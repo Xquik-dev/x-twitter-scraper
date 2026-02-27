@@ -1,6 +1,10 @@
 ---
-name: xquik
-description: Build integrations with the Xquik X (Twitter) real-time data platform REST API, webhooks, and MCP server. Use this skill when working with Xquik endpoints, building apps that monitor X accounts, extract Twitter/X data (followers, replies, retweets, communities, lists, Spaces), run giveaway draws, look up tweets/users, check follow relationships, or set up webhook delivery. Activate whenever the user mentions Xquik, xquik.com, X data extraction via Xquik, tweet monitoring through Xquik, giveaway draws on X, or connecting AI agents to Xquik via MCP. Also use when the user needs help choosing the right Xquik endpoint, handling Xquik API errors, verifying webhook signatures, or setting up cursor pagination for Xquik responses.
+name: x-twitter-scraper
+description: Build integrations with the Xquik X (Twitter) real-time data platform REST API, webhooks, and MCP server. Use this skill when working with Xquik endpoints, building apps that monitor X accounts, extract Twitter/X data (followers, replies, retweets, communities, lists, Spaces), run giveaway draws, look up tweets/users, check follow relationships, or set up webhook delivery. Activate whenever the user mentions Xquik, xquik.com, X data extraction, Twitter scraping, tweet monitoring, giveaway draws on X, or connecting AI agents to X/Twitter data via MCP. Also use when the user needs help choosing the right Xquik endpoint, handling API errors, verifying webhook signatures, or setting up cursor pagination.
+license: MIT
+metadata:
+  author: Xquik
+  version: "1.0.0"
 ---
 
 # Xquik API Integration
