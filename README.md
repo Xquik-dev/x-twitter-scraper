@@ -22,13 +22,13 @@ Add to your project's `.claude/skills/` directory:
 
 ```bash
 cd your-project
-git clone https://github.com/Xquik-dev/xquik-skill.git .claude/skills/xquik-skill
+git clone https://github.com/Xquik-dev/x-twitter-scraper.git .claude/skills/x-twitter-scraper
 ```
 
 Or add as a git submodule:
 
 ```bash
-git submodule add https://github.com/Xquik-dev/xquik-skill.git .claude/skills/xquik-skill
+git submodule add https://github.com/Xquik-dev/x-twitter-scraper.git .claude/skills/x-twitter-scraper
 ```
 
 ### Global Installation
@@ -36,13 +36,13 @@ git submodule add https://github.com/Xquik-dev/xquik-skill.git .claude/skills/xq
 To make the skill available across all projects:
 
 ```bash
-git clone https://github.com/Xquik-dev/xquik-skill.git ~/.claude/skills/xquik-skill
+git clone https://github.com/Xquik-dev/x-twitter-scraper.git ~/.claude/skills/x-twitter-scraper
 ```
 
 ## Skill Structure
 
 ```
-xquik-skill/
+x-twitter-scraper/
 ├── SKILL.md                      # Main skill (auth, endpoints, patterns)
 └── references/
     ├── api-endpoints.md          # All REST API endpoints
