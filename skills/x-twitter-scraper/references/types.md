@@ -89,6 +89,15 @@ interface TweetEventData {
     retweets: number;
     replies: number;
   };
+  // tweet.quote only
+  quotedTweetId?: string;
+  quotedUsername?: string;
+  // tweet.reply only
+  inReplyToTweetId?: string;
+  inReplyToUsername?: string;
+  // tweet.retweet only
+  retweetedTweetId?: string;
+  retweetedUsername?: string;
 }
 
 // Follower events (follower.gained, follower.lost)
@@ -394,7 +403,10 @@ The REST API and MCP server use different field names for the same data. Map the
 |------|---------------|-----------|
 | **Monitor** | `username` | `xUsername` |
 | **Event** | `type` | `eventType` |
+| **Event** | `data` | `eventData` |
 | **Event** | `monitorId` | `monitoredAccountId` |
+| **UserProfile** | `followers` | `followersCount` |
+| **UserProfile** | `following` | `followingCount` |
 | **FollowerCheck** | `isFollowing` / `isFollowedBy` | `following` / `followedBy` |
 
 **MCP `get-user-info` returns a subset** of the full `UserProfile` type. Fields not returned by MCP: `verified`, `location`, `createdAt`, `statusesCount`. Use the REST API `GET /x/users/{username}` for the complete profile.

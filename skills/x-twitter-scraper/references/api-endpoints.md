@@ -310,6 +310,12 @@ All filter fields are optional. Only `tweetUrl` is required.
   "id": "42",
   "tweetId": "1893456789012345678",
   "tweetUrl": "https://x.com/user/status/1893456789012345678",
+  "tweetText": "Like & RT to enter! Picking 3 winners tomorrow.",
+  "tweetAuthorUsername": "xquik",
+  "tweetLikeCount": 4200,
+  "tweetRetweetCount": 1800,
+  "tweetReplyCount": 1500,
+  "tweetQuoteCount": 120,
   "status": "completed",
   "totalEntries": 1500,
   "validEntries": 890,
@@ -337,10 +343,10 @@ Returns full draw details including winners.
 ### Export Draw
 
 ```
-GET /draws/{id}/export?format=csv
+GET /draws/{id}/export?format=csv&type=winners
 ```
 
-Formats: `csv`, `xlsx`, `md`.
+Formats: `csv`, `xlsx`, `md`. Types: `winners` (default), `entries`. Entry exports capped at 50,000 rows.
 
 ---
 
@@ -410,10 +416,10 @@ Returns job details with paginated results (up to 1,000 per page).
 ### Export Extraction
 
 ```
-GET /extractions/{id}/export?format=csv&type=users
+GET /extractions/{id}/export?format=csv
 ```
 
-Formats: `csv`, `xlsx`, `md`. Types: `users`, `tweets`. 50,000 row limit. Exports include enrichment columns not in the API response.
+Formats: `csv`, `xlsx`, `md`. 50,000 row limit. Exports include enrichment columns not in the API response.
 
 ---
 

@@ -211,7 +211,7 @@ while (true) {
 }
 
 // Step 5: Export as CSV/XLSX/Markdown (50,000 row limit)
-const exportUrl = `${BASE}/extractions/${job.id}/export?format=csv&type=users`;
+const exportUrl = `${BASE}/extractions/${job.id}/export?format=csv`;
 const csvResponse = await fetch(exportUrl, { headers });
 const csvData = await csvResponse.text();
 ```
@@ -445,7 +445,7 @@ For setup configs per platform, read `references/mcp-setup.md`.
 - **Timestamps are ISO 8601 UTC.** Example: `2026-02-24T10:30:00.000Z`
 - **Errors return JSON.** Format: `{ "error": "error_code" }`
 - **Cursors are opaque.** Pass `nextCursor` as the `after` query parameter, never decode
-- Export formats: `csv`, `xlsx`, `md` via `GET /extractions/{id}/export?format=csv&type=users` or `GET /draws/{id}/export?format=csv`
+- Export formats: `csv`, `xlsx`, `md` via `GET /extractions/{id}/export?format=csv` or `GET /draws/{id}/export?format=csv&type=winners`
 
 ## Unsupported Operations
 

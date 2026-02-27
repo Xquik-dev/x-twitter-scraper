@@ -135,10 +135,10 @@ Returns paginated results (up to 1,000 per page). Each result includes:
 ## Exporting Results
 
 ```
-GET /extractions/{id}/export?format=csv&type=users
+GET /extractions/{id}/export?format=csv
 ```
 
-Formats: `csv`, `xlsx`, `md`. Types: `users`, `tweets`. 50,000 row limit.
+Formats: `csv`, `xlsx`, `md`. 50,000 row limit.
 
 Exports include enrichment columns not present in the API response.
 
