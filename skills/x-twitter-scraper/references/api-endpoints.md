@@ -247,7 +247,22 @@ Permanently removes the webhook. All future deliveries are stopped.
 POST /webhooks/{id}/test
 ```
 
-Sends a test payload to the webhook endpoint to verify it is reachable and responding correctly. Returns success or failure status with HTTP response details.
+Sends a `webhook.test` event to the webhook endpoint, HMAC-signed with the webhook's secret. Returns success or failure status with HTTP response details.
+
+**Payload delivered to your endpoint:**
+```json
+{
+  "eventType": "webhook.test",
+  "data": {
+    "message": "Test delivery from Xquik"
+  },
+  "timestamp": "2026-02-27T12:00:00.000Z"
+}
+```
+
+The delivery includes the `X-Xquik-Signature` header, identical to production deliveries.
+
+Returns `400 webhook_inactive` if the webhook is disabled. Reactivate via `PATCH /webhooks/{id}` before testing.
 
 ### List Deliveries
 
@@ -422,7 +437,7 @@ GET /x/tweets/search?q={query}
 
 Search using X syntax: keywords, `#hashtags`, `from:user`, `to:user`, `"exact phrases"`, `OR`, `-exclude`.
 
-Returns basic tweet info (id, text, author, date). For engagement metrics, use Get Tweet on individual results.
+Returns tweet info with optional engagement metrics (likeCount, retweetCount, replyCount). Some fields may be omitted if unavailable.
 
 ### Get User
 
@@ -435,7 +450,7 @@ Returns profile info: name, username, bio, follower count, following count, prof
 ### Check Follower
 
 ```
-GET /x/follows/check?source={username}&target={username}
+GET /x/followers/check?source={username}&target={username}
 ```
 
 Returns `isFollowing` and `isFollowedBy` for both directions.
@@ -478,14 +493,18 @@ Free, no usage consumed. Cached, refreshes every 15 minutes.
 | 400 | `invalid_username` | X username is empty or invalid |
 | 400 | `invalid_tool_type` | Extraction tool type not recognized |
 | 400 | `invalid_format` | Export format not `csv`, `xlsx`, or `md` |
+| 400 | `invalid_params` | Export query parameters are missing or invalid |
 | 400 | `missing_query` | Required query parameter is missing |
+| 400 | `missing_params` | Required query parameters are missing |
 | 401 | `unauthenticated` | Missing or invalid API key |
 | 402 | `no_subscription` | No active subscription |
 | 402 | `subscription_inactive` | Subscription is not active |
 | 402 | `usage_limit_reached` | Monthly usage cap exceeded |
 | 403 | `monitor_limit_reached` | Plan monitor limit exceeded |
 | 404 | `not_found` | Resource does not exist |
+| 400 | `webhook_inactive` | Webhook is disabled (test-webhook only) |
 | 409 | `monitor_already_exists` | Duplicate monitor for same username |
 | 429 | - | Rate limited. Retry with backoff |
 | 500 | `internal_error` | Server error |
+| 502 | `stream_registration_failed` | Stream registration failed. Retry |
 | 502 | `x_api_unavailable` | X API temporarily unavailable |

@@ -151,7 +151,7 @@ Add to `opencode.json`:
 | `get-events` | Query events with filtering and pagination |
 | `get-event` | Get a single event by ID |
 | `search-tweets` | Search for tweets matching a query |
-| `get-user-info` | Get profile info for an X user |
+| `get-user-info` | Get profile info for an X user (subset: no `verified`, `location`, `createdAt`, `statusesCount`) |
 | `list-webhooks` | List all webhook endpoints |
 | `add-webhook` | Register a new webhook endpoint |
 | `remove-webhook` | Delete a webhook endpoint |
@@ -167,6 +167,8 @@ Add to `opencode.json`:
 | `get-draw` | Get draw details and winners |
 | `get-account` | Check subscription status and usage |
 | `get-trends` | Get trending topics by region (free) |
+
+**MCP vs REST field differences:** Monitor uses `xUsername` (not `username`), Event uses `eventType`/`monitoredAccountId` (not `type`/`monitorId`), FollowerCheck uses `following`/`followedBy` (not `isFollowing`/`isFollowedBy`). Use the REST API `GET /x/users/{username}` for the complete user profile.
 
 ## Example Prompts
 

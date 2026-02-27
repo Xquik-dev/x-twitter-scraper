@@ -230,10 +230,10 @@ interface ExtractionJob {
   totalResults: number;
   targetTweetId?: string;
   targetUsername?: string;
+  targetUserId?: string;
   targetCommunityId?: string;
-  targetListId?: string;
-  targetSpaceId?: string;
   searchQuery?: string;
+  aiTitles?: { en: string; tr: string; es: string };
   errorMessage?: string;
   createdAt: string;
   completedAt?: string;
@@ -250,6 +250,7 @@ interface ExtractionResult {
   tweetId?: string;
   tweetText?: string;
   tweetCreatedAt?: string;
+  createdAt: string;
 }
 
 interface ExtractionList {
@@ -264,6 +265,7 @@ interface ExtractionEstimate {
   estimatedResults: number;
   usagePercent: number;
   projectedPercent: number;
+  error?: string;
 }
 
 interface CreateExtractionRequest {
@@ -302,6 +304,9 @@ interface TweetSearchResult {
   id: string;
   text: string;
   createdAt: string;
+  likeCount: number;    // Omitted if unavailable
+  retweetCount: number; // Omitted if unavailable
+  replyCount: number;   // Omitted if unavailable
   author: {
     id: string;
     username: string;
@@ -380,3 +385,16 @@ interface CreateApiKeyRequest {
   name?: string;
 }
 ```
+
+## REST API vs MCP Field Naming
+
+The REST API and MCP server use different field names for the same data. Map these when switching between interfaces:
+
+| Type | REST API Field | MCP Field |
+|------|---------------|-----------|
+| **Monitor** | `username` | `xUsername` |
+| **Event** | `type` | `eventType` |
+| **Event** | `monitorId` | `monitoredAccountId` |
+| **FollowerCheck** | `isFollowing` / `isFollowedBy` | `following` / `followedBy` |
+
+**MCP `get-user-info` returns a subset** of the full `UserProfile` type. Fields not returned by MCP: `verified`, `location`, `createdAt`, `statusesCount`. Use the REST API `GET /x/users/{username}` for the complete profile.

@@ -42,9 +42,9 @@ For Python examples, see [references/python-examples.md](references/python-examp
 | Goal | Endpoint | Notes |
 |------|----------|-------|
 | **Get a single tweet** by ID/URL | `GET /x/tweets/{id}` | Full metrics: likes, retweets, views, bookmarks, author info |
-| **Search tweets** by keyword/hashtag | `GET /x/tweets/search?q=...` | Basic tweet info only (no engagement metrics) |
+| **Search tweets** by keyword/hashtag | `GET /x/tweets/search?q=...` | Tweet info with optional engagement metrics (likeCount, retweetCount, replyCount) |
 | **Get a user profile** | `GET /x/users/{username}` | Name, bio, follower/following counts, profile picture, location, created date, statuses count |
-| **Check follow relationship** | `GET /x/follows/check?source=A&target=B` | Both directions |
+| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | Both directions |
 | **Get trending topics** | `GET /trends?woeid=1` | Free, no quota consumed |
 | **Monitor an X account** | `POST /monitors` | Track tweets, replies, quotes, retweets, follower changes |
 | **Update monitor event types** | `PATCH /monitors/{id}` | Change subscribed events or pause/resume |
@@ -68,7 +68,7 @@ All errors return `{ "error": "error_code" }`. Key error codes:
 
 | Status | Code | Action |
 |--------|------|--------|
-| 400 | `invalid_input`, `invalid_id`, `invalid_tweet_url`, `invalid_username`, `invalid_tool_type` | Fix the request, do not retry |
+| 400 | `invalid_input`, `invalid_id`, `invalid_params`, `invalid_tweet_url`, `invalid_username`, `invalid_tool_type`, `missing_query`, `missing_params`, `webhook_inactive` | Fix the request, do not retry |
 | 401 | `unauthenticated` | Check API key |
 | 402 | `no_subscription`, `subscription_inactive`, `usage_limit_reached` | Subscribe or wait for quota reset |
 | 403 | `monitor_limit_reached` | Delete a monitor or add capacity ($5/month) |
@@ -76,7 +76,7 @@ All errors return `{ "error": "error_code" }`. Key error codes:
 | 409 | `monitor_already_exists` | Monitor exists, use the existing one |
 | 429 | - | Rate limited. Retry with exponential backoff, respect `Retry-After` header |
 | 500 | `internal_error` | Retry with backoff |
-| 502 | `x_api_unavailable` | X API down, retry with backoff |
+| 502 | `stream_registration_failed`, `x_api_unavailable` | Retry with backoff |
 
 Retry only `429` and `5xx`. Never retry `4xx` (except 429). Max 3 retries with exponential backoff:
 
