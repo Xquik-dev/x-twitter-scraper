@@ -141,7 +141,7 @@ Add to `opencode.json`:
 }
 ```
 
-## Available MCP Tools (21)
+## Available MCP Tools (22)
 
 | Tool | Description |
 |------|-------------|
@@ -155,6 +155,7 @@ Add to `opencode.json`:
 | `list-webhooks` | List all webhook endpoints |
 | `add-webhook` | Register a new webhook endpoint |
 | `remove-webhook` | Delete a webhook endpoint |
+| `test-webhook` | Send a test payload to verify a webhook endpoint |
 | `lookup-tweet` | Get tweet details and engagement metrics |
 | `check-follow` | Check follow relationship between two users |
 | `run-extraction` | Run a bulk data extraction (19 tool types) |

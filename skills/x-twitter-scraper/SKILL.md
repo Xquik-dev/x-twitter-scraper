@@ -1,11 +1,11 @@
 ---
 name: x-twitter-scraper
-description: Builds integrations with the Xquik X (Twitter) real-time data platform REST API, webhooks, and MCP server. Activates when working with Xquik endpoints, building apps that monitor X accounts, extracting Twitter/X data (followers, replies, retweets, communities, lists, Spaces), running giveaway draws, looking up tweets/users, checking follow relationships, or setting up webhook delivery. Triggers whenever the user mentions Xquik, xquik.com, X data extraction, Twitter scraping, tweet monitoring, giveaway draws on X, or connecting AI agents to X/Twitter data via MCP. Also activates when the user needs help choosing the right Xquik endpoint, handling API errors, verifying webhook signatures, or setting up cursor pagination.
+description: "X API & Twitter scraper skill for AI coding agents. Builds integrations with the Xquik REST API, MCP server & webhooks: tweet search, user lookup, follower extraction, engagement metrics, giveaway contest draws, trending topics, account monitoring, reply/retweet/quote extraction, community & Space data, mutual follow checks. Works with Claude Code, Cursor, Codex, Copilot, Windsurf & 40+ agents."
 compatibility: Requires internet access to call the Xquik REST API (https://xquik.com/api/v1)
 license: MIT
 metadata:
   author: Xquik
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Xquik API Integration
@@ -20,14 +20,14 @@ Xquik is an X (Twitter) real-time data platform providing a REST API, HMAC webho
 | **Auth** | `x-api-key: xq_...` header (64 hex chars after `xq_` prefix) |
 | **MCP endpoint** | `https://xquik.com/mcp` (StreamableHTTP, same API key) |
 | **Rate limits** | 10 req/s sustained, 20 burst (API); 60 req/s sustained, 100 burst (general) |
-| **Pricing** | $20/month base (1 monitor included), $10/month per extra monitor |
+| **Pricing** | $20/month base (1 monitor included), $5/month per extra monitor |
 | **Quota** | Monthly usage cap, hard limit, no overage. `402` when exhausted. |
 | **Docs** | [docs.xquik.com](https://docs.xquik.com) |
 | **HTTPS only** | Plain HTTP gets `301` redirect |
 
 ## Authentication
 
-Every request requires an API key via the `x-api-key` header. Keys start with `xq_` and are generated from the Xquik dashboard. The key is shown only once at creation -- store it securely.
+Every request requires an API key via the `x-api-key` header. Keys start with `xq_` and are generated from the Xquik dashboard. The key is shown only once at creation; store it securely.
 
 ```javascript
 const API_KEY = "xq_YOUR_KEY_HERE";
@@ -43,20 +43,22 @@ For Python examples, see [references/python-examples.md](references/python-examp
 |------|----------|-------|
 | **Get a single tweet** by ID/URL | `GET /x/tweets/{id}` | Full metrics: likes, retweets, views, bookmarks, author info |
 | **Search tweets** by keyword/hashtag | `GET /x/tweets/search?q=...` | Basic tweet info only (no engagement metrics) |
-| **Get a user profile** | `GET /x/users/{username}` | Bio, follower/following counts, profile picture |
+| **Get a user profile** | `GET /x/users/{username}` | Name, bio, follower/following counts, profile picture, location, created date, statuses count |
 | **Check follow relationship** | `GET /x/follows/check?source=A&target=B` | Both directions |
 | **Get trending topics** | `GET /trends?woeid=1` | Free, no quota consumed |
 | **Monitor an X account** | `POST /monitors` | Track tweets, replies, quotes, retweets, follower changes |
+| **Update monitor event types** | `PATCH /monitors/{id}` | Change subscribed events or pause/resume |
 | **Poll for events** | `GET /events` | Cursor-paginated, filter by monitorId/eventType |
 | **Receive events in real time** | `POST /webhooks` | HMAC-signed delivery to your HTTPS endpoint |
+| **Update webhook** | `PATCH /webhooks/{id}` | Change URL, event types, or pause/resume |
 | **Run a giveaway draw** | `POST /draws` | Pick random winners from tweet replies |
 | **Extract bulk data** | `POST /extractions` | 19 tool types, always estimate cost first |
 | **Check account/usage** | `GET /account` | Plan status, monitors, usage percent |
 
 **Common mistakes:**
-- Do NOT use extractions to get follower/following COUNT -- use `GET /x/users/{username}`
-- Do NOT use extractions to get retweet/reply/like COUNTS -- use `GET /x/tweets/{id}`
-- Do NOT use search to find a specific tweet by ID -- use `GET /x/tweets/{id}`
+- Do NOT use extractions to get follower/following COUNT. Use `GET /x/users/{username}`
+- Do NOT use extractions to get retweet/reply/like COUNTS. Use `GET /x/tweets/{id}`
+- Do NOT use search to find a specific tweet by ID. Use `GET /x/tweets/{id}`
 - Always call `POST /extractions/estimate` before running large extractions
 - Likes and bookmarks of a user are NOT available (X API limitation)
 
@@ -69,7 +71,7 @@ All errors return `{ "error": "error_code" }`. Key error codes:
 | 400 | `invalid_input`, `invalid_id`, `invalid_tweet_url`, `invalid_username`, `invalid_tool_type` | Fix the request, do not retry |
 | 401 | `unauthenticated` | Check API key |
 | 402 | `no_subscription`, `subscription_inactive`, `usage_limit_reached` | Subscribe or wait for quota reset |
-| 403 | `monitor_limit_reached` | Delete a monitor or add capacity ($10/month) |
+| 403 | `monitor_limit_reached` | Delete a monitor or add capacity ($5/month) |
 | 404 | `not_found` | Resource doesn't exist or belongs to another account |
 | 409 | `monitor_already_exists` | Monitor exists, use the existing one |
 | 429 | - | Rate limited. Retry with exponential backoff, respect `Retry-After` header |
@@ -130,7 +132,7 @@ async function fetchAllPages(path, dataKey) {
 }
 ```
 
-Cursors are opaque strings -- never decode or construct them manually.
+Cursors are opaque strings. Never decode or construct them manually.
 
 ## Extraction Tools (19 Types)
 
@@ -388,6 +390,8 @@ Webhook security rules:
 - Store webhook secret in environment variables, never hardcode
 - Retry policy: 5 attempts with exponential backoff on failure
 
+Check delivery status via `GET /webhooks/{id}/deliveries` to monitor successful and failed attempts.
+
 ## Real-Time Monitoring Setup
 
 Complete end-to-end: create monitor, register webhook, handle events.
@@ -411,7 +415,7 @@ const webhook = await xquikFetch("/webhooks", {
     eventTypes: ["tweet.new", "tweet.reply"],
   }),
 });
-// IMPORTANT: Save webhook.secret -- it's shown only once!
+// IMPORTANT: Save webhook.secret. It is shown only once!
 
 // 3. Poll events (alternative to webhooks)
 const events = await xquikFetch("/events?monitorId=7&limit=50");
@@ -422,14 +426,14 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `follow
 
 ## MCP Server (AI Agents)
 
-The MCP server at `https://xquik.com/mcp` exposes 21 tools using StreamableHTTP transport and the same API key auth. Supported platforms: Claude Desktop, Claude Code, ChatGPT (Agents SDK), Codex CLI, Cursor, VS Code, Windsurf, OpenCode.
+The MCP server at `https://xquik.com/mcp` exposes 22 tools using StreamableHTTP transport and the same API key auth. Supported platforms: Claude Desktop, Claude Code, ChatGPT (Agents SDK), Codex CLI, Cursor, VS Code, Windsurf, OpenCode.
 
 For setup configs per platform, read `references/mcp-setup.md`.
 
 ## Pricing & Quota
 
 - **Base plan**: $20/month (1 monitor, monthly usage quota)
-- **Extra monitors**: $10/month each
+- **Extra monitors**: $5/month each
 - **Free**: account info, monitor/webhook management, trends, extraction history
 - **Metered**: tweet search, user lookup, tweet lookup, follow check, extractions, draws
 - **Quota enforcement**: hard limit, `402 usage_limit_reached` when exhausted
@@ -437,10 +441,10 @@ For setup configs per platform, read `references/mcp-setup.md`.
 
 ## Conventions
 
-- **IDs are strings** -- bigint values, treat as opaque strings, never parse as numbers
-- **Timestamps are ISO 8601 UTC** -- e.g., `2026-02-24T10:30:00.000Z`
-- **Errors return JSON** -- `{ "error": "error_code" }`
-- **Cursors are opaque** -- pass `nextCursor` as the `after` query parameter, never decode
+- **IDs are strings.** Bigint values; treat as opaque strings, never parse as numbers
+- **Timestamps are ISO 8601 UTC.** Example: `2026-02-24T10:30:00.000Z`
+- **Errors return JSON.** Format: `{ "error": "error_code" }`
+- **Cursors are opaque.** Pass `nextCursor` as the `after` query parameter, never decode
 - Export formats: `csv`, `xlsx`, `md` via `GET /extractions/{id}/export?format=csv&type=users` or `GET /draws/{id}/export?format=csv`
 
 ## Unsupported Operations
@@ -453,9 +457,9 @@ For setup configs per platform, read `references/mcp-setup.md`.
 
 For additional detail beyond this guide:
 
-- **`references/api-endpoints.md`** -- All REST API endpoints with methods, paths, parameters, and response shapes
-- **`references/python-examples.md`** -- Python equivalents of all JavaScript examples (retry, extraction, draw, webhook)
-- **`references/webhooks.md`** -- Extended webhook examples, local testing with ngrok, delivery status monitoring
-- **`references/mcp-setup.md`** -- MCP server configuration for 8 IDEs and AI agent platforms
-- **`references/extractions.md`** -- Extraction tool details, export columns, common mistakes
-- **`references/types.md`** -- Copy-pasteable TypeScript type definitions for all API objects
+- **`references/api-endpoints.md`**: All REST API endpoints with methods, paths, parameters, and response shapes
+- **`references/python-examples.md`**: Python equivalents of all JavaScript examples (retry, extraction, draw, webhook)
+- **`references/webhooks.md`**: Extended webhook examples, local testing with ngrok, delivery status monitoring
+- **`references/mcp-setup.md`**: MCP server configuration for 8 IDEs and AI agent platforms
+- **`references/extractions.md`**: Extraction tool details, export columns, common mistakes
+- **`references/types.md`**: Copy-pasteable TypeScript type definitions for all API objects

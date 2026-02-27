@@ -56,7 +56,7 @@ Update account locale. Session auth only (not API key).
 
 ## API Keys
 
-Session auth only -- these endpoints do not accept API key auth.
+Session auth only. These endpoints do not accept API key auth.
 
 ### Create API Key
 
@@ -240,6 +240,14 @@ DELETE /webhooks/{id}
 ```
 
 Permanently removes the webhook. All future deliveries are stopped.
+
+### Test Webhook
+
+```
+POST /webhooks/{id}/test
+```
+
+Sends a test payload to the webhook endpoint to verify it is reachable and responding correctly. Returns success or failure status with HTTP response details.
 
 ### List Deliveries
 
@@ -478,6 +486,6 @@ Free, no usage consumed. Cached, refreshes every 15 minutes.
 | 403 | `monitor_limit_reached` | Plan monitor limit exceeded |
 | 404 | `not_found` | Resource does not exist |
 | 409 | `monitor_already_exists` | Duplicate monitor for same username |
-| 429 | - | Rate limited -- retry with backoff |
+| 429 | - | Rate limited. Retry with backoff |
 | 500 | `internal_error` | Server error |
 | 502 | `x_api_unavailable` | X API temporarily unavailable |

@@ -302,9 +302,6 @@ interface TweetSearchResult {
   id: string;
   text: string;
   createdAt: string;
-  likeCount: number;
-  retweetCount: number;
-  replyCount: number;
   author: {
     id: string;
     username: string;

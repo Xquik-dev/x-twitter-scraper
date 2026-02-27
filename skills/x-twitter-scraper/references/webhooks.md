@@ -150,11 +150,11 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
 
 ## Security Checklist
 
-- **Verify before processing** -- never process unverified payloads
-- **Use constant-time comparison** -- `timingSafeEqual` (Node.js), `hmac.compare_digest` (Python), `hmac.Equal` (Go)
-- **Use the raw request body** -- compute HMAC over raw bytes, not re-serialized JSON
-- **Respond within 10 seconds** -- acknowledge immediately, process async if slow
-- **Store secrets in environment variables** -- never hardcode
+- **Verify before processing.** Never process unverified payloads
+- **Use constant-time comparison.** `timingSafeEqual` (Node.js), `hmac.compare_digest` (Python), `hmac.Equal` (Go)
+- **Use the raw request body.** Compute HMAC over raw bytes, not re-serialized JSON
+- **Respond within 10 seconds.** Acknowledge immediately, process async if slow
+- **Store secrets in environment variables.** Never hardcode
 
 ## Idempotency
 
@@ -174,7 +174,7 @@ processedPayloads.add(payloadHash);
 
 ## Retry Policy
 
-Failed deliveries are retried up to 5 times with exponential backoff. Delivery status progresses: `pending` -> `delivered` (success) or `pending` -> `failed` -> `exhausted` (all retries failed).
+Failed deliveries are retried up to 5 times with exponential backoff. Delivery statuses: `pending`, `delivered`, `failed`, `exhausted`.
 
 Check delivery status: `GET /webhooks/{id}/deliveries`.
 
