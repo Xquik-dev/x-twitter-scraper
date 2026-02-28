@@ -15,6 +15,7 @@ Copy-pasteable TypeScript types for all Xquik API objects.
 - [Trends](#trends)
 - [Error](#error)
 - [Request Bodies](#request-bodies)
+- [MCP Output Schemas](#mcp-output-schemas)
 
 ```typescript
 // ─── Account ─────────────────────────────────────────────
@@ -410,3 +411,198 @@ The REST API and MCP server use different field names for the same data. Map the
 | **FollowerCheck** | `isFollowing` / `isFollowedBy` | `following` / `followedBy` |
 
 **MCP `get-user-info` returns a subset** of the full `UserProfile` type. Fields not returned by MCP: `verified`, `location`, `createdAt`, `statusesCount`. Use the REST API `GET /x/users/{username}` for the complete profile.
+
+## MCP Output Schemas
+
+MCP tools return structured data with these shapes. Field names differ from the REST API (see mapping table above).
+
+```typescript
+// ─── MCP: get-user-info ─────────────────────────────────
+
+interface McpUserInfo {
+  username: string;
+  name: string;
+  description: string;       // User bio
+  followersCount: number;
+  followingCount: number;
+  profilePicture: string;    // Profile image URL
+  // Not returned: verified, location, createdAt, statusesCount
+  // Use REST GET /x/users/{username} for the full profile
+}
+
+// ─── MCP: search-tweets ─────────────────────────────────
+
+interface McpSearchResult {
+  tweets: {
+    id: string;
+    text: string;
+    authorUsername: string;
+    authorName: string;
+    createdAt: string;        // ISO 8601 timestamp
+    // No engagement metrics -- use lookup-tweet for those
+  }[];
+}
+
+// ─── MCP: lookup-tweet ──────────────────────────────────
+
+interface McpTweetLookup {
+  tweet: {
+    id: string;
+    text: string;
+    likeCount: number;
+    retweetCount: number;
+    replyCount: number;
+    quoteCount: number;
+    viewCount: number;
+    bookmarkCount: number;
+  };
+  author?: {
+    id: string;
+    username: string;
+    followers: number;
+    verified: boolean;
+  };
+}
+
+// ─── MCP: check-follow ─────────────────────────────────
+
+interface McpFollowCheck {
+  following: boolean;         // Whether the source follows the target
+  followedBy: boolean;        // Whether the target follows the source
+}
+
+// ─── MCP: get-events ────────────────────────────────────
+
+interface McpEventList {
+  events: {
+    id: string;
+    xUsername: string;
+    eventType: string;
+    eventData: unknown;       // Full event payload (tweet text, author, metrics)
+    monitoredAccountId: string;
+    createdAt: string;        // ISO 8601 when event was recorded
+    occurredAt: string;       // ISO 8601 when event occurred on X
+  }[];
+  hasMore: boolean;
+  nextCursor?: string;
+}
+
+// ─── MCP: list-monitors ─────────────────────────────────
+
+interface McpMonitorList {
+  monitors: {
+    id: string;
+    xUsername: string;
+    eventTypes: string[];
+    isActive: boolean;
+    createdAt: string;        // ISO 8601 timestamp
+  }[];
+}
+
+// ─── MCP: add-webhook ───────────────────────────────────
+
+interface McpWebhookCreated {
+  id: string;
+  url: string;
+  eventTypes: string[];
+  isActive: boolean;
+  createdAt: string;          // ISO 8601 timestamp
+  secret: string;             // HMAC signing secret. Store securely.
+}
+
+// ─── MCP: test-webhook ──────────────────────────────────
+
+interface McpWebhookTest {
+  success: boolean;
+  statusCode: number;
+  error?: string;
+}
+
+// ─── MCP: run-extraction ────────────────────────────────
+
+interface McpExtractionJob {
+  id: string;                 // Use with get-extraction for results
+  toolType: string;
+  status: string;             // pending, running, completed, failed
+  totalResults: number;
+}
+
+// ─── MCP: estimate-extraction ───────────────────────────
+
+interface McpExtractionEstimate {
+  allowed?: boolean;          // Whether extraction fits within budget
+  estimatedResults?: number;
+  projectedPercent?: number;  // Projected usage percent after extraction
+  usagePercent?: number;      // Current usage percent of monthly quota
+  source?: string;
+  error?: string;
+}
+
+// ─── MCP: run-draw ──────────────────────────────────────
+
+interface McpDrawResult {
+  id: string;
+  tweetId: string;
+  totalEntries: number;
+  validEntries: number;
+  winners: {
+    position: number;
+    authorUsername: string;
+    tweetId: string;
+    isBackup: boolean;
+  }[];
+}
+
+// ─── MCP: get-draw ──────────────────────────────────────
+
+interface McpDrawDetails {
+  draw: {
+    id: string;
+    status: string;
+    createdAt: string;
+    drawnAt?: string;
+    totalEntries: number;
+    validEntries: number;
+    tweetId: string;
+    tweetUrl: string;
+    tweetText: string;
+    tweetAuthorUsername: string;
+    tweetLikeCount: number;   // Like count at draw time
+    tweetRetweetCount: number; // Retweet count at draw time
+    tweetReplyCount: number;  // Reply count at draw time
+    tweetQuoteCount: number;  // Quote count at draw time
+  };
+  winners: {
+    position: number;
+    authorUsername: string;
+    tweetId: string;
+    isBackup: boolean;
+  }[];
+}
+
+// ─── MCP: get-account ───────────────────────────────────
+
+interface McpAccount {
+  plan: string;               // Current plan name (free or subscriber)
+  monitorsAllowed: number;    // Maximum monitors on current plan
+  monitorsUsed: number;       // Number of active monitors
+  currentPeriod?: {           // Present only with active subscription
+    start: string;            // ISO 8601 billing period start
+    end: string;              // ISO 8601 billing period end
+    usagePercent: number;     // Current usage percent of monthly quota
+  };
+}
+
+// ─── MCP: get-trends ────────────────────────────────────
+
+interface McpTrends {
+  woeid: number;
+  total: number;
+  trends: {
+    name: string;             // Trend name or hashtag
+    rank?: number;            // Trend rank position
+    description?: string;     // Trend description or context
+    query?: string;           // Search query to find tweets for this trend
+  }[];
+}
+```

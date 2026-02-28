@@ -5,7 +5,7 @@ compatibility: Requires internet access to call the Xquik REST API (https://xqui
 license: MIT
 metadata:
   author: Xquik
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Xquik API Integration
@@ -55,12 +55,7 @@ For Python examples, see [references/python-examples.md](references/python-examp
 | **Extract bulk data** | `POST /extractions` | 19 tool types, always estimate cost first |
 | **Check account/usage** | `GET /account` | Plan status, monitors, usage percent |
 
-**Common mistakes:**
-- Do NOT use extractions to get follower/following COUNT. Use `GET /x/users/{username}`
-- Do NOT use extractions to get retweet/reply/like COUNTS. Use `GET /x/tweets/{id}`
-- Do NOT use search to find a specific tweet by ID. Use `GET /x/tweets/{id}`
-- Always call `POST /extractions/estimate` before running large extractions
-- Likes and bookmarks of a user are NOT available (X API limitation)
+See [references/mcp-tools.md](references/mcp-tools.md) for tool selection rules, common mistakes, and unsupported operations.
 
 ## Error Handling & Retry
 
@@ -428,7 +423,29 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `follow
 
 The MCP server at `https://xquik.com/mcp` exposes 22 tools using StreamableHTTP transport and the same API key auth. Supported platforms: Claude Desktop, Claude Code, ChatGPT (Agents SDK), Codex CLI, Cursor, VS Code, Windsurf, OpenCode.
 
-For setup configs per platform, read `references/mcp-setup.md`.
+For setup configs per platform, read [references/mcp-setup.md](references/mcp-setup.md). For the complete tool reference with input/output schemas, annotations, and selection rules, read [references/mcp-tools.md](references/mcp-tools.md).
+
+### MCP vs REST API
+
+| | MCP Server | REST API |
+|---|------------|----------|
+| **Best for** | AI agents, IDE integrations | Custom apps, scripts, backend services |
+| **User profile** | Subset (no verified, location, createdAt, statusesCount) | Full profile |
+| **Search results** | Basic (id, text, author, date) | Includes optional engagement metrics |
+| **Webhook/monitor update** | Delete + recreate | PATCH endpoints |
+| **File export** | Not available | CSV, XLSX, Markdown |
+
+Use the REST API `GET /x/users/{username}` for the complete user profile with `verified`, `location`, `createdAt`, and `statusesCount` fields that MCP `get-user-info` does not return.
+
+### Workflow Patterns
+
+Common multi-step tool sequences:
+
+- **Set up real-time alerts:** `add-monitor` -> `add-webhook` -> `test-webhook`
+- **Run a giveaway:** `get-account` (check budget) -> `run-draw`
+- **Bulk extraction:** `get-account` (check subscription) -> `estimate-extraction` -> `run-extraction` -> `get-extraction` (results)
+- **Full tweet analysis:** `lookup-tweet` (metrics) -> `run-extraction` with `thread_extractor` (full thread)
+- **Find and analyze user:** `get-user-info` (profile) -> `search-tweets from:username` (recent tweets) -> `lookup-tweet` (metrics on specific tweet)
 
 ## Pricing & Quota
 
@@ -447,19 +464,14 @@ For setup configs per platform, read `references/mcp-setup.md`.
 - **Cursors are opaque.** Pass `nextCursor` as the `after` query parameter, never decode
 - Export formats: `csv`, `xlsx`, `md` via `GET /extractions/{id}/export?format=csv` or `GET /draws/{id}/export?format=csv&type=winners`
 
-## Unsupported Operations
-
-- Tweets a user liked or bookmarked
-- Posting tweets, liking, retweeting, following
-- DMs or private/protected account data
-
 ## Reference Files
 
 For additional detail beyond this guide:
 
+- **`references/mcp-tools.md`**: All 22 MCP tools with input/output schemas, annotations, selection rules, workflow patterns, common mistakes, and unsupported operations
 - **`references/api-endpoints.md`**: All REST API endpoints with methods, paths, parameters, and response shapes
 - **`references/python-examples.md`**: Python equivalents of all JavaScript examples (retry, extraction, draw, webhook)
 - **`references/webhooks.md`**: Extended webhook examples, local testing with ngrok, delivery status monitoring
 - **`references/mcp-setup.md`**: MCP server configuration for 8 IDEs and AI agent platforms
-- **`references/extractions.md`**: Extraction tool details, export columns, common mistakes
-- **`references/types.md`**: Copy-pasteable TypeScript type definitions for all API objects
+- **`references/extractions.md`**: Extraction tool details, export columns
+- **`references/types.md`**: TypeScript type definitions for all REST API and MCP output objects

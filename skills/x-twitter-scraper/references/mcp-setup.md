@@ -143,36 +143,50 @@ Add to `opencode.json`:
 
 ## Available MCP Tools (22)
 
-| Tool | Description |
-|------|-------------|
-| `list-monitors` | List all monitored X accounts |
-| `add-monitor` | Start monitoring an X account |
-| `remove-monitor` | Stop monitoring an X account |
-| `get-events` | Query events with filtering and pagination |
-| `get-event` | Get a single event by ID |
-| `search-tweets` | Search for tweets matching a query |
-| `get-user-info` | Get profile info for an X user (subset: no `verified`, `location`, `createdAt`, `statusesCount`) |
-| `list-webhooks` | List all webhook endpoints |
-| `add-webhook` | Register a new webhook endpoint |
-| `remove-webhook` | Delete a webhook endpoint |
-| `test-webhook` | Send a test payload to verify a webhook endpoint |
-| `lookup-tweet` | Get tweet details and engagement metrics |
-| `check-follow` | Check follow relationship between two users |
-| `run-extraction` | Run a bulk data extraction (19 tool types) |
-| `list-extractions` | List past extraction jobs |
-| `get-extraction` | Get extraction job results |
-| `estimate-extraction` | Preview extraction cost before running |
-| `run-draw` | Run a giveaway draw from a tweet |
-| `list-draws` | List past giveaway draws |
-| `get-draw` | Get draw details and winners |
-| `get-account` | Check subscription status and usage |
-| `get-trends` | Get trending topics by region (free) |
+For complete input/output schemas, see [mcp-tools.md](mcp-tools.md).
+
+| Tool | Cost | Annotations | Description |
+|------|------|-------------|-------------|
+| `list-monitors` | Free | readOnly | List all monitored X accounts with IDs and event types |
+| `add-monitor` | Free | openWorld | Start monitoring an X account for tweets, replies, retweets, quotes, follower changes |
+| `remove-monitor` | Free | destructive | Stop monitoring and permanently delete a monitor |
+| `get-events` | Free | readOnly | Query events from YOUR monitored accounts with filtering and pagination |
+| `get-event` | Free | readOnly | Get full details for a single event by ID |
+| `search-tweets` | Metered | readOnly, openWorld | Search tweets by keyword, hashtag, from:user. Returns basic info only (no metrics) |
+| `get-user-info` | Metered | readOnly, openWorld | Get profile, bio, follower/following counts. No verified, location, createdAt, statusesCount |
+| `lookup-tweet` | Metered | readOnly, openWorld | Get tweet with full metrics (likes, retweets, views, bookmarks) and author verification |
+| `check-follow` | Metered | readOnly, openWorld | Check follow relationship in both directions |
+| `list-webhooks` | Free | readOnly | List all webhook endpoints with URLs and event types |
+| `add-webhook` | Free | openWorld | Register an HTTPS endpoint for HMAC-signed event delivery |
+| `remove-webhook` | Free | destructive | Permanently delete a webhook endpoint |
+| `test-webhook` | Free | openWorld | Send a test payload to verify a webhook endpoint works |
+| `run-extraction` | Metered | openWorld | Run bulk data extraction (19 tool types). Always estimate first |
+| `list-extractions` | Free | readOnly | List past extraction jobs with status and result counts |
+| `get-extraction` | Free | readOnly | Get paginated results of a completed extraction |
+| `estimate-extraction` | Free | readOnly, openWorld | Preview extraction cost and check if it fits within budget |
+| `run-draw` | Metered | openWorld | Run a giveaway draw with configurable filters. Handles everything automatically |
+| `list-draws` | Free | readOnly | List past giveaway draws |
+| `get-draw` | Free | readOnly | Get draw details with tweet metrics at draw time and winners list |
+| `get-account` | Free | readOnly | Check plan, monitor quota, and current period usage percent |
+| `get-trends` | Free | readOnly, openWorld | Get trending topics by region. Free, no usage consumed |
 
 **MCP vs REST field differences:** Monitor uses `xUsername` (not `username`), Event uses `eventType`/`monitoredAccountId` (not `type`/`monitorId`), FollowerCheck uses `following`/`followedBy` (not `isFollowing`/`isFollowedBy`). Use the REST API `GET /x/users/{username}` for the complete user profile.
 
-## Example Prompts
+## After Setup
 
-Once connected, try these with your AI agent:
+### Workflow Patterns
+
+| Workflow | Steps |
+|----------|-------|
+| Set up real-time alerts | `add-monitor` -> `add-webhook` -> `test-webhook` |
+| Run a giveaway | `get-account` (check budget) -> `run-draw` |
+| Bulk extraction | `get-account` (check subscription) -> `estimate-extraction` -> `run-extraction` -> `get-extraction` |
+| Full tweet analysis | `lookup-tweet` (metrics) -> `run-extraction` with `thread_extractor` (full thread) |
+| Find and analyze user | `get-user-info` (profile) -> `search-tweets from:username` -> `lookup-tweet` (metrics) |
+
+### Example Prompts
+
+Try these with your AI agent:
 
 - "Monitor @vercel for new tweets and quote tweets"
 - "How many followers does @elonmusk have?"

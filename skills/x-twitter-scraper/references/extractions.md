@@ -162,9 +162,4 @@ Same body as create. Response:
 
 If `allowed` is `false`, the extraction would exceed your monthly quota.
 
-## Common Mistakes
-
-- **Don't extract to get counts.** Use `GET /x/users/{username}` for follower count, `GET /x/tweets/{id}` for engagement metrics
-- **Don't extract when search works.** Use `GET /x/tweets/search?q=from:username` to find recent tweets
-- **Always estimate first.** Large extractions can consume significant quota
-- **Likes and bookmarks are NOT extractable.** These are not available through the X API
+For common mistakes and tool selection rules, see [mcp-tools.md](mcp-tools.md#common-mistakes).
