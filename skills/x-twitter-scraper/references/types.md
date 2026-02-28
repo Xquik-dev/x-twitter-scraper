@@ -420,12 +420,12 @@ MCP tools return structured data with these shapes. Field names differ from the 
 // ─── MCP: get-user-info ─────────────────────────────────
 
 interface McpUserInfo {
-  username: string;
-  name: string;
-  description: string;       // User bio
-  followersCount: number;
-  followingCount: number;
-  profilePicture: string;    // Profile image URL
+  username: string;           // X username (without @)
+  name: string;               // Display name
+  description: string;        // User bio text
+  followersCount: number;     // Number of followers
+  followingCount: number;     // Number of accounts followed
+  profilePicture: string;     // Profile picture URL
   // Not returned: verified, location, createdAt, statusesCount
   // Use REST GET /x/users/{username} for the full profile
 }
@@ -434,11 +434,11 @@ interface McpUserInfo {
 
 interface McpSearchResult {
   tweets: {
-    id: string;
-    text: string;
-    authorUsername: string;
-    authorName: string;
-    createdAt: string;        // ISO 8601 timestamp
+    id: string;               // Tweet ID (use with lookup-tweet for full metrics)
+    text: string;             // Full tweet text
+    authorUsername: string;   // X username of the tweet author
+    authorName: string;       // Display name of the tweet author
+    createdAt: string;        // ISO 8601 timestamp when tweet was posted
     // No engagement metrics -- use lookup-tweet for those
   }[];
 }
@@ -447,20 +447,20 @@ interface McpSearchResult {
 
 interface McpTweetLookup {
   tweet: {
-    id: string;
-    text: string;
-    likeCount: number;
-    retweetCount: number;
-    replyCount: number;
-    quoteCount: number;
-    viewCount: number;
-    bookmarkCount: number;
+    id: string;               // Tweet ID
+    text: string;             // Tweet text
+    likeCount: number;        // Number of likes
+    retweetCount: number;     // Number of retweets
+    replyCount: number;       // Number of replies
+    quoteCount: number;       // Number of quote tweets
+    viewCount: number;        // Number of views
+    bookmarkCount: number;    // Number of bookmarks
   };
-  author?: {
-    id: string;
-    username: string;
-    followers: number;
-    verified: boolean;
+  author?: {                  // Tweet author details
+    id: string;               // Author user ID
+    username: string;         // Author X username
+    followers: number;        // Author follower count
+    verified: boolean;        // Whether the author is verified
   };
 }
 
@@ -475,26 +475,26 @@ interface McpFollowCheck {
 
 interface McpEventList {
   events: {
-    id: string;
-    xUsername: string;
-    eventType: string;
+    id: string;               // Event ID (use with get-event for full details)
+    xUsername: string;        // Username of the monitored account
+    eventType: string;        // Event type (tweet.new, tweet.reply, etc.)
     eventData: unknown;       // Full event payload (tweet text, author, metrics)
-    monitoredAccountId: string;
+    monitoredAccountId: string; // ID of the monitored account
     createdAt: string;        // ISO 8601 when event was recorded
     occurredAt: string;       // ISO 8601 when event occurred on X
   }[];
-  hasMore: boolean;
-  nextCursor?: string;
+  hasMore: boolean;           // Whether more results are available
+  nextCursor?: string;        // Pass as afterCursor to fetch the next page
 }
 
 // ─── MCP: list-monitors ─────────────────────────────────
 
 interface McpMonitorList {
   monitors: {
-    id: string;
-    xUsername: string;
-    eventTypes: string[];
-    isActive: boolean;
+    id: string;               // Monitor ID (use with remove-monitor, get-events monitorId filter)
+    xUsername: string;        // Monitored X username
+    eventTypes: string[];     // Subscribed event types
+    isActive: boolean;        // Whether the monitor is currently active
     createdAt: string;        // ISO 8601 timestamp
   }[];
 }
@@ -502,12 +502,12 @@ interface McpMonitorList {
 // ─── MCP: add-webhook ───────────────────────────────────
 
 interface McpWebhookCreated {
-  id: string;
-  url: string;
-  eventTypes: string[];
-  isActive: boolean;
+  id: string;                 // Webhook ID
+  url: string;                // HTTPS endpoint URL
+  eventTypes: string[];       // Event types delivered to this webhook
+  isActive: boolean;          // Whether the webhook is active
   createdAt: string;          // ISO 8601 timestamp
-  secret: string;             // HMAC signing secret. Store securely.
+  secret: string;             // HMAC signing secret for verifying webhook payloads. Store securely.
 }
 
 // ─── MCP: test-webhook ──────────────────────────────────
@@ -521,35 +521,35 @@ interface McpWebhookTest {
 // ─── MCP: run-extraction ────────────────────────────────
 
 interface McpExtractionJob {
-  id: string;                 // Use with get-extraction for results
-  toolType: string;
-  status: string;             // pending, running, completed, failed
-  totalResults: number;
+  id: string;                 // Extraction job ID (use with get-extraction for results)
+  toolType: string;           // Extraction tool type used
+  status: string;             // Job status
+  totalResults: number;       // Number of results extracted
 }
 
 // ─── MCP: estimate-extraction ───────────────────────────
 
 interface McpExtractionEstimate {
-  allowed?: boolean;          // Whether extraction fits within budget
-  estimatedResults?: number;
+  allowed?: boolean;          // Whether the extraction is allowed within budget
+  estimatedResults?: number;  // Estimated number of results
   projectedPercent?: number;  // Projected usage percent after extraction
   usagePercent?: number;      // Current usage percent of monthly quota
-  source?: string;
-  error?: string;
+  source?: string;            // Data source used for estimation
+  error?: string;             // Error message if estimation failed
 }
 
 // ─── MCP: run-draw ──────────────────────────────────────
 
 interface McpDrawResult {
-  id: string;
-  tweetId: string;
-  totalEntries: number;
-  validEntries: number;
+  id: string;                 // Draw ID (use with get-draw for full details)
+  tweetId: string;            // Giveaway tweet ID
+  totalEntries: number;       // Total reply count before filtering
+  validEntries: number;       // Valid entries after filtering
   winners: {
-    position: number;
-    authorUsername: string;
-    tweetId: string;
-    isBackup: boolean;
+    position: number;         // Winner position (1-based)
+    authorUsername: string;   // X username of the winner
+    tweetId: string;          // Tweet ID of the winning reply
+    isBackup: boolean;        // Whether this is a backup winner
   }[];
 }
 
@@ -557,26 +557,26 @@ interface McpDrawResult {
 
 interface McpDrawDetails {
   draw: {
-    id: string;
-    status: string;
-    createdAt: string;
-    drawnAt?: string;
-    totalEntries: number;
-    validEntries: number;
-    tweetId: string;
-    tweetUrl: string;
-    tweetText: string;
-    tweetAuthorUsername: string;
-    tweetLikeCount: number;   // Like count at draw time
-    tweetRetweetCount: number; // Retweet count at draw time
-    tweetReplyCount: number;  // Reply count at draw time
-    tweetQuoteCount: number;  // Quote count at draw time
+    id: string;               // Draw ID
+    status: string;           // Draw status (completed, failed)
+    createdAt: string;        // ISO 8601 timestamp
+    drawnAt?: string;         // ISO 8601 timestamp when winners were drawn
+    totalEntries: number;     // Total reply count before filtering
+    validEntries: number;     // Entries remaining after filters applied
+    tweetId: string;          // Giveaway tweet ID
+    tweetUrl: string;         // Full URL of the giveaway tweet
+    tweetText: string;        // Giveaway tweet text
+    tweetAuthorUsername: string; // Username of the giveaway tweet author
+    tweetLikeCount: number;   // Tweet like count at draw time
+    tweetRetweetCount: number; // Tweet retweet count at draw time
+    tweetReplyCount: number;  // Tweet reply count at draw time
+    tweetQuoteCount: number;  // Tweet quote count at draw time
   };
   winners: {
-    position: number;
-    authorUsername: string;
-    tweetId: string;
-    isBackup: boolean;
+    position: number;         // Winner position (1-based)
+    authorUsername: string;   // X username of the winner
+    tweetId: string;          // Tweet ID of the winning reply
+    isBackup: boolean;        // Whether this is a backup winner
   }[];
 }
 
@@ -584,12 +584,12 @@ interface McpDrawDetails {
 
 interface McpAccount {
   plan: string;               // Current plan name (free or subscriber)
-  monitorsAllowed: number;    // Maximum monitors on current plan
+  monitorsAllowed: number;    // Maximum monitors allowed on current plan
   monitorsUsed: number;       // Number of active monitors
-  currentPeriod?: {           // Present only with active subscription
-    start: string;            // ISO 8601 billing period start
-    end: string;              // ISO 8601 billing period end
-    usagePercent: number;     // Current usage percent of monthly quota
+  currentPeriod?: {           // Current billing period (present only with active subscription)
+    start: string;            // ISO 8601 period start date
+    end: string;              // ISO 8601 period end date
+    usagePercent: number;     // Percent of monthly quota consumed
   };
 }
 

@@ -61,10 +61,10 @@ List all X accounts the user is currently monitoring.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `monitors[].id` | string | Monitor ID |
+| `monitors[].id` | string | Monitor ID (use with remove-monitor, get-events monitorId filter) |
 | `monitors[].xUsername` | string | Monitored X username |
 | `monitors[].eventTypes` | string[] | Subscribed event types |
-| `monitors[].isActive` | boolean | Whether monitor is active |
+| `monitors[].isActive` | boolean | Whether the monitor is currently active |
 | `monitors[].createdAt` | string | ISO 8601 timestamp |
 
 **Annotations:** readOnly, idempotent | **Cost:** Free
@@ -121,15 +121,15 @@ Retrieve recent activity from monitored X accounts. Only returns events from acc
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `events[].id` | string | Event ID |
-| `events[].xUsername` | string | Monitored account username |
-| `events[].eventType` | string | Event type |
+| `events[].id` | string | Event ID (use with get-event for full details) |
+| `events[].xUsername` | string | Username of the monitored account |
+| `events[].eventType` | string | Event type (tweet.new, tweet.reply, etc.) |
 | `events[].eventData` | object | Full event payload (tweet text, author, metrics) |
-| `events[].monitoredAccountId` | string | Monitor ID |
+| `events[].monitoredAccountId` | string | ID of the monitored account |
 | `events[].createdAt` | string | ISO 8601 timestamp when event was recorded |
 | `events[].occurredAt` | string | ISO 8601 timestamp when event occurred on X |
-| `hasMore` | boolean | Whether more pages exist |
-| `nextCursor` | string | Cursor for next page (present when hasMore is true) |
+| `hasMore` | boolean | Whether more results are available |
+| `nextCursor` | string | Pass as afterCursor to fetch the next page |
 
 **Annotations:** readOnly, idempotent | **Cost:** Free
 
@@ -169,11 +169,11 @@ Supports X search syntax: keywords, `#hashtags`, `from:user`, `to:user`, `"exact
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `tweets[].id` | string | Tweet ID |
-| `tweets[].text` | string | Tweet text |
-| `tweets[].authorUsername` | string | Author username |
-| `tweets[].authorName` | string | Author display name |
-| `tweets[].createdAt` | string | ISO 8601 timestamp |
+| `tweets[].id` | string | Tweet ID (use with lookup-tweet for full metrics) |
+| `tweets[].text` | string | Full tweet text |
+| `tweets[].authorUsername` | string | X username of the tweet author |
+| `tweets[].authorName` | string | Display name of the tweet author |
+| `tweets[].createdAt` | string | ISO 8601 timestamp when tweet was posted |
 
 **Annotations:** readOnly, idempotent, openWorld | **Cost:** Metered
 
@@ -195,12 +195,12 @@ Get full details of a specific tweet by its ID or URL. Returns engagement metric
 |-------|------|-------------|
 | `tweet.id` | string | Tweet ID |
 | `tweet.text` | string | Tweet text |
-| `tweet.likeCount` | number | Like count |
-| `tweet.retweetCount` | number | Retweet count |
-| `tweet.replyCount` | number | Reply count |
-| `tweet.quoteCount` | number | Quote tweet count |
-| `tweet.viewCount` | number | View count |
-| `tweet.bookmarkCount` | number | Bookmark count |
+| `tweet.likeCount` | number | Number of likes |
+| `tweet.retweetCount` | number | Number of retweets |
+| `tweet.replyCount` | number | Number of replies |
+| `tweet.quoteCount` | number | Number of quote tweets |
+| `tweet.viewCount` | number | Number of views |
+| `tweet.bookmarkCount` | number | Number of bookmarks |
 | `author.id` | string | Author user ID |
 | `author.username` | string | Author username |
 | `author.followers` | number | Author follower count |
@@ -224,12 +224,12 @@ Look up an X user profile by username. Does NOT return verification status or tw
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `username` | string | X username |
+| `username` | string | X username (without @) |
 | `name` | string | Display name |
-| `description` | string | Bio/description |
-| `followersCount` | number | Follower count |
-| `followingCount` | number | Following count |
-| `profilePicture` | string | Profile image URL |
+| `description` | string | User bio text |
+| `followersCount` | number | Number of followers |
+| `followingCount` | number | Number of accounts followed |
+| `profilePicture` | string | Profile picture URL |
 
 **Note:** The REST API `GET /x/users/{username}` returns additional fields: `verified`, `location`, `createdAt`, `statusesCount`.
 
@@ -274,8 +274,8 @@ Get trending topics on X for a region. Free -- does not consume usage quota.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `woeid` | number | Region WOEID used |
-| `total` | number | Total trends returned |
+| `woeid` | number | Region WOEID used for this request |
+| `total` | number | Total number of trends returned |
 | `trends[].name` | string | Trend name or hashtag |
 | `trends[].rank` | number | Trend rank position |
 | `trends[].description` | string | Trend description or context |
@@ -297,10 +297,10 @@ List all webhook endpoints configured by the user.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `webhooks[].id` | string | Webhook ID |
-| `webhooks[].url` | string | Delivery URL |
-| `webhooks[].eventTypes` | string[] | Subscribed event types |
-| `webhooks[].isActive` | boolean | Whether webhook is active |
+| `webhooks[].id` | string | Webhook ID (use with remove-webhook, test-webhook) |
+| `webhooks[].url` | string | HTTPS endpoint URL |
+| `webhooks[].eventTypes` | string[] | Event types delivered to this webhook |
+| `webhooks[].isActive` | boolean | Whether the webhook is currently active |
 | `webhooks[].createdAt` | string | ISO 8601 timestamp |
 
 **Annotations:** readOnly, idempotent | **Cost:** Free
@@ -309,7 +309,7 @@ List all webhook endpoints configured by the user.
 
 ### add-webhook
 
-Register a new webhook endpoint to receive real-time event notifications via HTTP POST. Events are delivered as HMAC-signed JSON payloads.
+Register a new webhook endpoint to receive real-time event notifications via HTTP POST. Events are delivered as HMAC-signed JSON payloads. Returns the webhook details including an HMAC signing secret. Store this secret securely to verify payload signatures.
 
 **Input:**
 
@@ -323,9 +323,9 @@ Register a new webhook endpoint to receive real-time event notifications via HTT
 | Field | Type | Description |
 |-------|------|-------------|
 | `id` | string | Webhook ID |
-| `url` | string | Delivery URL |
-| `eventTypes` | string[] | Subscribed event types |
-| `isActive` | boolean | Whether webhook is active |
+| `url` | string | HTTPS endpoint URL |
+| `eventTypes` | string[] | Event types delivered to this webhook |
+| `isActive` | boolean | Whether the webhook is active |
 | `createdAt` | string | ISO 8601 timestamp |
 | `secret` | string | HMAC signing secret for verifying webhook payloads. Store securely. |
 
@@ -397,8 +397,8 @@ Preview the cost of an extraction before running it. Always call this before `ru
 | `estimatedResults` | number | Estimated number of results |
 | `projectedPercent` | number | Projected usage percent after extraction |
 | `usagePercent` | number | Current usage percent of monthly quota |
-| `source` | string | How the estimate was derived |
-| `error` | string | Error message (present on failure) |
+| `source` | string | Data source used for estimation |
+| `error` | string | Error message if estimation failed |
 
 **Annotations:** readOnly, idempotent, openWorld | **Cost:** Free
 
@@ -435,9 +435,9 @@ Run a bulk data extraction job. Subscription required. For simpler lookups, pref
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | Extraction job ID (use with `get-extraction` for results) |
-| `toolType` | string | Extraction type |
-| `status` | string | Job status: pending, running, completed, failed |
+| `id` | string | Extraction job ID (use with get-extraction for results) |
+| `toolType` | string | Extraction tool type used |
+| `status` | string | Job status |
 | `totalResults` | number | Number of results extracted |
 
 **Annotations:** openWorld | **Cost:** Metered
@@ -461,14 +461,14 @@ List past extraction jobs.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extractions[].id` | string | Job ID |
-| `extractions[].toolType` | string | Extraction type |
-| `extractions[].status` | string | Job status |
-| `extractions[].createdAt` | string | ISO 8601 timestamp |
-| `extractions[].completedAt` | string | ISO 8601 timestamp (present when completed) |
-| `extractions[].totalResults` | number | Result count |
-| `hasMore` | boolean | Whether more pages exist |
-| `nextCursor` | string | Cursor for next page |
+| `extractions[].id` | string | Extraction ID (use with get-extraction for results) |
+| `extractions[].toolType` | string | Extraction tool type used |
+| `extractions[].status` | string | Job status (running, completed, failed) |
+| `extractions[].createdAt` | string | ISO 8601 creation timestamp |
+| `extractions[].completedAt` | string | ISO 8601 completion timestamp |
+| `extractions[].totalResults` | number | Number of results extracted |
+| `hasMore` | boolean | Whether more results are available |
+| `nextCursor` | string | Pass as afterCursor to fetch the next page |
 
 **Annotations:** readOnly, idempotent | **Cost:** Free
 
@@ -492,8 +492,8 @@ Get results of a specific extraction job by its ID.
 |-------|------|-------------|
 | `job` | object | Full job metadata |
 | `results` | array | Extracted data (user profiles, tweets, etc.) |
-| `hasMore` | boolean | Whether more pages exist |
-| `nextCursor` | string | Cursor for next page |
+| `hasMore` | boolean | Whether more results are available |
+| `nextCursor` | string | Pass as afterCursor to fetch the next page |
 
 **Annotations:** readOnly, idempotent | **Cost:** Free
 
@@ -526,13 +526,13 @@ Run a giveaway draw or raffle from a tweet. Handles reply fetching, filtering, d
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | Draw ID |
-| `tweetId` | string | Tweet ID |
-| `totalEntries` | number | Total replies found |
-| `validEntries` | number | Entries passing all filters |
+| `id` | string | Draw ID (use with get-draw for full details) |
+| `tweetId` | string | Giveaway tweet ID |
+| `totalEntries` | number | Total reply count before filtering |
+| `validEntries` | number | Valid entries after filtering |
 | `winners[].position` | number | Winner position (1-based) |
-| `winners[].authorUsername` | string | Winner username |
-| `winners[].tweetId` | string | Winner's reply tweet ID |
+| `winners[].authorUsername` | string | X username of the winner |
+| `winners[].tweetId` | string | Tweet ID of the winning reply |
 | `winners[].isBackup` | boolean | Whether this is a backup winner |
 
 **Annotations:** openWorld | **Cost:** Metered
@@ -554,15 +554,15 @@ List past giveaway draws.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `draws[].id` | string | Draw ID |
+| `draws[].id` | string | Draw ID (use with get-draw for full details) |
 | `draws[].tweetUrl` | string | Giveaway tweet URL |
-| `draws[].status` | string | Draw status: pending, running, completed, failed |
+| `draws[].status` | string | Draw status |
 | `draws[].createdAt` | string | ISO 8601 timestamp |
-| `draws[].drawnAt` | string | ISO 8601 timestamp (present when completed) |
-| `draws[].totalEntries` | number | Total replies |
-| `draws[].validEntries` | number | Filtered entries |
-| `hasMore` | boolean | Whether more pages exist |
-| `nextCursor` | string | Cursor for next page |
+| `draws[].drawnAt` | string | ISO 8601 timestamp when drawn |
+| `draws[].totalEntries` | number | Total reply count |
+| `draws[].validEntries` | number | Valid entries after filtering |
+| `hasMore` | boolean | Whether more results are available |
+| `nextCursor` | string | Pass as afterCursor to fetch the next page |
 
 **Annotations:** readOnly, idempotent | **Cost:** Free
 
@@ -583,22 +583,22 @@ Get details of a specific giveaway draw including winners.
 | Field | Type | Description |
 |-------|------|-------------|
 | `draw.id` | string | Draw ID |
-| `draw.status` | string | Draw status |
+| `draw.status` | string | Draw status (completed, failed) |
 | `draw.createdAt` | string | ISO 8601 timestamp |
-| `draw.drawnAt` | string | ISO 8601 timestamp (present when completed) |
-| `draw.totalEntries` | number | Total replies |
-| `draw.validEntries` | number | Filtered entries |
-| `draw.tweetId` | string | Tweet ID |
-| `draw.tweetUrl` | string | Tweet URL |
-| `draw.tweetText` | string | Tweet text |
-| `draw.tweetAuthorUsername` | string | Tweet author |
+| `draw.drawnAt` | string | ISO 8601 timestamp when winners were drawn |
+| `draw.totalEntries` | number | Total reply count before filtering |
+| `draw.validEntries` | number | Entries remaining after filters applied |
+| `draw.tweetId` | string | Giveaway tweet ID |
+| `draw.tweetUrl` | string | Full URL of the giveaway tweet |
+| `draw.tweetText` | string | Giveaway tweet text |
+| `draw.tweetAuthorUsername` | string | Username of the giveaway tweet author |
 | `draw.tweetLikeCount` | number | Tweet like count at draw time |
 | `draw.tweetRetweetCount` | number | Tweet retweet count at draw time |
 | `draw.tweetReplyCount` | number | Tweet reply count at draw time |
 | `draw.tweetQuoteCount` | number | Tweet quote count at draw time |
 | `winners[].position` | number | Winner position (1-based) |
-| `winners[].authorUsername` | string | Winner username |
-| `winners[].tweetId` | string | Winner's reply tweet ID |
+| `winners[].authorUsername` | string | X username of the winner |
+| `winners[].tweetId` | string | Tweet ID of the winning reply |
 | `winners[].isBackup` | boolean | Whether this is a backup winner |
 
 **Annotations:** readOnly, idempotent | **Cost:** Free
@@ -620,9 +620,10 @@ Check Xquik account status, subscription, and usage.
 | `plan` | string | Current plan name (free or subscriber) |
 | `monitorsAllowed` | number | Maximum monitors allowed on current plan |
 | `monitorsUsed` | number | Number of active monitors |
-| `currentPeriod.start` | string | ISO 8601 billing period start (present only with active subscription) |
-| `currentPeriod.end` | string | ISO 8601 billing period end |
-| `currentPeriod.usagePercent` | number | Current usage percent of monthly quota |
+| `currentPeriod` | object | Current billing period (present only with active subscription) |
+| `currentPeriod.start` | string | ISO 8601 period start date |
+| `currentPeriod.end` | string | ISO 8601 period end date |
+| `currentPeriod.usagePercent` | number | Percent of monthly quota consumed |
 
 **Annotations:** readOnly, idempotent | **Cost:** Free
 
