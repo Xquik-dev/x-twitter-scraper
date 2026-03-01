@@ -404,6 +404,77 @@ interface UpdateWebhookRequest {
 interface CreateApiKeyRequest {
   name?: string;
 }
+
+// --- Tweet Style Cache ---
+
+interface TweetStyleCache {
+  xUsername: string;
+  tweetCount: number;
+  isOwnAccount: boolean;
+  fetchedAt: string; // ISO 8601
+  tweets: CachedTweet[];
+}
+
+interface CachedTweet {
+  id: string;
+  text: string;
+  authorUsername: string;
+  createdAt: string; // ISO 8601
+  media?: TweetMedia[];
+}
+
+interface TweetStyleSummary {
+  xUsername: string;
+  tweetCount: number;
+  isOwnAccount: boolean;
+  fetchedAt: string;
+}
+
+interface StyleComparison {
+  style1: TweetStyleCache;
+  style2: TweetStyleCache;
+}
+
+interface StylePerformance {
+  xUsername: string;
+  tweetCount: number;
+  tweets: PerformanceTweet[];
+}
+
+interface PerformanceTweet {
+  id: string;
+  text: string;
+  likeCount: number;
+  retweetCount: number;
+  replyCount: number;
+  quoteCount: number;
+  viewCount: number;
+  bookmarkCount: number;
+}
+
+// --- Tweet Drafts ---
+
+interface TweetDraft {
+  id: string;
+  text: string;
+  topic?: string;
+  goal?: "engagement" | "followers" | "authority" | "conversation";
+  createdAt: string; // ISO 8601
+  updatedAt: string; // ISO 8601
+}
+
+interface TweetDraftList {
+  drafts: TweetDraft[];
+  afterCursor: string | null;
+  hasMore: boolean;
+}
+
+// --- Account Identity ---
+
+interface XIdentityResponse {
+  success: boolean;
+  xUsername: string;
+}
 ```
 
 ## REST API vs MCP Field Naming

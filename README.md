@@ -92,7 +92,7 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Trending topics**: Get trending hashtags and topics by region (free, no quota)
 - **Community & Space data**: Extract community members, moderators, posts, and Space participants
 - **Mutual follow checker**: Check if two accounts follow each other
-- **MCP server integration**: Connect AI agents to X data via 26 MCP tools
+- **MCP server integration**: Connect AI agents to X data via 37 MCP tools
 
 ## Capabilities
 
@@ -106,7 +106,7 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 | **Giveaway Draws** | Random winner selection from tweet replies with 11 filter options |
 | **Account Monitoring** | Real-time tracking of tweets, replies, quotes, retweets, follower changes |
 | **Webhooks** | HMAC-SHA256 signature verification in Node.js, Python, Go |
-| **MCP Server** | 26 tools, StreamableHTTP transport, configs for 8 platforms |
+| **MCP Server** | 37 tools, StreamableHTTP transport, configs for 9 platforms |
 | **Engagement Analytics** | Likes, retweets, replies, quotes, views, bookmarks per tweet |
 | **Trending Topics** | Regional trends with search queries (free, no quota) |
 | **Tweet Composition** | Algorithm-optimized tweet composer with scoring checklist (free) |
@@ -140,7 +140,7 @@ x-twitter-scraper/
 │       ├── metadata.json                 # Version and references
 │       └── references/
 │           ├── api-endpoints.md          # All REST API endpoints
-│           ├── mcp-tools.md             # All 26 MCP tools with schemas
+│           ├── mcp-tools.md             # All 37 MCP tools with schemas
 │           ├── mcp-setup.md              # MCP configs for 8 platforms
 │           ├── webhooks.md               # Webhook setup & verification
 │           ├── extractions.md            # 19 extraction tool types

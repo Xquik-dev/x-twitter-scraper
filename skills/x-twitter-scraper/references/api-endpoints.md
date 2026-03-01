@@ -487,6 +487,257 @@ Free, no usage consumed. Cached, refreshes every 15 minutes.
 
 ---
 
+## Drafts
+
+### Create Draft
+
+`POST /drafts`
+
+Save a tweet draft for later.
+
+**Request body:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `text` | string | Yes | The draft tweet text |
+| `topic` | string | No | Topic the tweet is about |
+| `goal` | string | No | Optimization goal: `engagement`, `followers`, `authority`, `conversation` |
+
+**Response (201):**
+
+```json
+{
+  "id": "123",
+  "text": "draft text",
+  "topic": "product launch",
+  "goal": "engagement",
+  "createdAt": "2026-02-24T10:30:00.000Z",
+  "updatedAt": "2026-02-24T10:30:00.000Z"
+}
+```
+
+---
+
+### List Drafts
+
+`GET /drafts`
+
+List saved tweet drafts with cursor pagination.
+
+**Query parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `limit` | number | No | 50 | Results per page (max 50) |
+| `afterCursor` | string | No | - | Pagination cursor from previous response |
+
+**Response (200):**
+
+```json
+{
+  "drafts": [
+    {
+      "id": "123",
+      "text": "draft text",
+      "topic": "product launch",
+      "goal": "engagement",
+      "createdAt": "2026-02-24T10:30:00.000Z",
+      "updatedAt": "2026-02-24T10:30:00.000Z"
+    }
+  ],
+  "afterCursor": "cursor_string",
+  "hasMore": true
+}
+```
+
+---
+
+### Get Draft
+
+`GET /drafts/{id}`
+
+Get a specific draft by ID.
+
+**Response (200):** Single draft object.
+
+**Errors:** `400 invalid_id`, `404 draft_not_found`
+
+---
+
+### Delete Draft
+
+`DELETE /drafts/{id}`
+
+Delete a draft. Returns `204 No Content`.
+
+**Errors:** `400 invalid_id`, `404 draft_not_found`
+
+---
+
+## Tweet Style Cache
+
+### Analyze & Cache Style
+
+`POST /styles`
+
+Fetch recent tweets from an X account and cache them for style analysis. **Consumes API usage credits.**
+
+**Request body:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `username` | string | Yes | X username to analyze (without @) |
+
+**Response (201):**
+
+```json
+{
+  "xUsername": "elonmusk",
+  "tweetCount": 20,
+  "isOwnAccount": false,
+  "fetchedAt": "2026-02-24T10:30:00.000Z",
+  "tweets": [
+    {
+      "id": "1893456789012345678",
+      "text": "The future is now.",
+      "authorUsername": "elonmusk",
+      "createdAt": "2026-02-24T14:22:00.000Z"
+    }
+  ]
+}
+```
+
+---
+
+### List Cached Styles
+
+`GET /styles`
+
+List all cached tweet style profiles. Max 200 results, ordered by fetch date.
+
+**Response (200):**
+
+```json
+{
+  "styles": [
+    {
+      "xUsername": "elonmusk",
+      "tweetCount": 20,
+      "isOwnAccount": false,
+      "fetchedAt": "2026-02-24T10:30:00.000Z"
+    }
+  ]
+}
+```
+
+---
+
+### Get Cached Style
+
+`GET /styles/{username}`
+
+Get a cached style profile with full tweet data.
+
+**Response (200):** Full style object with `tweets` array.
+
+**Errors:** `404 style_not_found`
+
+---
+
+### Delete Cached Style
+
+`DELETE /styles/{username}`
+
+Delete a cached style. Returns `204 No Content`.
+
+**Errors:** `404 style_not_found`
+
+---
+
+### Compare Styles
+
+`GET /styles/compare?username1=A&username2=B`
+
+Compare two cached tweet style profiles side by side.
+
+**Query parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `username1` | string | Yes | First X username |
+| `username2` | string | Yes | Second X username |
+
+**Response (200):**
+
+```json
+{
+  "style1": { "xUsername": "user1", "tweetCount": 20, "isOwnAccount": true, "fetchedAt": "...", "tweets": [...] },
+  "style2": { "xUsername": "user2", "tweetCount": 15, "isOwnAccount": false, "fetchedAt": "...", "tweets": [...] }
+}
+```
+
+**Errors:** `400 missing_params`, `404 style_not_found`
+
+---
+
+### Analyze Performance
+
+`GET /styles/{username}/performance`
+
+Get live engagement metrics for cached tweets. **Consumes API usage credits.**
+
+**Response (200):**
+
+```json
+{
+  "xUsername": "elonmusk",
+  "tweetCount": 20,
+  "tweets": [
+    {
+      "id": "1893456789012345678",
+      "text": "The future is now.",
+      "likeCount": 42000,
+      "retweetCount": 8500,
+      "replyCount": 3200,
+      "quoteCount": 1100,
+      "viewCount": 5000000,
+      "bookmarkCount": 2400
+    }
+  ]
+}
+```
+
+**Errors:** `404 style_not_found`
+
+---
+
+## Account Identity
+
+### Set X Identity
+
+`PUT /account/x-identity`
+
+Link your X username to your Xquik account. Required for own-account detection in style analysis.
+
+**Request body:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `username` | string | Yes | Your X username (without @) |
+
+**Response (200):**
+
+```json
+{
+  "success": true,
+  "xUsername": "elonmusk"
+}
+```
+
+**Errors:** `400 invalid_input`
+
+---
+
 ## Error Codes
 
 | Status | Code | Meaning |

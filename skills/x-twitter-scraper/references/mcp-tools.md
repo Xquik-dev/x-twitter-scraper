@@ -1,6 +1,6 @@
 # Xquik MCP Tools Reference
 
-Complete reference for all 26 MCP tools exposed by the Xquik server at `https://xquik.com/mcp`.
+Complete reference for all 37 MCP tools exposed by the Xquik server at `https://xquik.com/mcp`.
 
 ## Tool Selection Rules
 
@@ -21,6 +21,13 @@ Pick the simplest tool that answers the question:
 | Past giveaway results | `list-draws` + `get-draw` | Draw details with winners |
 | Subscribe, billing, manage plan | `subscribe` | Returns Stripe Checkout or Customer Portal URL. Free |
 | Write/compose/draft a tweet | `compose-tweet` FIRST | Returns algorithm signals + follow-up questions. Then `refine-tweet`, then `score-tweet`. Free |
+| Link your X username | `set-x-identity` | Required for own-account detection in style analysis |
+| Analyze how someone tweets | `analyze-style` | Fetches & caches recent tweets. Metered |
+| Get cached style for reference | `get-style` | Check before calling analyze-style |
+| Compare two styles | `compare-styles` | Both must be cached with analyze-style first |
+| Tweet engagement metrics | `analyze-performance` | Live metrics for cached tweets. Metered |
+| Save a tweet draft | `save-draft` | Store for later |
+| List/get/delete drafts | `list-drafts`, `get-draft`, `delete-draft` | Manage saved drafts |
 
 Use `run-extraction` ONLY for bulk data that simpler tools cannot provide:
 
@@ -42,14 +49,18 @@ Multi-step tool sequences for common tasks:
 | **Full tweet analysis** | `lookup-tweet` (metrics) -> `run-extraction` with `thread_extractor` (full thread) |
 | **Find and analyze user** | `get-user-info` (profile) -> `search-tweets` from:username (recent tweets) -> `lookup-tweet` (metrics on specific tweet) |
 | **Compose algorithm-optimized tweet** | `compose-tweet` -> AI asks follow-ups -> `refine-tweet` -> AI drafts tweet -> `score-tweet` -> iterate |
+| **Analyze tweet style** | `analyze-style` (fetch & cache tweets) -> `get-style` (reference) -> `compose-tweet` with `styleUsername` |
+| **Compare styles** | `analyze-style` for both accounts -> `compare-styles` |
+| **Track performance** | `analyze-style` (cache tweets) -> `analyze-performance` (live metrics) |
+| **Save & manage drafts** | `compose-tweet` -> `refine-tweet` -> `score-tweet` -> `save-draft` -> `list-drafts` |
 | **Subscribe or manage billing** | `subscribe` (returns Stripe URL) |
 
 ## Cost Categories
 
 | Category | Tools |
 |----------|-------|
-| **Free** | `list-monitors`, `add-monitor`, `remove-monitor`, `get-events`, `get-event`, `list-webhooks`, `add-webhook`, `remove-webhook`, `test-webhook`, `list-extractions`, `get-extraction`, `estimate-extraction`, `list-draws`, `get-draw`, `get-account`, `subscribe`, `get-trends`, `compose-tweet`, `refine-tweet`, `score-tweet` |
-| **Metered** (counts toward monthly quota) | `search-tweets`, `get-user-info`, `lookup-tweet`, `check-follow`, `run-extraction`, `run-draw` |
+| **Free** | `list-monitors`, `add-monitor`, `remove-monitor`, `get-events`, `get-event`, `list-webhooks`, `add-webhook`, `remove-webhook`, `test-webhook`, `list-extractions`, `get-extraction`, `estimate-extraction`, `list-draws`, `get-draw`, `get-account`, `subscribe`, `get-trends`, `compose-tweet`, `refine-tweet`, `score-tweet`, `get-style`, `list-styles`, `delete-style`, `compare-styles`, `set-x-identity`, `save-draft`, `list-drafts`, `get-draft`, `delete-draft` |
+| **Metered** (counts toward monthly quota) | `search-tweets`, `get-user-info`, `lookup-tweet`, `check-follow`, `run-extraction`, `run-draw`, `analyze-style`, `analyze-performance` |
 
 ---
 
@@ -659,7 +670,7 @@ Get a subscription checkout or management link. Returns a Stripe Checkout URL (f
 
 ### compose-tweet
 
-Start composing an algorithm-optimized tweet. Returns X algorithm engagement signals, content rules, and follow-up questions for the AI to ask the user. Free, no subscription needed. Use this first, then `refine-tweet` after the user answers follow-ups, then `score-tweet` to evaluate the draft.
+Start composing an algorithm-optimized tweet. Returns X algorithm engagement signals, content rules, and follow-up questions for the AI to ask the user. Subscription required, not metered. Use this first, then `refine-tweet` after the user answers follow-ups, then `score-tweet` to evaluate the draft. Optionally pass `styleUsername` to include cached style tweets for reference.
 
 **Input:**
 
@@ -667,6 +678,7 @@ Start composing an algorithm-optimized tweet. Returns X algorithm engagement sig
 |-----------|------|----------|-------------|
 | `topic` | string | Yes | What the tweet is about |
 | `goal` | string | No | Optimization goal: `engagement` (default), `followers`, `authority`, `conversation` |
+| `styleUsername` | string | No | X username whose cached style tweets to include for reference (must have been analyzed with `analyze-style` first) |
 
 **Output:**
 
@@ -687,6 +699,7 @@ Start composing an algorithm-optimized tweet. Returns X algorithm engagement sig
 | `scorerWeights[].context` | string | Practical meaning of this weight |
 | `topPenalties` | string[] | Most severe negative signals to avoid |
 | `source` | string | Attribution to algorithm source code |
+| `styleTweets` | array | Optional. Cached tweets from the referenced style username |
 
 **Annotations:** readOnly, idempotent | **Cost:** Free
 
@@ -694,7 +707,7 @@ Start composing an algorithm-optimized tweet. Returns X algorithm engagement sig
 
 ### refine-tweet
 
-Get targeted composition guidance after the user answers follow-up questions from `compose-tweet`. Returns goal-specific tips, example tweet patterns, media strategy, hashtag advice, and CTA guidance. Free, no subscription needed.
+Get targeted composition guidance after the user answers follow-up questions from `compose-tweet`. Returns goal-specific tips, example tweet patterns, media strategy, hashtag advice, and CTA guidance. Subscription required, not metered.
 
 **Input:**
 
@@ -722,7 +735,7 @@ Get targeted composition guidance after the user answers follow-up questions fro
 
 ### score-tweet
 
-Evaluate a draft tweet against X algorithm ranking factors. Returns a pass/fail checklist covering links, hashtags, capitalization, engagement farming, CTA, length, media, and punctuation. Free, no subscription needed.
+Evaluate a draft tweet against X algorithm ranking factors. Returns a pass/fail checklist covering links, hashtags, capitalization, engagement farming, CTA, length, media, and punctuation. Subscription required, not metered.
 
 **Input:**
 
@@ -747,6 +760,256 @@ Evaluate a draft tweet against X algorithm ranking factors. Returns a pass/fail 
 
 ---
 
+## Identity Tool
+
+### set-x-identity
+
+Link your X (Twitter) username to your Xquik account. Required for own-account detection in style analysis. Subscription required.
+
+**Input:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `username` | string | Yes | Your X username (without the @ prefix) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `success` | boolean | Whether the identity was set |
+
+**Annotations:** idempotent | **Cost:** Free (subscription required)
+
+---
+
+## Style Analysis Tools
+
+### analyze-style
+
+Fetch and cache recent tweets from an X account for style analysis. Use when someone says "analyze @username's style" or "how does @username tweet?". Fetches recent tweets and caches them. Use `get-style` to check if already cached. Subscription required.
+
+**Input:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `username` | string | Yes | X username to analyze (without the @ prefix) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `xUsername` | string | Analyzed username |
+| `tweetCount` | number | Number of tweets cached |
+| `isOwnAccount` | boolean | Whether this is the authenticated user's own account |
+| `fetchedAt` | string | ISO 8601 timestamp when tweets were fetched |
+| `tweets[].id` | string | Tweet ID |
+| `tweets[].text` | string | Tweet text |
+| `tweets[].authorUsername` | string | Author username |
+| `tweets[].createdAt` | string | ISO 8601 timestamp |
+
+**Annotations:** openWorld | **Cost:** Metered
+
+---
+
+### get-style
+
+Get a previously cached tweet style profile. Use to check if a style is already cached before calling `analyze-style`. Subscription required.
+
+**Input:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `username` | string | Yes | X username to look up (without the @ prefix) |
+
+**Output:** Same as `analyze-style` output.
+
+**Annotations:** readOnly, idempotent | **Cost:** Free (subscription required)
+
+---
+
+### list-styles
+
+List all cached tweet style profiles. Subscription required.
+
+**Input:** None
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `styles[].xUsername` | string | Cached username |
+| `styles[].tweetCount` | number | Number of cached tweets |
+| `styles[].isOwnAccount` | boolean | Whether this is the user's own account |
+| `styles[].fetchedAt` | string | ISO 8601 timestamp |
+
+**Annotations:** readOnly, idempotent | **Cost:** Free (subscription required)
+
+---
+
+### delete-style
+
+Delete a cached tweet style profile. Subscription required.
+
+**Input:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `username` | string | Yes | X username whose cached style to delete (without the @ prefix) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `deleted` | boolean | Whether the style was deleted |
+
+**Annotations:** destructive, idempotent | **Cost:** Free (subscription required)
+
+---
+
+### compare-styles
+
+Compare two cached tweet style profiles side by side. Both accounts must have been analyzed with `analyze-style` first. Subscription required.
+
+**Input:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `username1` | string | Yes | First X username to compare (without @) |
+| `username2` | string | Yes | Second X username to compare (without @) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `style1` | object | Full style profile for username1 (same shape as `get-style` output) |
+| `style2` | object | Full style profile for username2 (same shape as `get-style` output) |
+
+**Annotations:** readOnly, idempotent | **Cost:** Free (subscription required)
+
+---
+
+### analyze-performance
+
+Get engagement metrics for cached tweets. Requires cached style from `analyze-style`. Subscription required.
+
+**Input:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `username` | string | Yes | X username whose cached tweets to analyze (without the @ prefix) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `xUsername` | string | Analyzed username |
+| `tweetCount` | number | Number of tweets analyzed |
+| `tweets[].id` | string | Tweet ID |
+| `tweets[].text` | string | Tweet text |
+| `tweets[].likeCount` | number | Number of likes |
+| `tweets[].retweetCount` | number | Number of retweets |
+| `tweets[].replyCount` | number | Number of replies |
+| `tweets[].quoteCount` | number | Number of quote tweets |
+| `tweets[].viewCount` | number | Number of views |
+| `tweets[].bookmarkCount` | number | Number of bookmarks |
+
+**Annotations:** readOnly, idempotent, openWorld | **Cost:** Metered
+
+---
+
+## Draft Tools
+
+### save-draft
+
+Save a tweet draft for later. Subscription required.
+
+**Input:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `text` | string | Yes | The draft tweet text |
+| `topic` | string | No | Topic the tweet is about |
+| `goal` | string | No | Optimization goal used when composing: `engagement`, `followers`, `authority`, `conversation` |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | string | Draft ID (use with get-draft, delete-draft) |
+| `text` | string | Draft text |
+| `topic` | string | Topic (if provided) |
+| `goal` | string | Goal (if provided) |
+| `createdAt` | string | ISO 8601 timestamp |
+| `updatedAt` | string | ISO 8601 timestamp |
+
+**Annotations:** --- | **Cost:** Free (subscription required)
+
+---
+
+### list-drafts
+
+List saved tweet drafts. Subscription required.
+
+**Input:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `limit` | number | No | Drafts to return (1-50, default 50) |
+| `afterCursor` | string | No | Pagination cursor from previous response |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `drafts[].id` | string | Draft ID |
+| `drafts[].text` | string | Draft text |
+| `drafts[].topic` | string | Topic (if set) |
+| `drafts[].goal` | string | Goal (if set) |
+| `drafts[].createdAt` | string | ISO 8601 timestamp |
+| `drafts[].updatedAt` | string | ISO 8601 timestamp |
+| `hasMore` | boolean | Whether more results are available |
+| `nextCursor` | string | Pass as afterCursor to fetch the next page |
+
+**Annotations:** readOnly, idempotent | **Cost:** Free (subscription required)
+
+---
+
+### get-draft
+
+Get a specific saved tweet draft by its ID. Subscription required.
+
+**Input:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `draftId` | string | Yes | Draft ID (from `list-drafts` or `save-draft`) |
+
+**Output:** Single draft object with `id`, `text`, `topic`, `goal`, `createdAt`, `updatedAt`.
+
+**Annotations:** readOnly, idempotent | **Cost:** Free (subscription required)
+
+---
+
+### delete-draft
+
+Delete a saved tweet draft. Subscription required.
+
+**Input:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `draftId` | string | Yes | Draft ID to delete (from `list-drafts`) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `deleted` | boolean | Whether the draft was deleted |
+
+**Annotations:** destructive, idempotent | **Cost:** Free (subscription required)
+
+---
+
 ## MCP vs REST API
 
 Both interfaces access the same Xquik platform. Choose based on your integration:
@@ -757,7 +1020,7 @@ Both interfaces access the same Xquik platform. Choose based on your integration
 | **Transport** | StreamableHTTP | HTTPS + JSON |
 | **Auth** | `x-api-key` header | `x-api-key` header |
 | **Best for** | AI agents, IDE integrations | Custom apps, scripts, backend services |
-| **Tools/Endpoints** | 26 tools | 25+ endpoints |
+| **Tools/Endpoints** | 37 tools | 37+ endpoints |
 | **User profile** | Subset: name, bio, follower/following counts, profile picture | Full: adds verified, location, createdAt, statusesCount |
 | **Follow check** | `following` / `followedBy` | `isFollowing` / `isFollowedBy` |
 | **Monitor username field** | `xUsername` | `username` |
@@ -777,14 +1040,14 @@ Both interfaces access the same Xquik platform. Choose based on your integration
 
 ## Annotation Summary
 
-All 26 tools declare MCP annotations indicating their behavior:
+All 37 tools declare MCP annotations indicating their behavior:
 
 | Annotation | Meaning | Tools |
 |------------|---------|-------|
-| `readOnlyHint: true` | Does not modify any data | list-monitors, get-events, get-event, search-tweets, get-user-info, list-webhooks, lookup-tweet, check-follow, list-extractions, get-extraction, estimate-extraction, list-draws, get-draw, get-account, get-trends, compose-tweet, refine-tweet, score-tweet |
-| `destructiveHint: true` | Permanently deletes data | remove-monitor, remove-webhook |
-| `idempotentHint: true` | Safe to retry, same result | list-monitors, remove-monitor, get-events, get-event, search-tweets, get-user-info, list-webhooks, remove-webhook, lookup-tweet, check-follow, list-extractions, get-extraction, estimate-extraction, list-draws, get-draw, get-account, subscribe, get-trends, compose-tweet, refine-tweet, score-tweet |
-| `openWorldHint: true` | Makes external network requests | add-monitor, search-tweets, get-user-info, add-webhook, test-webhook, lookup-tweet, check-follow, run-extraction, estimate-extraction, run-draw, subscribe, get-trends |
+| `readOnlyHint: true` | Does not modify any data | list-monitors, get-events, get-event, search-tweets, get-user-info, list-webhooks, lookup-tweet, check-follow, list-extractions, get-extraction, estimate-extraction, list-draws, get-draw, get-account, get-trends, compose-tweet, refine-tweet, score-tweet, get-style, list-styles, compare-styles, analyze-performance, list-drafts, get-draft |
+| `destructiveHint: true` | Permanently deletes data | remove-monitor, remove-webhook, delete-style, delete-draft |
+| `idempotentHint: true` | Safe to retry, same result | list-monitors, remove-monitor, get-events, get-event, search-tweets, get-user-info, list-webhooks, remove-webhook, lookup-tweet, check-follow, list-extractions, get-extraction, estimate-extraction, list-draws, get-draw, get-account, subscribe, get-trends, compose-tweet, refine-tweet, score-tweet, set-x-identity, get-style, list-styles, delete-style, compare-styles, analyze-performance, list-drafts, get-draft, delete-draft |
+| `openWorldHint: true` | Makes external network requests | add-monitor, search-tweets, get-user-info, add-webhook, test-webhook, lookup-tweet, check-follow, run-extraction, estimate-extraction, run-draw, subscribe, get-trends, analyze-style, analyze-performance |
 
 ---
 
@@ -801,6 +1064,9 @@ All 26 tools declare MCP annotations indicating their behavior:
 - Do NOT manually search replies and pick random winners. Use `run-draw` which handles filtering, deduplication, and cryptographically secure random selection
 - Do NOT invent tool types like "like_extractor" or "bookmark_extractor". Likes and bookmarks are NOT available
 - Do NOT compose tweets without calling `compose-tweet` first. It provides algorithm-backed signals that dramatically improve engagement. ALWAYS call it before drafting any tweet text
+- Do NOT call `analyze-style` without checking `get-style` first. The cached style may already exist
+- Do NOT call `analyze-performance` without first caching tweets via `analyze-style`
+- Do NOT forget to call `set-x-identity` before style analysis if you want own-account detection
 
 ## Unsupported Operations
 

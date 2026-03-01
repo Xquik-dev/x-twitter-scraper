@@ -1,8 +1,8 @@
 {
-  "version": "1.4.0",
+  "version": "1.5.0",
   "organization": "Xquik",
   "date": "March 2026",
-  "abstract": "Integration guide for the Xquik X (Twitter) real-time data platform. Covers the REST API (monitors, events, webhooks, draws, extractions, lookups, trends), HMAC webhook verification, MCP server setup for 9 IDEs and AI agents, all 19 extraction tools, giveaway draws with configurable filters, and complete TypeScript type definitions. Code examples in JavaScript, Python, Go, and cURL.",
+  "abstract": "Integration guide for the Xquik X (Twitter) real-time data platform. Covers the REST API (monitors, events, webhooks, draws, extractions, lookups, trends, style analysis, drafts), HMAC webhook verification, MCP server setup for 9 IDEs and AI agents, all 19 extraction tools, giveaway draws with configurable filters, tweet style analysis & comparison, draft management, and complete TypeScript type definitions. Code examples in JavaScript, Python, Go, and cURL.",
   "references": [
     "https://docs.xquik.com",
     "https://docs.xquik.com/api-reference/overview",
