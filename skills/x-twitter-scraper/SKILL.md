@@ -421,7 +421,7 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `follow
 
 ## MCP Server (AI Agents)
 
-The MCP server at `https://xquik.com/mcp` exposes 22 tools using StreamableHTTP transport. API key auth (`x-api-key` header) for CLI/IDE clients; OAuth 2.1 for web clients (Claude.ai, ChatGPT Developer Mode). Supported platforms: Claude.ai, Claude Desktop, Claude Code, ChatGPT (Custom GPT, Agents SDK, Developer Mode), Codex CLI, Cursor, VS Code, Windsurf, OpenCode.
+The MCP server at `https://xquik.com/mcp` exposes 26 tools using StreamableHTTP transport. API key auth (`x-api-key` header) for CLI/IDE clients; OAuth 2.1 for web clients (Claude.ai, ChatGPT Developer Mode). Supported platforms: Claude.ai, Claude Desktop, Claude Code, ChatGPT (Custom GPT, Agents SDK, Developer Mode), Codex CLI, Cursor, VS Code, Windsurf, OpenCode.
 
 For setup configs per platform, read [references/mcp-setup.md](references/mcp-setup.md). For the complete tool reference with input/output schemas, annotations, and selection rules, read [references/mcp-tools.md](references/mcp-tools.md).
 
@@ -430,6 +430,7 @@ For setup configs per platform, read [references/mcp-setup.md](references/mcp-se
 | | MCP Server | REST API |
 |---|------------|----------|
 | **Best for** | AI agents, IDE integrations | Custom apps, scripts, backend services |
+| **Tools/Endpoints** | 26 tools | 25+ endpoints |
 | **User profile** | Subset (no verified, location, createdAt, statusesCount) | Full profile |
 | **Search results** | Basic (id, text, author, date) | Includes optional engagement metrics |
 | **Webhook/monitor update** | Delete + recreate | PATCH endpoints |
@@ -446,6 +447,8 @@ Common multi-step tool sequences:
 - **Bulk extraction:** `get-account` (check subscription) -> `estimate-extraction` -> `run-extraction` -> `get-extraction` (results)
 - **Full tweet analysis:** `lookup-tweet` (metrics) -> `run-extraction` with `thread_extractor` (full thread)
 - **Find and analyze user:** `get-user-info` (profile) -> `search-tweets from:username` (recent tweets) -> `lookup-tweet` (metrics on specific tweet)
+- **Compose algorithm-optimized tweet:** `compose-tweet` -> AI asks follow-ups -> `refine-tweet` -> AI drafts tweet -> `score-tweet` -> iterate
+- **Subscribe or manage billing:** `subscribe` (returns Stripe URL)
 
 ## Pricing & Quota
 
@@ -468,7 +471,7 @@ Common multi-step tool sequences:
 
 For additional detail beyond this guide:
 
-- **`references/mcp-tools.md`**: All 22 MCP tools with input/output schemas, annotations, selection rules, workflow patterns, common mistakes, and unsupported operations
+- **`references/mcp-tools.md`**: All 26 MCP tools with input/output schemas, annotations, selection rules, workflow patterns, common mistakes, and unsupported operations
 - **`references/api-endpoints.md`**: All REST API endpoints with methods, paths, parameters, and response shapes
 - **`references/python-examples.md`**: Python equivalents of all JavaScript examples (retry, extraction, draw, webhook)
 - **`references/webhooks.md`**: Extended webhook examples, local testing with ngrok, delivery status monitoring

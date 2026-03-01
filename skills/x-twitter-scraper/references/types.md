@@ -617,4 +617,52 @@ interface McpTrends {
     query?: string;           // Search query to find tweets for this trend
   }[];
 }
+
+// ─── MCP: subscribe ────────────────────────────────────
+
+interface McpSubscribe {
+  status: "already_subscribed" | "checkout_created" | "payment_issue";
+  url: string;                // Stripe Checkout or Customer Portal URL. Open in browser.
+  message: string;            // Human-readable status message
+}
+
+// ─── MCP: compose-tweet ────────────────────────────────
+
+interface McpComposeTweet {
+  algorithmInsights: {
+    name: string;             // Signal name from PhoenixScores
+    polarity: "positive" | "negative"; // Whether this signal helps or hurts ranking
+    description: string;      // What this signal measures
+  }[];
+  contentRules: {
+    rule: string;             // Actionable content rule
+    description: string;      // Why this rule matters based on algorithm architecture
+  }[];
+  followUpQuestions: string[]; // Questions for the AI to ask the user before composing
+  topPenalties: string[];     // Most severe negative signals to avoid
+  source: string;             // Attribution to algorithm source code
+}
+
+// ─── MCP: refine-tweet ─────────────────────────────────
+
+interface McpRefineTweet {
+  compositionGuidance: string[];  // Targeted guidance based on user preferences
+  examplePatterns: {
+    pattern: string;          // Tweet structure template
+    description: string;      // What this pattern achieves
+  }[];
+}
+
+// ─── MCP: score-tweet ──────────────────────────────────
+
+interface McpScoreTweet {
+  totalChecks: number;        // Total number of checks performed
+  passedCount: number;        // Number of checks that passed
+  topSuggestion: string;      // Highest-impact improvement suggestion
+  checklist: {
+    factor: string;           // What was checked
+    passed: boolean;          // Whether the check passed
+    suggestion?: string;      // Improvement suggestion (present only if failed)
+  }[];
+}
 ```

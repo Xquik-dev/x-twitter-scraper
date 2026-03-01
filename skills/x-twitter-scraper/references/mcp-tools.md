@@ -1,6 +1,6 @@
 # Xquik MCP Tools Reference
 
-Complete reference for all 22 MCP tools exposed by the Xquik server at `https://xquik.com/mcp`.
+Complete reference for all 26 MCP tools exposed by the Xquik server at `https://xquik.com/mcp`.
 
 ## Tool Selection Rules
 
@@ -39,12 +39,14 @@ Multi-step tool sequences for common tasks:
 | **Bulk extraction** | `get-account` (check subscription) -> `estimate-extraction` -> `run-extraction` -> `get-extraction` (results) |
 | **Full tweet analysis** | `lookup-tweet` (metrics) -> `run-extraction` with `thread_extractor` (full thread) |
 | **Find and analyze user** | `get-user-info` (profile) -> `search-tweets` from:username (recent tweets) -> `lookup-tweet` (metrics on specific tweet) |
+| **Compose algorithm-optimized tweet** | `compose-tweet` -> AI asks follow-ups -> `refine-tweet` -> AI drafts tweet -> `score-tweet` -> iterate |
+| **Subscribe or manage billing** | `subscribe` (returns Stripe URL) |
 
 ## Cost Categories
 
 | Category | Tools |
 |----------|-------|
-| **Free** | `list-monitors`, `add-monitor`, `remove-monitor`, `get-events`, `get-event`, `list-webhooks`, `add-webhook`, `remove-webhook`, `test-webhook`, `list-extractions`, `get-extraction`, `estimate-extraction`, `list-draws`, `get-draw`, `get-account`, `get-trends` |
+| **Free** | `list-monitors`, `add-monitor`, `remove-monitor`, `get-events`, `get-event`, `list-webhooks`, `add-webhook`, `remove-webhook`, `test-webhook`, `list-extractions`, `get-extraction`, `estimate-extraction`, `list-draws`, `get-draw`, `get-account`, `subscribe`, `get-trends`, `compose-tweet`, `refine-tweet`, `score-tweet` |
 | **Metered** (counts toward monthly quota) | `search-tweets`, `get-user-info`, `lookup-tweet`, `check-follow`, `run-extraction`, `run-draw` |
 
 ---
@@ -112,7 +114,7 @@ Retrieve recent activity from monitored X accounts. Only returns events from acc
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `limit` | number | No | Events to return (1-100, default 50) |
+| `limit` | number | No | Events to return (1-50, default 50) |
 | `afterCursor` | string | No | Pagination cursor from previous response |
 | `monitorId` | string | No | Filter to a specific monitor |
 | `eventType` | string | No | Filter: `tweet.new`, `tweet.reply`, `tweet.retweet`, `tweet.quote`, `follower.gained`, `follower.lost` |
@@ -485,7 +487,7 @@ Get results of a specific extraction job by its ID.
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `id` | string | Yes | Extraction job ID (from `list-extractions` or `run-extraction`) |
-| `limit` | number | No | Results to return (1-1000, default 100) |
+| `limit` | number | No | Results to return (1-200, default 100) |
 | `afterCursor` | string | No | Pagination cursor |
 
 **Output:**
@@ -631,6 +633,111 @@ Check Xquik account status, subscription, and usage.
 
 ---
 
+## Subscription Tool
+
+### subscribe
+
+Get a subscription checkout or management link. Returns a Stripe Checkout URL (for new subscribers) or Customer Portal URL (for existing subscribers). Free, no subscription needed.
+
+**Input:** None
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `status` | string | One of: `already_subscribed`, `checkout_created`, `payment_issue` |
+| `url` | string | Stripe Checkout or Customer Portal URL. Open in browser. |
+| `message` | string | Human-readable status message |
+
+**Annotations:** idempotent, openWorld | **Cost:** Free
+
+---
+
+## Tweet Composition Tools
+
+### compose-tweet
+
+Start composing an algorithm-optimized tweet. Returns X algorithm engagement signals, content rules, and follow-up questions for the AI to ask the user. Free, no subscription needed. Use this first, then `refine-tweet` after the user answers follow-ups, then `score-tweet` to evaluate the draft.
+
+**Input:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `topic` | string | Yes | What the tweet is about |
+| `goal` | string | No | Optimization goal: `engagement` (default), `followers`, `authority`, `conversation` |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `algorithmInsights[].name` | string | Signal name from PhoenixScores |
+| `algorithmInsights[].polarity` | string | `positive` or `negative` (helps or hurts ranking) |
+| `algorithmInsights[].description` | string | What this signal measures |
+| `contentRules[].rule` | string | Actionable content rule |
+| `contentRules[].description` | string | Why this rule matters based on algorithm architecture |
+| `followUpQuestions` | string[] | Questions for the AI to ask the user before composing |
+| `topPenalties` | string[] | Most severe negative signals to avoid |
+| `source` | string | Attribution to algorithm source code |
+
+**Annotations:** readOnly, idempotent | **Cost:** Free
+
+---
+
+### refine-tweet
+
+Get targeted composition guidance after the user answers follow-up questions from `compose-tweet`. Returns goal-specific tips, example tweet patterns, media strategy, hashtag advice, and CTA guidance. Free, no subscription needed.
+
+**Input:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `topic` | string | Yes | What the tweet is about |
+| `goal` | string | Yes | `engagement`, `followers`, `authority`, or `conversation` |
+| `tone` | string | Yes | Desired tone (e.g. casual, professional, provocative, educational) |
+| `hashtags` | string | No | Hashtags to include (comma or space separated) |
+| `mediaType` | string | No | `photo`, `video`, or `none` |
+| `callToAction` | string | No | Desired CTA (e.g. "reply with your take", "share if you agree") |
+| `additionalContext` | string | No | Additional context about target audience or constraints |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `compositionGuidance` | string[] | Targeted guidance based on user preferences |
+| `examplePatterns[].pattern` | string | Tweet structure template |
+| `examplePatterns[].description` | string | What this pattern achieves |
+
+**Annotations:** readOnly, idempotent | **Cost:** Free
+
+---
+
+### score-tweet
+
+Evaluate a draft tweet against X algorithm ranking factors. Returns a pass/fail checklist covering links, hashtags, capitalization, engagement farming, CTA, length, media, and punctuation. Free, no subscription needed.
+
+**Input:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `draft` | string | Yes | The draft tweet text to evaluate |
+| `hasLink` | boolean | No | Whether a link will be attached (link card, not in tweet body) |
+| `hasMedia` | boolean | No | Whether media (photo/video) will be attached |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `totalChecks` | number | Total number of checks performed |
+| `passedCount` | number | Number of checks that passed |
+| `topSuggestion` | string | Highest-impact improvement suggestion |
+| `checklist[].factor` | string | What was checked |
+| `checklist[].passed` | boolean | Whether the check passed |
+| `checklist[].suggestion` | string | Improvement suggestion (present only if failed) |
+
+**Annotations:** readOnly, idempotent | **Cost:** Free
+
+---
+
 ## MCP vs REST API
 
 Both interfaces access the same Xquik platform. Choose based on your integration:
@@ -641,7 +748,7 @@ Both interfaces access the same Xquik platform. Choose based on your integration
 | **Transport** | StreamableHTTP | HTTPS + JSON |
 | **Auth** | `x-api-key` header | `x-api-key` header |
 | **Best for** | AI agents, IDE integrations | Custom apps, scripts, backend services |
-| **Tools/Endpoints** | 22 tools | 25+ endpoints |
+| **Tools/Endpoints** | 26 tools | 25+ endpoints |
 | **User profile** | Subset: name, bio, follower/following counts, profile picture | Full: adds verified, location, createdAt, statusesCount |
 | **Follow check** | `following` / `followedBy` | `isFollowing` / `isFollowedBy` |
 | **Monitor username field** | `xUsername` | `username` |
@@ -661,14 +768,14 @@ Both interfaces access the same Xquik platform. Choose based on your integration
 
 ## Annotation Summary
 
-All 22 tools declare MCP annotations indicating their behavior:
+All 26 tools declare MCP annotations indicating their behavior:
 
 | Annotation | Meaning | Tools |
 |------------|---------|-------|
-| `readOnlyHint: true` | Does not modify any data | list-monitors, get-events, get-event, search-tweets, get-user-info, list-webhooks, lookup-tweet, check-follow, list-extractions, get-extraction, estimate-extraction, list-draws, get-draw, get-account, get-trends |
+| `readOnlyHint: true` | Does not modify any data | list-monitors, get-events, get-event, search-tweets, get-user-info, list-webhooks, lookup-tweet, check-follow, list-extractions, get-extraction, estimate-extraction, list-draws, get-draw, get-account, get-trends, compose-tweet, refine-tweet, score-tweet |
 | `destructiveHint: true` | Permanently deletes data | remove-monitor, remove-webhook |
-| `idempotentHint: true` | Safe to retry, same result | list-monitors, remove-monitor, get-events, get-event, search-tweets, get-user-info, list-webhooks, remove-webhook, lookup-tweet, check-follow, list-extractions, get-extraction, estimate-extraction, list-draws, get-draw, get-account, get-trends |
-| `openWorldHint: true` | Makes external network requests | add-monitor, search-tweets, get-user-info, add-webhook, test-webhook, lookup-tweet, check-follow, run-extraction, estimate-extraction, run-draw, get-trends |
+| `idempotentHint: true` | Safe to retry, same result | list-monitors, remove-monitor, get-events, get-event, search-tweets, get-user-info, list-webhooks, remove-webhook, lookup-tweet, check-follow, list-extractions, get-extraction, estimate-extraction, list-draws, get-draw, get-account, subscribe, get-trends, compose-tweet, refine-tweet, score-tweet |
+| `openWorldHint: true` | Makes external network requests | add-monitor, search-tweets, get-user-info, add-webhook, test-webhook, lookup-tweet, check-follow, run-extraction, estimate-extraction, run-draw, subscribe, get-trends |
 
 ---
 

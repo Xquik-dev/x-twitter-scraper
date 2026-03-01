@@ -160,7 +160,7 @@ Add to `opencode.json`:
 }
 ```
 
-## Available MCP Tools (22)
+## Available MCP Tools (26)
 
 For complete input/output schemas, see [mcp-tools.md](mcp-tools.md).
 
@@ -187,7 +187,11 @@ For complete input/output schemas, see [mcp-tools.md](mcp-tools.md).
 | `list-draws` | Free | readOnly | List past giveaway draws |
 | `get-draw` | Free | readOnly | Get draw details with tweet metrics at draw time and winners list |
 | `get-account` | Free | readOnly | Check plan, monitor quota, and current period usage percent |
+| `subscribe` | Free | idempotent, openWorld | Get Stripe Checkout or Customer Portal URL for subscription management |
 | `get-trends` | Free | readOnly, openWorld | Get trending topics by region. Free, no usage consumed |
+| `compose-tweet` | Free | readOnly | Start composing an algorithm-optimized tweet. Returns signals and follow-up questions |
+| `refine-tweet` | Free | readOnly | Get targeted composition guidance after user answers follow-ups |
+| `score-tweet` | Free | readOnly | Evaluate a draft tweet against X algorithm ranking factors (pass/fail checklist) |
 
 **MCP vs REST field differences:** Monitor uses `xUsername` (not `username`), Event uses `eventType`/`monitoredAccountId` (not `type`/`monitorId`), FollowerCheck uses `following`/`followedBy` (not `isFollowing`/`isFollowedBy`). Use the REST API `GET /x/users/{username}` for the complete user profile.
 
@@ -202,6 +206,8 @@ For complete input/output schemas, see [mcp-tools.md](mcp-tools.md).
 | Bulk extraction | `get-account` (check subscription) -> `estimate-extraction` -> `run-extraction` -> `get-extraction` |
 | Full tweet analysis | `lookup-tweet` (metrics) -> `run-extraction` with `thread_extractor` (full thread) |
 | Find and analyze user | `get-user-info` (profile) -> `search-tweets from:username` -> `lookup-tweet` (metrics) |
+| Compose optimized tweet | `compose-tweet` -> AI asks follow-ups -> `refine-tweet` -> AI drafts -> `score-tweet` |
+| Subscribe or manage billing | `subscribe` (returns Stripe URL) |
 
 ### Example Prompts
 

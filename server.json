@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.Xquik-dev/xquik",
-  "description": "Real-time X (Twitter) data platform with 22 MCP tools: monitors, events, webhooks, giveaway draws, 19 extraction tools, search, trends, and user lookups.",
+  "description": "Real-time X (Twitter) data platform with 26 MCP tools: monitors, events, webhooks, giveaway draws, 19 extraction tools, search, trends, tweet composer, and user lookups.",
   "repository": {
     "url": "https://github.com/Xquik-dev/x-twitter-scraper",
     "source": "github"
