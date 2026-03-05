@@ -22,6 +22,7 @@ Copy-pasteable TypeScript types for all Xquik API objects.
 
 interface Account {
   plan: "active" | "inactive";
+  pricingVersion: number;
   monitorsAllowed: number;
   monitorsUsed: number;
   currentPeriod?: {
@@ -246,7 +247,7 @@ interface ExtractionJob {
   targetListId?: string;
   targetSpaceId?: string;
   searchQuery?: string;
-  aiTitles?: { en: string; tr: string; es: string };
+  resultsLimit?: number; // Max results to extract. Stops early instead of fetching all. Omit for all.
   errorMessage?: string;
   createdAt: string;
   completedAt?: string;

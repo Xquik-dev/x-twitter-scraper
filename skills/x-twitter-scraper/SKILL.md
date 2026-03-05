@@ -45,7 +45,7 @@ For Python examples, see [references/python-examples.md](references/python-examp
 | **Search tweets** by keyword/hashtag | `GET /x/tweets/search?q=...` | Tweet info with optional engagement metrics (likeCount, retweetCount, replyCount) |
 | **Get a user profile** | `GET /x/users/{username}` | Name, bio, follower/following counts, profile picture, location, created date, statuses count |
 | **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | Both directions |
-| **Get trending topics** | `GET /trends?woeid=1` | Free, no quota consumed |
+| **Get trending topics** | `GET /trends?woeid=1` | Regional trends by WOEID. Metered |
 | **Get radar (trending news)** | `GET /radar?source=hacker_news` | Free, 6 sources: Google Trends, Hacker News, TrustMRR, Wikipedia, GitHub, Reddit |
 | **Monitor an X account** | `POST /monitors` | Track tweets, replies, quotes, retweets, follower changes |
 | **Update monitor event types** | `PATCH /monitors/{id}` | Change subscribed events or pause/resume |
@@ -58,6 +58,7 @@ For Python examples, see [references/python-examples.md](references/python-examp
 | **Check account/usage** | `GET /account` | Plan status, monitors, usage percent |
 | **Link your X identity** | `PUT /account/x-identity` | Required for own-account detection in style analysis |
 | **Analyze tweet style** | `POST /styles` | Cache recent tweets for style reference |
+| **Save custom style** | `PUT /styles/{username}` | Save custom style from tweet texts (free) |
 | **Get cached style** | `GET /styles/{username}` | Retrieve previously cached tweet style |
 | **Compare styles** | `GET /styles/compare?username1=A&username2=B` | Side-by-side comparison of two cached styles |
 | **Get tweet performance** | `GET /styles/{username}/performance` | Live engagement metrics for cached tweets |
@@ -73,11 +74,11 @@ All errors return `{ "error": "error_code" }`. Key error codes:
 
 | Status | Code | Action |
 |--------|------|--------|
-| 400 | `invalid_input`, `invalid_id`, `invalid_params`, `invalid_tweet_url`, `invalid_tweet_id`, `invalid_username`, `invalid_tool_type`, `invalid_format`, `missing_query`, `missing_params`, `webhook_inactive`, `api_key_limit_reached`, `no_media` | Fix the request, do not retry |
+| 400 | `invalid_input`, `invalid_id`, `invalid_params`, `invalid_tweet_url`, `invalid_tweet_id`, `invalid_username`, `invalid_tool_type`, `invalid_format`, `missing_query`, `missing_params`, `webhook_inactive`, `no_media` | Fix the request, do not retry |
 | 401 | `unauthenticated` | Check API key |
-| 402 | `no_subscription`, `subscription_inactive`, `usage_limit_reached`, `no_addon`, `extra_usage_disabled`, `frozen`, `overage_limit_reached` | Subscribe, enable extra usage, or wait for quota reset |
-| 403 | `monitor_limit_reached` | Delete a monitor or add capacity ($5/month) |
-| 404 | `not_found`, `user_not_found`, `tweet_not_found` | Resource doesn't exist or belongs to another account |
+| 402 | `no_subscription`, `subscription_inactive`, `usage_limit_reached`, `no_addon`, `extra_usage_disabled`, `extra_usage_requires_v2`, `frozen`, `overage_limit_reached` | Subscribe, enable extra usage, or wait for quota reset |
+| 403 | `monitor_limit_reached`, `api_key_limit_reached` | Delete a monitor/key or add capacity |
+| 404 | `not_found`, `user_not_found`, `tweet_not_found`, `style_not_found`, `draft_not_found` | Resource doesn't exist or belongs to another account |
 | 409 | `monitor_already_exists` | Monitor exists, use the existing one |
 | 429 | `x_api_rate_limited` | Rate limited. Retry with exponential backoff, respect `Retry-After` header |
 | 500 | `internal_error` | Retry with backoff |
@@ -258,7 +259,7 @@ async function marketResearchPipeline(username) {
     }
   }
 
-  // 5. Get trending topics for context (free, no quota)
+  // 5. Get trending topics for context
   const trends = await xquikFetch("/trends?woeid=1");
 
   return { user, posts: postsJob, tweets, trends };
@@ -445,7 +446,7 @@ For setup configs per platform, read [references/mcp-setup.md](references/mcp-se
 | | MCP Server (v2) | REST API |
 |---|------------|----------|
 | **Best for** | AI agents, IDE integrations | Custom apps, scripts, backend services |
-| **Model** | 2 tools (`explore` + `xquik`) with code-execution sandbox | 41+ individual endpoints |
+| **Model** | 2 tools (`explore` + `xquik`) with code-execution sandbox | 56 individual endpoints |
 | **User profile** | Full (via `xquik` tool calling REST endpoints) | Full profile |
 | **Search results** | Full (via `xquik` tool) | Includes optional engagement metrics |
 | **Webhook/monitor update** | Full PATCH via `xquik` tool | PATCH endpoints |
@@ -477,8 +478,8 @@ Common multi-step tool sequences:
 - **Base plan**: $20/month (1 monitor, monthly usage quota)
 - **Extra monitors**: $5/month each
 - **Per-operation costs**: tweet search $0.003, user profile $0.0036, follower fetch $0.003, verified follower fetch $0.006, follow check $0.02, media download $0.003, article extraction $0.02
-- **Free**: account info, monitor/webhook management, trends, radar, extraction history, cost estimates, tweet composition (compose, refine, score), style cache management, drafts
-- **Metered**: tweet search, user lookup, tweet lookup, follow check, media download (first download only, cached free), extractions, draws, style analysis, performance analysis
+- **Free**: account info, monitor/webhook management, radar, extraction history, cost estimates, tweet composition (compose, refine, score), style cache management (list, get, save, delete, compare), drafts
+- **Metered**: tweet search, user lookup, tweet lookup, follow check, media download (first download only, cached free), extractions, draws, style analysis, performance analysis, trends
 - **Extra usage**: enable from dashboard to continue metered calls beyond included allowance. Tiered spending limits: $5 -> $7 -> $10 -> $15 -> $25 (increases with each paid overage invoice)
 - **Quota enforcement**: `402 usage_limit_reached` when included allowance exhausted (or `402 overage_limit_reached` if extra usage is active and spending limit reached)
 - **Check usage**: `GET /account` returns `usagePercent` (0-100)

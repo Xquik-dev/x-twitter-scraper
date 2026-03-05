@@ -1,6 +1,6 @@
 # X API / Twitter Scraper Skill for AI Coding Agents
 
-An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. Build X API integrations, extract Twitter data, run giveaway draws, monitor accounts, and connect to the MCP server for AI-native workflows.
+An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. Search and extract tweets, download media, scrape follower/following lists, monitor accounts, and connect to the MCP server for AI-native workflows.
 
 Works with **40+ AI coding agents** including Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code, Cline, Roo Code, Goose, Amp, Augment, Continue, OpenHands, Trae, OpenCode, and more.
 
@@ -82,19 +82,21 @@ git clone https://github.com/Xquik-dev/x-twitter-scraper.git .agents/skills/x-tw
 
 When installed, this skill gives your AI coding assistant deep knowledge of the Xquik platform:
 
-- **Tweet search & lookup**: Search tweets by keyword, hashtag, or user. Get full engagement metrics (likes, retweets, replies, views, bookmarks) for any tweet
+- **Tweet search & lookup**: Search tweets by keyword, hashtag, advanced operators (`from:`, `to:`, `"exact phrase"`, `OR`, `-exclude`). Get full engagement metrics (likes, retweets, replies, views, bookmarks) for any tweet
 - **User profile lookup**: Fetch follower/following counts, bio, location, and profile data for any X account
 - **Follower & following extraction**: Extract complete follower lists, verified followers, and following lists for any account
 - **Reply, retweet & quote extraction**: Bulk extract all replies, retweets, and quote tweets for any tweet
-- **Giveaway contest & random winner picker**: Run transparent giveaway draws with configurable filters (must retweet, min followers, account age, required hashtags)
+- **Media download**: Download images, videos, and GIFs from any tweet with permanent hosted URLs
+- **Thread & article extraction**: Extract full tweet threads and linked article content
+- **Community & Space data**: Extract community members, moderators, posts, and Space participants
+- **People & tweet search extraction**: Bulk search for users by keyword or extract tweets by hashtag (up to 1,000)
+- **Mutual follow checker**: Check if two accounts follow each other
 - **X account monitoring**: Track accounts for new tweets, replies, quotes, retweets, and follower changes in real time
 - **Webhook delivery**: Receive HMAC-signed event notifications at your HTTPS endpoint
-- **Trending topics**: Get trending hashtags and topics by region (free, no quota)
-- **Radar**: Trending topics and news from 6 sources (Google Trends, Hacker News, TrustMRR, Wikipedia, GitHub, Reddit). Free
-- **Community & Space data**: Extract community members, moderators, posts, and Space participants
-- **Mutual follow checker**: Check if two accounts follow each other
-- **Media download**: Download images, videos, and GIFs from any tweet with permanent hosted URLs
-- **MCP server integration**: Connect AI agents to X data via MCP (v2: 2-tool sandbox covering 41+ endpoints, v1 legacy: 18 discrete tools)
+- **Trending topics**: Get trending hashtags and topics by region
+- **Radar**: Trending news from 6 sources (Google Trends, Hacker News, TrustMRR, Wikipedia, GitHub, Reddit). Free
+- **Giveaway draws**: Run transparent draws from tweet replies with configurable filters
+- **MCP server integration**: Connect AI agents to X data via MCP (v2: 2-tool sandbox covering 56 endpoints, v1 legacy: 18 discrete tools)
 
 ## Capabilities
 
@@ -109,9 +111,9 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 | **Account Monitoring** | Real-time tracking of tweets, replies, quotes, retweets, follower changes |
 | **Webhooks** | HMAC-SHA256 signature verification in Node.js, Python, Go |
 | **Media Download** | Download images, videos, GIFs with permanent hosted URLs (first download metered, cached free) |
-| **MCP Server** | v2: 2-tool sandbox (41+ endpoints), v1 legacy: 18 tools. StreamableHTTP, configs for 10 platforms |
+| **MCP Server** | v2: 2-tool sandbox (56 endpoints), v1 legacy: 18 tools. StreamableHTTP, configs for 10 platforms |
 | **Engagement Analytics** | Likes, retweets, replies, quotes, views, bookmarks per tweet |
-| **Trending Topics** | Regional trends with search queries (free, no quota) |
+| **Trending Topics** | Regional trends with search queries |
 | **Tweet Composition** | Algorithm-optimized tweet composer with scoring checklist (free) |
 | **TypeScript Types** | Complete type definitions for all API objects |
 
@@ -123,16 +125,19 @@ Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code
 
 | Resource | Endpoints |
 |----------|-----------|
-| Account | Get account, update locale |
-| API Keys | Create, list, revoke |
+| X Lookups | Tweet by ID, search tweets, user profile, follow check, download media |
+| Extractions | Create (20 types), estimate, list, get results, export |
 | Monitors | Create, list, get, update, delete |
 | Events | List (filtered, paginated), get single |
 | Webhooks | Create, list, update, delete, test, deliveries |
-| Draws | Create with filters, list, get with winners, export |
-| Extractions | Create (20 types), estimate, list, get results, export |
-| X Lookups | Tweet by ID, search tweets, user profile, follow check, download media |
-| Trends | Regional trending topics (free) |
+| Trends | Regional trending topics |
 | Radar | Trending topics & news from 6 sources (free) |
+| Draws | Create with filters, list, get with winners, export |
+| Styles | Analyze, save, list, get, delete, compare, performance |
+| Compose | Tweet composition (compose, refine, score) |
+| Drafts | Create, list, get, delete |
+| Account | Get account, update locale, set X identity, subscribe |
+| API Keys | Create, list, revoke |
 
 ## Skill Structure
 

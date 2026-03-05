@@ -21,6 +21,7 @@ All requests require the `x-api-key` header. All responses are JSON. HTTPS only.
 - [Drafts](#drafts)
 - [Tweet Style Cache](#tweet-style-cache)
 - [Account Identity](#account-identity)
+- [Subscribe](#subscribe)
 
 ---
 
@@ -557,28 +558,37 @@ Get trending topics and news from 6 sources: Google Trends, Hacker News, TrustMR
 |-------|------|-------------|
 | `source` | string | Filter by source: `google_trends`, `hacker_news`, `trustmrr`, `wikipedia`, `github`, `reddit` |
 | `category` | string | Filter by category: `general`, `tech`, `dev`, `science`, `culture`, `politics`, `business`, `entertainment` |
-| `count` | number | Items to return (1-50, default 20) |
+| `limit` | number | Items per page (1-100, default 50) |
 | `hours` | number | Look-back window in hours (1-72, default 6) |
 | `region` | string | Region code: `US`, `GB`, `TR`, `ES`, `DE`, `FR`, `JP`, `IN`, `BR`, `CA`, `MX`, `global` (default) |
 
 **Response:**
 ```json
 {
-  "total": 20,
   "items": [
     {
+      "id": "12345",
       "title": "Claude 4.6 Released",
       "description": "Anthropic releases Claude 4.6...",
       "url": "https://example.com/article",
+      "imageUrl": "https://example.com/image.png",
       "source": "hacker_news",
+      "sourceId": "hn_12345",
       "category": "tech",
       "region": "global",
-      "score": 95,
-      "publishedAt": "2026-03-05T10:00:00.000Z"
+      "language": "en",
+      "score": 450,
+      "metadata": { "points": 450, "numberComments": 132, "author": "pgdev" },
+      "publishedAt": "2026-03-05T10:00:00.000Z",
+      "createdAt": "2026-03-05T10:05:00.000Z"
     }
-  ]
+  ],
+  "hasMore": true,
+  "nextCursor": "NDUwfDIwMjYtMDMtMDRUMDg6MzA6MDAuMDAwWnwxMjM0NQ=="
 }
 ```
+
+Fields: `id`, `title`, `description?`, `url?`, `imageUrl?`, `source`, `sourceId`, `category`, `region`, `language`, `score`, `metadata`, `publishedAt`, `createdAt`. Response includes `hasMore` and `nextCursor` for pagination.
 
 ---
 
@@ -761,6 +771,25 @@ List all cached tweet style profiles. Max 200 results, ordered by fetch date.
 
 ---
 
+### Save Custom Style
+
+`PUT /styles/{username}`
+
+Save a custom style profile from tweet texts. Free, no usage cost. Replaces existing style if one exists with the same label.
+
+**Body:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `label` | string | Yes | Style label name (1-30 characters) |
+| `tweets` | object[] | Yes | Array of tweet objects (1-100). Each must have a `text` field |
+
+**Response (200):** Style object with label, `tweetCount`, `isOwnAccount: false`, `fetchedAt`, and `tweets` array.
+
+**Errors:** `400 invalid_input`
+
+---
+
 ### Get Cached Style
 
 `GET /styles/{username}`
@@ -867,6 +896,25 @@ Link your X username to your Xquik account. Required for own-account detection i
 
 ---
 
+## Subscribe
+
+### Get Subscription Link
+
+```
+POST /subscribe
+```
+
+Returns a Stripe Checkout URL for subscribing or managing the subscription. If already subscribed, returns the billing portal URL.
+
+**Response:**
+```json
+{
+  "url": "https://checkout.stripe.com/c/pay/..."
+}
+```
+
+---
+
 ## Error Codes
 
 | Status | Code | Meaning |
@@ -887,15 +935,18 @@ Link your X username to your Xquik account. Required for own-account detection i
 | 402 | `subscription_inactive` | Subscription is not active |
 | 402 | `usage_limit_reached` | Monthly usage cap exceeded |
 | 402 | `extra_usage_disabled` | Extra usage not enabled |
+| 402 | `extra_usage_requires_v2` | Extra usage requires the new pricing plan |
 | 402 | `frozen` | Extra usage paused, outstanding payment required |
 | 402 | `overage_limit_reached` | Overage spending limit reached |
 | 403 | `monitor_limit_reached` | Plan monitor limit exceeded |
 | 400 | `webhook_inactive` | Webhook is disabled (test-webhook only) |
-| 400 | `api_key_limit_reached` | API key limit reached (100 max) |
+| 403 | `api_key_limit_reached` | API key limit reached (100 max) |
 | 402 | `no_addon` | No monitor addon on subscription |
 | 404 | `not_found` | Resource does not exist |
 | 404 | `user_not_found` | X user not found |
 | 404 | `tweet_not_found` | Tweet not found |
+| 404 | `style_not_found` | No cached style found |
+| 404 | `draft_not_found` | Draft not found |
 | 409 | `monitor_already_exists` | Duplicate monitor for same username |
 | 429 | - | Rate limited. Retry with backoff |
 | 429 | `x_api_rate_limited` | X data source rate limited. Retry |

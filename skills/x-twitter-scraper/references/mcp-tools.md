@@ -1,6 +1,6 @@
 # Xquik MCP Tools Reference (Legacy v1)
 
-Complete reference for all 18 MCP tools exposed by the legacy v1 server at `https://xquik.com/mcp/v1`. The default v2 server at `/mcp` uses a code-execution sandbox with 2 tools (`explore` + `xquik`) that can call all 41+ REST API endpoints. See [mcp-setup.md](mcp-setup.md) for the v2 architecture.
+Complete reference for all 18 MCP tools exposed by the legacy v1 server at `https://xquik.com/mcp/v1`. The default v2 server at `/mcp` uses a code-execution sandbox with 2 tools (`explore` + `xquik`) that can call all 56 REST API endpoints. See [mcp-setup.md](mcp-setup.md) for the v2 architecture.
 
 ## Tool Selection Rules
 
@@ -13,7 +13,7 @@ Pick the simplest tool that answers the question:
 | User profile, bio, follower/following counts | `get-user-info` | Name, username, bio, follower count, following count, profile picture (no verification, tweet count, or join date) |
 | Download images/videos/GIFs from tweets | `download-media` | Permanent hosted URLs on media.xquik.com. First download metered, cached free |
 | Check follow relationship | `check-follow` | Both directions: following and followedBy |
-| Trending topics by region (X) | `get-trends` | Names, ranks, search queries. Free, no usage consumed |
+| Trending topics by region (X) | `get-trends` | Names, ranks, search queries. Metered |
 | Trending topics from 6 sources | `get-radar` | Google Trends, HN, TrustMRR, Wikipedia, GitHub, Reddit. Free |
 | Activity from monitored accounts | `events` | Only YOUR monitors, not all of X |
 | Budget, plan, usage percent | `get-account` | Plan, monitor quota, current period usage percent |
@@ -63,8 +63,8 @@ Multi-step tool sequences for common tasks:
 
 | Category | Tools |
 |----------|-------|
-| **Free** | `monitors`, `events`, `webhooks`, `extractions` action=list/get/estimate, `draws` action=list/get, `get-account`, `subscribe`, `get-trends`, `get-radar`, `compose-tweet`, `set-x-identity`, `styles` action=get/list/save/delete/compare, `drafts` |
-| **Metered** (counts toward monthly quota) | `search-tweets`, `get-user-info`, `lookup-tweet`, `download-media` (first download only, cached free), `check-follow`, `extractions` action=run, `draws` action=run, `styles` action=analyze/analyze-performance |
+| **Free** | `monitors`, `events`, `webhooks`, `extractions` action=list/get/estimate, `draws` action=list/get, `get-account`, `subscribe`, `get-radar`, `compose-tweet`, `set-x-identity`, `styles` action=get/list/save/delete/compare, `drafts` |
+| **Metered** (counts toward monthly quota) | `search-tweets`, `get-user-info`, `lookup-tweet`, `download-media` (first download only, cached free), `check-follow`, `extractions` action=run, `draws` action=run, `styles` action=analyze/analyze-performance, `get-trends` |
 
 ---
 
@@ -278,7 +278,7 @@ Check if one X account follows another. Returns both directions.
 
 ### get-trends
 
-Get trending topics on X for a region. Subscription required, does not consume usage quota.
+Get trending topics on X for a region. Subscription required, metered.
 
 **Input:**
 
@@ -298,7 +298,7 @@ Get trending topics on X for a region. Subscription required, does not consume u
 | `trends[].description` | string | Trend description or context |
 | `trends[].query` | string | Search query to find tweets for this trend |
 
-**Annotations:** readOnly, idempotent, openWorld | **Cost:** Free (subscription required)
+**Annotations:** readOnly, idempotent, openWorld | **Cost:** Metered (subscription required)
 
 ---
 
@@ -312,7 +312,7 @@ Get trending topics and news from 6 sources beyond X. Use a specific item title 
 |-----------|------|----------|-------------|
 | `source` | string | No | Filter by source: `google_trends`, `hacker_news`, `trustmrr`, `wikipedia`, `github`, `reddit` |
 | `category` | string | No | Filter by category: `general`, `tech`, `dev`, `science`, `culture`, `politics`, `business`, `entertainment` |
-| `count` | number | No | Number of items to return (1-50, default 20) |
+| `limit` | number | No | Items per page (1-100, default 50) |
 | `hours` | number | No | Look-back window in hours (1-72, default 6) |
 | `region` | string | No | Region code: `US`, `GB`, `TR`, `ES`, `DE`, `FR`, `JP`, `IN`, `BR`, `CA`, `MX`, `global` (default) |
 
@@ -320,17 +320,22 @@ Get trending topics and news from 6 sources beyond X. Use a specific item title 
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total` | number | Total number of items returned |
+| `items[].id` | string | Unique item identifier |
 | `items[].title` | string | Item title (use as `topic` for `compose-tweet`) |
 | `items[].description` | string | Optional. Item description or summary |
 | `items[].url` | string | Optional. Source URL for more details |
 | `items[].imageUrl` | string | Optional. Associated image URL |
 | `items[].source` | string | Source name (google_trends, hacker_news, etc.) |
+| `items[].sourceId` | string | Unique identifier within the source |
 | `items[].category` | string | Item category |
 | `items[].region` | string | Region code |
+| `items[].language` | string | BCP-47 language code |
 | `items[].score` | number | Relevance/trending score |
+| `items[].metadata` | object | Source-specific data (varies by source) |
 | `items[].publishedAt` | string | ISO 8601 timestamp |
-| `tip` | string | Workflow hint for composing tweets from radar items |
+| `items[].createdAt` | string | ISO 8601 timestamp when indexed |
+| `hasMore` | boolean | Whether more items are available |
+| `nextCursor` | string | Pagination cursor (present when hasMore is true) |
 
 **Annotations:** readOnly, idempotent, openWorld | **Cost:** Free
 
@@ -827,7 +832,7 @@ Both interfaces access the same Xquik platform. Choose based on your integration
 | **Transport** | StreamableHTTP | StreamableHTTP | HTTPS + JSON |
 | **Auth** | `x-api-key` or OAuth 2.1 | `x-api-key` or OAuth 2.1 | `x-api-key` header |
 | **Best for** | AI agents, IDE integrations | Legacy MCP integrations | Custom apps, scripts, backend services |
-| **Model** | 2 tools (sandbox) | 18 discrete tools | 41+ endpoints |
+| **Model** | 2 tools (sandbox) | 18 discrete tools | 56 endpoints |
 | **User profile** | Subset: name, bio, follower/following counts, profile picture | Full: adds verified, location, createdAt, statusesCount |
 | **Follow check** | `following` / `followedBy` | `isFollowing` / `isFollowedBy` |
 | **Monitor username field** | `xUsername` | `username` |
