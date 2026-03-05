@@ -94,7 +94,7 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Community & Space data**: Extract community members, moderators, posts, and Space participants
 - **Mutual follow checker**: Check if two accounts follow each other
 - **Media download**: Download images, videos, and GIFs from any tweet with permanent hosted URLs
-- **MCP server integration**: Connect AI agents to X data via 18 MCP tools
+- **MCP server integration**: Connect AI agents to X data via MCP (v2: 2-tool sandbox covering 41+ endpoints, v1 legacy: 18 discrete tools)
 
 ## Capabilities
 
@@ -109,7 +109,7 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 | **Account Monitoring** | Real-time tracking of tweets, replies, quotes, retweets, follower changes |
 | **Webhooks** | HMAC-SHA256 signature verification in Node.js, Python, Go |
 | **Media Download** | Download images, videos, GIFs with permanent hosted URLs (first download metered, cached free) |
-| **MCP Server** | 18 tools, StreamableHTTP transport, configs for 10 platforms |
+| **MCP Server** | v2: 2-tool sandbox (41+ endpoints), v1 legacy: 18 tools. StreamableHTTP, configs for 10 platforms |
 | **Engagement Analytics** | Likes, retweets, replies, quotes, views, bookmarks per tweet |
 | **Trending Topics** | Regional trends with search queries (free, no quota) |
 | **Tweet Composition** | Algorithm-optimized tweet composer with scoring checklist (free) |
@@ -144,8 +144,8 @@ x-twitter-scraper/
 │       ├── metadata.json                 # Version and references
 │       └── references/
 │           ├── api-endpoints.md          # All REST API endpoints
-│           ├── mcp-tools.md              # All 18 MCP tools with schemas
-│           ├── mcp-setup.md              # MCP configs for 10 platforms
+│           ├── mcp-tools.md              # All 18 v1 legacy MCP tools with schemas
+│           ├── mcp-setup.md              # MCP configs for 10 platforms (v2 + v1)
 │           ├── webhooks.md               # Webhook setup & verification
 │           ├── extractions.md            # 20 extraction tool types
 │           ├── types.md                  # TypeScript type definitions

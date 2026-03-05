@@ -16,6 +16,11 @@ All requests require the `x-api-key` header. All responses are JSON. HTTPS only.
 - [X API (Direct Lookups)](#x-api-direct-lookups)
 - [X Media (Download)](#x-media-download)
 - [Trends](#trends)
+- [Radar](#radar)
+- [Compose](#compose)
+- [Drafts](#drafts)
+- [Tweet Style Cache](#tweet-style-cache)
+- [Account Identity](#account-identity)
 
 ---
 
@@ -536,6 +541,81 @@ Free, no usage consumed. Cached, refreshes every 15 minutes.
 
 ---
 
+## Radar
+
+### List Radar Items
+
+```
+GET /radar
+```
+
+Get trending topics and news from 6 sources: Google Trends, Hacker News, TrustMRR, Wikipedia, GitHub Trending, Reddit. Free.
+
+**Query parameters:**
+
+| Param | Type | Description |
+|-------|------|-------------|
+| `source` | string | Filter by source: `google_trends`, `hacker_news`, `trustmrr`, `wikipedia`, `github`, `reddit` |
+| `category` | string | Filter by category: `general`, `tech`, `dev`, `science`, `culture`, `politics`, `business`, `entertainment` |
+| `count` | number | Items to return (1-50, default 20) |
+| `hours` | number | Look-back window in hours (1-72, default 6) |
+| `region` | string | Region code: `US`, `GB`, `TR`, `ES`, `DE`, `FR`, `JP`, `IN`, `BR`, `CA`, `MX`, `global` (default) |
+
+**Response:**
+```json
+{
+  "total": 20,
+  "items": [
+    {
+      "title": "Claude 4.6 Released",
+      "description": "Anthropic releases Claude 4.6...",
+      "url": "https://example.com/article",
+      "source": "hacker_news",
+      "category": "tech",
+      "region": "global",
+      "score": 95,
+      "publishedAt": "2026-03-05T10:00:00.000Z"
+    }
+  ]
+}
+```
+
+---
+
+## Compose
+
+### Compose Tweet
+
+```
+POST /compose
+```
+
+Compose, refine, and score tweets using X algorithm data. Free, 3-step workflow.
+
+**Body:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `step` | string | Yes | `compose`, `refine`, or `score` |
+| `topic` | string | No | Tweet topic (compose, refine) |
+| `goal` | string | No | `engagement`, `followers`, `authority`, `conversation` |
+| `styleUsername` | string | No | Cached style username for voice matching (compose) |
+| `tone` | string | No | Desired tone (refine) |
+| `additionalContext` | string | No | Extra context or URLs (refine) |
+| `callToAction` | string | No | Desired CTA (refine) |
+| `mediaType` | string | No | `photo`, `video`, `none` (refine) |
+| `draft` | string | No | Tweet text to evaluate (score) |
+| `hasLink` | boolean | No | Link attached (score) |
+| `hasMedia` | boolean | No | Media attached (score) |
+
+**Response (step=compose):** Returns `contentRules`, `scorerWeights`, `followUpQuestions`, `algorithmInsights`, `engagementMultipliers`, `topPenalties`.
+
+**Response (step=refine):** Returns `compositionGuidance`, `examplePatterns`.
+
+**Response (step=score):** Returns `totalChecks`, `passedCount`, `topSuggestion`, `checklist[]` with `factor`, `passed`, `suggestion`.
+
+---
+
 ## Drafts
 
 ### Create Draft
@@ -806,6 +886,9 @@ Link your X username to your Xquik account. Required for own-account detection i
 | 402 | `no_subscription` | No active subscription |
 | 402 | `subscription_inactive` | Subscription is not active |
 | 402 | `usage_limit_reached` | Monthly usage cap exceeded |
+| 402 | `extra_usage_disabled` | Extra usage not enabled |
+| 402 | `frozen` | Extra usage paused, outstanding payment required |
+| 402 | `overage_limit_reached` | Overage spending limit reached |
 | 403 | `monitor_limit_reached` | Plan monitor limit exceeded |
 | 400 | `webhook_inactive` | Webhook is disabled (test-webhook only) |
 | 400 | `api_key_limit_reached` | API key limit reached (100 max) |

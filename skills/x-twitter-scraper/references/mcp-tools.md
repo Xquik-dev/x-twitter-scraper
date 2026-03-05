@@ -1,6 +1,6 @@
-# Xquik MCP Tools Reference
+# Xquik MCP Tools Reference (Legacy v1)
 
-Complete reference for all 18 MCP tools exposed by the Xquik server at `https://xquik.com/mcp`.
+Complete reference for all 18 MCP tools exposed by the legacy v1 server at `https://xquik.com/mcp/v1`. The default v2 server at `/mcp` uses a code-execution sandbox with 2 tools (`explore` + `xquik`) that can call all 41+ REST API endpoints. See [mcp-setup.md](mcp-setup.md) for the v2 architecture.
 
 ## Tool Selection Rules
 
@@ -821,13 +821,13 @@ Manage tweet drafts. Use `action` to save, list, get, or delete drafts.
 
 Both interfaces access the same Xquik platform. Choose based on your integration:
 
-| | MCP Server | REST API |
-|---|------------|----------|
-| **URL** | `https://xquik.com/mcp` | `https://xquik.com/api/v1` |
-| **Transport** | StreamableHTTP | HTTPS + JSON |
-| **Auth** | `x-api-key` header | `x-api-key` header |
-| **Best for** | AI agents, IDE integrations | Custom apps, scripts, backend services |
-| **Tools/Endpoints** | 18 tools | 38+ endpoints |
+| | MCP Server (v2) | MCP Server (v1 legacy) | REST API |
+|---|------------|----------|----------|
+| **URL** | `https://xquik.com/mcp` | `https://xquik.com/mcp/v1` | `https://xquik.com/api/v1` |
+| **Transport** | StreamableHTTP | StreamableHTTP | HTTPS + JSON |
+| **Auth** | `x-api-key` or OAuth 2.1 | `x-api-key` or OAuth 2.1 | `x-api-key` header |
+| **Best for** | AI agents, IDE integrations | Legacy MCP integrations | Custom apps, scripts, backend services |
+| **Model** | 2 tools (sandbox) | 18 discrete tools | 41+ endpoints |
 | **User profile** | Subset: name, bio, follower/following counts, profile picture | Full: adds verified, location, createdAt, statusesCount |
 | **Follow check** | `following` / `followedBy` | `isFollowing` / `isFollowedBy` |
 | **Monitor username field** | `xUsername` | `username` |
@@ -847,7 +847,7 @@ Both interfaces access the same Xquik platform. Choose based on your integration
 
 ## Annotation Summary
 
-All 18 tools declare MCP annotations indicating their behavior:
+All 18 v1 tools declare MCP annotations indicating their behavior:
 
 | Annotation | Meaning | Tools |
 |------------|---------|-------|

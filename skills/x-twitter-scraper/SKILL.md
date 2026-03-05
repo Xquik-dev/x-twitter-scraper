@@ -5,7 +5,7 @@ compatibility: Requires internet access to call the Xquik REST API (https://xqui
 license: MIT
 metadata:
   author: Xquik
-  version: "1.5.0"
+  version: "1.6.0"
 ---
 
 # Xquik API Integration
@@ -21,7 +21,7 @@ Xquik is an X (Twitter) real-time data platform providing a REST API, HMAC webho
 | **MCP endpoint** | `https://xquik.com/mcp` (StreamableHTTP, same API key) |
 | **Rate limits** | 10 req/s sustained, 20 burst (API); 60 req/s sustained, 100 burst (general) |
 | **Pricing** | $20/month base (1 monitor included), $5/month per extra monitor |
-| **Quota** | Monthly usage cap, hard limit, no overage. `402` when exhausted. |
+| **Quota** | Monthly usage cap. `402` when exhausted. Enable extra usage from dashboard for overage (tiered spending limits: $5/$7/$10/$15/$25) |
 | **Docs** | [docs.xquik.com](https://docs.xquik.com) |
 | **HTTPS only** | Plain HTTP gets `301` redirect |
 
@@ -63,6 +63,7 @@ For Python examples, see [references/python-examples.md](references/python-examp
 | **Get tweet performance** | `GET /styles/{username}/performance` | Live engagement metrics for cached tweets |
 | **Save a tweet draft** | `POST /drafts` | Store drafts for later |
 | **List/manage drafts** | `GET /drafts`, `DELETE /drafts/{id}` | Retrieve and delete saved drafts |
+| **Compose a tweet** | `POST /compose` | 3-step workflow (compose, refine, score). Free, algorithm-backed |
 
 See [references/mcp-tools.md](references/mcp-tools.md) for tool selection rules, common mistakes, and unsupported operations.
 
@@ -72,9 +73,9 @@ All errors return `{ "error": "error_code" }`. Key error codes:
 
 | Status | Code | Action |
 |--------|------|--------|
-| 400 | `invalid_input`, `invalid_id`, `invalid_params`, `invalid_tweet_url`, `invalid_tweet_id`, `invalid_username`, `invalid_tool_type`, `invalid_format`, `missing_query`, `missing_params`, `webhook_inactive`, `api_key_limit_reached` | Fix the request, do not retry |
+| 400 | `invalid_input`, `invalid_id`, `invalid_params`, `invalid_tweet_url`, `invalid_tweet_id`, `invalid_username`, `invalid_tool_type`, `invalid_format`, `missing_query`, `missing_params`, `webhook_inactive`, `api_key_limit_reached`, `no_media` | Fix the request, do not retry |
 | 401 | `unauthenticated` | Check API key |
-| 402 | `no_subscription`, `subscription_inactive`, `usage_limit_reached`, `no_addon` | Subscribe or wait for quota reset |
+| 402 | `no_subscription`, `subscription_inactive`, `usage_limit_reached`, `no_addon`, `extra_usage_disabled`, `frozen`, `overage_limit_reached` | Subscribe, enable extra usage, or wait for quota reset |
 | 403 | `monitor_limit_reached` | Delete a monitor or add capacity ($5/month) |
 | 404 | `not_found`, `user_not_found`, `tweet_not_found` | Resource doesn't exist or belongs to another account |
 | 409 | `monitor_already_exists` | Monitor exists, use the existing one |
@@ -433,22 +434,25 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `follow
 
 ## MCP Server (AI Agents)
 
-The MCP server at `https://xquik.com/mcp` exposes 18 tools using StreamableHTTP transport. API key auth (`x-api-key` header) for CLI/IDE clients; OAuth 2.1 for web clients (Claude.ai, ChatGPT Developer Mode). Supported platforms: Claude.ai, Claude Desktop, Claude Code, ChatGPT (Custom GPT, Agents SDK, Developer Mode), Codex CLI, Cursor, VS Code, Windsurf, OpenCode.
+The MCP server at `https://xquik.com/mcp` uses a code-execution sandbox model with 2 tools (`explore` + `xquik`). The agent writes async JavaScript arrow functions that run in a sandboxed environment with auth injected automatically. StreamableHTTP transport. API key auth (`x-api-key` header) for CLI/IDE clients; OAuth 2.1 for web clients (Claude.ai, ChatGPT Developer Mode). Supported platforms: Claude.ai, Claude Desktop, Claude Code, ChatGPT (Custom GPT, Agents SDK, Developer Mode), Codex CLI, Cursor, VS Code, Windsurf, OpenCode.
 
-For setup configs per platform, read [references/mcp-setup.md](references/mcp-setup.md). For the complete tool reference with input/output schemas, annotations, and selection rules, read [references/mcp-tools.md](references/mcp-tools.md).
+**Legacy v1 server** at `https://xquik.com/mcp/v1` exposes 18 discrete tools with traditional input schemas. All new integrations should use the default v2 server at `/mcp`.
+
+For setup configs per platform, read [references/mcp-setup.md](references/mcp-setup.md). For the complete v1 tool reference with input/output schemas, annotations, and selection rules, read [references/mcp-tools.md](references/mcp-tools.md).
 
 ### MCP vs REST API
 
-| | MCP Server | REST API |
+| | MCP Server (v2) | REST API |
 |---|------------|----------|
 | **Best for** | AI agents, IDE integrations | Custom apps, scripts, backend services |
-| **Tools/Endpoints** | 18 tools | 38+ endpoints |
-| **User profile** | Subset (no verified, location, createdAt, statusesCount) | Full profile |
-| **Search results** | Basic (id, text, author, date) | Includes optional engagement metrics |
-| **Webhook/monitor update** | Delete + recreate | PATCH endpoints |
+| **Model** | 2 tools (`explore` + `xquik`) with code-execution sandbox | 41+ individual endpoints |
+| **User profile** | Full (via `xquik` tool calling REST endpoints) | Full profile |
+| **Search results** | Full (via `xquik` tool) | Includes optional engagement metrics |
+| **Webhook/monitor update** | Full PATCH via `xquik` tool | PATCH endpoints |
 | **File export** | Not available | CSV, XLSX, Markdown |
+| **Unique to REST** | - | API key management, file export (CSV/XLSX/MD), account locale update |
 
-Use the REST API `GET /x/users/{username}` for the complete user profile with `verified`, `location`, `createdAt`, and `statusesCount` fields that MCP `get-user-info` does not return.
+Use the REST API `GET /x/users/{username}` for the complete user profile with `verified`, `location`, `createdAt`, and `statusesCount` fields.
 
 ### Workflow Patterns
 
@@ -472,9 +476,11 @@ Common multi-step tool sequences:
 
 - **Base plan**: $20/month (1 monitor, monthly usage quota)
 - **Extra monitors**: $5/month each
-- **Free**: account info, monitor/webhook management, trends, radar, extraction history, style cache management, drafts
+- **Per-operation costs**: tweet search $0.003, user profile $0.0036, follower fetch $0.003, verified follower fetch $0.006, follow check $0.02, media download $0.003, article extraction $0.02
+- **Free**: account info, monitor/webhook management, trends, radar, extraction history, cost estimates, tweet composition (compose, refine, score), style cache management, drafts
 - **Metered**: tweet search, user lookup, tweet lookup, follow check, media download (first download only, cached free), extractions, draws, style analysis, performance analysis
-- **Quota enforcement**: hard limit, `402 usage_limit_reached` when exhausted
+- **Extra usage**: enable from dashboard to continue metered calls beyond included allowance. Tiered spending limits: $5 -> $7 -> $10 -> $15 -> $25 (increases with each paid overage invoice)
+- **Quota enforcement**: `402 usage_limit_reached` when included allowance exhausted (or `402 overage_limit_reached` if extra usage is active and spending limit reached)
 - **Check usage**: `GET /account` returns `usagePercent` (0-100)
 
 ## Conventions
@@ -489,10 +495,10 @@ Common multi-step tool sequences:
 
 For additional detail beyond this guide:
 
-- **`references/mcp-tools.md`**: All 18 MCP tools with input/output schemas, annotations, selection rules, workflow patterns, common mistakes, and unsupported operations
+- **`references/mcp-tools.md`**: All 18 legacy v1 MCP tools with input/output schemas, annotations, selection rules, workflow patterns, common mistakes, and unsupported operations
 - **`references/api-endpoints.md`**: All REST API endpoints with methods, paths, parameters, and response shapes
 - **`references/python-examples.md`**: Python equivalents of all JavaScript examples (retry, extraction, draw, webhook)
 - **`references/webhooks.md`**: Extended webhook examples, local testing with ngrok, delivery status monitoring
-- **`references/mcp-setup.md`**: MCP server configuration for 9 IDEs and AI agent platforms
+- **`references/mcp-setup.md`**: MCP server configuration for 10 IDEs and AI agent platforms
 - **`references/extractions.md`**: Extraction tool details, export columns
 - **`references/types.md`**: TypeScript type definitions for all REST API and MCP output objects

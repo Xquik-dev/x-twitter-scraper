@@ -160,66 +160,55 @@ Add to `opencode.json`:
 }
 ```
 
-## Available MCP Tools (38)
+## MCP Server Architecture
 
-For complete input/output schemas, see [mcp-tools.md](mcp-tools.md).
+The default MCP server (v2) at `https://xquik.com/mcp` uses a **code-execution sandbox model** with 2 tools:
 
-| Tool | Cost | Annotations | Description |
-|------|------|-------------|-------------|
-| `list-monitors` | Free | readOnly | List all monitored X accounts with IDs and event types |
-| `add-monitor` | Free | openWorld | Start monitoring an X account for tweets, replies, retweets, quotes, follower changes |
-| `remove-monitor` | Free | destructive | Stop monitoring and permanently delete a monitor |
-| `get-events` | Free | readOnly | Query events from YOUR monitored accounts with filtering and pagination |
-| `get-event` | Free | readOnly | Get full details for a single event by ID |
-| `search-tweets` | Metered | readOnly, openWorld | Search tweets by keyword, hashtag, from:user. Returns basic info only (no metrics) |
-| `get-user-info` | Metered | readOnly, openWorld | Get profile, bio, follower/following counts. No verified, location, createdAt, statusesCount |
-| `lookup-tweet` | Metered | readOnly, openWorld | Get tweet with full metrics (likes, retweets, views, bookmarks) and author verification |
-| `download-media` | Metered | openWorld | Download tweet media (images, videos, GIFs). First download metered, cached free |
-| `check-follow` | Metered | readOnly, openWorld | Check follow relationship in both directions |
-| `list-webhooks` | Free | readOnly | List all webhook endpoints with URLs and event types |
-| `add-webhook` | Free | openWorld | Register an HTTPS endpoint for HMAC-signed event delivery |
-| `remove-webhook` | Free | destructive | Permanently delete a webhook endpoint |
-| `test-webhook` | Free | openWorld | Send a test payload to verify a webhook endpoint works |
-| `run-extraction` | Metered | openWorld | Run bulk data extraction (20 tool types). Always estimate first |
-| `list-extractions` | Free | readOnly | List past extraction jobs with status and result counts |
-| `get-extraction` | Free | readOnly | Get paginated results of a completed extraction |
-| `estimate-extraction` | Free | readOnly, openWorld | Preview extraction cost and check if it fits within budget |
-| `run-draw` | Metered | openWorld | Run a giveaway draw with configurable filters. Handles everything automatically |
-| `list-draws` | Free | readOnly | List past giveaway draws |
-| `get-draw` | Free | readOnly | Get draw details with tweet metrics at draw time and winners list |
-| `get-account` | Free | readOnly | Check plan, monitor quota, and current period usage percent |
-| `subscribe` | Free | idempotent, openWorld | Get Stripe Checkout or Customer Portal URL for subscription management |
-| `get-trends` | Free | readOnly, openWorld | Get trending topics by region. Free, no usage consumed |
-| `compose-tweet` | Free | readOnly | Start composing an algorithm-optimized tweet. Returns signals and follow-up questions |
-| `refine-tweet` | Free | readOnly | Get targeted composition guidance after user answers follow-ups |
-| `score-tweet` | Free | readOnly | Evaluate a draft tweet against X algorithm ranking factors (pass/fail checklist) |
-| `set-x-identity` | Free | openWorld | Link your X username for own-account detection in style analysis |
-| `analyze-style` | Metered | openWorld | Fetch and cache recent tweets for style analysis |
-| `get-style` | Free | readOnly | Get a previously cached tweet style profile |
-| `list-styles` | Free | readOnly | List all cached tweet style profiles |
-| `delete-style` | Free | destructive | Delete a cached tweet style profile |
-| `compare-styles` | Free | readOnly | Compare two cached styles side by side |
-| `analyze-performance` | Metered | readOnly, openWorld | Get live engagement metrics for cached tweets |
-| `save-draft` | Free | openWorld | Save a tweet draft for later |
-| `list-drafts` | Free | readOnly | List saved tweet drafts |
-| `get-draft` | Free | readOnly | Get a specific saved tweet draft |
-| `delete-draft` | Free | destructive | Delete a saved tweet draft |
+| Tool | Description | Cost |
+|------|-------------|------|
+| `explore` | Search the API endpoint catalog (read-only, no network calls) | Free |
+| `xquik` | Execute API calls against your account | Varies by endpoint |
 
-**MCP vs REST field differences:** Monitor uses `xUsername` (not `username`), Event uses `eventType`/`monitoredAccountId` (not `type`/`monitorId`), FollowerCheck uses `following`/`followedBy` (not `isFollowing`/`isFollowedBy`). Use the REST API `GET /x/users/{username}` for the complete user profile.
+The agent writes async JavaScript arrow functions that run in a sandboxed environment. Auth is injected automatically. The sandbox covers all 41+ REST API endpoints across 5 categories: account, composition, extraction, monitoring, and twitter/media.
+
+### Legacy v1 Server (18 Tools)
+
+The legacy v1 server at `https://xquik.com/mcp/v1` exposes 18 discrete tools with traditional MCP tool-call input schemas:
+
+| Tool | Cost | Description |
+|------|------|-------------|
+| `monitors` | Free | Manage monitored X accounts (list, add, remove) |
+| `events` | Free | Retrieve activity from monitored accounts |
+| `webhooks` | Free | Manage webhook endpoints (list, add, remove, test) |
+| `search-tweets` | Metered | Search X for real-time tweets |
+| `get-user-info` | Metered | Get X user profile |
+| `lookup-tweet` | Metered | Get full tweet details and metrics |
+| `check-follow` | Metered | Check follow relationship between users |
+| `download-media` | Metered | Download media from tweets |
+| `extractions` | Metered (run) | Bulk data extraction (estimate, run, list, get) |
+| `draws` | Metered (run) | Giveaway draws from tweet replies (run, list, get) |
+| `get-trends` | Free | Trending topics across 12 regions |
+| `get-radar` | Free | Trending topics from 6 sources |
+| `compose-tweet` | Free | Compose, refine, and score tweets |
+| `styles` | Mixed | Manage tweet style profiles |
+| `drafts` | Free | Manage tweet drafts |
+| `get-account` | Free | Check subscription status and usage |
+| `subscribe` | Free | Get subscription checkout link |
+| `set-x-identity` | Free | Link X username to account |
+
+Point your MCP client to `https://xquik.com/mcp/v1` to use the legacy tools. For the complete v1 tool reference with input/output schemas, see [mcp-tools.md](mcp-tools.md).
 
 ## After Setup
 
 ### Workflow Patterns
 
-| Workflow | Steps |
-|----------|-------|
-| Set up real-time alerts | `add-monitor` -> `add-webhook` -> `test-webhook` |
-| Run a giveaway | `get-account` (check budget) -> `run-draw` |
-| Bulk extraction | `get-account` (check subscription) -> `estimate-extraction` -> `run-extraction` -> `get-extraction` |
-| Full tweet analysis | `lookup-tweet` (metrics) -> `run-extraction` with `thread_extractor` (full thread) |
-| Find and analyze user | `get-user-info` (profile) -> `search-tweets from:username` -> `lookup-tweet` (metrics) |
-| Compose optimized tweet | `compose-tweet` -> AI asks follow-ups -> `refine-tweet` -> AI drafts -> `score-tweet` |
-| Subscribe or manage billing | `subscribe` (returns Stripe URL) |
+| Workflow | v2 (`xquik` tool) | v1 (discrete tools) |
+|----------|-------------------|---------------------|
+| Set up real-time alerts | `POST /monitors` -> `POST /webhooks` -> `POST /webhooks/{id}/test` | `monitors` action=add -> `webhooks` action=add -> `webhooks` action=test |
+| Run a giveaway | `GET /account` -> `POST /draws` | `get-account` -> `draws` action=run |
+| Bulk extraction | `POST /extractions/estimate` -> `POST /extractions` -> `GET /extractions/{id}` | `extractions` action=estimate -> action=run -> action=get |
+| Compose optimized tweet | `POST /compose` (step=compose -> refine -> score) | `compose-tweet` step=compose -> step=refine -> step=score |
+| Subscribe or manage billing | `POST /subscribe` | `subscribe` |
 
 ### Example Prompts
 
@@ -233,5 +222,7 @@ Try these with your AI agent:
 - "Pick 3 winners from this tweet: https://x.com/burakbayir/status/1893456789012345678"
 - "How much would it cost to extract all followers of @elonmusk?"
 - "What's trending in the US right now?"
+- "What's trending on Hacker News today?"
+- "Help me write a tweet about launching my product"
 - "Set up a webhook at https://my-server.com/events for new tweets"
 - "What plan am I on and how much have I used?"
