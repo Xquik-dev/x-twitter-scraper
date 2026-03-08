@@ -442,7 +442,7 @@ interface CachedTweet {
   text: string;
   authorUsername: string;
   createdAt: string; // ISO 8601
-  media?: TweetMedia[];
+  media?: TweetMediaItem[];
 }
 
 interface TweetStyleSummary {
