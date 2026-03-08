@@ -94,24 +94,28 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **X account monitoring**: Track accounts for new tweets, replies, quotes, retweets, and follower changes in real time
 - **Webhook delivery**: Receive HMAC-signed event notifications at your HTTPS endpoint
 - **Trending topics**: Get trending hashtags and topics by region
-- **Radar**: Trending news from 6 sources (Google Trends, Hacker News, TrustMRR, Wikipedia, GitHub, Reddit). Free
+- **Radar**: Trending news from 7 sources (Google Trends, Hacker News, Polymarket, TrustMRR, Wikipedia, GitHub, Reddit). Free
 - **Giveaway draws**: Run transparent draws from tweet replies with configurable filters
-- **MCP server integration**: Connect AI agents to X data via MCP (v2: 2-tool sandbox covering 56 endpoints, v1 legacy: 18 discrete tools)
+- **Write actions**: Post tweets, like, retweet, follow/unfollow, send DMs, update profile, upload media, manage communities via connected X accounts
+- **Telegram integrations**: Receive real-time monitor event notifications in Telegram
+- **MCP server integration**: Connect AI agents to X data via MCP (v2: 2-tool sandbox covering 76 endpoints, v1 legacy: 18 discrete tools)
 
 ## Capabilities
 
 | Area | Details |
 |------|---------|
-| **REST API** | All endpoints across 9 resource groups with retry logic and pagination |
+| **REST API** | 76 endpoints across 12 resource groups with retry logic and pagination |
 | **Tweet Fetching** | Single tweet lookup with full metrics, keyword/hashtag search |
 | **User Lookup** | Profile data, follower/following counts, verified status |
 | **Follower Analysis** | Extract followers, following, verified followers for any account |
 | **Data Extraction** | 20 bulk extraction tools (replies, retweets, quotes, threads, articles, communities, lists, Spaces, people search, tweet search, mentions, posts) |
 | **Giveaway Draws** | Random winner selection from tweet replies with 11 filter options |
+| **Write Actions** | Post/delete tweets, like/unlike, retweet, follow/unfollow, DM, profile update, media upload, community actions |
+| **Telegram Integrations** | Real-time monitor event notifications via Telegram bot |
 | **Account Monitoring** | Real-time tracking of tweets, replies, quotes, retweets, follower changes |
 | **Webhooks** | HMAC-SHA256 signature verification in Node.js, Python, Go |
 | **Media Download** | Download images, videos, GIFs with permanent hosted URLs (first download metered, cached free) |
-| **MCP Server** | v2: 2-tool sandbox (56 endpoints), v1 legacy: 18 tools. StreamableHTTP, configs for 10 platforms |
+| **MCP Server** | v2: 2-tool sandbox (76 endpoints), v1 legacy: 18 tools. StreamableHTTP, configs for 10 platforms |
 | **Engagement Analytics** | Likes, retweets, replies, quotes, views, bookmarks per tweet |
 | **Trending Topics** | Regional trends with search queries |
 | **Tweet Composition** | Algorithm-optimized tweet composer with scoring checklist (free) |
@@ -131,13 +135,16 @@ Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code
 | Events | List (filtered, paginated), get single |
 | Webhooks | Create, list, update, delete, test, deliveries |
 | Trends | Regional trending topics |
-| Radar | Trending topics & news from 6 sources (free) |
+| Radar | Trending topics & news from 7 sources (free) |
 | Draws | Create with filters, list, get with winners, export |
 | Styles | Analyze, save, list, get, delete, compare, performance |
 | Compose | Tweet composition (compose, refine, score) |
 | Drafts | Create, list, get, delete |
 | Account | Get account, update locale, set X identity, subscribe |
 | API Keys | Create, list, revoke |
+| X Accounts | Connect, list, get, disconnect, re-authenticate |
+| X Write | Tweet, delete, like, unlike, retweet, follow, unfollow, DM, profile, avatar, banner, media upload, communities |
+| Integrations | Create (Telegram), list, get, update, delete, test, deliveries |
 
 ## Skill Structure
 

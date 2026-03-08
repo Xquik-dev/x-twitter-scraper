@@ -1,16 +1,16 @@
 ---
 name: x-twitter-scraper
-description: "X API & Twitter scraper skill for AI coding agents. Builds integrations with the Xquik REST API, MCP server & webhooks: tweet search, user lookup, follower extraction, engagement metrics, giveaway contest draws, trending topics, account monitoring, reply/retweet/quote extraction, community & Space data, mutual follow checks. Works with Claude Code, Cursor, Codex, Copilot, Windsurf & 40+ agents."
+description: "X API & Twitter scraper skill for AI coding agents. Builds integrations with the Xquik REST API, MCP server & webhooks: tweet search, user lookup, follower extraction, engagement metrics, giveaway contest draws, trending topics, account monitoring, reply/retweet/quote extraction, community & Space data, mutual follow checks, write actions (tweet, like, retweet, follow, DM, profile, media upload, communities), Telegram integrations. Works with Claude Code, Cursor, Codex, Copilot, Windsurf & 40+ agents."
 compatibility: Requires internet access to call the Xquik REST API (https://xquik.com/api/v1)
 license: MIT
 metadata:
   author: Xquik
-  version: "1.6.0"
+  version: "1.7.0"
 ---
 
 # Xquik API Integration
 
-Xquik is an X (Twitter) real-time data platform providing a REST API, HMAC webhooks, and an MCP server for AI agents. It covers account monitoring, bulk data extraction (20 tools), giveaway draws, tweet/user lookups, media downloads, follow checks, and trending topics.
+Xquik is an X (Twitter) real-time data platform providing a REST API, HMAC webhooks, and an MCP server for AI agents. It covers account monitoring, bulk data extraction (20 tools), giveaway draws, tweet/user lookups, media downloads, follow checks, trending topics, write actions (tweet, like, retweet, follow, DM, profile, media upload, communities), and Telegram integrations.
 
 ## Quick Reference
 
@@ -46,7 +46,7 @@ For Python examples, see [references/python-examples.md](references/python-examp
 | **Get a user profile** | `GET /x/users/{username}` | Name, bio, follower/following counts, profile picture, location, created date, statuses count |
 | **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | Both directions |
 | **Get trending topics** | `GET /trends?woeid=1` | Regional trends by WOEID. Metered |
-| **Get radar (trending news)** | `GET /radar?source=hacker_news` | Free, 6 sources: Google Trends, Hacker News, TrustMRR, Wikipedia, GitHub, Reddit |
+| **Get radar (trending news)** | `GET /radar?source=hacker_news` | Free, 7 sources: Google Trends, Hacker News, Polymarket, TrustMRR, Wikipedia, GitHub, Reddit |
 | **Monitor an X account** | `POST /monitors` | Track tweets, replies, quotes, retweets, follower changes |
 | **Update monitor event types** | `PATCH /monitors/{id}` | Change subscribed events or pause/resume |
 | **Poll for events** | `GET /events` | Cursor-paginated, filter by monitorId/eventType |
@@ -65,6 +65,20 @@ For Python examples, see [references/python-examples.md](references/python-examp
 | **Save a tweet draft** | `POST /drafts` | Store drafts for later |
 | **List/manage drafts** | `GET /drafts`, `DELETE /drafts/{id}` | Retrieve and delete saved drafts |
 | **Compose a tweet** | `POST /compose` | 3-step workflow (compose, refine, score). Free, algorithm-backed |
+| **Connect an X account** | `POST /x/accounts` | Credentials encrypted at rest. Required for write actions |
+| **List connected accounts** | `GET /x/accounts` | Free |
+| **Re-authenticate account** | `POST /x/accounts/{id}/reauth` | When session expires |
+| **Post a tweet** | `POST /x/tweets` | From a connected account. Supports replies, media, note tweets, communities |
+| **Delete a tweet** | `DELETE /x/tweets/{id}` | Must own the tweet via connected account |
+| **Like / Unlike a tweet** | `POST` / `DELETE /x/tweets/{id}/like` | Metered |
+| **Retweet** | `POST /x/tweets/{id}/retweet` | Metered |
+| **Follow / Unfollow a user** | `POST` / `DELETE /x/users/{id}/follow` | Metered |
+| **Send a DM** | `POST /x/dm/{userId}` | Text, media, reply to message |
+| **Update profile** | `PATCH /x/profile` | Name, bio, location, URL |
+| **Upload media** | `POST /x/media` | FormData. Returns media ID for tweet attachment |
+| **Community actions** | `POST /x/communities`, `POST /x/communities/{id}/join` | Create, delete, join, leave |
+| **Create Telegram integration** | `POST /integrations` | Receive monitor events in Telegram. Free |
+| **Manage integrations** | `GET /integrations`, `PATCH /integrations/{id}` | List, update, delete, test, deliveries. Free |
 
 See [references/mcp-tools.md](references/mcp-tools.md) for tool selection rules, common mistakes, and unsupported operations.
 
@@ -78,11 +92,12 @@ All errors return `{ "error": "error_code" }`. Key error codes:
 | 401 | `unauthenticated` | Check API key |
 | 402 | `no_subscription`, `subscription_inactive`, `usage_limit_reached`, `no_addon`, `extra_usage_disabled`, `extra_usage_requires_v2`, `frozen`, `overage_limit_reached` | Subscribe, enable extra usage, or wait for quota reset |
 | 403 | `monitor_limit_reached`, `api_key_limit_reached` | Delete a monitor/key or add capacity |
-| 404 | `not_found`, `user_not_found`, `tweet_not_found`, `style_not_found`, `draft_not_found` | Resource doesn't exist or belongs to another account |
-| 409 | `monitor_already_exists` | Monitor exists, use the existing one |
+| 404 | `not_found`, `user_not_found`, `tweet_not_found`, `style_not_found`, `draft_not_found`, `account_not_found` | Resource doesn't exist or belongs to another account |
+| 409 | `monitor_already_exists`, `account_already_connected`, `already_member` | Resource already exists, use the existing one |
+| 422 | `connection_failed`, `reauth_failed` | X credential verification failed. Check credentials |
 | 429 | `x_api_rate_limited` | Rate limited. Retry with exponential backoff, respect `Retry-After` header |
 | 500 | `internal_error` | Retry with backoff |
-| 502 | `stream_registration_failed`, `x_api_unavailable`, `x_api_unauthorized` | Retry with backoff |
+| 502 | `stream_registration_failed`, `x_api_unavailable`, `x_api_unauthorized`, `x_write_failed`, `upstream_error`, `delivery_failed` | Retry with backoff |
 
 Retry only `429` and `5xx`. Never retry `4xx` (except 429). Max 3 retries with exponential backoff:
 
@@ -439,6 +454,8 @@ The MCP server at `https://xquik.com/mcp` uses a code-execution sandbox model wi
 
 **Legacy v1 server** at `https://xquik.com/mcp/v1` exposes 18 discrete tools with traditional input schemas. All new integrations should use the default v2 server at `/mcp`.
 
+The server also registers 5 guided workflow prompts: `compose-tweet`, `compose-trending-tweet`, `compose-radar-tweet`, `analyze-account`, `run-giveaway`. Use `prompts/list` and `prompts/get` in compatible clients.
+
 For setup configs per platform, read [references/mcp-setup.md](references/mcp-setup.md). For the complete v1 tool reference with input/output schemas, annotations, and selection rules, read [references/mcp-tools.md](references/mcp-tools.md).
 
 ### MCP vs REST API
@@ -446,10 +463,12 @@ For setup configs per platform, read [references/mcp-setup.md](references/mcp-se
 | | MCP Server (v2) | REST API |
 |---|------------|----------|
 | **Best for** | AI agents, IDE integrations | Custom apps, scripts, backend services |
-| **Model** | 2 tools (`explore` + `xquik`) with code-execution sandbox | 56 individual endpoints |
+| **Model** | 2 tools (`explore` + `xquik`) with code-execution sandbox | 76 individual endpoints |
+| **Categories** | 9: account, composition, extraction, integrations, media, monitoring, twitter, x-accounts, x-write | Same |
 | **User profile** | Full (via `xquik` tool calling REST endpoints) | Full profile |
 | **Search results** | Full (via `xquik` tool) | Includes optional engagement metrics |
 | **Webhook/monitor update** | Full PATCH via `xquik` tool | PATCH endpoints |
+| **Write actions** | Full via `xquik` tool (tweet, like, follow, DM, etc.) | POST/DELETE endpoints |
 | **File export** | Not available | CSV, XLSX, Markdown |
 | **Unique to REST** | - | API key management, file export (CSV/XLSX/MD), account locale update |
 
@@ -470,16 +489,19 @@ Common multi-step tool sequences:
 - **Track tweet performance:** `styles` (action=analyze, cache tweets) -> `styles` (action=analyze-performance, live metrics)
 - **Save & manage drafts:** `compose-tweet` -> `drafts` (action=save) -> `drafts` (action=list) -> `drafts` (action=get/delete)
 - **Download & share media:** `download-media` (returns permanent hosted URLs)
-- **Get trending news:** `get-radar` (6 sources, free) -> `compose-tweet` with trending topic
+- **Get trending news:** `get-radar` (7 sources, free) -> `compose-tweet` with trending topic
 - **Subscribe or manage billing:** `subscribe` (returns Stripe URL)
+- **Post a tweet:** connect X account -> `POST /x/tweets` with `account` + `text` (optionally attach media via `POST /x/media` first)
+- **Engage with tweets:** `POST /x/tweets/{id}/like`, `POST /x/tweets/{id}/retweet`, `POST /x/users/{id}/follow`
+- **Set up Telegram alerts:** `POST /integrations` (type=telegram, chatId, eventTypes) -> `POST /integrations/{id}/test`
 
 ## Pricing & Quota
 
 - **Base plan**: $20/month (1 monitor, monthly usage quota)
 - **Extra monitors**: $5/month each
 - **Per-operation costs**: tweet search $0.003, user profile $0.0036, follower fetch $0.003, verified follower fetch $0.006, follow check $0.02, media download $0.003, article extraction $0.02
-- **Free**: account info, monitor/webhook management, radar, extraction history, cost estimates, tweet composition (compose, refine, score), style cache management (list, get, save, delete, compare), drafts
-- **Metered**: tweet search, user lookup, tweet lookup, follow check, media download (first download only, cached free), extractions, draws, style analysis, performance analysis, trends
+- **Free**: account info, monitor/webhook management, radar, extraction history, cost estimates, tweet composition (compose, refine, score), style cache management (list, get, save, delete, compare), drafts, X account management (connect, list, disconnect, reauth), integration management (create, list, update, delete, test)
+- **Metered**: tweet search, user lookup, tweet lookup, follow check, media download (first download only, cached free), extractions, draws, style analysis, performance analysis, trends, write actions (tweet, like, retweet, follow, DM, profile, media upload, communities)
 - **Extra usage**: enable from dashboard to continue metered calls beyond included allowance. Tiered spending limits: $5 -> $7 -> $10 -> $15 -> $25 (increases with each paid overage invoice)
 - **Quota enforcement**: `402 usage_limit_reached` when included allowance exhausted (or `402 overage_limit_reached` if extra usage is active and spending limit reached)
 - **Check usage**: `GET /account` returns `usagePercent` (0-100)

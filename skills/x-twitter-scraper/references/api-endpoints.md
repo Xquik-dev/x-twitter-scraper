@@ -22,6 +22,9 @@ All requests require the `x-api-key` header. All responses are JSON. HTTPS only.
 - [Tweet Style Cache](#tweet-style-cache)
 - [Account Identity](#account-identity)
 - [Subscribe](#subscribe)
+- [X Accounts (Connected)](#x-accounts-connected)
+- [X Write](#x-write)
+- [Integrations](#integrations)
 
 ---
 
@@ -525,7 +528,7 @@ Returns `400 no_media` if the tweet has no downloadable media.
 GET /trends?woeid=1&count=30
 ```
 
-Free, no usage consumed. Cached, refreshes every 15 minutes.
+Metered. Subscription required. Cached, refreshes every 15 minutes.
 
 **WOEIDs:** 1 (Worldwide), 23424977 (US), 23424975 (UK), 23424969 (Turkey), 23424950 (Spain), 23424829 (Germany), 23424819 (France), 23424856 (Japan), 23424848 (India), 23424768 (Brazil), 23424775 (Canada), 23424900 (Mexico).
 
@@ -550,13 +553,13 @@ Free, no usage consumed. Cached, refreshes every 15 minutes.
 GET /radar
 ```
 
-Get trending topics and news from 6 sources: Google Trends, Hacker News, TrustMRR, Wikipedia, GitHub Trending, Reddit. Free.
+Get trending topics and news from 7 sources: Google Trends, Hacker News, Polymarket, TrustMRR, Wikipedia, GitHub Trending, Reddit. Free.
 
 **Query parameters:**
 
 | Param | Type | Description |
 |-------|------|-------------|
-| `source` | string | Filter by source: `google_trends`, `hacker_news`, `trustmrr`, `wikipedia`, `github`, `reddit` |
+| `source` | string | Filter by source: `google_trends`, `hacker_news`, `polymarket`, `trustmrr`, `wikipedia`, `github`, `reddit` |
 | `category` | string | Filter by category: `general`, `tech`, `dev`, `science`, `culture`, `politics`, `business`, `entertainment` |
 | `limit` | number | Items per page (1-100, default 50) |
 | `hours` | number | Look-back window in hours (1-72, default 6) |
@@ -915,6 +918,308 @@ Returns a Stripe Checkout URL for subscribing or managing the subscription. If a
 
 ---
 
+## X Accounts (Connected)
+
+Manage connected X accounts for write actions. All endpoints are free (no usage cost).
+
+### List X Accounts
+
+```
+GET /x/accounts
+```
+
+Returns all connected X accounts. Response: `{ accounts: [{ id, username, displayName, isActive, createdAt }] }`.
+
+### Connect X Account
+
+```
+POST /x/accounts
+```
+
+**Body:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `username` | string | Yes | X username (`@` auto-stripped) |
+| `email` | string | Yes | Email associated with the X account |
+| `password` | string | Yes | Account password (encrypted at rest) |
+| `totp_secret` | string | No | TOTP base32 secret for 2FA accounts |
+| `proxy_country` | string | No | Preferred proxy region (e.g. `"US"`, `"TR"`) |
+
+**Response (201):** `{ id, username, isActive, createdAt }`
+
+**Errors:** `409 account_already_connected`, `422 connection_failed`
+
+### Get X Account
+
+```
+GET /x/accounts/{id}
+```
+
+Returns `{ id, username, displayName, isActive, createdAt }`.
+
+### Disconnect X Account
+
+```
+DELETE /x/accounts/{id}
+```
+
+Permanently removes the account and deletes stored credentials. Returns `{ success: true }`.
+
+### Re-authenticate X Account
+
+```
+POST /x/accounts/{id}/reauth
+```
+
+Use when a session expires or X requires re-verification.
+
+**Body:** `{ "password": "...", "totp_secret": "..." }` (password required, totp_secret optional)
+
+**Response:** `{ success: true }`
+
+**Errors:** `422 reauth_failed`
+
+---
+
+## X Write
+
+Write actions performed through connected X accounts. All endpoints are metered. Every request requires an `account` field (username or account ID) identifying which connected account to use.
+
+### Create Tweet
+
+```
+POST /x/tweets
+```
+
+**Body:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `account` | string | Yes | Connected X username or account ID |
+| `text` | string | Yes | Tweet text (280 chars, or 25,000 if `is_note_tweet` is true) |
+| `reply_to_tweet_id` | string | No | Tweet ID to reply to |
+| `attachment_url` | string | No | URL to attach as a card |
+| `community_id` | string | No | Community ID to post into |
+| `is_note_tweet` | boolean | No | Long-form note tweet (up to 25,000 chars) |
+| `media_ids` | string[] | No | Media IDs from `POST /x/media` (max 4 images or 1 video) |
+
+**Response:** `{ tweetId, success: true }`
+
+**Errors:** `502 x_write_failed`
+
+### Delete Tweet
+
+```
+DELETE /x/tweets/{id}
+```
+
+**Body:** `{ "account": "username" }`
+
+**Response:** `{ success: true }`
+
+### Like Tweet
+
+```
+POST /x/tweets/{id}/like
+```
+
+**Body:** `{ "account": "username" }`
+
+### Unlike Tweet
+
+```
+DELETE /x/tweets/{id}/like
+```
+
+**Body:** `{ "account": "username" }`
+
+### Retweet
+
+```
+POST /x/tweets/{id}/retweet
+```
+
+**Body:** `{ "account": "username" }`
+
+### Follow User
+
+```
+POST /x/users/{id}/follow
+```
+
+**Body:** `{ "account": "username" }`
+
+**Errors:** `502 upstream_error`
+
+### Unfollow User
+
+```
+DELETE /x/users/{id}/follow
+```
+
+**Body:** `{ "account": "username" }`
+
+### Send DM
+
+```
+POST /x/dm/{userId}
+```
+
+**Body:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `account` | string | Yes | Connected X username or account ID |
+| `text` | string | Yes | Message text |
+| `media_ids` | string[] | No | Media IDs to attach |
+| `reply_to_message_id` | string | No | Message ID to reply to |
+
+### Update Profile
+
+```
+PATCH /x/profile
+```
+
+**Body:** `{ "account": "username", "name": "...", "description": "...", "location": "...", "url": "..." }` (account required, others optional)
+
+### Update Avatar
+
+```
+PATCH /x/profile/avatar
+```
+
+**Body:** FormData with `account` (required) and `file` (required, max 700 KB).
+
+### Update Banner
+
+```
+PATCH /x/profile/banner
+```
+
+**Body:** FormData with `account` (required) and `file` (required, max 2 MB).
+
+### Upload Media
+
+```
+POST /x/media
+```
+
+**Body:** FormData with `account` (required), `file` (required), and `is_long_video` (optional boolean).
+
+**Response:** Returns a media ID to pass in `media_ids` when creating a tweet.
+
+### Create Community
+
+```
+POST /x/communities
+```
+
+**Body:** `{ "account": "username", "name": "...", "description": "..." }` (all required)
+
+### Delete Community
+
+```
+DELETE /x/communities/{id}
+```
+
+**Body:** `{ "account": "username", "community_name": "..." }` (name required for confirmation)
+
+### Join Community
+
+```
+POST /x/communities/{id}/join
+```
+
+**Body:** `{ "account": "username" }`
+
+**Errors:** `409 already_member`
+
+### Leave Community
+
+```
+DELETE /x/communities/{id}/join
+```
+
+**Body:** `{ "account": "username" }`
+
+---
+
+## Integrations
+
+Manage third-party integrations (currently Telegram) that receive monitor event notifications. All endpoints are free (no usage cost).
+
+### Create Integration
+
+```
+POST /integrations
+```
+
+**Body:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `type` | string | Yes | Integration type: `"telegram"` |
+| `name` | string | Yes | Human-readable name |
+| `config` | object | Yes | Type-specific config. Telegram: `{ chatId: "-1001234567890" }` |
+| `eventTypes` | string[] | Yes | Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `follower.gained`, `follower.lost` |
+
+**Response (201):** `{ id, type, name, config, eventTypes, isActive, createdAt }`
+
+### List Integrations
+
+```
+GET /integrations
+```
+
+Returns all integrations. Response: `{ integrations: [...] }`.
+
+### Get Integration
+
+```
+GET /integrations/{id}
+```
+
+Returns a single integration with full details.
+
+### Update Integration
+
+```
+PATCH /integrations/{id}
+```
+
+**Body:** `{ "name": "...", "eventTypes": [...], "isActive": true|false, "silentPush": false, "scopeAllMonitors": true, "filters": {}, "messageTemplate": {} }` (all optional, at least 1 required)
+
+### Delete Integration
+
+```
+DELETE /integrations/{id}
+```
+
+Permanently removes the integration. Returns `204 No Content`.
+
+### Test Integration
+
+```
+POST /integrations/{id}/test
+```
+
+Sends a test notification. Returns success or failure status.
+
+**Errors:** `502 delivery_failed`
+
+### List Deliveries
+
+```
+GET /integrations/{id}/deliveries
+```
+
+View delivery attempts and statuses. Statuses: `pending`, `delivered`, `failed`, `exhausted`.
+
+**Query:** `limit` (default 50).
+
+---
+
 ## Error Codes
 
 | Status | Code | Meaning |
@@ -930,6 +1235,7 @@ Returns a Stripe Checkout URL for subscribing or managing the subscription. If a
 | 400 | `missing_query` | Required query parameter is missing |
 | 400 | `missing_params` | Required query parameters are missing |
 | 400 | `no_media` | Tweet has no downloadable media |
+| 400 | `webhook_inactive` | Webhook is disabled (test-webhook only) |
 | 401 | `unauthenticated` | Missing or invalid API key |
 | 402 | `no_subscription` | No active subscription |
 | 402 | `subscription_inactive` | Subscription is not active |
@@ -939,7 +1245,6 @@ Returns a Stripe Checkout URL for subscribing or managing the subscription. If a
 | 402 | `frozen` | Extra usage paused, outstanding payment required |
 | 402 | `overage_limit_reached` | Overage spending limit reached |
 | 403 | `monitor_limit_reached` | Plan monitor limit exceeded |
-| 400 | `webhook_inactive` | Webhook is disabled (test-webhook only) |
 | 403 | `api_key_limit_reached` | API key limit reached (100 max) |
 | 402 | `no_addon` | No monitor addon on subscription |
 | 404 | `not_found` | Resource does not exist |
@@ -947,10 +1252,18 @@ Returns a Stripe Checkout URL for subscribing or managing the subscription. If a
 | 404 | `tweet_not_found` | Tweet not found |
 | 404 | `style_not_found` | No cached style found |
 | 404 | `draft_not_found` | Draft not found |
+| 404 | `account_not_found` | Connected X account not found |
 | 409 | `monitor_already_exists` | Duplicate monitor for same username |
+| 409 | `account_already_connected` | X account already connected |
+| 409 | `already_member` | Already a member of the community |
+| 422 | `connection_failed` | X credential verification failed |
+| 422 | `reauth_failed` | X re-authentication failed |
 | 429 | - | Rate limited. Retry with backoff |
 | 429 | `x_api_rate_limited` | X data source rate limited. Retry |
 | 500 | `internal_error` | Server error |
 | 502 | `stream_registration_failed` | Stream registration failed. Retry |
 | 502 | `x_api_unavailable` | X data source temporarily unavailable |
 | 502 | `x_api_unauthorized` | X data source authentication failed. Retry |
+| 502 | `x_write_failed` | Write action failed (tweet, delete, like, retweet) |
+| 502 | `upstream_error` | Upstream action failed (follow, DM, profile update) |
+| 502 | `delivery_failed` | Integration test delivery failed |

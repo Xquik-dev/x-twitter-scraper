@@ -169,7 +169,7 @@ The default MCP server (v2) at `https://xquik.com/mcp` uses a **code-execution s
 | `explore` | Search the API endpoint catalog (read-only, no network calls) | Free |
 | `xquik` | Execute API calls against your account | Varies by endpoint |
 
-The agent writes async JavaScript arrow functions that run in a sandboxed environment. Auth is injected automatically. The sandbox covers all 56 REST API endpoints across 5 categories: account, composition, extraction, monitoring, and twitter/media.
+The agent writes async JavaScript arrow functions that run in a sandboxed environment. Auth is injected automatically. The sandbox covers all 76 REST API endpoints across 9 categories: account, composition, extraction, integrations, media, monitoring, twitter, x-accounts, and x-write.
 
 ### Legacy v1 Server (18 Tools)
 
@@ -188,7 +188,7 @@ The legacy v1 server at `https://xquik.com/mcp/v1` exposes 18 discrete tools wit
 | `extractions` | Metered (run) | Bulk data extraction (estimate, run, list, get) |
 | `draws` | Metered (run) | Giveaway draws from tweet replies (run, list, get) |
 | `get-trends` | Metered | Trending topics across 12 regions |
-| `get-radar` | Free | Trending topics from 6 sources |
+| `get-radar` | Free | Trending topics from 7 sources |
 | `compose-tweet` | Free | Compose, refine, and score tweets |
 | `styles` | Mixed | Manage tweet style profiles |
 | `drafts` | Free | Manage tweet drafts |

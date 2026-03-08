@@ -1,6 +1,6 @@
 # Xquik MCP Tools Reference (Legacy v1)
 
-Complete reference for all 18 MCP tools exposed by the legacy v1 server at `https://xquik.com/mcp/v1`. The default v2 server at `/mcp` uses a code-execution sandbox with 2 tools (`explore` + `xquik`) that can call all 56 REST API endpoints. See [mcp-setup.md](mcp-setup.md) for the v2 architecture.
+Complete reference for all 18 MCP tools exposed by the legacy v1 server at `https://xquik.com/mcp/v1`. The default v2 server at `/mcp` uses a code-execution sandbox with 2 tools (`explore` + `xquik`) that can call all 76 REST API endpoints. See [mcp-setup.md](mcp-setup.md) for the v2 architecture.
 
 ## Tool Selection Rules
 
@@ -14,7 +14,7 @@ Pick the simplest tool that answers the question:
 | Download images/videos/GIFs from tweets | `download-media` | Permanent hosted URLs on media.xquik.com. First download metered, cached free |
 | Check follow relationship | `check-follow` | Both directions: following and followedBy |
 | Trending topics by region (X) | `get-trends` | Names, ranks, search queries. Metered |
-| Trending topics from 6 sources | `get-radar` | Google Trends, HN, TrustMRR, Wikipedia, GitHub, Reddit. Free |
+| Trending topics from 7 sources | `get-radar` | Google Trends, HN, Polymarket, TrustMRR, Wikipedia, GitHub, Reddit. Free |
 | Activity from monitored accounts | `events` | Only YOUR monitors, not all of X |
 | Budget, plan, usage percent | `get-account` | Plan, monitor quota, current period usage percent |
 | Start/stop tracking an account | `monitors` action=add/remove | Webhooks are optional, add separately with `webhooks` action=add |
@@ -304,13 +304,13 @@ Get trending topics on X for a region. Subscription required, metered.
 
 ### get-radar
 
-Get trending topics and news from 6 sources beyond X. Use a specific item title as `topic` for `compose-tweet`. For TrustMRR items, visit the URL for founder/MRR/growth details.
+Get trending topics and news from 7 sources beyond X. Use a specific item title as `topic` for `compose-tweet`. For TrustMRR items, visit the URL for founder/MRR/growth details.
 
 **Input:**
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `source` | string | No | Filter by source: `google_trends`, `hacker_news`, `trustmrr`, `wikipedia`, `github`, `reddit` |
+| `source` | string | No | Filter by source: `google_trends`, `hacker_news`, `polymarket`, `trustmrr`, `wikipedia`, `github`, `reddit` |
 | `category` | string | No | Filter by category: `general`, `tech`, `dev`, `science`, `culture`, `politics`, `business`, `entertainment` |
 | `limit` | number | No | Items per page (1-100, default 50) |
 | `hours` | number | No | Look-back window in hours (1-72, default 6) |
@@ -832,7 +832,7 @@ Both interfaces access the same Xquik platform. Choose based on your integration
 | **Transport** | StreamableHTTP | StreamableHTTP | HTTPS + JSON |
 | **Auth** | `x-api-key` or OAuth 2.1 | `x-api-key` or OAuth 2.1 | `x-api-key` header |
 | **Best for** | AI agents, IDE integrations | Legacy MCP integrations | Custom apps, scripts, backend services |
-| **Model** | 2 tools (sandbox) | 18 discrete tools | 56 endpoints |
+| **Model** | 2 tools (sandbox) | 18 discrete tools | 76 endpoints |
 | **User profile** | Subset: name, bio, follower/following counts, profile picture | Full: adds verified, location, createdAt, statusesCount |
 | **Follow check** | `following` / `followedBy` | `isFollowing` / `isFollowedBy` |
 | **Monitor username field** | `xUsername` | `username` |

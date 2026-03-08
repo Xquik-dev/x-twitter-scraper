@@ -769,4 +769,106 @@ interface McpScoreTweet {
     suggestion?: string;      // Improvement suggestion (present only if failed)
   }[];
 }
+
+// ─── X Accounts (Connected) ──────────────────────────
+
+interface ConnectedXAccount {
+  id: string;                 // Unique account ID
+  username: string;           // X username
+  displayName?: string;       // Display name on X
+  isActive: boolean;          // Whether the connection is active
+  createdAt: string;          // ISO 8601 timestamp
+}
+
+interface ConnectXAccountRequest {
+  username: string;           // X username (@ auto-stripped)
+  email: string;              // Email associated with X account
+  password: string;           // Password (encrypted at rest)
+  totp_secret?: string;       // TOTP base32 secret for 2FA accounts
+  proxy_country?: string;     // Preferred proxy region (e.g. "US")
+}
+
+interface ReauthXAccountRequest {
+  password: string;           // Current password
+  totp_secret?: string;       // TOTP secret if 2FA enabled
+}
+
+// ─── X Write ──────────────────────────────────────────
+
+interface CreateTweetRequest {
+  account: string;            // Connected X username or account ID
+  text: string;               // Tweet text (280 chars, or 25,000 if is_note_tweet)
+  reply_to_tweet_id?: string; // Tweet ID to reply to
+  attachment_url?: string;    // URL to attach as card
+  community_id?: string;      // Community ID to post into
+  is_note_tweet?: boolean;    // Long-form note tweet (up to 25,000 chars)
+  media_ids?: string[];       // Media IDs from POST /x/media (max 4 images or 1 video)
+}
+
+interface CreateTweetResponse {
+  tweetId: string;            // ID of the newly created tweet
+  success: boolean;           // Always true on success
+}
+
+interface WriteActionRequest {
+  account: string;            // Connected X username or account ID
+}
+
+interface SendDmRequest {
+  account: string;            // Connected X username or account ID
+  text: string;               // Message text
+  media_ids?: string[];       // Media IDs to attach
+  reply_to_message_id?: string; // Message ID to reply to
+}
+
+interface UpdateProfileRequest {
+  account: string;            // Connected X username or account ID
+  name?: string;              // Display name
+  description?: string;       // Bio
+  location?: string;          // Location
+  url?: string;               // Website URL
+}
+
+// ─── Integrations ─────────────────────────────────────
+
+interface Integration {
+  id: string;                 // Unique integration ID
+  type: string;               // Integration type ("telegram")
+  name: string;               // Human-readable name
+  config: Record<string, unknown>; // Type-specific config (Telegram: { chatId })
+  eventTypes: string[];       // Subscribed event types
+  isActive: boolean;          // Whether the integration is active
+  createdAt: string;          // ISO 8601 timestamp
+  updatedAt: string;          // ISO 8601 timestamp
+}
+
+interface CreateIntegrationRequest {
+  type: string;               // "telegram"
+  name: string;               // Human-readable name
+  config: { chatId: string }; // Telegram config
+  eventTypes: string[];       // Event types to subscribe to
+}
+
+interface UpdateIntegrationRequest {
+  name?: string;              // New name
+  eventTypes?: string[];      // New event types
+  isActive?: boolean;         // Activate/deactivate
+  silentPush?: boolean;       // Silent notifications
+  scopeAllMonitors?: boolean; // Scope to all monitors
+  filters?: Record<string, unknown>; // Filters
+  messageTemplate?: Record<string, unknown>; // Custom message template
+}
+
+interface IntegrationDelivery {
+  id: string;                 // Delivery ID
+  integrationId: string;      // Integration ID
+  sourceType: string;         // "monitor_event" | "extraction" | "draw"
+  sourceId: string;           // Source record ID
+  eventType: string;          // Event type
+  status: string;             // "pending" | "delivered" | "failed" | "exhausted"
+  lastError?: string;         // Last error message
+  attempts: number;           // Delivery attempt count
+  deliveredAt?: string;       // ISO 8601 timestamp
+  createdAt: string;          // ISO 8601 timestamp
+}
 ```
