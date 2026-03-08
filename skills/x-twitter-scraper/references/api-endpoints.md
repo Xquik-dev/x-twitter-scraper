@@ -482,41 +482,36 @@ Returns `isFollowing` and `isFollowedBy` for both directions.
 POST /x/media/download
 ```
 
-Download images, videos, and GIFs from a tweet. Returns permanent download URLs hosted on `media.xquik.com`.
+Download images, videos, and GIFs from tweets. Single or bulk (up to 50). Returns a shareable gallery URL.
 
-**Body:** Provide either `tweetId` or `tweetUrl` (at least 1 required).
+**Body:** Provide either `tweetInput` (single tweet) or `tweetIds` (bulk). Exactly 1 is required.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `tweetId` | string | Numeric tweet ID |
-| `tweetUrl` | string | Full tweet URL (x.com or twitter.com) |
+| `tweetInput` | string | Tweet URL or numeric tweet ID for a single download. Accepts `x.com` and `twitter.com` URL formats |
+| `tweetIds` | string[] | Array of tweet URLs or IDs for bulk download. Maximum 50 items. Returns a single combined gallery |
 
-**Response:**
+**Response (single):**
 ```json
 {
   "tweetId": "1893456789012345678",
-  "media": [
-    {
-      "url": "https://media.xquik.com/dl/abc123/video.mp4",
-      "type": "video",
-      "index": 0,
-      "fileSize": "4821000"
-    },
-    {
-      "url": "https://media.xquik.com/dl/def456/photo.jpg",
-      "type": "photo",
-      "index": 1,
-      "fileSize": "245000"
-    }
-  ]
+  "galleryUrl": "https://xquik.com/gallery/abc123",
+  "cacheHit": false
 }
 ```
 
-Each media item: `url` (permanent hosted URL), `type` (`photo`, `video`, or `animated_gif`), `index` (0-based position), `fileSize` (bytes as string, omitted if unavailable).
+**Response (bulk):**
+```json
+{
+  "galleryUrl": "https://xquik.com/gallery/def456",
+  "totalTweets": 3,
+  "totalMedia": 7
+}
+```
 
-First download is metered (counts toward monthly quota). Subsequent requests for the same tweet return cached URLs at no cost. Downloads are saved to the gallery at `https://xquik.com/gallery`.
+First download is metered (counts toward monthly quota). Subsequent requests for the same tweet return cached URLs at no cost (`cacheHit: true`). All downloads are saved to the gallery at `https://xquik.com/gallery`.
 
-Returns `400 no_media` if the tweet has no downloadable media.
+Returns `400 no_media` if the tweet has no downloadable media. Returns `400 too_many_tweets` if bulk array exceeds 50 items.
 
 ---
 

@@ -227,7 +227,7 @@ Look up an X user profile by username. Does NOT return verification status or tw
 
 ### download-media
 
-Download images, videos, and GIFs from tweets. Accepts one or more tweet IDs/URLs (up to 50). Returns permanent download URLs hosted on media.xquik.com.
+Download images, videos, and GIFs from tweets. Accepts one or more tweet IDs/URLs (up to 50). Returns a shareable gallery URL and permanent download URLs.
 
 **Input:**
 
@@ -235,18 +235,29 @@ Download images, videos, and GIFs from tweets. Accepts one or more tweet IDs/URL
 |-----------|------|----------|-------------|
 | `tweetIds` | string[] | Yes | Array of tweet IDs or full tweet URLs (1-50 items). Single item = one tweet, multiple = bulk download |
 
-**Output:**
+**Output (single, 1 item in tweetIds):**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `tweetId` | string | Resolved tweet ID (single mode) |
+| `tweetId` | string | Resolved tweet ID |
+| `galleryUrl` | string | Shareable gallery page URL |
+| `cacheHit` | boolean | `true` if served from cache (no usage consumed) |
 | `media` | array | Array of downloaded media items |
 | `media[].url` | string | Permanent download URL hosted on media.xquik.com |
 | `media[].type` | string | Media type: `photo`, `video`, or `animated_gif` |
 | `media[].index` | number | Position in the tweet's media attachments (0-indexed) |
-| `media[].fileSize` | string | File size in bytes (as a string). Omitted if unavailable |
+| `media[].fileSize` | string | File size in bytes (as a string). `null` if unavailable |
 
-**Quota:** First download is metered (counts toward your monthly quota). Subsequent requests for the same tweet return cached URLs at no cost. Downloads are saved to the user's gallery at `https://xquik.com/gallery`.
+**Output (bulk, 2+ items in tweetIds):**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `galleryUrl` | string | Combined gallery page URL containing media from all tweets |
+| `totalTweets` | number | Number of tweets successfully processed |
+| `totalMedia` | number | Total media items downloaded across all tweets |
+| `freshDownloads` | number | Number of tweets downloaded fresh (not from cache) |
+
+**Quota:** First download is metered (counts toward your monthly quota). Subsequent requests for the same tweet return cached URLs at no cost (`cacheHit: true`). All downloads are saved to the gallery at `https://xquik.com/gallery`.
 
 **Annotations:** openWorld | **Cost:** Metered (first download only, cached free)
 

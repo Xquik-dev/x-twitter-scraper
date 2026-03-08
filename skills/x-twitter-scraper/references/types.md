@@ -362,20 +362,20 @@ interface FollowerCheck {
 // ─── Download Media ─────────────────────────────────────
 
 interface DownloadMediaRequest {
-  tweetId?: string;  // Numeric tweet ID
-  tweetUrl?: string; // Full tweet URL (x.com or twitter.com). At least 1 required.
+  tweetInput?: string;  // Tweet URL or numeric tweet ID (single mode)
+  tweetIds?: string[];  // Array of tweet URLs or IDs (bulk mode, max 50). Exactly 1 of tweetInput or tweetIds required.
 }
 
-interface DownloadMediaResponse {
-  tweetId: string;
-  media: DownloadMediaItem[];
+interface DownloadMediaSingleResponse {
+  tweetId: string;      // Resolved tweet ID
+  galleryUrl: string;   // Shareable gallery page URL
+  cacheHit: boolean;    // true if served from cache (no usage consumed)
 }
 
-interface DownloadMediaItem {
-  url: string;       // Permanent download URL hosted on media.xquik.com
-  type: string;      // "photo" | "video" | "animated_gif"
-  index: number;     // Position in the tweet's media attachments (0-indexed)
-  fileSize?: string; // File size in bytes (as string). Omitted if unavailable.
+interface DownloadMediaBulkResponse {
+  galleryUrl: string;   // Combined gallery page URL
+  totalTweets: number;  // Number of tweets processed
+  totalMedia: number;   // Total media items downloaded
 }
 
 // ─── Trends ──────────────────────────────────────────────

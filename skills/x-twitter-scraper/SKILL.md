@@ -53,7 +53,7 @@ For Python examples, see [references/python-examples.md](references/python-examp
 | **Receive events in real time** | `POST /webhooks` | HMAC-signed delivery to your HTTPS endpoint |
 | **Update webhook** | `PATCH /webhooks/{id}` | Change URL, event types, or pause/resume |
 | **Run a giveaway draw** | `POST /draws` | Pick random winners from tweet replies |
-| **Download tweet media** | `POST /x/media/download` | Images, videos, GIFs. Permanent hosted URLs. First download metered, cached free |
+| **Download tweet media** | `POST /x/media/download` | Single (`tweetInput`) or bulk (`tweetIds[]`, up to 50). Returns gallery URL. First download metered, cached free |
 | **Extract bulk data** | `POST /extractions` | 20 tool types, always estimate cost first |
 | **Check account/usage** | `GET /account` | Plan status, monitors, usage percent |
 | **Link your X identity** | `PUT /account/x-identity` | Required for own-account detection in style analysis |
