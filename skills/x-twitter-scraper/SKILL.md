@@ -75,6 +75,8 @@ For Python examples, see [references/python-examples.md](references/python-examp
 | **Follow / Unfollow a user** | `POST` / `DELETE /x/users/{id}/follow` | Metered |
 | **Send a DM** | `POST /x/dm/{userId}` | Text, media, reply to message |
 | **Update profile** | `PATCH /x/profile` | Name, bio, location, URL |
+| **Update avatar** | `PATCH /x/profile/avatar` | FormData with image file (max 700 KB) |
+| **Update banner** | `PATCH /x/profile/banner` | FormData with image file (max 2 MB) |
 | **Upload media** | `POST /x/media` | FormData. Returns media ID for tweet attachment |
 | **Community actions** | `POST /x/communities`, `POST /x/communities/{id}/join` | Create, delete, join, leave |
 | **Create Telegram integration** | `POST /integrations` | Receive monitor events in Telegram. Free |
@@ -88,16 +90,16 @@ All errors return `{ "error": "error_code" }`. Key error codes:
 
 | Status | Code | Action |
 |--------|------|--------|
-| 400 | `invalid_input`, `invalid_id`, `invalid_params`, `invalid_tweet_url`, `invalid_tweet_id`, `invalid_username`, `invalid_tool_type`, `invalid_format`, `missing_query`, `missing_params`, `webhook_inactive`, `no_media` | Fix the request, do not retry |
+| 400 | `invalid_input`, `invalid_id`, `invalid_params`, `invalid_tweet_url`, `invalid_tweet_id`, `invalid_username`, `invalid_tool_type`, `invalid_format`, `invalid_json`, `missing_query`, `missing_params`, `webhook_inactive`, `no_media` | Fix the request, do not retry |
 | 401 | `unauthenticated` | Check API key |
 | 402 | `no_subscription`, `subscription_inactive`, `usage_limit_reached`, `no_addon`, `extra_usage_disabled`, `extra_usage_requires_v2`, `frozen`, `overage_limit_reached` | Subscribe, enable extra usage, or wait for quota reset |
 | 403 | `monitor_limit_reached`, `api_key_limit_reached` | Delete a monitor/key or add capacity |
-| 404 | `not_found`, `user_not_found`, `tweet_not_found`, `style_not_found`, `draft_not_found`, `account_not_found` | Resource doesn't exist or belongs to another account |
-| 409 | `monitor_already_exists`, `account_already_connected`, `already_member` | Resource already exists, use the existing one |
-| 422 | `connection_failed`, `reauth_failed` | X credential verification failed. Check credentials |
+| 404 | `not_found`, `user_not_found`, `tweet_not_found`, `style_not_found`, `draft_not_found` | Resource doesn't exist or belongs to another account |
+| 409 | `monitor_already_exists` | Resource already exists, use the existing one |
+| 422 | `login_failed` | X credential verification failed. Check credentials |
 | 429 | `x_api_rate_limited` | Rate limited. Retry with exponential backoff, respect `Retry-After` header |
 | 500 | `internal_error` | Retry with backoff |
-| 502 | `stream_registration_failed`, `x_api_unavailable`, `x_api_unauthorized`, `x_write_failed`, `upstream_error`, `delivery_failed` | Retry with backoff |
+| 502 | `stream_registration_failed`, `x_api_unavailable`, `x_api_unauthorized`, `delivery_failed` | Retry with backoff |
 
 Retry only `429` and `5xx`. Never retry `4xx` (except 429). Max 3 retries with exponential backoff:
 
@@ -493,7 +495,8 @@ Common multi-step tool sequences:
 - **Subscribe or manage billing:** `subscribe` (returns Stripe URL)
 - **Post a tweet:** connect X account -> `POST /x/tweets` with `account` + `text` (optionally attach media via `POST /x/media` first)
 - **Engage with tweets:** `POST /x/tweets/{id}/like`, `POST /x/tweets/{id}/retweet`, `POST /x/users/{id}/follow`
-- **Set up Telegram alerts:** `POST /integrations` (type=telegram, chatId, eventTypes) -> `POST /integrations/{id}/test`
+- **Set up Telegram alerts:** `POST /integrations` (type=telegram, chatId, eventTypes) -> `POST /integrations/{id}/test`. Integration event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `draw.completed`, `extraction.completed`, `extraction.failed`
+- **Update avatar/banner:** `PATCH /x/profile/avatar` or `PATCH /x/profile/banner` with FormData image file
 
 ## Pricing & Quota
 
@@ -501,7 +504,7 @@ Common multi-step tool sequences:
 - **Extra monitors**: $5/month each
 - **Per-operation costs**: tweet search $0.003, user profile $0.0036, follower fetch $0.003, verified follower fetch $0.006, follow check $0.02, media download $0.003, article extraction $0.02
 - **Free**: account info, monitor/webhook management, radar, extraction history, cost estimates, tweet composition (compose, refine, score), style cache management (list, get, save, delete, compare), drafts, X account management (connect, list, disconnect, reauth), integration management (create, list, update, delete, test)
-- **Metered**: tweet search, user lookup, tweet lookup, follow check, media download (first download only, cached free), extractions, draws, style analysis, performance analysis, trends, write actions (tweet, like, retweet, follow, DM, profile, media upload, communities)
+- **Metered**: tweet search, user lookup, tweet lookup, follow check, media download (first download only, cached free), extractions, draws, style analysis, performance analysis, trends, write actions (tweet, like, retweet, follow, DM, profile, avatar, banner, media upload, communities)
 - **Extra usage**: enable from dashboard to continue metered calls beyond included allowance. Tiered spending limits: $5 -> $7 -> $10 -> $15 -> $25 (increases with each paid overage invoice)
 - **Quota enforcement**: `402 usage_limit_reached` when included allowance exhausted (or `402 overage_limit_reached` if extra usage is active and spending limit reached)
 - **Check usage**: `GET /account` returns `usagePercent` (0-100)

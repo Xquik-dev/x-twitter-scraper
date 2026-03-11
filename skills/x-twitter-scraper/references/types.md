@@ -359,6 +359,44 @@ interface FollowerCheck {
   isFollowedBy: boolean;
 }
 
+// ─── Radar ───────────────────────────────────────────────
+
+type RadarSource =
+  | "github"
+  | "google_trends"
+  | "hacker_news"
+  | "polymarket"
+  | "reddit"
+  | "trustmrr"
+  | "wikipedia";
+
+type RadarCategory =
+  | "general"
+  | "tech"
+  | "dev"
+  | "science"
+  | "culture"
+  | "politics"
+  | "business"
+  | "entertainment";
+
+interface RadarItem {
+  id: string;
+  title: string;
+  description?: string;
+  url?: string;
+  imageUrl?: string;
+  source: RadarSource;
+  sourceId: string;
+  category: RadarCategory;
+  region: string;
+  language: string;
+  score: number;
+  metadata: Record<string, unknown>;
+  publishedAt: string;
+  createdAt: string;
+}
+
 // ─── Download Media ─────────────────────────────────────
 
 interface DownloadMediaRequest {
@@ -831,12 +869,23 @@ interface UpdateProfileRequest {
 
 // ─── Integrations ─────────────────────────────────────
 
+// Integration event types differ from monitor event types:
+// includes system events (draw/extraction) but NOT follower events
+type IntegrationEventType =
+  | "tweet.new"
+  | "tweet.quote"
+  | "tweet.reply"
+  | "tweet.retweet"
+  | "draw.completed"
+  | "extraction.completed"
+  | "extraction.failed";
+
 interface Integration {
   id: string;                 // Unique integration ID
   type: string;               // Integration type ("telegram")
   name: string;               // Human-readable name
   config: Record<string, unknown>; // Type-specific config (Telegram: { chatId })
-  eventTypes: string[];       // Subscribed event types
+  eventTypes: IntegrationEventType[]; // Subscribed event types
   isActive: boolean;          // Whether the integration is active
   createdAt: string;          // ISO 8601 timestamp
   updatedAt: string;          // ISO 8601 timestamp
@@ -846,7 +895,7 @@ interface CreateIntegrationRequest {
   type: string;               // "telegram"
   name: string;               // Human-readable name
   config: { chatId: string }; // Telegram config
-  eventTypes: string[];       // Event types to subscribe to
+  eventTypes: IntegrationEventType[]; // Event types to subscribe to
 }
 
 interface UpdateIntegrationRequest {

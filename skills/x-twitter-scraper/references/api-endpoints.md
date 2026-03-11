@@ -1157,7 +1157,7 @@ POST /integrations
 | `type` | string | Yes | Integration type: `"telegram"` |
 | `name` | string | Yes | Human-readable name |
 | `config` | object | Yes | Type-specific config. Telegram: `{ chatId: "-1001234567890" }` |
-| `eventTypes` | string[] | Yes | Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `follower.gained`, `follower.lost` |
+| `eventTypes` | string[] | Yes | Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `draw.completed`, `extraction.completed`, `extraction.failed` |
 
 **Response (201):** `{ id, type, name, config, eventTypes, isActive, createdAt }`
 
@@ -1221,6 +1221,7 @@ View delivery attempts and statuses. Statuses: `pending`, `delivered`, `failed`,
 |--------|------|---------|
 | 400 | `invalid_input` | Request body failed validation |
 | 400 | `invalid_id` | Path parameter is not a valid ID |
+| 400 | `invalid_json` | Invalid JSON in request body |
 | 400 | `invalid_tweet_url` | Tweet URL format is invalid |
 | 400 | `invalid_tweet_id` | Tweet ID is empty or invalid |
 | 400 | `invalid_username` | X username is empty or invalid |
@@ -1232,6 +1233,7 @@ View delivery attempts and statuses. Statuses: `pending`, `delivered`, `failed`,
 | 400 | `no_media` | Tweet has no downloadable media |
 | 400 | `webhook_inactive` | Webhook is disabled (test-webhook only) |
 | 401 | `unauthenticated` | Missing or invalid API key |
+| 401 | `account_needs_reauth` | X account session expired, re-authenticate |
 | 402 | `no_subscription` | No active subscription |
 | 402 | `subscription_inactive` | Subscription is not active |
 | 402 | `usage_limit_reached` | Monthly usage cap exceeded |
@@ -1239,26 +1241,20 @@ View delivery attempts and statuses. Statuses: `pending`, `delivered`, `failed`,
 | 402 | `extra_usage_requires_v2` | Extra usage requires the new pricing plan |
 | 402 | `frozen` | Extra usage paused, outstanding payment required |
 | 402 | `overage_limit_reached` | Overage spending limit reached |
+| 402 | `no_addon` | No monitor addon on subscription |
 | 403 | `monitor_limit_reached` | Plan monitor limit exceeded |
 | 403 | `api_key_limit_reached` | API key limit reached (100 max) |
-| 402 | `no_addon` | No monitor addon on subscription |
 | 404 | `not_found` | Resource does not exist |
 | 404 | `user_not_found` | X user not found |
 | 404 | `tweet_not_found` | Tweet not found |
 | 404 | `style_not_found` | No cached style found |
 | 404 | `draft_not_found` | Draft not found |
-| 404 | `account_not_found` | Connected X account not found |
 | 409 | `monitor_already_exists` | Duplicate monitor for same username |
-| 409 | `account_already_connected` | X account already connected |
-| 409 | `already_member` | Already a member of the community |
-| 422 | `connection_failed` | X credential verification failed |
-| 422 | `reauth_failed` | X re-authentication failed |
+| 422 | `login_failed` | X credential verification failed |
 | 429 | - | Rate limited. Retry with backoff |
 | 429 | `x_api_rate_limited` | X data source rate limited. Retry |
 | 500 | `internal_error` | Server error |
 | 502 | `stream_registration_failed` | Stream registration failed. Retry |
 | 502 | `x_api_unavailable` | X data source temporarily unavailable |
 | 502 | `x_api_unauthorized` | X data source authentication failed. Retry |
-| 502 | `x_write_failed` | Write action failed (tweet, delete, like, retweet) |
-| 502 | `upstream_error` | Upstream action failed (follow, DM, profile update) |
 | 502 | `delivery_failed` | Integration test delivery failed |
