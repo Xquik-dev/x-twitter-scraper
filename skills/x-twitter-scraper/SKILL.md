@@ -2,6 +2,17 @@
 name: x-twitter-scraper
 description: "X API & Twitter automation skill. Build integrations with the Xquik REST API, MCP server & webhooks: tweet search, user lookup, follower extraction, engagement metrics, giveaway draws, trending topics, account monitoring, reply/retweet/quote extraction, community & Space data, write actions (tweet, like, retweet, follow, DM, profile, media upload), Telegram integrations."
 homepage: https://xquik.com
+read_when:
+  - Building X/Twitter API integrations or automations
+  - Searching tweets, looking up users, or checking follow relationships
+  - Extracting bulk data from X/Twitter (followers, replies, communities, lists, spaces)
+  - Running giveaway draws from tweet replies
+  - Setting up account monitors or webhook event delivery
+  - Posting tweets, replying, liking, retweeting, following, or sending DMs
+  - Downloading tweet media or uploading images
+  - Composing algorithm-optimized tweets or analyzing tweet styles
+  - Setting up MCP server connections to Xquik
+  - Creating Telegram integrations for X/Twitter events
 metadata: {"openclaw":{"emoji":"🐦","primaryEnv":"XQUIK_API_KEY","requires":{"env":["XQUIK_API_KEY"]}}}
 ---
 
