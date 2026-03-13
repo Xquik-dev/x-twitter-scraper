@@ -5,7 +5,14 @@ compatibility: Requires internet access to call the Xquik REST API (https://xqui
 license: MIT
 metadata:
   author: Xquik
-  version: "1.7.0"
+  version: "1.8.0"
+  openclaw:
+    requires:
+      env:
+        - XQUIK_API_KEY
+    primaryEnv: XQUIK_API_KEY
+    emoji: "𝕏"
+    homepage: https://docs.xquik.com
 ---
 
 # Xquik API Integration
