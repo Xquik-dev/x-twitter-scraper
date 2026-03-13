@@ -538,6 +538,37 @@ Metered. Subscription required. Cached, refreshes every 15 minutes.
 }
 ```
 
+### Get Trending by Source
+
+```
+GET /trending/{source}?count=20
+```
+
+Metered. Subscription required. Get trending items from a specific source.
+
+**Path parameters:**
+
+| Param | Type | Description |
+|-------|------|-------------|
+| `source` | string | Source slug: `reddit`, `github`, `hacker-news`, `google-trends`, `wikipedia`, `startups`, `polymarket` |
+
+**Query parameters:**
+
+| Param | Type | Description |
+|-------|------|-------------|
+| `count` | number | Max number of items |
+
+**Response:**
+```json
+{
+  "items": [
+    { "title": "...", "url": "...", "score": 42 }
+  ],
+  "total": 20,
+  "source": "reddit"
+}
+```
+
 ---
 
 ## Radar

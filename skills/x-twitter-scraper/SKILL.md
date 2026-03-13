@@ -458,8 +458,8 @@ For setup configs per platform, read [references/mcp-setup.md](references/mcp-se
 | | MCP Server | REST API |
 |---|------------|----------|
 | **Best for** | AI agents, IDE integrations | Custom apps, scripts, backend services |
-| **Model** | 2 tools (`explore` + `xquik`) with code-execution sandbox | 81 individual endpoints |
-| **Categories** | 11: account, bot, composition, extraction, integrations, media, monitoring, trends, twitter, x-accounts, x-write | Same |
+| **Model** | 2 tools (`explore` + `xquik`) with code-execution sandbox | 77 individual endpoints |
+| **Categories** | 10: account, composition, extraction, integrations, media, monitoring, trends, twitter, x-accounts, x-write | Same |
 | **Coverage** | Full — `xquik` tool calls any REST endpoint | Direct HTTP calls |
 | **File export** | Not available | CSV, XLSX, Markdown |
 | **Unique to REST** | - | API key management, file export (CSV/XLSX/MD), account locale update |

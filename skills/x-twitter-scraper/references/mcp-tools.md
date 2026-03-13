@@ -18,7 +18,7 @@ interface EndpointInfo {
   method: string;
   path: string;
   summary: string;
-  category: string; // account, bot, composition, extraction, integrations, media, monitoring, trends, twitter, x-accounts, x-write
+  category: string; // account, composition, extraction, integrations, media, monitoring, trends, twitter, x-accounts, x-write
   free: boolean;
   parameters?: Array<{ name: string; in: 'query' | 'path' | 'body'; required: boolean; type: string; description: string }>;
   responseShape?: string;

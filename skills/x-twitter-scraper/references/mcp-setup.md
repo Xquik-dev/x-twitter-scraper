@@ -169,7 +169,7 @@ The default MCP server (v2) at `https://xquik.com/mcp` uses a **code-execution s
 | `explore` | Search the API endpoint catalog (read-only, no network calls) | Free |
 | `xquik` | Execute API calls against your account | Varies by endpoint |
 
-The agent writes async JavaScript arrow functions that run in a sandboxed environment. Auth is injected automatically. The sandbox covers all 76 REST API endpoints across 9 categories: account, composition, extraction, integrations, media, monitoring, twitter, x-accounts, and x-write.
+The agent writes async JavaScript arrow functions that run in a sandboxed environment. Auth is injected automatically. The sandbox covers all 77 REST API endpoints across 10 categories: account, composition, extraction, integrations, media, monitoring, trends, twitter, x-accounts, and x-write.
 
 ## After Setup
 
