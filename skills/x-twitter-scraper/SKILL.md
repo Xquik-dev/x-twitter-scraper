@@ -1,11 +1,8 @@
 ---
 name: x-twitter-scraper
-description: "X API & Twitter scraper skill for AI coding agents. Builds integrations with the Xquik REST API, MCP server & webhooks: tweet search, user lookup, follower extraction, engagement metrics, giveaway contest draws, trending topics, account monitoring, reply/retweet/quote extraction, community & Space data, mutual follow checks, write actions (tweet, like, retweet, follow, DM, profile, media upload, communities), Telegram integrations. Works with Claude Code, Cursor, Codex, Copilot, Windsurf & 40+ agents."
-compatibility: Requires internet access to call the Xquik REST API (https://xquik.com/api/v1)
-license: MIT
-metadata:
-  author: Xquik
-  version: "1.7.0"
+description: "X API & Twitter automation skill. Build integrations with the Xquik REST API, MCP server & webhooks: tweet search, user lookup, follower extraction, engagement metrics, giveaway draws, trending topics, account monitoring, reply/retweet/quote extraction, community & Space data, write actions (tweet, like, retweet, follow, DM, profile, media upload), Telegram integrations."
+homepage: https://xquik.com
+metadata: {"openclaw":{"emoji":"🐦","primaryEnv":"XQUIK_API_KEY","requires":{"env":["XQUIK_API_KEY"]}}}
 ---
 
 # Xquik API Integration
