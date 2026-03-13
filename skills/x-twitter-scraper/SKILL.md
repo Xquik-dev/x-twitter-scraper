@@ -13,7 +13,7 @@ read_when:
   - Building X/Twitter API integrations or automations
   - Setting up MCP server connections to Xquik
   - Creating Telegram integrations for X/Twitter events
-metadata: {"openclaw":{"emoji":"🐦","primaryEnv":"XQUIK_API_KEY","requires":{"env":["XQUIK_API_KEY"]}}}
+metadata: {"openclaw":{"emoji":"🐦","primaryEnv":"XQUIK_API_KEY","requires":{"env":["XQUIK_API_KEY"]},"tags":["twitter","x","automation","social-media","scraping","api","mcp","webhooks","giveaway","monitoring","extraction","rest-api"]}}
 ---
 
 # Xquik API Integration
