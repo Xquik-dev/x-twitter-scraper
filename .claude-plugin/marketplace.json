@@ -1,0 +1,43 @@
+{
+  "name": "x-twitter-scraper",
+  "owner": {
+    "name": "Xquik",
+    "email": "support@xquik.com"
+  },
+  "metadata": {
+    "description": "X (Twitter) data extraction & automation skill for AI coding agents",
+    "version": "1.7.0"
+  },
+  "plugins": [
+    {
+      "name": "x-twitter-scraper",
+      "source": ".",
+      "description": "40+ tools: tweet search, user lookup, follower extraction, engagement metrics, giveaway draws, trending topics, write actions, and Telegram integrations. REST API, MCP server & HMAC webhooks.",
+      "version": "1.7.0",
+      "author": {
+        "name": "Xquik"
+      },
+      "homepage": "https://xquik.com",
+      "repository": "https://github.com/Xquik-dev/x-twitter-scraper",
+      "license": "MIT",
+      "keywords": [
+        "twitter",
+        "x-api",
+        "mcp-server",
+        "data-extraction",
+        "giveaway",
+        "monitoring",
+        "webhooks",
+        "scraper"
+      ],
+      "category": "integrations",
+      "tags": [
+        "twitter",
+        "x",
+        "social-media",
+        "automation",
+        "mcp"
+      ]
+    }
+  ]
+}
