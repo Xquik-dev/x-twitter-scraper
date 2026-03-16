@@ -1,0 +1,11 @@
+startCommand:
+  type: http
+  configSchema:
+    type: object
+    required:
+      - apiKey
+    properties:
+      apiKey:
+        type: string
+        description: "Xquik API key from https://xquik.com/account-manager"
+  url: "https://xquik.com/mcp"
