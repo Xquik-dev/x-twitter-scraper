@@ -98,13 +98,15 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Giveaway draws**: Run transparent draws from tweet replies with configurable filters
 - **Write actions**: Post tweets, like, retweet, follow/unfollow, send DMs, update profile, upload media, manage communities via connected X accounts
 - **Telegram integrations**: Receive real-time monitor event notifications in Telegram
-- **MCP server integration**: Connect AI agents to X data via MCP (v2: 2-tool sandbox covering 76 endpoints, v1 legacy: 18 discrete tools)
+- **Flow automations**: Trigger-driven workflows with monitor events, schedules, search, and inbound webhooks. 9 action types, conditions, extractions
+- **Support tickets**: Open and manage support tickets via API
+- **MCP server integration**: Connect AI agents to X data via MCP (2-tool sandbox covering 93 endpoints)
 
 ## Capabilities
 
 | Area | Details |
 |------|---------|
-| **REST API** | 76 endpoints across 12 resource groups with retry logic and pagination |
+| **REST API** | 93 endpoints across 15 resource groups with retry logic and pagination |
 | **Tweet Fetching** | Single tweet lookup with full metrics, keyword/hashtag search |
 | **User Lookup** | Profile data, follower/following counts, verified status |
 | **Follower Analysis** | Extract followers, following, verified followers for any account |
@@ -115,7 +117,7 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 | **Account Monitoring** | Real-time tracking of tweets, replies, quotes, retweets, follower changes |
 | **Webhooks** | HMAC-SHA256 signature verification in Node.js, Python, Go |
 | **Media Download** | Download images, videos, GIFs with permanent hosted URLs (first download metered, cached free) |
-| **MCP Server** | v2: 2-tool sandbox (76 endpoints), v1 legacy: 18 tools. StreamableHTTP, configs for 10 platforms |
+| **MCP Server** | 2-tool sandbox (93 endpoints). StreamableHTTP, configs for 10 platforms |
 | **Engagement Analytics** | Likes, retweets, replies, quotes, views, bookmarks per tweet |
 | **Trending Topics** | Regional trends with search queries |
 | **Tweet Composition** | Algorithm-optimized tweet composer with scoring checklist (free) |
@@ -145,6 +147,8 @@ Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code
 | X Accounts | Connect, list, get, disconnect, re-authenticate |
 | X Write | Tweet, delete, like, unlike, retweet, follow, unfollow, DM, profile, avatar, banner, media upload, communities |
 | Integrations | Create (Telegram), list, get, update, delete, test, deliveries |
+| Automations | Create, list, get, update, delete, add/update/delete steps, positions, test, inbound webhook |
+| Support | Create ticket, list, get, update, reply |
 
 ## Skill Structure
 
@@ -156,7 +160,7 @@ x-twitter-scraper/
 │       ├── metadata.json                 # Version and references
 │       └── references/
 │           ├── api-endpoints.md          # All REST API endpoints
-│           ├── mcp-tools.md              # All 18 v1 legacy MCP tools with schemas
+│           ├── mcp-tools.md              # MCP tool selection rules and workflow patterns
 │           ├── mcp-setup.md              # MCP configs for 10 platforms (v2 + v1)
 │           ├── webhooks.md               # Webhook setup & verification
 │           ├── extractions.md            # 20 extraction tool types

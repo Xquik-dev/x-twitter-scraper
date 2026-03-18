@@ -13,6 +13,8 @@ Copy-pasteable TypeScript types for all Xquik API objects.
 - [Extractions](#extractions)
 - [X API](#x-api)
 - [Trends](#trends)
+- [Automations](#automations)
+- [Support](#support)
 - [Error](#error)
 - [Request Bodies](#request-bodies)
 - [MCP Output Schemas](#mcp-output-schemas)
@@ -429,6 +431,120 @@ interface TrendList {
   trends: Trend[];
   total: number;
   woeid: number;
+}
+
+// ─── Automations ────────────────────────────────────────
+
+type TriggerType = "monitor_event" | "schedule" | "search" | "webhook_inbound";
+
+type StepType = "action" | "condition" | "extraction";
+
+type ActionType =
+  | "create_tweet"
+  | "follow"
+  | "like"
+  | "reply_tweet"
+  | "retweet"
+  | "send_dm"
+  | "send_email"
+  | "send_telegram"
+  | "unfollow";
+
+interface AutomationFlow {
+  id: string;
+  name: string;
+  slug: string;
+  triggerType: TriggerType;
+  triggerConfig: Record<string, unknown>;
+  isActive: boolean;
+  runCount: string;
+  lastRunAt: string | null;
+  minIntervalSeconds: number;
+  pausedReason: string | null;
+  templateSlug: string | null;
+  xAccountId: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface AutomationStep {
+  id: string;
+  flowId: string;
+  stepType: StepType;
+  actionType: ActionType | null;
+  extractionType: string | null;
+  branch: "main" | "if_true" | "if_false";
+  config: Record<string, unknown>;
+  position: number;
+  positionX: number | null;
+  positionY: number | null;
+  parentStepId: string | null;
+  outputName: string | null;
+  createdAt: string;
+}
+
+interface AutomationRun {
+  id: string;
+  status: string;
+  startedAt: string;
+  completedAt: string | null;
+  errorMessage: string | null;
+  triggeredBy: string;
+}
+
+interface AutomationDetail extends AutomationFlow {
+  steps: AutomationStep[];
+  recentRuns: AutomationRun[];
+}
+
+interface CreateAutomationRequest {
+  name: string;
+  triggerType: TriggerType;
+  triggerConfig: Record<string, unknown>;
+  templateSlug?: string;
+}
+
+interface UpdateAutomationRequest {
+  expectedUpdatedAt: string;
+  name?: string;
+  triggerType?: TriggerType;
+  triggerConfig?: Record<string, unknown>;
+  isActive?: boolean;
+  triggerPositionX?: number | null;
+  triggerPositionY?: number | null;
+}
+
+interface AddStepRequest {
+  stepType: StepType;
+  branch: "main" | "if_true" | "if_false";
+  config: Record<string, unknown>;
+  position?: number;
+  parentStepId?: string;
+  actionType?: ActionType;
+  extractionType?: string;
+  outputName?: string;
+}
+
+// ─── Support ────────────────────────────────────────────
+
+interface SupportTicket {
+  id: string;
+  subject: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface SupportMessage {
+  id: string;
+  body: string;
+  sender: string;
+  createdAt: string;
+}
+
+interface CreateTicketRequest {
+  subject: string;
+  body: string;
 }
 
 // ─── Error ───────────────────────────────────────────────

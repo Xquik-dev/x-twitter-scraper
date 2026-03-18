@@ -25,6 +25,8 @@ All requests require the `x-api-key` header. All responses are JSON. HTTPS only.
 - [X Accounts (Connected)](#x-accounts-connected)
 - [X Write](#x-write)
 - [Integrations](#integrations)
+- [Automations](#automations)
+- [Support](#support)
 
 ---
 
@@ -1246,6 +1248,181 @@ View delivery attempts and statuses. Statuses: `pending`, `delivered`, `failed`,
 
 ---
 
+## Automations
+
+Trigger-driven workflow automation. Create flows with triggers (monitor events, schedules, search, inbound webhooks) and action steps.
+
+### List Automations
+
+```
+GET /automations
+```
+
+Returns all flows. Response: `{ items: [{ id, name, slug, triggerType, triggerConfig, isActive, runCount, lastRunAt, minIntervalSeconds, pausedReason, templateSlug, xAccountId, createdAt, updatedAt }] }`.
+
+### Create Automation
+
+```
+POST /automations
+```
+
+**Body:**
+```json
+{
+  "name": "New Follower Welcome",
+  "triggerType": "monitor_event",
+  "triggerConfig": { "eventType": "follower.gained" },
+  "templateSlug": "welcome-dm"
+}
+```
+
+Trigger types: `monitor_event`, `schedule`, `search`, `webhook_inbound`.
+
+**Response (201):** Flow object with `id`, `slug`, `isActive: false`.
+
+Flows are created inactive. Add steps, then activate via `PATCH /automations/{slug}`.
+
+Free: 2 flows. Subscribers: 10 flows.
+
+### Get Automation
+
+```
+GET /automations/{slug}
+```
+
+Returns flow with steps and 20 most recent runs.
+
+### Update Automation
+
+```
+PATCH /automations/{slug}
+```
+
+**Body:** `{ "expectedUpdatedAt": "...", "name": "...", "triggerType": "...", "triggerConfig": {...}, "isActive": true|false }`. `expectedUpdatedAt` required (optimistic concurrency). Returns `409 conflict` if stale.
+
+Activation requires an active subscription and at least 1 action step.
+
+### Delete Automation
+
+```
+DELETE /automations/{slug}
+```
+
+Deletes the flow and all its steps. Returns `{ success: true }`.
+
+### Add Step
+
+```
+POST /automations/{slug}/steps
+```
+
+**Body:**
+```json
+{
+  "stepType": "action",
+  "actionType": "send_dm",
+  "branch": "main",
+  "config": { "message": "Welcome!" },
+  "position": 0
+}
+```
+
+Step types: `action`, `condition`, `extraction`. Max 10 steps per flow.
+
+Action types: `create_tweet`, `follow`, `like`, `reply_tweet`, `retweet`, `send_dm`, `send_email`, `send_telegram`, `unfollow`.
+
+Extraction types: all 20 extraction tool types (kebab-case, e.g. `reply-extractor`). Requires `outputName` for variable reference in later steps.
+
+### Update Step
+
+```
+PATCH /automations/{slug}/steps
+```
+
+**Body:** `{ "stepId": "101", "config": {...}, "positionX": 250, "positionY": 100 }`. `stepId` required.
+
+### Delete Step
+
+```
+DELETE /automations/{slug}/steps
+```
+
+**Body:** `{ "stepId": "101" }`.
+
+### Update Step Positions
+
+```
+PATCH /automations/{slug}/steps/positions
+```
+
+Batch update canvas positions: `{ "positions": [{ "stepId": "101", "positionX": 250, "positionY": 100 }] }`.
+
+### Test Automation
+
+```
+POST /automations/{slug}/test
+```
+
+Not yet implemented. Returns `{ status: "not_implemented" }`.
+
+### Inbound Webhook Trigger
+
+```
+POST /webhooks/inbound/{token}
+```
+
+No auth header required. The URL token identifies the flow. Accepts any JSON body as trigger payload. Rate limited per flow (60/hour) and per user (300/hour).
+
+---
+
+## Support
+
+### Create Ticket
+
+```
+POST /support/tickets
+```
+
+**Body:** `{ "subject": "...", "body": "..." }`
+
+**Response (201):** `{ id, subject, status, createdAt }`
+
+### List Tickets
+
+```
+GET /support/tickets
+```
+
+Returns all tickets for the authenticated user.
+
+### Get Ticket
+
+```
+GET /support/tickets/{id}
+```
+
+Returns ticket with messages.
+
+### Update Ticket
+
+```
+PATCH /support/tickets/{id}
+```
+
+Update ticket status.
+
+### Reply to Ticket
+
+```
+POST /support/tickets/{id}/messages
+```
+
+**Body:** `{ "body": "..." }`
+
+Add a message to an existing ticket.
+
+---
+
 ## Error Codes
 
 | Status | Code | Meaning |
@@ -1275,12 +1452,15 @@ View delivery attempts and statuses. Statuses: `pending`, `delivered`, `failed`,
 | 402 | `no_addon` | No monitor addon on subscription |
 | 403 | `monitor_limit_reached` | Plan monitor limit exceeded |
 | 403 | `api_key_limit_reached` | API key limit reached (100 max) |
+| 403 | `flow_limit_reached` | Flow limit reached (free: 2, subscriber: 10) |
+| 403 | `step_limit_reached` | Step limit reached (10 per flow) |
 | 404 | `not_found` | Resource does not exist |
 | 404 | `user_not_found` | X user not found |
 | 404 | `tweet_not_found` | Tweet not found |
 | 404 | `style_not_found` | No cached style found |
 | 404 | `draft_not_found` | Draft not found |
 | 409 | `monitor_already_exists` | Duplicate monitor for same username |
+| 409 | `conflict` | Concurrent edit conflict (automation updates) |
 | 422 | `login_failed` | X credential verification failed |
 | 429 | - | Rate limited. Retry with backoff |
 | 429 | `x_api_rate_limited` | X data source rate limited. Retry |

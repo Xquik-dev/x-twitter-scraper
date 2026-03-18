@@ -1,7 +1,7 @@
 {
   "name": "x-twitter-scraper",
-  "version": "1.7.0",
-  "description": "X (Twitter) real-time data platform skill with REST API, MCP server & webhooks: tweet search, user lookup, follower extraction, engagement metrics, media download, 20 extraction tools, account monitoring, trending topics, community & Space data, giveaway draws, write actions (tweet, like, retweet, follow, DM, profile, communities), Telegram integrations.",
+  "version": "1.9.0",
+  "description": "X (Twitter) real-time data platform skill with REST API, MCP server & webhooks: tweet search, user lookup, follower extraction, engagement metrics, media download, 20 extraction tools, account monitoring, trending topics, community & Space data, giveaway draws, write actions (tweet, like, retweet, follow, DM, profile, communities), Telegram integrations, flow automations, support tickets.",
   "author": {
     "name": "Xquik",
     "url": "https://github.com/Xquik-dev"

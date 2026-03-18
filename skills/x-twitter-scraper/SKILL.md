@@ -1,11 +1,11 @@
 ---
 name: x-twitter-scraper
-description: "X API & Twitter scraper skill for AI coding agents. Builds integrations with the Xquik REST API, MCP server & webhooks: tweet search, user lookup, follower extraction, engagement metrics, giveaway contest draws, trending topics, account monitoring, reply/retweet/quote extraction, community & Space data, mutual follow checks, write actions (tweet, like, retweet, follow, DM, profile, media upload, communities), Telegram integrations. Works with Claude Code, Cursor, Codex, Copilot, Windsurf & 40+ agents."
+description: "X API & Twitter scraper skill for AI coding agents. Builds integrations with the Xquik REST API, MCP server & webhooks: tweet search, user lookup, follower extraction, engagement metrics, giveaway contest draws, trending topics, account monitoring, reply/retweet/quote extraction, community & Space data, mutual follow checks, write actions (tweet, like, retweet, follow, DM, profile, media upload, communities), flow automations, support tickets, Telegram integrations. Works with Claude Code, Cursor, Codex, Copilot, Windsurf & 40+ agents."
 compatibility: Requires internet access to call the Xquik REST API (https://xquik.com/api/v1)
 license: MIT
 metadata:
   author: Xquik
-  version: "1.8.0"
+  version: "1.9.0"
   openclaw:
     requires:
       env:
@@ -17,7 +17,7 @@ metadata:
 
 # Xquik API Integration
 
-Xquik is an X (Twitter) real-time data platform providing a REST API, HMAC webhooks, and an MCP server for AI agents. It covers account monitoring, bulk data extraction (20 tools), giveaway draws, tweet/user lookups, media downloads, follow checks, trending topics, write actions (tweet, like, retweet, follow, DM, profile, media upload, communities), and Telegram integrations.
+Xquik is an X (Twitter) real-time data platform providing a REST API, HMAC webhooks, and an MCP server for AI agents. It covers account monitoring, bulk data extraction (20 tools), giveaway draws, tweet/user lookups, media downloads, follow checks, trending topics, flow automations (trigger-driven workflows), support tickets, write actions (tweet, like, retweet, follow, DM, profile, media upload, communities), and Telegram integrations.
 
 ## Quick Reference
 
@@ -86,6 +86,12 @@ For Python examples, see [references/python-examples.md](references/python-examp
 | **Community actions** | `POST /x/communities`, `POST /x/communities/{id}/join` | Create, delete, join, leave |
 | **Create Telegram integration** | `POST /integrations` | Receive monitor events in Telegram. Free |
 | **Manage integrations** | `GET /integrations`, `PATCH /integrations/{id}` | List, update, delete, test, deliveries. Free |
+| **Create automation flow** | `POST /automations` | Trigger-driven workflows: monitor events, schedules, search, inbound webhooks |
+| **Manage automation flows** | `GET /automations`, `PATCH /automations/{slug}` | List, update, delete, activate/deactivate. Free |
+| **Add automation steps** | `POST /automations/{slug}/steps` | Action, condition, or extraction steps (max 10 per flow) |
+| **Trigger flow via webhook** | `POST /webhooks/inbound/{token}` | No auth needed. Token identifies the flow |
+| **Open support ticket** | `POST /support/tickets` | Free for all authenticated users |
+| **Manage support tickets** | `GET /support/tickets`, `POST /support/tickets/{id}/messages` | List, read, reply. Free |
 
 ## Error Handling & Retry
 
@@ -96,10 +102,10 @@ All errors return `{ "error": "error_code" }`. Key error codes:
 | 400 | `invalid_input`, `invalid_id`, `invalid_params`, `invalid_tweet_url`, `invalid_tweet_id`, `invalid_username`, `invalid_tool_type`, `invalid_format`, `missing_query`, `missing_params`, `webhook_inactive`, `no_media` | Fix the request, do not retry |
 | 401 | `unauthenticated` | Check API key |
 | 402 | `no_subscription`, `subscription_inactive`, `usage_limit_reached`, `no_addon`, `extra_usage_disabled`, `extra_usage_requires_v2`, `frozen`, `overage_limit_reached` | Subscribe, enable extra usage, or wait for quota reset |
-| 403 | `monitor_limit_reached`, `api_key_limit_reached` | Delete a monitor/key or add capacity |
+| 403 | `monitor_limit_reached`, `api_key_limit_reached`, `flow_limit_reached`, `step_limit_reached` | Delete a monitor/key/flow or add capacity |
 | 404 | `not_found`, `user_not_found`, `tweet_not_found`, `style_not_found`, `draft_not_found`, `account_not_found` | Resource doesn't exist or belongs to another account |
 | 403 | `account_needs_reauth` | Connected X account needs re-authentication |
-| 409 | `monitor_already_exists`, `account_already_connected` | Resource already exists, use the existing one |
+| 409 | `monitor_already_exists`, `account_already_connected`, `conflict` | Resource already exists or concurrent edit conflict |
 | 422 | `login_failed` | X credential verification failed. Check credentials |
 | 429 | `x_api_rate_limited` | Rate limited. Retry with exponential backoff, respect `Retry-After` header |
 | 500 | `internal_error` | Retry with backoff |
@@ -456,7 +462,7 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `follow
 
 ## MCP Server (AI Agents)
 
-The MCP server at `https://xquik.com/mcp` uses a code-execution sandbox model with 2 tools (`explore` + `xquik`). The agent writes async JavaScript arrow functions that run in a sandboxed environment with auth injected automatically. StreamableHTTP transport. API key auth (`x-api-key` header) for CLI/IDE clients; OAuth 2.1 for web clients (Claude.ai, ChatGPT Developer Mode). Supported platforms: Claude.ai, Claude Desktop, Claude Code, ChatGPT (Custom GPT, Agents SDK, Developer Mode), Codex CLI, Cursor, VS Code, Windsurf, OpenCode.
+The MCP server at `https://xquik.com/mcp` uses a code-execution sandbox model with 2 tools (`explore` + `xquik`). The agent writes async JavaScript arrow functions that run in a sandboxed environment with auth injected automatically. StreamableHTTP transport. API key auth (`x-api-key` header) for CLI/IDE clients; OAuth 2.1 for web clients (Claude.ai, ChatGPT Developer Mode). The sandbox covers all 93 REST API endpoints across 13 categories. Supported platforms: Claude.ai, Claude Desktop, Claude Code, ChatGPT (Custom GPT, Agents SDK, Developer Mode), Codex CLI, Cursor, VS Code, Windsurf, OpenCode.
 
 For setup configs per platform, read [references/mcp-setup.md](references/mcp-setup.md). For tool details with selection rules, common mistakes, and unsupported operations, read [references/mcp-tools.md](references/mcp-tools.md).
 
@@ -465,11 +471,11 @@ For setup configs per platform, read [references/mcp-setup.md](references/mcp-se
 | | MCP Server | REST API |
 |---|------------|----------|
 | **Best for** | AI agents, IDE integrations | Custom apps, scripts, backend services |
-| **Model** | 2 tools (`explore` + `xquik`) with code-execution sandbox | 77 individual endpoints |
-| **Categories** | 10: account, composition, extraction, integrations, media, monitoring, trends, twitter, x-accounts, x-write | Same |
+| **Model** | 2 tools (`explore` + `xquik`) with code-execution sandbox | 93 individual endpoints |
+| **Categories** | 13: account, automations, bot, composition, extraction, integrations, media, monitoring, support, trends, twitter, x-accounts, x-write | Same |
 | **Coverage** | Full — `xquik` tool calls any REST endpoint | Direct HTTP calls |
 | **File export** | Not available | CSV, XLSX, Markdown |
-| **Unique to REST** | - | API key management, file export (CSV/XLSX/MD), account locale update |
+| **Unique to REST** | - | API key management, file export (CSV/XLSX/MD), account locale update, automation step position batch updates |
 
 ### Workflow Patterns
 
@@ -491,13 +497,15 @@ Common multi-step sequences (all via `xquik` tool calling REST endpoints):
 - **Post a tweet:** `POST /x/accounts` (connect) -> `POST /x/tweets` with `account` + `text` (optionally `POST /x/media` first)
 - **Engage with tweets:** `POST /x/tweets/{id}/like`, `POST /x/tweets/{id}/retweet`, `POST /x/users/{id}/follow`
 - **Set up Telegram alerts:** `POST /integrations` (type=telegram, chatId, eventTypes) -> `POST /integrations/{id}/test`
+- **Create automation flow:** `POST /automations` (name, triggerType, triggerConfig) -> `POST /automations/{slug}/steps` (add actions) -> `PATCH /automations/{slug}` (activate)
+- **Open support ticket:** `POST /support/tickets` (subject, body) -> `GET /support/tickets/{id}` (check status) -> `POST /support/tickets/{id}/messages` (reply)
 
 ## Pricing & Quota
 
 - **Base plan**: $20/month (1 monitor, monthly usage quota)
 - **Extra monitors**: $5/month each
 - **Per-operation costs**: tweet search $0.003, user profile $0.0036, follower fetch $0.003, verified follower fetch $0.006, follow check $0.02, media download $0.003, article extraction $0.02
-- **Free**: account info, monitor/webhook management, radar, extraction history, cost estimates, tweet composition (compose, refine, score), style cache management (list, get, save, delete, compare), drafts, X account management (connect, list, disconnect, reauth), integration management (create, list, update, delete, test)
+- **Free**: account info, monitor/webhook management, radar, extraction history, cost estimates, tweet composition (compose, refine, score), style cache management (list, get, save, delete, compare), drafts, X account management (connect, list, disconnect, reauth), integration management (create, list, update, delete, test), automation management (create, list, update, delete, steps), support tickets (create, list, read, reply)
 - **Metered**: tweet search, user lookup, tweet lookup, follow check, media download (first download only, cached free), extractions, draws, style analysis, performance analysis, trends, write actions (tweet, like, retweet, follow, DM, profile, media upload, communities)
 - **Extra usage**: enable from dashboard to continue metered calls beyond included allowance. Tiered spending limits: $5 -> $7 -> $10 -> $15 -> $25 (increases with each paid overage invoice)
 - **Quota enforcement**: `402 usage_limit_reached` when included allowance exhausted (or `402 overage_limit_reached` if extra usage is active and spending limit reached)
