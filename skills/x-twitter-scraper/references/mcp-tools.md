@@ -25,7 +25,7 @@ interface EndpointInfo {
   method: string;
   path: string;
   summary: string;
-  category: string; // account, automations, bot, composition, extraction, integrations, media, monitoring, support, trends, twitter, x-accounts, x-write
+  category: string; // account, automations, bot, composition, extraction, integrations, media, monitoring, support, twitter, x-accounts, x-write
   free: boolean;
   parameters?: Array<{ name: string; in: 'query' | 'path' | 'body'; required: boolean; type: string; description: string }>;
   responseShape?: string;
@@ -69,6 +69,7 @@ Use `explore` first to find endpoints, then `xquik` to call them.
 | Goal | Endpoint (via `xquik`) |
 |------|------------------------|
 | Single tweet by ID or URL | `GET /api/v1/x/tweets/{id}` |
+| Full X Article by tweet ID | `GET /api/v1/x/articles/{id}` |
 | Search tweets by keyword/hashtag | `GET /api/v1/x/tweets/search?q=...` |
 | User profile, bio, follower counts | `GET /api/v1/x/users/{username}` |
 | Download media from tweets | `POST /api/v1/x/media/download` |

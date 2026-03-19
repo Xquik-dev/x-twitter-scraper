@@ -382,6 +382,29 @@ Run a bulk data extraction job. See `references/extractions.md` for all 20 tool 
 
 `resultsLimit` (optional): Maximum results to extract. Stops early instead of fetching all data. Useful for controlling costs.
 
+**Tweet Search Filters** (`tweet_search_extractor` only):
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `fromUser` | string | Author username |
+| `toUser` | string | Directed to user |
+| `mentioning` | string | Mentions user |
+| `language` | string | Language code (e.g., `en`) |
+| `sinceDate` | string | Start date (YYYY-MM-DD) |
+| `untilDate` | string | End date (YYYY-MM-DD) |
+| `mediaType` | string | `images`, `videos`, `gifs`, or `media` |
+| `minFaves` | number | Minimum likes |
+| `minRetweets` | number | Minimum retweets |
+| `minReplies` | number | Minimum replies |
+| `verifiedOnly` | boolean | Verified authors only |
+| `replies` | string | `include`, `exclude`, or `only` |
+| `retweets` | string | `include`, `exclude`, or `only` |
+| `exactPhrase` | string | Exact match text |
+| `excludeWords` | string | Comma-separated words to exclude |
+| `advancedQuery` | string | Raw X search operators appended to query |
+
+These filters are converted to X search operators and combined with `searchQuery`.
+
 **Response:**
 ```json
 {
@@ -447,6 +470,33 @@ GET /x/tweets/{id}
 ```
 
 Returns full tweet with engagement metrics (likes, retweets, replies, quotes, views, bookmarks), author info (username, followers, verified status, profile picture), and optional attached media (photos/videos with URLs).
+
+### Get Article
+
+```
+GET /x/articles/{id}
+```
+
+Retrieve the full content of an X Article (long-form post) by tweet ID. Returns title, body text with block-level formatting, cover image, inline images, and engagement metrics. Metered.
+
+**Response:**
+```json
+{
+  "title": "Why AI Will Transform Everything",
+  "coverImage": "https://pbs.twimg.com/...",
+  "bodyHtml": "<p>The future of AI...</p>",
+  "likeCount": 5200,
+  "retweetCount": 890,
+  "replyCount": 245,
+  "viewCount": 150000,
+  "bookmarkCount": 1200,
+  "author": {
+    "id": "44196397",
+    "username": "elonmusk",
+    "name": "Elon Musk"
+  }
+}
+```
 
 ### Search Tweets
 
@@ -945,7 +995,7 @@ POST /x/accounts
 
 **Response (201):** `{ id, username, isActive, createdAt }`
 
-**Errors:** `409 account_already_connected`, `422 connection_failed`
+**Errors:** `409 account_already_connected`, `422 login_failed`
 
 ### Get X Account
 
@@ -1047,7 +1097,7 @@ POST /x/users/{id}/follow
 
 **Body:** `{ "account": "username" }`
 
-**Errors:** `502 upstream_error`
+**Errors:** `502 x_write_failed`
 
 ### Unfollow User
 
@@ -1102,7 +1152,7 @@ PATCH /x/profile/banner
 POST /x/media
 ```
 
-**Body:** FormData with `account` (required), `file` (required), and `is_long_video` (optional boolean).
+**Body:** FormData with `account` (required), `file` (required), and `is_long_video` (optional boolean). Alternatively, JSON body with `account` (required) and `url` (required, direct media URL) for URL-based upload.
 
 **Response:** Returns a media ID to pass in `media_ids` when creating a tweet.
 
@@ -1410,7 +1460,7 @@ Add a message to an existing ticket.
 | 400 | `no_media` | Tweet has no downloadable media |
 | 400 | `webhook_inactive` | Webhook is disabled (test-webhook only) |
 | 401 | `unauthenticated` | Missing or invalid API key |
-| 401 | `account_needs_reauth` | X account session expired, re-authenticate |
+| 403 | `account_needs_reauth` | X account session expired, re-authenticate |
 | 402 | `no_subscription` | No active subscription |
 | 402 | `subscription_inactive` | Subscription is not active |
 | 402 | `usage_limit_reached` | Monthly usage cap exceeded |

@@ -100,13 +100,13 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Telegram integrations**: Receive real-time monitor event notifications in Telegram
 - **Flow automations**: Trigger-driven workflows with monitor events, schedules, search, and inbound webhooks. 9 action types, conditions, extractions
 - **Support tickets**: Open and manage support tickets via API
-- **MCP server integration**: Connect AI agents to X data via MCP (2-tool sandbox covering 93 endpoints)
+- **MCP server integration**: Connect AI agents to X data via MCP (2-tool sandbox covering 97 endpoints)
 
 ## Capabilities
 
 | Area | Details |
 |------|---------|
-| **REST API** | 93 endpoints across 15 resource groups with retry logic and pagination |
+| **REST API** | 97 endpoints across 12 categories with retry logic and pagination |
 | **Tweet Fetching** | Single tweet lookup with full metrics, keyword/hashtag search |
 | **User Lookup** | Profile data, follower/following counts, verified status |
 | **Follower Analysis** | Extract followers, following, verified followers for any account |
@@ -117,7 +117,7 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 | **Account Monitoring** | Real-time tracking of tweets, replies, quotes, retweets, follower changes |
 | **Webhooks** | HMAC-SHA256 signature verification in Node.js, Python, Go |
 | **Media Download** | Download images, videos, GIFs with permanent hosted URLs (first download metered, cached free) |
-| **MCP Server** | 2-tool sandbox (93 endpoints). StreamableHTTP, configs for 10 platforms |
+| **MCP Server** | 2-tool sandbox (97 endpoints). StreamableHTTP, configs for 10 platforms |
 | **Engagement Analytics** | Likes, retweets, replies, quotes, views, bookmarks per tweet |
 | **Trending Topics** | Regional trends with search queries |
 | **Tweet Composition** | Algorithm-optimized tweet composer with scoring checklist (free) |
@@ -131,7 +131,7 @@ Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code
 
 | Resource | Endpoints |
 |----------|-----------|
-| X Lookups | Tweet by ID, search tweets, user profile, follow check, download media |
+| X Lookups | Tweet by ID, article by ID, search tweets, user profile, follow check, download media |
 | Extractions | Create (20 types), estimate, list, get results, export |
 | Monitors | Create, list, get, update, delete |
 | Events | List (filtered, paginated), get single |

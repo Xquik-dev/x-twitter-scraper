@@ -293,6 +293,23 @@ interface CreateExtractionRequest {
   targetSpaceId?: string;
   searchQuery?: string;
   resultsLimit?: number; // Max results to extract. Stops early instead of fetching all. Omit for all.
+  // Tweet search filters (tweet_search_extractor only)
+  fromUser?: string;
+  toUser?: string;
+  mentioning?: string;
+  language?: string;
+  sinceDate?: string;           // YYYY-MM-DD
+  untilDate?: string;           // YYYY-MM-DD
+  mediaType?: 'images' | 'videos' | 'gifs' | 'media';
+  minFaves?: number;
+  minRetweets?: number;
+  minReplies?: number;
+  verifiedOnly?: boolean;
+  replies?: 'include' | 'exclude' | 'only';
+  retweets?: 'include' | 'exclude' | 'only';
+  exactPhrase?: string;
+  excludeWords?: string;
+  advancedQuery?: string;
 }
 
 // ─── X API ───────────────────────────────────────────────
@@ -359,6 +376,24 @@ interface FollowerCheck {
   targetUsername: string;
   isFollowing: boolean;
   isFollowedBy: boolean;
+}
+
+// ─── X Articles ─────────────────────────────────────────
+
+interface Article {
+  title: string;
+  coverImage?: string;
+  bodyHtml: string;
+  likeCount: number;
+  retweetCount: number;
+  replyCount: number;
+  viewCount: number;
+  bookmarkCount: number;
+  author: {
+    id: string;
+    username: string;
+    name: string;
+  };
 }
 
 // ─── Radar ───────────────────────────────────────────────

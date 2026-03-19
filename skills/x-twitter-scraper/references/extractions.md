@@ -117,6 +117,42 @@ The `@` prefix is automatically stripped if included.
 }
 ```
 
+### Tweet Search Filters
+
+The `tweet_search_extractor` tool type supports 16 additional filter fields that are converted to X search operators and combined with `searchQuery`:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `fromUser` | string | Author username |
+| `toUser` | string | Directed to user |
+| `mentioning` | string | Mentions user |
+| `language` | string | Language code (e.g., `en`) |
+| `sinceDate` | string | Start date (YYYY-MM-DD) |
+| `untilDate` | string | End date (YYYY-MM-DD) |
+| `mediaType` | string | `images`, `videos`, `gifs`, or `media` |
+| `minFaves` | number | Minimum likes |
+| `minRetweets` | number | Minimum retweets |
+| `minReplies` | number | Minimum replies |
+| `verifiedOnly` | boolean | Verified authors only |
+| `replies` | string | `include`, `exclude`, or `only` |
+| `retweets` | string | `include`, `exclude`, or `only` |
+| `exactPhrase` | string | Exact match text |
+| `excludeWords` | string | Comma-separated words to exclude |
+| `advancedQuery` | string | Raw X search operators appended to query |
+
+**Example with filters:**
+```json
+{
+  "toolType": "tweet_search_extractor",
+  "searchQuery": "AI",
+  "fromUser": "elonmusk",
+  "minFaves": 100,
+  "sinceDate": "2026-01-01",
+  "mediaType": "videos",
+  "resultsLimit": 500
+}
+```
+
 `resultsLimit` (optional): Maximum results to extract. Stops early instead of fetching all. Pass this on both `POST /extractions/estimate` and `POST /extractions` when you only need a specific count.
 
 ## Response

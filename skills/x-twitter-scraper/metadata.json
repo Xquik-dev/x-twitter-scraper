@@ -2,7 +2,7 @@
   "version": "1.9.0",
   "organization": "Xquik",
   "date": "March 2026",
-  "abstract": "Integration guide for the Xquik X (Twitter) real-time data platform. Covers the REST API (93 endpoints across tweet search, user lookup, media download, extractions, monitors, events, webhooks, trends, radar, compose, style analysis, drafts, draws, X account management, write actions, Telegram integrations, flow automations, and support tickets), HMAC webhook verification, MCP server setup for 10 IDEs and AI agents (code-execution sandbox with 2 tools), all 20 extraction tools, tweet composition with algorithm scoring, tweet style analysis & comparison, draft management, flow automation with 4 trigger types and 9 action types, and complete TypeScript type definitions. Code examples in JavaScript, Python, Go, and cURL.",
+  "abstract": "Integration guide for the Xquik X (Twitter) real-time data platform. Covers the REST API (97 endpoints across tweet search, user lookup, media download, extractions, monitors, events, webhooks, trends, radar, compose, style analysis, drafts, draws, X account management, write actions, Telegram integrations, flow automations, and support tickets), HMAC webhook verification, MCP server setup for 10 IDEs and AI agents (code-execution sandbox with 2 tools), all 20 extraction tools, tweet composition with algorithm scoring, tweet style analysis & comparison, draft management, flow automation with 4 trigger types and 9 action types, and complete TypeScript type definitions. Code examples in JavaScript, Python, Go, and cURL.",
   "references": [
     "https://docs.xquik.com",
     "https://docs.xquik.com/api-reference/overview",

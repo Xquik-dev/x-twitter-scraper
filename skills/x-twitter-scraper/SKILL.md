@@ -49,6 +49,7 @@ For Python examples, see [references/python-examples.md](references/python-examp
 | Goal | Endpoint | Notes |
 |------|----------|-------|
 | **Get a single tweet** by ID/URL | `GET /x/tweets/{id}` | Full metrics: likes, retweets, views, bookmarks, author info |
+| **Get an X Article** by tweet ID | `GET /x/articles/{id}` | Long-form post: title, body, cover image, engagement metrics |
 | **Search tweets** by keyword/hashtag | `GET /x/tweets/search?q=...` | Tweet info with optional engagement metrics (likeCount, retweetCount, replyCount) |
 | **Get a user profile** | `GET /x/users/{username}` | Name, bio, follower/following counts, profile picture, location, created date, statuses count |
 | **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | Both directions |
@@ -82,7 +83,7 @@ For Python examples, see [references/python-examples.md](references/python-examp
 | **Follow / Unfollow a user** | `POST` / `DELETE /x/users/{id}/follow` | Metered |
 | **Send a DM** | `POST /x/dm/{userId}` | Text, media, reply to message |
 | **Update profile** | `PATCH /x/profile` | Name, bio, location, URL |
-| **Upload media** | `POST /x/media` | FormData. Returns media ID for tweet attachment |
+| **Upload media** | `POST /x/media` | FormData or JSON (url param). Returns media ID for tweet attachment |
 | **Community actions** | `POST /x/communities`, `POST /x/communities/{id}/join` | Create, delete, join, leave |
 | **Create Telegram integration** | `POST /integrations` | Receive monitor events in Telegram. Free |
 | **Manage integrations** | `GET /integrations`, `PATCH /integrations/{id}` | List, update, delete, test, deliveries. Free |
@@ -462,7 +463,7 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `follow
 
 ## MCP Server (AI Agents)
 
-The MCP server at `https://xquik.com/mcp` uses a code-execution sandbox model with 2 tools (`explore` + `xquik`). The agent writes async JavaScript arrow functions that run in a sandboxed environment with auth injected automatically. StreamableHTTP transport. API key auth (`x-api-key` header) for CLI/IDE clients; OAuth 2.1 for web clients (Claude.ai, ChatGPT Developer Mode). The sandbox covers all 93 REST API endpoints across 13 categories. Supported platforms: Claude.ai, Claude Desktop, Claude Code, ChatGPT (Custom GPT, Agents SDK, Developer Mode), Codex CLI, Cursor, VS Code, Windsurf, OpenCode.
+The MCP server at `https://xquik.com/mcp` uses a code-execution sandbox model with 2 tools (`explore` + `xquik`). The agent writes async JavaScript arrow functions that run in a sandboxed environment with auth injected automatically. StreamableHTTP transport. API key auth (`x-api-key` header) for CLI/IDE clients; OAuth 2.1 for web clients (Claude.ai, ChatGPT Developer Mode). The sandbox covers all 97 REST API endpoints across 12 categories. Supported platforms: Claude.ai, Claude Desktop, Claude Code, ChatGPT (Custom GPT, Agents SDK, Developer Mode), Codex CLI, Cursor, VS Code, Windsurf, OpenCode.
 
 For setup configs per platform, read [references/mcp-setup.md](references/mcp-setup.md). For tool details with selection rules, common mistakes, and unsupported operations, read [references/mcp-tools.md](references/mcp-tools.md).
 
@@ -471,8 +472,8 @@ For setup configs per platform, read [references/mcp-setup.md](references/mcp-se
 | | MCP Server | REST API |
 |---|------------|----------|
 | **Best for** | AI agents, IDE integrations | Custom apps, scripts, backend services |
-| **Model** | 2 tools (`explore` + `xquik`) with code-execution sandbox | 93 individual endpoints |
-| **Categories** | 13: account, automations, bot, composition, extraction, integrations, media, monitoring, support, trends, twitter, x-accounts, x-write | Same |
+| **Model** | 2 tools (`explore` + `xquik`) with code-execution sandbox | 97 individual endpoints |
+| **Categories** | 12: account, automations, bot, composition, extraction, integrations, media, monitoring, support, twitter, x-accounts, x-write | Same |
 | **Coverage** | Full — `xquik` tool calls any REST endpoint | Direct HTTP calls |
 | **File export** | Not available | CSV, XLSX, Markdown |
 | **Unique to REST** | - | API key management, file export (CSV/XLSX/MD), account locale update, automation step position batch updates |
