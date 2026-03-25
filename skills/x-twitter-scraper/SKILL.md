@@ -115,9 +115,13 @@ Monitors, webhooks, integrations, account status, radar (7 sources), extraction/
 | **Monitoring + webhooks** | **Free** | Not available | Not available |
 | **Giveaway draws** | **$0.00015/entry** | Not available | Not available |
 
-### Pay-Per-Use (MPP)
+### Pay-Per-Use
 
-No subscription needed. 8 endpoints accept anonymous payments via Tempo (USDC).
+Two options without a monthly subscription:
+
+**Credits (Stripe)**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 99 endpoints.
+
+**MPP (USDC)**: 8 X-API read endpoints accept anonymous payments via Tempo (USDC). No account needed.
 
 | Endpoint | Price | Unit |
 |----------|-------|------|

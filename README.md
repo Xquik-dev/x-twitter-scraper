@@ -35,7 +35,10 @@ Xquik is dramatically cheaper than every alternative for X/Twitter data access.
 
 ### Pay-Per-Use (No Subscription)
 
-8 endpoints accept anonymous payments via Machine Payments Protocol (USDC). No account needed. Same per-call prices as subscription. SDK: `npm i mppx`.
+Two options for pay-per-use without a monthly subscription:
+
+- **Credits (Stripe)**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 99 endpoints.
+- **MPP (USDC)**: 8 X-API read endpoints accept anonymous payments via Machine Payments Protocol. No account needed. SDK: `npm i mppx`.
 
 ## Installation
 
