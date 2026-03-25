@@ -26,6 +26,7 @@ All requests require the `x-api-key` header. All responses are JSON. HTTPS only.
 - [X Write](#x-write)
 - [Integrations](#integrations)
 - [Automations](#automations)
+- [Credits](#credits)
 - [Support](#support)
 
 ---
@@ -523,6 +524,78 @@ GET /x/followers/check?source={username}&target={username}
 ```
 
 Returns `isFollowing` and `isFollowedBy` for both directions.
+
+### Get User Tweets
+
+```
+GET /x/users/{id}/tweets
+```
+
+Get a user's recent tweets by user ID. Metered (1 credit/tweet).
+
+### Get User Likes
+
+```
+GET /x/users/{id}/likes
+```
+
+Get tweets liked by a user. Metered (1 credit/result).
+
+### Get User Media
+
+```
+GET /x/users/{id}/media
+```
+
+Get a user's media tweets (tweets containing photos/videos). Metered (1 credit/result).
+
+### Get Tweet Favoriters
+
+```
+GET /x/tweets/{id}/favoriters
+```
+
+Get users who liked a tweet. Metered (1 credit/result).
+
+### Get Mutual Followers
+
+```
+GET /x/users/{id}/followers-you-know
+```
+
+Get mutual followers (followers you know). Metered (1 credit/result).
+
+### Get Bookmarks
+
+```
+GET /x/bookmarks
+```
+
+Get bookmarked tweets. Requires a connected X account. Metered (1 credit/result).
+
+### Get Bookmark Folders
+
+```
+GET /x/bookmarks/folders
+```
+
+Get bookmark folders. Requires a connected X account. Metered (1 credit).
+
+### Get Notifications
+
+```
+GET /x/notifications
+```
+
+Get notifications with type filter. Requires a connected X account. Metered (1 credit/result).
+
+### Get Home Timeline
+
+```
+GET /x/timeline
+```
+
+Get home timeline. Requires a connected X account. Metered (1 credit/result).
 
 ---
 
@@ -1122,6 +1195,14 @@ POST /x/dm/{userId}
 | `media_ids` | string[] | No | Media IDs to attach |
 | `reply_to_message_id` | string | No | Message ID to reply to |
 
+### Get DM History
+
+```
+GET /x/dm/{userId}/history
+```
+
+Get DM conversation history with a user. Requires a connected X account. Metered (1 credit/result).
+
 ### Update Profile
 
 ```
@@ -1136,6 +1217,8 @@ PATCH /x/profile
 PATCH /x/profile/avatar
 ```
 
+Update profile avatar. Max 700 KB, GIF/JPEG/PNG. Metered (2 credits).
+
 **Body:** FormData with `account` (required) and `file` (required, max 700 KB).
 
 ### Update Banner
@@ -1143,6 +1226,8 @@ PATCH /x/profile/avatar
 ```
 PATCH /x/profile/banner
 ```
+
+Update profile banner. Max 2 MB, GIF/JPEG/PNG. Metered (2 credits).
 
 **Body:** FormData with `account` (required) and `file` (required, max 2 MB).
 
@@ -1391,6 +1476,26 @@ POST /webhooks/inbound/{token}
 ```
 
 No auth header required. The URL token identifies the flow. Accepts any JSON body as trigger payload. Rate limited per flow (60/hour) and per user (300/hour).
+
+---
+
+## Credits
+
+### Get Credit Balance
+
+```
+GET /credits
+```
+
+Get credit balance, lifetime purchased/used, and auto top-up status. Free.
+
+### Top Up Credits
+
+```
+POST /credits/topup
+```
+
+Get a Stripe checkout URL to purchase credits ($10 minimum). Free.
 
 ---
 

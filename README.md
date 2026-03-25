@@ -1,8 +1,41 @@
 # X API / Twitter Scraper Skill for AI Coding Agents
 
-An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. Search and extract tweets, download media, scrape follower/following lists, monitor accounts, and connect to the MCP server for AI-native workflows.
+An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. 99 REST API endpoints, 9 MCP tools, HMAC webhooks, 20 bulk extraction tools, and write actions.
+
+**The cheapest X data API on the market** — reads from $0.00015/call (66x cheaper than the official X API).
 
 Works with **40+ AI coding agents** including Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code, Cline, Roo Code, Goose, Amp, Augment, Continue, OpenHands, Trae, OpenCode, and more.
+
+## Pricing
+
+Xquik is dramatically cheaper than every alternative for X/Twitter data access.
+
+### vs Official X API
+
+| | Xquik | X API Basic | X API Pro |
+|---|---|---|---|
+| **Monthly cost** | **$20** | $100 | $5,000 |
+| **Cost per tweet read** | **$0.00015** | ~$0.01 | ~$0.005 |
+| **Cost per user lookup** | **$0.00015** | ~$0.01 | ~$0.005 |
+| **Write actions** | **$0.0003** | Limited | Limited |
+| **Bulk extraction** | **$0.00015/result** | Not available | Not available |
+| **Monitoring + webhooks** | **Free** | Not available | Not available |
+| **Giveaway draws** | **$0.00015/entry** | Not available | Not available |
+| **MCP server** | **Included** | Not available | Not available |
+
+### Per-Operation Costs (1 credit = $0.00015)
+
+| Operation | Credits | Cost |
+|-----------|---------|------|
+| Read (tweet, user, search, timeline, bookmarks, etc.) | 1 | $0.00015 |
+| Follow check, article | 7 | $0.00105 |
+| Write (tweet, like, retweet, follow, DM, etc.) | 2 | $0.0003 |
+| Extraction / draw | 1/result | $0.00015/result |
+| Monitors, webhooks, radar, compose, drafts, integrations | 0 | **Free** |
+
+### Pay-Per-Use (No Subscription)
+
+8 endpoints accept anonymous payments via Machine Payments Protocol (USDC). No account needed. Same per-call prices as subscription. SDK: `npm i mppx`.
 
 ## Installation
 
@@ -82,45 +115,51 @@ git clone https://github.com/Xquik-dev/x-twitter-scraper.git .agents/skills/x-tw
 
 When installed, this skill gives your AI coding assistant deep knowledge of the Xquik platform:
 
-- **Tweet search & lookup**: Search tweets by keyword, hashtag, advanced operators (`from:`, `to:`, `"exact phrase"`, `OR`, `-exclude`). Get full engagement metrics (likes, retweets, replies, views, bookmarks) for any tweet
+- **Tweet search & lookup**: Search tweets by keyword, hashtag, advanced operators. Get full engagement metrics for any tweet
 - **User profile lookup**: Fetch follower/following counts, bio, location, and profile data for any X account
-- **Follower & following extraction**: Extract complete follower lists, verified followers, and following lists for any account
-- **Reply, retweet & quote extraction**: Bulk extract all replies, retweets, and quote tweets for any tweet
-- **Media download**: Download images, videos, and GIFs from any tweet with permanent hosted URLs
+- **User activity feeds**: Get user's recent tweets, liked tweets, and media tweets
+- **Tweet engagement data**: Get who liked (favoriters) any tweet, mutual followers between accounts
+- **Follower & following extraction**: Extract complete follower lists, verified followers, and following lists
+- **Reply, retweet & quote extraction**: Bulk extract all replies, retweets, and quote tweets
+- **Media download**: Download images, videos, and GIFs with permanent hosted URLs
 - **Thread & article extraction**: Extract full tweet threads and linked article content
 - **Community & Space data**: Extract community members, moderators, posts, and Space participants
-- **People & tweet search extraction**: Bulk search for users by keyword or extract tweets by hashtag (up to 1,000)
+- **Bookmarks & notifications**: Access bookmarks, bookmark folders, notifications, and home timeline
+- **DM history**: Retrieve conversation history with any user
 - **Mutual follow checker**: Check if two accounts follow each other
-- **X account monitoring**: Track accounts for new tweets, replies, quotes, retweets, and follower changes in real time
+- **X account monitoring**: Track accounts for new tweets, replies, quotes, retweets, and follower changes
 - **Webhook delivery**: Receive HMAC-signed event notifications at your HTTPS endpoint
 - **Trending topics**: Get trending hashtags and topics by region
 - **Radar**: Trending news from 7 sources (Google Trends, Hacker News, Polymarket, TrustMRR, Wikipedia, GitHub, Reddit). Free
 - **Giveaway draws**: Run transparent draws from tweet replies with configurable filters
-- **Write actions**: Post tweets, like, retweet, follow/unfollow, send DMs, update profile, upload media, manage communities via connected X accounts
+- **Write actions**: Post tweets, like, retweet, follow/unfollow, send DMs, update profile, upload media, manage communities
 - **Telegram integrations**: Receive real-time monitor event notifications in Telegram
-- **Flow automations**: Trigger-driven workflows with monitor events, schedules, search, and inbound webhooks. 9 action types, conditions, extractions
+- **Flow automations**: Trigger-driven workflows with monitor events, schedules, search, and inbound webhooks
+- **Tweet composition**: Algorithm-optimized tweet composer with scoring (free)
+- **Credits & billing**: Check balance, top up credits, manage subscription
 - **Support tickets**: Open and manage support tickets via API
-- **MCP server integration**: Connect AI agents to X data via MCP (2-tool sandbox covering 97 endpoints)
+- **MCP server**: 9 tools covering 99 endpoints for AI agent integration
+- **Pay-per-use (MPP)**: Anonymous access to 8 endpoints via USDC, no account needed
 
 ## Capabilities
 
 | Area | Details |
 |------|---------|
-| **REST API** | 97 endpoints across 12 categories with retry logic and pagination |
-| **Tweet Fetching** | Single tweet lookup with full metrics, keyword/hashtag search |
-| **User Lookup** | Profile data, follower/following counts, verified status |
-| **Follower Analysis** | Extract followers, following, verified followers for any account |
+| **REST API** | 99 endpoints across 12 categories with retry logic and pagination |
+| **MCP Server** | 9 tools (explore + xquik + 7 radar). StreamableHTTP, configs for 10 platforms |
 | **Data Extraction** | 20 bulk extraction tools (replies, retweets, quotes, threads, articles, communities, lists, Spaces, people search, tweet search, mentions, posts) |
+| **X Lookups** | Tweet, user, article, search, user tweets, user likes, user media, favoriters, mutual followers, bookmarks, notifications, timeline, DM history |
+| **Write Actions** | Post/delete tweets, like/unlike, retweet, follow/unfollow, DM, profile update, avatar/banner, media upload, community actions |
 | **Giveaway Draws** | Random winner selection from tweet replies with 11 filter options |
-| **Write Actions** | Post/delete tweets, like/unlike, retweet, follow/unfollow, DM, profile update, media upload, community actions |
-| **Telegram Integrations** | Real-time monitor event notifications via Telegram bot |
 | **Account Monitoring** | Real-time tracking of tweets, replies, quotes, retweets, follower changes |
 | **Webhooks** | HMAC-SHA256 signature verification in Node.js, Python, Go |
-| **Media Download** | Download images, videos, GIFs with permanent hosted URLs (first download metered, cached free) |
-| **MCP Server** | 2-tool sandbox (97 endpoints). StreamableHTTP, configs for 10 platforms |
+| **Telegram Integrations** | Real-time monitor event notifications via Telegram bot |
+| **Media Download** | Download images, videos, GIFs with permanent hosted URLs |
 | **Engagement Analytics** | Likes, retweets, replies, quotes, views, bookmarks per tweet |
-| **Trending Topics** | Regional trends with search queries |
+| **Trending Topics** | Regional trends + 7 free news sources via Radar |
 | **Tweet Composition** | Algorithm-optimized tweet composer with scoring checklist (free) |
+| **Credits & Billing** | Check balance, top up, manage subscription via API |
+| **Pay-Per-Use (MPP)** | 8 endpoints with anonymous USDC payments, no account needed |
 | **TypeScript Types** | Complete type definitions for all API objects |
 
 ## Supported Agents
@@ -131,7 +170,7 @@ Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code
 
 | Resource | Endpoints |
 |----------|-----------|
-| X Lookups | Tweet by ID, article by ID, search tweets, user profile, follow check, download media |
+| X Lookups | Tweet, article, search, user profile, user tweets, user likes, user media, favoriters, followers you know, follow check, download media, bookmarks, bookmark folders, notifications, timeline, DM history |
 | Extractions | Create (20 types), estimate, list, get results, export |
 | Monitors | Create, list, get, update, delete |
 | Events | List (filtered, paginated), get single |
@@ -143,6 +182,7 @@ Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code
 | Compose | Tweet composition (compose, refine, score) |
 | Drafts | Create, list, get, delete |
 | Account | Get account, update locale, set X identity, subscribe |
+| Credits | Get balance, top up |
 | API Keys | Create, list, revoke |
 | X Accounts | Connect, list, get, disconnect, re-authenticate |
 | X Write | Tweet, delete, like, unlike, retweet, follow, unfollow, DM, profile, avatar, banner, media upload, communities |
@@ -156,7 +196,7 @@ Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code
 x-twitter-scraper/
 ├── skills/
 │   └── x-twitter-scraper/
-│       ├── SKILL.md                      # Main skill (auth, endpoints, patterns)
+│       ├── SKILL.md                      # Main skill (auth, pricing, endpoints, patterns)
 │       ├── metadata.json                 # Version and references
 │       └── references/
 │           ├── api-endpoints.md          # All REST API endpoints
@@ -179,6 +219,7 @@ x-twitter-scraper/
 - [API Documentation](https://docs.xquik.com)
 - [API Reference](https://docs.xquik.com/api-reference/overview)
 - [MCP Server Guide](https://docs.xquik.com/mcp/overview)
+- [Billing & Pricing](https://docs.xquik.com/guides/billing)
 - [skills.sh Page](https://skills.sh/Xquik-dev/x-twitter-scraper)
 
 ## License

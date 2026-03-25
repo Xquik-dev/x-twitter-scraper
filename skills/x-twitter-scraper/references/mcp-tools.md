@@ -25,7 +25,7 @@ interface EndpointInfo {
   method: string;
   path: string;
   summary: string;
-  category: string; // account, automations, bot, composition, extraction, integrations, media, monitoring, support, twitter, x-accounts, x-write
+  category: string; // account, automations, bot, composition, credits, extraction, integrations, media, monitoring, support, twitter, x-accounts, x-write
   free: boolean;
   parameters?: Array<{ name: string; in: 'query' | 'path' | 'body'; required: boolean; type: string; description: string }>;
   responseShape?: string;
@@ -106,6 +106,18 @@ Use `explore` first to find endpoints, then `xquik` to call them.
 | Activate/deactivate flow | `PATCH /api/v1/automations/{slug}` |
 | Open support ticket | `POST /api/v1/support/tickets` |
 | List support tickets | `GET /api/v1/support/tickets` |
+| Get user's recent tweets | `GET /api/v1/x/users/{id}/tweets` |
+| Get user's liked tweets | `GET /api/v1/x/users/{id}/likes` |
+| Get user's media tweets | `GET /api/v1/x/users/{id}/media` |
+| Get tweet favoriters (who liked) | `GET /api/v1/x/tweets/{id}/favoriters` |
+| Get mutual followers | `GET /api/v1/x/users/{id}/followers-you-know` |
+| Get bookmarks | `GET /api/v1/x/bookmarks` |
+| Get bookmark folders | `GET /api/v1/x/bookmarks/folders` |
+| Get notifications | `GET /api/v1/x/notifications` |
+| Get home timeline | `GET /api/v1/x/timeline` |
+| Get DM history | `GET /api/v1/x/dm/{userId}/history` |
+| Check credit balance | `GET /api/v1/credits` |
+| Top up credits | `POST /api/v1/credits/topup` |
 
 Use `POST /api/v1/extractions` ONLY for bulk data that simpler endpoints cannot provide (all followers, all replies to a tweet, community members, etc.). Always call `POST /api/v1/extractions/estimate` first.
 
@@ -144,10 +156,10 @@ These are NOT available via the MCP server:
 - File export (CSV, XLSX, Markdown)
 - Account locale update
 - Scheduled tweets
-- Bookmark management
+
 - Direct X search (use extraction `tweet_search_extractor` for bulk search)
 
 ## Cost Reference
 
-- **Free**: account info, compose (all steps), styles (cached lookup/save/delete/compare), drafts, radar, radar source tools (github-trending, google-trends, hacker-news-trending, polymarket-trending, reddit-trending, startup-trending, wikipedia-trending), subscribe, API keys, bot endpoints, integrations, X account management, automations (create, list, update, delete, steps), support tickets
+- **Free**: account info, compose (all steps), styles (cached lookup/save/delete/compare), drafts, radar, radar source tools (github-trending, google-trends, hacker-news-trending, polymarket-trending, reddit-trending, startup-trending, wikipedia-trending), subscribe, API keys, bot endpoints, integrations, X account management, automations (create, list, update, delete, steps), support tickets, credits (balance check, top up)
 - **Subscription required**: tweet search, user lookup, tweet lookup, follow check, media download (first only, cached free), extractions, draws, style analysis (X API refresh), performance analysis, trends, all write actions (tweet, like, retweet, follow, DM, profile, media upload, communities)

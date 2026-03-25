@@ -6,6 +6,7 @@ Copy-pasteable TypeScript types for all Xquik API objects.
 
 - [Account](#account)
 - [API Keys](#api-keys)
+- [Credits](#credits)
 - [Monitors](#monitors)
 - [Events](#events)
 - [Webhooks](#webhooks)
@@ -32,6 +33,19 @@ interface Account {
     end: string;
     usagePercent: number;
   };
+}
+
+// ─── Credits ────────────────────────────────────────────
+
+interface CreditBalance {
+  balance: number;              // Current credit balance
+  lifetimePurchased: number;    // Total credits purchased
+  lifetimeUsed: number;         // Total credits consumed
+  autoTopUp: boolean;           // Whether auto top-up is enabled
+}
+
+interface CreditTopUpResponse {
+  url: string;                  // Stripe checkout URL
 }
 
 // ─── API Keys ────────────────────────────────────────────
@@ -376,6 +390,81 @@ interface FollowerCheck {
   targetUsername: string;
   isFollowing: boolean;
   isFollowedBy: boolean;
+}
+
+// ─── User Activity ──────────────────────────────────────
+
+interface UserTweetsResponse {
+  tweets: Tweet[];
+  hasMore: boolean;
+  nextCursor?: string;
+}
+
+interface UserLikesResponse {
+  tweets: Tweet[];
+  hasMore: boolean;
+  nextCursor?: string;
+}
+
+interface UserMediaResponse {
+  tweets: Tweet[];
+  hasMore: boolean;
+  nextCursor?: string;
+}
+
+interface TweetFavoritersResponse {
+  users: UserProfile[];
+  hasMore: boolean;
+  nextCursor?: string;
+}
+
+interface FollowersYouKnowResponse {
+  users: UserProfile[];
+  hasMore: boolean;
+  nextCursor?: string;
+}
+
+// ─── Bookmarks & Timeline ───────────────────────────────
+
+interface BookmarksResponse {
+  tweets: Tweet[];
+  hasMore: boolean;
+  nextCursor?: string;
+}
+
+interface BookmarkFolder {
+  id: string;
+  name: string;
+}
+
+interface BookmarkFoldersResponse {
+  folders: BookmarkFolder[];
+}
+
+interface NotificationsResponse {
+  notifications: Notification[];
+  hasMore: boolean;
+  nextCursor?: string;
+}
+
+interface TimelineResponse {
+  tweets: Tweet[];
+  hasMore: boolean;
+  nextCursor?: string;
+}
+
+interface DmHistoryResponse {
+  messages: DmMessage[];
+  hasMore: boolean;
+  nextCursor?: string;
+}
+
+interface DmMessage {
+  id: string;
+  text: string;
+  senderId: string;
+  createdAt: string;
+  media?: TweetMediaItem[];
 }
 
 // ─── X Articles ─────────────────────────────────────────

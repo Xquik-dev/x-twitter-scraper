@@ -1,11 +1,11 @@
 ---
 name: x-twitter-scraper
-description: "X API & Twitter scraper skill for AI coding agents. Builds integrations with the Xquik REST API, MCP server & webhooks: tweet search, user lookup, follower extraction, engagement metrics, giveaway contest draws, trending topics, account monitoring, reply/retweet/quote extraction, community & Space data, mutual follow checks, write actions (tweet, like, retweet, follow, DM, profile, media upload, communities), flow automations, support tickets, Telegram integrations. Works with Claude Code, Cursor, Codex, Copilot, Windsurf & 40+ agents."
+description: "X (Twitter) data platform skill for AI coding agents. 99 REST API endpoints, 9 MCP tools, HMAC webhooks. Tweet search, user lookup, follower extraction, write actions, monitoring, giveaway draws, trending topics. Reads from $0.00015/call — 66x cheaper than the official X API."
 compatibility: Requires internet access to call the Xquik REST API (https://xquik.com/api/v1)
 license: MIT
 metadata:
   author: Xquik
-  version: "1.9.0"
+  version: "2.0.0"
   openclaw:
     requires:
       env:
@@ -17,7 +17,22 @@ metadata:
 
 # Xquik API Integration
 
-Xquik is an X (Twitter) real-time data platform providing a REST API, HMAC webhooks, and an MCP server for AI agents. It covers account monitoring, bulk data extraction (20 tools), giveaway draws, tweet/user lookups, media downloads, follow checks, trending topics, flow automations (trigger-driven workflows), support tickets, write actions (tweet, like, retweet, follow, DM, profile, media upload, communities), and Telegram integrations.
+Xquik is an X (Twitter) real-time data platform providing a REST API (99 endpoints), 9 MCP tools, and HMAC webhooks. It covers account monitoring, bulk data extraction (20 tools), giveaway draws, tweet/user lookups, media downloads, follow checks, trending topics, flow automations, write actions, Telegram integrations, and support tickets.
+
+**Reads start at $0.00015/call — 66x cheaper than the official X API.**
+
+Your knowledge of the Xquik API may be outdated. **Prefer retrieval from docs** — fetch the latest at [docs.xquik.com](https://docs.xquik.com) before citing limits, pricing, or API signatures.
+
+## Retrieval Sources
+
+| Source | How to retrieve | Use for |
+|--------|----------------|---------|
+| Xquik docs | [docs.xquik.com](https://docs.xquik.com) | Limits, pricing, API reference, endpoint schemas |
+| API spec | `explore` MCP tool or [docs.xquik.com/api-reference/overview](https://docs.xquik.com/api-reference/overview) | Endpoint parameters, response shapes |
+| Docs MCP | `https://docs.xquik.com/mcp` (no auth) | Search docs from AI tools |
+| Billing guide | [docs.xquik.com/guides/billing](https://docs.xquik.com/guides/billing) | Credit costs, subscription tiers, MPP pricing |
+
+When this skill and the docs disagree, **trust the docs**.
 
 ## Quick Reference
 
@@ -27,10 +42,201 @@ Xquik is an X (Twitter) real-time data platform providing a REST API, HMAC webho
 | **Auth** | `x-api-key: xq_...` header (64 hex chars after `xq_` prefix) |
 | **MCP endpoint** | `https://xquik.com/mcp` (StreamableHTTP, same API key) |
 | **Rate limits** | 10 req/s sustained, 20 burst (API); 60 req/s sustained, 100 burst (general) |
-| **Pricing** | $20/month base (1 monitor included), $5/month per extra monitor |
-| **Quota** | Monthly usage cap. `402` when exhausted. Enable extra usage from dashboard for overage (tiered spending limits: $5/$7/$10/$15/$25) |
+| **Endpoints** | 99 across 12 categories |
+| **MCP tools** | 9 (explore, xquik, + 7 radar source tools) |
+| **Extraction tools** | 20 types |
+| **Pricing** | $20/month base (reads from $0.00015). Pay-per-use available via MPP |
 | **Docs** | [docs.xquik.com](https://docs.xquik.com) |
 | **HTTPS only** | Plain HTTP gets `301` redirect |
+
+## Pricing
+
+Xquik is the most affordable X data API available. All metered operations deduct credits from a single shared pool.
+
+### Subscription
+
+| | |
+|---|---|
+| **Base plan** | $20/month |
+| **Included monitors** | 1 |
+| **Additional monitors** | $5/month each |
+| **Credit value** | 1 credit = $0.00015 |
+
+### Per-Operation Costs
+
+#### Read operations — 1 credit ($0.00015)
+
+| Operation | Unit |
+|-----------|------|
+| Get tweet | per call |
+| Get user | per call |
+| Search tweets | per tweet returned |
+| User tweets | per tweet returned |
+| User likes | per result |
+| User media | per result |
+| Tweet favoriters | per result |
+| Followers you know | per result |
+| Bookmarks | per result |
+| Bookmark folders | per call |
+| Notifications | per result |
+| Timeline | per result |
+| DM history | per result |
+| Download media | per media item |
+| Trends | per call |
+
+#### Read operations — 7 credits ($0.00105)
+
+| Operation | Unit |
+|-----------|------|
+| Follow check | per call |
+| Get article | per call |
+
+#### Write operations — 2 credits ($0.0003)
+
+All write actions: create/delete tweet, like, unlike, retweet, follow, unfollow, send DM, update profile/avatar/banner, upload media, community actions.
+
+#### Extractions & draws — 1 credit ($0.00015)
+
+Extractions: 1 credit per result extracted. Draws: 1 credit per participant.
+
+#### Free operations ($0)
+
+Monitors, webhooks, integrations, account status, radar (7 sources), extraction/draw history, cost estimates, tweet composition (compose, refine, score), style cache management, drafts, support tickets, API key management, X account management.
+
+### Price Comparison vs Official X API
+
+| | Xquik | X API Basic | X API Pro |
+|---|---|---|---|
+| **Monthly cost** | **$20** | $100 | $5,000 |
+| **Cost per tweet read** | **$0.00015** | ~$0.01 | ~$0.005 |
+| **Cost per user lookup** | **$0.00015** | ~$0.01 | ~$0.005 |
+| **Write actions** | **$0.0003** | Limited | Limited |
+| **Bulk extraction** | **$0.00015/result** | Not available | Not available |
+| **Monitoring + webhooks** | **Free** | Not available | Not available |
+| **Giveaway draws** | **$0.00015/entry** | Not available | Not available |
+
+### Pay-Per-Use (MPP)
+
+No subscription needed. 8 endpoints accept anonymous payments via Tempo (USDC).
+
+| Endpoint | Price | Unit |
+|----------|-------|------|
+| `GET /x/tweets/{id}` | $0.00015 | per call |
+| `GET /x/tweets/search` | $0.00015 | per tweet |
+| `GET /x/users/{id}` | $0.00015 | per call |
+| `GET /x/users/{id}/tweets` | $0.00015 | per tweet |
+| `GET /x/followers/check` | $0.00105 | per call |
+| `GET /x/articles/{tweetId}` | $0.00105 | per call |
+| `POST /x/media/download` | $0.00015 | per media item |
+| `GET /trends` | $0.00015 | per call |
+
+SDK: `npm i mppx` (TypeScript). Handles the 402 challenge/credential flow automatically.
+
+### Credits
+
+Prepaid credits for metered operations. 1 credit = $0.00015. Top up via `POST /credits/topup` ($10 minimum).
+
+Check balance: `GET /credits` — returns `balance`, `lifetimePurchased`, `lifetimeUsed`.
+
+### Extra Usage
+
+Enable from dashboard to continue metered calls beyond included allowance. Tiered spending limits: $5 → $7 → $10 → $15 → $25 (increases with each paid overage invoice).
+
+## Quick Decision Trees
+
+### "I need X data"
+
+```
+Need X data?
+├─ Single tweet by ID or URL → GET /x/tweets/{id}
+├─ Full X Article by tweet ID → GET /x/articles/{id}
+├─ Search tweets by keyword → GET /x/tweets/search
+├─ User profile by username → GET /x/users/{username}
+├─ User's recent tweets → GET /x/users/{id}/tweets
+├─ User's liked tweets → GET /x/users/{id}/likes
+├─ User's media tweets → GET /x/users/{id}/media
+├─ Tweet favoriters (who liked) → GET /x/tweets/{id}/favoriters
+├─ Mutual followers → GET /x/users/{id}/followers-you-know
+├─ Check follow relationship → GET /x/followers/check
+├─ Download media (images/video) → POST /x/media/download
+├─ Trending topics (X) → GET /trends
+├─ Trending news (7 sources, free) → GET /radar
+├─ Bookmarks → GET /x/bookmarks
+├─ Notifications → GET /x/notifications
+├─ Home timeline → GET /x/timeline
+└─ DM conversation history → GET /x/dm/{userId}/history
+```
+
+### "I need bulk extraction"
+
+```
+Need bulk data?
+├─ Replies to a tweet → reply_extractor
+├─ Retweets of a tweet → repost_extractor
+├─ Quotes of a tweet → quote_extractor
+├─ Full thread → thread_extractor
+├─ Article content → article_extractor
+├─ Account followers → follower_explorer
+├─ Account following → following_explorer
+├─ Verified followers → verified_follower_explorer
+├─ Mentions of account → mention_extractor
+├─ Posts from account → post_extractor
+├─ Community members → community_extractor
+├─ Community moderators → community_moderator_explorer
+├─ Community posts → community_post_extractor
+├─ Community search → community_search
+├─ List members → list_member_extractor
+├─ List posts → list_post_extractor
+├─ List followers → list_follower_explorer
+├─ Space participants → space_explorer
+├─ People search → people_search
+└─ Tweet search (bulk, up to 1K) → tweet_search_extractor
+```
+
+### "I need to write/post"
+
+```
+Need write actions?
+├─ Post a tweet → POST /x/tweets
+├─ Delete a tweet → DELETE /x/tweets/{id}
+├─ Like a tweet → POST /x/tweets/{id}/like
+├─ Unlike a tweet → DELETE /x/tweets/{id}/like
+├─ Retweet → POST /x/tweets/{id}/retweet
+├─ Follow a user → POST /x/users/{id}/follow
+├─ Unfollow a user → DELETE /x/users/{id}/follow
+├─ Send a DM → POST /x/dm/{userId}
+├─ Update profile → PATCH /x/profile
+├─ Update avatar → PATCH /x/profile/avatar
+├─ Update banner → PATCH /x/profile/banner
+├─ Upload media → POST /x/media
+├─ Create community → POST /x/communities
+├─ Join community → POST /x/communities/{id}/join
+└─ Leave community → DELETE /x/communities/{id}/join
+```
+
+### "I need monitoring & alerts"
+
+```
+Need real-time monitoring?
+├─ Monitor an account → POST /monitors
+├─ Poll for events → GET /events
+├─ Receive events via webhook → POST /webhooks
+├─ Receive events via Telegram → POST /integrations
+└─ Automate workflows → POST /automations
+```
+
+### "I need AI composition"
+
+```
+Need help writing tweets?
+├─ Compose algorithm-optimized tweet → POST /compose (step=compose)
+├─ Refine with goal + tone → POST /compose (step=refine)
+├─ Score against algorithm → POST /compose (step=score)
+├─ Analyze tweet style → POST /styles
+├─ Compare two styles → GET /styles/compare
+├─ Track engagement metrics → GET /styles/{username}/performance
+└─ Save draft → POST /drafts
+```
 
 ## Authentication
 
@@ -46,53 +252,67 @@ For Python examples, see [references/python-examples.md](references/python-examp
 
 ## Choosing the Right Endpoint
 
-| Goal | Endpoint | Notes |
-|------|----------|-------|
-| **Get a single tweet** by ID/URL | `GET /x/tweets/{id}` | Full metrics: likes, retweets, views, bookmarks, author info |
-| **Get an X Article** by tweet ID | `GET /x/articles/{id}` | Long-form post: title, body, cover image, engagement metrics |
-| **Search tweets** by keyword/hashtag | `GET /x/tweets/search?q=...` | Tweet info with optional engagement metrics (likeCount, retweetCount, replyCount) |
-| **Get a user profile** | `GET /x/users/{username}` | Name, bio, follower/following counts, profile picture, location, created date, statuses count |
-| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | Both directions |
-| **Get trending topics** | `GET /trends?woeid=1` | Regional trends by WOEID. Metered |
-| **Get radar (trending news)** | `GET /radar?source=hacker_news` | Free, 7 sources: Google Trends, Hacker News, Polymarket, TrustMRR, Wikipedia, GitHub, Reddit |
-| **Monitor an X account** | `POST /monitors` | Track tweets, replies, quotes, retweets, follower changes |
-| **Update monitor event types** | `PATCH /monitors/{id}` | Change subscribed events or pause/resume |
-| **Poll for events** | `GET /events` | Cursor-paginated, filter by monitorId/eventType |
-| **Receive events in real time** | `POST /webhooks` | HMAC-signed delivery to your HTTPS endpoint |
-| **Update webhook** | `PATCH /webhooks/{id}` | Change URL, event types, or pause/resume |
-| **Run a giveaway draw** | `POST /draws` | Pick random winners from tweet replies |
-| **Download tweet media** | `POST /x/media/download` | Single (`tweetInput`) or bulk (`tweetIds[]`, up to 50). Returns gallery URL. First download metered, cached free |
-| **Extract bulk data** | `POST /extractions` | 20 tool types, always estimate cost first |
-| **Check account/usage** | `GET /account` | Plan status, monitors, usage percent |
-| **Link your X identity** | `PUT /account/x-identity` | Required for own-account detection in style analysis |
-| **Analyze tweet style** | `POST /styles` | Cache recent tweets for style reference |
-| **Save custom style** | `PUT /styles/{username}` | Save custom style from tweet texts (free) |
-| **Get cached style** | `GET /styles/{username}` | Retrieve previously cached tweet style |
-| **Compare styles** | `GET /styles/compare?username1=A&username2=B` | Side-by-side comparison of two cached styles |
-| **Get tweet performance** | `GET /styles/{username}/performance` | Live engagement metrics for cached tweets |
-| **Save a tweet draft** | `POST /drafts` | Store drafts for later |
-| **List/manage drafts** | `GET /drafts`, `DELETE /drafts/{id}` | Retrieve and delete saved drafts |
-| **Compose a tweet** | `POST /compose` | 3-step workflow (compose, refine, score). Free, algorithm-backed |
-| **Connect an X account** | `POST /x/accounts` | Credentials encrypted at rest. Required for write actions |
+| Goal | Endpoint | Cost |
+|------|----------|------|
+| **Get a single tweet** by ID/URL | `GET /x/tweets/{id}` | 1 credit |
+| **Get an X Article** by tweet ID | `GET /x/articles/{id}` | 7 credits |
+| **Search tweets** by keyword/hashtag | `GET /x/tweets/search?q=...` | 1 credit/tweet |
+| **Get a user profile** | `GET /x/users/{username}` | 1 credit |
+| **Get user's recent tweets** | `GET /x/users/{id}/tweets` | 1 credit/tweet |
+| **Get user's liked tweets** | `GET /x/users/{id}/likes` | 1 credit/result |
+| **Get user's media tweets** | `GET /x/users/{id}/media` | 1 credit/result |
+| **Get tweet favoriters** | `GET /x/tweets/{id}/favoriters` | 1 credit/result |
+| **Get mutual followers** | `GET /x/users/{id}/followers-you-know` | 1 credit/result |
+| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | 7 credits |
+| **Get trending topics** | `GET /trends?woeid=1` | 1 credit |
+| **Get radar (trending news)** | `GET /radar?source=hacker_news` | Free |
+| **Get bookmarks** | `GET /x/bookmarks` | 1 credit/result |
+| **Get bookmark folders** | `GET /x/bookmarks/folders` | 1 credit |
+| **Get notifications** | `GET /x/notifications` | 1 credit/result |
+| **Get home timeline** | `GET /x/timeline` | 1 credit/result |
+| **Get DM history** | `GET /x/dm/{userId}/history` | 1 credit/result |
+| **Monitor an X account** | `POST /monitors` | Free |
+| **Update monitor event types** | `PATCH /monitors/{id}` | Free |
+| **Poll for events** | `GET /events` | Free |
+| **Receive events in real time** | `POST /webhooks` | Free |
+| **Update webhook** | `PATCH /webhooks/{id}` | Free |
+| **Run a giveaway draw** | `POST /draws` | 1 credit/entry |
+| **Download tweet media** | `POST /x/media/download` | 1 credit/item |
+| **Extract bulk data** | `POST /extractions` | 1 credit/result |
+| **Check credits** | `GET /credits` | Free |
+| **Top up credits** | `POST /credits/topup` | Free |
+| **Check account/usage** | `GET /account` | Free |
+| **Link your X identity** | `PUT /account/x-identity` | Free |
+| **Analyze tweet style** | `POST /styles` | Metered |
+| **Save custom style** | `PUT /styles/{username}` | Free |
+| **Get cached style** | `GET /styles/{username}` | Free |
+| **Compare styles** | `GET /styles/compare?username1=A&username2=B` | Free |
+| **Get tweet performance** | `GET /styles/{username}/performance` | Metered |
+| **Save a tweet draft** | `POST /drafts` | Free |
+| **List/manage drafts** | `GET /drafts`, `DELETE /drafts/{id}` | Free |
+| **Compose a tweet** | `POST /compose` | Free |
+| **Connect an X account** | `POST /x/accounts` | Free |
 | **List connected accounts** | `GET /x/accounts` | Free |
-| **Re-authenticate account** | `POST /x/accounts/{id}/reauth` | When session expires |
-| **Post a tweet** | `POST /x/tweets` | From a connected account. Supports replies, media, note tweets, communities |
-| **Delete a tweet** | `DELETE /x/tweets/{id}` | Must own the tweet via connected account |
-| **Like / Unlike a tweet** | `POST` / `DELETE /x/tweets/{id}/like` | Metered |
-| **Retweet** | `POST /x/tweets/{id}/retweet` | Metered |
-| **Follow / Unfollow a user** | `POST` / `DELETE /x/users/{id}/follow` | Metered |
-| **Send a DM** | `POST /x/dm/{userId}` | Text, media, reply to message |
-| **Update profile** | `PATCH /x/profile` | Name, bio, location, URL |
-| **Upload media** | `POST /x/media` | FormData or JSON (url param). Returns media ID for tweet attachment |
-| **Community actions** | `POST /x/communities`, `POST /x/communities/{id}/join` | Create, delete, join, leave |
-| **Create Telegram integration** | `POST /integrations` | Receive monitor events in Telegram. Free |
-| **Manage integrations** | `GET /integrations`, `PATCH /integrations/{id}` | List, update, delete, test, deliveries. Free |
-| **Create automation flow** | `POST /automations` | Trigger-driven workflows: monitor events, schedules, search, inbound webhooks |
-| **Manage automation flows** | `GET /automations`, `PATCH /automations/{slug}` | List, update, delete, activate/deactivate. Free |
-| **Add automation steps** | `POST /automations/{slug}/steps` | Action, condition, or extraction steps (max 10 per flow) |
-| **Trigger flow via webhook** | `POST /webhooks/inbound/{token}` | No auth needed. Token identifies the flow |
-| **Open support ticket** | `POST /support/tickets` | Free for all authenticated users |
-| **Manage support tickets** | `GET /support/tickets`, `POST /support/tickets/{id}/messages` | List, read, reply. Free |
+| **Re-authenticate account** | `POST /x/accounts/{id}/reauth` | Free |
+| **Post a tweet** | `POST /x/tweets` | 2 credits |
+| **Delete a tweet** | `DELETE /x/tweets/{id}` | 2 credits |
+| **Like / Unlike a tweet** | `POST` / `DELETE /x/tweets/{id}/like` | 2 credits |
+| **Retweet** | `POST /x/tweets/{id}/retweet` | 2 credits |
+| **Follow / Unfollow a user** | `POST` / `DELETE /x/users/{id}/follow` | 2 credits |
+| **Send a DM** | `POST /x/dm/{userId}` | 2 credits |
+| **Update profile** | `PATCH /x/profile` | 2 credits |
+| **Update avatar** | `PATCH /x/profile/avatar` | 2 credits |
+| **Update banner** | `PATCH /x/profile/banner` | 2 credits |
+| **Upload media** | `POST /x/media` | 2 credits |
+| **Community actions** | `POST /x/communities`, `POST /x/communities/{id}/join` | 2 credits |
+| **Create Telegram integration** | `POST /integrations` | Free |
+| **Manage integrations** | `GET /integrations`, `PATCH /integrations/{id}` | Free |
+| **Create automation flow** | `POST /automations` | Free |
+| **Manage automation flows** | `GET /automations`, `PATCH /automations/{slug}` | Free |
+| **Add automation steps** | `POST /automations/{slug}/steps` | Free |
+| **Trigger flow via webhook** | `POST /webhooks/inbound/{token}` | Free |
+| **Open support ticket** | `POST /support/tickets` | Free |
+| **Manage support tickets** | `GET /support/tickets`, `POST /support/tickets/{id}/messages` | Free |
 
 ## Error Handling & Retry
 
@@ -102,7 +322,7 @@ All errors return `{ "error": "error_code" }`. Key error codes:
 |--------|------|--------|
 | 400 | `invalid_input`, `invalid_id`, `invalid_params`, `invalid_tweet_url`, `invalid_tweet_id`, `invalid_username`, `invalid_tool_type`, `invalid_format`, `missing_query`, `missing_params`, `webhook_inactive`, `no_media` | Fix the request, do not retry |
 | 401 | `unauthenticated` | Check API key |
-| 402 | `no_subscription`, `subscription_inactive`, `usage_limit_reached`, `no_addon`, `extra_usage_disabled`, `extra_usage_requires_v2`, `frozen`, `overage_limit_reached` | Subscribe, enable extra usage, or wait for quota reset |
+| 402 | `no_subscription`, `subscription_inactive`, `usage_limit_reached`, `no_addon`, `extra_usage_disabled`, `extra_usage_requires_v2`, `frozen`, `overage_limit_reached`, `insufficient_credits` | Subscribe, top up credits, enable extra usage, or wait for quota reset |
 | 403 | `monitor_limit_reached`, `api_key_limit_reached`, `flow_limit_reached`, `step_limit_reached` | Delete a monitor/key/flow or add capacity |
 | 404 | `not_found`, `user_not_found`, `tweet_not_found`, `style_not_found`, `draft_not_found`, `account_not_found` | Resource doesn't exist or belongs to another account |
 | 403 | `account_needs_reauth` | Connected X account needs re-authentication |
@@ -174,28 +394,28 @@ Extractions run bulk data collection jobs. The complete workflow: estimate cost,
 
 ### Tool Types and Required Parameters
 
-| Tool Type | Required Field | Description |
-|-----------|---------------|-------------|
-| `reply_extractor` | `targetTweetId` | Users who replied to a tweet |
-| `repost_extractor` | `targetTweetId` | Users who retweeted a tweet |
-| `quote_extractor` | `targetTweetId` | Users who quote-tweeted a tweet |
-| `thread_extractor` | `targetTweetId` | All tweets in a thread |
-| `article_extractor` | `targetTweetId` | Article content linked in a tweet |
-| `follower_explorer` | `targetUsername` | Followers of an account |
-| `following_explorer` | `targetUsername` | Accounts followed by a user |
-| `verified_follower_explorer` | `targetUsername` | Verified followers of an account |
-| `mention_extractor` | `targetUsername` | Tweets mentioning an account |
-| `post_extractor` | `targetUsername` | Posts from an account |
-| `community_extractor` | `targetCommunityId` | Members of a community |
-| `community_moderator_explorer` | `targetCommunityId` | Moderators of a community |
-| `community_post_extractor` | `targetCommunityId` | Posts from a community |
-| `community_search` | `targetCommunityId` + `searchQuery` | Search posts within a community |
-| `list_member_extractor` | `targetListId` | Members of a list |
-| `list_post_extractor` | `targetListId` | Posts from a list |
-| `list_follower_explorer` | `targetListId` | Followers of a list |
-| `space_explorer` | `targetSpaceId` | Participants of a Space |
-| `people_search` | `searchQuery` | Search for users by keyword |
-| `tweet_search_extractor` | `searchQuery` | Search and extract tweets by keyword or hashtag (bulk, up to 1,000) |
+| Tool Type | Required Field | Description | Cost |
+|-----------|---------------|-------------|------|
+| `reply_extractor` | `targetTweetId` | Users who replied to a tweet | 1 credit/result |
+| `repost_extractor` | `targetTweetId` | Users who retweeted a tweet | 1 credit/result |
+| `quote_extractor` | `targetTweetId` | Users who quote-tweeted a tweet | 1 credit/result |
+| `thread_extractor` | `targetTweetId` | All tweets in a thread | 1 credit/result |
+| `article_extractor` | `targetTweetId` | Article content linked in a tweet | 1 credit/result |
+| `follower_explorer` | `targetUsername` | Followers of an account | 1 credit/result |
+| `following_explorer` | `targetUsername` | Accounts followed by a user | 1 credit/result |
+| `verified_follower_explorer` | `targetUsername` | Verified followers of an account | 1 credit/result |
+| `mention_extractor` | `targetUsername` | Tweets mentioning an account | 1 credit/result |
+| `post_extractor` | `targetUsername` | Posts from an account | 1 credit/result |
+| `community_extractor` | `targetCommunityId` | Members of a community | 1 credit/result |
+| `community_moderator_explorer` | `targetCommunityId` | Moderators of a community | 1 credit/result |
+| `community_post_extractor` | `targetCommunityId` | Posts from a community | 1 credit/result |
+| `community_search` | `targetCommunityId` + `searchQuery` | Search posts within a community | 1 credit/result |
+| `list_member_extractor` | `targetListId` | Members of a list | 1 credit/result |
+| `list_post_extractor` | `targetListId` | Posts from a list | 1 credit/result |
+| `list_follower_explorer` | `targetListId` | Followers of a list | 1 credit/result |
+| `space_explorer` | `targetSpaceId` | Participants of a Space | 1 credit/result |
+| `people_search` | `searchQuery` | Search for users by keyword | 1 credit/result |
+| `tweet_search_extractor` | `searchQuery` | Search and extract tweets by keyword or hashtag (bulk, up to 1,000) | 1 credit/result |
 
 ### Complete Extraction Workflow
 
@@ -253,47 +473,6 @@ const csvResponse = await fetch(exportUrl, { headers });
 const csvData = await csvResponse.text();
 ```
 
-### Orchestrating Multiple Extractions
-
-When building applications that combine multiple extraction tools (e.g., market research), run them sequentially and respect rate limits:
-
-```javascript
-async function marketResearchPipeline(username) {
-  // 1. Get user profile
-  const user = await xquikFetch(`/x/users/${username}`);
-
-  // 2. Extract their recent posts
-  const postsJob = await xquikFetch("/extractions", {
-    method: "POST",
-    body: JSON.stringify({ toolType: "post_extractor", targetUsername: username }),
-  });
-
-  // 3. Search for related conversations
-  const tweets = await xquikFetch(`/x/tweets/search?q=from:${username}`);
-
-  // 4. For top tweets, extract replies for sentiment analysis
-  for (const tweet of tweets.tweets.slice(0, 5)) {
-    const estimate = await xquikFetch("/extractions/estimate", {
-      method: "POST",
-      body: JSON.stringify({ toolType: "reply_extractor", targetTweetId: tweet.id }),
-    });
-
-    if (estimate.allowed) {
-      const repliesJob = await xquikFetch("/extractions", {
-        method: "POST",
-        body: JSON.stringify({ toolType: "reply_extractor", targetTweetId: tweet.id }),
-      });
-      // Process replies...
-    }
-  }
-
-  // 5. Get trending topics for context
-  const trends = await xquikFetch("/trends?woeid=1");
-
-  return { user, posts: postsJob, tweets, trends };
-}
-```
-
 ## Giveaway Draws
 
 Run transparent, auditable giveaway draws from tweet replies with configurable filters.
@@ -336,32 +515,12 @@ const draw = await xquikFetch("/draws", {
     requiredHashtags: ["#giveaway"],
   }),
 });
-// Response:
-// {
-//   id: "42",
-//   tweetId: "1893456789012345678",
-//   tweetUrl: "https://x.com/burakbayir/status/1893456789012345678",
-//   tweetText: "Giveaway! RT + Follow to enter...",
-//   tweetAuthorUsername: "burakbayir",
-//   tweetLikeCount: 5200,
-//   tweetRetweetCount: 3100,
-//   tweetReplyCount: 890,
-//   tweetQuoteCount: 45,
-//   status: "completed",
-//   totalEntries: 890,
-//   validEntries: 312,
-//   createdAt: "2026-02-24T10:00:00.000Z",
-//   drawnAt: "2026-02-24T10:01:00.000Z"
-// }
 
 // Step 2: Get draw details with winners
 const details = await xquikFetch(`/draws/${draw.id}`);
 // details.winners: [
 //   { position: 1, authorUsername: "winner1", tweetId: "...", isBackup: false },
-//   { position: 2, authorUsername: "winner2", tweetId: "...", isBackup: false },
-//   { position: 3, authorUsername: "winner3", tweetId: "...", isBackup: false },
-//   { position: 4, authorUsername: "backup1", tweetId: "...", isBackup: true },
-//   { position: 5, authorUsername: "backup2", tweetId: "...", isBackup: true },
+//   ...
 // ]
 
 // Step 3: Export results
@@ -407,8 +566,6 @@ app.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
   // 3. Parse and route by event type
   const event = JSON.parse(payload);
   // event.eventType: "tweet.new" | "tweet.reply" | "tweet.quote" | "tweet.retweet" | "follower.gained" | "follower.lost"
-  // event.username: monitored account username
-  // event.data: tweet data ({ tweetId, text, metrics }) or follower data ({ followerId, followerUsername, followerName, followerFollowersCount, followerVerified })
 
   // 4. Respond within 10 seconds (process async if slow)
   res.status(200).send("OK");
@@ -434,7 +591,7 @@ Check delivery status via `GET /webhooks/{id}/deliveries` to monitor successful 
 Complete end-to-end: create monitor, register webhook, handle events.
 
 ```javascript
-// 1. Create monitor
+// 1. Create monitor (free)
 const monitor = await xquikFetch("/monitors", {
   method: "POST",
   body: JSON.stringify({
@@ -442,9 +599,8 @@ const monitor = await xquikFetch("/monitors", {
     eventTypes: ["tweet.new", "tweet.reply", "tweet.quote", "follower.gained"],
   }),
 });
-// Response: { id: "7", username: "elonmusk", xUserId: "44196397", eventTypes: [...], createdAt: "..." }
 
-// 2. Register webhook
+// 2. Register webhook (free)
 const webhook = await xquikFetch("/webhooks", {
   method: "POST",
   body: JSON.stringify({
@@ -454,16 +610,31 @@ const webhook = await xquikFetch("/webhooks", {
 });
 // IMPORTANT: Save webhook.secret. It is shown only once!
 
-// 3. Poll events (alternative to webhooks)
+// 3. Poll events (alternative to webhooks, free)
 const events = await xquikFetch("/events?monitorId=7&limit=50");
-// Response: { events: [...], hasMore: false }
 ```
 
 Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `follower.gained`, `follower.lost`.
 
 ## MCP Server (AI Agents)
 
-The MCP server at `https://xquik.com/mcp` uses a code-execution sandbox model with 2 tools (`explore` + `xquik`). The agent writes async JavaScript arrow functions that run in a sandboxed environment with auth injected automatically. StreamableHTTP transport. API key auth (`x-api-key` header) for CLI/IDE clients; OAuth 2.1 for web clients (Claude.ai, ChatGPT Developer Mode). The sandbox covers all 97 REST API endpoints across 12 categories. Supported platforms: Claude.ai, Claude Desktop, Claude Code, ChatGPT (Custom GPT, Agents SDK, Developer Mode), Codex CLI, Cursor, VS Code, Windsurf, OpenCode.
+The MCP server at `https://xquik.com/mcp` provides 9 tools. StreamableHTTP transport. API key auth (`x-api-key` header) for CLI/IDE clients; OAuth 2.1 for web clients (Claude.ai, ChatGPT Developer Mode).
+
+### Tools
+
+| Tool | Description | Cost |
+|------|-------------|------|
+| `explore` | Search the API endpoint catalog (read-only, no network calls) | Free |
+| `xquik` | Execute API calls against your account (99 endpoints, 12 categories) | Varies |
+| `github-trending` | Trending repositories on GitHub | Free |
+| `google-trends` | Trending search topics from Google | Free |
+| `hacker-news-trending` | Trending stories on Hacker News | Free |
+| `polymarket-trending` | Trending prediction markets from Polymarket | Free |
+| `reddit-trending` | Trending posts on Reddit | Free |
+| `startup-trending` | Trending startups and SaaS products | Free |
+| `wikipedia-trending` | Most viewed Wikipedia articles | Free |
+
+Supported platforms: Claude.ai, Claude Desktop, Claude Code, ChatGPT (Custom GPT, Agents SDK, Developer Mode), Codex CLI, Cursor, VS Code, Windsurf, OpenCode.
 
 For setup configs per platform, read [references/mcp-setup.md](references/mcp-setup.md). For tool details with selection rules, common mistakes, and unsupported operations, read [references/mcp-tools.md](references/mcp-tools.md).
 
@@ -472,45 +643,35 @@ For setup configs per platform, read [references/mcp-setup.md](references/mcp-se
 | | MCP Server | REST API |
 |---|------------|----------|
 | **Best for** | AI agents, IDE integrations | Custom apps, scripts, backend services |
-| **Model** | 2 tools (`explore` + `xquik`) with code-execution sandbox | 97 individual endpoints |
-| **Categories** | 12: account, automations, bot, composition, extraction, integrations, media, monitoring, support, twitter, x-accounts, x-write | Same |
+| **Model** | 9 tools (explore + xquik + 7 radar) | 99 individual endpoints |
+| **Categories** | 12: account, automations, bot, composition, credits, extraction, integrations, media, monitoring, support, twitter, x-accounts, x-write | Same |
 | **Coverage** | Full — `xquik` tool calls any REST endpoint | Direct HTTP calls |
 | **File export** | Not available | CSV, XLSX, Markdown |
-| **Unique to REST** | - | API key management, file export (CSV/XLSX/MD), account locale update, automation step position batch updates |
+| **Unique to REST** | - | API key management, file export (CSV/XLSX/MD), account locale update |
 
 ### Workflow Patterns
 
 Common multi-step sequences (all via `xquik` tool calling REST endpoints):
 
-- **Set up real-time alerts:** `POST /monitors` -> `POST /webhooks` -> `POST /webhooks/{id}/test`
-- **Run a giveaway:** `GET /account` (check budget) -> `POST /draws`
-- **Bulk extraction:** `POST /extractions/estimate` -> `POST /extractions` -> `GET /extractions/{id}`
-- **Full tweet analysis:** `GET /x/tweets/{id}` (metrics) -> `POST /extractions` with `thread_extractor`
-- **Find and analyze user:** `GET /x/users/{username}` -> `GET /x/tweets/search?q=from:username` -> `GET /x/tweets/{id}`
-- **Compose algorithm-optimized tweet:** `POST /compose` (step=compose) -> AI asks follow-ups -> (step=refine) -> AI drafts -> (step=score) -> iterate
-- **Analyze tweet style:** `POST /styles` (fetch & cache) -> `GET /styles/{username}` (reference) -> `POST /compose` with `styleUsername`
-- **Compare styles:** `POST /styles` for both accounts -> `GET /styles/compare`
-- **Track tweet performance:** `POST /styles` (cache tweets) -> `GET /styles/{username}/performance` (live metrics)
-- **Save & manage drafts:** `POST /compose` -> `POST /drafts` -> `GET /drafts` -> `DELETE /drafts/{id}`
+- **Set up real-time alerts:** `POST /monitors` → `POST /webhooks` → `POST /webhooks/{id}/test`
+- **Run a giveaway:** `GET /account` (check budget) → `POST /draws`
+- **Bulk extraction:** `POST /extractions/estimate` → `POST /extractions` → `GET /extractions/{id}`
+- **Full tweet analysis:** `GET /x/tweets/{id}` (metrics) → `POST /extractions` with `thread_extractor`
+- **Find and analyze user:** `GET /x/users/{username}` → `GET /x/users/{id}/tweets` → `GET /x/tweets/{id}`
+- **Compose algorithm-optimized tweet:** `POST /compose` (step=compose) → AI asks follow-ups → (step=refine) → AI drafts → (step=score) → iterate
+- **Analyze tweet style:** `POST /styles` (fetch & cache) → `GET /styles/{username}` (reference) → `POST /compose` with `styleUsername`
+- **Compare styles:** `POST /styles` for both accounts → `GET /styles/compare`
+- **Track tweet performance:** `POST /styles` (cache tweets) → `GET /styles/{username}/performance` (live metrics)
+- **Save & manage drafts:** `POST /compose` → `POST /drafts` → `GET /drafts` → `DELETE /drafts/{id}`
 - **Download & share media:** `POST /x/media/download` (returns permanent hosted URLs)
-- **Get trending news:** `GET /radar` (7 sources, free) -> `POST /compose` with trending topic
+- **Get trending news:** `GET /radar` (7 sources, free) or per-source tools → `POST /compose` with trending topic
 - **Subscribe or manage billing:** `POST /subscribe` (returns Stripe URL)
-- **Post a tweet:** `POST /x/accounts` (connect) -> `POST /x/tweets` with `account` + `text` (optionally `POST /x/media` first)
+- **Post a tweet:** `POST /x/accounts` (connect) → `POST /x/tweets` with `account` + `text` (optionally `POST /x/media` first)
 - **Engage with tweets:** `POST /x/tweets/{id}/like`, `POST /x/tweets/{id}/retweet`, `POST /x/users/{id}/follow`
-- **Set up Telegram alerts:** `POST /integrations` (type=telegram, chatId, eventTypes) -> `POST /integrations/{id}/test`
-- **Create automation flow:** `POST /automations` (name, triggerType, triggerConfig) -> `POST /automations/{slug}/steps` (add actions) -> `PATCH /automations/{slug}` (activate)
-- **Open support ticket:** `POST /support/tickets` (subject, body) -> `GET /support/tickets/{id}` (check status) -> `POST /support/tickets/{id}/messages` (reply)
-
-## Pricing & Quota
-
-- **Base plan**: $20/month (1 monitor, monthly usage quota)
-- **Extra monitors**: $5/month each
-- **Per-operation costs**: tweet search $0.003, user profile $0.0036, follower fetch $0.003, verified follower fetch $0.006, follow check $0.02, media download $0.003, article extraction $0.02
-- **Free**: account info, monitor/webhook management, radar, extraction history, cost estimates, tweet composition (compose, refine, score), style cache management (list, get, save, delete, compare), drafts, X account management (connect, list, disconnect, reauth), integration management (create, list, update, delete, test), automation management (create, list, update, delete, steps), support tickets (create, list, read, reply)
-- **Metered**: tweet search, user lookup, tweet lookup, follow check, media download (first download only, cached free), extractions, draws, style analysis, performance analysis, trends, write actions (tweet, like, retweet, follow, DM, profile, media upload, communities)
-- **Extra usage**: enable from dashboard to continue metered calls beyond included allowance. Tiered spending limits: $5 -> $7 -> $10 -> $15 -> $25 (increases with each paid overage invoice)
-- **Quota enforcement**: `402 usage_limit_reached` when included allowance exhausted (or `402 overage_limit_reached` if extra usage is active and spending limit reached)
-- **Check usage**: `GET /account` returns `usagePercent` (0-100)
+- **Set up Telegram alerts:** `POST /integrations` (type=telegram, chatId, eventTypes) → `POST /integrations/{id}/test`
+- **Create automation flow:** `POST /automations` (name, triggerType, triggerConfig) → `POST /automations/{slug}/steps` (add actions) → `PATCH /automations/{slug}` (activate)
+- **Check & top up credits:** `GET /credits` → `POST /credits/topup`
+- **Open support ticket:** `POST /support/tickets` (subject, body) → `GET /support/tickets/{id}` (check status) → `POST /support/tickets/{id}/messages` (reply)
 
 ## Conventions
 

@@ -1,13 +1,14 @@
 {
-  "version": "1.9.0",
+  "version": "2.0.0",
   "organization": "Xquik",
   "date": "March 2026",
-  "abstract": "Integration guide for the Xquik X (Twitter) real-time data platform. Covers the REST API (97 endpoints across tweet search, user lookup, media download, extractions, monitors, events, webhooks, trends, radar, compose, style analysis, drafts, draws, X account management, write actions, Telegram integrations, flow automations, and support tickets), HMAC webhook verification, MCP server setup for 10 IDEs and AI agents (code-execution sandbox with 2 tools), all 20 extraction tools, tweet composition with algorithm scoring, tweet style analysis & comparison, draft management, flow automation with 4 trigger types and 9 action types, and complete TypeScript type definitions. Code examples in JavaScript, Python, Go, and cURL.",
+  "abstract": "Integration guide for the Xquik X (Twitter) real-time data platform. Covers the REST API (99 endpoints across tweet search, user lookup, user tweets/likes/media, favoriters, mutual followers, bookmarks, notifications, timeline, DM history, media download, extractions, monitors, events, webhooks, trends, radar, compose, style analysis, drafts, draws, X account management, write actions, credits, Telegram integrations, flow automations, and support tickets), HMAC webhook verification, MCP server setup for 10 IDEs and AI agents (9 tools including code-execution sandbox and 7 radar sources), all 20 extraction tools, tweet composition with algorithm scoring, credit-based billing, pay-per-use via MPP, and complete TypeScript type definitions. Code examples in JavaScript, Python, Go, and cURL.",
   "references": [
     "https://docs.xquik.com",
     "https://docs.xquik.com/api-reference/overview",
     "https://docs.xquik.com/mcp/overview",
     "https://docs.xquik.com/webhooks/overview",
-    "https://docs.xquik.com/guides/workflows"
+    "https://docs.xquik.com/guides/billing",
+    "https://docs.xquik.com/mpp/overview"
   ]
 }

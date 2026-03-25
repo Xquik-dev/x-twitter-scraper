@@ -5,15 +5,15 @@
     "email": "support@xquik.com"
   },
   "metadata": {
-    "description": "X (Twitter) data extraction & automation skill for AI coding agents",
-    "version": "1.9.0"
+    "description": "X (Twitter) data extraction & automation skill for AI coding agents. 99 endpoints, 9 MCP tools, reads from $0.00015/call.",
+    "version": "2.0.0"
   },
   "plugins": [
     {
       "name": "x-twitter-scraper",
       "source": ".",
-      "description": "40+ tools: tweet search, user lookup, follower extraction, engagement metrics, giveaway draws, trending topics, write actions, and Telegram integrations. REST API, MCP server & HMAC webhooks.",
-      "version": "1.9.0",
+      "description": "99 REST API endpoints, 9 MCP tools, 20 extraction types. Tweet search, user lookup, follower extraction, engagement metrics, giveaway draws, trending topics, write actions, credits, pay-per-use (MPP), and Telegram integrations. Reads from $0.00015/call — 66x cheaper than the official X API.",
+      "version": "2.0.0",
       "author": {
         "name": "Xquik"
       },
@@ -28,7 +28,12 @@
         "giveaway",
         "monitoring",
         "webhooks",
-        "scraper"
+        "scraper",
+        "twitter-api",
+        "social-media",
+        "automation",
+        "ai-agent",
+        "pay-per-use"
       ],
       "category": "integrations",
       "tags": [
@@ -36,7 +41,9 @@
         "x",
         "social-media",
         "automation",
-        "mcp"
+        "mcp",
+        "cheap-api",
+        "pay-per-use"
       ]
     }
   ]
