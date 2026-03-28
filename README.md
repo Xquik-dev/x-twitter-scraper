@@ -1,6 +1,6 @@
 # X API / Twitter Scraper Skill for AI Coding Agents
 
-An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. 99 REST API endpoints, 9 MCP tools, HMAC webhooks, 20 bulk extraction tools, and write actions.
+An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. 120 REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, and write actions.
 
 **The cheapest X data API on the market** — reads from $0.00015/call (66x cheaper than the official X API).
 
@@ -16,7 +16,7 @@ Xquik is dramatically cheaper than every alternative for X/Twitter data access.
 |---|---|---|---|
 | **Monthly cost** | **$20** | $100 | $5,000 |
 | **Cost per tweet read** | **$0.00015** | ~$0.01 | ~$0.005 |
-| **Cost per user lookup** | **$0.00015** | ~$0.01 | ~$0.005 |
+| **Cost per user lookup** | **$0.0003** | ~$0.01 | ~$0.005 |
 | **Write actions** | **$0.0003** | Limited | Limited |
 | **Bulk extraction** | **$0.00015/result** | Not available | Not available |
 | **Monitoring + webhooks** | **Free** | Not available | Not available |
@@ -37,7 +37,7 @@ Xquik is dramatically cheaper than every alternative for X/Twitter data access.
 
 Two options for pay-per-use without a monthly subscription:
 
-- **Credits (Stripe)**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 99 endpoints.
+- **Credits (Stripe)**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 120 endpoints.
 - **MPP (USDC)**: 8 X-API read endpoints accept anonymous payments via Machine Payments Protocol. No account needed. SDK: `npm i mppx`.
 
 ## Installation
@@ -141,16 +141,16 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Tweet composition**: Algorithm-optimized tweet composer with scoring (free)
 - **Credits & billing**: Check balance, top up credits, manage subscription
 - **Support tickets**: Open and manage support tickets via API
-- **MCP server**: 9 tools covering 99 endpoints for AI agent integration
+- **MCP server**: 2 tools covering 120 endpoints for AI agent integration
 - **Pay-per-use (MPP)**: Anonymous access to 8 endpoints via USDC, no account needed
 
 ## Capabilities
 
 | Area | Details |
 |------|---------|
-| **REST API** | 99 endpoints across 12 categories with retry logic and pagination |
-| **MCP Server** | 9 tools (explore + xquik + 7 radar). StreamableHTTP, configs for 10 platforms |
-| **Data Extraction** | 20 bulk extraction tools (replies, retweets, quotes, threads, articles, communities, lists, Spaces, people search, tweet search, mentions, posts) |
+| **REST API** | 120 endpoints across 12 categories with retry logic and pagination |
+| **MCP Server** | 2 tools (explore + xquik). StreamableHTTP, configs for 10 platforms |
+| **Data Extraction** | 23 bulk extraction tools (replies, retweets, quotes, favoriters, threads, articles, user likes, user media, communities, lists, Spaces, people search, tweet search, mentions, posts) |
 | **X Lookups** | Tweet, user, article, search, user tweets, user likes, user media, favoriters, mutual followers, bookmarks, notifications, timeline, DM history |
 | **Write Actions** | Post/delete tweets, like/unlike, retweet, follow/unfollow, DM, profile update, avatar/banner, media upload, community actions |
 | **Giveaway Draws** | Random winner selection from tweet replies with 11 filter options |
@@ -174,7 +174,7 @@ Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code
 | Resource | Endpoints |
 |----------|-----------|
 | X Lookups | Tweet, article, search, user profile, user tweets, user likes, user media, favoriters, followers you know, follow check, download media, bookmarks, bookmark folders, notifications, timeline, DM history |
-| Extractions | Create (20 types), estimate, list, get results, export |
+| Extractions | Create (23 types), estimate, list, get results, export |
 | Monitors | Create, list, get, update, delete |
 | Events | List (filtered, paginated), get single |
 | Webhooks | Create, list, update, delete, test, deliveries |
@@ -206,7 +206,7 @@ x-twitter-scraper/
 │           ├── mcp-tools.md              # MCP tool selection rules and workflow patterns
 │           ├── mcp-setup.md              # MCP configs for 10 platforms (v2 + v1)
 │           ├── webhooks.md               # Webhook setup & verification
-│           ├── extractions.md            # 20 extraction tool types
+│           ├── extractions.md            # 23 extraction tool types
 │           ├── types.md                  # TypeScript type definitions
 │           └── python-examples.md        # Python code examples
 ├── server.json                           # MCP Registry metadata

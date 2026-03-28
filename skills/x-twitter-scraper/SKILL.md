@@ -1,6 +1,6 @@
 ---
 name: x-twitter-scraper
-description: "X (Twitter) data platform skill for AI coding agents. 99 REST API endpoints, 9 MCP tools, HMAC webhooks. Tweet search, user lookup, follower extraction, write actions, monitoring, giveaway draws, trending topics. Reads from $0.00015/call — 66x cheaper than the official X API."
+description: "X (Twitter) data platform skill for AI coding agents. 120 REST API endpoints, 2 MCP tools, HMAC webhooks. Tweet search, user lookup, follower extraction, write actions, monitoring, giveaway draws, trending topics. Reads from $0.00015/call — 66x cheaper than the official X API."
 compatibility: Requires internet access to call the Xquik REST API (https://xquik.com/api/v1)
 license: MIT
 metadata:
@@ -17,7 +17,7 @@ metadata:
 
 # Xquik API Integration
 
-Xquik is an X (Twitter) real-time data platform providing a REST API (99 endpoints), 9 MCP tools, and HMAC webhooks. It covers account monitoring, bulk data extraction (20 tools), giveaway draws, tweet/user lookups, media downloads, follow checks, trending topics, flow automations, write actions, Telegram integrations, and support tickets.
+Xquik is an X (Twitter) real-time data platform providing a REST API (120 endpoints), 2 MCP tools, and HMAC webhooks. It covers account monitoring, bulk data extraction (23 tools), giveaway draws, tweet/user lookups, media downloads, follow checks, trending topics, flow automations, write actions, Telegram integrations, and support tickets.
 
 **Reads start at $0.00015/call — 66x cheaper than the official X API.**
 
@@ -41,10 +41,10 @@ When this skill and the docs disagree, **trust the docs**.
 | **Base URL** | `https://xquik.com/api/v1` |
 | **Auth** | `x-api-key: xq_...` header (64 hex chars after `xq_` prefix) |
 | **MCP endpoint** | `https://xquik.com/mcp` (StreamableHTTP, same API key) |
-| **Rate limits** | 10 req/s sustained, 20 burst (API); 60 req/s sustained, 100 burst (general) |
-| **Endpoints** | 99 across 12 categories |
-| **MCP tools** | 9 (explore, xquik, + 7 radar source tools) |
-| **Extraction tools** | 20 types |
+| **Rate limits** | Read: 120/60s, Write: 30/60s, Delete: 15/60s (fixed window per method tier) |
+| **Endpoints** | 120 across 12 categories |
+| **MCP tools** | 2 (explore + xquik) |
+| **Extraction tools** | 23 types |
 | **Pricing** | $20/month base (reads from $0.00015). Pay-per-use available via MPP |
 | **Docs** | [docs.xquik.com](https://docs.xquik.com) |
 | **HTTPS only** | Plain HTTP gets `301` redirect |
@@ -69,7 +69,6 @@ Xquik is the most affordable X data API available. All metered operations deduct
 | Operation | Unit |
 |-----------|------|
 | Get tweet | per call |
-| Get user | per call |
 | Search tweets | per tweet returned |
 | User tweets | per tweet returned |
 | User likes | per result |
@@ -82,6 +81,17 @@ Xquik is the most affordable X data API available. All metered operations deduct
 | Timeline | per result |
 | DM history | per result |
 | Download media | per media item |
+
+#### Read operations — 2 credits ($0.0003)
+
+| Operation | Unit |
+|-----------|------|
+| Get user | per call |
+
+#### Read operations — 3 credits ($0.00045)
+
+| Operation | Unit |
+|-----------|------|
 | Trends | per call |
 
 #### Read operations — 7 credits ($0.00105)
@@ -109,7 +119,7 @@ Monitors, webhooks, integrations, account status, radar (7 sources), extraction/
 |---|---|---|---|
 | **Monthly cost** | **$20** | $100 | $5,000 |
 | **Cost per tweet read** | **$0.00015** | ~$0.01 | ~$0.005 |
-| **Cost per user lookup** | **$0.00015** | ~$0.01 | ~$0.005 |
+| **Cost per user lookup** | **$0.0003** | ~$0.01 | ~$0.005 |
 | **Write actions** | **$0.0003** | Limited | Limited |
 | **Bulk extraction** | **$0.00015/result** | Not available | Not available |
 | **Monitoring + webhooks** | **Free** | Not available | Not available |
@@ -119,7 +129,7 @@ Monitors, webhooks, integrations, account status, radar (7 sources), extraction/
 
 Two options without a monthly subscription:
 
-**Credits (Stripe)**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 99 endpoints.
+**Credits (Stripe)**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 120 endpoints.
 
 **MPP (USDC)**: 8 X-API read endpoints accept anonymous payments via Tempo (USDC). No account needed.
 
@@ -178,8 +188,11 @@ Need bulk data?
 ├─ Replies to a tweet → reply_extractor
 ├─ Retweets of a tweet → repost_extractor
 ├─ Quotes of a tweet → quote_extractor
+├─ Favoriters of a tweet → favoriters
 ├─ Full thread → thread_extractor
 ├─ Article content → article_extractor
+├─ User's liked tweets (bulk) → user_likes
+├─ User's media tweets (bulk) → user_media
 ├─ Account followers → follower_explorer
 ├─ Account following → following_explorer
 ├─ Verified followers → verified_follower_explorer
@@ -261,14 +274,14 @@ For Python examples, see [references/python-examples.md](references/python-examp
 | **Get a single tweet** by ID/URL | `GET /x/tweets/{id}` | 1 credit |
 | **Get an X Article** by tweet ID | `GET /x/articles/{id}` | 7 credits |
 | **Search tweets** by keyword/hashtag | `GET /x/tweets/search?q=...` | 1 credit/tweet |
-| **Get a user profile** | `GET /x/users/{username}` | 1 credit |
+| **Get a user profile** | `GET /x/users/{username}` | 2 credits |
 | **Get user's recent tweets** | `GET /x/users/{id}/tweets` | 1 credit/tweet |
 | **Get user's liked tweets** | `GET /x/users/{id}/likes` | 1 credit/result |
 | **Get user's media tweets** | `GET /x/users/{id}/media` | 1 credit/result |
 | **Get tweet favoriters** | `GET /x/tweets/{id}/favoriters` | 1 credit/result |
 | **Get mutual followers** | `GET /x/users/{id}/followers-you-know` | 1 credit/result |
 | **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | 7 credits |
-| **Get trending topics** | `GET /trends?woeid=1` | 1 credit |
+| **Get trending topics** | `GET /trends?woeid=1` | 3 credits |
 | **Get radar (trending news)** | `GET /radar?source=hacker_news` | Free |
 | **Get bookmarks** | `GET /x/bookmarks` | 1 credit/result |
 | **Get bookmark folders** | `GET /x/bookmarks/folders` | 1 credit |
@@ -392,7 +405,7 @@ async function fetchAllPages(path, dataKey) {
 
 Cursors are opaque strings. Never decode or construct them manually.
 
-## Extraction Tools (20 Types)
+## Extraction Tools (23 Types)
 
 Extractions run bulk data collection jobs. The complete workflow: estimate cost, create job, retrieve results, optionally export.
 
@@ -405,11 +418,14 @@ Extractions run bulk data collection jobs. The complete workflow: estimate cost,
 | `quote_extractor` | `targetTweetId` | Users who quote-tweeted a tweet | 1 credit/result |
 | `thread_extractor` | `targetTweetId` | All tweets in a thread | 1 credit/result |
 | `article_extractor` | `targetTweetId` | Article content linked in a tweet | 1 credit/result |
+| `favoriters` | `targetTweetId` | Users who favorited a tweet | 1 credit/result |
 | `follower_explorer` | `targetUsername` | Followers of an account | 1 credit/result |
 | `following_explorer` | `targetUsername` | Accounts followed by a user | 1 credit/result |
 | `verified_follower_explorer` | `targetUsername` | Verified followers of an account | 1 credit/result |
 | `mention_extractor` | `targetUsername` | Tweets mentioning an account | 1 credit/result |
 | `post_extractor` | `targetUsername` | Posts from an account | 1 credit/result |
+| `user_likes` | `targetUserId` | Tweets liked by a user | 1 credit/result |
+| `user_media` | `targetUserId` | Media tweets from a user | 1 credit/result |
 | `community_extractor` | `targetCommunityId` | Members of a community | 1 credit/result |
 | `community_moderator_explorer` | `targetCommunityId` | Moderators of a community | 1 credit/result |
 | `community_post_extractor` | `targetCommunityId` | Posts from a community | 1 credit/result |
@@ -622,21 +638,14 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `follow
 
 ## MCP Server (AI Agents)
 
-The MCP server at `https://xquik.com/mcp` provides 9 tools. StreamableHTTP transport. API key auth (`x-api-key` header) for CLI/IDE clients; OAuth 2.1 for web clients (Claude.ai, ChatGPT Developer Mode).
+The MCP server at `https://xquik.com/mcp` provides 2 tools. StreamableHTTP transport. API key auth (`x-api-key` header) for CLI/IDE clients; OAuth 2.1 for web clients (Claude.ai, ChatGPT Developer Mode).
 
 ### Tools
 
 | Tool | Description | Cost |
 |------|-------------|------|
 | `explore` | Search the API endpoint catalog (read-only, no network calls) | Free |
-| `xquik` | Execute API calls against your account (99 endpoints, 12 categories) | Varies |
-| `github-trending` | Trending repositories on GitHub | Free |
-| `google-trends` | Trending search topics from Google | Free |
-| `hacker-news-trending` | Trending stories on Hacker News | Free |
-| `polymarket-trending` | Trending prediction markets from Polymarket | Free |
-| `reddit-trending` | Trending posts on Reddit | Free |
-| `startup-trending` | Trending startups and SaaS products | Free |
-| `wikipedia-trending` | Most viewed Wikipedia articles | Free |
+| `xquik` | Execute API calls against your account (120 endpoints, 12 categories) | Varies |
 
 Supported platforms: Claude.ai, Claude Desktop, Claude Code, ChatGPT (Custom GPT, Agents SDK, Developer Mode), Codex CLI, Cursor, VS Code, Windsurf, OpenCode.
 
@@ -647,7 +656,7 @@ For setup configs per platform, read [references/mcp-setup.md](references/mcp-se
 | | MCP Server | REST API |
 |---|------------|----------|
 | **Best for** | AI agents, IDE integrations | Custom apps, scripts, backend services |
-| **Model** | 9 tools (explore + xquik + 7 radar) | 99 individual endpoints |
+| **Model** | 2 tools (explore + xquik) | 120 individual endpoints |
 | **Categories** | 12: account, automations, bot, composition, credits, extraction, integrations, media, monitoring, support, twitter, x-accounts, x-write | Same |
 | **Coverage** | Full — `xquik` tool calls any REST endpoint | Direct HTTP calls |
 | **File export** | Not available | CSV, XLSX, Markdown |
@@ -668,7 +677,7 @@ Common multi-step sequences (all via `xquik` tool calling REST endpoints):
 - **Track tweet performance:** `POST /styles` (cache tweets) → `GET /styles/{username}/performance` (live metrics)
 - **Save & manage drafts:** `POST /compose` → `POST /drafts` → `GET /drafts` → `DELETE /drafts/{id}`
 - **Download & share media:** `POST /x/media/download` (returns permanent hosted URLs)
-- **Get trending news:** `GET /radar` (7 sources, free) or per-source tools → `POST /compose` with trending topic
+- **Get trending news:** `GET /radar` (7 sources, free) → `POST /compose` with trending topic
 - **Subscribe or manage billing:** `POST /subscribe` (returns Stripe URL)
 - **Post a tweet:** `POST /x/accounts` (connect) → `POST /x/tweets` with `account` + `text` (optionally `POST /x/media` first)
 - **Engage with tweets:** `POST /x/tweets/{id}/like`, `POST /x/tweets/{id}/retweet`, `POST /x/users/{id}/follow`

@@ -8,13 +8,6 @@ The MCP server at `https://xquik.com/mcp` uses a code-execution sandbox model wi
 |------|-------------|------|
 | `explore` | Search the API endpoint catalog (read-only, no network calls) | Free |
 | `xquik` | Execute API calls against your account | Varies by endpoint |
-| `github-trending` | Trending repositories on GitHub | Free |
-| `google-trends` | Trending search topics from Google | Free |
-| `hacker-news-trending` | Trending stories on Hacker News | Free |
-| `polymarket-trending` | Trending prediction markets from Polymarket | Free |
-| `reddit-trending` | Trending posts on Reddit | Free |
-| `startup-trending` | Trending startups and SaaS products | Free |
-| `wikipedia-trending` | Most viewed Wikipedia articles | Free |
 
 ### `explore` — Search the API Spec
 
@@ -75,14 +68,7 @@ Use `explore` first to find endpoints, then `xquik` to call them.
 | Download media from tweets | `POST /api/v1/x/media/download` |
 | Check follow relationship | `GET /api/v1/x/followers/check?source=A&target=B` |
 | Trending topics by region (X) | `GET /api/v1/trends?woeid=1` |
-| Trending news from 7 sources | `GET /api/v1/radar` |
-| Trending GitHub repos | `github-trending` |
-| Trending Google search topics | `google-trends` |
-| Trending Hacker News stories | `hacker-news-trending` |
-| Trending prediction markets | `polymarket-trending` |
-| Trending Reddit posts | `reddit-trending` |
-| Trending startups | `startup-trending` |
-| Most viewed Wikipedia articles | `wikipedia-trending` |
+| Trending news from 7 sources | `GET /api/v1/radar` (via `xquik` tool) |
 | Activity from monitored accounts | `GET /api/v1/events` |
 | Budget, plan, usage percent | `GET /api/v1/account` |
 | Monitor an X account | `POST /api/v1/monitors` |
@@ -131,7 +117,7 @@ Use `POST /api/v1/extractions` ONLY for bulk data that simpler endpoints cannot 
 | **Compose optimized tweet** | `POST /compose` (step=compose -> refine -> score) |
 | **Analyze tweet style** | `POST /styles` -> `GET /styles/{username}` -> `POST /compose` with `styleUsername` |
 | **Post a tweet** | `GET /x/accounts` -> `POST /x/tweets` with `account` + `text` |
-| **Get trending news** | `GET /radar` (free, all sources) or per-source tools (`github-trending`, `google-trends`, `hacker-news-trending`, `polymarket-trending`, `reddit-trending`, `startup-trending`, `wikipedia-trending`) -> `POST /compose` with trending topic |
+| **Get trending news** | `GET /radar` (free, all 7 sources, via `xquik` tool) -> `POST /compose` with trending topic |
 | **Create automation** | `POST /automations` -> `POST /automations/{slug}/steps` -> `PATCH /automations/{slug}` (activate) |
 | **Open support ticket** | `POST /support/tickets` -> `GET /support/tickets/{id}` |
 
@@ -161,5 +147,5 @@ These are NOT available via the MCP server:
 
 ## Cost Reference
 
-- **Free**: account info, compose (all steps), styles (cached lookup/save/delete/compare), drafts, radar, radar source tools (github-trending, google-trends, hacker-news-trending, polymarket-trending, reddit-trending, startup-trending, wikipedia-trending), subscribe, API keys, bot endpoints, integrations, X account management, automations (create, list, update, delete, steps), support tickets, credits (balance check, top up)
+- **Free**: account info, compose (all steps), styles (cached lookup/save/delete/compare), drafts, radar (via `xquik` tool, all 7 sources), subscribe, API keys, bot endpoints, integrations, X account management, automations (create, list, update, delete, steps), support tickets, credits (balance check, top up)
 - **Subscription required**: tweet search, user lookup, tweet lookup, follow check, media download (first only, cached free), extractions, draws, style analysis (X API refresh), performance analysis, trends, all write actions (tweet, like, retweet, follow, DM, profile, media upload, communities)

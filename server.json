@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.Xquik-dev/xquik",
-  "description": "Real-time X (Twitter) data platform. MCP server with 9 tools (explore + xquik sandbox + 7 radar sources) covering 99 REST API endpoints: tweet search, user lookup, user tweets/likes/media, favoriters, mutual followers, bookmarks, notifications, timeline, DM history, media download, 20 extraction tools, account monitoring, events, webhooks, trends, radar, tweet composer, style analysis, drafts, giveaway draws, write actions (tweet, like, retweet, follow, DM, profile, communities), X account management, credits, Telegram integrations, flow automations, and support tickets. Reads from $0.00015/call.",
+  "description": "Real-time X (Twitter) data platform. MCP server with 2 tools (explore + xquik) covering 120 REST API endpoints: tweet search, user lookup, user tweets/likes/media, favoriters, mutual followers, bookmarks, notifications, timeline, DM history, media download, 23 extraction tools, account monitoring, events, webhooks, trends, radar, tweet composer, style analysis, drafts, giveaway draws, write actions (tweet, like, retweet, follow, DM, profile, communities), X account management, credits, Telegram integrations, flow automations, and support tickets. Reads from $0.00015/call.",
   "repository": {
     "url": "https://github.com/Xquik-dev/x-twitter-scraper",
     "source": "github"

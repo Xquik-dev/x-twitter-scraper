@@ -1,6 +1,6 @@
 # Xquik Extraction Tools
 
-20 bulk data extraction tools. Each requires a specific target parameter.
+23 bulk data extraction tools. Each requires a specific target parameter.
 
 **Endpoint:** `POST /extractions`
 
@@ -17,6 +17,7 @@
 | `quote_extractor` | Extract users who quote-tweeted a tweet |
 | `thread_extractor` | Extract all tweets in a thread |
 | `article_extractor` | Extract article content linked in a tweet |
+| `favoriters` | Extract users who favorited a tweet |
 
 **Example:**
 ```json
@@ -45,6 +46,21 @@
 ```
 
 The `@` prefix is automatically stripped if included.
+
+### User-Based by ID (require `targetUserId`)
+
+| Tool Type | Description |
+|-----------|-------------|
+| `user_likes` | Extract tweets liked by a user |
+| `user_media` | Extract media tweets from a user |
+
+**Example:**
+```json
+{
+  "toolType": "user_likes",
+  "targetUserId": "44196397"
+}
+```
 
 ### Community-Based (require `targetCommunityId`)
 

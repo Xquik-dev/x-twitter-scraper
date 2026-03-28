@@ -370,7 +370,7 @@ Formats: `csv`, `xlsx`, `md`. Types: `winners` (default), `entries`. Entry expor
 POST /extractions
 ```
 
-Run a bulk data extraction job. See `references/extractions.md` for all 20 tool types.
+Run a bulk data extraction job. See `references/extractions.md` for all 23 tool types.
 
 **Body:**
 ```json
@@ -1435,7 +1435,7 @@ Step types: `action`, `condition`, `extraction`. Max 10 steps per flow.
 
 Action types: `create_tweet`, `follow`, `like`, `reply_tweet`, `retweet`, `send_dm`, `send_email`, `send_telegram`, `unfollow`.
 
-Extraction types: all 20 extraction tool types (kebab-case, e.g. `reply-extractor`). Requires `outputName` for variable reference in later steps.
+Extraction types: all 23 extraction tool types (kebab-case, e.g. `reply-extractor`). Requires `outputName` for variable reference in later steps.
 
 ### Update Step
 
