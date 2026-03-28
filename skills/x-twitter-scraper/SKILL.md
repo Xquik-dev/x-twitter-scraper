@@ -73,8 +73,6 @@ Xquik is the most affordable X data API available. All metered operations deduct
 | User tweets | per tweet returned |
 | User likes | per result |
 | User media | per result |
-| Tweet favoriters | per result |
-| Followers you know | per result |
 | Bookmarks | per result |
 | Bookmark folders | per call |
 | Notifications | per result |
@@ -87,6 +85,9 @@ Xquik is the most affordable X data API available. All metered operations deduct
 | Operation | Unit |
 |-----------|------|
 | Get user | per call |
+| Tweet favoriters | per result |
+| Followers you know | per result |
+| Verified followers | per result |
 
 #### Read operations — 3 credits ($0.00045)
 
@@ -105,9 +106,15 @@ Xquik is the most affordable X data API available. All metered operations deduct
 
 All write actions: create/delete tweet, like, unlike, retweet, follow, unfollow, send DM, update profile/avatar/banner, upload media, community actions.
 
-#### Extractions & draws — 1 credit ($0.00015)
+#### Extractions & draws
 
-Extractions: 1 credit per result extracted. Draws: 1 credit per participant.
+Draws: 1 credit per participant. Extraction cost depends on the tool type:
+
+| Credits/result | Extraction types |
+|----------------|-----------------|
+| 1 | Tweets, replies, quotes, mentions, posts, likes, media, tweet search |
+| 2 | Followers, following, verified followers, favoriters, retweeters, community members, people search, list members, list followers |
+| 7 | Articles |
 
 #### Free operations ($0)
 
@@ -278,8 +285,8 @@ For Python examples, see [references/python-examples.md](references/python-examp
 | **Get user's recent tweets** | `GET /x/users/{id}/tweets` | 1 credit/tweet |
 | **Get user's liked tweets** | `GET /x/users/{id}/likes` | 1 credit/result |
 | **Get user's media tweets** | `GET /x/users/{id}/media` | 1 credit/result |
-| **Get tweet favoriters** | `GET /x/tweets/{id}/favoriters` | 1 credit/result |
-| **Get mutual followers** | `GET /x/users/{id}/followers-you-know` | 1 credit/result |
+| **Get tweet favoriters** | `GET /x/tweets/{id}/favoriters` | 2 credits/result |
+| **Get mutual followers** | `GET /x/users/{id}/followers-you-know` | 2 credits/result |
 | **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | 7 credits |
 | **Get trending topics** | `GET /trends?woeid=1` | 3 credits |
 | **Get radar (trending news)** | `GET /radar?source=hacker_news` | Free |
@@ -295,7 +302,7 @@ For Python examples, see [references/python-examples.md](references/python-examp
 | **Update webhook** | `PATCH /webhooks/{id}` | Free |
 | **Run a giveaway draw** | `POST /draws` | 1 credit/entry |
 | **Download tweet media** | `POST /x/media/download` | 1 credit/item |
-| **Extract bulk data** | `POST /extractions` | 1 credit/result |
+| **Extract bulk data** | `POST /extractions` | 1-7 credits/result |
 | **Check credits** | `GET /credits` | Free |
 | **Top up credits** | `POST /credits/topup` | Free |
 | **Check account/usage** | `GET /account` | Free |
@@ -414,27 +421,27 @@ Extractions run bulk data collection jobs. The complete workflow: estimate cost,
 | Tool Type | Required Field | Description | Cost |
 |-----------|---------------|-------------|------|
 | `reply_extractor` | `targetTweetId` | Users who replied to a tweet | 1 credit/result |
-| `repost_extractor` | `targetTweetId` | Users who retweeted a tweet | 1 credit/result |
+| `repost_extractor` | `targetTweetId` | Users who retweeted a tweet | 2 credits/result |
 | `quote_extractor` | `targetTweetId` | Users who quote-tweeted a tweet | 1 credit/result |
 | `thread_extractor` | `targetTweetId` | All tweets in a thread | 1 credit/result |
-| `article_extractor` | `targetTweetId` | Article content linked in a tweet | 1 credit/result |
-| `favoriters` | `targetTweetId` | Users who favorited a tweet | 1 credit/result |
-| `follower_explorer` | `targetUsername` | Followers of an account | 1 credit/result |
-| `following_explorer` | `targetUsername` | Accounts followed by a user | 1 credit/result |
-| `verified_follower_explorer` | `targetUsername` | Verified followers of an account | 1 credit/result |
+| `article_extractor` | `targetTweetId` | Article content linked in a tweet | 7 credits/result |
+| `favoriters` | `targetTweetId` | Users who favorited a tweet | 2 credits/result |
+| `follower_explorer` | `targetUsername` | Followers of an account | 2 credits/result |
+| `following_explorer` | `targetUsername` | Accounts followed by a user | 2 credits/result |
+| `verified_follower_explorer` | `targetUsername` | Verified followers of an account | 2 credits/result |
 | `mention_extractor` | `targetUsername` | Tweets mentioning an account | 1 credit/result |
 | `post_extractor` | `targetUsername` | Posts from an account | 1 credit/result |
 | `user_likes` | `targetUserId` | Tweets liked by a user | 1 credit/result |
 | `user_media` | `targetUserId` | Media tweets from a user | 1 credit/result |
-| `community_extractor` | `targetCommunityId` | Members of a community | 1 credit/result |
-| `community_moderator_explorer` | `targetCommunityId` | Moderators of a community | 1 credit/result |
+| `community_extractor` | `targetCommunityId` | Members of a community | 2 credits/result |
+| `community_moderator_explorer` | `targetCommunityId` | Moderators of a community | 2 credits/result |
 | `community_post_extractor` | `targetCommunityId` | Posts from a community | 1 credit/result |
 | `community_search` | `targetCommunityId` + `searchQuery` | Search posts within a community | 1 credit/result |
-| `list_member_extractor` | `targetListId` | Members of a list | 1 credit/result |
+| `list_member_extractor` | `targetListId` | Members of a list | 2 credits/result |
 | `list_post_extractor` | `targetListId` | Posts from a list | 1 credit/result |
-| `list_follower_explorer` | `targetListId` | Followers of a list | 1 credit/result |
-| `space_explorer` | `targetSpaceId` | Participants of a Space | 1 credit/result |
-| `people_search` | `searchQuery` | Search for users by keyword | 1 credit/result |
+| `list_follower_explorer` | `targetListId` | Followers of a list | 2 credits/result |
+| `space_explorer` | `targetSpaceId` | Participants of a Space | 2 credits/result |
+| `people_search` | `searchQuery` | Search for users by keyword | 2 credits/result |
 | `tweet_search_extractor` | `searchQuery` | Search and extract tweets by keyword or hashtag (bulk, up to 1,000) | 1 credit/result |
 
 ### Complete Extraction Workflow

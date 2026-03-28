@@ -18,7 +18,7 @@ Xquik is dramatically cheaper than every alternative for X/Twitter data access.
 | **Cost per tweet read** | **$0.00015** | ~$0.01 | ~$0.005 |
 | **Cost per user lookup** | **$0.0003** | ~$0.01 | ~$0.005 |
 | **Write actions** | **$0.0003** | Limited | Limited |
-| **Bulk extraction** | **$0.00015/result** | Not available | Not available |
+| **Bulk extraction** | **From $0.00015/result** | Not available | Not available |
 | **Monitoring + webhooks** | **Free** | Not available | Not available |
 | **Giveaway draws** | **$0.00015/entry** | Not available | Not available |
 | **MCP server** | **Included** | Not available | Not available |
@@ -27,10 +27,15 @@ Xquik is dramatically cheaper than every alternative for X/Twitter data access.
 
 | Operation | Credits | Cost |
 |-----------|---------|------|
-| Read (tweet, user, search, timeline, bookmarks, etc.) | 1 | $0.00015 |
+| Read (tweet, search, timeline, bookmarks, etc.) | 1 | $0.00015 |
+| Read (user profile, favoriters, followers you know, verified followers) | 2 | $0.0003 |
+| Read (trends) | 3 | $0.00045 |
 | Follow check, article | 7 | $0.00105 |
 | Write (tweet, like, retweet, follow, DM, etc.) | 2 | $0.0003 |
-| Extraction / draw | 1/result | $0.00015/result |
+| Extraction (tweets, replies, quotes, mentions, posts, likes, media, search) | 1/result | $0.00015/result |
+| Extraction (followers, following, verified followers, favoriters, retweeters, community members, people search, list members, list followers) | 2/result | $0.0003/result |
+| Extraction (articles) | 7/result | $0.00105/result |
+| Draw | 1/entry | $0.00015/entry |
 | Monitors, webhooks, radar, compose, drafts, integrations | 0 | **Free** |
 
 ### Pay-Per-Use (No Subscription)
