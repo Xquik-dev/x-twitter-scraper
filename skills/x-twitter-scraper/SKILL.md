@@ -159,7 +159,7 @@ Two options without a monthly subscription:
 | `GET /x/trends` | $0.00045 | per call |
 | `GET /trends` | $0.00045 | per call |
 
-SDK: `npm i mppx` (TypeScript). Handles the 402 challenge/credential flow automatically.
+SDK: `npm i mppx viem` (TypeScript). Handles the 402 challenge/credential flow automatically.
 
 ### Credits
 
