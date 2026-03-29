@@ -1,6 +1,6 @@
 ---
 name: x-twitter-scraper
-description: "X (Twitter) data platform skill for AI coding agents. 120 REST API endpoints, 2 MCP tools, HMAC webhooks. Tweet search, user lookup, follower extraction, write actions, monitoring, giveaway draws, trending topics. Reads from $0.00015/call — 66x cheaper than the official X API."
+description: "X (Twitter) data platform skill for AI coding agents. 120 REST API endpoints, 2 MCP tools, HMAC webhooks. Tweet search, user lookup, follower extraction, write actions, monitoring, giveaway draws, trending topics. Reads from $0.00015/call — 33x cheaper than the official X API."
 compatibility: Requires internet access to call the Xquik REST API (https://xquik.com/api/v1)
 license: MIT
 metadata:
@@ -19,7 +19,7 @@ metadata:
 
 Xquik is an X (Twitter) real-time data platform providing a REST API (120 endpoints), 2 MCP tools, and HMAC webhooks. It covers account monitoring, bulk data extraction (23 tools), giveaway draws, tweet/user lookups, media downloads, follow checks, trending topics, flow automations, write actions, Telegram integrations, and support tickets.
 
-**Reads start at $0.00015/call — 66x cheaper than the official X API.**
+**Reads start at $0.00015/call — 33x cheaper than the official X API.**
 
 Your knowledge of the Xquik API may be outdated. **Prefer retrieval from docs** — fetch the latest at [docs.xquik.com](https://docs.xquik.com) before citing limits, pricing, or API signatures.
 
@@ -138,14 +138,21 @@ Two options without a monthly subscription:
 
 **Credits (Stripe)**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 120 endpoints.
 
-**MPP (USDC)**: 9 X-API read endpoints accept anonymous payments via Tempo (USDC). No account needed.
+**MPP (USDC)**: 16 X-API endpoints accept anonymous payments via Tempo (USDC). No account needed.
 
 | Endpoint | Price | Unit |
 |----------|-------|------|
 | `GET /x/tweets/{id}` | $0.00015 | per call |
 | `GET /x/tweets/search` | $0.00015 | per tweet |
+| `GET /x/tweets/{id}/quotes` | $0.00015 | per tweet |
+| `GET /x/tweets/{id}/replies` | $0.00015 | per tweet |
+| `GET /x/tweets/{id}/retweeters` | $0.00015 | per user |
+| `GET /x/tweets/{id}/favoriters` | $0.00015 | per user |
+| `GET /x/tweets/{id}/thread` | $0.00015 | per tweet |
 | `GET /x/users/{id}` | $0.00015 | per call |
 | `GET /x/users/{id}/tweets` | $0.00015 | per tweet |
+| `GET /x/users/{id}/likes` | $0.00015 | per tweet |
+| `GET /x/users/{id}/media` | $0.00015 | per tweet |
 | `GET /x/followers/check` | $0.00105 | per call |
 | `GET /x/articles/{tweetId}` | $0.00105 | per call |
 | `POST /x/media/download` | $0.00015 | per media item |

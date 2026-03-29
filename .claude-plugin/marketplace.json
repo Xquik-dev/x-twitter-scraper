@@ -12,7 +12,7 @@
     {
       "name": "x-twitter-scraper",
       "source": ".",
-      "description": "120 REST API endpoints, 2 MCP tools, 23 extraction types. Tweet search, user lookup, follower extraction, engagement metrics, giveaway draws, trending topics, write actions, credits, pay-per-use (MPP), and Telegram integrations. Reads from $0.00015/call — 66x cheaper than the official X API.",
+      "description": "120 REST API endpoints, 2 MCP tools, 23 extraction types. Tweet search, user lookup, follower extraction, engagement metrics, giveaway draws, trending topics, write actions, credits, pay-per-use (MPP), and Telegram integrations. Reads from $0.00015/call — 33x cheaper than the official X API.",
       "version": "2.0.0",
       "author": {
         "name": "Xquik"

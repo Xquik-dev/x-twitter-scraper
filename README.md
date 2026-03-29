@@ -5,7 +5,7 @@
 
 An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. 120 REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, and write actions.
 
-**The cheapest X data API on the market** — reads from $0.00015/call (66x cheaper than the official X API).
+**The cheapest X data API on the market** — reads from $0.00015/call (33x cheaper than the official X API).
 
 Works with **40+ AI coding agents** including Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code, Cline, Roo Code, Goose, Amp, Augment, Continue, OpenHands, Trae, OpenCode, and more.
 
@@ -46,7 +46,7 @@ Xquik is dramatically cheaper than every alternative for X/Twitter data access.
 Two options for pay-per-use without a monthly subscription:
 
 - **Credits (Stripe)**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 120 endpoints.
-- **MPP (USDC)**: 9 X-API read endpoints accept anonymous payments via Machine Payments Protocol. No account needed. SDK: `npm i mppx`.
+- **MPP (USDC)**: 16 X-API endpoints accept anonymous payments via Machine Payments Protocol. No account needed. SDK: `npm i mppx`.
 
 ## Installation
 
@@ -150,7 +150,7 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Credits & billing**: Check balance, top up credits, manage subscription
 - **Support tickets**: Open and manage support tickets via API
 - **MCP server**: 2 tools covering 120 endpoints for AI agent integration
-- **Pay-per-use (MPP)**: Anonymous access to 9 endpoints via USDC, no account needed
+- **Pay-per-use (MPP)**: Anonymous access to 16 endpoints via USDC, no account needed
 
 ## Capabilities
 
@@ -170,7 +170,7 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 | **Trending Topics** | Regional trends + 7 free news sources via Radar |
 | **Tweet Composition** | Algorithm-optimized tweet composer with scoring checklist (free) |
 | **Credits & Billing** | Check balance, top up, manage subscription via API |
-| **Pay-Per-Use (MPP)** | 9 endpoints with anonymous USDC payments, no account needed |
+| **Pay-Per-Use (MPP)** | 16 endpoints with anonymous USDC payments, no account needed |
 | **TypeScript Types** | Complete type definitions for all API objects |
 
 ## Supported Agents
