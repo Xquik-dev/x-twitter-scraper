@@ -138,7 +138,7 @@ Two options without a monthly subscription:
 
 **Credits (Stripe)**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 120 endpoints.
 
-**MPP (USDC)**: 8 X-API read endpoints accept anonymous payments via Tempo (USDC). No account needed.
+**MPP (USDC)**: 9 X-API read endpoints accept anonymous payments via Tempo (USDC). No account needed.
 
 | Endpoint | Price | Unit |
 |----------|-------|------|
@@ -149,7 +149,8 @@ Two options without a monthly subscription:
 | `GET /x/followers/check` | $0.00105 | per call |
 | `GET /x/articles/{tweetId}` | $0.00105 | per call |
 | `POST /x/media/download` | $0.00015 | per media item |
-| `GET /trends` | $0.00015 | per call |
+| `GET /x/trends` | $0.00045 | per call |
+| `GET /trends` | $0.00045 | per call |
 
 SDK: `npm i mppx` (TypeScript). Handles the 402 challenge/credential flow automatically.
 
