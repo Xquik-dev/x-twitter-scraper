@@ -1,0 +1,31 @@
+name: xquik-remote
+type: remote
+dynamic:
+  tools: true
+meta:
+  category: social-media
+  tags:
+    - social-media
+    - twitter
+    - x
+    - automation
+    - monitoring
+    - data-extraction
+    - remote
+about:
+  title: Xquik
+  description: Real-time X (Twitter) data platform. 120 REST API endpoints via 2 MCP tools - tweet search, user lookup, follower extraction, write actions, monitoring, giveaway draws, trending topics. Reads from $0.00015/call.
+  icon: https://www.google.com/s2/favicons?domain=xquik.com&sz=64
+source:
+  project: https://github.com/Xquik-dev/x-twitter-scraper
+remote:
+  transport_type: streamable-http
+  url: https://xquik.com/mcp
+  headers:
+    Authorization: "Bearer ${XQUIK_REMOTE_API_KEY}"
+config:
+  description: Configure the connection to Xquik
+  secrets:
+    - name: xquik-remote.api_key
+      env: XQUIK_REMOTE_API_KEY
+      example: xq_YOUR_API_KEY_HERE

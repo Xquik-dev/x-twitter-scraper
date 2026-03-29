@@ -1,0 +1,24 @@
+[
+  {
+    "name": "explore",
+    "description": "Search the X (Twitter) API spec for endpoints. No network calls - runs against an in-memory endpoint catalog covering tweet search, user lookup, media download, monitoring, giveaways, composition, and more.",
+    "arguments": [
+      {
+        "name": "code",
+        "type": "string",
+        "desc": "Async arrow function to search the API spec. Sandbox provides spec.endpoints array with method, path, summary, category, free, parameters, and responseShape fields."
+      }
+    ]
+  },
+  {
+    "name": "xquik",
+    "description": "Execute X (Twitter) API calls. Covers 120 endpoints: tweet search, user lookup, follower extraction, write actions (tweet, like, retweet, follow, DM), monitoring, giveaway draws, trending topics, composition, and more.",
+    "arguments": [
+      {
+        "name": "code",
+        "type": "string",
+        "desc": "Async arrow function to execute API calls. Sandbox provides xquik(method, path, options?) for making authenticated requests to the Xquik API."
+      }
+    ]
+  }
+]
