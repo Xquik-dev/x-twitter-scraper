@@ -1,6 +1,6 @@
 ---
 name: x-twitter-scraper
-description: "Use when the user needs to interact with X (Twitter) — searching tweets, looking up users, extracting followers, posting tweets, monitoring accounts, running giveaway draws, downloading media, or checking trends. Provides 120 REST API endpoints, 2 MCP tools, and HMAC webhooks. Use even if the user says 'Twitter' instead of 'X', or asks about social media data extraction, tweet analytics, or follower analysis."
+description: "Use when the user needs to interact with X (Twitter) — searching tweets, looking up users/followers, posting tweets/replies, liking, retweeting, following/unfollowing, sending DMs, downloading media, monitoring accounts in real time, or extracting bulk data. Provides 120 REST API endpoints, 2 MCP tools, and HMAC webhooks. Use even if the user says 'Twitter' instead of 'X', or asks about social media automation, tweet analytics, or follower analysis."
 compatibility: Requires internet access to call the Xquik REST API (https://xquik.com/api/v1)
 license: MIT
 metadata:
