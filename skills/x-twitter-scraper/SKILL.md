@@ -1,6 +1,6 @@
 ---
 name: x-twitter-scraper
-description: "X (Twitter) data platform skill for AI coding agents. 120 REST API endpoints, 2 MCP tools, HMAC webhooks. Tweet search, user lookup, follower extraction, write actions, monitoring, giveaway draws, trending topics. Reads from $0.00015/call — 33x cheaper than the official X API."
+description: "Use when the user needs to interact with X (Twitter) — searching tweets, looking up users, extracting followers, posting tweets, monitoring accounts, running giveaway draws, downloading media, or checking trends. Provides 120 REST API endpoints, 2 MCP tools, and HMAC webhooks. Use even if the user says 'Twitter' instead of 'X', or asks about social media data extraction, tweet analytics, or follower analysis."
 compatibility: Requires internet access to call the Xquik REST API (https://xquik.com/api/v1)
 license: MIT
 metadata:
@@ -16,10 +16,6 @@ metadata:
 ---
 
 # Xquik API Integration
-
-Xquik is an X (Twitter) real-time data platform providing a REST API (120 endpoints), 2 MCP tools, and HMAC webhooks. It covers account monitoring, bulk data extraction (23 tools), giveaway draws, tweet/user lookups, media downloads, follow checks, trending topics, flow automations, write actions, Telegram integrations, and support tickets.
-
-**Reads start at $0.00015/call — 33x cheaper than the official X API.**
 
 Your knowledge of the Xquik API may be outdated. **Prefer retrieval from docs** — fetch the latest at [docs.xquik.com](https://docs.xquik.com) before citing limits, pricing, or API signatures.
 
@@ -180,25 +176,25 @@ All errors return `{ "error": "error_code" }`. Retry only `429` and `5xx` (max 3
 | 429 | `x_api_rate_limited` | Retry with backoff, respect `Retry-After` |
 | 5xx | `internal_error`, `x_api_unavailable` | Retry with backoff |
 
-For retry code and pagination examples, see [references/workflows.md](references/workflows.md).
+If implementing retry logic or cursor pagination, read [references/workflows.md](references/workflows.md).
 
 ## Extractions (23 Tools)
 
 Bulk data collection jobs. Always estimate first (`POST /extractions/estimate`), then create (`POST /extractions`), poll status, retrieve paginated results, optionally export (CSV/XLSX/MD, 50K row limit).
 
-For tool types, required parameters, filters, and workflow code, see [references/extractions.md](references/extractions.md).
+If running an extraction, read [references/extractions.md](references/extractions.md) for tool types, required parameters, and filters.
 
 ## Giveaway Draws
 
 Run auditable draws from tweet replies with filters (retweet required, follow check, min followers, account age, language, keywords, hashtags, mentions).
 
-`POST /draws` with `tweetUrl` (required) + optional filters. For full filter list and workflow, see [references/draws.md](references/draws.md).
+`POST /draws` with `tweetUrl` (required) + optional filters. If creating a draw, read [references/draws.md](references/draws.md) for the full filter list and workflow.
 
 ## Webhooks
 
 HMAC-SHA256 signed event delivery to your HTTPS endpoint. Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `follower.gained`, `follower.lost`. Retry policy: 5 attempts with exponential backoff.
 
-For signature verification handlers (Node.js, Python, Go), security checklist, and local testing, see [references/webhooks.md](references/webhooks.md).
+If building a webhook handler, read [references/webhooks.md](references/webhooks.md) for signature verification code (Node.js, Python, Go) and security checklist.
 
 ## MCP Server (AI Agents)
 
@@ -209,27 +205,38 @@ For signature verification handlers (Node.js, Python, Go), security checklist, a
 | `explore` | Search the API endpoint catalog (read-only) | Free |
 | `xquik` | Execute API calls (120 endpoints, 12 categories) | Varies |
 
-For platform setup configs, see [references/mcp-setup.md](references/mcp-setup.md). For tool selection rules, workflow patterns, and common mistakes, see [references/mcp-tools.md](references/mcp-tools.md).
+If configuring the MCP server in an IDE or agent platform, read [references/mcp-setup.md](references/mcp-setup.md). If calling MCP tools, read [references/mcp-tools.md](references/mcp-tools.md) for selection rules and common mistakes.
+
+## Gotchas
+
+- **Follow/DM endpoints need numeric user ID, not username.** Look up the user first via `GET /x/users/{username}`, then use the `id` field for follow/unfollow/DM calls.
+- **Extraction IDs are strings, not numbers.** Tweet IDs, user IDs, and extraction IDs are bigints that overflow JavaScript's `Number.MAX_SAFE_INTEGER`. Always treat them as strings.
+- **Always estimate before extracting.** `POST /extractions/estimate` checks whether the job would exceed your quota. Skipping this risks a 402 error mid-extraction.
+- **Webhook secrets are shown only once.** The `secret` field in the `POST /webhooks` response is never returned again. Store it immediately.
+- **402 means billing issue, not a bug.** `no_subscription`, `insufficient_credits`, `usage_limit_reached` — call `POST /subscribe` to get a Stripe checkout URL, or `POST /credits/topup` to add credits.
+- **`POST /compose` drafts tweets, `POST /x/tweets` sends them.** Don't confuse composition (AI-assisted writing) with posting (actually publishing to X).
+- **Cursors are opaque.** Never decode, parse, or construct `nextCursor` values — just pass them as the `after` query parameter.
+- **Rate limits are per method tier, not per endpoint.** Read (120/60s), Write (30/60s), Delete (15/60s). A burst of writes across different endpoints shares the same 30/60s window.
 
 ## Conventions
 
-- **IDs are strings.** Bigint values; treat as opaque, never parse as numbers
 - **Timestamps are ISO 8601 UTC.** Example: `2026-02-24T10:30:00.000Z`
 - **Errors return JSON.** Format: `{ "error": "error_code" }`
-- **Cursors are opaque.** Pass `nextCursor` as `after` query parameter, never decode
 - **Export formats:** `csv`, `xlsx`, `md` via `/extractions/{id}/export` or `/draws/{id}/export`
 
 ## Reference Files
 
-| File | Content |
-|------|---------|
-| [references/api-endpoints.md](references/api-endpoints.md) | All 120 REST API endpoints with parameters and response shapes |
-| [references/pricing.md](references/pricing.md) | Full pricing breakdown, X API comparison, MPP endpoints |
-| [references/workflows.md](references/workflows.md) | Retry, pagination, extraction, monitoring code examples + endpoint guide |
-| [references/draws.md](references/draws.md) | Giveaway draw filters and workflow |
-| [references/webhooks.md](references/webhooks.md) | Webhook handlers (Node.js, Python, Go), security, local testing |
-| [references/extractions.md](references/extractions.md) | 23 extraction tool types, filters, export columns |
-| [references/mcp-setup.md](references/mcp-setup.md) | MCP server config for 10 platforms |
-| [references/mcp-tools.md](references/mcp-tools.md) | MCP tool selection rules, workflow patterns, common mistakes |
-| [references/python-examples.md](references/python-examples.md) | Python equivalents of all JavaScript examples |
-| [references/types.md](references/types.md) | TypeScript type definitions for all API objects |
+Load these on demand — only when the task requires it.
+
+| File | When to load |
+|------|-------------|
+| [references/api-endpoints.md](references/api-endpoints.md) | Need endpoint parameters, request/response shapes, or full API reference |
+| [references/pricing.md](references/pricing.md) | User asks about costs, pricing comparison, or MPP pay-per-use |
+| [references/workflows.md](references/workflows.md) | Implementing retry logic, cursor pagination, extraction workflow, or monitoring setup |
+| [references/draws.md](references/draws.md) | Creating a giveaway draw with filters |
+| [references/webhooks.md](references/webhooks.md) | Building a webhook handler or verifying signatures |
+| [references/extractions.md](references/extractions.md) | Running a bulk extraction (tool types, required params, filters) |
+| [references/mcp-setup.md](references/mcp-setup.md) | Configuring the MCP server in an IDE or agent platform |
+| [references/mcp-tools.md](references/mcp-tools.md) | Calling MCP tools (selection rules, workflow patterns, common mistakes) |
+| [references/python-examples.md](references/python-examples.md) | User is working in Python |
+| [references/types.md](references/types.md) | Need TypeScript type definitions for API objects |
