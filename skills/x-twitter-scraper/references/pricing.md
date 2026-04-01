@@ -22,6 +22,8 @@ Xquik is the most affordable X data API available. All metered operations deduct
 | User tweets | per tweet returned |
 | User likes | per result |
 | User media | per result |
+| Tweet favoriters | per result |
+| Followers you know | per result |
 | Bookmarks | per result |
 | Bookmark folders | per call |
 | Notifications | per result |
@@ -34,8 +36,6 @@ Xquik is the most affordable X data API available. All metered operations deduct
 | Operation | Unit |
 |-----------|------|
 | Get user | per call |
-| Tweet favoriters | per result |
-| Followers you know | per result |
 | Verified followers | per result |
 
 ### Read operations — 3 credits ($0.00045)
@@ -61,8 +61,8 @@ Draws: 1 credit per participant. Extraction cost depends on the tool type:
 
 | Credits/result | Extraction types |
 |----------------|-----------------|
-| 1 | Tweets, replies, quotes, mentions, posts, likes, media, tweet search |
-| 2 | Followers, following, verified followers, favoriters, retweeters, community members, people search, list members, list followers |
+| 1 | Tweets, replies, quotes, mentions, posts, likes, media, tweet search, favoriters, retweeters, community members, people search, list members, list followers |
+| 2 | Followers, following, verified followers |
 | 7 | Articles |
 
 ### Free operations ($0)
