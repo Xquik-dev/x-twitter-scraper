@@ -24,7 +24,7 @@ Add to `claude_desktop_config.json`:
     "xquik": {
       "command": "npx",
       "args": [
-        "mcp-remote@latest",
+        "mcp-remote@0.1.38",
         "https://xquik.com/mcp",
         "--header",
         "x-api-key:xq_YOUR_KEY_HERE"
