@@ -23,5 +23,12 @@
     "automation",
     "ai-agent"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "userConfig": {
+    "api_key": {
+      "description": "Xquik API key (get one at xquik.com/account-manager)",
+      "sensitive": true
+    }
+  }
 }
