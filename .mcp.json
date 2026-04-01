@@ -1,0 +1,9 @@
+{
+  "xquik": {
+    "type": "streamable-http",
+    "url": "https://xquik.com/mcp",
+    "headers": {
+      "x-api-key": "${user_config.api_key}"
+    }
+  }
+}
