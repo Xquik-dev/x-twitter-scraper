@@ -45,7 +45,7 @@ interface CreditBalance {
 }
 
 interface CreditTopUpResponse {
-  url: string;                  // Stripe checkout URL
+  url: string;                  // Checkout URL
 }
 
 // ─── API Keys ────────────────────────────────────────────
@@ -993,7 +993,7 @@ interface McpTrends {
 
 interface McpSubscribe {
   status: "already_subscribed" | "checkout_created" | "payment_issue";
-  url: string;                // Stripe Checkout or Customer Portal URL. Open in browser.
+  url: string;                // Checkout or Customer Portal URL. Open in browser.
   message: string;            // Human-readable status message
 }
 

@@ -85,9 +85,9 @@ Monitors, webhooks, integrations, account status, radar (7 sources), extraction/
 
 Two options without a monthly subscription:
 
-**Credits (Stripe)**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 120 endpoints.
+**Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 120 endpoints.
 
-**MPP (USDC)**: 16 X-API endpoints accept anonymous payments via Tempo (USDC). No account needed.
+**MPP**: 16 X-API endpoints accept anonymous on-chain payments. No account needed.
 
 | Endpoint | Price | Unit |
 |----------|-------|------|
@@ -108,7 +108,7 @@ Two options without a monthly subscription:
 | `GET /x/trends` | $0.00045 | per call |
 | `GET /trends` | $0.00045 | per call |
 
-SDK: `npm i mppx viem` (TypeScript). Handles the 402 challenge/credential flow automatically.
+SDK: `npm i mppx` (TypeScript). Handles the 402 challenge/credential flow automatically.
 
 ## Credits
 

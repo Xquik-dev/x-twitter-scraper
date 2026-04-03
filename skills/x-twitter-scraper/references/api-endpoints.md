@@ -1027,12 +1027,12 @@ Link your X username to your Xquik account. Required for own-account detection i
 POST /subscribe
 ```
 
-Returns a Stripe Checkout URL for subscribing or managing the subscription. If already subscribed, returns the billing portal URL.
+Returns a checkout URL for subscribing or managing the subscription. If already subscribed, returns the billing portal URL.
 
 **Response:**
 ```json
 {
-  "url": "https://checkout.stripe.com/c/pay/..."
+  "url": "https://checkout.xquik.com/..."
 }
 ```
 
@@ -1495,7 +1495,7 @@ Get credit balance, lifetime purchased/used, and auto top-up status. Free.
 POST /credits/topup
 ```
 
-Get a Stripe checkout URL to purchase credits ($10 minimum). Free.
+Get a checkout URL to purchase credits ($10 minimum). Free.
 
 ---
 
