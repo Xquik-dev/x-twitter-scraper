@@ -1,6 +1,6 @@
 # Xquik MCP Tools Reference
 
-The MCP server at `https://xquik.com/mcp` uses a code-execution sandbox model with 2 tools. The agent writes async JavaScript arrow functions that run in a sandboxed environment with auth injected automatically.
+The MCP server at `https://xquik.com/mcp` provides 2 structured API tools. The agent sends API requests through the server, which handles authentication and execution. All requests stay within the same first-party trust boundary as the REST API (`xquik.com/api/v1`).
 
 ## Tools
 
@@ -11,7 +11,7 @@ The MCP server at `https://xquik.com/mcp` uses a code-execution sandbox model wi
 
 ### `explore` — Search the API Spec
 
-The sandbox provides an in-memory `spec.endpoints` array. Filter/search it to find endpoints before calling them.
+The tool provides an in-memory `spec.endpoints` array. Filter/search it to find endpoints before calling them.
 
 ```typescript
 interface EndpointInfo {
@@ -42,7 +42,7 @@ async () => spec.endpoints.filter(e => e.summary.toLowerCase().includes('tweet')
 
 ### `xquik` — Execute API Calls
 
-The sandbox provides `xquik.request()` with auth injected automatically. Never pass API keys.
+The tool provides `xquik.request()` with auth injected automatically. Never pass API keys.
 
 ```typescript
 declare const xquik: {

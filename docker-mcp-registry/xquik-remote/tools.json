@@ -6,7 +6,7 @@
       {
         "name": "code",
         "type": "string",
-        "desc": "Async arrow function to search the API spec. Sandbox provides spec.endpoints array with method, path, summary, category, free, parameters, and responseShape fields."
+        "desc": "JavaScript expression to search the API spec. The tool provides a spec.endpoints array with method, path, summary, category, free, parameters, and responseShape fields."
       }
     ]
   },
@@ -17,7 +17,7 @@
       {
         "name": "code",
         "type": "string",
-        "desc": "Async arrow function to execute API calls. Sandbox provides xquik(method, path, options?) for making authenticated requests to the Xquik API."
+        "desc": "JavaScript expression to execute API calls. The tool provides xquik.request(path, options?) for making authenticated requests to the Xquik API."
       }
     ]
   }

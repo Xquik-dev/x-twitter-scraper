@@ -162,14 +162,14 @@ Add to `opencode.json`:
 
 ## MCP Server Architecture
 
-The default MCP server (v2) at `https://xquik.com/mcp` uses a **code-execution sandbox model** with 2 tools:
+The MCP server (v2) at `https://xquik.com/mcp` provides 2 structured API tools:
 
 | Tool | Description | Cost |
 |------|-------------|------|
 | `explore` | Search the API endpoint catalog (read-only, no network calls) | Free |
 | `xquik` | Execute API calls against your account | Varies by endpoint |
 
-The agent writes async JavaScript arrow functions that run in a sandboxed environment. Auth is injected automatically. The sandbox covers all 97 REST API endpoints across 12 categories: account, automations, bot, composition, extraction, integrations, media, monitoring, support, twitter, x-accounts, and x-write.
+The agent sends structured API requests through the MCP server, which handles authentication and execution within the same first-party infrastructure as the REST API. All 97 REST API endpoints across 12 categories are accessible: account, automations, bot, composition, extraction, integrations, media, monitoring, support, twitter, x-accounts, and x-write.
 
 ## After Setup
 
