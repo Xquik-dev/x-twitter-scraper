@@ -44,7 +44,7 @@ Xquik is the most affordable X data API available. All metered operations deduct
 |-----------|------|
 | Trends | per call |
 
-### Read operations — 5 credits ($0.00075)
+### Read operations — 7 credits ($0.00105)
 
 | Operation | Unit |
 |-----------|------|
@@ -102,8 +102,8 @@ Two options without a monthly subscription:
 | `GET /x/users/{id}/tweets` | $0.00015 | per tweet |
 | `GET /x/users/{id}/likes` | $0.00015 | per tweet |
 | `GET /x/users/{id}/media` | $0.00015 | per tweet |
-| `GET /x/followers/check` | $0.00075 | per call |
-| `GET /x/articles/{tweetId}` | $0.00075 | per call |
+| `GET /x/followers/check` | $0.00105 | per call |
+| `GET /x/articles/{tweetId}` | $0.00105 | per call |
 | `POST /x/media/download` | $0.00015 | per media item |
 | `GET /x/trends` | $0.00045 | per call |
 | `GET /trends` | $0.00045 | per call |
