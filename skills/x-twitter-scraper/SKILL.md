@@ -62,7 +62,7 @@ When this skill and the docs disagree, **trust the docs**.
 
 ## Pricing Summary
 
-$20/month base plan. 1 credit = $0.00015. Read operations: 1-7 credits. Write operations: 2 credits. Extractions: 1-7 credits/result. Draws: 1 credit/participant. Monitors, webhooks, radar, compose, drafts, and support are free. Pay-per-use credit top-ups also available.
+$20/month base plan. 1 credit = $0.00015. Read operations: 1-5 credits. Write operations: 10 credits. Extractions: 1-5 credits/result. Draws: 1 credit/participant. Monitors, webhooks, radar, compose, drafts, and support are free. Pay-per-use credit top-ups also available.
 
 For full pricing breakdown, comparison vs official X API, and pay-per-use details, see [references/pricing.md](references/pricing.md).
 

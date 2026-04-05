@@ -44,14 +44,14 @@ Xquik is the most affordable X data API available. All metered operations deduct
 |-----------|------|
 | Trends | per call |
 
-### Read operations — 7 credits ($0.00105)
+### Read operations — 5 credits ($0.00075)
 
 | Operation | Unit |
 |-----------|------|
 | Follow check | per call |
 | Get article | per call |
 
-### Write operations — 2 credits ($0.0003)
+### Write operations — 10 credits ($0.0015)
 
 All write actions: create/delete tweet, like, unlike, retweet, follow, unfollow, send DM, update profile/avatar/banner, upload media, community actions.
 
@@ -63,7 +63,7 @@ Draws: 1 credit per participant. Extraction cost depends on the tool type:
 |----------------|-----------------|
 | 1 | Tweets, replies, quotes, mentions, posts, likes, media, tweet search, favoriters, retweeters, community members, people search, list members, list followers |
 | 2 | Followers, following, verified followers |
-| 7 | Articles |
+| 5 | Articles |
 
 ### Free operations ($0)
 
@@ -76,7 +76,7 @@ Monitors, webhooks, integrations, account status, radar (7 sources), extraction/
 | **Monthly cost** | **$20** | $100 | $5,000 |
 | **Cost per tweet read** | **$0.00015** | ~$0.01 | ~$0.005 |
 | **Cost per user lookup** | **$0.0003** | ~$0.01 | ~$0.005 |
-| **Write actions** | **$0.0003** | Limited | Limited |
+| **Write actions** | **$0.0015** | Limited | Limited |
 | **Bulk extraction** | **$0.00015/result** | Not available | Not available |
 | **Monitoring + webhooks** | **Free** | Not available | Not available |
 | **Giveaway draws** | **$0.00015/entry** | Not available | Not available |
@@ -102,8 +102,8 @@ Two options without a monthly subscription:
 | `GET /x/users/{id}/tweets` | $0.00015 | per tweet |
 | `GET /x/users/{id}/likes` | $0.00015 | per tweet |
 | `GET /x/users/{id}/media` | $0.00015 | per tweet |
-| `GET /x/followers/check` | $0.00105 | per call |
-| `GET /x/articles/{tweetId}` | $0.00105 | per call |
+| `GET /x/followers/check` | $0.00075 | per call |
+| `GET /x/articles/{tweetId}` | $0.00075 | per call |
 | `POST /x/media/download` | $0.00015 | per media item |
 | `GET /x/trends` | $0.00045 | per call |
 | `GET /trends` | $0.00045 | per call |

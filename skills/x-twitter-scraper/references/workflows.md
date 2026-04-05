@@ -156,15 +156,15 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `follow
 | Goal | Endpoint | Cost |
 |------|----------|------|
 | **Get a single tweet** by ID/URL | `GET /x/tweets/{id}` | 1 credit |
-| **Get an X Article** by tweet ID | `GET /x/articles/{id}` | 7 credits |
+| **Get an X Article** by tweet ID | `GET /x/articles/{id}` | 5 credits |
 | **Search tweets** by keyword/hashtag | `GET /x/tweets/search?q=...` | 1 credit/tweet |
 | **Get a user profile** | `GET /x/users/{username}` | 2 credits |
 | **Get user's recent tweets** | `GET /x/users/{id}/tweets` | 1 credit/tweet |
 | **Get user's liked tweets** | `GET /x/users/{id}/likes` | 1 credit/result |
 | **Get user's media tweets** | `GET /x/users/{id}/media` | 1 credit/result |
-| **Get tweet favoriters** | `GET /x/tweets/{id}/favoriters` | 2 credits/result |
+| **Get tweet favoriters** | `GET /x/tweets/{id}/favoriters` | 1 credit/result |
 | **Get mutual followers** | `GET /x/users/{id}/followers-you-know` | 2 credits/result |
-| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | 7 credits |
+| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | 5 credits |
 | **Get trending topics** | `GET /trends?woeid=1` | 3 credits |
 | **Get radar (trending news)** | `GET /radar?source=hacker_news` | Free |
 | **Get bookmarks** | `GET /x/bookmarks` | 1 credit/result |
@@ -177,18 +177,18 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `follow
 | **Receive events via webhook** | `POST /webhooks` | Free |
 | **Run a giveaway draw** | `POST /draws` | 1 credit/entry |
 | **Download tweet media** | `POST /x/media/download` | 1 credit/item |
-| **Extract bulk data** | `POST /extractions` | 1-7 credits/result |
+| **Extract bulk data** | `POST /extractions` | 1-5 credits/result |
 | **Check credits** | `GET /credits` | Free |
 | **Top up credits** | `POST /credits/topup` | Free |
 | **Compose a tweet** | `POST /compose` | Free |
-| **Post a tweet** | `POST /x/tweets` | 2 credits |
-| **Like / Unlike a tweet** | `POST` / `DELETE /x/tweets/{id}/like` | 2 credits |
-| **Retweet** | `POST /x/tweets/{id}/retweet` | 2 credits |
-| **Follow / Unfollow** | `POST` / `DELETE /x/users/{id}/follow` | 2 credits |
-| **Send a DM** | `POST /x/dm/{userId}` | 2 credits |
-| **Update profile** | `PATCH /x/profile` | 2 credits |
-| **Upload media** | `POST /x/media` | 2 credits |
-| **Community actions** | `POST /x/communities`, join/leave | 2 credits |
+| **Post a tweet** | `POST /x/tweets` | 10 credits |
+| **Like / Unlike a tweet** | `POST` / `DELETE /x/tweets/{id}/like` | 10 credits |
+| **Retweet** | `POST /x/tweets/{id}/retweet` | 10 credits |
+| **Follow / Unfollow** | `POST` / `DELETE /x/users/{id}/follow` | 10 credits |
+| **Send a DM** | `POST /x/dm/{userId}` | 10 credits |
+| **Update profile** | `PATCH /x/profile` | 10 credits |
+| **Upload media** | `POST /x/media` | 10 credits |
+| **Community actions** | `POST /x/communities`, join/leave | 10 credits |
 | **Telegram integration** | `POST /integrations` | Free |
 | **Automation flows** | `POST /automations` | Free |
 | **Support tickets** | `POST /support/tickets` | Free |

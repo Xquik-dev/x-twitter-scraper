@@ -1217,7 +1217,7 @@ PATCH /x/profile
 PATCH /x/profile/avatar
 ```
 
-Update profile avatar. Max 700 KB, GIF/JPEG/PNG. Metered (2 credits).
+Update profile avatar. Max 700 KB, GIF/JPEG/PNG. Metered (10 credits).
 
 **Body:** FormData with `account` (required) and `file` (required, max 700 KB).
 
@@ -1227,7 +1227,7 @@ Update profile avatar. Max 700 KB, GIF/JPEG/PNG. Metered (2 credits).
 PATCH /x/profile/banner
 ```
 
-Update profile banner. Max 2 MB, GIF/JPEG/PNG. Metered (2 credits).
+Update profile banner. Max 2 MB, GIF/JPEG/PNG. Metered (10 credits).
 
 **Body:** FormData with `account` (required) and `file` (required, max 2 MB).
 
