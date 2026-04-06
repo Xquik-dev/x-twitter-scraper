@@ -34,7 +34,7 @@ Xquik is dramatically cheaper than every alternative for X/Twitter data access.
 | Read (user profile, verified followers, followers you know) | 2 | $0.0003 |
 | Read (favoriters) | 1 | $0.00015 |
 | Read (trends) | 3 | $0.00045 |
-| Follow check, article | 5 | $0.00075 |
+| Follow check, article | 7 | $0.00105 |
 | Write (tweet, like, retweet, follow, DM, etc.) | 10 | $0.0015 |
 | Extraction (tweets, replies, quotes, mentions, posts, likes, media, search, favoriters, retweeters, community members, people search, list members, list followers) | 1/result | $0.00015/result |
 | Extraction (followers, following, verified followers) | 2/result | $0.0003/result |
