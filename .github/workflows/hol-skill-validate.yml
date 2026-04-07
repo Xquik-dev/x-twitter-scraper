@@ -28,3 +28,5 @@ jobs:
           skill-dir: skills/x-twitter-scraper
           annotate: "false"
           preview-upload: "false"
+          comment-mode: none
+          comment-on-success: "false"
