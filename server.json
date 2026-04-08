@@ -10,7 +10,22 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://xquik.com/mcp"
+      "url": "https://xquik.com/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {XQUIK_API_KEY}",
+          "description": "Xquik API key from https://xquik.com/dashboard/account",
+          "isRequired": true,
+          "isSecret": true,
+          "variables": {
+            "XQUIK_API_KEY": {
+              "description": "Your Xquik API key (starts with xq_)",
+              "isSecret": true
+            }
+          }
+        }
+      ]
     }
   ]
 }

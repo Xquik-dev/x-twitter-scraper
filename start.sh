@@ -1,2 +1,2 @@
 #!/bin/sh
-exec mcp-proxy https://xquik.com/mcp
+exec npx -y mcp-remote https://xquik.com/mcp
