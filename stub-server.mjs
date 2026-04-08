@@ -20,14 +20,34 @@ const TOOLS = [
   {
     name: "explore",
     description:
-      "Search the X (Twitter) API spec for endpoints: tweet search, user lookup, media download, monitoring, giveaways, composition, and more. No network calls - runs against an in-memory endpoint catalog.\n\nWrite an async arrow function. The sandbox provides:\n\n```typescript\ninterface EndpointInfo {\n  method: string;\n  path: string;\n  summary: string;\n  category: string;\n  free: boolean;\n  parameters?: Array<{ name: string; in: 'query' | 'path' | 'body'; required: boolean; type: string; description: string }>;\n  responseShape?: string;\n}\n\ndeclare const spec: { endpoints: EndpointInfo[] };\n```\n\n## Examples\n\n### Find all free endpoints\n```javascript\nasync () => {\n  return spec.endpoints.filter(e => e.free);\n}\n```\n\n### Find endpoints by category\n```javascript\nasync () => {\n  return spec.endpoints.filter(e => e.category === 'composition');\n}\n```\n\n### Search by keyword\n```javascript\nasync () => {\n  return spec.endpoints.filter(e => e.summary.toLowerCase().includes('tweet'));\n}\n```",
+      "Search and browse the Xquik X (Twitter) API specification to discover endpoints before making live API calls with the 'xquik' tool.\n\n" +
+      "## When to use\n" +
+      "- Use 'explore' FIRST to find the right endpoint path, parameters, and response shape before calling 'xquik'.\n" +
+      "- Use when the user asks what capabilities are available or how to accomplish a task on X/Twitter.\n" +
+      "- Use to check whether an endpoint is free or requires a subscription.\n\n" +
+      "## When NOT to use\n" +
+      "- Do NOT use 'explore' to fetch live data from X — use 'xquik' instead.\n" +
+      "- Do NOT use if you already know the endpoint path and parameters.\n\n" +
+      "## Behavior\n" +
+      "- Read-only, idempotent. No network calls — runs against an in-memory catalog of 121 endpoints.\n" +
+      "- Always free, no authentication or credits required.\n" +
+      "- Returns an array of EndpointInfo objects matching your filter.\n" +
+      "- Each EndpointInfo contains: method, path, summary, category (account | composition | credits | extraction | integrations | media | monitoring | support | twitter | x-accounts | x-write | bot), free (boolean), parameters (array), and responseShape (string).\n\n" +
+      "## Input format\n" +
+      "Write an async arrow function. The sandbox provides `spec.endpoints` (EndpointInfo[]). Filter, search, or return them.\n\n" +
+      "## Examples\n" +
+      "Find all free endpoints: `async () => spec.endpoints.filter(e => e.free)`\n" +
+      "Find by category: `async () => spec.endpoints.filter(e => e.category === 'composition')`\n" +
+      "Search by keyword: `async () => spec.endpoints.filter(e => e.summary.toLowerCase().includes('tweet'))`\n" +
+      "Get full details: `async () => spec.endpoints.find(e => e.path === '/api/v1/x/tweets/search')`",
     inputSchema: {
       type: "object",
       properties: {
         code: {
           type: "string",
           maxLength: 4096,
-          description: "Async arrow function to execute",
+          description:
+            "JavaScript async arrow function that filters or searches spec.endpoints (EndpointInfo[]). Must return an array or single EndpointInfo object. Example: async () => spec.endpoints.filter(e => e.category === 'twitter')",
         },
       },
       required: ["code"],
@@ -42,14 +62,41 @@ const TOOLS = [
   {
     name: "xquik",
     description:
-      "Execute X (Twitter) API calls: search tweets, look up users, download media, compose tweets, run giveaways, monitor accounts, and more. Write an async arrow function.\n\nThe sandbox provides:\n```typescript\n// xquik.request(path, options?) - auth is injected automatically\ndeclare const xquik: {\n  request(path: string, options?: {\n    method?: string;  // default: 'GET'\n    body?: unknown;\n    query?: Record<string, string>;\n  }): Promise<unknown>;\n};\ndeclare const spec: { endpoints: EndpointInfo[] };\n```\n\nAuth is injected automatically - never pass API keys.\nFirst use \"explore\" to find endpoints, then write code here to call them.\n\n## Workflows\n\n### 1. Send a tweet (Subscription required)\n```javascript\nasync () => {\n  const { accounts } = await xquik.request('/api/v1/x/accounts');\n  return xquik.request('/api/v1/x/tweets', {\n    method: 'POST',\n    body: { account: accounts[0].xUsername, text: 'Hello world!' }\n  });\n}\n```\n\n### 2. Search tweets\n```javascript\nasync () => {\n  return xquik.request('/api/v1/x/tweets/search', { query: { q: 'AI agents', limit: '50' } });\n}\n```\n\n### 3. Get user profile\n```javascript\nasync () => {\n  return xquik.request('/api/v1/x/users/elonmusk');\n}\n```\n\n### 4. Run a giveaway draw\n```javascript\nasync () => {\n  return xquik.request('/api/v1/draws', {\n    method: 'POST',\n    body: { tweetUrl: 'https://x.com/user/status/123', winnerCount: 3 }\n  });\n}\n```\n\n### 5. Monitor an account\n```javascript\nasync () => {\n  return xquik.request('/api/v1/monitors', {\n    method: 'POST',\n    body: { username: 'elonmusk' }\n  });\n}\n```",
+      "Execute authenticated X (Twitter) API calls to read data, publish content, and manage accounts across 121 REST endpoints.\n\n" +
+      "## When to use\n" +
+      "- Use after calling 'explore' to discover the endpoint path and parameters.\n" +
+      "- Use for any live X/Twitter operation: search tweets, look up users, post tweets, like, retweet, follow, send DMs, run giveaway draws, monitor accounts, extract bulk data, compose tweets, and more.\n\n" +
+      "## When NOT to use\n" +
+      "- Do NOT use to discover endpoints — use 'explore' first.\n" +
+      "- Do NOT pass API keys or auth headers — authentication is injected automatically.\n\n" +
+      "## Behavior\n" +
+      "- Executes the provided async function in a sandboxed environment with `xquik.request(path, options?)` and `spec.endpoints` available.\n" +
+      "- Read operations (GET) return JSON objects with the requested data. Write operations (POST/DELETE) return `{ success: true }` or `{ success: true, warning: '...' }`.\n" +
+      "- Pagination: responses include `has_next_page` (boolean) and `next_cursor` (string). Pass `cursor` as a query param for the next page.\n" +
+      "- Can be destructive: write operations (POST/DELETE) modify data on X (tweets, follows, DMs, profile).\n\n" +
+      "## Error handling\n" +
+      "- 402: Subscription required or insufficient credits. Call `POST /api/v1/subscribe` to get a checkout URL.\n" +
+      "- 429: Rate limited. Retry after backoff.\n" +
+      "- 404: Resource not found (user, tweet, or monitor does not exist).\n" +
+      "- 200 with `warning` field: Probable success — do NOT retry.\n\n" +
+      "## Costs\n" +
+      "- Free: compose, styles, drafts, radar, subscribe, account, api-keys, support.\n" +
+      "- 1 credit/read ($0.00015): tweet search, timeline, bookmarks, favoriters.\n" +
+      "- 10 credits/write ($0.0015): tweet, like, retweet, follow, DM.\n\n" +
+      "## Input format\n" +
+      "Write an async arrow function using `xquik.request(path, { method?, body?, query? })`. Auth is automatic.\n\n" +
+      "## Examples\n" +
+      "Search tweets: `async () => xquik.request('/api/v1/x/tweets/search', { query: { q: 'AI agents', limit: '50' } })`\n" +
+      "Get user: `async () => xquik.request('/api/v1/x/users/elonmusk')`\n" +
+      "Post tweet: `async () => { const { accounts } = await xquik.request('/api/v1/x/accounts'); return xquik.request('/api/v1/x/tweets', { method: 'POST', body: { account: accounts[0].xUsername, text: 'Hello!' } }); }`",
     inputSchema: {
       type: "object",
       properties: {
         code: {
           type: "string",
           maxLength: 4096,
-          description: "Async arrow function to execute",
+          description:
+            "JavaScript async arrow function that calls xquik.request(path, options?) to execute X/Twitter API operations. Auth is injected automatically. Example: async () => xquik.request('/api/v1/x/tweets/search', { query: { q: 'AI', limit: '20' } })",
         },
       },
       required: ["code"],
