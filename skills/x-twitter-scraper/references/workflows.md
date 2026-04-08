@@ -158,12 +158,12 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `follow
 | **Get a single tweet** by ID/URL | `GET /x/tweets/{id}` | 1 credit |
 | **Get an X Article** by tweet ID | `GET /x/articles/{id}` | 7 credits |
 | **Search tweets** by keyword/hashtag | `GET /x/tweets/search?q=...` | 1 credit/tweet |
-| **Get a user profile** | `GET /x/users/{username}` | 2 credits |
+| **Get a user profile** | `GET /x/users/{username}` | 1 credit |
 | **Get user's recent tweets** | `GET /x/users/{id}/tweets` | 1 credit/tweet |
 | **Get user's liked tweets** | `GET /x/users/{id}/likes` | 1 credit/result |
 | **Get user's media tweets** | `GET /x/users/{id}/media` | 1 credit/result |
 | **Get tweet favoriters** | `GET /x/tweets/{id}/favoriters` | 1 credit/result |
-| **Get mutual followers** | `GET /x/users/{id}/followers-you-know` | 2 credits/result |
+| **Get mutual followers** | `GET /x/users/{id}/followers-you-know` | 1 credit/result |
 | **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | 7 credits |
 | **Get trending topics** | `GET /trends?woeid=1` | 3 credits |
 | **Get radar (trending news)** | `GET /radar?source=hacker_news` | Free |
