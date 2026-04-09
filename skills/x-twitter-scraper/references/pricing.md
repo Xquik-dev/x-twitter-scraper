@@ -82,7 +82,7 @@ Two options without a monthly subscription:
 
 **Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 120 endpoints.
 
-**MPP**: 16 X-API endpoints accept anonymous on-chain payments. No account needed.
+**MPP**: 32 X-API endpoints accept anonymous on-chain payments. No account needed.
 
 | Endpoint | Price | Unit |
 |----------|-------|------|
@@ -102,6 +102,22 @@ Two options without a monthly subscription:
 | `POST /x/media/download` | $0.00015 | per media item |
 | `GET /x/trends` | $0.00045 | per call |
 | `GET /trends` | $0.00045 | per call |
+| `GET /x/communities/{id}/info` | $0.00015 | per call |
+| `GET /x/communities/{id}/members` | $0.00015 | per user |
+| `GET /x/communities/{id}/moderators` | $0.00015 | per user |
+| `GET /x/communities/{id}/tweets` | $0.00015 | per tweet |
+| `GET /x/communities/search` | $0.00015 | per community |
+| `GET /x/communities/tweets` | $0.00015 | per tweet |
+| `GET /x/lists/{id}/followers` | $0.00015 | per user |
+| `GET /x/lists/{id}/members` | $0.00015 | per user |
+| `GET /x/lists/{id}/tweets` | $0.00015 | per tweet |
+| `GET /x/users/batch` | $0.00015 | per user |
+| `GET /x/users/search` | $0.00015 | per user |
+| `GET /x/users/{id}/followers` | $0.00015 | per user |
+| `GET /x/users/{id}/followers-you-know` | $0.00015 | per user |
+| `GET /x/users/{id}/following` | $0.00015 | per user |
+| `GET /x/users/{id}/mentions` | $0.00015 | per tweet |
+| `GET /x/users/{id}/verified-followers` | $0.00015 | per user |
 
 SDK: `npm i mppx viem` (TypeScript). Handles the 402 challenge/credential flow automatically.
 
