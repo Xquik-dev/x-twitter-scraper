@@ -31,7 +31,9 @@ const TOOLS = [
       "## Behavior\n" +
       "- Read-only, idempotent. No network calls — runs against an in-memory catalog of 121 endpoints.\n" +
       "- Always free, no authentication or credits required.\n" +
-      "- Returns an array of EndpointInfo objects matching your filter.\n" +
+      "- Returns the result of your filter function (e.g., empty array if no endpoints match).\n" +
+      "- Returns an error message if the code is syntactically invalid or throws at runtime.\n" +
+      "- Execution timeout: 60 seconds.\n" +
       "- Each EndpointInfo contains: method, path, summary, category (account | composition | credits | extraction | integrations | media | monitoring | support | twitter | x-accounts | x-write | bot), free (boolean), parameters (array), and responseShape (string).\n\n" +
       "## Input format\n" +
       "Write an async arrow function. The sandbox provides `spec.endpoints` (EndpointInfo[]). Filter, search, or return them.\n\n" +
@@ -71,6 +73,8 @@ const TOOLS = [
       "- Do NOT pass API keys or auth headers — authentication is injected automatically.\n\n" +
       "## Behavior\n" +
       "- Executes the provided async function in a sandboxed environment with `xquik.request(path, options?)` and `spec.endpoints` available.\n" +
+      "- Sandboxed via Node.js VM: no filesystem, no global network access — only xquik.request() is available. Console calls are silently ignored.\n" +
+      "- Execution timeout: 60 seconds per invocation, 60 seconds per individual API request.\n" +
       "- Read operations (GET) return JSON objects with the requested data. Write operations (POST/DELETE) return `{ success: true }` or `{ success: true, warning: '...' }`.\n" +
       "- Pagination: responses include `has_next_page` (boolean) and `next_cursor` (string). Pass `cursor` as a query param for the next page.\n" +
       "- Can be destructive: write operations (POST/DELETE) modify data on X (tweets, follows, DMs, profile).\n\n" +
