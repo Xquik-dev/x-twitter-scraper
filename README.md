@@ -50,7 +50,7 @@ Xquik is dramatically cheaper than every alternative for X/Twitter data access.
 Two options for pay-per-use without a monthly subscription:
 
 - **Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 121 endpoints.
-- **MPP**: 16 X-API endpoints accept anonymous on-chain payments via Machine Payments Protocol. No account needed. SDK: `npm i mppx viem`.
+- **MPP**: 32 X-API endpoints accept anonymous on-chain payments via Machine Payments Protocol. No account needed. SDK: `npm i mppx viem`.
 
 ## Installation
 
@@ -154,7 +154,7 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Credits & billing**: Check balance, top up credits, manage subscription
 - **Support tickets**: Open and manage support tickets via API
 - **MCP server**: 2 tools covering 121 endpoints for AI agent integration
-- **Pay-per-use (MPP)**: Anonymous access to 16 endpoints via on-chain payments, no account needed
+- **Pay-per-use (MPP)**: Anonymous access to 32 endpoints via on-chain payments, no account needed
 
 ## Capabilities
 
@@ -174,7 +174,7 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 | **Trending Topics** | Regional trends + 7 free news sources via Radar |
 | **Tweet Composition** | Algorithm-optimized tweet composer with scoring checklist (free) |
 | **Credits & Billing** | Check balance, top up, manage subscription via API |
-| **Pay-Per-Use (MPP)** | 16 endpoints with anonymous on-chain payments, no account needed |
+| **Pay-Per-Use (MPP)** | 32 endpoints with anonymous on-chain payments, no account needed |
 | **TypeScript Types** | Complete type definitions for all API objects |
 
 ## Supported Agents
