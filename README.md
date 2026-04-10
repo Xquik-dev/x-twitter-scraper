@@ -6,7 +6,7 @@
 [![x-twitter-scraper MCP server](https://glama.ai/mcp/servers/Xquik-dev/x-twitter-scraper/badges/score.svg)](https://glama.ai/mcp/servers/Xquik-dev/x-twitter-scraper)
 [![smithery badge](https://smithery.ai/badge/xquik/x-twitter-scraper)](https://smithery.ai/servers/xquik/x-twitter-scraper)
 
-An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. 121 REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, and write actions.
+An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. 122 REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, and write actions.
 
 **The cheapest X data API on the market** — reads from $0.00015/call (33x cheaper than the official X API).
 
@@ -49,7 +49,7 @@ Xquik is dramatically cheaper than every alternative for X/Twitter data access.
 
 Two options for pay-per-use without a monthly subscription:
 
-- **Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 121 endpoints.
+- **Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 122 endpoints.
 - **MPP**: 32 X-API endpoints accept anonymous on-chain payments via Machine Payments Protocol. No account needed. SDK: `npm i mppx viem`.
 
 ## Installation
@@ -153,14 +153,14 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Tweet composition**: Algorithm-optimized tweet composer with scoring (free)
 - **Credits & billing**: Check balance, top up credits, manage subscription
 - **Support tickets**: Open and manage support tickets via API
-- **MCP server**: 2 tools covering 121 endpoints for AI agent integration
+- **MCP server**: 2 tools covering 122 endpoints for AI agent integration
 - **Pay-per-use (MPP)**: Anonymous access to 32 endpoints via on-chain payments, no account needed
 
 ## Capabilities
 
 | Area | Details |
 |------|---------|
-| **REST API** | 121 endpoints across 12 categories with retry logic and pagination |
+| **REST API** | 122 endpoints across 12 categories with retry logic and pagination |
 | **MCP Server** | 2 tools (explore + xquik). StreamableHTTP, configs for 10 platforms |
 | **Data Extraction** | 23 bulk extraction tools (replies, retweets, quotes, favoriters, threads, articles, user likes, user media, communities, lists, Spaces, people search, tweet search, mentions, posts) |
 | **X Lookups** | Tweet, user, article, search, user tweets, user likes, user media, favoriters, mutual followers, bookmarks, notifications, timeline, DM history |
