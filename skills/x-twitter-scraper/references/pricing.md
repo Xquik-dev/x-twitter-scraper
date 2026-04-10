@@ -80,7 +80,7 @@ Monitors, webhooks, integrations, account status, radar (7 sources), extraction/
 
 Two options without a monthly subscription:
 
-**Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 120 endpoints.
+**Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 122 endpoints.
 
 **MPP**: 32 X-API endpoints accept anonymous on-chain payments. No account needed.
 

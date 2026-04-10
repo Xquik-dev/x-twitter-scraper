@@ -12,7 +12,7 @@
   },
   {
     "name": "xquik",
-    "description": "Execute X (Twitter) API calls. Covers 120 endpoints: tweet search, user lookup, follower extraction, write actions (tweet, like, retweet, follow, DM), monitoring, giveaway draws, trending topics, composition, and more.",
+    "description": "Execute X (Twitter) API calls. Covers 122 endpoints: tweet search, user lookup, follower extraction, write actions (tweet, like, retweet, follow, DM), monitoring, giveaway draws, trending topics, composition, and more.",
     "arguments": [
       {
         "name": "code",
