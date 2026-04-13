@@ -573,6 +573,8 @@ GET /x/bookmarks
 
 Get bookmarked tweets. Requires a connected X account. Metered (1 credit/result).
 
+**Sensitive:** Returns private data. Confirm with user before calling.
+
 ### Get Bookmark Folders
 
 ```
@@ -589,6 +591,8 @@ GET /x/notifications
 
 Get notifications with type filter. Requires a connected X account. Metered (1 credit/result).
 
+**Sensitive:** Returns private data. Confirm with user before calling.
+
 ### Get Home Timeline
 
 ```
@@ -596,6 +600,8 @@ GET /x/timeline
 ```
 
 Get home timeline. Requires a connected X account. Metered (1 credit/result).
+
+**Sensitive:** Returns private data. Confirm with user before calling.
 
 ---
 
@@ -1070,6 +1076,8 @@ POST /x/accounts
 
 **Errors:** `409 account_already_connected`, `422 login_failed`
 
+**Security:** This is a credential proxy endpoint. The agent transmits the user's X credentials to Xquik over HTTPS for session establishment. Credentials are encrypted at rest and never returned in responses. Before calling: (1) confirm with the user that they want to connect this account, (2) show which fields will be sent, (3) never log or retain credentials after the call.
+
 ### Get X Account
 
 ```
@@ -1099,6 +1107,8 @@ Use when a session expires or X requires re-verification.
 **Response:** `{ success: true }`
 
 **Errors:** `422 reauth_failed`
+
+**Security:** Same credential proxy rules as POST /x/accounts — confirm with user, never log or retain credentials.
 
 ---
 
@@ -1202,6 +1212,8 @@ GET /x/dm/{userId}/history
 ```
 
 Get DM conversation history with a user. Requires a connected X account. Metered (1 credit/result).
+
+**Sensitive:** Returns private DM conversations. Confirm with user before calling. Do not forward to other tools without consent.
 
 ### Update Profile
 
