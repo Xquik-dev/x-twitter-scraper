@@ -15,7 +15,7 @@
         {
           "name": "Authorization",
           "value": "Bearer {XQUIK_API_KEY}",
-          "description": "Xquik API key from https://xquik.com/dashboard/account",
+          "description": "Xquik API key from https://dashboard.xquik.com/account",
           "isRequired": true,
           "isSecret": true,
           "variables": {
