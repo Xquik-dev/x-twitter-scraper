@@ -10,6 +10,9 @@ metadata:
     requires:
       env:
         - XQUIK_API_KEY
+      optionalEnv:
+        - name: XQUIK_WEBHOOK_SECRET
+          description: "Per-webhook HMAC secret from POST /webhooks response (not a Xquik account credential). Only needed if building a webhook handler."
     primaryEnv: XQUIK_API_KEY
     emoji: "𝕏"
     homepage: https://docs.xquik.com

@@ -113,6 +113,7 @@ import hmac, hashlib, json, os
 from flask import Flask, request
 
 app = Flask(__name__)
+# Per-webhook secret from POST /webhooks response, not a Xquik account credential
 WEBHOOK_SECRET = os.environ["XQUIK_WEBHOOK_SECRET"]
 processed_hashes = set()  # Use Redis/DB in production
 
