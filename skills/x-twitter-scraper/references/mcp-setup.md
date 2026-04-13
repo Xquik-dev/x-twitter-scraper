@@ -8,6 +8,8 @@ Connect AI agents and IDEs to Xquik via the Model Context Protocol. The MCP serv
 | Endpoint | `https://xquik.com/mcp` |
 | Auth header | `x-api-key` |
 
+> **Security:** Use a scoped, revocable API key — not your primary account key. Where your platform supports environment variable interpolation (e.g., `${XQUIK_API_KEY}`), prefer that over hardcoding. Rotate keys periodically from the [dashboard](https://xquik.com/dashboard/account). Never commit API keys to version control.
+
 ## Claude.ai (Web)
 
 Claude.ai supports MCP connectors natively via OAuth. Add Xquik as a connector from **Settings > Feature Preview > Integrations > Add More > Xquik**. The OAuth 2.1 flow handles authentication automatically. No API key needed.
