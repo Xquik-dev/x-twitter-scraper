@@ -6,7 +6,7 @@
     "url": "https://github.com/Xquik-dev/x-twitter-scraper",
     "source": "github"
   },
-  "version": "2.2.1",
+  "version": "2.3.0",
   "remotes": [
     {
       "type": "streamable-http",
