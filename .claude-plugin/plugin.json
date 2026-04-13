@@ -27,7 +27,7 @@
   "mcpServers": "./.mcp.json",
   "userConfig": {
     "api_key": {
-      "description": "Xquik API key (get one at xquik.com/account-manager)",
+      "description": "Xquik API key (get one at dashboard.xquik.com/account)",
       "sensitive": true
     }
   }

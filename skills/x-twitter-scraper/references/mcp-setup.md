@@ -8,6 +8,8 @@ Connect AI agents and IDEs to Xquik via the Model Context Protocol. The MCP serv
 | Endpoint | `https://xquik.com/mcp` |
 | Auth header | `x-api-key` |
 
+> **Security:** Use a scoped, revocable API key — not your primary account key. Where your platform supports environment variable interpolation (e.g., `${XQUIK_API_KEY}`), prefer that over hardcoding. Rotate keys periodically from the [dashboard](https://dashboard.xquik.com/account). Never commit API keys to version control.
+
 ## Claude.ai (Web)
 
 Claude.ai supports MCP connectors natively via OAuth. Add Xquik as a connector from **Settings > Feature Preview > Integrations > Add More > Xquik**. The OAuth 2.1 flow handles authentication automatically. No API key needed.
@@ -169,7 +171,7 @@ The MCP server (v2) at `https://xquik.com/mcp` provides 2 structured API tools:
 | `explore` | Search the API endpoint catalog (read-only, no network calls) | Free |
 | `xquik` | Execute API calls against your account | Varies by endpoint |
 
-The agent sends structured API requests through the MCP server, which handles authentication and execution within the same first-party infrastructure as the REST API. All 97 REST API endpoints across 12 categories are accessible: account, automations, bot, composition, extraction, integrations, media, monitoring, support, twitter, x-accounts, and x-write.
+The agent sends structured API requests through the MCP server, which handles authentication and execution within the same first-party infrastructure as the REST API. All 122 REST API endpoints across 12 categories are accessible: account, automations, bot, composition, extraction, integrations, media, monitoring, support, twitter, x-accounts, and x-write.
 
 ## After Setup
 
