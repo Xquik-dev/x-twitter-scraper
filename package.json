@@ -1,0 +1,34 @@
+{
+  "name": "x-developer",
+  "version": "2.3.0",
+  "description": "X (Twitter) data platform skill for AI coding agents. 122 REST API endpoints, 2 MCP tools, 23 extraction types, HMAC webhooks.",
+  "author": {
+    "name": "Xquik",
+    "url": "https://xquik.com"
+  },
+  "license": "MIT",
+  "homepage": "https://xquik.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Xquik-dev/x-twitter-scraper"
+  },
+  "keywords": [
+    "tanstack-intent",
+    "twitter",
+    "x-api",
+    "mcp-server",
+    "agent-skill",
+    "data-extraction",
+    "social-media",
+    "automation",
+    "ai-agent"
+  ],
+  "files": [
+    "skills",
+    "!skills/_artifacts",
+    "openclaw.plugin.json"
+  ],
+  "devDependencies": {
+    "@tanstack/intent": "latest"
+  }
+}
