@@ -1,6 +1,6 @@
 {
   "name": "x-developer",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "X (Twitter) data platform skill for AI coding agents. 122 REST API endpoints, 2 MCP tools, 23 extraction types, HMAC webhooks.",
   "author": {
     "name": "Xquik",
@@ -13,15 +13,31 @@
     "url": "https://github.com/Xquik-dev/x-twitter-scraper"
   },
   "keywords": [
-    "tanstack-intent",
     "twitter",
     "x-api",
+    "twitter-api",
+    "mcp",
     "mcp-server",
     "agent-skill",
+    "skills",
+    "ai-agent",
+    "claude-code",
+    "codex",
+    "cursor",
+    "copilot",
+    "gemini-cli",
+    "windsurf",
     "data-extraction",
+    "twitter-scraper",
     "social-media",
     "automation",
-    "ai-agent"
+    "webhooks",
+    "monitoring",
+    "giveaway",
+    "pay-per-use",
+    "cheap-api",
+    "rest-api",
+    "scraper"
   ],
   "files": [
     "skills",
