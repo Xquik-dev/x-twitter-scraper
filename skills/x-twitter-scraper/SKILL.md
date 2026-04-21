@@ -5,7 +5,7 @@ compatibility: Requires internet access to call the Xquik REST API (https://xqui
 license: MIT
 metadata:
   author: Xquik
-  version: "2.3.0"
+  version: "2.3.1"
   openclaw:
     requires:
       env:
@@ -245,7 +245,7 @@ If implementing retry logic or cursor pagination, read [references/workflows.md]
 
 ## Extractions (23 Tools)
 
-Bulk data collection jobs. Always estimate first (`POST /extractions/estimate`), then create (`POST /extractions`), poll status, retrieve paginated results, optionally export (CSV/XLSX/MD, 50K row limit).
+Bulk data collection jobs. Always estimate first (`POST /extractions/estimate`), then create (`POST /extractions`), poll status, retrieve paginated results, optionally export (csv, json, md, md-document, pdf, txt, xlsx; 100K row limit, 10K for PDF).
 
 If running an extraction, read [references/extractions.md](references/extractions.md) for tool types, required parameters, and filters.
 
@@ -401,7 +401,7 @@ All API calls are sent to `https://xquik.com/api/v1` (REST) or `https://xquik.co
 
 - **Timestamps are ISO 8601 UTC.** Example: `2026-02-24T10:30:00.000Z`
 - **Errors return JSON.** Format: `{ "error": "error_code" }`
-- **Export formats:** `csv`, `xlsx`, `md` via `/extractions/{id}/export` or `/draws/{id}/export`
+- **Export formats:** `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, `xlsx` via `/extractions/{id}/export` or `/draws/{id}/export` (100K row limit, 10K for PDF)
 
 ## Reference Files
 
