@@ -115,7 +115,7 @@ while (true) {
   cursor = page.nextCursor;
 }
 
-// Step 5: Export as CSV/XLSX/Markdown (50,000 row limit)
+// Step 5: Export as CSV/JSON/MD/MD-document/PDF/TXT/XLSX (100,000 row limit; PDF 10,000)
 const exportUrl = `${BASE}/extractions/${job.id}/export?format=csv`;
 const csvResponse = await fetch(exportUrl, { headers });
 const csvData = await csvResponse.text();

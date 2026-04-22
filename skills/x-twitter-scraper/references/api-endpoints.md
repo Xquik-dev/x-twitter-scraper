@@ -358,7 +358,7 @@ Returns full draw details including winners.
 GET /draws/{id}/export?format=csv&type=winners
 ```
 
-Formats: `csv`, `xlsx`, `md`. Types: `winners` (default), `entries`. Entry exports capped at 50,000 rows.
+Formats: `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, `xlsx`. Types: `winners` (default), `entries`. Entry exports capped at 100,000 rows (PDF capped at 10,000).
 
 ---
 
@@ -456,7 +456,7 @@ Returns job details with paginated results (up to 1,000 per page).
 GET /extractions/{id}/export?format=csv
 ```
 
-Formats: `csv`, `xlsx`, `md`. 50,000 row limit. Exports include enrichment columns not in the API response.
+Formats: `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, `xlsx`. 100,000 row limit (PDF 10,000). Exports include enrichment columns not in the API response.
 
 ---
 
@@ -1570,7 +1570,7 @@ Add a message to an existing ticket.
 | 400 | `invalid_tweet_id` | Tweet ID is empty or invalid |
 | 400 | `invalid_username` | X username is empty or invalid |
 | 400 | `invalid_tool_type` | Extraction tool type not recognized |
-| 400 | `invalid_format` | Export format not `csv`, `xlsx`, or `md` |
+| 400 | `invalid_format` | Export format not `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, or `xlsx` |
 | 400 | `invalid_params` | Export query parameters are missing or invalid |
 | 400 | `missing_query` | Required query parameter is missing |
 | 400 | `missing_params` | Required query parameters are missing |
