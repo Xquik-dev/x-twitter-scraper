@@ -232,6 +232,7 @@ x-twitter-scraper/
 - [API Reference](https://docs.xquik.com/api-reference/overview)
 - [MCP Server Guide](https://docs.xquik.com/mcp/overview)
 - [Billing & Pricing](https://docs.xquik.com/guides/billing)
+- Framework guides: [Mastra](https://docs.xquik.com/guides/mastra), [CrewAI](https://docs.xquik.com/guides/crewai), [LangChain](https://docs.xquik.com/guides/langchain), [Pydantic AI](https://docs.xquik.com/guides/pydantic-ai), [Google ADK](https://docs.xquik.com/guides/google-adk), [Microsoft Agent Framework](https://docs.xquik.com/guides/microsoft-agent-framework), [Composio migration](https://docs.xquik.com/guides/composio-migration)
 - [skills.sh Page](https://skills.sh/Xquik-dev/x-twitter-scraper)
 
 ## License
