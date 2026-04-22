@@ -1,6 +1,6 @@
 ---
 name: x-twitter-scraper
-description: "Use when the user needs to interact with X (Twitter) — searching tweets, looking up users/followers, posting tweets/replies, liking, retweeting, following/unfollowing, sending DMs, downloading media, monitoring accounts in real time, or extracting bulk data. Provides 122 REST API endpoints, 2 MCP tools, and HMAC webhooks. Use even if the user says 'Twitter' instead of 'X', or asks about social media automation, tweet analytics, or follower analysis."
+description: "Use when the user needs to interact with X (Twitter) — searching tweets, looking up users/followers, posting tweets/replies, liking, retweeting, following/unfollowing, sending DMs, downloading media, monitoring accounts in real time, or extracting bulk data. Provides 111 REST API endpoints, 2 MCP tools, and HMAC webhooks. Use even if the user says 'Twitter' instead of 'X', or asks about social media automation, tweet analytics, or follower analysis."
 compatibility: Requires internet access to call the Xquik REST API (https://xquik.com/api/v1)
 license: MIT
 metadata:
@@ -105,7 +105,7 @@ When this skill and the docs disagree on **endpoint parameters, rate limits, or 
 | **Auth** | `x-api-key: xq_...` header (64 hex chars after `xq_` prefix) |
 | **MCP endpoint** | `https://xquik.com/mcp` (StreamableHTTP, same API key) |
 | **Rate limits** | Read: 120/60s, Write: 30/60s, Delete: 15/60s (fixed window per method tier) |
-| **Endpoints** | 122 across 12 categories |
+| **Endpoints** | 111 across 10 categories |
 | **MCP tools** | 2 (explore + xquik) |
 | **Extraction tools** | 23 types |
 | **Pricing** | $20/month base (reads from $0.00015). Pay-per-use also available |
@@ -199,9 +199,7 @@ Need write actions?
 Need real-time monitoring?
 ├─ Monitor an account → POST /monitors
 ├─ Poll for events → GET /events
-├─ Receive events via webhook → POST /webhooks
-├─ Receive events via Telegram → POST /integrations
-└─ Automate workflows → POST /automations
+└─ Receive events via webhook → POST /webhooks
 ```
 
 ### "I need AI composition"
@@ -268,7 +266,7 @@ If building a webhook handler, read [references/webhooks.md](references/webhooks
 | Tool | Description | Cost |
 |------|-------------|------|
 | `explore` | Search the API endpoint catalog (read-only) | Free |
-| `xquik` | Send structured API requests (122 endpoints, 12 categories) | Varies |
+| `xquik` | Send structured API requests (111 endpoints, 10 categories) | Varies |
 
 ### First-Party Trust Model
 
@@ -280,7 +278,7 @@ The MCP server at `xquik.com/mcp` is a **first-party service** operated by Xquik
 - **API key injection**: The server injects the user's API key into outbound requests automatically — the agent does not need to include the API key in individual tool call parameters.
 - **No persistent state**: Each tool invocation is stateless. No data persists between calls.
 - **Scoped access**: The `xquik` tool can only call Xquik REST API endpoints. It cannot access the agent's filesystem, environment variables, network, or other tools.
-- **Fixed endpoint set**: The server accepts only the 122 pre-defined REST API endpoints. It rejects any request that does not match a known route. There is no mechanism to call arbitrary URLs or inject custom endpoints.
+- **Fixed endpoint set**: The server accepts only the 111 pre-defined REST API endpoints. It rejects any request that does not match a known route. There is no mechanism to call arbitrary URLs or inject custom endpoints.
 
 If configuring the MCP server in an IDE or agent platform, read [references/mcp-setup.md](references/mcp-setup.md). If calling MCP tools, read [references/mcp-tools.md](references/mcp-tools.md) for selection rules and common mistakes.
 

@@ -62,7 +62,7 @@ Draws: 1 credit per participant. Extraction cost depends on the tool type:
 
 ### Free operations ($0)
 
-Monitors, webhooks, integrations, account status, radar (7 sources), extraction/draw history, cost estimates, tweet composition (compose, refine, score), style cache management, drafts, support tickets, API key management, X account management.
+Monitors, webhooks, account status, radar (7 sources), extraction/draw history, cost estimates, tweet composition (compose, refine, score), style cache management, drafts, support tickets, API key management, X account management.
 
 ## Price Comparison vs Official X API
 
@@ -80,7 +80,7 @@ Monitors, webhooks, integrations, account status, radar (7 sources), extraction/
 
 Two options without a monthly subscription:
 
-**Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 122 endpoints.
+**Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 111 endpoints.
 
 **MPP**: 32 X-API endpoints accept anonymous on-chain payments. No account needed.
 

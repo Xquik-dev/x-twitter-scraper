@@ -189,6 +189,4 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `follow
 | **Update profile** | `PATCH /x/profile` | 10 credits |
 | **Upload media** | `POST /x/media` | 10 credits |
 | **Community actions** | `POST /x/communities`, join/leave | 10 credits |
-| **Telegram integration** | `POST /integrations` | Free |
-| **Automation flows** | `POST /automations` | Free |
 | **Support tickets** | `POST /support/tickets` | Free |

@@ -18,7 +18,7 @@ interface EndpointInfo {
   method: string;
   path: string;
   summary: string;
-  category: string; // account, automations, bot, composition, credits, extraction, integrations, media, monitoring, support, twitter, x-accounts, x-write
+  category: string; // account, composition, credits, extraction, media, monitoring, support, twitter, x-accounts, x-write
   free: boolean;
   parameters?: Array<{ name: string; in: 'query' | 'path' | 'body'; required: boolean; type: string; description: string }>;
   responseShape?: string;
@@ -86,10 +86,6 @@ Use `explore` first to find endpoints, then `xquik` to call them.
 | Follow/unfollow | `POST`/`DELETE /api/v1/x/users/{id}/follow` |
 | Send a DM | `POST /api/v1/x/dm/{userId}` |
 | Upload media | `POST /api/v1/x/media` |
-| Create automation flow | `POST /api/v1/automations` |
-| List automation flows | `GET /api/v1/automations` |
-| Add step to flow | `POST /api/v1/automations/{slug}/steps` |
-| Activate/deactivate flow | `PATCH /api/v1/automations/{slug}` |
 | Open support ticket | `POST /api/v1/support/tickets` |
 | List support tickets | `GET /api/v1/support/tickets` |
 | Get user's recent tweets | `GET /api/v1/x/users/{id}/tweets` |
@@ -118,7 +114,6 @@ Use `POST /api/v1/extractions` ONLY for bulk data that simpler endpoints cannot 
 | **Analyze tweet style** | `POST /styles` -> `GET /styles/{username}` -> `POST /compose` with `styleUsername` |
 | **Post a tweet** | `GET /x/accounts` -> `POST /x/tweets` with `account` + `text` |
 | **Get trending news** | `GET /radar` (free, all 7 sources, via `xquik` tool) -> `POST /compose` with trending topic |
-| **Create automation** | `POST /automations` -> `POST /automations/{slug}/steps` -> `PATCH /automations/{slug}` (activate) |
 | **Open support ticket** | `POST /support/tickets` -> `GET /support/tickets/{id}` |
 
 ## Common Mistakes
@@ -147,5 +142,5 @@ These are NOT available via the MCP server:
 
 ## Cost Reference
 
-- **Free**: account info, compose (all steps), styles (cached lookup/save/delete/compare), drafts, radar (via `xquik` tool, all 7 sources), subscribe, API keys, bot endpoints, integrations, X account management, automations (create, list, update, delete, steps), support tickets, credits (balance check, top up)
+- **Free**: account info, compose (all steps), styles (cached lookup/save/delete/compare), drafts, radar (via `xquik` tool, all 7 sources), subscribe, API keys, X account management, support tickets, credits (balance check, top up)
 - **Subscription required**: tweet search, user lookup, tweet lookup, follow check, media download (first only, cached free), extractions, draws, style analysis (X API refresh), performance analysis, trends, all write actions (tweet, like, retweet, follow, DM, profile, media upload, communities)

@@ -8,7 +8,7 @@
 [![x-twitter-scraper MCP server](https://glama.ai/mcp/servers/Xquik-dev/x-twitter-scraper/badges/score.svg)](https://glama.ai/mcp/servers/Xquik-dev/x-twitter-scraper)
 [![smithery badge](https://smithery.ai/badge/xquik/x-twitter-scraper)](https://smithery.ai/servers/xquik/x-twitter-scraper)
 
-An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. 122 REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, and write actions.
+An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. 111 REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, and write actions.
 
 **The cheapest X data API on the market** — reads from $0.00015/call (33x cheaper than the official X API).
 
@@ -45,13 +45,13 @@ Xquik is dramatically cheaper than every alternative for X/Twitter data access.
 | Extraction (followers, following, verified followers) | 1/result | $0.00015/result |
 | Extraction (articles) | 5/result | $0.00075/result |
 | Draw | 1/entry | $0.00015/entry |
-| Monitors, webhooks, radar, compose, drafts, integrations | 0 | **Free** |
+| Monitors, webhooks, radar, compose, drafts | 0 | **Free** |
 
 ### Pay-Per-Use (No Subscription)
 
 Two options for pay-per-use without a monthly subscription:
 
-- **Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 122 endpoints.
+- **Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 111 endpoints.
 - **MPP**: 32 X-API endpoints accept anonymous on-chain payments via Machine Payments Protocol. No account needed. SDK: `npm i mppx viem`.
 
 ## Installation
@@ -150,19 +150,17 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Radar**: Trending news from 7 sources (Google Trends, Hacker News, Polymarket, TrustMRR, Wikipedia, GitHub, Reddit). Free
 - **Giveaway draws**: Run transparent draws from tweet replies with configurable filters
 - **Write actions**: Post tweets, like, retweet, follow/unfollow, send DMs, update profile, upload media, manage communities
-- **Telegram integrations**: Receive real-time monitor event notifications in Telegram
-- **Flow automations**: Trigger-driven workflows with monitor events, schedules, search, and inbound webhooks
 - **Tweet composition**: Algorithm-optimized tweet composer with scoring (free)
 - **Credits & billing**: Check balance, top up credits, manage subscription
 - **Support tickets**: Open and manage support tickets via API
-- **MCP server**: 2 tools covering 122 endpoints for AI agent integration
+- **MCP server**: 2 tools covering 111 endpoints for AI agent integration
 - **Pay-per-use (MPP)**: Anonymous access to 32 endpoints via on-chain payments, no account needed
 
 ## Capabilities
 
 | Area | Details |
 |------|---------|
-| **REST API** | 122 endpoints across 12 categories with retry logic and pagination |
+| **REST API** | 111 endpoints across 10 categories with retry logic and pagination |
 | **MCP Server** | 2 tools (explore + xquik). StreamableHTTP, configs for 10 platforms |
 | **Data Extraction** | 23 bulk extraction tools (replies, retweets, quotes, favoriters, threads, articles, user likes, user media, communities, lists, Spaces, people search, tweet search, mentions, posts) |
 | **X Lookups** | Tweet, user, article, search, user tweets, user likes, user media, favoriters, mutual followers, bookmarks, notifications, timeline, DM history |
@@ -170,7 +168,6 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 | **Giveaway Draws** | Random winner selection from tweet replies with 11 filter options |
 | **Account Monitoring** | Real-time tracking of tweets, replies, quotes, retweets, follower changes |
 | **Webhooks** | HMAC-SHA256 signature verification in Node.js, Python, Go |
-| **Telegram Integrations** | Real-time monitor event notifications via Telegram bot |
 | **Media Download** | Download images, videos, GIFs with permanent hosted URLs |
 | **Engagement Analytics** | Likes, retweets, replies, quotes, views, bookmarks per tweet |
 | **Trending Topics** | Regional trends + 7 free news sources via Radar |
@@ -203,8 +200,6 @@ Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code
 | API Keys | Create, list, revoke |
 | X Accounts | Connect, list, get, disconnect, re-authenticate |
 | X Write | Tweet, delete, like, unlike, retweet, follow, unfollow, DM, profile, avatar, banner, media upload, communities |
-| Integrations | Create (Telegram), list, get, update, delete, test, deliveries |
-| Automations | Create, list, get, update, delete, add/update/delete steps, positions, test, inbound webhook |
 | Support | Create ticket, list, get, update, reply |
 
 ## Skill Structure

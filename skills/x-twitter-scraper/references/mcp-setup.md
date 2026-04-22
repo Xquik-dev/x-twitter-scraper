@@ -175,7 +175,7 @@ The MCP server (v2) at `https://xquik.com/mcp` provides 2 structured API tools:
 | `explore` | Search the API endpoint catalog (read-only, no network calls) | Free |
 | `xquik` | Execute API calls against your account | Varies by endpoint |
 
-The agent sends structured API requests through the MCP server, which handles authentication and execution within the same first-party infrastructure as the REST API. All 122 REST API endpoints across 12 categories are accessible: account, automations, bot, composition, extraction, integrations, media, monitoring, support, twitter, x-accounts, and x-write.
+The agent sends structured API requests through the MCP server, which handles authentication and execution within the same first-party infrastructure as the REST API. All 111 REST API endpoints across 10 categories are accessible: account, composition, credits, extraction, media, monitoring, support, twitter, x-accounts, and x-write.
 
 ## After Setup
 
