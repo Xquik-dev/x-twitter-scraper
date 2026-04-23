@@ -36,14 +36,16 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 ## Quick reference
 
 ```
-GET /x/bookmarks?account=<connected_username>&cursor=<optional>
--> { tweets: Tweet[], next_cursor?: string }
+GET /x/bookmarks?cursor=<optional>&folderId=<optional>
+-> { tweets: Tweet[], nextCursor?: string }
 ```
+
+Supported query parameters: `cursor` (opaque), `folderId` (scope to a bookmark folder). The route does not take `account` - the authenticated caller's connected account is used automatically.
 
 ## Typical flow
 
-1. `GET /x/accounts` to pick the account.
-2. Fetch bookmarks, paginate as needed.
+1. Optionally `GET /x/bookmarks/folders` to list the folders and pick a `folderId`.
+2. Call `GET /x/bookmarks` (with `folderId` if filtering) and paginate via `nextCursor`.
 3. Summarize, categorize by topic, or export to CSV via `export-tweets-csv`.
 
 ## Security

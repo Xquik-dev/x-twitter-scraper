@@ -29,15 +29,20 @@ List users who liked a specific tweet.
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| POST /extractions with tool=favoriters | Favoriters of a tweet | Per-row |
+| POST /extractions with toolType=favoriters | Favoriters of a tweet | Per-row |
+| POST /extractions/estimate | Preview credit cost before running | Free |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ## Quick reference
 
 ```
+POST /extractions/estimate
+{ "toolType": "favoriters", "targetTweetId": "<id>" }
+
 POST /extractions
-{ "tool": "favoriters", "params": { "tweet_id": "<id>", "limit": 5000 } }
+{ "toolType": "favoriters", "targetTweetId": "<id>" }
+-> 202 { "id": "<extractionId>", "toolType": "favoriters", "status": "running" }
 ```
 
 Each row: `{ username, name, bio, followers_count, verified, liked_at }`.

@@ -35,9 +35,9 @@ Read tweets from a specific X (Twitter) account - recent posts, likes, or media 
 | GET /x/users/{id}/tweets | Recent tweets (paginated) | Read tier |
 | GET /x/users/{id}/likes | Tweets the user liked (paginated) | Read tier |
 | GET /x/users/{id}/media | Tweets with media (paginated) | Read tier |
-| POST /extractions (type=post_extractor) | Bulk post history, up to 1,000 tweets | Per result |
-| POST /extractions (type=user_likes) | Bulk likes history | Per result |
-| POST /extractions (type=user_media) | Bulk media posts | Per result |
+| POST /extractions (toolType=post_extractor) | Bulk post history, up to 1,000 tweets | Per result |
+| POST /extractions (toolType=user_likes) | Bulk likes history | Per result |
+| POST /extractions (toolType=user_media) | Bulk media posts | Per result |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key`.
 
@@ -72,10 +72,12 @@ Now you have `id` for the next calls. Treat IDs as strings.
 ## Paginated reads
 
 ```
-GET /x/users/{id}/tweets?after=<cursor>&limit=20
-GET /x/users/{id}/likes?after=<cursor>
-GET /x/users/{id}/media?after=<cursor>
+GET /x/users/{id}/tweets?cursor=<cursor>&includeReplies=false&includeParentTweet=false
+GET /x/users/{id}/likes?cursor=<cursor>
+GET /x/users/{id}/media?cursor=<cursor>
 ```
+
+Supported query parameters on `/x/users/{id}/tweets`: `cursor`, `includeReplies`, `includeParentTweet` (no `limit`, no `sort`).
 
 Loop until `nextCursor` is empty. Respect Read tier 120/60s.
 
@@ -85,26 +87,24 @@ For hundreds or thousands of tweets, use extractions. Estimate first:
 
 ```
 POST /extractions/estimate
-{
-  "type": "post_extractor",
-  "params": { "username": "elonmusk", "max_results": 1000 }
-}
+{ "toolType": "post_extractor", "targetUsername": "elonmusk" }
 ```
 
 Show the user the cost. On approval, create the job:
 
 ```
 POST /extractions
-{ "type": "post_extractor", "params": { "username": "elonmusk", "max_results": 1000 } }
+{ "toolType": "post_extractor", "targetUsername": "elonmusk" }
+-> 202 { "id": "<extractionId>", "toolType": "post_extractor", "status": "running" }
 ```
 
-Poll `GET /extractions/{id}` until `completed`. Retrieve with `GET /extractions/{id}/results?after=<cursor>`. Export to CSV/XLSX/MD with `GET /extractions/{id}/export?format=csv`.
+Poll `GET /extractions/{id}` until `completed`. Retrieve with `GET /extractions/{id}/results?cursor=<cursor>`. Export to CSV/XLSX/MD with `GET /extractions/{id}/export?format=csv`.
 
-Same pattern for `user_likes` and `user_media` extractors.
+Same pattern for `user_likes` and `user_media` (both take `targetUsername`).
 
 ## Filtering
 
-The bulk `post_extractor` supports `since` and `until` ISO 8601 timestamps, and `include_replies: bool` and `include_retweets: bool`. Use these to narrow cost before estimation.
+For the bulk search pathway, use `tweet_search_extractor` with a `searchQuery` that embeds `from:<user> since:YYYY-MM-DD until:YYYY-MM-DD -filter:replies` style operators to narrow cost before estimation.
 
 ## Common errors
 

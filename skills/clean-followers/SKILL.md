@@ -1,6 +1,6 @@
 ---
 name: clean-followers
-description: "Use when the user wants to audit their X (Twitter) followers for bots, inactive accounts, or ghosts, and optionally block or remove them. Analysis is automatic; any removal is per-account with explicit user approval."
+description: "Use when the user wants to audit their X (Twitter) followers for bots, inactive accounts, or ghosts. Analysis-only; removal is not exposed via the API and must be done in the dashboard or X app."
 license: MIT
 metadata:
   author: Xquik
@@ -16,7 +16,6 @@ metadata:
     contentTrust: untrusted
     contentIsolation: enforced
     promptInjectionDefense: true
-    writeConfirmation: required
     executionModel: api-only
     codeExecution: none
     credentialProxy: false
@@ -24,16 +23,25 @@ metadata:
 
 # Clean X Followers
 
-Identify likely bots, inactive followers, or ghost accounts. Optional removal happens one at a time with explicit user approval.
+Identify likely bots, inactive followers, or ghost accounts. The API exposes discovery only; any block or unfollow is performed by the user in the Xquik dashboard or on X directly.
 
 ## Endpoints
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| POST /extractions with tool=follower_explorer | Full follower list | Per-row |
-| POST /x/block | Block a follower (removes them) | Write tier |
+| POST /extractions (toolType=follower_explorer) | Full follower list | Per-row |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+
+## Quick reference
+
+```
+POST /extractions
+{ "toolType": "follower_explorer", "targetUsername": "handle" }
+-> 202 { "id": "<extractionId>", "toolType": "follower_explorer", "status": "running" }
+```
+
+Poll `GET /extractions/{id}` until `status: "completed"`, then `GET /extractions/{id}/export?format=csv`.
 
 ## Typical flow
 
@@ -42,13 +50,12 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
    - `followers_count < 5`, `following_count > 2000`, `tweets_count < 5`, `created_at < 30 days ago` - classic bot signal
    - No avatar + generic bio = suspicious
 3. Show the user a flagged shortlist.
-4. For any account they want removed: show the profile, ask for per-account confirmation, then `POST /x/block`.
+4. If removal is desired, direct the user to the Xquik dashboard or X app. The API does not expose a block endpoint.
 
 ## Never do
 
-- Block in bulk based on an automated score without per-account review
+- Produce a removal list based on an automated score without per-account review
 - Run continuously in the background
-- Block anyone who did not match the heuristic
 
 ## Security
 

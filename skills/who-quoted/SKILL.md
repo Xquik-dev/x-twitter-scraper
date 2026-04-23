@@ -29,15 +29,20 @@ Find quote tweets (QTs) of a specific tweet, with their text and engagement.
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| POST /extractions with tool=quote_extractor | Quote tweets of a tweet | Per-row |
+| POST /extractions with toolType=quote_extractor | Quote tweets of a tweet | Per-row |
+| POST /extractions/estimate | Preview credit cost before running | Free |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ## Quick reference
 
 ```
+POST /extractions/estimate
+{ "toolType": "quote_extractor", "targetTweetId": "<id>" }
+
 POST /extractions
-{ "tool": "quote_extractor", "params": { "tweet_id": "<id>", "limit": 2000 } }
+{ "toolType": "quote_extractor", "targetTweetId": "<id>" }
+-> 202 { "id": "<extractionId>", "toolType": "quote_extractor", "status": "running" }
 ```
 
 Each row: `{ quote_tweet_id, author, text, metrics, quoted_at }`.

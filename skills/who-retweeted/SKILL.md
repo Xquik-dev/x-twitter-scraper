@@ -29,15 +29,20 @@ List users who retweeted (reposted) a specific tweet.
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| POST /extractions with tool=repost_extractor | Retweeters of a tweet | Per-row |
+| POST /extractions with toolType=repost_extractor | Retweeters of a tweet | Per-row |
+| POST /extractions/estimate | Preview credit cost before running | Free |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ## Quick reference
 
 ```
+POST /extractions/estimate
+{ "toolType": "repost_extractor", "targetTweetId": "<id>" }
+
 POST /extractions
-{ "tool": "repost_extractor", "params": { "tweet_id": "<id>", "limit": 5000 } }
+{ "toolType": "repost_extractor", "targetTweetId": "<id>" }
+-> 202 { "id": "<extractionId>", "toolType": "repost_extractor", "status": "running" }
 ```
 
 Each row: `{ username, name, bio, followers_count, verified, retweeted_at }`.

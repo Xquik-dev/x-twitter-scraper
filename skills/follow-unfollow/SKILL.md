@@ -30,25 +30,32 @@ Follow and unfollow accounts as a connected user, and check follow state.
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| POST /x/follow | Follow a user | Write tier |
-| POST /x/unfollow | Unfollow a user | Write tier |
-| GET /x/followers/check?from=<a>&to=<b> | Does A follow B? | Read tier |
+| POST /x/users/{id}/follow | Follow a user (numeric ID) | Write tier |
+| DELETE /x/users/{id}/follow | Unfollow a user (numeric ID) | Write tier |
+| GET /x/users/{username} | Resolve @handle to numeric user ID | Read tier |
+| GET /x/followers/check?source=<a>&target=<b> | Does A follow B? | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ## Quick reference
 
 ```
-POST /x/follow
-{ "account": "<connected_username>", "target": "@handle" }
+POST /x/users/{id}/follow
+{ "account": "<connected_username>" }
 -> { followed: true }
+
+DELETE /x/users/{id}/follow
+{ "account": "<connected_username>" }
 ```
+
+The `{id}` path segment is the numeric user ID. Resolve a @handle with `GET /x/users/{username}` first.
 
 ## Typical flow
 
 1. `GET /x/accounts` to pick the acting account.
-2. Show the user the target handle and the acting account. Wait for approval.
-3. Call `POST /x/follow` or `POST /x/unfollow`.
+2. `GET /x/users/{username}` to resolve each target handle to a numeric `id`.
+3. Show the user the target handle and the acting account. Wait for approval.
+4. Call `POST /x/users/{id}/follow` to follow, or `DELETE /x/users/{id}/follow` to unfollow.
 
 ## Bulk operations
 

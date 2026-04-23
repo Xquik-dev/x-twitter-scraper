@@ -30,7 +30,7 @@ Get replies to any public tweet on X. Useful for reading community reactions, pu
 | Endpoint | Purpose | Cost |
 |---|---|---|
 | GET /x/tweets/{id}/replies | Recent replies with pagination | Read tier |
-| POST /extractions with tool=reply_extractor | Bulk replies (all pages, CSV/JSONL export) | Per-row extraction pricing |
+| POST /extractions with toolType=reply_extractor | Bulk replies (all pages, CSV/JSONL export) | Per-row extraction pricing |
 | GET /x/tweets/{id} | Get the root tweet metadata (for context) | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
@@ -38,26 +38,28 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 ## Quick reference
 
 ```
-GET /x/tweets/{id}/replies?cursor=<optional>
--> { replies: Tweet[], next_cursor?: string }
+GET /x/tweets/{id}/replies?cursor=<optional>&sinceTime=<unix>&untilTime=<unix>
+-> { replies: Tweet[], nextCursor?: string }
 ```
 
-Each `Tweet` has `id`, `text`, `author`, `metrics` (like_count, retweet_count, reply_count, view_count), `created_at`.
+Each `Tweet` has `id`, `text`, `author`, `metrics` (like_count, retweet_count, reply_count, view_count), `created_at`. Supported query parameters: `cursor`, `sinceTime`, `untilTime`.
 
 ## Typical flow
 
 1. Call `GET /x/tweets/{id}/replies` with the root tweet ID.
-2. Paginate via `next_cursor` until done or the user-specified limit is hit.
-3. Sort by `metrics.like_count` to surface the top replies.
-4. For large threads (thousands of replies), use `POST /extractions` with `tool: "reply_extractor"` and export to CSV.
-
-## Top replies shortcut
+2. Paginate via `nextCursor` until done or the user-specified limit is hit.
+3. Sort by `metrics.like_count` client-side to surface the top replies.
+4. For large threads (thousands of replies), use `POST /extractions`:
 
 ```
-GET /x/tweets/{id}/replies?sort=top&limit=20
+POST /extractions
+{ "toolType": "reply_extractor", "targetTweetId": "<id>" }
+-> 202 { "id": "<extractionId>", "toolType": "reply_extractor", "status": "running" }
 ```
 
-Returns the highest-engagement replies first, useful for "what did people say" summaries.
+## Top replies
+
+The route does not expose a server-side sort. Page through and sort locally by `metrics.like_count`. See the `top-replies` skill for a guided workflow.
 
 ## Security
 

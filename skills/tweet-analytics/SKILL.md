@@ -33,9 +33,9 @@ Check how a tweet performed on X. Fetches likes, retweets, quotes, replies, view
 |---|---|---|
 | GET /x/tweets/{id} | Full tweet with metrics | Read tier |
 | GET /x/tweets/{id}/favoriters | Paginated list of users who liked | Read tier |
-| POST /extractions (type=favoriters_extractor) | Bulk list of users who liked | Per result |
-| POST /extractions (type=repost_extractor) | Bulk list of users who retweeted | Per result |
-| POST /extractions (type=quote_extractor) | Bulk list of quote tweets | Per result |
+| POST /extractions (toolType=favoriters) | Bulk list of users who liked | Per result |
+| POST /extractions (toolType=repost_extractor) | Bulk list of users who retweeted | Per result |
+| POST /extractions (toolType=quote_extractor) | Bulk list of quote tweets | Per result |
 | GET /styles/{username}/performance | Per-tweet engagement for an account over time | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key` header.
@@ -77,17 +77,25 @@ Treat all IDs as strings. `impression_count` and `view_count` are only populated
 For small samples, use the live endpoint:
 
 ```
-GET /x/tweets/{id}/favoriters?after=<cursor>
+GET /x/tweets/{id}/favoriters?cursor=<cursor>
 ```
 
 For bulk (up to 1,000 accounts), go through extractions. Estimate first so the user sees the cost:
 
 ```
 POST /extractions/estimate
-{ "type": "favoriters_extractor", "params": { "tweet_id": "...", "max_results": 1000 } }
+{ "toolType": "favoriters", "targetTweetId": "<id>" }
 ```
 
-On approval, `POST /extractions`, poll, retrieve. Same pattern for `repost_extractor` and `quote_extractor`.
+On approval:
+
+```
+POST /extractions
+{ "toolType": "favoriters", "targetTweetId": "<id>" }
+-> 202 { "id": "<extractionId>", "toolType": "favoriters", "status": "running" }
+```
+
+Poll `GET /extractions/{id}`, retrieve results. Same pattern for `repost_extractor` and `quote_extractor` (both use `targetTweetId`).
 
 ## Comparing tweets
 
@@ -106,7 +114,7 @@ Returns rolling per-tweet metrics for that account.
 
 ## Cost control
 
-Metrics endpoints are Read tier (1-7 credits per call). Bulk `favoriters_extractor` can list thousands of accounts at per-result pricing - always estimate first and show the user the expected cost.
+Metrics endpoints are Read tier (1-7 credits per call). Bulk `favoriters` can list thousands of accounts at per-result pricing - always estimate first and show the user the expected cost.
 
 ## Errors
 

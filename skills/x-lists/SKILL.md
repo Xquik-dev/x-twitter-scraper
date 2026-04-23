@@ -29,24 +29,32 @@ Read X Lists: members, followers, and the timeline feed of any public list.
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| POST /extractions with tool=list_member_extractor | Members of a list | Per-row |
-| POST /extractions with tool=list_follower_explorer | Users following a list | Per-row |
-| POST /extractions with tool=list_post_extractor | Posts in a list's feed | Per-row |
+| POST /extractions with toolType=list_member_extractor | Members of a list | Per-row |
+| POST /extractions with toolType=list_follower_explorer | Users following a list | Per-row |
+| POST /extractions with toolType=list_post_extractor | Posts in a list's feed | Per-row |
+| POST /extractions/estimate | Preview credit cost before running | Free |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ## Quick reference
 
 ```
+POST /extractions/estimate
+{ "toolType": "list_member_extractor", "targetListId": "<id>" }
+
 POST /extractions
-{ "tool": "list_member_extractor", "params": { "list_id": "<id>", "limit": 1000 } }
+{ "toolType": "list_member_extractor", "targetListId": "<id>" }
+-> 202 { "id": "<extractionId>", "toolType": "list_member_extractor", "status": "running" }
 ```
+
+All three list extractors use `targetListId`. The server accepts the raw ID from `x.com/i/lists/<id>`.
 
 ## Typical flow
 
 1. Get the list ID from the URL (`x.com/i/lists/<id>`).
-2. Confirm target + limit + cost with user.
-3. Run extraction, poll, export.
+2. Call `POST /extractions/estimate`, show the cost.
+3. On approval, `POST /extractions`. Poll `GET /extractions/{id}` until `completed`.
+4. Export `GET /extractions/{id}/export?format=csv`.
 
 ## Security
 

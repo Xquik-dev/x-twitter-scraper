@@ -29,8 +29,8 @@ Search and monitor hashtags. Read-only.
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| GET /x/tweets/search?query=%23tag | Recent tweets with a hashtag | Read tier |
-| POST /extractions with tool=tweet_search_extractor | Bulk hashtag tweets | Per-row |
+| GET /x/tweets/search?q=%23tag | Recent tweets with a hashtag | Read tier |
+| POST /extractions with toolType=tweet_search_extractor | Bulk hashtag tweets | Per-row |
 | POST /monitors type=hashtag | Continuous hashtag monitor | Subscription |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
@@ -38,11 +38,19 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 ## Quick reference (one-shot)
 
 ```
-GET /x/tweets/search?query=%23buildinpublic&sort=recent&limit=100
--> { tweets: Tweet[], next_cursor?: string }
+GET /x/tweets/search?q=%23buildinpublic&queryType=Latest&limit=100
+-> { tweets: Tweet[], nextCursor?: string }
 ```
 
-Combine operators: `#tag min_faves:10 lang:en -is:retweet`.
+Supported query parameters: `q`, `queryType` (`Latest` or `Top`), `cursor`, `sinceTime`, `untilTime`, `limit`.
+
+Engagement floors and content filters go inside `q`: `#tag min_faves:10 lang:en -is:retweet`.
+
+```
+POST /extractions
+{ "toolType": "tweet_search_extractor", "searchQuery": "#buildinpublic min_faves:10 lang:en" }
+-> 202 { "id": "<extractionId>", "toolType": "tweet_search_extractor", "status": "running" }
+```
 
 ## Continuous monitoring
 
@@ -56,12 +64,12 @@ POST /monitors
 -> { monitor_id }
 ```
 
-Poll `/events?monitor_id=<id>` or use a webhook (see `tweet-webhooks`).
+Poll `/events?monitorId=<id>` or use a webhook (see `tweet-webhooks`).
 
 ## Typical flow
 
 1. Ask the user for the hashtag and whether they want recent only, top, or live monitoring.
-2. One-shot read: `GET /x/tweets/search?query=%23<tag>&sort=<recent|top>`.
+2. One-shot read: `GET /x/tweets/search?q=%23<tag>&queryType=<Latest|Top>`.
 3. Live monitoring: create a monitor, poll events, or configure a webhook.
 
 ## Security

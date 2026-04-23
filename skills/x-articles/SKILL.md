@@ -29,15 +29,16 @@ Fetch X Articles (the long-form post format on X). Use for one-off reads or bulk
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| GET /x/articles/{id} | Single article by ID | Read tier |
-| POST /extractions with tool=article_extractor | Bulk articles by author or query | Per-row |
+| GET /x/articles/{tweetId} | Single article by tweet ID | Read tier |
+| POST /extractions with toolType=article_extractor | Bulk article pull rooted at a tweet ID | Per-row |
+| POST /extractions/estimate | Preview credit cost before running | Free |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ## Quick reference
 
 ```
-GET /x/articles/{id}
+GET /x/articles/{tweetId}
 -> {
   id, title, content_markdown, author: { username, name, verified },
   published_at, edited_at?, word_count, view_count
@@ -49,19 +50,20 @@ GET /x/articles/{id}
 ## Bulk extraction
 
 ```
+POST /extractions/estimate
+{ "toolType": "article_extractor", "targetTweetId": "<id>" }
+
 POST /extractions
-{
-  "tool": "article_extractor",
-  "params": { "author": "@handle", "limit": 200 }
-}
+{ "toolType": "article_extractor", "targetTweetId": "<id>" }
+-> 202 { "id": "<extractionId>", "toolType": "article_extractor", "status": "running" }
 ```
 
-Returns an extraction job ID. Poll `GET /extractions/{id}` and export when complete.
+Returns an extraction job ID. Poll `GET /extractions/{id}` and export via `GET /extractions/{id}/export?format=csv` when complete.
 
 ## Typical flow
 
-1. Given an article URL (`x.com/<user>/articles/<id>`), pull `id` from the path.
-2. Call `GET /x/articles/{id}`.
+1. Given an article URL (`x.com/<user>/articles/<tweetId>`), pull `tweetId` from the path.
+2. Call `GET /x/articles/{tweetId}`.
 3. Summarize or quote the article for the user as requested.
 
 ## Security

@@ -29,16 +29,20 @@ Read participants of an X Space (audio room): host, co-hosts, speakers, listener
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| POST /extractions with tool=space_explorer | Space participants and role | Per-row |
+| POST /extractions with toolType=space_explorer | Space participants and role | Per-row |
+| POST /extractions/estimate | Preview credit cost before running | Free |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ## Quick reference
 
 ```
+POST /extractions/estimate
+{ "toolType": "space_explorer", "targetSpaceId": "<id>" }
+
 POST /extractions
-{ "tool": "space_explorer", "params": { "space_id": "<id>" } }
--> { extraction_id }
+{ "toolType": "space_explorer", "targetSpaceId": "<id>" }
+-> 202 { "id": "<extractionId>", "toolType": "space_explorer", "status": "running" }
 ```
 
 Each row: `{ username, name, role: "host"|"cohost"|"speaker"|"listener", joined_at }`.

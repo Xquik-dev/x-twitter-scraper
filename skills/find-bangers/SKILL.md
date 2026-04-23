@@ -29,16 +29,17 @@ Find tweets that outperformed their author's usual engagement by a wide margin. 
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| GET /x/users/{id}/tweets?sort=top&limit=50 | Top tweets for an author | Read tier |
-| GET /x/tweets/search?query=from:@user min_faves:X | Apply a floor | Read tier |
+| GET /x/users/{username} | Resolve handle to numeric ID + follower count | Read tier |
+| GET /x/users/{id}/tweets | Recent tweets for an author (paginated) | Read tier |
+| GET /x/tweets/search?q=from:@user+min_faves:X&queryType=Top | Author posts above a like floor | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ## Typical flow
 
 1. Get a handle from the user.
-2. `GET /x/users/{username}` to get the baseline follower count.
-3. `GET /x/users/{id}/tweets?sort=top&limit=50`.
+2. `GET /x/users/{username}` to get the baseline follower count and numeric `id`.
+3. Either page `GET /x/users/{id}/tweets?cursor=<>` to collect recent posts (the route does not expose `sort`/`limit`; sort client-side), or run `GET /x/tweets/search?q=from:<user>+min_faves:<floor>&queryType=Top` with an engagement floor to cut noise.
 4. Compute engagement rate per tweet = (likes + RTs + replies) / followers.
 5. Surface tweets with engagement rate more than 3-5x the median for that author. Those are bangers.
 

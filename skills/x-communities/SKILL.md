@@ -29,27 +29,33 @@ Read X Communities: members, posts, and search across communities. Read-only.
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| POST /extractions with tool=community_extractor | Member list | Per-row |
-| POST /extractions with tool=community_post_extractor | Posts inside a community | Per-row |
-| POST /extractions with tool=community_search | Search communities | Per-row |
-| POST /extractions with tool=community_moderator_explorer | Community moderators | Per-row |
+| POST /extractions with toolType=community_extractor | Member list | Per-row |
+| POST /extractions with toolType=community_post_extractor | Posts inside a community | Per-row |
+| POST /extractions with toolType=community_search | Search communities | Per-row |
+| POST /extractions with toolType=community_moderator_explorer | Community moderators | Per-row |
+| POST /extractions/estimate | Preview credit cost before running | Free |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ## Quick reference
 
 ```
+POST /extractions/estimate
+{ "toolType": "community_post_extractor", "targetCommunityId": "<id>" }
+
 POST /extractions
-{ "tool": "community_post_extractor", "params": { "community_id": "<id>", "limit": 500 } }
--> { extraction_id, estimated_cost_credits }
+{ "toolType": "community_post_extractor", "targetCommunityId": "<id>" }
+-> 202 { "id": "<extractionId>", "toolType": "community_post_extractor", "status": "running" }
 ```
+
+`community_extractor`, `community_post_extractor`, and `community_moderator_explorer` take `targetCommunityId` (raw ID from `x.com/i/communities/<id>`). `community_search` takes `searchQuery` instead.
 
 ## Typical flow
 
-1. Confirm community ID or a search query.
-2. Show estimated cost.
+1. Confirm community ID (or search query for `community_search`).
+2. Call `POST /extractions/estimate` and show the cost.
 3. **User approval required** before calling `POST /extractions`.
-4. Poll until complete, then export.
+4. Poll `GET /extractions/{id}` until `completed`, then `GET /extractions/{id}/export?format=csv`.
 
 ## Security
 

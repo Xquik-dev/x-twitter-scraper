@@ -1,6 +1,6 @@
 ---
 name: for-you-feed
-description: "Use when the user wants to read their X (Twitter) For You feed or Following feed through the API. Surfaces the algorithmic home timeline or the chronological following timeline for a connected account. Read-only."
+description: "Use when the user wants to read the For You home timeline on X (Twitter) through the API. Surfaces the algorithmic home timeline (cursor-paginated) with an option to suppress already-seen tweets. Read-only."
 license: MIT
 metadata:
   author: Xquik
@@ -23,29 +23,30 @@ metadata:
 
 # For You Feed (Home Timeline)
 
-Fetch the For You or Following timeline of a connected X account, the way it appears in the app.
+Fetch the For You timeline the way it appears in the app. Cursor-paginated; the caller is authenticated via API key (the server picks the connected account).
 
 ## Endpoints
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| GET /x/timeline?type=for_you | Algorithmic For You timeline | Read tier |
-| GET /x/timeline?type=following | Chronological Following timeline | Read tier |
+| GET /x/timeline | For You home timeline | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ## Quick reference
 
 ```
-GET /x/timeline?account=<connected_username>&type=for_you&limit=50
--> { tweets: Tweet[], next_cursor?: string }
+GET /x/timeline?cursor=<optional>&seenTweetIds=<comma-separated>
+-> { tweets: Tweet[], nextCursor?: string }
 ```
+
+Supported query parameters: `cursor` (opaque), `seenTweetIds` (comma-separated tweet IDs the client has already displayed, so the server can suppress them). The endpoint does not take `account`, `type`, or `limit`.
 
 ## Typical flow
 
-1. Pick a connected account.
-2. Choose `for_you` (algorithmic) or `following` (chronological).
-3. Paginate. Summarize or present as a reading list.
+1. Call `GET /x/timeline` with no cursor on first fetch.
+2. Store displayed tweet IDs. On subsequent calls pass them as `seenTweetIds` to reduce duplication.
+3. Paginate via `nextCursor`. Summarize or present as a reading list.
 
 ## Security
 

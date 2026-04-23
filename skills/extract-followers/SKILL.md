@@ -29,37 +29,45 @@ Pull the follower list of any public X account, with optional filters for verifi
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| POST /extractions with tool=follower_explorer | Bulk follower list | Per-row |
-| POST /extractions with tool=verified_follower_explorer | Verified followers only | Per-row |
-| GET /extractions/{id} | Poll job status | Read tier |
-| GET /extractions/{id}/export?format=csv | Download results | Read tier |
+| POST /extractions with toolType=follower_explorer | Bulk follower list | Per-row |
+| POST /extractions with toolType=verified_follower_explorer | Verified followers only | Per-row |
+| POST /extractions/estimate | Preview credit cost before running | Free |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ## Quick reference
 
+Estimate the cost first:
+
 ```
-POST /extractions
-{
-  "tool": "follower_explorer",
-  "params": { "target": "@handle", "limit": 10000 }
-}
--> { extraction_id, estimated_cost_credits, status: "queued" }
+POST /extractions/estimate
+{ "toolType": "follower_explorer", "targetUsername": "handle" }
 ```
 
-Each row: `{ username, name, bio, followers_count, following_count, verified, created_at }`.
+Then create the extraction:
+
+```
+POST /extractions
+{ "toolType": "follower_explorer", "targetUsername": "handle" }
+-> 202 { "id": "<extractionId>", "toolType": "follower_explorer", "status": "running" }
+```
+
+Fields: `toolType` (not `tool`), `targetUsername` is a bare handle with no `@`. Use `verified_follower_explorer` with the same body for verified-only.
+
+Each result row: `{ username, name, bio, followers_count, following_count, verified, created_at }`.
 
 ## Typical flow
 
-1. Confirm target handle and row limit with the user.
-2. Show estimated cost from the create response.
+1. Confirm target handle and the user's intent with them.
+2. Call `POST /extractions/estimate` and show the returned cost estimate.
 3. **Require user approval before running** - follower extraction is paid.
-4. Poll `GET /extractions/{id}` until `status: "completed"`.
-5. Export with `GET /extractions/{id}/export?format=csv`.
+4. Call `POST /extractions`, remember the returned `id`.
+5. Poll `GET /extractions/{id}` until `status: "completed"`.
+6. Export with `GET /extractions/{id}/export?format=csv` (or `xlsx`, `md`).
 
 ## Confirmation
 
-Extraction is a paid action. Always surface `estimated_cost_credits` and ask for explicit approval before calling `POST /extractions`.
+Extraction is a paid action. Always surface the estimate and ask for explicit approval before calling `POST /extractions`.
 
 ## Security
 

@@ -33,7 +33,7 @@ Search X (Twitter) tweets by keyword, phrase, hashtag, from-user filter, date ra
 |---|---|---|
 | GET /x/tweets/search | Live search, paginated | Read tier |
 | POST /extractions/estimate | Estimate bulk search cost before running | Free |
-| POST /extractions (type=tweet_search_extractor) | Bulk search up to 1,000 tweets | Per-result credits |
+| POST /extractions (toolType=tweet_search_extractor) | Bulk search up to 1,000 tweets | Per-result credits |
 | GET /extractions/{id} | Poll job status | Free |
 | GET /extractions/{id}/results | Retrieve paginated results | Free |
 | GET /extractions/{id}/export | Export CSV/XLSX/MD | Free |
@@ -63,8 +63,10 @@ Standard X search operators are supported:
 ## Live search (small batches)
 
 ```
-GET /x/tweets/search?q=<url-encoded query>&after=<optional cursor>
+GET /x/tweets/search?q=<url-encoded query>&queryType=Latest&cursor=<optional>
 ```
+
+Supported query parameters: `q` (URL-encoded), `queryType` (`Latest` or `Top`), `cursor`, `sinceTime`, `untilTime`, `limit`.
 
 Response: `{ tweets: [...], nextCursor: "..." }`. Loop until `nextCursor` is empty or you hit the number you need.
 
@@ -74,23 +76,24 @@ Always estimate first so the user sees the credit cost before committing:
 
 ```
 POST /extractions/estimate
-{ "type": "tweet_search_extractor", "params": { "query": "...", "max_results": 1000 } }
+{ "toolType": "tweet_search_extractor", "searchQuery": "<query>" }
 ```
 
 Show the user the estimated cost and result count. On approval:
 
 ```
 POST /extractions
-{ "type": "tweet_search_extractor", "params": { "query": "...", "max_results": 1000 } }
+{ "toolType": "tweet_search_extractor", "searchQuery": "<query>" }
+-> 202 { "id": "<extractionId>", "toolType": "tweet_search_extractor", "status": "running" }
 ```
 
-Poll `GET /extractions/{id}` until `status: "completed"` (or `failed`). Then paginate `GET /extractions/{id}/results?after=<cursor>`.
+Poll `GET /extractions/{id}` until `status: "completed"` (or `failed`). Then paginate `GET /extractions/{id}/results?cursor=<cursor>`.
 
 To export: `GET /extractions/{id}/export?format=csv` (or `xlsx`, `md`). Cap 50,000 rows per export.
 
 ## Cursors
 
-`nextCursor` is opaque. Never parse it, decode it, or construct it by hand. Pass it straight back as the `after` query param.
+`nextCursor` is opaque. Never parse it, decode it, or construct it by hand. Pass it back as the `cursor` query parameter.
 
 ## Error handling
 
