@@ -81,9 +81,7 @@ type EventType =
   | "tweet.new"
   | "tweet.quote"
   | "tweet.reply"
-  | "tweet.retweet"
-  | "follower.gained"
-  | "follower.lost";
+  | "tweet.retweet";
 
 // ─── Events ──────────────────────────────────────────────
 
@@ -117,16 +115,7 @@ interface TweetEventData {
   retweetedUsername?: string;
 }
 
-// Follower events (follower.gained, follower.lost)
-interface FollowerEventData {
-  followerId: string;
-  followerUsername: string;
-  followerName: string;
-  followerFollowersCount: number;
-  followerVerified: boolean;
-}
-
-type EventData = TweetEventData | FollowerEventData;
+type EventData = TweetEventData;
 
 interface EventList {
   events: Event[];

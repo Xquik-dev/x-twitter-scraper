@@ -60,8 +60,8 @@ app.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
     case "tweet.reply":
       console.log(`Reply from @${event.username}: ${event.data.text}`);
       break;
-    case "follower.gained":
-      console.log(`@${event.username} gained a follower`);
+    case "tweet.retweet":
+      console.log(`@${event.username} retweeted`);
       break;
   }
 

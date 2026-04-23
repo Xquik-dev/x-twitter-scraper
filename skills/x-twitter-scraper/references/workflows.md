@@ -131,7 +131,7 @@ const monitor = await xquikFetch("/monitors", {
   method: "POST",
   body: JSON.stringify({
     username: "elonmusk",
-    eventTypes: ["tweet.new", "tweet.reply", "tweet.quote", "follower.gained"],
+    eventTypes: ["tweet.new", "tweet.reply", "tweet.quote", "tweet.retweet"],
   }),
 });
 
@@ -149,7 +149,7 @@ const webhook = await xquikFetch("/webhooks", {
 const events = await xquikFetch("/events?monitorId=7&limit=50");
 ```
 
-Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `follower.gained`, `follower.lost`.
+Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `webhook.test`.
 
 ## Endpoint Guide
 

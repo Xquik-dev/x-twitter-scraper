@@ -256,7 +256,7 @@ Run auditable draws from tweet replies with filters (retweet required, follow ch
 
 ## Webhooks
 
-HMAC-SHA256 signed event delivery to your HTTPS endpoint. Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `follower.gained`, `follower.lost`. Retry policy: 5 attempts with exponential backoff.
+HMAC-SHA256 signed event delivery to your HTTPS endpoint. Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `webhook.test`. Retry policy: 5 attempts with exponential backoff.
 
 If building a webhook handler, read [references/webhooks.md](references/webhooks.md) for signature verification code (Node.js, Python, Go) and security checklist.
 

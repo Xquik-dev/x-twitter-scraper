@@ -124,7 +124,7 @@ POST /monitors
 }
 ```
 
-Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `follower.gained`, `follower.lost`.
+Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `webhook.test`.
 
 Returns `409 monitor_already_exists` if the username is already monitored.
 
