@@ -965,18 +965,8 @@ interface ConnectedXAccount {
   createdAt: string;          // ISO 8601 timestamp
 }
 
-interface ConnectXAccountRequest {
-  username: string;           // X username (@ auto-stripped)
-  email: string;              // Email associated with X account
-  password: string;           // Password (encrypted at rest)
-  totp_secret?: string;       // TOTP base32 secret for 2FA accounts
-  proxy_country?: string;     // Preferred proxy region (e.g. "US")
-}
-
-interface ReauthXAccountRequest {
-  password: string;           // Current password
-  totp_secret?: string;       // TOTP secret if 2FA enabled
-}
+// Connecting an X account is done by the user in the Xquik dashboard,
+// not through this skill. The skill never handles X login credentials.
 
 // ─── X Write ──────────────────────────────────────────
 

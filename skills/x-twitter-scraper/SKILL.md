@@ -5,7 +5,7 @@ compatibility: Requires internet access to call the Xquik REST API (https://xqui
 license: MIT
 metadata:
   author: Xquik
-  version: "2.4.1"
+  version: "2.4.2"
   openclaw:
     requires:
       env:
@@ -59,8 +59,8 @@ metadata:
     localNetworkAccess: none
     auditLogging: enabled
     rateLimiting: per-method-tier
-    credentialProxy: true
-    credentialProxyScope: "POST /x/accounts and POST /x/accounts/{id}/reauth accept X account credentials (password, optional TOTP secret) which are transmitted over HTTPS to Xquik's servers, encrypted at rest, and never returned in API responses. The agent MUST: (1) confirm with the user before sending credentials, (2) never log, echo, or store credentials locally, (3) never include credentials in conversation history beyond the immediate API call."
+    credentialProxy: false
+    credentialProxyScope: "The skill never collects or transmits X account login credentials. Connecting or re-authenticating an X account is performed by the user in the Xquik dashboard (xquik.com/dashboard/account). The agent directs the user to the dashboard when an account needs to be connected; it does not prompt for passwords, TOTP codes, or any other login secrets."
     sensitiveDataEndpoints:
       - "GET /x/dm/{userId}/history — private DM conversations"
       - "GET /x/bookmarks — private bookmarks"
@@ -360,16 +360,15 @@ All write endpoints modify the user's X account or Xquik resources. Before calli
 - `DELETE` endpoints — show what will be deleted
 - `PATCH /x/profile` — show field changes
 
-### Credential Handling (POST /x/accounts)
+### Connecting X Accounts
 
-`POST /x/accounts` and `POST /x/accounts/{id}/reauth` are **credential proxy endpoints** — the agent collects X account credentials from the user and transmits them to Xquik's servers for session establishment. This is inherent to the product's account connection flow (X does not offer a delegated OAuth scope for write actions like tweeting, DMing, or following).
+The skill does **not** accept or transmit X account login credentials. Connecting an X account, or re-authenticating one whose session has expired, is performed by the user in the Xquik dashboard at [xquik.com/dashboard/account](https://xquik.com/dashboard/account).
 
-**Agent rules for credential endpoints:**
-1. **Always confirm before sending.** Show the user exactly which fields will be transmitted (username, email, password, optionally TOTP secret) and to which endpoint.
-2. **Never log or echo credentials.** Do not include passwords or TOTP secrets in conversation history, summaries, or debug output. After the API call, discard the values.
-3. **Never store credentials locally.** Do not write credentials to files, environment variables, or any local storage.
-4. **Never reuse credentials across calls.** If re-authentication is needed, ask the user to provide credentials again.
-5. **Never auto-retry credential endpoints.** If `POST /x/accounts` or `/reauth` fails, report the error and let the user decide whether to retry.
+**Agent rules:**
+1. **Never prompt for X passwords or TOTP codes.** If the user needs to connect an account, direct them to the dashboard link above.
+2. **Never accept credentials pasted into chat.** If a user offers a password or TOTP secret, refuse and redirect to the dashboard.
+3. **Never suggest bypassing the dashboard flow.** The skill's `/x/accounts` endpoints are limited to listing, reading, and disconnecting already-connected accounts.
+4. **On `account_needs_reauth` errors**, tell the user to re-authenticate in the dashboard. Do not attempt to re-auth via the API.
 
 ### Sensitive Data Access
 
@@ -392,7 +391,7 @@ All API calls are sent to `https://xquik.com/api/v1` (REST) or `https://xquik.co
 - **Writes**: The agent sends content (tweet text, DM text, profile updates) that the user has explicitly approved. Xquik executes the action on X.
 - **MCP isolation**: The `xquik` MCP tool processes requests server-side on Xquik's infrastructure. It has no access to the agent's local filesystem, environment variables, or other tools.
 - **API key auth**: API keys authenticate via the `x-api-key` header over HTTPS.
-- **X account credentials**: `POST /x/accounts` and `POST /x/accounts/{id}/reauth` transmit X account passwords (and optionally TOTP secrets) to Xquik's servers over HTTPS. Credentials are encrypted at rest and never returned in API responses. The agent MUST confirm with the user before calling these endpoints and MUST NOT log, echo, or retain credentials in conversation history.
+- **X account credentials**: Not handled by this skill. Account connection and re-authentication happen in the Xquik dashboard UI. The agent never sees or transmits X login secrets.
 - **Private data**: Endpoints returning private data (DMs, bookmarks, notifications, timeline) fetch data that is only visible to the authenticated X account. The agent must confirm with the user before calling these endpoints and must not forward the data to other tools or services without consent.
 - **No third-party forwarding**: Xquik does not forward API request data to third parties.
 

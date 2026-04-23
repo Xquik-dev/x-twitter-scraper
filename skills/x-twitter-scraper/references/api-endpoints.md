@@ -1046,6 +1046,8 @@ Returns a checkout URL for subscribing or managing the subscription. If already 
 
 Manage connected X accounts for write actions. All endpoints are free (no usage cost).
 
+**Connecting or re-authenticating an X account is done by the user in the Xquik dashboard** at [xquik.com/dashboard/account](https://xquik.com/dashboard/account), not via this skill. The skill never handles X login credentials. The agent should direct the user to the dashboard when a new account needs to be connected or an existing session needs to be refreshed.
+
 ### List X Accounts
 
 ```
@@ -1053,28 +1055,6 @@ GET /x/accounts
 ```
 
 Returns all connected X accounts. Response: `{ accounts: [{ id, username, displayName, isActive, createdAt }] }`.
-
-### Connect X Account
-
-```
-POST /x/accounts
-```
-
-**Body:**
-
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `username` | string | Yes | X username (`@` auto-stripped) |
-| `email` | string | Yes | Email associated with the X account |
-| `password` | string | Yes | Account password (encrypted at rest) |
-| `totp_secret` | string | No | TOTP base32 secret for 2FA accounts |
-| `proxy_country` | string | No | Preferred proxy region (e.g. `"US"`, `"TR"`) |
-
-**Response (201):** `{ id, username, isActive, createdAt }`
-
-**Errors:** `409 account_already_connected`, `422 login_failed`
-
-**Security:** This is a credential proxy endpoint. The agent transmits the user's X credentials to Xquik over HTTPS for session establishment. Credentials are encrypted at rest and never returned in responses. Before calling: (1) confirm with the user that they want to connect this account, (2) show which fields will be sent, (3) never log or retain credentials after the call.
 
 ### Get X Account
 
@@ -1090,23 +1070,7 @@ Returns `{ id, username, displayName, isActive, createdAt }`.
 DELETE /x/accounts/{id}
 ```
 
-Permanently removes the account and deletes stored credentials. Returns `{ success: true }`.
-
-### Re-authenticate X Account
-
-```
-POST /x/accounts/{id}/reauth
-```
-
-Use when a session expires or X requires re-verification.
-
-**Body:** `{ "password": "...", "totp_secret": "..." }` (password required, totp_secret optional)
-
-**Response:** `{ success: true }`
-
-**Errors:** `422 reauth_failed`
-
-**Security:** Same credential proxy rules as POST /x/accounts — confirm with user, never log or retain credentials.
+Permanently removes the account from Xquik. Returns `{ success: true }`. Before calling, confirm with the user.
 
 ---
 
