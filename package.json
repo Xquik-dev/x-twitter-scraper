@@ -43,6 +43,10 @@
     "!skills/_artifacts",
     "openclaw.plugin.json"
   ],
+  "scripts": {
+    "check-versions": "node scripts/check-versions.mjs",
+    "prepublishOnly": "node scripts/check-versions.mjs"
+  },
   "devDependencies": {
     "@tanstack/intent": "latest"
   }
