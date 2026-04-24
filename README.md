@@ -144,7 +144,7 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Bookmarks & notifications**: Access bookmarks, bookmark folders, notifications, and home timeline
 - **DM history**: Retrieve conversation history with any user
 - **Mutual follow checker**: Check if two accounts follow each other
-- **X account monitoring**: Track accounts for new tweets, replies, quotes, retweets, and follower changes
+- **X account monitoring**: Track accounts for new tweets, replies, quotes, retweets
 - **Webhook delivery**: Receive HMAC-signed event notifications at your HTTPS endpoint
 - **Trending topics**: Get trending hashtags and topics by region
 - **Radar**: Trending news from 7 sources (Google Trends, Hacker News, Polymarket, TrustMRR, Wikipedia, GitHub, Reddit). Free
@@ -166,7 +166,7 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 | **X Lookups** | Tweet, user, article, search, user tweets, user likes, user media, favoriters, mutual followers, bookmarks, notifications, timeline, DM history |
 | **Write Actions** | Post/delete tweets, like/unlike, retweet, follow/unfollow, DM, profile update, avatar/banner, media upload, community actions |
 | **Giveaway Draws** | Random winner selection from tweet replies with 11 filter options |
-| **Account Monitoring** | Real-time tracking of tweets, replies, quotes, retweets, follower changes |
+| **Account Monitoring** | Real-time tracking of tweets, replies, quotes, retweets |
 | **Webhooks** | HMAC-SHA256 signature verification in Node.js, Python, Go |
 | **Media Download** | Download images, videos, GIFs with permanent hosted URLs |
 | **Engagement Analytics** | Likes, retweets, replies, quotes, views, bookmarks per tweet |
