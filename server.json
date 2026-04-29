@@ -1,6 +1,6 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.Xquik-dev/xquik",
+  "name": "com.xquik/mcp",
   "description": "X data platform with 111 REST endpoints, 2 MCP tools, 23 extraction tools, webhooks, and writes.",
   "repository": {
     "url": "https://github.com/Xquik-dev/x-twitter-scraper",

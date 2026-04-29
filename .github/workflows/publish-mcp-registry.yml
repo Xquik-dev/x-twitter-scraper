@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
     steps:
       - uses: actions/checkout@v4
 
@@ -23,7 +22,10 @@ jobs:
         run: ./mcp-publisher validate
 
       - name: Authenticate to MCP Registry
-        run: ./mcp-publisher login github-oidc
+        run: >
+          ./mcp-publisher login http
+          --domain xquik.com
+          --private-key "${{ secrets.MCP_REGISTRY_PRIVATE_KEY }}"
 
       - name: Publish to MCP Registry
         run: ./mcp-publisher publish
