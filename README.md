@@ -10,7 +10,7 @@
 
 An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. 111 REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, and write actions.
 
-**The cheapest X data API on the market** - reads from $0.00015/call (33x cheaper than the official X API).
+**The cheapest X data API on the market** - post reads from $0.00015/call (about 33x cheaper than official X API post reads).
 
 Works with **40+ AI coding agents** including Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code, Cline, Roo Code, Goose, Amp, Augment, Continue, OpenHands, Trae, OpenCode, and more.
 
@@ -20,16 +20,19 @@ Xquik is dramatically cheaper than every alternative for X/Twitter data access.
 
 ### vs Official X API
 
-| | Xquik | X API Basic | X API Pro |
+| | Xquik | Official X pay-per-usage | Notes |
 |---|---|---|---|
-| **Monthly cost** | **$20** | $100 | $5,000 |
-| **Cost per tweet read** | **$0.00015** | ~$0.01 | ~$0.005 |
-| **Cost per user lookup** | **$0.00015** | ~$0.01 | ~$0.005 |
-| **Write actions** | **$0.0015** | Limited | Limited |
-| **Bulk extraction** | **From $0.00015/result** | Not available | Not available |
-| **Monitoring + webhooks** | **Free** | Not available | Not available |
-| **Giveaway draws** | **$0.00015/entry** | Not available | Not available |
-| **MCP server** | **Included** | Not available | Not available |
+| **Access model** | **$20/month full API, plus pay-per-use options** | No subscriptions or commitments | Basic and Pro are legacy package names |
+| **Cost per post read** | **$0.00015** | $0.005 per resource | Xquik is about 33x cheaper |
+| **Cost per user lookup** | **$0.00015** | $0.010 per resource | Xquik is about 67x cheaper |
+| **Cost per trend read** | **$0.00045** | $0.010 per resource | Xquik is about 22x cheaper |
+| **Write actions** | **$0.0015** | $0.015 content or interaction create; $0.200 content create with URL | Xquik is 10x cheaper for matching $0.015 write classes |
+| **Bulk extraction** | **From $0.00015/result** | Charged per returned resource | Built-in extraction jobs are included with Xquik |
+| **Monitoring + webhooks** | **Free** | No direct monitor product in pricing table | Real-time delivery is included |
+| **Giveaway draws** | **$0.00015/entry** | No comparable draw product | Draw engine is included |
+| **MCP server** | **Included** | Not listed | Agent tools are included |
+
+Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricing), which lists current pay-per-usage read and write rates.
 
 ### Per-Operation Costs (1 credit = $0.00015)
 

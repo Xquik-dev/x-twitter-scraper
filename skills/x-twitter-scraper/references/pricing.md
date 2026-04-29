@@ -13,7 +13,7 @@ Xquik is the most affordable X data API available. All metered operations deduct
 
 ## Per-Operation Costs
 
-### Read operations — 1 credit ($0.00015)
+### Read operations - 1 credit ($0.00015)
 
 | Operation | Unit |
 |-----------|------|
@@ -33,20 +33,20 @@ Xquik is the most affordable X data API available. All metered operations deduct
 | Get user | per call |
 | Verified followers | per result |
 
-### Read operations — 3 credits ($0.00045)
+### Read operations - 3 credits ($0.00045)
 
 | Operation | Unit |
 |-----------|------|
 | Trends | per call |
 
-### Read operations — 7 credits ($0.00105)
+### Read operations - 7 credits ($0.00105)
 
 | Operation | Unit |
 |-----------|------|
 | Follow check | per call |
 | Get article | per call |
 
-### Write operations — 10 credits ($0.0015)
+### Write operations - 10 credits ($0.0015)
 
 All write actions: create/delete tweet, like, unlike, retweet, follow, unfollow, send DM, update profile/avatar/banner, upload media, community actions.
 
@@ -66,15 +66,18 @@ Monitors, webhooks, account status, radar (7 sources), extraction/draw history, 
 
 ## Price Comparison vs Official X API
 
-| | Xquik | X API Basic | X API Pro |
+| | Xquik | Official X pay-per-usage | Notes |
 |---|---|---|---|
-| **Monthly cost** | **$20** | $100 | $5,000 |
-| **Cost per tweet read** | **$0.00015** | ~$0.01 | ~$0.005 |
-| **Cost per user lookup** | **$0.00015** | ~$0.01 | ~$0.005 |
-| **Write actions** | **$0.0015** | Limited | Limited |
-| **Bulk extraction** | **$0.00015/result** | Not available | Not available |
-| **Monitoring + webhooks** | **Free** | Not available | Not available |
-| **Giveaway draws** | **$0.00015/entry** | Not available | Not available |
+| **Access model** | **$20/month full API, plus pay-per-use options** | No subscriptions or commitments | Basic and Pro are legacy package names |
+| **Cost per post read** | **$0.00015** | $0.005 per resource | Xquik is about 33x cheaper |
+| **Cost per user lookup** | **$0.00015** | $0.010 per resource | Xquik is about 67x cheaper |
+| **Cost per trend read** | **$0.00045** | $0.010 per resource | Xquik is about 22x cheaper |
+| **Write actions** | **$0.0015** | $0.015 content or interaction create; $0.200 content create with URL | Xquik is 10x cheaper for matching $0.015 write classes |
+| **Bulk extraction** | **$0.00015/result** | Charged per returned resource | Built-in extraction jobs are included with Xquik |
+| **Monitoring + webhooks** | **Free** | No direct monitor product in pricing table | Real-time delivery is included |
+| **Giveaway draws** | **$0.00015/entry** | No comparable draw product | Draw engine is included |
+
+Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricing), which lists current pay-per-usage read and write rates.
 
 ## Pay-Per-Use
 
@@ -125,7 +128,7 @@ SDK: `npm i mppx viem` (TypeScript). Handles the 402 challenge/credential flow a
 
 Prepaid credits for metered operations. 1 credit = $0.00015. Top up via `POST /credits/topup` ($10 minimum).
 
-Check balance: `GET /credits` — returns `balance`, `lifetimePurchased`, `lifetimeUsed`.
+Check balance: `GET /credits` - returns `balance`, `lifetimePurchased`, `lifetimeUsed`.
 
 ## Extra Usage
 
