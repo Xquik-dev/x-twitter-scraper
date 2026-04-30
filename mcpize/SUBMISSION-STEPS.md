@@ -10,8 +10,8 @@ that points at the existing endpoint.
 - Server URL: `https://xquik.com/mcp`
 - Transport: Streamable HTTP
 - Repository: `https://github.com/Xquik-dev/x-twitter-scraper`
-- Version: `2.4.6`
-- Description: `X data platform with 111 REST endpoints, 2 MCP tools, 23 extraction tools, webhooks, and writes.`
+- Version: `2.4.7`
+- Description: `X data platform with 112 REST endpoints, 2 MCP tools, 23 extraction tools, webhooks, and writes.`
 - Categories: Social Media, Automation, Search, Data, Monitoring, Web Scraping, AI Agents
 - Auth header: `Authorization`
 - Auth value template: `Bearer {XQUIK_API_KEY}`

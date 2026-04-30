@@ -1152,6 +1152,18 @@ DELETE /x/users/{id}/follow
 
 **Body:** `{ "account": "username" }`
 
+### Remove Follower
+
+```
+POST /x/users/{id}/remove-follower
+```
+
+Remove a user from your followers without blocking them.
+
+**Body:** `{ "account": "username" }`
+
+**Cost:** 10 credits per call.
+
 ### Send DM
 
 ```

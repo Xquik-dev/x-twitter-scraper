@@ -9,7 +9,7 @@ import { createInterface } from "node:readline";
 
 const SERVER_INFO = {
   name: "xquik",
-  version: "2.4.6",
+  version: "2.4.7",
 };
 
 const CAPABILITIES = {
@@ -26,10 +26,10 @@ const TOOLS = [
       "- Use when the user asks what capabilities are available or how to accomplish a task on X/Twitter.\n" +
       "- Use to check whether an endpoint is free or requires a subscription.\n\n" +
       "## When NOT to use\n" +
-      "- Do NOT use 'explore' to fetch live data from X — use 'xquik' instead.\n" +
+      "- Do NOT use 'explore' to fetch live data from X - use 'xquik' instead.\n" +
       "- Do NOT use if you already know the endpoint path and parameters.\n\n" +
       "## Behavior\n" +
-      "- Read-only, idempotent. No network calls — runs against an in-memory catalog of 111 endpoints.\n" +
+      "- Read-only, idempotent. No network calls - runs against an in-memory catalog of 112 endpoints.\n" +
       "- Always free, no authentication or credits required.\n" +
       "- Returns the result of your filter function (e.g., empty array if no endpoints match).\n" +
       "- Returns an error message if the code is syntactically invalid or throws at runtime.\n" +
@@ -64,16 +64,16 @@ const TOOLS = [
   {
     name: "xquik",
     description:
-      "Execute authenticated X (Twitter) API calls to read data, publish content, and manage accounts across 111 REST endpoints.\n\n" +
+      "Execute authenticated X (Twitter) API calls to read data, publish content, and manage accounts across 112 REST endpoints.\n\n" +
       "## When to use\n" +
       "- Use after calling 'explore' to discover the endpoint path and parameters.\n" +
       "- Use for any live X/Twitter operation: search tweets, look up users, post tweets, like, retweet, follow, send DMs, run giveaway draws, monitor accounts, extract bulk data, compose tweets, and more.\n\n" +
       "## When NOT to use\n" +
-      "- Do NOT use to discover endpoints — use 'explore' first.\n" +
-      "- Do NOT pass API keys or auth headers — authentication is injected automatically.\n\n" +
+      "- Do NOT use to discover endpoints - use 'explore' first.\n" +
+      "- Do NOT pass API keys or auth headers - authentication is injected automatically.\n\n" +
       "## Behavior\n" +
       "- Executes the provided async function in a sandboxed environment with `xquik.request(path, options?)` and `spec.endpoints` available.\n" +
-      "- Sandboxed via Node.js VM: no filesystem, no global network access — only xquik.request() is available. Console calls are silently ignored.\n" +
+      "- Sandboxed via Node.js VM: no filesystem, no global network access - only xquik.request() is available. Console calls are silently ignored.\n" +
       "- Execution timeout: 60 seconds per invocation, 60 seconds per individual API request.\n" +
       "- Read operations (GET) return JSON objects with the requested data. Write operations (POST/DELETE) return `{ success: true }` or `{ success: true, warning: '...' }`.\n" +
       "- Pagination: responses include `has_next_page` (boolean) and `next_cursor` (string). Pass `cursor` as a query param for the next page.\n" +
@@ -82,7 +82,7 @@ const TOOLS = [
       "- 402: Subscription required or insufficient credits. Call `POST /api/v1/subscribe` to get a checkout URL.\n" +
       "- 429: Rate limited. Retry after backoff.\n" +
       "- 404: Resource not found (user, tweet, or monitor does not exist).\n" +
-      "- 200 with `warning` field: Probable success — do NOT retry.\n\n" +
+      "- 200 with `warning` field: Probable success - do NOT retry.\n\n" +
       "## Costs\n" +
       "- Free: compose, styles, drafts, radar, subscribe, account, api-keys, support.\n" +
       "- 1 credit/read ($0.00015): tweet search, timeline, bookmarks, favoriters.\n" +

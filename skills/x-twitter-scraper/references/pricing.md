@@ -83,7 +83,7 @@ Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricin
 
 Two options without a monthly subscription:
 
-**Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 111 endpoints.
+**Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 112 endpoints.
 
 **MPP**: 32 X-API endpoints accept anonymous on-chain payments. No account needed.
 

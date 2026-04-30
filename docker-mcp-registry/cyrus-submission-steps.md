@@ -22,7 +22,7 @@ Skills appear to be indexed from GitHub repos via a curation process. Options:
    - **Skill path**: skills/x-twitter-scraper/SKILL.md
    - **Install command**: `npx skills add Xquik-dev/x-twitter-scraper`
    - **Category**: Development (or Data & APIs)
-   - **Description**: X (Twitter) data platform skill for AI coding agents. 111 REST API endpoints, 2 MCP tools, HMAC webhooks. Reads from $0.00015/call.
+   - **Description**: X (Twitter) data platform skill for AI coding agents. 112 REST API endpoints, 2 MCP tools, HMAC webhooks. Reads from $0.00015/call.
 
 ### Option B: Open GitHub Issue
 
@@ -37,4 +37,4 @@ The existing SKILL.md is fully compliant with the skills.sh standard:
 - Includes metadata.json with version info
 - MIT licensed
 
-No additional files are needed for Cyrus -- the existing skill structure is ready.
+No additional files are needed for Cyrus - the existing skill structure is ready.
