@@ -1281,6 +1281,14 @@ POST /credits/topup
 
 Get a checkout URL to purchase credits ($10 minimum). Free.
 
+### Get Top-Up Status
+
+```
+GET /credits/topup/status
+```
+
+Poll a checkout session after starting a credit top-up. Query: `session_id`. Free.
+
 ---
 
 ## Support

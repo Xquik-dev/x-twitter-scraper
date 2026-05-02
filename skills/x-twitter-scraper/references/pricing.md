@@ -39,7 +39,7 @@ Xquik is the most affordable X data API available. All metered operations deduct
 |-----------|------|
 | Trends | per call |
 
-### Read operations - 7 credits ($0.00105)
+### Read operations - 5 credits ($0.00075)
 
 | Operation | Unit |
 |-----------|------|
@@ -83,7 +83,7 @@ Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricin
 
 Two options without a monthly subscription:
 
-**Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 112 endpoints.
+**Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 113 endpoints.
 
 **MPP**: 32 X-API endpoints accept anonymous on-chain payments. No account needed.
 

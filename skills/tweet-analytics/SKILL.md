@@ -114,7 +114,7 @@ Returns rolling per-tweet metrics for that account.
 
 ## Cost control
 
-Metrics endpoints are Read tier (1-7 credits per call). Bulk `favoriters` can list thousands of accounts at per-result pricing - always estimate first and show the user the expected cost.
+Metrics endpoints are Read tier (1-5 credits per call). Bulk `favoriters` can list thousands of accounts at per-result pricing - always estimate first and show the user the expected cost.
 
 ## Errors
 

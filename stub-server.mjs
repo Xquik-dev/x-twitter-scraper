@@ -9,7 +9,7 @@ import { createInterface } from "node:readline";
 
 const SERVER_INFO = {
   name: "xquik",
-  version: "2.4.7",
+  version: "2.4.8",
 };
 
 const CAPABILITIES = {
@@ -29,7 +29,7 @@ const TOOLS = [
       "- Do NOT use 'explore' to fetch live data from X - use 'xquik' instead.\n" +
       "- Do NOT use if you already know the endpoint path and parameters.\n\n" +
       "## Behavior\n" +
-      "- Read-only, idempotent. No network calls - runs against an in-memory catalog of 112 endpoints.\n" +
+      "- Read-only, idempotent. No network calls - runs against an in-memory catalog of 113 endpoints.\n" +
       "- Always free, no authentication or credits required.\n" +
       "- Returns the result of your filter function (e.g., empty array if no endpoints match).\n" +
       "- Returns an error message if the code is syntactically invalid or throws at runtime.\n" +
@@ -64,7 +64,7 @@ const TOOLS = [
   {
     name: "xquik",
     description:
-      "Execute authenticated X (Twitter) API calls to read data, publish content, and manage accounts across 112 REST endpoints.\n\n" +
+      "Execute authenticated X (Twitter) API calls to read data, publish content, and manage accounts across 113 REST endpoints.\n\n" +
       "## When to use\n" +
       "- Use after calling 'explore' to discover the endpoint path and parameters.\n" +
       "- Use for any live X/Twitter operation: search tweets, look up users, post tweets, like, retweet, follow, send DMs, run giveaway draws, monitor accounts, extract bulk data, compose tweets, and more.\n\n" +

@@ -54,6 +54,63 @@ for (const s of surfaces) {
   }
 }
 
+const contentChecks = [
+  {
+    path: "README.md",
+    required: [
+      "113 REST API endpoints",
+      "| Follow check, article | 5 | $0.00075 |",
+      "Works with all 113 endpoints",
+    ],
+    forbidden: [
+      "112 REST API endpoints",
+      "| Follow check, article | 7 | $0.00105 |",
+    ],
+  },
+  {
+    path: "skills/x-twitter-scraper/SKILL.md",
+    required: ["113 REST API endpoints", "Read operations: 1-5 credits"],
+    forbidden: ["112 REST API endpoints", "Read operations: 1-7 credits"],
+  },
+  {
+    path: "skills/x-twitter-scraper/references/api-endpoints.md",
+    required: ["GET /credits/topup/status"],
+    forbidden: [],
+  },
+  {
+    path: "skills/x-twitter-scraper/references/pricing.md",
+    required: [
+      "Read operations - 5 credits ($0.00075)",
+      "Works with all 113 endpoints",
+    ],
+    forbidden: ["Read operations - 7 credits ($0.00105)"],
+  },
+  {
+    path: "server.json",
+    required: ["113 REST endpoints"],
+    forbidden: ["112 REST endpoints"],
+  },
+  {
+    path: "stub-server.mjs",
+    required: ["113 endpoints", "113 REST endpoints"],
+    forbidden: ["112 endpoints", "112 REST endpoints"],
+  },
+];
+
+for (const check of contentChecks) {
+  const raw = readFileSync(join(root, check.path), "utf8");
+  for (const required of check.required) {
+    if (!raw.includes(required)) {
+      drifts.push(`  ${check.path}: missing "${required}"`);
+    }
+  }
+  for (const forbidden of check.forbidden) {
+    if (raw.includes(forbidden)) {
+      drifts.push(`  ${check.path}: stale "${forbidden}"`);
+    }
+  }
+}
+
 if (drifts.length > 0) {
   process.stderr.write(
     `Version drift detected (package.json = ${expected}):\n${drifts.join("\n")}\n`,

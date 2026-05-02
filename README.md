@@ -8,7 +8,7 @@
 [![x-twitter-scraper MCP server](https://glama.ai/mcp/servers/Xquik-dev/x-twitter-scraper/badges/score.svg)](https://glama.ai/mcp/servers/Xquik-dev/x-twitter-scraper)
 [![smithery badge](https://smithery.ai/badge/xquik/x-twitter-scraper)](https://smithery.ai/servers/xquik/x-twitter-scraper)
 
-An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. 112 REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, and write actions.
+An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. 113 REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, and write actions.
 
 **The cheapest X data API on the market** - post reads from $0.00015/call (about 33x cheaper than official X API post reads).
 
@@ -42,7 +42,7 @@ Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricin
 | Read (user profile, verified followers, followers you know) | 1 | $0.00015 |
 | Read (favoriters) | 1 | $0.00015 |
 | Read (trends) | 3 | $0.00045 |
-| Follow check, article | 7 | $0.00105 |
+| Follow check, article | 5 | $0.00075 |
 | Write (tweet, like, retweet, follow, DM, etc.) | 10 | $0.0015 |
 | Extraction (tweets, replies, quotes, mentions, posts, likes, media, search, favoriters, retweeters, community members, people search, list members, list followers) | 1/result | $0.00015/result |
 | Extraction (followers, following, verified followers) | 1/result | $0.00015/result |
@@ -54,7 +54,7 @@ Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricin
 
 Two options for pay-per-use without a monthly subscription:
 
-- **Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 112 endpoints.
+- **Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 113 endpoints.
 - **MPP**: 32 X-API endpoints accept anonymous on-chain payments via Machine Payments Protocol. No account needed. SDK: `npm i mppx viem`.
 
 ## Installation
@@ -156,14 +156,14 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Tweet composition**: Algorithm-optimized tweet composer with scoring (free)
 - **Credits & billing**: Check balance, top up credits, manage subscription
 - **Support tickets**: Open and manage support tickets via API
-- **MCP server**: 2 tools covering 112 endpoints for AI agent integration
+- **MCP server**: 2 tools covering 113 endpoints for AI agent integration
 - **Pay-per-use (MPP)**: Anonymous access to 32 endpoints via on-chain payments, no account needed
 
 ## Capabilities
 
 | Area | Details |
 |------|---------|
-| **REST API** | 112 endpoints across 10 categories with retry logic and pagination |
+| **REST API** | 113 endpoints across 10 categories with retry logic and pagination |
 | **MCP Server** | 2 tools (explore + xquik). StreamableHTTP, configs for 10 platforms |
 | **Data Extraction** | 23 bulk extraction tools (replies, retweets, quotes, favoriters, threads, articles, user likes, user media, communities, lists, Spaces, people search, tweet search, mentions, posts) |
 | **X Lookups** | Tweet, user, article, search, user tweets, user likes, user media, favoriters, mutual followers, bookmarks, notifications, timeline, DM history |
