@@ -10,7 +10,7 @@
   "homepage": "https://xquik.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Xquik-dev/x-twitter-scraper"
+    "url": "git+https://github.com/Xquik-dev/x-twitter-scraper.git"
   },
   "keywords": [
     "twitter",
