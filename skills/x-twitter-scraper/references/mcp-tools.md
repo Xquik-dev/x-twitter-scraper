@@ -7,7 +7,7 @@ The MCP server at `https://xquik.com/mcp` provides 2 structured API tools. The a
 | Tool | Description | Cost |
 |------|-------------|------|
 | `explore` | Search the API endpoint catalog (read-only, no network calls) | Free |
-| `xquik` | Execute confirmed Xquik API calls | Varies by endpoint |
+| `xquik` | Send confirmed Xquik API requests | Varies by endpoint |
 
 ### `explore` - Search the API Spec
 
@@ -40,7 +40,7 @@ async () => spec.endpoints.filter(e => e.category === 'x-write');
 async () => spec.endpoints.filter(e => e.summary.toLowerCase().includes('tweet'));
 ```
 
-### `xquik` - Execute API Calls
+### `xquik` - Send API Requests
 
 The tool provides `xquik.request()` with auth injected automatically. Never pass API keys.
 

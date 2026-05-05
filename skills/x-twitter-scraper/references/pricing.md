@@ -125,7 +125,7 @@ Two options without a monthly subscription:
 | `GET /x/users/{id}/mentions` | $0.00015 | per tweet |
 | `GET /x/users/{id}/verified-followers` | $0.00015 | per user |
 
-SDK: `npm i mppx viem` (TypeScript). Handles the 402 payment challenge flow.
+SDK: `npm i mppx@0.6.15 viem@2.48.8` (TypeScript). Handles the 402 payment challenge flow.
 
 ## Credits
 

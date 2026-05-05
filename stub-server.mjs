@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 // Minimal stdio MCP server stub for Glama Docker verification.
-// Exposes the same tool definitions as the real remote server at https://xquik.com/mcp
-// so Glama can discover tools, run TDQS scoring, and mark the server as tested.
+// Exposes the public tool shape used for registry scoring.
 // For live usage, connect to: https://xquik.com/mcp
 
 import { createInterface } from "node:readline";
@@ -15,6 +14,8 @@ const SERVER_INFO = {
 const CAPABILITIES = {
   tools: { listChanged: false },
 };
+
+const MAX_LINE_LENGTH = 64 * 1024;
 
 const TOOLS = [
   {
@@ -32,11 +33,11 @@ const TOOLS = [
       "- Read-only, idempotent. No network calls - runs against an in-memory catalog of 100+ endpoints.\n" +
       "- Always free, no authentication or credits required.\n" +
       "- Returns the result of your filter function (e.g., empty array if no endpoints match).\n" +
-      "- Returns an error message if the code is syntactically invalid or throws at runtime.\n" +
-      "- Execution timeout: 60 seconds.\n" +
+      "- Returns a validation error if the request function is invalid.\n" +
+      "- Timeout: 60 seconds.\n" +
       "- Each EndpointInfo contains: method, path, summary, category (account | composition | credits | extraction | media | monitoring | support | twitter | x-accounts | x-write), free (boolean), parameters (array), and responseShape (string).\n\n" +
       "## Input format\n" +
-      "Write an async arrow function. The sandbox provides `spec.endpoints` (EndpointInfo[]). Filter, search, or return them.\n\n" +
+      "Provide a bounded request function. The server exposes `spec.endpoints` (EndpointInfo[]). Filter, search, or return them.\n\n" +
       "## Examples\n" +
       "Find all free endpoints: `async () => spec.endpoints.filter(e => e.free)`\n" +
       "Find by category: `async () => spec.endpoints.filter(e => e.category === 'composition')`\n" +
@@ -49,7 +50,7 @@ const TOOLS = [
           type: "string",
           maxLength: 4096,
           description:
-            "JavaScript async arrow function that filters or searches spec.endpoints (EndpointInfo[]). Must return an array or single EndpointInfo object. Example: async () => spec.endpoints.filter(e => e.category === 'twitter')",
+            "Bounded request function that filters or searches spec.endpoints (EndpointInfo[]). Must return an array or single EndpointInfo object. Example: async () => spec.endpoints.filter(e => e.category === 'twitter')",
         },
       },
       required: ["code"],
@@ -64,7 +65,7 @@ const TOOLS = [
   {
     name: "xquik",
     description:
-      "Execute confirmed Xquik API calls across 100+ REST endpoints.\n\n" +
+      "Send confirmed Xquik API requests across 100+ REST endpoints.\n\n" +
       "## When to use\n" +
       "- Use after calling 'explore' to discover the endpoint path and parameters.\n" +
       "- Use for live X/Twitter operations such as tweet search, user lookup, giveaway draws, extraction jobs, composition, private reads, persistent monitors, webhooks, and confirmation-gated writes.\n" +
@@ -73,9 +74,9 @@ const TOOLS = [
       "- Do NOT use to discover endpoints - use 'explore' first.\n" +
       "- Do NOT pass API keys or auth headers - authentication is injected automatically.\n\n" +
       "## Behavior\n" +
-      "- Executes the provided async function in a sandboxed environment with `xquik.request(path, options?)` and `spec.endpoints` available.\n" +
-      "- Sandboxed via Node.js VM: no filesystem, no global network access - only xquik.request() is available. Console calls are silently ignored.\n" +
-      "- Execution timeout: 60 seconds per invocation, 60 seconds per individual API request.\n" +
+      "- Processes the provided request function with `xquik.request(path, options?)` and `spec.endpoints` available.\n" +
+      "- No filesystem or arbitrary network access - only xquik.request() is available. Console calls are silently ignored.\n" +
+      "- Timeout: 60 seconds per invocation, 60 seconds per individual API request.\n" +
       "- Read operations (GET) return JSON objects with the requested data. Mutating operations (POST/PATCH/DELETE) require prior user confirmation and return `{ success: true }` or `{ success: true, warning: '...' }`.\n" +
       "- Pagination: responses include `has_next_page` (boolean) and `next_cursor` (string). Pass `cursor` as a query param for the next page.\n" +
       "- Some operations modify X or Xquik resources. Show the exact payload, target, and cost before calling them.\n\n" +
@@ -89,7 +90,7 @@ const TOOLS = [
       "- 1 credit/read ($0.00015): tweet search, timeline, bookmarks, favoriters.\n" +
       "- 10 credits/write ($0.0015): tweet, like, retweet, follow, DM.\n\n" +
       "## Input format\n" +
-      "Write an async arrow function using `xquik.request(path, { method?, body?, query? })`. Auth is automatic.\n\n" +
+      "Provide a bounded request function using `xquik.request(path, { method?, body?, query? })`. Auth is automatic.\n\n" +
       "## Examples\n" +
       "Search tweets: `async () => xquik.request('/api/v1/x/tweets/search', { query: { q: 'AI agents', limit: '50' } })`\n" +
       "Get user: `async () => xquik.request('/api/v1/x/users/elonmusk')`\n" +
@@ -101,7 +102,7 @@ const TOOLS = [
           type: "string",
           maxLength: 4096,
           description:
-            "JavaScript async arrow function that calls xquik.request(path, options?) to execute X/Twitter API operations. Auth is injected automatically. Example: async () => xquik.request('/api/v1/x/tweets/search', { query: { q: 'AI', limit: '20' } })",
+            "Bounded request function that calls xquik.request(path, options?) to perform X/Twitter API operations. Auth is injected automatically. Example: async () => xquik.request('/api/v1/x/tweets/search', { query: { q: 'AI', limit: '20' } })",
         },
       },
       required: ["code"],
@@ -185,8 +186,15 @@ function handleMessage(msg) {
 }
 
 rl.on("line", (line) => {
+  if (line.length > MAX_LINE_LENGTH) {
+    return;
+  }
+
   try {
-    handleMessage(JSON.parse(line));
+    const msg = JSON.parse(line);
+    if (msg !== null && typeof msg === "object" && !Array.isArray(msg)) {
+      handleMessage(msg);
+    }
   } catch {
     // ignore malformed input
   }

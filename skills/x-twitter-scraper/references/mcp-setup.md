@@ -18,7 +18,7 @@ Claude.ai supports MCP connectors natively via OAuth. Add Xquik as a connector f
 
 Claude Desktop only supports stdio transport, so it needs a local stdio-to-HTTP bridge. The recommended setup avoids runtime package fetches: **install the bridge globally first, then invoke the pinned binary directly.**
 
-> **About `mcp-remote`:** [`mcp-remote`](https://www.npmjs.com/package/mcp-remote) is an open-source stdio-to-HTTP bridge (MIT license, [source on GitHub](https://github.com/geelen/mcp-remote)) maintained by the MCP ecosystem. It translates stdio to StreamableHTTP - it does not execute arbitrary code, access your filesystem, or modify your system. Always pin the version (`@0.1.38`) and audit the package on npm before installing.
+> **About `mcp-remote`:** [`mcp-remote`](https://www.npmjs.com/package/mcp-remote) is an open-source stdio-to-HTTP bridge (MIT license, [source on GitHub](https://github.com/geelen/mcp-remote)) maintained by the MCP ecosystem. It translates stdio to StreamableHTTP - it does not run user code, access your filesystem, or modify your system. Always pin the version (`@0.1.38`) and audit the package on npm before installing.
 
 ### Step 1: Install the bridge globally (one-time, audited)
 
@@ -180,9 +180,9 @@ The MCP server (v2) at `https://xquik.com/mcp` provides 2 structured API tools:
 | Tool | Description | Cost |
 |------|-------------|------|
 | `explore` | Search the API endpoint catalog (read-only, no network calls) | Free |
-| `xquik` | Execute confirmed Xquik API calls | Varies by endpoint |
+| `xquik` | Send confirmed Xquik API requests | Varies by endpoint |
 
-The agent sends structured API requests through the MCP server, which handles authentication and execution within the same first-party infrastructure as the REST API. All 100+ REST API endpoints across 10 categories are accessible. Private reads, writes, persistent resources, and billing flows require explicit user confirmation before use.
+The agent sends structured API requests through the MCP server, which handles authentication and request routing within the same first-party infrastructure as the REST API. All 100+ REST API endpoints across 10 categories are accessible. Private reads, writes, persistent resources, and billing flows require explicit user confirmation before use.
 
 ## After Setup
 

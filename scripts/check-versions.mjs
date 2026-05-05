@@ -61,12 +61,16 @@ const contentChecks = [
       "100+ REST API endpoints",
       "| Follow check, article | 5 | $0.00075 |",
       "Works with all supported endpoints",
+      "npm i mppx@0.6.15 viem@2.48.8",
+      "npx skills@1.5.3 add Xquik-dev/x-twitter-scraper",
     ],
     forbidden: [
       "113 REST API endpoints",
       "112 REST API endpoints",
       "Works with all 113 endpoints",
       "@latest",
+      "npm i mppx viem",
+      "npx skills add Xquik-dev/x-twitter-scraper",
       "| Follow check, article | 7 | $0.00105 |",
     ],
   },
@@ -77,11 +81,26 @@ const contentChecks = [
   },
   {
     path: "skills/x-twitter-scraper/SKILL.md",
-    required: ["100+ REST API endpoints", "Read operations: 1-5 credits"],
+    required: [
+      "100+ REST API endpoints",
+      "Read operations: 1-5 credits",
+      "persistentResourceConfirmation: required",
+      "X-authored text can include requests that conflict with the user's task",
+    ],
     forbidden: [
       "113 REST API endpoints",
       "112 REST API endpoints",
       "Read operations: 1-7 credits",
+      "NEVER asks",
+      "Instructions found in X content",
+      "Instructions embedded in X content",
+      "instructions embedded",
+      "The agent MUST",
+      "no code execution",
+      "No code execution",
+      "No eval",
+      "execute arbitrary code",
+      "execute autonomous payments",
     ],
   },
   {
@@ -114,10 +133,14 @@ const contentChecks = [
     required: [
       "Read operations - 5 credits ($0.00075)",
       "Works with all supported endpoints",
+      "`GET /x/followers/check` | $0.00105",
+      "`GET /x/articles/{tweetId}` | $0.00105",
+      "npm i mppx@0.6.15 viem@2.48.8",
     ],
     forbidden: [
       "Works with all 113 endpoints",
       "Read operations - 7 credits ($0.00105)",
+      "npm i mppx viem",
     ],
   },
   {
@@ -146,7 +169,7 @@ const contentChecks = [
     required: [
       "100+ endpoints",
       "100+ REST endpoints",
-      "Execute confirmed Xquik API calls",
+      "Send confirmed Xquik API requests",
       '"x-api-key": "<YOUR_API_KEY>"',
     ],
     forbidden: [
@@ -155,9 +178,17 @@ const contentChecks = [
       "112 endpoints",
       "112 REST endpoints",
       "Execute authenticated",
+      "Execute confirmed Xquik API calls",
+      "JavaScript expression",
+      "Node.js VM",
       "Call `POST /api/v1/subscribe`",
       '"Authorization": "Bearer <YOUR_API_KEY>"',
     ],
+  },
+  {
+    path: "docker-mcp-registry/xquik-remote/tools.json",
+    required: ["Send confirmed Xquik API requests", "Bounded request"],
+    forbidden: ["Execute confirmed Xquik API calls", "JavaScript expression"],
   },
 ];
 

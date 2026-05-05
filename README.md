@@ -56,14 +56,14 @@ Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricin
 Two options for pay-per-use without a monthly subscription:
 
 - **Credits**: Start a credit top-up checkout only after explicit confirmation. 1 credit = $0.00015. Works with all supported endpoints.
-- **MPP**: 32 X-API endpoints accept optional per-call payments. Show the exact amount and get explicit confirmation before starting any payment flow. SDK: `npm i mppx viem`.
+- **MPP**: 32 X-API endpoints accept optional per-call payments. Show the exact amount and get explicit confirmation before starting any payment flow. SDK: `npm i mppx@0.6.15 viem@2.48.8`.
 
 ## Installation
 
 Install via the [skills CLI](https://skills.sh) (auto-detects your installed agents):
 
 ```bash
-npx skills add Xquik-dev/x-twitter-scraper
+npx skills@1.5.3 add Xquik-dev/x-twitter-scraper
 ```
 
 ### Manual Installation
@@ -221,7 +221,7 @@ Use the X Twitter Scraper API in your language of choice. All SDKs are auto-gene
 | [x-twitter-scraper-csharp](https://github.com/Xquik-dev/x-twitter-scraper-csharp) | C# / .NET | `dotnet add package XTwitterScraper` | ![Stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper-csharp?style=flat-square) |
 | [x-twitter-scraper-php](https://github.com/Xquik-dev/x-twitter-scraper-php) | PHP | `composer require xquik/x-twitter-scraper` | ![Stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper-php?style=flat-square) |
 | [x-twitter-scraper-cli](https://github.com/Xquik-dev/x-twitter-scraper-cli) | CLI | Build from source or install a pinned release tag | ![Stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper-cli?style=flat-square) |
-| [terraform-provider-x-twitter-scraper](https://github.com/Xquik-dev/terraform-provider-x-twitter-scraper) | Terraform | Build from source ([latest release](https://github.com/Xquik-dev/terraform-provider-x-twitter-scraper/releases)) | ![Stars](https://img.shields.io/github/stars/Xquik-dev/terraform-provider-x-twitter-scraper?style=flat-square) |
+| [terraform-provider-x-twitter-scraper](https://github.com/Xquik-dev/terraform-provider-x-twitter-scraper) | Terraform | Build from source ([release page](https://github.com/Xquik-dev/terraform-provider-x-twitter-scraper/releases)) | ![Stars](https://img.shields.io/github/stars/Xquik-dev/terraform-provider-x-twitter-scraper?style=flat-square) |
 | [tweetclaw](https://github.com/Xquik-dev/tweetclaw) | OpenClaw plugin | `openclaw plugins install @xquik/tweetclaw` | ![Stars](https://img.shields.io/github/stars/Xquik-dev/tweetclaw?style=flat-square) |
 
 ## Skill Structure

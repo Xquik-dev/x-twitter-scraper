@@ -20,7 +20,7 @@ Skills appear to be indexed from GitHub repos via a curation process. Options:
 2. Post in their skills/marketplace channel requesting listing for:
    - **Repo**: https://github.com/Xquik-dev/x-twitter-scraper
    - **Skill path**: skills/x-twitter-scraper/SKILL.md
-   - **Install command**: `npx skills add Xquik-dev/x-twitter-scraper`
+   - **Install command**: `npx skills@1.5.3 add Xquik-dev/x-twitter-scraper`
    - **Category**: Development (or Data & APIs)
    - **Description**: X (Twitter) data platform skill for AI coding agents. 100+ REST API endpoints, 2 MCP tools, HMAC webhooks. Reads from $0.00015/call.
 

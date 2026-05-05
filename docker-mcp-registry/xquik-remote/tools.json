@@ -6,18 +6,18 @@
       {
         "name": "code",
         "type": "string",
-        "desc": "JavaScript expression to search the API spec. The tool provides a spec.endpoints array with method, path, summary, category, free, parameters, and responseShape fields."
+        "desc": "Bounded filter over the API spec. The tool provides a spec.endpoints array with method, path, summary, category, free, parameters, and responseShape fields."
       }
     ]
   },
   {
     "name": "xquik",
-    "description": "Execute confirmed Xquik API calls. Covers 100+ endpoints: tweet search, user lookup, follower extraction, confirmation-gated writes (tweet, like, retweet, follow, DM), monitoring, giveaway draws, trending topics, composition, and more.",
+    "description": "Send confirmed Xquik API requests. Covers 100+ endpoints: tweet search, user lookup, follower extraction, confirmation-gated writes (tweet, like, retweet, follow, DM), monitoring, giveaway draws, trending topics, composition, and more.",
     "arguments": [
       {
         "name": "code",
         "type": "string",
-        "desc": "JavaScript expression to execute API calls. The tool provides xquik.request(path, options?) for making authenticated requests to the Xquik API."
+        "desc": "Bounded request using xquik.request(path, options?) for authenticated requests to the Xquik API."
       }
     ]
   }
