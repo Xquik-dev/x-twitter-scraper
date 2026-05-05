@@ -24,28 +24,54 @@ Copy-pasteable TypeScript types for all Xquik API objects.
 
 interface Account {
   plan: "active" | "inactive";
-  pricingVersion: number;
   monitorsAllowed: number;
   monitorsUsed: number;
-  currentPeriod?: {
-    start: string;
-    end: string;
-    usagePercent: number;
+  monitorBilling: {
+    activeDailyEstimate: string;
+    activeHourlyBurn: string;
+    creditsPerActiveMonitorDay: string;
+    creditsPerActiveMonitorHour: string;
+    eventsIncluded: boolean;
+    instantCheckIntervalSeconds: number;
+    unlimitedSlots: boolean;
   };
+  creditInfo?: {
+    balance: string;
+    lifetimePurchased: string;
+    lifetimeUsed: string;
+    autoTopupEnabled: boolean;
+    autoTopupAmountDollars: number;
+    autoTopupThreshold: string;
+  };
+  xUsername?: string;
 }
 
 // ─── Credits ────────────────────────────────────────────
 
 interface CreditBalance {
-  balance: number;              // Current credit balance
-  lifetimePurchased: number;    // Total credits purchased
-  lifetimeUsed: number;         // Total credits consumed
-  autoTopUp: boolean;           // Whether auto top-up is enabled
+  balance: string;              // Current credit balance, bigint string
+  lifetimePurchased: string;    // Total credits purchased, bigint string
+  lifetimeUsed: string;         // Total credits consumed, bigint string
+  autoTopupEnabled: boolean;    // Whether auto top-up is enabled
+  autoTopupAmountDollars: number; // Dollar amount charged by auto top-up
+  autoTopupThreshold: string;   // Trigger threshold, bigint string
 }
 
 interface CreditTopUpResponse {
   url: string;                  // Checkout URL
 }
+
+type CreditQuickTopUpResponse =
+  | {
+      outcome: "charged";
+      credits: string;          // Credits added, bigint string
+      balance: string;          // New balance, bigint string
+    }
+  | { outcome: "no_payment_method" }
+  | {
+      outcome: "requires_action";
+      clientSecret: string;     // Complete required cardholder action
+    };
 
 // ─── API Keys ────────────────────────────────────────────
 
@@ -279,10 +305,11 @@ interface ExtractionList {
 
 interface ExtractionEstimate {
   allowed: boolean;
+  creditsAvailable: string;
+  creditsRequired: string;
   source: "replyCount" | "retweetCount" | "quoteCount" | "followers" | "unknown";
   estimatedResults: number;
-  usagePercent: number;
-  projectedPercent: number;
+  resolvedXUserId?: string;
   error?: string;
 }
 
@@ -811,9 +838,10 @@ interface McpExtractionJob {
 interface McpExtractionEstimate {
   allowed?: boolean;          // Whether the extraction is allowed within budget
   estimatedResults?: number;  // Estimated number of results
-  projectedPercent?: number;  // Projected usage percent after extraction
-  usagePercent?: number;      // Current usage percent of monthly quota
+  creditsRequired?: string;   // Required credits, bigint string
+  creditsAvailable?: string;  // Available credits, bigint string
   source?: string;            // Data source used for estimation
+  resolvedXUserId?: string;   // Resolved user ID for username-based estimates
   error?: string;             // Error message if estimation failed
 }
 
@@ -862,14 +890,27 @@ interface McpDrawDetails {
 // ─── MCP: get-account ───────────────────────────────────
 
 interface McpAccount {
-  plan: string;               // Current plan name (free or subscriber)
-  monitorsAllowed: number;    // Maximum monitors allowed on current plan
+  plan: "active" | "inactive";
+  monitorsAllowed: number;    // Deprecated; monitor slots are unlimited
   monitorsUsed: number;       // Number of active monitors
-  currentPeriod?: {           // Current billing period (present only with active subscription)
-    start: string;            // ISO 8601 period start date
-    end: string;              // ISO 8601 period end date
-    usagePercent: number;     // Percent of monthly quota consumed
+  monitorBilling: {
+    activeDailyEstimate: string;
+    activeHourlyBurn: string;
+    creditsPerActiveMonitorDay: string;
+    creditsPerActiveMonitorHour: string;
+    eventsIncluded: boolean;
+    instantCheckIntervalSeconds: number;
+    unlimitedSlots: boolean;
   };
+  creditInfo?: {
+    balance: string;
+    lifetimePurchased: string;
+    lifetimeUsed: string;
+    autoTopupEnabled: boolean;
+    autoTopupAmountDollars: number;
+    autoTopupThreshold: string;
+  };
+  xUsername?: string;
 }
 
 // ─── MCP: get-trends ────────────────────────────────────

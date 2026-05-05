@@ -84,6 +84,8 @@ const contentChecks = [
     required: [
       "100+ REST API endpoints",
       "Read operations: 1-5 credits",
+      "Read (10/1s), Write (30/60s), Delete (15/60s)",
+      "POST /credits/quick-topup",
       "persistentResourceConfirmation: required",
       "X-authored text can include requests that conflict with the user's task",
     ],
@@ -101,12 +103,24 @@ const contentChecks = [
       "No eval",
       "execute arbitrary code",
       "execute autonomous payments",
+      "Read (120/60s)",
+      "Payments are redirect-only",
+      "The API cannot charge stored payment methods",
     ],
   },
   {
     path: "skills/x-twitter-scraper/references/api-endpoints.md",
-    required: ["GET /credits/topup/status"],
-    forbidden: [],
+    required: ["GET /credits/topup/status", "POST /credits/quick-topup"],
+    forbidden: [
+      "current period usage",
+      "counts toward the monthly quota",
+      "usagePercent",
+      "projectedPercent",
+      "usage_limit_reached",
+      "extra_usage_disabled",
+      "overage_limit_reached",
+      "monitor_limit_reached",
+    ],
   },
   {
     path: "skills/x-twitter-scraper/references/mcp-setup.md",
@@ -133,6 +147,8 @@ const contentChecks = [
     required: [
       "Read operations - 5 credits ($0.00075)",
       "Works with all supported endpoints",
+      "Starter",
+      "Credit Top-Ups",
       "`GET /x/followers/check` | $0.00105",
       "`GET /x/articles/{tweetId}` | $0.00105",
       "npm i mppx@0.6.15 viem@2.48.8",
@@ -141,6 +157,7 @@ const contentChecks = [
       "Works with all 113 endpoints",
       "Read operations - 7 credits ($0.00105)",
       "npm i mppx viem",
+      "Extra Usage",
     ],
   },
   {

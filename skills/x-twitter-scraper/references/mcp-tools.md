@@ -83,7 +83,7 @@ Use `explore` first to find endpoints, then `xquik` to call them.
 | Trending topics by region (X) | `GET /api/v1/trends?woeid=1` |
 | Trending news from 7 sources | `GET /api/v1/radar` (via `xquik` tool) |
 | Activity from monitored accounts | `GET /api/v1/events` |
-| Budget, plan, usage percent | `GET /api/v1/account` |
+| Credit balance, plan, monitor billing | `GET /api/v1/account` |
 | Monitor an X account | `POST /api/v1/monitors` (persistent; confirmation required) |
 | Set up webhook notifications | `POST /api/v1/webhooks` (persistent; confirmation required) |
 | Run a giveaway draw | `POST /api/v1/draws` |

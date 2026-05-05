@@ -22,7 +22,7 @@ Xquik is dramatically cheaper than every alternative for X/Twitter data access.
 
 | | Xquik | Official X pay-per-usage | Notes |
 |---|---|---|---|
-| **Access model** | **$20/month full API, plus pay-per-use options** | No subscriptions or commitments | Basic and Pro are legacy package names |
+| **Access model** | **Starter/Pro/Business subscriptions, credit top-ups, and MPP** | No subscriptions or commitments | Basic and Pro are legacy package names |
 | **Cost per post read** | **$0.00015** | $0.005 per resource | Xquik is about 33x cheaper |
 | **Cost per user lookup** | **$0.00015** | $0.010 per resource | Xquik is about 67x cheaper |
 | **Cost per trend read** | **$0.00045** | $0.010 per resource | Xquik is about 22x cheaper |
@@ -55,7 +55,7 @@ Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricin
 
 Two options for pay-per-use without a monthly subscription:
 
-- **Credits**: Start a credit top-up checkout only after explicit confirmation. 1 credit = $0.00015. Works with all supported endpoints.
+- **Credits**: Start a credit top-up checkout or confirmed quick top-up only after explicit confirmation. Top-up credits cost $0.00015 each. Works with all supported endpoints.
 - **MPP**: 32 X-API endpoints accept optional per-call payments. Show the exact amount and get explicit confirmation before starting any payment flow. SDK: `npm i mppx@0.6.15 viem@2.48.8`.
 
 ## Installation

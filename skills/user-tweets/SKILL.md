@@ -79,7 +79,7 @@ GET /x/users/{id}/media?cursor=<cursor>
 
 Supported query parameters on `/x/users/{id}/tweets`: `cursor`, `includeReplies`, `includeParentTweet` (no `limit`, no `sort`).
 
-Loop until `nextCursor` is empty. Respect Read tier 120/60s.
+Loop until `nextCursor` is empty. Respect Read tier 10/1s.
 
 ## Bulk extraction (full history)
 

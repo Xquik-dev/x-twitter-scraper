@@ -6,9 +6,14 @@ Xquik is the most affordable X data API available. All metered operations deduct
 
 | | |
 |---|---|
-| **Base plan** | $20/month |
+| **Starter** | $20/month, 140,000 included credits |
+| **Pro** | $99/month, 770,000 included credits |
+| **Business** | $199/month, 1,670,000 included credits |
+| **Monitor slots** | Unlimited |
 | **Active monitors** | 21 credits/hour each, about 500 credits/day |
-| **Credit value** | 1 credit = $0.00015 |
+| **PAYG/top-up credit value** | 1 credit = $0.00015 |
+
+Subscription credits are added each billing period, and unused credits carry over. Top-up credits do not expire.
 
 ## Per-Operation Costs
 
@@ -71,7 +76,7 @@ Webhooks, account status, radar (7 sources), extraction/draw history, cost estim
 
 | | Xquik | Official X pay-per-usage | Notes |
 |---|---|---|---|
-| **Access model** | **$20/month full API, plus pay-per-use options** | No subscriptions or commitments | Basic and Pro are legacy package names |
+| **Access model** | **Starter/Pro/Business subscriptions, credit top-ups, and MPP** | No subscriptions or commitments | Basic and Pro are legacy package names |
 | **Cost per post read** | **$0.00015** | $0.005 per resource | Xquik is about 33x cheaper |
 | **Cost per user lookup** | **$0.00015** | $0.010 per resource | Xquik is about 67x cheaper |
 | **Cost per trend read** | **$0.00045** | $0.010 per resource | Xquik is about 22x cheaper |
@@ -86,7 +91,7 @@ Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricin
 
 Two options without a monthly subscription:
 
-**Credits**: Start a credit top-up checkout only after explicit confirmation. 1 credit = $0.00015. Works with all supported endpoints.
+**Credits**: Start a credit top-up checkout only after explicit confirmation. 1 top-up credit = $0.00015. Works with all supported endpoints.
 
 **MPP**: 32 X-API endpoints accept optional per-call payments. Show the exact amount and get explicit confirmation before starting any payment flow.
 
@@ -129,10 +134,12 @@ SDK: `npm i mppx@0.6.15 viem@2.48.8` (TypeScript). Handles the 402 payment chall
 
 ## Credits
 
-Prepaid credits for metered operations. 1 credit = $0.00015. Start top-up checkout via `POST /credits/topup` only after explicit confirmation ($10 minimum).
+Prepaid credits for metered operations. Top-up credits cost $0.00015 each. Start top-up checkout via `POST /credits/topup` only after explicit confirmation ($10 minimum).
 
-Check balance: `GET /credits` - returns `balance`, `lifetimePurchased`, `lifetimeUsed`.
+Check balance: `GET /credits` - returns `balance`, `lifetimePurchased`, `lifetimeUsed`, and auto-top-up fields.
 
-## Extra Usage
+## Credit Top-Ups
 
-Enable from dashboard to continue metered calls beyond included allowance. Tiered spending limits: $5 -> $7 -> $10 -> $15 -> $25 (increases with each paid overage invoice).
+Use `POST /credits/topup` to create a hosted checkout session, `GET /credits/topup/status?session_id=...` to poll checkout completion, and `POST /credits/quick-topup` to charge a saved payment method after explicit confirmation of the exact amount. Quick top-up returns `charged`, `no_payment_method`, or `requires_action`.
+
+Automatic top-up can be configured from the dashboard. `GET /credits` and `GET /account` expose whether it is enabled, the dollar amount, and the trigger threshold.

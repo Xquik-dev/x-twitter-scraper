@@ -82,7 +82,7 @@ const estimate = await xquikFetch("/extractions/estimate", {
 });
 
 if (!estimate.allowed) {
-  console.log("Extraction would exceed monthly quota");
+  console.log(`Need ${estimate.creditsRequired} credits; available ${estimate.creditsAvailable}`);
   return;
 }
 

@@ -37,19 +37,32 @@ All requests require the `x-api-key` header. All responses are JSON. HTTPS only.
 GET /account
 ```
 
-Returns subscription status, monitor allocation, and current period usage.
+Returns account status, monitor billing details, credit balance, and X identity.
 
 **Response:**
 ```json
 {
   "plan": "active",
-  "monitorsAllowed": 1,
-  "monitorsUsed": 0,
-  "currentPeriod": {
-    "start": "2026-02-01T00:00:00.000Z",
-    "end": "2026-03-01T00:00:00.000Z",
-    "usagePercent": 45
-  }
+  "monitorsAllowed": 9007199254740991,
+  "monitorsUsed": 1,
+  "monitorBilling": {
+    "activeDailyEstimate": "500",
+    "activeHourlyBurn": "21",
+    "creditsPerActiveMonitorDay": "500",
+    "creditsPerActiveMonitorHour": "21",
+    "eventsIncluded": true,
+    "instantCheckIntervalSeconds": 1,
+    "unlimitedSlots": true
+  },
+  "creditInfo": {
+    "balance": "77000",
+    "lifetimePurchased": "140000",
+    "lifetimeUsed": "63000",
+    "autoTopupEnabled": false,
+    "autoTopupAmountDollars": 10,
+    "autoTopupThreshold": "50000"
+  },
+  "xUsername": "elonmusk"
 }
 ```
 
@@ -425,10 +438,10 @@ Preview the cost before running. Same body as create.
 ```json
 {
   "allowed": true,
+  "creditsAvailable": "50000",
+  "creditsRequired": "150",
   "source": "replyCount",
-  "estimatedResults": 150,
-  "usagePercent": 45,
-  "projectedPercent": 48
+  "estimatedResults": 150
 }
 ```
 
@@ -460,7 +473,7 @@ Formats: `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, `xlsx`. 100,000 row l
 
 ## X API (Direct Lookups)
 
-Metered operations that count toward the monthly quota.
+Metered operations that deduct credits from the account balance.
 
 ### Get Tweet
 
@@ -638,7 +651,7 @@ Download images, videos, and GIFs from tweets. Single or bulk (up to 50). Return
 }
 ```
 
-First download is metered (counts toward monthly quota). Subsequent requests for the same tweet return cached URLs at no cost (`cacheHit: true`). All downloads are saved to the gallery at `https://xquik.com/gallery`.
+First download is metered. Subsequent requests for the same tweet return cached URLs at no cost (`cacheHit: true`). All downloads are saved to the gallery at `https://xquik.com/gallery`.
 
 Returns `400 no_media` if the tweet has no downloadable media. Returns `400 too_many_tweets` if bulk array exceeds 50 items.
 
@@ -1289,6 +1302,16 @@ GET /credits/topup/status
 
 Poll a checkout session after starting a credit top-up. Query: `session_id`. Free.
 
+### Quick Top Up
+
+```
+POST /credits/quick-topup
+```
+
+Charge a saved payment method for credits after the user confirms the exact amount. Body: `{ "dollars": 10 }` ($10 minimum, $500 maximum). Free endpoint, but it can initiate a confirmed card charge.
+
+Responses include `{ "outcome": "charged", "credits": "...", "balance": "..." }`, `{ "outcome": "no_payment_method" }`, or `{ "outcome": "requires_action", "clientSecret": "..." }`.
+
 ---
 
 ## Support
@@ -1360,13 +1383,8 @@ Add a message to an existing ticket.
 | 403 | `account_needs_reauth` | X account session expired; use dashboard re-auth flow |
 | 402 | `no_subscription` | No active subscription |
 | 402 | `subscription_inactive` | Subscription is not active |
-| 402 | `usage_limit_reached` | Monthly usage cap exceeded |
-| 402 | `extra_usage_disabled` | Extra usage not enabled |
-| 402 | `extra_usage_requires_v2` | Extra usage requires the new pricing plan |
-| 402 | `frozen` | Extra usage paused, outstanding payment required |
-| 402 | `overage_limit_reached` | Overage spending limit reached |
-| 402 | `no_addon` | No monitor addon on subscription |
-| 403 | `monitor_limit_reached` | Plan monitor limit exceeded |
+| 402 | `no_credits` | No credit balance record exists |
+| 402 | `insufficient_credits` | Credit balance is too low |
 | 403 | `api_key_limit_reached` | API key limit reached (100 max) |
 | 404 | `not_found` | Resource does not exist |
 | 404 | `user_not_found` | X user not found |

@@ -104,7 +104,7 @@ To export: `GET /extractions/{id}/export?format=csv` (or `xlsx`, `md`). Cap 50,0
 | 402 | `insufficient_credits` | Explain the billing issue and ask before any checkout action |
 | 429 | `x_api_rate_limited` | Exponential backoff, respect `Retry-After` |
 
-Read tier rate limit: 120 requests per 60s.
+Read tier rate limit: 10 requests per 1s.
 
 ## Tweet IDs are strings
 

@@ -51,7 +51,7 @@ estimate = xquik_fetch("/extractions/estimate", method="POST", json_body={
 })
 
 if not estimate["allowed"]:
-    print(f"Would exceed quota: {estimate['projectedPercent']}%")
+    print(f"Need {estimate['creditsRequired']} credits; available {estimate['creditsAvailable']}")
     exit()
 
 # Step 2: Create job
