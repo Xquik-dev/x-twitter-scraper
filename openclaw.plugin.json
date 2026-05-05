@@ -2,7 +2,7 @@
   "id": "x-developer",
   "name": "X Developer API",
   "description": "X (Twitter) data platform skill for AI coding agents. 100+ REST API endpoints, 2 MCP tools, 23 extraction types, HMAC webhooks.",
-  "version": "2.4.8",
+  "version": "2.4.9",
   "skills": ["./skills"],
   "providerAuthEnvVars": {
     "xquik": ["XQUIK_API_KEY"]
