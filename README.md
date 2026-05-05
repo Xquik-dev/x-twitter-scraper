@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/xquik-dev-x-twitter-scraper-badge.png)](https://mseep.ai/app/xquik-dev-x-twitter-scraper)
+
 # X API / Twitter Scraper Skill for AI Coding Agents
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
