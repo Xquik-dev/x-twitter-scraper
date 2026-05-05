@@ -7,8 +7,7 @@ Xquik is the most affordable X data API available. All metered operations deduct
 | | |
 |---|---|
 | **Base plan** | $20/month |
-| **Included monitors** | 1 |
-| **Additional monitors** | $5/month each |
+| **Active monitors** | 21 credits/hour each, about 500 credits/day |
 | **Credit value** | 1 credit = $0.00015 |
 
 ## Per-Operation Costs
@@ -48,7 +47,7 @@ Xquik is the most affordable X data API available. All metered operations deduct
 
 ### Write operations - 10 credits ($0.0015)
 
-All write actions: create/delete tweet, like, unlike, retweet, follow, unfollow, send DM, update profile/avatar/banner, upload media, community actions.
+All confirmation-gated write actions: create/delete tweet, like, unlike, retweet, follow, unfollow, send DM, update profile/avatar/banner, upload media, community actions.
 
 ### Extractions & draws
 
@@ -60,9 +59,13 @@ Draws: 1 credit per participant. Extraction cost depends on the tool type:
 | 1 | Followers, following, verified followers |
 | 5 | Articles |
 
+### Active monitors
+
+Active account and keyword monitors cost 21 credits/hour each. Events and webhook delivery are included.
+
 ### Free operations ($0)
 
-Monitors, webhooks, account status, radar (7 sources), extraction/draw history, cost estimates, tweet composition (compose, refine, score), style cache management, drafts, support tickets, API key management, X account management.
+Webhooks, account status, radar (7 sources), extraction/draw history, cost estimates, tweet composition (compose, refine, score), style cache management, drafts, support tickets, and X account listing.
 
 ## Price Comparison vs Official X API
 
@@ -74,7 +77,7 @@ Monitors, webhooks, account status, radar (7 sources), extraction/draw history, 
 | **Cost per trend read** | **$0.00045** | $0.010 per resource | Xquik is about 22x cheaper |
 | **Write actions** | **$0.0015** | $0.015 content or interaction create; $0.200 content create with URL | Xquik is 10x cheaper for matching $0.015 write classes |
 | **Bulk extraction** | **$0.00015/result** | Charged per returned resource | Built-in extraction jobs are included with Xquik |
-| **Monitoring + webhooks** | **Free** | No direct monitor product in pricing table | Real-time delivery is included |
+| **Monitoring + webhooks** | Active monitors are metered; webhooks included | No direct monitor product in pricing table | Real-time delivery is included |
 | **Giveaway draws** | **$0.00015/entry** | No comparable draw product | Draw engine is included |
 
 Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricing), which lists current pay-per-usage read and write rates.
@@ -83,9 +86,9 @@ Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricin
 
 Two options without a monthly subscription:
 
-**Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 113 endpoints.
+**Credits**: Start a credit top-up checkout only after explicit confirmation. 1 credit = $0.00015. Works with all 113 endpoints.
 
-**MPP**: 32 X-API endpoints accept anonymous on-chain payments. No account needed.
+**MPP**: 32 X-API endpoints accept optional per-call payments. Show the exact amount and get explicit confirmation before starting any payment flow.
 
 | Endpoint | Price | Unit |
 |----------|-------|------|
@@ -122,11 +125,11 @@ Two options without a monthly subscription:
 | `GET /x/users/{id}/mentions` | $0.00015 | per tweet |
 | `GET /x/users/{id}/verified-followers` | $0.00015 | per user |
 
-SDK: `npm i mppx viem` (TypeScript). Handles the 402 challenge/credential flow automatically.
+SDK: `npm i mppx viem` (TypeScript). Handles the 402 payment challenge flow.
 
 ## Credits
 
-Prepaid credits for metered operations. 1 credit = $0.00015. Top up via `POST /credits/topup` ($10 minimum).
+Prepaid credits for metered operations. 1 credit = $0.00015. Start top-up checkout via `POST /credits/topup` only after explicit confirmation ($10 minimum).
 
 Check balance: `GET /credits` - returns `balance`, `lifetimePurchased`, `lifetimeUsed`.
 

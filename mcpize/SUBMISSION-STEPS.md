@@ -11,10 +11,10 @@ that points at the existing endpoint.
 - Transport: Streamable HTTP
 - Repository: `https://github.com/Xquik-dev/x-twitter-scraper`
 - Version: `2.4.8`
-- Description: `X data platform with 113 REST endpoints, 2 MCP tools, 23 extraction tools, webhooks, and writes.`
+- Description: `X data platform with 113 REST endpoints, 2 MCP tools, 23 extraction tools, webhooks, and confirmation-gated writes.`
 - Categories: Social Media, Automation, Search, Data, Monitoring, Web Scraping, AI Agents
-- Auth header: `Authorization`
-- Auth value template: `Bearer {XQUIK_API_KEY}`
+- Auth header: `x-api-key`
+- Auth value template: `{XQUIK_API_KEY}`
 - API key source: `https://dashboard.xquik.com/account`
 
 ## Submission Flow
@@ -27,7 +27,7 @@ that points at the existing endpoint.
    value template for docs or metadata.
 6. If MCPize requires hosted deployment instead of a remote URL, create a thin
    adapter task that forwards to `https://xquik.com/mcp` and preserves the
-   incoming `Authorization` header.
+   incoming `x-api-key` header.
 7. Test the listing with an Xquik API key owned by the submitter.
 8. Update public docs with the MCPize listing URL only after the listing is
    live.
@@ -37,5 +37,5 @@ that points at the existing endpoint.
 - Searching MCPize for `xquik` returns the listing.
 - The listing shows `https://xquik.com/mcp` as the remote server URL or uses an
   approved adapter that targets it.
-- The install instructions show `Authorization: Bearer {XQUIK_API_KEY}`.
+- The install instructions show `x-api-key: {XQUIK_API_KEY}`.
 - The listing description matches `server.json`.

@@ -955,7 +955,7 @@ interface ConnectedXAccount {
 }
 
 // Connecting an X account is done by the user in the Xquik dashboard,
-// not through this skill. The skill never handles X login credentials.
+// not through this skill. The skill never handles X login material.
 
 // ─── X Write ──────────────────────────────────────────
 

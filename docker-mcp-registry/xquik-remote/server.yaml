@@ -13,7 +13,7 @@ meta:
     - remote
 about:
   title: Xquik
-  description: Real-time X (Twitter) data platform. 113 REST API endpoints via 2 MCP tools - tweet search, user lookup, follower extraction, write actions, monitoring, giveaway draws, trending topics. Reads from $0.00015/call.
+  description: Real-time X (Twitter) data platform. 113 REST API endpoints via 2 MCP tools - tweet search, user lookup, follower extraction, confirmation-gated writes, monitoring, giveaway draws, trending topics. Reads from $0.00015/call.
   icon: https://www.google.com/s2/favicons?domain=xquik.com&sz=64
 source:
   project: https://github.com/Xquik-dev/x-twitter-scraper
@@ -21,7 +21,7 @@ remote:
   transport_type: streamable-http
   url: https://xquik.com/mcp
   headers:
-    Authorization: "Bearer ${XQUIK_REMOTE_API_KEY}"
+    x-api-key: "${XQUIK_REMOTE_API_KEY}"
 config:
   description: Configure the connection to Xquik
   secrets:

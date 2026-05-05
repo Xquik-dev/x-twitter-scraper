@@ -180,9 +180,9 @@ The MCP server (v2) at `https://xquik.com/mcp` provides 2 structured API tools:
 | Tool | Description | Cost |
 |------|-------------|------|
 | `explore` | Search the API endpoint catalog (read-only, no network calls) | Free |
-| `xquik` | Execute API calls against your account | Varies by endpoint |
+| `xquik` | Execute confirmed Xquik API calls | Varies by endpoint |
 
-The agent sends structured API requests through the MCP server, which handles authentication and execution within the same first-party infrastructure as the REST API. All 113 REST API endpoints across 10 categories are accessible: account, composition, credits, extraction, media, monitoring, support, twitter, x-accounts, and x-write.
+The agent sends structured API requests through the MCP server, which handles authentication and execution within the same first-party infrastructure as the REST API. All 113 REST API endpoints across 10 categories are accessible. Private reads, writes, persistent resources, and billing flows require explicit user confirmation before use.
 
 ## After Setup
 
@@ -190,17 +190,17 @@ The agent sends structured API requests through the MCP server, which handles au
 
 | Workflow | Steps (via `xquik` tool) |
 |----------|--------------------------|
-| Set up real-time alerts | `POST /monitors` -> `POST /webhooks` -> `POST /webhooks/{id}/test` |
+| Set up real-time alerts | Confirm target, event types, destination, and ongoing cost -> `POST /monitors` -> `POST /webhooks` -> `POST /webhooks/{id}/test` |
 | Run a giveaway | `GET /account` -> `POST /draws` |
 | Bulk extraction | `POST /extractions/estimate` -> `POST /extractions` -> `GET /extractions/{id}` |
 | Compose optimized tweet | `POST /compose` (step=compose -> refine -> score) |
-| Subscribe or manage billing | `POST /subscribe` |
+| Billing checkout | Confirm plan or amount -> `POST /subscribe` or `POST /credits/topup` |
 
 ### Example Prompts
 
 Try these with your AI agent:
 
-- "Monitor @vercel for new tweets and quote tweets"
+- "Monitor @vercel for new tweets and quote tweets after I confirm the ongoing cost"
 - "How many followers does @elonmusk have?"
 - "Search for tweets mentioning xquik"
 - "What does this tweet say? https://x.com/elonmusk/status/1893456789012345678"
@@ -210,5 +210,5 @@ Try these with your AI agent:
 - "What's trending in the US right now?"
 - "What's trending on Hacker News today?"
 - "Help me write a tweet about launching my product"
-- "Set up a webhook at https://my-server.com/events for new tweets"
+- "Set up a webhook at https://my-server.com/events for new tweets after I confirm the destination"
 - "What plan am I on and how much have I used?"

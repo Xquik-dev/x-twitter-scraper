@@ -8,7 +8,7 @@
 [![x-twitter-scraper MCP server](https://glama.ai/mcp/servers/Xquik-dev/x-twitter-scraper/badges/score.svg)](https://glama.ai/mcp/servers/Xquik-dev/x-twitter-scraper)
 [![smithery badge](https://smithery.ai/badge/xquik/x-twitter-scraper)](https://smithery.ai/servers/xquik/x-twitter-scraper)
 
-An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. 113 REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, and write actions.
+An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. 113 REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, and confirmation-gated write actions.
 
 **The cheapest X data API on the market** - post reads from $0.00015/call (about 33x cheaper than official X API post reads).
 
@@ -28,7 +28,7 @@ Xquik is dramatically cheaper than every alternative for X/Twitter data access.
 | **Cost per trend read** | **$0.00045** | $0.010 per resource | Xquik is about 22x cheaper |
 | **Write actions** | **$0.0015** | $0.015 content or interaction create; $0.200 content create with URL | Xquik is 10x cheaper for matching $0.015 write classes |
 | **Bulk extraction** | **From $0.00015/result** | Charged per returned resource | Built-in extraction jobs are included with Xquik |
-| **Monitoring + webhooks** | **Free** | No direct monitor product in pricing table | Real-time delivery is included |
+| **Monitoring + webhooks** | Active monitors are metered; webhooks included | No direct monitor product in pricing table | Real-time delivery is included |
 | **Giveaway draws** | **$0.00015/entry** | No comparable draw product | Draw engine is included |
 | **MCP server** | **Included** | Not listed | Agent tools are included |
 
@@ -48,14 +48,15 @@ Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricin
 | Extraction (followers, following, verified followers) | 1/result | $0.00015/result |
 | Extraction (articles) | 5/result | $0.00075/result |
 | Draw | 1/entry | $0.00015/entry |
-| Monitors, webhooks, radar, compose, drafts | 0 | **Free** |
+| Active monitors | 21/hour | $0.00315/hour |
+| Webhooks, radar, compose, drafts | 0 | **Free** |
 
 ### Pay-Per-Use (No Subscription)
 
 Two options for pay-per-use without a monthly subscription:
 
-- **Credits**: Top up credits via `POST /credits/topup` ($10 minimum). 1 credit = $0.00015. Works with all 113 endpoints.
-- **MPP**: 32 X-API endpoints accept anonymous on-chain payments via Machine Payments Protocol. No account needed. SDK: `npm i mppx viem`.
+- **Credits**: Start a credit top-up checkout only after explicit confirmation. 1 credit = $0.00015. Works with all 113 endpoints.
+- **MPP**: 32 X-API endpoints accept optional per-call payments. Show the exact amount and get explicit confirmation before starting any payment flow. SDK: `npm i mppx viem`.
 
 ## Installation
 
@@ -144,20 +145,20 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Media download**: Download images, videos, and GIFs with permanent hosted URLs
 - **Thread & article extraction**: Extract full tweet threads and linked article content
 - **Community & Space data**: Extract community members, moderators, posts, and Space participants
-- **Bookmarks & notifications**: Access bookmarks, bookmark folders, notifications, and home timeline
-- **DM history**: Retrieve conversation history with any user
+- **Bookmarks & notifications**: Access bookmarks, bookmark folders, notifications, and home timeline after explicit approval
+- **DM history**: Retrieve conversation history with explicit approval
 - **Mutual follow checker**: Check if two accounts follow each other
-- **X account monitoring**: Track accounts for new tweets, replies, quotes, retweets
+- **X account monitoring**: Track accounts for new tweets, replies, quotes, retweets with explicit approval
 - **Webhook delivery**: Receive HMAC-signed event notifications at your HTTPS endpoint
 - **Trending topics**: Get trending hashtags and topics by region
 - **Radar**: Trending news from 7 sources (Google Trends, Hacker News, Polymarket, TrustMRR, Wikipedia, GitHub, Reddit). Free
 - **Giveaway draws**: Run transparent draws from tweet replies with configurable filters
-- **Write actions**: Post tweets, like, retweet, follow/unfollow, remove followers, send DMs, update profile, upload media, manage communities
+- **Write actions**: Post tweets, like, retweet, follow/unfollow, remove followers, send DMs, update profile, upload media, manage communities after explicit approval
 - **Tweet composition**: Algorithm-optimized tweet composer with scoring (free)
-- **Credits & billing**: Check balance, top up credits, manage subscription
+- **Credits & billing**: Check balance; start top-up or subscription checkout only after explicit confirmation
 - **Support tickets**: Open and manage support tickets via API
 - **MCP server**: 2 tools covering 113 endpoints for AI agent integration
-- **Pay-per-use (MPP)**: Anonymous access to 32 endpoints via on-chain payments, no account needed
+- **Pay-per-use (MPP)**: Optional per-call access to 32 endpoints with exact-amount confirmation
 
 ## Capabilities
 
@@ -166,17 +167,17 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 | **REST API** | 113 endpoints across 10 categories with retry logic and pagination |
 | **MCP Server** | 2 tools (explore + xquik). StreamableHTTP, configs for 10 platforms |
 | **Data Extraction** | 23 bulk extraction tools (replies, retweets, quotes, favoriters, threads, articles, user likes, user media, communities, lists, Spaces, people search, tweet search, mentions, posts) |
-| **X Lookups** | Tweet, user, article, search, user tweets, user likes, user media, favoriters, mutual followers, bookmarks, notifications, timeline, DM history |
-| **Write Actions** | Post/delete tweets, like/unlike, retweet, follow/unfollow, remove followers, DM, profile update, avatar/banner, media upload, community actions |
+| **X Lookups** | Tweet, user, article, search, user tweets, user likes, user media, favoriters, mutual followers, and confirmation-gated private reads |
+| **Write Actions** | Confirmation-gated post/delete tweets, like/unlike, retweet, follow/unfollow, remove followers, DM, profile update, avatar/banner, media upload, community actions |
 | **Giveaway Draws** | Random winner selection from tweet replies with 11 filter options |
-| **Account Monitoring** | Real-time tracking of tweets, replies, quotes, retweets |
+| **Account Monitoring** | Real-time tracking of tweets, replies, quotes, retweets with ongoing-cost confirmation |
 | **Webhooks** | HMAC-SHA256 signature verification in Node.js, Python, Go |
 | **Media Download** | Download images, videos, GIFs with permanent hosted URLs |
 | **Engagement Analytics** | Likes, retweets, replies, quotes, views, bookmarks per tweet |
 | **Trending Topics** | Regional trends + 7 free news sources via Radar |
 | **Tweet Composition** | Algorithm-optimized tweet composer with scoring checklist (free) |
-| **Credits & Billing** | Check balance, top up, manage subscription via API |
-| **Pay-Per-Use (MPP)** | 32 endpoints with anonymous on-chain payments, no account needed |
+| **Credits & Billing** | Check balance, start confirmed top-up checkout, start confirmed subscription checkout |
+| **Pay-Per-Use (MPP)** | 32 endpoints with exact-amount confirmation before every payment flow |
 | **TypeScript Types** | Complete type definitions for all API objects |
 
 ## Supported Agents
@@ -187,22 +188,22 @@ Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code
 
 | Resource | Endpoints |
 |----------|-----------|
-| X Lookups | Tweet, article, search, user profile, user tweets, user likes, user media, favoriters, followers you know, follow check, download media, bookmarks, bookmark folders, notifications, timeline, DM history |
+| X Lookups | Tweet, article, search, user profile, user tweets, user likes, user media, favoriters, followers you know, follow check, download media, and confirmation-gated private reads |
 | Extractions | Create (23 types), estimate, list, get results, export |
-| Monitors | Create, list, get, update, delete |
+| Monitors | Create with confirmation, list, get, update, delete |
 | Events | List (filtered, paginated), get single |
-| Webhooks | Create, list, update, delete, test, deliveries |
+| Webhooks | Create with destination confirmation, list, update, delete, test, deliveries |
 | Trends | Regional trending topics |
 | Radar | Trending topics & news from 7 sources (free) |
 | Draws | Create with filters, list, get with winners, export |
 | Styles | Analyze, save, list, get, delete, compare, performance |
 | Compose | Tweet composition (compose, refine, score) |
 | Drafts | Create, list, get, delete |
-| Account | Get account, update locale, set X identity, subscribe |
-| Credits | Get balance, top up |
+| Account | Get account, update locale, set X identity, subscription checkout with confirmation |
+| Credits | Get balance, confirmed top-up checkout |
 | API Keys | Create, list, revoke |
-| X Accounts | Connect, list, get, disconnect, re-authenticate |
-| X Write | Tweet, delete, like, unlike, retweet, follow, unfollow, DM, profile, avatar, banner, media upload, communities |
+| X Accounts | List, get, and disconnect already-connected accounts; dashboard handles connection and re-authentication |
+| X Write | Confirmation-gated tweet, delete, like, unlike, retweet, follow, unfollow, DM, profile, avatar, banner, media upload, communities |
 | Support | Create ticket, list, get, update, reply |
 
 ## Official SDKs & Tools

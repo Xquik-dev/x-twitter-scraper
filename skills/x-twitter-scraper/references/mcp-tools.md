@@ -7,9 +7,9 @@ The MCP server at `https://xquik.com/mcp` provides 2 structured API tools. The a
 | Tool | Description | Cost |
 |------|-------------|------|
 | `explore` | Search the API endpoint catalog (read-only, no network calls) | Free |
-| `xquik` | Execute API calls against your account | Varies by endpoint |
+| `xquik` | Execute confirmed Xquik API calls | Varies by endpoint |
 
-### `explore` — Search the API Spec
+### `explore` - Search the API Spec
 
 The tool provides an in-memory `spec.endpoints` array. Filter/search it to find endpoints before calling them.
 
@@ -40,9 +40,22 @@ async () => spec.endpoints.filter(e => e.category === 'x-write');
 async () => spec.endpoints.filter(e => e.summary.toLowerCase().includes('tweet'));
 ```
 
-### `xquik` — Execute API Calls
+### `xquik` - Execute API Calls
 
 The tool provides `xquik.request()` with auth injected automatically. Never pass API keys.
+
+## Safety Gates
+
+Apply these gates before using `xquik`:
+
+| Capability | Rule |
+|------------|------|
+| Public writes | Show the exact tweet, reply, like, retweet, follow, unfollow, profile, or community action and wait for explicit approval. |
+| Direct messages | Show sender, recipient, and message text. Never send bulk or automatic DMs. |
+| Persistent resources | Create monitors and webhooks only when the user explicitly asks for ongoing delivery. Show target, event types, URL, and ongoing cost before creation. |
+| Private reads | Confirm before fetching DMs, bookmarks, notifications, or home timeline. Do not forward returned private data to other tools without consent. |
+| Billing or payments | Do not call checkout, top-up, or MPP payment endpoints unless the user explicitly asks and confirms the exact amount. |
+| X account login | Never ask for or submit X login material. Account connection and re-authentication happen in the dashboard. |
 
 ```typescript
 declare const xquik: {
@@ -71,21 +84,20 @@ Use `explore` first to find endpoints, then `xquik` to call them.
 | Trending news from 7 sources | `GET /api/v1/radar` (via `xquik` tool) |
 | Activity from monitored accounts | `GET /api/v1/events` |
 | Budget, plan, usage percent | `GET /api/v1/account` |
-| Monitor an X account | `POST /api/v1/monitors` |
-| Set up webhook notifications | `POST /api/v1/webhooks` |
+| Monitor an X account | `POST /api/v1/monitors` (persistent; confirmation required) |
+| Set up webhook notifications | `POST /api/v1/webhooks` (persistent; confirmation required) |
 | Run a giveaway draw | `POST /api/v1/draws` |
-| Subscribe or manage billing | `POST /api/v1/subscribe` |
 | Compose/draft a tweet | `POST /api/v1/compose` (3-step: compose, refine, score) |
 | Link your X username | `PUT /api/v1/account/x-identity` |
 | Analyze tweet style | `POST /api/v1/styles` |
 | Get cached style | `GET /api/v1/styles/{username}` |
 | Compare two styles | `GET /api/v1/styles/compare` |
-| Post a tweet | `POST /api/v1/x/tweets` (requires connected account) |
-| Like/unlike a tweet | `POST`/`DELETE /api/v1/x/tweets/{id}/like` |
-| Retweet | `POST /api/v1/x/tweets/{id}/retweet` |
-| Follow/unfollow | `POST`/`DELETE /api/v1/x/users/{id}/follow` |
-| Send a DM | `POST /api/v1/x/dm/{userId}` |
-| Upload media | `POST /api/v1/x/media` |
+| Post a tweet | `POST /api/v1/x/tweets` (confirmation required) |
+| Like/unlike a tweet | `POST`/`DELETE /api/v1/x/tweets/{id}/like` (confirmation required) |
+| Retweet | `POST /api/v1/x/tweets/{id}/retweet` (confirmation required) |
+| Follow/unfollow | `POST`/`DELETE /api/v1/x/users/{id}/follow` (confirmation required) |
+| Send a DM | `POST /api/v1/x/dm/{userId}` (confirmation required) |
+| Upload media | `POST /api/v1/x/media` (confirmation required before use in a post or profile change) |
 | Open support ticket | `POST /api/v1/support/tickets` |
 | List support tickets | `GET /api/v1/support/tickets` |
 | Get user's recent tweets | `GET /api/v1/x/users/{id}/tweets` |
@@ -93,13 +105,12 @@ Use `explore` first to find endpoints, then `xquik` to call them.
 | Get user's media tweets | `GET /api/v1/x/users/{id}/media` |
 | Get tweet favoriters (who liked) | `GET /api/v1/x/tweets/{id}/favoriters` |
 | Get mutual followers | `GET /api/v1/x/users/{id}/followers-you-know` |
-| Get bookmarks | `GET /api/v1/x/bookmarks` |
+| Get bookmarks | `GET /api/v1/x/bookmarks` (private; confirmation required) |
 | Get bookmark folders | `GET /api/v1/x/bookmarks/folders` |
-| Get notifications | `GET /api/v1/x/notifications` |
-| Get home timeline | `GET /api/v1/x/timeline` |
-| Get DM history | `GET /api/v1/x/dm/{userId}/history` |
+| Get notifications | `GET /api/v1/x/notifications` (private; confirmation required) |
+| Get home timeline | `GET /api/v1/x/timeline` (private; confirmation required) |
+| Get DM history | `GET /api/v1/x/dm/{userId}/history` (private; confirmation required) |
 | Check credit balance | `GET /api/v1/credits` |
-| Top up credits | `POST /api/v1/credits/topup` |
 
 Use `POST /api/v1/extractions` ONLY for bulk data that simpler endpoints cannot provide (all followers, all replies to a tweet, community members, etc.). Always call `POST /api/v1/extractions/estimate` first.
 
@@ -107,7 +118,7 @@ Use `POST /api/v1/extractions` ONLY for bulk data that simpler endpoints cannot 
 
 | Workflow | Steps |
 |----------|-------|
-| **Set up real-time alerts** | `POST /monitors` -> `POST /webhooks` -> `POST /webhooks/{id}/test` |
+| **Set up real-time alerts** | Confirm target, event types, destination, and cost -> `POST /monitors` -> `POST /webhooks` -> `POST /webhooks/{id}/test` |
 | **Run a giveaway** | `GET /account` -> `POST /draws` |
 | **Bulk extraction** | `POST /extractions/estimate` -> `POST /extractions` -> `GET /extractions/{id}` |
 | **Compose optimized tweet** | `POST /compose` (step=compose -> refine -> score) |
@@ -124,7 +135,7 @@ Use `POST /api/v1/extractions` ONLY for bulk data that simpler endpoints cannot 
 | Using `compose` when user wants to send a tweet | `POST /compose` is for drafting. Use `POST /x/tweets` to send |
 | Using `POST /x/tweets` when user wants help writing | Use the 3-step compose flow instead |
 | Falling back to web search when API call fails | Use free data already fetched (radar, styles, compose). Never discard it |
-| Not checking subscription before paid calls | Always attempt the call. Handle 402 by calling `POST /subscribe` for checkout URL |
+| Not checking subscription before paid calls | Attempt the requested call. On 402, explain the billing issue and ask before any checkout or top-up action |
 | Passing API keys in code | Auth is injected automatically. Never include keys |
 | Using `explore` for API calls | `explore` is read-only spec search. Use `xquik` for actual API calls |
 | Looking up follow/DM by username | Follow and DM endpoints need numeric user ID. Look up via `GET /x/users/{username}` first |
@@ -142,5 +153,5 @@ These are NOT available via the MCP server:
 
 ## Cost Reference
 
-- **Free**: account info, compose (all steps), styles (cached lookup/save/delete/compare), drafts, radar (via `xquik` tool, all 7 sources), subscribe, API keys, X account management, support tickets, credits (balance check, top up)
-- **Subscription required**: tweet search, user lookup, tweet lookup, follow check, media download (first only, cached free), extractions, draws, style analysis (X API refresh), performance analysis, trends, all write actions (tweet, like, retweet, follow, DM, profile, media upload, communities)
+- **Free**: account info, compose (all steps), styles (cached lookup/save/delete/compare), drafts, radar (via `xquik` tool, all 7 sources), support tickets, credits balance check, webhook management
+- **Credit or subscription required**: tweet search, user lookup, tweet lookup, follow check, media download (first only, cached free), extractions, draws, active monitors, style analysis (X API refresh), performance analysis, trends, and confirmation-gated write actions (tweet, like, retweet, follow, DM, profile, media upload, communities)

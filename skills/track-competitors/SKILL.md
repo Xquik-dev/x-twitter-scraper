@@ -1,6 +1,6 @@
 ---
 name: track-competitors
-description: "Use when the user wants to track competitor accounts on X (Twitter). Monitors their posts, measures their growth, benchmarks engagement, and surfaces their best-performing tweets. Read-only competitor intelligence."
+description: "Use when the user wants to track competitor accounts on X (Twitter). Measures their growth, benchmarks engagement, surfaces their best-performing tweets, and creates ongoing monitors only after explicit approval."
 license: MIT
 metadata:
   author: Xquik
@@ -16,6 +16,8 @@ metadata:
     contentTrust: untrusted
     contentIsolation: enforced
     promptInjectionDefense: true
+    writeConfirmation: required
+    paymentConfirmation: required
     executionModel: api-only
     codeExecution: none
     credentialProxy: false
@@ -23,7 +25,7 @@ metadata:
 
 # Track Competitors on X
 
-Ongoing competitor intelligence: posts, follower growth, engagement benchmarks, and top tweets per competitor. Read-only.
+Competitor intelligence: posts, follower growth, engagement benchmarks, and top tweets per competitor. Ongoing monitors require explicit approval.
 
 ## Endpoints
 
@@ -32,7 +34,7 @@ Ongoing competitor intelligence: posts, follower growth, engagement benchmarks, 
 | GET /x/users/{username} | Profile + follower count snapshot | Read tier |
 | GET /x/users/{id}/tweets | Recent posts | Read tier |
 | POST /extractions with tool=post_extractor | Bulk historical posts | Per-row |
-| POST /monitors type=account | Continuous monitor per competitor | Subscription |
+| POST /monitors type=account | Continuous monitor per competitor | 21 credits/hour while active |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
@@ -43,7 +45,7 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
    - `GET /x/users/{username}` for follower count, verified status, bio
    - `GET /x/users/{id}/tweets?limit=50&sort=top` for their best recent posts
 3. Build a side-by-side table: handle, followers, avg engagement, top tweet.
-4. If the user wants ongoing tracking, create one monitor per competitor (see `monitor-accounts`).
+4. If the user wants ongoing tracking, show each target and the hourly cost, then create monitors only after explicit approval (see `monitor-accounts`).
 
 ## Engagement benchmarking
 

@@ -33,12 +33,12 @@ The `xquik-remote/` directory contains the 3 required files:
 
 5. Validate and build:
    ```bash
-   task validate -- --name xquik-remote
-   task build -- --tools xquik-remote
+   task validate --name xquik-remote
+   task build --tools xquik-remote
    ```
 
 6. Create PR to docker/mcp-registry with title: "Add xquik-remote MCP server"
 
-7. Share test API key credentials via the form: https://forms.gle/6Lw3nsvu2d6nFg8e6
+7. Share the test API key via the form: https://forms.gle/6Lw3nsvu2d6nFg8e6
 
 8. Wait for Docker team review (catalog entry available within 24h of approval).

@@ -4,11 +4,11 @@ description: Post a tweet to X/Twitter
 
 Post a tweet with the text: "$ARGUMENTS"
 
-Before posting, confirm with the user: "Post this tweet? [text]"
+Before posting, confirm the exact tweet text and posting account with the user.
 
-After confirmation, use the `xquik` MCP tool to call `POST /api/v1/x/tweets` with body `{ "text": "<the tweet text>" }`.
+After confirmation, use the `xquik` MCP tool to call `POST /api/v1/x/tweets` with body `{ "account": "<confirmed account>", "text": "<the tweet text>" }`.
 
-Note: The API requires an `account` field (connected X username). If unknown, use the `explore` MCP tool to check available accounts first via `GET /api/v1/x/accounts`, then use the first connected account.
+Note: The API requires an `account` field (connected X username). If unknown, ask the user which connected account should post.
 
 Show the result: tweet ID and link `https://x.com/i/status/{tweetId}`.
 

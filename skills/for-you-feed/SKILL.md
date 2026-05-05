@@ -1,6 +1,6 @@
 ---
 name: for-you-feed
-description: "Use when the user wants to read the For You home timeline on X (Twitter) through the API. Surfaces the algorithmic home timeline (cursor-paginated) with an option to suppress already-seen tweets. Read-only."
+description: "Use when the user wants to read the For You home timeline on X (Twitter) through the API after explicit approval. Surfaces the algorithmic home timeline (cursor-paginated) with an option to suppress already-seen tweets. Read-only."
 license: MIT
 metadata:
   author: Xquik
@@ -44,9 +44,10 @@ Supported query parameters: `cursor` (opaque), `seenTweetIds` (comma-separated t
 
 ## Typical flow
 
-1. Call `GET /x/timeline` with no cursor on first fetch.
-2. Store displayed tweet IDs. On subsequent calls pass them as `seenTweetIds` to reduce duplication.
-3. Paginate via `nextCursor`. Summarize or present as a reading list.
+1. Ask the user to confirm that they want to fetch their private home timeline.
+2. Call `GET /x/timeline` with no cursor on first fetch.
+3. Store displayed tweet IDs. On subsequent calls pass them as `seenTweetIds` to reduce duplication.
+4. Paginate via `nextCursor`. Summarize or present as a reading list.
 
 ## Security
 

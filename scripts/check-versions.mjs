@@ -78,6 +78,16 @@ const contentChecks = [
     forbidden: [],
   },
   {
+    path: ".claude-plugin/plugin.json",
+    required: ["113 endpoints"],
+    forbidden: ["112 endpoints"],
+  },
+  {
+    path: ".claude-plugin/marketplace.json",
+    required: ["confirmation-gated writes"],
+    forbidden: ["write actions, credits"],
+  },
+  {
     path: "skills/x-twitter-scraper/references/pricing.md",
     required: [
       "Read operations - 5 credits ($0.00075)",
@@ -86,14 +96,40 @@ const contentChecks = [
     forbidden: ["Read operations - 7 credits ($0.00105)"],
   },
   {
+    path: "skills/x-twitter-scraper/references/workflows.md",
+    required: [
+      "| **Get an X Article** by tweet ID | `GET /x/articles/{id}` | 5 credits |",
+      "| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | 5 credits |",
+    ],
+    forbidden: [
+      "| **Get an X Article** by tweet ID | `GET /x/articles/{id}` | 7 credits |",
+      "| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | 7 credits |",
+    ],
+  },
+  {
     path: "server.json",
-    required: ["113 REST endpoints"],
-    forbidden: ["112 REST endpoints"],
+    required: ["113 REST endpoints", '"name": "x-api-key"'],
+    forbidden: [
+      "112 REST endpoints",
+      '"name": "Authorization"',
+      "Bearer {XQUIK_API_KEY}",
+    ],
   },
   {
     path: "stub-server.mjs",
-    required: ["113 endpoints", "113 REST endpoints"],
-    forbidden: ["112 endpoints", "112 REST endpoints"],
+    required: [
+      "113 endpoints",
+      "113 REST endpoints",
+      "Execute confirmed Xquik API calls",
+      '"x-api-key": "<YOUR_API_KEY>"',
+    ],
+    forbidden: [
+      "112 endpoints",
+      "112 REST endpoints",
+      "Execute authenticated",
+      "Call `POST /api/v1/subscribe`",
+      '"Authorization": "Bearer <YOUR_API_KEY>"',
+    ],
   },
 ];
 

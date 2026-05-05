@@ -11,12 +11,30 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    env:
+      MCP_PUBLISHER_VERSION: v1.7.8
     steps:
       - uses: actions/checkout@v4
 
       - name: Install mcp-publisher
         run: |
-          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+          case "$(uname -m)" in
+            x86_64)
+              asset="mcp-publisher_linux_amd64.tar.gz"
+              checksum="48230dbec85bd88a0d42977ef533cddda23235f0db4331b9263ce53b432cb75c"
+              ;;
+            aarch64)
+              asset="mcp-publisher_linux_arm64.tar.gz"
+              checksum="3eaa88ea0590433b538d3971a6ca0863d0345d3ff5937b0d1874b7a8de71a591"
+              ;;
+            *)
+              echo "Unsupported architecture: $(uname -m)" >&2
+              exit 1
+              ;;
+          esac
+          curl -fsSLO "https://github.com/modelcontextprotocol/registry/releases/download/${MCP_PUBLISHER_VERSION}/${asset}"
+          printf "%s  %s\n" "$checksum" "$asset" | sha256sum -c -
+          tar xzf "$asset" mcp-publisher
 
       - name: Validate server.json
         run: ./mcp-publisher validate

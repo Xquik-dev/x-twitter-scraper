@@ -64,10 +64,11 @@ const TOOLS = [
   {
     name: "xquik",
     description:
-      "Execute authenticated X (Twitter) API calls to read data, publish content, and manage accounts across 113 REST endpoints.\n\n" +
+      "Execute confirmed Xquik API calls across 113 REST endpoints.\n\n" +
       "## When to use\n" +
       "- Use after calling 'explore' to discover the endpoint path and parameters.\n" +
-      "- Use for any live X/Twitter operation: search tweets, look up users, post tweets, like, retweet, follow, send DMs, run giveaway draws, monitor accounts, extract bulk data, compose tweets, and more.\n\n" +
+      "- Use for live X/Twitter operations such as tweet search, user lookup, giveaway draws, extraction jobs, composition, private reads, persistent monitors, webhooks, and confirmation-gated writes.\n" +
+      "- Confirm private reads, persistent resources, billing flows, and writes before using endpoints that require user approval.\n\n" +
       "## When NOT to use\n" +
       "- Do NOT use to discover endpoints - use 'explore' first.\n" +
       "- Do NOT pass API keys or auth headers - authentication is injected automatically.\n\n" +
@@ -75,16 +76,16 @@ const TOOLS = [
       "- Executes the provided async function in a sandboxed environment with `xquik.request(path, options?)` and `spec.endpoints` available.\n" +
       "- Sandboxed via Node.js VM: no filesystem, no global network access - only xquik.request() is available. Console calls are silently ignored.\n" +
       "- Execution timeout: 60 seconds per invocation, 60 seconds per individual API request.\n" +
-      "- Read operations (GET) return JSON objects with the requested data. Write operations (POST/DELETE) return `{ success: true }` or `{ success: true, warning: '...' }`.\n" +
+      "- Read operations (GET) return JSON objects with the requested data. Mutating operations (POST/PATCH/DELETE) require prior user confirmation and return `{ success: true }` or `{ success: true, warning: '...' }`.\n" +
       "- Pagination: responses include `has_next_page` (boolean) and `next_cursor` (string). Pass `cursor` as a query param for the next page.\n" +
-      "- Can be destructive: write operations (POST/DELETE) modify data on X (tweets, follows, DMs, profile).\n\n" +
+      "- Some operations modify X or Xquik resources. Show the exact payload, target, and cost before calling them.\n\n" +
       "## Error handling\n" +
-      "- 402: Subscription required or insufficient credits. Call `POST /api/v1/subscribe` to get a checkout URL.\n" +
+      "- 402: Subscription required or insufficient credits. Explain the billing issue and ask before any checkout or top-up action.\n" +
       "- 429: Rate limited. Retry after backoff.\n" +
       "- 404: Resource not found (user, tweet, or monitor does not exist).\n" +
       "- 200 with `warning` field: Probable success - do NOT retry.\n\n" +
       "## Costs\n" +
-      "- Free: compose, styles, drafts, radar, subscribe, account, api-keys, support.\n" +
+      "- Free: compose, styles, drafts, radar, account info, support, credit balance, and webhook management.\n" +
       "- 1 credit/read ($0.00015): tweet search, timeline, bookmarks, favoriters.\n" +
       "- 10 credits/write ($0.0015): tweet, like, retweet, follow, DM.\n\n" +
       "## Input format\n" +
@@ -92,7 +93,7 @@ const TOOLS = [
       "## Examples\n" +
       "Search tweets: `async () => xquik.request('/api/v1/x/tweets/search', { query: { q: 'AI agents', limit: '50' } })`\n" +
       "Get user: `async () => xquik.request('/api/v1/x/users/elonmusk')`\n" +
-      "Post tweet: `async () => { const { accounts } = await xquik.request('/api/v1/x/accounts'); return xquik.request('/api/v1/x/tweets', { method: 'POST', body: { account: accounts[0].xUsername, text: 'Hello!' } }); }`",
+      "After explicit user confirmation, post tweet: `async () => xquik.request('/api/v1/x/tweets', { method: 'POST', body: { account: '<confirmed_account>', text: '<confirmed_text>' } })`",
     inputSchema: {
       type: "object",
       properties: {
@@ -156,7 +157,7 @@ function handleMessage(msg) {
             content: [
               {
                 type: "text",
-                text: `This is a verification stub. Connect to the live server at https://xquik.com/mcp for real API access. Configure with: { "mcpServers": { "xquik": { "url": "https://xquik.com/mcp", "headers": { "Authorization": "Bearer <YOUR_API_KEY>" } } } }`,
+                text: `This is a verification stub. Connect to the live server at https://xquik.com/mcp for real API access. Configure with: { "mcpServers": { "xquik": { "url": "https://xquik.com/mcp", "headers": { "x-api-key": "<YOUR_API_KEY>" } } } }`,
               },
             ],
           },

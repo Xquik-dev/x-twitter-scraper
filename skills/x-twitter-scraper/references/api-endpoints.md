@@ -1031,7 +1031,7 @@ Link your X username to your Xquik account. Required for own-account detection i
 POST /subscribe
 ```
 
-Returns a checkout URL for subscribing or managing the subscription. If already subscribed, returns the billing portal URL.
+Returns a checkout URL for subscribing or managing the subscription. If already subscribed, returns the billing portal URL. Use only after the user confirms the plan or billing action.
 
 **Response:**
 ```json
@@ -1044,9 +1044,9 @@ Returns a checkout URL for subscribing or managing the subscription. If already 
 
 ## X Accounts (Connected)
 
-Manage connected X accounts for write actions. All endpoints are free (no usage cost).
+Manage connected X accounts for confirmation-gated write actions. All endpoints are free (no usage cost).
 
-**Connecting or re-authenticating an X account is done by the user in the Xquik dashboard** at [xquik.com/dashboard/account](https://xquik.com/dashboard/account), not via this skill. The skill never handles X login credentials. The agent should direct the user to the dashboard when a new account needs to be connected or an existing session needs to be refreshed.
+**Connecting or re-authenticating an X account is done by the user in the Xquik dashboard** at [xquik.com/dashboard/account](https://xquik.com/dashboard/account), not via this skill. The skill never handles X login material. The agent should direct the user to the dashboard when a new account needs to be connected or an existing session needs to be refreshed.
 
 ### List X Accounts
 
@@ -1279,7 +1279,7 @@ Get credit balance, lifetime purchased/used, and auto top-up status. Free.
 POST /credits/topup
 ```
 
-Get a checkout URL to purchase credits ($10 minimum). Free.
+Get a checkout URL to purchase credits ($10 minimum). Use only after the user confirms the exact amount.
 
 ### Get Top-Up Status
 
@@ -1357,7 +1357,7 @@ Add a message to an existing ticket.
 | 400 | `no_media` | Tweet has no downloadable media |
 | 400 | `webhook_inactive` | Webhook is disabled (test-webhook only) |
 | 401 | `unauthenticated` | Missing or invalid API key |
-| 403 | `account_needs_reauth` | X account session expired, re-authenticate |
+| 403 | `account_needs_reauth` | X account session expired; use dashboard re-auth flow |
 | 402 | `no_subscription` | No active subscription |
 | 402 | `subscription_inactive` | Subscription is not active |
 | 402 | `usage_limit_reached` | Monthly usage cap exceeded |
@@ -1374,7 +1374,7 @@ Add a message to an existing ticket.
 | 404 | `style_not_found` | No cached style found |
 | 404 | `draft_not_found` | Draft not found |
 | 409 | `monitor_already_exists` | Duplicate monitor for same username |
-| 422 | `login_failed` | X credential verification failed |
+| 422 | `login_failed` | Account connection failed; use dashboard re-auth flow |
 | 429 | - | Rate limited. Retry with backoff |
 | 429 | `x_api_rate_limited` | X data source rate limited. Retry |
 | 500 | `internal_error` | Server error |

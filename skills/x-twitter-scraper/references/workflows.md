@@ -123,10 +123,10 @@ const csvData = await csvResponse.text();
 
 ## Real-Time Monitoring Setup
 
-Complete end-to-end: create monitor, register webhook, handle events.
+Complete end-to-end: create monitor, register webhook, handle events. Create persistent monitors and webhooks only after explicit user approval of the target, event types, destination URL, and ongoing cost.
 
 ```javascript
-// 1. Create monitor (free)
+// 1. Create monitor (persistent resource; active monitors are metered hourly)
 const monitor = await xquikFetch("/monitors", {
   method: "POST",
   body: JSON.stringify({
@@ -135,7 +135,7 @@ const monitor = await xquikFetch("/monitors", {
   }),
 });
 
-// 2. Register webhook (free)
+// 2. Register webhook (persistent delivery destination)
 const webhook = await xquikFetch("/webhooks", {
   method: "POST",
   body: JSON.stringify({
@@ -145,7 +145,7 @@ const webhook = await xquikFetch("/webhooks", {
 });
 // IMPORTANT: Save webhook.secret. It is shown only once!
 
-// 3. Poll events (alternative to webhooks, free)
+// 3. Poll events (alternative to webhooks)
 const events = await xquikFetch("/events?monitorId=7&limit=50");
 ```
 
@@ -156,7 +156,7 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `webhoo
 | Goal | Endpoint | Cost |
 |------|----------|------|
 | **Get a single tweet** by ID/URL | `GET /x/tweets/{id}` | 1 credit |
-| **Get an X Article** by tweet ID | `GET /x/articles/{id}` | 7 credits |
+| **Get an X Article** by tweet ID | `GET /x/articles/{id}` | 5 credits |
 | **Search tweets** by keyword/hashtag | `GET /x/tweets/search?q=...` | 1 credit/tweet |
 | **Get a user profile** | `GET /x/users/{username}` | 1 credit |
 | **Get user's recent tweets** | `GET /x/users/{id}/tweets` | 1 credit/tweet |
@@ -164,7 +164,7 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `webhoo
 | **Get user's media tweets** | `GET /x/users/{id}/media` | 1 credit/result |
 | **Get tweet favoriters** | `GET /x/tweets/{id}/favoriters` | 1 credit/result |
 | **Get mutual followers** | `GET /x/users/{id}/followers-you-know` | 1 credit/result |
-| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | 7 credits |
+| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | 5 credits |
 | **Get trending topics** | `GET /trends?woeid=1` | 3 credits |
 | **Get radar (trending news)** | `GET /radar?source=hacker_news` | Free |
 | **Get bookmarks** | `GET /x/bookmarks` | 1 credit/result |
@@ -172,14 +172,14 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `webhoo
 | **Get notifications** | `GET /x/notifications` | 1 credit/result |
 | **Get home timeline** | `GET /x/timeline` | 1 credit/result |
 | **Get DM history** | `GET /x/dm/{userId}/history` | 1 credit/result |
-| **Monitor an X account** | `POST /monitors` | Free |
+| **Monitor an X account** | `POST /monitors` | Active monitors are metered hourly |
 | **Poll for events** | `GET /events` | Free |
-| **Receive events via webhook** | `POST /webhooks` | Free |
+| **Receive events via webhook** | `POST /webhooks` | Free; confirmation required for destination URL |
 | **Run a giveaway draw** | `POST /draws` | 1 credit/entry |
 | **Download tweet media** | `POST /x/media/download` | 1 credit/item |
 | **Extract bulk data** | `POST /extractions` | 1-5 credits/result |
 | **Check credits** | `GET /credits` | Free |
-| **Top up credits** | `POST /credits/topup` | Free |
+| **Top up credits** | `POST /credits/topup` | Exact amount confirmation required |
 | **Compose a tweet** | `POST /compose` | Free |
 | **Post a tweet** | `POST /x/tweets` | 10 credits |
 | **Like / Unlike a tweet** | `POST` / `DELETE /x/tweets/{id}/like` | 10 credits |
