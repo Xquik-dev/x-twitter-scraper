@@ -8,7 +8,7 @@
 [![x-twitter-scraper MCP server](https://glama.ai/mcp/servers/Xquik-dev/x-twitter-scraper/badges/score.svg)](https://glama.ai/mcp/servers/Xquik-dev/x-twitter-scraper)
 [![smithery badge](https://smithery.ai/badge/xquik/x-twitter-scraper)](https://smithery.ai/servers/xquik/x-twitter-scraper)
 
-An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. 113 REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, and confirmation-gated write actions.
+An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. 100+ REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, and confirmation-gated write actions.
 
 **The cheapest X data API on the market** - post reads from $0.00015/call (about 33x cheaper than official X API post reads).
 
@@ -55,7 +55,7 @@ Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricin
 
 Two options for pay-per-use without a monthly subscription:
 
-- **Credits**: Start a credit top-up checkout only after explicit confirmation. 1 credit = $0.00015. Works with all 113 endpoints.
+- **Credits**: Start a credit top-up checkout only after explicit confirmation. 1 credit = $0.00015. Works with all supported endpoints.
 - **MPP**: 32 X-API endpoints accept optional per-call payments. Show the exact amount and get explicit confirmation before starting any payment flow. SDK: `npm i mppx viem`.
 
 ## Installation
@@ -157,14 +157,14 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Tweet composition**: Algorithm-optimized tweet composer with scoring (free)
 - **Credits & billing**: Check balance; start top-up or subscription checkout only after explicit confirmation
 - **Support tickets**: Open and manage support tickets via API
-- **MCP server**: 2 tools covering 113 endpoints for AI agent integration
+- **MCP server**: 2 tools covering 100+ endpoints for AI agent integration
 - **Pay-per-use (MPP)**: Optional per-call access to 32 endpoints with exact-amount confirmation
 
 ## Capabilities
 
 | Area | Details |
 |------|---------|
-| **REST API** | 113 endpoints across 10 categories with retry logic and pagination |
+| **REST API** | 100+ endpoints across 10 categories with retry logic and pagination |
 | **MCP Server** | 2 tools (explore + xquik). StreamableHTTP, configs for 10 platforms |
 | **Data Extraction** | 23 bulk extraction tools (replies, retweets, quotes, favoriters, threads, articles, user likes, user media, communities, lists, Spaces, people search, tweet search, mentions, posts) |
 | **X Lookups** | Tweet, user, article, search, user tweets, user likes, user media, favoriters, mutual followers, and confirmation-gated private reads |
@@ -220,7 +220,7 @@ Use the X Twitter Scraper API in your language of choice. All SDKs are auto-gene
 | [x-twitter-scraper-kotlin](https://github.com/Xquik-dev/x-twitter-scraper-kotlin) | Kotlin | Build from source while Maven Central publication is pending | ![Stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper-kotlin?style=flat-square) |
 | [x-twitter-scraper-csharp](https://github.com/Xquik-dev/x-twitter-scraper-csharp) | C# / .NET | `dotnet add package XTwitterScraper` | ![Stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper-csharp?style=flat-square) |
 | [x-twitter-scraper-php](https://github.com/Xquik-dev/x-twitter-scraper-php) | PHP | `composer require xquik/x-twitter-scraper` | ![Stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper-php?style=flat-square) |
-| [x-twitter-scraper-cli](https://github.com/Xquik-dev/x-twitter-scraper-cli) | CLI | `go install github.com/Xquik-dev/x-twitter-scraper-cli/cmd/x-twitter-scraper@latest` | ![Stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper-cli?style=flat-square) |
+| [x-twitter-scraper-cli](https://github.com/Xquik-dev/x-twitter-scraper-cli) | CLI | Build from source or install a pinned release tag | ![Stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper-cli?style=flat-square) |
 | [terraform-provider-x-twitter-scraper](https://github.com/Xquik-dev/terraform-provider-x-twitter-scraper) | Terraform | Build from source ([latest release](https://github.com/Xquik-dev/terraform-provider-x-twitter-scraper/releases)) | ![Stars](https://img.shields.io/github/stars/Xquik-dev/terraform-provider-x-twitter-scraper?style=flat-square) |
 | [tweetclaw](https://github.com/Xquik-dev/tweetclaw) | OpenClaw plugin | `openclaw plugins install @xquik/tweetclaw` | ![Stars](https://img.shields.io/github/stars/Xquik-dev/tweetclaw?style=flat-square) |
 
@@ -233,7 +233,7 @@ x-twitter-scraper/
 │       ├── SKILL.md                      # Main skill (auth, pricing, endpoints, patterns)
 │       ├── metadata.json                 # Version and references
 │       └── references/
-│           ├── api-endpoints.md          # All REST API endpoints
+│           ├── api-endpoints.md          # REST API endpoint reference
 │           ├── mcp-tools.md              # MCP tool selection rules and workflow patterns
 │           ├── mcp-setup.md              # MCP configs for 10 platforms (v2 + v1)
 │           ├── webhooks.md               # Webhook setup & verification

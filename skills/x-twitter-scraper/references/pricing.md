@@ -86,7 +86,7 @@ Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricin
 
 Two options without a monthly subscription:
 
-**Credits**: Start a credit top-up checkout only after explicit confirmation. 1 credit = $0.00015. Works with all 113 endpoints.
+**Credits**: Start a credit top-up checkout only after explicit confirmation. 1 credit = $0.00015. Works with all supported endpoints.
 
 **MPP**: 32 X-API endpoints accept optional per-call payments. Show the exact amount and get explicit confirmation before starting any payment flow.
 

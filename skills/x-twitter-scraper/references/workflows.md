@@ -87,7 +87,7 @@ if (!estimate.allowed) {
 }
 
 // Step 2: Create extraction job
-const job = await xquikFetch("/extractions", {
+let job = await xquikFetch("/extractions", {
   method: "POST",
   body: JSON.stringify({
     toolType: "follower_explorer",

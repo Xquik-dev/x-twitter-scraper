@@ -12,7 +12,7 @@
   },
   {
     "name": "xquik",
-    "description": "Execute confirmed Xquik API calls. Covers 113 endpoints: tweet search, user lookup, follower extraction, confirmation-gated writes (tweet, like, retweet, follow, DM), monitoring, giveaway draws, trending topics, composition, and more.",
+    "description": "Execute confirmed Xquik API calls. Covers 100+ endpoints: tweet search, user lookup, follower extraction, confirmation-gated writes (tweet, like, retweet, follow, DM), monitoring, giveaway draws, trending topics, composition, and more.",
     "arguments": [
       {
         "name": "code",

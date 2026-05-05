@@ -16,6 +16,7 @@ metadata:
     contentTrust: untrusted
     contentIsolation: enforced
     promptInjectionDefense: true
+    writeConfirmation: required
     paymentConfirmation: required
     executionModel: api-only
     codeExecution: none

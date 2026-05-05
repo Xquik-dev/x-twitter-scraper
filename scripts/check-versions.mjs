@@ -5,7 +5,7 @@
 // Official MCP Registry) cache from these files, so drift across surfaces
 // ships an inconsistent release. See Xquik-dev/xquik#2024.
 
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -58,19 +58,31 @@ const contentChecks = [
   {
     path: "README.md",
     required: [
-      "113 REST API endpoints",
+      "100+ REST API endpoints",
       "| Follow check, article | 5 | $0.00075 |",
-      "Works with all 113 endpoints",
+      "Works with all supported endpoints",
     ],
     forbidden: [
+      "113 REST API endpoints",
       "112 REST API endpoints",
+      "Works with all 113 endpoints",
+      "@latest",
       "| Follow check, article | 7 | $0.00105 |",
     ],
   },
   {
+    path: "package.json",
+    required: ['"@tanstack/intent": "0.0.40"'],
+    forbidden: ['"@tanstack/intent": "latest"'],
+  },
+  {
     path: "skills/x-twitter-scraper/SKILL.md",
-    required: ["113 REST API endpoints", "Read operations: 1-5 credits"],
-    forbidden: ["112 REST API endpoints", "Read operations: 1-7 credits"],
+    required: ["100+ REST API endpoints", "Read operations: 1-5 credits"],
+    forbidden: [
+      "113 REST API endpoints",
+      "112 REST API endpoints",
+      "Read operations: 1-7 credits",
+    ],
   },
   {
     path: "skills/x-twitter-scraper/references/api-endpoints.md",
@@ -78,9 +90,19 @@ const contentChecks = [
     forbidden: [],
   },
   {
+    path: "skills/x-twitter-scraper/references/mcp-setup.md",
+    required: ["https://xquik.com/openapi.json"],
+    forbidden: ["https://docs.xquik.com/openapi.json"],
+  },
+  {
+    path: "skills/x-twitter-scraper/references/webhooks.md",
+    required: ["expectedBuffer.length === signatureBuffer.length"],
+    forbidden: ["timingSafeEqual(Buffer.from(expected), Buffer.from(signature))"],
+  },
+  {
     path: ".claude-plugin/plugin.json",
-    required: ["113 endpoints"],
-    forbidden: ["112 endpoints"],
+    required: ["100+ endpoints"],
+    forbidden: ["113 endpoints", "112 endpoints"],
   },
   {
     path: ".claude-plugin/marketplace.json",
@@ -91,9 +113,12 @@ const contentChecks = [
     path: "skills/x-twitter-scraper/references/pricing.md",
     required: [
       "Read operations - 5 credits ($0.00075)",
-      "Works with all 113 endpoints",
+      "Works with all supported endpoints",
     ],
-    forbidden: ["Read operations - 7 credits ($0.00105)"],
+    forbidden: [
+      "Works with all 113 endpoints",
+      "Read operations - 7 credits ($0.00105)",
+    ],
   },
   {
     path: "skills/x-twitter-scraper/references/workflows.md",
@@ -108,8 +133,9 @@ const contentChecks = [
   },
   {
     path: "server.json",
-    required: ["113 REST endpoints", '"name": "x-api-key"'],
+    required: ["100+ REST endpoints", '"name": "x-api-key"'],
     forbidden: [
+      "113 REST endpoints",
       "112 REST endpoints",
       '"name": "Authorization"',
       "Bearer {XQUIK_API_KEY}",
@@ -118,12 +144,14 @@ const contentChecks = [
   {
     path: "stub-server.mjs",
     required: [
-      "113 endpoints",
-      "113 REST endpoints",
+      "100+ endpoints",
+      "100+ REST endpoints",
       "Execute confirmed Xquik API calls",
       '"x-api-key": "<YOUR_API_KEY>"',
     ],
     forbidden: [
+      "113 endpoints",
+      "113 REST endpoints",
       "112 endpoints",
       "112 REST endpoints",
       "Execute authenticated",
@@ -143,6 +171,24 @@ for (const check of contentChecks) {
   for (const forbidden of check.forbidden) {
     if (raw.includes(forbidden)) {
       drifts.push(`  ${check.path}: stale "${forbidden}"`);
+    }
+  }
+}
+
+for (const dir of readdirSync(join(root, "skills"))) {
+  const path = `skills/${dir}/SKILL.md`;
+  let raw;
+  try {
+    raw = readFileSync(join(root, path), "utf8");
+  } catch {
+    continue;
+  }
+  for (const required of [
+    "writeConfirmation: required",
+    "paymentConfirmation: required",
+  ]) {
+    if (!raw.includes(required)) {
+      drifts.push(`  ${path}: missing "${required}"`);
     }
   }
 }

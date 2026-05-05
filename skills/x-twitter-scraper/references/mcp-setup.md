@@ -71,7 +71,7 @@ Add to `.mcp.json`:
 
 ### Option 1: Custom GPT (Recommended)
 
-Create a Custom GPT and add Xquik as an Action using the OpenAPI schema at `https://docs.xquik.com/openapi.json`. Set the API key under Authentication > API Key > Header `x-api-key`.
+Create a Custom GPT and add Xquik as an Action using the OpenAPI schema at `https://xquik.com/openapi.json`. Set the API key under Authentication > API Key > Header `x-api-key`.
 
 ### Option 2: Agents SDK
 
@@ -182,7 +182,7 @@ The MCP server (v2) at `https://xquik.com/mcp` provides 2 structured API tools:
 | `explore` | Search the API endpoint catalog (read-only, no network calls) | Free |
 | `xquik` | Execute confirmed Xquik API calls | Varies by endpoint |
 
-The agent sends structured API requests through the MCP server, which handles authentication and execution within the same first-party infrastructure as the REST API. All 113 REST API endpoints across 10 categories are accessible. Private reads, writes, persistent resources, and billing flows require explicit user confirmation before use.
+The agent sends structured API requests through the MCP server, which handles authentication and execution within the same first-party infrastructure as the REST API. All 100+ REST API endpoints across 10 categories are accessible. Private reads, writes, persistent resources, and billing flows require explicit user confirmation before use.
 
 ## After Setup
 

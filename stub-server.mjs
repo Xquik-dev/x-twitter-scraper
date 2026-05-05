@@ -29,7 +29,7 @@ const TOOLS = [
       "- Do NOT use 'explore' to fetch live data from X - use 'xquik' instead.\n" +
       "- Do NOT use if you already know the endpoint path and parameters.\n\n" +
       "## Behavior\n" +
-      "- Read-only, idempotent. No network calls - runs against an in-memory catalog of 113 endpoints.\n" +
+      "- Read-only, idempotent. No network calls - runs against an in-memory catalog of 100+ endpoints.\n" +
       "- Always free, no authentication or credits required.\n" +
       "- Returns the result of your filter function (e.g., empty array if no endpoints match).\n" +
       "- Returns an error message if the code is syntactically invalid or throws at runtime.\n" +
@@ -64,7 +64,7 @@ const TOOLS = [
   {
     name: "xquik",
     description:
-      "Execute confirmed Xquik API calls across 113 REST endpoints.\n\n" +
+      "Execute confirmed Xquik API calls across 100+ REST endpoints.\n\n" +
       "## When to use\n" +
       "- Use after calling 'explore' to discover the endpoint path and parameters.\n" +
       "- Use for live X/Twitter operations such as tweet search, user lookup, giveaway draws, extraction jobs, composition, private reads, persistent monitors, webhooks, and confirmation-gated writes.\n" +

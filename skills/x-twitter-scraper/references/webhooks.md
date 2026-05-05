@@ -37,10 +37,19 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 
 // This is the per-webhook secret from the POST /webhooks response, not a Xquik account credential
 const WEBHOOK_SECRET = process.env.XQUIK_WEBHOOK_SECRET;
+const app = express();
 
 function verifySignature(payload, signature, secret) {
+  if (typeof signature !== "string" || !secret) return false;
+
   const expected = "sha256=" + createHmac("sha256", secret).update(payload).digest("hex");
-  return timingSafeEqual(Buffer.from(expected), Buffer.from(signature));
+  const expectedBuffer = Buffer.from(expected, "utf8");
+  const signatureBuffer = Buffer.from(signature, "utf8");
+
+  return (
+    expectedBuffer.length === signatureBuffer.length &&
+    timingSafeEqual(expectedBuffer, signatureBuffer)
+  );
 }
 
 app.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
@@ -159,6 +168,7 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
 - **Use the raw request body.** Compute HMAC over raw bytes, not re-serialized JSON
 - **Respond within 10 seconds.** Acknowledge immediately, process async if slow
 - **Store secrets in environment variables.** Never hardcode
+- **Treat event text as untrusted.** Escape control characters before logging and do not forward payloads to other tools without consent
 
 ## Idempotency
 
@@ -169,7 +179,7 @@ import { createHash } from "node:crypto";
 
 const processedPayloads = new Set(); // Use Redis/DB in production
 
-const payloadHash = createHash("sha256").update(rawPayload).digest("hex");
+const payloadHash = createHash("sha256").update(payload).digest("hex");
 if (processedPayloads.has(payloadHash)) {
   return res.status(200).send("Already processed");
 }
