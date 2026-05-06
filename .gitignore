@@ -6,6 +6,11 @@
 .envrc
 *.env
 .npmrc
+.npmrc.*
+.yarnrc
+.pnpmrc
+.netrc
+.netrc.*
 *.pem
 *.key
 *.crt
@@ -13,11 +18,28 @@
 *.pfx
 *.token
 *.secret
+*.credentials
+*.credentials.*
+auth.json
+auth.*.json
+credentials.json
+credentials.*.json
+secret.json
+secret.*.json
+secrets.json
+secrets.*.json
+token.json
+token.*.json
+tokens.json
+tokens.*.json
 openclaw.json
 openclaw.json.bak*
 .openclaw/
 .openclaw-*/
 .clawhub/
+.context7/
+context7.local.json
+context7.*.local.json
 
 # Dependencies and build output
 node_modules/
@@ -40,6 +62,8 @@ pnpm-debug.log*
 .tmp/
 tmp/
 temp/
+.local/
+.local-*/
 .eslintcache
 *.eslintcache
 .nyc_output/
