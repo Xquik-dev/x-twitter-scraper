@@ -1,5 +1,7 @@
 # X API / Twitter Scraper Skill for AI Coding Agents
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg?url=https%3A%2F%2Fgithub.com%2FXquik-dev%2Fx-twitter-scraper)](https://deepwiki.com/Xquik-dev/x-twitter-scraper)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![GitHub stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper)
 [![npm version](https://img.shields.io/npm/v/x-developer.svg)](https://www.npmjs.com/package/x-developer)
