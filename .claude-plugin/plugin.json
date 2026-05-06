@@ -1,6 +1,6 @@
 {
   "name": "x-twitter-scraper",
-  "version": "2.4.9",
+  "version": "2.4.10",
   "description": "X (Twitter) real-time data platform skill with REST API (100+ endpoints), MCP server (2 tools) & webhooks. Covers tweet search, user lookup, timelines, extraction, monitoring, giveaway draws, credits, support, and confirmation-gated private reads, write actions, webhooks, monitors, and pay-per-use flows. Reads from $0.00015/call.",
   "author": {
     "name": "Xquik",

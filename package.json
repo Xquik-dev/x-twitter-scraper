@@ -1,6 +1,6 @@
 {
   "name": "x-developer",
-  "version": "2.4.9",
+  "version": "2.4.10",
   "description": "X (Twitter) data platform skill for AI coding agents. 100+ REST API endpoints, 2 MCP tools, 23 extraction types, HMAC webhooks.",
   "author": {
     "name": "Xquik",
