@@ -1,0 +1,71 @@
+name: Refresh Context7 Docs
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/context7-refresh.yml"
+      - "README.md"
+      - "context7.json"
+      - "docs/**"
+      - "skills/**"
+      - "src/**"
+      - "package.json"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Context7 refresh
+        env:
+          CONTEXT7_API_KEY: ${{ secrets.CONTEXT7_API_KEY }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "$CONTEXT7_API_KEY" ]; then
+            echo "::error ::CONTEXT7_API_KEY secret is not configured."
+            exit 1
+          fi
+
+          body_file="$(mktemp)"
+          trap 'rm -f "$body_file"' EXIT
+          status="$(curl -sS -o "$body_file" -w "%{http_code}" -X POST "https://context7.com/api/v1/refresh" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${CONTEXT7_API_KEY}" \
+            -d '{"libraryName": "/xquik-dev/x-twitter-scraper"}')"
+
+          case "$status" in
+            200|202)
+              cat "$body_file"
+              ;;
+            400)
+              if grep -Eiq "active-task|being processed|already.*process" "$body_file"; then
+                echo "::warning ::Context7 is already processing another library. Retry on the next docs change."
+                cat "$body_file"
+              elif grep -Eiq "too-early|minimum .* days|required between updates" "$body_file"; then
+                echo "::warning ::Context7 refresh is not due yet."
+                cat "$body_file"
+              else
+                echo "::error ::Context7 refresh returned HTTP $status."
+                cat "$body_file"
+                exit 1
+              fi
+              ;;
+            404)
+              echo "::warning ::Context7 library /xquik-dev/x-twitter-scraper is not available yet. Add processing may still be pending."
+              cat "$body_file"
+              ;;
+            401|403)
+              echo "::error ::Context7 authentication failed."
+              exit 1
+              ;;
+            *)
+              echo "::error ::Context7 refresh returned HTTP $status."
+              cat "$body_file"
+              exit 1
+              ;;
+          esac
