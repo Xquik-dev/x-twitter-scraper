@@ -102,4 +102,4 @@ This skill assumes an account is already connected. New connections are performe
 
 ## Related
 
-For the full 113-endpoint reference including reads, analytics, extraction, and monitoring, see [x-twitter-scraper](../x-twitter-scraper/SKILL.md) in the same repo.
+For the full 100+ endpoint reference including reads, analytics, extraction, and monitoring, see [x-twitter-scraper](../x-twitter-scraper/SKILL.md) in the same repo.
