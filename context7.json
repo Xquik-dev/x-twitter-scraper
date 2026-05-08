@@ -1,4 +1,35 @@
 {
+  "$schema": "https://context7.com/schema/context7.json",
+  "projectTitle": "X Twitter Scraper",
+  "description": "AI agent skill and MCP server docs for Xquik's X/Twitter API: tweet search, user lookup, extraction, monitoring, webhooks, writes, and SDK links.",
+  "branch": "master",
+  "excludeFolders": [
+    ".claude-plugin",
+    ".github",
+    "docker-mcp-registry",
+    "mcpize"
+  ],
+  "excludeFiles": [
+    ".DS_Store",
+    ".gitignore",
+    ".mcp.json",
+    "CODE_OF_CONDUCT.md",
+    "LICENSE",
+    "glama.json",
+    "openclaw.plugin.json",
+    "package.json",
+    "server.json",
+    "smithery.yaml",
+    "start.sh",
+    "stub-server.mjs"
+  ],
+  "rules": [
+    "Use README.md for installation, pricing, SDK links, API coverage, and MCP setup.",
+    "Use skills/x-twitter-scraper/SKILL.md as the primary agent operating guide.",
+    "Use skills/*/SKILL.md for task-specific workflows such as search, extraction, monitoring, webhooks, posting, and DMs.",
+    "Use commands/*.md for slash-command examples.",
+    "Keep implementation details public-safe; use Xquik API, read service, write service, or browser service wording."
+  ],
   "url": "https://context7.com/xquik-dev/x-twitter-scraper",
   "public_key": "pk_oCPeRRqZFJsY4cCUSotDD"
 }
