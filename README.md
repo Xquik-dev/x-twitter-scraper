@@ -10,7 +10,7 @@
 [![X Tweet Scraper on Apify](https://apify.com/actor-badge?actor=xquik/x-tweet-scraper)](https://apify.com/xquik/x-tweet-scraper)
 [![x-twitter-scraper MCP server](https://glama.ai/mcp/servers/Xquik-dev/x-twitter-scraper/badges/score.svg)](https://glama.ai/mcp/servers/Xquik-dev/x-twitter-scraper)
 [![smithery badge](https://smithery.ai/badge/xquik/x-twitter-scraper)](https://smithery.ai/servers/xquik/x-twitter-scraper)
-[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/xquik-dev-x-twitter-scraper-badge.png)](https://mseep.ai/app/xquik-dev-x-twitter-scraper)
+[![Skills.sh x-twitter-scraper Skill](https://skills.sh/b/xquik-dev/x-twitter-scraper/x-twitter-scraper)](https://skills.sh/xquik-dev/x-twitter-scraper/x-twitter-scraper)
 
 An [AI agent skill](https://skills.sh) for [Xquik](https://xquik.com), a Twitter API alternative for developers who need to search tweets, get tweets from profiles, export followers, download media, monitor accounts, and automate posting workflows.
 
