@@ -139,7 +139,12 @@ func verifySignature(payload []byte, signature, secret string) bool {
 }
 
 func webhookHandler(w http.ResponseWriter, r *http.Request) {
-    payload, _ := io.ReadAll(r.Body)
+    payload, err := io.ReadAll(r.Body)
+    if err != nil {
+        http.Error(w, "Unable to read request body", http.StatusBadRequest)
+        return
+    }
+
     signature := r.Header.Get("X-Xquik-Signature")
 
     if !verifySignature(payload, signature, webhookSecret) {
