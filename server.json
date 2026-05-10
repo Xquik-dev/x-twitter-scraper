@@ -1,11 +1,13 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.xquik/mcp",
+  "title": "Xquik MCP Server",
   "description": "X data platform with 100+ REST endpoints, MCP tools, webhooks, SDKs, and confirmed writes.",
   "repository": {
     "url": "https://github.com/Xquik-dev/x-twitter-scraper",
     "source": "github"
   },
+  "websiteUrl": "https://docs.xquik.com/mcp/overview",
   "version": "2.4.12",
   "remotes": [
     {

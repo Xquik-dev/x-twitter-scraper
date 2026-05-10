@@ -71,7 +71,7 @@ Two options for pay-per-use without a monthly subscription:
 Install via the [skills CLI](https://skills.sh) (auto-detects your installed agents):
 
 ```bash
-npx skills add xquik-dev/x-twitter-scraper
+npx skills@1.5.3 add Xquik-dev/x-twitter-scraper
 ```
 
 This installs the primary [`x-twitter-scraper`](https://skills.sh/xquik-dev/x-twitter-scraper/x-twitter-scraper) skill, including `SKILL.md` and every file in `references/`.

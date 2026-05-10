@@ -173,7 +173,12 @@ const contentChecks = [
   },
   {
     path: "server.json",
-    required: ["100+ REST endpoints", '"name": "x-api-key"'],
+    required: [
+      '"title": "Xquik MCP Server"',
+      "100+ REST endpoints",
+      '"websiteUrl": "https://docs.xquik.com/mcp/overview"',
+      '"name": "x-api-key"',
+    ],
     forbidden: [
       "113 REST endpoints",
       "112 REST endpoints",
