@@ -74,71 +74,31 @@ Install via the [skills CLI](https://skills.sh) (auto-detects your installed age
 npx skills add xquik-dev/x-twitter-scraper
 ```
 
+This installs the primary [`x-twitter-scraper`](https://skills.sh/xquik-dev/x-twitter-scraper/x-twitter-scraper) skill, including `SKILL.md` and every file in `references/`.
+
 ### Manual Installation
 
-<details>
-<summary>Claude Code</summary>
+Use manual installation only when the skills CLI is unavailable. Copy the primary skill directory, not the repository root.
 
 ```bash
-git clone https://github.com/Xquik-dev/x-twitter-scraper.git .claude/skills/x-twitter-scraper
+target_dir=".agents/skills/x-twitter-scraper"
+tmp_dir="$(mktemp -d)"
+
+git clone --depth 1 https://github.com/Xquik-dev/x-twitter-scraper.git "$tmp_dir/x-twitter-scraper"
+rm -rf "$target_dir"
+mkdir -p "$(dirname "$target_dir")"
+cp -R "$tmp_dir/x-twitter-scraper/skills/x-twitter-scraper" "$target_dir"
+rm -rf "$tmp_dir"
 ```
-</details>
 
-<details>
-<summary>Codex / Cursor / Gemini CLI / GitHub Copilot</summary>
+Target directories:
 
-```bash
-git clone https://github.com/Xquik-dev/x-twitter-scraper.git .agents/skills/x-twitter-scraper
-```
-</details>
-
-<details>
-<summary>Windsurf</summary>
-
-```bash
-git clone https://github.com/Xquik-dev/x-twitter-scraper.git .windsurf/skills/x-twitter-scraper
-```
-</details>
-
-<details>
-<summary>Cline</summary>
-
-```bash
-git clone https://github.com/Xquik-dev/x-twitter-scraper.git .agents/skills/x-twitter-scraper
-```
-</details>
-
-<details>
-<summary>Roo Code</summary>
-
-```bash
-git clone https://github.com/Xquik-dev/x-twitter-scraper.git .roo/skills/x-twitter-scraper
-```
-</details>
-
-<details>
-<summary>Continue</summary>
-
-```bash
-git clone https://github.com/Xquik-dev/x-twitter-scraper.git .continue/skills/x-twitter-scraper
-```
-</details>
-
-<details>
-<summary>Goose</summary>
-
-```bash
-git clone https://github.com/Xquik-dev/x-twitter-scraper.git .goose/skills/x-twitter-scraper
-```
-</details>
-
-<details>
-<summary>OpenCode</summary>
-
-```bash
-git clone https://github.com/Xquik-dev/x-twitter-scraper.git .agents/skills/x-twitter-scraper
-```
-</details>
+- Codex / Cursor / Gemini CLI / GitHub Copilot / Cline / OpenCode: `.agents/skills/x-twitter-scraper`
+- Claude Code: `.claude/skills/x-twitter-scraper`
+- Windsurf: `.windsurf/skills/x-twitter-scraper`
+- Roo Code: `.roo/skills/x-twitter-scraper`
+- Continue: `.continue/skills/x-twitter-scraper`
+- Goose: `.goose/skills/x-twitter-scraper`
 
 ## What This Skill Does
 
@@ -248,6 +208,7 @@ x-twitter-scraper/
 │           ├── extractions.md            # 23 extraction tool types
 │           ├── types.md                  # TypeScript type definitions
 │           └── python-examples.md        # Python code examples
+├── task-guides/                          # Public task guides, not installable skills
 ├── server.json                           # MCP Registry metadata
 ├── glama.json                            # Glama.ai directory metadata
 ├── logo.png                              # Marketplace logo
@@ -264,6 +225,7 @@ x-twitter-scraper/
 - [Billing & Pricing](https://docs.xquik.com/guides/billing)
 - Framework guides: [Mastra](https://docs.xquik.com/guides/mastra), [CrewAI](https://docs.xquik.com/guides/crewai), [LangChain](https://docs.xquik.com/guides/langchain), [Pydantic AI](https://docs.xquik.com/guides/pydantic-ai), [Google ADK](https://docs.xquik.com/guides/google-adk), [Microsoft Agent Framework](https://docs.xquik.com/guides/microsoft-agent-framework), [n8n](https://docs.xquik.com/guides/n8n), [Zapier](https://docs.xquik.com/guides/zapier), [Make](https://docs.xquik.com/guides/make), [Pipedream](https://docs.xquik.com/guides/pipedream), [Composio migration](https://docs.xquik.com/guides/composio-migration)
 - [skills.sh Page](https://skills.sh/xquik-dev/x-twitter-scraper)
+- [skills.sh Primary Skill Page](https://skills.sh/xquik-dev/x-twitter-scraper/x-twitter-scraper)
 
 ## License
 
