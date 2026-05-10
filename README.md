@@ -10,7 +10,7 @@
 [![X Tweet Scraper on Apify](https://apify.com/actor-badge?actor=xquik/x-tweet-scraper)](https://apify.com/xquik/x-tweet-scraper)
 [![x-twitter-scraper MCP server](https://glama.ai/mcp/servers/Xquik-dev/x-twitter-scraper/badges/score.svg)](https://glama.ai/mcp/servers/Xquik-dev/x-twitter-scraper)
 [![smithery badge](https://smithery.ai/badge/xquik/x-twitter-scraper)](https://smithery.ai/servers/xquik/x-twitter-scraper)
-[![Skills.sh x-twitter-scraper Skill](https://skills.sh/b/xquik-dev/x-twitter-scraper/x-twitter-scraper)](https://skills.sh/xquik-dev/x-twitter-scraper/x-twitter-scraper)
+[![Skills.sh x-twitter-scraper Skill](https://skills.sh/b/xquik-dev/x-twitter-scraper)](https://skills.sh/xquik-dev/x-twitter-scraper)
 
 An [AI agent skill](https://skills.sh) for [Xquik](https://xquik.com), a Twitter API alternative for developers who need to search tweets, get tweets from profiles, export followers, download media, monitor accounts, and automate posting workflows.
 
@@ -71,7 +71,7 @@ Two options for pay-per-use without a monthly subscription:
 Install via the [skills CLI](https://skills.sh) (auto-detects your installed agents):
 
 ```bash
-npx skills@1.5.3 add Xquik-dev/x-twitter-scraper
+npx skills add xquik-dev/x-twitter-scraper
 ```
 
 ### Manual Installation
@@ -263,7 +263,7 @@ x-twitter-scraper/
 - [MCP Server Guide](https://docs.xquik.com/mcp/overview)
 - [Billing & Pricing](https://docs.xquik.com/guides/billing)
 - Framework guides: [Mastra](https://docs.xquik.com/guides/mastra), [CrewAI](https://docs.xquik.com/guides/crewai), [LangChain](https://docs.xquik.com/guides/langchain), [Pydantic AI](https://docs.xquik.com/guides/pydantic-ai), [Google ADK](https://docs.xquik.com/guides/google-adk), [Microsoft Agent Framework](https://docs.xquik.com/guides/microsoft-agent-framework), [n8n](https://docs.xquik.com/guides/n8n), [Zapier](https://docs.xquik.com/guides/zapier), [Make](https://docs.xquik.com/guides/make), [Pipedream](https://docs.xquik.com/guides/pipedream), [Composio migration](https://docs.xquik.com/guides/composio-migration)
-- [skills.sh Page](https://skills.sh/Xquik-dev/x-twitter-scraper)
+- [skills.sh Page](https://skills.sh/xquik-dev/x-twitter-scraper)
 
 ## License
 
