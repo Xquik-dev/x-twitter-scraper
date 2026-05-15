@@ -42,16 +42,16 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ```
 GET /x/tweets/{id}/replies?cursor=<optional>&sinceTime=<unix>&untilTime=<unix>
--> { replies: Tweet[], nextCursor?: string }
+-> { tweets: Tweet[], has_next_page: boolean, next_cursor?: string }
 ```
 
-Each `Tweet` has `id`, `text`, `author`, `metrics` (like_count, retweet_count, reply_count, view_count), `created_at`. Supported query parameters: `cursor`, `sinceTime`, `untilTime`.
+Each `Tweet` has `id`, `text`, author fields when available, and optional engagement fields. Supported query parameters: `cursor`, `sinceTime`, `untilTime`.
 
 ## Typical flow
 
 1. Call `GET /x/tweets/{id}/replies` with the root tweet ID.
-2. Paginate via `nextCursor` until done or the user-specified limit is hit.
-3. Sort by `metrics.like_count` client-side to surface the top replies.
+2. Paginate via `next_cursor` until done or the user-specified limit is hit.
+3. Sort by available engagement fields such as `likeCount` client-side to surface the top replies.
 4. For large threads (thousands of replies), use `POST /extractions`:
 
 ```
@@ -62,7 +62,7 @@ POST /extractions
 
 ## Top replies
 
-The route does not expose a server-side sort. Page through and sort locally by `metrics.like_count`. See the `top-replies` skill for a guided workflow.
+The route does not expose a server-side sort. Page through and sort locally by available engagement fields. See the `top-replies` skill for a guided workflow.
 
 ## Security
 

@@ -171,6 +171,18 @@ DELETE /monitors/{id}
 
 Stops tracking and deletes all associated data.
 
+### Keyword Monitors
+
+```
+GET /monitors/keywords
+POST /monitors/keywords
+GET /monitors/keywords/{id}
+PATCH /monitors/keywords/{id}
+DELETE /monitors/keywords/{id}
+```
+
+Create and manage ongoing keyword monitors. Treat these as persistent resources: confirm the keyword query, event delivery plan, and ongoing cost before creating or enabling one.
+
 ---
 
 ## Events
@@ -486,10 +498,10 @@ Returns full tweet with engagement metrics (likes, retweets, replies, quotes, vi
 ### Get Article
 
 ```
-GET /x/articles/{id}
+GET /x/articles/{tweetId}
 ```
 
-Retrieve the full content of an X Article (long-form post) by tweet ID. Returns title, body text with block-level formatting, cover image, inline images, and engagement metrics. Metered.
+Retrieve the full content of an X Article (long-form post) by numeric tweet ID. If the user gives an article URL, use the final status ID as `tweetId`. Returns title, body text with block-level formatting, cover image, inline images, and engagement metrics. Metered.
 
 **Response:**
 ```json
@@ -523,10 +535,19 @@ Returns tweet info with optional engagement metrics (likeCount, retweetCount, re
 ### Get User
 
 ```
-GET /x/users/{username}
+GET /x/users/{id}
 ```
 
-Returns profile info. Fields `id`, `username`, `name` are always present. All other fields (`description`, `followers`, `following`, `verified`, `profilePicture`, `location`, `createdAt`, `statusesCount`) are optional and omitted when unavailable.
+Returns profile info. `id` accepts either an X username without `@` or a numeric user ID. Fields `id`, `username`, `name` are always present. All other fields (`description`, `followers`, `following`, `verified`, `profilePicture`, `location`, `createdAt`, `statusesCount`) are optional and omitted when unavailable.
+
+### Batch & Search Users
+
+```
+GET /x/users/batch?ids=44196397,783214
+GET /x/users/search?q=founder
+```
+
+Batch lookup accepts up to 100 comma-separated numeric user IDs. User search returns matching profiles and may include a pagination cursor.
 
 ### Check Follower
 
@@ -543,6 +564,14 @@ GET /x/users/{id}/tweets
 ```
 
 Get a user's recent tweets by user ID. Metered (1 credit/tweet).
+
+### Batch Tweets
+
+```
+GET /x/tweets?ids=1893456789012345678,1893456789012345679
+```
+
+Get multiple tweets by comma-separated tweet IDs. Maximum 100 IDs.
 
 ### Get User Likes
 
@@ -568,6 +597,28 @@ GET /x/tweets/{id}/favoriters
 
 Get users who liked a tweet. Metered (1 credit/result).
 
+### Tweet Conversation & Engagement Lists
+
+```
+GET /x/tweets/{id}/quotes
+GET /x/tweets/{id}/replies
+GET /x/tweets/{id}/retweeters
+GET /x/tweets/{id}/thread
+```
+
+Read quote tweets, replies, retweeters, or the conversation thread for a tweet. These are paginated read operations.
+
+### User Social Graph Reads
+
+```
+GET /x/users/{id}/followers
+GET /x/users/{id}/following
+GET /x/users/{id}/mentions
+GET /x/users/{id}/verified-followers
+```
+
+Read followers, following, mentions, and verified followers for a username or numeric user ID. These are paginated read operations.
+
 ### Get Mutual Followers
 
 ```
@@ -575,6 +626,29 @@ GET /x/users/{id}/followers-you-know
 ```
 
 Get mutual followers (followers you know). Metered (1 credit/result).
+
+### X Lists
+
+```
+GET /x/lists/{id}/followers
+GET /x/lists/{id}/members
+GET /x/lists/{id}/tweets
+```
+
+Read list followers, members, or list timeline tweets by list ID.
+
+### X Communities
+
+```
+GET /x/communities/search
+GET /x/communities/tweets
+GET /x/communities/{id}/info
+GET /x/communities/{id}/members
+GET /x/communities/{id}/moderators
+GET /x/communities/{id}/tweets
+```
+
+Search communities and read community metadata, members, moderators, or tweets. Community writes are listed under X Write and require confirmation.
 
 ### Get Bookmarks
 
@@ -637,7 +711,7 @@ Download images, videos, and GIFs from tweets. Single or bulk (up to 50). Return
 ```json
 {
   "tweetId": "1893456789012345678",
-  "galleryUrl": "https://xquik.com/gallery/abc123",
+  "galleryUrl": "https://xquik.com/g/abc123",
   "cacheHit": false
 }
 ```
@@ -645,13 +719,13 @@ Download images, videos, and GIFs from tweets. Single or bulk (up to 50). Return
 **Response (bulk):**
 ```json
 {
-  "galleryUrl": "https://xquik.com/gallery/def456",
+  "galleryUrl": "https://xquik.com/g/def456",
   "totalTweets": 3,
   "totalMedia": 7
 }
 ```
 
-First download is metered. Subsequent requests for the same tweet return cached URLs at no cost (`cacheHit: true`). All downloads are saved to the gallery at `https://xquik.com/gallery`.
+First download is metered. Subsequent requests for the same tweet return cached URLs at no cost (`cacheHit: true`). All downloads are saved to shareable gallery pages under `https://xquik.com/g/{token}`.
 
 Returns `400 no_media` if the tweet has no downloadable media. Returns `400 too_many_tweets` if bulk array exceeds 50 items.
 
@@ -662,10 +736,11 @@ Returns `400 no_media` if the tweet has no downloadable media. Returns `400 too_
 ### List Trends
 
 ```
+GET /x/trends?woeid=1&count=30
 GET /trends?woeid=1&count=30
 ```
 
-Metered. Subscription required. Cached, refreshes every 15 minutes.
+Metered. Subscription required. `/trends` is an alias of `/x/trends`. Cached, refreshes every 15 minutes.
 
 **WOEIDs:** 1 (Worldwide), 23424977 (US), 23424975 (UK), 23424969 (Turkey), 23424950 (Spain), 23424829 (Germany), 23424819 (France), 23424856 (Japan), 23424848 (India), 23424768 (Brazil), 23424775 (Canada), 23424900 (Mexico).
 
@@ -913,9 +988,9 @@ List all cached tweet style profiles. Max 200 results, ordered by fetch date.
 
 ### Save Custom Style
 
-`PUT /styles/{username}`
+`PUT /styles/{id}`
 
-Save a custom style profile from tweet texts. Free, no usage cost. Replaces existing style if one exists with the same label.
+Save a custom style profile from tweet texts. Free, no usage cost. The body `label` controls the saved style label and replaces any existing style with that label.
 
 **Body:**
 
@@ -932,9 +1007,9 @@ Save a custom style profile from tweet texts. Free, no usage cost. Replaces exis
 
 ### Get Cached Style
 
-`GET /styles/{username}`
+`GET /styles/{id}`
 
-Get a cached style profile with full tweet data.
+Get a cached style profile with full tweet data. `id` is the cached style label or username.
 
 **Response (200):** Full style object with `tweets` array.
 
@@ -944,9 +1019,9 @@ Get a cached style profile with full tweet data.
 
 ### Delete Cached Style
 
-`DELETE /styles/{username}`
+`DELETE /styles/{id}`
 
-Delete a cached style. Returns `204 No Content`.
+Delete a cached style by label or username. Returns `204 No Content`.
 
 **Errors:** `404 style_not_found`
 
@@ -980,9 +1055,9 @@ Compare two cached tweet style profiles side by side.
 
 ### Analyze Performance
 
-`GET /styles/{username}/performance`
+`GET /styles/{id}/performance`
 
-Get live engagement metrics for cached tweets. **Consumes API usage credits.**
+Get live engagement metrics for cached tweets for a cached style label or username. **Consumes API usage credits.**
 
 **Response (200):**
 
@@ -1061,6 +1136,17 @@ Manage connected X accounts for confirmation-gated write actions. All endpoints 
 
 **Connecting or re-authenticating an X account is done by the user in the Xquik dashboard** at [xquik.com/dashboard/account](https://xquik.com/dashboard/account), not via this skill. The skill never handles X login material. The agent should direct the user to the dashboard when a new account needs to be connected or an existing session needs to be refreshed.
 
+The OpenAPI surface includes dashboard-owned account connection routes:
+
+```
+POST /x/accounts
+POST /x/account-connection-challenges/{id}/submit
+POST /x/accounts/{id}/reauth
+POST /x/accounts/bulk-retry
+```
+
+Do not call these from this skill. They are listed here only so the skill docs match the public API surface and keep the dashboard-only boundary explicit.
+
 ### List X Accounts
 
 ```
@@ -1102,12 +1188,12 @@ POST /x/tweets
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `account` | string | Yes | Connected X username or account ID |
-| `text` | string | Yes | Tweet text (280 chars, or 25,000 if `is_note_tweet` is true) |
+| `text` | string | No | Tweet text (280 chars, or 25,000 if `is_note_tweet` is true). Required unless `media` is provided |
 | `reply_to_tweet_id` | string | No | Tweet ID to reply to |
 | `attachment_url` | string | No | URL to attach as a card |
 | `community_id` | string | No | Community ID to post into |
 | `is_note_tweet` | boolean | No | Long-form note tweet (up to 25,000 chars) |
-| `media_ids` | string[] | No | Media IDs from `POST /x/media` (max 4 images or 1 video) |
+| `media` | string[] | No | Public image URLs to attach (max 4). `POST /x/media` returns `mediaUrl` values for this field |
 
 **Response:** `{ tweetId, success: true }`
 
@@ -1143,6 +1229,14 @@ DELETE /x/tweets/{id}/like
 
 ```
 POST /x/tweets/{id}/retweet
+```
+
+**Body:** `{ "account": "username" }`
+
+### Unretweet
+
+```
+DELETE /x/tweets/{id}/retweet
 ```
 
 **Body:** `{ "account": "username" }`
@@ -1238,7 +1332,7 @@ POST /x/media
 
 **Body:** FormData with `account` (required), `file` (required), and `is_long_video` (optional boolean). Alternatively, JSON body with `account` (required) and `url` (required, direct media URL) for URL-based upload.
 
-**Response:** Returns a media ID to pass in `media_ids` when creating a tweet.
+**Response:** Returns `mediaId`, `mediaUrl`, and `success`. Pass `mediaUrl` in the `media` array when creating a tweet.
 
 ### Create Community
 
@@ -1273,6 +1367,14 @@ DELETE /x/communities/{id}/join
 ```
 
 **Body:** `{ "account": "username" }`
+
+### Get Write Action Status
+
+```
+GET /x/write-actions/{id}
+```
+
+Check a pending write action by the ID returned from an earlier write response.
 
 ---
 

@@ -41,15 +41,15 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ```
 GET /x/tweets/{id}/replies?cursor=<optional>
--> { replies: Tweet[], nextCursor?: string }
+-> { tweets: Tweet[], has_next_page: boolean, next_cursor?: string }
 ```
 
-The route does not accept a server-side `sort`. Page through and sort locally by `metrics.like_count + metrics.retweet_count`.
+The route does not accept a server-side `sort`. Page through and sort locally by available engagement fields such as `likeCount` and `retweetCount`.
 
 ## Typical flow
 
 1. User supplies a tweet ID or URL.
-2. Page `GET /x/tweets/{id}/replies` via `nextCursor` until you have enough replies (or the thread ends).
+2. Page `GET /x/tweets/{id}/replies` via `next_cursor` until you have enough replies (or the thread ends).
 3. Sort the collected replies client-side by engagement and keep the top N (default 20).
 4. Summarize or list them.
 

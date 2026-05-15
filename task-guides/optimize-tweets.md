@@ -33,7 +33,7 @@ Score drafts against engagement predictors and get targeted rewrite suggestions.
 | Endpoint | Purpose | Cost |
 |---|---|---|
 | POST /compose (step=score) | Score a tweet draft | Compose tier |
-| POST /compose (step=optimize) | Rewrite for higher predicted engagement | Compose tier |
+| POST /compose (step=refine) | Get rewrite guidance for a topic, tone, and goal | Compose tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
@@ -43,27 +43,30 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 POST /compose
 {
   "step": "score",
-  "text": "<draft>"
+  "draft": "<draft>"
 }
--> {
-  score: 0-100,
-  signals: { hook_quality, length_fit, format, media_bonus, reply_bait_risk, link_penalty },
-  suggestions: string[]
-}
+-> { totalChecks, passedCount, topSuggestion, checklist }
 ```
 
 ```
 POST /compose
-{ "step": "optimize", "text": "<draft>", "target_score": 80 }
--> { variants: [{ text, score }] }
+{
+  "step": "refine",
+  "topic": "<topic>",
+  "goal": "engagement",
+  "tone": "casual",
+  "additionalContext": "<draft>"
+}
+-> { compositionGuidance, examplePatterns }
 ```
 
 ## Typical flow
 
 1. Take the user's draft.
 2. Call `step: "score"` first; show current score and signals.
-3. If the user wants a rewrite, call `step: "optimize"`; show 2-3 variants with scores.
-4. User picks the winning text; pass to `post-tweets` for actual publishing.
+3. If the user wants a rewrite, call `step: "refine"` and draft 2-3 variants in chat from the returned guidance.
+4. Score the strongest variant with `step: "score"`.
+5. User picks the winning text; pass to `post-tweets` for actual publishing.
 
 ## Notes
 

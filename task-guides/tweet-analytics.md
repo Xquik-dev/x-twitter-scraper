@@ -37,41 +37,36 @@ Check how a tweet performed on X. Fetches likes, retweets, quotes, replies, view
 | POST /extractions (toolType=favoriters) | Bulk list of users who liked | Per result |
 | POST /extractions (toolType=repost_extractor) | Bulk list of users who retweeted | Per result |
 | POST /extractions (toolType=quote_extractor) | Bulk list of quote tweets | Per result |
-| GET /styles/{username}/performance | Per-tweet engagement for an account over time | Read tier |
+| GET /styles/{id}/performance | Per-tweet engagement for an account over time | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key` header.
 
 ## Per-tweet fetch
 
 ```
-GET /x/tweets/{tweet_id}
+GET /x/tweets/{id}
 ```
 
 Response includes:
 
 ```
 {
-  "id": "...",
-  "text": "...",
-  "author": { "id": "...", "username": "...", "name": "...", "verified": bool },
-  "created_at": "ISO 8601",
-  "metrics": {
-    "like_count": 0,
-    "retweet_count": 0,
-    "quote_count": 0,
-    "reply_count": 0,
-    "bookmark_count": 0,
-    "impression_count": 0,
-    "view_count": 0
+  "tweet": {
+    "id": "...",
+    "text": "...",
+    "createdAt": "ISO 8601",
+    "likeCount": 0,
+    "retweetCount": 0,
+    "quoteCount": 0,
+    "replyCount": 0,
+    "bookmarkCount": 0,
+    "viewCount": 0
   },
-  "media": [...],
-  "is_quote": bool,
-  "is_reply": bool,
-  "lang": "en"
+  "author": { "id": "...", "username": "...", "followers": 0, "verified": bool }
 }
 ```
 
-Treat all IDs as strings. `impression_count` and `view_count` are only populated for tweets from the authenticated account's own timeline (X only exposes impressions to the author).
+Treat all IDs as strings. `viewCount` can be omitted or zero when unavailable.
 
 ## Listing who liked or retweeted
 
@@ -108,7 +103,7 @@ To compare multiple tweets' engagement:
 For longer-term account performance (trends in the account's own tweet engagement over days/weeks):
 
 ```
-GET /styles/{username}/performance
+GET /styles/{id}/performance
 ```
 
 Returns rolling per-tweet metrics for that account.

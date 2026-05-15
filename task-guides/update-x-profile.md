@@ -33,8 +33,8 @@ Change bio, display name, location, website, avatar, or banner on a connected X 
 | Endpoint | Purpose | Cost |
 |---|---|---|
 | PATCH /x/profile | Update bio, name, location, website | Write tier |
-| PUT /x/profile/avatar | Upload a new avatar | Write tier |
-| PUT /x/profile/banner | Upload a new banner | Write tier |
+| PATCH /x/profile/avatar | Upload a new avatar | Write tier |
+| PATCH /x/profile/banner | Upload a new banner | Write tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
@@ -58,7 +58,7 @@ All fields optional. Send only what should change.
 1. `GET /x/accounts` to pick the acting account.
 2. Show the user the **before/after diff** for each field they want to change.
 3. Wait for explicit approval per field (or batch approval of the full diff).
-4. `PATCH /x/profile` for text fields, `PUT` for images.
+4. `PATCH /x/profile` for text fields, `PATCH /x/profile/avatar`, or `PATCH /x/profile/banner` for images.
 
 ## Confirmation
 

@@ -32,7 +32,7 @@ Read tweets from a specific X (Twitter) account - recent posts, likes, or media 
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| GET /x/users/{username} | Look up user by @handle, get numeric ID | Read tier |
+| GET /x/users/{id} | Look up user by @handle, get numeric ID | Read tier |
 | GET /x/users/{id}/tweets | Recent tweets (paginated) | Read tier |
 | GET /x/users/{id}/likes | Tweets the user liked (paginated) | Read tier |
 | GET /x/users/{id}/media | Tweets with media (paginated) | Read tier |
@@ -47,7 +47,7 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key`.
 X endpoints for user data need the numeric user ID, not the @handle. First resolve:
 
 ```
-GET /x/users/{username}
+GET /x/users/{id}
 ```
 
 Response:
@@ -57,13 +57,13 @@ Response:
   "id": "44196397",
   "username": "elonmusk",
   "name": "Elon Musk",
-  "bio": "...",
-  "followers_count": 0,
-  "following_count": 0,
-  "tweet_count": 0,
+  "description": "...",
+  "followers": 0,
+  "following": 0,
+  "statusesCount": 0,
   "verified": bool,
-  "created_at": "ISO 8601",
-  "profile_image_url": "...",
+  "createdAt": "ISO 8601",
+  "profilePicture": "...",
   "location": "..."
 }
 ```
@@ -80,7 +80,7 @@ GET /x/users/{id}/media?cursor=<cursor>
 
 Supported query parameters on `/x/users/{id}/tweets`: `cursor`, `includeReplies`, `includeParentTweet` (no `limit`, no `sort`).
 
-Loop until `nextCursor` is empty. Respect Read tier 10/1s.
+Loop until `has_next_page` is false or `next_cursor` is empty. Respect Read tier 10/1s.
 
 ## Bulk extraction (full history)
 
@@ -99,7 +99,7 @@ POST /extractions
 -> 202 { "id": "<extractionId>", "toolType": "post_extractor", "status": "running" }
 ```
 
-Poll `GET /extractions/{id}` until `completed`. Retrieve with `GET /extractions/{id}/results?cursor=<cursor>`. Export to CSV/XLSX/MD with `GET /extractions/{id}/export?format=csv`.
+Poll `GET /extractions/{id}` until `completed`. Retrieve paginated rows from `GET /extractions/{id}?after=<cursor>`. Export to CSV/XLSX/MD with `GET /extractions/{id}/export?format=csv`.
 
 Same pattern for `user_likes` and `user_media` (both take `targetUsername`).
 

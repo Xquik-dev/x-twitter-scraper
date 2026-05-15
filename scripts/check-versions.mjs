@@ -163,11 +163,11 @@ const contentChecks = [
   {
     path: "skills/x-twitter-scraper/references/workflows.md",
     required: [
-      "| **Get an X Article** by tweet ID | `GET /x/articles/{id}` | 5 credits |",
+      "| **Get an X Article** by tweet ID | `GET /x/articles/{tweetId}` | 5 credits |",
       "| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | 5 credits |",
     ],
     forbidden: [
-      "| **Get an X Article** by tweet ID | `GET /x/articles/{id}` | 7 credits |",
+      "| **Get an X Article** by tweet ID | `GET /x/articles/{tweetId}` | 7 credits |",
       "| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | 7 credits |",
     ],
   },

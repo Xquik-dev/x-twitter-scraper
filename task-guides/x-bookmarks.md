@@ -40,7 +40,7 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ```
 GET /x/bookmarks?cursor=<optional>&folderId=<optional>
--> { tweets: Tweet[], nextCursor?: string }
+-> { tweets: Tweet[], has_next_page: boolean, next_cursor?: string }
 ```
 
 Supported query parameters: `cursor` (opaque), `folderId` (scope to a bookmark folder). The route does not take `account` - the authenticated caller's connected account is used automatically.
@@ -49,7 +49,7 @@ Supported query parameters: `cursor` (opaque), `folderId` (scope to a bookmark f
 
 1. Ask the user to confirm that they want to fetch private bookmarks.
 2. Optionally `GET /x/bookmarks/folders` to list the folders and pick a `folderId`.
-3. Call `GET /x/bookmarks` (with `folderId` if filtering) and paginate via `nextCursor`.
+3. Call `GET /x/bookmarks` (with `folderId` if filtering) and paginate via `next_cursor`.
 4. Summarize, categorize by topic, or export to CSV via `export-tweets-csv`.
 
 ## Security

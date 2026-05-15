@@ -32,7 +32,7 @@ Competitor intelligence: posts, follower growth, engagement benchmarks, and top 
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| GET /x/users/{username} | Profile + follower count snapshot | Read tier |
+| GET /x/users/{id} | Profile + follower count snapshot | Read tier |
 | GET /x/users/{id}/tweets | Recent posts | Read tier |
 | POST /extractions with tool=post_extractor | Bulk historical posts | Per-row |
 | POST /monitors type=account | Continuous monitor per competitor | 21 credits/hour while active |
@@ -43,8 +43,9 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 1. Ask the user for 2-5 competitor handles.
 2. For each:
-   - `GET /x/users/{username}` for follower count, verified status, bio
-   - `GET /x/users/{id}/tweets?limit=50&sort=top` for their best recent posts
+   - `GET /x/users/{id}` for follower count, verified status, bio. The route accepts a username or numeric user ID.
+   - `GET /x/users/{id}/tweets?cursor=<cursor>` for recent posts, then sort client-side by engagement.
+   - Optionally use `GET /x/tweets/search?q=from:<handle> min_faves:<floor>&queryType=Top` to focus on high-engagement posts.
 3. Build a side-by-side table: handle, followers, avg engagement, top tweet.
 4. If the user wants ongoing tracking, show each target and the hourly cost, then create monitors only after explicit approval (see `monitor-accounts`).
 

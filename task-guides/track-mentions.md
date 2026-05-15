@@ -43,7 +43,7 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ```
 GET /x/tweets/search?q=%40xquik&queryType=Latest&limit=50
--> { tweets: Tweet[], nextCursor?: string }
+-> { tweets: Tweet[], has_next_page: boolean, next_cursor?: string }
 ```
 
 Supported query parameters: `q` (URL-encoded search expression), `queryType` (`Latest` or `Top`), `cursor`, `sinceTime`, `untilTime`, `limit`.

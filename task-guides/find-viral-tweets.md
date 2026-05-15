@@ -41,7 +41,7 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ```
 GET /x/tweets/search?q=<q+min_faves:1000+min_retweets:100>&queryType=Top
--> { tweets: Tweet[], nextCursor?: string }
+-> { tweets: Tweet[], has_next_page: boolean, next_cursor?: string }
 ```
 
 Supported query parameters: `q` (URL-encoded), `queryType` (`Latest` or `Top`), `cursor`, `sinceTime`, `untilTime`, `limit`. Engagement floors go inside `q` as standard X search syntax.

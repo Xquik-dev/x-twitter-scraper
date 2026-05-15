@@ -32,26 +32,28 @@ Get trending hashtags and topics from X by country or globally. Read-only.
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| GET /trends | Current trending topics | Read tier |
-| GET /trends?country=<ISO2> | Country-scoped trends | Read tier |
+| GET /x/trends | Current trending topics | Read tier |
+| GET /x/trends?woeid=<woeid> | Region-scoped trends | Read tier |
+| GET /trends?woeid=<woeid> | Alias for `/x/trends` | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ## Quick reference
 
 ```
-GET /trends?country=US
+GET /x/trends?woeid=23424977&count=30
 -> { trends: [{ name, url, volume, context }] }
 ```
 
-- `country`: ISO 3166-1 alpha-2 (`US`, `GB`, `TR`, `JP`, etc.). Omit for global.
+- `woeid`: Yahoo WOEID (`1` worldwide, `23424977` US, `23424975` UK, `23424969` Turkey). Omit for worldwide.
+- `count`: number of trends to return, 1-50.
 - `volume`: approximate tweet count for the trend in the last 24h (may be null for low-volume trends)
 - `context`: a short description of why this is trending (when available)
 
 ## Typical flow
 
-1. Ask the user for a country (or default to US).
-2. Call `GET /trends?country=<code>`.
+1. Ask the user for a region (or default to worldwide).
+2. Call `GET /x/trends?woeid=<woeid>`.
 3. Present the trends as a numbered list with name, volume, and short context.
 4. If the user wants to post about a trend, pass the text to the `write-tweets` or `post-tweets` skill.
 

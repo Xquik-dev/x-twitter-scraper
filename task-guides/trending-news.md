@@ -34,7 +34,7 @@ Breaking news from 7 curated sources, cross-referenced with X for social context
 |---|---|---|
 | GET /radar | Current top news stories | Free (included) |
 | GET /radar?category=tech | Category filter (tech, business, politics, sports, entertainment) | Free |
-| GET /radar/{id}/tweets | Related tweets for a story | Read tier |
+| GET /x/tweets/search | Search X for reactions to selected story terms | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
@@ -49,7 +49,7 @@ GET /radar?category=tech&limit=20
 
 1. Call `GET /radar` with optional `category`.
 2. Show the user a ranked list of headlines with source and short summary.
-3. For any story the user wants more on, call `GET /radar/{id}/tweets` for related X reactions.
+3. For any story the user wants more on, search X with `GET /x/tweets/search?q=<headline terms>&queryType=Top` for related reactions.
 4. Optionally pass a story to `write-tweets` to draft a post responding to the news.
 
 ## Why this is separate from x-trends

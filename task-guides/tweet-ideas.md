@@ -32,8 +32,9 @@ Generate a batch of tweet topic ideas. Each idea is a short prompt - the user (o
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| POST /compose (step=ideas) | Generate topic ideas | Compose tier |
-| GET /trends | Seed ideas from current trends | Read tier |
+| POST /compose (step=compose) | Get content rules and follow-up questions | Compose tier |
+| GET /x/trends | Seed ideas from current X trends | Read tier |
+| GET /radar | Seed ideas from current news and developer trends | Free |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
@@ -42,20 +43,20 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 ```
 POST /compose
 {
-  "step": "ideas",
-  "niche": "indie saas",
-  "count": 10,
-  "seed_from_trends": true
+  "step": "compose",
+  "topic": "indie saas",
+  "goal": "engagement"
 }
--> { ideas: [{ prompt, rationale, format: "thread"|"single"|"poll" }] }
+-> { contentRules, followUpQuestions, scorerWeights, topPenalties }
 ```
 
 ## Typical flow
 
 1. Ask the user for their niche.
-2. Generate 10 ideas.
-3. Show as a numbered list; user picks one.
-4. Pass the chosen idea's `prompt` to `write-tweets` to draft.
+2. Optionally fetch `GET /x/trends` or `GET /radar` for timely context.
+3. Call `POST /compose` with `step: "compose"` for content rules.
+4. Generate 10 short idea prompts in chat using only the user goal plus fetched trend data.
+5. Pass the chosen prompt to `write-tweets` to draft.
 
 ## Related
 

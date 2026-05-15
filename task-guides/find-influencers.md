@@ -34,7 +34,7 @@ Find active X accounts in a niche by bio/handle search with follower and activit
 |---|---|---|
 | POST /extractions with toolType=people_search | User search by keyword/bio | Per-row |
 | POST /extractions/estimate | Preview credit cost before running | Free |
-| GET /x/users/{username} | Profile snapshot for shortlisted accounts | Read tier |
+| GET /x/users/{id} | Profile snapshot for shortlisted accounts | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
@@ -57,8 +57,8 @@ The server only accepts `toolType` and `searchQuery`. Follower-count filters and
 2. Call `POST /extractions/estimate`, show the cost.
 3. On approval, `POST /extractions`.
 4. Poll `GET /extractions/{id}` until `completed`.
-5. Retrieve `GET /extractions/{id}/results?cursor=<cursor>` and filter locally by `followers_count` range and `verified` flag.
-6. Optionally enrich the shortlist with `GET /x/users/{username}` for recency signals.
+5. Retrieve `GET /extractions/{id}?after=<cursor>` and filter locally by `followers_count` range and `verified` flag.
+6. Optionally enrich the shortlist with `GET /x/users/{id}` for recency signals. The `{id}` segment accepts a username or numeric user ID.
 7. Export via `GET /extractions/{id}/export?format=csv` if raw data is needed.
 
 ## Ethics note

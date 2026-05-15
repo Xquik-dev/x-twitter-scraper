@@ -49,13 +49,13 @@ POST /x/tweets
   "attachment_url": "<optional URL to card>",
   "community_id": "<optional>",
   "is_note_tweet": false,
-  "media_ids": ["<from POST /x/media>", "..."]
+  "media": ["<public image URL or mediaUrl from POST /x/media>"]
 }
 ```
 
 Rules for fields:
 - `text`: 280 chars by default, up to 25,000 if `is_note_tweet: true`
-- `media_ids`: max 4 images or 1 video per tweet
+- `media`: max 4 public image URLs per tweet
 - `account`: the connected X username or ID that will post; listed via `GET /x/accounts`
 
 For a reply: set `reply_to_tweet_id` to the target tweet ID.
@@ -64,9 +64,9 @@ For a quote tweet: include the quoted tweet URL in `text`.
 ## Typical flow
 
 1. List connected accounts with `GET /x/accounts` to find the `account` to post from.
-2. If the tweet needs media, upload it with `POST /x/media`, capture the returned `id`s.
+2. If the tweet needs media, upload it with `POST /x/media`, capture the returned `mediaUrl` values.
 3. Show the user the full payload (text, media, reply target, community) and wait for explicit approval.
-4. Call `POST /x/tweets`. Response returns `{ id, created_at }`.
+4. Call `POST /x/tweets`. Response returns `{ tweetId, success: true }`.
 5. If the user wants to undo, call `DELETE /x/tweets/{id}`.
 
 ## Confirmation rules

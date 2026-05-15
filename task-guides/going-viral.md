@@ -32,12 +32,12 @@ Full viral-content workflow: find what is working right now, draft in the user's
 
 | Purpose | Endpoint |
 |---|---|
-| Recent viral references | GET /x/tweets/search?sort=top&min_faves=5000 |
-| User style | GET /styles/{username} |
-| Ideas | POST /compose (step=ideas) |
+| Recent viral references | GET /x/tweets/search?q=<topic+min_faves:5000>&queryType=Top |
+| User style | GET /styles/{id} |
+| Ideas | POST /compose (step=compose) |
 | Draft | POST /compose |
 | Score | POST /compose (step=score) |
-| Optimize | POST /compose (step=optimize) |
+| Refine | POST /compose (step=refine) |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 

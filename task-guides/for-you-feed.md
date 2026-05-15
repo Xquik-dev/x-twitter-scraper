@@ -40,7 +40,7 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ```
 GET /x/timeline?cursor=<optional>&seenTweetIds=<comma-separated>
--> { tweets: Tweet[], nextCursor?: string }
+-> { tweets: Tweet[], has_next_page: boolean, next_cursor?: string }
 ```
 
 Supported query parameters: `cursor` (opaque), `seenTweetIds` (comma-separated tweet IDs the client has already displayed, so the server can suppress them). The endpoint does not take `account`, `type`, or `limit`.
@@ -50,7 +50,7 @@ Supported query parameters: `cursor` (opaque), `seenTweetIds` (comma-separated t
 1. Ask the user to confirm that they want to fetch their private home timeline.
 2. Call `GET /x/timeline` with no cursor on first fetch.
 3. Store displayed tweet IDs. On subsequent calls pass them as `seenTweetIds` to reduce duplication.
-4. Paginate via `nextCursor`. Summarize or present as a reading list.
+4. Paginate via `next_cursor`. Summarize or present as a reading list.
 
 ## Security
 

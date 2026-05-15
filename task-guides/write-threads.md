@@ -32,7 +32,7 @@ Draft multi-tweet threads on X. This skill produces the thread text; publishing 
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| POST /compose with mode=thread | Draft a full thread | Compose tier |
+| POST /compose (step=compose/refine) | Get guidance for the thread topic and tone | Compose tier |
 | POST /drafts | Save a thread draft | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
@@ -42,19 +42,18 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 ```
 POST /compose
 {
-  "mode": "thread",
-  "prompt": "explain why static sites beat SPAs for blogs",
-  "tone": "casual",
-  "target_tweet_count": 6
+  "step": "compose",
+  "topic": "why static sites beat SPAs for blogs",
+  "goal": "authority"
 }
--> { thread: [{ text }], total_chars }
+-> { contentRules, followUpQuestions, scorerWeights, topPenalties }
 ```
 
-Each `text` is already within the 280-char limit. The response preserves a natural narrative flow (hook, arguments, conclusion).
+Use the returned guidance to draft the thread in chat. Keep each tweet within the 280-char limit and preserve a natural narrative flow (hook, arguments, conclusion).
 
 ## Publishing flow
 
-1. `POST /compose` with `mode: "thread"`.
+1. `POST /compose` with `step: "compose"` for the topic.
 2. Show all tweets in order to the user and wait for approval.
 3. For each tweet in sequence:
    - Post the first via `post-tweets` skill.

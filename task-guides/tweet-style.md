@@ -32,16 +32,16 @@ Profile the writing voice of any public X account: tone, length preferences, top
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| GET /styles/{username} | Cached style profile | Read tier |
-| POST /styles/compare | Compare two handles' styles | Read tier |
-| GET /styles/{username}/performance | Which formats earn the most engagement | Read tier |
+| GET /styles/{id} | Cached style profile | Read tier |
+| GET /styles/compare?username1=A&username2=B | Compare two handles' styles | Read tier |
+| GET /styles/{id}/performance | Which formats earn the most engagement | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ## Quick reference
 
 ```
-GET /styles/@naval
+GET /styles/{id}
 -> {
   tone, avg_length, top_topics, format_breakdown,
   signature_phrases, engagement_profile
@@ -51,15 +51,14 @@ GET /styles/@naval
 ## Typical flow
 
 1. Ask for a handle.
-2. `GET /styles/{username}`.
+2. `GET /styles/{id}`.
 3. Summarize: tone, typical length, favorite topics, signature phrases.
 4. If user wants to write in that style, pass the profile as context to `write-tweets`.
 
 ## Compare two handles
 
 ```
-POST /styles/compare
-{ "a": "@naval", "b": "@elonmusk" }
+GET /styles/compare?username1=naval&username2=elonmusk
 ```
 
 ## Security

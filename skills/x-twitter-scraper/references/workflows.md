@@ -156,9 +156,9 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `webhoo
 | Goal | Endpoint | Cost |
 |------|----------|------|
 | **Get a single tweet** by ID/URL | `GET /x/tweets/{id}` | 1 credit |
-| **Get an X Article** by tweet ID | `GET /x/articles/{id}` | 5 credits |
+| **Get an X Article** by tweet ID | `GET /x/articles/{tweetId}` | 5 credits |
 | **Search tweets** by keyword/hashtag | `GET /x/tweets/search?q=...` | 1 credit/tweet |
-| **Get a user profile** | `GET /x/users/{username}` | 1 credit |
+| **Get a user profile** | `GET /x/users/{id}` | 1 credit |
 | **Get user's recent tweets** | `GET /x/users/{id}/tweets` | 1 credit/tweet |
 | **Get user's liked tweets** | `GET /x/users/{id}/likes` | 1 credit/result |
 | **Get user's media tweets** | `GET /x/users/{id}/media` | 1 credit/result |

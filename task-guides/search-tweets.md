@@ -36,7 +36,7 @@ Search X (Twitter) tweets by keyword, phrase, hashtag, from-user filter, date ra
 | POST /extractions/estimate | Estimate bulk search cost before running | Free |
 | POST /extractions (toolType=tweet_search_extractor) | Bulk search up to 1,000 tweets | Per-result credits |
 | GET /extractions/{id} | Poll job status | Free |
-| GET /extractions/{id}/results | Retrieve paginated results | Free |
+| GET /extractions/{id} | Retrieve paginated results with `after` cursor | Free |
 | GET /extractions/{id}/export | Export CSV/XLSX/MD | Free |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key` header.
@@ -69,7 +69,7 @@ GET /x/tweets/search?q=<url-encoded query>&queryType=Latest&cursor=<optional>
 
 Supported query parameters: `q` (URL-encoded), `queryType` (`Latest` or `Top`), `cursor`, `sinceTime`, `untilTime`, `limit`.
 
-Response: `{ tweets: [...], nextCursor: "..." }`. Loop until `nextCursor` is empty or you hit the number you need.
+Response: `{ tweets: [...], has_next_page: true, next_cursor: "..." }`. Loop until `has_next_page` is false or you hit the number you need.
 
 ## Bulk search (up to 1,000 rows)
 
@@ -88,13 +88,13 @@ POST /extractions
 -> 202 { "id": "<extractionId>", "toolType": "tweet_search_extractor", "status": "running" }
 ```
 
-Poll `GET /extractions/{id}` until `status: "completed"` (or `failed`). Then paginate `GET /extractions/{id}/results?cursor=<cursor>`.
+Poll `GET /extractions/{id}` until `status: "completed"` (or `failed`). Then paginate `GET /extractions/{id}?after=<cursor>`.
 
 To export: `GET /extractions/{id}/export?format=csv` (or `xlsx`, `md`). Cap 50,000 rows per export.
 
 ## Cursors
 
-`nextCursor` is opaque. Never parse it, decode it, or construct it by hand. Pass it back as the `cursor` query parameter.
+`next_cursor` is opaque. Never parse it, decode it, or construct it by hand. Pass it back as the `cursor` query parameter.
 
 ## Error handling
 

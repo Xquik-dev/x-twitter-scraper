@@ -414,40 +414,40 @@ interface FollowerCheck {
 
 interface UserTweetsResponse {
   tweets: Tweet[];
-  hasMore: boolean;
-  nextCursor?: string;
+  has_next_page: boolean;
+  next_cursor?: string;
 }
 
 interface UserLikesResponse {
   tweets: Tweet[];
-  hasMore: boolean;
-  nextCursor?: string;
+  has_next_page: boolean;
+  next_cursor?: string;
 }
 
 interface UserMediaResponse {
   tweets: Tweet[];
-  hasMore: boolean;
-  nextCursor?: string;
+  has_next_page: boolean;
+  next_cursor?: string;
 }
 
 interface TweetFavoritersResponse {
   users: UserProfile[];
-  hasMore: boolean;
-  nextCursor?: string;
+  has_next_page: boolean;
+  next_cursor?: string;
 }
 
 interface FollowersYouKnowResponse {
   users: UserProfile[];
-  hasMore: boolean;
-  nextCursor?: string;
+  has_next_page: boolean;
+  next_cursor?: string;
 }
 
 // ─── Bookmarks & Timeline ───────────────────────────────
 
 interface BookmarksResponse {
   tweets: Tweet[];
-  hasMore: boolean;
-  nextCursor?: string;
+  has_next_page: boolean;
+  next_cursor?: string;
 }
 
 interface BookmarkFolder {
@@ -461,20 +461,20 @@ interface BookmarkFoldersResponse {
 
 interface NotificationsResponse {
   notifications: Notification[];
-  hasMore: boolean;
-  nextCursor?: string;
+  has_next_page: boolean;
+  next_cursor?: string;
 }
 
 interface TimelineResponse {
   tweets: Tweet[];
-  hasMore: boolean;
-  nextCursor?: string;
+  has_next_page: boolean;
+  next_cursor?: string;
 }
 
 interface DmHistoryResponse {
   messages: DmMessage[];
-  hasMore: boolean;
-  nextCursor?: string;
+  has_next_page: boolean;
+  next_cursor?: string;
 }
 
 interface DmMessage {
@@ -717,7 +717,7 @@ The REST API and MCP server use different field names for the same data. Map the
 | **UserProfile** | `following` | `followingCount` |
 | **FollowerCheck** | `isFollowing` / `isFollowedBy` | `following` / `followedBy` |
 
-**MCP `get-user-info` returns a subset** of the full `UserProfile` type. Fields not returned by MCP: `verified`, `location`, `createdAt`, `statusesCount`. Use the REST API `GET /x/users/{username}` for the complete profile.
+**MCP `get-user-info` returns a subset** of the full `UserProfile` type. Fields not returned by MCP: `verified`, `location`, `createdAt`, `statusesCount`. Use the REST API `GET /x/users/{id}` for the complete profile.
 
 ## MCP Output Schemas
 
@@ -734,7 +734,7 @@ interface McpUserInfo {
   followingCount: number;     // Number of accounts followed
   profilePicture: string;     // Profile picture URL
   // Not returned: verified, location, createdAt, statusesCount
-  // Use REST GET /x/users/{username} for the full profile
+  // Use REST GET /x/users/{id} for the full profile
 }
 
 // ─── MCP: search-tweets ─────────────────────────────────
@@ -1005,12 +1005,12 @@ interface ConnectedXAccount {
 
 interface CreateTweetRequest {
   account: string;            // Connected X username or account ID
-  text: string;               // Tweet text (280 chars, or 25,000 if is_note_tweet)
+  text?: string;              // Tweet text (required unless media is provided)
   reply_to_tweet_id?: string; // Tweet ID to reply to
   attachment_url?: string;    // URL to attach as card
   community_id?: string;      // Community ID to post into
   is_note_tweet?: boolean;    // Long-form note tweet (up to 25,000 chars)
-  media_ids?: string[];       // Media IDs from POST /x/media (max 4 images or 1 video)
+  media?: string[];           // Public image URLs, such as mediaUrl from POST /x/media
 }
 
 interface CreateTweetResponse {

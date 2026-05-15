@@ -75,9 +75,9 @@ Use `explore` first to find endpoints, then `xquik` to call them.
 | Goal | Endpoint (via `xquik`) |
 |------|------------------------|
 | Single tweet by ID or URL | `GET /api/v1/x/tweets/{id}` |
-| Full X Article by tweet ID | `GET /api/v1/x/articles/{id}` |
+| Full X Article by tweet ID | `GET /api/v1/x/articles/{tweetId}` |
 | Search tweets by keyword/hashtag | `GET /api/v1/x/tweets/search?q=...` |
-| User profile, bio, follower counts | `GET /api/v1/x/users/{username}` |
+| User profile, bio, follower counts | `GET /api/v1/x/users/{id}` (`id` can be username or numeric ID) |
 | Download media from tweets | `POST /api/v1/x/media/download` |
 | Check follow relationship | `GET /api/v1/x/followers/check?source=A&target=B` |
 | Trending topics by region (X) | `GET /api/v1/trends?woeid=1` |
@@ -90,11 +90,12 @@ Use `explore` first to find endpoints, then `xquik` to call them.
 | Compose/draft a tweet | `POST /api/v1/compose` (3-step: compose, refine, score) |
 | Link your X username | `PUT /api/v1/account/x-identity` |
 | Analyze tweet style | `POST /api/v1/styles` |
-| Get cached style | `GET /api/v1/styles/{username}` |
+| Get cached style | `GET /api/v1/styles/{id}` |
 | Compare two styles | `GET /api/v1/styles/compare` |
 | Post a tweet | `POST /api/v1/x/tweets` (confirmation required) |
 | Like/unlike a tweet | `POST`/`DELETE /api/v1/x/tweets/{id}/like` (confirmation required) |
 | Retweet | `POST /api/v1/x/tweets/{id}/retweet` (confirmation required) |
+| Unretweet | `DELETE /api/v1/x/tweets/{id}/retweet` (confirmation required) |
 | Follow/unfollow | `POST`/`DELETE /api/v1/x/users/{id}/follow` (confirmation required) |
 | Send a DM | `POST /api/v1/x/dm/{userId}` (confirmation required) |
 | Upload media | `POST /api/v1/x/media` (confirmation required before use in a post or profile change) |
@@ -105,6 +106,10 @@ Use `explore` first to find endpoints, then `xquik` to call them.
 | Get user's media tweets | `GET /api/v1/x/users/{id}/media` |
 | Get tweet favoriters (who liked) | `GET /api/v1/x/tweets/{id}/favoriters` |
 | Get mutual followers | `GET /api/v1/x/users/{id}/followers-you-know` |
+| Get followers/following | `GET /api/v1/x/users/{id}/followers` / `GET /api/v1/x/users/{id}/following` |
+| Get tweet quotes/replies/retweeters/thread | `GET /api/v1/x/tweets/{id}/quotes`, `/replies`, `/retweeters`, `/thread` |
+| Read X Lists | `GET /api/v1/x/lists/{id}/members`, `/followers`, `/tweets` |
+| Read X Communities | `GET /api/v1/x/communities/search`, `/tweets`, `/{id}/info`, `/{id}/members`, `/{id}/moderators`, `/{id}/tweets` |
 | Get bookmarks | `GET /api/v1/x/bookmarks` (private; confirmation required) |
 | Get bookmark folders | `GET /api/v1/x/bookmarks/folders` |
 | Get notifications | `GET /api/v1/x/notifications` (private; confirmation required) |
@@ -122,7 +127,7 @@ Use `POST /api/v1/extractions` ONLY for bulk data that simpler endpoints cannot 
 | **Run a giveaway** | `GET /account` -> `POST /draws` |
 | **Bulk extraction** | `POST /extractions/estimate` -> `POST /extractions` -> `GET /extractions/{id}` |
 | **Compose optimized tweet** | `POST /compose` (step=compose -> refine -> score) |
-| **Analyze tweet style** | `POST /styles` -> `GET /styles/{username}` -> `POST /compose` with `styleUsername` |
+| **Analyze tweet style** | `POST /styles` -> `GET /styles/{id}` -> `POST /compose` with `styleUsername` |
 | **Post a tweet** | `GET /x/accounts` -> `POST /x/tweets` with `account` + `text` |
 | **Get trending news** | `GET /radar` (free, all 7 sources, via `xquik` tool) -> `POST /compose` with trending topic |
 | **Open support ticket** | `POST /support/tickets` -> `GET /support/tickets/{id}` |
@@ -138,7 +143,7 @@ Use `POST /api/v1/extractions` ONLY for bulk data that simpler endpoints cannot 
 | Not checking subscription before paid calls | Attempt the requested call. On 402, explain the billing issue and ask before any checkout or top-up action |
 | Passing API keys in code | Auth is injected automatically. Never include keys |
 | Using `explore` for API calls | `explore` is read-only spec search. Use `xquik` for actual API calls |
-| Looking up follow/DM by username | Follow and DM endpoints need numeric user ID. Look up via `GET /x/users/{username}` first |
+| Looking up follow/DM by username | Follow and DM endpoints need numeric user ID. Look up via `GET /x/users/{id}` first; that route accepts usernames and IDs |
 
 ## Unsupported Operations
 

@@ -34,7 +34,7 @@ Send and read direct messages through a connected X account. One-to-one only - n
 |---|---|---|
 | POST /x/dm/{userId} | Send a DM to a user (numeric ID) | Write tier |
 | GET /x/dm/{userId}/history | Read DM history with a user | Read tier |
-| GET /x/users/{username} | Resolve @handle to numeric user ID | Read tier |
+| GET /x/users/{id} | Resolve @handle to numeric user ID | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
@@ -49,14 +49,14 @@ POST /x/dm/{userId}
 -> { message_id, sent_at }
 ```
 
-The path parameter is the numeric user ID of the recipient. Resolve a @handle first with `GET /x/users/{username}`. Optional body fields: `media_ids` (string array) and `reply_to_message_id`.
+The path parameter is the numeric user ID of the recipient. Resolve a @handle first with `GET /x/users/{id}`; the lookup route accepts usernames and numeric IDs. Optional body fields: `media_ids` (string array) and `reply_to_message_id`.
 
 The recipient must allow DMs from people they don't follow, or must follow the sender.
 
 ## Typical flow
 
 1. `GET /x/accounts` to pick the sending account.
-2. `GET /x/users/{username}` to resolve the recipient handle into a numeric `id`.
+2. `GET /x/users/{id}` to resolve the recipient handle into a numeric `id`.
 3. Optionally `GET /x/dm/{userId}/history?cursor=<optional>` to provide context, only after the user confirms this private read.
 4. Show the user the exact DM text, recipient, and sender account. Wait for explicit approval.
 5. `POST /x/dm/{userId}`.

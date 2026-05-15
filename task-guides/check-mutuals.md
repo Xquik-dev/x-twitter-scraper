@@ -41,7 +41,7 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 1. Ask for two handles.
 2. For A vs B mutual check: `GET /x/followers/check?source=<a>&target=<b>` and reverse. `source` and `target` may be handles or numeric IDs.
-3. For A's-followers-that-also-follow-B: resolve B to a numeric `id` via `GET /x/users/{username}`, then `GET /x/users/{id}/followers-you-know` through a connected account context.
+3. For A's-followers-that-also-follow-B: resolve B to a numeric ID via `GET /x/users/{id}` (the lookup route accepts a username), then `GET /x/users/{id}/followers-you-know` through a connected account context.
 4. Present as a small list with bios.
 
 ## Security

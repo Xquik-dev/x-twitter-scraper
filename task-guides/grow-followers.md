@@ -32,19 +32,19 @@ Data-driven follower growth advisory. Analyzes the user's recent tweets, their e
 
 | Endpoint | Purpose | Cost |
 |---|---|---|
-| GET /x/users/{username} | Baseline follower count + numeric ID | Read tier |
+| GET /x/users/{id} | Baseline follower count + numeric ID | Read tier |
 | GET /x/users/{id}/tweets | Recent posts for pattern analysis (cursor-paginated) | Read tier |
-| GET /styles/{username}/performance | Format-by-engagement breakdown | Read tier |
+| GET /styles/{id}/performance | Format-by-engagement breakdown | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ## Typical flow
 
 1. Ask the user for their handle.
-2. `GET /x/users/{username}` to resolve to a numeric `id` and capture the baseline follower count.
+2. `GET /x/users/{id}` to resolve to a numeric `id` and capture the baseline follower count.
 3. Page `GET /x/users/{id}/tweets?cursor=<>` (supported parameters: `cursor`, `includeReplies`, `includeParentTweet`) until you have ~100 recent tweets.
 4. Compute: average engagement rate, best-performing format, best day/time, ratio of replies-to-posts-to-threads.
-5. Call `/styles/{username}/performance` for a server-side breakdown.
+5. Call `/styles/{id}/performance` for a server-side breakdown.
 6. Present 3-5 concrete recommendations (e.g., "Your threads get 4x the engagement of single tweets. Post 1-2 threads per week.").
 
 ## What this skill will not do

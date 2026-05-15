@@ -4,7 +4,7 @@ description: Look up an X/Twitter user profile by username
 
 Look up the X/Twitter user profile for "$ARGUMENTS".
 
-Use the `xquik` MCP tool to call `GET /api/v1/x/users/$ARGUMENTS`.
+Use the `xquik` MCP tool to call `GET /api/v1/x/users/{id}`, replacing `{id}` with the username or numeric user ID from the user.
 
 Display the profile:
 - **Name** (@username)
