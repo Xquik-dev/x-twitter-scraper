@@ -49,7 +49,7 @@ POST /x/tweets
   "attachment_url": "<optional URL to card>",
   "community_id": "<optional>",
   "is_note_tweet": false,
-  "media": ["<public image URL or mediaUrl from POST /x/media>"]
+  "media": ["<public image URL or uploaded mediaUrl>"]
 }
 ```
 
