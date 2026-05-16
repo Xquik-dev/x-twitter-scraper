@@ -135,14 +135,11 @@ See [workflows](references/workflows.md) and [event delivery](references/webhook
 
 ## Authentication
 
-Use the Xquik API key only:
+Use the Xquik API key only. To verify authentication, send `GET /account`
+against the Base URL with the `x-api-key: $XQUIK_API_KEY` header. Do not paste
+API keys into chat, logs, shell history, issues, or docs.
 
-```bash
-curl https://xquik.com/api/v1/account \
-  -H "x-api-key: $XQUIK_API_KEY"
-```
-
-If the user needs to connect or re-authenticate an X account, direct them to [xquik.com/dashboard/account](https://xquik.com/dashboard/account). Do not collect login material in chat.
+If the user needs to connect or re-authenticate an X account, direct them to the account page in the Xquik dashboard. Do not collect login material in chat.
 
 ## Error Handling
 

@@ -15,7 +15,7 @@ that points at the existing endpoint.
 - Categories: Social Media, Automation, Search, Data, Monitoring, Web Scraping, AI Agents
 - Auth header: `x-api-key`
 - Auth value template: `{XQUIK_API_KEY}`
-- API key source: `https://dashboard.xquik.com/account`
+- API key source: Xquik dashboard account page
 
 ## Submission Flow
 

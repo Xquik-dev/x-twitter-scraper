@@ -10,7 +10,7 @@
   "uiHints": {
     "apiKey": {
       "label": "Xquik API Key",
-      "help": "Get your API key at dashboard.xquik.com/account",
+      "help": "Get your API key from your Xquik dashboard account page",
       "sensitive": true,
       "placeholder": "xq_..."
     }

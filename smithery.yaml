@@ -7,5 +7,5 @@ startCommand:
     properties:
       apiKey:
         type: string
-        description: "Xquik API key from https://dashboard.xquik.com/account"
+        description: "Xquik API key from your dashboard account page"
   url: "https://xquik.com/mcp"

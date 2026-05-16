@@ -1134,7 +1134,7 @@ Returns a checkout URL for subscribing or managing the subscription. If already 
 
 Manage connected X accounts for confirmation-gated write actions. All endpoints are free (no usage cost).
 
-**Connecting or re-authenticating an X account is done by the user in the Xquik dashboard** at [xquik.com/dashboard/account](https://xquik.com/dashboard/account), not via this skill. The skill never handles X login material. The agent should direct the user to the dashboard when a new account needs to be connected or an existing session needs to be refreshed.
+**Connecting or re-authenticating an X account is done by the user in the Xquik dashboard**, not via this skill. The skill never handles X login material. The agent should direct the user to the dashboard account page when a new account needs to be connected or an existing session needs to be refreshed.
 
 The OpenAPI surface includes dashboard-owned account connection routes:
 

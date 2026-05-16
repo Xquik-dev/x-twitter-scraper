@@ -17,7 +17,7 @@
         {
           "name": "x-api-key",
           "value": "{XQUIK_API_KEY}",
-          "description": "Xquik API key from https://dashboard.xquik.com/account",
+          "description": "Xquik API key from your dashboard account page",
           "isRequired": true,
           "isSecret": true,
           "variables": {

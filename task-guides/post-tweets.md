@@ -93,7 +93,7 @@ Only retry `429` and `5xx`. Never retry other 4xx.
 
 ## Connecting accounts
 
-This skill assumes an account is already connected. New connections are performed by the user at [xquik.com/dashboard/account](https://xquik.com/dashboard/account). The skill never collects X login material.
+This skill assumes an account is already connected. New connections are performed by the user in the Xquik dashboard account page. The skill never collects X login material.
 
 ## Security notes
 
