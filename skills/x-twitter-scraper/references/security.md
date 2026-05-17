@@ -8,6 +8,7 @@ This reference expands the safety rules in `SKILL.md`. The skill integrates with
 - Never request X passwords, 2FA codes, recovery codes, cookies, session tokens, browser exports, or account backup files.
 - If a user pastes X login material, do not repeat it. Tell them to rotate it and connect the account through the dashboard.
 - Do not print API keys or include them in logs, examples, issue text, or responses.
+- Do not pass API keys as command-line arguments. Prefer clients that store headers in config or OAuth, because local process listings can expose argv values.
 
 ## User Consent
 

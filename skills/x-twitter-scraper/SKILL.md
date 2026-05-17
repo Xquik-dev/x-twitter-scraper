@@ -135,9 +135,9 @@ See [workflows](references/workflows.md) and [event delivery](references/webhook
 
 ## Authentication
 
-Use the Xquik API key only. To verify authentication, send `GET /account`
+Use the Xquik API key only. To verify authentication, send `GET /credits`
 against the Base URL with the `x-api-key: $XQUIK_API_KEY` header. Do not paste
-API keys into chat, logs, shell history, issues, or docs.
+API keys into chat, logs, shell history, process arguments, issues, or docs.
 
 If the user needs to connect or re-authenticate an X account, direct them to the account page in the Xquik dashboard. Do not collect login material in chat.
 

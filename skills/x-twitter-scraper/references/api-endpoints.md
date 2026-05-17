@@ -6,7 +6,6 @@ All requests require the `x-api-key` header. All responses are JSON. HTTPS only.
 
 ## Table of Contents
 
-- [Account](#account)
 - [API Keys](#api-keys)
 - [Monitors](#monitors)
 - [Events](#events)
@@ -20,61 +19,11 @@ All requests require the `x-api-key` header. All responses are JSON. HTTPS only.
 - [Compose](#compose)
 - [Drafts](#drafts)
 - [Tweet Style Cache](#tweet-style-cache)
-- [Account Identity](#account-identity)
 - [Subscribe](#subscribe)
 - [X Accounts (Connected)](#x-accounts-connected)
 - [X Write](#x-write)
 - [Credits](#credits)
 - [Support](#support)
-
----
-
-## Account
-
-### Get Account
-
-```
-GET /account
-```
-
-Returns account status, monitor billing details, credit balance, and X identity.
-
-**Response:**
-```json
-{
-  "plan": "active",
-  "monitorsAllowed": 9007199254740991,
-  "monitorsUsed": 1,
-  "monitorBilling": {
-    "activeDailyEstimate": "500",
-    "activeHourlyBurn": "21",
-    "creditsPerActiveMonitorDay": "500",
-    "creditsPerActiveMonitorHour": "21",
-    "eventsIncluded": true,
-    "instantCheckIntervalSeconds": 1,
-    "unlimitedSlots": true
-  },
-  "creditInfo": {
-    "balance": "77000",
-    "lifetimePurchased": "140000",
-    "lifetimeUsed": "63000",
-    "autoTopupEnabled": false,
-    "autoTopupAmountDollars": 10,
-    "autoTopupThreshold": "50000"
-  },
-  "xUsername": "elonmusk"
-}
-```
-
-### Update Account
-
-```
-PATCH /account
-```
-
-Update account locale. Session auth only (not API key).
-
-**Body:** `{ "locale": "en" | "tr" | "es" }`
 
 ---
 
@@ -1081,33 +1030,6 @@ Get live engagement metrics for cached tweets for a cached style label or userna
 ```
 
 **Errors:** `404 style_not_found`
-
----
-
-## Account Identity
-
-### Set X Identity
-
-`PUT /account/x-identity`
-
-Link your X username to your Xquik account. Required for own-account detection in style analysis.
-
-**Request body:**
-
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `username` | string | Yes | Your X username (without @) |
-
-**Response (200):**
-
-```json
-{
-  "success": true,
-  "xUsername": "elonmusk"
-}
-```
-
-**Errors:** `400 invalid_input`
 
 ---
 

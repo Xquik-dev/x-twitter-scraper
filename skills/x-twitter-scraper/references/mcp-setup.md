@@ -16,36 +16,9 @@ Claude.ai supports MCP connectors natively via OAuth. Add Xquik as a connector f
 
 ## Claude Desktop
 
-Claude Desktop only supports stdio transport, so it needs a local stdio-to-HTTP bridge. The recommended setup avoids runtime package fetches: **install the bridge globally first, then invoke the pinned binary directly.**
+Claude.ai (web) is the recommended Claude client because it supports Xquik via OAuth in the hosted UI. Avoid local bridge setups that pass API keys in command-line arguments; local process listings can expose argv values.
 
-> **About `mcp-remote`:** [`mcp-remote`](https://www.npmjs.com/package/mcp-remote) is an open-source stdio-to-HTTP bridge (MIT license, [source on GitHub](https://github.com/geelen/mcp-remote)) maintained by the MCP ecosystem. It translates stdio to StreamableHTTP - it does not run user code, access your filesystem, or modify your system. Always pin the version (`@0.1.38`) and audit the package on npm before installing.
-
-### Step 1: Install the bridge globally (one-time, audited)
-
-```bash
-npm install -g mcp-remote@0.1.38
-```
-
-### Step 2: Add to `claude_desktop_config.json`
-
-```json
-{
-  "mcpServers": {
-    "xquik": {
-      "command": "mcp-remote",
-      "args": [
-        "https://xquik.com/mcp",
-        "--header",
-        "x-api-key:${XQUIK_API_KEY}"
-      ]
-    }
-  }
-}
-```
-
-> Set the `XQUIK_API_KEY` environment variable before launching Claude Desktop, or replace `${XQUIK_API_KEY}` with your actual API key.
-
-> **Prefer a hosted option?** Claude.ai (web) supports Xquik natively via OAuth - see the section above. No local bridge required.
+For desktop workflows, use Claude Code, Cursor, VS Code, Windsurf, OpenCode, or another HTTP MCP client that stores headers in a config file or secure settings store.
 
 ## Claude Code
 
@@ -191,7 +164,7 @@ The agent sends structured API requests through the MCP server, which handles au
 | Workflow | Steps (via `xquik` tool) |
 |----------|--------------------------|
 | Set up real-time alerts | Confirm target, event types, destination, and ongoing cost -> `POST /monitors` -> `POST /webhooks` -> `POST /webhooks/{id}/test` |
-| Run a giveaway | `GET /account` -> `POST /draws` |
+| Run a giveaway | Confirm tweet URL and rules -> `POST /draws` |
 | Bulk extraction | `POST /extractions/estimate` -> `POST /extractions` -> `GET /extractions/{id}` |
 | Compose optimized tweet | `POST /compose` (step=compose -> refine -> score) |
 | Billing checkout | Confirm plan or amount -> `POST /subscribe` or `POST /credits/topup` |

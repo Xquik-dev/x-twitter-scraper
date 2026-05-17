@@ -142,4 +142,4 @@ Check balance: `GET /credits` - returns `balance`, `lifetimePurchased`, `lifetim
 
 Use `POST /credits/topup` to create a hosted checkout session, `GET /credits/topup/status?session_id=...` to poll checkout completion, and `POST /credits/quick-topup` to charge a saved payment method after explicit confirmation of the exact amount. Quick top-up returns `charged`, `no_payment_method`, or `requires_action`.
 
-Automatic top-up can be configured from the dashboard. `GET /credits` and `GET /account` expose whether it is enabled, the dollar amount, and the trigger threshold.
+Automatic top-up can be configured from the dashboard. `GET /credits` exposes whether it is enabled, the dollar amount, and the trigger threshold.

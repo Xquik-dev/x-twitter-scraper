@@ -83,12 +83,12 @@ Use `explore` first to find endpoints, then `xquik` to call them.
 | Trending topics by region (X) | `GET /api/v1/trends?woeid=1` |
 | Trending news from 7 sources | `GET /api/v1/radar` (via `xquik` tool) |
 | Activity from monitored accounts | `GET /api/v1/events` |
-| Credit balance, plan, monitor billing | `GET /api/v1/account` |
+| Credit balance | `GET /api/v1/credits` |
 | Monitor an X account | `POST /api/v1/monitors` (persistent; confirmation required) |
 | Set up webhook notifications | `POST /api/v1/webhooks` (persistent; confirmation required) |
 | Run a giveaway draw | `POST /api/v1/draws` |
 | Compose/draft a tweet | `POST /api/v1/compose` (3-step: compose, refine, score) |
-| Link your X username | `PUT /api/v1/account/x-identity` |
+| Link your X username | Use the Xquik dashboard account settings |
 | Analyze tweet style | `POST /api/v1/styles` |
 | Get cached style | `GET /api/v1/styles/{id}` |
 | Compare two styles | `GET /api/v1/styles/compare` |
@@ -124,7 +124,7 @@ Use `POST /api/v1/extractions` ONLY for bulk data that simpler endpoints cannot 
 | Workflow | Steps |
 |----------|-------|
 | **Set up real-time alerts** | Confirm target, event types, destination, and cost -> `POST /monitors` -> `POST /webhooks` -> `POST /webhooks/{id}/test` |
-| **Run a giveaway** | `GET /account` -> `POST /draws` |
+| **Run a giveaway** | Confirm tweet URL and rules -> `POST /draws` |
 | **Bulk extraction** | `POST /extractions/estimate` -> `POST /extractions` -> `GET /extractions/{id}` |
 | **Compose optimized tweet** | `POST /compose` (step=compose -> refine -> score) |
 | **Analyze tweet style** | `POST /styles` -> `GET /styles/{id}` -> `POST /compose` with `styleUsername` |
