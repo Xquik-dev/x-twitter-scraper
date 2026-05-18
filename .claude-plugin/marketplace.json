@@ -6,18 +6,18 @@
   },
   "metadata": {
     "description": "X (Twitter) data extraction skill for AI coding agents. 100+ endpoints, 2 MCP tools, reads from $0.00015/call.",
-    "version": "2.4.12"
+    "version": "2.4.13"
   },
   "plugins": [
     {
       "name": "x-twitter-scraper",
       "source": "./",
       "description": "100+ REST API endpoints, 2 MCP tools, 23 extraction types. Tweet search, user lookup, follower extraction, engagement metrics, giveaway draws, trending topics, confirmation-gated writes, credits, and pay-per-use (MPP). Post reads from $0.00015/call - about 33x cheaper than official X API post reads.",
-      "version": "2.4.12",
+      "version": "2.4.13",
       "author": {
         "name": "Xquik"
       },
-      "homepage": "https://xquik.com",
+      "homepage": "https://docs.xquik.com",
       "repository": "https://github.com/Xquik-dev/x-twitter-scraper",
       "license": "MIT",
       "keywords": [

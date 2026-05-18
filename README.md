@@ -12,7 +12,7 @@
 [![smithery badge](https://smithery.ai/badge/xquik/x-twitter-scraper)](https://smithery.ai/servers/xquik/x-twitter-scraper)
 [![Skills.sh x-twitter-scraper Skill](https://skills.sh/b/xquik-dev/x-twitter-scraper)](https://skills.sh/xquik-dev/x-twitter-scraper)
 
-An [AI agent skill](https://skills.sh) for [Xquik](https://xquik.com), a Twitter API alternative for developers who need to search tweets, get tweets from profiles, export followers, download media, monitor accounts, and automate posting workflows.
+An [AI agent skill](https://skills.sh) for [Xquik](https://docs.xquik.com), a Twitter API alternative for developers who need to search tweets, get tweets from profiles, export followers, download media, monitor accounts, and automate posting workflows.
 
 Use it for advanced Twitter search, tweet search API calls, profile tweet scraping, follower export to CSV, media download, tweet scheduling, send tweets, post replies, like, repost, follow, DM, webhooks, MCP, and official SDK workflows from AI coding agents.
 
@@ -64,7 +64,7 @@ Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricin
 Two options for pay-per-use without a monthly subscription:
 
 - **Credits**: Start a credit top-up checkout or confirmed quick top-up only after explicit confirmation. Top-up credits cost $0.00015 each. Works with all supported endpoints.
-- **MPP**: 32 X-API endpoints accept optional per-call payments. Show the exact amount and get explicit confirmation before starting any payment flow. SDK: `npm i mppx@0.6.15 viem@2.48.8`.
+- **MPP**: 32 X-API endpoints accept optional per-call payments. Show the exact amount and get explicit confirmation before starting any payment flow. Use the Xquik billing docs for the current payment client setup.
 
 ## Installation
 
@@ -218,8 +218,7 @@ x-twitter-scraper/
 
 ## Links
 
-- [Xquik Platform](https://xquik.com)
-- [API Documentation](https://docs.xquik.com)
+- [Xquik Documentation](https://docs.xquik.com)
 - [API Reference](https://docs.xquik.com/api-reference/overview)
 - [MCP Server Guide](https://docs.xquik.com/mcp/overview)
 - [Billing & Pricing](https://docs.xquik.com/guides/billing)
