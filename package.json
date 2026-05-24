@@ -42,6 +42,7 @@
     "scraper"
   ],
   "files": [
+    ".codex-plugin",
     "skills",
     "!skills/_artifacts",
     "openclaw.plugin.json"
