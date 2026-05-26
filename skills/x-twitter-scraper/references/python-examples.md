@@ -5,7 +5,9 @@ Python equivalents of the JavaScript examples in SKILL.md.
 ## Authentication
 
 ```python
-import requests
+import json
+import urllib.error
+import urllib.request
 
 API_KEY = "xq_YOUR_KEY_HERE"
 BASE = "https://xquik.com/api/v1"
@@ -21,22 +23,24 @@ def xquik_fetch(path, method="GET", json_body=None, max_retries=3):
     base_delay = 1.0
 
     for attempt in range(max_retries + 1):
-        response = requests.request(
-            method,
-            f"{BASE}{path}",
-            headers=HEADERS,
-            json=json_body,
+        retry_after = None
+        body = json.dumps(json_body).encode() if json_body is not None else None
+        request = urllib.request.Request(
+            f"{BASE}{path}", data=body, headers=HEADERS, method=method
         )
 
-        if response.ok:
-            return response.json()
+        try:
+            with urllib.request.urlopen(request, timeout=30) as response:
+                return json.loads(response.read())
+        except urllib.error.HTTPError as error:
+            status = error.code
+            payload = json.loads(error.read() or b"{}")
+            retry_after = error.headers.get("Retry-After")
 
-        retryable = response.status_code == 429 or response.status_code >= 500
+        retryable = status == 429 or status >= 500
         if not retryable or attempt == max_retries:
-            error = response.json()
-            raise Exception(f"Xquik API {response.status_code}: {error['error']}")
+            raise Exception(f"Xquik API {status}: {payload.get('error', 'request failed')}")
 
-        retry_after = response.headers.get("Retry-After")
         delay = int(retry_after) if retry_after else base_delay * (2 ** attempt) + random.uniform(0, 1)
         time.sleep(delay)
 ```
@@ -106,13 +110,15 @@ for winner in details["winners"]:
     print(f"{role} #{winner['position']}: @{winner['authorUsername']}")
 ```
 
-## Webhook Handler (Flask)
+## Webhook Handler (Python Standard Library)
 
 ```python
-import hmac, hashlib, json, os
-from flask import Flask, request
+import hashlib
+import hmac
+import json
+import os
+from http.server import BaseHTTPRequestHandler, HTTPServer
 
-app = Flask(__name__)
 # Per-webhook secret from POST /webhooks response, not a Xquik account credential
 WEBHOOK_SECRET = os.environ["XQUIK_WEBHOOK_SECRET"]
 processed_hashes = set()  # Use Redis/DB in production
@@ -128,23 +134,34 @@ EVENT_HANDLERS = {
     "tweet.retweet": lambda u, d: print(f"Retweet by @{u}"),
 }
 
-@app.route("/webhook", methods=["POST"])
-def webhook():
-    signature = request.headers.get("X-Xquik-Signature", "")
-    payload = request.get_data()
+class WebhookHandler(BaseHTTPRequestHandler):
+    def do_POST(self):
+        length = int(self.headers.get("Content-Length", "0"))
+        signature = self.headers.get("X-Xquik-Signature", "")
+        payload = self.rfile.read(length)
 
-    if not verify_signature(payload, signature, WEBHOOK_SECRET):
-        return "Invalid signature", 401
+        if not verify_signature(payload, signature, WEBHOOK_SECRET):
+            self.send_response(401)
+            self.end_headers()
+            self.wfile.write(b"Invalid signature")
+            return
 
-    payload_hash = hashlib.sha256(payload).hexdigest()
-    if payload_hash in processed_hashes:
-        return "Already processed", 200
-    processed_hashes.add(payload_hash)
+        payload_hash = hashlib.sha256(payload).hexdigest()
+        if payload_hash in processed_hashes:
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b"Already processed")
+            return
+        processed_hashes.add(payload_hash)
 
-    event = json.loads(payload)
-    handler = EVENT_HANDLERS.get(event["eventType"])
-    if handler:
-        handler(event["username"], event["data"])
+        event = json.loads(payload)
+        handler = EVENT_HANDLERS.get(event["eventType"])
+        if handler:
+            handler(event["username"], event["data"])
 
-    return "OK", 200
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"OK")
+
+HTTPServer(("", 3000), WebhookHandler).serve_forever()
 ```

@@ -29,15 +29,14 @@ Every delivery is a `POST` request to your URL with a JSON body:
 
 The `X-Xquik-Signature` header contains: `sha256=` + HMAC-SHA256(secret, raw JSON body).
 
-### Node.js (Express)
+### Node.js (Standard Library)
 
 ```javascript
-import express from "express";
 import { createHmac, timingSafeEqual } from "node:crypto";
+import { createServer } from "node:http";
 
 // This is the per-webhook secret from the POST /webhooks response, not a Xquik account credential
 const WEBHOOK_SECRET = process.env.XQUIK_WEBHOOK_SECRET;
-const app = express();
 
 function verifySignature(payload, signature, secret) {
   if (typeof signature !== "string" || !secret) return false;
@@ -52,41 +51,54 @@ function verifySignature(payload, signature, secret) {
   );
 }
 
-app.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
-  const signature = req.headers["x-xquik-signature"];
-  const payload = req.body.toString();
-
-  if (!verifySignature(payload, signature, WEBHOOK_SECRET)) {
-    return res.status(401).send("Invalid signature");
+const server = createServer((req, res) => {
+  if (req.method !== "POST" || req.url !== "/webhook") {
+    res.writeHead(404).end("Not found");
+    return;
   }
 
-  const event = JSON.parse(payload);
+  const chunks = [];
 
-  switch (event.eventType) {
-    case "tweet.new":
-      console.log(`New tweet from @${event.username}: ${event.data.text}`);
-      break;
-    case "tweet.reply":
-      console.log(`Reply from @${event.username}: ${event.data.text}`);
-      break;
-    case "tweet.retweet":
-      console.log(`@${event.username} retweeted`);
-      break;
-  }
+  req.on("data", (chunk) => chunks.push(chunk));
+  req.on("end", () => {
+    const payload = Buffer.concat(chunks).toString("utf8");
+    const signature = req.headers["x-xquik-signature"];
 
-  res.status(200).send("OK");
+    if (!verifySignature(payload, signature, WEBHOOK_SECRET)) {
+      res.writeHead(401).end("Invalid signature");
+      return;
+    }
+
+    const event = JSON.parse(payload);
+
+    switch (event.eventType) {
+      case "tweet.new":
+        console.log(`New tweet from @${event.username}: ${event.data.text}`);
+        break;
+      case "tweet.reply":
+        console.log(`Reply from @${event.username}: ${event.data.text}`);
+        break;
+      case "tweet.retweet":
+        console.log(`@${event.username} retweeted`);
+        break;
+    }
+
+    res.writeHead(200).end("OK");
+  });
 });
+
+server.listen(3000);
 ```
 
-### Python (Flask)
+### Python (Standard Library)
 
 ```python
 import hmac
 import hashlib
+import json
 import os
-from flask import Flask, request
+from http.server import BaseHTTPRequestHandler, HTTPServer
 
-app = Flask(__name__)
 # Per-webhook secret from POST /webhooks response, not a Xquik account credential
 WEBHOOK_SECRET = os.environ["XQUIK_WEBHOOK_SECRET"]
 
@@ -96,20 +108,28 @@ def verify_signature(payload: bytes, signature: str, secret: str) -> bool:
     ).hexdigest()
     return hmac.compare_digest(expected, signature)
 
-@app.route("/webhook", methods=["POST"])
-def webhook():
-    signature = request.headers.get("X-Xquik-Signature", "")
-    payload = request.get_data()
+class WebhookHandler(BaseHTTPRequestHandler):
+    def do_POST(self):
+        signature = self.headers.get("X-Xquik-Signature", "")
+        length = int(self.headers.get("Content-Length", "0"))
+        payload = self.rfile.read(length)
 
-    if not verify_signature(payload, signature, WEBHOOK_SECRET):
-        return "Invalid signature", 401
+        if not verify_signature(payload, signature, WEBHOOK_SECRET):
+            self.send_response(401)
+            self.end_headers()
+            self.wfile.write(b"Invalid signature")
+            return
 
-    event = request.get_json()
+        event = json.loads(payload)
 
-    if event["eventType"] == "tweet.new":
-        print(f"New tweet from @{event['username']}: {event['data']['text']}")
+        if event["eventType"] == "tweet.new":
+            print(f"New tweet from @{event['username']}: {event['data']['text']}")
 
-    return "OK", 200
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"OK")
+
+HTTPServer(("", 3000), WebhookHandler).serve_forever()
 ```
 
 ### Go
@@ -186,9 +206,10 @@ const processedPayloads = new Set(); // Use Redis/DB in production
 
 const payloadHash = createHash("sha256").update(payload).digest("hex");
 if (processedPayloads.has(payloadHash)) {
-  return res.status(200).send("Already processed");
+  res.writeHead(200).end("Already processed");
+} else {
+  processedPayloads.add(payloadHash);
 }
-processedPayloads.add(payloadHash);
 ```
 
 ## Retry Policy

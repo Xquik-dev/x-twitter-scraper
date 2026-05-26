@@ -1,6 +1,6 @@
 {
   "name": "x-twitter-scraper",
-  "version": "2.4.13",
+  "version": "2.4.14",
   "description": "X (Twitter) data and automation skill for agents using Xquik REST API, MCP, webhooks, SDKs, and confirmation-gated actions.",
   "author": {
     "name": "Xquik",
