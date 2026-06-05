@@ -1,10 +1,10 @@
 # Xquik Usage Credits
 
-Use this reference to estimate credit consumption before API calls. The agent may read credit balance and show usage estimates. Account funding and plan changes happen only in the Xquik dashboard and are outside this skill.
+Use this reference to estimate credit consumption before API calls. The agent may read credit balance and show usage estimates. Plan and credit changes happen only in the Xquik dashboard and are outside this skill.
 
 ## Plan Context
 
-Xquik plans include monthly credits. Direct users to the dashboard for plan, invoice, or account-funding changes.
+Xquik plans include monthly credits. Direct users to the dashboard for plan, invoice, or credit changes.
 
 ## Per-Operation Credit Costs
 
@@ -65,4 +65,4 @@ Webhooks, account status, radar, extraction/draw history, cost estimates, tweet 
 
 ## Credit Balance
 
-Use `GET /credits` to read the current balance and lifetime usage fields. Treat account-funding fields as read-only status from the dashboard. Do not start account funding from this skill.
+Use `GET /credits` to read the current balance and lifetime usage fields. Treat plan and credit-change fields as read-only dashboard status. Do not start plan or credit changes from this skill.

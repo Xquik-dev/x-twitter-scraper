@@ -18,7 +18,7 @@ metadata:
     contentIsolation: enforced
     promptInjectionDefense: true
     writeConfirmation: required
-    paymentConfirmation: required
+    costConfirmation: required
     executionModel: api-only
     codeExecution: none
     credentialProxy: false
@@ -115,7 +115,7 @@ Metrics endpoints are Read tier (1-5 credits per call). Bulk `favoriters` can li
 ## Errors
 
 - `404 tweet_not_found`: tweet was deleted or is protected
-- `402 insufficient_credits`: explain the billing issue and ask before any checkout action
+- `402 insufficient_credits`: explain the account state and direct the user to the dashboard
 - `429 x_api_rate_limited`: backoff, respect `Retry-After`
 
 ## Security

@@ -887,9 +887,6 @@ interface McpAccount {
     balance: string;
     lifetimePurchased: string;
     lifetimeUsed: string;
-    autoTopupEnabled: boolean;
-    autoTopupAmountDollars: number;
-    autoTopupThreshold: string;
   };
   xUsername?: string;
 }

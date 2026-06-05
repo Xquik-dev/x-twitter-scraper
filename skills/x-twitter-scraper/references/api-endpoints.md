@@ -688,7 +688,7 @@ GET /x/trends?woeid=1&count=30
 GET /trends?woeid=1&count=30
 ```
 
-Metered. Subscription required. `/trends` is an alias of `/x/trends`. Cached, refreshes every 15 minutes.
+Metered. Plan access required. `/trends` is an alias of `/x/trends`. Cached, refreshes every 15 minutes.
 
 **WOEIDs:** 1 (Worldwide), 23424977 (US), 23424975 (UK), 23424969 (Turkey), 23424950 (Spain), 23424829 (Germany), 23424819 (France), 23424856 (Japan), 23424848 (India), 23424768 (Brazil), 23424775 (Canada), 23424900 (Mexico).
 
@@ -1288,7 +1288,7 @@ Check a pending write action by the ID returned from an earlier write response.
 GET /credits
 ```
 
-Get credit balance and lifetime usage fields. Free. Account funding and plan changes are dashboard-only and intentionally omitted from this installable skill.
+Get credit balance and lifetime usage fields. Free. Plan and credit changes are dashboard-only and intentionally omitted from this installable skill.
 
 ---
 
@@ -1359,8 +1359,8 @@ Add a message to an existing ticket.
 | 400 | `webhook_inactive` | Webhook is disabled (test-webhook only) |
 | 401 | `unauthenticated` | Missing or invalid API key |
 | 403 | `account_needs_reauth` | X account session expired; use dashboard re-auth flow |
-| 402 | `no_subscription` | No active subscription |
-| 402 | `subscription_inactive` | Subscription is not active |
+| 402 | `no_subscription` | No active plan |
+| 402 | `subscription_inactive` | Plan is not active |
 | 402 | `no_credits` | No credit balance record exists |
 | 402 | `insufficient_credits` | Credit balance is too low |
 | 403 | `api_key_limit_reached` | API key limit reached (100 max) |

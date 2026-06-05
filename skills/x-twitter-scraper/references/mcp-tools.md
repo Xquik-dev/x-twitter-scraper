@@ -54,7 +54,7 @@ Apply these gates before using `xquik`:
 | Direct messages | Show sender, recipient, and message text. Never send bulk or automatic DMs. |
 | Persistent resources | Create monitors and webhooks only when the user explicitly asks for ongoing delivery. Show target, event types, URL, and ongoing cost before creation. |
 | Private reads | Confirm before fetching DMs, bookmarks, notifications, or home timeline. Do not forward returned private data to other tools without consent. |
-| Account funding | Dashboard-only. The agent may read credit balance, but must not start plan changes or account funding. |
+| Plan and credit changes | Dashboard-only. The agent may read credit balance, but must not start account changes. |
 | X account login | Never ask for or submit X login material. Account connection and re-authentication happen in the dashboard. |
 
 ```typescript
@@ -159,4 +159,4 @@ These are NOT available via the MCP server:
 ## Cost Reference
 
 - **Free**: account info, compose (all steps), styles (cached lookup/save/delete/compare), drafts, radar (via `xquik` tool, all 7 sources), support tickets, credits balance check, webhook management
-- **Credit or subscription required**: tweet search, user lookup, tweet lookup, follow check, media download (first only, cached free), extractions, draws, active monitors, style analysis (X API refresh), performance analysis, trends, and confirmation-gated write actions (tweet, like, retweet, follow, DM, profile, media upload, communities)
+- **Credits or plan required**: tweet search, user lookup, tweet lookup, follow check, media download (first only, cached free), extractions, draws, active monitors, style analysis (X API refresh), performance analysis, trends, and confirmation-gated write actions (tweet, like, retweet, follow, DM, profile, media upload, communities)

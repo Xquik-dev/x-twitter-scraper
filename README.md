@@ -22,15 +22,15 @@ Includes 100+ REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction
 
 Works with **40+ AI coding agents** including Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code, Cline, Roo Code, Goose, Amp, Augment, Continue, OpenHands, Trae, OpenCode, and more.
 
-## Pricing
+## Usage Costs
 
-Xquik is dramatically cheaper than every alternative for X/Twitter data access.
+Xquik is dramatically cheaper than every alternative for X/Twitter data access. This installable skill can read credit balance and estimate usage costs. Users manage plan and credit changes in the Xquik dashboard.
 
 ### vs Official X API
 
 | | Xquik | Official X pay-per-usage | Notes |
 |---|---|---|---|
-| **Access model** | **Starter/Pro/Business subscriptions, credit top-ups, and MPP** | No subscriptions or commitments | Basic and Pro are legacy package names |
+| **Access model** | **Dashboard-managed account + usage credits** | Usage-based account | This skill reads balance and estimates cost only |
 | **Cost per post read** | **$0.00015** | $0.005 per resource | Xquik is about 33x cheaper |
 | **Cost per user lookup** | **$0.00015** | $0.010 per resource | Xquik is about 67x cheaper |
 | **Cost per trend read** | **$0.00045** | $0.010 per resource | Xquik is about 22x cheaper |
@@ -59,12 +59,9 @@ Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricin
 | Active monitors | 21/hour | $0.00315/hour |
 | Webhooks, radar, compose, drafts | 0 | **Free** |
 
-### Pay-Per-Use (No Subscription)
+### Skill Account Boundary
 
-Two options for pay-per-use without a monthly subscription:
-
-- **Credits**: Start a credit top-up checkout or confirmed quick top-up only after explicit confirmation. Top-up credits cost $0.00015 each. Works with all supported endpoints.
-- **MPP**: 32 X-API endpoints accept optional per-call payments. Show the exact amount and get explicit confirmation before starting any payment flow. Use the Xquik billing docs for the current payment client setup.
+Only balance reads and usage estimates are in scope for this skill. Plan and credit changes are dashboard-only.
 
 ## Installation
 
@@ -123,10 +120,9 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Giveaway draws**: Run transparent draws from tweet replies with configurable filters
 - **Write actions**: Post tweets, like, retweet, follow/unfollow, remove followers, send DMs, update profile, upload media, manage communities after explicit approval
 - **Tweet composition**: Algorithm-optimized tweet composer with scoring (free)
-- **Credits & billing**: Check balance; start top-up or subscription checkout only after explicit confirmation
+- **Usage credits**: Check balance and estimate costs; dashboard handles plan and credit changes
 - **Support tickets**: Open and manage support tickets via API
 - **MCP server**: 2 tools covering 100+ endpoints for AI agent integration
-- **Pay-per-use (MPP)**: Optional per-call access to 32 endpoints with exact-amount confirmation
 
 ## Capabilities
 
@@ -144,8 +140,7 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 | **Engagement Analytics** | Likes, retweets, replies, quotes, views, bookmarks per tweet |
 | **Trending Topics** | Regional trends + 7 free news sources via Radar |
 | **Tweet Composition** | Algorithm-optimized tweet composer with scoring checklist (free) |
-| **Credits & Billing** | Check balance, start confirmed top-up checkout, start confirmed subscription checkout |
-| **Pay-Per-Use (MPP)** | 32 endpoints with exact-amount confirmation before every payment flow |
+| **Usage Credits** | Check balance and estimate costs; dashboard handles plan and credit changes |
 | **TypeScript Types** | Complete type definitions for all API objects |
 
 ## Supported Agents
@@ -167,8 +162,8 @@ Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code
 | Styles | Analyze, save, list, get, delete, compare, performance |
 | Compose | Tweet composition (compose, refine, score) |
 | Drafts | Create, list, get, delete |
-| Account | Get account, update locale, set X identity, subscription checkout with confirmation |
-| Credits | Get balance, confirmed top-up checkout |
+| Account | Get account, update locale, set X identity |
+| Credits | Get balance |
 | API Keys | Create, list, revoke |
 | X Accounts | List, get, and disconnect already-connected accounts; dashboard handles connection and re-authentication |
 | X Write | Confirmation-gated tweet, delete, like, unlike, retweet, follow, unfollow, DM, profile, avatar, banner, media upload, communities |
@@ -221,7 +216,6 @@ x-twitter-scraper/
 - [Xquik Documentation](https://docs.xquik.com)
 - [API Reference](https://docs.xquik.com/api-reference/overview)
 - [MCP Server Guide](https://docs.xquik.com/mcp/overview)
-- [Billing & Pricing](https://docs.xquik.com/guides/billing)
 - Framework guides: [Mastra](https://docs.xquik.com/guides/mastra), [CrewAI](https://docs.xquik.com/guides/crewai), [LangChain](https://docs.xquik.com/guides/langchain), [Pydantic AI](https://docs.xquik.com/guides/pydantic-ai), [Google ADK](https://docs.xquik.com/guides/google-adk), [Microsoft Agent Framework](https://docs.xquik.com/guides/microsoft-agent-framework), [n8n](https://docs.xquik.com/guides/n8n), [Zapier](https://docs.xquik.com/guides/zapier), [Make](https://docs.xquik.com/guides/make), [Pipedream](https://docs.xquik.com/guides/pipedream), [Composio migration](https://docs.xquik.com/guides/composio-migration)
 - [skills.sh Page](https://skills.sh/xquik-dev/x-twitter-scraper)
 - [skills.sh Primary Skill Page](https://skills.sh/xquik-dev/x-twitter-scraper/x-twitter-scraper)

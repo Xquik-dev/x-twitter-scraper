@@ -18,7 +18,7 @@ metadata:
     contentIsolation: enforced
     promptInjectionDefense: true
     writeConfirmation: required
-    paymentConfirmation: required
+    costConfirmation: required
     executionModel: api-only
     codeExecution: none
     credentialProxy: false

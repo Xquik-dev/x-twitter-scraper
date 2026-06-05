@@ -18,7 +18,7 @@ metadata:
     contentIsolation: enforced
     promptInjectionDefense: true
     writeConfirmation: required
-    paymentConfirmation: required
+    costConfirmation: required
     executionModel: api-only
     codeExecution: none
     credentialProxy: false
@@ -102,7 +102,7 @@ To export: `GET /extractions/{id}/export?format=csv` (or `xlsx`, `md`). Cap 50,0
 |---|---|---|
 | 400 | `invalid_input`, `missing_query` | Fix the query syntax |
 | 401 | `unauthenticated` | Check API key |
-| 402 | `insufficient_credits` | Explain the billing issue and ask before any checkout action |
+| 402 | `insufficient_credits` | Explain the account state and direct the user to the dashboard |
 | 429 | `x_api_rate_limited` | Exponential backoff, respect `Retry-After` |
 
 Read tier rate limit: 10 requests per 1s.
