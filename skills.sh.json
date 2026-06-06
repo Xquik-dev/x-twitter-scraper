@@ -1,0 +1,77 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Core API",
+      "description": "Start here for Xquik setup, authentication, MCP, SDKs, and broad X API workflows.",
+      "skills": ["x-twitter-scraper"]
+    },
+    {
+      "title": "Tweet Search",
+      "description": "Find, analyze, and export X posts from keywords, trends, replies, quotes, and engagement data.",
+      "skills": [
+        "search-tweets",
+        "x-trends",
+        "find-viral-tweets",
+        "find-bangers",
+        "going-viral",
+        "export-tweets-csv",
+        "who-liked",
+        "who-retweeted",
+        "who-quoted",
+        "tweet-replies",
+        "top-replies",
+        "tweet-analytics",
+        "x-articles",
+        "x-spaces"
+      ]
+    },
+    {
+      "title": "User Data",
+      "description": "Read user timelines, followers, mutuals, lists, communities, and account-scoped data.",
+      "skills": [
+        "user-tweets",
+        "extract-followers",
+        "find-influencers",
+        "check-mutuals",
+        "x-lists",
+        "x-communities",
+        "x-bookmarks",
+        "for-you-feed"
+      ]
+    },
+    {
+      "title": "Monitoring",
+      "description": "Track accounts, hashtags, competitors, mentions, webhooks, and trending news.",
+      "skills": [
+        "monitor-accounts",
+        "track-hashtags",
+        "track-competitors",
+        "track-mentions",
+        "tweet-webhooks",
+        "trending-news"
+      ]
+    },
+    {
+      "title": "Publishing",
+      "description": "Plan, write, optimize, and publish X posts with confirmation-gated account actions.",
+      "skills": [
+        "tweet-ideas",
+        "write-tweets",
+        "write-threads",
+        "optimize-tweets",
+        "tweet-style",
+        "post-tweets",
+        "send-dms",
+        "follow-unfollow",
+        "update-x-profile"
+      ]
+    },
+    {
+      "title": "Growth",
+      "description": "Run growth, cleanup, and giveaway workflows with bounded API calls and explicit confirmation.",
+      "skills": ["grow-followers", "clean-followers", "run-giveaway"]
+    }
+  ]
+}
