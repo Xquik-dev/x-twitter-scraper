@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "1.0.0"
+  version: "1.0.1"
   openclaw:
     requires:
       env:
@@ -14,19 +14,37 @@ metadata:
     emoji: "𝕏"
     homepage: https://docs.xquik.com
   security:
+    credentialsHandledByAgent: api-key-only
+    credentialsTransmitted: xquik-api-key-only
+    xLoginSecretsHandled: false
+    passwordsCollected: false
+    totpCollected: false
+    sessionCookiesCollected: false
     contentTrust: mixed
     contentIsolation: enforced
     promptInjectionDefense: true
     writeConfirmation: required
     costConfirmation: required
+    planChanges: dashboard-only
+    creditChanges: dashboard-only
+    privateReads: none
+    accountChangeExecution: false
+    autonomousPlanChanges: false
     executionModel: api-only
     codeExecution: none
+    localFileAccess: none
+    localNetworkAccess: none
     credentialProxy: false
+    allowedHosts:
+      - xquik.com
+      - docs.xquik.com
 ---
 
 # Fetch a User's Tweets
 
 Read tweets from a specific X (Twitter) account - recent posts, likes, or media tweets. Supports lookup by username and bulk extraction of a full post history.
+
+This guide is read-only. It never posts, sends DMs, follows, deletes, updates profiles, starts monitors, changes plans, or collects X login material.
 
 ## Endpoints
 
@@ -41,6 +59,8 @@ Read tweets from a specific X (Twitter) account - recent posts, likes, or media 
 | POST /extractions (toolType=user_media) | Bulk media posts | Per result |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key`.
+
+Use only a user-issued Xquik API key from `XQUIK_API_KEY`. Never ask for X passwords, 2FA codes, cookies, session tokens, recovery codes, or account backup files.
 
 ## Resolving a username to an ID
 
@@ -84,7 +104,9 @@ Loop until `has_next_page` is false or `next_cursor` is empty. Respect Read tier
 
 ## Bulk extraction (full history)
 
-For hundreds or thousands of tweets, use extractions. Estimate first:
+For hundreds or thousands of tweets, use extractions only for a user-requested, authorized task. Do not use this guide for surveillance, spam targeting, harassment, credential collection, or data resale. Keep result counts bounded, estimate cost first, and ask before exporting.
+
+Estimate first:
 
 ```
 POST /extractions/estimate

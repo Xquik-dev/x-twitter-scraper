@@ -8,7 +8,7 @@ Connect AI agents and IDEs to Xquik via the Model Context Protocol. The MCP serv
 | Endpoint | `https://xquik.com/mcp` |
 | Auth header | `x-api-key` |
 
-> **Security:** Use a scoped, revocable API key - not your primary account key. Where your platform supports environment variable interpolation (e.g., `${XQUIK_API_KEY}`), prefer that over hardcoding. Rotate keys periodically from the Xquik dashboard account page. Never commit API keys to version control.
+> **Security:** Use a scoped, revocable API key - not your primary account key. Where your platform supports environment variable interpolation (for example, `${XQUIK_API_KEY}`), prefer that over hardcoding. If interpolation is not supported, use the client's secure secret store. Rotate keys periodically from the Xquik dashboard account page. Never commit API keys to version control.
 
 Use native HTTP MCP clients or OAuth connectors only. Do not proxy Xquik API keys through third-party local bridge packages, local proxy commands, or command-line adapters.
 
@@ -33,7 +33,7 @@ Add to `.mcp.json`:
       "type": "http",
       "url": "https://xquik.com/mcp",
       "headers": {
-        "x-api-key": "xq_YOUR_KEY_HERE"
+        "x-api-key": "${XQUIK_API_KEY}"
       }
     }
   }
@@ -53,11 +53,13 @@ Create a Custom GPT and add Xquik as an Action using the OpenAPI schema at `http
 Use the [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/mcp/) for programmatic access:
 
 ```python
+import os
+
 from agents.mcp import MCPServerStreamableHttp
 
 async with MCPServerStreamableHttp(
     url="https://xquik.com/mcp",
-    headers={"x-api-key": "xq_YOUR_KEY_HERE"},
+    headers={"x-api-key": os.environ["XQUIK_API_KEY"]},
     params={},
 ) as xquik:
     # use xquik as a tool provider
@@ -75,7 +77,7 @@ Add to `~/.codex/config.toml`:
 ```toml
 [mcp_servers.xquik]
 url = "https://xquik.com/mcp"
-http_headers = { "x-api-key" = "xq_YOUR_KEY_HERE" }
+http_headers = { "x-api-key" = "${XQUIK_API_KEY}" }
 ```
 
 ## Cursor
@@ -88,7 +90,7 @@ Add to `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` (project):
     "xquik": {
       "url": "https://xquik.com/mcp",
       "headers": {
-        "x-api-key": "xq_YOUR_KEY_HERE"
+        "x-api-key": "${XQUIK_API_KEY}"
       }
     }
   }
@@ -106,7 +108,7 @@ Add to `.vscode/mcp.json` (project) or use **MCP: Open User Configuration** (glo
       "type": "http",
       "url": "https://xquik.com/mcp",
       "headers": {
-        "x-api-key": "xq_YOUR_KEY_HERE"
+        "x-api-key": "${XQUIK_API_KEY}"
       }
     }
   }
@@ -123,7 +125,7 @@ Add to `~/.codeium/windsurf/mcp_config.json`:
     "xquik": {
       "serverUrl": "https://xquik.com/mcp",
       "headers": {
-        "x-api-key": "xq_YOUR_KEY_HERE"
+        "x-api-key": "${XQUIK_API_KEY}"
       }
     }
   }
@@ -141,7 +143,7 @@ Add to `opencode.json`:
       "type": "remote",
       "url": "https://xquik.com/mcp",
       "headers": {
-        "x-api-key": "xq_YOUR_KEY_HERE"
+        "x-api-key": "${XQUIK_API_KEY}"
       }
     }
   }

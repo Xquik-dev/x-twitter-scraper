@@ -6,10 +6,11 @@ Python equivalents of the JavaScript examples in SKILL.md.
 
 ```python
 import json
+import os
 import urllib.error
 import urllib.request
 
-API_KEY = "xq_YOUR_KEY_HERE"
+API_KEY = os.environ["XQUIK_API_KEY"]
 BASE = "https://xquik.com/api/v1"
 HEADERS = {"x-api-key": API_KEY, "Content-Type": "application/json"}
 ```

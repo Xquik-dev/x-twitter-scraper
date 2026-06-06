@@ -5,9 +5,11 @@ Code examples for common integration patterns.
 ## Authentication
 
 ```javascript
-const API_KEY = "xq_YOUR_KEY_HERE";
+const apiKey = process.env.XQUIK_API_KEY;
+if (!apiKey) throw new Error("Set XQUIK_API_KEY first.");
+
 const BASE = "https://xquik.com/api/v1";
-const headers = { "x-api-key": API_KEY, "Content-Type": "application/json" };
+const headers = { "x-api-key": apiKey, "Content-Type": "application/json" };
 ```
 
 ## Retry with Exponential Backoff
