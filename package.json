@@ -42,6 +42,7 @@
   ],
   "files": [
     ".codex-plugin",
+    "assets",
     "skills",
     "!skills/_artifacts",
     "openclaw.plugin.json"

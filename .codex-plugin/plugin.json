@@ -29,6 +29,7 @@
     "longDescription": "Use the X Twitter Scraper skill to guide agents through Xquik REST API, MCP, webhook, SDK, extraction, monitoring, and confirmation-gated action workflows for X data and automation.",
     "developerName": "Xquik",
     "category": "Productivity",
+    "composerIcon": "./assets/icon.svg",
     "capabilities": [
       "Interactive",
       "Read",
