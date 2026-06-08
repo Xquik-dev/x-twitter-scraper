@@ -1,17 +1,5 @@
 # X (Twitter) Scraper API Skill: Search Tweets, Get Profile Tweets, Followers, Posting & Replies
 
-[![Ask DeepWiki](https://deepwiki.com/badge.svg?url=https%3A%2F%2Fgithub.com%2FXquik-dev%2Fx-twitter-scraper)](https://deepwiki.com/Xquik-dev/x-twitter-scraper)
-<a href="https://nothumansearch.ai/site/xquik.com" target="_blank" rel="noopener"><img src="https://nothumansearch.ai/badge/xquik.com.svg" alt="NHS Agentic Readiness Score" height="28"></a>
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-![GitHub stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper)
-[![npm version](https://img.shields.io/npm/v/x-developer.svg)](https://www.npmjs.com/package/x-developer)
-[![npm downloads](https://img.shields.io/npm/dm/x-developer.svg)](https://www.npmjs.com/package/x-developer)
-[![X Tweet Scraper on Apify](https://apify.com/actor-badge?actor=xquik/x-tweet-scraper)](https://apify.com/xquik/x-tweet-scraper)
-[![x-twitter-scraper MCP server](https://glama.ai/mcp/servers/Xquik-dev/x-twitter-scraper/badges/score.svg)](https://glama.ai/mcp/servers/Xquik-dev/x-twitter-scraper)
-[![smithery badge](https://smithery.ai/badge/xquik/x-twitter-scraper)](https://smithery.ai/servers/xquik/x-twitter-scraper)
-[![Skills.sh x-twitter-scraper Skill](https://skills.sh/b/xquik-dev/x-twitter-scraper)](https://skills.sh/xquik-dev/x-twitter-scraper)
-
 An [AI agent skill](https://skills.sh) for [Xquik](https://docs.xquik.com), a Twitter API alternative for developers who need to search tweets, get tweets from profiles, export followers, download media, monitor accounts, and automate posting workflows.
 
 Use it for advanced Twitter search, tweet search API calls, profile tweet scraping, follower export to CSV, media download, tweet scheduling, send tweets, post replies, like, repost, follow, DM, webhooks, MCP, and official SDK workflows from AI coding agents.
@@ -171,19 +159,19 @@ Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code
 
 Use the X Twitter Scraper API in your language of choice. All SDKs are auto-generated, kept in sync with the OpenAPI spec, and follow idiomatic conventions for each ecosystem.
 
-| Repo | Language | Install | Stars |
-|------|----------|---------|-------|
-| [x-twitter-scraper-typescript](https://github.com/Xquik-dev/x-twitter-scraper-typescript) | TypeScript / Node.js | `npm i x-twitter-scraper` | ![Stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper-typescript?style=flat-square) |
-| [x-twitter-scraper-python](https://github.com/Xquik-dev/x-twitter-scraper-python) | Python | `pip install x-twitter-scraper` | ![Stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper-python?style=flat-square) |
-| [x-twitter-scraper-go](https://github.com/Xquik-dev/x-twitter-scraper-go) | Go | `go get github.com/Xquik-dev/x-twitter-scraper-go` | ![Stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper-go?style=flat-square) |
-| [x-twitter-scraper-ruby](https://github.com/Xquik-dev/x-twitter-scraper-ruby) | Ruby | `gem install x-twitter-scraper` | ![Stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper-ruby?style=flat-square) |
-| [x-twitter-scraper-java](https://github.com/Xquik-dev/x-twitter-scraper-java) | Java | Build from source while Maven Central publication is pending | ![Stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper-java?style=flat-square) |
-| [x-twitter-scraper-kotlin](https://github.com/Xquik-dev/x-twitter-scraper-kotlin) | Kotlin | Build from source while Maven Central publication is pending | ![Stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper-kotlin?style=flat-square) |
-| [x-twitter-scraper-csharp](https://github.com/Xquik-dev/x-twitter-scraper-csharp) | C# / .NET | `dotnet add package XTwitterScraper` | ![Stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper-csharp?style=flat-square) |
-| [x-twitter-scraper-php](https://github.com/Xquik-dev/x-twitter-scraper-php) | PHP | `composer require xquik/x-twitter-scraper` | ![Stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper-php?style=flat-square) |
-| [x-twitter-scraper-cli](https://github.com/Xquik-dev/x-twitter-scraper-cli) | CLI | Build from source or install a pinned release tag | ![Stars](https://img.shields.io/github/stars/Xquik-dev/x-twitter-scraper-cli?style=flat-square) |
-| [terraform-provider-x-twitter-scraper](https://github.com/Xquik-dev/terraform-provider-x-twitter-scraper) | Terraform | Build from source ([release page](https://github.com/Xquik-dev/terraform-provider-x-twitter-scraper/releases)) | ![Stars](https://img.shields.io/github/stars/Xquik-dev/terraform-provider-x-twitter-scraper?style=flat-square) |
-| [tweetclaw](https://github.com/Xquik-dev/tweetclaw) | OpenClaw plugin | `openclaw plugins install @xquik/tweetclaw` | ![Stars](https://img.shields.io/github/stars/Xquik-dev/tweetclaw?style=flat-square) |
+| Repo | Language | Install |
+|------|----------|---------|
+| [x-twitter-scraper-typescript](https://github.com/Xquik-dev/x-twitter-scraper-typescript) | TypeScript / Node.js | `npm i x-twitter-scraper` |
+| [x-twitter-scraper-python](https://github.com/Xquik-dev/x-twitter-scraper-python) | Python | `pip install x-twitter-scraper` |
+| [x-twitter-scraper-go](https://github.com/Xquik-dev/x-twitter-scraper-go) | Go | `go get github.com/Xquik-dev/x-twitter-scraper-go` |
+| [x-twitter-scraper-ruby](https://github.com/Xquik-dev/x-twitter-scraper-ruby) | Ruby | `gem install x-twitter-scraper` |
+| [x-twitter-scraper-java](https://github.com/Xquik-dev/x-twitter-scraper-java) | Java | Build from source while Maven Central publication is pending |
+| [x-twitter-scraper-kotlin](https://github.com/Xquik-dev/x-twitter-scraper-kotlin) | Kotlin | Build from source while Maven Central publication is pending |
+| [x-twitter-scraper-csharp](https://github.com/Xquik-dev/x-twitter-scraper-csharp) | C# / .NET | `dotnet add package XTwitterScraper` |
+| [x-twitter-scraper-php](https://github.com/Xquik-dev/x-twitter-scraper-php) | PHP | `composer require xquik/x-twitter-scraper` |
+| [x-twitter-scraper-cli](https://github.com/Xquik-dev/x-twitter-scraper-cli) | CLI | Build from source or install a pinned release tag |
+| [terraform-provider-x-twitter-scraper](https://github.com/Xquik-dev/terraform-provider-x-twitter-scraper) | Terraform | Build from source ([release page](https://github.com/Xquik-dev/terraform-provider-x-twitter-scraper/releases)) |
+| [tweetclaw](https://github.com/Xquik-dev/tweetclaw) | OpenClaw plugin | `openclaw plugins install @xquik/tweetclaw` |
 
 ## Skill Structure
 
