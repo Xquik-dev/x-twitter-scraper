@@ -15,11 +15,9 @@
     ".mcp.json",
     "CODE_OF_CONDUCT.md",
     "LICENSE",
-    "glama.json",
     "openclaw.plugin.json",
     "package.json",
     "server.json",
-    "smithery.yaml",
     "start.sh",
     "stub-server.mjs"
   ],

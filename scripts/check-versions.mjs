@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
 // Pre-publish / pre-commit guard: fails if any known version surface
-// disagrees with package.json. Registries (npm, Glama, ClawHub, Smithery,
-// Official MCP Registry) cache from these files, so drift across surfaces
-// ships an inconsistent release. See Xquik-dev/xquik#2024.
+// disagrees with package.json. Registry metadata caches from these files, so
+// drift across surfaces ships an inconsistent release. See Xquik-dev/xquik#2024.
 
 import { readFileSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";

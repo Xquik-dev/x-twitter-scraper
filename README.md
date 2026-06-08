@@ -191,7 +191,6 @@ x-twitter-scraper/
 │           └── python-examples.md        # Python code examples
 ├── task-guides/                          # Public task guides, not installable skills
 ├── server.json                           # MCP Registry metadata
-├── glama.json                            # Glama.ai directory metadata
 ├── logo.png                              # Marketplace logo
 ├── LICENSE                               # MIT
 └── README.md                             # This file

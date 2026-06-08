@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-// Minimal stdio MCP server stub for Glama Docker verification.
-// Exposes the public tool shape used for registry scoring.
+// Minimal stdio MCP server stub for package verification.
+// Exposes the public tool shape used by registry checks.
 // For live usage, connect to: https://xquik.com/mcp
 
 import { createInterface } from "node:readline";
