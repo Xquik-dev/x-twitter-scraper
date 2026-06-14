@@ -1,7 +1,7 @@
 {
   "name": "x-twitter-scraper",
   "version": "2.4.16",
-  "description": "Xquik X/Twitter data skill with 100+ endpoints, 2 MCP tools, webhooks, monitors, extraction workflows, and confirmation-gated actions.",
+  "description": "Xquik X/Twitter scraper API skill with 100+ endpoints, MCP, webhooks, extraction workflows, usage estimates, and confirmation-gated actions.",
   "author": {
     "name": "Xquik",
     "url": "https://github.com/Xquik-dev"

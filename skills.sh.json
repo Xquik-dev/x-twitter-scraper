@@ -4,12 +4,12 @@
   "groupings": [
     {
       "title": "Core API",
-      "description": "Start here for Xquik setup, authentication, MCP, SDKs, and broad X API workflows.",
+      "description": "Start with safe Xquik setup, API-key auth, MCP, SDKs, and broad X data workflows.",
       "skills": ["x-twitter-scraper"]
     },
     {
       "title": "Tweet Search",
-      "description": "Find, analyze, and export X posts from keywords, trends, replies, quotes, and engagement data.",
+      "description": "Search tweets, analyze engagement, export posts, and inspect replies, quotes, and trends.",
       "skills": [
         "search-tweets",
         "x-trends",
@@ -29,7 +29,7 @@
     },
     {
       "title": "User Data",
-      "description": "Read user timelines, followers, mutuals, lists, communities, and account-scoped data.",
+      "description": "Read user timelines, followers, mutuals, lists, communities, and approved account data.",
       "skills": [
         "user-tweets",
         "extract-followers",
@@ -43,7 +43,7 @@
     },
     {
       "title": "Monitoring",
-      "description": "Track accounts, hashtags, competitors, mentions, webhooks, and trending news.",
+      "description": "Track accounts, hashtags, competitors, mentions, webhooks, and trending news with clear approvals.",
       "skills": [
         "monitor-accounts",
         "track-hashtags",
@@ -55,7 +55,7 @@
     },
     {
       "title": "Publishing",
-      "description": "Plan, write, optimize, and publish X posts with confirmation-gated account actions.",
+      "description": "Plan, write, optimize, and publish X posts only after explicit confirmation.",
       "skills": [
         "tweet-ideas",
         "write-tweets",
@@ -70,7 +70,7 @@
     },
     {
       "title": "Growth",
-      "description": "Run growth, cleanup, and giveaway workflows with bounded API calls and explicit confirmation.",
+      "description": "Run follower, cleanup, and giveaway workflows with bounded calls and explicit confirmation.",
       "skills": ["grow-followers", "clean-followers", "run-giveaway"]
     }
   ]

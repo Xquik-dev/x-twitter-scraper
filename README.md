@@ -1,53 +1,27 @@
-# X (Twitter) Scraper API Skill: Search Tweets, Get Profile Tweets, Followers, Posting & Replies
+# X (Twitter) Scraper API Skill For AI Agents
 
-An [AI agent skill](https://skills.sh) for [Xquik](https://docs.xquik.com), a Twitter API alternative for developers who need to search tweets, get tweets from profiles, export followers, download media, monitor accounts, and automate posting workflows.
+An [AI agent skill](https://skills.sh) for [Xquik](https://docs.xquik.com), built for developers who need reliable X (Twitter) data workflows from coding agents. Use it to search tweets, get profile tweets, export followers, download media, monitor accounts, receive webhooks, use MCP, and prepare confirmation-gated publishing actions.
 
-Use it for advanced Twitter search, tweet search API calls, profile tweet scraping, follower export to CSV, media download, tweet scheduling, send tweets, post replies, like, repost, follow, DM, webhooks, MCP, and official SDK workflows from AI coding agents.
+The skill gives Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, and other skills-compatible agents the exact API boundaries, endpoint choices, safety rules, and workflow steps they need for X data automation.
 
-Includes 100+ REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, and confirmation-gated write actions.
+Includes 100+ REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, official SDK pointers, and confirmation-gated write actions.
 
-Works with **40+ AI coding agents** including Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code, Cline, Roo Code, Goose, Amp, Augment, Continue, OpenHands, Trae, OpenCode, and more.
+## Why Use This Skill
 
-## Usage Costs
+- **Find X posts faster**: search tweets, inspect replies, quotes, retweets, favoriters, trends, and article content from one skill.
+- **Understand X accounts**: fetch profile data, user tweets, likes, media, followers, following, mutuals, lists, and communities.
+- **Move from one-off calls to workflows**: run follower exports, tweet search exports, media downloads, giveaway draws, monitors, and HMAC webhooks.
+- **Keep agents inside clear boundaries**: read-only by default, API-key only, physical untrusted-content delimiters, and explicit approval for private reads, writes, persistent resources, and metered bulk jobs.
+- **Use the right integration path**: REST API, MCP, framework guides, and SDKs are all mapped for agent use.
 
-This installable skill can read credit balance and estimate usage costs. Users manage plan and credit changes in the Xquik dashboard.
+## Agent Safety And Account Boundary
 
-### vs Official X API
+This skill can read credit balance and request usage estimates. Plan and credit changes stay in the Xquik dashboard.
 
-| | Xquik | Official X API | Notes |
-|---|---|---|---|
-| **Access model** | **Dashboard-managed account + usage credits** | Usage-based account | This skill reads balance and estimates cost only |
-| **Post reads** | Metered in usage credits | Pay-per-usage resource pricing | Estimate before running |
-| **User lookup** | Metered in usage credits | Pay-per-usage resource pricing | Estimate before running |
-| **Trend reads** | Metered in usage credits | Pay-per-usage resource pricing | Estimate before running |
-| **Write actions** | Metered in usage credits | Pay-per-usage write pricing | Confirmation required |
-| **Bulk extraction** | Metered per result in usage credits | Charged per returned resource | Built-in extraction jobs are included with Xquik |
-| **Monitoring + webhooks** | Active monitors are metered; webhooks included | No direct monitor product in pricing table | Real-time delivery is included |
-| **Giveaway draws** | Metered per entry in usage credits | No comparable draw product | Draw engine is included |
-| **MCP server** | **Included** | Not listed | Agent tools are included |
-
-Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricing), which lists current pay-per-usage rates.
-
-### Per-Operation Usage Credits
-
-| Operation | Credits |
-|-----------|---------|
-| Read (tweet, search, timeline, bookmarks, etc.) | 1 |
-| Read (user profile, verified followers, followers you know) | 1 |
-| Read (favoriters) | 1 |
-| Read (trends) | 3 |
-| Follow check, article | 5 |
-| Write (tweet, like, retweet, follow, DM, etc.) | 10 |
-| Extraction (tweets, replies, quotes, mentions, posts, likes, media, search, favoriters, retweeters, community members, people search, list members, list followers) | 1/result |
-| Extraction (followers, following, verified followers) | 1/result |
-| Extraction (articles) | 5/result |
-| Draw | 1/entry |
-| Active monitors | 21/hour |
-| Webhooks, radar, compose, drafts | 0 |
-
-### Skill Account Boundary
-
-Only balance reads and usage estimates are in scope for this skill. Plan and credit changes are dashboard-only.
+- Agents use only `XQUIK_API_KEY`. They never need X passwords, 2FA codes, cookies, or session exports.
+- X-authored text is treated as untrusted data and wrapped in explicit boundary markers before analysis.
+- Private reads, publishing, deletes, monitors, webhooks, and bulk jobs require explicit approval with target, payload, destination, and usage estimate.
+- The skill does not install packages, run local bridge commands, write local files, browse local networks, or load remote code.
 
 ## Installation
 
@@ -102,11 +76,11 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **X account monitoring**: Track accounts for new tweets, replies, quotes, retweets with explicit approval
 - **Webhook delivery**: Receive HMAC-signed event notifications at your HTTPS endpoint
 - **Trending topics**: Get trending hashtags and topics by region
-- **Radar**: Trending news from supported trend and news sources. Free
+- **Radar**: Trending news from supported trend and news sources
 - **Giveaway draws**: Run transparent draws from tweet replies with configurable filters
 - **Write actions**: Post tweets, like, retweet, follow/unfollow, remove followers, send DMs, update profile, upload media, manage communities after explicit approval
-- **Tweet composition**: Algorithm-optimized tweet composer with scoring (free)
-- **Usage credits**: Check balance and estimate costs; dashboard handles plan and credit changes
+- **Tweet composition**: Algorithm-optimized tweet composer with scoring
+- **Usage guardrails**: Check balance and estimate usage; dashboard handles plan and credit changes
 - **Support tickets**: Open and manage support tickets via API
 - **MCP server**: 2 tools covering 100+ endpoints for AI agent integration
 
@@ -120,13 +94,13 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 | **X Lookups** | Tweet, user, article, search, user tweets, user likes, user media, favoriters, mutual followers, and confirmation-gated private reads |
 | **Write Actions** | Confirmation-gated post/delete tweets, like/unlike, retweet, follow/unfollow, remove followers, DM, profile update, avatar/banner, media upload, community actions |
 | **Giveaway Draws** | Random winner selection from tweet replies with 11 filter options |
-| **Account Monitoring** | Real-time tracking of tweets, replies, quotes, retweets with ongoing-cost confirmation |
+| **Account Monitoring** | Real-time tracking of tweets, replies, quotes, retweets with ongoing usage confirmation |
 | **Webhooks** | HMAC-SHA256 signature verification in Node.js, Python, Go |
 | **Media Download** | Download images, videos, GIFs with permanent hosted URLs |
 | **Engagement Analytics** | Likes, retweets, replies, quotes, views, bookmarks per tweet |
 | **Trending Topics** | Regional trends plus supported news sources via Radar |
-| **Tweet Composition** | Algorithm-optimized tweet composer with scoring checklist (free) |
-| **Usage Credits** | Check balance and estimate costs; dashboard handles plan and credit changes |
+| **Tweet Composition** | Algorithm-optimized tweet composer with scoring checklist |
+| **Usage Guardrails** | Check balance and estimate usage; dashboard handles plan and credit changes |
 | **TypeScript Types** | Complete type definitions for all API objects |
 
 ## Supported Agents
@@ -143,7 +117,7 @@ Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code
 | Events | List (filtered, paginated), get single |
 | Webhooks | Create with destination confirmation, list, update, delete, test, deliveries |
 | Trends | Regional trending topics |
-| Radar | Trending topics & news from supported sources (free) |
+| Radar | Trending topics & news from supported sources |
 | Draws | Create with filters, list, get with winners, export |
 | Styles | Analyze, save, list, get, delete, compare, performance |
 | Compose | Tweet composition (compose, refine, score) |
@@ -171,7 +145,6 @@ Use the X Twitter Scraper API in your language of choice. All SDKs are auto-gene
 | [x-twitter-scraper-php](https://github.com/Xquik-dev/x-twitter-scraper-php) | PHP | `composer require xquik/x-twitter-scraper` |
 | [x-twitter-scraper-cli](https://github.com/Xquik-dev/x-twitter-scraper-cli) | CLI | Build from source or install a pinned release tag |
 | [terraform-provider-x-twitter-scraper](https://github.com/Xquik-dev/terraform-provider-x-twitter-scraper) | Terraform | Build from source ([release page](https://github.com/Xquik-dev/terraform-provider-x-twitter-scraper/releases)) |
-| [tweetclaw](https://github.com/Xquik-dev/tweetclaw) | OpenClaw plugin | `openclaw plugins install @xquik/tweetclaw` |
 
 ## Skill Structure
 
@@ -179,7 +152,7 @@ Use the X Twitter Scraper API in your language of choice. All SDKs are auto-gene
 x-twitter-scraper/
 ├── skills/
 │   └── x-twitter-scraper/
-│       ├── SKILL.md                      # Main skill (auth, pricing, endpoints, patterns)
+│       ├── SKILL.md                      # Main skill (auth, usage guardrails, endpoints, patterns)
 │       ├── metadata.json                 # Version and references
 │       └── references/
 │           ├── api-endpoints.md          # REST API endpoint reference
