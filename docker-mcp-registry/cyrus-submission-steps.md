@@ -6,7 +6,7 @@ indexed from GitHub repos that follow the skills.sh standard (SKILL.md format).
 ## Current Status
 
 - x-twitter-scraper already has a SKILL.md at `skills/x-twitter-scraper/SKILL.md`
-- Already listed on skills.sh at https://skills.sh/Xquik-dev/x-twitter-scraper (393 installs)
+- Already listed on skills.sh at https://skills.sh/Xquik-dev/x-twitter-scraper
 - NOT yet listed on Cyrus at https://www.atcyrus.com/skills/x-twitter-scraper (returns "Skill not found")
 
 ## Submission Process
