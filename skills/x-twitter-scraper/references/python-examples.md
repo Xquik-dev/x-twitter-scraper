@@ -2,6 +2,14 @@
 
 Python equivalents of the JavaScript examples in SKILL.md.
 
+## Contents
+
+- [Authentication](#authentication)
+- [Retry with Exponential Backoff](#retry-with-exponential-backoff)
+- [Extraction Workflow](#extraction-workflow)
+- [Giveaway Draw](#giveaway-draw)
+- [Webhook Handler (Python Standard Library)](#webhook-handler-python-standard-library)
+
 ## Authentication
 
 ```python

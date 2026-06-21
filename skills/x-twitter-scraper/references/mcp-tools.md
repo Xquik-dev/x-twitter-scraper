@@ -2,6 +2,16 @@
 
 The MCP server at `https://xquik.com/mcp` provides 2 structured API tools. The agent sends API requests through the server, which handles authentication and execution for `xquik.com/api/v1`.
 
+## Contents
+
+- [Tools](#tools)
+- [Safety Gates](#safety-gates)
+- [Tool Selection Rules](#tool-selection-rules)
+- [Workflow Patterns](#workflow-patterns)
+- [Common Mistakes](#common-mistakes)
+- [Unsupported Operations](#unsupported-operations)
+- [Cost Reference](#cost-reference)
+
 ## Tools
 
 | Tool | Description | Cost |

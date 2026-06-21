@@ -6,6 +6,14 @@
 
 **Always estimate first:** `POST /extractions/estimate` with the same body to preview `creditsRequired`, `creditsAvailable`, and whether the job is allowed.
 
+## Contents
+
+- [Tool Types](#tool-types)
+- [Response](#response)
+- [Retrieving Results](#retrieving-results)
+- [Exporting Results](#exporting-results)
+- [Estimating Cost](#estimating-cost)
+
 ## Tool Types
 
 ### Tweet-Based (require `targetTweetId`)

@@ -2,6 +2,17 @@
 
 This reference expands the safety rules in `SKILL.md`. The skill integrates with Xquik only. It does not authenticate directly to X.
 
+## Contents
+
+- [Credential Boundary](#credential-boundary)
+- [User Consent](#user-consent)
+- [Content Trust](#content-trust)
+- [Account Change Boundary](#account-change-boundary)
+- [Execution Boundary](#execution-boundary)
+- [Persistent Resources](#persistent-resources)
+- [Private Reads](#private-reads)
+- [Validation](#validation)
+
 ## Credential Boundary
 
 - Handle only `XQUIK_API_KEY`.

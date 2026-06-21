@@ -2,6 +2,15 @@
 
 Code examples for common integration patterns.
 
+## Contents
+
+- [Authentication](#authentication)
+- [Retry with Exponential Backoff](#retry-with-exponential-backoff)
+- [Cursor Pagination](#cursor-pagination)
+- [Complete Extraction Workflow](#complete-extraction-workflow)
+- [Real-Time Monitoring Setup](#real-time-monitoring-setup)
+- [Endpoint Guide](#endpoint-guide)
+
 ## Authentication
 
 ```javascript

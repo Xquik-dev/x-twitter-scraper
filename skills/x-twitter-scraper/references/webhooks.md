@@ -2,6 +2,16 @@
 
 Receive real-time event notifications at your HTTPS endpoints with HMAC-SHA256 signature verification.
 
+## Contents
+
+- [Setup](#setup)
+- [Webhook Payload](#webhook-payload)
+- [Signature Verification](#signature-verification)
+- [Security Checklist](#security-checklist)
+- [Idempotency](#idempotency)
+- [Retry Policy](#retry-policy)
+- [Local Testing](#local-testing)
+
 ## Setup
 
 1. Create at least 1 active monitor (`POST /monitors`)
