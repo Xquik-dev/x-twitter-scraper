@@ -109,7 +109,7 @@ Before each private read:
 2. Ask for approval.
 3. Fetch only the requested scope.
 4. Summarize by default.
-5. Do not forward the data elsewhere without approval.
+5. Forward the data elsewhere only after explicit approval.
 
 ## Validation
 

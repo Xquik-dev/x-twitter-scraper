@@ -97,7 +97,7 @@ const contentChecks = [
   {
     path: "skills/x-twitter-scraper/SKILL.md",
     required: [
-      "100+ REST API endpoints",
+      "OpenAPI-documented REST API paths",
       "Some operations consume usage credits",
       "Read (10/1s), Write (30/60s), Delete (15/60s)",
       "Plan and credit changes are dashboard-only",
@@ -156,7 +156,7 @@ const contentChecks = [
   },
   {
     path: "skills/x-twitter-scraper/references/mcp-setup.md",
-    required: ["https://xquik.com/openapi.json"],
+    required: ["https://xquik.com/mcp", "OpenAI Agents SDK"],
     forbidden: ["https://docs.xquik.com/openapi.json"],
   },
   {
@@ -219,12 +219,22 @@ const contentChecks = [
   {
     path: "skills/x-twitter-scraper/references/workflows.md",
     required: [
-      "| **Get an X Article** by tweet ID | `GET /x/articles/{tweetId}` | 5 credits |",
-      "| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | 5 credits |",
+      "| **Get an X Article** by tweet ID | `GET /x/articles/{tweetId}` | Metered |",
+      "| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | Metered |",
     ],
     forbidden: [
       "| **Get an X Article** by tweet ID | `GET /x/articles/{tweetId}` | 7 credits |",
       "| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | 7 credits |",
+      blocked(
+        "| **Get an X Article** by tweet ID | `GET /x/articles/{tweetId}` | ",
+        "5",
+        " credits |",
+      ),
+      blocked(
+        "| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | ",
+        "5",
+        " credits |",
+      ),
     ],
   },
   {

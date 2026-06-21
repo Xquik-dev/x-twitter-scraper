@@ -12,7 +12,7 @@
 - [Response](#response)
 - [Retrieving Results](#retrieving-results)
 - [Exporting Results](#exporting-results)
-- [Estimating Cost](#estimating-cost)
+- [Estimating Usage](#estimating-usage)
 
 ## Tool Types
 
@@ -214,7 +214,7 @@ Formats: `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, `xlsx`. 100,000 row l
 
 Exports include enrichment columns not present in the API response.
 
-## Estimating Cost
+## Estimating Usage
 
 ```
 POST /extractions/estimate

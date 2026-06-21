@@ -14,11 +14,14 @@ Python equivalents of the JavaScript examples in SKILL.md.
 
 ```python
 import json
-import os
 import urllib.error
 import urllib.request
 
-API_KEY = os.environ["XQUIK_API_KEY"]
+def load_secret(name: str) -> str:
+    """Read from your agent or platform secret store."""
+    raise RuntimeError(f"Configure {name} in your secret store.")
+
+API_KEY = load_secret("XQUIK_API_KEY")
 BASE = "https://xquik.com/api/v1"
 HEADERS = {"x-api-key": API_KEY, "Content-Type": "application/json"}
 ```
@@ -64,7 +67,7 @@ estimate = xquik_fetch("/extractions/estimate", method="POST", json_body={
 })
 
 if not estimate["allowed"]:
-    print(f"Need {estimate['creditsRequired']} credits; available {estimate['creditsAvailable']}")
+    print(f"Estimate requires {estimate['creditsRequired']}; available {estimate['creditsAvailable']}")
     exit()
 
 # Step 2: Create job
@@ -125,11 +128,14 @@ for winner in details["winners"]:
 import hashlib
 import hmac
 import json
-import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
+def load_secret(name: str) -> str:
+    """Read from your runtime secret store."""
+    raise RuntimeError(f"Configure {name} in your secret store.")
+
 # Per-webhook secret from POST /webhooks response, not a Xquik account credential
-WEBHOOK_SECRET = os.environ["XQUIK_WEBHOOK_SECRET"]
+WEBHOOK_SECRET = load_secret("XQUIK_WEBHOOK_SECRET")
 processed_hashes = set()  # Use Redis/DB in production
 
 def verify_signature(payload: bytes, signature: str, secret: str) -> bool:
