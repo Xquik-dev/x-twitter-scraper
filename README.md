@@ -1,4 +1,8 @@
-# X Twitter Scraper API - Xquik X API Alternative For Tweets, Followers, MCP, SDKs, Webhooks
+# X Twitter Scraper API For Tweets, Followers & MCP
+
+[![Framer shows Xquik MCP with Claude Code, Codex, Cursor, and more](https://img.youtube.com/vi/4UOSpoOoC3Y/hqdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
+
+Featured in Framer's [Connect Framer to Claude Code, Codex, Cursor, and more](https://youtu.be/4UOSpoOoC3Y?t=367) video at 6:07.
 
 [Xquik](https://docs.xquik.com) is a production Twitter/X scraper API and X API alternative for teams that need structured X data at scale: tweet search, profiles, followers, following, engagement, media, lists, communities, trends, monitors, webhooks, exports, MCP tools, SDKs, and confirmation-gated X actions.
 
