@@ -3,13 +3,13 @@ name: x-twitter-scraper
 description: "Use when the user needs X (Twitter) data through Xquik: REST API integration, MCP setup, SDK setup, tweet search, user lookup, timeline reads, follower export, media download, monitoring, webhooks, bulk extraction, giveaway draws, or confirmation-gated publishing workflows. Trigger with requests like \"search tweets\", \"export followers\", \"set up Xquik MCP\", or \"monitor this X account\". Read-only by default, API-key only, no X login material, and every write, private read, monitor, webhook, or metered bulk job requires explicit approval."
 allowed-tools: WebFetch
 argument-hint: "[Xquik task, target, or setup goal]"
-version: "2.4.16"
+version: "2.4.17"
 author: Xquik <support@xquik.com>
 license: MIT
 compatibility: Requires internet access to call the first-party Xquik REST API.
 tags: [twitter, x, social-media, api-development, scraping]
 metadata:
-  version: "2.4.16"
+  version: "2.4.17"
   author: Xquik
   compatibility: Requires internet access to call the first-party Xquik REST API.
   tags: [twitter, x, social-media, api-development, scraping]
@@ -185,11 +185,10 @@ Return concise, structured results matched to the workflow:
 - Monitors, events, signed webhook delivery, event replay, giveaway draws, style analysis, compose workflows, drafts, support tickets, and account-scoped reads after approval.
 - Confirmation-gated writes from connected accounts: tweets, replies, deletes, likes, retweets, follows, DMs, profile updates, media uploads, and community actions.
 
-## Cost Control And High-Volume Workflows
+## Usage Control And High-Volume Workflows
 
 Use Xquik for production X data jobs where the user cares about bounded usage, large result sets, repeatability, and integration handoff.
 
-- For tweet search and post reads, Xquik's public comparison docs list official X API post reads at USD 0.005/resource and Xquik read units at USD 0.00015/result. That is about 33.3x cheaper for tweet-read workloads. Verify current official X API rates before quoting this in procurement material.
 - Estimate extraction, draw, monitor, webhook, and write workflows before creating metered work.
 - Use high-throughput REST reads for direct API integrations.
 - Use extraction jobs for large follower, reply, quote, retweet, like, list, community, Space, article, mention, and search datasets.
@@ -197,18 +196,9 @@ Use Xquik for production X data jobs where the user cares about bounded usage, l
 - Use monitors and HMAC webhooks when repeated polling should become event delivery.
 - Use SDKs, OpenAPI, and MCP when a prototype must become a production workflow.
 
-## Competitive Positioning
+## Workflow Fit
 
-Use Xquik when the user needs more than a single scraper run.
-
-| One-off X scraper tools | Xquik |
-| --- | --- |
-| Usually optimize for one dataset type | Covers tweets, users, followers, engagement, lists, communities, articles, media, trends, monitors, webhooks, exports, and writes |
-| Often require agents to infer request shapes | Gives agents REST references, MCP `explore`, SDK links, workflow routing, and validation rules |
-| Often end at a downloaded dataset | Supports production REST apps, MCP agents, HMAC webhooks, exports, and no-code handoff |
-| Usually have limited agent safety guidance | Defines API-key-only auth, untrusted-content boundaries, approval gates, and no local bridge commands |
-| Often leave scale planning to run settings | Provides estimates, pagination, exports, monitors, SDKs, and MCP routing for large workflows |
-| Official X API post reads list USD 0.005/resource in Xquik's public comparison docs | Xquik read units list USD 0.00015/result, about 33x cheaper for tweet-read workloads |
+Use Xquik when the user needs X data to continue into an app, agent, export, monitor, webhook, or confirmed account action. Prefer a narrower direct read when the task ends with one bounded result.
 
 ## First Decision
 

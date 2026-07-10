@@ -72,11 +72,10 @@ Use profile URLs, @handles, user IDs, tweet URLs, tweet IDs, search queries, has
 | Webhooks | Real-time alerts, monitor delivery, workflow automation, event replay |
 | Exports | Research datasets, CRM handoff, BI tools, spreadsheets, archive workflows |
 
-## Cost Control, Rate Limits, And High-Volume Workflows
+## Usage Control, Rate Limits, And High-Volume Workflows
 
-Xquik is built for production X data jobs where teams care about predictable usage, large result sets, and integration paths beyond a single dataset run.
+Xquik is built for production X data jobs where teams need bounded usage, large result sets, and integration paths beyond a single dataset run.
 
-- **About 33x cheaper than the official X API for tweet reads**: Xquik's public comparison docs list official X API post reads at USD 0.005/resource and Xquik read units at USD 0.00015/result. For tweet search and post reads, that is roughly 33.3x cheaper. Always verify current official X API rates before procurement.
 - **Higher read throughput for supported workflows**: Xquik docs list read limits at 60 requests per second per account. Official X API rate-limit tables use per-15-minute windows for many endpoints, including recent search at 450 requests per app and 300 requests per user per 15 minutes.
 - Use `POST /extractions/estimate` before large exports so agents can show expected usage before creating work.
 - Use cursor pagination and batch endpoints for high-throughput read workflows.
@@ -85,23 +84,18 @@ Xquik is built for production X data jobs where teams care about predictable usa
 - Use monitors and HMAC webhooks when repeated polling should become event delivery.
 - Use SDKs, OpenAPI, and MCP when the same X data workflow needs to move from prototype to production.
 
-## Where Xquik Is Stronger Than Scraper-Only Alternatives
+## Production Workflow Coverage
 
-Most Twitter scraper listings sell one job: scrape tweets from search, profiles, or URLs. Xquik covers the full X data workflow surface for apps, agents, datasets, webhooks, exports, and connected-account actions.
+Use Xquik when an X data task must continue into an app, agent, dataset, webhook, export, or confirmed connected-account action.
 
-| Capability | Single-purpose scraper actors | Xquik |
-|------------|-------------------------------|-------|
-| Tweet search, profile timelines, and tweet URLs | Usually supported | Supported through REST, MCP, SDKs, and exports |
-| Replies, quotes, retweeters, and favoriters | Often separate modes or separate tools | Same platform, endpoint-routed, with bulk extraction paths |
-| Followers, following, verified followers, lists, and communities | Often separate actors | Same API account, same skill, same export model |
-| Real-time monitoring | Usually not the core product | Account monitors, keyword monitors, events, and HMAC webhooks |
-| Agent-native use | Often generic HTTP calls | Dedicated MCP server, endpoint discovery, skill instructions, and safety gates |
-| Product integration | Dataset download first | REST API, OpenAPI, SDKs, MCP, webhooks, and no-code guides |
-| Account actions | Usually unsupported or separate | Confirmation-gated writes from connected accounts |
-| Safety model for agents | Rarely explicit | API-key only, untrusted-content boundaries, approval gates, no local bridge commands |
-| Large workload planning | Often configured at run time | Estimate first, paginate, export, monitor, and route through SDKs or MCP |
-| Tweet-read economics | Xquik public comparison docs list official X API post reads at USD 0.005/resource | Xquik read units are listed at USD 0.00015/result, about 33x cheaper for tweet reads |
-| Rate-limit model | Often opaque or tied to platform run settings | Public Xquik docs list 60 read requests per second per account |
+| Workflow | Xquik Support |
+|----------|----------------|
+| Tweet and profile research | Search, lookup, timelines, replies, quotes, engagement, and media |
+| Large datasets | Estimates, cursor pagination, extraction jobs, and exports |
+| Ongoing listening | Account monitors, keyword monitors, events, and HMAC webhooks |
+| Agent integration | Remote MCP, endpoint discovery, skill instructions, and safety gates |
+| Product integration | REST API, OpenAPI, SDKs, webhooks, and no-code guides |
+| Account actions | Confirmation-gated writes from connected accounts |
 
 Choose Xquik when the goal is not just "scrape tweets," but to build a durable X data product, social listening workflow, market research pipeline, CRM export, agent tool, monitoring system, or publishing assistant.
 

@@ -16,7 +16,7 @@ MIT for the skill package. Xquik service terms govern API use.
 
 ## Use Case
 
-Use this skill when developers, agent operators, or support teams need tweet search, user lookup, follower export, media download, monitoring, webhook setup, MCP setup, SDK setup, high-volume X data workflows, about 33x lower tweet-read unit cost than official X API post reads, or confirmation-gated X publishing workflows through Xquik.
+Use this skill when developers, agent operators, or support teams need tweet search, user lookup, follower export, media download, monitoring, webhook setup, MCP setup, SDK setup, high-volume X data workflows, or confirmation-gated X publishing workflows through Xquik.
 
 ## Deployment Geography for Use
 
@@ -53,7 +53,7 @@ Mitigation: Verify unfamiliar endpoint details against `https://docs.xquik.com` 
 - NVIDIA signing guidance: `https://docs.nvidia.com/skills/signing-agent-skills`
 - NVIDIA skill card guidance: `https://docs.nvidia.com/skills/skill-cards`
 - NVIDIA release checklist: `https://docs.nvidia.com/skills/release-checklist`
-- Scan evidence: `skillspector-report.md` records a static SkillSpector v2.3.7 scan from 2026-06-26 with 0 findings. Refresh it after each `SKILL.md` change.
+- Scan evidence: `skillspector-report.md` records a static SkillSpector v2.3.7 scan from 2026-07-10 with 0 findings. Refresh it after each `SKILL.md` change.
 - Signing evidence: pending `skill.oms.sig` for signed release artifacts.
 - Evaluation evidence: pending Tier-3 evaluation data and `BENCHMARK.md` for NVIDIA-Verified release.
 
@@ -69,7 +69,7 @@ Other properties: The skill performs no shell execution, no local file access, n
 
 ## Skill Version
 
-2.4.16
+2.4.17
 
 ## Ethical Considerations
 

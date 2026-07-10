@@ -1,8 +1,8 @@
 {
   "id": "x-developer",
   "name": "X Developer API",
-  "description": "Xquik X Twitter scraper API skill and X API alternative for tweet search, follower export, social listening, 100+ REST endpoints, MCP, SDKs, webhooks, exports, 33x cheaper tweet reads, and gated actions.",
-  "version": "2.4.16",
+  "description": "Xquik X Twitter scraper API skill for tweet search, follower export, social listening, 100+ REST endpoints, MCP, SDKs, webhooks, exports, and gated actions.",
+  "version": "2.4.17",
   "skills": ["./skills"],
   "providerAuthEnvVars": {
     "xquik": ["XQUIK_API_KEY"]
