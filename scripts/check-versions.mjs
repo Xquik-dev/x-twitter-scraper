@@ -86,13 +86,17 @@ function checkForbiddenContent(check, raw) {
 }
 
 function collectSkillMetadataDrifts() {
-  const skillPaths = readdirSync(join(root, "skills")).map(
-    (dir) => `skills/${dir}/SKILL.md`,
-  );
-  return collectFrontmatterPolicyDrifts(
-    skillPaths,
-    skillFrontmatterExpectations,
-  );
+  const primarySkillPath = "skills/x-twitter-scraper/SKILL.md";
+  const portableSkillPaths = readdirSync(join(root, "skills"))
+    .filter((dir) => dir !== "x-twitter-scraper")
+    .map((dir) => `skills/${dir}/SKILL.md`);
+  return [
+    ...collectFrontmatterPolicyDrifts(
+      [primarySkillPath],
+      skillFrontmatterExpectations,
+    ),
+    ...collectFrontmatterPolicyDrifts(portableSkillPaths, {}),
+  ];
 }
 
 function collectTaskGuideMetadataDrifts() {
@@ -283,6 +287,9 @@ function collectNestedReferenceDrifts() {
   const drifts = [];
   for (const skill of readdirSync(join(root, "skills"))) {
     const referencesPath = `skills/${skill}/references`;
+    if (!existsSync(join(root, referencesPath))) {
+      continue;
+    }
     for (const entry of readdirSync(join(root, referencesPath), {
       withFileTypes: true,
     })) {
