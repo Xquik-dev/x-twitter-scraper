@@ -1,5 +1,8 @@
 # X Twitter Scraper API For Tweets, Followers, MCP
 
+> **Xquik is an independent third-party service.** Not affiliated with X Corp.
+> "Twitter" and "X" are trademarks of X Corp.
+
 <table>
   <tr>
     <td align="center">
@@ -18,7 +21,7 @@
 
 This repository packages Xquik as an [AI agent skill](https://skills.sh) for Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, and other skills-compatible agents. It helps agents choose the right REST endpoint, MCP tool, SDK, webhook, extraction, export, or approval-gated workflow without guessing.
 
-Includes 100+ REST API endpoints (123 documented operations), 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, official SDK pointers, and confirmation-gated write actions.
+Includes 100+ REST API endpoints (123 documented operations), 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, Xquik SDK pointers, and confirmation-gated write actions.
 
 ## Why Teams Use Xquik
 
@@ -214,7 +217,7 @@ Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code
 | X Write | Confirmation-gated tweet, delete, like, unlike, retweet, follow, unfollow, DM, profile, avatar, banner, media upload, communities |
 | Support | Create ticket, list, get, update, reply |
 
-## Official SDKs & Tools
+## Xquik SDKs & Tools
 
 Use the X Twitter Scraper API in your language of choice. All SDKs are auto-generated, kept in sync with the OpenAPI spec, and follow idiomatic conventions for each ecosystem.
 

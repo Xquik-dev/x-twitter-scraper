@@ -175,7 +175,7 @@ Return concise, structured results matched to the workflow:
 | Search tweets, profiles, timelines, replies, quotes, or engagement | Narrow `/x/*` REST endpoint or MCP `xquik` | [workflows](references/workflows.md) |
 | Export followers, following, replies, quotes, retweets, likes, lists, communities, Spaces, or search results | Estimate, confirm, then create extraction job | [extractions](references/extractions.md) |
 | Receive real-time X events | Confirm monitor and HMAC webhook setup | [webhooks](references/webhooks.md) |
-| Use typed clients | Official SDK repositories from README | README SDK table |
+| Use typed clients | Xquik SDK repositories from README | README SDK table |
 | Publish or change X account state | Confirmation-gated X write endpoint | [security](references/security.md) |
 
 ## What Xquik Covers

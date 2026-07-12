@@ -1,7 +1,7 @@
 {
   "name": "x-developer",
   "version": "2.4.17",
-  "description": "Xquik X Twitter scraper API skill for tweet search, follower export, social listening, REST, MCP, SDKs, webhooks, exports, and gated actions.",
+  "description": "Xquik X Twitter scraper API skill for tweet search, follower export, social listening, REST, MCP, SDKs, webhooks, exports, and gated actions. Not affiliated with X Corp.",
   "author": {
     "name": "Xquik",
     "url": "https://docs.xquik.com"
