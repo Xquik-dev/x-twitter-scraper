@@ -21,6 +21,8 @@
 
 This repository packages Xquik as an [AI agent skill](https://skills.sh) for Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, and other skills-compatible agents. It helps agents choose the right REST endpoint, MCP tool, SDK, webhook, extraction, export, or approval-gated workflow without guessing.
 
+The npm package `x-developer` is this agent skill and plugin bundle. The separate `x-twitter-scraper` package is the typed TypeScript SDK.
+
 Includes 123 REST API operations, HMAC webhooks, 23 extraction tools, SDK pointers, and confirmation-gated writes.
 
 MCP v2.5.0 exposes 118 MCP operations through 2 tools. It excludes 5 sensitive REST operations. These cover API key creation, listing, and revocation, saved-payment top-ups, and dashboard checkout redirects.

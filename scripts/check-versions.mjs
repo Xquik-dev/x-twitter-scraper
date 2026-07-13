@@ -78,8 +78,14 @@ function checkRequiredContent(check, raw) {
 function checkForbiddenContent(check, raw) {
   const drifts = [];
   for (const forbidden of check.forbidden) {
-    if (raw.includes(forbidden)) {
-      drifts.push(`  ${check.path}: stale "${forbidden}"`);
+    const isMatch =
+      typeof forbidden === "string"
+        ? raw.includes(forbidden)
+        : forbidden.pattern.test(raw);
+    if (isMatch) {
+      const label =
+        typeof forbidden === "string" ? `"${forbidden}"` : forbidden.label;
+      drifts.push(`  ${check.path}: stale ${label}`);
     }
   }
   return drifts;

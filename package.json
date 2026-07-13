@@ -1,7 +1,7 @@
 {
   "name": "x-developer",
   "version": "2.5.0",
-  "description": "Xquik X Twitter scraper API skill for tweet search, follower export, social listening, REST, MCP, SDKs, webhooks, exports, and gated actions. Not affiliated with X Corp.",
+  "description": "Xquik agent skill & plugin bundle for REST, MCP, webhooks, exports & confirmation-gated X workflows. Not affiliated with X Corp.",
   "author": {
     "name": "Xquik",
     "url": "https://docs.xquik.com"
@@ -75,8 +75,5 @@
   "scripts": {
     "check-versions": "node scripts/check-versions.mjs",
     "prepublishOnly": "node scripts/check-versions.mjs"
-  },
-  "devDependencies": {
-    "@tanstack/intent": "0.0.40"
   }
 }

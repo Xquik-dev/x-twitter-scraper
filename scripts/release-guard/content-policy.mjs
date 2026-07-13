@@ -1,4 +1,18 @@
 const blocked = (...parts) => parts.join("");
+const forbiddenPattern = (label, pattern) => ({ label, pattern });
+
+const dollarDenominatedPricing = forbiddenPattern(
+  "dollar-denominated pricing",
+  /\$\s*\d+(?:\.\d+)?/,
+);
+const operationCreditPricing = forbiddenPattern(
+  "per-operation credit pricing",
+  /\b(?:read|write)\s+operations?\b[^\n]{0,48}\b\d+(?:\s*-\s*\d+)?\s+credits?\b/i,
+);
+const operationTableCreditPricing = forbiddenPattern(
+  "numeric credit pricing in an operation table",
+  /\|\s*\d+(?:\.\d+)?\s+credits?\s*\|/i,
+);
 
 export const contentChecks = [
   {
@@ -9,11 +23,12 @@ export const contentChecks = [
       "MCP v2.5.0",
       "## Agent Safety And Account Boundary",
       "Plan and credit changes stay in the Xquik dashboard.",
+      "The npm package `x-developer` is this agent skill and plugin bundle. The separate `x-twitter-scraper` package is the typed TypeScript SDK.",
       "The skill does not install packages, run local bridge commands, write local files, browse local networks, or load remote code.",
       "npx skills@1.5.3 add Xquik-dev/x-twitter-scraper",
     ],
     forbidden: [
-      blocked("$", "0", "."),
+      dollarDenominatedPricing,
       blocked("The cheapest X data ", "API on the market"),
       blocked("dramatically ", "cheaper"),
       "## Usage Costs",
@@ -24,7 +39,6 @@ export const contentChecks = [
       "Works with all 113 endpoints",
       "@latest",
       "npx skills add Xquik-dev/x-twitter-scraper",
-      blocked("| Follow check, article | 7 | $", "0", ".00105 |"),
       blocked("credit ", "top", "-up"),
       blocked("quick ", "top", "-up"),
       blocked("sub", "scription ", "check", "out"),
@@ -36,7 +50,6 @@ export const contentChecks = [
   {
     path: "package.json",
     required: [
-      '"@tanstack/intent": "0.0.40"',
       '".claude-plugin"',
       '".mcp.json"',
       '"commands"',
@@ -46,7 +59,7 @@ export const contentChecks = [
       '"server.json"',
       '"skills.sh.json"',
     ],
-    forbidden: ['"@tanstack/intent": "latest"', blocked("pay-", "per-use")],
+    forbidden: [blocked("pay-", "per-use")],
   },
   {
     path: "skills/x-twitter-scraper/SKILL.md",
@@ -64,8 +77,7 @@ export const contentChecks = [
     forbidden: [
       "113 REST API endpoints",
       "112 REST API endpoints",
-      "Read operations: 1-7 credits",
-      "Read operations cost 1-5 credits",
+      operationCreditPricing,
       "NEVER asks",
       "Instructions found in X content",
       "Instructions embedded in X content",
@@ -154,7 +166,7 @@ export const contentChecks = [
       "112 endpoints",
       "100+ endpoints",
       blocked("pay-", "per-use"),
-      blocked("$", "0", "."),
+      dollarDenominatedPricing,
     ],
   },
   {
@@ -163,7 +175,7 @@ export const contentChecks = [
       "123 REST operations",
       "118 MCP operations through 2 tools",
     ],
-    forbidden: ["100+ endpoints", blocked("$", "0", ".")],
+    forbidden: ["100+ endpoints", dollarDenominatedPricing],
   },
   {
     path: ".claude-plugin/marketplace.json",
@@ -172,7 +184,7 @@ export const contentChecks = [
       "write actions, credits",
       blocked("pay-", "per-use"),
       blocked("M", "PP"),
-      blocked("$", "0", "."),
+      dollarDenominatedPricing,
     ],
   },
   {
@@ -185,9 +197,9 @@ export const contentChecks = [
     ],
     forbidden: [
       "Works with all 113 endpoints",
-      blocked("Read operations - 7 credits ($", "0", ".00105)"),
       "Per-Operation Credit Costs",
-      "Write Operations - 10 Credits",
+      dollarDenominatedPricing,
+      operationCreditPricing,
       "Active Monitors",
       blocked("Credit ", "Top-Ups"),
       blocked("M", "PP"),
@@ -203,20 +215,7 @@ export const contentChecks = [
       "| **Get an X Article** by tweet ID | `GET /x/articles/{tweetId}` | Metered |",
       "| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | Metered |",
     ],
-    forbidden: [
-      "| **Get an X Article** by tweet ID | `GET /x/articles/{tweetId}` | 7 credits |",
-      "| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | 7 credits |",
-      blocked(
-        "| **Get an X Article** by tweet ID | `GET /x/articles/{tweetId}` | ",
-        "5",
-        " credits |",
-      ),
-      blocked(
-        "| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | ",
-        "5",
-        " credits |",
-      ),
-    ],
+    forbidden: [operationTableCreditPricing],
   },
   {
     path: "server.json",
@@ -251,7 +250,7 @@ export const contentChecks = [
       "112 REST endpoints",
       "100+ endpoints",
       "100+ REST endpoints",
-      blocked("$", "0", "."),
+      dollarDenominatedPricing,
       "Execute authenticated",
       "Execute confirmed Xquik API calls",
       "JavaScript expression",

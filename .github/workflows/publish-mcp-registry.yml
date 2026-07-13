@@ -3,47 +3,76 @@ name: Publish MCP Registry
 on:
   push:
     tags:
-      - "v*"
-  workflow_dispatch:
+      - "v*.*.*"
+
+permissions: {}
+
+concurrency:
+  group: mcp-registry-release-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   publish:
-    runs-on: blacksmith-2vcpu-ubuntu-2404
+    if: github.repository == 'Xquik-dev/x-twitter-scraper'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: mcp-registry
     permissions:
       contents: read
     env:
-      MCP_PUBLISHER_VERSION: v1.7.8
+      MCP_PUBLISHER_VERSION: v1.7.9
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - name: Check out the release tag
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
+        with:
+          node-version: "24.18.0"
+          package-manager-cache: false
+
+      - name: Verify release context
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: .github/scripts/verify-release-context.sh
+
+      - name: Wait for the npm release
+        run: |
+          package_name="$(node -p "require('./package.json').name")"
+          package_version="$(node -p "require('./package.json').version")"
+          for _ in {1..30}; do
+            published_version="$(npm view "${package_name}@${package_version}" version 2>/dev/null || true)"
+            if [[ "$published_version" == "$package_version" ]]; then
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "The matching npm package was not available after 5 minutes." >&2
+          exit 1
 
       - name: Install mcp-publisher
         run: |
-          case "$(uname -m)" in
-            x86_64)
-              asset="mcp-publisher_linux_amd64.tar.gz"
-              checksum="48230dbec85bd88a0d42977ef533cddda23235f0db4331b9263ce53b432cb75c"
-              ;;
-            aarch64)
-              asset="mcp-publisher_linux_arm64.tar.gz"
-              checksum="3eaa88ea0590433b538d3971a6ca0863d0345d3ff5937b0d1874b7a8de71a591"
-              ;;
-            *)
-              echo "Unsupported architecture: $(uname -m)" >&2
-              exit 1
-              ;;
-          esac
-          curl -fsSLO "https://github.com/modelcontextprotocol/registry/releases/download/${MCP_PUBLISHER_VERSION}/${asset}"
-          printf "%s  %s\n" "$checksum" "$asset" | sha256sum -c -
+          asset="mcp-publisher_linux_amd64.tar.gz"
+          checksum="ab128162b0616090b47cf245afe0a23f3ef08936fdce19074f5ba0a4469281ac"
+          curl --fail --location --show-error --silent --retry 3 \
+            --output "$asset" \
+            "https://github.com/modelcontextprotocol/registry/releases/download/${MCP_PUBLISHER_VERSION}/${asset}"
+          printf "%s  %s\n" "$checksum" "$asset" | sha256sum --check --strict
           tar xzf "$asset" mcp-publisher
 
       - name: Validate server.json
         run: ./mcp-publisher validate
 
       - name: Authenticate to MCP Registry
-        run: >
-          ./mcp-publisher login http
-          --domain xquik.com
-          --private-key "${{ secrets.MCP_REGISTRY_PRIVATE_KEY }}"
+        env:
+          MCP_REGISTRY_PRIVATE_KEY: ${{ secrets.MCP_REGISTRY_PRIVATE_KEY }}
+        run: |
+          ./mcp-publisher login http \
+            --domain xquik.com \
+            --private-key "$MCP_REGISTRY_PRIVATE_KEY"
 
       - name: Publish to MCP Registry
         run: ./mcp-publisher publish

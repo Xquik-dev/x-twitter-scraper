@@ -3,53 +3,85 @@ name: Publish to npm
 on:
   push:
     tags:
-      - "v*"
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: Existing release tag to publish
-        required: false
-        type: string
+      - "v*.*.*"
+
+permissions: {}
+
+concurrency:
+  group: npm-release-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   publish:
-    runs-on: blacksmith-2vcpu-ubuntu-2404
+    if: github.repository == 'Xquik-dev/x-twitter-scraper'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: npm
     permissions:
-      contents: write
+      contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+      - name: Check out the release tag
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           fetch-depth: 0
-          ref: ${{ github.event.inputs.tag || github.ref }}
-      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
-          node-version: "24"
+          node-version: "24.18.0"
           registry-url: "https://registry.npmjs.org"
           package-manager-cache: false
-      - name: Check npm version
-        id: npm_version
+
+      - name: Verify release context
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: .github/scripts/verify-release-context.sh
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
+
+      - name: Inspect package contents
+        run: npm pack --dry-run --json
+
+      - name: Check npm registry
+        id: registry
         run: |
           package_name="$(node -p "require('./package.json').name")"
           package_version="$(node -p "require('./package.json').version")"
           if npm view "${package_name}@${package_version}" version >/dev/null 2>&1; then
             echo "published=true" >> "$GITHUB_OUTPUT"
-            echo "${package_name}@${package_version} is already published"
           else
             echo "published=false" >> "$GITHUB_OUTPUT"
-            echo "${package_name}@${package_version} is not published yet"
           fi
-      - run: npm publish --access public --provenance
-        if: steps.npm_version.outputs.published != 'true'
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Create GitHub Release
+
+      - name: Publish package
+        if: steps.registry.outputs.published != 'true'
+        run: npm publish --access public --provenance
+
+  release:
+    needs: publish
+    if: github.repository == 'Xquik-dev/x-twitter-scraper'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Create GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG_NAME: ${{ github.event.inputs.tag || github.ref_name }}
+          TAG_NAME: ${{ github.ref_name }}
         run: |
-          if gh release view "$TAG_NAME" >/dev/null 2>&1; then
-            echo "Release $TAG_NAME already exists"
-          else
-            gh release create "$TAG_NAME" --title "$TAG_NAME" --generate-notes
+          if gh release view "$TAG_NAME" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            exit 0
           fi
+          notice='Xquik is an independent third-party service. Not affiliated with X Corp. "Twitter" and "X" are trademarks of X Corp.'
+          gh release create "$TAG_NAME" \
+            --repo "$GITHUB_REPOSITORY" \
+            --verify-tag \
+            --title "$TAG_NAME" \
+            --notes "$notice"
