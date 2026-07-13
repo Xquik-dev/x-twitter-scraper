@@ -17,8 +17,13 @@ on:
 
 permissions: {}
 
+concurrency:
+  group: x-developer-context7-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   refresh:
+    name: Refresh Context7 Library
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:

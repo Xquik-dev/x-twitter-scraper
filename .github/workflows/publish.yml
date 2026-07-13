@@ -13,13 +13,14 @@ concurrency:
 
 jobs:
   publish:
+    name: Publish Verified Package
     if: github.repository == 'Xquik-dev/x-twitter-scraper'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     environment: npm
     permissions:
       contents: read
-      id-token: write
+      id-token: write # Request npm's short-lived OIDC credential.
     steps:
       - name: Check out the release tag
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
@@ -64,12 +65,13 @@ jobs:
         run: npm publish --access public --provenance
 
   release:
+    name: Create GitHub Release
     needs: publish
     if: github.repository == 'Xquik-dev/x-twitter-scraper'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:
-      contents: write
+      contents: write # Create the verified tag's GitHub release.
     steps:
       - name: Create GitHub release
         env:
