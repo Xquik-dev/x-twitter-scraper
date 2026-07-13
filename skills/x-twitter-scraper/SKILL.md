@@ -1,6 +1,6 @@
 ---
 name: x-twitter-scraper
-description: "Use when the user needs X (Twitter) data through Xquik: REST API integration, MCP setup, SDK setup, tweet search, user lookup, timeline reads, follower export, media download, monitoring, webhooks, bulk extraction, giveaway draws, or confirmation-gated publishing workflows. Trigger with requests like \"search tweets\", \"export followers\", \"set up Xquik MCP\", or \"monitor this X account\". Read-only by default, API-key only, no X login material, and every write, private read, monitor, webhook, or metered bulk job requires explicit approval."
+description: "Use when the user needs X (Twitter) data through Xquik: REST API integration, MCP setup, SDK setup, tweet search, user lookup, timeline reads, follower export, media download, monitoring, webhooks, bulk extraction, giveaway draws, or confirmation-gated publishing workflows. Trigger with requests like \"search tweets\", \"export followers\", \"set up Xquik MCP\", or \"monitor this X account\". Read-only by default, API-key only, no X login material, and every write, private read, monitor, webhook, or metered bulk job requires explicit approval. Not affiliated with X Corp."
 allowed-tools: WebFetch
 argument-hint: "[Xquik task, target, or setup goal]"
 version: "2.5.0"

@@ -1,7 +1,7 @@
 {
   "id": "x-developer",
   "name": "X Developer API",
-  "description": "Xquik X Twitter scraper API skill with 123 REST operations, 118 MCP operations through 2 tools, SDKs, webhooks, exports, and gated actions.",
+  "description": "Xquik X Twitter scraper API skill with 123 REST operations, 118 MCP operations through 2 tools, SDKs, webhooks, exports, and gated actions. Not affiliated with X Corp.",
   "version": "2.5.0",
   "skills": ["./skills"],
   "providerAuthEnvVars": {

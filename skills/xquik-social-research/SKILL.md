@@ -1,6 +1,6 @@
 ---
 name: xquik-social-research
-description: Research public X data with Xquik. Use for tweet search, tweet lookup, user discovery, profile timelines, threads, followers, trends, exports, monitoring plans, or MCP setup. Keep public reads bounded. Require explicit approval before private reads, writes, persistent resources, or bulk jobs.
+description: Research public X data with Xquik. Use for tweet search, tweet lookup, user discovery, profile timelines, threads, followers, trends, exports, monitoring plans, or MCP setup. Keep public reads bounded. Require explicit approval before private reads, writes, persistent resources, or bulk jobs. Not affiliated with X Corp.
 ---
 
 # Xquik Social Research
