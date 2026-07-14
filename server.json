@@ -8,7 +8,7 @@
     "source": "github"
   },
   "websiteUrl": "https://docs.xquik.com/mcp/overview",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "remotes": [
     {
       "type": "streamable-http",

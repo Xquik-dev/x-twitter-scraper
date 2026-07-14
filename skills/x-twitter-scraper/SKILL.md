@@ -3,13 +3,13 @@ name: x-twitter-scraper
 description: "Use Xquik for X/Twitter REST, MCP, SDKs, search, exports, monitoring & approved publishing. Not affiliated with X Corp. Trigger for tweet search, user lookup, timelines, follower exports, media, webhooks, bulk extraction, giveaways, or MCP setup. Read-only by default. Require explicit approval for writes, private reads, monitors, webhooks & metered bulk jobs."
 allowed-tools: WebFetch
 argument-hint: "[Xquik task, target, or setup goal]"
-version: "2.5.1"
+version: "2.5.2"
 author: Xquik <support@xquik.com>
 license: MIT
 compatibility: Requires internet access to call the first-party Xquik REST API.
 tags: [twitter, x, social-media, api-development, scraping]
 metadata:
-  version: "2.5.1"
+  version: "2.5.2"
   author: Xquik
   compatibility: Requires internet access to call the first-party Xquik REST API.
   tags: [twitter, x, social-media, api-development, scraping]
@@ -110,6 +110,8 @@ metadata:
 ---
 
 # Xquik X Data Platform
+
+> Xquik is an independent third-party service. Not affiliated with X Corp. "Twitter" and "X" are trademarks of X Corp.
 
 ## Overview
 

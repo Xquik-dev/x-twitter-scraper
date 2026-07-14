@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Xquik X Twitter scraper API skill for AI agents with 123 REST operations and 118 MCP operations through 2 tools. Not affiliated with X Corp.",
-    "version": "2.5.1"
+    "version": "2.5.2"
   },
   "plugins": [
     {
       "name": "x-twitter-scraper",
       "source": "./",
       "description": "123 REST operations, 118 MCP operations through 2 tools, 23 extraction types, SDKs, webhooks, exports, and confirmation-gated writes. Not affiliated with X Corp.",
-      "version": "2.5.1",
+      "version": "2.5.2",
       "author": {
         "name": "Xquik"
       },

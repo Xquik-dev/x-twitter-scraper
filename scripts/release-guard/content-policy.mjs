@@ -20,7 +20,7 @@ export const contentChecks = [
     required: [
       "123 REST API operations",
       "118 MCP operations through 2 tools",
-      "MCP v2.5.1",
+      "MCP v2.5.2",
       "## Agent Safety And Account Boundary",
       "Plan and credit changes stay in the Xquik dashboard.",
       "The npm package `x-developer` is this agent skill and plugin bundle. The separate `x-twitter-scraper` package is the typed TypeScript SDK.",
@@ -64,6 +64,7 @@ export const contentChecks = [
   {
     path: "skills/x-twitter-scraper/SKILL.md",
     required: [
+      'Xquik is an independent third-party service. Not affiliated with X Corp. "Twitter" and "X" are trademarks of X Corp.',
       "OpenAPI-documented REST API paths",
       "Some operations consume usage credits",
       "Read (60/1s), Write (30/60s), Delete (15/60s)",
@@ -140,7 +141,7 @@ export const contentChecks = [
       "| `explore` | Search the API endpoint catalog (read-only, no network calls) | Included |",
       "Included usage flag from endpoint metadata",
       "Find all included-usage endpoints",
-      "MCP v2.5.1 exposes 118 of 123 REST operations",
+      "MCP v2.5.2 exposes 118 of 123 REST operations",
       "Saved-payment top-ups",
       "Dashboard checkout redirects",
     ],
