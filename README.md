@@ -25,7 +25,7 @@ The npm package `x-developer` is this agent skill and plugin bundle. The separat
 
 Includes 123 REST API operations, HMAC webhooks, 23 extraction tools, SDK pointers, and confirmation-gated writes.
 
-MCP v2.5.0 exposes 118 MCP operations through 2 tools. It excludes 5 sensitive REST operations. These cover API key creation, listing, and revocation, saved-payment top-ups, and dashboard checkout redirects.
+MCP v2.5.1 exposes 118 MCP operations through 2 tools. It excludes 5 sensitive REST operations. These cover API key creation, listing, and revocation, saved-payment top-ups, and dashboard checkout redirects.
 
 ## Why Teams Use Xquik
 
@@ -174,7 +174,7 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Tweet composition**: Algorithm-optimized tweet composer with scoring
 - **Usage guardrails**: Check balance and estimate usage; dashboard handles plan and credit changes
 - **Support tickets**: Open and manage support tickets via API
-- **MCP server**: MCP v2.5.0 exposes 118 operations through 2 tools
+- **MCP server**: MCP v2.5.1 exposes 118 operations through 2 tools
 
 ## Capabilities
 

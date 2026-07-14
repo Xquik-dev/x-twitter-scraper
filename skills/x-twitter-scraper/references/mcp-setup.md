@@ -166,7 +166,7 @@ Add to `opencode.json`:
 
 ## MCP Server Architecture
 
-The MCP server (v2.5.0) at `https://xquik.com/mcp` exposes 118 operations through 2 structured API tools:
+The MCP server (v2.5.1) at `https://xquik.com/mcp` exposes 118 operations through 2 structured API tools:
 
 | Tool | Description | Usage |
 |------|-------------|------|

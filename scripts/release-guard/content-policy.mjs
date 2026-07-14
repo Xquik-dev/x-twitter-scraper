@@ -20,7 +20,7 @@ export const contentChecks = [
     required: [
       "123 REST API operations",
       "118 MCP operations through 2 tools",
-      "MCP v2.5.0",
+      "MCP v2.5.1",
       "## Agent Safety And Account Boundary",
       "Plan and credit changes stay in the Xquik dashboard.",
       "The npm package `x-developer` is this agent skill and plugin bundle. The separate `x-twitter-scraper` package is the typed TypeScript SDK.",
@@ -140,7 +140,7 @@ export const contentChecks = [
       "| `explore` | Search the API endpoint catalog (read-only, no network calls) | Included |",
       "Included usage flag from endpoint metadata",
       "Find all included-usage endpoints",
-      "MCP v2.5.0 exposes 118 of 123 REST operations",
+      "MCP v2.5.1 exposes 118 of 123 REST operations",
       "Saved-payment top-ups",
       "Dashboard checkout redirects",
     ],
