@@ -1,15 +1,17 @@
 # Security Policy
 
-## Reporting a vulnerability
+## Reporting A Vulnerability
 
 If you discover a security vulnerability, please **do not** open a public issue.
 
-Email `security@xquik.com` with:
+Email [security@xquik.com](mailto:security@xquik.com) with:
+
 - A description of the issue
 - Steps to reproduce
 - Impact assessment
 
-We'll respond within 72 hours.
+We aim to acknowledge reports within 72 hours. We will coordinate a disclosure
+timeline after confirming the issue.
 
 ## Credential handling
 
@@ -23,10 +25,12 @@ This skill uses an API key for authentication. Key guidelines:
 ## Scope
 
 In scope:
+
 - The skill and guide files (`skills/`, `task-guides/`, `commands/`)
 - The plugin, MCP, and marketplace metadata (`.claude-plugin/`, `.codex-plugin/`, `openclaw.plugin.json`, `skills.sh.json`, `server.json`, `.mcp.json`, `docker-mcp-registry/`, `mcpize/`)
 - The npm package (`x-developer`)
 
 Out of scope:
+
 - The upstream Xquik API (report at `security@xquik.com`)
 - Third-party registries that list this skill
