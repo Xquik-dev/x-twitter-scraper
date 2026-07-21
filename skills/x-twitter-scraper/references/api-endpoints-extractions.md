@@ -1,5 +1,14 @@
 # Xquik REST API Endpoints: Extractions
 
+## Safety Boundary
+
+Extraction creation and export can collect and disclose large datasets. First
+confirm the lawful purpose, exact target, minimum fields, `resultsLimit`,
+recipients, and retention period. Estimate usage, show the estimate, and obtain
+explicit approval for that exact bounded job. Never use extraction for private
+data, surveillance, discrimination, harassment, doxxing, or unrelated
+secondary use.
+
 ### Create Extraction
 
 ```
@@ -7,6 +16,10 @@ POST /extractions
 ```
 
 Run a bulk data extraction job. See `references/extractions.md` for all 23 tool types.
+
+**Approval required:** Call the estimate endpoint with the same body first.
+Create the job only after the user approves the target, bound, fields, usage,
+and data-handling plan.
 
 **Body:**
 ```json
@@ -93,5 +106,9 @@ GET /extractions/{id}/export?format=csv
 ```
 
 Formats: `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, `xlsx`. 100,000 row limit (PDF 10,000). Exports include enrichment columns not in the API response.
+
+**Privacy warning:** Confirm the exact format, minimum fields, recipient,
+storage location, and retention period. Review enrichment columns before
+sharing. Delete the export when the approved purpose ends.
 
 ---

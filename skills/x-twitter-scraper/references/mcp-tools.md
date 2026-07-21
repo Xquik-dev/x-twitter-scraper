@@ -28,7 +28,7 @@ interface EndpointInfo {
   method: string;
   path: string;
   summary: string;
-  category: string; // account, composition, credits, extraction, media, monitoring, support, twitter, x-accounts, x-write
+  category: string; // account, composition, credits, extraction, media, monitoring, twitter, x-accounts, x-write
   free: boolean; // Included usage flag from endpoint metadata
   parameters?: Array<{ name: string; in: 'query' | 'path' | 'body'; required: boolean; type: string; description: string }>;
   responseShape?: string;
@@ -109,8 +109,6 @@ Use `explore` first to find endpoints, then `xquik` to call them.
 | Follow/unfollow | `POST` or delete request to `/api/v1/x/users/{id}/follow` (confirmation required) |
 | Send a DM | `POST /api/v1/x/dm/{userId}` (confirmation required) |
 | Upload media | `POST /api/v1/x/media` (confirmation required before use in a post or profile change) |
-| Open support ticket | `POST /api/v1/support/tickets` |
-| List support tickets | `GET /api/v1/support/tickets` |
 | Get user's recent tweets | `GET /api/v1/x/users/{id}/tweets` |
 | Get user's liked tweets | `GET /api/v1/x/users/{id}/likes` |
 | Get user's media tweets | `GET /api/v1/x/users/{id}/media` |
@@ -140,7 +138,6 @@ Use `POST /api/v1/extractions` ONLY for bulk data that simpler endpoints cannot 
 | **Analyze tweet style** | `POST /styles` -> `GET /styles/{id}` -> `POST /compose` with `styleUsername` |
 | **Post a tweet** | `GET /x/accounts` -> `POST /x/tweets` with `account` + `text` |
 | **Get trending news** | `GET /radar` (supported sources, via `xquik` tool) -> `POST /compose` with trending topic |
-| **Open support ticket** | `POST /support/tickets` -> `GET /support/tickets/{id}` |
 
 ## Common Mistakes
 
@@ -157,7 +154,7 @@ Use `POST /api/v1/extractions` ONLY for bulk data that simpler endpoints cannot 
 
 ## REST-only operations
 
-MCP v2.5.4 exposes 118 of 126 REST operations. These 8 credential or session-bound operations remain outside MCP:
+MCP v2.5.5 exposes 118 of 126 REST operations. These 8 credential or session-bound operations remain outside MCP:
 
 - API key creation
 - API key listing
@@ -170,5 +167,5 @@ MCP v2.5.4 exposes 118 of 126 REST operations. These 8 credential or session-bou
 
 ## Usage Reference
 
-- Public or included: account info, compose steps, cached styles, drafts, radar, support tickets, credits balance check, and webhook management.
+- Public or included: account info, compose steps, cached styles, drafts, radar, credits balance check, and webhook management.
 - Metered or account-gated: tweet search, user lookup, tweet lookup, follow check, media download, extractions, draws, active monitors, style analysis, performance analysis, trends, and confirmation-gated write actions.
