@@ -13,6 +13,12 @@ Code examples for common integration patterns.
 
 ## Authentication
 
+> **External transmission:** These examples send the Xquik API key, request
+> parameters, and returned data to and from `xquik.com`. Keep the key in a
+> secret store. Get explicit user approval before any private read, account
+> write, persistent resource, webhook, or metered job. Never forward private
+> results to another tool without separate approval.
+
 ```javascript
 const apiKey = process.env.XQUIK_API_KEY;
 if (!apiKey) throw new Error("Set XQUIK_API_KEY first.");
@@ -163,6 +169,11 @@ const events = await xquikFetch("/events?monitorId=7&limit=50");
 Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `webhook.test`.
 
 ## Endpoint Guide
+
+> **Reference, not authorization:** The table below does not authorize a call.
+> Require explicit approval for every private read, write, persistent resource,
+> webhook, export, media gallery, or metered bulk job. Support writes remain
+> dashboard-only and outside agent execution.
 
 | Goal | Endpoint | Usage |
 |------|----------|------|

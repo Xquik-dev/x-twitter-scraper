@@ -8,6 +8,12 @@ POST /x/media/download
 
 Download images, videos, and GIFs from tweets. Single or bulk (up to 50). Returns a shareable gallery URL.
 
+> **Approval and privacy required:** This is not a transient download. Xquik
+> persists the media in a shareable gallery. Before the request, show the exact
+> tweets, bulk size, estimated usage, persistence, and intended recipients.
+> Proceed only after explicit user approval, and do not expose private or
+> sensitive media through a shareable URL.
+
 **Body:** Provide either `tweetInput` (single tweet) or `tweetIds` (bulk). Exactly 1 is required.
 
 | Field | Type | Description |

@@ -8,6 +8,10 @@ POST /draws
 
 Run a giveaway draw from a tweet. Picks random winners from replies.
 
+> **Approval required:** A draw is a metered, state-changing operation. Show
+> the exact tweet, eligibility filters, winner and backup counts, and usage
+> estimate. Run it only after explicit user approval.
+
 **Body:**
 ```json
 {
@@ -71,5 +75,9 @@ GET /draws/{id}/export?format=csv&type=winners
 ```
 
 Formats: `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, `xlsx`. Types: `winners` (default), `entries`. Entry exports capped at 100,000 rows (PDF capped at 10,000).
+
+> **Participant privacy:** Export only the minimum rows and fields needed.
+> Confirm the type, format, recipient, and storage destination before export.
+> Do not publish or forward participant data without explicit user approval.
 
 ---

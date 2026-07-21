@@ -12,6 +12,12 @@ Python equivalents of the JavaScript examples in SKILL.md.
 
 ## Authentication
 
+> **External transmission:** These examples send the Xquik API key, request
+> parameters, and returned data to and from `xquik.com`. Keep the key in a
+> secret store. Get explicit user approval before any private read, account
+> write, persistent resource, webhook, or metered job. Never forward private
+> results to another tool without separate approval.
+
 ```python
 import json
 import urllib.error
@@ -100,6 +106,10 @@ print(f"Extracted {len(results)} results")
 ```
 
 ## Giveaway Draw
+
+> **Approval required:** Before running this example, show the exact tweet,
+> eligibility filters, winner and backup counts, and usage estimate. Run the
+> draw only after explicit user approval.
 
 ```python
 # Create draw with all filters
