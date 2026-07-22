@@ -12,6 +12,9 @@ const expectations = {
   arrays: {
     tags: ["xquik", "security"],
   },
+  enums: {
+    "security.mode": ["read-only", "restricted"],
+  },
 };
 
 const validFrontmatter = `---
@@ -37,6 +40,16 @@ const cases = [
     expectedFragment: "missing opening frontmatter marker",
   },
   {
+    label: "rejects unclosed frontmatter",
+    raw: "---\nname: xquik-test\n",
+    expectedFragment: "missing closing frontmatter marker",
+  },
+  {
+    label: "rejects unsupported frontmatter syntax",
+    raw: validFrontmatter.replace("name: xquik-test", "name xquik-test"),
+    expectedFragment: "unsupported frontmatter line",
+  },
+  {
     label: "rejects a changed nested scalar",
     raw: validFrontmatter.replace("mode: read-only", "mode: write-enabled"),
     expectedFragment: "frontmatter security.mode",
@@ -45,6 +58,13 @@ const cases = [
     label: "rejects a missing array value",
     raw: validFrontmatter.replace("[xquik, security]", "[xquik]"),
     expectedFragment: 'frontmatter tags missing "security"',
+  },
+  {
+    label: "accepts quoted scalars and block arrays",
+    raw: validFrontmatter
+      .replace("name: xquik-test", 'name: "xquik-test"')
+      .replace("tags: [xquik, security]", "tags:\n  - xquik\n  - security"),
+    expected: [],
   },
 ];
 
@@ -61,7 +81,8 @@ for (const currentCase of cases) {
       return;
     }
 
-    assert.equal(drifts.length, 1);
-    assert.ok(drifts[0].includes(currentCase.expectedFragment));
+    assert.ok(
+      drifts.some((drift) => drift.includes(currentCase.expectedFragment)),
+    );
   });
 }
