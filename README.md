@@ -35,7 +35,7 @@ The npm package `x-developer` contains this Skill and plugin bundle. The separat
 
 Includes 127 REST API operations, HMAC webhooks, 23 extraction types, SDK links, and confirmed writes.
 
-MCP v2.5.5 exposes 119 catalog routes through 2 tools. Of these, 118 support JSON or text. Binary support downloads use REST. Add `https://xquik.com/mcp`. Then follow the [client compatibility guide](https://docs.xquik.com/mcp/overview#client-compatibility). OAuth-capable clients use OAuth 2.1. API-key fallback depends on the client. ChatGPT custom apps require OAuth. Eight credential or session operations remain outside MCP.
+MCP v2.5.6 exposes 119 catalog routes through 2 tools. Of these, 118 support JSON or text. Binary support downloads use REST. Add `https://xquik.com/mcp`. Then follow the [client compatibility guide](https://docs.xquik.com/mcp/overview#client-compatibility). OAuth-capable clients use OAuth 2.1. API-key fallback depends on the client. ChatGPT custom apps require OAuth. Eight credential or session operations remain outside MCP.
 
 > **Codex OAuth compatibility:** Affected Codex releases discard the RFC 9207 `iss` callback value even though Xquik returns it. If Codex reports `Authorization server response missing required issuer: expected https://xquik.com`, use `XQUIK_API_KEY` through the Codex `bearer_token_env_var` setting. Follow the [Codex OAuth troubleshooting guide](https://docs.xquik.com/guides/troubleshooting#codex-oauth-issuer-validation-error) and track [openai/codex#31573](https://github.com/openai/codex/issues/31573).
 
@@ -186,7 +186,7 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Tweet composition**: Algorithm-optimized tweet composer with scoring
 - **Usage guardrails**: Check balance and estimate usage; dashboard handles plan and credit changes
 - **Support tickets**: Open and manage support tickets via API
-- **MCP server**: MCP v2.5.5 exposes 119 catalog routes through 2 tools. 118 support JSON or text
+- **MCP server**: MCP v2.5.6 exposes 119 catalog routes through 2 tools. 118 support JSON or text
 
 ## Capabilities
 
