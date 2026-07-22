@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.5.4"
+  version: "2.5.5"
   openclaw:
     requires:
       env:
@@ -100,7 +100,7 @@ GET /x/users/{id}/media?cursor=<cursor>
 
 Supported query parameters on `/x/users/{id}/tweets`: `cursor`, `includeReplies`, `includeParentTweet` (no `limit`, no `sort`).
 
-Loop until `has_next_page` is false or `next_cursor` is empty. Respect Read tier 60/1s.
+Loop until `has_next_page` is false or `next_cursor` is empty. Respect the 300/1s Read tier.
 
 ## Bulk extraction (full history)
 

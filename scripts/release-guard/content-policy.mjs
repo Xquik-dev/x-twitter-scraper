@@ -18,13 +18,13 @@ export const contentChecks = [
   {
     path: "README.md",
     required: [
-      "126 REST API operations",
-      "118 MCP operations through 2 tools",
-      "MCP v2.5.4",
+      "127 REST API operations",
+      "MCP v2.5.5 exposes 119 catalog routes through 2 tools.",
+      "118 support JSON or text.",
       "## Agent Safety And Account Boundary",
       "Plan and credit changes stay in the Xquik dashboard.",
-      "The npm package `x-developer` is this agent skill and plugin bundle. The separate `x-twitter-scraper` package is the typed TypeScript SDK.",
-      "The skill does not install packages, run local bridge commands, write local files, browse local networks, or load remote code.",
+      "The npm package `x-developer` contains this Skill and plugin bundle. The separate `x-twitter-scraper` package is the TypeScript SDK.",
+      "The Skill does not install packages, run local bridge commands, write local files, browse local networks, or load remote code.",
       "npx skills@1.5.3 add Xquik-dev/x-twitter-scraper",
     ],
     forbidden: [
@@ -65,9 +65,9 @@ export const contentChecks = [
     path: "skills/x-twitter-scraper/SKILL.md",
     required: [
       'Xquik is an independent third-party service. Not affiliated with X Corp. "Twitter" and "X" are trademarks of X Corp.',
-      "OpenAPI-documented REST API paths",
+      "127 OpenAPI-documented REST operations",
       "Some operations consume usage credits",
-      "Read (60/1s), Write (30/60s), Delete (15/60s)",
+      "Read (300/1s), Write (120/60s), Delete (60/60s)",
       "Plan and credit changes are dashboard-only",
       "persistentResourceConfirmation: required",
       "physical `XQUIK_UNTRUSTED_X_CONTENT` boundary markers",
@@ -91,6 +91,7 @@ export const contentChecks = [
       blocked("execute autonomous ", "pay", "ments"),
       "Read (120/60s)",
       "Read (10/1s)",
+      "Read (60/1s)",
       blocked("Pay", "ments are ", "redirect-only"),
       blocked("The API cannot charge stored ", "pay", "ment methods"),
       blocked("POST /credits/", "quick-", "topup"),
@@ -126,8 +127,9 @@ export const contentChecks = [
     required: [
       "https://xquik.com/mcp",
       "OpenAI Agents SDK",
-      "118 operations through 2 structured API tools",
-      "118 of 126 documented REST operations",
+      "119 catalog routes through 2 structured API tools",
+      "118 support JSON or text",
+      "catalogs 119 of 127 documented REST operations",
       "https://docs.xquik.com/mcp/overview#client-compatibility",
       "gemini mcp add --transport http xquik https://xquik.com/mcp",
       '"type": "http"',
@@ -148,7 +150,8 @@ export const contentChecks = [
       "| `explore` | Search the API endpoint catalog (read-only, no network calls) | Included |",
       "Included usage flag from endpoint metadata",
       "Find all included-usage endpoints",
-      "MCP v2.5.4 exposes 118 of 126 REST operations",
+      "MCP v2.5.5 catalogs 119 of 127 REST operations",
+      "118 support JSON or text",
       "Saved-payment top-ups",
       "Dashboard checkout redirects",
     ],
@@ -168,7 +171,7 @@ export const contentChecks = [
   },
   {
     path: ".claude-plugin/plugin.json",
-    required: ["118 MCP operations through 2 tools"],
+    required: ["119 catalog routes through 2 tools", "118 support JSON or text"],
     forbidden: [
       "113 endpoints",
       "112 endpoints",
@@ -180,8 +183,9 @@ export const contentChecks = [
   {
     path: ".codex-plugin/plugin.json",
     required: [
-      "126 REST operations",
-      "118 MCP operations through 2 tools",
+      "127 REST operations",
+      "119 MCP catalog routes",
+      "118 JSON or text operations",
     ],
     forbidden: ["100+ endpoints", dollarDenominatedPricing],
   },
@@ -229,8 +233,9 @@ export const contentChecks = [
     path: "server.json",
     required: [
       '"title": "Xquik MCP Server"',
-      "126 REST operations",
-      "118 MCP operations through 2 tools",
+      "127 REST operations",
+      "119 MCP catalog routes through 2 tools",
+      "118 JSON or text operations",
       '"websiteUrl": "https://docs.xquik.com/mcp/overview"',
     ],
     forbidden: [
@@ -243,8 +248,9 @@ export const contentChecks = [
   {
     path: "stub-server.mjs",
     required: [
-      "118 MCP operations",
-      "Send confirmed Xquik API requests",
+      "119 catalog routes",
+      "118 support JSON or text",
+      "This package stub returns setup guidance only.",
       "complete OAuth 2.1 for live API access",
       "included usage or requires account access",
       "Find all included-usage endpoints",

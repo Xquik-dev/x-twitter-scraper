@@ -8,7 +8,7 @@ import { createInterface } from "node:readline";
 
 const SERVER_INFO = {
   name: "xquik",
-  version: "2.5.4",
+  version: "2.5.5",
 };
 
 const CAPABILITIES = {
@@ -42,7 +42,7 @@ const TOOLS = [
   {
     name: "explore",
     description: description([
-      "Search and browse the Xquik X (Twitter) API specification to discover endpoints before making live API calls with the 'xquik' tool.",
+      "Live Xquik tool: search the 119-route API catalog before calling 'xquik'. This package stub returns setup guidance only.",
       "",
       "## When to use",
       "- Use 'explore' FIRST to find the right endpoint path, parameters, and response shape before calling 'xquik'.",
@@ -54,11 +54,9 @@ const TOOLS = [
       "- Do NOT use if you already know the endpoint path and parameters.",
       "",
       "## Behavior",
-      "- Read-only, idempotent. No network calls - runs against an in-memory catalog of 118 MCP operations.",
-      "- Included usage and does not require authentication.",
-      "- Returns the result of your filter function, such as an empty array if no endpoints match.",
-      "- Returns a validation error if the request function is invalid.",
-      "- Timeout: 60 seconds.",
+      "- Live server: read-only, idempotent catalog search with no API request.",
+      "- Package stub: makes no network call and returns live setup guidance.",
+      "- The live catalog has 119 routes. Of these, 118 support JSON or text.",
       "- Each EndpointInfo contains method, path, summary, category, free, parameters, and responseShape fields.",
       "",
       "## Input format",
@@ -83,7 +81,7 @@ const TOOLS = [
   {
     name: "xquik",
     description: description([
-      "Send confirmed Xquik API requests across 118 MCP operations.",
+      "Live Xquik tool: send confirmed requests across 119 catalog routes. This package stub returns setup guidance only.",
       "",
       "## When to use",
       "- Use after calling 'explore' to discover the endpoint path and parameters.",
@@ -95,19 +93,19 @@ const TOOLS = [
       "- Do NOT pass API keys or auth headers - authentication is injected automatically.",
       "",
       "## Behavior",
-      "- Processes the provided request function with `xquik.request(path, options?)` and `spec.endpoints` available.",
-      "- No filesystem or arbitrary network access - only xquik.request() is available.",
-      "- Timeout: 60 seconds per invocation, 60 seconds per individual API request.",
-      "- Read operations return JSON objects with the requested data.",
-      "- Mutating operations require prior user confirmation and return `{ success: true }` or `{ success: true, warning: '...' }`.",
-      "- Pagination responses include `has_next_page` and `next_cursor`. Pass `cursor` as a query param for the next page.",
+      "- Live server: processes `xquik.request(path, options?)` inside a bounded sandbox.",
+      "- Package stub: makes no API request and returns live setup guidance.",
+      "- The live tool has no filesystem or arbitrary network access.",
+      "- 118 catalog routes support JSON or text. Binary support downloads use REST.",
+      "- Mutating operations require prior user confirmation and can return durable actions.",
+      "- Pagination responses include `has_more` and `next_cursor`. Pass `cursor` for the next page.",
       "- Some operations modify X or Xquik resources. Show the exact payload, target, and usage estimate before calling them.",
       "",
       "## Error handling",
       "- 402: Account access or usage balance requires dashboard attention. Explain the account state and direct the user to the dashboard before retrying.",
       "- 429: Rate limited. Retry after backoff.",
       "- 404: Resource not found, such as a missing user, tweet, or monitor.",
-      "- 200 with `warning` field: Probable success - do NOT retry.",
+      "- Durable writes: follow `safe_to_retry` and `next_action` before retrying.",
       "",
       "## Input format",
       "Provide a bounded request function using `xquik.request(path, { method?, body?, query? })`. Auth is automatic.",

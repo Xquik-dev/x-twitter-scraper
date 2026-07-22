@@ -5,15 +5,15 @@
     "email": "support@xquik.com"
   },
   "metadata": {
-    "description": "Xquik X Twitter scraper API skill for AI agents with 126 REST operations and 118 MCP operations through 2 tools. Not affiliated with X Corp.",
-    "version": "2.5.4"
+    "description": "Xquik Skill for 127 REST operations and 119 MCP catalog routes. Two MCP tools support 118 JSON or text operations. Not affiliated with X Corp.",
+    "version": "2.5.5"
   },
   "plugins": [
     {
       "name": "x-twitter-scraper",
       "source": "./",
-      "description": "126 REST operations, 118 MCP operations through 2 tools, 23 extraction types, SDKs, webhooks, exports, and confirmation-gated writes. Not affiliated with X Corp.",
-      "version": "2.5.4",
+      "description": "127 REST operations, 119 MCP catalog routes, 23 extraction types, SDKs, webhooks, exports, and confirmation-gated writes. Two MCP tools support 118 JSON or text operations. Not affiliated with X Corp.",
+      "version": "2.5.5",
       "author": {
         "name": "Xquik"
       },
