@@ -19,7 +19,7 @@ export const contentChecks = [
     path: "README.md",
     required: [
       "127 REST API operations",
-      "MCP v2.5.5 exposes 119 catalog routes through 2 tools.",
+      "MCP v2.5.6 exposes 119 catalog routes through 2 tools.",
       "118 support JSON or text.",
       "## Agent Safety And Account Boundary",
       "Plan and credit changes stay in the Xquik dashboard.",
@@ -150,7 +150,7 @@ export const contentChecks = [
       "| `explore` | Search the API endpoint catalog (read-only, no network calls) | Included |",
       "Included usage flag from endpoint metadata",
       "Find all included-usage endpoints",
-      "MCP v2.5.5 catalogs 119 of 127 REST operations",
+      "MCP v2.5.6 catalogs 119 of 127 REST operations",
       "118 support JSON or text",
       "Saved-payment top-ups",
       "Dashboard checkout redirects",
@@ -234,8 +234,8 @@ export const contentChecks = [
     required: [
       '"title": "Xquik MCP Server"',
       "127 REST operations",
-      "119 MCP catalog routes through 2 tools",
-      "118 JSON or text operations",
+      "119 MCP routes",
+      "118 JSON/text ops",
       '"websiteUrl": "https://docs.xquik.com/mcp/overview"',
     ],
     forbidden: [

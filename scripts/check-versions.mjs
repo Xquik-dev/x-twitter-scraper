@@ -356,6 +356,19 @@ function collectPublicContractDrifts() {
   return drifts;
 }
 
+function collectRegistryMetadataDrifts() {
+  const description = readJson("server.json").description;
+  if (typeof description !== "string") {
+    return ["  server.json: description must be a string"];
+  }
+  if (description.length > 100) {
+    return [
+      `  server.json: description has ${description.length} characters (maximum 100)`,
+    ];
+  }
+  return [];
+}
+
 function readSelector(object, selector) {
   return selector
     .split(".")
@@ -413,6 +426,7 @@ const failures = [
   ...collectPackageFileDrifts(),
   ...collectNestedReferenceDrifts(),
   ...collectPublicContractDrifts(),
+  ...collectRegistryMetadataDrifts(),
 ];
 
 function reportFailures() {

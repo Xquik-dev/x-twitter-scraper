@@ -10,7 +10,7 @@ API keys.
 | Protocol | Streamable HTTP |
 | Endpoint | `https://xquik.com/mcp` |
 | Authentication | OAuth 2.1 discovery; API key fallback |
-| Version | `2.5.5` |
+| Version | `2.5.6` |
 
 Xquik publishes these discovery documents:
 
@@ -280,7 +280,7 @@ Active guest `paid_reads` keys expose 33 eligible GET routes.
 
 ## MCP Server Architecture
 
-The MCP server (v2.5.5) exposes 119 catalog routes through 2 structured API tools. Of these, 118 support JSON or text. Binary support downloads use REST.
+The MCP server (v2.5.6) exposes 119 catalog routes through 2 structured API tools. Of these, 118 support JSON or text. Binary support downloads use REST.
 
 | Tool | Description | Usage |
 |------|-------------|------|
@@ -291,7 +291,7 @@ The MCP server (v2.5.5) exposes 119 catalog routes through 2 structured API tool
 operations with normalized snake_case responses. Authentication is injected, so
 tool code must never include credentials.
 
-MCP v2.5.5 catalogs 119 of 127 documented REST operations. These 8 credential
+MCP v2.5.6 catalogs 119 of 127 documented REST operations. These 8 credential
 or session operations remain direct REST or dashboard workflows:
 
 - API key creation, listing, and revocation
