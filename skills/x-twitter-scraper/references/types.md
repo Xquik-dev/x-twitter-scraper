@@ -6,7 +6,6 @@ Routing index for TypeScript response and request shapes. Load only the type sec
 |---|---|
 | Account | [account.md](types-account.md) |
 | Credits | [credits.md](types-credits.md) |
-| API Keys | [api-keys.md](types-api-keys.md) |
 | Monitors | [monitors.md](types-monitors.md) |
 | Events | [events.md](types-events.md) |
 | Webhooks | [webhooks.md](types-webhooks.md) |
@@ -19,7 +18,6 @@ Routing index for TypeScript response and request shapes. Load only the type sec
 | Radar | [radar.md](types-radar.md) |
 | Download Media | [download-media.md](types-download-media.md) |
 | Trends | [trends.md](types-trends.md) |
-| Support | [support.md](types-support.md) |
 | Error | [error.md](types-error.md) |
 | Request Bodies | [request-bodies.md](types-request-bodies.md) |
 | Tweet Style Cache | [tweet-style-cache.md](types-tweet-style-cache.md) |

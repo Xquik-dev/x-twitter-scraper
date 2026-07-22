@@ -1,10 +1,19 @@
 # Xquik REST API Endpoints: Tweet Style Cache
 
+## Safety Boundary
+
+Style creation, replacement, and deletion change persistent cached resources.
+Show the exact username or label, source tweets, metered usage, and replacement
+or deletion effect. Proceed only after explicit approval for that exact write.
+
 ### Analyze & Cache Style
 
 `POST /styles`
 
 Fetch recent tweets from an X account and cache them for style analysis. **Consumes metered API usage.**
+
+**Approval required:** Confirm the username, metered usage, and intent to store
+the resulting profile before creating the cache.
 
 **Request body:**
 
@@ -62,6 +71,9 @@ List all cached tweet style profiles. Max 200 results, ordered by fetch date.
 
 Save a custom style profile from tweet texts. The body `label` controls the saved style label and replaces any existing style with that label.
 
+**Approval required:** Preview the label and source texts. Warn when an existing
+label will be replaced, then obtain explicit approval.
+
 **Body:**
 
 | Field | Type | Required | Description |
@@ -91,7 +103,9 @@ Get a cached style profile with full tweet data. `id` is the cached style label 
 
 delete request to `/styles/{id}`
 
-Delete a cached style by label or username. Returns `204 No Content`.
+**Destructive action:** This permanently deletes the cached style profile.
+Show the exact label or username and explain the lost cached data. Delete only
+after explicit approval immediately before the call. Returns `204 No Content`.
 
 **Errors:** `404 style_not_found`
 

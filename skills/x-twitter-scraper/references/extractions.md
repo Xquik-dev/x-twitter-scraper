@@ -2,6 +2,20 @@
 
 23 bulk data extraction tools. Each requires a specific target parameter.
 
+## Privacy And Acceptable Use
+
+Bulk extraction and export can collect large amounts of public identity,
+activity, and relationship data. Before creating a job, confirm the lawful
+purpose, target, minimum fields, `resultsLimit`, intended recipients, and
+retention period. Follow X rules and applicable privacy law. Do not use these
+tools for credential collection, private data, surveillance, discrimination,
+harassment, doxxing, or unrelated secondary use. Delete exported data when the
+approved purpose ends.
+
+Every extraction requires an estimate and explicit approval for the exact
+bounded job. Never infer approval from a general request or increase a bound
+without renewed approval.
+
 **Endpoint:** `POST /extractions`
 
 **Always estimate first:** `POST /extractions/estimate` with the same body to preview `creditsRequired`, `creditsAvailable`, and whether the job is allowed.
@@ -213,6 +227,11 @@ GET /extractions/{id}/export?format=csv
 Formats: `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, `xlsx`. 100,000 row limit (10,000 for PDF).
 
 Exports include enrichment columns not present in the API response.
+
+**Privacy warning:** Export only the minimum approved rows and fields. Confirm
+the exact format, audience, storage location, and retention period before
+requesting an export. Review enrichment columns for unnecessary personal data
+before sharing the file.
 
 ## Estimating Usage
 

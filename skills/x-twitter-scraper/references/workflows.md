@@ -199,4 +199,3 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `webhoo
 | **Update profile** | `PATCH /x/profile` | Metered write action |
 | **Upload media** | `POST /x/media` | Metered write action |
 | **Community actions** | `POST /x/communities`, join/leave | Metered write action |
-| **Support tickets** | `POST /support/tickets` | Included |

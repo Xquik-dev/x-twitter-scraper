@@ -10,7 +10,6 @@ Plan and credit changes are dashboard-only. Agents may read usage state with `GE
 
 | Need | Reference |
 |---|---|
-| API Keys | [api-keys.md](api-endpoints-api-keys.md) |
 | Monitors | [monitors.md](api-endpoints-monitors.md) |
 | Events | [events.md](api-endpoints-events.md) |
 | Webhooks | [webhooks.md](api-endpoints-webhooks.md) |
@@ -26,5 +25,4 @@ Plan and credit changes are dashboard-only. Agents may read usage state with `GE
 | X Accounts (Connected) | [x-accounts.md](api-endpoints-x-accounts.md) |
 | X Write | [x-write.md](api-endpoints-x-write.md) |
 | Credits | [credits.md](api-endpoints-credits.md) |
-| Support | [support.md](api-endpoints-support.md) |
 | Error Codes | [error-codes.md](api-endpoints-error-codes.md) |
