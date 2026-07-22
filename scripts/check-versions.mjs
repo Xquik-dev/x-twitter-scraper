@@ -27,6 +27,35 @@ const taskGuidePaths = readdirSync(join(root, "task-guides"))
 const taskGuideNames = new Set(
   taskGuidePaths.map((path) => path.slice("task-guides/".length, -3)),
 );
+const publicContractRoots = [
+  ".claude-plugin",
+  ".codex-plugin",
+  "docker-mcp-registry",
+  "mcpize",
+  "skills",
+  "task-guides",
+];
+const publicContractFiles = [
+  "README.md",
+  "openclaw.plugin.json",
+  "package.json",
+  "server.json",
+  "stub-server.mjs",
+];
+const stalePublicContractPatterns = [
+  ["126-operation REST count", /\b126 REST(?: API)? operations\b/u],
+  ["ambiguous 118-operation MCP count", /\b118 (?:MCP )?operations\b/u],
+  ["118-of-126 MCP count", /\b118 of 126\b/u],
+  ["MCP v2.5.4", /\bMCP v2\.5\.4\b/u],
+  ["60/1s read limit", /\bRead(?::| \() 60\/1s\b/u],
+  ["60-per-1s read limit", /\b60 requests per (?:1s|second)\b/iu],
+  ["30/60s write limit", /\bWrite(?::| \() 30\/60s\b/u],
+  ["30-per-60s write limit", /\b30 requests per (?:60s|60 seconds)\b/iu],
+  ["15/60s delete limit", /\bDelete(?::| \() 15\/60s\b/u],
+  ["15-per-60s delete limit", /\b15 requests per (?:60s|60 seconds)\b/iu],
+  ["volatile agent count", /\b40\+ (?:AI )?(?:coding )?agents\b/iu],
+  ["stub in-memory catalog claim", /in-memory catalog of \d+ MCP operations/iu],
+];
 
 function readText(path) {
   return readFileSync(join(root, path), "utf8");
@@ -309,6 +338,24 @@ function collectNestedReferenceDrifts() {
   return drifts;
 }
 
+function collectPublicContractDrifts() {
+  const drifts = [];
+  const paths = new Set([
+    ...publicContractFiles,
+    ...publicContractRoots.flatMap((path) => collectFilesBelow(path)),
+  ]);
+  for (const path of paths) {
+    if (!/\.(?:json|md|mjs|ya?ml)$/u.test(path)) continue;
+    const raw = readText(path);
+    for (const [label, pattern] of stalePublicContractPatterns) {
+      if (pattern.test(raw)) {
+        drifts.push(`  ${path}: stale ${label}`);
+      }
+    }
+  }
+  return drifts;
+}
+
 function readSelector(object, selector) {
   return selector
     .split(".")
@@ -365,6 +412,7 @@ const failures = [
   ...collectJsonFieldDrifts(),
   ...collectPackageFileDrifts(),
   ...collectNestedReferenceDrifts(),
+  ...collectPublicContractDrifts(),
 ];
 
 function reportFailures() {

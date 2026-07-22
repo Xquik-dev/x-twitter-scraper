@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.5.4"
+  version: "2.5.5"
   openclaw:
     requires:
       env:
@@ -107,7 +107,7 @@ To export: `GET /extractions/{id}/export?format=csv` (or `xlsx`, `md`). Cap 50,0
 | 402 | `insufficient_credits` | Explain the account state and direct the user to the dashboard |
 | 429 | `x_api_rate_limited` | Exponential backoff, respect `Retry-After` |
 
-Read tier rate limit: 60 requests per 1s.
+Read tier rate limit: 300 requests per 1s.
 
 ## Tweet IDs are strings
 

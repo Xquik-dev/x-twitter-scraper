@@ -2,13 +2,13 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.xquik/mcp",
   "title": "Xquik MCP Server",
-  "description": "126 REST operations, 118 MCP operations through 2 tools. OAuth 2.1. Not affiliated with X Corp.",
+  "description": "127 REST operations. 119 MCP catalog routes through 2 tools. 118 JSON or text operations are supported. Binary support downloads use REST. OAuth 2.1. Not affiliated with X Corp.",
   "repository": {
     "url": "https://github.com/Xquik-dev/x-twitter-scraper",
     "source": "github"
   },
   "websiteUrl": "https://docs.xquik.com/mcp/overview",
-  "version": "2.5.4",
+  "version": "2.5.5",
   "icons": [
     {
       "src": "https://xquik.com/icons/mcp/xquik.png",

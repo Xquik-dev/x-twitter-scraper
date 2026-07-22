@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.5.4"
+  version: "2.5.5"
   openclaw:
     requires:
       env:
@@ -99,7 +99,7 @@ Poll `GET /extractions/{id}`, retrieve results. Same pattern for `repost_extract
 
 To compare multiple tweets' engagement:
 
-1. Call `GET /x/tweets/{id}` for each tweet (batched via parallel fetches, respect Read tier 60/1s).
+1. Call `GET /x/tweets/{id}` for each tweet. Use bounded parallel requests. Respect the 300/1s Read tier.
 2. Present metrics side-by-side. Highlight which tweet had the highest engagement rate (likes + RTs + quotes) / impressions.
 
 For longer-term account performance (trends in the account's own tweet engagement over days/weeks):

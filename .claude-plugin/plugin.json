@@ -1,7 +1,7 @@
 {
   "name": "x-twitter-scraper",
-  "version": "2.5.4",
-  "description": "Xquik agent skill & plugin bundle. Not affiliated with X Corp. Includes 126 REST operations, 118 MCP operations through 2 tools, SDKs, webhooks, exports & approved X workflows.",
+  "version": "2.5.5",
+  "description": "Xquik Skill and plugin bundle. Includes 127 REST operations. MCP has 119 catalog routes through 2 tools; 118 support JSON or text. Not affiliated with X Corp.",
   "author": {
     "name": "Xquik",
     "url": "https://github.com/Xquik-dev"

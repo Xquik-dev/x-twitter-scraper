@@ -12,7 +12,7 @@
   },
   {
     "name": "xquik",
-    "description": "Send confirmed Xquik API requests across 118 MCP operations: tweet search, user lookup, follower extraction, confirmation-gated writes, monitoring, giveaway draws, trends, and composition.",
+    "description": "Send confirmed Xquik API requests across 119 MCP catalog routes. 118 support JSON or text. Covers search, lookup, extraction, writes, monitoring, draws, trends, and composition.",
     "arguments": [
       {
         "name": "code",
