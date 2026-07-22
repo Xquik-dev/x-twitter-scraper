@@ -3,7 +3,18 @@
 > **Xquik is an independent third-party service.** Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
+[![Apify Actor](https://apify.com/actor-badge?actor=xquik/x-tweet-scraper)](https://apify.com/xquik/x-tweet-scraper)
+[![npm downloads](https://img.shields.io/npm/dt/x-developer?style=for-the-badge&logo=npm&label=downloads)](https://www.npmjs.com/package/x-developer)
+[![npm monthly downloads](https://img.shields.io/npm/dm/x-developer?style=for-the-badge&logo=npm&label=downloads%2Fmonth)](https://www.npmjs.com/package/x-developer)
+[![npm version](https://img.shields.io/npm/v/x-developer?style=for-the-badge&logo=npm&label=npm)](https://www.npmjs.com/package/x-developer)
+
+[![CI](https://github.com/Xquik-dev/x-twitter-scraper/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/Xquik-dev/x-twitter-scraper/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/Xquik-dev/x-twitter-scraper/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/Xquik-dev/x-twitter-scraper/actions/workflows/codeql.yml)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13731/badge)](https://www.bestpractices.dev/projects/13731)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Xquik-dev/x-twitter-scraper/badge)](https://securityscorecards.dev/viewer/?uri=github.com/Xquik-dev/x-twitter-scraper)
+[![Snyk security](https://snyk.io/test/npm/x-developer/badge.svg)](https://security.snyk.io/package/npm/x-developer)
+[![Socket.dev package analysis](https://img.shields.io/badge/Socket.dev-Package%20Analysis-8B5CF6?logo=socketdotio&logoColor=white)](https://socket.dev/npm/package/x-developer)
+[![MIT license](https://img.shields.io/npm/l/x-developer?logo=opensourceinitiative)](LICENSE)
 
 <table>
   <tr>
