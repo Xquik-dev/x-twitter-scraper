@@ -74,6 +74,7 @@
   ],
   "scripts": {
     "check-versions": "node scripts/check-versions.mjs",
-    "prepublishOnly": "node scripts/check-versions.mjs"
+    "test": "node --test tests/*.test.mjs",
+    "prepublishOnly": "npm test && node scripts/check-versions.mjs"
   }
 }

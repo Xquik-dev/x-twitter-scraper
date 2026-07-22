@@ -27,6 +27,21 @@ Changes to the upstream Xquik API itself belong in the main Xquik repo.
 - Update `README.md` if the API surface changes
 - Bump the version in `package.json` if you republish to npm
 
+## Test Policy
+
+Run these checks before opening a pull request:
+
+```sh
+npm ci --ignore-scripts
+npm test
+npm run check-versions
+npm pack --dry-run --json
+```
+
+CI runs the same tests on every pull request and every push to `master`. Bug
+fixes must include a regression test. New behavior must include tests for
+expected and invalid inputs.
+
 ## Questions
 
 Open an issue with the "question" label or email `support@xquik.com`.
