@@ -1,10 +1,14 @@
 #!/usr/bin/env node
 
+// SPDX-FileCopyrightText: 2026 Xquik Contributors
+// SPDX-License-Identifier: MIT
+
 // Minimal stdio MCP server stub for package verification.
 // Exposes the public tool shape used by registry checks.
 // For live usage, connect to: https://xquik.com/mcp
 
 import { createInterface } from "node:readline";
+import { pathToFileURL } from "node:url";
 
 const SERVER_INFO = {
   name: "xquik",
@@ -127,21 +131,6 @@ const TOOLS = [
   },
 ];
 
-const rl = createInterface({ input: process.stdin, terminal: false });
-
-function send(msg) {
-  const json = JSON.stringify(msg);
-  process.stdout.write(json + "\n");
-}
-
-function sendResult(id, result) {
-  send({ jsonrpc: JSONRPC, id, result });
-}
-
-function sendError(id, code, message) {
-  send({ jsonrpc: JSONRPC, id, error: { code, message } });
-}
-
 function isObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
@@ -150,48 +139,62 @@ function isKnownTool(name) {
   return TOOLS.some((tool) => tool.name === name);
 }
 
-function sendStubToolResult(id) {
-  sendResult(id, {
-    content: [{ type: "text", text: LIVE_SERVER_MESSAGE }],
-  });
-}
-
-function handleMessage(msg) {
-  const { id, method, params } = msg;
-
-  switch (method) {
-    case "initialize":
-      return sendResult(id, {
-        protocolVersion: "2024-11-05",
-        serverInfo: SERVER_INFO,
-        capabilities: CAPABILITIES,
-      });
-
-    case "notifications/initialized":
-      return; // no response needed
-
-    case "tools/list":
-      return sendResult(id, { tools: TOOLS });
-
-    case "tools/call": {
-      const toolName = params?.name;
-      if (isKnownTool(toolName)) {
-        return sendStubToolResult(id);
-      }
-      return sendError(id, -32601, `Unknown tool: ${toolName}`);
-    }
-
-    case "ping":
-      return sendResult(id, {});
-
-    default:
-      if (id !== undefined) {
-        return sendError(id, -32601, `Method not found: ${method}`);
-      }
+export function createMessageHandler(writeLine) {
+  function send(msg) {
+    writeLine(`${JSON.stringify(msg)}\n`);
   }
+
+  function sendResult(id, result) {
+    send({ jsonrpc: JSONRPC, id, result });
+  }
+
+  function sendError(id, code, message) {
+    send({ jsonrpc: JSONRPC, id, error: { code, message } });
+  }
+
+  function sendStubToolResult(id) {
+    sendResult(id, {
+      content: [{ type: "text", text: LIVE_SERVER_MESSAGE }],
+    });
+  }
+
+  return function handleMessage(msg) {
+    const { id, method, params } = msg;
+
+    switch (method) {
+      case "initialize":
+        return sendResult(id, {
+          protocolVersion: "2024-11-05",
+          serverInfo: SERVER_INFO,
+          capabilities: CAPABILITIES,
+        });
+
+      case "notifications/initialized":
+        return; // no response needed
+
+      case "tools/list":
+        return sendResult(id, { tools: TOOLS });
+
+      case "tools/call": {
+        const toolName = params?.name;
+        if (isKnownTool(toolName)) {
+          return sendStubToolResult(id);
+        }
+        return sendError(id, -32601, `Unknown tool: ${toolName}`);
+      }
+
+      case "ping":
+        return sendResult(id, {});
+
+      default:
+        if (id !== undefined) {
+          return sendError(id, -32601, `Method not found: ${method}`);
+        }
+    }
+  };
 }
 
-rl.on("line", (line) => {
+export function processLine(line, handleMessage) {
   if (line.length > MAX_LINE_LENGTH) {
     return;
   }
@@ -204,4 +207,22 @@ rl.on("line", (line) => {
   } catch {
     // ignore malformed input
   }
-});
+}
+
+export function startServer({
+  input = process.stdin,
+  output = process.stdout,
+} = {}) {
+  const rl = createInterface({ input, terminal: false });
+  const handleMessage = createMessageHandler((line) => output.write(line));
+  rl.on("line", (line) => processLine(line, handleMessage));
+  return rl;
+}
+
+const isDirectExecution =
+  process.argv[1] !== undefined &&
+  import.meta.url === pathToFileURL(process.argv[1]).href;
+
+if (isDirectExecution) {
+  startServer();
+}
