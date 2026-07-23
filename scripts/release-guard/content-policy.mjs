@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Xquik Contributors
+// SPDX-License-Identifier: MIT
+
 const blocked = (...parts) => parts.join("");
 const forbiddenPattern = (label, pattern) => ({ label, pattern });
 
