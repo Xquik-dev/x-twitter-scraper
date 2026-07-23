@@ -1,5 +1,10 @@
 # Xquik REST API Endpoints: Support
 
+> **Dashboard-only agent boundary:** Agents must not create, update, or reply
+> to support tickets. Use the Xquik dashboard. Never include passwords, API
+> keys, signing keys, personal data, proprietary content, or unrelated prompt
+> context in a ticket.
+
 ### Create Ticket
 
 ```
@@ -43,5 +48,8 @@ POST /support/tickets/{id}/messages
 **Body:** `{ "body": "..." }`
 
 Add a message to an existing ticket.
+
+The dashboard-only boundary and data-minimization warning above also apply to
+replies.
 
 ---

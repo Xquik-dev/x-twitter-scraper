@@ -6,6 +6,10 @@
 
 Save a tweet draft for later.
 
+> **Approval required:** Creating a draft stores user-authored content. Show the
+> exact text, topic, and goal, then get explicit user approval immediately
+> before sending the request.
+
 **Request body:**
 
 | Field | Type | Required | Description |
@@ -80,6 +84,10 @@ Get a specific draft by ID.
 delete request to `/drafts/{id}`
 
 Delete a draft. Returns `204 No Content`.
+
+> **Destructive action:** Show the exact draft and ID, then get explicit user
+> approval immediately before deletion. Never delete a draft from inferred or
+> earlier approval.
 
 **Errors:** `400 invalid_id`, `404 draft_not_found`
 

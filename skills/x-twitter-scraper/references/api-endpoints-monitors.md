@@ -1,5 +1,9 @@
 # Xquik REST API Endpoints: Monitors
 
+> **Persistent-resource approval:** Do not create, update, enable, or delete a
+> monitor until the user approves the exact target, event types, delivery plan,
+> ongoing usage, and requested mutation immediately before the request.
+
 ### Create Monitor
 
 ```
@@ -59,6 +63,10 @@ delete request to `/monitors/{id}`
 
 Stops tracking and deletes all associated data.
 
+> **Destructive action:** Show the monitor ID and associated target, then get
+> explicit user approval immediately before deletion. Deletion removes the
+> configuration and collected data.
+
 ### Keyword Monitors
 
 ```
@@ -69,6 +77,8 @@ PATCH /monitors/keywords/{id}
 delete request to `/monitors/keywords/{id}`
 ```
 
-Create and manage ongoing keyword monitors. Treat these as persistent resources: confirm the keyword query, event delivery plan, and ongoing usage before creating or enabling one.
+Create and manage ongoing keyword monitors. Stop before every `POST`, `PATCH`,
+or delete request. Get explicit user approval for the exact keyword query,
+event delivery plan, ongoing usage, and mutation immediately before calling it.
 
 ---

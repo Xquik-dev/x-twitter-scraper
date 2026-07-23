@@ -6,6 +6,11 @@
 
 Fetch recent tweets from an X account and cache them for style analysis. **Consumes metered API usage.**
 
+> **Approval and privacy required:** Show the exact username, estimated usage,
+> purpose, and retention need before caching. Cache only the minimum public
+> content needed for a lawful, user-approved purpose. Public availability does
+> not imply consent to unnecessary collection or redistribution.
+
 **Request body:**
 
 | Field | Type | Required | Description |
@@ -92,6 +97,10 @@ Get a cached style profile with full tweet data. `id` is the cached style label 
 delete request to `/styles/{id}`
 
 Delete a cached style by label or username. Returns `204 No Content`.
+
+> **Destructive action:** Show the exact cached style and label, then get
+> explicit user approval immediately before deletion. The cached data may not
+> be recoverable.
 
 **Errors:** `404 style_not_found`
 

@@ -6,6 +6,12 @@
 
 **Always estimate first:** `POST /extractions/estimate` with the same body to preview `creditsRequired`, `creditsAvailable`, and whether the job is allowed.
 
+> **Approval, privacy, and acceptable use:** Bulk extraction can collect and
+> export personal or behavioral data at scale. Minimize the target, fields,
+> result limit, retention, format, and destination. Confirm lawful use and get
+> explicit user approval for the exact estimate and export plan immediately
+> before creating a job. Never publish or forward results beyond that approval.
+
 ## Contents
 
 - [Tool Types](#tool-types)
