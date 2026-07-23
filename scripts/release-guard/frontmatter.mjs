@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Xquik Contributors
+// SPDX-License-Identifier: MIT
+
 export function collectFrontmatterDrifts(path, raw, expectations) {
   const frontmatter = parseFrontmatter(path, raw);
   if (frontmatter.error) {

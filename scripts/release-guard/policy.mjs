@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Xquik Contributors
+// SPDX-License-Identifier: MIT
+
 /** Each entry: path (relative to root) + extractor returning the version string. */
 function parseJsonVersion(raw) {
   return JSON.parse(raw).version;
