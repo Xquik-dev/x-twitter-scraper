@@ -39,6 +39,20 @@ MCP v2.5.6 exposes 119 catalog routes through 2 tools. Of these, 118 support JSO
 
 > **Codex OAuth compatibility:** Affected Codex releases discard the RFC 9207 `iss` callback value even though Xquik returns it. If Codex reports `Authorization server response missing required issuer: expected https://xquik.com`, use `XQUIK_API_KEY` through the Codex `bearer_token_env_var` setting. Follow the [Codex OAuth troubleshooting guide](https://docs.xquik.com/guides/troubleshooting#codex-oauth-issuer-validation-error) and track [openai/codex#31573](https://github.com/openai/codex/issues/31573).
 
+## Common API Questions
+
+Choose the narrowest route first. Use extraction jobs for complete datasets.
+
+| Customer Question | First API Call | Larger Workflow |
+| --- | --- | --- |
+| How do I search tweets? | `GET /x/tweets/search` | Export a bounded search extraction. |
+| How do I read a profile timeline? | `GET /x/users/{id}/tweets` | Paginate or run a posts extraction. |
+| How do I list followers? | `GET /x/users/{id}/followers` | Run a followers extraction. |
+| How do I list following accounts? | `GET /x/users/{id}/following` | Run a following extraction. |
+| How do I read my home timeline? | `GET /x/timeline` | Approve this private read. |
+| How do I monitor an account? | `POST /monitors` | Deliver events through HMAC webhooks. |
+| How do I post or reply? | `POST /x/tweets` | Confirm the account and payload. |
+
 ## Why Teams Use Xquik
 
 - **Use one API surface** for reads, exports, monitors, webhooks, MCP, and writes.
