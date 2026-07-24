@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Xquik Contributors
+# SPDX-License-Identifier: MIT
+
 name: CI
 
 on:
@@ -24,11 +27,17 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Check license metadata
+        uses: fsfe/reuse-action@676e2d560c9a403aa252096d99fcab3e1132b0f5 # v6.0.0
+
       - name: Set up Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "24.18.0"
           package-manager-cache: false
+
+      - name: Set up npm
+        run: npm install --global npm@12.0.1 --ignore-scripts
 
       - name: Install dependencies
         run: npm ci --ignore-scripts
@@ -41,6 +50,9 @@ jobs:
 
       - name: Audit dependencies
         run: npm audit --audit-level=low
+
+      - name: Check reproducible package
+        run: npm run check:reproducible
 
       - name: Inspect package contents
         run: npm pack --dry-run --json
