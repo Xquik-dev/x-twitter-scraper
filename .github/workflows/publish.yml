@@ -42,7 +42,9 @@ jobs:
           package-manager-cache: false
 
       - name: Set up npm
-        run: npm install --global npm@12.0.1 --ignore-scripts
+        run: |
+          corepack enable npm
+          npm --version
 
       - name: Verify release context
         env:
