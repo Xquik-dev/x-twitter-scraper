@@ -40,7 +40,7 @@ jobs:
 
           body_file="$(mktemp)"
           trap 'rm -f "$body_file"' EXIT
-          status="$(curl -sS -o "$body_file" -w "%{http_code}" -X POST "https://context7.com/api/v1/refresh" \
+          status="$(curl --connect-timeout 10 --max-time 30 --proto '=https' -sS --tlsv1.2 -o "$body_file" -w "%{http_code}" -X POST "https://context7.com/api/v1/refresh" \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${CONTEXT7_API_KEY}" \
             -d '{"libraryName": "/xquik-dev/x-twitter-scraper"}')"
