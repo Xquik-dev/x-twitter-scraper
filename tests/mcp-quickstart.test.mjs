@@ -50,6 +50,6 @@ test("packaged MCP entry supports the offline quickstart workflow", () => {
   assert.match(explore.description, /JSON or text/u);
 
   const resultText = responses[2].result.content[0].text;
-  assert.match(resultText, /https:\/\/xquik\.com\/mcp/u);
+  assert.ok(resultText.includes("Add https://xquik.com/mcp to"));
   assert.match(resultText, /OAuth 2\.1/u);
 });
