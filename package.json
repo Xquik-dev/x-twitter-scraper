@@ -78,5 +78,8 @@
     "check-versions": "node scripts/check-versions.mjs",
     "test": "node --test --experimental-test-coverage --test-coverage-branches=80 --test-coverage-functions=90 --test-coverage-lines=90 tests/*.test.mjs",
     "prepublishOnly": "npm test && npm run check:reproducible"
+  },
+  "devDependencies": {
+    "fast-check": "4.9.0"
   }
 }
