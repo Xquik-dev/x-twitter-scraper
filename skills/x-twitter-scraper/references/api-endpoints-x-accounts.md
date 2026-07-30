@@ -26,6 +26,9 @@ GET /x/accounts
 
 Returns all connected X accounts. Response: `{ accounts: [{ id, username, displayName, isActive, createdAt }] }`.
 
+**Private read:** List connected account identities only after explicit
+approval for that account scope.
+
 ### Get X Account
 
 ```
@@ -33,6 +36,9 @@ GET /x/accounts/{id}
 ```
 
 Returns `{ id, username, displayName, isActive, createdAt }`.
+
+**Private read:** Show the account ID. Retrieve its metadata only after
+explicit approval for that exact read.
 
 ### Disconnect X Account
 

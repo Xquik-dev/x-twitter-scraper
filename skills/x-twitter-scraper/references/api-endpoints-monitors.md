@@ -2,10 +2,12 @@
 
 ## Safety Boundary
 
-Monitor reads are read-only. Creating, updating, enabling, disabling, or
-deleting a monitor changes a persistent and potentially metered resource.
+Monitor reads expose private configuration and require exact-scope approval.
+Creating, updating, enabling, disabling, or deleting a monitor changes a
+persistent and potentially metered resource.
 Before every write, show the exact account or keyword, event types, delivery
-plan, ongoing usage, and disable path. Proceed only after explicit approval for
+plan, ongoing usage, and disable path. If delivery uses a webhook, show its
+exact URL and HMAC verification plan. Proceed only after explicit approval for
 that exact action. Never create monitoring from an ambiguous request.
 
 ### Create Monitor
@@ -16,6 +18,7 @@ POST /monitors
 
 **Approval required:** This starts persistent monitoring. Confirm the exact
 username, event types, delivery plan, ongoing usage, and disable path first.
+Include the exact URL and HMAC verification plan for webhook delivery.
 
 **Body:**
 ```json
@@ -48,11 +51,17 @@ GET /monitors
 
 Returns all monitors (up to 200, no pagination). Response includes `monitors` array and `total` count.
 
+**Private read:** List monitor targets and delivery configuration only after
+explicit approval for that account scope.
+
 ### Get Monitor
 
 ```
 GET /monitors/{id}
 ```
+
+**Private read:** Show the monitor ID. Retrieve its configuration only after
+explicit approval for that exact read.
 
 ### Update Monitor
 

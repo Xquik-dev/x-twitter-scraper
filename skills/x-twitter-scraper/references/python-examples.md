@@ -14,7 +14,7 @@ Python equivalents of the JavaScript examples in SKILL.md.
 
 > **External transmission:** These examples send credentials, parameters, and
 > returned data to and from `xquik.com`. Keep the key in a secret store. Get
-> explicit approval before private reads, writes, persistent resources,
+> explicit approval before private reads, writes, exports, persistent resources,
 > webhooks, or metered jobs. Never forward private results without separate
 > approval.
 

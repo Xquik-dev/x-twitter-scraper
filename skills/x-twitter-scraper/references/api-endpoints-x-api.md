@@ -193,8 +193,8 @@ names or contents to other tools without separate explicit approval.
 GET /x/dm/{userId}/history?account={username}
 ```
 
-Get DM conversation history with a user. Requires a connected X account and is
-metered per returned result.
+Get DM conversation history with a numeric user ID. Requires a connected X
+account and is metered per returned result.
 
 **Query:** `account` is required. Use the connected X handle without `@`.
 `cursor` and legacy `maxId` are optional pagination cursors. Do not call this

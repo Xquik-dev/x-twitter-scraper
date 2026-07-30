@@ -56,8 +56,8 @@ the exact account, tweet ID, and current text before obtaining final approval.
 POST /x/tweets/{id}/like
 ```
 
-**Approval required:** A like is a public account-affecting signal. Confirm the
-account and tweet ID immediately before the call.
+**Approval required:** A like is an account-affecting engagement signal. The
+post author can see it. Confirm the account and tweet ID before the call.
 
 **Body:** `{ "account": "username" }`
 
@@ -68,7 +68,7 @@ delete request to `/x/tweets/{id}/like`
 ```
 
 **Approval required:** Confirm the account and tweet ID before removing this
-public signal.
+engagement signal.
 
 **Body:** `{ "account": "username" }`
 
@@ -196,7 +196,7 @@ POST /x/media
 ```
 
 **Approval required:** Media upload transfers a file or remote URL for later
-publication. Confirm the account, source, content rights, and intended tweet.
+use. Confirm the account, source, content rights, and intended action.
 
 **Body:** FormData with `account` (required), `file` (required), and `is_long_video` (optional boolean). Alternatively, JSON body with `account` (required) and `url` (required, direct media URL) for URL-based upload.
 

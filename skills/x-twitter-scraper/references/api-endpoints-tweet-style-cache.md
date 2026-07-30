@@ -3,8 +3,12 @@
 ## Safety Boundary
 
 Style creation, replacement, and deletion change persistent cached resources.
-Show the exact username or label, source tweets, metered usage, and replacement
-or deletion effect. Proceed only after explicit approval for that exact write.
+For analysis, show the username, estimated usage, and storage effect. For
+custom saves, show the label, source tweets, and replacement effect. For
+deletion, show the label or username and deletion effect. Proceed only after
+explicit approval for that exact write.
+Cached profiles and comparisons are account-scoped reads. Require exact-scope
+approval before retrieving them.
 
 ### Analyze & Cache Style
 
@@ -47,6 +51,9 @@ the resulting profile before creating the cache.
 `GET /styles`
 
 List all cached tweet style profiles. Max 200 results, ordered by fetch date.
+
+**Private read:** List cached profile labels only after explicit approval for
+that account scope.
 
 **Response (200):**
 
@@ -93,6 +100,9 @@ label will be replaced, then obtain explicit approval.
 
 Get a cached style profile with full tweet data. `id` is the cached style label or username.
 
+**Private read:** Show the label or username. Retrieve its tweets only after
+explicit approval for that exact read.
+
 **Response (200):** Full style object with `tweets` array.
 
 **Errors:** `404 style_not_found`
@@ -116,6 +126,9 @@ after explicit approval immediately before the call. Returns `204 No Content`.
 `GET /styles/compare?username1=A&username2=B`
 
 Compare two cached tweet style profiles side by side.
+
+**Private read:** Show both labels or usernames. Compare only after explicit
+approval for that exact read.
 
 **Query parameters:**
 
@@ -142,6 +155,9 @@ Compare two cached tweet style profiles side by side.
 `GET /styles/{id}/performance`
 
 Get live engagement metrics for cached tweets for a cached style label or username. **Consumes metered API usage.**
+
+**Private metered read:** Show the label or username and usage estimate.
+Proceed only after explicit approval for that exact read.
 
 **Response (200):**
 

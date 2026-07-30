@@ -2,10 +2,11 @@
 
 ## Safety Boundary
 
-`GET` operations are read-only. `POST` and delete operations are non-default
-writes. Show the exact draft text or draft ID and receive explicit user
-approval immediately before each write. Never infer approval from an earlier
-request or retry a failed write automatically.
+`GET` operations expose private saved content. State the exact draft scope and
+obtain explicit approval immediately before each read. `POST` and delete
+operations are non-default writes. Show the exact draft text or draft ID and
+obtain explicit approval immediately before each write. Never infer approval
+from an earlier request or retry a failed write automatically.
 
 ### Create Draft
 
@@ -45,6 +46,9 @@ only after the user explicitly approves that exact payload.
 
 List saved tweet drafts with cursor pagination.
 
+**Private read:** Show the requested page size and account scope. List drafts
+only after explicit approval for that exact read.
+
 **Query parameters:**
 
 | Parameter | Type | Required | Default | Description |
@@ -78,6 +82,9 @@ List saved tweet drafts with cursor pagination.
 `GET /drafts/{id}`
 
 Get a specific draft by ID.
+
+**Private read:** Show the draft ID. Fetch it only after explicit approval for
+that exact read, including any preview before deletion.
 
 **Response (200):** Single draft object.
 
