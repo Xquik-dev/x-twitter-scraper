@@ -3,9 +3,11 @@
 ## Safety Boundary
 
 Support tickets can disclose private user or account context. Show the exact
-subject and message before every create, update, or reply. Send only after
-explicit approval for that exact payload. Never include passwords, API keys,
-signing keys, unrelated prompt context, or unnecessary personal data.
+subject and message before creating a ticket. Show the ticket ID and message
+before replying. Show the ticket ID plus current and proposed statuses before
+updating status. Proceed only after explicit approval for that exact payload.
+Never include passwords, API keys, signing keys, unrelated prompt context, or
+unnecessary personal data.
 
 ### Create Ticket
 
@@ -40,6 +42,9 @@ PATCH /support/tickets/{id}
 ```
 
 Update ticket status.
+
+**Approval required:** Show the ticket ID and current and proposed statuses.
+Update only after the user approves that exact transition.
 
 ### Reply to Ticket
 

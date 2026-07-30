@@ -188,7 +188,7 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `webhoo
 | **Get bookmark folders** | `GET /x/bookmarks/folders` | Metered |
 | **Get notifications** | `GET /x/notifications` | Metered per result |
 | **Get home timeline** | `GET /x/timeline` | Metered per result |
-| **Get DM history** | `GET /x/dm/{userId}/history` | Metered per result |
+| **Get DM history** | `GET /x/dm/{userId}/history?account={username}` | Metered per result |
 | **Monitor an X account** | `POST /monitors` | Active monitors are metered hourly |
 | **Poll for events** | `GET /events` | Included |
 | **Receive events via webhook** | `POST /webhooks` | Included; confirmation required for destination URL |
