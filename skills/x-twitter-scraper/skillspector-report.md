@@ -2,7 +2,7 @@
 
 **Skill:** x-twitter-scraper
 **Source:** `skills/x-twitter-scraper`
-**Scanned:** 2026-07-16 13:37:35 UTC
+**Scanned:** 2026-07-30 03:38:37 UTC
 
 ## Static Scan
 
@@ -10,6 +10,9 @@
 - Mode: static analysis only (`--no-llm`)
 - Components scanned: 75
 - Executable scripts: no
+- Risk score: 0/100
+- Severity: low
+- Recommendation: safe
 - Findings: 0
 
 No security issues were detected by the static scan.

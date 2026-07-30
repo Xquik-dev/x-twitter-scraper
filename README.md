@@ -43,8 +43,8 @@ Modern calls need no initialization session. Stateless 2025-era clients remain
 compatible. Follow the
 [client compatibility guide](https://docs.xquik.com/mcp/overview#client-compatibility).
 OAuth-capable clients use OAuth 2.1. API-key fallback depends on the client.
-ChatGPT custom apps require OAuth. Eight credential operations remain outside
-MCP.
+ChatGPT custom apps require OAuth. Eight credential, checkout, or guest-wallet
+operations remain outside MCP.
 
 > **Codex OAuth compatibility:** Affected Codex releases discard the RFC 9207 `iss` callback value even though Xquik returns it. If Codex reports `Authorization server response missing required issuer: expected https://xquik.com`, use `XQUIK_API_KEY` through the Codex `bearer_token_env_var` setting. Follow the [Codex OAuth troubleshooting guide](https://docs.xquik.com/guides/troubleshooting#codex-oauth-issuer-validation-error) and track [openai/codex#31573](https://github.com/openai/codex/issues/31573).
 

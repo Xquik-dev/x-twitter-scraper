@@ -163,7 +163,7 @@ Use `POST /api/v1/extractions` ONLY for bulk data that simpler endpoints cannot 
 
 MCP v2.6.0 catalogs 120 of 128 REST operations.
 Of these, 119 support JSON or text. Binary support downloads use REST.
-These 8 credential operations remain outside MCP:
+These 8 credential, checkout, or guest-wallet operations remain outside MCP:
 
 - API key creation
 - API key listing

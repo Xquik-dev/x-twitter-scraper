@@ -298,8 +298,8 @@ The MCP server (v2.6.0) exposes 120 catalog routes through 2 structured API tool
 operations with normalized snake_case responses. Authentication is injected, so
 tool code must never include credentials.
 
-MCP v2.6.0 catalogs 120 of 128 documented REST operations. These 8 credential
-operations remain direct REST or dashboard workflows:
+MCP v2.6.0 catalogs 120 of 128 documented REST operations. These 8 credential,
+checkout, or guest-wallet operations remain direct REST or dashboard workflows:
 
 - API key creation, listing, and revocation
 - Saved-payment top-up

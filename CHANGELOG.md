@@ -25,5 +25,6 @@ All notable public changes appear in this file.
 
 - Exclude fetching-account action and permission state from general reads.
 - Return follow relationships only from explicit relationship checks.
+- Refresh SkillSpector v2.3.7 evidence with 0 findings.
 
 [2.6.0]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.0
