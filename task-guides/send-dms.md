@@ -60,8 +60,9 @@ The recipient must allow DMs from people they don't follow, or must follow the s
 1. `GET /x/accounts` to pick the sending account.
 2. `GET /x/users/{id}` to resolve the recipient handle into a numeric `id`.
 3. Optionally call `GET /x/dm/{userId}/history?account=<username>&cursor=<optional>`.
-   Obtain explicit approval for this private read. Use the exact approved
-   connected account. Block ambiguous account selection.
+   Show the exact account, conversation partner, purpose, approved page count,
+   and downstream recipients. Obtain explicit approval for that private read.
+   Block ambiguous account selection or unapproved pagination.
 4. Show the user the exact DM text, recipient, and sender account. Wait for explicit approval.
 5. `POST /x/dm/{userId}`.
 

@@ -128,7 +128,7 @@ Use `explore` first to find endpoints, then `xquik` to call them.
 | Get bookmark folders | `GET /api/v1/x/bookmarks/folders` |
 | Get notifications | `GET /api/v1/x/notifications` (private; confirmation required) |
 | Get home timeline | `GET /api/v1/x/timeline` (private; confirmation required) |
-| Get DM history | `GET /api/v1/x/dm/{userId}/history?account={username}` (private; account and confirmation required) |
+| Get DM history | `GET /api/v1/x/dm/{userId}/history?account={username}` (private; exact-account approval required; block ambiguous selection) |
 | Check credit balance | `GET /api/v1/credits` |
 
 Use `POST /api/v1/extractions` ONLY for bulk data that simpler endpoints cannot provide (all followers, all replies to a tweet, community members, etc.). Always call `POST /api/v1/extractions/estimate` first.
