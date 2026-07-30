@@ -63,7 +63,7 @@ The route does not accept a server-side `sort`. Page through and sort locally by
 
 For very large threads (thousands of replies), prefer the extraction path:
 
-```
+```json
 POST /extractions/estimate
 { "toolType": "reply_extractor", "targetTweetId": "<id>" }
 ```
@@ -71,7 +71,7 @@ POST /extractions/estimate
 Show the result estimate and usage. Ask for explicit approval.
 Only after approval, create the job with the same body:
 
-```
+```json
 POST /extractions
 { "toolType": "reply_extractor", "targetTweetId": "<id>" }
 ```

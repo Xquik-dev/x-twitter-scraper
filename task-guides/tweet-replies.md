@@ -59,7 +59,7 @@ Each `Tweet` has `id`, `text`, author fields when available, and optional engage
 4. Sort by available engagement fields such as `likeCount` client-side.
 5. For large threads, estimate with the exact job body:
 
-```
+```json
 POST /extractions/estimate
 { "toolType": "reply_extractor", "targetTweetId": "<id>" }
 ```
@@ -67,7 +67,7 @@ POST /extractions/estimate
 6. Show the result estimate and usage. Ask for explicit approval.
 7. Only after approval, create the job with the same body:
 
-```
+```json
 POST /extractions
 { "toolType": "reply_extractor", "targetTweetId": "<id>" }
 -> 202 { "id": "<extractionId>", "toolType": "reply_extractor", "status": "running" }

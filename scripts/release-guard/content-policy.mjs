@@ -27,6 +27,7 @@ export const contentChecks = [
       "MCP `2026-07-28` through",
       "`server/discover`",
       "Eight credential, checkout, or guest-wallet",
+      "operations remain outside MCP.",
       "## Agent Safety And Account Boundary",
       "Plan and credit changes stay in the Xquik dashboard.",
       "The npm package `x-developer` contains this Skill and plugin bundle. The separate `x-twitter-scraper` package is the TypeScript SDK.",
