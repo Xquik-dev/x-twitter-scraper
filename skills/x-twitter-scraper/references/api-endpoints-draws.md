@@ -1,5 +1,12 @@
 # Xquik REST API Endpoints: Draws
 
+## Safety Boundary
+
+Draw creation and participant exports are metered or privacy-sensitive actions.
+Confirm the source tweet, eligibility rules, requested fields, export audience,
+and retention plan. Use the smallest necessary dataset. Do not export entries
+for surveillance, discrimination, harassment, or unrelated secondary use.
+
 ### Create Draw
 
 ```
@@ -7,6 +14,9 @@ POST /draws
 ```
 
 Run a giveaway draw from a tweet. Picks random winners from replies.
+
+**Approval required:** Show the source tweet, winner count, backup count,
+filters, estimated usage, and participant-data handling before creating it.
 
 **Body:**
 ```json
@@ -71,5 +81,10 @@ GET /draws/{id}/export?format=csv&type=winners
 ```
 
 Formats: `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, `xlsx`. Types: `winners` (default), `entries`. Entry exports capped at 100,000 rows (PDF capped at 10,000).
+
+**Private-data handling:** Full entry exports can contain participant identity
+and activity data. Confirm the lawful purpose, exact type, format, audience,
+minimum fields, and retention period before export. Prefer winners-only output.
+Do not disclose or retain participant data beyond the approved purpose.
 
 ---

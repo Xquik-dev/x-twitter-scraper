@@ -12,6 +12,12 @@ Python equivalents of the JavaScript examples in SKILL.md.
 
 ## Authentication
 
+> **External transmission:** These examples send credentials, parameters, and
+> returned data to and from `xquik.com`. Keep the key in a secret store. Get
+> explicit approval before private reads, writes, persistent resources,
+> webhooks, or metered jobs. Never forward private results without separate
+> approval.
+
 ```python
 import json
 import urllib.error

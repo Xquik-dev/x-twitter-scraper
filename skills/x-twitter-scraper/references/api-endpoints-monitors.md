@@ -1,10 +1,21 @@
 # Xquik REST API Endpoints: Monitors
 
+## Safety Boundary
+
+Monitor reads are read-only. Creating, updating, enabling, disabling, or
+deleting a monitor changes a persistent and potentially metered resource.
+Before every write, show the exact account or keyword, event types, delivery
+plan, ongoing usage, and disable path. Proceed only after explicit approval for
+that exact action. Never create monitoring from an ambiguous request.
+
 ### Create Monitor
 
 ```
 POST /monitors
 ```
+
+**Approval required:** This starts persistent monitoring. Confirm the exact
+username, event types, delivery plan, ongoing usage, and disable path first.
 
 **Body:**
 ```json
@@ -49,6 +60,9 @@ GET /monitors/{id}
 PATCH /monitors/{id}
 ```
 
+**Approval required:** Show the current and proposed event types and active
+state. Apply only the explicitly approved change.
+
 **Body:** `{ "eventTypes": [...], "isActive": true|false }` (both optional)
 
 ### Delete Monitor
@@ -57,7 +71,9 @@ PATCH /monitors/{id}
 delete request to `/monitors/{id}`
 ```
 
-Stops tracking and deletes all associated data.
+**Destructive action:** This permanently stops tracking and deletes associated
+monitor data. Show the monitor ID, target, and lost data. Delete only after
+explicit approval immediately before the call.
 
 ### Keyword Monitors
 
@@ -70,5 +86,9 @@ delete request to `/monitors/keywords/{id}`
 ```
 
 Create and manage ongoing keyword monitors. Treat these as persistent resources: confirm the keyword query, event delivery plan, and ongoing usage before creating or enabling one.
+
+Creating, updating, enabling, disabling, or deleting a keyword monitor requires
+explicit approval for the exact monitor. Deletion permanently removes its
+associated data.
 
 ---

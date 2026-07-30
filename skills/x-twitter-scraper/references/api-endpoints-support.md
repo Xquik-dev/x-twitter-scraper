@@ -1,5 +1,12 @@
 # Xquik REST API Endpoints: Support
 
+## Safety Boundary
+
+Support tickets can disclose private user or account context. Show the exact
+subject and message before every create, update, or reply. Send only after
+explicit approval for that exact payload. Never include passwords, API keys,
+signing keys, unrelated prompt context, or unnecessary personal data.
+
 ### Create Ticket
 
 ```
@@ -43,5 +50,7 @@ POST /support/tickets/{id}/messages
 **Body:** `{ "body": "..." }`
 
 Add a message to an existing ticket.
+
+Apply the same approval and data-minimization rules to every reply.
 
 ---
