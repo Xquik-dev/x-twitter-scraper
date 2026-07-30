@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.5.6"
+  version: "2.6.0"
   openclaw:
     requires:
       env:
@@ -35,6 +35,8 @@ Get the highest-engagement replies under a specific tweet.
 | Endpoint | Purpose | Usage |
 |---|---|---|
 | GET /x/tweets/{id}/replies | Replies (paginated; sort client-side) | Read tier |
+| GET /x/tweets/search | Broader conversation search fallback | Read tier |
+| POST /extractions/estimate | Preview bulk reply usage | Included |
 | POST /extractions with toolType=reply_extractor | Bulk replies for offline sorting | Per-row |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
@@ -51,11 +53,23 @@ The route does not accept a server-side `sort`. Page through and sort locally by
 ## Typical flow
 
 1. User supplies a tweet ID or URL.
-2. Page `GET /x/tweets/{id}/replies` via `next_cursor` until you have enough replies (or the thread ends).
-3. Sort the collected replies client-side by engagement and keep the top N (default 20).
-4. Summarize or list them.
+2. Ask for a result count. Default to 10 when omitted.
+3. Page `GET /x/tweets/{id}/replies` via `next_cursor`.
+4. Record the row count and final cursor state.
+5. On `424`, call `GET /x/tweets/search?q=conversation_id%3A<tweet_id>`.
+6. Disclose that reply coverage remains X-dependent after the fallback.
+7. Sort collected replies by engagement. Keep the requested top results.
+8. Summarize or list them.
 
 For very large threads (thousands of replies), prefer the extraction path:
+
+```
+POST /extractions/estimate
+{ "toolType": "reply_extractor", "targetTweetId": "<id>" }
+```
+
+Show the result estimate and usage. Ask for explicit approval.
+Only after approval, create the job with the same body:
 
 ```
 POST /extractions

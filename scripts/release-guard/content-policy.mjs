@@ -21,9 +21,11 @@ export const contentChecks = [
   {
     path: "README.md",
     required: [
-      "127 REST API operations",
-      "MCP v2.5.6 exposes 119 catalog routes through 2 tools.",
-      "118 support JSON or text.",
+      "128 REST API operations",
+      "MCP v2.6.0 exposes 120 catalog routes through 2 tools.",
+      "119 support JSON or text.",
+      "MCP `2026-07-28` through",
+      "`server/discover`",
       "## Agent Safety And Account Boundary",
       "Plan and credit changes stay in the Xquik dashboard.",
       "The npm package `x-developer` contains this Skill and plugin bundle. The separate `x-twitter-scraper` package is the TypeScript SDK.",
@@ -51,6 +53,18 @@ export const contentChecks = [
     ],
   },
   {
+    path: "CHANGELOG.md",
+    required: [
+      "## [2.6.0] - 2026-07-30",
+      "MCP `2026-07-28`",
+      "`server/discover`",
+      "120 authenticated catalog routes",
+      "fetching-account action and permission state from general reads",
+      "follow relationships only from explicit relationship checks",
+    ],
+    forbidden: [dollarDenominatedPricing],
+  },
+  {
     path: "package.json",
     required: [
       '".claude-plugin"',
@@ -61,6 +75,7 @@ export const contentChecks = [
       '"stub-server.mjs"',
       '"server.json"',
       '"skills.sh.json"',
+      '"CHANGELOG.md"',
     ],
     forbidden: [blocked("pay-", "per-use")],
   },
@@ -68,7 +83,7 @@ export const contentChecks = [
     path: "skills/x-twitter-scraper/SKILL.md",
     required: [
       'Xquik is an independent third-party service. Not affiliated with X Corp. "Twitter" and "X" are trademarks of X Corp.',
-      "127 OpenAPI-documented REST operations",
+      "128 OpenAPI-documented REST operations",
       "Some operations consume usage credits",
       "Read (300/1s), Write (120/60s), Delete (60/60s)",
       "Plan and credit changes are dashboard-only",
@@ -130,9 +145,11 @@ export const contentChecks = [
     required: [
       "https://xquik.com/mcp",
       "OpenAI Agents SDK",
-      "119 catalog routes through 2 structured API tools",
-      "118 support JSON or text",
-      "catalogs 119 of 127 documented REST operations",
+      "120 catalog routes through 2 structured API tools",
+      "119 support JSON or text",
+      "catalogs 120 of 128 documented REST operations",
+      "Current clients negotiate MCP `2026-07-28`",
+      "Modern calls need no `initialize` request or session ID.",
       "https://docs.xquik.com/mcp/overview#client-compatibility",
       "gemini mcp add --transport http xquik https://xquik.com/mcp",
       '"type": "http"',
@@ -153,8 +170,9 @@ export const contentChecks = [
       "| `explore` | Search the API endpoint catalog (read-only, no network calls) | Included |",
       "Included usage flag from endpoint metadata",
       "Find all included-usage endpoints",
-      "MCP v2.5.6 catalogs 119 of 127 REST operations",
-      "118 support JSON or text",
+      "MCP v2.6.0 catalogs 120 of 128 REST operations",
+      "119 support JSON or text",
+      "MCP v2.6.0 supports `2026-07-28` through `server/discover`.",
       "Saved-payment top-ups",
       "Dashboard checkout redirects",
     ],
@@ -174,7 +192,7 @@ export const contentChecks = [
   },
   {
     path: ".claude-plugin/plugin.json",
-    required: ["119 catalog routes through 2 tools", "118 support JSON or text"],
+    required: ["120 catalog routes through 2 tools", "119 support JSON or text"],
     forbidden: [
       "113 endpoints",
       "112 endpoints",
@@ -186,9 +204,9 @@ export const contentChecks = [
   {
     path: ".codex-plugin/plugin.json",
     required: [
-      "127 REST operations",
-      "119 MCP catalog routes",
-      "118 JSON or text operations",
+      "128 REST operations",
+      "120 MCP catalog routes",
+      "119 JSON or text operations",
     ],
     forbidden: ["100+ endpoints", dollarDenominatedPricing],
   },
@@ -236,9 +254,9 @@ export const contentChecks = [
     path: "server.json",
     required: [
       '"title": "Xquik MCP Server"',
-      "127 REST operations",
-      "119 MCP routes",
-      "118 JSON/text ops",
+      "128 REST operations",
+      "120 MCP routes",
+      "119 JSON/text ops",
       '"websiteUrl": "https://docs.xquik.com/mcp/overview"',
     ],
     forbidden: [
@@ -251,8 +269,10 @@ export const contentChecks = [
   {
     path: "stub-server.mjs",
     required: [
-      "119 catalog routes",
-      "118 support JSON or text",
+      "120 catalog routes",
+      "119 support JSON or text",
+      '"server/discover"',
+      '"2026-07-28"',
       "This package stub returns setup guidance only.",
       "complete OAuth 2.1 for live API access",
       "included usage or requires account access",

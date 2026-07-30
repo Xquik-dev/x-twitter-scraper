@@ -37,6 +37,16 @@ const publicContractFiles = [
 ];
 
 const stalePublicContractPatterns = [
+  [
+    "127-operation REST count",
+    /\b127 (?:OpenAPI-documented )?REST(?: API)? operations\b/u,
+  ],
+  [
+    "119-route MCP count",
+    /\b(?:119 MCP (?:catalog )?routes|119 catalog routes through|119-route API catalog|catalogs 119 of \d+)\b/iu,
+  ],
+  ["118 JSON or text count", /\b118 (?:support |JSON\/text|JSON or text)/u],
+  ["MCP v2.5.6", /\bMCP v2\.5\.6\b/u],
   ["126-operation REST count", /\b126 REST(?: API)? operations\b/u],
   ["ambiguous 118-operation MCP count", /\b118 (?:MCP )?operations\b/u],
   ["118-of-126 MCP count", /\b118 of 126\b/u],
@@ -153,6 +163,7 @@ function collectPackageFileDrifts() {
     ".mcp.json",
     ".claude-plugin/plugin.json",
     ".codex-plugin/plugin.json",
+    "CHANGELOG.md",
     "commands/post.md",
     "task-guides/search-tweets.md",
     "server.json",

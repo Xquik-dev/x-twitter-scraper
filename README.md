@@ -33,9 +33,18 @@ This repository packages Xquik as an [AI agent Skill](https://skills.sh). It wor
 
 The npm package `x-developer` contains this Skill and plugin bundle. The separate `x-twitter-scraper` package is the TypeScript SDK.
 
-Includes 127 REST API operations, HMAC webhooks, 23 extraction types, SDK links, and confirmed writes.
+Includes 128 REST API operations, HMAC webhooks, 23 extraction types, SDK links, and confirmed writes.
 
-MCP v2.5.6 exposes 119 catalog routes through 2 tools. Of these, 118 support JSON or text. Binary support downloads use REST. Add `https://xquik.com/mcp`. Then follow the [client compatibility guide](https://docs.xquik.com/mcp/overview#client-compatibility). OAuth-capable clients use OAuth 2.1. API-key fallback depends on the client. ChatGPT custom apps require OAuth. Eight credential or session operations remain outside MCP.
+MCP v2.6.0 exposes 120 catalog routes through 2 tools.
+Of these, 119 support JSON or text. Binary support downloads use REST. Add
+`https://xquik.com/mcp`. Current clients negotiate MCP `2026-07-28` through
+`server/discover`. The SDK adds request metadata and headers automatically.
+Modern calls need no initialization session. Stateless 2025-era clients remain
+compatible. Follow the
+[client compatibility guide](https://docs.xquik.com/mcp/overview#client-compatibility).
+OAuth-capable clients use OAuth 2.1. API-key fallback depends on the client.
+ChatGPT custom apps require OAuth. Eight credential operations remain outside
+MCP.
 
 > **Codex OAuth compatibility:** Affected Codex releases discard the RFC 9207 `iss` callback value even though Xquik returns it. If Codex reports `Authorization server response missing required issuer: expected https://xquik.com`, use `XQUIK_API_KEY` through the Codex `bearer_token_env_var` setting. Follow the [Codex OAuth troubleshooting guide](https://docs.xquik.com/guides/troubleshooting#codex-oauth-issuer-validation-error) and track [openai/codex#31573](https://github.com/openai/codex/issues/31573).
 
@@ -200,14 +209,14 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Tweet composition**: Algorithm-optimized tweet composer with scoring
 - **Usage guardrails**: Check balance and estimate usage; dashboard handles plan and credit changes
 - **Support tickets**: Open and manage support tickets via API
-- **MCP server**: MCP v2.5.6 exposes 119 catalog routes through 2 tools. 118 support JSON or text
+- **MCP server**: MCP v2.6.0 supports `server/discover`, 120 catalog routes, and 119 JSON or text routes
 
 ## Capabilities
 
 | Area | Details |
 |------|---------|
-| **REST API** | 127 OpenAPI-backed operations with pagination and documented errors |
-| **MCP Server** | 119 catalog routes through `explore` and `xquik`. 118 support JSON or text |
+| **REST API** | 128 OpenAPI-backed operations with pagination and documented errors |
+| **MCP Server** | 120 catalog routes through `explore` and `xquik`. 119 support JSON or text |
 | **Data Extraction** | 23 bulk extraction tools (replies, retweets, quotes, favoriters, threads, articles, user likes, user media, communities, lists, Spaces, people search, tweet search, mentions, posts) |
 | **X Lookups** | Tweet, user, article, search, user tweets, user likes, user media, favoriters, mutual followers, and confirmation-gated private reads |
 | **Write Actions** | Confirmation-gated post/delete tweets, like/unlike, retweet, follow/unfollow, remove followers, DM, profile update, avatar/banner, media upload, community actions |

@@ -15,7 +15,7 @@ test("packaged MCP entry supports the offline quickstart workflow", () => {
   assert.ok(manifest.files.includes("stub-server.mjs"));
 
   const requests = [
-    { jsonrpc: "2.0", id: 1, method: "initialize", params: {} },
+    { jsonrpc: "2.0", id: 1, method: "server/discover", params: {} },
     { jsonrpc: "2.0", id: 2, method: "tools/list", params: {} },
     {
       jsonrpc: "2.0",
@@ -28,6 +28,7 @@ test("packaged MCP entry supports the offline quickstart workflow", () => {
         },
       },
     },
+    { jsonrpc: "2.0", id: 4, method: "initialize", params: {} },
   ];
   const child = spawnSync(process.execPath, [join(root, "stub-server.mjs")], {
     encoding: "utf8",
@@ -37,7 +38,20 @@ test("packaged MCP entry supports the offline quickstart workflow", () => {
 
   assert.equal(child.status, 0, child.stderr);
   const responses = child.stdout.trim().split("\n").map(JSON.parse);
-  assert.equal(responses[0].result.serverInfo.name, "xquik");
+  assert.deepEqual(responses[0].result.supportedVersions, ["2026-07-28"]);
+  assert.equal(
+    responses[0].result._meta["io.modelcontextprotocol/serverInfo"].name,
+    "xquik",
+  );
+  assert.equal(
+    responses[0].result._meta["io.modelcontextprotocol/serverInfo"].version,
+    "2.6.0",
+  );
+  assert.deepEqual(responses[0].result.capabilities, {
+    tools: { listChanged: false },
+  });
+  assert.equal(responses[0].result.cacheScope, "private");
+  assert.equal(responses[0].result.ttlMs, 300_000);
 
   const explore = responses[1].result.tools.find(
     (tool) => tool.name === "explore",
@@ -48,8 +62,12 @@ test("packaged MCP entry supports the offline quickstart workflow", () => {
   assert.equal(explore.annotations.readOnlyHint, true);
   assert.match(explore.description, /EndpointInfo/u);
   assert.match(explore.description, /JSON or text/u);
+  assert.equal(responses[1].result.cacheScope, "private");
+  assert.equal(responses[1].result.ttlMs, 300_000);
 
   const resultText = responses[2].result.content[0].text;
   assert.ok(resultText.includes("Add https://xquik.com/mcp to"));
   assert.match(resultText, /OAuth 2\.1/u);
+  assert.equal(responses[3].result.protocolVersion, "2025-11-25");
+  assert.equal(responses[3].result.serverInfo.version, "2.6.0");
 });

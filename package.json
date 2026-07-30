@@ -1,6 +1,6 @@
 {
   "name": "x-developer",
-  "version": "2.5.6",
+  "version": "2.6.0",
   "description": "Xquik agent skill & plugin bundle for REST, MCP, webhooks, exports & confirmation-gated X workflows. Not affiliated with X Corp.",
   "author": {
     "name": "Xquik",
@@ -59,6 +59,7 @@
     ".codex-plugin",
     ".claude-plugin",
     ".mcp.json",
+    "CHANGELOG.md",
     "assets",
     "commands",
     "context7.json",
