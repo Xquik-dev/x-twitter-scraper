@@ -5,15 +5,15 @@
     "email": "support@xquik.com"
   },
   "metadata": {
-    "description": "Xquik Skill for 127 REST operations and 119 MCP catalog routes. Two MCP tools support 118 JSON or text operations. Not affiliated with X Corp.",
-    "version": "2.5.6"
+    "description": "Xquik Skill for 128 REST operations and 120 MCP catalog routes. Two MCP tools support 119 JSON or text operations. Not affiliated with X Corp.",
+    "version": "2.6.0"
   },
   "plugins": [
     {
       "name": "x-twitter-scraper",
       "source": "./",
-      "description": "127 REST operations, 119 MCP catalog routes, 23 extraction types, SDKs, webhooks, exports, and confirmation-gated writes. Two MCP tools support 118 JSON or text operations. Not affiliated with X Corp.",
-      "version": "2.5.6",
+      "description": "128 REST operations, 120 MCP catalog routes, 23 extraction types, SDKs, webhooks, exports, and confirmation-gated writes. Two MCP tools support 119 JSON or text operations. Not affiliated with X Corp.",
+      "version": "2.6.0",
       "author": {
         "name": "Xquik"
       },

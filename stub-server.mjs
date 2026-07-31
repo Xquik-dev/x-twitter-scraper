@@ -12,13 +12,16 @@ import { pathToFileURL } from "node:url";
 
 const SERVER_INFO = {
   name: "xquik",
-  version: "2.5.6",
+  version: "2.6.0",
 };
 
 const CAPABILITIES = {
   tools: { listChanged: false },
 };
 
+const MODERN_PROTOCOL_VERSION = "2026-07-28";
+const LEGACY_PROTOCOL_VERSION = "2025-11-25";
+const CACHE_TTL_MS = 300_000;
 const MAX_LINE_LENGTH = 64 * 1024;
 const JSONRPC = "2.0";
 const LIVE_SERVER_MESSAGE =
@@ -46,7 +49,7 @@ const TOOLS = [
   {
     name: "explore",
     description: description([
-      "Live Xquik tool: search the 119-route API catalog before calling 'xquik'. This package stub returns setup guidance only.",
+      "Live Xquik tool: search the 120-route API catalog before calling 'xquik'. This package stub returns setup guidance only.",
       "",
       "## When to use",
       "- Use 'explore' FIRST to find the right endpoint path, parameters, and response shape before calling 'xquik'.",
@@ -60,7 +63,7 @@ const TOOLS = [
       "## Behavior",
       "- Live server: read-only, idempotent catalog search with no API request.",
       "- Package stub: makes no network call and returns live setup guidance.",
-      "- The live catalog has 119 routes. Of these, 118 support JSON or text.",
+      "- The live catalog has 120 routes. Of these, 119 support JSON or text.",
       "- Each EndpointInfo contains method, path, summary, category, free, parameters, and responseShape fields.",
       "",
       "## Input format",
@@ -85,7 +88,7 @@ const TOOLS = [
   {
     name: "xquik",
     description: description([
-      "Live Xquik tool: send confirmed requests across 119 catalog routes. This package stub returns setup guidance only.",
+      "Live Xquik tool: send confirmed requests across 120 catalog routes. This package stub returns setup guidance only.",
       "",
       "## When to use",
       "- Use after calling 'explore' to discover the endpoint path and parameters.",
@@ -100,7 +103,7 @@ const TOOLS = [
       "- Live server: processes `xquik.request(path, options?)` inside a bounded sandbox.",
       "- Package stub: makes no API request and returns live setup guidance.",
       "- The live tool has no filesystem or arbitrary network access.",
-      "- 118 catalog routes support JSON or text. Binary support downloads use REST.",
+      "- 119 catalog routes support JSON or text. Binary support downloads use REST.",
       "- Mutating operations require prior user confirmation and can return durable actions.",
       "- Pagination responses include `has_more` and `next_cursor`. Pass `cursor` for the next page.",
       "- Some operations modify X or Xquik resources. Show the exact payload, target, and usage estimate before calling them.",
@@ -131,6 +134,22 @@ const TOOLS = [
   },
 ];
 
+const DISCOVERY_RESULT = {
+  _meta: {
+    "io.modelcontextprotocol/serverInfo": SERVER_INFO,
+  },
+  cacheScope: "private",
+  capabilities: CAPABILITIES,
+  supportedVersions: [MODERN_PROTOCOL_VERSION],
+  ttlMs: CACHE_TTL_MS,
+};
+
+const TOOL_LIST_RESULT = {
+  cacheScope: "private",
+  tools: TOOLS,
+  ttlMs: CACHE_TTL_MS,
+};
+
 function isObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
@@ -160,20 +179,23 @@ export function createMessageHandler(writeLine) {
 
   return function handleMessage(msg) {
     const { id, method, params } = msg;
+    if (id === undefined) {
+      return;
+    }
 
     switch (method) {
+      case "server/discover":
+        return sendResult(id, DISCOVERY_RESULT);
+
       case "initialize":
         return sendResult(id, {
-          protocolVersion: "2024-11-05",
+          protocolVersion: LEGACY_PROTOCOL_VERSION,
           serverInfo: SERVER_INFO,
           capabilities: CAPABILITIES,
         });
 
-      case "notifications/initialized":
-        return; // no response needed
-
       case "tools/list":
-        return sendResult(id, { tools: TOOLS });
+        return sendResult(id, TOOL_LIST_RESULT);
 
       case "tools/call": {
         const toolName = params?.name;
@@ -187,9 +209,7 @@ export function createMessageHandler(writeLine) {
         return sendResult(id, {});
 
       default:
-        if (id !== undefined) {
-          return sendError(id, -32601, `Method not found: ${method}`);
-        }
+        return sendError(id, -32601, `Method not found: ${method}`);
     }
   };
 }
