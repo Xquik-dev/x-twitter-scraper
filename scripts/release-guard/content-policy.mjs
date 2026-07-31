@@ -179,11 +179,36 @@ export const contentChecks = [
       "These 8 credential, checkout, or guest-wallet operations remain outside MCP:",
       "Saved-payment top-ups",
       "Dashboard checkout redirects",
+      "GET /x/tweets/{id}/replies?mode=complete&limit=<1-25000>",
+      "Keep `nested_replies` separate",
+      "Follow `diagnostic.recommendedFallback`",
     ],
     forbidden: [
       "| `explore` | Search the API endpoint catalog (read-only, no network calls) | Free |",
       "Find all free endpoints",
     ],
+  },
+  {
+    path: "task-guides/tweet-replies.md",
+    required: [
+      "GET /x/tweets/{id}/replies?mode=complete&limit=25000",
+      "whose `inReplyToId` equals the root tweet ID",
+      "Keep `nested_replies` separate",
+      "below 80% direct-reply coverage",
+      "follow `diagnostic.recommendedFallback`",
+      "Wait for `Retry-After`, then retry",
+    ],
+    forbidden: ["conversation_id%3A<tweet_id>"],
+  },
+  {
+    path: "task-guides/top-replies.md",
+    required: [
+      "GET /x/tweets/{id}/replies?mode=complete&limit=25000",
+      "whose `inReplyToId` equals the root tweet ID",
+      "Keep `nested_replies` separate",
+      "follow `diagnostic.recommendedFallback`",
+    ],
+    forbidden: ["conversation_id%3A<tweet_id>"],
   },
   {
     path: "skills/x-twitter-scraper/references/webhooks.md",

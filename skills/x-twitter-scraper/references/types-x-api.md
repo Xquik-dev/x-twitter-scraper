@@ -108,6 +108,35 @@ interface FollowerCheck {
   isFollowedBy: boolean;
 }
 
+interface ReplyCoverageDiagnostic {
+  complete: boolean;
+  reportedReplyCount: number;
+  targetDirectReplies: number;
+  uniqueDirectReplies: number;
+  coveragePercentage: number;
+  nestedReplyCount: number;
+  pagesAttempted: number;
+  strategiesAttempted: Array<Record<string, unknown>>;
+  duplicateCount: number;
+  cursorFailures: number;
+  repeatedCursorCount: number;
+  emptyFalseProgressPages: number;
+  malformedCount: number;
+  unrelatedCount: number;
+  missingResponseModulesOrFields: string[];
+  recommendedFallback: string;
+  richness: Record<string, number>;
+  responseTruncated: boolean;
+}
+
+interface TweetReplies {
+  tweets: Tweet[];
+  nested_replies: Tweet[];
+  has_next_page: boolean;
+  next_cursor: string;
+  diagnostic?: ReplyCoverageDiagnostic;
+}
+
 ```
 
 Optional fields appear only when X supplies them. Never infer missing values.
@@ -115,5 +144,7 @@ Fetching-account action and permission state stays private. Follow-relationship
 state appears only through an explicitly requested
 `GET /api/v1/x/followers/check` lookup.
 
-Reply endpoints expose replies visible through Xquik. Handle
-`424 replies_incomplete` with `conversation_id:<tweet_id>` search.
+Use `mode=complete&limit=25000` for bounded maximum-coverage reply collection.
+Count direct replies only when `inReplyToId` equals the root tweet ID. Keep
+`nested_replies` separate. On `424 replies_incomplete`, retain safe partial rows
+and follow `diagnostic.recommendedFallback`.

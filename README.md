@@ -58,6 +58,7 @@ Choose the narrowest route first. Use extraction jobs for complete datasets.
 | How do I read a profile timeline? | `GET /x/users/{id}/tweets` | Paginate or run a posts extraction. |
 | How do I list followers? | `GET /x/users/{id}/followers` | Run a followers extraction. |
 | How do I list following accounts? | `GET /x/users/{id}/following` | Run a following extraction. |
+| How do I collect replies? | `GET /x/tweets/{id}/replies?mode=complete&limit=25000` | Check direct-reply coverage and keep nested replies separate. |
 | How do I read my home timeline? | `GET /x/timeline` | Approve this private read. |
 | How do I monitor an account? | `POST /monitors` | Deliver events through HMAC webhooks. |
 | How do I post or reply? | `POST /x/tweets` | Confirm the account and payload. |

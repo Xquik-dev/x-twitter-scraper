@@ -20,6 +20,9 @@ All notable public changes appear in this file.
 - Make incomplete-reply search fallback directly executable.
 - Default top-reply requests to 10 results when unspecified.
 - Align documented tweet authors with the public response contract.
+- Prefer bounded complete mode for maximum-coverage reply collection.
+- Separate nested replies from measured direct-reply coverage.
+- Preserve safe partial rows and detailed diagnostics on incomplete coverage.
 
 ### Security
 
