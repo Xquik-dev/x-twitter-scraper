@@ -16,15 +16,18 @@ test("handles every supported JSON-RPC message", () => {
   const lines = [];
   const handleMessage = createMessageHandler((line) => lines.push(line));
   const messages = [
-    { id: 1, method: "initialize" },
+    { id: 1, method: "server/discover" },
+    { id: 2, method: "initialize" },
     { method: "notifications/initialized" },
-    { id: 2, method: "tools/list" },
-    { id: 3, method: "tools/call", params: { name: "explore" } },
-    { id: 4, method: "tools/call", params: { name: "xquik" } },
-    { id: 5, method: "tools/call", params: { name: "missing" } },
-    { id: 6, method: "tools/call" },
-    { id: 7, method: "ping" },
-    { id: 8, method: "missing" },
+    { method: "server/discover" },
+    { method: "tools/list" },
+    { id: 3, method: "tools/list" },
+    { id: 4, method: "tools/call", params: { name: "explore" } },
+    { id: 5, method: "tools/call", params: { name: "xquik" } },
+    { id: 6, method: "tools/call", params: { name: "missing" } },
+    { id: 7, method: "tools/call" },
+    { id: 8, method: "ping" },
+    { id: 9, method: "missing" },
     { method: "missing" },
   ];
 
@@ -32,16 +35,28 @@ test("handles every supported JSON-RPC message", () => {
     processLine(JSON.stringify(message), handleMessage);
   }
 
-  assert.equal(lines.length, 8);
+  assert.equal(lines.length, 9);
   const responses = lines.map((line) => JSON.parse(line));
-  assert.equal(responses[0].result.serverInfo.name, "xquik");
-  assert.equal(responses[1].result.tools.length, 2);
-  assert.match(responses[2].result.content[0].text, /verification stub/u);
+  assert.deepEqual(responses[0].result.supportedVersions, ["2026-07-28"]);
+  assert.equal(responses[0].result.cacheScope, "private");
+  assert.deepEqual(responses[0].result.capabilities, {
+    tools: { listChanged: false },
+  });
+  assert.equal(
+    responses[0].result._meta["io.modelcontextprotocol/serverInfo"].version,
+    "2.6.0",
+  );
+  assert.equal(responses[1].result.protocolVersion, "2025-11-25");
+  assert.equal(responses[1].result.serverInfo.version, "2.6.0");
+  assert.equal(responses[2].result.tools.length, 2);
+  assert.equal(responses[2].result.cacheScope, "private");
+  assert.equal(responses[2].result.ttlMs, 300_000);
   assert.match(responses[3].result.content[0].text, /verification stub/u);
-  assert.match(responses[4].error.message, /missing/u);
-  assert.match(responses[5].error.message, /undefined/u);
-  assert.deepEqual(responses[6].result, {});
-  assert.match(responses[7].error.message, /Method not found/u);
+  assert.match(responses[4].result.content[0].text, /verification stub/u);
+  assert.match(responses[5].error.message, /missing/u);
+  assert.match(responses[6].error.message, /undefined/u);
+  assert.deepEqual(responses[7].result, {});
+  assert.match(responses[8].error.message, /Method not found/u);
 });
 
 test("ignores malformed, non-object, and oversized input", () => {

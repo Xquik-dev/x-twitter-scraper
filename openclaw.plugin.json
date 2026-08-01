@@ -1,8 +1,8 @@
 {
   "id": "x-developer",
   "name": "X Developer API",
-  "description": "Xquik Skill with 127 REST operations and 119 MCP catalog routes. Two MCP tools support 118 JSON or text operations. Includes SDKs, webhooks, exports, and gated actions. Not affiliated with X Corp.",
-  "version": "2.5.6",
+  "description": "Xquik Skill with 128 REST operations and 120 MCP catalog routes. Two MCP tools support 119 JSON or text operations. Includes SDKs, webhooks, exports, and gated actions. Not affiliated with X Corp.",
+  "version": "2.6.0",
   "skills": ["./skills"],
   "providerAuthEnvVars": {
     "xquik": ["XQUIK_API_KEY"]

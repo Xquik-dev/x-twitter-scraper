@@ -22,7 +22,7 @@ Skills appear to be indexed from GitHub repos via a curation process. Options:
    - **Skill path**: skills/x-twitter-scraper/SKILL.md
    - **Install command**: `npx skills@1.5.3 add Xquik-dev/x-twitter-scraper`
    - **Category**: Development (or Data & APIs)
-   - **Description**: X data platform Skill for developers and agents. 127 REST operations and 119 MCP catalog routes through 2 tools. 118 support JSON or text. Includes HMAC webhooks.
+   - **Description**: X data platform Skill for developers and agents. 128 REST operations and 120 MCP catalog routes through 2 tools. 119 support JSON or text. Includes HMAC webhooks.
 
 ### Option B: Open GitHub Issue
 

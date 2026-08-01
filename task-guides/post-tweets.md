@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.5.6"
+  version: "2.6.0"
   openclaw:
     requires:
       env:
@@ -105,4 +105,4 @@ This skill assumes an account is already connected. New connections are performe
 
 ## Related
 
-For all 127 REST operations, see [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md) in this repository.
+For all 128 REST operations, see [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md) in this repository.
