@@ -31,7 +31,8 @@ approval for the target, bound, usage, and data-handling plan.
 }
 ```
 
-`resultsLimit` (optional): Maximum results to extract. Stops early instead of fetching all data. Useful for controlling usage.
+The API accepts an omitted `resultsLimit`. This Skill must always send an
+explicit finite positive bound. The bound stops early and limits usage.
 
 **Tweet Search Filters** (`tweet_search_extractor` only):
 
@@ -118,10 +119,11 @@ Formats: `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, `xlsx`. 100,000 row l
 
 **Approval required:** The export endpoint cannot project rows or fields. Set
 the smallest approved `resultsLimit` when creating the job. Before export, show
-the exact account, job ID, purpose, and format. Also show the full fixed dataset,
-enrichment columns, and enrichment risk. Show all downstream recipients, the
-storage location, and the retention period. Export only after explicit approval.
-Block exports that exceed the approved purpose. Delete the export when the
-approved purpose ends.
+the exact account, job ID, purpose, and format. Describe the full fixed-dataset
+scope with its row count, schema, and field list. Show only a bounded preview,
+including enrichment columns and risk, before approval. Show all downstream
+recipients, storage location, and retention period. Materialize or
+transmit the complete dataset only after explicit approval. Block exports that
+exceed the approved purpose. Delete the export when the approved purpose ends.
 
 ---

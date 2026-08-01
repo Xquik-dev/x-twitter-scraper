@@ -19,7 +19,9 @@ POST /draws
 Run a giveaway draw from a tweet. Picks random winners from replies.
 
 **Approval required:** Show the source tweet, winner count, backup count,
-filters, estimated usage, and participant-data handling before creating it.
+filters, and estimated usage. Also show the lawful purpose, participant-data
+handling, export audience, and retention plan. Record every field before
+persisting participant data.
 
 **Body:**
 ```json
@@ -69,8 +71,8 @@ GET /draws
 
 Cursor-paginated. Returns compact draw objects.
 
-**Private read:** Show the requested page scope. List draws only after explicit
-approval for that exact read.
+**Private read:** Show the exact account, requested page scope, and returned
+field scope. List draws only after explicit approval for that exact read.
 
 ### Get Draw
 
@@ -80,8 +82,8 @@ GET /draws/{id}
 
 Returns full draw details including winners.
 
-**Private read:** Show the draw ID. Retrieve details only after explicit
-approval for that exact read.
+**Private read:** Show the exact account, draw ID, and returned-data scope.
+Retrieve details only after explicit approval for that exact read.
 
 ### Export Draw
 

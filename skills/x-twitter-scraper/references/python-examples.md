@@ -39,6 +39,8 @@ import time, random
 
 def xquik_fetch(path, method="GET", json_body=None, max_retries=3):
     base_delay = 1.0
+    method = method.upper()
+    retry_safe = method in {"GET", "HEAD", "OPTIONS"}
 
     for attempt in range(max_retries + 1):
         retry_after = None
@@ -55,7 +57,7 @@ def xquik_fetch(path, method="GET", json_body=None, max_retries=3):
             payload = json.loads(error.read() or b"{}")
             retry_after = error.headers.get("Retry-After")
 
-        retryable = status == 429 or status >= 500
+        retryable = retry_safe and (status == 429 or status >= 500)
         if not retryable or attempt == max_retries:
             raise Exception(f"Xquik API {status}: {payload.get('error', 'request failed')}")
 

@@ -16,6 +16,9 @@ Every extraction requires an estimate and explicit approval for the exact
 bounded job. Never infer approval from a general request or increase a bound
 without renewed approval.
 
+The API accepts an omitted `resultsLimit`. This Skill must always send an
+explicit finite positive bound. Use the same bound for estimate and create.
+
 **Endpoint:** `POST /extractions`
 
 **Always estimate first:** `POST /extractions/estimate` with the same body to preview `creditsRequired`, `creditsAvailable`, and whether the job is allowed.
@@ -230,11 +233,12 @@ Exports include enrichment columns not present in the API response.
 
 **Approval required:** The export endpoint cannot project rows or fields. Set
 the smallest approved `resultsLimit` when creating the job. Before export, show
-the exact account, job ID, purpose, and format. Also show the full fixed dataset,
-enrichment columns, and enrichment risk. Show all downstream recipients, the
-storage location, and the retention period. Export only after explicit approval.
-Block exports that exceed the approved purpose. Delete the export when the
-approved purpose ends.
+the exact account, job ID, purpose, and format. Describe the full fixed-dataset
+scope with its row count, schema, and field list. Show only a bounded preview,
+including enrichment columns and risk, before approval. Show all downstream
+recipients, storage location, and retention period. Materialize or
+transmit the complete dataset only after explicit approval. Block exports that
+exceed the approved purpose. Delete the export when the approved purpose ends.
 
 ## Estimating Usage
 

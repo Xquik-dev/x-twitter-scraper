@@ -57,7 +57,9 @@ The recipient must allow DMs from people they don't follow, or must follow the s
 
 ## Typical flow
 
-1. `GET /x/accounts` to pick the sending account.
+1. Use the exact account supplied by the user. Otherwise, show that
+   `GET /x/accounts` returns the complete connected-account list. Obtain
+   explicit approval before listing accounts or selecting a sender.
 2. `GET /x/users/{id}` to resolve the recipient handle into a numeric `id`.
 3. Optionally call `GET /x/dm/{userId}/history?account=<username>&cursor=<optional>`.
    Show the exact account, conversation partner, purpose, approved page count,

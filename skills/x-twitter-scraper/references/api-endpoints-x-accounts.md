@@ -26,8 +26,8 @@ GET /x/accounts
 
 Returns all connected X accounts. Response: `{ accounts: [{ id, username, displayName, isActive, createdAt }] }`.
 
-**Private read:** List connected account identities only after explicit
-approval for that account scope.
+**Private read:** This endpoint returns the complete connected-account list.
+Show that full scope and list identities only after explicit approval.
 
 ### Get X Account
 

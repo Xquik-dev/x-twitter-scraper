@@ -12,7 +12,7 @@ that exact action. Never create monitoring from an ambiguous request.
 
 ### Create Monitor
 
-```
+```http
 POST /monitors
 ```
 
@@ -56,7 +56,7 @@ explicit approval for that account scope.
 
 ### Get Monitor
 
-```
+```http
 GET /monitors/{id}
 ```
 
@@ -65,7 +65,7 @@ explicit approval for that exact read.
 
 ### Update Monitor
 
-```
+```http
 PATCH /monitors/{id}
 ```
 
@@ -97,7 +97,9 @@ delete request to `/monitors/keywords/{id}`
 Create and manage ongoing keyword monitors. Treat these as persistent resources: confirm the keyword query, event delivery plan, and ongoing usage before creating or enabling one.
 
 Creating, updating, enabling, disabling, or deleting a keyword monitor requires
-explicit approval for the exact monitor. Deletion permanently removes its
-associated data.
+explicit approval for the exact monitor. For creates and updates, show the
+proposed keyword, event types, and delivery changes. For enable or disable,
+show the active-state transition. For deletion, show the exact target and all
+associated data that will be permanently lost.
 
 ---

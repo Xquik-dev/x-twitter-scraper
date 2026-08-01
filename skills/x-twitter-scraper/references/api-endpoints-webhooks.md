@@ -12,7 +12,7 @@ retrieved X content.
 
 ### Create Webhook
 
-```
+```http
 POST /webhooks
 ```
 
@@ -43,7 +43,7 @@ List webhooks only after explicit approval for that account scope.
 
 ### Update Webhook
 
-```
+```http
 PATCH /webhooks/{id}
 ```
 
@@ -64,7 +64,7 @@ then obtain explicit approval immediately before deletion.
 
 ### Test Webhook
 
-```
+```http
 POST /webhooks/{id}/test
 ```
 

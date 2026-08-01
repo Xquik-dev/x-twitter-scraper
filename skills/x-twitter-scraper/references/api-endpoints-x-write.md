@@ -14,7 +14,7 @@ exception.
 
 ### Create Tweet
 
-```
+```http
 POST /x/tweets
 ```
 
