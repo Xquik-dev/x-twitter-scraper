@@ -52,8 +52,9 @@ the resulting profile before creating the cache.
 
 List all cached tweet style profiles. Max 200 results, ordered by fetch date.
 
-**Private read:** List cached profile labels only after explicit approval for
-that account scope.
+**Private read:** This endpoint returns the entire cached profile list, up to 200
+entries. Show that scope, the purpose, downstream recipients, and retention plan.
+List profiles only after explicit approval for that exact read.
 
 **Response (200):**
 

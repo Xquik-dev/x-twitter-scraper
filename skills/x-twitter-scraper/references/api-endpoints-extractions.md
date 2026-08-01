@@ -92,7 +92,8 @@ GET /extractions
 
 Cursor-paginated. Filter by `status` and `toolType`.
 
-**Private read:** Show the requested filters and page scope. List jobs only
+**Private read:** Show the exact account, purpose, requested filters, and page
+scope. Also show downstream recipients and the retention plan. List jobs only
 after explicit approval for that exact read.
 
 ### Get Extraction
@@ -103,7 +104,8 @@ GET /extractions/{id}
 
 Returns job details with paginated results (up to 1,000 per page).
 
-**Private read:** Show the job ID and page scope. Retrieve results only after
+**Private read:** Show the exact account, job ID, purpose, and page scope. Also
+show downstream recipients and the retention plan. Retrieve results only after
 explicit approval for that exact read.
 
 ### Export Extraction
@@ -114,10 +116,12 @@ GET /extractions/{id}/export?format=csv
 
 Formats: `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, `xlsx`. 100,000 row limit (PDF 10,000). Exports include enrichment columns not in the API response.
 
-**Approval required:** Export has no row or field projection. It includes the
-fixed dataset and enrichment columns. Show the exact job, format, full scope,
-recipient, storage location, retention period, and enrichment risk. Request
-the export only after explicit approval. Delete it when the approved purpose
-ends.
+**Approval required:** The export endpoint cannot project rows or fields. Set
+the smallest approved `resultsLimit` when creating the job. Before export, show
+the exact account, job ID, purpose, and format. Also show the full fixed dataset,
+enrichment columns, and enrichment risk. Show all downstream recipients, the
+storage location, and the retention period. Export only after explicit approval.
+Block exports that exceed the approved purpose. Delete the export when the
+approved purpose ends.
 
 ---

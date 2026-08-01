@@ -230,9 +230,11 @@ Exports include enrichment columns not present in the API response.
 
 **Approval required:** The export endpoint cannot project rows or fields. Set
 the smallest approved `resultsLimit` when creating the job. Before export, show
-the exact format, full fixed dataset, enrichment columns, audience, storage
-location, and retention period. Export only after explicit approval. Do not
-export when the fixed dataset exceeds the approved purpose.
+the exact account, job ID, purpose, and format. Also show the full fixed dataset,
+enrichment columns, and enrichment risk. Show all downstream recipients, the
+storage location, and the retention period. Export only after explicit approval.
+Block exports that exceed the approved purpose. Delete the export when the
+approved purpose ends.
 
 ## Estimating Usage
 
