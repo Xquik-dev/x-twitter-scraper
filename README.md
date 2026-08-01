@@ -12,6 +12,7 @@
 [![CodeQL](https://github.com/Xquik-dev/x-twitter-scraper/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/Xquik-dev/x-twitter-scraper/actions/workflows/codeql.yml)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13731/badge)](https://www.bestpractices.dev/projects/13731)
 [![MIT license](https://img.shields.io/npm/l/x-developer?logo=opensourceinitiative)](LICENSE)
+[![Smithery](https://smithery.ai/badge/xquik/x-twitter-scraper)](https://smithery.ai/servers/xquik/x-twitter-scraper)
 
 <table>
   <tr>
