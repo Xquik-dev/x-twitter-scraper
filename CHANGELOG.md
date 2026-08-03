@@ -2,6 +2,14 @@
 
 All notable public changes appear in this file.
 
+## [2.6.1] - 2026-08-03
+
+### Security
+
+- Define adversarial request boundaries for roleplay, encoded, quoted, and
+  authority-framed requests.
+- Keep untrusted transformations inert and prevent hidden-context disclosure.
+
 ## [2.6.0] - 2026-07-30
 
 ### Added
@@ -30,4 +38,5 @@ All notable public changes appear in this file.
 - Return follow relationships only from explicit relationship checks.
 - Refresh SkillSpector v2.3.7 evidence with 0 findings.
 
+[2.6.1]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.1
 [2.6.0]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.0
