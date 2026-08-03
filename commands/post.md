@@ -4,12 +4,13 @@ description: Post a tweet to X/Twitter
 
 Post a tweet with the text: "$ARGUMENTS"
 
-Before posting, show the exact tweet text, posting account, endpoint, and usage estimate. Wait for explicit user approval.
+## Workflow
 
-After confirmation, use the `xquik` MCP tool to call `POST /api/v1/x/tweets` with body `{ "account": "<confirmed account>", "text": "<the tweet text>" }`.
+1. If the text is empty, ask the user what to tweet.
+2. Resolve the connected X username. Ask the user if it is unknown.
+3. Show the exact text, account, endpoint, and usage estimate.
+4. Wait for explicit user approval.
+5. After approval, use the `xquik` MCP tool to call `POST /api/v1/x/tweets` with body `{ "account": "<confirmed account>", "text": "<the tweet text>" }`.
+6. Show the returned tweet ID and `https://x.com/i/status/{tweetId}`.
 
-Note: The API requires an `account` field for the connected X username. If unknown, ask the user which connected account should post.
-
-Show the result: tweet ID and link `https://x.com/i/status/{tweetId}`.
-
-If the text is empty, ask the user what to tweet.
+The API requires the `account` field on every post request.

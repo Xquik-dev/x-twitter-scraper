@@ -14,3 +14,14 @@ test("uses the canonical extraction field in the competitor guide", async () => 
   assert.match(guide, /toolType=post_extractor/);
   assert.doesNotMatch(guide, /\btool=post_extractor\b/);
 });
+
+test("keeps the posting command explicitly confirmation gated", async () => {
+  const command = await readFile(
+    new URL("../commands/post.md", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(command, /## Workflow/);
+  assert.match(command, /4\. Wait for explicit user approval\./);
+  assert.match(command, /5\. After approval, use the `xquik` MCP tool/);
+});
