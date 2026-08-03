@@ -36,7 +36,7 @@ The npm package `x-developer` contains this Skill and plugin bundle. The separat
 
 Includes 128 REST API operations, HMAC webhooks, 23 extraction types, SDK links, and confirmed writes.
 
-MCP v2.6.0 exposes 120 catalog routes through 2 tools.
+MCP v2.6.1 exposes 120 catalog routes through 2 tools.
 Of these, 119 support JSON or text. Binary support downloads use REST. Add
 `https://xquik.com/mcp`. Current clients negotiate MCP `2026-07-28` through
 `server/discover`. The SDK adds request metadata and headers automatically.
@@ -350,7 +350,7 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Tweet composition**: Algorithm-optimized tweet composer with scoring
 - **Usage guardrails**: Check balance and estimate usage; dashboard handles plan and credit changes
 - **Support tickets**: Open and manage support tickets via API
-- **MCP server**: MCP v2.6.0 supports `server/discover`, 120 catalog routes, and 119 JSON or text routes
+- **MCP server**: MCP v2.6.1 supports `server/discover`, 120 catalog routes, and 119 JSON or text routes
 
 ## Xquik REST, MCP, Extraction, and Monitoring Capabilities
 
