@@ -1,5 +1,7 @@
 # X Twitter Scraper API for Tweets, Followers, MCP
 
+[![MCP Toplist](https://mcptoplist.com/badge/com.xquik%2Fmcp.svg)](https://mcptoplist.com/server/com.xquik%2Fmcp)
+
 > **Xquik is an independent third-party service.** Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
