@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.1"
+  version: "2.6.2"
   openclaw:
     requires:
       env:
@@ -36,12 +36,30 @@ Get replies to any public tweet on X. Useful for reading community reactions, pu
 |---|---|---|
 | GET /x/tweets/{id}/replies | Paginated or maximum-coverage replies | Read tier |
 | POST /extractions/estimate | Preview bulk reply usage | Included |
-| POST /extractions with toolType=reply_extractor | Bulk replies (all pages, CSV/JSONL export) | Per-row extraction usage |
+| POST /extractions with toolType=reply_extractor | Bounded bulk replies | Per-row extraction usage |
 | GET /x/tweets/{id} | Get the root tweet metadata (for context) | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
-## Quick reference
+## Automatic Pagination
+
+Omit `mode` for automatic maximum coverage:
+
+```http
+GET /x/tweets/{id}/replies?pageSize=300
+```
+
+Automatic pages accept `pageSize` from 1 to 300. They also accept time ranges
+and Tweet filters. Pass `next_cursor` back unchanged as `cursor`. Continue
+until `has_next_page` is false. An empty or underfilled page can still resume.
+
+Concurrent use returns `409 coverage_cursor_unavailable`. Wait the exact
+`Retry-After` seconds, then retry the same cursor once. A finished, expired,
+superseded, or identity-mismatched cursor returns `410 coverage_cursor_gone`
+without `Retry-After`. Restart without a cursor and deduplicate by Tweet ID.
+Malformed cursors return `400 invalid_coverage_cursor`. Restart without them.
+
+## Complete Mode
 
 ```http
 GET /x/tweets/{id}/replies?mode=complete&limit=25000
@@ -62,9 +80,8 @@ timeline views, rankings, forward cursors, labeled hidden-content branches,
 exact-parent time partitions, and search. It returns `424 replies_incomplete`
 below 80% direct-reply coverage. The 424 body still contains safe partial rows.
 
-Use regular cursor pagination only for filtered or page-sized requests. Complete
-mode accepts only `limit` from 1 to 25,000. Remove cursors, page-size aliases,
-time ranges, and tweet filters.
+Complete mode accepts only `limit` from 1 to 25,000. Remove cursors,
+`pageSize`, time ranges, and Tweet filters.
 
 ## Typical flow
 
@@ -91,9 +108,10 @@ POST /extractions
 -> 202 { "id": "<extractionId>", "toolType": "reply_extractor", "status": "running" }
 ```
 
-## Top replies
+## Top Replies
 
-The route does not expose a server-side sort. Page through and sort locally by available engagement fields. See the `top-replies` guide for a guided workflow.
+Automatic pages need client-side sorting. Complete mode supports `sort` values
+`relevance`, `latest`, `oldest`, and `likes`.
 
 ## Security
 

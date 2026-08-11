@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.1"
+  version: "2.6.2"
   openclaw:
     requires:
       env:
@@ -36,8 +36,8 @@ Find who is talking about a handle, brand, or keyword. One-shot reads via search
 |---|---|---|
 | GET /x/tweets/search?q=@handle | Recent mentions of a handle | Read tier |
 | POST /extractions with toolType=mention_extractor | Bulk mention history | Per-row |
-| POST /monitors | Create a monitor that polls new mentions | metered while active |
-| GET /events?monitorId=<id> | Poll new mention events | Included |
+| POST /monitors/keywords | Create a keyword monitor | metered while active |
+| GET /events?keywordMonitorId=<id> | Poll new mention events | Included |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
@@ -61,16 +61,17 @@ POST /extractions
 ## Continuous monitoring
 
 ```
-POST /monitors
+POST /monitors/keywords
 {
-  "type": "mention",
-  "target": "@xquik",
-  "filters": { "min_faves": 0, "lang": "en" }
+  "query": "@xquik lang:en",
+  "eventTypes": ["tweet.new"]
 }
--> { monitor_id }
+-> { id, query, eventTypes, isActive, createdAt, nextBillingAt }
 ```
 
-Then poll `GET /events?monitorId=<id>&since=<cursor>` periodically, or set up a webhook (see `tweet-webhooks` guide).
+Then poll `GET /events?keywordMonitorId=<id>&cursor=<cursor>`. Pass each
+`nextCursor` unchanged while `hasMore` is true. A webhook is a separate
+resource; see `tweet-webhooks`.
 
 ## Typical flow
 

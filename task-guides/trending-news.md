@@ -1,11 +1,11 @@
 ---
 name: trending-news
-description: "Use when the user wants trending news with X (Twitter) context. Pulls breaking news from 7 curated sources, links each story to related tweets, and surfaces what people on X are saying about each headline. Included read-only news radar."
+description: "Use when the user wants trending topics from curated public sources. Returns ranked Radar items and can run a separate X search for a selected topic. Included read-only Radar workflow."
 license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.1"
+  version: "2.6.2"
   openclaw:
     requires:
       env:
@@ -28,14 +28,15 @@ metadata:
 
 # Trending News (X Radar)
 
-Breaking news from 7 curated sources, cross-referenced with X for social context. Read-only.
+Read ranked topics from curated public sources. Search X separately when the
+user requests social context.
 
 ## Endpoints
 
 | Endpoint | Purpose | Usage |
 |---|---|---|
 | GET /radar | Current top news stories | Included |
-| GET /radar?category=tech | Category filter (tech, business, politics, sports, entertainment) | Included |
+| GET /radar?category=tech | Filter by a supported category | Included |
 | GET /x/tweets/search | Search X for reactions to selected story terms | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
@@ -44,20 +45,24 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 ```
 GET /radar?category=tech&limit=20
--> { stories: [{ id, title, summary, source, url, published_at, related_tweet_count }] }
+-> { items: [{ id, sourceId, title, score, category, source, region, language, metadata, publishedAt, createdAt }], hasMore, nextCursor }
 ```
 
 ## Typical flow
 
 1. Call `GET /radar` with optional `category`.
-2. Show the user a ranked list of headlines with source and short summary.
+2. Show a ranked list using `title`, `score`, `source`, and `description`.
 3. For any story the user wants more on, search X with `GET /x/tweets/search?q=<headline terms>&queryType=Top` for related reactions.
 4. Optionally pass a story to `write-tweets` to draft a post responding to the news.
 
-## Why this is separate from x-trends
+Pass `nextCursor` as `after` while `hasMore` is true. Supported categories are
+`general`, `tech`, `dev`, `science`, `culture`, `politics`, `business`, and
+`entertainment`.
+
+## Why This Is Separate From X Trends
 
 - `x-trends` = what is trending on X right now (hashtags, topics from X itself)
-- `trending-news` = what is trending in news, with X reactions layered on top
+- `trending-news` = topics from Radar's curated public sources
 
 ## Security
 

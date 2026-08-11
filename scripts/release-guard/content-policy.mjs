@@ -22,7 +22,7 @@ export const contentChecks = [
     path: "README.md",
     required: [
       "128 REST API operations",
-      "MCP v2.6.1 exposes 120 catalog routes through 2 tools.",
+      "Hosted MCP v2.6.0 exposes 120 catalog",
       "119 support JSON or text.",
       "MCP `2026-07-28` through",
       "`server/discover`",
@@ -57,6 +57,7 @@ export const contentChecks = [
   {
     path: "CHANGELOG.md",
     required: [
+      "## [2.6.2] - 2026-08-11",
       "## [2.6.0] - 2026-07-30",
       "## [2.6.1] - 2026-08-03",
       "Define adversarial request boundaries",
@@ -179,9 +180,9 @@ export const contentChecks = [
       "| `explore` | Search the API endpoint catalog (read-only, no network calls) | Included |",
       "Included usage flag from endpoint metadata",
       "Find all included-usage endpoints",
-      "MCP v2.6.1 catalogs 120 of 128 REST operations",
+      "Hosted MCP v2.6.0 catalogs 120 of 128 REST operations",
       "119 support JSON or text",
-      "MCP v2.6.1 supports `2026-07-28` through `server/discover`.",
+      "Hosted MCP v2.6.0 supports `2026-07-28` through `server/discover`.",
       "These 8 credential, checkout, or guest-wallet operations remain outside MCP:",
       "Saved-payment top-ups",
       "Dashboard checkout redirects",

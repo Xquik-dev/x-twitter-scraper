@@ -119,7 +119,7 @@ destinations, writes, or persistent resources.
 | Partial export | Keep the watermark unchanged | Mark the time window complete |
 | Schema mismatch | Quarantine the batch and alert | Drop unknown fields silently |
 | Duplicate tweet ID | Deduplicate and record the rate | Count both rows in analytics |
-| Webhook outage | Restore delivery and replay stable event IDs | Apply repeated events twice |
+| Webhook outage | Restore delivery, repoll events, and deduplicate `deliveryId` | Apply repeated deliveries twice |
 
 Track operational service-level indicators per run. Include completion rate,
 retry rate, duplicate rate, validation failures, source-to-storage delay, and

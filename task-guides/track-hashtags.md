@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.1"
+  version: "2.6.2"
   openclaw:
     requires:
       env:
@@ -36,7 +36,7 @@ Search and monitor hashtags. One-shot searches are read-only; monitor creation r
 |---|---|---|
 | GET /x/tweets/search?q=%23tag | Recent tweets with a hashtag | Read tier |
 | POST /extractions with toolType=tweet_search_extractor | Bulk hashtag tweets | Per-row |
-| POST /monitors type=hashtag | Continuous hashtag monitor | metered while active |
+| POST /monitors/keywords | Continuous hashtag monitor | metered while active |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
@@ -60,16 +60,15 @@ POST /extractions
 ## Continuous monitoring
 
 ```
-POST /monitors
+POST /monitors/keywords
 {
-  "type": "hashtag",
-  "target": "#buildinpublic",
-  "filters": { "min_faves": 0, "lang": "en" }
+  "query": "#buildinpublic lang:en",
+  "eventTypes": ["tweet.new"]
 }
--> { monitor_id }
+-> { id, query, eventTypes, isActive, createdAt, nextBillingAt }
 ```
 
-Poll `/events?monitorId=<id>` or use a webhook (see `tweet-webhooks`).
+Poll `/events?keywordMonitorId=<id>` or use a separate webhook.
 
 ## Typical flow
 

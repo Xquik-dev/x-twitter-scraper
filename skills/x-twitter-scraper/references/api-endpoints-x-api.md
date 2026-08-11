@@ -16,19 +16,25 @@ Returns full tweet with engagement metrics (likes, retweets, replies, quotes, vi
 GET /x/articles/{tweetId}
 ```
 
-Retrieve the full content of an X Article (long-form post) by numeric tweet ID. If the user gives an article URL, use the final status ID as `tweetId`. Returns title, body text with block-level formatting, cover image, inline images, and engagement metrics. Metered.
+Retrieve an X Article by numeric tweet ID. For an article URL, use its final
+status ID. The response wraps content in `article` and profile data in
+`author`. Metered.
 
 **Response:**
 ```json
 {
-  "title": "Why AI Will Transform Everything",
-  "coverImage": "https://pbs.twimg.com/...",
-  "bodyHtml": "<p>The future of AI...</p>",
-  "likeCount": 5200,
-  "retweetCount": 890,
-  "replyCount": 245,
-  "viewCount": 150000,
-  "bookmarkCount": 1200,
+  "article": {
+    "title": "Why AI Will Transform Everything",
+    "previewText": "A short preview...",
+    "coverImageUrl": "https://pbs.twimg.com/...",
+    "bodyText": "The future of AI...",
+    "contents": [{ "type": "paragraph", "text": "The future of AI..." }],
+    "createdAt": "2026-02-24T10:30:00.000Z",
+    "likeCount": 5200,
+    "replyCount": 245,
+    "quoteCount": 90,
+    "viewCount": 150000
+  },
   "author": {
     "id": "44196397",
     "username": "elonmusk",
@@ -133,6 +139,15 @@ GET /x/users/{id}/verified-followers
 ```
 
 Read followers, following, mentions, and verified followers for a username or numeric user ID. These are paginated read operations.
+
+### Automatic Cursor Recovery
+
+This contract applies to Tweet search, user Tweets, user replies, Tweet replies,
+followers, following, and verified followers.
+
+- `400 invalid_coverage_cursor`: Restart without the malformed cursor.
+- `409 coverage_cursor_unavailable`: Wait the exact `Retry-After` seconds. Retry the same cursor once.
+- `410 coverage_cursor_gone`: The cursor finished, expired, was superseded, or no longer matches the request identity. The response omits `Retry-After`. Restart without a cursor and deduplicate by ID.
 
 ### Get Mutual Followers
 

@@ -11,9 +11,10 @@ GET /events
 | Param | Type | Description |
 |-------|------|-------------|
 | `monitorId` | string | Filter by monitor ID |
+| `keywordMonitorId` | string | Filter by keyword monitor ID |
 | `eventType` | string | Filter by event type |
 | `limit` | number | Results per page (1-100, default 50) |
-| `after` | string | Cursor for next page |
+| `cursor` | string | Previous `nextCursor` |
 
 **Response:**
 ```json
@@ -23,6 +24,7 @@ GET /events
       "id": "9010",
       "type": "tweet.new",
       "monitorId": "7",
+      "monitorType": "account",
       "username": "elonmusk",
       "occurredAt": "2026-02-24T16:45:00.000Z",
       "data": {

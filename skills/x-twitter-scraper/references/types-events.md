@@ -6,33 +6,13 @@ interface XquikEvent {
   id: string;
   type: EventType;
   monitorId: string;
-  username: string;
+  monitorType: "account" | "keyword";
+  username?: string;
+  query?: string;
+  keywordMonitorId?: string;
   occurredAt: string;
-  data: EventData;
-  xEventId?: string;
+  data: Record<string, unknown>;
 }
-
-// Tweet events (tweet.new, tweet.reply, tweet.quote, tweet.retweet)
-interface TweetEventData {
-  tweetId: string;
-  text: string;
-  metrics: {
-    likes: number;
-    retweets: number;
-    replies: number;
-  };
-  // tweet.quote only
-  quotedTweetId?: string;
-  quotedUsername?: string;
-  // tweet.reply only
-  inReplyToTweetId?: string;
-  inReplyToUsername?: string;
-  // tweet.retweet only
-  retweetedTweetId?: string;
-  retweetedUsername?: string;
-}
-
-type EventData = TweetEventData;
 
 interface EventList {
   events: XquikEvent[];

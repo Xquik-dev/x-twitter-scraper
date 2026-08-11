@@ -5,11 +5,12 @@
 
 // Pre-publish and pre-commit guard for every public package contract.
 
-import { expected } from "./release-guard/context.mjs";
+import { expected, readJson } from "./release-guard/context.mjs";
 import { collectPolicyDrifts } from "./release-guard/policy-checks.mjs";
 import { collectRepositoryDrifts } from "./release-guard/repository-checks.mjs";
 
 const failures = [...collectPolicyDrifts(), ...collectRepositoryDrifts()];
+const hostedMcpVersion = readJson("server.json").version;
 
 if (failures.length > 0) {
   process.stderr.write(
@@ -18,4 +19,6 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-process.stdout.write(`All surfaces at ${expected}\n`);
+process.stdout.write(
+  `All bundle surfaces at ${expected}; hosted MCP at ${hostedMcpVersion}\n`,
+);

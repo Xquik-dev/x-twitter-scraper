@@ -27,22 +27,5 @@ Routing index for TypeScript response and request shapes. Load only the type sec
 | Account Identity | [account-identity.md](types-account-identity.md) |
 | REST API vs MCP Field Naming | [rest-api-vs-mcp-field-naming.md](types-rest-api-vs-mcp-field-naming.md) |
 | MCP Output Schemas | [mcp-output-schemas.md](types-mcp-output-schemas.md) |
-| MCP: get-user-info | [mcp-get-user-info.md](types-mcp-get-user-info.md) |
-| MCP: search-tweets | [mcp-search-tweets.md](types-mcp-search-tweets.md) |
-| MCP: lookup-tweet | [mcp-lookup-tweet.md](types-mcp-lookup-tweet.md) |
-| MCP: check-follow | [mcp-check-follow.md](types-mcp-check-follow.md) |
-| MCP: get-events | [mcp-get-events.md](types-mcp-get-events.md) |
-| MCP: list-monitors | [mcp-list-monitors.md](types-mcp-list-monitors.md) |
-| MCP: add-webhook | [mcp-add-webhook.md](types-mcp-add-webhook.md) |
-| MCP: test-webhook | [mcp-test-webhook.md](types-mcp-test-webhook.md) |
-| MCP: run-extraction | [mcp-run-extraction.md](types-mcp-run-extraction.md) |
-| MCP: estimate-extraction | [mcp-estimate-extraction.md](types-mcp-estimate-extraction.md) |
-| MCP: run-draw | [mcp-run-draw.md](types-mcp-run-draw.md) |
-| MCP: get-draw | [mcp-get-draw.md](types-mcp-get-draw.md) |
-| MCP: get-account | [mcp-get-account.md](types-mcp-get-account.md) |
-| MCP: get-trends | [mcp-get-trends.md](types-mcp-get-trends.md) |
-| MCP: compose-tweet | [mcp-compose-tweet.md](types-mcp-compose-tweet.md) |
-| MCP: refine-tweet | [mcp-refine-tweet.md](types-mcp-refine-tweet.md) |
-| MCP: score-tweet | [mcp-score-tweet.md](types-mcp-score-tweet.md) |
 | X Accounts (Connected) | [x-accounts.md](types-x-accounts.md) |
 | X Write | [x-write.md](types-x-write.md) |

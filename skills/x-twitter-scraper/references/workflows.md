@@ -64,7 +64,9 @@ async function xquikFetch(path, options = {}) {
 
 ## Cursor Pagination
 
-Events, draws, extractions, and extraction results use cursor-based pagination. When more results exist, the response includes `hasMore: true` and a `nextCursor` string. Pass `nextCursor` as the `after` query parameter.
+Events, draws, extractions, and extraction results use cursor-based pagination.
+When more results exist, the response includes `hasMore: true` and a
+`nextCursor` string. Pass it as `cursor`. Radar alone uses `after`.
 
 ```javascript
 async function fetchAllPages(path, dataKey) {
@@ -73,7 +75,7 @@ async function fetchAllPages(path, dataKey) {
 
   while (true) {
     const params = new URLSearchParams({ limit: "100" });
-    if (cursor) params.set("after", cursor);
+    if (cursor) params.set("cursor", cursor);
 
     const data = await xquikFetch(`${path}?${params}`);
     results.push(...data[dataKey]);
@@ -132,7 +134,7 @@ let cursor;
 const allResults = [];
 
 while (true) {
-  const path = `/extractions/${job.id}${cursor ? `?after=${cursor}` : ""}`;
+  const path = `/extractions/${job.id}${cursor ? `?cursor=${cursor}` : ""}`;
   const page = await xquikFetch(path);
   allResults.push(...page.results);
 
@@ -175,7 +177,8 @@ const webhook = await xquikFetch("/webhooks", {
 const events = await xquikFetch("/events?monitorId=7&limit=50");
 ```
 
-Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `webhook.test`.
+Monitor event types include `tweet.new`, `tweet.quote`, `tweet.reply`, and
+`tweet.retweet`. Test deliveries use `webhook.test`; do not subscribe to it.
 
 ## Endpoint Guide
 

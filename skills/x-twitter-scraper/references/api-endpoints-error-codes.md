@@ -11,6 +11,7 @@
 | 400 | `invalid_tool_type` | Extraction tool type not recognized |
 | 400 | `invalid_format` | Export format not `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, or `xlsx` |
 | 400 | `invalid_params` | Export query parameters are missing or invalid |
+| 400 | `invalid_coverage_cursor` | Automatic coverage cursor is malformed. Restart without it |
 | 400 | `missing_query` | Required query parameter is missing |
 | 400 | `missing_params` | Required query parameters are missing |
 | 400 | `no_media` | Tweet has no downloadable media |
@@ -28,6 +29,8 @@
 | 404 | `style_not_found` | No cached style found |
 | 404 | `draft_not_found` | Draft not found |
 | 409 | `monitor_already_exists` | Duplicate monitor for same username |
+| 409 | `coverage_cursor_unavailable` | Cursor is in use. Wait for `Retry-After`, then retry it once |
+| 410 | `coverage_cursor_gone` | Cursor ended or no longer matches. Restart without it |
 | 422 | `login_failed` | Account connection failed; use dashboard re-auth flow |
 | 429 | - | Rate limited. Retry with backoff |
 | 429 | `x_api_rate_limited` | X data source rate limited. Retry |

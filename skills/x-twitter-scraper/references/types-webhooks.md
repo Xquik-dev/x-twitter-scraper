@@ -15,6 +15,9 @@ interface Webhook {
   url: string;
   eventTypes: EventType[];
   isActive: boolean;
+  consecutiveFailures: number;
+  deliveryStatus: "active" | "paused" | "needs_attention";
+  failureHardCap: number;
   createdAt: string;
 }
 
@@ -30,9 +33,14 @@ interface Delivery {
 }
 
 interface WebhookPayload {
+  schemaVersion: 1;
+  streamEventId: string;
+  deliveryId: string;
   eventType: EventType;
-  username: string;
-  data: EventData;
+  username?: string;
+  query?: string;
+  occurredAt: string;
+  data: Record<string, unknown>;
 }
 
 ```

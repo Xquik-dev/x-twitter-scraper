@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.1"
+  version: "2.6.2"
   openclaw:
     requires:
       env:
@@ -54,7 +54,7 @@ This guide is read-only. It never posts, sends DMs, follows, deletes, updates pr
 | GET /x/users/{id}/tweets | Recent tweets (paginated) | Read tier |
 | GET /x/users/{id}/likes | Tweets the user liked (paginated) | Read tier |
 | GET /x/users/{id}/media | Tweets with media (paginated) | Read tier |
-| POST /extractions (toolType=post_extractor) | Bulk post history, up to 1,000 tweets | Per result |
+| POST /extractions (toolType=post_extractor) | Bounded bulk post history | Per result |
 | POST /extractions (toolType=user_likes) | Bulk likes history | Per result |
 | POST /extractions (toolType=user_media) | Bulk media posts | Per result |
 
@@ -62,9 +62,10 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key`.
 
 Use only a user-issued Xquik API key from `XQUIK_API_KEY`. Never ask for X passwords, 2FA codes, cookies, session tokens, recovery codes, or account backup files.
 
-## Resolving a username to an ID
+## Resolving a User
 
-X endpoints for user data need the numeric user ID, not the @handle. First resolve:
+`{id}` accepts a username or numeric user ID. Resolve first when you need the
+canonical ID or profile context:
 
 ```
 GET /x/users/{id}
@@ -98,9 +99,18 @@ GET /x/users/{id}/likes?cursor=<cursor>
 GET /x/users/{id}/media?cursor=<cursor>
 ```
 
-Supported query parameters on `/x/users/{id}/tweets`: `cursor`, `includeReplies`, `includeParentTweet` (no `limit`, no `sort`).
+`/x/users/{id}/tweets` accepts `pageSize` from 1 to 300, `includeReplies`,
+`includeParentTweet`, and the documented Tweet filters. Use `pageSize`, not
+`limit`. Sort returned rows client-side.
 
-Loop until `has_next_page` is false or `next_cursor` is empty. Respect the 300/1s Read tier.
+Pass `next_cursor` back unchanged as `cursor`. Stop only when
+`has_next_page` is false. Empty or underfilled pages can still resume.
+
+Concurrent use returns `409 coverage_cursor_unavailable`. Wait the exact
+`Retry-After` seconds, then retry the same cursor once. A finished, expired,
+superseded, or identity-mismatched cursor returns `410 coverage_cursor_gone`
+without `Retry-After`. Restart without a cursor and deduplicate by Tweet ID.
+Malformed cursors return `400 invalid_coverage_cursor`. Restart without them.
 
 ## Bulk extraction (full history)
 
@@ -121,9 +131,11 @@ POST /extractions
 -> 202 { "id": "<extractionId>", "toolType": "post_extractor", "status": "running" }
 ```
 
-Poll `GET /extractions/{id}` until `completed`. Retrieve paginated rows from `GET /extractions/{id}?after=<cursor>`. Export to CSV/XLSX/MD with `GET /extractions/{id}/export?format=csv`.
+Poll `GET /extractions/{id}` until `completed`. Retrieve paginated rows from
+`GET /extractions/{id}?cursor=<cursor>`. Continue while `hasMore` is true.
 
-Same pattern for `user_likes` and `user_media` (both take `targetUsername`).
+Same pattern applies to `user_likes` and `user_media`. Both use
+`targetUsername`.
 
 ## Filtering
 

@@ -11,9 +11,10 @@ them to an HTTPS endpoint through HMAC-signed webhooks.
 
 | Object | Fields to Preserve |
 | --- | --- |
-| Monitor | Monitor ID, target, query, filters, event types, status |
-| Event | Event ID, monitor ID, event type, source tweet ID, source time |
-| Delivery | Webhook ID, attempt, delivery time, status, processing state |
+| Account monitor | Monitor ID, username, event types, active state |
+| Keyword monitor | Monitor ID, query, event types, active state |
+| Event | Event ID, monitor ID and type, event type, occurrence time, data |
+| Delivery | Delivery ID, stream event ID, attempts, status, delivery time |
 
 ## Twitter Monitor Polling Versus Webhook Delivery
 
@@ -21,7 +22,7 @@ them to an HTTPS endpoint through HMAC-signed webhooks.
 | --- | --- | --- |
 | Simple scheduled batch | Strong fit | Optional |
 | Low detection delay | More frequent polling needed | Strong fit |
-| Replay after downtime | Use stored cursor and event IDs | Use delivery log and event IDs |
+| Recover after downtime | Resume with the stored cursor | Inspect delivery status, then repoll events |
 | Public HTTPS endpoint | Not required | Required |
 | Signature verification | Not applicable | Required |
 | Backpressure control | Caller controls fetch rate | Receiver must queue work |
@@ -54,8 +55,9 @@ Webhook alerts are HTTPS POST requests sent when a monitor creates a matching
 event. Xquik signs each delivery with a per-webhook HMAC secret. The secret is
 shown only once and should enter a secret store immediately.
 
-Verify the signature against the raw request body before parsing business data.
-Reject invalid signatures, return success quickly, and queue slower work.
+Verify `<timestamp>.<nonce>.<raw body>` with `X-Xquik-Timestamp`,
+`X-Xquik-Nonce`, and `X-Xquik-Signature`. Reject timestamps outside 5 minutes
+and reused nonces. Reject invalid signatures before parsing business data.
 
 ### What is a Twitter account monitor API?
 
@@ -94,7 +96,7 @@ from production analytics.
 1. Read the raw request body.
 2. Compute and compare the expected HMAC signature safely.
 3. Reject invalid or missing signatures.
-4. Deduplicate by event or delivery ID.
+4. Deduplicate webhook attempts by `deliveryId`.
 5. Acknowledge valid delivery quickly.
 6. Process asynchronously with bounded retries.
 7. Record attempt, status, and failure reason.
@@ -107,9 +109,9 @@ plan changes, credit changes, or tool changes.
 
 1. Pause downstream actions when signature checks fail.
 2. Check monitor status and delivery history.
-3. Restore the receiver before replaying events.
-4. Replay by stable event ID where supported.
-5. Deduplicate before applying business changes.
+3. Restore the receiver before resuming delivery.
+4. Repoll events from the last stored cursor when recovery needs them.
+5. Deduplicate event IDs and webhook `deliveryId` values.
 6. Compare source and stored timestamps.
 7. Document gaps and permanent failures.
 
