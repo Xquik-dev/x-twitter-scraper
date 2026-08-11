@@ -1,10 +1,21 @@
 # Xquik REST API Endpoints: Drafts
 
+## Safety Boundary
+
+`GET` operations expose private saved content. State the exact draft scope and
+obtain explicit approval immediately before each read. `POST` and delete
+operations are non-default writes. Show the exact draft text or draft ID and
+obtain explicit approval immediately before each write. Never infer approval
+from an earlier request or retry a failed write automatically.
+
 ### Create Draft
 
 `POST /drafts`
 
 Save a tweet draft for later.
+
+**Approval required:** Preview the complete text and metadata. Create the draft
+only after the user explicitly approves that exact payload.
 
 **Request body:**
 
@@ -34,6 +45,9 @@ Save a tweet draft for later.
 `GET /drafts`
 
 List saved tweet drafts with cursor pagination.
+
+**Private read:** Show the requested page size and account scope. List drafts
+only after explicit approval for that exact read.
 
 **Query parameters:**
 
@@ -69,6 +83,9 @@ List saved tweet drafts with cursor pagination.
 
 Get a specific draft by ID.
 
+**Private read:** Show the draft ID. Fetch it only after explicit approval for
+that exact read, including any preview before deletion.
+
 **Response (200):** Single draft object.
 
 **Errors:** `400 invalid_id`, `404 draft_not_found`
@@ -79,7 +96,9 @@ Get a specific draft by ID.
 
 delete request to `/drafts/{id}`
 
-Delete a draft. Returns `204 No Content`.
+**Destructive action:** Deletion is permanent and cannot be recovered through
+this API. Show the draft ID and text, then obtain explicit approval immediately
+before deleting it. Returns `204 No Content`.
 
 **Errors:** `400 invalid_id`, `404 draft_not_found`
 

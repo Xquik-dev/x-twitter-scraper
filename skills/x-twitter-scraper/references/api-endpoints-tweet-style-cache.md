@@ -1,10 +1,23 @@
 # Xquik REST API Endpoints: Tweet Style Cache
 
+## Safety Boundary
+
+Style creation, replacement, and deletion change persistent cached resources.
+For analysis, show the username, estimated usage, and storage effect. For
+custom saves, show the label, source tweets, and replacement effect. For
+deletion, show the label or username and deletion effect. Proceed only after
+explicit approval for that exact write.
+Cached profiles and comparisons are account-scoped reads. Require exact-scope
+approval before retrieving them.
+
 ### Analyze & Cache Style
 
 `POST /styles`
 
 Fetch recent tweets from an X account and cache them for style analysis. **Consumes metered API usage.**
+
+**Approval required:** Confirm the username, metered usage, and intent to store
+the resulting profile before creating the cache.
 
 **Request body:**
 
@@ -39,6 +52,10 @@ Fetch recent tweets from an X account and cache them for style analysis. **Consu
 
 List all cached tweet style profiles. Max 200 results, ordered by fetch date.
 
+**Private read:** This endpoint returns the entire cached profile list, up to 200
+entries. Show that scope, the purpose, downstream recipients, and retention plan.
+List profiles only after explicit approval for that exact read.
+
 **Response (200):**
 
 ```json
@@ -62,6 +79,9 @@ List all cached tweet style profiles. Max 200 results, ordered by fetch date.
 
 Save a custom style profile from tweet texts. The body `label` controls the saved style label and replaces any existing style with that label.
 
+**Approval required:** Preview the label and source texts. Warn when an existing
+label will be replaced, then obtain explicit approval.
+
 **Body:**
 
 | Field | Type | Required | Description |
@@ -81,6 +101,9 @@ Save a custom style profile from tweet texts. The body `label` controls the save
 
 Get a cached style profile with full tweet data. `id` is the cached style label or username.
 
+**Private read:** Show the label or username. Retrieve its tweets only after
+explicit approval for that exact read.
+
 **Response (200):** Full style object with `tweets` array.
 
 **Errors:** `404 style_not_found`
@@ -91,7 +114,9 @@ Get a cached style profile with full tweet data. `id` is the cached style label 
 
 delete request to `/styles/{id}`
 
-Delete a cached style by label or username. Returns `204 No Content`.
+**Destructive action:** This permanently deletes the cached style profile.
+Show the exact label or username and explain the lost cached data. Delete only
+after explicit approval immediately before the call. Returns `204 No Content`.
 
 **Errors:** `404 style_not_found`
 
@@ -102,6 +127,9 @@ Delete a cached style by label or username. Returns `204 No Content`.
 `GET /styles/compare?username1=A&username2=B`
 
 Compare two cached tweet style profiles side by side.
+
+**Private read:** Show both labels or usernames. Compare only after explicit
+approval for that exact read.
 
 **Query parameters:**
 
@@ -128,6 +156,9 @@ Compare two cached tweet style profiles side by side.
 `GET /styles/{id}/performance`
 
 Get live engagement metrics for cached tweets for a cached style label or username. **Consumes metered API usage.**
+
+**Private metered read:** Show the label or username and usage estimate.
+Proceed only after explicit approval for that exact read.
 
 **Response (200):**
 

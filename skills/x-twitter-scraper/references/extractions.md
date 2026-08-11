@@ -2,6 +2,23 @@
 
 23 bulk data extraction tools. Each requires a specific target parameter.
 
+## Privacy and Acceptable Use
+
+Bulk extraction and export can collect large amounts of public identity,
+activity, and relationship data. Before creating a job, confirm the lawful
+purpose, target, `resultsLimit`, intended recipients, and retention period.
+Follow X rules and applicable privacy law. Do not use these tools for
+credential collection, private data, surveillance, discrimination, harassment,
+doxxing, or unrelated secondary use. Delete exported data when the approved
+purpose ends.
+
+Every extraction requires an estimate and explicit approval for the exact
+bounded job. Never infer approval from a general request or increase a bound
+without renewed approval.
+
+The API accepts an omitted `resultsLimit`. This Skill must always send an
+explicit finite positive bound. Use the same bound for estimate and create.
+
 **Endpoint:** `POST /extractions`
 
 **Always estimate first:** `POST /extractions/estimate` with the same body to preview `creditsRequired`, `creditsAvailable`, and whether the job is allowed.
@@ -214,6 +231,15 @@ Formats: `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, `xlsx`. 100,000 row l
 
 Exports include enrichment columns not present in the API response.
 
+**Approval required:** The export endpoint cannot project rows or fields. Set
+the smallest approved `resultsLimit` when creating the job. Before export, show
+the exact account, job ID, purpose, and format. Describe the full fixed-dataset
+scope with its row count, schema, and field list. Show only a bounded preview,
+including enrichment columns and risk, before approval. Show all downstream
+recipients, storage location, and retention period. Materialize or
+transmit the complete dataset only after explicit approval. Block exports that
+exceed the approved purpose. Delete the export when the approved purpose ends.
+
 ## Estimating Usage
 
 ```
@@ -232,6 +258,7 @@ Same body as create. Response:
 }
 ```
 
-If `allowed` is `false`, the extraction requires more credits than are currently available.
+If `allowed` is `false`, do not create the extraction. It requires more credits
+than are currently available.
 
 For common mistakes and tool selection rules, see [mcp-tools.md](mcp-tools.md#common-mistakes).

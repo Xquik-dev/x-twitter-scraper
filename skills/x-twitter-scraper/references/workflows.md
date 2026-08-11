@@ -13,6 +13,12 @@ Code examples for common integration patterns.
 
 ## Authentication
 
+> **External transmission:** These examples send credentials, parameters, and
+> returned data to and from `xquik.com`. Keep the key in a secret store. Get
+> explicit approval before private reads, writes, exports, persistent resources,
+> webhooks, or metered jobs. Never forward private results without separate
+> approval.
+
 ```javascript
 const apiKey = process.env.XQUIK_API_KEY;
 if (!apiKey) throw new Error("Set XQUIK_API_KEY first.");
@@ -23,11 +29,14 @@ const headers = { "x-api-key": apiKey, "Content-Type": "application/json" };
 
 ## Retry with Exponential Backoff
 
-Retry only `429` and `5xx`. Never retry `4xx` (except 429). Max 3 retries:
+Retry only idempotent requests after `429` and `5xx`. Never automatically retry
+`POST`, `PATCH`, or `DELETE`. Max 3 retries:
 
 ```javascript
 async function xquikFetch(path, options = {}) {
   const baseDelay = 1000;
+  const method = (options.method || "GET").toUpperCase();
+  const retrySafe = ["GET", "HEAD", "OPTIONS"].includes(method);
 
   for (let attempt = 0; attempt <= 3; attempt++) {
     const response = await fetch(`${BASE}${path}`, {
@@ -37,7 +46,7 @@ async function xquikFetch(path, options = {}) {
 
     if (response.ok) return response.json();
 
-    const retryable = response.status === 429 || response.status >= 500;
+    const retryable = retrySafe && (response.status === 429 || response.status >= 500);
     if (!retryable || attempt === 3) {
       const error = await response.json();
       throw new Error(`Xquik API ${response.status}: ${error.error}`);
@@ -82,6 +91,10 @@ Cursors are opaque strings. Never decode or construct them manually.
 ## Complete Extraction Workflow
 
 ```javascript
+function requireExplicitApproval(scope) {
+  throw new Error(`Approval required for ${scope}. Implement the approval gate first.`);
+}
+
 // Step 1: Estimate usage before running
 const estimate = await xquikFetch("/extractions/estimate", {
   method: "POST",
@@ -97,7 +110,8 @@ if (!estimate.allowed) {
   return;
 }
 
-// Step 2: Create extraction job
+// Step 2: Create extraction job after approving this exact bounded request
+requireExplicitApproval("the bounded extraction job, usage, recipients, and retention");
 let job = await xquikFetch("/extractions", {
   method: "POST",
   body: JSON.stringify({
@@ -126,7 +140,8 @@ while (true) {
   cursor = page.nextCursor;
 }
 
-// Step 5: Export as CSV/JSON/MD/MD-document/PDF/TXT/XLSX (100,000 row limit; PDF 10,000)
+// Step 5: Export only after reviewing a bounded preview and approving transmission
+requireExplicitApproval("the fixed export scope, audience, storage, and retention");
 const exportUrl = `${BASE}/extractions/${job.id}/export?format=csv`;
 const csvResponse = await fetch(exportUrl, { headers });
 const csvData = await csvResponse.text();
@@ -182,7 +197,7 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `webhoo
 | **Get bookmark folders** | `GET /x/bookmarks/folders` | Metered |
 | **Get notifications** | `GET /x/notifications` | Metered per result |
 | **Get home timeline** | `GET /x/timeline` | Metered per result |
-| **Get DM history** | `GET /x/dm/{userId}/history` | Metered per result |
+| **Get DM history** | `GET /x/dm/{userId}/history?account={username}` | Private; approve exact account and block ambiguity |
 | **Monitor an X account** | `POST /monitors` | Active monitors are metered hourly |
 | **Poll for events** | `GET /events` | Included |
 | **Receive events via webhook** | `POST /webhooks` | Included; confirmation required for destination URL |

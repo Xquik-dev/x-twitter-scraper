@@ -2,30 +2,13 @@
 
 Session auth only. These endpoints do not accept API key auth.
 
-### Create API Key
+## Agent Boundary
 
-```
-POST /api-keys
-```
+API key lifecycle operations stay in the Xquik dashboard. Never request, copy,
+display, store, rotate, or revoke an API key through this Skill. Direct the
+user to the dashboard account page.
 
-**Body:** `{ "name": "My Key" }` (optional)
-
-**Response:** Returns `fullKey` (shown only once), `prefix`, `name`, `id`, `createdAt`.
-
-### List API Keys
-
-```
-GET /api-keys
-```
-
-Returns all keys with `id`, `name`, `prefix`, `isActive`, `createdAt`, `lastUsedAt`. Full key is never exposed.
-
-### Revoke API Key
-
-```
-delete request to `/api-keys/{id}`
-```
-
-Permanent and irreversible. The key stops working immediately.
+API key lifecycle request and response details are intentionally omitted. Do
+not call lifecycle routes from this Skill. Use the dashboard account page.
 
 ---

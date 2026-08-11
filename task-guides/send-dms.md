@@ -35,7 +35,7 @@ Send and read direct messages through a connected X account. One-to-one only - n
 | Endpoint | Purpose | Usage |
 |---|---|---|
 | POST /x/dm/{userId} | Send a DM to a user (numeric ID) | Write tier |
-| GET /x/dm/{userId}/history | Read DM history with a user | Read tier |
+| GET /x/dm/{userId}/history?account={username} | Read DM history with a user | Read tier |
 | GET /x/users/{id} | Resolve @handle to numeric user ID | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
@@ -57,9 +57,14 @@ The recipient must allow DMs from people they don't follow, or must follow the s
 
 ## Typical flow
 
-1. `GET /x/accounts` to pick the sending account.
+1. Use the exact account supplied by the user. Otherwise, show that
+   `GET /x/accounts` returns the complete connected-account list. Obtain
+   explicit approval before listing accounts or selecting a sender.
 2. `GET /x/users/{id}` to resolve the recipient handle into a numeric `id`.
-3. Optionally `GET /x/dm/{userId}/history?cursor=<optional>` to provide context, only after the user confirms this private read.
+3. Optionally call `GET /x/dm/{userId}/history?account=<username>&cursor=<optional>`.
+   Show the exact account, conversation partner, purpose, approved page count,
+   and downstream recipients. Obtain explicit approval for that private read.
+   Block ambiguous account selection or unapproved pagination.
 4. Show the user the exact DM text, recipient, and sender account. Wait for explicit approval.
 5. `POST /x/dm/{userId}`.
 

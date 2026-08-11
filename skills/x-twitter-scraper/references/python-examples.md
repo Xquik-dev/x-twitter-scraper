@@ -12,6 +12,12 @@ Python equivalents of the JavaScript examples in SKILL.md.
 
 ## Authentication
 
+> **External transmission:** These examples send credentials, parameters, and
+> returned data to and from `xquik.com`. Keep the key in a secret store. Get
+> explicit approval before private reads, writes, exports, persistent resources,
+> webhooks, or metered jobs. Never forward private results without separate
+> approval.
+
 ```python
 import json
 import urllib.error
@@ -33,6 +39,8 @@ import time, random
 
 def xquik_fetch(path, method="GET", json_body=None, max_retries=3):
     base_delay = 1.0
+    method = method.upper()
+    retry_safe = method in {"GET", "HEAD", "OPTIONS"}
 
     for attempt in range(max_retries + 1):
         retry_after = None
@@ -49,7 +57,7 @@ def xquik_fetch(path, method="GET", json_body=None, max_retries=3):
             payload = json.loads(error.read() or b"{}")
             retry_after = error.headers.get("Retry-After")
 
-        retryable = status == 429 or status >= 500
+        retryable = retry_safe and (status == 429 or status >= 500)
         if not retryable or attempt == max_retries:
             raise Exception(f"Xquik API {status}: {payload.get('error', 'request failed')}")
 
@@ -60,10 +68,18 @@ def xquik_fetch(path, method="GET", json_body=None, max_retries=3):
 ## Extraction Workflow
 
 ```python
+RESULTS_LIMIT = 1000
+
+def require_explicit_approval(scope: str) -> None:
+    raise RuntimeError(
+        f"Approval required for {scope}. Implement the approval gate first."
+    )
+
 # Step 1: Estimate
 estimate = xquik_fetch("/extractions/estimate", method="POST", json_body={
     "toolType": "reply_extractor",
     "targetTweetId": "1893704267862470862",
+    "resultsLimit": RESULTS_LIMIT,
 })
 
 if not estimate["allowed"]:
@@ -71,9 +87,13 @@ if not estimate["allowed"]:
     exit()
 
 # Step 2: Create job
+require_explicit_approval(
+    "the bounded extraction job, usage, recipients, and retention"
+)
 job = xquik_fetch("/extractions", method="POST", json_body={
     "toolType": "reply_extractor",
     "targetTweetId": "1893704267862470862",
+    "resultsLimit": RESULTS_LIMIT,
 })
 
 # Step 3: Poll until complete (large jobs may return "running")
