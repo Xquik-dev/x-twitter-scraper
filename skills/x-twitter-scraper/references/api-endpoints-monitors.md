@@ -35,11 +35,14 @@ Include the exact URL and HMAC verification plan for webhook delivery.
   "username": "elonmusk",
   "xUserId": "44196397",
   "eventTypes": ["tweet.new", "tweet.reply", "tweet.quote"],
-  "createdAt": "2026-02-24T10:30:00.000Z"
+  "isActive": true,
+  "createdAt": "2026-02-24T10:30:00.000Z",
+  "nextBillingAt": "2026-02-24T10:30:00.000Z"
 }
 ```
 
-Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `webhook.test`.
+Event types include Tweet activity and profile-change events. Use the OpenAPI
+`EventType` enum for the current values. `webhook.test` is only a test payload.
 
 Returns `409 monitor_already_exists` if the username is already monitored.
 
@@ -95,6 +98,9 @@ delete request to `/monitors/keywords/{id}`
 ```
 
 Create and manage ongoing keyword monitors. Treat these as persistent resources: confirm the keyword query, event delivery plan, and ongoing usage before creating or enabling one.
+
+Create with `{ "query": "#buildinpublic", "eventTypes": ["tweet.new"] }`.
+Poll its events with `GET /events?keywordMonitorId=<id>`.
 
 Creating, updating, enabling, disabling, or deleting a keyword monitor requires
 explicit approval for the exact monitor. For creates and updates, show the

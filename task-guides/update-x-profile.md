@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.1"
+  version: "2.6.2"
   openclaw:
     requires:
       env:
@@ -39,6 +39,8 @@ Change bio, display name, location, website, avatar, or banner on a connected X 
 | PATCH /x/profile/banner | Upload a new banner | Write tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+Every profile write requires a unique `Idempotency-Key` header.
+Direct REST callers supply it. Hosted MCP injects it automatically.
 
 ## Quick reference
 
@@ -46,21 +48,22 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 PATCH /x/profile
 {
   "account": "<connected_username>",
-  "bio": "building stuff",
+  "description": "building stuff",
   "name": "Jane Doe",
   "location": "SF",
-  "website": "https://janedoe.com"
+  "url": "https://janedoe.com"
 }
 ```
 
-All fields optional. Send only what should change.
+`account` is required. Send only the profile fields that should change.
 
 ## Typical flow
 
 1. `GET /x/accounts` to pick the acting account.
 2. Show the user the **before/after diff** for each field they want to change.
 3. Wait for explicit approval per field (or batch approval of the full diff).
-4. `PATCH /x/profile` for text fields, `PATCH /x/profile/avatar`, or `PATCH /x/profile/banner` for images.
+4. Send the selected write. Direct REST supplies the key. Hosted MCP injects it.
+5. Poll `statusUrl` after a `202` response until `terminal` is true.
 
 ## Confirmation
 

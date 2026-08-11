@@ -34,7 +34,6 @@ interface ExtractionJob {
   totalResults: number;
   targetTweetId?: string;
   targetUsername?: string;
-  targetUserId?: string;
   targetCommunityId?: string;
   targetListId?: string;
   targetSpaceId?: string;
@@ -91,16 +90,64 @@ interface CreateExtractionRequest {
   language?: string;
   sinceDate?: string;           // YYYY-MM-DD
   untilDate?: string;           // YYYY-MM-DD
-  mediaType?: 'images' | 'videos' | 'gifs' | 'media';
+  mediaType?: 'images' | 'videos' | 'gifs' | 'media' | 'links' | 'none';
   minFaves?: number;
   minRetweets?: number;
   minReplies?: number;
+  minQuotes?: number;
+  minViews?: number;
+  minBookmarks?: number;
+  maxLikes?: number;
+  maxRetweets?: number;
+  maxReplies?: number;
+  maxQuotes?: number;
+  blueVerifiedOnly?: boolean;
+  cardName?: string;
+  source?: string;
+  excludeSource?: string;
+  geocode?: string;
+  sinceId?: string;
+  maxId?: string;
+  near?: string;
+  within?: string;
+  withinTime?: string;
+  nativeRetweets?: boolean;
+  safe?: boolean;
+  news?: boolean;
   verifiedOnly?: boolean;
   replies?: 'include' | 'exclude' | 'only';
   retweets?: 'include' | 'exclude' | 'only';
+  quotes?: 'include' | 'exclude' | 'only';
   exactPhrase?: string;
   excludeWords?: string;
+  anyWords?: string;
+  hashtags?: string;
+  cashtags?: string;
+  url?: string;
+  conversationId?: string;
+  inReplyToTweetId?: string;
+  quotesOfTweetId?: string;
+  retweetsOfTweetId?: string;
+  listId?: string;
+  place?: string;
+  placeCountry?: string;
+  pointRadius?: string;
+  boundingBox?: string;
   advancedQuery?: string;
+  // Profile filters for profile-producing extractions
+  minFollowers?: number;
+  maxFollowers?: number;
+  minFollowing?: number;
+  maxFollowing?: number;
+  minPosts?: number;
+  maxPosts?: number;
+  minAccountAgeDays?: number;
+  verifiedType?: string;
+  hasWebsite?: boolean;
+  hasLocation?: boolean;
+  bioContains?: string;
+  locationContains?: string;
+  usernameContains?: string;
 }
 
 ```

@@ -1,11 +1,11 @@
 ---
 name: export-tweets-csv
-description: "Use when the user wants to export X (Twitter) data to CSV, JSONL, or XLSX. Covers exporting extraction results (tweets, followers, mentions, giveaway entrants) and formatting them for spreadsheets or pipelines. Download handling only."
+description: "Use when the user wants to export X (Twitter) data to CSV, JSON, Markdown, PDF, TXT, or XLSX. Covers extraction results and giveaway entrant files. Download handling only."
 license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.1"
+  version: "2.6.2"
   openclaw:
     requires:
       env:
@@ -26,7 +26,7 @@ metadata:
     credentialProxy: false
 ---
 
-# Export X Data to CSV/JSONL/XLSX
+# Export X Data
 
 Download completed extractions or draw entrant lists in spreadsheet-friendly formats.
 
@@ -35,7 +35,7 @@ Download completed extractions or draw entrant lists in spreadsheet-friendly for
 | Endpoint | Purpose | Usage |
 |---|---|---|
 | GET /extractions/{id}/export?format=csv | CSV export | Read tier |
-| GET /extractions/{id}/export?format=jsonl | Line-delimited JSON | Read tier |
+| GET /extractions/{id}/export?format=json | JSON export | Read tier |
 | GET /extractions/{id}/export?format=xlsx | Excel workbook | Read tier |
 | GET /draws/{id}/export?format=csv | Giveaway entrants/winners | Read tier |
 
@@ -59,7 +59,16 @@ GET /extractions/{id}/export?format=csv
 
 - CSV: broad compatibility, Excel/Sheets open directly
 - XLSX: preserves types, multiple sheets per extraction
-- JSONL: best for piping into scripts or databases
+- JSON: structured data for scripts or databases
+- Markdown, PDF, or TXT: human-readable reports
+
+## Export Filters
+
+The endpoint accepts follower, following, post, engagement, profile, media,
+language, search, and date filters. Use `minFollowers`, `maxFollowers`,
+`minFollowing`, `maxFollowing`, `minPosts`, `maxPosts`, `minLikes`,
+`minReplies`, `minRetweets`, `minViews`, `hasDescription`, `hasLocation`,
+`hasMedia`, `verified`, `lang`, `search`, `sinceDate`, and `untilDate`.
 
 ## Security
 

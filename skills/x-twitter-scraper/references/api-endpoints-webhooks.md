@@ -58,9 +58,9 @@ change. A URL change redirects future data to another external system.
 delete request to `/webhooks/{id}`
 ```
 
-**Destructive action:** This permanently removes the webhook and stops all
-future deliveries. Show the webhook ID, destination, and affected event types,
-then obtain explicit approval immediately before deletion.
+**Destructive action:** This deactivates the webhook and stops future
+deliveries. Show the webhook ID, destination, and affected event types. Obtain
+explicit approval immediately before deletion.
 
 ### Test Webhook
 
@@ -77,17 +77,33 @@ Sends a `webhook.test` event to the webhook endpoint, HMAC-signed with the webho
 **Payload delivered to your endpoint:**
 ```json
 {
+  "schemaVersion": 1,
+  "streamEventId": "9010",
+  "deliveryId": "334",
   "eventType": "webhook.test",
+  "occurredAt": "2026-02-27T12:00:00.000Z",
   "data": {
     "message": "Test delivery from Xquik"
-  },
-  "timestamp": "2026-02-27T12:00:00.000Z"
+  }
 }
 ```
 
-The delivery includes the `X-Xquik-Signature` header, identical to production deliveries.
+The delivery includes `X-Xquik-Timestamp`, `X-Xquik-Nonce`, and
+`X-Xquik-Signature`. Verify the HMAC over
+`<timestamp>.<nonce>.<raw JSON body>`. Reject timestamps outside 5 minutes and
+reused nonces. Test deliveries use the same signing contract as production.
 
-Returns `400 webhook_inactive` if the webhook is disabled. Reactivate via `PATCH /webhooks/{id}` before testing.
+Testing does not change the webhook state. Use `POST /webhooks/{id}/resume` to
+test and resume a paused endpoint.
+
+### Resume Webhook
+
+```http
+POST /webhooks/{id}/resume
+```
+
+Tests the configured destination. A successful test resets failures and
+reactivates delivery. A failed test leaves the webhook unchanged.
 
 ### List Deliveries
 
@@ -95,7 +111,8 @@ Returns `400 webhook_inactive` if the webhook is disabled. Reactivate via `PATCH
 GET /webhooks/{id}/deliveries
 ```
 
-View delivery attempts and statuses for a webhook. Statuses: `pending`, `delivered`, `failed`, `exhausted`.
+View delivery attempts. Statuses are `pending`, `delivered`, `failed`, and
+`exhausted`.
 
 **Private read:** Show the webhook ID and requested history scope. List
 deliveries only after explicit approval for that exact read.

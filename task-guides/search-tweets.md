@@ -1,11 +1,11 @@
 ---
 name: search-tweets
-description: "Use when the user wants to search tweets on X (Twitter) by keyword, phrase, hashtag, from a specific user, within a date range, or with engagement filters. Covers both the live search endpoint (latest matches) and bulk tweet search extractions (up to 1,000 tweets per job). Returns tweet IDs, text, authors, metrics, and timestamps."
+description: "Use when the user wants to search tweets on X (Twitter) by keyword, phrase, hashtag, from a specific user, within a date range, or with engagement filters. Covers live search and bounded bulk tweet search extractions. Returns tweet IDs, text, authors, metrics, and timestamps."
 license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.1"
+  version: "2.6.2"
   openclaw:
     requires:
       env:
@@ -28,7 +28,7 @@ metadata:
 
 # Search Tweets on X
 
-Search X (Twitter) tweets by keyword, phrase, hashtag, from-user filter, date range, language, minimum favorites, minimum retweets, or geo. Two modes: live search (small result set, paginated) and bulk extraction (up to 1,000 rows per job).
+Search X tweets with live pagination or a bounded bulk extraction.
 
 ## Endpoints
 
@@ -36,9 +36,9 @@ Search X (Twitter) tweets by keyword, phrase, hashtag, from-user filter, date ra
 |---|---|---|
 | GET /x/tweets/search | Live search, paginated | Read tier |
 | POST /extractions/estimate | Estimate bulk search usage before running | Included |
-| POST /extractions (toolType=tweet_search_extractor) | Bulk search up to 1,000 tweets | Per-result usage |
+| POST /extractions (toolType=tweet_search_extractor) | Bounded bulk search | Per-result usage |
 | GET /extractions/{id} | Poll job status | Included |
-| GET /extractions/{id} | Retrieve paginated results with `after` cursor | Included |
+| GET /extractions/{id} | Retrieve paginated results with `cursor` | Included |
 | GET /extractions/{id}/export | Export CSV/XLSX/MD | Included |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key` header.
@@ -73,7 +73,7 @@ Supported query parameters: `q` (URL-encoded), `queryType` (`Latest` or `Top`), 
 
 Response: `{ tweets: [...], has_next_page: true, next_cursor: "..." }`. Loop until `has_next_page` is false or you hit the number you need.
 
-## Bulk search (up to 1,000 rows)
+## Bulk Search
 
 Always estimate first so the user sees the usage estimate before committing:
 
@@ -90,13 +90,21 @@ POST /extractions
 -> 202 { "id": "<extractionId>", "toolType": "tweet_search_extractor", "status": "running" }
 ```
 
-Poll `GET /extractions/{id}` until `status: "completed"` (or `failed`). Then paginate `GET /extractions/{id}?after=<cursor>`.
+Poll `GET /extractions/{id}` until `status: "completed"` or `failed`. Then
+paginate `GET /extractions/{id}?cursor=<cursor>` while `hasMore` is true.
 
-To export: `GET /extractions/{id}/export?format=csv` (or `xlsx`, `md`). Cap 50,000 rows per export.
+To export, use `GET /extractions/{id}/export?format=csv`. Supported formats
+are `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, and `xlsx`.
 
 ## Cursors
 
 `next_cursor` is opaque. Never parse it, decode it, or construct it by hand. Pass it back as the `cursor` query parameter.
+
+Concurrent use returns `409 coverage_cursor_unavailable`. Wait the exact
+`Retry-After` seconds, then retry the same cursor once. A finished, expired,
+superseded, or identity-mismatched cursor returns `410 coverage_cursor_gone`
+without `Retry-After`. Restart without a cursor and deduplicate by Tweet ID.
+Malformed cursors return `400 invalid_coverage_cursor`. Restart without them.
 
 ## Error handling
 

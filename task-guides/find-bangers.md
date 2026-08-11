@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.1"
+  version: "2.6.2"
   openclaw:
     requires:
       env:
@@ -44,7 +44,9 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 1. Get a handle from the user.
 2. `GET /x/users/{id}` to get the baseline follower count and numeric `id`.
-3. Either page `GET /x/users/{id}/tweets?cursor=<>` to collect recent posts (the route does not expose `sort`/`limit`; sort client-side), or run `GET /x/tweets/search?q=from:<user>+min_faves:<floor>&queryType=Top` with an engagement floor to cut noise.
+3. Page `GET /x/users/{id}/tweets?pageSize=300&cursor=<>`, then sort
+   client-side. Continue until `has_next_page` is false. Or use Tweet Search
+   with a `minFaves` filter and `queryType=Top`.
 4. Compute engagement rate per tweet = (likes + RTs + replies) / followers.
 5. Surface tweets with engagement rate more than 3-5x the median for that author. Those are bangers.
 

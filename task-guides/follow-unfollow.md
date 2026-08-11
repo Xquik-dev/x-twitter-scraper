@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.1"
+  version: "2.6.2"
   openclaw:
     requires:
       env:
@@ -40,13 +40,15 @@ Follow and unfollow accounts as a connected user, and check follow state.
 | GET /x/followers/check?source=<a>&target=<b> | Does A follow B? | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+Every follow or unfollow needs a unique `Idempotency-Key` header.
+Direct REST callers supply it. Hosted MCP injects it automatically.
 
 ## Quick reference
 
 ```
 POST /x/users/{id}/follow
 { "account": "<connected_username>" }
--> { followed: true }
+-> XWriteAction (HTTP 200 terminal or HTTP 202 accepted)
 
 DELETE /x/users/{id}/follow
 { "account": "<connected_username>" }
@@ -59,11 +61,14 @@ For follow/unfollow, `{id}` is the numeric user ID. Resolve a @handle with `GET 
 1. `GET /x/accounts` to pick the acting account.
 2. `GET /x/users/{id}` to resolve each target handle to a numeric `id`.
 3. Show the user the target handle and the acting account. Wait for approval.
-4. Call `POST /x/users/{id}/follow` to follow, or `DELETE /x/users/{id}/follow` to unfollow.
+4. Send the write. Direct REST supplies the key. Hosted MCP injects it.
+5. Poll `statusUrl` after a `202` response until `terminal` is true.
 
 ## Bulk operations
 
-If the user asks to follow or unfollow many accounts at once, list every target first, require explicit confirmation for the full list, then iterate with a short delay (1-2s) between calls to avoid rate limits. Never silently batch.
+If the user asks to follow or unfollow many accounts at once, list every target
+first and require explicit confirmation for the full list. Process serially.
+Honor `Retry-After` when returned. Never silently batch.
 
 Hard no:
 - Mass-following random accounts based on a scrape

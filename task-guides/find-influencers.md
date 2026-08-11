@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.1"
+  version: "2.6.2"
   openclaw:
     requires:
       env:
@@ -51,15 +51,18 @@ POST /extractions
 -> 202 { "id": "<extractionId>", "toolType": "people_search", "status": "running" }
 ```
 
-The server only accepts `toolType` and `searchQuery`. Follower-count filters and verified-only shortlists happen **after** extraction, on the returned rows.
+The request also accepts profile filters. Examples include `minFollowers`,
+`maxFollowers`, `minPosts`, `minAccountAgeDays`, `verifiedType`,
+`hasWebsite`, `hasLocation`, and text-match fields. Apply them before
+estimation so excluded rows are not delivered.
 
 ## Typical flow
 
-1. Ask the user for the niche keyword and any follower-range / verified preferences (applied client-side).
+1. Ask for the niche, result bound, and profile filters.
 2. Call `POST /extractions/estimate`, show the usage estimate.
 3. On approval, `POST /extractions`.
 4. Poll `GET /extractions/{id}` until `completed`.
-5. Retrieve `GET /extractions/{id}?after=<cursor>` and filter locally by `followers_count` range and `verified` flag.
+5. Retrieve `GET /extractions/{id}?cursor=<cursor>` until `hasMore` is false.
 6. Optionally enrich the shortlist with `GET /x/users/{id}` for recency signals. The `{id}` segment accepts a username or numeric user ID.
 7. Export via `GET /extractions/{id}/export?format=csv` if raw data is needed.
 

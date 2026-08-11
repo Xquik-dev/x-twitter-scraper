@@ -12,7 +12,7 @@ import { pathToFileURL } from "node:url";
 
 const SERVER_INFO = {
   name: "xquik",
-  version: "2.6.1",
+  version: "2.6.2",
 };
 
 const CAPABILITIES = {

@@ -1,11 +1,11 @@
 ---
 name: extract-followers
-description: "Use when the user wants to extract the follower list of any public X (Twitter) account. Pulls follower profiles, filters by verified status, and exports to CSV or JSONL for analysis. Read-only."
+description: "Use when the user wants to extract the follower list of any public X (Twitter) account. Pulls follower profiles, filters by verified status, and exports supported files for analysis. Read-only."
 license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.1"
+  version: "2.6.2"
   openclaw:
     requires:
       env:

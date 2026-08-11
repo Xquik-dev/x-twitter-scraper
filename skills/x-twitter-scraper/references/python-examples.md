@@ -108,7 +108,7 @@ results = []
 while True:
     path = f"/extractions/{job['id']}"
     if cursor:
-        path += f"?after={cursor}"
+        path += f"?cursor={cursor}"
     page = xquik_fetch(path)
     results.extend(page["results"])
 
@@ -148,6 +148,8 @@ for winner in details["winners"]:
 import hashlib
 import hmac
 import json
+import re
+import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 def load_secret(name: str) -> str:
@@ -156,10 +158,15 @@ def load_secret(name: str) -> str:
 
 # Per-webhook secret from POST /webhooks response, not a Xquik account credential
 WEBHOOK_SECRET = load_secret("XQUIK_WEBHOOK_SECRET")
-processed_hashes = set()  # Use Redis/DB in production
+processed_delivery_ids = set()  # Use durable storage in production
 
-def verify_signature(payload: bytes, signature: str, secret: str) -> bool:
-    expected = "sha256=" + hmac.new(secret.encode(), payload, hashlib.sha256).hexdigest()
+def verify_signature(payload: bytes, signature: str, timestamp: str, nonce: str, secret: str) -> bool:
+    if not timestamp.isdigit() or not re.fullmatch(r"[0-9a-f]{32}", nonce):
+        return False
+    if abs(int(time.time() * 1000) - int(timestamp)) > 5 * 60 * 1000:
+        return False
+    signing_input = timestamp.encode() + b"." + nonce.encode() + b"." + payload
+    expected = "sha256=" + hmac.new(secret.encode(), signing_input, hashlib.sha256).hexdigest()
     return hmac.compare_digest(expected, signature)
 
 EVENT_HANDLERS = {
@@ -173,23 +180,23 @@ class WebhookHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         length = int(self.headers.get("Content-Length", "0"))
         signature = self.headers.get("X-Xquik-Signature", "")
+        timestamp = self.headers.get("X-Xquik-Timestamp", "")
+        nonce = self.headers.get("X-Xquik-Nonce", "")
         payload = self.rfile.read(length)
 
-        if not verify_signature(payload, signature, WEBHOOK_SECRET):
+        if not verify_signature(payload, signature, timestamp, nonce, WEBHOOK_SECRET):
             self.send_response(401)
             self.end_headers()
             self.wfile.write(b"Invalid signature")
             return
 
-        payload_hash = hashlib.sha256(payload).hexdigest()
-        if payload_hash in processed_hashes:
+        event = json.loads(payload)
+        if event["deliveryId"] in processed_delivery_ids:
             self.send_response(200)
             self.end_headers()
             self.wfile.write(b"Already processed")
             return
-        processed_hashes.add(payload_hash)
-
-        event = json.loads(payload)
+        processed_delivery_ids.add(event["deliveryId"])
         handler = EVENT_HANDLERS.get(event["eventType"])
         if handler:
             handler(event["username"], event["data"])

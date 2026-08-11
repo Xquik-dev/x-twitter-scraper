@@ -12,7 +12,8 @@ Get trending topics and news from supported trend and news sources.
 
 | Param | Type | Description |
 |-------|------|-------------|
-| `source` | string | Filter by public source: `google_trends`, `hacker_news`, `polymarket`, `wikipedia`, `github`, `reddit`. Omit to include all supported sources |
+| `after` | string | Previous `nextCursor` |
+| `source` | string | Filter by `github`, `google_trends`, `hacker_news`, `polymarket`, `reddit`, `trustmrr`, or `wikipedia` |
 | `category` | string | Filter by category: `general`, `tech`, `dev`, `science`, `culture`, `politics`, `business`, `entertainment` |
 | `limit` | number | Items per page (1-100, default 50) |
 | `hours` | number | Look-back window in hours (1-72, default 6) |

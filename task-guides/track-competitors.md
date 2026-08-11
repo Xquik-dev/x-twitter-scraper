@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.1"
+  version: "2.6.2"
   openclaw:
     requires:
       env:
@@ -37,7 +37,7 @@ Competitor intelligence: posts, follower growth, engagement benchmarks, and top 
 | GET /x/users/{id} | Profile + follower count snapshot | Read tier |
 | GET /x/users/{id}/tweets | Recent posts | Read tier |
 | POST /extractions with toolType=post_extractor | Bulk historical posts | Per-row |
-| POST /monitors type=account | Continuous monitor per competitor | metered while active |
+| POST /monitors | Continuous account monitor | metered while active |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 

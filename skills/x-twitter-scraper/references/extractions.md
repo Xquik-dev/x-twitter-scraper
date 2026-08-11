@@ -72,7 +72,7 @@ explicit finite positive bound. Use the same bound for estimate and create.
 
 The `@` prefix is automatically stripped if included.
 
-### User-Based by ID (require `targetUserId`)
+### User Timeline Tools (require `targetUsername`)
 
 | Tool Type | Description |
 |-----------|-------------|
@@ -83,7 +83,7 @@ The `@` prefix is automatically stripped if included.
 ```json
 {
   "toolType": "user_likes",
-  "targetUserId": "44196397"
+  "targetUsername": "elonmusk"
 }
 ```
 
@@ -139,7 +139,7 @@ The `@` prefix is automatically stripped if included.
 | Tool Type | Description |
 |-----------|-------------|
 | `people_search` | Search for users by keyword |
-| `tweet_search_extractor` | Search and extract tweets by keyword or hashtag (bulk, up to 1,000) |
+| `tweet_search_extractor` | Search and extract tweets by keyword or hashtag |
 
 **Example (people search):**
 ```json
@@ -160,7 +160,8 @@ The `@` prefix is automatically stripped if included.
 
 ### Tweet Search Filters
 
-The `tweet_search_extractor` tool type supports 16 additional filter fields that are converted to X search operators and combined with `searchQuery`:
+`tweet_search_extractor` accepts structured filters. It combines them with
+`searchQuery` before collection.
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -170,15 +171,49 @@ The `tweet_search_extractor` tool type supports 16 additional filter fields that
 | `language` | string | Language code (e.g., `en`) |
 | `sinceDate` | string | Start date (YYYY-MM-DD) |
 | `untilDate` | string | End date (YYYY-MM-DD) |
-| `mediaType` | string | `images`, `videos`, `gifs`, or `media` |
+| `mediaType` | string | `images`, `videos`, `gifs`, `media`, `links`, or `none` |
 | `minFaves` | number | Minimum likes |
 | `minRetweets` | number | Minimum retweets |
 | `minReplies` | number | Minimum replies |
+| `minQuotes` | number | Minimum quote count |
+| `minViews` | number | Minimum view count |
+| `minBookmarks` | number | Minimum bookmark count |
+| `maxLikes` | number | Maximum likes |
+| `maxRetweets` | number | Maximum reposts |
+| `maxReplies` | number | Maximum replies |
+| `maxQuotes` | number | Maximum quotes |
+| `blueVerifiedOnly` | boolean | Blue-verified authors only |
+| `cardName` | string | Match the Tweet card name |
+| `source` | string | Match the source application |
+| `excludeSource` | string | Exclude a source application |
+| `geocode` | string | Match latitude, longitude, and radius |
+| `sinceId` | string | Tweets newer than this ID |
+| `maxId` | string | Tweets older than this ID |
+| `near` | string | Match a place name |
+| `within` | string | Radius for the `near` filter |
+| `withinTime` | string | Recent time window |
+| `nativeRetweets` | boolean | Native reposts only |
+| `safe` | boolean | Enable safe search |
+| `news` | boolean | News results only |
 | `verifiedOnly` | boolean | Verified authors only |
 | `replies` | string | `include`, `exclude`, or `only` |
 | `retweets` | string | `include`, `exclude`, or `only` |
+| `quotes` | string | `include`, `exclude`, or `only` |
 | `exactPhrase` | string | Exact match text |
 | `excludeWords` | string | Comma-separated words to exclude |
+| `anyWords` | string | Terms where any one can match |
+| `hashtags` | string | Hashtags separated by spaces, commas, or lines |
+| `cashtags` | string | Cashtags separated by spaces, commas, or lines |
+| `url` | string | URL substring or domain |
+| `conversationId` | string | Conversation ID |
+| `inReplyToTweetId` | string | Replies to one Tweet ID |
+| `quotesOfTweetId` | string | Quotes of one Tweet ID |
+| `retweetsOfTweetId` | string | Reposts of one Tweet ID |
+| `listId` | string | Search within a list |
+| `place` | string | Search within a place ID |
+| `placeCountry` | string | Search within a country code |
+| `pointRadius` | string | Geographic point and radius |
+| `boundingBox` | string | Geographic bounding box |
 | `advancedQuery` | string | Raw X search operators appended to query |
 
 **Example with filters:**
@@ -195,6 +230,13 @@ The `tweet_search_extractor` tool type supports 16 additional filter fields that
 ```
 
 `resultsLimit` (optional): Maximum results to extract. Stops early instead of fetching all. Pass this on both `POST /extractions/estimate` and `POST /extractions` when you only need a specific count.
+
+### Profile Filters
+
+Profile-producing extractions also accept `minFollowers`, `maxFollowers`,
+`minFollowing`, `maxFollowing`, `minPosts`, `maxPosts`,
+`minAccountAgeDays`, `verifiedType`, `hasWebsite`, `hasLocation`,
+`bioContains`, `locationContains`, and `usernameContains`.
 
 ## Response
 
@@ -231,14 +273,13 @@ Formats: `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, `xlsx`. 100,000 row l
 
 Exports include enrichment columns not present in the API response.
 
-**Approval required:** The export endpoint cannot project rows or fields. Set
-the smallest approved `resultsLimit` when creating the job. Before export, show
-the exact account, job ID, purpose, and format. Describe the full fixed-dataset
-scope with its row count, schema, and field list. Show only a bounded preview,
-including enrichment columns and risk, before approval. Show all downstream
-recipients, storage location, and retention period. Materialize or
-transmit the complete dataset only after explicit approval. Block exports that
-exceed the approved purpose. Delete the export when the approved purpose ends.
+The endpoint supports follower, following, post, engagement, profile, media,
+language, search, and date filters. It does not project individual fields.
+
+**Approval required:** Set the smallest approved `resultsLimit` when creating
+the job. Before export, show the job, filters, format, row count, schema,
+recipients, storage, and retention. Materialize or transmit the dataset only
+after explicit approval. Delete it when the approved purpose ends.
 
 ## Estimating Usage
 

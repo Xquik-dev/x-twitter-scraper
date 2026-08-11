@@ -40,7 +40,30 @@ jobs:
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: .github/scripts/verify-release-context.sh
 
+      - name: Check MCP Registry
+        id: registry
+        run: |
+          server_name="$(node -p "encodeURIComponent(require('./server.json').name)")"
+          server_version="$(node -p "require('./server.json').version")"
+          registry_url="https://registry.modelcontextprotocol.io/v0.1/servers/${server_name}/versions/${server_version}"
+          registry_status="$(curl --location --silent --show-error --retry 3 \
+            --output /dev/null --write-out "%{http_code}" "$registry_url")"
+
+          case "$registry_status" in
+            200)
+              echo "published=true" >> "$GITHUB_OUTPUT"
+              ;;
+            404)
+              echo "published=false" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              echo "MCP Registry returned HTTP ${registry_status}." >&2
+              exit 1
+              ;;
+          esac
+
       - name: Wait for the npm release
+        if: steps.registry.outputs.published != 'true'
         run: |
           package_name="$(node -p "require('./package.json').name")"
           package_version="$(node -p "require('./package.json').version")"
@@ -55,6 +78,7 @@ jobs:
           exit 1
 
       - name: Install mcp-publisher
+        if: steps.registry.outputs.published != 'true'
         run: |
           asset="mcp-publisher_linux_amd64.tar.gz"
           checksum="1370446bbe74d562608e8005a6ccce02d146a661fbd78674e11cc70b9618d6cf"
@@ -65,9 +89,11 @@ jobs:
           tar xzf "$asset" mcp-publisher
 
       - name: Validate server.json
+        if: steps.registry.outputs.published != 'true'
         run: ./mcp-publisher validate
 
       - name: Authenticate to MCP Registry
+        if: steps.registry.outputs.published != 'true'
         env:
           MCP_REGISTRY_PRIVATE_KEY: ${{ secrets.MCP_REGISTRY_PRIVATE_KEY }}
         run: |
@@ -76,4 +102,5 @@ jobs:
             --private-key "$MCP_REGISTRY_PRIVATE_KEY"
 
       - name: Publish to MCP Registry
+        if: steps.registry.outputs.published != 'true'
         run: ./mcp-publisher publish

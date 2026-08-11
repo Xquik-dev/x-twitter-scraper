@@ -15,7 +15,15 @@ Metered. Plan access required. `/trends` is an alias of `/x/trends`. Cached, ref
 ```json
 {
   "trends": [
-    { "name": "#AI", "description": "...", "rank": 1, "query": "#AI" }
+    {
+      "name": "#AI",
+      "description": "...",
+      "query": "%23AI",
+      "promotedContent": null,
+      "rank": 1,
+      "tweetVolume": 250000,
+      "url": "https://x.com/search?q=%23AI"
+    }
   ],
   "total": 30,
   "woeid": 1

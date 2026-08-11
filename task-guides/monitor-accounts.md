@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.1"
+  version: "2.6.2"
   openclaw:
     requires:
       env:
@@ -37,7 +37,7 @@ Watch specific accounts for new tweets or activity. Creates a monitor resource o
 | POST /monitors | Create an account monitor | metered while active |
 | GET /monitors | List active monitors | Included |
 | DELETE /monitors/{id} | Stop a monitor | Included |
-| GET /events?monitor_id=<id>&since=<cursor> | Poll new events | Included |
+| GET /events?monitorId=<id>&cursor=<cursor> | Poll new events | Included |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
@@ -46,21 +46,20 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 ```
 POST /monitors
 {
-  "type": "account",
-  "target": "@elonmusk",
-  "filters": { "include_replies": false, "include_retweets": false },
-  "webhook_url": "https://example.com/webhook"  // optional
+  "username": "elonmusk",
+  "eventTypes": ["tweet.new", "tweet.reply"]
 }
--> { monitor_id }
+-> { id, username, xUserId, eventTypes, isActive, createdAt, nextBillingAt }
 ```
 
 ## Typical flow
 
 1. Confirm the target account(s), event types, delivery method, and ongoing usage with the user.
 2. **Create the monitor only with explicit user approval** - active monitors consume usage while active.
-3. Either poll `GET /events?monitor_id=<id>` on a schedule, or provide a `webhook_url` at create time.
+3. Poll `GET /events?monitorId=<id>` or create a separate webhook.
 4. On each event, surface the new tweet to the user; never auto-act (reply, RT, etc.).
-5. `DELETE /monitors/{id}` when done.
+5. Continue with `cursor=nextCursor` while `hasMore` is true.
+6. `DELETE /monitors/{id}` when done.
 
 ## Confirmation
 

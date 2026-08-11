@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.1"
+  version: "2.6.2"
   openclaw:
     requires:
       env:
@@ -39,6 +39,8 @@ Send and read direct messages through a connected X account. One-to-one only - n
 | GET /x/users/{id} | Resolve @handle to numeric user ID | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+Every send also requires a unique `Idempotency-Key` header.
+Direct REST callers supply it. Hosted MCP injects it automatically.
 
 ## Quick reference
 
@@ -48,10 +50,11 @@ POST /x/dm/{userId}
   "account": "<connected_username>",
   "text": "Hi, thanks for following!"
 }
--> { message_id, sent_at }
+-> XWriteAction (HTTP 200 terminal or HTTP 202 accepted)
 ```
 
-The path parameter is the numeric user ID of the recipient. Resolve a @handle first with `GET /x/users/{id}`; the lookup route accepts usernames and numeric IDs. Optional body fields: `media_ids` (string array) and `reply_to_message_id`.
+The path parameter is the numeric recipient ID. Resolve a handle with
+`GET /x/users/{id}`. `media_ids` is optional and accepts exactly 1 media ID.
 
 The recipient must allow DMs from people they don't follow, or must follow the sender.
 
@@ -66,7 +69,8 @@ The recipient must allow DMs from people they don't follow, or must follow the s
    and downstream recipients. Obtain explicit approval for that private read.
    Block ambiguous account selection or unapproved pagination.
 4. Show the user the exact DM text, recipient, and sender account. Wait for explicit approval.
-5. `POST /x/dm/{userId}`.
+5. Call `POST /x/dm/{userId}`. Direct REST supplies the key. Hosted MCP injects it.
+6. Poll `statusUrl` after a `202` response until `terminal` is true.
 
 ## Confirmation rules
 

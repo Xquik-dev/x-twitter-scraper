@@ -27,6 +27,20 @@ Changes to the upstream Xquik API itself belong in the main Xquik repo.
 - Update `README.md` if the API surface changes
 - Bump the version in `package.json` if you republish to npm
 
+## Release Process
+
+Package releases use the version in `package.json`. Hosted MCP releases use
+the independent version in `server.json`. Keep the hosted version unchanged
+when only the package changes.
+
+1. Merge the release commit into the default branch.
+2. Create and push the matching `vMAJOR.MINOR.PATCH` tag.
+3. Wait for the npm and GitHub release workflow to finish.
+4. Verify the published npm version and package contents.
+
+The MCP Registry workflow reads `server.json`. It skips versions that already
+exist. It publishes only when the hosted MCP version changes.
+
 ## Test Policy
 
 Run these checks before opening a pull request:

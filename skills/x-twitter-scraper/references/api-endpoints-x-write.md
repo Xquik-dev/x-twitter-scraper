@@ -2,6 +2,21 @@
 
 Write actions performed through connected X accounts. All endpoints are metered. Every request requires an `account` field (username or account ID) identifying which connected account to use.
 
+Every write requires an `Idempotency-Key` header. Generate one key for each
+intended write. Reuse it only for the exact same account, action, target, and
+payload. Direct REST callers supply this header. Hosted MCP injects it
+automatically.
+
+## Durable Write Responses
+
+Successful writes return an `XWriteAction` lifecycle record. HTTP 200 means
+the record is terminal. HTTP 202 means it was accepted or dispatched. Poll
+`statusUrl` after `pollAfterMs` until `terminal` is true. Never submit another
+write while the original record is nonterminal.
+
+Inspect `status`, `result`, `billing`, `nextAction`, `retryable`, and
+`safeToRetry`. Use a new key only when a new attempt is explicitly safe.
+
 ## Mandatory Approval Gate
 
 Every operation in this file changes an X account, its content, its social
@@ -28,14 +43,11 @@ attachments, and community before publishing.
 | `account` | string | Yes | Connected X username or account ID |
 | `text` | string | No | Tweet text (280 chars, or 25,000 if `is_note_tweet` is true). Required unless `media` is provided |
 | `reply_to_tweet_id` | string | No | Tweet ID to reply to |
-| `attachment_url` | string | No | URL to attach as a card |
 | `community_id` | string | No | Community ID to post into |
 | `is_note_tweet` | boolean | No | Long-form note tweet (up to 25,000 chars) |
-| `media` | string[] | No | Public image URLs to attach (max 4). `POST /x/media` returns `mediaUrl` values for this field |
+| `media` | string[] | No | Up to 4 image URLs, or exactly 1 MP4 URL. `POST /x/media` returns usable `mediaUrl` values |
 
-**Response:** `{ tweetId, success: true }`
-
-**Errors:** `502 x_write_failed`
+**Response:** `XWriteAction` with HTTP 200 or 202.
 
 ### Delete Tweet
 
@@ -48,7 +60,7 @@ the exact account, tweet ID, and current text before obtaining final approval.
 
 **Body:** `{ "account": "username" }`
 
-**Response:** `{ success: true }`
+**Response:** `XWriteAction` with HTTP 200 or 202.
 
 ### Like Tweet
 
@@ -149,8 +161,7 @@ unapproved retrieved content in a DM.
 |-------|------|----------|-------------|
 | `account` | string | Yes | Connected X username or account ID |
 | `text` | string | Yes | Message text |
-| `media_ids` | string[] | No | Media IDs to attach |
-| `reply_to_message_id` | string | No | Message ID to reply to |
+| `media_ids` | string[] | No | Array containing exactly 1 uploaded media ID |
 
 ### Update Profile
 

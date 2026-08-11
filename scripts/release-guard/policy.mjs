@@ -7,7 +7,6 @@ function parseJsonVersion(raw) {
 }
 
 export const versionSurfaces = [
-  { path: "server.json", get: parseJsonVersion },
   { path: "openclaw.plugin.json", get: parseJsonVersion },
   { path: ".codex-plugin/plugin.json", get: parseJsonVersion },
   { path: ".claude-plugin/plugin.json", get: parseJsonVersion },
@@ -198,6 +197,7 @@ export const jsonFieldExpectations = [
       websiteUrl: "https://docs.xquik.com/mcp/overview",
       "remotes.0.type": "streamable-http",
       "remotes.0.url": "https://xquik.com/mcp",
+      version: "2.6.0",
     },
   },
   {

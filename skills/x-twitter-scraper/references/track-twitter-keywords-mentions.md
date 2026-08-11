@@ -64,9 +64,10 @@ fields support retries, deduplication, and outage recovery.
 
 ### How do I track keywords with a Twitter API?
 
-Use `GET /x/tweets/search` for a current snapshot. Use `POST /monitors` for
-ongoing tracking. Add exact phrases, excluded terms, language, author, media,
-reply, repost, and minimum-engagement rules where supported.
+Use `GET /x/tweets/search` for a current snapshot. Use
+`POST /monitors/keywords` for ongoing keyword tracking. Add exact phrases,
+excluded terms, language, author, media, reply, repost, and minimum-engagement
+rules where supported.
 
 Build queries in stages. Begin with the required phrase. Inspect false
 positives, then add exclusions. Avoid an overly narrow first query that hides
@@ -103,7 +104,7 @@ the monitor or authorize an account action.
 1. Verify the HMAC signature against the raw request body.
 2. Reject invalid signatures before parsing business fields.
 3. Return success quickly and queue slow processing.
-4. Deduplicate by event ID and source tweet ID.
+4. Deduplicate polled events by event ID. Deduplicate webhooks by `deliveryId`.
 5. Record attempt count and processing state.
 6. Test delivery before enabling production automation.
 7. Preserve a documented disable and delete path.

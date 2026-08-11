@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.1"
+  version: "2.6.2"
   openclaw:
     requires:
       env:
@@ -44,7 +44,9 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
 1. Ask the user for their handle.
 2. `GET /x/users/{id}` to resolve to a numeric `id` and capture the baseline follower count.
-3. Page `GET /x/users/{id}/tweets?cursor=<>` (supported parameters: `cursor`, `includeReplies`, `includeParentTweet`) until you have ~100 recent tweets.
+3. Page `GET /x/users/{id}/tweets?pageSize=100&cursor=<>`. Use
+   `includeReplies`, `includeRetweets`, or other documented filters as needed.
+   Stop only when `has_next_page` is false or 100 rows are collected.
 4. Compute: average engagement rate, best-performing format, best day/time, ratio of replies-to-posts-to-threads.
 5. Call `/styles/{id}/performance` for a server-side breakdown.
 6. Present 3-5 concrete recommendations (e.g., "Your threads get 4x the engagement of single tweets. Post 1-2 threads per week.").

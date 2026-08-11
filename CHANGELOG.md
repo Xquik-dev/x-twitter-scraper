@@ -2,6 +2,18 @@
 
 All notable public changes appear in this file.
 
+## [2.6.2] - 2026-08-11
+
+### Fixed
+
+- Align REST, MCP, webhook, extraction, write, article, Radar, and trends guides
+  with the current public API contract.
+- Distinguish the v2.6.2 Skill bundle from hosted MCP v2.6.0.
+- Replace obsolete operation-named MCP types with the 2-tool contract.
+- Document hosted MCP's automatic required idempotency headers.
+- Document automatic cursor recovery for `400`, `409`, and `410` responses.
+- Add regression coverage for high-risk public examples.
+
 ## [2.6.1] - 2026-08-03
 
 ### Security
@@ -38,5 +50,6 @@ All notable public changes appear in this file.
 - Return follow relationships only from explicit relationship checks.
 - Refresh SkillSpector v2.3.7 evidence with 0 findings.
 
+[2.6.2]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.2
 [2.6.1]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.1
 [2.6.0]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.0

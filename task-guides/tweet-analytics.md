@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.1"
+  version: "2.6.2"
   openclaw:
     requires:
       env:
@@ -78,7 +78,7 @@ For small samples, use the live endpoint:
 GET /x/tweets/{id}/favoriters?cursor=<cursor>
 ```
 
-For bulk (up to 1,000 accounts), go through extractions. Estimate first so the user sees the usage estimate:
+For a bounded bulk dataset, use an extraction. Estimate first:
 
 ```
 POST /extractions/estimate
