@@ -68,10 +68,18 @@ def xquik_fetch(path, method="GET", json_body=None, max_retries=3):
 ## Extraction Workflow
 
 ```python
+RESULTS_LIMIT = 1000
+
+def require_explicit_approval(scope: str) -> None:
+    raise RuntimeError(
+        f"Approval required for {scope}. Implement the approval gate first."
+    )
+
 # Step 1: Estimate
 estimate = xquik_fetch("/extractions/estimate", method="POST", json_body={
     "toolType": "reply_extractor",
     "targetTweetId": "1893704267862470862",
+    "resultsLimit": RESULTS_LIMIT,
 })
 
 if not estimate["allowed"]:
@@ -79,9 +87,13 @@ if not estimate["allowed"]:
     exit()
 
 # Step 2: Create job
+require_explicit_approval(
+    "the bounded extraction job, usage, recipients, and retention"
+)
 job = xquik_fetch("/extractions", method="POST", json_body={
     "toolType": "reply_extractor",
     "targetTweetId": "1893704267862470862",
+    "resultsLimit": RESULTS_LIMIT,
 })
 
 # Step 3: Poll until complete (large jobs may return "running")
