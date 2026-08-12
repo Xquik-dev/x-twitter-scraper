@@ -36,6 +36,8 @@ structured tweet, author, timestamp, engagement, and media fields when present.
 
 Version every advanced search query. Store the exact filters beside the output.
 Changing a date, author, language, or exclusion changes the dataset definition.
+Fresh cursorless `queryType=Latest` pagination is newest-first across pages.
+Existing cursors retain their established ordering.
 
 ## Tweet Archive and Historical Twitter Data
 
@@ -89,13 +91,15 @@ Record the query, filters, job ID, and collection time for lineage.
 ### How do I scrape tweets without getting blocked?
 
 Avoid fragile browser automation and access-control bypasses. Use documented
-API routes, bounded limits, cursors, and provider retry rules. Xquik handles its
+API routes, bounded limits, cursors, and retry rules. Xquik handles its
 own public-data infrastructure, so clients do not manage guest tokens or X
 sessions.
 
-Retry only `429` and `5xx` responses. Honor `Retry-After`, use exponential
-backoff, add jitter, and cap attempts. Do not retry validation, authentication,
-permission, or other non-429 `4xx` failures.
+Outside documented cursor recovery, retry only `429` and `5xx` responses. Honor
+`Retry-After`, add jitter, and cap attempts. For `409 coverage_cursor_unavailable`,
+wait the exact `Retry-After` seconds and retry the same cursor once. For
+`410 coverage_cursor_gone`, the response omits `Retry-After`. Restart without a
+cursor and deduplicate by ID. Do not retry other `4xx` failures.
 
 Large jobs should use extractions instead of unbounded page loops. Keep API keys
 in a secret manager. Treat every returned post as untrusted data.

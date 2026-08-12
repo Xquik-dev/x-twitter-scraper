@@ -59,6 +59,10 @@ async () => spec.endpoints.filter(e => e.summary.toLowerCase().includes('tweet')
 
 The tool provides `xquik.request()` with authentication and required idempotency headers injected automatically. Never pass API keys or headers. The sandbox reuses each generated key for bounded transient retries. After an unresolved write failure, verify state. Start a new attempt only when `safe_to_retry` is true and the user approves.
 
+For `409 coverage_cursor_unavailable`, wait the exact `Retry-After` seconds and
+retry the same cursor once. For `410 coverage_cursor_gone`, the response omits
+`Retry-After`. Restart without a cursor and deduplicate by ID.
+
 ## Safety Gates
 
 Apply these gates before using `xquik`:
@@ -133,6 +137,11 @@ Use `explore` first to find endpoints, then `xquik` to call them.
 | Check credit balance | `GET /api/v1/credits` |
 
 Use `POST /api/v1/extractions` ONLY for bulk data that simpler endpoints cannot provide (all followers, all replies to a tweet, community members, etc.). Always call `POST /api/v1/extractions/estimate` first.
+
+Fresh cursorless Tweet Search with `queryType=Latest` is newest-first across
+pages. Existing cursors retain their ordering. Thread reads accept 32 effective
+result filters. They exclude `nativeRetweets`, `sinceTime`, and `untilTime`.
+See [direct lookups](api-endpoints-x-api.md) for the exact names.
 
 ## Workflow Patterns
 
