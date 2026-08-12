@@ -2,8 +2,9 @@
 
 Default v1 responses put a legacy string code in `error`. Send
 `xquik-api-contract: 2026-04-29` to receive an object with `message`, `type`,
-and `code`. The current OpenAPI schema enumerates all 109 codes. This table
-highlights common codes.
+and `code`. OpenAPI enumerates 112 codes, including `closed`, `expired`,
+`missing_url`, and `user_not_found`. This table highlights common codes.
+`closed` and `expired` map to 410. `missing_url` maps to 502.
 
 | Status | Code | Meaning |
 |--------|------|---------|
