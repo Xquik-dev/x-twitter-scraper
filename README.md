@@ -5,7 +5,6 @@
 
 [![Apify Actor](https://apify.com/actor-badge?actor=xquik/x-tweet-scraper)](https://apify.com/xquik/x-tweet-scraper)
 [![npm downloads](https://img.shields.io/npm/dt/x-developer?style=for-the-badge&logo=npm&label=downloads)](https://www.npmjs.com/package/x-developer)
-[![npm monthly downloads](https://img.shields.io/npm/dm/x-developer?style=for-the-badge&logo=npm&label=downloads%2Fmonth)](https://www.npmjs.com/package/x-developer)
 [![npm version](https://img.shields.io/npm/v/x-developer?style=for-the-badge&logo=npm&label=npm)](https://www.npmjs.com/package/x-developer)
 
 [![CI](https://github.com/Xquik-dev/x-twitter-scraper/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/Xquik-dev/x-twitter-scraper/actions/workflows/ci.yml)
@@ -30,11 +29,9 @@
 
 [Xquik](https://docs.xquik.com) provides 128 REST API operations for structured X data and approved account automation. It includes search, profiles, followers, media, communities, trends, monitors, webhooks, exports, MCP, and SDKs.
 
-This repository packages Xquik as an [AI agent Skill](https://skills.sh). It works with Claude Code, Codex, Cursor, Copilot, Gemini CLI, Windsurf, and compatible agents. It routes tasks to REST, MCP, SDKs, webhooks, extractions, or exports.
-
 The npm package `x-developer` contains this Skill and plugin bundle. The separate `x-twitter-scraper` package is the TypeScript SDK.
 
-The `x-developer` bundle is v2.6.3. Hosted MCP v2.6.0 exposes 120 catalog
+The `x-developer` bundle is v2.6.4. Hosted MCP v2.6.0 exposes 120 catalog
 routes through 2 tools.
 Of these, 119 support JSON or text. Binary support downloads use REST. Add
 `https://xquik.com/mcp`. Current clients negotiate MCP `2026-07-28` through
@@ -69,13 +66,6 @@ Compare alternatives with the same query, filters, fields, and row count. Use
 - [Reliability, cost, scale, and legal review](skills/x-twitter-scraper/references/reliable-twitter-data-api-2026.md)
 - [Xquik pricing, filters, and access](skills/x-twitter-scraper/references/best-x-api-alternative.md)
 - [Twitter scraper API selection and safety](skills/x-twitter-scraper/references/twitter-scraper-api-guide.md)
-
-## Usage Control, Rate Limits, and High-Volume Workflows
-
-Use bounded jobs, cursor pagination, and exports for larger workloads. Per
-account, reads allow 300 requests per second, writes allow 120 per minute, and
-deletes allow 60 per minute. Use extraction estimates before bulk work. Prefer
-monitors and HMAC webhooks over repeated polling.
 
 ## Agent Safety And Account Boundary: Xquik X Account Rules
 

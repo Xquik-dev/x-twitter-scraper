@@ -18,7 +18,7 @@ function assertIncludes(source, values) {
 }
 
 const contract = Object.freeze({
-  bundleVersion: "2.6.3",
+  bundleVersion: "2.6.4",
   hostedMcpVersion: "2.6.0",
   eventCursor: "cursor",
   eventFilters: ["monitorId", "keywordMonitorId", "eventType"],
@@ -138,7 +138,7 @@ test("separates the bundle version from hosted MCP", async () => {
 
   assert.equal(packageJson.version, contract.bundleVersion);
   assert.equal(serverJson.version, contract.hostedMcpVersion);
-  assert.match(readme, /bundle is v2\.6\.3/);
+  assert.match(readme, /bundle is v2\.6\.4/);
   assert.match(readme, /Hosted MCP v2\.6\.0/);
   assert.match(mcpize, /Version: `2\.6\.0`/);
   assert.match(versionGuard, /All bundle surfaces at/);
@@ -328,11 +328,16 @@ test("documents the current Error surface", async () => {
   const userGuide = await read("task-guides/user-tweets.md");
 
   for (const document of [errors, types]) {
-    assert.match(document, /109/);
-    assert.match(document, /user_not_found/);
+    assert.match(document, /112/);
+    assertIncludes(document, [
+      "closed",
+      "expired",
+      "missing_url",
+      "user_not_found",
+    ]);
     assert.match(document, /xquik-api-contract: 2026-04-29/);
   }
-  assert.match(types, /error:\s*[\s\S]*ApiErrorCode[\s\S]*message: string; type: ApiErrorType; code: ApiErrorCode/);
+  assert.match(types, /error:\s*[\s\S]*string[\s\S]*message: string; type: ApiErrorType; code: string/);
   assert.match(types, /retryAfter\?: number/);
   assert.match(types, /retryAfterMs\?: number/);
   assert.match(types, /rate_limit_error/);

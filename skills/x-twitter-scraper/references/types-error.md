@@ -1,8 +1,6 @@
 # Xquik TypeScript Types: Error
 
 ```typescript
-type ApiErrorCode = string;
-
 type ApiErrorType =
   | "api_error"
   | "authentication_error"
@@ -14,8 +12,8 @@ type ApiErrorType =
 
 interface ApiError {
   error:
-    | ApiErrorCode
-    | { message: string; type: ApiErrorType; code: ApiErrorCode };
+    | string
+    | { message: string; type: ApiErrorType; code: string };
   message?: string;
   reason?: string;
   retryAfter?: number;
@@ -23,9 +21,9 @@ interface ApiError {
 }
 ```
 
-OpenAPI enumerates all 109 `ApiErrorCode` values, including
-`user_not_found`. Generated SDKs expose that exhaustive enum. The handwritten
-type remains a string for forward compatibility.
+OpenAPI enumerates 112 codes, including `closed`, `expired`, `missing_url`, and
+`user_not_found`. Generated SDKs use that enum. This reference keeps strings
+forward-compatible.
 
 Default v1 errors use the string form. Send
 `xquik-api-contract: 2026-04-29` to receive the structured form.
