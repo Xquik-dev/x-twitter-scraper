@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.2"
+  version: "2.6.3"
   openclaw:
     requires:
       env:
@@ -144,7 +144,6 @@ For the bulk search pathway, use `tweet_search_extractor` with a `searchQuery` t
 ## Common errors
 
 - `404 user_not_found`: handle was misspelled or the account was suspended/deleted
-- `403 protected_account`: the account is private and not following you
 - `402 insufficient_credits`: explain the account state and direct the user to the dashboard
 
 ## Security

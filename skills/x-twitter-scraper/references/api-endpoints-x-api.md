@@ -52,6 +52,8 @@ GET /x/tweets/search?q={query}
 Search using X syntax: keywords, `#hashtags`, `from:user`, `to:user`, `"exact phrases"`, `OR`, `-exclude`.
 
 Returns tweet info with optional engagement metrics (likeCount, retweetCount, replyCount) and optional attached media. Some fields may be omitted if unavailable.
+Fresh cursorless `queryType=Latest` pagination returns newest-first across pages.
+Existing cursors keep their established ordering.
 
 ### Get User
 
@@ -63,12 +65,21 @@ Returns profile info. `id` accepts either an X username without `@` or a numeric
 
 ### Batch & Search Users
 
-```
+```http
 GET /x/users/batch?ids=44196397,783214
-GET /x/users/search?q=founder
+GET /x/users/search?q=founder&minFollowers=1000&verifiedOnly=true
 ```
 
-Batch lookup accepts up to 100 comma-separated numeric user IDs. User search returns matching profiles and may include a pagination cursor.
+Batch lookup accepts up to 100 comma-separated numeric user IDs.
+Search returns matching profiles and may include a `cursor`. All supported
+filters apply before billing.
+
+Filters: `minFollowers`, `maxFollowers`, `minFollowing`, `maxFollowing`,
+`minStatuses`, `maxStatuses`, `minAccountAgeDays`, `verifiedOnly`,
+`verifiedType`, `hasWebsite`, `hasLocation`, `bioContains`, `locationContains`,
+and `usernameContains`. `minPosts` and `maxPosts` alias the status filters.
+Text filters ignore case. `bioContains` matches any comma- or line-separated
+term. Count filters use inclusive bounds.
 
 ### Check Follower
 
@@ -128,6 +139,16 @@ GET /x/tweets/{id}/thread
 ```
 
 Read quote tweets, replies, retweeters, or the conversation thread for a tweet. These are paginated read operations.
+
+Thread reads accept these 32 effective result filters:
+`fromUser`, `toUser`, `mentioning`, `language`, `sinceDate`, `untilDate`,
+`mediaType`, `minFaves`, `minRetweets`, `minReplies`, `minQuotes`, `minViews`,
+`minBookmarks`, `maxFaves`, `maxRetweets`, `maxReplies`, `maxQuotes`,
+`blueVerifiedOnly`, `verifiedOnly`, `replies`, `retweets`, `quotes`,
+`exactPhrase`, `excludeWords`, `anyWords`, `hashtags`, `cashtags`, `url`,
+`conversationId`, `inReplyToTweetId`, `quotesOfTweetId`, and
+`retweetsOfTweetId`. Thread reads do not accept `nativeRetweets`, `sinceTime`,
+or `untilTime`.
 
 ### User Social Graph Reads
 

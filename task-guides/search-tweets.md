@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.2"
+  version: "2.6.3"
   openclaw:
     requires:
       env:
@@ -72,6 +72,9 @@ GET /x/tweets/search?q=<url-encoded query>&queryType=Latest&cursor=<optional>
 Supported query parameters: `q` (URL-encoded), `queryType` (`Latest` or `Top`), `cursor`, `sinceTime`, `untilTime`, `limit`.
 
 Response: `{ tweets: [...], has_next_page: true, next_cursor: "..." }`. Loop until `has_next_page` is false or you hit the number you need.
+
+A fresh cursorless `queryType=Latest` sequence is newest-first across pages.
+Existing cursors retain their established ordering.
 
 ## Bulk Search
 

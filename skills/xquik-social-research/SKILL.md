@@ -41,6 +41,11 @@ Never request X passwords, cookies, session tokens, recovery codes, or 2FA codes
 
 The API base URL is `https://xquik.com`.
 
+Fresh cursorless Tweet Search with `queryType=Latest` is newest-first across
+pages. Existing cursors retain their established ordering. Thread reads accept
+32 effective result filters, excluding `nativeRetweets`, `sinceTime`, and
+`untilTime`. Check OpenAPI for their exact names.
+
 ## Workflow
 
 1. Classify the request as direct read, bulk export, monitor, or account action.
