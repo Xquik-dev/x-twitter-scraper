@@ -2,6 +2,16 @@
 
 All notable public changes appear in this file.
 
+## [2.6.3] - 2026-08-12
+
+### Fixed
+
+- Document support media, replay-safe mutations, and attachment downloads.
+- Document all direct user-search filters and filters-before-billing behavior.
+- Document the 109-code Error surface and exact cursor recovery.
+- Document Latest chronology and all 32 Tweet Thread filters.
+- Remove private reply-collection implementation details.
+
 ## [2.6.2] - 2026-08-11
 
 ### Fixed
@@ -50,6 +60,7 @@ All notable public changes appear in this file.
 - Return follow relationships only from explicit relationship checks.
 - Refresh SkillSpector v2.3.7 evidence with 0 findings.
 
+[2.6.3]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.3
 [2.6.2]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.2
 [2.6.1]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.1
 [2.6.0]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.0

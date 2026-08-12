@@ -11,8 +11,14 @@ async function read(path) {
   return readFile(new URL(path, root), "utf8");
 }
 
+function assertIncludes(source, values) {
+  for (const value of values) {
+    assert.ok(source.includes(value), `Missing ${value}`);
+  }
+}
+
 const contract = Object.freeze({
-  bundleVersion: "2.6.2",
+  bundleVersion: "2.6.3",
   hostedMcpVersion: "2.6.0",
   eventCursor: "cursor",
   eventFilters: ["monitorId", "keywordMonitorId", "eventType"],
@@ -54,18 +60,87 @@ const contract = Object.freeze({
     "trustmrr",
     "wikipedia",
   ],
+  supportStatuses: ["pending", "ready", "failed"],
+  supportDocFields: [
+    "/support/tickets/{id}/messages",
+    "/support/attachments/{id}",
+    "Multipart",
+    "Idempotency-Key",
+    "Idempotency-Replayed",
+    "idempotency_key_conflict",
+    "publicId",
+    "attachments",
+    "10 MB",
+    "25 MB",
+    "30 MB",
+    "`400`",
+    "`404`",
+    "`429`",
+  ],
+  userSearchFilters: [
+    "minFollowers",
+    "maxFollowers",
+    "minFollowing",
+    "maxFollowing",
+    "minStatuses",
+    "maxStatuses",
+    "minAccountAgeDays",
+    "verifiedOnly",
+    "verifiedType",
+    "hasWebsite",
+    "hasLocation",
+    "bioContains",
+    "locationContains",
+    "usernameContains",
+  ],
+  threadFilters: [
+    "fromUser",
+    "toUser",
+    "mentioning",
+    "language",
+    "sinceDate",
+    "untilDate",
+    "mediaType",
+    "minFaves",
+    "minRetweets",
+    "minReplies",
+    "minQuotes",
+    "minViews",
+    "minBookmarks",
+    "maxFaves",
+    "maxRetweets",
+    "maxReplies",
+    "maxQuotes",
+    "blueVerifiedOnly",
+    "verifiedOnly",
+    "replies",
+    "retweets",
+    "quotes",
+    "exactPhrase",
+    "excludeWords",
+    "anyWords",
+    "hashtags",
+    "cashtags",
+    "url",
+    "conversationId",
+    "inReplyToTweetId",
+    "quotesOfTweetId",
+    "retweetsOfTweetId",
+  ],
 });
 
 test("separates the bundle version from hosted MCP", async () => {
   const packageJson = JSON.parse(await read("package.json"));
   const serverJson = JSON.parse(await read("server.json"));
   const readme = await read("README.md");
+  const mcpize = await read("mcpize/SUBMISSION-STEPS.md");
   const versionGuard = await read("scripts/check-versions.mjs");
 
   assert.equal(packageJson.version, contract.bundleVersion);
   assert.equal(serverJson.version, contract.hostedMcpVersion);
-  assert.match(readme, /bundle is v2\.6\.2/);
+  assert.match(readme, /bundle is v2\.6\.3/);
   assert.match(readme, /Hosted MCP v2\.6\.0/);
+  assert.match(mcpize, /Version: `2\.6\.0`/);
   assert.match(versionGuard, /All bundle surfaces at/);
   assert.match(versionGuard, /hosted MCP at/);
 });
@@ -99,9 +174,10 @@ test("documents current monitor bodies and event pagination", async () => {
   assert.match(monitorGuide, /"eventTypes": \["tweet\.new", "tweet\.reply"\]/);
   assert.match(hashtagGuide, /POST \/monitors\/keywords/);
   assert.match(hashtagGuide, /"query": "#buildinpublic lang:en"/);
-  for (const filter of contract.eventFilters) {
-    assert.ok(events.includes("| `" + filter + "` |"));
-  }
+  assertIncludes(
+    events,
+    contract.eventFilters.map((filter) => `| \`${filter}\` |`),
+  );
   assert.ok(events.includes("| `" + contract.eventCursor + "` |"));
   assert.doesNotMatch(monitorGuide, /monitor_id|webhook_url/);
 });
@@ -116,9 +192,7 @@ test("documents replay-safe webhook signing and bounded retries", async () => {
   for (const field of contract.webhookCreateFields) {
     assert.match(taskGuide, new RegExp(`"${field}"`));
   }
-  for (const header of contract.webhookSignatureHeaders) {
-    assert.match(guide, new RegExp(header));
-  }
+  assertIncludes(guide, contract.webhookSignatureHeaders);
   assert.match(guide, /<timestamp>\.<nonce>\.<raw JSON body>/);
   assert.match(guide, /claimNonce\(nonce\)/);
   assert.match(guide, /claim_nonce\(nonce\)/);
@@ -167,9 +241,10 @@ test("documents canonical X write fields and durable envelopes", async () => {
   );
   const profile = await read("task-guides/update-x-profile.md");
 
-  for (const field of contract.writeTweetFields) {
-    assert.ok(writeReference.includes("| `" + field + "` |"));
-  }
+  assertIncludes(
+    writeReference,
+    contract.writeTweetFields.map((field) => `| \`${field}\` |`),
+  );
   assert.match(writeReference, /Idempotency-Key/);
   assert.match(writeReference, /Hosted MCP injects it\s+automatically/);
   assert.match(writeReference, /HTTP 200/);
@@ -209,13 +284,27 @@ test("documents automatic cursor recovery across public entry points", async () 
     read("task-guides/search-tweets.md"),
     read("task-guides/user-tweets.md"),
     read("task-guides/tweet-replies.md"),
+    read("skills/x-twitter-scraper/references/mcp-tools.md"),
+    read("skills/x-twitter-scraper/references/mcp-setup.md"),
+    read("skills/x-twitter-scraper/references/workflows.md"),
+    read("skills/x-twitter-scraper/references/scrape-export-twitter-data.md"),
   ]);
 
   for (const document of documents) {
-    assert.match(document, /invalid_coverage_cursor/);
     assert.match(document, /coverage_cursor_unavailable/);
+    assert.match(document, /wait the exact\s+`Retry-After` seconds/i);
+    assert.match(document, /retry the same cursor once/i);
     assert.match(document, /coverage_cursor_gone/);
-    assert.match(document, /Retry-After/);
+    assert.match(document, /(?:omits|without|no)\s+`Retry-After`/i);
+    assert.match(document, /restart without a\s+cursor/i);
+    assert.match(document, /deduplicate by (?:Tweet )?ID/i);
+  }
+
+  for (const document of documents.slice(0, 6)) {
+    assert.match(document, /invalid_coverage_cursor/);
+  }
+  for (const document of documents.slice(-2)) {
+    assert.match(document, /Outside documented cursor recovery/);
   }
 
   const reference = documents[1];
@@ -229,6 +318,33 @@ test("documents automatic cursor recovery across public entry points", async () 
   assert.match(errors, /\| 410 \| `coverage_cursor_gone`/);
 });
 
+test("documents the current Error surface", async () => {
+  const errors = await read(
+    "skills/x-twitter-scraper/references/api-endpoints-error-codes.md",
+  );
+  const types = await read(
+    "skills/x-twitter-scraper/references/types-error.md",
+  );
+  const userGuide = await read("task-guides/user-tweets.md");
+
+  for (const document of [errors, types]) {
+    assert.match(document, /109/);
+    assert.match(document, /user_not_found/);
+    assert.match(document, /xquik-api-contract: 2026-04-29/);
+  }
+  assert.match(types, /error:\s*[\s\S]*ApiErrorCode[\s\S]*message: string; type: ApiErrorType; code: ApiErrorCode/);
+  assert.match(types, /retryAfter\?: number/);
+  assert.match(types, /retryAfterMs\?: number/);
+  assert.match(types, /rate_limit_error/);
+  assert.match(errors, /requires an integer `Retry-After` response\s+header/);
+  assert.match(errors, /`410 coverage_cursor_gone` has no `Retry-After` header/);
+  assert.match(errors, /"error": "coverage_cursor_unavailable"/);
+  assert.match(errors, /"error": "coverage_cursor_gone"/);
+  assert.doesNotMatch(errors, /stream_registration_failed/);
+  assert.match(userGuide, /404 user_not_found/);
+  assert.doesNotMatch(userGuide, /protected_account/);
+});
+
 test("documents the wrapped article response", async () => {
   const article = await read(
     "skills/x-twitter-scraper/references/api-endpoints-x-api.md",
@@ -237,9 +353,10 @@ test("documents the wrapped article response", async () => {
     .split("### Get Article", 2)[1]
     .split("### Search Tweets", 1)[0];
 
-  for (const field of contract.articleFields) {
-    assert.match(articleSection, new RegExp(`"${field}"`));
-  }
+  assertIncludes(
+    articleSection,
+    contract.articleFields.map((field) => `"${field}"`),
+  );
   assert.doesNotMatch(
     articleSection,
     /bodyHtml|coverImage"|bookmarkCount|retweetCount/,
@@ -267,6 +384,72 @@ test("documents current pagination, filters, and export formats", async () => {
   }
   assert.doesNotMatch(exportGuide, /JSONL|format=jsonl/i);
   assert.doesNotMatch(search, /1,000 (?:tweets|rows) per job/i);
+  assert.match(replies, /collection across available\s+read strategies/);
+  assert.doesNotMatch(replies, /It merges available/);
+});
+
+test("documents Latest ordering and thread result filters", async () => {
+  const taskGuide = await read("task-guides/search-tweets.md");
+  const skill = await read("skills/x-twitter-scraper/SKILL.md");
+  const mcp = await read("skills/x-twitter-scraper/references/mcp-tools.md");
+  const research = await read("skills/xquik-social-research/SKILL.md");
+  const scraper = await read(
+    "skills/x-twitter-scraper/references/scrape-export-twitter-data.md",
+  );
+  const direct = await read(
+    "skills/x-twitter-scraper/references/api-endpoints-x-api.md",
+  );
+
+  for (const document of [taskGuide, skill, mcp, research, scraper, direct]) {
+    assert.match(document, /fresh cursorless[\s\S]*queryType=Latest[\s\S]*newest-first across\s+pages/i);
+    assert.match(document, /existing cursors (?:keep|retain)[\s\S]{0,60}ordering/i);
+  }
+
+  const acceptedThreadFilters = direct
+    .split("Thread reads accept these 32 effective result filters:", 2)[1]
+    .split("Thread reads do not accept", 1)[0];
+  assert.equal(contract.threadFilters.length, 32);
+  assertIncludes(
+    acceptedThreadFilters,
+    contract.threadFilters.map((filter) => `\`${filter}\``),
+  );
+  assert.doesNotMatch(acceptedThreadFilters, /nativeRetweets|sinceTime|untilTime/);
+  assert.match(direct, /32 effective result filters/);
+  assert.match(direct, /do not accept `nativeRetweets`, `sinceTime`,\s+or `untilTime`/);
+  for (const document of [skill, mcp, research]) {
+    assert.match(document, /Thread reads accept\s+(?:the\s+)?32 effective\s+result filters/i);
+    assert.match(document, /exclud(?:e|ing)[\s\S]{0,30}`nativeRetweets`, `sinceTime`, and\s+`untilTime`/);
+  }
+});
+
+test("documents direct user filters and support media contracts", async () => {
+  const direct = await read(
+    "skills/x-twitter-scraper/references/api-endpoints-x-api.md",
+  );
+  const support = await read(
+    "skills/x-twitter-scraper/references/api-endpoints-support.md",
+  );
+  const supportTypes = await read(
+    "skills/x-twitter-scraper/references/types-support.md",
+  );
+  const readme = await read("README.md");
+
+  assertIncludes(direct, contract.userSearchFilters);
+  assert.match(direct, /All supported\s+filters apply before billing/);
+  assert.match(direct, /`minPosts` and `maxPosts` alias/);
+  assertIncludes(support, contract.supportDocFields);
+  assertIncludes(support, contract.supportStatuses);
+  assertIncludes(supportTypes, contract.supportStatuses);
+  assert.match(
+    support,
+    /`201`[\s\S]*`200`[\s\S]*`409 idempotency_key_conflict`/,
+  );
+  assert.match(support, /Range[\s\S]*`206`[\s\S]*`416 invalid_range`/);
+  assert.match(
+    supportTypes,
+    /interface SupportAttachment[\s\S]*interface SupportMutationResponse/,
+  );
+  assert.match(readme, /Support \|[^\n]*download attachments/);
 });
 
 test("documents current Radar and X trends contracts", async () => {
@@ -279,9 +462,7 @@ test("documents current Radar and X trends contracts", async () => {
   const trends = await read("task-guides/x-trends.md");
 
   assert.match(radar, /`after`/);
-  for (const source of contract.radarSources) {
-    assert.match(`${radar}\n${radarTypes}`, new RegExp(`\\b${source}\\b`));
-  }
+  assertIncludes(`${radar}\n${radarTypes}`, contract.radarSources);
   assert.match(trends, /tweetVolume/);
   assert.match(trends, /promotedContent/);
   assert.doesNotMatch(trends, /`volume`|`context`/);

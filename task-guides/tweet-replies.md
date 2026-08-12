@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.2"
+  version: "2.6.3"
   openclaw:
     requires:
       env:
@@ -75,10 +75,9 @@ GET /x/tweets/{id}/replies?mode=complete&limit=25000
 }
 ```
 
-Complete mode performs bounded maximum-coverage collection. It merges available
-timeline views, rankings, forward cursors, labeled hidden-content branches,
-exact-parent time partitions, and search. It returns `424 replies_incomplete`
-below 80% direct-reply coverage. The 424 body still contains safe partial rows.
+Complete mode performs bounded maximum-coverage collection across available
+read strategies. It returns `424 replies_incomplete` below 80% direct-reply coverage.
+The 424 body still contains safe partial rows.
 
 Complete mode accepts only `limit` from 1 to 25,000. Remove cursors,
 `pageSize`, time ranges, and Tweet filters.

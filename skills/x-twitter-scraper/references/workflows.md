@@ -29,8 +29,8 @@ const headers = { "x-api-key": apiKey, "Content-Type": "application/json" };
 
 ## Retry with Exponential Backoff
 
-Retry only idempotent requests after `429` and `5xx`. Never automatically retry
-`POST`, `PATCH`, or `DELETE`. Max 3 retries:
+Outside documented cursor recovery, retry only idempotent requests after `429`
+and `5xx`. Never automatically retry `POST`, `PATCH`, or `DELETE`. Max 3 retries:
 
 ```javascript
 async function xquikFetch(path, options = {}) {
@@ -89,6 +89,10 @@ async function fetchAllPages(path, dataKey) {
 ```
 
 Cursors are opaque strings. Never decode or construct them manually.
+
+For `409 coverage_cursor_unavailable`, wait the exact `Retry-After` seconds and
+retry the same cursor once. For `410 coverage_cursor_gone`, the response omits
+`Retry-After`. Restart without a cursor and deduplicate by ID.
 
 ## Complete Extraction Workflow
 

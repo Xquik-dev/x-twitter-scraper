@@ -11,7 +11,7 @@ API keys.
 | Endpoint | `https://xquik.com/mcp` |
 | Authentication | OAuth 2.1 discovery; API key fallback |
 | Hosted MCP version | `2.6.0` |
-| Skill bundle version | `2.6.2` |
+| Skill bundle version | `2.6.3` |
 
 Current clients negotiate MCP `2026-07-28` through `server/discover`.
 Use a current MCP SDK. It adds request `_meta` and protocol headers.
@@ -329,6 +329,8 @@ Handle failures from structured error fields:
 
 - `401`: reconnect OAuth or replace the revoked API key.
 - `402`: report payment options. Never create checkout without confirmation.
+- `409 coverage_cursor_unavailable`: wait the exact `Retry-After` seconds, then retry the same cursor once.
+- `410 coverage_cursor_gone`: no `Retry-After`; restart without a cursor and deduplicate by ID.
 - `429`: honor `Retry-After`.
 - `5xx`: retry read-only requests with bounded exponential backoff.
 
