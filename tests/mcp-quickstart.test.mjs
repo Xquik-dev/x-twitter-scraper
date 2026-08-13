@@ -45,7 +45,7 @@ test("packaged MCP entry supports the offline quickstart workflow", () => {
   );
   assert.equal(
     responses[0].result._meta["io.modelcontextprotocol/serverInfo"].version,
-    "2.6.4",
+    "2.6.5",
   );
   assert.deepEqual(responses[0].result.capabilities, {
     tools: { listChanged: false },
@@ -69,5 +69,5 @@ test("packaged MCP entry supports the offline quickstart workflow", () => {
   assert.ok(resultText.includes("Add https://xquik.com/mcp to"));
   assert.match(resultText, /OAuth 2\.1/u);
   assert.equal(responses[3].result.protocolVersion, "2025-11-25");
-  assert.equal(responses[3].result.serverInfo.version, "2.6.4");
+  assert.equal(responses[3].result.serverInfo.version, "2.6.5");
 });
