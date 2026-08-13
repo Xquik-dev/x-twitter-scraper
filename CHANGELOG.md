@@ -2,6 +2,12 @@
 
 All notable public changes appear in this file.
 
+## [2.6.5] - 2026-08-13
+
+### Fixed
+
+- Add Claude Code user configuration metadata for API key setup.
+
 ## [2.6.4] - 2026-08-12
 
 - Align public Error docs with the 112-code OpenAPI contract.
@@ -64,6 +70,7 @@ All notable public changes appear in this file.
 - Return follow relationships only from explicit relationship checks.
 - Refresh SkillSpector v2.3.7 evidence with 0 findings.
 
+[2.6.5]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.5
 [2.6.4]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.4
 [2.6.3]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.3
 [2.6.2]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.2

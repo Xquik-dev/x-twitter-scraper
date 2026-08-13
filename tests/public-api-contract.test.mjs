@@ -18,7 +18,7 @@ function assertIncludes(source, values) {
 }
 
 const contract = Object.freeze({
-  bundleVersion: "2.6.4",
+  bundleVersion: "2.6.5",
   hostedMcpVersion: "2.6.0",
   eventCursor: "cursor",
   eventFilters: ["monitorId", "keywordMonitorId", "eventType"],
