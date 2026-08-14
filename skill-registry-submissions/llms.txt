@@ -1,0 +1,7 @@
+# Xquik Agent Skill and MCP
+
+- Skill: https://github.com/Xquik-dev/x-twitter-scraper
+- Install: npx skills@1.5.3 add Xquik-dev/x-twitter-scraper
+- MCP: https://xquik.com/mcp
+- Docs: https://docs.xquik.com
+- Independent third-party service. Not affiliated with X Corp.

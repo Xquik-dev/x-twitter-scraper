@@ -1,0 +1,15 @@
+{
+  "generatedAt": "2026-08-14T15:50:47.152Z",
+  "searchedRepoCount": 1472,
+  "agentSkillRepoCount": 925,
+  "withoutXquikCount": 900,
+  "alreadyHasXquikCount": 25,
+  "classifications": {
+    "already-has-xquik": 25,
+    "community-catalog": 88,
+    "first-party-collection": 25,
+    "single-skill-or-narrow-collection": 721,
+    "skill-collection": 59,
+    "tooling-or-spec": 7
+  }
+}

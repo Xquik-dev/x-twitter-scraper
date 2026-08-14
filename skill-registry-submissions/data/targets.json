@@ -1,0 +1,44 @@
+{
+  "prAuthor": "kriptoburak",
+  "forbiddenAuthors": ["Xquik-dev"],
+  "sourceRepo": "https://github.com/Xquik-dev/x-twitter-scraper",
+  "install": "npx skills@1.5.3 add Xquik-dev/x-twitter-scraper",
+  "mcpUrl": "https://xquik.com/mcp",
+  "targets": [
+    {
+      "fullName": "docker/mcp-registry",
+      "fit": "mcp",
+      "mode": "remote-server-files",
+      "prTitle": "Add xquik-remote MCP server",
+      "eligible": true
+    },
+    {
+      "fullName": "ComposioHQ/awesome-claude-skills",
+      "fit": "skill",
+      "mode": "in-tree-skill",
+      "prTitle": "Add X Twitter Scraper skill",
+      "eligible": true
+    },
+    {
+      "fullName": "skillmatic-ai/awesome-agent-skills",
+      "fit": "skill",
+      "mode": "readme-link",
+      "prTitle": "Add X Twitter Scraper agent skill",
+      "eligible": true
+    },
+    {
+      "fullName": "heilcheng/awesome-agent-skills",
+      "fit": "skill",
+      "mode": "readme-link",
+      "prTitle": "feat: add x-twitter-scraper skill",
+      "eligible": true
+    },
+    {
+      "fullName": "karanb192/awesome-claude-skills",
+      "fit": "skill",
+      "mode": "readme-structured",
+      "prTitle": "Add x-twitter-scraper to Documentation & Automation",
+      "eligible": true
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lfx-xquik"
+version = "0.1.0"
+description = "Langflow extension for bounded X/Twitter search through Xquik. Not affiliated with X Corp."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Xquik", email = "support@xquik.com" }]
+dependencies = []
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/lfx_xquik"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src/lfx_xquik" = "lfx_xquik"
+
+[tool.langflow.extension]
+id = "lfx-xquik"
+version = "0.1.0"
+name = "Xquik"
+
+[tool.langflow.extension.lfx]
+compat = ["1"]
+
+[[tool.langflow.extension.bundles]]
+name = "xquik"
+path = "components/xquik"
