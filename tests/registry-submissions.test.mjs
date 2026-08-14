@@ -37,14 +37,21 @@ test("keeps Docker remote MCP files in the official remote-server shape", async 
   assert.match(readme, /https:\/\/docs\.xquik\.com\/mcp\/overview/);
 });
 
-test("prepares kriptoburak-only third-party targets", async () => {
+test("skips third-party targets that already have a kriptoburak PR", async () => {
   const targets = JSON.parse(
     await read("skill-registry-submissions/data/targets.json"),
   );
   assert.equal(targets.prAuthor, "kriptoburak");
   assert.ok(targets.forbiddenAuthors.includes("Xquik-dev"));
-  assert.equal(targets.targets.length, 5);
-  assert.ok(targets.targets.every((target) => target.eligible));
+  assert.match(targets.rule, /already has an open PR/);
+  assert.ok(targets.targets.length >= 5);
+  for (const target of targets.targets) {
+    assert.equal(target.eligible, false, `${target.fullName} must not get a duplicate PR`);
+    assert.ok(
+      target.existing?.open?.length || target.existing?.merged?.length,
+      `${target.fullName} must record an existing PR`,
+    );
+  }
 });
 
 test("ships a catalog SKILL.md with safety gates", async () => {

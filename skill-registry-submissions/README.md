@@ -16,20 +16,21 @@ Connect remote MCP at `https://xquik.com/mcp`.
 
 Open every third-party pull request from [kriptoburak](https://github.com/kriptoburak). Do not open those pull requests from Xquik-dev.
 
-This environment currently authenticates to GitHub as the `cursor` integration on `Xquik-dev/x-twitter-scraper`. It cannot fork or open pull requests as kriptoburak until `KRIPTOBURAK_GITHUB_TOKEN` is available.
+This Cloud Agent keeps the default `cursor` login for `Xquik-dev/x-twitter-scraper`. Third-party forks and PRs use a separate GitHub CLI login as [kriptoburak](https://github.com/kriptoburak). Do not ping maintainers while a review is waiting. Rebase when a branch is behind, and reply only when there is new evidence.
 
-## What to submit
+## Already open as kriptoburak
 
-Maintainers reject SaaS dumps, AI-generated list spam, and skills that do not match the repo. Each target below is a fit, not a volume play.
+Do not open a duplicate. kriptoburak currently has thousands of open GitHub PRs. These catalog targets already have an Xquik PR:
 
-| Target | Fit | Action | Why reviewers should accept it |
-| --- | --- | --- | --- |
-| [docker/mcp-registry](https://github.com/docker/mcp-registry) | Remote MCP catalog | Copy `docker-mcp-registry/xquik-remote/` | Official remote-server layout: `server.yaml`, empty `tools.json`, docs-only `readme.md`, OAuth |
-| [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) | In-tree skill | Add `x-twitter-scraper/SKILL.md` plus README row | Their CONTRIBUTING asks for that folder layout; they already list Twitter skills |
-| [skillmatic-ai/awesome-agent-skills](https://github.com/skillmatic-ai/awesome-agent-skills) | Skill index | One README link | General Agent Skills list; MIT skill with SKILL.md |
-| [heilcheng/awesome-agent-skills](https://github.com/heilcheng/awesome-agent-skills) | Skill index | One README metadata row | Index of SKILL.md packages |
-| [karanb192/awesome-claude-skills](https://github.com/karanb192/awesome-claude-skills) | Skill index | Structured README block | Required Source / Description / Use Case / Stars fields |
-| Langflow | Framework plugin | Ship `langflow-extension/` as `lfx-xquik` | Langflow wants pip extensions, not a vendor dump into core |
+| Target | Status | Existing PR |
+| --- | --- | --- |
+| [docker/mcp-registry](https://github.com/docker/mcp-registry) | Open | https://github.com/docker/mcp-registry/pull/4371 |
+| [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) | Open | https://github.com/ComposioHQ/awesome-claude-skills/pull/1204 |
+| [skillmatic-ai/awesome-agent-skills](https://github.com/skillmatic-ai/awesome-agent-skills) | Open | https://github.com/skillmatic-ai/awesome-agent-skills/pull/49 |
+| [heilcheng/awesome-agent-skills](https://github.com/heilcheng/awesome-agent-skills) | Open | https://github.com/heilcheng/awesome-agent-skills/pull/290 |
+| [karanb192/awesome-claude-skills](https://github.com/karanb192/awesome-claude-skills) | Open | https://github.com/karanb192/awesome-claude-skills/pull/27 |
+| [langflow-ai/langflow](https://github.com/langflow-ai/langflow) | Open | https://github.com/langflow-ai/langflow/pull/13306 |
+| [punkpeye/awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers) | Merged, plus open update | https://github.com/punkpeye/awesome-mcp-servers/pull/4464, https://github.com/punkpeye/awesome-mcp-servers/pull/5940 |
 
 ## Do not submit
 

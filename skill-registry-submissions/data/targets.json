@@ -4,41 +4,85 @@
   "sourceRepo": "https://github.com/Xquik-dev/x-twitter-scraper",
   "install": "npx skills@1.5.3 add Xquik-dev/x-twitter-scraper",
   "mcpUrl": "https://xquik.com/mcp",
+  "kriptoburakOpenPrCount": 4178,
+  "rule": "Do not open a new PR if kriptoburak already has an open PR, a merged PR, or the repo already lists Xquik.",
   "targets": [
     {
       "fullName": "docker/mcp-registry",
       "fit": "mcp",
-      "mode": "remote-server-files",
-      "prTitle": "Add xquik-remote MCP server",
-      "eligible": true
+      "eligible": false,
+      "skipReason": "kriptoburak already has an open PR.",
+      "existing": {
+        "open": ["https://github.com/docker/mcp-registry/pull/4371"],
+        "closed": [
+          "https://github.com/docker/mcp-registry/pull/4234",
+          "https://github.com/docker/mcp-registry/pull/4142",
+          "https://github.com/docker/mcp-registry/pull/3949",
+          "https://github.com/docker/mcp-registry/pull/3229"
+        ]
+      }
     },
     {
       "fullName": "ComposioHQ/awesome-claude-skills",
       "fit": "skill",
-      "mode": "in-tree-skill",
-      "prTitle": "Add X Twitter Scraper skill",
-      "eligible": true
+      "eligible": false,
+      "skipReason": "kriptoburak already has open x-twitter-scraper PRs.",
+      "existing": {
+        "open": [
+          "https://github.com/ComposioHQ/awesome-claude-skills/pull/1204",
+          "https://github.com/ComposioHQ/awesome-claude-skills/pull/553"
+        ]
+      }
     },
     {
       "fullName": "skillmatic-ai/awesome-agent-skills",
       "fit": "skill",
-      "mode": "readme-link",
-      "prTitle": "Add X Twitter Scraper agent skill",
-      "eligible": true
+      "eligible": false,
+      "skipReason": "kriptoburak already has an open Xquik listing PR.",
+      "existing": {
+        "open": ["https://github.com/skillmatic-ai/awesome-agent-skills/pull/49"]
+      }
     },
     {
       "fullName": "heilcheng/awesome-agent-skills",
       "fit": "skill",
-      "mode": "readme-link",
-      "prTitle": "feat: add x-twitter-scraper skill",
-      "eligible": true
+      "eligible": false,
+      "skipReason": "kriptoburak already has open Xquik listing PRs.",
+      "existing": {
+        "open": [
+          "https://github.com/heilcheng/awesome-agent-skills/pull/290",
+          "https://github.com/heilcheng/awesome-agent-skills/pull/228",
+          "https://github.com/heilcheng/awesome-agent-skills/pull/142"
+        ]
+      }
     },
     {
       "fullName": "karanb192/awesome-claude-skills",
       "fit": "skill",
-      "mode": "readme-structured",
-      "prTitle": "Add x-twitter-scraper to Documentation & Automation",
-      "eligible": true
+      "eligible": false,
+      "skipReason": "kriptoburak already has an open x-twitter-scraper PR.",
+      "existing": {
+        "open": ["https://github.com/karanb192/awesome-claude-skills/pull/27"]
+      }
+    },
+    {
+      "fullName": "langflow-ai/langflow",
+      "fit": "plugin",
+      "eligible": false,
+      "skipReason": "kriptoburak already has an open Langflow component PR.",
+      "existing": {
+        "open": ["https://github.com/langflow-ai/langflow/pull/13306"]
+      }
+    },
+    {
+      "fullName": "punkpeye/awesome-mcp-servers",
+      "fit": "mcp",
+      "eligible": false,
+      "skipReason": "Already merged; a follow-up update PR is also open.",
+      "existing": {
+        "merged": ["https://github.com/punkpeye/awesome-mcp-servers/pull/4464"],
+        "open": ["https://github.com/punkpeye/awesome-mcp-servers/pull/5940"]
+      }
     }
   ]
 }
