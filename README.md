@@ -11,7 +11,7 @@
 [![CodeQL](https://github.com/Xquik-dev/x-twitter-scraper/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/Xquik-dev/x-twitter-scraper/actions/workflows/codeql.yml)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13731/badge)](https://www.bestpractices.dev/projects/13731)
 [![MIT license](https://img.shields.io/npm/l/x-developer?logo=opensourceinitiative)](LICENSE)
-[![Smithery](https://smithery.ai/badge/xquik/x-twitter-scraper)](https://smithery.ai/servers/xquik/x-twitter-scraper)
+[![Smithery](https://img.shields.io/badge/Smithery-listed-111)](https://smithery.ai/servers/xquik/x-twitter-scraper)
 
 <table>
   <tr>
@@ -31,16 +31,7 @@
 
 The npm package `x-developer` contains this Skill and plugin bundle. The separate `x-twitter-scraper` package is the TypeScript SDK.
 
-The `x-developer` bundle is v2.6.4. Hosted MCP v2.6.0 exposes 120 catalog
-routes through 2 tools.
-Of these, 119 support JSON or text. Binary support downloads use REST. Add
-`https://xquik.com/mcp`. Current clients negotiate MCP `2026-07-28` through
-`server/discover`. Modern calls need no initialization session. Stateless
-2025-era clients remain compatible. Follow the
-[client compatibility guide](https://docs.xquik.com/mcp/overview#client-compatibility).
-OAuth-capable clients use OAuth 2.1. ChatGPT custom apps require OAuth.
-Eight credential, checkout, or guest-wallet
-operations remain outside MCP.
+The `x-developer` bundle is v2.6.4. Hosted MCP v2.6.0 exposes 120 catalog routes through 2 tools. Of these, 119 support JSON or text. Binary support downloads use REST. Add `https://xquik.com/mcp`. Current clients negotiate MCP `2026-07-28` through `server/discover`. Modern calls need no initialization session. Stateless 2025-era clients remain compatible. Follow the [client compatibility guide](https://docs.xquik.com/mcp/overview#client-compatibility). OAuth-capable clients use OAuth 2.1. ChatGPT custom apps require OAuth. Eight credential, checkout, or guest-wallet operations remain outside MCP.
 
 > **Codex OAuth compatibility:** Affected Codex releases discard the RFC 9207 `iss` callback value even though Xquik returns it. If Codex reports `Authorization server response missing required issuer: expected https://xquik.com`, use `XQUIK_API_KEY` through the Codex `bearer_token_env_var` setting. Follow the [Codex OAuth troubleshooting guide](https://docs.xquik.com/guides/troubleshooting#codex-oauth-issuer-validation-error) and track [openai/codex#31573](https://github.com/openai/codex/issues/31573).
 
