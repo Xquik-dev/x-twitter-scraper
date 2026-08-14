@@ -1,1 +1,0 @@
-- **x-twitter-scraper** (https://github.com/Xquik-dev/x-twitter-scraper) — Bounded X/Twitter REST, MCP, exports, and confirmation-gated publishing through Xquik. Install: `npx skills@1.5.3 add Xquik-dev/x-twitter-scraper`.

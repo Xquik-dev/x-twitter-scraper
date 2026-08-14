@@ -1,1 +1,0 @@
-- [X Twitter Scraper](./x-twitter-scraper/) - Bounded X/Twitter REST, MCP, exports, and confirmation-gated publishing through Xquik. Credit: Based on Xquik's public skill.

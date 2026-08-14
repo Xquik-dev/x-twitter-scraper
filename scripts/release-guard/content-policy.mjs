@@ -354,7 +354,7 @@ export const contentChecks = [
     required: [
       "developers and agents",
       "`skills/`, `commands/`, `task-guides/`",
-      "`docker-mcp-registry/`, `mcpize/`, `skill-registry-submissions/`",
+      "`docker-mcp-registry/`, `mcpize/`",
     ],
     forbidden: ["AI coding agents", "smithery.yaml", "`docs/`", "`src/`"],
   },
@@ -362,7 +362,7 @@ export const contentChecks = [
     path: ".github/SECURITY.md",
     required: [
       "`skills/`, `task-guides/`, `commands/`",
-      "`.claude-plugin/`, `.codex-plugin/`, `openclaw.plugin.json`, `skills.sh.json`, `server.json`, `.mcp.json`, `docker-mcp-registry/`, `mcpize/`, `skill-registry-submissions/`",
+      "`.claude-plugin/`, `.codex-plugin/`, `openclaw.plugin.json`, `skills.sh.json`, `server.json`, `.mcp.json`, `docker-mcp-registry/`, `mcpize/`",
     ],
     forbidden: ["smithery.yaml", "The skill files (`skills/`, `commands/`, `.claude-plugin/`)"],
   },
@@ -404,7 +404,7 @@ export const contentChecks = [
   },
   {
     path: "docker-mcp-registry/xquik-remote/tools.json",
-    required: ["[]"],
-    forbidden: ["Execute confirmed Xquik API calls", "JavaScript expression", "Send confirmed Xquik API requests"],
+    required: ["Send confirmed Xquik API requests", "Bounded request"],
+    forbidden: ["Execute confirmed Xquik API calls", "JavaScript expression"],
   },
 ];

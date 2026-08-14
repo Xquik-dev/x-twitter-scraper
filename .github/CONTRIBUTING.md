@@ -7,7 +7,7 @@ Thanks for your interest in improving `x-twitter-scraper`.
 This repo packages Xquik as an X Twitter Scraper API skill, MCP listing, SDK handoff, and public integration guide for developers and agents. Changes should focus on:
 
 - Skill instruction clarity (`skills/`, `commands/`, `task-guides/`)
-- MCP and marketplace metadata (`server.json`, `.mcp.json`, `docker-mcp-registry/`, `mcpize/`, `skill-registry-submissions/`)
+- MCP and marketplace metadata (`server.json`, `.mcp.json`, `docker-mcp-registry/`, `mcpize/`)
 - Cross-agent compatibility (SKILL.md spec adherence)
 - Documentation and package metadata (`README.md`, `package.json`, plugin manifests)
 
