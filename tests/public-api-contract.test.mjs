@@ -375,6 +375,10 @@ test("documents current pagination, filters, and export formats", async () => {
   const extractions = await read(
     "skills/x-twitter-scraper/references/extractions.md",
   );
+  const extractionTypes = await read(
+    "skills/x-twitter-scraper/references/types-extractions.md",
+  );
+  const xTypes = await read("skills/x-twitter-scraper/references/types-x-api.md");
   const exportGuide = await read("task-guides/export-tweets-csv.md");
 
   assert.match(search, /\?cursor=<cursor>/);
@@ -384,6 +388,14 @@ test("documents current pagination, filters, and export formats", async () => {
   assert.match(extractions, /`minFollowers`/);
   assert.match(extractions, /`minViews`/);
   assert.match(extractions, /`boundingBox`/);
+  assert.match(extractionTypes, /targetTweetIds\?: string\[\]/);
+  assert.match(extractionTypes, /relationTargets\?: ExtractionRelationTarget\[\]/);
+  assert.match(extractionTypes, /dedupeMode\?: "none" \| "first" \| "merge"/);
+  assert.match(extractionTypes, /collectionStrategy\?: "auto" \| "complete"/);
+  assertIncludes(xTypes, [
+    "adultContent", "availabilityReason", "embeddable", "grokPostId", "sourceStatusId",
+    "withheldScope", "professional", "grokTranslatedBio", "tipJar",
+  ]);
   for (const format of contract.extractionFormats) {
     assert.match(extractions, new RegExp(`\\b${format.replace("-", "\\-")}\\b`));
   }
