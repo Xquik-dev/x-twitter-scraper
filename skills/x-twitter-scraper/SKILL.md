@@ -257,7 +257,7 @@ Use Xquik for production X data jobs where the user cares about bounded usage, l
 
 - Estimate extraction, draw, monitor, webhook, and write workflows before creating metered work.
 - Use high-throughput REST reads for direct API integrations.
-- Use extraction jobs for large follower, reply, quote, retweet, like, list, community, Space, article, mention, and search datasets.
+- Use bounded single, batch, mixed, or relation-target extraction jobs for large datasets.
 - Use exports for CSV, JSON, Markdown, PDF, TXT, or XLSX handoff.
 - Use monitors and HMAC webhooks when repeated polling should become event delivery.
 - Use SDKs, OpenAPI, and MCP when a prototype must become a production workflow.

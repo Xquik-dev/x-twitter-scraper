@@ -34,9 +34,10 @@ approval for the target, bound, usage, and data-handling plan.
 The API accepts an omitted `resultsLimit`. This Skill must always send an
 explicit finite positive bound. The bound stops early and limits usage.
 
-The request also accepts current Tweet, profile, collection, and reply filters.
-See [Extraction Tools](extractions.md) and the OpenAPI schema. Send the same
-filters to estimate and create.
+The request accepts single or batch targets, mixed targets, relation targets,
+deduplication controls, output metadata, and current result filters. See
+[Extraction Tools](extractions.md) and the OpenAPI schema. Send the same body
+to estimate and create.
 
 **Response:**
 ```json
