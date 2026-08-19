@@ -1,0 +1,370 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "xquik",
+  "homepage": "https://docs.xquik.com",
+  "items": [
+    {
+      "name": "x-twitter-scraper",
+      "type": "registry:item",
+      "title": "X Twitter Scraper Skill",
+      "description": "Install the Xquik Skill for X/Twitter data, API integrations, and approval-gated actions.",
+      "files": [
+        {
+          "path": "skills/x-twitter-scraper/SKILL.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/SKILL.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/metadata.json",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/metadata.json"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints-api-keys.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints-api-keys.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints-compose.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints-compose.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints-credits.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints-credits.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints-drafts.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints-drafts.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints-draws.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints-draws.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints-error-codes.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints-error-codes.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints-events.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints-events.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints-extractions.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints-extractions.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints-monitors.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints-monitors.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints-radar.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints-radar.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints-support.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints-support.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints-trends.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints-trends.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints-tweet-style-cache.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints-tweet-style-cache.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints-webhooks.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints-webhooks.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints-x-accounts.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints-x-accounts.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints-x-api.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints-x-api.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints-x-media.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints-x-media.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints-x-write.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints-x-write.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/api-endpoints.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/api-endpoints.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/automate-twitter-giveaways.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/automate-twitter-giveaways.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/best-x-api-alternative.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/best-x-api-alternative.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/compare-twitter-apis.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/compare-twitter-apis.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/draws.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/draws.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/export-twitter-followers.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/export-twitter-followers.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/extract-x-community-data.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/extract-x-community-data.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/extractions.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/extractions.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/mcp-setup.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/mcp-setup.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/mcp-tools.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/mcp-tools.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/monitor-twitter-webhooks.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/monitor-twitter-webhooks.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/python-examples.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/python-examples.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/reliable-twitter-data-api-2026.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/reliable-twitter-data-api-2026.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/scrape-export-twitter-data.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/scrape-export-twitter-data.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/security.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/security.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/track-twitter-keywords-mentions.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/track-twitter-keywords-mentions.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/twitter-api-alternative-faq.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/twitter-api-alternative-faq.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/twitter-api-without-x-account.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/twitter-api-without-x-account.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/twitter-data-pipeline.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/twitter-data-pipeline.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/twitter-scraper-api-guide.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/twitter-scraper-api-guide.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-account-identity.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-account-identity.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-account.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-account.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-api-keys.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-api-keys.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-bookmarks-and-timeline.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-bookmarks-and-timeline.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-credits.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-credits.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-download-media.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-download-media.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-draws.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-draws.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-error.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-error.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-events.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-events.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-extractions.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-extractions.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-mcp-output-schemas.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-mcp-output-schemas.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-monitors.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-monitors.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-radar.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-radar.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-request-bodies.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-request-bodies.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-rest-api-vs-mcp-field-naming.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-rest-api-vs-mcp-field-naming.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-support.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-support.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-trends.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-trends.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-tweet-drafts.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-tweet-drafts.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-tweet-style-cache.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-tweet-style-cache.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-user-activity.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-user-activity.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-webhooks.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-webhooks.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-x-accounts.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-x-accounts.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-x-api.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-x-api.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-x-articles.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-x-articles.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types-x-write.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types-x-write.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/types.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/types.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/usage.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/usage.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/webhooks.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/webhooks.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/references/workflows.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/references/workflows.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/skill-card.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/skill-card.md"
+        },
+        {
+          "path": "skills/x-twitter-scraper/skillspector-report.md",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/skillspector-report.md"
+        }
+      ]
+    }
+  ]
+}

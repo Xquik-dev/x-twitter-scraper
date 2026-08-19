@@ -2,6 +2,12 @@
 
 All notable public changes appear in this file.
 
+## Unreleased
+
+### Added
+
+- Add a shadcn GitHub registry for project-local Skill installation.
+
 ## [2.6.5] - 2026-08-13
 
 ### Fixed
