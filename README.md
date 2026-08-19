@@ -85,6 +85,20 @@ npx skills@1.5.3 add Xquik-dev/x-twitter-scraper
 
 This installs the primary [`x-twitter-scraper`](https://skills.sh/xquik-dev/x-twitter-scraper/x-twitter-scraper) skill, including `SKILL.md` and every file in `references/`.
 
+Install the same project-local Skill through the shadcn GitHub registry:
+
+```bash
+npx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
+```
+
+Review the resolved files before installation:
+
+```bash
+npx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
+```
+
+The registry writes only to `.agents/skills/x-twitter-scraper`.
+
 ### Manual Installation
 
 Use manual installation only when the skills CLI is unavailable. Copy the primary skill directory, not the repository root.
