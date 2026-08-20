@@ -99,6 +99,28 @@ npx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
 
 The registry writes only to `.agents/skills/x-twitter-scraper`.
 
+### Gemini CLI
+
+Install both Xquik Skills with Gemini CLI's native Skill installer:
+
+```bash
+gemini skills install https://github.com/Xquik-dev/x-twitter-scraper.git \
+  --path skills
+```
+
+Review the consent summary before continuing. The installer copies only the
+`x-twitter-scraper` and `xquik-social-research` Skill directories into your
+Gemini CLI user Skill directory. It does not install an npm package or start a
+local MCP server.
+
+Verify the installed Skills:
+
+```bash
+gemini skills list
+```
+
+Add `--scope workspace` for a trusted project-only installation.
+
 ### Manual Installation
 
 Use manual installation only when the skills CLI is unavailable. Copy the primary skill directory, not the repository root.

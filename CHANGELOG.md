@@ -7,6 +7,7 @@ All notable public changes appear in this file.
 ### Added
 
 - Add a shadcn GitHub registry for project-local Skill installation.
+- Document and validate native Gemini CLI installation for both bundled Skills.
 
 ## [2.6.5] - 2026-08-13
 
