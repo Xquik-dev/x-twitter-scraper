@@ -74,7 +74,7 @@ The Skill cannot run shell commands or code. It cannot access local files or net
 
 ## Skill version
 
-2.6.5
+2.6.6
 
 ## Use the Skill responsibly
 
