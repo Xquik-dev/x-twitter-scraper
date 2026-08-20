@@ -1,13 +1,13 @@
-# Xquik TypeScript Types: X Write
+# Xquik TypeScript types: X write
 
 ```typescript
 
 interface CreateTweetRequest {
   account: string;            // Connected X username or account ID
-  text?: string;              // Tweet text (required unless media is provided)
+  text?: string;              // Required tweet text unless media is provided.
   reply_to_tweet_id?: string; // Tweet ID to reply to
   community_id?: string;      // Community ID to post into
-  is_note_tweet?: boolean;    // Long-form note tweet (up to 25,000 chars)
+  is_note_tweet?: boolean;    // Long-form note tweet up to 25,000 characters.
   media?: string[];           // Up to 4 images or exactly 1 MP4 URL
 }
 

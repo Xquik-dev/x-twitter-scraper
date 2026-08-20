@@ -1,6 +1,6 @@
-# Xquik REST API Endpoints: Draws
+# Xquik REST API endpoints: draws
 
-## Safety Boundary
+## Protect giveaway participant data
 
 Draw creation and participant exports are metered or privacy-sensitive actions.
 Confirm the source tweet, eligibility rules, requested data type, export
@@ -10,20 +10,20 @@ secondary use.
 Draw history and results are account-scoped private reads. Require exact-scope
 approval before listing draws or retrieving winners.
 
-### Create Draw
+### Create draw
 
 ```
 POST /draws
 ```
 
-Run a giveaway draw from a tweet. Picks random winners from replies.
+Run a giveaway draw from a tweet. The draw selects random winners from replies.
 
-**Approval required:** Show the source tweet, winner count, backup count,
+Get approval first. Show the source tweet, winner count, backup count,
 filters, and estimated usage. Also show the lawful purpose, participant-data
 handling, export audience, and retention plan. Record every field before
 persisting participant data.
 
-**Body:**
+Send this body:
 ```json
 {
   "tweetUrl": "https://x.com/user/status/1893456789012345678",
@@ -43,13 +43,13 @@ persisting participant data.
 
 All filter fields are optional. Only `tweetUrl` is required.
 
-**Response:**
+The API returns:
 ```json
 {
   "id": "42",
   "tweetId": "1893456789012345678",
   "tweetUrl": "https://x.com/user/status/1893456789012345678",
-  "tweetText": "Like & RT to enter! Picking 3 winners tomorrow.",
+  "tweetText": "Like and repost to enter. We will select 3 winners tomorrow.",
   "tweetAuthorUsername": "xquik",
   "tweetLikeCount": 4200,
   "tweetRetweetCount": 1800,
@@ -63,7 +63,7 @@ All filter fields are optional. Only `tweetUrl` is required.
 }
 ```
 
-### List Draws
+### List draws
 
 ```
 GET /draws
@@ -71,10 +71,10 @@ GET /draws
 
 Cursor-paginated. Returns compact draw objects.
 
-**Private read:** Show the exact account, requested page scope, and returned
+This is a private read. Show the exact account, requested page scope, and returned
 field scope. List draws only after explicit approval for that exact read.
 
-### Get Draw
+### Get draw
 
 ```
 GET /draws/{id}
@@ -82,18 +82,18 @@ GET /draws/{id}
 
 Returns full draw details including winners.
 
-**Private read:** Show the exact account, draw ID, and returned-data scope.
+This is a private read. Show the exact account, draw ID, and returned-data scope.
 Retrieve details only after explicit approval for that exact read.
 
-### Export Draw
+### Export draw
 
 ```
 GET /draws/{id}/export?format=csv&type=winners
 ```
 
-Formats: `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, `xlsx`. Types: `winners` (default), `entries`. Entry exports capped at 100,000 rows (PDF capped at 10,000).
+Choose `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, or `xlsx`. Choose `winners` or `entries`; the default is `winners`. Entry exports support 100,000 rows, except PDF supports 10,000.
 
-**Approval required:** Full entry exports can contain participant identity and
+Get approval first. Full entry exports can contain participant identity and
 activity data. Show the lawful purpose, exact draw, type, format, audience, and
 retention period. Export only after explicit approval for that exact request.
 Prefer winners-only output. Do not retain data beyond the approved purpose.

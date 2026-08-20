@@ -1,4 +1,4 @@
-# Xquik TypeScript Types: Account
+# Xquik TypeScript types: account
 
 ```typescript
 

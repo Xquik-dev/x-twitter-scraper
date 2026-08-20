@@ -1,40 +1,40 @@
-# Cyrus Skills Marketplace (atcyrus.com/skills) Submission Steps
+# Cyrus skills marketplace (atcyrus.com/skills) submission steps
 
-The Cyrus Skills Marketplace is a curated directory of agent skills. Skills are
-indexed from GitHub repos that follow the skills.sh standard (SKILL.md format).
+The Cyrus Skills Marketplace lists agent Skills from GitHub repositories that
+use the skills.sh `SKILL.md` format.
 
-## Current Status
+## Check the listing
 
-- x-twitter-scraper already has a SKILL.md at `skills/x-twitter-scraper/SKILL.md`
-- Already listed on skills.sh at https://skills.sh/Xquik-dev/x-twitter-scraper
-- NOT yet listed on Cyrus at https://www.atcyrus.com/skills/x-twitter-scraper (returns "Skill not found")
+- Skill file: `skills/x-twitter-scraper/SKILL.md`
+- skills.sh listing: https://skills.sh/Xquik-dev/x-twitter-scraper
+- Cyrus listing: https://www.atcyrus.com/skills/x-twitter-scraper
 
-## Submission Process
+If the Cyrus URL returns "Skill not found," request a listing below.
 
-The Cyrus marketplace does not have a public self-service submission form.
-Skills appear to be indexed from GitHub repos via a curation process. Options:
+## Request a listing
 
-### Option A: Request Listing via Discord
+### Ask in Discord
 
 1. Join the Cyrus Discord: https://discord.gg/cyrus (linked from atcyrus.com)
 2. Post in their skills/marketplace channel requesting listing for:
-   - **Repo**: https://github.com/Xquik-dev/x-twitter-scraper
-   - **Skill path**: skills/x-twitter-scraper/SKILL.md
-   - **Install command**: `npx skills@1.5.3 add Xquik-dev/x-twitter-scraper`
-   - **Category**: Development (or Data & APIs)
-   - **Description**: X data platform Skill for developers and agents. 128 REST operations and 120 MCP catalog routes through 2 tools. 119 support JSON or text. Includes HMAC webhooks.
+   - Repository: https://github.com/Xquik-dev/x-twitter-scraper
+   - Skill path: `skills/x-twitter-scraper/SKILL.md`
+   - Install command: `npx skills@1.5.3 add Xquik-dev/x-twitter-scraper`
+   - Category: Development or Data & APIs
+   - Description: Twitter scraper API Skill for search, exports, monitoring,
+     HMAC webhooks, and approved X account actions. Includes 128 REST
+     operations and 120 MCP catalog routes. Of these, 119 support JSON or text.
 
-### Option B: Open GitHub Issue
+### Open a GitHub issue
 
 1. Open an issue at https://github.com/ceedaragents/cyrus
-2. Request skill listing with the details from Option A
+2. Request a Skill listing with the details above.
 
-## SKILL.md Already Prepared
+## Files supplied by this repo
 
-The existing SKILL.md is fully compliant with the skills.sh standard:
-- Has proper frontmatter (name, description, compatibility, license, metadata)
-- Includes references directory with detailed endpoint docs
-- Includes metadata.json with version info
-- MIT licensed
+The existing Skill includes:
 
-No additional files are needed for Cyrus - the existing skill structure is ready.
+- Frontmatter with its name, description, compatibility, license, and metadata
+- A `references/` directory with endpoint documentation
+- `metadata.json` with version information
+- An MIT license

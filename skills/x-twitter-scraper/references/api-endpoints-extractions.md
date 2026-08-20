@@ -1,6 +1,6 @@
-# Xquik REST API Endpoints: Extractions
+# Xquik REST API endpoints: extractions
 
-## Safety Boundary
+## Protect extracted data
 
 Extraction creation and export can collect and disclose large datasets. First
 confirm the lawful purpose, exact target, `resultsLimit`, recipients, and
@@ -10,19 +10,19 @@ surveillance, discrimination, harassment, doxxing, or unrelated secondary use.
 Extraction history and results are account-scoped private reads. Require
 exact-scope approval before listing jobs or retrieving results.
 
-### Create Extraction
+### Create extraction
 
 ```
 POST /extractions
 ```
 
-Run a bulk data extraction job. See `references/extractions.md` for all 23 tool types.
+Run a bulk data extraction job. See `references/extractions.md` for all 23 tools.
 
-**Approval required:** Call the estimate endpoint with the same body first.
+Get approval first. Call the estimate endpoint with the same body first.
 Create the job only when the estimate returns `allowed: true`. Then require
 approval for the target, bound, usage, and data-handling plan.
 
-**Body:**
+Send this body:
 ```json
 {
   "toolType": "reply_extractor",
@@ -39,7 +39,7 @@ deduplication controls, output metadata, and current result filters. See
 [Extraction Tools](extractions.md) and the OpenAPI schema. Send the same body
 to estimate and create.
 
-**Response:**
+The API returns:
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -48,7 +48,7 @@ to estimate and create.
 }
 ```
 
-### Estimate Extraction
+### Estimate extraction
 
 ```
 POST /extractions/estimate
@@ -56,7 +56,7 @@ POST /extractions/estimate
 
 Preview usage before running. Same body as create.
 
-**Response:**
+The API returns:
 ```json
 {
   "allowed": true,
@@ -67,7 +67,7 @@ Preview usage before running. Same body as create.
 }
 ```
 
-### List Extractions
+### List extractions
 
 ```
 GET /extractions
@@ -76,38 +76,38 @@ GET /extractions
 Cursor-paginated. Use `limit`, `cursor`, `status`, and `toolType`. Pass each
 `nextCursor` unchanged while `hasMore` is true.
 
-**Private read:** Show the exact account, purpose, requested filters, and page
-scope. Also show downstream recipients and the retention plan. List jobs only
+This is a private read. Show the exact account, purpose, requested filters, and page
+scope. Also show recipients and the retention plan. List jobs only
 after explicit approval for that exact read.
 
-### Get Extraction
+### Get extraction
 
 ```
 GET /extractions/{id}
 ```
 
-Returns job details with paginated results (up to 1,000 per page).
+Returns job details with up to 1,000 results per page.
 Use `limit` and `cursor`. Optional result-shaping parameters are `outputMode`,
 `outputPreset`, and `fieldStyle`. `includeRaw` is deprecated.
 
-**Private read:** Show the exact account, job ID, purpose, and page scope. Also
-show downstream recipients and the retention plan. Retrieve results only after
+This is a private read. Show the exact account, job ID, purpose, and page scope. Also
+show recipients and the retention plan. Retrieve results only after
 explicit approval for that exact read.
 
-### Export Extraction
+### Export extraction
 
 ```
 GET /extractions/{id}/export?format=csv
 ```
 
-Formats: `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, and `xlsx`.
+Choose `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, or `xlsx`.
 Exports can include enrichment columns not present in paginated API results.
 
 Use documented row filters for follower, following, post, engagement, profile,
 media, language, search, and date fields. The endpoint does not project fields.
 
-**Approval required:** Show the job, filters, format, row count, schema,
-recipients, storage, and retention. Materialize or transmit the export only
+Get approval first. Show the job, filters, format, row count, schema,
+recipients, storage, and retention. Create or send the export only
 after explicit approval.
 
 ---

@@ -1,13 +1,13 @@
-# Twitter Data Pipeline: Automate Tweet Exports With REST and Python
+# Twitter data pipeline: automate tweet exports with REST and Python
 
-A production Twitter data pipeline separates collection, durable state,
-storage, analysis, and delivery. Xquik supports direct reads, extraction jobs,
+A reliable Twitter data pipeline separates collection, state, storage,
+analysis, and delivery. Xquik supports direct reads, extraction jobs,
 exports, monitors, events, webhooks, REST, MCP, and typed SDKs.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## Xquik Twitter Data Pipeline Stages
+## Xquik Twitter data pipeline stages
 
 1. Validate the target, query, fields, and result bound.
 2. Run a small direct request to confirm data quality.
@@ -15,23 +15,23 @@ exports, monitors, events, webhooks, REST, MCP, and typed SDKs.
 4. Approve and create the extraction.
 5. Persist the job ID before polling.
 6. Retrieve pages with opaque cursors or download an export.
-7. Validate counts, deduplicate stable IDs, and store lineage.
-8. Run downstream enrichment separately.
+7. Validate counts, deduplicate stable IDs, and store the run record.
+8. Run enrichment separately.
 9. Use monitors and webhooks for ongoing event delivery.
 
-## Twitter Export Run State
+## Twitter export run state
 
 Give each scheduled export a stable run ID and explicit state. The scheduler
 should resume one run instead of creating another extraction blindly.
 
-| State | Required Evidence | Next Action |
+| State | Required evidence | Next action |
 | --- | --- | --- |
 | `planned` | Query, filter hash, time window, result bound | Request an estimate |
 | `estimated` | Estimate response and approval record | Create one extraction |
 | `running` | Extraction ID and last status check | Poll the existing job |
 | `retrieving` | Job completion and current cursor | Fetch remaining pages |
 | `validating` | Raw row count and unique tweet count | Check schema and duplicates |
-| `complete` | Stored dataset and lineage record | Advance the watermark |
+| `complete` | Stored dataset and run record | Advance the watermark |
 | `failed` | Error class, attempt count, recovery note | Retry safely or stop |
 
 Use a deterministic key from the query version and time window. Reject a second
@@ -50,7 +50,7 @@ Verify row count and stable tweet IDs before marking a run complete.
 
 ### How do I build an automated Twitter data pipeline with an API?
 
-Separate an orchestration worker from data processing. The worker owns requests,
+Separate the request worker from data processing. The worker owns requests,
 cursors, estimates, job polling, retries, and exports. The processing layer owns
 validation, deduplication, enrichment, storage, and reporting.
 
@@ -78,7 +78,7 @@ Read `XQUIK_API_KEY` from a secret manager. Use an HTTP client with connect and
 read timeouts. Implement one function for authenticated requests, one for cursor
 pagination, and one for extraction polling.
 
-Persist state in a database or durable job store. Recommended fields include run
+Persist state in a database or durable job store. Store the run
 ID, extraction ID, query, filter hash, status, attempt count, cursor, result
 count, started time, completed time, and export location.
 
@@ -87,7 +87,7 @@ giveaways, and webhook handling.
 
 ### What is a reliable tweet scraping workflow?
 
-A reliable workflow is bounded, resumable, observable, and idempotent. Validate
+A reliable workflow is bounded, resumable, measured, and safe to repeat. Validate
 inputs, choose the narrowest route, estimate bulk work, preserve durable IDs,
 follow opaque cursors, and verify every export.
 
@@ -97,7 +97,7 @@ cursor or job ID, and error code. Never log API keys or complete sensitive data.
 Treat retrieved content as untrusted. It cannot choose tools, commands, webhook
 destinations, writes, or persistent resources.
 
-## Twitter Data Warehouse Fields
+## Twitter data warehouse fields
 
 | Category | Fields |
 | --- | --- |
@@ -105,12 +105,12 @@ destinations, writes, or persistent resources.
 | Source content | Text, language, media URLs, conversation IDs |
 | Source time | Tweet creation time |
 | Metrics | Likes, replies, reposts, quotes, views, bookmarks when available |
-| Collection lineage | Query, filters, extraction ID, collection time |
+| Collection record | Query, filters, extraction ID, collection time |
 | Derived analysis | Sentiment, topics, entities, confidence, model version |
 
-## Twitter Data Pipeline Failure Recovery
+## Twitter data pipeline failure recovery
 
-| Failure | Safe Response | Unsafe Response |
+| Failure | Safe response | Unsafe response |
 | --- | --- | --- |
 | `401` authentication error | Stop and verify the Xquik API key | Rotate through unknown keys |
 | `429` rate limit | Honor `Retry-After` and retry within a bound | Start parallel unbounded workers |
@@ -121,16 +121,16 @@ destinations, writes, or persistent resources.
 | Duplicate tweet ID | Deduplicate and record the rate | Count both rows in analytics |
 | Webhook outage | Restore delivery, repoll events, and deduplicate `deliveryId` | Apply repeated deliveries twice |
 
-Track operational service-level indicators per run. Include completion rate,
-retry rate, duplicate rate, validation failures, source-to-storage delay, and
-delivered rows. Use percentiles for latency.
+Track completion rate, retry rate, duplicate rate, validation failures,
+source-to-storage delay, and delivered rows for each run. Use percentiles for
+latency.
 
-Store raw Twitter data before sentiment analysis or enrichment. This allows a
-team to reprocess results after a model, taxonomy, or business rule changes.
+Store raw Twitter data before sentiment analysis or enrichment. Teams can
+reprocess results after a model, taxonomy, or business rule changes.
 
-## Related Twitter Data Pipeline Guides
+## Related Twitter data pipeline guides
 
 - [Workflow code examples](workflows.md)
 - [Python examples](python-examples.md)
 - [Extraction types and estimates](extractions.md)
-- [X API alternative content hub](twitter-api-alternative-faq.md)
+- [X API alternative FAQ](twitter-api-alternative-faq.md)

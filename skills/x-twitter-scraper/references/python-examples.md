@@ -1,18 +1,10 @@
-# Xquik Python Examples
+# Xquik Python examples
 
-Python equivalents of the JavaScript examples in SKILL.md.
-
-## Contents
-
-- [Authentication](#authentication)
-- [Retry with Exponential Backoff](#retry-with-exponential-backoff)
-- [Extraction Workflow](#extraction-workflow)
-- [Giveaway Draw](#giveaway-draw)
-- [Webhook Handler (Python Standard Library)](#webhook-handler-python-standard-library)
+Use these Python examples for authentication, retries, extractions, draws, and webhooks.
 
 ## Authentication
 
-> **External transmission:** These examples send credentials, parameters, and
+> These examples send credentials, parameters, and
 > returned data to and from `xquik.com`. Keep the key in a secret store. Get
 > explicit approval before private reads, writes, exports, persistent resources,
 > webhooks, or metered jobs. Never forward private results without separate
@@ -24,7 +16,7 @@ import urllib.error
 import urllib.request
 
 def load_secret(name: str) -> str:
-    """Read from your agent or platform secret store."""
+    """Read from the runtime secret store."""
     raise RuntimeError(f"Configure {name} in your secret store.")
 
 API_KEY = load_secret("XQUIK_API_KEY")
@@ -32,7 +24,7 @@ BASE = "https://xquik.com/api/v1"
 HEADERS = {"x-api-key": API_KEY, "Content-Type": "application/json"}
 ```
 
-## Retry with Exponential Backoff
+## Retry with exponential backoff
 
 ```python
 import time, random
@@ -65,7 +57,7 @@ def xquik_fetch(path, method="GET", json_body=None, max_retries=3):
         time.sleep(delay)
 ```
 
-## Extraction Workflow
+## Extraction workflow
 
 ```python
 RESULTS_LIMIT = 1000
@@ -75,7 +67,7 @@ def require_explicit_approval(scope: str) -> None:
         f"Approval required for {scope}. Implement the approval gate first."
     )
 
-# Step 1: Estimate
+# Estimate the extraction.
 estimate = xquik_fetch("/extractions/estimate", method="POST", json_body={
     "toolType": "reply_extractor",
     "targetTweetId": "1893704267862470862",
@@ -83,10 +75,10 @@ estimate = xquik_fetch("/extractions/estimate", method="POST", json_body={
 })
 
 if not estimate["allowed"]:
-    print(f"Estimate requires {estimate['creditsRequired']}; available {estimate['creditsAvailable']}")
+    print(f"Extraction estimate: {estimate['creditsRequired']} credits. Balance: {estimate['creditsAvailable']}.")
     exit()
 
-# Step 2: Create job
+# Create the bounded job only after approval.
 require_explicit_approval(
     "the bounded extraction job, usage, recipients, and retention"
 )
@@ -96,12 +88,12 @@ job = xquik_fetch("/extractions", method="POST", json_body={
     "resultsLimit": RESULTS_LIMIT,
 })
 
-# Step 3: Poll until complete (large jobs may return "running")
+# Poll until the job finishes. Large jobs may remain in "running" state.
 while job["status"] in ("pending", "running"):
     time.sleep(2)
     job = xquik_fetch(f"/extractions/{job['id']}")
 
-# Step 4: Get results
+# Get every approved result page.
 cursor = None
 results = []
 
@@ -119,10 +111,10 @@ while True:
 print(f"Extracted {len(results)} results")
 ```
 
-## Giveaway Draw
+## Giveaway draw
 
 ```python
-# Create draw with all filters
+# Create a draw with explicit filters.
 draw = xquik_fetch("/draws", method="POST", json_body={
     "tweetUrl": "https://x.com/burakbayir/status/1893456789012345678",
     "winnerCount": 3,
@@ -135,14 +127,14 @@ draw = xquik_fetch("/draws", method="POST", json_body={
     "requiredKeywords": ["giveaway"],
 })
 
-# Get winners
+# Get the winners.
 details = xquik_fetch(f"/draws/{draw['id']}")
 for winner in details["winners"]:
-    role = "BACKUP" if winner["isBackup"] else "WINNER"
+    role = "Backup" if winner["isBackup"] else "Winner"
     print(f"{role} #{winner['position']}: @{winner['authorUsername']}")
 ```
 
-## Webhook Handler (Python Standard Library)
+## Python standard library webhook handler
 
 ```python
 import hashlib
@@ -156,9 +148,9 @@ def load_secret(name: str) -> str:
     """Read from your runtime secret store."""
     raise RuntimeError(f"Configure {name} in your secret store.")
 
-# Per-webhook secret from POST /webhooks response, not a Xquik account credential
+# Use the per-webhook secret from POST /webhooks, not an Xquik account credential.
 WEBHOOK_SECRET = load_secret("XQUIK_WEBHOOK_SECRET")
-processed_delivery_ids = set()  # Use durable storage in production
+processed_delivery_ids = set()  # Use durable storage in deployed services.
 
 def verify_signature(payload: bytes, signature: str, timestamp: str, nonce: str, secret: str) -> bool:
     if not timestamp.isdigit() or not re.fullmatch(r"[0-9a-f]{32}", nonce):

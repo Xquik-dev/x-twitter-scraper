@@ -1,4 +1,4 @@
-# Xquik TypeScript Types: Webhooks
+# Xquik TypeScript types: webhooks
 
 ```typescript
 

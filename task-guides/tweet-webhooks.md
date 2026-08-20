@@ -1,6 +1,6 @@
 ---
 name: tweet-webhooks
-description: "Use when the user wants to receive monitored X (Twitter) events at their own URL. Creates HMAC-signed webhooks for account and keyword monitor events. Delivery setup only - payload handling is the user's webhook."
+description: "Use when the user wants monitor events sent to a URL. Create an HMAC-signed webhook after approval. The user's server handles each payload."
 license: MIT
 metadata:
   internal: true
@@ -26,11 +26,11 @@ metadata:
     credentialProxy: false
 ---
 
-# X Webhooks
+# X webhooks
 
 Send HTTPS POST callbacks when an account or keyword monitor emits an event.
 
-## Endpoints
+## Choose an endpoint
 
 | Endpoint | Purpose | Usage |
 |---|---|---|
@@ -43,7 +43,7 @@ Send HTTPS POST callbacks when an account or keyword monitor emits an event.
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
-## Quick reference
+## Example requests
 
 ```
 POST /webhooks
@@ -54,9 +54,9 @@ POST /webhooks
 -> { id, url, secret, eventTypes, createdAt }
 ```
 
-Save the returned `secret` - used to verify HMAC-SHA256 signatures on incoming payloads.
+Save the returned `secret`. Use it to verify HMAC-SHA256 signatures on incoming payloads.
 
-## HMAC verification (for the user's server)
+## Verify HMAC signatures
 
 Each delivery includes these headers:
 ```
@@ -68,21 +68,21 @@ Compute HMAC-SHA256 over
 `<timestamp>.<nonce>.<raw_body>`. Compare in constant time. Reject old
 timestamps and reused nonces.
 
-## Typical flow
+## Create the webhook
 
 1. Confirm the target URL is HTTPS and reachable.
 2. Ask the user which events to subscribe to and remind them that the URL will keep receiving matching events while enabled.
-3. **Create the webhook only with user approval** - the URL will receive real data.
+3. Create the webhook only after user approval. The URL will receive real data.
 4. Call `POST /webhooks/{id}/test` to send a sample payload. Confirm with the user that it arrived and verified.
 5. Inspect `deliveryStatus`. Use `/resume` after fixing a paused destination.
 
-## Security
+## Protect webhook data
 
 - Webhook URLs must be HTTPS
 - Verify the signature, timestamp, and nonce before parsing the payload
 - Do not register third-party URLs on behalf of the user; they must own the endpoint
 - Delete or disable the webhook when the user no longer wants ongoing delivery
 
-## Related
+## Related guides
 
-Monitor creation: `monitor-accounts`. Full API: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).
+Use `monitor-accounts` to create a monitor. See the [primary API guide](../skills/x-twitter-scraper/SKILL.md).

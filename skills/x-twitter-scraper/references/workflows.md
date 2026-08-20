@@ -1,19 +1,10 @@
-# Xquik Workflow Examples
+# Xquik workflow examples
 
-Code examples for common integration patterns.
-
-## Contents
-
-- [Authentication](#authentication)
-- [Retry with Exponential Backoff](#retry-with-exponential-backoff)
-- [Cursor Pagination](#cursor-pagination)
-- [Complete Extraction Workflow](#complete-extraction-workflow)
-- [Real-Time Monitoring Setup](#real-time-monitoring-setup)
-- [Endpoint Guide](#endpoint-guide)
+Use these code examples for authentication, retries, pagination, extractions, and monitoring.
 
 ## Authentication
 
-> **External transmission:** These examples send credentials, parameters, and
+> These examples send credentials, parameters, and
 > returned data to and from `xquik.com`. Keep the key in a secret store. Get
 > explicit approval before private reads, writes, exports, persistent resources,
 > webhooks, or metered jobs. Never forward private results without separate
@@ -27,10 +18,10 @@ const BASE = "https://xquik.com/api/v1";
 const headers = { "x-api-key": apiKey, "Content-Type": "application/json" };
 ```
 
-## Retry with Exponential Backoff
+## Retry with exponential backoff
 
 Outside documented cursor recovery, retry only idempotent requests after `429`
-and `5xx`. Never automatically retry `POST`, `PATCH`, or `DELETE`. Max 3 retries:
+and `5xx`. Never automatically retry `POST`, `PATCH`, or `DELETE`. Stop after 3 retries.
 
 ```javascript
 async function xquikFetch(path, options = {}) {
@@ -62,7 +53,7 @@ async function xquikFetch(path, options = {}) {
 }
 ```
 
-## Cursor Pagination
+## Cursor pagination
 
 Events, draws, extractions, and extraction results use cursor-based pagination.
 When more results exist, the response includes `hasMore: true` and a
@@ -94,14 +85,14 @@ For `409 coverage_cursor_unavailable`, wait the exact `Retry-After` seconds and
 retry the same cursor once. For `410 coverage_cursor_gone`, the response omits
 `Retry-After`. Restart without a cursor and deduplicate by ID.
 
-## Complete Extraction Workflow
+## Complete extraction workflow
 
 ```javascript
 function requireExplicitApproval(scope) {
   throw new Error(`Approval required for ${scope}. Implement the approval gate first.`);
 }
 
-// Step 1: Estimate usage before running
+// Estimate usage before creating the job.
 const estimate = await xquikFetch("/extractions/estimate", {
   method: "POST",
   body: JSON.stringify({
@@ -112,11 +103,11 @@ const estimate = await xquikFetch("/extractions/estimate", {
 });
 
 if (!estimate.allowed) {
-  console.log(`Estimate requires ${estimate.creditsRequired}; available ${estimate.creditsAvailable}`);
+  console.log(`Extraction estimate: ${estimate.creditsRequired} credits. Balance: ${estimate.creditsAvailable}.`);
   return;
 }
 
-// Step 2: Create extraction job after approving this exact bounded request
+// Create the bounded job only after approval.
 requireExplicitApproval("the bounded extraction job, usage, recipients, and retention");
 let job = await xquikFetch("/extractions", {
   method: "POST",
@@ -127,13 +118,13 @@ let job = await xquikFetch("/extractions", {
   }),
 });
 
-// Step 3: Poll until complete
+// Poll until the job finishes.
 while (job.status === "pending" || job.status === "running") {
   await new Promise((r) => setTimeout(r, 2000));
   job = await xquikFetch(`/extractions/${job.id}`);
 }
 
-// Step 4: Retrieve paginated results (up to 1,000 per page)
+// Retrieve up to 1,000 results per page.
 let cursor;
 const allResults = [];
 
@@ -146,19 +137,19 @@ while (true) {
   cursor = page.nextCursor;
 }
 
-// Step 5: Export only after reviewing a bounded preview and approving transmission
+// Review a bounded preview and approve the export first.
 requireExplicitApproval("the fixed export scope, audience, storage, and retention");
 const exportUrl = `${BASE}/extractions/${job.id}/export?format=csv`;
 const csvResponse = await fetch(exportUrl, { headers });
 const csvData = await csvResponse.text();
 ```
 
-## Real-Time Monitoring Setup
+## Real-time monitoring setup
 
-Complete end-to-end: create monitor, register webhook, handle events. Create persistent monitors and webhooks only after explicit user approval of the target, event types, destination URL, and ongoing usage.
+Create a monitor, register a webhook, then handle events. Get explicit approval for the target, event types, destination URL, and ongoing usage first.
 
 ```javascript
-// 1. Create monitor (persistent resource; active monitors are metered hourly)
+// Create a persistent monitor. Active monitors are metered hourly.
 const monitor = await xquikFetch("/monitors", {
   method: "POST",
   body: JSON.stringify({
@@ -167,7 +158,7 @@ const monitor = await xquikFetch("/monitors", {
   }),
 });
 
-// 2. Register webhook (persistent delivery destination)
+// Register a persistent delivery destination.
 const webhook = await xquikFetch("/webhooks", {
   method: "POST",
   body: JSON.stringify({
@@ -175,50 +166,50 @@ const webhook = await xquikFetch("/webhooks", {
     eventTypes: ["tweet.new", "tweet.reply"],
   }),
 });
-// IMPORTANT: Save webhook.secret. It is shown only once!
+// Store webhook.secret now. The API returns it once.
 
-// 3. Poll events (alternative to webhooks)
+// Poll events when you do not use a webhook.
 const events = await xquikFetch("/events?monitorId=7&limit=50");
 ```
 
 Monitor event types include `tweet.new`, `tweet.quote`, `tweet.reply`, and
 `tweet.retweet`. Test deliveries use `webhook.test`; do not subscribe to it.
 
-## Endpoint Guide
+## Endpoint guide
 
 | Goal | Endpoint | Usage |
 |------|----------|------|
-| **Get a single tweet** by ID/URL | `GET /x/tweets/{id}` | Metered |
-| **Get an X Article** by tweet ID | `GET /x/articles/{tweetId}` | Metered |
-| **Search tweets** by keyword/hashtag | `GET /x/tweets/search?q=...` | Metered per result |
-| **Get a user profile** | `GET /x/users/{id}` | Metered |
-| **Get user's recent tweets** | `GET /x/users/{id}/tweets` | Metered per result |
-| **Get user's liked tweets** | `GET /x/users/{id}/likes` | Metered per result |
-| **Get user's media tweets** | `GET /x/users/{id}/media` | Metered per result |
-| **Get tweet favoriters** | `GET /x/tweets/{id}/favoriters` | Metered per result |
-| **Get mutual followers** | `GET /x/users/{id}/followers-you-know` | Metered per result |
-| **Check follow relationship** | `GET /x/followers/check?source=A&target=B` | Metered |
-| **Get trending topics** | `GET /trends?woeid=1` | Metered |
-| **Get radar (trending news)** | `GET /radar?source=hacker_news` | Included |
-| **Get bookmarks** | `GET /x/bookmarks` | Metered per result |
-| **Get bookmark folders** | `GET /x/bookmarks/folders` | Metered |
-| **Get notifications** | `GET /x/notifications` | Metered per result |
-| **Get home timeline** | `GET /x/timeline` | Metered per result |
-| **Get DM history** | `GET /x/dm/{userId}/history?account={username}` | Private; approve exact account and block ambiguity |
-| **Monitor an X account** | `POST /monitors` | Active monitors are metered hourly |
-| **Poll for events** | `GET /events` | Included |
-| **Receive events via webhook** | `POST /webhooks` | Included; confirmation required for destination URL |
-| **Run a giveaway draw** | `POST /draws` | Metered per entry |
-| **Download tweet media** | `POST /x/media/download` | Metered per item |
-| **Extract bulk data** | `POST /extractions` | Metered per result |
-| **Check credits** | `GET /credits` | Included |
-| **Compose a tweet** | `POST /compose` | Included |
-| **Post a tweet** | `POST /x/tweets` | Metered write action |
-| **Like / Unlike a tweet** | `POST` or delete request to `/x/tweets/{id}/like` | Metered write action |
-| **Retweet** | `POST /x/tweets/{id}/retweet` | Metered write action |
-| **Follow / Unfollow** | `POST` or delete request to `/x/users/{id}/follow` | Metered write action |
-| **Send a DM** | `POST /x/dm/{userId}` | Metered write action |
-| **Update profile** | `PATCH /x/profile` | Metered write action |
-| **Upload media** | `POST /x/media` | Metered write action |
-| **Community actions** | `POST /x/communities`, join/leave | Metered write action |
-| **Support tickets** | `POST /support/tickets` | Included |
+| Get a tweet by ID or URL | `GET /x/tweets/{id}` | Metered |
+| Get an X Article by tweet ID | `GET /x/articles/{tweetId}` | Metered |
+| Search tweets by keyword or hashtag | `GET /x/tweets/search?q=...` | Metered per result |
+| Get a user profile | `GET /x/users/{id}` | Metered |
+| Get a user's recent tweets | `GET /x/users/{id}/tweets` | Metered per result |
+| Get a user's liked tweets | `GET /x/users/{id}/likes` | Metered per result |
+| Get a user's media tweets | `GET /x/users/{id}/media` | Metered per result |
+| Get tweet favoriters | `GET /x/tweets/{id}/favoriters` | Metered per result |
+| Get mutual followers | `GET /x/users/{id}/followers-you-know` | Metered per result |
+| Check a follow relationship | `GET /x/followers/check?source=A&target=B` | Metered |
+| Get trending topics | `GET /trends?woeid=1` | Metered |
+| Get Radar news | `GET /radar?source=hacker_news` | Included |
+| Get bookmarks | `GET /x/bookmarks` | Metered per result |
+| Get bookmark folders | `GET /x/bookmarks/folders` | Metered |
+| Get notifications | `GET /x/notifications` | Metered per result |
+| Get the home timeline | `GET /x/timeline` | Metered per result |
+| Get DM history | `GET /x/dm/{userId}/history?account={username}` | Private; approve the exact account |
+| Monitor an X account | `POST /monitors` | Active monitors are metered hourly |
+| Poll for events | `GET /events` | Included |
+| Receive webhook events | `POST /webhooks` | Included; approve the destination URL |
+| Run a giveaway draw | `POST /draws` | Metered per entry |
+| Download tweet media | `POST /x/media/download` | Metered per item |
+| Extract bulk data | `POST /extractions` | Metered per result |
+| Check credits | `GET /credits` | Included |
+| Compose a tweet | `POST /compose` | Included |
+| Post a tweet | `POST /x/tweets` | Metered write action |
+| Like or unlike a tweet | `POST /x/tweets/{id}/like` likes it. A delete request to the same route unlikes it. | Metered write action |
+| Retweet | `POST /x/tweets/{id}/retweet` | Metered write action |
+| Follow or unfollow | `POST /x/users/{id}/follow` follows. A delete request to the same route unfollows. | Metered write action |
+| Send a DM | `POST /x/dm/{userId}` | Metered write action |
+| Update a profile | `PATCH /x/profile` | Metered write action |
+| Upload media | `POST /x/media` | Metered write action |
+| Change a community | `POST /x/communities`, join, or leave | Metered write action |
+| Manage support tickets | `POST /support/tickets` | Included |

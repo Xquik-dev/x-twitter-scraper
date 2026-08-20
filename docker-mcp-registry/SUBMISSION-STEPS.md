@@ -1,17 +1,17 @@
-# Docker MCP Catalog Submission Steps
+# Docker MCP catalog submission steps
 
-Xquik MCP is a **remote server** (StreamableHTTP), so no Dockerfile is needed.
+Xquik MCP is a remote Streamable HTTP server, so it needs no Dockerfile.
 Docker will list the remote endpoint directly.
 
-## Prepared Files
+## Prepared files
 
 The `xquik-remote/` directory contains the 3 required files:
 
-- `server.yaml` - Server metadata for OAuth-enabled Streamable HTTP
-- `readme.md` - Link to docs
-- `tools.json` - Tool definitions for explore and xquik tools
+- `server.yaml`: server metadata for OAuth-enabled Streamable HTTP
+- `readme.md`: documentation link
+- `tools.json`: definitions for the `explore` and `xquik` tools
 
-## Submission Steps
+## Submission steps
 
 1. Fork https://github.com/docker/mcp-registry
 
@@ -37,8 +37,8 @@ The `xquik-remote/` directory contains the 3 required files:
    task build --tools xquik-remote
    ```
 
-6. Create PR to docker/mcp-registry with title: "Add xquik-remote MCP server"
+6. Open a pull request to `docker/mcp-registry` titled "Add xquik-remote MCP server."
 
 7. Confirm Docker opens Xquik OAuth and completes browser authorization.
 
-8. Wait for Docker team review (catalog entry available within 24h of approval).
+8. Address the Docker team's review comments.

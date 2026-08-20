@@ -1,4 +1,4 @@
-# Xquik TypeScript Types: Events
+# Xquik TypeScript types: events
 
 ```typescript
 

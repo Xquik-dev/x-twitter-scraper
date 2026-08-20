@@ -1,10 +1,9 @@
-# MCPize Submission Steps
+# MCPize submission steps
 
-Use this checklist for the human-owned MCPize marketplace submission. Xquik
-already runs a remote Streamable HTTP MCP server, so prefer a remote listing
-that points at the existing endpoint.
+Use this checklist to submit Xquik to MCPize. List the existing remote
+Streamable HTTP endpoint.
 
-## Listing Details
+## Listing details
 
 - Name: `com.xquik/mcp`
 - Server URL: `https://xquik.com/mcp`
@@ -12,12 +11,12 @@ that points at the existing endpoint.
 - Repository: `https://github.com/Xquik-dev/x-twitter-scraper`
 - Version: `2.6.0`
 - Description: `128 REST operations. 120 MCP routes; 119 JSON/text ops. OAuth 2.1. Not affiliated with X Corp.`
-- Categories: Social Media, Automation, Search, Data, Monitoring, Web Scraping, AI Agents
+- Categories: Social Media, Automation, Search, Data, Monitoring, Web Scraping, Agent Tools
 - Authentication: OAuth 2.1 discovery
 - Protected resource metadata: `https://xquik.com/.well-known/oauth-protected-resource/mcp`
 - Authorization server metadata: `https://xquik.com/.well-known/oauth-authorization-server`
 
-## Submission Flow
+## Submission flow
 
 1. Sign in to MCPize with the owner account.
 2. Start a marketplace submission or new project from the MCPize dashboard.
@@ -29,7 +28,7 @@ that points at the existing endpoint.
 8. Update public docs with the MCPize listing URL only after the listing is
    live.
 
-## Acceptance Checks
+## Acceptance checks
 
 - Searching MCPize for `xquik` returns the listing.
 - The listing shows `https://xquik.com/mcp` as the remote server URL.

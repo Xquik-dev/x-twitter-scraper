@@ -1,4 +1,4 @@
-# Xquik TypeScript Types: Tweet Drafts
+# Xquik TypeScript types: tweet drafts
 
 ```typescript
 

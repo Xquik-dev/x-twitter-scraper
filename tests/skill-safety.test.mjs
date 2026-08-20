@@ -5,7 +5,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-test("keeps the Python extraction example bounded and approval-gated", async () => {
+test("keeps the Python extraction example bounded and requires approval", async () => {
   const source = await readFile(
     new URL(
       "../skills/x-twitter-scraper/references/python-examples.md",
@@ -14,7 +14,7 @@ test("keeps the Python extraction example bounded and approval-gated", async () 
     "utf8",
   );
   const workflow = source.match(
-    /## Extraction Workflow\n\n```python\n([\s\S]*?)\n```/,
+    /## Extraction workflow\n\n```python\n([\s\S]*?)\n```/,
   )?.[1];
 
   assert.ok(workflow, "Python extraction workflow is missing");

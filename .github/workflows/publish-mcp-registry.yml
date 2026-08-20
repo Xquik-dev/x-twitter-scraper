@@ -1,4 +1,4 @@
-name: Publish MCP Registry
+name: Publish to the MCP Registry
 
 on:
   push:
@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   publish:
-    name: Publish Verified MCP Metadata
+    name: Publish verified MCP metadata
     if: github.repository == 'Xquik-dev/x-twitter-scraper'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -40,7 +40,7 @@ jobs:
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: .github/scripts/verify-release-context.sh
 
-      - name: Check MCP Registry
+      - name: Check the MCP Registry
         id: registry
         run: |
           server_name="$(node -p "encodeURIComponent(require('./server.json').name)")"
@@ -57,7 +57,7 @@ jobs:
               echo "published=false" >> "$GITHUB_OUTPUT"
               ;;
             *)
-              echo "MCP Registry returned HTTP ${registry_status}." >&2
+              echo "The MCP Registry returned HTTP ${registry_status}." >&2
               exit 1
               ;;
           esac
@@ -92,7 +92,7 @@ jobs:
         if: steps.registry.outputs.published != 'true'
         run: ./mcp-publisher validate
 
-      - name: Authenticate to MCP Registry
+      - name: Authenticate to the MCP Registry
         if: steps.registry.outputs.published != 'true'
         env:
           MCP_REGISTRY_PRIVATE_KEY: ${{ secrets.MCP_REGISTRY_PRIVATE_KEY }}
@@ -101,6 +101,6 @@ jobs:
             --domain xquik.com \
             --private-key "$MCP_REGISTRY_PRIVATE_KEY"
 
-      - name: Publish to MCP Registry
+      - name: Publish to the MCP Registry
         if: steps.registry.outputs.published != 'true'
         run: ./mcp-publisher publish

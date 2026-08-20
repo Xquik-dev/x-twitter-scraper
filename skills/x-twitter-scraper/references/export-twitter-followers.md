@@ -1,4 +1,4 @@
-# Twitter Follower Scraper API: Export and Track Follower Lists
+# Twitter follower scraper API: export and track follower lists
 
 Xquik supports paginated follower reads and complete follower extraction jobs.
 Choose a bounded read for an application page. Choose `follower_explorer` for a
@@ -7,23 +7,23 @@ durable dataset or file export.
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## Twitter Follower Export Data Model
+## Twitter follower export data model
 
 Common fields include stable X user ID, username, display name, profile image,
 follower count, and verification state. Optional fields depend on source
 availability. Store the user ID as the primary key because usernames can change.
 
-Record target username, collection time, extraction ID, page cursor, and source
-availability notes. These fields support repeatable audience snapshots.
+Record the target username, collection time, extraction ID, page cursor, and
+source limits. Use these fields to compare audience snapshots.
 
-## Twitter Follower Tracker Snapshot Model
+## Twitter follower tracker snapshot model
 
 Never compare follower exports by row position. Sort and join snapshots by the
 stable X user ID. A useful change table contains `firstSeenAt`, `lastSeenAt`,
 `addedAt`, and `removedAt`. Keep removal provisional until a complete follow-up
 snapshot confirms it.
 
-| Measure | Calculation | Decision It Supports |
+| Measure | Calculation | Decision it supports |
 | --- | --- | --- |
 | Net audience change | Added IDs minus removed IDs | Growth reporting |
 | Gross audience change | Added IDs plus removed IDs | Audience volatility |
@@ -95,22 +95,22 @@ For relationship checks between 2 known users, use the dedicated follower-check
 route instead of exporting a full audience. Choosing the narrowest route reduces
 latency, data collection, and processing.
 
-## Twitter Follower Dataset Checklist
+## Twitter follower dataset checklist
 
 1. Define the lawful purpose and minimum fields.
 2. Validate the public target account.
 3. Set a sample or complete result bound.
 4. Estimate and approve bulk work.
 5. Deduplicate by stable user ID.
-6. Record collection time and source caveats.
+6. Record collection time and source limits.
 7. Restrict export access and retention.
 
-## Twitter Follower Warehouse Tables
+## Twitter follower warehouse tables
 
 Keep identity, observations, and memberships separate. This model reduces
 duplicate profile data and preserves history.
 
-| Table | Suggested Key | Purpose |
+| Table | Suggested key | Purpose |
 | --- | --- | --- |
 | `x_users` | `x_user_id` | Latest known public profile |
 | `follower_snapshots` | `snapshot_id` | Target, time, job, and source notes |
@@ -120,8 +120,8 @@ duplicate profile data and preserves history.
 For lead scoring, derive features after storage. Keep the raw observation
 available for review. Avoid inferring sensitive traits from profile text.
 
-## Related Twitter Follower API Guides
+## Related Twitter follower API guides
 
 - [Extraction types and estimates](extractions.md)
 - [Python examples](python-examples.md)
-- [X API alternative content hub](twitter-api-alternative-faq.md)
+- [X API alternative FAQ](twitter-api-alternative-faq.md)

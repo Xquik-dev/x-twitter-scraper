@@ -1,4 +1,4 @@
-# Xquik TypeScript Types: Support
+# Xquik TypeScript types: support
 
 ```typescript
 type SupportTicketStatus = "open" | "in_progress" | "resolved" | "closed";

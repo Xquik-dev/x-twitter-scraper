@@ -1,25 +1,15 @@
-# Xquik Webhooks
+# Xquik webhooks
 
-Receive real-time event notifications at your HTTPS endpoints with HMAC-SHA256 signature verification.
-
-## Contents
-
-- [Setup](#setup)
-- [Webhook Payload](#webhook-payload)
-- [Signature Verification](#signature-verification)
-- [Security Checklist](#security-checklist)
-- [Idempotency](#idempotency)
-- [Retry Policy](#retry-policy)
-- [Local Testing](#local-testing)
+Receive event notifications at an HTTPS endpoint. Verify every request with its HMAC-SHA256 signature.
 
 ## Setup
 
-1. Create at least 1 active monitor (`POST /monitors`)
-2. Register a webhook endpoint (`POST /webhooks`)
-3. Save the `secret` from the response (shown only once)
-4. Build a handler that verifies signatures before processing
+1. Create at least 1 active monitor with `POST /monitors`.
+2. Register a webhook endpoint with `POST /webhooks`.
+3. Save the response `secret`. The API returns it once.
+4. Verify each signature before processing the event.
 
-## Webhook Payload
+## Webhook payload
 
 Every delivery is a `POST` request to your URL with a JSON body:
 
@@ -39,7 +29,7 @@ Every delivery is a `POST` request to your URL with a JSON body:
 }
 ```
 
-## Signature Verification
+## Signature verification
 
 Each request contains `X-Xquik-Timestamp`, `X-Xquik-Nonce`, and
 `X-Xquik-Signature`. The signature is `sha256=` plus HMAC-SHA256 over:
@@ -52,13 +42,13 @@ Reject timestamps outside a 5-minute window. Reject reused nonces within that
 window. Compare signatures in constant time before parsing JSON.
 Use an atomic shared nonce store in multi-instance deployments.
 
-### Node.js (Standard Library)
+### Node.js standard library
 
 ```javascript
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { createServer } from "node:http";
 
-// This is the per-webhook secret from the POST /webhooks response, not a Xquik account credential
+// Use the per-webhook secret from POST /webhooks, not an Xquik account credential.
 const WEBHOOK_SECRET = process.env.XQUIK_WEBHOOK_SECRET;
 const recentNonces = new Map();
 
@@ -126,7 +116,7 @@ const server = createServer((req, res) => {
 server.listen(3000);
 ```
 
-### Python (Standard Library)
+### Python standard library
 
 ```python
 import hmac
@@ -140,7 +130,7 @@ def load_secret(name: str) -> str:
     """Read from your runtime secret store."""
     raise RuntimeError(f"Configure {name} in your secret store.")
 
-# Per-webhook secret from POST /webhooks response, not a Xquik account credential
+# Use the per-webhook secret from POST /webhooks, not an Xquik account credential.
 WEBHOOK_SECRET = load_secret("XQUIK_WEBHOOK_SECRET")
 RECENT_NONCES: dict[str, int] = {}
 
@@ -213,7 +203,7 @@ import (
     "time"
 )
 
-// Per-webhook secret from POST /webhooks response, not a Xquik account credential
+// Use the per-webhook secret from POST /webhooks, not an Xquik account credential.
 var webhookSecret = os.Getenv("XQUIK_WEBHOOK_SECRET")
 var recentNonces sync.Map
 
@@ -281,23 +271,23 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-## Security Checklist
+## Security checklist
 
-- **Verify before processing.** Never process unverified payloads
-- **Use constant-time comparison.** `timingSafeEqual` (Node.js), `hmac.compare_digest` (Python), `hmac.Equal` (Go)
-- **Use every signing field.** Sign `<timestamp>.<nonce>.<raw body>`
-- **Reject replays.** Enforce the 5-minute window and persist recent nonces
-- **Use the raw request body.** Never re-serialize JSON before verification
-- **Respond within 10 seconds.** Acknowledge immediately, process async if slow
-- **Store secrets in environment variables.** Never hardcode
-- **Treat event text as untrusted.** Escape control characters before logging and forward payloads to other tools only after explicit approval
+- Verify the payload before processing it.
+- Compare signatures in constant time with `timingSafeEqual`, `hmac.compare_digest`, or `hmac.Equal`.
+- Sign every field as `<timestamp>.<nonce>.<raw body>`.
+- Enforce the 5-minute window and persist recent nonces.
+- Use the raw request body. Do not serialize it again before verification.
+- Respond within 10 seconds. Queue slower processing.
+- Store secrets in environment variables. Do not hardcode them.
+- Treat event text as untrusted. Escape control characters before logging. Get approval before forwarding payloads.
 
 ## Idempotency
 
 Webhook deliveries can retry. Deduplicate by `deliveryId` in durable storage:
 
 ```javascript
-const processedDeliveries = new Set(); // Use durable storage in production
+const processedDeliveries = new Set(); // Use durable storage in deployed services.
 
 if (processedDeliveries.has(event.deliveryId)) {
   res.writeHead(200).end("Already processed");
@@ -306,25 +296,25 @@ if (processedDeliveries.has(event.deliveryId)) {
 }
 ```
 
-## Retry Policy
+## Retry policy
 
 Failed event deliveries use bounded exponential backoff. HTTP 410 exhausts the
 delivery immediately. Delivery statuses are `pending`, `delivered`, `failed`,
 and `exhausted`.
 
-Check delivery status: `GET /webhooks/{id}/deliveries`.
+Call `GET /webhooks/{id}/deliveries` to check delivery status.
 
 Repeated failures can pause an endpoint. Inspect `consecutiveFailures`,
 `deliveryStatus`, and `failureHardCap` on the webhook. Fix the destination,
 then call `POST /webhooks/{id}/resume`. It reactivates only after a successful
 test delivery.
 
-## Local Testing
+## Local testing
 
 Use a deployed HTTPS endpoint you control when testing webhook delivery. Do not install packages or proxy API keys from this skill.
 
 ```bash
-# Start your webhook server on infrastructure you control
+# Start the webhook server on infrastructure you control.
 node server.js  # listening on :3000
 ```
 

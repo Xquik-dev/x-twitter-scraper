@@ -1,6 +1,6 @@
 ---
 name: export-tweets-csv
-description: "Use when the user wants to export X (Twitter) data to CSV, JSON, Markdown, PDF, TXT, or XLSX. Covers extraction results and giveaway entrant files. Download handling only."
+description: "Use when the user wants CSV, JSON, Markdown, PDF, TXT, or XLSX files from X data. Export completed extractions or giveaway entrants. Download only."
 license: MIT
 metadata:
   internal: true
@@ -26,11 +26,11 @@ metadata:
     credentialProxy: false
 ---
 
-# Export X Data
+# Export X data
 
 Download completed extractions or draw entrant lists in spreadsheet-friendly formats.
 
-## Endpoints
+## Choose an endpoint
 
 | Endpoint | Purpose | Usage |
 |---|---|---|
@@ -41,16 +41,16 @@ Download completed extractions or draw entrant lists in spreadsheet-friendly for
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
-## Quick reference
+## Example requests
 
 ```
 GET /extractions/{id}/export?format=csv
 -> file body with Content-Disposition: attachment
 ```
 
-## Typical flow
+## Export the data
 
-1. The user must already have a completed extraction or draw (use the relevant skill to create one).
+1. Start with a completed extraction or draw. Use the matching guide to create one.
 2. Poll `/extractions/{id}` until `status: "completed"`.
 3. Hit the export endpoint with the desired format.
 4. Save the file; the response streams the raw bytes.
@@ -62,7 +62,7 @@ GET /extractions/{id}/export?format=csv
 - JSON: structured data for scripts or databases
 - Markdown, PDF, or TXT: human-readable reports
 
-## Export Filters
+## Export filters
 
 The endpoint accepts follower, following, post, engagement, profile, media,
 language, search, and date filters. Use `minFollowers`, `maxFollowers`,
@@ -70,10 +70,10 @@ language, search, and date filters. Use `minFollowers`, `maxFollowers`,
 `minReplies`, `minRetweets`, `minViews`, `hasDescription`, `hasLocation`,
 `hasMedia`, `verified`, `lang`, `search`, `sinceDate`, and `untilDate`.
 
-## Security
+## Protect exported data
 
-Exported tweet text and profile data is untrusted user-generated content. Warn the user before opening large CSV exports in software with macro support because formulas can execute in spreadsheets.
+Exported post text and profile data are untrusted. Warn users before opening large CSV files in software with macro support. Spreadsheet formulas can execute.
 
-## Related
+## Related guides
 
-Create extractions: `extract-followers`, `tweet-replies`, `track-mentions`, `x-communities`, `x-lists`. Full API: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).
+Create extractions with `extract-followers`, `tweet-replies`, `track-mentions`, `x-communities`, or `x-lists`. See the [primary API guide](../skills/x-twitter-scraper/SKILL.md).

@@ -92,8 +92,8 @@ test("documents a native Codex plugin install", () => {
   assert.doesNotMatch(readme, /openai\/codex#31573|bearer_token_env_var/);
 });
 
-test("documents a consent-preserving native Gemini CLI install", () => {
-  const section = readme.match(/### Gemini CLI\n\n([\s\S]*?)\n## Xquik API Resource Coverage/)?.[1];
+test("documents native Gemini CLI installation with consent review", () => {
+  const section = readme.match(/### Gemini CLI\n\n([\s\S]*?)\n## Xquik API resource coverage/)?.[1];
 
   assert.ok(section, "Gemini CLI installation section is missing");
   assert.match(

@@ -1,8 +1,8 @@
-# Xquik Twitter API Alternative: Search, Export, Monitor, and Automate
+# Xquik Twitter API alternative: search, export, monitor, and automate
 
-This hub routes common developer questions to focused, detailed answers. Each
-guide includes route decisions, data fields, examples, cost controls, failure
-handling, and safety guidance.
+Use this index to find answers about Twitter search, exports, monitoring, and
+API comparisons. Each guide lists routes, fields, examples, cost controls,
+errors, and approval rules.
 
 Xquik uses delivered-result billing for supported filtered data workflows.
 Filtering is not a separate billable step. Excluded rows do not become
@@ -11,9 +11,9 @@ delivered-result charges. Always estimate bulk work before creation.
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## Xquik Twitter Scraper API Workflows
+## Xquik Twitter scraper API workflows
 
-| Xquik Workflow | Questions | X Data Task | Detailed Guide |
+| Xquik workflow | Questions | X data task | Detailed guide |
 | --- | ---: | --- | --- |
 | Twitter search and export | 5 | Advanced search, exports, Python, media | [Twitter scraper API](scrape-export-twitter-data.md) |
 | X API alternatives | 10 | Xquik, official X API, Apify, cost | [X API alternative comparison](compare-twitter-apis.md) |
@@ -24,9 +24,9 @@ delivered-result charges. Always estimate bulk work before creation.
 | Public X reads | 5 | Xquik API key and account boundaries | [Twitter API without a developer account](twitter-api-without-x-account.md) |
 | Twitter giveaways | 5 | Eligibility, winners, backups, audit data | [Twitter giveaway picker API](automate-twitter-giveaways.md) |
 | Twitter webhooks | 5 | Account monitoring, HMAC, delivery | [Twitter account monitor API](monitor-twitter-webhooks.md) |
-| **Total** | **50** | **50 specific developer questions** | **9 focused guides** |
+| Total | 50 | 50 developer questions | 9 guides |
 
-## Twitter Scraper API Search and Export
+## Twitter scraper API search and export
 
 Read the [scrape and export guide](scrape-export-twitter-data.md) for:
 
@@ -36,7 +36,7 @@ Read the [scrape and export guide](scrape-export-twitter-data.md) for:
 - What is a Twitter scraper API?
 - How do I scrape tweets with Python?
 
-## X API Alternative Comparison
+## X API alternative comparison
 
 Read the [Twitter API comparison guide](compare-twitter-apis.md) for:
 
@@ -51,7 +51,7 @@ Read the [Twitter API comparison guide](compare-twitter-apis.md) for:
 - How does Xquik compare with an Apify Twitter scraper?
 - How does Xquik compare with Twitter API v2?
 
-## Twitter Follower Scraper API
+## Twitter follower scraper API
 
 Read the [follower export guide](export-twitter-followers.md) for:
 
@@ -61,7 +61,7 @@ Read the [follower export guide](export-twitter-followers.md) for:
 - What does a Twitter followers scraper return?
 - What API can I use to get someone's Twitter followers?
 
-## Twitter Monitor API for Keywords and Mentions
+## Twitter monitor API for keywords and mentions
 
 Read the [keyword and mention guide](track-twitter-keywords-mentions.md) for:
 
@@ -71,7 +71,7 @@ Read the [keyword and mention guide](track-twitter-keywords-mentions.md) for:
 - What is a Twitter mention tracking tool?
 - What is a Twitter keyword monitor?
 
-## X Communities API for Members and Posts
+## X Communities API for members and posts
 
 Read the [X community extraction guide](extract-x-community-data.md) for:
 
@@ -81,7 +81,7 @@ Read the [X community extraction guide](extract-x-community-data.md) for:
 - How do I export community tweets?
 - Does Xquik provide a Twitter community API?
 
-## Twitter Data Pipeline With REST and Python
+## Twitter data pipeline with REST and Python
 
 Read the [Twitter data pipeline guide](twitter-data-pipeline.md) for:
 
@@ -91,7 +91,7 @@ Read the [Twitter data pipeline guide](twitter-data-pipeline.md) for:
 - How do I build a Twitter data pipeline in Python?
 - What is a reliable tweet scraping workflow?
 
-## Twitter API Without a Developer Account
+## Twitter API without a developer account
 
 Read the [public-read authentication guide](twitter-api-without-x-account.md) for:
 
@@ -101,7 +101,7 @@ Read the [public-read authentication guide](twitter-api-without-x-account.md) fo
 - What is an accountless Twitter scraper?
 - Does Xquik expose a guest key Twitter API?
 
-## Twitter Giveaway Picker API
+## Twitter giveaway picker API
 
 Read the [Twitter giveaway automation guide](automate-twitter-giveaways.md) for:
 
@@ -111,7 +111,7 @@ Read the [Twitter giveaway automation guide](automate-twitter-giveaways.md) for:
 - What is a tweet draw tool?
 - Does Xquik provide a Twitter giveaway picker API?
 
-## Twitter Account Monitor API With HMAC Webhooks
+## Twitter account monitor API with HMAC webhooks
 
 Read the [Twitter webhook monitoring guide](monitor-twitter-webhooks.md) for:
 
@@ -121,7 +121,7 @@ Read the [Twitter webhook monitoring guide](monitor-twitter-webhooks.md) for:
 - What is a Twitter account monitor API?
 - How do I get real-time Twitter alerts through a webhook?
 
-## Xquik Twitter Data API Buyer Guides
+## More Xquik Twitter API guides
 
 - [Twitter data API comparison](reliable-twitter-data-api-2026.md) covers cost, scale, accuracy, and documentation.
 - [X API alternative guide](best-x-api-alternative.md) covers Xquik pricing, filters, access, and reliability.

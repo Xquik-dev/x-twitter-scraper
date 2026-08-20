@@ -3,6 +3,6 @@
 
 import test from "node:test";
 
-test("validates every package contract surface", async () => {
+test("validates every package contract file", async () => {
   await import("../scripts/check-versions.mjs");
 });

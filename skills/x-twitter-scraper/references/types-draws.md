@@ -1,4 +1,4 @@
-# Xquik TypeScript Types: Draws
+# Xquik TypeScript types: draws
 
 ```typescript
 

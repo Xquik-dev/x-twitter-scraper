@@ -1,4 +1,4 @@
-# Xquik TypeScript Types: API Keys
+# Xquik TypeScript types: API keys
 
 ```typescript
 

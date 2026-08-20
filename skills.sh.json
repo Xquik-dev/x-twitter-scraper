@@ -4,12 +4,12 @@
   "groupings": [
     {
       "title": "Core API",
-      "description": "Start with OAuth-first MCP, API-key REST auth, SDKs, and broad X data workflows.",
+      "description": "Choose OAuth for MCP, an API key for REST, or a typed SDK.",
       "skills": ["x-twitter-scraper"]
     },
     {
-      "title": "Tweet Search",
-      "description": "Search tweets, analyze engagement, export posts, and inspect replies, quotes, and trends.",
+      "title": "Tweet search",
+      "description": "Search tweets, inspect engagement, or export posts and replies.",
       "skills": [
         "search-tweets",
         "x-trends",
@@ -28,8 +28,8 @@
       ]
     },
     {
-      "title": "User Data",
-      "description": "Read user timelines, followers, mutuals, lists, communities, and approved account data.",
+      "title": "User data",
+      "description": "Read timelines, followers, lists, communities, and approved account data.",
       "skills": [
         "user-tweets",
         "extract-followers",
@@ -43,7 +43,7 @@
     },
     {
       "title": "Monitoring",
-      "description": "Track accounts, hashtags, competitors, mentions, webhooks, and trending news with clear approvals.",
+      "description": "Track accounts, hashtags, mentions, or news. Ask before creating a monitor or webhook.",
       "skills": [
         "monitor-accounts",
         "track-hashtags",
@@ -55,7 +55,7 @@
     },
     {
       "title": "Publishing",
-      "description": "Plan, write, optimize, and publish X posts only after explicit confirmation.",
+      "description": "Draft and score X posts. Publish only after explicit approval.",
       "skills": [
         "tweet-ideas",
         "write-tweets",
@@ -70,7 +70,7 @@
     },
     {
       "title": "Growth",
-      "description": "Run follower, cleanup, and giveaway workflows with bounded calls and explicit confirmation.",
+      "description": "Review followers or run a giveaway with bounded, approved calls.",
       "skills": ["grow-followers", "clean-followers", "run-giveaway"]
     }
   ]

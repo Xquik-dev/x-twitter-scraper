@@ -45,7 +45,7 @@ function assertValidResponse(response) {
   }
 }
 
-test("fuzzes arbitrary JSON lines without invalid responses", () => {
+test("returns valid responses for arbitrary JSON lines", () => {
   const inputLine = fc.oneof(
     fc.jsonValue().map(JSON.stringify),
     fc.string({ maxLength: 4_096 }),
@@ -62,7 +62,7 @@ test("fuzzes arbitrary JSON lines without invalid responses", () => {
   );
 });
 
-test("fuzzes unknown methods while preserving JSON-RPC identifiers", () => {
+test("preserves JSON-RPC identifiers for unknown methods", () => {
   const identifier = fc.oneof(
     fc.integer(),
     fc.string({ maxLength: 128 }),

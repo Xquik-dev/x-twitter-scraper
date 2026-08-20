@@ -1,7 +1,7 @@
 {
   "name": "x-twitter-scraper",
   "version": "2.6.5",
-  "description": "Xquik Skill and plugin bundle. Includes 128 REST operations. MCP has 120 catalog routes through 2 tools; 119 support JSON or text. Not affiliated with X Corp.",
+  "description": "Xquik Twitter scraper API Skill for 128 REST operations. MCP has 120 catalog routes through 2 tools; 119 support JSON or text. Account actions need approval. Not affiliated with X Corp.",
   "author": {
     "name": "Xquik",
     "url": "https://github.com/Xquik-dev"
@@ -37,8 +37,8 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "X Twitter Scraper",
-    "shortDescription": "Use Xquik for X data, MCP, SDKs, and gated actions. Not affiliated with X Corp.",
-    "longDescription": "Guide agents through 128 Xquik REST operations, 120 MCP catalog routes, SDKs, webhooks, exports, and confirmed actions. Two MCP tools support 119 JSON or text operations. Not affiliated with X Corp.",
+    "shortDescription": "Search and export X data. Confirm every account action. Not affiliated with X Corp.",
+    "longDescription": "Use 128 Xquik REST operations or 120 MCP catalog routes. Two MCP tools support 119 JSON or text operations. SDKs, signed webhooks, and exports support application integrations. Account actions need approval. Not affiliated with X Corp.",
     "developerName": "Xquik",
     "category": "Productivity",
     "composerIcon": "./assets/icon.svg",
@@ -53,7 +53,7 @@
     "defaultPrompt": [
       "Search recent X posts with Xquik",
       "Set up the Xquik MCP server",
-      "Create a gated X monitoring workflow"
+      "Create an approved X monitor"
     ],
     "brandColor": "#0F172A",
     "screenshots": []

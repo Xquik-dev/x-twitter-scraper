@@ -1,4 +1,4 @@
-# X Communities API: Export Members, Moderators, and Posts
+# X Communities API: export members, moderators, and posts
 
 Xquik supports community discovery, metadata, members, moderators, posts, and
 search. Use the numeric community ID from `x.com/i/communities/{id}`.
@@ -6,22 +6,22 @@ search. Use the numeric community ID from `x.com/i/communities/{id}`.
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## X Community Dataset Matrix
+## X Community dataset matrix
 
-| Dataset | Extraction Type | Required Input | Useful Keys |
+| Dataset | Extraction type | Required input | Useful keys |
 | --- | --- | --- | --- |
 | Members | `community_extractor` | `targetCommunityId` | Community ID and user ID |
 | Moderators | `community_moderator_explorer` | `targetCommunityId` | Community ID and user ID |
 | Posts | `community_post_extractor` | `targetCommunityId` | Community ID and tweet ID |
 | Matching posts | `community_search` | Community ID and `searchQuery` | Community ID, query, tweet ID |
 
-## X Community Research Schema
+## X Community research schema
 
 Use a separate table for communities, member observations, and post
 observations. This prevents a current profile update from changing past
 research results.
 
-| Table | Primary Key | Recommended Context |
+| Table | Primary key | Stored context |
 | --- | --- | --- |
 | `communities` | Community ID | Name, description, rules, collected time |
 | `community_members` | Community ID, user ID, snapshot ID | Role and membership observation |
@@ -51,7 +51,7 @@ Moderators answer governance questions. Posts answer content questions.
 Community search answers topic questions inside one community.
 
 Use a direct read for a small application page. Use extraction jobs for durable
-or complete datasets. Estimate before creating bulk work.
+or exportable datasets. Estimate before creating bulk work.
 
 Keep member and post datasets separate. Their identifiers, update rates,
 privacy considerations, and analysis methods differ.
@@ -90,7 +90,7 @@ Community writes are separate account actions. They require a connected X
 account and explicit confirmation. Public community reads do not authorize
 joins, leaves, or moderation actions.
 
-## X Community Extraction Checklist
+## X Community extraction checklist
 
 1. Confirm the public community and numeric ID.
 2. Choose members, moderators, posts, or scoped search.
@@ -100,7 +100,7 @@ joins, leaves, or moderation actions.
 6. Separate raw content from derived analysis.
 7. Apply privacy, retention, and redistribution controls.
 
-## X Community Dataset Quality Checks
+## X Community dataset quality checks
 
 Report the requested result bound, returned rows, unique IDs, and collection
 time. Explain whether the dataset covers members, moderators, posts, or search
@@ -114,8 +114,8 @@ For topic analysis, publish the query version and language coverage. For network
 analysis, explain whether edges represent membership, replies, quotes, or
 reposts. Each edge has a different meaning.
 
-## Related X Community API Guides
+## Related X Community API guides
 
 - [Extraction types](extractions.md)
 - [Community endpoint routes](api-endpoints-x-api.md)
-- [X API alternative content hub](twitter-api-alternative-faq.md)
+- [X API alternative FAQ](twitter-api-alternative-faq.md)

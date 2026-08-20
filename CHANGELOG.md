@@ -1,6 +1,6 @@
 # Changelog
 
-All notable public changes appear in this file.
+This file records public changes.
 
 ## Unreleased
 
@@ -10,6 +10,11 @@ All notable public changes appear in this file.
 - Document and validate native Codex marketplace installation.
 - Document and validate native Gemini CLI installation for both bundled Skills.
 - Document and validate native LobeHub subdirectory installation for both bundled Skills.
+
+### Changed
+
+- Rewrite public documentation, metadata, guides, commands, and tool descriptions.
+- Add supported Twitter search and API terms to package metadata.
 
 ## [2.6.5] - 2026-08-13
 
@@ -27,7 +32,7 @@ All notable public changes appear in this file.
 
 - Document support media, replay-safe mutations, and attachment downloads.
 - Document all direct user-search filters and filters-before-billing behavior.
-- Document the 109-code Error surface and exact cursor recovery.
+- Document the 109-code Error schema and exact cursor recovery.
 - Document Latest chronology and all 32 Tweet Thread filters.
 - Remove private reply-collection implementation details.
 
@@ -57,7 +62,7 @@ All notable public changes appear in this file.
 
 - Document MCP `2026-07-28` negotiation through `server/discover`.
 - Add private cache guidance for discovery and tool catalogs.
-- Add complete safe tweet, profile, and media field guidance.
+- Add safe tweet, profile, and media field guidance.
 - Add reply coverage and fallback guidance.
 
 ### Changed

@@ -1,4 +1,4 @@
-# Xquik TypeScript Types: Request Bodies
+# Xquik TypeScript types: request bodies
 
 ```typescript
 

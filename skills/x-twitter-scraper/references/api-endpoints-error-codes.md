@@ -1,4 +1,4 @@
-# Xquik REST API Endpoints: Error Codes
+# Xquik REST API endpoints: error codes
 
 Default v1 responses put a legacy string code in `error`. Send
 `xquik-api-contract: 2026-04-29` to receive an object with `message`, `type`,
@@ -21,14 +21,14 @@ and `code`. OpenAPI enumerates 112 codes, including `closed`, `expired`,
 | 400 | `missing_query` | Required query parameter is missing |
 | 400 | `missing_params` | Required query parameters are missing |
 | 400 | `no_media` | Tweet has no downloadable media |
-| 400 | `webhook_inactive` | Webhook is disabled (test-webhook only) |
+| 400 | `webhook_inactive` | Webhook is disabled; applies only to webhook tests |
 | 401 | `unauthenticated` | Missing or invalid API key |
 | 403 | `account_needs_reauth` | X account session expired; use dashboard re-auth flow |
 | 402 | `no_subscription` | No active plan |
 | 402 | `subscription_inactive` | Plan is not active |
 | 402 | `no_credits` | No credit balance record exists |
 | 402 | `insufficient_credits` | Credit balance is too low |
-| 403 | `api_key_limit_reached` | API key limit reached (100 max) |
+| 403 | `api_key_limit_reached` | API key limit reached; maximum 100 |
 | 404 | `not_found` | Resource does not exist |
 | 404 | `user_not_found` | X user not found |
 | 404 | `tweet_not_found` | Tweet not found |
@@ -44,7 +44,7 @@ and `code`. OpenAPI enumerates 112 codes, including `closed`, `expired`,
 | 502 | `x_api_unavailable` | X data source temporarily unavailable |
 | 502 | `x_api_unauthorized` | X data source authentication failed. Retry |
 
-## Cursor Recovery Examples
+## Cursor recovery examples
 
 `409 coverage_cursor_unavailable` requires an integer `Retry-After` response
 header. Wait that many seconds, then retry the same cursor once.
