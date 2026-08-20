@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import test from "node:test";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+const readme = readFileSync(join(root, "README.md"), "utf8");
 const skillsRoot = join(root, "skills");
 
 function readFrontmatterScalar(source, key) {
@@ -55,9 +56,17 @@ test("matches Gemini CLI's one-level Skill discovery contract", () => {
   }
 });
 
+test("documents a native Codex plugin install", () => {
+  const section = readme.match(/### Codex\n\n([\s\S]*?)\n### Gemini CLI/)?.[1];
+  assert.ok(section, "Codex installation section is missing");
+  assert.match(section, /codex plugin marketplace add Xquik-dev\/x-twitter-scraper/);
+  assert.match(section, /codex plugin add x-twitter-scraper@x-twitter-scraper/);
+  assert.match(section, /codex plugin list/);
+  assert.doesNotMatch(readme, /openai\/codex#31573|bearer_token_env_var/);
+});
+
 test("documents a consent-preserving native Gemini CLI install", () => {
-  const readme = readFileSync(join(root, "README.md"), "utf8");
-  const section = readme.match(/### Gemini CLI\n\n([\s\S]*?)\n### Manual Installation/)?.[1];
+  const section = readme.match(/### Gemini CLI\n\n([\s\S]*?)\n## Xquik API Resource Coverage/)?.[1];
 
   assert.ok(section, "Gemini CLI installation section is missing");
   assert.match(
