@@ -42,7 +42,7 @@ OAuth-capable clients use OAuth 2.1. ChatGPT custom apps require OAuth.
 Eight credential, checkout, or guest-wallet
 operations remain outside MCP.
 
-> **Codex OAuth compatibility:** Affected Codex releases discard the RFC 9207 `iss` callback value even though Xquik returns it. If Codex reports `Authorization server response missing required issuer: expected https://xquik.com`, use `XQUIK_API_KEY` through the Codex `bearer_token_env_var` setting. Follow the [Codex OAuth troubleshooting guide](https://docs.xquik.com/guides/troubleshooting#codex-oauth-issuer-validation-error) and track [openai/codex#31573](https://github.com/openai/codex/issues/31573).
+> **Codex OAuth:** Use Codex CLI 0.147.0 or later. These releases preserve RFC 9207 `iss` values during MCP OAuth.
 
 ## Cheapest X API Alternative for Filtered Results
 
@@ -99,6 +99,18 @@ npx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
 
 The registry writes only to `.agents/skills/x-twitter-scraper`.
 
+Other clients can copy `skills/x-twitter-scraper` into their documented Skill directory.
+
+### Codex
+
+```bash
+codex plugin marketplace add Xquik-dev/x-twitter-scraper
+codex plugin add x-twitter-scraper@x-twitter-scraper
+```
+
+This enables both bundled Skills and the hosted MCP declaration. It installs no
+npm package and starts no local server. Verify with `codex plugin list`.
+
 ### Gemini CLI
 
 Install both Xquik Skills with Gemini CLI's native Skill installer:
@@ -120,30 +132,6 @@ gemini skills list
 ```
 
 Add `--scope workspace` for a trusted project-only installation.
-
-### Manual Installation
-
-Use manual installation only when the skills CLI is unavailable. Copy the primary skill directory, not the repository root.
-
-```bash
-target_dir=".agents/skills/x-twitter-scraper"
-tmp_dir="$(mktemp -d)"
-
-git clone --depth 1 https://github.com/Xquik-dev/x-twitter-scraper.git "$tmp_dir/x-twitter-scraper"
-rm -rf "$target_dir"
-mkdir -p "$(dirname "$target_dir")"
-cp -R "$tmp_dir/x-twitter-scraper/skills/x-twitter-scraper" "$target_dir"
-rm -rf "$tmp_dir"
-```
-
-Target directories:
-
-- Codex / Cursor / Gemini CLI / GitHub Copilot / Cline / OpenCode: `.agents/skills/x-twitter-scraper`
-- Claude Code: `.claude/skills/x-twitter-scraper`
-- Windsurf: `.windsurf/skills/x-twitter-scraper`
-- Roo Code: `.roo/skills/x-twitter-scraper`
-- Continue: `.continue/skills/x-twitter-scraper`
-- Goose: `.goose/skills/x-twitter-scraper`
 
 ## Xquik API Resource Coverage
 
