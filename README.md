@@ -101,6 +101,26 @@ The registry writes only to `.agents/skills/x-twitter-scraper`.
 
 Other clients can copy `skills/x-twitter-scraper` into their documented Skill directory.
 
+### LobeHub
+
+LobeHub CLI 0.0.48 or later imports a Skill from an exact GitHub tree path.
+Sign in, then install the primary Skill:
+
+```bash
+lh login
+lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/x-twitter-scraper
+```
+
+Install the optional social-research Skill separately:
+
+```bash
+lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-social-research
+```
+
+Verify both imports with `lh skill list --source market`. Each command imports
+only the selected Skill directory and its resources. It installs no npm package
+and starts no local MCP server.
+
 ### Codex
 
 ```bash
