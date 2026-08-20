@@ -77,7 +77,7 @@ export const skillFrontmatterExpectations = {
     "metadata.security.securityReference": "references/security.md",
   },
   arrays: {
-    tags: ["twitter", "x", "social-media", "api-development", "scraping"],
+    "metadata.tags": ["twitter", "x", "social-media", "api-development", "scraping"],
     "metadata.capabilities.network.hosts": ["xquik.com", "docs.xquik.com"],
     "metadata.capabilities.environment.required": ["XQUIK_API_KEY"],
     "metadata.capabilities.environment.optional": ["XQUIK_WEBHOOK_SECRET"],
