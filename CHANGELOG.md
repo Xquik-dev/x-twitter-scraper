@@ -9,6 +9,7 @@ All notable public changes appear in this file.
 - Add a shadcn GitHub registry for project-local Skill installation.
 - Document and validate native Codex marketplace installation.
 - Document and validate native Gemini CLI installation for both bundled Skills.
+- Document and validate native LobeHub subdirectory installation for both bundled Skills.
 
 ## [2.6.5] - 2026-08-13
 

@@ -56,6 +56,33 @@ test("matches Gemini CLI's one-level Skill discovery contract", () => {
   }
 });
 
+test("documents native LobeHub subdirectory installs", () => {
+  const section = readme.match(/### LobeHub\n\n([\s\S]*?)\n### Codex/)?.[1];
+  assert.ok(section, "LobeHub installation section is missing");
+  assert.match(section, /LobeHub CLI 0\.0\.48 or later/);
+  assert.match(section, /lh login/);
+  assert.match(section, /lh skill list --source market/);
+
+  const prefix =
+    "https://github.com/Xquik-dev/x-twitter-scraper/tree/master/";
+  const installedPaths = [...section.matchAll(/lh skill install (\S+)/g)].map(
+    ([, url]) => {
+      assert.ok(url.startsWith(prefix), `Unexpected LobeHub Skill URL: ${url}`);
+      return url.slice(prefix.length);
+    },
+  );
+
+  assert.deepEqual(installedPaths, [
+    "skills/x-twitter-scraper",
+    "skills/xquik-social-research",
+  ]);
+  for (const path of installedPaths) {
+    assert.ok(existsSync(join(root, path, "SKILL.md")), `${path} is missing`);
+  }
+
+  assert.doesNotMatch(section, /npm install|npx|git clone/);
+});
+
 test("documents a native Codex plugin install", () => {
   const section = readme.match(/### Codex\n\n([\s\S]*?)\n### Gemini CLI/)?.[1];
   assert.ok(section, "Codex installation section is missing");
