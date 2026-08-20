@@ -1,20 +1,18 @@
 # Changelog
 
-This file records public changes.
-
 ## Unreleased
+
+## [2.6.6] - 2026-08-20
 
 ### Added
 
-- Add a shadcn GitHub registry for project-local Skill installation.
-- Document and validate native Codex marketplace installation.
-- Document and validate native Gemini CLI installation for both bundled Skills.
-- Document and validate native LobeHub subdirectory installation for both bundled Skills.
+- Add native shadcn, Codex, Gemini CLI, and LobeHub installation paths.
 
 ### Changed
 
 - Rewrite public documentation, metadata, guides, commands, and tool descriptions.
 - Add supported Twitter search and API terms to package metadata.
+- Link Java, Kotlin, CLI, and Terraform users to published install paths.
 
 ## [2.6.5] - 2026-08-13
 
@@ -84,6 +82,7 @@ This file records public changes.
 - Return follow relationships only from explicit relationship checks.
 - Refresh SkillSpector v2.3.7 evidence with 0 findings.
 
+[2.6.6]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.6
 [2.6.5]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.5
 [2.6.4]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.4
 [2.6.3]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.3

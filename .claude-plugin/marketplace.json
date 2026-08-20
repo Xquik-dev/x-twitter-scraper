@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Xquik Twitter scraper API Skill for 128 REST operations and 120 MCP catalog routes. Two MCP tools support 119 JSON or text operations. Not affiliated with X Corp.",
-    "version": "2.6.5"
+    "version": "2.6.6"
   },
   "plugins": [
     {
       "name": "x-twitter-scraper",
       "source": "./",
       "description": "Search and export X data through 128 REST operations or 120 MCP catalog routes. Use 23 extraction types, signed webhooks, SDKs, and approved writes. Two MCP tools support 119 JSON or text operations. Not affiliated with X Corp.",
-      "version": "2.6.5",
+      "version": "2.6.6",
       "author": {
         "name": "Xquik"
       },
