@@ -6,12 +6,17 @@ labels: enhancement
 ---
 
 ## Problem
+
 What user problem would this solve?
 
 ## Proposed solution
+
 Describe the desired behavior.
 
 ## Alternatives considered
-Other approaches you've thought about.
+
+List other approaches you considered.
 
 ## Additional context
+
+Add examples, links, or screenshots that clarify the request.

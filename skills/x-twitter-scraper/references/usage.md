@@ -1,8 +1,8 @@
-# Xquik Usage Guardrails
+# Xquik usage and approval rules
 
-Use this reference to keep Xquik calls bounded, consent-based, and account-safe. Agents can read the current balance and request estimates so users can decide what to run.
+Use this reference to bound Xquik calls and require approval. Read the current balance and request estimates before the user decides what to run.
 
-## Agent Scope
+## Agent scope
 
 The skill may:
 
@@ -21,7 +21,7 @@ The skill must not:
 
 Plan and credit changes are dashboard-only.
 
-## Before Metered Work
+## Before metered work
 
 Before creating extraction jobs, draws, monitors, signed event delivery, or write actions:
 
@@ -31,13 +31,13 @@ Before creating extraction jobs, draws, monitors, signed event delivery, or writ
 4. Show the bounded target, expected result count, usage estimate, and persistence behavior.
 5. Wait for explicit user approval before sending the request.
 
-## Balance Reads
+## Balance reads
 
 Use `GET /credits` to read the current balance and account state. Treat returned plan and credit-change fields as read-only status from the dashboard.
 
 Do not use balance data to decide whether to run work automatically. Ask the user when a request may consume credits, create persistent resources, or act on an account.
 
-## Persistent Usage
+## Persistent usage
 
 Monitors and signed event delivery can continue after the current chat. Before creating one, show:
 

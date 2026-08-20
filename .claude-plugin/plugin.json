@@ -1,7 +1,7 @@
 {
   "name": "x-twitter-scraper",
   "version": "2.6.5",
-  "description": "Xquik Skill and plugin bundle. Includes 128 REST operations. MCP has 120 catalog routes through 2 tools; 119 support JSON or text. Not affiliated with X Corp.",
+  "description": "Xquik Twitter scraper API Skill for 128 REST operations. MCP has 120 catalog routes through 2 tools; 119 support JSON or text. Account actions need approval. Not affiliated with X Corp.",
   "author": {
     "name": "Xquik",
     "url": "https://github.com/Xquik-dev"
@@ -40,7 +40,7 @@
     "api_key": {
       "type": "string",
       "title": "Xquik API key",
-      "description": "Xquik API key (get one at dashboard.xquik.com/account)",
+      "description": "Create an API key at dashboard.xquik.com/account.",
       "sensitive": true
     }
   }

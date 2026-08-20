@@ -1,4 +1,4 @@
-# Xquik REST API and MCP Field Naming
+# Xquik REST API and MCP field naming
 
 Hosted MCP exposes `explore` and `xquik`. It no longer exposes
 operation-named tools with separate legacy response models.

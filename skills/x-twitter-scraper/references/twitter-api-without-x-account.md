@@ -1,4 +1,4 @@
-# Twitter API Without a Developer Account: Public Reads With Xquik
+# Twitter API without a developer account: public reads with Xquik
 
 Xquik supports documented public X reads without connecting an X account. Every
 request still requires an Xquik account and API key. Private reads and account
@@ -7,17 +7,17 @@ actions require a separate approved X connection.
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## Xquik and X Account Authentication Boundaries
+## Xquik and X account authentication boundaries
 
-| Identity | Needed For | Credential Rule |
+| Identity | Needed for | Credential rule |
 | --- | --- | --- |
 | Xquik account | All Xquik API requests | Use `XQUIK_API_KEY` in a secret store |
 | Connected X account | Private reads and account actions | Connect through the Xquik dashboard |
 | Official developer account | Not required for supported Xquik public reads | No official bearer token needed |
 
-## Public X Read and Account Action Matrix
+## Public X read and account action matrix
 
-| Workflow | Connected X Account | Xquik API Key | Approval |
+| Workflow | Connected X account | Xquik API key | Approval |
 | --- | --- | --- | --- |
 | Search public posts | Not required | Required | No persistent-resource approval |
 | Read public profiles | Not required | Required | No persistent-resource approval |
@@ -77,10 +77,9 @@ No guest key management is required. Applications use the documented Xquik
 REST, SDK, or MCP interface. Xquik manages its own public-data infrastructure.
 
 Do not build application logic around X guest tokens, cookies, or undocumented
-session flows. Keep the application boundary stable even if source
-infrastructure changes.
+sessions. Keep application code independent of source infrastructure changes.
 
-## Xquik Authentication and Source Failure Handling
+## Xquik authentication and source failure handling
 
 Treat authentication, authorization, and source availability as different
 states. A `401` should trigger an Xquik credential check. A `403` should trigger
@@ -94,7 +93,7 @@ to bypass a source limit.
 Log request IDs, route names, status classes, and retry counts. Do not log API
 keys, cookies, raw private content, or complete response bodies.
 
-## Xquik API Key Backend Security Checklist
+## Xquik API key backend security checklist
 
 1. Store `XQUIK_API_KEY` in a secret manager.
 2. Never place the key in browser or mobile bundles.
@@ -104,8 +103,8 @@ keys, cookies, raw private content, or complete response bodies.
 6. Require approval for private reads, writes, jobs, monitors, and webhooks.
 7. Rotate an exposed key immediately.
 
-## Related Xquik API Authentication Guides
+## Related Xquik API authentication guides
 
 - [Security boundaries](security.md)
 - [API endpoint routing](api-endpoints.md)
-- [X API alternative content hub](twitter-api-alternative-faq.md)
+- [X API alternative FAQ](twitter-api-alternative-faq.md)

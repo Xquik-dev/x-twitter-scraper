@@ -138,11 +138,11 @@ test("separates the bundle version from hosted MCP", async () => {
 
   assert.equal(packageJson.version, contract.bundleVersion);
   assert.equal(serverJson.version, contract.hostedMcpVersion);
-  assert.match(readme, /bundle is v2\.6\.4/);
+  assert.ok(readme.includes(`bundle is v${contract.bundleVersion}`));
   assert.match(readme, /Hosted MCP v2\.6\.0/);
   assert.match(mcpize, /Version: `2\.6\.0`/);
-  assert.match(versionGuard, /All bundle surfaces at/);
-  assert.match(versionGuard, /hosted MCP at/);
+  assert.match(versionGuard, /All bundle version files use/);
+  assert.match(versionGuard, /hosted MCP uses/);
 });
 
 test("keeps package-only releases from republishing hosted MCP", async () => {
@@ -318,7 +318,7 @@ test("documents automatic cursor recovery across public entry points", async () 
   assert.match(errors, /\| 410 \| `coverage_cursor_gone`/);
 });
 
-test("documents the current Error surface", async () => {
+test("documents the current Error schema", async () => {
   const errors = await read(
     "skills/x-twitter-scraper/references/api-endpoints-error-codes.md",
   );
@@ -355,8 +355,8 @@ test("documents the wrapped article response", async () => {
     "skills/x-twitter-scraper/references/api-endpoints-x-api.md",
   );
   const articleSection = article
-    .split("### Get Article", 2)[1]
-    .split("### Search Tweets", 1)[0];
+    .split("### Get article", 2)[1]
+    .split("### Search tweets", 1)[0];
 
   assertIncludes(
     articleSection,

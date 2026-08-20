@@ -1,33 +1,34 @@
 # Contributing
 
-Thanks for your interest in improving `x-twitter-scraper`.
+Use this guide to improve `x-twitter-scraper`.
 
 ## Scope
 
-This repo packages Xquik as an X Twitter Scraper API skill, MCP listing, SDK handoff, and public integration guide for developers and agents. Changes should focus on:
+This repo packages Xquik's Twitter scraper API Skill, MCP listings, SDK setup,
+and public integration guides for developers and agents. Changes should focus on:
 
-- Skill instruction clarity (`skills/`, `commands/`, `task-guides/`)
-- MCP and marketplace metadata (`server.json`, `.mcp.json`, `docker-mcp-registry/`, `mcpize/`)
-- Cross-agent compatibility (SKILL.md spec adherence)
-- Documentation and package metadata (`README.md`, `package.json`, plugin manifests)
+- Clarify Skill instructions in `skills/`, `commands/`, and `task-guides/`.
+- Update MCP and marketplace metadata in `server.json`, `.mcp.json`, `docker-mcp-registry/`, and `mcpize/`.
+- Preserve cross-agent compatibility with the SKILL.md specification.
+- Update `README.md`, `package.json`, and plugin manifests together when needed.
 
 Changes to the upstream Xquik API itself belong in the main Xquik repo.
 
 ## Getting started
 
-1. Fork and clone
-2. Create a branch for your change
-3. Make the edit
-4. Open a PR using the template
+1. Fork and clone the repository.
+2. Create a branch for the change.
+3. Make and test the edit.
+4. Open a pull request with the template.
 
 ## Guidelines
 
-- Keep skill instructions short and agent-friendly
-- Update `SKILL.md` if user-facing behavior changes
-- Update `README.md` if the API surface changes
-- Bump the version in `package.json` if you republish to npm
+- Keep Skill instructions short and direct.
+- Update `SKILL.md` when user-facing behavior changes.
+- Update `README.md` when the public API changes.
+- Bump the `package.json` version before republishing to npm.
 
-## Release Process
+## Release process
 
 Package releases use the version in `package.json`. Hosted MCP releases use
 the independent version in `server.json`. Keep the hosted version unchanged
@@ -41,7 +42,7 @@ when only the package changes.
 The MCP Registry workflow reads `server.json`. It skips versions that already
 exist. It publishes only when the hosted MCP version changes.
 
-## Test Policy
+## Test policy
 
 Run these checks before opening a pull request:
 
@@ -58,4 +59,4 @@ expected and invalid inputs.
 
 ## Questions
 
-Open an issue with the "question" label or email `support@xquik.com`.
+Open an issue with the `question` label or email `support@xquik.com`.

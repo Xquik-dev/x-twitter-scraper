@@ -1,7 +1,7 @@
 {
   "name": "x-developer",
   "version": "2.6.5",
-  "description": "Xquik agent skill & plugin bundle for REST, MCP, webhooks, exports & confirmation-gated X workflows. Not affiliated with X Corp.",
+  "description": "Xquik Twitter scraper API Skill for REST, MCP, webhooks, exports, and approved X actions. Not affiliated with X Corp.",
   "author": {
     "name": "Xquik",
     "url": "https://docs.xquik.com"
@@ -23,10 +23,18 @@
     "twitter-api-alternative",
     "x-api-alternative",
     "twitter-scraper-api",
+    "twitter-search",
+    "advanced-twitter-search",
     "twitter-data-api",
     "x-data-api",
     "tweet-search-api",
     "tweet-analytics",
+    "twitter-analytics",
+    "twitter-api-pricing",
+    "twitter-api-key",
+    "twitter-followers",
+    "twitter-trends",
+    "tweet-archive",
     "twitter-monitoring",
     "twitter-follower-export",
     "x-twitter-scraper",

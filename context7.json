@@ -1,7 +1,7 @@
 {
   "$schema": "https://context7.com/schema/context7.json",
   "projectTitle": "X Twitter Scraper",
-  "description": "Xquik X Twitter scraper API, MCP server, SDK, and agent skill docs for X API alternatives, filtered data, tweet search, follower export, social listening, extraction, monitoring, webhooks, and delivered-result workflows. Not affiliated with X Corp.",
+  "description": "Xquik Twitter scraper API, MCP server, SDK, and Skill documentation. Covers X API alternatives, Twitter search, follower exports, social listening, extractions, monitoring, and webhooks. Not affiliated with X Corp.",
   "branch": "master",
   "excludeFolders": [
     ".claude-plugin",
@@ -22,15 +22,15 @@
     "stub-server.mjs"
   ],
   "rules": [
-    "Use README.md for installation, comparison copy, SDK links, API coverage, and MCP setup.",
-    "Use skills/x-twitter-scraper/SKILL.md as the primary agent operating guide.",
-    "Use skills/x-twitter-scraper/references/twitter-api-alternative-faq.md to route Twitter scraper API questions to nine workflow guides for advanced search, exports, followers, monitoring, X communities, data pipelines, account boundaries, giveaways, and webhooks.",
+    "Use README.md for installation, provider comparisons, SDK links, API coverage, and MCP setup.",
+    "Use skills/x-twitter-scraper/SKILL.md as the primary operating guide.",
+    "Use skills/x-twitter-scraper/references/twitter-api-alternative-faq.md to route Twitter scraper API questions to 9 guides for advanced search, exports, followers, monitoring, X communities, data pipelines, account boundaries, giveaways, and webhooks.",
     "Use skills/x-twitter-scraper/references/reliable-twitter-data-api-2026.md, skills/x-twitter-scraper/references/best-x-api-alternative.md, and skills/x-twitter-scraper/references/twitter-scraper-api-guide.md for Twitter data API cost, Xquik filtering, API access, provider evaluation, analytics, and monitoring questions.",
-    "Use https://docs.xquik.com/mcp/overview#client-compatibility as the canonical current MCP client matrix. Do not assume every client supports OAuth: Cline and Qwen Code support OAuth; affected Codex and Goose releases need environment-backed API keys; Roo Code's archived final release is API-key-only; Pi has no native MCP client.",
-    "If Codex reports Authorization server response missing required issuer: expected https://xquik.com, do not repeat OAuth. Affected Codex releases discard the RFC 9207 iss value even though Xquik returns it. Set XQUIK_API_KEY and bearer_token_env_var = \"XQUIK_API_KEY\" in Codex TOML, then use https://docs.xquik.com/guides/troubleshooting#codex-oauth-issuer-validation-error and track https://github.com/openai/codex/issues/31573.",
-    "Use task-guides/*.md for task-specific workflows such as search, extraction, monitoring, webhooks, posting, and DMs.",
-    "Use commands/*.md for slash-command examples.",
-    "Keep implementation details public-safe; use Xquik API, read service, write service, or browser service wording."
+    "Use https://docs.xquik.com/mcp/overview#client-compatibility for current MCP client support. OAuth support differs by client. Codex CLI 0.147.0 or later, Cline, and Qwen Code support OAuth. Affected Goose releases need environment-backed API keys. Roo Code's archived final release accepts only API keys. Pi has no native MCP client.",
+    "If an older Codex release reports Authorization server response missing required issuer: expected https://xquik.com, do not repeat OAuth. Upgrade to Codex CLI 0.147.0 or later. If an upgrade is unavailable, set XQUIK_API_KEY and bearer_token_env_var = \"XQUIK_API_KEY\" in Codex TOML, then follow https://docs.xquik.com/guides/troubleshooting#codex-oauth-issuer-validation-error.",
+    "Use task-guides/*.md for search, extraction, monitoring, webhook, posting, and DM workflows.",
+    "Use commands/*.md for command examples.",
+    "Keep private implementation details out of public text. Use Xquik API, read service, write service, or browser service."
   ],
   "url": "https://context7.com/xquik-dev/x-twitter-scraper",
   "public_key": "pk_oCPeRRqZFJsY4cCUSotDD"

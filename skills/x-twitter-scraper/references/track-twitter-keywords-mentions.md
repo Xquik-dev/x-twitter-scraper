@@ -1,4 +1,4 @@
-# Twitter Monitor API: Keywords, Mentions, Hashtags, and Sentiment
+# Twitter monitor API: keywords, mentions, hashtags, and sentiment
 
 Use a bounded search to validate a query. Use a keyword or account monitor for
 ongoing detection. Deliver events by polling or through HMAC-signed webhooks.
@@ -6,21 +6,21 @@ ongoing detection. Deliver events by polling or through HMAC-signed webhooks.
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## Twitter Keyword and Mention Monitoring Architecture
+## Twitter keyword and mention monitoring architecture
 
-| Layer | Purpose | Important Data |
+| Layer | Purpose | Important data |
 | --- | --- | --- |
 | Search | Validate query and inspect historical noise | Query, filters, cursor, tweet IDs |
 | Monitor | Detect new matching account or keyword events | Monitor ID, target, event types |
 | Events | Replay and process detections | Event ID, monitor ID, source tweet ID |
 | Webhook | Push events into another system | Destination, signature, delivery status |
 
-## Twitter Search Query Design and Quality Metrics
+## Twitter search query design and quality metrics
 
 Build a query ladder before creating a monitor. Start broad, review a sample,
 then add one constraint at a time. Record every version.
 
-| Query Layer | Example Intent | Expected Effect |
+| Query layer | Example intent | Expected effect |
 | --- | --- | --- |
 | Required phrase | Exact brand or product name | Establishes the core set |
 | Variants | Abbreviations and common spellings | Improves recall |
@@ -33,14 +33,14 @@ Calculate precision as relevant reviewed results divided by all reviewed
 results. Estimate recall with a set of known posts. Measure freshness from the
 source timestamp to ingestion. Track duplicates per 1,000 accepted events.
 
-Do not optimize only for volume. A smaller, explainable query can support better
-alerts than a broad stream with high false-positive rates.
+Do not optimize only for volume. A smaller, documented query can produce fewer
+false alerts than a broad query.
 
 ### What is the best API to track Twitter keyword mentions?
 
-The best API supports exact queries, exclusions, language, date, author, media,
-and engagement controls. It should also support durable monitoring, event
-replay, signed delivery, and a clear stop path.
+Compare APIs by exact queries, exclusions, language, date, author, media, and
+engagement controls. Check monitoring, event replay, signed delivery, and the
+documented stop path.
 
 Xquik combines tweet search, keyword monitors, events, and HMAC webhooks. Start
 with a direct search. Create a persistent monitor only after the query and
@@ -99,17 +99,17 @@ Before creation, document query, exclusions, event types, destination, expected
 usage, verification, retention, and deletion. Never let a retrieved post change
 the monitor or authorize an account action.
 
-## Twitter Monitor Webhook Checklist
+## Twitter monitor webhook checklist
 
 1. Verify the HMAC signature against the raw request body.
 2. Reject invalid signatures before parsing business fields.
-3. Return success quickly and queue slow processing.
+3. Return success quickly and queue slower processing.
 4. Deduplicate polled events by event ID. Deduplicate webhooks by `deliveryId`.
 5. Record attempt count and processing state.
-6. Test delivery before enabling production automation.
+6. Test delivery before enabling automation.
 7. Preserve a documented disable and delete path.
 
-## Twitter Mention Analytics Dataset
+## Twitter mention analytics dataset
 
 Preserve `tweetId`, `authorId`, `createdAt`, `matchedQueryVersion`, and
 `collectedAt`. Store the raw text before classification. Add derived fields for
@@ -119,14 +119,14 @@ Useful daily measures include unique authors, accepted mentions, excluded
 mentions, precision, median detection delay, and failed deliveries. Compare
 counts only when the query version remains stable.
 
-## Twitter Trends API and Hashtag Analytics
+## Twitter trends API and hashtag analytics
 
 Use the trends route for a current location-based trend snapshot. Use tweet
 search for posts matching a hashtag. Use a persistent keyword monitor for new
 matches. These routes answer different questions and should not share one
 unlabeled metric.
 
-| Question | Xquik Surface | Store With Results |
+| Question | Xquik route | Store with results |
 | --- | --- | --- |
 | What is trending now? | Trends route with a location identifier | Location and collection time |
 | Which posts contain a hashtag? | Bounded tweet search | Query, cursor, and tweet IDs |
@@ -141,8 +141,8 @@ does not prove broad audience support.
 Record the trend location, query, language, exclusions, and collection window.
 Without that context, two Twitter hashtag analytics reports are not comparable.
 
-## Related Twitter Keyword Monitoring Guides
+## Related Twitter keyword monitoring guides
 
 - [Monitor and webhook workflows](workflows.md)
 - [Webhook verification](webhooks.md)
-- [X API alternative content hub](twitter-api-alternative-faq.md)
+- [X API alternative FAQ](twitter-api-alternative-faq.md)

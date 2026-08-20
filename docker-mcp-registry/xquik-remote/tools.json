@@ -1,23 +1,23 @@
 [
   {
     "name": "explore",
-    "description": "Search the X (Twitter) API spec for endpoints. No network calls - runs against an in-memory endpoint catalog covering tweet search, user lookup, media download, monitoring, giveaways, composition, and more.",
+    "description": "Search the Twitter API catalog for routes. The tool makes no network calls. Find tweet search, user lookup, media, monitoring, giveaway, and composition routes.",
     "arguments": [
       {
         "name": "code",
         "type": "string",
-        "desc": "Bounded filter over the API spec. The tool provides a spec.endpoints array with method, path, summary, category, free, parameters, and responseShape fields."
+        "desc": "Bounded filter over spec.endpoints. Each item contains method, path, summary, category, free, parameters, and responseShape."
       }
     ]
   },
   {
     "name": "xquik",
-    "description": "Send confirmed Xquik API requests across 120 MCP catalog routes. 119 support JSON or text. Covers search, lookup, extraction, writes, monitoring, draws, trends, and composition.",
+    "description": "Send confirmed Xquik API requests across 120 MCP routes. Of these, 119 support JSON or text. Search, look up, extract, write, monitor, draw, inspect trends, or compose.",
     "arguments": [
       {
         "name": "code",
         "type": "string",
-        "desc": "Bounded request using xquik.request(path, options?) for authenticated requests to the Xquik API."
+        "desc": "Bounded call to xquik.request(path, options?) for an authenticated Xquik API request."
       }
     ]
   }

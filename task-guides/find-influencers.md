@@ -1,6 +1,6 @@
 ---
 name: find-influencers
-description: "Use when the user wants to find X (Twitter) influencers in a niche. Searches users by bio keyword, filters by follower count and engagement, and surfaces active accounts suited for outreach or partnership research. Read-only discovery."
+description: "Use when the user wants to find active X accounts in a niche. Search bios, then filter by follower count and engagement. Read-only."
 license: MIT
 metadata:
   internal: true
@@ -26,11 +26,11 @@ metadata:
     credentialProxy: false
 ---
 
-# Find X Influencers
+# Find X influencers
 
 Find active X accounts in a niche by bio/handle search with follower and activity filters. Read-only.
 
-## Endpoints
+## Choose an endpoint
 
 | Endpoint | Purpose | Usage |
 |---|---|---|
@@ -40,7 +40,7 @@ Find active X accounts in a niche by bio/handle search with follower and activit
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
-## Quick reference
+## Example requests
 
 ```
 POST /extractions/estimate
@@ -56,7 +56,7 @@ The request also accepts profile filters. Examples include `minFollowers`,
 `hasWebsite`, `hasLocation`, and text-match fields. Apply them before
 estimation so excluded rows are not delivered.
 
-## Typical flow
+## Find relevant accounts
 
 1. Ask for the niche, result bound, and profile filters.
 2. Call `POST /extractions/estimate`, show the usage estimate.
@@ -66,10 +66,10 @@ estimation so excluded rows are not delivered.
 6. Optionally enrich the shortlist with `GET /x/users/{id}` for recency signals. The `{id}` segment accepts a username or numeric user ID.
 7. Export via `GET /extractions/{id}/export?format=csv` if raw data is needed.
 
-## Ethics note
+## Protect user data
 
-This skill is for discovery and research. Do not use to mass-DM, mass-follow, or run automated outreach. If the user wants outreach, they must review each target before any action.
+Use this guide for discovery and research. Never send bulk DMs, bulk follows, or automated outreach. The user must review every outreach target.
 
-## Related
+## Related guides
 
-Reach out: `send-dms` (single DM with confirmation). Full API: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).
+Use `send-dms` for 1 approved DM. See the [primary API guide](../skills/x-twitter-scraper/SKILL.md).

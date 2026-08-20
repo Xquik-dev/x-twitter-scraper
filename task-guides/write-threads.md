@@ -1,6 +1,6 @@
 ---
 name: write-threads
-description: "Use when the user wants to write a Twitter thread on X. Drafts a multi-tweet thread with coherent narrative, splits long content into 280-char segments, and hands off to post-tweets for publishing. Text generation only."
+description: "Use when the user wants to draft an X thread. Keep each post within 280 characters and hand approved text to post-tweets. Text only."
 license: MIT
 metadata:
   internal: true
@@ -26,20 +26,20 @@ metadata:
     credentialProxy: false
 ---
 
-# Write Twitter Threads
+# Write Twitter threads
 
-Draft multi-tweet threads on X. This skill produces the thread text; publishing is done through `post-tweets` chaining replies to the previous tweet ID.
+Draft multi-post threads on X. This guide returns text. `post-tweets` publishes each approved reply against the previous post ID.
 
-## Endpoints
+## Choose an endpoint
 
 | Endpoint | Purpose | Usage |
 |---|---|---|
-| POST /compose (step=compose/refine) | Get guidance for the thread topic and tone | Compose tier |
+| POST /compose with step=compose or refine | Get rules for the thread topic and tone | Compose tier |
 | POST /drafts | Save a thread draft | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
-## Quick reference
+## Example requests
 
 ```
 POST /compose
@@ -51,7 +51,7 @@ POST /compose
 -> { contentRules, followUpQuestions, scorerWeights, topPenalties }
 ```
 
-Use the returned guidance to draft the thread in chat. Keep each tweet within the 280-char limit and preserve a natural narrative flow (hook, arguments, conclusion).
+Use the returned rules to draft the thread in chat. Keep each post within 280 characters. Give each post 1 clear job.
 
 ## Publishing flow
 
@@ -61,12 +61,12 @@ Use the returned guidance to draft the thread in chat. Keep each tweet within th
    - Post the first via `post-tweets` guide.
    - Capture the returned `id`.
    - Post the next with `reply_to_tweet_id` = previous id.
-4. Stop and surface any error instead of continuing silently.
+4. Stop on any error and show it to the user.
 
-## Confirmation
+## Get approval
 
-Never publish a thread without user review of every tweet in order. Threads amplify mistakes - one typo becomes 10 tweets.
+Never publish a thread until the user reviews every post in order. One typo can otherwise appear in 10 posts.
 
-## Related
+## Related guides
 
-Single tweets: `write-tweets`. Publishing: `post-tweets`. Full API: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).
+Use `write-tweets` for 1 tweet and `post-tweets` to publish. See the [primary API guide](../skills/x-twitter-scraper/SKILL.md).

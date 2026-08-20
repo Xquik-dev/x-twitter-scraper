@@ -20,5 +20,5 @@ if (failures.length > 0) {
 }
 
 process.stdout.write(
-  `All bundle surfaces at ${expected}; hosted MCP at ${hostedMcpVersion}\n`,
+  `All bundle version files use ${expected}; hosted MCP uses ${hostedMcpVersion}\n`,
 );

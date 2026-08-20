@@ -1,6 +1,6 @@
 ---
 name: follow-unfollow
-description: "Use when the user wants to follow or unfollow accounts on X (Twitter), or check whether one account follows another. Single-target only; bulk follow operations require explicit per-account confirmation."
+description: "Use when the user wants to follow, unfollow, or check a relationship on X. Process 1 target and require approval for every write."
 license: MIT
 metadata:
   internal: true
@@ -26,16 +26,16 @@ metadata:
     credentialProxy: false
 ---
 
-# Follow & Unfollow on X
+# Follow & unfollow on X
 
 Follow and unfollow accounts as a connected user, and check follow state.
 
-## Endpoints
+## Choose an endpoint
 
 | Endpoint | Purpose | Usage |
 |---|---|---|
-| POST /x/users/{id}/follow | Follow a user (numeric ID) | Write tier |
-| DELETE /x/users/{id}/follow | Unfollow a user (numeric ID) | Write tier |
+| POST /x/users/{id}/follow | Follow a numeric user ID | Write tier |
+| DELETE /x/users/{id}/follow | Unfollow a numeric user ID | Write tier |
 | GET /x/users/{id} | Resolve @handle to numeric user ID | Read tier |
 | GET /x/followers/check?source=<a>&target=<b> | Does A follow B? | Read tier |
 
@@ -43,20 +43,20 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 Every follow or unfollow needs a unique `Idempotency-Key` header.
 Direct REST callers supply it. Hosted MCP injects it automatically.
 
-## Quick reference
+## Example requests
 
 ```
 POST /x/users/{id}/follow
 { "account": "<connected_username>" }
--> XWriteAction (HTTP 200 terminal or HTTP 202 accepted)
+-> XWriteAction. HTTP 200 is terminal. HTTP 202 is accepted.
 
 DELETE /x/users/{id}/follow
 { "account": "<connected_username>" }
 ```
 
-For follow/unfollow, `{id}` is the numeric user ID. Resolve a @handle with `GET /x/users/{id}` first; the lookup route accepts usernames and numeric IDs.
+`{id}` is the numeric user ID. Resolve an @handle with `GET /x/users/{id}` first. The lookup accepts usernames and numeric IDs.
 
-## Typical flow
+## Change a follow relationship
 
 1. `GET /x/accounts` to pick the acting account.
 2. `GET /x/users/{id}` to resolve each target handle to a numeric `id`.
@@ -66,16 +66,17 @@ For follow/unfollow, `{id}` is the numeric user ID. Resolve a @handle with `GET 
 
 ## Bulk operations
 
-If the user asks to follow or unfollow many accounts at once, list every target
+If the user asks to follow or unfollow more than 1 account, list every target
 first and require explicit confirmation for the full list. Process serially.
 Honor `Retry-After` when returned. Never silently batch.
 
-Hard no:
+Reject these requests:
+
 - Mass-following random accounts based on a scrape
 - "Follow everyone who liked my tweet" workflows without user review of the full list
 - Unfollowing loops that run in the background
 
-## Errors
+## Handle errors
 
 | Status | Code | Meaning |
 |---|---|---|
@@ -83,6 +84,6 @@ Hard no:
 | 422 | `login_failed` | Reconnect in dashboard |
 | 429 | `x_api_rate_limited` | Backoff |
 
-## Related
+## Related guides
 
-Follower extraction: `extract-followers`. Full API: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).
+Use `extract-followers` to export followers. See the [primary API guide](../skills/x-twitter-scraper/SKILL.md).

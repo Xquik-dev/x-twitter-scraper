@@ -6,8 +6,8 @@
     {
       "name": "x-twitter-scraper",
       "type": "registry:item",
-      "title": "X Twitter Scraper Skill",
-      "description": "Install the Xquik Skill for X/Twitter data, API integrations, and approval-gated actions.",
+      "title": "X Twitter scraper Skill",
+      "description": "Install the Xquik Skill for Twitter data, API integrations, and approved account actions.",
       "files": [
         {
           "path": "skills/x-twitter-scraper/SKILL.md",

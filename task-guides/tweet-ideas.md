@@ -1,6 +1,6 @@
 ---
 name: tweet-ideas
-description: "Use when the user wants tweet ideas or content prompts for X (Twitter). Generates a batch of post ideas based on the user's niche, recent trends, and their style profile. Ideation only - drafting and posting are separate skills."
+description: "Use when the user wants X post ideas based on their niche, trends, or saved style. Return prompts only. Do not draft or post."
 license: MIT
 metadata:
   internal: true
@@ -26,21 +26,21 @@ metadata:
     credentialProxy: false
 ---
 
-# Tweet Ideas
+# Tweet ideas
 
-Generate a batch of tweet topic ideas. Each idea is a short prompt - the user (or `write-tweets`) turns it into an actual draft.
+Generate a batch of short topic prompts. The user or `write-tweets` turns each prompt into a draft.
 
-## Endpoints
+## Choose an endpoint
 
 | Endpoint | Purpose | Usage |
 |---|---|---|
-| POST /compose (step=compose) | Get content rules and follow-up questions | Compose tier |
+| POST /compose with step=compose | Get content rules and follow-up questions | Compose tier |
 | GET /x/trends | Seed ideas from current X trends | Read tier |
 | GET /radar | Seed ideas from current news and developer trends | Included |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
-## Quick reference
+## Example requests
 
 ```
 POST /compose
@@ -52,7 +52,7 @@ POST /compose
 -> { contentRules, followUpQuestions, scorerWeights, topPenalties }
 ```
 
-## Typical flow
+## Generate the ideas
 
 1. Ask the user for their niche.
 2. Optionally fetch `GET /x/trends` or `GET /radar` for timely context.
@@ -60,6 +60,6 @@ POST /compose
 4. Generate 10 short idea prompts in chat using only the user goal plus fetched trend data.
 5. Pass the chosen prompt to `write-tweets` to draft.
 
-## Related
+## Related guides
 
-Drafting: `write-tweets`. Threads: `write-threads`. Posting: `post-tweets`. Full API: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).
+Use `write-tweets` for drafts, `write-threads` for threads, and `post-tweets` to publish. See the [primary API guide](../skills/x-twitter-scraper/SKILL.md).

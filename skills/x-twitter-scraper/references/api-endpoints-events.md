@@ -1,22 +1,22 @@
-# Xquik REST API Endpoints: Events
+# Xquik REST API endpoints: events
 
-### List Events
+### List events
 
 ```
 GET /events
 ```
 
-**Query parameters:**
+Use these query parameters:
 
-| Param | Type | Description |
+| Parameter | Type | Description |
 |-------|------|-------------|
 | `monitorId` | string | Filter by monitor ID |
 | `keywordMonitorId` | string | Filter by keyword monitor ID |
 | `eventType` | string | Filter by event type |
-| `limit` | number | Results per page (1-100, default 50) |
+| `limit` | number | Results per page from 1-100; defaults to 50 |
 | `cursor` | string | Previous `nextCursor` |
 
-**Response:**
+The API returns:
 ```json
 {
   "events": [
@@ -39,12 +39,12 @@ GET /events
 }
 ```
 
-### Get Event
+### Get event
 
 ```
 GET /events/{id}
 ```
 
-Returns a single event with full details.
+Returns 1 event.
 
 ---

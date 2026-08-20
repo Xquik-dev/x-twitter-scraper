@@ -1,4 +1,4 @@
-# Xquik MCP Output Schemas
+# Xquik MCP output schemas
 
 Hosted MCP exposes 2 tools: `explore` and `xquik`. It does not expose legacy
 operation-named tools such as `search-tweets` or `get-events`.

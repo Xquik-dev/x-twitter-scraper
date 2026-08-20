@@ -1,4 +1,4 @@
-name: Refresh Context7 Docs
+name: Refresh Context7 documentation
 
 on:
   push:
@@ -23,7 +23,7 @@ concurrency:
 
 jobs:
   refresh:
-    name: Refresh Context7 Library
+    name: Refresh Context7 library
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -34,7 +34,7 @@ jobs:
           set -euo pipefail
 
           if [ -z "$CONTEXT7_API_KEY" ]; then
-            echo "::error ::CONTEXT7_API_KEY secret is not configured."
+            echo "::error ::CONTEXT7_API_KEY is missing. Configure the repository secret."
             exit 1
           fi
 
@@ -51,19 +51,19 @@ jobs:
               ;;
             400)
               if grep -Eiq "active-task|being processed|already.*process" "$body_file"; then
-                echo "::warning ::Context7 is already processing another library. Retry on the next docs change."
+                echo "::warning ::Context7 is processing another library. Retry after the next documentation change."
                 cat "$body_file"
               elif grep -Eiq "too-early|minimum .* days|required between updates" "$body_file"; then
                 echo "::warning ::Context7 refresh is not due yet."
                 cat "$body_file"
               else
-                echo "::error ::Context7 refresh returned HTTP $status."
+                echo "::error ::Context7 returned HTTP $status during refresh."
                 cat "$body_file"
                 exit 1
               fi
               ;;
             404)
-              echo "::warning ::Context7 library /xquik-dev/x-twitter-scraper is not available yet. Add processing may still be pending."
+              echo "::warning ::Context7 has not listed /xquik-dev/x-twitter-scraper yet."
               cat "$body_file"
               ;;
             401|403)
@@ -71,7 +71,7 @@ jobs:
               exit 1
               ;;
             *)
-              echo "::error ::Context7 refresh returned HTTP $status."
+              echo "::error ::Context7 returned HTTP $status during refresh."
               cat "$body_file"
               exit 1
               ;;

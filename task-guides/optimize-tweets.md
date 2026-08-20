@@ -1,6 +1,6 @@
 ---
 name: optimize-tweets
-description: "Use when the user wants to optimize a tweet for the X (Twitter) algorithm before posting. Scores drafts against engagement predictors, suggests rewrites, and compares variants. Text scoring only - no posting."
+description: "Use when the user wants to score and revise a tweet before posting. Return text and scores only. Do not post."
 license: MIT
 metadata:
   internal: true
@@ -26,20 +26,20 @@ metadata:
     credentialProxy: false
 ---
 
-# Optimize Tweets for the Algorithm
+# Score and revise tweets
 
 Score drafts against engagement predictors and get targeted rewrite suggestions. No posting.
 
-## Endpoints
+## Choose an endpoint
 
 | Endpoint | Purpose | Usage |
 |---|---|---|
-| POST /compose (step=score) | Score a tweet draft | Compose tier |
-| POST /compose (step=refine) | Get rewrite guidance for a topic, tone, and goal | Compose tier |
+| POST /compose with step=score | Score a tweet draft | Compose tier |
+| POST /compose with step=refine | Get rewrite rules for a topic, tone, and goal | Compose tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
-## Quick reference
+## Example requests
 
 ```
 POST /compose
@@ -62,19 +62,20 @@ POST /compose
 -> { compositionGuidance, examplePatterns }
 ```
 
-## Typical flow
+## Score and revise the tweet
 
 1. Take the user's draft.
 2. Call `step: "score"` first; show current score and signals.
-3. If the user wants a rewrite, call `step: "refine"` and draft 2-3 variants in chat from the returned guidance.
-4. Score the strongest variant with `step: "score"`.
-5. User picks the winning text; pass to `post-tweets` for actual publishing.
+3. If the user wants a rewrite, call `step: "refine"` and draft 2-3 variants from the returned guidance.
+4. Score the user's preferred variant with `step: "score"`.
+5. The user selects the text. Pass it to `post-tweets` for publishing.
 
-## Notes
+## Limits
 
 - Scores are estimates, not promises. Engagement depends on timing, audience, and luck.
-- `link_penalty` is real: tweets with external URLs typically underperform. Warn the user if they insist.
+- `link_penalty` records how an external URL affects the score. Explain that
+  signal without promising engagement.
 
-## Related
+## Related guides
 
-Drafting: `write-tweets`. Publishing: `post-tweets`. Full API: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).
+Use `write-tweets` to draft and `post-tweets` to publish. See the [primary API guide](../skills/x-twitter-scraper/SKILL.md).

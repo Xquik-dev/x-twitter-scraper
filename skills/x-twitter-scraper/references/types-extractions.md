@@ -1,4 +1,4 @@
-# Xquik TypeScript Types: Extractions
+# Xquik TypeScript types: extractions
 
 ```typescript
 
@@ -24,7 +24,7 @@ interface ExtractionJob {
   targetTweetId?: string; targetUsername?: string;
   targetCommunityId?: string; targetListId?: string;
   targetSpaceId?: string; searchQuery?: string;
-  resultsLimit?: number; // Max results to extract. Stops early instead of fetching all. Omit for all.
+  resultsLimit?: number; // Maximum results. Omit to request all available results.
   errorMessage?: string;
   createdAt: string;
   completedAt?: string;
@@ -75,7 +75,7 @@ interface CreateExtractionRequest {
   searchQuery?: string; searchQueries?: string[];
   targets?: ExtractionMixedTarget[];
   relationTargets?: ExtractionRelationTarget[];
-  resultsLimit?: number; // Max results to extract. Stops early instead of fetching all. Omit for all.
+  resultsLimit?: number; // Maximum results. Omit to request all available results.
   queryType?: "Latest" | "Top" | "Both";
   maxItemsPerTarget?: number; maxPagesPerTarget?: number;
   startCursor?: string;
@@ -90,7 +90,7 @@ interface CreateExtractionRequest {
   excludeOriginalAuthor?: boolean; includeOriginalPost?: boolean;
   hasMediaOnly?: boolean;
   sinceTime?: string | number; untilTime?: string | number;
-  // Tweet search filters (tweet_search_extractor only)
+  // Used only by tweet_search_extractor.
   fromUser?: string; toUser?: string; mentioning?: string;
   language?: string;
   sinceDate?: string; untilDate?: string; // YYYY-MM-DD
@@ -122,7 +122,7 @@ interface CreateExtractionRequest {
   place?: string; placeCountry?: string;
   pointRadius?: string; boundingBox?: string;
   advancedQuery?: string;
-  // Profile filters for profile-producing extractions
+  // Filters for extractions that return profiles.
   minFollowers?: number; maxFollowers?: number;
   minFollowing?: number; maxFollowing?: number;
   minPosts?: number; maxPosts?: number;

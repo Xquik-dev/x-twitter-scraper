@@ -1,8 +1,8 @@
-# Xquik Extraction Tools
+# Xquik extraction tools
 
-23 bulk data extraction tools. Each requires a specific target parameter.
+Xquik provides 23 bulk data extraction tools. Each tool requires a specific target.
 
-## Privacy and Acceptable Use
+## Privacy and acceptable use
 
 Bulk extraction and export can collect large amounts of public identity,
 activity, and relationship data. Before creating a job, confirm the lawful
@@ -19,23 +19,17 @@ without renewed approval.
 The API accepts an omitted `resultsLimit`. This Skill must always send an
 explicit finite positive bound. Use the same bound for estimate and create.
 
-**Endpoint:** `POST /extractions`
+Call `POST /extractions`
 
-**Always estimate first:** `POST /extractions/estimate` with the same body to preview `creditsRequired`, `creditsAvailable`, and whether the job is allowed.
+Estimate first with `POST /extractions/estimate` with the same body to preview `creditsRequired`, `creditsAvailable`, and whether the job is allowed.
 
-## Contents
+## Tool types
 
-- [Tool Types](#tool-types)
-- [Response](#response)
-- [Retrieving Results](#retrieving-results)
-- [Exporting Results](#exporting-results)
-- [Estimating Usage](#estimating-usage)
+### Tweet-based tools
 
-## Tool Types
+These tools require `targetTweetId`.
 
-### Tweet-Based (require `targetTweetId`)
-
-| Tool Type | Description |
+| Tool type | Description |
 |-----------|-------------|
 | `reply_extractor` | Extract users who replied to a tweet |
 | `repost_extractor` | Extract users who retweeted a tweet |
@@ -44,7 +38,7 @@ explicit finite positive bound. Use the same bound for estimate and create.
 | `article_extractor` | Extract article content linked in a tweet |
 | `favoriters` | Extract users who favorited a tweet |
 
-**Example:**
+For example:
 ```json
 {
   "toolType": "reply_extractor",
@@ -52,9 +46,11 @@ explicit finite positive bound. Use the same bound for estimate and create.
 }
 ```
 
-### User-Based (require `targetUsername`)
+### User-based tools
 
-| Tool Type | Description |
+These tools require `targetUsername`.
+
+| Tool type | Description |
 |-----------|-------------|
 | `follower_explorer` | Extract followers of an account |
 | `following_explorer` | Extract accounts followed by a user |
@@ -62,7 +58,7 @@ explicit finite positive bound. Use the same bound for estimate and create.
 | `mention_extractor` | Extract tweets mentioning an account |
 | `post_extractor` | Extract posts from an account |
 
-**Example:**
+For example:
 ```json
 {
   "toolType": "follower_explorer",
@@ -72,14 +68,16 @@ explicit finite positive bound. Use the same bound for estimate and create.
 
 The `@` prefix is automatically stripped if included.
 
-### User Timeline Tools (require `targetUsername`)
+### User timeline tools
 
-| Tool Type | Description |
+These tools require `targetUsername`.
+
+| Tool type | Description |
 |-----------|-------------|
 | `user_likes` | Extract tweets liked by a user |
 | `user_media` | Extract media tweets from a user |
 
-**Example:**
+For example:
 ```json
 {
   "toolType": "user_likes",
@@ -87,16 +85,18 @@ The `@` prefix is automatically stripped if included.
 }
 ```
 
-### Community-Based (require `targetCommunityId`)
+### Community-based tools
 
-| Tool Type | Description |
+These tools require `targetCommunityId`.
+
+| Tool type | Description |
 |-----------|-------------|
 | `community_extractor` | Extract members of a community |
 | `community_moderator_explorer` | Extract moderators of a community |
 | `community_post_extractor` | Extract posts from a community |
 | `community_search` | Search posts within a community (also requires `searchQuery`) |
 
-**Example:**
+For example:
 ```json
 {
   "toolType": "community_extractor",
@@ -104,15 +104,17 @@ The `@` prefix is automatically stripped if included.
 }
 ```
 
-### List-Based (require `targetListId`)
+### List-based tools
 
-| Tool Type | Description |
+These tools require `targetListId`.
+
+| Tool type | Description |
 |-----------|-------------|
 | `list_member_extractor` | Extract members of a list |
 | `list_post_extractor` | Extract posts from a list |
 | `list_follower_explorer` | Extract followers of a list |
 
-**Example:**
+For example:
 ```json
 {
   "toolType": "list_member_extractor",
@@ -120,13 +122,15 @@ The `@` prefix is automatically stripped if included.
 }
 ```
 
-### Space-Based (require `targetSpaceId`)
+### Space-based tools
 
-| Tool Type | Description |
+These tools require `targetSpaceId`.
+
+| Tool type | Description |
 |-----------|-------------|
 | `space_explorer` | Extract participants of a Space |
 
-**Example:**
+For example:
 ```json
 {
   "toolType": "space_explorer",
@@ -134,14 +138,16 @@ The `@` prefix is automatically stripped if included.
 }
 ```
 
-### Search-Based (require `searchQuery`)
+### Search-based tools
 
-| Tool Type | Description |
+These tools require `searchQuery`.
+
+| Tool type | Description |
 |-----------|-------------|
 | `people_search` | Search for users by keyword |
 | `tweet_search_extractor` | Search and extract tweets by keyword or hashtag |
 
-**Example (people search):**
+For a people search:
 ```json
 {
   "toolType": "people_search",
@@ -149,7 +155,7 @@ The `@` prefix is automatically stripped if included.
 }
 ```
 
-**Example (tweet search):**
+For a tweet search:
 ```json
 {
   "toolType": "tweet_search_extractor",
@@ -158,7 +164,7 @@ The `@` prefix is automatically stripped if included.
 }
 ```
 
-### Tweet Search Filters
+### Tweet search filters
 
 `tweet_search_extractor` accepts structured filters. It combines them with
 `searchQuery` before collection.
@@ -216,7 +222,7 @@ The `@` prefix is automatically stripped if included.
 | `boundingBox` | string | Geographic bounding box |
 | `advancedQuery` | string | Raw X search operators appended to query |
 
-**Example with filters:**
+For example, apply filters:
 ```json
 {
   "toolType": "tweet_search_extractor",
@@ -229,9 +235,9 @@ The `@` prefix is automatically stripped if included.
 }
 ```
 
-`resultsLimit` (optional): Maximum results to extract. Stops early instead of fetching all. Pass this on both `POST /extractions/estimate` and `POST /extractions` when you only need a specific count.
+Set optional `resultsLimit` to stop after a specific result count. Pass the same value to `POST /extractions/estimate` and `POST /extractions`.
 
-### Profile Filters
+### Profile filters
 
 Profile-producing extractions also accept `minFollowers`, `maxFollowers`,
 `minFollowing`, `maxFollowing`, `minPosts`, `maxPosts`,
@@ -249,39 +255,39 @@ Profile-producing extractions also accept `minFollowers`, `maxFollowers`,
 }
 ```
 
-Statuses: `pending`, `running`, `completed`, `failed`.
+The status is `pending`, `running`, `completed`, or `failed`.
 
-## Retrieving Results
+## Retrieving results
 
 ```
 GET /extractions/{id}
 ```
 
-Returns paginated results (up to 1,000 per page). Each result includes:
+The endpoint returns up to 1,000 results per page. Each result includes:
 
 - `xUserId`, `xUsername`, `xDisplayName`
 - `xFollowersCount`, `xVerified`, `xProfileImageUrl`
 - `tweetId`, `tweetText`, `tweetCreatedAt` (for tweet-based extractions)
 
-## Exporting Results
+## Exporting results
 
 ```
 GET /extractions/{id}/export?format=csv
 ```
 
-Formats: `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, `xlsx`. 100,000 row limit (10,000 for PDF).
+Choose `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, or `xlsx`. Exports support 100,000 rows, except PDF supports 10,000.
 
 Exports include enrichment columns not present in the API response.
 
 The endpoint supports follower, following, post, engagement, profile, media,
 language, search, and date filters. It does not project individual fields.
 
-**Approval required:** Set the smallest approved `resultsLimit` when creating
+Get approval first. Set the smallest approved `resultsLimit` when creating
 the job. Before export, show the job, filters, format, row count, schema,
 recipients, storage, and retention. Materialize or transmit the dataset only
 after explicit approval. Delete it when the approved purpose ends.
 
-## Estimating Usage
+## Estimating usage
 
 ```
 POST /extractions/estimate
@@ -299,7 +305,7 @@ Same body as create. Response:
 }
 ```
 
-If `allowed` is `false`, do not create the extraction. It requires more credits
-than are currently available.
+If `allowed` is `false`, do not create the extraction. The current balance does
+not cover the estimate.
 
 For common mistakes and tool selection rules, see [mcp-tools.md](mcp-tools.md#common-mistakes).

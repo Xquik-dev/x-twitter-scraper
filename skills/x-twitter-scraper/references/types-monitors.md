@@ -1,4 +1,4 @@
-# Xquik TypeScript Types: Monitors
+# Xquik TypeScript types: monitors
 
 ```typescript
 

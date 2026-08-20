@@ -1,6 +1,6 @@
 ---
 name: update-x-profile
-description: "Use when the user wants to update their X (Twitter) profile: bio, display name, location, website URL, avatar, or banner image. Each field update requires explicit user approval."
+description: "Use when the user wants to change an X profile field or image. Show the exact diff and require approval for every field."
 license: MIT
 metadata:
   internal: true
@@ -26,11 +26,11 @@ metadata:
     credentialProxy: false
 ---
 
-# Update X Profile
+# Update X profile
 
 Change bio, display name, location, website, avatar, or banner on a connected X account.
 
-## Endpoints
+## Choose an endpoint
 
 | Endpoint | Purpose | Usage |
 |---|---|---|
@@ -42,7 +42,7 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 Every profile write requires a unique `Idempotency-Key` header.
 Direct REST callers supply it. Hosted MCP injects it automatically.
 
-## Quick reference
+## Example requests
 
 ```
 PATCH /x/profile
@@ -55,24 +55,24 @@ PATCH /x/profile
 }
 ```
 
-`account` is required. Send only the profile fields that should change.
+Every request needs `account`. Send only the fields the user wants to change.
 
-## Typical flow
+## Update the profile
 
 1. `GET /x/accounts` to pick the acting account.
-2. Show the user the **before/after diff** for each field they want to change.
-3. Wait for explicit approval per field (or batch approval of the full diff).
+2. Show the before and after value for every requested field.
+3. Wait for approval of each field or the complete diff.
 4. Send the selected write. Direct REST supplies the key. Hosted MCP injects it.
 5. Poll `statusUrl` after a `202` response until `terminal` is true.
 
-## Confirmation
+## Get approval
 
-Profile changes are immediately visible to the user's audience. Show the exact new values before any call. Do not alter more fields than the user asked.
+The audience sees profile changes immediately. Show exact new values before the call. Change only requested fields.
 
-## Security
+## Protect the account
 
-Image URLs for avatar/banner must be HTTPS. Validate format (JPG/PNG) and reasonable size before upload.
+Avatar and banner URLs must use HTTPS. Accept JPG or PNG files within the documented size limit.
 
-## Related
+## Related guides
 
-Full API surface: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).
+See the [primary API guide](../skills/x-twitter-scraper/SKILL.md).

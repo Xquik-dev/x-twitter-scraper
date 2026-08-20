@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   publish:
-    name: Publish Verified Package
+    name: Publish verified package
     if: github.repository == 'Xquik-dev/x-twitter-scraper'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -82,7 +82,7 @@ jobs:
         run: npm publish --access public --provenance
 
   release:
-    name: Create GitHub Release
+    name: Create GitHub release
     needs: publish
     if: github.repository == 'Xquik-dev/x-twitter-scraper'
     runs-on: ubuntu-24.04
