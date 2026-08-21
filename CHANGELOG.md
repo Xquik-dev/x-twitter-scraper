@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## [2.6.7] - 2026-08-21
+
+- Tighten thread review instructions without changing the approval gate.
 
 ## [2.6.6] - 2026-08-20
 
@@ -82,6 +84,7 @@
 - Return follow relationships only from explicit relationship checks.
 - Refresh SkillSpector v2.3.7 evidence with 0 findings.
 
+[2.6.7]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.7
 [2.6.6]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.6
 [2.6.5]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.5
 [2.6.4]: https://github.com/Xquik-dev/x-twitter-scraper/releases/tag/v2.6.4

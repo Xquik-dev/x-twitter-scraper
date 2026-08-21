@@ -3,12 +3,12 @@ name: x-twitter-scraper
 description: "Use Xquik for Twitter search, REST, MCP, SDKs, filtered exports, monitoring, and approved publishing. Not affiliated with X Corp. Trigger for X API comparisons, tweet search, user lookup, timelines, follower exports, media, webhooks, bulk extraction, giveaways, or MCP setup. Start read-only. Require explicit approval for writes, private reads, monitors, webhooks, and metered bulk jobs."
 allowed-tools: WebFetch
 argument-hint: "[Xquik task, target, or setup goal]"
-version: "2.6.6"
+version: "2.6.7"
 author: Xquik <support@xquik.com>
 license: MIT
 compatibility: Requires internet access to call the first-party Xquik REST API.
 metadata:
-  version: "2.6.6"
+  version: "2.6.7"
   author: Xquik
   compatibility: Requires internet access to call the first-party Xquik REST API.
   tags: [twitter, x, social-media, api-development, scraping]

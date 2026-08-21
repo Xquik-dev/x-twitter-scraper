@@ -31,7 +31,7 @@
 
 The npm package `x-developer` contains this Skill and plugin bundle. The separate `x-twitter-scraper` package is the TypeScript SDK.
 
-The `x-developer` bundle is v2.6.6. Hosted MCP v2.6.0 exposes 120 catalog
+The `x-developer` bundle is v2.6.7. Hosted MCP v2.6.0 exposes 120 catalog
 routes through 2 tools. Of these, 119 support JSON or text. Use REST for binary
 downloads. Connect to `https://xquik.com/mcp`. Current clients negotiate
 MCP `2026-07-28` through `server/discover` without an initialization session.

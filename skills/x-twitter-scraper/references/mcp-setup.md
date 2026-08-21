@@ -11,7 +11,7 @@ API keys.
 | Endpoint | `https://xquik.com/mcp` |
 | Authentication | OAuth 2.1 discovery; API key fallback |
 | Hosted MCP version | `2.6.0` |
-| Skill bundle version | `2.6.6` |
+| Skill bundle version | `2.6.7` |
 
 Current clients negotiate MCP `2026-07-28` through `server/discover`.
 Use a current MCP SDK. It adds request `_meta` and protocol headers.

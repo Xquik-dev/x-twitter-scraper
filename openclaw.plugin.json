@@ -2,7 +2,7 @@
   "id": "x-developer",
   "name": "X Developer API",
   "description": "Xquik Twitter scraper API Skill with 128 REST operations and 120 MCP catalog routes. Two MCP tools support 119 JSON or text operations. Use SDKs, webhooks, exports, and approved account actions. Not affiliated with X Corp.",
-  "version": "2.6.6",
+  "version": "2.6.7",
   "skills": ["./skills"],
   "providerAuthEnvVars": {
     "xquik": ["XQUIK_API_KEY"]

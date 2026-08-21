@@ -1,6 +1,6 @@
 {
   "name": "x-twitter-scraper",
-  "version": "2.6.6",
+  "version": "2.6.7",
   "description": "Xquik Twitter scraper API Skill for 128 REST operations. MCP has 120 catalog routes through 2 tools; 119 support JSON or text. Account actions need approval. Not affiliated with X Corp.",
   "author": {
     "name": "Xquik",
