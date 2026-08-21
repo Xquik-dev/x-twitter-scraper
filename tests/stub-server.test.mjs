@@ -44,10 +44,10 @@ test("handles every supported JSON-RPC message", () => {
   });
   assert.equal(
     responses[0].result._meta["io.modelcontextprotocol/serverInfo"].version,
-    "2.6.6",
+    "2.6.7",
   );
   assert.equal(responses[1].result.protocolVersion, "2025-11-25");
-  assert.equal(responses[1].result.serverInfo.version, "2.6.6");
+  assert.equal(responses[1].result.serverInfo.version, "2.6.7");
   assert.equal(responses[2].result.tools.length, 2);
   assert.equal(responses[2].result.cacheScope, "private");
   assert.equal(responses[2].result.ttlMs, 300_000);

@@ -1,6 +1,6 @@
 {
   "name": "x-developer",
-  "version": "2.6.6",
+  "version": "2.6.7",
   "description": "Xquik Twitter scraper API Skill for REST, MCP, webhooks, exports, and approved X actions. Not affiliated with X Corp.",
   "author": {
     "name": "Xquik",

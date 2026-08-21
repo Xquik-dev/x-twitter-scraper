@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.6"
+  version: "2.6.7"
   openclaw:
     requires:
       env:
@@ -56,16 +56,12 @@ Use the returned rules to draft the thread in chat. Keep each post within 280 ch
 ## Publishing flow
 
 1. `POST /compose` with `step: "compose"` for the topic.
-2. Show all tweets in order to the user and wait for approval.
+2. Show the user every tweet in sequence. Wait for approval.
 3. For each tweet in sequence:
    - Post the first via `post-tweets` guide.
    - Capture the returned `id`.
    - Post the next with `reply_to_tweet_id` = previous id.
 4. Stop on any error and show it to the user.
-
-## Get approval
-
-Never publish a thread until the user reviews every post in order. One typo can otherwise appear in 10 posts.
 
 ## Related guides
 
