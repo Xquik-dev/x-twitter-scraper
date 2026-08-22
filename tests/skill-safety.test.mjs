@@ -21,21 +21,21 @@ test("keeps the Python extraction example bounded and requires approval", async 
   assert.match(workflow, /RESULTS_LIMIT = [1-9]\d*/);
   assert.equal(
     workflow.match(/"resultsLimit": RESULTS_LIMIT/g)?.length,
-    2,
-    "estimate and create requests must use the same finite bound",
+    1,
+    "the shared request must use one finite bound",
   );
 
-  const allowedIndex = workflow.indexOf('if not estimate["allowed"]:');
-  const approvalIndex = workflow.indexOf(
-    '"the bounded extraction job, usage, recipients, and retention"',
-  );
+  const estimateIndex = workflow.indexOf("json_body=extraction_request");
+  const allowedIndex = workflow.indexOf('estimate["allowed"] is not True');
+  const approvalIndex = workflow.indexOf("require_explicit_approval(proposal)");
   const createIndex = workflow.indexOf(
-    'xquik_fetch("/extractions", method="POST"',
+    '"/extractions", method="POST", json_body=extraction_request',
   );
 
-  assert.ok(allowedIndex >= 0, "estimate response gate is missing");
+  assert.ok(estimateIndex >= 0, "shared estimate request is missing");
+  assert.ok(allowedIndex >= 0, "strict estimate response gate is missing");
   assert.ok(
-    allowedIndex < approvalIndex && approvalIndex < createIndex,
+    estimateIndex < allowedIndex && allowedIndex < approvalIndex && approvalIndex < createIndex,
     "exact-job approval must follow the estimate and precede job creation",
   );
 });
