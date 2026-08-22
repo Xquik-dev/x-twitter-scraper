@@ -124,9 +124,12 @@ When more results exist, the response includes `hasMore: true` and a
 `nextCursor` string. Pass it as `cursor`. Radar alone uses `after`.
 
 ```javascript
-async function fetchAllPages(path, dataKey, maxResults) {
+async function fetchAllPages(path, dataKey, maxResults, identityForItem) {
   if (!Number.isInteger(maxResults) || maxResults < 1) {
     throw new Error("maxResults must be a finite positive integer.");
+  }
+  if (typeof identityForItem !== "function") {
+    throw new Error("identityForItem must select a stable endpoint-specific ID.");
   }
 
   const results = [];
@@ -160,11 +163,12 @@ async function fetchAllPages(path, dataKey, maxResults) {
     const page = data?.[dataKey];
     if (!Array.isArray(page)) throw new Error(`Missing ${dataKey} page.`);
     for (const item of page) {
-      if (!item || typeof item.id !== "string") {
-        throw new Error(`Every ${dataKey} item needs a string id.`);
+      const identity = identityForItem(item);
+      if (typeof identity !== "string" || !identity) {
+        throw new Error(`Every ${dataKey} item needs a stable identity.`);
       }
-      if (!seenIds.has(item.id)) {
-        seenIds.add(item.id);
+      if (!seenIds.has(identity)) {
+        seenIds.add(identity);
         results.push(item);
       }
       if (results.length === maxResults) break;
@@ -185,7 +189,8 @@ Cursors are opaque strings. Never decode or construct them manually.
 
 For `409 coverage_cursor_unavailable`, wait the exact `Retry-After` seconds and
 retry the same cursor once. For `410 coverage_cursor_gone`, the response omits
-`Retry-After`. Restart without a cursor and deduplicate by ID.
+`Retry-After`. Restart without a cursor and deduplicate by an endpoint-specific
+stable identity.
 
 ## Complete extraction workflow
 
@@ -230,7 +235,12 @@ if (job.status !== "completed") {
 }
 
 // Retrieve no more than the approved 1,000 results.
-const allResults = await fetchAllPages(`/extractions/${job.id}`, "results", 1000);
+const allResults = await fetchAllPages(
+  `/extractions/${job.id}`,
+  "results",
+  1000,
+  (item) => typeof item?.xUserId === "string" ? `user:${item.xUserId}` : null,
+);
 
 // Review a bounded preview and approve the export first.
 requireExplicitApproval("the fixed export scope, audience, storage, and retention");

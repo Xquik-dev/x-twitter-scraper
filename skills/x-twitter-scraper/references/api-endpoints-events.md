@@ -57,6 +57,6 @@ Keyword events omit `username`.
 GET /events/{id}
 ```
 
-Returns 1 event.
+Returns 1 event. Detailed events may include `xEventId`, the source X event ID.
 
 ---

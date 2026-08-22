@@ -4,7 +4,11 @@ Use this index to load only the REST API section needed for the task.
 
 Send requests to `https://xquik.com/api/v1`.
 
-All requests require the `x-api-key` header unless the section says session auth only. All responses are JSON. HTTPS only.
+All requests require the `x-api-key` header unless the section says session auth only. HTTPS only.
+
+JSON endpoints return JSON. Export endpoints return files. Read `Content-Type`
+before decoding the body. Use `Content-Disposition` for the suggested filename.
+Call `response.json()` only for JSON exports.
 
 Plan and credit changes are dashboard-only. This Skill may read usage state with `GET /credits`, but it must not start changes.
 

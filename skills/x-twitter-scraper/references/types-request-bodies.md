@@ -12,6 +12,16 @@ interface UpdateMonitorRequest {
   isActive?: boolean;
 }
 
+interface CreateKeywordMonitorRequest {
+  query: string;
+  eventTypes: EventType[];
+}
+
+interface UpdateKeywordMonitorRequest {
+  eventTypes?: EventType[];
+  isActive?: boolean;
+}
+
 interface CreateWebhookRequest {
   url: string;
   eventTypes: EventType[];

@@ -26,6 +26,10 @@ type XquikEvent = XquikEventBase & (
     }
 );
 
+type XquikEventDetail = XquikEvent & {
+  xEventId?: string;
+};
+
 interface EventList {
   events: XquikEvent[];
   hasMore: boolean;
