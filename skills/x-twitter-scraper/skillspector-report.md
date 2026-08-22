@@ -2,7 +2,7 @@
 
 **Skill:** x-twitter-scraper
 **Source:** `skills/x-twitter-scraper`
-**Scanned:** 2026-08-22 20:24:45 UTC
+**Scanned:** 2026-08-22 20:37:32 UTC
 
 ## Static Scan
 
@@ -16,8 +16,8 @@
 - Heuristic findings: 1
 - Confirmed security issues: 0
 
-The scanner flagged `NOT LIMITED TO` in the standard MIT warranty clause. The
-file is license text, not an agent instruction. The finding does not grant
-scope or agency.
+The scanner flagged the standard MIT warranty clause on line 16. The file is
+license text, not an agent instruction. The finding does not grant scope or
+agency.
 
 Refresh this report after each change to the skill directory.
