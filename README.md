@@ -1,4 +1,4 @@
-# Xquik Twitter scraper API Skill
+# X (Twitter) Scraper API
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
@@ -27,7 +27,7 @@
   </tr>
 </table>
 
-[Xquik](https://docs.xquik.com) provides 128 REST API operations for X data and approved account actions. Search tweets, export followers, create monitors, or receive signed webhooks. Use REST directly or connect through MCP and an SDK.
+Use the X (Twitter) Scraper API to search tweets, export followers, create monitors, and receive signed webhooks. [Xquik](https://docs.xquik.com) provides 128 REST API operations for public X data and approved account actions. Use REST directly or connect through MCP and an SDK.
 
 The npm package `x-developer` contains this Skill and plugin bundle. The separate `x-twitter-scraper` package is the TypeScript SDK.
 
@@ -42,14 +42,13 @@ Eight credential, checkout, or guest-wallet operations remain outside MCP.
 
 > Use Codex CLI 0.147.0 or later for OAuth. These releases preserve RFC 9207 `iss` values.
 
-## Compare Twitter API pricing for filtered results
+## Compare X (Twitter) Scraper API pricing
 
-Xquik bills delivered results for supported filtered workflows. Supported
-filters run before billing, so excluded rows are not delivered-result charges.
+Xquik bills delivered results for supported filtered workflows. Supported filters run before billing, so excluded rows are not delivered-result charges.
 To compare Twitter API cost, use the same query, filters, fields, and row count.
 Use `POST /extractions/estimate` before each bulk job.
 
-## Xquik developer guides
+## X (Twitter) Scraper API guides
 
 - [API questions and route selection](skills/x-twitter-scraper/references/twitter-api-alternative-faq.md)
 - [Twitter search, advanced filters, exports, and Python](skills/x-twitter-scraper/references/scrape-export-twitter-data.md)
@@ -173,7 +172,7 @@ Add `--scope workspace` for a trusted project-only installation.
 | X writes | Approved tweet, delete, like, unlike, retweet, follow, unfollow, DM, profile, avatar, banner, media upload, and community actions |
 | Support | Create, list, get, update, reply, and download attachments |
 
-## Xquik Twitter scraper SDKs and tools
+## X (Twitter) Scraper API SDKs and tools
 
 | Repo | Language | Install |
 |------|----------|---------|
