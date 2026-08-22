@@ -302,8 +302,8 @@ test("documents bounded jobs, retries, exports, and webhook delivery", async () 
   assert.match(guide, /100,000 rows[\s\S]*PDF[\s\S]*10,000/);
   assert.match(guide, /connection\s+failures, `408`, `429`, or `5xx`/);
   assert.match(guide, /`424` only when[\s\S]*safe to retry/);
-  assert.match(draws, /estimated entries, intended audience, and retention period/);
-  assert.match(draws, /draw export format, audience, and retention period/);
+  assert.match(draws, /estimated entries, intended\s+audience, and retention period/);
+  assert.match(draws, /request: \{ drawId: draw\.id, format: "csv", type: "winners" \}/);
   assert.equal((errors.match(/default v1 string error contract/g) ?? []).length, 2);
   assert.match(extractions, /GET \/extractions\/\{id\}\?limit=1000&cursor=<nextCursor>/);
   assert.match(extractions, /send[\s\S]*`nextCursor` unchanged[\s\S]*`cursor`/i);
@@ -354,7 +354,7 @@ test("hardens portable webhook receiver examples", async () => {
   assert.match(guide, /if \(!WEBHOOK_SECRET\) throw new Error/);
   assert.match(guide, /except json\.JSONDecodeError/);
   assert.match(guide, /if err := json\.Unmarshal\(payload, &event\); err != nil/);
-  assert.match(guide, /deliveryStore\.markProcessed/);
+  assert.match(guide, /eventStore\.markProcessed/);
   assert.match(guide, /req\.setTimeout\(10_000/);
   assert.match(guide, /res\.writeHead\(413\)[\s\S]*req\.destroy\(\)/);
   assert.match(guide, /event === null[\s\S]*Array\.isArray\(event\)/);
@@ -368,12 +368,12 @@ test("hardens portable webhook receiver examples", async () => {
   assert.match(python, /MAX_WEBHOOK_BODY_BYTES = 1024 \* 1024/);
   assert.match(python, /def validate_subscription_event_types\(event_types: list\[str\]\)/);
   assert.match(python, /event_type not in EVENT_HANDLERS[\s\S]*send_response\(503\)/);
-  assert.match(python, /claim_delivery\(delivery_id\)/);
-  assert.match(python, /mark_delivery_processed\(delivery_id\)/);
+  assert.match(python, /claim_event\(delivery_key\)/);
+  assert.match(python, /mark_event_processed\(stream_key\)/);
   assert.ok(
-    python.indexOf("handler(event.get") <
-      python.indexOf("mark_delivery_processed(delivery_id)"),
-    "mark a delivery processed only after its handler succeeds",
+    python.indexOf('EVENT_HANDLERS[event["eventType"]]') <
+      python.indexOf("mark_event_processed(stream_key)"),
+    "mark a stream event processed only after its handler succeeds",
   );
   assert.match(webhookTypes, /interface ProductionWebhookPayload/);
   assert.match(webhookTypes, /interface WebhookTestPayload/);
@@ -478,9 +478,10 @@ test("aligns public safety and type contracts", async () => {
   assert.match(mcp, /creating, replacing, or deleting a cached style/);
 
   assert.match(python, /def claim_nonce\(nonce: str, ttl_seconds: int\)/);
+  const pythonReceiver = python.slice(python.indexOf("class WebhookHandler"));
   assert.ok(
-    python.indexOf("claim_nonce(nonce, 5 * 60)") <
-      python.indexOf('if event_type == "webhook.test"'),
+    pythonReceiver.indexOf("claim_nonce(nonce, 5 * 60)") <
+      pythonReceiver.indexOf('if event_type == "webhook.test"'),
     "claim each nonce before accepting a test delivery",
   );
   assert.match(python, /HTTPServer\(\("127\.0\.0\.1", 3000\)/);
@@ -505,7 +506,7 @@ test("aligns public safety and type contracts", async () => {
   assert.match(supportTypes, /candidate\.body\.length > 10_000/);
 
   assert.match(workflows, /removes the like/);
-  assert.match(skillCard, /with 1 MIT warranty-text finding/);
+  assert.match(skillCard, /1 low-confidence MIT license finding and 0 confirmed security issues/);
   assert.match(skillCard, /local files or local networks/);
 });
 
@@ -877,9 +878,9 @@ test("preserves audited integration safety invariants", async () => {
   assert.match(python, /if max_retries < 0:\n\s+raise ValueError/);
   assert.match(python, /poll_deadline = time\.monotonic\(\) \+ 5 \* 60/);
   assert.match(python, /deadline=poll_deadline/);
-  assert.match(python, /if not isinstance\(event_type, str\):/);
-  assert.match(python, /if not isinstance\(delivery_id, str\) or not delivery_id:/);
-  assert.match(python, /if not isinstance\(data, dict\):/);
+  assert.match(python, /if not valid_event_envelope\(event\):/);
+  assert.match(python, /is_nonempty_string\(event\.get\("deliveryId"\)\)/);
+  assert.match(python, /isinstance\(data, dict\)/);
   assert.match(security, /Replace every `<`, `>`, and `&`/);
   assert.match(security, /Never put raw X-authored text inside the markers/);
   assert.match(skillCard, /JSON-encode quoted content/);
@@ -891,10 +892,10 @@ test("preserves audited integration safety invariants", async () => {
   assert.match(support, /subject\.length > 500/);
   assert.match(xTypes, /interface TweetReplies[\s\S]*next_cursor: string/);
   assert.match(usage, /Obtain explicit approval for that exact read/);
-  assert.match(webhooks, /deliveryStore\.claimPending\(event\.deliveryId\)/);
-  assert.match(webhooks, /claim_delivery\(delivery_id\)/);
-  assert.match(webhooks, /deliveryStore\.ClaimPending\(event\.DeliveryID\)/);
-  assert.match(webhooks, /if not isinstance\(event_type, str\):/);
+  assert.match(webhooks, /eventStore\.claimPending\(deliveryKey\)/);
+  assert.match(webhooks, /claim_event\(delivery_key\)/);
+  assert.match(webhooks, /eventStore\.ClaimPending\(deliveryKey\)/);
+  assert.match(webhooks, /if not valid_event_envelope\(event\):/);
   assert.match(workflows, /existingMonitorIds/);
   assert.match(workflows, /Monitor creation is ambiguous/);
   assert.match(workflows, /Monitor \$\{monitor\.id\} was retained for manual reconciliation/);
@@ -993,10 +994,10 @@ test("preserves final review safety and correctness fixes", async () => {
   assert.match(mcpSetup, /require_approval=\{"explore": "never", "xquik": "always"\}/);
   assert.match(mcpTools, /`safeToRetry` is true/);
   assert.doesNotMatch(mcpTools, /safe_to_retry/);
-  assert.match(writeTypes, /function assertCreateTweetRequest\(request: unknown\)/);
+  assert.match(writeTypes, /function assertCreateTweetRequest\([\s\S]*request: unknown,[\s\S]*resolvedMedia/);
   assert.match(writeTypes, /media must contain 1-4 nonempty URLs/);
   assert.match(webhooks, /await handleEvent\(event\);[\s\S]*markProcessed/);
-  assert.match(webhooks, /handle_event\(event\)[\s\S]*mark_delivery_processed/);
+  assert.match(webhooks, /handle_event\(event\)[\s\S]*mark_event_processed\(stream_key\)/);
   assert.match(webhooks, /handleEvent\(event\)[\s\S]*MarkProcessed/);
   assert.match(webhooks, /var event \*struct/);
   assert.match(webhooks, /err != nil \|\| event == nil/);
@@ -1008,4 +1009,74 @@ test("preserves final review safety and correctness fixes", async () => {
   assert.doesNotMatch(workflows, /const eventParams = new URLSearchParams/);
   assert.match(skill, /Serialize X-authored content as JSON/);
   assert.doesNotMatch(skill, /requires:\n\s+env:\n\s+- XQUIK_API_KEY/);
+});
+
+test("preserves complete AutoSkills review fixes", async () => {
+  const [
+    skill,
+    xApi,
+    draws,
+    followers,
+    mcp,
+    python,
+    security,
+    tweetTypes,
+    writeTypes,
+    webhooks,
+    workflows,
+    skillCard,
+  ] = await Promise.all([
+    read("skills/x-twitter-scraper/SKILL.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-x-api.md"),
+    read("skills/x-twitter-scraper/references/draws.md"),
+    read("skills/x-twitter-scraper/references/export-twitter-followers.md"),
+    read("skills/x-twitter-scraper/references/mcp-tools.md"),
+    read("skills/x-twitter-scraper/references/python-examples.md"),
+    read("skills/x-twitter-scraper/references/security.md"),
+    read("skills/x-twitter-scraper/references/types-x-api.md"),
+    read("skills/x-twitter-scraper/references/types-x-write.md"),
+    read("skills/x-twitter-scraper/references/webhooks.md"),
+    read("skills/x-twitter-scraper/references/workflows.md"),
+    read("skills/x-twitter-scraper/skill-card.md"),
+  ]);
+
+  assert.equal((xApi.match(/new URLSearchParams/g) ?? []).length, 2);
+  assert.ok(draws.indexOf("async function xquikFetch") < draws.indexOf('xquikFetch("/draws"'));
+  assert.match(draws, /request: drawRequest[\s\S]*usageLimitation[\s\S]*approval\.request/);
+  assertIncludes(followers, contract.extractionFormats.map((format) => `\`${format}\``));
+  assert.match(mcp, /Download media[\s\S]*exact `tweetInput`[\s\S]*destination[\s\S]*retention/);
+  assert.match(mcp, /require `allowed === true`/);
+
+  assert.match(python, /json_body=extraction_request[\s\S]*estimate\["allowed"\] is not True/);
+  assert.match(python, /require_explicit_approval\(proposal\) != proposal/);
+  assert.match(python, /not isinstance\(page\.get\("results"\), list\)/);
+  assert.match(python, /not isinstance\(cursor, str\) or not cursor/);
+  assert.match(python, /enqueue_delivery\(event\)[\s\S]*send_response\(202\)/);
+  assert.match(python, /stream_key = f"stream:\{event\['streamEventId'\]\}"/);
+
+  assert.match(security, /non-metered public reads/);
+  assert.match(security, /media downloads,[\s\S]*searches,[\s\S]*extractions,[\s\S]*draws/);
+  assert.match(tweetTypes, /retweetCount\?: number/);
+  assert.match(tweetTypes, /bookmarkCount\?: number/);
+  assert.match(tweetTypes, /interface TweetSearchResult[\s\S]*likeCount\?: number[\s\S]*replyCount\?: number/);
+  assert.match(writeTypes, /25_000 : 280/);
+  assert.match(writeTypes, /1-4 images or exactly 1 MP4/);
+  assert.match(writeTypes, /resolvedMedia\.length !== media\.length/);
+
+  assert.match(webhooks, /bodyDeadline = setTimeout[\s\S]*Request body timeout/);
+  assert.match(webhooks, /event\.schemaVersion === 1[\s\S]*event\.streamEventId[\s\S]*event\.occurredAt/);
+  assert.match(webhooks, /eventStore\.claimPending\(streamKey\)/);
+  assert.match(webhooks, /streamClaimed && !streamProcessed/);
+  assert.match(webhooks, /stream_claim = claim_event\(stream_key\)/);
+  assert.match(webhooks, /stream_claimed and not stream_processed/);
+  assert.match(webhooks, /eventStore\.ClaimPending\(streamKey\)/);
+  assert.match(webhooks, /event\.Timestamp == ""[\s\S]*message == ""/);
+  assert.equal((webhooks.match(/type\(event\.get\("schemaVersion"\)\) is int/g) ?? []).length, 1);
+  assert.match(python, /type\(event\.get\("schemaVersion"\)\) is int/);
+
+  assert.match(workflows, /delayMs < 0/);
+  assert.equal((workflows.match(/instanceof XquikApiError/g) ?? []).length, 3);
+  assert.match(skill, /`401` over REST/);
+  assert.match(skill, /`401` over MCP/);
+  assert.match(skillCard, /0 confirmed security issues/);
 });
