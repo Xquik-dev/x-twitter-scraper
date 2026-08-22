@@ -30,13 +30,27 @@ HEADERS = {"x-api-key": API_KEY, "Content-Type": "application/json"}
 ```python
 import time, random
 
-def xquik_fetch(path, method="GET", json_body=None, max_retries=3):
+MAX_RETRY_DELAY_SECONDS = 30.0
+
+def sleep_before_retry(delay, deadline=None):
+    if deadline is None:
+        time.sleep(delay)
+        return
+    remaining = deadline - time.monotonic()
+    if remaining <= 0:
+        raise TimeoutError("Request deadline reached")
+    time.sleep(min(delay, remaining))
+
+def xquik_fetch(path, method="GET", json_body=None, max_retries=3, deadline=None):
     base_delay = 1.0
     method = method.upper()
     retry_safe = method in {"GET", "HEAD", "OPTIONS"}
     retried_coverage_cursor = False
 
     for attempt in range(max_retries + 1):
+        remaining = deadline - time.monotonic() if deadline is not None else None
+        if remaining is not None and remaining <= 0:
+            raise TimeoutError("Request deadline reached")
         retry_after = None
         body = json.dumps(json_body).encode() if json_body is not None else None
         request = urllib.request.Request(
@@ -44,7 +58,8 @@ def xquik_fetch(path, method="GET", json_body=None, max_retries=3):
         )
 
         try:
-            with urllib.request.urlopen(request, timeout=30) as response:
+            timeout = min(30, remaining) if remaining is not None else 30
+            with urllib.request.urlopen(request, timeout=timeout) as response:
                 response_body = response.read()
                 if response.status == 204 or not response_body:
                     return None
@@ -55,11 +70,17 @@ def xquik_fetch(path, method="GET", json_body=None, max_retries=3):
                 payload = json.loads(error.read() or b"{}")
             except json.JSONDecodeError:
                 payload = {"error": "request failed"}
+            if not isinstance(payload, dict):
+                payload = {}
             retry_after = error.headers.get("Retry-After")
         except urllib.error.URLError:
             if not retry_safe or attempt == max_retries:
                 raise
-            time.sleep(base_delay * (2 ** attempt) + random.uniform(0, 1))
+            delay = min(
+                base_delay * (2 ** attempt) + random.uniform(0, 1),
+                MAX_RETRY_DELAY_SECONDS,
+            )
+            sleep_before_retry(delay, deadline)
             continue
 
         error_value = payload.get("error")
@@ -89,14 +110,19 @@ def xquik_fetch(path, method="GET", json_body=None, max_retries=3):
         )
         if coverage_retry and retry_after_seconds is None:
             raise RuntimeError("Xquik API 409: missing Retry-After")
+        if coverage_retry and retry_after_seconds > MAX_RETRY_DELAY_SECONDS:
+            raise RuntimeError("Xquik API 409: Retry-After exceeds the configured wait limit")
         if coverage_retry:
             retried_coverage_cursor = True
         delay = (
-            retry_after_seconds
+            min(retry_after_seconds, MAX_RETRY_DELAY_SECONDS)
             if retry_after_seconds is not None
-            else base_delay * (2 ** attempt) + random.uniform(0, 1)
+            else min(
+                base_delay * (2 ** attempt) + random.uniform(0, 1),
+                MAX_RETRY_DELAY_SECONDS,
+            )
         )
-        time.sleep(delay)
+        sleep_before_retry(delay, deadline)
 ```
 
 ## Extraction workflow
@@ -130,12 +156,20 @@ job = xquik_fetch("/extractions", method="POST", json_body={
     "resultsLimit": RESULTS_LIMIT,
 })
 
-# Poll for at most 5 minutes. Resume later by job ID if the bound expires.
-for _ in range(150):
-    if job["status"] not in ("pending", "running"):
+# Poll for at most 5 minutes. Resume later by job ID if the deadline expires.
+poll_deadline = time.monotonic() + 5 * 60
+while job["status"] in ("pending", "running"):
+    remaining = poll_deadline - time.monotonic()
+    if remaining <= 0:
         break
-    time.sleep(2)
-    job = xquik_fetch(f"/extractions/{job['id']}")
+    time.sleep(min(2, remaining))
+    try:
+        job = xquik_fetch(f"/extractions/{job['id']}", deadline=poll_deadline)
+    except TimeoutError:
+        break
+
+if job["status"] in ("pending", "running"):
+    raise RuntimeError(f"Polling deadline reached. Resume extraction {job['id']}.")
 
 if job["status"] != "completed":
     raise RuntimeError(job.get("errorMessage", "Extraction failed."))
@@ -310,6 +344,11 @@ class WebhookHandler(BaseHTTPRequestHandler):
             return
 
         event_type = event.get("eventType")
+        if not isinstance(event_type, str):
+            self.send_response(400)
+            self.end_headers()
+            self.wfile.write(b"Invalid eventType")
+            return
         if event_type == "webhook.test":
             self.send_response(200)
             self.end_headers()
@@ -322,8 +361,15 @@ class WebhookHandler(BaseHTTPRequestHandler):
             self.wfile.write(b"Handler unavailable")
             return
 
+        data = event.get("data", {})
+        if not isinstance(data, dict):
+            self.send_response(400)
+            self.end_headers()
+            self.wfile.write(b"Invalid data")
+            return
+
         delivery_id = event.get("deliveryId")
-        if not isinstance(delivery_id, str):
+        if not isinstance(delivery_id, str) or not delivery_id:
             self.send_response(400)
             self.end_headers()
             self.wfile.write(b"Missing deliveryId")
@@ -343,7 +389,7 @@ class WebhookHandler(BaseHTTPRequestHandler):
 
         handler = EVENT_HANDLERS[event_type]
         try:
-            handler(event.get("username", ""), event.get("data", {}))
+            handler(event.get("username", ""), data)
             mark_delivery_processed(delivery_id)
         except Exception:
             release_delivery(delivery_id)
