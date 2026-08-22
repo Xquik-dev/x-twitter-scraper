@@ -10,6 +10,11 @@
       "description": "Install the Xquik Skill for Twitter data, API integrations, and approved account actions.",
       "files": [
         {
+          "path": "skills/x-twitter-scraper/LICENSE",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/LICENSE"
+        },
+        {
           "path": "skills/x-twitter-scraper/SKILL.md",
           "type": "registry:file",
           "target": "~/.agents/skills/x-twitter-scraper/SKILL.md"

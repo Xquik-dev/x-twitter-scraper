@@ -38,7 +38,10 @@ Use `GET /support/tickets`, `GET /support/tickets/{id}`, or
 
 List returns `{ tickets }`. Get returns ticket details, messages, and attachment
 metadata. Patch accepts `{ "status": "open" | "resolved" | "closed" }`.
-Private reads and status changes require the exact approvals above.
+Patch returns `{ "publicId": "tkt_...", "status": "resolved" }`. It can return
+`400` for an invalid status, `401` for missing authentication, `404` for a
+missing ticket, or `429` for rate limits. Private reads and status changes
+require the exact approvals above.
 
 ### Download an attachment
 

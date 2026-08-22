@@ -2,19 +2,21 @@
 
 **Skill:** x-twitter-scraper
 **Source:** `skills/x-twitter-scraper`
-**Scanned:** 2026-08-20 20:49:06 UTC
+**Scanned:** 2026-08-22 15:55:09 UTC
 
 ## Static Scan
 
 - Scanner: SkillSpector v2.3.7
 - Mode: static analysis only (`--no-llm`)
-- Components scanned: 71
+- Components scanned: 72
 - Executable scripts: no
-- Risk score: 0/100
+- Risk score: 3/100
 - Severity: low
 - Recommendation: safe
-- Findings: 0
+- Findings: 1
 
-No security issues were detected by the static scan.
+The scanner matched wording in the standard MIT warranty clause. It classified
+the legal text as possible scope creep with 0.7 confidence. The clause grants
+no runtime capability and contains no agent instruction.
 
 Refresh this report after each change to the skill directory.

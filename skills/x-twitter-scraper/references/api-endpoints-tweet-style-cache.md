@@ -51,6 +51,9 @@ For a 201 response, the API returns:
 `GET /styles`
 
 List up to 200 cached tweet style profiles ordered by fetch date.
+Each summary's `xUsername` is the route identifier. For a custom style, it is
+the normalized label returned when the style was saved. Use that value for
+subsequent get and delete requests.
 
 This is a private read. This endpoint returns the entire cached profile list, up to 200
 entries. Show that scope, the purpose, recipients, and retention plan.
@@ -77,7 +80,9 @@ For a 200 response, the API returns:
 
 `PUT /styles/{id}`
 
-Save a custom style profile from tweet texts. The body `label` controls the saved style label and replaces any existing style with that label.
+Save a custom style profile from tweet texts. Set `{id}` to the same label as
+the body `label`. The API normalizes that label into the response
+`xUsername`. A matching saved style is replaced.
 
 Get approval first. Preview the label and source texts. Warn when an existing
 label will be replaced, then obtain explicit approval.
@@ -112,7 +117,9 @@ Possible errors include `404 style_not_found`.
 
 ### Delete cached style
 
-Send a delete request to `/styles/{id}`.
+```http
+DELETE /styles/{id}
+```
 
 This action is destructive. This permanently deletes the cached style profile.
 Show the exact label or username and explain the lost cached data. Delete only

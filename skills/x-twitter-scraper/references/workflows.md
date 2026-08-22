@@ -103,8 +103,7 @@ const estimate = await xquikFetch("/extractions/estimate", {
 });
 
 if (!estimate.allowed) {
-  console.log(`Extraction estimate: ${estimate.creditsRequired} credits. Balance: ${estimate.creditsAvailable}.`);
-  return;
+  throw new Error(`Extraction requires ${estimate.creditsRequired} credits. Balance: ${estimate.creditsAvailable}.`);
 }
 
 // Create the bounded job only after approval.
@@ -122,6 +121,10 @@ let job = await xquikFetch("/extractions", {
 while (job.status === "pending" || job.status === "running") {
   await new Promise((r) => setTimeout(r, 2000));
   job = await xquikFetch(`/extractions/${job.id}`);
+}
+
+if (job.status !== "completed") {
+  throw new Error(job.errorMessage || "Extraction failed.");
 }
 
 // Retrieve up to 1,000 results per page.
@@ -158,18 +161,34 @@ const monitor = await xquikFetch("/monitors", {
   }),
 });
 
-// Register a persistent delivery destination.
-const webhook = await xquikFetch("/webhooks", {
-  method: "POST",
-  body: JSON.stringify({
-    url: "https://your-server.com/webhook",
-    eventTypes: ["tweet.new", "tweet.reply"],
-  }),
-});
+// Register a persistent delivery destination. Remove the monitor if this fails.
+let webhook;
+try {
+  webhook = await xquikFetch("/webhooks", {
+    method: "POST",
+    body: JSON.stringify({
+      url: "https://your-server.com/webhook",
+      eventTypes: ["tweet.new", "tweet.reply"],
+    }),
+  });
+} catch (creationError) {
+  try {
+    await xquikFetch(`/monitors/${encodeURIComponent(monitor.id)}`, {
+      method: "DELETE",
+    });
+  } catch (cleanupError) {
+    throw new AggregateError(
+      [creationError, cleanupError],
+      `Webhook creation and monitor ${monitor.id} cleanup failed. Delete the monitor manually.`,
+    );
+  }
+  throw creationError;
+}
 // Store webhook.secret now. The API returns it once.
 
 // Poll events when you do not use a webhook.
-const events = await xquikFetch("/events?monitorId=7&limit=50");
+const eventParams = new URLSearchParams({ monitorId: monitor.id, limit: "50" });
+const events = await xquikFetch(`/events?${eventParams}`);
 ```
 
 Monitor event types include `tweet.new`, `tweet.quote`, `tweet.reply`, and
@@ -205,9 +224,9 @@ Monitor event types include `tweet.new`, `tweet.quote`, `tweet.reply`, and
 | Check credits | `GET /credits` | Included |
 | Compose a tweet | `POST /compose` | Included |
 | Post a tweet | `POST /x/tweets` | Metered write action |
-| Like or unlike a tweet | `POST /x/tweets/{id}/like` likes it. A delete request to the same route unlikes it. | Metered write action |
+| Like or unlike a tweet | `POST /x/tweets/{id}/like` likes it. The `DELETE` method on the same route unlikes it. | Metered write action |
 | Retweet | `POST /x/tweets/{id}/retweet` | Metered write action |
-| Follow or unfollow | `POST /x/users/{id}/follow` follows. A delete request to the same route unfollows. | Metered write action |
+| Follow or unfollow | `POST /x/users/{id}/follow` follows. The `DELETE` method on the same route unfollows. | Metered write action |
 | Send a DM | `POST /x/dm/{userId}` | Metered write action |
 | Update a profile | `PATCH /x/profile` | Metered write action |
 | Upload media | `POST /x/media` | Metered write action |

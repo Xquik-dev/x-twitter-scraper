@@ -2,10 +2,15 @@
 
 ```typescript
 
-interface DownloadMediaRequest {
-  tweetInput?: string;  // Tweet URL or numeric tweet ID for 1 tweet.
-  tweetIds?: string[];  // Tweet URLs or IDs for up to 50 tweets. Use exactly 1 input field.
-}
+type NonEmptyTweetIds = [string, ...string[]];
+
+type DownloadMediaRequest =
+  | { tweetInput: string; tweetId?: never; tweetUrl?: never; tweetIds?: never }
+  | { tweetInput?: never; tweetId: string; tweetUrl?: never; tweetIds?: never }
+  | { tweetInput?: never; tweetId?: never; tweetUrl: string; tweetIds?: never }
+  | { tweetInput?: never; tweetId?: never; tweetUrl?: never; tweetIds: NonEmptyTweetIds };
+
+// Validate tweetIds.length <= 50 at runtime.
 
 interface DownloadMediaSingleResponse {
   tweetId: string;      // Resolved tweet ID

@@ -1,8 +1,8 @@
 # Xquik REST API endpoints: X media downloads
 
-### Download media
+## Download media
 
-```
+```http
 POST /x/media/download
 ```
 

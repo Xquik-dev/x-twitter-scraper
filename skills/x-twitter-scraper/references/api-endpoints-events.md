@@ -1,8 +1,8 @@
 # Xquik REST API endpoints: events
 
-### List events
+## List events
 
-```
+```http
 GET /events
 ```
 
@@ -28,9 +28,14 @@ The API returns:
       "username": "elonmusk",
       "occurredAt": "2026-02-24T16:45:00.000Z",
       "data": {
-        "tweetId": "1893556789012345678",
+        "id": "1893556789012345678",
         "text": "Hello world",
-        "metrics": { "likes": 3200, "retweets": 890, "replies": 245 }
+        "author": {
+          "id": "44196397",
+          "userName": "elonmusk",
+          "name": "Elon Musk"
+        },
+        "createdAt": "2026-02-24T16:45:00.000Z"
       }
     }
   ],
@@ -39,9 +44,12 @@ The API returns:
 }
 ```
 
-### Get event
+Keyword events set `monitorType` to `keyword` and may include
+`keywordMonitorId` and `query` instead of `username`.
 
-```
+## Get event
+
+```http
 GET /events/{id}
 ```
 

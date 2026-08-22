@@ -35,6 +35,13 @@ test("publishes the complete portable Skill tree", () => {
   assert.equal(new Set(publishedPaths).size, publishedPaths.length);
 });
 
+test("publishes the MIT license with the portable Skill", () => {
+  const license = readFileSync(join(skillRoot, "LICENSE"), "utf8");
+
+  assert.match(license, /^MIT License$/m);
+  assert.match(license, /Copyright \(c\) 2026 Xquik/);
+});
+
 test("installs only inside the project-local Skill directory", () => {
   for (const file of item.files) {
     const relativePath = file.path.replace("skills/x-twitter-scraper/", "");

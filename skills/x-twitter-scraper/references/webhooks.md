@@ -22,9 +22,10 @@ Every delivery is a `POST` request to your URL with a JSON body:
   "username": "elonmusk",
   "occurredAt": "2026-02-24T16:45:00.000Z",
   "data": {
-    "tweetId": "1893556789012345678",
+    "id": "1893556789012345678",
     "text": "Hello world",
-    "metrics": { "likes": 3200, "retweets": 890, "replies": 245 }
+    "author": { "id": "44196397", "userName": "elonmusk" },
+    "createdAt": "2026-02-24T16:45:00.000Z"
   }
 }
 ```
@@ -41,6 +42,7 @@ Each request contains `X-Xquik-Timestamp`, `X-Xquik-Nonce`, and
 Reject timestamps outside a 5-minute window. Reject reused nonces within that
 window. Compare signatures in constant time before parsing JSON.
 Use an atomic shared nonce store in multi-instance deployments.
+Set a receiver body limit before reading the request. The examples use 1 MiB.
 
 ### Node.js standard library
 
@@ -50,6 +52,9 @@ import { createServer } from "node:http";
 
 // Use the per-webhook secret from POST /webhooks, not an Xquik account credential.
 const WEBHOOK_SECRET = process.env.XQUIK_WEBHOOK_SECRET;
+if (!WEBHOOK_SECRET) throw new Error("Set XQUIK_WEBHOOK_SECRET first.");
+
+const MAX_WEBHOOK_BODY_BYTES = 1024 * 1024;
 const recentNonces = new Map();
 
 function claimNonce(nonce) {
@@ -63,7 +68,7 @@ function claimNonce(nonce) {
 }
 
 function verifySignature(payload, signature, timestamp, nonce, secret) {
-  if (![signature, timestamp, nonce, secret].every((value) => typeof value === "string")) return false;
+  if (![signature, timestamp, nonce, secret].every((value) => typeof value === "string" && value.length > 0)) return false;
   if (!/^\d+$/.test(timestamp) || !/^[0-9a-f]{32}$/.test(nonce)) return false;
   if (Math.abs(Date.now() - Number(timestamp)) > 5 * 60 * 1000) return false;
 
@@ -85,9 +90,22 @@ const server = createServer((req, res) => {
   }
 
   const chunks = [];
+  let bodyBytes = 0;
+  let bodyTooLarge = false;
 
-  req.on("data", (chunk) => chunks.push(chunk));
+  req.on("data", (chunk) => {
+    if (bodyTooLarge) return;
+    bodyBytes += chunk.length;
+    if (bodyBytes > MAX_WEBHOOK_BODY_BYTES) {
+      bodyTooLarge = true;
+      chunks.length = 0;
+      res.writeHead(413).end("Request body too large");
+      return;
+    }
+    chunks.push(chunk);
+  });
   req.on("end", () => {
+    if (bodyTooLarge) return;
     const payload = Buffer.concat(chunks).toString("utf8");
     const signature = req.headers["x-xquik-signature"];
     const timestamp = req.headers["x-xquik-timestamp"];
@@ -101,9 +119,15 @@ const server = createServer((req, res) => {
       return;
     }
 
-    const event = JSON.parse(payload);
+    let event;
+    try {
+      event = JSON.parse(payload);
+    } catch {
+      res.writeHead(400).end("Invalid JSON");
+      return;
+    }
 
-    if (!["tweet.new", "tweet.reply", "tweet.retweet"].includes(event.eventType)) {
+    if (!["webhook.test", "tweet.new", "tweet.reply", "tweet.retweet"].includes(event.eventType)) {
       res.writeHead(400).end("Unsupported event type");
       return;
     }
@@ -132,6 +156,7 @@ def load_secret(name: str) -> str:
 
 # Use the per-webhook secret from POST /webhooks, not an Xquik account credential.
 WEBHOOK_SECRET = load_secret("XQUIK_WEBHOOK_SECRET")
+MAX_WEBHOOK_BODY_BYTES = 1024 * 1024
 RECENT_NONCES: dict[str, int] = {}
 
 def claim_nonce(nonce: str) -> bool:
@@ -145,7 +170,7 @@ def claim_nonce(nonce: str) -> bool:
     return True
 
 def verify_signature(payload: bytes, signature: str, timestamp: str, nonce: str, secret: str) -> bool:
-    if not timestamp.isdigit() or not re.fullmatch(r"[0-9a-f]{32}", nonce):
+    if not secret or not timestamp.isdigit() or not re.fullmatch(r"[0-9a-f]{32}", nonce):
         return False
     if abs(int(time.time() * 1000) - int(timestamp)) > 5 * 60 * 1000:
         return False
@@ -158,7 +183,15 @@ class WebhookHandler(BaseHTTPRequestHandler):
         signature = self.headers.get("X-Xquik-Signature", "")
         timestamp = self.headers.get("X-Xquik-Timestamp", "")
         nonce = self.headers.get("X-Xquik-Nonce", "")
-        length = int(self.headers.get("Content-Length", "0"))
+        try:
+            length = int(self.headers.get("Content-Length", ""))
+        except ValueError:
+            length = -1
+        if length < 1 or length > MAX_WEBHOOK_BODY_BYTES:
+            self.send_response(413)
+            self.end_headers()
+            self.wfile.write(b"Request body too large or missing")
+            return
         payload = self.rfile.read(length)
 
         if not verify_signature(payload, signature, timestamp, nonce, WEBHOOK_SECRET) or not claim_nonce(nonce):
@@ -167,9 +200,15 @@ class WebhookHandler(BaseHTTPRequestHandler):
             self.wfile.write(b"Invalid signature")
             return
 
-        event = json.loads(payload)
+        try:
+            event = json.loads(payload)
+        except json.JSONDecodeError:
+            self.send_response(400)
+            self.end_headers()
+            self.wfile.write(b"Invalid JSON")
+            return
 
-        if event.get("eventType") not in {"tweet.new", "tweet.reply", "tweet.retweet"}:
+        if event.get("eventType") not in {"webhook.test", "tweet.new", "tweet.reply", "tweet.retweet"}:
             self.send_response(400)
             self.end_headers()
             self.wfile.write(b"Unsupported event type")
@@ -193,6 +232,7 @@ import (
     "crypto/sha256"
     "encoding/hex"
     "encoding/json"
+    "errors"
     "fmt"
     "io"
     "net/http"
@@ -204,7 +244,17 @@ import (
 )
 
 // Use the per-webhook secret from POST /webhooks, not an Xquik account credential.
-var webhookSecret = os.Getenv("XQUIK_WEBHOOK_SECRET")
+func requireWebhookSecret() string {
+    secret := os.Getenv("XQUIK_WEBHOOK_SECRET")
+    if secret == "" {
+        panic("Set XQUIK_WEBHOOK_SECRET first.")
+    }
+    return secret
+}
+
+const maxWebhookBodyBytes int64 = 1024 * 1024
+
+var webhookSecret = requireWebhookSecret()
 var recentNonces sync.Map
 
 func claimNonce(nonce string) bool {
@@ -220,6 +270,9 @@ func claimNonce(nonce string) bool {
 }
 
 func verifySignature(payload []byte, signature, timestamp, nonce, secret string) bool {
+    if secret == "" {
+        return false
+    }
     signedAt, err := strconv.ParseInt(timestamp, 10, 64)
     if err != nil || !regexp.MustCompile(`^[0-9a-f]{32}$`).MatchString(nonce) {
         return false
@@ -236,8 +289,14 @@ func verifySignature(payload []byte, signature, timestamp, nonce, secret string)
 }
 
 func webhookHandler(w http.ResponseWriter, r *http.Request) {
+    r.Body = http.MaxBytesReader(w, r.Body, maxWebhookBodyBytes)
     payload, err := io.ReadAll(r.Body)
     if err != nil {
+        var maxBytesError *http.MaxBytesError
+        if errors.As(err, &maxBytesError) {
+            http.Error(w, "Request body too large", http.StatusRequestEntityTooLarge)
+            return
+        }
         http.Error(w, "Unable to read request body", http.StatusBadRequest)
         return
     }
@@ -258,10 +317,13 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
             Text string `json:"text"`
         } `json:"data"`
     }
-    json.Unmarshal(payload, &event)
+    if err := json.Unmarshal(payload, &event); err != nil {
+        http.Error(w, "Invalid JSON", http.StatusBadRequest)
+        return
+    }
 
     switch event.EventType {
-    case "tweet.new", "tweet.reply", "tweet.retweet":
+    case "webhook.test", "tweet.new", "tweet.reply", "tweet.retweet":
         fmt.Print("Accepted verified Xquik webhook\n")
     default:
         http.Error(w, "Unsupported event type", http.StatusBadRequest)
@@ -284,15 +346,30 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
 
 ## Idempotency
 
-Webhook deliveries can retry. Deduplicate by `deliveryId` in durable storage:
+Webhook deliveries can retry. Claim `deliveryId` with an expiring pending lease
+in durable storage. Mark it processed only after the handler or durable queue
+write succeeds:
 
 ```javascript
-const processedDeliveries = new Set(); // Use durable storage in deployed services.
+async function processDelivery(event, res) {
+  const claim = await deliveryStore.claimPending(event.deliveryId);
+  if (claim === "processed") {
+    res.writeHead(200).end("Already processed");
+    return;
+  }
+  if (claim !== "claimed") {
+    res.writeHead(409).end("Delivery already pending");
+    return;
+  }
 
-if (processedDeliveries.has(event.deliveryId)) {
-  res.writeHead(200).end("Already processed");
-} else {
-  processedDeliveries.add(event.deliveryId);
+  try {
+    await handleEvent(event);
+    await deliveryStore.markProcessed(event.deliveryId);
+    res.writeHead(200).end("OK");
+  } catch (error) {
+    await deliveryStore.release(event.deliveryId);
+    throw error;
+  }
 }
 ```
 

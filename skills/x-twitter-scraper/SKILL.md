@@ -1,20 +1,22 @@
 ---
 name: x-twitter-scraper
 description: "Use Xquik for Twitter search, REST, MCP, SDKs, filtered exports, monitoring, and approved publishing. Not affiliated with X Corp. Trigger for X API comparisons, tweet search, user lookup, timelines, follower exports, media, webhooks, bulk extraction, giveaways, or MCP setup. Start read-only. Require explicit approval for writes, private reads, monitors, webhooks, and metered bulk jobs."
-allowed-tools: WebFetch
+allowed-tools: WebFetch mcp__xquik__explore mcp__xquik__xquik
 argument-hint: "[Xquik task, target, or setup goal]"
 version: "2.6.7"
 author: Xquik <support@xquik.com>
 license: MIT
-compatibility: Requires internet access to call the first-party Xquik REST API.
+compatibility: Requires internet access. Authenticated calls require configured Xquik MCP tools or a user-controlled HTTP client.
 metadata:
   version: "2.6.7"
   author: Xquik
-  compatibility: Requires internet access to call the first-party Xquik REST API.
+  compatibility: Requires internet access. Authenticated calls require configured Xquik MCP tools or a user-controlled HTTP client.
   tags: [twitter, x, social-media, api-development, scraping]
   capabilities:
     tools:
       - WebFetch
+      - mcp__xquik__explore
+      - mcp__xquik__xquik
     network:
       allowed: true
       hosts:
@@ -184,7 +186,8 @@ questions.
 
 - A valid Xquik API key in `XQUIK_API_KEY`.
 - Internet access to `https://xquik.com` and `https://docs.xquik.com`.
-- `WebFetch` access for current docs, OpenAPI references, and setup guides.
+- `WebFetch` access for public docs, OpenAPI references, and setup guides only.
+- Configured `mcp__xquik__explore` and `mcp__xquik__xquik` tools for authenticated calls. REST examples require a user-controlled HTTP client that can send `x-api-key`.
 - User approval before private reads, writes, monitors, webhooks, extraction jobs, or other metered persistent work.
 - X account connection handled only in the Xquik dashboard when account-scoped reads or writes are needed.
 

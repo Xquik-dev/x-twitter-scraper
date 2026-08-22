@@ -93,6 +93,9 @@ while job["status"] in ("pending", "running"):
     time.sleep(2)
     job = xquik_fetch(f"/extractions/{job['id']}")
 
+if job["status"] != "completed":
+    raise RuntimeError(job.get("errorMessage", "Extraction failed."))
+
 # Get every approved result page.
 cursor = None
 results = []
@@ -150,10 +153,25 @@ def load_secret(name: str) -> str:
 
 # Use the per-webhook secret from POST /webhooks, not an Xquik account credential.
 WEBHOOK_SECRET = load_secret("XQUIK_WEBHOOK_SECRET")
-processed_delivery_ids = set()  # Use durable storage in deployed services.
+MAX_WEBHOOK_BODY_BYTES = 1024 * 1024
+
+def claim_delivery(delivery_id: str) -> str:
+    """Atomically create an expiring claim or return 'pending' or 'processed'."""
+    raise RuntimeError("Configure a durable webhook delivery store.")
+
+def mark_delivery_processed(delivery_id: str) -> None:
+    """Atomically mark a claimed delivery as processed."""
+    raise RuntimeError("Configure a durable webhook delivery store.")
+
+def release_delivery(delivery_id: str) -> None:
+    """Release a failed pending claim so Xquik can retry it."""
+    raise RuntimeError("Configure a durable webhook delivery store.")
+
+def safe_log_value(value: object) -> str:
+    return json.dumps(str(value), ensure_ascii=True)[:256]
 
 def verify_signature(payload: bytes, signature: str, timestamp: str, nonce: str, secret: str) -> bool:
-    if not timestamp.isdigit() or not re.fullmatch(r"[0-9a-f]{32}", nonce):
+    if not secret or not timestamp.isdigit() or not re.fullmatch(r"[0-9a-f]{32}", nonce):
         return False
     if abs(int(time.time() * 1000) - int(timestamp)) > 5 * 60 * 1000:
         return False
@@ -162,15 +180,24 @@ def verify_signature(payload: bytes, signature: str, timestamp: str, nonce: str,
     return hmac.compare_digest(expected, signature)
 
 EVENT_HANDLERS = {
-    "tweet.new": lambda u, d: print(f"New tweet from @{u}: {d['text']}"),
-    "tweet.reply": lambda u, d: print(f"Reply from @{u}: {d['text']}"),
-    "tweet.quote": lambda u, d: print(f"Quote from @{u}: {d['text']}"),
-    "tweet.retweet": lambda u, d: print(f"Retweet by @{u}"),
+    "tweet.new": lambda u, d: print(f"New tweet from {safe_log_value(u)}: {safe_log_value(d.get('text', ''))}"),
+    "tweet.reply": lambda u, d: print(f"Reply from {safe_log_value(u)}: {safe_log_value(d.get('text', ''))}"),
+    "tweet.quote": lambda u, d: print(f"Quote from {safe_log_value(u)}: {safe_log_value(d.get('text', ''))}"),
+    "tweet.retweet": lambda u, d: print(f"Retweet by {safe_log_value(u)}"),
 }
 
 class WebhookHandler(BaseHTTPRequestHandler):
     def do_POST(self):
-        length = int(self.headers.get("Content-Length", "0"))
+        try:
+            length = int(self.headers.get("Content-Length", ""))
+        except ValueError:
+            length = -1
+        if length < 1 or length > MAX_WEBHOOK_BODY_BYTES:
+            self.send_response(413)
+            self.end_headers()
+            self.wfile.write(b"Request body too large or missing")
+            return
+
         signature = self.headers.get("X-Xquik-Signature", "")
         timestamp = self.headers.get("X-Xquik-Timestamp", "")
         nonce = self.headers.get("X-Xquik-Nonce", "")
@@ -182,16 +209,50 @@ class WebhookHandler(BaseHTTPRequestHandler):
             self.wfile.write(b"Invalid signature")
             return
 
-        event = json.loads(payload)
-        if event["deliveryId"] in processed_delivery_ids:
+        try:
+            event = json.loads(payload)
+        except json.JSONDecodeError:
+            self.send_response(400)
+            self.end_headers()
+            self.wfile.write(b"Invalid JSON")
+            return
+
+        if event.get("eventType") == "webhook.test":
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b"Test accepted")
+            return
+
+        delivery_id = event.get("deliveryId")
+        if not isinstance(delivery_id, str):
+            self.send_response(400)
+            self.end_headers()
+            self.wfile.write(b"Missing deliveryId")
+            return
+
+        claim = claim_delivery(delivery_id)
+        if claim == "processed":
             self.send_response(200)
             self.end_headers()
             self.wfile.write(b"Already processed")
             return
-        processed_delivery_ids.add(event["deliveryId"])
-        handler = EVENT_HANDLERS.get(event["eventType"])
-        if handler:
-            handler(event["username"], event["data"])
+        if claim != "claimed":
+            self.send_response(409)
+            self.end_headers()
+            self.wfile.write(b"Delivery already pending")
+            return
+
+        handler = EVENT_HANDLERS.get(event.get("eventType"))
+        try:
+            if handler:
+                handler(event.get("username", ""), event.get("data", {}))
+            mark_delivery_processed(delivery_id)
+        except Exception:
+            release_delivery(delivery_id)
+            self.send_response(500)
+            self.end_headers()
+            self.wfile.write(b"Handler failed")
+            return
 
         self.send_response(200)
         self.end_headers()

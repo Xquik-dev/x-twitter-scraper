@@ -70,10 +70,12 @@ For a 200 response, the API returns:
       "updatedAt": "2026-02-24T10:30:00.000Z"
     }
   ],
-  "afterCursor": "cursor_string",
+  "nextCursor": "cursor_string",
   "hasMore": true
 }
 ```
+
+The final page omits `nextCursor` when `hasMore` is `false`.
 
 ---
 
@@ -94,7 +96,9 @@ Possible errors include `400 invalid_id` and `404 draft_not_found`.
 
 ### Delete draft
 
-Send a delete request to `/drafts/{id}`.
+```http
+DELETE /drafts/{id}
+```
 
 This action is destructive. Deletion is permanent and cannot be recovered through
 this API. Show the draft ID and text, then obtain explicit approval immediately

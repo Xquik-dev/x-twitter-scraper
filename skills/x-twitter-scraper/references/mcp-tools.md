@@ -102,10 +102,10 @@ Use `explore` first to find endpoints, then `xquik` to call them.
 | Get cached style | `GET /api/v1/styles/{id}` |
 | Compare two styles | `GET /api/v1/styles/compare` |
 | Post a tweet | `POST /api/v1/x/tweets`; requires approval |
-| Like or unlike a tweet | `POST /api/v1/x/tweets/{id}/like` likes it. A delete request to the same route unlikes it. Both require approval. |
+| Like or unlike a tweet | `POST /api/v1/x/tweets/{id}/like` likes it. The `DELETE` method on the same route unlikes it. Both require approval. |
 | Retweet | `POST /api/v1/x/tweets/{id}/retweet`; requires approval |
-| Unretweet | Send a delete request to `/api/v1/x/tweets/{id}/retweet`; requires approval |
-| Follow or unfollow | `POST /api/v1/x/users/{id}/follow` follows. A delete request to the same route unfollows. Both require approval. |
+| Unretweet | Use the `DELETE` method on `/api/v1/x/tweets/{id}/retweet`; requires approval |
+| Follow or unfollow | `POST /api/v1/x/users/{id}/follow` follows. The `DELETE` method on the same route unfollows. Both require approval. |
 | Send a DM | `POST /api/v1/x/dm/{userId}`; requires approval |
 | Upload media | `POST /api/v1/x/media`; approve its use in a post or profile change |
 | Open support ticket | `POST /api/v1/support/tickets` |
@@ -151,7 +151,7 @@ See [direct lookups](api-endpoints-x-api.md) for the exact names.
 
 | Mistake | Fix |
 |---------|-----|
-| Combining included and metered calls in `Promise.all` | Call included endpoints first, then metered ones. A 402 in `Promise.all` cancels all results. |
+| Combining included and metered calls in `Promise.all` | Keep approval and billing steps sequential. `Promise.all` starts every call, then rejects without returning fulfilled values when 1 call fails. |
 | Using `compose` when the user wants to send a tweet | `POST /compose` creates drafts. Use `POST /x/tweets` to send. |
 | Using `POST /x/tweets` when the user wants writing help | Use compose, refine, and score instead. |
 | Falling back to web search after an API error | Keep data already fetched from Xquik. |

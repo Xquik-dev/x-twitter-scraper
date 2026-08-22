@@ -38,7 +38,8 @@ export const skillFrontmatterExpectations = {
   scalars: {
     author: "Xquik <support@xquik.com>",
     compatibility:
-      "Requires internet access to call the first-party Xquik REST API.",
+      "Requires internet access. Authenticated calls require configured Xquik MCP tools or a user-controlled HTTP client.",
+    "allowed-tools": "WebFetch mcp__xquik__explore mcp__xquik__xquik",
     "metadata.author": "Xquik",
     "metadata.capabilities.network.allowed": true,
     "metadata.capabilities.shell.allowed": false,
@@ -79,6 +80,11 @@ export const skillFrontmatterExpectations = {
   arrays: {
     "metadata.tags": ["twitter", "x", "social-media", "api-development", "scraping"],
     "metadata.capabilities.network.hosts": ["xquik.com", "docs.xquik.com"],
+    "metadata.capabilities.tools": [
+      "WebFetch",
+      "mcp__xquik__explore",
+      "mcp__xquik__xquik",
+    ],
     "metadata.capabilities.environment.required": ["XQUIK_API_KEY"],
     "metadata.capabilities.environment.optional": ["XQUIK_WEBHOOK_SECRET"],
     "metadata.openclaw.requires.env": ["XQUIK_API_KEY"],

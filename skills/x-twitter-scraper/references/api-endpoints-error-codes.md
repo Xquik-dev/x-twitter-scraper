@@ -38,6 +38,7 @@ and `code`. OpenAPI enumerates 112 codes, including `closed`, `expired`,
 | 409 | `coverage_cursor_unavailable` | Wait the exact `Retry-After` seconds, then retry the same cursor once |
 | 410 | `coverage_cursor_gone` | No `Retry-After`. Restart without a cursor and deduplicate by ID |
 | 422 | `login_failed` | Account connection failed; use dashboard re-auth flow |
+| 424 | `x_api_unavailable` | With `xquik-api-contract: 2026-04-29`, an upstream dependency failed. Apply the endpoint's documented fallback |
 | 429 | - | Rate limited. Retry with backoff |
 | 429 | `x_api_rate_limited` | X data source rate limited. Retry |
 | 500 | `internal_error` | Server error |
