@@ -502,7 +502,7 @@ test("aligns public safety and type contracts", async () => {
   assert.match(extractionTypes, /Number\.isFinite\(request\.resultsLimit\)/);
   assert.match(supportTypes, /type SupportAttachments =\s+\| \[Blob\]/);
   assert.match(supportTypes, /body or attachments is required/);
-  assert.match(supportTypes, /content\.body\.length > 10_000/);
+  assert.match(supportTypes, /candidate\.body\.length > 10_000/);
 
   assert.match(workflows, /removes the like/);
   assert.match(skillCard, /with 1 MIT warranty-text finding/);
@@ -542,7 +542,7 @@ test("documents file responses and specialized monitor contracts", async () => {
 
   assert.doesNotMatch(apiIndex, /All responses are JSON/);
   assert.match(apiIndex, /`Content-Type`[\s\S]*`Content-Disposition`/);
-  assert.match(apiIndex, /response\.json\(\).*only for JSON exports/);
+  assert.match(apiIndex, /`response\.json\(\)` whenever `Content-Type` indicates JSON/);
   assert.match(eventEndpoints, /Detailed events may include `xEventId`/);
   assert.match(eventTypes, /type XquikEventDetail[\s\S]*xEventId\?: string/);
   assert.match(
@@ -871,7 +871,7 @@ test("preserves audited integration safety invariants", async () => {
     extractions.indexOf("POST /extractions/estimate") <
       extractions.indexOf("POST /extractions`."),
   );
-  assert.match(mcp, /POST \/api\/v1\/draws`;.?metered and requires explicit approval/i);
+  assert.match(mcp, /POST \/api\/v1\/draws`; metered and requires approval for the exact request/i);
   assert.match(python, /if not isinstance\(payload, dict\):/);
   assert.match(python, /MAX_RETRY_DELAY_SECONDS/);
   assert.match(python, /if max_retries < 0:\n\s+raise ValueError/);
@@ -888,7 +888,7 @@ test("preserves audited integration safety invariants", async () => {
     pipeline,
     /deduplicate by `eventId`[\s\S]*webhook deliveries by `deliveryId`/,
   );
-  assert.match(support, /request\.subject\.length > 500/);
+  assert.match(support, /subject\.length > 500/);
   assert.match(xTypes, /interface TweetReplies[\s\S]*next_cursor: string/);
   assert.match(usage, /Obtain explicit approval for that exact read/);
   assert.match(webhooks, /deliveryStore\.claimPending\(event\.deliveryId\)/);
@@ -902,4 +902,53 @@ test("preserves audited integration safety invariants", async () => {
     workflows,
     /eventTypes: \["tweet\.new", "tweet\.reply"\][\s\S]*eventTypes: \["tweet\.new", "tweet\.reply",/,
   );
+});
+
+test("preserves reviewed approval and decoding safeguards", async () => {
+  const [
+    extractionEndpoints,
+    drawEndpoints,
+    styleEndpoints,
+    endpointIndex,
+    comparison,
+    mcp,
+    supportTypes,
+    workflows,
+    skillCard,
+    mediaEndpoints,
+    mediaTypes,
+  ] = await Promise.all([
+    read("skills/x-twitter-scraper/references/api-endpoints-extractions.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-draws.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-tweet-style-cache.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints.md"),
+    read("skills/x-twitter-scraper/references/compare-twitter-apis.md"),
+    read("skills/x-twitter-scraper/references/mcp-tools.md"),
+    read("skills/x-twitter-scraper/references/types-support.md"),
+    read("skills/x-twitter-scraper/references/workflows.md"),
+    read("skills/x-twitter-scraper/skill-card.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-x-media.md"),
+    read("skills/x-twitter-scraper/references/types-download-media.md"),
+  ]);
+
+  assert.ok(
+    extractionEndpoints.indexOf("Send that body to the estimate endpoint") <
+      extractionEndpoints.indexOf("Then require approval"),
+  );
+  assert.match(drawEndpoints, /no precise preflight estimate is available/);
+  assert.match(drawEndpoints, /Never invent an estimate/);
+  assert.match(styleEndpoints, /new URLSearchParams/);
+  assert.match(endpointIndex, /`response\.json\(\)` whenever `Content-Type` indicates JSON/);
+  assert.match(comparison, /Do not add raw credits, row counts, retry counts, bytes/);
+  assert.match(mcp, /confirm the source tweet, `winnerCount`, `backupCount`, every/);
+  assert.match(mcp, /show the exact subject, body, and attachments/);
+  assert.match(supportTypes, /typeof candidate\.body !== "string"/);
+  assert.match(supportTypes, /!Array\.isArray\(candidate\.attachments\)/);
+  assert.match(supportTypes, /typeof subject !== "string"/);
+  assert.match(workflows, /Math\.min\(\n\s+maxRetryDelay,/);
+  assert.match(skillCard, /MCP review uses client-managed\nOAuth 2\.1/);
+  assert.match(mediaEndpoints, /`tweetId` \| string \| Numeric tweet ID alias/);
+  assert.match(mediaEndpoints, /`tweetUrl` \| string \| Tweet URL alias/);
+  assert.match(mediaTypes, /tweetId: string/);
+  assert.match(mediaTypes, /tweetUrl: string/);
 });
