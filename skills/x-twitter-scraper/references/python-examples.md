@@ -197,6 +197,7 @@ import hashlib
 import hmac
 import json
 import re
+import socket
 import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
@@ -243,8 +244,18 @@ EVENT_HANDLERS = {
     "tweet.retweet": lambda u, d: print(f"Retweet by {safe_log_value(u)}"),
 }
 
+def validate_subscription_event_types(event_types: list[str]) -> None:
+    """Reject subscriptions until this receiver implements every event type."""
+    unsupported = sorted(set(event_types) - EVENT_HANDLERS.keys())
+    if unsupported:
+        raise ValueError(f"Add handlers before subscribing: {', '.join(unsupported)}")
+
+# Call validate_subscription_event_types before every monitor or webhook create
+# or update request.
+
 class WebhookHandler(BaseHTTPRequestHandler):
     def do_POST(self):
+        self.connection.settimeout(10)
         try:
             length = int(self.headers.get("Content-Length", ""))
         except ValueError:
@@ -258,7 +269,19 @@ class WebhookHandler(BaseHTTPRequestHandler):
         signature = self.headers.get("X-Xquik-Signature", "")
         timestamp = self.headers.get("X-Xquik-Timestamp", "")
         nonce = self.headers.get("X-Xquik-Nonce", "")
-        payload = self.rfile.read(length)
+        try:
+            payload = self.rfile.read(length)
+        except socket.timeout:
+            self.close_connection = True
+            self.send_response(408)
+            self.end_headers()
+            self.wfile.write(b"Request body timeout")
+            return
+        if len(payload) != length:
+            self.send_response(400)
+            self.end_headers()
+            self.wfile.write(b"Incomplete request body")
+            return
 
         if not verify_signature(payload, signature, timestamp, nonce, WEBHOOK_SECRET):
             self.send_response(401)
@@ -286,10 +309,17 @@ class WebhookHandler(BaseHTTPRequestHandler):
             self.wfile.write(b"Invalid JSON object")
             return
 
-        if event.get("eventType") == "webhook.test":
+        event_type = event.get("eventType")
+        if event_type == "webhook.test":
             self.send_response(200)
             self.end_headers()
             self.wfile.write(b"Test accepted")
+            return
+
+        if event_type not in EVENT_HANDLERS:
+            self.send_response(503)
+            self.end_headers()
+            self.wfile.write(b"Handler unavailable")
             return
 
         delivery_id = event.get("deliveryId")
@@ -311,13 +341,7 @@ class WebhookHandler(BaseHTTPRequestHandler):
             self.wfile.write(b"Delivery already pending")
             return
 
-        handler = EVENT_HANDLERS.get(event.get("eventType"))
-        if handler is None:
-            release_delivery(delivery_id)
-            self.send_response(400)
-            self.end_headers()
-            self.wfile.write(b"Unsupported event type")
-            return
+        handler = EVENT_HANDLERS[event_type]
         try:
             handler(event.get("username", ""), event.get("data", {}))
             mark_delivery_processed(delivery_id)
