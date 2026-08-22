@@ -28,6 +28,8 @@ draw.
 ## Create and review a draw
 
 ```javascript
+const BASE = "https://xquik.com/api/v1";
+
 function requireExplicitApproval(scope) {
   throw new Error(`Approval required for ${scope}. Implement the approval gate first.`);
 }

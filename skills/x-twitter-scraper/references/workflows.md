@@ -257,10 +257,21 @@ requireExplicitApproval(
   "the monitor target, event types, destination URL, preflight webhook list, ongoing usage, and disable path",
 );
 
+const eventTypes = ["tweet.new", "tweet.reply", "tweet.quote", "tweet.retweet"];
+const monitorConfig = {
+  username: "elonmusk",
+  eventTypes,
+};
 const webhookConfig = {
   url: "https://your-server.com/webhook",
-  eventTypes: ["tweet.new", "tweet.reply"],
+  eventTypes,
 };
+
+function readMonitorList(data) {
+  if (Array.isArray(data)) return data;
+  if (data && Array.isArray(data.monitors)) return data.monitors;
+  throw new Error("Unexpected monitor list response.");
+}
 
 function readWebhookList(data) {
   if (Array.isArray(data)) return data;
@@ -272,20 +283,47 @@ function eventTypeKey(eventTypes) {
   return [...eventTypes].sort().join("\u0000");
 }
 
-// Snapshot existing IDs before creating anything. This private read needs the
-// approval above and enables safe reconciliation after an ambiguous timeout.
+// Snapshot existing IDs before creating anything. These private reads need the
+// approval above and enable safe reconciliation after ambiguous timeouts.
+const existingMonitorIds = new Set(
+  readMonitorList(await xquikFetch("/monitors")).map((item) => item.id),
+);
 const existingWebhookIds = new Set(
   readWebhookList(await xquikFetch("/webhooks")).map((item) => item.id),
 );
 
 // Create a persistent monitor. Active monitors are metered hourly.
-const monitor = await xquikFetch("/monitors", {
-  method: "POST",
-  body: JSON.stringify({
-    username: "elonmusk",
-    eventTypes: ["tweet.new", "tweet.reply", "tweet.quote", "tweet.retweet"],
-  }),
-});
+let monitor;
+try {
+  monitor = await xquikFetch("/monitors", {
+    method: "POST",
+    body: JSON.stringify(monitorConfig),
+  });
+} catch (monitorCreationError) {
+  let candidates;
+  try {
+    candidates = readMonitorList(await xquikFetch("/monitors")).filter(
+      (item) =>
+        typeof item.id === "string" &&
+        Array.isArray(item.eventTypes) &&
+        !existingMonitorIds.has(item.id) &&
+        item.username === monitorConfig.username &&
+        eventTypeKey(item.eventTypes) === eventTypeKey(monitorConfig.eventTypes),
+    );
+  } catch (reconciliationError) {
+    throw new AggregateError(
+      [monitorCreationError, reconciliationError],
+      "Monitor creation is ambiguous. Reconcile new monitors manually.",
+    );
+  }
+  if (candidates.length !== 1) {
+    throw new AggregateError(
+      [monitorCreationError],
+      `Monitor creation is ambiguous. Found ${candidates.length} new matches. Reconcile them manually.`,
+    );
+  }
+  [monitor] = candidates;
+}
 
 // Register a persistent delivery destination. POST /webhooks does not accept
 // Idempotency-Key, so reconcile an ambiguous failure before deleting anything.
@@ -296,43 +334,47 @@ try {
     body: JSON.stringify(webhookConfig),
   });
 } catch (creationError) {
-  let candidates;
+  const failures = [creationError];
+  let candidates = [];
   try {
     candidates = readWebhookList(await xquikFetch("/webhooks")).filter(
       (item) =>
         typeof item.id === "string" &&
+        Array.isArray(item.eventTypes) &&
         !existingWebhookIds.has(item.id) &&
         item.url === webhookConfig.url &&
         eventTypeKey(item.eventTypes) === eventTypeKey(webhookConfig.eventTypes),
     );
   } catch (reconciliationError) {
-    throw new AggregateError(
-      [creationError, reconciliationError],
-      `Webhook creation is ambiguous. Keep monitor ${monitor.id} and resolve it manually.`,
-    );
+    failures.push(reconciliationError);
   }
 
-  if (candidates.length !== 1) {
-    throw new AggregateError(
-      [creationError],
-      `Webhook creation is ambiguous. Found ${candidates.length} new matches. Keep monitor ${monitor.id} and resolve it manually.`,
+  if (candidates.length === 1) {
+    try {
+      await xquikFetch(`/webhooks/${encodeURIComponent(candidates[0].id)}`, {
+        method: "DELETE",
+      });
+    } catch (cleanupError) {
+      failures.push(cleanupError);
+    }
+  } else {
+    failures.push(
+      new Error(`Found ${candidates.length} new webhook matches. Reconcile them manually.`),
     );
   }
 
   try {
-    await xquikFetch(`/webhooks/${encodeURIComponent(candidates[0].id)}`, {
-      method: "DELETE",
-    });
     await xquikFetch(`/monitors/${encodeURIComponent(monitor.id)}`, {
       method: "DELETE",
     });
   } catch (cleanupError) {
-    throw new AggregateError(
-      [creationError, cleanupError],
-      `Webhook reconciliation cleanup failed. Resolve webhook ${candidates[0].id} and monitor ${monitor.id} manually.`,
-    );
+    failures.push(cleanupError);
   }
-  throw creationError;
+
+  throw new AggregateError(
+    failures,
+    `Webhook setup failed. Monitor ${monitor.id} cleanup was attempted. Reconcile webhook resources manually.`,
+  );
 }
 // Store webhook.secret now. The API returns it once.
 

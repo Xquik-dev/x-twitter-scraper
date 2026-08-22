@@ -2,7 +2,7 @@
 
 **Skill:** x-twitter-scraper
 **Source:** `skills/x-twitter-scraper`
-**Scanned:** 2026-08-22 17:38:26 UTC
+**Scanned:** 2026-08-22 18:03:45 UTC
 
 ## Static Scan
 

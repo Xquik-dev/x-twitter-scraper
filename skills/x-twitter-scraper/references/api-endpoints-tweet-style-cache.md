@@ -81,8 +81,10 @@ For a 200 response, the API returns:
 `PUT /styles/{id}`
 
 Save a custom style profile from tweet texts. Set `{id}` to the same label as
-the body `label`. The API normalizes that label into the response
-`xUsername`. A matching saved style is replaced.
+the body `label`. URL-encode the label as one path segment with
+`encodeURIComponent(label)`. The API normalizes that label into the response
+`xUsername`. Use `encodeURIComponent(response.xUsername)` for later get,
+delete, or performance requests. A matching saved style is replaced.
 
 Get approval first. Preview the label and source texts. Warn when an existing
 label will be replaced, then obtain explicit approval.
@@ -91,7 +93,7 @@ Send this body:
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `label` | string | Yes | Style label from 1-30 characters |
+| `label` | string | Yes | Style label from 1-50 characters. Start with a letter or number. Use letters, numbers, spaces, dots, hyphens, or apostrophes. |
 | `tweets` | object[] | Yes | Array of 1-100 tweet objects; each needs a `text` field |
 
 For a 200 response, the API returns a style object with its label, `tweetCount`, `isOwnAccount: false`, `fetchedAt`, and `tweets`.
@@ -104,7 +106,8 @@ Possible errors include `400 invalid_input`.
 
 `GET /styles/{id}`
 
-Get a cached style profile with full tweet data. `id` is the cached style label or username.
+Get a cached style profile with full tweet data. `id` is the cached style label
+or username. URL-encode it as one path segment.
 
 This is a private read. Show the label or username. Retrieve its tweets only after
 explicit approval for that exact read.
@@ -123,7 +126,8 @@ DELETE /styles/{id}
 
 This action is destructive. This permanently deletes the cached style profile.
 Show the exact label or username and explain the lost cached data. Delete only
-after explicit approval immediately before the call. Returns `204 No Content`.
+after explicit approval immediately before the call. URL-encode `id` as one
+path segment. Returns `204 No Content`.
 
 Possible errors include `404 style_not_found`.
 

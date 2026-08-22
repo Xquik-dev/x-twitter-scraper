@@ -19,9 +19,10 @@ without renewed approval.
 The API accepts an omitted `resultsLimit`. This Skill must always send an
 explicit finite positive bound. Use the same bound for estimate and create.
 
-Call `POST /extractions`
-
-Estimate first with `POST /extractions/estimate` with the same body to preview `creditsRequired`, `creditsAvailable`, and whether the job is allowed.
+First send the bounded body to `POST /extractions/estimate`. Review
+`creditsRequired`, `creditsAvailable`, and `allowed`. Create nothing when
+`allowed` is false. When it is true, show the exact estimate and wait for
+explicit approval. Only then send the same body to `POST /extractions`.
 
 ## Tool types
 

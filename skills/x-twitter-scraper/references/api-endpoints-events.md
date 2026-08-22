@@ -44,8 +44,12 @@ The API returns:
 }
 ```
 
-Keyword events set `monitorType` to `keyword` and may include
-`keywordMonitorId` and `query` instead of `username`.
+Account events set `monitorType` to `account`. They include `monitorId` and
+`username`. They omit `keywordMonitorId` and `query`.
+
+Keyword events set `monitorType` to `keyword`. They include `monitorId`,
+`keywordMonitorId`, and `query`. Both ID fields contain the keyword monitor ID.
+Keyword events omit `username`.
 
 ## Get event
 

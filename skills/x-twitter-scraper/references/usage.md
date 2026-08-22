@@ -1,12 +1,14 @@
 # Xquik usage and approval rules
 
-Use this reference to bound Xquik calls and require approval. Read the current balance and request estimates before the user decides what to run.
+Use this reference to bound Xquik calls and require approval. Ask before reading
+account balance or usage. Then request estimates before the user decides what
+to run.
 
 ## Agent scope
 
 The skill may:
 
-- read the current credit balance with `GET /credits`
+- read the current credit balance with `GET /credits` after explicit approval
 - call estimate endpoints before bulk jobs, draws, monitors, or write actions
 - show whether a requested operation is metered, included, or blocked by account state
 - explain how to keep a request bounded before sending it
@@ -33,7 +35,10 @@ Before creating extraction jobs, draws, monitors, signed event delivery, or writ
 
 ## Balance reads
 
-Use `GET /credits` to read the current balance and account state. Treat returned plan and credit-change fields as read-only status from the dashboard.
+Show the account and purpose. Obtain explicit approval for that exact read.
+Use `GET /credits` to read the current balance and account state only after
+approval. Treat returned plan and credit-change fields as read-only dashboard
+status.
 
 Do not use balance data to decide whether to run work automatically. Ask the user when a request may consume credits, create persistent resources, or act on an account.
 

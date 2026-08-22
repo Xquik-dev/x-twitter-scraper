@@ -5,6 +5,7 @@
 interface XquikEventBase {
   id: string;
   type: EventType;
+  // Account monitor ID or keyword monitor ID, based on monitorType.
   monitorId: string;
   occurredAt: string;
   data: Record<string, unknown>;
