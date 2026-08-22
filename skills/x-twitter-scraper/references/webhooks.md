@@ -47,6 +47,10 @@ The examples listen over local HTTP. Put them behind a reverse proxy or load
 balancer that terminates TLS. Register the webhook only after the public HTTPS
 route reaches that private listener.
 
+The in-memory nonce claims below are atomic only within their single-process,
+private listeners. Production clusters must replace them with one shared atomic
+insert-if-absent operation and a 5-minute TTL.
+
 ### Node.js standard library
 
 ```javascript
@@ -92,6 +96,7 @@ const server = createServer((req, res) => {
     return;
   }
 
+  req.setTimeout(10_000, () => req.destroy());
   const chunks = [];
   let bodyBytes = 0;
   let bodyTooLarge = false;
@@ -103,6 +108,7 @@ const server = createServer((req, res) => {
       bodyTooLarge = true;
       chunks.length = 0;
       res.writeHead(413).end("Request body too large");
+      req.destroy();
       return;
     }
     chunks.push(chunk);
@@ -130,6 +136,11 @@ const server = createServer((req, res) => {
       return;
     }
 
+    if (event === null || typeof event !== "object" || Array.isArray(event)) {
+      res.writeHead(400).end("Invalid JSON object");
+      return;
+    }
+
     if (!["webhook.test", "tweet.new", "tweet.reply", "tweet.quote", "tweet.retweet"].includes(event.eventType)) {
       res.writeHead(400).end("Unsupported event type");
       return;
@@ -140,7 +151,7 @@ const server = createServer((req, res) => {
   });
 });
 
-server.listen(3000);
+server.listen(3000, "127.0.0.1");
 ```
 
 ### Python standard library
@@ -211,6 +222,12 @@ class WebhookHandler(BaseHTTPRequestHandler):
             self.wfile.write(b"Invalid JSON")
             return
 
+        if not isinstance(event, dict):
+            self.send_response(400)
+            self.end_headers()
+            self.wfile.write(b"Invalid JSON object")
+            return
+
         if event.get("eventType") not in {"webhook.test", "tweet.new", "tweet.reply", "tweet.quote", "tweet.retweet"}:
             self.send_response(400)
             self.end_headers()
@@ -222,7 +239,7 @@ class WebhookHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(b"OK")
 
-HTTPServer(("", 3000), WebhookHandler).serve_forever()
+HTTPServer(("127.0.0.1", 3000), WebhookHandler).serve_forever()
 ```
 
 ### Go
@@ -238,6 +255,7 @@ import (
     "errors"
     "fmt"
     "io"
+    "log"
     "net/http"
     "os"
     "regexp"
@@ -333,6 +351,17 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
     fmt.Fprint(w, "OK")
+}
+
+func main() {
+    mux := http.NewServeMux()
+    mux.HandleFunc("/webhook", webhookHandler)
+    server := &http.Server{
+        Addr:              "127.0.0.1:3000",
+        Handler:           mux,
+        ReadHeaderTimeout: 5 * time.Second,
+    }
+    log.Fatal(server.ListenAndServe())
 }
 ```
 

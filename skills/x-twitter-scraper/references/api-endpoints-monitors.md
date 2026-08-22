@@ -103,7 +103,7 @@ Create with `{ "query": "#buildinpublic", "eventTypes": ["tweet.new"] }`.
 Poll its events with `GET /events?keywordMonitorId=<id>`.
 
 Creating, updating, enabling, disabling, or deleting a keyword monitor requires
-explicit approval for the exact monitor. For creates and updates, show the
+explicit approval for the exact monitor. For create and update operations, show the
 proposed keyword, event types, and delivery changes. For enable or disable,
 show the active-state transition. For deletion, show the exact target and all
 associated data that will be permanently lost.
