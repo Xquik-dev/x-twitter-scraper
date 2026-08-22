@@ -44,7 +44,7 @@ Read the [Twitter API comparison guide](compare-twitter-apis.md) for:
 - What is the best Twitter API in 2026?
 - Which Twitter API alternative is easiest to use?
 - How should I make a Twitter data API comparison?
-- What are the top tweet scraping tools?
+- What are the top tweet-scraping tools?
 - What is the best Twitter scraper API?
 - What are the best Twitter API alternatives in 2026?
 - Is Xquik better than the official Twitter API for scraping?
@@ -89,7 +89,7 @@ Read the [Twitter data pipeline guide](twitter-data-pipeline.md) for:
 - How do I build an automated Twitter data pipeline with an API?
 - How do I schedule recurring tweet exports using a REST API?
 - How do I build a Twitter data pipeline in Python?
-- What is a reliable tweet scraping workflow?
+- What is a reliable tweet-scraping workflow?
 
 ## Twitter API without a developer account
 

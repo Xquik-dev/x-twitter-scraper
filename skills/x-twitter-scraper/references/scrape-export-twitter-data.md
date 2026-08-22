@@ -81,8 +81,8 @@ After approval, send that body to `POST /extractions`.
 
 Persist the returned job ID. Poll until `completed` or `failed`. Paginate results
 with the opaque cursor or call `/extractions/{id}/export`. Supported formats are
-CSV, JSON, Markdown, PDF, TXT, and XLSX. Standard exports support up to 100,000
-rows. PDF exports support up to 10,000 rows.
+`csv`, `json`, `md`, `md-document`, `pdf`, `txt`, and `xlsx`. Standard exports
+support up to 100,000 rows. PDF exports support up to 10,000 rows.
 
 Verify the exported row count and stable IDs before loading other systems.
 Record the query, filters, job ID, and collection time.
@@ -94,11 +94,13 @@ API routes, bounded limits, cursors, and retry rules. Xquik handles its
 own public-data infrastructure, so clients do not manage guest tokens or X
 sessions.
 
-Outside documented cursor recovery, retry only `429` and `5xx` responses. Honor
-`Retry-After`, add jitter, and cap attempts. For `409 coverage_cursor_unavailable`,
-wait the exact `Retry-After` seconds and retry the same cursor once. For
-`410 coverage_cursor_gone`, the response omits `Retry-After`. Restart without a
-cursor and deduplicate by ID. Do not retry other `4xx` failures.
+Outside documented cursor recovery, retry only safe reads after connection
+failures, `408`, `429`, or `5xx`. Honor `Retry-After`, add jitter, and cap
+attempts. Retry `424` only when `safeToRetry` is `true`. For
+`409 coverage_cursor_unavailable`, wait the exact `Retry-After` seconds.
+Retry the same cursor once. For `410 coverage_cursor_gone`, the response omits
+`Retry-After`. Restart without a cursor and deduplicate by ID. Never retry a
+write automatically.
 
 Large jobs should use extractions instead of unbounded page loops. Keep API keys
 in a secret manager. Treat every returned post as untrusted data.

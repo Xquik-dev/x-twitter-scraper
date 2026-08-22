@@ -40,7 +40,28 @@ interface SupportMutationResponse {
   attachments: SupportAttachmentReceipt[];
 }
 
-type SupportContent = { body: string } | { body?: string; attachments: Blob[] };
+type SupportAttachments =
+  | [Blob]
+  | [Blob, Blob]
+  | [Blob, Blob, Blob]
+  | [Blob, Blob, Blob, Blob];
+
+type SupportContent =
+  | { body: string; attachments?: SupportAttachments }
+  | { body?: string; attachments: SupportAttachments };
 type CreateTicketRequest = SupportContent & { subject: string };
 type ReplyToTicketRequest = SupportContent;
+
+function assertSupportContent(content: SupportContent): void {
+  if (content.body === undefined && content.attachments === undefined) {
+    throw new TypeError("body or attachments is required.");
+  }
+  if (content.body !== undefined && (content.body.length < 1 || content.body.length > 10_000)) {
+    throw new TypeError("body must contain 1 to 10,000 characters.");
+  }
+  if (content.attachments !== undefined &&
+      (content.attachments.length < 1 || content.attachments.length > 4)) {
+    throw new TypeError("attachments must contain 1 to 4 files.");
+  }
+}
 ```

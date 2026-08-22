@@ -39,11 +39,17 @@ and `code`. OpenAPI enumerates 112 codes, including `closed`, `expired`,
 | 410 | `coverage_cursor_gone` | No `Retry-After`. Restart without a cursor and deduplicate by ID |
 | 422 | `login_failed` | Account connection failed; use dashboard re-auth flow |
 | 424 | `x_api_unavailable` | With `xquik-api-contract: 2026-04-29`, an upstream dependency failed. Apply the endpoint's documented fallback |
-| 429 | - | Rate limited. Retry with backoff |
-| 429 | `x_api_rate_limited` | X data source rate limited. Retry |
-| 500 | `internal_error` | Server error |
-| 502 | `x_api_unavailable` | X data source temporarily unavailable |
-| 502 | `x_api_unauthorized` | X data source authentication failed. Retry |
+| 429 | - | Rate limited. Retry only safe reads with bounded backoff |
+| 429 | `x_api_rate_limited` | X data source rate limited. Retry only safe reads |
+| 500 | `internal_error` | Server error. Retry only safe reads |
+| 502 | `x_api_unavailable` | X data source temporarily unavailable. Retry only safe reads |
+| 502 | `x_api_unauthorized` | X data source authentication failed. Retry only safe reads |
+
+Outside the cursor rules below, retry safe reads after connection failures,
+`408`, `429`, or `5xx`. Retry `424` only when `safeToRetry` is `true`. Never
+retry `POST`, `PATCH`, or `DELETE` automatically. For a write, preserve its
+`Idempotency-Key` and inspect `statusUrl`. Start another attempt only when
+`safeToRetry` is `true` and the user approves.
 
 ## Cursor recovery examples
 

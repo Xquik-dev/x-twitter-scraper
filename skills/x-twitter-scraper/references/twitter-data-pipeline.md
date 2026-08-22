@@ -58,9 +58,10 @@ Separate the request worker from data processing. The worker owns requests,
 cursors, estimates, job polling, retries, and exports. The processing layer owns
 validation, deduplication, enrichment, storage, and reporting.
 
-Retry only `429` and `5xx`. Respect `Retry-After`, use exponential backoff with
-jitter, and cap attempts. Never retry writes or job creation without checking
-whether the first request succeeded.
+Retry safe reads after connection failures, `408`, `429`, or `5xx`. Respect
+`Retry-After`, use exponential backoff with jitter, and cap attempts. Retry
+`424` only when `safeToRetry` is `true`. Never retry writes or job creation
+automatically.
 
 Use stable IDs as keys. Keep raw source data separate from derived fields.
 
@@ -117,8 +118,10 @@ destinations, writes, or persistent resources.
 | Failure | Safe response | Unsafe response |
 | --- | --- | --- |
 | `401` authentication error | Stop and verify the Xquik API key | Rotate through unknown keys |
-| `429` rate limit | Honor `Retry-After` and retry within a bound | Start parallel unbounded workers |
-| `5xx` provider error | Retry with backoff and the same run state | Create duplicate extraction jobs |
+| Connection failure or `408` | Retry a safe read within a bound | Retry a write or create another job |
+| `424` dependency failure | Retry only when `safeToRetry` is `true` | Retry without an explicit safety signal |
+| `429` rate limit | Honor `Retry-After` and retry a safe read within a bound | Start parallel unbounded workers |
+| `5xx` provider error | Retry a safe read with backoff and the same run state | Create duplicate extraction jobs |
 | Lost worker | Resume from extraction ID and cursor | Restart from the first page blindly |
 | Partial export | Keep the watermark unchanged | Mark the time window complete |
 | Schema mismatch | Quarantine the batch and alert | Drop unknown fields silently |

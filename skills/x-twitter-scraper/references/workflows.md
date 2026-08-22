@@ -374,7 +374,7 @@ Monitor event types include `tweet.new`, `tweet.quote`, `tweet.reply`, and
 | Check credits | `GET /credits` | Included |
 | Compose a tweet | `POST /compose` | Included |
 | Post a tweet | `POST /x/tweets` | Metered write action |
-| Like or unlike a tweet | `POST /x/tweets/{id}/like` likes it. The `DELETE` method on the same route unlikes it. | Metered write action |
+| Like or unlike a tweet | `POST /x/tweets/{id}/like` likes it. The `DELETE` method on the same route removes the like. | Metered write action |
 | Retweet or unretweet | `POST /x/tweets/{id}/retweet` retweets. The same route with the `DELETE` method unretweets. | Metered write action |
 | Follow or unfollow | `POST /x/users/{id}/follow` follows. The `DELETE` method on the same route unfollows. | Metered write action |
 | Send a DM | `POST /x/dm/{userId}` | Metered write action |
