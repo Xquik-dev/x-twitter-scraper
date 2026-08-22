@@ -161,6 +161,7 @@ import hmac
 import hashlib
 import json
 import re
+import socket
 import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
@@ -194,6 +195,7 @@ def verify_signature(payload: bytes, signature: str, timestamp: str, nonce: str,
 
 class WebhookHandler(BaseHTTPRequestHandler):
     def do_POST(self):
+        self.connection.settimeout(10)
         signature = self.headers.get("X-Xquik-Signature", "")
         timestamp = self.headers.get("X-Xquik-Timestamp", "")
         nonce = self.headers.get("X-Xquik-Nonce", "")
@@ -206,7 +208,19 @@ class WebhookHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b"Request body too large or missing")
             return
-        payload = self.rfile.read(length)
+        try:
+            payload = self.rfile.read(length)
+        except socket.timeout:
+            self.close_connection = True
+            self.send_response(408)
+            self.end_headers()
+            self.wfile.write(b"Request body timeout")
+            return
+        if len(payload) != length:
+            self.send_response(400)
+            self.end_headers()
+            self.wfile.write(b"Incomplete request body")
+            return
 
         if not verify_signature(payload, signature, timestamp, nonce, WEBHOOK_SECRET) or not claim_nonce(nonce):
             self.send_response(401)
@@ -360,6 +374,7 @@ func main() {
         Addr:              "127.0.0.1:3000",
         Handler:           mux,
         ReadHeaderTimeout: 5 * time.Second,
+        ReadTimeout:       10 * time.Second,
     }
     log.Fatal(server.ListenAndServe())
 }

@@ -309,7 +309,7 @@ test("documents bounded jobs, retries, exports, and webhook delivery", async () 
   assert.match(extractions, /send[\s\S]*`nextCursor` unchanged[\s\S]*`cursor`/i);
   assert.match(python, /urllib\.parse\.urlencode/);
   assert.match(python, /for _ in range\(150\)/);
-  assert.match(python, /if handler is None:[\s\S]*release_delivery/);
+  assert.match(python, /event_type not in EVENT_HANDLERS[\s\S]*send_response\(503\)/);
   assert.match(workflows, /new AbortController\(\)/);
   assert.match(workflows, /response\.status === 408/);
   assert.match(workflows, /if \(!csvResponse\.ok\)/);
@@ -362,7 +362,12 @@ test("hardens portable webhook receiver examples", async () => {
   assert.match(guide, /server\.listen\(3000, "127\.0\.0\.1"\)/);
   assert.match(guide, /HTTPServer\(\("127\.0\.0\.1", 3000\)/);
   assert.match(guide, /func main\(\)[\s\S]*Addr:\s+"127\.0\.0\.1:3000"/);
+  assert.match(guide, /self\.connection\.settimeout\(10\)/);
+  assert.match(guide, /except socket\.timeout/);
+  assert.match(guide, /ReadTimeout:\s+10 \* time\.Second/);
   assert.match(python, /MAX_WEBHOOK_BODY_BYTES = 1024 \* 1024/);
+  assert.match(python, /def validate_subscription_event_types\(event_types: list\[str\]\)/);
+  assert.match(python, /event_type not in EVENT_HANDLERS[\s\S]*send_response\(503\)/);
   assert.match(python, /claim_delivery\(delivery_id\)/);
   assert.match(python, /mark_delivery_processed\(delivery_id\)/);
   assert.ok(
@@ -474,7 +479,7 @@ test("aligns public safety and type contracts", async () => {
   assert.match(python, /def claim_nonce\(nonce: str, ttl_seconds: int\)/);
   assert.ok(
     python.indexOf("claim_nonce(nonce, 5 * 60)") <
-      python.indexOf('event.get("eventType") == "webhook.test"'),
+      python.indexOf('if event_type == "webhook.test"'),
     "claim each nonce before accepting a test delivery",
   );
   assert.match(python, /HTTPServer\(\("127\.0\.0\.1", 3000\)/);
