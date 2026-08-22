@@ -308,7 +308,7 @@ test("documents bounded jobs, retries, exports, and webhook delivery", async () 
   assert.match(extractions, /GET \/extractions\/\{id\}\?limit=1000&cursor=<nextCursor>/);
   assert.match(extractions, /send[\s\S]*`nextCursor` unchanged[\s\S]*`cursor`/i);
   assert.match(python, /urllib\.parse\.urlencode/);
-  assert.match(python, /for _ in range\(150\)/);
+  assert.match(python, /poll_deadline = time\.monotonic\(\) \+ 5 \* 60/);
   assert.match(python, /event_type not in EVENT_HANDLERS[\s\S]*send_response\(503\)/);
   assert.match(workflows, /new AbortController\(\)/);
   assert.match(workflows, /response\.status === 408/);
@@ -803,13 +803,26 @@ test("removes obsolete operation-named MCP type files", async () => {
 });
 
 test("preserves audited integration safety invariants", async () => {
-  const [events, styles, draws, extractions, mcp, support, xTypes, usage, webhooks, workflows] =
+  const [
+    events,
+    styles,
+    draws,
+    extractions,
+    mcp,
+    python,
+    support,
+    xTypes,
+    usage,
+    webhooks,
+    workflows,
+  ] =
     await Promise.all([
       read("skills/x-twitter-scraper/references/api-endpoints-events.md"),
       read("skills/x-twitter-scraper/references/api-endpoints-tweet-style-cache.md"),
       read("skills/x-twitter-scraper/references/draws.md"),
       read("skills/x-twitter-scraper/references/extractions.md"),
       read("skills/x-twitter-scraper/references/mcp-tools.md"),
+      read("skills/x-twitter-scraper/references/python-examples.md"),
       read("skills/x-twitter-scraper/references/types-support.md"),
       read("skills/x-twitter-scraper/references/types-x-api.md"),
       read("skills/x-twitter-scraper/references/usage.md"),
@@ -827,6 +840,13 @@ test("preserves audited integration safety invariants", async () => {
       extractions.indexOf("POST /extractions`."),
   );
   assert.match(mcp, /POST \/api\/v1\/draws`;.?metered and requires explicit approval/i);
+  assert.match(python, /if not isinstance\(payload, dict\):/);
+  assert.match(python, /MAX_RETRY_DELAY_SECONDS/);
+  assert.match(python, /poll_deadline = time\.monotonic\(\) \+ 5 \* 60/);
+  assert.match(python, /deadline=poll_deadline/);
+  assert.match(python, /if not isinstance\(event_type, str\):/);
+  assert.match(python, /if not isinstance\(delivery_id, str\) or not delivery_id:/);
+  assert.match(python, /if not isinstance\(data, dict\):/);
   assert.match(support, /function assertCreateTicketRequest/);
   assert.match(support, /request\.subject\.length > 500/);
   assert.match(xTypes, /interface TweetReplies[\s\S]*next_cursor: string/);
@@ -834,6 +854,7 @@ test("preserves audited integration safety invariants", async () => {
   assert.match(webhooks, /deliveryStore\.claimPending\(event\.deliveryId\)/);
   assert.match(webhooks, /claim_delivery\(delivery_id\)/);
   assert.match(webhooks, /deliveryStore\.ClaimPending\(event\.DeliveryID\)/);
+  assert.match(webhooks, /if not isinstance\(event_type, str\):/);
   assert.match(workflows, /existingMonitorIds/);
   assert.match(workflows, /Monitor creation is ambiguous/);
   assert.match(workflows, /Monitor \$\{monitor\.id\} cleanup was attempted/);

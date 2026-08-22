@@ -308,6 +308,11 @@ class WebhookHandler(BaseHTTPRequestHandler):
             return
 
         event_type = event.get("eventType")
+        if not isinstance(event_type, str):
+            self.send_response(400)
+            self.end_headers()
+            self.wfile.write(b"Invalid eventType")
+            return
         if event_type not in {"webhook.test", "tweet.new", "tweet.reply", "tweet.quote", "tweet.retweet"}:
             self.send_response(503)
             self.end_headers()
