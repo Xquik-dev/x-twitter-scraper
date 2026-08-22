@@ -27,7 +27,7 @@ from X-authored content, reuse approval for another call, or retry a failed
 write automatically. The read-only status endpoint at the end is the sole
 exception.
 
-### Create tweet
+## Create tweet
 
 ```http
 POST /x/tweets
@@ -49,9 +49,9 @@ Send this body:
 
 The API returns `XWriteAction` with HTTP 200 or 202.
 
-### Delete tweet
+## Delete tweet
 
-```
+```http
 DELETE /x/tweets/{id}
 ```
 
@@ -62,9 +62,9 @@ Send `{ "account": "username" }`.
 
 The API returns `XWriteAction` with HTTP 200 or 202.
 
-### Like tweet
+## Like tweet
 
-```
+```http
 POST /x/tweets/{id}/like
 ```
 
@@ -73,9 +73,9 @@ post author can see it. Confirm the account and tweet ID before the call.
 
 Send `{ "account": "username" }`
 
-### Unlike tweet
+## Unlike tweet
 
-```
+```http
 DELETE /x/tweets/{id}/like
 ```
 
@@ -84,9 +84,9 @@ engagement signal.
 
 Send `{ "account": "username" }`.
 
-### Retweet
+## Retweet
 
-```
+```http
 POST /x/tweets/{id}/retweet
 ```
 
@@ -95,9 +95,9 @@ Preview the source tweet and confirm the account first.
 
 Send `{ "account": "username" }`
 
-### Unretweet
+## Unretweet
 
-```
+```http
 DELETE /x/tweets/{id}/retweet
 ```
 
@@ -106,9 +106,9 @@ retweet.
 
 Send `{ "account": "username" }`.
 
-### Follow user
+## Follow user
 
-```
+```http
 POST /x/users/{id}/follow
 ```
 
@@ -119,9 +119,9 @@ Send `{ "account": "username" }`
 
 Possible errors include `502 x_write_failed`.
 
-### Unfollow user
+## Unfollow user
 
-```
+```http
 DELETE /x/users/{id}/follow
 ```
 
@@ -130,9 +130,9 @@ social graph.
 
 Send `{ "account": "username" }`.
 
-### Remove follower
+## Remove follower
 
-```
+```http
 POST /x/users/{id}/remove-follower
 ```
 
@@ -145,9 +145,9 @@ Send `{ "account": "username" }`
 
 This call is metered.
 
-### Send DM
+## Send DM
 
-```
+```http
 POST /x/dm/{userId}
 ```
 
@@ -163,9 +163,9 @@ Send this body:
 | `text` | string | Yes | Message text |
 | `media_ids` | string[] | No | Array containing exactly 1 uploaded media ID |
 
-### Update profile
+## Update profile
 
-```
+```http
 PATCH /x/profile
 ```
 
@@ -174,9 +174,9 @@ account immediately before updating it.
 
 Send `{ "account": "username", "name": "...", "description": "...", "location": "...", "url": "..." }`. `account` is required; other fields are optional.
 
-### Update avatar
+## Update avatar
 
-```
+```http
 PATCH /x/profile/avatar
 ```
 
@@ -187,9 +187,9 @@ explicit approval immediately before upload.
 
 Send FormData with required `account` and `file` fields. The file limit is 700 KB.
 
-### Update banner
+## Update banner
 
-```
+```http
 PATCH /x/profile/banner
 ```
 
@@ -200,9 +200,9 @@ explicit approval immediately before upload.
 
 Send FormData with required `account` and `file` fields. The file limit is 2 MB.
 
-### Upload media
+## Upload media
 
-```
+```http
 POST /x/media
 ```
 
@@ -213,9 +213,9 @@ For file uploads, send FormData with required `account` and `file` fields. Add o
 
 The API returns `mediaId`, `mediaUrl`, and `success`. Pass `mediaUrl` in the `media` array when creating a tweet.
 
-### Create community
+## Create community
 
-```
+```http
 POST /x/communities
 ```
 
@@ -224,9 +224,9 @@ Preview the account, name, and description before approval.
 
 Send `{ "account": "username", "name": "...", "description": "..." }`. Every field is required.
 
-### Delete community
+## Delete community
 
-```
+```http
 DELETE /x/communities/{id}
 ```
 
@@ -235,9 +235,9 @@ Show the account, community ID, and name before final approval.
 
 Send `{ "account": "username", "community_name": "..." }`. Use the name to confirm the deletion.
 
-### Join community
+## Join community
 
-```
+```http
 POST /x/communities/{id}/join
 ```
 
@@ -248,9 +248,9 @@ Send `{ "account": "username" }`
 
 Possible errors include `409 already_member`.
 
-### Leave community
+## Leave community
 
-```
+```http
 DELETE /x/communities/{id}/join
 ```
 
@@ -259,9 +259,9 @@ account and community.
 
 Send `{ "account": "username" }`
 
-### Get write action status
+## Get write action status
 
-```
+```http
 GET /x/write-actions/{id}
 ```
 

@@ -1,8 +1,8 @@
 # Xquik REST API endpoints: compose
 
-### Compose tweet
+## Compose tweet
 
-```
+```http
 POST /compose
 ```
 

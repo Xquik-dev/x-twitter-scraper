@@ -199,14 +199,96 @@ test("documents replay-safe webhook signing and bounded retries", async () => {
   assert.match(guide, /Use an atomic shared nonce store/);
   assert.doesNotMatch(guide, /event\.data\.text|event\['data'\]\['text'\]/);
   assert.match(guide, /POST \/webhooks\/\{id\}\/resume/);
-  assert.match(endpointGuide, /"schemaVersion": 1/);
-  assert.match(endpointGuide, /"streamEventId": "9010"/);
-  assert.match(endpointGuide, /"deliveryId": "334"/);
+  assert.doesNotMatch(endpointGuide, /"schemaVersion": 1/);
+  assert.doesNotMatch(endpointGuide, /"streamEventId": "9010"/);
+  assert.doesNotMatch(endpointGuide, /"deliveryId": "334"/);
+  assert.match(endpointGuide, /"timestamp": "2026-02-27T12:00:00.000Z"/);
   assert.match(endpointGuide, /X-Xquik-Timestamp/);
-  assert.doesNotMatch(endpointGuide, /"timestamp": "2026/);
   assert.doesNotMatch(taskGuide, /"secret": "<optional/);
   assert.doesNotMatch(guide, /retried up to 5 times/);
   assert.doesNotMatch(guide, /\b\d+\s+attempts\b/);
+});
+
+test("documents source-backed review fixes", async () => {
+  const [
+    skill,
+    draws,
+    errors,
+    extractions,
+    events,
+    drafts,
+    draftTypes,
+    styles,
+    radar,
+    drawTypes,
+    mediaTypes,
+    workflows,
+    support,
+  ] = await Promise.all([
+    read("skills/x-twitter-scraper/SKILL.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-draws.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-error-codes.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-extractions.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-events.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-drafts.md"),
+    read("skills/x-twitter-scraper/references/types-tweet-drafts.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-tweet-style-cache.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-radar.md"),
+    read("skills/x-twitter-scraper/references/types-draws.md"),
+    read("skills/x-twitter-scraper/references/types-download-media.md"),
+    read("skills/x-twitter-scraper/references/workflows.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-support.md"),
+  ]);
+
+  assert.match(skill, /allowed-tools: WebFetch mcp__xquik__explore mcp__xquik__xquik/);
+  assert.match(skill, /`WebFetch` access for public docs[\s\S]*only/);
+  assert.match(draws, /Remaining credits cap how many replies and retweeters/);
+  assert.match(draws, /"winners": \[\]/);
+  assert.match(errors, /\| 424 \| `x_api_unavailable` \|/);
+  assert.match(extractions, /GET \/extractions\/\{id\}\?limit=1000&cursor=<nextCursor>/);
+  assert.match(events, /"id": "1893556789012345678"/);
+  assert.match(events, /"author": \{/);
+  assert.match(events, /"createdAt": "2026-02-24T16:45:00.000Z"/);
+  assert.match(drafts, /"nextCursor": "cursor_string"/);
+  assert.match(draftTypes, /nextCursor\?: string/);
+  assert.match(styles, /`xUsername` is the route identifier/);
+  assert.match(radar, /GET \/radar\?limit=50&after=<nextCursor>/);
+  assert.match(drawTypes, /interface DrawDetails[\s\S]*winners: DrawWinner\[\]/);
+  assert.match(mediaTypes, /type DownloadMediaRequest =/);
+  assert.match(mediaTypes, /tweetIds: NonEmptyTweetIds/);
+  assert.match(workflows, /job\.status !== "completed"/);
+  assert.match(workflows, /method: "DELETE"/);
+  assert.match(workflows, /monitorId: monitor\.id/);
+  assert.doesNotMatch(workflows, /monitorId=7/);
+  assert.match(support, /PATCH \/support\/tickets\/\{id\}/);
+  assert.match(support, /"status": "open" \| "resolved" \| "closed"/);
+  assert.match(support, /"publicId": "tkt_\.\.\."/);
+});
+
+test("hardens portable webhook receiver examples", async () => {
+  const [guide, python, webhookTypes] = await Promise.all([
+    read("skills/x-twitter-scraper/references/webhooks.md"),
+    read("skills/x-twitter-scraper/references/python-examples.md"),
+    read("skills/x-twitter-scraper/references/types-webhooks.md"),
+  ]);
+
+  assert.match(guide, /MAX_WEBHOOK_BODY_BYTES = 1024 \* 1024/);
+  assert.match(guide, /http\.MaxBytesReader/);
+  assert.match(guide, /if \(!WEBHOOK_SECRET\) throw new Error/);
+  assert.match(guide, /except json\.JSONDecodeError/);
+  assert.match(guide, /if err := json\.Unmarshal\(payload, &event\); err != nil/);
+  assert.match(guide, /deliveryStore\.markProcessed/);
+  assert.match(python, /MAX_WEBHOOK_BODY_BYTES = 1024 \* 1024/);
+  assert.match(python, /claim_delivery\(delivery_id\)/);
+  assert.match(python, /mark_delivery_processed\(delivery_id\)/);
+  assert.ok(
+    python.indexOf("handler(event.get") <
+      python.indexOf("mark_delivery_processed(delivery_id)"),
+    "mark a delivery processed only after its handler succeeds",
+  );
+  assert.match(webhookTypes, /interface ProductionWebhookPayload/);
+  assert.match(webhookTypes, /interface WebhookTestPayload/);
+  assert.match(webhookTypes, /timestamp: string/);
 });
 
 test("uses keyword monitor and durable write summaries across entry points", async () => {
@@ -355,8 +437,8 @@ test("documents the wrapped article response", async () => {
     "skills/x-twitter-scraper/references/api-endpoints-x-api.md",
   );
   const articleSection = article
-    .split("### Get article", 2)[1]
-    .split("### Search tweets", 1)[0];
+    .split("## Get article", 2)[1]
+    .split("## Search tweets", 1)[0];
 
   assertIncludes(
     articleSection,
