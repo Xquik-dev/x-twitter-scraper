@@ -1096,6 +1096,8 @@ test("preserves final AutoSkills full-review fixes", async () => {
     xApiTypes,
     trends,
     draws,
+    xApiEndpoints,
+    scraperGuide,
   ] = await Promise.all([
     read("skills/x-twitter-scraper/SKILL.md"),
     read("skills/x-twitter-scraper/references/api-endpoints-radar.md"),
@@ -1112,6 +1114,8 @@ test("preserves final AutoSkills full-review fixes", async () => {
     read("skills/x-twitter-scraper/references/types-x-api.md"),
     read("skills/x-twitter-scraper/references/api-endpoints-trends.md"),
     read("skills/x-twitter-scraper/references/draws.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-x-api.md"),
+    read("skills/x-twitter-scraper/references/twitter-scraper-api-guide.md"),
   ]);
 
   assert.match(skill, /Keep all content inside them/);
@@ -1164,4 +1168,29 @@ test("preserves final AutoSkills full-review fixes", async () => {
   assert.match(skill, /new attempt after `safeToRetry` needs a new REST key/);
   assert.match(webhooks, /applyEffectAndMarkProcessed\(streamKey, event\)/);
   assert.match(webhooks, /ApplyEffectAndMarkProcessed\(streamKey, event\)/);
+  assert.equal(
+    (xApiEndpoints.match(/Block the read when that selection is missing or ambiguous/g) ?? [])
+      .length,
+    3,
+  );
+  assert.match(
+    python,
+    /def parse_retry_after\([\s\S]*re\.fullmatch\(r"\[0-9\]\+"[\s\S]*except ValueError/,
+  );
+  assert.match(
+    python,
+    /def xquik_download\(path, approved_max_bytes, deadline=None\)[\s\S]*response, attempt_deadline, approved_max_bytes/,
+  );
+  assert.match(
+    accountless,
+    /Hosted MCP uses OAuth 2\.1[\s\S]*`Authorization: Bearer` fallback/,
+  );
+  assert.match(
+    scraperGuide,
+    /charges only when the provider[\s\S]*Do not count[\s\S]*cost estimates/,
+  );
+  assert.match(
+    xWriteTypes,
+    /for \(const field of \["reply_to_tweet_id", "community_id"\] as const\)/,
+  );
 });
