@@ -26,6 +26,27 @@ response explicitly marks the read safe to retry. Never automatically retry
 `POST`, `PATCH`, or `DELETE`. Stop after 3 retries.
 
 ```javascript
+class XquikApiError extends Error {
+  constructor(status, code, message) {
+    super(`Xquik API ${status}: ${message}`);
+    this.status = status;
+    this.code = code;
+  }
+}
+
+async function fetchTextWithTimeout(url, options = {}) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 30_000);
+
+  try {
+    const response = await fetch(url, { ...options, signal: controller.signal });
+    const body = await response.text();
+    return { response, body };
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 async function xquikFetch(path, options = {}) {
   const baseDelay = 1000;
   const method = (options.method || "GET").toUpperCase();
@@ -33,30 +54,30 @@ async function xquikFetch(path, options = {}) {
   let retriedCoverageCursor = false;
 
   for (let attempt = 0; attempt <= 3; attempt++) {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 30_000);
     let response;
+    let responseBody;
 
     try {
-      response = await fetch(`${BASE}${path}`, {
-        ...options,
-        headers: { ...headers, ...options.headers },
-        signal: controller.signal,
-      });
+      ({ response, body: responseBody } = await fetchTextWithTimeout(
+        `${BASE}${path}`,
+        { ...options, headers: { ...headers, ...options.headers } },
+      ));
     } catch (error) {
-      clearTimeout(timeout);
       if (!retrySafe || attempt === 3) throw error;
       await new Promise((resolve) =>
         setTimeout(resolve, baseDelay * 2 ** attempt + Math.random() * 1000),
       );
       continue;
-    } finally {
-      clearTimeout(timeout);
     }
 
-    if (response.ok) return response.json();
+    if (response.ok) return responseBody ? JSON.parse(responseBody) : null;
 
-    const parsedError = await response.json().catch(() => null);
+    let parsedError = null;
+    try {
+      parsedError = responseBody ? JSON.parse(responseBody) : null;
+    } catch {
+      // Use the generic error below.
+    }
     const error = parsedError && typeof parsedError === "object"
       ? parsedError
       : { error: "request failed" };
@@ -73,7 +94,10 @@ async function xquikFetch(path, options = {}) {
         coverageRetry ||
         (response.status === 424 && error.safeToRetry === true));
     if (!retryable || attempt === 3) {
-      throw new Error(`Xquik API ${response.status}: ${error.error}`);
+      const message = typeof error.error === "string"
+        ? error.error
+        : error.error?.message || code || "request failed";
+      throw new XquikApiError(response.status, code, message);
     }
 
     const retryAfter = response.headers.get("Retry-After");
@@ -100,18 +124,56 @@ When more results exist, the response includes `hasMore: true` and a
 `nextCursor` string. Pass it as `cursor`. Radar alone uses `after`.
 
 ```javascript
-async function fetchAllPages(path, dataKey) {
-  const results = [];
-  let cursor;
+async function fetchAllPages(path, dataKey, maxResults) {
+  if (!Number.isInteger(maxResults) || maxResults < 1) {
+    throw new Error("maxResults must be a finite positive integer.");
+  }
 
-  while (true) {
-    const params = new URLSearchParams({ limit: "100" });
+  const results = [];
+  const seenIds = new Set();
+  let cursor;
+  let restartedExpiredCursor = false;
+
+  while (results.length < maxResults) {
+    const remaining = maxResults - results.length;
+    const params = new URLSearchParams({ limit: String(Math.min(100, remaining)) });
     if (cursor) params.set("cursor", cursor);
 
-    const data = await xquikFetch(`${path}?${params}`);
-    results.push(...data[dataKey]);
+    let data;
+    try {
+      data = await xquikFetch(`${path}?${params}`);
+    } catch (error) {
+      if (
+        error instanceof XquikApiError &&
+        error.status === 410 &&
+        error.code === "coverage_cursor_gone" &&
+        cursor &&
+        !restartedExpiredCursor
+      ) {
+        cursor = undefined;
+        restartedExpiredCursor = true;
+        continue;
+      }
+      throw error;
+    }
 
-    if (!data.hasMore) break;
+    const page = data?.[dataKey];
+    if (!Array.isArray(page)) throw new Error(`Missing ${dataKey} page.`);
+    for (const item of page) {
+      if (!item || typeof item.id !== "string") {
+        throw new Error(`Every ${dataKey} item needs a string id.`);
+      }
+      if (!seenIds.has(item.id)) {
+        seenIds.add(item.id);
+        results.push(item);
+      }
+      if (results.length === maxResults) break;
+    }
+
+    if (results.length === maxResults || !data.hasMore) break;
+    if (typeof data.nextCursor !== "string" || !data.nextCursor) {
+      throw new Error("Missing nextCursor for a paginated response.");
+    }
     cursor = data.nextCursor;
   }
 
@@ -167,29 +229,19 @@ if (job.status !== "completed") {
   throw new Error(job.errorMessage || "Extraction failed.");
 }
 
-// Retrieve up to 1,000 results per page.
-let cursor;
-const allResults = [];
-
-while (true) {
-  const params = new URLSearchParams({ limit: "1000" });
-  if (cursor) params.set("cursor", cursor);
-  const path = `/extractions/${job.id}?${params}`;
-  const page = await xquikFetch(path);
-  allResults.push(...page.results);
-
-  if (!page.hasMore) break;
-  cursor = page.nextCursor;
-}
+// Retrieve no more than the approved 1,000 results.
+const allResults = await fetchAllPages(`/extractions/${job.id}`, "results", 1000);
 
 // Review a bounded preview and approve the export first.
 requireExplicitApproval("the fixed export scope, audience, storage, and retention");
 const exportUrl = `${BASE}/extractions/${job.id}/export?format=csv`;
-const csvResponse = await fetch(exportUrl, { headers });
+const { response: csvResponse, body: csvData } = await fetchTextWithTimeout(
+  exportUrl,
+  { headers },
+);
 if (!csvResponse.ok) {
   throw new Error(`Xquik export failed with HTTP ${csvResponse.status}.`);
 }
-const csvData = await csvResponse.text();
 ```
 
 ## Real-time monitoring setup
@@ -202,7 +254,28 @@ function requireExplicitApproval(scope) {
 }
 
 requireExplicitApproval(
-  "the monitor target, event types, destination URL, ongoing usage, and disable path",
+  "the monitor target, event types, destination URL, preflight webhook list, ongoing usage, and disable path",
+);
+
+const webhookConfig = {
+  url: "https://your-server.com/webhook",
+  eventTypes: ["tweet.new", "tweet.reply"],
+};
+
+function readWebhookList(data) {
+  if (Array.isArray(data)) return data;
+  if (data && Array.isArray(data.webhooks)) return data.webhooks;
+  throw new Error("Unexpected webhook list response.");
+}
+
+function eventTypeKey(eventTypes) {
+  return [...eventTypes].sort().join("\u0000");
+}
+
+// Snapshot existing IDs before creating anything. This private read needs the
+// approval above and enables safe reconciliation after an ambiguous timeout.
+const existingWebhookIds = new Set(
+  readWebhookList(await xquikFetch("/webhooks")).map((item) => item.id),
 );
 
 // Create a persistent monitor. Active monitors are metered hourly.
@@ -214,25 +287,49 @@ const monitor = await xquikFetch("/monitors", {
   }),
 });
 
-// Register a persistent delivery destination. Remove the monitor if this fails.
+// Register a persistent delivery destination. POST /webhooks does not accept
+// Idempotency-Key, so reconcile an ambiguous failure before deleting anything.
 let webhook;
 try {
   webhook = await xquikFetch("/webhooks", {
     method: "POST",
-    body: JSON.stringify({
-      url: "https://your-server.com/webhook",
-      eventTypes: ["tweet.new", "tweet.reply"],
-    }),
+    body: JSON.stringify(webhookConfig),
   });
 } catch (creationError) {
+  let candidates;
   try {
+    candidates = readWebhookList(await xquikFetch("/webhooks")).filter(
+      (item) =>
+        typeof item.id === "string" &&
+        !existingWebhookIds.has(item.id) &&
+        item.url === webhookConfig.url &&
+        eventTypeKey(item.eventTypes) === eventTypeKey(webhookConfig.eventTypes),
+    );
+  } catch (reconciliationError) {
+    throw new AggregateError(
+      [creationError, reconciliationError],
+      `Webhook creation is ambiguous. Keep monitor ${monitor.id} and resolve it manually.`,
+    );
+  }
+
+  if (candidates.length !== 1) {
+    throw new AggregateError(
+      [creationError],
+      `Webhook creation is ambiguous. Found ${candidates.length} new matches. Keep monitor ${monitor.id} and resolve it manually.`,
+    );
+  }
+
+  try {
+    await xquikFetch(`/webhooks/${encodeURIComponent(candidates[0].id)}`, {
+      method: "DELETE",
+    });
     await xquikFetch(`/monitors/${encodeURIComponent(monitor.id)}`, {
       method: "DELETE",
     });
   } catch (cleanupError) {
     throw new AggregateError(
       [creationError, cleanupError],
-      `Webhook creation and monitor ${monitor.id} cleanup failed. Delete the monitor manually.`,
+      `Webhook reconciliation cleanup failed. Resolve webhook ${candidates[0].id} and monitor ${monitor.id} manually.`,
     );
   }
   throw creationError;

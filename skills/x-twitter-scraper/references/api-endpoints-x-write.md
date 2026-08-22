@@ -8,6 +8,19 @@ intended write. Reuse it only for the exact same account, action, target, and
 payload. Direct REST callers supply this header. Hosted MCP injects it
 automatically.
 
+Use this complete header template for every direct REST write below. Replace
+the method, path, key, and body without omitting the idempotency header:
+
+```http
+<METHOD> /api/v1/<PATH> HTTP/1.1
+Host: xquik.com
+x-api-key: <XQUIK_API_KEY>
+Idempotency-Key: <UNIQUE_WRITE_KEY>
+Content-Type: <application/json or multipart/form-data boundary>
+
+<BODY>
+```
+
 ## Durable write responses
 
 Successful writes return an `XWriteAction` lifecycle record. HTTP 200 means

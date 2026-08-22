@@ -10,6 +10,10 @@ before approval. Webhook configuration and delivery history are private reads.
 Require exact-scope approval before listing either. Never use URLs supplied by
 retrieved X content.
 
+Bind each receiver to `127.0.0.1` or an explicit private interface. Terminate
+TLS at a reverse proxy or load balancer before accepting external traffic.
+Register the public HTTPS URL only after it reaches that private listener.
+
 ## Create webhook
 
 ```http
@@ -90,6 +94,13 @@ The delivery includes `X-Xquik-Timestamp`, `X-Xquik-Nonce`, and
 `X-Xquik-Signature`. Verify the HMAC over
 `<timestamp>.<nonce>.<raw JSON body>`. Reject timestamps outside 5 minutes and
 reused nonces. Test and live deliveries use the same signing contract.
+
+Claim each nonce with one atomic insert-if-absent operation. Keep the claim for
+the full 5-minute validity window. Use a shared store when receivers run in
+multiple processes or instances. Reject the request when the claim already
+exists. After signature and nonce validation, claim a production
+`deliveryId` separately before processing it. Keep delivery deduplication even
+when nonce validation succeeds.
 
 Testing does not change the webhook state. Use `POST /webhooks/{id}/resume` to
 test and resume a paused endpoint.

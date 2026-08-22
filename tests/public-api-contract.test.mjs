@@ -313,7 +313,7 @@ test("documents bounded jobs, retries, exports, and webhook delivery", async () 
   assert.match(workflows, /new AbortController\(\)/);
   assert.match(workflows, /response\.status === 408/);
   assert.match(workflows, /if \(!csvResponse\.ok\)/);
-  assert.match(workflows, /new URLSearchParams\(\{ limit: "1000" \}\)/);
+  assert.match(workflows, /Math\.min\(100, remaining\)/);
   assert.match(webhooks, /reverse proxy or load[\s\S]*terminates TLS/);
   assert.match(webhooks, /"tweet\.quote"/);
   assert.match(webhooks, /`webhook\.test` payload omits[\s\S]*`deliveryId`/);
@@ -355,6 +355,13 @@ test("hardens portable webhook receiver examples", async () => {
   assert.match(guide, /except json\.JSONDecodeError/);
   assert.match(guide, /if err := json\.Unmarshal\(payload, &event\); err != nil/);
   assert.match(guide, /deliveryStore\.markProcessed/);
+  assert.match(guide, /req\.setTimeout\(10_000/);
+  assert.match(guide, /res\.writeHead\(413\)[\s\S]*req\.destroy\(\)/);
+  assert.match(guide, /event === null[\s\S]*Array\.isArray\(event\)/);
+  assert.match(guide, /not isinstance\(event, dict\)/);
+  assert.match(guide, /server\.listen\(3000, "127\.0\.0\.1"\)/);
+  assert.match(guide, /HTTPServer\(\("127\.0\.0\.1", 3000\)/);
+  assert.match(guide, /func main\(\)[\s\S]*Addr:\s+"127\.0\.0\.1:3000"/);
   assert.match(python, /MAX_WEBHOOK_BODY_BYTES = 1024 \* 1024/);
   assert.match(python, /claim_delivery\(delivery_id\)/);
   assert.match(python, /mark_delivery_processed\(delivery_id\)/);
@@ -366,6 +373,60 @@ test("hardens portable webhook receiver examples", async () => {
   assert.match(webhookTypes, /interface ProductionWebhookPayload/);
   assert.match(webhookTypes, /interface WebhookTestPayload/);
   assert.match(webhookTypes, /timestamp: string/);
+});
+
+test("hardens bounded workflows and persistent delivery setup", async () => {
+  const [
+    skill,
+    monitorEndpoints,
+    webhookEndpoints,
+    extractions,
+    python,
+    pipeline,
+    workflows,
+    writeEndpoints,
+  ] = await Promise.all([
+    read("skills/x-twitter-scraper/SKILL.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-monitors.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-webhooks.md"),
+    read("skills/x-twitter-scraper/references/extractions.md"),
+    read("skills/x-twitter-scraper/references/python-examples.md"),
+    read("skills/x-twitter-scraper/references/twitter-data-pipeline.md"),
+    read("skills/x-twitter-scraper/references/workflows.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-x-write.md"),
+  ]);
+
+  assert.match(skill, /`5xx`:[^\n]*up to 3 times/);
+  assert.doesNotMatch(monitorEndpoints, /For creates and updates/);
+  assert.match(webhookEndpoints, /atomic insert-if-absent/);
+  assert.match(webhookEndpoints, /`deliveryId` separately/);
+  assert.match(webhookEndpoints, /`127\.0\.0\.1`/);
+
+  const requestSection = extractions.slice(0, extractions.indexOf("## Response"));
+  const extractionRequests = [...requestSection.matchAll(/```json\n([\s\S]*?)\n```/g)]
+    .map((match) => JSON.parse(match[1]))
+    .filter((body) => body.toolType);
+  assert.ok(extractionRequests.length > 0);
+  for (const request of extractionRequests) {
+    assert.ok(Number.isInteger(request.resultsLimit) && request.resultsLimit > 0);
+  }
+
+  assert.match(python, /response\.status == 204 or not response_body/);
+  assert.match(pipeline, /objective, event scope, destination URL, verification method/);
+  assert.match(pipeline, /retention period, and deactivation or deletion procedure/);
+
+  assert.match(workflows, /await response\.text\(\)[\s\S]*finally[\s\S]*clearTimeout/);
+  assert.match(workflows, /fetchAllPages\(path, dataKey, maxResults\)/);
+  assert.match(workflows, /error\.status === 410/);
+  assert.match(workflows, /error\.code === "coverage_cursor_gone"/);
+  assert.match(workflows, /seenIds\.has\(item\.id\)/);
+  assert.match(workflows, /existingWebhookIds/);
+  assert.match(workflows, /candidates\.length !== 1/);
+  assert.match(workflows, /Keep monitor \$\{monitor\.id\} and resolve it manually/);
+  assert.match(workflows, /fetchAllPages\(`\/extractions\/\$\{job\.id\}`,[^\n]*1000\)/);
+
+  assert.match(writeEndpoints, /Idempotency-Key: <UNIQUE_WRITE_KEY>/);
+  assert.match(writeEndpoints, /Direct REST callers supply this header/);
 });
 
 test("uses keyword monitor and durable write summaries across entry points", async () => {

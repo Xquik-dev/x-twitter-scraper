@@ -19,6 +19,10 @@ exports, monitors, events, webhooks, REST, MCP, and typed SDKs.
 8. Run enrichment separately.
 9. Use monitors and webhooks for ongoing event delivery.
 
+Before stage 9 creates any persistent subscription, obtain explicit approval.
+Confirm the objective, event scope, destination URL, verification method,
+intended use, retention period, and deactivation or deletion procedure.
+
 ## Twitter export run state
 
 Give each scheduled export a stable run ID and explicit state. The scheduler

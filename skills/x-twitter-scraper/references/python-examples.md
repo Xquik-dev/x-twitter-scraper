@@ -45,7 +45,10 @@ def xquik_fetch(path, method="GET", json_body=None, max_retries=3):
 
         try:
             with urllib.request.urlopen(request, timeout=30) as response:
-                return json.loads(response.read())
+                response_body = response.read()
+                if response.status == 204 or not response_body:
+                    return None
+                return json.loads(response_body)
         except urllib.error.HTTPError as error:
             status = error.code
             try:
