@@ -1,4 +1,4 @@
-# X API alternative comparison: Xquik, official X API, and Apify
+# X API alternative comparison across 5 providers
 
 Compare Twitter APIs with one controlled acceptance workload. Fix the query,
 filters, fields, date range, output format, and delivered row count. Record raw

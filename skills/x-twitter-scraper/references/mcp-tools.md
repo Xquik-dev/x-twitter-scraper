@@ -71,7 +71,7 @@ declare const xquik: {
   request(path: string, options?: {
     method?: string;  // default: 'GET'
     body?: unknown;
-    query?: Record<string, string>;
+    query?: Record<string, string | number | boolean>;
   }): Promise<unknown>;
 };
 declare const spec: { endpoints: EndpointInfo[] };

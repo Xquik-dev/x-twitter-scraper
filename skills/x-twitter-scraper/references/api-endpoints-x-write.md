@@ -1,6 +1,7 @@
 # Xquik REST API endpoints: X write
 
-These metered actions use connected X accounts. Every request needs an `account` username or account ID.
+These metered actions use connected X accounts. Every write request needs an
+`account` username or account ID. The read-only status request does not.
 
 Every write requires an `Idempotency-Key` header. Generate one key for each
 intended write. Reuse it only for the exact same account, action, target, and

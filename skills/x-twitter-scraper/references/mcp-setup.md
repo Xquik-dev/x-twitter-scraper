@@ -80,7 +80,12 @@ Run `/mcp`, select `xquik`, then authenticate.
 
 ChatGPT cannot present a custom API key. Business and Enterprise/Edu
 workspaces support full MCP, including write tools. Pro supports read and fetch
-tools only. Custom MCP apps are web-only.
+tools only. Custom MCP apps are web-only. Business workspaces limit Developer
+mode enablement, use, and publishing to admins and owners. On Enterprise and
+Edu workspaces, Developer mode access follows admin-assigned role-based access.
+Each permitted user still toggles Developer mode in personal settings.
+Workspace publishing is limited to admins and owners. Check the current
+workspace policy before setup.
 
 ### Codex CLI
 

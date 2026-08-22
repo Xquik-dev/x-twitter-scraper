@@ -20,33 +20,73 @@ const headers = { "x-api-key": apiKey, "Content-Type": "application/json" };
 
 ## Retry with exponential backoff
 
-Outside documented cursor recovery, retry only idempotent requests after `429`
-and `5xx`. Never automatically retry `POST`, `PATCH`, or `DELETE`. Stop after 3 retries.
+Outside documented cursor recovery, retry only idempotent requests after a
+connection failure, timeout, `408`, `429`, or `5xx`. Retry `424` only when the
+response explicitly marks the read safe to retry. Never automatically retry
+`POST`, `PATCH`, or `DELETE`. Stop after 3 retries.
 
 ```javascript
 async function xquikFetch(path, options = {}) {
   const baseDelay = 1000;
   const method = (options.method || "GET").toUpperCase();
   const retrySafe = ["GET", "HEAD", "OPTIONS"].includes(method);
+  let retriedCoverageCursor = false;
 
   for (let attempt = 0; attempt <= 3; attempt++) {
-    const response = await fetch(`${BASE}${path}`, {
-      ...options,
-      headers: { ...headers, ...options.headers },
-    });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30_000);
+    let response;
+
+    try {
+      response = await fetch(`${BASE}${path}`, {
+        ...options,
+        headers: { ...headers, ...options.headers },
+        signal: controller.signal,
+      });
+    } catch (error) {
+      clearTimeout(timeout);
+      if (!retrySafe || attempt === 3) throw error;
+      await new Promise((resolve) =>
+        setTimeout(resolve, baseDelay * 2 ** attempt + Math.random() * 1000),
+      );
+      continue;
+    } finally {
+      clearTimeout(timeout);
+    }
 
     if (response.ok) return response.json();
 
-    const retryable = retrySafe && (response.status === 429 || response.status >= 500);
+    const parsedError = await response.json().catch(() => null);
+    const error = parsedError && typeof parsedError === "object"
+      ? parsedError
+      : { error: "request failed" };
+    const code = typeof error.error === "string" ? error.error : error.error?.code;
+    const coverageRetry =
+      response.status === 409 &&
+      code === "coverage_cursor_unavailable" &&
+      !retriedCoverageCursor;
+    const retryable =
+      retrySafe &&
+      (response.status === 408 ||
+        response.status === 429 ||
+        response.status >= 500 ||
+        coverageRetry ||
+        (response.status === 424 && error.safeToRetry === true));
     if (!retryable || attempt === 3) {
-      const error = await response.json();
       throw new Error(`Xquik API ${response.status}: ${error.error}`);
     }
 
     const retryAfter = response.headers.get("Retry-After");
-    const delay = retryAfter
-      ? parseInt(retryAfter, 10) * 1000
-      : baseDelay * Math.pow(2, attempt) + Math.random() * 1000;
+    const retryAfterMs = retryAfter && /^\d+$/.test(retryAfter)
+      ? Number(retryAfter) * 1000
+      : null;
+    if (coverageRetry && retryAfterMs === null) {
+      throw new Error("Xquik API 409: missing Retry-After");
+    }
+    if (coverageRetry) retriedCoverageCursor = true;
+    const delay = retryAfterMs !== null
+      ? retryAfterMs
+      : baseDelay * 2 ** attempt + Math.random() * 1000;
 
     await new Promise((resolve) => setTimeout(resolve, delay));
   }
@@ -117,8 +157,8 @@ let job = await xquikFetch("/extractions", {
   }),
 });
 
-// Poll until the job finishes.
-while (job.status === "pending" || job.status === "running") {
+// Poll for at most 5 minutes.
+for (let poll = 0; poll < 150 && ["pending", "running"].includes(job.status); poll++) {
   await new Promise((r) => setTimeout(r, 2000));
   job = await xquikFetch(`/extractions/${job.id}`);
 }
@@ -132,7 +172,9 @@ let cursor;
 const allResults = [];
 
 while (true) {
-  const path = `/extractions/${job.id}${cursor ? `?cursor=${cursor}` : ""}`;
+  const params = new URLSearchParams({ limit: "1000" });
+  if (cursor) params.set("cursor", cursor);
+  const path = `/extractions/${job.id}?${params}`;
   const page = await xquikFetch(path);
   allResults.push(...page.results);
 
@@ -144,6 +186,9 @@ while (true) {
 requireExplicitApproval("the fixed export scope, audience, storage, and retention");
 const exportUrl = `${BASE}/extractions/${job.id}/export?format=csv`;
 const csvResponse = await fetch(exportUrl, { headers });
+if (!csvResponse.ok) {
+  throw new Error(`Xquik export failed with HTTP ${csvResponse.status}.`);
+}
 const csvData = await csvResponse.text();
 ```
 
@@ -152,6 +197,14 @@ const csvData = await csvResponse.text();
 Create a monitor, register a webhook, then handle events. Get explicit approval for the target, event types, destination URL, and ongoing usage first.
 
 ```javascript
+function requireExplicitApproval(scope) {
+  throw new Error(`Approval required for ${scope}. Implement the approval gate first.`);
+}
+
+requireExplicitApproval(
+  "the monitor target, event types, destination URL, ongoing usage, and disable path",
+);
+
 // Create a persistent monitor. Active monitors are metered hourly.
 const monitor = await xquikFetch("/monitors", {
   method: "POST",
@@ -225,10 +278,11 @@ Monitor event types include `tweet.new`, `tweet.quote`, `tweet.reply`, and
 | Compose a tweet | `POST /compose` | Included |
 | Post a tweet | `POST /x/tweets` | Metered write action |
 | Like or unlike a tweet | `POST /x/tweets/{id}/like` likes it. The `DELETE` method on the same route unlikes it. | Metered write action |
-| Retweet | `POST /x/tweets/{id}/retweet` | Metered write action |
+| Retweet or unretweet | `POST /x/tweets/{id}/retweet` retweets. The same route with the `DELETE` method unretweets. | Metered write action |
 | Follow or unfollow | `POST /x/users/{id}/follow` follows. The `DELETE` method on the same route unfollows. | Metered write action |
 | Send a DM | `POST /x/dm/{userId}` | Metered write action |
 | Update a profile | `PATCH /x/profile` | Metered write action |
 | Upload media | `POST /x/media` | Metered write action |
-| Change a community | `POST /x/communities`, join, or leave | Metered write action |
+| Create or delete a community | `POST /x/communities` creates. The `/x/communities/{id}` route with the `DELETE` method deletes. | Metered write action |
+| Join or leave a community | `POST /x/communities/{id}/join` joins. The same route with the `DELETE` method leaves. | Metered write action |
 | Manage support tickets | `POST /support/tickets` | Included |

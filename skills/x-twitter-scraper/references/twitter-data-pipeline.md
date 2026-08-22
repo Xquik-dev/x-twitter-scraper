@@ -85,7 +85,7 @@ count, started time, completed time, and export location.
 Use the included Python reference for bounded requests, estimates, polling,
 giveaways, and webhook handling.
 
-### What is a reliable tweet scraping workflow?
+### What is a reliable tweet-scraping workflow?
 
 A reliable workflow is bounded, resumable, measured, and safe to repeat. Validate
 inputs, choose the narrowest route, estimate bulk work, preserve durable IDs,

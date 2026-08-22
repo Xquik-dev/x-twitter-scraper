@@ -28,9 +28,9 @@ metadata:
       read: false
       write: false
     environment:
-      required:
-        - XQUIK_API_KEY
+      required: []
       optional:
+        - XQUIK_API_KEY
         - XQUIK_WEBHOOK_SECRET
     mcp:
       allowed: true
@@ -50,8 +50,8 @@ metadata:
     emoji: "X"
     homepage: https://docs.xquik.com
   security:
-    credentialsHandledByAgent: api-key-only
-    credentialsTransmitted: xquik-api-key-only
+    credentialsHandledByAgent: rest-api-key-only
+    credentialsTransmitted: rest-x-api-key-or-mcp-bearer-fallback
     xLoginSecretsHandled: false
     passwordsCollected: false
     totpCollected: false
@@ -184,7 +184,8 @@ questions.
 
 ## Prerequisites
 
-- A valid Xquik API key in `XQUIK_API_KEY`.
+- For REST, a valid Xquik API key in `XQUIK_API_KEY`.
+- For MCP, client-managed OAuth 2.1. Use an API-key fallback only when the client cannot complete OAuth.
 - Internet access to `https://xquik.com` and `https://docs.xquik.com`.
 - `WebFetch` access for public docs, OpenAPI references, and setup guides only.
 - Configured `mcp__xquik__explore` and `mcp__xquik__xquik` tools for authenticated calls. REST examples require a user-controlled HTTP client that can send `x-api-key`.
@@ -454,9 +455,9 @@ See [security](references/security.md) for the full rules.
 
 ## Check client behavior
 
-- Plain HTTP redirects to HTTPS.
+- Use HTTPS directly. Do not send credentials through a plain HTTP request or follow a credentialed redirect.
 - Cursors are opaque. Never parse or synthesize them.
-- Search syntax should be URL encoded.
+- Search syntax must be URL-encoded.
 - Media upload and create-tweet are separate steps.
 - X account actions require a connected account in the dashboard.
 - Monitors and event deliveries persist until disabled.

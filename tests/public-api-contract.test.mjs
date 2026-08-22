@@ -265,6 +265,83 @@ test("documents source-backed review fixes", async () => {
   assert.match(support, /"publicId": "tkt_\.\.\."/);
 });
 
+test("separates REST credentials from client-managed MCP OAuth", async () => {
+  const [skill, metadata, security, setup, tools] = await Promise.all([
+    read("skills/x-twitter-scraper/SKILL.md"),
+    read("skills/x-twitter-scraper/metadata.json"),
+    read("skills/x-twitter-scraper/references/security.md"),
+    read("skills/x-twitter-scraper/references/mcp-setup.md"),
+    read("skills/x-twitter-scraper/references/mcp-tools.md"),
+  ]);
+
+  assert.match(skill, /required: \[\][\s\S]*optional:[\s\S]*XQUIK_API_KEY/);
+  assert.match(skill, /For REST, a valid Xquik API key/);
+  assert.match(skill, /For MCP, client-managed OAuth 2\.1/);
+  assert.match(skill, /Use HTTPS directly/);
+  assert.match(skill, /URL-encoded/);
+  assert.match(metadata, /client-managed-oauth-2\.1-or-bearer-fallback/);
+  assert.match(security, /OAuth 2\.1 with S256 PKCE/);
+  assert.match(security, /`Authorization: Bearer` fallback/);
+  assert.match(setup, /Business workspaces limit Developer[\s\S]*admins and owners/);
+  assert.match(setup, /Enterprise and[\s\S]*Edu workspaces[\s\S]*role-based/);
+  assert.match(tools, /Record<string, string \| number \| boolean>/);
+});
+
+test("documents bounded jobs, retries, exports, and webhook delivery", async () => {
+  const [guide, draws, errors, extractions, python, workflows, webhooks] =
+    await Promise.all([
+      read("skills/x-twitter-scraper/references/twitter-scraper-api-guide.md"),
+      read("skills/x-twitter-scraper/references/draws.md"),
+      read("skills/x-twitter-scraper/references/api-endpoints-error-codes.md"),
+      read("skills/x-twitter-scraper/references/extractions.md"),
+      read("skills/x-twitter-scraper/references/python-examples.md"),
+      read("skills/x-twitter-scraper/references/workflows.md"),
+      read("skills/x-twitter-scraper/references/webhooks.md"),
+    ]);
+
+  assert.match(guide, /100,000 rows[\s\S]*PDF[\s\S]*10,000/);
+  assert.match(guide, /connection\s+failures, `408`, `429`, or `5xx`/);
+  assert.match(guide, /`424` only when[\s\S]*safe to retry/);
+  assert.match(draws, /estimated entries, intended audience, and retention period/);
+  assert.match(draws, /draw export format, audience, and retention period/);
+  assert.equal((errors.match(/default v1 string error contract/g) ?? []).length, 2);
+  assert.match(extractions, /GET \/extractions\/\{id\}\?limit=1000&cursor=<nextCursor>/);
+  assert.match(extractions, /send[\s\S]*`nextCursor` unchanged[\s\S]*`cursor`/i);
+  assert.match(python, /urllib\.parse\.urlencode/);
+  assert.match(python, /for _ in range\(150\)/);
+  assert.match(python, /if handler is None:[\s\S]*release_delivery/);
+  assert.match(workflows, /new AbortController\(\)/);
+  assert.match(workflows, /response\.status === 408/);
+  assert.match(workflows, /if \(!csvResponse\.ok\)/);
+  assert.match(workflows, /new URLSearchParams\(\{ limit: "1000" \}\)/);
+  assert.match(webhooks, /reverse proxy or load[\s\S]*terminates TLS/);
+  assert.match(webhooks, /"tweet\.quote"/);
+  assert.match(webhooks, /`webhook\.test` payload omits[\s\S]*`deliveryId`/);
+});
+
+test("documents current compose, tweet, style, and write types", async () => {
+  const [compose, tweetTypes, styles, writeTypes, writeEndpoints] =
+    await Promise.all([
+      read("skills/x-twitter-scraper/references/api-endpoints-compose.md"),
+      read("skills/x-twitter-scraper/references/types-x-api.md"),
+      read("skills/x-twitter-scraper/references/api-endpoints-tweet-style-cache.md"),
+      read("skills/x-twitter-scraper/references/types-x-write.md"),
+      read("skills/x-twitter-scraper/references/api-endpoints-x-write.md"),
+    ]);
+
+  assert.match(compose, /`step=score` requires a nonempty `draft`/);
+  assert.match(tweetTypes, /type: "photo" \| "video" \| "animated_gif"/);
+  assert.match(tweetTypes, /inReplyToId\?: string/);
+  assert.match(styles, /both values are cached style[\s\S]*identifiers/);
+  assert.match(styles, /normalized label returned as `xUsername`/);
+  assert.match(writeTypes, /type NonEmptyTweetMedia =/);
+  assert.match(writeTypes, /\| \[string, string, string, string\]/);
+  assert.match(writeTypes, /text: string; media\?: NonEmptyTweetMedia/);
+  assert.match(writeTypes, /text\?: string; media: NonEmptyTweetMedia/);
+  assert.match(writeEndpoints, /Every write request needs an[\s\S]*`account`/);
+  assert.match(writeEndpoints, /read-only status request does not/);
+});
+
 test("hardens portable webhook receiver examples", async () => {
   const [guide, python, webhookTypes] = await Promise.all([
     read("skills/x-twitter-scraper/references/webhooks.md"),

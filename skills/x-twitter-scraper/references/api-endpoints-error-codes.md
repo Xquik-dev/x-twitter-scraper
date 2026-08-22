@@ -50,6 +50,8 @@ and `code`. OpenAPI enumerates 112 codes, including `closed`, `expired`,
 `409 coverage_cursor_unavailable` requires an integer `Retry-After` response
 header. Wait that many seconds, then retry the same cursor once.
 
+The following example uses the default v1 string error contract:
+
 ```json
 {
   "error": "coverage_cursor_unavailable",
@@ -59,6 +61,8 @@ header. Wait that many seconds, then retry the same cursor once.
 
 `410 coverage_cursor_gone` has no `Retry-After` header. Restart without a
 cursor and deduplicate by ID.
+
+The following example also uses the default v1 string error contract:
 
 ```json
 {

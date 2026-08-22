@@ -2,14 +2,27 @@
 
 ```typescript
 
-interface CreateTweetRequest {
+interface CreateTweetBase {
   account: string;            // Connected X username or account ID
-  text?: string;              // Required tweet text unless media is provided.
   reply_to_tweet_id?: string; // Tweet ID to reply to
   community_id?: string;      // Community ID to post into
   is_note_tweet?: boolean;    // Long-form note tweet up to 25,000 characters.
-  media?: string[];           // Up to 4 images or exactly 1 MP4 URL
 }
+
+type NonEmptyTweetMedia =
+  | [string]
+  | [string, string]
+  | [string, string, string]
+  | [string, string, string, string];
+
+type CreateTweetRequest = CreateTweetBase &
+  (
+    | { text: string; media?: NonEmptyTweetMedia }
+    | { text?: string; media: NonEmptyTweetMedia }
+  );
+
+// Validate media MIME types before the request. Allow up to 4 images or exactly
+// 1 MP4. A request must include nonempty text, nonempty media, or both.
 
 type XWriteStatus =
   | "accepted"
