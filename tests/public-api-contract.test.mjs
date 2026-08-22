@@ -836,7 +836,10 @@ test("preserves audited integration safety invariants", async () => {
     extractions,
     mcp,
     python,
+    security,
+    skillCard,
     support,
+    pipeline,
     xTypes,
     usage,
     webhooks,
@@ -849,7 +852,10 @@ test("preserves audited integration safety invariants", async () => {
       read("skills/x-twitter-scraper/references/extractions.md"),
       read("skills/x-twitter-scraper/references/mcp-tools.md"),
       read("skills/x-twitter-scraper/references/python-examples.md"),
+      read("skills/x-twitter-scraper/references/security.md"),
+      read("skills/x-twitter-scraper/skill-card.md"),
       read("skills/x-twitter-scraper/references/types-support.md"),
+      read("skills/x-twitter-scraper/references/twitter-data-pipeline.md"),
       read("skills/x-twitter-scraper/references/types-x-api.md"),
       read("skills/x-twitter-scraper/references/usage.md"),
       read("skills/x-twitter-scraper/references/webhooks.md"),
@@ -868,12 +874,20 @@ test("preserves audited integration safety invariants", async () => {
   assert.match(mcp, /POST \/api\/v1\/draws`;.?metered and requires explicit approval/i);
   assert.match(python, /if not isinstance\(payload, dict\):/);
   assert.match(python, /MAX_RETRY_DELAY_SECONDS/);
+  assert.match(python, /if max_retries < 0:\n\s+raise ValueError/);
   assert.match(python, /poll_deadline = time\.monotonic\(\) \+ 5 \* 60/);
   assert.match(python, /deadline=poll_deadline/);
   assert.match(python, /if not isinstance\(event_type, str\):/);
   assert.match(python, /if not isinstance\(delivery_id, str\) or not delivery_id:/);
   assert.match(python, /if not isinstance\(data, dict\):/);
+  assert.match(security, /Replace every `<`, `>`, and `&`/);
+  assert.match(security, /Never put raw X-authored text inside the markers/);
+  assert.match(skillCard, /JSON-encode quoted content/);
   assert.match(support, /function assertCreateTicketRequest/);
+  assert.match(
+    pipeline,
+    /deduplicate by `eventId`[\s\S]*webhook deliveries by `deliveryId`/,
+  );
   assert.match(support, /request\.subject\.length > 500/);
   assert.match(xTypes, /interface TweetReplies[\s\S]*next_cursor: string/);
   assert.match(usage, /Obtain explicit approval for that exact read/);
