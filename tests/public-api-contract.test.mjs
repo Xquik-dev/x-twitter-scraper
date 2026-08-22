@@ -417,14 +417,13 @@ test("hardens bounded workflows and persistent delivery setup", async () => {
   assert.match(pipeline, /retention period, and deactivation or deletion procedure/);
 
   assert.match(workflows, /await response\.text\(\)[\s\S]*finally[\s\S]*clearTimeout/);
-  assert.match(workflows, /fetchAllPages\(path, dataKey, maxResults, identityForItem\)/);
+  assert.match(workflows, /fetchAllPages\(path, dataKey, maxResults, identityForItem, maxPages = 100\)/);
   assert.match(workflows, /error\.status === 410/);
   assert.match(workflows, /error\.code === "coverage_cursor_gone"/);
   assert.match(workflows, /seenIds\.has\(identity\)/);
-  assert.match(workflows, /existingMonitorIds/);
-  assert.match(workflows, /existingWebhookIds/);
-  assert.match(workflows, /candidates\.length !== 1/);
-  assert.match(workflows, /Monitor \$\{monitor\.id\} was retained for manual reconciliation/);
+  assert.doesNotMatch(workflows, /existingMonitorIds|existingWebhookIds|candidates\.length/);
+  assert.match(workflows, /Do not adopt matching monitors/);
+  assert.match(workflows, /Retain monitor \$\{monitor\.id\} and every matching webhook/);
   assert.match(workflows, /typeof item\?\.xUserId === "string"/);
 
   assert.match(writeEndpoints, /Idempotency-Key: <UNIQUE_WRITE_KEY>/);
@@ -611,6 +610,7 @@ test("documents automatic cursor recovery across public entry points", async () 
     read("skills/x-twitter-scraper/references/mcp-setup.md"),
     read("skills/x-twitter-scraper/references/workflows.md"),
     read("skills/x-twitter-scraper/references/scrape-export-twitter-data.md"),
+    read("skills/x-twitter-scraper/references/twitter-scraper-api-guide.md"),
   ]);
 
   for (const document of documents) {
@@ -892,9 +892,9 @@ test("preserves audited integration safety invariants", async () => {
   assert.match(webhooks, /claim_event\(delivery_key, handler_deadline\)/);
   assert.match(webhooks, /eventStore\.ClaimPending\(ctx, deliveryKey\)/);
   assert.match(webhooks, /if not valid_event_envelope\(event\):/);
-  assert.match(workflows, /existingMonitorIds/);
+  assert.doesNotMatch(workflows, /existingMonitorIds|existingWebhookIds/);
   assert.match(workflows, /Monitor creation is ambiguous/);
-  assert.match(workflows, /Monitor \$\{monitor\.id\} was retained for manual reconciliation/);
+  assert.match(workflows, /Retain monitor \$\{monitor\.id\} and every matching webhook/);
   assert.doesNotMatch(
     workflows,
     /eventTypes: \["tweet\.new", "tweet\.reply"\][\s\S]*eventTypes: \["tweet\.new", "tweet\.reply",/,
@@ -986,22 +986,33 @@ test("preserves final review safety and correctness fixes", async () => {
   assert.match(xWrite, /POST \/api\/v1\/x\/tweets/);
   assert.match(comparison, /top tweet-scraping tools/);
   assert.match(giveaways, /\(draws\.md\)/);
+  assert.match(giveaways, /Before exporting,[\s\S]*Require separate approval/);
   assert.doesNotMatch(alternative, /\.\.\/\.\.\/\.\.\/logo\.png/);
   assert.match(mcpSetup, /require_approval=\{"explore": "never", "xquik": "always"\}/);
+  assert.doesNotMatch(mcpSetup, /normalized snake_case responses/);
+  assert.match(mcpSetup, /returns the selected REST response object[\s\S]*`safeToRetry`/);
   assert.match(mcpTools, /`safeToRetry` is true/);
   assert.doesNotMatch(mcpTools, /safe_to_retry/);
   assert.match(writeTypes, /function assertCreateTweetRequest\([\s\S]*request: unknown,[\s\S]*resolvedMedia/);
   assert.match(writeTypes, /media must contain 1-4 nonempty URLs/);
   assert.match(webhooks, /store\.applyEffectAndMarkProcessed\(streamKey, event\)/);
+  assert.equal(
+    (webhooks.match(/store\.applyEffectAndMarkProcessed\(streamKey, event\)/g) ?? []).length,
+    2,
+  );
   assert.match(webhooks, /apply_effect_and_mark_processed\(stream_key, event, handler_deadline\)/);
   assert.match(webhooks, /ApplyEffectAndMarkProcessed\(ctx, streamKey, event\)/);
   assert.match(webhooks, /var event \*struct/);
   assert.match(webhooks, /err != nil \|\| event == nil/);
   assert.match(workflows, /const seenCursors = new Set\(\)/);
+  assert.match(workflows, /maxPages = 100/);
+  assert.match(workflows, /pageCount >= maxPages/);
   assert.match(workflows, /Pagination exceeded the maximum page count/);
   assert.match(workflows, /const pollDeadline = performance\.now\(\) \+ 5 \* 60 \* 1000/);
   assert.match(workflows, /timeoutMs: remainingPollMs/);
-  assert.match(workflows, /let webhookRemoved = false/);
+  assert.match(workflows, /Do not adopt matching monitors/);
+  assert.match(workflows, /Retain monitor \$\{monitor\.id\} and every matching webhook/);
+  assert.doesNotMatch(workflows, /existingMonitorIds|existingWebhookIds|candidates\.length/);
   assert.doesNotMatch(workflows, /const eventParams = new URLSearchParams/);
   assert.match(skill, /Serialize X-authored content as JSON/);
   assert.doesNotMatch(skill, /requires:\n\s+env:\n\s+- XQUIK_API_KEY/);
@@ -1038,7 +1049,10 @@ test("preserves complete AutoSkills review fixes", async () => {
 
   assert.equal((xApi.match(/new URLSearchParams/g) ?? []).length, 2);
   assert.ok(draws.indexOf("async function xquikFetch") < draws.indexOf('xquikFetch("/draws"'));
-  assert.match(draws, /request: drawRequest[\s\S]*usageLimitation[\s\S]*approval\.request/);
+  assert.match(draws, /const drawProposal = \{[\s\S]*request: drawRequest[\s\S]*usageLimitation/);
+  assert.match(draws, /JSON\.stringify\(approval\) !== JSON\.stringify\(drawProposal\)/);
+  assert.match(draws, /const drawIdempotencyKey = crypto\.randomUUID\(\)/);
+  assert.match(draws, /"Idempotency-Key": drawIdempotencyKey/);
   assertIncludes(followers, contract.extractionFormats.map((format) => `\`${format}\``));
   assert.match(mcp, /Download media[\s\S]*exact `tweetInput`[\s\S]*destination[\s\S]*retention/);
   assert.match(mcp, /require `allowed === true`/);
@@ -1047,6 +1061,7 @@ test("preserves complete AutoSkills review fixes", async () => {
   assert.match(python, /require_explicit_approval\(proposal\) != proposal/);
   assert.match(python, /not isinstance\(page\.get\("results"\), list\)/);
   assert.match(python, /not isinstance\(cursor, str\) or not cursor/);
+  assert.match(python, /type\(winner\.get\("position"\)\) is not int/);
   assert.match(
     python,
     /enqueue_delivery_and_consume_nonce\(event, nonce\)[\s\S]*send_response\(202\)/,
@@ -1104,6 +1119,8 @@ test("preserves final AutoSkills full-review fixes", async () => {
     monitorTypes,
     requestTypes,
     workflows,
+    exportGuide,
+    skillspectorReport,
   ] = await Promise.all([
     read("skills/x-twitter-scraper/SKILL.md"),
     read("skills/x-twitter-scraper/references/api-endpoints-radar.md"),
@@ -1127,6 +1144,8 @@ test("preserves final AutoSkills full-review fixes", async () => {
     read("skills/x-twitter-scraper/references/types-monitors.md"),
     read("skills/x-twitter-scraper/references/types-request-bodies.md"),
     read("skills/x-twitter-scraper/references/workflows.md"),
+    read("skills/x-twitter-scraper/references/scrape-export-twitter-data.md"),
+    read("skills/x-twitter-scraper/skillspector-report.md"),
   ]);
 
   assert.match(skill, /Keep all content inside them/);
@@ -1209,6 +1228,10 @@ test("preserves final AutoSkills full-review fixes", async () => {
     /charges only when the provider[\s\S]*Do not count[\s\S]*cost estimates/,
   );
   assert.match(
+    scraperGuide,
+    /coverage_cursor_unavailable[\s\S]*same cursor once[\s\S]*coverage_cursor_gone[\s\S]*deduplicate by ID/,
+  );
+  assert.match(
     xWriteTypes,
     /for \(const field of \["reply_to_tweet_id", "community_id"\] as const\)/,
   );
@@ -1222,6 +1245,11 @@ test("preserves final AutoSkills full-review fixes", async () => {
   assert.match(monitorTypes, /type KeywordEventType =/);
   assert.match(requestTypes, /interface CreateKeywordMonitorRequest[\s\S]*eventTypes: KeywordEventType\[\]/);
   assert.match(requestTypes, /interface UpdateKeywordMonitorRequest[\s\S]*eventTypes\?: KeywordEventType\[\]/);
+  assert.match(exportGuide, /Require `allowed === true`[\s\S]*Send it unchanged/);
+  assert.match(
+    skillspectorReport,
+    /Source repository path:[^\n]*Xquik-dev\/x-twitter-scraper\/skills\/x-twitter-scraper/,
+  );
   assert.match(workflows, /function isDefinitiveWriteRejection\(error\)/);
   assert.match(workflows, /if \(isDefinitiveWriteRejection\(monitorCreationError\)\)/);
   assert.match(workflows, /if \(isDefinitiveWriteRejection\(creationError\)\)[\s\S]*method: "DELETE"/);
