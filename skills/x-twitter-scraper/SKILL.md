@@ -397,9 +397,11 @@ See [workflows](references/workflows.md) and [event delivery](references/webhook
 
 ## Authentication
 
-Use the Xquik API key only. To verify authentication, send `GET /credits`
-against the Base URL with the `x-api-key: $XQUIK_API_KEY` header. Do not paste
-API keys into chat, logs, shell history, process arguments, issues, or docs.
+For REST, use the Xquik API key. Verify REST authentication with `GET /credits`
+and the `x-api-key: $XQUIK_API_KEY` header. For MCP, prefer client-managed
+OAuth 2.1. Use the API-key bearer fallback only when OAuth cannot complete. Do
+not paste API keys into chat, logs, shell history, process arguments, issues,
+or docs.
 
 If the user needs to connect or re-authenticate an X account, direct them to the account page in the Xquik dashboard. Do not collect login material in chat.
 

@@ -429,6 +429,80 @@ test("hardens bounded workflows and persistent delivery setup", async () => {
   assert.match(writeEndpoints, /Direct REST callers supply this header/);
 });
 
+test("aligns public safety and type contracts", async () => {
+  const [
+    skill,
+    errors,
+    supportEndpoints,
+    mcp,
+    python,
+    exportGuide,
+    faq,
+    pipeline,
+    eventTypes,
+    extractionTypes,
+    supportTypes,
+    typeIndex,
+    workflows,
+    skillCard,
+  ] = await Promise.all([
+    read("skills/x-twitter-scraper/SKILL.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-error-codes.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-support.md"),
+    read("skills/x-twitter-scraper/references/mcp-tools.md"),
+    read("skills/x-twitter-scraper/references/python-examples.md"),
+    read("skills/x-twitter-scraper/references/scrape-export-twitter-data.md"),
+    read("skills/x-twitter-scraper/references/twitter-api-alternative-faq.md"),
+    read("skills/x-twitter-scraper/references/twitter-data-pipeline.md"),
+    read("skills/x-twitter-scraper/references/types-events.md"),
+    read("skills/x-twitter-scraper/references/types-extractions.md"),
+    read("skills/x-twitter-scraper/references/types-support.md"),
+    read("skills/x-twitter-scraper/references/types.md"),
+    read("skills/x-twitter-scraper/references/workflows.md"),
+    read("skills/x-twitter-scraper/skill-card.md"),
+  ]);
+
+  assert.match(skill, /For REST, use the Xquik API key/);
+  assert.match(skill, /For MCP, prefer client-managed\s+OAuth 2\.1/);
+  assert.match(errors, /Never\s+retry `POST`, `PATCH`, or `DELETE` automatically/);
+  assert.match(errors, /inspect `statusUrl`/);
+  assert.match(supportEndpoints, /Never retry a direct REST write without this key/);
+
+  assert.match(mcp, /bookmark folders/);
+  assert.match(mcp, /creating, replacing, or deleting a cached style/);
+
+  assert.match(python, /def claim_nonce\(nonce: str, ttl_seconds: int\)/);
+  assert.ok(
+    python.indexOf("claim_nonce(nonce, 5 * 60)") <
+      python.indexOf('event.get("eventType") == "webhook.test"'),
+    "claim each nonce before accepting a test delivery",
+  );
+  assert.match(python, /HTTPServer\(\("127\.0\.0\.1", 3000\)/);
+  assert.match(python, /Terminate TLS at a reverse proxy/);
+
+  assertIncludes(exportGuide, contract.extractionFormats.map((format) => `\`${format}\``));
+  assert.doesNotMatch(faq, /tweet scraping/);
+  assert.match(pipeline, /connection failures, `408`, `429`, or `5xx`/);
+  assert.match(pipeline, /`424` only when `safeToRetry` is `true`/);
+
+  assert.doesNotMatch(typeIndex, /types-api-keys/);
+  await assert.rejects(read("skills/x-twitter-scraper/references/types-api-keys.md"));
+  assert.match(eventTypes, /monitorType: "account"[\s\S]*username: string/);
+  assert.match(eventTypes, /monitorType: "keyword"[\s\S]*query: string/);
+  assert.match(eventTypes, /keywordMonitorId: string/);
+
+  assert.match(extractionTypes, /interface CreateExtractionResponse/);
+  assert.match(extractionTypes, /interface CreateExtractionRequest[\s\S]*resultsLimit: number/);
+  assert.match(extractionTypes, /Number\.isFinite\(request\.resultsLimit\)/);
+  assert.match(supportTypes, /type SupportAttachments =\s+\| \[Blob\]/);
+  assert.match(supportTypes, /body or attachments is required/);
+  assert.match(supportTypes, /content\.body\.length > 10_000/);
+
+  assert.match(workflows, /removes the like/);
+  assert.match(skillCard, /with 1 MIT warranty-text finding/);
+  assert.match(skillCard, /local files or local networks/);
+});
+
 test("uses keyword monitor and durable write summaries across entry points", async () => {
   const keywordGuide = await read(
     "skills/x-twitter-scraper/references/track-twitter-keywords-mentions.md",

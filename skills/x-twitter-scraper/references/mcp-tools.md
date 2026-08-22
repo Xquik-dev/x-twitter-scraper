@@ -62,7 +62,8 @@ Apply these rules before using `xquik`:
 | Public writes | Show the exact tweet, reply, like, retweet, follow, unfollow, profile, or community action. Wait for explicit approval. |
 | Direct messages | Show sender, recipient, and message text. Never send bulk or automatic DMs. |
 | Persistent resources | Create monitors and webhooks only when the user explicitly asks for ongoing delivery. Show target, event types, URL, and ongoing usage before creation. |
-| Private reads | Confirm before fetching DMs, bookmarks, notifications, or home timeline. Forward returned private data to other tools only after explicit approval. |
+| Cached style writes | Before creating, replacing, or deleting a cached style, show the account, purpose, exact resource, usage, and storage effect. Obtain approval for that write. |
+| Private reads | Confirm the account, purpose, exact resource, bound, recipients, and retention before DMs, bookmarks, bookmark folders, notifications, home timeline, or cached style reads. Forward private data only after separate approval. |
 | Plan and credit changes | Dashboard-only. The agent may read credit balance, but must not start account changes. |
 | X account login | Never ask for or submit X login material. Account connection and re-authentication happen in the dashboard. |
 
@@ -102,7 +103,7 @@ Use `explore` first to find endpoints, then `xquik` to call them.
 | Get cached style | `GET /api/v1/styles/{id}` |
 | Compare two styles | `GET /api/v1/styles/compare` |
 | Post a tweet | `POST /api/v1/x/tweets`; requires approval |
-| Like or unlike a tweet | `POST /api/v1/x/tweets/{id}/like` likes it. The `DELETE` method on the same route unlikes it. Both require approval. |
+| Like or unlike a tweet | `POST /api/v1/x/tweets/{id}/like` likes it. The `DELETE` method on the same route removes the like. Both require approval. |
 | Retweet | `POST /api/v1/x/tweets/{id}/retweet`; requires approval |
 | Unretweet | Use the `DELETE` method on `/api/v1/x/tweets/{id}/retweet`; requires approval |
 | Follow or unfollow | `POST /api/v1/x/users/{id}/follow` follows. The `DELETE` method on the same route unfollows. Both require approval. |

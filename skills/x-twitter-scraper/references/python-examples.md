@@ -189,6 +189,9 @@ for winner in details["winners"]:
 
 ## Python standard library webhook handler
 
+Bind this listener to loopback. Terminate TLS at a reverse proxy before
+registering its public HTTPS route.
+
 ```python
 import hashlib
 import hmac
@@ -204,6 +207,10 @@ def load_secret(name: str) -> str:
 # Use the per-webhook secret from POST /webhooks, not an Xquik account credential.
 WEBHOOK_SECRET = load_secret("XQUIK_WEBHOOK_SECRET")
 MAX_WEBHOOK_BODY_BYTES = 1024 * 1024
+
+def claim_nonce(nonce: str, ttl_seconds: int) -> bool:
+    """Atomically insert a nonce when absent and retain it for the full TTL."""
+    raise RuntimeError("Configure a shared durable webhook nonce store.")
 
 def claim_delivery(delivery_id: str) -> str:
     """Atomically create an expiring claim or return 'pending' or 'processed'."""
@@ -259,12 +266,24 @@ class WebhookHandler(BaseHTTPRequestHandler):
             self.wfile.write(b"Invalid signature")
             return
 
+        if not claim_nonce(nonce, 5 * 60):
+            self.send_response(409)
+            self.end_headers()
+            self.wfile.write(b"Nonce already used")
+            return
+
         try:
             event = json.loads(payload)
         except json.JSONDecodeError:
             self.send_response(400)
             self.end_headers()
             self.wfile.write(b"Invalid JSON")
+            return
+
+        if not isinstance(event, dict):
+            self.send_response(400)
+            self.end_headers()
+            self.wfile.write(b"Invalid JSON object")
             return
 
         if event.get("eventType") == "webhook.test":
@@ -313,5 +332,5 @@ class WebhookHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(b"OK")
 
-HTTPServer(("", 3000), WebhookHandler).serve_forever()
+HTTPServer(("127.0.0.1", 3000), WebhookHandler).serve_forever()
 ```

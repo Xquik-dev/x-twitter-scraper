@@ -225,11 +225,6 @@
           "target": "~/.agents/skills/x-twitter-scraper/references/types-account.md"
         },
         {
-          "path": "skills/x-twitter-scraper/references/types-api-keys.md",
-          "type": "registry:file",
-          "target": "~/.agents/skills/x-twitter-scraper/references/types-api-keys.md"
-        },
-        {
           "path": "skills/x-twitter-scraper/references/types-bookmarks-and-timeline.md",
           "type": "registry:file",
           "target": "~/.agents/skills/x-twitter-scraper/references/types-bookmarks-and-timeline.md"

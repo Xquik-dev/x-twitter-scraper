@@ -2,13 +2,13 @@
 
 **Skill:** x-twitter-scraper
 **Source:** `skills/x-twitter-scraper`
-**Scanned:** 2026-08-22 17:11:23 UTC
+**Scanned:** 2026-08-22 17:21:11 UTC
 
 ## Static Scan
 
 - Scanner: SkillSpector v2.3.7
 - Mode: static analysis only (`--no-llm`)
-- Components scanned: 72
+- Components scanned: 71
 - Executable scripts: no
 - Risk score: 3/100
 - Severity: low

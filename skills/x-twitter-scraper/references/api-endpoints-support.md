@@ -28,6 +28,9 @@ New requests return `201`. Direct REST callers may send a random
 or reply. Reuse it only for identical text and attachments. Never log it. A safe
 replay returns `200` plus `Idempotency-Replayed: true`. Different content with
 the same key returns `409 idempotency_key_conflict`.
+Never retry a direct REST write without this key. After a timeout, reuse the
+same key only for the identical payload. MCP injects and reuses the key for its
+bounded transport retries.
 Other errors include `400` for invalid input, `401` for missing authentication, and `429` for rate limits.
 Replies also return `404` for a missing ticket.
 

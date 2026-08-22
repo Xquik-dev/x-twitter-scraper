@@ -16,15 +16,23 @@ type ExtractionToolType =
   | "user_likes" | "user_media"
   | "verified_follower_explorer";
 
+type ExtractionStatus = "pending" | "running" | "completed" | "failed";
+
+interface CreateExtractionResponse {
+  id: string;
+  toolType: ExtractionToolType;
+  status: ExtractionStatus;
+}
+
 interface ExtractionJob {
   id: string;
   toolType: ExtractionToolType;
-  status: "pending" | "running" | "completed" | "failed";
+  status: ExtractionStatus;
   totalResults: number;
   targetTweetId?: string; targetUsername?: string;
   targetCommunityId?: string; targetListId?: string;
   targetSpaceId?: string; searchQuery?: string;
-  resultsLimit?: number; // Maximum results. Omit to request all available results.
+  resultsLimit?: number;
   errorMessage?: string;
   createdAt: string;
   completedAt?: string;
@@ -75,7 +83,7 @@ interface CreateExtractionRequest {
   searchQuery?: string; searchQueries?: string[];
   targets?: ExtractionMixedTarget[];
   relationTargets?: ExtractionRelationTarget[];
-  resultsLimit?: number; // Maximum results. Omit to request all available results.
+  resultsLimit: number; // This Skill always sends a finite positive bound.
   queryType?: "Latest" | "Top" | "Both";
   maxItemsPerTarget?: number; maxPagesPerTarget?: number;
   startCursor?: string;
@@ -131,6 +139,12 @@ interface CreateExtractionRequest {
   hasWebsite?: boolean;
   hasLocation?: boolean;
   bioContains?: string; locationContains?: string; usernameContains?: string;
+}
+
+function assertCreateExtractionRequest(request: CreateExtractionRequest): void {
+  if (!Number.isFinite(request.resultsLimit) || request.resultsLimit <= 0) {
+    throw new TypeError("resultsLimit must be finite and greater than zero.");
+  }
 }
 
 ```
