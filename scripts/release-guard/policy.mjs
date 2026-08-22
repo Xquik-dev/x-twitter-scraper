@@ -90,7 +90,6 @@ export const skillFrontmatterExpectations = {
       "XQUIK_API_KEY",
       "XQUIK_WEBHOOK_SECRET",
     ],
-    "metadata.openclaw.requires.env": ["XQUIK_API_KEY"],
     "metadata.security.allowedHosts": ["xquik.com", "docs.xquik.com"],
   },
   enums: {
