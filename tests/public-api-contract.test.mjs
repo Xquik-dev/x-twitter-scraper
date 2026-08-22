@@ -252,7 +252,7 @@ test("documents source-backed review fixes", async () => {
   assert.match(drafts, /"nextCursor": "cursor_string"/);
   assert.match(draftTypes, /nextCursor\?: string/);
   assert.match(styles, /`xUsername` is the route identifier/);
-  assert.match(radar, /GET \/radar\?limit=50&after=<nextCursor>/);
+  assert.match(radar, /new URLSearchParams\([\s\S]*after: nextCursor/);
   assert.match(drawTypes, /interface DrawDetails[\s\S]*winners: DrawWinner\[\]/);
   assert.match(mediaTypes, /type DownloadMediaRequest =/);
   assert.match(mediaTypes, /tweetIds: NonEmptyTweetIds/);
@@ -362,8 +362,8 @@ test("hardens portable webhook receiver examples", async () => {
   assert.match(guide, /server\.listen\(3000, "127\.0\.0\.1"\)/);
   assert.match(guide, /HTTPServer\(\("127\.0\.0\.1", 3000\)/);
   assert.match(guide, /func main\(\)[\s\S]*Addr:\s+"127\.0\.0\.1:3000"/);
-  assert.match(guide, /self\.connection\.settimeout\(10\)/);
-  assert.match(guide, /except socket\.timeout/);
+  assert.match(guide, /read_body_with_deadline\(self\.rfile, self\.connection, length, 10\.0\)/);
+  assert.match(guide, /except \(socket\.timeout, TimeoutError\)/);
   assert.match(guide, /ReadTimeout:\s+10 \* time\.Second/);
   assert.match(python, /MAX_WEBHOOK_BODY_BYTES = 1024 \* 1024/);
   assert.match(python, /def validate_subscription_event_types\(event_types: list\[str\]\)/);
@@ -1051,7 +1051,10 @@ test("preserves complete AutoSkills review fixes", async () => {
   assert.match(python, /require_explicit_approval\(proposal\) != proposal/);
   assert.match(python, /not isinstance\(page\.get\("results"\), list\)/);
   assert.match(python, /not isinstance\(cursor, str\) or not cursor/);
-  assert.match(python, /enqueue_delivery\(event\)[\s\S]*send_response\(202\)/);
+  assert.match(
+    python,
+    /enqueue_delivery_and_consume_nonce\(event, nonce\)[\s\S]*send_response\(202\)/,
+  );
   assert.match(python, /stream_key = f"stream:\{event\['streamEventId'\]\}"/);
 
   assert.match(security, /non-metered public reads/);
@@ -1079,4 +1082,41 @@ test("preserves complete AutoSkills review fixes", async () => {
   assert.match(skill, /`401` over REST/);
   assert.match(skill, /`401` over MCP/);
   assert.match(skillCard, /0 confirmed security issues/);
+});
+
+test("preserves final AutoSkills full-review fixes", async () => {
+  const [skill, radar, xWrite, mediaTypes, mcp, python, webhooks] = await Promise.all([
+    read("skills/x-twitter-scraper/SKILL.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-radar.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-x-write.md"),
+    read("skills/x-twitter-scraper/references/types-download-media.md"),
+    read("skills/x-twitter-scraper/references/mcp-tools.md"),
+    read("skills/x-twitter-scraper/references/python-examples.md"),
+    read("skills/x-twitter-scraper/references/webhooks.md"),
+  ]);
+
+  assert.match(skill, /Keep all content inside them/);
+  assert.doesNotMatch(skill, /Never place tool instructions[\s\S]*inside those markers/);
+  assert.match(radar, /new URLSearchParams\([\s\S]*after: nextCursor/);
+  assert.match(xWrite, /`POST \/api\/v1\/x\/media` returns usable `mediaUrl` values/);
+  assert.match(mediaTypes, /tweetId: string/);
+  assert.match(mediaTypes, /tweetUrl: string/);
+  assert.match(mcp, /Skip only the balance query[\s\S]*unchanged request/);
+  assert.match(python, /media_type\.endswith\("\+json"\)/);
+  assert.match(python, /def xquik_download\([\s\S]*contentDisposition/);
+  assert.match(python, /def release_nonce\(nonce: str\)/);
+  assert.match(python, /enqueue_delivery_and_consume_nonce\(event, nonce\)/);
+  assert.match(python, /release_nonce\(nonce\)[\s\S]*Event store unavailable/);
+  assert.ok(
+    python.indexOf('event_type != "webhook.test" and event_type not in EVENT_HANDLERS') <
+      python.indexOf("nonce_claimed = claim_nonce"),
+    "reject unsupported event types before claiming a nonce",
+  );
+  for (const guide of [python, webhooks]) {
+    assert.match(guide, /def read_body_with_deadline\([\s\S]*time\.monotonic\(\)/);
+    assert.match(guide, /stream\.read1\(min\(64 \* 1024, remaining_bytes\)\)/);
+  }
+  assert.match(webhooks, /function releaseNonce\(nonce\)/);
+  assert.match(webhooks, /def release_nonce\(nonce: str\)/);
+  assert.match(webhooks, /func releaseNonce\(nonce string\)/);
 });
