@@ -42,6 +42,9 @@ def sleep_before_retry(delay, deadline=None):
     time.sleep(min(delay, remaining))
 
 def xquik_fetch(path, method="GET", json_body=None, max_retries=3, deadline=None):
+    if max_retries < 0:
+        raise ValueError("max_retries must be non-negative")
+
     base_delay = 1.0
     method = method.upper()
     retry_safe = method in {"GET", "HEAD", "OPTIONS"}
