@@ -421,15 +421,15 @@ test("hardens bounded workflows and persistent delivery setup", async () => {
   assert.match(pipeline, /retention period, and deactivation or deletion procedure/);
 
   assert.match(workflows, /await response\.text\(\)[\s\S]*finally[\s\S]*clearTimeout/);
-  assert.match(workflows, /fetchAllPages\(path, dataKey, maxResults\)/);
+  assert.match(workflows, /fetchAllPages\(path, dataKey, maxResults, identityForItem\)/);
   assert.match(workflows, /error\.status === 410/);
   assert.match(workflows, /error\.code === "coverage_cursor_gone"/);
-  assert.match(workflows, /seenIds\.has\(item\.id\)/);
+  assert.match(workflows, /seenIds\.has\(identity\)/);
   assert.match(workflows, /existingMonitorIds/);
   assert.match(workflows, /existingWebhookIds/);
   assert.match(workflows, /candidates\.length !== 1/);
   assert.match(workflows, /Monitor \$\{monitor\.id\} cleanup was attempted/);
-  assert.match(workflows, /fetchAllPages\(`\/extractions\/\$\{job\.id\}`,[^\n]*1000\)/);
+  assert.match(workflows, /typeof item\?\.xUserId === "string"/);
 
   assert.match(writeEndpoints, /Idempotency-Key: <UNIQUE_WRITE_KEY>/);
   assert.match(writeEndpoints, /Direct REST callers supply this header/);
@@ -532,6 +532,32 @@ test("uses keyword monitor and durable write summaries across entry points", asy
   assert.doesNotMatch(mcpReference, /with `account`, `text`, and unique `Idempotency-Key`/);
 });
 
+test("documents file responses and specialized monitor contracts", async () => {
+  const [apiIndex, eventEndpoints, eventTypes, requestTypes] = await Promise.all([
+    read("skills/x-twitter-scraper/references/api-endpoints.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-events.md"),
+    read("skills/x-twitter-scraper/references/types-events.md"),
+    read("skills/x-twitter-scraper/references/types-request-bodies.md"),
+  ]);
+
+  assert.doesNotMatch(apiIndex, /All responses are JSON/);
+  assert.match(apiIndex, /`Content-Type`[\s\S]*`Content-Disposition`/);
+  assert.match(apiIndex, /response\.json\(\).*only for JSON exports/);
+  assert.match(eventEndpoints, /Detailed events may include `xEventId`/);
+  assert.match(eventTypes, /type XquikEventDetail[\s\S]*xEventId\?: string/);
+  assert.match(
+    requestTypes,
+    /interface CreateKeywordMonitorRequest[\s\S]*query: string;[\s\S]*eventTypes: EventType\[\]/,
+  );
+  const updateKeyword = requestTypes.match(
+    /interface UpdateKeywordMonitorRequest \{([\s\S]*?)\n\}/,
+  )?.[1];
+  assert.ok(updateKeyword);
+  assert.match(updateKeyword, /eventTypes\?: EventType\[\]/);
+  assert.match(updateKeyword, /isActive\?: boolean/);
+  assert.doesNotMatch(updateKeyword, /query/);
+});
+
 test("documents canonical X write fields and durable envelopes", async () => {
   const writeReference = await read(
     "skills/x-twitter-scraper/references/api-endpoints-x-write.md",
@@ -597,7 +623,7 @@ test("documents automatic cursor recovery across public entry points", async () 
     assert.match(document, /coverage_cursor_gone/);
     assert.match(document, /(?:omits|without|no)\s+`Retry-After`/i);
     assert.match(document, /restart without a\s+cursor/i);
-    assert.match(document, /deduplicate by (?:Tweet )?ID/i);
+    assert.match(document, /deduplicate by (?:(?:Tweet )?ID|an endpoint-specific\s+stable identity)/i);
   }
 
   for (const document of documents.slice(0, 6)) {
