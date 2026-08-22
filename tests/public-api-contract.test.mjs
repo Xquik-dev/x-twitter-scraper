@@ -309,7 +309,7 @@ test("documents bounded jobs, retries, exports, and webhook delivery", async () 
   assert.match(extractions, /send[\s\S]*`nextCursor` unchanged[\s\S]*`cursor`/i);
   assert.match(python, /urllib\.parse\.urlencode/);
   assert.match(python, /poll_deadline = time\.monotonic\(\) \+ 5 \* 60/);
-  assert.match(python, /event_type not in EVENT_HANDLERS[\s\S]*send_response\(503\)/);
+  assert.match(python, /event_type not in SUPPORTED_EVENT_TYPES[\s\S]*send_response\(503\)/);
   assert.match(workflows, /new AbortController\(\)/);
   assert.match(workflows, /response\.status === 408/);
   assert.match(workflows, /if \(!csvResponse\.ok\)/);
@@ -367,14 +367,9 @@ test("hardens portable webhook receiver examples", async () => {
   assert.match(guide, /ReadTimeout:\s+10 \* time\.Second/);
   assert.match(python, /MAX_WEBHOOK_BODY_BYTES = 1024 \* 1024/);
   assert.match(python, /def validate_subscription_event_types\(event_types: list\[str\]\)/);
-  assert.match(python, /event_type not in EVENT_HANDLERS[\s\S]*send_response\(503\)/);
+  assert.match(python, /event_type not in SUPPORTED_EVENT_TYPES[\s\S]*send_response\(503\)/);
   assert.match(python, /claim_event\(delivery_key\)/);
-  assert.match(python, /mark_event_processed\(stream_key\)/);
-  assert.ok(
-    python.indexOf('EVENT_HANDLERS[event["eventType"]]') <
-      python.indexOf("mark_event_processed(stream_key)"),
-    "mark a stream event processed only after its handler succeeds",
-  );
+  assert.match(python, /apply_effect_and_mark_processed\(stream_key, event\)/);
   assert.match(webhookTypes, /interface ProductionWebhookPayload/);
   assert.match(webhookTypes, /interface WebhookTestPayload/);
   assert.match(webhookTypes, /timestamp: string/);
@@ -996,9 +991,9 @@ test("preserves final review safety and correctness fixes", async () => {
   assert.doesNotMatch(mcpTools, /safe_to_retry/);
   assert.match(writeTypes, /function assertCreateTweetRequest\([\s\S]*request: unknown,[\s\S]*resolvedMedia/);
   assert.match(writeTypes, /media must contain 1-4 nonempty URLs/);
-  assert.match(webhooks, /await handleEvent\(event\);[\s\S]*markProcessed/);
-  assert.match(webhooks, /handle_event\(event\)[\s\S]*mark_event_processed\(stream_key\)/);
-  assert.match(webhooks, /handleEvent\(event\)[\s\S]*MarkProcessed/);
+  assert.match(webhooks, /applyEffectAndMarkProcessed\(streamKey, event\)/);
+  assert.match(webhooks, /apply_effect_and_mark_processed\(stream_key, event\)/);
+  assert.match(webhooks, /ApplyEffectAndMarkProcessed\(streamKey, event\)/);
   assert.match(webhooks, /var event \*struct/);
   assert.match(webhooks, /err != nil \|\| event == nil/);
   assert.match(workflows, /const seenCursors = new Set\(\)/);
@@ -1099,6 +1094,8 @@ test("preserves final AutoSkills full-review fixes", async () => {
     pipeline,
     xWriteTypes,
     xApiTypes,
+    trends,
+    draws,
   ] = await Promise.all([
     read("skills/x-twitter-scraper/SKILL.md"),
     read("skills/x-twitter-scraper/references/api-endpoints-radar.md"),
@@ -1113,6 +1110,8 @@ test("preserves final AutoSkills full-review fixes", async () => {
     read("skills/x-twitter-scraper/references/twitter-data-pipeline.md"),
     read("skills/x-twitter-scraper/references/types-x-write.md"),
     read("skills/x-twitter-scraper/references/types-x-api.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-trends.md"),
+    read("skills/x-twitter-scraper/references/draws.md"),
   ]);
 
   assert.match(skill, /Keep all content inside them/);
@@ -1133,7 +1132,7 @@ test("preserves final AutoSkills full-review fixes", async () => {
   assert.match(python, /Invalid draw winner response/);
   assert.match(python, /ThreadingHTTPServer\(\("127\.0\.0\.1", 3000\)/);
   assert.ok(
-    python.indexOf('event_type != "webhook.test" and event_type not in EVENT_HANDLERS') <
+    python.indexOf('event_type != "webhook.test" and event_type not in SUPPORTED_EVENT_TYPES') <
       python.indexOf("nonce_claimed = claim_nonce"),
     "reject unsupported event types before claiming a nonce",
   );
@@ -1153,4 +1152,16 @@ test("preserves final AutoSkills full-review fixes", async () => {
   assert.match(xWriteTypes, /"image\/avif"/);
   assert.match(xApiTypes, /followers: number/);
   assert.match(xApiTypes, /verified: boolean/);
+  assert.match(trends, /Require explicit approval to spend credits/);
+  assert.match(draws, /Invalid draw response/);
+  assert.match(draws, /Invalid draw details response/);
+  assert.match(python, /def read_response_with_deadline\([\s\S]*response\.read1/);
+  assert.match(python, /error\.fp, attempt_deadline, MAX_JSON_RESPONSE_BYTES/);
+  assert.match(python, /except ValueError:[\s\S]*return False/);
+  assert.match(python, /apply_effect_and_mark_processed\(stream_key, event\)/);
+  assert.match(pipeline, /Normalize the complete creation payload with sorted keys/);
+  assert.match(skill, /Allow only `source="tweet"`/);
+  assert.match(skill, /new attempt after `safeToRetry` needs a new REST key/);
+  assert.match(webhooks, /applyEffectAndMarkProcessed\(streamKey, event\)/);
+  assert.match(webhooks, /ApplyEffectAndMarkProcessed\(streamKey, event\)/);
 });
