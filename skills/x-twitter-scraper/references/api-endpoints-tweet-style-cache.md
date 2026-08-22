@@ -1,4 +1,4 @@
-# Xquik REST API endpoints: tweet style cache
+# Xquik REST API endpoints: tweet-style cache
 
 ## Protect cached style data
 
@@ -50,7 +50,7 @@ For a 201 response, the API returns:
 
 `GET /styles`
 
-List up to 200 cached tweet style profiles ordered by fetch date.
+List up to 200 cached tweet-style profiles ordered by fetch date.
 Each summary's `xUsername` is the route identifier. For a custom style, it is
 the normalized label returned when the style was saved. Use that value for
 subsequent get and delete requests.
@@ -133,17 +133,19 @@ Possible errors include `404 style_not_found`.
 
 `GET /styles/compare?username1=A&username2=B`
 
-Compare 2 cached tweet style profiles.
+Compare 2 cached tweet-style profiles.
 
 This is a private read. Show both labels or usernames. Compare only after explicit
 approval for that exact read.
 
-Use these query parameters:
+Use these query parameters. Despite their names, both values are cached style
+identifiers. An analyzed profile uses its X username. A custom profile uses the
+normalized label returned as `xUsername`.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `username1` | string | Yes | First X username |
-| `username2` | string | Yes | Second X username |
+| `username1` | string | Yes | First cached `xUsername` identifier |
+| `username2` | string | Yes | Second cached `xUsername` identifier |
 
 For a 200 response, the API returns:
 

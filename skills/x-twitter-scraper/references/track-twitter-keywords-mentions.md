@@ -59,8 +59,9 @@ Poll monitor events or register an HTTPS webhook. Treat "real time" as ongoing
 detection, not guaranteed zero-latency streaming. Measure delay from source post
 time to stored event time.
 
-Persist monitor ID, event ID, tweet ID, event type, and delivery time. These
-fields support retries, deduplication, and outage recovery.
+Persist monitor ID, event ID, tweet ID, event type, source occurrence time, and
+processing time. For webhooks, also store delivery time. These fields support
+retries, deduplication, latency measurement, and outage recovery.
 
 ### How do I track keywords with a Twitter API?
 

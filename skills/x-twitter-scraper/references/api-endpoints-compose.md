@@ -20,7 +20,7 @@ Send this body:
 | `additionalContext` | string | No | Extra context or URLs for refine |
 | `callToAction` | string | No | Desired call to action for refine |
 | `mediaType` | string | No | `photo`, `video`, or `none` for refine |
-| `draft` | string | No | Tweet text to evaluate for score |
+| `draft` | string | For `score` | Tweet text to evaluate for score |
 | `hasLink` | boolean | No | Whether score evaluates a link |
 | `hasMedia` | boolean | No | Whether score evaluates media |
 
@@ -29,5 +29,8 @@ For `step=compose`, the API returns `contentRules`, `scorerWeights`, `followUpQu
 For `step=refine`, the API returns `compositionGuidance` and `examplePatterns`.
 
 For `step=score`, the API returns `totalChecks`, `passedCount`, `topSuggestion`, and `checklist[]`. Each checklist item contains `factor`, `passed`, and `suggestion`.
+
+`step=score` requires a nonempty `draft`. Do not send a score request without
+the final text to check.
 
 ---

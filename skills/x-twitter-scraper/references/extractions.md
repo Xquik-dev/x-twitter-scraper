@@ -39,6 +39,7 @@ These tools require `targetTweetId`.
 | `favoriters` | Extract users who favorited a tweet |
 
 For example:
+
 ```json
 {
   "toolType": "reply_extractor",
@@ -59,6 +60,7 @@ These tools require `targetUsername`.
 | `post_extractor` | Extract posts from an account |
 
 For example:
+
 ```json
 {
   "toolType": "follower_explorer",
@@ -78,6 +80,7 @@ These tools require `targetUsername`.
 | `user_media` | Extract media tweets from a user |
 
 For example:
+
 ```json
 {
   "toolType": "user_likes",
@@ -97,6 +100,7 @@ These tools require `targetCommunityId`.
 | `community_search` | Search posts within a community (also requires `searchQuery`) |
 
 For example:
+
 ```json
 {
   "toolType": "community_extractor",
@@ -115,6 +119,7 @@ These tools require `targetListId`.
 | `list_follower_explorer` | Extract followers of a list |
 
 For example:
+
 ```json
 {
   "toolType": "list_member_extractor",
@@ -131,6 +136,7 @@ These tools require `targetSpaceId`.
 | `space_explorer` | Extract participants of a Space |
 
 For example:
+
 ```json
 {
   "toolType": "space_explorer",
@@ -148,6 +154,7 @@ These tools require `searchQuery`.
 | `tweet_search_extractor` | Search and extract tweets by keyword or hashtag |
 
 For a people search:
+
 ```json
 {
   "toolType": "people_search",
@@ -156,6 +163,7 @@ For a people search:
 ```
 
 For a tweet search:
+
 ```json
 {
   "toolType": "tweet_search_extractor",
@@ -223,6 +231,7 @@ For a tweet search:
 | `advancedQuery` | string | Raw X search operators appended to query |
 
 For example, apply filters:
+
 ```json
 {
   "toolType": "tweet_search_extractor",
@@ -235,7 +244,9 @@ For example, apply filters:
 }
 ```
 
-Set optional `resultsLimit` to stop after a specific result count. Pass the same value to `POST /extractions/estimate` and `POST /extractions`.
+The API makes `resultsLimit` optional. This Skill requires a finite positive
+value. Pass the same value to `POST /extractions/estimate` and
+`POST /extractions`.
 
 ### Profile filters
 
@@ -259,11 +270,13 @@ The status is `pending`, `running`, `completed`, or `failed`.
 
 ## Retrieving results
 
-```
-GET /extractions/{id}
+```http
+GET /extractions/{id}?limit=1000&cursor=<nextCursor>
 ```
 
-The endpoint returns up to 1,000 results per page. Each result includes:
+The endpoint returns up to 1,000 results per page. When `hasMore` is true, send
+the returned `nextCursor` unchanged as the next request's `cursor`. Each result
+includes:
 
 - `xUserId`, `xUsername`, `xDisplayName`
 - `xFollowersCount`, `xVerified`, `xProfileImageUrl`
@@ -271,7 +284,7 @@ The endpoint returns up to 1,000 results per page. Each result includes:
 
 ## Exporting results
 
-```
+```http
 GET /extractions/{id}/export?format=csv
 ```
 
@@ -289,7 +302,7 @@ after explicit approval. Delete it when the approved purpose ends.
 
 ## Estimating usage
 
-```
+```http
 POST /extractions/estimate
 ```
 

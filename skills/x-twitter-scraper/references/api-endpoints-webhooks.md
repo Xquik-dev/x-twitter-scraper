@@ -101,7 +101,9 @@ POST /webhooks/{id}/resume
 ```
 
 Tests the configured destination. A successful test resets failures and
-reactivates delivery. A failed test leaves the webhook unchanged.
+reactivates delivery. A failed test leaves the webhook unchanged. Before the
+call, show the configured destination, event types, exposed data, and renewed
+ongoing delivery. Resume only after explicit approval for that exact scope.
 
 ## List deliveries
 

@@ -100,13 +100,25 @@ Use this first integration sequence:
 2. Define a precise query and small result limit.
 3. Call `GET /x/tweets/search` and validate the response fields.
 4. Follow opaque cursors without decoding or constructing them.
-5. Retry only `429` and `5xx`, respecting `Retry-After`.
+5. Retry safe reads after connection failures, `408`, `429`, and `5xx`.
 6. Move complete work to an estimated extraction job.
 7. Persist tweet IDs, collection time, query, and source job ID.
 
 Direct reads return JSON. Extractions add durable states:
 `pending`, `running`, `completed`, and `failed`. Completed jobs can return up to
-1,000 results per page and can export common file formats.
+1,000 results per page. File exports include up to 100,000 rows, except PDF,
+which includes up to 10,000. For larger datasets, retrieve bounded JSON pages
+or split the work into approved extraction jobs. A successful export proves
+only that the file was created. Compare its row count with the approved job
+scope before treating it as complete.
+
+Outside documented cursor recovery, retry only safe methods after connection
+failures, `408`, `429`, or `5xx`. Use bounded exponential backoff with jitter.
+Honor `Retry-After` for `429`. Retry `409 coverage_cursor_unavailable` once
+after its exact `Retry-After`. Retry `424` only when the response explicitly
+marks the read safe to retry. Never retry a write automatically. Reuse its
+`Idempotency-Key`, inspect `statusUrl`, and start a new attempt only when
+`safeToRetry` is true and the user approves.
 
 ### How does Xquik extract public X posts?
 

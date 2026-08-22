@@ -13,6 +13,7 @@ Use these Python examples for authentication, retries, extractions, draws, and w
 ```python
 import json
 import urllib.error
+import urllib.parse
 import urllib.request
 
 def load_secret(name: str) -> str:
@@ -33,6 +34,7 @@ def xquik_fetch(path, method="GET", json_body=None, max_retries=3):
     base_delay = 1.0
     method = method.upper()
     retry_safe = method in {"GET", "HEAD", "OPTIONS"}
+    retried_coverage_cursor = False
 
     for attempt in range(max_retries + 1):
         retry_after = None
@@ -46,14 +48,51 @@ def xquik_fetch(path, method="GET", json_body=None, max_retries=3):
                 return json.loads(response.read())
         except urllib.error.HTTPError as error:
             status = error.code
-            payload = json.loads(error.read() or b"{}")
+            try:
+                payload = json.loads(error.read() or b"{}")
+            except json.JSONDecodeError:
+                payload = {"error": "request failed"}
             retry_after = error.headers.get("Retry-After")
+        except urllib.error.URLError:
+            if not retry_safe or attempt == max_retries:
+                raise
+            time.sleep(base_delay * (2 ** attempt) + random.uniform(0, 1))
+            continue
 
-        retryable = retry_safe and (status == 429 or status >= 500)
+        error_value = payload.get("error")
+        code = (
+            error_value
+            if isinstance(error_value, str)
+            else error_value.get("code") if isinstance(error_value, dict) else None
+        )
+        coverage_retry = (
+            status == 409
+            and code == "coverage_cursor_unavailable"
+            and not retried_coverage_cursor
+        )
+        retryable = retry_safe and (
+            status in {408, 429}
+            or status >= 500
+            or coverage_retry
+            or (status == 424 and payload.get("safeToRetry") is True)
+        )
         if not retryable or attempt == max_retries:
             raise Exception(f"Xquik API {status}: {payload.get('error', 'request failed')}")
 
-        delay = int(retry_after) if retry_after else base_delay * (2 ** attempt) + random.uniform(0, 1)
+        retry_after_seconds = (
+            int(retry_after)
+            if isinstance(retry_after, str) and retry_after.isdigit()
+            else None
+        )
+        if coverage_retry and retry_after_seconds is None:
+            raise RuntimeError("Xquik API 409: missing Retry-After")
+        if coverage_retry:
+            retried_coverage_cursor = True
+        delay = (
+            retry_after_seconds
+            if retry_after_seconds is not None
+            else base_delay * (2 ** attempt) + random.uniform(0, 1)
+        )
         time.sleep(delay)
 ```
 
@@ -88,8 +127,10 @@ job = xquik_fetch("/extractions", method="POST", json_body={
     "resultsLimit": RESULTS_LIMIT,
 })
 
-# Poll until the job finishes. Large jobs may remain in "running" state.
-while job["status"] in ("pending", "running"):
+# Poll for at most 5 minutes. Resume later by job ID if the bound expires.
+for _ in range(150):
+    if job["status"] not in ("pending", "running"):
+        break
     time.sleep(2)
     job = xquik_fetch(f"/extractions/{job['id']}")
 
@@ -103,7 +144,9 @@ results = []
 while True:
     path = f"/extractions/{job['id']}"
     if cursor:
-        path += f"?cursor={cursor}"
+        path += "?" + urllib.parse.urlencode({"limit": 1000, "cursor": cursor})
+    else:
+        path += "?limit=1000"
     page = xquik_fetch(path)
     results.extend(page["results"])
 
@@ -117,6 +160,10 @@ print(f"Extracted {len(results)} results")
 ## Giveaway draw
 
 ```python
+require_explicit_approval(
+    "the tweet, filters, estimated entries, intended audience, and retention"
+)
+
 # Create a draw with explicit filters.
 draw = xquik_fetch("/draws", method="POST", json_body={
     "tweetUrl": "https://x.com/burakbayir/status/1893456789012345678",
@@ -243,9 +290,14 @@ class WebhookHandler(BaseHTTPRequestHandler):
             return
 
         handler = EVENT_HANDLERS.get(event.get("eventType"))
+        if handler is None:
+            release_delivery(delivery_id)
+            self.send_response(400)
+            self.end_headers()
+            self.wfile.write(b"Unsupported event type")
+            return
         try:
-            if handler:
-                handler(event.get("username", ""), event.get("data", {}))
+            handler(event.get("username", ""), event.get("data", {}))
             mark_delivery_processed(delivery_id)
         except Exception:
             release_delivery(delivery_id)

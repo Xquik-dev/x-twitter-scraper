@@ -48,7 +48,7 @@ Returns `409 monitor_already_exists` if the username is already monitored.
 
 ### List monitors
 
-```
+```http
 GET /monitors
 ```
 
@@ -79,7 +79,7 @@ Send `{ "eventTypes": [...], "isActive": true|false }`. Both fields are optional
 
 ### Delete monitor
 
-```
+```http
 DELETE /monitors/{id}
 ```
 
@@ -89,7 +89,7 @@ explicit approval immediately before the call.
 
 ### Keyword monitors
 
-```
+```http
 GET /monitors/keywords
 POST /monitors/keywords
 GET /monitors/keywords/{id}

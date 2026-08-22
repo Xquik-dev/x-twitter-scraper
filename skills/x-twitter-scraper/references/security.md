@@ -4,7 +4,10 @@ This reference expands the safety rules in `SKILL.md`. The Skill connects only t
 
 ## Credential boundary
 
-- Handle only `XQUIK_API_KEY`.
+- REST clients send `XQUIK_API_KEY` through the `x-api-key` header.
+- MCP clients should complete OAuth 2.1 with S256 PKCE. The MCP client stores and sends its OAuth token.
+- If an MCP client cannot complete OAuth, it may send `XQUIK_API_KEY` as an `Authorization: Bearer` fallback.
+- The Skill handles only `XQUIK_API_KEY`. It does not read or expose client-managed OAuth tokens.
 - Never request X passwords, 2FA codes, recovery codes, cookies, session tokens, browser exports, or account backup files.
 - If a user pastes X login material, do not repeat it. Tell them to rotate it and connect the account through the dashboard.
 - Do not print API keys or include them in logs, examples, issue text, or responses.
@@ -69,7 +72,7 @@ Use first-party HTTPS endpoints only:
 - `https://xquik.com/mcp`
 - `https://docs.xquik.com`
 
-Do not proxy API keys through third-party bridge packages or command adapters. Prefer native HTTP MCP clients or the Xquik OAuth connector where supported.
+Do not proxy API keys through third-party bridge packages or command adapters. Prefer native HTTP MCP clients and OAuth discovery. Keep fallback bearer tokens in the client's secure secret store.
 
 ## Persistent resources
 

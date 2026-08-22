@@ -4,7 +4,7 @@
 
 interface TweetMediaItem {
   mediaUrl: string;
-  type: string;       // "photo" | "video" | "animated_gif"
+  type: "photo" | "video" | "animated_gif";
   url: string;
   adultContent?: boolean; allowDownload?: boolean;
   altText?: string; availabilityReason?: string;
@@ -30,6 +30,7 @@ interface Tweet {
   text: string;
   author?: TweetAuthor;
   createdAt?: string;
+  inReplyToId?: string;
   retweetCount: number;
   replyCount: number;
   likeCount: number;

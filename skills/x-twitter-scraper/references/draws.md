@@ -6,6 +6,10 @@ Run giveaway draws from tweet replies with explicit filters and a stable draw ID
 
 Call `POST /draws` with a required `tweetUrl` and optional filters:
 
+Before the call, show the exact tweet, filters, estimated entries, intended
+audience, and retention period. Wait for explicit approval for that bounded
+draw.
+
 | Field | Type | Description |
 |-------|------|-------------|
 | `tweetUrl` | string | Required full tweet URL, such as `https://x.com/user/status/ID` |
@@ -24,6 +28,14 @@ Call `POST /draws` with a required `tweetUrl` and optional filters:
 ## Create and review a draw
 
 ```javascript
+function requireExplicitApproval(scope) {
+  throw new Error(`Approval required for ${scope}. Implement the approval gate first.`);
+}
+
+requireExplicitApproval(
+  "the tweet, filters, estimated entries, intended audience, and retention period",
+);
+
 // Create a filtered draw.
 const draw = await xquikFetch("/draws", {
   method: "POST",
@@ -48,7 +60,8 @@ const details = await xquikFetch(`/draws/${draw.id}`);
 //   ...
 // ]
 
-// Export the results.
+// Approve the exact format, audience, and retention before materializing it.
+requireExplicitApproval("the draw export format, audience, and retention period");
 const exportUrl = `${BASE}/draws/${draw.id}/export?format=csv`;
 ```
 

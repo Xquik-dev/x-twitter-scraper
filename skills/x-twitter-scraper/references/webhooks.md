@@ -43,6 +43,9 @@ Reject timestamps outside a 5-minute window. Reject reused nonces within that
 window. Compare signatures in constant time before parsing JSON.
 Use an atomic shared nonce store in multi-instance deployments.
 Set a receiver body limit before reading the request. The examples use 1 MiB.
+The examples listen over local HTTP. Put them behind a reverse proxy or load
+balancer that terminates TLS. Register the webhook only after the public HTTPS
+route reaches that private listener.
 
 ### Node.js standard library
 
@@ -127,7 +130,7 @@ const server = createServer((req, res) => {
       return;
     }
 
-    if (!["webhook.test", "tweet.new", "tweet.reply", "tweet.retweet"].includes(event.eventType)) {
+    if (!["webhook.test", "tweet.new", "tweet.reply", "tweet.quote", "tweet.retweet"].includes(event.eventType)) {
       res.writeHead(400).end("Unsupported event type");
       return;
     }
@@ -208,7 +211,7 @@ class WebhookHandler(BaseHTTPRequestHandler):
             self.wfile.write(b"Invalid JSON")
             return
 
-        if event.get("eventType") not in {"webhook.test", "tweet.new", "tweet.reply", "tweet.retweet"}:
+        if event.get("eventType") not in {"webhook.test", "tweet.new", "tweet.reply", "tweet.quote", "tweet.retweet"}:
             self.send_response(400)
             self.end_headers()
             self.wfile.write(b"Unsupported event type")
@@ -323,7 +326,7 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
     }
 
     switch event.EventType {
-    case "webhook.test", "tweet.new", "tweet.reply", "tweet.retweet":
+    case "webhook.test", "tweet.new", "tweet.reply", "tweet.quote", "tweet.retweet":
         fmt.Print("Accepted verified Xquik webhook\n")
     default:
         http.Error(w, "Unsupported event type", http.StatusBadRequest)
@@ -349,6 +352,10 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
 Webhook deliveries can retry. Claim `deliveryId` with an expiring pending lease
 in durable storage. Mark it processed only after the handler or durable queue
 write succeeds:
+
+This rule applies to live deliveries. A `webhook.test` payload omits
+`deliveryId` and `streamEventId`; acknowledge it after signature, nonce, and
+event-type validation without entering the delivery store.
 
 ```javascript
 async function processDelivery(event, res) {
@@ -388,7 +395,9 @@ test delivery.
 
 ## Local testing
 
-Use a deployed HTTPS endpoint you control when testing webhook delivery. Do not install packages or proxy API keys from this skill.
+Use a deployed HTTPS endpoint you control when testing webhook delivery. The
+sample process listens on private HTTP and requires TLS termination before it.
+Do not install packages or proxy API keys from this skill.
 
 ```bash
 # Start the webhook server on infrastructure you control.

@@ -1,8 +1,8 @@
 # Xquik REST API endpoints: trends
 
-### List trends
+## List trends
 
-```
+```http
 GET /x/trends?woeid=1&count=30
 GET /trends?woeid=1&count=30
 ```
