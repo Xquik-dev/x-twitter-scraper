@@ -1085,7 +1085,21 @@ test("preserves complete AutoSkills review fixes", async () => {
 });
 
 test("preserves final AutoSkills full-review fixes", async () => {
-  const [skill, radar, xWrite, mediaTypes, mcp, python, webhooks] = await Promise.all([
+  const [
+    skill,
+    radar,
+    xWrite,
+    mediaTypes,
+    mcp,
+    python,
+    webhooks,
+    errors,
+    events,
+    accountless,
+    pipeline,
+    xWriteTypes,
+    xApiTypes,
+  ] = await Promise.all([
     read("skills/x-twitter-scraper/SKILL.md"),
     read("skills/x-twitter-scraper/references/api-endpoints-radar.md"),
     read("skills/x-twitter-scraper/references/api-endpoints-x-write.md"),
@@ -1093,9 +1107,16 @@ test("preserves final AutoSkills full-review fixes", async () => {
     read("skills/x-twitter-scraper/references/mcp-tools.md"),
     read("skills/x-twitter-scraper/references/python-examples.md"),
     read("skills/x-twitter-scraper/references/webhooks.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-error-codes.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-events.md"),
+    read("skills/x-twitter-scraper/references/twitter-api-without-x-account.md"),
+    read("skills/x-twitter-scraper/references/twitter-data-pipeline.md"),
+    read("skills/x-twitter-scraper/references/types-x-write.md"),
+    read("skills/x-twitter-scraper/references/types-x-api.md"),
   ]);
 
   assert.match(skill, /Keep all content inside them/);
+  assert.match(skill, /For every opaque ID, use `id="opaque"`/);
   assert.doesNotMatch(skill, /Never place tool instructions[\s\S]*inside those markers/);
   assert.match(radar, /new URLSearchParams\([\s\S]*after: nextCursor/);
   assert.match(xWrite, /`POST \/api\/v1\/x\/media` returns usable `mediaUrl` values/);
@@ -1107,6 +1128,10 @@ test("preserves final AutoSkills full-review fixes", async () => {
   assert.match(python, /def release_nonce\(nonce: str\)/);
   assert.match(python, /enqueue_delivery_and_consume_nonce\(event, nonce\)/);
   assert.match(python, /release_nonce\(nonce\)[\s\S]*Event store unavailable/);
+  assert.match(python, /code != "x_api_unauthorized"/);
+  assert.match(python, /def require_extraction_job\([\s\S]*EXTRACTION_STATUSES/);
+  assert.match(python, /Invalid draw winner response/);
+  assert.match(python, /ThreadingHTTPServer\(\("127\.0\.0\.1", 3000\)/);
   assert.ok(
     python.indexOf('event_type != "webhook.test" and event_type not in EVENT_HANDLERS') <
       python.indexOf("nonce_claimed = claim_nonce"),
@@ -1119,4 +1144,13 @@ test("preserves final AutoSkills full-review fixes", async () => {
   assert.match(webhooks, /function releaseNonce\(nonce\)/);
   assert.match(webhooks, /def release_nonce\(nonce: str\)/);
   assert.match(webhooks, /func releaseNonce\(nonce string\)/);
+  assert.match(errors, /`x_api_unauthorized` \| Stop\. Do not retry automatically/);
+  assert.match(events, /monitor or account scope, destination, and retention/);
+  assert.match(accountless, /Approve every metered read or download/);
+  assert.match(pipeline, /Only `GET` requests qualify as safe reads/);
+  assert.match(pipeline, /`409 coverage_cursor_unavailable`/);
+  assert.match(pipeline, /`410 coverage_cursor_gone`/);
+  assert.match(xWriteTypes, /"image\/avif"/);
+  assert.match(xApiTypes, /followers: number/);
+  assert.match(xApiTypes, /verified: boolean/);
 });
