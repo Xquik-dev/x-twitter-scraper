@@ -425,9 +425,10 @@ test("hardens bounded workflows and persistent delivery setup", async () => {
   assert.match(workflows, /error\.status === 410/);
   assert.match(workflows, /error\.code === "coverage_cursor_gone"/);
   assert.match(workflows, /seenIds\.has\(item\.id\)/);
+  assert.match(workflows, /existingMonitorIds/);
   assert.match(workflows, /existingWebhookIds/);
   assert.match(workflows, /candidates\.length !== 1/);
-  assert.match(workflows, /Keep monitor \$\{monitor\.id\} and resolve it manually/);
+  assert.match(workflows, /Monitor \$\{monitor\.id\} cleanup was attempted/);
   assert.match(workflows, /fetchAllPages\(`\/extractions\/\$\{job\.id\}`,[^\n]*1000\)/);
 
   assert.match(writeEndpoints, /Idempotency-Key: <UNIQUE_WRITE_KEY>/);
@@ -799,4 +800,45 @@ test("removes obsolete operation-named MCP type files", async () => {
   assert.deepEqual(obsolete, []);
   assert.match(outputGuide, /2 tools: `explore` and `xquik`/);
   assert.doesNotMatch(outputGuide, /types-mcp-(?:lookup|search|get|run)/);
+});
+
+test("preserves audited integration safety invariants", async () => {
+  const [events, styles, draws, extractions, mcp, support, xTypes, usage, webhooks, workflows] =
+    await Promise.all([
+      read("skills/x-twitter-scraper/references/api-endpoints-events.md"),
+      read("skills/x-twitter-scraper/references/api-endpoints-tweet-style-cache.md"),
+      read("skills/x-twitter-scraper/references/draws.md"),
+      read("skills/x-twitter-scraper/references/extractions.md"),
+      read("skills/x-twitter-scraper/references/mcp-tools.md"),
+      read("skills/x-twitter-scraper/references/types-support.md"),
+      read("skills/x-twitter-scraper/references/types-x-api.md"),
+      read("skills/x-twitter-scraper/references/usage.md"),
+      read("skills/x-twitter-scraper/references/webhooks.md"),
+      read("skills/x-twitter-scraper/references/workflows.md"),
+    ]);
+
+  assert.match(events, /Both ID fields contain the keyword monitor ID/);
+  assert.match(events, /Keyword events omit `username`/);
+  assert.match(styles, /encodeURIComponent\(label\)/);
+  assert.match(styles, /encodeURIComponent\(response\.xUsername\)/);
+  assert.match(draws, /const BASE = "https:\/\/xquik\.com\/api\/v1"/);
+  assert.ok(
+    extractions.indexOf("POST /extractions/estimate") <
+      extractions.indexOf("POST /extractions`."),
+  );
+  assert.match(mcp, /POST \/api\/v1\/draws`;.?metered and requires explicit approval/i);
+  assert.match(support, /function assertCreateTicketRequest/);
+  assert.match(support, /request\.subject\.length > 500/);
+  assert.match(xTypes, /interface TweetReplies[\s\S]*next_cursor: string/);
+  assert.match(usage, /Obtain explicit approval for that exact read/);
+  assert.match(webhooks, /deliveryStore\.claimPending\(event\.deliveryId\)/);
+  assert.match(webhooks, /claim_delivery\(delivery_id\)/);
+  assert.match(webhooks, /deliveryStore\.ClaimPending\(event\.DeliveryID\)/);
+  assert.match(workflows, /existingMonitorIds/);
+  assert.match(workflows, /Monitor creation is ambiguous/);
+  assert.match(workflows, /Monitor \$\{monitor\.id\} cleanup was attempted/);
+  assert.doesNotMatch(
+    workflows,
+    /eventTypes: \["tweet\.new", "tweet\.reply"\][\s\S]*eventTypes: \["tweet\.new", "tweet\.reply",/,
+  );
 });

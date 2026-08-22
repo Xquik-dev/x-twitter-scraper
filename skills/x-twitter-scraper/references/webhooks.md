@@ -51,6 +51,10 @@ The in-memory nonce claims below are atomic only within their single-process,
 private listeners. Production clusters must replace them with one shared atomic
 insert-if-absent operation and a 5-minute TTL.
 
+Live deliveries also require one shared durable `deliveryId` store. The
+examples fail closed until that store is configured. Test deliveries omit the
+delivery ID and do not enter this store.
+
 ### Node.js standard library
 
 ```javascript
@@ -63,6 +67,19 @@ if (!WEBHOOK_SECRET) throw new Error("Set XQUIK_WEBHOOK_SECRET first.");
 
 const MAX_WEBHOOK_BODY_BYTES = 1024 * 1024;
 const recentNonces = new Map();
+
+// Replace these fail-closed methods with one shared durable store.
+const deliveryStore = {
+  async claimPending(_deliveryId) {
+    throw new Error("Configure a durable webhook delivery store.");
+  },
+  async markProcessed(_deliveryId) {
+    throw new Error("Configure a durable webhook delivery store.");
+  },
+  async release(_deliveryId) {
+    throw new Error("Configure a durable webhook delivery store.");
+  },
+};
 
 function claimNonce(nonce) {
   const now = Date.now();
@@ -113,7 +130,7 @@ const server = createServer((req, res) => {
     }
     chunks.push(chunk);
   });
-  req.on("end", () => {
+  req.on("end", async () => {
     if (bodyTooLarge) return;
     const payload = Buffer.concat(chunks).toString("utf8");
     const signature = req.headers["x-xquik-signature"];
@@ -142,12 +159,48 @@ const server = createServer((req, res) => {
     }
 
     if (!["webhook.test", "tweet.new", "tweet.reply", "tweet.quote", "tweet.retweet"].includes(event.eventType)) {
-      res.writeHead(400).end("Unsupported event type");
+      res.writeHead(503).end("Handler unavailable");
       return;
     }
 
-    console.log("Accepted verified Xquik webhook");
-    res.writeHead(200).end("OK");
+    if (event.eventType === "webhook.test") {
+      res.writeHead(200).end("Test accepted");
+      return;
+    }
+    if (typeof event.deliveryId !== "string" || event.deliveryId.length === 0) {
+      res.writeHead(400).end("Missing deliveryId");
+      return;
+    }
+
+    let claim;
+    try {
+      claim = await deliveryStore.claimPending(event.deliveryId);
+    } catch {
+      res.writeHead(503).end("Delivery store unavailable");
+      return;
+    }
+    if (claim === "processed") {
+      res.writeHead(200).end("Already processed");
+      return;
+    }
+    if (claim !== "claimed") {
+      res.writeHead(409).end("Delivery already pending");
+      return;
+    }
+
+    try {
+      console.log("Accepted verified Xquik webhook");
+      await deliveryStore.markProcessed(event.deliveryId);
+      res.writeHead(200).end("OK");
+    } catch {
+      try {
+        await deliveryStore.release(event.deliveryId);
+      } catch {
+        res.writeHead(503).end("Delivery store unavailable");
+        return;
+      }
+      res.writeHead(500).end("Handler failed");
+    }
   });
 });
 
@@ -183,6 +236,18 @@ def claim_nonce(nonce: str) -> bool:
         return False
     RECENT_NONCES[nonce] = now + 5 * 60 * 1000
     return True
+
+def claim_delivery(delivery_id: str) -> str:
+    """Atomically create a durable lease or return pending or processed."""
+    raise RuntimeError("Configure a durable webhook delivery store.")
+
+def mark_delivery_processed(delivery_id: str) -> None:
+    """Mark a claimed delivery processed after handling succeeds."""
+    raise RuntimeError("Configure a durable webhook delivery store.")
+
+def release_delivery(delivery_id: str) -> None:
+    """Release a failed pending claim so Xquik can retry it."""
+    raise RuntimeError("Configure a durable webhook delivery store.")
 
 def verify_signature(payload: bytes, signature: str, timestamp: str, nonce: str, secret: str) -> bool:
     if not secret or not timestamp.isdigit() or not re.fullmatch(r"[0-9a-f]{32}", nonce):
@@ -242,13 +307,57 @@ class WebhookHandler(BaseHTTPRequestHandler):
             self.wfile.write(b"Invalid JSON object")
             return
 
-        if event.get("eventType") not in {"webhook.test", "tweet.new", "tweet.reply", "tweet.quote", "tweet.retweet"}:
-            self.send_response(400)
+        event_type = event.get("eventType")
+        if event_type not in {"webhook.test", "tweet.new", "tweet.reply", "tweet.quote", "tweet.retweet"}:
+            self.send_response(503)
             self.end_headers()
-            self.wfile.write(b"Unsupported event type")
+            self.wfile.write(b"Handler unavailable")
             return
 
-        print("Accepted verified Xquik webhook")
+        if event_type == "webhook.test":
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b"Test accepted")
+            return
+
+        delivery_id = event.get("deliveryId")
+        if not isinstance(delivery_id, str) or not delivery_id:
+            self.send_response(400)
+            self.end_headers()
+            self.wfile.write(b"Missing deliveryId")
+            return
+
+        try:
+            claim = claim_delivery(delivery_id)
+        except Exception:
+            self.send_response(503)
+            self.end_headers()
+            self.wfile.write(b"Delivery store unavailable")
+            return
+        if claim == "processed":
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b"Already processed")
+            return
+        if claim != "claimed":
+            self.send_response(409)
+            self.end_headers()
+            self.wfile.write(b"Delivery already pending")
+            return
+
+        try:
+            print("Accepted verified Xquik webhook")
+            mark_delivery_processed(delivery_id)
+        except Exception:
+            try:
+                release_delivery(delivery_id)
+            except Exception:
+                pass
+            self.send_response(500)
+            self.end_headers()
+            self.wfile.write(b"Handler failed")
+            return
+
         self.send_response(200)
         self.end_headers()
         self.wfile.write(b"OK")
@@ -291,6 +400,15 @@ const maxWebhookBodyBytes int64 = 1024 * 1024
 
 var webhookSecret = requireWebhookSecret()
 var recentNonces sync.Map
+
+type DeliveryStore interface {
+    ClaimPending(deliveryID string) (string, error)
+    MarkProcessed(deliveryID string) error
+    Release(deliveryID string) error
+}
+
+// Assign one shared durable implementation before starting the server.
+var deliveryStore DeliveryStore
 
 func claimNonce(nonce string) bool {
     now := time.Now().UnixMilli()
@@ -346,9 +464,11 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
     }
 
     var event struct {
-        EventType string `json:"eventType"`
-        Username  string `json:"username"`
-        Data      struct {
+        DeliveryID   string `json:"deliveryId"`
+        StreamEventID string `json:"streamEventId"`
+        EventType    string `json:"eventType"`
+        Username     string `json:"username"`
+        Data         struct {
             Text string `json:"text"`
         } `json:"data"`
     }
@@ -358,16 +478,47 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
     }
 
     switch event.EventType {
-    case "webhook.test", "tweet.new", "tweet.reply", "tweet.quote", "tweet.retweet":
-        fmt.Print("Accepted verified Xquik webhook\n")
+    case "webhook.test":
+        fmt.Fprint(w, "Test accepted")
+        return
+    case "tweet.new", "tweet.reply", "tweet.quote", "tweet.retweet":
+        // Continue with durable delivery deduplication.
     default:
-        http.Error(w, "Unsupported event type", http.StatusBadRequest)
+        http.Error(w, "Handler unavailable", http.StatusServiceUnavailable)
+        return
+    }
+
+    if event.DeliveryID == "" {
+        http.Error(w, "Missing deliveryId", http.StatusBadRequest)
+        return
+    }
+    claim, err := deliveryStore.ClaimPending(event.DeliveryID)
+    if err != nil {
+        http.Error(w, "Delivery store unavailable", http.StatusServiceUnavailable)
+        return
+    }
+    if claim == "processed" {
+        fmt.Fprint(w, "Already processed")
+        return
+    }
+    if claim != "claimed" {
+        http.Error(w, "Delivery already pending", http.StatusConflict)
+        return
+    }
+
+    fmt.Print("Accepted verified Xquik webhook\n")
+    if err := deliveryStore.MarkProcessed(event.DeliveryID); err != nil {
+        _ = deliveryStore.Release(event.DeliveryID)
+        http.Error(w, "Handler failed", http.StatusInternalServerError)
         return
     }
     fmt.Fprint(w, "OK")
 }
 
 func main() {
+    if deliveryStore == nil {
+        log.Fatal("Configure a durable webhook delivery store.")
+    }
     mux := http.NewServeMux()
     mux.HandleFunc("/webhook", webhookHandler)
     server := &http.Server{

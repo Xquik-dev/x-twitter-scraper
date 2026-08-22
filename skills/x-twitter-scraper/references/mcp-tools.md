@@ -96,7 +96,7 @@ Use `explore` first to find endpoints, then `xquik` to call them.
 | Credit balance | `GET /api/v1/credits` |
 | Monitor an X account | `POST /api/v1/monitors`; persistent and requires approval |
 | Set up webhook notifications | `POST /api/v1/webhooks`; persistent and requires approval |
-| Run a giveaway draw | `POST /api/v1/draws` |
+| Run a giveaway draw | `POST /api/v1/draws`; metered and requires explicit approval for the bounded draw |
 | Compose or draft a tweet | `POST /api/v1/compose`; run compose, refine, then score |
 | Link your X username | Use the Xquik dashboard account settings |
 | Analyze tweet style | `POST /api/v1/styles` |

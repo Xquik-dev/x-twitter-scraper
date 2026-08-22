@@ -64,4 +64,11 @@ function assertSupportContent(content: SupportContent): void {
     throw new TypeError("attachments must contain 1 to 4 files.");
   }
 }
+
+function assertCreateTicketRequest(request: CreateTicketRequest): void {
+  assertSupportContent(request);
+  if (request.subject.length > 500 || !/\S/.test(request.subject)) {
+    throw new TypeError("subject must contain 1 to 500 characters, including non-whitespace.");
+  }
+}
 ```
