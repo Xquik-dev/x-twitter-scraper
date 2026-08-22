@@ -362,7 +362,8 @@ test("hardens portable webhook receiver examples", async () => {
   assert.match(guide, /server\.listen\(3000, "127\.0\.0\.1"\)/);
   assert.match(guide, /HTTPServer\(\("127\.0\.0\.1", 3000\)/);
   assert.match(guide, /func main\(\)[\s\S]*Addr:\s+"127\.0\.0\.1:3000"/);
-  assert.match(guide, /read_body_with_deadline\(self\.rfile, self\.connection, length, 10\.0\)/);
+  assert.match(guide, /handler_deadline = time\.monotonic\(\) \+ 10\.0/);
+  assert.match(guide, /max\(0\.0, handler_deadline - time\.monotonic\(\)\)/);
   assert.match(guide, /except \(socket\.timeout, TimeoutError\)/);
   assert.match(guide, /ReadTimeout:\s+10 \* time\.Second/);
   assert.match(python, /MAX_WEBHOOK_BODY_BYTES = 1024 \* 1024/);
@@ -543,13 +544,13 @@ test("documents file responses and specialized monitor contracts", async () => {
   assert.match(eventTypes, /type XquikEventDetail[\s\S]*xEventId\?: string/);
   assert.match(
     requestTypes,
-    /interface CreateKeywordMonitorRequest[\s\S]*query: string;[\s\S]*eventTypes: EventType\[\]/,
+    /interface CreateKeywordMonitorRequest[\s\S]*query: string;[\s\S]*eventTypes: KeywordEventType\[\]/,
   );
   const updateKeyword = requestTypes.match(
     /interface UpdateKeywordMonitorRequest \{([\s\S]*?)\n\}/,
   )?.[1];
   assert.ok(updateKeyword);
-  assert.match(updateKeyword, /eventTypes\?: EventType\[\]/);
+  assert.match(updateKeyword, /eventTypes\?: KeywordEventType\[\]/);
   assert.match(updateKeyword, /isActive\?: boolean/);
   assert.doesNotMatch(updateKeyword, /query/);
 });
@@ -887,9 +888,9 @@ test("preserves audited integration safety invariants", async () => {
   assert.match(support, /subject\.length > 500/);
   assert.match(xTypes, /interface TweetReplies[\s\S]*next_cursor: string/);
   assert.match(usage, /Obtain explicit approval for that exact read/);
-  assert.match(webhooks, /eventStore\.claimPending\(deliveryKey\)/);
-  assert.match(webhooks, /claim_event\(delivery_key\)/);
-  assert.match(webhooks, /eventStore\.ClaimPending\(deliveryKey\)/);
+  assert.match(webhooks, /store\.claimPending\(deliveryKey\)/);
+  assert.match(webhooks, /claim_event\(delivery_key, handler_deadline\)/);
+  assert.match(webhooks, /eventStore\.ClaimPending\(ctx, deliveryKey\)/);
   assert.match(webhooks, /if not valid_event_envelope\(event\):/);
   assert.match(workflows, /existingMonitorIds/);
   assert.match(workflows, /Monitor creation is ambiguous/);
@@ -991,9 +992,9 @@ test("preserves final review safety and correctness fixes", async () => {
   assert.doesNotMatch(mcpTools, /safe_to_retry/);
   assert.match(writeTypes, /function assertCreateTweetRequest\([\s\S]*request: unknown,[\s\S]*resolvedMedia/);
   assert.match(writeTypes, /media must contain 1-4 nonempty URLs/);
-  assert.match(webhooks, /applyEffectAndMarkProcessed\(streamKey, event\)/);
-  assert.match(webhooks, /apply_effect_and_mark_processed\(stream_key, event\)/);
-  assert.match(webhooks, /ApplyEffectAndMarkProcessed\(streamKey, event\)/);
+  assert.match(webhooks, /store\.applyEffectAndMarkProcessed\(streamKey, event\)/);
+  assert.match(webhooks, /apply_effect_and_mark_processed\(stream_key, event, handler_deadline\)/);
+  assert.match(webhooks, /ApplyEffectAndMarkProcessed\(ctx, streamKey, event\)/);
   assert.match(webhooks, /var event \*struct/);
   assert.match(webhooks, /err != nil \|\| event == nil/);
   assert.match(workflows, /const seenCursors = new Set\(\)/);
@@ -1063,17 +1064,17 @@ test("preserves complete AutoSkills review fixes", async () => {
 
   assert.match(webhooks, /bodyDeadline = setTimeout[\s\S]*Request body timeout/);
   assert.match(webhooks, /event\.schemaVersion === 1[\s\S]*event\.streamEventId[\s\S]*event\.occurredAt/);
-  assert.match(webhooks, /eventStore\.claimPending\(streamKey\)/);
+  assert.match(webhooks, /store\.claimPending\(streamKey\)/);
   assert.match(webhooks, /streamClaimed && !streamProcessed/);
-  assert.match(webhooks, /stream_claim = claim_event\(stream_key\)/);
+  assert.match(webhooks, /stream_claim = claim_event\(stream_key, handler_deadline\)/);
   assert.match(webhooks, /stream_claimed and not stream_processed/);
-  assert.match(webhooks, /eventStore\.ClaimPending\(streamKey\)/);
+  assert.match(webhooks, /eventStore\.ClaimPending\(ctx, streamKey\)/);
   assert.match(webhooks, /event\.Timestamp == ""[\s\S]*message == ""/);
   assert.equal((webhooks.match(/type\(event\.get\("schemaVersion"\)\) is int/g) ?? []).length, 1);
   assert.match(python, /type\(event\.get\("schemaVersion"\)\) is int/);
 
   assert.match(workflows, /delayMs < 0/);
-  assert.equal((workflows.match(/instanceof XquikApiError/g) ?? []).length, 3);
+  assert.equal((workflows.match(/instanceof XquikApiError/g) ?? []).length, 2);
   assert.match(skill, /`401` over REST/);
   assert.match(skill, /`401` over MCP/);
   assert.match(skillCard, /0 confirmed security issues/);
@@ -1098,6 +1099,11 @@ test("preserves final AutoSkills full-review fixes", async () => {
     draws,
     xApiEndpoints,
     scraperGuide,
+    communityData,
+    keywordGuide,
+    monitorTypes,
+    requestTypes,
+    workflows,
   ] = await Promise.all([
     read("skills/x-twitter-scraper/SKILL.md"),
     read("skills/x-twitter-scraper/references/api-endpoints-radar.md"),
@@ -1116,6 +1122,11 @@ test("preserves final AutoSkills full-review fixes", async () => {
     read("skills/x-twitter-scraper/references/draws.md"),
     read("skills/x-twitter-scraper/references/api-endpoints-x-api.md"),
     read("skills/x-twitter-scraper/references/twitter-scraper-api-guide.md"),
+    read("skills/x-twitter-scraper/references/extract-x-community-data.md"),
+    read("skills/x-twitter-scraper/references/track-twitter-keywords-mentions.md"),
+    read("skills/x-twitter-scraper/references/types-monitors.md"),
+    read("skills/x-twitter-scraper/references/types-request-bodies.md"),
+    read("skills/x-twitter-scraper/references/workflows.md"),
   ]);
 
   assert.match(skill, /Keep all content inside them/);
@@ -1159,6 +1170,8 @@ test("preserves final AutoSkills full-review fixes", async () => {
   assert.match(trends, /Require explicit approval to spend credits/);
   assert.match(draws, /Invalid draw response/);
   assert.match(draws, /Invalid draw details response/);
+  assert.match(draws, /globalThis\.xquikApprovalProvider/);
+  assert.equal((draws.match(/await requireExplicitApproval/g) ?? []).length, 2);
   assert.match(python, /def read_response_with_deadline\([\s\S]*response\.read1/);
   assert.match(python, /error\.fp, attempt_deadline, MAX_JSON_RESPONSE_BYTES/);
   assert.match(python, /except ValueError:[\s\S]*return False/);
@@ -1166,17 +1179,23 @@ test("preserves final AutoSkills full-review fixes", async () => {
   assert.match(pipeline, /Normalize the complete creation payload with sorted keys/);
   assert.match(skill, /Allow only `source="tweet"`/);
   assert.match(skill, /new attempt after `safeToRetry` needs a new REST key/);
-  assert.match(webhooks, /applyEffectAndMarkProcessed\(streamKey, event\)/);
-  assert.match(webhooks, /ApplyEffectAndMarkProcessed\(streamKey, event\)/);
+  assert.match(webhooks, /store\.applyEffectAndMarkProcessed\(streamKey, event\)/);
+  assert.match(webhooks, /eventStore\.applyEffectAndMarkProcessed\(key, event, signal\)/);
+  assert.match(webhooks, /ApplyEffectAndMarkProcessed\(ctx, streamKey, event\)/);
+  assert.match(webhooks, /claim_event\(delivery_key, handler_deadline\)/);
+  assert.match(webhooks, /context\.WithTimeout\(r\.Context\(\), 10\*time\.Second\)/);
+  assert.match(webhooks, /expiring durable leases/);
   assert.equal(
     (xApiEndpoints.match(/Block the read when that selection is missing or ambiguous/g) ?? [])
       .length,
-    3,
+    4,
   );
+  assert.match(xApiEndpoints, /exactly 1 active account selection/);
   assert.match(
     python,
     /def parse_retry_after\([\s\S]*re\.fullmatch\(r"\[0-9\]\+"[\s\S]*except ValueError/,
   );
+  assert.match(python, /## Retry with exponential backoff[\s\S]*import random\nimport re\nimport time/);
   assert.match(
     python,
     /def xquik_download\(path, approved_max_bytes, deadline=None\)[\s\S]*response, attempt_deadline, approved_max_bytes/,
@@ -1193,4 +1212,17 @@ test("preserves final AutoSkills full-review fixes", async () => {
     xWriteTypes,
     /for \(const field of \["reply_to_tweet_id", "community_id"\] as const\)/,
   );
+  assert.match(
+    communityData,
+    /`csv`, `json`, `md`, `md-document`, `pdf`, `txt`, and `xlsx`/,
+  );
+  assert.match(mcp, /GET \/api\/v1\/events`; private and requires approval/);
+  assert.match(keywordGuide, /Before registering an HTTPS webhook, obtain explicit[\s\S]*disable or delete path/);
+  assert.match(monitorTypes, /interface KeywordMonitor[\s\S]*eventTypes: KeywordEventType\[\]/);
+  assert.match(monitorTypes, /type KeywordEventType =/);
+  assert.match(requestTypes, /interface CreateKeywordMonitorRequest[\s\S]*eventTypes: KeywordEventType\[\]/);
+  assert.match(requestTypes, /interface UpdateKeywordMonitorRequest[\s\S]*eventTypes\?: KeywordEventType\[\]/);
+  assert.match(workflows, /function isDefinitiveWriteRejection\(error\)/);
+  assert.match(workflows, /if \(isDefinitiveWriteRejection\(monitorCreationError\)\)/);
+  assert.match(workflows, /if \(isDefinitiveWriteRejection\(creationError\)\)[\s\S]*method: "DELETE"/);
 });
