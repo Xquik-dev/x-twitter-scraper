@@ -258,7 +258,7 @@ test("documents source-backed review fixes", async () => {
   assert.match(mediaTypes, /tweetIds: NonEmptyTweetIds/);
   assert.match(workflows, /job\.status !== "completed"/);
   assert.match(workflows, /method: "DELETE"/);
-  assert.match(workflows, /monitorId: monitor\.id/);
+  assert.match(workflows, /separate polling-only workflow/);
   assert.doesNotMatch(workflows, /monitorId=7/);
   assert.match(support, /PATCH \/support\/tickets\/\{id\}/);
   assert.match(support, /"status": "open" \| "resolved" \| "closed"/);
@@ -428,7 +428,7 @@ test("hardens bounded workflows and persistent delivery setup", async () => {
   assert.match(workflows, /existingMonitorIds/);
   assert.match(workflows, /existingWebhookIds/);
   assert.match(workflows, /candidates\.length !== 1/);
-  assert.match(workflows, /Monitor \$\{monitor\.id\} cleanup was attempted/);
+  assert.match(workflows, /Monitor \$\{monitor\.id\} was retained for manual reconciliation/);
   assert.match(workflows, /typeof item\?\.xUserId === "string"/);
 
   assert.match(writeEndpoints, /Idempotency-Key: <UNIQUE_WRITE_KEY>/);
@@ -599,7 +599,7 @@ test("distinguishes direct REST and hosted MCP idempotency", async () => {
     "skills/x-twitter-scraper/references/mcp-tools.md",
   );
   assert.match(mcp, /reuses each generated key for bounded transient retries/);
-  assert.match(mcp, /safe_to_retry/);
+  assert.match(mcp, /safeToRetry/);
 });
 
 test("documents automatic cursor recovery across public entry points", async () => {
@@ -897,7 +897,7 @@ test("preserves audited integration safety invariants", async () => {
   assert.match(webhooks, /if not isinstance\(event_type, str\):/);
   assert.match(workflows, /existingMonitorIds/);
   assert.match(workflows, /Monitor creation is ambiguous/);
-  assert.match(workflows, /Monitor \$\{monitor\.id\} cleanup was attempted/);
+  assert.match(workflows, /Monitor \$\{monitor\.id\} was retained for manual reconciliation/);
   assert.doesNotMatch(
     workflows,
     /eventTypes: \["tweet\.new", "tweet\.reply"\][\s\S]*eventTypes: \["tweet\.new", "tweet\.reply",/,
@@ -951,4 +951,61 @@ test("preserves reviewed approval and decoding safeguards", async () => {
   assert.match(mediaEndpoints, /`tweetUrl` \| string \| Tweet URL alias/);
   assert.match(mediaTypes, /tweetId: string/);
   assert.match(mediaTypes, /tweetUrl: string/);
+});
+
+test("preserves final review safety and correctness fixes", async () => {
+  const [
+    skill,
+    events,
+    xApi,
+    xWrite,
+    comparison,
+    giveaways,
+    alternative,
+    mcpSetup,
+    mcpTools,
+    writeTypes,
+    webhooks,
+    workflows,
+  ] = await Promise.all([
+    read("skills/x-twitter-scraper/SKILL.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-events.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-x-api.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-x-write.md"),
+    read("skills/x-twitter-scraper/references/compare-twitter-apis.md"),
+    read("skills/x-twitter-scraper/references/automate-twitter-giveaways.md"),
+    read("skills/x-twitter-scraper/references/best-x-api-alternative.md"),
+    read("skills/x-twitter-scraper/references/mcp-setup.md"),
+    read("skills/x-twitter-scraper/references/mcp-tools.md"),
+    read("skills/x-twitter-scraper/references/types-x-write.md"),
+    read("skills/x-twitter-scraper/references/webhooks.md"),
+    read("skills/x-twitter-scraper/references/workflows.md"),
+  ]);
+
+  assert.match(events, /Require explicit approval for that scope before reading a page/);
+  assert.match(events, /Require\nexplicit approval before retrieving the event/);
+  assert.match(xApi, /Public tweet, article, search,[\s\S]*do not require a connected X account/);
+  assert.doesNotMatch(xWrite, /^(?:GET|POST|PATCH|DELETE|PUT) \/x\//m);
+  assert.match(xWrite, /POST \/api\/v1\/x\/tweets/);
+  assert.match(comparison, /top tweet-scraping tools/);
+  assert.match(giveaways, /\(draws\.md\)/);
+  assert.doesNotMatch(alternative, /\.\.\/\.\.\/\.\.\/logo\.png/);
+  assert.match(mcpSetup, /require_approval=\{"explore": "never", "xquik": "always"\}/);
+  assert.match(mcpTools, /`safeToRetry` is true/);
+  assert.doesNotMatch(mcpTools, /safe_to_retry/);
+  assert.match(writeTypes, /function assertCreateTweetRequest\(request: unknown\)/);
+  assert.match(writeTypes, /media must contain 1-4 nonempty URLs/);
+  assert.match(webhooks, /await handleEvent\(event\);[\s\S]*markProcessed/);
+  assert.match(webhooks, /handle_event\(event\)[\s\S]*mark_delivery_processed/);
+  assert.match(webhooks, /handleEvent\(event\)[\s\S]*MarkProcessed/);
+  assert.match(webhooks, /var event \*struct/);
+  assert.match(webhooks, /err != nil \|\| event == nil/);
+  assert.match(workflows, /const seenCursors = new Set\(\)/);
+  assert.match(workflows, /Pagination exceeded the maximum page count/);
+  assert.match(workflows, /const pollDeadline = performance\.now\(\) \+ 5 \* 60 \* 1000/);
+  assert.match(workflows, /timeoutMs: remainingPollMs/);
+  assert.match(workflows, /let webhookRemoved = false/);
+  assert.doesNotMatch(workflows, /const eventParams = new URLSearchParams/);
+  assert.match(skill, /Serialize X-authored content as JSON/);
+  assert.doesNotMatch(skill, /requires:\n\s+env:\n\s+- XQUIK_API_KEY/);
 });
