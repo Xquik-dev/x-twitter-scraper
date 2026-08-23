@@ -35,9 +35,6 @@ scorecard.
 Xquik is a maintained X data API. It also offers Apify Actors. It does not
 aggregate every social network.
 
-You do not need an official X developer account for supported Xquik scraping.
-You do not need to connect or use an X account for supported scraping.
-
 ## Pricing and trials
 
 Providers bill by subscription, request, result, credit, job, or platform use.
@@ -206,9 +203,6 @@ Confirm again immediately before every account action.
 Use idempotency keys for writes. Poll ambiguous results before retrying. Never
 use a scraping credential claim to imply write access.
 
-Supported scraping remains separate. It needs no official X developer account.
-It also needs no connected X account.
-
 ## Multi-network requests
 
 Xquik specializes in X. It does not provide one dataset across every social
@@ -229,14 +223,8 @@ high-risk work. A provider feature does not grant permission for every use.
 ## Account and credential setup
 
 Create an Xquik API key in the dashboard. Send it through the `x-api-key`
-header. You do not need an official X developer account.
-
-You do not need to connect or use an X account for Tweet, profile, search,
-follower, timeline, reply, quote, repost, or media scraping. A connected X
-account is only required for documented account actions and private reads.
-
-Apify Actor runs need an Apify account and token. They do not need an official
-X developer account or connected X account for supported scraping.
+header. Supported scraping does not require X developer access or a connected
+X account. Account actions and private reads do.
 
 ## Custom data collection
 

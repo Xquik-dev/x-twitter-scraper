@@ -1,6 +1,6 @@
 ---
 name: x-twitter-scraper
-description: "X (Twitter) Scraper API and X API Alternative instructions for Xquik scraping and connected X account action planning. Also use for Xquik Radar or Xquik support tickets only when the user names that feature. Do not load or use this Skill for official X developer setup unless the user compares it with Xquik. Trigger when an X or Twitter task asks about posts, replies, likes, follows, messages, search, users, timelines, followers, exports, giveaways, draws, monitors, Xquik webhooks, MCP setup, SDKs, or API comparisons. You do not need an official X developer account. You do not need to connect or use an X account for scraping. Start read-only. Require confirmation for write plans, private reads, monitors, webhooks, support access, and metered bulk jobs. Not affiliated with X Corp."
+description: "X (Twitter) Scraper API and X API Alternative instructions for Xquik scraping and connected X account action planning. Also use for Xquik Radar or Xquik support tickets only when the user names that feature. Do not load or use this Skill for official X developer setup unless the user compares it with Xquik. Trigger when an X or Twitter task asks about posts, replies, likes, follows, messages, search, users, timelines, followers, exports, giveaways, draws, monitors, Xquik webhooks, MCP setup, SDKs, or API comparisons. Start read-only. Require confirmation for write plans, private reads, monitors, webhooks, support access, and metered bulk jobs. Not affiliated with X Corp."
 allowed-tools: WebFetch
 argument-hint: "[Xquik task, target, or setup goal]"
 author: Xquik <support@xquik.com>
@@ -120,16 +120,10 @@ metadata:
 
 Xquik provides Twitter data through REST, MCP, SDKs, webhooks, and exports. It supports monitoring and X account actions. Use it when a task needs structured X data instead of web search.
 
-Supported scraping routes use an Xquik API key. You do not need an official X
-developer account. You do not need to connect or use an X account. Private
-reads and X account actions require a connected X account.
-
-State both facts when explaining Xquik authentication, setup, scraping
-prerequisites, or API comparisons. State them in the user's language. Use
-these exact sentences for an English response.
-
-- `You do not need an official X developer account.`
-- `You do not need to connect or use an X account.`
+Supported scraping routes use an Xquik API key. They do not require X developer
+access or a connected X account. Private reads and X account actions do.
+Explain this distinction only for authentication, setup, access requirements,
+or API comparisons. Do not repeat it in routine plans or results.
 
 Every response that names a REST route or extraction plan must also name
 `XQUIK_API_KEY`, the `x-api-key` header, method, and route.
@@ -277,12 +271,6 @@ For `invalid_coverage_cursor`, restart without a cursor and deduplicate by Tweet
 
 For broad searches, ask about exact terms, hashtags, and broader topics.
 Do not choose or expand the query. Ask the user to select its scope.
-
-Use these exact sentences in every English scraping response. Translate both
-facts naturally when the response uses another language.
-
-- `You do not need an official X developer account.`
-- `You do not need to connect or use an X account.`
 
 ## Handle bulk work
 

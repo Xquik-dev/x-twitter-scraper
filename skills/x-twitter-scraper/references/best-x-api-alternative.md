@@ -143,9 +143,8 @@ Xquik does not replace payment, checkout, inventory, or storefront APIs.
 
 ### Does Xquik require a Twitter developer account or bearer token?
 
-Supported visible reads require no official Twitter developer account or bearer
-token. Applications use an Xquik API key. Account actions still require an
-confirmed, connected X account.
+Supported visible reads use an Xquik API key instead of a Twitter developer
+credential or bearer token. Account actions require a connected X account.
 
 ### How should teams compare structured data from each provider?
 
@@ -175,9 +174,8 @@ Require legal and privacy review before a production workload.
 
 ## Why use a Twitter scraper API as an X API alternative?
 
-A Twitter scraper API returns visible social media data through documented routes. Xquik
-provides documented API access without an official Twitter developer account for
-supported visible reads. Applications use an Xquik API key, not X passwords,
+A Twitter scraper API returns visible social media data through documented
+routes. Applications authenticate with an Xquik API key, not X passwords,
 cookies, 2FA codes, or guest tokens.
 
 The REST API returns structured tweets, user profiles, timelines, followers,
