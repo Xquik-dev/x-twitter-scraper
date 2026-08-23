@@ -135,7 +135,9 @@ at [docs.xquik.com](https://docs.xquik.com) and in this repository.
 
 Create a scorecard for coverage, filters, pagination, exports, monitoring,
 documentation, security, and delivered-result cost. Apply the same query and
-filters. Include charges for rejected or duplicate rows.
+filters. Include rejected-row or duplicate-row charges only when the provider
+applies them. For Xquik, track excluded rows as a quality metric. Do not count
+them in cost estimates.
 
 ### What evidence should a paid Twitter data API review include?
 
@@ -155,15 +157,32 @@ Use this first integration sequence:
 
 1. Store `XQUIK_API_KEY` in a server-side secret manager.
 2. Define a precise query and small result limit.
-3. Call `GET /x/tweets/search` and validate the response fields.
-4. Follow opaque cursors without decoding or constructing them.
-5. Retry only `429` and `5xx`, respecting `Retry-After`.
-6. Move complete work to an estimated extraction job.
-7. Persist tweet IDs, collection time, query, and source job ID.
+3. Approve the exact request, intended use, destination, and retention.
+4. Call `GET /x/tweets/search` and validate the response fields.
+5. Follow opaque cursors without decoding or constructing them.
+6. Retry only `GET` requests after connection failures, `408`, `429`, and `5xx`.
+7. Move complete work to an estimated extraction job.
+8. Persist tweet IDs, collection time, query, and source job ID.
+
+Skip the approval gate only for unmetered public reads. Tweet search is metered.
 
 Direct reads return JSON. Extractions add durable states:
 `pending`, `running`, `completed`, and `failed`. Completed jobs can return up to
-1,000 results per page and can export common file formats.
+1,000 results per page. File exports include up to 100,000 rows, except PDF,
+which includes up to 10,000. For larger datasets, retrieve bounded JSON pages
+or split the work into approved extraction jobs. A successful export proves
+only that the file was created. Compare its row count with the approved job
+scope before treating it as complete.
+
+Outside documented cursor recovery, retry only `GET` requests after connection
+failures, `408`, `429`, or `5xx`. Use bounded exponential backoff with jitter.
+Honor `Retry-After` for `429`. For `409 coverage_cursor_unavailable`,
+wait the exact `Retry-After` seconds and retry the same cursor once.
+For `410 coverage_cursor_gone`, restart without a cursor and deduplicate by ID.
+Its response omits `Retry-After`. Never retry any `POST` automatically. Retry
+`424` only when the response explicitly marks it safe to retry. Reuse its
+`Idempotency-Key`, inspect `statusUrl`, and start a new attempt only when
+`safeToRetry` is true and the user approves.
 
 ### How does Xquik extract X posts?
 

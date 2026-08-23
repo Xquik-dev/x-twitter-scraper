@@ -4,7 +4,7 @@
 
 interface TweetMediaItem {
   mediaUrl: string;
-  type: string;       // "photo" | "video" | "animated_gif"
+  type: "photo" | "video" | "animated_gif";
   url: string;
   adultContent?: boolean; allowDownload?: boolean;
   altText?: string; availabilityReason?: string;
@@ -30,12 +30,13 @@ interface Tweet {
   text: string;
   author?: TweetAuthor;
   createdAt?: string;
-  retweetCount: number;
-  replyCount: number;
-  likeCount: number;
-  quoteCount: number;
-  viewCount: number;
-  bookmarkCount: number;
+  inReplyToId?: string;
+  retweetCount?: number;
+  replyCount?: number;
+  likeCount?: number;
+  quoteCount?: number;
+  viewCount?: number;
+  bookmarkCount?: number;
   media?: TweetMediaItem[];
   article?: Record<string, unknown>;
   card?: Record<string, unknown>;
@@ -80,9 +81,9 @@ interface TweetSearchResult {
   id: string;
   text: string;
   createdAt?: string;
-  likeCount: number;    // Zero can mean X did not report the count
-  retweetCount: number; // Zero can mean X did not report the count
-  replyCount: number;   // Zero can mean X did not report the count
+  likeCount?: number;
+  retweetCount?: number;
+  replyCount?: number;
   media?: TweetMediaItem[];
   author?: UserProfile;
 }

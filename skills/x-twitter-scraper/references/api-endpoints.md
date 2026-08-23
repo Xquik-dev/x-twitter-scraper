@@ -4,7 +4,12 @@ Use this index to load only the REST API section needed for the task.
 
 Send requests to `https://xquik.com/api/v1`.
 
-All requests require the `x-api-key` header unless the section says session auth only. All responses are JSON. HTTPS only.
+All requests require the `x-api-key` header unless the section says session auth only. HTTPS only.
+
+JSON endpoints return JSON. Export endpoints return files. Read `Content-Type`
+before decoding the body. Use `Content-Disposition` for the suggested filename.
+Call `response.json()` whenever `Content-Type` indicates JSON. This includes
+ordinary JSON routes and JSON exports. Handle every non-JSON export as a file.
 
 Treat `XQUIK_API_KEY` as a secret. Load it from a secret manager or environment
 variable. Send it only in the HTTPS `x-api-key` header to `xquik.com`. Never put

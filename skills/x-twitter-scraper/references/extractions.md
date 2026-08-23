@@ -42,7 +42,8 @@ For example:
 ```json
 {
   "toolType": "reply_extractor",
-  "targetTweetId": "1893704267862470862"
+  "targetTweetId": "1893704267862470862",
+  "resultsLimit": 100
 }
 ```
 
@@ -62,7 +63,8 @@ For example:
 ```json
 {
   "toolType": "follower_explorer",
-  "targetUsername": "elonmusk"
+  "targetUsername": "elonmusk",
+  "resultsLimit": 100
 }
 ```
 
@@ -81,7 +83,8 @@ For example:
 ```json
 {
   "toolType": "user_likes",
-  "targetUsername": "elonmusk"
+  "targetUsername": "elonmusk",
+  "resultsLimit": 100
 }
 ```
 
@@ -104,7 +107,8 @@ For example:
 ```json
 {
   "toolType": "community_extractor",
-  "targetCommunityId": "1234567890"
+  "targetCommunityId": "1234567890",
+  "resultsLimit": 100
 }
 ```
 
@@ -122,7 +126,8 @@ For example:
 ```json
 {
   "toolType": "list_member_extractor",
-  "targetListId": "1234567890"
+  "targetListId": "1234567890",
+  "resultsLimit": 100
 }
 ```
 
@@ -138,7 +143,8 @@ For example:
 ```json
 {
   "toolType": "space_explorer",
-  "targetSpaceId": "1YqKDqDXAbwKV"
+  "targetSpaceId": "1YqKDqDXAbwKV",
+  "resultsLimit": 100
 }
 ```
 
@@ -155,7 +161,8 @@ For a people search:
 ```json
 {
   "toolType": "people_search",
-  "searchQuery": "machine learning engineer"
+  "searchQuery": "machine learning engineer",
+  "resultsLimit": 100
 }
 ```
 
