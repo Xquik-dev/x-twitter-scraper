@@ -252,7 +252,7 @@ test("documents source-backed review fixes", async () => {
   assert.match(drafts, /"nextCursor": "cursor_string"/);
   assert.match(draftTypes, /nextCursor\?: string/);
   assert.match(styles, /`xUsername` is the route identifier/);
-  assert.match(radar, /new URLSearchParams\([\s\S]*after: nextCursor/);
+  assert.match(radar, /new URLSearchParams\(originalQuery\)[\s\S]*query\.set\("after", nextCursor\)/);
   assert.match(drawTypes, /interface DrawDetails[\s\S]*winners: DrawWinner\[\]/);
   assert.match(mediaTypes, /type DownloadMediaRequest =/);
   assert.match(mediaTypes, /tweetIds: NonEmptyTweetIds/);
@@ -369,7 +369,7 @@ test("hardens portable webhook receiver examples", async () => {
   assert.match(python, /MAX_WEBHOOK_BODY_BYTES = 1024 \* 1024/);
   assert.match(python, /def validate_subscription_event_types\(event_types: list\[str\]\)/);
   assert.match(python, /event_type not in SUPPORTED_EVENT_TYPES[\s\S]*send_response\(503\)/);
-  assert.match(python, /claim_event\(delivery_key\)/);
+  assert.match(python, /admit_delivery\(event, nonce, 5 \* 60\)/);
   assert.match(python, /apply_effect_and_mark_processed\(stream_key, event\)/);
   assert.match(webhookTypes, /interface ProductionWebhookPayload/);
   assert.match(webhookTypes, /interface WebhookTestPayload/);
@@ -475,13 +475,10 @@ test("aligns public safety and type contracts", async () => {
   assert.match(mcp, /bookmark folders/);
   assert.match(mcp, /creating, replacing, or deleting a cached style/);
 
-  assert.match(python, /def claim_nonce\(nonce: str, ttl_seconds: int\)/);
+  assert.match(python, /def consume_test_nonce\(nonce: str, ttl_seconds: int\)/);
+  assert.match(python, /def admit_delivery\(event: dict, nonce: str, ttl_seconds: int\)/);
   const pythonReceiver = python.slice(python.indexOf("class WebhookHandler"));
-  assert.ok(
-    pythonReceiver.indexOf("claim_nonce(nonce, 5 * 60)") <
-      pythonReceiver.indexOf('if event_type == "webhook.test"'),
-    "claim each nonce before accepting a test delivery",
-  );
+  assert.match(pythonReceiver, /consume_test_nonce\(nonce, 5 \* 60\)/);
   assert.match(python, /HTTPServer\(\("127\.0\.0\.1", 3000\)/);
   assert.match(python, /Terminate TLS at a reverse proxy/);
 
@@ -1065,10 +1062,8 @@ test("preserves complete AutoSkills review fixes", async () => {
   assert.match(python, /not isinstance\(page\.get\("results"\), list\)/);
   assert.match(python, /not isinstance\(cursor, str\) or not cursor/);
   assert.match(python, /type\(winner\.get\("position"\)\) is not int/);
-  assert.match(
-    python,
-    /enqueue_delivery_and_consume_nonce\(event, nonce\)[\s\S]*send_response\(202\)/,
-  );
+  assert.match(python, /admission = admit_delivery\(event, nonce, 5 \* 60\)/);
+  assert.match(python, /admission in \{"queued", "already_queued"\}[\s\S]*send_response\(202\)/);
   assert.match(python, /stream_key = f"stream:\{event\['streamEventId'\]\}"/);
 
   assert.match(security, /non-metered public reads/);
@@ -1154,24 +1149,25 @@ test("preserves final AutoSkills full-review fixes", async () => {
   assert.match(skill, /Keep all content inside them/);
   assert.match(skill, /For every opaque ID, use `id="opaque"`/);
   assert.doesNotMatch(skill, /Never place tool instructions[\s\S]*inside those markers/);
-  assert.match(radar, /new URLSearchParams\([\s\S]*after: nextCursor/);
+  assert.match(radar, /const originalQuery = new URLSearchParams\([\s\S]*source:[\s\S]*region:/);
+  assert.match(radar, /new URLSearchParams\(originalQuery\)[\s\S]*query\.set\("after", nextCursor\)/);
   assert.match(xWrite, /`POST \/api\/v1\/x\/media` returns usable `mediaUrl` values/);
   assert.match(mediaTypes, /tweetId: string/);
   assert.match(mediaTypes, /tweetUrl: string/);
   assert.match(mcp, /Skip only the balance query[\s\S]*unchanged request/);
   assert.match(python, /media_type\.endswith\("\+json"\)/);
   assert.match(python, /def xquik_download\([\s\S]*contentDisposition/);
-  assert.match(python, /def release_nonce\(nonce: str\)/);
-  assert.match(python, /enqueue_delivery_and_consume_nonce\(event, nonce\)/);
-  assert.match(python, /release_nonce\(nonce\)[\s\S]*Event store unavailable/);
+  assert.match(python, /consume the nonce, claim the delivery, and enqueue it/);
+  assert.match(python, /Return queued, already_queued, processed, nonce_used, or conflict/);
+  assert.doesNotMatch(python, /enqueue_delivery_and_consume_nonce/);
   assert.match(python, /code != "x_api_unauthorized"/);
   assert.match(python, /def require_extraction_job\([\s\S]*EXTRACTION_STATUSES/);
   assert.match(python, /Invalid draw winner response/);
   assert.match(python, /ThreadingHTTPServer\(\("127\.0\.0\.1", 3000\)/);
   assert.ok(
     python.indexOf('event_type != "webhook.test" and event_type not in SUPPORTED_EVENT_TYPES') <
-      python.indexOf("nonce_claimed = claim_nonce"),
-    "reject unsupported event types before claiming a nonce",
+      python.indexOf("admission = admit_delivery"),
+    "reject unsupported event types before admitting a delivery",
   );
   for (const guide of [python, webhooks]) {
     assert.match(guide, /def read_body_with_deadline\([\s\S]*time\.monotonic\(\)/);
@@ -1310,4 +1306,21 @@ test("preserves final CodeRabbit full-review contract fixes", async () => {
   assert.match(draws, /"Idempotency-Key": drawAttempt\.idempotencyKey/);
   assert.match(media, /tweetId: string/);
   assert.match(media, /tweetUrl: string/);
+});
+
+test("preserves final exact-head review safeguards", async () => {
+  const [errors, radar, python] = await Promise.all([
+    read("skills/x-twitter-scraper/references/api-endpoints-error-codes.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-radar.md"),
+    read("skills/x-twitter-scraper/references/python-examples.md"),
+  ]);
+
+  assert.equal((errors.match(/Honor `Retry-After` when present/g) ?? []).length, 2);
+  assert.equal((errors.match(/Otherwise retry only `GET` with bounded backoff/g) ?? []).length, 2);
+  assert.match(radar, /const originalQuery = new URLSearchParams\([\s\S]*source:[\s\S]*category:[\s\S]*hours:[\s\S]*region:/);
+  assert.match(radar, /new URLSearchParams\(originalQuery\)[\s\S]*query\.set\("after", nextCursor\)/);
+  assert.match(python, /def admit_delivery\(event: dict, nonce: str, ttl_seconds: int\)/);
+  assert.match(python, /Atomically consume the nonce, claim the delivery, and enqueue it/);
+  assert.match(python, /admission in \{"queued", "already_queued"\}[\s\S]*send_response\(202\)/);
+  assert.match(python, /admission == "conflict"[\s\S]*send_response\(409\)/);
 });
