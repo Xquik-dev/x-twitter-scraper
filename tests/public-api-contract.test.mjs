@@ -245,7 +245,14 @@ test("documents source-backed review fixes", async () => {
   assert.match(draws, /Remaining credits cap how many replies and retweeters/);
   assert.match(draws, /"winners": \[\]/);
   assert.match(errors, /\| 424 \| `x_api_unavailable` \|/);
-  assert.match(extractions, /new URLSearchParams\(\{ limit: "1000", after: nextCursor \}\)/);
+  assert.equal(
+    (extractions.match(/new URLSearchParams\(\{ limit: "(?:100|1000)" \}\)/g) ?? []).length,
+    2,
+  );
+  assert.equal(
+    (extractions.match(/typeof nextCursor === "string" && nextCursor/g) ?? []).length,
+    2,
+  );
   assert.match(events, /"id": "1893556789012345678"/);
   assert.match(events, /"author": \{/);
   assert.match(events, /"createdAt": "2026-02-24T16:45:00.000Z"/);
@@ -400,7 +407,7 @@ test("hardens bounded workflows and persistent delivery setup", async () => {
   assert.match(skill, /`5xx`:[^\n]*up to 3 times/);
   assert.doesNotMatch(monitorEndpoints, /For creates and updates/);
   assert.match(webhookEndpoints, /atomic insert-if-absent/);
-  assert.match(webhookEndpoints, /`deliveryId` separately/);
+  assert.match(webhookEndpoints, /`deliveryId` and `streamEventId` separately/);
   assert.match(webhookEndpoints, /`127\.0\.0\.1`/);
 
   const requestSection = extractions.slice(0, extractions.indexOf("## Response"));
@@ -883,7 +890,7 @@ test("preserves audited integration safety invariants", async () => {
   assert.match(support, /function assertCreateTicketRequest/);
   assert.match(
     pipeline,
-    /deduplicate by `eventId`[\s\S]*webhook deliveries by `deliveryId`/,
+    /deduplicate by `eventId`[\s\S]*webhook `deliveryId` and `streamEventId` values/,
   );
   assert.match(support, /subject\.length > 500/);
   assert.match(xTypes, /interface TweetReplies[\s\S]*next_cursor: string/);
@@ -942,7 +949,10 @@ test("preserves reviewed approval and decoding safeguards", async () => {
   assert.match(supportTypes, /typeof candidate\.body !== "string"/);
   assert.match(supportTypes, /!Array\.isArray\(candidate\.attachments\)/);
   assert.match(supportTypes, /typeof subject !== "string"/);
-  assert.match(workflows, /Math\.min\(\n\s+maxRetryDelay,/);
+  assert.match(
+    workflows,
+    /const delay = retryAfterMs !== null\s+\? retryAfterMs\s+: Math\.min\(maxRetryDelay/,
+  );
   assert.match(skillCard, /MCP review uses client-managed\nOAuth 2\.1/);
   assert.match(mediaEndpoints, /`tweetId` \| string \| Numeric tweet ID alias/);
   assert.match(mediaEndpoints, /`tweetUrl` \| string \| Tweet URL alias/);
@@ -1287,8 +1297,12 @@ test("preserves final CodeRabbit full-review contract fixes", async () => {
     ]);
 
   assert.equal(
-    (endpointExtractions.match(/new URLSearchParams\(\{ limit: "(?:100|1000)", after: nextCursor \}\)/g) ?? [])
+    (endpointExtractions.match(/new URLSearchParams\(\{ limit: "(?:100|1000)" \}\)/g) ?? [])
       .length,
+    2,
+  );
+  assert.equal(
+    (endpointExtractions.match(/typeof nextCursor === "string" && nextCursor/g) ?? []).length,
     2,
   );
   assert.match(extractions, /new URLSearchParams\(\{ limit: "1000" \}\)[\s\S]*params\.set\("after", nextCursor\)/);
@@ -1357,4 +1371,40 @@ test("preserves final full-review safeguards", async () => {
   assert.match(workflows, /const exportProposal = \{[\s\S]*jobId:[\s\S]*format:[\s\S]*rowCount:[\s\S]*schema:/);
   assert.match(workflows, /hmacVerificationPlan: \{[\s\S]*signatureHeader:[\s\S]*replayWindow:/);
   assert.match(workflows, /JSON\.stringify\(approvedDelivery\) !== JSON\.stringify\(deliveryProposal\)/);
+});
+
+test("preserves latest full-review pagination and delivery safeguards", async () => {
+  const [endpointExtractions, extractions, python, keywords, monitor, endpoints, pipeline, workflows] =
+    await Promise.all([
+      read("skills/x-twitter-scraper/references/api-endpoints-extractions.md"),
+      read("skills/x-twitter-scraper/references/extractions.md"),
+      read("skills/x-twitter-scraper/references/python-examples.md"),
+      read("skills/x-twitter-scraper/references/track-twitter-keywords-mentions.md"),
+      read("skills/x-twitter-scraper/references/monitor-twitter-webhooks.md"),
+      read("skills/x-twitter-scraper/references/api-endpoints-webhooks.md"),
+      read("skills/x-twitter-scraper/references/twitter-data-pipeline.md"),
+      read("skills/x-twitter-scraper/references/workflows.md"),
+    ]);
+
+  assert.doesNotMatch(endpointExtractions, /after: nextCursor/);
+  assert.equal(
+    (endpointExtractions.match(/params\.set\("after", nextCursor\)/g) ?? []).length,
+    2,
+  );
+  assert.match(
+    extractions,
+    /page === null[\s\S]*typeof page !== "object"[\s\S]*Array\.isArray\(page\)[\s\S]*typeof page\.hasMore !== "boolean"/,
+  );
+  assert.equal(
+    (python.match(/except \(json\.JSONDecodeError, UnicodeDecodeError\)/g) ?? []).length,
+    2,
+  );
+  for (const guide of [keywords, monitor, endpoints, pipeline]) {
+    assert.match(guide, /deliveryId/);
+    assert.match(guide, /streamEventId/);
+  }
+  assert.match(
+    workflows,
+    /const delay = retryAfterMs !== null\s+\? retryAfterMs\s+: Math\.min\(maxRetryDelay/,
+  );
 });
