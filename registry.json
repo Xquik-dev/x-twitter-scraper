@@ -10,11 +10,6 @@
       "description": "Install the X (Twitter) Scraper API and X API Alternative Skill. You do not need an official X developer account. You do not need to connect or use an X account for scraping. Not affiliated with X Corp.",
       "files": [
         {
-          "path": "skills/x-twitter-scraper/BENCHMARK.md",
-          "type": "registry:file",
-          "target": "~/.agents/skills/x-twitter-scraper/BENCHMARK.md"
-        },
-        {
           "path": "skills/x-twitter-scraper/LICENSE",
           "type": "registry:file",
           "target": "~/.agents/skills/x-twitter-scraper/LICENSE"
@@ -23,11 +18,6 @@
           "path": "skills/x-twitter-scraper/SKILL.md",
           "type": "registry:file",
           "target": "~/.agents/skills/x-twitter-scraper/SKILL.md"
-        },
-        {
-          "path": "skills/x-twitter-scraper/evals/evals.json",
-          "type": "registry:file",
-          "target": "~/.agents/skills/x-twitter-scraper/evals/evals.json"
         },
         {
           "path": "skills/x-twitter-scraper/metadata.json",
@@ -363,16 +353,6 @@
           "path": "skills/x-twitter-scraper/references/workflows.md",
           "type": "registry:file",
           "target": "~/.agents/skills/x-twitter-scraper/references/workflows.md"
-        },
-        {
-          "path": "skills/x-twitter-scraper/skill-card.md",
-          "type": "registry:file",
-          "target": "~/.agents/skills/x-twitter-scraper/skill-card.md"
-        },
-        {
-          "path": "skills/x-twitter-scraper/skillspector-report.md",
-          "type": "registry:file",
-          "target": "~/.agents/skills/x-twitter-scraper/skillspector-report.md"
         }
       ]
     }

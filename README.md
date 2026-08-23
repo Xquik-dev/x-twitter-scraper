@@ -102,10 +102,8 @@ or [open the complete documentation](https://docs.xquik.com).
 
 The title is a target, not a guarantee.
 
-Our [cost study](docs/research/cost-study/README.md) reviews 22 competitors. Its
-published unit model puts Xquik first in 4 filter-heavy workloads. Same-day live
-output matching is still open. The repository does not claim universal savings
-until those runs pass.
+Xquik suits filter-heavy jobs. It bills delivered results and supports
+server-side filters. Run the same job with each provider before choosing.
 
 Choose Xquik when you need several of these together:
 
@@ -380,8 +378,6 @@ reports one user's experience. It does not prove the same result for everyone.
 | X Reply Scraper | "Recommended. Thank you for the free usage, working." | furkkann1, 2026-07-31. [Source](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 | X Reply Scraper | "We are able to get much more replies comparing the other scrapers, thank you!" | Tovuk (Tovuk), 2026-07-31. [Source](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 
-Read the complete [Actor review audit](docs/research/apify-reviews/README.md).
-
 <!-- END APIFY TESTIMONIALS -->
 
 ## Bulk extraction and estimates
@@ -439,9 +435,8 @@ Current contracts prove these rules:
 | Apify diagnostic | At most 1 diagnostic row for named empty-run outcomes |
 
 Extraction inputs support `dedupeAcrossTargets` and `dedupeMode`. The live docs
-do not yet tie every deduplicated row to final credit deduction. The
-[contract review](docs/research/xquik-contract-2026-08-22.md) keeps that proof
-open. Do not treat an estimate as a final invoice.
+do not yet tie every deduplicated row to final credit deduction. Do not treat
+an estimate as a final invoice.
 
 ## Monitoring, events, and webhooks
 
@@ -504,9 +499,8 @@ stable IDs. Keep a lawful purpose and deletion plan for collected data.
 | General scraper | Flexible HTML or browser retrieval | You own parsing, pagination, schema drift, and cleanup |
 | Do it yourself | Full control over code and storage | You own browser state, pacing, proxies, breakage, and maintenance |
 
-Read the [22-provider cost study](docs/research/cost-study/README.md) and the
-[source review index](docs/research/sources/README.md). Vendor claims stay
-labeled. Synthetic workloads stay separate from measured runs.
+Compare providers with the same query, filters, result limit, and delivery
+format. Keep provider claims separate from your own test results.
 
 ## Common questions
 
@@ -570,12 +564,7 @@ high-risk work.
 - [Extraction workflow](https://docs.xquik.com/guides/extraction-workflow)
 - [MCP](https://docs.xquik.com/mcp/overview)
 - [112-question X API guide](skills/x-twitter-scraper/references/twitter-api-alternative-faq.md)
-- [Search question and keyword evidence](docs/research/seo/README.md)
-- [Apify Actor review audit](docs/research/apify-reviews/README.md)
 - [Security guidance](skills/x-twitter-scraper/references/security.md)
-- [Contribution guide](.github/CONTRIBUTING.md)
-- [Security policy](.github/SECURITY.md)
-- [Translation guide](docs/readme-translations.md)
 
 ## Contract date
 

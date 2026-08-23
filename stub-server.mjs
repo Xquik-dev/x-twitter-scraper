@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 
-// SPDX-FileCopyrightText: 2026 Xquik Contributors
+// SPDX-FileCopyrightText: 2026 Xquik
 // SPDX-License-Identifier: MIT
 
 // Package-verification stub for the stdio MCP protocol.

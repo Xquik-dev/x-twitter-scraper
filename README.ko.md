@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 2e43104d3de4a410c431e0dff67b26d069a86ea1ebf3c95558b191c23dc00969. -->
+<!-- Translation source SHA-256: 2fbc1f09dc0b381f36d28649ae49289961b02826898a4cb435ee52172e336430. -->
 
 # X(Twitter) Scraper API (좋은 X API 대안)
 
@@ -104,9 +104,9 @@ type SearchResponse = {
 
 ## Xquik을 선택하는 이유
 
-[비용 연구](docs/research/cost-study/README.md)는 22개 선택지를 비교합니다. 계산
-모델에서 Xquik은 필터가 많은 4개 작업의 비용이 가장 낮습니다. 실시간 결과 비교는
-아직 끝나지 않았습니다. 그래서 모든 작업이 더 저렴하다고 말하지 않습니다.
+Xquik은 필터가 많은 작업에 적합합니다. 전달된 결과를 기준으로 요금이 부과됩니다.
+서버 필터로 불필요한 결과를 줄일 수 있습니다. 선택하기 전에 같은 작업을 각 업체에서
+테스트하세요.
 
 필터, 내보내기, 모니터, webhook, 여러 클라이언트가 필요하면 Xquik이 알맞습니다.
 X 고유 계약이 필요하면 공식 X API가 알맞습니다. HTML만 필요하면 일반 scraper도
@@ -304,8 +304,6 @@ $0.00015, 무료 요금제는 행당 $0.015로 표시되었습니다. 실행 전
 | X Reply Scraper | "Recommended. Thank you for the free usage, working." | furkkann1, 2026-07-31. [출처](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 | X Reply Scraper | "We are able to get much more replies comparing the other scrapers, thank you!" | Tovuk (Tovuk), 2026-07-31. [출처](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 
-자세한 내용은 [Actor 후기 감사](docs/research/apify-reviews/README.md)를 확인하세요.
-
 <!-- END APIFY TESTIMONIALS -->
 
 ## 필터와 사용 사례
@@ -480,17 +478,10 @@ gemini skills list
 - [대량 추출 흐름](https://docs.xquik.com/guides/extraction-workflow)
 - [MCP 가이드](https://docs.xquik.com/mcp/overview)
 - [112개 X API 질문 가이드](skills/x-twitter-scraper/references/twitter-api-alternative-faq.md)
-- [질문 및 키워드 근거](docs/research/seo/README.md)
-- [Apify Actor 후기 감사](docs/research/apify-reviews/README.md)
 - [보안 가이드](skills/x-twitter-scraper/references/security.md)
-- [기여 가이드](.github/CONTRIBUTING.md)
-- [보안 정책](.github/SECURITY.md)
 - [Python 예제](skills/x-twitter-scraper/references/python-examples.md)
 - [API 비교](skills/x-twitter-scraper/references/compare-twitter-apis.md)
-- [비용 연구](docs/research/cost-study/README.md)
 - [영문 전체 README](README.md)
-
-파일을 최신 상태로 유지하려면 [번역 가이드](docs/readme-translations.md)를 따르세요.
 
 ## 계약 확인일
 

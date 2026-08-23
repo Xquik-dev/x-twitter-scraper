@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 2e43104d3de4a410c431e0dff67b26d069a86ea1ebf3c95558b191c23dc00969. -->
+<!-- Translation source SHA-256: 2fbc1f09dc0b381f36d28649ae49289961b02826898a4cb435ee52172e336430. -->
 
 # X（Twitter）抓取 API（优秀的 X API 替代方案）
 
@@ -102,9 +102,8 @@ type SearchResponse = {
 
 ## 为什么选择 Xquik
 
-[成本研究](docs/research/cost-study/README.md)比较了 22 个选项。已发布模型显示，
-Xquik 在 4 个重筛选工作负载中成本最低。实时结果匹配仍未完成。因此，本仓库
-不会声称所有场景都能省钱。
+Xquik 适合筛选条件较多的任务。它按交付结果计费。服务端筛选可减少无用结果。
+选择前，请用同一任务测试每个服务商。
 
 需要筛选、导出、监控、webhook 和多个客户端时，可选择 Xquik。需要 X 的原始
 合同与支持时，可选择官方 X API。只需要 HTML 时，可选择通用 scraper。
@@ -297,8 +296,6 @@ Apify 按方案显示价格。2026-08-22，付费方案每交付一行显示 $0.
 | X Reply Scraper | "Recommended. Thank you for the free usage, working." | furkkann1, 2026-07-31. [来源](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 | X Reply Scraper | "We are able to get much more replies comparing the other scrapers, thank you!" | Tovuk (Tovuk), 2026-07-31. [来源](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 
-查看完整的 [Actor 评论审计](docs/research/apify-reviews/README.md)。
-
 <!-- END APIFY TESTIMONIALS -->
 
 ## 筛选条件和使用场景
@@ -470,17 +467,10 @@ gemini skills list
 - [批量提取流程](https://docs.xquik.com/guides/extraction-workflow)
 - [MCP 指南](https://docs.xquik.com/mcp/overview)
 - [112 个 X API 问题指南](skills/x-twitter-scraper/references/twitter-api-alternative-faq.md)
-- [问题与关键词证据](docs/research/seo/README.md)
-- [Apify Actor 评论审计](docs/research/apify-reviews/README.md)
 - [安全指南](skills/x-twitter-scraper/references/security.md)
-- [贡献指南](.github/CONTRIBUTING.md)
-- [安全政策](.github/SECURITY.md)
 - [Python 示例](skills/x-twitter-scraper/references/python-examples.md)
 - [API 对比](skills/x-twitter-scraper/references/compare-twitter-apis.md)
-- [成本研究](docs/research/cost-study/README.md)
 - [英文完整版 README](README.md)
-
-请按照[翻译指南](docs/readme-translations.md)保持此文件同步。
 
 ## 合同日期
 

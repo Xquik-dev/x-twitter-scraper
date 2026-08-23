@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 2e43104d3de4a410c431e0dff67b26d069a86ea1ebf3c95558b191c23dc00969. -->
+<!-- Translation source SHA-256: 2fbc1f09dc0b381f36d28649ae49289961b02826898a4cb435ee52172e336430. -->
 
 # X（Twitter）Scraper API（優れた X API の代替手段）
 
@@ -103,9 +103,9 @@ type SearchResponse = {
 
 ## Xquik を選ぶ理由
 
-[コスト調査](docs/research/cost-study/README.md)では 22 の選択肢を比較しました。
-公開済みモデルでは、フィルターの多い 4 つの処理で Xquik が最安です。ライブ結果の
-一致試験は未完了です。そのため、すべての処理で安くなるとは主張しません。
+Xquik はフィルターが多い処理に向いています。料金は取得できた結果に基づきます。
+サーバー側のフィルターで不要な結果を減らせます。選ぶ前に各サービスで同じ処理を
+試してください。
 
 フィルター、出力、監視、webhook、複数クライアントが必要なら Xquik が向きます。
 X 固有の契約が必要なら公式 X API が向きます。HTML だけなら一般的な scraper も
@@ -303,8 +303,6 @@ $0.00015、無料プランは行ごとに $0.015 と表示されました。実�
 | X Reply Scraper | "Recommended. Thank you for the free usage, working." | furkkann1, 2026-07-31. [出典](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 | X Reply Scraper | "We are able to get much more replies comparing the other scrapers, thank you!" | Tovuk (Tovuk), 2026-07-31. [出典](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 
-詳しくは [Actor レビュー監査](docs/research/apify-reviews/README.md) を確認してください。
-
 <!-- END APIFY TESTIMONIALS -->
 
 ## フィルターと用途
@@ -479,17 +477,10 @@ gemini skills list
 - [一括取得フロー](https://docs.xquik.com/guides/extraction-workflow)
 - [MCP ガイド](https://docs.xquik.com/mcp/overview)
 - [112 問の X API ガイド](skills/x-twitter-scraper/references/twitter-api-alternative-faq.md)
-- [質問とキーワードの根拠](docs/research/seo/README.md)
-- [Apify Actor レビュー監査](docs/research/apify-reviews/README.md)
 - [セキュリティガイド](skills/x-twitter-scraper/references/security.md)
-- [コントリビューションガイド](.github/CONTRIBUTING.md)
-- [セキュリティポリシー](.github/SECURITY.md)
 - [Python の例](skills/x-twitter-scraper/references/python-examples.md)
 - [API 比較](skills/x-twitter-scraper/references/compare-twitter-apis.md)
-- [コスト調査](docs/research/cost-study/README.md)
 - [英語版 README](README.md)
-
-更新時は[翻訳ガイド](docs/readme-translations.md)に従ってください。
 
 ## 契約の確認日
 

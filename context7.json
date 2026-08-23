@@ -5,15 +5,11 @@
   "branch": "master",
   "excludeFolders": [
     ".claude-plugin",
-    ".github",
-    "docker-mcp-registry",
-    "mcpize"
+    "docker-mcp-registry"
   ],
   "excludeFiles": [
     ".DS_Store",
-    ".gitignore",
     ".mcp.json",
-    "CODE_OF_CONDUCT.md",
     "LICENSE",
     "openclaw.plugin.json",
     "package.json",
@@ -32,6 +28,5 @@
     "Use commands/*.md for command examples.",
     "Keep private implementation details out of external text. Use Xquik API, read service, write service, or browser service."
   ],
-  "url": "https://context7.com/xquik-dev/x-twitter-scraper",
-  "public_key": "pk_oCPeRRqZFJsY4cCUSotDD"
+  "url": "https://context7.com/xquik-dev/x-twitter-scraper"
 }

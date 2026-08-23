@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 2e43104d3de4a410c431e0dff67b26d069a86ea1ebf3c95558b191c23dc00969. -->
+<!-- Translation source SHA-256: 2fbc1f09dc0b381f36d28649ae49289961b02826898a4cb435ee52172e336430. -->
 
 # X (Twitter) Scraper API (gute X API-Alternative)
 
@@ -105,10 +105,9 @@ Eine gefilterte leere Seite kann trotzdem eine Folgeseite haben.
 
 ## Warum Xquik wählen?
 
-Die [Kostenstudie](docs/research/cost-study/README.md) vergleicht 22 Optionen.
-Das Modell setzt Xquik bei 4 filterreichen Aufgaben auf den ersten Platz. Der
-Live-Abgleich der Ergebnisse ist noch offen. Deshalb versprechen wir keine
-Ersparnis für jeden Fall.
+Xquik eignet sich für filterreiche Aufgaben. Abgerechnet werden gelieferte
+Ergebnisse. Serverseitige Filter reduzieren unnötige Ergebnisse. Teste denselben
+Auftrag bei jedem Anbieter.
 
 Wähle Xquik für Filter, Exporte, Monitore, Webhooks und mehrere Clients. Wähle
 die offizielle X API, wenn du genau ihren Vertrag brauchst. Ein allgemeiner
@@ -306,8 +305,6 @@ Sie garantiert nicht dasselbe Ergebnis für alle.
 | X Reply Scraper | "Recommended. Thank you for the free usage, working." | furkkann1, 2026-07-31. [Quelle](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 | X Reply Scraper | "We are able to get much more replies comparing the other scrapers, thank you!" | Tovuk (Tovuk), 2026-07-31. [Quelle](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 
-Lies die vollständige [Actor-Bewertungsprüfung](docs/research/apify-reviews/README.md).
-
 <!-- END APIFY TESTIMONIALS -->
 
 ## Filter und Anwendungsfälle
@@ -491,18 +488,10 @@ Nutze das passende SDK oder Werkzeug für dein Projekt.
 - [Ablauf für Massenextraktionen](https://docs.xquik.com/guides/extraction-workflow)
 - [MCP-Anleitung](https://docs.xquik.com/mcp/overview)
 - [X-API-Leitfaden mit 112 Fragen](skills/x-twitter-scraper/references/twitter-api-alternative-faq.md)
-- [Fragen- und Suchbegriffsnachweise](docs/research/seo/README.md)
-- [Prüfung der Apify-Actor-Bewertungen](docs/research/apify-reviews/README.md)
 - [Sicherheitsleitfaden](skills/x-twitter-scraper/references/security.md)
-- [Beitragsleitfaden](.github/CONTRIBUTING.md)
-- [Sicherheitsrichtlinie](.github/SECURITY.md)
 - [Python-Beispiele](skills/x-twitter-scraper/references/python-examples.md)
 - [API-Vergleich](skills/x-twitter-scraper/references/compare-twitter-apis.md)
-- [Kostenstudie](docs/research/cost-study/README.md)
 - [Vollständige englische README](README.md)
-
-Nutze den [Übersetzungsleitfaden](docs/readme-translations.md), um diese Datei
-aktuell zu halten.
 
 ## Vertragsdatum
 

@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 2e43104d3de4a410c431e0dff67b26d069a86ea1ebf3c95558b191c23dc00969. -->
+<!-- Translation source SHA-256: 2fbc1f09dc0b381f36d28649ae49289961b02826898a4cb435ee52172e336430. -->
 
 # X (Twitter) Scraper API (En iyi X API alternatifi)
 
@@ -105,10 +105,9 @@ bir sayfadan sonra başka bir sayfa gelebilir.
 
 ## Neden Xquik?
 
-[Maliyet çalışması](docs/research/cost-study/README.md) 22 seçeneği karşılaştırır.
-Yayımlanmış model, filtre ağırlıklı 4 yükte Xquik'i ilk sıraya koyuyor. Canlı
-sonuç eşleştirme testleri henüz bitmedi. Bu yüzden her durumda tasarruf sözü
-vermiyoruz.
+Xquik, çok filtreli işler için uygundur. Yalnızca teslim edilen sonuçlar
+ücretlendirilir. Sunucu filtreleri gereksiz sonuçları azaltır. Karar vermeden
+önce aynı işi her sağlayıcıda dene.
 
 Filtre, dışa aktarma, izleme, webhook ve farklı istemciler gerekiyorsa Xquik'i
 seç. X'in kendi sözleşmesi gerekiyorsa resmî X API'sini seç. Yalnızca HTML
@@ -307,8 +306,6 @@ Herkes için aynı sonucu garanti etmez.
 | X Reply Scraper | "Recommended. Thank you for the free usage, working." | furkkann1, 2026-07-31. [Kaynak](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 | X Reply Scraper | "We are able to get much more replies comparing the other scrapers, thank you!" | Tovuk (Tovuk), 2026-07-31. [Kaynak](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 
-Tüm ayrıntılar için [Actor yorum denetimini](docs/research/apify-reviews/README.md) oku.
-
 <!-- END APIFY TESTIMONIALS -->
 
 ## Filtreler ve kullanım alanları
@@ -488,18 +485,10 @@ Projene uyan SDK'yı veya aracı kullan.
 - [Toplu iş akışı](https://docs.xquik.com/guides/extraction-workflow)
 - [MCP kılavuzu](https://docs.xquik.com/mcp/overview)
 - [112 soruluk X API kılavuzu](skills/x-twitter-scraper/references/twitter-api-alternative-faq.md)
-- [Soru ve anahtar kelime kanıtları](docs/research/seo/README.md)
-- [Apify Actor yorum denetimi](docs/research/apify-reviews/README.md)
 - [Güvenlik kılavuzu](skills/x-twitter-scraper/references/security.md)
-- [Katkı kılavuzu](.github/CONTRIBUTING.md)
-- [Güvenlik politikası](.github/SECURITY.md)
 - [Python örnekleri](skills/x-twitter-scraper/references/python-examples.md)
 - [API karşılaştırması](skills/x-twitter-scraper/references/compare-twitter-apis.md)
-- [Maliyet çalışması](docs/research/cost-study/README.md)
 - [İngilizce README](README.md)
-
-Bu dosyayı güncel tutmak için [çeviri kılavuzunu](docs/readme-translations.md)
-kullan.
 
 ## Sözleşme tarihi
 

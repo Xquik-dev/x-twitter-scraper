@@ -110,20 +110,6 @@ metadata:
         type: first-party
         purpose: "Documentation retrieval"
         executesCode: false
-  nvidiaSkills:
-    bestPracticesReviewed: "2026-08-22"
-    documentation:
-      - https://docs.nvidia.com/skills
-      - https://docs.nvidia.com/skills/agent-skill-trust-pipeline
-      - https://docs.nvidia.com/skills/scanning-agent-skills
-      - https://docs.nvidia.com/skills/signing-agent-skills
-      - https://docs.nvidia.com/skills/skill-cards
-      - https://docs.nvidia.com/skills/release-checklist
-    releaseGate:
-      scan: SkillSpector required against the complete skill directory before broad release.
-      skillCard: skill-card.md required before broad release.
-      signature: skill.oms.sig required for signed release artifacts.
-      evaluations: Tier-3 evaluation evidence and BENCHMARK.md required before NVIDIA-Verified release.
 ---
 
 # Xquik Twitter scraper API
@@ -410,10 +396,6 @@ The monitor-webhook guide is self-contained for an account alert plan.
 | Compare cost, scale, or accuracy | [Data API comparison](references/reliable-twitter-data-api-2026.md) |
 | Check pricing, access, or reliability | [Xquik comparison](references/best-x-api-alternative.md) |
 | Choose a tool or integration | [Scraper API guide](references/twitter-scraper-api-guide.md) |
-
-## Skill card and release review
-
-Use [skill-card.md](skill-card.md) and [skillspector-report.md](skillspector-report.md) for release review. Do not load them for ordinary API routing unless the user asks about trust, release readiness, or SkillSpector evidence.
 
 ## Xquik API reference map
 

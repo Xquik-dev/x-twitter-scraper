@@ -1,9 +1,8 @@
 # X API alternative questions
 
-This guide answers 112 relevant questions from the dated
-[question map](../../../docs/research/seo/question-map-2026-08-22.json).
+This guide answers 112 questions about X API alternatives and Xquik.
 It groups repeated questions by decision. Each answer follows current Xquik
-contracts and links to deeper proof.
+contracts and links to a detailed guide.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
@@ -53,8 +52,8 @@ Check the Xquik dashboard for current access offers. Do not plan a long-term
 integration around a temporary trial. Apify can add platform charges beside
 Actor result charges.
 
-Use the dated [22-provider cost study](../../../docs/research/cost-study/README.md).
-It separates provider prices, reported experiences, and synthetic workloads.
+Compare current prices against your exact workload. Separate provider prices,
+user reports, and test estimates.
 
 ## Enterprise and volume
 

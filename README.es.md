@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 2e43104d3de4a410c431e0dff67b26d069a86ea1ebf3c95558b191c23dc00969. -->
+<!-- Translation source SHA-256: 2fbc1f09dc0b381f36d28649ae49289961b02826898a4cb435ee52172e336430. -->
 
 # API de scraping de X (Twitter) (mejor alternativa a la API de X)
 
@@ -105,10 +105,9 @@ página filtrada puede estar vacía y aun tener otra página.
 
 ## ¿Por qué elegir Xquik?
 
-El [estudio de costos](docs/research/cost-study/README.md) compara 22 opciones.
-El modelo coloca a Xquik primero en 4 cargas con muchos filtros. Las pruebas
-de resultados en vivo siguen pendientes. Por eso no afirmamos un ahorro
-universal.
+Xquik funciona bien para cargas con muchos filtros. Cobra por los resultados
+entregados. Sus filtros del servidor reducen resultados innecesarios. Prueba el
+mismo trabajo con cada proveedor.
 
 Elige Xquik si necesitas filtros, exportaciones, monitores, webhooks y varios
 clientes con una sola clave. Elige la API oficial de X si necesitas su contrato
@@ -307,8 +306,6 @@ describe la experiencia de una persona. No garantiza el mismo resultado para tod
 | X Reply Scraper | "Recommended. Thank you for the free usage, working." | furkkann1, 2026-07-31. [Fuente](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 | X Reply Scraper | "We are able to get much more replies comparing the other scrapers, thank you!" | Tovuk (Tovuk), 2026-07-31. [Fuente](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 
-Consulta la [auditoría completa de comentarios](docs/research/apify-reviews/README.md).
-
 <!-- END APIFY TESTIMONIALS -->
 
 ## Filtros y casos de uso
@@ -491,18 +488,10 @@ Usa el SDK o la herramienta que encaje con tu proyecto.
 - [Flujo de extracción](https://docs.xquik.com/guides/extraction-workflow)
 - [Guía de MCP](https://docs.xquik.com/mcp/overview)
 - [Guía de 112 preguntas sobre la API de X](skills/x-twitter-scraper/references/twitter-api-alternative-faq.md)
-- [Evidencia de preguntas y palabras clave](docs/research/seo/README.md)
-- [Auditoría de comentarios de Actors](docs/research/apify-reviews/README.md)
 - [Guía de seguridad](skills/x-twitter-scraper/references/security.md)
-- [Guía de contribución](.github/CONTRIBUTING.md)
-- [Política de seguridad](.github/SECURITY.md)
 - [Ejemplos de Python](skills/x-twitter-scraper/references/python-examples.md)
 - [Comparación de APIs](skills/x-twitter-scraper/references/compare-twitter-apis.md)
-- [Estudio de costos](docs/research/cost-study/README.md)
 - [README completo en inglés](README.md)
-
-Consulta la [guía de traducción](docs/readme-translations.md) para mantener este
-archivo sincronizado.
 
 ## Fecha del contrato
 
