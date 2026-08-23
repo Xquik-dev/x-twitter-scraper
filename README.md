@@ -29,7 +29,7 @@
 
 Use the X (Twitter) Scraper API to search tweets, export followers, create monitors, and receive signed webhooks. [Xquik](https://docs.xquik.com) provides 128 REST API operations for public X data and approved account actions. Use REST directly or connect through MCP and an SDK.
 
-The npm package `x-developer` contains this Skill and plugin bundle. The separate `x-twitter-scraper` package is the TypeScript SDK.
+This repository is a portable Agent Plugins v1 package. It includes its Skills and hosted MCP server. The npm package is `x-developer`. The separate `x-twitter-scraper` package is the TypeScript SDK.
 
 The `x-developer` bundle is v2.6.7. Hosted MCP v2.6.0 exposes 120 catalog
 routes through 2 tools. Of these, 119 support JSON or text. Use REST for binary

@@ -72,6 +72,8 @@
     "commands",
     "context7.json",
     "logo.png",
+    "mcp.json",
+    "plugin.json",
     "server.json",
     "scripts",
     "skills",

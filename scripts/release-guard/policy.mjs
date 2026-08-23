@@ -7,6 +7,7 @@ function parseJsonVersion(raw) {
 }
 
 export const versionSurfaces = [
+  { path: "plugin.json", get: parseJsonVersion },
   { path: "openclaw.plugin.json", get: parseJsonVersion },
   { path: ".codex-plugin/plugin.json", get: parseJsonVersion },
   { path: ".claude-plugin/plugin.json", get: parseJsonVersion },

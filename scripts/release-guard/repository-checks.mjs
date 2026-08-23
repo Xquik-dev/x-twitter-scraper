@@ -32,6 +32,8 @@ const publicContractFiles = [
   "README.md",
   "openclaw.plugin.json",
   "package.json",
+  "plugin.json",
+  "mcp.json",
   "server.json",
   "stub-server.mjs",
 ];
@@ -164,6 +166,8 @@ function collectPackageFileDrifts() {
     ".claude-plugin/plugin.json",
     ".codex-plugin/plugin.json",
     "CHANGELOG.md",
+    "mcp.json",
+    "plugin.json",
     "commands/post.md",
     "task-guides/search-tweets.md",
     "server.json",

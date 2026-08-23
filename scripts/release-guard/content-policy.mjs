@@ -30,7 +30,7 @@ export const contentChecks = [
       "operations remain outside MCP.",
       "## Account and agent safety",
       "Plan and credit changes stay in the Xquik dashboard.",
-      "The npm package `x-developer` contains this Skill and plugin bundle. The separate `x-twitter-scraper` package is the TypeScript SDK.",
+      "This repository is a portable Agent Plugins v1 package. It includes its Skills and hosted MCP server.",
       "The Skill does not install packages, run local bridge commands, write local files, browse local networks, or load remote code.",
       "npx skills@1.5.3 add Xquik-dev/x-twitter-scraper",
     ],
