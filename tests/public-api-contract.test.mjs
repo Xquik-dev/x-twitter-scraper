@@ -1254,3 +1254,23 @@ test("preserves final AutoSkills full-review fixes", async () => {
   assert.match(workflows, /if \(isDefinitiveWriteRejection\(monitorCreationError\)\)/);
   assert.match(workflows, /if \(isDefinitiveWriteRejection\(creationError\)\)[\s\S]*method: "DELETE"/);
 });
+
+test("preserves latest AutoSkills full-review safeguards", async () => {
+  const [skill, drafts, mcp, scraperGuide, webhooks] = await Promise.all([
+    read("skills/x-twitter-scraper/SKILL.md"),
+    read("skills/x-twitter-scraper/references/api-endpoints-drafts.md"),
+    read("skills/x-twitter-scraper/references/mcp-tools.md"),
+    read("skills/x-twitter-scraper/references/twitter-scraper-api-guide.md"),
+    read("skills/x-twitter-scraper/references/webhooks.md"),
+  ]);
+
+  assert.match(drafts, /starting `afterCursor`[\s\S]*maximum page count[\s\S]*new approval/);
+  assert.match(skill, /support tickets need exact user approval[\s\S]*scope, recipients, destination, and retention/);
+  assert.match(mcp, /List support tickets \|[\s\S]*private and requires approval for the exact scope/);
+  assert.match(scraperGuide, /retry only `GET` requests/);
+  assert.doesNotMatch(scraperGuide, /retry only safe methods/i);
+  assert.match(webhooks, /server\.headersTimeout = 10_000;[\s\S]*server\.requestTimeout = 10_000;[\s\S]*server\.listen/);
+  assert.match(webhooks, /class TimeoutHTTPServer\(HTTPServer\):[\s\S]*connection\.settimeout\(10\.0\)/);
+  assert.match(webhooks, /def do_POST\(self\):[\s\S]*if self\.path != "\/webhook"/);
+  assert.match(webhooks, /func webhookHandler[\s\S]*if r\.Method != http\.MethodPost/);
+});
