@@ -305,7 +305,7 @@ test("documents bounded jobs, retries, exports, and webhook delivery", async () 
   assert.match(draws, /estimated entries, intended\s+audience, and retention period/);
   assert.match(draws, /request: \{ drawId: draw\.id, format: "csv", type: "winners" \}/);
   assert.equal((errors.match(/default v1 string error contract/g) ?? []).length, 2);
-  assert.match(extractions, /new URLSearchParams\(\{ limit: "1000", after: nextCursor \}\)/);
+  assert.match(extractions, /new URLSearchParams\(\{ limit: "1000" \}\)[\s\S]*params\.set\("after", nextCursor\)/);
   assert.match(extractions, /send[\s\S]*`nextCursor` unchanged[\s\S]*`after`/i);
   assert.match(python, /urllib\.parse\.urlencode/);
   assert.match(python, /poll_deadline = time\.monotonic\(\) \+ 5 \* 60/);
@@ -1051,7 +1051,7 @@ test("preserves complete AutoSkills review fixes", async () => {
   assert.ok(draws.indexOf("async function xquikFetch") < draws.indexOf('xquikFetch("/draws"'));
   assert.match(draws, /const drawProposal = \{[\s\S]*request: drawRequest[\s\S]*usageLimitation/);
   assert.match(draws, /JSON\.stringify\(approval\) !== JSON\.stringify\(drawProposal\)/);
-  assert.match(draws, /await drawAttemptStore\.save\(drawAttemptId, drawAttempt\)/);
+  assert.match(draws, /await drawAttemptStore\.getOrCreate\(/);
   assert.match(draws, /"Idempotency-Key": drawAttempt\.idempotencyKey/);
   assertIncludes(followers, contract.extractionFormats.map((format) => `\`${format}\``));
   assert.match(mcp, /Download media[\s\S]*exact `tweetInput`[\s\S]*destination[\s\S]*retention/);
@@ -1269,7 +1269,7 @@ test("preserves latest AutoSkills full-review safeguards", async () => {
   assert.match(scraperGuide, /retry only `GET` requests/);
   assert.doesNotMatch(scraperGuide, /retry only safe methods/i);
   assert.match(webhooks, /server\.headersTimeout = 10_000;[\s\S]*server\.requestTimeout = 10_000;[\s\S]*server\.listen/);
-  assert.match(webhooks, /class TimeoutHTTPServer\(HTTPServer\):[\s\S]*connection\.settimeout\(10\.0\)/);
+  assert.match(webhooks, /class BoundedHTTPServer\(HTTPServer\):[\s\S]*BoundedSemaphore[\s\S]*connection\.settimeout\(10\.0\)/);
   assert.match(webhooks, /def do_POST\(self\):[\s\S]*if self\.path != "\/webhook"/);
   assert.match(webhooks, /func webhookHandler[\s\S]*if r\.Method != http\.MethodPost/);
 });
@@ -1291,7 +1291,7 @@ test("preserves final CodeRabbit full-review contract fixes", async () => {
       .length,
     2,
   );
-  assert.match(extractions, /new URLSearchParams\(\{ limit: "1000", after: nextCursor \}\)/);
+  assert.match(extractions, /new URLSearchParams\(\{ limit: "1000" \}\)[\s\S]*params\.set\("after", nextCursor\)/);
   assert.match(workflows, /Radar and[\s\S]*extractions accept it as `after`/);
   assert.match(workflows, /params\.set\(cursorParameter, cursor\)/);
   assert.match(workflows, /const retrySafe = method === "GET"/);
@@ -1302,7 +1302,7 @@ test("preserves final CodeRabbit full-review contract fixes", async () => {
   assert.match(account, /autoTopupEnabled: boolean/);
   assert.match(account, /autoTopupAmountDollars: number/);
   assert.match(account, /autoTopupThreshold: string/);
-  assert.match(draws, /await drawAttemptStore\.save\(drawAttemptId, drawAttempt\)[\s\S]*xquikFetch\("\/draws"/);
+  assert.match(draws, /await drawAttemptStore\.getOrCreate\([\s\S]*xquikFetch\("\/draws"/);
   assert.match(draws, /"Idempotency-Key": drawAttempt\.idempotencyKey/);
   assert.match(media, /tweetId: string/);
   assert.match(media, /tweetUrl: string/);
@@ -1323,4 +1323,38 @@ test("preserves final exact-head review safeguards", async () => {
   assert.match(python, /Atomically consume the nonce, claim the delivery, and enqueue it/);
   assert.match(python, /admission in \{"queued", "already_queued"\}[\s\S]*send_response\(202\)/);
   assert.match(python, /admission == "conflict"[\s\S]*send_response\(409\)/);
+});
+
+test("preserves final full-review safeguards", async () => {
+  const [draws, community, extractions, python, guide, webhooks, workflows] =
+    await Promise.all([
+      read("skills/x-twitter-scraper/references/draws.md"),
+      read("skills/x-twitter-scraper/references/extract-x-community-data.md"),
+      read("skills/x-twitter-scraper/references/extractions.md"),
+      read("skills/x-twitter-scraper/references/python-examples.md"),
+      read("skills/x-twitter-scraper/references/twitter-scraper-api-guide.md"),
+      read("skills/x-twitter-scraper/references/webhooks.md"),
+      read("skills/x-twitter-scraper/references/workflows.md"),
+    ]);
+
+  assert.match(draws, /const drawAttemptId = globalThis\.xquikDrawAttemptId/);
+  assert.match(draws, /drawAttemptStore\.getOrCreate\([\s\S]*idempotencyKey: crypto\.randomUUID/);
+  assert.match(draws, /enforce a unique constraint and atomically return/);
+  assert.match(community, /`community_posts` \| Community ID, tweet ID, snapshot ID[\s\S]*collection time/);
+  assert.match(extractions, /const xquikFetch = globalThis\.xquikFetch/);
+  assert.match(extractions, /const extractionId = globalThis\.xquikExtractionId/);
+  assert.match(extractions, /const approvedMaxPages = globalThis\.xquikApprovedMaxPages/);
+  assert.match(extractions, /if \(nextCursor\) params\.set\("after", nextCursor\)/);
+  assert.match(python, /except \(json\.JSONDecodeError, UnicodeDecodeError\)/);
+  assert.match(guide, /Approve the exact request, intended use, destination, and retention/);
+  assert.match(guide, /Skip the approval gate only for unmetered public reads/);
+  assert.match(webhooks, /NONCE_LOCK = threading\.Lock\(\)[\s\S]*with NONCE_LOCK:/);
+  assert.match(webhooks, /from concurrent\.futures import ThreadPoolExecutor/);
+  assert.match(webhooks, /class BoundedHTTPServer\(HTTPServer\):[\s\S]*BoundedSemaphore/);
+  assert.match(webhooks, /Use a concurrency-safe atomic store/);
+  assert.match(workflows, /response\.status >= 500 && code !== "x_api_unauthorized"/);
+  assert.match(workflows, /const extractionProposal = \{[\s\S]*filters:[\s\S]*estimatedUsage:[\s\S]*dataHandling:/);
+  assert.match(workflows, /const exportProposal = \{[\s\S]*jobId:[\s\S]*format:[\s\S]*rowCount:[\s\S]*schema:/);
+  assert.match(workflows, /hmacVerificationPlan: \{[\s\S]*signatureHeader:[\s\S]*replayWindow:/);
+  assert.match(workflows, /JSON\.stringify\(approvedDelivery\) !== JSON\.stringify\(deliveryProposal\)/);
 });
