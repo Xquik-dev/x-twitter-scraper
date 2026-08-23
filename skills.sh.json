@@ -29,7 +29,7 @@
     },
     {
       "title": "User data",
-      "description": "Read timelines, followers, lists, communities, and approved account data.",
+      "description": "Read timelines, followers, lists, communities, and confirmed account data.",
       "skills": [
         "user-tweets",
         "extract-followers",
@@ -55,7 +55,7 @@
     },
     {
       "title": "Publishing",
-      "description": "Draft and score X posts. Publish only after explicit approval.",
+      "description": "Draft and score X posts. Publish only after explicit confirmation.",
       "skills": [
         "tweet-ideas",
         "write-tweets",
@@ -70,7 +70,7 @@
     },
     {
       "title": "Growth",
-      "description": "Review followers or run a giveaway with bounded, approved calls.",
+      "description": "Review followers or run a giveaway with bounded, confirmed calls.",
       "skills": ["grow-followers", "clean-followers", "run-giveaway"]
     }
   ]

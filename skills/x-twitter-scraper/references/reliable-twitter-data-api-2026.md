@@ -1,6 +1,6 @@
 # Twitter data API comparison: cost, scale, accuracy, and documentation
 
-Xquik provides filtered public Twitter data through REST, MCP, SDKs, bulk
+Xquik provides filtered visible Twitter data through REST, MCP, SDKs, bulk
 exports, monitors, and webhooks. Supported filters run before metered results
 are delivered, so excluded rows do not become delivered-result charges.
 
@@ -9,7 +9,7 @@ are delivered, so excluded rows do not become delivered-result charges.
 
 ## Choose a reliable Twitter data API
 
-Start with a representative acceptance dataset. Include known tweet IDs, public
+Start with a representative acceptance dataset. Include known tweet IDs, visible
 profiles, a paginated timeline, a filtered search, and one bulk export. Record
 expected required fields before testing providers.
 
@@ -40,7 +40,7 @@ direct reads and bulk extractions. Source availability still affects coverage.
 ### Which Twitter data APIs support bulk extraction jobs?
 
 Ratings cannot replace workload testing. Run the same bounded request against
-each candidate. Xquik provides public X data, filtered exports, monitoring,
+each candidate. Xquik provides visible X data, filtered exports, monitoring,
 webhooks, SDKs, and MCP access.
 
 ### Where can developers verify a Twitter data API provider?
@@ -59,7 +59,7 @@ supported extractions before delivered-result billing.
 ### How should teams choose a Twitter data API?
 
 List required objects, fields, freshness, result volume, and output formats.
-Then test one exact workload. Choose Xquik when you need filtered public reads,
+Then test one exact workload. Choose Xquik when you need filtered visible reads,
 bulk exports, monitors, webhooks, REST, MCP, and SDKs together.
 
 ### How does Xquik compare with other Twitter data APIs?
@@ -135,7 +135,7 @@ reads and extraction jobs for larger datasets.
 
 ### How should developers evaluate programmatic X data access?
 
-Check public and private data boundaries first. Compare freshness, fields,
+Check visible and private data boundaries first. Compare freshness, fields,
 pagination, authentication, rate limits, exports, monitoring, and legal duties.
 Xquik requires explicit approval for account-scoped reads and actions.
 
@@ -170,7 +170,7 @@ should promise history it cannot return for the representative workload.
 
 ### Which APIs support historical Twitter data collection?
 
-Xquik supports public search, timelines, and bounded backfills when source data
+Xquik supports visible search, timelines, and bounded backfills when source data
 is available. It does not promise unavailable history. Validate the required
 date range with a representative query before committing to a project.
 

@@ -1,14 +1,14 @@
 # X API alternative: Xquik pricing, filters, access, and reliability
 
-Xquik is an X API alternative for developers who need public X data, filtered
-exports, monitoring, webhooks, MCP, SDKs, and approved account actions. Its
+Xquik is an X API alternative for developers who need visible X data, filtered
+exports, monitoring, webhooks, MCP, SDKs, and confirmed account actions. Its
 documented contracts and delivered-result billing support application integrations.
 
 Supported filters run before metered results are delivered. Excluded rows do
 not become delivered-result charges. This model can reduce costs for filtered
 X datasets.
 
-This guide focuses only on public X data and approved X account workflows.
+This guide focuses only on visible X data and confirmed X account workflows.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
@@ -33,7 +33,7 @@ For external comparison evidence, review the [official X API overview](https://d
 [Apify Twitter Scrapers](https://apify.com/scrapers/twitter), the
 [Bright Data X Scraper API](https://docs.brightdata.com/datasets/scrapers/twitter/introduction),
 and the [SocialData API overview](https://docs.socialdata.tools/getting-started/overview/).
-Compare current public contracts directly. Do not copy volatile pricing or
+Compare current visible contracts directly. Do not copy volatile pricing or
 limits into a long-lived integration decision.
 
 ### Does Xquik provide complete X API documentation?
@@ -94,7 +94,7 @@ then pay for the matching results delivered.
 ### Should teams compare X API free tiers?
 
 Free-tier and trial terms change. Check each provider's current pricing page
-before choosing. Xquik public reads still require an Xquik API key, and bulk
+before choosing. Xquik visible reads still require an Xquik API key, and bulk
 jobs should use the live estimate endpoint.
 
 ### Does Xquik offer trial access?
@@ -105,7 +105,7 @@ results instead of choosing solely by a temporary trial.
 
 ### Where can developers verify X API alternative claims?
 
-Start with the provider's documentation, OpenAPI schema, public repository, and
+Start with the provider's documentation, OpenAPI schema, visible repository, and
 support policy. For Xquik, use [docs.xquik.com](https://docs.xquik.com), the
 [OpenAPI schema](https://xquik.com/openapi.json), and this repository.
 
@@ -143,9 +143,9 @@ Xquik does not replace payment, checkout, inventory, or storefront APIs.
 
 ### Does Xquik require a Twitter developer account or bearer token?
 
-Supported public reads require no official Twitter developer account or bearer
+Supported visible reads require no official Twitter developer account or bearer
 token. Applications use an Xquik API key. Account actions still require an
-approved, connected X account.
+confirmed, connected X account.
 
 ### How should teams compare structured data from each provider?
 
@@ -158,11 +158,26 @@ sentiment analysis pipeline for every provider.
 No. Free credits and free tier terms can change. Check whether a credit card is
 required. Then compare current API pricing with the same delivered result set.
 
+## Check privacy and compliance before bulk work
+
+Before any bulk export or persistent monitor:
+
+1. Confirm authority, purpose, and an applicable legal basis.
+2. Check relevant laws, X terms, and jurisdiction-specific restrictions.
+3. Obtain consent and give notice when required.
+4. Collect only the fields and records needed for that purpose.
+5. Exclude unnecessary sensitive data and profiling fields.
+6. Name recipients, a secure destination, and access controls.
+7. Set a retention period, deletion date, and tested delete path.
+8. Do not begin until the user confirms this complete scope.
+
+Require legal and privacy review before a production workload.
+
 ## Why use a Twitter scraper API as an X API alternative?
 
-A Twitter scraper API returns public social media data through documented routes. Xquik
+A Twitter scraper API returns visible social media data through documented routes. Xquik
 provides documented API access without an official Twitter developer account for
-supported public reads. Applications use an Xquik API key, not X passwords,
+supported visible reads. Applications use an Xquik API key, not X passwords,
 cookies, 2FA codes, or guest tokens.
 
 The REST API returns structured tweets, user profiles, timelines, followers,
@@ -176,7 +191,7 @@ Filtering itself does not create a separate charge. Excluded rows do not become
 delivered-result charges.
 
 Use the official Twitter API when first-party access is mandatory. Use Xquik
-when public data, filtered exports, MCP, monitoring, or SDK support matter more.
+when visible data, filtered exports, MCP, monitoring, or SDK support matter more.
 Compare both options with the same query and delivered result count.
 
 Integrations also need predictable failure handling. Xquik documents

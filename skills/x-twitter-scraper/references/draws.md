@@ -2,6 +2,11 @@
 
 Run giveaway draws from tweet replies with explicit filters and a stable draw ID.
 
+Before exporting participant identifiers, confirm the purpose, fields,
+recipients, protected destination, and deletion date. Prefer winners-only
+exports. Where full entry exports are necessary, pseudonymize identifiers when
+possible. Never reuse draw data for profiling or targeting.
+
 ## Create draw
 
 Call `POST /draws` with a required `tweetUrl` and optional filters:
@@ -66,6 +71,14 @@ async function requireExplicitApproval(proposal) {
   return approvalScope;
 }
 
+const selectedLanguage = globalThis.xquikConfirmedDrawLanguage;
+if (
+  selectedLanguage !== null &&
+  (typeof selectedLanguage !== "string" || !selectedLanguage.trim())
+) {
+  throw new Error("Confirm a language filter or use null for no language filter.");
+}
+
 const drawRequest = {
   tweetUrl: "https://x.com/burakbayir/status/1893456789012345678",
   winnerCount: 3,
@@ -75,7 +88,7 @@ const drawRequest = {
   mustFollowUsername: "burakbayir",
   filterMinFollowers: 50,
   filterAccountAgeDays: 30,
-  filterLanguage: "en",
+  filterLanguage: selectedLanguage,
   requiredHashtags: ["#giveaway"],
 };
 const usageLimitation = {
@@ -86,13 +99,13 @@ const drawProposal = {
   request: drawRequest,
   usageLimitation,
   purpose: "Select 3 winners and 2 backups from eligible replies.",
-  dataScope: "Public replies to the source tweet.",
+  dataScope: "Visible replies to the source tweet.",
   recipients: ["Giveaway administrator"],
   retention: "Delete the participant export after 30 days.",
 };
 const approval = await requireExplicitApproval(drawProposal);
 if (JSON.stringify(approval) !== JSON.stringify(drawProposal)) {
-  throw new Error("Approved draw request changed. Request approval again.");
+  throw new Error("Confirmed draw request changed. Request approval again.");
 }
 
 const drawAttemptId = globalThis.xquikDrawAttemptId;
@@ -111,7 +124,7 @@ if (
   typeof drawAttempt.idempotencyKey !== "string" ||
   !drawAttempt.idempotencyKey
 ) {
-  throw new Error("Stored draw attempt does not match the approved proposal.");
+  throw new Error("Stored draw attempt does not match the confirmed proposal.");
 }
 
 const draw = await xquikFetch("/draws", {
@@ -141,16 +154,22 @@ if (details === null || typeof details !== "object" || !Array.isArray(details.wi
 
 const exportProposal = {
   request: { drawId: draw.id, format: "csv", type: "winners" },
+  purpose: "Notify the selected winners and retain the draw record.",
+  fields: ["position", "authorUsername", "tweetId", "isBackup"],
   destination: "Restricted giveaway administration storage.",
   recipients: ["Giveaway administrator"],
   retention: "Delete the export after 30 days.",
 };
 const approvedExport = await requireExplicitApproval(exportProposal);
 if (JSON.stringify(approvedExport) !== JSON.stringify(exportProposal)) {
-  throw new Error("Approved draw export changed. Request approval again.");
+  throw new Error("Confirmed draw export changed. Request approval again.");
 }
 const exportUrl = `${BASE}/draws/${draw.id}/export?format=csv&type=winners`;
 ```
+
+Before storing the CSV, parse its header. Reject any field outside
+`approvedExport.fields`. Request confirmation again if the purpose or fields
+change.
 
 Use a unique, stable `drawAttemptId` from the draw-starting workflow. The
 durable store must enforce a unique constraint and atomically return the

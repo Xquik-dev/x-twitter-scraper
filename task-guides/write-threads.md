@@ -1,6 +1,6 @@
 ---
 name: write-threads
-description: "Use when the user wants to draft an X thread. Keep each post within 280 characters and hand approved text to post-tweets. Text only."
+description: "Use when the user wants to draft an X thread. Keep each post within 280 characters and hand confirmed text to post-tweets. Text only."
 license: MIT
 metadata:
   internal: true
@@ -28,7 +28,7 @@ metadata:
 
 # Write Twitter threads
 
-Draft multi-post threads on X. This guide returns text. `post-tweets` publishes each approved reply against the previous post ID.
+Draft multi-post threads on X. This guide returns text. `post-tweets` publishes each confirmed reply against the previous post ID.
 
 ## Choose an endpoint
 
@@ -56,7 +56,7 @@ Use the returned rules to draft the thread in chat. Keep each post within 280 ch
 ## Publishing flow
 
 1. `POST /compose` with `step: "compose"` for the topic.
-2. Show the user every tweet in sequence. Wait for approval.
+2. Show the user every tweet in sequence. Wait for confirmation.
 3. For each tweet in sequence:
    - Post the first via `post-tweets` guide.
    - Capture the returned `id`.

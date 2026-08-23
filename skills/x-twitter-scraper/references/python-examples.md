@@ -36,6 +36,16 @@ import time
 MAX_RETRY_DELAY_SECONDS = 30.0
 MAX_JSON_RESPONSE_BYTES = 16 * 1024 * 1024
 
+def confirm_api_request(proposal: dict) -> dict:
+    """Validate one exact request against the integration's confirmation ledger."""
+    provider = globals().get("XQUIK_REQUEST_APPROVAL_PROVIDER")
+    if not callable(provider):
+        raise RuntimeError("Configure XQUIK_REQUEST_APPROVAL_PROVIDER first")
+    confirmed = provider(dict(proposal))
+    if confirmed != proposal:
+        raise RuntimeError("Request differs from its exact confirmation record")
+    return confirmed
+
 def sleep_before_retry(delay, deadline=None):
     if deadline is None:
         time.sleep(delay)
@@ -79,6 +89,11 @@ def xquik_fetch(path, method="GET", json_body=None, max_retries=3, deadline=None
 
     base_delay = 1.0
     method = method.upper()
+    confirm_api_request({
+        "method": method,
+        "path": path,
+        "body": json_body,
+    })
     retry_safe = method == "GET"
     retried_coverage_cursor = False
 
@@ -176,14 +191,31 @@ def xquik_fetch(path, method="GET", json_body=None, max_retries=3, deadline=None
         )
         sleep_before_retry(delay, deadline)
 
-def xquik_download(path, approved_max_bytes, deadline=None):
-    """Return an approved bounded GET export and selected headers."""
+def xquik_download(path, confirmed_export, deadline=None):
+    """Return one bounded export covered by an exact confirmation record."""
+    if not isinstance(confirmed_export, dict):
+        raise TypeError("confirmed_export must be an object")
+    confirmed_max_bytes = confirmed_export.get("maxBytes")
     if (
-        isinstance(approved_max_bytes, bool)
-        or not isinstance(approved_max_bytes, int)
-        or approved_max_bytes <= 0
+        confirmed_export.get("path") != path
+        or not isinstance(confirmed_export.get("purpose"), str)
+        or not confirmed_export["purpose"]
+        or not isinstance(confirmed_export.get("recipients"), list)
+        or not confirmed_export["recipients"]
+        or not all(isinstance(value, str) and value for value in confirmed_export["recipients"])
+        or not isinstance(confirmed_export.get("retention"), str)
+        or not confirmed_export["retention"]
+        or isinstance(confirmed_max_bytes, bool)
+        or not isinstance(confirmed_max_bytes, int)
+        or confirmed_max_bytes <= 0
     ):
-        raise ValueError("approved_max_bytes must be a positive integer")
+        raise ValueError("Confirm the exact path, purpose, recipients, retention, and maxBytes")
+    confirm_api_request({
+        "method": "GET",
+        "path": path,
+        "body": None,
+        "export": confirmed_export,
+    })
     remaining = deadline - time.monotonic() if deadline is not None else None
     if remaining is not None and remaining <= 0:
         raise TimeoutError("Request deadline reached")
@@ -196,7 +228,7 @@ def xquik_download(path, approved_max_bytes, deadline=None):
     timeout = max(0.001, attempt_deadline - time.monotonic())
     with urllib.request.urlopen(request, timeout=timeout) as response:
         return read_response_with_deadline(
-            response, attempt_deadline, approved_max_bytes
+            response, attempt_deadline, confirmed_max_bytes
         ), {
             "contentType": response.headers.get("Content-Type", ""),
             "contentDisposition": response.headers.get("Content-Disposition", ""),
@@ -213,13 +245,13 @@ def require_explicit_approval(proposal: dict) -> dict:
         f"Approval required for {json.dumps(proposal, sort_keys=True)}."
     )
 
-extraction_request = {
+estimate_request = {
     "toolType": "reply_extractor",
     "targetTweetId": "1893704267862470862",
     "resultsLimit": RESULTS_LIMIT,
 }
 estimate = xquik_fetch(
-    "/extractions/estimate", method="POST", json_body=extraction_request
+    "/extractions/estimate", method="POST", json_body=estimate_request
 )
 
 if (
@@ -229,24 +261,32 @@ if (
     or not isinstance(estimate.get("creditsAvailable"), str)
 ):
     raise RuntimeError("Invalid extraction estimate response.")
-if estimate["allowed"] is not True:
+if not estimate["allowed"]:
     raise RuntimeError(
         f"Extraction requires {estimate['creditsRequired']} credits. "
         f"Balance: {estimate['creditsAvailable']}."
     )
 
 proposal = {
-    "request": extraction_request,
+    "request": estimate_request,
     "estimate": estimate,
     "purpose": "Collect a bounded reply dataset.",
     "recipients": ["Requesting analyst"],
     "retention": "Delete the export after 30 days.",
 }
-if require_explicit_approval(proposal) != proposal:
-    raise RuntimeError("Approved extraction changed. Request approval again.")
-job = xquik_fetch(
-    "/extractions", method="POST", json_body=extraction_request
+require_explicit_approval(
+    "the bounded extraction job, usage, recipients, and retention"
 )
+if require_explicit_approval(proposal) != proposal:
+    raise RuntimeError("Confirmed extraction changed. Request approval again.")
+creation_request = {
+    "toolType": "reply_extractor",
+    "targetTweetId": "1893704267862470862",
+    "resultsLimit": RESULTS_LIMIT,
+}
+if creation_request != estimate_request:
+    raise RuntimeError("Extraction request changed after estimation.")
+job = xquik_fetch("/extractions", method="POST", json_body=creation_request)
 EXTRACTION_STATUSES = {"pending", "running", "completed", "failed"}
 
 def require_extraction_job(value: object) -> dict:
@@ -281,7 +321,7 @@ if job["status"] in ("pending", "running"):
 if job["status"] != "completed":
     raise RuntimeError(job.get("errorMessage", "Extraction failed."))
 
-# Get every approved result page.
+# Get every confirmed result page.
 cursor = None
 results = []
 
@@ -331,12 +371,12 @@ proposal = {
     "request": draw_request,
     "usageLimitation": usage_limitation,
     "purpose": "Select 3 winners and 2 backups from eligible replies.",
-    "dataScope": "Public replies to the source tweet.",
+    "dataScope": "Visible replies to the source tweet.",
     "recipients": ["Giveaway administrator"],
     "retention": "Delete the participant export after 30 days.",
 }
 if require_explicit_approval(proposal) != proposal:
-    raise RuntimeError("Approved draw changed. Request approval again.")
+    raise RuntimeError("Confirmed draw changed. Request approval again.")
 
 draw = xquik_fetch("/draws", method="POST", json_body=draw_request)
 if not isinstance(draw, dict) or not isinstance(draw.get("id"), str) or not draw["id"]:
@@ -361,12 +401,16 @@ for winner in details["winners"]:
 ## Python standard library webhook handler
 
 Bind this listener to loopback. Terminate TLS at a reverse proxy before
-registering its public HTTPS route. Bound concurrent connections in production.
+registering its visible HTTPS route. Bound concurrent connections in production.
+Keep it disabled by default. Start it only after the user confirms the route,
+event types, data effects, recipients, and retention. Record that confirmation
+with the webhook or monitor configuration.
 
 ```python
 import hashlib
 import hmac
 import json
+import os
 import re
 import socket
 import time
@@ -379,6 +423,23 @@ def load_secret(name: str) -> str:
 # Use the per-webhook secret from POST /webhooks, not an Xquik account credential.
 WEBHOOK_SECRET = load_secret("XQUIK_WEBHOOK_SECRET")
 MAX_WEBHOOK_BODY_BYTES = 1024 * 1024
+
+def require_confirmed_listener_plan() -> None:
+    """Require deployment confirmation before startup or event effects."""
+    required = {
+        "XQUIK_WEBHOOK_LISTENER_CONFIRMED": os.environ.get(
+            "XQUIK_WEBHOOK_LISTENER_CONFIRMED"
+        ),
+        "XQUIK_WEBHOOK_EFFECTS_CONFIRMED": os.environ.get(
+            "XQUIK_WEBHOOK_EFFECTS_CONFIRMED"
+        ),
+    }
+    missing = [name for name, value in required.items() if value != "true"]
+    if missing:
+        raise RuntimeError(
+            "Confirm the listener and event-effect plan before startup: "
+            + ", ".join(missing)
+        )
 
 def consume_test_nonce(nonce: str, ttl_seconds: int) -> bool:
     """Atomically consume a test nonce unless it already exists."""
@@ -615,5 +676,12 @@ class WebhookHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(b"Delivery store unavailable")
 
-ThreadingHTTPServer(("127.0.0.1", 3000), WebhookHandler).serve_forever()
+def run_confirmed_webhook_listener() -> None:
+    """Check confirmation before constructing or starting the listener."""
+    require_confirmed_listener_plan()
+    server = ThreadingHTTPServer(("127.0.0.1", 3000), WebhookHandler)
+    server.serve_forever()
+
+if __name__ == "__main__":
+    run_confirmed_webhook_listener()
 ```

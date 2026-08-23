@@ -25,8 +25,8 @@ Approval text should include:
 - the usage estimate when applicable
 - whether the action persists until disabled
 
-No approval is needed for safe documentation lookup, schema lookup, or
-non-metered public reads that the user clearly requested. Before a metered read,
+Safe documentation and schema lookups need no extra confirmation. Clearly
+requested non-metered visible reads also need no extra confirmation. Before a metered read,
 show the exact request, usage estimate or limitation, destination, recipients,
 and retention. Wait for explicit approval. This includes media downloads,
 searches, extractions, and draws when their endpoint metadata marks them metered.

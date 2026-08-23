@@ -9,8 +9,8 @@ Post this text to X: "$ARGUMENTS"
 1. If the text is empty, ask the user what to tweet.
 2. Resolve the connected X username. Ask the user if it is unknown.
 3. Show the exact text, account, endpoint, and usage estimate.
-4. Wait for explicit user approval.
-5. After approval, call `POST /api/v1/x/tweets` with the `xquik` MCP tool and this body:
+4. Wait for explicit user confirmation.
+5. After confirmation, call `POST /api/v1/x/tweets` with the `xquik` MCP tool and this body:
    `{ "account": "<confirmed account>", "text": "<the tweet text>" }`.
    Hosted MCP injects a unique `Idempotency-Key`.
 6. Accept HTTP 200 or 202. Wait for `pollAfterMs`, then poll `statusUrl`.

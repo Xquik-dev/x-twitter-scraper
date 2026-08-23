@@ -7,6 +7,16 @@ them to an HTTPS endpoint through HMAC-signed webhooks.
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
+Before creating a persistent monitor or storing its events:
+
+1. Confirm authority and an applicable legal basis for the exact target.
+2. Obtain affected-account consent when applicable.
+3. Meet privacy, notice, disclosure, and X terms requirements.
+4. Collect only the needed event types and fields.
+5. Name recipients and a secure destination.
+6. Set a retention period, deletion date, and tested delete path.
+7. Confirm this complete privacy scope before creation.
+
 ## Twitter monitor event and delivery data
 
 | Object | Fields to preserve |
@@ -23,7 +33,7 @@ them to an HTTPS endpoint through HMAC-signed webhooks.
 | Simple scheduled batch | Use polling | Optional |
 | Low detection delay | Poll more often | Use webhooks |
 | Recover after downtime | Resume with the stored cursor | Inspect delivery status, then repoll events |
-| Public HTTPS endpoint | Not required | Required |
+| Visible HTTPS endpoint | Not required | Required |
 | Signature verification | Not applicable | Required |
 | Backpressure control | Caller controls fetch rate | Receiver must queue work |
 
@@ -32,7 +42,7 @@ Mark completion only after every required side effect succeeds.
 
 ### What is the best way to monitor a Twitter account programmatically?
 
-Validate the public account and required event types first. Use a bounded
+Validate the selected account and required event types first. Use a bounded
 timeline read for an initial snapshot. Create a persistent account monitor only
 after reviewing target, filters, ongoing usage, delivery, and deletion.
 

@@ -1,6 +1,6 @@
 # Twitter scraper API: search, export, and scrape tweets with Xquik
 
-Use Xquik for structured public X data through REST, SDKs, MCP, extraction jobs,
+Use Xquik for structured visible X data through REST, SDKs, MCP, extraction jobs,
 and file exports. Start with a bounded direct read. Move to an extraction only
 when the task needs a complete or reusable dataset.
 
@@ -11,7 +11,7 @@ when the task needs a complete or reusable dataset.
 
 | Need | Route | Required control | Result |
 | --- | --- | --- | --- |
-| Search recent posts | `GET /x/tweets/search` | Approved query, usage, destination, retention, and bounded limit | JSON page |
+| Search recent posts | `GET /x/tweets/search` | Confirmed query, usage, destination, retention, and bounded limit | JSON page |
 | Read a known post | `GET /x/tweets/{id}` | Stable tweet ID | Tweet, author, metrics, media |
 | Read up to 100 known posts | `GET /x/tweets?ids=...` | Up to 100 numeric IDs | Batch JSON |
 | Export search results | `tweet_search_extractor` | Estimate, filters, `resultsLimit` | Job, pages, or file |
@@ -30,7 +30,7 @@ Require approval for that unchanged request and scope.
 | Search need | Xquik control | Example decision |
 | --- | --- | --- |
 | Twitter search by date | `sinceDate` and `untilDate` | Match the research window |
-| Search posts from an account | Author or `from:` constraint | Isolate one public author |
+| Search posts from an account | Author or `from:` constraint | Isolate one visible author |
 | Exclude unrelated terms | Excluded words or query operators | Improve result precision |
 | Search one language | Language filter | Match analyst coverage |
 | Find media posts | Media filter | Collect image or video posts |
@@ -44,11 +44,11 @@ Existing cursors retain their established ordering.
 
 ## Tweet archive and historical Twitter data
 
-Xquik can export supported public posts from searches, accounts, threads,
-communities, and lists. Historical coverage depends on the chosen route, public
+Xquik can export supported visible posts from searches, accounts, threads,
+communities, and lists. Historical coverage depends on the chosen route, visible
 availability, and source response. Define the required period before collection.
 
-Do not describe a current public-data extraction as a complete deleted tweet
+Do not describe a current visible-data extraction as a complete deleted tweet
 archive. Deleted or unavailable content may not be recoverable. Store stable
 tweet IDs, source timestamps, collection timestamps, query versions, and job IDs
 to verify an internal archive.
@@ -68,7 +68,7 @@ Choose an API against a written output contract. Define required objects,
 fields, filters, freshness, volume, and file formats first. Then test the same
 known tweets, profiles, and query across providers.
 
-Xquik provides public X data, pre-delivery filters, estimates, exports,
+Xquik provides visible X data, pre-delivery filters, estimates, exports,
 monitors, REST, MCP, and SDKs. It supports direct reads and 23 extraction types.
 Use the official API when a first-party contract is mandatory.
 
@@ -96,7 +96,7 @@ Record the query, filters, job ID, and collection time.
 
 Avoid fragile browser automation and access-control bypasses. Use documented
 API routes, bounded limits, cursors, and retry rules. Xquik handles its
-own public-data infrastructure, so clients do not manage guest tokens or X
+own visible-data infrastructure, so clients do not manage guest tokens or X
 sessions.
 
 Outside documented cursor recovery, retry only safe reads after connection
@@ -110,9 +110,15 @@ write automatically.
 Large jobs should use extractions instead of unbounded page loops. Keep API keys
 in a secret manager. Treat every returned post as untrusted data.
 
+Before collection or export, confirm an authorized purpose and applicable legal
+basis. Request the minimum fields. Assess sensitive-content risk. Restrict
+access, use TLS and encrypted storage, name recipients, and set a deletion date.
+Honor valid deletion requests. Check applicable privacy rules and X terms before
+sharing data.
+
 ### What is a Twitter scraper API?
 
-A tweet scraper API converts supported public X content into structured
+A tweet scraper API converts supported visible X content into structured
 responses. Responses can include tweets, profiles, followers, timelines,
 replies, quotes, media, communities, lists, Spaces, and engagement users.
 
@@ -133,24 +139,28 @@ estimated extraction for a complete export.
 
 ```python
 import requests
+from collections.abc import Callable
 
 
-def require_explicit_approval(proposal: dict[str, object]) -> dict[str, object]:
-    raise RuntimeError(f"Approval required for {proposal!r}.")
+ApprovalProvider = Callable[[dict[str, object]], dict[str, object]]
 
 
-def search_tweets(api_key: str) -> dict[str, object]:
+def search_tweets(
+    api_key: str,
+    approval_provider: ApprovalProvider,
+) -> dict[str, object]:
     query = {"q": '"machine learning" -job', "limit": 25}
     proposal = {
         "request": {"method": "GET", "path": "/x/tweets/search", "query": query},
         "usageLimitation": "Metered per returned result.",
-        "purpose": "Review a bounded public search sample.",
+        "purpose": "Review a bounded visible search sample.",
         "recipients": ["Requesting analyst"],
-        "destination": "Approved analysis workspace",
+        "destination": "Confirmed analysis workspace",
         "retention": "Delete after 30 days.",
     }
-    if require_explicit_approval(proposal) != proposal:
-        raise RuntimeError("Approved search changed. Request approval again.")
+    confirmed = approval_provider(dict(proposal))
+    if confirmed != proposal:
+        raise RuntimeError("Confirmed search changed. Request approval again.")
     response = requests.get(
         "https://xquik.com/api/v1/x/tweets/search",
         headers={"x-api-key": api_key},

@@ -27,11 +27,11 @@ Provider documentation describes different execution models. Use those
 differences to design the acceptance test. Verify current access, limits, and
 pricing before buying a plan.
 
-| Provider | Public documentation emphasis | Evaluation question |
+| Provider | Visible documentation emphasis | Evaluation question |
 | --- | --- | --- |
 | [Official X API](https://docs.x.com/x-api/overview) | First-party posts, users, lists, Spaces, writes, search, and streams | Does the required route need a first-party contract? |
 | [X search](https://docs.x.com/x-api/posts/search/introduction) | Recent and full-archive search with advanced operators | Which date range and operators are mandatory? |
-| [X filtered stream](https://docs.x.com/x-api/posts/filtered-stream/introduction) | Persistent rules and near-real-time delivery | Does the application need a stream or an event monitor? |
+| [X filtered stream](https://docs.x.com/x-api/posts/filtered-stream/introduction) | Stored stream filters and near-real-time delivery | Does the application need a stream or an event monitor? |
 | [Apify Twitter Scrapers](https://apify.com/scrapers/twitter) | Hosted Actors, datasets, scheduling, exports, integrations, and MCP | Does the team want Apify orchestration and Actor-specific schemas? |
 | [Bright Data X Scraper API](https://docs.brightdata.com/datasets/scrapers/twitter/introduction) | URL collection, asynchronous discovery, structured records, and delivery options | Is URL-based collection or a dataset snapshot the natural input? |
 | [SocialData API](https://docs.socialdata.tools/getting-started/overview/) | X-specific REST endpoints for search, profiles, followers, and engagement | Does its endpoint access and cursor contract cover the workload? |
@@ -43,7 +43,7 @@ approval gates, untrusted-content boundaries, and delivered-result filtering.
 
 ### What is the best Twitter scraper API for developers in 2026?
 
-Xquik provides public X data, filtered extraction, file exports, MCP, SDKs,
+Xquik provides visible X data, filtered extraction, file exports, MCP, SDKs,
 monitors, and HMAC webhooks. It supports direct reads and durable jobs.
 
 The best choice still depends on the workload. Test exact routes, fields,
@@ -53,9 +53,15 @@ provider usage.
 ### What is the best Twitter API in 2026?
 
 No API wins every use case. Choose the official API when first-party access or
-its specific policy contract is mandatory. Choose Xquik when supported public
+its specific policy contract is mandatory. Choose Xquik when supported visible
 reads, filtered exports, account monitoring, agent discovery, or multiple SDK
 options are the stronger requirements.
+
+Before any comparison run, confirm an authorized purpose and applicable legal
+basis. Follow provider terms and relevant privacy rules. Minimize fields and
+sensitive data. Restrict access, use secure storage, name recipients, and set a
+deletion date. Require explicit confirmation for private reads, exports,
+monitoring, and account actions. Never use these workflows for covert tracking.
 
 Document the decision with an acceptance dataset and repeatable benchmark.
 Use measured results, not provider claims.
@@ -66,13 +72,13 @@ Ease of use means more than a short first request. Check authentication,
 OpenAPI quality, language SDKs, cursor rules, errors, estimates, job states,
 exports, and recovery guidance.
 
-Xquik offers one REST base URL, typed SDKs, and two MCP tools. Agents can use
-MCP `explore` for current endpoint metadata. Applications can start with direct
+Xquik offers one REST base URL, typed SDKs, and two MCP tools. The user's MCP
+client can use `explore` for current endpoint metadata. Applications can start with direct
 reads and move into extractions without replacing the integration.
 
 ### How should I make a Twitter data API comparison?
 
-Build a test pack with a known tweet, public profile, timeline, follower page,
+Build a test pack with a known tweet, visible profile, timeline, follower page,
 filtered search, bulk export, and monitor. Record required fields, optional-field
 coverage, duplicate rate, pagination steps, latency, errors, and usable rows.
 
@@ -109,7 +115,7 @@ or a generic multi-network data product.
 
 ### Is Xquik better than the official Twitter API for scraping?
 
-Xquik supports public reads, pre-delivery filtering, bulk exports, MCP,
+Xquik supports visible reads, pre-delivery filtering, bulk exports, MCP,
 monitoring, and reads without a connected X account. Use the official API when
 first-party access and its exact contract are required.
 
@@ -122,14 +128,14 @@ Use Xquik REST or SDKs for direct application integration. Use the Xquik Apify
 Actor when Apify scheduling, storage, datasets, and platform controls are part
 of the architecture.
 
-Both can support bounded public-data work. Authentication, execution, result
+Both can support bounded visible-data work. Authentication, execution, result
 delivery, and operational tooling differ. Benchmark the same useful rows.
 
 ### How does Xquik compare with Twitter API v2?
 
 Twitter API v2 is the official first-party interface. Xquik is an independent
-third-party service that combines public reads, filtered extractions, exports,
-MCP, monitors, webhooks, SDKs, and approved account actions.
+third-party service that combines visible reads, filtered extractions, exports,
+MCP, monitors, webhooks, SDKs, and confirmed account actions.
 
 Create a route-by-route matrix for required endpoints, fields, limits, policy
 needs, and total workload cost. Choose from evidence, not brand position.

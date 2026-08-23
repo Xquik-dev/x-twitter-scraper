@@ -7,7 +7,7 @@
       "name": "x-twitter-scraper",
       "type": "registry:item",
       "title": "X Twitter scraper Skill",
-      "description": "Install the Xquik Skill for Twitter data, API integrations, and approved account actions.",
+      "description": "Install the X (Twitter) Scraper API and X API Alternative Skill. You do not need an official X developer account. You do not need to connect or use an X account for scraping. Not affiliated with X Corp.",
       "files": [
         {
           "path": "skills/x-twitter-scraper/LICENSE",
@@ -353,16 +353,6 @@
           "path": "skills/x-twitter-scraper/references/workflows.md",
           "type": "registry:file",
           "target": "~/.agents/skills/x-twitter-scraper/references/workflows.md"
-        },
-        {
-          "path": "skills/x-twitter-scraper/skill-card.md",
-          "type": "registry:file",
-          "target": "~/.agents/skills/x-twitter-scraper/skill-card.md"
-        },
-        {
-          "path": "skills/x-twitter-scraper/skillspector-report.md",
-          "type": "registry:file",
-          "target": "~/.agents/skills/x-twitter-scraper/skillspector-report.md"
         }
       ]
     }

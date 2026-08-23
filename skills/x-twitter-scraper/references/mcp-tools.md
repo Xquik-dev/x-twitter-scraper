@@ -2,6 +2,16 @@
 
 The MCP server at `https://xquik.com/mcp` provides 2 API tools. The client sends requests through the server, which authenticates calls to `xquik.com/api/v1`.
 
+This file documents plans for calls the user runs in an MCP client. This Skill
+never invokes `explore` or `xquik`. Code blocks show client-side tool shapes and
+request plans only.
+
+Xquik processes MCP requests as an external service. Requests may contain
+queries, IDs, message text, or support content. Minimize personal data. Never
+send passwords, cookies, session tokens, 2FA codes, or unnecessary personal
+data. Confirm before sending private or sensitive content. Review current
+retention and logging terms before sensitive work.
+
 Hosted MCP v2.6.0 supports `2026-07-28` through `server/discover`.
 Current MCP SDKs add request metadata and headers automatically.
 Modern calls need no initialization session.
@@ -15,7 +25,9 @@ Modern calls need no initialization session.
 
 ### Search the API spec with `explore`
 
-The tool provides an in-memory `spec.endpoints` array. Search or filter it before calling an endpoint.
+Plan API spec searches with `explore`. The user's MCP client provides an
+in-memory `spec.endpoints` array. Search or filter it before an unfamiliar
+endpoint.
 
 ```typescript
 interface EndpointInfo {
@@ -47,7 +59,12 @@ async () => spec.endpoints.filter(e => e.summary.toLowerCase().includes('tweet')
 
 ### Send API requests with `xquik`
 
-The tool provides `xquik.request()` with authentication and required idempotency headers injected automatically. Never pass API keys or headers. The sandbox reuses each generated key for bounded transient retries. After an unresolved write failure, verify state. Start a new attempt only when `safeToRetry` is true and the user approves.
+Plan API requests with `xquik`. The user's MCP client provides
+`xquik.request()` with authentication and required idempotency headers injected automatically.
+Never pass API keys or headers.
+The client reuses each generated key for bounded transient retries.
+After an unresolved write failure, verify
+state. Start a new attempt only when `safeToRetry` is true and the user confirms.
 
 For `409 coverage_cursor_unavailable`, wait the exact `Retry-After` seconds and
 retry the same cursor once. For `410 coverage_cursor_gone`, the response omits
@@ -55,11 +72,11 @@ retry the same cursor once. For `410 coverage_cursor_gone`, the response omits
 
 ## Require approval
 
-Apply these rules before using `xquik`:
+Apply these rules before showing a user-run `xquik` request:
 
 | Capability | Rule |
 |------------|------|
-| Public writes | Show the exact tweet, reply, like, retweet, follow, unfollow, profile, or community action. Wait for explicit approval. |
+| Visible writes | Show the exact tweet, reply, like, retweet, follow, unfollow, profile, or community action. Wait for explicit approval. |
 | Direct messages | Show sender, recipient, and message text. Never send bulk or automatic DMs. |
 | Persistent resources | Create monitors and webhooks only when the user explicitly asks for ongoing delivery. Show target, event types, URL, and ongoing usage before creation. |
 | Cached style writes | Before creating, replacing, or deleting a cached style, show the account, purpose, exact resource, usage, and storage effect. Obtain approval for that write. |
@@ -128,9 +145,14 @@ Use `explore` first to find endpoints, then `xquik` to call them.
 | Get DM history | `GET /api/v1/x/dm/{userId}/history?account={username}`; private and requires exact-account approval |
 | Check credit balance | `GET /api/v1/credits` |
 
+Before planning a timeline, engagement, likes, relationship, list, or community
+read, confirm its purpose and exact resource scope. Also confirm fields, result
+bound, destination, recipients, and retention. Apply this data plan even when
+the route needs no connected X account.
+
 Before a draw, confirm the source tweet, `winnerCount`, `backupCount`, every
 filter, published usage estimate or estimate limitation, purpose, data scope,
-export audience, and retention. Send exactly the approved request.
+export audience, and retention. Send exactly the confirmed request.
 
 Before a media download, confirm the exact `tweetInput`. Show the endpoint's
 current usage estimate or limitation, local or remote destination, recipients,
@@ -157,7 +179,7 @@ See [direct lookups](api-endpoints-x-api.md) for the exact names.
 | Compose and score a tweet | `POST /compose` with `step=compose` -> `refine` -> `score` |
 | Analyze tweet style | `POST /styles` -> `GET /styles/{id}` -> `POST /compose` with `styleUsername` |
 | Post a tweet | `GET /x/accounts` -> approve -> `POST /x/tweets` with `account` and `text` -> hosted MCP adds a unique `Idempotency-Key` -> poll `statusUrl` |
-| Get trending news | `GET /radar` through `xquik` -> `POST /compose` with the selected topic |
+| Get trending news with Xquik Radar | Only when the user explicitly names Xquik Radar: plan `GET /radar`, then `POST /compose` with the selected topic |
 | Open a support ticket | Show exact content and attachments -> approve -> `POST /support/tickets` -> `GET /support/tickets/{id}` |
 | Collect complete reply coverage | `GET /x/tweets/{id}/replies?mode=complete&limit=<1-25000>` -> filter direct rows by `inReplyToId` -> keep `nested_replies` separate -> inspect `diagnostic` |
 
@@ -179,7 +201,7 @@ See [direct lookups](api-endpoints-x-api.md) for the exact names.
 ## REST-only operations
 
 Hosted MCP v2.6.0 catalogs 120 of 128 REST operations.
-Of these, 119 support JSON or text. Binary support downloads use REST.
+Of these, 119 support JSON or text. Binary support downloads remain REST-only.
 These 8 credential, checkout, or guest-wallet operations remain outside MCP:
 
 - API key creation
@@ -187,11 +209,19 @@ These 8 credential, checkout, or guest-wallet operations remain outside MCP:
 - API key revocation
 - Saved-payment top-ups
 - Dashboard checkout redirects
-- Guest wallet creation
-- Guest wallet status polling
-- Guest wallet top-ups
+- Wallet operations
+
+This Skill excludes credential lifecycle, payment, checkout, and wallet
+operations. Do not load, call, recommend, or describe those REST endpoints.
+Use a separate workflow with its own authority and confirmation controls.
+
+## User-run workflow plans
+
+Only when the user explicitly names Xquik support tickets, prepare a ticket
+request. Confirm the exact redacted subject, body, attachments, recipients,
+destination, and retention. Never use this for generic support.
 
 ## Usage reference
 
 - Included operations cover account info, compose steps, cached styles, drafts, Radar, support tickets, credit balance, and webhook management.
-- Metered or account-gated operations cover tweet search, lookups, media, extractions, draws, monitors, analysis, trends, and approved writes.
+- Metered or account-gated operations cover tweet search, lookups, media, extractions, draws, monitors, analysis, trends, and confirmed writes.

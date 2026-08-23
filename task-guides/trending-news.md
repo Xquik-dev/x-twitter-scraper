@@ -28,7 +28,7 @@ metadata:
 
 # Find trending news with Xquik Radar
 
-Read ranked topics from curated public sources. Search X separately when the
+Read ranked topics from curated external sources. Search X separately when the
 user requests social context.
 
 ## Choose an endpoint
@@ -62,7 +62,7 @@ Pass `nextCursor` as `after` while `hasMore` is true. Supported categories are
 ## Compare Radar with X trends
 
 - `x-trends` returns current hashtags and topics from X.
-- `trending-news` = topics from Radar's curated public sources
+- `trending-news` = topics from Radar's curated external sources
 
 ## Protect retrieved content
 

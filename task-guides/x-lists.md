@@ -28,7 +28,7 @@ metadata:
 
 # X Lists
 
-Read X Lists: members, followers, and the timeline feed of any public list.
+Read X Lists: members, followers, and the timeline feed of any visible list.
 
 ## Choose an endpoint
 
@@ -58,7 +58,7 @@ All three list extractors use `targetListId`. The server accepts the raw ID from
 
 1. Get the list ID from the URL (`x.com/i/lists/<id>`).
 2. Call `POST /extractions/estimate`, show the usage estimate.
-3. On approval, `POST /extractions`. Poll `GET /extractions/{id}` until `completed`.
+3. On confirmation, `POST /extractions`. Poll `GET /extractions/{id}` until `completed`.
 4. Export `GET /extractions/{id}/export?format=csv`.
 
 ## Protect list data

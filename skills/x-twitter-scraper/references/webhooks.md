@@ -2,6 +2,12 @@
 
 Receive event notifications at an HTTPS endpoint. Verify every request with its HMAC-SHA256 signature.
 
+The Node and Python examples below bind loopback HTTP only. They are not HTTPS
+endpoints. Terminate TLS at a trusted reverse proxy or load balancer.
+Forward only `POST /webhook` to `127.0.0.1:3000`.
+Preserve the raw body and all signature headers.
+Enforce a 1 MiB body limit in the app and reverse proxy.
+
 ## Setup
 
 1. Create at least 1 active monitor with `POST /monitors`.
@@ -49,7 +55,7 @@ window. Compare signatures in constant time before parsing JSON.
 Use an atomic shared nonce store in multi-instance deployments.
 Set a receiver body limit before reading the request. The examples use 1 MiB.
 The examples listen over local HTTP. Put them behind a reverse proxy or load
-balancer that terminates TLS. Register the webhook only after the public HTTPS
+balancer that terminates TLS. Register the webhook only after the confirmed HTTPS
 route reaches that private listener.
 
 The in-memory nonce claims below are atomic only within their single-process,
@@ -71,11 +77,14 @@ expiring durable leases because deadline cleanup can also time out.
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { createServer } from "node:http";
 
+const LISTENER_CONFIRMATION_FLAG = "--confirmed-listener-scope";
+
 // Use the per-webhook secret from POST /webhooks, not an Xquik account credential.
 const WEBHOOK_SECRET = process.env.XQUIK_WEBHOOK_SECRET;
 if (!WEBHOOK_SECRET) throw new Error("Set XQUIK_WEBHOOK_SECRET first.");
 
 const MAX_WEBHOOK_BODY_BYTES = 1024 * 1024;
+const MAX_BODY_BYTES = 1_048_576;
 const STORE_OPERATION_MAX_MS = 2_000;
 const recentNonces = new Map();
 const SUPPORTED_EVENT_TYPES = new Set([
@@ -199,7 +208,7 @@ const server = createServer((req, res) => {
   }
 
   const chunks = [];
-  let bodyBytes = 0;
+  let receivedBytes = 0;
   let bodyReadFinished = false;
   let bodyDeadline;
   const finishBodyRead = () => {
@@ -221,8 +230,8 @@ const server = createServer((req, res) => {
 
   req.on("data", (chunk) => {
     if (bodyReadFinished) return;
-    bodyBytes += chunk.length;
-    if (bodyBytes > MAX_WEBHOOK_BODY_BYTES) {
+    receivedBytes += chunk.length;
+    if (receivedBytes > MAX_BODY_BYTES) {
       finishBodyRead();
       chunks.length = 0;
       res.writeHead(413).end("Request body too large");
@@ -337,6 +346,9 @@ const server = createServer((req, res) => {
 
 server.headersTimeout = 10_000;
 server.requestTimeout = 10_000;
+if (!process.argv.includes(LISTENER_CONFIRMATION_FLAG)) {
+  throw new Error("Confirm listener scope before startup.");
+}
 server.listen(3000, "127.0.0.1");
 ```
 
@@ -349,6 +361,7 @@ import hashlib
 import json
 import re
 import socket
+import sys
 import threading
 import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -360,6 +373,7 @@ def load_secret(name: str) -> str:
 # Use the per-webhook secret from POST /webhooks, not an Xquik account credential.
 WEBHOOK_SECRET = load_secret("XQUIK_WEBHOOK_SECRET")
 MAX_WEBHOOK_BODY_BYTES = 1024 * 1024
+MAX_BODY_BYTES = 1_048_576
 STORE_OPERATION_MAX_SECONDS = 2.0
 RECENT_NONCES: dict[str, int] = {}
 NONCE_LOCK = threading.Lock()
@@ -527,7 +541,7 @@ class WebhookHandler(BaseHTTPRequestHandler):
             length = int(self.headers.get("Content-Length", ""))
         except ValueError:
             length = -1
-        if length < 1 or length > MAX_WEBHOOK_BODY_BYTES:
+        if length < 1 or length > MAX_BODY_BYTES:
             self.send_response(413)
             self.end_headers()
             self.wfile.write(b"Request body too large or missing")
@@ -656,6 +670,8 @@ class WebhookHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(b"OK")
 
+if "--confirmed-listener-scope" not in sys.argv:
+    raise RuntimeError("Confirm listener scope before startup.")
 BoundedHTTPServer(("127.0.0.1", 3000), WebhookHandler).serve_forever()
 ```
 
@@ -691,7 +707,7 @@ func requireWebhookSecret() string {
     return secret
 }
 
-const maxWebhookBodyBytes int64 = 1024 * 1024
+const maxBodyBytes int64 = 1024 * 1024
 
 var webhookSecret = requireWebhookSecret()
 var recentNonces sync.Map
@@ -760,6 +776,10 @@ func verifySignature(payload []byte, signature, timestamp, nonce, secret string)
 }
 
 func webhookHandler(w http.ResponseWriter, r *http.Request) {
+    if r.URL.Path != "/webhook" {
+        http.NotFound(w, r)
+        return
+    }
     if r.Method != http.MethodPost {
         w.Header().Set("Allow", http.MethodPost)
         http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
@@ -767,7 +787,7 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
     }
     ctx, cancel := context.WithTimeout(r.Context(), 10*time.Second)
     defer cancel()
-    r.Body = http.MaxBytesReader(w, r.Body, maxWebhookBodyBytes)
+    r.Body = http.MaxBytesReader(w, r.Body, maxBodyBytes)
     payload, err := io.ReadAll(r.Body)
     if err != nil {
         var maxBytesError *http.MaxBytesError
@@ -992,8 +1012,8 @@ sample process listens on private HTTP and requires TLS termination before it.
 Do not install packages or proxy API keys from this skill.
 
 ```bash
-# Start the webhook server on infrastructure you control.
-node server.js  # listening on :3000
+# First confirm port 3000, exposure, retention, and the stop path.
+node server.js --confirmed-listener-scope  # listening on 127.0.0.1:3000
 ```
 
 Create the webhook only after confirming the exact HTTPS destination and event types.

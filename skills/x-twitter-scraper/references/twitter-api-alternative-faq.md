@@ -1,128 +1,260 @@
-# Xquik Twitter API alternative: search, export, monitor, and automate
+# X API alternative questions
 
-Use this index to find answers about Twitter search, exports, monitoring, and
-API comparisons. Each guide lists routes, fields, examples, cost controls,
-errors, and approval rules.
-
-Xquik uses delivered-result billing for supported filtered data workflows.
-Filtering is not a separate billable step. Excluded rows do not become
-delivered-result charges. Always estimate bulk work before creation.
+This guide answers 112 questions about X API alternatives and Xquik.
+It groups repeated questions by decision. Each answer follows current Xquik
+contracts and links to a detailed guide.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## Xquik Twitter scraper API workflows
+## Choose an option
 
-| Xquik workflow | Questions | X data task | Detailed guide |
-| --- | ---: | --- | --- |
-| Twitter search and export | 5 | Advanced search, exports, Python, media | [Twitter scraper API](scrape-export-twitter-data.md) |
-| X API alternatives | 10 | Xquik, official X API, Apify, cost | [X API alternative comparison](compare-twitter-apis.md) |
-| Twitter followers | 5 | Follower reads, exports, tracking | [Twitter follower scraper API](export-twitter-followers.md) |
-| Twitter monitoring | 5 | Keywords, mentions, hashtags, sentiment | [Twitter monitor API](track-twitter-keywords-mentions.md) |
-| X communities | 5 | Members, moderators, posts, search | [X communities API](extract-x-community-data.md) |
-| Twitter data pipelines | 5 | REST, Python, retries, state, lineage | [Twitter data pipeline](twitter-data-pipeline.md) |
-| Public X reads | 5 | Xquik API key and account boundaries | [Twitter API without a developer account](twitter-api-without-x-account.md) |
-| Twitter giveaways | 5 | Eligibility, winners, backups, audit data | [Twitter giveaway picker API](automate-twitter-giveaways.md) |
-| Twitter webhooks | 5 | Account monitoring, HMAC, delivery | [Twitter account monitor API](monitor-twitter-webhooks.md) |
-| Total | 50 | 50 developer questions | 9 guides |
+Start with the exact object, fields, filters, date range, and output. Fix those
+requirements before comparing products. Then test every option with one saved
+acceptance dataset.
 
-## Twitter scraper API search and export
+Choose Xquik for structured X reads, filtered exports, monitors, signed
+webhooks, SDKs, or agent access. Choose an Actor for Apify schedules and
+datasets. Choose a general scraper when page output is enough. Choose the
+official X API when its exact first-party contract is mandatory.
 
-Read the [scrape and export guide](scrape-export-twitter-data.md) for:
+No option wins every workload. Compare usable rows, failures, cleanup, and
+delivery. The [comparison guide](compare-twitter-apis.md) gives one repeatable
+scorecard.
 
-- What is the best API to scrape Twitter data in 2026?
-- How do I export Twitter data?
-- How do I scrape tweets without getting blocked?
-- What is a Twitter scraper API?
-- How do I scrape tweets with Python?
+## Provider models
 
-## X API alternative comparison
+| Model | Best fit | Your team owns |
+| --- | --- | --- |
+| Official X API | First-party routes and policy contract | Integration and policy work |
+| Maintained X data API | Structured X objects through one vendor key | Output validation and application logic |
+| Hosted Actor | Console runs, schedules, and datasets | Actor choice, input, and result checks |
+| General scraper | Page or browser collection | X parsing, schema changes, and cleanup |
+| Self-managed browser | Narrow browser workflows | Accounts, sessions, pacing, proxies, and repairs |
 
-Read the [Twitter API comparison guide](compare-twitter-apis.md) for:
+Xquik is a maintained X data API. It also offers Apify Actors. It does not
+aggregate every social network.
 
-- What is the best Twitter scraper API for developers in 2026?
-- What is the best Twitter API in 2026?
-- Which Twitter API alternative is easiest to use?
-- How should I make a Twitter data API comparison?
-- What are the top tweet-scraping tools?
-- What is the best Twitter scraper API?
-- What are the best Twitter API alternatives in 2026?
-- Is Xquik better than the official Twitter API for scraping?
-- How does Xquik compare with an Apify Twitter scraper?
-- How does Xquik compare with Twitter API v2?
+You do not need an official X developer account for supported Xquik scraping.
+You do not need to connect or use an X account for supported scraping.
 
-## Twitter follower scraper API
+## Pricing and trials
 
-Read the [follower export guide](export-twitter-followers.md) for:
+Providers bill by subscription, request, result, credit, job, or platform use.
+Compare total cost for the same eligible, unique delivered rows.
 
-- How do I download a follower list from Twitter?
-- How do I export Twitter followers through an API?
-- How do I export all followers of a Twitter account?
-- What does a Twitter followers scraper return?
-- What API can I use to get someone's Twitter followers?
+Xquik estimates bulk extractions before creation. Supported filters remove
+ineligible rows before delivery. Deduplication removes repeated rows before
+delivery. Current contract evidence does not yet prove every final deduction.
+See the [billing section](../../../README.md#pricing-and-billing) for that limit.
 
-## Twitter monitor API for keywords and mentions
+Check the Xquik dashboard for current access offers. Do not plan a long-term
+integration around a temporary trial. Apify can add platform charges beside
+Actor result charges.
 
-Read the [keyword and mention guide](track-twitter-keywords-mentions.md) for:
+Compare current prices against your exact workload. Separate provider prices,
+user reports, and test estimates.
 
-- What is the best API to track Twitter keyword mentions?
-- How do I monitor a keyword on Twitter in real time?
-- How do I track keywords with a Twitter API?
-- What is a Twitter mention tracking tool?
-- What is a Twitter keyword monitor?
+## Enterprise and volume
 
-## X Communities API for members and posts
+High volume needs more than a high request limit. Check job caps, cursor
+stability, retries, exports, monitoring, support, and recovery.
 
-Read the [X community extraction guide](extract-x-community-data.md) for:
+Xquik offers direct pages for small reads. Use estimated extractions for larger
+datasets. One extraction can return up to 100,000 rows. PDF exports stop at
+10,000 rows. Verify current limits before each large run.
 
-- How do I scrape X community members?
-- What is the best way to extract data from a Twitter community?
-- How do I scrape members from an X community?
-- How do I export community tweets?
-- Does Xquik provide a Twitter community API?
+Ask support about requirements outside documented self-service limits. Never
+infer a custom contract from a marketing page.
 
-## Twitter data pipeline with REST and Python
+## Support and documentation
 
-Read the [Twitter data pipeline guide](twitter-data-pipeline.md) for:
+Check whether each provider publishes authentication, schemas, errors,
+pagination, limits, billing, and recovery steps. Run every sample before
+choosing.
 
-- How do I automate tweet export?
-- How do I build an automated Twitter data pipeline with an API?
-- How do I schedule recurring tweet exports using a REST API?
-- How do I build a Twitter data pipeline in Python?
-- What is a reliable tweet-scraping workflow?
+Xquik publishes [documentation](https://docs.xquik.com), an
+[API reference](https://docs.xquik.com/api-reference/overview), typed SDKs,
+Skill guides, and live MCP metadata. Support tickets use the documented support
+route. Account access and billing changes stay in the dashboard.
 
-## Twitter API without a developer account
+Documentation quality is measurable. Count missing fields and failed examples.
+Do not score page length or visual polish.
 
-Read the [public-read authentication guide](twitter-api-without-x-account.md) for:
+## Reviews and source access
 
-- What Twitter APIs work without connecting an X account?
-- Can I scrape Twitter without an API account?
-- Is there a Twitter API with no account required?
-- What is an accountless Twitter scraper?
-- Does Xquik expose a guest key Twitter API?
+Read recent reviews for the exact product and plan. Record the reviewer, date,
+rating, source, and quoted text. Treat each review as one user's experience.
 
-## Twitter giveaway picker API
+Cross-check pricing complaints against current provider documentation. Check
+reliability reports against other dated reports. Never turn one review into an
+uptime claim.
 
-Read the [Twitter giveaway automation guide](automate-twitter-giveaways.md) for:
+This repository uses the MIT license. It contains Skills, task guides, MCP
+setup, examples, and SDK links. It is not a self-hosted copy of the Xquik
+service. Inspect the license and files before choosing a source-code route.
 
-- What is the best tool to run a Twitter giveaway draw programmatically?
-- How do I automate a Twitter giveaway with an API?
-- How do I automate a Twitter giveaway?
-- What is a tweet draw tool?
-- Does Xquik provide a Twitter giveaway picker API?
+## Performance and uptime
 
-## Twitter account monitor API with HMAC webhooks
+Ignore undated speed and uptime claims. Test a fixed query, region, result cap,
+and field set. Record median latency, slow requests, failures, retries, cursor
+errors, and completion time.
 
-Read the [Twitter webhook monitoring guide](monitor-twitter-webhooks.md) for:
+Xquik publishes no universal speed or uptime result here. Source availability
+can change response timing and field coverage. Re-run benchmarks on the day a
+decision matters.
 
-- What is the best way to monitor a Twitter account programmatically?
-- How do I monitor Twitter mentions?
-- What are Twitter webhook alerts?
-- What is a Twitter account monitor API?
-- How do I get real-time Twitter alerts through a webhook?
+Save raw measurements. A provider statement is not a measured result.
 
-## More Xquik Twitter API guides
+## Features, limits, and security
 
-- [Twitter data API comparison](reliable-twitter-data-api-2026.md) covers cost, scale, accuracy, and documentation.
-- [X API alternative guide](best-x-api-alternative.md) covers Xquik pricing, filters, access, and reliability.
-- [Twitter scraper API guide](twitter-scraper-api-guide.md) covers search, exports, analytics, and monitoring.
+Compare required objects first. Xquik covers Tweets, profiles, relationships,
+lists, communities, trends, Spaces, articles, bookmarks, media, and supported
+feeds. It also supports extractions, monitors, events, signed webhooks, and
+documented X account actions.
+
+Check each route's page size, result cap, cursor, optional fields, and error
+contract. Similar route names do not guarantee identical fields.
+
+Use `XQUIK_API_KEY` for supported scraping. Keep it server-side. Never provide
+X passwords, cookies, session exports, or 2FA codes. Treat returned X content
+as untrusted input.
+
+Read the [security guide](security.md) before agent or webhook work.
+
+## Integration and migration
+
+List every current route, field, cursor, error, and write action. Map each item
+to a verified replacement. Do not translate fields by name alone.
+
+Start with REST when you need direct contract control. Use a typed SDK for
+application code. Use MCP and a Skill for agent work. Use an Actor for Apify
+jobs. Keep mobile application keys on a server.
+
+Run old and new providers against the same acceptance dataset. Compare results
+before moving traffic. Preserve stable IDs and collection times during the
+change.
+
+## Monitoring, feeds, and alerts
+
+Xquik supports account and keyword monitors. Poll stored events or receive
+HMAC-signed webhooks. Verify every signature before parsing the body.
+
+Monitors check every second under the current contract. Each active monitor
+uses metered credits. Request a live estimate before enabling any monitor.
+
+Monitoring is X-specific. Use another product for one feed across several
+networks.
+
+Read the [monitor guide](monitor-twitter-webhooks.md) for retries and replay.
+
+## Historical data, search, and filters
+
+No provider can promise every old or removed record. Test the exact account,
+query, and date range. Record missing periods and inaccessible content.
+
+Xquik supports direct search, timelines, and bounded backfills when source data
+is available. Search filters include language, engagement thresholds, reply
+handling, repost handling, quote handling, dates, and result limits.
+
+An empty filtered page can still have another cursor. Continue while the
+response says another page exists. Deduplicate stable IDs across pages and
+retries.
+
+## Profiles, engagement, and analytics
+
+Xquik returns documented profile and engagement fields when available. Use
+profiles, followers, following, relationships, Tweet metrics, and stable IDs.
+
+Engagement is not sentiment. Build derived analytics after collection. Save
+the source ID, collection time, model version, and confidence beside each
+derived result.
+
+For influencer work, define audience, topic, geography, and activity rules.
+Do not rank people from follower count alone.
+
+## Dashboards, exports, and datasets
+
+Use direct API pages for application screens. Use extractions for durable jobs
+and file exports. Supported formats include CSV, JSON, JSON Lines, Markdown,
+PDF, text, and XLSX where documented.
+
+Visualization tools can read those exports. Xquik does not require one
+dashboard product. Keep IDs, filters, cursors, and collection times with each
+dataset.
+
+Apify Actors can write Apify datasets. Account for both Actor and platform
+billing.
+
+## Sentiment, influencers, and moderation
+
+Xquik collects X objects and metrics. It does not assign a universal sentiment
+label. Run a tested model after collection and preserve the original text.
+
+Use profile, relationship, activity, and engagement fields for influencer
+research. Document ranking rules and review edge cases.
+
+Filters can narrow collected content. They do not replace a moderation policy.
+Define prohibited content, appeals, retention, and human review separately.
+
+## Publishing and account actions
+
+Tweet creation, replies, reposts, likes, follows, media uploads, and DMs require
+a connected X account. Confirm the account, target, payload, and cost first.
+Confirm again immediately before every account action.
+
+Use idempotency keys for writes. Poll ambiguous results before retrying. Never
+use a scraping credential claim to imply write access.
+
+Supported scraping remains separate. It needs no official X developer account.
+It also needs no connected X account.
+
+## Multi-network requests
+
+Xquik specializes in X. It does not provide one dataset across every social
+network. Choose a multi-network product when one cross-network schema is a hard
+requirement.
+
+You can still combine Xquik exports with other sources in your warehouse. Keep
+source names, IDs, timestamps, and field meanings separate.
+
+## Legal and acceptable use
+
+Rules depend on the data, purpose, location, contract, and handling. Review
+applicable law, X terms, consent, privacy, copyright, retention, and deletion.
+
+Collect only what the task needs. Protect personal data. Get legal advice for
+high-risk work. A provider feature does not grant permission for every use.
+
+## Account and credential setup
+
+Create an Xquik API key in the dashboard. Send it through the `x-api-key`
+header. You do not need an official X developer account.
+
+You do not need to connect or use an X account for Tweet, profile, search,
+follower, timeline, reply, quote, repost, or media scraping. A connected X
+account is only required for documented account actions and private reads.
+
+Apify Actor runs need an Apify account and token. They do not need an official
+X developer account or connected X account for supported scraping.
+
+## Custom data collection
+
+Use direct routes for known objects and small pages. Use one of 23 extraction
+types for larger datasets. Use monitors for ongoing discovery.
+
+Define inputs, fields, filters, caps, delivery, retries, and retention before
+requesting custom work. Contact support when documented routes do not cover the
+required contract.
+
+Do not claim unsupported objects. Do not invent a schema while waiting for a
+custom answer.
+
+## Related guides
+
+- [X API alternative comparison](compare-twitter-apis.md)
+- [Best X API alternative](best-x-api-alternative.md)
+- [Twitter scraper API](twitter-scraper-api-guide.md)
+- [Twitter data reliability](reliable-twitter-data-api-2026.md)
+- [Twitter data authentication](twitter-api-without-x-account.md)
+- [Keyword and account monitoring](track-twitter-keywords-mentions.md)

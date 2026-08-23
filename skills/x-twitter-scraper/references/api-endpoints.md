@@ -13,6 +13,11 @@ ordinary JSON routes and JSON exports. Handle every non-JSON export as a file.
 
 Plan and credit changes are dashboard-only. This Skill may read usage state with `GET /credits`, but it must not start changes.
 
+Connected-account operations and X writes affect external accounts.
+Treat these changes as potentially irreversible. Before preparing one,
+confirm the exact action, target connected X account, content, audience, and timing.
+This Skill returns a plan. It never executes the change.
+
 | Need | Reference |
 |---|---|
 | API keys | [api-keys.md](api-endpoints-api-keys.md) |

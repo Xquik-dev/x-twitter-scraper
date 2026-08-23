@@ -1,6 +1,6 @@
 ---
 name: user-tweets
-description: "Use when the user wants recent posts, likes, or media from a public X account. Supports cursor pagination and bounded history extraction. Use other guides for writes or DMs."
+description: "Use when the user wants recent posts, likes, or media from an X account. Supports cursor pagination and bounded history extraction. Use other guides for writes or DMs."
 license: MIT
 metadata:
   internal: true
@@ -123,7 +123,7 @@ POST /extractions/estimate
 { "toolType": "post_extractor", "targetUsername": "elonmusk" }
 ```
 
-Show the user the usage estimate. On approval, create the job:
+Show the user the usage estimate. On confirmation, create the job:
 
 ```
 POST /extractions

@@ -1,5 +1,11 @@
 # Xquik TypeScript types: X write
 
+These types describe changes to a connected X account. Posting, sending a DM,
+and updating a profile affect other people and may use credits. Deletion may be
+irreversible. This Skill only drafts the request plan. Show the exact account,
+payload, external effect, and live usage estimate. Obtain explicit confirmation
+immediately before the user dispatches the unchanged request elsewhere.
+
 ```typescript
 
 interface CreateTweetBase {

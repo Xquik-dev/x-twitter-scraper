@@ -8,6 +8,11 @@ POST /compose
 
 Compose, refine, and score tweets with Xquik style signals. Run each step separately.
 
+The request sends its topic, draft, username, URLs, and extra context to Xquik.
+Remove secrets, personal data, and confidential text first. Show the exact
+content and confirm it before sending. Review current privacy, retention,
+deletion, and data-sharing terms before sensitive work.
+
 Send this body:
 
 | Field | Type | Required | Description |

@@ -71,11 +71,11 @@ Draw returns winners when complete. Use `GET /draws/{id}` later to retrieve the 
 
 ## Preserve the draw record
 
-Every draw response includes IDs, entry counts, and winners. Put the draw ID in public announcements so readers can retrieve the result.
+Every draw response includes IDs, entry counts, and winners. Put the draw ID in announcements so readers can retrieve the result.
 
-## Get approval
+## Get confirmation
 
-Creating a draw is metered and irreversible. Require explicit user approval for:
+Creating a draw is metered and irreversible. Require explicit user confirmation for:
 - Seed tweet URL
 - Entry source
 - Winner count

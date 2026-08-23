@@ -1,19 +1,15 @@
 {
   "$schema": "https://context7.com/schema/context7.json",
   "projectTitle": "X Twitter Scraper",
-  "description": "Xquik Twitter scraper API, MCP server, SDK, and Skill documentation. Covers X API alternatives, Twitter search, follower exports, social listening, extractions, monitoring, and webhooks. Not affiliated with X Corp.",
+  "description": "Xquik Twitter scraper API, MCP server, SDK, and Skill documentation for an X (Twitter) Scraper API and X API Alternative. You do not need an official X developer account. You do not need to connect or use an X account for scraping. Covers exports, monitors, and webhooks. Not affiliated with X Corp.",
   "branch": "master",
   "excludeFolders": [
     ".claude-plugin",
-    ".github",
-    "docker-mcp-registry",
-    "mcpize"
+    "docker-mcp-registry"
   ],
   "excludeFiles": [
     ".DS_Store",
-    ".gitignore",
     ".mcp.json",
-    "CODE_OF_CONDUCT.md",
     "LICENSE",
     "openclaw.plugin.json",
     "package.json",
@@ -30,8 +26,7 @@
     "If an older Codex release reports Authorization server response missing required issuer: expected https://xquik.com, do not repeat OAuth. Upgrade to Codex CLI 0.147.0 or later. If an upgrade is unavailable, set XQUIK_API_KEY and bearer_token_env_var = \"XQUIK_API_KEY\" in Codex TOML, then follow https://docs.xquik.com/guides/troubleshooting#codex-oauth-issuer-validation-error.",
     "Use task-guides/*.md for search, extraction, monitoring, webhook, posting, and DM workflows.",
     "Use commands/*.md for command examples.",
-    "Keep private implementation details out of public text. Use Xquik API, read service, write service, or browser service."
+    "Keep private implementation details out of external text. Use Xquik API, read service, write service, or browser service."
   ],
-  "url": "https://context7.com/xquik-dev/x-twitter-scraper",
-  "public_key": "pk_oCPeRRqZFJsY4cCUSotDD"
+  "url": "https://context7.com/xquik-dev/x-twitter-scraper"
 }

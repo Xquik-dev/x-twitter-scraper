@@ -1,5 +1,5 @@
 #!/bin/sh
-# SPDX-FileCopyrightText: 2026 Xquik Contributors
+# SPDX-FileCopyrightText: 2026 Xquik
 # SPDX-License-Identifier: MIT
 
-exec node stub-server.mjs
+exec bun stub-server.mjs

@@ -1,5 +1,19 @@
 # Xquik TypeScript types: extractions
 
+Extraction results can contain identifiers, profile details, relationships,
+and Tweet content. Before requesting them:
+
+1. Confirm an authorized purpose and applicable legal basis.
+2. Follow privacy, consent, disclosure, and X terms requirements.
+3. Set finite `resultsLimit`, `maxItemsPerTarget`, and `maxPagesPerTarget` values.
+4. Never omit limits to request every available result.
+5. Request only the needed targets and fields.
+6. Name recipients, access controls, retention, and a deletion date.
+
+Treat an omitted `resultsLimit` as an unbounded extraction request. Stop and
+ask for a finite bound. Get separate confirmation before exporting profile or
+relationship data.
+
 ```typescript
 
 type ExtractionToolType =
@@ -83,7 +97,7 @@ interface CreateExtractionRequest {
   searchQuery?: string; searchQueries?: string[];
   targets?: ExtractionMixedTarget[];
   relationTargets?: ExtractionRelationTarget[];
-  resultsLimit: number; // This Skill always sends a finite positive bound.
+  resultsLimit: number; // Finite maximum required by this Skill.
   queryType?: "Latest" | "Top" | "Both";
   maxItemsPerTarget?: number; maxPagesPerTarget?: number;
   startCursor?: string;
@@ -141,9 +155,57 @@ interface CreateExtractionRequest {
   bioContains?: string; locationContains?: string; usernameContains?: string;
 }
 
-function assertCreateExtractionRequest(request: CreateExtractionRequest): void {
-  if (!Number.isFinite(request.resultsLimit) || request.resultsLimit <= 0) {
-    throw new TypeError("resultsLimit must be finite and greater than zero.");
+interface ExtractionSafetyBounds {
+  maxResults: number;
+  maxItemsPerTarget: number;
+  maxPagesPerTarget: number;
+  maxAggregateItems: number;
+}
+
+function assertBoundedPositiveInteger(
+  value: unknown,
+  name: string,
+  maximum: number,
+): asserts value is number {
+  if (!Number.isInteger(value) || (value as number) < 1 || (value as number) > maximum) {
+    throw new TypeError(`${name} must be an integer from 1 to ${maximum}.`);
+  }
+}
+
+function extractionTargetCount(request: CreateExtractionRequest): number {
+  const targetArrays = [
+    request.targetTweetIds,
+    request.targetUsernames,
+    request.targetCommunityIds,
+    request.targetListIds,
+    request.searchQueries,
+    request.targets,
+    request.relationTargets,
+  ];
+  const arrayCount = targetArrays.reduce(
+    (count, targets) => count + (targets?.length ?? 0),
+    0,
+  );
+  return Math.max(1, arrayCount);
+}
+
+function assertCreateExtractionRequest(
+  request: CreateExtractionRequest,
+  bounds: ExtractionSafetyBounds,
+): void {
+  assertBoundedPositiveInteger(request.resultsLimit, "resultsLimit", bounds.maxResults);
+  assertBoundedPositiveInteger(
+    request.maxItemsPerTarget,
+    "maxItemsPerTarget",
+    bounds.maxItemsPerTarget,
+  );
+  assertBoundedPositiveInteger(
+    request.maxPagesPerTarget,
+    "maxPagesPerTarget",
+    bounds.maxPagesPerTarget,
+  );
+  if (extractionTargetCount(request) * request.maxItemsPerTarget > bounds.maxAggregateItems) {
+    throw new TypeError("Aggregate per-target limit exceeds the confirmed bound.");
   }
 }
 

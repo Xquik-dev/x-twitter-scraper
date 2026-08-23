@@ -10,6 +10,12 @@ explicit approval for that exact write.
 Cached profiles and comparisons are account-scoped reads. Require exact-scope
 approval before retrieving them.
 
+The cache can store third-party usernames, Tweet text, and Tweet metadata.
+Before caching, confirm an authorized purpose and applicable legal basis. Tell
+the user what Xquik will fetch, why it will be stored, and who can access it.
+Confirm the exact username, needed content, recipients, retention period, and deletion
+date. Never reuse cached content for profiling, targeting, or unrelated work.
+
 ### Analyze and cache style
 
 `POST /styles`
@@ -120,9 +126,7 @@ Possible errors include `404 style_not_found`.
 
 ### Delete cached style
 
-```http
-DELETE /styles/{id}
-```
+Use the delete method on `/styles/{id}`.
 
 This action is destructive. This permanently deletes the cached style profile.
 Show the exact label or username and explain the lost cached data. Delete only

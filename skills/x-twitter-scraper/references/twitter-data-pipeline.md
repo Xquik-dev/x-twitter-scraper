@@ -11,7 +11,7 @@ exports, monitors, events, webhooks, REST, MCP, and typed SDKs.
 
 1. Validate the target, query, fields, and result bound.
 2. Approve the direct request, purpose, usage, recipients, destination, and retention.
-3. Run the approved request to confirm data quality.
+3. Run the confirmed request to confirm data quality.
 4. Estimate bulk work with the exact creation body.
 5. Approve and create the extraction.
 6. Persist the job ID before polling.
@@ -85,9 +85,9 @@ Read `XQUIK_API_KEY` from a secret manager. Use an HTTP client with connect and
 read timeouts. Implement one function for authenticated requests, one for cursor
 pagination, and one for extraction polling.
 
-Persist state in a database or durable job store. Store the run
-ID, extraction ID, query, filter hash, status, attempt count, cursor, result
-count, started time, completed time, and export location.
+For an explicitly requested recurring pipeline, save run state in the user's
+chosen database or job store. Store the run ID, extraction ID, query, filter
+hash, status, attempt count, cursor, result count, times, and export location.
 
 Use the included Python reference for bounded requests, estimates, polling,
 giveaways, and webhook handling.

@@ -74,10 +74,27 @@ async function xquikFetch(path, options = {}) {
     if (deadline !== null && remaining <= 0) {
       throw new Error("Xquik request deadline exceeded.");
     }
-    const waitMs = deadline === null ? delayMs : Math.min(delayMs, remaining);
-    await new Promise((resolve) => setTimeout(resolve, waitMs));
+    if (deadline !== null && delayMs > remaining) {
+      throw new Error("Request deadline cannot honor the full retry delay.");
+    }
+    await new Promise((resolve) => setTimeout(resolve, delayMs));
   };
   const method = (requestOptions.method || "GET").toUpperCase();
+  const requestApprovalProvider = globalThis.xquikRequestApprovalProvider;
+  if (typeof requestApprovalProvider !== "function") {
+    throw new Error("Configure xquikRequestApprovalProvider before API access.");
+  }
+  const requestProposal = {
+    method,
+    path,
+    body: requestOptions.body ?? null,
+  };
+  const confirmedRequest = await requestApprovalProvider(
+    structuredClone(requestProposal),
+  );
+  if (JSON.stringify(confirmedRequest) !== JSON.stringify(requestProposal)) {
+    throw new Error("Request differs from its exact confirmation record.");
+  }
   const retrySafe = method === "GET";
   let retriedCoverageCursor = false;
 
@@ -255,7 +272,15 @@ stable identity.
 
 ```javascript
 async function requireExplicitApproval(proposal) {
-  throw new Error(`Approval required for ${JSON.stringify(proposal)}. Implement the approval gate first.`);
+  const approvalProvider = globalThis.xquikApprovalProvider;
+  if (typeof approvalProvider !== "function") {
+    throw new Error("Configure xquikApprovalProvider before this workflow.");
+  }
+  const confirmed = await approvalProvider(structuredClone(proposal));
+  if (JSON.stringify(confirmed) !== JSON.stringify(proposal)) {
+    throw new Error("Confirmed proposal changed. Request approval again.");
+  }
+  return confirmed;
 }
 
 const extractionRequest = {
@@ -264,7 +289,13 @@ const extractionRequest = {
   resultsLimit: 1000,
 };
 
-// Estimate usage before creating the job.
+await requireExplicitApproval({
+  action: "Calculate an extraction estimate without creating a job.",
+  request: extractionRequest,
+  purpose: "Check the bounded follower request before any bulk job.",
+});
+
+// Estimate usage before creating the job. This route creates no extraction job.
 const estimate = await xquikFetch("/extractions/estimate", {
   method: "POST",
   body: JSON.stringify(extractionRequest),
@@ -289,7 +320,7 @@ const extractionProposal = {
 };
 const approvedExtraction = await requireExplicitApproval(extractionProposal);
 if (JSON.stringify(approvedExtraction) !== JSON.stringify(extractionProposal)) {
-  throw new Error("Approved extraction changed. Request approval again.");
+  throw new Error("Confirmed extraction changed. Request approval again.");
 }
 
 let job = await xquikFetch("/extractions", {
@@ -312,7 +343,7 @@ if (job.status !== "completed") {
   throw new Error(job.errorMessage || "Extraction failed.");
 }
 
-// Retrieve no more than the approved 1,000 results.
+// Retrieve no more than the confirmed 1,000 results.
 const allResults = await fetchAllPages(
   `/extractions/${job.id}`,
   "results",
@@ -334,11 +365,11 @@ const exportProposal = {
 };
 const approvedExport = await requireExplicitApproval(exportProposal);
 if (JSON.stringify(approvedExport) !== JSON.stringify(exportProposal)) {
-  throw new Error("Approved export changed. Request approval again.");
+  throw new Error("Confirmed export changed. Request approval again.");
 }
 const approvedExportWriter = globalThis.xquikApprovedExportWriter;
 if (typeof approvedExportWriter !== "function") {
-  throw new Error("Configure the approved xquikApprovedExportWriter first.");
+  throw new Error("Configure the confirmed xquikApprovedExportWriter first.");
 }
 const exportUrl = `${BASE}/extractions/${encodeURIComponent(approvedExport.jobId)}/export?format=${encodeURIComponent(approvedExport.format)}`;
 const { response: csvResponse, body: csvData } = await fetchTextWithTimeout(
@@ -390,7 +421,7 @@ const deliveryProposal = {
 };
 const approvedDelivery = await requireExplicitApproval(deliveryProposal);
 if (JSON.stringify(approvedDelivery) !== JSON.stringify(deliveryProposal)) {
-  throw new Error("Approved monitoring setup changed. Request approval again.");
+  throw new Error("Confirmed monitoring setup changed. Request approval again.");
 }
 
 // Create a persistent monitor. Active monitors are metered hourly.
@@ -440,6 +471,12 @@ try {
 // Store webhook.secret now. The API returns it once.
 ```
 
+Put `webhook.secret` in a secret manager immediately. Limit access to the
+receiver. Never log it, return it in responses, or place it in source control.
+Verify every signature with the stored secret before parsing event fields.
+Rotate by replacing the webhook under a separately confirmed plan. Revoke by
+disabling or deleting the webhook, then delete the stored secret.
+
 Use `GET /events` only in a separate polling-only workflow. Do not register a
 webhook and poll the same monitor simultaneously.
 
@@ -484,4 +521,8 @@ Monitor event types include `tweet.new`, `tweet.quote`, `tweet.reply`, and
 | Upload media | `POST /x/media` | Metered write action |
 | Create or delete a community | `POST /x/communities` creates. The `/x/communities/{id}` route with the `DELETE` method deletes. | Metered write action |
 | Join or leave a community | `POST /x/communities/{id}/join` joins. The same route with the `DELETE` method leaves. | Metered write action |
-| Manage support tickets | `POST /support/tickets` | Included |
+| Manage support tickets | `POST /support/tickets` | Included; confirm Xquik support as the destination, exact redacted content, attachments, recipients, and retention |
+
+Before ticket creation, remove secrets and unnecessary personal data. Show the
+exact subject, body, attachments, destination, recipients, and retention terms.
+Create the ticket only after confirmation.

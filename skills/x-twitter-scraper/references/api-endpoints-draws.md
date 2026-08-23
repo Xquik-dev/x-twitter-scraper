@@ -95,6 +95,6 @@ Choose `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, or `xlsx`. Choose `winn
 Get approval first. Full entry exports can contain participant identity and
 activity data. Show the lawful purpose, exact draw, type, format, audience, and
 retention period. Export only after explicit approval for that exact request.
-Prefer winners-only output. Do not retain data beyond the approved purpose.
+Prefer winners-only output. Do not retain data beyond the confirmed purpose.
 
 ---

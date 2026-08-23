@@ -55,7 +55,7 @@ Each row: `{ username, name, role: "host"|"cohost"|"speaker"|"listener", joined_
 ## Fetch the Space data
 
 1. Get the Space ID from the URL (`x.com/i/spaces/<id>`).
-2. Run the extraction with user approval.
+2. Run the extraction with user confirmation.
 3. Export or summarize participant list.
 
 ## Protect Space data

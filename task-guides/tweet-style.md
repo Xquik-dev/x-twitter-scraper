@@ -28,7 +28,7 @@ metadata:
 
 # Analyze tweet style
 
-Measure a public X account's tone, post length, topics, formats, and engagement by format.
+Measure a visible X account's tone, post length, topics, formats, and engagement by format.
 
 ## Choose an endpoint
 

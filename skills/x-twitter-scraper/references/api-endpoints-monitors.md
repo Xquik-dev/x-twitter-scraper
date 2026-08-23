@@ -73,15 +73,13 @@ PATCH /monitors/{id}
 ```
 
 Get approval first. Show the current and proposed event types and active
-state. Apply only the explicitly approved change.
+state. Apply only the explicitly confirmed change.
 
 Send `{ "eventTypes": [...], "isActive": true|false }`. Both fields are optional.
 
 ### Delete monitor
 
-```http
-DELETE /monitors/{id}
-```
+Use the delete method on `/monitors/{id}`.
 
 This action is destructive. This permanently stops tracking and deletes associated
 monitor data. Show the monitor ID, target, and lost data. Delete only after
@@ -94,10 +92,11 @@ GET /monitors/keywords
 POST /monitors/keywords
 GET /monitors/keywords/{id}
 PATCH /monitors/keywords/{id}
-DELETE /monitors/keywords/{id}
 ```
 
 Create and manage ongoing keyword monitors. They are persistent resources. Confirm the query, event delivery, and ongoing usage before creating or enabling one.
+
+Use the delete method on `/monitors/keywords/{id}` to remove one.
 
 Create with `{ "query": "#buildinpublic", "eventTypes": ["tweet.new"] }`.
 Poll its events with `GET /events?keywordMonitorId=<id>`.

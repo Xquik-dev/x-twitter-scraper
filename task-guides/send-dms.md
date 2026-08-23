@@ -1,6 +1,6 @@
 ---
 name: send-dms
-description: "Use when the user wants to send 1 X DM or read DM history after explicit approval. Never send bulk DMs."
+description: "Use when the user wants to send 1 X DM or read DM history after explicit confirmation. Never send bulk DMs."
 license: MIT
 metadata:
   internal: true
@@ -62,26 +62,26 @@ The recipient must allow DMs from people they don't follow, or must follow the s
 
 1. Use the exact account supplied by the user. Otherwise, show that
    `GET /x/accounts` returns the complete connected-account list. Obtain
-   explicit approval before listing accounts or selecting a sender.
+   explicit confirmation before listing accounts or selecting a sender.
 2. `GET /x/users/{id}` to resolve the recipient handle into a numeric `id`.
 3. Optionally call `GET /x/dm/{userId}/history?account=<username>&cursor=<optional>`.
-   Show the exact account, conversation partner, purpose, approved page count,
-   and recipients. Obtain explicit approval for that private read.
-   Block ambiguous account selection or unapproved pagination.
-4. Show the user the exact DM text, recipient, and sender account. Wait for explicit approval.
+   Show the exact account, conversation partner, purpose, confirmed page count,
+   and recipients. Obtain explicit confirmation for that private read.
+   Block ambiguous account selection or pagination without confirmation.
+4. Show the user the exact DM text, recipient, and sender account. Wait for explicit confirmation.
 5. Call `POST /x/dm/{userId}`. Direct REST supplies the key. Hosted MCP injects it.
 6. Poll `statusUrl` after a `202` response until `terminal` is true.
 
 ## Confirmation rules
 
-DMs are private messages sent as the user. Never send without explicit approval of:
+DMs are private messages sent as the user. Never send without explicit confirmation of:
 - Recipient handle
 - Exact message text
 - Sending account
 
 Hard no:
 - Bulk DMs across multiple recipients in one turn
-- Auto-replying to incoming DMs without per-message approval
+- Auto-replying to incoming DMs without per-message confirmation
 - Using DMs for any promotional content without user direction
 
 ## Handle errors

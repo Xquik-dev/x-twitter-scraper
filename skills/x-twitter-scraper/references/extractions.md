@@ -4,12 +4,12 @@ Xquik provides 23 bulk data extraction tools. Each tool requires a specific targ
 
 ## Privacy and acceptable use
 
-Bulk extraction and export can collect large amounts of public identity,
+Bulk extraction and export can collect large amounts of visible identity,
 activity, and relationship data. Before creating a job, confirm the lawful
 purpose, target, `resultsLimit`, intended recipients, and retention period.
 Follow X rules and applicable privacy law. Do not use these tools for
 credential collection, private data, surveillance, discrimination, harassment,
-doxxing, or unrelated secondary use. Delete exported data when the approved
+doxxing, or unrelated secondary use. Delete exported data when the confirmed
 purpose ends.
 
 Every extraction requires an estimate and explicit approval for the exact
@@ -285,11 +285,11 @@ if (typeof xquikFetch !== "function") {
 }
 const extractionId = globalThis.xquikExtractionId;
 if (typeof extractionId !== "string" || !extractionId) {
-  throw new Error("Supply the approved xquikExtractionId first.");
+  throw new Error("Supply the confirmed xquikExtractionId first.");
 }
 const approvedMaxPages = globalThis.xquikApprovedMaxPages;
 if (!Number.isInteger(approvedMaxPages) || approvedMaxPages < 1) {
-  throw new Error("Supply the approved positive xquikApprovedMaxPages first.");
+  throw new Error("Supply the confirmed positive xquikApprovedMaxPages first.");
 }
 
 const results = [];
@@ -317,7 +317,7 @@ for (let pageNumber = 0; pageNumber < approvedMaxPages; pageNumber++) {
   }
   nextCursor = page.nextCursor;
 }
-if (nextCursor) throw new Error("Approved extraction page limit reached.");
+if (nextCursor) throw new Error("Confirmed extraction page limit reached.");
 ```
 
 The endpoint returns up to 1,000 results per page. When `hasMore` is true, send
@@ -341,10 +341,10 @@ Exports include enrichment columns not present in the API response.
 The endpoint supports follower, following, post, engagement, profile, media,
 language, search, and date filters. It does not project individual fields.
 
-Get approval first. Set the smallest approved `resultsLimit` when creating
+Get approval first. Set the smallest confirmed `resultsLimit` when creating
 the job. Before export, show the job, filters, format, row count, schema,
 recipients, storage, and retention. Materialize or transmit the dataset only
-after explicit approval. Delete it when the approved purpose ends.
+after explicit approval. Delete it when the confirmed purpose ends.
 
 ## Estimating usage
 

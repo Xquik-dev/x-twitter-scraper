@@ -1,8 +1,11 @@
 # Xquik REST API endpoints: direct X lookups
 
-These metered reads require Xquik credentials. Public tweet, article, search,
+These metered reads require Xquik credentials. Visible tweet, article, search,
 and profile lookups do not require a connected X account. Connect an X account
 only for sections that explicitly require private or account-scoped access.
+
+Most metered lookups use only `XQUIK_API_KEY`. Only the private or account-context routes
+name a connected X account requirement.
 
 ## Get tweet
 
@@ -177,6 +180,18 @@ GET /x/users/{id}/verified-followers
 ```
 
 Read followers, following, mentions, and verified followers for a username or numeric user ID. These are paginated read operations.
+
+Before calling any listed endpoint:
+
+1. Confirm the exact target username or user ID. Stop if the target is ambiguous.
+2. Confirm an authorized purpose and applicable legal basis.
+3. Set a finite result cap and pagination limit.
+4. Name the intended recipients and secure destination.
+5. Respect visibility restrictions and access controls.
+6. Confirm retention and a deletion date.
+7. Get separate confirmation before forwarding or exporting results.
+
+Never use a default or inferred account.
 
 ## Automatic cursor recovery
 

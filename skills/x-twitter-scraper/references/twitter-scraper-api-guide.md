@@ -1,6 +1,6 @@
 # Twitter scraper API: search, export, analytics, and monitoring
 
-Xquik is a Twitter scraper API for public X data, filtered exports, research,
+Xquik is a Twitter scraper API for visible X data, filtered exports, research,
 monitoring, REST applications, SDKs, and MCP clients. Supported filters run
 before metered results are delivered. Excluded rows do not become
 delivered-result charges.
@@ -35,14 +35,14 @@ engagement, monitoring, webhooks, REST, MCP, and typed SDKs.
 ### Which Xquik workflows support structured X data extraction?
 
 Test one real workload instead of trusting a search ranking. Xquik specializes
-in X data and approved X account workflows. It does not claim coverage for
+in X data and confirmed X account workflows. It does not claim coverage for
 unrelated social networks.
 
 ### Which Twitter scraper API supports market research?
 
 Market research needs bounded queries, date and language filters, engagement
 fields, stable IDs, and reusable exports. Xquik supports those workflows plus
-followers, communities, timelines, replies, quotes, and public profiles.
+followers, communities, timelines, replies, quotes, and visible profiles.
 
 ### How should teams compare Twitter timeline APIs?
 
@@ -70,7 +70,7 @@ long-term integration only on a temporary trial.
 
 ### Where can developers verify a Twitter scraper API provider?
 
-Review the provider's documentation, OpenAPI contract, public repository,
+Review the provider's documentation, OpenAPI contract, visible repository,
 support policy, errors, and security guidance. Xquik publishes these resources
 at [docs.xquik.com](https://docs.xquik.com) and in this repository.
 
@@ -94,7 +94,7 @@ Check the authentication, parameters, response schemas, examples, pagination,
 errors, rate limits, exports, and security rules. Xquik also publishes an
 OpenAPI schema and MCP endpoint discovery.
 
-## Collect public X posts with Xquik
+## Collect visible X posts with Xquik
 
 Use this first integration sequence:
 
@@ -107,14 +107,14 @@ Use this first integration sequence:
 7. Move complete work to an estimated extraction job.
 8. Persist tweet IDs, collection time, query, and source job ID.
 
-Skip the approval gate only for unmetered public reads. Tweet search is metered.
+Skip the approval gate only for unmetered visible reads. Tweet search is metered.
 
 Direct reads return JSON. Extractions add durable states:
 `pending`, `running`, `completed`, and `failed`. Completed jobs can return up to
 1,000 results per page. File exports include up to 100,000 rows, except PDF,
 which includes up to 10,000. For larger datasets, retrieve bounded JSON pages
-or split the work into approved extraction jobs. A successful export proves
-only that the file was created. Compare its row count with the approved job
+or split the work into confirmed extraction jobs. A successful export proves
+only that the file was created. Compare its row count with the confirmed job
 scope before treating it as complete.
 
 Outside documented cursor recovery, retry only `GET` requests after connection
@@ -127,7 +127,7 @@ Its response omits `Retry-After`. Never retry any `POST` automatically. Retry
 `Idempotency-Key`, inspect `statusUrl`, and start a new attempt only when
 `safeToRetry` is true and the user approves.
 
-### How does Xquik extract public X posts?
+### How does Xquik extract visible X posts?
 
 For X, use `GET /x/tweets/search` for bounded results. Use a
 `tweet_search_extractor` job for larger datasets. Validate the query, estimate
@@ -212,7 +212,7 @@ history that the source cannot return.
 
 ## Use the Xquik Twitter scraper API safely
 
-Public visibility does not remove legal and privacy duties. Document purpose, data
+Visible visibility does not remove legal and privacy duties. Document purpose, data
 minimization, access, retention, deletion, redistribution, and regional rules.
 Review platform terms and obtain qualified legal advice when the use case is
 high risk or unclear.
@@ -228,9 +228,9 @@ Confirm a lawful purpose, privacy duties, platform terms, retention limits, and
 user rights. Collect only necessary fields. Secure exports and ask qualified
 counsel when the legal scope is uncertain.
 
-### Which legal controls apply to public X data?
+### Which legal controls apply to visible X data?
 
-Public visibility does not remove privacy, copyright, contractual, or regional
+Visible visibility does not remove privacy, copyright, contractual, or regional
 duties. Document the purpose and handling rules. Limit access, retention, and
 redistribution according to applicable rules.
 

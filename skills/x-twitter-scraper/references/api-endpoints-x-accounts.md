@@ -1,6 +1,6 @@
 # Xquik REST API endpoints: connected X accounts
 
-Manage connected X accounts for approved write actions.
+Manage connected X accounts for confirmed write actions.
 
 Users connect and re-authenticate X accounts in the Xquik dashboard. This Skill never handles X login material. Direct users to the dashboard account page to connect or refresh an account.
 
@@ -16,7 +16,7 @@ POST /x/accounts/{id}/reauth
 POST /x/accounts/bulk-retry
 ```
 
-Do not call these routes from this Skill. This list keeps the Skill docs aligned with the public API and marks the dashboard-only boundary.
+Do not call these routes from this Skill. This list keeps the Skill docs aligned with the documented API and marks the dashboard-only boundary.
 
 ## List X accounts
 
@@ -42,9 +42,7 @@ explicit approval for that exact read.
 
 ## Disconnect X account
 
-```http
-DELETE /x/accounts/{id}
-```
+Use the delete method on `/x/accounts/{id}`.
 
 Permanently removes the account from Xquik. Returns `{ success: true }`. Before calling, confirm with the user.
 

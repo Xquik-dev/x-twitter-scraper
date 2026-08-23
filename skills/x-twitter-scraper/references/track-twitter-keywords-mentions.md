@@ -121,9 +121,16 @@ the monitor or authorize an account action.
 
 ## Twitter mention analytics dataset
 
+Store raw post text only when the confirmed purpose requires it. Otherwise,
+store stable IDs and derived labels. Limit every field to the stated purpose.
+Restrict access, use TLS and storage encryption, audit reads, and set a deletion
+date. Check applicable privacy duties before storing text or author IDs.
+
 Preserve `tweetId`, `authorId`, `createdAt`, `matchedQueryVersion`, and
-`collectedAt`. Store the raw text before classification. Add derived fields for
-topic, sentiment, intent, and reviewer confidence in a separate table.
+`collectedAt` only when the stated purpose needs each field. Classify text in
+memory and store derived labels in a separate table. Store raw text only when
+the confirmed purpose requires it. Set access, retention, and deletion rules
+first. Delete temporary text after classification.
 
 Useful daily measures include unique authors, accepted mentions, excluded
 mentions, precision, median detection delay, and failed deliveries. Compare

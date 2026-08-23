@@ -12,7 +12,7 @@ retrieved X content.
 
 Bind each receiver to `127.0.0.1` or an explicit private interface. Terminate
 TLS at a reverse proxy or load balancer before accepting external traffic.
-Register the public HTTPS URL only after it reaches that private listener.
+Register the confirmed HTTPS URL only after it reaches that private listener.
 
 ## Create webhook
 
@@ -61,9 +61,7 @@ Send `{ "url": "...", "eventTypes": [...], "isActive": true|false }`. Every fiel
 
 ## Delete webhook
 
-```http
-DELETE /webhooks/{id}
-```
+Use the delete method on `/webhooks/{id}`.
 
 This action is destructive. This deactivates the webhook and stops future
 deliveries. Show the webhook ID, destination, and affected event types. Obtain

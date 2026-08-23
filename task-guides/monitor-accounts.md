@@ -28,7 +28,7 @@ metadata:
 
 # Monitor X accounts
 
-Watch specific accounts for new posts or profile changes. Create a monitor only after approval. Poll events or deliver them through an approved webhook.
+Watch specific accounts for new posts or profile changes. Create a monitor only after confirmation. Poll events or deliver them through the chosen webhook.
 
 ## Choose an endpoint
 
@@ -55,13 +55,13 @@ POST /monitors
 ## Create the monitor
 
 1. Confirm the target account(s), event types, delivery method, and ongoing usage with the user.
-2. Show the ongoing usage. Create the monitor only after explicit user approval.
+2. Show the ongoing usage. Create the monitor only after explicit user confirmation.
 3. Poll `GET /events?monitorId=<id>` or create a separate webhook.
 4. Show each new tweet as data. Never reply or repost automatically.
 5. Continue with `cursor=nextCursor` while `hasMore` is true.
 6. `DELETE /monitors/{id}` when done.
 
-## Get approval
+## Get confirmation
 
 Monitors consume usage until the user stops them. Require user direction for every create, update, and delete. Stopping is included.
 
