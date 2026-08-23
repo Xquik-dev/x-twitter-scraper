@@ -1223,7 +1223,10 @@ test("preserves final AutoSkills full-review fixes", async () => {
     python,
     /def parse_retry_after\([\s\S]*re\.fullmatch\(r"\[0-9\]\+"[\s\S]*except ValueError/,
   );
-  assert.match(python, /## Retry with exponential backoff[\s\S]*import random\nimport re\nimport time/);
+  assert.match(
+    python,
+    /## Retry with exponential backoff[\s\S]*import random\nimport re\nimport socket\nimport time/,
+  );
   assert.match(
     python,
     /def xquik_download\(path, approved_max_bytes, deadline=None\)[\s\S]*response, attempt_deadline, approved_max_bytes/,
@@ -1414,4 +1417,35 @@ test("preserves latest full-review pagination and delivery safeguards", async ()
     workflows,
     /const delay = retryAfterMs !== null\s+\? retryAfterMs\s+: Math\.min\(maxRetryDelay/,
   );
+});
+
+test("preserves complete final full-review fixes", async () => {
+  const [webhookEndpoints, xApi, python, scrape, pipeline, keywords, webhooks, workflows] =
+    await Promise.all([
+      read("skills/x-twitter-scraper/references/api-endpoints-webhooks.md"),
+      read("skills/x-twitter-scraper/references/api-endpoints-x-api.md"),
+      read("skills/x-twitter-scraper/references/python-examples.md"),
+      read("skills/x-twitter-scraper/references/scrape-export-twitter-data.md"),
+      read("skills/x-twitter-scraper/references/twitter-data-pipeline.md"),
+      read("skills/x-twitter-scraper/references/track-twitter-keywords-mentions.md"),
+      read("skills/x-twitter-scraper/references/webhooks.md"),
+      read("skills/x-twitter-scraper/references/workflows.md"),
+    ]);
+
+  assert.match(webhookEndpoints, /Store it in a[\s\S]*secret manager for HMAC verification/);
+  assert.match(webhookEndpoints, /Never log, commit, or expose it/);
+  assert.match(xApi, /Require exactly 1 active connected\s+account/);
+  assert.match(xApi, /selection is missing or ambiguous/);
+  assert.match(python, /import socket[\s\S]*except \(urllib\.error\.URLError, socket\.timeout, TimeoutError\)/);
+  assert.match(python, /any\(not isinstance\(event_type, str\) for event_type in event_types\)/);
+  assert.match(scrape, /The direct search is metered[\s\S]*Require approval for that unchanged request/);
+  assert.match(scrape, /require_explicit_approval\(proposal\) != proposal[\s\S]*requests\.get/);
+  assert.match(pipeline, /Approve the direct request[\s\S]*Run the approved request/);
+  assert.match(keywords, /Then validate it with that\s+unchanged bounded[\s\S]*search/);
+  assert.equal(
+    (webhooks.match(/Call validate(?:SubscriptionEventTypes|_subscription_event_types)/g) ?? [])
+      .length,
+    3,
+  );
+  assert.match(workflows, /`\/extractions\/\$\{job\.id\}`,[\s\S]*100,[\s\S]*"after"/);
 });
