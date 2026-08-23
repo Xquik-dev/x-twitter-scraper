@@ -1355,11 +1355,16 @@ test("preserves final full-review safeguards", async () => {
   assert.match(draws, /drawAttemptStore\.getOrCreate\([\s\S]*idempotencyKey: crypto\.randomUUID/);
   assert.match(draws, /enforce a unique constraint and atomically return/);
   assert.match(community, /`community_posts` \| Community ID, tweet ID, snapshot ID[\s\S]*collection time/);
+  assert.match(community, /Deduplicate by snapshot ID and user ID within each snapshot/);
   assert.match(extractions, /const xquikFetch = globalThis\.xquikFetch/);
   assert.match(extractions, /const extractionId = globalThis\.xquikExtractionId/);
   assert.match(extractions, /const approvedMaxPages = globalThis\.xquikApprovedMaxPages/);
   assert.match(extractions, /if \(nextCursor\) params\.set\("after", nextCursor\)/);
   assert.match(python, /except \(json\.JSONDecodeError, UnicodeDecodeError\)/);
+  assert.match(
+    python,
+    /except urllib\.error\.HTTPError as error:[\s\S]*retry_after = error\.headers\.get\("Retry-After"\)[\s\S]*finally:\n\s+error\.close\(\)/,
+  );
   assert.match(guide, /Approve the exact request, intended use, destination, and retention/);
   assert.match(guide, /Skip the approval gate only for unmetered public reads/);
   assert.match(webhooks, /NONCE_LOCK = threading\.Lock\(\)[\s\S]*with NONCE_LOCK:/);
@@ -1371,6 +1376,8 @@ test("preserves final full-review safeguards", async () => {
   assert.match(workflows, /const exportProposal = \{[\s\S]*jobId:[\s\S]*format:[\s\S]*rowCount:[\s\S]*schema:/);
   assert.match(workflows, /hmacVerificationPlan: \{[\s\S]*signatureHeader:[\s\S]*replayWindow:/);
   assert.match(workflows, /JSON\.stringify\(approvedDelivery\) !== JSON\.stringify\(deliveryProposal\)/);
+  assert.match(workflows, /const approvedExportWriter = globalThis\.xquikApprovedExportWriter/);
+  assert.match(workflows, /await approvedExportWriter\(\{[\s\S]*data: csvData/);
 });
 
 test("preserves latest full-review pagination and delivery safeguards", async () => {
