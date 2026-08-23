@@ -245,7 +245,7 @@ test("documents source-backed review fixes", async () => {
   assert.match(draws, /Remaining credits cap how many replies and retweeters/);
   assert.match(draws, /"winners": \[\]/);
   assert.match(errors, /\| 424 \| `x_api_unavailable` \|/);
-  assert.match(extractions, /GET \/extractions\/\{id\}\?limit=1000&cursor=<nextCursor>/);
+  assert.match(extractions, /new URLSearchParams\(\{ limit: "1000", after: nextCursor \}\)/);
   assert.match(events, /"id": "1893556789012345678"/);
   assert.match(events, /"author": \{/);
   assert.match(events, /"createdAt": "2026-02-24T16:45:00.000Z"/);
@@ -305,8 +305,8 @@ test("documents bounded jobs, retries, exports, and webhook delivery", async () 
   assert.match(draws, /estimated entries, intended\s+audience, and retention period/);
   assert.match(draws, /request: \{ drawId: draw\.id, format: "csv", type: "winners" \}/);
   assert.equal((errors.match(/default v1 string error contract/g) ?? []).length, 2);
-  assert.match(extractions, /GET \/extractions\/\{id\}\?limit=1000&cursor=<nextCursor>/);
-  assert.match(extractions, /send[\s\S]*`nextCursor` unchanged[\s\S]*`cursor`/i);
+  assert.match(extractions, /new URLSearchParams\(\{ limit: "1000", after: nextCursor \}\)/);
+  assert.match(extractions, /send[\s\S]*`nextCursor` unchanged[\s\S]*`after`/i);
   assert.match(python, /urllib\.parse\.urlencode/);
   assert.match(python, /poll_deadline = time\.monotonic\(\) \+ 5 \* 60/);
   assert.match(python, /event_type not in SUPPORTED_EVENT_TYPES[\s\S]*send_response\(503\)/);
@@ -417,7 +417,10 @@ test("hardens bounded workflows and persistent delivery setup", async () => {
   assert.match(pipeline, /retention period, and deactivation or deletion procedure/);
 
   assert.match(workflows, /await response\.text\(\)[\s\S]*finally[\s\S]*clearTimeout/);
-  assert.match(workflows, /fetchAllPages\(path, dataKey, maxResults, identityForItem, maxPages = 100\)/);
+  assert.match(
+    workflows,
+    /async function fetchAllPages\([\s\S]*maxPages = 100,[\s\S]*cursorParameter = "cursor"/,
+  );
   assert.match(workflows, /error\.status === 410/);
   assert.match(workflows, /error\.code === "coverage_cursor_gone"/);
   assert.match(workflows, /seenIds\.has\(identity\)/);
@@ -1051,8 +1054,8 @@ test("preserves complete AutoSkills review fixes", async () => {
   assert.ok(draws.indexOf("async function xquikFetch") < draws.indexOf('xquikFetch("/draws"'));
   assert.match(draws, /const drawProposal = \{[\s\S]*request: drawRequest[\s\S]*usageLimitation/);
   assert.match(draws, /JSON\.stringify\(approval\) !== JSON\.stringify\(drawProposal\)/);
-  assert.match(draws, /const drawIdempotencyKey = crypto\.randomUUID\(\)/);
-  assert.match(draws, /"Idempotency-Key": drawIdempotencyKey/);
+  assert.match(draws, /await drawAttemptStore\.save\(drawAttemptId, drawAttempt\)/);
+  assert.match(draws, /"Idempotency-Key": drawAttempt\.idempotencyKey/);
   assertIncludes(followers, contract.extractionFormats.map((format) => `\`${format}\``));
   assert.match(mcp, /Download media[\s\S]*exact `tweetInput`[\s\S]*destination[\s\S]*retention/);
   assert.match(mcp, /require `allowed === true`/);
@@ -1273,4 +1276,38 @@ test("preserves latest AutoSkills full-review safeguards", async () => {
   assert.match(webhooks, /class TimeoutHTTPServer\(HTTPServer\):[\s\S]*connection\.settimeout\(10\.0\)/);
   assert.match(webhooks, /def do_POST\(self\):[\s\S]*if self\.path != "\/webhook"/);
   assert.match(webhooks, /func webhookHandler[\s\S]*if r\.Method != http\.MethodPost/);
+});
+
+test("preserves final CodeRabbit full-review contract fixes", async () => {
+  const [endpointExtractions, extractions, workflows, python, account, draws, media] =
+    await Promise.all([
+      read("skills/x-twitter-scraper/references/api-endpoints-extractions.md"),
+      read("skills/x-twitter-scraper/references/extractions.md"),
+      read("skills/x-twitter-scraper/references/workflows.md"),
+      read("skills/x-twitter-scraper/references/python-examples.md"),
+      read("skills/x-twitter-scraper/references/types-account.md"),
+      read("skills/x-twitter-scraper/references/draws.md"),
+      read("skills/x-twitter-scraper/references/types-download-media.md"),
+    ]);
+
+  assert.equal(
+    (endpointExtractions.match(/new URLSearchParams\(\{ limit: "(?:100|1000)", after: nextCursor \}\)/g) ?? [])
+      .length,
+    2,
+  );
+  assert.match(extractions, /new URLSearchParams\(\{ limit: "1000", after: nextCursor \}\)/);
+  assert.match(workflows, /Radar and[\s\S]*extractions accept it as `after`/);
+  assert.match(workflows, /params\.set\(cursorParameter, cursor\)/);
+  assert.match(workflows, /const retrySafe = method === "GET"/);
+  assert.match(python, /retry_safe = method == "GET"/);
+  assert.match(python, /urllib\.parse\.urlencode\(\{"limit": 1000, "after": cursor\}\)/);
+  assert.match(account, /monitorBilling: \{/);
+  assert.doesNotMatch(account, /monitorUsage/);
+  assert.match(account, /autoTopupEnabled: boolean/);
+  assert.match(account, /autoTopupAmountDollars: number/);
+  assert.match(account, /autoTopupThreshold: string/);
+  assert.match(draws, /await drawAttemptStore\.save\(drawAttemptId, drawAttempt\)[\s\S]*xquikFetch\("\/draws"/);
+  assert.match(draws, /"Idempotency-Key": drawAttempt\.idempotencyKey/);
+  assert.match(media, /tweetId: string/);
+  assert.match(media, /tweetUrl: string/);
 });
