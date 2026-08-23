@@ -67,7 +67,7 @@ test("keeps every README example bounded and contract-shaped", async () => {
   for (const token of [
     "new URL(\"https://xquik.com/api/v1/x/tweets/search\")",
     "requests.get(",
-    "npm install x-twitter-scraper",
+    "bun add x-twitter-scraper",
     "client.x.tweets.search({",
     'xquik.request("/api/v1/x/tweets/search"',
     "x-twitter-scraper x:tweets search",

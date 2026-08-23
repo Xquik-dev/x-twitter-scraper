@@ -127,14 +127,14 @@ contract, support, or platform relationship is required.
 Install the primary Skill for any compatible agent:
 
 ```bash
-npx skills@1.5.3 add Xquik-dev/x-twitter-scraper
+bunx skills@1.5.3 add Xquik-dev/x-twitter-scraper
 ```
 
 Inspect the shadcn registry item before adding the same Skill:
 
 ```bash
-npx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
-npx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
+bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
+bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
 ```
 
 ### LobeHub
@@ -194,7 +194,7 @@ The `x-developer` bundle is v2.6.7. Hosted MCP v2.6.0 exposes 120 catalog
 routes through 2 structured API tools. Of these, 119 support JSON or text.
 Current clients negotiate MCP `2026-07-28` through `server/discover`.
 
-The live OpenAPI currently documents 128 REST API operations. The npm package `x-developer` contains this Skill and plugin bundle. The separate `x-twitter-scraper` package is the TypeScript SDK.
+The live OpenAPI currently documents 128 REST API operations. The package `x-developer` contains this Skill and plugin bundle. The separate `x-twitter-scraper` package is the TypeScript SDK.
 
 ## Choose the right client
 
@@ -264,7 +264,7 @@ page = response.json()
 Install the typed SDK:
 
 ```bash
-npm install x-twitter-scraper
+bun add x-twitter-scraper
 ```
 
 ```ts
@@ -551,7 +551,7 @@ high-risk work.
 
 | Tool | Install or source |
 | --- | --- |
-| TypeScript | [`npm install x-twitter-scraper`](https://github.com/Xquik-dev/x-twitter-scraper-typescript) |
+| TypeScript | [`bun add x-twitter-scraper`](https://github.com/Xquik-dev/x-twitter-scraper-typescript) |
 | Python | [`pip install x_twitter_scraper`](https://github.com/Xquik-dev/x-twitter-scraper-python) |
 | Go | [x-twitter-scraper-go](https://github.com/Xquik-dev/x-twitter-scraper-go) |
 | Ruby | [x-twitter-scraper-ruby](https://github.com/Xquik-dev/x-twitter-scraper-ruby) |

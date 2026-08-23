@@ -3,10 +3,9 @@
 ## Protect private support data
 
 Tickets can disclose private account context. Preview each subject, message,
-file, ticket ID, or status change. Obtain confirmation for that exact action. Before
+file, ticket ID, or status change. Obtain approval for that exact action. Before
 private reads, show the account, purpose, scope, bound, recipients, and retention
 plan. Exclude secrets, unrelated context, and unnecessary personal data.
-Use these routes only when the user explicitly asks to manage Xquik support.
 
 ### Create or reply
 
@@ -29,6 +28,9 @@ New requests return `201`. Direct REST callers may send a random
 or reply. Reuse it only for identical text and attachments. Never log it. A safe
 replay returns `200` plus `Idempotency-Replayed: true`. Different content with
 the same key returns `409 idempotency_key_conflict`.
+Never retry a direct REST write without this key. After a timeout, reuse the
+same key only for the identical payload. MCP injects and reuses the key for its
+bounded transport retries.
 Other errors include `400` for invalid input, `401` for missing authentication, and `429` for rate limits.
 Replies also return `404` for a missing ticket.
 
@@ -39,7 +41,10 @@ Use `GET /support/tickets`, `GET /support/tickets/{id}`, or
 
 List returns `{ tickets }`. Get returns ticket details, messages, and attachment
 metadata. Patch accepts `{ "status": "open" | "resolved" | "closed" }`.
-Private reads and status changes require the exact confirmations above.
+Patch returns `{ "publicId": "tkt_...", "status": "resolved" }`. It can return
+`400` for an invalid status, `401` for missing authentication, `404` for a
+missing ticket, or `429` for rate limits. Private reads and status changes
+require the exact approvals above.
 
 ### Download an attachment
 

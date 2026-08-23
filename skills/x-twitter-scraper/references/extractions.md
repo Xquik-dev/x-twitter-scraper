@@ -4,24 +4,25 @@ Xquik provides 23 bulk data extraction tools. Each tool requires a specific targ
 
 ## Privacy and acceptable use
 
-Bulk extraction and export can collect large amounts of identity,
+Bulk extraction and export can collect large amounts of visible identity,
 activity, and relationship data. Before creating a job, confirm the lawful
 purpose, target, `resultsLimit`, intended recipients, and retention period.
 Follow X rules and applicable privacy law. Do not use these tools for
 credential collection, private data, surveillance, discrimination, harassment,
-doxxing, or unrelated secondary use. Delete exported data when the stated
+doxxing, or unrelated secondary use. Delete exported data when the confirmed
 purpose ends.
 
-Every extraction requires an estimate and explicit confirmation for the exact
-bounded job. Never infer confirmation from a general request or increase a bound
-without renewed confirmation.
+Every extraction requires an estimate and explicit approval for the exact
+bounded job. Never infer approval from a general request or increase a bound
+without renewed approval.
 
 The API accepts an omitted `resultsLimit`. This Skill must always send an
 explicit finite positive bound. Use the same bound for estimate and create.
 
-Call `POST /extractions`
-
-Estimate first with `POST /extractions/estimate` with the same body to preview `creditsRequired`, `creditsAvailable`, and whether the job is allowed.
+First send the bounded body to `POST /extractions/estimate`. Review
+`creditsRequired`, `creditsAvailable`, and `allowed`. Create nothing when
+`allowed` is false. When it is true, show the exact estimate and wait for
+explicit approval. Only then send the same body to `POST /extractions`.
 
 ## Tool types
 
@@ -39,6 +40,7 @@ These tools require `targetTweetId`.
 | `favoriters` | Extract users who favorited a tweet |
 
 For example:
+
 ```json
 {
   "toolType": "reply_extractor",
@@ -60,6 +62,7 @@ These tools require `targetUsername`.
 | `post_extractor` | Extract posts from an account |
 
 For example:
+
 ```json
 {
   "toolType": "follower_explorer",
@@ -76,10 +79,11 @@ These tools require `targetUsername`.
 
 | Tool type | Description |
 |-----------|-------------|
-| `user_likes` | Extract tweets liked by a user; treat as a sensitive preference read |
+| `user_likes` | Extract tweets liked by a user |
 | `user_media` | Extract media tweets from a user |
 
 For example:
+
 ```json
 {
   "toolType": "user_likes",
@@ -87,10 +91,6 @@ For example:
   "resultsLimit": 100
 }
 ```
-
-Before a `user_likes` extraction, confirm the target, authorized purpose,
-result limit, and recipients. Require separate confirmation before forwarding
-or exporting results. See [security](security.md).
 
 ### Community-based tools
 
@@ -104,6 +104,7 @@ These tools require `targetCommunityId`.
 | `community_search` | Search posts within a community (also requires `searchQuery`) |
 
 For example:
+
 ```json
 {
   "toolType": "community_extractor",
@@ -123,6 +124,7 @@ These tools require `targetListId`.
 | `list_follower_explorer` | Extract followers of a list |
 
 For example:
+
 ```json
 {
   "toolType": "list_member_extractor",
@@ -140,6 +142,7 @@ These tools require `targetSpaceId`.
 | `space_explorer` | Extract participants of a Space |
 
 For example:
+
 ```json
 {
   "toolType": "space_explorer",
@@ -158,6 +161,7 @@ These tools require `searchQuery`.
 | `tweet_search_extractor` | Search and extract tweets by keyword or hashtag |
 
 For a people search:
+
 ```json
 {
   "toolType": "people_search",
@@ -167,6 +171,7 @@ For a people search:
 ```
 
 For a tweet search:
+
 ```json
 {
   "toolType": "tweet_search_extractor",
@@ -234,6 +239,7 @@ For a tweet search:
 | `advancedQuery` | string | Raw X search operators appended to query |
 
 For example, apply filters:
+
 ```json
 {
   "toolType": "tweet_search_extractor",
@@ -246,11 +252,9 @@ For example, apply filters:
 }
 ```
 
-Every estimate and creation request must include the same explicit, finite,
-positive integer `resultsLimit`. Reject a missing, zero, negative, or
-non-integer value. Validate it against the current contract maximum. If the
-user raises the limit, run a new estimate and obtain confirmation again before
-creating or changing the job.
+The API makes `resultsLimit` optional. This Skill requires a finite positive
+value. Pass the same value to `POST /extractions/estimate` and
+`POST /extractions`.
 
 ### Profile filters
 
@@ -274,11 +278,51 @@ The status is `pending`, `running`, `completed`, or `failed`.
 
 ## Retrieving results
 
-```
-GET /extractions/{id}
+```javascript
+const xquikFetch = globalThis.xquikFetch;
+if (typeof xquikFetch !== "function") {
+  throw new Error("Configure the authenticated xquikFetch client first.");
+}
+const extractionId = globalThis.xquikExtractionId;
+if (typeof extractionId !== "string" || !extractionId) {
+  throw new Error("Supply the confirmed xquikExtractionId first.");
+}
+const approvedMaxPages = globalThis.xquikApprovedMaxPages;
+if (!Number.isInteger(approvedMaxPages) || approvedMaxPages < 1) {
+  throw new Error("Supply the confirmed positive xquikApprovedMaxPages first.");
+}
+
+const results = [];
+let nextCursor;
+for (let pageNumber = 0; pageNumber < approvedMaxPages; pageNumber++) {
+  const params = new URLSearchParams({ limit: "1000" });
+  if (nextCursor) params.set("after", nextCursor);
+  const page = await xquikFetch(`/extractions/${extractionId}?${params}`);
+  if (
+    page === null ||
+    typeof page !== "object" ||
+    Array.isArray(page) ||
+    !Array.isArray(page.results) ||
+    typeof page.hasMore !== "boolean"
+  ) {
+    throw new Error("Invalid extraction page.");
+  }
+  results.push(...page.results);
+  if (!page.hasMore) {
+    nextCursor = undefined;
+    break;
+  }
+  if (typeof page.nextCursor !== "string" || !page.nextCursor) {
+    throw new Error("Missing extraction cursor.");
+  }
+  nextCursor = page.nextCursor;
+}
+if (nextCursor) throw new Error("Confirmed extraction page limit reached.");
 ```
 
-The endpoint returns up to 1,000 results per page. Each result includes:
+The endpoint returns up to 1,000 results per page. When `hasMore` is true, send
+the returned `nextCursor` unchanged as the next request's `after` value. Each result
+includes:
 
 - `xUserId`, `xUsername`, `xDisplayName`
 - `xFollowersCount`, `xVerified`, `xProfileImageUrl`
@@ -286,7 +330,7 @@ The endpoint returns up to 1,000 results per page. Each result includes:
 
 ## Exporting results
 
-```
+```http
 GET /extractions/{id}/export?format=csv
 ```
 
@@ -297,14 +341,14 @@ Exports include enrichment columns not present in the API response.
 The endpoint supports follower, following, post, engagement, profile, media,
 language, search, and date filters. It does not project individual fields.
 
-Get confirmation first. Set the smallest confirmed `resultsLimit` when creating
+Get approval first. Set the smallest confirmed `resultsLimit` when creating
 the job. Before export, show the job, filters, format, row count, schema,
 recipients, storage, and retention. Materialize or transmit the dataset only
-after explicit confirmation. Delete it when the stated purpose ends.
+after explicit approval. Delete it when the confirmed purpose ends.
 
 ## Estimating usage
 
-```
+```http
 POST /extractions/estimate
 ```
 

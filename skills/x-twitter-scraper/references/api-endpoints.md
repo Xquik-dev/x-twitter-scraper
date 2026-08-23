@@ -11,18 +11,12 @@ before decoding the body. Use `Content-Disposition` for the suggested filename.
 Call `response.json()` whenever `Content-Type` indicates JSON. This includes
 ordinary JSON routes and JSON exports. Handle every non-JSON export as a file.
 
-Treat `XQUIK_API_KEY` as a secret. Load it from a secret manager or environment
-variable. Send it only in the HTTPS `x-api-key` header to `xquik.com`. Never put
-it in URLs, prompts, logs, responses, source files, or committed configuration.
-Redact it from errors and rotate it immediately if exposed. See
-[security](security.md).
-
 Plan and credit changes are dashboard-only. This Skill may read usage state with `GET /credits`, but it must not start changes.
 
-Connected-account operations and X writes affect external accounts. They can
-publish, modify, or delete user-controlled data. Treat these changes as
-potentially irreversible. Immediately before each request, confirm the exact
-action, target connected X account, content, audience, and timing.
+Connected-account operations and X writes affect external accounts.
+Treat these changes as potentially irreversible. Before preparing one,
+confirm the exact action, target connected X account, content, audience, and timing.
+This Skill returns a plan. It never executes the change.
 
 | Need | Reference |
 |---|---|

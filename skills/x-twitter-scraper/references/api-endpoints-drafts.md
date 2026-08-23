@@ -1,11 +1,11 @@
 # Xquik REST API endpoints: drafts
 
-## Require confirmation for drafts
+## Require approval for drafts
 
 `GET` operations expose private saved content. State the exact draft scope and
-obtain explicit confirmation immediately before each read. `POST` and `DELETE`
+obtain explicit approval immediately before each read. `POST` and `DELETE`
 operations are non-default writes. Show the exact draft text or draft ID and
-obtain explicit confirmation immediately before each write. Never infer confirmation
+obtain explicit approval immediately before each write. Never infer approval
 from an earlier request or retry a failed write automatically.
 
 ### Create draft
@@ -14,8 +14,8 @@ from an earlier request or retry a failed write automatically.
 
 Save a tweet draft for later.
 
-Get confirmation first. Preview the complete text and metadata. Create the draft
-only after the user explicitly confirms that exact payload.
+Get approval first. Preview the complete text and metadata. Create the draft
+only after the user explicitly approves that exact payload.
 
 Send this request body:
 
@@ -46,8 +46,10 @@ For a 201 response, the API returns:
 
 List saved tweet drafts with cursor pagination.
 
-This is a private read. Show the requested page size and account scope. List drafts
-only after explicit confirmation for that exact read.
+This is a private read. Show the account scope, page size, starting `afterCursor`
+or lack of one, and maximum page count. List drafts only after explicit approval
+for that exact scope. Stop at the confirmed page limit. Obtain new approval before
+following any `nextCursor` beyond it.
 
 Use these query parameters:
 
@@ -70,10 +72,12 @@ For a 200 response, the API returns:
       "updatedAt": "2026-02-24T10:30:00.000Z"
     }
   ],
-  "afterCursor": "cursor_string",
+  "nextCursor": "cursor_string",
   "hasMore": true
 }
 ```
+
+The final page omits `nextCursor` when `hasMore` is `false`.
 
 ---
 
@@ -83,7 +87,7 @@ For a 200 response, the API returns:
 
 Get a specific draft by ID.
 
-This is a private read. Show the draft ID. Fetch it only after explicit confirmation for
+This is a private read. Show the draft ID. Fetch it only after explicit approval for
 that exact read, including any preview before deletion.
 
 For a 200 response, the API returns 1 draft object.
@@ -94,10 +98,10 @@ Possible errors include `400 invalid_id` and `404 draft_not_found`.
 
 ### Delete draft
 
-Send a delete request to `/drafts/{id}`.
+Use the delete method on `/drafts/{id}`.
 
 This action is destructive. Deletion is permanent and cannot be recovered through
-this API. Show the draft ID and text, then obtain explicit confirmation immediately
+this API. Show the draft ID and text, then obtain explicit approval immediately
 before deleting it. Returns `204 No Content`.
 
 Possible errors include `400 invalid_id` and `404 draft_not_found`.

@@ -127,7 +127,7 @@ Until these checks pass, `leastCostProven` stays `false`.
 Run:
 
 ```bash
-npm run check:cost-study
+bun run check:cost-study
 node scripts/check-cost-study.mjs --json
 ```
 

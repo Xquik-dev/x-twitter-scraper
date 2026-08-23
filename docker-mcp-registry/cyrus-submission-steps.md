@@ -19,10 +19,10 @@ If the Cyrus URL returns "Skill not found," request a listing below.
 2. Post in their skills/marketplace channel requesting listing for:
    - Repository: https://github.com/Xquik-dev/x-twitter-scraper
    - Skill path: `skills/x-twitter-scraper/SKILL.md`
-   - Install command: `npx skills@1.5.3 add Xquik-dev/x-twitter-scraper`
+   - Install command: `bunx skills@1.5.3 add Xquik-dev/x-twitter-scraper`
    - Category: Development or Data & APIs
    - Description: Twitter scraper API Skill for search, exports, monitoring,
-     HMAC webhooks, and X account actions. Includes 127 REST
+     HMAC webhooks, and X account actions. Includes 128 REST
      operations and 120 MCP catalog routes. Of these, 119 support JSON or text.
 
 ### Open a GitHub issue

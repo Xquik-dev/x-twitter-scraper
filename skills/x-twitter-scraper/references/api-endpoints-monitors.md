@@ -1,13 +1,13 @@
 # Xquik REST API endpoints: monitors
 
-## Require confirmation for monitors
+## Require approval for monitors
 
-Monitor reads expose private configuration and require exact-scope confirmation.
+Monitor reads expose private configuration and require exact-scope approval.
 Creating, updating, enabling, disabling, or deleting a monitor changes a
 persistent and potentially metered resource.
 Before every write, show the exact account or keyword, event types, delivery
 plan, ongoing usage, and disable path. If delivery uses a webhook, show its
-exact URL and HMAC verification plan. Proceed only after explicit confirmation for
+exact URL and HMAC verification plan. Proceed only after explicit approval for
 that exact action. Never create monitoring from an ambiguous request.
 
 ### Create monitor
@@ -16,7 +16,7 @@ that exact action. Never create monitoring from an ambiguous request.
 POST /monitors
 ```
 
-Get confirmation first. This starts persistent monitoring. Confirm the exact
+Get approval first. This starts persistent monitoring. Confirm the exact
 username, event types, delivery plan, ongoing usage, and disable path first.
 Include the exact URL and HMAC verification plan for webhook delivery.
 
@@ -48,14 +48,14 @@ Returns `409 monitor_already_exists` if the username is already monitored.
 
 ### List monitors
 
-```
+```http
 GET /monitors
 ```
 
 Returns up to 200 monitors without pagination. The response includes `monitors` and `total`.
 
 This is a private read. List monitor targets and delivery configuration only after
-explicit confirmation for that account scope.
+explicit approval for that account scope.
 
 ### Get monitor
 
@@ -64,7 +64,7 @@ GET /monitors/{id}
 ```
 
 This is a private read. Show the monitor ID. Retrieve its configuration only after
-explicit confirmation for that exact read.
+explicit approval for that exact read.
 
 ### Update monitor
 
@@ -72,38 +72,37 @@ explicit confirmation for that exact read.
 PATCH /monitors/{id}
 ```
 
-Get confirmation first. Show the current and proposed event types and active
+Get approval first. Show the current and proposed event types and active
 state. Apply only the explicitly confirmed change.
 
 Send `{ "eventTypes": [...], "isActive": true|false }`. Both fields are optional.
 
 ### Delete monitor
 
-Use method `DELETE` on route `/monitors/{id}`.
+Use the delete method on `/monitors/{id}`.
 
 This action is destructive. This permanently stops tracking and deletes associated
 monitor data. Show the monitor ID, target, and lost data. Delete only after
-explicit confirmation immediately before the call.
+explicit approval immediately before the call.
 
 ### Keyword monitors
 
-```
+```http
 GET /monitors/keywords
 POST /monitors/keywords
 GET /monitors/keywords/{id}
 PATCH /monitors/keywords/{id}
 ```
 
-Delete a keyword monitor with method `DELETE` on route
-`/monitors/keywords/{id}`.
-
 Create and manage ongoing keyword monitors. They are persistent resources. Confirm the query, event delivery, and ongoing usage before creating or enabling one.
 
-Create with `{ "query": "#indiehacking", "eventTypes": ["tweet.new"] }`.
+Use the delete method on `/monitors/keywords/{id}` to remove one.
+
+Create with `{ "query": "#buildinpublic", "eventTypes": ["tweet.new"] }`.
 Poll its events with `GET /events?keywordMonitorId=<id>`.
 
 Creating, updating, enabling, disabling, or deleting a keyword monitor requires
-explicit confirmation for the exact monitor. For creates and updates, show the
+explicit approval for the exact monitor. For create and update operations, show the
 proposed keyword, event types, and delivery changes. For enable or disable,
 show the active-state transition. For deletion, show the exact target and all
 associated data that will be permanently lost.

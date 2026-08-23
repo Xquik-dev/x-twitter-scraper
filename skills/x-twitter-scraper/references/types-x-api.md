@@ -140,6 +140,9 @@ state appears only through an explicitly requested
 `GET /api/v1/x/followers/check` lookup.
 
 Use `mode=complete&limit=25000` for bounded maximum-coverage reply collection.
+Before this metered bulk read, show the exact target, filters, limit, usage
+estimate or limitation, destination, recipients, retention, and cancellation
+path. Obtain explicit confirmation for that unchanged plan before sending it.
 Count direct replies only when `inReplyToId` equals the root tweet ID. Keep
 `nested_replies` separate. On `424 replies_incomplete`, retain safe partial rows
 and follow `diagnostic.recommendedFallback`.

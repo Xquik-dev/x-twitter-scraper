@@ -1,6 +1,6 @@
 # Translation review register
 
-The source hash is `10c1c2029ee52892a74a624459f334c1f75c37bc3faceed8ea35e6e17a331f4f`.
+The source hash is `2e43104d3de4a410c431e0dff67b26d069a86ea1ebf3c95558b191c23dc00969`.
 
 `Pending` means the file is translated and checked by automation. It has not
 yet received the required fluent human review.

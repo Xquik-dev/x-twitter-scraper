@@ -20,7 +20,7 @@ if [[ ! "$GITHUB_REF_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
   exit 1
 fi
 
-package_version="$(node -p "require('./package.json').version")"
+package_version="$(bun -e "process.stdout.write(require('./package.json').version)")"
 expected_tag="v${package_version}"
 if [[ "$GITHUB_REF_NAME" != "$expected_tag" ]]; then
   echo "Release tag does not match package version ${package_version}. Use ${expected_tag}." >&2
@@ -39,4 +39,4 @@ if ! git merge-base --is-ancestor "$GITHUB_SHA" "origin/${DEFAULT_BRANCH}"; then
   exit 1
 fi
 
-npm run check-versions
+bun run check-versions

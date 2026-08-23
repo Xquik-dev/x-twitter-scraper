@@ -240,8 +240,8 @@ test("documents source-backed review fixes", async () => {
     read("skills/x-twitter-scraper/references/api-endpoints-support.md"),
   ]);
 
-  assert.match(skill, /allowed-tools: WebFetch mcp__xquik__explore mcp__xquik__xquik/);
-  assert.match(skill, /`WebFetch` access for public docs[\s\S]*only/);
+  assert.match(skill, /allowed-tools: WebFetch/);
+  assert.match(skill, /mcp:[\s\S]*allowed: false[\s\S]*setup-and-request-planning-only/);
   assert.match(draws, /Remaining credits cap how many replies and retweeters/);
   assert.match(draws, /"winners": \[\]/);
   assert.match(errors, /\| 424 \| `x_api_unavailable` \|/);
@@ -281,16 +281,16 @@ test("separates REST credentials from client-managed MCP OAuth", async () => {
     read("skills/x-twitter-scraper/references/mcp-tools.md"),
   ]);
 
-  assert.match(skill, /required: \[\][\s\S]*optional:[\s\S]*XQUIK_API_KEY/);
-  assert.match(skill, /For REST, a valid Xquik API key/);
-  assert.match(skill, /For MCP, client-managed OAuth 2\.1/);
-  assert.match(skill, /Use HTTPS directly/);
-  assert.match(skill, /URL-encoded/);
-  assert.match(metadata, /client-managed-oauth-2\.1-or-bearer-fallback/);
+  assert.match(skill, /required:[\s\S]*- XQUIK_API_KEY/);
+  assert.match(skill, /REST calls made from this Skill use only `XQUIK_API_KEY`/);
+  assert.match(skill, /OAuth is an MCP-client credential flow/);
+  assert.match(skill, /x-api-key/);
+  assert.match(metadata, /"oauthHandledByAgent": false/);
+  assert.match(metadata, /"oauthHandledByMcpClient": true/);
   assert.match(security, /OAuth 2\.1 with S256 PKCE/);
   assert.match(security, /`Authorization: Bearer` fallback/);
-  assert.match(setup, /Business workspaces limit Developer[\s\S]*admins and owners/);
-  assert.match(setup, /Enterprise and[\s\S]*Edu workspaces[\s\S]*role-based/);
+  assert.match(setup, /ChatGPT uses OAuth here[\s\S]*workspace controls/);
+  assert.match(setup, /cannot present a custom API key/);
   assert.match(tools, /Record<string, string \| number \| boolean>/);
 });
 
@@ -440,7 +440,7 @@ test("hardens bounded workflows and persistent delivery setup", async () => {
   assert.match(writeEndpoints, /Direct REST callers supply this header/);
 });
 
-test("aligns public safety and type contracts", async () => {
+test("aligns external safety and type contracts", async () => {
   const [
     skill,
     errors,
@@ -473,8 +473,8 @@ test("aligns public safety and type contracts", async () => {
     read("skills/x-twitter-scraper/skill-card.md"),
   ]);
 
-  assert.match(skill, /For REST, use the Xquik API key/);
-  assert.match(skill, /For MCP, prefer client-managed\s+OAuth 2\.1/);
+  assert.match(skill, /REST calls made from this Skill use only `XQUIK_API_KEY`/);
+  assert.match(skill, /OAuth is an MCP-client credential flow/);
   assert.match(errors, /Never\s+retry `POST`, `PATCH`, or `DELETE` automatically/);
   assert.match(errors, /inspect `statusUrl`/);
   assert.match(supportEndpoints, /Never retry a direct REST write without this key/);
@@ -502,13 +502,16 @@ test("aligns public safety and type contracts", async () => {
 
   assert.match(extractionTypes, /interface CreateExtractionResponse/);
   assert.match(extractionTypes, /interface CreateExtractionRequest[\s\S]*resultsLimit: number/);
-  assert.match(extractionTypes, /Number\.isFinite\(request\.resultsLimit\)/);
+  assert.match(extractionTypes, /Number\.isInteger\(value\)/);
+  assert.match(extractionTypes, /request\.maxItemsPerTarget/);
+  assert.match(extractionTypes, /request\.maxPagesPerTarget/);
+  assert.match(extractionTypes, /bounds\.maxAggregateItems/);
   assert.match(supportTypes, /type SupportAttachments =\s+\| \[Blob\]/);
   assert.match(supportTypes, /body or attachments is required/);
   assert.match(supportTypes, /candidate\.body\.length > 10_000/);
 
   assert.match(workflows, /removes the like/);
-  assert.match(skillCard, /1 low-confidence MIT license finding and 0 confirmed security issues/);
+  assert.match(skillCard, /clean static and repeated semantic SkillSpector 2\.9\.6 scans/);
   assert.match(skillCard, /local files or local networks/);
 });
 
@@ -991,14 +994,15 @@ test("preserves final review safety and correctness fixes", async () => {
 
   assert.match(events, /Require explicit approval for that scope before reading a page/);
   assert.match(events, /Require\nexplicit approval before retrieving the event/);
-  assert.match(xApi, /Public tweet, article, search,[\s\S]*do not require a connected X account/);
+  assert.match(xApi, /Visible tweet, article, search,[\s\S]*do not require a connected X account/);
   assert.doesNotMatch(xWrite, /^(?:GET|POST|PATCH|DELETE|PUT) \/x\//m);
   assert.match(xWrite, /POST \/api\/v1\/x\/tweets/);
   assert.match(comparison, /top tweet-scraping tools/);
   assert.match(giveaways, /\(draws\.md\)/);
   assert.match(giveaways, /Before exporting,[\s\S]*Require separate approval/);
   assert.doesNotMatch(alternative, /\.\.\/\.\.\/\.\.\/logo\.png/);
-  assert.match(mcpSetup, /require_approval=\{"explore": "never", "xquik": "always"\}/);
+  assert.match(mcpSetup, /Only the MCP server setting is returned/);
+  assert.doesNotMatch(mcpSetup, /Runner\.run/);
   assert.doesNotMatch(mcpSetup, /normalized snake_case responses/);
   assert.match(mcpSetup, /returns the selected REST response object[\s\S]*`safeToRetry`/);
   assert.match(mcpTools, /`safeToRetry` is true/);
@@ -1025,7 +1029,7 @@ test("preserves final review safety and correctness fixes", async () => {
   assert.doesNotMatch(workflows, /existingMonitorIds|existingWebhookIds|candidates\.length/);
   assert.doesNotMatch(workflows, /const eventParams = new URLSearchParams/);
   assert.match(skill, /Serialize X-authored content as JSON/);
-  assert.doesNotMatch(skill, /requires:\n\s+env:\n\s+- XQUIK_API_KEY/);
+  assert.match(skill, /requires:\n\s+env:\n\s+- XQUIK_API_KEY/);
 });
 
 test("preserves complete AutoSkills review fixes", async () => {
@@ -1067,8 +1071,9 @@ test("preserves complete AutoSkills review fixes", async () => {
   assert.match(mcp, /Download media[\s\S]*exact `tweetInput`[\s\S]*destination[\s\S]*retention/);
   assert.match(mcp, /require `allowed === true`/);
 
-  assert.match(python, /json_body=extraction_request[\s\S]*estimate\["allowed"\] is not True/);
-  assert.match(python, /require_explicit_approval\(proposal\) != proposal/);
+  assert.match(python, /json_body=estimate_request[\s\S]*if not estimate\["allowed"\]/);
+  assert.match(python, /creation_request != estimate_request/);
+  assert.match(python, /confirmed = provider\(dict\(proposal\)\)/);
   assert.match(python, /not isinstance\(page\.get\("results"\), list\)/);
   assert.match(python, /not isinstance\(cursor, str\) or not cursor/);
   assert.match(python, /type\(winner\.get\("position"\)\) is not int/);
@@ -1076,7 +1081,7 @@ test("preserves complete AutoSkills review fixes", async () => {
   assert.match(python, /admission in \{"queued", "already_queued"\}[\s\S]*send_response\(202\)/);
   assert.match(python, /stream_key = f"stream:\{event\['streamEventId'\]\}"/);
 
-  assert.match(security, /non-metered public reads/);
+  assert.match(security, /non-metered visible reads/);
   assert.match(security, /media downloads,[\s\S]*searches,[\s\S]*extractions,[\s\S]*draws/);
   assert.match(tweetTypes, /retweetCount\?: number/);
   assert.match(tweetTypes, /bookmarkCount\?: number/);
@@ -1100,7 +1105,7 @@ test("preserves complete AutoSkills review fixes", async () => {
   assert.equal((workflows.match(/instanceof XquikApiError/g) ?? []).length, 2);
   assert.match(skill, /`401` over REST/);
   assert.match(skill, /`401` over MCP/);
-  assert.match(skillCard, /0 confirmed security issues/);
+  assert.match(skillCard, /clean static and repeated semantic SkillSpector 2\.9\.6 scans/);
 });
 
 test("preserves final AutoSkills full-review fixes", async () => {
@@ -1229,7 +1234,7 @@ test("preserves final AutoSkills full-review fixes", async () => {
   );
   assert.match(
     python,
-    /def xquik_download\(path, approved_max_bytes, deadline=None\)[\s\S]*response, attempt_deadline, approved_max_bytes/,
+    /def xquik_download\(path, confirmed_export, deadline=None\)[\s\S]*response, attempt_deadline, confirmed_max_bytes/,
   );
   assert.match(
     accountless,
@@ -1260,7 +1265,7 @@ test("preserves final AutoSkills full-review fixes", async () => {
   assert.match(exportGuide, /Require `allowed === true`[\s\S]*Send it unchanged/);
   assert.match(
     skillspectorReport,
-    /Source repository path:[^\n]*Xquik-dev\/x-twitter-scraper\/skills\/x-twitter-scraper/,
+    /\[The dated result\]\(\.\.\/\.\.\/docs\/research\/skill-security\/results\/results-2026-08-23\.json\)/,
   );
   assert.match(workflows, /function isDefinitiveWriteRejection\(error\)/);
   assert.match(workflows, /if \(isDefinitiveWriteRejection\(monitorCreationError\)\)/);
@@ -1277,7 +1282,7 @@ test("preserves latest AutoSkills full-review safeguards", async () => {
   ]);
 
   assert.match(drafts, /starting `afterCursor`[\s\S]*maximum page count[\s\S]*new approval/);
-  assert.match(skill, /support tickets need exact user approval[\s\S]*scope, recipients, destination, and retention/);
+  assert.match(skill, /support tickets need exact user confirmation[\s\S]*scope, recipients, destination, and retention/);
   assert.match(mcp, /List support tickets \|[\s\S]*private and requires approval for the exact scope/);
   assert.match(scraperGuide, /retry only `GET` requests/);
   assert.doesNotMatch(scraperGuide, /retry only safe methods/i);
@@ -1369,7 +1374,7 @@ test("preserves final full-review safeguards", async () => {
     /except urllib\.error\.HTTPError as error:[\s\S]*retry_after = error\.headers\.get\("Retry-After"\)[\s\S]*finally:\n\s+error\.close\(\)/,
   );
   assert.match(guide, /Approve the exact request, intended use, destination, and retention/);
-  assert.match(guide, /Skip the approval gate only for unmetered public reads/);
+  assert.match(guide, /Skip the approval gate only for unmetered visible reads/);
   assert.match(webhooks, /NONCE_LOCK = threading\.Lock\(\)[\s\S]*with NONCE_LOCK:/);
   assert.match(webhooks, /from concurrent\.futures import ThreadPoolExecutor/);
   assert.match(webhooks, /class BoundedHTTPServer\(HTTPServer\):[\s\S]*BoundedSemaphore/);
@@ -1439,8 +1444,8 @@ test("preserves complete final full-review fixes", async () => {
   assert.match(python, /import socket[\s\S]*except \(urllib\.error\.URLError, socket\.timeout, TimeoutError\)/);
   assert.match(python, /any\(not isinstance\(event_type, str\) for event_type in event_types\)/);
   assert.match(scrape, /The direct search is metered[\s\S]*Require approval for that unchanged request/);
-  assert.match(scrape, /require_explicit_approval\(proposal\) != proposal[\s\S]*requests\.get/);
-  assert.match(pipeline, /Approve the direct request[\s\S]*Run the approved request/);
+  assert.match(scrape, /confirmed = approval_provider\(dict\(proposal\)\)[\s\S]*requests\.get/);
+  assert.match(pipeline, /Approve the direct request[\s\S]*Run the confirmed request/);
   assert.match(keywords, /Then validate it with that\s+unchanged bounded[\s\S]*search/);
   assert.equal(
     (webhooks.match(/Call validate(?:SubscriptionEventTypes|_subscription_event_types)/g) ?? [])

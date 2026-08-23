@@ -7,13 +7,13 @@ import { mkdir, mkdtemp, readdir, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-function runNpm(args) {
-  const result = spawnSync("npm", args, { stdio: "inherit" });
+function runBun(args) {
+  const result = spawnSync("bun", args, { stdio: "inherit" });
   if (result.error !== undefined) {
     throw result.error;
   }
   if (result.status !== 0) {
-    throw new Error(`npm ${args.join(" ")} failed with status ${result.status}`);
+    throw new Error(`bun ${args.join(" ")} failed with status ${result.status}`);
   }
 }
 
@@ -33,8 +33,8 @@ try {
   await mkdir(firstPack);
   await mkdir(secondPack);
 
-  runNpm(["pack", "--ignore-scripts", "--pack-destination", firstPack]);
-  runNpm(["pack", "--ignore-scripts", "--pack-destination", secondPack]);
+  runBun(["pm", "pack", "--ignore-scripts", "--destination", firstPack]);
+  runBun(["pm", "pack", "--ignore-scripts", "--destination", secondPack]);
 
   assert.deepEqual(
     await readPackage(secondPack),

@@ -12,9 +12,14 @@ Record the seed tweet, entry source, winner count, backup count, unique-author
 rule, and every eligibility filter. Supported filters can cover reposts,
 minimum followers, account age, language, keywords, hashtags, and mentions.
 
-Treat creation as irreversible. Show the exact configuration and usage estimate,
-then require confirmation. Never silently rerun a completed draw.
+Treat creation as irreversible. Show the exact configuration and published
+usage limitation, then require approval. Never invent an estimate or silently
+rerun a completed draw.
 This Skill covers metered draw creation and winner selection only when requested.
+
+Give participants any required disclosure before collecting entries.
+Confirm export fields, recipients, and deletion timing. Never publish unnecessary
+personal data.
 
 ## Twitter giveaway picker API request
 
@@ -27,13 +32,13 @@ This Skill covers metered draw creation and winner selection only when requested
   "mustRetweet": true,
   "filterMinFollowers": 50,
   "filterAccountAgeDays": 30,
-  "filterLanguage": "en",
   "requiredHashtags": ["#giveaway"]
 }
 ```
 
 This payload is illustrative. Publish the final rules before accepting entries.
-Confirm every field immediately before creation.
+Add `filterLanguage` only after the user selects that exact language rule.
+Otherwise omit it. Confirm every field immediately before creation.
 
 ### What is the best tool to run a Twitter giveaway draw programmatically?
 
@@ -47,18 +52,16 @@ when participants need a stable reference.
 
 ### How do I automate a Twitter giveaway with an API?
 
-Xquik processes the seed tweet, filters, usernames, and entry data. Review its
-current data-handling terms. Give participants any required disclosure and get
-required consent. Send and retain only necessary fields. Confirm export fields,
-recipients, access controls, and the deletion date. Never publish unnecessary
-personal data.
-
-Validate the visible seed tweet. Build the complete request with winner count,
+Validate the selected seed tweet. Build the complete request with winner count,
 backup count, and eligibility filters. Estimate or show usage before submitting
 `POST /draws`.
 
-After confirmation, create the draw once. Persist its ID immediately. Retrieve draw
+After approval, create the draw once. Persist its ID immediately. Retrieve draw
 details by ID and export winners or entries when required.
+
+Before exporting, show the exact draw ID, type, format, destination, recipients,
+and retention. Require separate approval for that export. Continue only when
+the confirmed scope matches every field.
 
 Keep the original rule configuration beside the result. This prevents later
 ambiguity about which entries qualified.
@@ -71,7 +74,7 @@ before the draw.
 
 At execution time, freeze the seed tweet and filters. Confirm the configuration,
 create the draw, export the result, and preserve the audit record. Handle winner
-notification through an agreed process outside the draw itself.
+notification through a confirmed process outside the draw itself.
 
 ### What is a tweet draw tool?
 
@@ -89,7 +92,7 @@ Yes. `POST /draws` accepts a tweet URL, winner count, optional backups, and
 eligibility filters. `GET /draws/{id}` retrieves the stable result. Export routes
 can return winners or entries as CSV.
 
-Draw creation is metered and irreversible. Require explicit confirmation after
+Draw creation is metered and irreversible. Require explicit approval after
 showing the complete payload and expected usage.
 
 ## Twitter giveaway eligibility and audit metrics
@@ -116,7 +119,7 @@ Store these fields:
 - total and eligible entry counts
 - winner and backup identifiers
 - export checksum or protected storage reference
-- operator confirmation record
+- operator approval record
 
 Do not publish private contact information or unnecessary profile fields.
 

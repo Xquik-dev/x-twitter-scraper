@@ -1,8 +1,10 @@
 # Xquik TypeScript types: X write
 
-These requests change a connected X account. They can publish or send supplied
-content. Show the exact target, payload, destination, and live usage estimate.
-Get confirmation immediately before each call.
+These types describe changes to a connected X account. Posting, sending a DM,
+and updating a profile affect other people and may use credits. Deletion may be
+irreversible. This Skill only drafts the request plan. Show the exact account,
+payload, external effect, and live usage estimate. Obtain explicit confirmation
+immediately before the user dispatches the unchanged request elsewhere.
 
 ```typescript
 

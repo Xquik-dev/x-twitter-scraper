@@ -38,7 +38,7 @@ const publicContractFiles = [
 
 const stalePublicContractPatterns = [
   [
-    "127-operation REST count",
+    "stale 127-operation REST count",
     /\b127 (?:OpenAPI-documented )?REST(?: API)? operations\b/u,
   ],
   [

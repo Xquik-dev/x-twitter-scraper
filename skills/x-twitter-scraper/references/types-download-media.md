@@ -14,7 +14,7 @@ type DownloadMediaRequest =
 
 interface DownloadMediaSingleResponse {
   tweetId: string;      // Resolved tweet ID
-  galleryUrl: string;   // Shareable gallery page URL
+  galleryUrl: string;   // Gallery page URL. Treat it as sensitive.
   cacheHit: boolean;    // True when the cache served the result without usage.
 }
 
@@ -25,3 +25,7 @@ interface DownloadMediaBulkResponse {
 }
 
 ```
+
+Check gallery visibility before sharing its URL. Restrict recipients and set a
+retention period. Prefer authenticated or expiring links when supported. Delete
+the gallery after use when supported.

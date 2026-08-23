@@ -62,10 +62,10 @@ test("documents the exact GitHub registry install command", () => {
 
   assert.match(
     readme,
-    /npx shadcn@4\.18\.0 add Xquik-dev\/x-twitter-scraper\/x-twitter-scraper/,
+    /bunx shadcn@4\.18\.0 add Xquik-dev\/x-twitter-scraper\/x-twitter-scraper/,
   );
   assert.match(
     readme,
-    /npx shadcn@4\.18\.0 view Xquik-dev\/x-twitter-scraper\/x-twitter-scraper/,
+    /bunx shadcn@4\.18\.0 view Xquik-dev\/x-twitter-scraper\/x-twitter-scraper/,
   );
 });

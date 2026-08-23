@@ -29,11 +29,10 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Set up Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
         with:
-          node-version: "24.18.0"
-          package-manager-cache: false
+          bun-version: "1.4.0"
 
       - name: Verify release context
         env:
@@ -43,8 +42,8 @@ jobs:
       - name: Check the MCP Registry
         id: registry
         run: |
-          server_name="$(node -p "encodeURIComponent(require('./server.json').name)")"
-          server_version="$(node -p "require('./server.json').version")"
+          server_name="$(bun -e "process.stdout.write(encodeURIComponent(require('./server.json').name))")"
+          server_version="$(bun -e "process.stdout.write(require('./server.json').version)")"
           registry_url="https://registry.modelcontextprotocol.io/v0.1/servers/${server_name}/versions/${server_version}"
           registry_status="$(curl --location --silent --show-error --retry 3 \
             --output /dev/null --write-out "%{http_code}" "$registry_url")"
@@ -62,19 +61,19 @@ jobs:
               ;;
           esac
 
-      - name: Wait for the npm release
+      - name: Wait for the package release
         if: steps.registry.outputs.published != 'true'
         run: |
-          package_name="$(node -p "require('./package.json').name")"
-          package_version="$(node -p "require('./package.json').version")"
+          package_name="$(bun -e "process.stdout.write(require('./package.json').name)")"
+          package_version="$(bun -e "process.stdout.write(require('./package.json').version)")"
           for _ in {1..30}; do
-            published_version="$(npm view "${package_name}@${package_version}" version 2>/dev/null || true)"
+            published_version="$(bun pm view "${package_name}@${package_version}" version 2>/dev/null || true)"
             if [[ "$published_version" == "$package_version" ]]; then
               exit 0
             fi
             sleep 10
           done
-          echo "The matching npm package was not available after 5 minutes." >&2
+          echo "The matching package was not available after 5 minutes." >&2
           exit 1
 
       - name: Install mcp-publisher

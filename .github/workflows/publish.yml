@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Xquik Contributors
 # SPDX-License-Identifier: MIT
 
-name: Publish to npm
+name: Publish package
 
 on:
   push:
@@ -23,7 +23,6 @@ jobs:
     environment: npm
     permissions:
       contents: read
-      id-token: write # Request npm's short-lived OIDC credential.
     steps:
       - name: Check out the release tag
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -34,17 +33,10 @@ jobs:
       - name: Check license metadata
         uses: fsfe/reuse-action@676e2d560c9a403aa252096d99fcab3e1132b0f5 # v6.0.0
 
-      - name: Set up Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
         with:
-          node-version: "24.18.0"
-          registry-url: "https://registry.npmjs.org"
-          package-manager-cache: false
-
-      - name: Set up npm
-        run: |
-          corepack enable npm
-          npm --version
+          bun-version: "1.4.0"
 
       - name: Verify release context
         env:
@@ -52,26 +44,26 @@ jobs:
         run: .github/scripts/verify-release-context.sh
 
       - name: Install dependencies
-        run: npm ci --ignore-scripts
+        run: bun install --frozen-lockfile
 
       - name: Test
-        run: npm test
+        run: bun run test
 
       - name: Audit dependencies
-        run: npm audit --audit-level=high
+        run: bun audit --audit-level=high
 
       - name: Check reproducible package
-        run: npm run check:reproducible
+        run: bun run check:reproducible
 
       - name: Inspect package contents
-        run: npm pack --dry-run --json
+        run: bun pm pack --dry-run --ignore-scripts
 
       - name: Check npm registry
         id: registry
         run: |
-          package_name="$(node -p "require('./package.json').name")"
-          package_version="$(node -p "require('./package.json').version")"
-          if npm view "${package_name}@${package_version}" version >/dev/null 2>&1; then
+          package_name="$(bun -e "process.stdout.write(require('./package.json').name)")"
+          package_version="$(bun -e "process.stdout.write(require('./package.json').version)")"
+          if bun pm view "${package_name}@${package_version}" version >/dev/null 2>&1; then
             echo "published=true" >> "$GITHUB_OUTPUT"
           else
             echo "published=false" >> "$GITHUB_OUTPUT"
@@ -79,7 +71,9 @@ jobs:
 
       - name: Publish package
         if: steps.registry.outputs.published != 'true'
-        run: npm publish --access public --provenance
+        env:
+          NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: bun publish
 
   release:
     name: Create GitHub release

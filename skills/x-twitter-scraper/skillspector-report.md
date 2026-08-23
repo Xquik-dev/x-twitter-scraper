@@ -1,12 +1,11 @@
 # SkillSpector security report
 
-The dated scan evidence stays outside this Skill directory. This keeps a scan
-result from changing the directory it describes.
+Reviewed on 2026-08-24.
 
-The release scan covers this complete directory. It runs the current stable
-SkillSpector static checks and a semantic scan. The gate reads the report, not
-the process exit code. It accepts only `SAFE`, complete analysis, and zero
-active findings.
+SkillSpector 2.9.6 scanned the complete `x-twitter-scraper` Skill directory.
+One static run and 2 independent semantic runs returned `SAFE`. Each run had
+score 0, 100% coverage, no findings, and no suppressions.
 
-See [the current results](../../docs/research/skill-security/results/README.md).
-Refresh them after any file in this directory changes.
+[The dated result](../../docs/research/skill-security/results/results-2026-08-23.json)
+records the scanner revision, timestamps, analyzer status, and exact Skill
+source hash. Refresh that record after every Skill change.

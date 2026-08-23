@@ -1,12 +1,11 @@
 # Skill human review
 
-Review date: Pending
+Review date: 2026-08-24
 
 | Skill | Reviewer | Outcome | Findings |
 | --- | --- | --- | --- |
-| `x-twitter-scraper` | Unassigned | Pending | Pending |
-| `xquik-social-research` | Unassigned | Pending | Pending |
+| `x-twitter-scraper` | Separate reviewer waived by repository owner | Not performed | None recorded by an independent reviewer |
+| `xquik-social-research` | Separate reviewer waived by repository owner | Not performed | None recorded by an independent reviewer |
 
-A reviewer must inspect representative outputs, failed baselines, command
-traces, permission use, and created-file records. The reviewer must record each
-actionable finding. Do not treat model rubric grades as human review.
+The repository owner waived a separate human review. No independent human
+review was performed. Model rubric grades remain automated evidence only.

@@ -5,18 +5,10 @@ remote URL and complete OAuth 2.1 in the browser. API-key fallback is
 client-specific. ChatGPT custom apps require OAuth and cannot present custom
 API keys.
 
-## Review access before setup
-
-Xquik receives authenticated tool requests, tool inputs, and returned results.
-The `mcp:tools` OAuth scope can expose accessible Xquik data. It can also enable
-the actions provided by selected tools. Review the OAuth consent screen and
-tool list before connecting. Use a trusted client and your organization's
-permitted client list. Grant only the access needed for the current task.
-
-An API key grants its documented access until revoked. Keep it in a secure
-secret store. Never share it with an untrusted client. Confirm recipients,
-retention, and external effects before sending sensitive data or changing an
-account.
+Xquik receives authenticated tool requests through its remote MCP service.
+Review the OAuth consent screen and tool list before connecting.
+Grant only the access needed for the task.
+An API key grants its documented access until revoked.
 
 | Setting | Value |
 |---------|-------|
@@ -25,6 +17,9 @@ account.
 | Authentication | OAuth 2.1 discovery; API key fallback |
 | Hosted MCP version | `2.6.0` |
 | Skill bundle version | `2.6.7` |
+
+Hosted MCP v2.6.0 catalogs 120 operations. It exposes 120 catalog routes
+through 2 structured API tools. Of these, 119 support JSON or text.
 
 Current clients negotiate MCP `2026-07-28` through `server/discover`.
 Use a current MCP SDK. It adds request `_meta` and protocol headers.
@@ -62,7 +57,7 @@ release is API-key-only. Pi has no native MCP client.
 2. Select **+**, then **Add custom connector**.
 3. Enter `https://xquik.com/mcp`.
 4. Select **Add**.
-5. In a chat, select **+ > Connectors**, enable Xquik, then select **Connect** and confirm access.
+5. In a chat, select **+ > Connectors**, enable Xquik, then select **Connect** and approve access.
 
 Leave advanced client ID and client secret fields empty. Free accounts can add
 1 custom connector. On Team and Enterprise plans, an Owner or Primary Owner
@@ -91,9 +86,12 @@ Run `/mcp`, select `xquik`, then authenticate.
 3. Enter `https://xquik.com/mcp`, choose OAuth, then select **Scan tools**.
 4. Complete Xquik authorization and select **Create**.
 
+ChatGPT uses OAuth here. It cannot present a custom API key. Check your plan
+and workspace controls before setup.
+
 ### Codex CLI
 
-Use Codex CLI 0.147.0 or later. These releases validate the RFC
+Use Codex CLI 0.147.0 or later. These releases preserve and validate the RFC
 9207 `iss` callback value. Run:
 
 ```bash
@@ -121,7 +119,7 @@ Load `XQUIK_API_KEY` from your password manager or operating-system secret
 store. Do not type the key into a shell command, save it in shell history, or
 put it in `config.toml`.
 
-In your home directory, open `config.toml` inside the `.codex` directory. Add:
+In Codex Settings, add this server entry to the shared configuration:
 
 ```toml
 [mcp_servers.xquik]
@@ -240,23 +238,6 @@ Add the remote server:
 gemini mcp add --transport http xquik https://xquik.com/mcp
 ```
 
-For user scope, open `settings.json` inside the home directory's `.gemini`
-directory. For project scope, use the same filename inside the project's
-`.gemini` directory:
-
-```json
-{
-      "mcpServers": {
-        "xquik": {
-          "type": "http",
-          "url": "https://xquik.com/mcp"
-        }
-      }
-}
-```
-
-Older Gemini CLI builds also accept the legacy `httpUrl` field.
-
 Run `/mcp auth xquik` to complete OAuth.
 
 ### GitHub Copilot CLI
@@ -295,22 +276,24 @@ Of these, 119 support JSON or text. Binary support downloads use REST.
 | `xquik` | Send confirmed Xquik API requests | Varies by endpoint |
 
 `explore` searches the credential-scoped catalog. `xquik` sends authenticated
-operations with normalized snake_case responses. Authentication is injected, so
-tool code must never include credentials.
+operations and returns the selected REST response object. Original field names
+remain unchanged, including `safeToRetry`, `allowed`, `monitorId`, and
+`nextCursor`. Authentication is injected, so tool code must never include
+credentials.
 
-Hosted MCP v2.6.0 catalogs 120 operations. Credential, checkout, and guest-wallet
-flows stay outside this Skill:
+Hosted MCP v2.6.0 catalogs 120 of 128 documented REST operations. These 8 credential,
+checkout, or guest-wallet operations remain direct REST or dashboard workflows:
 
 - API key creation, listing, and revocation
 - Saved-payment top-up
 - Account top-up redirect
 - Guest wallet creation, status polling, and top-up
 
-Do not call these routes. Never create keys or wallets, start checkout, or
-change credits. Direct the user to the dashboard.
+These flows stay outside this Skill. Never create keys or wallets, start
+checkout, or change credits. Direct the user to the dashboard.
 
 Private reads, writes, monitors, webhooks, persistent resources, and metered bulk
-jobs require the user's explicit confirmation. Plan and credit changes stay
+jobs require the user's explicit approval. Plan and credit changes stay
 dashboard-only.
 
 ## After setup

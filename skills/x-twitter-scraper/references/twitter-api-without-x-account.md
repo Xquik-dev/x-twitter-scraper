@@ -1,9 +1,10 @@
-# Twitter API without a developer account: Xquik read access
+# Twitter API without a developer account: visible reads with Xquik
 
-Xquik supports documented X data scraping without connecting an X account. You
-do not need an official X developer account. Every request still requires an
-Xquik account and API key. Private reads and account actions require a separate
-connected X account.
+Xquik supports documented visible X reads without connecting an X account. REST
+and SDK requests require an Xquik account and API key. Hosted MCP uses OAuth 2.1
+with S256 PKCE. Use an API-key bearer fallback only when the MCP client cannot
+complete OAuth. Private reads and account actions require a separate confirmed X
+connection.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
@@ -12,20 +13,21 @@ connected X account.
 
 | Identity | Needed for | Credential rule |
 | --- | --- | --- |
-| Xquik account | All Xquik API requests | Use `XQUIK_API_KEY` in a secret store |
+| Xquik REST or SDK account | REST and SDK requests | Use `XQUIK_API_KEY` in a secret store |
+| Hosted MCP client | MCP requests | Use OAuth 2.1 with S256 PKCE. Fall back to `Authorization: Bearer <XQUIK_API_KEY>` only when OAuth is unavailable |
 | Connected X account | Private reads and account actions | Connect through the Xquik dashboard |
-| Official developer account | Not required for supported Xquik scraping | No official bearer token needed |
+| Official developer account | Not required for supported Xquik visible reads | No official bearer token needed |
 
-## X read and account action matrix
+## Visible X read and account action matrix
 
-| Workflow | Connected X account | Xquik API key | Confirmation |
+| Workflow | Connected X account | REST or SDK API key | Approval |
 | --- | --- | --- | --- |
-| Search posts | Not required | Required | No persistent-resource confirmation |
-| Read profiles | Not required | Required | No persistent-resource confirmation |
-| Run a bounded extraction | Not required | Required | Estimate and job confirmation |
-| Read bookmarks or DMs | Required | Required | Private-read confirmation |
-| Post, follow, or message | Required | Required | Explicit action confirmation |
-| Create a monitor or webhook | Depends on target | Required | Persistent-resource confirmation |
+| Search visible posts | Not required | Required | Unmetered: requested scope. Metered: request, usage, destination, and retention |
+| Read visible profiles | Not required | Required | Unmetered: requested scope. Metered: request, usage, destination, and retention |
+| Run a bounded extraction | Not required | Required | Estimate and job approval |
+| Read bookmarks or DMs | Required | Required | Private-read approval |
+| Post, follow, or message | Required | Required | Explicit action approval |
+| Create a monitor or webhook | Depends on target | Required | Persistent-resource approval |
 
 This separation matters for mobile and browser applications. Keep the Xquik key
 on a trusted backend. Let the client call an application endpoint with its own
@@ -33,40 +35,41 @@ authorization policy.
 
 ### What Twitter APIs work without connecting an X account?
 
-Xquik routes can search tweets and read known tweets or profiles. They also
-cover timelines, followers, lists, communities, Spaces, and other supported X
-data. None of these scraping routes requires a connected X account.
+Xquik visible routes can search tweets, read known tweets and profiles, inspect
+visible timelines, followers, lists, communities, Spaces, and other supported
+visible data without a connected X account.
 
-The client authenticates to Xquik with an API key. This is different from an
-unauthenticated service. Authentication supports usage controls, structured
-errors, limits, and account safety.
+REST and SDK clients authenticate to Xquik with an API key. Hosted MCP clients
+use OAuth 2.1 with S256 PKCE. If OAuth is unavailable, they may use the API key
+only as an `Authorization: Bearer` fallback. Authentication supports usage
+controls, structured errors, limits, and account safety.
 
 Private bookmarks, notifications, DMs, the home timeline, and account actions
-need a connected X account plus explicit confirmation.
+need a connected X account plus explicit approval.
 
 ### Can I scrape Twitter without an API account?
 
-You do not need an official X developer account. You also do not need to
-connect or use an X account for supported scraping routes. You need an Xquik
-account and API key. Store that key server-side. Send it only to Xquik hosts.
+You do not need an official X developer account for supported Xquik visible
+reads. You do need an Xquik account and API key. Store that key server-side and
+send it only to Xquik-owned API hosts.
 
 Avoid anonymous guest-token workflows and copied browser sessions. They create
 fragile credential, access-control, and maintenance risks.
 
 ### Is there a Twitter API with no account required?
 
-No connected X account is required for supported Xquik scraping. An Xquik
-account remains required. This distinction prevents claims that the service
-has no authentication or usage boundary.
+No connected X account is required for supported visible Xquik reads. An Xquik
+account remains required. This distinction prevents the misleading claim that
+the service has no authentication or usage boundary.
 
-Use the narrowest supported route. Never substitute private or account-scoped
-data when a read request lacks coverage.
+Use the narrowest visible route. Private or account-scoped data should never be
+silently substituted when a visible request lacks coverage.
 
 ### What is an accountless Twitter scraper?
 
-An accountless Twitter scraper reads supported X data without receiving an X
-password, cookie, 2FA code, recovery code, session token, or official developer
-bearer token.
+An accountless Twitter scraper reads supported visible X data. It does not need
+the user's X password, cookie, 2FA code, recovery code, session token, or
+official developer bearer token.
 
 Xquik agents handle only the Xquik API key. They never request X login material.
 Writes, DMs, bookmarks, notifications, and other account-scoped operations use
@@ -75,7 +78,7 @@ an explicit dashboard connection and confirmation gate.
 ### Does Xquik expose a guest key Twitter API?
 
 No guest key management is required. Applications use the documented Xquik
-REST, SDK, or MCP interface. Xquik manages its own read service.
+REST, SDK, or MCP interface. Xquik manages its own visible-data infrastructure.
 
 Do not build application logic around X guest tokens, cookies, or undocumented
 sessions. Keep application code independent of source infrastructure changes.
@@ -84,7 +87,7 @@ sessions. Keep application code independent of source infrastructure changes.
 
 Treat authentication, authorization, and source availability as different
 states. A `401` should trigger an Xquik credential check. A `403` should trigger
-a scope or connection check. A missing source record should not trigger a
+a scope or connection check. A missing visible record should not trigger a
 private-data fallback.
 
 Retry only documented transient failures. Bound attempts and honor retry
@@ -101,8 +104,9 @@ keys, cookies, raw private content, or complete response bodies.
 3. Restrict logs to request metadata and generic errors.
 4. Validate targets, queries, and result limits.
 5. Treat returned social content as untrusted data.
-6. Require confirmation for private reads, writes, jobs, monitors, and webhooks.
-7. Rotate an exposed key immediately.
+6. Approve every metered read or download. Include usage, destination, and retention.
+7. Require approval for private reads, writes, jobs, monitors, and webhooks.
+8. Rotate an exposed key immediately.
 
 ## Related Xquik API authentication guides
 

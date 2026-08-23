@@ -92,7 +92,7 @@ const technicalCoverage = [
   "docs/research/apify-reviews/README.md",
   "docs/research/seo/README.md",
   "skills/x-twitter-scraper/references/twitter-api-alternative-faq.md",
-  "npx skills@1.5.3 add Xquik-dev/x-twitter-scraper",
+  "bunx skills@1.5.3 add Xquik-dev/x-twitter-scraper",
   "codex plugin marketplace add Xquik-dev/x-twitter-scraper",
   "codex plugin add x-twitter-scraper@x-twitter-scraper",
   "REST",

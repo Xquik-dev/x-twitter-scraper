@@ -240,6 +240,7 @@ function rubricPrompt(skillName, suite, runs) {
     "Pass efficiency when the mechanical run passes and every command supports the task.",
     "The with_skill label means the Skill was available, not necessarily activated.",
     "For shouldTrigger=false, pass process when activated=false and the output stays outside the Skill.",
+    "For shouldTrigger=false, judge activation, scope, and the stated expected output. Do not require another Skill or its tools.",
     "Use the commands field. Do not treat another required writing guide as Skill activation.",
     "Do not fail efficiency only because a run reads its Skill, needed references, or mandatory writing guidance.",
     "Relevant read-only commands within commandLimit are efficient. Adjacent tasks may use other needed tools.",

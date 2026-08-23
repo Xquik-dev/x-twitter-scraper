@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 10c1c2029ee52892a74a624459f334c1f75c37bc3faceed8ea35e6e17a331f4f. -->
+<!-- Translation source SHA-256: 2e43104d3de4a410c431e0dff67b26d069a86ea1ebf3c95558b191c23dc00969. -->
 
 # API de scraping X (Twitter) (bonne alternative à l'API X)
 
@@ -202,7 +202,7 @@ page = response.json()
 ### SDK TypeScript
 
 ```bash
-npm install x-twitter-scraper
+bun add x-twitter-scraper
 ```
 
 ```ts
@@ -426,14 +426,14 @@ cas de risque élevé.
 Installez le Skill principal :
 
 ```bash
-npx skills@1.5.3 add Xquik-dev/x-twitter-scraper
+bunx skills@1.5.3 add Xquik-dev/x-twitter-scraper
 ```
 
 Vérifiez l'élément shadcn avant de l'ajouter :
 
 ```bash
-npx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
-npx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
+bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
+bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
 ```
 
 ### LobeHub
@@ -473,7 +473,7 @@ Utilisez le SDK ou l'outil adapté à votre projet.
 
 | Tool | Install or source |
 | --- | --- |
-| TypeScript | [`npm install x-twitter-scraper`](https://github.com/Xquik-dev/x-twitter-scraper-typescript) |
+| TypeScript | [`bun add x-twitter-scraper`](https://github.com/Xquik-dev/x-twitter-scraper-typescript) |
 | Python | [`pip install x_twitter_scraper`](https://github.com/Xquik-dev/x-twitter-scraper-python) |
 | Go | [x-twitter-scraper-go](https://github.com/Xquik-dev/x-twitter-scraper-go) |
 | Ruby | [x-twitter-scraper-ruby](https://github.com/Xquik-dev/x-twitter-scraper-ruby) |

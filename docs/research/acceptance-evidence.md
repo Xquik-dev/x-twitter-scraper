@@ -1,6 +1,6 @@
 # Repository acceptance evidence
 
-Last reviewed: 2026-08-22
+Last reviewed: 2026-08-24
 
 This file tracks evidence for the repository goal. `Complete` means the named
 evidence exists and passes its check. `Open` means completion is not proven.
@@ -16,7 +16,7 @@ evidence exists and passes its check. `Open` means completion is not proven.
 | Framer video and thumbnail | Complete | The exact video link and thumbnail remain visible in all 9 READMEs. The contract check fixes their nesting and text. The link check reaches both URLs. |
 | Apify Actor testimonials | Complete | The [dated review audit](apify-reviews/README.md) covers all 11 Xquik Actors. It records 21 ratings, 19 written reviews, 18 eligible testimonials, one excluded 1-star review, and two rating-only entries. Every eligible quote appears unchanged in all 9 READMEs. |
 | Current primary-source checks | Complete | The 12 supplied reviews, Xquik contract review, and 22-provider registry cite current primary sources and record 2026-08-22 as the review date. |
-| Xquik claim verification | Partial | The [contract review](xquik-contract-2026-08-22.md) records live OpenAPI and billing evidence. Current repository metadata now uses the 127-operation count. Credential-backed output and billing checks remain open. |
+| Xquik claim verification | Partial | The [contract review](xquik-contract-2026-08-22.md) records live OpenAPI and billing evidence. Current repository metadata now uses the 128-operation count. Credential-backed output and billing checks remain open. |
 | Working request, response, and estimate | Partial | The [live contract check](readme-example-validation-2026-08-22.md) validates the request, required response fields, and estimate schema. A credential-backed production run remains open. |
 | cURL, TypeScript, Python, SDK, MCP, CLI, and Actor examples | Partial | All nine READMEs contain the same 16 examples. The [dated validation](readme-example-validation-2026-08-22.md) checks each current source. Credential-backed production checks remain open. |
 | Product coverage | Complete | The live checker validates 37 resource paths and all 23 extraction types. The [topic record](content-gap-coverage-2026-08-22.md) maps each visitor topic to its destination. |
@@ -33,15 +33,18 @@ evidence exists and passes its check. `Open` means completion is not proven.
 | Translation checks | Complete | Tests enforce 19 main sections, the same 16 examples, 18 exact reviews, shared links, source hashes, account text, legal text, and technical claims. |
 | Markdown and link checks | Complete | Tests check local links and code fences. The [dated link check](readme-link-check-2026-08-22.md) reached all 24 unique external destinations across all 9 README files. |
 | Clean-environment quickstart | Open | No credential-backed clean run is recorded. |
-| Confidentiality scan | Complete | `npm run check:external-content` scans external-facing Markdown and metadata for secrets, local paths, attachment references, and banned terms. |
+| Skill security scans | Complete | [The dated SkillSpector record](skill-security/results/results-2026-08-23.json) ties current source hashes to complete static scans and 2 semantic samples per Skill. Every scan returned `SAFE`, score 0, and no findings or suppressions. |
+| Repeated Skill evals | Complete | [The dated benchmark](skill-evals/benchmark-2026-08-23.json) records 2 clean-context rounds per Skill. Every guided run passed and beat its no-Skill baseline without extra permissions or created files. |
+| Human Skill review | Open | [The review record](skill-evals/human-review-2026-08-22.md) states that the repository owner waived a separate reviewer. No independent human review was performed. |
+| Confidentiality scan | Complete | `bun run check:external-content` scans external-facing Markdown and metadata for secrets, local paths, attachment references, and banned terms. |
 | Metadata alignment | Complete | The [dated metadata check](metadata-check-2026-08-22.md) records the GitHub description, homepage, and topics. Automated tests align package, plugin, registry, Skill, Context7, OpenClaw, and Docker descriptions. |
-| Strict maintainability review | Complete | The final review found no unresolved handwritten-file issue. Large SEO maps are generated evidence. The npm archive excludes those JSON maps and remains reproducible. |
+| Strict maintainability review | Complete | The final review found no unresolved handwritten-file issue. Large SEO maps are generated evidence. The package archive excludes those JSON maps and remains reproducible. |
 | Final unslop review | Complete | The final repository scan found no blocked wording, stock AI phrasing, smart quotes, or long dash characters. |
 
 ## Contract count evidence
 
-On 2026-08-22, `https://xquik.com/openapi.json` returned OpenAPI 3.1. The
-document contained 127 HTTP operations. This count includes every standard HTTP
+On 2026-08-24, `https://xquik.com/openapi.json` returned OpenAPI 3.1. The
+document contained 128 HTTP operations. This count includes every standard HTTP
 method under `paths`. Recheck the live document before publishing a fixed count.
 
 ## Completion rule

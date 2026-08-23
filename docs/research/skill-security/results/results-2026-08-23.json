@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-08-23",
+  "reviewedAt": "2026-08-24",
   "scanner": {
     "name": "SkillSpector",
     "version": "2.9.6",
@@ -75,14 +75,14 @@
   },
   "skills": {
     "x-twitter-scraper": {
-      "sourceSha256": "f31735c4f8ae707ef99b89f9f2ae28b0ba977b15eeca49aca9cee686d507d7eb",
+      "sourceSha256": "feb2cdc41d389091151ffa77eb7b8f0d25ee247d7db778031cee37cf730ef44e",
       "scans": [
         {
           "id": "static-final",
           "mode": "static",
           "analyzerProfile": "static",
-          "scannedAt": "2026-08-23T10:13:26.132792Z",
-          "sourceSha256": "f31735c4f8ae707ef99b89f9f2ae28b0ba977b15eeca49aca9cee686d507d7eb",
+          "scannedAt": "2026-08-23T22:19:15.305935Z",
+          "sourceSha256": "feb2cdc41d389091151ffa77eb7b8f0d25ee247d7db778031cee37cf730ef44e",
           "executionSuccessful": true,
           "recommendation": "SAFE",
           "riskScore": 0,
@@ -95,8 +95,8 @@
           "id": "semantic-final-a",
           "mode": "semantic",
           "analyzerProfile": "semantic",
-          "scannedAt": "2026-08-23T10:25:12.771873Z",
-          "sourceSha256": "f31735c4f8ae707ef99b89f9f2ae28b0ba977b15eeca49aca9cee686d507d7eb",
+          "scannedAt": "2026-08-23T22:28:11.913796Z",
+          "sourceSha256": "feb2cdc41d389091151ffa77eb7b8f0d25ee247d7db778031cee37cf730ef44e",
           "executionSuccessful": true,
           "recommendation": "SAFE",
           "riskScore": 0,
@@ -109,8 +109,8 @@
           "id": "semantic-final-b",
           "mode": "semantic",
           "analyzerProfile": "semantic",
-          "scannedAt": "2026-08-23T10:34:18.136204Z",
-          "sourceSha256": "f31735c4f8ae707ef99b89f9f2ae28b0ba977b15eeca49aca9cee686d507d7eb",
+          "scannedAt": "2026-08-23T22:30:06.478212Z",
+          "sourceSha256": "feb2cdc41d389091151ffa77eb7b8f0d25ee247d7db778031cee37cf730ef44e",
           "executionSuccessful": true,
           "recommendation": "SAFE",
           "riskScore": 0,
@@ -122,14 +122,14 @@
       ]
     },
     "xquik-social-research": {
-      "sourceSha256": "d8b5749cc7b478e337a3c0a0280209affb302d418cff61ba54c522be2697d120",
+      "sourceSha256": "ee31b7ff262bd266ecc4661453b352ec48294e6f1405513725fccb7ff04374c0",
       "scans": [
         {
           "id": "static-final",
           "mode": "static",
           "analyzerProfile": "static",
-          "scannedAt": "2026-08-23T13:07:48.224413Z",
-          "sourceSha256": "d8b5749cc7b478e337a3c0a0280209affb302d418cff61ba54c522be2697d120",
+          "scannedAt": "2026-08-23T13:29:11.975721Z",
+          "sourceSha256": "ee31b7ff262bd266ecc4661453b352ec48294e6f1405513725fccb7ff04374c0",
           "executionSuccessful": true,
           "recommendation": "SAFE",
           "riskScore": 0,
@@ -142,8 +142,8 @@
           "id": "semantic-final-a",
           "mode": "semantic",
           "analyzerProfile": "semantic",
-          "scannedAt": "2026-08-23T13:08:36.183541Z",
-          "sourceSha256": "d8b5749cc7b478e337a3c0a0280209affb302d418cff61ba54c522be2697d120",
+          "scannedAt": "2026-08-23T13:31:09.145366Z",
+          "sourceSha256": "ee31b7ff262bd266ecc4661453b352ec48294e6f1405513725fccb7ff04374c0",
           "executionSuccessful": true,
           "recommendation": "SAFE",
           "riskScore": 0,
@@ -156,8 +156,8 @@
           "id": "semantic-final-b",
           "mode": "semantic",
           "analyzerProfile": "semantic",
-          "scannedAt": "2026-08-23T13:08:31.662112Z",
-          "sourceSha256": "d8b5749cc7b478e337a3c0a0280209affb302d418cff61ba54c522be2697d120",
+          "scannedAt": "2026-08-23T13:31:47.868651Z",
+          "sourceSha256": "ee31b7ff262bd266ecc4661453b352ec48294e6f1405513725fccb7ff04374c0",
           "executionSuccessful": true,
           "recommendation": "SAFE",
           "riskScore": 0,

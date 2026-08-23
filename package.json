@@ -15,7 +15,10 @@
   "bugs": {
     "url": "https://github.com/Xquik-dev/x-twitter-scraper/issues"
   },
-  "packageManager": "npm@12.0.1+sha512.2f94fd8bf600416416a934bfc59c4991e8bff7372ef7d842784e2a8b8d48c81555ee645069ddea73625fb8e92dc261feab0188fd5dab6c22fefd46316f5f9140",
+  "packageManager": "bun@1.4.0",
+  "engines": {
+    "bun": ">=1.4.0"
+  },
   "keywords": [
     "twitter",
     "x-api",
@@ -98,7 +101,7 @@
     "eval:skills": "node scripts/run-skill-evals.mjs",
     "sync:testimonials": "node scripts/sync-readme-testimonials.mjs",
     "test": "node --test --experimental-test-coverage --test-coverage-branches=80 --test-coverage-functions=90 --test-coverage-lines=90 tests/*.test.mjs",
-    "prepublishOnly": "npm test && npm run check:reproducible"
+    "prepublishOnly": "bun run test && bun run check:reproducible"
   },
   "devDependencies": {
     "fast-check": "4.9.0"

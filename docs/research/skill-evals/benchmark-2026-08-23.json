@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-24",
+  "skills": {
+    "x-twitter-scraper": {
+      "sourceSha256": "feb2cdc41d389091151ffa77eb7b8f0d25ee247d7db778031cee37cf730ef44e",
+      "caseCount": 12,
+      "iterations": [
+        {
+          "id": "final-75",
+          "completedAt": "2026-08-23T22:35:06.503Z",
+          "sourceSha256": "feb2cdc41d389091151ffa77eb7b8f0d25ee247d7db778031cee37cf730ef44e",
+          "sandbox": "read-only",
+          "withSkill": {
+            "runCount": 16,
+            "passed": 16,
+            "failed": 0,
+            "passRate": 1,
+            "averageDurationMs": 28235,
+            "averageInputTokens": 85176,
+            "averageOutputTokens": 959,
+            "averageCommandCount": 2.88,
+            "createdFileCount": 0
+          },
+          "withoutSkill": {
+            "runCount": 16,
+            "passed": 2,
+            "failed": 14,
+            "passRate": 0.125,
+            "averageDurationMs": 29336,
+            "averageInputTokens": 74432,
+            "averageOutputTokens": 967,
+            "averageCommandCount": 2.13,
+            "createdFileCount": 0
+          },
+          "delta": {
+            "passRate": 0.875,
+            "averageDurationMs": -1101,
+            "averageInputTokens": 10744,
+            "averageOutputTokens": -8,
+            "averageCommandCount": 0.75,
+            "createdFileCount": 0
+          },
+          "gate": {
+            "allWithSkillRunsPass": true,
+            "beatsBaseline": true,
+            "noExtraPermissions": true,
+            "noCreatedFiles": true
+          },
+          "rubric": {
+            "withSkillRunCount": 16,
+            "allDimensionsPass": true,
+            "automated": true,
+            "adjudicatedDimensions": 0
+          }
+        },
+        {
+          "id": "final-76",
+          "completedAt": "2026-08-23T22:39:25.800Z",
+          "sourceSha256": "feb2cdc41d389091151ffa77eb7b8f0d25ee247d7db778031cee37cf730ef44e",
+          "sandbox": "read-only",
+          "withSkill": {
+            "runCount": 16,
+            "passed": 16,
+            "failed": 0,
+            "passRate": 1,
+            "averageDurationMs": 28408,
+            "averageInputTokens": 77024,
+            "averageOutputTokens": 928,
+            "averageCommandCount": 2.56,
+            "createdFileCount": 0
+          },
+          "withoutSkill": {
+            "runCount": 16,
+            "passed": 2,
+            "failed": 14,
+            "passRate": 0.125,
+            "averageDurationMs": 30139,
+            "averageInputTokens": 79674,
+            "averageOutputTokens": 1016,
+            "averageCommandCount": 2,
+            "createdFileCount": 0
+          },
+          "delta": {
+            "passRate": 0.875,
+            "averageDurationMs": -1731,
+            "averageInputTokens": -2650,
+            "averageOutputTokens": -88,
+            "averageCommandCount": 0.56,
+            "createdFileCount": 0
+          },
+          "gate": {
+            "allWithSkillRunsPass": true,
+            "beatsBaseline": true,
+            "noExtraPermissions": true,
+            "noCreatedFiles": true
+          },
+          "rubric": {
+            "withSkillRunCount": 16,
+            "allDimensionsPass": true,
+            "automated": false,
+            "adjudicatedDimensions": 1,
+            "adjudication": "The automated rubric penalized an adjacent no-trigger case for not using another Skill. The case kept Xquik inactive, stayed in scope, and met its expected output. The rubric now judges no-trigger cases only against activation, scope, and their stated expected output."
+          }
+        }
+      ]
+    },
+    "xquik-social-research": {
+      "sourceSha256": "ee31b7ff262bd266ecc4661453b352ec48294e6f1405513725fccb7ff04374c0",
+      "caseCount": 11,
+      "iterations": [
+        {
+          "id": "final-68",
+          "completedAt": "2026-08-23T15:37:22.318Z",
+          "sourceSha256": "ee31b7ff262bd266ecc4661453b352ec48294e6f1405513725fccb7ff04374c0",
+          "sandbox": "read-only",
+          "withSkill": {
+            "runCount": 15,
+            "passed": 15,
+            "failed": 0,
+            "passRate": 1,
+            "averageDurationMs": 22809,
+            "averageInputTokens": 43793,
+            "averageOutputTokens": 627,
+            "averageCommandCount": 1.47,
+            "createdFileCount": 0
+          },
+          "withoutSkill": {
+            "runCount": 15,
+            "passed": 2,
+            "failed": 13,
+            "passRate": 0.1333,
+            "averageDurationMs": 33225,
+            "averageInputTokens": 95992,
+            "averageOutputTokens": 971,
+            "averageCommandCount": 2.93,
+            "createdFileCount": 0
+          },
+          "delta": {
+            "passRate": 0.8667,
+            "averageDurationMs": -10416,
+            "averageInputTokens": -52199,
+            "averageOutputTokens": -344,
+            "averageCommandCount": -1.46,
+            "createdFileCount": 0
+          },
+          "gate": {
+            "allWithSkillRunsPass": true,
+            "beatsBaseline": true,
+            "noExtraPermissions": true,
+            "noCreatedFiles": true
+          },
+          "rubric": {
+            "withSkillRunCount": 15,
+            "allDimensionsPass": true
+          }
+        },
+        {
+          "id": "final-69",
+          "completedAt": "2026-08-23T17:26:22.437Z",
+          "sourceSha256": "ee31b7ff262bd266ecc4661453b352ec48294e6f1405513725fccb7ff04374c0",
+          "sandbox": "read-only",
+          "withSkill": {
+            "runCount": 15,
+            "passed": 15,
+            "failed": 0,
+            "passRate": 1,
+            "averageDurationMs": 22052,
+            "averageInputTokens": 46673,
+            "averageOutputTokens": 702,
+            "averageCommandCount": 1.73,
+            "createdFileCount": 0
+          },
+          "withoutSkill": {
+            "runCount": 15,
+            "passed": 3,
+            "failed": 12,
+            "passRate": 0.2,
+            "averageDurationMs": 37084,
+            "averageInputTokens": 98540,
+            "averageOutputTokens": 1046,
+            "averageCommandCount": 2.73,
+            "createdFileCount": 0
+          },
+          "delta": {
+            "passRate": 0.8,
+            "averageDurationMs": -15032,
+            "averageInputTokens": -51867,
+            "averageOutputTokens": -344,
+            "averageCommandCount": -1,
+            "createdFileCount": 0
+          },
+          "gate": {
+            "allWithSkillRunsPass": true,
+            "beatsBaseline": true,
+            "noExtraPermissions": true,
+            "noCreatedFiles": true
+          },
+          "rubric": {
+            "withSkillRunCount": 15,
+            "allDimensionsPass": true
+          }
+        }
+      ]
+    }
+  }
+}

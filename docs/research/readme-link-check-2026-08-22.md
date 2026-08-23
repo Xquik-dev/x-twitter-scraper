@@ -2,7 +2,7 @@
 
 Checked on 2026-08-22.
 
-`npm run check:readme-links` checked all 9 root README files. It deduplicated
+`bun run check:readme-links` checked all 9 root README files. It deduplicated
 their links and reached all 24 external destinations. No destination returned
 a missing-page or server-error status. No destination rejected the checker.
 

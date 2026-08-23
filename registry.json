@@ -15,6 +15,11 @@
           "target": "~/.agents/skills/x-twitter-scraper/BENCHMARK.md"
         },
         {
+          "path": "skills/x-twitter-scraper/LICENSE",
+          "type": "registry:file",
+          "target": "~/.agents/skills/x-twitter-scraper/LICENSE"
+        },
+        {
           "path": "skills/x-twitter-scraper/SKILL.md",
           "type": "registry:file",
           "target": "~/.agents/skills/x-twitter-scraper/SKILL.md"
@@ -228,11 +233,6 @@
           "path": "skills/x-twitter-scraper/references/types-account.md",
           "type": "registry:file",
           "target": "~/.agents/skills/x-twitter-scraper/references/types-account.md"
-        },
-        {
-          "path": "skills/x-twitter-scraper/references/types-api-keys.md",
-          "type": "registry:file",
-          "target": "~/.agents/skills/x-twitter-scraper/references/types-api-keys.md"
         },
         {
           "path": "skills/x-twitter-scraper/references/types-bookmarks-and-timeline.md",

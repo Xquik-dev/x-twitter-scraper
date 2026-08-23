@@ -87,7 +87,7 @@ language.
 4. Preserve all 19 main sections and 16 bounded examples.
 5. Ask a fluent reviewer to check meaning, tone, safety, billing, and legal text.
 6. Record the reviewer in [translation-reviews.md](translation-reviews.md).
-7. Run `npm test`.
+7. Run `bun run test`.
 8. Preview every README. Check tables, links, wrapping, and code fences.
 
 Never mark a language verified without a reviewer name, date, source hash, and

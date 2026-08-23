@@ -8,7 +8,7 @@ Never request passwords, cookies, 2FA codes, or verification codes.
 
 The OpenAPI spec includes dashboard-owned account connection routes:
 
-```
+```http
 POST /x/accounts
 GET /x/account-connection-attempts/{id}
 POST /x/account-connection-challenges/{id}/submit
@@ -16,37 +16,37 @@ POST /x/accounts/{id}/reauth
 POST /x/accounts/bulk-retry
 ```
 
-Do not call these routes from this Skill. This list keeps the Skill docs aligned with the API and marks the dashboard-only boundary.
+Do not call these routes from this Skill. This list keeps the Skill docs aligned with the documented API and marks the dashboard-only boundary.
 
-### List X accounts
+## List X accounts
 
-```
+```http
 GET /x/accounts
 ```
 
 Returns all connected X accounts as `{ accounts: [{ id, username, displayName, isActive, createdAt }] }`.
 
 This is a private read. This endpoint returns the complete connected-account list.
-Show that full scope and list identities only after explicit confirmation.
+Show that full scope and list identities only after explicit approval.
 
-### Get X account
+## Get X account
 
-```
+```http
 GET /x/accounts/{id}
 ```
 
 Returns `{ id, username, displayName, isActive, createdAt }`.
 
 This is a private read. Show the account ID. Retrieve its metadata only after
-explicit confirmation for that exact read.
+explicit approval for that exact read.
 
-### Disconnect X account
+## Disconnect X account
 
-Use method `DELETE` on route `/x/accounts/{id}`.
+Use the delete method on `/x/accounts/{id}`.
 
 Permanently removes the account from Xquik. Returns `{ success: true }`. Before calling, confirm with the user.
 
 This action is destructive. Show the exact account and lost access before
-disconnecting it. Obtain explicit confirmation immediately before the call.
+disconnecting it. Obtain explicit approval immediately before the call.
 
 ---

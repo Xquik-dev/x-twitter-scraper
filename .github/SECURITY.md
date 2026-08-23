@@ -28,7 +28,7 @@ This Skill uses an API key for authentication.
 
 - The skill and guide files (`skills/`, `task-guides/`, `commands/`)
 - The plugin, MCP, and marketplace metadata (`.claude-plugin/`, `.codex-plugin/`, `openclaw.plugin.json`, `skills.sh.json`, `server.json`, `.mcp.json`, `docker-mcp-registry/`, `mcpize/`)
-- The npm package (`x-developer`)
+- The package (`x-developer`)
 
 ### Out of scope
 

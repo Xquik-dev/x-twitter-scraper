@@ -26,7 +26,7 @@ Changes to the upstream Xquik API itself belong in the main Xquik repo.
 - Keep Skill instructions short and direct.
 - Update `SKILL.md` when user-facing behavior changes.
 - Update `README.md` when the documented API changes.
-- Bump the `package.json` version before republishing to npm.
+- Bump the `package.json` version before republishing the package.
 
 ## Release process
 
@@ -36,8 +36,8 @@ when only the package changes.
 
 1. Merge the release commit into the default branch.
 2. Create and push the matching `vMAJOR.MINOR.PATCH` tag.
-3. Wait for the npm and GitHub release workflow to finish.
-4. Verify the published npm version and package contents.
+3. Wait for the package and GitHub release workflow to finish.
+4. Verify the published version and package contents.
 
 The MCP Registry workflow reads `server.json`. It skips versions that already
 exist. It publishes only when the hosted MCP version changes.
@@ -47,10 +47,10 @@ exist. It publishes only when the hosted MCP version changes.
 Run these checks before opening a pull request:
 
 ```sh
-npm ci --ignore-scripts
-npm test
-npm run check-versions
-npm pack --dry-run --json
+bun install --frozen-lockfile
+bun run test
+bun run check-versions
+bun pm pack --dry-run --ignore-scripts
 ```
 
 CI runs the same tests on every pull request and every push to `master`. Bug
