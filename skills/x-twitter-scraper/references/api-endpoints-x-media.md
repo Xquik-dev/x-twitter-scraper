@@ -8,11 +8,11 @@ POST /x/media/download
 
 Download images, videos, and GIFs from 1 tweet or up to 50 tweets. The API returns a shareable gallery URL.
 
-This sends data to an external host. Get approval first. This operation copies requested
+This sends data to an external host. Get confirmation first. This operation copies requested
 media to a shareable Xquik gallery. Anyone who receives the unlisted gallery URL
 may access it. Confirm the exact tweets, media rights, bulk bound, and intended
 recipients before calling. Never use private or access-restricted media. Do not
-share the returned URL beyond the approved audience.
+share the returned URL beyond the intended audience.
 
 Send either `tweetInput` for 1 tweet or `tweetIds` for a bulk download. Exactly 1 field is required.
 

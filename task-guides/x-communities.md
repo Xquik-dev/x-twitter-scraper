@@ -59,7 +59,7 @@ POST /extractions
 
 1. Confirm community ID (or search query for `community_search`).
 2. Call `POST /extractions/estimate` and show the usage estimate.
-3. Require user approval before calling `POST /extractions`.
+3. Require user confirmation before calling `POST /extractions`.
 4. Poll `GET /extractions/{id}` until `completed`, then `GET /extractions/{id}/export?format=csv`.
 
 ## Protect community data

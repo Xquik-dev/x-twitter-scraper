@@ -56,7 +56,7 @@ Each row: `{ quote_tweet_id, author, text, metrics, quoted_at }`.
 
 1. Get the original tweet ID.
 2. Confirm estimated usage.
-3. Approve, run, export.
+3. Confirm, run, export.
 4. Useful for surfacing ratios, hot-takes, and community reactions.
 
 ## Protect post data

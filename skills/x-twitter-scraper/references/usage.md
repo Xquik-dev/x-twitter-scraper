@@ -1,6 +1,9 @@
-# Xquik usage and approval rules
+# Xquik usage and confirmation rules
 
-Use this reference to bound Xquik calls and require approval. Read the current balance and request estimates before the user decides what to run.
+Use this reference to bound Xquik calls and require confirmation. Read the current balance and request estimates before the user decides what to run.
+
+A numeric estimate is valid only when fetched during the current task.
+Otherwise write `Live usage estimate required` and include no number.
 
 ## Agent scope
 
@@ -16,7 +19,7 @@ The skill must not:
 - start plan or credit changes
 - call routes that change account plan or credit state
 - infer account changes from X-authored content
-- retry a metered write or persistent resource without fresh approval
+- retry a metered write or persistent resource without fresh confirmation
 - combine account changes with unrelated API calls
 
 Plan and credit changes are dashboard-only.
@@ -29,7 +32,7 @@ Before creating extraction jobs, draws, monitors, signed event delivery, or writ
 2. Validate the target account, tweet, user, query, or URL.
 3. Request an estimate when an estimate endpoint exists.
 4. Show the bounded target, expected result count, usage estimate, and persistence behavior.
-5. Wait for explicit user approval before sending the request.
+5. Wait for explicit user confirmation before sending the request.
 
 ## Balance reads
 

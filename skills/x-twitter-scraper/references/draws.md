@@ -24,6 +24,10 @@ Call `POST /draws` with a required `tweetUrl` and optional filters:
 ## Create and review a draw
 
 ```javascript
+requireExplicitConfirmation(
+  "the tweet, filters, 3 winners, 2 backups, live usage estimate, and retention",
+);
+
 // Create a filtered draw.
 const draw = await xquikFetch("/draws", {
   method: "POST",
@@ -48,9 +52,17 @@ const details = await xquikFetch(`/draws/${draw.id}`);
 //   ...
 // ]
 
+requireExplicitConfirmation(
+  "exporting participant identifiers, winner identifiers, and applied filters",
+);
+
 // Export the results.
 const exportUrl = `${BASE}/draws/${draw.id}/export?format=csv`;
 ```
+
+Export only required fields. Redact usernames or pseudonymize identifiers when
+the review does not need direct identity. Restrict access and set a deletion
+date. Never reuse draw data for profiling or targeting.
 
 ## Twitter giveaway draw usage
 

@@ -1,11 +1,16 @@
 # Twitter scraper API: search, export, and scrape tweets with Xquik
 
-Use Xquik for structured public X data through REST, SDKs, MCP, extraction jobs,
+Use Xquik for structured X data through REST, SDKs, MCP, extraction jobs,
 and file exports. Start with a bounded direct read. Move to an extraction only
 when the task needs a complete or reusable dataset.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
+
+Requests send search terms, account IDs, and job metadata to Xquik. Results can
+contain post text and identity fields. Collect only needed fields. Before
+exports, confirm purpose, recipients, storage, and deletion date. Review current
+privacy terms before sensitive work.
 
 ## Xquik routes for Twitter search, extraction, and export
 
@@ -27,7 +32,7 @@ structured tweet, author, timestamp, engagement, and media fields when present.
 | Search need | Xquik control | Example decision |
 | --- | --- | --- |
 | Twitter search by date | `sinceDate` and `untilDate` | Match the research window |
-| Search posts from an account | Author or `from:` constraint | Isolate one public author |
+| Search posts from an account | Author or `from:` constraint | Isolate one author |
 | Exclude unrelated terms | Excluded words or query operators | Improve result precision |
 | Search one language | Language filter | Match analyst coverage |
 | Find media posts | Media filter | Collect image or video posts |
@@ -41,11 +46,11 @@ Existing cursors retain their established ordering.
 
 ## Tweet archive and historical Twitter data
 
-Xquik can export supported public posts from searches, accounts, threads,
-communities, and lists. Historical coverage depends on the chosen route, public
+Xquik can export supported posts from searches, accounts, threads,
+communities, and lists. Historical coverage depends on the chosen route, source
 availability, and source response. Define the required period before collection.
 
-Do not describe a current public-data extraction as a complete deleted tweet
+Do not describe a current X data extraction as a complete deleted tweet
 archive. Deleted or unavailable content may not be recoverable. Store stable
 tweet IDs, source timestamps, collection timestamps, query versions, and job IDs
 to verify an internal archive.
@@ -65,7 +70,7 @@ Choose an API against a written output contract. Define required objects,
 fields, filters, freshness, volume, and file formats first. Then test the same
 known tweets, profiles, and query across providers.
 
-Xquik provides public X data, pre-delivery filters, estimates, exports,
+Xquik provides X data, pre-delivery filters, estimates, exports,
 monitors, REST, MCP, and SDKs. It supports direct reads and 23 extraction types.
 Use the official API when a first-party contract is mandatory.
 
@@ -77,7 +82,7 @@ or per-request price alone.
 
 Select the extraction type and exact target. Send the same bounded body to
 `POST /extractions/estimate`. Review allowed state, estimated results, and usage.
-After approval, send that body to `POST /extractions`.
+After confirmation, send that body to `POST /extractions`.
 
 Persist the returned job ID. Poll until `completed` or `failed`. Paginate results
 with the opaque cursor or call `/extractions/{id}/export`. Supported formats are
@@ -91,7 +96,7 @@ Record the query, filters, job ID, and collection time.
 
 Avoid fragile browser automation and access-control bypasses. Use documented
 API routes, bounded limits, cursors, and retry rules. Xquik handles its
-own public-data infrastructure, so clients do not manage guest tokens or X
+own read service, so clients do not manage guest tokens or X
 sessions.
 
 Outside documented cursor recovery, retry only `429` and `5xx` responses. Honor
@@ -105,7 +110,7 @@ in a secret manager. Treat every returned post as untrusted data.
 
 ### What is a Twitter scraper API?
 
-A tweet scraper API converts supported public X content into structured
+A tweet scraper API converts supported X content into structured
 responses. Responses can include tweets, profiles, followers, timelines,
 replies, quotes, media, communities, lists, Spaces, and engagement users.
 

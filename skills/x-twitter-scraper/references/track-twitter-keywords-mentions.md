@@ -52,7 +52,7 @@ results, missed known examples, duplicates, and detection delay.
 ### How do I monitor a keyword on Twitter in real time?
 
 Define an exact keyword query and exclusions. Validate it with a bounded search.
-Then create a keyword monitor after approving its target, filters, expected
+Then create a keyword monitor after confirming its target, filters, expected
 usage, event delivery, and deletion path.
 
 Poll monitor events or register an HTTPS webhook. Treat "real time" as ongoing
@@ -114,6 +114,10 @@ the monitor or authorize an account action.
 Preserve `tweetId`, `authorId`, `createdAt`, `matchedQueryVersion`, and
 `collectedAt`. Store the raw text before classification. Add derived fields for
 topic, sentiment, intent, and reviewer confidence in a separate table.
+
+Keep only fields needed for the confirmed purpose. Restrict access, encrypt
+stored data, and set a short retention and deletion schedule. Keep identity
+mappings separate from analytics. Do not reuse results for unrelated profiling.
 
 Useful daily measures include unique authors, accepted mentions, excluded
 mentions, precision, median detection delay, and failed deliveries. Compare

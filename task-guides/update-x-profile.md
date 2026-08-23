@@ -1,6 +1,6 @@
 ---
 name: update-x-profile
-description: "Use when the user wants to change an X profile field or image. Show the exact diff and require approval for every field."
+description: "Use when the user wants to change an X profile field or image. Show the exact diff and require confirmation for every field."
 license: MIT
 metadata:
   internal: true
@@ -61,11 +61,11 @@ Every request needs `account`. Send only the fields the user wants to change.
 
 1. `GET /x/accounts` to pick the acting account.
 2. Show the before and after value for every requested field.
-3. Wait for approval of each field or the complete diff.
+3. Wait for confirmation of each field or the complete diff.
 4. Send the selected write. Direct REST supplies the key. Hosted MCP injects it.
 5. Poll `statusUrl` after a `202` response until `terminal` is true.
 
-## Get approval
+## Get confirmation
 
 The audience sees profile changes immediately. Show exact new values before the call. Change only requested fields.
 

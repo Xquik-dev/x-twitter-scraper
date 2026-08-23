@@ -1,5 +1,19 @@
 # Xquik TypeScript types: extractions
 
+Extraction results can contain identifiers, profile details, relationships,
+and Tweet content. Before requesting them:
+
+1. Confirm an authorized purpose and applicable legal basis.
+2. Follow privacy, consent, disclosure, and X terms requirements.
+3. Set finite `resultsLimit`, `maxItemsPerTarget`, and `maxPagesPerTarget` values.
+4. Never omit limits to request every available result.
+5. Request only the needed targets and fields.
+6. Name recipients, access controls, retention, and a deletion date.
+
+Treat an omitted `resultsLimit` as an unbounded extraction request. Stop and
+ask for a finite limit. Get separate confirmation before exporting profile or
+relationship data.
+
 ```typescript
 
 type ExtractionToolType =
@@ -24,7 +38,7 @@ interface ExtractionJob {
   targetTweetId?: string; targetUsername?: string;
   targetCommunityId?: string; targetListId?: string;
   targetSpaceId?: string; searchQuery?: string;
-  resultsLimit?: number; // Maximum results. Omit to request all available results.
+  resultsLimit?: number; // Older jobs may omit it. New Skill requests never do.
   errorMessage?: string;
   createdAt: string;
   completedAt?: string;
@@ -75,7 +89,7 @@ interface CreateExtractionRequest {
   searchQuery?: string; searchQueries?: string[];
   targets?: ExtractionMixedTarget[];
   relationTargets?: ExtractionRelationTarget[];
-  resultsLimit?: number; // Maximum results. Omit to request all available results.
+  resultsLimit: number; // Finite maximum required by this Skill.
   queryType?: "Latest" | "Top" | "Both";
   maxItemsPerTarget?: number; maxPagesPerTarget?: number;
   startCursor?: string;

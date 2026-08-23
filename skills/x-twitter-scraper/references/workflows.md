@@ -6,9 +6,9 @@ Use these code examples for authentication, retries, pagination, extractions, an
 
 > These examples send credentials, parameters, and
 > returned data to and from `xquik.com`. Keep the key in a secret store. Get
-> explicit approval before private reads, writes, exports, persistent resources,
+> explicit confirmation before private reads, writes, exports, persistent resources,
 > webhooks, or metered jobs. Never forward private results without separate
-> approval.
+> confirmation.
 
 ```javascript
 const apiKey = process.env.XQUIK_API_KEY;
@@ -88,8 +88,8 @@ retry the same cursor once. For `410 coverage_cursor_gone`, the response omits
 ## Complete extraction workflow
 
 ```javascript
-function requireExplicitApproval(scope) {
-  throw new Error(`Approval required for ${scope}. Implement the approval gate first.`);
+function requireExplicitConfirmation(scope) {
+  throw new Error(`Confirmation required for ${scope}. Implement the confirmation gate first.`);
 }
 
 // Estimate usage before creating the job.
@@ -107,8 +107,8 @@ if (!estimate.allowed) {
   return;
 }
 
-// Create the bounded job only after approval.
-requireExplicitApproval("the bounded extraction job, usage, recipients, and retention");
+// Create the bounded job only after confirmation.
+requireExplicitConfirmation("the bounded extraction job, usage, recipients, and retention");
 let job = await xquikFetch("/extractions", {
   method: "POST",
   body: JSON.stringify({
@@ -137,8 +137,8 @@ while (true) {
   cursor = page.nextCursor;
 }
 
-// Review a bounded preview and approve the export first.
-requireExplicitApproval("the fixed export scope, audience, storage, and retention");
+// Review a bounded preview and confirm the export first.
+requireExplicitConfirmation("the fixed export scope, audience, storage, and retention");
 const exportUrl = `${BASE}/extractions/${job.id}/export?format=csv`;
 const csvResponse = await fetch(exportUrl, { headers });
 const csvData = await csvResponse.text();
@@ -146,9 +146,13 @@ const csvData = await csvResponse.text();
 
 ## Real-time monitoring setup
 
-Create a monitor, register a webhook, then handle events. Get explicit approval for the target, event types, destination URL, and ongoing usage first.
+Create a monitor, register a webhook, then handle events. Get explicit confirmation for the target, event types, destination URL, and ongoing usage first.
 
 ```javascript
+requireExplicitConfirmation(
+  "account @elonmusk, the listed events, https://your-server.com/webhook, ongoing usage, recipients, retention, and both cleanup paths",
+);
+
 // Create a persistent monitor. Active monitors are metered hourly.
 const monitor = await xquikFetch("/monitors", {
   method: "POST",
@@ -166,7 +170,7 @@ const webhook = await xquikFetch("/webhooks", {
     eventTypes: ["tweet.new", "tweet.reply"],
   }),
 });
-// Store webhook.secret now. The API returns it once.
+// Save the one-time webhook.secret in a secret manager. Never log or share it.
 
 // Poll events when you do not use a webhook.
 const events = await xquikFetch("/events?monitorId=7&limit=50");
@@ -184,10 +188,10 @@ Monitor event types include `tweet.new`, `tweet.quote`, `tweet.reply`, and
 | Search tweets by keyword or hashtag | `GET /x/tweets/search?q=...` | Metered per result |
 | Get a user profile | `GET /x/users/{id}` | Metered |
 | Get a user's recent tweets | `GET /x/users/{id}/tweets` | Metered per result |
-| Get a user's liked tweets | `GET /x/users/{id}/likes` | Metered per result |
+| Get a user's liked tweets | `GET /x/users/{id}/likes` | Sensitive preference read; confirm target, authorized purpose, limit, recipients, and any later forwarding or export |
 | Get a user's media tweets | `GET /x/users/{id}/media` | Metered per result |
-| Get tweet favoriters | `GET /x/tweets/{id}/favoriters` | Metered per result |
-| Get mutual followers | `GET /x/users/{id}/followers-you-know` | Metered per result |
+| Get tweet favoriters | `GET /x/tweets/{id}/favoriters` | Metered per result; apply sensitive-read safeguards when the tweet subject is sensitive |
+| Get mutual followers | `GET /x/users/{id}/followers-you-know` | Private; confirm account, target, purpose, limit, and recipients |
 | Check a follow relationship | `GET /x/followers/check?source=A&target=B` | Metered |
 | Get trending topics | `GET /trends?woeid=1` | Metered |
 | Get Radar news | `GET /radar?source=hacker_news` | Included |
@@ -195,21 +199,25 @@ Monitor event types include `tweet.new`, `tweet.quote`, `tweet.reply`, and
 | Get bookmark folders | `GET /x/bookmarks/folders` | Metered |
 | Get notifications | `GET /x/notifications` | Metered per result |
 | Get the home timeline | `GET /x/timeline` | Metered per result |
-| Get DM history | `GET /x/dm/{userId}/history?account={username}` | Private; approve the exact account |
+| Get DM history | `GET /x/dm/{userId}/history?account={username}` | Private; confirm the exact account |
 | Monitor an X account | `POST /monitors` | Active monitors are metered hourly |
 | Poll for events | `GET /events` | Included |
-| Receive webhook events | `POST /webhooks` | Included; approve the destination URL |
+| Receive webhook events | `POST /webhooks` | Included; confirm the destination URL |
 | Run a giveaway draw | `POST /draws` | Metered per entry |
 | Download tweet media | `POST /x/media/download` | Metered per item |
 | Extract bulk data | `POST /extractions` | Metered per result |
 | Check credits | `GET /credits` | Included |
-| Compose a tweet | `POST /compose` | Included |
-| Post a tweet | `POST /x/tweets` | Metered write action |
-| Like or unlike a tweet | `POST /x/tweets/{id}/like` likes it. A delete request to the same route unlikes it. | Metered write action |
-| Retweet | `POST /x/tweets/{id}/retweet` | Metered write action |
-| Follow or unfollow | `POST /x/users/{id}/follow` follows. A delete request to the same route unfollows. | Metered write action |
-| Send a DM | `POST /x/dm/{userId}` | Metered write action |
-| Update a profile | `PATCH /x/profile` | Metered write action |
-| Upload media | `POST /x/media` | Metered write action |
-| Change a community | `POST /x/communities`, join, or leave | Metered write action |
-| Manage support tickets | `POST /support/tickets` | Included |
+| Compose a tweet | `POST /compose` | Included; confirm supplied content first |
+| Post a tweet | `POST /x/tweets` | Confirm immediately before the metered write |
+| Like or unlike a tweet | `POST /x/tweets/{id}/like` likes it. A delete request to the same route unlikes it. | Confirm immediately before either write |
+| Retweet | `POST /x/tweets/{id}/retweet` | Confirm immediately before the metered write |
+| Follow or unfollow | `POST /x/users/{id}/follow` follows. A delete request to the same route unfollows. | Confirm immediately before either write |
+| Send a DM | `POST /x/dm/{userId}` | Confirm sender, recipient, and message immediately before sending |
+| Update a profile | `PATCH /x/profile` | Confirm the exact visible change immediately before writing |
+| Upload media | `POST /x/media` | Confirm its exact use immediately before uploading |
+| Change a community | `POST /x/communities`, join, or leave | Confirm the exact change immediately before writing |
+| Manage support tickets | `POST /support/tickets` | Included; confirm Xquik support as the destination, exact redacted content, attachments, recipients, and retention |
+
+Before ticket creation, remove secrets and unnecessary personal data. Show the
+exact subject, body, attachments, destination, recipients, and retention terms.
+Create the ticket only after confirmation.

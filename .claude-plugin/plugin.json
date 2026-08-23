@@ -1,7 +1,7 @@
 {
   "name": "x-twitter-scraper",
   "version": "2.6.7",
-  "description": "Xquik Twitter scraper API Skill for 128 REST operations. MCP has 120 catalog routes through 2 tools; 119 support JSON or text. Account actions need approval. Not affiliated with X Corp.",
+  "description": "X (Twitter) Scraper API and X API Alternative. You do not need an official X developer account. You do not need to connect or use an X account for scraping. Includes 128 REST operations. MCP has 120 catalog routes through 2 tools; 119 support JSON or text. Not affiliated with X Corp.",
   "author": {
     "name": "Xquik",
     "url": "https://github.com/Xquik-dev"

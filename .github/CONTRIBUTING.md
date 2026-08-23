@@ -5,7 +5,7 @@ Use this guide to improve `x-twitter-scraper`.
 ## Scope
 
 This repo packages Xquik's Twitter scraper API Skill, MCP listings, SDK setup,
-and public integration guides for developers and agents. Changes should focus on:
+and external integration guides for developers and agents. Changes should focus on:
 
 - Clarify Skill instructions in `skills/`, `commands/`, and `task-guides/`.
 - Update MCP and marketplace metadata in `server.json`, `.mcp.json`, `docker-mcp-registry/`, and `mcpize/`.
@@ -25,7 +25,7 @@ Changes to the upstream Xquik API itself belong in the main Xquik repo.
 
 - Keep Skill instructions short and direct.
 - Update `SKILL.md` when user-facing behavior changes.
-- Update `README.md` when the public API changes.
+- Update `README.md` when the documented API changes.
 - Bump the `package.json` version before republishing to npm.
 
 ## Release process

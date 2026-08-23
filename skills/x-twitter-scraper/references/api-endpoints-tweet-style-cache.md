@@ -6,9 +6,18 @@ Style creation, replacement, and deletion change persistent cached resources.
 For analysis, show the username, estimated usage, and storage effect. For
 custom saves, show the label, source tweets, and replacement effect. For
 deletion, show the label or username and deletion effect. Proceed only after
-explicit approval for that exact write.
+explicit confirmation for that exact write.
 Cached profiles and comparisons are account-scoped reads. Require exact-scope
-approval before retrieving them.
+confirmation before retrieving them.
+
+The cache can store third-party usernames, Tweet text, and Tweet metadata.
+Before caching, confirm an authorized purpose and applicable legal basis. Check
+privacy, consent, disclosure, and X terms requirements. Tell the user what
+Xquik will fetch, why it will be stored, and who can access it. Confirm the
+exact username, needed content, recipients, retention period, and deletion
+date. Apply account access controls. Delete the cache when its purpose ends.
+Honor applicable access and deletion requests. Never reuse cached content for
+profiling, targeting, or unrelated work.
 
 ### Analyze and cache style
 
@@ -16,8 +25,8 @@ approval before retrieving them.
 
 Fetch recent tweets from an X account and cache them for style analysis. This call is metered.
 
-Get approval first. Confirm the username, metered usage, and intent to store
-the resulting profile before creating the cache.
+Get confirmation first. Confirm the username, metered usage, stored content,
+recipients, retention, deletion date, and intent before creating the cache.
 
 Send this request body:
 
@@ -54,7 +63,7 @@ List up to 200 cached tweet style profiles ordered by fetch date.
 
 This is a private read. This endpoint returns the entire cached profile list, up to 200
 entries. Show that scope, the purpose, recipients, and retention plan.
-List profiles only after explicit approval for that exact read.
+List profiles only after explicit confirmation for that exact read.
 
 For a 200 response, the API returns:
 
@@ -79,8 +88,8 @@ For a 200 response, the API returns:
 
 Save a custom style profile from tweet texts. The body `label` controls the saved style label and replaces any existing style with that label.
 
-Get approval first. Preview the label and source texts. Warn when an existing
-label will be replaced, then obtain explicit approval.
+Get confirmation first. Preview the label and source texts. Warn when an existing
+label will be replaced, then obtain explicit confirmation.
 
 Send this body:
 
@@ -102,7 +111,7 @@ Possible errors include `400 invalid_input`.
 Get a cached style profile with full tweet data. `id` is the cached style label or username.
 
 This is a private read. Show the label or username. Retrieve its tweets only after
-explicit approval for that exact read.
+explicit confirmation for that exact read.
 
 For a 200 response, the API returns the full style object with `tweets`.
 
@@ -116,7 +125,7 @@ Send a delete request to `/styles/{id}`.
 
 This action is destructive. This permanently deletes the cached style profile.
 Show the exact label or username and explain the lost cached data. Delete only
-after explicit approval immediately before the call. Returns `204 No Content`.
+after explicit confirmation immediately before the call. Returns `204 No Content`.
 
 Possible errors include `404 style_not_found`.
 
@@ -129,7 +138,7 @@ Possible errors include `404 style_not_found`.
 Compare 2 cached tweet style profiles.
 
 This is a private read. Show both labels or usernames. Compare only after explicit
-approval for that exact read.
+confirmation for that exact read.
 
 Use these query parameters:
 
@@ -158,7 +167,7 @@ Possible errors include `400 missing_params` and `404 style_not_found`.
 Get current engagement metrics for tweets in a cached style. This call is metered.
 
 This is a metered private read. Show the label or username and usage estimate.
-Proceed only after explicit approval for that exact read.
+Proceed only after explicit confirmation for that exact read.
 
 For a 200 response, the API returns:
 

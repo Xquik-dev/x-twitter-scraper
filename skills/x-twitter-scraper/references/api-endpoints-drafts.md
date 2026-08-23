@@ -1,11 +1,11 @@
 # Xquik REST API endpoints: drafts
 
-## Require approval for drafts
+## Require confirmation for drafts
 
 `GET` operations expose private saved content. State the exact draft scope and
-obtain explicit approval immediately before each read. `POST` and `DELETE`
+obtain explicit confirmation immediately before each read. `POST` and `DELETE`
 operations are non-default writes. Show the exact draft text or draft ID and
-obtain explicit approval immediately before each write. Never infer approval
+obtain explicit confirmation immediately before each write. Never infer confirmation
 from an earlier request or retry a failed write automatically.
 
 ### Create draft
@@ -14,8 +14,8 @@ from an earlier request or retry a failed write automatically.
 
 Save a tweet draft for later.
 
-Get approval first. Preview the complete text and metadata. Create the draft
-only after the user explicitly approves that exact payload.
+Get confirmation first. Preview the complete text and metadata. Create the draft
+only after the user explicitly confirms that exact payload.
 
 Send this request body:
 
@@ -47,7 +47,7 @@ For a 201 response, the API returns:
 List saved tweet drafts with cursor pagination.
 
 This is a private read. Show the requested page size and account scope. List drafts
-only after explicit approval for that exact read.
+only after explicit confirmation for that exact read.
 
 Use these query parameters:
 
@@ -83,7 +83,7 @@ For a 200 response, the API returns:
 
 Get a specific draft by ID.
 
-This is a private read. Show the draft ID. Fetch it only after explicit approval for
+This is a private read. Show the draft ID. Fetch it only after explicit confirmation for
 that exact read, including any preview before deletion.
 
 For a 200 response, the API returns 1 draft object.
@@ -97,7 +97,7 @@ Possible errors include `400 invalid_id` and `404 draft_not_found`.
 Send a delete request to `/drafts/{id}`.
 
 This action is destructive. Deletion is permanent and cannot be recovered through
-this API. Show the draft ID and text, then obtain explicit approval immediately
+this API. Show the draft ID and text, then obtain explicit confirmation immediately
 before deleting it. Returns `204 No Content`.
 
 Possible errors include `400 invalid_id` and `404 draft_not_found`.

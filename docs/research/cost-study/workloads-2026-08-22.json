@@ -1,0 +1,62 @@
+{
+  "reviewedAt": "2026-08-22",
+  "status": "synthetic-contract-model",
+  "scope": {
+    "input": "One X search query per scenario",
+    "filters": [
+      "language equals en",
+      "date falls inside the requested range",
+      "media type equals videos",
+      "likes are at least 100",
+      "replies are excluded",
+      "reposts are excluded",
+      "quotes are excluded"
+    ],
+    "fields": [
+      "Tweet ID",
+      "text",
+      "creation time",
+      "engagement counts",
+      "author ID",
+      "author username"
+    ],
+    "freshness": "Collected when the run starts",
+    "retries": "At most 2 retries for documented transient failures",
+    "export": "JSON and CSV",
+    "delivery": "Completed API pages or one completed export"
+  },
+  "workloads": [
+    {
+      "id": "light",
+      "rawCandidates": 250000,
+      "rejectedByFilters": 145000,
+      "duplicates": 5000,
+      "delivered": 100000,
+      "xquikBilled": 100000
+    },
+    {
+      "id": "medium",
+      "rawCandidates": 2000000,
+      "rejectedByFilters": 1500000,
+      "duplicates": 100000,
+      "delivered": 400000,
+      "xquikBilled": 400000
+    },
+    {
+      "id": "heavy",
+      "rawCandidates": 10000000,
+      "rejectedByFilters": 8500000,
+      "duplicates": 500000,
+      "delivered": 1000000,
+      "xquikBilled": 1000000
+    },
+    {
+      "id": "near-zero-yield",
+      "rawCandidates": 5000000,
+      "rejectedByFilters": 4980000,
+      "duplicates": 10000,
+      "delivered": 10000,
+      "xquikBilled": 10000
+    }
+  ]
+}

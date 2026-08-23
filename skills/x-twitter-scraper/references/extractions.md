@@ -4,17 +4,17 @@ Xquik provides 23 bulk data extraction tools. Each tool requires a specific targ
 
 ## Privacy and acceptable use
 
-Bulk extraction and export can collect large amounts of public identity,
+Bulk extraction and export can collect large amounts of identity,
 activity, and relationship data. Before creating a job, confirm the lawful
 purpose, target, `resultsLimit`, intended recipients, and retention period.
 Follow X rules and applicable privacy law. Do not use these tools for
 credential collection, private data, surveillance, discrimination, harassment,
-doxxing, or unrelated secondary use. Delete exported data when the approved
+doxxing, or unrelated secondary use. Delete exported data when the stated
 purpose ends.
 
-Every extraction requires an estimate and explicit approval for the exact
-bounded job. Never infer approval from a general request or increase a bound
-without renewed approval.
+Every extraction requires an estimate and explicit confirmation for the exact
+bounded job. Never infer confirmation from a general request or increase a bound
+without renewed confirmation.
 
 The API accepts an omitted `resultsLimit`. This Skill must always send an
 explicit finite positive bound. Use the same bound for estimate and create.
@@ -74,7 +74,7 @@ These tools require `targetUsername`.
 
 | Tool type | Description |
 |-----------|-------------|
-| `user_likes` | Extract tweets liked by a user |
+| `user_likes` | Extract tweets liked by a user; treat as a sensitive preference read |
 | `user_media` | Extract media tweets from a user |
 
 For example:
@@ -84,6 +84,10 @@ For example:
   "targetUsername": "elonmusk"
 }
 ```
+
+Before a `user_likes` extraction, confirm the target, authorized purpose,
+result limit, and recipients. Require separate confirmation before forwarding
+or exporting results. See [security](security.md).
 
 ### Community-based tools
 
@@ -235,7 +239,11 @@ For example, apply filters:
 }
 ```
 
-Set optional `resultsLimit` to stop after a specific result count. Pass the same value to `POST /extractions/estimate` and `POST /extractions`.
+Every estimate and creation request must include the same explicit, finite,
+positive integer `resultsLimit`. Reject a missing, zero, negative, or
+non-integer value. Validate it against the current contract maximum. If the
+user raises the limit, run a new estimate and obtain confirmation again before
+creating or changing the job.
 
 ### Profile filters
 
@@ -282,10 +290,10 @@ Exports include enrichment columns not present in the API response.
 The endpoint supports follower, following, post, engagement, profile, media,
 language, search, and date filters. It does not project individual fields.
 
-Get approval first. Set the smallest approved `resultsLimit` when creating
+Get confirmation first. Set the smallest confirmed `resultsLimit` when creating
 the job. Before export, show the job, filters, format, row count, schema,
 recipients, storage, and retention. Materialize or transmit the dataset only
-after explicit approval. Delete it when the approved purpose ends.
+after explicit confirmation. Delete it when the stated purpose ends.
 
 ## Estimating usage
 

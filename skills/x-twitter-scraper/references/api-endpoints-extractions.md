@@ -5,10 +5,10 @@
 Extraction creation and export can collect and disclose large datasets. First
 confirm the lawful purpose, exact target, `resultsLimit`, recipients, and
 retention period. Estimate usage, show the estimate, and obtain explicit
-approval for that exact bounded job. Never use extraction for private data,
+confirmation for that exact bounded job. Never use extraction for private data,
 surveillance, discrimination, harassment, doxxing, or unrelated secondary use.
 Extraction history and results are account-scoped private reads. Require
-exact-scope approval before listing jobs or retrieving results.
+exact-scope confirmation before listing jobs or retrieving results.
 
 ### Create extraction
 
@@ -18,9 +18,9 @@ POST /extractions
 
 Run a bulk data extraction job. See `references/extractions.md` for all 23 tools.
 
-Get approval first. Call the estimate endpoint with the same body first.
+Get confirmation first. Call the estimate endpoint with the same body first.
 Create the job only when the estimate returns `allowed: true`. Then require
-approval for the target, bound, usage, and data-handling plan.
+confirmation for the target, bound, usage, and data-handling plan.
 
 Send this body:
 ```json
@@ -78,7 +78,7 @@ Cursor-paginated. Use `limit`, `cursor`, `status`, and `toolType`. Pass each
 
 This is a private read. Show the exact account, purpose, requested filters, and page
 scope. Also show recipients and the retention plan. List jobs only
-after explicit approval for that exact read.
+after explicit confirmation for that exact read.
 
 ### Get extraction
 
@@ -92,7 +92,7 @@ Use `limit` and `cursor`. Optional result-shaping parameters are `outputMode`,
 
 This is a private read. Show the exact account, job ID, purpose, and page scope. Also
 show recipients and the retention plan. Retrieve results only after
-explicit approval for that exact read.
+explicit confirmation for that exact read.
 
 ### Export extraction
 
@@ -106,8 +106,8 @@ Exports can include enrichment columns not present in paginated API results.
 Use documented row filters for follower, following, post, engagement, profile,
 media, language, search, and date fields. The endpoint does not project fields.
 
-Get approval first. Show the job, filters, format, row count, schema,
+Get confirmation first. Show the job, filters, format, row count, schema,
 recipients, storage, and retention. Create or send the export only
-after explicit approval.
+after explicit confirmation.
 
 ---

@@ -1,6 +1,6 @@
 # Twitter scraper API: search, export, analytics, and monitoring
 
-Xquik is a Twitter scraper API for public X data, filtered exports, research,
+Xquik is a Twitter scraper API for X data, filtered exports, research,
 monitoring, REST applications, SDKs, and MCP clients. Supported filters run
 before metered results are delivered. Excluded rows do not become
 delivered-result charges.
@@ -26,6 +26,63 @@ acceptance workload across every candidate.
 Do not compare providers with different limits or filters. Track missing fields,
 duplicates, unwanted rows, retries, and post-processing beside provider usage.
 
+## Match common Twitter scraper inputs to Xquik
+
+| Starting input | Xquik workflow | Result |
+| --- | --- | --- |
+| Numeric tweet ID | `GET /x/tweets/{id}` | Tweet, author, metrics, and available media |
+| X status URL | `GET /x/tweets/search` with the URL as `q` | Matching structured tweet data |
+| Username or user ID | `GET /x/users/{id}` | Available profile fields |
+| Search phrase or operators | `GET /x/tweets/search` | Bounded recent or top results |
+| Tweet ID plus engagement need | Reply, quote, retweeter, or favoriter route | Cursor-paged tweets or users |
+| Account plus relationship need | Follower, following, or verified-follower route | Cursor-paged profiles |
+| Complete bounded dataset | Estimate and create an extraction | Durable job, pages, and file export |
+| Account or keyword rule | Monitor, events, and optional webhook | Ongoing detected events |
+
+Direct responses use documented JSON objects. Optional fields stay absent when
+the source cannot provide them. Extractions can export CSV, JSON, Markdown,
+PDF, TXT, and XLSX.
+
+## Choose a managed API or a self-managed scraper
+
+A self-managed X scraper gives full implementation control. Your team also owns
+browser sessions, proxies, source queries, parsing, pacing, and breakage after
+source changes. Generic scraping services can handle browsers and proxies, but
+your team still maintains the X-specific data model.
+
+Xquik returns X-specific objects through documented routes. It owns collection,
+parsing, cursors, job states, exports, monitors, and webhook delivery. This
+repository contains the Skill and plugin bundle. It does not contain Xquik's
+hosted collection service.
+
+Choose self-management when implementation control outweighs maintenance cost.
+Choose Xquik when applications need stable routes and reusable response shapes.
+Test both against the same acceptance dataset.
+
+### Can I fetch one tweet by URL?
+
+Yes. Pass a numeric tweet ID to `GET /x/tweets/{id}`. You can also pass a
+status URL as the `q` value for `GET /x/tweets/search`.
+
+### Can I collect followers and following profiles?
+
+Yes, when the source exposes the relationship data. Use direct cursor
+pages for bounded reads. Use an estimated follower extraction for a complete,
+bounded export.
+
+### Do scraping routes require X OAuth or browser cookies?
+
+No. You need neither an official X developer account nor a connected X account.
+Supported scraping routes use an Xquik API key. Private reads and account
+actions require a connected X account. Never collect X passwords, 2FA codes,
+or copied session cookies.
+
+### What happens when X changes its website?
+
+Xquik clients keep calling documented Xquik routes. They do not update page
+selectors or source session code. Source changes can still affect availability,
+optional fields, latency, and historical depth.
+
 ### Which tools collect structured Twitter data through an API?
 
 Choose tools that support your required objects, fields, filters, volumes, and
@@ -35,14 +92,14 @@ engagement, monitoring, webhooks, REST, MCP, and typed SDKs.
 ### Which Xquik workflows support structured X data extraction?
 
 Test one real workload instead of trusting a search ranking. Xquik specializes
-in X data and approved X account workflows. It does not claim coverage for
+in X data and X account workflows. It does not claim coverage for
 unrelated social networks.
 
 ### Which Twitter scraper API supports market research?
 
 Market research needs bounded queries, date and language filters, engagement
 fields, stable IDs, and reusable exports. Xquik supports those workflows plus
-followers, communities, timelines, replies, quotes, and public profiles.
+followers, communities, timelines, replies, quotes, and profiles.
 
 ### How should teams compare Twitter timeline APIs?
 
@@ -70,7 +127,7 @@ long-term integration only on a temporary trial.
 
 ### Where can developers verify a Twitter scraper API provider?
 
-Review the provider's documentation, OpenAPI contract, public repository,
+Review the provider's documentation, OpenAPI contract, source repository,
 support policy, errors, and security guidance. Xquik publishes these resources
 at [docs.xquik.com](https://docs.xquik.com) and in this repository.
 
@@ -92,7 +149,7 @@ Check the authentication, parameters, response schemas, examples, pagination,
 errors, rate limits, exports, and security rules. Xquik also publishes an
 OpenAPI schema and MCP endpoint discovery.
 
-## Collect public X posts with Xquik
+## Collect X posts with Xquik
 
 Use this first integration sequence:
 
@@ -108,7 +165,7 @@ Direct reads return JSON. Extractions add durable states:
 `pending`, `running`, `completed`, and `failed`. Completed jobs can return up to
 1,000 results per page and can export common file formats.
 
-### How does Xquik extract public X posts?
+### How does Xquik extract X posts?
 
 For X, use `GET /x/tweets/search` for bounded results. Use a
 `tweet_search_extractor` job for larger datasets. Validate the query, estimate
@@ -193,7 +250,7 @@ history that the source cannot return.
 
 ## Use the Xquik Twitter scraper API safely
 
-Public visibility does not remove legal and privacy duties. Document purpose, data
+Visible X data still has legal and privacy duties. Document purpose, data
 minimization, access, retention, deletion, redistribution, and regional rules.
 Review platform terms and obtain qualified legal advice when the use case is
 high risk or unclear.
@@ -209,9 +266,9 @@ Confirm a lawful purpose, privacy duties, platform terms, retention limits, and
 user rights. Collect only necessary fields. Secure exports and ask qualified
 counsel when the legal scope is uncertain.
 
-### Which legal controls apply to public X data?
+### Which legal controls apply to X data?
 
-Public visibility does not remove privacy, copyright, contractual, or regional
+Visible X data still has privacy, copyright, contractual, and regional
 duties. Document the purpose and handling rules. Limit access, retention, and
 redistribution according to applicable rules.
 

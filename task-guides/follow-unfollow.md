@@ -1,6 +1,6 @@
 ---
 name: follow-unfollow
-description: "Use when the user wants to follow, unfollow, or check a relationship on X. Process 1 target and require approval for every write."
+description: "Use when the user wants to follow, unfollow, or check a relationship on X. Process 1 target and require confirmation for every write."
 license: MIT
 metadata:
   internal: true
@@ -60,7 +60,7 @@ DELETE /x/users/{id}/follow
 
 1. `GET /x/accounts` to pick the acting account.
 2. `GET /x/users/{id}` to resolve each target handle to a numeric `id`.
-3. Show the user the target handle and the acting account. Wait for approval.
+3. Show the user the target handle and the acting account. Wait for confirmation.
 4. Send the write. Direct REST supplies the key. Hosted MCP injects it.
 5. Poll `statusUrl` after a `202` response until `terminal` is true.
 

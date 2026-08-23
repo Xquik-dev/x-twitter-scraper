@@ -50,6 +50,9 @@ jobs:
       - name: Test
         run: npm test
 
+      - name: Check Skill evidence
+        run: npm run check:skill-evidence
+
       - name: Audit dependencies
         run: npm audit --audit-level=low
 

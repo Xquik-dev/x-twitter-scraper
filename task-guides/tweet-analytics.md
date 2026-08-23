@@ -85,7 +85,7 @@ POST /extractions/estimate
 { "toolType": "favoriters", "targetTweetId": "<id>" }
 ```
 
-On approval:
+On confirmation:
 
 ```
 POST /extractions

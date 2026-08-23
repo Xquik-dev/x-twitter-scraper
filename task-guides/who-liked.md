@@ -56,7 +56,7 @@ Each row: `{ username, name, bio, followers_count, verified, liked_at }`.
 
 1. Get tweet ID.
 2. Confirm estimated usage.
-3. Get user approval because the extraction is metered.
+3. Get user confirmation because the extraction is metered.
 4. Poll until complete, export.
 
 ## Protect account data

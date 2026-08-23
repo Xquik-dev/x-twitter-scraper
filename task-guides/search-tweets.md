@@ -85,7 +85,7 @@ POST /extractions/estimate
 { "toolType": "tweet_search_extractor", "searchQuery": "<query>" }
 ```
 
-Show the user the estimated usage and result count. On approval:
+Show the user the estimated usage and result count. On confirmation:
 
 ```
 POST /extractions

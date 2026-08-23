@@ -60,7 +60,7 @@ estimation so excluded rows are not delivered.
 
 1. Ask for the niche, result bound, and profile filters.
 2. Call `POST /extractions/estimate`, show the usage estimate.
-3. On approval, `POST /extractions`.
+3. On confirmation, `POST /extractions`.
 4. Poll `GET /extractions/{id}` until `completed`.
 5. Retrieve `GET /extractions/{id}?cursor=<cursor>` until `hasMore` is false.
 6. Optionally enrich the shortlist with `GET /x/users/{id}` for recency signals. The `{id}` segment accepts a username or numeric user ID.
@@ -72,4 +72,4 @@ Use this guide for discovery and research. Never send bulk DMs, bulk follows, or
 
 ## Related guides
 
-Use `send-dms` for 1 approved DM. See the [primary API guide](../skills/x-twitter-scraper/SKILL.md).
+Use `send-dms` for 1 confirmed DM. See the [primary API guide](../skills/x-twitter-scraper/SKILL.md).

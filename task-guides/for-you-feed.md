@@ -1,6 +1,6 @@
 ---
 name: for-you-feed
-description: "Use when the user wants to read the For You timeline after explicit approval. Paginate with an opaque cursor and optionally hide tweets already seen. Read-only."
+description: "Use when the user wants to read the For You timeline after explicit confirmation. Paginate with an opaque cursor and optionally hide tweets already seen. Read-only."
 license: MIT
 metadata:
   internal: true

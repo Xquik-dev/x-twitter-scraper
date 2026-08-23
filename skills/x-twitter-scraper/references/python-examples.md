@@ -6,9 +6,9 @@ Use these Python examples for authentication, retries, extractions, draws, and w
 
 > These examples send credentials, parameters, and
 > returned data to and from `xquik.com`. Keep the key in a secret store. Get
-> explicit approval before private reads, writes, exports, persistent resources,
+> explicit confirmation before private reads, writes, exports, persistent resources,
 > webhooks, or metered jobs. Never forward private results without separate
-> approval.
+> confirmation.
 
 ```python
 import json
@@ -62,9 +62,9 @@ def xquik_fetch(path, method="GET", json_body=None, max_retries=3):
 ```python
 RESULTS_LIMIT = 1000
 
-def require_explicit_approval(scope: str) -> None:
+def require_explicit_confirmation(scope: str) -> None:
     raise RuntimeError(
-        f"Approval required for {scope}. Implement the approval gate first."
+        f"Confirmation required for {scope}. Implement the confirmation gate first."
     )
 
 # Estimate the extraction.
@@ -78,8 +78,8 @@ if not estimate["allowed"]:
     print(f"Extraction estimate: {estimate['creditsRequired']} credits. Balance: {estimate['creditsAvailable']}.")
     exit()
 
-# Create the bounded job only after approval.
-require_explicit_approval(
+# Create the bounded job only after confirmation.
+require_explicit_confirmation(
     "the bounded extraction job, usage, recipients, and retention"
 )
 job = xquik_fetch("/extractions", method="POST", json_body={
@@ -93,7 +93,7 @@ while job["status"] in ("pending", "running"):
     time.sleep(2)
     job = xquik_fetch(f"/extractions/{job['id']}")
 
-# Get every approved result page.
+# Get every result page after confirmation.
 cursor = None
 results = []
 
@@ -114,6 +114,10 @@ print(f"Extracted {len(results)} results")
 ## Giveaway draw
 
 ```python
+require_explicit_confirmation(
+    "the tweet, filters, 3 winners, 2 backups, live usage estimate, and retention"
+)
+
 # Create a draw with explicit filters.
 draw = xquik_fetch("/draws", method="POST", json_body={
     "tweetUrl": "https://x.com/burakbayir/status/1893456789012345678",
@@ -150,7 +154,10 @@ def load_secret(name: str) -> str:
 
 # Use the per-webhook secret from POST /webhooks, not an Xquik account credential.
 WEBHOOK_SECRET = load_secret("XQUIK_WEBHOOK_SECRET")
-processed_delivery_ids = set()  # Use durable storage in deployed services.
+
+def claim_delivery_id(delivery_id: str) -> bool:
+    """Atomically claim the ID in a shared store. Return False on conflict."""
+    return shared_delivery_store.set_if_absent(delivery_id, ttl_seconds=86400)
 
 def verify_signature(payload: bytes, signature: str, timestamp: str, nonce: str, secret: str) -> bool:
     if not timestamp.isdigit() or not re.fullmatch(r"[0-9a-f]{32}", nonce):
@@ -183,12 +190,11 @@ class WebhookHandler(BaseHTTPRequestHandler):
             return
 
         event = json.loads(payload)
-        if event["deliveryId"] in processed_delivery_ids:
+        if not claim_delivery_id(event["deliveryId"]):
             self.send_response(200)
             self.end_headers()
             self.wfile.write(b"Already processed")
             return
-        processed_delivery_ids.add(event["deliveryId"])
         handler = EVENT_HANDLERS.get(event["eventType"])
         if handler:
             handler(event["username"], event["data"])
@@ -197,5 +203,8 @@ class WebhookHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(b"OK")
 
-HTTPServer(("", 3000), WebhookHandler).serve_forever()
+require_explicit_confirmation(
+    "start the loopback webhook receiver on port 3000, with its retention and stop path"
+)
+HTTPServer(("127.0.0.1", 3000), WebhookHandler).serve_forever()
 ```

@@ -66,6 +66,7 @@ function collectMarkdownPathsBelow(path) {
   for (const entry of readdirSync(join(root, path), { withFileTypes: true })) {
     const childPath = `${path}/${entry.name}`;
     if (entry.isDirectory()) {
+      if (entry.name === "_artifacts") continue;
       paths.push(...collectMarkdownPathsBelow(childPath));
     } else if (entry.isFile() && entry.name.endsWith(".md")) {
       paths.push(childPath);

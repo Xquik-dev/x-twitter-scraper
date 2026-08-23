@@ -94,7 +94,7 @@ const cases = [
       ...expectations,
       enums: {
         ...expectations.enums,
-        name: ["approved"],
+        name: ["restricted"],
       },
     },
   },

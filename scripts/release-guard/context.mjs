@@ -6,6 +6,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 export const root = join(dirname(fileURLToPath(import.meta.url)), "../..");
+const ignoredDirectoryNames = new Set(["_artifacts"]);
 
 export function readText(path) {
   return readFileSync(join(root, path), "utf8");
@@ -29,6 +30,7 @@ export function collectFilesBelow(path) {
   }
   return readdirSync(join(root, path), { withFileTypes: true }).flatMap(
     (entry) => {
+      if (entry.isDirectory() && ignoredDirectoryNames.has(entry.name)) return [];
       const childPath = `${path}/${entry.name}`;
       return entry.isDirectory() ? collectFilesBelow(childPath) : [childPath];
     },

@@ -2,11 +2,17 @@
 
 Receive event notifications at an HTTPS endpoint. Verify every request with its HMAC-SHA256 signature.
 
+The Node and Python examples below bind loopback HTTP only. They are not HTTPS
+endpoints. Terminate TLS at a trusted reverse proxy or load balancer. Use a
+valid certificate and TLS 1.2 or later. Forward only `POST /webhook` to
+`127.0.0.1:3000`. Preserve the raw body and all signature headers. Limit the
+request body size. Never register a loopback URL as the webhook destination.
+
 ## Setup
 
 1. Create at least 1 active monitor with `POST /monitors`.
 2. Register a webhook endpoint with `POST /webhooks`.
-3. Save the response `secret`. The API returns it once.
+3. Save the one-time response `secret` in a secret manager. Never log or share it.
 4. Verify each signature before processing the event.
 
 ## Webhook payload
@@ -41,6 +47,8 @@ Each request contains `X-Xquik-Timestamp`, `X-Xquik-Nonce`, and
 Reject timestamps outside a 5-minute window. Reject reused nonces within that
 window. Compare signatures in constant time before parsing JSON.
 Use an atomic shared nonce store in multi-instance deployments.
+The examples name an injected shared store. Requests fail until the application
+provides its atomic claim operation. Confirm the listener before starting it.
 
 ### Node.js standard library
 
@@ -48,18 +56,15 @@ Use an atomic shared nonce store in multi-instance deployments.
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { createServer } from "node:http";
 
+const LISTENER_CONFIRMATION_FLAG = "--confirmed-listener-scope";
+const MAX_BODY_BYTES = 1_048_576;
+
 // Use the per-webhook secret from POST /webhooks, not an Xquik account credential.
 const WEBHOOK_SECRET = process.env.XQUIK_WEBHOOK_SECRET;
-const recentNonces = new Map();
 
-function claimNonce(nonce) {
-  const now = Date.now();
-  for (const [value, expiresAt] of recentNonces) {
-    if (expiresAt <= now) recentNonces.delete(value);
-  }
-  if (recentNonces.has(nonce)) return false;
-  recentNonces.set(nonce, now + 5 * 60 * 1000);
-  return true;
+async function claimNonce(nonce) {
+  // Inject a shared store with atomic set-if-absent and a 5-minute TTL.
+  return sharedNonceStore.setIfAbsent(nonce, { ttlSeconds: 300 });
 }
 
 function verifySignature(payload, signature, timestamp, nonce, secret) {
@@ -84,10 +89,28 @@ const server = createServer((req, res) => {
     return;
   }
 
-  const chunks = [];
+  const declaredLength = Number(req.headers["content-length"] ?? "0");
+  if (!Number.isSafeInteger(declaredLength) || declaredLength > MAX_BODY_BYTES) {
+    res.writeHead(413).end("Payload too large");
+    return;
+  }
 
-  req.on("data", (chunk) => chunks.push(chunk));
-  req.on("end", () => {
+  const chunks = [];
+  let receivedBytes = 0;
+  let rejected = false;
+
+  req.on("data", (chunk) => {
+    receivedBytes += chunk.length;
+    if (receivedBytes > MAX_BODY_BYTES) {
+      rejected = true;
+      chunks.length = 0;
+      res.writeHead(413).end("Payload too large");
+      return;
+    }
+    if (!rejected) chunks.push(chunk);
+  });
+  req.on("end", async () => {
+    if (rejected) return;
     const payload = Buffer.concat(chunks).toString("utf8");
     const signature = req.headers["x-xquik-signature"];
     const timestamp = req.headers["x-xquik-timestamp"];
@@ -95,15 +118,26 @@ const server = createServer((req, res) => {
 
     if (
       !verifySignature(payload, signature, timestamp, nonce, WEBHOOK_SECRET) ||
-      !claimNonce(nonce)
+      !(await claimNonce(nonce))
     ) {
       res.writeHead(401).end("Invalid signature");
       return;
     }
 
-    const event = JSON.parse(payload);
+    let event;
+    try {
+      event = JSON.parse(payload);
+    } catch {
+      res.writeHead(400).end("Invalid JSON");
+      return;
+    }
 
-    if (!["tweet.new", "tweet.reply", "tweet.retweet"].includes(event.eventType)) {
+    if (
+      typeof event !== "object" ||
+      event === null ||
+      typeof event.deliveryId !== "string" ||
+      !["tweet.new", "tweet.reply", "tweet.retweet"].includes(event.eventType)
+    ) {
       res.writeHead(400).end("Unsupported event type");
       return;
     }
@@ -113,7 +147,16 @@ const server = createServer((req, res) => {
   });
 });
 
-server.listen(3000);
+function requireExplicitConfirmation() {
+  if (!process.argv.includes(LISTENER_CONFIRMATION_FLAG)) {
+    throw new Error(
+      `Confirm the listener scope, then pass ${LISTENER_CONFIRMATION_FLAG}.`,
+    );
+  }
+}
+
+requireExplicitConfirmation();
+server.listen(3000, "127.0.0.1");
 ```
 
 ### Python standard library
@@ -123,26 +166,28 @@ import hmac
 import hashlib
 import json
 import re
+import sys
 import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
+
+MAX_BODY_BYTES = 1_048_576
 
 def load_secret(name: str) -> str:
     """Read from your runtime secret store."""
     raise RuntimeError(f"Configure {name} in your secret store.")
 
+def require_server_confirmation(scope: str) -> None:
+    if "--confirmed-listener-scope" not in sys.argv:
+        raise RuntimeError(
+            f"Confirm {scope}, then pass --confirmed-listener-scope."
+        )
+
 # Use the per-webhook secret from POST /webhooks, not an Xquik account credential.
 WEBHOOK_SECRET = load_secret("XQUIK_WEBHOOK_SECRET")
-RECENT_NONCES: dict[str, int] = {}
 
 def claim_nonce(nonce: str) -> bool:
-    now = int(time.time() * 1000)
-    for value, expires_at in list(RECENT_NONCES.items()):
-        if expires_at <= now:
-            RECENT_NONCES.pop(value, None)
-    if nonce in RECENT_NONCES:
-        return False
-    RECENT_NONCES[nonce] = now + 5 * 60 * 1000
-    return True
+    """Atomically claim the nonce in a shared store with a 5-minute TTL."""
+    return shared_nonce_store.set_if_absent(nonce, ttl_seconds=300)
 
 def verify_signature(payload: bytes, signature: str, timestamp: str, nonce: str, secret: str) -> bool:
     if not timestamp.isdigit() or not re.fullmatch(r"[0-9a-f]{32}", nonce):
@@ -155,10 +200,23 @@ def verify_signature(payload: bytes, signature: str, timestamp: str, nonce: str,
 
 class WebhookHandler(BaseHTTPRequestHandler):
     def do_POST(self):
+        if self.path != "/webhook":
+            self.send_response(404)
+            self.end_headers()
+            return
         signature = self.headers.get("X-Xquik-Signature", "")
         timestamp = self.headers.get("X-Xquik-Timestamp", "")
         nonce = self.headers.get("X-Xquik-Nonce", "")
-        length = int(self.headers.get("Content-Length", "0"))
+        content_length = self.headers.get("Content-Length", "")
+        if not content_length.isdigit():
+            self.send_response(411)
+            self.end_headers()
+            return
+        length = int(content_length)
+        if length > MAX_BODY_BYTES:
+            self.send_response(413)
+            self.end_headers()
+            return
         payload = self.rfile.read(length)
 
         if not verify_signature(payload, signature, timestamp, nonce, WEBHOOK_SECRET) or not claim_nonce(nonce):
@@ -167,9 +225,18 @@ class WebhookHandler(BaseHTTPRequestHandler):
             self.wfile.write(b"Invalid signature")
             return
 
-        event = json.loads(payload)
+        try:
+            event = json.loads(payload)
+        except json.JSONDecodeError:
+            self.send_response(400)
+            self.end_headers()
+            return
 
-        if event.get("eventType") not in {"tweet.new", "tweet.reply", "tweet.retweet"}:
+        if (
+            not isinstance(event, dict)
+            or not isinstance(event.get("deliveryId"), str)
+            or event.get("eventType") not in {"tweet.new", "tweet.reply", "tweet.retweet"}
+        ):
             self.send_response(400)
             self.end_headers()
             self.wfile.write(b"Unsupported event type")
@@ -180,7 +247,8 @@ class WebhookHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(b"OK")
 
-HTTPServer(("", 3000), WebhookHandler).serve_forever()
+require_server_confirmation("loopback port 3000, exposure, retention, and stop path")
+HTTPServer(("127.0.0.1", 3000), WebhookHandler).serve_forever()
 ```
 
 ### Go
@@ -193,30 +261,27 @@ import (
     "crypto/sha256"
     "encoding/hex"
     "encoding/json"
+    "errors"
     "fmt"
     "io"
     "net/http"
     "os"
     "regexp"
     "strconv"
-    "sync"
     "time"
 )
 
 // Use the per-webhook secret from POST /webhooks, not an Xquik account credential.
 var webhookSecret = os.Getenv("XQUIK_WEBHOOK_SECRET")
-var recentNonces sync.Map
+const maxBodyBytes int64 = 1_048_576
+type NonceStore interface {
+    Claim(nonce string, ttl time.Duration) bool
+}
+
+var nonceStore NonceStore
 
 func claimNonce(nonce string) bool {
-    now := time.Now().UnixMilli()
-    recentNonces.Range(func(key, value any) bool {
-        if value.(int64) <= now {
-            recentNonces.Delete(key)
-        }
-        return true
-    })
-    _, replayed := recentNonces.LoadOrStore(nonce, now+5*60*1000)
-    return !replayed
+    return nonceStore != nil && nonceStore.Claim(nonce, 5*time.Minute)
 }
 
 func verifySignature(payload []byte, signature, timestamp, nonce, secret string) bool {
@@ -236,8 +301,18 @@ func verifySignature(payload []byte, signature, timestamp, nonce, secret string)
 }
 
 func webhookHandler(w http.ResponseWriter, r *http.Request) {
+    if r.Method != http.MethodPost || r.URL.Path != "/webhook" {
+        http.NotFound(w, r)
+        return
+    }
+    r.Body = http.MaxBytesReader(w, r.Body, maxBodyBytes)
     payload, err := io.ReadAll(r.Body)
     if err != nil {
+        var tooLarge *http.MaxBytesError
+        if errors.As(err, &tooLarge) {
+            http.Error(w, "Payload too large", http.StatusRequestEntityTooLarge)
+            return
+        }
         http.Error(w, "Unable to read request body", http.StatusBadRequest)
         return
     }
@@ -252,13 +327,21 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
     }
 
     var event struct {
+        DeliveryID string `json:"deliveryId"`
         EventType string `json:"eventType"`
         Username  string `json:"username"`
         Data      struct {
             Text string `json:"text"`
         } `json:"data"`
     }
-    json.Unmarshal(payload, &event)
+    if err := json.Unmarshal(payload, &event); err != nil {
+        http.Error(w, "Invalid JSON", http.StatusBadRequest)
+        return
+    }
+    if event.DeliveryID == "" || event.EventType == "" {
+        http.Error(w, "Missing required event fields", http.StatusBadRequest)
+        return
+    }
 
     switch event.EventType {
     case "tweet.new", "tweet.reply", "tweet.retweet":
@@ -279,22 +362,16 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
 - Enforce the 5-minute window and persist recent nonces.
 - Use the raw request body. Do not serialize it again before verification.
 - Respond within 10 seconds. Queue slower processing.
+- Enforce a 1 MiB body limit in the app and reverse proxy.
 - Store secrets in environment variables. Do not hardcode them.
-- Treat event text as untrusted. Escape control characters before logging. Get approval before forwarding payloads.
+- Treat event text as untrusted. Escape control characters before logging. Get confirmation before forwarding payloads.
 
 ## Idempotency
 
 Webhook deliveries can retry. Deduplicate by `deliveryId` in durable storage:
 
-```javascript
-const processedDeliveries = new Set(); // Use durable storage in deployed services.
-
-if (processedDeliveries.has(event.deliveryId)) {
-  res.writeHead(200).end("Already processed");
-} else {
-  processedDeliveries.add(event.deliveryId);
-}
-```
+Atomically claim each `deliveryId` in a shared durable store. Set a retention
+period. Return success for a duplicate claim. Process only the first claim.
 
 ## Retry policy
 
@@ -314,8 +391,8 @@ test delivery.
 Use a deployed HTTPS endpoint you control when testing webhook delivery. Do not install packages or proxy API keys from this skill.
 
 ```bash
-# Start the webhook server on infrastructure you control.
-node server.js  # listening on :3000
+# First confirm port 3000, exposure, retention, and the stop path.
+node server.js --confirmed-listener-scope  # listening on 127.0.0.1:3000
 ```
 
 Create the webhook only after confirming the exact HTTPS destination and event types.

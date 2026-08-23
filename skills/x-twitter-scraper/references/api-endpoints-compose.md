@@ -1,5 +1,11 @@
 # Xquik REST API endpoints: compose
 
+Submitted drafts, topics, URLs, and context go to Xquik. Remove secrets,
+personal data, private messages, unreleased business details, and sensitive URL
+parameters. Confirm before sending sensitive material.
+Every step creates server-side draft data. Show the exact supplied content and
+usage. Get confirmation before each compose, refine, or score call.
+
 ### Compose tweet
 
 ```

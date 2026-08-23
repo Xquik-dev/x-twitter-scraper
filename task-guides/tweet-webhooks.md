@@ -1,6 +1,6 @@
 ---
 name: tweet-webhooks
-description: "Use when the user wants monitor events sent to a URL. Create an HMAC-signed webhook after approval. The user's server handles each payload."
+description: "Use when the user wants monitor events sent to a URL. Create an HMAC-signed webhook after confirmation. The user's server handles each payload."
 license: MIT
 metadata:
   internal: true
@@ -72,7 +72,7 @@ timestamps and reused nonces.
 
 1. Confirm the target URL is HTTPS and reachable.
 2. Ask the user which events to subscribe to and remind them that the URL will keep receiving matching events while enabled.
-3. Create the webhook only after user approval. The URL will receive real data.
+3. Create the webhook only after user confirmation. The URL will receive real data.
 4. Call `POST /webhooks/{id}/test` to send a sample payload. Confirm with the user that it arrived and verified.
 5. Inspect `deliveryStatus`. Use `/resume` after fixing a paused destination.
 

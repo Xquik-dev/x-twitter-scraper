@@ -1,8 +1,20 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Add translated README guides for Spanish, Turkish, Simplified Chinese,
+  Japanese, Korean, German, French, and Italian.
+- Compare X data services by workload, upkeep, and total usable-result cost.
+
+### Changed
+
+- Clarify account requirements for scraping, private reads, and X actions.
+
 ## [2.6.7] - 2026-08-21
 
-- Tighten thread review instructions without changing the approval gate.
+- Tighten thread review instructions without changing the confirmation gate.
 
 ## [2.6.6] - 2026-08-20
 
@@ -12,7 +24,7 @@
 
 ### Changed
 
-- Rewrite public documentation, metadata, guides, commands, and tool descriptions.
+- Rewrite user-facing documentation, metadata, guides, commands, and tool descriptions.
 - Add supported Twitter search and API terms to package metadata.
 - Link Java, Kotlin, CLI, and Terraform users to published install paths.
 
@@ -24,7 +36,7 @@
 
 ## [2.6.4] - 2026-08-12
 
-- Align public Error docs with the 112-code OpenAPI contract.
+- Align published Error docs with the 112-code OpenAPI contract.
 
 ## [2.6.3] - 2026-08-12
 
@@ -41,12 +53,12 @@
 ### Fixed
 
 - Align REST, MCP, webhook, extraction, write, article, Radar, and trends guides
-  with the current public API contract.
+  with the current documented API contract.
 - Distinguish the v2.6.2 Skill bundle from hosted MCP v2.6.0.
 - Replace obsolete operation-named MCP types with the 2-tool contract.
 - Document hosted MCP's automatic required idempotency headers.
 - Document automatic cursor recovery for `400`, `409`, and `410` responses.
-- Add regression coverage for high-risk public examples.
+- Add regression coverage for high-risk external examples.
 
 ## [2.6.1] - 2026-08-03
 
@@ -67,13 +79,13 @@
 
 ### Changed
 
-- Update public metadata to 128 REST operations.
+- Update published metadata to 128 REST operations.
 - Update MCP metadata to 120 authenticated catalog routes.
 - Keep stateless 2025-era MCP clients compatible.
-- Require estimates and approval before bulk reply extraction.
+- Require estimates and confirmation before bulk reply extraction.
 - Make incomplete-reply search fallback directly executable.
 - Default top-reply requests to 10 results when unspecified.
-- Align documented tweet authors with the public response contract.
+- Align documented tweet authors with the published response contract.
 - Prefer bounded complete mode for maximum-coverage reply collection.
 - Separate nested replies from measured direct-reply coverage.
 - Preserve safe partial rows and detailed diagnostics on incomplete coverage.

@@ -22,7 +22,7 @@ If the Cyrus URL returns "Skill not found," request a listing below.
    - Install command: `npx skills@1.5.3 add Xquik-dev/x-twitter-scraper`
    - Category: Development or Data & APIs
    - Description: Twitter scraper API Skill for search, exports, monitoring,
-     HMAC webhooks, and approved X account actions. Includes 128 REST
+     HMAC webhooks, and X account actions. Includes 127 REST
      operations and 120 MCP catalog routes. Of these, 119 support JSON or text.
 
 ### Open a GitHub issue

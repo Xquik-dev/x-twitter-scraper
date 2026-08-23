@@ -1,0 +1,8 @@
+[
+  { "id": "alpha", "value": 1 },
+  { "id": "beta", "value": 2 },
+  { "id": "alpha", "value": 3 },
+  { "id": "gamma", "value": 4 },
+  { "id": "beta", "value": 5 },
+  { "id": "beta", "value": 6 }
+]

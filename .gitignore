@@ -78,6 +78,7 @@ lcov.info
 test-results/
 playwright-report/
 screenshots/
+skills/_artifacts/
 secret-scan/
 secret-scan-results/
 secret-scan-report.*

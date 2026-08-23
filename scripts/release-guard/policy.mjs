@@ -22,13 +22,6 @@ export const versionSurfaces = [
     get: parseJsonVersion,
   },
   {
-    path: "skills/x-twitter-scraper/SKILL.md",
-    get: (t) => {
-      const match = /^\s*version:\s*"([^"]+)"/m.exec(t);
-      return match?.[1];
-    },
-  },
-  {
     path: "stub-server.mjs",
     get: (t) => /version:\s*"([^"]+)"/.exec(t)?.[1],
   },
@@ -44,7 +37,7 @@ export const skillFrontmatterExpectations = {
     "metadata.capabilities.shell.allowed": false,
     "metadata.capabilities.filesystem.read": false,
     "metadata.capabilities.filesystem.write": false,
-    "metadata.capabilities.mcp.allowed": true,
+    "metadata.capabilities.mcp.allowed": false,
     "metadata.capabilities.mcp.transport": "native-http-or-oauth-only",
     "metadata.capabilities.codeExecution.allowed": false,
     "metadata.capabilities.localNetwork.allowed": false,
@@ -207,7 +200,7 @@ export const jsonFieldExpectations = [
       homepage: "https://docs.xquik.com",
       repository: "https://github.com/Xquik-dev/x-twitter-scraper",
       license: "MIT",
-      "security.defaultMode": "read-only-public-data",
+      "security.defaultMode": "read-only-x-data",
       "security.localExecution": false,
       "security.localFileAccess": false,
       "security.localNetworkAccess": false,

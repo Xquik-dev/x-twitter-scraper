@@ -56,7 +56,7 @@ Each row: `{ username, name, bio, followers_count, verified, retweeted_at }`.
 
 1. Get tweet ID.
 2. Confirm estimated usage.
-3. Approve, run, export.
+3. Confirm, run, export.
 
 ## Protect account data
 

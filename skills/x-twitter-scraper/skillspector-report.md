@@ -1,20 +1,12 @@
-# SkillSpector Security Report
+# SkillSpector security report
 
-**Skill:** x-twitter-scraper
-**Source:** `skills/x-twitter-scraper`
-**Scanned:** 2026-08-20 20:49:06 UTC
+The dated scan evidence stays outside this Skill directory. This keeps a scan
+result from changing the directory it describes.
 
-## Static Scan
+The release scan covers this complete directory. It runs the current stable
+SkillSpector static checks and a semantic scan. The gate reads the report, not
+the process exit code. It accepts only `SAFE`, complete analysis, and zero
+active findings.
 
-- Scanner: SkillSpector v2.3.7
-- Mode: static analysis only (`--no-llm`)
-- Components scanned: 71
-- Executable scripts: no
-- Risk score: 0/100
-- Severity: low
-- Recommendation: safe
-- Findings: 0
-
-No security issues were detected by the static scan.
-
-Refresh this report after each change to the skill directory.
+See [the current results](../../docs/research/skill-security/results/README.md).
+Refresh them after any file in this directory changes.

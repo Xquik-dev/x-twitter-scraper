@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: MIT
 
 // Package-verification stub for the stdio MCP protocol.
-// Returns the public tool definitions used by registry checks.
+// Returns the published tool definitions used by registry checks.
 // Connect to https://xquik.com/mcp for live requests.
 
 import { createInterface } from "node:readline";
@@ -88,12 +88,12 @@ const TOOLS = [
   {
     name: "xquik",
     description: description([
-      "The live 'xquik' tool sends approved requests across 120 catalog routes. This package stub returns setup guidance only.",
+      "The live 'xquik' tool sends confirmed requests across 120 catalog routes. This package stub returns setup guidance only.",
       "",
       "## When to use",
       "- Call it after 'explore' identifies the endpoint and parameters.",
-      "- Use it for Twitter search, user lookup, draws, extractions, composition, private reads, monitors, webhooks, and approved writes.",
-      "- Get approval before private reads, persistent resources, metered operations, and writes.",
+      "- Use it for Twitter search, user lookup, draws, extractions, composition, private reads, monitors, webhooks, and confirmed writes.",
+      "- Get confirmation before private reads, persistent resources, metered operations, and writes.",
       "",
       "## When not to use",
       "- Use 'explore' first when you do not know the endpoint.",
@@ -104,7 +104,7 @@ const TOOLS = [
       "- The package stub makes no API request and returns setup instructions.",
       "- The live tool cannot access local files or arbitrary network hosts.",
       "- 119 catalog routes support JSON or text. Use REST for binary downloads.",
-      "- Write operations require prior approval and can return durable actions.",
+      "- Write operations require prior confirmation and can return durable actions.",
       "- Pagination responses include `has_more` and `next_cursor`. Pass `cursor` for the next page.",
       "- Show the exact payload, target, and usage estimate before changing X or Xquik resources.",
       "",
@@ -120,7 +120,7 @@ const TOOLS = [
       "## Examples",
       "Search tweets: `async () => xquik.request('/api/v1/x/tweets/search', { query: { q: 'twitter scraper api', limit: '50' } })`",
       "Get user: `async () => xquik.request('/api/v1/x/users/elonmusk')`",
-      "Post after approval: `async () => xquik.request('/api/v1/x/tweets', { method: 'POST', body: { account: '<confirmed_account>', text: '<confirmed_text>' } })`",
+      "Post after confirmation: `async () => xquik.request('/api/v1/x/tweets', { method: 'POST', body: { account: '<confirmed_account>', text: '<confirmed_text>' } })`",
     ]),
     inputSchema: codeInputSchema(
       "Bounded function that calls xquik.request(path, options?) for Twitter API operations. The server adds authentication. Example: async () => xquik.request('/api/v1/x/tweets/search', { query: { q: 'twitter api', limit: '20' } })",

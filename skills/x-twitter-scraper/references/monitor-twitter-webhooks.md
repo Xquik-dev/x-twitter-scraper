@@ -23,16 +23,26 @@ them to an HTTPS endpoint through HMAC-signed webhooks.
 | Simple scheduled batch | Use polling | Optional |
 | Low detection delay | Poll more often | Use webhooks |
 | Recover after downtime | Resume with the stored cursor | Inspect delivery status, then repoll events |
-| Public HTTPS endpoint | Not required | Required |
+| Internet-reachable HTTPS endpoint | Not required | Required |
 | Signature verification | Not applicable | Required |
 | Backpressure control | Caller controls fetch rate | Receiver must queue work |
+
+Before creating a persistent monitor or storing its events:
+
+1. Confirm authority and an applicable legal basis for the exact target.
+2. Obtain affected-account consent when applicable.
+3. Meet privacy, notice, disclosure, and X terms requirements.
+4. Collect only the needed event types and fields.
+5. Name recipients, access controls, and the secure destination.
+6. Set a retention period, deletion date, and tested delete path.
+7. Confirm this complete privacy scope before creation.
 
 Both models need idempotency. Persist the event before processing it.
 Mark completion only after every required side effect succeeds.
 
 ### What is the best way to monitor a Twitter account programmatically?
 
-Validate the public account and required event types first. Use a bounded
+Validate the visible account and required event types first. Use a bounded
 timeline read for an initial snapshot. Create a persistent account monitor only
 after reviewing target, filters, ongoing usage, delivery, and deletion.
 
@@ -70,7 +80,7 @@ owner, purpose, expected usage, retention, and disable path.
 
 ### How do I get real-time Twitter alerts through a webhook?
 
-Create the account or keyword monitor after approval. Register an HTTPS webhook
+Create the account or keyword monitor after confirmation. Register an HTTPS webhook
 for the required event types. Save the one-time secret and test delivery before
 processing events.
 

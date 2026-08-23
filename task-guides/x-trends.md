@@ -49,7 +49,7 @@ GET /x/trends?woeid=23424977&count=30
 
 - `woeid`: Yahoo WOEID (`1` worldwide, `23424977` US, `23424975` UK, `23424969` Turkey). Omit for worldwide.
 - `count`: number of trends to return, 1-50.
-- `tweetVolume`: approximate public post volume when supplied, otherwise null
+- `tweetVolume`: approximate visible post volume when supplied, otherwise null
 - `description`: optional context for the trend
 
 ## Fetch the trends

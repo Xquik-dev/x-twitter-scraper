@@ -1,5 +1,9 @@
 # Xquik TypeScript types: X write
 
+These requests change a connected X account. They can publish or send supplied
+content. Show the exact target, payload, destination, and live usage estimate.
+Get confirmation immediately before each call.
+
 ```typescript
 
 interface CreateTweetRequest {

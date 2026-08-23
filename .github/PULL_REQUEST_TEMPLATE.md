@@ -13,7 +13,7 @@ How was this verified?
 ## Checklist
 
 - [ ] Updated SKILL.md, task guides, or commands if user-facing behavior changed
-- [ ] Updated README.md if the public API changed
+- [ ] Updated README.md if the documented API changed
 - [ ] Ran `npm run check-versions`
 - [ ] Refreshed SkillSpector evidence after changing the Skill directory
 - [ ] Bumped the package version when required

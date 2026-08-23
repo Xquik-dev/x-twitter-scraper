@@ -57,7 +57,7 @@ Useful operators inside `q`:
 
 ## Find high-engagement tweets
 
-1. Ask for the topic, author, or hashtag and an engagement threshold. Default to 1k likes only with the user's approval.
+1. Ask for the topic, author, or hashtag and an engagement threshold. Default to 1k likes only with the user's confirmation.
 2. `GET /x/tweets/search?q=<url-encoded "<q> min_faves:1000">&queryType=Top`.
 3. Present top N tweets with author, text, likes, RTs, views, and the tweet URL.
 4. For bulk exports, call `POST /extractions { toolType: "tweet_search_extractor", searchQuery: "<q> min_faves:1000" }`.

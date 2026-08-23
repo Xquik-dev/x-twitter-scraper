@@ -50,7 +50,7 @@ Poll `GET /extractions/{id}` until `status: "completed"`, then `GET /extractions
 
 ## Review the followers
 
-1. Get approval for the usage, then extract the full follower list.
+1. Get confirmation for the usage, then extract the full follower list.
 2. Flag likely ghosts:
    - Flag accounts that match the declared count and age thresholds.
    - Flag missing avatars and copied or empty bios for review.

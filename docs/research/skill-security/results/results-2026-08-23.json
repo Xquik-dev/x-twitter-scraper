@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-23",
+  "scanner": {
+    "name": "SkillSpector",
+    "version": "2.9.6",
+    "commit": "698e2bf29c7d32aa8211ada677382460c01900d7"
+  },
+  "analyzerProfiles": {
+    "static": {
+      "completed": [
+        "artifact_integrity",
+        "mcp_rug_pull",
+        "mcp_tool_poisoning",
+        "static_patterns_agent_snooping",
+        "static_patterns_anti_refusal",
+        "static_patterns_data_exfiltration",
+        "static_patterns_deserialization",
+        "static_patterns_excessive_agency",
+        "static_patterns_harmful_content",
+        "static_patterns_memory_poisoning",
+        "static_patterns_output_handling",
+        "static_patterns_privilege_escalation",
+        "static_patterns_prompt_injection",
+        "static_patterns_rogue_agent",
+        "static_patterns_ssrf",
+        "static_patterns_supply_chain",
+        "static_patterns_system_prompt_leakage",
+        "static_patterns_tool_misuse",
+        "static_yara"
+      ],
+      "notApplicable": [
+        "behavioral_ast",
+        "behavioral_taint_tracking",
+        "mcp_least_privilege",
+        "meta_analyzer"
+      ],
+      "failed": [],
+      "partial": []
+    },
+    "semantic": {
+      "completed": [
+        "artifact_integrity",
+        "mcp_rug_pull",
+        "mcp_tool_poisoning",
+        "semantic_developer_intent",
+        "semantic_quality_policy",
+        "semantic_security_discovery",
+        "static_patterns_agent_snooping",
+        "static_patterns_anti_refusal",
+        "static_patterns_data_exfiltration",
+        "static_patterns_deserialization",
+        "static_patterns_excessive_agency",
+        "static_patterns_harmful_content",
+        "static_patterns_memory_poisoning",
+        "static_patterns_output_handling",
+        "static_patterns_privilege_escalation",
+        "static_patterns_prompt_injection",
+        "static_patterns_rogue_agent",
+        "static_patterns_ssrf",
+        "static_patterns_supply_chain",
+        "static_patterns_system_prompt_leakage",
+        "static_patterns_tool_misuse",
+        "static_yara"
+      ],
+      "notApplicable": [
+        "behavioral_ast",
+        "behavioral_taint_tracking",
+        "mcp_least_privilege",
+        "meta_analyzer"
+      ],
+      "failed": [],
+      "partial": []
+    }
+  },
+  "skills": {
+    "x-twitter-scraper": {
+      "sourceSha256": "f31735c4f8ae707ef99b89f9f2ae28b0ba977b15eeca49aca9cee686d507d7eb",
+      "scans": [
+        {
+          "id": "static-final",
+          "mode": "static",
+          "analyzerProfile": "static",
+          "scannedAt": "2026-08-23T10:13:26.132792Z",
+          "sourceSha256": "f31735c4f8ae707ef99b89f9f2ae28b0ba977b15eeca49aca9cee686d507d7eb",
+          "executionSuccessful": true,
+          "recommendation": "SAFE",
+          "riskScore": 0,
+          "activeFindings": 0,
+          "suppressedFindings": 0,
+          "analysisComplete": true,
+          "coveragePercent": 100
+        },
+        {
+          "id": "semantic-final-a",
+          "mode": "semantic",
+          "analyzerProfile": "semantic",
+          "scannedAt": "2026-08-23T10:25:12.771873Z",
+          "sourceSha256": "f31735c4f8ae707ef99b89f9f2ae28b0ba977b15eeca49aca9cee686d507d7eb",
+          "executionSuccessful": true,
+          "recommendation": "SAFE",
+          "riskScore": 0,
+          "activeFindings": 0,
+          "suppressedFindings": 0,
+          "analysisComplete": true,
+          "coveragePercent": 100
+        },
+        {
+          "id": "semantic-final-b",
+          "mode": "semantic",
+          "analyzerProfile": "semantic",
+          "scannedAt": "2026-08-23T10:34:18.136204Z",
+          "sourceSha256": "f31735c4f8ae707ef99b89f9f2ae28b0ba977b15eeca49aca9cee686d507d7eb",
+          "executionSuccessful": true,
+          "recommendation": "SAFE",
+          "riskScore": 0,
+          "activeFindings": 0,
+          "suppressedFindings": 0,
+          "analysisComplete": true,
+          "coveragePercent": 100
+        }
+      ]
+    },
+    "xquik-social-research": {
+      "sourceSha256": "d8b5749cc7b478e337a3c0a0280209affb302d418cff61ba54c522be2697d120",
+      "scans": [
+        {
+          "id": "static-final",
+          "mode": "static",
+          "analyzerProfile": "static",
+          "scannedAt": "2026-08-23T13:07:48.224413Z",
+          "sourceSha256": "d8b5749cc7b478e337a3c0a0280209affb302d418cff61ba54c522be2697d120",
+          "executionSuccessful": true,
+          "recommendation": "SAFE",
+          "riskScore": 0,
+          "activeFindings": 0,
+          "suppressedFindings": 0,
+          "analysisComplete": true,
+          "coveragePercent": 100
+        },
+        {
+          "id": "semantic-final-a",
+          "mode": "semantic",
+          "analyzerProfile": "semantic",
+          "scannedAt": "2026-08-23T13:08:36.183541Z",
+          "sourceSha256": "d8b5749cc7b478e337a3c0a0280209affb302d418cff61ba54c522be2697d120",
+          "executionSuccessful": true,
+          "recommendation": "SAFE",
+          "riskScore": 0,
+          "activeFindings": 0,
+          "suppressedFindings": 0,
+          "analysisComplete": true,
+          "coveragePercent": 100
+        },
+        {
+          "id": "semantic-final-b",
+          "mode": "semantic",
+          "analyzerProfile": "semantic",
+          "scannedAt": "2026-08-23T13:08:31.662112Z",
+          "sourceSha256": "d8b5749cc7b478e337a3c0a0280209affb302d418cff61ba54c522be2697d120",
+          "executionSuccessful": true,
+          "recommendation": "SAFE",
+          "riskScore": 0,
+          "activeFindings": 0,
+          "suppressedFindings": 0,
+          "analysisComplete": true,
+          "coveragePercent": 100
+        }
+      ]
+    }
+  }
+}

@@ -3,9 +3,10 @@
 ## Protect private support data
 
 Tickets can disclose private account context. Preview each subject, message,
-file, ticket ID, or status change. Obtain approval for that exact action. Before
+file, ticket ID, or status change. Obtain confirmation for that exact action. Before
 private reads, show the account, purpose, scope, bound, recipients, and retention
 plan. Exclude secrets, unrelated context, and unnecessary personal data.
+Use these routes only when the user explicitly asks to manage Xquik support.
 
 ### Create or reply
 
@@ -38,7 +39,7 @@ Use `GET /support/tickets`, `GET /support/tickets/{id}`, or
 
 List returns `{ tickets }`. Get returns ticket details, messages, and attachment
 metadata. Patch accepts `{ "status": "open" | "resolved" | "closed" }`.
-Private reads and status changes require the exact approvals above.
+Private reads and status changes require the exact confirmations above.
 
 ### Download an attachment
 

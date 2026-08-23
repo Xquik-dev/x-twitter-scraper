@@ -1,6 +1,6 @@
 ---
 name: top-replies
-description: "Use when the user wants the most-liked replies under a public X post. Read-only."
+description: "Use when the user wants the most-liked replies under a visible X post. Read-only."
 license: MIT
 metadata:
   internal: true
@@ -70,8 +70,8 @@ POST /extractions/estimate
 { "toolType": "reply_extractor", "targetTweetId": "<id>" }
 ```
 
-Show the result estimate and usage. Ask for explicit approval.
-Only after approval, create the job with the same body:
+Show the result estimate and usage. Ask for explicit confirmation.
+Only after confirmation, create the job with the same body:
 
 ```json
 POST /extractions

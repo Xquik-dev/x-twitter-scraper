@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Xquik Contributors
 // SPDX-License-Identifier: MIT
 
-import { readdirSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 import { contentChecks } from "./content-policy.mjs";
@@ -70,12 +70,15 @@ function collectSkillMetadataDrifts() {
   const portableSkillPaths = readdirSync(join(root, "skills"))
     .filter((directory) => directory !== "x-twitter-scraper")
     .map((directory) => `skills/${directory}/SKILL.md`);
+  const completePortableSkillPaths = portableSkillPaths.filter((path) =>
+    existsSync(join(root, path)),
+  );
   return [
     ...collectFrontmatterPolicyDrifts(
       ["skills/x-twitter-scraper/SKILL.md"],
       skillFrontmatterExpectations,
     ),
-    ...collectFrontmatterPolicyDrifts(portableSkillPaths, {}),
+    ...collectFrontmatterPolicyDrifts(completePortableSkillPaths, {}),
   ];
 }
 

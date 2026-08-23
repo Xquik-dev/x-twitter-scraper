@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: 2026 Xquik Contributors
 // SPDX-License-Identifier: MIT
 
-// Pre-publish and pre-commit guard for every public package contract.
+// Pre-publish and pre-commit guard for every published package contract.
 
 import { expected, readJson } from "./release-guard/context.mjs";
 import { collectPolicyDrifts } from "./release-guard/policy-checks.mjs";

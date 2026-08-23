@@ -173,7 +173,7 @@ test("documents current monitor bodies and event pagination", async () => {
   assert.match(monitorGuide, /"username": "elonmusk"/);
   assert.match(monitorGuide, /"eventTypes": \["tweet\.new", "tweet\.reply"\]/);
   assert.match(hashtagGuide, /POST \/monitors\/keywords/);
-  assert.match(hashtagGuide, /"query": "#buildinpublic lang:en"/);
+  assert.match(hashtagGuide, /"query": "#indiehacking lang:en"/);
   assertIncludes(
     events,
     contract.eventFilters.map((filter) => `| \`${filter}\` |`),
@@ -276,7 +276,7 @@ test("distinguishes direct REST and hosted MCP idempotency", async () => {
   assert.match(mcp, /safe_to_retry/);
 });
 
-test("documents automatic cursor recovery across public entry points", async () => {
+test("documents automatic cursor recovery across documented entry points", async () => {
   const documents = await Promise.all([
     read("skills/x-twitter-scraper/SKILL.md"),
     read("skills/x-twitter-scraper/references/api-endpoints-x-api.md"),

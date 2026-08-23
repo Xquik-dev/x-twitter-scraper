@@ -15,13 +15,13 @@ test("uses the canonical extraction field in the competitor guide", async () => 
   assert.doesNotMatch(guide, /\btool=post_extractor\b/);
 });
 
-test("requires approval before the posting command calls the API", async () => {
+test("requires confirmation before the posting command calls the API", async () => {
   const command = await readFile(
     new URL("../commands/post.md", import.meta.url),
     "utf8",
   );
 
   assert.match(command, /## Workflow/);
-  assert.match(command, /4\. Wait for explicit user approval\./);
-  assert.match(command, /5\. After approval, call `POST \/api\/v1\/x\/tweets` with the `xquik` MCP tool/);
+  assert.match(command, /4\. Wait for explicit user confirmation\./);
+  assert.match(command, /5\. After confirmation, call `POST \/api\/v1\/x\/tweets` with the `xquik` MCP tool/);
 });

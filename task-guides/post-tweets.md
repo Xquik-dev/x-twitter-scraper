@@ -1,6 +1,6 @@
 ---
 name: post-tweets
-description: "Use when the user wants to publish an X post, reply, quote, community post, or note up to 25,000 characters. Show the exact payload and account. Wait for approval. Posting only."
+description: "Use when the user wants to publish an X post, reply, quote, community post, or note up to 25,000 characters. Show the exact payload and account. Wait for confirmation. Posting only."
 license: MIT
 metadata:
   internal: true
@@ -52,7 +52,7 @@ POST /x/tweets
   "reply_to_tweet_id": "<optional>",
   "community_id": "<optional>",
   "is_note_tweet": false,
-  "media": ["<public image URL or uploaded mediaUrl>"]
+  "media": ["<reachable image URL or uploaded mediaUrl>"]
 }
 ```
 
@@ -68,7 +68,7 @@ For a quote tweet: include the quoted tweet URL in `text`.
 
 1. List connected accounts with `GET /x/accounts` to find the `account` to post from.
 2. If the tweet needs media, upload it with `POST /x/media`, capture the returned `mediaUrl` values.
-3. Show the exact text, media, reply target, and community. Wait for explicit approval.
+3. Show the exact text, media, reply target, and community. Wait for explicit confirmation.
 4. Call `POST /x/tweets`. Direct REST supplies the key. Hosted MCP injects it.
 5. A `200` response is terminal. A `202` response needs polling.
 6. Poll `statusUrl` after `pollAfterMs` until `terminal` is true.
@@ -76,7 +76,7 @@ For a quote tweet: include the quoted tweet URL in `text`.
 
 ## Confirmation rules
 
-Never post without explicit user approval of the exact text. Show:
+Never post without explicit user confirmation of the exact text. Show:
 - The full tweet text as it will appear
 - The reply target, when present
 - Every attached media URL

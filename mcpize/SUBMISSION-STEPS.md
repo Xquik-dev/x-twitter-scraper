@@ -25,7 +25,7 @@ Streamable HTTP endpoint.
 5. Leave manual client ID and client secret fields empty when discovery works.
 6. Do not add a local bridge or hosted forwarding adapter.
 7. Test browser authorization through the marketplace client.
-8. Update public docs with the MCPize listing URL only after the listing is
+8. Update published docs with the MCPize listing URL only after the listing is
    live.
 
 ## Acceptance checks

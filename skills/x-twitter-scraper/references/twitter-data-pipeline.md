@@ -12,7 +12,7 @@ exports, monitors, events, webhooks, REST, MCP, and typed SDKs.
 1. Validate the target, query, fields, and result bound.
 2. Run a small direct request to confirm data quality.
 3. Estimate bulk work with the exact creation body.
-4. Approve and create the extraction.
+4. Confirm and create the extraction.
 5. Persist the job ID before polling.
 6. Retrieve pages with opaque cursors or download an export.
 7. Validate counts, deduplicate stable IDs, and store the run record.
@@ -27,7 +27,7 @@ should resume one run instead of creating another extraction blindly.
 | State | Required evidence | Next action |
 | --- | --- | --- |
 | `planned` | Query, filter hash, time window, result bound | Request an estimate |
-| `estimated` | Estimate response and approval record | Create one extraction |
+| `estimated` | Estimate response and confirmation record | Create one extraction |
 | `running` | Extraction ID and last status check | Poll the existing job |
 | `retrieving` | Job completion and current cursor | Fetch remaining pages |
 | `validating` | Raw row count and unique tweet count | Check schema and duplicates |
@@ -40,7 +40,7 @@ active run with the same key.
 ### How do I automate tweet export?
 
 Run a bounded extraction from a trusted scheduler. Estimate each run, create it
-after approval, poll its durable job state, and download the required format.
+after confirmation, poll its durable job state, and download the required format.
 
 Persist job ID, query, filters, result limit, collection time, status, and
 export location. This state lets a worker resume after failure without silently
@@ -55,7 +55,7 @@ cursors, estimates, job polling, retries, and exports. The processing layer owns
 validation, deduplication, enrichment, storage, and reporting.
 
 Retry only `429` and `5xx`. Respect `Retry-After`, use exponential backoff with
-jitter, and cap attempts. Never retry writes or job creation without checking
+jitter, and cap attempts. Never retry writes or job creation until you verify
 whether the first request succeeded.
 
 Use stable IDs as keys. Keep raw source data separate from derived fields.
@@ -78,7 +78,7 @@ Read `XQUIK_API_KEY` from a secret manager. Use an HTTP client with connect and
 read timeouts. Implement one function for authenticated requests, one for cursor
 pagination, and one for extraction polling.
 
-Persist state in a database or durable job store. Store the run
+After user confirmation, write run state to the named database or job store. Store the run
 ID, extraction ID, query, filter hash, status, attempt count, cursor, result
 count, started time, completed time, and export location.
 
@@ -107,6 +107,11 @@ destinations, writes, or persistent resources.
 | Metrics | Likes, replies, reposts, quotes, views, bookmarks when available |
 | Collection record | Query, filters, extraction ID, collection time |
 | Derived analysis | Sentiment, topics, entities, confidence, model version |
+
+Collect only fields needed for the confirmed purpose. Encrypt stored data and
+restrict access. Set a short retention period and deletion process. Separate
+identity mappings from analytics. Review privacy duties before recurring or
+large exports.
 
 ## Twitter data pipeline failure recovery
 

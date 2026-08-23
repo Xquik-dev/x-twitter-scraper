@@ -1,7 +1,7 @@
 {
   "name": "x-developer",
   "version": "2.6.7",
-  "description": "Xquik Twitter scraper API Skill for REST, MCP, webhooks, exports, and approved X actions. Not affiliated with X Corp.",
+  "description": "X (Twitter) Scraper API and X API Alternative. You do not need an official X developer account. You do not need to connect or use an X account for scraping. REST, MCP, SDKs, CLI, webhooks, and exports. Not affiliated with X Corp.",
   "author": {
     "name": "Xquik",
     "url": "https://docs.xquik.com"
@@ -71,6 +71,8 @@
     "assets",
     "commands",
     "context7.json",
+    "docs",
+    "!docs/research/seo/*.json",
     "logo.png",
     "server.json",
     "scripts",
@@ -83,8 +85,18 @@
     "task-guides"
   ],
   "scripts": {
+    "check:apify-testimonials": "node --test tests/apify-testimonials.test.mjs",
+    "check:cost-study": "node scripts/check-cost-study.mjs",
+    "check:external-content": "node --test tests/external-content.test.mjs",
+    "check:readme-contract": "node scripts/check-readme-contract.mjs",
+    "check:readme-links": "node scripts/check-readme-links.mjs",
     "check:reproducible": "node scripts/check-reproducible.mjs",
+    "check:seo-evidence": "node --test tests/seo-evidence.test.mjs",
+    "check:skill-evals": "node scripts/check-skill-evals.mjs",
+    "check:skill-evidence": "node --test tests/skill-evidence.test.mjs",
     "check-versions": "node scripts/check-versions.mjs",
+    "eval:skills": "node scripts/run-skill-evals.mjs",
+    "sync:testimonials": "node scripts/sync-readme-testimonials.mjs",
     "test": "node --test --experimental-test-coverage --test-coverage-branches=80 --test-coverage-functions=90 --test-coverage-lines=90 tests/*.test.mjs",
     "prepublishOnly": "npm test && npm run check:reproducible"
   },

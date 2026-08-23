@@ -1,6 +1,6 @@
 ---
 name: x-bookmarks
-description: "Use when the user wants private X bookmarks after explicit approval. Supports folders, pagination, and export. Requires a connected account."
+description: "Use when the user wants private X bookmarks after explicit confirmation. Supports folders, pagination, and export. Requires a connected account."
 license: MIT
 metadata:
   internal: true
@@ -28,7 +28,7 @@ metadata:
 
 # Read X bookmarks
 
-Access the bookmarks of a connected X account after user approval. Private to the user's account.
+Access the bookmarks of a connected X account after user confirmation. Private to the user's account.
 
 ## Choose an endpoint
 

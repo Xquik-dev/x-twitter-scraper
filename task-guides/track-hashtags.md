@@ -1,6 +1,6 @@
 ---
 name: track-hashtags
-description: "Use when the user wants recent or top X posts for a hashtag. Create an ongoing monitor only after explicit approval."
+description: "Use when the user wants recent or top X posts for a hashtag. Create an ongoing monitor only after explicit confirmation."
 license: MIT
 metadata:
   internal: true
@@ -28,7 +28,7 @@ metadata:
 
 # Track hashtags on X
 
-Search and monitor hashtags. One-shot searches are read-only; monitor creation requires explicit approval.
+Search and monitor hashtags. One-shot searches are read-only; monitor creation requires explicit confirmation.
 
 ## Choose an endpoint
 
@@ -43,7 +43,7 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 ## Run one search
 
 ```
-GET /x/tweets/search?q=%23buildinpublic&queryType=Latest&limit=100
+GET /x/tweets/search?q=%23indiehacking&queryType=Latest&limit=100
 -> { tweets: Tweet[], has_next_page: boolean, next_cursor?: string }
 ```
 
@@ -53,7 +53,7 @@ Engagement floors and content filters go inside `q`: `#tag min_faves:10 lang:en 
 
 ```
 POST /extractions
-{ "toolType": "tweet_search_extractor", "searchQuery": "#buildinpublic min_faves:10 lang:en" }
+{ "toolType": "tweet_search_extractor", "searchQuery": "#indiehacking min_faves:10 lang:en" }
 -> 202 { "id": "<extractionId>", "toolType": "tweet_search_extractor", "status": "running" }
 ```
 
@@ -62,7 +62,7 @@ POST /extractions
 ```
 POST /monitors/keywords
 {
-  "query": "#buildinpublic lang:en",
+  "query": "#indiehacking lang:en",
   "eventTypes": ["tweet.new"]
 }
 -> { id, query, eventTypes, isActive, createdAt, nextBillingAt }
@@ -74,7 +74,7 @@ Poll `/events?keywordMonitorId=<id>` or use a separate webhook.
 
 1. Ask the user for the hashtag and whether they want recent only, top, or live monitoring.
 2. One-shot read: `GET /x/tweets/search?q=%23<tag>&queryType=<Latest|Top>`.
-3. Live monitoring: show the target, filters, event delivery choice, and ongoing usage, then create a monitor only after explicit approval.
+3. Live monitoring: show the target, filters, event delivery choice, and ongoing usage, then create a monitor only after explicit confirmation.
 
 ## Protect search data
 

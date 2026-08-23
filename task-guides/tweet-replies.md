@@ -1,6 +1,6 @@
 ---
 name: tweet-replies
-description: "Use when the user wants replies to a public tweet, with authors and engagement. Read-only. Use post-tweets to publish a reply."
+description: "Use when the user wants replies to a visible tweet, with authors and engagement. Read-only. Use post-tweets to publish a reply."
 license: MIT
 metadata:
   internal: true
@@ -28,7 +28,7 @@ metadata:
 
 # Read tweet replies
 
-Get replies to any public X post. Return direct replies, nested replies, and engagement as separate fields.
+Get replies to any visible X post. Return direct replies, nested replies, and engagement as separate fields.
 
 ## Choose an endpoint
 
@@ -98,8 +98,8 @@ POST /extractions/estimate
 { "toolType": "reply_extractor", "targetTweetId": "<id>" }
 ```
 
-9. Show the result estimate and usage. Ask for explicit approval.
-10. Only after approval, create the job with the same body:
+9. Show the result estimate and usage. Ask for explicit confirmation.
+10. Only after confirmation, create the job with the same body:
 
 ```json
 POST /extractions
