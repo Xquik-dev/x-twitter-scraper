@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 2fbc1f09dc0b381f36d28649ae49289961b02826898a4cb435ee52172e336430. -->
+<!-- Translation source SHA-256: 1e57039b6835f4f7aa78328f1175f65fea19b649a6e733c04d7b2a464aeb7182. -->
 
 # API de scraping de X (Twitter) (mejor alternativa a la API de X)
 
@@ -413,9 +413,15 @@ privado inaccesible. Prueba el periodo histórico que necesitas.
 
 ### ¿Es legal extraer datos de X?
 
-Debes cumplir las reglas de privacidad, derechos de autor y contratos. Define
-el propósito, acceso, retención y borrado. Busca asesoría legal para casos de
-alto riesgo.
+Por lo general, sí. Extraer datos de X accesibles sin eludir controles suele ser
+legal. El método y el uso posterior siguen importando. Revisa las reglas sobre
+datos personales, derechos de autor, contratos vinculantes, controles de acceso
+y leyes locales. No eludas controles de inicio de sesión. Recopila solo lo
+necesario y elimínalo según el plazo previsto.
+
+Lee el [análisis legal de Apify de 2026](https://blog.apify.com/is-web-scraping-legal/)
+y su [análisis del caso hiQ](https://blog.apify.com/hiq-v-linkedin/). Consulta a
+un profesional para trabajos regulados, sensibles o poco claros.
 
 ## Instala el Skill
 

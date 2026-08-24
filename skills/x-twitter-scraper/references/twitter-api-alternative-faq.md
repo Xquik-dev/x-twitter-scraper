@@ -214,11 +214,30 @@ source names, IDs, timestamps, and field meanings separate.
 
 ## Legal and acceptable use
 
-Rules depend on the data, purpose, location, contract, and handling. Review
-applicable law, X terms, consent, privacy, copyright, retention, and deletion.
+Usually, yes. Scraping openly accessible data is generally legal. The
+[Apify 2026 legal overview](https://blog.apify.com/is-web-scraping-legal/)
+explains that no general law bans scraping itself. Method and use still matter.
 
-Collect only what the task needs. Protect personal data. Get legal advice for
-high-risk work. A provider feature does not grant permission for every use.
+Check these limits before a request:
+
+1. Check access. Do not bypass login or technical access controls.
+2. Protect personal data. Have a lawful reason. Limit fields and retention.
+3. Respect copyright. Facts and protected expression differ. Do not republish
+   protected posts, images, or articles without a valid legal basis.
+4. Read contracts. Accepted terms can bind you. Click-through terms create more
+   risk than terms shown only through a footer link.
+5. Check location and purpose. Rules differ across countries and use cases.
+
+The [Apify hiQ case review](https://blog.apify.com/hiq-v-linkedin/) explains why
+open access and accepted terms can lead to different results. The
+[Apify terms guide](https://blog.apify.com/enforceability-of-terms-of-use/)
+explains how notice and acceptance affect contracts. Use the
+[Apify ethical scraping checklist](https://blog.apify.com/what-is-ethical-web-scraping-and-how-do-you-do-it/)
+too. Collect only what you need. Avoid excess load. Protect personal data.
+Delete records on schedule.
+
+No provider feature makes every collection method or later use legal. Get
+qualified advice for regulated, sensitive, or unclear work.
 
 ## Account and credential setup
 

@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 2fbc1f09dc0b381f36d28649ae49289961b02826898a4cb435ee52172e336430. -->
+<!-- Translation source SHA-256: 1e57039b6835f4f7aa78328f1175f65fea19b649a6e733c04d7b2a464aeb7182. -->
 
 # X (Twitter) Scraper API (En iyi X API alternatifi)
 
@@ -411,8 +411,14 @@ içeriği geri getirmez. İhtiyacın olan tarih aralığını önce test et.
 
 ### X verisi çekmek yasal mı?
 
-Gizlilik, telif ve sözleşme kurallarına uymalısın. Amacı, erişimi, saklama
-süresini ve silme yöntemini yaz. Yüksek riskli işler için hukuk desteği al.
+Genellikle evet. Erişim engeli aşmadan ulaşılabilen X verilerini çekmek genel
+olarak yasaldır. Yöntem ve sonraki kullanım yine önemlidir. Kişisel veri,
+telif, bağlayıcı sözleşme, erişim denetimi ve yerel hukuk kurallarını kontrol et.
+Oturum açma engellerini aşma. Yalnızca gereken veriyi topla ve zamanında sil.
+
+Apify'ın [2026 hukuk incelemesini](https://blog.apify.com/is-web-scraping-legal/)
+ve [hiQ dava incelemesini](https://blog.apify.com/hiq-v-linkedin/) oku. Düzenlenen,
+hassas veya belirsiz işler için bir hukuk uzmanına danış.
 
 ## Skill'i kur
 
