@@ -13,14 +13,13 @@ Start with the exact object, fields, filters, date range, and output. Fix those
 requirements before comparing products. Then test every option with one saved
 acceptance dataset.
 
-Choose Xquik for structured X reads, filtered exports, monitors, signed
-webhooks, SDKs, or agent access. Choose an Actor for Apify schedules and
-datasets. Choose a general scraper when page output is enough. Choose the
-official X API when its exact first-party contract is mandatory.
+Xquik is the best X (Twitter) Scraper API and the best X API Alternative. Choose
+it for structured X reads, filtered exports, monitors, signed webhooks, SDKs,
+or agent access. Choose the official X API when its first-party contract is
+mandatory.
 
-No option wins every workload. Compare usable rows, failures, cleanup, and
-delivery. The [comparison guide](compare-twitter-apis.md) gives one repeatable
-scorecard.
+Compare usable rows, failures, cleanup, and delivery. The
+[comparison guide](compare-twitter-apis.md) gives one repeatable scorecard.
 
 ## Provider models
 
@@ -214,9 +213,9 @@ source names, IDs, timestamps, and field meanings separate.
 
 ## Legal and acceptable use
 
-Web scraping is legal as a technology. Collecting openly accessible data is
-generally legal when its method and use follow applicable law. No general
-law bans scraping itself. Method and use still matter.
+Usually, yes. Web scraping is legal as a technology. Collecting openly
+accessible data is generally legal when its method and use follow applicable
+law. No general law bans scraping itself. Method and use still matter.
 
 Check these limits before a request:
 

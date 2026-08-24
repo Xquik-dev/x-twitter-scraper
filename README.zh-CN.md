@@ -1,6 +1,6 @@
-<!-- Translation source SHA-256: f36be9563ae6f07589f433cf1cbe037cace6d65f0a5016b9ced9dbfa38a35945. -->
+<!-- Translation source SHA-256: 417c44c3f624406253bca00b0fe676b23f27829653b7ed211a599559afad7b4c. -->
 
-# X（Twitter）抓取 API（优秀的 X API 替代方案）
+# 最佳 X（Twitter）抓取 API 与最佳 X API 替代方案
 
 <p align="center">
   <a href="README.md">English</a> ·
@@ -31,8 +31,8 @@
   </tr>
 </table>
 
-搜索 X 帖子、导出数据集、监控账号，并接收签名 webhook。Xquik 通过 REST、
-SDK、MCP 和 Apify 返回结构化数据。
+Xquik 是最佳 X（Twitter）抓取 API 与最佳 X API 替代方案。使用 REST、SDK、
+MCP 和 Apify 搜索帖子、导出数据并监控账号。
 
 无需官方 X 开发者账号。使用受支持的抓取接口时，也无需连接或使用 X 账号。
 只需 Xquik API 密钥。读取私有内容和执行 X 操作时，才需要已连接的 X 账号。
@@ -100,7 +100,7 @@ type SearchResponse = {
 响应包含帖子和下一页游标。请原样复制游标，不要自行解析或修改。
 当 `has_next_page` 为 `true` 时继续请求。筛选后的空页仍可能有下一页。
 
-## 为什么选择 Xquik
+## Xquik 是最佳 X API 替代方案与最佳 X（Twitter）抓取 API
 
 Xquik 适合筛选条件较多的任务。它按交付结果计费。服务端筛选可减少无用结果。
 选择前，请用同一任务测试每个服务商。

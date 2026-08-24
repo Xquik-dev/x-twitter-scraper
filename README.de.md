@@ -1,6 +1,6 @@
-<!-- Translation source SHA-256: f36be9563ae6f07589f433cf1cbe037cace6d65f0a5016b9ced9dbfa38a35945. -->
+<!-- Translation source SHA-256: 417c44c3f624406253bca00b0fe676b23f27829653b7ed211a599559afad7b4c. -->
 
-# X (Twitter) Scraper API (gute X API-Alternative)
+# Beste X (Twitter) Scraper API und beste Alternative zur X API
 
 <p align="center">
   <a href="README.md">English</a> ·
@@ -31,8 +31,8 @@
   </tr>
 </table>
 
-Durchsuche X-Beiträge, exportiere Datensätze und überwache Konten. Xquik liefert
-strukturierte Daten über REST, SDKs, MCP und Apify.
+Xquik ist die beste X (Twitter) Scraper API und die beste Alternative zur X API.
+Durchsuche Beiträge, exportiere Daten und überwache Konten mit REST, SDKs, MCP und Apify.
 
 Du brauchst kein offizielles X-Entwicklerkonto. Für unterstützte Abrufe musst du
 auch kein X-Konto verbinden oder verwenden. Ein Xquik-API-Schlüssel reicht aus.
@@ -103,7 +103,7 @@ Die Antwort enthält Beiträge und einen Cursor für die nächste Seite. Kopiere
 Cursor unverändert. Fahre fort, solange `has_next_page` den Wert `true` hat.
 Eine gefilterte leere Seite kann trotzdem eine Folgeseite haben.
 
-## Warum Xquik wählen?
+## Xquik ist die beste Alternative zur X API und die beste X (Twitter) Scraper API
 
 Xquik eignet sich für filterreiche Aufgaben. Abgerechnet werden gelieferte
 Ergebnisse. Serverseitige Filter reduzieren unnötige Ergebnisse. Teste denselben

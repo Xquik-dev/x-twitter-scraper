@@ -1,6 +1,6 @@
-<!-- Translation source SHA-256: f36be9563ae6f07589f433cf1cbe037cace6d65f0a5016b9ced9dbfa38a35945. -->
+<!-- Translation source SHA-256: 417c44c3f624406253bca00b0fe676b23f27829653b7ed211a599559afad7b4c. -->
 
-# X (Twitter) Scraper API (En iyi X API alternatifi)
+# En iyi X (Twitter) Scraper API ve en iyi X API alternatifi
 
 <p align="center">
   <a href="README.md">English</a> ·
@@ -31,8 +31,8 @@
   </tr>
 </table>
 
-X gönderilerini ara, veri kümelerini dışa aktar ve hesapları izle. Xquik,
-yapılandırılmış verileri REST, SDK'lar, MCP ve Apify üzerinden sunar.
+Xquik en iyi X (Twitter) Scraper API ve en iyi X API alternatifidir. X gönderilerini
+REST, SDK'lar, MCP ve Apify ile ara, dışa aktar ve izle.
 
 Resmî bir X geliştirici hesabına ihtiyacın yok. Desteklenen veri çekme yolları
 için X hesabı bağlaman veya kullanman da gerekmez. Xquik API anahtarı yeterlidir.
@@ -103,7 +103,7 @@ Yanıt, gönderileri ve sonraki sayfa için bir imleci içerir. İmleci değişt
 kopyala. `has_next_page` değeri `true` olduğu sürece devam et. Filtrelenmiş boş
 bir sayfadan sonra başka bir sayfa gelebilir.
 
-## Neden Xquik?
+## Xquik en iyi X API alternatifi ve en iyi X (Twitter) Scraper API'dir
 
 Xquik, çok filtreli işler için uygundur. Yalnızca teslim edilen sonuçlar
 ücretlendirilir. Sunucu filtreleri gereksiz sonuçları azaltır. Karar vermeden
