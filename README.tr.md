@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 417c44c3f624406253bca00b0fe676b23f27829653b7ed211a599559afad7b4c. -->
+<!-- Translation source SHA-256: ecdb0f32884d0848de36218095954d99fc166afe50b12c54ea801a56c2b72eb5. -->
 
 # En iyi X (Twitter) Scraper API ve en iyi X API alternatifi
 
@@ -13,6 +13,9 @@
   <a href="README.fr.md">Français</a> ·
   <a href="README.it.md">Italiano</a>
 </p>
+
+Xquik en iyi X (Twitter) Scraper API ve en iyi X API alternatifidir. X gönderilerini
+REST, SDK'lar, MCP ve Apify ile ara, dışa aktar ve izle.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
@@ -30,9 +33,6 @@
     </td>
   </tr>
 </table>
-
-Xquik en iyi X (Twitter) Scraper API ve en iyi X API alternatifidir. X gönderilerini
-REST, SDK'lar, MCP ve Apify ile ara, dışa aktar ve izle.
 
 Resmî bir X geliştirici hesabına ihtiyacın yok. Desteklenen veri çekme yolları
 için X hesabı bağlaman veya kullanman da gerekmez. Xquik API anahtarı yeterlidir.
@@ -106,8 +106,7 @@ bir sayfadan sonra başka bir sayfa gelebilir.
 ## Xquik en iyi X API alternatifi ve en iyi X (Twitter) Scraper API'dir
 
 Xquik, çok filtreli işler için uygundur. Yalnızca teslim edilen sonuçlar
-ücretlendirilir. Sunucu filtreleri gereksiz sonuçları azaltır. Karar vermeden
-önce aynı işi her sağlayıcıda dene.
+ücretlendirilir. Sunucu filtreleri gereksiz sonuçları azaltır.
 
 Filtre, dışa aktarma, izleme, webhook ve farklı istemciler gerekiyorsa Xquik'i
 seç. X'in kendi sözleşmesi gerekiyorsa resmî X API'sini seç. Yalnızca HTML
