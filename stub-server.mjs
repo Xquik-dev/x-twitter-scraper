@@ -27,10 +27,6 @@ const JSONRPC = "2.0";
 const LIVE_SERVER_MESSAGE =
   "This package is a verification stub. Add https://xquik.com/mcp to your MCP client and complete OAuth 2.1 for live API access. Use a bearer API key only when OAuth is unavailable.";
 
-function description(lines) {
-  return lines.join("\n");
-}
-
 function codeInputSchema(descriptionText) {
   return {
     type: "object",
@@ -48,7 +44,7 @@ function codeInputSchema(descriptionText) {
 const TOOLS = [
   {
     name: "explore",
-    description: description([
+    description: [
       "The live Xquik 'explore' tool searches the 120-route API catalog. This package stub returns setup guidance only.",
       "",
       "## When to use",
@@ -74,7 +70,7 @@ const TOOLS = [
       "Filter by category: `async () => spec.endpoints.filter(e => e.category === 'composition')`",
       "Search summaries: `async () => spec.endpoints.filter(e => e.summary.toLowerCase().includes('tweet'))`",
       "Get one endpoint: `async () => spec.endpoints.find(e => e.path === '/api/v1/x/tweets/search')`",
-    ]),
+    ].join("\n"),
     inputSchema: codeInputSchema(
       "Bounded function that filters or searches the spec.endpoints EndpointInfo array. Return one EndpointInfo object or an array. Example: async () => spec.endpoints.filter(e => e.category === 'twitter')",
     ),
@@ -87,7 +83,7 @@ const TOOLS = [
   },
   {
     name: "xquik",
-    description: description([
+    description: [
       "The live 'xquik' tool sends confirmed requests across 120 catalog routes. This package stub returns setup guidance only.",
       "",
       "## When to use",
@@ -121,7 +117,7 @@ const TOOLS = [
       "Search tweets: `async () => xquik.request('/api/v1/x/tweets/search', { query: { q: 'twitter scraper api', limit: '50' } })`",
       "Get user: `async () => xquik.request('/api/v1/x/users/elonmusk')`",
       "Post after confirmation: `async () => xquik.request('/api/v1/x/tweets', { method: 'POST', body: { account: '<confirmed_account>', text: '<confirmed_text>' } })`",
-    ]),
+    ].join("\n"),
     inputSchema: codeInputSchema(
       "Bounded function that calls xquik.request(path, options?) for Twitter API operations. The server adds authentication. Example: async () => xquik.request('/api/v1/x/tweets/search', { query: { q: 'twitter api', limit: '20' } })",
     ),
@@ -152,10 +148,6 @@ const TOOL_LIST_RESULT = {
 
 function isObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
-}
-
-function isKnownTool(name) {
-  return TOOLS.some((tool) => tool.name === name);
 }
 
 export function createMessageHandler(writeLine) {
@@ -199,7 +191,7 @@ export function createMessageHandler(writeLine) {
 
       case "tools/call": {
         const toolName = params?.name;
-        if (isKnownTool(toolName)) {
+        if (TOOLS.some((tool) => tool.name === toolName)) {
           return sendStubToolResult(id);
         }
         return sendError(id, -32601, `Unknown tool: ${toolName}`);
