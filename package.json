@@ -19,6 +19,10 @@
   "engines": {
     "bun": ">=1.4.0"
   },
+  "scripts": {
+    "registry:build": "bun run scripts/build-shadcn-registry.mjs",
+    "registry:check": "bun run scripts/build-shadcn-registry.mjs --check"
+  },
   "keywords": [
     "twitter",
     "x-api",
@@ -89,6 +93,7 @@
     "skills.sh.json",
     "start.sh",
     "stub-server.mjs",
-    "task-guides"
+    "task-guides",
+    "x-twitter-scraper.json"
   ]
 }
