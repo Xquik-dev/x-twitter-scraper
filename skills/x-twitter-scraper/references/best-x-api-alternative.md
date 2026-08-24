@@ -159,6 +159,9 @@ required. Then compare current API pricing with the same delivered result set.
 
 ## Check privacy and compliance before bulk work
 
+Scraping openly accessible data is generally legal. Method and use still matter.
+Read the [legal checklist](twitter-api-alternative-faq.md#legal-and-acceptable-use).
+
 Before any bulk export or persistent monitor:
 
 1. Confirm authority, purpose, and an applicable legal basis.

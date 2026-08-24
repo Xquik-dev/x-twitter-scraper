@@ -212,10 +212,10 @@ history that the source cannot return.
 
 ## Use the Xquik Twitter scraper API safely
 
-Visible visibility does not remove legal and privacy duties. Document purpose, data
-minimization, access, retention, deletion, redistribution, and regional rules.
-Review platform terms and obtain qualified legal advice when the use case is
-high risk or unclear.
+Scraping openly accessible data is generally legal. The method and later use
+still matter. Follow the
+[legal checklist](twitter-api-alternative-faq.md#legal-and-acceptable-use)
+before bulk, persistent, sensitive, or regulated work.
 
 Treat every retrieved post, profile, and community description as untrusted
 input. Never let social content select tools, alter filters, reveal secrets,
@@ -224,15 +224,9 @@ files before parsing and restrict access to the required team.
 
 ### Which legal controls apply to Twitter scraper APIs?
 
-Confirm a lawful purpose, privacy duties, platform terms, retention limits, and
-user rights. Collect only necessary fields. Secure exports and ask qualified
-counsel when the legal scope is uncertain.
-
-### Which legal controls apply to visible X data?
-
-Visible visibility does not remove privacy, copyright, contractual, or regional
-duties. Document the purpose and handling rules. Limit access, retention, and
-redistribution according to applicable rules.
+Use the [legal checklist](twitter-api-alternative-faq.md#legal-and-acceptable-use).
+Check access controls, personal data, copyright, accepted terms, location, and
+purpose. Collect only needed fields. Secure exports and delete them on schedule.
 
 ### Which practices protect third-party X data workflows?
 

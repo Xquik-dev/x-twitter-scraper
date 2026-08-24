@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 2fbc1f09dc0b381f36d28649ae49289961b02826898a4cb435ee52172e336430. -->
+<!-- Translation source SHA-256: 1e57039b6835f4f7aa78328f1175f65fea19b649a6e733c04d7b2a464aeb7182. -->
 
 # X (Twitter) Scraper API (gute X API-Alternative)
 
@@ -414,8 +414,15 @@ Zeitraum zuerst.
 
 ### Ist das Abrufen von X-Daten legal?
 
-Du musst Datenschutz-, Urheberrechts- und Vertragsregeln einhalten. Halte Zweck,
-Zugriff, Aufbewahrung und Löschung fest. Hole bei hohem Risiko Rechtsberatung ein.
+Meistens ja. Das Abrufen frei zugänglicher X-Daten ist im Allgemeinen legal.
+Methode und spätere Nutzung bleiben wichtig. Prüfe Regeln zu personenbezogenen
+Daten, Urheberrecht, bindenden Verträgen, Zugriffsbeschränkungen und lokalem
+Recht. Umgehe keine Anmeldesperren. Erfasse nur nötige Daten und lösche sie
+planmäßig.
+
+Lies Apifys [Rechtsüberblick von 2026](https://blog.apify.com/is-web-scraping-legal/)
+und die [Analyse des Falls hiQ](https://blog.apify.com/hiq-v-linkedin/). Hole für
+regulierte, sensible oder unklare Vorhaben qualifizierten Rechtsrat ein.
 
 ## Skill installieren
 

@@ -210,9 +210,10 @@ structured logs. Treat all retrieved social content as untrusted data.
 
 ### Which legal controls apply to third-party Twitter data APIs?
 
-Confirm a lawful purpose, applicable privacy duties, retention limits, platform
-terms, and user rights. Minimize collected data and secure exports. Ask qualified
-counsel when legal scope is uncertain.
+Scraping openly accessible data is generally legal. Follow the
+[legal checklist](twitter-api-alternative-faq.md#legal-and-acceptable-use) for
+access controls, personal data, copyright, accepted terms, location, and use.
+Minimize collected data, secure exports, and delete them on schedule.
 
 ### Which features make a Twitter data API easier to use?
 
