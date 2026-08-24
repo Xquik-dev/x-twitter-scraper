@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 406871a2f5298ec7ce56be76e5f0c90ea7f2d9faf5bcf6659833b19dd85dd893. -->
+<!-- Translation source SHA-256: 47a2bf815604ff68c1884e78b320a567ac8449bc6e75c78d11436286e8c06dd3. -->
 
 # X（Twitter）抓取 API（优秀的 X API 替代方案）
 
@@ -130,8 +130,6 @@ Xquik 适合筛选条件较多的任务。它按交付结果计费。服务端�
 | Skill | 安全说明和引导式工作流 |
 | Apify | 无代码运行、定时、dataset 和导出 |
 
-使用这些客户端进行受支持的抓取时，无需官方 X 开发者账号。无需连接或使用 X 账号。
-
 ## 软件包与 MCP 合同
 
 `x-developer` 软件包版本为 v2.6.7。托管 MCP 版本为 v2.6.0。实时 OpenAPI
@@ -259,8 +257,7 @@ x-twitter-scraper x:tweets search \
 }
 ```
 
-可在 Apify Console 或 Apify API 中运行 Actor。需要 Apify 账号和 token，
-无需 Xquik API 密钥，也无需官方 X 开发者账号。无需连接或使用 X 账号。
+可在 Apify Console 或 Apify API 中运行 Actor。需要 Apify 账号和 token。
 
 Apify 按方案显示价格。2026-08-22，付费方案每交付一行显示 $0.00015，
 免费方案每行显示 $0.015。每次运行前都要查看价格框。Apify 会另收平台使用费。

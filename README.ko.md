@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 406871a2f5298ec7ce56be76e5f0c90ea7f2d9faf5bcf6659833b19dd85dd893. -->
+<!-- Translation source SHA-256: 47a2bf815604ff68c1884e78b320a567ac8449bc6e75c78d11436286e8c06dd3. -->
 
 # X(Twitter) Scraper API (좋은 X API 대안)
 
@@ -134,9 +134,6 @@ X 고유 계약이 필요하면 공식 X API가 알맞습니다. HTML만 필요�
 | Skill | 안전한 지침과 안내형 흐름 |
 | Apify | 노코드 실행, 일정, dataset, 내보내기 |
 
-이 클라이언트의 지원되는 수집에는 공식 X 개발자 계정이 필요하지 않습니다.
-X 계정을 연결하거나 사용할 필요도 없습니다.
-
 ## 패키지와 MCP 계약
 
 `x-developer` 패키지는 v2.6.7입니다. 호스팅 MCP는 v2.6.0입니다. 실시간
@@ -265,8 +262,7 @@ x-twitter-scraper x:tweets search \
 ```
 
 Apify Console 또는 Apify API에서 Actor를 실행하세요. Apify 계정과 token이
-필요합니다. Xquik API 키나 공식 X 개발자 계정은 필요하지 않습니다. X 계정을
-연결하거나 사용할 필요도 없습니다.
+필요합니다.
 
 Apify는 요금제별 가격을 표시합니다. 2026-08-22 기준 유료 요금제는 전달된 행당
 $0.00015, 무료 요금제는 행당 $0.015로 표시되었습니다. 실행 전에 가격 상자를

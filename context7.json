@@ -1,7 +1,7 @@
 {
   "$schema": "https://context7.com/schema/context7.json",
   "projectTitle": "X Twitter Scraper",
-  "description": "Xquik Twitter scraper API, MCP server, SDK, and Skill documentation for an X (Twitter) Scraper API and X API Alternative. You do not need an official X developer account. You do not need to connect or use an X account for scraping. Covers exports, monitors, and webhooks. Not affiliated with X Corp.",
+  "description": "Xquik documentation for an X (Twitter) Scraper API and X API Alternative. Covers REST, MCP, SDKs, Skills, exports, monitors, and webhooks. Not affiliated with X Corp.",
   "branch": "master",
   "excludeFolders": [
     ".claude-plugin",

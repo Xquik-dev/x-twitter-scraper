@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 406871a2f5298ec7ce56be76e5f0c90ea7f2d9faf5bcf6659833b19dd85dd893. -->
+<!-- Translation source SHA-256: 47a2bf815604ff68c1884e78b320a567ac8449bc6e75c78d11436286e8c06dd3. -->
 
 # X (Twitter) Scraper API (gute X API-Alternative)
 
@@ -135,9 +135,6 @@ Scraper passt, wenn HTML ausreicht.
 | Skill | Sichere Anweisungen und geführte Abläufe |
 | Apify | No-Code-Läufe, Zeitpläne, Datasets und Exporte |
 
-Unterstützte Abrufe brauchen mit diesen Clients kein offizielles
-X-Entwicklerkonto. Du musst auch kein X-Konto verbinden oder verwenden.
-
 ## Paket- und MCP-Vertrag
 
 Das Paket `x-developer` ist v2.6.7. Hosted MCP ist v2.6.0. Der Live-OpenAPI-
@@ -266,8 +263,7 @@ x-twitter-scraper x:tweets search \
 ```
 
 Starte den Actor in der Apify Console oder über die Apify API. Du brauchst ein
-Apify-Konto und ein Token. Du brauchst weder einen Xquik-API-Schlüssel noch ein
-offizielles X-Entwicklerkonto. Du musst auch kein X-Konto verbinden oder nutzen.
+Apify-Konto und ein Token.
 
 Apify zeigt Preise je Tarif. Am 2026-08-22 zeigten bezahlte Tarife $0.00015 pro
 gelieferter Zeile. Der kostenlose Tarif zeigte $0.015 pro Zeile. Prüfe das

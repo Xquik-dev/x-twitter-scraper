@@ -1,7 +1,7 @@
 {
   "id": "x-developer",
   "name": "X Developer API",
-  "description": "X (Twitter) Scraper API and X API Alternative. You do not need an official X developer account. You do not need to connect or use an X account for scraping. Use 128 REST operations, 120 MCP routes, SDKs, webhooks, and exports. Not affiliated with X Corp.",
+  "description": "X (Twitter) Scraper API and X API Alternative with 128 REST operations, 120 MCP routes, SDKs, webhooks, and exports. Not affiliated with X Corp.",
   "version": "2.6.7",
   "skills": ["./skills"],
   "providerAuthEnvVars": {
