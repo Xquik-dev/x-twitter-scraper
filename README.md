@@ -122,6 +122,9 @@ contract, support, or platform relationship is required.
 
 ## Install the Skills
 
+This repository is also a portable Agent Plugins v1 package. Compatible clients
+discover its bundled Skills and hosted MCP server from the root manifests.
+
 Install the primary Skill for any compatible agent:
 
 ```bash
