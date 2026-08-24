@@ -214,7 +214,8 @@ source names, IDs, timestamps, and field meanings separate.
 
 ## Legal and acceptable use
 
-Usually, yes. Scraping openly accessible data is generally legal. No general
+Web scraping is legal as a technology. Collecting openly accessible data is
+generally legal when its method and use follow applicable law. No general
 law bans scraping itself. Method and use still matter.
 
 Check these limits before a request:

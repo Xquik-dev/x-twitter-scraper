@@ -536,10 +536,11 @@ Use idempotency keys. Poll ambiguous writes before retrying.
 
 ### Is scraping X data legal?
 
-Usually, yes. Scraping openly accessible X data is generally legal. The method
-and later use still matter. Check personal data rules, copyright, binding terms,
-access controls, and local law. Do not bypass login controls. Collect only what
-you need and delete it on schedule.
+Web scraping is legal as a technology. Collecting openly accessible X data is
+generally legal when the method and later use follow applicable law. Check
+personal data rules, copyright, binding terms, access controls, and local law.
+Do not bypass login controls. Collect only what you need and delete it on
+schedule.
 
 Get qualified advice for regulated, sensitive, or unclear work.
 
