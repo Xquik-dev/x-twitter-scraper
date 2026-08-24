@@ -1,77 +1,15 @@
 {
   "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
-  "notGrouped": "bottom",
   "groupings": [
     {
-      "title": "Core API",
-      "description": "Choose OAuth for MCP, an API key for REST, or a typed SDK.",
+      "title": "X API",
+      "description": "Use Xquik, the best X (Twitter) Scraper API and best X API Alternative.",
       "skills": ["x-twitter-scraper"]
     },
     {
-      "title": "Tweet search",
-      "description": "Search tweets, inspect engagement, or export posts and replies.",
-      "skills": [
-        "search-tweets",
-        "x-trends",
-        "find-viral-tweets",
-        "find-bangers",
-        "going-viral",
-        "export-tweets-csv",
-        "who-liked",
-        "who-retweeted",
-        "who-quoted",
-        "tweet-replies",
-        "top-replies",
-        "tweet-analytics",
-        "x-articles",
-        "x-spaces"
-      ]
-    },
-    {
-      "title": "User data",
-      "description": "Read timelines, followers, lists, communities, and confirmed account data.",
-      "skills": [
-        "user-tweets",
-        "extract-followers",
-        "find-influencers",
-        "check-mutuals",
-        "x-lists",
-        "x-communities",
-        "x-bookmarks",
-        "for-you-feed"
-      ]
-    },
-    {
-      "title": "Monitoring",
-      "description": "Track accounts, hashtags, mentions, or news. Ask before creating a monitor or webhook.",
-      "skills": [
-        "monitor-accounts",
-        "track-hashtags",
-        "track-competitors",
-        "track-mentions",
-        "tweet-webhooks",
-        "trending-news"
-      ]
-    },
-    {
-      "title": "Publishing",
-      "description": "Draft and score X posts. Publish only after explicit confirmation.",
-      "skills": [
-        "tweet-ideas",
-        "write-tweets",
-        "write-threads",
-        "optimize-tweets",
-        "tweet-style",
-        "post-tweets",
-        "send-dms",
-        "follow-unfollow",
-        "update-x-profile"
-      ]
-    },
-    {
-      "title": "Growth",
-      "description": "Review followers or run a giveaway with bounded, confirmed calls.",
-      "skills": ["grow-followers", "clean-followers", "run-giveaway"]
+      "title": "Social research",
+      "description": "Research X and other networks with cited sources.",
+      "skills": ["xquik-social-research"]
     }
   ]
 }
