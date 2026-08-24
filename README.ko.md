@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 1e57039b6835f4f7aa78328f1175f65fea19b649a6e733c04d7b2a464aeb7182. -->
+<!-- Translation source SHA-256: 406871a2f5298ec7ce56be76e5f0c90ea7f2d9faf5bcf6659833b19dd85dd893. -->
 
 # X(Twitter) Scraper API (좋은 X API 대안)
 
@@ -409,9 +409,7 @@ Xquik은 사용할 수 있는 데이터만 반환합니다. 누락된 필드를 
 유효한 계약, 접근 제한, 현지 법률을 확인하세요. 로그인 제한을 우회하지 마세요. 필요한
 데이터만 수집하고 정한 일정에 따라 삭제하세요.
 
-Apify의 [2026년 법률 안내](https://blog.apify.com/is-web-scraping-legal/)와
-[hiQ 판례 설명](https://blog.apify.com/hiq-v-linkedin/)을 읽어보세요. 규제 대상이거나
-민감하거나 판단이 어려운 작업은 법률 전문가에게 문의하세요.
+규제 대상이거나 민감하거나 판단이 어려운 작업은 법률 전문가에게 문의하세요.
 
 ## Skill 설치하기
 

@@ -214,9 +214,8 @@ source names, IDs, timestamps, and field meanings separate.
 
 ## Legal and acceptable use
 
-Usually, yes. Scraping openly accessible data is generally legal. The
-[Apify 2026 legal overview](https://blog.apify.com/is-web-scraping-legal/)
-explains that no general law bans scraping itself. Method and use still matter.
+Usually, yes. Scraping openly accessible data is generally legal. No general
+law bans scraping itself. Method and use still matter.
 
 Check these limits before a request:
 
@@ -228,13 +227,9 @@ Check these limits before a request:
    risk than terms shown only through a footer link.
 5. Check location and purpose. Rules differ across countries and use cases.
 
-The [Apify hiQ case review](https://blog.apify.com/hiq-v-linkedin/) explains why
-open access and accepted terms can lead to different results. The
-[Apify terms guide](https://blog.apify.com/enforceability-of-terms-of-use/)
-explains how notice and acceptance affect contracts. Use the
-[Apify ethical scraping checklist](https://blog.apify.com/what-is-ethical-web-scraping-and-how-do-you-do-it/)
-too. Collect only what you need. Avoid excess load. Protect personal data.
-Delete records on schedule.
+Open access and accepted terms can lead to different results. Notice and
+acceptance affect whether terms bind you. Collect only what you need. Avoid
+excess load. Protect personal data. Delete records on schedule.
 
 No provider feature makes every collection method or later use legal. Get
 qualified advice for regulated, sensitive, or unclear work.

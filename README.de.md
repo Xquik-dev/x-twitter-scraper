@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 1e57039b6835f4f7aa78328f1175f65fea19b649a6e733c04d7b2a464aeb7182. -->
+<!-- Translation source SHA-256: 406871a2f5298ec7ce56be76e5f0c90ea7f2d9faf5bcf6659833b19dd85dd893. -->
 
 # X (Twitter) Scraper API (gute X API-Alternative)
 
@@ -420,9 +420,7 @@ Daten, Urheberrecht, bindenden Verträgen, Zugriffsbeschränkungen und lokalem
 Recht. Umgehe keine Anmeldesperren. Erfasse nur nötige Daten und lösche sie
 planmäßig.
 
-Lies Apifys [Rechtsüberblick von 2026](https://blog.apify.com/is-web-scraping-legal/)
-und die [Analyse des Falls hiQ](https://blog.apify.com/hiq-v-linkedin/). Hole für
-regulierte, sensible oder unklare Vorhaben qualifizierten Rechtsrat ein.
+Hole für regulierte, sensible oder unklare Vorhaben qualifizierten Rechtsrat ein.
 
 ## Skill installieren
 
