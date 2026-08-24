@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "x-twitter-scraper",
   "version": "2.6.7",
-  "description": "Xquik Twitter scraper API Skill for REST, MCP, webhooks, exports, and approved X actions. Not affiliated with X Corp.",
+  "description": "Xquik Twitter scraper API Skill for REST, MCP, webhooks, exports, and connected X account actions. Not affiliated with X Corp.",
   "author": {
     "name": "Xquik",
     "url": "https://github.com/Xquik-dev"
