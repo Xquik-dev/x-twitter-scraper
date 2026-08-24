@@ -1,0 +1,10 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "x-twitter-scraper",
+  "type": "registry:item",
+  "title": "X Twitter scraper Skill",
+  "description": "Install the X (Twitter) Scraper API and X API Alternative Skill for searches, exports, monitors, webhooks, and supported account actions. Not affiliated with X Corp.",
+  "registryDependencies": [
+    "Xquik-dev/x-twitter-scraper/x-twitter-scraper"
+  ]
+}

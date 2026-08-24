@@ -138,6 +138,9 @@ bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
 bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
 ```
 
+The shadcn registry files are generated from the public Skill. Run
+`bun run registry:build` after changing its file set.
+
 ### LobeHub
 
 Use LobeHub CLI 0.0.48 or later. Sign in, install both Skills, then confirm them:
