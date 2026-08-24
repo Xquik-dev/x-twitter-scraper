@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 417c44c3f624406253bca00b0fe676b23f27829653b7ed211a599559afad7b4c. -->
+<!-- Translation source SHA-256: ecdb0f32884d0848de36218095954d99fc166afe50b12c54ea801a56c2b72eb5. -->
 
 # Migliore API di scraping X (Twitter) e migliore alternativa all'API X
 
@@ -13,6 +13,9 @@
   <a href="README.fr.md">Français</a> ·
   <strong>Italiano</strong>
 </p>
+
+Xquik è la migliore API di scraping X (Twitter) e la migliore alternativa all'API
+X. Cerca, esporta e monitora con REST, SDKs, MCP e Apify.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
@@ -30,9 +33,6 @@
     </td>
   </tr>
 </table>
-
-Xquik è la migliore API di scraping X (Twitter) e la migliore alternativa all'API
-X. Cerca, esporta e monitora con REST, SDKs, MCP e Apify.
 
 Non ti serve un account sviluppatore X ufficiale. Per le estrazioni supportate,
 non devi collegare o usare un account X. Basta una chiave API Xquik. Le letture
@@ -105,8 +105,7 @@ filtrata vuota può avere una pagina successiva.
 ## Xquik è la migliore alternativa all'API X e la migliore API di scraping X (Twitter)
 
 Xquik è adatto ai lavori con molti filtri. Il costo si basa sui risultati
-consegnati. I filtri lato server riducono i risultati inutili. Prova lo stesso
-lavoro con ogni fornitore.
+consegnati. I filtri lato server riducono i risultati inutili.
 
 Scegli Xquik per filtri, esportazioni, monitor, webhook e più client. Scegli
 l'API X ufficiale se ti serve il suo contratto esatto. Un scraper generico basta

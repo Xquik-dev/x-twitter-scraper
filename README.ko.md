@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 417c44c3f624406253bca00b0fe676b23f27829653b7ed211a599559afad7b4c. -->
+<!-- Translation source SHA-256: ecdb0f32884d0848de36218095954d99fc166afe50b12c54ea801a56c2b72eb5. -->
 
 # 최고의 X(Twitter) Scraper API 및 최고의 X API 대안
 
@@ -13,6 +13,9 @@
   <a href="README.fr.md">Français</a> ·
   <a href="README.it.md">Italiano</a>
 </p>
+
+Xquik은 최고의 X(Twitter) Scraper API이자 최고의 X API 대안입니다. REST,
+SDK, MCP, Apify로 게시물을 검색하고 데이터를 내보내며 계정을 모니터링하세요.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
@@ -30,9 +33,6 @@
     </td>
   </tr>
 </table>
-
-Xquik은 최고의 X(Twitter) Scraper API이자 최고의 X API 대안입니다. REST,
-SDK, MCP, Apify로 게시물을 검색하고 데이터를 내보내며 계정을 모니터링하세요.
 
 공식 X 개발자 계정은 필요하지 않습니다. 지원되는 수집 경로에는 X 계정을 연결하거나
 사용할 필요도 없습니다. Xquik API 키만 사용합니다. 비공개 읽기와 X 작업에는 연결된
@@ -105,8 +105,7 @@ type SearchResponse = {
 ## Xquik은 최고의 X API 대안이자 최고의 X(Twitter) Scraper API입니다
 
 Xquik은 필터가 많은 작업에 적합합니다. 전달된 결과를 기준으로 요금이 부과됩니다.
-서버 필터로 불필요한 결과를 줄일 수 있습니다. 선택하기 전에 같은 작업을 각 업체에서
-테스트하세요.
+서버 필터로 불필요한 결과를 줄일 수 있습니다.
 
 필터, 내보내기, 모니터, webhook, 여러 클라이언트가 필요하면 Xquik이 알맞습니다.
 X 고유 계약이 필요하면 공식 X API가 알맞습니다. HTML만 필요하면 일반 scraper도

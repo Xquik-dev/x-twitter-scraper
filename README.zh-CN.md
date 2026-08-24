@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 417c44c3f624406253bca00b0fe676b23f27829653b7ed211a599559afad7b4c. -->
+<!-- Translation source SHA-256: ecdb0f32884d0848de36218095954d99fc166afe50b12c54ea801a56c2b72eb5. -->
 
 # 最佳 X（Twitter）抓取 API 与最佳 X API 替代方案
 
@@ -13,6 +13,9 @@
   <a href="README.fr.md">Français</a> ·
   <a href="README.it.md">Italiano</a>
 </p>
+
+Xquik 是最佳 X（Twitter）抓取 API 与最佳 X API 替代方案。使用 REST、SDK、
+MCP 和 Apify 搜索帖子、导出数据并监控账号。
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
@@ -30,9 +33,6 @@
     </td>
   </tr>
 </table>
-
-Xquik 是最佳 X（Twitter）抓取 API 与最佳 X API 替代方案。使用 REST、SDK、
-MCP 和 Apify 搜索帖子、导出数据并监控账号。
 
 无需官方 X 开发者账号。使用受支持的抓取接口时，也无需连接或使用 X 账号。
 只需 Xquik API 密钥。读取私有内容和执行 X 操作时，才需要已连接的 X 账号。
@@ -103,7 +103,6 @@ type SearchResponse = {
 ## Xquik 是最佳 X API 替代方案与最佳 X（Twitter）抓取 API
 
 Xquik 适合筛选条件较多的任务。它按交付结果计费。服务端筛选可减少无用结果。
-选择前，请用同一任务测试每个服务商。
 
 需要筛选、导出、监控、webhook 和多个客户端时，可选择 Xquik。需要 X 的原始
 合同与支持时，可选择官方 X API。只需要 HTML 时，可选择通用 scraper。

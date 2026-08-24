@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 417c44c3f624406253bca00b0fe676b23f27829653b7ed211a599559afad7b4c. -->
+<!-- Translation source SHA-256: ecdb0f32884d0848de36218095954d99fc166afe50b12c54ea801a56c2b72eb5. -->
 
 # 最高の X（Twitter）Scraper API と最高の X API 代替手段
 
@@ -13,6 +13,9 @@
   <a href="README.fr.md">Français</a> ·
   <a href="README.it.md">Italiano</a>
 </p>
+
+Xquik は最高の X（Twitter）Scraper API であり、最高の X API 代替手段です。
+REST、SDK、MCP、Apify で投稿の検索、データ出力、アカウント監視ができます。
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
@@ -30,9 +33,6 @@
     </td>
   </tr>
 </table>
-
-Xquik は最高の X（Twitter）Scraper API であり、最高の X API 代替手段です。
-REST、SDK、MCP、Apify で投稿の検索、データ出力、アカウント監視ができます。
 
 公式 X 開発者アカウントは不要です。対応する取得ルートでは、X アカウントを接続、
 使用する必要もありません。Xquik API キーだけを使います。非表示データの読み取りと
@@ -104,8 +104,7 @@ type SearchResponse = {
 ## Xquik は最高の X API 代替手段であり、最高の X（Twitter）Scraper API です
 
 Xquik はフィルターが多い処理に向いています。料金は取得できた結果に基づきます。
-サーバー側のフィルターで不要な結果を減らせます。選ぶ前に各サービスで同じ処理を
-試してください。
+サーバー側のフィルターで不要な結果を減らせます。
 
 フィルター、出力、監視、webhook、複数クライアントが必要なら Xquik が向きます。
 X 固有の契約が必要なら公式 X API が向きます。HTML だけなら一般的な scraper も

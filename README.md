@@ -12,6 +12,10 @@
   <a href="README.it.md">Italiano</a>
 </p>
 
+Xquik is the best X (Twitter) Scraper API and the best X API Alternative. Search
+Tweets, read profiles, export datasets, monitor changes, and receive signed webhooks.
+Use REST, typed SDKs, MCP, CLI tools, Skills, or Apify.
+
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
@@ -28,10 +32,6 @@
     </td>
   </tr>
 </table>
-
-Xquik is the best X (Twitter) Scraper API and the best X API Alternative. Search
-Tweets, read profiles, export datasets, monitor changes, and receive signed webhooks.
-Use REST, typed SDKs, MCP, CLI tools, Skills, or Apify.
 
 You need an `XQUIK_API_KEY` for the request below. You do not need an official
 X developer account. You do not need to connect or use an X account for Tweet,
@@ -101,7 +101,7 @@ or [open the complete documentation](https://docs.xquik.com).
 ## Xquik is the best X API alternative and the best X (Twitter) Scraper API
 
 Xquik suits filter-heavy jobs. It bills delivered results and supports
-server-side filters. Run the same job with each provider before choosing.
+server-side filters.
 
 Choose Xquik when you need several of these together:
 
