@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 406871a2f5298ec7ce56be76e5f0c90ea7f2d9faf5bcf6659833b19dd85dd893. -->
+<!-- Translation source SHA-256: 47a2bf815604ff68c1884e78b320a567ac8449bc6e75c78d11436286e8c06dd3. -->
 
 # X（Twitter）Scraper API（優れた X API の代替手段）
 
@@ -133,9 +133,6 @@ X 固有の契約が必要なら公式 X API が向きます。HTML だけなら
 | Skill | 安全な指示と案内付き処理 |
 | Apify | ノーコード実行、スケジュール、dataset、出力 |
 
-どのクライアントでも、対応する取得に公式 X 開発者アカウントは不要です。
-X アカウントを接続、使用する必要もありません。
-
 ## パッケージと MCP の契約
 
 `x-developer` パッケージは v2.6.7 です。ホスト型 MCP は v2.6.0 です。
@@ -264,8 +261,7 @@ x-twitter-scraper x:tweets search \
 ```
 
 Actor は Apify Console または Apify API から実行できます。Apify のアカウントと
-token が必要です。Xquik API キーや公式 X 開発者アカウントは不要です。
-X アカウントを接続、使用する必要もありません。
+token が必要です。
 
 Apify はプラン別に価格を表示します。2026-08-22 時点では、有料プランは配信行ごとに
 $0.00015、無料プランは行ごとに $0.015 と表示されました。実行前に価格欄を確認して

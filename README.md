@@ -209,9 +209,6 @@ The live OpenAPI currently documents 128 REST API operations. The package `x-dev
 | CLI | Shell scripts, terminals, and scheduled jobs | Xquik API key |
 | Apify Actor | No-code runs, schedules, datasets, and Apify exports | Apify API token |
 
-Supported scraping needs no official X developer account. You do not need to
-connect or use an X account. Connected X account actions are the exception.
-
 ## Code examples
 
 ### TypeScript with fetch
@@ -343,8 +340,7 @@ The [Xquik Actor](https://apify.com/xquik/x-tweet-scraper) accepts this input:
 ```
 
 Run it in Apify Console or through the Apify API. It needs an Apify account and
-token. It needs no Xquik API key or official X developer account. You do not
-need to connect or use an X account.
+token.
 
 Apify shows Actor prices by plan. On 2026-08-22, paid plans showed $0.00015 per
 delivered row. The free plan showed $0.015 per delivered row. Check the price

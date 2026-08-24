@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 406871a2f5298ec7ce56be76e5f0c90ea7f2d9faf5bcf6659833b19dd85dd893. -->
+<!-- Translation source SHA-256: 47a2bf815604ff68c1884e78b320a567ac8449bc6e75c78d11436286e8c06dd3. -->
 
 # API de scraping de X (Twitter) (mejor alternativa a la API de X)
 
@@ -135,9 +135,6 @@ exacto. Elige un scraper general si solo necesitas HTML.
 | Skill | Instrucciones seguras y flujos guiados |
 | Apify | Ejecuciones sin código, horarios, datasets y exportaciones |
 
-Todos estos clientes permiten el scraping compatible sin una cuenta oficial de
-desarrollador de X. Tampoco hace falta conectar ni usar una cuenta de X.
-
 ## Contrato del paquete y MCP
 
 El paquete `x-developer` está en v2.6.7. El MCP alojado está en v2.6.0. El
@@ -266,8 +263,7 @@ x-twitter-scraper x:tweets search \
 ```
 
 Ejecuta el Actor desde Apify Console o la API de Apify. Necesitas una cuenta y
-un token de Apify. No necesitas una clave de Xquik ni una cuenta oficial de
-desarrollador de X. Tampoco necesitas conectar o usar una cuenta de X.
+un token de Apify.
 
 Apify muestra precios según el plan. El 2026-08-22, los planes de pago mostraban
 $0.00015 por fila entregada. El plan gratuito mostraba $0.015 por fila. Revisa

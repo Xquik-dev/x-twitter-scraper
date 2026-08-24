@@ -5,14 +5,14 @@
     "email": "support@xquik.com"
   },
   "metadata": {
-    "description": "X (Twitter) Scraper API and X API Alternative. You do not need an official X developer account. You do not need to connect or use an X account for scraping. 128 REST operations and 120 MCP routes. Not affiliated with X Corp.",
+    "description": "X (Twitter) Scraper API and X API Alternative with 128 REST operations and 120 MCP routes. Not affiliated with X Corp.",
     "version": "2.6.7"
   },
   "plugins": [
     {
       "name": "x-twitter-scraper",
       "source": "./",
-      "description": "X (Twitter) Scraper API and X API Alternative. You do not need an official X developer account. You do not need to connect or use an X account for scraping. Use 23 extraction types, webhooks, SDKs, MCP, and confirmed writes. Not affiliated with X Corp.",
+      "description": "X (Twitter) Scraper API and X API Alternative with 23 extraction types, webhooks, SDKs, MCP, and confirmed writes. Not affiliated with X Corp.",
       "version": "2.6.7",
       "author": {
         "name": "Xquik"

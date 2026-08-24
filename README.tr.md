@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 406871a2f5298ec7ce56be76e5f0c90ea7f2d9faf5bcf6659833b19dd85dd893. -->
+<!-- Translation source SHA-256: 47a2bf815604ff68c1884e78b320a567ac8449bc6e75c78d11436286e8c06dd3. -->
 
 # X (Twitter) Scraper API (En iyi X API alternatifi)
 
@@ -135,9 +135,6 @@ gerekiyorsa genel bir scraper seç.
 | Skill | Güvenli talimatlar ve yönlendirilmiş akışlar |
 | Apify | Kodsuz çalıştırma, zamanlama, dataset ve dışa aktarma |
 
-Bu istemcilerle desteklenen veri çekme işlemleri için resmî bir X geliştirici
-hesabı gerekmez. X hesabı bağlaman veya kullanman da gerekmez.
-
 ## Paket ve MCP sözleşmesi
 
 `x-developer` paketi v2.6.7 sürümünde. Barındırılan MCP v2.6.0 sürümünde. Canlı
@@ -266,8 +263,7 @@ x-twitter-scraper x:tweets search \
 ```
 
 Actor'ı Apify Console veya Apify API üzerinden çalıştır. Apify hesabı ve token
-gerekir. Xquik API anahtarı ya da resmî X geliştirici hesabı gerekmez. X hesabı
-bağlaman veya kullanman da gerekmez.
+gerekir.
 
 Apify fiyatları plana göre gösterir. 2026-08-22 tarihinde ücretli planlarda
 teslim edilen satır başına $0.00015 vardı. Ücretsiz planda satır başına $0.015
