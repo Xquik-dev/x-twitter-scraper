@@ -911,6 +911,13 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+    confirmed := false
+    for _, arg := range os.Args[1:] {
+        confirmed = confirmed || arg == "--confirmed-listener-scope"
+    }
+    if !confirmed {
+        log.Fatal("Confirm listener scope before startup.")
+    }
     if eventStore == nil {
         log.Fatal("Configure a durable webhook event store.")
     }

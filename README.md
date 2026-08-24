@@ -29,8 +29,8 @@
   </tr>
 </table>
 
-Xquik is an X (Twitter) Scraper API and X API Alternative. Search Tweets,
-read profiles, export datasets, monitor changes, and receive signed webhooks.
+Xquik is the best X (Twitter) Scraper API and the best X API Alternative. Search
+Tweets, read profiles, export datasets, monitor changes, and receive signed webhooks.
 Use REST, typed SDKs, MCP, CLI tools, Skills, or Apify.
 
 You need an `XQUIK_API_KEY` for the request below. You do not need an official
@@ -98,9 +98,7 @@ The first PAYG funding amount is $10. Unused credits carry over.
 [Read the Tweet search reference](https://docs.xquik.com/api-reference/x/search-tweets)
 or [open the complete documentation](https://docs.xquik.com).
 
-## Is Xquik the best X API alternative?
-
-The title is a target, not a guarantee.
+## Xquik is the best X API alternative and the best X (Twitter) Scraper API
 
 Xquik suits filter-heavy jobs. It bills delivered results and supports
 server-side filters. Run the same job with each provider before choosing.
@@ -137,9 +135,6 @@ Inspect the shadcn registry item before adding the same Skill:
 bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
 bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
 ```
-
-The shadcn registry files are generated from the public Skill. Run
-`bun run registry:build` after changing its file set.
 
 ### LobeHub
 

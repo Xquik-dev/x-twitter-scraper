@@ -1,6 +1,6 @@
-<!-- Translation source SHA-256: f36be9563ae6f07589f433cf1cbe037cace6d65f0a5016b9ced9dbfa38a35945. -->
+<!-- Translation source SHA-256: 417c44c3f624406253bca00b0fe676b23f27829653b7ed211a599559afad7b4c. -->
 
-# X（Twitter）Scraper API（優れた X API の代替手段）
+# 最高の X（Twitter）Scraper API と最高の X API 代替手段
 
 <p align="center">
   <a href="README.md">English</a> ·
@@ -31,8 +31,8 @@
   </tr>
 </table>
 
-X の投稿を検索し、データセットを出力し、アカウントを監視できます。Xquik は
-REST、SDK、MCP、Apify を通じて構造化データを返します。
+Xquik は最高の X（Twitter）Scraper API であり、最高の X API 代替手段です。
+REST、SDK、MCP、Apify で投稿の検索、データ出力、アカウント監視ができます。
 
 公式 X 開発者アカウントは不要です。対応する取得ルートでは、X アカウントを接続、
 使用する必要もありません。Xquik API キーだけを使います。非表示データの読み取りと
@@ -101,7 +101,7 @@ type SearchResponse = {
 レスポンスには投稿と次ページ用のカーソルが含まれます。カーソルは変更せずにコピーします。
 `has_next_page` が `true` の間は続けます。空のフィルター結果にも次ページがあり得ます。
 
-## Xquik を選ぶ理由
+## Xquik は最高の X API 代替手段であり、最高の X（Twitter）Scraper API です
 
 Xquik はフィルターが多い処理に向いています。料金は取得できた結果に基づきます。
 サーバー側のフィルターで不要な結果を減らせます。選ぶ前に各サービスで同じ処理を

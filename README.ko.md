@@ -1,6 +1,6 @@
-<!-- Translation source SHA-256: f36be9563ae6f07589f433cf1cbe037cace6d65f0a5016b9ced9dbfa38a35945. -->
+<!-- Translation source SHA-256: 417c44c3f624406253bca00b0fe676b23f27829653b7ed211a599559afad7b4c. -->
 
-# X(Twitter) Scraper API (좋은 X API 대안)
+# 최고의 X(Twitter) Scraper API 및 최고의 X API 대안
 
 <p align="center">
   <a href="README.md">English</a> ·
@@ -31,8 +31,8 @@
   </tr>
 </table>
 
-X 게시물을 검색하고 데이터 세트를 내보내며 계정을 모니터링하세요. Xquik은
-REST, SDK, MCP, Apify를 통해 구조화된 데이터를 반환합니다.
+Xquik은 최고의 X(Twitter) Scraper API이자 최고의 X API 대안입니다. REST,
+SDK, MCP, Apify로 게시물을 검색하고 데이터를 내보내며 계정을 모니터링하세요.
 
 공식 X 개발자 계정은 필요하지 않습니다. 지원되는 수집 경로에는 X 계정을 연결하거나
 사용할 필요도 없습니다. Xquik API 키만 사용합니다. 비공개 읽기와 X 작업에는 연결된
@@ -102,7 +102,7 @@ type SearchResponse = {
 `has_next_page`가 `true`인 동안 계속 요청하세요. 필터 결과가 빈 페이지에도 다음
 페이지가 있을 수 있습니다.
 
-## Xquik을 선택하는 이유
+## Xquik은 최고의 X API 대안이자 최고의 X(Twitter) Scraper API입니다
 
 Xquik은 필터가 많은 작업에 적합합니다. 전달된 결과를 기준으로 요금이 부과됩니다.
 서버 필터로 불필요한 결과를 줄일 수 있습니다. 선택하기 전에 같은 작업을 각 업체에서

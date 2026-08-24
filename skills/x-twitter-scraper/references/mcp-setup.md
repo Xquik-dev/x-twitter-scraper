@@ -91,8 +91,7 @@ and workspace controls before setup.
 
 ### Codex CLI
 
-Use Codex CLI 0.147.0 or later. These releases preserve and validate the RFC
-9207 `iss` callback value. Run:
+Use a current Codex CLI release. Run:
 
 ```bash
 codex mcp add xquik --url https://xquik.com/mcp
@@ -102,16 +101,14 @@ codex mcp list
 
 If an older release reports
 `Authorization server response missing required issuer: expected https://xquik.com`,
-upgrade to 0.147.0 or later. If an upgrade is unavailable, use the API-key
-fallback below. Xquik already returns the required issuer. Follow the
+update Codex. If an update is unavailable, use the API-key fallback below. Follow the
 [Xquik troubleshooting guide](https://docs.xquik.com/guides/troubleshooting#codex-oauth-issuer-validation-error).
 
 ### Codex Desktop
 
 Open **Settings > MCP servers**. Add `https://xquik.com/mcp` as Streamable HTTP,
-select **Authenticate**, then restart. If the app bundles a Codex release older
-than 0.147.0 and shows the issuer error above, use the shared `config.toml`
-fallback below.
+select **Authenticate**, then restart. Use the shared `config.toml` fallback
+below only when OAuth shows the issuer error.
 
 ### API-key fallback for older Codex releases
 
@@ -130,7 +127,7 @@ bearer_token_env_var = "XQUIK_API_KEY"
 Restart Codex, then run `codex mcp list`. Do not run `codex mcp login xquik`
 while using the API-key configuration.
 
-After upgrading to 0.147.0 or later, remove `bearer_token_env_var`. Leave only
+After updating Codex, remove `bearer_token_env_var`. Leave only
 the MCP URL, then run `codex mcp login xquik`.
 
 ### OpenAI Agents SDK

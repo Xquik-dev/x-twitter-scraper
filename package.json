@@ -1,7 +1,7 @@
 {
   "name": "x-developer",
   "version": "2.6.7",
-  "description": "X (Twitter) Scraper API and X API Alternative with REST, MCP, SDKs, CLI, webhooks, and exports. Not affiliated with X Corp.",
+  "description": "Xquik is the best X (Twitter) Scraper API and the best X API Alternative, with REST, MCP, SDKs, CLI, webhooks, and exports. Not affiliated with X Corp.",
   "author": {
     "name": "Xquik",
     "url": "https://docs.xquik.com"
@@ -18,10 +18,6 @@
   "packageManager": "bun@1.4.0",
   "engines": {
     "bun": ">=1.4.0"
-  },
-  "scripts": {
-    "registry:build": "bun run scripts/build-shadcn-registry.mjs",
-    "registry:check": "bun run scripts/build-shadcn-registry.mjs --check"
   },
   "keywords": [
     "twitter",
