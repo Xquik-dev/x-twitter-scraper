@@ -503,17 +503,6 @@ format. Keep provider claims separate from your own test results.
 
 ## Common questions
 
-### Do I need an official X developer account?
-
-No. Supported scraping uses your Xquik API key. You do not need an official X
-developer account.
-
-### Do I need to connect or use an X account for scraping?
-
-No. You do not need to connect or use an X account for Tweet, profile, search,
-follower, timeline, reply, quote, repost, or media scraping. Private reads and
-X account actions require a connected X account.
-
 ### Do I need proxies, cookies, or browser automation?
 
 No. Your client calls Xquik. Never send X cookies, passwords, or 2FA codes.

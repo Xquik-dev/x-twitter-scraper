@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: a4455cd5e7c9c59fb96e75a57418c4108aeacfa4cab1b39e033b001853956b94. -->
+<!-- Translation source SHA-256: f36be9563ae6f07589f433cf1cbe037cace6d65f0a5016b9ced9dbfa38a35945. -->
 
 # API de scraping de X (Twitter) (mejor alternativa a la API de X)
 
@@ -386,16 +386,10 @@ perfiles, mensajes y enlaces.
 No. Tu cliente llama rutas documentadas de Xquik. No administras proxies,
 tokens de invitado, selectores de página, cookies ni sesiones de X.
 
-### ¿Qué datos de X puedo obtener?
+### ¿Cómo funciona la paginación?
 
-Las rutas compatibles cubren publicaciones, perfiles, cronologías, seguidores,
-respuestas, citas, usuarios que interactuaron, contenido multimedia, listas,
-comunidades, artículos y tendencias regionales.
-
-### ¿Xquik permite monitoreo en tiempo real?
-
-Xquik monitorea cuentas y palabras clave de forma continua. Lee los eventos por
-API o webhooks firmados. No asumas una transmisión sin demora.
+Copia el cursor devuelto tal cual. No lo decodifiques ni lo generes. Continúa
+mientras la respuesta indique otra página. Elimina IDs duplicados al reintentar.
 
 ### ¿Puedo publicar y subir contenido multimedia?
 

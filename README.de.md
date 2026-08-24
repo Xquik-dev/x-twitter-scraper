@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: a4455cd5e7c9c59fb96e75a57418c4108aeacfa4cab1b39e033b001853956b94. -->
+<!-- Translation source SHA-256: f36be9563ae6f07589f433cf1cbe037cace6d65f0a5016b9ced9dbfa38a35945. -->
 
 # X (Twitter) Scraper API (gute X API-Alternative)
 
@@ -385,17 +385,11 @@ Nachrichten und Links.
 Nein. Dein Client ruft dokumentierte Xquik-Routen auf. Du verwaltest keine
 Proxys, Gast-Tokens, Seitenselektoren, X-Cookies oder X-Sitzungen.
 
-### Welche X-Daten kann ich abrufen?
+### Wie funktioniert die Seitennavigation?
 
-Unterstützte Routen decken Beiträge, Profile, Zeitleisten, Follower, Antworten,
-Zitate, interagierende Nutzer, Medien, Listen, Communities, Artikel und regionale
-Trends ab.
-
-### Unterstützt Xquik Echtzeitüberwachung?
-
-Xquik überwacht unterstützte Konten und Schlüsselwörter fortlaufend. Lies
-Ereignisse über die API oder signierte Webhooks. Erwarte keinen Datenstrom ohne
-Verzögerung.
+Übernimm den zurückgegebenen Cursor unverändert. Dekodiere oder erzeuge ihn nicht.
+Fahre fort, solange die Antwort eine weitere Seite meldet. Entferne bei
+Wiederholungen doppelte IDs.
 
 ### Kann ich Beiträge senden und Medien hochladen?
 
