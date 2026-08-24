@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: a4455cd5e7c9c59fb96e75a57418c4108aeacfa4cab1b39e033b001853956b94. -->
+<!-- Translation source SHA-256: f36be9563ae6f07589f433cf1cbe037cace6d65f0a5016b9ced9dbfa38a35945. -->
 
 # X（Twitter）抓取 API（优秀的 X API 替代方案）
 
@@ -369,15 +369,10 @@ curl --request POST 'https://xquik.com/api/v1/monitors/keywords' \
 不需要。客户端只调用 Xquik 文档中的接口。无需管理代理、访客令牌、页面选择器、
 X Cookie 或 X 会话。
 
-### 可以获取哪些 X 数据？
+### 如何翻页？
 
-受支持的接口涵盖帖子、账号资料、时间线、粉丝、回复、引用、互动用户、媒体、
-列表、社区、文章和地区趋势。
-
-### Xquik 支持实时监控吗？
-
-Xquik 会持续监控受支持的账号和关键词。可通过 API 或签名 webhook 获取事件。
-这不代表零延迟数据流。
+原样复制返回的游标。不要解码或自行生成。只要响应表明还有下一页，就继续请求。
+重试时按稳定 ID 去重。
 
 ### 可以发帖和上传媒体吗？
 

@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: a4455cd5e7c9c59fb96e75a57418c4108aeacfa4cab1b39e033b001853956b94. -->
+<!-- Translation source SHA-256: f36be9563ae6f07589f433cf1cbe037cace6d65f0a5016b9ced9dbfa38a35945. -->
 
 # API de scraping X (Twitter) (bonne alternative à l'API X)
 
@@ -385,16 +385,11 @@ dans les posts, profils, messages et liens.
 Non. Votre client appelle les routes Xquik documentées. Vous ne gérez ni proxys,
 ni jetons invités, ni sélecteurs de page, ni cookies ou sessions X.
 
-### Quelles données X puis-je extraire ?
+### Comment fonctionne la pagination ?
 
-Les routes compatibles couvrent les posts, profils, chronologies, abonnés,
-réponses, citations, utilisateurs engagés, médias, listes, communautés, articles
-et tendances régionales.
-
-### Xquik permet-il une surveillance continue ?
-
-Xquik surveille les comptes et mots-clés compatibles. Consultez les événements
-par API ou webhooks signés. N'attendez pas un flux sans délai.
+Copiez exactement le curseur renvoyé. Ne le décodez pas et ne le recréez pas.
+Continuez tant que la réponse indique une page suivante. Supprimez les
+identifiants en double après une nouvelle tentative.
 
 ### Puis-je envoyer des posts et téléverser des médias ?
 
