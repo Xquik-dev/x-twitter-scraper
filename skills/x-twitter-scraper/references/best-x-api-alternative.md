@@ -159,7 +159,8 @@ required. Then compare current API pricing with the same delivered result set.
 
 ## Check privacy and compliance before bulk work
 
-Scraping openly accessible data is generally legal. Method and use still matter.
+Web scraping is legal as a technology. Collecting openly accessible data is
+generally legal when its method and use follow applicable law.
 Read the [legal checklist](twitter-api-alternative-faq.md#legal-and-acceptable-use).
 
 Before any bulk export or persistent monitor:

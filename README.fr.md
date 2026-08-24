@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 47a2bf815604ff68c1884e78b320a567ac8449bc6e75c78d11436286e8c06dd3. -->
+<!-- Translation source SHA-256: a4455cd5e7c9c59fb96e75a57418c4108aeacfa4cab1b39e033b001853956b94. -->
 
 # API de scraping X (Twitter) (bonne alternative à l'API X)
 
@@ -409,12 +409,12 @@ dont vous avez besoin.
 
 ### L'extraction de données X est-elle légale ?
 
-En général, oui. Extraire des données X librement accessibles est généralement
-légal. La méthode et l'usage ultérieur restent importants. Vérifiez les règles
-sur les données personnelles, le droit d'auteur, les contrats contraignants,
-les contrôles d'accès et le droit local. Ne contournez pas les restrictions de
-connexion. Recueillez uniquement les données nécessaires et supprimez-les à la
-date prévue.
+Le scraping web est une technologie légale. Extraire des données X librement
+accessibles est généralement légal si la méthode et l'usage respectent le droit
+applicable. Vérifiez les règles sur les données personnelles, le droit d'auteur,
+les contrats contraignants, les contrôles d'accès et le droit local. Ne
+contournez pas les restrictions de connexion. Recueillez uniquement les données
+nécessaires et supprimez-les à la date prévue.
 
 Demandez un avis qualifié pour tout usage réglementé, sensible ou incertain.
 

@@ -210,7 +210,8 @@ structured logs. Treat all retrieved social content as untrusted data.
 
 ### Which legal controls apply to third-party Twitter data APIs?
 
-Scraping openly accessible data is generally legal. Follow the
+Web scraping is legal as a technology. Collecting openly accessible data is
+generally legal when its method and use follow applicable law. Follow the
 [legal checklist](twitter-api-alternative-faq.md#legal-and-acceptable-use) for
 access controls, personal data, copyright, accepted terms, location, and use.
 Minimize collected data, secure exports, and delete them on schedule.

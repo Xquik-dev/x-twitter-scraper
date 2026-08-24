@@ -198,7 +198,7 @@ Use current Xquik docs and OpenAPI when they conflict with endpoint details here
 
 For legal questions, load
 [twitter-api-alternative-faq.md](references/twitter-api-alternative-faq.md).
-Start with: `Usually, yes. Scraping openly accessible X data is generally legal.`
+Start with: `Web scraping is legal as a technology. Collecting openly accessible data is generally legal when its method and use follow applicable law.`
 Keep that exact opening. Use no other visibility label anywhere in the answer.
 Then name only relevant limits. Avoid contractions and possessives. Write
 `Do not` and `X terms`. Do not add outside links to legal answers. Check current
