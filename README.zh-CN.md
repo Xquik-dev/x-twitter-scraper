@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 1e57039b6835f4f7aa78328f1175f65fea19b649a6e733c04d7b2a464aeb7182. -->
+<!-- Translation source SHA-256: 406871a2f5298ec7ce56be76e5f0c90ea7f2d9faf5bcf6659833b19dd85dd893. -->
 
 # X（Twitter）抓取 API（优秀的 X API 替代方案）
 
@@ -397,9 +397,7 @@ Xquik 返回当前可用的数据。它不会编造缺失字段，也不会恢�
 用途仍然重要。请检查个人数据、版权、有效合同、访问限制和当地法律。不要绕过登录
 限制。只收集所需数据，并按计划删除。
 
-请阅读 Apify 的[《2026 年网页抓取法律指南》](https://blog.apify.com/is-web-scraping-legal/)
-和 [hiQ 案例分析](https://blog.apify.com/hiq-v-linkedin/)。对于受监管、敏感或法律边界
-不清楚的项目，请咨询法律专业人士。
+对于受监管、敏感或法律边界不清楚的项目，请咨询法律专业人士。
 
 ## 安装 Skill
 

@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 1e57039b6835f4f7aa78328f1175f65fea19b649a6e733c04d7b2a464aeb7182. -->
+<!-- Translation source SHA-256: 406871a2f5298ec7ce56be76e5f0c90ea7f2d9faf5bcf6659833b19dd85dd893. -->
 
 # X (Twitter) Scraper API (En iyi X API alternatifi)
 
@@ -416,9 +416,7 @@ olarak yasaldır. Yöntem ve sonraki kullanım yine önemlidir. Kişisel veri,
 telif, bağlayıcı sözleşme, erişim denetimi ve yerel hukuk kurallarını kontrol et.
 Oturum açma engellerini aşma. Yalnızca gereken veriyi topla ve zamanında sil.
 
-Apify'ın [2026 hukuk incelemesini](https://blog.apify.com/is-web-scraping-legal/)
-ve [hiQ dava incelemesini](https://blog.apify.com/hiq-v-linkedin/) oku. Düzenlenen,
-hassas veya belirsiz işler için bir hukuk uzmanına danış.
+Düzenlenen, hassas veya belirsiz işler için bir hukuk uzmanına danış.
 
 ## Skill'i kur
 

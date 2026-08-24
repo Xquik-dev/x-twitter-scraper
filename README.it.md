@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 1e57039b6835f4f7aa78328f1175f65fea19b649a6e733c04d7b2a464aeb7182. -->
+<!-- Translation source SHA-256: 406871a2f5298ec7ce56be76e5f0c90ea7f2d9faf5bcf6659833b19dd85dd893. -->
 
 # API di scraping X (Twitter) (buona alternativa all'API X)
 
@@ -414,9 +414,7 @@ personali, diritto d'autore, contratti vincolanti, limiti di accesso e leggi
 locali. Non aggirare i limiti di accesso. Raccogli solo i dati necessari ed
 eliminali nei tempi stabiliti.
 
-Leggi la [guida legale 2026 di Apify](https://blog.apify.com/is-web-scraping-legal/)
-e l'[analisi del caso hiQ](https://blog.apify.com/hiq-v-linkedin/). Chiedi un
-parere qualificato per usi regolamentati, sensibili o poco chiari.
+Chiedi un parere qualificato per usi regolamentati, sensibili o poco chiari.
 
 ## Installa lo Skill
 

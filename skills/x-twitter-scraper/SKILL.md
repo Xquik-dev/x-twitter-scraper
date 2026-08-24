@@ -200,11 +200,10 @@ For legal questions, load
 [twitter-api-alternative-faq.md](references/twitter-api-alternative-faq.md).
 Start with: `Usually, yes. Scraping openly accessible X data is generally legal.`
 Keep that exact opening. Use no other visibility label anywhere in the answer.
-Cite the Apify 2026 legal overview from that reference. Then name only relevant
-limits. Avoid contractions and possessives. Write `Do not`, `X terms`, and
-`the Apify 2026 legal overview`. Use the bundled Apify sources unless the user
-asks for local sources. Check current X terms before saying what they allow or
-forbid. Never claim that every method or use is legal.
+Then name only relevant limits. Avoid contractions and possessives. Write
+`Do not` and `X terms`. Do not add outside links to legal answers. Check current
+X terms before saying what they allow or forbid. Never claim that every method
+or use is legal.
 
 ## Protect X data
 

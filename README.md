@@ -542,9 +542,7 @@ and later use still matter. Check personal data rules, copyright, binding terms,
 access controls, and local law. Do not bypass login controls. Collect only what
 you need and delete it on schedule.
 
-Read the [Apify 2026 legal overview](https://blog.apify.com/is-web-scraping-legal/)
-and [Apify hiQ case review](https://blog.apify.com/hiq-v-linkedin/). Get
-qualified advice for regulated, sensitive, or unclear work.
+Get qualified advice for regulated, sensitive, or unclear work.
 
 ## SDKs and tools
 

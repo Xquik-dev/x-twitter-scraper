@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 1e57039b6835f4f7aa78328f1175f65fea19b649a6e733c04d7b2a464aeb7182. -->
+<!-- Translation source SHA-256: 406871a2f5298ec7ce56be76e5f0c90ea7f2d9faf5bcf6659833b19dd85dd893. -->
 
 # X（Twitter）Scraper API（優れた X API の代替手段）
 
@@ -408,9 +408,7 @@ Xquik は取得できるデータだけを返します。欠けた項目を作�
 有効な契約、アクセス制限、地域の法律を確認してください。ログイン制限を回避せず、
 必要なデータだけを収集して予定どおり削除してください。
 
-Apify の[2026 年版の法的ガイド](https://blog.apify.com/is-web-scraping-legal/)と
-[hiQ 判例の解説](https://blog.apify.com/hiq-v-linkedin/)を参照してください。規制対象、
-機密性の高い用途、判断が難しい用途では法律の専門家に相談してください。
+規制対象、機密性の高い用途、判断が難しい用途では法律の専門家に相談してください。
 
 ## Skill をインストールする
 
