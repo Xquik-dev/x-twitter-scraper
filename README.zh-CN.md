@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: ecdb0f32884d0848de36218095954d99fc166afe50b12c54ea801a56c2b72eb5. -->
+<!-- Translation source SHA-256: 28943b43ec642bede7fa912a548fef6c85df725e5d336545401335ce93766b03. -->
 
 # 最佳 X（Twitter）抓取 API 与最佳 X API 替代方案
 
@@ -131,9 +131,8 @@ Xquik 适合筛选条件较多的任务。它按交付结果计费。服务端�
 
 ## 软件包与 MCP 合同
 
-`x-developer` 软件包版本为 v2.6.7。托管 MCP 版本为 v2.6.0。实时 OpenAPI
-合同包含 128 个 REST 操作。MCP 提供 120 条目录路由，其中 119 条支持 JSON
-或文本。
+`x-developer` v2.6.7 包含 Skills 和插件元数据。托管 MCP 提供 `docs`、
+`search` 和 `execute`。实时 OpenAPI 合同包含 128 个 REST 操作。
 
 `x-developer` 包含 Skill 和插件。独立的 `x-twitter-scraper` 软件包是
 TypeScript SDK。
@@ -214,6 +213,8 @@ const page = await client.x.tweets.search({
 
 ### MCP
 
+使用以下代码调用 `execute`：
+
 ```js
 async () => xquik.request("/api/v1/x/tweets/search", {
   query: {
@@ -223,7 +224,7 @@ async () => xquik.request("/api/v1/x/tweets/search", {
     replies: "exclude",
     retweets: "exclude",
     quotes: "exclude",
-    limit: 25,
+    limit: 1,
   },
 });
 ```

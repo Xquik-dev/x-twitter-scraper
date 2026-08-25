@@ -189,9 +189,9 @@ Xquik omits unavailable optional fields. It never invents missing content.
 
 ## Package and MCP details
 
-The `x-developer` bundle is v2.6.7. Hosted MCP v2.6.0 exposes 120 catalog
-routes through 2 structured API tools. Of these, 119 support JSON or text.
-Current clients negotiate MCP `2026-07-28` through `server/discover`.
+`x-developer` v2.6.7 bundles Skills and plugin metadata. Hosted MCP exposes
+`docs`, `search`, and `execute`. Current clients negotiate MCP `2026-07-28`
+through `server/discover`.
 
 The live OpenAPI currently documents 128 REST API operations. The package `x-developer` contains this Skill and plugin bundle. The separate `x-twitter-scraper` package is the TypeScript SDK.
 
@@ -286,7 +286,7 @@ the same resource layout. See all [SDKs and tools](#sdks-and-tools).
 
 ### MCP
 
-Connect your MCP client to `https://xquik.com/mcp`. Then call:
+Connect your MCP client to `https://xquik.com/mcp`. Call `execute` with this code:
 
 ```js
 async () => xquik.request("/api/v1/x/tweets/search", {
@@ -297,7 +297,7 @@ async () => xquik.request("/api/v1/x/tweets/search", {
     replies: "exclude",
     retweets: "exclude",
     quotes: "exclude",
-    limit: 25,
+    limit: 1,
   },
 });
 ```

@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: ecdb0f32884d0848de36218095954d99fc166afe50b12c54ea801a56c2b72eb5. -->
+<!-- Translation source SHA-256: 28943b43ec642bede7fa912a548fef6c85df725e5d336545401335ce93766b03. -->
 
 # 최고의 X(Twitter) Scraper API 및 최고의 X API 대안
 
@@ -135,9 +135,9 @@ X 고유 계약이 필요하면 공식 X API가 알맞습니다. HTML만 필요�
 
 ## 패키지와 MCP 계약
 
-`x-developer` 패키지는 v2.6.7입니다. 호스팅 MCP는 v2.6.0입니다. 실시간
-OpenAPI 계약에는 128개 REST 작업이 있습니다. MCP는 120개 경로를 제공하며,
-그중 119개가 JSON 또는 텍스트를 지원합니다.
+`x-developer` v2.6.7에는 Skills와 플러그인 메타데이터가 포함됩니다. 호스팅
+MCP는 `docs`, `search`, `execute`를 제공합니다. 실시간 OpenAPI 계약에는
+128개 REST 작업이 있습니다.
 
 `x-developer`에는 Skill과 플러그인이 들어 있습니다. 별도
 `x-twitter-scraper` 패키지는 TypeScript SDK입니다.
@@ -218,6 +218,8 @@ const page = await client.x.tweets.search({
 
 ### MCP
 
+다음 코드로 `execute`를 호출하세요.
+
 ```js
 async () => xquik.request("/api/v1/x/tweets/search", {
   query: {
@@ -227,7 +229,7 @@ async () => xquik.request("/api/v1/x/tweets/search", {
     replies: "exclude",
     retweets: "exclude",
     quotes: "exclude",
-    limit: 25,
+    limit: 1,
   },
 });
 ```

@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: ecdb0f32884d0848de36218095954d99fc166afe50b12c54ea801a56c2b72eb5. -->
+<!-- Translation source SHA-256: 28943b43ec642bede7fa912a548fef6c85df725e5d336545401335ce93766b03. -->
 
 # En iyi X (Twitter) Scraper API ve en iyi X API alternatifi
 
@@ -136,9 +136,9 @@ gerekiyorsa genel bir scraper seç.
 
 ## Paket ve MCP sözleşmesi
 
-`x-developer` paketi v2.6.7 sürümünde. Barındırılan MCP v2.6.0 sürümünde. Canlı
-OpenAPI sözleşmesinde 128 REST işlemi var. MCP 120 rota sunuyor. Bunların 119'u
-JSON veya metin destekliyor.
+`x-developer` v2.6.7, Skill'leri ve eklenti meta verilerini içerir. Barındırılan
+MCP; `docs`, `search` ve `execute` araçlarını sunar. Canlı OpenAPI sözleşmesinde
+128 REST işlemi var.
 
 `x-developer`, Skill ve eklenti paketidir. Ayrı `x-twitter-scraper` paketi
 TypeScript SDK'sıdır.
@@ -219,6 +219,8 @@ const page = await client.x.tweets.search({
 
 ### MCP
 
+`execute` aracını şu kodla çağır:
+
 ```js
 async () => xquik.request("/api/v1/x/tweets/search", {
   query: {
@@ -228,7 +230,7 @@ async () => xquik.request("/api/v1/x/tweets/search", {
     replies: "exclude",
     retweets: "exclude",
     quotes: "exclude",
-    limit: 25,
+    limit: 1,
   },
 });
 ```

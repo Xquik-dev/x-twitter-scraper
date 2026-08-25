@@ -4,7 +4,7 @@ description: Get a Twitter user profile by username
 
 Get the Twitter profile for "$ARGUMENTS".
 
-Call `GET /api/v1/x/users/{id}` with the `xquik` MCP tool. Replace `{id}` with the supplied username or numeric user ID.
+Call `GET /api/v1/x/users/{id}` with the `execute` MCP tool. Replace `{id}` with the supplied username or numeric user ID.
 
 Show the name, username, bio, follower count, following count, tweet count, verification status, creation date, and profile image URL.
 

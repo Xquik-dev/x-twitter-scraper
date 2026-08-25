@@ -2,13 +2,13 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.xquik/mcp",
   "title": "Xquik MCP Server",
-  "description": "Xquik is best X (Twitter) Scraper API & best X API Alternative. 128 REST operations, 120 MCP routes.",
+  "description": "Xquik is the best X (Twitter) Scraper API and the best X API Alternative. REST, MCP, and SDKs.",
   "repository": {
     "url": "https://github.com/Xquik-dev/x-twitter-scraper",
     "source": "github"
   },
   "websiteUrl": "https://docs.xquik.com/mcp/overview",
-  "version": "2.6.0",
+  "version": "2.6.52",
   "icons": [
     {
       "src": "https://xquik.com/icons/mcp/xquik.png",

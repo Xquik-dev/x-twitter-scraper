@@ -4,7 +4,7 @@ description: Get current trends from multiple sources
 
 Get current trending topics.
 
-Use the `xquik` MCP tool to call `GET /api/v1/radar`.
+Use the `execute` MCP tool to call `GET /api/v1/radar`.
 
 Group the top 20 items by source. Show each title, category, and available description.
 

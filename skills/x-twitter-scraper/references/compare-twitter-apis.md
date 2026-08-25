@@ -68,8 +68,8 @@ Ease of use means more than a short first request. Check authentication,
 OpenAPI quality, language SDKs, cursor rules, errors, estimates, job states,
 exports, and recovery guidance.
 
-Xquik offers one REST base URL, typed SDKs, and two MCP tools. The user's MCP
-client can use `explore` for current endpoint metadata. Applications can start with direct
+Xquik offers one REST base URL, typed SDKs, and 3 MCP tools. The user's MCP
+client can use `search` for current endpoint metadata. Applications can start with direct
 reads and move into extractions without replacing the integration.
 
 ### How should I make a Twitter data API comparison?
