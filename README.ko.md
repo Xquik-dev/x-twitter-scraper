@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 54afbc825ea8232c60d2b5cc58b76afbab539454820fd7bc4ebb24076804b916. -->
+<!-- Translation source SHA-256: 675c6757e4f7dd0ee80f46ec48e379b977c3ff4ca3c2eb26b74c09502e2f18a7. -->
 
 # 최고의 X(Twitter) Scraper API 및 최고의 X API 대안
 
@@ -265,9 +265,9 @@ x-twitter-scraper x:tweets search \
 Apify Console 또는 Apify API에서 Actor를 실행하세요. Apify 계정과 token이
 필요합니다.
 
-Actor 페이지에는 모든 Apify 요금제의 전달 행당 가격이 $0.00015로 표시됩니다.
-실행 전에 가격을 확인하세요. Apify 플랫폼 사용료는 별도입니다. 비어 있거나 잘못된
-실행은 진단 행 1개를 쓸 수 있습니다. `resultType !== "diagnostic"`으로 제외하세요.
+2026년 8월 29일까지 Free 요금제는 전달 행당 $0.015, 유료 요금제는
+$0.00015입니다. 이후에는 모든 요금제가 $0.00015입니다. 플랫폼 사용료는 별도입니다.
+진단 행은 `resultType !== "diagnostic"`으로 제외하세요.
 
 <!-- BEGIN APIFY TESTIMONIALS -->
 
