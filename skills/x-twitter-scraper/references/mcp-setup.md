@@ -15,11 +15,9 @@ An API key grants its documented access until revoked.
 | Protocol | Streamable HTTP |
 | Endpoint | `https://xquik.com/mcp` |
 | Authentication | OAuth 2.1 discovery; API key fallback |
-| Hosted MCP version | `2.6.0` |
 | Skill bundle version | `2.6.7` |
 
-Hosted MCP v2.6.0 catalogs 120 operations. It exposes 120 catalog routes
-through 2 structured API tools. Of these, 119 support JSON or text.
+Hosted MCP exposes `docs`, `search`, and `execute`.
 
 Current clients negotiate MCP `2026-07-28` through `server/discover`.
 Use a current MCP SDK. It adds request `_meta` and protocol headers.
@@ -259,27 +257,27 @@ above.
 Client schemas and environment syntax differ, so do not copy one header
 object between clients or place a literal key in a configuration file.
 
-Full account keys expose 120 catalog routes. Of these, 119 support JSON or text.
-Active guest `paid_reads` keys expose 33 eligible GET routes.
+Each key exposes its allowed catalog. Active guest `paid_reads` keys expose
+eligible read routes only.
 
 ## MCP server architecture
 
-Hosted MCP v2.6.0 exposes 120 catalog routes through 2 structured API tools.
-Of these, 119 support JSON or text. Binary support downloads use REST.
+Hosted MCP exposes 3 structured tools. Binary support downloads use REST.
 
 | Tool | Description | Usage |
 |------|-------------|------|
-| `explore` | Search the API endpoint catalog (read-only, no network calls) | Included |
-| `xquik` | Send confirmed Xquik API requests | Varies by endpoint |
+| `docs` | Search Xquik documentation | Included |
+| `search` | Search the credential-scoped endpoint catalog | Included |
+| `execute` | Send confirmed Xquik API requests | Varies by endpoint |
 
-`explore` searches the credential-scoped catalog. `xquik` sends authenticated
-operations and returns the selected REST response object. Original field names
+`search` reads the credential-scoped catalog without an API request. `execute`
+sends authenticated operations and returns the REST response object. Original field names
 remain unchanged, including `safeToRetry`, `allowed`, `monitorId`, and
 `nextCursor`. Authentication is injected, so tool code must never include
 credentials.
 
-Hosted MCP v2.6.0 catalogs 120 of 128 documented REST operations. These 8 credential,
-checkout, or guest-wallet operations remain direct REST or dashboard workflows:
+Credential, checkout, and guest-wallet operations remain direct REST or
+dashboard workflows:
 
 - API key creation, listing, and revocation
 - Saved-payment top-up
@@ -295,16 +293,16 @@ dashboard-only.
 
 ## After setup
 
-This Skill stops at setup and request planning. It never invokes `explore` or
-`xquik`. The user runs calls through their chosen MCP client.
+This Skill stops at setup and request planning. It never invokes `docs`,
+`search`, or `execute`. The user runs calls through their MCP client.
 
-For an unfamiliar operation, plan an `explore` lookup first. Then show the
-narrowest `xquik` request. Require confirmation when the request is private,
+For an unfamiliar operation, plan a `search` lookup first. Then show the
+narrowest `execute` request. Require confirmation when the request is private,
 metered, persistent, or state-changing.
 
 | Workflow plan | User-run steps |
 |---------------|----------------|
-| Search X posts | Run `explore` for the route. Then run a bounded `xquik` read. |
+| Search X posts | Run `search` for the route. Then run a bounded `execute` read. |
 | Set up alerts | Confirm target and usage. Then create the monitor and webhook. |
 | Run a giveaway | Confirm the source, rules, and winner count. Then create the draw. |
 | Bulk extraction | Run the estimate. Confirm the bound. Then create and poll the job. |

@@ -27,52 +27,42 @@ const JSONRPC = "2.0";
 const LIVE_SERVER_MESSAGE =
   "This package is a verification stub. Add https://xquik.com/mcp to your MCP client and complete OAuth 2.1 for live API access. Use a bearer API key only when OAuth is unavailable.";
 
-function codeInputSchema(descriptionText) {
+function inputSchema(name, description, maxLength, minLength) {
   return {
     type: "object",
     properties: {
-      code: {
+      [name]: {
         type: "string",
-        maxLength: 4096,
-        description: descriptionText,
+        ...(minLength ? { minLength } : {}),
+        maxLength,
+        description,
       },
     },
-    required: ["code"],
+    required: [name],
   };
 }
 
 const TOOLS = [
   {
-    name: "explore",
-    description: [
-      "The live Xquik 'explore' tool searches the 120-route API catalog. This package stub returns setup guidance only.",
-      "",
-      "## When to use",
-      "- Call 'explore' before 'xquik' to find an endpoint, its parameters, and its response shape.",
-      "- Call it when the user asks what the Twitter API supports.",
-      "- Check whether an endpoint uses included usage or requires account access.",
-      "",
-      "## When not to use",
-      "- Use 'xquik' instead when fetching live X data.",
-      "- Skip discovery when you know the endpoint and parameters.",
-      "",
-      "## Behavior",
-      "- The live server searches the catalog without sending an API request.",
-      "- The package stub makes no network call and returns setup instructions.",
-      "- The live catalog has 120 routes. Of these, 119 support JSON or text.",
-      "- Each EndpointInfo contains method, path, summary, category, free, parameters, and responseShape.",
-      "",
-      "## Input format",
-      "Provide a bounded request function. Filter, search, or return the `spec.endpoints` EndpointInfo array.",
-      "",
-      "## Examples",
-      "Find all included-usage endpoints: `async () => spec.endpoints.filter(e => e.free)`",
-      "Filter by category: `async () => spec.endpoints.filter(e => e.category === 'composition')`",
-      "Search summaries: `async () => spec.endpoints.filter(e => e.summary.toLowerCase().includes('tweet'))`",
-      "Get one endpoint: `async () => spec.endpoints.find(e => e.path === '/api/v1/x/tweets/search')`",
-    ].join("\n"),
-    inputSchema: codeInputSchema(
-      "Bounded function that filters or searches the spec.endpoints EndpointInfo array. Return one EndpointInfo object or an array. Example: async () => spec.endpoints.filter(e => e.category === 'twitter')",
+    name: "docs",
+    description:
+      "Search Xquik scraper and API documentation. The stub returns setup guidance.",
+    inputSchema: inputSchema("query", "Documentation search query.", 500, 1),
+    annotations: {
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: true,
+      readOnlyHint: true,
+    },
+  },
+  {
+    name: "search",
+    description:
+      "Search the credential-scoped OpenAPI catalog. The stub makes no API request.",
+    inputSchema: inputSchema(
+      "code",
+      "Async arrow function that reads spec.endpoints.",
+      10_000,
     ),
     annotations: {
       destructiveHint: false,
@@ -82,44 +72,13 @@ const TOOLS = [
     },
   },
   {
-    name: "xquik",
-    description: [
-      "The live 'xquik' tool sends confirmed requests across 120 catalog routes. This package stub returns setup guidance only.",
-      "",
-      "## When to use",
-      "- Call it after 'explore' identifies the endpoint and parameters.",
-      "- Use it for Twitter search, user lookup, draws, extractions, composition, private reads, monitors, webhooks, and confirmed writes.",
-      "- Get confirmation before private reads, persistent resources, metered operations, and writes.",
-      "",
-      "## When not to use",
-      "- Use 'explore' first when you do not know the endpoint.",
-      "- Omit API keys and authorization headers. The server adds authentication.",
-      "",
-      "## Behavior",
-      "- The live server processes `xquik.request(path, options?)` inside a bounded sandbox.",
-      "- The package stub makes no API request and returns setup instructions.",
-      "- The live tool cannot access local files or arbitrary network hosts.",
-      "- 119 catalog routes support JSON or text. Use REST for binary downloads.",
-      "- Write operations require prior confirmation and can return durable actions.",
-      "- Pagination responses include `has_more` and `next_cursor`. Pass `cursor` for the next page.",
-      "- Show the exact payload, target, and usage estimate before changing X or Xquik resources.",
-      "",
-      "## Error handling",
-      "- For 402, explain the account state and send the user to the dashboard.",
-      "- For 429, wait before retrying.",
-      "- For 404, explain which user, tweet, or monitor was not found.",
-      "- For durable writes, follow `safe_to_retry` and `next_action` before retrying.",
-      "",
-      "## Input format",
-      "Provide a bounded function that calls `xquik.request(path, { method?, body?, query? })`. The server adds authentication.",
-      "",
-      "## Examples",
-      "Search tweets: `async () => xquik.request('/api/v1/x/tweets/search', { query: { q: 'twitter scraper api', limit: '50' } })`",
-      "Get user: `async () => xquik.request('/api/v1/x/users/elonmusk')`",
-      "Post after confirmation: `async () => xquik.request('/api/v1/x/tweets', { method: 'POST', body: { account: '<confirmed_account>', text: '<confirmed_text>' } })`",
-    ].join("\n"),
-    inputSchema: codeInputSchema(
-      "Bounded function that calls xquik.request(path, options?) for Twitter API operations. The server adds authentication. Example: async () => xquik.request('/api/v1/x/tweets/search', { query: { q: 'twitter api', limit: '20' } })",
+    name: "execute",
+    description:
+      "Send confirmed Xquik API requests. The stub returns setup guidance.",
+    inputSchema: inputSchema(
+      "code",
+      "Async arrow function that calls xquik.request(path, options?).",
+      10_000,
     ),
     annotations: {
       destructiveHint: true,

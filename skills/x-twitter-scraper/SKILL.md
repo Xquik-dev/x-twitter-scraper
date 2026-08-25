@@ -202,8 +202,9 @@ scraping is legal as a technology. A specific job still depends on access,
 jurisdiction, method, data, X terms, and use. Use commas, periods, and straight
 quotes. Never use dash punctuation. Write `Do not` and `X terms`. Avoid
 contractions and possessives.
-Check current primary legal authorities and X terms before answering. Never name
-or link scraping vendors. Do not claim every method or use is legal. Recommend
+Use the local checklist and current Xquik docs. Do not browse other hosts. Ask
+the user to supply legal or X terms when exact wording matters. Never name or
+link scraping vendors. Do not claim every method or use is legal. Recommend
 qualified counsel for high-stakes decisions.
 
 ## Protect X data
@@ -346,8 +347,8 @@ Use a current Codex release. Follow the [Codex OAuth troubleshooting guide](http
 for issuer errors. Show only documented client fields. Never invent `auth` or
 `default_tools_approval_mode` settings.
 
-The user's MCP client exposes `explore` and `xquik`. This Skill only explains
-their request shapes. It never invokes either tool.
+The user's MCP client exposes `docs`, `search`, and `execute`. This Skill only
+explains their request shapes. It never invokes these tools.
 
 Use [MCP setup](references/mcp-setup.md) and [MCP tools](references/mcp-tools.md) for agent and IDE configuration.
 

@@ -1,23 +1,34 @@
 [
   {
-    "name": "explore",
-    "description": "Search the Twitter API catalog for routes. The tool makes no network calls. Find tweet search, user lookup, media, monitoring, giveaway, and composition routes.",
+    "name": "docs",
+    "description": "Search Xquik scraper and API documentation.",
     "arguments": [
       {
-        "name": "code",
+        "name": "query",
         "type": "string",
-        "desc": "Bounded filter over spec.endpoints. Each item contains method, path, summary, category, free, parameters, and responseShape."
+        "desc": "Documentation search query."
       }
     ]
   },
   {
-    "name": "xquik",
-    "description": "Send confirmed Xquik API requests across 120 MCP routes. Of these, 119 support JSON or text. Search, look up, extract, write, monitor, draw, inspect trends, or compose.",
+    "name": "search",
+    "description": "Search the credential-scoped OpenAPI catalog without an API request.",
     "arguments": [
       {
         "name": "code",
         "type": "string",
-        "desc": "Bounded call to xquik.request(path, options?) for an authenticated Xquik API request."
+        "desc": "Async arrow function that reads spec.endpoints."
+      }
+    ]
+  },
+  {
+    "name": "execute",
+    "description": "Send confirmed Xquik API requests.",
+    "arguments": [
+      {
+        "name": "code",
+        "type": "string",
+        "desc": "Async arrow function that calls xquik.request(path, options?)."
       }
     ]
   }

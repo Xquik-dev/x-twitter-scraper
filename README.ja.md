@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: ecdb0f32884d0848de36218095954d99fc166afe50b12c54ea801a56c2b72eb5. -->
+<!-- Translation source SHA-256: 28943b43ec642bede7fa912a548fef6c85df725e5d336545401335ce93766b03. -->
 
 # 最高の X（Twitter）Scraper API と最高の X API 代替手段
 
@@ -134,9 +134,9 @@ X 固有の契約が必要なら公式 X API が向きます。HTML だけなら
 
 ## パッケージと MCP の契約
 
-`x-developer` パッケージは v2.6.7 です。ホスト型 MCP は v2.6.0 です。
-ライブ OpenAPI は 128 の REST 操作を定義します。MCP は 120 ルートを掲載し、
-そのうち 119 が JSON またはテキストに対応します。
+`x-developer` v2.6.7 には Skills とプラグインのメタデータが含まれます。
+ホスト型 MCP は `docs`、`search`、`execute` を提供します。ライブ OpenAPI は
+128 の REST 操作を定義します。
 
 `x-developer` は Skill とプラグインのバンドルです。別の
 `x-twitter-scraper` パッケージが TypeScript SDK です。
@@ -217,6 +217,8 @@ const page = await client.x.tweets.search({
 
 ### MCP
 
+次のコードで `execute` を呼び出します。
+
 ```js
 async () => xquik.request("/api/v1/x/tweets/search", {
   query: {
@@ -226,7 +228,7 @@ async () => xquik.request("/api/v1/x/tweets/search", {
     replies: "exclude",
     retweets: "exclude",
     quotes: "exclude",
-    limit: 25,
+    limit: 1,
   },
 });
 ```

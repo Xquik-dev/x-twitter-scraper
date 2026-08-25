@@ -5,7 +5,7 @@
     "email": "support@xquik.com"
   },
   "metadata": {
-    "description": "Xquik is the best X (Twitter) Scraper API and the best X API Alternative, with 128 REST operations and 120 MCP routes. Not affiliated with X Corp.",
+    "description": "Xquik is the best X (Twitter) Scraper API and the best X API Alternative, with REST, MCP, SDKs, webhooks, and exports. Not affiliated with X Corp.",
     "version": "2.6.7"
   },
   "plugins": [

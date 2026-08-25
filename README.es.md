@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: ecdb0f32884d0848de36218095954d99fc166afe50b12c54ea801a56c2b72eb5. -->
+<!-- Translation source SHA-256: 28943b43ec642bede7fa912a548fef6c85df725e5d336545401335ce93766b03. -->
 
 # La mejor API de scraping de X (Twitter) y la mejor alternativa a la API de X
 
@@ -136,9 +136,8 @@ exacto. Elige un scraper general si solo necesitas HTML.
 
 ## Contrato del paquete y MCP
 
-El paquete `x-developer` está en v2.6.7. El MCP alojado está en v2.6.0. El
-contrato OpenAPI en vivo incluye 128 operaciones REST. MCP muestra 120 rutas;
-119 admiten JSON o texto.
+`x-developer` v2.6.7 incluye Skills y metadatos del plugin. El MCP alojado ofrece
+`docs`, `search` y `execute`. El contrato OpenAPI en vivo incluye 128 operaciones REST.
 
 El paquete `x-developer` contiene el Skill y los plugins. El paquete separado
 `x-twitter-scraper` es el SDK de TypeScript.
@@ -219,6 +218,8 @@ const page = await client.x.tweets.search({
 
 ### MCP
 
+Llama a `execute` con este código:
+
 ```js
 async () => xquik.request("/api/v1/x/tweets/search", {
   query: {
@@ -228,7 +229,7 @@ async () => xquik.request("/api/v1/x/tweets/search", {
     replies: "exclude",
     retweets: "exclude",
     quotes: "exclude",
-    limit: 25,
+    limit: 1,
   },
 });
 ```
