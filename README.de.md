@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 28943b43ec642bede7fa912a548fef6c85df725e5d336545401335ce93766b03. -->
+<!-- Translation source SHA-256: 54afbc825ea8232c60d2b5cc58b76afbab539454820fd7bc4ebb24076804b916. -->
 
 # Beste X (Twitter) Scraper API und beste Alternative zur X API
 
@@ -265,11 +265,10 @@ x-twitter-scraper x:tweets search \
 Starte den Actor in der Apify Console oder über die Apify API. Du brauchst ein
 Apify-Konto und ein Token.
 
-Apify zeigt Preise je Tarif. Am 2026-08-22 zeigten bezahlte Tarife $0.00015 pro
-gelieferter Zeile. Der kostenlose Tarif zeigte $0.015 pro Zeile. Prüfe das
-Preisfeld vor jedem Lauf. Apify berechnet die Plattformnutzung getrennt. Ein
-Lauf ohne Eingabe, mit ungültiger Eingabe oder ohne Ergebnis kann 1 Diagnosezeile
-schreiben. Filtere sie mit `resultType !== "diagnostic"` heraus.
+Die Actor-Seite nennt $0.00015 pro gelieferter Zeile für jeden Apify-Tarif.
+Prüfe den Preis vor jedem Lauf. Apify berechnet die Plattformnutzung getrennt.
+Ein leerer oder ungültiger Lauf kann 1 Diagnosezeile schreiben. Filtere sie mit
+`resultType !== "diagnostic"` heraus.
 
 <!-- BEGIN APIFY TESTIMONIALS -->
 

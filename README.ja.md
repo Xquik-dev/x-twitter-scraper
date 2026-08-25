@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 28943b43ec642bede7fa912a548fef6c85df725e5d336545401335ce93766b03. -->
+<!-- Translation source SHA-256: 54afbc825ea8232c60d2b5cc58b76afbab539454820fd7bc4ebb24076804b916. -->
 
 # 最高の X（Twitter）Scraper API と最高の X API 代替手段
 
@@ -264,10 +264,9 @@ x-twitter-scraper x:tweets search \
 Actor は Apify Console または Apify API から実行できます。Apify のアカウントと
 token が必要です。
 
-Apify はプラン別に価格を表示します。2026-08-22 時点では、有料プランは配信行ごとに
-$0.00015、無料プランは行ごとに $0.015 と表示されました。実行前に価格欄を確認して
-ください。Apify のプラットフォーム利用料は別途発生します。入力なし、無効な入力、
-結果なしの実行では、診断行が 1 行書き込まれる場合があります。
+Actor ページでは、すべての Apify プランが配信行ごとに $0.00015 と表示されます。
+実行前に価格を確認してください。Apify のプラットフォーム利用料は別途発生します。
+空または無効な実行では、診断行が 1 行書き込まれる場合があります。
 `resultType !== "diagnostic"` で除外してください。
 
 <!-- BEGIN APIFY TESTIMONIALS -->

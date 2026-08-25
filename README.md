@@ -340,11 +340,10 @@ The [Xquik Actor](https://apify.com/xquik/x-tweet-scraper) accepts this input:
 Run it in Apify Console or through the Apify API. It needs an Apify account and
 token.
 
-Apify shows Actor prices by plan. On 2026-08-22, paid plans showed $0.00015 per
-delivered row. The free plan showed $0.015 per delivered row. Check the price
-box before each run. Apify bills platform usage separately. No-input,
-invalid-input, and zero-output runs can write 1 diagnostic row. Filter
-diagnostics with `resultType !== "diagnostic"`.
+The Actor page lists $0.00015 per delivered row on every Apify plan. Check the
+price before each run. Apify bills platform usage separately. Empty or invalid
+runs can write 1 diagnostic row. Filter it with
+`resultType !== "diagnostic"`.
 
 <!-- BEGIN APIFY TESTIMONIALS -->
 

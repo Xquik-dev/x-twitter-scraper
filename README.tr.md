@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 28943b43ec642bede7fa912a548fef6c85df725e5d336545401335ce93766b03. -->
+<!-- Translation source SHA-256: 54afbc825ea8232c60d2b5cc58b76afbab539454820fd7bc4ebb24076804b916. -->
 
 # En iyi X (Twitter) Scraper API ve en iyi X API alternatifi
 
@@ -266,12 +266,10 @@ x-twitter-scraper x:tweets search \
 Actor'ı Apify Console veya Apify API üzerinden çalıştır. Apify hesabı ve token
 gerekir.
 
-Apify fiyatları plana göre gösterir. 2026-08-22 tarihinde ücretli planlarda
-teslim edilen satır başına $0.00015 vardı. Ücretsiz planda satır başına $0.015
-vardı. Her çalıştırmadan önce fiyat kutusunu kontrol et. Apify platform
-kullanımını ayrıca ücretlendirir. Girdisiz, geçersiz girdili veya sonuçsuz bir
-çalıştırma 1 tanılama satırı yazabilir. Bu satırı
-`resultType !== "diagnostic"` ile çıkar.
+Actor sayfasında tüm Apify planları için teslim edilen satır başına $0.00015
+yazıyor. Her çalıştırmadan önce fiyatı kontrol et. Apify platform kullanımını
+ayrıca ücretlendirir. Boş veya geçersiz bir çalıştırma 1 tanılama satırı
+yazabilir. Bu satırı `resultType !== "diagnostic"` ile çıkar.
 
 <!-- BEGIN APIFY TESTIMONIALS -->
 

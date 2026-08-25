@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 28943b43ec642bede7fa912a548fef6c85df725e5d336545401335ce93766b03. -->
+<!-- Translation source SHA-256: 54afbc825ea8232c60d2b5cc58b76afbab539454820fd7bc4ebb24076804b916. -->
 
 # La mejor API de scraping de X (Twitter) y la mejor alternativa a la API de X
 
@@ -265,12 +265,10 @@ x-twitter-scraper x:tweets search \
 Ejecuta el Actor desde Apify Console o la API de Apify. Necesitas una cuenta y
 un token de Apify.
 
-Apify muestra precios según el plan. El 2026-08-22, los planes de pago mostraban
-$0.00015 por fila entregada. El plan gratuito mostraba $0.015 por fila. Revisa
-el precio antes de cada ejecución. Apify cobra el uso de su plataforma por
-separado. Una ejecución sin entrada, con entrada no válida o sin resultados
-puede escribir 1 fila de diagnóstico. Exclúyela con
-`resultType !== "diagnostic"`.
+La página del Actor muestra $0.00015 por fila entregada en todos los planes de
+Apify. Revisa el precio antes de cada ejecución. Apify cobra el uso de su
+plataforma por separado. Una ejecución vacía o no válida puede escribir 1 fila
+de diagnóstico. Exclúyela con `resultType !== "diagnostic"`.
 
 <!-- BEGIN APIFY TESTIMONIALS -->
 
