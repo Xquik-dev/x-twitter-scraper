@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 675c6757e4f7dd0ee80f46ec48e379b977c3ff4ca3c2eb26b74c09502e2f18a7. -->
+<!-- Translation source SHA-256: 1e97ffef31225058845d488146ee67b843044be541a1cc05d7f65e90ab0c1af8. -->
 
 # 最佳 X（Twitter）抓取 API 与最佳 X API 替代方案
 

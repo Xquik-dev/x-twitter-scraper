@@ -337,8 +337,7 @@ The [Xquik Actor](https://apify.com/xquik/x-tweet-scraper) accepts this input:
 }
 ```
 
-Run it in Apify Console or through the Apify API. It needs an Apify account and
-token.
+Run it in Apify Console or its API with an Apify account and token.
 
 Until August 29, 2026, the Apify Free plan costs $0.015 per delivered row. Paid
 plans cost $0.00015. Then every plan costs $0.00015. Platform use is separate.

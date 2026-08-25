@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 675c6757e4f7dd0ee80f46ec48e379b977c3ff4ca3c2eb26b74c09502e2f18a7. -->
+<!-- Translation source SHA-256: 1e97ffef31225058845d488146ee67b843044be541a1cc05d7f65e90ab0c1af8. -->
 
 # Beste X (Twitter) Scraper API und beste Alternative zur X API
 
@@ -262,8 +262,7 @@ x-twitter-scraper x:tweets search \
 }
 ```
 
-Starte den Actor in der Apify Console oder über die Apify API. Du brauchst ein
-Apify-Konto und ein Token.
+Starte den Actor mit Apify-Konto und Token in Apify Console oder über die API.
 
 Bis zum 29. August 2026 kostet der Free-Tarif $0.015 pro gelieferter Zeile.
 Bezahlte Tarife kosten $0.00015. Danach kosten alle $0.00015. Die Plattformnutzung

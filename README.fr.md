@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 675c6757e4f7dd0ee80f46ec48e379b977c3ff4ca3c2eb26b74c09502e2f18a7. -->
+<!-- Translation source SHA-256: 1e97ffef31225058845d488146ee67b843044be541a1cc05d7f65e90ab0c1af8. -->
 
 # Meilleure API de scraping X (Twitter) et meilleure alternative à l'API X
 
@@ -264,8 +264,7 @@ x-twitter-scraper x:tweets search \
 }
 ```
 
-Lancez l'Actor dans Apify Console ou avec l'API Apify. Il faut un compte Apify
-et un token.
+Lancez l'Actor dans Apify Console ou son API avec un compte et un token Apify.
 
 Jusqu'au 29 août 2026, l'offre Free coûte $0.015 par ligne livrée. Les offres
 payantes coûtent $0.00015. Ensuite, toutes coûteront $0.00015. L'utilisation de
