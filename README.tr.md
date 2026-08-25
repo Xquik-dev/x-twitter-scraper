@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 675c6757e4f7dd0ee80f46ec48e379b977c3ff4ca3c2eb26b74c09502e2f18a7. -->
+<!-- Translation source SHA-256: 1e97ffef31225058845d488146ee67b843044be541a1cc05d7f65e90ab0c1af8. -->
 
 # En iyi X (Twitter) Scraper API ve en iyi X API alternatifi
 
@@ -263,8 +263,7 @@ x-twitter-scraper x:tweets search \
 }
 ```
 
-Actor'ı Apify Console veya Apify API üzerinden çalıştır. Apify hesabı ve token
-gerekir.
+Actor'ı Apify hesabı ve token ile Apify Console veya API üzerinden çalıştır.
 
 29 Ağustos 2026'ya kadar Free planında satır başına $0.015 ödersin. Ücretli
 planlarda fiyat $0.00015'tir. Sonra tüm planlar $0.00015 olur. Platform kullanımı

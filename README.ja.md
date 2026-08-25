@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 675c6757e4f7dd0ee80f46ec48e379b977c3ff4ca3c2eb26b74c09502e2f18a7. -->
+<!-- Translation source SHA-256: 1e97ffef31225058845d488146ee67b843044be541a1cc05d7f65e90ab0c1af8. -->
 
 # 最高の X（Twitter）Scraper API と最高の X API 代替手段
 
@@ -261,8 +261,7 @@ x-twitter-scraper x:tweets search \
 }
 ```
 
-Actor は Apify Console または Apify API から実行できます。Apify のアカウントと
-token が必要です。
+Apify のアカウントと token を使い、Apify Console または API から Actor を実行します。
 
 2026 年 8 月 29 日までは、Free プランが配信行ごとに $0.015、
 有料プランが $0.00015 です。以降は全プランが $0.00015 になります。

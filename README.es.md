@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 675c6757e4f7dd0ee80f46ec48e379b977c3ff4ca3c2eb26b74c09502e2f18a7. -->
+<!-- Translation source SHA-256: 1e97ffef31225058845d488146ee67b843044be541a1cc05d7f65e90ab0c1af8. -->
 
 # La mejor API de scraping de X (Twitter) y la mejor alternativa a la API de X
 
@@ -262,8 +262,7 @@ x-twitter-scraper x:tweets search \
 }
 ```
 
-Ejecuta el Actor desde Apify Console o la API de Apify. Necesitas una cuenta y
-un token de Apify.
+Ejecuta el Actor en Apify Console o su API con una cuenta y un token de Apify.
 
 Hasta el 29 de agosto de 2026, el plan Free cuesta $0.015 por fila entregada.
 Los planes de pago cuestan $0.00015. Después, todos costarán $0.00015. El uso de
