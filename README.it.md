@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 54afbc825ea8232c60d2b5cc58b76afbab539454820fd7bc4ebb24076804b916. -->
+<!-- Translation source SHA-256: 675c6757e4f7dd0ee80f46ec48e379b977c3ff4ca3c2eb26b74c09502e2f18a7. -->
 
 # Migliore API di scraping X (Twitter) e migliore alternativa all'API X
 
@@ -264,10 +264,9 @@ x-twitter-scraper x:tweets search \
 Esegui l'Actor da Apify Console o tramite l'API Apify. Servono un account Apify
 e un token.
 
-La pagina dell'Actor indica $0.00015 per riga consegnata per ogni piano Apify.
-Controlla il prezzo prima di ogni esecuzione. Apify addebita separatamente l'uso
-della piattaforma. Un'esecuzione vuota o non valida può scrivere 1 riga
-diagnostica. Escludila con `resultType !== "diagnostic"`.
+Fino al 29 agosto 2026, il piano Free costa $0.015 per riga consegnata. I piani
+a pagamento costano $0.00015. Poi tutti costeranno $0.00015. L'uso della
+piattaforma è separato. Escludi le righe diagnostiche con `resultType !== "diagnostic"`.
 
 <!-- BEGIN APIFY TESTIMONIALS -->
 

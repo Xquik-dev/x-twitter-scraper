@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 54afbc825ea8232c60d2b5cc58b76afbab539454820fd7bc4ebb24076804b916. -->
+<!-- Translation source SHA-256: 675c6757e4f7dd0ee80f46ec48e379b977c3ff4ca3c2eb26b74c09502e2f18a7. -->
 
 # 最佳 X（Twitter）抓取 API 与最佳 X API 替代方案
 
@@ -259,9 +259,9 @@ x-twitter-scraper x:tweets search \
 
 可在 Apify Console 或 Apify API 中运行 Actor。需要 Apify 账号和 token。
 
-Actor 页面显示，所有 Apify 方案每交付一行均为 $0.00015。每次运行前都要
-查看价格。Apify 会另收平台使用费。空运行或无效运行可能写入 1 行诊断数据。
-请用 `resultType !== "diagnostic"` 将其排除。
+2026 年 8 月 29 日前，Free 方案每交付一行收费 $0.015，付费方案收费
+$0.00015。之后所有方案均为 $0.00015。平台使用费另计。请用
+`resultType !== "diagnostic"` 排除诊断行。
 
 <!-- BEGIN APIFY TESTIMONIALS -->
 

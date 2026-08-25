@@ -340,10 +340,9 @@ The [Xquik Actor](https://apify.com/xquik/x-tweet-scraper) accepts this input:
 Run it in Apify Console or through the Apify API. It needs an Apify account and
 token.
 
-The Actor page lists $0.00015 per delivered row on every Apify plan. Check the
-price before each run. Apify bills platform usage separately. Empty or invalid
-runs can write 1 diagnostic row. Filter it with
-`resultType !== "diagnostic"`.
+Until August 29, 2026, the Apify Free plan costs $0.015 per delivered row. Paid
+plans cost $0.00015. Then every plan costs $0.00015. Platform use is separate.
+Filter diagnostic rows with `resultType !== "diagnostic"`.
 
 <!-- BEGIN APIFY TESTIMONIALS -->
 
