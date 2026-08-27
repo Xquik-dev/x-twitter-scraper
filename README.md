@@ -138,11 +138,12 @@ bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
 
 ### LobeHub
 
-Use LobeHub CLI 0.0.48 or later. Sign in, install both Skills, then confirm them:
+Use LobeHub CLI 0.0.48 or later. Sign in, install the Skills, then confirm them:
 
 ```bash
 lh login
 lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/x-twitter-scraper
+lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-mcp
 lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-social-research
 lh skill list --source market
 ```
@@ -159,8 +160,8 @@ codex plugin list
 
 ### Gemini CLI
 
-Review the repository and both Skill files before consenting to installation.
-Then install and confirm both Skills:
+Review the repository and its Skill files before consenting to installation.
+Then install and confirm the Skills:
 
 ```bash
 gemini skills install https://github.com/Xquik-dev/x-twitter-scraper.git \
@@ -168,7 +169,7 @@ gemini skills install https://github.com/Xquik-dev/x-twitter-scraper.git \
 gemini skills list
 ```
 
-The command discovers `x-twitter-scraper` and `xquik-social-research`.
+The command discovers `x-twitter-scraper`, `xquik-mcp`, and `xquik-social-research`.
 
 ## Xquik API resource coverage
 
@@ -303,7 +304,7 @@ async () => xquik.request("/api/v1/x/tweets/search", {
 ```
 
 MCP responses use normalized `snake_case` fields. Use REST for binary support
-downloads. Read the [MCP setup guide](skills/x-twitter-scraper/references/mcp-setup.md).
+downloads. Read the [MCP setup guide](skills/xquik-mcp/references/mcp-setup.md).
 
 ### CLI
 

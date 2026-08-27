@@ -421,11 +421,12 @@ bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
 
 ### LobeHub
 
-Accedi a LobeHub. Installa e verifica entrambi gli Skill:
+Accedi a LobeHub. Installa e verifica gli Skill:
 
 ```bash
 lh login
 lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/x-twitter-scraper
+lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-mcp
 lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-social-research
 lh skill list --source market
 ```
@@ -442,7 +443,7 @@ codex plugin list
 
 ### Gemini CLI
 
-Controlla il repository. Poi installa e verifica entrambi gli Skill:
+Controlla il repository. Poi installa e verifica gli Skill:
 
 ```bash
 gemini skills install https://github.com/Xquik-dev/x-twitter-scraper.git \

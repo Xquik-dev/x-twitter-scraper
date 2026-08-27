@@ -412,6 +412,7 @@ bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
 ```bash
 lh login
 lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/x-twitter-scraper
+lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-mcp
 lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-social-research
 lh skill list --source market
 ```
@@ -428,7 +429,7 @@ codex plugin list
 
 ### Gemini CLI
 
-先检查仓库，再安装并确认两个 Skill：
+先检查仓库，再安装并确认 Skill：
 
 ```bash
 gemini skills install https://github.com/Xquik-dev/x-twitter-scraper.git \

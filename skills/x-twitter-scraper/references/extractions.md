@@ -366,5 +366,3 @@ Same body as create. Response:
 
 If `allowed` is `false`, do not create the extraction. The current balance does
 not cover the estimate.
-
-For common mistakes and tool selection rules, see [mcp-tools.md](mcp-tools.md#common-mistakes).
