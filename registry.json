@@ -155,16 +155,6 @@
           "target": "~/.agents/skills/x-twitter-scraper/references/extractions.md"
         },
         {
-          "path": "skills/x-twitter-scraper/references/mcp-setup.md",
-          "type": "registry:file",
-          "target": "~/.agents/skills/x-twitter-scraper/references/mcp-setup.md"
-        },
-        {
-          "path": "skills/x-twitter-scraper/references/mcp-tools.md",
-          "type": "registry:file",
-          "target": "~/.agents/skills/x-twitter-scraper/references/mcp-tools.md"
-        },
-        {
           "path": "skills/x-twitter-scraper/references/monitor-twitter-webhooks.md",
           "type": "registry:file",
           "target": "~/.agents/skills/x-twitter-scraper/references/monitor-twitter-webhooks.md"

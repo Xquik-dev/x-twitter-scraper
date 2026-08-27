@@ -422,6 +422,7 @@ LobeHub에 로그인하고 두 Skill을 설치한 뒤 확인하세요.
 ```bash
 lh login
 lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/x-twitter-scraper
+lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-mcp
 lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-social-research
 lh skill list --source market
 ```
@@ -438,7 +439,7 @@ codex plugin list
 
 ### Gemini CLI
 
-저장소를 확인한 뒤 두 Skill을 설치하고 확인하세요.
+저장소를 확인한 뒤 Skill을 설치하고 확인하세요.
 
 ```bash
 gemini skills install https://github.com/Xquik-dev/x-twitter-scraper.git \
