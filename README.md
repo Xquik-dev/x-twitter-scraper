@@ -553,12 +553,6 @@ Get qualified advice for regulated, sensitive, or unclear work.
 - [112-question X API guide](skills/x-twitter-scraper/references/twitter-api-alternative-faq.md)
 - [Security guidance](skills/x-twitter-scraper/references/security.md)
 
-## Contract date
-
-The README was checked against the live OpenAPI and docs on 2026-08-23. The
-live OpenAPI contained 128 HTTP operations. Recheck volatile prices, limits,
-versions, and counts before relying on them.
-
 ## License
 
 MIT
