@@ -132,6 +132,7 @@ prima di eseguirlo.
 | `isNoteTweet`          | Se si tratta di un Note Tweet (post lungo)                        |
 | `isQuoteStatus`        | Se questo tweet cita un altro tweet                               |
 | `isRetweet`            | Se questa riga è un retweet, con l'originale allegato             |
+| `isPinned`             | Se l'autore ha fissato questo post, righe piatte                  |
 | `isReply`              | Se questo tweet è una risposta                                    |
 | `quoted_tweet`         | Oggetto del tweet citato (se è una citazione)                     |
 | `conversationId`       | ID del thread/conversazione                                       |

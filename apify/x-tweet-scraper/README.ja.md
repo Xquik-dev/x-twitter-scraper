@@ -107,6 +107,7 @@ Apifyの
 | `isNoteTweet`          | Note Tweet（長文ポスト）かどうか                              |
 | `isQuoteStatus`        | このポストが他のポストを引用しているかどうか                   |
 | `isRetweet`            | この行がリポストかどうか、元のポスト付き                      |
+| `isPinned`             | 作者が固定した投稿かどうか、フラット行のみ                     |
 | `isReply`              | このポストがリプライかどうか                                  |
 | `quoted_tweet`         | 引用元ポストのオブジェクト（引用ポストの場合）                  |
 | `conversationId`       | スレッド/会話ID                                              |

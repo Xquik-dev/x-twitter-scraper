@@ -132,6 +132,7 @@ veri kümesi görünümü vardır. Her görev gerçek bir arama veya hedefle aç
 | `isNoteTweet`            | Bunun bir Note Tweet (uzun biçimli gönderi) olup olmadığı      |
 | `isQuoteStatus`          | Bu tweet'in başka bir tweet'i alıntılayıp alıntılamadığı       |
 | `isRetweet`              | Bu satırın retweet olup olmadığı, orijinali ekli               |
+| `isPinned`               | Yazar bu gönderiyi sabitledi mi, düz satırlar                  |
 | `isReply`                | Bu tweet'in bir yanıt olup olmadığı                            |
 | `quoted_tweet`           | Alıntılanan tweet nesnesi (alıntı tweet ise)                   |
 | `conversationId`         | Thread/konuşma ID'si                                           |

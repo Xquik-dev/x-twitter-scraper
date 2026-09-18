@@ -134,6 +134,7 @@ une cible réelle. Modifiez-la avant de l'exécuter.
 | `isNoteTweet`              | Indique s'il s'agit d'un Note Tweet (post long format)             |
 | `isQuoteStatus`            | Indique si ce tweet cite un autre tweet                            |
 | `isRetweet`                | Indique si cette ligne est un retweet, original joint              |
+| `isPinned`                 | Si l'auteur a épinglé ce post, lignes plates                       |
 | `isReply`                  | Indique si ce tweet est une réponse                                |
 | `quoted_tweet`             | Objet tweet cité (si c'est une citation)                           |
 | `conversationId`           | ID de thread / conversation                                        |

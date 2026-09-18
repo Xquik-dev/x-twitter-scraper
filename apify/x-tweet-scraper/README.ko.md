@@ -122,6 +122,7 @@ Apify의 [빌드 태그](https://docs.apify.com/platform/actors/development/buil
 | `isNoteTweet`           | 노트 트윗(장문 게시물) 여부                                  |
 | `isQuoteStatus`         | 다른 트윗을 인용하는지 여부                                  |
 | `isRetweet`             | 이 행이 리트윗인지 여부, 원본 첨부                           |
+| `isPinned`              | 작성자가 고정한 게시물인지 여부, 플랫 행                        |
 | `isReply`               | 답글인지 여부                                                |
 | `quoted_tweet`          | 인용된 트윗 객체(인용 트윗인 경우)                           |
 | `conversationId`        | 스레드/대화 ID                                               |

@@ -122,6 +122,7 @@ view. Every task opens with a real search or target. Edit it before running.
 | `isNoteTweet`          | Whether this is a Note Tweet (long-form post)            |
 | `isQuoteStatus`        | Whether this tweet quotes another tweet                  |
 | `isRetweet`            | Whether this row is a retweet, original attached         |
+| `isPinned`             | Whether the author pinned this post, flat rows           |
 | `isReply`              | Whether this tweet is a reply                            |
 | `quoted_tweet`         | Quoted tweet object (if quote tweet)                     |
 | `conversationId`       | Thread/conversation ID                                   |

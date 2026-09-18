@@ -118,6 +118,7 @@ Apify 不会将固定的构建编号重定向到 `latest`。请将固定编号�
 | `isNoteTweet`          | 是否为 Note Tweet（长篇帖子）                                    |
 | `isQuoteStatus`        | 该推文是否引用了另一条推文                                        |
 | `isRetweet`            | 该行是否为转推，并附带原帖                                      |
+| `isPinned`             | 作者是否置顶此帖，仅扁平行                                      |
 | `isReply`              | 该推文是否为回复                                                |
 | `quoted_tweet`         | 被引用的推文对象（若为引用推文）                                    |
 | `conversationId`       | 推文串/对话 ID                                                 |

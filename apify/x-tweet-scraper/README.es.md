@@ -132,6 +132,7 @@ real. Edítala antes de ejecutar.
 | `isNoteTweet`          | Si es un Note Tweet (publicación larga)                            |
 | `isQuoteStatus`        | Si este tuit cita otro tuit                                        |
 | `isRetweet`            | Si esta fila es un retuit, con el original adjunto                 |
+| `isPinned`             | Si el autor fijó esta publicación, filas planas                    |
 | `isReply`              | Si este tuit es una respuesta                                      |
 | `quoted_tweet`         | Objeto del tuit citado (si es un tuit cita)                        |
 | `conversationId`       | ID del hilo o conversación                                         |

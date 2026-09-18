@@ -130,6 +130,7 @@ einem echten Ziel. Bearbeite ihn vor dem Ausführen.
 | `isNoteTweet`              | Ob es sich um einen Note Tweet (Langform-Beitrag) handelt           |
 | `isQuoteStatus`            | Ob dieser Tweet einen anderen Tweet zitiert                         |
 | `isRetweet`                | Ob dieser Datensatz ein Retweet ist, Original angehängt             |
+| `isPinned`                 | Ob der Autor diesen Beitrag angeheftet hat, flache Zeilen           |
 | `isReply`                  | Ob dieser Tweet eine Antwort ist                                    |
 | `quoted_tweet`             | Zitiertes Tweet-Objekt (bei Zitat-Tweet)                            |
 | `conversationId`           | Thread-/Konversations-ID                                            |
