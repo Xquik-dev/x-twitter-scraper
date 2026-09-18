@@ -10,8 +10,6 @@
   <a href="README.it.md">Italiano</a>
 </p>
 
-# X Tweet Sentiment Analysis with AI | $0.3/1K Tweets
-
 <table align="center"><tr><td align="center">
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer 将 Xquik MCP 连接到编程 agent"></a><br>
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何搭配 Claude Code、Codex、Cursor 等使用 Xquik 抓取工具，从 6:07 开始。</a>
@@ -22,8 +20,10 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有�
 Apify Actor 都在过滤或去重之前就收费。Xquik 只为交付的、唯一的、符合过滤条件
 的结果收费。
 
+AI 费用已包含在每条推文的价格中。你无需向 AI 提供商付费、无需购买 token，也无需自带密钥。
+
 衡量 X（Twitter）帖子背后的态度，并保留原始推文数据。
-**X Tweet Sentiment Analysis with AI** 收集匹配的推文，然后为每条帖子添加
+**X Tweet Sentiment Analysis** 收集匹配的推文，然后为每条帖子添加
 AI 驱动的情感类别、强度等级与讽刺概率。追踪一次发布、一场活动、一集节目或
 一位公众人物引发的反应，把强烈反应从随口提及中区分出来。
 
@@ -60,6 +60,8 @@ AI 驱动的情感类别、强度等级与讽刺概率。追踪一次发布、�
 判断帖子的主要主题。
 
 ## 定价
+
+AI 费用已包含在每条推文的价格中。你无需向 AI 提供商付费、无需购买 token，也无需自带密钥。
 
 每成功分析一条推文起价 $0.0003，无起步费用。收集费用已包含在内，文档化的
 分析额度为 8 个问题、每个问题定义 8,000 字节、每条推文 12,000 字节上下文。
@@ -187,16 +189,16 @@ store 中的免费诊断信息会说明无效输入、缺失结果与中断的�
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader)：从帖子
   或主页提取或存储照片、视频与 GIF，提供 MP4 与元数据选项。当你需要媒体
   文件本身时使用。每个媒体行起价 $0.00015。
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)：
+- [X (Twitter) Brand Monitoring](https://apify.com/xquik/x-twitter-brand-monitoring)：
   以 AI 相关性、情感与客户体验答案追踪品牌提及，并比较不同运行。当你要
   长期观察一个品牌时使用。每条已分析推文起价 $0.0003。
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)：
+- [X (Twitter) Stock & Crypto Signal](https://apify.com/xquik/x-twitter-stock-crypto-signals)：
   用 AI 标注看涨、看跌、中性或混合立场、内容类型、信念强度与资产相关性。
   当你要关注股票、加密货币或交易讨论时使用。每条已分析推文起价 $0.0003。
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)：
+- [X (Twitter) News Monitor with AI](https://apify.com/xquik/x-twitter-news-monitor)：
   用 AI 按形式、来源归属与话题相关性标注新闻帖子。当你要把报道与评论区分
   开时使用。每条已分析推文起价 $0.0003。
-- [X (Twitter) Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)：
+- [X Tweet Classifier with AI](https://apify.com/xquik/x-twitter-tweet-classifier)：
   用 AI 为每条推文回答你自己定义的类别、分数与是否问题。当预设分析不适合
   你的标签体系时使用。每条已分析推文起价 $0.0003。
 

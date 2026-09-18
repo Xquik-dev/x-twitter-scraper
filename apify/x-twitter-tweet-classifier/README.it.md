@@ -10,8 +10,6 @@
   <strong>Italiano</strong>
 </p>
 
-# X (Twitter) Tweet Classifier with AI Analysis | $0.3/1K Tweets
-
 <table align="center"><tr><td align="center">
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer collega Xquik MCP agli agenti di coding"></a><br>
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Guarda come Framer usa gli scraper Xquik con Claude Code, Codex, Cursor e altri, dal minuto 6:07.</a>
@@ -23,8 +21,10 @@ etichette, punteggi e domande sì/no su ogni tweet. Ogni altro Actor Apify
 addebita i costi prima di filtrare o deduplicare. Xquik addebita solo i
 risultati consegnati, unici e conformi ai filtri.
 
+I costi dell'IA sono inclusi nel prezzo per tweet. Non paghi alcun provider di IA, non compri token & non porti alcuna chiave.
+
 Classifica i post X (Twitter) con le tue domande e mantieni i dati originali
-del tweet. **X (Twitter) Tweet Classifier with AI Analysis** raccoglie i
+del tweet. **X Tweet Classifier with AI** raccoglie i
 tweet corrispondenti, poi risponde a 1-8 domande tipizzate per post:
 categorie per lo smistamento del supporto clienti, punteggi per la
 prioritizzazione e probabilità per la pertinenza. I preset coprono
@@ -88,6 +88,8 @@ accetta valori da 1 a 16. Ogni definizione di domanda resta entro una soglia
 di 8.000 byte.
 
 ## Prezzi
+
+I costi dell'IA sono inclusi nel prezzo per tweet. Non paghi alcun provider di IA, non compri token & non porti alcuna chiave.
 
 Da $0.0003 per tweet analizzato con successo, senza costo iniziale. La
 raccolta è inclusa e la soglia documentata per l'analisi è di 8 domande,
@@ -245,20 +247,20 @@ bisogno.
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader): Estrae o
   archivia foto, video e GIF da post o profili con opzioni MP4 e metadati.
   Usalo quando ti servono i file media stessi. Da $0.00015 per riga media.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
+- [X (Twitter) Brand Monitoring](https://apify.com/xquik/x-twitter-brand-monitoring):
   Monitora le menzioni del brand con pertinenza, sentiment e risposte sulla
   customer experience generate dall'IA e confronta le esecuzioni. Usalo
   quando segui un brand nel tempo. Da $0.0003 per tweet analizzato.
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
+- [X Tweet Sentiment Analysis](https://apify.com/xquik/x-tweet-sentiment-analysis):
   Etichetta atteggiamento, intensità e probabilità di sarcasmo per ogni tweet
   con l'IA. Usalo quando ti serve un sentiment generale su qualsiasi
   argomento. Da $0.0003 per tweet analizzato.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
+- [X (Twitter) Stock & Crypto Signal](https://apify.com/xquik/x-twitter-stock-crypto-signals):
   Etichetta posizione rialzista, ribassista, neutra o mista, tipo di
   contenuto, convinzione e pertinenza dell'asset con l'IA. Usalo quando segui
   azioni, criptovalute o discussioni di trading. Da $0.0003 per tweet
   analizzato.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
+- [X (Twitter) News Monitor with AI](https://apify.com/xquik/x-twitter-news-monitor):
   Etichetta i post di notizie per formato, attribuzione della fonte e
   pertinenza dell'argomento con l'IA. Usalo quando separi il giornalismo dal
   commento. Da $0.0003 per tweet analizzato.

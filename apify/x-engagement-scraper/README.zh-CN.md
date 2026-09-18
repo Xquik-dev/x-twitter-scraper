@@ -10,8 +10,6 @@
   <a href="README.it.md">Italiano</a>
 </p>
 
-# X Engagement Scraper | $0.00015/Row | Pay-Per-Result
-
 <table align="center"><tr><td align="center">
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer 将 Xquik MCP 连接到编码 Agent"></a><br>
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何将 Xquik 抓取工具与 Claude Code、Codex、Cursor 等一起使用，从 6:07 开始。</a>
@@ -123,18 +121,18 @@ Xquik 是独立的第三方服务，与 X Corp 无关联。"Twitter" 与 "X" 是
   X Article，包含封面、作者、日期与指标。适合需要文章正文而非推文的场景。起价每篇文章 $0.00015。
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader)：从帖子或主页中提取或存储照片、
   视频与 GIF，提供 MP4 与元数据选项。适合需要媒体文件本身的场景。起价每条媒体行 $0.00015。
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)：
+- [X (Twitter) Brand Monitoring](https://apify.com/xquik/x-twitter-brand-monitoring)：
   通过 AI 相关性、情感与客户体验回答追踪品牌提及，并对比多次运行结果。适合持续关注品牌动态的场景。
   起价每条分析推文 $0.0003。
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)：通过 AI
+- [X Tweet Sentiment Analysis](https://apify.com/xquik/x-tweet-sentiment-analysis)：通过 AI
   为每条推文标注态度、强度与讽刺概率。适合需要对任意话题进行通用情感分析的场景。
   起价每条分析推文 $0.0003。
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)：
+- [X (Twitter) Stock & Crypto Signal](https://apify.com/xquik/x-twitter-stock-crypto-signals)：
   通过 AI 标注看涨、看跌、中性或混合立场、内容类型、信心程度与资产相关性。适合关注股票、加密货币
   或交易讨论的场景。起价每条分析推文 $0.0003。
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)：通过 AI
+- [X (Twitter) News Monitor with AI](https://apify.com/xquik/x-twitter-news-monitor)：通过 AI
   按格式、来源归属与话题相关性标注新闻类帖子。适合区分报道与评论的场景。
   起价每条分析推文 $0.0003。
-- [X (Twitter) Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)：
+- [X Tweet Classifier with AI](https://apify.com/xquik/x-twitter-tweet-classifier)：
   通过 AI 为每条推文回答你自定义的分类、评分与是非问题。适合预设分析无法满足你自定义标签需求的场景。
   起价每条分析推文 $0.0003。

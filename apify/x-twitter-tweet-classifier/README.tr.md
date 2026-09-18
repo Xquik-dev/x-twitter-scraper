@@ -10,8 +10,6 @@
   <a href="README.it.md">Italiano</a>
 </p>
 
-# X (Twitter) Tweet Classifier with AI Analysis | $0.3/1K Tweets
-
 <table align="center"><tr><td align="center">
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer, Xquik MCP'yi kodlama ajanlarına bağlıyor"></a><br>
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Framer'ın Xquik scraper'larını Claude Code, Codex, Cursor ve daha fazlasıyla nasıl kullandığını 6:07'den itibaren izle.</a>
@@ -23,8 +21,10 @@ etiketlerini, puanlarını ve evet/hayır sorularını yanıtlar. Diğer tüm Ap
 Actor'ları filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca
 teslim edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
 
+Yapay zekâ maliyetleri tweet başına fiyata dahil. Yapay zekâ sağlayıcısına ödeme yapmazsın, token almazsın & anahtar getirmezsin.
+
 X (Twitter) gönderilerini kendi sorularınla sınıflandır ve orijinal tweet
-verisini sakla. **X (Twitter) Tweet Classifier with AI Analysis**, eşleşen
+verisini sakla. **X Tweet Classifier with AI**, eşleşen
 tweet'leri toplar, ardından gönderi başına 1-8 tipli soruyu yanıtlar: destek
 önceliklendirmesi için kategoriler, önceliklendirme için puanlar ve ilgi
 için olasılıklar. Hazır ayarlar marka izleme, şikayetler, rakipler, satın
@@ -88,6 +88,8 @@ aşırı büyük bağlamı atlar. `concurrency` varsayılan olarak 4'tür ve 1 i
 kalır.
 
 ## Fiyatlandırma
+
+Yapay zekâ maliyetleri tweet başına fiyata dahil. Yapay zekâ sağlayıcısına ödeme yapmazsın, token almazsın & anahtar getirmezsin.
 
 Başlangıç ücreti olmadan, başarıyla analiz edilen tweet başına $0.0003'ten
 başlar. Toplama dahildir ve belgelenen analiz ödeneği 8 soru, soru tanımı
@@ -247,20 +249,20 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   veya profillerden fotoğrafları, videoları ve GIF'leri MP4 ve metadata
   seçenekleriyle çıkarır veya depolar. Medya dosyalarının kendisine ihtiyacın
   olduğunda kullan. Medya satırı başına $0.00015'ten başlar.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
+- [X (Twitter) Brand Monitoring](https://apify.com/xquik/x-twitter-brand-monitoring):
   Yapay zeka destekli ilgi, duygu durumu ve müşteri deneyimi yanıtlarıyla marka
   bahsedilmelerini izler ve çalıştırmaları karşılaştırır. Bir markayı zaman
   içinde takip ettiğinde kullan. Analiz edilen tweet başına $0.0003'ten başlar.
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
+- [X Tweet Sentiment Analysis](https://apify.com/xquik/x-tweet-sentiment-analysis):
   Yapay zeka ile her tweet için tutum, yoğunluk ve alaycılık olasılığını
   etiketler. Herhangi bir konuda genel duygu durumuna ihtiyacın olduğunda
   kullan. Analiz edilen tweet başına $0.0003'ten başlar.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
+- [X (Twitter) Stock & Crypto Signal](https://apify.com/xquik/x-twitter-stock-crypto-signals):
   Yapay zeka ile yükseliş, düşüş, nötr veya karışık duruşu, içerik türünü,
   kesinliği ve varlık ilgisini etiketler. Hisse senedi, kripto veya alım satım
   konuşmalarını takip ettiğinde kullan. Analiz edilen tweet başına $0.0003'ten
   başlar.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
+- [X (Twitter) News Monitor with AI](https://apify.com/xquik/x-twitter-news-monitor):
   Yapay zeka ile haber gönderilerini biçim, kaynak atfı ve konu ilgisine göre
   etiketler. Haberi yorumdan ayırdığında kullan. Analiz edilen tweet başına
   $0.0003'ten başlar.

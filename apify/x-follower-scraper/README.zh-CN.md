@@ -360,11 +360,11 @@ Store 运行使用 Actor 的 `latest` 构建配置。API 客户端应省略构�
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper)：按地点抓取实时趋势，包含排名、热度、查询词和 WOEID。适合追踪各地正在流行的话题。每条趋势低至 $0.00015。
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper)：以 Markdown 和文本形式抓取长篇 X Articles，包含封面、作者、日期和指标数据。适合需要获取文章正文而非推文的场景。每篇文章低至 $0.00015。
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader)：从帖子或主页提取或存储照片、视频和 GIF，提供 MP4 和元数据选项。适合需要获取媒体文件本身的场景。每条媒体记录低至 $0.00015。
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)：跟踪品牌提及，提供 AI 相关性、情感和客户体验方面的回答，并比较各次运行结果。适合长期观察某个品牌的场景。每条已分析推文低至 $0.0003。
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)：使用 AI 为每条推文标注态度、强度和讽刺概率。适合需要针对任意主题获取整体情感的场景。每条已分析推文低至 $0.0003。
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)：使用 AI 标注看涨、看跌、中性或混合立场、内容类型、信心程度和资产相关性。适合关注股票、加密货币或交易讨论的场景。每条已分析推文低至 $0.0003。
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)：使用 AI 按格式、来源归属和主题相关性标注新闻类帖子。适合将报道内容与评论区分开的场景。每条已分析推文低至 $0.0003。
-- [X (Twitter) Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)：使用 AI 为每条推文回答你自定义的分类、评分和是/否问题。适合预设分析无法满足你的标签需求的场景。每条已分析推文低至 $0.0003。
+- [X (Twitter) Brand Monitoring](https://apify.com/xquik/x-twitter-brand-monitoring)：跟踪品牌提及，提供 AI 相关性、情感和客户体验方面的回答，并比较各次运行结果。适合长期观察某个品牌的场景。每条已分析推文低至 $0.0003。
+- [X Tweet Sentiment Analysis](https://apify.com/xquik/x-tweet-sentiment-analysis)：使用 AI 为每条推文标注态度、强度和讽刺概率。适合需要针对任意主题获取整体情感的场景。每条已分析推文低至 $0.0003。
+- [X (Twitter) Stock & Crypto Signal](https://apify.com/xquik/x-twitter-stock-crypto-signals)：使用 AI 标注看涨、看跌、中性或混合立场、内容类型、信心程度和资产相关性。适合关注股票、加密货币或交易讨论的场景。每条已分析推文低至 $0.0003。
+- [X (Twitter) News Monitor with AI](https://apify.com/xquik/x-twitter-news-monitor)：使用 AI 按格式、来源归属和主题相关性标注新闻类帖子。适合将报道内容与评论区分开的场景。每条已分析推文低至 $0.0003。
+- [X Tweet Classifier with AI](https://apify.com/xquik/x-twitter-tweet-classifier)：使用 AI 为每条推文回答你自定义的分类、评分和是/否问题。适合预设分析无法满足你的标签需求的场景。每条已分析推文低至 $0.0003。
 
 ## 需要抓取以外的功能？
 

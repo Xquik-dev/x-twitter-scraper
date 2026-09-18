@@ -10,8 +10,6 @@
   <a href="README.it.md">Italiano</a>
 </p>
 
-# X (Twitter) Brand Monitoring with AI Analysis | $0.3/1K Tweets
-
 <table align="center"><tr><td align="center">
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer verbindet Xquik MCP mit Coding-Agents"></a><br>
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Sieh dir an, wie Framer Xquik-Scraper mit Claude Code, Codex, Cursor und mehr nutzt, ab Minute 6:07.</a>
@@ -23,8 +21,10 @@ Markenerwähnungen mit Relevanz, Sentiment & Antworten zur Kundenerfahrung.
 Jeder andere Apify Actor berechnet, bevor gefiltert oder dedupliziert wird.
 Xquik berechnet nur für gelieferte, eindeutige, filterkonforme Ergebnisse.
 
+Die KI-Kosten sind im Preis pro Tweet enthalten. Du bezahlst keinen KI-Anbieter, kaufst keine Tokens & bringst keinen Schlüssel mit.
+
 Verfolge Markenerwähnungen auf X (Twitter) & beobachte Sentiment-Änderungen
-zwischen Runs. **X (Twitter) Brand Monitoring with AI Analysis** sammelt
+zwischen Runs. **X (Twitter) Brand Monitoring** sammelt
 jeden passenden Tweet, ergänzt jeden Beitrag um KI-gestützte Relevanz-,
 Sentiment- & Kundenerfahrungs-Antworten, & vergleicht die Antworten mit
 einem früheren Dataset, damit du siehst, was sich geändert hat.
@@ -122,6 +122,8 @@ Tweet-IDs, Ladefehler & sich ändernde Dataset-Größen stoppen den Vergleich
 vor der Erfassung; sie werden nie zu einer leeren Baseline.
 
 ## Preise
+
+Die KI-Kosten sind im Preis pro Tweet enthalten. Du bezahlst keinen KI-Anbieter, kaufst keine Tokens & bringst keinen Schlüssel mit.
 
 Ab $0.0003 pro erfolgreich analysiertem Tweet, ohne Startgebühr. Die
 Erfassung ist enthalten, & das dokumentierte Analyse-Kontingent umfasst 8
@@ -272,20 +274,20 @@ Abrechnung & Diagnosen. Wähle den, der zu deinen Daten passt.
   Extrahiert oder speichert Fotos, Videos & GIFs aus Beiträgen oder Profilen
   mit MP4- & Metadaten-Optionen. Nutze ihn, wenn du die Mediendateien selbst
   brauchst. Ab $0.00015 pro Medien-Datensatz.
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
+- [X Tweet Sentiment Analysis](https://apify.com/xquik/x-tweet-sentiment-analysis):
   Kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden
   Tweet mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema
   brauchst. Ab $0.0003 pro analysiertem Tweet.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
+- [X (Twitter) Stock & Crypto Signal](https://apify.com/xquik/x-twitter-stock-crypto-signals):
   Kennzeichnet bullische, bärische, neutrale oder gemischte Haltung,
   Inhaltstyp, Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du
   Aktien, Krypto oder Trading-Talk verfolgst. Ab $0.0003 pro analysiertem
   Tweet.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
+- [X (Twitter) News Monitor with AI](https://apify.com/xquik/x-twitter-news-monitor):
   Kennzeichnet News-Beiträge nach Format, Quellenangabe & Themenrelevanz mit
   KI. Nutze ihn, wenn du Berichterstattung von Kommentaren trennst. Ab
   $0.0003 pro analysiertem Tweet.
-- [X (Twitter) Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
+- [X Tweet Classifier with AI](https://apify.com/xquik/x-twitter-tweet-classifier):
   Beantwortet deine eigenen Kategorie-, Score- & Ja/Nein-Fragen für jeden
   Tweet mit KI. Nutze ihn, wenn die vorgefertigten Analysen nicht zu deinen
   Labels passen. Ab $0.0003 pro analysiertem Tweet.
