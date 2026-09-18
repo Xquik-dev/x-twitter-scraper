@@ -21,7 +21,7 @@ Classifier 可为每条推文回答你自定义的标签、评分与是非问题
 
 AI 费用已包含在每条推文的价格中。你无需向 AI 提供商付费、无需购买 token，也无需自带密钥。
 
-用你自己的问题对 X（Twitter）帖子进行分类，同时保留原始推文数据。**X Tweet Classifier with AI** 会收集匹配的推文，然后为每条帖子回答 1 到 8 个类型化问题：
+用你自己的问题对 X（Twitter）帖子进行分类，同时保留原始推文数据。**X Tweet Classifier with AI Analysis** 会收集匹配的推文，然后为每条帖子回答 1 到 8 个类型化问题：
 用于客服分流的分类、用于优先级排序的评分，以及用于相关性判断的概率。预设覆盖品牌监测、
 投诉、竞争对手、购买意向、产品反馈、新闻、情感与市场情绪；自定义问题可替代预设。
 
@@ -195,16 +195,16 @@ Actor 页面上还有更多任务，覆盖更多工作流。
   X Article，包含封面、作者、日期与指标。适合需要文章正文而非推文的场景。起价每篇文章 $0.00015。
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader)：从帖子或主页中提取或存储照片、
   视频与 GIF，提供 MP4 与元数据选项。适合需要媒体文件本身的场景。起价每条媒体行 $0.00015。
-- [X (Twitter) Brand Monitoring](https://apify.com/xquik/x-twitter-brand-monitoring)：
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)：
   通过 AI 相关性、情感与客户体验回答追踪品牌提及，并对比多次运行结果。适合持续关注品牌动态的场景。
   起价每条分析推文 $0.0003。
-- [X Tweet Sentiment Analysis](https://apify.com/xquik/x-tweet-sentiment-analysis)：通过 AI
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)：通过 AI
   为每条推文标注态度、强度与讽刺概率。适合需要对任意话题进行通用情感分析的场景。
   起价每条分析推文 $0.0003。
-- [X (Twitter) Stock & Crypto Signal](https://apify.com/xquik/x-twitter-stock-crypto-signals)：
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)：
   通过 AI 标注看涨、看跌、中性或混合立场、内容类型、信心程度与资产相关性。适合关注股票、加密货币
   或交易讨论的场景。起价每条分析推文 $0.0003。
-- [X (Twitter) News Monitor with AI](https://apify.com/xquik/x-twitter-news-monitor)：通过 AI
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)：通过 AI
   按格式、来源归属与话题相关性标注新闻类帖子。适合区分报道与评论的场景。
   起价每条分析推文 $0.0003。
 

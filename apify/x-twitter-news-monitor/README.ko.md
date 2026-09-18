@@ -24,7 +24,7 @@ Xquik은 가장 완전한 X 데이터를 보유한, 세계에서 가장 빠르�
 AI 비용은 트윗당 가격에 포함되어 있습니다. AI 제공업체에 비용을 내거나 토큰을 구매하거나 키를 준비할 필요가 없습니다.
 
 X(Twitter)의 뉴스 게시물을 그 실체에 따라 정렬하면서 원본 트윗 데이터는
-그대로 유지하세요. **X (Twitter) News Monitor with AI**는 여러분의
+그대로 유지하세요. **X (Twitter) News Monitor with AI Analysis**는 여러분의
 주제에 관한 게시물을 수집한 뒤, 모든 게시물에 AI 기반 형식, 출처 표기,
 관련성 답변을 추가합니다. 보도를 논평과 추측에서 분리하고, 출처가 명시되거나
 링크되었는지 확인하며, 여러분이 추적하는 조직, 인물, 주제에 관한 게시물만
@@ -219,18 +219,18 @@ Apify가 별도로 청구하며 Pricing 탭에 표시됩니다.
   메타데이터 옵션과 함께 게시물이나 프로필에서 사진, 동영상 & GIF를 추출하거나
   저장합니다. 미디어 파일 자체가 필요할 때 사용하세요. 미디어 행당
   $0.00015부터.
-- [X (Twitter) Brand Monitoring](https://apify.com/xquik/x-twitter-brand-monitoring):
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
   AI 관련성, 감정 & 고객 경험 답변으로 브랜드 언급을 추적하고 실행 결과를
   비교합니다. 브랜드를 시간에 따라 지켜볼 때 사용하세요. 분석된 트윗당
   $0.0003부터.
-- [X Tweet Sentiment Analysis](https://apify.com/xquik/x-tweet-sentiment-analysis):
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
   AI로 모든 트윗에 태도, 강도 & 비꼬는 표현 가능성을 라벨링합니다. 어떤
   주제든 전반적인 감정이 필요할 때 사용하세요. 분석된 트윗당 $0.0003부터.
-- [X (Twitter) Stock & Crypto Signal](https://apify.com/xquik/x-twitter-stock-crypto-signals):
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
   AI로 강세, 약세, 중립 또는 혼조 입장, 콘텐츠 유형, 확신도 & 자산 관련성을
   라벨링합니다. 주식, 암호화폐 또는 트레이딩 이야기를 팔로우할 때 사용하세요.
   분석된 트윗당 $0.0003부터.
-- [X Tweet Classifier with AI](https://apify.com/xquik/x-twitter-tweet-classifier):
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
   AI로 모든 트윗에 대해 자신만의 카테고리, 점수 & 예/아니오 질문에 답합니다.
   미리 준비된 분석이 라벨에 맞지 않을 때 사용하세요. 분석된 트윗당
   $0.0003부터.

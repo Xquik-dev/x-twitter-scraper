@@ -19,7 +19,7 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 
 AI の費用はツイート単価に含まれています。AI プロバイダーへの支払いも、トークンの購入も、キーの用意も不要です。
 
-X(Twitter)上でのブランド言及を監視し、実行間の感情の変化を追跡します。**X (Twitter) Brand Monitoring**は、一致するすべてのポストを収集し、AIによる関連性、感情、顧客体験の回答を各ポストに付加し、その回答を以前のデータセットと比較して、何が変化したかを示します。元のポストデータはすべての行に残るため、エクスポート、レビュー、追加分析のために再度スクレイピングする必要はありません。
+X(Twitter)上でのブランド言及を監視し、実行間の感情の変化を追跡します。**X (Twitter) Brand Monitoring with AI Analysis**は、一致するすべてのポストを収集し、AIによる関連性、感情、顧客体験の回答を各ポストに付加し、その回答を以前のデータセットと比較して、何が変化したかを示します。元のポストデータはすべての行に残るため、エクスポート、レビュー、追加分析のために再度スクレイピングする必要はありません。
 
 ブランド、製品ライン、キャンペーンについて、苦情、称賛、購入に関する質問を監視するために使用してください。集計スコアではなく実際のポストからサポートチームやマーケティングチームに報告するために、また顧客がどのようにあなたについて語っているかについて、実行を重ねるごとの履歴を保持するために使用してください。
 
@@ -155,10 +155,10 @@ AI の費用はツイート単価に含まれています。AI プロバイダ�
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): 順位、ボリューム、クエリ、WOEIDを含む地域別のリアルタイムトレンドをスクレイピングします。どこで何がトレンドになっているかを追跡するときに使用してください。1トレンドあたり$0.00015から。
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): 表紙、著者、日付、指標付きで、長文のX ArticlesをMarkdownとテキストでスクレイピングします。ポストではなく記事本文が必要なときに使用してください。1記事あたり$0.00015から。
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader): ポストやプロフィールから写真、動画、GIFを抽出または保存し、MP4化やメタデータのオプションを備えます。メディアファイル自体が必要なときに使用してください。1メディア行あたり$0.00015から。
-- [X Tweet Sentiment Analysis](https://apify.com/xquik/x-tweet-sentiment-analysis): すべてのポストにAIで態度、強度、皮肉の確率をラベル付けします。任意のトピックについて一般的な感情分析が必要なときに使用してください。分析済みポスト1件あたり$0.0003から。
-- [X (Twitter) Stock & Crypto Signal](https://apify.com/xquik/x-twitter-stock-crypto-signals): AIで強気、弱気、中立、または複合的なスタンス、コンテンツの種類、確信度、資産との関連性をラベル付けします。株、暗号資産、トレーディングの話題を追うときに使用してください。分析済みポスト1件あたり$0.0003から。
-- [X (Twitter) News Monitor with AI](https://apify.com/xquik/x-twitter-news-monitor): AIでニュースポストを形式、情報源の帰属、トピックとの関連性でラベル付けします。報道とコメントを区別するときに使用してください。分析済みポスト1件あたり$0.0003から。
-- [X Tweet Classifier with AI](https://apify.com/xquik/x-twitter-tweet-classifier): AIで独自のカテゴリ、スコア、はい/いいえの質問にすべてのポストで回答します。既定の分析があなたのラベルに合わないときに使用してください。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis): すべてのポストにAIで態度、強度、皮肉の確率をラベル付けします。任意のトピックについて一般的な感情分析が必要なときに使用してください。分析済みポスト1件あたり$0.0003から。
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals): AIで強気、弱気、中立、または複合的なスタンス、コンテンツの種類、確信度、資産との関連性をラベル付けします。株、暗号資産、トレーディングの話題を追うときに使用してください。分析済みポスト1件あたり$0.0003から。
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor): AIでニュースポストを形式、情報源の帰属、トピックとの関連性でラベル付けします。報道とコメントを区別するときに使用してください。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier): AIで独自のカテゴリ、スコア、はい/いいえの質問にすべてのポストで回答します。既定の分析があなたのラベルに合わないときに使用してください。分析済みポスト1件あたり$0.0003から。
 
 ## よくある質問とサポート
 

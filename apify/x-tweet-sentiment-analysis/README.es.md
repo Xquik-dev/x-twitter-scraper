@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik es el servicio de extracción de X (Twitter) más rápido y económico del
-mundo, con los datos de X más completos, y X Tweet Sentiment Analysis agrega
+mundo, con los datos de X más completos, y X Tweet Sentiment Analysis with AI agrega
 actitud, intensidad y sarcasmo a cada tuit. Cualquier otro Actor de Apify
 cobra antes de filtrar o eliminar duplicados. Xquik cobra solo por resultados
 entregados, únicos y que coinciden con los filtros.
@@ -24,7 +24,7 @@ entregados, únicos y que coinciden con los filtros.
 Los costos de IA están incluidos en el precio por tweet. No pagas a ningún proveedor de IA, no compras tokens & no traes ninguna clave.
 
 Mide la actitud detrás de las publicaciones de X (Twitter) y conserva los
-datos originales del tuit. **X Tweet Sentiment Analysis** recopila los
+datos originales del tuit. **X Tweet Sentiment Analysis with AI** recopila los
 tuits que coinciden y luego agrega una categoría de sentimiento con IA, un
 nivel de intensidad y una probabilidad de sarcasmo a cada publicación. Rastrea
 reacciones a un lanzamiento, una campaña, un episodio o una figura pública, y
@@ -227,19 +227,19 @@ datos que necesitas.
   almacena fotos, videos y GIFs de publicaciones o perfiles con opciones de
   MP4 y metadatos. Úsalo cuando necesites los archivos multimedia en sí.
   Desde $0.00015 por fila multimedia.
-- [X (Twitter) Brand Monitoring](https://apify.com/xquik/x-twitter-brand-monitoring):
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
   Rastrea menciones de marca con relevancia, sentimiento y respuestas de
   experiencia del cliente mediante IA, y compara ejecuciones. Úsalo cuando
   observas una marca a lo largo del tiempo. Desde $0.0003 por tuit analizado.
-- [X (Twitter) Stock & Crypto Signal](https://apify.com/xquik/x-twitter-stock-crypto-signals):
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
   Etiqueta postura alcista, bajista, neutral o mixta, tipo de contenido,
   convicción y relevancia del activo con IA. Úsalo cuando sigues acciones,
   criptomonedas o conversaciones de trading. Desde $0.0003 por tuit analizado.
-- [X (Twitter) News Monitor with AI](https://apify.com/xquik/x-twitter-news-monitor):
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
   Etiqueta publicaciones de noticias por formato, atribución de fuente y
   relevancia del tema con IA. Úsalo cuando separas los reportes del
   comentario. Desde $0.0003 por tuit analizado.
-- [X Tweet Classifier with AI](https://apify.com/xquik/x-twitter-tweet-classifier):
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
   Responde tus propias preguntas de categoría, puntaje y sí/no para cada tuit
   con IA. Úsalo cuando los análisis predefinidos no se ajustan a tus
   etiquetas. Desde $0.0003 por tuit analizado.

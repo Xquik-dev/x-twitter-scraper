@@ -137,23 +137,23 @@ cui hai bisogno.
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader): estrae o
   archivia foto, video e GIF da post o profili con opzioni MP4 e metadati.
   Usalo quando ti servono i file media stessi. Da $0.00015 per riga media.
-- [X (Twitter) Brand Monitoring](https://apify.com/xquik/x-twitter-brand-monitoring):
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
   monitora le menzioni del brand con rilevanza, sentiment e risposte sulla
   customer experience generate dall'IA e confronta le esecuzioni. Usalo
   quando osservi un brand nel tempo. Da $0.0003 per tweet analizzato.
-- [X Tweet Sentiment Analysis](https://apify.com/xquik/x-tweet-sentiment-analysis):
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
   etichetta atteggiamento, intensità e probabilità di sarcasmo per ogni
   tweet con l'IA. Usalo quando ti serve un sentiment generale su qualsiasi
   argomento. Da $0.0003 per tweet analizzato.
-- [X (Twitter) Stock & Crypto Signal](https://apify.com/xquik/x-twitter-stock-crypto-signals):
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
   etichetta posizione rialzista, ribassista, neutra o mista, tipo di
   contenuto, convinzione e rilevanza dell'asset con l'IA. Usalo quando segui
   discussioni su azioni, crypto o trading. Da $0.0003 per tweet analizzato.
-- [X (Twitter) News Monitor with AI](https://apify.com/xquik/x-twitter-news-monitor):
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
   etichetta i post di news per formato, attribuzione della fonte e
   rilevanza del tema con l'IA. Usalo quando separi il reporting dal
   commento. Da $0.0003 per tweet analizzato.
-- [X Tweet Classifier with AI](https://apify.com/xquik/x-twitter-tweet-classifier):
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
   risponde alle tue domande personalizzate su categoria, punteggio e sì/no
   per ogni tweet con l'IA. Usalo quando le analisi preimpostate non si
   adattano alle tue etichette. Da $0.0003 per tweet analizzato.

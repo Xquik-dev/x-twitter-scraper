@@ -534,18 +534,18 @@ MCP 服务器。
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader)：
   从帖子或主页中提取或保存照片、视频及 GIF，支持 MP4 和元数据选项。适用
   于需要媒体文件本身的场景。起价为每条媒体行 $0.00015。
-- [X (Twitter) Brand Monitoring](https://apify.com/xquik/x-twitter-brand-monitoring)：
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)：
   通过 AI 追踪品牌提及的相关性、情感及客户体验相关的回答，并比较不同运行
   结果。适用于长期观察某个品牌的场景。起价为每条分析推文 $0.0003。
-- [X Tweet Sentiment Analysis](https://apify.com/xquik/x-tweet-sentiment-analysis)：
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)：
   通过 AI 为每条推文标注态度、强度及讽刺可能性。适用于需要对任意主题进行
   通用情感分析的场景。起价为每条分析推文 $0.0003。
-- [X (Twitter) Stock & Crypto Signal](https://apify.com/xquik/x-twitter-stock-crypto-signals)：
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)：
   通过 AI 标注看涨、看跌、中性或混合立场、内容类型、信心程度及资产相关性。
   适用于关注股票、加密货币或交易讨论的场景。起价为每条分析推文 $0.0003。
-- [X (Twitter) News Monitor with AI](https://apify.com/xquik/x-twitter-news-monitor)：
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)：
   通过 AI 按格式、消息来源归属及主题相关性为新闻类帖子打标签。适用于将
   报道内容与评论内容区分开的场景。起价为每条分析推文 $0.0003。
-- [X Tweet Classifier with AI](https://apify.com/xquik/x-twitter-tweet-classifier)：
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)：
   通过 AI 为每条推文回答你自定义的分类、评分及是否问题。适用于预设分析
   无法满足你的标签需求的场景。起价为每条分析推文 $0.0003。

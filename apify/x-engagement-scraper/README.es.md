@@ -165,25 +165,25 @@ coincida con los datos que necesitas.
   almacena fotos, videos y GIFs de publicaciones o perfiles, con opciones de
   MP4 y metadatos. Úsalo cuando necesites los archivos multimedia en sí.
   Desde $0.00015 por fila de contenido multimedia.
-- [X (Twitter) Brand Monitoring](https://apify.com/xquik/x-twitter-brand-monitoring):
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
   rastrea menciones de marca con relevancia, sentimiento y respuestas de
   experiencia del cliente generadas por IA, y compara ejecuciones. Úsalo
   cuando monitorees una marca a lo largo del tiempo. Desde $0.0003 por tuit
   analizado.
-- [X Tweet Sentiment Analysis](https://apify.com/xquik/x-tweet-sentiment-analysis):
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
   etiqueta la actitud, la intensidad y la probabilidad de sarcasmo de cada
   tuit con IA. Úsalo cuando necesites un sentimiento general sobre cualquier
   tema. Desde $0.0003 por tuit analizado.
-- [X (Twitter) Stock & Crypto Signal](https://apify.com/xquik/x-twitter-stock-crypto-signals):
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
   etiqueta la postura alcista, bajista, neutral o mixta, el tipo de contenido,
   la convicción y la relevancia del activo con IA. Úsalo cuando sigas
   acciones, cripto o conversaciones de trading. Desde $0.0003 por tuit
   analizado.
-- [X (Twitter) News Monitor with AI](https://apify.com/xquik/x-twitter-news-monitor):
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
   etiqueta publicaciones de noticias por formato, atribución de fuente y
   relevancia del tema con IA. Úsalo cuando separes el reporte informativo del
   comentario. Desde $0.0003 por tuit analizado.
-- [X Tweet Classifier with AI](https://apify.com/xquik/x-twitter-tweet-classifier):
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
   responde tus propias preguntas de categoría, puntuación y sí/no para cada
   tuit con IA. Úsalo cuando los análisis predefinidos no se ajusten a tus
   etiquetas. Desde $0.0003 por tuit analizado.

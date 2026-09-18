@@ -25,7 +25,7 @@ conformes aux filtres.
 Les coûts d'IA sont inclus dans le prix par tweet. Vous ne payez aucun fournisseur d'IA, n'achetez aucun jeton & n'apportez aucune clé.
 
 Triez les posts d'actualité sur X (Twitter) selon ce qu'ils sont et
-conservez les données originales du tweet. **X (Twitter) News Monitor with AI** collecte les posts sur vos sujets, puis ajoute à chaque post
+conservez les données originales du tweet. **X (Twitter) News Monitor with AI Analysis** collecte les posts sur vos sujets, puis ajoute à chaque post
 une réponse de format, d'attribution de source et de pertinence générée
 par IA. Séparez le reportage du commentaire et de la spéculation, voyez
 si une source est nommée ou liée, et ne gardez que les posts qui
@@ -253,21 +253,21 @@ données dont vous avez besoin.
   profils, avec des options MP4 et de métadonnées. Utilisez-le quand vous
   avez besoin des fichiers médias eux-mêmes. À partir de $0.00015 par
   ligne média.
-- [X (Twitter) Brand Monitoring](https://apify.com/xquik/x-twitter-brand-monitoring) :
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring) :
   suit les mentions de marque avec pertinence, sentiment et réponses sur
   l'expérience client par IA, et compare les runs. Utilisez-le pour
   surveiller une marque dans le temps. À partir de $0.0003 par tweet
   analysé.
-- [X Tweet Sentiment Analysis](https://apify.com/xquik/x-tweet-sentiment-analysis) :
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis) :
   attribue une attitude, une intensité et une probabilité de sarcasme à
   chaque tweet par IA. Utilisez-le pour un sentiment général sur n'importe
   quel sujet. À partir de $0.0003 par tweet analysé.
-- [X (Twitter) Stock & Crypto Signal](https://apify.com/xquik/x-twitter-stock-crypto-signals) :
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals) :
   attribue une position haussière, baissière, neutre ou mixte, un type de
   contenu, une conviction et une pertinence d'actif par IA. Utilisez-le
   pour suivre les actions, la crypto ou les discussions de trading. À
   partir de $0.0003 par tweet analysé.
-- [X Tweet Classifier with AI](https://apify.com/xquik/x-twitter-tweet-classifier) :
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier) :
   répond à vos propres questions de catégorie, de score et de oui/non pour
   chaque tweet par IA. Utilisez-le quand les analyses prédéfinies ne
   correspondent pas à vos étiquettes. À partir de $0.0003 par tweet

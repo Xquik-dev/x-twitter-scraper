@@ -24,7 +24,7 @@ Apify Actor는 필터링이나 중복 제거 전에 요금을 부과합니다. X
 AI 비용은 트윗당 가격에 포함되어 있습니다. AI 제공업체에 비용을 내거나 토큰을 구매하거나 키를 준비할 필요가 없습니다.
 
 X(Twitter)의 주식, 암호화폐 & 트레이딩 게시물 뒤에 담긴 입장을 읽으면서
-원본 트윗 데이터는 그대로 유지하세요. **X (Twitter) Stock & Crypto Signal**는 여러분의 티커나 자산에 관한 게시물을 수집한 뒤, 모든 게시물에
+원본 트윗 데이터는 그대로 유지하세요. **X (Twitter) Stock & Crypto AI Trading Signals**는 여러분의 티커나 자산에 관한 게시물을 수집한 뒤, 모든 게시물에
 AI 기반 입장, 콘텐츠 유형, 확신 수준, 자산 관련성을 추가합니다. 확고한
 주장을 헤지된 발언에서 분리하고, 분석을 홍보에서 구분하며, 자산에 관한
 게시물을 그 이름을 무관하게 사용한 게시물과 구분하세요.
@@ -216,17 +216,17 @@ Apify가 별도로 청구하며 Pricing 탭에 표시됩니다.
   메타데이터 옵션과 함께 게시물이나 프로필에서 사진, 동영상 & GIF를 추출하거나
   저장합니다. 미디어 파일 자체가 필요할 때 사용하세요. 미디어 행당
   $0.00015부터.
-- [X (Twitter) Brand Monitoring](https://apify.com/xquik/x-twitter-brand-monitoring):
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
   AI 관련성, 감정 & 고객 경험 답변으로 브랜드 언급을 추적하고 실행 결과를
   비교합니다. 브랜드를 시간에 따라 지켜볼 때 사용하세요. 분석된 트윗당
   $0.0003부터.
-- [X Tweet Sentiment Analysis](https://apify.com/xquik/x-tweet-sentiment-analysis):
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
   AI로 모든 트윗에 태도, 강도 & 비꼬는 표현 가능성을 라벨링합니다. 어떤
   주제든 전반적인 감정이 필요할 때 사용하세요. 분석된 트윗당 $0.0003부터.
-- [X (Twitter) News Monitor with AI](https://apify.com/xquik/x-twitter-news-monitor):
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
   AI로 뉴스 게시물을 형식, 출처 표기 & 주제 관련성으로 라벨링합니다. 보도와
   논평을 구분할 때 사용하세요. 분석된 트윗당 $0.0003부터.
-- [X Tweet Classifier with AI](https://apify.com/xquik/x-twitter-tweet-classifier):
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
   AI로 모든 트윗에 대해 자신만의 카테고리, 점수 & 예/아니오 질문에 답합니다.
   미리 준비된 분석이 라벨에 맞지 않을 때 사용하세요. 분석된 트윗당
   $0.0003부터.

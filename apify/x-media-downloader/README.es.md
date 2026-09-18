@@ -122,23 +122,23 @@ datos que necesitas.
   Artículos largos de X en Markdown y texto con portadas, autores, fechas y
   métricas. Úsalo cuando necesites cuerpos de artículos, no tuits. Desde
   $0.00015 por artículo.
-- [X (Twitter) Brand Monitoring](https://apify.com/xquik/x-twitter-brand-monitoring):
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
   rastrea menciones de marca con relevancia, sentimiento y respuestas de
   experiencia del cliente mediante IA, y compara ejecuciones. Úsalo cuando
   sigas una marca a lo largo del tiempo. Desde $0.0003 por tuit analizado.
-- [X Tweet Sentiment Analysis](https://apify.com/xquik/x-tweet-sentiment-analysis):
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
   etiqueta actitud, intensidad y probabilidad de sarcasmo de cada tuit con IA.
   Úsalo cuando necesites sentimiento general sobre cualquier tema. Desde
   $0.0003 por tuit analizado.
-- [X (Twitter) Stock & Crypto Signal](https://apify.com/xquik/x-twitter-stock-crypto-signals):
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
   etiqueta postura alcista, bajista, neutral o mixta, tipo de contenido,
   convicción y relevancia de activos con IA. Úsalo cuando sigas acciones,
   cripto o conversaciones de trading. Desde $0.0003 por tuit analizado.
-- [X (Twitter) News Monitor with AI](https://apify.com/xquik/x-twitter-news-monitor):
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
   etiqueta publicaciones de noticias por formato, atribución de fuente y
   relevancia de tema con IA. Úsalo cuando separes reportería de opinión.
   Desde $0.0003 por tuit analizado.
-- [X Tweet Classifier with AI](https://apify.com/xquik/x-twitter-tweet-classifier):
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
   responde tus propias preguntas de categoría, puntaje y sí/no para cada tuit
   con IA. Úsalo cuando los análisis predefinidos no se ajusten a tus
   etiquetas. Desde $0.0003 por tuit analizado.

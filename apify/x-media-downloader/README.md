@@ -111,23 +111,23 @@ diagnostics. Pick the one that matches the data you need.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapes
   long-form X Articles as Markdown & text with covers, authors, dates & metrics.
   Use it when you need article bodies, not tweets. From $0.00015 per article.
-- [X (Twitter) Brand Monitoring](https://apify.com/xquik/x-twitter-brand-monitoring):
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
   Tracks brand mentions with AI relevance, sentiment & customer-experience
   answers & compares runs. Use it when you watch a brand over time. From $0.0003
   per analyzed tweet.
-- [X Tweet Sentiment Analysis](https://apify.com/xquik/x-tweet-sentiment-analysis):
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
   Labels attitude, intensity & sarcasm probability for every tweet with AI. Use
   it when you need general sentiment on any topic. From $0.0003 per analyzed
   tweet.
-- [X (Twitter) Stock & Crypto Signal](https://apify.com/xquik/x-twitter-stock-crypto-signals):
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
   Labels bullish, bearish, neutral or mixed stance, content type, conviction &
   asset relevance with AI. Use it when you follow stocks, crypto or trading
   talk. From $0.0003 per analyzed tweet.
-- [X (Twitter) News Monitor with AI](https://apify.com/xquik/x-twitter-news-monitor):
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
   Labels news posts by format, source attribution & topic relevance with AI. Use
   it when you separate reporting from commentary. From $0.0003 per analyzed
   tweet.
-- [X Tweet Classifier with AI](https://apify.com/xquik/x-twitter-tweet-classifier):
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
   Answers your own category, score & yes/no questions for every tweet with AI.
   Use it when the preset analyses do not fit your labels. From $0.0003 per
   analyzed tweet.
