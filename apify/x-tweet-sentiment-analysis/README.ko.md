@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik은 가장 완전한 X 데이터를 보유한, 세계에서 가장 빠르고 저렴한 X(Twitter)
-스크레이퍼 서비스입니다. X Tweet Sentiment Analysis는 모든 트윗에 태도, 강도 &
+스크레이퍼 서비스입니다. X Tweet Sentiment Analysis with AI는 모든 트윗에 태도, 강도 &
 비꼬는 표현 가능성을 추가합니다. 다른 모든 Apify Actor는 필터링이나 중복 제거
 전에 요금을 부과합니다. Xquik은 전달되고, 고유하며, 필터에 맞는 결과에만 요금을
 부과합니다.

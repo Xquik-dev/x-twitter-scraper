@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">FramerがXquikのスクレイパーをClaude Code、Codex、Cursorなどと一緒に使う様子を6:07から視聴できます。</a>
 </td></tr></table>
 
-Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。X (Twitter) Stock & Crypto Signalは、ポストを銘柄やコインごとの強気、弱気、中立、または複合的なスタンスに変換します。他のApify Actorはすべて、フィルタリングや重複排除の前に課金します。Xquikは、配信済みでユニークかつフィルタ条件に一致する結果にのみ課金します。
+Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。X (Twitter) Stock & Crypto AI Trading Signalsは、ポストを銘柄やコインごとの強気、弱気、中立、または複合的なスタンスに変換します。他のApify Actorはすべて、フィルタリングや重複排除の前に課金します。Xquikは、配信済みでユニークかつフィルタ条件に一致する結果にのみ課金します。
 
 AI の費用はツイート単価に含まれています。AI プロバイダーへの支払いも、トークンの購入も、キーの用意も不要です。
 
