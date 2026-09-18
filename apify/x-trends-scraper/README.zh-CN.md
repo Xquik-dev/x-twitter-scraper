@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何将 Xquik 抓取工具与 Claude Code、Codex、Cursor 等一起使用，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是速度最快、成本最低且数据最完整的 X（Twitter）抓取工具服务，X Trends Scraper
+Xquik 是速度最快、成本最低且数据最完整的 X（Twitter）抓取工具服务。X Trends Scraper
 可按位置收集实时趋势，包含排名、热度与搜索词。其他 Apify Actor 都在筛选或去重之前收费。
 Xquik 只对已交付、唯一且符合筛选条件的结果收费。
 
@@ -51,7 +51,7 @@ France、Germany、India、Indonesia、Japan、Mexico 与 Australia。其他受�
 ## 输出
 
 每条趋势为数据集中的一行，包含 `name`、`rank`、`tweetVolume`、`query`、`url`、`woeid`、
-`sourceTarget` 与 `resultType`。缺失的来源字段会保持为空，而不会被虚构填充。
+`sourceTarget` 与 `resultType`。缺失的来源字段会保持为空。Actor 不会虚构任何值。
 
 ## 定价
 
@@ -59,7 +59,7 @@ France、Germany、India、Indonesia、Japan、Mexico 与 Australia。其他受�
 
 - 每条交付的数据行收费一次。`diagnostics` 中的诊断信息免费。
 - 无启动费、查询费或位置费。
-- 计费前会去除重复项。
+- Actor 会在计费前去除重复项。
 - Apify 的最大总费用设置会限制交付行数。
 
 除非需要旧版本，否则请使用 `latest`。可从 50 个公开任务或 129 个 Xquik REST 操作中选择。

@@ -16,36 +16,37 @@
 </td></tr></table>
 
 Xquik es el servicio de extracción de X (Twitter) más rápido y económico del
-mundo, con los datos de X más completos, y X (Twitter) Brand Monitoring with AI Analysis rastrea
+mundo, con los datos de X más completos. X (Twitter) Brand Monitoring rastrea
 las menciones de tu marca con relevancia, sentimiento y respuestas de
 experiencia del cliente. Cualquier otro Actor de Apify cobra antes de filtrar o
 eliminar duplicados. Xquik cobra solo por resultados entregados, únicos y que
-coinciden con los filtros.
+coinciden con los filtros. Los costos de IA están incluidos en el precio por
+tweet. No pagas a ningún proveedor de IA, no compras tokens & no traes ninguna
+clave.
 
-Los costos de IA están incluidos en el precio por tweet. No pagas a ningún proveedor de IA, no compras tokens & no traes ninguna clave.
+Monitorea menciones de marca en X (Twitter) y rastrea los cambios de sentimiento
+entre ejecuciones. **X (Twitter) Brand Monitoring with AI Analysis** recopila
+cada tuit que coincide. Responde con IA preguntas de relevancia, sentimiento &
+experiencia del cliente para cada publicación. Compara esas respuestas con un
+Dataset anterior, así que ves qué cambió. Cada fila conserva los datos
+originales del tuit, así que las exportaciones, revisiones & análisis
+posteriores no necesitan una segunda extracción.
 
-Monitorea menciones de marca en X (Twitter) y rastrea los cambios de
-sentimiento entre ejecuciones. **X (Twitter) Brand Monitoring with AI Analysis** recopila cada tuit que coincide, agrega respuestas de relevancia,
-sentimiento y experiencia del cliente con IA a cada publicación, y compara las
-respuestas con un Dataset anterior para que veas qué cambió. Los datos
-originales del tuit permanecen en cada fila, así que las exportaciones,
-revisiones y análisis posteriores no necesitan una segunda extracción.
+Vigila una marca, una línea de producto o una campaña en busca de quejas,
+elogios & preguntas de compra. Informa a los equipos de soporte & marketing con
+publicaciones reales. Mantén un historial de cómo hablan los clientes de ti de
+una ejecución a otra.
 
-Úsalo para vigilar una marca, una línea de producto o una campaña en busca de
-quejas, elogios y preguntas de compra; para informar a los equipos de soporte y
-marketing con publicaciones reales en lugar de puntajes agregados; y para
-mantener un historial de cómo hablan los clientes de ti a lo largo de las
-ejecuciones.
-
-- **Cada campo del tuit de origen** permanece junto a las respuestas: texto,
-  autor, conteos, contenido multimedia, enlaces, publicaciones citadas y
-  respondidas.
-- **Respuestas tipadas**: una probabilidad de relevancia, una categoría de
-  sentimiento con probabilidades y una categoría de experiencia del cliente.
-- **Seguimiento de cambios** entre ejecuciones por decisión, no por ruido de
-  probabilidad.
-- **Facturación basada en filtros**: solo se cobran los tuits únicos que
-  coinciden con los filtros y tienen análisis exitoso.
+- **Cada campo del tuit de origen.** El texto, el autor, los conteos, el
+  contenido multimedia, los enlaces & las publicaciones citadas y respondidas
+  permanecen junto a las respuestas.
+- **Respuestas tipadas.** Cada fila tiene una probabilidad de relevancia, una
+  categoría de sentimiento con probabilidades & una categoría de experiencia del
+  cliente.
+- **Seguimiento de cambios.** Las ejecuciones se comparan por decisión, así que
+  los cambios pequeños de probabilidad no cuentan como cambios.
+- **Facturación basada en filtros.** Pagas solo por tuits únicos que coinciden
+  con los filtros y tienen un análisis exitoso.
 
 ## Cómo monitorear una marca en X
 
@@ -102,37 +103,37 @@ sentimiento describe la actitud expresada por el autor hacia el objetivo.
 | `not_comparable`         | Faltan metadatos, IDs o configuraciones de coincidencia requeridos |
 | `analysis_unavailable`   | Este tuit no tiene un análisis exitoso                        |
 
-Las respuestas se comparan por decisión: una respuesta `choice` por su
-categoría, una respuesta `score` por su nivel más cercano y una respuesta
-`probability` por su decisión de sí o no en 0.5. Una decisión solo cuenta como
-cambiada cuando la respuesta se mueve claramente: la categoría anterior cae
-por debajo de 0.4 de probabilidad, un puntaje se mueve al menos 0.6 niveles, o
-una probabilidad de sí/no queda a al menos 0.1 del umbral. Las fluctuaciones
-de empate cercano entre ejecuciones se consideran sin cambios. Los cambios que
-mantienen la misma decisión permanecen `unchanged`, así que la variación del
-modelo entre ejecuciones no satura tu informe. `changes` enumera cada pregunta
-cambiada con su decisión `previous` y `current`. Los cambios pueden reflejar
-variación del modelo, contexto nuevo o datos de origen editados; no prueban
-hechos cambiados, y un tuit ausente no prueba que fue eliminado.
+Las respuestas se comparan por decisión. Una respuesta `choice` se compara por
+su categoría. Una respuesta `score` se compara por su nivel más cercano. Una
+respuesta `probability` se compara por su decisión de sí o no en 0.5. Una
+decisión cuenta como cambiada en tres casos. La categoría anterior cae por
+debajo de 0.4 de probabilidad. Un puntaje se mueve al menos 0.6 niveles. Una
+probabilidad de sí/no queda a al menos 0.1 del umbral. Los empates cercanos
+entre ejecuciones permanecen `unchanged`, & también los cambios que mantienen la
+misma decisión. La variación del modelo entre ejecuciones no llena tu informe.
+`changes` enumera cada pregunta cambiada con su decisión `previous` & `current`.
+Los cambios pueden venir de variación del modelo, contexto nuevo o datos de
+origen editados. No prueban hechos cambiados, & un tuit ausente no prueba que
+fue eliminado.
 
 El límite de línea base es de 100 000 filas por defecto. Los IDs de tuits
-duplicados, los fallos de carga y los tamaños de Dataset cambiantes detienen
-la comparación antes de la recopilación; nunca se convierten en una línea base
+duplicados, los fallos de carga y los tamaños de Dataset cambiantes detienen la
+comparación antes de la recopilación. Nunca se convierten en una línea base
 vacía.
 
 ## Precios
 
-Los costos de IA están incluidos en el precio por tweet. No pagas a ningún proveedor de IA, no compras tokens & no traes ninguna clave.
+Los costos de IA están incluidos en el precio por tweet. No pagas a ningún
+proveedor de IA, no compras tokens & no traes ninguna clave.
 
-Desde $0.0003 por tuit analizado con éxito, sin tarifa de inicio. La
-recopilación está incluida, y la capacidad de análisis documentada es de 8
-preguntas, 8000 bytes por definición de pregunta y 12 000 bytes de contexto
-por tuit. Los filtros de extracción y la eliminación de duplicados se ejecutan
-antes del análisis, por lo que las filas descartadas y duplicadas nunca se
-analizan ni se cobran. Los análisis fallidos u omitidos y las filas de
-diagnóstico no tienen costo de resultado. El uso de la plataforma de Apify
-(cómputo, almacenamiento y transferencia) se factura por separado por Apify
-según las tarifas de tu plan y aparece en la pestaña Pricing.
+Desde $0.0003 por tuit analizado con éxito, sin tarifa de inicio. El precio
+incluye la recopilación. La capacidad de análisis es de 8 preguntas, 8000 bytes
+por definición de pregunta & 12 000 bytes de contexto por tuit. Los filtros de
+extracción & la eliminación de duplicados se ejecutan antes del análisis, así
+que nunca pagas por filas descartadas o duplicadas. Los análisis fallidos, los
+análisis omitidos & las filas de diagnóstico no tienen costo de resultado. Apify
+factura por separado el uso de la plataforma por cómputo, almacenamiento &
+transferencia, según las tarifas de tu plan. La pestaña Pricing lo muestra.
 
 ## Ejemplos de entrada y salida
 
@@ -178,22 +179,27 @@ pendientes.
 
 Cada ejecución escribe un registro `analysis-summary` en su almacén de
 clave-valor y lo repite bajo `results.analysisSummary` en el informe de
-ejecución. Cuenta las filas analizadas, fallidas y omitidas, suma la
-interacción y resume cada pregunta. `targets` reporta menciones, participación
-de voz e interacción por marca o alias, y el `top` de cada entrada enumera sus
-tres menciones con más interacción por categoría de respuesta, así que las
-menciones negativas y positivas más fuertes de cada marca quedan listas para
-alertas. El bloque `sentiment` enumera las tres menciones positivas y
-negativas con más interacción bajo `top`, listas para alertas, y `relevance`
-cuenta las menciones que tratan sobre la marca. Los números se redondean a 4
-decimales; las ejecuciones vacías reportan conteos en cero y medias `null`.
-Cada entrada de `targets` también incluye `choices`, la división de respuestas
-entre los tuits que mencionan esa marca, y `monitor.changedRows` enumera los
-tuits cuyas decisiones cambiaron desde la línea base, listos para un webhook o
-alerta. Cada fila también enumera `sourceDomains`, los nombres de host que
-enlaza, y el bloque `monitor` del resumen cuenta los estados de comparación y
-enumera hasta 50 filas modificadas cuando se establece
-`monitor.baselineDatasetId`.
+ejecución. Cuenta las filas analizadas, fallidas y omitidas, suma la interacción
+y resume cada pregunta.
+
+- `targets` reporta menciones, participación de voz & interacción por marca o
+  alias.
+- Cada entrada de `targets` tiene `top`, sus tres menciones con más interacción
+  por categoría de respuesta. Úsalo para alertar sobre las menciones negativas &
+  positivas más fuertes.
+- Cada entrada de `targets` tiene `choices`, la división de respuestas entre los
+  tuits que mencionan esa marca.
+- El bloque `sentiment` enumera las tres menciones positivas & negativas con más
+  interacción bajo `top`.
+- `relevance` cuenta las menciones que tratan sobre la marca.
+- `monitor.changedRows` enumera los tuits cuyas decisiones cambiaron desde la
+  línea base. Envíalos a un webhook o a una alerta.
+- Con `monitor.baselineDatasetId` establecido, el bloque `monitor` cuenta los
+  estados de comparación & enumera hasta 50 filas modificadas.
+- Cada fila enumera `sourceDomains`, los nombres de host que enlaza.
+
+El resumen redondea los números a 4 decimales. Una ejecución vacía reporta
+conteos en cero & medias `null`.
 
 Cada fila de resultado también incluye `answers`, un mapa plano del ID de
 pregunta a la categoría, puntaje o probabilidad elegidos. La vista de Dataset
@@ -294,15 +300,15 @@ datos que necesitas.
 
 ### ¿Puedo usar mis propias preguntas?
 
-Sí. Las `analysis.questions` personalizadas reemplazan las predeterminadas: de
-1 a 8 preguntas de tipo `choice`, `score` o `probability`. Las preguntas de
-tipo choice aceptan entre 2 y 255 categorías; los puntajes usan al menos 2
-niveles ordenados. Mantén las mismas preguntas en las ejecuciones que quieras
-comparar.
+Sí. Las `analysis.questions` personalizadas reemplazan las predeterminadas.
+Envía de 1 a 8 preguntas de tipo `choice`, `score` o `probability`. Las
+preguntas de tipo choice aceptan entre 2 y 255 categorías. Los puntajes usan al
+menos 2 niveles ordenados. Mantén las mismas preguntas en las ejecuciones que
+quieras comparar.
 
 ### ¿Por qué una fila regresó con `analysis.status` en `failed` o `skipped`?
 
-El tuit se recopiló y entregó, pero el análisis con IA no se completó.
+El Actor recopiló & entregó el tuit, pero el análisis con IA no se completó.
 `analysis.reason` indica la causa, como `context_limit` cuando el tuit y su
 contexto superan `maxContextBytes`, o `service_unavailable` tras varios
 reintentos. Estas filas no tienen costo de resultado. Aumenta
@@ -310,24 +316,23 @@ reintentos. Estas filas no tienen costo de resultado. Aumenta
 
 ### ¿El análisis verifica hechos?
 
-No. Las respuestas describen lo que expresa la publicación y cómo está
-enmarcada. Las probabilidades expresan la confianza del modelo, no la verdad.
-Revisa las clasificaciones importantes contra el tuit original, que cada fila
-conserva.
+No. Las respuestas describen lo que expresa la publicación & cómo lo enmarca.
+Las probabilidades expresan la confianza del modelo, no la verdad. Revisa las
+clasificaciones importantes contra el tuit original, que cada fila conserva.
 
 ### ¿Qué idiomas funcionan?
 
-La extracción admite todos los idiomas que ofrece X. El análisis se valida
-primero con escenarios de clientes en inglés; los demás idiomas admitidos
-devuelven respuestas con la misma estructura, y la incertidumbre queda
-explícita mediante categorías `unclear` y probabilidades.
+La extracción admite todos los idiomas que ofrece X. Validamos el análisis
+primero con escenarios de clientes en inglés. Los demás idiomas admitidos
+devuelven respuestas con la misma estructura. Las categorías `unclear` & las
+probabilidades muestran la incertidumbre en todos los idiomas.
 
 ### ¿Cómo limito el costo?
 
-Los filtros, la eliminación de duplicados y `maxItems` se ejecutan antes del
-análisis, así que solo se analizan y cobran los tuits únicos que coinciden con
-los filtros. Usa operadores de búsqueda precisos, límites de fecha y umbrales
-de interacción, y comienza con un `maxItems` pequeño para verificar la
+Los filtros, la eliminación de duplicados & `maxItems` se ejecutan antes del
+análisis, así que el Actor analiza & cobra solo los tuits únicos que coinciden
+con los filtros. Usa operadores de búsqueda precisos, límites de fecha &
+umbrales de interacción, & comienza con un `maxItems` pequeño para verificar la
 calidad de las respuestas antes de una ejecución grande.
 
 ### ¿Dónde obtengo ayuda?

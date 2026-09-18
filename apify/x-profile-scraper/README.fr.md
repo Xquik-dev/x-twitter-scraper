@@ -37,7 +37,7 @@ handles, des ID ou des URL. Aucune clé API X ni connexion requise.
   repost et métriques.
 - Filtrez les profils optionnels par audience, activité, ancienneté et
   métadonnées publiques.
-- Les lignes en double sont retirées avant la facturation.
+- L'Actor retire les lignes en double avant la facturation.
 
 ## Entrée
 

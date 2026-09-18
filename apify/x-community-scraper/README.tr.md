@@ -36,7 +36,7 @@ girişi gerekmez.
 - Bir çalıştırmada birden fazla Topluluk ve kaynak.
 - Kaynak başına ve genel üst sınırlar.
 - Kaydedilen imleç kurtarmasıyla eşzamanlı okumalar.
-- Tekrarlanan satırlar faturalamadan önce kaldırılır.
+- Actor tekrarlanan satırları faturalamadan önce kaldırır.
 
 ## Girdi
 
@@ -54,7 +54,7 @@ Anahtar kelime araması için `resources` içine `"search"` ekle ve `query` sağ
 
 Satırlar `resultType` olarak `community`, `communityTweet`, `communityMember`
 veya `communityModerator` kullanır. Her satır, girdi Topluluğu için
-`sourceTarget` içerir. Kaynak alanları uydurulmuş değerler olmadan korunur.
+`sourceTarget` içerir. Actor kaynak alanlarını korur & değer uydurmaz.
 
 ## Fiyatlandırma
 
@@ -77,7 +77,7 @@ içinde sıralı kalır. Kabul edilen satırlar, faturalama durumu, imleçler ve
 çıktı parmak izleri Apify göçünden sağ çıkar. Actor'ın kendi kendine
 uyguladığı bir zaman aşımı yoktur.
 
-Yalnızca X'in gösterdiği herkese açık Topluluklar döndürülebilir. Mevcut
+Actor yalnızca X'in gösterdiği herkese açık Toplulukları döndürür. Mevcut
 alanlar Topluluğa göre değişir.
 
 ## Eksik çıkarma

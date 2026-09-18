@@ -66,11 +66,11 @@ Pour des lectures uniques, utilisez
 
 ## Limites et format
 
-Seuls les Articles publics exposés par X peuvent être renvoyés. Le Markdown
+L'Actor renvoie uniquement les Articles publics que X expose. Le Markdown
 conserve les blocs, ainsi que les plages en gras et en italique. `contents`
-conserve le formatage source. Les métadonnées de lien ne sont jamais devinées.
-Apify affiche le Markdown sous forme de texte. Les exemples utilisent des
-valeurs d'illustration. Les résultats reflètent des données en temps réel.
+conserve le formatage source. Il ne devine jamais les métadonnées de lien. Les
+exemples utilisent des valeurs d'illustration. Les résultats reflètent des
+données en temps réel. Apify affiche le Markdown sous forme de texte.
 Utilisez `latest`. Les URL et les ID peuvent être mélangés.
 
 ## Extraction incomplète

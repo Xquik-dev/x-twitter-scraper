@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data, and X Media Downloader extracts or stores photos, videos &
+most complete X data. X Media Downloader extracts or stores photos, videos &
 GIFs from posts & profiles. Every other Apify Actor charges before filtering or
 deduplicating. Xquik charges only for delivered, unique, filter-matching
 results.

@@ -74,8 +74,8 @@ Chaque recherche vérifie la page de profil disponible la plus récente de la
 personne ayant reposté. Elle fait correspondre le compte et le post source
 avec les enregistrements de repost réels. Des enregistrements de repost plus
 anciens, supprimés ou indisponibles peuvent laisser l'horodatage à `null`.
-Les recherches d'horodatage échouées laissent aussi `null` ; le profil reste
-inclus. La recherche ne prouve pas qu'un compte n'a jamais reposté un post.
+Les recherches d'horodatage échouées laissent aussi `null`. Le profil reste
+dans la sortie. La recherche ne prouve pas qu'un compte n'a jamais reposté un post.
 
 Des lectures supplémentaires augmentent la latence. Laissez cette option
 désactivée pour des résultats de profil uniquement. Le champ `createdAt` du

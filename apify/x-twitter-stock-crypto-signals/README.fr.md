@@ -15,31 +15,31 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Découvrez comment Framer utilise les scrapers Xquik avec Claude Code, Codex, Cursor et d'autres outils, à partir de 6:07.</a>
 </td></tr></table>
 
-Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher
-au monde, avec les données X les plus complètes. X (Twitter) Stock & Crypto AI Trading Signals transforme les tweets en positions haussière, baissière,
-neutre ou mixte par action ou coin. Tous les autres Actors Apify facturent
-avant de filtrer ou de dédupliquer. Xquik ne facture que les résultats
-livrés, uniques et conformes aux filtres.
+Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
+monde, avec les données X les plus complètes. X (Twitter) Stock & Crypto AI
+Trading Signals transforme les tweets en positions haussière, baissière, neutre
+ou mixte par action ou coin. Tous les autres Actors Apify facturent avant de
+filtrer ou de dédupliquer. Xquik ne facture que les résultats livrés, uniques et
+conformes aux filtres. Les coûts d'IA sont inclus dans le prix par tweet. Vous
+ne payez aucun fournisseur d'IA, n'achetez aucun jeton & n'apportez aucune clé.
 
-Les coûts d'IA sont inclus dans le prix par tweet. Vous ne payez aucun fournisseur d'IA, n'achetez aucun jeton & n'apportez aucune clé.
+Lisez la position derrière les posts d'action, de crypto et de trading sur X
+(Twitter) et conservez les données originales du tweet. **X (Twitter) Stock &
+Crypto AI Trading Signals** collecte les posts sur vos tickers ou actifs. Il
+ajoute ensuite à chaque post une position, un type de contenu, un niveau de
+conviction & une pertinence d'actif générés par IA. Séparez les appels fermes
+des remarques nuancées, l'analyse de la promotion, et les posts sur votre actif
+des usages non liés de son nom.
 
-Lisez la position derrière les posts d'action, de crypto et de trading sur
-X (Twitter) et conservez les données originales du tweet. **X (Twitter) Stock & Crypto AI Trading Signals** collecte les posts sur vos tickers ou
-actifs, puis ajoute à chaque post une position, un type de contenu, un
-niveau de conviction et une pertinence d'actif générés par IA. Séparez les
-appels fermes des remarques nuancées, l'analyse de la promotion, et les
-posts sur votre actif des usages non liés de son nom.
-
-- **Position par post** : haussière, baissière, neutre, mixte ou
-  incertaine.
-- **Le type de contenu** distingue l'analyse, l'actualité, les idées de
-  trade, la promotion, l'humour et les questions.
+- **Position par post.** Chaque post est de position haussière, baissière,
+  neutre, mixte ou incertaine.
+- **Le type de contenu** distingue l'analyse, l'actualité, les idées de trade,
+  la promotion, l'humour et les questions.
 - **La conviction** sépare les appels et positions fermes des remarques
   nuancées.
 - **La pertinence** retire les usages non liés d'un ticker ou d'un nom
   d'entreprise.
-- **Enregistrements source complets** pour chaque champ exposé par le
-  tweet.
+- **Enregistrements source complets** pour chaque champ exposé par le tweet.
 
 ## Comment analyser le sentiment de marché sur X
 
@@ -80,15 +80,14 @@ les prix, ni les dépôts réglementaires.
 
 Les coûts d'IA sont inclus dans le prix par tweet. Vous ne payez aucun fournisseur d'IA, n'achetez aucun jeton & n'apportez aucune clé.
 
-À partir de $0.0003 par tweet analysé avec succès, sans frais de
-démarrage. La collecte est incluse, et l'allocation d'analyse documentée
-est de 8 questions, 8 000 octets par définition de question et 12 000
-octets de contexte par tweet. Les filtres d'extraction et la déduplication
-s'exécutent avant l'analyse, donc les lignes filtrées et en double ne sont
-jamais analysées ni facturées. Les analyses échouées ou ignorées et les
-lignes de diagnostic n'entraînent aucun frais de résultat. L'usage de la
-plateforme Apify est facturé séparément par Apify et apparaît dans
-l'onglet Pricing.
+À partir de $0.0003 par tweet analysé avec succès, sans frais de démarrage. Le
+prix inclut la collecte. L'allocation d'analyse est de 8 questions, 8 000 octets
+par définition de question & 12 000 octets de contexte par tweet. Les filtres
+d'extraction et la déduplication s'exécutent avant l'analyse, donc les lignes
+filtrées et en double ne sont jamais analysées ni facturées. Les analyses
+échouées ou ignorées et les lignes de diagnostic n'entraînent aucun frais de
+résultat. Apify facture séparément l'usage de la plateforme. L'onglet Pricing
+l'affiche.
 
 ## Exemples d'entrée et de sortie
 
@@ -135,23 +134,21 @@ collectées, les analyses facturées et les frais en attente.
 
 ## Résumé de run et réponses à plat
 
-Chaque run écrit un enregistrement `analysis-summary` dans son
-key-value store et le répète sous `results.analysisSummary` dans le
-rapport de run. Il compte les lignes analysées, échouées et ignorées,
-totalise l'engagement, et résume chaque question. `cashtags` compte la
-position par cashtag tel que `$NVDA`, donc le ratio haussier par actif
-provient de `choices.stance`. Le bloc `stance` ajoute la répartition
-pondérée par l'engagement et les posts haussiers et baissiers les plus
-engagés ; `conviction` rapporte la moyenne et la moyenne pondérée par
-l'engagement. Les nombres sont arrondis à 4 décimales ; les runs vides
-indiquent des comptes à zéro et des moyennes `null`. Chaque entrée
-`cashtags` ajoute `signal` : le compte haussier, le compte baissier et un
-score de -1 à 1 calculé comme (haussier - baissier) / lignes, et
-`monitor.changedRows` liste les tweets dont la position a évolué depuis
-la référence. Chaque ligne liste aussi `sourceDomains`, les noms d'hôte
-qu'elle lie, et le bloc `monitor` du résumé compte les statuts de
-comparaison et liste jusqu'à 50 lignes modifiées quand
-`monitor.baselineDatasetId` est réglé.
+Chaque run écrit un enregistrement `analysis-summary` dans son key-value store
+et le répète sous `results.analysisSummary` dans le rapport de run. Il compte
+les lignes analysées, échouées et ignorées, totalise l'engagement, et résume
+chaque question. `cashtags` compte la position par cashtag tel que `$NVDA`, donc
+le ratio haussier par actif provient de `choices.stance`. Le bloc `stance`
+ajoute la répartition pondérée par l'engagement et les posts haussiers et
+baissiers les plus engagés. `conviction` rapporte la moyenne & la moyenne
+pondérée par l'engagement. Le résumé arrondit les nombres à 4 décimales. Un run
+vide indique des comptes à zéro & des moyennes `null`. Chaque entrée `cashtags`
+ajoute `signal` avec un compte haussier, un compte baissier & un score de -1 à
+1. Le score vaut (haussier - baissier) / lignes. `monitor.changedRows` liste les
+tweets dont la position a évolué depuis la référence. Chaque ligne liste
+`sourceDomains`, les noms d'hôte qu'elle lie. Avec `monitor.baselineDatasetId`
+réglé, le bloc `monitor` du résumé compte les statuts de comparaison & liste
+jusqu'à 50 lignes modifiées.
 
 Chaque ligne de résultat porte aussi `answers`, une correspondance plate
 de l'ID de question vers la catégorie, le score ou la probabilité
@@ -162,20 +159,19 @@ ignorées portent une correspondance vide.
 
 ## Comparer avec un run antérieur
 
-Passez `monitor.baselineDatasetId`, l'ID du dataset d'un run antérieur
-terminé avec les mêmes réglages d'analyse, et chaque ligne gagne un objet
-`monitor` : `first_run` sans référence, `new_to_baseline` pour les tweets
-absents du run antérieur, `unchanged` ou `changed` pour les tweets qu'il
-avait, avec `changes` listant chaque position, type de contenu ou niveau
-de conviction ayant évolué de `previous` à `current`. Les décisions se
-comparent par catégorie, niveau de score arrondi, ou oui/non à 0,5, et
-une décision ne compte comme changée que lorsque la réponse évolue
-clairement : la catégorie précédente tombe sous 0,4 de probabilité, un
-score bouge d'au moins 0,6 niveau, ou une probabilité oui/non se situe à
-au moins 0,1 du seuil. Les fluctuations proches d'une égalité entre les
-runs restent inchangées. Les références au-delà de `maxBaselineRows`
-(par défaut 100 000) ou issues de réglages différents arrêtent le run
-avant la collecte avec une ligne de diagnostic.
+Passez `monitor.baselineDatasetId`, l'ID du dataset d'un run antérieur terminé
+avec les mêmes réglages d'analyse. Chaque ligne gagne alors un objet `monitor`.
+Son statut est `first_run` sans référence, `new_to_baseline` pour les tweets
+absents du run antérieur, & `unchanged` ou `changed` pour les tweets qu'il
+avait. `changes` liste chaque position, type de contenu ou niveau de conviction
+ayant évolué de `previous` à `current`. Les décisions se comparent par
+catégorie, niveau de score arrondi, ou oui/non à 0,5. Une décision compte comme
+changée dans trois cas. La catégorie précédente tombe sous 0,4 de probabilité.
+Un score bouge d'au moins 0,6 niveau. Une probabilité oui/non se situe à au
+moins 0,1 du seuil. Les fluctuations proches d'une égalité entre les runs
+restent inchangées. Les références au-delà de `maxBaselineRows` (par défaut 100
+000) ou issues de réglages différents arrêtent le run avant la collecte avec une
+ligne de diagnostic.
 
 ## Exemples de tâches
 
@@ -283,35 +279,33 @@ vous indiquent quels posts traitent vos cibles comme des actifs.
 
 ### Pourquoi une ligne revient-elle avec un `analysis.status` de `failed` ou `skipped` ?
 
-Le tweet a été collecté et livré, mais l'analyse par IA ne s'est pas
-terminée. `analysis.reason` nomme la cause, comme `context_limit` quand
-le tweet et son contexte dépassent `maxContextBytes`, ou
-`service_unavailable` après des tentatives. Ces lignes n'entraînent aucun
-frais de résultat. Augmentez `maxContextBytes` (jusqu'à 12 000) ou
-relancez les ID concernés.
+L'Actor a collecté & livré le tweet, mais l'analyse par IA ne s'est pas
+terminée. `analysis.reason` nomme la cause, comme `context_limit` quand le tweet
+et son contexte dépassent `maxContextBytes`, ou `service_unavailable` après des
+tentatives. Ces lignes n'entraînent aucun frais de résultat. Augmentez
+`maxContextBytes` (jusqu'à 12 000) ou relancez les ID concernés.
 
 ### L'analyse vérifie-t-elle les faits ?
 
-Non. Les réponses décrivent ce que le post exprime et comment il est
-formulé. Les probabilités expriment la confiance du modèle, pas la
-vérité. Vérifiez les classifications importantes par rapport au tweet
-original, que chaque ligne conserve.
+Non. Les réponses décrivent ce que le post exprime & comment le post le formule.
+Les probabilités expriment la confiance du modèle, pas la vérité. Vérifiez les
+classifications importantes par rapport au tweet original, que chaque ligne
+conserve.
 
 ### Quelles langues fonctionnent ?
 
-L'extraction prend en charge toutes les langues servies par X. L'analyse
-est validée d'abord sur des scénarios clients en anglais ; les autres
-langues prises en charge renvoient des réponses avec la même structure, et
-l'incertitude reste explicite via les catégories et probabilités
-`unclear`.
+L'extraction prend en charge toutes les langues servies par X. Nous validons
+d'abord l'analyse sur des scénarios clients en anglais. Les autres langues
+prises en charge renvoient des réponses avec la même structure. Les catégories
+`unclear` & les probabilités montrent l'incertitude dans chaque langue.
 
 ### Comment limiter le coût ?
 
-Les filtres, la déduplication et `maxItems` s'exécutent avant l'analyse,
-donc seuls les tweets uniques et conformes aux filtres sont analysés et
-facturés. Utilisez des opérateurs de recherche précis, des bornes de date
-et des planchers d'engagement, et commencez avec un `maxItems` réduit pour
-vérifier la qualité des réponses avant un grand run.
+Les filtres, la déduplication et `maxItems` s'exécutent avant l'analyse, donc
+l'Actor analyse & facture seulement les tweets uniques et conformes aux filtres.
+Utilisez des opérateurs de recherche précis, des bornes de date et des planchers
+d'engagement, et commencez avec un `maxItems` réduit pour vérifier la qualité
+des réponses avant un grand run.
 
 ### Où obtenir de l'aide ?
 

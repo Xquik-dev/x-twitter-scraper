@@ -16,26 +16,28 @@
 </td></tr></table>
 
 Xquik es el servicio de extracción de X (Twitter) más rápido y económico del
-mundo, con los datos de X más completos, y X (Twitter) Stock & Crypto AI Trading Signals convierte tuits en posturas alcistas, bajistas, neutrales o
-mixtas por ticker o moneda. Todos los demás Actors de Apify cobran antes de
-filtrar o eliminar duplicados. Xquik cobra solo por resultados entregados,
-únicos y que coinciden con los filtros.
+mundo, con los datos de X más completos. X (Twitter) Stock & Crypto AI Trading
+Signals convierte tuits en posturas alcistas, bajistas, neutrales o mixtas por
+ticker o moneda. Todos los demás Actors de Apify cobran antes de filtrar o
+eliminar duplicados. Xquik cobra solo por resultados entregados, únicos y que
+coinciden con los filtros. Los costos de IA están incluidos en el precio por
+tweet. No pagas a ningún proveedor de IA, no compras tokens & no traes ninguna
+clave.
 
-Los costos de IA están incluidos en el precio por tweet. No pagas a ningún proveedor de IA, no compras tokens & no traes ninguna clave.
+Lee la postura detrás de las publicaciones sobre acciones, cripto y trading en X
+(Twitter) y conserva los datos originales del tuit. **X (Twitter) Stock & Crypto
+AI Trading Signals** recopila publicaciones sobre tus tickers o activos. Luego
+agrega, mediante IA, una postura, tipo de contenido, nivel de convicción &
+relevancia del activo a cada publicación. Separa las declaraciones firmes de los
+comentarios matizados, el análisis de la promoción, y las publicaciones sobre tu
+activo de usos no relacionados de su nombre.
 
-Lee la postura detrás de las publicaciones sobre acciones, cripto y trading en
-X (Twitter) y conserva los datos originales del tuit. **X (Twitter) Stock & Crypto AI Trading Signals** recopila publicaciones sobre tus tickers o activos
-y luego agrega, mediante IA, una postura, tipo de contenido, nivel de
-convicción y relevancia del activo a cada publicación. Separa las
-declaraciones firmes de los comentarios matizados, el análisis de la
-promoción, y las publicaciones sobre tu activo de usos no relacionados de su
-nombre.
-
-- **Postura por publicación**: alcista, bajista, neutral, mixta o poco clara.
+- **Postura por publicación.** Cada publicación es alcista, bajista, neutral,
+  mixta o poco clara.
 - **Tipo de contenido** distingue entre análisis, noticias, ideas de trading,
   promoción, humor y preguntas.
-- **Convicción** separa las declaraciones y posiciones firmes de los
-  comentarios matizados.
+- **Convicción** separa las declaraciones y posiciones firmes de los comentarios
+  matizados.
 - **Relevancia** filtra usos no relacionados de un ticker o nombre de empresa.
 - **Registros de fuente completos** para cada campo que expone el tuit.
 
@@ -76,14 +78,14 @@ inversión y no verifican afirmaciones, precios o reportes regulatorios.
 
 Los costos de IA están incluidos en el precio por tweet. No pagas a ningún proveedor de IA, no compras tokens & no traes ninguna clave.
 
-Desde $0.0003 por tuit analizado con éxito, sin tarifa de inicio. La
-recopilación está incluida, y el límite documentado de análisis es de 8
-preguntas, 8000 bytes por definición de pregunta y 12 000 bytes de contexto por
-tuit. Los filtros de extracción y la eliminación de duplicados se ejecutan
-antes del análisis, así que las filas filtradas o duplicadas nunca se analizan
-ni se cobran. Los análisis fallidos u omitidos y las filas de diagnóstico no
-generan cargo por resultado. El uso de la plataforma Apify se factura por
-separado por Apify y aparece en la pestaña Pricing.
+Desde $0.0003 por tuit analizado con éxito, sin tarifa de inicio. El precio
+incluye la recopilación. El límite de análisis es de 8 preguntas, 8000 bytes por
+definición de pregunta & 12 000 bytes de contexto por tuit. Los filtros de
+extracción y la eliminación de duplicados se ejecutan antes del análisis, así
+que las filas filtradas o duplicadas nunca se analizan ni se cobran. Los
+análisis fallidos u omitidos y las filas de diagnóstico no generan cargo por
+resultado. Apify factura por separado el uso de la plataforma. La pestaña
+Pricing lo muestra.
 
 ## Ejemplos de entrada y salida
 
@@ -132,20 +134,19 @@ análisis cobrados y los cargos pendientes.
 
 Cada ejecución escribe un registro `analysis-summary` en su almacén de
 clave-valor y lo repite en `results.analysisSummary` dentro del informe de
-ejecución. Cuenta las filas analizadas, fallidas y omitidas, suma la
-interacción y resume cada pregunta. `cashtags` cuenta la postura por cashtag
-como `$NVDA`, así que la proporción alcista por activo proviene de
-`choices.stance`. El bloque `stance` agrega la división ponderada por
-interacción y las publicaciones alcistas y bajistas con más interacción;
-`conviction` informa la media y la media ponderada por interacción. Los
-números se redondean a 4 decimales; las ejecuciones vacías informan conteos en
-cero y medias `null`. Cada entrada de `cashtags` agrega `signal`: conteo
-alcista, conteo bajista y un puntaje de -1 a 1 calculado como
-(alcistas - bajistas) / filas, y `monitor.changedRows` lista los tuits cuya
-postura cambió desde la línea base. Cada fila también incluye
-`sourceDomains`, los dominios que enlaza, y el bloque `monitor` del resumen
-cuenta los estados de comparación y lista hasta 50 filas cambiadas cuando se
-configura `monitor.baselineDatasetId`.
+ejecución. Cuenta las filas analizadas, fallidas y omitidas, suma la interacción
+y resume cada pregunta. `cashtags` cuenta la postura por cashtag como `$NVDA`,
+así que la proporción alcista por activo proviene de `choices.stance`. El bloque
+`stance` agrega la división ponderada por interacción y las publicaciones
+alcistas y bajistas con más interacción. `conviction` informa la media & la
+media ponderada por interacción. El resumen redondea los números a 4 decimales.
+Una ejecución vacía informa conteos en cero & medias `null`. Cada entrada de
+`cashtags` agrega `signal` con un conteo alcista, un conteo bajista & un puntaje
+de -1 a 1. El puntaje es (alcistas - bajistas) / filas. `monitor.changedRows`
+lista los tuits cuya postura cambió desde la línea base. Cada fila incluye
+`sourceDomains`, los dominios que enlaza. Con `monitor.baselineDatasetId`
+configurado, el bloque `monitor` del resumen cuenta los estados de comparación &
+lista hasta 50 filas cambiadas.
 
 Cada fila de resultado también incluye `answers`, un mapa plano del ID de
 pregunta a la categoría, puntaje o probabilidad elegidos. La vista de conjunto
@@ -156,19 +157,19 @@ JSON. Las filas fallidas u omitidas tienen un mapa vacío.
 ## Comparar con una ejecución anterior
 
 Pasa `monitor.baselineDatasetId`, el ID de conjunto de datos de una ejecución
-anterior completada con la misma configuración de análisis, y cada fila gana
-un objeto `monitor`: `first_run` sin línea base, `new_to_baseline` para tuits
-que la ejecución anterior no tenía, `unchanged` o `changed` para tuits que sí
-tenía, con `changes` que lista cada postura, tipo de contenido o nivel de
-convicción que cambió de `previous` a `current`. Las decisiones se comparan
-por categoría, nivel de puntaje redondeado, o sí/no en 0.5, y una decisión
-solo cuenta como cambiada cuando la respuesta se mueve claramente: la
-categoría anterior cae por debajo de 0.4 de probabilidad, un puntaje se mueve
-al menos 0.6 niveles, o una probabilidad de sí/no queda al menos a 0.1 del
-umbral. Las fluctuaciones marginales entre ejecuciones se consideran sin
-cambios. Las líneas base por encima de `maxBaselineRows` (100 000 por defecto)
-o de una configuración distinta detienen la ejecución antes de la
-recopilación con una fila de diagnóstico.
+anterior completada con la misma configuración de análisis. Cada fila gana
+entonces un objeto `monitor`. Su estado es `first_run` sin línea base,
+`new_to_baseline` para tuits que la ejecución anterior no tenía, & `unchanged` o
+`changed` para tuits que sí tenía. `changes` lista cada postura, tipo de
+contenido o nivel de convicción que cambió de `previous` a `current`. Las
+decisiones se comparan por categoría, nivel de puntaje redondeado, o sí/no en
+0.5. Una decisión cuenta como cambiada en tres casos. La categoría anterior cae
+por debajo de 0.4 de probabilidad. Un puntaje se mueve al menos 0.6 niveles. Una
+probabilidad de sí/no queda al menos a 0.1 del umbral. Las fluctuaciones
+marginales entre ejecuciones se consideran sin cambios. Las líneas base por
+encima de `maxBaselineRows` (100 000 por defecto) o de una configuración
+distinta detienen la ejecución antes de la recopilación con una fila de
+diagnóstico.
 
 ## Ejemplos de tareas
 
@@ -270,7 +271,7 @@ publicaciones tratan tus objetivos como activos.
 
 ### ¿Por qué una fila regresó con `analysis.status` en `failed` o `skipped`?
 
-El tuit se recopiló y entregó, pero el análisis con IA no se completó.
+El Actor recopiló & entregó el tuit, pero el análisis con IA no se completó.
 `analysis.reason` indica la causa, como `context_limit` cuando el tuit y su
 contexto superan `maxContextBytes`, o `service_unavailable` tras varios
 reintentos. Estas filas no generan cargo por resultado. Aumenta
@@ -278,24 +279,24 @@ reintentos. Estas filas no generan cargo por resultado. Aumenta
 
 ### ¿El análisis verifica hechos?
 
-No. Las respuestas describen lo que expresa la publicación y cómo está
-formulada. Las probabilidades expresan la confianza del modelo, no la verdad.
+No. Las respuestas describen lo que expresa la publicación & cómo la publicación
+lo formula. Las probabilidades expresan la confianza del modelo, no la verdad.
 Revisa las clasificaciones importantes contra el tuit original, que cada fila
 conserva.
 
 ### ¿Qué idiomas funcionan?
 
-La extracción admite todos los idiomas que ofrece X. El análisis se valida
-primero con escenarios de clientes en inglés; los demás idiomas admitidos
-devuelven respuestas con la misma estructura, y la incertidumbre queda
-explícita mediante categorías y probabilidades `unclear`.
+La extracción admite todos los idiomas que ofrece X. Validamos el análisis
+primero con escenarios de clientes en inglés. Los demás idiomas admitidos
+devuelven respuestas con la misma estructura. Las categorías `unclear` & las
+probabilidades muestran la incertidumbre en todos los idiomas.
 
 ### ¿Cómo limito el costo?
 
 Los filtros, la eliminación de duplicados y `maxItems` se ejecutan antes del
-análisis, así que solo se analizan y cobran los tuits únicos que coinciden con
-los filtros. Usa operadores de búsqueda precisos, límites de fecha y pisos de
-interacción, y comienza con un `maxItems` pequeño para revisar la calidad de
+análisis, así que el Actor analiza & cobra solo los tuits únicos que coinciden
+con los filtros. Usa operadores de búsqueda precisos, límites de fecha y pisos
+de interacción, y comienza con un `maxItems` pequeño para revisar la calidad de
 las respuestas antes de una ejecución grande.
 
 ### ¿Dónde obtengo ayuda?

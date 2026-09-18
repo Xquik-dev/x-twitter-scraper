@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo,
-con i dati X più completi, e X Tweet Scraper raccoglie tweet, risposte, profili,
+con i dati X più completi. X Tweet Scraper raccoglie tweet, risposte, profili,
 liste & ricerche con oltre 50 filtri. Ogni altro Actor Apify addebita il costo
 prima di filtrare o deduplicare. Xquik addebita solo i risultati consegnati,
 unici & corrispondenti ai filtri.
@@ -58,7 +58,7 @@ tweet e query di ricerca con oltre 50 filtri.
 Seleziona `latest` per ogni esecuzione per ricevere tutte le correzioni
 pubblicate.
 
-Quando non viene specificata alcuna build, Apify usa il valore predefinito
+Se non specifichi alcuna build, Apify usa il valore predefinito
 `latest` di questo Actor. Le esecuzioni dalla Console e gli esempi API
 standard ereditano questo valore predefinito.
 
@@ -131,6 +131,7 @@ prima di eseguirlo.
 | `isLimitedReply`       | Se le risposte sono limitate                                     |
 | `isNoteTweet`          | Se si tratta di un Note Tweet (post lungo)                        |
 | `isQuoteStatus`        | Se questo tweet cita un altro tweet                               |
+| `isRetweet`            | Se questa riga è un retweet, con l'originale allegato             |
 | `isReply`              | Se questo tweet è una risposta                                    |
 | `quoted_tweet`         | Oggetto del tweet citato (se è una citazione)                     |
 | `conversationId`       | ID del thread/conversazione                                       |
@@ -147,6 +148,10 @@ conversazione. Consulta l'OpenAPI per i campi esatti.
 
 Gli autori annidati seguono il contratto del profilo pubblico. Copre identità,
 conteggi, verifica, disponibilità, dati professionali e biografie del profilo.
+
+Le righe dei retweet impostano `isRetweet` su `true`. Il loro `text` riporta il
+post originale per intero, e `retweeted_tweet` contiene il post originale con
+autore & conteggi.
 
 Le righe dei tweet conservano anche `type`, `source`, `inReplyToId`,
 `inReplyToUserId`, `inReplyToUsername` e `retweeted_tweet`. I tweet citati e
@@ -213,8 +218,8 @@ consecutive. Le ricerche eseguono un checkpoint anche quando il servizio
 riporta una paginazione bloccata. I blocchi fermano i retry automatici senza
 riavviare la ricerca. Queste esecuzioni riportano un'estrazione incompleta e
 conservano cursori ripristinabili. Una pagina finale completa la paginazione
-anche dopo pagine vuote consecutive. `failedSubtargets` resta `0`. Vengono
-fatturate solo le righe del dataset accettate.
+anche dopo pagine vuote consecutive. `failedSubtargets` resta `0`. Paghi
+solo le righe del dataset accettate.
 
 Il timeout Apify predefinito è `0`, quindi le esecuzioni non hanno limite di
 tempo. L'Actor continua finché non raggiunge il limite o esaurisce i dati
@@ -249,7 +254,7 @@ Incolla una combinazione di URL di tweet, profili, ricerche o liste:
 }
 ```
 
-Gli URL dei tweet vengono cercati in batch concorrenti fino a 100. Le risposte
+L'Actor cerca gli URL dei tweet in batch concorrenti fino a 100. Le risposte
 parzialmente riuscite ricontrollano una volta gli ID non risolti. L'output dei
 batch resta unico e corrisponde agli ID richiesti. Gli URL di profilo
 combinano la timeline del profilo con la ricerca autore. Gli URL di ricerca
@@ -328,19 +333,19 @@ Modalità esplicite supportate: `tweet`, `tweets`, `search`, `profileTweets`,
 `replies`, `quotes`, `thread`, `retweeters` e `favoriters`.
 
 `profileTweets` segue la scheda Post del profilo. Restituisce post non di
-risposta scritti dal target. Le righe di risposta e il contesto di
-conversazione di altri autori sono esclusi prima della fatturazione.
+risposta scritti dal target. L'Actor esclude le righe di risposta e il
+contesto di conversazione di altri autori prima della fatturazione.
 
 `profileReplies` segue la scheda Con risposte di X. Restituisce post e
-risposte del profilo scritti dal target. Il contesto di conversazione di
-altri autori è escluso. Usa `filter:replies` o la ricerca `to:` quando ti
+risposte del profilo scritti dal target. L'Actor esclude il contesto di
+conversazione di altri autori. Usa `filter:replies` o la ricerca `to:` quando ti
 servono solo le risposte.
 
 Le modalità di ricerca e i tweet paginati supportano `time.since`,
 `time.until`, i timestamp Unix e `lang`. Questo include Post del profilo, Con
 risposte, Media, Mi piace, Liste, risposte, citazioni e thread. Funzionano
 anche gli operatori di data piatti corrispondenti. L'Actor verifica ogni riga
-prima della fatturazione. Il limite inferiore della data è incluso; il limite
+prima della fatturazione. Il limite inferiore della data è incluso. Il limite
 superiore è escluso. I filtri di data escludono le righe senza date
 utilizzabili. I filtri di lingua escludono le lingue mancanti o non
 corrispondenti. Le righe filtrate non consumano mai il limite di risultati
@@ -389,6 +394,10 @@ fogli di calcolo:
 L'output piatto mantiene invariati `author` e `media` e aggiunge anche campi
 di primo livello come `authorUsername`, `authorName`, `authorFollowers`,
 `tweetUrl`, `twitterUrl`, `mediaUrls`, `imageUrls` e `videoUrls`.
+
+Ogni riga piatta di tweet riporta `media`. Un tweet senza media ha una lista
+vuota, quindi ogni riga ha le stesse chiavi in un foglio di calcolo o in una
+pipeline tipizzata.
 
 ### 7. Seleziona la denominazione dei campi
 
@@ -697,7 +706,7 @@ e della piattaforma Apify.
 **Quanto è veloce?** Il tempo di esecuzione dipende dal percorso, dal numero
 di risultati e dalla disponibilità a monte.
 
-**Quali operatori di ricerca sono supportati?** La ricerca avanzata di X
+**Quali operatori di ricerca funzionano?** La ricerca avanzata di X
 supporta autori, destinatari, menzioni, date, coinvolgimento, media & posizione.
 
 **Posso usare l'API Apify per eseguirlo?** Sì. Consulta la

@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何将 Xquik 抓取工具与 Claude Code、Codex、Cursor 等配合使用，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据，X List
+Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据。X List
 Scraper 能采集 List 帖子、成员与关注者。其他所有 Apify Actor 都会在过滤或去重之前
 就收费。Xquik 只为已交付、唯一且符合过滤条件的结果收费。
 
@@ -30,7 +30,7 @@ Scraper 能采集 List 帖子、成员与关注者。其他所有 Apify Actor �
 - 支持按日期、Unix 时间、语言、媒体、互动量、认证状态与主页信息过滤。
 - 每次运行支持多个 List 与多种资源类型。
 - 全局与单资源上限。
-- 迁移后分页可恢复。重复行会被移除。
+- 迁移后分页可恢复。Actor 会移除重复行。
 
 ## 输入参数
 

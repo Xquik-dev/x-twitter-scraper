@@ -113,7 +113,7 @@ Apifyのデフォルトのタイムアウトは `0` です。実行に時間制�
   `minFollowing`、`maxFollowing`、`minStatuses`、`maxStatuses`、
   `minAccountAgeDays`、`verifiedType`、`usernameContains`、`hasWebsite`、
   `hasLocation`)は、プロフィールがデータセットに入る前に実行されます。
-- `dedupeAcrossTargets: true` の場合、重複は書き込み前に削除されます。
+- `dedupeAcrossTargets: true` の場合、Actorは書き込み前に重複を削除します。
 - データセットに拒否された行は課金されません。
 - 入力なし、無効な入力、出力ゼロの実行では、無料の `diagnostics` 出力に1件の実用的なレコードが書き込まれます。
 
@@ -150,7 +150,7 @@ Apifyのデフォルトのタイムアウトは `0` です。実行に時間制�
 }
 ```
 
-各ハンドル名に対して何をスクレイピングするかを切り替えるには、`relation` を `followers`、`following`、または `verified_followers` に設定します。
+Actorが各ハンドル名に対してスクレイピングする関係を選ぶには、`relation` を `followers`、`following`、または `verified_followers` に設定します。
 
 同じ入力に使えるエイリアスとして、`username`、`usernames`、`user_names` があります。
 

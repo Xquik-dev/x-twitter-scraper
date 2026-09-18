@@ -79,7 +79,7 @@ kümeleri için kullan.
 
 Tüm yayınlanmış düzeltmeleri almak için her çalıştırmada `latest`'i seç.
 
-Yapı belirtilmediğinde Apify bu Actor'ın `latest` varsayılanını kullanır.
+Yapı belirtmezsen Apify bu Actor'ın `latest` varsayılanını kullanır.
 Console çalıştırmaları ve standart API örnekleri bu varsayılanı devralır.
 
 Kaydedilmiş görevler Actor varsayılanını geçersiz kılabilir. Zamanlamalar ve
@@ -448,8 +448,8 @@ Xquik, teslim edilen veri satırı başına bir ücret uygular. Tanılamalar
 veya proxy ücreti uygulanmaz.
 
 Varsayılan Apify zaman aşımı `0`'dır, bu yüzden çalıştırmaların zaman
-sınırı yoktur. Actor, üst sınıra veya uygun veri tükenene kadar devam eder.
-Çağıran yine de sonlu bir Apify zaman aşımı ayarlayabilir. O zaman
+sınırı yoktur. Actor, üst sınıra ulaşana veya uygun veriyi bitirene kadar
+devam eder. Çağıran yine de sonlu bir Apify zaman aşımı ayarlayabilir. O zaman
 `completionReason: "deadline_reached"`, o yapılandırılmış sınırın yaklaştığı
 anlamına gelir. Actor, kontrol noktaları, satırlar, raporlar ve başarılı bir
 çıkış için son 15 saniyeyi tutar. Zaten toplanan yanıtlar teslim edilmiş

@@ -58,7 +58,7 @@ eder.
 
 Tüm yayınlanmış düzeltmeleri almak için her çalıştırmada `latest`'i seç.
 
-Yapı belirtilmediğinde Apify bu Actor'ın `latest` varsayılanını kullanır.
+Yapı belirtmezsen Apify bu Actor'ın `latest` varsayılanını kullanır.
 Console çalıştırmaları ve standart API örnekleri bu varsayılanı devralır.
 
 Kaydedilmiş görevler Actor varsayılanını geçersiz kılabilir. Zamanlamalar ve
@@ -131,6 +131,7 @@ veri kümesi görünümü vardır. Her görev gerçek bir arama veya hedefle aç
 | `isLimitedReply`         | Yanıtların sınırlı olup olmadığı                               |
 | `isNoteTweet`            | Bunun bir Note Tweet (uzun biçimli gönderi) olup olmadığı      |
 | `isQuoteStatus`          | Bu tweet'in başka bir tweet'i alıntılayıp alıntılamadığı       |
+| `isRetweet`              | Bu satırın retweet olup olmadığı, orijinali ekli               |
 | `isReply`                | Bu tweet'in bir yanıt olup olmadığı                            |
 | `quoted_tweet`           | Alıntılanan tweet nesnesi (alıntı tweet ise)                   |
 | `conversationId`         | Thread/konuşma ID'si                                           |
@@ -148,6 +149,10 @@ listeler. Tam alanlar için OpenAPI'a bak.
 İç içe yazarlar herkese açık profil sözleşmesini izler. Bu sözleşme kimliği,
 sayaçları, doğrulamayı, kullanılabilirliği, profesyonel verileri ve profil
 biyografilerini kapsar.
+
+Retweet satırları `isRetweet` değerini `true` yapar. `text` alanı orijinal
+gönderinin tamamını taşır, `retweeted_tweet` ise orijinal gönderiyi yazarı &
+sayaçlarıyla birlikte tutar.
 
 Tweet satırları ayrıca `type`, `source`, `inReplyToId`, `inReplyToUserId`,
 `inReplyToUsername` ve `retweeted_tweet`'i korur. Alıntılanan ve yeniden
@@ -217,11 +222,11 @@ kontrol noktasına alınır. Duraklamalar, aramayı yeniden başlatmadan
 otomatik yeniden denemeleri durdurur. Bu çalıştırmalar eksik çıkarma
 bildirir ve devam ettirilebilir imleçleri korur. Ardışık boş sayfalardan
 sonra bile bir terminal sayfası sayfalamayı tamamlar. `failedSubtargets` `0`
-olarak kalır. Yalnızca kabul edilen veri kümesi satırları faturalandırılır.
+olarak kalır. Yalnızca kabul edilen veri kümesi satırları için ödersin.
 
 Varsayılan Apify zaman aşımı `0`'dır, bu yüzden çalıştırmaların zaman
-sınırı yoktur. Actor, üst sınıra veya uygun veri tükenene kadar devam eder.
-Çağıran yine de sonlu bir Apify zaman aşımı ayarlayabilir. O zaman
+sınırı yoktur. Actor, üst sınıra ulaşana veya uygun veriyi bitirene kadar
+devam eder. Çağıran yine de sonlu bir Apify zaman aşımı ayarlayabilir. O zaman
 `completionReason: "deadline_reached"`, o yapılandırılmış sınırın
 yaklaştığı anlamına gelir. Actor, kontrol noktaları, satırlar, raporlar ve
 başarılı bir çıkış için son 15 saniyeyi tutar. Geçerli satırlar teslim
@@ -252,8 +257,8 @@ Tweet, profil, arama veya liste URL'lerinin karışımını yapıştır:
 }
 ```
 
-Tweet URL'leri, 100'e kadar eşzamanlı gruplar halinde aranır. Kısmi başarılı
-yanıtlar, çözülmemiş ID'leri bir kez yeniden kontrol eder. Grup çıktısı
+Actor, tweet URL'lerini 100'e kadar eşzamanlı gruplar halinde arar. Kısmi
+başarılı yanıtlar, çözülmemiş ID'leri bir kez yeniden kontrol eder. Grup çıktısı
 benzersiz kalır ve istenen ID'lerle eşleşir. Profil URL'leri, profil zaman
 akışını yazar aramasıyla birleştirir. Arama URL'leri sorguyu çıkarır. Liste
 URL'leri, genel `list:` araması yerine özel liste yolunu kullanır.
@@ -328,19 +333,19 @@ Desteklenen açık modlar: `tweet`, `tweets`, `search`, `profileTweets`,
 `replies`, `quotes`, `thread`, `retweeters` ve `favoriters`.
 
 `profileTweets`, profil Posts sekmesini izler. Hedefin yazdığı yanıt
-olmayan gönderileri döndürür. Yanıt satırları ve diğer yazarlardan gelen
-konuşma bağlamı faturalamadan önce hariç tutulur.
+olmayan gönderileri döndürür. Actor, yanıt satırlarını ve diğer yazarlardan
+gelen konuşma bağlamını faturalamadan önce hariç tutar.
 
 `profileReplies`, X'in With Replies sekmesini izler. Hedefin yazdığı profil
-gönderilerini ve yanıtlarını döndürür. Diğer yazarlardan gelen konuşma
-bağlamı hariç tutulur. Yalnızca yanıt sonuçlarına ihtiyacın olduğunda
+gönderilerini ve yanıtlarını döndürür. Actor, diğer yazarlardan gelen konuşma
+bağlamını hariç tutar. Yalnızca yanıt sonuçlarına ihtiyacın olduğunda
 `filter:replies` veya `to:` aramasını kullan.
 
 Arama ve sayfalanmış Tweet modları `time.since`, `time.until`, Unix zaman
 damgalarını ve `lang`'i destekler. Bunlar profil Posts, With Replies,
 Media, Likes, Listeler, yanıtlar, alıntılar ve thread'leri içerir. Eşleşen
 düz tarih operatörleri de çalışır. Actor, faturalamadan önce her satırı
-doğrular. Alt tarih sınırı kapsayıcı, üst sınır hariç tutucudur. Tarih
+doğrular. Alt tarih sınırı kapsayıcıdır. Üst sınır hariç tutucudur. Tarih
 filtreleri, kullanılabilir tarihi olmayan satırları hariç tutar. Dil
 filtreleri, eksik veya uyuşmayan dilleri hariç tutar. Filtrelenen satırlar
 asla istenen sonuç sınırını tüketmez. Sıralanmamış sonuçlar, eşleşen
@@ -389,6 +394,10 @@ Düz çıktı, `author` ve `media`'yı değiştirmeden korur ve ayrıca
 `authorUsername`, `authorName`, `authorFollowers`, `tweetUrl`,
 `twitterUrl`, `mediaUrls`, `imageUrls` ve `videoUrls` gibi üst düzey alanlar
 ekler.
+
+Her düz tweet satırı `media` taşır. Medyası olmayan bir tweet boş bir liste
+alır, böylece her satır bir e-tabloda veya tipli bir pipeline'da aynı
+anahtarlara sahip olur.
 
 ### 7. Alan adlandırmasını seç
 
@@ -702,7 +711,7 @@ geçerlidir.
 **Ne kadar hızlı?** Çalışma süresi rotaya, sonuç sayısına ve üst akış
 kullanılabilirliğine bağlıdır.
 
-**Hangi arama operatörleri destekleniyor?** X gelişmiş araması yazarları,
+**Hangi arama operatörleri çalışıyor?** X gelişmiş araması yazarları,
 alıcıları, bahsetmeleri, tarihleri, etkileşimi, medyayı ve konumu destekler.
 
 **Bunu çalıştırmak için Apify API'yi kullanabilir miyim?** Evet. Python,

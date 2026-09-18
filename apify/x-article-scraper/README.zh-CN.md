@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何将 Xquik 抓取工具与 Claude Code、Codex、Cursor 等配合使用，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据，X Article
+Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据。X Article
 Scraper 能将长篇 X Article 转换为 Markdown、纯文本、封面、作者、日期与指标。其他所有
 Apify Actor 都会在过滤或去重之前就收费。Xquik 只为已交付、唯一且符合过滤条件的结果收费。
 
@@ -59,9 +59,9 @@ Article 收费 **$0.00015**。诊断信息在 `diagnostics` 输出中免费提�
 
 ## 限制与格式
 
-只能返回 X 公开的 Article。Markdown 会保留区块、加粗与斜体范围。`contents`
-保留原始格式。链接元数据绝不臆测。Apify 会将 Markdown 显示为纯文本。示例使用
-样例值。结果反映实时数据。使用 `latest`。URL 与 ID 可以混用。
+Actor 只返回 X 公开的 Article。Markdown 会保留区块、加粗与斜体范围。`contents`
+保留原始格式。它绝不臆测链接元数据。示例使用样例值。结果反映实时数据。Apify 会将
+Markdown 显示为纯文本。使用 `latest`。URL 与 ID 可以混用。
 
 ## 提取不完整
 

@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
-den umfassendsten X-Daten, und X User Search Scraper findet Nutzer nach
+den umfassendsten X-Daten. X User Search Scraper findet Nutzer nach
 Handle, Bio & Standort. Jeder andere Apify Actor berechnet, bevor gefiltert
 oder dedupliziert wird. Xquik berechnet nur für gelieferte, eindeutige,
 filterkonforme Ergebnisse.

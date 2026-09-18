@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik è il servizio di scraping X (Twitter) più veloce ed economico al mondo,
-con i dati X più completi, e X Engagement Scraper raccoglie risposte,
+con i dati X più completi. X Engagement Scraper raccoglie risposte,
 citazioni, chi ha retwittato, chi ha messo Mi piace e thread per qualsiasi
 post. Ogni altro Actor Apify addebita il costo prima di filtrare o
 deduplicare. Xquik addebita solo i risultati consegnati, unici e conformi ai
@@ -75,7 +75,7 @@ Ogni verifica controlla la pagina profilo più recente disponibile di chi ha
 retwittato. Confronta l'account e il post sorgente con i record di
 ripubblicazione effettivi. Record di ripubblicazione più vecchi, eliminati o
 non disponibili possono lasciare il timestamp `null`. Anche le verifiche del
-timestamp fallite lasciano `null`; il profilo resta incluso. La verifica non
+timestamp fallite lasciano `null`. Il profilo resta nell'output. La verifica non
 dimostra che un account non abbia mai ripubblicato un post.
 
 Le letture extra aumentano la latenza. Lascia questa opzione disattivata per

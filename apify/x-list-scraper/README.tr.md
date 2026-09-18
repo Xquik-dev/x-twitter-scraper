@@ -33,7 +33,7 @@ anahtarı veya girişi gerekmez.
 - Tarih, Unix zamanı, dil, medya, etkileşim, doğrulama ve profil filtreleri.
 - Bir çalıştırmada birden fazla Liste ve kaynak türü.
 - Genel ve kaynak başına üst sınırlar.
-- Sayfalama göçten sonra devam eder. Tekrarlanan satırlar kaldırılır.
+- Sayfalama göçten sonra devam eder. Actor tekrarlanan satırları kaldırır.
 
 ## Girdi
 

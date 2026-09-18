@@ -34,8 +34,8 @@ ni connexion requise.
   vérification et de profil.
 - Plusieurs Lists et types de ressources par run.
 - Plafonds globaux et par ressource.
-- La pagination reprend après une migration. Les lignes en double sont
-  retirées.
+- La pagination reprend après une migration. L'Actor retire les lignes
+  en double.
 
 ## Entrée
 

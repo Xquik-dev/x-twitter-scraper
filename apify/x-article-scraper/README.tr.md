@@ -65,11 +65,11 @@ kullan.
 
 ## Sınırlar ve biçim
 
-Yalnızca X'in gösterdiği herkese açık Makaleler döndürülebilir. Markdown
+Actor yalnızca X'in gösterdiği herkese açık Makaleleri döndürür. Markdown
 blokları, kalın ve italik aralıkları korur. `contents` kaynak biçimlendirmesini
-korur. Bağlantı metadata'sı asla tahmin edilmez. Apify, Markdown'ı metin olarak
-gösterir. Örnekler örnek değerler kullanır. Sonuçlar canlı veriyi yansıtır.
-`latest`'i kullan. URL'ler ve ID'ler karıştırılabilir.
+korur. Bağlantı metadata'sını asla tahmin etmez. Örnekler örnek değerler
+kullanır. Sonuçlar canlı veriyi yansıtır. Apify, Markdown'ı metin olarak
+gösterir. `latest`'i kullan. URL'ler ve ID'ler karıştırılabilir.
 
 ## Eksik çıkarma
 

@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik es el servicio de extracción de datos de X (Twitter) más rápido y
-económico del mundo, con los datos de X más completos, y X Reply Scraper
+económico del mundo, con los datos de X más completos. X Reply Scraper
 recopila respuestas, comentarios y conversaciones completas. Todos los demás
 Actors de Apify cobran antes de filtrar o eliminar duplicados. Xquik cobra
 solo por resultados entregados, únicos y que cumplen los filtros.
@@ -25,7 +25,7 @@ Extrae respuestas de X (Twitter) por **$0.00015 por fila entregada en cada
 plan de Apify**. Pega URLs de publicaciones, IDs de tuits, URLs de perfiles o
 nombres de usuario. Exporta respuestas, conversaciones, autores, interacción,
 entidades y URLs de contenido multimedia. Apify factura el uso de su
-plataforma por separado. No se requiere inicio de sesión en X.
+plataforma por separado. No necesitas iniciar sesión en X.
 
 Los filtros se ejecutan antes de escribir en el conjunto de datos. Pagas solo
 por las filas entregadas.
@@ -83,7 +83,7 @@ de moderación y conjuntos de datos de conversaciones.
 Selecciona `latest` en cada ejecución para recibir todas las correcciones
 publicadas.
 
-Cuando no se especifica una versión, Apify usa el valor predeterminado
+Si no especificas una versión, Apify usa el valor predeterminado
 `latest` de este Actor. Las ejecuciones desde Console y los ejemplos
 estándar de la API heredan ese valor predeterminado.
 
@@ -473,8 +473,8 @@ gratuitos en `diagnostics`. No se aplica tarifa de inicio, URL, consulta,
 paginación, filtro o proxy.
 
 El tiempo de espera predeterminado de Apify es `0`, por lo que las
-ejecuciones no tienen límite de tiempo. El Actor continúa hasta que se
-alcanza el límite o se agotan los datos elegibles. Quien invoca puede seguir
+ejecuciones no tienen límite de tiempo. El Actor continúa hasta alcanzar
+el límite o agotar los datos elegibles. Quien invoca puede seguir
 configurando un tiempo de espera finito de Apify. Entonces,
 `completionReason: "deadline_reached"` significa que ese límite configurado
 está cerca. El Actor reserva los últimos 15 segundos para puntos de

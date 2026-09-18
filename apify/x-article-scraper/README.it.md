@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo con
-i dati X più completi, e X Article Scraper trasforma gli Article X lunghi in
+i dati X più completi. X Article Scraper trasforma gli Article X lunghi in
 Markdown, testo, copertine, autori, date & metriche. Ogni altro Actor Apify
 addebita costi prima di filtrare o deduplicare. Xquik addebita solo per i
 risultati consegnati, unici e corrispondenti ai filtri.
@@ -64,11 +64,11 @@ singole usano [Xquik REST](https://docs.xquik.com/api-reference/x/get-article).
 
 ## Limiti e formato
 
-Possono essere restituiti solo gli Article pubblici esposti da X. Il Markdown
+L'Actor restituisce solo gli Article pubblici che X espone. Il Markdown
 conserva blocchi, grassetto e corsivo. `contents` mantiene la formattazione
-di origine. I metadati dei link non vengono mai indovinati. Apify mostra il
-Markdown come testo. Gli esempi usano valori campione. I risultati riflettono
-dati live. Usa `latest`. URL e ID possono essere combinati.
+di origine. Non indovina mai i metadati dei link. Gli esempi usano valori
+campione. I risultati riflettono dati live. Apify mostra il Markdown come
+testo. Usa `latest`. URL e ID possono essere combinati.
 
 ## Estrazione incompleta
 

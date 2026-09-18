@@ -38,7 +38,7 @@ ID veya URL kullan. X API anahtarı veya girişi gerekmez.
   durumuna ve metriklere göre filtrele.
 - İsteğe bağlı profilleri kitleye, etkinliğe, yaşa ve herkese açık metadata'ya
   göre filtrele.
-- Tekrarlanan satırlar faturalamadan önce kaldırılır.
+- Actor, tekrarlanan satırları faturalamadan önce kaldırır.
 
 ## Girdi
 

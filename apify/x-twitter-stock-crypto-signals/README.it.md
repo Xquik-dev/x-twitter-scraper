@@ -16,24 +16,25 @@
 </td></tr></table>
 
 Xquik è il servizio di scraping X (Twitter) più veloce ed economico al mondo,
-con i dati X più completi, e X (Twitter) Stock & Crypto AI Trading Signals
+con i dati X più completi. X (Twitter) Stock & Crypto AI Trading Signals
 trasforma i tweet in posizioni rialziste, ribassiste, neutre o miste per ogni
 titolo o moneta. Ogni altro Actor Apify addebita i costi prima di filtrare o
 deduplicare. Xquik addebita solo i risultati consegnati, unici e conformi ai
-filtri.
-
-I costi dell'IA sono inclusi nel prezzo per tweet. Non paghi alcun provider di IA, non compri token & non porti alcuna chiave.
+filtri. I costi dell'IA sono inclusi nel prezzo per tweet. Non paghi alcun
+provider di IA, non compri token & non porti alcuna chiave.
 
 Leggi il sentiment dietro i post su azioni, criptovalute e trading su X
-(Twitter) e mantieni i dati originali del tweet. **X (Twitter) Stock & Crypto AI Trading Signals** raccoglie post sui tuoi titoli o asset, poi aggiunge a
-ogni post una posizione, un tipo di contenuto, un livello di convinzione e una
+(Twitter) e mantieni i dati originali del tweet. **X (Twitter) Stock & Crypto AI
+Trading Signals** raccoglie post sui tuoi titoli o asset. Poi aggiunge a ogni
+post una posizione, un tipo di contenuto, un livello di convinzione & una
 pertinenza dell'asset generati dall'IA. Separa le dichiarazioni ferme dalle
 osservazioni caute, l'analisi dalla promozione e i post sul tuo asset dagli usi
 non correlati del suo nome.
 
-- **Posizione per post**: rialzista, ribassista, neutra, mista o non chiara.
-- **Tipo di contenuto** distingue analisi, notizie, idee di trading,
-  promozione, umorismo e domande.
+- **Posizione per post.** Ogni post è di posizione rialzista, ribassista,
+  neutra, mista o non chiara.
+- **Tipo di contenuto** distingue analisi, notizie, idee di trading, promozione,
+  umorismo e domande.
 - **Convinzione** separa le dichiarazioni e le posizioni ferme dalle
   osservazioni caute.
 - **Pertinenza** filtra gli usi non correlati di un titolo o nome societario.
@@ -76,14 +77,14 @@ finanziaria e non verificano affermazioni, prezzi o comunicazioni ufficiali.
 
 I costi dell'IA sono inclusi nel prezzo per tweet. Non paghi alcun provider di IA, non compri token & non porti alcuna chiave.
 
-Da $0.0003 per tweet analizzato con successo, senza costo iniziale. La
-raccolta è inclusa e la soglia documentata per l'analisi è di 8 domande, 8.000
-byte per definizione di domanda e 12.000 byte di contesto per tweet. I filtri
-di estrazione e la deduplicazione vengono eseguiti prima dell'analisi, quindi
-le righe filtrate o duplicate non vengono mai analizzate né addebitate. Le
-analisi fallite o saltate e le righe diagnostiche non comportano alcun
-addebito sul risultato. L'utilizzo della piattaforma Apify viene fatturato
-separatamente da Apify e compare nella scheda Pricing.
+Da $0.0003 per tweet analizzato con successo, senza costo iniziale. Il prezzo
+include la raccolta. La soglia per l'analisi è di 8 domande, 8.000 byte per
+definizione di domanda & 12.000 byte di contesto per tweet. I filtri di
+estrazione e la deduplicazione vengono eseguiti prima dell'analisi, quindi le
+righe filtrate o duplicate non vengono mai analizzate né addebitate. Le analisi
+fallite o saltate e le righe diagnostiche non comportano alcun addebito sul
+risultato. Apify fattura separatamente l'utilizzo della piattaforma. La scheda
+Pricing lo mostra.
 
 ## Esempi di input e output
 
@@ -129,21 +130,21 @@ separa le righe raccolte, le analisi addebitate e gli addebiti in sospeso.
 
 ## Riepilogo dell'esecuzione e risposte in formato piatto
 
-Ogni esecuzione scrive un record `analysis-summary` nel proprio key-value
-store e lo ripete sotto `results.analysisSummary` nel report dell'esecuzione.
-Conta le righe analizzate, fallite e saltate, somma l'engagement e riassume
-ogni domanda. `cashtags` conta la posizione per cashtag come `$NVDA`, quindi il
-rapporto rialzista per asset deriva da `choices.stance`. Il blocco `stance`
-aggiunge la ripartizione ponderata per engagement e i post rialzisti e
-ribassisti con più engagement; `conviction` riporta la media e la media
-ponderata per engagement. I numeri sono arrotondati a 4 decimali; le
-esecuzioni vuote riportano conteggi zero e medie `null`. Ogni voce di
-`cashtags` aggiunge `signal`: conteggio rialzista, conteggio ribassista e un
-punteggio da -1 a 1 calcolato come (rialzisti - ribassisti) / righe, e
-`monitor.changedRows` elenca i tweet la cui posizione è cambiata rispetto alla
-baseline. Ogni riga elenca anche `sourceDomains`, gli host a cui rimanda, e il
-blocco `monitor` del riepilogo conta gli stati di confronto ed elenca fino a
-50 righe modificate quando `monitor.baselineDatasetId` è impostato.
+Ogni esecuzione scrive un record `analysis-summary` nel proprio key-value store
+e lo ripete sotto `results.analysisSummary` nel report dell'esecuzione. Conta le
+righe analizzate, fallite e saltate, somma l'engagement e riassume ogni domanda.
+`cashtags` conta la posizione per cashtag come `$NVDA`, quindi il rapporto
+rialzista per asset deriva da `choices.stance`. Il blocco `stance` aggiunge la
+ripartizione ponderata per engagement e i post rialzisti e ribassisti con più
+engagement. `conviction` riporta la media & la media ponderata per engagement.
+Il riepilogo arrotonda i numeri a 4 decimali. Un'esecuzione vuota riporta
+conteggi zero & medie `null`. Ogni voce di `cashtags` aggiunge `signal` con un
+conteggio rialzista, un conteggio ribassista & un punteggio da -1 a 1. Il
+punteggio è (rialzisti - ribassisti) / righe. `monitor.changedRows` elenca i
+tweet la cui posizione è cambiata rispetto alla baseline. Ogni riga elenca
+`sourceDomains`, gli host a cui rimanda. Con `monitor.baselineDatasetId`
+impostato, il blocco `monitor` del riepilogo conta gli stati di confronto &
+elenca fino a 50 righe modificate.
 
 Ogni riga di risultato include anche `answers`, una mappa piatta dall'ID della
 domanda alla categoria, al punteggio o alla probabilità scelti. La vista
@@ -153,20 +154,19 @@ del JSON. Le righe fallite o saltate contengono una mappa vuota.
 
 ## Confronto con un'esecuzione precedente
 
-Passa `monitor.baselineDatasetId`, l'ID del dataset di un'esecuzione
-precedente completata con le stesse impostazioni di analisi, e ogni riga
-ottiene un oggetto `monitor`: `first_run` senza baseline, `new_to_baseline`
-per i tweet che l'esecuzione precedente non aveva, `unchanged` o `changed` per
-i tweet che aveva già, con `changes` che elenca ogni posizione, tipo di
-contenuto o livello di convinzione passato da `previous` a `current`. Le
-decisioni si confrontano per categoria, livello di punteggio arrotondato, o
-sì/no a 0,5, e una decisione conta come cambiata solo quando la risposta si
-sposta chiaramente: la categoria precedente scende sotto 0,4 di probabilità,
-un punteggio si sposta di almeno 0,6 livelli, oppure una probabilità sì/no si
-colloca ad almeno 0,1 dalla soglia. Le oscillazioni minime tra esecuzioni
-restano invariate. Le baseline sopra `maxBaselineRows` (predefinito 100.000) o
-con impostazioni diverse interrompono l'esecuzione prima della raccolta con
-una riga diagnostica.
+Passa `monitor.baselineDatasetId`, l'ID del dataset di un'esecuzione precedente
+completata con le stesse impostazioni di analisi. Ogni riga ottiene quindi un
+oggetto `monitor`. Il suo stato è `first_run` senza baseline, `new_to_baseline`
+per i tweet che l'esecuzione precedente non aveva, & `unchanged` o `changed` per
+i tweet che aveva già. `changes` elenca ogni posizione, tipo di contenuto o
+livello di convinzione passato da `previous` a `current`. Le decisioni si
+confrontano per categoria, livello di punteggio arrotondato, o sì/no a 0,5. Una
+decisione conta come cambiata in tre casi. La categoria precedente scende sotto
+0,4 di probabilità. Un punteggio si sposta di almeno 0,6 livelli. Una
+probabilità sì/no si colloca ad almeno 0,1 dalla soglia. Le oscillazioni minime
+tra esecuzioni restano invariate. Le baseline sopra `maxBaselineRows`
+(predefinito 100.000) o con impostazioni diverse interrompono l'esecuzione prima
+della raccolta con una riga diagnostica.
 
 ## Esempi di task
 
@@ -262,34 +262,33 @@ post trattano i tuoi target come asset.
 
 ### Perché una riga è tornata con `analysis.status` su `failed` o `skipped`?
 
-Il tweet è stato raccolto e consegnato, ma l'analisi generata dall'IA non è
-stata completata. `analysis.reason` indica la causa, come `context_limit`
-quando il tweet e il suo contesto superano `maxContextBytes`, oppure
-`service_unavailable` dopo i tentativi. Queste righe non comportano alcun
-addebito sul risultato. Aumenta `maxContextBytes` (fino a 12.000) o riesegui
-gli ID interessati.
+L'Actor ha raccolto & consegnato il tweet, ma l'analisi IA non si è completata.
+`analysis.reason` indica la causa, come `context_limit` quando il tweet e il suo
+contesto superano `maxContextBytes`, oppure `service_unavailable` dopo i
+tentativi. Queste righe non comportano alcun addebito sul risultato. Aumenta
+`maxContextBytes` (fino a 12.000) o riesegui gli ID interessati.
 
 ### L'analisi verifica i fatti?
 
-No. Le risposte descrivono ciò che il post esprime e come è formulato. Le
+No. Le risposte descrivono ciò che il post esprime & come il post lo formula. Le
 probabilità esprimono la fiducia del modello, non la verità. Rivedi le
-classificazioni importanti confrontandole con il tweet originale, che ogni
-riga conserva.
+classificazioni importanti confrontandole con il tweet originale, che ogni riga
+conserva.
 
 ### Quali lingue funzionano?
 
-L'estrazione supporta ogni lingua servita da X. L'analisi è validata prima
-sugli scenari clienti in inglese; le altre lingue supportate restituiscono
-risposte con la stessa struttura, e l'incertezza resta esplicita attraverso
-le categorie e le probabilità `unclear`.
+L'estrazione supporta ogni lingua servita da X. Validiamo l'analisi prima sugli
+scenari clienti in inglese. Le altre lingue supportate restituiscono risposte
+con la stessa struttura. Le categorie `unclear` & le probabilità mostrano
+l'incertezza in ogni lingua.
 
 ### Come limito i costi?
 
-Filtri, deduplicazione e `maxItems` vengono eseguiti prima dell'analisi,
-quindi solo i tweet unici e conformi ai filtri vengono analizzati e
-addebitati. Usa operatori di ricerca precisi, limiti di data e soglie minime
-di engagement, e inizia con un `maxItems` piccolo per verificare la qualità
-delle risposte prima di un'esecuzione ampia.
+Filtri, deduplicazione e `maxItems` vengono eseguiti prima dell'analisi, quindi
+l'Actor analizza & addebita solo i tweet unici e conformi ai filtri. Usa
+operatori di ricerca precisi, limiti di data e soglie minime di engagement, e
+inizia con un `maxItems` piccolo per verificare la qualità delle risposte prima
+di un'esecuzione ampia.
 
 ### Dove ricevo assistenza?
 

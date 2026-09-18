@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik es el servicio de extracción de datos de X (Twitter) más rápido y
-económico del mundo, con los datos más completos de X, y X Community Scraper
+económico del mundo, con los datos más completos de X. X Community Scraper
 recopila información, publicaciones, búsquedas, miembros y moderadores de
 Comunidades. Todos los demás Actors de Apify cobran antes de filtrar o
 eliminar duplicados. Xquik solo cobra por resultados entregados, únicos y
@@ -39,7 +39,7 @@ clave de API de X ni inicio de sesión.
 - Varias Comunidades y recursos por ejecución.
 - Límites por recurso y globales.
 - Lecturas concurrentes con recuperación de cursor guardado.
-- Las filas duplicadas se eliminan antes de facturar.
+- El Actor elimina las filas duplicadas antes de facturar.
 
 ## Entrada
 
@@ -58,8 +58,8 @@ proporciona `query`.
 
 Las filas usan `community`, `communityTweet`, `communityMember` o
 `communityModerator` como `resultType`. Cada fila incluye `sourceTarget` para
-la Comunidad de entrada. Los campos de origen se conservan sin valores
-inventados.
+la Comunidad de entrada. El Actor conserva los campos de origen & no inventa
+valores.
 
 ## Precios
 
@@ -83,7 +83,7 @@ aceptadas, el estado de facturación, los cursores y las huellas de salida
 sobreviven a la migración de Apify. El Actor no tiene un tiempo de espera
 propio.
 
-Solo se pueden devolver las Comunidades públicas que X expone. Los campos
+El Actor devuelve solo las Comunidades públicas que X expone. Los campos
 disponibles varían según la Comunidad.
 
 ## Extracción incompleta

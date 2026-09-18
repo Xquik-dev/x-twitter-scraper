@@ -16,9 +16,9 @@
 </td></tr></table>
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data, and X Profile Scraper collects profiles, posts, replies,
-media & likes for any handle. Every other Apify Actor charges before filtering
-or deduplicating. Xquik charges only for delivered, unique, filter-matching
+most complete X data. X Profile Scraper collects profiles, posts, replies, media
+& likes for any handle. Every other Apify Actor charges before filtering or
+deduplicating. Xquik charges only for delivered, unique, filter-matching
 results.
 
 Scrape X profiles, posts, replies, media, and likes. Use handles, IDs, or URLs.
@@ -33,7 +33,7 @@ No X API key or login required.
 - Filter optional posts by date, media, verification, repost status, and
   metrics.
 - Filter optional profiles by audience, activity, age, and public metadata.
-- Duplicate rows are removed before billing.
+- The Actor removes duplicate rows before billing.
 
 ## Input
 

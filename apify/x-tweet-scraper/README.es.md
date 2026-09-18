@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik es el servicio de extracción de X (Twitter) más rápido y económico del
-mundo, con los datos de X más completos, y X Tweet Scraper recopila tuits,
+mundo, con los datos de X más completos. X Tweet Scraper recopila tuits,
 respuestas, perfiles, listas y búsquedas con más de 50 filtros. Cualquier otro
 Actor de Apify cobra antes de filtrar o eliminar duplicados. Xquik cobra solo
 por resultados entregados, únicos y que coinciden con los filtros.
@@ -58,7 +58,7 @@ IDs de tuits y consultas de búsqueda con más de 50 filtros.
 Selecciona `latest` en cada ejecución para recibir todas las correcciones
 publicadas.
 
-Cuando no se especifica una compilación, Apify usa el valor `latest` por
+Si no especificas una compilación, Apify usa el valor `latest` por
 defecto de este Actor. Las ejecuciones desde Console y los ejemplos estándar
 de la API heredan ese valor.
 
@@ -131,6 +131,7 @@ real. Edítala antes de ejecutar.
 | `isLimitedReply`       | Si las respuestas están limitadas                                  |
 | `isNoteTweet`          | Si es un Note Tweet (publicación larga)                            |
 | `isQuoteStatus`        | Si este tuit cita otro tuit                                        |
+| `isRetweet`            | Si esta fila es un retuit, con el original adjunto                 |
 | `isReply`              | Si este tuit es una respuesta                                      |
 | `quoted_tweet`         | Objeto del tuit citado (si es un tuit cita)                        |
 | `conversationId`       | ID del hilo o conversación                                         |
@@ -148,6 +149,10 @@ conversación. Consulta el OpenAPI para los campos exactos.
 Los autores anidados siguen el contrato de perfil público. Cubre identidad,
 conteos, verificación, disponibilidad, datos profesionales y biografías de
 perfil.
+
+Las filas de retuit ponen `isRetweet` en `true`. Su `text` lleva la
+publicación original completa, y `retweeted_tweet` contiene la publicación
+original con su autor & conteos.
 
 Las filas de tuit también conservan `type`, `source`, `inReplyToId`,
 `inReplyToUserId`, `inReplyToUsername` y `retweeted_tweet`. Los tuits citados
@@ -218,8 +223,8 @@ de control cuando el servicio reporta paginación estancada. Los
 estancamientos detienen los reintentos automáticos sin reiniciar la búsqueda.
 Estas ejecuciones reportan extracción incompleta y conservan cursores
 reanudables. Una página terminal completa la paginación incluso después de
-páginas vacías consecutivas. `failedSubtargets` permanece en `0`. Solo se
-facturan las filas de Dataset aceptadas.
+páginas vacías consecutivas. `failedSubtargets` permanece en `0`. Pagas
+solo por las filas de Dataset aceptadas.
 
 El tiempo de espera predeterminado de Apify es `0`, así que las ejecuciones no
 tienen límite de tiempo. El Actor continúa hasta alcanzar el tope o agotar los
@@ -254,8 +259,8 @@ Pega una mezcla de URLs de tuits, perfiles, búsquedas o listas:
 }
 ```
 
-Las URLs de tuits se buscan en lotes concurrentes de hasta 100. Las respuestas
-parcialmente exitosas vuelven a verificar los IDs no resueltos una vez. La
+El Actor busca las URLs de tuits en lotes concurrentes de hasta 100. Las
+respuestas parcialmente exitosas vuelven a verificar los IDs no resueltos una vez. La
 salida de cada lote permanece única y coincide con los IDs solicitados. Las
 URLs de perfil combinan la línea de tiempo del perfil con la búsqueda de
 autor. Las URLs de búsqueda extraen la consulta. Las URLs de lista usan la
@@ -332,19 +337,19 @@ Modos explícitos admitidos: `tweet`, `tweets`, `search`, `profileTweets`,
 `replies`, `quotes`, `thread`, `retweeters` y `favoriters`.
 
 `profileTweets` sigue la pestaña Posts del perfil. Devuelve publicaciones que
-no son respuestas escritas por el objetivo. Las filas de respuesta y el
-contexto de conversación de otros autores se excluyen antes de facturar.
+no son respuestas escritas por el objetivo. El Actor excluye las filas de
+respuesta y el contexto de conversación de otros autores antes de facturar.
 
 `profileReplies` sigue la pestaña With Replies de X. Devuelve publicaciones y
-respuestas del perfil escritas por el objetivo. El contexto de conversación de
-otros autores se excluye. Usa `filter:replies` o la búsqueda `to:` cuando
+respuestas del perfil escritas por el objetivo. El Actor excluye el contexto
+de conversación de otros autores. Usa `filter:replies` o la búsqueda `to:` cuando
 necesites resultados solo de respuestas.
 
 Los modos de búsqueda y de tuit paginado admiten `time.since`, `time.until`,
 marcas de tiempo Unix y `lang`. Esto incluye Posts de perfil, With Replies,
 Media, Likes, Listas, respuestas, citas e hilos. Los operadores de fecha plana
 correspondientes también funcionan. El Actor verifica cada fila antes de
-facturar. El límite inferior de fecha es inclusivo; el límite superior es
+facturar. El límite inferior de fecha es inclusivo. El límite superior es
 exclusivo. Los filtros de fecha excluyen filas sin fechas utilizables. Los
 filtros de idioma excluyen idiomas faltantes o no coincidentes. Las filas
 filtradas nunca consumen tu límite de resultados solicitado. Los resultados
@@ -395,6 +400,10 @@ La salida plana conserva `author` y `media` sin cambios y también agrega
 campos de nivel superior como `authorUsername`, `authorName`,
 `authorFollowers`, `tweetUrl`, `twitterUrl`, `mediaUrls`, `imageUrls` y
 `videoUrls`.
+
+Cada fila plana de tuit lleva `media`. Un tuit sin contenido multimedia tiene
+una lista vacía, así que cada fila tiene las mismas claves en una hoja de
+cálculo o en un pipeline tipado.
 
 ### 7. Elige el nombramiento de campos
 
@@ -710,7 +719,7 @@ Apify siguen aplicando.
 **¿Qué tan rápido es?** El tiempo de ejecución depende de la ruta, el conteo
 de resultados y la disponibilidad de la fuente.
 
-**¿Qué operadores de búsqueda se admiten?** La búsqueda avanzada de X admite
+**¿Qué operadores de búsqueda funcionan?** La búsqueda avanzada de X admite
 autores, destinatarios, menciones, fechas, interacción, contenido multimedia y
 ubicación.
 

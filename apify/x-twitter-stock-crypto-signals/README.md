@@ -16,21 +16,20 @@
 </td></tr></table>
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data, and X (Twitter) Stock & Crypto AI Trading Signals turns
-tweets into bullish, bearish, neutral or mixed stances per ticker & coin. Every
-other Apify Actor charges before filtering or deduplicating. Xquik charges only
-for delivered, unique, filter-matching results.
-
-AI costs are included in the per-tweet price. You pay no AI provider, buy no tokens & bring no key.
+most complete X data. X (Twitter) Stock & Crypto AI Trading Signals turns tweets
+into bullish, bearish, neutral or mixed stances per ticker & coin. Every other
+Apify Actor charges before filtering or deduplicating. Xquik charges only for
+delivered, unique, filter-matching results. AI costs are included in the
+per-tweet price. You pay no AI provider, buy no tokens & bring no key.
 
 Read the stance behind stock, crypto & trading posts on X (Twitter) & keep the
 original tweet data. **X (Twitter) Stock & Crypto AI Trading Signals** collects
-posts about your tickers or assets, then adds an AI-powered stance, content
+posts about your tickers or assets. It then adds an AI-powered stance, content
 type, conviction level & asset relevance to every post. Separate firm calls from
 hedged remarks, analysis from promotion, & posts about your asset from unrelated
 uses of its name.
 
-- **Stance per post**: bullish, bearish, neutral, mixed or unclear.
+- **Stance per post.** Each post is bullish, bearish, neutral, mixed or unclear.
 - **Content type** tells analysis, news, trade ideas, promotion, humor &
   questions apart.
 - **Conviction** separates firm calls & positions from hedged remarks.
@@ -71,15 +70,15 @@ verify claims, prices or filings.
 
 ## Pricing
 
-AI costs are included in the per-tweet price. You pay no AI provider, buy no tokens & bring no key.
+AI costs are included in the per-tweet price. You pay no AI provider, buy no
+tokens & bring no key.
 
-From $0.0003 per successfully analyzed tweet, with no start fee. Collection is
-included, & the documented analysis allowance is 8 questions, 8,000 bytes per
+From $0.0003 per successfully analyzed tweet, with no start fee. The price
+includes collection. The analysis allowance is 8 questions, 8,000 bytes per
 question definition & 12,000 bytes of context per tweet. Extraction filters &
 deduplication run before analysis, so filtered-out & duplicate rows are never
 analyzed or charged. Failed & skipped analyses & diagnostic rows have no result
-charge. Apify platform usage is billed separately by Apify & appears on the
-Pricing tab.
+charge. Apify bills platform usage separately. The Pricing tab shows it.
 
 ## Input & output examples
 
@@ -129,14 +128,14 @@ under `results.analysisSummary` in the run report. It counts analyzed, failed &
 skipped rows, sums engagement, and summarizes every question. `cashtags` counts
 stance per cashtag such as `$NVDA`, so the bullish ratio per asset comes from
 `choices.stance`. The `stance` block adds the engagement-weighted split & the
-most engaged bullish & bearish posts; `conviction` reports the mean &
-engagement-weighted mean. Numbers are rounded to 4 decimals; empty runs report
-zero counts & `null` means. Each `cashtags` entry adds `signal`: bullish count,
-bearish count & a score from -1 to 1 computed as (bullish - bearish) / rows, and
-`monitor.changedRows` lists tweets whose stance moved since the baseline. Every
-row also lists `sourceDomains`, the hostnames it links to, and the summary's
-`monitor` block counts comparison statuses & lists up to 50 changed rows when
-`monitor.baselineDatasetId` is set.
+most engaged bullish & bearish posts. `conviction` reports the mean & the
+engagement-weighted mean. The summary rounds numbers to 4 decimals. An empty run
+reports zero counts & `null` means. Each `cashtags` entry adds `signal` with a
+bullish count, a bearish count & a score from -1 to 1. The score is (bullish -
+bearish) / rows. `monitor.changedRows` lists tweets whose stance moved since the
+baseline. Every row lists `sourceDomains`, the hostnames it links to. With
+`monitor.baselineDatasetId` set, the summary's `monitor` block counts comparison
+statuses & lists up to 50 changed rows.
 
 Every result row also carries `answers`, a flat map from question ID to the
 chosen category, score, or probability. The `Flat answers` dataset view & CSV or
@@ -146,17 +145,16 @@ need no JSON parsing. Failed & skipped rows carry an empty map.
 ## Compare with an earlier run
 
 Pass `monitor.baselineDatasetId`, the dataset ID of a completed earlier run with
-the same analysis settings, and every row gains a `monitor` object: `first_run`
-without a baseline, `new_to_baseline` for tweets the earlier run did not have,
-`unchanged` or `changed` for tweets it had, with `changes` listing each stance,
-content type or conviction level that moved from `previous` to `current`.
-Decisions compare by category, rounded score level, or yes/no at 0.5, and a
-decision only counts as changed when the answer clearly moves: the earlier
-category falls below 0.4 probability, a score moves at least 0.6 levels, or a
-yes/no probability lands at least 0.1 from the threshold. Near-tie jitter
-between runs stays unchanged. Baselines above `maxBaselineRows` (default
-100,000) or from different settings stop the run before collection with a
-diagnostic row.
+the same analysis settings. Every row then gains a `monitor` object. Its status
+is `first_run` without a baseline, `new_to_baseline` for tweets the earlier run
+did not have, & `unchanged` or `changed` for tweets it had. `changes` lists each
+stance, content type or conviction level that moved from `previous` to
+`current`. Decisions compare by category, rounded score level, or yes/no at 0.5.
+A decision counts as changed in three cases. The earlier category falls below
+0.4 probability. A score moves at least 0.6 levels. A yes/no probability lands
+at least 0.1 from the threshold. Near-tie jitter between runs stays unchanged.
+Baselines above `maxBaselineRows` (default 100,000) or from different settings
+stop the run before collection with a diagnostic row.
 
 ## Task examples
 
@@ -249,7 +247,7 @@ as assets.
 
 ### Why did a row come back with `analysis.status` of `failed` or `skipped`?
 
-The tweet was collected & delivered, but AI-powered analysis did not complete.
+The Actor collected & delivered the tweet, but the AI analysis did not complete.
 `analysis.reason` names the cause, such as `context_limit` when the tweet & its
 context exceed `maxContextBytes`, or `service_unavailable` after retries. These
 rows carry no result charge. Raise `maxContextBytes` (up to 12,000) or rerun the
@@ -257,22 +255,22 @@ affected IDs.
 
 ### Does the analysis verify facts?
 
-No. Answers describe what the post expresses & how it is framed. Probabilities
-express model confidence, not truth. Review important classifications against
-the original tweet, which every row keeps.
+No. Answers describe what the post expresses & how the post frames it.
+Probabilities express model confidence, not truth. Review important
+classifications against the original tweet, which every row keeps.
 
 ### Which languages work?
 
-Extraction supports every language X serves. Analysis is validated on English
-customer scenarios first; other supported languages return answers with the same
-structure, & uncertainty stays explicit through `unclear` categories &
-probabilities.
+Extraction supports every language X serves. We validate analysis on English
+customer scenarios first. Other supported languages return answers with the same
+structure. `unclear` categories & probabilities show uncertainty in every
+language.
 
 ### How do I limit cost?
 
-Filters, deduplication & `maxItems` run before analysis, so only unique,
-filter-matching tweets are analyzed & charged. Use precise search operators,
-date bounds & engagement floors, & start with a small `maxItems` to check answer
+Filters, deduplication & `maxItems` run before analysis, so the Actor analyzes &
+charges only unique, filter-matching tweets. Use precise search operators, date
+bounds & engagement floors, & start with a small `maxItems` to check answer
 quality before a large run.
 
 ### Where do I get help?

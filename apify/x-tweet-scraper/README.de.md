@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
-den umfassendsten X-Daten, und X Tweet Scraper sammelt Tweets, Antworten,
+den umfassendsten X-Daten. X Tweet Scraper sammelt Tweets, Antworten,
 Profile, Listen & Suchen mit über 50 Filtern. Jeder andere Apify Actor
 berechnet, bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für
 gelieferte, eindeutige, filterkonforme Ergebnisse.
@@ -56,7 +56,7 @@ Tweet-IDs und Suchanfragen mit über 50 Filtern.
 
 Wähle `latest` für jeden Run, um alle veröffentlichten Fixes zu erhalten.
 
-Wenn kein Build angegeben ist, nutzt Apify den `latest`-Standard dieses
+Wenn du keinen Build angibst, nutzt Apify den `latest`-Standard dieses
 Actors. Console-Runs und Standard-API-Beispiele übernehmen diesen
 Standard.
 
@@ -129,6 +129,7 @@ einem echten Ziel. Bearbeite ihn vor dem Ausführen.
 | `isLimitedReply`           | Ob Antworten eingeschränkt sind                                     |
 | `isNoteTweet`              | Ob es sich um einen Note Tweet (Langform-Beitrag) handelt           |
 | `isQuoteStatus`            | Ob dieser Tweet einen anderen Tweet zitiert                         |
+| `isRetweet`                | Ob dieser Datensatz ein Retweet ist, Original angehängt             |
 | `isReply`                  | Ob dieser Tweet eine Antwort ist                                    |
 | `quoted_tweet`             | Zitiertes Tweet-Objekt (bei Zitat-Tweet)                            |
 | `conversationId`           | Thread-/Konversations-ID                                            |
@@ -146,6 +147,10 @@ Konversation verlassen haben. Siehe OpenAPI für die genauen Felder.
 Verschachtelte Autoren folgen dem öffentlichen Profilvertrag. Dieser deckt
 Identität, Zähler, Verifizierung, Verfügbarkeit, professionelle Daten und
 Profilbiografien ab.
+
+Retweet-Datensätze setzen `isRetweet` auf `true`. Ihr `text` enthält den
+vollständigen Originalbeitrag, und `retweeted_tweet` enthält den
+Originalbeitrag mit Autor & Zählern.
 
 Tweet-Datensätze erhalten außerdem `type`, `source`, `inReplyToId`,
 `inReplyToUserId`, `inReplyToUsername` und `retweeted_tweet`. Zitierte und
@@ -216,12 +221,12 @@ auch einen Checkpoint, wenn der Dienst eine stockende Paginierung meldet.
 Stockungen stoppen automatische Wiederholungen, ohne die Suche neu zu
 starten. Diese Runs melden eine unvollständige Extraktion & behalten
 fortsetzbare Cursor. Eine finale Seite schließt die Paginierung auch nach
-aufeinanderfolgenden leeren Seiten ab. `failedSubtargets` bleibt `0`. Nur
-akzeptierte Dataset-Datensätze werden abgerechnet.
+aufeinanderfolgenden leeren Seiten ab. `failedSubtargets` bleibt `0`. Du
+zahlst nur für akzeptierte Dataset-Datensätze.
 
 Das Standard-Apify-Zeitlimit ist `0`, Runs haben also kein Zeitlimit. Der
-Actor läuft weiter, bis die Obergrenze erreicht oder die verfügbaren Daten
-erschöpft sind. Ein Aufrufer kann dennoch ein endliches Apify-Zeitlimit
+Actor läuft weiter, bis er die Obergrenze erreicht oder die verfügbaren Daten
+aufbraucht. Ein Aufrufer kann dennoch ein endliches Apify-Zeitlimit
 setzen. Dann bedeutet `completionReason: "deadline_reached"`, dass dieses
 konfigurierte Limit nahe ist. Der Actor reserviert die letzten 15
 Sekunden für Checkpoints, Datensätze, Reports und einen erfolgreichen
@@ -253,7 +258,7 @@ Füge eine Mischung aus Tweet-, Profil-, Such- oder Listen-URLs ein:
 }
 ```
 
-Tweet-URLs werden in gleichzeitigen Batches von bis zu 100 nachgeschlagen.
+Der Actor schlägt Tweet-URLs in gleichzeitigen Batches von bis zu 100 nach.
 Teilweise erfolgreiche Antworten prüfen nicht aufgelöste IDs einmal erneut.
 Die Batch-Ausgabe bleibt eindeutig und entspricht den angeforderten IDs.
 Profil-URLs kombinieren die Profil-Timeline mit Autorensuche. Such-URLs
@@ -334,13 +339,13 @@ Unterstützte explizite Modi: `tweet`, `tweets`, `search`,
 `favoriters`.
 
 `profileTweets` folgt dem Tab „Beiträge" des Profils. Er gibt vom Ziel
-verfasste Nicht-Antwort-Beiträge zurück. Antwort-Datensätze und
-Konversationskontext anderer Autoren werden vor der Abrechnung
-ausgeschlossen.
+verfasste Nicht-Antwort-Beiträge zurück. Der Actor schließt
+Antwort-Datensätze und Konversationskontext anderer Autoren vor der
+Abrechnung aus.
 
 `profileReplies` folgt X' Tab „Mit Antworten". Er gibt vom Ziel verfasste
-Profilbeiträge und Antworten zurück. Konversationskontext anderer Autoren
-wird ausgeschlossen. Nutze `filter:replies` oder `to:`-Suche, wenn du nur
+Profilbeiträge und Antworten zurück. Der Actor schließt Konversationskontext
+anderer Autoren aus. Nutze `filter:replies` oder `to:`-Suche, wenn du nur
 Antworten brauchst.
 
 Such- und paginierte Tweet-Modi unterstützen `time.since`, `time.until`,
@@ -348,7 +353,7 @@ Unix-Zeitstempel & `lang`. Dazu gehören die Tabs „Beiträge", „Mit
 Antworten", „Medien" und „Likes" von Profilen, Listen, Antworten, Zitate
 & Threads. Passende flache Datumsoperatoren funktionieren ebenfalls. Der
 Actor verifiziert jeden Datensatz vor der Abrechnung. Die untere
-Datumsgrenze ist einschließend; die obere ist ausschließend. Datumsfilter
+Datumsgrenze ist einschließend. Die obere ist ausschließend. Datumsfilter
 schließen Datensätze ohne nutzbares Datum aus. Sprachfilter schließen
 fehlende oder nicht passende Sprachen aus. Gefilterte Datensätze
 verbrauchen nie deine angeforderte Ergebnisobergrenze. Ungeordnete
@@ -401,6 +406,10 @@ Die flache Ausgabe behält `author` und `media` unverändert bei und ergänzt
 auch oberste Felder wie `authorUsername`, `authorName`,
 `authorFollowers`, `tweetUrl`, `twitterUrl`, `mediaUrls`, `imageUrls` und
 `videoUrls`.
+
+Jeder flache Tweet-Datensatz enthält `media`. Ein Tweet ohne Medien hat eine
+leere Liste, sodass jeder Datensatz in einer Tabelle oder einer typisierten
+Pipeline dieselben Schlüssel hat.
 
 ### 7. Feldbenennung wählen
 
@@ -715,7 +724,7 @@ gelten weiterhin.
 **Wie schnell ist es?** Die Laufzeit hängt von der Route, der
 Ergebnisanzahl und der Verfügbarkeit der Quelle ab.
 
-**Welche Suchoperatoren werden unterstützt?** X Advanced Search
+**Welche Suchoperatoren funktionieren?** X Advanced Search
 unterstützt Autoren, Empfänger, Erwähnungen, Daten, Interaktion, Medien
 und Standort.
 

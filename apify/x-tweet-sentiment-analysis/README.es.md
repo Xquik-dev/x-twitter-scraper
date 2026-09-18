@@ -16,12 +16,12 @@
 </td></tr></table>
 
 Xquik es el servicio de extracción de X (Twitter) más rápido y económico del
-mundo, con los datos de X más completos, y X Tweet Sentiment Analysis with AI agrega
-actitud, intensidad y sarcasmo a cada tuit. Cualquier otro Actor de Apify
+mundo, con los datos de X más completos. X Tweet Sentiment Analysis agrega
+actitud, intensidad & sarcasmo a cada tuit. Cualquier otro Actor de Apify
 cobra antes de filtrar o eliminar duplicados. Xquik cobra solo por resultados
-entregados, únicos y que coinciden con los filtros.
-
-Los costos de IA están incluidos en el precio por tweet. No pagas a ningún proveedor de IA, no compras tokens & no traes ninguna clave.
+entregados, únicos y que coinciden con los filtros. Los costos de IA están
+incluidos en el precio por tweet. No pagas a ningún proveedor de IA, no
+compras tokens & no traes ninguna clave.
 
 Mide la actitud detrás de las publicaciones de X (Twitter) y conserva los
 datos originales del tuit. **X Tweet Sentiment Analysis with AI** recopila los
@@ -63,22 +63,22 @@ separa las reacciones intensas de las menciones pasajeras.
 | Intensidad  | 0 mención pasajera, 1 actitud clara, 2 texto enfático             |
 | Sarcasmo    | Probabilidad de que el texto literal contradiga la actitud        |
 
-Cuando se proporcionan objetivos (targets), el sentimiento evalúa la actitud
-hacia ellos y usa el contexto de cita o respuesta proporcionado; de lo
-contrario, evalúa el tema principal de la publicación.
+Cuando proporcionas objetivos (targets), el sentimiento evalúa la actitud
+hacia ellos & usa el contexto de cita o respuesta que proporcionas. Sin
+objetivos, evalúa el tema principal de la publicación.
 
 ## Precios
 
 Los costos de IA están incluidos en el precio por tweet. No pagas a ningún proveedor de IA, no compras tokens & no traes ninguna clave.
 
-Desde $0.0003 por tuit analizado con éxito, sin tarifa de inicio. La
-recopilación está incluida, y la capacidad de análisis documentada es de 8
+Desde $0.0003 por tuit analizado con éxito, sin tarifa de inicio. El precio
+incluye la recopilación. La capacidad de análisis es de 8
 preguntas, 8000 bytes por definición de pregunta y 12 000 bytes de contexto
 por tuit. Los filtros de extracción y la eliminación de duplicados se ejecutan
 antes del análisis, por lo que las filas descartadas y duplicadas nunca se
 analizan ni se cobran. Los análisis fallidos u omitidos y las filas de
-diagnóstico no tienen costo de resultado. El uso de la plataforma de Apify se
-factura por separado por Apify y aparece en la pestaña Pricing.
+diagnóstico no tienen costo de resultado. Apify factura el uso de la
+plataforma por separado. La pestaña Pricing lo muestra.
 
 ## Ejemplos de entrada y salida
 
@@ -123,14 +123,14 @@ Cada ejecución escribe un registro `analysis-summary` en su almacén de
 clave-valor y lo repite bajo `results.analysisSummary` en el informe de
 ejecución. Cuenta las filas analizadas, fallidas y omitidas, suma la
 interacción y resume cada pregunta. La división de `sentiment` muestra cuántos
-tuits caen en cada actitud y, bajo `engagementShares`, cómo cambia esa
-división cuando cada tuit se pondera por sus me gusta, retuits, respuestas y
-citas. `top` enumera los tres tuits con más interacción por actitud. Los
-números se redondean a 4 decimales; las ejecuciones vacías reportan conteos en
-cero y medias `null`. Cada fila también enumera `sourceDomains`, los nombres
-de host que enlaza, `cashtags` como `$NVDA` encontrados en su texto, y el
-bloque `monitor` del resumen cuenta los estados de comparación y enumera hasta
-50 filas modificadas cuando se establece `monitor.baselineDatasetId`.
+tuits caen en cada actitud. `engagementShares` muestra la misma división con
+cada tuit ponderado por sus me gusta, retuits, respuestas & citas. `top`
+enumera los tres tuits con más interacción por actitud. El resumen redondea
+los números a 4 decimales. Una ejecución vacía reporta conteos en cero &
+medias `null`. Cada fila enumera `sourceDomains`, los nombres de host que
+enlaza, & `cashtags` como `$NVDA` encontrados en su texto. Con
+`monitor.baselineDatasetId` establecido, el bloque `monitor` del resumen
+cuenta los estados de comparación & enumera hasta 50 filas modificadas.
 
 Cada fila de resultado también incluye `answers`, un mapa plano del ID de
 pregunta a la categoría, puntaje o probabilidad elegidos. La vista de Dataset
@@ -140,16 +140,16 @@ JSON. Las filas fallidas u omitidas tienen un mapa vacío.
 
 ## Comparar con una ejecución anterior
 
-Al pasar `monitor.baselineDatasetId`, el ID del Dataset de una ejecución
-anterior completada con la misma configuración de análisis, cada fila obtiene
-un objeto `monitor`: `first_run` sin línea base, `new_to_baseline` para tuits
-que la ejecución anterior no tenía, `unchanged` o `changed` para tuits que sí
-tenía, con `changes` listando cada decisión de sentimiento, nivel de
-intensidad o sarcasmo que cambió de `previous` a `current`. Las decisiones se
-comparan por categoría, nivel de puntaje redondeado o sí/no en 0.5, y una
-decisión solo cuenta como cambiada cuando la respuesta se mueve claramente: la
-categoría anterior cae por debajo de 0.4 de probabilidad, un puntaje se mueve
-al menos 0.6 niveles, o una probabilidad de sí/no queda a al menos 0.1 del
+Pasa `monitor.baselineDatasetId`, el ID del Dataset de una ejecución
+anterior completada con la misma configuración de análisis. Cada fila obtiene
+entonces un objeto `monitor`. Su estado es `first_run` sin línea base,
+`new_to_baseline` para tuits que la ejecución anterior no tenía, & `unchanged`
+o `changed` para tuits que sí tenía. `changes` enumera cada decisión de
+sentimiento, nivel de intensidad o sarcasmo que cambió de `previous` a
+`current`. Las decisiones se comparan por categoría, nivel de puntaje
+redondeado o sí/no en 0.5. Una decisión cuenta como cambiada en tres casos. La
+categoría anterior cae por debajo de 0.4 de probabilidad. Un puntaje se mueve
+al menos 0.6 niveles. Una probabilidad de sí/no queda a al menos 0.1 del
 umbral. Las fluctuaciones de empate cercano entre ejecuciones se consideran
 sin cambios. Las líneas base por encima de `maxBaselineRows` (100 000 por
 defecto) o con configuraciones diferentes detienen la ejecución antes de la
@@ -254,7 +254,7 @@ categorías o al menos 2 niveles ordenados.
 
 ### ¿Por qué una fila regresó con `analysis.status` en `failed` o `skipped`?
 
-El tuit se recopiló y entregó, pero el análisis con IA no se completó.
+El Actor recopiló & entregó el tuit, pero el análisis con IA no se completó.
 `analysis.reason` indica la causa, como `context_limit` cuando el tuit y su
 contexto superan `maxContextBytes`, o `service_unavailable` tras varios
 reintentos. Estas filas no tienen costo de resultado. Aumenta
@@ -262,23 +262,23 @@ reintentos. Estas filas no tienen costo de resultado. Aumenta
 
 ### ¿El análisis verifica hechos?
 
-No. Las respuestas describen lo que expresa la publicación y cómo está
-enmarcada. Las probabilidades expresan la confianza del modelo, no la verdad.
+No. Las respuestas describen lo que expresa la publicación & cómo lo
+enmarca. Las probabilidades expresan la confianza del modelo, no la verdad.
 Revisa las clasificaciones importantes contra el tuit original, que cada fila
 conserva.
 
 ### ¿Qué idiomas funcionan?
 
-La extracción admite todos los idiomas que ofrece X. El análisis se valida
-primero con escenarios de clientes en inglés; los demás idiomas admitidos
-devuelven respuestas con la misma estructura, y la incertidumbre queda
-explícita mediante categorías `unclear` y probabilidades.
+La extracción admite todos los idiomas que ofrece X. Validamos el análisis
+primero con escenarios de clientes en inglés. Los demás idiomas admitidos
+devuelven respuestas con la misma estructura. Las categorías `unclear` & las
+probabilidades muestran la incertidumbre en todos los idiomas.
 
 ### ¿Cómo limito el costo?
 
 Los filtros, la eliminación de duplicados y `maxItems` se ejecutan antes del
-análisis, así que solo se analizan y cobran los tuits únicos que coinciden con
-los filtros. Usa operadores de búsqueda precisos, límites de fecha y umbrales
+análisis, así que el Actor analiza & cobra solo los tuits únicos que coinciden
+con los filtros. Usa operadores de búsqueda precisos, límites de fecha y umbrales
 de interacción, y comienza con un `maxItems` pequeño para verificar la
 calidad de las respuestas antes de una ejecución grande.
 

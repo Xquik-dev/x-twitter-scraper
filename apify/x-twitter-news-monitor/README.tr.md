@@ -16,20 +16,20 @@
 </td></tr></table>
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
-scraper hizmetidir. X (Twitter) News Monitor, haber gönderilerini biçim,
-kaynak atfı ve ilgiye göre sıralar. Diğer tüm Apify Actor'ları filtreleme
-veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim edilen,
-benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
-
-Yapay zekâ maliyetleri tweet başına fiyata dahil. Yapay zekâ sağlayıcısına ödeme yapmazsın, token almazsın & anahtar getirmezsin.
+scraper hizmetidir. X (Twitter) News Monitor, haber gönderilerini biçim, kaynak
+atfı ve ilgiye göre sıralar. Diğer tüm Apify Actor'ları filtreleme veya
+tekilleştirmeden önce ücret alır. Xquik yalnızca teslim edilen, benzersiz,
+filtreyle eşleşen sonuçlar için ücret alır. Yapay zekâ maliyetleri tweet başına
+fiyata dahil. Yapay zekâ sağlayıcısına ödeme yapmazsın, token almazsın & anahtar
+getirmezsin.
 
 X (Twitter)'daki haber gönderilerini ne olduklarına göre sırala ve orijinal
-tweet verisini sakla. **X (Twitter) News Monitor with AI Analysis**,
-konularınla ilgili gönderileri toplar, ardından her gönderiye yapay zeka
-destekli bir biçim, kaynak atfı ve ilgi yanıtı ekler. Haberciliği yorum ve
-spekülasyondan ayır, bir kaynağın adlandırılıp adlandırılmadığını veya
-bağlantı verilip verilmediğini gör, ve yalnızca izlediğin kuruluşlar,
-kişiler veya konularla ilgili gönderileri sakla.
+tweet verisini sakla. **X (Twitter) News Monitor with AI Analysis**, konularınla
+ilgili gönderileri toplar, ardından her gönderiye yapay zeka destekli bir biçim,
+kaynak atfı ve ilgi yanıtı ekler. Haberciliği yorum & spekülasyondan ayır. Bir
+gönderinin kaynak adlandırıp adlandırmadığını veya kaynağa bağlantı verip
+vermediğini gör. Yalnızca izlediğin kuruluşlar, kişiler veya konularla ilgili
+gönderileri sakla.
 
 - **Biçim**, haberciliği, yorumu, spekülasyonu, tanıtımı ve hicvi birbirinden
   ayırır.
@@ -70,21 +70,20 @@ kişiler veya konularla ilgili gönderileri sakla.
 | Atıf          | Adlandırılmış, bağlantılı, ilk elden, yok veya belirsiz                         |
 | İlgi          | Bildirilen olayın hedeflerinle ilgili olma olasılığı                            |
 
-Sınıflandırma gerçekleri doğrulamaz. Adlandırılmış bir kaynak, güvenilir
-bir kaynak değildir; atıf, gönderinin ne sunduğunu açıklar.
+Sınıflandırma gerçekleri doğrulamaz. Adlandırılmış bir kaynak, güvenilir bir
+kaynak değildir. Atıf, gönderinin ne sunduğunu açıklar.
 
 ## Fiyatlandırma
 
 Yapay zekâ maliyetleri tweet başına fiyata dahil. Yapay zekâ sağlayıcısına ödeme yapmazsın, token almazsın & anahtar getirmezsin.
 
 Başlangıç ücreti olmadan, başarıyla analiz edilen tweet başına $0.0003'ten
-başlar. Toplama dahildir ve belgelenen analiz ödeneği 8 soru, soru tanımı
-başına 8.000 bayt ve tweet başına 12.000 bayt bağlamdır. Çıkarma filtreleri
-ve tekilleştirme analizden önce çalışır, bu yüzden filtrelenmiş ve
-tekrarlanan satırlar hiçbir zaman analiz edilmez veya ücretlendirilmez.
-Başarısız ve atlanan analizler ile tanılama satırlarının sonuç ücreti
-yoktur. Apify platform kullanımı Apify tarafından ayrıca faturalandırılır
-ve Pricing sekmesinde görünür.
+başlar. Fiyata toplama dahil. Analiz ödeneği 8 soru, soru tanımı başına 8.000
+bayt ve tweet başına 12.000 bayt bağlamdır. Çıkarma filtreleri ve tekilleştirme
+analizden önce çalışır, bu yüzden filtrelenmiş ve tekrarlanan satırlar hiçbir
+zaman analiz edilmez veya ücretlendirilmez. Başarısız ve atlanan analizler ile
+tanılama satırlarının sonuç ücreti yoktur. Apify platform kullanımını ayrıca
+faturalandırır. Pricing sekmesi bunu gösterir.
 
 ## Girdi ve çıktı örnekleri
 
@@ -115,39 +114,42 @@ Yukarıdaki girdi kopyalamaya hazırdır. Çıktı satırları şöyle görünü
 }
 ```
 
-Her sonuç `tweet` ve `analysis` içerir. Yanıtlar türleri, soru sürümlerini
-ve mevcut olasılıkları içerir. Bir gönderi bir X Makalesine bağlantı
-verdiğinde analiz, o makalenin başlığını, önizlemesini ve metin bloklarını
-bağlam olarak alır, ve `analysis.contextAvailability.article`,
-`text_blocks`, `summary` (yalnızca başlık ve önizleme) veya
-`not_supplied` bildirir. Başarısız veya atlanan bir analiz, boş bir yanıt
-listesi ve bir `reason` ile toplanan tweet'i korur. Anahtar-değer
-deposundaki ücretsiz tanılamalar, geçersiz girdileri, eksik sonuçları ve
-kesintiye uğrayan toplamayı açıklar, çalıştırma raporu ise toplanan
-satırları, ücretlendirilen analizleri ve bekleyen ücretleri ayırır.
+Her sonuç `tweet` ve `analysis` içerir. Yanıtlar türleri, soru sürümlerini ve
+mevcut olasılıkları içerir. Bir gönderi bir X Makalesine bağlantı verdiğinde
+analiz, o makalenin başlığını, önizlemesini ve metin bloklarını bağlam olarak
+alır. `analysis.contextAvailability.article`, `text_blocks`, `summary` veya
+`not_supplied` bildirir. `summary`, yalnızca başlık & önizleme demektir.
+Başarısız veya atlanan bir analiz, boş bir yanıt listesi ve bir `reason` ile
+toplanan tweet'i korur. Anahtar-değer deposundaki ücretsiz tanılamalar, geçersiz
+girdileri, eksik sonuçları ve kesintiye uğrayan toplamayı açıklar, çalıştırma
+raporu ise toplanan satırları, ücretlendirilen analizleri ve bekleyen ücretleri
+ayırır.
 
 ## Çalıştırma özeti ve düz yanıtlar
 
 Her çalıştırma, anahtar-değer deposuna bir `analysis-summary` kaydı yazar ve
-çalıştırma raporunda `results.analysisSummary` altında tekrarlar. Analiz
-edilen, başarısız ve atlanan satırları sayar, etkileşimi toplar ve her
-soruyu özetler. `format` bölünmesi, haberciliği yorumdan, spekülasyondan,
-tanıtımdan ve hicivden ayırır; `attribution`, adlandırılmış, bağlantılı,
-ilk elden ve olmayan kaynakları sayar; `relevance`, her hedefle ilgili
-gönderileri sayar, `targets` hedef başına bahsedilmeleri verir ve her
-hedefin `top`'u yanıt kategorisi başına en çok etkileşim alan
-gönderilerini listeler. Sayılar 4 ondalık basamağa yuvarlanır; boş
-çalıştırmalar sıfır sayım ve `null` ortalama bildirir. `sourceDomains`,
-çalıştırma genelindeki bağlantılı alan adlarını sayar, her `targets`
-girişi o hedefle ilgili gönderiler için biçim ve atıf bölünmesiyle
-`choices`'ı taşır, ve `monitor.changedRows`, kararları temel değerden bu
-yana hareket eden gönderileri listeler. Her satır ayrıca bağlantı verdiği
-ana bilgisayar adlarını `sourceDomains`'te, metninde bulunan `$NVDA` gibi
-`cashtags`'i listeler ve özetin `monitor` bloğu, `monitor.baselineDatasetId`
-ayarlandığında karşılaştırma durumlarını sayar ve 50'ye kadar değişen
-satırı listeler.
+çalıştırma raporunda `results.analysisSummary` altında tekrarlar. Analiz edilen,
+başarısız ve atlanan satırları sayar, etkileşimi toplar ve her soruyu özetler.
 
-Her sonuç satırı ayrıca `answers`'ı da taşır; bu, soru ID'sinden seçilen
+- `format` bölünmesi, haberciliği yorumdan, spekülasyondan, tanıtımdan &
+  hicivden ayırır.
+- `attribution`, adlandırılmış, bağlantılı, ilk elden & olmayan kaynakları
+  sayar.
+- `relevance`, her hedefle ilgili gönderileri sayar.
+- `targets`, hedef başına bahsedilmeleri verir. Her hedefin `top`'u, yanıt
+  kategorisi başına en çok etkileşim alan gönderilerini listeler.
+- Her `targets` girişinde `choices` bulunur. Bu, o hedefle ilgili gönderilerin
+  biçim & atıf bölünmesidir.
+- `sourceDomains`, çalıştırma genelindeki bağlantılı alan adlarını sayar.
+- `monitor.changedRows`, kararları temel değerden bu yana değişen gönderileri
+  listeler.
+
+Her satır, bağlantı verdiği ana bilgisayar adlarını `sourceDomains`'te &
+metninde bulunan `$NVDA` gibi `cashtags`'i listeler. `monitor.baselineDatasetId`
+ayarlıysa özetin `monitor` bloğu karşılaştırma durumlarını sayar & 50'ye kadar
+değişen satırı listeler.
+
+Her sonuç satırı ayrıca `answers`'ı da taşır. Bu, soru ID'sinden seçilen
 kategoriye, puana veya olasılığa düz bir eşlemedir. `Flat answers` veri
 kümesi görünümü ve CSV veya Excel dışa aktarımları, tweet'in yanında soru
 başına bir sütun gösterir, böylece elektronik tablolar JSON ayrıştırmasına
@@ -155,20 +157,19 @@ ihtiyaç duymaz. Başarısız ve atlanan satırlar boş bir eşleme taşır.
 
 ## Önceki bir çalıştırmayla karşılaştır
 
-Aynı analiz ayarlarına sahip tamamlanmış önceki bir çalıştırmanın veri
-kümesi ID'si olan `monitor.baselineDatasetId`'yi geçir, ve her satır bir
-`monitor` nesnesi kazanır: bir temel değer olmadan `first_run`, önceki
-çalıştırmada bulunmayan tweet'ler için `new_to_baseline`, sahip olduğu
-tweet'ler için `unchanged` veya `changed`, `changes` ise `previous`'tan
-`current`'a taşınan her biçim, atıf veya ilgi kararını listeler. Kararlar
+Aynı analiz ayarlarına sahip tamamlanmış önceki bir çalıştırmanın veri kümesi
+ID'si olan `monitor.baselineDatasetId`'yi geçir. O zaman her satır bir `monitor`
+nesnesi kazanır. Durumu, temel değer yoksa `first_run`, önceki çalıştırmada
+bulunmayan tweet'ler için `new_to_baseline` & önceki çalıştırmada bulunan
+tweet'ler için `unchanged` veya `changed` olur. `changes`, `previous`'tan
+`current`'a geçen her biçim, atıf veya ilgi kararını listeler. Actor kararları
 kategoriye, yuvarlanmış puan seviyesine veya 0,5'te evet/hayır'a göre
-karşılaştırılır ve bir karar yalnızca yanıt açıkça hareket ettiğinde
-değişmiş sayılır: önceki kategori 0,4 olasılığın altına düşer, bir puan en
-az 0,6 seviye hareket eder veya bir evet/hayır olasılığı eşikten en az 0,1
-uzağa düşer. Çalıştırmalar arasındaki yakın-berabere titremeler değişmemiş
-kalır. `maxBaselineRows`'un (varsayılan 100.000) üzerindeki veya farklı
-ayarlardan gelen temel değerler, toplamadan önce bir tanılama satırıyla
-çalıştırmayı durdurur.
+karşılaştırır. Bir karar üç durumda değişmiş sayılır. Önceki kategori 0,4
+olasılığın altına düşer. Bir puan en az 0,6 seviye hareket eder. Bir evet/hayır
+olasılığı eşikten en az 0,1 uzağa düşer. Çalıştırmalar arasındaki yakın-berabere
+titremeler değişmemiş kalır. `maxBaselineRows`'un (varsayılan 100.000)
+üzerindeki veya farklı ayarlardan gelen temel değerler, toplamadan önce bir
+tanılama satırıyla çalıştırmayı durdurur.
 
 ## Görev örnekleri
 
@@ -268,34 +269,31 @@ kategorili veya en az 2 sıralı seviyeli, 1-8 `choice`, `score` veya
 
 ### Bir satır neden `analysis.status`'u `failed` veya `skipped` olarak döndü?
 
-Tweet toplandı ve teslim edildi, ancak yapay zeka destekli analiz
-tamamlanmadı. `analysis.reason`, tweet ve bağlamı `maxContextBytes`'ı
-aştığında `context_limit` veya yeniden denemelerden sonra
-`service_unavailable` gibi nedeni adlandırır. Bu satırların sonuç ücreti
-yoktur. `maxContextBytes`'ı (12.000'e kadar) artır veya etkilenen ID'leri
-yeniden çalıştır.
+Actor tweet'i topladı & teslim etti, ancak yapay zeka analizi tamamlanmadı.
+`analysis.reason`, tweet ve bağlamı `maxContextBytes`'ı aştığında
+`context_limit` veya yeniden denemelerden sonra `service_unavailable` gibi
+nedeni adlandırır. Bu satırların sonuç ücreti yoktur. `maxContextBytes`'ı
+(12.000'e kadar) artır veya etkilenen ID'leri yeniden çalıştır.
 
 ### Analiz gerçekleri doğrular mı?
 
-Hayır. Yanıtlar, gönderinin ne ifade ettiğini ve nasıl çerçevelendiğini
+Hayır. Yanıtlar, gönderinin ne ifade ettiğini & bunu nasıl çerçevelediğini
 açıklar. Olasılıklar model güvenini ifade eder, gerçeği değil. Önemli
-sınıflandırmaları, her satırın koruduğu orijinal tweet'e karşı gözden
-geçir.
+sınıflandırmaları, her satırın koruduğu orijinal tweet'e karşı gözden geçir.
 
 ### Hangi diller çalışır?
 
-Çıkarma, X'in sunduğu her dili destekler. Analiz önce İngilizce müşteri
-senaryolarında doğrulanır; diğer desteklenen diller aynı yapıda yanıtlar
-döndürür ve belirsizlik `unclear` kategorileri ve olasılıklar aracılığıyla
-açık kalır.
+Çıkarma, X'in sunduğu her dili destekler. Analizi önce İngilizce müşteri
+senaryolarında doğruluyoruz. Diğer desteklenen diller aynı yapıda yanıtlar
+döndürür. `unclear` kategorileri & olasılıklar belirsizliği her dilde gösterir.
 
 ### Maliyeti nasıl sınırlarım?
 
-Filtreler, tekilleştirme ve `maxItems` analizden önce çalışır, bu yüzden
-yalnızca benzersiz, filtreyle eşleşen tweet'ler analiz edilir ve
-ücretlendirilir. Kesin arama operatörleri, tarih sınırları ve etkileşim
-tabanları kullan, ve büyük bir çalıştırmadan önce yanıt kalitesini
-kontrol etmek için küçük bir `maxItems` ile başla.
+Filtreler, tekilleştirme ve `maxItems` analizden önce çalışır, bu yüzden Actor
+yalnızca benzersiz, filtreyle eşleşen tweet'leri analiz eder & ücretlendirir.
+Kesin arama operatörleri, tarih sınırları ve etkileşim tabanları kullan, ve
+büyük bir çalıştırmadan önce yanıt kalitesini kontrol etmek için küçük bir
+`maxItems` ile başla.
 
 ### Yardımı nereden alırım?
 

@@ -38,7 +38,7 @@ connexion requise.
 - Plusieurs Communities et ressources par run.
 - Plafonds par ressource et globaux.
 - Lectures simultanées avec reprise de curseur sauvegardé.
-- Les lignes en double sont retirées avant la facturation.
+- L'Actor retire les lignes en double avant la facturation.
 
 ## Entrée
 
@@ -57,8 +57,8 @@ fournissez `query`.
 
 Les lignes utilisent `community`, `communityTweet`, `communityMember` ou
 `communityModerator` comme `resultType`. Chaque ligne inclut `sourceTarget`
-pour la Community d'entrée. Les champs source sont préservés sans valeur
-inventée.
+pour la Community d'entrée. L'Actor préserve les champs source & n'invente
+aucune valeur.
 
 ## Tarification
 
@@ -83,7 +83,7 @@ lignes acceptées, l'état de facturation, les curseurs et les empreintes de
 sortie survivent à une migration Apify. L'Actor n'a pas de délai
 d'expiration imposé.
 
-Seules les Communities publiques exposées par X peuvent être renvoyées. Les
+L'Actor renvoie uniquement les Communities publiques que X expose. Les
 champs disponibles varient selon la Community.
 
 ## Extraction incomplète

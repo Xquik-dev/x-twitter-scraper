@@ -16,12 +16,12 @@
 </td></tr></table>
 
 Xquik è il servizio di scraping X (Twitter) più veloce ed economico al mondo,
-con i dati X più completi, e X Tweet Sentiment Analysis with AI aggiunge
-atteggiamento, intensità e sarcasmo a ogni tweet. Ogni altro Actor Apify
+con i dati X più completi. X Tweet Sentiment Analysis aggiunge
+atteggiamento, intensità & sarcasmo a ogni tweet. Ogni altro Actor Apify
 addebita il costo prima di filtrare o deduplicare. Xquik addebita solo i
-risultati consegnati, unici e conformi ai filtri.
-
-I costi dell'IA sono inclusi nel prezzo per tweet. Non paghi alcun provider di IA, non compri token & non porti alcuna chiave.
+risultati consegnati, unici e conformi ai filtri. I costi dell'IA sono
+inclusi nel prezzo per tweet. Non paghi alcun provider di IA, non compri
+token & non porti alcuna chiave.
 
 Misura l'atteggiamento dietro i post di X (Twitter) e mantieni i dati
 originali del tweet. **X Tweet Sentiment Analysis with AI** raccoglie i tweet
@@ -61,22 +61,22 @@ separa le reazioni forti dalle menzioni di passaggio.
 | Intensità | 0 menzione di passaggio, 1 atteggiamento chiaro, 2 formulazione enfatica |
 | Sarcasmo  | Probabilità che il testo letterale contraddica l'atteggiamento |
 
-Quando vengono forniti dei target, il sentiment giudica l'atteggiamento nei
-loro confronti e usa il contesto di citazione o risposta fornito; altrimenti
-giudica l'argomento principale del post.
+Quando fornisci dei target, il sentiment giudica l'atteggiamento nei loro
+confronti & usa il contesto di citazione o risposta che fornisci. Senza
+target giudica l'argomento principale del post.
 
 ## Prezzi
 
 I costi dell'IA sono inclusi nel prezzo per tweet. Non paghi alcun provider di IA, non compri token & non porti alcuna chiave.
 
 A partire da $0.0003 per tweet analizzato con successo, senza costo di avvio.
-La raccolta è inclusa, e l'allowance di analisi documentata è di 8 domande,
+Il prezzo include la raccolta. L'allowance di analisi è di 8 domande,
 8.000 byte per definizione di domanda e 12.000 byte di contesto per tweet. I
 filtri di estrazione e la deduplicazione vengono eseguiti prima dell'analisi,
 quindi le righe filtrate e duplicate non vengono mai analizzate né
 addebitate. Le analisi fallite o saltate e le righe di diagnostica non
-comportano alcun addebito sul risultato. L'uso della piattaforma Apify viene
-fatturato separatamente da Apify e compare nella scheda Pricing.
+comportano alcun addebito sul risultato. Apify fattura separatamente l'uso
+della piattaforma. La scheda Pricing lo mostra.
 
 ## Esempi di input e output
 
@@ -121,15 +121,15 @@ Ogni esecuzione scrive un record `analysis-summary` nel proprio key-value
 store e lo ripete sotto `results.analysisSummary` nel rapporto di
 esecuzione. Conta le righe analizzate, fallite e saltate, somma
 l'engagement e riassume ogni domanda. La suddivisione `sentiment` mostra
-quanti tweet rientrano in ogni atteggiamento e, sotto `engagementShares`,
-come cambia la suddivisione quando ogni tweet viene pesato in base ai suoi
-Mi piace, retweet, risposte e citazioni. `top` elenca i tre tweet più
-coinvolgenti per atteggiamento. I numeri sono arrotondati a 4 decimali; le
-esecuzioni vuote riportano conteggi a zero e le medie `null`. Ogni riga
-elenca anche `sourceDomains`, i nomi host a cui rimanda, `cashtags` come
-`$NVDA` trovati nel testo, e il blocco `monitor` del riepilogo conta gli
-stati di confronto ed elenca fino a 50 righe modificate quando è impostato
-`monitor.baselineDatasetId`.
+quanti tweet rientrano in ogni atteggiamento. `engagementShares` mostra la
+stessa suddivisione con ogni tweet pesato in base ai suoi Mi piace, retweet,
+risposte & citazioni. `top` elenca i tre tweet più coinvolgenti per
+atteggiamento. Il riepilogo arrotonda i numeri a 4 decimali. Un'esecuzione
+vuota riporta conteggi a zero & medie `null`. Ogni riga elenca
+`sourceDomains`, i nomi host a cui rimanda, & `cashtags` come `$NVDA`
+trovati nel testo. Con `monitor.baselineDatasetId` impostato, il blocco
+`monitor` del riepilogo conta gli stati di confronto & elenca fino a 50
+righe modificate.
 
 Ogni riga di risultato porta anche `answers`, una mappa piatta dall'ID
 domanda alla categoria, al punteggio o alla probabilità scelti. La vista
@@ -140,16 +140,16 @@ JSON. Le righe fallite o saltate portano una mappa vuota.
 ## Confronta con un'esecuzione precedente
 
 Passa `monitor.baselineDatasetId`, l'ID dataset di un'esecuzione precedente
-completata con le stesse impostazioni di analisi, e ogni riga guadagna un
-oggetto `monitor`: `first_run` senza baseline, `new_to_baseline` per i
-tweet che l'esecuzione precedente non aveva, `unchanged` o `changed` per i
-tweet che aveva, con `changes` che elenca ogni decisione di sentiment,
-livello di intensità o sarcasmo che si è spostata da `previous` a
-`current`. Le decisioni si confrontano per categoria, livello di punteggio
-arrotondato o sì/no a 0,5, e una decisione conta come cambiata solo quando
-la risposta si sposta chiaramente: la categoria precedente scende sotto lo
-0,4 di probabilità, un punteggio si sposta di almeno 0,6 livelli, o una
-probabilità sì/no atterra ad almeno 0,1 dalla soglia. Le oscillazioni quasi
+completata con le stesse impostazioni di analisi. Ogni riga guadagna allora
+un oggetto `monitor`. Il suo stato è `first_run` senza baseline,
+`new_to_baseline` per i tweet che l'esecuzione precedente non aveva, &
+`unchanged` o `changed` per i tweet che aveva. `changes` elenca ogni
+decisione di sentiment, livello di intensità o sarcasmo che si è spostata da
+`previous` a `current`. Le decisioni si confrontano per categoria, livello
+di punteggio arrotondato o sì/no a 0,5. Una decisione conta come cambiata in
+tre casi. La categoria precedente scende sotto lo 0,4 di probabilità. Un
+punteggio si sposta di almeno 0,6 livelli. Una probabilità sì/no atterra ad
+almeno 0,1 dalla soglia. Le oscillazioni quasi
 pari tra le esecuzioni restano invariate. Le baseline sopra
 `maxBaselineRows` (predefinito 100.000) o con impostazioni diverse
 interrompono l'esecuzione prima della raccolta con una riga di diagnostica.
@@ -252,7 +252,7 @@ almeno 2 livelli ordinati.
 
 ### Perché una riga è tornata con `analysis.status` `failed` o `skipped`?
 
-Il tweet è stato raccolto e consegnato, ma l'analisi basata sull'AI non si è
+L'Actor ha raccolto & consegnato il tweet, ma l'analisi AI non si è
 completata. `analysis.reason` indica la causa, come `context_limit` quando
 il tweet e il suo contesto superano `maxContextBytes`, oppure
 `service_unavailable` dopo i tentativi. Queste righe non comportano alcun
@@ -261,22 +261,22 @@ gli ID interessati.
 
 ### L'analisi verifica i fatti?
 
-No. Le risposte descrivono ciò che il post esprime e come è formulato. Le
-probabilità esprimono la fiducia del modello, non la verità. Rivedi le
+No. Le risposte descrivono ciò che il post esprime & come il post lo
+formula. Le probabilità esprimono la fiducia del modello, non la verità. Rivedi le
 classificazioni importanti confrontandole con il tweet originale, che ogni
 riga conserva.
 
 ### Quali lingue funzionano?
 
-L'estrazione supporta ogni lingua servita da X. L'analisi è validata prima
-sugli scenari clienti in inglese; le altre lingue supportate restituiscono
-risposte con la stessa struttura, e l'incertezza resta esplicita tramite le
-categorie `unclear` e le probabilità.
+L'estrazione supporta ogni lingua servita da X. Validiamo l'analisi prima
+sugli scenari clienti in inglese. Le altre lingue supportate restituiscono
+risposte con la stessa struttura. Le categorie `unclear` & le probabilità
+mostrano l'incertezza in ogni lingua.
 
 ### Come limito il costo?
 
 Filtri, deduplicazione e `maxItems` vengono eseguiti prima dell'analisi,
-quindi vengono analizzati e addebitati solo i tweet unici e conformi ai
+quindi l'Actor analizza & addebita solo i tweet unici e conformi ai
 filtri. Usa operatori di ricerca precisi, limiti di data e soglie di
 engagement, e inizia con un `maxItems` piccolo per verificare la qualità
 delle risposte prima di un'esecuzione grande.

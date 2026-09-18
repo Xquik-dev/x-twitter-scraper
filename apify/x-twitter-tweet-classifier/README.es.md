@@ -16,28 +16,26 @@
 </td></tr></table>
 
 Xquik es el servicio de extracción de X (Twitter) más rápido y económico del
-mundo, con los datos de X más completos, y X (Twitter) Tweet Classifier
-responde tus propias etiquetas, puntajes y preguntas de sí/no sobre cada tuit.
-Todos los demás Actors de Apify cobran antes de filtrar o eliminar duplicados.
-Xquik cobra solo por resultados entregados, únicos y que coinciden con los
-filtros.
+mundo, con los datos de X más completos. X (Twitter) Tweet Classifier responde
+tus propias etiquetas, puntajes y preguntas de sí/no sobre cada tuit. Todos los
+demás Actors de Apify cobran antes de filtrar o eliminar duplicados. Xquik cobra
+solo por resultados entregados, únicos y que coinciden con los filtros. Los
+costos de IA están incluidos en el precio por tweet. No pagas a ningún proveedor
+de IA, no compras tokens & no traes ninguna clave.
 
-Los costos de IA están incluidos en el precio por tweet. No pagas a ningún proveedor de IA, no compras tokens & no traes ninguna clave.
+Clasifica publicaciones de X (Twitter) con tus propias preguntas y conserva los
+datos originales del tuit. **X Tweet Classifier with AI Analysis** recopila
+tuits que coinciden y luego responde de 1 a 8 preguntas tipadas por publicación:
+categorías para triaje de soporte, puntajes para priorización y probabilidades
+para relevancia. Los preajustes cubren monitoreo de marca, quejas, competidores,
+intención de compra, comentarios sobre productos, noticias, sentimiento &
+sentimiento de mercado. Las preguntas personalizadas los reemplazan.
 
-Clasifica publicaciones de X (Twitter) con tus propias preguntas y conserva
-los datos originales del tuit. **X Tweet Classifier with AI Analysis** recopila tuits que coinciden y luego responde de 1 a 8 preguntas
-tipadas por publicación: categorías para triaje de soporte, puntajes para
-priorización y probabilidades para relevancia. Los preajustes cubren
-monitoreo de marca, quejas, competidores, intención de compra, comentarios
-sobre productos, noticias, sentimiento y sentimiento de mercado; las
-preguntas personalizadas los reemplazan.
-
-- **Respuestas tipadas** con probabilidades, confianza y versiones de
-  pregunta.
-- **Tus preguntas, tus categorías**: hasta 255 categorías por pregunta.
+- **Respuestas tipadas** con probabilidades, confianza y versiones de pregunta.
+- **Tus preguntas, tus categorías.** Cada pregunta admite hasta 255 categorías.
 - **Registros de fuente completos** para cada campo que expone el tuit.
-- **Facturación basada en filtros primero**: solo se cobran los tuits únicos
-  que coinciden con los filtros y tienen análisis exitoso.
+- **Facturación basada en filtros primero.** Pagas solo por los tuits únicos que
+  coinciden con los filtros & tienen un análisis exitoso.
 
 ## Cómo clasificar tuits con preguntas personalizadas
 
@@ -83,23 +81,23 @@ Ofrece de 1 a 8 preguntas con IDs, instrucciones y versiones únicos.
   contiene descripciones de `yes` y `no`.
 
 Preajustes: `brand`, `complaints`, `competitors`, `purchase_intent`,
-`product_feedback`, `news`, `sentiment` y `market`. `maxContextBytes` es de
-12 000 bytes por defecto; los límites menores omiten el contexto demasiado
-grande sin truncarlo. `concurrency` es 4 por defecto y acepta de 1 a 16. Cada
-definición de pregunta se mantiene dentro de un límite de 8000 bytes.
+`product_feedback`, `news`, `sentiment` y `market`. `maxContextBytes` es de 12
+000 bytes por defecto. Un límite menor omite el contexto demasiado grande sin
+truncarlo. `concurrency` es 4 por defecto y acepta de 1 a 16. Cada definición de
+pregunta se mantiene dentro de un límite de 8000 bytes.
 
 ## Precios
 
 Los costos de IA están incluidos en el precio por tweet. No pagas a ningún proveedor de IA, no compras tokens & no traes ninguna clave.
 
-Desde $0.0003 por tuit analizado con éxito, sin tarifa de inicio. La
-recopilación está incluida, y el límite documentado de análisis es de 8
-preguntas, 8000 bytes por definición de pregunta y 12 000 bytes de contexto
-por tuit. Los filtros de extracción y la eliminación de duplicados se
-ejecutan antes del análisis, así que las filas filtradas o duplicadas nunca se
-analizan ni se cobran. Los análisis fallidos u omitidos y las filas de
-diagnóstico no generan cargo por resultado. El uso de la plataforma Apify se
-factura por separado por Apify y aparece en la pestaña Pricing.
+Desde $0.0003 por tuit analizado con éxito, sin tarifa de inicio. El precio
+incluye la recopilación. El límite de análisis es de 8 preguntas, 8000 bytes por
+definición de pregunta & 12 000 bytes de contexto por tuit. Los filtros de
+extracción y la eliminación de duplicados se ejecutan antes del análisis, así
+que las filas filtradas o duplicadas nunca se analizan ni se cobran. Los
+análisis fallidos u omitidos y las filas de diagnóstico no generan cargo por
+resultado. Apify factura por separado el uso de la plataforma. La pestaña
+Pricing lo muestra.
 
 ## Ejemplos de entrada y salida
 
@@ -146,20 +144,19 @@ análisis cobrados y los cargos pendientes.
 
 Cada ejecución escribe un registro `analysis-summary` en su almacén de
 clave-valor y lo repite en `results.analysisSummary` dentro del informe de
-ejecución. Cuenta las filas analizadas, fallidas y omitidas, suma la
-interacción y resume cada pregunta. Cada pregunta personalizada tiene su
-propio bloque: conteos y proporciones de categoría para preguntas de tipo
-`choice`, media y conteos por nivel para preguntas de tipo `score`, y conteos
-de sí y no para preguntas de sí/no. Los números se redondean a 4 decimales;
-las ejecuciones vacías informan conteos en cero y medias `null`. Pasa
-`analysis.preset` con `brand`, `complaints`, `purchase_intent`,
-`product_feedback`, `competitors`, `sentiment`, `market` o `news` para
-ejecutar un enfoque integrado en lugar de preguntas personalizadas; el
-resumen entonces informa ese enfoque por pregunta. Cada fila también incluye
-`sourceDomains`, los dominios que enlaza, `cashtags` como `$NVDA` encontrados
-en su texto, y el bloque `monitor` del resumen cuenta los estados de
-comparación y lista hasta 50 filas cambiadas cuando se configura
-`monitor.baselineDatasetId`.
+ejecución. Cuenta las filas analizadas, fallidas y omitidas, suma la interacción
+y resume cada pregunta. Cada pregunta personalizada tiene su propio bloque:
+conteos y proporciones de categoría para preguntas de tipo `choice`, media y
+conteos por nivel para preguntas de tipo `score`, y conteos de sí y no para
+preguntas de sí/no. El resumen redondea los números a 4 decimales. Una ejecución
+vacía informa conteos en cero & medias `null`. Pasa `analysis.preset` con
+`brand`, `complaints`, `purchase_intent`, `product_feedback`, `competitors`,
+`sentiment`, `market` o `news` para ejecutar un enfoque integrado en lugar de
+preguntas personalizadas. El resumen entonces informa ese enfoque por pregunta.
+Cada fila incluye `sourceDomains`, los dominios que enlaza, & `cashtags` como
+`$NVDA` encontrados en su texto. Con `monitor.baselineDatasetId` configurado, el
+bloque `monitor` del resumen cuenta los estados de comparación & lista hasta 50
+filas cambiadas.
 
 Cada fila de resultado también incluye `answers`, un mapa plano del ID de
 pregunta a la categoría, puntaje o probabilidad elegidos. La vista de
@@ -170,19 +167,19 @@ analizar JSON. Las filas fallidas u omitidas tienen un mapa vacío.
 ## Comparar con una ejecución anterior
 
 Pasa `monitor.baselineDatasetId`, el ID de conjunto de datos de una ejecución
-anterior completada con la misma configuración de análisis, y cada fila gana
-un objeto `monitor`: `first_run` sin línea base, `new_to_baseline` para tuits
-que la ejecución anterior no tenía, `unchanged` o `changed` para tuits que sí
-tenía, con `changes` que lista cada decisión de cualquiera de tus preguntas
-que cambió de `previous` a `current`. Las decisiones se comparan por
-categoría, nivel de puntaje redondeado, o sí/no en 0.5, y una decisión solo
-cuenta como cambiada cuando la respuesta se mueve claramente: la categoría
-anterior cae por debajo de 0.4 de probabilidad, un puntaje se mueve al menos
-0.6 niveles, o una probabilidad de sí/no queda al menos a 0.1 del umbral. Las
-fluctuaciones marginales entre ejecuciones se consideran sin cambios. Las
-líneas base por encima de `maxBaselineRows` (100 000 por defecto) o de una
-configuración distinta detienen la ejecución antes de la recopilación con una
-fila de diagnóstico.
+anterior completada con la misma configuración de análisis. Cada fila gana
+entonces un objeto `monitor`. Su estado es `first_run` sin línea base,
+`new_to_baseline` para tuits que la ejecución anterior no tenía, & `unchanged` o
+`changed` para tuits que sí tenía. `changes` lista cada decisión de cualquiera
+de tus preguntas que cambió de `previous` a `current`. Las decisiones se
+comparan por categoría, nivel de puntaje redondeado, o sí/no en 0.5. Una
+decisión cuenta como cambiada en tres casos. La categoría anterior cae por
+debajo de 0.4 de probabilidad. Un puntaje se mueve al menos 0.6 niveles. Una
+probabilidad de sí/no queda al menos a 0.1 del umbral. Las fluctuaciones
+marginales entre ejecuciones se consideran sin cambios. Las líneas base por
+encima de `maxBaselineRows` (100 000 por defecto) o de una configuración
+distinta detienen la ejecución antes de la recopilación con una fila de
+diagnóstico.
 
 ## Ejemplos de tareas
 
@@ -277,13 +274,12 @@ que necesitas.
 
 ### ¿Importan las versiones de pregunta?
 
-Sí. La `version` que le das a cada pregunta se guarda con cada respuesta, así
-puedes saber qué formulación produjo un resultado cuando refinas tus
-preguntas con el tiempo.
+Sí. Cada respuesta guarda la `version` que le das a su pregunta. Cuando refinas
+tus preguntas con el tiempo, puedes saber qué formulación produjo un resultado.
 
 ### ¿Por qué una fila regresó con `analysis.status` en `failed` o `skipped`?
 
-El tuit se recopiló y entregó, pero el análisis con IA no se completó.
+El Actor recopiló & entregó el tuit, pero el análisis con IA no se completó.
 `analysis.reason` indica la causa, como `context_limit` cuando el tuit y su
 contexto superan `maxContextBytes`, o `service_unavailable` tras varios
 reintentos. Estas filas no generan cargo por resultado. Aumenta
@@ -291,24 +287,24 @@ reintentos. Estas filas no generan cargo por resultado. Aumenta
 
 ### ¿El análisis verifica hechos?
 
-No. Las respuestas describen lo que expresa la publicación y cómo está
-formulada. Las probabilidades expresan la confianza del modelo, no la verdad.
+No. Las respuestas describen lo que expresa la publicación & cómo la publicación
+lo formula. Las probabilidades expresan la confianza del modelo, no la verdad.
 Revisa las clasificaciones importantes contra el tuit original, que cada fila
 conserva.
 
 ### ¿Qué idiomas funcionan?
 
-La extracción admite todos los idiomas que ofrece X. El análisis se valida
-primero con escenarios de clientes en inglés; los demás idiomas admitidos
-devuelven respuestas con la misma estructura, y la incertidumbre queda
-explícita mediante categorías y probabilidades `unclear`.
+La extracción admite todos los idiomas que ofrece X. Validamos el análisis
+primero con escenarios de clientes en inglés. Los demás idiomas admitidos
+devuelven respuestas con la misma estructura. Las categorías `unclear` & las
+probabilidades muestran la incertidumbre en todos los idiomas.
 
 ### ¿Cómo limito el costo?
 
 Los filtros, la eliminación de duplicados y `maxItems` se ejecutan antes del
-análisis, así que solo se analizan y cobran los tuits únicos que coinciden con
-los filtros. Usa operadores de búsqueda precisos, límites de fecha y pisos de
-interacción, y comienza con un `maxItems` pequeño para revisar la calidad de
+análisis, así que el Actor analiza & cobra solo los tuits únicos que coinciden
+con los filtros. Usa operadores de búsqueda precisos, límites de fecha y pisos
+de interacción, y comienza con un `maxItems` pequeño para revisar la calidad de
 las respuestas antes de una ejecución grande.
 
 ### ¿Dónde obtengo ayuda?

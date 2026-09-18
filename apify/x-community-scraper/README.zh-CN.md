@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何将 Xquik 抓取工具与 Claude Code、Codex、Cursor 等配合使用，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据，X Community
+Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据。X Community
 Scraper 能采集 Community 信息、帖子、搜索结果、成员与管理员。其他所有 Apify Actor
 都会在过滤或去重之前就收费。Xquik 只为已交付、唯一且符合过滤条件的结果收费。
 
@@ -32,7 +32,7 @@ Scraper 能采集 Community 信息、帖子、搜索结果、成员与管理员�
 - 每次运行支持多个 Community 与多种资源。
 - 单资源与全局上限。
 - 并发读取并支持游标断点恢复。
-- 重复行会在计费前移除。
+- Actor 会在计费前移除重复行。
 
 ## 输入参数
 
@@ -49,8 +49,8 @@ Scraper 能采集 Community 信息、帖子、搜索结果、成员与管理员�
 ## 输出
 
 各行以 `community`、`communityTweet`、`communityMember` 或 `communityModerator`
-作为 `resultType`。每行都包含对应输入 Community 的 `sourceTarget`。来源字段会
-原样保留，不会臆造数值。
+作为 `resultType`。每行都包含对应输入 Community 的 `sourceTarget`。Actor 会
+保留来源字段，不臆造数值。
 
 ## 定价
 
@@ -68,7 +68,7 @@ Scraper 能采集 Community 信息、帖子、搜索结果、成员与管理员�
 独立的 Community 资源会并发运行。每条游标链内的分页保持有序。已接受的行、
 计费状态、游标与输出指纹在 Apify 迁移后依然保留。该 Actor 没有自设超时。
 
-只能返回 X 公开的 Community。可用字段因 Community 而异。
+Actor 只返回 X 公开的 Community。可用字段因 Community 而异。
 
 ## 提取不完整
 

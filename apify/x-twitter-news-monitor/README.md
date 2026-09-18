@@ -16,19 +16,18 @@
 </td></tr></table>
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data, and X (Twitter) News Monitor sorts news posts by format,
+most complete X data. X (Twitter) News Monitor sorts news posts by format,
 source attribution & relevance. Every other Apify Actor charges before filtering
 or deduplicating. Xquik charges only for delivered, unique, filter-matching
-results.
-
-AI costs are included in the per-tweet price. You pay no AI provider, buy no tokens & bring no key.
+results. AI costs are included in the per-tweet price. You pay no AI provider,
+buy no tokens & bring no key.
 
 Sort news posts on X (Twitter) by what they are & keep the original tweet data.
 **X (Twitter) News Monitor with AI Analysis** collects posts about your topics,
 then adds an AI-powered format, source attribution & relevance answer to every
-post. Separate reporting from commentary & speculation, see whether a source is
-named or linked, & keep only posts that concern the organizations, people or
-topics you track.
+post. Separate reporting from commentary & speculation. See whether a post names
+or links a source. Keep only posts about the organizations, people or topics you
+track.
 
 - **Format** tells reporting, commentary, speculation, promotion & satire apart.
 - **Attribution** shows whether a claim names a source, links one, is firsthand
@@ -66,20 +65,20 @@ topics you track.
 | Attribution | Named, linked, firsthand, absent or unclear                                 |
 | Relevance   | Probability that the reported event concerns your targets                   |
 
-Classification does not verify facts. A named source is not a credible source;
-attribution describes what the post presents.
+Classification does not verify facts. A named source is not a credible source.
+Attribution describes what the post presents.
 
 ## Pricing
 
-AI costs are included in the per-tweet price. You pay no AI provider, buy no tokens & bring no key.
+AI costs are included in the per-tweet price. You pay no AI provider, buy no
+tokens & bring no key.
 
-From $0.0003 per successfully analyzed tweet, with no start fee. Collection is
-included, & the documented analysis allowance is 8 questions, 8,000 bytes per
+From $0.0003 per successfully analyzed tweet, with no start fee. The price
+includes collection. The analysis allowance is 8 questions, 8,000 bytes per
 question definition & 12,000 bytes of context per tweet. Extraction filters &
 deduplication run before analysis, so filtered-out & duplicate rows are never
 analyzed or charged. Failed & skipped analyses & diagnostic rows have no result
-charge. Apify platform usage is billed separately by Apify & appears on the
-Pricing tab.
+charge. Apify bills platform usage separately. The Pricing tab shows it.
 
 ## Input & output examples
 
@@ -111,31 +110,34 @@ The input above is copy-ready. Output rows look like this (abbreviated):
 
 Each result contains `tweet` & `analysis`. Answers include types, question
 versions & available probabilities. When a post links an X Article, the analysis
-fetches that article's title, preview & text blocks as context, and
-`analysis.contextAvailability.article` reports `text_blocks`, `summary` (title &
-preview only) or `not_supplied`. A failed or skipped analysis keeps the
-collected tweet with an empty answer list & a `reason`. Free diagnostics in the
-key-value store explain invalid inputs, missing results & interrupted
-collection, & the run report separates collected rows, charged analyses &
-pending charges.
+fetches that article's title, preview & text blocks as context.
+`analysis.contextAvailability.article` reports `text_blocks`, `summary` or
+`not_supplied`. `summary` means the title & preview only. A failed or skipped
+analysis keeps the collected tweet with an empty answer list & a `reason`. Free
+diagnostics in the key-value store explain invalid inputs, missing results &
+interrupted collection, & the run report separates collected rows, charged
+analyses & pending charges.
 
 ## Run summary & flat answers
 
 Each run writes an `analysis-summary` record to its key-value store & repeats it
 under `results.analysisSummary` in the run report. It counts analyzed, failed &
-skipped rows, sums engagement, and summarizes every question. The `format` split
-separates reporting from commentary, speculation, promotion & satire;
-`attribution` counts named, linked, firsthand & absent sources; `relevance`
-counts posts about each target, with `targets` giving mentions per target and
-each target's `top` listing its most engaged posts per answer category. Numbers
-are rounded to 4 decimals; empty runs report zero counts & `null` means.
-`sourceDomains` counts linked domains across the run, each `targets` entry
-carries `choices` with the format & attribution split for posts about that
-target, and `monitor.changedRows` lists posts whose decisions moved since the
-baseline. Every row also lists `sourceDomains`, the hostnames it links to,
-`cashtags` such as `$NVDA` found in its text, and the summary's `monitor` block
-counts comparison statuses & lists up to 50 changed rows when
-`monitor.baselineDatasetId` is set.
+skipped rows, sums engagement, and summarizes every question.
+
+- The `format` split separates reporting from commentary, speculation, promotion
+  & satire.
+- `attribution` counts named, linked, firsthand & absent sources.
+- `relevance` counts posts about each target.
+- `targets` gives mentions per target. Each target's `top` lists its most
+  engaged posts per answer category.
+- Each `targets` entry has `choices`, the format & attribution split for posts
+  about that target.
+- `sourceDomains` counts linked domains across the run.
+- `monitor.changedRows` lists posts whose decisions moved since the baseline.
+
+Every row lists `sourceDomains`, the hostnames it links to, & `cashtags` such as
+`$NVDA` found in its text. With `monitor.baselineDatasetId` set, the summary's
+`monitor` block counts comparison statuses & lists up to 50 changed rows.
 
 Every result row also carries `answers`, a flat map from question ID to the
 chosen category, score, or probability. The `Flat answers` dataset view & CSV or
@@ -145,17 +147,16 @@ need no JSON parsing. Failed & skipped rows carry an empty map.
 ## Compare with an earlier run
 
 Pass `monitor.baselineDatasetId`, the dataset ID of a completed earlier run with
-the same analysis settings, and every row gains a `monitor` object: `first_run`
-without a baseline, `new_to_baseline` for tweets the earlier run did not have,
-`unchanged` or `changed` for tweets it had, with `changes` listing each format,
-attribution or relevance decision that moved from `previous` to `current`.
-Decisions compare by category, rounded score level, or yes/no at 0.5, and a
-decision only counts as changed when the answer clearly moves: the earlier
-category falls below 0.4 probability, a score moves at least 0.6 levels, or a
-yes/no probability lands at least 0.1 from the threshold. Near-tie jitter
-between runs stays unchanged. Baselines above `maxBaselineRows` (default
-100,000) or from different settings stop the run before collection with a
-diagnostic row.
+the same analysis settings. Every row then gains a `monitor` object. Its status
+is `first_run` without a baseline, `new_to_baseline` for tweets the earlier run
+did not have, & `unchanged` or `changed` for tweets it had. `changes` lists each
+format, attribution or relevance decision that moved from `previous` to
+`current`. Decisions compare by category, rounded score level, or yes/no at 0.5.
+A decision counts as changed in three cases. The earlier category falls below
+0.4 probability. A score moves at least 0.6 levels. A yes/no probability lands
+at least 0.1 from the threshold. Near-tie jitter between runs stays unchanged.
+Baselines above `maxBaselineRows` (default 100,000) or from different settings
+stop the run before collection with a diagnostic row.
 
 ## Task examples
 
@@ -248,7 +249,7 @@ Yes. Custom `analysis.questions` replace the defaults: 1-8 `choice`, `score` or
 
 ### Why did a row come back with `analysis.status` of `failed` or `skipped`?
 
-The tweet was collected & delivered, but AI-powered analysis did not complete.
+The Actor collected & delivered the tweet, but the AI analysis did not complete.
 `analysis.reason` names the cause, such as `context_limit` when the tweet & its
 context exceed `maxContextBytes`, or `service_unavailable` after retries. These
 rows carry no result charge. Raise `maxContextBytes` (up to 12,000) or rerun the
@@ -256,22 +257,22 @@ affected IDs.
 
 ### Does the analysis verify facts?
 
-No. Answers describe what the post expresses & how it is framed. Probabilities
-express model confidence, not truth. Review important classifications against
-the original tweet, which every row keeps.
+No. Answers describe what the post expresses & how the post frames it.
+Probabilities express model confidence, not truth. Review important
+classifications against the original tweet, which every row keeps.
 
 ### Which languages work?
 
-Extraction supports every language X serves. Analysis is validated on English
-customer scenarios first; other supported languages return answers with the same
-structure, & uncertainty stays explicit through `unclear` categories &
-probabilities.
+Extraction supports every language X serves. We validate analysis on English
+customer scenarios first. Other supported languages return answers with the same
+structure. `unclear` categories & probabilities show uncertainty in every
+language.
 
 ### How do I limit cost?
 
-Filters, deduplication & `maxItems` run before analysis, so only unique,
-filter-matching tweets are analyzed & charged. Use precise search operators,
-date bounds & engagement floors, & start with a small `maxItems` to check answer
+Filters, deduplication & `maxItems` run before analysis, so the Actor analyzes &
+charges only unique, filter-matching tweets. Use precise search operators, date
+bounds & engagement floors, & start with a small `maxItems` to check answer
 quality before a large run.
 
 ### Where do I get help?

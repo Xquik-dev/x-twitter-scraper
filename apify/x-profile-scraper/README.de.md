@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
-den umfassendsten X-Daten, und X Profile Scraper sammelt Profile, Beiträge,
+den umfassendsten X-Daten. X Profile Scraper sammelt Profile, Beiträge,
 Antworten, Medien & Likes für jedes Handle. Jeder andere Apify Actor
 berechnet, bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für
 gelieferte, eindeutige, filterkonforme Ergebnisse.
@@ -37,7 +37,7 @@ oder URLs. Kein X-API-Schlüssel oder Login erforderlich.
   Repost-Status und Kennzahlen.
 - Filtere optionale Profile nach Zielgruppe, Aktivität, Alter und
   öffentlichen Metadaten.
-- Doppelte Datensätze werden vor der Abrechnung entfernt.
+- Der Actor entfernt doppelte Datensätze vor der Abrechnung.
 
 ## Eingabe
 

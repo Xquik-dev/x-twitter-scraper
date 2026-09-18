@@ -55,7 +55,7 @@ Brazil, Canada, France, Germany, India, Indonesia, Japan, Mexico, Australia가
 
 각 트렌드는 `name`, `rank`, `tweetVolume`, `query`, `url`, `woeid`,
 `sourceTarget`, `resultType`이 포함된 하나의 데이터셋 행입니다. 누락된 소스
-필드는 값을 지어내지 않고 그대로 비어 있습니다.
+필드는 그대로 비어 있습니다. Actor는 값을 지어내지 않습니다.
 
 ## 가격
 
@@ -64,7 +64,7 @@ Brazil, Canada, France, Germany, India, Indonesia, Japan, Mexico, Australia가
 
 - 전달된 데이터 행당 1회 과금됩니다. 진단 정보는 `diagnostics`에서 무료입니다.
 - 시작, 쿼리, 위치 요금은 없습니다.
-- 중복은 과금 전에 제거됩니다.
+- Actor는 과금 전에 중복을 제거합니다.
 - Apify 최대 총 비용 설정으로 전달되는 행을 제한할 수 있습니다.
 
 이전 빌드가 필요하지 않다면 `latest`를 사용하세요. 50개의 공개 태스크나 129개의

@@ -168,7 +168,7 @@ plafonds, la déduplication, l'attribution et la facturation atomiques.
   `maxStatuses`, `minAccountAgeDays`, `verifiedType`, `usernameContains`,
   `hasWebsite`, `hasLocation`) s'exécutent avant qu'un profil n'entre dans
   votre dataset.
-- Avec `dedupeAcrossTargets: true`, les répétitions sont retirées avant
+- Avec `dedupeAcrossTargets: true`, l'Actor retire les répétitions avant
   l'écriture.
 - Les lignes rejetées par le dataset ne sont pas facturées.
 - Les runs sans entrée, avec entrée invalide et sans sortie écrivent 1
@@ -216,7 +216,7 @@ d'utilisateur acceptent `@` ou aucun préfixe :
 ```
 
 Réglez `relation` sur `followers`, `following` ou `verified_followers`
-pour changer ce qui est scrapé pour chaque handle.
+pour choisir la relation que l'Actor scrape pour chaque handle.
 
 Les alias acceptés pour la même entrée incluent `username`, `usernames` et
 `user_names`.
@@ -302,7 +302,7 @@ La sortie contient une ligne par profil unique. Les profils partagés
 incluent `sourceTargets`, `sourceRelations`, `sourceUrls`,
 `sourceTargetKeys` et `overlapCount`, afin que vous puissiez trier par
 chevauchement ou exporter directement en CSV. Gardez `maxItems` assez
-élevé pour que chaque cible contribue des lignes ; utilisez
+élevé pour que chaque cible contribue des lignes. Utilisez
 `maxItemsPerTarget` pour contrôler la profondeur par compte.
 
 ### Formes d'URL acceptées

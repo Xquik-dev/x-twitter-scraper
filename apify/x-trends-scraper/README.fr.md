@@ -59,7 +59,7 @@ en charge.
 
 Chaque tendance est une ligne de dataset avec `name`, `rank`, `tweetVolume`,
 `query`, `url`, `woeid`, `sourceTarget` et `resultType`. Les champs source
-manquants restent absents plutôt que d'être inventés.
+manquants restent absents. L'Actor n'invente aucune valeur.
 
 ## Tarification
 
@@ -69,7 +69,7 @@ séparément l'usage de sa plateforme.
 - Une facturation par ligne de donnée livrée. Les diagnostics sont gratuits
   dans `diagnostics`.
 - Aucun frais de démarrage, de requête ou de localisation.
-- Les doublons sont retirés avant la facturation.
+- L'Actor retire les doublons avant la facturation.
 - Les paramètres Apify de charge totale maximale plafonnent les lignes
   livrées.
 

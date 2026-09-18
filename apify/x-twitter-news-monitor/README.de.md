@@ -16,20 +16,20 @@
 </td></tr></table>
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
-den umfassendsten X-Daten, und X (Twitter) News Monitor sortiert News-Beiträge
-nach Format, Quellenangabe & Relevanz. Jeder andere Apify Actor berechnet,
-bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für gelieferte,
-eindeutige, filterkonforme Ergebnisse.
-
-Die KI-Kosten sind im Preis pro Tweet enthalten. Du bezahlst keinen KI-Anbieter, kaufst keine Tokens & bringst keinen Schlüssel mit.
+den umfassendsten X-Daten. X (Twitter) News Monitor sortiert News-Beiträge nach
+Format, Quellenangabe & Relevanz. Jeder andere Apify Actor berechnet, bevor
+gefiltert oder dedupliziert wird. Xquik berechnet nur für gelieferte,
+eindeutige, filterkonforme Ergebnisse. Die KI-Kosten sind im Preis pro Tweet
+enthalten. Du bezahlst keinen KI-Anbieter, kaufst keine Tokens & bringst keinen
+Schlüssel mit.
 
 Sortiere News-Beiträge auf X (Twitter) danach, was sie sind, & behalte die
 ursprünglichen Tweet-Daten. **X (Twitter) News Monitor with AI Analysis**
 sammelt Beiträge zu deinen Themen, ergänzt dann jeden Beitrag um eine
 KI-gestützte Format-, Quellenangabe- & Relevanz-Antwort. Trenne
-Berichterstattung von Kommentar & Spekulation, sieh, ob eine Quelle genannt
-oder verlinkt ist, & behalte nur Beiträge, die die Organisationen, Personen
-oder Themen betreffen, die du verfolgst.
+Berichterstattung von Kommentar & Spekulation. Sieh, ob ein Beitrag eine Quelle
+nennt oder verlinkt. Behalte nur Beiträge über die Organisationen, Personen oder
+Themen, die du verfolgst.
 
 - **Format** unterscheidet Berichterstattung, Kommentar, Spekulation,
   Werbung & Satire.
@@ -70,20 +70,19 @@ oder Themen betreffen, die du verfolgst.
 | Relevanz        | Wahrscheinlichkeit, dass das berichtete Ereignis deine Ziele betrifft       |
 
 Die Klassifizierung prüft keine Fakten. Eine genannte Quelle ist keine
-glaubwürdige Quelle; die Quellenangabe beschreibt, was der Beitrag darstellt.
+glaubwürdige Quelle. Die Quellenangabe beschreibt, was der Beitrag darstellt.
 
 ## Preise
 
 Die KI-Kosten sind im Preis pro Tweet enthalten. Du bezahlst keinen KI-Anbieter, kaufst keine Tokens & bringst keinen Schlüssel mit.
 
-Ab $0.0003 pro erfolgreich analysiertem Tweet, ohne Startgebühr. Die
-Erfassung ist enthalten, & das dokumentierte Analyse-Kontingent umfasst 8
-Fragen, 8.000 Byte pro Frage-Definition & 12.000 Byte Kontext pro Tweet.
-Extraktionsfilter & Deduplizierung laufen vor der Analyse, sodass
-herausgefilterte & doppelte Datensätze nie analysiert oder berechnet
-werden. Fehlgeschlagene & übersprungene Analysen sowie Diagnose-Datensätze
-verursachen keine Ergebnisgebühr. Die Apify-Plattformnutzung wird separat
-von Apify berechnet & erscheint im Tab „Pricing".
+Ab $0.0003 pro erfolgreich analysiertem Tweet, ohne Startgebühr. Der Preis
+enthält die Erfassung. Das Analyse-Kontingent umfasst 8 Fragen, 8.000 Byte pro
+Frage-Definition & 12.000 Byte Kontext pro Tweet. Extraktionsfilter &
+Deduplizierung laufen vor der Analyse, sodass herausgefilterte & doppelte
+Datensätze nie analysiert oder berechnet werden. Fehlgeschlagene & übersprungene
+Analysen sowie Diagnose-Datensätze verursachen keine Ergebnisgebühr. Apify
+berechnet die Plattformnutzung separat. Der Tab "Pricing" zeigt sie.
 
 ## Eingabe- & Ausgabebeispiele
 
@@ -116,36 +115,39 @@ Die obige Eingabe ist kopierfertig. Ausgabedatensätze sehen so aus
 
 Jedes Ergebnis enthält `tweet` & `analysis`. Antworten enthalten Typen,
 Fragenversionen & verfügbare Wahrscheinlichkeiten. Wenn ein Beitrag einen
-X-Artikel verlinkt, ruft die Analyse dessen Titel, Vorschau & Textblöcke
-als Kontext ab, und `analysis.contextAvailability.article` meldet
-`text_blocks`, `summary` (nur Titel & Vorschau) oder `not_supplied`. Eine
+X-Artikel verlinkt, ruft die Analyse dessen Titel, Vorschau & Textblöcke als
+Kontext ab. `analysis.contextAvailability.article` meldet `text_blocks`,
+`summary` oder `not_supplied`. `summary` bedeutet nur Titel & Vorschau. Eine
 fehlgeschlagene oder übersprungene Analyse behält den gesammelten Tweet mit
 einer leeren Antwortliste & einem `reason`. Kostenlose Diagnosen im
-Key-Value-Store erklären ungültige Eingaben, fehlende Ergebnisse &
-unterbrochene Erfassung, & der Run-Report trennt gesammelte Datensätze,
-abgerechnete Analysen & ausstehende Gebühren.
+Key-Value-Store erklären ungültige Eingaben, fehlende Ergebnisse & unterbrochene
+Erfassung, & der Run-Report trennt gesammelte Datensätze, abgerechnete Analysen
+& ausstehende Gebühren.
 
 ## Run-Zusammenfassung & flache Antworten
 
-Jeder Run schreibt einen `analysis-summary`-Datensatz in seinen
-Key-Value-Store & wiederholt ihn unter `results.analysisSummary` im
-Run-Report. Er zählt analysierte, fehlgeschlagene & übersprungene
-Datensätze, summiert Interaktionen und fasst jede Frage zusammen. Die
-Aufteilung `format` trennt Berichterstattung von Kommentar, Spekulation,
-Werbung & Satire; `attribution` zählt genannte, verlinkte, aus erster Hand
-stammende & fehlende Quellen; `relevance` zählt Beiträge zu jedem Ziel, wobei
-`targets` die Erwähnungen pro Ziel angibt und der `top`-Eintrag jedes Ziels
-dessen am stärksten interagierte Beiträge pro Antwortkategorie listet.
-Zahlen sind auf 4 Nachkommastellen gerundet; leere Runs melden Nullwerte &
-`null`-Mittelwerte. `sourceDomains` zählt verlinkte Domains über den Run
-hinweg, jeder `targets`-Eintrag führt `choices` mit der Format- &
-Quellenangabe-Aufteilung für Beiträge zu diesem Ziel, und
-`monitor.changedRows` listet Beiträge, deren Entscheidungen sich seit der
-Baseline geändert haben. Jeder Datensatz listet außerdem `sourceDomains`,
-die Hostnamen, auf die er verlinkt, `cashtags` wie `$NVDA`, die in seinem
-Text gefunden wurden, und der `monitor`-Block der Zusammenfassung zählt
-Vergleichsstatus & listet bis zu 50 geänderte Datensätze, wenn
-`monitor.baselineDatasetId` gesetzt ist.
+Jeder Run schreibt einen `analysis-summary`-Datensatz in seinen Key-Value-Store
+& wiederholt ihn unter `results.analysisSummary` im Run-Report. Er zählt
+analysierte, fehlgeschlagene & übersprungene Datensätze, summiert Interaktionen
+und fasst jede Frage zusammen.
+
+- Die Aufteilung `format` trennt Berichterstattung von Kommentar, Spekulation,
+  Werbung & Satire.
+- `attribution` zählt genannte, verlinkte, aus erster Hand stammende & fehlende
+  Quellen.
+- `relevance` zählt Beiträge zu jedem Ziel.
+- `targets` gibt die Erwähnungen pro Ziel an. Der `top`-Eintrag jedes Ziels
+  listet dessen Beiträge mit den meisten Interaktionen pro Antwortkategorie.
+- Jeder `targets`-Eintrag hat `choices`, die Format- & Quellenangabe-Aufteilung
+  für Beiträge zu diesem Ziel.
+- `sourceDomains` zählt verlinkte Domains über den Run hinweg.
+- `monitor.changedRows` listet Beiträge, deren Entscheidungen sich seit der
+  Baseline geändert haben.
+
+Jeder Datensatz listet `sourceDomains`, die Hostnamen, auf die er verlinkt, &
+`cashtags` wie `$NVDA` aus seinem Text. Ist `monitor.baselineDatasetId` gesetzt,
+zählt der `monitor`-Block der Zusammenfassung Vergleichsstatus & listet bis zu
+50 geänderte Datensätze.
 
 Jeder Ergebnisdatensatz führt außerdem `answers`, eine flache Zuordnung
 von Frage-ID zu gewählter Kategorie, Score oder Wahrscheinlichkeit. Die
@@ -157,21 +159,19 @@ leere Zuordnung.
 ## Mit einem früheren Run vergleichen
 
 Übergib `monitor.baselineDatasetId`, die Dataset-ID eines abgeschlossenen
-früheren Runs mit denselben Analyseeinstellungen, und jeder Datensatz
-erhält ein `monitor`-Objekt: `first_run` ohne Baseline,
-`new_to_baseline` für Tweets, die der frühere Run nicht hatte,
-`unchanged` oder `changed` für Tweets, die er hatte, mit `changes`, das
-jede Format-, Quellenangabe- oder Relevanz-Entscheidung listet, die sich
-von `previous` zu `current` geändert hat. Entscheidungen werden nach
-Kategorie, gerundeter Score-Stufe oder Ja/Nein bei 0,5 verglichen, und
-eine Entscheidung zählt nur als geändert, wenn sich die Antwort deutlich
-verschiebt: die frühere Kategorie fällt unter eine Wahrscheinlichkeit von
-0,4, ein Score bewegt sich um mindestens 0,6 Stufen, oder eine
-Ja/Nein-Wahrscheinlichkeit landet mindestens 0,1 vom Schwellenwert entfernt.
-Fast unentschiedenes Rauschen zwischen Runs bleibt unverändert. Baselines
-über `maxBaselineRows` (Standard: 100.000) oder aus abweichenden
-Einstellungen stoppen den Run vor der Erfassung mit einem
-Diagnose-Datensatz.
+früheren Runs mit denselben Analyseeinstellungen. Jeder Datensatz erhält dann
+ein `monitor`-Objekt. Sein Status ist `first_run` ohne Baseline,
+`new_to_baseline` für Tweets, die der frühere Run nicht hatte, & `unchanged`
+oder `changed` für Tweets, die er hatte. `changes` listet jede Format-,
+Quellenangabe- oder Relevanz-Entscheidung, die sich von `previous` zu `current`
+geändert hat. Der Actor vergleicht Entscheidungen nach Kategorie, gerundeter
+Score-Stufe oder Ja/Nein bei 0,5. Eine Entscheidung zählt in drei Fällen als
+geändert. Die frühere Kategorie fällt unter eine Wahrscheinlichkeit von 0,4. Ein
+Score bewegt sich um mindestens 0,6 Stufen. Eine Ja/Nein-Wahrscheinlichkeit
+landet mindestens 0,1 vom Schwellenwert entfernt. Fast unentschiedenes Rauschen
+zwischen Runs bleibt unverändert. Baselines über `maxBaselineRows` (Standard:
+100.000) oder aus abweichenden Einstellungen stoppen den Run vor der Erfassung
+mit einem Diagnose-Datensatz.
 
 ## Task-Beispiele
 
@@ -272,36 +272,33 @@ mindestens 2 geordneten Stufen.
 
 ### Warum kam ein Datensatz mit `analysis.status` `failed` oder `skipped` zurück?
 
-Der Tweet wurde gesammelt & geliefert, aber die KI-gestützte Analyse
-wurde nicht abgeschlossen. `analysis.reason` nennt die Ursache, etwa
-`context_limit`, wenn der Tweet & sein Kontext `maxContextBytes`
-überschreiten, oder `service_unavailable` nach Wiederholungsversuchen.
-Diese Datensätze verursachen keine Ergebnisgebühr. Erhöhe
-`maxContextBytes` (bis zu 12.000) oder führe die betroffenen IDs erneut
-aus.
+Der Actor hat den Tweet gesammelt & geliefert, aber die KI-Analyse wurde nicht
+abgeschlossen. `analysis.reason` nennt die Ursache, etwa `context_limit`, wenn
+der Tweet & sein Kontext `maxContextBytes` überschreiten, oder
+`service_unavailable` nach Wiederholungsversuchen. Diese Datensätze verursachen
+keine Ergebnisgebühr. Erhöhe `maxContextBytes` (bis zu 12.000) oder führe die
+betroffenen IDs erneut aus.
 
 ### Prüft die Analyse Fakten?
 
-Nein. Antworten beschreiben, was der Beitrag ausdrückt & wie er
-formuliert ist. Wahrscheinlichkeiten drücken die Modellsicherheit aus,
-nicht die Wahrheit. Überprüfe wichtige Einstufungen anhand des
-ursprünglichen Tweets, den jeder Datensatz behält.
+Nein. Antworten beschreiben, was der Beitrag ausdrückt & wie der Beitrag es
+formuliert. Wahrscheinlichkeiten drücken die Modellsicherheit aus, nicht die
+Wahrheit. Überprüfe wichtige Einstufungen anhand des ursprünglichen Tweets, den
+jeder Datensatz behält.
 
 ### Welche Sprachen funktionieren?
 
-Die Extraktion unterstützt jede Sprache, die X anbietet. Die Analyse ist
-zuerst an englischsprachigen Kundenszenarien validiert; andere
-unterstützte Sprachen liefern Antworten mit derselben Struktur, &
-Unsicherheit bleibt durch `unclear`-Kategorien & Wahrscheinlichkeiten
-explizit.
+Die Extraktion unterstützt jede Sprache, die X anbietet. Wir validieren die
+Analyse zuerst an englischsprachigen Kundenszenarien. Andere unterstützte
+Sprachen liefern Antworten mit derselben Struktur. `unclear`-Kategorien &
+Wahrscheinlichkeiten zeigen Unsicherheit in jeder Sprache.
 
 ### Wie begrenze ich die Kosten?
 
-Filter, Deduplizierung & `maxItems` laufen vor der Analyse, sodass nur
-eindeutige, filterkonforme Tweets analysiert & berechnet werden. Nutze
-präzise Suchoperatoren, Datumsgrenzen & Interaktionsuntergrenzen, & starte
-mit einem kleinen `maxItems`, um die Antwortqualität vor einem großen
-Run zu prüfen.
+Filter, Deduplizierung & `maxItems` laufen vor der Analyse, sodass der Actor nur
+eindeutige, filterkonforme Tweets analysiert & berechnet. Nutze präzise
+Suchoperatoren, Datumsgrenzen & Interaktionsuntergrenzen, & starte mit einem
+kleinen `maxItems`, um die Antwortqualität vor einem großen Run zu prüfen.
 
 ### Wo bekomme ich Hilfe?
 

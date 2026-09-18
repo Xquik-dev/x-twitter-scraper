@@ -16,28 +16,28 @@
 </td></tr></table>
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
-den umfassendsten X-Daten, und X (Twitter) Tweet Classifier beantwortet
-deine eigenen Labels, Scores & Ja/Nein-Fragen für jeden Tweet. Jeder andere
-Apify Actor berechnet, bevor gefiltert oder dedupliziert wird. Xquik
-berechnet nur für gelieferte, eindeutige, filterkonforme Ergebnisse.
-
-Die KI-Kosten sind im Preis pro Tweet enthalten. Du bezahlst keinen KI-Anbieter, kaufst keine Tokens & bringst keinen Schlüssel mit.
+den umfassendsten X-Daten. X (Twitter) Tweet Classifier beantwortet deine
+eigenen Labels, Scores & Ja/Nein-Fragen für jeden Tweet. Jeder andere Apify
+Actor berechnet, bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für
+gelieferte, eindeutige, filterkonforme Ergebnisse. Die KI-Kosten sind im Preis
+pro Tweet enthalten. Du bezahlst keinen KI-Anbieter, kaufst keine Tokens &
+bringst keinen Schlüssel mit.
 
 Klassifiziere X-(Twitter-)Beiträge mit deinen eigenen Fragen & behalte die
-ursprünglichen Tweet-Daten. **X Tweet Classifier with AI Analysis** sammelt passende Tweets und beantwortet dann 1-8 typisierte
-Fragen pro Beitrag: Kategorien für die Support-Triage, Scores für die
-Priorisierung & Wahrscheinlichkeiten für die Relevanz. Voreinstellungen
-decken Markenbeobachtung, Beschwerden, Wettbewerber, Kaufabsicht,
-Produktfeedback, News, Sentiment & Marktsentiment ab; eigene Fragen
-ersetzen sie.
+ursprünglichen Tweet-Daten. **X Tweet Classifier with AI Analysis** sammelt
+passende Tweets und beantwortet dann 1-8 typisierte Fragen pro Beitrag:
+Kategorien für die Support-Triage, Scores für die Priorisierung &
+Wahrscheinlichkeiten für die Relevanz. Voreinstellungen decken
+Markenbeobachtung, Beschwerden, Wettbewerber, Kaufabsicht, Produktfeedback,
+News, Sentiment & Marktsentiment ab. Eigene Fragen ersetzen sie.
 
 - **Typisierte Antworten** mit Wahrscheinlichkeiten, Konfidenz &
   Fragenversionen.
-- **Deine Fragen, deine Kategorien**: bis zu 255 Kategorien pro Frage.
-- **Vollständige Quelldatensätze** für jedes Feld, das der Tweet
-  offenlegt.
-- **Filterbasierte Abrechnung**: Nur eindeutige, filterkonforme Tweets mit
-  erfolgreicher Analyse werden berechnet.
+- **Deine Fragen, deine Kategorien.** Jede Frage nimmt bis zu 255 Kategorien
+  auf.
+- **Vollständige Quelldatensätze** für jedes Feld, das der Tweet offenlegt.
+- **Filterbasierte Abrechnung.** Du zahlst nur für eindeutige, filterkonforme
+  Tweets mit erfolgreicher Analyse.
 
 ## So klassifizierst du Tweets mit eigenen Fragen
 
@@ -81,25 +81,23 @@ Stelle 1-8 Fragen mit eindeutigen IDs, Anweisungen & Versionen bereit.
 - `probability` gibt einen Wert zwischen 0 & 1 zurück. Optionale
   `criteria` enthalten `yes`- & `no`-Beschreibungen.
 
-Voreinstellungen: `brand`, `complaints`, `competitors`,
-`purchase_intent`, `product_feedback`, `news`, `sentiment` & `market`.
-`maxContextBytes` liegt standardmäßig bei 12.000 Byte; kleinere Limits
-überspringen übergroßen Kontext ohne Kürzung. `concurrency` liegt
-standardmäßig bei 4 & akzeptiert 1 bis 16. Jede Frage-Definition bleibt
-innerhalb eines Kontingents von 8.000 Byte.
+Voreinstellungen: `brand`, `complaints`, `competitors`, `purchase_intent`,
+`product_feedback`, `news`, `sentiment` & `market`. `maxContextBytes` liegt
+standardmäßig bei 12.000 Byte. Ein kleineres Limit überspringt übergroßen
+Kontext ohne Kürzung. `concurrency` liegt standardmäßig bei 4 & akzeptiert 1 bis
+16. Jede Frage-Definition bleibt innerhalb eines Kontingents von 8.000 Byte.
 
 ## Preise
 
 Die KI-Kosten sind im Preis pro Tweet enthalten. Du bezahlst keinen KI-Anbieter, kaufst keine Tokens & bringst keinen Schlüssel mit.
 
-Ab $0.0003 pro erfolgreich analysiertem Tweet, ohne Startgebühr. Die
-Erfassung ist enthalten, & das dokumentierte Analyse-Kontingent umfasst 8
-Fragen, 8.000 Byte pro Frage-Definition & 12.000 Byte Kontext pro Tweet.
-Extraktionsfilter & Deduplizierung laufen vor der Analyse, sodass
-herausgefilterte & doppelte Datensätze nie analysiert oder berechnet
-werden. Fehlgeschlagene & übersprungene Analysen sowie Diagnose-Datensätze
-verursachen keine Ergebnisgebühr. Die Apify-Plattformnutzung wird separat
-von Apify berechnet & erscheint im Tab „Pricing".
+Ab $0.0003 pro erfolgreich analysiertem Tweet, ohne Startgebühr. Der Preis
+enthält die Erfassung. Das Analyse-Kontingent umfasst 8 Fragen, 8.000 Byte pro
+Frage-Definition & 12.000 Byte Kontext pro Tweet. Extraktionsfilter &
+Deduplizierung laufen vor der Analyse, sodass herausgefilterte & doppelte
+Datensätze nie analysiert oder berechnet werden. Fehlgeschlagene & übersprungene
+Analysen sowie Diagnose-Datensätze verursachen keine Ergebnisgebühr. Apify
+berechnet die Plattformnutzung separat. Der Tab Pricing zeigt sie.
 
 ## Eingabe- & Ausgabebeispiele
 
@@ -144,23 +142,21 @@ Analysen & ausstehende Gebühren.
 
 ## Run-Zusammenfassung & flache Antworten
 
-Jeder Run schreibt einen `analysis-summary`-Datensatz in seinen
-Key-Value-Store & wiederholt ihn unter `results.analysisSummary` im
-Run-Report. Er zählt analysierte, fehlgeschlagene & übersprungene
-Datensätze, summiert Interaktionen und fasst jede Frage zusammen. Jede
-eigene Frage erhält ihren eigenen Block: Kategoriezählungen & -anteile für
-Choice-Fragen, Mittelwert & Stufenzählungen für Score-Fragen,
-Ja- & Nein-Zählungen für Ja/Nein-Fragen. Zahlen sind auf 4
-Nachkommastellen gerundet; leere Runs melden Nullwerte &
+Jeder Run schreibt einen `analysis-summary`-Datensatz in seinen Key-Value-Store
+& wiederholt ihn unter `results.analysisSummary` im Run-Report. Er zählt
+analysierte, fehlgeschlagene & übersprungene Datensätze, summiert Interaktionen
+und fasst jede Frage zusammen. Jede eigene Frage erhält ihren eigenen Block:
+Kategoriezählungen & -anteile für Choice-Fragen, Mittelwert & Stufenzählungen
+für Score-Fragen, Ja- & Nein-Zählungen für Ja/Nein-Fragen. Die Zusammenfassung
+rundet Zahlen auf 4 Nachkommastellen. Ein leerer Run meldet Nullwerte &
 `null`-Mittelwerte. Übergib `analysis.preset` mit `brand`, `complaints`,
-`purchase_intent`, `product_feedback`, `competitors`, `sentiment`,
-`market` oder `news`, um eine eingebaute Linse statt eigener Fragen zu
-nutzen; die Zusammenfassung meldet dann diese Linse pro Frage. Jeder
-Datensatz listet außerdem `sourceDomains`, die Hostnamen, auf die er
-verlinkt, `cashtags` wie `$NVDA`, die in seinem Text gefunden wurden, und
-der `monitor`-Block der Zusammenfassung zählt Vergleichsstatus & listet
-bis zu 50 geänderte Datensätze, wenn `monitor.baselineDatasetId` gesetzt
-ist.
+`purchase_intent`, `product_feedback`, `competitors`, `sentiment`, `market` oder
+`news`, um eine eingebaute Linse statt eigener Fragen zu nutzen. Die
+Zusammenfassung meldet dann diese Linse pro Frage. Jeder Datensatz listet
+`sourceDomains`, die Hostnamen, auf die er verlinkt, & `cashtags` wie `$NVDA`
+aus seinem Text. Ist `monitor.baselineDatasetId` gesetzt, zählt der
+`monitor`-Block der Zusammenfassung Vergleichsstatus & listet bis zu 50
+geänderte Datensätze.
 
 Jeder Ergebnisdatensatz führt außerdem `answers`, eine flache Zuordnung
 von Frage-ID zu gewählter Kategorie, Score oder Wahrscheinlichkeit. Die
@@ -172,19 +168,17 @@ leere Zuordnung.
 ## Mit einem früheren Run vergleichen
 
 Übergib `monitor.baselineDatasetId`, die Dataset-ID eines abgeschlossenen
-früheren Runs mit denselben Analyseeinstellungen, und jeder Datensatz
-erhält ein `monitor`-Objekt: `first_run` ohne Baseline,
-`new_to_baseline` für Tweets, die der frühere Run nicht hatte,
-`unchanged` oder `changed` für Tweets, die er hatte, mit `changes`, das
-jede Entscheidung für eine deiner Fragen listet, die sich von `previous`
-zu `current` geändert hat. Entscheidungen werden nach Kategorie,
-gerundeter Score-Stufe oder Ja/Nein bei 0,5 verglichen, und eine
-Entscheidung zählt nur als geändert, wenn sich die Antwort deutlich
-verschiebt: die frühere Kategorie fällt unter eine Wahrscheinlichkeit von
-0,4, ein Score bewegt sich um mindestens 0,6 Stufen, oder eine
-Ja/Nein-Wahrscheinlichkeit landet mindestens 0,1 vom Schwellenwert
-entfernt. Fast unentschiedenes Rauschen zwischen Runs bleibt unverändert.
-Baselines über `maxBaselineRows` (Standard: 100.000) oder aus
+früheren Runs mit denselben Analyseeinstellungen. Jeder Datensatz erhält dann
+ein `monitor`-Objekt. Sein Status ist `first_run` ohne Baseline,
+`new_to_baseline` für Tweets, die der frühere Run nicht hatte, & `unchanged`
+oder `changed` für Tweets, die er hatte. `changes` listet jede Entscheidung für
+eine deiner Fragen listet, die sich von `previous` zu `current` geändert hat.
+Entscheidungen werden nach Kategorie, gerundeter Score-Stufe oder Ja/Nein bei
+0,5 verglichen. Eine Entscheidung zählt in drei Fällen als geändert. Die frühere
+Kategorie fällt unter eine Wahrscheinlichkeit von 0,4. Ein Score bewegt sich um
+mindestens 0,6 Stufen. Eine Ja/Nein-Wahrscheinlichkeit landet mindestens 0,1 vom
+Schwellenwert entfernt. Fast unentschiedenes Rauschen zwischen Runs bleibt
+unverändert. Baselines über `maxBaselineRows` (Standard: 100.000) oder aus
 abweichenden Einstellungen stoppen den Run vor der Erfassung mit einem
 Diagnose-Datensatz.
 
@@ -279,42 +273,39 @@ Abrechnung & Diagnosen. Wähle den, der zu deinen Daten passt.
 
 ### Sind Frageversionen wichtig?
 
-Ja. Die `version`, die du jeder Frage gibst, wird bei jeder Antwort
-gespeichert, sodass du erkennen kannst, welcher Wortlaut ein Ergebnis
-erzeugt hat, wenn du Fragen im Lauf der Zeit verfeinerst.
+Ja. Jede Antwort speichert die `version`, die du ihrer Frage gibst. Wenn du
+Fragen im Lauf der Zeit verfeinerst, erkennst du, welcher Wortlaut ein Ergebnis
+erzeugt hat.
 
 ### Warum kam ein Datensatz mit `analysis.status` `failed` oder `skipped` zurück?
 
-Der Tweet wurde gesammelt & geliefert, aber die KI-gestützte Analyse
-wurde nicht abgeschlossen. `analysis.reason` nennt die Ursache, etwa
-`context_limit`, wenn der Tweet & sein Kontext `maxContextBytes`
-überschreiten, oder `service_unavailable` nach Wiederholungsversuchen.
-Diese Datensätze verursachen keine Ergebnisgebühr. Erhöhe
-`maxContextBytes` (bis zu 12.000) oder führe die betroffenen IDs erneut
-aus.
+Der Actor hat den Tweet gesammelt & geliefert, aber die KI-Analyse wurde nicht
+abgeschlossen. `analysis.reason` nennt die Ursache, etwa `context_limit`, wenn
+der Tweet & sein Kontext `maxContextBytes` überschreiten, oder
+`service_unavailable` nach Wiederholungsversuchen. Diese Datensätze verursachen
+keine Ergebnisgebühr. Erhöhe `maxContextBytes` (bis zu 12.000) oder führe die
+betroffenen IDs erneut aus.
 
 ### Prüft die Analyse Fakten?
 
-Nein. Antworten beschreiben, was der Beitrag ausdrückt & wie er
-formuliert ist. Wahrscheinlichkeiten drücken die Modellsicherheit aus,
-nicht die Wahrheit. Überprüfe wichtige Einstufungen anhand des
-ursprünglichen Tweets, den jeder Datensatz behält.
+Nein. Antworten beschreiben, was der Beitrag ausdrückt & wie der Beitrag es
+formuliert. Wahrscheinlichkeiten drücken die Modellsicherheit aus, nicht die
+Wahrheit. Überprüfe wichtige Einstufungen anhand des ursprünglichen Tweets, den
+jeder Datensatz behält.
 
 ### Welche Sprachen funktionieren?
 
-Die Extraktion unterstützt jede Sprache, die X anbietet. Die Analyse ist
-zuerst an englischsprachigen Kundenszenarien validiert; andere
-unterstützte Sprachen liefern Antworten mit derselben Struktur, &
-Unsicherheit bleibt durch `unclear`-Kategorien & Wahrscheinlichkeiten
-explizit.
+Die Extraktion unterstützt jede Sprache, die X anbietet. Wir validieren die
+Analyse zuerst an englischsprachigen Kundenszenarien. Andere unterstützte
+Sprachen liefern Antworten mit derselben Struktur. `unclear`-Kategorien &
+Wahrscheinlichkeiten zeigen Unsicherheit in jeder Sprache.
 
 ### Wie begrenze ich die Kosten?
 
-Filter, Deduplizierung & `maxItems` laufen vor der Analyse, sodass nur
-eindeutige, filterkonforme Tweets analysiert & berechnet werden. Nutze
-präzise Suchoperatoren, Datumsgrenzen & Interaktionsuntergrenzen, & starte
-mit einem kleinen `maxItems`, um die Antwortqualität vor einem großen
-Run zu prüfen.
+Filter, Deduplizierung & `maxItems` laufen vor der Analyse, sodass der Actor nur
+eindeutige, filterkonforme Tweets analysiert & berechnet. Nutze präzise
+Suchoperatoren, Datumsgrenzen & Interaktionsuntergrenzen, & starte mit einem
+kleinen `maxItems`, um die Antwortqualität vor einem großen Run zu prüfen.
 
 ### Wo bekomme ich Hilfe?
 

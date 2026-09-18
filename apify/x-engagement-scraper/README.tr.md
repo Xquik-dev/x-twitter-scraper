@@ -71,8 +71,8 @@ kapsama için `incompleteTargets`'ı sayar. Filtreler Actor faturalamasından
 Her arama, retweet edenin en yeni mevcut profil sayfasını kontrol eder. Hesabı
 ve kaynak gönderiyi gerçek yeniden paylaşım kayıtlarıyla eşleştirir. Daha
 eski, silinmiş veya kullanılamayan yeniden paylaşım kayıtları zaman damgasını
-`null` bırakabilir. Başarısız zaman damgası aramaları da `null` bırakır;
-profil dahil edilmeye devam eder. Arama, bir hesabın bir gönderiyi hiç yeniden
+`null` bırakabilir. Başarısız zaman damgası aramaları da `null` bırakır.
+Profil çıktıda kalır. Arama, bir hesabın bir gönderiyi hiç yeniden
 paylaşmadığını kanıtlamaz.
 
 Ekstra okumalar gecikmeyi artırır. Yalnızca profil sonuçları için bu seçeneği

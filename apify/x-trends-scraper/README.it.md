@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik è il servizio di scraping X (Twitter) più veloce ed economico al mondo,
-con i dati X più completi, e X Trends Scraper raccoglie tendenze in tempo
+con i dati X più completi. X Trends Scraper raccoglie tendenze in tempo
 reale per località con posizione, volume e query. Ogni altro Actor Apify
 addebita l'importo prima di filtrare o deduplicare. Xquik addebita solo i
 risultati consegnati, unici e corrispondenti ai filtri.
@@ -55,7 +55,7 @@ Mexico e Australia. Usa `woeids` per qualsiasi altra località supportata.
 
 Ogni tendenza è una riga del dataset con `name`, `rank`, `tweetVolume`,
 `query`, `url`, `woeid`, `sourceTarget` e `resultType`. I campi di origine
-mancanti restano assenti invece di essere inventati.
+mancanti restano assenti. L'Actor non inventa valori.
 
 ## Prezzi
 
@@ -65,7 +65,7 @@ separatamente l'utilizzo della tua piattaforma.
 - Un addebito per ogni riga di dati consegnata. La diagnostica è gratuita in
   `diagnostics`.
 - Nessun costo di avvio, query o località.
-- I duplicati vengono rimossi prima della fatturazione.
+- L'Actor rimuove i duplicati prima della fatturazione.
 - Le impostazioni di addebito massimo totale di Apify limitano le righe
   consegnate.
 

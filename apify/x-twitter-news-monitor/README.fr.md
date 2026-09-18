@@ -17,19 +17,19 @@
 
 Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher
 au monde, avec les données X les plus complètes. X (Twitter) News Monitor
-trie les posts d'actualité par format, attribution de source et
-pertinence. Tous les autres Actors Apify facturent avant de filtrer ou de
-dédupliquer. Xquik ne facture que les résultats livrés, uniques et
-conformes aux filtres.
-
-Les coûts d'IA sont inclus dans le prix par tweet. Vous ne payez aucun fournisseur d'IA, n'achetez aucun jeton & n'apportez aucune clé.
+trie les posts d'actualité par format, attribution de source et pertinence.
+Tous les autres Actors Apify facturent avant de filtrer ou de dédupliquer.
+Xquik ne facture que les résultats livrés, uniques et conformes aux filtres.
+Les coûts d'IA sont inclus dans le prix par tweet. Vous ne payez aucun
+fournisseur d'IA, n'achetez aucun jeton & n'apportez aucune clé.
 
 Triez les posts d'actualité sur X (Twitter) selon ce qu'ils sont et
-conservez les données originales du tweet. **X (Twitter) News Monitor with AI Analysis** collecte les posts sur vos sujets, puis ajoute à chaque post
-une réponse de format, d'attribution de source et de pertinence générée
-par IA. Séparez le reportage du commentaire et de la spéculation, voyez
-si une source est nommée ou liée, et ne gardez que les posts qui
-concernent les organisations, personnes ou sujets que vous suivez.
+conservez les données originales du tweet. **X (Twitter) News Monitor with
+AI Analysis** collecte les posts sur vos sujets, puis ajoute à chaque post
+une réponse de format, d'attribution de source et de pertinence générée par
+IA. Séparez le reportage du commentaire & de la spéculation. Voyez si un
+post nomme ou lie une source. Ne gardez que les posts sur les organisations,
+personnes ou sujets que vous suivez.
 
 - **Le format** distingue le reportage, le commentaire, la spéculation, la
   promotion et la satire.
@@ -71,22 +71,21 @@ concernent les organisations, personnes ou sujets que vous suivez.
 | Attribution       | Nommée, liée, de première main, absente ou incertaine                             |
 | Pertinence        | Probabilité que l'événement rapporté concerne vos cibles                          |
 
-La classification ne vérifie pas les faits. Une source nommée n'est pas
-une source crédible ; l'attribution décrit ce que le post présente.
+La classification ne vérifie pas les faits. Une source nommée n'est pas une
+source crédible. L'attribution décrit ce que le post présente.
 
 ## Tarification
 
 Les coûts d'IA sont inclus dans le prix par tweet. Vous ne payez aucun fournisseur d'IA, n'achetez aucun jeton & n'apportez aucune clé.
 
-À partir de $0.0003 par tweet analysé avec succès, sans frais de
-démarrage. La collecte est incluse, et l'allocation d'analyse documentée
-est de 8 questions, 8 000 octets par définition de question et 12 000
-octets de contexte par tweet. Les filtres d'extraction et la déduplication
-s'exécutent avant l'analyse, donc les lignes filtrées et en double ne sont
-jamais analysées ni facturées. Les analyses échouées ou ignorées et les
-lignes de diagnostic n'entraînent aucun frais de résultat. L'usage de la
-plateforme Apify est facturé séparément par Apify et apparaît dans
-l'onglet Pricing.
+À partir de $0.0003 par tweet analysé avec succès, sans frais de démarrage.
+Le prix inclut la collecte. L'allocation d'analyse est de 8 questions, 8 000
+octets par définition de question et 12 000 octets de contexte par tweet.
+Les filtres d'extraction et la déduplication s'exécutent avant l'analyse,
+donc les lignes filtrées et en double ne sont jamais analysées ni facturées.
+Les analyses échouées ou ignorées et les lignes de diagnostic n'entraînent
+aucun frais de résultat. Apify facture l'usage de la plateforme séparément.
+L'onglet Pricing l'affiche.
 
 ## Exemples d'entrée et de sortie
 
@@ -119,37 +118,40 @@ ceci (abrégées) :
 
 Chaque résultat contient `tweet` et `analysis`. Les réponses incluent les
 types, les versions de question et les probabilités disponibles. Quand un
-post lie un X Article, l'analyse récupère le titre, l'aperçu et les blocs
-de texte de cet article comme contexte, et
-`analysis.contextAvailability.article` indique `text_blocks`, `summary`
-(titre et aperçu uniquement) ou `not_supplied`. Une analyse échouée ou
-ignorée conserve le tweet collecté avec une liste de réponses vide et une
-`reason`. Les diagnostics gratuits dans le key-value store expliquent les
-entrées invalides, les résultats manquants et la collecte interrompue, et
-le rapport de run sépare les lignes collectées, les analyses facturées et
-les frais en attente.
+post lie un X Article, l'analyse récupère le titre, l'aperçu et les blocs de
+texte de cet article comme contexte. `analysis.contextAvailability.article`
+indique `text_blocks`, `summary` ou `not_supplied`. `summary` signifie le
+titre & l'aperçu uniquement. Une analyse échouée ou ignorée conserve le
+tweet collecté avec une liste de réponses vide et une `reason`. Les
+diagnostics gratuits dans le key-value store expliquent les entrées
+invalides, les résultats manquants et la collecte interrompue, et le rapport
+de run sépare les lignes collectées, les analyses facturées et les frais en
+attente.
 
 ## Résumé de run et réponses à plat
 
-Chaque run écrit un enregistrement `analysis-summary` dans son
-key-value store et le répète sous `results.analysisSummary` dans le
-rapport de run. Il compte les lignes analysées, échouées et ignorées,
-totalise l'engagement, et résume chaque question. La répartition
-`format` sépare le reportage du commentaire, de la spéculation, de la
-promotion et de la satire ; `attribution` compte les sources nommées,
-liées, de première main et absentes ; `relevance` compte les posts sur
-chaque cible, avec `targets` donnant les mentions par cible et le `top`
-de chaque cible listant ses posts les plus engagés par catégorie de
-réponse. Les nombres sont arrondis à 4 décimales ; les runs vides
-indiquent des comptes à zéro et des moyennes `null`. `sourceDomains`
-compte les domaines liés sur l'ensemble du run, chaque entrée `targets`
-porte `choices` avec la répartition du format et de l'attribution pour
-les posts sur cette cible, et `monitor.changedRows` liste les posts dont
-les décisions ont évolué depuis la référence. Chaque ligne liste aussi
-`sourceDomains`, les noms d'hôte qu'elle lie, `cashtags` tels que `$NVDA`
-trouvés dans son texte, et le bloc `monitor` du résumé compte les statuts
-de comparaison et liste jusqu'à 50 lignes modifiées quand
-`monitor.baselineDatasetId` est réglé.
+Chaque run écrit un enregistrement `analysis-summary` dans son key-value
+store et le répète sous `results.analysisSummary` dans le rapport de run. Il
+compte les lignes analysées, échouées et ignorées, totalise l'engagement, et
+résume chaque question.
+
+- La répartition `format` sépare le reportage du commentaire, de la
+  spéculation, de la promotion & de la satire.
+- `attribution` compte les sources nommées, liées, de première main &
+  absentes.
+- `relevance` compte les posts sur chaque cible.
+- `targets` donne les mentions par cible. Le `top` de chaque cible liste ses
+  posts les plus engagés par catégorie de réponse.
+- Chaque entrée `targets` a `choices`, la répartition du format & de
+  l'attribution pour les posts sur cette cible.
+- `sourceDomains` compte les domaines liés sur l'ensemble du run.
+- `monitor.changedRows` liste les posts dont les décisions ont évolué depuis
+  la référence.
+
+Chaque ligne liste `sourceDomains`, les noms d'hôte qu'elle lie, &
+`cashtags` tels que `$NVDA` trouvés dans son texte. Quand
+`monitor.baselineDatasetId` est réglé, le bloc `monitor` du résumé compte
+les statuts de comparaison & liste jusqu'à 50 lignes modifiées.
 
 Chaque ligne de résultat porte aussi `answers`, une correspondance plate
 de l'ID de question vers la catégorie, le score ou la probabilité
@@ -161,19 +163,18 @@ ignorées portent une correspondance vide.
 ## Comparer avec un run antérieur
 
 Passez `monitor.baselineDatasetId`, l'ID du dataset d'un run antérieur
-terminé avec les mêmes réglages d'analyse, et chaque ligne gagne un objet
-`monitor` : `first_run` sans référence, `new_to_baseline` pour les tweets
-absents du run antérieur, `unchanged` ou `changed` pour les tweets qu'il
-avait, avec `changes` listant chaque décision de format, d'attribution ou
-de pertinence ayant évolué de `previous` à `current`. Les décisions se
-comparent par catégorie, niveau de score arrondi, ou oui/non à 0,5, et
-une décision ne compte comme changée que lorsque la réponse évolue
-clairement : la catégorie précédente tombe sous 0,4 de probabilité, un
-score bouge d'au moins 0,6 niveau, ou une probabilité oui/non se situe à
-au moins 0,1 du seuil. Les fluctuations proches d'une égalité entre les
-runs restent inchangées. Les références au-delà de `maxBaselineRows`
-(par défaut 100 000) ou issues de réglages différents arrêtent le run
-avant la collecte avec une ligne de diagnostic.
+terminé avec les mêmes réglages d'analyse. Chaque ligne gagne alors un objet
+`monitor`. Son statut est `first_run` sans référence, `new_to_baseline` pour
+les tweets absents du run antérieur, & `unchanged` ou `changed` pour les
+tweets qu'il avait. `changes` liste chaque décision de format, d'attribution
+ou de pertinence ayant évolué de `previous` à `current`. Les décisions se
+comparent par catégorie, niveau de score arrondi, ou oui/non à 0,5. Une
+décision compte comme changée dans trois cas. La catégorie précédente tombe
+sous 0,4 de probabilité. Un score bouge d'au moins 0,6 niveau. Une
+probabilité oui/non se situe à au moins 0,1 du seuil. Les fluctuations
+proches d'une égalité entre les runs restent inchangées. Les références
+au-delà de `maxBaselineRows` (par défaut 100 000) ou issues de réglages
+différents arrêtent le run avant la collecte avec une ligne de diagnostic.
 
 ## Exemples de tâches
 
@@ -283,34 +284,33 @@ défaut : 1 à 8 questions de type `choice`, `score` ou `probability` avec
 
 ### Pourquoi une ligne revient-elle avec un `analysis.status` de `failed` ou `skipped` ?
 
-Le tweet a été collecté et livré, mais l'analyse par IA ne s'est pas
-terminée. `analysis.reason` nomme la cause, comme `context_limit` quand
-le tweet et son contexte dépassent `maxContextBytes`, ou
-`service_unavailable` après des tentatives. Ces lignes n'entraînent aucun
-frais de résultat. Augmentez `maxContextBytes` (jusqu'à 12 000) ou
-relancez les ID concernés.
+L'Actor a collecté & livré le tweet, mais l'analyse par IA ne s'est pas
+terminée. `analysis.reason` nomme la cause, comme `context_limit` quand le
+tweet et son contexte dépassent `maxContextBytes`, ou `service_unavailable`
+après des tentatives. Ces lignes n'entraînent aucun frais de résultat.
+Augmentez `maxContextBytes` (jusqu'à 12 000) ou relancez les ID concernés.
 
 ### L'analyse vérifie-t-elle les faits ?
 
-Non. Les réponses décrivent ce que le post exprime et comment il est
-formulé. Les probabilités expriment la confiance du modèle, pas la
-vérité. Vérifiez les classifications importantes par rapport au tweet
-original, que chaque ligne conserve.
+Non. Les réponses décrivent ce que le post exprime & comment le post le
+formule. Les probabilités expriment la confiance du modèle, pas la vérité.
+Vérifiez les classifications importantes par rapport au tweet original, que
+chaque ligne conserve.
 
 ### Quelles langues fonctionnent ?
 
-L'extraction prend en charge toutes les langues servies par X. L'analyse
-est validée d'abord sur des scénarios clients en anglais ; les autres
-langues prises en charge renvoient des réponses avec la même structure, et
-l'incertitude reste explicite via les catégories et probabilités
-`unclear`.
+L'extraction prend en charge toutes les langues servies par X. Nous validons
+d'abord l'analyse sur des scénarios clients en anglais. Les autres langues
+prises en charge renvoient des réponses avec la même structure. Les
+catégories `unclear` & les probabilités montrent l'incertitude dans chaque
+langue.
 
 ### Comment limiter le coût ?
 
 Les filtres, la déduplication et `maxItems` s'exécutent avant l'analyse,
-donc seuls les tweets uniques et conformes aux filtres sont analysés et
-facturés. Utilisez des opérateurs de recherche précis, des bornes de date
-et des planchers d'engagement, et commencez avec un `maxItems` réduit pour
+donc l'Actor n'analyse & ne facture que les tweets uniques et conformes aux
+filtres. Utilisez des opérateurs de recherche précis, des bornes de date et
+des planchers d'engagement, et commencez avec un `maxItems` réduit pour
 vérifier la qualité des réponses avant un grand run.
 
 ### Où obtenir de l'aide ?

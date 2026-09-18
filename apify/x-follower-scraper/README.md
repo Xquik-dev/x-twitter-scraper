@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data, and X Follower Scraper collects followers, following, list
+most complete X data. X Follower Scraper collects followers, following, list
 members, subscribers & community members. Every other Apify Actor charges before
 filtering or deduplicating. Xquik charges only for delivered, unique,
 filter-matching results.
@@ -151,7 +151,7 @@ atomic.
   `minFollowing`, `maxFollowing`, `minStatuses`, `maxStatuses`,
   `minAccountAgeDays`, `verifiedType`, `usernameContains`, `hasWebsite`,
   `hasLocation`) run before a profile enters your dataset.
-- With `dedupeAcrossTargets: true`, repeats are removed before writing.
+- With `dedupeAcrossTargets: true`, the Actor removes repeats before writing.
 - Rows rejected by the dataset are not billed.
 - No-input, invalid-input, and zero-output runs write 1 actionable record to the
   free `diagnostics` output.
@@ -196,8 +196,8 @@ prefix:
 }
 ```
 
-Set `relation` to `followers`, `following`, or `verified_followers` to switch
-what is scraped for every handle.
+Set `relation` to `followers`, `following`, or `verified_followers` to choose
+the relation the Actor scrapes for every handle.
 
 Aliases accepted for the same input include `username`, `usernames`, and
 `user_names`.
@@ -277,7 +277,7 @@ Use merge mode to compare competitors, lists, communities, or relation types:
 The output contains one row per unique profile. Shared profiles include
 `sourceTargets`, `sourceRelations`, `sourceUrls`, `sourceTargetKeys`, and
 `overlapCount`, so you can sort by overlap or export directly to CSV. Keep
-`maxItems` high enough to let every target contribute rows; use
+`maxItems` high enough to let every target contribute rows. Use
 `maxItemsPerTarget` to control depth per account.
 
 ### Accepted URL shapes

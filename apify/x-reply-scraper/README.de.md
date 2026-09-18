@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
-den umfassendsten X-Daten, und X Reply Scraper sammelt Antworten, Kommentare
+den umfassendsten X-Daten. X Reply Scraper sammelt Antworten, Kommentare
 & ganze Unterhaltungen. Jeder andere Apify Actor berechnet, bevor gefiltert
 oder dedupliziert wird. Xquik berechnet nur für gelieferte, eindeutige,
 filterkonforme Ergebnisse.
@@ -25,7 +25,7 @@ Scrape X-(Twitter-)Antworten für **$0.00015 pro gelieferten Datensatz auf
 jedem Apify-Plan**. Füge Beitrags-URLs, Tweet-IDs, Profil-URLs oder
 Nutzernamen ein. Exportiere Antworten, Konversationen, Autoren,
 Interaktionen, Entitäten und Medien-URLs. Apify berechnet deine
-Plattformnutzung separat. Kein X-Login erforderlich.
+Plattformnutzung separat. Du brauchst keinen X-Login.
 
 Filter laufen vor den Dataset-Schreibvorgängen. Du zahlst nur für gelieferte
 Datensätze.
@@ -80,7 +80,7 @@ Konversations-Datasets.
 
 Wähle `latest` für jeden Run, um alle veröffentlichten Fixes zu erhalten.
 
-Wenn kein Build angegeben ist, nutzt Apify den `latest`-Standard dieses
+Wenn du keinen Build angibst, nutzt Apify den `latest`-Standard dieses
 Actors. Console-Runs und Standard-API-Beispiele übernehmen diesen Standard.
 
 Gespeicherte Tasks können den Actor-Standard überschreiben. Zeitpläne und
@@ -464,8 +464,8 @@ Xquik berechnet eine Gebühr pro geliefertem Datensatz. Diagnosen in
 Filter- oder Proxy-Gebühr.
 
 Das Standard-Apify-Zeitlimit ist `0`, Runs haben also kein Zeitlimit. Der
-Actor läuft weiter, bis die Obergrenze erreicht oder die verfügbaren Daten
-erschöpft sind. Ein Aufrufer kann dennoch ein endliches Apify-Zeitlimit
+Actor läuft weiter, bis er die Obergrenze erreicht oder die verfügbaren Daten
+aufbraucht. Ein Aufrufer kann dennoch ein endliches Apify-Zeitlimit
 setzen. Dann bedeutet `completionReason: "deadline_reached"`, dass dieses
 konfigurierte Limit nahe ist. Der Actor reserviert die letzten 15 Sekunden
 für Checkpoints, Datensätze, Reports und einen erfolgreichen Abschluss.

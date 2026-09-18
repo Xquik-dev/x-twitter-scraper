@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo con
-i dati X più completi, e X Follower Scraper raccoglie follower, following, membri
+i dati X più completi. X Follower Scraper raccoglie follower, following, membri
 di List, iscritti & membri di community. Ogni altro Actor Apify addebita costi
 prima di filtrare o deduplicare. Xquik addebita solo i risultati consegnati,
 unici & conformi ai filtri.
@@ -156,7 +156,7 @@ limiti, deduplicazione, attribuzione & fatturazione.
   `minFollowing`, `maxFollowing`, `minStatuses`, `maxStatuses`,
   `minAccountAgeDays`, `verifiedType`, `usernameContains`, `hasWebsite`,
   `hasLocation`) vengono applicati prima che un profilo entri nel tuo dataset.
-- Con `dedupeAcrossTargets: true`, i duplicati vengono rimossi prima della
+- Con `dedupeAcrossTargets: true`, l'Actor rimuove i duplicati prima della
   scrittura.
 - Le righe rifiutate dal dataset non vengono fatturate.
 - Le esecuzioni senza input, con input non valido & senza output scrivono 1
@@ -204,7 +204,7 @@ o nessun prefisso:
 ```
 
 Imposta `relation` su `followers`, `following` o `verified_followers` per
-cambiare cosa viene estratto per ogni handle.
+scegliere la relazione che l'Actor estrae per ogni handle.
 
 Gli alias accettati per lo stesso input includono `username`, `usernames` &
 `user_names`.
@@ -290,7 +290,7 @@ L'output contiene una riga per profilo unico. I profili condivisi includono
 `sourceTargets`, `sourceRelations`, `sourceUrls`, `sourceTargetKeys` &
 `overlapCount`, così puoi ordinare per sovrapposizione o esportare direttamente
 in CSV. Mantieni `maxItems` sufficientemente alto da lasciare che ogni target
-contribuisca con righe; usa `maxItemsPerTarget` per controllare la profondità
+contribuisca con righe. Usa `maxItemsPerTarget` per controllare la profondità
 per account.
 
 ### Formati URL accettati

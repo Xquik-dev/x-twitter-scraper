@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik es el servicio de extracción de datos de X (Twitter) más rápido y
-económico del mundo, con los datos más completos de X, y X Engagement Scraper
+económico del mundo, con los datos más completos de X. X Engagement Scraper
 recopila respuestas, citas, usuarios que retuitean, usuarios que dan me gusta
 e hilos de cualquier publicación. Todos los demás Actors de Apify cobran
 antes de filtrar o eliminar duplicados. Xquik solo cobra por resultados
@@ -75,8 +75,8 @@ Cada búsqueda revisa la página de perfil disponible más reciente del usuario
 que retuitea. Coteja la cuenta y la publicación de origen con registros
 reales de republicación. Los registros de republicación antiguos, eliminados
 o no disponibles pueden dejar la marca de tiempo en `null`. Las búsquedas de
-marca de tiempo fallidas también dejan `null`; el perfil permanece incluido.
-La búsqueda no demuestra que una cuenta nunca haya republicado una
+marca de tiempo fallidas también dejan `null`. El perfil permanece en la
+salida. La búsqueda no demuestra que una cuenta nunca haya republicado una
 publicación.
 
 Las lecturas adicionales aumentan la latencia. Deja esta opción desactivada

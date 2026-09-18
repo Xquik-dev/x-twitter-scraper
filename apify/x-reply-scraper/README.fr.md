@@ -25,7 +25,7 @@ Scrapez les réponses X (Twitter) pour **$0.00015 par ligne livrée sur
 chaque plan Apify**. Collez des URL de post, des ID de Tweet, des URL de
 profil ou des noms d'utilisateur. Exportez les réponses, conversations,
 auteurs, engagement, entités et URL de médias. Apify facture séparément
-l'usage de sa plateforme. Aucune connexion X requise.
+l'usage de sa plateforme. Vous n'avez besoin d'aucune connexion X.
 
 Les filtres s'exécutent avant les écritures dans le dataset. Vous ne payez
 que pour les lignes livrées.
@@ -84,7 +84,7 @@ revue de modération et les datasets de conversation.
 Sélectionnez `latest` pour chaque run afin de recevoir tous les correctifs
 publiés.
 
-Quand aucune build n'est spécifiée, Apify utilise la valeur par défaut
+Si vous ne spécifiez aucune build, Apify utilise la valeur par défaut
 `latest` de cet Actor. Les runs Console et les exemples d'API standard
 héritent de cette valeur par défaut.
 
@@ -472,8 +472,8 @@ sont gratuits dans `diagnostics`. Aucun frais de démarrage, d'URL, de
 requête, de pagination, de filtre ou de proxy ne s'applique.
 
 Le délai d'expiration Apify par défaut est `0`, donc les runs n'ont pas de
-limite de temps. L'Actor continue jusqu'au plafond ou jusqu'à
-l'épuisement des données éligibles. Un appelant peut néanmoins fixer un
+limite de temps. L'Actor continue jusqu'à ce qu'il atteigne le plafond ou
+épuise les données éligibles. Un appelant peut néanmoins fixer un
 délai Apify fini. Alors `completionReason: "deadline_reached"` signifie
 que cette limite configurée est proche. L'Actor garde les 15 dernières
 secondes pour les points de contrôle, les lignes, les rapports et une

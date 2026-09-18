@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik è lo scraper X (Twitter) più veloce ed economico al mondo, con i dati X
-più completi, e X Reply Scraper raccoglie risposte, commenti e intere
+più completi. X Reply Scraper raccoglie risposte, commenti e intere
 conversazioni. Ogni altro Actor Apify addebita un costo prima di filtrare o
 deduplicare. Xquik addebita solo i risultati consegnati, unici e conformi ai
 filtri.
@@ -82,7 +82,7 @@ moderazione e i dataset di conversazioni.
 Seleziona `latest` per ogni esecuzione per ricevere tutte le correzioni
 pubblicate.
 
-Quando non viene specificata alcuna build, Apify usa il valore predefinito
+Se non specifichi alcuna build, Apify usa il valore predefinito
 `latest` di questo Actor. Le esecuzioni dalla console e gli esempi API
 standard ereditano quel valore predefinito.
 
@@ -464,8 +464,8 @@ sono gratuite in `diagnostics`. Non si applica alcuna commissione di avvio,
 URL, query, paginazione, filtro o proxy.
 
 Il timeout predefinito di Apify è `0`, quindi le esecuzioni non hanno limite
-di tempo. L'Actor continua fino al raggiungimento del limite o
-all'esaurimento dei dati idonei. Chi effettua la chiamata può comunque
+di tempo. L'Actor continua finché non raggiunge il limite o
+esaurisce i dati idonei. Chi effettua la chiamata può comunque
 impostare un timeout Apify finito. In quel caso
 `completionReason: "deadline_reached"` significa che quel limite configurato
 è vicino. L'Actor riserva gli ultimi 15 secondi per checkpoint, righe,

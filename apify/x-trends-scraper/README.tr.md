@@ -55,7 +55,7 @@ Australia bulunur. Desteklenen başka bir konum için `woeids`'i kullan.
 
 Her trend, `name`, `rank`, `tweetVolume`, `query`, `url`, `woeid`,
 `sourceTarget` ve `resultType` içeren tek bir veri kümesi satırıdır. Eksik
-kaynak alanları uydurulmak yerine boş kalır.
+kaynak alanları boş kalır. Actor değer uydurmaz.
 
 ## Fiyatlandırma
 
@@ -65,7 +65,7 @@ platform kullanımını ayrıca faturalandırır.
 - Teslim edilen veri satırı başına bir ücret. Tanılamalar `diagnostics`
   içinde ücretsizdir.
 - Başlangıç, sorgu veya konum ücreti yok.
-- Tekrarlar faturalamadan önce kaldırılır.
+- Actor, tekrarları faturalamadan önce kaldırır.
 - Apify maksimum toplam ücret ayarları teslim edilen satırları sınırlar.
 
 Daha eski bir yapıya ihtiyacın olmadıkça `latest`'i kullan. 50 herkese açık

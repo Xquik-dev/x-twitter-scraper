@@ -16,34 +16,34 @@
 </td></tr></table>
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
-scraper hizmetidir. X (Twitter) Brand Monitoring with AI Analysis, marka bahsedilmelerini
-ilgi, duygu durumu ve müşteri deneyimi yanıtlarıyla izler. Diğer tüm Apify
-Actor'ları filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca
-teslim edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
+scraper hizmetidir. X (Twitter) Brand Monitoring, marka bahsedilmelerini ilgi,
+duygu durumu ve müşteri deneyimi yanıtlarıyla izler. Diğer tüm Apify Actor'ları
+filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim edilen,
+benzersiz, filtreyle eşleşen sonuçlar için ücret alır. Yapay zekâ maliyetleri
+tweet başına fiyata dahil. Yapay zekâ sağlayıcısına ödeme yapmazsın, token
+almazsın & anahtar getirmezsin.
 
-Yapay zekâ maliyetleri tweet başına fiyata dahil. Yapay zekâ sağlayıcısına ödeme yapmazsın, token almazsın & anahtar getirmezsin.
+X (Twitter)'da marka bahsedilmelerini izle ve çalıştırmalar arasındaki duygu
+durumu değişikliklerini takip et. **X (Twitter) Brand Monitoring with AI
+Analysis**, eşleşen her tweet'i toplar. Her gönderi için ilgi, duygu durumu &
+müşteri deneyimi sorularını yapay zeka ile yanıtlar. Bu yanıtları önceki bir
+veri kümesiyle karşılaştırır, böylece neyin değiştiğini görürsün. Her satır
+orijinal tweet verisini korur, bu yüzden dışa aktarımlar, incelemeler & takip
+analizleri ikinci bir kazımaya ihtiyaç duymaz.
 
-X (Twitter)'da marka bahsedilmelerini izle ve çalıştırmalar arasındaki
-duygu durumu değişikliklerini takip et. **X (Twitter) Brand Monitoring with AI Analysis**, eşleşen her tweet'i toplar, her gönderiye yapay zeka
-destekli ilgi, duygu durumu ve müşteri deneyimi yanıtları ekler, ve
-yanıtları neyin değiştiğini görmen için önceki bir veri kümesiyle
-karşılaştırır. Orijinal tweet verisi her satırda kalır, bu yüzden dışa
-aktarımlar, incelemeler ve takip analizleri ikinci bir kazımaya ihtiyaç
-duymaz.
+Bir markayı, ürün hattını veya kampanyayı şikayetler, övgüler & satın alma
+soruları için izle. Destek & pazarlama ekiplerini gerçek gönderilerle
+bilgilendir. Müşterilerin senin hakkında nasıl konuştuğunun geçmişini
+çalıştırmadan çalıştırmaya tut.
 
-Bir markayı, ürün hattını veya kampanyayı şikayetler, övgüler ve satın alma
-soruları için izlemek; destek ve pazarlama ekiplerini toplu puanlar yerine
-gerçek gönderilerden bilgilendirmek; ve müşterilerin senin hakkında nasıl
-konuştuğunun çalıştırma-üstü-çalıştırma geçmişini tutmak için kullan.
-
-- **Kaynak tweet'in her alanı** yanıtların yanında kalır: metin, yazar,
-  sayaçlar, medya, bağlantılar, alıntılanan ve yanıtlanan gönderiler.
-- **Tipli yanıtlar**: bir ilgi olasılığı, olasılıklı bir duygu durumu
-  kategorisi ve bir müşteri deneyimi kategorisi.
-- **Değişim takibi**, olasılık gürültüsüne göre değil karara göre
-  çalıştırmalar arasında.
-- **Önce filtreleyen faturalandırma**: yalnızca başarılı analizli benzersiz,
-  filtreyle eşleşen tweet'ler ücretlendirilir.
+- **Kaynak tweet'in her alanı.** Metin, yazar, sayaçlar, medya, bağlantılar,
+  alıntılanan & yanıtlanan gönderiler yanıtların yanında kalır.
+- **Tipli yanıtlar.** Her satırda bir ilgi olasılığı, olasılıklı bir duygu
+  durumu kategorisi & bir müşteri deneyimi kategorisi bulunur.
+- **Değişim takibi.** Actor çalıştırmaları karara göre karşılaştırır, bu yüzden
+  küçük olasılık kaymaları değişim sayılmaz.
+- **Önce filtreleyen faturalandırma.** Yalnızca başarılı analizi olan benzersiz,
+  filtreyle eşleşen tweet'ler için ödersin.
 
 ## X'te bir markayı nasıl izlerim
 
@@ -100,36 +100,35 @@ Duygu durumu, yazarın hedefe yönelik ifade ettiği tutumu açıklar.
 | `not_comparable`            | Gerekli metadata, ID'ler veya eşleştirme ayarları eksik          |
 | `analysis_unavailable`      | Bu tweet'in başarılı bir analizi yok                            |
 
-Yanıtlar karara göre karşılaştırılır: bir `choice` yanıtı kategorisine
-göre, bir `score` yanıtı en yakın seviyesine göre ve bir `probability`
-yanıtı 0,5'teki evet-ya-da-hayır kararına göre. Bir karar yalnızca yanıt
-açıkça hareket ettiğinde değişmiş sayılır: önceki kategori 0,4 olasılığın
-altına düşer, bir puan en az 0,6 seviye hareket eder veya bir evet/hayır
-olasılığı eşikten en az 0,1 uzağa düşer. Çalıştırmalar arasındaki
-yakın-berabere titremeler değişmemiş kalır. Aynı kararı koruyan değişimler
-`unchanged` kalır, bu yüzden çalıştırmalar arasındaki model varyasyonu
-raporunu doldurmaz. `changes`, `previous` ve `current` kararıyla her
-değişen soruyu listeler. Değişimler model varyasyonunu, yeni bağlamı veya
-düzenlenmiş kaynak veriyi yansıtabilir; değişen gerçekleri kanıtlamazlar ve
-eksik bir tweet silinmeyi kanıtlamaz.
+Actor yanıtları karara göre karşılaştırır. Bir `choice` yanıtını kategorisine
+göre karşılaştırır. Bir `score` yanıtını en yakın seviyesine göre karşılaştırır.
+Bir `probability` yanıtını 0,5'teki evet ya da hayır kararına göre
+karşılaştırır. Bir karar üç durumda değişmiş sayılır. Önceki kategori 0,4
+olasılığın altına düşer. Bir puan en az 0,6 seviye hareket eder. Bir evet/hayır
+olasılığı eşikten en az 0,1 uzağa düşer. Çalıştırmalar arasındaki neredeyse
+berabere durumlar `unchanged` kalır & aynı kararı koruyan kaymalar da öyle
+kalır. Çalıştırmalar arasındaki model varyasyonu raporunu doldurmaz. `changes`,
+değişen her soruyu `previous` & `current` kararıyla listeler. Değişimler model
+varyasyonundan, yeni bağlamdan veya düzenlenmiş kaynak veriden gelebilir.
+Değişen gerçekleri kanıtlamazlar & eksik bir tweet silinmeyi kanıtlamaz.
 
 Temel değer sınırı varsayılan olarak 100.000 satırdır. Tekrarlanan tweet
 ID'leri, yükleme hataları ve değişen veri kümesi boyutları, toplamadan önce
-karşılaştırmayı durdurur; asla boş bir temel değere dönüşmezler.
+karşılaştırmayı durdurur. Asla boş bir temel değere dönüşmezler.
 
 ## Fiyatlandırma
 
-Yapay zekâ maliyetleri tweet başına fiyata dahil. Yapay zekâ sağlayıcısına ödeme yapmazsın, token almazsın & anahtar getirmezsin.
+Yapay zekâ maliyetleri tweet başına fiyata dahil. Yapay zekâ sağlayıcısına ödeme
+yapmazsın, token almazsın & anahtar getirmezsin.
 
 Başlangıç ücreti olmadan, başarıyla analiz edilen tweet başına $0.0003'ten
-başlar. Toplama dahildir ve belgelenen analiz ödeneği 8 soru, soru tanımı
-başına 8.000 bayt ve tweet başına 12.000 bayt bağlamdır. Çıkarma filtreleri
-ve tekilleştirme analizden önce çalışır, bu yüzden filtrelenmiş ve
-tekrarlanan satırlar hiçbir zaman analiz edilmez veya ücretlendirilmez.
-Başarısız ve atlanan analizler ile tanılama satırlarının sonuç ücreti
-yoktur. Apify platform kullanımı (işlem, depolama ve aktarım), planının
-oranlarında Apify tarafından ayrıca faturalandırılır ve Pricing sekmesinde
-görünür.
+başlar. Fiyat toplamayı içerir. Analiz ödeneği 8 soru, soru tanımı başına 8.000
+bayt & tweet başına 12.000 bayt bağlamdır. Çıkarma filtreleri & tekilleştirme
+analizden önce çalışır, bu yüzden filtrelenmiş veya tekrarlanan satırlar için
+asla ödemezsin. Başarısız analizlerin, atlanan analizlerin & tanılama
+satırlarının sonuç ücreti yoktur. Apify, işlem, depolama & aktarım için platform
+kullanımını planının oranlarında ayrıca faturalandırır. Pricing sekmesi bunu
+gösterir.
 
 ## Girdi ve çıktı örnekleri
 
@@ -173,25 +172,30 @@ raporu ise toplanan satırları, ücretlendirilen analizleri ve bekleyen
 ## Çalıştırma özeti ve düz yanıtlar
 
 Her çalıştırma, anahtar-değer deposuna bir `analysis-summary` kaydı yazar ve
-çalıştırma raporunda `results.analysisSummary` altında tekrarlar. Analiz
-edilen, başarısız ve atlanan satırları sayar, etkileşimi toplar ve her
-soruyu özetler. `targets`, marka veya takma ad başına bahsedilmeleri, ses
-payını ve etkileşimi bildirir, ve her girişin `top`'u yanıt kategorisi
-başına en çok etkileşim alan üç bahsedilmeyi listeler, bu yüzden her
-markanın en güçlü olumsuz ve olumlu bahsedilmeleri uyarılara hazır olur.
-`sentiment` bloğu, `top` altında en çok etkileşim alan üç olumlu ve olumsuz
-bahsedilmeyi listeler, uyarılara hazır, ve `relevance` markayla ilgili
-bahsedilmeleri sayar. Sayılar 4 ondalık basamağa yuvarlanır; boş
-çalıştırmalar sıfır sayım ve `null` ortalama bildirir. Her `targets` girişi
-ayrıca o markadan bahseden tweet'ler arasındaki yanıt bölünmesi olan
-`choices`'ı taşır, ve `monitor.changedRows`, kararları temel değerden bu
-yana hareket eden tweet'leri listeler, bir webhook veya uyarıya hazır. Her
-satır ayrıca bağlantı verdiği ana bilgisayar adlarını `sourceDomains`'te
-listeler ve özetin `monitor` bloğu, `monitor.baselineDatasetId`
-ayarlandığında karşılaştırma durumlarını sayar ve 50'ye kadar değişen
-satırı listeler.
+çalıştırma raporunda `results.analysisSummary` altında tekrarlar. Analiz edilen,
+başarısız ve atlanan satırları sayar, etkileşimi toplar ve her soruyu özetler.
 
-Her sonuç satırı ayrıca `answers`'ı da taşır; bu, soru ID'sinden seçilen
+- `targets`, marka veya takma ad başına bahsedilmeleri, ses payını & etkileşimi
+  bildirir.
+- Her `targets` girişinde, yanıt kategorisi başına en çok etkileşim alan üç
+  bahsedilmeyi listeleyen `top` bulunur. En güçlü olumsuz & olumlu
+  bahsedilmelerde uyarı vermek için bunu kullan.
+- Her `targets` girişinde, o markadan bahseden tweet'ler arasındaki yanıt
+  dağılımı olan `choices` bulunur.
+- `sentiment` bloğu, `top` altında en çok etkileşim alan üç olumlu & olumsuz
+  bahsedilmeyi listeler.
+- `relevance`, markayla ilgili bahsedilmeleri sayar.
+- `monitor.changedRows`, kararları temel değerden bu yana değişen tweet'leri
+  listeler. Bunları bir webhook'a veya uyarıya gönder.
+- `monitor.baselineDatasetId` ayarlıyken `monitor` bloğu karşılaştırma
+  durumlarını sayar & 50'ye kadar değişen satırı listeler.
+- Her satır, bağlantı verdiği ana bilgisayar adlarını `sourceDomains`'te
+  listeler.
+
+Özet, sayıları 4 ondalık basamağa yuvarlar. Boş bir çalıştırma sıfır sayım &
+`null` ortalama bildirir.
+
+Her sonuç satırı ayrıca `answers`'ı da taşır. Bu, soru ID'sinden seçilen
 kategoriye, puana veya olasılığa düz bir eşlemedir. `Flat answers` veri
 kümesi görünümü ve CSV veya Excel dışa aktarımları, tweet'in yanında soru
 başına bir sütun gösterir, böylece elektronik tablolar JSON ayrıştırmasına
@@ -288,41 +292,38 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 ### Kendi sorularımı kullanabilir miyim?
 
-Evet. Özel `analysis.questions`, varsayılanların yerini alır: 1-8
-`choice`, `score` veya `probability` sorusu. Choice soruları 2-255
-kategori kabul eder; score soruları en az 2 sıralı seviye kullanır.
-Karşılaştırmak istediğin çalıştırmalar genelinde aynı soruları koru.
+Evet. Özel `analysis.questions`, varsayılanların yerini alır. 1-8 `choice`,
+`score` veya `probability` sorusu gönder. Choice soruları 2-255 kategori kabul
+eder. Score soruları en az 2 sıralı seviye kullanır. Karşılaştırmak istediğin
+çalıştırmalar genelinde aynı soruları koru.
 
 ### Bir satır neden `analysis.status`'u `failed` veya `skipped` olarak döndü?
 
-Tweet toplandı ve teslim edildi, ancak yapay zeka destekli analiz
-tamamlanmadı. `analysis.reason`, tweet ve bağlamı `maxContextBytes`'ı
-aştığında `context_limit` veya yeniden denemelerden sonra
-`service_unavailable` gibi nedeni adlandırır. Bu satırların sonuç ücreti
-yoktur. `maxContextBytes`'ı (12.000'e kadar) artır veya etkilenen ID'leri
-yeniden çalıştır.
+Actor tweet'i topladı & teslim etti, ancak yapay zeka analizi tamamlanmadı.
+`analysis.reason`, tweet ve bağlamı `maxContextBytes`'ı aştığında
+`context_limit` veya yeniden denemelerden sonra `service_unavailable` gibi
+nedeni adlandırır. Bu satırların sonuç ücreti yoktur. `maxContextBytes`'ı
+(12.000'e kadar) artır veya etkilenen ID'leri yeniden çalıştır.
 
 ### Analiz gerçekleri doğrular mı?
 
-Hayır. Yanıtlar, gönderinin ne ifade ettiğini ve nasıl çerçevelendiğini
+Hayır. Yanıtlar, gönderinin ne ifade ettiğini & bunu nasıl çerçevelediğini
 açıklar. Olasılıklar model güvenini ifade eder, gerçeği değil. Önemli
-sınıflandırmaları, her satırın koruduğu orijinal tweet'e karşı gözden
-geçir.
+sınıflandırmaları, her satırın koruduğu orijinal tweet'e karşı gözden geçir.
 
 ### Hangi diller çalışır?
 
-Çıkarma, X'in sunduğu her dili destekler. Analiz önce İngilizce müşteri
-senaryolarında doğrulanır; diğer desteklenen diller aynı yapıda yanıtlar
-döndürür ve belirsizlik `unclear` kategorileri ve olasılıklar aracılığıyla
-açık kalır.
+Çıkarma, X'in sunduğu her dili destekler. Analizi önce İngilizce müşteri
+senaryolarında doğruluyoruz. Diğer desteklenen diller aynı yapıda yanıtlar
+döndürür. `unclear` kategorileri & olasılıklar belirsizliği her dilde gösterir.
 
 ### Maliyeti nasıl sınırlarım?
 
-Filtreler, tekilleştirme ve `maxItems` analizden önce çalışır, bu yüzden
-yalnızca benzersiz, filtreyle eşleşen tweet'ler analiz edilir ve
-ücretlendirilir. Kesin arama operatörleri, tarih sınırları ve etkileşim
-tabanları kullan, ve büyük bir çalıştırmadan önce yanıt kalitesini
-kontrol etmek için küçük bir `maxItems` ile başla.
+Filtreler, tekilleştirme & `maxItems` analizden önce çalışır, bu yüzden Actor
+yalnızca benzersiz, filtreyle eşleşen tweet'leri analiz eder & ücretlendirir.
+Kesin arama operatörleri, tarih sınırları & etkileşim tabanları kullan & büyük
+bir çalıştırmadan önce yanıt kalitesini kontrol etmek için küçük bir `maxItems`
+ile başla.
 
 ### Yardımı nereden alırım?
 

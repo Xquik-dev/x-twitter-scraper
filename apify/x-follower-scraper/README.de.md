@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
-den umfassendsten X-Daten, und X Follower Scraper sammelt Follower, Gefolgte,
+den umfassendsten X-Daten. X Follower Scraper sammelt Follower, Gefolgte,
 Listenmitglieder, Abonnenten & Community-Mitglieder. Jeder andere Apify Actor
 berechnet, bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für
 gelieferte, eindeutige, filterkonforme Ergebnisse.
@@ -161,8 +161,8 @@ Deduplizierung, Zuordnung und Abrechnung atomar.
   `minFollowing`, `maxFollowing`, `minStatuses`, `maxStatuses`,
   `minAccountAgeDays`, `verifiedType`, `usernameContains`, `hasWebsite`,
   `hasLocation`) laufen, bevor ein Profil in dein Dataset gelangt.
-- Bei `dedupeAcrossTargets: true` werden Duplikate vor dem Schreiben
-  entfernt.
+- Bei `dedupeAcrossTargets: true` entfernt der Actor Duplikate vor dem
+  Schreiben.
 - Vom Dataset abgelehnte Datensätze werden nicht abgerechnet.
 - Runs ohne Eingabe, mit ungültiger Eingabe und ohne Ausgabe schreiben 1
   verwertbaren Datensatz in die kostenlose Ausgabe `diagnostics`.
@@ -208,7 +208,7 @@ oder kein Präfix:
 ```
 
 Setze `relation` auf `followers`, `following` oder `verified_followers`, um
-festzulegen, was für jedes Handle gescrapt wird.
+die Beziehung zu wählen, die der Actor für jedes Handle scrapt.
 
 Akzeptierte Aliasse für dieselbe Eingabe sind `username`, `usernames` und
 `user_names`.
@@ -292,7 +292,7 @@ Die Ausgabe enthält einen Datensatz pro eindeutigem Profil. Gemeinsame
 Profile enthalten `sourceTargets`, `sourceRelations`, `sourceUrls`,
 `sourceTargetKeys` und `overlapCount`, sodass du nach Überschneidung
 sortieren oder direkt nach CSV exportieren kannst. Halte `maxItems` hoch
-genug, damit jedes Ziel Datensätze beiträgt; nutze `maxItemsPerTarget`, um
+genug, damit jedes Ziel Datensätze beiträgt. Nutze `maxItemsPerTarget`, um
 die Tiefe pro Account zu steuern.
 
 ### Akzeptierte URL-Formen

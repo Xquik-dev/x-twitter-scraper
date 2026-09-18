@@ -16,10 +16,10 @@
 </td></tr></table>
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data, and X Engagement Scraper collects replies, quotes,
-retweeters, likers & threads for any post. Every other Apify Actor charges
-before filtering or deduplicating. Xquik charges only for delivered, unique,
-filter-matching results.
+most complete X data. X Engagement Scraper collects replies, quotes, retweeters,
+likers & threads for any post. Every other Apify Actor charges before filtering
+or deduplicating. Xquik charges only for delivered, unique, filter-matching
+results.
 
 Collect Twitter engagement data for one or more X posts: replies, quotes,
 retweeters, likers, and thread context. No X API key or login required.
@@ -68,7 +68,7 @@ Set `includeRetweetTimestamp` to `true` for `retweeters` results. The
 Each lookup checks the retweeter's newest available profile page. It matches the
 account and source post against actual repost records. Older, deleted, or
 unavailable repost records can leave the timestamp `null`. Failed timestamp
-lookups also leave `null`; the profile remains included. The lookup does not
+lookups also leave `null`. The profile stays in the output. The lookup does not
 prove that an account never reposted a post.
 
 Extra reads increase latency. Leave this option disabled for profile-only

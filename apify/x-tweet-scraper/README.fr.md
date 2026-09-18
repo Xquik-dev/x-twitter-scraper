@@ -60,7 +60,7 @@ List, des ID de Tweet et des requêtes de recherche avec plus de 50 filtres.
 Sélectionnez `latest` pour chaque run afin de recevoir tous les correctifs
 publiés.
 
-Quand aucune build n'est spécifiée, Apify utilise la valeur par défaut
+Si vous ne spécifiez aucune build, Apify utilise la valeur par défaut
 `latest` de cet Actor. Les runs Console et les exemples d'API standard
 héritent de cette valeur par défaut.
 
@@ -133,6 +133,7 @@ une cible réelle. Modifiez-la avant de l'exécuter.
 | `isLimitedReply`           | Indique si les réponses sont limitées                              |
 | `isNoteTweet`              | Indique s'il s'agit d'un Note Tweet (post long format)             |
 | `isQuoteStatus`            | Indique si ce tweet cite un autre tweet                            |
+| `isRetweet`                | Indique si cette ligne est un retweet, original joint              |
 | `isReply`                  | Indique si ce tweet est une réponse                                |
 | `quoted_tweet`             | Objet tweet cité (si c'est une citation)                           |
 | `conversationId`           | ID de thread / conversation                                        |
@@ -151,6 +152,10 @@ liste exacte des champs.
 Les auteurs imbriqués suivent le contrat de profil public. Il couvre
 l'identité, les compteurs, la vérification, la disponibilité, les données
 professionnelles et les biographies de profil.
+
+Les lignes de retweet règlent `isRetweet` sur `true`. Leur `text` porte le
+post original en entier, et `retweeted_tweet` contient le post original avec
+son auteur & ses compteurs.
 
 Les lignes de tweet préservent aussi `type`, `source`, `inReplyToId`,
 `inReplyToUserId`, `inReplyToUsername` et `retweeted_tweet`. Les tweets
@@ -225,12 +230,12 @@ quand le service signale une pagination bloquée. Les blocages arrêtent les
 nouvelles tentatives automatiques sans redémarrer la recherche. Ces runs
 indiquent une extraction incomplète et conservent des curseurs
 reprenables. Une page terminale complète la pagination même après des
-pages vides consécutives. `failedSubtargets` reste à `0`. Seules les
-lignes de dataset acceptées sont facturées.
+pages vides consécutives. `failedSubtargets` reste à `0`. Vous ne
+payez que les lignes de dataset acceptées.
 
 Le délai d'expiration Apify par défaut est `0`, donc les runs n'ont pas de
-limite de temps. L'Actor continue jusqu'au plafond ou jusqu'à
-l'épuisement des données éligibles. Un appelant peut néanmoins fixer un
+limite de temps. L'Actor continue jusqu'à ce qu'il atteigne le plafond ou
+épuise les données éligibles. Un appelant peut néanmoins fixer un
 délai Apify fini. Alors `completionReason: "deadline_reached"` signifie
 que cette limite configurée est proche. L'Actor garde les 15 dernières
 secondes pour les points de contrôle, les lignes, les rapports et une
@@ -261,7 +266,7 @@ Collez un mélange d'URL de tweet, de profil, de recherche ou de list :
 }
 ```
 
-Les URL de tweet sont recherchées par lots simultanés allant jusqu'à 100.
+L'Actor recherche les URL de tweet par lots simultanés allant jusqu'à 100.
 Les réponses partiellement réussies revérifient une fois les ID non
 résolus. La sortie de lot reste unique et correspond aux ID demandés. Les
 URL de profil combinent le fil de profil avec la recherche par auteur. Les
@@ -343,12 +348,12 @@ Modes explicites pris en charge : `tweet`, `tweets`, `search`,
 `favoriters`.
 
 `profileTweets` suit l'onglet Posts du profil. Il renvoie les posts non
-réponse rédigés par la cible. Les lignes de réponse et le contexte de
-conversation d'autres auteurs sont exclus avant la facturation.
+réponse rédigés par la cible. L'Actor exclut les lignes de réponse et le
+contexte de conversation d'autres auteurs avant la facturation.
 
 `profileReplies` suit l'onglet With Replies de X. Il renvoie les posts et
-réponses de profil rédigés par la cible. Le contexte de conversation
-d'autres auteurs est exclu. Utilisez `filter:replies` ou la recherche
+réponses de profil rédigés par la cible. L'Actor exclut le contexte de
+conversation d'autres auteurs. Utilisez `filter:replies` ou la recherche
 `to:` quand vous avez besoin de résultats uniquement de réponse.
 
 Les modes de recherche et de Tweet paginés prennent en charge
@@ -356,7 +361,7 @@ Les modes de recherche et de Tweet paginés prennent en charge
 les onglets Posts, With Replies, Media, Likes, Lists de profil, les
 réponses, citations et threads. Les opérateurs de date plats
 correspondants fonctionnent aussi. L'Actor vérifie chaque ligne avant la
-facturation. La borne de date inférieure est inclusive ; la borne
+facturation. La borne de date inférieure est inclusive. La borne
 supérieure est exclusive. Les filtres de date excluent les lignes sans
 date exploitable. Les filtres de langue excluent les langues manquantes
 ou non correspondantes. Les lignes filtrées ne consomment jamais votre
@@ -409,6 +414,9 @@ La sortie plate garde `author` et `media` inchangés et ajoute aussi des
 champs de premier niveau tels que `authorUsername`, `authorName`,
 `authorFollowers`, `tweetUrl`, `twitterUrl`, `mediaUrls`, `imageUrls` et
 `videoUrls`.
+
+Chaque ligne de tweet à plat porte `media`. Un tweet sans média a une liste
+vide, donc chaque ligne a les mêmes clés dans un tableur ou un pipeline typé.
 
 ### 7. Choisir le nommage des champs
 
@@ -738,7 +746,7 @@ plateforme Apify s'appliquent toujours.
 **Quelle est sa vitesse ?** Le temps d'exécution dépend de la route, du
 nombre de résultats et de la disponibilité en amont.
 
-**Quels opérateurs de recherche sont pris en charge ?** La recherche
+**Quels opérateurs de recherche fonctionnent ?** La recherche
 avancée X prend en charge les auteurs, les destinataires, les mentions,
 les dates, l'engagement, les médias et la localisation.
 

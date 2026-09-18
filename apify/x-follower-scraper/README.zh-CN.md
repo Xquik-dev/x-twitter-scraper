@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，拥有最完整的 X 数据，X Follower Scraper 可收集关注者、关注对象、列表成员、订阅者与社群成员。其他所有 Apify Actor 都会在过滤或去重之前收费。Xquik 只对已交付、唯一且符合过滤条件的结果收费。
+Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，拥有最完整的 X 数据。X Follower Scraper 可收集关注者、关注对象、列表成员、订阅者与社群成员。其他所有 Apify Actor 都会在过滤或去重之前收费。Xquik 只对已交付、唯一且符合过滤条件的结果收费。
 
 在每个 Apify 套餐上，以**每个交付的主页低至 $0.00015** 的价格抓取 X（Twitter）关注者、关注对象、已验证关注者、List 成员、List 订阅者和 Community 成员。Apify 会单独收取平台使用费。无需 X 登录、无启动费、无查询费。
 
@@ -110,7 +110,7 @@ Apify 默认超时时间为 `0`，运行没有时间限制。Actor 会持续跟�
 
 - 启动、目标和关系选择不会额外收取查询费用。
 - 过滤条件（`minFollowers`、`verifiedOnly`、`bioContains`、`locationContains`、`minFollowing`、`maxFollowing`、`minStatuses`、`maxStatuses`、`minAccountAgeDays`、`verifiedType`、`usernameContains`、`hasWebsite`、`hasLocation`）会在主页进入数据集之前执行。
-- 设置 `dedupeAcrossTargets: true` 后，重复项会在写入前被移除。
+- 设置 `dedupeAcrossTargets: true` 后，Actor 会在写入前移除重复项。
 - 被数据集拒绝的行不会计费。
 - 无输入、输入无效及零输出的运行，会向免费的 `diagnostics` 输出写入 1 条可供参考的记录。
 
@@ -147,7 +147,7 @@ Apify 默认超时时间为 `0`，运行没有时间限制。Actor 会持续跟�
 }
 ```
 
-将 `relation` 设置为 `followers`、`following` 或 `verified_followers`，可切换所有用户名抓取的内容。
+将 `relation` 设置为 `followers`、`following` 或 `verified_followers`，可选择 Actor 为每个用户名抓取的关系。
 
 同一输入接受的别名包括 `username`、`usernames` 和 `user_names`。
 
@@ -217,7 +217,7 @@ Actor 可能会检查比写入数量更多的主页。你只需为通过所有�
 }
 ```
 
-输出中每个唯一主页对应一行。共享主页会包含 `sourceTargets`、`sourceRelations`、`sourceUrls`、`sourceTargetKeys` 和 `overlapCount`，方便你按重叠度排序或直接导出为 CSV。将 `maxItems` 设置得足够高，可让每个目标都贡献结果行；使用 `maxItemsPerTarget` 控制每个账号的抓取深度。
+输出中每个唯一主页对应一行。共享主页会包含 `sourceTargets`、`sourceRelations`、`sourceUrls`、`sourceTargetKeys` 和 `overlapCount`，方便你按重叠度排序或直接导出为 CSV。将 `maxItems` 设置得足够高，可让每个目标都贡献结果行。使用 `maxItemsPerTarget` 控制每个账号的抓取深度。
 
 ### 支持的 URL 格式
 

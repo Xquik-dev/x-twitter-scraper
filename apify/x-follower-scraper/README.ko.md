@@ -149,7 +149,7 @@ X Follower Scraper는 팔로워, 팔로잉, 리스트, 커뮤니티에 대해 �
   `minFollowing`, `maxFollowing`, `minStatuses`, `maxStatuses`,
   `minAccountAgeDays`, `verifiedType`, `usernameContains`, `hasWebsite`,
   `hasLocation`)는 프로필이 데이터셋에 들어가기 전에 실행됩니다.
-- `dedupeAcrossTargets: true`이면 중복은 쓰기 전에 제거됩니다.
+- `dedupeAcrossTargets: true`이면 Actor가 쓰기 전에 중복을 제거합니다.
 - 데이터셋에서 거부된 행은 과금되지 않습니다.
 - 입력이 없거나, 입력이 잘못됐거나, 출력이 0인 실행은 무료 `diagnostics`
   출력에 실행 가능한 레코드 1건을 작성합니다.
@@ -193,8 +193,8 @@ Console에서 실행당 최대 비용을 설정하세요. Apify는 이 제한을
 }
 ```
 
-`relation`을 `followers`, `following`, `verified_followers`로 설정하면 각
-핸들에 대해 스크랩할 대상이 바뀝니다.
+`relation`을 `followers`, `following`, `verified_followers`로 설정해 Actor가
+각 핸들에 대해 스크랩할 관계를 선택하세요.
 
 동일한 입력에 대해 허용되는 별칭에는 `username`, `usernames`,
 `user_names`가 있습니다.
@@ -275,7 +275,7 @@ Actor는 기록하는 것보다 더 많은 프로필을 검사할 수 있습니�
 출력에는 고유 프로필당 하나의 행이 포함됩니다. 공유된 프로필에는
 `sourceTargets`, `sourceRelations`, `sourceUrls`, `sourceTargetKeys`,
 `overlapCount`가 포함되어 있어 중복 기준으로 정렬하거나 바로 CSV로 내보낼 수
-있습니다. 모든 대상이 행을 기여할 수 있도록 `maxItems`를 충분히 높게 유지하고,
+있습니다. 모든 대상이 행을 기여할 수 있도록 `maxItems`를 충분히 높게 유지하세요.
 계정별 깊이를 조절하려면 `maxItemsPerTarget`을 사용하세요.
 
 ### 허용되는 URL 형태

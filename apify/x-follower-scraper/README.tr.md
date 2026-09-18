@@ -160,7 +160,7 @@ faturalamayı atomik tutar.
   `locationContains`, `minFollowing`, `maxFollowing`, `minStatuses`,
   `maxStatuses`, `minAccountAgeDays`, `verifiedType`, `usernameContains`,
   `hasWebsite`, `hasLocation`), bir profil veri kümene girmeden önce çalışır.
-- `dedupeAcrossTargets: true` ile tekrarlar yazmadan önce kaldırılır.
+- `dedupeAcrossTargets: true` ile Actor tekrarları yazmadan önce kaldırır.
 - Veri kümesi tarafından reddedilen satırlar faturalandırılmaz.
 - Girdisiz, geçersiz girdi ve sıfır çıktılı çalıştırmalar, ücretsiz
   `diagnostics` çıktısına 1 uygulanabilir kayıt yazar.
@@ -205,7 +205,7 @@ veya öneksiz kabul edilir:
 }
 ```
 
-Her handle için neyin kazınacağını değiştirmek üzere `relation`'ı
+Actor'ın her handle için kazıyacağı ilişkiyi seçmek üzere `relation`'ı
 `followers`, `following` veya `verified_followers` olarak ayarla.
 
 Aynı girdi için kabul edilen takma adlar arasında `username`, `usernames` ve
@@ -290,7 +290,7 @@ birleştirme modunu kullan:
 `sourceTargets`, `sourceRelations`, `sourceUrls`, `sourceTargetKeys` ve
 `overlapCount` içerir, böylece örtüşmeye göre sıralayabilir veya doğrudan
 CSV'ye aktarabilirsin. Her hedefin satır katkısı yapabilmesi için
-`maxItems`'i yeterince yüksek tut; hesap başına derinliği kontrol etmek için
+`maxItems`'i yeterince yüksek tut. Hesap başına derinliği kontrol etmek için
 `maxItemsPerTarget`'i kullan.
 
 ### Kabul edilen URL biçimleri

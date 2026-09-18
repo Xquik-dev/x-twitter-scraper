@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data, and X Reply Scraper collects replies, comments & whole
+most complete X data. X Reply Scraper collects replies, comments & whole
 conversations. Every other Apify Actor charges before filtering or
 deduplicating. Xquik charges only for delivered, unique, filter-matching
 results.
@@ -24,7 +24,7 @@ results.
 Scrape X (Twitter) replies for **$0.00015 per delivered rows on every Apify
 plan**. Paste post URLs, Tweet IDs, profile URLs, or usernames. Export replies,
 conversations, authors, engagement, entities, and media URLs. Apify bills your
-platform usage separately. No X login is required.
+platform usage separately. You need no X login.
 
 Filters run before dataset writes. You pay only for delivered rows.
 
@@ -70,8 +70,8 @@ ranking, lead discovery, moderation review, and conversation datasets.
 
 Select `latest` for every run to receive all published fixes.
 
-When no build is specified, Apify uses this Actor's `latest` default. Console
-runs and standard API examples inherit that default.
+If you specify no build, Apify uses this Actor's `latest` default. Console runs
+and standard API examples inherit that default.
 
 Saved tasks may override the Actor default. Schedules and task integrations
 reuse that choice. Keep every override set to `latest`.
@@ -421,11 +421,11 @@ Xquik applies one charge per delivered data row. Diagnostics are free in
 `diagnostics`. No start, URL, query, pagination, filter, or proxy fee applies.
 
 The default Apify timeout is `0`, so runs have no time limit. The Actor
-continues until the cap or eligible data is exhausted. A caller can still set a
-finite Apify timeout. Then `completionReason: "deadline_reached"` means that
-configured limit is near. The Actor keeps the final 15 seconds for checkpoints,
-rows, reports, and a successful exit. Replies already collected remain delivered
-and bill once. Unfinished pagination remains resumable.
+continues until it reaches the cap or runs out of eligible data. A caller can
+still set a finite Apify timeout. Then `completionReason: "deadline_reached"`
+means that configured limit is near. The Actor keeps the final 15 seconds for
+checkpoints, rows, reports, and a successful exit. Replies already collected
+remain delivered and bill once. Unfinished pagination remains resumable.
 
 ## Public task examples
 

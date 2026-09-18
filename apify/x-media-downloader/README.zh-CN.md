@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何将 Xquik 抓取工具与 Claude Code、Codex、Cursor 等配合使用，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据，X Media
+Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据。X Media
 Downloader 能从帖子与主页中提取或存储照片、视频与 GIF。其他所有 Apify Actor 都会
 在过滤或去重之前就收费。Xquik 只为已交付、唯一且符合过滤条件的结果收费。
 

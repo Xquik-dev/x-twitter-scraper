@@ -16,10 +16,10 @@
 </td></tr></table>
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data, and X Tweet Scraper collects tweets, replies, profiles,
-lists & searches with 50+ filters. Every other Apify Actor charges before
-filtering or deduplicating. Xquik charges only for delivered, unique,
-filter-matching results.
+most complete X data. X Tweet Scraper collects tweets, replies, profiles, lists
+& searches with 50+ filters. Every other Apify Actor charges before filtering or
+deduplicating. Xquik charges only for delivered, unique, filter-matching
+results.
 
 Scrape public X (Twitter) tweets for **from $0.00015 per delivered result on
 every Apify plan**. Apify bills platform usage separately. No X login, start
@@ -51,8 +51,8 @@ media. It accepts URLs, handles, List IDs, Tweet IDs, and search queries with
 
 Select `latest` for every run to receive all published fixes.
 
-When no build is specified, Apify uses this Actor's `latest` default. Console
-runs and standard API examples inherit that default.
+If you specify no build, Apify uses this Actor's `latest` default. Console runs
+and standard API examples inherit that default.
 
 Saved tasks may override the Actor default. Schedules and task integrations
 reuse that choice. Keep every override set to `latest`.
@@ -121,6 +121,7 @@ view. Every task opens with a real search or target. Edit it before running.
 | `isLimitedReply`       | Whether replies are limited                              |
 | `isNoteTweet`          | Whether this is a Note Tweet (long-form post)            |
 | `isQuoteStatus`        | Whether this tweet quotes another tweet                  |
+| `isRetweet`            | Whether this row is a retweet, original attached         |
 | `isReply`              | Whether this tweet is a reply                            |
 | `quoted_tweet`         | Quoted tweet object (if quote tweet)                     |
 | `conversationId`       | Thread/conversation ID                                   |
@@ -137,6 +138,9 @@ exact fields.
 
 Nested authors follow the public profile contract. It covers identity, counts,
 verification, availability, professional data, and profile biographies.
+
+Retweet rows set `isRetweet` to `true`. Their `text` carries the original post
+in full, and `retweeted_tweet` holds the original post with its author & counts.
 
 Tweet rows also preserve `type`, `source`, `inReplyToId`, `inReplyToUserId`,
 `inReplyToUsername`, and `retweeted_tweet`. Quoted and reposted tweets preserve
@@ -195,15 +199,15 @@ searches & account-window recovery may checkpoint after 10 consecutive empty
 pages. Searches also checkpoint when the service reports stalled pagination.
 Stalls stop automatic retries without restarting the search. These runs report
 incomplete extraction & retain resumable cursors. A terminal page completes
-pagination even after consecutive empty pages. `failedSubtargets` stays `0`.
-Only accepted dataset rows are billed.
+pagination even after consecutive empty pages. `failedSubtargets` stays `0`. You
+pay only for accepted dataset rows.
 
 The default Apify timeout is `0`, so runs have no time limit. The Actor
-continues until the cap or eligible data is exhausted. A caller can still set a
-finite Apify timeout. Then `completionReason: "deadline_reached"` means that
-configured limit is near. The Actor keeps the final 15 seconds for checkpoints,
-rows, reports, and a successful exit. Valid rows remain delivered and bill once.
-Unfinished pagination remains resumable.
+continues until it reaches the cap or runs out of eligible data. A caller can
+still set a finite Apify timeout. Then `completionReason: "deadline_reached"`
+means that configured limit is near. The Actor keeps the final 15 seconds for
+checkpoints, rows, reports, and a successful exit. Valid rows remain delivered
+and bill once. Unfinished pagination remains resumable.
 
 - Starts, queries, URLs, and single Tweet lookups add no separate fee.
 - The Actor removes duplicates before writing or billing rows.
@@ -228,11 +232,12 @@ Paste a mix of tweet, profile, search, or list URLs:
 }
 ```
 
-Tweet URLs are looked up in concurrent batches of up to 100. Partial successful
-responses recheck unresolved IDs once. Batch output stays unique and matches
-requested IDs. Profile URLs combine the profile timeline with author search.
-Search URLs extract the query. List URLs use the dedicated list path instead of
-generic `list:` search. `maxItems` caps results across all pasted URLs.
+The Actor looks up tweet URLs in concurrent batches of up to 100. Partial
+successful responses recheck unresolved IDs once. Batch output stays unique and
+matches requested IDs. Profile URLs combine the profile timeline with author
+search. Search URLs extract the query. List URLs use the dedicated list path
+instead of generic `list:` search. `maxItems` caps results across all pasted
+URLs.
 
 ### 2. Bulk handles
 
@@ -299,17 +304,17 @@ Supported explicit modes: `tweet`, `tweets`, `search`, `profileTweets`,
 `replies`, `quotes`, `thread`, `retweeters`, and `favoriters`.
 
 `profileTweets` follows the profile Posts tab. It returns target-authored
-non-reply posts. Reply rows and conversation context from other authors are
-excluded before billing.
+non-reply posts. The Actor excludes reply rows and conversation context from
+other authors before billing.
 
 `profileReplies` follows X's With Replies tab. It returns target-authored
-profile posts and replies. Conversation context from other authors is excluded.
-Use `filter:replies` or `to:` search when you need reply-only results.
+profile posts and replies. The Actor excludes conversation context from other
+authors. Use `filter:replies` or `to:` search when you need reply-only results.
 
 Search & paginated Tweet modes support `time.since`, `time.until`, Unix
 timestamps, & `lang`. These include profile Posts, With Replies, Media, Likes,
 Lists, replies, quotes, & threads. Matching flat date operators work too. The
-Actor verifies each row before billing. The lower date bound is inclusive; the
+Actor verifies each row before billing. The lower date bound is inclusive. The
 upper bound is exclusive. Date filters exclude rows without usable dates.
 Language filters exclude missing or mismatched languages. Filtered rows never
 consume your requested result limit. Unordered results keep paging when older
@@ -351,6 +356,9 @@ Keep the default nested JSON fields, or add spreadsheet-friendly columns:
 Flat output keeps `author` and `media` unchanged and also adds top-level fields
 such as `authorUsername`, `authorName`, `authorFollowers`, `tweetUrl`,
 `twitterUrl`, `mediaUrls`, `imageUrls`, and `videoUrls`.
+
+Every flat tweet row carries `media`. A tweet without media has an empty list,
+so each row has the same keys in a spreadsheet or a typed pipeline.
 
 ### 7. Select field naming
 
@@ -639,8 +647,8 @@ run. Apify account and platform limits still apply.
 **How fast is it?** Runtime depends on route, result count, and upstream
 availability.
 
-**What search operators are supported?** X advanced search supports authors,
-recipients, mentions, dates, engagement, media, and location.
+**Which search operators work?** X advanced search supports authors, recipients,
+mentions, dates, engagement, media, and location.
 
 **Can I use the Apify API to run this?** Yes. See the
 [API tab](https://apify.com/xquik/x-tweet-scraper/api) for Python, JavaScript,

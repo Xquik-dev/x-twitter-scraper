@@ -16,32 +16,31 @@
 </td></tr></table>
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data, and X (Twitter) Brand Monitoring with AI Analysis tracks your brand
-mentions with relevance, sentiment & customer-experience answers. Every other
-Apify Actor charges before filtering or deduplicating. Xquik charges only for
-delivered, unique, filter-matching results.
-
-AI costs are included in the per-tweet price. You pay no AI provider, buy no tokens & bring no key.
+most complete X data. X (Twitter) Brand Monitoring tracks your brand mentions
+with relevance, sentiment & customer-experience answers. Every other Apify Actor
+charges before filtering or deduplicating. Xquik charges only for delivered,
+unique, filter-matching results. AI costs are included in the per-tweet price.
+You pay no AI provider, buy no tokens & bring no key.
 
 Monitor brand mentions on X (Twitter) & track sentiment changes between runs.
-**X (Twitter) Brand Monitoring with AI Analysis** collects every matching tweet,
-adds AI-powered relevance, sentiment & customer-experience answers to each post,
-& compares the answers with an earlier dataset so you see what changed. Original
-tweet data stays in every row, so exports, reviews & follow-up analysis need no
-second scrape.
+**X (Twitter) Brand Monitoring with AI Analysis** collects every matching tweet.
+It answers relevance, sentiment & customer-experience questions for each post
+with AI. It compares those answers with an earlier dataset, so you see what
+changed. Every row keeps the original tweet data, so exports, reviews &
+follow-up analysis need no second scrape.
 
-Use it to watch a brand, a product line or a campaign for complaints, praise &
-purchase questions; to brief support & marketing teams from real posts rather
-than aggregate scores; & to keep a run-over-run history of how customers talk
-about you.
+Watch a brand, a product line or a campaign for complaints, praise & purchase
+questions. Brief support & marketing teams from real posts. Keep a history of
+how customers talk about you from run to run.
 
-- **Every field of the source tweet** stays beside the answers: text, author,
-  counts, media, links, quoted & replied posts.
-- **Typed answers**: a relevance probability, a sentiment category with
-  probabilities & a customer-experience category.
-- **Change tracking** between runs by decision, not by probability noise.
-- **Filter-first billing**: only unique, filter-matching tweets with successful
-  analysis are charged.
+- **Every field of the source tweet.** Text, author, counts, media, links,
+  quoted & replied posts stay beside the answers.
+- **Typed answers.** Each row has a relevance probability, a sentiment category
+  with probabilities & a customer-experience category.
+- **Change tracking.** Runs compare by decision, so small probability shifts do
+  not count as changes.
+- **Filter-first billing.** You pay only for unique, filter-matching tweets with
+  a successful analysis.
 
 ## How to monitor a brand on X
 
@@ -97,32 +96,33 @@ the author's expressed attitude toward the target.
 | `not_comparable`       | Required metadata, IDs or matching settings are missing |
 | `analysis_unavailable` | This tweet has no successful analysis                   |
 
-Answers compare by decision: a `choice` answer by its category, a `score` answer
-by its nearest level & a `probability` answer by its yes-or-no decision at 0.5.
-A decision only counts as changed when the answer clearly moves: the earlier
-category falls below 0.4 probability, a score moves at least 0.6 levels, or a
-yes/no probability lands at least 0.1 from the threshold. Near-tie jitter
-between runs stays unchanged. Shifts that keep the same decision stay
-`unchanged`, so model variation between runs does not flood your report.
-`changes` lists each changed question with its `previous` & `current` decision.
-Changes may reflect model variation, new context or edited source data; they do
-not prove changed facts, & an absent tweet does not prove deletion.
+Answers compare by decision. A `choice` answer compares by its category. A
+`score` answer compares by its nearest level. A `probability` answer compares by
+its yes-or-no decision at 0.5. A decision counts as changed in three cases. The
+earlier category falls below 0.4 probability. A score moves at least 0.6 levels.
+A yes/no probability lands at least 0.1 from the threshold. Near ties between
+runs stay `unchanged`, & so do shifts that keep the same decision. Model
+variation between runs does not fill your report. `changes` lists each changed
+question with its `previous` & `current` decision. Changes may come from model
+variation, new context or edited source data. They do not prove changed facts, &
+an absent tweet does not prove deletion.
 
 The baseline limit defaults to 100,000 rows. Duplicate tweet IDs, loading
-failures & changing dataset sizes stop comparison before collection; they never
+failures & changing dataset sizes stop comparison before collection. They never
 become an empty baseline.
 
 ## Pricing
 
-AI costs are included in the per-tweet price. You pay no AI provider, buy no tokens & bring no key.
+AI costs are included in the per-tweet price. You pay no AI provider, buy no
+tokens & bring no key.
 
-From $0.0003 per successfully analyzed tweet, with no start fee. Collection is
-included, & the documented analysis allowance is 8 questions, 8,000 bytes per
+From $0.0003 per successfully analyzed tweet, with no start fee. The price
+includes collection. The analysis allowance is 8 questions, 8,000 bytes per
 question definition & 12,000 bytes of context per tweet. Extraction filters &
-deduplication run before analysis, so filtered-out & duplicate rows are never
-analyzed or charged. Failed & skipped analyses & diagnostic rows have no result
-charge. Apify platform usage (compute, storage & transfer) is billed separately
-by Apify at your plan's rates & appears on the Pricing tab.
+deduplication run before analysis, so you never pay for filtered-out or
+duplicate rows. Failed analyses, skipped analyses & diagnostic rows have no
+result charge. Apify bills platform usage for compute, storage & transfer
+separately at your plan's rates. The Pricing tab shows it.
 
 ## Input & output examples
 
@@ -165,19 +165,24 @@ rows, charged analyses & pending charges.
 
 Each run writes an `analysis-summary` record to its key-value store & repeats it
 under `results.analysisSummary` in the run report. It counts analyzed, failed &
-skipped rows, sums engagement, and summarizes every question. `targets` reports
-mentions, share of voice & engagement per brand or alias, and each entry's `top`
-lists its three most engaged mentions per answer category, so the strongest
-negative & positive mentions of every brand are ready for alerts. The
-`sentiment` block lists the three most engaged positive & negative mentions
-under `top`, ready for alerts, and `relevance` counts mentions that are about
-the brand. Numbers are rounded to 4 decimals; empty runs report zero counts &
-`null` means. Each `targets` entry also carries `choices`, the answer split
-among tweets that mention that brand, and `monitor.changedRows` lists tweets
-whose decisions moved since the baseline, ready for a webhook or alert. Every
-row also lists `sourceDomains`, the hostnames it links to, and the summary's
-`monitor` block counts comparison statuses & lists up to 50 changed rows when
-`monitor.baselineDatasetId` is set.
+skipped rows, sums engagement, and summarizes every question.
+
+- `targets` reports mentions, share of voice & engagement per brand or alias.
+- Each `targets` entry has `top`, its three most engaged mentions per answer
+  category. Use it to alert on the strongest negative & positive mentions.
+- Each `targets` entry has `choices`, the answer split among tweets that mention
+  that brand.
+- The `sentiment` block lists the three most engaged positive & negative
+  mentions under `top`.
+- `relevance` counts the mentions that are about the brand.
+- `monitor.changedRows` lists tweets whose decisions moved since the baseline.
+  Send them to a webhook or an alert.
+- With `monitor.baselineDatasetId` set, the `monitor` block counts comparison
+  statuses & lists up to 50 changed rows.
+- Every row lists `sourceDomains`, the hostnames it links to.
+
+The summary rounds numbers to 4 decimals. An empty run reports zero counts &
+`null` means.
 
 Every result row also carries `answers`, a flat map from question ID to the
 chosen category, score, or probability. The `Flat answers` dataset view & CSV or
@@ -269,13 +274,14 @@ diagnostics. Pick the one that matches the data you need.
 
 ### Can I use my own questions?
 
-Yes. Custom `analysis.questions` replace the defaults: 1-8 `choice`, `score` or
-`probability` questions. Choice questions accept 2-255 categories; scores use at
-least 2 ordered levels. Keep the same questions across runs you want to compare.
+Yes. Custom `analysis.questions` replace the defaults. Send 1-8 `choice`,
+`score` or `probability` questions. Choice questions accept 2-255 categories.
+Scores use at least 2 ordered levels. Keep the same questions across runs you
+want to compare.
 
 ### Why did a row come back with `analysis.status` of `failed` or `skipped`?
 
-The tweet was collected & delivered, but AI-powered analysis did not complete.
+The Actor collected & delivered the tweet, but the AI analysis did not complete.
 `analysis.reason` names the cause, such as `context_limit` when the tweet & its
 context exceed `maxContextBytes`, or `service_unavailable` after retries. These
 rows carry no result charge. Raise `maxContextBytes` (up to 12,000) or rerun the
@@ -283,22 +289,22 @@ affected IDs.
 
 ### Does the analysis verify facts?
 
-No. Answers describe what the post expresses & how it is framed. Probabilities
-express model confidence, not truth. Review important classifications against
-the original tweet, which every row keeps.
+No. Answers describe what the post expresses & how the post frames it.
+Probabilities express model confidence, not truth. Review important
+classifications against the original tweet, which every row keeps.
 
 ### Which languages work?
 
-Extraction supports every language X serves. Analysis is validated on English
-customer scenarios first; other supported languages return answers with the same
-structure, & uncertainty stays explicit through `unclear` categories &
-probabilities.
+Extraction supports every language X serves. We validate analysis on English
+customer scenarios first. Other supported languages return answers with the same
+structure. `unclear` categories & probabilities show uncertainty in every
+language.
 
 ### How do I limit cost?
 
-Filters, deduplication & `maxItems` run before analysis, so only unique,
-filter-matching tweets are analyzed & charged. Use precise search operators,
-date bounds & engagement floors, & start with a small `maxItems` to check answer
+Filters, deduplication & `maxItems` run before analysis, so the Actor analyzes &
+charges only unique, filter-matching tweets. Use precise search operators, date
+bounds & engagement floors, & start with a small `maxItems` to check answer
 quality before a large run.
 
 ### Where do I get help?

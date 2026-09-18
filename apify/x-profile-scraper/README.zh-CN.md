@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何将 Xquik 抓取工具与 Claude Code、Codex、Cursor 等一起使用，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是速度最快、成本最低且数据最完整的 X（Twitter）抓取工具服务，X Profile Scraper
+Xquik 是速度最快、成本最低且数据最完整的 X（Twitter）抓取工具服务。X Profile Scraper
 可为任意用户名收集主页、帖子、回复、媒体与点赞。其他 Apify Actor 都在筛选或去重之前收费。
 Xquik 只对已交付、唯一且符合筛选条件的结果收费。
 
@@ -29,7 +29,7 @@ Xquik 只对已交付、唯一且符合筛选条件的结果收费。
 - 添加媒体、点赞、关注者、关注对象或已验证关注者。
 - 按日期、媒体、认证状态、转推情况与指标筛选可选帖子。
 - 按受众、活跃度、账号年龄与公开元数据筛选可选主页。
-- 计费前会去除重复行。
+- Actor 会在计费前去除重复行。
 
 ## 输入参数
 

@@ -16,20 +16,19 @@
 </td></tr></table>
 
 Xquik è il servizio di scraping per X (Twitter) più veloce ed economico al
-mondo, con i dati X più completi, e X (Twitter) News Monitor ordina i post di
-news per formato, attribuzione della fonte e rilevanza. Ogni altro Actor
-Apify addebita i costi prima di filtrare o deduplicare. Xquik addebita solo i
-risultati consegnati, unici e che corrispondono ai filtri.
-
-I costi dell'IA sono inclusi nel prezzo per tweet. Non paghi alcun provider di IA, non compri token & non porti alcuna chiave.
+mondo, con i dati X più completi. X (Twitter) News Monitor ordina i post di news
+per formato, attribuzione della fonte e rilevanza. Ogni altro Actor Apify
+addebita i costi prima di filtrare o deduplicare. Xquik addebita solo i
+risultati consegnati, unici e che corrispondono ai filtri. I costi dell'IA sono
+inclusi nel prezzo per tweet. Non paghi alcun provider di IA, non compri token &
+non porti alcuna chiave.
 
 Ordina i post di news su X (Twitter) in base a cosa sono e conserva i dati
-originali del tweet. **X (Twitter) News Monitor with AI Analysis** raccoglie
-i post sui tuoi argomenti, poi aggiunge a ogni post una risposta basata su AI
-su formato, attribuzione della fonte e rilevanza. Separa la cronaca dal
-commento e dalla speculazione, verifica se una fonte è nominata o collegata,
-e mantieni solo i post che riguardano le organizzazioni, le persone o gli
-argomenti che segui.
+originali del tweet. **X (Twitter) News Monitor with AI Analysis** raccoglie i
+post sui tuoi argomenti, poi aggiunge a ogni post una risposta basata su AI su
+formato, attribuzione della fonte e rilevanza. Separa la cronaca dal commento &
+dalla speculazione. Verifica se un post nomina o collega una fonte. Mantieni
+solo i post sulle organizzazioni, le persone o gli argomenti che segui.
 
 - **Il formato** distingue cronaca, commento, speculazione, promozione e
   satira.
@@ -70,21 +69,20 @@ argomenti che segui.
 | Rilevanza    | Probabilità che l'evento riportato riguardi i tuoi target                  |
 
 La classificazione non verifica i fatti. Una fonte nominata non è una fonte
-credibile; l'attribuzione descrive ciò che il post presenta.
+credibile. L'attribuzione descrive ciò che il post presenta.
 
 ## Prezzi
 
 I costi dell'IA sono inclusi nel prezzo per tweet. Non paghi alcun provider di IA, non compri token & non porti alcuna chiave.
 
-A partire da $0.0003 per tweet analizzato con successo, senza costo di
-avvio. La raccolta è inclusa, e la soglia documentata per l'analisi è di 8
-domande, 8.000 byte per definizione di domanda e 12.000 byte di contesto per
-tweet. I filtri di estrazione e la deduplicazione vengono eseguiti prima
-dell'analisi, quindi le righe filtrate e i duplicati non vengono mai
-analizzati né addebitati. Le analisi fallite o saltate e le righe
-diagnostiche non comportano addebiti sul risultato. L'utilizzo della
-piattaforma Apify viene fatturato separatamente da Apify e appare nella
-scheda Pricing.
+A partire da $0.0003 per tweet analizzato con successo, senza costo di avvio. Il
+prezzo include la raccolta. La soglia per l'analisi è di 8 domande, 8.000 byte
+per definizione di domanda e 12.000 byte di contesto per tweet. I filtri di
+estrazione e la deduplicazione vengono eseguiti prima dell'analisi, quindi le
+righe filtrate e i duplicati non vengono mai analizzati né addebitati. Le
+analisi fallite o saltate e le righe diagnostiche non comportano addebiti sul
+risultato. Apify fattura separatamente l'utilizzo della piattaforma. La scheda
+Pricing lo mostra.
 
 ## Esempi di input e output
 
@@ -116,36 +114,39 @@ L'input sopra è pronto all'uso. Le righe di output hanno questo aspetto
 ```
 
 Ogni risultato contiene `tweet` e `analysis`. Le risposte includono tipi,
-versioni delle domande e le probabilità disponibili. Quando un post collega
-un X Article, l'analisi recupera il titolo, l'anteprima e i blocchi di testo
-di quell'articolo come contesto, e `analysis.contextAvailability.article`
-riporta `text_blocks`, `summary` (solo titolo e anteprima) o
-`not_supplied`. Un'analisi fallita o saltata conserva il tweet raccolto con
-un elenco di risposte vuoto e un `reason`. Le diagnostiche gratuite nel
-key-value store spiegano input non validi, risultati mancanti e raccolte
-interrotte, e il report dell'esecuzione separa le righe raccolte, le analisi
-addebitate e gli addebiti in sospeso.
+versioni delle domande e le probabilità disponibili. Quando un post collega un X
+Article, l'analisi recupera il titolo, l'anteprima e i blocchi di testo di
+quell'articolo come contesto. `analysis.contextAvailability.article` riporta
+`text_blocks`, `summary` o `not_supplied`. `summary` indica solo titolo &
+anteprima. Un'analisi fallita o saltata conserva il tweet raccolto con un elenco
+di risposte vuoto e un `reason`. Le diagnostiche gratuite nel key-value store
+spiegano input non validi, risultati mancanti e raccolte interrotte, e il report
+dell'esecuzione separa le righe raccolte, le analisi addebitate e gli addebiti
+in sospeso.
 
 ## Riepilogo dell'esecuzione e risposte in formato piatto
 
-Ogni esecuzione scrive un record `analysis-summary` nel proprio key-value
-store e lo ripete sotto `results.analysisSummary` nel report
-dell'esecuzione. Conta le righe analizzate, fallite e saltate, somma
-l'engagement e riepiloga ogni domanda. La ripartizione `format` separa la
-cronaca da commento, speculazione, promozione e satira; `attribution` conta
-le fonti nominate, collegate, di prima mano e assenti; `relevance` conta i
-post relativi a ciascun target, con `targets` che indica le menzioni per
-target e il campo `top` di ogni target che elenca i suoi post più
-coinvolgenti per categoria di risposta. I numeri sono arrotondati a 4
-decimali; le esecuzioni vuote riportano conteggi zero e medie `null`.
-`sourceDomains` conta i domini collegati nell'intera esecuzione, ogni voce
-di `targets` porta `choices` con la ripartizione di formato e attribuzione
-per i post relativi a quel target, e `monitor.changedRows` elenca i post le
-cui decisioni sono cambiate rispetto alla baseline. Ogni riga elenca anche
-`sourceDomains`, gli host a cui rimanda, i `cashtags` come `$NVDA` trovati
-nel suo testo, e il blocco `monitor` del riepilogo conta gli stati di
-confronto ed elenca fino a 50 righe cambiate quando è impostato
-`monitor.baselineDatasetId`.
+Ogni esecuzione scrive un record `analysis-summary` nel proprio key-value store
+e lo ripete sotto `results.analysisSummary` nel report dell'esecuzione. Conta le
+righe analizzate, fallite e saltate, somma l'engagement e riepiloga ogni
+domanda.
+
+- La ripartizione `format` separa la cronaca da commento, speculazione,
+  promozione & satira.
+- `attribution` conta le fonti nominate, collegate, di prima mano & assenti.
+- `relevance` conta i post relativi a ciascun target.
+- `targets` indica le menzioni per target. Il campo `top` di ogni target elenca
+  i suoi post più coinvolgenti per categoria di risposta.
+- Ogni voce di `targets` ha `choices`, la ripartizione di formato & attribuzione
+  per i post relativi a quel target.
+- `sourceDomains` conta i domini collegati nell'intera esecuzione.
+- `monitor.changedRows` elenca i post le cui decisioni sono cambiate rispetto
+  alla baseline.
+
+Ogni riga elenca `sourceDomains`, gli host a cui rimanda, & i `cashtags` come
+`$NVDA` trovati nel suo testo. Con `monitor.baselineDatasetId` impostato, il
+blocco `monitor` del riepilogo conta gli stati di confronto & elenca fino a 50
+righe cambiate.
 
 Ogni riga di risultato porta anche `answers`, una mappa piatta dall'ID della
 domanda alla categoria, al punteggio o alla probabilità scelti. La vista
@@ -155,20 +156,19 @@ JSON. Le righe fallite e saltate portano una mappa vuota.
 
 ## Confronto con un'esecuzione precedente
 
-Passa `monitor.baselineDatasetId`, l'ID del dataset di un'esecuzione
-precedente completata con le stesse impostazioni di analisi, e ogni riga
-acquisisce un oggetto `monitor`: `first_run` senza una baseline,
-`new_to_baseline` per i tweet che l'esecuzione precedente non aveva,
-`unchanged` o `changed` per i tweet che aveva, con `changes` che elenca ogni
-decisione su formato, attribuzione o rilevanza che è passata da `previous` a
-`current`. Le decisioni si confrontano per categoria, livello di punteggio
-arrotondato, o sì/no a 0,5, e una decisione conta come cambiata solo quando
-la risposta si sposta chiaramente: la categoria precedente scende sotto lo
-0,4 di probabilità, un punteggio si sposta di almeno 0,6 livelli, oppure una
-probabilità sì/no si colloca ad almeno 0,1 dalla soglia. Le oscillazioni
-minime da quasi parità tra esecuzioni restano invariate. Le baseline che
-superano `maxBaselineRows` (default 100.000) o provenienti da impostazioni
-diverse interrompono l'esecuzione prima della raccolta con una riga
+Passa `monitor.baselineDatasetId`, l'ID del dataset di un'esecuzione precedente
+completata con le stesse impostazioni di analisi. Ogni riga acquisisce allora un
+oggetto `monitor`. Il suo stato è `first_run` senza una baseline,
+`new_to_baseline` per i tweet che l'esecuzione precedente non aveva, &
+`unchanged` o `changed` per i tweet che aveva. `changes` elenca ogni decisione
+su formato, attribuzione o rilevanza che è passata da `previous` a `current`. Le
+decisioni si confrontano per categoria, livello di punteggio arrotondato, o
+sì/no a 0,5. Una decisione conta come cambiata in tre casi. La categoria
+precedente scende sotto lo 0,4 di probabilità. Un punteggio si sposta di almeno
+0,6 livelli. Una probabilità sì/no si colloca ad almeno 0,1 dalla soglia. Le
+oscillazioni minime da quasi parità tra esecuzioni restano invariate. Le
+baseline che superano `maxBaselineRows` (default 100.000) o provenienti da
+impostazioni diverse interrompono l'esecuzione prima della raccolta con una riga
 diagnostica.
 
 ## Esempi di task
@@ -270,34 +270,33 @@ almeno 2 livelli ordinati.
 
 ### Perché una riga è tornata con `analysis.status` su `failed` o `skipped`?
 
-Il tweet è stato raccolto e consegnato, ma l'analisi basata su AI non si è
-completata. `analysis.reason` indica la causa, ad esempio `context_limit`
-quando il tweet e il suo contesto superano `maxContextBytes`, oppure
-`service_unavailable` dopo diversi tentativi. Queste righe non comportano
-addebiti sul risultato. Aumenta `maxContextBytes` (fino a 12.000) oppure
-riesegui gli ID interessati.
+L'Actor ha raccolto & consegnato il tweet, ma l'analisi AI non si è completata.
+`analysis.reason` indica la causa, ad esempio `context_limit` quando il tweet e
+il suo contesto superano `maxContextBytes`, oppure `service_unavailable` dopo
+diversi tentativi. Queste righe non comportano addebiti sul risultato. Aumenta
+`maxContextBytes` (fino a 12.000) oppure riesegui gli ID interessati.
 
 ### L'analisi verifica i fatti?
 
-No. Le risposte descrivono cosa esprime il post e come è formulato. Le
+No. Le risposte descrivono cosa esprime il post & come il post lo formula. Le
 probabilità esprimono la fiducia del modello, non la verità. Rivedi le
-classificazioni importanti confrontandole con il tweet originale, che ogni
-riga conserva.
+classificazioni importanti confrontandole con il tweet originale, che ogni riga
+conserva.
 
 ### Quali lingue funzionano?
 
-L'estrazione supporta ogni lingua servita da X. L'analisi è validata prima
-sugli scenari clienti in inglese; le altre lingue supportate restituiscono
-risposte con la stessa struttura, e l'incertezza resta esplicita tramite le
-categorie e le probabilità `unclear`.
+L'estrazione supporta ogni lingua servita da X. Validiamo l'analisi prima sugli
+scenari clienti in inglese. Le altre lingue supportate restituiscono risposte
+con la stessa struttura. Le categorie `unclear` & le probabilità mostrano
+l'incertezza in ogni lingua.
 
 ### Come limito i costi?
 
-Filtri, deduplicazione e `maxItems` vengono eseguiti prima dell'analisi,
-quindi vengono analizzati e addebitati solo i tweet unici e corrispondenti
-ai filtri. Usa operatori di ricerca precisi, limiti di data e soglie minime
-di engagement, e inizia con un `maxItems` piccolo per verificare la qualità
-delle risposte prima di un'esecuzione ampia.
+Filtri, deduplicazione e `maxItems` vengono eseguiti prima dell'analisi, quindi
+l'Actor analizza & addebita solo i tweet unici e corrispondenti ai filtri. Usa
+operatori di ricerca precisi, limiti di data e soglie minime di engagement, e
+inizia con un `maxItems` piccolo per verificare la qualità delle risposte prima
+di un'esecuzione ampia.
 
 ### Dove trovo assistenza?
 

@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data, and X Community Scraper collects Community info, posts,
+most complete X data. X Community Scraper collects Community info, posts,
 searches, members & moderators. Every other Apify Actor charges before filtering
 or deduplicating. Xquik charges only for delivered, unique, filter-matching
 results.
@@ -35,7 +35,7 @@ key or login required.
 - Multiple Communities and resources per run.
 - Per-resource and global caps.
 - Concurrent reads with saved cursor recovery.
-- Duplicate rows are removed before billing.
+- The Actor removes duplicate rows before billing.
 
 ## Input
 
@@ -53,7 +53,7 @@ For keyword search, include `"search"` in `resources` and provide `query`.
 
 Rows use `community`, `communityTweet`, `communityMember`, or
 `communityModerator` as `resultType`. Every row includes `sourceTarget` for the
-input Community. Source fields are preserved without invented values.
+input Community. The Actor preserves source fields & invents no values.
 
 ## Pricing
 
@@ -73,8 +73,8 @@ Independent Community resources run concurrently. Pagination remains ordered
 inside each cursor lineage. Accepted rows, billing state, cursors, and output
 fingerprints survive Apify migration. The Actor has no self-imposed timeout.
 
-Only public Communities exposed by X can be returned. Available fields vary by
-Community.
+The Actor returns only public Communities that X exposes. Available fields vary
+by Community.
 
 ## Incomplete extraction
 
