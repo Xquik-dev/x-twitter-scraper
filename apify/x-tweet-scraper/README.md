@@ -193,15 +193,20 @@ results. When all failures concern unavailable targets, diagnostics set
 `retryable: false`. Check target URLs or usernames & choose available public
 accounts. Other failures retain retry guidance for unfinished targets.
 
+The diagnostic names those targets in `unavailableTargets`. Each entry has the
+`target` as you entered it & a `reason`, `not_found` or `protected`. The list
+holds up to 100 entries. Remove them from the input to get a complete run.
+
 `completionReason: "pagination_safety_limit"` is not a read failure. It means
 pagination retained valid rows, then reached its bounded safety limit. Latest
 searches continue through empty pages while valid recovery cursors remain. Top
 searches & account-window recovery may checkpoint after 10 consecutive empty
-pages. Searches also checkpoint when the service reports stalled pagination.
-Stalls stop automatic retries without restarting the search. These runs report
-incomplete extraction & retain resumable cursors. A terminal page completes
-pagination even after consecutive empty pages. `failedSubtargets` stays `0`. You
-pay only for accepted dataset rows.
+pages. When the service reports stalled pagination in the middle of a run, the
+run waits 31 seconds & asks the same page once more. It then continues with new
+posts or ends as complete. A second stall checkpoints the search. A checkpointed
+run reports incomplete extraction & retains resumable cursors. A terminal page
+completes pagination even after consecutive empty pages. `failedSubtargets`
+stays `0`. You pay only for accepted dataset rows.
 
 The default Apify timeout is `0`, so runs have no time limit. The Actor
 continues until it reaches the cap or runs out of eligible data. A caller can
@@ -304,9 +309,27 @@ Supported explicit modes: `tweet`, `tweets`, `search`, `profileTweets`,
 `profileReplies`, `profileMedia`, `profileLikes`, `listTweets`, `article`,
 `replies`, `quotes`, `thread`, `retweeters`, and `favoriters`.
 
-`profileTweets` follows the profile Posts tab. It returns target-authored
-non-reply posts. The Actor excludes reply rows and conversation context from
-other authors before billing.
+`profileTweets` follows the profile Posts tab on X. It returns the account's
+posts, its reposts & its replies to its own posts, in date order. Replies to
+other accounts & conversation context from other authors are left out before
+billing.
+
+For original posts only, exclude the types you do not want:
+
+```json
+{
+  "mode": "profileTweets",
+  "twitterHandles": ["apify"],
+  "tweetTypes": { "excludeReplies": true, "excludeRetweets": true },
+  "maxItems": 100
+}
+```
+
+`tweetTypes.excludeReplies`, `excludeRetweets` & `excludeQuotes` work on every
+source. A search sends them to X as `-filter:replies`, `-filter:nativeretweets`
+& `-filter:quote`. On a profile or a List the Actor drops those rows itself.
+Excluded rows never reach the dataset, so you never pay for them, & they never
+count toward `maxItems`.
 
 `profileReplies` follows X's With Replies tab. It returns target-authored
 profile posts and replies. The Actor excludes conversation context from other
@@ -319,7 +342,13 @@ Actor verifies each row before billing. The lower date bound is inclusive. The
 upper bound is exclusive. Date filters exclude rows without usable dates.
 Language filters exclude missing or mismatched languages. Filtered rows never
 consume your requested result limit. Unordered results keep paging when older
-Tweets precede matching results. Tweet filters do not apply to user lists or
+Tweets precede matching results. A List run with a date window jumps straight to
+the window, so a day 30 days back takes about as long as yesterday. For a window
+deep in a List the Tweets come from X's List search, which leaves out a few
+replies that the List timeline shows. A List run also ends once 3 pages in a row
+hold only Tweets older than your lower date bound. Since the upper bound is
+exclusive, the same date for `since` & `until` is an empty window. Set `until`
+to the next day to get 1 full day. Tweet filters do not apply to user lists or
 direct Tweet/article lookups.
 
 `mode: "replies"` is stricter. It combines direct timelines, supported ranking
@@ -414,9 +443,42 @@ a diagnostic.
 When you set `lang`, the Actor verifies each returned tweet's language. It skips
 mismatches and continues paging for matching tweets.
 
-You can also pass competitor-friendly aliases such as `query`, `searchQuery`,
-`urls`, `profileUrls`, `usernames`, `maxResults`, `max_results`, `resultsLimit`,
-`numberOfTweets`, `maxPosts`, and `max_posts`.
+### Migrate from another tweet Actor
+
+Paste the input you already use. X Tweet Scraper reads the field names that
+other tweet Actors use & maps them to its own fields. Canonical names stay the
+documented default. An alias never drops a field & never changes what you pay.
+The input form lists canonical fields only, so it stays short. Aliases work in
+JSON, API, SDK, automation & saved task inputs.
+
+| Field you already use                                                                                              | X Tweet Scraper reads it as                                              |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                        | `startUrls`                                                              |
+| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, or `tweetId` as one string                           | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`                                                                                      | `twitterHandles`                                                         |
+| `twitterContent`, `query`, `searchQuery`                                                                           | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts` | `maxItems`                                                               |
+| `sort`                                                                                                             | `queryType`                                                              |
+| `tweetLanguage`                                                                                                    | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                | `from`, `to`, `@`                                                        |
+| `start`, `end`                                                                                                     | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                            | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                           | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                    | `near`, `within`                                                         |
+
+How a pasted input behaves:
+
+- Every source runs. An input with start URLs, handles, search terms, list IDs &
+  tweet IDs runs them all, & `maxItems` applies across the run.
+- A search query next to `searchTerms` runs as 1 more term.
+- When you set an alias & its canonical field, the canonical value wins. The run
+  log names the alias that lost.
+- The run log names every field the Actor does not read, such as
+  `customMapFunction`. Nothing is dropped without notice.
+- A row cap must be a whole number of 1 or more. `maxResults: 0` stops the run
+  before anything is fetched or charged.
+- Search operator fields such as `from`, `min_faves`, `since_time` &
+  `filter:images` already use the names X uses, so they need no mapping.
 
 ### Console & API input UX
 
@@ -432,11 +494,10 @@ The Console exposes these controls:
 - Max Items and Max Items Per Target accept whole numbers of 1 or more.
   Engagement thresholds accept whole numbers of 0 or more.
 
-Use canonical fields in new integrations. Compatibility aliases remain available
-in JSON, API, SDK, automation, and task inputs. This includes `includeRaw` as an
-alias for `outputVariant: "raw"`. Historical `outputVariant` values such as
-`compact` and `full` remain accepted and use Legacy output. The visual form
-labels them as Legacy aliases.
+Use canonical fields in new integrations. The aliases in the migration table
+above stay available. `includeRaw` is an alias for `outputVariant: "raw"`.
+Historical `outputVariant` values such as `compact` and `full` remain accepted
+and use Legacy output. The visual form labels them as Legacy aliases.
 
 ### Top supported search operators
 
@@ -566,15 +627,15 @@ Every Xquik Actor shares the same extraction engine, filter-first billing &
 diagnostics. Pick the one that matches the data you need.
 
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Scrapes
-  profiles plus their posts, replies, media & likes from handles, IDs or URLs.
-  Use it when you start from accounts rather than searches. From $0.00015 per
-  row.
+  profiles plus their posts, replies, media & followers from handles, IDs or
+  URLs. Use it when you start from accounts rather than searches. From $0.00015
+  per row.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Scrapes replies,
   comments & whole conversations under posts with 25+ filters. Use it when you
   need the discussion beneath tweets. From $0.00015 per row.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Scrapes
-  replies, quotes, retweeters, likers & threads for post URLs or IDs in bulk.
-  Use it when you measure who engaged with posts. From $0.00015 per row.
+  replies, quotes, retweeters & threads for post URLs or IDs in bulk. Use it
+  when you measure who engaged with posts. From $0.00015 per row.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Scrapes
   followers, following, List members, subscribers & Community members as profile
   rows. Use it when you need audience or member lists. From $0.00015 per
@@ -619,6 +680,10 @@ diagnostics. Pick the one that matches the data you need.
   Answers your own category, score & yes/no questions for every tweet with AI.
   Use it when the preset analyses do not fit your labels. From $0.0003 per
   analyzed tweet.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
+  trait answers. Use it when you study why tweets spread or flop. From $0.0003
+  per analyzed tweet.
 
 ## Need more than scraping?
 
@@ -647,6 +712,14 @@ run. Apify account and platform limits still apply.
 
 **How fast is it?** Runtime depends on route, result count, and upstream
 availability.
+
+**Why does a Latest search return posts that X's Latest tab does not show?** X
+leaves some matching posts out of its open Latest list & returns them only to a
+search with time bounds. This Actor reads a Latest search as time slices side by
+side, so it gets both. In a test of 100 posts for 1 query, 83 matched the posts
+5 other scrapers returned & 17 were posts X returned only to the time-bounded
+searches. All 17 were inside the same time span. Every post is a real X search
+result for your query, & you pay for each post once.
 
 **Which search operators work?** X advanced search supports authors, recipients,
 mentions, dates, engagement, media, and location.

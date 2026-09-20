@@ -210,15 +210,22 @@ la diagnostica imposta `retryable: false`. Controlla gli URL o gli username
 target & scegli account pubblici disponibili. Gli altri errori conservano le
 indicazioni per il retry per i target non completati.
 
+La diagnostica nomina questi target in `unavailableTargets`. Ogni voce ha il
+`target` come lo hai inserito & un `reason`, `not_found` o `protected`. La
+lista contiene fino a 100 voci. Rimuovili dall'input per ottenere
+un'esecuzione completa.
+
 `completionReason: "pagination_safety_limit"` non è un errore di lettura.
 Significa che la paginazione ha conservato righe valide e poi ha raggiunto il
 suo limite di sicurezza. Le ricerche Latest continuano attraverso le pagine
 vuote finché restano cursori di recupero validi. Le ricerche Top e il recupero
 per finestra account possono eseguire un checkpoint dopo 10 pagine vuote
-consecutive. Le ricerche eseguono un checkpoint anche quando il servizio
-riporta una paginazione bloccata. I blocchi fermano i retry automatici senza
-riavviare la ricerca. Queste esecuzioni riportano un'estrazione incompleta e
-conservano cursori ripristinabili. Una pagina finale completa la paginazione
+consecutive. Quando il servizio riporta una paginazione bloccata a metà di
+un'esecuzione, l'esecuzione attende 31 secondi & richiede la stessa pagina 1
+altra volta. Poi continua con nuovi post o termina come completa. Un secondo
+blocco esegue un checkpoint della ricerca. Un'esecuzione con checkpoint
+riporta un'estrazione incompleta & conserva cursori ripristinabili. Una pagina
+finale completa la paginazione
 anche dopo pagine vuote consecutive. `failedSubtargets` resta `0`. Paghi
 solo le righe del dataset accettate.
 
@@ -333,9 +340,27 @@ Modalità esplicite supportate: `tweet`, `tweets`, `search`, `profileTweets`,
 `profileReplies`, `profileMedia`, `profileLikes`, `listTweets`, `article`,
 `replies`, `quotes`, `thread`, `retweeters` e `favoriters`.
 
-`profileTweets` segue la scheda Post del profilo. Restituisce post non di
-risposta scritti dal target. L'Actor esclude le righe di risposta e il
-contesto di conversazione di altri autori prima della fatturazione.
+`profileTweets` segue la scheda Post del profilo su X. Restituisce i post
+dell'account, i suoi repost & le sue risposte ai propri post, in ordine di
+data. Le risposte ad altri account & il contesto di conversazione di altri
+autori vengono esclusi prima della fatturazione.
+
+Per avere solo i post originali, escludi i tipi che non vuoi:
+
+```json
+{
+  "mode": "profileTweets",
+  "twitterHandles": ["apify"],
+  "tweetTypes": { "excludeReplies": true, "excludeRetweets": true },
+  "maxItems": 100
+}
+```
+
+`tweetTypes.excludeReplies`, `excludeRetweets` & `excludeQuotes` funzionano su
+ogni fonte. Una ricerca li invia a X come `-filter:replies`,
+`-filter:nativeretweets` & `-filter:quote`. Su un profilo o una lista l'Actor
+scarta quelle righe da solo. Le righe escluse non raggiungono mai il dataset,
+quindi non le paghi mai, & non contano mai per `maxItems`.
 
 `profileReplies` segue la scheda Con risposte di X. Restituisce post e
 risposte del profilo scritti dal target. L'Actor esclude il contesto di
@@ -351,8 +376,16 @@ superiore è escluso. I filtri di data escludono le righe senza date
 utilizzabili. I filtri di lingua escludono le lingue mancanti o non
 corrispondenti. Le righe filtrate non consumano mai il limite di risultati
 richiesto. I risultati non ordinati continuano la paginazione quando i tweet
-più vecchi precedono i risultati corrispondenti. I filtri sui tweet non si
-applicano alle liste utenti o alle ricerche dirette di tweet/articoli.
+più vecchi precedono i risultati corrispondenti. Un'esecuzione su una lista
+con una finestra di date salta direttamente alla finestra, quindi un giorno di
+30 giorni fa richiede circa lo stesso tempo di ieri. Per una finestra in
+profondità in una lista i tweet arrivano dalla ricerca nelle liste di X, che
+omette alcune risposte che la timeline della lista mostra. Un'esecuzione su
+una lista termina anche quando 3 pagine di fila contengono solo tweet più
+vecchi del tuo limite inferiore della data. Poiché il limite superiore è
+escluso, la stessa data per `since` & `until` è una finestra vuota. Imposta
+`until` al giorno successivo per ottenere 1 giorno intero. I filtri sui tweet
+non si applicano alle liste utenti o alle ricerche dirette di tweet/articoli.
 
 `mode: "replies"` è più rigorosa. Combina timeline dirette, modalità di
 ranking supportate, ogni modulo cursore in avanti, rami di contenuto nascosto
@@ -458,9 +491,47 @@ Quando imposti `lang`, l'Actor verifica la lingua di ogni tweet restituito.
 Salta le corrispondenze mancate e continua la paginazione per i tweet
 corrispondenti.
 
-Puoi anche passare alias compatibili con la concorrenza come `query`,
-`searchQuery`, `urls`, `profileUrls`, `usernames`, `maxResults`,
-`max_results`, `resultsLimit`, `numberOfTweets`, `maxPosts` e `max_posts`.
+### Migra da un altro Actor di tweet
+
+Incolla l'input che usi già. X Tweet Scraper legge i nomi dei campi che usano
+gli altri Actor di tweet & li mappa sui propri campi. I nomi canonici restano
+il default documentato. Un alias non scarta mai un campo & non cambia mai
+quanto paghi. Il form di input elenca solo i campi canonici, quindi resta
+breve. Gli alias funzionano negli input JSON, API, SDK, di automazione & dei
+task salvati.
+
+| Campo che usi già                                                                                                  | X Tweet Scraper lo legge come                                            |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                        | `startUrls`                                                              |
+| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, o `tweetId` come 1 stringa                           | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`                                                                                      | `twitterHandles`                                                         |
+| `twitterContent`, `query`, `searchQuery`                                                                           | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts` | `maxItems`                                                               |
+| `sort`                                                                                                             | `queryType`                                                              |
+| `tweetLanguage`                                                                                                    | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                | `from`, `to`, `@`                                                        |
+| `start`, `end`                                                                                                     | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                            | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                           | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                    | `near`, `within`                                                         |
+
+Come si comporta un input incollato:
+
+- Ogni fonte viene eseguita. Un input con URL di avvio, handle, termini di
+  ricerca, ID di lista & ID di tweet li esegue tutti, & `maxItems` si applica
+  all'intera esecuzione.
+- Una query di ricerca accanto a `searchTerms` viene eseguita come 1 termine
+  in più.
+- Quando imposti un alias & il suo campo canonico, vince il valore canonico.
+  Il log dell'esecuzione nomina l'alias che ha perso.
+- Il log dell'esecuzione nomina ogni campo che l'Actor non legge, come
+  `customMapFunction`. Niente viene scartato senza avviso.
+- Un limite di righe deve essere un numero intero pari a 1 o più.
+  `maxResults: 0` ferma l'esecuzione prima di recuperare o addebitare
+  qualcosa.
+- I campi degli operatori di ricerca come `from`, `min_faves`, `since_time` &
+  `filter:images` usano già i nomi che usa X, quindi non serve alcuna
+  mappatura.
 
 ### UX di input Console e API
 
@@ -478,9 +549,9 @@ La Console espone questi controlli:
   1. Le soglie di coinvolgimento accettano numeri interi pari o superiori a
   0.
 
-Usa i campi canonici nelle nuove integrazioni. Gli alias di compatibilità
-restano disponibili negli input JSON, API, SDK, di automazione e dei task.
-Questo include `includeRaw` come alias di `outputVariant: "raw"`. I valori
+Usa i campi canonici nelle nuove integrazioni. Gli alias della tabella di
+migrazione qui sopra restano disponibili. `includeRaw` è un alias di
+`outputVariant: "raw"`. I valori
 storici di `outputVariant` come `compact` e `full` restano accettati e usano
 l'output Legacy. Il form visivo li etichetta come alias Legacy.
 
@@ -620,16 +691,15 @@ basata sui filtri e la diagnostica. Scegli quello che corrisponde ai dati di
 cui hai bisogno.
 
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): estrae
-  profili con i relativi post, risposte, media & Mi piace da handle, ID o URL.
+  profili con i relativi post, risposte, media & follower da handle, ID o URL.
   Usalo quando parti dagli account invece che dalle ricerche. Da $0.00015 per
   riga.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): estrae
   risposte, commenti & intere conversazioni sotto i post con oltre 25 filtri.
   Usalo quando ti serve la discussione sotto i tweet. Da $0.00015 per riga.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): estrae
-  risposte, citazioni, retweeter, utenti che mettono Mi piace & thread per URL
-  o ID di post in blocco. Usalo quando misuri chi ha interagito con i post. Da
-  $0.00015 per riga.
+  risposte, citazioni, retweeter & thread per URL o ID di post in blocco.
+  Usalo quando misuri chi ha interagito con i post. Da $0.00015 per riga.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): estrae
   follower, following, membri di liste, iscritti & membri di community come
   righe profilo. Usalo quando ti servono elenchi di audience o membri. Da
@@ -675,6 +745,10 @@ cui hai bisogno.
   risponde alle tue domande personalizzate su categoria, punteggio & sì/no
   per ogni tweet con l'IA. Usalo quando le analisi preimpostate non si
   adattano alle tue etichette. Da $0.0003 per tweet analizzato.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  stima un Viral Score da 0 a 100 & un verdetto per ogni tweet da 8 risposte
+  dell'IA sui tratti. Usalo quando studi perché i tweet si diffondono o
+  falliscono. Da $0.0003 per tweet analizzato.
 
 ## Ti serve più dello scraping?
 
@@ -706,6 +780,16 @@ e della piattaforma Apify.
 
 **Quanto è veloce?** Il tempo di esecuzione dipende dal percorso, dal numero
 di risultati e dalla disponibilità a monte.
+
+**Perché una ricerca Latest restituisce post che la scheda Latest di X non
+mostra?** X lascia alcuni post corrispondenti fuori dalla sua lista Latest
+aperta & li restituisce solo a una ricerca con limiti di tempo. Questo Actor
+legge una ricerca Latest come fasce di tempo affiancate, quindi ottiene
+entrambi. In un test di 100 post per 1 query, 83 corrispondevano ai post
+restituiti da altri 5 scraper & 17 erano post che X ha restituito solo alle
+ricerche con limiti di tempo. Tutti i 17 erano nello stesso intervallo di
+tempo. Ogni post è un vero risultato di ricerca X per la tua query, & paghi
+ogni post 1 volta.
 
 **Quali operatori di ricerca funzionano?** La ricerca avanzata di X
 supporta autori, destinatari, menzioni, date, coinvolgimento, media & posizione.

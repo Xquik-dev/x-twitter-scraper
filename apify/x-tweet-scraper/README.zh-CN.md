@@ -186,12 +186,17 @@ Apify 不会将固定的构建编号重定向到 `latest`。请将固定编号�
 `false`。请检查目标 URL 或用户名，并选择可用的公开账户。其他类型的
 失败会为未完成的目标保留重试指引。
 
+诊断记录会在 `unavailableTargets` 中列出这些目标。每个条目包含你输入时
+原样的 `target` 和一个 `reason`，取值为 `not_found` 或 `protected`。该列表
+最多保存 100 个条目。从输入中移除它们，即可得到完整的运行。
+
 `completionReason: "pagination_safety_limit"` 并不代表读取失败，它表示
 分页在保留有效行的同时，达到了自身的边界安全限制。在仍存在有效恢复
 游标的情况下，Latest 搜索会持续翻页，即使遇到空页面。Top 搜索及账户
-窗口恢复可能会在连续出现 10 个空页面后设置检查点。当服务报告分页停滞时，
-搜索也会设置检查点。停滞会停止自动重试，但不会重新开始搜索。这类运行
-会报告抓取未完成，并保留可恢复的游标。即使出现连续的空页面，终止页面
+窗口恢复可能会在连续出现 10 个空页面后设置检查点。当服务在运行中途报告
+分页停滞时，运行会等待 31 秒，再请求同一页面 1 次。之后它会带着新帖子
+继续，或以完成状态结束。第 2 次停滞会为搜索设置检查点。设置了检查点的
+运行会报告抓取未完成，并保留可恢复的游标。即使出现连续的空页面，终止页面
 仍会完成分页。`failedSubtargets` 会保持为 `0`。你只需为被接受的数据集行
 付费。
 
@@ -292,8 +297,26 @@ Actor 每次请求处理 100 个 ID，会并发运行多个批次，并将每个
 `profileReplies`、`profileMedia`、`profileLikes`、`listTweets`、
 `article`、`replies`、`quotes`、`thread`、`retweeters` 及 `favoriters`。
 
-`profileTweets` 遵循主页的 Posts 标签页。它返回目标账户自己发布的非
-回复类帖子。Actor 会在计费之前排除回复行及来自其他作者的对话上下文。
+`profileTweets` 遵循 X 上主页的 Posts 标签页。它按日期顺序返回该账户的
+帖子、转发，以及该账户对自己帖子的回复。对其他账户的回复及来自其他作者的
+对话上下文会在计费之前被排除。
+
+如果只需要原创帖子，请排除你不想要的类型：
+
+```json
+{
+  "mode": "profileTweets",
+  "twitterHandles": ["apify"],
+  "tweetTypes": { "excludeReplies": true, "excludeRetweets": true },
+  "maxItems": 100
+}
+```
+
+`tweetTypes.excludeReplies`、`excludeRetweets` 和 `excludeQuotes` 适用于
+每一种来源。搜索会将它们以 `-filter:replies`、`-filter:nativeretweets` 和
+`-filter:quote` 的形式发送给 X。对于主页或 List，Actor 会自行丢弃这些行。
+被排除的行永远不会进入数据集，因此你永远不用为它们付费，它们也永远不会
+计入 `maxItems`。
 
 `profileReplies` 遵循 X 的 With Replies 标签页。它返回目标账户自己
 发布的主页帖子及回复。Actor 会排除来自其他作者的对话上下文。如果只需要
@@ -305,8 +328,13 @@ Likes、Lists、回复、引用及推文串。对应的扁平化日期操作符�
 Actor 会在计费前验证每一行数据。下限日期为含边界。上限日期为不含
 边界。日期过滤会排除没有可用日期的行。语言过滤会排除缺失或不匹配
 语言的行。被过滤的行永远不会占用你所请求的结果数量上限。当较早的
-推文出现在匹配结果之前时，无序结果会继续翻页。推文过滤器不适用于
-用户列表或直接的推文/文章查询。
+推文出现在匹配结果之前时，无序结果会继续翻页。带日期窗口的 List 运行会
+直接跳到该窗口，因此 30 天前的某一天与昨天耗时相近。对于 List 深处的
+窗口，推文来自 X 的 List 搜索，它会漏掉 List 时间线上显示的少数回复。
+当连续 3 个页面只包含早于你下限日期的推文时，List 运行也会结束。由于
+上限日期为不含边界，`since` 和 `until` 使用同一日期就是一个空窗口。将
+`until` 设为第二天，即可获取 1 整天的数据。推文过滤器不适用于用户列表或
+直接的推文/文章查询。
 
 `mode: "replies"` 的规则更为严格。它结合了直接时间线、受支持的排序
 模式、每一个前向游标模块、带标签的隐藏内容分支、按已报告回复数量
@@ -398,9 +426,42 @@ fields` 视图对应 `snake_case`。视图只负责选择列，永远不会重�
 设置 `lang` 时，Actor 会验证每条返回推文的语言，跳过不匹配的结果，
 并继续翻页寻找匹配的推文。
 
-你也可以传入面向竞品用户的兼容别名，例如 `query`、`searchQuery`、
-`urls`、`profileUrls`、`usernames`、`maxResults`、`max_results`、
-`resultsLimit`、`numberOfTweets`、`maxPosts` 和 `max_posts`。
+### 从其他推文 Actor 迁移
+
+粘贴你已在使用的输入即可。X Tweet Scraper 会读取其他推文 Actor 使用的
+字段名，并将它们映射到自己的字段。规范化名称仍是文档中的默认名称。别名
+永远不会丢弃字段，也永远不会改变你支付的费用。输入表单只列出规范化
+字段，因此保持简短。别名可在 JSON、API、SDK、自动化及已保存的任务输入中
+使用。
+
+| 你已在使用的字段                                                                                                   | X Tweet Scraper 将其读取为                                               |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                        | `startUrls`                                                              |
+| `tweetIds`、`tweetIDs`、`tweets`、`postIds`、`lookupPostIds`，或作为 1 个字符串的 `tweetId`                        | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`                                                                                      | `twitterHandles`                                                         |
+| `twitterContent`, `query`, `searchQuery`                                                                           | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts` | `maxItems`                                                               |
+| `sort`                                                                                                             | `queryType`                                                              |
+| `tweetLanguage`                                                                                                    | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                | `from`, `to`, `@`                                                        |
+| `start`, `end`                                                                                                     | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                            | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                           | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                    | `near`, `within`                                                         |
+
+粘贴的输入会这样运行：
+
+- 每一种来源都会运行。包含起始 URL、用户名、搜索词、List ID 和推文 ID 的
+  输入会全部运行，`maxItems` 适用于整个运行。
+- 与 `searchTerms` 并列的搜索查询会作为额外的 1 个搜索词运行。
+- 同时设置别名及其规范化字段时，以规范化字段的值为准。运行日志会写明
+  未被采用的别名。
+- 运行日志会写明 Actor 不读取的每个字段，例如 `customMapFunction`。不会有
+  任何内容在未通知的情况下被丢弃。
+- 行数上限必须是大于等于 1 的整数。`maxResults: 0` 会在抓取或计费任何
+  内容之前停止运行。
+- `from`、`min_faves`、`since_time` 和 `filter:images` 等搜索操作符字段
+  已经使用 X 所用的名称，因此无需映射。
 
 ### 控制台与 API 输入体验
 
@@ -416,8 +477,8 @@ fields` 视图对应 `snake_case`。视图只负责选择列，永远不会重�
 - Max Items 和 Max Items Per Target 接受大于等于 1 的整数。互动阈值
   接受大于等于 0 的整数。
 
-新集成请使用规范化字段。兼容性别名在 JSON、API、SDK、自动化及任务
-输入中仍然可用，包括作为 `outputVariant: "raw"` 别名的 `includeRaw`。
+新集成请使用规范化字段。上方迁移表中的别名仍然可用。`includeRaw` 是
+`outputVariant: "raw"` 的别名。
 `outputVariant` 的历史取值，例如 `compact` 和 `full`，仍然受支持，
 并使用 Legacy 输出格式。可视化表单会将它们标记为 Legacy 别名。
 
@@ -549,13 +610,13 @@ fields` 视图对应 `snake_case`。视图只负责选择列，永远不会重�
 请选择与你所需数据匹配的那一个。
 
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从
-  用户名、ID 或 URL 抓取主页及其帖子、回复、媒体和点赞。适用于从账户
+  用户名、ID 或 URL 抓取主页及其帖子、回复、媒体和关注者。适用于从账户
   出发而非从搜索出发的场景。起价为每行 $0.00015。
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)：使用
   25 种以上的过滤器抓取帖子下的回复、评论及完整对话。适用于需要获取
   推文下方讨论内容的场景。起价为每行 $0.00015。
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)：
-  批量抓取帖子 URL 或 ID 对应的回复、引用、转推者、点赞者及推文串。
+  批量抓取帖子 URL 或 ID 对应的回复、引用、转推者及推文串。
   适用于衡量谁与帖子产生了互动。起价为每行 $0.00015。
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)：
   以主页行的形式抓取关注者、正在关注的账户、List 成员、订阅者及社区成员。
@@ -593,6 +654,9 @@ fields` 视图对应 `snake_case`。视图只负责选择列，永远不会重�
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)：
   通过 AI 为每条推文回答你自定义的分类、评分及是否问题。适用于预设分析
   无法满足你的标签需求的场景。起价为每条分析推文 $0.0003。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)：
+  根据 8 个 AI 特征回答，为每条推文估算 0 到 100 的 Viral Score 及一个结论。
+  适用于研究推文为何传播或遇冷的场景。起价为每条分析推文 $0.0003。
 
 ## 需要抓取以外的功能？
 
@@ -621,6 +685,14 @@ MCP 服务器。
 
 **运行速度有多快？** 运行耗时取决于所用路径、结果数量及上游服务的
 可用性。
+
+**为什么 Latest 搜索会返回 X 的 Latest 标签页不显示的帖子？** X 会把部分
+匹配的帖子排除在其公开的 Latest 列表之外，只返回给带时间范围的搜索。此
+Actor 会把 Latest 搜索当作并排的时间切片来读取，因此两类帖子都能获取。在
+针对 1 个查询、100 条帖子的测试中，83 条与另外 5 个抓取工具返回的帖子
+一致，17 条是 X 只返回给带时间范围搜索的帖子。这 17 条全部位于同一时间
+跨度内。每条帖子都是你的查询在 X 上的真实搜索结果，每条帖子你只需付费
+1 次。
 
 **哪些搜索操作符可用？** X 高级搜索支持按作者、接收者、提及、日期、
 互动、媒体及位置进行搜索。

@@ -212,16 +212,22 @@ setzen Diagnosen `retryable: false`. Prüfe Ziel-URLs oder Nutzernamen &
 wähle verfügbare öffentliche Accounts. Andere Fehler behalten die
 Wiederholungsempfehlung für unvollständige Ziele.
 
+Die Diagnose nennt diese Ziele in `unavailableTargets`. Jeder Eintrag hat das
+`target`, so wie du es eingegeben hast, & einen `reason`, `not_found` oder
+`protected`. Die Liste fasst bis zu 100 Einträge. Entferne sie aus der
+Eingabe, um einen vollständigen Run zu erhalten.
+
 `completionReason: "pagination_safety_limit"` ist kein Lesefehler. Es
 bedeutet, dass die Paginierung gültige Datensätze behalten hat und dann
 ihr begrenztes Sicherheitslimit erreicht hat. Latest-Suchen laufen durch
 leere Seiten weiter, solange gültige Wiederherstellungs-Cursor vorhanden
 sind. Top-Suchen & Konto-Fenster-Wiederherstellung können nach 10
-aufeinanderfolgenden leeren Seiten einen Checkpoint setzen. Suchen setzen
-auch einen Checkpoint, wenn der Dienst eine stockende Paginierung meldet.
-Stockungen stoppen automatische Wiederholungen, ohne die Suche neu zu
-starten. Diese Runs melden eine unvollständige Extraktion & behalten
-fortsetzbare Cursor. Eine finale Seite schließt die Paginierung auch nach
+aufeinanderfolgenden leeren Seiten einen Checkpoint setzen. Meldet der
+Dienst mitten in einem Run eine stockende Paginierung, wartet der Run 31
+Sekunden & fragt dieselbe Seite noch 1 Mal an. Danach läuft er mit neuen
+Beiträgen weiter oder endet als vollständig. Eine zweite Stockung setzt für
+die Suche einen Checkpoint. Ein Run mit Checkpoint meldet eine unvollständige
+Extraktion & behält fortsetzbare Cursor. Eine finale Seite schließt die Paginierung auch nach
 aufeinanderfolgenden leeren Seiten ab. `failedSubtargets` bleibt `0`. Du
 zahlst nur für akzeptierte Dataset-Datensätze.
 
@@ -339,10 +345,28 @@ Unterstützte explizite Modi: `tweet`, `tweets`, `search`,
 `listTweets`, `article`, `replies`, `quotes`, `thread`, `retweeters` und
 `favoriters`.
 
-`profileTweets` folgt dem Tab „Beiträge" des Profils. Er gibt vom Ziel
-verfasste Nicht-Antwort-Beiträge zurück. Der Actor schließt
-Antwort-Datensätze und Konversationskontext anderer Autoren vor der
-Abrechnung aus.
+`profileTweets` folgt dem Tab „Beiträge" des Profils auf X. Er gibt die
+Beiträge des Accounts, seine Reposts & seine Antworten auf eigene Beiträge in
+Datumsreihenfolge zurück. Antworten an andere Accounts & Konversationskontext
+anderer Autoren fallen vor der Abrechnung weg.
+
+Für nur originale Beiträge schließt du die Typen aus, die du nicht willst:
+
+```json
+{
+  "mode": "profileTweets",
+  "twitterHandles": ["apify"],
+  "tweetTypes": { "excludeReplies": true, "excludeRetweets": true },
+  "maxItems": 100
+}
+```
+
+`tweetTypes.excludeReplies`, `excludeRetweets` & `excludeQuotes` funktionieren
+bei jeder Quelle. Eine Suche sendet sie als `-filter:replies`,
+`-filter:nativeretweets` & `-filter:quote` an X. Bei einem Profil oder einer
+Liste verwirft der Actor diese Datensätze selbst. Ausgeschlossene Datensätze
+erreichen nie das Dataset. Du zahlst also nie für sie, & sie zählen nie zu
+`maxItems`.
 
 `profileReplies` folgt X' Tab „Mit Antworten". Er gibt vom Ziel verfasste
 Profilbeiträge und Antworten zurück. Der Actor schließt Konversationskontext
@@ -359,8 +383,15 @@ schließen Datensätze ohne nutzbares Datum aus. Sprachfilter schließen
 fehlende oder nicht passende Sprachen aus. Gefilterte Datensätze
 verbrauchen nie deine angeforderte Ergebnisobergrenze. Ungeordnete
 Ergebnisse paginieren weiter, wenn ältere Tweets vor passenden Ergebnissen
-liegen. Tweet-Filter gelten nicht für Nutzerlisten oder direkte
-Tweet-/Artikel-Lookups.
+liegen. Ein Listen-Run mit Datumsfenster springt direkt zum Fenster. Ein Tag
+vor 30 Tagen dauert also etwa so lange wie gestern. Für ein Fenster tief in
+einer Liste kommen die Tweets aus der Listensuche von X. Sie lässt einige
+Antworten aus, die die Listen-Timeline zeigt. Ein Listen-Run endet auch,
+sobald 3 Seiten in Folge nur Tweets enthalten, die älter als deine untere
+Datumsgrenze sind. Da die obere Grenze ausschließend ist, ergibt dasselbe
+Datum für `since` & `until` ein leeres Fenster. Setze `until` auf den nächsten
+Tag, um 1 vollen Tag zu erhalten. Tweet-Filter gelten nicht für Nutzerlisten
+oder direkte Tweet-/Artikel-Lookups.
 
 `mode: "replies"` ist strenger. Er kombiniert direkte Timelines,
 unterstützte Ranking-Modi, jedes vorwärtsgerichtete Cursor-Modul,
@@ -470,10 +501,44 @@ Wenn du `lang` setzt, verifiziert der Actor die Sprache jedes
 zurückgegebenen Tweets. Er überspringt nicht passende Treffer und
 paginiert weiter nach passenden Tweets.
 
-Du kannst auch wettbewerberfreundliche Aliasse wie `query`,
-`searchQuery`, `urls`, `profileUrls`, `usernames`, `maxResults`,
-`max_results`, `resultsLimit`, `numberOfTweets`, `maxPosts` und
-`max_posts` übergeben.
+### Von einem anderen Tweet-Actor migrieren
+
+Füge die Eingabe ein, die du schon nutzt. X Tweet Scraper liest die Feldnamen,
+die andere Tweet-Actors nutzen, & ordnet sie seinen eigenen Feldern zu.
+Kanonische Namen bleiben der dokumentierte Standard. Ein Alias verwirft nie
+ein Feld & ändert nie, was du zahlst. Das Eingabeformular listet nur
+kanonische Felder, damit es kurz bleibt. Aliasse funktionieren in JSON, API,
+SDK, Automatisierung & gespeicherten Task-Eingaben.
+
+| Feld, das du schon nutzt                                                                                           | X Tweet Scraper liest es als                                             |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                        | `startUrls`                                                              |
+| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds` oder `tweetId` als 1 String                           | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`                                                                                      | `twitterHandles`                                                         |
+| `twitterContent`, `query`, `searchQuery`                                                                           | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts` | `maxItems`                                                               |
+| `sort`                                                                                                             | `queryType`                                                              |
+| `tweetLanguage`                                                                                                    | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                | `from`, `to`, `@`                                                        |
+| `start`, `end`                                                                                                     | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                            | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                           | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                    | `near`, `within`                                                         |
+
+So verhält sich eine eingefügte Eingabe:
+
+- Jede Quelle läuft. Eine Eingabe mit Start-URLs, Handles, Suchbegriffen,
+  Listen-IDs & Tweet-IDs führt alle aus, & `maxItems` gilt für den gesamten
+  Run.
+- Eine Suchanfrage neben `searchTerms` läuft als 1 weiterer Begriff.
+- Wenn du einen Alias & sein kanonisches Feld setzt, gewinnt der kanonische
+  Wert. Das Run-Protokoll nennt den Alias, der verloren hat.
+- Das Run-Protokoll nennt jedes Feld, das der Actor nicht liest, etwa
+  `customMapFunction`. Nichts wird ohne Hinweis verworfen.
+- Eine Datensatz-Obergrenze muss eine ganze Zahl ab 1 sein. `maxResults: 0`
+  stoppt den Run, bevor etwas abgerufen oder berechnet wird.
+- Suchoperator-Felder wie `from`, `min_faves`, `since_time` & `filter:images`
+  nutzen schon die Namen, die X nutzt. Sie brauchen also keine Zuordnung.
 
 ### Console- & API-Eingabe-UX
 
@@ -492,9 +557,9 @@ Die Console bietet folgende Steuerelemente:
 - „Max Items" und „Max Items Per Target" akzeptieren ganze Zahlen ab 1.
   Interaktionsschwellen akzeptieren ganze Zahlen ab 0.
 
-Nutze kanonische Felder in neuen Integrationen. Kompatibilitätsaliasse
-bleiben in JSON, API, SDK, Automatisierung und Task-Eingaben verfügbar.
-Dazu gehört `includeRaw` als Alias für `outputVariant: "raw"`.
+Nutze kanonische Felder in neuen Integrationen. Die Aliasse aus der
+Migrationstabelle oben bleiben verfügbar. `includeRaw` ist ein Alias für
+`outputVariant: "raw"`.
 Historische `outputVariant`-Werte wie `compact` und `full` bleiben
 akzeptiert und nutzen die Legacy-Ausgabe. Das visuelle Formular
 kennzeichnet sie als Legacy-Aliasse.
@@ -634,7 +699,7 @@ Jeder Xquik Actor nutzt dieselbe Extraktions-Engine, filterbasierte
 Abrechnung & Diagnosen. Wähle den, der zu deinen Daten passt.
 
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Scrapt
-  Profile samt Beiträgen, Antworten, Medien & Likes anhand von Handles, IDs
+  Profile samt Beiträgen, Antworten, Medien & Followern anhand von Handles, IDs
   oder URLs. Nutze ihn, wenn du von Accounts statt von Suchen ausgehst. Ab
   $0.00015 pro Datensatz.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Scrapt
@@ -642,7 +707,7 @@ Abrechnung & Diagnosen. Wähle den, der zu deinen Daten passt.
   Filtern. Nutze ihn, wenn du die Diskussion unter Tweets brauchst. Ab
   $0.00015 pro Datensatz.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Scrapt
-  Antworten, Zitate, Retweeter, Liker & Threads zu Beitrags-URLs oder -IDs in
+  Antworten, Zitate, Retweeter & Threads zu Beitrags-URLs oder -IDs in
   großen Mengen. Nutze ihn, wenn du misst, wer mit Beiträgen interagiert hat.
   Ab $0.00015 pro Datensatz.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Scrapt
@@ -692,6 +757,10 @@ Abrechnung & Diagnosen. Wähle den, der zu deinen Daten passt.
   Beantwortet deine eigenen Kategorie-, Score- & Ja/Nein-Fragen für jeden
   Tweet mit KI. Nutze ihn, wenn die vorgefertigten Analysen nicht zu deinen
   Labels passen. Ab $0.0003 pro analysiertem Tweet.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Schätzt für jeden Tweet einen Viral Score von 0 bis 100 & ein Urteil aus 8
+  KI-Antworten zu Merkmalen. Nutze ihn, wenn du untersuchst, warum Tweets sich
+  verbreiten oder floppen. Ab $0.0003 pro analysiertem Tweet.
 
 ## Brauchst du mehr als Scraping?
 
@@ -724,6 +793,16 @@ gelten weiterhin.
 
 **Wie schnell ist es?** Die Laufzeit hängt von der Route, der
 Ergebnisanzahl und der Verfügbarkeit der Quelle ab.
+
+**Warum liefert eine Latest-Suche Beiträge, die der Latest-Tab von X nicht
+zeigt?** X lässt einige passende Beiträge aus seiner offenen Latest-Liste weg
+& liefert sie nur an eine Suche mit Zeitgrenzen. Dieser Actor liest eine
+Latest-Suche als Zeitscheiben nebeneinander, also bekommt er beides. In einem
+Test mit 100 Beiträgen für 1 Suchanfrage stimmten 83 mit den Beiträgen
+überein, die 5 andere Scraper lieferten. 17 waren Beiträge, die X nur an die
+zeitbegrenzten Suchen lieferte. Alle 17 lagen in derselben Zeitspanne. Jeder
+Beitrag ist ein echtes X-Suchergebnis für deine Suchanfrage, & du zahlst für
+jeden Beitrag 1 Mal.
 
 **Welche Suchoperatoren funktionieren?** X Advanced Search
 unterstützt Autoren, Empfänger, Erwähnungen, Daten, Interaktion, Medien

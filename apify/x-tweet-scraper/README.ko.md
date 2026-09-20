@@ -195,14 +195,20 @@ Apify의 [빌드 태그](https://docs.apify.com/platform/actors/development/buil
 가능한 공개 계정을 선택하세요. 다른 실패는 마치지 못한 대상에 대한 재시도
 안내를 유지합니다.
 
+진단은 이런 대상을 `unavailableTargets`에 나열합니다. 각 항목에는 입력한
+그대로의 `target`과 `reason`이 있으며, `reason`은 `not_found` 또는
+`protected`입니다. 목록은 최대 100개 항목을 담습니다. 완전한 실행을 얻으려면
+입력에서 이 대상을 빼세요.
+
 `completionReason: "pagination_safety_limit"`는 읽기 실패가 아닙니다. 이는
 페이지네이션이 유효한 행을 유지하다가 제한된 안전 한도에 도달했다는
 의미입니다. 최신 검색은 유효한 복구 커서가 남아 있는 한 빈 페이지를
 통과하며 계속됩니다. 인기 검색 & 계정 윈도우 복구는 연속으로 빈 페이지 10개
-이후 체크포인트를 남길 수 있습니다. 검색은 서비스가 정체된 페이지네이션을
-보고할 때도 체크포인트를 남깁니다. 정체는 검색을 다시 시작하지 않으면서
-자동 재시도를 멈춥니다. 이런 실행은 불완전한 추출을 보고하고 재개 가능한
-커서를 유지합니다. 연속으로 빈 페이지가 있어도 마지막 페이지는
+이후 체크포인트를 남길 수 있습니다. 실행 도중 서비스가 정체된
+페이지네이션을 보고하면 실행은 31초를 기다린 뒤 같은 페이지를 1번 더
+요청합니다. 그다음 새 게시물로 계속하거나 완료로 끝납니다. 두 번째 정체는
+검색에 체크포인트를 남깁니다. 체크포인트가 남은 실행은 불완전한 추출을
+보고하고 재개 가능한 커서를 유지합니다. 연속으로 빈 페이지가 있어도 마지막 페이지는
 페이지네이션을 완료합니다. `failedSubtargets`는 `0`으로 유지됩니다. 승인된
 데이터셋 행에 대해서만 비용을 지불합니다.
 
@@ -309,9 +315,26 @@ Actor는 요청당 100개의 ID를 처리합니다. 배치를 동시에 실행�
 `profileReplies`, `profileMedia`, `profileLikes`, `listTweets`, `article`,
 `replies`, `quotes`, `thread`, `retweeters`, `favoriters`.
 
-`profileTweets`는 프로필의 Posts 탭을 따릅니다. 대상이 작성한 답글이 아닌
-게시물을 반환합니다. Actor는 답글 행과 다른 작성자의 대화 맥락을 과금 전에
-제외합니다.
+`profileTweets`는 X에서 프로필의 Posts 탭을 따릅니다. 계정의 게시물,
+재게시 & 자기 게시물에 단 답글을 날짜순으로 반환합니다. 다른 계정에 단
+답글 & 다른 작성자의 대화 맥락은 과금 전에 제외됩니다.
+
+원본 게시물만 원하면 원하지 않는 유형을 제외하세요:
+
+```json
+{
+  "mode": "profileTweets",
+  "twitterHandles": ["apify"],
+  "tweetTypes": { "excludeReplies": true, "excludeRetweets": true },
+  "maxItems": 100
+}
+```
+
+`tweetTypes.excludeReplies`, `excludeRetweets` & `excludeQuotes`는 모든
+소스에서 작동합니다. 검색은 이를 `-filter:replies`, `-filter:nativeretweets`
+& `-filter:quote`로 X에 보냅니다. 프로필이나 리스트에서는 Actor가 해당 행을
+직접 버립니다. 제외된 행은 데이터셋에 도달하지 않습니다. 그래서 그 행에
+비용을 지불하지 않으며, `maxItems`에도 집계되지 않습니다.
 
 `profileReplies`는 X의 With Replies 탭을 따릅니다. 대상이 작성한 프로필
 게시물과 답글을 반환합니다. Actor는 다른 작성자의 대화 맥락을 제외합니다.
@@ -324,7 +347,13 @@ Likes, Lists, 답글, 인용, 스레드가 포함됩니다. 일치하는 플랫 
 상한은 제외됩니다. 날짜 필터는 사용 가능한 날짜가 없는 행을 제외합니다. 언어
 필터는 누락되거나 일치하지 않는 언어를 제외합니다. 필터링된 행은 요청한
 결과 제한을 소비하지 않습니다. 오래된 트윗이 일치하는 결과보다 앞설 때는
-순서가 없는 결과도 계속 페이지를 넘깁니다. 트윗 필터는 사용자 목록이나
+순서가 없는 결과도 계속 페이지를 넘깁니다. 날짜 윈도우가 있는 리스트
+실행은 그 윈도우로 바로 이동합니다. 그래서 30일 전 하루는 어제와 비슷한
+시간이 걸립니다. 리스트 깊숙한 윈도우의 트윗은 X의 리스트 검색에서 옵니다.
+이 검색은 리스트 타임라인에 보이는 답글 몇 개를 빠뜨립니다. 리스트 실행은
+3개 페이지 연속으로 하한 날짜보다 오래된 트윗만 있을 때도 끝납니다. 상한은
+제외되므로 `since` & `until`에 같은 날짜를 쓰면 빈 윈도우입니다. 하루 전체
+1일을 얻으려면 `until`을 다음 날로 설정하세요. 트윗 필터는 사용자 목록이나
 직접 트윗/아티클 조회에는 적용되지 않습니다.
 
 `mode: "replies"`는 더 엄격합니다. 직접 타임라인, 지원되는 순위 모드, 모든
@@ -422,9 +451,43 @@ Overview 데이터셋 뷰는 두 스타일 모두에서 작동합니다. 실행�
 `lang`을 설정하면 Actor는 반환된 각 트윗의 언어를 검증합니다. 일치하지 않는
 항목은 건너뛰고 일치하는 트윗을 위해 페이지를 계속 넘깁니다.
 
-`query`, `searchQuery`, `urls`, `profileUrls`, `usernames`, `maxResults`,
-`max_results`, `resultsLimit`, `numberOfTweets`, `maxPosts`, `max_posts`
-같은 경쟁사 친화적 별칭도 전달할 수 있습니다.
+### 다른 트윗 Actor에서 옮겨오기
+
+이미 쓰는 입력을 붙여넣으세요. X Tweet Scraper는 다른 트윗 Actor가 쓰는 필드
+이름을 읽고 자체 필드에 매핑합니다. 표준 이름이 문서화된 기본값으로
+유지됩니다. 별칭은 필드를 버리지 않으며 지불 금액을 바꾸지 않습니다. 입력
+폼은 표준 필드만 나열하므로 짧게 유지됩니다. 별칭은 JSON, API, SDK, 자동화 &
+저장된 태스크 입력에서 작동합니다.
+
+| 이미 쓰는 필드                                                                                                     | X Tweet Scraper가 읽는 필드                                              |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                        | `startUrls`                                                              |
+| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, 또는 문자열 1개인 `tweetId`                          | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`                                                                                      | `twitterHandles`                                                         |
+| `twitterContent`, `query`, `searchQuery`                                                                           | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts` | `maxItems`                                                               |
+| `sort`                                                                                                             | `queryType`                                                              |
+| `tweetLanguage`                                                                                                    | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                | `from`, `to`, `@`                                                        |
+| `start`, `end`                                                                                                     | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                            | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                           | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                    | `near`, `within`                                                         |
+
+붙여넣은 입력은 이렇게 동작합니다:
+
+- 모든 소스가 실행됩니다. 시작 URL, 핸들, 검색어, 리스트 ID & 트윗 ID가 있는
+  입력은 전부 실행하며, `maxItems`는 실행 전체에 적용됩니다.
+- `searchTerms` 옆에 있는 검색 쿼리는 검색어 1개가 더 추가된 것으로
+  실행됩니다.
+- 별칭 & 그 표준 필드를 함께 설정하면 표준 값이 우선합니다. 실행 로그에 밀린
+  별칭 이름이 남습니다.
+- 실행 로그에는 `customMapFunction`처럼 Actor가 읽지 않는 모든 필드 이름이
+  남습니다. 알림 없이 버려지는 것은 없습니다.
+- 행 상한은 1 이상의 정수여야 합니다. `maxResults: 0`은 무언가를 가져오거나
+  과금하기 전에 실행을 멈춥니다.
+- `from`, `min_faves`, `since_time` & `filter:images` 같은 검색 연산자 필드는
+  이미 X가 쓰는 이름을 사용하므로 매핑이 필요 없습니다.
 
 ### Console & API 입력 UX
 
@@ -440,9 +503,9 @@ Console은 다음 컨트롤을 제공합니다.
 - Max Items와 Max Items Per Target은 1 이상의 정수를 받아들입니다. 참여
   임계값은 0 이상의 정수를 받아들입니다.
 
-새 통합에는 표준 필드를 사용하세요. 호환성 별칭은 JSON, API, SDK, 자동화,
-태스크 입력에서 계속 사용할 수 있습니다. 여기에는 `outputVariant: "raw"`의
-별칭인 `includeRaw`도 포함됩니다. `compact`와 `full` 같은 기존
+새 통합에는 표준 필드를 사용하세요. 위 마이그레이션 표의 별칭은 계속
+사용할 수 있습니다. `includeRaw`는 `outputVariant: "raw"`의 별칭입니다.
+`compact`와 `full` 같은 기존
 `outputVariant` 값도 계속 받아들여지며 Legacy 출력을 사용합니다. 시각적
 폼은 이를 Legacy 별칭으로 표시합니다.
 
@@ -577,13 +640,13 @@ Actor는 공개 X 필드를 요청합니다. 결과에는 개인 데이터가 �
 필요한 데이터에 맞는 Actor를 선택하세요.
 
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): 핸들, ID
-  또는 URL에서 프로필과 게시물, 답글, 미디어 & 좋아요를 스크랩합니다. 검색이
+  또는 URL에서 프로필과 게시물, 답글, 미디어 & 팔로워를 스크랩합니다. 검색이
   아니라 계정에서 시작할 때 사용하세요. 행당 $0.00015부터.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 게시물 아래의
   답글, 댓글 & 전체 대화를 25개 이상의 필터로 스크랩합니다. 트윗 아래의 토론이
   필요할 때 사용하세요. 행당 $0.00015부터.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): 게시물
-  URL이나 ID에 대한 답글, 인용, 리트윗한 사람, 좋아요를 누른 사람 & 스레드를
+  URL이나 ID에 대한 답글, 인용, 리트윗한 사람 & 스레드를
   대량으로 스크랩합니다. 게시물에 참여한 사람을 측정할 때 사용하세요. 행당
   $0.00015부터.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): 팔로워,
@@ -626,6 +689,10 @@ Actor는 공개 X 필드를 요청합니다. 결과에는 개인 데이터가 �
   AI로 모든 트윗에 대해 자신만의 카테고리, 점수 & 예/아니오 질문에 답합니다.
   미리 준비된 분석이 라벨에 맞지 않을 때 사용하세요. 분석된 트윗당
   $0.0003부터.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  AI의 특성 답변 8개로 모든 트윗의 0에서 100까지 Viral Score & 판정을
+  추정합니다. 트윗이 왜 퍼지거나 묻히는지 연구할 때 사용하세요. 분석된 트윗당
+  $0.0003부터.
 
 ## 스크래핑보다 더 필요하신가요?
 
@@ -654,6 +721,14 @@ Xquik은 47개의 대시보드 도구, 129개의 REST 작업, 서명된 웹훅, 
 
 **속도는 얼마나 빠른가요?** 실행 시간은 경로, 결과 수, 업스트림 가용성에
 따라 달라집니다.
+
+**최신 검색은 왜 X의 최신 탭에 없는 게시물을 반환하나요?** X는 일치하는
+게시물 일부를 공개 최신 목록에서 빼고, 시간 범위가 있는 검색에만 반환합니다.
+이 Actor는 최신 검색을 나란히 놓인 시간 조각으로 읽으므로 둘 다 가져옵니다.
+쿼리 1개에 대한 게시물 100개 테스트에서 83개는 다른 스크레이퍼 5개가 반환한
+게시물과 일치했습니다. 17개는 X가 시간 범위 검색에만 반환한 게시물이었습니다.
+17개 모두 같은 시간 범위 안에 있었습니다. 모든 게시물은 쿼리에 대한 실제 X
+검색 결과이며, 게시물마다 1번만 비용을 지불합니다.
 
 **어떤 검색 연산자를 쓸 수 있나요?** X 고급 검색은 작성자, 수신자, 멘션,
 날짜, 참여, 미디어, 위치를 지원합니다.

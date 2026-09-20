@@ -220,17 +220,23 @@ les URL ou noms d'utilisateur cibles et choisissez des comptes publics
 disponibles. Les autres échecs conservent des conseils de nouvelle
 tentative pour les cibles inachevées.
 
+Le diagnostic nomme ces cibles dans `unavailableTargets`. Chaque entrée
+contient la `target` telle que vous l'avez saisie et une `reason`,
+`not_found` ou `protected`. La liste contient jusqu'à 100 entrées.
+Retirez-les de l'entrée pour obtenir un run complet.
+
 `completionReason: "pagination_safety_limit"` n'est pas un échec de
 lecture. Cela signifie que la pagination a conservé des lignes valides,
 puis a atteint sa limite de sécurité bornée. Les recherches Latest
 continuent à travers les pages vides tant que des curseurs de récupération
 valides subsistent. Les recherches Top et la récupération de fenêtre de
 compte peuvent enregistrer un point de contrôle après 10 pages vides
-consécutives. Les recherches enregistrent aussi un point de contrôle
-quand le service signale une pagination bloquée. Les blocages arrêtent les
-nouvelles tentatives automatiques sans redémarrer la recherche. Ces runs
-indiquent une extraction incomplète et conservent des curseurs
-reprenables. Une page terminale complète la pagination même après des
+consécutives. Quand le service signale une pagination bloquée au milieu
+d'un run, le run attend 31 secondes et redemande la même page 1 fois. Il
+continue ensuite avec de nouveaux posts ou se termine comme complet. Un
+deuxième blocage enregistre un point de contrôle pour la recherche. Un run
+avec point de contrôle indique une extraction incomplète et conserve des
+curseurs reprenables. Une page terminale complète la pagination même après des
 pages vides consécutives. `failedSubtargets` reste à `0`. Vous ne
 payez que les lignes de dataset acceptées.
 
@@ -348,9 +354,29 @@ Modes explicites pris en charge : `tweet`, `tweets`, `search`,
 `listTweets`, `article`, `replies`, `quotes`, `thread`, `retweeters` et
 `favoriters`.
 
-`profileTweets` suit l'onglet Posts du profil. Il renvoie les posts non
-réponse rédigés par la cible. L'Actor exclut les lignes de réponse et le
-contexte de conversation d'autres auteurs avant la facturation.
+`profileTweets` suit l'onglet Posts du profil sur X. Il renvoie les posts
+du compte, ses reposts et ses réponses à ses propres posts, par ordre de
+date. Les réponses à d'autres comptes et le contexte de conversation
+d'autres auteurs sont écartés avant la facturation.
+
+Pour les posts originaux uniquement, excluez les types que vous ne voulez
+pas :
+
+```json
+{
+  "mode": "profileTweets",
+  "twitterHandles": ["apify"],
+  "tweetTypes": { "excludeReplies": true, "excludeRetweets": true },
+  "maxItems": 100
+}
+```
+
+`tweetTypes.excludeReplies`, `excludeRetweets` et `excludeQuotes`
+fonctionnent sur chaque source. Une recherche les envoie à X sous la forme
+`-filter:replies`, `-filter:nativeretweets` et `-filter:quote`. Sur un
+profil ou une List, l'Actor écarte lui-même ces lignes. Les lignes exclues
+n'atteignent jamais le dataset. Vous ne les payez donc jamais, et elles ne
+comptent jamais dans `maxItems`.
 
 `profileReplies` suit l'onglet With Replies de X. Il renvoie les posts et
 réponses de profil rédigés par la cible. L'Actor exclut le contexte de
@@ -368,7 +394,15 @@ date exploitable. Les filtres de langue excluent les langues manquantes
 ou non correspondantes. Les lignes filtrées ne consomment jamais votre
 limite de résultat demandée. Les résultats non ordonnés continuent la
 pagination quand des Tweets plus anciens précèdent des résultats
-correspondants. Les filtres de tweet ne s'appliquent pas aux listes
+correspondants. Un run de List avec une fenêtre de dates saute directement
+à la fenêtre. Un jour situé 30 jours en arrière prend donc à peu près autant
+de temps qu'hier. Pour une fenêtre profonde dans une List, les Tweets
+viennent de la recherche de List de X, qui omet quelques réponses que le fil
+de la List affiche. Un run de List se termine aussi quand 3 pages de suite ne
+contiennent que des Tweets plus anciens que votre borne de date inférieure.
+Comme la borne supérieure est exclusive, la même date pour `since` et
+`until` donne une fenêtre vide. Réglez `until` sur le jour suivant pour
+obtenir 1 jour complet. Les filtres de tweet ne s'appliquent pas aux listes
 d'utilisateurs ni aux lookups directs de Tweet/article.
 
 `mode: "replies"` est plus strict. Il combine les fils directs, les modes
@@ -480,10 +514,47 @@ Quand vous réglez `lang`, l'Actor vérifie la langue de chaque tweet
 renvoyé. Il ignore les non-correspondances et continue la pagination pour
 les tweets correspondants.
 
-Vous pouvez aussi passer des alias compatibles avec les concurrents tels
-que `query`, `searchQuery`, `urls`, `profileUrls`, `usernames`,
-`maxResults`, `max_results`, `resultsLimit`, `numberOfTweets`, `maxPosts`
-et `max_posts`.
+### Migrer depuis un autre Actor de tweets
+
+Collez l'entrée que vous utilisez déjà. X Tweet Scraper lit les noms de
+champ que les autres Actors de tweets utilisent et les fait correspondre à
+ses propres champs. Les noms canoniques restent la valeur par défaut
+documentée. Un alias ne supprime jamais un champ et ne change jamais ce que
+vous payez. Le formulaire d'entrée ne liste que les champs canoniques, donc
+il reste court. Les alias fonctionnent en JSON, API, SDK, automatisation et
+entrées de tâche enregistrées.
+
+| Champ que vous utilisez déjà                                                                                       | X Tweet Scraper le lit comme                                             |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                        | `startUrls`                                                              |
+| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, ou `tweetId` en 1 chaîne                             | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`                                                                                      | `twitterHandles`                                                         |
+| `twitterContent`, `query`, `searchQuery`                                                                           | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts` | `maxItems`                                                               |
+| `sort`                                                                                                             | `queryType`                                                              |
+| `tweetLanguage`                                                                                                    | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                | `from`, `to`, `@`                                                        |
+| `start`, `end`                                                                                                     | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                            | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                           | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                    | `near`, `within`                                                         |
+
+Comportement d'une entrée collée :
+
+- Chaque source s'exécute. Une entrée avec des URL de départ, des handles,
+  des termes de recherche, des ID de List et des ID de tweet les exécute
+  tous, et `maxItems` s'applique à l'ensemble du run.
+- Une requête de recherche à côté de `searchTerms` s'exécute comme 1 terme
+  de plus.
+- Quand vous définissez un alias et son champ canonique, la valeur canonique
+  l'emporte. Le log du run nomme l'alias qui a perdu.
+- Le log du run nomme chaque champ que l'Actor ne lit pas, comme
+  `customMapFunction`. Rien n'est écarté sans avis.
+- Une limite de lignes doit être un nombre entier à partir de 1.
+  `maxResults: 0` arrête le run avant toute récupération ou facturation.
+- Les champs d'opérateur de recherche tels que `from`, `min_faves`,
+  `since_time` et `filter:images` utilisent déjà les noms que X utilise. Ils
+  n'ont donc besoin d'aucune correspondance.
 
 ### UX d'entrée Console et API
 
@@ -503,9 +574,8 @@ La Console expose ces contrôles :
   partir de 0.
 
 Utilisez les champs canoniques dans les nouvelles intégrations. Les alias
-de compatibilité restent disponibles en JSON, API, SDK, automatisation et
-entrées de tâche. Cela inclut `includeRaw` comme alias de
-`outputVariant: "raw"`. Les valeurs historiques d'`outputVariant` telles
+du tableau de migration ci-dessus restent disponibles. `includeRaw` est un
+alias de `outputVariant: "raw"`. Les valeurs historiques d'`outputVariant` telles
 que `compact` et `full` restent acceptées et utilisent la sortie Legacy.
 Le formulaire visuel les étiquette comme alias Legacy.
 
@@ -649,7 +719,7 @@ au filtre et les mêmes diagnostics. Choisissez celui qui correspond aux
 données dont vous avez besoin.
 
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) : scrape
-  des profils ainsi que leurs posts, réponses, médias et likes à partir de
+  des profils ainsi que leurs posts, réponses, médias et abonnés à partir de
   handles, d'ID ou d'URL. Utilisez-le quand vous partez de comptes plutôt
   que de recherches. À partir de $0.00015 par ligne.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) : scrape des
@@ -657,9 +727,8 @@ données dont vous avez besoin.
   avec plus de 25 filtres. Utilisez-le quand vous avez besoin de la
   discussion sous les tweets. À partir de $0.00015 par ligne.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) :
-  scrape les réponses, citations, personnes ayant reposté, personnes ayant
-  aimé et threads pour des URL ou ID de post en masse. Utilisez-le pour
-  mesurer qui s'est engagé avec des posts. À partir de $0.00015 par ligne.
+  scrape les réponses, citations, personnes ayant reposté et threads pour
+  des URL ou ID de post en masse. Utilisez-le pour mesurer qui s'est engagé avec des posts. À partir de $0.00015 par ligne.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) : scrape
   les abonnés, les comptes suivis, les membres de List, les abonnés de List
   et les membres de Community sous forme de lignes de profil. Utilisez-le
@@ -714,6 +783,11 @@ données dont vous avez besoin.
   chaque tweet par IA. Utilisez-le quand les analyses prédéfinies ne
   correspondent pas à vos étiquettes. À partir de $0.0003 par tweet
   analysé.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer) :
+  estime un Viral Score de 0 à 100 et un verdict pour chaque tweet à partir
+  de 8 réponses d'IA sur ses traits. Utilisez-le quand vous étudiez pourquoi
+  des tweets se propagent ou échouent. À partir de $0.0003 par tweet
+  analysé.
 
 ## Besoin de plus que du scraping ?
 
@@ -746,6 +820,16 @@ plateforme Apify s'appliquent toujours.
 
 **Quelle est sa vitesse ?** Le temps d'exécution dépend de la route, du
 nombre de résultats et de la disponibilité en amont.
+
+**Pourquoi une recherche Latest renvoie-t-elle des posts que l'onglet Latest
+de X n'affiche pas ?** X laisse certains posts correspondants hors de sa
+liste Latest ouverte et ne les renvoie qu'à une recherche avec des bornes de
+temps. Cet Actor lit une recherche Latest comme des tranches de temps côte à
+côte, donc il obtient les deux. Dans un test de 100 posts pour 1 requête, 83
+correspondaient aux posts renvoyés par 5 autres scrapers. 17 étaient des
+posts que X n'a renvoyés qu'aux recherches bornées dans le temps. Les 17
+étaient dans le même intervalle de temps. Chaque post est un vrai résultat
+de recherche X pour votre requête, et vous payez chaque post 1 fois.
 
 **Quels opérateurs de recherche fonctionnent ?** La recherche
 avancée X prend en charge les auteurs, les destinataires, les mentions,

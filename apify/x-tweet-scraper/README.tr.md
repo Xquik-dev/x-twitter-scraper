@@ -213,15 +213,22 @@ kullanıcı adlarını kontrol et ve kullanılabilir herkese açık hesapları s
 Diğer hatalar, tamamlanmamış hedefler için yeniden deneme rehberliğini
 korur.
 
+Tanılama bu hedefleri `unavailableTargets` içinde adlandırır. Her kayıtta
+senin girdiğin haliyle `target` ve bir `reason` bulunur, `not_found` veya
+`protected`. Liste en fazla 100 kayıt tutar. Eksiksiz bir çalıştırma için
+onları girdiden çıkar.
+
 `completionReason: "pagination_safety_limit"` bir okuma hatası değildir. Bu,
 sayfalamanın geçerli satırları koruduğu, ardından sınırlı güvenlik
 sınırına ulaştığı anlamına gelir. En Yeni aramalar, geçerli kurtarma
 imleçleri kaldığı sürece boş sayfalar boyunca devam eder. En Popüler
 aramalar ve hesap penceresi kurtarma, 10 ardışık boş sayfadan sonra kontrol
-noktasına alınabilir. Aramalar ayrıca hizmet durmuş sayfalama bildirdiğinde
-kontrol noktasına alınır. Duraklamalar, aramayı yeniden başlatmadan
-otomatik yeniden denemeleri durdurur. Bu çalıştırmalar eksik çıkarma
-bildirir ve devam ettirilebilir imleçleri korur. Ardışık boş sayfalardan
+noktasına alınabilir. Hizmet bir çalıştırmanın ortasında durmuş sayfalama
+bildirirse çalıştırma 31 saniye bekler ve aynı sayfayı 1 kez daha ister.
+Sonra yeni gönderilerle devam eder veya tamamlanmış olarak biter. İkinci bir
+duraklama aramayı kontrol noktasına alır. Kontrol noktasına alınan bir
+çalıştırma eksik çıkarma bildirir ve devam ettirilebilir imleçleri korur.
+Ardışık boş sayfalardan
 sonra bile bir terminal sayfası sayfalamayı tamamlar. `failedSubtargets` `0`
 olarak kalır. Yalnızca kabul edilen veri kümesi satırları için ödersin.
 
@@ -333,9 +340,27 @@ Desteklenen açık modlar: `tweet`, `tweets`, `search`, `profileTweets`,
 `profileReplies`, `profileMedia`, `profileLikes`, `listTweets`, `article`,
 `replies`, `quotes`, `thread`, `retweeters` ve `favoriters`.
 
-`profileTweets`, profil Posts sekmesini izler. Hedefin yazdığı yanıt
-olmayan gönderileri döndürür. Actor, yanıt satırlarını ve diğer yazarlardan
-gelen konuşma bağlamını faturalamadan önce hariç tutar.
+`profileTweets`, X'teki profil Posts sekmesini izler. Hesabın gönderilerini,
+repost'larını ve kendi gönderilerine verdiği yanıtları tarih sırasıyla
+döndürür. Başka hesaplara verilen yanıtlar ve diğer yazarlardan gelen konuşma
+bağlamı faturalamadan önce çıkarılır.
+
+Yalnızca orijinal gönderiler için istemediğin türleri hariç tut:
+
+```json
+{
+  "mode": "profileTweets",
+  "twitterHandles": ["apify"],
+  "tweetTypes": { "excludeReplies": true, "excludeRetweets": true },
+  "maxItems": 100
+}
+```
+
+`tweetTypes.excludeReplies`, `excludeRetweets` ve `excludeQuotes` her kaynakta
+çalışır. Bir arama bunları X'e `-filter:replies`, `-filter:nativeretweets` ve
+`-filter:quote` olarak gönderir. Bir profilde veya bir Listede Actor bu
+satırları kendisi atar. Hariç tutulan satırlar veri kümesine asla ulaşmaz. Bu
+yüzden onlar için asla ödemezsin ve `maxItems` sayısına asla dahil olmazlar.
 
 `profileReplies`, X'in With Replies sekmesini izler. Hedefin yazdığı profil
 gönderilerini ve yanıtlarını döndürür. Actor, diğer yazarlardan gelen konuşma
@@ -351,6 +376,13 @@ filtreleri, kullanılabilir tarihi olmayan satırları hariç tutar. Dil
 filtreleri, eksik veya uyuşmayan dilleri hariç tutar. Filtrelenen satırlar
 asla istenen sonuç sınırını tüketmez. Sıralanmamış sonuçlar, eşleşen
 sonuçlardan önce daha eski Tweet'ler geldiğinde sayfalamaya devam eder.
+Tarih penceresi olan bir Liste çalıştırması doğrudan pencereye atlar. Bu
+yüzden 30 gün önceki bir gün, dün kadar sürer. Bir Listenin derinlerindeki bir
+pencere için Tweet'ler X'in Liste aramasından gelir. Bu arama, Liste zaman
+akışının gösterdiği birkaç yanıtı dışarıda bırakır. Bir Liste çalıştırması,
+art arda 3 sayfa yalnızca alt tarih sınırından eski Tweet'ler içerdiğinde de
+biter. Üst sınır hariç tutucu olduğu için `since` ve `until` için aynı tarih
+boş bir penceredir. 1 tam gün almak için `until` değerini sonraki güne ayarla.
 Tweet filtreleri kullanıcı listelerine veya doğrudan Tweet/makale
 aramalarına uygulanmaz.
 
@@ -457,9 +489,45 @@ ekstra yeniden deneme alır.
 `lang`'i ayarladığında Actor, döndürülen her tweet'in dilini doğrular.
 Uyuşmazlıkları atlar ve eşleşen tweet'ler için sayfalamaya devam eder.
 
-`query`, `searchQuery`, `urls`, `profileUrls`, `usernames`, `maxResults`,
-`max_results`, `resultsLimit`, `numberOfTweets`, `maxPosts` ve `max_posts`
-gibi rakip dostu takma adları da geçirebilirsin.
+### Başka bir tweet Actor'ından geçiş yap
+
+Zaten kullandığın girdiyi yapıştır. X Tweet Scraper, diğer tweet Actor'larının
+kullandığı alan adlarını okur ve kendi alanlarına eşler. Kanonik adlar
+belgelenen varsayılan olarak kalır. Bir takma ad asla bir alanı düşürmez ve
+ödediğin tutarı asla değiştirmez. Girdi formu yalnızca kanonik alanları
+listeler, böylece kısa kalır. Takma adlar JSON, API, SDK, otomasyon ve kayıtlı
+görev girdilerinde çalışır.
+
+| Zaten kullandığın alan                                                                                             | X Tweet Scraper bunu şöyle okur                                          |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                        | `startUrls`                                                              |
+| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds` veya tek string olarak `tweetId`                      | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`                                                                                      | `twitterHandles`                                                         |
+| `twitterContent`, `query`, `searchQuery`                                                                           | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts` | `maxItems`                                                               |
+| `sort`                                                                                                             | `queryType`                                                              |
+| `tweetLanguage`                                                                                                    | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                | `from`, `to`, `@`                                                        |
+| `start`, `end`                                                                                                     | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                            | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                           | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                    | `near`, `within`                                                         |
+
+Yapıştırılan bir girdi şöyle davranır:
+
+- Her kaynak çalışır. Başlangıç URL'leri, handle'lar, arama terimleri, Liste
+  ID'leri ve tweet ID'leri içeren bir girdi hepsini çalıştırır ve `maxItems`
+  tüm çalıştırma için geçerlidir.
+- `searchTerms` yanındaki bir arama sorgusu 1 terim daha olarak çalışır.
+- Bir takma adı ve kanonik alanını birlikte ayarlarsan kanonik değer kazanır.
+  Çalıştırma günlüğü kaybeden takma adı adlandırır.
+- Çalıştırma günlüğü, Actor'ın okumadığı her alanı adlandırır, örneğin
+  `customMapFunction`. Hiçbir şey haber verilmeden atılmaz.
+- Satır sınırı 1 veya daha büyük bir tam sayı olmalıdır. `maxResults: 0`,
+  herhangi bir şey getirilmeden veya ücretlendirilmeden önce çalıştırmayı
+  durdurur.
+- `from`, `min_faves`, `since_time` ve `filter:images` gibi arama operatörü
+  alanları zaten X'in kullandığı adları kullanır. Bu yüzden eşleme gerekmez.
 
 ### Console ve API girdi deneyimi
 
@@ -477,9 +545,9 @@ Console şu kontrolleri gösterir:
 - Max Items ve Max Items Per Target, 1 veya daha büyük tam sayıları kabul
   eder. Etkileşim eşikleri 0 veya daha büyük tam sayıları kabul eder.
 
-Yeni entegrasyonlarda kanonik alanları kullan. Uyumluluk takma adları
-JSON, API, SDK, otomasyon ve görev girdilerinde kullanılabilir kalır. Buna
-`outputVariant: "raw"` için bir takma ad olarak `includeRaw` dahildir.
+Yeni entegrasyonlarda kanonik alanları kullan. Yukarıdaki geçiş tablosundaki
+takma adlar kullanılabilir kalır. `includeRaw`, `outputVariant: "raw"` için
+bir takma addır.
 `compact` ve `full` gibi tarihsel `outputVariant` değerleri kabul edilmeye
 devam eder ve Legacy çıktıyı kullanır. Görsel form onları Legacy takma
 adları olarak etiketler.
@@ -623,7 +691,7 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Handle, ID
   veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını ve
-  beğenilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
+  takipçilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
   başına $0.00015'ten başlar.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25'ten fazla
   filtreyle gönderilerin altındaki yanıtları, yorumları ve tüm konuşmaları
@@ -631,7 +699,7 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   başına $0.00015'ten başlar.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Gönderi
   URL'leri veya ID'leri için toplu olarak yanıtları, alıntıları, retweet
-  edenleri, beğenenleri ve thread'leri kazır. Gönderilerle kimin etkileşime
+  edenleri ve thread'leri kazır. Gönderilerle kimin etkileşime
   girdiğini ölçtüğünde kullan. Satır başına $0.00015'ten başlar.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Takipçileri,
   takip edilenleri, Liste üyelerini, aboneleri ve Topluluk üyelerini profil
@@ -680,6 +748,11 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   Yapay zeka ile her tweet için kendi kategori, puan ve evet/hayır sorularını
   yanıtlar. Hazır analizler etiketlerine uymadığında kullan. Analiz edilen
   tweet başına $0.0003'ten başlar.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Yapay zekanın 8 özellik yanıtından her tweet için 0 ile 100 arasında bir
+  Viral Score ve bir karar tahmin eder. Tweet'lerin neden yayıldığını veya
+  tutmadığını incelediğinde kullan. Analiz edilen tweet başına $0.0003'ten
+  başlar.
 
 ## Kazımadan fazlasına mı ihtiyacın var?
 
@@ -711,6 +784,16 @@ geçerlidir.
 
 **Ne kadar hızlı?** Çalışma süresi rotaya, sonuç sayısına ve üst akış
 kullanılabilirliğine bağlıdır.
+
+**En Yeni araması neden X'in En Yeni sekmesinde görünmeyen gönderiler
+döndürüyor?** X, eşleşen bazı gönderileri açık En Yeni listesinin dışında
+bırakır ve onları yalnızca zaman sınırları olan bir aramaya döndürür. Bu Actor
+bir En Yeni aramasını yan yana zaman dilimleri olarak okur, böylece ikisini de
+alır. 1 sorgu için 100 gönderilik bir testte 83 gönderi, diğer 5 scraper'ın
+döndürdüğü gönderilerle eşleşti. 17 gönderiyi ise X yalnızca zaman sınırlı
+aramalara döndürdü. 17 gönderinin hepsi aynı zaman aralığının içindeydi. Her
+gönderi, sorgun için gerçek bir X arama sonucudur ve her gönderi için 1 kez
+ödersin.
 
 **Hangi arama operatörleri çalışıyor?** X gelişmiş araması yazarları,
 alıcıları, bahsetmeleri, tarihleri, etkileşimi, medyayı ve konumu destekler.
