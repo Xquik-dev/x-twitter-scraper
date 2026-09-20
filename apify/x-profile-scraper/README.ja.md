@@ -15,16 +15,16 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">FramerがClaude Code、Codex、Cursorなどと一緒にXquikのスクレイパーを使う方法を6:07から見る。</a>
 </td></tr></table>
 
-Xquikは、最も完全なXデータを備えた、世界最速かつ最安のX(Twitter)スクレイパーサービスです。X Profile Scraperは、任意のハンドル名について、プロフィール、投稿、リプライ、メディア、いいねを収集します。他のApify Actorはすべて、フィルタリングや重複排除の前に課金します。Xquikは、配信済みでユニークかつフィルター条件に一致した結果にのみ課金します。
+Xquikは、最も完全なXデータを備えた、世界最速かつ最安のX(Twitter)スクレイパーサービスです。X Profile Scraperは、任意のハンドル名について、プロフィール、投稿、リプライ、メディア、フォロワーを収集します。他のApify Actorはすべて、フィルタリングや重複排除の前に課金します。Xquikは、配信済みでユニークかつフィルター条件に一致した結果にのみ課金します。
 
-Xのプロフィール、投稿、リプライ、メディア、いいねをスクレイピングします。ハンドル名、ID、URLを使用できます。X APIキーやログインは不要です。
+Xのプロフィール、投稿、リプライ、メディア、フォロワーをスクレイピングします。ハンドル名、ID、URLを使用できます。X APIキーやログインは不要です。
 
 ## プロフィールとタイムライン
 
 - 自己紹介、各種カウント、認証、自己申告の所在地、ウェブサイト、メディアを抽出します。
 - 利用可能な場合、Xがベストエフォートで公開している所在地ラベル(Account based in)を含めます。
 - 利用可能な結果ページ全体にわたって、プロフィールの投稿とWith Repliesの行を追加します。
-- メディア、いいね、フォロワー、フォロー中、または認証済みフォロワーを追加します。
+- メディア、フォロワー、フォロー中、または認証済みフォロワーを追加します。
 - 任意の投稿を、日付、メディア、認証、リポスト状態、指標でフィルタリングします。
 - 任意のプロフィールを、オーディエンス、活動量、アカウント年数、公開メタデータでフィルタリングします。
 - Actorは課金前に重複する行を削除します。
@@ -45,10 +45,12 @@ Xのプロフィール、投稿、リプライ、メディア、いいねをス�
 ## 出力
 
 プロフィールの行は `resultType: "profile"` を使用します。任意で追加される行は、`profileTweet`、
-`profileReply`、`profileMedia`、`profileLike`、`profileFollower`、
+`profileReply`、`profileMedia`、`profileFollower`、
 `profileFollowing`、`profileVerifiedFollower` のいずれかを使用します。すべての行は
 `sourceTarget` を保持します。公開フィールドは、Xquik REST応答の形式のまま残ります。Xは
 `accountBasedIn` を、集約されたアカウントアクセスのIPアドレスから推定します。`observedAt` は取得時刻を記録します。これは、国籍、居住地、身元、登録、投稿、正確な位置を示すものではありません。
+
+Xは2024年以降、アカウントがいいねした投稿をそのアカウント本人にのみ表示しています。`includeLikes` は、他のアカウントについて `profileLike` の行を返しません。
 
 ## 料金
 
@@ -79,7 +81,7 @@ Xquikは独立した第三者サービスです。X Corpとは提携していま
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): 検索、プロフィールのタイムライン、リスト、Tweet IDから、50以上のフィルターとフラットなエクスポートでポストをスクレイピングします。分析なしでポストデータが必要なときに使用します。1行あたり$0.00015から。
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25以上のフィルターで、投稿へのリプライ、コメント、会話全体をスクレイピングします。ポストの下にある議論が必要なときに使用します。1行あたり$0.00015から。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): 投稿URLまたはIDから、リプライ、引用ポスト、リポストしたユーザー、いいねしたユーザー、スレッドを一括でスクレイピングします。誰がポストにエンゲージしたかを測定するときに使用します。1行あたり$0.00015から。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): ポストのURLまたはIDから、リプライ、引用ポスト、リポストしたユーザー、スレッドを一括でスクレイピングします。誰がポストにエンゲージしたかを測定するときに使用してください。1行あたり$0.00015から。
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): フォロワー、フォロー中、リストメンバー、購読者、コミュニティメンバーをプロフィール行としてスクレイピングします。オーディエンスやメンバーリストが必要なときに使用します。1プロフィールあたり$0.00015から。
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): ハンドル名、自己紹介、所在地でユーザーを検索し、フォロワー数、認証、アカウント年数、所在地でフィルタリングします。検索からアカウントリストを構築するときに使用します。1プロフィールあたり$0.00015から。
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): リストのURLまたはIDから、リストの投稿、メンバー、フォロワーをスクレイピングします。厳選されたリストが情報源となるときに使用します。1行あたり$0.00015から。
@@ -92,3 +94,4 @@ Xquikは独立した第三者サービスです。X Corpとは提携していま
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals): AIで強気、弱気、中立、または混合のスタンス、コンテンツタイプ、確信度、資産との関連性をラベル付けします。株式、暗号資産、取引に関する話題を追うときに使用します。分析済みポスト1件あたり$0.0003から。
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor): AIでニュース投稿を形式、情報源の帰属、トピックの関連性でラベル付けします。報道とコメンタリーを区別するときに使用します。分析済みポスト1件あたり$0.0003から。
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier): AIですべてのポストに対して、独自のカテゴリー、スコア、はい/いいえの質問に答えます。既定の分析があなたのラベルに合わないときに使用します。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer): AIによる8つの特性への回答から、すべてのポストについて0から100のViral Scoreと判定を推定します。ポストが広がる理由や伸びない理由を調べるときに使用してください。分析済みポスト1件あたり$0.0003から。

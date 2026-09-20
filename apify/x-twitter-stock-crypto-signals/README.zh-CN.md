@@ -54,6 +54,25 @@ Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，拥�
 
 这些回答描述的是作者所表达的内容，并非投资建议，也不会核实相关说法、价格或备案信息。
 
+## 分析你自己的文本
+
+将你自己的文本粘贴到 `texts` 中：草稿、回复、评价或笔记。Actor 会分析这些文本，
+不会从 X 获取任何内容。
+
+```json
+{
+  "texts": [
+    "$NVDA guidance beat again. I am adding on any dip below 900.",
+    "Not touching $BTC until the ETF flows turn positive."
+  ]
+}
+```
+
+- 每段文本生成 1 行，其 `analysis` 答案与推文相同。
+- `tweet.id` 依次为 `text:1`、`text:2` 等，`tweet.type` 为 `text`。
+- 每段已分析文本的费用与一条已分析推文相同，均为 $0.0003。
+- 设置 `texts` 后，运行只分析这些文本。X 目标请另行运行。
+
 ## 定价
 
 AI 费用已包含在每条推文的价格中。你无需向 AI 提供商付费、无需购买 token，也无需自带密钥。
@@ -130,9 +149,13 @@ Actor 页面上还有更多涵盖其他品牌、主题和市场的任务。
 每个 Xquik Actor 都共享相同的抓取引擎，采用先过滤后计费与诊断机制。请选择与你所需数据相匹配的那一个。
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper)：从搜索、主页时间线、List 和推文 ID 抓取推文，提供 50 多种过滤条件和扁平化导出。适合在不需要分析的情况下获取推文数据。每行低至 $0.00015。
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从用户名、ID 或 URL 抓取主页及其帖子、回复、媒体和点赞。适合从账号而非搜索出发的场景。每行低至 $0.00015。
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从
+  用户名、ID 或 URL 抓取主页及其帖子、回复、媒体和关注者。适用于从账户
+  出发而非从搜索出发的场景。起价为每行 $0.00015。
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)：抓取帖子下的回复、评论及完整对话，提供 25 多种过滤条件。适合需要获取帖子下方讨论内容的场景。每行低至 $0.00015。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)：批量抓取帖子 URL 或 ID 对应的回复、引用推文、转推者、点赞者和推文串。适合衡量谁与帖子产生了互动。每行低至 $0.00015。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)：
+  批量抓取帖子 URL 或 ID 对应的回复、引用、转推者及推文串。
+  适用于衡量谁与帖子产生了互动。起价为每行 $0.00015。
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)：以主页行的形式抓取关注者、关注对象、List 成员、订阅者和 Community 成员。适合需要受众或成员列表的场景。每个主页低至 $0.00015。
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)：按用户名、简介和所在地搜索用户，并提供关注者数、认证状态、账号年龄和所在地过滤条件。适合根据搜索结果构建账号列表。每个主页低至 $0.00015。
 - [X List Scraper](https://apify.com/xquik/x-list-scraper)：从 List 的 URL 或 ID 抓取 List 帖子、成员和关注者。适合由精选 List 定义数据来源的场景。每行低至 $0.00015。
@@ -144,6 +167,9 @@ Actor 页面上还有更多涵盖其他品牌、主题和市场的任务。
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)：使用 AI 为每条推文标注态度、强度和讽刺概率。适合需要针对任意主题获取整体情感的场景。每条已分析推文低至 $0.0003。
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)：使用 AI 按格式、来源归属和主题相关性标注新闻类帖子。适合将报道内容与评论区分开的场景。每条已分析推文低至 $0.0003。
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)：使用 AI 为每条推文回答你自定义的分类、评分和是/否问题。适合预设分析无法满足你的标签需求的场景。每条已分析推文低至 $0.0003。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)：
+  根据 8 个 AI 特征回答，为每条推文估算 0 到 100 的 Viral Score 及一个结论。
+  适用于研究推文为何传播或遇冷的场景。起价为每条分析推文 $0.0003。
 
 ## 常见问题与支持
 

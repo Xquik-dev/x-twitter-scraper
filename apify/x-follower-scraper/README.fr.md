@@ -367,6 +367,33 @@ Dedupe Mode. Le formulaire visuel masque les alias qui dupliquent un
 contrôle canonique. Les entrées JSON et de tâche sauvegardées existantes
 conservent leur comportement actuel.
 
+### Migrer depuis un autre Actor d'abonnés
+
+Collez l'entrée que vous utilisez déjà. X Follower Scraper lit les noms de
+champ que d'autres Actors d'abonnés X utilisent et les associe à ses propres
+champs. Les noms canoniques restent la valeur par défaut documentée. Un
+alias ne supprime jamais un champ et ne change jamais ce que vous payez.
+
+| Champ que vous utilisez déjà                                                          | X Follower Scraper le lit comme |
+| ------------------------------------------------------------------------------------- | ------------------------------- |
+| `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`, `screenNames` | `twitterHandles`                |
+| `username`, `handle`, `screenName`, en une seule chaîne                               | `twitterHandles`                |
+| `twitterUserIds`, `user_ids`, `userIdList`                                            | `userIds`                       |
+| `user_id`, `userId`, en une seule chaîne                                              | `userIds`                       |
+| `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`                          | `startUrls`                     |
+| `profileUrl`, en une seule chaîne                                                     | `startUrls`                     |
+| `getFollowers`, `getFollowing`                                                        | `relations`                     |
+| `type` avec `followers` ou `following`                                                | `relation`                      |
+| `maxResults`, `max_results`, `resultsLimit`, `count`                                  | `maxItems`                      |
+| `scrapeAllResults`                                                                    | aucun plafond par cible         |
+
+2 noms ont un autre sens ici. Dans certains Actors, `maxFollowers` et
+`maxFollowing` plafonnent le nombre de lignes qu'un run récupère. Dans
+X Follower Scraper, ils filtrent les profils selon leurs nombres d'abonnés
+et de comptes suivis. Utilisez `maxItems` pour plafonner les lignes.
+X Follower Scraper n'a pas d'unité de page, donc remplacez `maxPages` par
+`maxItems`.
+
 ### Utilisez toujours la dernière build
 
 Les runs de Store utilisent la configuration de build `latest` de l'Actor.
@@ -491,7 +518,7 @@ données dont vous avez besoin.
   avez besoin de données de tweet sans analyse. À partir de $0.00015 par
   ligne.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) : scrape
-  des profils ainsi que leurs posts, réponses, médias et likes à partir de
+  des profils ainsi que leurs posts, réponses, médias et abonnés à partir de
   handles, d'ID ou d'URL. Utilisez-le quand vous partez de comptes plutôt
   que de recherches. À partir de $0.00015 par ligne.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) : scrape des
@@ -499,9 +526,8 @@ données dont vous avez besoin.
   avec plus de 25 filtres. Utilisez-le quand vous avez besoin de la
   discussion sous les tweets. À partir de $0.00015 par ligne.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) :
-  scrape les réponses, citations, personnes ayant reposté, personnes ayant
-  aimé et threads pour des URL ou ID de post en masse. Utilisez-le pour
-  mesurer qui s'est engagé avec des posts. À partir de $0.00015 par ligne.
+  scrape les réponses, citations, personnes ayant reposté et threads pour
+  des URL ou ID de post en masse. Utilisez-le pour mesurer qui s'est engagé avec des posts. À partir de $0.00015 par ligne.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) :
   recherche des utilisateurs par handle, bio et localisation avec des
   filtres d'abonnés, de vérification, d'ancienneté et de localisation.
@@ -550,6 +576,11 @@ données dont vous avez besoin.
   répond à vos propres questions de catégorie, de score et de oui/non pour
   chaque tweet par IA. Utilisez-le quand les analyses prédéfinies ne
   correspondent pas à vos étiquettes. À partir de $0.0003 par tweet
+  analysé.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer) :
+  estime un Viral Score de 0 à 100 et un verdict pour chaque tweet à partir
+  de 8 réponses d'IA sur ses traits. Utilisez-le quand vous étudiez pourquoi
+  des tweets se propagent ou échouent. À partir de $0.0003 par tweet
   analysé.
 
 ## Besoin de plus que du scraping ?

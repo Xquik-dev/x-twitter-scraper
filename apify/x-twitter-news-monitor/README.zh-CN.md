@@ -62,6 +62,25 @@ AI Analysis** 收集关于你所关注话题的帖子，然后为每条帖子添
 
 分类不核实事实。具名来源不代表是可信来源。归属描述的是帖子所呈现的内容。
 
+## 分析你自己的文本
+
+将你自己的文本粘贴到 `texts` 中：草稿、回复、评价或笔记。Actor 会分析这些文本，
+不会从 X 获取任何内容。
+
+```json
+{
+  "texts": [
+    "Central bank holds rates at 4.5%, signals 2 cuts next year.",
+    "I was at the port this morning. Cranes are idle & trucks are queued."
+  ]
+}
+```
+
+- 每段文本生成 1 行，其 `analysis` 答案与推文相同。
+- `tweet.id` 依次为 `text:1`、`text:2` 等，`tweet.type` 为 `text`。
+- 每段已分析文本的费用与一条已分析推文相同，均为 $0.0003。
+- 设置 `texts` 后，运行只分析这些文本。X 目标请另行运行。
+
 ## 定价
 
 AI 费用已包含在每条推文的价格中。你无需向 AI 提供商付费、无需购买 token，也无需自带密钥。
@@ -172,15 +191,15 @@ ID。之后每一行都会获得一个 `monitor` 对象。其状态在没有基�
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper)：从搜索、主页
   时间线、List 与推文 ID 抓取推文，提供 50 多种过滤条件与扁平化导出。当你
   只需要推文数据而无需分析时使用。每行起价 $0.00015。
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从用户名、
-  ID 或链接抓取主页及其帖子、回复、媒体与点赞。当你从账号而非搜索出发时
-  使用。每行起价 $0.00015。
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从
+  用户名、ID 或 URL 抓取主页及其帖子、回复、媒体和关注者。适用于从账户
+  出发而非从搜索出发的场景。起价为每行 $0.00015。
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)：抓取帖子下的
   回复、评论与完整对话，提供 25 多种过滤条件。当你需要推文下方的讨论时
   使用。每行起价 $0.00015。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)：批量
-  抓取帖子链接或 ID 对应的回复、引用推文、转推者、点赞者与推文串。当你要
-  衡量谁与帖子互动过时使用。每行起价 $0.00015。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)：
+  批量抓取帖子 URL 或 ID 对应的回复、引用、转推者及推文串。
+  适用于衡量谁与帖子产生了互动。起价为每行 $0.00015。
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)：以主页
   行的形式抓取关注者、正在关注、List 成员、订阅者与 Community 成员。当你
   需要受众或成员列表时使用。每个主页起价 $0.00015。
@@ -214,6 +233,9 @@ ID。之后每一行都会获得一个 `monitor` 对象。其状态在没有基�
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)：
   用 AI 为每条推文回答你自己定义的类别、分数与是否问题。当预设分析不适合
   你的标签体系时使用。每条已分析推文起价 $0.0003。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)：
+  根据 8 个 AI 特征回答，为每条推文估算 0 到 100 的 Viral Score 及一个结论。
+  适用于研究推文为何传播或遇冷的场景。起价为每条分析推文 $0.0003。
 
 ## 常见问题与支持
 

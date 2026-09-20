@@ -82,8 +82,29 @@ Benzersiz ID'leri, talimatları ve sürümleri olan 1-8 soru sağla.
 Hazır ayarlar: `brand`, `complaints`, `competitors`, `purchase_intent`,
 `product_feedback`, `news`, `sentiment` ve `market`. `maxContextBytes`
 varsayılan olarak 12.000 bayttır. Daha küçük bir sınır, kesme yapmadan aşırı
-büyük bağlamı atlar. `concurrency` varsayılan olarak 4'tür ve 1 ile 16 arasını
+büyük bağlamı atlar. `concurrency` varsayılan olarak 16'dır ve 1 ile 16 arasını
 kabul eder. Her soru tanımı 8.000 baytlık bir ödenek içinde kalır.
+
+## Kendi metnini analiz et
+
+Kendi metnini `texts` alanına yapıştır: taslaklar, yanıtlar, değerlendirmeler
+veya notlar. Actor metni analiz eder & X'ten hiçbir şey getirmez.
+
+```json
+{
+  "texts": [
+    "The new update is great, but sync still drops on mobile.",
+    "Support fixed my issue in 10 minutes. Thank you."
+  ]
+}
+```
+
+- Her metin, bir tweet ile aynı `analysis` yanıtlarını taşıyan 1 satır olur.
+- `tweet.id` değeri `text:1`, `text:2` & devamı şeklindedir, `tweet.type` ise
+  `text` olur.
+- Analiz edilen her metin, analiz edilen bir tweet gibi $0.0003 tutar.
+- `texts` ayarlıyken çalıştırma yalnızca o metinleri analiz eder. X hedeflerini
+  ayrı çalıştır.
 
 ## Fiyatlandırma
 
@@ -208,7 +229,7 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   gerektiğinde kullan. Satır başına $0.00015'ten başlar.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Handle, ID
   veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını ve
-  beğenilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
+  takipçilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
   başına $0.00015'ten başlar.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25'ten fazla
   filtreyle gönderilerin altındaki yanıtları, yorumları ve tüm konuşmaları
@@ -216,7 +237,7 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   başına $0.00015'ten başlar.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Gönderi
   URL'leri veya ID'leri için toplu olarak yanıtları, alıntıları, retweet
-  edenleri, beğenenleri ve thread'leri kazır. Gönderilerle kimin etkileşime
+  edenleri ve thread'leri kazır. Gönderilerle kimin etkileşime
   girdiğini ölçtüğünde kullan. Satır başına $0.00015'ten başlar.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Takipçileri,
   takip edilenleri, Liste üyelerini, aboneleri ve Topluluk üyelerini profil
@@ -261,6 +282,11 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   Yapay zeka ile haber gönderilerini biçim, kaynak atfı ve konu ilgisine göre
   etiketler. Haberi yorumdan ayırdığında kullan. Analiz edilen tweet başına
   $0.0003'ten başlar.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Yapay zekanın 8 özellik yanıtından her tweet için 0 ile 100 arasında bir
+  Viral Score ve bir karar tahmin eder. Tweet'lerin neden yayıldığını veya
+  tutmadığını incelediğinde kullan. Analiz edilen tweet başına $0.0003'ten
+  başlar.
 
 ## SSS ve destek
 

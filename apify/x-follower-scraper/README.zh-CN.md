@@ -264,6 +264,25 @@ Console 提供以下控件：
 
 新的集成请使用规范字段名。兼容性别名在 JSON、API、SDK、自动化和任务输入中仍然可用，包括作为 Output Mode 别名的 `outputVariant` 和 `includeRaw`，以及作为 Dedupe Mode 别名的 `dedupeAcrossTargets`。可视化表单会隐藏与规范控件重复的别名。现有的 JSON 和已保存的任务输入会保持当前行为不变。
 
+### 从其他关注者 Actor 迁移
+
+粘贴你已在使用的输入。X Follower Scraper 会读取其他 X 关注者 Actor 使用的字段名，并将其映射到自己的字段。规范字段名仍是文档中的默认写法。别名绝不会丢弃字段，也绝不会改变你支付的费用。
+
+| 你已在使用的字段                                                                      | X Follower Scraper 将其读取为  |
+| ------------------------------------------------------------------------------------- | ------------------------------ |
+| `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`, `screenNames` | `twitterHandles`               |
+| `username`, `handle`, `screenName`，作为单个字符串                                    | `twitterHandles`               |
+| `twitterUserIds`, `user_ids`, `userIdList`                                            | `userIds`                      |
+| `user_id`, `userId`，作为单个字符串                                                   | `userIds`                      |
+| `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`                          | `startUrls`                    |
+| `profileUrl`，作为单个字符串                                                          | `startUrls`                    |
+| `getFollowers`, `getFollowing`                                                        | `relations`                    |
+| `type`，值为 `followers` 或 `following`                                               | `relation`                     |
+| `maxResults`, `max_results`, `resultsLimit`, `count`                                  | `maxItems`                     |
+| `scrapeAllResults`                                                                    | 不设单目标上限                 |
+
+有 2 个名称在这里含义不同。在某些 Actor 中，`maxFollowers` 和 `maxFollowing` 限制一次运行获取的行数。在 X Follower Scraper 中，它们按主页的关注者数量和关注对象数量过滤主页。请使用 `maxItems` 限制行数。X Follower Scraper 没有页面单位，因此请将 `maxPages` 替换为 `maxItems`。
+
 ### 始终使用最新构建
 
 Store 运行使用 Actor 的 `latest` 构建配置。API 客户端应省略构建覆盖参数，或传入 `build=latest`。请更新固定了旧版构建的 Tasks 和集成。固定的构建版本不会自动更新。
@@ -351,9 +370,13 @@ Store 运行使用 Actor 的 `latest` 构建配置。API 客户端应省略构�
 每个 Xquik Actor 都共享相同的抓取引擎，采用先过滤后计费与诊断机制。请选择与你所需数据相匹配的那一个。
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper)：从搜索、主页时间线、List 和推文 ID 抓取推文，提供 50 多种过滤条件和扁平化导出。适合在不需要分析的情况下获取推文数据。每行低至 $0.00015。
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从用户名、ID 或 URL 抓取主页及其帖子、回复、媒体和点赞。适合从账号而非搜索出发的场景。每行低至 $0.00015。
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从
+  用户名、ID 或 URL 抓取主页及其帖子、回复、媒体和关注者。适用于从账户
+  出发而非从搜索出发的场景。起价为每行 $0.00015。
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)：抓取帖子下的回复、评论及完整对话，提供 25 多种过滤条件。适合需要获取帖子下方讨论内容的场景。每行低至 $0.00015。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)：批量抓取帖子 URL 或 ID 对应的回复、引用推文、转推者、点赞者和推文串。适合衡量谁与帖子产生了互动。每行低至 $0.00015。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)：
+  批量抓取帖子 URL 或 ID 对应的回复、引用、转推者及推文串。
+  适用于衡量谁与帖子产生了互动。起价为每行 $0.00015。
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)：按用户名、简介和所在地搜索用户，并提供关注者数、认证状态、账号年龄和所在地过滤条件。适合根据搜索结果构建账号列表。每个主页低至 $0.00015。
 - [X List Scraper](https://apify.com/xquik/x-list-scraper)：从 List 的 URL 或 ID 抓取 List 帖子、成员和关注者。适合由精选 List 定义数据来源的场景。每行低至 $0.00015。
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper)：抓取 Community 信息、帖子、搜索结果、成员和管理员。适合以 X Community 为数据来源的场景。每行低至 $0.00015。
@@ -365,6 +388,9 @@ Store 运行使用 Actor 的 `latest` 构建配置。API 客户端应省略构�
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)：使用 AI 标注看涨、看跌、中性或混合立场、内容类型、信心程度和资产相关性。适合关注股票、加密货币或交易讨论的场景。每条已分析推文低至 $0.0003。
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)：使用 AI 按格式、来源归属和主题相关性标注新闻类帖子。适合将报道内容与评论区分开的场景。每条已分析推文低至 $0.0003。
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)：使用 AI 为每条推文回答你自定义的分类、评分和是/否问题。适合预设分析无法满足你的标签需求的场景。每条已分析推文低至 $0.0003。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)：
+  根据 8 个 AI 特征回答，为每条推文估算 0 到 100 的 Viral Score 及一个结论。
+  适用于研究推文为何传播或遇冷的场景。起价为每条分析推文 $0.0003。
 
 ## 需要抓取以外的功能？
 

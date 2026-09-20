@@ -47,8 +47,8 @@ bilgilendir. Müşterilerin senin hakkında nasıl konuştuğunun geçmişini
 
 ## X'te bir markayı nasıl izlerim
 
-1. Arama terimleri (örneğin `"Acme headphones" lang:en"`), profil
-   handle'ları, tweet URL'leri veya tweet ID'leri ekle.
+1. Arama terimleri (örneğin `(Sony OR "WH-1000XM5") headphones lang:en`),
+   profil handle'ları, tweet URL'leri veya tweet ID'leri ekle.
 2. `maxItems`'i ve tarih sınırları, minimum beğeni veya yanıt hariç tutma
    gibi görevinin ihtiyaç duyduğu çıkarma filtrelerini ayarla.
 3. Marka isimlerini ve takma adlarını `analysis.targets` altına koy ve
@@ -61,10 +61,12 @@ bilgilendir. Müşterilerin senin hakkında nasıl konuştuğunun geçmişini
 
 ```json
 {
-  "searchTerms": ["\"Acme headphones\" lang:en"],
+  "searchTerms": ["(Sony OR \"WH-1000XM5\") headphones lang:en"],
   "maxItems": 100,
   "analysis": {
-    "targets": [{ "name": "Acme", "aliases": ["Acme headphones"] }],
+    "targets": [
+      { "name": "Sony", "aliases": ["Sony headphones", "WH-1000XM5"] }
+    ],
     "context": "Consumer headphones & customer service."
   },
   "monitor": {
@@ -115,6 +117,27 @@ Değişen gerçekleri kanıtlamazlar & eksik bir tweet silinmeyi kanıtlamaz.
 Temel değer sınırı varsayılan olarak 100.000 satırdır. Tekrarlanan tweet
 ID'leri, yükleme hataları ve değişen veri kümesi boyutları, toplamadan önce
 karşılaştırmayı durdurur. Asla boş bir temel değere dönüşmezler.
+
+## Kendi metnini analiz et
+
+Kendi metnini `texts` alanına yapıştır: taslaklar, yanıtlar, değerlendirmeler
+veya notlar. Actor metni analiz eder & X'ten hiçbir şey getirmez.
+
+```json
+{
+  "texts": [
+    "The new update is great, but sync still drops on mobile.",
+    "Support fixed my issue in 10 minutes. Thank you."
+  ]
+}
+```
+
+- Her metin, bir tweet ile aynı `analysis` yanıtlarını taşıyan 1 satır olur.
+- `tweet.id` değeri `text:1`, `text:2` & devamı şeklindedir, `tweet.type` ise
+  `text` olur.
+- Analiz edilen her metin, analiz edilen bir tweet gibi $0.0003 tutar.
+- `texts` ayarlıyken çalıştırma yalnızca o metinleri analiz eder. X hedeflerini
+  ayrı çalıştır.
 
 ## Fiyatlandırma
 
@@ -234,7 +257,7 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   gerektiğinde kullan. Satır başına $0.00015'ten başlar.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Handle, ID
   veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını ve
-  beğenilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
+  takipçilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
   başına $0.00015'ten başlar.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25'ten fazla
   filtreyle gönderilerin altındaki yanıtları, yorumları ve tüm konuşmaları
@@ -242,7 +265,7 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   başına $0.00015'ten başlar.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Gönderi
   URL'leri veya ID'leri için toplu olarak yanıtları, alıntıları, retweet
-  edenleri, beğenenleri ve thread'leri kazır. Gönderilerle kimin etkileşime
+  edenleri ve thread'leri kazır. Gönderilerle kimin etkileşime
   girdiğini ölçtüğünde kullan. Satır başına $0.00015'ten başlar.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Takipçileri,
   takip edilenleri, Liste üyelerini, aboneleri ve Topluluk üyelerini profil
@@ -287,6 +310,11 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   Yapay zeka ile her tweet için kendi kategori, puan ve evet/hayır sorularını
   yanıtlar. Hazır analizler etiketlerine uymadığında kullan. Analiz edilen
   tweet başına $0.0003'ten başlar.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Yapay zekanın 8 özellik yanıtından her tweet için 0 ile 100 arasında bir
+  Viral Score ve bir karar tahmin eder. Tweet'lerin neden yayıldığını veya
+  tutmadığını incelediğinde kullan. Analiz edilen tweet başına $0.0003'ten
+  başlar.
 
 ## SSS ve destek
 

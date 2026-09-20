@@ -69,6 +69,26 @@ Signals**는 여러분의 티커나 자산에 관한 게시물을 수집합니�
 답변은 작성자가 표현하는 내용을 설명합니다. 투자 조언이 아니며 주장, 가격,
 공시를 검증하지 않습니다.
 
+## 직접 작성한 텍스트 분석하기
+
+`texts`에 직접 작성한 텍스트를 붙여넣으세요: 초안, 답글, 리뷰, 메모. Actor는
+이를 분석하며 X에서 아무것도 가져오지 않습니다.
+
+```json
+{
+  "texts": [
+    "$NVDA guidance beat again. I am adding on any dip below 900.",
+    "Not touching $BTC until the ETF flows turn positive."
+  ]
+}
+```
+
+- 각 텍스트는 트윗과 동일한 `analysis` 답변이 담긴 1개의 행이 됩니다.
+- `tweet.id`는 `text:1`, `text:2` 등으로 이어지고 `tweet.type`은 `text`입니다.
+- 분석된 텍스트 1개의 비용은 분석된 트윗과 동일한 $0.0003입니다.
+- `texts`를 설정하면 실행은 해당 텍스트만 분석합니다. X 대상은 별도로
+  실행하세요.
+
 ## 가격
 
 AI 비용은 트윗당 가격에 포함되어 있습니다. AI 제공업체에 비용을 내거나 토큰을 구매하거나 키를 준비할 필요가 없습니다.
@@ -185,13 +205,13 @@ Pricing 탭이 이를 보여줍니다.
   타임라인, 리스트 & 트윗 ID에서 50개 이상의 필터와 플랫 내보내기로 트윗을
   스크랩합니다. 분석 없이 트윗 데이터만 필요할 때 사용하세요. 행당 $0.00015부터.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): 핸들, ID
-  또는 URL에서 프로필과 게시물, 답글, 미디어 & 좋아요를 스크랩합니다. 검색이
+  또는 URL에서 프로필과 게시물, 답글, 미디어 & 팔로워를 스크랩합니다. 검색이
   아니라 계정에서 시작할 때 사용하세요. 행당 $0.00015부터.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 게시물 아래의
   답글, 댓글 & 전체 대화를 25개 이상의 필터로 스크랩합니다. 트윗 아래의 토론이
   필요할 때 사용하세요. 행당 $0.00015부터.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): 게시물
-  URL이나 ID에 대한 답글, 인용, 리트윗한 사람, 좋아요를 누른 사람 & 스레드를
+  URL이나 ID에 대한 답글, 인용, 리트윗한 사람 & 스레드를
   대량으로 스크랩합니다. 게시물에 참여한 사람을 측정할 때 사용하세요. 행당
   $0.00015부터.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): 팔로워,
@@ -229,6 +249,10 @@ Pricing 탭이 이를 보여줍니다.
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
   AI로 모든 트윗에 대해 자신만의 카테고리, 점수 & 예/아니오 질문에 답합니다.
   미리 준비된 분석이 라벨에 맞지 않을 때 사용하세요. 분석된 트윗당
+  $0.0003부터.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  AI의 특성 답변 8개로 모든 트윗의 0에서 100까지 Viral Score & 판정을
+  추정합니다. 트윗이 왜 퍼지거나 묻히는지 연구할 때 사용하세요. 분석된 트윗당
   $0.0003부터.
 
 ## FAQ & 지원

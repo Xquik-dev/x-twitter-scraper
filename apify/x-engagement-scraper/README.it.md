@@ -17,14 +17,13 @@
 
 Xquik è il servizio di scraping X (Twitter) più veloce ed economico al mondo,
 con i dati X più completi. X Engagement Scraper raccoglie risposte,
-citazioni, chi ha retwittato, chi ha messo Mi piace e thread per qualsiasi
-post. Ogni altro Actor Apify addebita il costo prima di filtrare o
-deduplicare. Xquik addebita solo i risultati consegnati, unici e conformi ai
-filtri.
+citazioni, chi ha retwittato e thread per qualsiasi post. Ogni altro Actor
+Apify addebita il costo prima di filtrare o deduplicare. Xquik addebita solo
+i risultati consegnati, unici e conformi ai filtri.
 
 Raccogli dati di engagement Twitter per uno o più post X: risposte,
-citazioni, chi ha retwittato, chi ha messo Mi piace e contesto del thread.
-Non serve una chiave API X né il login.
+citazioni, chi ha retwittato e contesto del thread. Non serve una chiave API
+X né il login.
 
 ## Risposte, citazioni e profili
 
@@ -33,7 +32,7 @@ Non serve una chiave API X né il login.
 - Risposte dirette e annidate in 4 ordini di ordinamento.
 - Dettagli del post sorgente come riga selezionabile.
 - Post di citazione con testo, autori, media e metriche.
-- Profili di chi ha retwittato e di chi ha messo Mi piace.
+- Profili di chi ha retwittato.
 - Contesto della conversazione attorno a ogni post sorgente.
 - Più tipi di engagement e post per esecuzione.
 - Limiti globali e per risorsa.
@@ -45,10 +44,14 @@ Non serve una chiave API X né il login.
 ```json
 {
   "tweetIds": ["2082577277246972300"],
-  "engagementTypes": ["replies", "quotes", "retweeters", "favoriters"],
+  "engagementTypes": ["replies", "quotes", "retweeters"],
   "maxItems": 10000
 }
 ```
+
+X ha smesso di mostrare chi ha messo Mi piace a un post nel 2024. Il tipo
+`favoriters` non restituisce righe. Un'esecuzione senza righe indica questo
+motivo nella sua diagnostica.
 
 Lascia `dedupeAcrossTargets` disattivato per mantenere ogni abbinamento tra
 sorgente ed engagement. Attivalo per mantenere una riga per account
@@ -126,10 +129,10 @@ hai bisogno.
   da ricerche, timeline di profilo, List e ID di tweet con oltre 50 filtri ed
   export piatti. Usalo quando ti servono dati sui tweet senza analisi. A
   partire da $0.00015 per riga.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): raccoglie
-  profili più i loro post, risposte, media e Mi piace da handle, ID o URL.
-  Usalo quando parti dagli account invece che dalle ricerche. A partire da
-  $0.00015 per riga.
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): estrae
+  profili con i relativi post, risposte, media & follower da handle, ID o URL.
+  Usalo quando parti dagli account invece che dalle ricerche. Da $0.00015 per
+  riga.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): raccoglie
   risposte, commenti e intere conversazioni sotto i post con oltre 25 filtri.
   Usalo quando ti serve la discussione sotto i tweet. A partire da $0.00015
@@ -181,3 +184,7 @@ hai bisogno.
   risponde alle tue domande personalizzate di categoria, punteggio e sì/no
   per ogni tweet con l'AI. Usalo quando le analisi preimpostate non si
   adattano alle tue etichette. A partire da $0.0003 per tweet analizzato.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  stima un Viral Score da 0 a 100 & un verdetto per ogni tweet da 8 risposte
+  dell'IA sui tratti. Usalo quando studi perché i tweet si diffondono o
+  falliscono. Da $0.0003 per tweet analizzato.

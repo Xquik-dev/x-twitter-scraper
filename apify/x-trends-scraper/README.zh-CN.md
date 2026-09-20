@@ -85,12 +85,14 @@ Xquik 是独立的第三方服务，与 X Corp 无关联。"Twitter" 与 "X" 是
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper)：从搜索、主页时间线、List 与推文 ID
   中抓取推文，提供 50 多种筛选条件与扁平化导出。适合只需要推文数据而无需分析的场景。
   起价每行 $0.00015。
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从用户名、ID 或 URL 抓取主页
-  及其帖子、回复、媒体与点赞。适合从账号而非搜索开始的场景。起价每行 $0.00015。
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从
+  用户名、ID 或 URL 抓取主页及其帖子、回复、媒体和关注者。适用于从账户
+  出发而非从搜索出发的场景。起价为每行 $0.00015。
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)：抓取帖子下的回复、评论与完整对话，
   提供 25 多种筛选条件。适合需要获取推文下方讨论内容的场景。起价每行 $0.00015。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)：批量为帖子 URL 或 ID 抓取
-  回复、引用推文、转推者、点赞者与推文串。适合衡量帖子互动情况的场景。起价每行 $0.00015。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)：
+  批量抓取帖子 URL 或 ID 对应的回复、引用、转推者及推文串。
+  适用于衡量谁与帖子产生了互动。起价为每行 $0.00015。
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)：以主页行形式抓取关注者、
   关注对象、List 成员、订阅者与 Community 成员。适合需要受众或成员列表的场景。
   起价每个主页 $0.00015。
@@ -120,3 +122,6 @@ Xquik 是独立的第三方服务，与 X Corp 无关联。"Twitter" 与 "X" 是
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)：
   通过 AI 为每条推文回答你自定义的分类、评分与是非问题。适合预设分析无法满足你自定义标签需求的场景。
   起价每条分析推文 $0.0003。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)：
+  根据 8 个 AI 特征回答，为每条推文估算 0 到 100 的 Viral Score 及一个结论。
+  适用于研究推文为何传播或遇冷的场景。起价为每条分析推文 $0.0003。

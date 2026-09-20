@@ -50,8 +50,9 @@ una ejecución a otra.
 
 ## Cómo monitorear una marca en X
 
-1. Agrega términos de búsqueda (por ejemplo `"Acme headphones" lang:en`),
-   nombres de usuario de perfiles, URLs de tuits o IDs de tuits.
+1. Agrega términos de búsqueda (por ejemplo
+   `(Sony OR "WH-1000XM5") headphones lang:en`), nombres de usuario de
+   perfiles, URLs de tuits o IDs de tuits.
 2. Configura `maxItems` y los filtros de extracción que necesita tu tarea,
    como límites de fecha, mínimo de me gusta o exclusión de respuestas.
 3. Pon los nombres y alias de tu marca bajo `analysis.targets` y describe la
@@ -64,10 +65,12 @@ una ejecución a otra.
 
 ```json
 {
-  "searchTerms": ["\"Acme headphones\" lang:en"],
+  "searchTerms": ["(Sony OR \"WH-1000XM5\") headphones lang:en"],
   "maxItems": 100,
   "analysis": {
-    "targets": [{ "name": "Acme", "aliases": ["Acme headphones"] }],
+    "targets": [
+      { "name": "Sony", "aliases": ["Sony headphones", "WH-1000XM5"] }
+    ],
     "context": "Consumer headphones & customer service."
   },
   "monitor": {
@@ -120,6 +123,28 @@ El límite de línea base es de 100 000 filas por defecto. Los IDs de tuits
 duplicados, los fallos de carga y los tamaños de Dataset cambiantes detienen la
 comparación antes de la recopilación. Nunca se convierten en una línea base
 vacía.
+
+## Analiza tu propio texto
+
+Pega tu propio texto en `texts`: borradores, respuestas, reseñas o notas. El
+Actor lo analiza y no obtiene nada de X.
+
+```json
+{
+  "texts": [
+    "The new update is great, but sync still drops on mobile.",
+    "Support fixed my issue in 10 minutes. Thank you."
+  ]
+}
+```
+
+- Cada texto se convierte en 1 fila con las mismas respuestas de `analysis` que
+  un tuit.
+- `tweet.id` es `text:1`, `text:2` y así sucesivamente, y `tweet.type` es
+  `text`.
+- Cada texto analizado cuesta los mismos $0.0003 que un tuit analizado.
+- Con `texts` establecido, la ejecución analiza solo esos textos. Ejecuta los
+  objetivos de X por separado.
 
 ## Precios
 
@@ -240,16 +265,16 @@ datos que necesitas.
   filtros y exportaciones planas. Úsalo cuando necesites datos de tuits sin
   análisis. Desde $0.00015 por fila.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Extrae
-  perfiles junto con sus publicaciones, respuestas, contenido multimedia y me
-  gusta a partir de nombres de usuario, IDs o URLs. Úsalo cuando partes de
+  perfiles junto con sus publicaciones, respuestas, contenido multimedia y
+  seguidores a partir de nombres de usuario, IDs o URLs. Úsalo cuando partes de
   cuentas en lugar de búsquedas. Desde $0.00015 por fila.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Extrae
   respuestas, comentarios y conversaciones completas debajo de publicaciones
   con más de 25 filtros. Úsalo cuando necesites la discusión debajo de los
   tuits. Desde $0.00015 por fila.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Extrae
-  respuestas, citas, usuarios que retuitean, quienes dan me gusta e hilos para
-  URLs o IDs de publicaciones de forma masiva. Úsalo cuando mides quién
+  respuestas, citas, usuarios que retuitean e hilos para URLs o IDs de
+  publicaciones de forma masiva. Úsalo cuando mides quién
   interactuó con las publicaciones. Desde $0.00015 por fila.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Extrae
   seguidores, cuentas seguidas, miembros de Listas, suscriptores y miembros de
@@ -295,6 +320,10 @@ datos que necesitas.
   Responde tus propias preguntas de categoría, puntaje y sí/no para cada tuit
   con IA. Úsalo cuando los análisis predefinidos no se ajustan a tus
   etiquetas. Desde $0.0003 por tuit analizado.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Estima un Viral Score de 0 a 100 y un veredicto para cada tuit a partir de 8
+  respuestas de IA sobre sus rasgos. Úsalo cuando estudias por qué los tuits se
+  difunden o fracasan. Desde $0.0003 por tuit analizado.
 
 ## Preguntas frecuentes y soporte
 

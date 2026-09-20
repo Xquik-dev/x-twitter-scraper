@@ -17,11 +17,11 @@
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. X Profile Scraper, herhangi bir handle için profilleri,
-gönderileri, yanıtları, medyayı ve beğenileri toplar. Diğer tüm Apify
+gönderileri, yanıtları, medyayı ve takipçileri toplar. Diğer tüm Apify
 Actor'ları filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca
 teslim edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
 
-X profillerini, gönderileri, yanıtları, medyayı ve beğenileri kazı. Handle,
+X profillerini, gönderileri, yanıtları, medyayı ve takipçileri kazı. Handle,
 ID veya URL kullan. X API anahtarı veya girişi gerekmez.
 
 ## Profiller ve zaman akışları
@@ -32,8 +32,7 @@ ID veya URL kullan. X API anahtarı veya girişi gerekmez.
   based in" etiketini dahil et.
 - Mevcut sonuç sayfaları genelinde Profile Posts ve With Replies satırları
   ekle.
-- Medya, beğeniler, takipçiler, takip edilenler veya doğrulanmış takipçiler
-  ekle.
+- Medya, takipçiler, takip edilenler veya doğrulanmış takipçiler ekle.
 - İsteğe bağlı gönderileri tarihe, medyaya, doğrulamaya, yeniden paylaşım
   durumuna ve metriklere göre filtrele.
 - İsteğe bağlı profilleri kitleye, etkinliğe, yaşa ve herkese açık metadata'ya
@@ -57,12 +56,15 @@ kaynakları içerir.
 ## Çıktı
 
 Profil satırları `resultType: "profile"` kullanır. İsteğe bağlı satırlar
-`profileTweet`, `profileReply`, `profileMedia`, `profileLike`,
-`profileFollower`, `profileFollowing` veya `profileVerifiedFollower` kullanır.
-Her satır `sourceTarget`'ı korur. Herkese açık alanlar Xquik REST yanıt
-biçiminde kalır. X, `accountBasedIn`'i toplu hesap erişim IP'lerinden çıkarır.
-`observedAt`, alma zamanını kaydeder. Vatandaşlığı, ikameti, kimliği, üyelik
-tarihini, gönderiyi veya tam konumu belirtmez.
+`profileTweet`, `profileReply`, `profileMedia`, `profileFollower`,
+`profileFollowing` veya `profileVerifiedFollower` kullanır. Her satır
+`sourceTarget`'ı korur. Herkese açık alanlar Xquik REST yanıt biçiminde kalır.
+X, `accountBasedIn`'i toplu hesap erişim IP'lerinden çıkarır. `observedAt`,
+alma zamanını kaydeder. Vatandaşlığı, ikameti, kimliği, üyelik tarihini,
+gönderiyi veya tam konumu belirtmez.
+
+X, 2024'ten beri bir hesabın beğendiği gönderileri yalnızca o hesaba gösteriyor.
+`includeLikes`, başka hesaplar için `profileLike` satırı döndürmez.
 
 ## Fiyatlandırma
 
@@ -110,7 +112,7 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   başına $0.00015'ten başlar.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Gönderi
   URL'leri veya ID'leri için toplu olarak yanıtları, alıntıları, retweet
-  edenleri, beğenenleri ve thread'leri kazır. Gönderilerle kimin etkileşime
+  edenleri ve thread'leri kazır. Gönderilerle kimin etkileşime
   girdiğini ölçtüğünde kullan. Satır başına $0.00015'ten başlar.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Takipçileri,
   takip edilenleri, Liste üyelerini, aboneleri ve Topluluk üyelerini profil
@@ -159,3 +161,8 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   Yapay zeka ile her tweet için kendi kategori, puan ve evet/hayır sorularını
   yanıtlar. Hazır analizler etiketlerine uymadığında kullan. Analiz edilen
   tweet başına $0.0003'ten başlar.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Yapay zekanın 8 özellik yanıtından her tweet için 0 ile 100 arasında bir
+  Viral Score ve bir karar tahmin eder. Tweet'lerin neden yayıldığını veya
+  tutmadığını incelediğinde kullan. Analiz edilen tweet başına $0.0003'ten
+  başlar.

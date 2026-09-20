@@ -76,6 +76,28 @@ Les réponses décrivent ce que les auteurs expriment. Elles ne constituent
 pas un conseil en investissement et ne vérifient ni les affirmations, ni
 les prix, ni les dépôts réglementaires.
 
+## Analyser votre propre texte
+
+Collez votre propre texte dans `texts` : brouillons, réponses, avis ou
+notes. L'Actor l'analyse & ne récupère rien sur X.
+
+```json
+{
+  "texts": [
+    "$NVDA guidance beat again. I am adding on any dip below 900.",
+    "Not touching $BTC until the ETF flows turn positive."
+  ]
+}
+```
+
+- Chaque texte devient 1 ligne avec les mêmes réponses `analysis` qu'un
+  tweet.
+- `tweet.id` vaut `text:1`, `text:2` & ainsi de suite, & `tweet.type` vaut
+  `text`.
+- Chaque texte analysé coûte les mêmes $0.0003 qu'un tweet analysé.
+- Avec `texts` réglé, le run n'analyse que ces textes. Exécutez les cibles
+  X séparément.
+
 ## Tarification
 
 Les coûts d'IA sont inclus dans le prix par tweet. Vous ne payez aucun fournisseur d'IA, n'achetez aucun jeton & n'apportez aucune clé.
@@ -208,7 +230,7 @@ données dont vous avez besoin.
   avez besoin de données de tweet sans analyse. À partir de $0.00015 par
   ligne.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) : scrape
-  des profils ainsi que leurs posts, réponses, médias et likes à partir de
+  des profils ainsi que leurs posts, réponses, médias et abonnés à partir de
   handles, d'ID ou d'URL. Utilisez-le quand vous partez de comptes plutôt
   que de recherches. À partir de $0.00015 par ligne.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) : scrape des
@@ -216,9 +238,8 @@ données dont vous avez besoin.
   avec plus de 25 filtres. Utilisez-le quand vous avez besoin de la
   discussion sous les tweets. À partir de $0.00015 par ligne.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) :
-  scrape les réponses, citations, personnes ayant reposté, personnes ayant
-  aimé et threads pour des URL ou ID de post en masse. Utilisez-le pour
-  mesurer qui s'est engagé avec des posts. À partir de $0.00015 par ligne.
+  scrape les réponses, citations, personnes ayant reposté et threads pour
+  des URL ou ID de post en masse. Utilisez-le pour mesurer qui s'est engagé avec des posts. À partir de $0.00015 par ligne.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) : scrape
   les abonnés, les comptes suivis, les membres de List, les abonnés de List
   et les membres de Community sous forme de lignes de profil. Utilisez-le
@@ -267,6 +288,11 @@ données dont vous avez besoin.
   répond à vos propres questions de catégorie, de score et de oui/non pour
   chaque tweet par IA. Utilisez-le quand les analyses prédéfinies ne
   correspondent pas à vos étiquettes. À partir de $0.0003 par tweet
+  analysé.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer) :
+  estime un Viral Score de 0 à 100 et un verdict pour chaque tweet à partir
+  de 8 réponses d'IA sur ses traits. Utilisez-le quand vous étudiez pourquoi
+  des tweets se propagent ou échouent. À partir de $0.0003 par tweet
   analysé.
 
 ## FAQ et support

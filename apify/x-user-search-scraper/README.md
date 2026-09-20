@@ -69,15 +69,15 @@ diagnostics. Pick the one that matches the data you need.
   exports. Use it when you need tweet data without analysis. From $0.00015 per
   row.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Scrapes
-  profiles plus their posts, replies, media & likes from handles, IDs or URLs.
-  Use it when you start from accounts rather than searches. From $0.00015 per
-  row.
+  profiles plus their posts, replies, media & followers from handles, IDs or
+  URLs. Use it when you start from accounts rather than searches. From $0.00015
+  per row.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Scrapes replies,
   comments & whole conversations under posts with 25+ filters. Use it when you
   need the discussion beneath tweets. From $0.00015 per row.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Scrapes
-  replies, quotes, retweeters, likers & threads for post URLs or IDs in bulk.
-  Use it when you measure who engaged with posts. From $0.00015 per row.
+  replies, quotes, retweeters & threads for post URLs or IDs in bulk. Use it
+  when you measure who engaged with posts. From $0.00015 per row.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Scrapes
   followers, following, List members, subscribers & Community members as profile
   rows. Use it when you need audience or member lists. From $0.00015 per
@@ -118,3 +118,7 @@ diagnostics. Pick the one that matches the data you need.
   Answers your own category, score & yes/no questions for every tweet with AI.
   Use it when the preset analyses do not fit your labels. From $0.0003 per
   analyzed tweet.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
+  trait answers. Use it when you study why tweets spread or flop. From $0.0003
+  per analyzed tweet.

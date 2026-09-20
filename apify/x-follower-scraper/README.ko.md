@@ -334,6 +334,32 @@ Console은 다음 컨트롤을 제공합니다.
 `dedupeAcrossTargets`도 포함됩니다. 시각적 폼은 표준 컨트롤과 중복되는 별칭을
 숨깁니다. 기존 JSON과 저장된 태스크 입력은 현재 동작을 유지합니다.
 
+### 다른 팔로워 Actor에서 옮겨오기
+
+이미 사용 중인 입력을 그대로 붙여넣으세요. X Follower Scraper는 다른 X 팔로워
+Actor가 사용하는 필드 이름을 읽고 자체 필드에 매핑합니다. 표준 이름은 문서화된
+기본값으로 유지됩니다. 별칭은 필드를 누락시키지 않으며 지불 금액도 바꾸지
+않습니다.
+
+| 이미 사용 중인 필드                                                                   | X Follower Scraper가 읽는 필드 |
+| ------------------------------------------------------------------------------------- | ------------------------------ |
+| `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`, `screenNames` | `twitterHandles`               |
+| `username`, `handle`, `screenName`, 문자열 1개로                                      | `twitterHandles`               |
+| `twitterUserIds`, `user_ids`, `userIdList`                                            | `userIds`                      |
+| `user_id`, `userId`, 문자열 1개로                                                     | `userIds`                      |
+| `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`                          | `startUrls`                    |
+| `profileUrl`, 문자열 1개로                                                            | `startUrls`                    |
+| `getFollowers`, `getFollowing`                                                        | `relations`                    |
+| `type`에 `followers` 또는 `following` 지정                                            | `relation`                     |
+| `maxResults`, `max_results`, `resultsLimit`, `count`                                  | `maxItems`                     |
+| `scrapeAllResults`                                                                    | 대상별 상한 없음               |
+
+2개의 이름은 여기서 다른 의미를 가집니다. 일부 Actor에서 `maxFollowers` &
+`maxFollowing`은 실행이 가져오는 행 수를 제한합니다. X Follower Scraper에서는
+프로필을 팔로워 & 팔로잉 수로 필터링합니다. 행 수를 제한하려면 `maxItems`를
+사용하세요. X Follower Scraper에는 페이지 단위가 없으므로 `maxPages`를
+`maxItems`로 바꾸세요.
+
 ### 항상 최신 빌드를 사용하세요
 
 Store 실행은 Actor의 `latest` 빌드 구성을 사용합니다. API 클라이언트는 빌드
@@ -441,13 +467,13 @@ Actor는 공개 X 프로필 필드를 요청합니다. 결과에는 자기 신�
   타임라인, 리스트 & 트윗 ID에서 50개 이상의 필터와 플랫 내보내기로 트윗을
   스크랩합니다. 분석 없이 트윗 데이터만 필요할 때 사용하세요. 행당 $0.00015부터.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): 핸들, ID
-  또는 URL에서 프로필과 게시물, 답글, 미디어 & 좋아요를 스크랩합니다. 검색이
+  또는 URL에서 프로필과 게시물, 답글, 미디어 & 팔로워를 스크랩합니다. 검색이
   아니라 계정에서 시작할 때 사용하세요. 행당 $0.00015부터.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 게시물 아래의
   답글, 댓글 & 전체 대화를 25개 이상의 필터로 스크랩합니다. 트윗 아래의 토론이
   필요할 때 사용하세요. 행당 $0.00015부터.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): 게시물
-  URL이나 ID에 대한 답글, 인용, 리트윗한 사람, 좋아요를 누른 사람 & 스레드를
+  URL이나 ID에 대한 답글, 인용, 리트윗한 사람 & 스레드를
   대량으로 스크랩합니다. 게시물에 참여한 사람을 측정할 때 사용하세요. 행당
   $0.00015부터.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): 핸들,
@@ -486,6 +512,10 @@ Actor는 공개 X 프로필 필드를 요청합니다. 결과에는 자기 신�
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
   AI로 모든 트윗에 대해 자신만의 카테고리, 점수 & 예/아니오 질문에 답합니다.
   미리 준비된 분석이 라벨에 맞지 않을 때 사용하세요. 분석된 트윗당
+  $0.0003부터.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  AI의 특성 답변 8개로 모든 트윗의 0에서 100까지 Viral Score & 판정을
+  추정합니다. 트윗이 왜 퍼지거나 묻히는지 연구할 때 사용하세요. 분석된 트윗당
   $0.0003부터.
 
 ## 스크래핑보다 더 필요하신가요?

@@ -16,10 +16,10 @@
 </td></tr></table>
 
 Xquik 是速度最快、成本最低且数据最完整的 X（Twitter）抓取工具服务。X Engagement Scraper
-可为任意帖子收集回复、引用推文、转推者、点赞者与推文串。其他 Apify Actor 都在筛选或去重之前收费。
+可为任意帖子收集回复、引用推文、转推者与推文串。其他 Apify Actor 都在筛选或去重之前收费。
 Xquik 只对已交付、唯一且符合筛选条件的结果收费。
 
-为一个或多个 X 帖子收集 Twitter 互动数据：回复、引用推文、转推者、点赞者与推文串上下文。
+为一个或多个 X 帖子收集 Twitter 互动数据：回复、引用推文、转推者与推文串上下文。
 无需 X API 密钥或登录。
 
 ## 回复、引用推文与主页
@@ -29,7 +29,7 @@ Xquik 只对已交付、唯一且符合筛选条件的结果收费。
 - 支持 4 种排序方式的直接与嵌套回复。
 - 将源帖子详情作为可选行返回。
 - 引用推文包含文本、作者、媒体与指标。
-- 转推者与点赞者主页。
+- 转推者主页。
 - 源帖子周围的对话上下文。
 - 单次运行支持多种互动类型与多个帖子。
 - 支持全局与单资源上限。
@@ -41,10 +41,13 @@ Xquik 只对已交付、唯一且符合筛选条件的结果收费。
 ```json
 {
   "tweetIds": ["2082577277246972300"],
-  "engagementTypes": ["replies", "quotes", "retweeters", "favoriters"],
+  "engagementTypes": ["replies", "quotes", "retweeters"],
   "maxItems": 10000
 }
 ```
+
+X 自 2024 年起不再显示谁点赞了帖子。`favoriters` 类型不返回任何行。没有行的运行会在其诊断信息中
+说明该原因。
 
 关闭 `dedupeAcrossTargets` 以保留每个源与互动类型的配对。开启后每次运行每个账号只保留一行。
 
@@ -101,8 +104,9 @@ Xquik 是独立的第三方服务，与 X Corp 无关联。"Twitter" 与 "X" 是
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper)：从搜索、主页时间线、List 与推文 ID
   中抓取推文，提供 50 多种筛选条件与扁平化导出。适合只需要推文数据而无需分析的场景。
   起价每行 $0.00015。
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从用户名、ID 或 URL 抓取主页
-  及其帖子、回复、媒体与点赞。适合从账号而非搜索开始的场景。起价每行 $0.00015。
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从
+  用户名、ID 或 URL 抓取主页及其帖子、回复、媒体和关注者。适用于从账户
+  出发而非从搜索出发的场景。起价为每行 $0.00015。
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)：抓取帖子下的回复、评论与完整对话，
   提供 25 多种筛选条件。适合需要获取推文下方讨论内容的场景。起价每行 $0.00015。
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)：以主页行形式抓取关注者、
@@ -136,3 +140,6 @@ Xquik 是独立的第三方服务，与 X Corp 无关联。"Twitter" 与 "X" 是
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)：
   通过 AI 为每条推文回答你自定义的分类、评分与是非问题。适合预设分析无法满足你自定义标签需求的场景。
   起价每条分析推文 $0.0003。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)：
+  根据 8 个 AI 特征回答，为每条推文估算 0 到 100 的 Viral Score 及一个结论。
+  适用于研究推文为何传播或遇冷的场景。起价为每条分析推文 $0.0003。

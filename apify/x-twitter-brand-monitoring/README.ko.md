@@ -43,8 +43,8 @@ X(Twitter)에서 브랜드 언급을 모니터링하고 실행 간 감정 변화
 
 ## X에서 브랜드를 모니터링하는 방법
 
-1. 검색어(예: `"Acme headphones" lang:en`), 프로필 핸들, 트윗 URL, 트윗
-   ID를 추가하세요.
+1. 검색어(예: `(Sony OR "WH-1000XM5") headphones lang:en`), 프로필 핸들,
+   트윗 URL, 트윗 ID를 추가하세요.
 2. `maxItems`와 작업에 필요한 추출 필터(예: 날짜 경계, 최소 좋아요, 답글
    제외)를 설정하세요.
 3. 브랜드 이름 & 별칭을 `analysis.targets`에 넣고 `analysis.context`에
@@ -55,10 +55,12 @@ X(Twitter)에서 브랜드 언급을 모니터링하고 실행 간 감정 변화
 
 ```json
 {
-  "searchTerms": ["\"Acme headphones\" lang:en"],
+  "searchTerms": ["(Sony OR \"WH-1000XM5\") headphones lang:en"],
   "maxItems": 100,
   "analysis": {
-    "targets": [{ "name": "Acme", "aliases": ["Acme headphones"] }],
+    "targets": [
+      { "name": "Sony", "aliases": ["Sony headphones", "WH-1000XM5"] }
+    ],
     "context": "Consumer headphones & customer service."
   },
   "monitor": {
@@ -107,6 +109,26 @@ Actor는 답변을 판단 기준으로 비교합니다. `choice` 답변은 카�
 기준선 제한은 기본적으로 100,000행입니다. 중복된 트윗 ID, 로딩 실패, 데이터셋
 크기 변경은 수집 전에 비교를 중단시킵니다. 이들은 절대 빈 기준선이 되지
 않습니다.
+
+## 직접 작성한 텍스트 분석하기
+
+`texts`에 직접 작성한 텍스트를 붙여넣으세요: 초안, 답글, 리뷰, 메모. Actor는
+이를 분석하며 X에서 아무것도 가져오지 않습니다.
+
+```json
+{
+  "texts": [
+    "The new update is great, but sync still drops on mobile.",
+    "Support fixed my issue in 10 minutes. Thank you."
+  ]
+}
+```
+
+- 각 텍스트는 트윗과 동일한 `analysis` 답변이 담긴 1개의 행이 됩니다.
+- `tweet.id`는 `text:1`, `text:2` 등으로 이어지고 `tweet.type`은 `text`입니다.
+- 분석된 텍스트 1개의 비용은 분석된 트윗과 동일한 $0.0003입니다.
+- `texts`를 설정하면 실행은 해당 텍스트만 분석합니다. X 대상은 별도로
+  실행하세요.
 
 ## 가격
 
@@ -215,13 +237,13 @@ AI 비용은 트윗당 가격에 포함되어 있습니다. AI 제공업체에 �
   타임라인, 리스트 & 트윗 ID에서 50개 이상의 필터와 플랫 내보내기로 트윗을
   스크랩합니다. 분석 없이 트윗 데이터만 필요할 때 사용하세요. 행당 $0.00015부터.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): 핸들, ID
-  또는 URL에서 프로필과 게시물, 답글, 미디어 & 좋아요를 스크랩합니다. 검색이
+  또는 URL에서 프로필과 게시물, 답글, 미디어 & 팔로워를 스크랩합니다. 검색이
   아니라 계정에서 시작할 때 사용하세요. 행당 $0.00015부터.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 게시물 아래의
   답글, 댓글 & 전체 대화를 25개 이상의 필터로 스크랩합니다. 트윗 아래의 토론이
   필요할 때 사용하세요. 행당 $0.00015부터.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): 게시물
-  URL이나 ID에 대한 답글, 인용, 리트윗한 사람, 좋아요를 누른 사람 & 스레드를
+  URL이나 ID에 대한 답글, 인용, 리트윗한 사람 & 스레드를
   대량으로 스크랩합니다. 게시물에 참여한 사람을 측정할 때 사용하세요. 행당
   $0.00015부터.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): 팔로워,
@@ -259,6 +281,10 @@ AI 비용은 트윗당 가격에 포함되어 있습니다. AI 제공업체에 �
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
   AI로 모든 트윗에 대해 자신만의 카테고리, 점수 & 예/아니오 질문에 답합니다.
   미리 준비된 분석이 라벨에 맞지 않을 때 사용하세요. 분석된 트윗당
+  $0.0003부터.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  AI의 특성 답변 8개로 모든 트윗의 0에서 100까지 Viral Score & 판정을
+  추정합니다. 트윗이 왜 퍼지거나 묻히는지 연구할 때 사용하세요. 분석된 트윗당
   $0.0003부터.
 
 ## FAQ & 지원

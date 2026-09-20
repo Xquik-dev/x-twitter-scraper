@@ -17,12 +17,12 @@
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
 den umfassendsten X-Daten. X Engagement Scraper sammelt Antworten,
-Zitate, Retweeter, Liker & Threads zu jedem Beitrag. Jeder andere Apify Actor
+Zitate, Retweeter & Threads zu jedem Beitrag. Jeder andere Apify Actor
 berechnet, bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für
 gelieferte, eindeutige, filterkonforme Ergebnisse.
 
 Sammle Twitter-Interaktionsdaten für einen oder mehrere X-Beiträge: Antworten,
-Zitate, Retweeter, Liker und Thread-Kontext. Kein X-API-Schlüssel oder Login
+Zitate, Retweeter und Thread-Kontext. Kein X-API-Schlüssel oder Login
 erforderlich.
 
 ## Antworten, Zitate und Profile
@@ -32,7 +32,7 @@ erforderlich.
 - Direkte und verschachtelte Antworten in 4 Sortierreihenfolgen.
 - Details zum Quellbeitrag als auswählbarer Datensatz.
 - Zitatbeiträge mit Text, Autoren, Medien und Kennzahlen.
-- Retweeter- und Liker-Profile.
+- Retweeter-Profile.
 - Konversationskontext rund um jeden Quellbeitrag.
 - Mehrere Interaktionstypen und Beiträge pro Run.
 - Globale und ressourcenbezogene Obergrenzen.
@@ -44,10 +44,14 @@ erforderlich.
 ```json
 {
   "tweetIds": ["2082577277246972300"],
-  "engagementTypes": ["replies", "quotes", "retweeters", "favoriters"],
+  "engagementTypes": ["replies", "quotes", "retweeters"],
   "maxItems": 10000
 }
 ```
+
+X zeigt seit 2024 nicht mehr, wer einen Beitrag gelikt hat. Der Typ
+`favoriters` liefert keine Datensätze. Ein Run ohne Datensätze nennt diesen
+Grund in seiner Diagnose.
 
 Lass `dedupeAcrossTargets` deaktiviert, um jede Quelle-Interaktionstyp-
 Kombination zu behalten. Schalte es ein, um im gesamten Run einen Datensatz
@@ -125,7 +129,7 @@ Abrechnung & Diagnosen. Wähle den, der zu deinen Daten passt.
   flachen Exporten. Nutze ihn, wenn du Tweet-Daten ohne Analyse brauchst. Ab
   $0.00015 pro Datensatz.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Scrapt
-  Profile samt Beiträgen, Antworten, Medien & Likes anhand von Handles, IDs
+  Profile samt Beiträgen, Antworten, Medien & Followern anhand von Handles, IDs
   oder URLs. Nutze ihn, wenn du von Accounts statt von Suchen ausgehst. Ab
   $0.00015 pro Datensatz.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Scrapt
@@ -179,3 +183,7 @@ Abrechnung & Diagnosen. Wähle den, der zu deinen Daten passt.
   Beantwortet deine eigenen Kategorie-, Score- & Ja/Nein-Fragen für jeden
   Tweet mit KI. Nutze ihn, wenn die vorgefertigten Analysen nicht zu deinen
   Labels passen. Ab $0.0003 pro analysiertem Tweet.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Schätzt für jeden Tweet einen Viral Score von 0 bis 100 & ein Urteil aus 8
+  KI-Antworten zu Merkmalen. Nutze ihn, wenn du untersuchst, warum Tweets sich
+  verbreiten oder floppen. Ab $0.0003 pro analysiertem Tweet.

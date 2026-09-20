@@ -350,6 +350,32 @@ bir Dedupe Mode takma adı olarak `dedupeAcrossTargets`'i de içerir. Görsel
 form, kanonik bir kontrolü tekrarlayan takma adları gizler. Mevcut JSON ve
 kaydedilmiş görev girdileri güncel davranışlarını korur.
 
+### Başka bir takipçi Actor'ından geç
+
+Zaten kullandığın girdiyi yapıştır. X Follower Scraper, diğer X takipçi
+Actor'larının kullandığı alan adlarını okur ve kendi alanlarına eşler. Kanonik
+adlar belgelenmiş varsayılan olarak kalır. Bir takma ad asla bir alanı
+düşürmez ve ödediğin tutarı asla değiştirmez.
+
+| Zaten kullandığın alan                                                                | X Follower Scraper bunu şöyle okur |
+| ------------------------------------------------------------------------------------- | ---------------------------------- |
+| `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`, `screenNames` | `twitterHandles`                   |
+| `username`, `handle`, `screenName`, tek bir dize olarak                               | `twitterHandles`                   |
+| `twitterUserIds`, `user_ids`, `userIdList`                                            | `userIds`                          |
+| `user_id`, `userId`, tek bir dize olarak                                              | `userIds`                          |
+| `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`                          | `startUrls`                        |
+| `profileUrl`, tek bir dize olarak                                                     | `startUrls`                        |
+| `getFollowers`, `getFollowing`                                                        | `relations`                        |
+| `followers` veya `following` değeriyle `type`                                         | `relation`                         |
+| `maxResults`, `max_results`, `resultsLimit`, `count`                                  | `maxItems`                         |
+| `scrapeAllResults`                                                                    | hedef başına üst sınır yok         |
+
+2 ad burada başka bir anlama gelir. Bazı Actor'larda `maxFollowers` ve
+`maxFollowing`, bir çalıştırmanın kaç satır getireceğini sınırlar. X Follower
+Scraper'da ise profilleri takipçi ve takip edilen sayılarına göre filtreler.
+Satırları sınırlamak için `maxItems` kullan. X Follower Scraper'da sayfa birimi
+yoktur, bu yüzden `maxPages` yerine `maxItems` kullan.
+
 ### Her zaman en güncel yapıyı kullan
 
 Store çalıştırmaları Actor'ın `latest` yapı yapılandırmasını kullanır. API
@@ -466,7 +492,7 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   gerektiğinde kullan. Satır başına $0.00015'ten başlar.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Handle, ID
   veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını ve
-  beğenilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
+  takipçilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
   başına $0.00015'ten başlar.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25'ten fazla
   filtreyle gönderilerin altındaki yanıtları, yorumları ve tüm konuşmaları
@@ -474,7 +500,7 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   başına $0.00015'ten başlar.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Gönderi
   URL'leri veya ID'leri için toplu olarak yanıtları, alıntıları, retweet
-  edenleri, beğenenleri ve thread'leri kazır. Gönderilerle kimin etkileşime
+  edenleri ve thread'leri kazır. Gönderilerle kimin etkileşime
   girdiğini ölçtüğünde kullan. Satır başına $0.00015'ten başlar.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
   Handle, biyografi ve konuma göre kullanıcıları takipçi, doğrulama, hesap
@@ -519,6 +545,11 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   Yapay zeka ile her tweet için kendi kategori, puan ve evet/hayır sorularını
   yanıtlar. Hazır analizler etiketlerine uymadığında kullan. Analiz edilen
   tweet başına $0.0003'ten başlar.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Yapay zekanın 8 özellik yanıtından her tweet için 0 ile 100 arasında bir
+  Viral Score ve bir karar tahmin eder. Tweet'lerin neden yayıldığını veya
+  tutmadığını incelediğinde kullan. Analiz edilen tweet başına $0.0003'ten
+  başlar.
 
 ## Kazımadan fazlasına mı ihtiyacın var?
 

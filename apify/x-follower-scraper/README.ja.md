@@ -267,6 +267,25 @@ Consoleでは、次のコントロールが提供されます。
 
 新しい連携では、正規のフィールドを使用してください。互換性のためのエイリアスは、JSON、API、SDK、自動化、タスクの入力で引き続き利用できます。これには、Output Modeのエイリアスとしての `outputVariant` と `includeRaw` が含まれます。また、Dedupe Modeのエイリアスとしての `dedupeAcrossTargets` も含まれます。ビジュアルフォームは、正規のコントロールと重複するエイリアスを非表示にします。既存のJSONおよび保存済みタスクの入力は、現在の動作を維持します。
 
+### 別のフォロワーActorから移行する
+
+すでに使っている入力をそのまま貼り付けてください。X Follower Scraperは、他のXフォロワーActorが使うフィールド名を読み取り、自身のフィールドに対応付けます。正規の名前は、引き続きドキュメント上のデフォルトです。エイリアスがフィールドを落とすことはなく、支払う金額を変えることもありません。
+
+| すでに使っているフィールド                                                              | X Follower Scraperでの読み取り先 |
+| ------------------------------------------------------------------------------------- | ------------------------------ |
+| `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`, `screenNames` | `twitterHandles`               |
+| `username`, `handle`, `screenName`（1つの文字列として）                                  | `twitterHandles`               |
+| `twitterUserIds`, `user_ids`, `userIdList`                                            | `userIds`                      |
+| `user_id`, `userId`（1つの文字列として）                                                 | `userIds`                      |
+| `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`                          | `startUrls`                    |
+| `profileUrl`（1つの文字列として）                                                        | `startUrls`                    |
+| `getFollowers`, `getFollowing`                                                        | `relations`                    |
+| `type` に `followers` または `following` を指定                                         | `relation`                     |
+| `maxResults`, `max_results`, `resultsLimit`, `count`                                  | `maxItems`                     |
+| `scrapeAllResults`                                                                    | ターゲットごとの上限なし          |
+
+2つの名前は、ここでは別の意味を持ちます。一部のActorでは、`maxFollowers` と `maxFollowing` は実行が取得する行数の上限です。X Follower Scraperでは、これらはフォロワー数とフォロー中の数でプロフィールをフィルタリングします。行数を制限するには `maxItems` を使用してください。X Follower Scraperにはページという単位がないため、`maxPages` は `maxItems` に置き換えてください。
+
 ### 常に最新のビルドを使用する
 
 Storeでの実行は、Actorの `latest` ビルド設定を使用します。APIクライアントは、ビルドの上書きを省略するか、`build=latest` を渡してください。古いビルドを固定しているタスクや連携は更新してください。固定されたビルドは自動的には移行しません。
@@ -354,9 +373,9 @@ Actorは公開されているXのプロフィールフィールドをリクエ�
 すべてのXquik Actorは、同じ抽出エンジン、フィルター優先の課金、診断機能を共有しています。必要なデータに合ったものを選んでください。
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): 検索、プロフィールのタイムライン、リスト、Tweet IDから、50以上のフィルターとフラットなエクスポートでポストをスクレイピングします。分析なしでポストデータが必要なときに使用します。1行あたり$0.00015から。
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): ハンドル名、ID、URLから、プロフィールとその投稿、リプライ、メディア、いいねをスクレイピングします。検索ではなくアカウント起点で始めるときに使用します。1行あたり$0.00015から。
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): ハンドル、ID、URLからプロフィールとそのポスト、リプライ、メディア、フォロワーをスクレイピングします。検索ではなくアカウントから始めるときに使用してください。1行あたり$0.00015から。
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25以上のフィルターで、投稿へのリプライ、コメント、会話全体をスクレイピングします。ポストの下にある議論が必要なときに使用します。1行あたり$0.00015から。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): 投稿URLまたはIDから、リプライ、引用ポスト、リポストしたユーザー、いいねしたユーザー、スレッドを一括でスクレイピングします。誰がポストにエンゲージしたかを測定するときに使用します。1行あたり$0.00015から。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): ポストのURLまたはIDから、リプライ、引用ポスト、リポストしたユーザー、スレッドを一括でスクレイピングします。誰がポストにエンゲージしたかを測定するときに使用してください。1行あたり$0.00015から。
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): ハンドル名、自己紹介、所在地でユーザーを検索し、フォロワー数、認証、アカウント年数、所在地でフィルタリングします。検索からアカウントリストを構築するときに使用します。1プロフィールあたり$0.00015から。
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): リストのURLまたはIDから、リストの投稿、メンバー、フォロワーをスクレイピングします。厳選されたリストが情報源となるときに使用します。1行あたり$0.00015から。
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): コミュニティ情報、投稿、検索、メンバー、モデレーターをスクレイピングします。情報源がXコミュニティであるときに使用します。1行あたり$0.00015から。
@@ -368,6 +387,7 @@ Actorは公開されているXのプロフィールフィールドをリクエ�
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals): AIで強気、弱気、中立、または混合のスタンス、コンテンツタイプ、確信度、資産との関連性をラベル付けします。株式、暗号資産、取引に関する話題を追うときに使用します。分析済みポスト1件あたり$0.0003から。
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor): AIでニュース投稿を形式、情報源の帰属、トピックの関連性でラベル付けします。報道とコメンタリーを区別するときに使用します。分析済みポスト1件あたり$0.0003から。
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier): AIですべてのポストに対して、独自のカテゴリー、スコア、はい/いいえの質問に答えます。既定の分析があなたのラベルに合わないときに使用します。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer): AIによる8つの特性への回答から、すべてのポストについて0から100のViral Scoreと判定を推定します。ポストが広がる理由や伸びない理由を調べるときに使用してください。分析済みポスト1件あたり$0.0003から。
 
 ## スクレイピング以外にも必要ですか?
 

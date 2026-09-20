@@ -28,7 +28,7 @@ X(Twitter)上でのブランド言及を監視し、実行間の感情の変化�
 
 ## Xでブランドを監視する方法
 
-1. 検索語（例: `"Acme headphones" lang:en`）、プロフィールのハンドル、ポストのURL、またはポストIDを追加します。
+1. 検索語（例: `(Sony OR "WH-1000XM5") headphones lang:en`）、プロフィールのハンドル、ポストのURL、またはポストIDを追加します。
 2. `maxItems`と、日付範囲、最小いいね数、リプライ除外などのタスクに必要な抽出フィルタを設定します。
 3. `analysis.targets`にブランド名とエイリアスを入れ、`analysis.context`にブランドの説明を記述します。
 4. Actorを実行し、次回の比較のためにデータセットIDを保存しておきます。
@@ -36,10 +36,12 @@ X(Twitter)上でのブランド言及を監視し、実行間の感情の変化�
 
 ```json
 {
-  "searchTerms": ["\"Acme headphones\" lang:en"],
+  "searchTerms": ["(Sony OR \"WH-1000XM5\") headphones lang:en"],
   "maxItems": 100,
   "analysis": {
-    "targets": [{ "name": "Acme", "aliases": ["Acme headphones"] }],
+    "targets": [
+      { "name": "Sony", "aliases": ["Sony headphones", "WH-1000XM5"] }
+    ],
     "context": "Consumer headphones & customer service."
   },
   "monitor": {
@@ -75,6 +77,24 @@ X(Twitter)上でのブランド言及を監視し、実行間の感情の変化�
 Actorは回答を判定単位で比較します。`choice`の回答はそのカテゴリで比較します。`score`の回答は最も近いレベルで比較します。`probability`の回答は0.5でのはい/いいえの判定で比較します。判定は次の3つの場合に変更として数えます。以前のカテゴリの確率が0.4を下回った場合。スコアが少なくとも0.6レベル動いた場合。はい/いいえの確率がしきい値から少なくとも0.1離れた場合。実行間の僅差の結果は`unchanged`のままで、同じ判定を保った変動も同様です。実行間のモデルのばらつきがレポートを埋めることはありません。`changes`は、変化した各質問について`previous`と`current`の判定を一覧表示します。変化は、モデルのばらつき、新しいコンテキスト、または元データの編集から生じる場合があります。変化は事実の変化を証明するものではなく、ポストが存在しないことは削除を証明するものでもありません。
 
 ベースラインの上限はデフォルトで100,000行です。重複するポストID、読み込み失敗、データセットサイズの変化があると、収集前に比較が停止します。それらが空のベースラインになることはありません。
+
+## 自分のテキストを分析する
+
+下書き、リプライ、レビュー、メモなど、自分のテキストを`texts`に貼り付けてください。Actorはそれを分析し、Xからは何も取得しません。
+
+```json
+{
+  "texts": [
+    "The new update is great, but sync still drops on mobile.",
+    "Support fixed my issue in 10 minutes. Thank you."
+  ]
+}
+```
+
+- 各テキストは1行になり、ポストと同じ`analysis`の回答を持ちます。
+- `tweet.id`は`text:1`、`text:2`のように続き、`tweet.type`は`text`です。
+- 分析済みテキスト1件の料金は、分析済みポスト1件と同じ$0.0003です。
+- `texts`を設定すると、実行はそれらのテキストだけを分析します。Xの対象は別に実行してください。
 
 ## 料金
 
@@ -154,9 +174,9 @@ AI の費用はツイート単価に含まれています。AI プロバイダ�
 すべてのXquik Actorは、同じ抽出エンジン、フィルタ優先の課金方式、診断機能を共有しています。必要なデータに合ったものを選んでください。
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): 検索、プロフィールのタイムライン、リスト、ポストIDから50種類以上のフィルタとフラットなエクスポートでポストをスクレイピングします。分析なしでポストデータが必要なときに使用してください。1行あたり$0.00015から。
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): ハンドル、ID、URLからプロフィールとそのポスト、リプライ、メディア、いいねをスクレイピングします。検索ではなくアカウントから始めるときに使用してください。1行あたり$0.00015から。
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): ハンドル、ID、URLからプロフィールとそのポスト、リプライ、メディア、フォロワーをスクレイピングします。検索ではなくアカウントから始めるときに使用してください。1行あたり$0.00015から。
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25種類以上のフィルタで、ポスト配下のリプライ、コメント、会話全体をスクレイピングします。ポストの下にある議論が必要なときに使用してください。1行あたり$0.00015から。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): ポストのURLまたはIDから、リプライ、引用ポスト、リポストしたユーザー、いいねしたユーザー、スレッドを一括でスクレイピングします。誰がポストにエンゲージしたかを測定するときに使用してください。1行あたり$0.00015から。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): ポストのURLまたはIDから、リプライ、引用ポスト、リポストしたユーザー、スレッドを一括でスクレイピングします。誰がポストにエンゲージしたかを測定するときに使用してください。1行あたり$0.00015から。
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): フォロワー、フォロー中、リストメンバー、購読者、コミュニティメンバーをプロフィール行としてスクレイピングします。オーディエンスやメンバーリストが必要なときに使用してください。1プロフィールあたり$0.00015から。
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): ハンドル、自己紹介、地域からユーザーを検索し、フォロワー数、認証状態、アカウントの経過期間、地域でフィルタします。検索からアカウントリストを作成するときに使用してください。1プロフィールあたり$0.00015から。
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): リストのURLまたはIDから、リストのポスト、メンバー、フォロワーをスクレイピングします。厳選されたリストが情報源となるときに使用してください。1行あたり$0.00015から。
@@ -168,6 +188,7 @@ AI の費用はツイート単価に含まれています。AI プロバイダ�
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals): AIで強気、弱気、中立、または複合的なスタンス、コンテンツの種類、確信度、資産との関連性をラベル付けします。株、暗号資産、トレーディングの話題を追うときに使用してください。分析済みポスト1件あたり$0.0003から。
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor): AIでニュースポストを形式、情報源の帰属、トピックとの関連性でラベル付けします。報道とコメントを区別するときに使用してください。分析済みポスト1件あたり$0.0003から。
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier): AIで独自のカテゴリ、スコア、はい/いいえの質問にすべてのポストで回答します。既定の分析があなたのラベルに合わないときに使用してください。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer): AIによる8つの特性への回答から、すべてのポストについて0から100のViral Scoreと判定を推定します。ポストが広がる理由や伸びない理由を調べるときに使用してください。分析済みポスト1件あたり$0.0003から。
 
 ## よくある質問とサポート
 

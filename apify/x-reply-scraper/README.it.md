@@ -569,13 +569,12 @@ cui hai bisogno.
   ed esportazioni piatte. Usalo quando hai bisogno di dati sui tweet senza
   analisi. Da $0.00015 per riga.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): estrae
-  profili con i relativi post, risposte, media e Mi piace da handle, ID o
-  URL. Usalo quando parti dagli account invece che dalle ricerche. Da
-  $0.00015 per riga.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper):
-  estrae risposte, citazioni, chi ha fatto retweet, chi ha messo Mi piace e
-  thread per URL o ID di post in blocco. Usalo quando misuri chi ha
-  interagito con i post. Da $0.00015 per riga.
+  profili con i relativi post, risposte, media & follower da handle, ID o URL.
+  Usalo quando parti dagli account invece che dalle ricerche. Da $0.00015 per
+  riga.
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): estrae
+  risposte, citazioni, retweeter & thread per URL o ID di post in blocco.
+  Usalo quando misuri chi ha interagito con i post. Da $0.00015 per riga.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): estrae
   follower, seguiti, membri di List, iscritti e membri di Community come
   righe di profilo. Usalo quando hai bisogno di elenchi di audience o
@@ -622,3 +621,7 @@ cui hai bisogno.
   risponde alle tue categorie, punteggi e domande sì/no personalizzate per
   ogni tweet con l'AI. Usalo quando le analisi preimpostate non si adattano
   alle tue etichette. Da $0.0003 per tweet analizzato.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  stima un Viral Score da 0 a 100 & un verdetto per ogni tweet da 8 risposte
+  dell'IA sui tratti. Usalo quando studi perché i tweet si diffondono o
+  falliscono. Da $0.0003 per tweet analizzato.

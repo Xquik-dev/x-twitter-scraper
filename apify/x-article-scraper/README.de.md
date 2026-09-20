@@ -91,7 +91,7 @@ Abrechnung & Diagnosen. Wähle den, der zu deinen Daten passt.
   flachen Exporten. Nutze ihn, wenn du Tweet-Daten ohne Analyse brauchst. Ab
   $0.00015 pro Datensatz.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Scrapt
-  Profile samt Beiträgen, Antworten, Medien & Likes anhand von Handles, IDs
+  Profile samt Beiträgen, Antworten, Medien & Followern anhand von Handles, IDs
   oder URLs. Nutze ihn, wenn du von Accounts statt von Suchen ausgehst. Ab
   $0.00015 pro Datensatz.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Scrapt
@@ -99,7 +99,7 @@ Abrechnung & Diagnosen. Wähle den, der zu deinen Daten passt.
   Filtern. Nutze ihn, wenn du die Diskussion unter Tweets brauchst. Ab
   $0.00015 pro Datensatz.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Scrapt
-  Antworten, Zitate, Retweeter, Liker & Threads zu Beitrags-URLs oder -IDs in
+  Antworten, Zitate, Retweeter & Threads zu Beitrags-URLs oder -IDs in
   großen Mengen. Nutze ihn, wenn du misst, wer mit Beiträgen interagiert hat.
   Ab $0.00015 pro Datensatz.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Scrapt
@@ -145,3 +145,7 @@ Abrechnung & Diagnosen. Wähle den, der zu deinen Daten passt.
   Beantwortet deine eigenen Kategorie-, Score- & Ja/Nein-Fragen für jeden
   Tweet mit KI. Nutze ihn, wenn die vorgefertigten Analysen nicht zu deinen
   Labels passen. Ab $0.0003 pro analysiertem Tweet.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Schätzt für jeden Tweet einen Viral Score von 0 bis 100 & ein Urteil aus 8
+  KI-Antworten zu Merkmalen. Nutze ihn, wenn du untersuchst, warum Tweets sich
+  verbreiten oder floppen. Ab $0.0003 pro analysiertem Tweet.

@@ -16,13 +16,13 @@
 </td></tr></table>
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data. X Engagement Scraper collects replies, quotes, retweeters,
-likers & threads for any post. Every other Apify Actor charges before filtering
-or deduplicating. Xquik charges only for delivered, unique, filter-matching
+most complete X data. X Engagement Scraper collects replies, quotes, retweeters
+& threads for any post. Every other Apify Actor charges before filtering or
+deduplicating. Xquik charges only for delivered, unique, filter-matching
 results.
 
 Collect Twitter engagement data for one or more X posts: replies, quotes,
-retweeters, likers, and thread context. No X API key or login required.
+retweeters, and thread context. No X API key or login required.
 
 ## Replies, quotes, and profiles
 
@@ -31,7 +31,7 @@ retweeters, likers, and thread context. No X API key or login required.
 - Direct and nested replies in 4 sort orders.
 - Source post details as a selectable row.
 - Quote posts with text, authors, media, and metrics.
-- Retweeter and liker profiles.
+- Retweeter profiles.
 - Conversation context around each source post.
 - Multiple engagement types and posts per run.
 - Global and per-resource caps.
@@ -43,10 +43,13 @@ retweeters, likers, and thread context. No X API key or login required.
 ```json
 {
   "tweetIds": ["2082577277246972300"],
-  "engagementTypes": ["replies", "quotes", "retweeters", "favoriters"],
+  "engagementTypes": ["replies", "quotes", "retweeters"],
   "maxItems": 10000
 }
 ```
+
+X stopped showing who liked a post in 2024. The `favoriters` type returns no
+rows. A run with no rows states that reason in its diagnostic.
 
 Keep `dedupeAcrossTargets` off to retain each source and engagement pairing.
 Turn it on to keep one row per account across the run.
@@ -115,9 +118,9 @@ diagnostics. Pick the one that matches the data you need.
   exports. Use it when you need tweet data without analysis. From $0.00015 per
   row.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Scrapes
-  profiles plus their posts, replies, media & likes from handles, IDs or URLs.
-  Use it when you start from accounts rather than searches. From $0.00015 per
-  row.
+  profiles plus their posts, replies, media & followers from handles, IDs or
+  URLs. Use it when you start from accounts rather than searches. From $0.00015
+  per row.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Scrapes replies,
   comments & whole conversations under posts with 25+ filters. Use it when you
   need the discussion beneath tweets. From $0.00015 per row.
@@ -165,3 +168,7 @@ diagnostics. Pick the one that matches the data you need.
   Answers your own category, score & yes/no questions for every tweet with AI.
   Use it when the preset analyses do not fit your labels. From $0.0003 per
   analyzed tweet.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
+  trait answers. Use it when you study why tweets spread or flop. From $0.0003
+  per analyzed tweet.

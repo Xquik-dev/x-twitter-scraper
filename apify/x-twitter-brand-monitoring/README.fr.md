@@ -49,8 +49,9 @@ dont les clients parlent de vous.
 
 ## Comment surveiller une marque sur X
 
-1. Ajoutez des termes de recherche (par exemple `"Acme headphones"
-   lang:en`), des handles de profil, des URL de tweet ou des ID de tweet.
+1. Ajoutez des termes de recherche (par exemple
+   `(Sony OR "WH-1000XM5") headphones lang:en`), des handles de profil, des
+   URL de tweet ou des ID de tweet.
 2. Réglez `maxItems` et les filtres d'extraction dont votre tâche a
    besoin, tels que des bornes de date, un minimum de likes ou
    l'exclusion des réponses.
@@ -64,10 +65,12 @@ dont les clients parlent de vous.
 
 ```json
 {
-  "searchTerms": ["\"Acme headphones\" lang:en"],
+  "searchTerms": ["(Sony OR \"WH-1000XM5\") headphones lang:en"],
   "maxItems": 100,
   "analysis": {
-    "targets": [{ "name": "Acme", "aliases": ["Acme headphones"] }],
+    "targets": [
+      { "name": "Sony", "aliases": ["Sony headphones", "WH-1000XM5"] }
+    ],
     "context": "Consumer headphones & customer service."
   },
   "monitor": {
@@ -121,6 +124,28 @@ absent ne prouve pas une suppression.
 La limite de référence est de 100 000 lignes par défaut. Les ID de tweet en
 double, les échecs de chargement et les tailles de dataset changeantes arrêtent
 la comparaison avant la collecte. Ils ne deviennent jamais une référence vide.
+
+## Analyser votre propre texte
+
+Collez votre propre texte dans `texts` : brouillons, réponses, avis ou
+notes. L'Actor l'analyse & ne récupère rien sur X.
+
+```json
+{
+  "texts": [
+    "The new update is great, but sync still drops on mobile.",
+    "Support fixed my issue in 10 minutes. Thank you."
+  ]
+}
+```
+
+- Chaque texte devient 1 ligne avec les mêmes réponses `analysis` qu'un
+  tweet.
+- `tweet.id` vaut `text:1`, `text:2` & ainsi de suite, & `tweet.type` vaut
+  `text`.
+- Chaque texte analysé coûte les mêmes $0.0003 qu'un tweet analysé.
+- Avec `texts` réglé, le run n'analyse que ces textes. Exécutez les cibles
+  X séparément.
 
 ## Tarification
 
@@ -244,7 +269,7 @@ données dont vous avez besoin.
   avez besoin de données de tweet sans analyse. À partir de $0.00015 par
   ligne.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) : scrape
-  des profils ainsi que leurs posts, réponses, médias et likes à partir de
+  des profils ainsi que leurs posts, réponses, médias et abonnés à partir de
   handles, d'ID ou d'URL. Utilisez-le quand vous partez de comptes plutôt
   que de recherches. À partir de $0.00015 par ligne.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) : scrape des
@@ -252,9 +277,8 @@ données dont vous avez besoin.
   avec plus de 25 filtres. Utilisez-le quand vous avez besoin de la
   discussion sous les tweets. À partir de $0.00015 par ligne.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) :
-  scrape les réponses, citations, personnes ayant reposté, personnes ayant
-  aimé et threads pour des URL ou ID de post en masse. Utilisez-le pour
-  mesurer qui s'est engagé avec des posts. À partir de $0.00015 par ligne.
+  scrape les réponses, citations, personnes ayant reposté et threads pour
+  des URL ou ID de post en masse. Utilisez-le pour mesurer qui s'est engagé avec des posts. À partir de $0.00015 par ligne.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) : scrape
   les abonnés, les comptes suivis, les membres de List, les abonnés de List
   et les membres de Community sous forme de lignes de profil. Utilisez-le
@@ -303,6 +327,11 @@ données dont vous avez besoin.
   répond à vos propres questions de catégorie, de score et de oui/non pour
   chaque tweet par IA. Utilisez-le quand les analyses prédéfinies ne
   correspondent pas à vos étiquettes. À partir de $0.0003 par tweet
+  analysé.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer) :
+  estime un Viral Score de 0 à 100 et un verdict pour chaque tweet à partir
+  de 8 réponses d'IA sur ses traits. Utilisez-le quand vous étudiez pourquoi
+  des tweets se propagent ou échouent. À partir de $0.0003 par tweet
   analysé.
 
 ## FAQ et support

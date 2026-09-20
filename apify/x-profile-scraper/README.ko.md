@@ -17,11 +17,11 @@
 
 Xquik은 가장 완전한 X 데이터를 보유한, 세계에서 가장 빠르고 저렴한 X(Twitter)
 스크레이퍼 서비스입니다. X Profile Scraper는 모든 핸들에 대해 프로필, 게시물,
-답글, 미디어 & 좋아요를 수집합니다. 다른 모든 Apify Actor는 필터링이나 중복 제거
+답글, 미디어 & 팔로워를 수집합니다. 다른 모든 Apify Actor는 필터링이나 중복 제거
 전에 요금을 부과합니다. Xquik은 전달되고, 고유하며, 필터에 맞는 결과에만 요금을
 부과합니다.
 
-X 프로필, 게시물, 답글, 미디어, 좋아요를 스크랩하세요. 핸들, ID, URL을 사용할 수
+X 프로필, 게시물, 답글, 미디어, 팔로워를 스크랩하세요. 핸들, ID, URL을 사용할 수
 있습니다. X API 키나 로그인이 필요 없습니다.
 
 ## 프로필 & 타임라인
@@ -30,7 +30,7 @@ X 프로필, 게시물, 답글, 미디어, 좋아요를 스크랩하세요. 핸�
 - 사용 가능한 경우 X의 최선 노력 기반 공개 활동 지역 라벨을 포함합니다.
 - 사용 가능한 결과 페이지 전체에서 Profile Posts와 With Replies 행을
   추가합니다.
-- 미디어, 좋아요, 팔로워, 팔로잉, 인증된 팔로워를 추가합니다.
+- 미디어, 팔로워, 팔로잉, 인증된 팔로워를 추가합니다.
 - 선택적 게시물을 날짜, 미디어, 인증, 재게시 여부, 지표로 필터링합니다.
 - 선택적 프로필을 오디언스, 활동, 계정 나이, 공개 메타데이터로 필터링합니다.
 - Actor는 과금 전에 중복 행을 제거합니다.
@@ -52,12 +52,14 @@ X 프로필, 게시물, 답글, 미디어, 좋아요를 스크랩하세요. 핸�
 ## 출력
 
 프로필 행은 `resultType: "profile"`을 사용합니다. 선택적 행은 `profileTweet`,
-`profileReply`, `profileMedia`, `profileLike`, `profileFollower`,
-`profileFollowing`, `profileVerifiedFollower` 중 하나를 사용합니다. 모든
-행에는 `sourceTarget`이 유지됩니다. 공개 필드는 Xquik REST 응답 형식으로
-남습니다. X는 집계된 계정 접속 IP에서 `accountBasedIn`을 추론합니다.
-`observedAt`은 조회 시각을 기록합니다. 이는 국적, 거주지, 신원, 가입, 게시,
-정확한 위치를 나타내지 않습니다.
+`profileReply`, `profileMedia`, `profileFollower`, `profileFollowing`,
+`profileVerifiedFollower` 중 하나를 사용합니다. 모든 행에는 `sourceTarget`이
+유지됩니다. 공개 필드는 Xquik REST 응답 형식으로 남습니다. X는 집계된 계정 접속
+IP에서 `accountBasedIn`을 추론합니다. `observedAt`은 조회 시각을 기록합니다.
+이는 국적, 거주지, 신원, 가입, 게시, 정확한 위치를 나타내지 않습니다.
+
+X는 2024년부터 계정이 좋아요를 누른 게시물을 해당 계정에만 보여줍니다.
+`includeLikes`는 다른 계정에 대해 `profileLike` 행을 반환하지 않습니다.
 
 ## 가격
 
@@ -100,7 +102,7 @@ Xquik은 독립적인 제3자 서비스입니다. X Corp와 제휴 관계가 없
   답글, 댓글 & 전체 대화를 25개 이상의 필터로 스크랩합니다. 트윗 아래의 토론이
   필요할 때 사용하세요. 행당 $0.00015부터.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): 게시물
-  URL이나 ID에 대한 답글, 인용, 리트윗한 사람, 좋아요를 누른 사람 & 스레드를
+  URL이나 ID에 대한 답글, 인용, 리트윗한 사람 & 스레드를
   대량으로 스크랩합니다. 게시물에 참여한 사람을 측정할 때 사용하세요. 행당
   $0.00015부터.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): 팔로워,
@@ -142,4 +144,8 @@ Xquik은 독립적인 제3자 서비스입니다. X Corp와 제휴 관계가 없
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
   AI로 모든 트윗에 대해 자신만의 카테고리, 점수 & 예/아니오 질문에 답합니다.
   미리 준비된 분석이 라벨에 맞지 않을 때 사용하세요. 분석된 트윗당
+  $0.0003부터.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  AI의 특성 답변 8개로 모든 트윗의 0에서 100까지 Viral Score & 판정을
+  추정합니다. 트윗이 왜 퍼지거나 묻히는지 연구할 때 사용하세요. 분석된 트윗당
   $0.0003부터.

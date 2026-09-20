@@ -91,17 +91,17 @@ coincida con los datos que necesitas.
   búsquedas, líneas de tiempo de perfiles, Listas e IDs de tuits, con más de 50
   filtros y exportaciones planas. Úsalo cuando necesites datos de tuits sin
   análisis. Desde $0.00015 por fila.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): extrae
-  perfiles junto con sus publicaciones, respuestas, contenido multimedia y me
-  gusta, a partir de nombres de usuario, IDs o URLs. Úsalo cuando partas de
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Extrae
+  perfiles junto con sus publicaciones, respuestas, contenido multimedia y
+  seguidores a partir de nombres de usuario, IDs o URLs. Úsalo cuando partes de
   cuentas en lugar de búsquedas. Desde $0.00015 por fila.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): extrae
   respuestas, comentarios y conversaciones completas debajo de publicaciones,
   con más de 25 filtros. Úsalo cuando necesites la discusión debajo de los
   tuits. Desde $0.00015 por fila.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): extrae
-  respuestas, citas, usuarios que retuitean, usuarios que dan me gusta e hilos
-  para URLs o IDs de publicaciones en bloque. Úsalo cuando midas quién
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Extrae
+  respuestas, citas, usuarios que retuitean e hilos para URLs o IDs de
+  publicaciones de forma masiva. Úsalo cuando mides quién
   interactuó con las publicaciones. Desde $0.00015 por fila.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): extrae
   seguidores, cuentas seguidas, miembros de Listas, suscriptores y miembros de
@@ -150,3 +150,7 @@ coincida con los datos que necesitas.
   responde tus propias preguntas de categoría, puntuación y sí/no para cada
   tuit con IA. Úsalo cuando los análisis predefinidos no se ajusten a tus
   etiquetas. Desde $0.0003 por tuit analizado.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Estima un Viral Score de 0 a 100 y un veredicto para cada tuit a partir de 8
+  respuestas de IA sobre sus rasgos. Úsalo cuando estudias por qué los tuits se
+  difunden o fracasan. Desde $0.0003 por tuit analizado.

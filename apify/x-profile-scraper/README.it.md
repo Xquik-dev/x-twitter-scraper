@@ -17,12 +17,12 @@
 
 Xquik è il servizio di scraping X (Twitter) più veloce ed economico al mondo,
 con i dati X più completi. X Profile Scraper raccoglie profili, post,
-risposte, media e Mi piace per qualsiasi handle. Ogni altro Actor Apify
+risposte, media e follower per qualsiasi handle. Ogni altro Actor Apify
 addebita l'importo prima di filtrare o deduplicare. Xquik addebita solo i
 risultati consegnati, unici e corrispondenti ai filtri.
 
-Estrai profili, post, risposte, media e Mi piace di X. Usa handle, ID o URL.
-Non servono chiave API X né login.
+Estrai profili, post, risposte, media e follower di X. Usa handle, ID o
+URL. Non servono chiave API X né login.
 
 ## Profili e timeline
 
@@ -32,7 +32,7 @@ Non servono chiave API X né login.
   based in quando disponibile.
 - Aggiungi righe Profile Posts e With Replies su tutte le pagine di
   risultati disponibili.
-- Aggiungi media, Mi piace, follower, following o follower verificati.
+- Aggiungi media, follower, following o follower verificati.
 - Filtra i post opzionali per data, media, verifica, stato di repost e
   metriche.
 - Filtra i profili opzionali per pubblico, attività, età e metadati
@@ -56,12 +56,16 @@ e le risorse selezionate.
 ## Output
 
 Le righe di profilo usano `resultType: "profile"`. Le righe opzionali usano
-`profileTweet`, `profileReply`, `profileMedia`, `profileLike`,
-`profileFollower`, `profileFollowing` o `profileVerifiedFollower`. Ogni riga
-mantiene `sourceTarget`. I campi pubblici restano nella forma di risposta
-REST di Xquik. X deduce `accountBasedIn` dagli IP di accesso all'account
-aggregati. `observedAt` registra il momento del recupero. Non indica
-nazionalità, residenza, identità, iscrizione, post o posizione esatta.
+`profileTweet`, `profileReply`, `profileMedia`, `profileFollower`,
+`profileFollowing` o `profileVerifiedFollower`. Ogni riga mantiene
+`sourceTarget`. I campi pubblici restano nella forma di risposta REST di
+Xquik. X deduce `accountBasedIn` dagli IP di accesso all'account aggregati.
+`observedAt` registra il momento del recupero. Non indica nazionalità,
+residenza, identità, iscrizione, post o posizione esatta.
+
+Dal 2024 X mostra i post a cui un account ha messo Mi piace solo a
+quell'account. `includeLikes` non restituisce righe `profileLike` per gli
+altri account.
 
 ## Prezzi
 
@@ -109,10 +113,9 @@ cui hai bisogno.
   risposte, commenti e intere conversazioni sotto i post con oltre 25
   filtri. Usalo quando ti serve la discussione sotto i tweet. Da $0.00015
   per riga.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper):
-  estrae risposte, citazioni, retweeter, chi mette Mi piace e thread per URL
-  o ID di post in blocco. Usalo quando misuri chi ha interagito con i post.
-  Da $0.00015 per riga.
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): estrae
+  risposte, citazioni, retweeter & thread per URL o ID di post in blocco.
+  Usalo quando misuri chi ha interagito con i post. Da $0.00015 per riga.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): estrae
   follower, following, membri delle Liste, iscritti e membri delle Community
   come righe di profilo. Usalo quando ti servono liste di pubblico o membri.
@@ -157,3 +160,7 @@ cui hai bisogno.
   risponde alle tue domande personalizzate su categoria, punteggio e sì/no
   per ogni tweet con l'IA. Usalo quando le analisi preimpostate non si
   adattano alle tue etichette. Da $0.0003 per tweet analizzato.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  stima un Viral Score da 0 a 100 & un verdetto per ogni tweet da 8 risposte
+  dell'IA sui tratti. Usalo quando studi perché i tweet si diffondono o
+  falliscono. Da $0.0003 per tweet analizzato.

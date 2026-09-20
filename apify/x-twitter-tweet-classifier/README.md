@@ -78,8 +78,27 @@ Provide 1-8 questions with unique IDs, instructions & versions.
 Presets: `brand`, `complaints`, `competitors`, `purchase_intent`,
 `product_feedback`, `news`, `sentiment` & `market`. `maxContextBytes` defaults
 to 12,000 bytes. A smaller limit skips oversized context without truncation.
-`concurrency` defaults to 4 & accepts 1 through 16. Each question definition
+`concurrency` defaults to 16 & accepts 1 through 16. Each question definition
 stays within an 8,000 byte allowance.
+
+## Analyze your own text
+
+Paste your own text in `texts`: drafts, replies, reviews or notes. The Actor
+analyzes it & fetches nothing from X.
+
+```json
+{
+  "texts": [
+    "The new update is great, but sync still drops on mobile.",
+    "Support fixed my issue in 10 minutes. Thank you."
+  ]
+}
+```
+
+- Each text becomes 1 row with the same `analysis` answers as a tweet.
+- `tweet.id` is `text:1`, `text:2` & so on, & `tweet.type` is `text`.
+- Each analyzed text costs the same $0.0003 as an analyzed tweet.
+- With `texts` set, the run analyzes only those texts. Run X targets separately.
 
 ## Pricing
 
@@ -198,15 +217,15 @@ diagnostics. Pick the one that matches the data you need.
   exports. Use it when you need tweet data without analysis. From $0.00015 per
   row.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Scrapes
-  profiles plus their posts, replies, media & likes from handles, IDs or URLs.
-  Use it when you start from accounts rather than searches. From $0.00015 per
-  row.
+  profiles plus their posts, replies, media & followers from handles, IDs or
+  URLs. Use it when you start from accounts rather than searches. From $0.00015
+  per row.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Scrapes replies,
   comments & whole conversations under posts with 25+ filters. Use it when you
   need the discussion beneath tweets. From $0.00015 per row.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Scrapes
-  replies, quotes, retweeters, likers & threads for post URLs or IDs in bulk.
-  Use it when you measure who engaged with posts. From $0.00015 per row.
+  replies, quotes, retweeters & threads for post URLs or IDs in bulk. Use it
+  when you measure who engaged with posts. From $0.00015 per row.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Scrapes
   followers, following, List members, subscribers & Community members as profile
   rows. Use it when you need audience or member lists. From $0.00015 per
@@ -247,6 +266,10 @@ diagnostics. Pick the one that matches the data you need.
   Labels news posts by format, source attribution & topic relevance with AI. Use
   it when you separate reporting from commentary. From $0.0003 per analyzed
   tweet.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
+  trait answers. Use it when you study why tweets spread or flop. From $0.0003
+  per analyzed tweet.
 
 ## FAQ & support
 

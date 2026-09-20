@@ -47,8 +47,9 @@ te da un'esecuzione all'altra.
 
 ## Come monitorare un brand su X
 
-1. Aggiungi termini di ricerca (ad esempio `"Acme headphones" lang:en`),
-   handle di profili, URL di tweet o ID di tweet.
+1. Aggiungi termini di ricerca (ad esempio
+   `(Sony OR "WH-1000XM5") headphones lang:en`), handle di profili, URL di
+   tweet o ID di tweet.
 2. Imposta `maxItems` e i filtri di estrazione richiesti dal tuo task, come
    limiti di data, un minimo di Mi piace o l'esclusione delle risposte.
 3. Inserisci i nomi e gli alias del tuo brand in `analysis.targets` e descrivi
@@ -60,10 +61,12 @@ te da un'esecuzione all'altra.
 
 ```json
 {
-  "searchTerms": ["\"Acme headphones\" lang:en"],
+  "searchTerms": ["(Sony OR \"WH-1000XM5\") headphones lang:en"],
   "maxItems": 100,
   "analysis": {
-    "targets": [{ "name": "Acme", "aliases": ["Acme headphones"] }],
+    "targets": [
+      { "name": "Sony", "aliases": ["Sony headphones", "WH-1000XM5"] }
+    ],
     "context": "Consumer headphones & customer service."
   },
   "monitor": {
@@ -115,6 +118,26 @@ dimostrano fatti cambiati, & un tweet assente non dimostra una cancellazione.
 Il limite della baseline è di default 100.000 righe. ID tweet duplicati, errori
 di caricamento e dimensioni del dataset che cambiano interrompono il confronto
 prima della raccolta. Non diventano mai una baseline vuota.
+
+## Analizza il tuo testo
+
+Incolla il tuo testo in `texts`: bozze, risposte, recensioni o note. L'Actor
+lo analizza & non recupera nulla da X.
+
+```json
+{
+  "texts": [
+    "The new update is great, but sync still drops on mobile.",
+    "Support fixed my issue in 10 minutes. Thank you."
+  ]
+}
+```
+
+- Ogni testo diventa 1 riga con le stesse risposte `analysis` di un tweet.
+- `tweet.id` è `text:1`, `text:2` & così via, & `tweet.type` è `text`.
+- Ogni testo analizzato costa gli stessi $0.0003 di un tweet analizzato.
+- Con `texts` impostato, l'esecuzione analizza solo quei testi. Esegui i
+  target X separatamente.
 
 ## Prezzi
 
@@ -232,18 +255,17 @@ cui hai bisogno.
   ricerche, timeline dei profili, List e ID di tweet con oltre 50 filtri ed
   export in formato piatto. Usalo quando ti servono dati sui tweet senza
   analisi. A partire da $0.00015 per riga.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Estrae
-  profili insieme ai loro post, risposte, media e Mi piace da handle, ID o
-  URL. Usalo quando parti dagli account invece che dalle ricerche. A partire
-  da $0.00015 per riga.
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): estrae
+  profili con i relativi post, risposte, media & follower da handle, ID o URL.
+  Usalo quando parti dagli account invece che dalle ricerche. Da $0.00015 per
+  riga.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Estrae
   risposte, commenti e intere conversazioni sotto i post con oltre 25 filtri.
   Usalo quando ti serve la discussione sotto i tweet. A partire da $0.00015
   per riga.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper):
-  Estrae risposte, citazioni, chi ha retwittato, chi ha messo Mi piace e i
-  thread per URL o ID di post in blocco. Usalo quando misuri chi ha
-  interagito con i post. A partire da $0.00015 per riga.
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): estrae
+  risposte, citazioni, retweeter & thread per URL o ID di post in blocco.
+  Usalo quando misuri chi ha interagito con i post. Da $0.00015 per riga.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Estrae
   follower, seguiti, membri di List, iscritti e membri di Community come
   righe di profilo. Usalo quando ti servono liste di pubblico o membri. A
@@ -287,6 +309,10 @@ cui hai bisogno.
   Risponde alle tue domande personalizzate di categoria, punteggio e sì/no
   per ogni tweet con l'AI. Usalo quando le analisi preimpostate non si
   adattano alle tue etichette. A partire da $0.0003 per tweet analizzato.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  stima un Viral Score da 0 a 100 & un verdetto per ogni tweet da 8 risposte
+  dell'IA sui tratti. Usalo quando studi perché i tweet si diffondono o
+  falliscono. Da $0.0003 per tweet analizzato.
 
 ## FAQ e supporto
 

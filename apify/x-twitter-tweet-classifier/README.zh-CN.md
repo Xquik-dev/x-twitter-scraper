@@ -69,8 +69,27 @@ Analysis** 会收集匹配的推文，然后为每条帖子回答 1 到 8 个类
 
 预设包括：`brand`、`complaints`、`competitors`、`purchase_intent`、`product_feedback`、`news`、
 `sentiment` 与 `market`。`maxContextBytes` 默认值为 12,000 字节。
-更小的限制会跳过超大上下文而不做截断。`concurrency` 默认值为 4，可接受 1 到 16 之间的值。
+更小的限制会跳过超大上下文而不做截断。`concurrency` 默认值为 16，可接受 1 到 16 之间的值。
 每个问题定义都不能超过 8,000 字节的限额。
+
+## 分析你自己的文本
+
+将你自己的文本粘贴到 `texts` 中：草稿、回复、评价或笔记。Actor 会分析这些文本，
+不会从 X 获取任何内容。
+
+```json
+{
+  "texts": [
+    "The new update is great, but sync still drops on mobile.",
+    "Support fixed my issue in 10 minutes. Thank you."
+  ]
+}
+```
+
+- 每段文本生成 1 行，其 `analysis` 答案与推文相同。
+- `tweet.id` 依次为 `text:1`、`text:2` 等，`tweet.type` 为 `text`。
+- 每段已分析文本的费用与一条已分析推文相同，均为 $0.0003。
+- 设置 `texts` 后，运行只分析这些文本。X 目标请另行运行。
 
 ## 定价
 
@@ -172,12 +191,14 @@ Actor 页面上还有更多任务，覆盖更多工作流。
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper)：从搜索、主页时间线、List 与推文 ID
   中抓取推文，提供 50 多种筛选条件与扁平化导出。适合只需要推文数据而无需分析的场景。
   起价每行 $0.00015。
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从用户名、ID 或 URL 抓取主页
-  及其帖子、回复、媒体与点赞。适合从账号而非搜索开始的场景。起价每行 $0.00015。
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从
+  用户名、ID 或 URL 抓取主页及其帖子、回复、媒体和关注者。适用于从账户
+  出发而非从搜索出发的场景。起价为每行 $0.00015。
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)：抓取帖子下的回复、评论与完整对话，
   提供 25 多种筛选条件。适合需要获取推文下方讨论内容的场景。起价每行 $0.00015。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)：批量为帖子 URL 或 ID 抓取
-  回复、引用推文、转推者、点赞者与推文串。适合衡量帖子互动情况的场景。起价每行 $0.00015。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)：
+  批量抓取帖子 URL 或 ID 对应的回复、引用、转推者及推文串。
+  适用于衡量谁与帖子产生了互动。起价为每行 $0.00015。
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)：以主页行形式抓取关注者、
   关注对象、List 成员、订阅者与 Community 成员。适合需要受众或成员列表的场景。
   起价每个主页 $0.00015。
@@ -206,6 +227,9 @@ Actor 页面上还有更多任务，覆盖更多工作流。
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)：通过 AI
   按格式、来源归属与话题相关性标注新闻类帖子。适合区分报道与评论的场景。
   起价每条分析推文 $0.0003。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)：
+  根据 8 个 AI 特征回答，为每条推文估算 0 到 100 的 Viral Score 及一个结论。
+  适用于研究推文为何传播或遇冷的场景。起价为每条分析推文 $0.0003。
 
 ## 常见问题与支持
 

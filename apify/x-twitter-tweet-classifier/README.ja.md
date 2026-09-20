@@ -60,7 +60,25 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 - `score`は、少なくとも2個の説明を含む順序付きの`levels`配列を使用します。
 - `probability`は0から1の間の値を返します。任意の`criteria`には`yes`と`no`の説明を含められます。
 
-プリセット: `brand`、`complaints`、`competitors`、`purchase_intent`、`product_feedback`、`news`、`sentiment`、`market`。`maxContextBytes`のデフォルトは12,000バイトです。これより小さい上限を設定すると、切り詰めることなく大きすぎるコンテキストがスキップされます。`concurrency`のデフォルトは4で、1から16まで指定できます。各質問定義は8,000バイトの上限内に収まります。
+プリセット: `brand`、`complaints`、`competitors`、`purchase_intent`、`product_feedback`、`news`、`sentiment`、`market`。`maxContextBytes`のデフォルトは12,000バイトです。これより小さい上限を設定すると、切り詰めることなく大きすぎるコンテキストがスキップされます。`concurrency`のデフォルトは16で、1から16まで指定できます。各質問定義は8,000バイトの上限内に収まります。
+
+## 自分のテキストを分析する
+
+下書き、リプライ、レビュー、メモなど、自分のテキストを`texts`に貼り付けてください。Actorはそれを分析し、Xからは何も取得しません。
+
+```json
+{
+  "texts": [
+    "The new update is great, but sync still drops on mobile.",
+    "Support fixed my issue in 10 minutes. Thank you."
+  ]
+}
+```
+
+- 各テキストは1行になり、ポストと同じ`analysis`の回答を持ちます。
+- `tweet.id`は`text:1`、`text:2`のように続き、`tweet.type`は`text`です。
+- 分析済みテキスト1件の料金は、分析済みポスト1件と同じ$0.0003です。
+- `texts`を設定すると、実行はそれらのテキストだけを分析します。Xの対象は別に実行してください。
 
 ## 料金
 
@@ -136,9 +154,9 @@ AI の費用はツイート単価に含まれています。AI プロバイダ�
 すべてのXquik Actorは、同じ抽出エンジン、フィルタ優先の課金方式、診断機能を共有しています。必要なデータに合ったものを選んでください。
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): 検索、プロフィールのタイムライン、リスト、ポストIDから50種類以上のフィルタとフラットなエクスポートでポストをスクレイピングします。分析なしでポストデータが必要なときに使用してください。1行あたり$0.00015から。
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): ハンドル、ID、URLからプロフィールとそのポスト、リプライ、メディア、いいねをスクレイピングします。検索ではなくアカウントから始めるときに使用してください。1行あたり$0.00015から。
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): ハンドル、ID、URLからプロフィールとそのポスト、リプライ、メディア、フォロワーをスクレイピングします。検索ではなくアカウントから始めるときに使用してください。1行あたり$0.00015から。
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25種類以上のフィルタで、ポスト配下のリプライ、コメント、会話全体をスクレイピングします。ポストの下にある議論が必要なときに使用してください。1行あたり$0.00015から。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): ポストのURLまたはIDから、リプライ、引用ポスト、リポストしたユーザー、いいねしたユーザー、スレッドを一括でスクレイピングします。誰がポストにエンゲージしたかを測定するときに使用してください。1行あたり$0.00015から。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): ポストのURLまたはIDから、リプライ、引用ポスト、リポストしたユーザー、スレッドを一括でスクレイピングします。誰がポストにエンゲージしたかを測定するときに使用してください。1行あたり$0.00015から。
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): フォロワー、フォロー中、リストメンバー、購読者、コミュニティメンバーをプロフィール行としてスクレイピングします。オーディエンスやメンバーリストが必要なときに使用してください。1プロフィールあたり$0.00015から。
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): ハンドル、自己紹介、地域からユーザーを検索し、フォロワー数、認証状態、アカウントの経過期間、地域でフィルタします。検索からアカウントリストを作成するときに使用してください。1プロフィールあたり$0.00015から。
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): リストのURLまたはIDから、リストのポスト、メンバー、フォロワーをスクレイピングします。厳選されたリストが情報源となるときに使用してください。1行あたり$0.00015から。
@@ -150,6 +168,7 @@ AI の費用はツイート単価に含まれています。AI プロバイダ�
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis): すべてのポストにAIで態度、強度、皮肉の確率をラベル付けします。任意のトピックについて一般的な感情分析が必要なときに使用してください。分析済みポスト1件あたり$0.0003から。
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals): AIで強気、弱気、中立、または複合的なスタンス、コンテンツの種類、確信度、資産との関連性をラベル付けします。株、暗号資産、トレーディングの話題を追うときに使用してください。分析済みポスト1件あたり$0.0003から。
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor): AIでニュースポストを形式、情報源の帰属、トピックとの関連性でラベル付けします。報道とコメントを区別するときに使用してください。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer): AIによる8つの特性への回答から、すべてのポストについて0から100のViral Scoreと判定を推定します。ポストが広がる理由や伸びない理由を調べるときに使用してください。分析済みポスト1件あたり$0.0003から。
 
 ## よくある質問とサポート
 

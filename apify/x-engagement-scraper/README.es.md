@@ -17,14 +17,14 @@
 
 Xquik es el servicio de extracción de datos de X (Twitter) más rápido y
 económico del mundo, con los datos más completos de X. X Engagement Scraper
-recopila respuestas, citas, usuarios que retuitean, usuarios que dan me gusta
-e hilos de cualquier publicación. Todos los demás Actors de Apify cobran
-antes de filtrar o eliminar duplicados. Xquik solo cobra por resultados
-entregados, únicos y que coinciden con los filtros.
+recopila respuestas, citas, usuarios que retuitean e hilos de cualquier
+publicación. Todos los demás Actors de Apify cobran antes de filtrar o
+eliminar duplicados. Xquik solo cobra por resultados entregados, únicos y que
+coinciden con los filtros.
 
 Recopila datos de interacción de Twitter para una o varias publicaciones de
-X: respuestas, citas, usuarios que retuitean, usuarios que dan me gusta y
-contexto del hilo. No requiere clave de API de X ni inicio de sesión.
+X: respuestas, citas, usuarios que retuitean y contexto del hilo. No requiere
+clave de API de X ni inicio de sesión.
 
 ## Respuestas, citas y perfiles
 
@@ -33,7 +33,7 @@ contexto del hilo. No requiere clave de API de X ni inicio de sesión.
 - Respuestas directas y anidadas en 4 órdenes de clasificación.
 - Detalles de la publicación de origen como fila seleccionable.
 - Tuits cita con texto, autores, contenido multimedia y métricas.
-- Perfiles de usuarios que retuitean y que dan me gusta.
+- Perfiles de usuarios que retuitean.
 - Contexto de la conversación alrededor de cada publicación de origen.
 - Varios tipos de interacción y publicaciones por ejecución.
 - Límites globales y por recurso.
@@ -45,10 +45,14 @@ contexto del hilo. No requiere clave de API de X ni inicio de sesión.
 ```json
 {
   "tweetIds": ["2082577277246972300"],
-  "engagementTypes": ["replies", "quotes", "retweeters", "favoriters"],
+  "engagementTypes": ["replies", "quotes", "retweeters"],
   "maxItems": 10000
 }
 ```
+
+X dejó de mostrar quién dio me gusta a una publicación en 2024. El tipo
+`favoriters` no devuelve filas. Una ejecución sin filas indica ese motivo en
+su diagnóstico.
 
 Mantén `dedupeAcrossTargets` desactivado para conservar cada combinación de
 origen e interacción. Actívalo para mantener una fila por cuenta en toda la
@@ -128,9 +132,9 @@ coincida con los datos que necesitas.
   búsquedas, líneas de tiempo de perfiles, Listas e IDs de tuits, con más de 50
   filtros y exportaciones planas. Úsalo cuando necesites datos de tuits sin
   análisis. Desde $0.00015 por fila.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): extrae
-  perfiles junto con sus publicaciones, respuestas, contenido multimedia y me
-  gusta, a partir de nombres de usuario, IDs o URLs. Úsalo cuando partas de
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Extrae
+  perfiles junto con sus publicaciones, respuestas, contenido multimedia y
+  seguidores a partir de nombres de usuario, IDs o URLs. Úsalo cuando partes de
   cuentas en lugar de búsquedas. Desde $0.00015 por fila.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): extrae
   respuestas, comentarios y conversaciones completas debajo de publicaciones,
@@ -187,3 +191,7 @@ coincida con los datos que necesitas.
   responde tus propias preguntas de categoría, puntuación y sí/no para cada
   tuit con IA. Úsalo cuando los análisis predefinidos no se ajusten a tus
   etiquetas. Desde $0.0003 por tuit analizado.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Estima un Viral Score de 0 a 100 y un veredicto para cada tuit a partir de 8
+  respuestas de IA sobre sus rasgos. Úsalo cuando estudias por qué los tuits se
+  difunden o fracasan. Desde $0.0003 por tuit analizado.

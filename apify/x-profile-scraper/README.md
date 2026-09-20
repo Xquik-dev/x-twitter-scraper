@@ -17,19 +17,19 @@
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. X Profile Scraper collects profiles, posts, replies, media
-& likes for any handle. Every other Apify Actor charges before filtering or
+& followers for any handle. Every other Apify Actor charges before filtering or
 deduplicating. Xquik charges only for delivered, unique, filter-matching
 results.
 
-Scrape X profiles, posts, replies, media, and likes. Use handles, IDs, or URLs.
-No X API key or login required.
+Scrape X profiles, posts, replies, media, and followers. Use handles, IDs, or
+URLs. No X API key or login required.
 
 ## Profiles and timelines
 
 - Extract bio, counts, verification, owner-entered location, website, and media.
 - Include X's best-effort public Account based in label when available.
 - Add Profile Posts and With Replies rows across available result pages.
-- Add media, likes, followers, following, or verified followers.
+- Add media, followers, following, or verified followers.
 - Filter optional posts by date, media, verification, repost status, and
   metrics.
 - Filter optional profiles by audience, activity, age, and public metadata.
@@ -52,12 +52,14 @@ resources.
 ## Output
 
 Profile rows use `resultType: "profile"`. Optional rows use `profileTweet`,
-`profileReply`, `profileMedia`, `profileLike`, `profileFollower`,
-`profileFollowing`, or `profileVerifiedFollower`. Every row keeps
-`sourceTarget`. Public fields remain in the Xquik REST response shape. X infers
-`accountBasedIn` from aggregated account-access IPs. `observedAt` records
-retrieval time. It does not state nationality, residence, identity, signup,
-post, or exact location.
+`profileReply`, `profileMedia`, `profileFollower`, `profileFollowing`, or
+`profileVerifiedFollower`. Every row keeps `sourceTarget`. Public fields remain
+in the Xquik REST response shape. X infers `accountBasedIn` from aggregated
+account-access IPs. `observedAt` records retrieval time. It does not state
+nationality, residence, identity, signup, post, or exact location.
+
+X has shown the posts an account liked only to that account since 2024.
+`includeLikes` returns no `profileLike` rows for other accounts.
 
 ## Pricing
 
@@ -100,8 +102,8 @@ diagnostics. Pick the one that matches the data you need.
   comments & whole conversations under posts with 25+ filters. Use it when you
   need the discussion beneath tweets. From $0.00015 per row.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Scrapes
-  replies, quotes, retweeters, likers & threads for post URLs or IDs in bulk.
-  Use it when you measure who engaged with posts. From $0.00015 per row.
+  replies, quotes, retweeters & threads for post URLs or IDs in bulk. Use it
+  when you measure who engaged with posts. From $0.00015 per row.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Scrapes
   followers, following, List members, subscribers & Community members as profile
   rows. Use it when you need audience or member lists. From $0.00015 per
@@ -146,3 +148,7 @@ diagnostics. Pick the one that matches the data you need.
   Answers your own category, score & yes/no questions for every tweet with AI.
   Use it when the preset analyses do not fit your labels. From $0.0003 per
   analyzed tweet.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
+  trait answers. Use it when you study why tweets spread or flop. From $0.0003
+  per analyzed tweet.

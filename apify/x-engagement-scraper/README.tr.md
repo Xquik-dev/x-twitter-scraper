@@ -17,13 +17,13 @@
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. X Engagement Scraper, herhangi bir gönderi için yanıtları,
-alıntıları, retweet edenleri, beğenenleri ve thread'leri toplar. Diğer tüm
-Apify Actor'ları filtreleme veya tekilleştirmeden önce ücret alır. Xquik
-yalnızca teslim edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
+alıntıları, retweet edenleri ve thread'leri toplar. Diğer tüm Apify Actor'ları
+filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim edilen,
+benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
 
 Bir veya daha fazla X gönderisi için Twitter etkileşim verisini topla: yanıtlar,
-alıntılar, retweet edenler, beğenenler ve thread bağlamı. X API anahtarı veya
-girişi gerekmez.
+alıntılar, retweet edenler ve thread bağlamı. X API anahtarı veya girişi
+gerekmez.
 
 ## Yanıtlar, alıntılar ve profiller
 
@@ -32,7 +32,7 @@ girişi gerekmez.
 - 4 sıralama düzeninde doğrudan ve iç içe yanıtlar.
 - Seçilebilir bir satır olarak kaynak gönderi ayrıntıları.
 - Metin, yazar, medya ve metriklerle alıntı gönderileri.
-- Retweet eden ve beğenen profiller.
+- Retweet eden profiller.
 - Her kaynak gönderi etrafındaki konuşma bağlamı.
 - Bir çalıştırmada birden fazla etkileşim türü ve gönderi.
 - Genel ve kaynak başına üst sınırlar.
@@ -44,10 +44,13 @@ girişi gerekmez.
 ```json
 {
   "tweetIds": ["2082577277246972300"],
-  "engagementTypes": ["replies", "quotes", "retweeters", "favoriters"],
+  "engagementTypes": ["replies", "quotes", "retweeters"],
   "maxItems": 10000
 }
 ```
+
+X, 2024'te bir gönderiyi kimlerin beğendiğini göstermeyi bıraktı. `favoriters`
+türü satır döndürmez. Satırsız bir çalıştırma bu nedeni tanılamasında belirtir.
 
 Her kaynak ve etkileşim eşleşmesini korumak için `dedupeAcrossTargets`'ı kapalı
 tut. Çalıştırma genelinde hesap başına tek satır tutmak için aç.
@@ -123,7 +126,7 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   gerektiğinde kullan. Satır başına $0.00015'ten başlar.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Handle, ID
   veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını ve
-  beğenilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
+  takipçilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
   başına $0.00015'ten başlar.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25'ten fazla
   filtreyle gönderilerin altındaki yanıtları, yorumları ve tüm konuşmaları
@@ -176,3 +179,8 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   Yapay zeka ile her tweet için kendi kategori, puan ve evet/hayır sorularını
   yanıtlar. Hazır analizler etiketlerine uymadığında kullan. Analiz edilen
   tweet başına $0.0003'ten başlar.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Yapay zekanın 8 özellik yanıtından her tweet için 0 ile 100 arasında bir
+  Viral Score ve bir karar tahmin eder. Tweet'lerin neden yayıldığını veya
+  tutmadığını incelediğinde kullan. Analiz edilen tweet başına $0.0003'ten
+  başlar.

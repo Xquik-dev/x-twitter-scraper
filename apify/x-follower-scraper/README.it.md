@@ -349,6 +349,32 @@ include `outputVariant` & `includeRaw` come alias di Output Mode. Include anche
 alias che duplicano un controllo canonico. Gli input JSON esistenti & i task
 salvati mantengono il loro comportamento attuale.
 
+### Migra da un altro Actor di follower
+
+Incolla l'input che usi già. X Follower Scraper legge i nomi dei campi usati
+dagli altri Actor di follower X & li mappa sui propri campi. I nomi canonici
+restano il default documentato. Un alias non scarta mai un campo & non cambia
+mai quanto paghi.
+
+| Campo che usi già                                                                     | X Follower Scraper lo legge come |
+| ------------------------------------------------------------------------------------- | -------------------------------- |
+| `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`, `screenNames` | `twitterHandles`                 |
+| `username`, `handle`, `screenName`, come stringa singola                              | `twitterHandles`                 |
+| `twitterUserIds`, `user_ids`, `userIdList`                                            | `userIds`                        |
+| `user_id`, `userId`, come stringa singola                                             | `userIds`                        |
+| `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`                          | `startUrls`                      |
+| `profileUrl`, come stringa singola                                                    | `startUrls`                      |
+| `getFollowers`, `getFollowing`                                                        | `relations`                      |
+| `type` con `followers` o `following`                                                  | `relation`                       |
+| `maxResults`, `max_results`, `resultsLimit`, `count`                                  | `maxItems`                       |
+| `scrapeAllResults`                                                                    | nessun limite per target         |
+
+2 nomi qui significano altro. In alcuni Actor `maxFollowers` & `maxFollowing`
+limitano quante righe recupera un'esecuzione. In X Follower Scraper filtrano
+i profili in base ai loro conteggi di follower & following. Usa `maxItems`
+per limitare le righe. X Follower Scraper non ha un'unità pagina, quindi
+sostituisci `maxPages` con `maxItems`.
+
 ### Usa sempre la build più recente
 
 Le esecuzioni Store usano la configurazione di build `latest` dell'Actor. I
@@ -463,16 +489,15 @@ hai bisogno.
   esportazioni piatte. Usalo quando ti servono dati sui tweet senza analisi. A
   partire da $0.00015 per riga.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): estrae
-  profili più i loro post, risposte, media & Mi piace da handle, ID o URL.
-  Usalo quando parti dagli account anziché dalle ricerche. A partire da
-  $0.00015 per riga.
+  profili con i relativi post, risposte, media & follower da handle, ID o URL.
+  Usalo quando parti dagli account invece che dalle ricerche. Da $0.00015 per
+  riga.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): estrae risposte,
   commenti & intere conversazioni sotto i post con oltre 25 filtri. Usalo
   quando ti serve la discussione sotto i tweet. A partire da $0.00015 per riga.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): estrae
-  risposte, citazioni, chi ha fatto retweet, chi ha messo Mi piace & thread per
-  URL o ID di post in blocco. Usalo quando misuri chi ha interagito con i
-  post. A partire da $0.00015 per riga.
+  risposte, citazioni, retweeter & thread per URL o ID di post in blocco.
+  Usalo quando misuri chi ha interagito con i post. Da $0.00015 per riga.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
   cerca utenti per handle, bio & località con filtri su follower, verifica,
   età & località. Usalo quando costruisci liste di account dalla ricerca. A
@@ -515,6 +540,10 @@ hai bisogno.
   risponde alle tue domande personalizzate di categoria, punteggio & sì/no per
   ogni tweet con l'AI. Usalo quando le analisi predefinite non si adattano
   alle tue etichette. A partire da $0.0003 per tweet analizzato.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  stima un Viral Score da 0 a 100 & un verdetto per ogni tweet da 8 risposte
+  dell'IA sui tratti. Usalo quando studi perché i tweet si diffondono o
+  falliscono. Da $0.0003 per tweet analizzato.
 
 ## Ti serve più dello scraping?
 

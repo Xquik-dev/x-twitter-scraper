@@ -72,6 +72,28 @@ organizaciones, personas o temas que sigues.
 La clasificación no verifica hechos. Una fuente nombrada no es una fuente
 confiable. La atribución describe lo que presenta la publicación.
 
+## Analiza tu propio texto
+
+Pega tu propio texto en `texts`: borradores, respuestas, reseñas o notas. El
+Actor lo analiza y no obtiene nada de X.
+
+```json
+{
+  "texts": [
+    "Central bank holds rates at 4.5%, signals 2 cuts next year.",
+    "I was at the port this morning. Cranes are idle & trucks are queued."
+  ]
+}
+```
+
+- Cada texto se convierte en 1 fila con las mismas respuestas de `analysis` que
+  un tuit.
+- `tweet.id` es `text:1`, `text:2` y así sucesivamente, y `tweet.type` es
+  `text`.
+- Cada texto analizado cuesta los mismos $0.0003 que un tuit analizado.
+- Con `texts` establecido, la ejecución analiza solo esos textos. Ejecuta los
+  objetivos de X por separado.
+
 ## Precios
 
 Los costos de IA están incluidos en el precio por tweet. No pagas a ningún proveedor de IA, no compras tokens & no traes ninguna clave.
@@ -209,17 +231,17 @@ que necesitas.
   filtros y exportaciones planas. Úsalo cuando necesites datos de tuits sin
   análisis. Desde $0.00015 por fila.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Extrae
-  perfiles junto con sus publicaciones, respuestas, medios y me gusta a partir
-  de nombres de usuario, IDs o URLs. Úsalo cuando partas de cuentas en lugar de
-  búsquedas. Desde $0.00015 por fila.
+  perfiles junto con sus publicaciones, respuestas, contenido multimedia y
+  seguidores a partir de nombres de usuario, IDs o URLs. Úsalo cuando partes de
+  cuentas en lugar de búsquedas. Desde $0.00015 por fila.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Extrae
   respuestas, comentarios y conversaciones completas debajo de publicaciones
   con más de 25 filtros. Úsalo cuando necesites la discusión debajo de los
   tuits. Desde $0.00015 por fila.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Extrae
-  respuestas, citas, usuarios que retuitean, quienes dan me gusta e hilos para
-  URLs o IDs de publicaciones en bloque. Úsalo cuando midas quién interactuó
-  con las publicaciones. Desde $0.00015 por fila.
+  respuestas, citas, usuarios que retuitean e hilos para URLs o IDs de
+  publicaciones de forma masiva. Úsalo cuando mides quién
+  interactuó con las publicaciones. Desde $0.00015 por fila.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Extrae
   seguidores, cuentas seguidas, miembros de Listas, suscriptores y miembros de
   Comunidades como filas de perfil. Úsalo cuando necesites listas de audiencia
@@ -264,6 +286,10 @@ que necesitas.
   Responde tus propias preguntas de categoría, puntaje y sí/no para cada tuit
   con IA. Úsalo cuando los análisis predefinidos no se ajusten a tus
   etiquetas. Desde $0.0003 por tuit analizado.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Estima un Viral Score de 0 a 100 y un veredicto para cada tuit a partir de 8
+  respuestas de IA sobre sus rasgos. Úsalo cuando estudias por qué los tuits se
+  difunden o fracasan. Desde $0.0003 por tuit analizado.
 
 ## Preguntas frecuentes y soporte
 

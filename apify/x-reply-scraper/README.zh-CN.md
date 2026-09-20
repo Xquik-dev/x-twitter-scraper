@@ -508,10 +508,10 @@ MCP 服务器。
   主页时间线、List 及推文 ID 中抓取推文，支持 50 多种过滤器和扁平化导出。
   适用于只需要推文数据、不需要分析的场景。起价为每行 $0.00015。
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从
-  用户名、ID 或 URL 抓取主页及其帖子、回复、媒体和点赞。适用于从账户
+  用户名、ID 或 URL 抓取主页及其帖子、回复、媒体和关注者。适用于从账户
   出发而非从搜索出发的场景。起价为每行 $0.00015。
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)：
-  批量抓取帖子 URL 或 ID 对应的回复、引用、转推者、点赞者及推文串。
+  批量抓取帖子 URL 或 ID 对应的回复、引用、转推者及推文串。
   适用于衡量谁与帖子产生了互动。起价为每行 $0.00015。
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)：
   以主页行的形式抓取关注者、正在关注的账户、List 成员、订阅者及社区成员。
@@ -549,3 +549,6 @@ MCP 服务器。
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)：
   通过 AI 为每条推文回答你自定义的分类、评分及是否问题。适用于预设分析
   无法满足你的标签需求的场景。起价为每条分析推文 $0.0003。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)：
+  根据 8 个 AI 特征回答，为每条推文估算 0 到 100 的 Viral Score 及一个结论。
+  适用于研究推文为何传播或遇冷的场景。起价为每条分析推文 $0.0003。
