@@ -140,12 +140,13 @@ prima di eseguirlo.
 | `sourceTweetId`        | ID del tweet sorgente per le modalità articolo e coinvolgimento    |
 | `article`              | Dati strutturati dell'articolo in `mode: "article"`                |
 
-I metadati opzionali del tweet possono includere `card`, `communityId`,
-`communityNote`, `edit`, `noteTweet` e `postCta`. `isTranslatable`, `place`,
-`possiblySensitive` e `viewState` conservano altro contesto pubblico.
-`previousCounts` conserva il coinvolgimento pre-modifica. `tombstone` conserva
-gli avvisi. `unmentionedUserIds` elenca gli utenti che hanno lasciato la
-conversazione. Consulta l'OpenAPI per i campi esatti.
+I metadati opzionali del tweet possono includere `authorUnavailable`, `card`,
+`communityId`, `communityNote`, `edit`, `exclusiveContent`, `noteTweet` e
+`postCta`. `isTranslatable`, `place`, `possiblySensitive` e `viewState`
+conservano altro contesto pubblico. `previousCounts` conserva il coinvolgimento
+pre-modifica. `tombstone` conserva gli avvisi. `unmentionedUserIds` elenca gli
+utenti che hanno lasciato la conversazione. Consulta l'OpenAPI per i campi
+esatti.
 
 Gli autori annidati seguono il contratto del profilo pubblico. Copre identità,
 conteggi, verifica, disponibilità, dati professionali e biografie del profilo.
@@ -203,6 +204,13 @@ L'estrazione interrotta scrive anche una diagnostica gratuita `partial`. I
 risultati disponibili restano intatti. La diagnostica riporta
 `availableResults`, `failedTargets`, `retryable` e `nextAction`. Un'uscita
 dell'Actor riuscita conferma la consegna, non l'estrazione completa.
+
+Il messaggio di stato nomina ogni causa dell'interruzione. Un'esecuzione con un
+account mancante & una ricerca bloccata riporta entrambe le cause. `stopCauses`
+elenca ogni causa con i propri `message`, `retryable` & `nextAction`. Le cause
+sono `target_not_found`, `target_protected`, `target_failed`,
+`pagination_safety_limit`, `reply_reach` & `deadline_reached`. L'esecuzione è
+`retryable` quando lo è almeno una causa.
 
 I target protetti o mancanti contano come errori, anche in esecuzioni con
 risultati validi. Quando tutti gli errori riguardano target non disponibili,
@@ -387,6 +395,10 @@ escluso, la stessa data per `since` & `until` è una finestra vuota. Imposta
 `until` al giorno successivo per ottenere 1 giorno intero. I filtri sui tweet
 non si applicano alle liste utenti o alle ricerche dirette di tweet/articoli.
 
+`time.withinTime` & `within_time` funzionano nelle stesse modalità. Il valore
+`7d` conserva gli ultimi 7 giorni prima che l'esecuzione inizi a leggere. Una
+finestra che risale a prima del 2006 conserva tutti i post.
+
 `mode: "replies"` è più rigorosa. Combina timeline dirette, modalità di
 ranking supportate, ogni modulo cursore in avanti, rami di contenuto nascosto
 etichettati, partizioni temporali scalate in base al numero di risposte
@@ -500,20 +512,21 @@ quanto paghi. Il form di input elenca solo i campi canonici, quindi resta
 breve. Gli alias funzionano negli input JSON, API, SDK, di automazione & dei
 task salvati.
 
-| Campo che usi già                                                                                                  | X Tweet Scraper lo legge come                                            |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                        | `startUrls`                                                              |
-| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, o `tweetId` come 1 stringa                           | `tweetIds`                                                               |
-| `twitterHandles`, `usernames`                                                                                      | `twitterHandles`                                                         |
-| `twitterContent`, `query`, `searchQuery`                                                                           | `twitterContent`                                                         |
-| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts` | `maxItems`                                                               |
-| `sort`                                                                                                             | `queryType`                                                              |
-| `tweetLanguage`                                                                                                    | `lang`                                                                   |
-| `author`, `inReplyTo`, `mentioning`                                                                                | `from`, `to`, `@`                                                        |
-| `start`, `end`                                                                                                     | `since`, `until`                                                         |
-| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                            | `min_retweets`, `min_faves`, `min_replies`                               |
-| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                           | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
-| `geotaggedNear`, `withinRadius`                                                                                    | `near`, `within`                                                         |
+| Campo che usi già                                                                                                                                             | X Tweet Scraper lo legge come                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                                                                   | `startUrls`                                                              |
+| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids`, o `tweetId` come 1 stringa                                                         | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`, `handles`                                                                                                                      | `twitterHandles`                                                         |
+| `searchTerms`, `searchQueries`, `queries`, `search`, come lista o 1 ricerca per riga                                                                          | `searchTerms`                                                            |
+| `twitterContent`, `query`, `searchQuery`                                                                                                                      | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
+| `sort`                                                                                                                                                        | `queryType`                                                              |
+| `tweetLanguage`, `language`                                                                                                                                   | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                                                           | `from`, `to`, `@`                                                        |
+| `start`, `startDate`, `end`, `endDate`                                                                                                                        | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                       | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                      | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                                                               | `near`, `within`                                                         |
 
 Come si comporta un input incollato:
 
@@ -522,6 +535,7 @@ Come si comporta un input incollato:
   all'intera esecuzione.
 - Una query di ricerca accanto a `searchTerms` viene eseguita come 1 termine
   in più.
+- L'Actor legge un URL di profilo nel formato `x.com/@name` come `x.com/name`.
 - Quando imposti un alias & il suo campo canonico, vince il valore canonico.
   Il log dell'esecuzione nomina l'alias che ha perso.
 - Il log dell'esecuzione nomina ogni campo che l'Actor non legge, come

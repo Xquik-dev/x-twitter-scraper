@@ -115,7 +115,7 @@ Apifyの
 | `sourceTweetId`        | 記事モードおよびエンゲージメントモードの元ポストID              |
 | `article`              | `mode: "article"`の構造化された記事データ                     |
 
-任意のポストメタデータには、`card`、`communityId`、`communityNote`、`edit`、`noteTweet`、`postCta`が含まれる場合があります。`isTranslatable`、`place`、`possiblySensitive`、`viewState`はその他の公開情報を保持します。`previousCounts`は編集前のエンゲージメントを保持します。`tombstone`は通知を保持します。`unmentionedUserIds`は会話から退出したユーザーを一覧表示します。正確なフィールドについてはOpenAPIを参照してください。
+任意のポストメタデータには、`authorUnavailable`、`card`、`communityId`、`communityNote`、`edit`、`exclusiveContent`、`noteTweet`、`postCta`が含まれる場合があります。`isTranslatable`、`place`、`possiblySensitive`、`viewState`はその他の公開情報を保持します。`previousCounts`は編集前のエンゲージメントを保持します。`tombstone`は通知を保持します。`unmentionedUserIds`は会話から退出したユーザーを一覧表示します。正確なフィールドについてはOpenAPIを参照してください。
 
 ネストされた著者情報は、公開プロフィールの仕様に従います。これには、アイデンティティ、各種カウント、認証状態、利用可能性、専門的なデータ、プロフィールの自己紹介が含まれます。
 
@@ -140,6 +140,8 @@ Xquikのサブスクリプションは適用されません。個別の開始料
 `failedSubtargets`は、読み取り失敗によって停止したクエリとプロフィール対象の数を数えます。ページネーションと支払いの失敗は、部分的な行と未完了のカーソルを保持します。これらは対象が存在しないことを意味するものではありません。受理された行はデータ行のままで、課金対象に含まれます。これらの実行は`completionReason: "partial_failure"`を使用します。高速なサーバー側ページネーションも同じレポートの仕様に従います。
 
 中断された抽出でも、無料の`partial`診断が書き込まれます。取得済みの結果はそのまま保持されます。この診断は`availableResults`、`failedTargets`、`retryable`、`nextAction`をレポートします。Actorが正常終了したことは、配信が成功したことを示すだけで、抽出が完全に完了したことを意味しません。
+
+ステータスのテキストは、実行が停止した原因をすべて示します。存在しないアカウントと停滞した検索を含む実行では、両方を示します。`stopCauses`は各原因を列挙し、原因ごとに`message`、`retryable`、`nextAction`を示します。原因は`target_not_found`、`target_protected`、`target_failed`、`pagination_safety_limit`、`reply_reach`、`deadline_reached`です。いずれかの原因が`retryable`であれば、実行も`retryable`になります。
 
 保護されている対象、または存在しない対象は、有効な結果がある実行を含めて失敗として数えられます。すべての失敗が利用できない対象に関するものである場合、診断情報では`retryable: false`が設定されます。対象のURLやユーザー名を確認し、利用可能な公開アカウントを選んでください。その他の失敗では、未完了の対象について再試行のガイダンスが保持されます。
 
@@ -238,6 +240,8 @@ Actorは1リクエストあたり100件のIDを処理します。バッチは同
 
 検索とページネーションが必要なポストのモードは、`time.since`、`time.until`、Unixタイムスタンプ、`lang`をサポートします。これには、プロフィールのPosts、With Replies、Media、Likes、Lists、リプライ、引用ポスト、スレッドが含まれます。対応するフラットな日付演算子も機能します。Actorは、課金前に各行を検証します。日付の下限は含みます。上限は含みません。日付フィルタは、利用可能な日付がない行を除外します。言語フィルタは、言語が欠落しているか一致しない行を除外します。フィルタされた行は、要求した結果上限を消費しません。順序が保証されていない結果では、一致する結果より古いポストが先に来る場合でもページネーションが続きます。日付範囲を指定したリストの実行は、その範囲へ直接移動します。そのため、30日前の1日分は昨日の分とほぼ同じ時間で取得できます。リストの深い位置にある範囲では、ポストはXのリスト検索から取得されます。この検索では、リストのタイムラインに表示されるリプライの一部が含まれません。リストの実行は、日付の下限より古いポストだけのページが3ページ続いた時点でも終了します。上限は含まれないため、`since`と`until`に同じ日付を指定すると空の範囲になります。丸1日分を取得するには、`until`を翌日に設定してください。ポストのフィルタは、ユーザーリストや直接のポスト/記事検索には適用されません。
 
+`time.withinTime`と`within_time`も同じモードで機能します。`7d`を指定すると、実行が読み取りを始める時点までの直近7日間のポストを残します。2006年より前までさかのぼる期間では、すべてのポストを残します。
+
 `mode: "replies"`はより厳格です。直接のタイムライン、サポートされているランキングモード、すべての前方カーソルモジュール、ラベル付けされた非表示コンテンツの分岐、報告されたリプライ数に応じた時間区分、検索を組み合わせます。すべてのポスト行には、要求されたポストIDと一致する`inReplyToId`があります。ネストされた会話内のリプライは、直接のリプライとしてカウントされません。Xが報告よりも少ないリプライしか公開していない場合、Actorは安全な部分的結果を保持します。余力がある場合は、`diagnostics`に1件の`replies-incomplete`レコードを追加します。カバレッジのしきい値に達したことは、抽出が完了したことを意味しません。実行は、指定した上限に達するか、確認済みの情報源枯渇に至るまで部分的なままです。`replyCoverage`は、件数、戦略、ページネーションの異常、欠落フィールド、推奨されるフォールバックをレポートします。Actorは、出力ゼロを返す前に、一時的な再試行の遅延を尊重します。1つのリプライ対象について25,000件を超える合計を含め、要求する合計に`maxItems`を設定してください。
 
 記事の行には、`resultType: "article"`、`sourceTweetId`、`article`、任意で`author`が含まれます。エンゲージメントのユーザー行には、`resultType: "user"`、`sourceTweetId`、`engagementMode`が含まれます。
@@ -298,25 +302,27 @@ Actorは1リクエストあたり100件のIDを処理します。バッチは同
 
 すでに使っている入力を貼り付けてください。X Tweet Scraperは、他のポストActorが使うフィールド名を読み取り、自身のフィールドに対応付けます。標準の名前が、引き続きドキュメント上の既定です。別名がフィールドを落とすことはなく、支払う金額を変えることもありません。入力フォームには標準フィールドだけが並ぶため、短いままです。別名は、JSON、API、SDK、自動化、保存済みタスクの入力で機能します。
 
-| すでに使っているフィールド                                                                                         | X Tweet Scraperでの読み取り先                                            |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                        | `startUrls`                                                              |
-| `tweetIds`、`tweetIDs`、`tweets`、`postIds`、`lookupPostIds`、または1つの文字列としての`tweetId`                   | `tweetIds`                                                               |
-| `twitterHandles`, `usernames`                                                                                      | `twitterHandles`                                                         |
-| `twitterContent`, `query`, `searchQuery`                                                                           | `twitterContent`                                                         |
-| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts` | `maxItems`                                                               |
-| `sort`                                                                                                             | `queryType`                                                              |
-| `tweetLanguage`                                                                                                    | `lang`                                                                   |
-| `author`, `inReplyTo`, `mentioning`                                                                                | `from`, `to`, `@`                                                        |
-| `start`, `end`                                                                                                     | `since`, `until`                                                         |
-| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                            | `min_retweets`, `min_faves`, `min_replies`                               |
-| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                           | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
-| `geotaggedNear`, `withinRadius`                                                                                    | `near`, `within`                                                         |
+| すでに使っているフィールド                                                                                                                                    | X Tweet Scraperでの読み取り先                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                                                                   | `startUrls`                                                              |
+| `tweetIds`、`tweetIDs`、`tweets`、`postIds`、`lookupPostIds`、`tweet_ids`、または1つの文字列としての`tweetId`                                                 | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`, `handles`                                                                                                                      | `twitterHandles`                                                         |
+| `searchTerms`、`searchQueries`、`queries`、`search`（リスト、または1行に1つの検索）                                                                           | `searchTerms`                                                            |
+| `twitterContent`, `query`, `searchQuery`                                                                                                                      | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
+| `sort`                                                                                                                                                        | `queryType`                                                              |
+| `tweetLanguage`, `language`                                                                                                                                   | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                                                           | `from`, `to`, `@`                                                        |
+| `start`, `startDate`, `end`, `endDate`                                                                                                                        | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                       | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                      | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                                                               | `near`, `within`                                                         |
 
 貼り付けた入力の動作は次のとおりです。
 
 - すべての取得元が実行されます。開始URL、ハンドル、検索語句、リストID、ポストIDを含む入力はすべてを実行し、`maxItems`は実行全体に適用されます。
 - `searchTerms`と並んだ検索クエリは、追加の1語句として実行されます。
+- Actorは、`x.com/@name`形式のプロフィールのURLを`x.com/name`と同じように読み取ります。
 - 別名とその標準フィールドを両方設定した場合、標準の値が優先されます。実行ログには、採用されなかった別名が記録されます。
 - 実行ログには、`customMapFunction`のようにActorが読み取らないすべてのフィールドが記録されます。通知なしに破棄されるものはありません。
 - 行数の上限は1以上の整数でなければなりません。`maxResults: 0`は、何かを取得または課金する前に実行を停止します。

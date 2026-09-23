@@ -126,8 +126,9 @@ Apify 不会将固定的构建编号重定向到 `latest`。请将固定编号�
 | `sourceTweetId`        | 文章和互动模式下的来源推文 ID                                     |
 | `article`              | `mode: "article"` 下的结构化文章数据                             |
 
-可选的推文元数据可能包含 `card`、`communityId`、`communityNote`、
-`edit`、`noteTweet` 和 `postCta`。`isTranslatable`、`place`、
+可选的推文元数据可能包含 `authorUnavailable`、`card`、
+`communityId`、`communityNote`、`edit`、`exclusiveContent`、
+`noteTweet` 和 `postCta`。`isTranslatable`、`place`、
 `possiblySensitive` 和 `viewState` 保留其他公开上下文信息。
 `previousCounts` 保留编辑前的互动数据。`tombstone` 保留提示信息。
 `unmentionedUserIds` 列出退出对话的用户。具体字段请参见 OpenAPI 文档。
@@ -180,6 +181,13 @@ Apify 不会将固定的构建编号重定向到 `latest`。请将固定编号�
 被中断的抓取还会写入一条免费的 `partial` 诊断记录。已获取的结果保持
 完整。诊断记录中报告 `availableResults`、`failedTargets`、`retryable`
 及 `nextAction`。Actor 成功退出只能确认交付情况，不代表抓取已完成。
+
+状态消息会写明导致运行停止的每个原因。如果一次运行中既有不存在的账户，
+又有停滞的搜索，状态消息会同时写明两者。`stopCauses` 会列出每个原因
+及其各自的 `message`、`retryable` 和 `nextAction`。原因的取值为
+`target_not_found`、`target_protected`、`target_failed`、
+`pagination_safety_limit`、`reply_reach` 和 `deadline_reached`。
+只要任一原因可重试，整个运行就会标记为 `retryable`。
 
 受保护或不存在的目标都会被计为失败，即使运行中包含有效结果也是如此。
 当所有失败都与不可用的目标有关时，诊断记录会将 `retryable` 设为
@@ -336,6 +344,10 @@ Actor 会在计费前验证每一行数据。下限日期为含边界。上限�
 `until` 设为第二天，即可获取 1 整天的数据。推文过滤器不适用于用户列表或
 直接的推文/文章查询。
 
+`time.withinTime` 和 `within_time` 也适用于上述模式。取值为 `7d` 时，
+会保留运行开始读取前最近 7 天内的帖子。回溯到 2006 年之前的时间窗口
+会保留所有帖子。
+
 `mode: "replies"` 的规则更为严格。它结合了直接时间线、受支持的排序
 模式、每一个前向游标模块、带标签的隐藏内容分支、按已报告回复数量
 缩放的时间分区，以及搜索。每一行推文数据的 `inReplyToId` 都等于所
@@ -434,26 +446,28 @@ fields` 视图对应 `snake_case`。视图只负责选择列，永远不会重�
 字段，因此保持简短。别名可在 JSON、API、SDK、自动化及已保存的任务输入中
 使用。
 
-| 你已在使用的字段                                                                                                   | X Tweet Scraper 将其读取为                                               |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                        | `startUrls`                                                              |
-| `tweetIds`、`tweetIDs`、`tweets`、`postIds`、`lookupPostIds`，或作为 1 个字符串的 `tweetId`                        | `tweetIds`                                                               |
-| `twitterHandles`, `usernames`                                                                                      | `twitterHandles`                                                         |
-| `twitterContent`, `query`, `searchQuery`                                                                           | `twitterContent`                                                         |
-| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts` | `maxItems`                                                               |
-| `sort`                                                                                                             | `queryType`                                                              |
-| `tweetLanguage`                                                                                                    | `lang`                                                                   |
-| `author`, `inReplyTo`, `mentioning`                                                                                | `from`, `to`, `@`                                                        |
-| `start`, `end`                                                                                                     | `since`, `until`                                                         |
-| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                            | `min_retweets`, `min_faves`, `min_replies`                               |
-| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                           | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
-| `geotaggedNear`, `withinRadius`                                                                                    | `near`, `within`                                                         |
+| 你已在使用的字段                                                                                                                                              | X Tweet Scraper 将其读取为                                               |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                                                                   | `startUrls`                                                              |
+| `tweetIds`、`tweetIDs`、`tweets`、`postIds`、`lookupPostIds`、`tweet_ids`，或作为 1 个字符串的 `tweetId`                                                      | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`, `handles`                                                                                                                      | `twitterHandles`                                                         |
+| `searchTerms`、`searchQueries`、`queries`、`search`，以列表形式或每行 1 个搜索词                                                                              | `searchTerms`                                                            |
+| `twitterContent`, `query`, `searchQuery`                                                                                                                      | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
+| `sort`                                                                                                                                                        | `queryType`                                                              |
+| `tweetLanguage`, `language`                                                                                                                                   | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                                                           | `from`, `to`, `@`                                                        |
+| `start`, `startDate`, `end`, `endDate`                                                                                                                        | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                       | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                      | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                                                               | `near`, `within`                                                         |
 
 粘贴的输入会这样运行：
 
 - 每一种来源都会运行。包含起始 URL、用户名、搜索词、List ID 和推文 ID 的
   输入会全部运行，`maxItems` 适用于整个运行。
 - 与 `searchTerms` 并列的搜索查询会作为额外的 1 个搜索词运行。
+- 写成 `x.com/@name` 的主页 URL 会按 `x.com/name` 读取。
 - 同时设置别名及其规范化字段时，以规范化字段的值为准。运行日志会写明
   未被采用的别名。
 - 运行日志会写明 Actor 不读取的每个字段，例如 `customMapFunction`。不会有

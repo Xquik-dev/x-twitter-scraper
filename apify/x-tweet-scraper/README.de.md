@@ -138,9 +138,10 @@ einem echten Ziel. Bearbeite ihn vor dem Ausführen.
 | `sourceTweetId`            | Quell-Tweet-ID für Artikel- und Interaktionsmodi                    |
 | `article`                  | Strukturierte Artikeldaten in `mode: "article"`                     |
 
-Optionale Tweet-Metadaten können `card`, `communityId`, `communityNote`,
-`edit`, `noteTweet` und `postCta` umfassen. `isTranslatable`, `place`,
-`possiblySensitive` und `viewState` erhalten weiteren öffentlichen Kontext.
+Optionale Tweet-Metadaten können `authorUnavailable`, `card`, `communityId`,
+`communityNote`, `edit`, `exclusiveContent`, `noteTweet` und `postCta`
+umfassen. `isTranslatable`, `place`, `possiblySensitive` und `viewState`
+erhalten weiteren öffentlichen Kontext.
 `previousCounts` erhält Interaktionswerte vor einer Bearbeitung.
 `tombstone` erhält Hinweise. `unmentionedUserIds` listet Nutzer, die die
 Konversation verlassen haben. Siehe OpenAPI für die genauen Felder.
@@ -205,6 +206,13 @@ Eine unterbrochene Extraktion schreibt außerdem eine kostenlose
 meldet `availableResults`, `failedTargets`, `retryable` und `nextAction`.
 Ein erfolgreicher Actor-Abschluss bestätigt die Lieferung, nicht die
 vollständige Extraktion.
+
+Der Statustext nennt jede Ursache für den Stopp. Ein Run mit einem fehlenden
+Account & einer stockenden Suche nennt beide. `stopCauses` listet jede Ursache
+mit eigenen Feldern `message`, `retryable` & `nextAction`. Die Ursachen sind
+`target_not_found`, `target_protected`, `target_failed`,
+`pagination_safety_limit`, `reply_reach` & `deadline_reached`. Der Run ist
+`retryable`, wenn mindestens 1 Ursache es ist.
 
 Geschützte oder fehlende Ziele zählen als Fehler, auch bei Runs mit
 gültigen Ergebnissen. Wenn alle Fehler nicht verfügbare Ziele betreffen,
@@ -393,6 +401,10 @@ Datum für `since` & `until` ein leeres Fenster. Setze `until` auf den nächsten
 Tag, um 1 vollen Tag zu erhalten. Tweet-Filter gelten nicht für Nutzerlisten
 oder direkte Tweet-/Artikel-Lookups.
 
+`time.withinTime` & `within_time` funktionieren in denselben Modi. Der Wert
+`7d` behält die letzten 7 Tage, bevor der Run zu lesen beginnt. Ein Fenster,
+das bis vor 2006 zurückreicht, behält jeden Beitrag.
+
 `mode: "replies"` ist strenger. Er kombiniert direkte Timelines,
 unterstützte Ranking-Modi, jedes vorwärtsgerichtete Cursor-Modul,
 gekennzeichnete versteckte Inhaltszweige, an die gemeldete Antwortanzahl
@@ -510,20 +522,21 @@ ein Feld & ändert nie, was du zahlst. Das Eingabeformular listet nur
 kanonische Felder, damit es kurz bleibt. Aliasse funktionieren in JSON, API,
 SDK, Automatisierung & gespeicherten Task-Eingaben.
 
-| Feld, das du schon nutzt                                                                                           | X Tweet Scraper liest es als                                             |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                        | `startUrls`                                                              |
-| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds` oder `tweetId` als 1 String                           | `tweetIds`                                                               |
-| `twitterHandles`, `usernames`                                                                                      | `twitterHandles`                                                         |
-| `twitterContent`, `query`, `searchQuery`                                                                           | `twitterContent`                                                         |
-| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts` | `maxItems`                                                               |
-| `sort`                                                                                                             | `queryType`                                                              |
-| `tweetLanguage`                                                                                                    | `lang`                                                                   |
-| `author`, `inReplyTo`, `mentioning`                                                                                | `from`, `to`, `@`                                                        |
-| `start`, `end`                                                                                                     | `since`, `until`                                                         |
-| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                            | `min_retweets`, `min_faves`, `min_replies`                               |
-| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                           | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
-| `geotaggedNear`, `withinRadius`                                                                                    | `near`, `within`                                                         |
+| Feld, das du schon nutzt                                                                                                                                      | X Tweet Scraper liest es als                                             |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                                                                   | `startUrls`                                                              |
+| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids` oder `tweetId` als 1 String                                                         | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`, `handles`                                                                                                                      | `twitterHandles`                                                         |
+| `searchTerms`, `searchQueries`, `queries`, `search`, als Liste oder 1 Suche pro Zeile                                                                         | `searchTerms`                                                            |
+| `twitterContent`, `query`, `searchQuery`                                                                                                                      | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
+| `sort`                                                                                                                                                        | `queryType`                                                              |
+| `tweetLanguage`, `language`                                                                                                                                   | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                                                           | `from`, `to`, `@`                                                        |
+| `start`, `startDate`, `end`, `endDate`                                                                                                                        | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                       | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                      | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                                                               | `near`, `within`                                                         |
 
 So verhält sich eine eingefügte Eingabe:
 
@@ -531,6 +544,7 @@ So verhält sich eine eingefügte Eingabe:
   Listen-IDs & Tweet-IDs führt alle aus, & `maxItems` gilt für den gesamten
   Run.
 - Eine Suchanfrage neben `searchTerms` läuft als 1 weiterer Begriff.
+- Der Actor liest eine Profil-URL in der Form `x.com/@name` wie `x.com/name`.
 - Wenn du einen Alias & sein kanonisches Feld setzt, gewinnt der kanonische
   Wert. Das Run-Protokoll nennt den Alias, der verloren hat.
 - Das Run-Protokoll nennt jedes Feld, das der Actor nicht liest, etwa

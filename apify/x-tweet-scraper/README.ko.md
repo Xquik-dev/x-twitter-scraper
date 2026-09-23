@@ -130,12 +130,12 @@ Apify의 [빌드 태그](https://docs.apify.com/platform/actors/development/buil
 | `sourceTweetId`         | 아티클 & 참여 모드의 원본 트윗 ID                             |
 | `article`               | `mode: "article"`에서 구조화된 아티클 데이터                 |
 
-선택적 트윗 메타데이터에는 `card`, `communityId`, `communityNote`, `edit`,
-`noteTweet`, `postCta`가 포함될 수 있습니다. `isTranslatable`, `place`,
-`possiblySensitive`, `viewState`는 그 밖의 공개 맥락을 보존합니다.
-`previousCounts`는 수정 전 참여 지표를 보존합니다. `tombstone`은 안내 문구를
-보존합니다. `unmentionedUserIds`는 대화를 떠난 사용자를 나열합니다. 정확한
-필드는 OpenAPI를 참고하세요.
+선택적 트윗 메타데이터에는 `authorUnavailable`, `card`, `communityId`,
+`communityNote`, `edit`, `exclusiveContent`, `noteTweet`, `postCta`가 포함될 수
+있습니다. `isTranslatable`, `place`, `possiblySensitive`, `viewState`는 그 밖의
+공개 맥락을 보존합니다. `previousCounts`는 수정 전 참여 지표를 보존합니다.
+`tombstone`은 안내 문구를 보존합니다. `unmentionedUserIds`는 대화를 떠난
+사용자를 나열합니다. 정확한 필드는 OpenAPI를 참고하세요.
 
 중첩된 작성자는 공개 프로필 계약을 따릅니다. 여기에는 신원, 개수, 인증, 사용
 가능 여부, 전문 데이터, 프로필 자기소개가 포함됩니다.
@@ -188,6 +188,13 @@ Apify의 [빌드 태그](https://docs.apify.com/platform/actors/development/buil
 유지됩니다. 진단은 `availableResults`, `failedTargets`, `retryable`,
 `nextAction`을 보고합니다. Actor가 성공적으로 종료되었다는 것은 전달이
 확인됐다는 뜻이지, 추출이 완료됐다는 뜻은 아닙니다.
+
+상태 메시지는 중단 원인을 모두 표시합니다. 찾을 수 없는 계정 & 정체된 검색이
+함께 있는 실행은 둘 다 표시합니다. `stopCauses`는 각 원인을 나열하고, 원인마다
+`message`, `retryable` & `nextAction`을 따로 담습니다. 원인은
+`target_not_found`, `target_protected`, `target_failed`,
+`pagination_safety_limit`, `reply_reach` & `deadline_reached`입니다. 원인 중
+하나라도 `retryable`이면 실행도 `retryable`입니다.
 
 보호되거나 누락된 대상은 유효한 결과가 있는 실행을 포함해 실패로
 집계됩니다. 모든 실패가 사용할 수 없는 대상 때문일 때는 진단에서
@@ -356,6 +363,10 @@ Likes, Lists, 답글, 인용, 스레드가 포함됩니다. 일치하는 플랫 
 1일을 얻으려면 `until`을 다음 날로 설정하세요. 트윗 필터는 사용자 목록이나
 직접 트윗/아티클 조회에는 적용되지 않습니다.
 
+`time.withinTime` & `within_time`도 같은 모드에서 작동합니다. `7d` 값은 실행이
+읽기를 시작하기 전 최근 7일의 게시물을 남깁니다. 2006년 이전까지 거슬러 올라가는
+윈도우는 모든 게시물을 남깁니다.
+
 `mode: "replies"`는 더 엄격합니다. 직접 타임라인, 지원되는 순위 모드, 모든
 정방향 커서 모듈, 라벨이 붙은 숨겨진 콘텐츠 분기, 보고된 답글 수에 맞춰
 조정된 시간 구간, 검색을 결합합니다. 모든 트윗 행은 요청한 트윗 ID와 같은
@@ -459,20 +470,21 @@ Overview 데이터셋 뷰는 두 스타일 모두에서 작동합니다. 실행�
 폼은 표준 필드만 나열하므로 짧게 유지됩니다. 별칭은 JSON, API, SDK, 자동화 &
 저장된 태스크 입력에서 작동합니다.
 
-| 이미 쓰는 필드                                                                                                     | X Tweet Scraper가 읽는 필드                                              |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                        | `startUrls`                                                              |
-| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, 또는 문자열 1개인 `tweetId`                          | `tweetIds`                                                               |
-| `twitterHandles`, `usernames`                                                                                      | `twitterHandles`                                                         |
-| `twitterContent`, `query`, `searchQuery`                                                                           | `twitterContent`                                                         |
-| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts` | `maxItems`                                                               |
-| `sort`                                                                                                             | `queryType`                                                              |
-| `tweetLanguage`                                                                                                    | `lang`                                                                   |
-| `author`, `inReplyTo`, `mentioning`                                                                                | `from`, `to`, `@`                                                        |
-| `start`, `end`                                                                                                     | `since`, `until`                                                         |
-| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                            | `min_retweets`, `min_faves`, `min_replies`                               |
-| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                           | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
-| `geotaggedNear`, `withinRadius`                                                                                    | `near`, `within`                                                         |
+| 이미 쓰는 필드                                                                                                                                                | X Tweet Scraper가 읽는 필드                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                                                                   | `startUrls`                                                              |
+| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids`, 또는 문자열 1개인 `tweetId`                                                        | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`, `handles`                                                                                                                      | `twitterHandles`                                                         |
+| `searchTerms`, `searchQueries`, `queries`, `search`, 목록 또는 한 줄에 검색어 1개씩                                                                           | `searchTerms`                                                            |
+| `twitterContent`, `query`, `searchQuery`                                                                                                                      | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
+| `sort`                                                                                                                                                        | `queryType`                                                              |
+| `tweetLanguage`, `language`                                                                                                                                   | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                                                           | `from`, `to`, `@`                                                        |
+| `start`, `startDate`, `end`, `endDate`                                                                                                                        | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                       | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                      | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                                                               | `near`, `within`                                                         |
 
 붙여넣은 입력은 이렇게 동작합니다:
 
@@ -480,6 +492,7 @@ Overview 데이터셋 뷰는 두 스타일 모두에서 작동합니다. 실행�
   입력은 전부 실행하며, `maxItems`는 실행 전체에 적용됩니다.
 - `searchTerms` 옆에 있는 검색 쿼리는 검색어 1개가 더 추가된 것으로
   실행됩니다.
+- Actor는 `x.com/@name`으로 쓴 프로필 URL을 `x.com/name`과 똑같이 읽습니다.
 - 별칭 & 그 표준 필드를 함께 설정하면 표준 값이 우선합니다. 실행 로그에 밀린
   별칭 이름이 남습니다.
 - 실행 로그에는 `customMapFunction`처럼 Actor가 읽지 않는 모든 필드 이름이

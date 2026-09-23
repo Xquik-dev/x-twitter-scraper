@@ -142,8 +142,9 @@ une cible réelle. Modifiez-la avant de l'exécuter.
 | `sourceTweetId`            | ID de tweet source pour les modes article et engagement            |
 | `article`                  | Données d'article structurées en `mode: "article"`                 |
 
-Les métadonnées optionnelles de tweet peuvent inclure `card`,
-`communityId`, `communityNote`, `edit`, `noteTweet` et `postCta`.
+Les métadonnées optionnelles de tweet peuvent inclure
+`authorUnavailable`, `card`, `communityId`, `communityNote`, `edit`,
+`exclusiveContent`, `noteTweet` et `postCta`.
 `isTranslatable`, `place`, `possiblySensitive` et `viewState` préservent
 d'autre contexte public. `previousCounts` préserve l'engagement avant
 édition. `tombstone` préserve les avis. `unmentionedUserIds` liste les
@@ -212,6 +213,13 @@ Une extraction interrompue écrit aussi un diagnostic `partial` gratuit.
 Les résultats disponibles restent intacts. Le diagnostic indique
 `availableResults`, `failedTargets`, `retryable` et `nextAction`. Une
 sortie d'Actor réussie confirme la livraison, pas l'extraction complète.
+
+Le texte de statut nomme toutes les causes de l'arrêt. Un run avec un
+compte introuvable et une recherche bloquée indique les deux. `stopCauses`
+liste chaque cause avec ses propres `message`, `retryable` et
+`nextAction`. Les causes sont `target_not_found`, `target_protected`,
+`target_failed`, `pagination_safety_limit`, `reply_reach` et
+`deadline_reached`. Le run est `retryable` dès qu'une cause l'est.
 
 Les cibles protégées ou manquantes comptent comme des échecs, y compris
 les runs avec des résultats valides. Quand tous les échecs concernent des
@@ -405,6 +413,11 @@ Comme la borne supérieure est exclusive, la même date pour `since` et
 obtenir 1 jour complet. Les filtres de tweet ne s'appliquent pas aux listes
 d'utilisateurs ni aux lookups directs de Tweet/article.
 
+`time.withinTime` et `within_time` fonctionnent dans les mêmes modes. Une
+valeur de `7d` conserve les 7 jours qui précèdent le moment où le run
+commence à lire. Une fenêtre qui remonte avant 2006 conserve tous les
+posts.
+
 `mode: "replies"` est plus strict. Il combine les fils directs, les modes
 de classement pris en charge, chaque module de curseur avant, les
 branches de contenu masqué étiquetées, les partitions temporelles mises à
@@ -524,20 +537,21 @@ vous payez. Le formulaire d'entrée ne liste que les champs canoniques, donc
 il reste court. Les alias fonctionnent en JSON, API, SDK, automatisation et
 entrées de tâche enregistrées.
 
-| Champ que vous utilisez déjà                                                                                       | X Tweet Scraper le lit comme                                             |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                        | `startUrls`                                                              |
-| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, ou `tweetId` en 1 chaîne                             | `tweetIds`                                                               |
-| `twitterHandles`, `usernames`                                                                                      | `twitterHandles`                                                         |
-| `twitterContent`, `query`, `searchQuery`                                                                           | `twitterContent`                                                         |
-| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts` | `maxItems`                                                               |
-| `sort`                                                                                                             | `queryType`                                                              |
-| `tweetLanguage`                                                                                                    | `lang`                                                                   |
-| `author`, `inReplyTo`, `mentioning`                                                                                | `from`, `to`, `@`                                                        |
-| `start`, `end`                                                                                                     | `since`, `until`                                                         |
-| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                            | `min_retweets`, `min_faves`, `min_replies`                               |
-| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                           | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
-| `geotaggedNear`, `withinRadius`                                                                                    | `near`, `within`                                                         |
+| Champ que vous utilisez déjà                                                                                                                                  | X Tweet Scraper le lit comme                                             |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                                                                   | `startUrls`                                                              |
+| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids`, ou `tweetId` en 1 chaîne                                                           | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`, `handles`                                                                                                                      | `twitterHandles`                                                         |
+| `searchTerms`, `searchQueries`, `queries`, `search`, en liste ou 1 recherche par ligne                                                                        | `searchTerms`                                                            |
+| `twitterContent`, `query`, `searchQuery`                                                                                                                      | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
+| `sort`                                                                                                                                                        | `queryType`                                                              |
+| `tweetLanguage`, `language`                                                                                                                                   | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                                                           | `from`, `to`, `@`                                                        |
+| `start`, `startDate`, `end`, `endDate`                                                                                                                        | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                       | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                      | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                                                               | `near`, `within`                                                         |
 
 Comportement d'une entrée collée :
 
@@ -546,6 +560,7 @@ Comportement d'une entrée collée :
   tous, et `maxItems` s'applique à l'ensemble du run.
 - Une requête de recherche à côté de `searchTerms` s'exécute comme 1 terme
   de plus.
+- L'Actor lit une URL de profil écrite `x.com/@name` comme `x.com/name`.
 - Quand vous définissez un alias et son champ canonique, la valeur canonique
   l'emporte. Le log du run nomme l'alias qui a perdu.
 - Le log du run nomme chaque champ que l'Actor ne lit pas, comme

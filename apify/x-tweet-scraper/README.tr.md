@@ -140,8 +140,9 @@ veri kümesi görünümü vardır. Her görev gerçek bir arama veya hedefle aç
 | `sourceTweetId`          | Makale ve etkileşim modları için kaynak tweet ID'si            |
 | `article`                | `mode: "article"` içinde yapılandırılmış makale verisi         |
 
-İsteğe bağlı tweet metadata'sı `card`, `communityId`, `communityNote`,
-`edit`, `noteTweet` ve `postCta` içerebilir. `isTranslatable`, `place`,
+İsteğe bağlı tweet metadata'sı `authorUnavailable`, `card`, `communityId`,
+`communityNote`, `edit`, `exclusiveContent`, `noteTweet` ve `postCta`
+içerebilir. `isTranslatable`, `place`,
 `possiblySensitive` ve `viewState`, diğer herkese açık bağlamı korur.
 `previousCounts`, düzenleme öncesi etkileşimi korur. `tombstone`,
 bildirimleri korur. `unmentionedUserIds`, konuşmayı terk eden kullanıcıları
@@ -205,6 +206,14 @@ Kesintiye uğrayan çıkarma ayrıca ücretsiz bir `partial` tanılaması yazar.
 Mevcut sonuçlar bozulmadan kalır. Tanılama `availableResults`,
 `failedTargets`, `retryable` ve `nextAction`'ı bildirir. Başarılı bir Actor
 çıkışı teslimatı doğrular, eksiksiz çıkarmayı değil.
+
+Durum metni, çalıştırmayı durduran her nedeni belirtir. Bulunamayan bir hesabı
+ve duraklayan bir araması olan çalıştırmada durum metni ikisini de belirtir.
+`stopCauses`, her nedeni kendi `message`, `retryable` ve `nextAction`
+alanlarıyla listeler. Olası nedenler şunlar: `target_not_found`,
+`target_protected`, `target_failed`, `pagination_safety_limit`, `reply_reach`
+ve `deadline_reached`. Nedenlerden en az biri `retryable` ise çalıştırma da
+`retryable` olur.
 
 Korunan veya eksik hedefler, geçerli sonuçları olan çalıştırmalar dahil
 hata olarak sayılır. Tüm hatalar kullanılamayan hedeflerle ilgili
@@ -386,6 +395,10 @@ boş bir penceredir. 1 tam gün almak için `until` değerini sonraki güne ayar
 Tweet filtreleri kullanıcı listelerine veya doğrudan Tweet/makale
 aramalarına uygulanmaz.
 
+`time.withinTime` ve `within_time` aynı modlarda çalışır. `7d` değeri,
+çalıştırma okumaya başlamadan önceki son 7 günü tutar. 2006'dan önce başlayan
+bir pencere her gönderiyi tutar.
+
 `mode: "replies"` daha katıdır. Doğrudan zaman akışlarını, desteklenen
 sıralama modlarını, her ileri imleç modülünü, etiketlenmiş gizli içerik
 dallarını, bildirilen yanıt sayısına göre ölçeklenen zaman bölümlerini ve
@@ -498,20 +511,21 @@ belgelenen varsayılan olarak kalır. Bir takma ad asla bir alanı düşürmez v
 listeler, böylece kısa kalır. Takma adlar JSON, API, SDK, otomasyon ve kayıtlı
 görev girdilerinde çalışır.
 
-| Zaten kullandığın alan                                                                                             | X Tweet Scraper bunu şöyle okur                                          |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                        | `startUrls`                                                              |
-| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds` veya tek string olarak `tweetId`                      | `tweetIds`                                                               |
-| `twitterHandles`, `usernames`                                                                                      | `twitterHandles`                                                         |
-| `twitterContent`, `query`, `searchQuery`                                                                           | `twitterContent`                                                         |
-| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts` | `maxItems`                                                               |
-| `sort`                                                                                                             | `queryType`                                                              |
-| `tweetLanguage`                                                                                                    | `lang`                                                                   |
-| `author`, `inReplyTo`, `mentioning`                                                                                | `from`, `to`, `@`                                                        |
-| `start`, `end`                                                                                                     | `since`, `until`                                                         |
-| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                            | `min_retweets`, `min_faves`, `min_replies`                               |
-| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                           | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
-| `geotaggedNear`, `withinRadius`                                                                                    | `near`, `within`                                                         |
+| Zaten kullandığın alan                                                                                                                                        | X Tweet Scraper bunu şöyle okur                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                                                                   | `startUrls`                                                              |
+| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids` veya tek string olarak `tweetId`                                                    | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`, `handles`                                                                                                                      | `twitterHandles`                                                         |
+| `searchTerms`, `searchQueries`, `queries`, `search`, liste olarak veya her satırda bir arama                                                                  | `searchTerms`                                                            |
+| `twitterContent`, `query`, `searchQuery`                                                                                                                      | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
+| `sort`                                                                                                                                                        | `queryType`                                                              |
+| `tweetLanguage`, `language`                                                                                                                                   | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                                                           | `from`, `to`, `@`                                                        |
+| `start`, `startDate`, `end`, `endDate`                                                                                                                        | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                       | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                      | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                                                               | `near`, `within`                                                         |
 
 Yapıştırılan bir girdi şöyle davranır:
 
@@ -519,6 +533,7 @@ Yapıştırılan bir girdi şöyle davranır:
   ID'leri ve tweet ID'leri içeren bir girdi hepsini çalıştırır ve `maxItems`
   tüm çalıştırma için geçerlidir.
 - `searchTerms` yanındaki bir arama sorgusu 1 terim daha olarak çalışır.
+- Actor, `x.com/@name` biçimindeki bir profil URL'sini `x.com/name` gibi okur.
 - Bir takma adı ve kanonik alanını birlikte ayarlarsan kanonik değer kazanır.
   Çalıştırma günlüğü kaybeden takma adı adlandırır.
 - Çalıştırma günlüğü, Actor'ın okumadığı her alanı adlandırır, örneğin
