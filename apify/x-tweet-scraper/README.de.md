@@ -225,19 +225,17 @@ Die Diagnose nennt diese Ziele in `unavailableTargets`. Jeder Eintrag hat das
 `protected`. Die Liste fasst bis zu 100 Einträge. Entferne sie aus der
 Eingabe, um einen vollständigen Run zu erhalten.
 
-`completionReason: "pagination_safety_limit"` ist kein Lesefehler. Es
-bedeutet, dass die Paginierung gültige Datensätze behalten hat und dann
-ihr begrenztes Sicherheitslimit erreicht hat. Latest-Suchen laufen durch
-leere Seiten weiter, solange gültige Wiederherstellungs-Cursor vorhanden
-sind. Top-Suchen & Konto-Fenster-Wiederherstellung können nach 10
-aufeinanderfolgenden leeren Seiten einen Checkpoint setzen. Meldet der
-Dienst mitten in einem Run eine stockende Paginierung, wartet der Run 31
-Sekunden & fragt dieselbe Seite noch 1 Mal an. Danach läuft er mit neuen
-Beiträgen weiter oder endet als vollständig. Eine zweite Stockung setzt für
-die Suche einen Checkpoint. Ein Run mit Checkpoint meldet eine unvollständige
-Extraktion & behält fortsetzbare Cursor. Eine finale Seite schließt die Paginierung auch nach
-aufeinanderfolgenden leeren Seiten ab. `failedSubtargets` bleibt `0`. Du
-zahlst nur für akzeptierte Dataset-Datensätze.
+`completionReason: "pagination_safety_limit"` ist kein Lesefehler. Es bedeutet,
+dass die Paginierung gültige Datensätze behalten hat und dann ihr begrenztes
+Sicherheitslimit erreicht hat. Latest-Suchen laufen durch leere Seiten weiter,
+solange gültige Wiederherstellungs-Cursor vorhanden sind. Top-Suchen &
+Konto-Fenster-Wiederherstellung können nach 10 aufeinanderfolgenden leeren
+Seiten einen Checkpoint setzen. Meldet der Dienst eine stockende Paginierung,
+behält der Run seine Zeilen & setzt für dieses Ziel sofort einen Checkpoint. Ein
+Run mit Checkpoint meldet eine unvollständige Extraktion & behält fortsetzbare
+Cursor. Eine finale Seite schließt die Paginierung auch nach
+aufeinanderfolgenden leeren Seiten ab. `failedSubtargets` bleibt `0`. Du zahlst
+nur für akzeptierte Dataset-Datensätze.
 
 Das Standard-Apify-Zeitlimit ist `0`, Runs haben also kein Zeitlimit. Der
 Actor läuft weiter, bis er die Obergrenze erreicht oder die verfügbaren Daten

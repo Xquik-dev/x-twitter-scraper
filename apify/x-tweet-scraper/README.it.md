@@ -228,14 +228,12 @@ Significa che la paginazione ha conservato righe valide e poi ha raggiunto il
 suo limite di sicurezza. Le ricerche Latest continuano attraverso le pagine
 vuote finché restano cursori di recupero validi. Le ricerche Top e il recupero
 per finestra account possono eseguire un checkpoint dopo 10 pagine vuote
-consecutive. Quando il servizio riporta una paginazione bloccata a metà di
-un'esecuzione, l'esecuzione attende 31 secondi & richiede la stessa pagina 1
-altra volta. Poi continua con nuovi post o termina come completa. Un secondo
-blocco esegue un checkpoint della ricerca. Un'esecuzione con checkpoint
-riporta un'estrazione incompleta & conserva cursori ripristinabili. Una pagina
-finale completa la paginazione
-anche dopo pagine vuote consecutive. `failedSubtargets` resta `0`. Paghi
-solo le righe del dataset accettate.
+consecutive. Quando il servizio riporta una paginazione bloccata, l'esecuzione
+conserva le sue righe & esegue subito un checkpoint di quel target.
+Un'esecuzione con checkpoint riporta un'estrazione incompleta & conserva cursori
+ripristinabili. Una pagina finale completa la paginazione anche dopo pagine
+vuote consecutive. `failedSubtargets` resta `0`. Paghi solo le righe del dataset
+accettate.
 
 Il timeout Apify predefinito è `0`, quindi le esecuzioni non hanno limite di
 tempo. L'Actor continua finché non raggiunge il limite o esaurisce i dati

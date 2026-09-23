@@ -228,18 +228,15 @@ senin girdiğin haliyle `target` ve bir `reason` bulunur, `not_found` veya
 onları girdiden çıkar.
 
 `completionReason: "pagination_safety_limit"` bir okuma hatası değildir. Bu,
-sayfalamanın geçerli satırları koruduğu, ardından sınırlı güvenlik
-sınırına ulaştığı anlamına gelir. En Yeni aramalar, geçerli kurtarma
-imleçleri kaldığı sürece boş sayfalar boyunca devam eder. En Popüler
-aramalar ve hesap penceresi kurtarma, 10 ardışık boş sayfadan sonra kontrol
-noktasına alınabilir. Hizmet bir çalıştırmanın ortasında durmuş sayfalama
-bildirirse çalıştırma 31 saniye bekler ve aynı sayfayı 1 kez daha ister.
-Sonra yeni gönderilerle devam eder veya tamamlanmış olarak biter. İkinci bir
-duraklama aramayı kontrol noktasına alır. Kontrol noktasına alınan bir
-çalıştırma eksik çıkarma bildirir ve devam ettirilebilir imleçleri korur.
-Ardışık boş sayfalardan
-sonra bile bir terminal sayfası sayfalamayı tamamlar. `failedSubtargets` `0`
-olarak kalır. Yalnızca kabul edilen veri kümesi satırları için ödersin.
+sayfalamanın geçerli satırları koruduğu, ardından sınırlı güvenlik sınırına
+ulaştığı anlamına gelir. En Yeni aramalar, geçerli kurtarma imleçleri kaldığı
+sürece boş sayfalar boyunca devam eder. En Popüler aramalar ve hesap penceresi
+kurtarma, 10 ardışık boş sayfadan sonra kontrol noktasına alınabilir. Hizmet
+durmuş sayfalama bildirirse çalıştırma satırlarını korur ve o hedefi hemen
+kontrol noktasına alır. Kontrol noktasına alınan bir çalıştırma eksik çıkarma
+bildirir ve devam ettirilebilir imleçleri korur. Ardışık boş sayfalardan sonra
+bile bir terminal sayfası sayfalamayı tamamlar. `failedSubtargets` `0` olarak
+kalır. Yalnızca kabul edilen veri kümesi satırları için ödersin.
 
 Varsayılan Apify zaman aşımı `0`'dır, bu yüzden çalıştırmaların zaman
 sınırı yoktur. Actor, üst sınıra ulaşana veya uygun veriyi bitirene kadar

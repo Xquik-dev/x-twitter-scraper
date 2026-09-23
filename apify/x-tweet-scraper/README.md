@@ -207,12 +207,11 @@ holds up to 100 entries. Remove them from the input to get a complete run.
 pagination retained valid rows, then reached its bounded safety limit. Latest
 searches continue through empty pages while valid recovery cursors remain. Top
 searches & account-window recovery may checkpoint after 10 consecutive empty
-pages. When the service reports stalled pagination in the middle of a run, the
-run waits 31 seconds & asks the same page once more. It then continues with new
-posts or ends as complete. A second stall checkpoints the search. A checkpointed
-run reports incomplete extraction & retains resumable cursors. A terminal page
-completes pagination even after consecutive empty pages. `failedSubtargets`
-stays `0`. You pay only for accepted dataset rows.
+pages. When the service reports stalled pagination, the run keeps its rows &
+checkpoints that target at once. A checkpointed run reports incomplete
+extraction & retains resumable cursors. A terminal page completes pagination
+even after consecutive empty pages. `failedSubtargets` stays `0`. You pay only
+for accepted dataset rows.
 
 The default Apify timeout is `0`, so runs have no time limit. The Actor
 continues until it reaches the cap or runs out of eligible data. A caller can

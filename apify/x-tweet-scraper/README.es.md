@@ -228,18 +228,16 @@ tiene el `target` tal como lo ingresaste y un `reason`, `not_found` o
 obtener una ejecución completa.
 
 `completionReason: "pagination_safety_limit"` no es un fallo de lectura.
-Significa que la paginación conservó filas válidas y luego alcanzó su límite
-de seguridad acotado. Las búsquedas Latest continúan a través de páginas
-vacías mientras queden cursores de recuperación válidos. Las búsquedas Top y
-la recuperación por ventana de cuenta pueden establecer un punto de control
-tras 10 páginas vacías consecutivas. Cuando el servicio reporta paginación
-estancada a mitad de una ejecución, la ejecución espera 31 segundos y pide la
-misma página 1 vez más. Luego continúa con publicaciones nuevas o termina como
-completa. Un segundo estancamiento establece un punto de control en la
-búsqueda. Una ejecución con punto de control reporta extracción incompleta y
-conserva cursores reanudables. Una página terminal completa la paginación incluso después de
-páginas vacías consecutivas. `failedSubtargets` permanece en `0`. Pagas
-solo por las filas de Dataset aceptadas.
+Significa que la paginación conservó filas válidas y luego alcanzó su límite de
+seguridad acotado. Las búsquedas Latest continúan a través de páginas vacías
+mientras queden cursores de recuperación válidos. Las búsquedas Top y la
+recuperación por ventana de cuenta pueden establecer un punto de control tras 10
+páginas vacías consecutivas. Cuando el servicio reporta paginación estancada, la
+ejecución conserva sus filas y establece de inmediato un punto de control en ese
+objetivo. Una ejecución con punto de control reporta extracción incompleta y
+conserva cursores reanudables. Una página terminal completa la paginación
+incluso después de páginas vacías consecutivas. `failedSubtargets` permanece en
+`0`. Pagas solo por las filas de Dataset aceptadas.
 
 El tiempo de espera predeterminado de Apify es `0`, así que las ejecuciones no
 tienen límite de tiempo. El Actor continúa hasta alcanzar el tope o agotar los

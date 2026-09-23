@@ -233,20 +233,17 @@ contient la `target` telle que vous l'avez saisie et une `reason`,
 `not_found` ou `protected`. La liste contient jusqu'à 100 entrées.
 Retirez-les de l'entrée pour obtenir un run complet.
 
-`completionReason: "pagination_safety_limit"` n'est pas un échec de
-lecture. Cela signifie que la pagination a conservé des lignes valides,
-puis a atteint sa limite de sécurité bornée. Les recherches Latest
-continuent à travers les pages vides tant que des curseurs de récupération
-valides subsistent. Les recherches Top et la récupération de fenêtre de
-compte peuvent enregistrer un point de contrôle après 10 pages vides
-consécutives. Quand le service signale une pagination bloquée au milieu
-d'un run, le run attend 31 secondes et redemande la même page 1 fois. Il
-continue ensuite avec de nouveaux posts ou se termine comme complet. Un
-deuxième blocage enregistre un point de contrôle pour la recherche. Un run
-avec point de contrôle indique une extraction incomplète et conserve des
-curseurs reprenables. Une page terminale complète la pagination même après des
-pages vides consécutives. `failedSubtargets` reste à `0`. Vous ne
-payez que les lignes de dataset acceptées.
+`completionReason: "pagination_safety_limit"` n'est pas un échec de lecture.
+Cela signifie que la pagination a conservé des lignes valides, puis a atteint sa
+limite de sécurité bornée. Les recherches Latest continuent à travers les pages
+vides tant que des curseurs de récupération valides subsistent. Les recherches
+Top et la récupération de fenêtre de compte peuvent enregistrer un point de
+contrôle après 10 pages vides consécutives. Quand le service signale une
+pagination bloquée, le run garde ses lignes et enregistre aussitôt un point de
+contrôle pour cette cible. Un run avec point de contrôle indique une extraction
+incomplète et conserve des curseurs reprenables. Une page terminale complète la
+pagination même après des pages vides consécutives. `failedSubtargets` reste à
+`0`. Vous ne payez que les lignes de dataset acceptées.
 
 Le délai d'expiration Apify par défaut est `0`, donc les runs n'ont pas de
 limite de temps. L'Actor continue jusqu'à ce qu'il atteigne le plafond ou
