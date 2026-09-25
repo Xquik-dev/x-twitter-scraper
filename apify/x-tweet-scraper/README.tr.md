@@ -211,21 +211,26 @@ Durum metni, çalıştırmayı durduran her nedeni belirtir. Bulunamayan bir hes
 ve duraklayan bir araması olan çalıştırmada durum metni ikisini de belirtir.
 `stopCauses`, her nedeni kendi `message`, `retryable` ve `nextAction`
 alanlarıyla listeler. Olası nedenler şunlar: `target_not_found`,
-`target_protected`, `target_failed`, `pagination_safety_limit`, `reply_reach`
-ve `deadline_reached`. Nedenlerden en az biri `retryable` ise çalıştırma da
-`retryable` olur.
+`target_protected`, `search_unavailable`, `likes_hidden`, `target_failed`,
+`pagination_safety_limit`, `reply_reach` ve `deadline_reached`. Nedenlerden en
+az biri `retryable` ise çalıştırma da `retryable` olur.
 
-Korunan veya eksik hedefler, geçerli sonuçları olan çalıştırmalar dahil
-hata olarak sayılır. Tüm hatalar kullanılamayan hedeflerle ilgili
+Korunan veya eksik hedefler, geçerli sonuçları olan çalıştırmalar dahil hata
+olarak sayılır. X'in çalıştıramadığı bir arama da hata sayılır. X.com böyle bir
+aramada "Something went wrong" gösterir. Çalıştırma bu aramayı yeniden denemeden
+hemen durdurur. X'in gizlediği beğeniler de hata sayılır. X bir gönderiyi kimin
+beğendiğini yalnızca yazarına gösterir. Bir hesabın beğendiği gönderileri de
+yalnızca o hesaba gösterir. Tüm hatalar kullanılamayan hedeflerle ilgili
 olduğunda tanılamalar `retryable: false` ayarlar. Hedef URL'lerini veya
-kullanıcı adlarını kontrol et ve kullanılabilir herkese açık hesapları seç.
-Diğer hatalar, tamamlanmamış hedefler için yeniden deneme rehberliğini
-korur.
+kullanıcı adlarını kontrol et ve kullanılabilir herkese açık hesapları seç. X'in
+çalıştıramadığı bir aramayı daralt veya filtrelerini değiştir. Gizli beğeniler
+yerine retweet edenleri, yanıtları veya gönderileri oku. Diğer hatalar,
+tamamlanmamış hedefler için yeniden deneme rehberliğini korur.
 
-Tanılama bu hedefleri `unavailableTargets` içinde adlandırır. Her kayıtta
-senin girdiğin haliyle `target` ve bir `reason` bulunur, `not_found` veya
-`protected`. Liste en fazla 100 kayıt tutar. Eksiksiz bir çalıştırma için
-onları girdiden çıkar.
+Tanılama bu hedefleri `unavailableTargets` içinde adlandırır. Her kayıtta senin
+girdiğin haliyle `target` ve bir `reason` bulunur: `not_found`, `protected`,
+`search_unavailable` veya `likes_hidden`. Liste en fazla 100 kayıt tutar.
+Eksiksiz bir çalıştırma için onları girdiden çıkar.
 
 `completionReason: "pagination_safety_limit"` bir okuma hatası değildir. Bu,
 sayfalamanın geçerli satırları koruduğu, ardından sınırlı güvenlik sınırına
@@ -286,9 +291,11 @@ Birçok `from:username` araması için kısayol:
 { "twitterHandles": ["elonmusk", "nasa", "openai"], "maxItems": 100 }
 ```
 
-Her handle, imleç sayfalamasını yazar aramasıyla birleştirir. Actor,
-çıktı ve faturalamadan önce tekrarlanan satırları kaldırır. Kullanıcı
-adları isteğe bağlı bir `@` önekini kabul eder.
+Her handle, imleç sayfalamasını yazar aramasıyla birleştirir. Actor, çıktı ve
+faturalamadan önce tekrarlanan satırları kaldırır. Kullanıcı adları isteğe bağlı
+bir `@` önekini kabul eder. Handle'lar ve profil URL'leri, X'teki Posts sekmesi
+gibi repost'ları tutar. Tarih veya filtre olsa bile bu değişmez. Onları çıkarmak
+için `tweetTypes.excludeRetweets` ayarla.
 
 ### 3. Tweet ara
 
@@ -318,6 +325,10 @@ sayfalarını okur. Filtrelenmiş sayfalar, eşleşen tweet'ler veya sayfalama
 bitene kadar devam eder. Bağımsız arama terimleri eşzamanlı çalışır. Her
 terim, tutarlı derinlik ve atıf için sıralı imleç sayfalamasını korur.
 Hesap pencereleri yalnızca uyumlu olduklarında tek bir alımı paylaşır.
+
+`from:` içeren bir arama terimi, X aramasıyla aynı sonuçları döndürür. Bu yüzden
+repost'ları dışarıda bırakır. Onları tutmak için `include:nativeretweets` ekle.
+Yalnızca repost'lar için `filter:nativeretweets` kullan.
 
 ### 4. Tweet'leri ID'ye göre ara
 
@@ -508,21 +519,24 @@ belgelenen varsayılan olarak kalır. Bir takma ad asla bir alanı düşürmez v
 listeler, böylece kısa kalır. Takma adlar JSON, API, SDK, otomasyon ve kayıtlı
 görev girdilerinde çalışır.
 
-| Zaten kullandığın alan                                                                                                                                        | X Tweet Scraper bunu şöyle okur                                          |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                                                                   | `startUrls`                                                              |
-| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids` veya tek string olarak `tweetId`                                                    | `tweetIds`                                                               |
-| `twitterHandles`, `usernames`, `handles`                                                                                                                      | `twitterHandles`                                                         |
-| `searchTerms`, `searchQueries`, `queries`, `search`, liste olarak veya her satırda bir arama                                                                  | `searchTerms`                                                            |
-| `twitterContent`, `query`, `searchQuery`                                                                                                                      | `twitterContent`                                                         |
-| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
-| `sort`                                                                                                                                                        | `queryType`                                                              |
-| `tweetLanguage`, `language`                                                                                                                                   | `lang`                                                                   |
-| `author`, `inReplyTo`, `mentioning`                                                                                                                           | `from`, `to`, `@`                                                        |
-| `start`, `startDate`, `end`, `endDate`                                                                                                                        | `since`, `until`                                                         |
-| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                       | `min_retweets`, `min_faves`, `min_replies`                               |
-| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                      | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
-| `geotaggedNear`, `withinRadius`                                                                                                                               | `near`, `within`                                                         |
+| Zaten kullandığın alan                                                                                                                                                 | X Tweet Scraper bunu şöyle okur                                          |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`                                                                                             | `startUrls`                                                              |
+| tek string olarak `profileUrl`                                                                                                                                         | `startUrls`                                                              |
+| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids` veya tek string olarak `tweetId`                                                             | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`, `screenNames`, `profileTweets`                                                                 | `twitterHandles`                                                         |
+| tek string olarak `username`, `handle`, `screenName`                                                                                                                   | `twitterHandles`                                                         |
+| `searchTerms`, `searchQueries`, `queries`, `search`, liste olarak veya her satırda bir arama                                                                           | `searchTerms`                                                            |
+| `twitterContent`, `query`, `searchQuery`                                                                                                                               | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
+| `sort`                                                                                                                                                                 | `queryType`                                                              |
+| `tweetLanguage`, `language`                                                                                                                                            | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                                                                    | `from`, `to`, `@`                                                        |
+| `start`, `startDate`, `end`, `endDate`                                                                                                                                 | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                                | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                               | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                                                                        | `near`, `within`                                                         |
+| Google Search Scraper'daki `quickDateRange`, örneğin `d7`, `w2`, `m1` veya `y`                                                                                         | `since_time`, çalıştırmanın başlangıcından geriye sayılır                |
 
 Yapıştırılan bir girdi şöyle davranır:
 
@@ -538,6 +552,12 @@ Yapıştırılan bir girdi şöyle davranır:
 - Satır sınırı 1 veya daha büyük bir tam sayı olmalıdır. `maxResults: 0`,
   herhangi bir şey getirilmeden veya ücretlendirilmeden önce çalıştırmayı
   durdurur.
+- `quickDateRange: "m1"` her rotada son 1 ayı okur. Aylar ve yıllar takvime göre
+  geriye sayılır. İçinde h, d, w, m veya y olmayan bir değer, hiçbir şey
+  okunmadan veya ücretlendirilmeden önce çalıştırmayı durdurur.
+- Actor'da sayfa birimi yoktur. `maxPages` yerine `maxItems` kullan.
+- Actor'da kullanıcı ID alanı yoktur. `userId` veya `user_ids` yerine
+  handle'ları veya profil URL'lerini gönder.
 - `from`, `min_faves`, `since_time` ve `filter:images` gibi arama operatörü
   alanları zaten X'in kullandığı adları kullanır. Bu yüzden eşleme gerekmez.
 

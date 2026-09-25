@@ -210,20 +210,27 @@ vollständige Extraktion.
 Der Statustext nennt jede Ursache für den Stopp. Ein Run mit einem fehlenden
 Account & einer stockenden Suche nennt beide. `stopCauses` listet jede Ursache
 mit eigenen Feldern `message`, `retryable` & `nextAction`. Die Ursachen sind
-`target_not_found`, `target_protected`, `target_failed`,
-`pagination_safety_limit`, `reply_reach` & `deadline_reached`. Der Run ist
-`retryable`, wenn mindestens 1 Ursache es ist.
+`target_not_found`, `target_protected`, `search_unavailable`, `likes_hidden`,
+`target_failed`, `pagination_safety_limit`, `reply_reach` & `deadline_reached`.
+Der Run ist `retryable`, wenn mindestens 1 Ursache es ist.
 
-Geschützte oder fehlende Ziele zählen als Fehler, auch bei Runs mit
-gültigen Ergebnissen. Wenn alle Fehler nicht verfügbare Ziele betreffen,
-setzen Diagnosen `retryable: false`. Prüfe Ziel-URLs oder Nutzernamen &
-wähle verfügbare öffentliche Accounts. Andere Fehler behalten die
-Wiederholungsempfehlung für unvollständige Ziele.
+Geschützte oder fehlende Ziele zählen als Fehler, auch bei Runs mit gültigen
+Ergebnissen. Das gilt auch für eine Suche, die X nicht ausführen kann. X.com
+zeigt für eine solche Suche „Something went wrong". Der Run stoppt sie sofort
+ohne Wiederholungen. Das gilt auch für Likes, die X verbirgt. X zeigt nur dem
+Autor, wer einen Beitrag gelikt hat. Die gelikten Beiträge eines Accounts zeigt
+X nur diesem Account. Wenn alle Fehler nicht verfügbare Ziele betreffen, setzen
+Diagnosen `retryable: false`. Prüfe Ziel-URLs oder Nutzernamen & wähle
+verfügbare öffentliche Accounts. Grenze eine Suche, die X nicht ausführen kann,
+weiter ein oder ändere ihre Filter. Rufe statt verborgener Likes Retweeter,
+Antworten oder Beiträge ab. Andere Fehler behalten die Wiederholungsempfehlung
+für unvollständige Ziele.
 
 Die Diagnose nennt diese Ziele in `unavailableTargets`. Jeder Eintrag hat das
-`target`, so wie du es eingegeben hast, & einen `reason`, `not_found` oder
-`protected`. Die Liste fasst bis zu 100 Einträge. Entferne sie aus der
-Eingabe, um einen vollständigen Run zu erhalten.
+`target`, so wie du es eingegeben hast, & einen `reason`: `not_found`,
+`protected`, `search_unavailable` oder `likes_hidden`. Die Liste fasst bis zu
+100 Einträge. Entferne sie aus der Eingabe, um einen vollständigen Run zu
+erhalten.
 
 `completionReason: "pagination_safety_limit"` ist kein Lesefehler. Es bedeutet,
 dass die Paginierung gültige Datensätze behalten hat und dann ihr begrenztes
@@ -287,9 +294,11 @@ Kurzform für viele `from:username`-Suchen:
 { "twitterHandles": ["elonmusk", "nasa", "openai"], "maxItems": 100 }
 ```
 
-Jedes Handle kombiniert Cursor-Paginierung mit Autorensuche. Der Actor
-entfernt doppelte Datensätze vor Ausgabe und Abrechnung. Nutzernamen
-akzeptieren ein optionales `@`-Präfix.
+Jedes Handle kombiniert Cursor-Paginierung mit Autorensuche. Der Actor entfernt
+doppelte Datensätze vor Ausgabe und Abrechnung. Nutzernamen akzeptieren ein
+optionales `@`-Präfix. Handles & Profil-URLs behalten Reposts, so wie der Tab
+„Beiträge" auf X. Das gilt auch mit Datumsangaben oder Filtern. Setze
+`tweetTypes.excludeRetweets`, um sie zu entfernen.
 
 ### 3. Tweets suchen
 
@@ -321,6 +330,10 @@ gefunden sind oder die Paginierung endet. Unabhängige Suchbegriffe laufen
 gleichzeitig. Jeder Begriff behält eine geordnete Cursor-Paginierung für
 konsistente Tiefe und Zuordnung. Konto-Fenster teilen sich einen Abruf
 nur, wenn sie kompatibel sind.
+
+Ein `from:`-Suchbegriff liefert, was die X-Suche liefert. Er lässt also Reposts
+aus. Füge `include:nativeretweets` hinzu, um sie zu behalten. Nutze
+`filter:nativeretweets`, um nur Reposts zu erhalten.
 
 ### 4. Tweets nach ID nachschlagen
 
@@ -520,21 +533,24 @@ ein Feld & ändert nie, was du zahlst. Das Eingabeformular listet nur
 kanonische Felder, damit es kurz bleibt. Aliasse funktionieren in JSON, API,
 SDK, Automatisierung & gespeicherten Task-Eingaben.
 
-| Feld, das du schon nutzt                                                                                                                                      | X Tweet Scraper liest es als                                             |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                                                                   | `startUrls`                                                              |
-| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids` oder `tweetId` als 1 String                                                         | `tweetIds`                                                               |
-| `twitterHandles`, `usernames`, `handles`                                                                                                                      | `twitterHandles`                                                         |
-| `searchTerms`, `searchQueries`, `queries`, `search`, als Liste oder 1 Suche pro Zeile                                                                         | `searchTerms`                                                            |
-| `twitterContent`, `query`, `searchQuery`                                                                                                                      | `twitterContent`                                                         |
-| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
-| `sort`                                                                                                                                                        | `queryType`                                                              |
-| `tweetLanguage`, `language`                                                                                                                                   | `lang`                                                                   |
-| `author`, `inReplyTo`, `mentioning`                                                                                                                           | `from`, `to`, `@`                                                        |
-| `start`, `startDate`, `end`, `endDate`                                                                                                                        | `since`, `until`                                                         |
-| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                       | `min_retweets`, `min_faves`, `min_replies`                               |
-| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                      | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
-| `geotaggedNear`, `withinRadius`                                                                                                                               | `near`, `within`                                                         |
+| Feld, das du schon nutzt                                                                                                                                               | X Tweet Scraper liest es als                                             |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`                                                                                             | `startUrls`                                                              |
+| `profileUrl` als 1 String                                                                                                                                              | `startUrls`                                                              |
+| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids` oder `tweetId` als 1 String                                                                  | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`, `screenNames`, `profileTweets`                                                                 | `twitterHandles`                                                         |
+| `username`, `handle`, `screenName` als 1 String                                                                                                                        | `twitterHandles`                                                         |
+| `searchTerms`, `searchQueries`, `queries`, `search`, als Liste oder 1 Suche pro Zeile                                                                                  | `searchTerms`                                                            |
+| `twitterContent`, `query`, `searchQuery`                                                                                                                               | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
+| `sort`                                                                                                                                                                 | `queryType`                                                              |
+| `tweetLanguage`, `language`                                                                                                                                            | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                                                                    | `from`, `to`, `@`                                                        |
+| `start`, `startDate`, `end`, `endDate`                                                                                                                                 | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                                | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                               | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                                                                        | `near`, `within`                                                         |
+| `quickDateRange` aus dem Google Search Scraper, etwa `d7`, `w2`, `m1` oder `y`                                                                                         | `since_time`, ab dem Run-Start zurückgerechnet                           |
 
 So verhält sich eine eingefügte Eingabe:
 
@@ -549,6 +565,12 @@ So verhält sich eine eingefügte Eingabe:
   `customMapFunction`. Nichts wird ohne Hinweis verworfen.
 - Eine Datensatz-Obergrenze muss eine ganze Zahl ab 1 sein. `maxResults: 0`
   stoppt den Run, bevor etwas abgerufen oder berechnet wird.
+- `quickDateRange: "m1"` liest auf jeder Route den letzten Monat. Monate & Jahre
+  zählen im Kalender zurück. Ein Wert ohne h, d, w, m oder y stoppt den Run,
+  bevor etwas gelesen oder berechnet wird.
+- Der Actor hat keine Seiteneinheit. Ersetze `maxPages` durch `maxItems`.
+- Der Actor hat kein Nutzer-ID-Feld. Sende Handles oder Profil-URLs statt
+  `userId` oder `user_ids`.
 - Suchoperator-Felder wie `from`, `min_faves`, `since_time` & `filter:images`
   nutzen schon die Namen, die X nutzt. Sie brauchen also keine Zuordnung.
 

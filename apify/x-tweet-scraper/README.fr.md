@@ -214,24 +214,30 @@ Les résultats disponibles restent intacts. Le diagnostic indique
 `availableResults`, `failedTargets`, `retryable` et `nextAction`. Une
 sortie d'Actor réussie confirme la livraison, pas l'extraction complète.
 
-Le texte de statut nomme toutes les causes de l'arrêt. Un run avec un
-compte introuvable et une recherche bloquée indique les deux. `stopCauses`
-liste chaque cause avec ses propres `message`, `retryable` et
-`nextAction`. Les causes sont `target_not_found`, `target_protected`,
-`target_failed`, `pagination_safety_limit`, `reply_reach` et
-`deadline_reached`. Le run est `retryable` dès qu'une cause l'est.
+Le texte de statut nomme toutes les causes de l'arrêt. Un run avec un compte
+introuvable et une recherche bloquée indique les deux. `stopCauses` liste chaque
+cause avec ses propres `message`, `retryable` et `nextAction`. Les causes sont
+`target_not_found`, `target_protected`, `search_unavailable`, `likes_hidden`,
+`target_failed`, `pagination_safety_limit`, `reply_reach` et `deadline_reached`.
+Le run est `retryable` dès qu'une cause l'est.
 
-Les cibles protégées ou manquantes comptent comme des échecs, y compris
-les runs avec des résultats valides. Quand tous les échecs concernent des
-cibles indisponibles, les diagnostics fixent `retryable: false`. Vérifiez
+Les cibles protégées ou manquantes comptent comme des échecs, y compris les runs
+avec des résultats valides. Une recherche que X ne peut pas exécuter compte
+aussi. X.com affiche « Something went wrong » pour une telle recherche. Le run
+l'arrête aussitôt, sans nouvelle tentative. Les likes que X masque comptent
+aussi. X montre qui a aimé un post uniquement à son auteur. Il montre les posts
+qu'un compte a aimés uniquement à ce compte. Quand tous les échecs concernent
+des cibles indisponibles, les diagnostics fixent `retryable: false`. Vérifiez
 les URL ou noms d'utilisateur cibles et choisissez des comptes publics
-disponibles. Les autres échecs conservent des conseils de nouvelle
+disponibles. Affinez une recherche que X ne peut pas exécuter ou changez ses
+filtres. Récupérez les personnes ayant reposté, les réponses ou les posts à la
+place des likes masqués. Les autres échecs conservent des conseils de nouvelle
 tentative pour les cibles inachevées.
 
-Le diagnostic nomme ces cibles dans `unavailableTargets`. Chaque entrée
-contient la `target` telle que vous l'avez saisie et une `reason`,
-`not_found` ou `protected`. La liste contient jusqu'à 100 entrées.
-Retirez-les de l'entrée pour obtenir un run complet.
+Le diagnostic nomme ces cibles dans `unavailableTargets`. Chaque entrée contient
+la `target` telle que vous l'avez saisie et une `reason` : `not_found`,
+`protected`, `search_unavailable` ou `likes_hidden`. La liste contient jusqu'à
+100 entrées. Retirez-les de l'entrée pour obtenir un run complet.
 
 `completionReason: "pagination_safety_limit"` n'est pas un échec de lecture.
 Cela signifie que la pagination a conservé des lignes valides, puis a atteint sa
@@ -294,9 +300,11 @@ Raccourci pour de nombreuses recherches `from:username` :
 { "twitterHandles": ["elonmusk", "nasa", "openai"], "maxItems": 100 }
 ```
 
-Chaque handle combine la pagination par curseur avec la recherche par
-auteur. L'Actor retire les lignes en double avant la sortie et la
-facturation. Les noms d'utilisateur acceptent un préfixe `@` optionnel.
+Chaque handle combine la pagination par curseur avec la recherche par auteur.
+L'Actor retire les lignes en double avant la sortie et la facturation. Les noms
+d'utilisateur acceptent un préfixe `@` optionnel. Les handles et les URL de
+profil gardent les reposts, comme l'onglet Posts sur X. C'est vrai même avec des
+dates ou des filtres. Réglez `tweetTypes.excludeRetweets` pour les retirer.
 
 ### 3. Rechercher des tweets
 
@@ -329,6 +337,10 @@ termine. Les termes de recherche indépendants s'exécutent en parallèle.
 Chaque terme conserve une pagination de curseur ordonnée pour une
 profondeur et une attribution cohérentes. Les fenêtres de compte partagent
 une récupération uniquement quand elles sont compatibles.
+
+Un terme de recherche `from:` renvoie ce que renvoie la recherche X. Il omet
+donc les reposts. Ajoutez `include:nativeretweets` pour les garder, ou
+`filter:nativeretweets` pour n'avoir que des reposts.
 
 ### 4. Rechercher des tweets par ID
 
@@ -534,21 +546,24 @@ vous payez. Le formulaire d'entrée ne liste que les champs canoniques, donc
 il reste court. Les alias fonctionnent en JSON, API, SDK, automatisation et
 entrées de tâche enregistrées.
 
-| Champ que vous utilisez déjà                                                                                                                                  | X Tweet Scraper le lit comme                                             |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                                                                   | `startUrls`                                                              |
-| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids`, ou `tweetId` en 1 chaîne                                                           | `tweetIds`                                                               |
-| `twitterHandles`, `usernames`, `handles`                                                                                                                      | `twitterHandles`                                                         |
-| `searchTerms`, `searchQueries`, `queries`, `search`, en liste ou 1 recherche par ligne                                                                        | `searchTerms`                                                            |
-| `twitterContent`, `query`, `searchQuery`                                                                                                                      | `twitterContent`                                                         |
-| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
-| `sort`                                                                                                                                                        | `queryType`                                                              |
-| `tweetLanguage`, `language`                                                                                                                                   | `lang`                                                                   |
-| `author`, `inReplyTo`, `mentioning`                                                                                                                           | `from`, `to`, `@`                                                        |
-| `start`, `startDate`, `end`, `endDate`                                                                                                                        | `since`, `until`                                                         |
-| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                       | `min_retweets`, `min_faves`, `min_replies`                               |
-| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                      | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
-| `geotaggedNear`, `withinRadius`                                                                                                                               | `near`, `within`                                                         |
+| Champ que vous utilisez déjà                                                                                                                                           | X Tweet Scraper le lit comme                                             |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`                                                                                             | `startUrls`                                                              |
+| `profileUrl` en 1 chaîne                                                                                                                                               | `startUrls`                                                              |
+| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids`, ou `tweetId` en 1 chaîne                                                                    | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`, `screenNames`, `profileTweets`                                                                 | `twitterHandles`                                                         |
+| `username`, `handle`, `screenName` en 1 chaîne                                                                                                                         | `twitterHandles`                                                         |
+| `searchTerms`, `searchQueries`, `queries`, `search`, en liste ou 1 recherche par ligne                                                                                 | `searchTerms`                                                            |
+| `twitterContent`, `query`, `searchQuery`                                                                                                                               | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
+| `sort`                                                                                                                                                                 | `queryType`                                                              |
+| `tweetLanguage`, `language`                                                                                                                                            | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                                                                    | `from`, `to`, `@`                                                        |
+| `start`, `startDate`, `end`, `endDate`                                                                                                                                 | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                                | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                               | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                                                                        | `near`, `within`                                                         |
+| `quickDateRange` du Google Search Scraper, comme `d7`, `w2`, `m1` ou `y`                                                                                               | `since_time`, compté à rebours depuis le début du run                    |
 
 Comportement d'une entrée collée :
 
@@ -564,6 +579,12 @@ Comportement d'une entrée collée :
   `customMapFunction`. Rien n'est écarté sans avis.
 - Une limite de lignes doit être un nombre entier à partir de 1.
   `maxResults: 0` arrête le run avant toute récupération ou facturation.
+- `quickDateRange: "m1"` lit le mois passé sur chaque route. Les mois et les
+  années se comptent à rebours sur le calendrier. Une valeur sans h, d, w, m ou
+  y arrête le run avant toute lecture ou facturation.
+- L'Actor n'a pas d'unité de page. Remplacez `maxPages` par `maxItems`.
+- L'Actor n'a pas de champ d'ID utilisateur. Envoyez des handles ou des URL de
+  profil au lieu de `userId` ou `user_ids`.
 - Les champs d'opérateur de recherche tels que `from`, `min_faves`,
   `since_time` et `filter:images` utilisent déjà les noms que X utilise. Ils
   n'ont donc besoin d'aucune correspondance.

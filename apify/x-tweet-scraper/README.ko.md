@@ -192,20 +192,26 @@ Apify의 [빌드 태그](https://docs.apify.com/platform/actors/development/buil
 상태 메시지는 중단 원인을 모두 표시합니다. 찾을 수 없는 계정 & 정체된 검색이
 함께 있는 실행은 둘 다 표시합니다. `stopCauses`는 각 원인을 나열하고, 원인마다
 `message`, `retryable` & `nextAction`을 따로 담습니다. 원인은
-`target_not_found`, `target_protected`, `target_failed`,
-`pagination_safety_limit`, `reply_reach` & `deadline_reached`입니다. 원인 중
-하나라도 `retryable`이면 실행도 `retryable`입니다.
+`target_not_found`, `target_protected`, `search_unavailable`, `likes_hidden`,
+`target_failed`, `pagination_safety_limit`, `reply_reach` &
+`deadline_reached`입니다. 원인 중 하나라도 `retryable`이면 실행도
+`retryable`입니다.
 
-보호되거나 누락된 대상은 유효한 결과가 있는 실행을 포함해 실패로
-집계됩니다. 모든 실패가 사용할 수 없는 대상 때문일 때는 진단에서
-`retryable: false`로 설정됩니다. 대상 URL이나 사용자 이름을 확인하고 사용
-가능한 공개 계정을 선택하세요. 다른 실패는 마치지 못한 대상에 대한 재시도
-안내를 유지합니다.
+보호되거나 누락된 대상은 유효한 결과가 있는 실행을 포함해 실패로 집계됩니다. X가
+실행할 수 없는 검색도 실패로 집계됩니다. X.com은 이런 검색에 "Something went
+wrong"을 표시합니다. 실행은 재시도 없이 이 검색을 즉시 멈춥니다. X가 숨기는
+좋아요도 실패로 집계됩니다. X는 게시물에 좋아요를 누른 사람을 작성자에게만 보여
+줍니다. 계정이 좋아요를 누른 게시물도 그 계정에게만 보여 줍니다. 모든 실패가
+사용할 수 없는 대상 때문일 때는 진단에서 `retryable: false`로 설정됩니다. 대상
+URL이나 사용자 이름을 확인하고 사용 가능한 공개 계정을 선택하세요. X가 실행할 수
+없는 검색은 범위를 좁히거나 필터를 바꾸세요. 숨겨진 좋아요 대신 리트윗한 사람,
+답글 또는 게시물을 읽으세요. 다른 실패는 마치지 못한 대상에 대한 재시도 안내를
+유지합니다.
 
 진단은 이런 대상을 `unavailableTargets`에 나열합니다. 각 항목에는 입력한
-그대로의 `target`과 `reason`이 있으며, `reason`은 `not_found` 또는
-`protected`입니다. 목록은 최대 100개 항목을 담습니다. 완전한 실행을 얻으려면
-입력에서 이 대상을 빼세요.
+그대로의 `target`과 `reason`이 있으며, `reason`은 `not_found`, `protected`,
+`search_unavailable` 또는 `likes_hidden`입니다. 목록은 최대 100개 항목을
+담습니다. 완전한 실행을 얻으려면 입력에서 이 대상을 빼세요.
 
 `completionReason: "pagination_safety_limit"`는 읽기 실패가 아닙니다. 이는
 페이지네이션이 유효한 행을 유지하다가 제한된 안전 한도에 도달했다는
@@ -264,9 +270,10 @@ Actor는 트윗 URL을 최대 100개 단위의 동시 배치로 조회합니다.
 { "twitterHandles": ["elonmusk", "nasa", "openai"], "maxItems": 100 }
 ```
 
-각 핸들은 커서 페이지네이션과 작성자 검색을 결합합니다. Actor는 출력 및
-과금 전에 중복 행을 제거합니다. 사용자 이름은 선택적인 `@` 접두사를
-받아들입니다.
+각 핸들은 커서 페이지네이션과 작성자 검색을 결합합니다. Actor는 출력 및 과금
+전에 중복 행을 제거합니다. 사용자 이름은 선택적인 `@` 접두사를 받아들입니다.
+핸들 & 프로필 URL은 X의 Posts 탭처럼 재게시를 유지합니다. 날짜나 필터가 있어도
+마찬가지입니다. 재게시를 빼려면 `tweetTypes.excludeRetweets`를 설정하세요.
 
 ### 3. 트윗 검색
 
@@ -295,6 +302,10 @@ Actor는 트윗 URL을 최대 100개 단위의 동시 배치로 조회합니다.
 때까지 계속됩니다. 독립적인 검색어는 동시에 실행됩니다. 각 검색어는 일관된
 깊이와 귀속을 위해 순서가 유지된 커서 페이지네이션을 유지합니다. 계정
 윈도우는 호환될 때만 하나의 조회를 공유합니다.
+
+`from:` 검색어는 X 검색이 반환하는 결과를 그대로 반환하므로 재게시를 제외합니다.
+재게시를 유지하려면 `include:nativeretweets`를 추가하세요. 재게시만 원하면
+`filter:nativeretweets`를 추가하세요.
 
 ### 4. ID로 트윗 조회하기
 
@@ -469,21 +480,24 @@ Overview 데이터셋 뷰는 두 스타일 모두에서 작동합니다. 실행�
 폼은 표준 필드만 나열하므로 짧게 유지됩니다. 별칭은 JSON, API, SDK, 자동화 &
 저장된 태스크 입력에서 작동합니다.
 
-| 이미 쓰는 필드                                                                                                                                                | X Tweet Scraper가 읽는 필드                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                                                                   | `startUrls`                                                              |
-| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids`, 또는 문자열 1개인 `tweetId`                                                        | `tweetIds`                                                               |
-| `twitterHandles`, `usernames`, `handles`                                                                                                                      | `twitterHandles`                                                         |
-| `searchTerms`, `searchQueries`, `queries`, `search`, 목록 또는 한 줄에 검색어 1개씩                                                                           | `searchTerms`                                                            |
-| `twitterContent`, `query`, `searchQuery`                                                                                                                      | `twitterContent`                                                         |
-| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
-| `sort`                                                                                                                                                        | `queryType`                                                              |
-| `tweetLanguage`, `language`                                                                                                                                   | `lang`                                                                   |
-| `author`, `inReplyTo`, `mentioning`                                                                                                                           | `from`, `to`, `@`                                                        |
-| `start`, `startDate`, `end`, `endDate`                                                                                                                        | `since`, `until`                                                         |
-| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                       | `min_retweets`, `min_faves`, `min_replies`                               |
-| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                      | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
-| `geotaggedNear`, `withinRadius`                                                                                                                               | `near`, `within`                                                         |
+| 이미 쓰는 필드                                                                                                                                                         | X Tweet Scraper가 읽는 필드                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`                                                                                             | `startUrls`                                                              |
+| 문자열 1개인 `profileUrl`                                                                                                                                              | `startUrls`                                                              |
+| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids`, 또는 문자열 1개인 `tweetId`                                                                 | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`, `screenNames`, `profileTweets`                                                                 | `twitterHandles`                                                         |
+| 문자열 1개인 `username`, `handle`, `screenName`                                                                                                                        | `twitterHandles`                                                         |
+| `searchTerms`, `searchQueries`, `queries`, `search`, 목록 또는 한 줄에 검색어 1개씩                                                                                    | `searchTerms`                                                            |
+| `twitterContent`, `query`, `searchQuery`                                                                                                                               | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
+| `sort`                                                                                                                                                                 | `queryType`                                                              |
+| `tweetLanguage`, `language`                                                                                                                                            | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                                                                    | `from`, `to`, `@`                                                        |
+| `start`, `startDate`, `end`, `endDate`                                                                                                                                 | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                                | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                               | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                                                                        | `near`, `within`                                                         |
+| Google Search Scraper의 `quickDateRange`, 예: `d7`, `w2`, `m1` 또는 `y`                                                                                                | `since_time`, 실행 시작 시점부터 거슬러 계산                             |
 
 붙여넣은 입력은 이렇게 동작합니다:
 
@@ -498,6 +512,12 @@ Overview 데이터셋 뷰는 두 스타일 모두에서 작동합니다. 실행�
   남습니다. 알림 없이 버려지는 것은 없습니다.
 - 행 상한은 1 이상의 정수여야 합니다. `maxResults: 0`은 무언가를 가져오거나
   과금하기 전에 실행을 멈춥니다.
+- `quickDateRange: "m1"`은 모든 경로에서 지난 1개월을 읽습니다. 월 & 연 단위는
+  달력 기준으로 거슬러 셉니다. h, d, w, m 또는 y가 없는 값은 무언가를 읽거나
+  과금하기 전에 실행을 멈춥니다.
+- Actor에는 페이지 단위가 없습니다. `maxPages` 대신 `maxItems`를 쓰세요.
+- Actor에는 사용자 ID 필드가 없습니다. `userId`나 `user_ids` 대신 핸들이나
+  프로필 URL을 보내세요.
 - `from`, `min_faves`, `since_time` & `filter:images` 같은 검색 연산자 필드는
   이미 X가 쓰는 이름을 사용하므로 매핑이 필요 없습니다.
 

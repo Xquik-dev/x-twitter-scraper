@@ -141,11 +141,11 @@ Xquikのサブスクリプションは適用されません。個別の開始料
 
 中断された抽出でも、無料の`partial`診断が書き込まれます。取得済みの結果はそのまま保持されます。この診断は`availableResults`、`failedTargets`、`retryable`、`nextAction`をレポートします。Actorが正常終了したことは、配信が成功したことを示すだけで、抽出が完全に完了したことを意味しません。
 
-ステータスのテキストは、実行が停止した原因をすべて示します。存在しないアカウントと停滞した検索を含む実行では、両方を示します。`stopCauses`は各原因を列挙し、原因ごとに`message`、`retryable`、`nextAction`を示します。原因は`target_not_found`、`target_protected`、`target_failed`、`pagination_safety_limit`、`reply_reach`、`deadline_reached`です。いずれかの原因が`retryable`であれば、実行も`retryable`になります。
+ステータスのテキストは、実行が停止した原因をすべて示します。存在しないアカウントと停滞した検索を含む実行では、両方を示します。`stopCauses`は各原因を列挙し、原因ごとに`message`、`retryable`、`nextAction`を示します。原因は`target_not_found`、`target_protected`、`search_unavailable`、`likes_hidden`、`target_failed`、`pagination_safety_limit`、`reply_reach`、`deadline_reached`です。いずれかの原因が`retryable`であれば、実行も`retryable`になります。
 
-保護されている対象、または存在しない対象は、有効な結果がある実行を含めて失敗として数えられます。すべての失敗が利用できない対象に関するものである場合、診断情報では`retryable: false`が設定されます。対象のURLやユーザー名を確認し、利用可能な公開アカウントを選んでください。その他の失敗では、未完了の対象について再試行のガイダンスが保持されます。
+保護されている対象、または存在しない対象は、有効な結果がある実行を含めて失敗として数えられます。Xが実行できない検索も失敗として数えられます。このような検索に対して、X.comは「Something went wrong」と表示します。実行はその検索を再試行せず、すぐに停止します。Xが非表示にしているいいねも失敗として数えられます。Xは、ポストにいいねしたユーザーをそのポストの著者にだけ表示します。また、アカウントがいいねしたポストは、そのアカウントにだけ表示します。すべての失敗が利用できない対象に関するものである場合、診断情報では`retryable: false`が設定されます。対象のURLやユーザー名を確認し、利用可能な公開アカウントを選んでください。Xが実行できない検索は、範囲を絞るかフィルタを変更してください。非表示のいいねの代わりに、リポストしたユーザー、リプライ、ポストを取得してください。その他の失敗では、未完了の対象について再試行のガイダンスが保持されます。
 
-診断情報は、それらの対象を`unavailableTargets`に列挙します。各エントリには、入力したままの`target`と、`not_found`または`protected`の`reason`が入ります。このリストは最大100件のエントリを保持します。完全な実行を得るには、それらを入力から外してください。
+診断情報は、それらの対象を`unavailableTargets`に列挙します。各エントリには、入力したままの`target`と、`not_found`、`protected`、`search_unavailable`、`likes_hidden`のいずれかの`reason`が入ります。このリストは最大100件のエントリを保持します。完全な実行を得るには、それらを入力から外してください。
 
 `completionReason: "pagination_safety_limit"`は読み取り失敗ではありません。これは、ページネーションが有効な行を保持したまま、設定された安全上限に達したことを意味します。有効な回復用カーソルが残っている限り、最新の検索は空のページを経ても続行されます。トップ検索とアカウント期間の回復は、連続して10ページが空だった場合にチェックポイントを取ることがあります。サービスがページネーションの停滞を報告した場合、実行は取得済みの行を保持し、その対象ですぐにチェックポイントを取ります。チェックポイントを取った実行は不完全な抽出をレポートし、再開可能なカーソルを保持します。ページが空になり続けた後でも、最終ページに達すればページネーションは完了します。`failedSubtargets`は`0`のままです。お支払いいただくのは、受理されたデータセット行の分のみです。
 
@@ -183,7 +183,7 @@ Actorは、ポストのURLを最大100件までの同時バッチで検索しま
 { "twitterHandles": ["elonmusk", "nasa", "openai"], "maxItems": 100 }
 ```
 
-各ハンドルは、カーソルによるページネーションと著者検索を組み合わせます。Actorは、出力と課金の前に重複行を除去します。ユーザー名には任意で`@`プレフィックスを付けられます。
+各ハンドルは、カーソルによるページネーションと著者検索を組み合わせます。Actorは、出力と課金の前に重複行を除去します。ユーザー名には任意で`@`プレフィックスを付けられます。ハンドルとプロフィールのURLは、XのPostsタブと同じくリポストを残します。日付やフィルタを指定しても同じです。リポストを除くには`tweetTypes.excludeRetweets`を設定してください。
 
 ### 3. ポストを検索する
 
@@ -200,6 +200,8 @@ Actorは、ポストのURLを最大100件までの同時バッチで検索しま
 `mode`が`tweet`または`tweets`で、ポストIDが指定されていない場合、クエリの入力は検索にルーティングされます。これにより、有効な`searchTerms`が空の検索結果を返すことを防ぎます。
 
 `from:elonmusk since:2026-01-01 until:2026-01-02`のような、日付範囲を指定した単純なアカウントの過去データ取得は、範囲が定められたアカウントルートを使用します。直近の期間はプロフィールのタイムラインと著者検索を組み合わせます。過去の期間は正確な検索を使用します。互換性のある隣接した期間は1回の取得を共有し、元の`searchTerm`の帰属情報を保持します。`maxItems`は、すべての検索語をまたいだ結果の上限です。すべての`since:`/`until:`とUnixタイムのウィンドウは、返された各ポストを検証します。フィルタされたアカウントの期間は、出力上限を適用する前に元のページを最後まで読み込みます。フィルタされたページは、一致するポストが見つかるか、ページネーションが終わるまで続きます。独立した検索語は同時並行で実行されます。各検索語は、深さと帰属情報を一貫させるために、順序付けられたカーソルページネーションを維持します。アカウントの期間は、互換性がある場合にのみ1回の取得を共有します。
+
+`from:`の検索語はXの検索と同じ結果を返すため、リポストは含まれません。リポストを残すには`include:nativeretweets`を追加し、リポストだけを取得するには`filter:nativeretweets`を追加してください。
 
 ### 4. IDでポストを検索する
 
@@ -302,21 +304,24 @@ Actorは1リクエストあたり100件のIDを処理します。バッチは同
 
 すでに使っている入力を貼り付けてください。X Tweet Scraperは、他のポストActorが使うフィールド名を読み取り、自身のフィールドに対応付けます。標準の名前が、引き続きドキュメント上の既定です。別名がフィールドを落とすことはなく、支払う金額を変えることもありません。入力フォームには標準フィールドだけが並ぶため、短いままです。別名は、JSON、API、SDK、自動化、保存済みタスクの入力で機能します。
 
-| すでに使っているフィールド                                                                                                                                    | X Tweet Scraperでの読み取り先                                            |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`                                                                                                   | `startUrls`                                                              |
-| `tweetIds`、`tweetIDs`、`tweets`、`postIds`、`lookupPostIds`、`tweet_ids`、または1つの文字列としての`tweetId`                                                 | `tweetIds`                                                               |
-| `twitterHandles`, `usernames`, `handles`                                                                                                                      | `twitterHandles`                                                         |
-| `searchTerms`、`searchQueries`、`queries`、`search`（リスト、または1行に1つの検索）                                                                           | `searchTerms`                                                            |
-| `twitterContent`, `query`, `searchQuery`                                                                                                                      | `twitterContent`                                                         |
-| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
-| `sort`                                                                                                                                                        | `queryType`                                                              |
-| `tweetLanguage`, `language`                                                                                                                                   | `lang`                                                                   |
-| `author`, `inReplyTo`, `mentioning`                                                                                                                           | `from`, `to`, `@`                                                        |
-| `start`, `startDate`, `end`, `endDate`                                                                                                                        | `since`, `until`                                                         |
-| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                       | `min_retweets`, `min_faves`, `min_replies`                               |
-| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                      | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
-| `geotaggedNear`, `withinRadius`                                                                                                                               | `near`, `within`                                                         |
+| すでに使っているフィールド                                                                                                                                             | X Tweet Scraperでの読み取り先                                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`                                                                                             | `startUrls`                                                              |
+| 1つの文字列としての`profileUrl`                                                                                                                                        | `startUrls`                                                              |
+| `tweetIds`、`tweetIDs`、`tweets`、`postIds`、`lookupPostIds`、`tweet_ids`、または1つの文字列としての`tweetId`                                                          | `tweetIds`                                                               |
+| `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`, `screenNames`, `profileTweets`                                                                 | `twitterHandles`                                                         |
+| 1つの文字列としての`username`、`handle`、`screenName`                                                                                                                  | `twitterHandles`                                                         |
+| `searchTerms`、`searchQueries`、`queries`、`search`（リスト、または1行に1つの検索）                                                                                    | `searchTerms`                                                            |
+| `twitterContent`, `query`, `searchQuery`                                                                                                                               | `twitterContent`                                                         |
+| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
+| `sort`                                                                                                                                                                 | `queryType`                                                              |
+| `tweetLanguage`, `language`                                                                                                                                            | `lang`                                                                   |
+| `author`, `inReplyTo`, `mentioning`                                                                                                                                    | `from`, `to`, `@`                                                        |
+| `start`, `startDate`, `end`, `endDate`                                                                                                                                 | `since`, `until`                                                         |
+| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                                | `min_retweets`, `min_faves`, `min_replies`                               |
+| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                               | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
+| `geotaggedNear`, `withinRadius`                                                                                                                                        | `near`, `within`                                                         |
+| Google Search Scraperの`quickDateRange`（`d7`、`w2`、`m1`、`y`など）                                                                                                   | `since_time`（実行開始時点から遡って計算）                               |
 
 貼り付けた入力の動作は次のとおりです。
 
@@ -326,6 +331,9 @@ Actorは1リクエストあたり100件のIDを処理します。バッチは同
 - 別名とその標準フィールドを両方設定した場合、標準の値が優先されます。実行ログには、採用されなかった別名が記録されます。
 - 実行ログには、`customMapFunction`のようにActorが読み取らないすべてのフィールドが記録されます。通知なしに破棄されるものはありません。
 - 行数の上限は1以上の整数でなければなりません。`maxResults: 0`は、何かを取得または課金する前に実行を停止します。
+- `quickDateRange: "m1"`は、どのルートでも過去1か月を読み取ります。月と年はカレンダーに沿って遡ります。h、d、w、m、yのいずれも含まない値は、何かを読み取ったり課金したりする前に実行を停止します。
+- Actorにはページ単位がありません。`maxPages`の代わりに`maxItems`を使ってください。
+- ActorにはユーザーIDのフィールドがありません。`userId`や`user_ids`の代わりに、ハンドルかプロフィールのURLを送ってください。
 - `from`、`min_faves`、`since_time`、`filter:images`のような検索演算子フィールドは、すでにXと同じ名前を使っているため、対応付けは不要です。
 
 ### コンソールとAPIの入力UX
