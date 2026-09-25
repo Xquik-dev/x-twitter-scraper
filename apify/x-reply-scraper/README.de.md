@@ -30,7 +30,8 @@ Plattformnutzung separat. Du brauchst keinen X-Login.
 Filter laufen vor den Dataset-Schreibvorgängen. Du zahlst nur für gelieferte
 Datensätze.
 
->
+> Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
+> „Twitter" und „X" sind Marken von X Corp.
 
 ## Unvollständige Extraktion
 
@@ -47,10 +48,6 @@ listet jede Ursache mit eigenen Feldern `message`, `retryable` &
 Threads geliefert hat. Der Run ist `retryable`, wenn mindestens 1 Ursache es
 ist.
 
-Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
-
-> „Twitter" und „X" sind Marken von X Corp.
-
 ## Was macht dieser Twitter-Antworten-Scraper?
 
 X Reply Scraper sammelt öffentliche Antworten und Kommentar-Konversationen.
@@ -63,25 +60,21 @@ Konversations-Datasets.
 
 ### Verhalten bei der Antworten-Erfassung
 
-- Der Auto-Modus wechselt bei unvollständigen direkten Ergebnissen zur
-  Konversationssuche.
-- Automatische Tweet-Antwortseiten fordern bis zu 300 Datensätze an.
-- 4 Strategien decken direkte Antworten, Suche und Thread-Kontext ab.
+- Der Auto-Modus sammelt weiter, wenn direkte Ergebnisse unvollständig sind.
+- `collectionStrategy` bietet 4 Modi für verschiedene Antwort-Aufgaben.
 - Massen-Eingaben akzeptieren Beitrags-URLs, Tweet-IDs, Profile und
   Nutzernamen.
-- Profilziele kombinieren Timeline und Autorensuche, wenn beides zutrifft.
 - Filter und Duplikatentfernung laufen vor der Abrechnung.
 - Die Ausgabe unterstützt 4 Sortiermodi, 3 Detailstufen und 3 Feldstile.
 - Jede Antwort behält ihr Quellziel, übergeordnete IDs, die Wurzel-ID und
   die Tiefe.
 - Fortsetzungs-Cursor unterstützen Backfills und geplante Runs.
 - Leere Runs schreiben 1 kostenlosen Datensatz in `diagnostics`.
-- Seiten- und Zielprotokolle enthalten `fetchDurationMs`,
+- Run-Protokolle zeigen Seiten- und Zielzeiten in `fetchDurationMs`,
   `processingDurationMs`, `pushDurationMs`, `statusDurationMs`,
-  `fullPageDurationMs` und `fullTargetDurationMs`, ohne Eingaben zu
-  wiederholen.
-- Checkpoints erhalten akzeptierte Antworten, Timing und Fehler nach
-  Neustarts.
+  `fullPageDurationMs` und `fullTargetDurationMs`.
+- Startet Apify einen Run neu, bleiben gelieferte Antworten und der Fortschritt
+  erhalten.
 
 ### Immer den aktuellsten Build verwenden
 
@@ -100,10 +93,10 @@ vorübergehende Rollbacks.
 
 ## Schnellstart
 
-Das erste Formular zielt auf eine verifizierte öffentliche Konversation. Es
-gibt bis zu 25 vollständige, flache Datensätze über maximal 10 Seiten
-zurück. Der Auto-Modus durchsucht standardmäßig die gesamte Konversation.
-Deduplizierung und Quellzuordnung bleiben aktiviert.
+Das erste Formular zielt auf eine verifizierte öffentliche Konversation. Es gibt
+bis zu 25 vollständige, flache Datensätze zurück. Der Auto-Modus durchsucht
+standardmäßig die gesamte Konversation. Deduplizierung und Quellzuordnung
+bleiben aktiviert.
 
 ### Antworten aus einer Beitrags-URL scrapen
 
@@ -201,8 +194,8 @@ Nutze die folgenden primären Felder.
 | -------------- | ---------------------------------------------------- |
 | `startUrls`    | Gemischte X-Beitrags- und Profil-URLs                 |
 | `tweetIds`     | Numerische Beitrags-IDs                               |
-| `usernames`    | Profil-Timelines mit Autorensuche                     |
-| `startCursor`  | Setzt ein Ziel von einem gespeicherten Quell-Cursor fort |
+| `usernames`    | Antwort-Timelines von Profilen                        |
+| `startCursor`  | Setzt ein Ziel von einem gespeicherten Cursor fort   |
 
 Das visuelle Formular zeigt nur kanonische Steuerelemente.
 Kompatibilitätsaliasse bleiben in JSON, API, SDK, Automatisierung und
@@ -228,39 +221,32 @@ Fehlerhafte oder nicht unterstützte Ziele lassen den Actor nicht
 fehlschlagen. Der Run gibt eine verwertbare Diagnose zurück, wenn kein
 gültiges Ziel übrig bleibt.
 
-Profilziele kombinieren Cursor-Paginierung mit Autorensuche. Der Actor
-entfernt doppelte Datensätze vor Ausgabe und Abrechnung. Gespeicherte
-Legacy-Cursor behalten die Standard-Paginierung.
+Der Actor entfernt doppelte Datensätze vor Ausgabe und Abrechnung.
 
 ## Abdeckungsstrategien
 
 ### Auto complete
 
-Nutze `collectionStrategy: "auto"` für die meisten Aufgaben. Vollständige
-oder verschachtelte Bereiche beginnen mit vollständiger Antworten-
-Extraktion. Bereich, Tiefe, Sortierung und Autoren-Steuerelemente greifen
-vor Antwortlimits. Die Extraktion umfasst Nachkommen unterhalb von
-Nicht-Wurzel-Zielen. Bei unvollständiger Extraktion bleiben Datensätze
-erhalten, bevor Konversationssuche & direkte Antworten versucht werden.
-Ein Beitrag, dessen Quellen alle beendet sind, überspringt beides, da X den
-Rest verbirgt. Der Statustext nennt dann, wie viele Antworten X verbirgt.
-Direkte Bereiche fallen bei Bedarf auf die Suche zurück. Unvollständige
-Seiten behalten ihre Fortsetzung. Explizite Strategien wechseln nie.
+Nutze `collectionStrategy: "auto"` für die meisten Aufgaben. Der Modus sammelt
+jede Antwort, die er für deinen Umfang erreicht. Umfang, Tiefe, Sortierung und
+Autorensteuerung gelten vor deinen Limits. Antworten unter Nicht-Root-Zielen
+sind enthalten. Verbirgt X einen Teil eines Threads, nennt der Status, wie viele
+Antworten X verbirgt. Die anderen `collectionStrategy`-Werte wechseln nie den
+Modus.
 
-Die diagnostische Abdeckungsschwelle beweist keine vollständige
-Quellerschöpfung. Stockende Seiten, Limits, fehlende Daten oder Fehler
-lassen die Wiederherstellung unvollständig.
+Ein Abdeckungswert in den Diagnosen beweist nicht, dass X keine weiteren
+Antworten hat. Limits, fehlende Daten oder Fehler können einen Run unvollständig
+lassen.
 
-### Direkter Antworten-Endpunkt
+### Direkte Antworten
 
-Nutze `collectionStrategy: "replies"`, um X' Antworten-Timeline zu
-erzwingen. Dies behält die Quellreihenfolge bei und unterstützt Cursor.
+Nutze `collectionStrategy: "replies"` für direkte Antworten in der Reihenfolge
+von X. Gespeicherte Cursor werden unterstützt.
 
 ### Konversationssuche
 
 Nutze `collectionStrategy: "conversationSearch"` für breite
-Konversationsabdeckung. Der Actor sucht nach
-`conversation_id:<Tweet-ID>`.
+Konversationsabdeckung.
 
 ### Vollständiger Thread-Kontext
 
@@ -343,9 +329,8 @@ Nutze `minLikes`, `minReplies`, `minRetweets`, `minQuotes`, `minViews` und
 `maxItems` begrenzt gelieferte Datensätze über den gesamten Run. Über
 `maxItemsPerTarget` wird jeder Beitrag oder jedes Profil begrenzt.
 
-Unabhängige Ziele laufen gleichzeitig. Jedes Ziel behält eine geordnete
-Cursor-Paginierung. Dataset-Schreibvorgänge halten Obergrenzen,
-Deduplizierung, Zuordnung und Abrechnung atomar.
+Ein Run kann viele Ziele lesen. Limits, Deduplizierung, Zuordnung und Abrechnung
+bleiben über alle hinweg exakt.
 
 Der Actor entfernt Duplikate vor der Abrechnung. Setze
 `dedupeAcrossTargets: false`, um doppelte Datensätze aus verschiedenen
@@ -470,17 +455,16 @@ entspricht `$0.00015` pro Datensatz. Apify berechnet die Plattformnutzung
 separat.
 
 Xquik berechnet eine Gebühr pro geliefertem Datensatz. Diagnosen in
-`diagnostics` sind kostenlos. Keine Start-, URL-, Such-, Paginierungs-,
-Filter- oder Proxy-Gebühr.
+`diagnostics` sind kostenlos. Keine Start-, URL-, Such-, Paginierungs- oder
+Filter-Gebühr.
 
-Das Standard-Apify-Zeitlimit ist `0`, Runs haben also kein Zeitlimit. Der
-Actor läuft weiter, bis er die Obergrenze erreicht oder die verfügbaren Daten
-aufbraucht. Ein Aufrufer kann dennoch ein endliches Apify-Zeitlimit
-setzen. Dann bedeutet `completionReason: "deadline_reached"`, dass dieses
-konfigurierte Limit nahe ist. Der Actor reserviert die letzten 15 Sekunden
-für Checkpoints, Datensätze, Reports und einen erfolgreichen Abschluss.
-Bereits gesammelte Antworten bleiben geliefert und werden einmal
-abgerechnet. Unvollständige Paginierung bleibt fortsetzbar.
+Das Standard-Timeout von Apify ist `0`, daher haben Runs kein Zeitlimit. Der
+Actor läuft weiter, bis er das Limit erreicht oder keine passenden Daten mehr
+findet. Du kannst trotzdem ein endliches Apify-Timeout setzen. Dann bedeutet
+`completionReason: "deadline_reached"`, dass dieses Limit nahe ist. Der Actor
+speichert Antworten und Bericht und beendet sich vor dem Limit sauber.
+Gelieferte Antworten werden einmal abgerechnet. Unfertige Ziele lassen sich
+fortsetzen.
 
 ## Öffentliche Task-Beispiele
 
@@ -564,8 +548,8 @@ Antwort-Datasets können personenbezogene Daten enthalten. Wähle einen
 rechtmäßigen Zweck. Minimiere die Aufbewahrung. Schütze Exporte. Beachte
 Lösch- und Auskunftsanfragen, wo erforderlich.
 
-Der Actor umgeht keine geschützten Accounts. Er fragt keine
-X-Passwörter, Sitzungs-Cookies oder Authentifizierungs-Token von Kunden ab.
+Der Actor umgeht keine geschützten Accounts. Er fragt nie nach deinem
+X-Passwort, Cookies oder Tokens.
 
 ## Verwandte Xquik Actors
 

@@ -37,7 +37,8 @@ gerekmez.
 - Bir çalıştırmada birden fazla etkileşim türü ve gönderi.
 - Genel ve kaynak başına üst sınırlar.
 - Kaynak gönderi ve etkileşim türü atfı.
-- Kaydedilen imleç kurtarmasıyla eşzamanlı kaynaklar.
+- Çalıştırmalar, Apify yeniden başlatmasından sonra kaldıkları yerden devam
+  eder.
 
 ## Girdi
 
@@ -71,19 +72,16 @@ kapsama için `incompleteTargets`'ı sayar. Filtreler Actor faturalamasından
 `retweeters` sonuçları için `includeRetweetTimestamp`'i `true` olarak ayarla.
 `retweetedAt` sütunu, gözlemlenen yeniden paylaşım zamanını UTC olarak içerir.
 
-Her arama, retweet edenin en yeni mevcut profil sayfasını kontrol eder. Hesabı
-ve kaynak gönderiyi gerçek yeniden paylaşım kayıtlarıyla eşleştirir. Daha
-eski, silinmiş veya kullanılamayan yeniden paylaşım kayıtları zaman damgasını
-`null` bırakabilir. Başarısız zaman damgası aramaları da `null` bırakır.
-Profil çıktıda kalır. Arama, bir hesabın bir gönderiyi hiç yeniden
+Actor, X o yeniden paylaşımı hâlâ gösteriyorsa paylaşım zamanını bulur. Eski,
+silinmiş veya kullanılamayan yeniden paylaşımlar zaman damgasını `null` bırakır.
+Profil çıktıda kalır. `null` değeri, bir hesabın bir gönderiyi hiç yeniden
 paylaşmadığını kanıtlamaz.
 
-Ekstra okumalar gecikmeyi artırır. Yalnızca profil sonuçları için bu seçeneği
-kapalı bırak. Profil `createdAt` alanı hesap oluşturma tarihi olarak kalır.
-Tweet satırları bir yeniden paylaşım olayı içerdiğinde `retweetedAt` taşır.
-Orijinal gönderi tarihleri ve kazıma zamanları asla yeniden paylaşım
-zamanlarının yerini almaz. Sonuç fiyatları ve teslim edilen satır faturalaması
-değişmeden kalır.
+Bu seçenek çalıştırmaları yavaşlatır. Yalnızca profil sonuçları için kapalı
+bırak. Profil `createdAt` alanı hesap oluşturma tarihi olarak kalır. Tweet
+satırları bir yeniden paylaşım olayı içerdiğinde `retweetedAt` taşır. Orijinal
+gönderi tarihleri ve kazıma zamanları asla yeniden paylaşım zamanlarının yerini
+almaz. Sonuç fiyatları ve teslim edilen satır faturalaması değişmeden kalır.
 
 ## Fiyatlandırma
 
@@ -101,9 +99,9 @@ Sonuçlar canlı veriyi yansıtır.
 
 ## Kurtarma ve sınırlar
 
-Bağımsız gönderi-kaynak çiftleri eşzamanlı çalışır. İmleç soyu sıralı kalır.
-Kabul edilen satırlar, faturalama durumu, imleçler ve parmak izleri Apify
-göçünden sağ çıkar. Actor'ın kendi kendine uyguladığı bir zaman aşımı yoktur.
+Tek bir çalıştırma birçok gönderiyi ve etkileşim türünü okuyabilir. Teslim
+edilen satırlar ve ilerleme, Apify yeniden başlatmasından sonra korunur. Actor
+kendi zaman sınırını eklemez.
 
 ## Eksik çıkarma
 

@@ -37,7 +37,7 @@ erforderlich.
 - Mehrere Interaktionstypen und Beiträge pro Run.
 - Globale und ressourcenbezogene Obergrenzen.
 - Zuordnung von Quellbeitrag und Interaktionstyp.
-- Gleichzeitige Ressourcen mit gespeicherter Cursor-Wiederherstellung.
+- Runs machen nach einem Apify-Neustart dort weiter, wo sie aufgehört haben.
 
 ## Eingabe
 
@@ -73,19 +73,16 @@ Actor-Abrechnung.
 Setze `includeRetweetTimestamp` auf `true` für `retweeters`-Ergebnisse. Die
 Spalte `retweetedAt` enthält den beobachteten Repost-Zeitpunkt in UTC.
 
-Jede Abfrage prüft die neueste verfügbare Profilseite des Retweeters. Sie
-gleicht den Account und den Quellbeitrag mit tatsächlichen Repost-Datensätzen
-ab. Ältere, gelöschte oder nicht verfügbare Repost-Datensätze können den
-Zeitstempel `null` lassen. Auch fehlgeschlagene Zeitstempel-Abfragen lassen
-`null`. Das Profil bleibt in der Ausgabe. Die Abfrage beweist nicht, dass ein
+Der Actor findet den Repost-Zeitpunkt, solange X diesen Repost noch zeigt.
+Ältere, gelöschte oder nicht verfügbare Reposts lassen den Zeitstempel `null`.
+Das Profil bleibt in der Ausgabe. Ein `null`-Wert beweist nicht, dass ein
 Account einen Beitrag nie reposted hat.
 
-Zusätzliche Lesevorgänge erhöhen die Latenz. Lass diese Option für reine
-Profilergebnisse deaktiviert. `createdAt` im Profil bleibt das
-Erstellungsdatum des Accounts. Tweet-Datensätze führen `retweetedAt`, wenn
-sie ein Repost-Ereignis enthalten. Ursprüngliche Beitragsdaten und
-Scrape-Zeiten ersetzen niemals Repost-Zeiten. Ergebnispreise und die
-Abrechnung gelieferter Datensätze bleiben unverändert.
+Diese Option macht Runs langsamer. Lass sie für reine Profilergebnisse
+deaktiviert. `createdAt` im Profil bleibt das Erstellungsdatum des Accounts.
+Tweet-Datensätze führen `retweetedAt`, wenn sie ein Repost-Ereignis enthalten.
+Ursprüngliche Beitragsdaten und Scrape-Zeiten ersetzen niemals Repost-Zeiten.
+Ergebnispreise und die Abrechnung gelieferter Datensätze bleiben unverändert.
 
 ## Preise
 
@@ -103,10 +100,9 @@ Beispielwerte. Ergebnisse spiegeln Live-Daten.
 
 ## Wiederherstellung und Grenzen
 
-Unabhängige Beitrags-Ressourcen-Paare laufen gleichzeitig. Die Cursor-Linie
-bleibt geordnet. Akzeptierte Datensätze, Abrechnungsstatus, Cursor und
-Fingerprints überstehen eine Apify-Migration. Der Actor hat kein eigenes
-Zeitlimit.
+Ein Run kann viele Beiträge und Interaktionstypen lesen. Gelieferte Datensätze
+und der Fortschritt überstehen einen Apify-Neustart. Der Actor setzt kein
+eigenes Zeitlimit.
 
 ## Unvollständige Extraktion
 

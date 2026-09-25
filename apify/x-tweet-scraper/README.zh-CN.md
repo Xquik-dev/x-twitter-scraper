@@ -37,12 +37,8 @@ URL、用户名、List ID、推文 ID 以及带有 50 多种过滤器的搜索�
 - 过滤和去重都在计费之前执行。
 - 单一输入即可支持查询、时间线、List、搜索及互动模式。
 - 推文 ID 类输入没有固定的数量上限，Apify 的支出和超时设置仍然适用。
-- 自动化的搜索和引用分页每次最多请求 300 行。
-- 已保存的游标会保留其原有的分页上限，并在过期后重新开始。
-- 当两者都适用时，主页模式会同时结合时间线和作者搜索。
-- 分页日志包含 `fetchDurationMs`、`processingDurationMs`、`pushDurationMs`、
-  `statusDurationMs` 和 `fullPageDurationMs`，且不会重复目标信息。
-- 检查点会在重启后保留已接受的行、耗时及失败计数。
+- 运行日志会在 `fetchDurationMs`、`processingDurationMs`、`pushDurationMs`、`statusDurationMs` 和 `fullPageDurationMs` 中显示每页耗时。
+- 如果 Apify 重启运行，已交付的行和进度都会保留。
 
 ### 始终使用最新构建
 
@@ -146,9 +142,7 @@ Apify 不会将固定的构建编号重定向到 `latest`。请将固定编号�
 媒体信息包括可用性、尺寸、标签、视频变体、`watchNowUrl` 和
 `visitSiteUrl` 操作。
 
-与查看者相关的状态属于 Xquik 的抓取账户，而非属于你的数据集。关注、
-屏蔽、静音、收藏、点赞、转发、编辑权限等与查看者相关的标记都会一律
-移除，原始输出中也不例外。
+结果行永远不会包含仅与查看者相关的状态。关注、屏蔽、静音、收藏、点赞、转发、编辑权限等查看者标记都会被移除，原始输出也不例外。
 
 ## 抓取推文的费用是多少？
 
@@ -162,21 +156,13 @@ Apify 不会将固定的构建编号重定向到 `latest`。请将固定编号�
 无输入和输入无效的退出情况。运行报告会将数据行区分为 `realRows`，
 诊断记录区分为 `diagnosticRows`。
 
-在为下一次运行付费之前，请先理解空结果的原因。`filtering` 对象会在
-报告和最终诊断中将 `serverFilteredRows` 与 `actorFilteredRows` 区分开来。
-这些数字统计的是已处理页面中被拒绝的行数，包括重复出现的源行。
-`pagesWithUnknownServerFiltering` 标识出没有有效服务器计数的页面。缺失的
-计数将保持为空缺。被过滤的行永远不会产生结果费用。
+在为下一次运行付费之前，请先理解空结果的原因。报告和最终诊断中的 `filtering` 对象会统计被你的过滤条件移除的行数。请查看 `serverFilteredRows`、`actorFilteredRows` 和 `pagesWithUnknownServerFiltering`。被过滤的行永远不会产生结果费用。
 
 来源耗尽可能导致抓取在低于你所请求的上限时就已完成。这类运行会报告
 `outcome: "complete"`，`completionReason: "source_exhausted"`。被中断的
 运行会保留其部分完成的结果状态及重试指引。
 
-`failedSubtargets` 统计因读取失败而被停止的查询和主页目标数量。分页
-失败和支付失败会保留部分结果行及未完成的游标，这些失败并不意味着目标
-不存在。已接受的行仍属于数据行，并计入计费。这类运行使用
-`completionReason: "partial_failure"`。快速的服务端分页遵循同样的报告
-约定。
+`failedSubtargets` 统计出错后停止的查询和主页目标数量。已交付的行会保留在数据集中并计入计费。出错并不代表目标不存在。这类运行使用 `completionReason: "partial_failure"`。
 
 被中断的抓取还会写入一条免费的 `partial` 诊断记录。已获取的结果保持
 完整。诊断记录中报告 `availableResults`、`failedTargets`、`retryable`
@@ -203,20 +189,9 @@ Apify 不会将固定的构建编号重定向到 `latest`。请将固定编号�
 `search_unavailable` 或 `likes_hidden`。该列表最多保存 100 个条目。从输入中
 移除它们，即可得到完整的运行。
 
-`completionReason: "pagination_safety_limit"` 并不代表读取失败，它表示
-分页在保留有效行的同时，达到了自身的边界安全限制。在仍存在有效恢复
-游标的情况下，Latest 搜索会持续翻页，即使遇到空页面。Top 搜索及账户
-窗口恢复可能会在连续出现 10 个空页面后设置检查点。当服务报告分页停滞时，
-运行会保留已获取的行，并立即为该目标设置检查点。设置了检查点的
-运行会报告抓取未完成，并保留可恢复的游标。即使出现连续的空页面，终止页面
-仍会完成分页。`failedSubtargets` 会保持为 `0`。你只需为被接受的数据集行
-付费。
+`completionReason: "pagination_safety_limit"` 并不代表读取失败。运行保留了有效行，然后结束了一个不再返回新结果的目标。运行会报告抓取不完整。`failedSubtargets` 保持为 `0`。你只需为已交付的行付费。
 
-Apify 的默认超时为 `0`，因此运行没有时间限制。Actor 会持续运行，直到
-达到上限或用完可用数据为止。调用方仍可设置有限的 Apify 超时。此时
-`completionReason: "deadline_reached"` 表示该配置的限制即将到达。Actor
-会为检查点、行数据、报告及成功退出保留最后 15 秒。有效行会保持已交付
-状态并只计费一次。未完成的分页仍可恢复继续。
+Apify 的默认超时为 `0`，因此运行没有时间限制。Actor 会持续运行，直到达到上限或用完可用数据为止。你仍可设置有限的 Apify 超时。此时 `completionReason: "deadline_reached"` 表示该限制即将到达。Actor 会在到达限制前保存行数据和报告，然后正常退出。已交付的行只计费一次。
 
 - 启动、查询、URL 及单条推文查询不会产生额外费用。
 - Actor 会在写入或计费之前去重。
@@ -241,11 +216,7 @@ Apify 的默认超时为 `0`，因此运行没有时间限制。Actor 会持续�
 }
 ```
 
-Actor 会以最多 100 个为一批并发查询推文 URL。部分成功的响应会对未解析的
-ID 重新检查一次。批处理输出保持唯一，并与请求的 ID 相匹配。主页 URL
-会将主页时间线与作者搜索结合起来。搜索 URL 会提取其中的查询内容。
-List URL 会使用专用的 List 路径，而不是通用的 `list:` 搜索。`maxItems`
-会对所有粘贴的 URL 的结果总数设置上限。
+推文 URL 会按你的输入顺序返回这些推文，且不重复。主页 URL 会返回该账户的帖子。搜索 URL 会运行其中的查询。List URL 会返回该 List 的帖子。`maxItems` 会限制所有粘贴 URL 的结果总数。
 
 ### 2. 批量用户名
 
@@ -255,10 +226,7 @@ List URL 会使用专用的 List 路径，而不是通用的 `list:` 搜索。`m
 { "twitterHandles": ["elonmusk", "nasa", "openai"], "maxItems": 100 }
 ```
 
-每个用户名都会结合游标分页和作者搜索。Actor 会在输出和计费之前移除重复行。用
-户名可以带上可选的 `@` 前缀。与 X 上的 Posts 标签页一样，用户名和主页 URL 会
-保留转发，即使设置了日期或过滤条件也是如此。设置
-`tweetTypes.excludeRetweets` 即可去掉转发。
+每个用户名都会返回该账户的帖子。Actor 会在输出和计费之前移除重复行。用户名可以带上可选的 `@` 前缀。与 X 上的 Posts 标签页一样，用户名和主页 URL 会保留转发，即使设置了日期或过滤条件也是如此。设置 `tweetTypes.excludeRetweets` 即可去掉转发。
 
 ### 3. 搜索推文
 
@@ -275,16 +243,7 @@ List URL 会使用专用的 List 路径，而不是通用的 `list:` 搜索。`m
 当 `mode` 为 `tweet` 或 `tweets` 且没有推文 ID 时，查询输入会被路由
 到搜索。这样可以避免有效的 `searchTerms` 返回空的查询结果。
 
-单纯的账户回溯并搭配日期窗口，例如
-`from:elonmusk since:2026-01-01 until:2026-01-02`，会使用有边界的账户
-路径。较近的时间窗口会结合主页时间线与作者搜索。较早的历史时间窗口
-则使用精确搜索。兼容的相邻时间窗口会共享一次检索，并保留原始的
-`searchTerm` 归属信息。`maxItems` 会对所有搜索词的结果总数设置上限。
-所有 `since:`/`until:` 及 Unix 时间窗口都会对每条返回的推文进行验证。
-经过过滤的账户窗口会先读取完整的源页面，再应用输出上限。经过过滤的
-页面会持续读取，直到出现匹配的推文或分页结束为止。独立的搜索词会并发
-运行。每个搜索词都会保持有序的游标分页，以确保深度和归属的一致性。
-账户窗口只有在彼此兼容时才会共享一次检索。
+带日期窗口的账户回溯同样可用，例如 `from:elonmusk since:2026-01-01 until:2026-01-02`。每个搜索词都会保留自己的 `searchTerm` 归属。`maxItems` 会限制所有搜索词的结果总数。Actor 会根据 `since:`、`until:` 和 Unix 时间窗口核对每条返回的推文。带过滤条件的搜索会持续读取，直到找到匹配结果或 X 没有更多结果。
 
 `from:` 搜索词返回的结果与 X 搜索相同，因此不包含转发。添加
 `include:nativeretweets` 可保留转发，添加 `filter:nativeretweets` 则只返回转
@@ -296,9 +255,7 @@ List URL 会使用专用的 List 路径，而不是通用的 `list:` 搜索。`m
 { "tweetIds": ["1846987139428634858", "1858743654778892784"], "maxItems": 100 }
 ```
 
-Actor 每次请求处理 100 个 ID，会并发运行多个批次，并将每个完成的批次
-一次性写入。部分成功的响应只会重新检查未解析的 ID。结果会保留输入
-顺序、去除重复项，并排除未被请求的推文。
+结果会保持你的输入顺序，去除重复项，并只包含你请求的推文。
 
 同一查询也接受 `tweetId`、`tweetIDs`、`tweets`、`postIds`、
 `lookupPostIds`、`tweetUrls` 和 `postUrls` 等别名。
@@ -340,35 +297,13 @@ Actor 每次请求处理 100 个 ID，会并发运行多个批次，并将每个
 发布的主页帖子及回复。Actor 会排除来自其他作者的对话上下文。如果只需要
 纯回复结果，请使用 `filter:replies` 或 `to:` 搜索。
 
-搜索及分页类的推文模式都支持 `time.since`、`time.until`、Unix
-时间戳及 `lang`。这些模式包括主页的 Posts、With Replies、Media、
-Likes、Lists、回复、引用及推文串。对应的扁平化日期操作符同样有效。
-Actor 会在计费前验证每一行数据。下限日期为含边界。上限日期为不含
-边界。日期过滤会排除没有可用日期的行。语言过滤会排除缺失或不匹配
-语言的行。被过滤的行永远不会占用你所请求的结果数量上限。当较早的
-推文出现在匹配结果之前时，无序结果会继续翻页。带日期窗口的 List 运行会
-直接跳到该窗口，因此 30 天前的某一天与昨天耗时相近。对于 List 深处的
-窗口，推文来自 X 的 List 搜索，它会漏掉 List 时间线上显示的少数回复。
-当连续 3 个页面只包含早于你下限日期的推文时，List 运行也会结束。由于
-上限日期为不含边界，`since` 和 `until` 使用同一日期就是一个空窗口。将
-`until` 设为第二天，即可获取 1 整天的数据。推文过滤器不适用于用户列表或
-直接的推文/文章查询。
+搜索及分页类的推文模式都支持 `time.since`、`time.until`、Unix 时间戳及 `lang`。这些模式包括主页的 Posts、With Replies、Media、Likes、List、回复、引用和帖子串。对应的扁平日期运算符同样可用。Actor 会在计费前核对每一行。日期下限包含在内，上限不包含在内。日期过滤会排除没有可用日期的行。语言过滤会排除缺失或不匹配的语言。被过滤的行永远不会占用你请求的结果上限。带日期窗口的 List 运行能很快到达较早的日期，并在越过你设置的下限后结束。List 中很久以前的窗口可能会漏掉少量回复。由于上限不包含在内，`since` 和 `until` 使用同一日期会得到空窗口。将 `until` 设为次日即可获取完整的 1 天。推文过滤条件不适用于用户列表，也不适用于直接的推文或文章查询。
 
 `time.withinTime` 和 `within_time` 也适用于上述模式。取值为 `7d` 时，
 会保留运行开始读取前最近 7 天内的帖子。回溯到 2006 年之前的时间窗口
 会保留所有帖子。
 
-`mode: "replies"` 的规则更为严格。它结合了直接时间线、受支持的排序
-模式、每一个前向游标模块、带标签的隐藏内容分支、按已报告回复数量
-缩放的时间分区，以及搜索。每一行推文数据的 `inReplyToId` 都等于所
-请求的推文 ID。嵌套对话中的回复永远不计为直接回复。如果 X 显示的
-回复数少于其报告的数量，Actor 会保留安全的部分结果行，并在仍有余量
-时向 `diagnostics` 添加 1 条 `replies-incomplete` 记录。达到覆盖率
-阈值并不意味着抓取已经完成，运行会一直保持部分完成状态，直到达到
-你的限制或源数据被验证为已耗尽。`replyCoverage` 会报告计数、所用
-策略、分页异常、缺失字段以及推荐的回退方案。Actor 会在返回零输出前
-遵循瞬时重试延迟。请将 `maxItems` 设置为你所需的总量，单个回复目标
-也可以设置超过 25000 的总量。
+`mode: "replies"` 的规则更为严格。每一行推文数据的 `inReplyToId` 都等于所请求的推文 ID。嵌套对话中的回复永远不计为直接回复。如果 X 显示的回复数少于其报告的数量，Actor 会保留已找到的行。未达到你的上限时，它会向 `diagnostics` 添加 1 条 `replies-incomplete` 记录。运行会一直保持部分完成状态，直到达到你的上限或 X 没有更多回复。`replyCoverage` 会报告回复数量和覆盖详情。请将 `maxItems` 设置为你所需的总量，单个回复目标也可以设置超过 25000 的总量。
 
 文章行包含 `resultType: "article"`、`sourceTweetId`、`article` 及
 可选的 `author`。互动用户行包含 `resultType: "user"`、
@@ -439,11 +374,7 @@ fields` 视图对应 `snake_case`。视图只负责选择列，永远不会重�
 }
 ```
 
-设置 `queryType: "Latest + Top"` 可并发运行两种 X 搜索模式。Actor
-会在计费前去重，并用任一模式回填未使用的容量。`Top` 按相关性排序，
-并不保证结果详尽。设置 `includeSearchTerms: true` 可为每条匹配结果
-附加对应的 `searchTerm` 字段。短暂的瞬时读取中断会在 Actor 返回诊断
-信息之前额外重试一次。
+设置 `queryType: "Latest + Top"` 可在一次运行中使用两种 X 搜索模式。Actor 会在计费前去重，并用任一模式的结果填满你的上限。`Top` 按相关性排序，并不完整。设置 `includeSearchTerms: true` 可将每个匹配的查询附加为 `searchTerm` 字段。
 
 设置 `lang` 时，Actor 会验证每条返回推文的语言，跳过不匹配的结果，
 并继续翻页寻找匹配的推文。
@@ -550,17 +481,11 @@ fields` 视图对应 `snake_case`。视图只负责选择列，永远不会重�
 示例：
 
 - 在 Start URLs 中粘贴一条推文 URL。
-- 粘贴一个主页 URL，或将用户名添加到 X Handles。Actor 会将其时间线
-  与作者搜索结合起来。
-- 使用 `from:user since:YYYY-MM-DD until:YYYY-MM-DD` 作为搜索词，
-  进行账户回溯抓取。Actor 会在检索前合并兼容的时间窗口。较近的时间
-  窗口会结合主页时间线与作者搜索。较早的历史时间窗口则使用精确搜索。
+- 粘贴一个主页 URL，或将用户名添加到 X Handles。
+- 使用 `from:user since:YYYY-MM-DD until:YYYY-MM-DD` 作为搜索词，进行账户回溯抓取。
 - 在 Start URLs 中粘贴一条 List URL。
 - 将 `twitterContent` 与 `from:`、`since:`、`min_faves:` 及
   `filter:media` 等过滤器结合，用于高级搜索。
-
-此抓取工具会将 List URL 路由到专用的 List 路径，而不是通用的
-`list:ID` 搜索。
 
 ## 输出
 
@@ -614,12 +539,10 @@ fields` 视图对应 `snake_case`。视图只负责选择列，永远不会重�
 - 在 Apify API 中设置 `maxTotalChargeUsd`，或在控制台中设置 Max
   cost per run。Apify 会将该限制以 `ACTOR_MAX_TOTAL_CHARGE_USD` 的
   形式暴露给 Actor，Actor 会据此换算出最大可计费行数。
-- 传入 `tweetIds` 可使用并发的 100 个 ID 批处理。粘贴主页 URL 可使用
-  更快的用户时间线路径。
+- 传入 `tweetIds` 可一次查询多条推文。粘贴主页 URL 可读取单个账户的帖子。
 - 运行多个查询时，设置 `includeSearchTerms: true` 可为每条结果标注
   其来源搜索词。
-- 设置 `queryType: "Latest + Top"` 可并发运行两种 X 搜索模式，去重
-  和结果上限依然保持原子性。
+- 设置 `queryType: "Latest + Top"` 可在一次运行中使用两种 X 搜索模式。去重和结果上限对两种模式统一生效。
 - 使用 Xquik 的账户或关键词监控功能，可实现每秒检测和签名 webhook
   推送。已启用的监控会每秒检测一次。
 
@@ -696,8 +619,7 @@ Xquik 还提供 47 个仪表盘工具、129 个 REST 操作、签名 webhook 以
 MCP 服务器。
 
 - [API 文档](https://docs.xquik.com/introduction)：REST API 使用指南
-- [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets)：
-  驱动此 Actor 的接口
+- [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets)：通过 REST 搜索推文
 - [Batch Tweets API](https://docs.xquik.com/api-reference/x/batch-tweets)：
   按 ID 获取最多 100 条推文
 - [User Tweets API](https://docs.xquik.com/api-reference/x/user-tweets)：
@@ -709,22 +631,14 @@ MCP 服务器。
 
 ## 常见问题
 
-**我需要 X API 密钥吗？** 不需要。此抓取工具使用自有基础设施，无需
-登录或凭据。
+**我需要 X API 密钥吗？** 不需要。无需 X API 密钥、登录或凭据。
 
 **什么因素会限制一次运行？** 你设置的条目数量上限和 Apify 支出上限会
 停止运行，Apify 账户及平台限制依然适用。
 
-**运行速度有多快？** 运行耗时取决于所用路径、结果数量及上游服务的
-可用性。
+**运行速度有多快？** 运行耗时取决于你的输入、结果数量及 X 的可用性。
 
-**为什么 Latest 搜索会返回 X 的 Latest 标签页不显示的帖子？** X 会把部分
-匹配的帖子排除在其公开的 Latest 列表之外，只返回给带时间范围的搜索。此
-Actor 会把 Latest 搜索当作并排的时间切片来读取，因此两类帖子都能获取。在
-针对 1 个查询、100 条帖子的测试中，83 条与另外 5 个抓取工具返回的帖子
-一致，17 条是 X 只返回给带时间范围搜索的帖子。这 17 条全部位于同一时间
-跨度内。每条帖子都是你的查询在 X 上的真实搜索结果，每条帖子你只需付费
-1 次。
+**为什么 Latest 搜索会返回 X 的 Latest 标签页不显示的帖子？** X 会把部分匹配的帖子排除在其 Latest 标签页之外。本 Actor 也会返回这些帖子。每条帖子都是针对你的查询的真实 X 搜索结果，且每条帖子只计费一次。
 
 **哪些搜索操作符可用？** X 高级搜索支持按作者、接收者、提及、日期、
 互动、媒体及位置进行搜索。

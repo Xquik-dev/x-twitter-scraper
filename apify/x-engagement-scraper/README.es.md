@@ -38,7 +38,7 @@ clave de API de X ni inicio de sesión.
 - Varios tipos de interacción y publicaciones por ejecución.
 - Límites globales y por recurso.
 - Atribución de la publicación de origen y del tipo de interacción.
-- Recursos concurrentes con recuperación de cursor guardado.
+- Las ejecuciones continúan donde se quedaron tras un reinicio de Apify.
 
 ## Entrada
 
@@ -75,21 +75,17 @@ Configura `includeRetweetTimestamp` en `true` para los resultados de
 `retweeters`. La columna `retweetedAt` contiene la hora observada de la
 republicación en UTC.
 
-Cada búsqueda revisa la página de perfil disponible más reciente del usuario
-que retuitea. Coteja la cuenta y la publicación de origen con registros
-reales de republicación. Los registros de republicación antiguos, eliminados
-o no disponibles pueden dejar la marca de tiempo en `null`. Las búsquedas de
-marca de tiempo fallidas también dejan `null`. El perfil permanece en la
-salida. La búsqueda no demuestra que una cuenta nunca haya republicado una
-publicación.
+El Actor encuentra la hora de republicación cuando X todavía muestra esa
+republicación. Las republicaciones antiguas, eliminadas o no disponibles dejan
+la marca de tiempo en `null`. El perfil permanece en la salida. Un valor `null`
+no demuestra que una cuenta nunca haya republicado una publicación.
 
-Las lecturas adicionales aumentan la latencia. Deja esta opción desactivada
-para resultados solo de perfil. `createdAt` del perfil sigue siendo la fecha
-de creación de la cuenta. Las filas de tuit llevan `retweetedAt` cuando
-contienen un evento de republicación. Las fechas de la publicación original
-y los momentos de extracción nunca sustituyen a las horas de republicación.
-Los precios de los resultados y la facturación por fila entregada permanecen
-sin cambios.
+Esta opción hace que las ejecuciones sean más lentas. Déjala desactivada para
+resultados solo de perfil. `createdAt` del perfil sigue siendo la fecha de
+creación de la cuenta. Las filas de tuit llevan `retweetedAt` cuando contienen
+un evento de republicación. Las fechas de la publicación original y los momentos
+de extracción nunca sustituyen a las horas de republicación. Los precios de los
+resultados y la facturación por fila entregada permanecen sin cambios.
 
 ## Precios
 
@@ -107,10 +103,9 @@ muestra. Los resultados reflejan datos en vivo.
 
 ## Recuperación y límites
 
-Los pares independientes de publicación y recurso se ejecutan de forma
-concurrente. El linaje de cursor permanece ordenado. Las filas aceptadas, el
-estado de facturación, los cursores y las huellas sobreviven a la migración
-de Apify. El Actor no tiene un tiempo de espera propio.
+Una ejecución puede leer muchas publicaciones y tipos de interacción. Las filas
+entregadas y el progreso se conservan tras un reinicio de Apify. El Actor no
+agrega un límite de tiempo propio.
 
 ## Extracción incompleta
 

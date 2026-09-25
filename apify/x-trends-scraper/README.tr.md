@@ -74,10 +74,9 @@ Sonuçlar canlı veriyi yansıtır.
 
 ## Kurtarma ve sınırlar
 
-Bağımsız konumlar eşzamanlı çalışır. İmleç durumu, kabul edilen satırlar,
-faturalama durumu ve çıktı parmak izleri Apify göçünden sağ çıkar. Actor'ın
-kendi kendine uyguladığı bir çalıştırma zaman aşımı yoktur. Çağıranın
-belirlediği bir Apify zaman aşımı yine de dikkate alınır.
+Tek bir çalıştırma birçok konumu okuyabilir. Teslim edilen satırlar ve ilerleme,
+Apify yeniden başlatmasından sonra korunur. Actor kendi zaman sınırını eklemez.
+Ayarladığın her Apify zaman aşımına uyar.
 
 ## Eksik çıkarma
 

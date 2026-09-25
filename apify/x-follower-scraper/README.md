@@ -26,7 +26,8 @@ subscribers, and Community members for **from $0.00015 per delivered profile on
 every Apify plan**. Apify bills platform usage separately. No X login, start
 fee, or query fee.
 
->
+> Xquik is an independent third-party service. Not affiliated with X Corp.
+> "Twitter" and "X" are trademarks of X Corp.
 
 ## Incomplete extraction
 
@@ -34,10 +35,6 @@ Interrupted extraction writes a free `partial` diagnostic. Available results
 remain intact. Read `availableResults`, `failedTargets`, `retryable`, and
 `nextAction` before retrying. A successful Actor exit confirms delivery, not
 complete extraction.
-
-Xquik is an independent third-party service. Not affiliated with X Corp.
-
-> "Twitter" and "X" are trademarks of X Corp.
 
 ## What does X Follower Scraper do?
 
@@ -50,11 +47,9 @@ relation.
 - Filters and duplicate removal run before billing.
 - One run accepts handles, numeric IDs, URLs, and short paths.
 - Merge mode records shared profiles, sources, relations, and `overlapCount`.
-- Automatic cursors request up to 300 profiles per page.
-- Older cursors keep their 200-profile limit and restart when expired.
-- Page logs include `fetchDurationMs`, `processingDurationMs`, `pushDurationMs`,
-  `statusDurationMs`, and `fullPageDurationMs` without repeating targets.
-- Checkpoints preserve accepted rows, timing, and failure counts after restarts.
+- Run logs show page timing in `fetchDurationMs`, `processingDurationMs`,
+  `pushDurationMs`, `statusDurationMs` & `fullPageDurationMs`.
+- Runs keep delivered rows & progress when Apify restarts them.
 
 ## Task examples
 
@@ -115,9 +110,8 @@ safe source profile. Compact mode remains the default.
 `verifiedOnly` accepts public Blue and legacy verified profiles. Conflicting
 source flags never let a false value hide a true verification state.
 
-Viewer-relative state belongs to Xquik's fetch account, not your dataset.
-Follow, block, mute, DM, notification, and similar viewer flags are always
-removed, including from raw output.
+Rows never include viewer-only state. Follow, block, mute, DM, notification &
+similar viewer flags are always removed, including from raw output.
 
 ## How much does it cost to scrape X followers?
 
@@ -130,21 +124,17 @@ to the Actor. Every outcome writes `run-report`, including no-input and
 invalid-input exits. Its `version` field reports the exact published Actor
 source version.
 
-`failedTargets` counts targets that stopped after a read failure. Accepted
-profiles remain billable data rows. These runs use
-`completionReason: "partial_failure"`. Fast server-side pagination follows the
-same reporting contract.
+`failedTargets` counts targets that stopped after an error. Delivered profiles
+remain billable data rows. These runs use `completionReason: "partial_failure"`.
 
-The default Apify timeout is `0`. Runs have no time limit. The Actor follows
-every live cursor until the cap or source ends. A caller can still set a finite
+The default Apify timeout is `0`. Runs have no time limit. The Actor continues
+until it reaches the cap or runs out of profiles. You can still set a finite
 timeout. Then `completionReason: "deadline_reached"` means that limit is near.
-The Actor reserves the final 15 seconds for checkpoints, rows, reports, and a
-clean exit. Valid profiles remain delivered and bill once. Unfinished pagination
-remains resumable.
+The Actor saves profiles & the report, then exits cleanly before the limit.
+Delivered profiles bill once.
 
-Independent targets run concurrently. Each target keeps ordered cursor
-pagination. Dataset writes keep caps, deduplication, attribution, and billing
-atomic.
+One run can read many targets. Caps, deduplication, attribution & billing stay
+exact across them.
 
 - Starts, targets, and relation selection add no separate query charge.
 - Filters (`minFollowers`, `verifiedOnly`, `bioContains`, `locationContains`,
@@ -541,35 +531,30 @@ and an MCP server.
 
 ## FAQ
 
-**Do I need an X API key?** No. This scraper uses its own infrastructure. No
-login or credentials required.
+**Do I need an X API key?** No. You need no X API key, login or credentials.
 
 **What limits a run?** Your requested item limit and Apify spend limit stop the
 run. Apify account and platform limits still apply.
 
-**How fast is it?** Runtime depends on target size, filters, and upstream
-availability. Deep filtered runs checkpoint Console progress every 5 pages. This
-reduces non-data traffic between page fetches.
+**How fast is it?** Runtime depends on target size, filters & X availability.
 
 **Why is my run returning fewer rows than `maxItems`?** Filters such as
 `minFollowers`, `verifiedOnly`, and `bioContains` apply before writes. Relax
 filters to return more results.
 
-**How many followers can I scrape from a single account?** X paginates large
-accounts in batches. Raise Apify's run time limit to fetch more pages.
-`maxItemsPerTarget` only caps each target.
+**How many followers can I scrape from a single account?** As many as X shows
+for that account. The run continues until your cap, your spend limit or the end
+of the list. `maxItemsPerTarget` only caps each target.
 
-**Does the Actor retry temporary failures?** Yes. It makes up to 3 attempts per
-page for timeouts, 429, and 5xx responses. It honors `Retry-After` when present.
-Otherwise, it uses exponential backoff. Hard failures preserve partial results.
+**Does the Actor retry temporary failures?** Yes. It recovers from temporary X
+errors on its own. Hard failures keep partial results.
 
-**What happens near the Apify run time limit?** The Actor adds no shorter run
-deadline. It uses Apify's configured limit and keeps the final 15 seconds for
-finalization. It flushes profiles, checkpoints pagination, writes the report,
-and exits. Rows not accepted by the dataset are not billed.
+**What happens near the Apify run time limit?** The Actor adds no shorter
+deadline of its own. Before your limit, it saves profiles, writes the report &
+exits. Rows that never reach the dataset are not billed.
 
-**Can I resume where I left off?** Resume cursor input is not exposed yet.
-Re-running the same target starts from its first available page.
+**Can I resume where I left off?** Not yet. Running the same target again starts
+from the beginning.
 
 **Can I use the Apify API to run this?** Yes. See the
 [API tab](https://apify.com/xquik/x-follower-scraper/api) for Python,

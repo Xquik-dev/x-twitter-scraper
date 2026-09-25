@@ -26,7 +26,8 @@ Listenmitglieder, Listenabonnenten und Community-Mitglieder für **ab
 $0.00015 pro geliefertem Profil auf jedem Apify-Plan**. Apify berechnet die
 Plattformnutzung separat. Kein X-Login, keine Start- oder Suchgebühr.
 
->
+> Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
+> „Twitter" und „X" sind Marken von X Corp.
 
 ## Unvollständige Extraktion
 
@@ -35,10 +36,6 @@ Verfügbare Ergebnisse bleiben erhalten. Lies `availableResults`,
 `failedTargets`, `retryable` und `nextAction`, bevor du es erneut versuchst.
 Ein erfolgreicher Actor-Abschluss bestätigt die Lieferung, nicht die
 vollständige Extraktion.
-
-Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
-
-> „Twitter" und „X" sind Marken von X Corp.
 
 ## Was macht X Follower Scraper?
 
@@ -52,13 +49,11 @@ seine Beziehung.
 - Ein Run akzeptiert Handles, numerische IDs, URLs und Kurzpfade.
 - Der Merge-Modus erfasst gemeinsame Profile, Quellen, Beziehungen und
   `overlapCount`.
-- Automatische Cursor fordern bis zu 300 Profile pro Seite an.
-- Ältere Cursor behalten ihr 200-Profil-Limit und starten bei Ablauf neu.
-- Seitenprotokolle enthalten `fetchDurationMs`, `processingDurationMs`,
-  `pushDurationMs`, `statusDurationMs` und `fullPageDurationMs`, ohne Ziele
-  zu wiederholen.
-- Checkpoints erhalten akzeptierte Datensätze, Timing und Fehleranzahlen
-  nach Neustarts.
+- Run-Protokolle zeigen die Seitenzeiten in `fetchDurationMs`,
+  `processingDurationMs`, `pushDurationMs`, `statusDurationMs` und
+  `fullPageDurationMs`.
+- Startet Apify einen Run neu, bleiben gelieferte Datensätze und der Fortschritt
+  erhalten.
 
 ## Task-Beispiele
 
@@ -122,9 +117,9 @@ Standard.
 Widersprüchliche Quell-Flags lassen niemals einen falschen Wert einen
 tatsächlichen Verifizierungsstatus verdecken.
 
-Betrachterbezogener Status gehört zum Abrufkonto von Xquik, nicht zu deinem
-Dataset. Follow-, Block-, Mute-, DM-, Benachrichtigungs- und ähnliche
-Betrachter-Flags werden immer entfernt, auch aus der Rohausgabe.
+Datensätze enthalten nie betrachterbezogenen Status. Folgen-, Blockieren-,
+Stummschalten-, DM-, Benachrichtigungs- und ähnliche Betrachter-Flags werden
+immer entfernt, auch aus der Raw-Ausgabe.
 
 ## Was kostet es, X-Follower zu scrapen?
 
@@ -138,22 +133,19 @@ Jedes Ergebnis schreibt `run-report`, auch Abbrüche ohne Eingabe und mit
 ungültiger Eingabe. Das Feld `version` darin gibt die exakte veröffentlichte
 Actor-Quellversion an.
 
-`failedTargets` zählt Ziele, die nach einem Lesefehler abgebrochen wurden.
-Akzeptierte Profile bleiben abrechenbare Datensätze. Diese Runs nutzen
-`completionReason: "partial_failure"`. Schnelle serverseitige Paginierung
-folgt demselben Berichtsvertrag.
+`failedTargets` zählt Ziele, die nach einem Fehler abgebrochen sind. Gelieferte
+Profile bleiben abrechenbare Datensätze. Diese Runs verwenden
+`completionReason: "partial_failure"`.
 
-Das Standard-Apify-Zeitlimit ist `0`. Runs haben kein Zeitlimit. Der Actor
-folgt jedem Live-Cursor bis zur Obergrenze oder zum Ende der Quelle. Ein
-Aufrufer kann dennoch ein endliches Zeitlimit setzen. Dann bedeutet
-`completionReason: "deadline_reached"`, dass dieses Limit nahe ist. Der
-Actor reserviert die letzten 15 Sekunden für Checkpoints, Datensätze,
-Reports und einen sauberen Abschluss. Gültige Profile bleiben geliefert und
-werden einmal abgerechnet. Unvollständige Paginierung bleibt fortsetzbar.
+Das Standard-Apify-Zeitlimit ist `0`. Runs haben kein Zeitlimit. Der Actor läuft
+weiter, bis er das Limit erreicht oder keine Profile mehr findet. Du kannst
+trotzdem ein endliches Zeitlimit setzen. Dann bedeutet
+`completionReason: "deadline_reached"`, dass dieses Limit nahe ist. Der Actor
+speichert Profile und Bericht und beendet sich vor dem Limit sauber. Gelieferte
+Profile werden einmal abgerechnet.
 
-Unabhängige Ziele laufen gleichzeitig. Jedes Ziel behält eine geordnete
-Cursor-Paginierung. Dataset-Schreibvorgänge halten Obergrenzen,
-Deduplizierung, Zuordnung und Abrechnung atomar.
+Ein Run kann viele Ziele lesen. Limits, Deduplizierung, Zuordnung und Abrechnung
+bleiben über alle hinweg exakt.
 
 - Starts, Ziele und Beziehungsauswahl verursachen keine separate
   Suchgebühr.
@@ -575,41 +567,35 @@ Webhooks und einen MCP-Server.
 
 ## FAQ
 
-**Brauche ich einen X-API-Schlüssel?** Nein. Dieser Scraper nutzt seine
-eigene Infrastruktur. Kein Login oder Zugangsdaten erforderlich.
+**Brauche ich einen X-API-Schlüssel?** Nein. Du brauchst keinen X-API-Schlüssel,
+keinen Login und keine Zugangsdaten.
 
 **Was begrenzt einen Run?** Dein angefordertes Item-Limit und das
 Apify-Ausgabenlimit stoppen den Run. Apify-Konto- und Plattformlimits
 gelten weiterhin.
 
-**Wie schnell ist es?** Die Laufzeit hängt von der Zielgröße, den Filtern
-und der Verfügbarkeit der Quelle ab. Tief gefilterte Runs checkpointen den
-Console-Fortschritt alle 5 Seiten. Das reduziert Nicht-Daten-Traffic
-zwischen den Seitenabrufen.
+**Wie schnell ist es?** Die Laufzeit hängt von der Zielgröße, den Filtern und
+der Verfügbarkeit von X ab.
 
 **Warum liefert mein Run weniger Datensätze als `maxItems`?** Filter wie
 `minFollowers`, `verifiedOnly` und `bioContains` greifen vor dem Schreiben.
 Lockere die Filter, um mehr Ergebnisse zu erhalten.
 
-**Wie viele Follower kann ich von einem einzelnen Account scrapen?** X
-paginiert große Accounts in Batches. Erhöhe das Apify-Zeitlimit für den Run,
-um mehr Seiten abzurufen. `maxItemsPerTarget` begrenzt nur jedes einzelne
-Ziel.
+**Wie viele Follower kann ich von einem einzelnen Account scrapen?** So viele,
+wie X für diesen Account zeigt. Der Run läuft bis zu deinem Limit, deinem
+Ausgabenlimit oder dem Ende der Liste. `maxItemsPerTarget` begrenzt nur jedes
+einzelne Ziel.
 
-**Wiederholt der Actor vorübergehende Fehler?** Ja. Er unternimmt bis zu 3
-Versuche pro Seite bei Timeouts, 429- und 5xx-Antworten. Er beachtet
-`Retry-After`, sofern vorhanden. Andernfalls nutzt er exponentiellen
-Backoff. Harte Fehler erhalten Teilergebnisse.
+**Wiederholt der Actor vorübergehende Fehler?** Ja. Er erholt sich selbst von
+vorübergehenden X-Fehlern. Bei harten Fehlern bleiben Teilergebnisse erhalten.
 
-**Was passiert kurz vor dem Apify-Zeitlimit für den Run?** Der Actor fügt
-kein kürzeres eigenes Zeitlimit hinzu. Er nutzt das von Apify konfigurierte
-Limit und reserviert die letzten 15 Sekunden für den Abschluss. Er schreibt
-Profile, checkpointet die Paginierung, schreibt den Report und beendet sich.
-Vom Dataset nicht akzeptierte Datensätze werden nicht abgerechnet.
+**Was passiert kurz vor dem Apify-Zeitlimit für den Run?** Der Actor setzt keine
+eigene, kürzere Frist. Vor deinem Limit speichert er Profile, schreibt den
+Bericht und beendet sich. Datensätze, die nie im Dataset ankommen, werden nicht
+abgerechnet.
 
-**Kann ich dort fortsetzen, wo ich aufgehört habe?** Eine Cursor-Eingabe
-zur Fortsetzung ist noch nicht verfügbar. Ein erneuter Run desselben Ziels
-startet bei dessen erster verfügbarer Seite.
+**Kann ich dort fortsetzen, wo ich aufgehört habe?** Noch nicht. Ein erneuter
+Run desselben Ziels beginnt von vorn.
 
 **Kann ich die Apify-API nutzen, um dies auszuführen?** Ja. Siehe den
 [API-Tab](https://apify.com/xquik/x-follower-scraper/api) für

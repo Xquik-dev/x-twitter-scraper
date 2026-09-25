@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，拥有最完整的 X 数据。X (Twitter) Stock & Crypto AI Trading Signals 会将推文转化为针对每个股票代码或币种的看涨、看跌、中性或混合立场。其他所有 Apify Actor 都会在过滤或去重之前收费。Xquik 只对已交付、唯一且符合过滤条件的结果收费。AI 费用已包含在每条推文的价格中。你无需向 AI 提供商付费、无需购买 token，也无需自带密钥。
+Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，拥有最完整的 X 数据。X (Twitter) Stock & Crypto AI Trading Signals 会将推文转化为针对每个股票代码或币种的看涨、看跌、中性或混合立场。其他所有 Apify Actor 都会在过滤或去重之前收费。Xquik 只对已交付、唯一且符合过滤条件的结果收费。AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
 
 在 X（Twitter）上读取股票、加密货币和交易相关帖子背后的立场，同时保留原始推文数据。**X (Twitter) Stock & Crypto AI Trading Signals** 会收集与你的股票代码或资产相关的帖子。然后它会为每条帖子添加由 AI 生成的立场、内容类型、信心程度和资产相关性。它能将明确的判断与含糊其辞的言论区分开，将分析与推广区分开，将谈论你所关注资产的帖子与仅仅提到同名词但无关的用法区分开。
 
@@ -75,7 +75,7 @@ Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，拥�
 
 ## 定价
 
-AI 费用已包含在每条推文的价格中。你无需向 AI 提供商付费、无需购买 token，也无需自带密钥。
+AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
 
 每条成功分析的推文低至 $0.0003，无启动费。价格已包含数据收集。分析额度为每条推文 8 个问题、每个问题定义 8,000 字节、上下文 12,000 字节。提取过滤和去重会在分析之前执行，因此被过滤掉或重复的行不会被分析，也不会计费。分析失败、被跳过的分析以及诊断行不产生结果费用。Apify 会单独收取平台使用费。Pricing 标签页会显示该费用。
 
@@ -123,7 +123,7 @@ AI 费用已包含在每条推文的价格中。你无需向 AI 提供商付费�
 
 ## 与更早的运行进行比较
 
-传入 `monitor.baselineDatasetId`，即一次采用相同分析设置且已完成的更早运行的数据集 ID。每一行就会新增一个 `monitor` 对象。其状态在没有基线时为 `first_run`，基线中不存在该推文时为 `new_to_baseline`，基线中存在该推文时为 `unchanged` 或 `changed`。`changes` 会列出每一项从 `previous` 变为 `current` 的立场、内容类型或信心程度。比较时按类别、四舍五入后的评分等级或以 0.5 为界的是/否值进行判断。有三种情况会计为已变化。此前的类别概率低于 0.4。评分变化至少 0.6 个等级。是/否概率与阈值的距离至少达到 0.1。运行之间的临界抖动仍视为未变化。超过 `maxBaselineRows`（默认 100,000）的基线，或来自不同设置的基线，会在数据收集开始前停止运行，并写入一条诊断记录。
+传入 `monitor.baselineDatasetId`，即一次采用相同分析设置且已完成的更早运行的数据集 ID。每一行就会新增一个 `monitor` 对象。其状态在没有基线时为 `first_run`，基线中不存在该推文时为 `new_to_baseline`，基线中存在该推文时为 `unchanged` 或 `changed`。`changes` 会列出每一项从 `previous` 变为 `current` 的立场、内容类型或信心程度。比较时按类别、四舍五入后的评分等级或以 0.5 为界的是/否值进行判断。只有判断发生明显变化时才计为已更改。运行之间的临界抖动仍视为未变化。超过 `maxBaselineRows`（默认 100,000）的基线，或来自不同设置的基线，会在数据收集开始前停止运行，并写入一条诊断记录。
 
 ## 任务示例
 
@@ -179,7 +179,7 @@ Actor 页面上还有更多涵盖其他品牌、主题和市场的任务。
 
 ### 为什么某一行返回的 `analysis.status` 是 `failed` 或 `skipped`？
 
-Actor 已收集并交付该推文，但 AI 分析未能完成。`analysis.reason` 会说明原因，例如推文及其上下文超过 `maxContextBytes` 时的 `context_limit`，或重试后仍失败的 `service_unavailable`。这些行不产生结果费用。可以提高 `maxContextBytes`（最高 12,000），或重新运行受影响的 ID。
+Actor 已收集并交付该推文，但 AI 分析未能完成。`analysis.reason` 会说明原因，例如推文及其上下文超过 `maxContextBytes` 时的 `context_limit`，或分析服务暂时不可用时的 `service_unavailable`。这些行不产生结果费用。可以提高 `maxContextBytes`（最高 12,000），或重新运行受影响的 ID。
 
 ### 该分析会核实事实吗？
 

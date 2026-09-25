@@ -30,7 +30,8 @@ login X.
 I filtri vengono applicati prima della scrittura nel dataset. Paghi solo le
 righe consegnate.
 
->
+> Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
+> "Twitter" e "X" sono marchi di X Corp.
 
 ## Estrazione incompleta
 
@@ -45,10 +46,6 @@ Il messaggio di stato nomina ogni causa di un'interruzione anticipata.
 `deadline_reached`. `reply_reach` significa che X ha fornito solo una parte
 di un thread. L'esecuzione è `retryable` quando lo è almeno una causa.
 
-Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
-
-> "Twitter" e "X" sono marchi di X Corp.
-
 ## Cosa fa questo scraper di risposte Twitter?
 
 X Reply Scraper raccoglie risposte pubbliche e conversazioni di commenti.
@@ -61,14 +58,11 @@ moderazione e i dataset di conversazioni.
 
 ### Comportamento della raccolta delle risposte
 
-- La modalità automatica passa dai risultati diretti incompleti alla ricerca
-  per conversazione.
-- Le pagine automatiche delle risposte ai tweet richiedono fino a 300 righe.
-- Quattro strategie coprono risposte dirette, ricerca e contesto del thread.
+- La modalità automatica continua a raccogliere quando i risultati diretti sono
+  incompleti.
+- `collectionStrategy` offre 4 modalità per diversi lavori sulle risposte.
 - Gli input in blocco accettano URL di post, ID dei tweet, profili e
   username.
-- I target di profilo combinano timeline e ricerca per autore quando
-  entrambi si applicano.
 - Filtri e rimozione dei duplicati vengono eseguiti prima della
   fatturazione.
 - L'output supporta 4 modalità di ordinamento, 3 livelli di dettaglio e 3
@@ -77,11 +71,11 @@ moderazione e i dataset di conversazioni.
   la profondità.
 - I cursori di continuazione supportano backfill ed esecuzioni pianificate.
 - Le esecuzioni vuote scrivono 1 record gratuito in `diagnostics`.
-- I log di pagina e di target includono `fetchDurationMs`,
-  `processingDurationMs`, `pushDurationMs`, `statusDurationMs`,
-  `fullPageDurationMs` e `fullTargetDurationMs` senza ripetere gli input.
-- I checkpoint conservano le risposte accettate, i tempi e gli errori dopo i
-  riavvii.
+- I log dell'esecuzione mostrano i tempi per pagina e per target in
+  `fetchDurationMs`, `processingDurationMs`, `pushDurationMs`,
+  `statusDurationMs`, `fullPageDurationMs` e `fullTargetDurationMs`.
+- Se Apify riavvia l'esecuzione, le risposte consegnate e i progressi restano
+  salvati.
 
 ### Usa sempre la build più recente
 
@@ -101,11 +95,10 @@ numeri fissati con `latest`. Usa build esatte solo per rollback temporanei.
 
 ## Avvio rapido
 
-Il modulo iniziale ha come target una conversazione pubblica verificata.
-Restituisce fino a 25 righe complete e piatte su un massimo di 10 pagine. La
-modalità automatica cerca per impostazione predefinita nell'intera
-conversazione. La deduplicazione e l'attribuzione della fonte restano
-attive.
+Il modulo iniziale punta a una conversazione pubblica verificata. Restituisce
+fino a 25 righe complete e flat. La modalità automatica cerca l'intera
+conversazione per impostazione predefinita. Deduplicazione e attribuzione della
+fonte restano attive.
 
 ### Estrai risposte da un URL di post
 
@@ -203,8 +196,8 @@ Usa i campi principali sotto elencati.
 | ------------- | ------------------------------------------------- |
 | `startUrls`   | URL misti di post e profili X                     |
 | `tweetIds`    | ID numerici dei post                              |
-| `usernames`   | Timeline di profilo con ricerca per autore         |
-| `startCursor` | Riprendi un target da un cursore di origine salvato |
+| `usernames`   | Timeline delle risposte dei profili                |
+| `startCursor` | Riprendi un target da un cursore salvato          |
 
 Il modulo visivo mostra solo i controlli canonici. Gli alias di
 compatibilità restano disponibili in JSON, API, SDK, automazione e input di
@@ -227,38 +220,32 @@ Gli alias di compatibilità accettano input comuni della concorrenza:
 I target malformati o non supportati non fanno fallire l'Actor. L'esecuzione
 restituisce una diagnostica utile quando non resta alcun target valido.
 
-I target di profilo combinano la paginazione tramite cursore con la ricerca
-per autore. L'Actor rimuove le righe duplicate prima dell'output e della
-fatturazione. I cursori legacy salvati mantengono la paginazione standard.
+L'Actor rimuove le righe duplicate prima dell'output e della fatturazione.
 
 ## Strategie di copertura
 
 ### Completamento automatico
 
-Usa `collectionStrategy: "auto"` per la maggior parte dei lavori. Gli ambiti
-completi o annidati iniziano con un'estrazione completa delle risposte. I
-controlli di ambito, profondità, ordinamento e autore si applicano prima dei
-limiti di risposta. L'estrazione include i discendenti sotto i target non
-radice. L'estrazione incompleta conserva le righe prima di provare la
-ricerca per conversazione e le risposte dirette. Un post con tutte le fonti
-terminate salta questi passaggi, perché X nasconde il resto. Il messaggio di
-stato indica poi quante risposte nasconde X. Gli ambiti diretti passano alla
-ricerca quando necessario. Le pagine non completate mantengono la loro
-continuazione. Le strategie esplicite non passano mai ad altre.
+Usa `collectionStrategy: "auto"` per la maggior parte dei lavori. Raccoglie ogni
+risposta che riesce a raggiungere per il tuo ambito. I controlli di ambito,
+profondità, ordinamento e autore si applicano prima dei tuoi limiti. Sono
+incluse le risposte sotto target non radice. Quando X nasconde parte di un
+thread, lo stato indica quante risposte X nasconde. Gli altri valori di
+`collectionStrategy` non cambiano mai modalità.
 
-La soglia di copertura diagnostica non dimostra l'esaurimento della fonte.
-Pagine bloccate, limiti, dati mancanti o errori mantengono il recupero
-incompleto.
+Un valore di copertura nella diagnostica non dimostra che X non abbia altre
+risposte. Limiti, dati mancanti o errori possono lasciare un'esecuzione
+incompleta.
 
-### Endpoint di risposta diretta
+### Risposte dirette
 
-Usa `collectionStrategy: "replies"` per forzare la timeline di risposta di
-X. Mantiene l'ordinamento della fonte e supporta i cursori.
+Usa `collectionStrategy: "replies"` per le risposte dirette nell'ordine di X.
+Supporta i cursori salvati.
 
 ### Ricerca per conversazione
 
-Usa `collectionStrategy: "conversationSearch"` per una copertura ampia della
-conversazione. L'Actor cerca tramite `conversation_id:<ID del tweet>`.
+Usa `collectionStrategy: "conversationSearch"` per un'ampia copertura della
+conversazione.
 
 ### Contesto completo del thread
 
@@ -342,9 +329,8 @@ Usa `minLikes`, `minReplies`, `minRetweets`, `minQuotes`, `minViews` e
 `maxItems` limita le righe consegnate nell'intera esecuzione.
 `maxItemsPerTarget` limita ogni post o profilo.
 
-I target indipendenti vengono eseguiti in parallelo. Ogni target mantiene la
-paginazione ordinata tramite cursore. Le scritture nel dataset mantengono
-atomici limiti, deduplicazione, attribuzione e fatturazione.
+Un'esecuzione può leggere molti target. Limiti, deduplicazione, attribuzione e
+fatturazione restano esatti su tutti.
 
 L'Actor rimuove i duplicati prima della fatturazione. Imposta
 `dedupeAcrossTargets: false` per conservare le righe duplicate provenienti
@@ -468,19 +454,17 @@ Ogni piano Apify costa **$0.00015 per riga consegnata**. Equivale a
 `$0.00015` per riga. Apify addebita separatamente l'utilizzo della
 piattaforma.
 
-Xquik applica un addebito per ogni riga di dati consegnata. Le diagnostiche
-sono gratuite in `diagnostics`. Non si applica alcuna commissione di avvio,
-URL, query, paginazione, filtro o proxy.
+Xquik applica un addebito per ogni riga di dati consegnata. La diagnostica è
+gratuita in `diagnostics`. Nessuna tariffa di avvio, URL, query, paginazione o
+filtro.
 
-Il timeout predefinito di Apify è `0`, quindi le esecuzioni non hanno limite
-di tempo. L'Actor continua finché non raggiunge il limite o
-esaurisce i dati idonei. Chi effettua la chiamata può comunque
-impostare un timeout Apify finito. In quel caso
-`completionReason: "deadline_reached"` significa che quel limite configurato
-è vicino. L'Actor riserva gli ultimi 15 secondi per checkpoint, righe,
-report e un'uscita riuscita. Le risposte già raccolte restano consegnate e
-vengono fatturate una sola volta. La paginazione non completata resta
-ripristinabile.
+Il timeout Apify predefinito è `0`, quindi le esecuzioni non hanno limite di
+tempo. L'Actor continua finché non raggiunge il limite o esaurisce i dati
+idonei. Puoi comunque impostare un timeout Apify finito. In tal caso
+`completionReason: "deadline_reached"` significa che quel limite è vicino.
+L'Actor salva le risposte e il report, poi termina correttamente prima del
+limite. Le risposte consegnate vengono fatturate una sola volta. I target non
+completati restano riprendibili.
 
 ## Esempi di task pubblici
 
@@ -564,8 +548,8 @@ I dataset di risposte possono contenere dati personali. Scegli uno scopo
 lecito. Riduci al minimo la conservazione. Proteggi le esportazioni. Rispetta
 le richieste di cancellazione e di accesso quando previsto.
 
-L'Actor non aggira gli account protetti. Non richiede password, cookie di
-sessione o token di autenticazione X dei clienti.
+L'Actor non aggira gli account protetti. Non chiede mai la tua password X,
+cookie o token.
 
 ## Actor Xquik correlati
 

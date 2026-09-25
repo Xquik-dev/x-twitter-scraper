@@ -28,7 +28,8 @@ pour **à partir de $0.00015 par profil livré sur chaque plan Apify**. Apify
 facture séparément l'usage de sa plateforme. Aucune connexion X, ni frais de
 démarrage, ni frais de requête.
 
->
+> Xquik est un service tiers indépendant. Non affilié à X Corp.
+> « Twitter » et « X » sont des marques déposées de X Corp.
 
 ## Extraction incomplète
 
@@ -36,10 +37,6 @@ Une extraction interrompue écrit un diagnostic `partial` gratuit. Les
 résultats disponibles restent intacts. Consultez `availableResults`,
 `failedTargets`, `retryable` et `nextAction` avant de relancer. Une sortie
 d'Actor réussie confirme la livraison, pas l'extraction complète.
-
-Xquik est un service tiers indépendant. Non affilié à X Corp.
-
-> « Twitter » et « X » sont des marques déposées de X Corp.
 
 ## Que fait X Follower Scraper ?
 
@@ -55,14 +52,11 @@ inclut sa cible source et sa relation.
   courts.
 - Le mode fusion enregistre les profils partagés, les sources, les
   relations et `overlapCount`.
-- Les curseurs automatiques demandent jusqu'à 300 profils par page.
-- Les curseurs plus anciens conservent leur limite de 200 profils et
-  redémarrent quand ils expirent.
-- Les logs de page incluent `fetchDurationMs`, `processingDurationMs`,
-  `pushDurationMs`, `statusDurationMs` et `fullPageDurationMs` sans répéter
-  les cibles.
-- Les points de contrôle préservent les lignes acceptées, la durée et les
-  compteurs d'échec après un redémarrage.
+- Les journaux du run affichent la durée de chaque page dans `fetchDurationMs`,
+  `processingDurationMs`, `pushDurationMs`, `statusDurationMs` et
+  `fullPageDurationMs`.
+- Si Apify redémarre un run, les lignes livrées et la progression sont
+  conservées.
 
 ## Exemples de tâches
 
@@ -126,10 +120,9 @@ Réglez `outputMode: "raw"` ou `includeRaw: true` pour inclure une copie
 indicateurs source contradictoires ne laissent jamais une valeur fausse
 masquer un état de vérification vrai.
 
-L'état relatif au visualiseur appartient au compte de récupération de Xquik,
-pas à votre dataset. Les indicateurs de suivi, blocage, mise en sourdine,
-DM, notification et autres indicateurs relatifs au visualiseur sont toujours
-retirés, y compris de la sortie brute.
+Les lignes n'incluent jamais d'état propre au visualiseur. Les indicateurs
+d'abonnement, de blocage, de sourdine, de DM, de notification et similaires sont
+toujours retirés, y compris de la sortie raw.
 
 ## Combien coûte le scraping des abonnés X ?
 
@@ -143,23 +136,19 @@ réel qu'Apify expose à l'Actor. Chaque issue de run écrit `run-report`, y
 compris les sorties sans entrée et avec entrée invalide. Son champ
 `version` indique la version exacte du code source publié de l'Actor.
 
-`failedTargets` compte les cibles arrêtées après un échec de lecture. Les
-profils acceptés restent des lignes de donnée facturables. Ces runs
-utilisent `completionReason: "partial_failure"`. La pagination rapide
-côté serveur suit le même contrat de reporting.
+`failedTargets` compte les cibles arrêtées après une erreur. Les profils livrés
+restent des lignes de données facturables. Ces runs utilisent
+`completionReason: "partial_failure"`.
 
-Le délai d'expiration Apify par défaut est `0`. Les runs n'ont pas de
-limite de temps. L'Actor suit chaque curseur en direct jusqu'au plafond ou
-jusqu'à la fin de la source. Un appelant peut néanmoins fixer un délai fini.
-Alors `completionReason: "deadline_reached"` signifie que cette limite est
-proche. L'Actor réserve les 15 dernières secondes pour les points de
-contrôle, les lignes, les rapports et une sortie propre. Les profils
-valides restent livrés et facturés une seule fois. La pagination inachevée
-reste reprenable.
+Le délai d'expiration Apify par défaut est `0`. Les runs n'ont pas de limite de
+temps. L'Actor continue jusqu'à atteindre le plafond ou épuiser les profils.
+Vous pouvez néanmoins fixer un délai fini. Alors
+`completionReason: "deadline_reached"` signifie que cette limite est proche.
+L'Actor enregistre les profils et le rapport, puis se termine proprement avant
+la limite. Les profils livrés sont facturés une seule fois.
 
-Les cibles indépendantes s'exécutent en parallèle. Chaque cible conserve
-une pagination de curseur ordonnée. Les écritures de dataset gardent les
-plafonds, la déduplication, l'attribution et la facturation atomiques.
+Un run peut lire de nombreuses cibles. Les plafonds, la déduplication,
+l'attribution et la facturation restent exacts sur l'ensemble.
 
 - Les démarrages, cibles et sélections de relation n'ajoutent aucun frais
   de requête séparé.
@@ -603,44 +592,36 @@ webhooks signés et un serveur MCP.
 
 ## FAQ
 
-**Ai-je besoin d'une clé API X ?** Non. Ce scraper utilise sa propre
-infrastructure. Aucune connexion ni identifiant requis.
+**Ai-je besoin d'une clé API X ?** Non. Vous n'avez besoin ni de clé API X, ni
+de connexion, ni d'identifiants.
 
 **Qu'est-ce qui limite un run ?** Votre limite d'éléments demandée et
 votre limite de dépense Apify arrêtent le run. Les limites de compte et de
 plateforme Apify s'appliquent toujours.
 
 **Quelle est sa vitesse ?** Le temps d'exécution dépend de la taille de la
-cible, des filtres et de la disponibilité en amont. Les runs filtrés en
-profondeur enregistrent un point de contrôle dans la Console toutes les 5
-pages. Cela réduit le trafic non lié aux données entre les récupérations
-de page.
+cible, des filtres et de la disponibilité de X.
 
 **Pourquoi mon run renvoie-t-il moins de lignes que `maxItems` ?** Des
 filtres tels que `minFollowers`, `verifiedOnly` et `bioContains`
 s'appliquent avant l'écriture. Assouplissez les filtres pour obtenir plus
 de résultats.
 
-**Combien d'abonnés puis-je scraper depuis un seul compte ?** X pagine les
-grands comptes par lots. Augmentez la limite de temps de run d'Apify pour
-récupérer plus de pages. `maxItemsPerTarget` ne plafonne que chaque cible.
+**Combien d'abonnés puis-je scraper depuis un seul compte ?** Autant que X en
+affiche pour ce compte. Le run continue jusqu'à votre plafond, votre limite de
+dépense ou la fin de la liste. `maxItemsPerTarget` plafonne seulement chaque
+cible.
 
-**L'Actor relance-t-il les échecs temporaires ?** Oui. Il fait jusqu'à 3
-tentatives par page pour les délais d'attente, les 429 et les réponses
-5xx. Il respecte `Retry-After` quand présent. Sinon, il utilise un
-backoff exponentiel. Les échecs définitifs préservent les résultats
-partiels.
+**L'Actor relance-t-il les échecs temporaires ?** Oui. Il se rétablit seul des
+erreurs temporaires de X. Les échecs graves conservent les résultats partiels.
 
-**Que se passe-t-il près de la limite de temps de run Apify ?** L'Actor
-n'ajoute pas de délai de run plus court. Il utilise la limite configurée
-d'Apify et garde les 15 dernières secondes pour la finalisation. Il vide
-les profils, enregistre un point de contrôle de la pagination, écrit le
-rapport et sort. Les lignes non acceptées par le dataset ne sont pas
-facturées.
+**Que se passe-t-il près de la limite de temps de run Apify ?** L'Actor n'ajoute
+aucune échéance plus courte. Avant votre limite, il enregistre les profils,
+écrit le rapport et se termine. Les lignes qui n'atteignent jamais le dataset ne
+sont pas facturées.
 
-**Puis-je reprendre là où je m'étais arrêté ?** L'entrée de curseur de
-reprise n'est pas encore exposée. Relancer la même cible démarre depuis sa
-première page disponible.
+**Puis-je reprendre là où je m'étais arrêté ?** Pas encore. Relancer la même
+cible repart du début.
 
 **Puis-je utiliser l'API Apify pour l'exécuter ?** Oui. Consultez
 l'[onglet API](https://apify.com/xquik/x-follower-scraper/api) pour des

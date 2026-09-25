@@ -16,12 +16,11 @@
 </td></tr></table>
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
-den umfassendsten X-Daten. X Tweet Sentiment Analysis ergänzt jeden Tweet
-um Haltung, Intensität & Sarkasmus. Jeder andere Apify Actor berechnet, bevor
+den umfassendsten X-Daten. X Tweet Sentiment Analysis ergänzt jeden Tweet um
+Haltung, Intensität & Sarkasmus. Jeder andere Apify Actor berechnet, bevor
 gefiltert oder dedupliziert wird. Xquik berechnet nur für gelieferte,
 eindeutige, filterkonforme Ergebnisse. Die KI-Kosten sind im Preis pro Tweet
-enthalten. Du bezahlst keinen KI-Anbieter, kaufst keine Tokens & bringst
-keinen Schlüssel mit.
+enthalten. Du brauchst kein KI-Konto, keine Tokens und keinen Schlüssel.
 
 Miss die Haltung hinter X-(Twitter-)Beiträgen & behalte die ursprünglichen
 Tweet-Daten. **X Tweet Sentiment Analysis with AI** sammelt passende Tweets
@@ -90,7 +89,8 @@ oder Notizen. Der Actor analysiert ihn & ruft nichts von X ab.
 
 ## Preise
 
-Die KI-Kosten sind im Preis pro Tweet enthalten. Du bezahlst keinen KI-Anbieter, kaufst keine Tokens & bringst keinen Schlüssel mit.
+Die KI-Kosten sind im Preis pro Tweet enthalten. Du brauchst kein KI-Konto,
+keine Tokens und keinen Schlüssel.
 
 Ab $0.0003 pro erfolgreich analysiertem Tweet, ohne Startgebühr. Der
 Preis enthält die Erfassung. Das Analyse-Kontingent umfasst 8
@@ -164,20 +164,17 @@ leere Zuordnung.
 ## Mit einem früheren Run vergleichen
 
 Übergib `monitor.baselineDatasetId`, die Dataset-ID eines abgeschlossenen
-früheren Runs mit denselben Analyseeinstellungen. Jeder Datensatz erhält
-dann ein `monitor`-Objekt. Sein Status ist `first_run` ohne Baseline,
-`new_to_baseline` für Tweets, die der frühere Run nicht hatte, &
-`unchanged` oder `changed` für Tweets, die er hatte. `changes` listet
-jede Sentiment-, Intensitätsstufen- oder Sarkasmus-Entscheidung, die sich
-von `previous` zu `current` geändert hat. Entscheidungen werden nach
-Kategorie, gerundeter Score-Stufe oder Ja/Nein bei 0,5 verglichen. Eine
-Entscheidung zählt in drei Fällen als geändert. Die frühere Kategorie
-fällt unter eine Wahrscheinlichkeit von 0,4. Ein Score bewegt sich um
-mindestens 0,6 Stufen. Eine Ja/Nein-Wahrscheinlichkeit landet mindestens
-0,1 vom Schwellenwert entfernt. Fast unentschiedenes Rauschen zwischen Runs
-bleibt unverändert. Baselines über `maxBaselineRows` (Standard: 100.000)
-oder aus abweichenden Einstellungen stoppen den Run vor der Erfassung mit
-einem Diagnose-Datensatz.
+früheren Runs mit denselben Analyseeinstellungen. Jeder Datensatz erhält dann
+ein `monitor`-Objekt. Sein Status ist `first_run` ohne Baseline,
+`new_to_baseline` für Tweets, die der frühere Run nicht hatte, & `unchanged`
+oder `changed` für Tweets, die er hatte. `changes` listet jede Sentiment-,
+Intensitätsstufen- oder Sarkasmus-Entscheidung, die sich von `previous` zu
+`current` geändert hat. Entscheidungen werden nach Kategorie, gerundeter
+Score-Stufe oder Ja/Nein bei 0,5 verglichen. Eine Entscheidung zählt nur als
+geändert, wenn sie sich deutlich bewegt. Fast unentschiedenes Rauschen zwischen
+Runs bleibt unverändert. Baselines über `maxBaselineRows` (Standard: 100.000)
+oder aus abweichenden Einstellungen stoppen den Run vor der Erfassung mit einem
+Diagnose-Datensatz.
 
 ## Task-Beispiele
 
@@ -281,13 +278,12 @@ mindestens 2 geordneten Stufen.
 
 ### Warum kam ein Datensatz mit `analysis.status` `failed` oder `skipped` zurück?
 
-Der Actor hat den Tweet gesammelt & geliefert, aber die KI-Analyse
-wurde nicht abgeschlossen. `analysis.reason` nennt die Ursache, etwa
-`context_limit`, wenn der Tweet & sein Kontext `maxContextBytes`
-überschreiten, oder `service_unavailable` nach Wiederholungsversuchen.
-Diese Datensätze verursachen keine Ergebnisgebühr. Erhöhe
-`maxContextBytes` (bis zu 12.000) oder führe die betroffenen IDs erneut
-aus.
+Der Actor hat den Tweet gesammelt & geliefert, aber die KI-Analyse wurde nicht
+abgeschlossen. `analysis.reason` nennt die Ursache, etwa `context_limit`, wenn
+der Tweet & sein Kontext `maxContextBytes` überschreiten, oder
+`service_unavailable`, wenn der Analysedienst kurz nicht verfügbar ist. Diese
+Datensätze verursachen keine Ergebnisgebühr. Erhöhe `maxContextBytes` (bis zu
+12.000) oder führe die betroffenen IDs erneut aus.
 
 ### Prüft die Analyse Fakten?
 

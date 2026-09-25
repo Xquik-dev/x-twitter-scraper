@@ -75,10 +75,9 @@ Beispielwerte. Ergebnisse spiegeln Live-Daten.
 
 ## Wiederherstellung und Grenzen
 
-Unabhängige Standorte laufen gleichzeitig. Cursor-Zustand, akzeptierte
-Datensätze, Abrechnungsstatus und Ausgabe-Fingerprints überstehen eine
-Apify-Migration. Der Actor hat kein eigenes Zeitlimit für den Run. Ein vom
-Aufrufer gesetztes Apify-Zeitlimit wird weiterhin eingehalten.
+Ein Run kann viele Standorte lesen. Gelieferte Datensätze und der Fortschritt
+überstehen einen Apify-Neustart. Der Actor setzt kein eigenes Zeitlimit. Ein von
+dir gesetztes Apify-Zeitlimit gilt weiterhin.
 
 ## Unvollständige Extraktion
 

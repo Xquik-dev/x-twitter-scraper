@@ -67,8 +67,7 @@ France、Germany、India、Indonesia、Japan、Mexico 与 Australia。其他受�
 
 ## 恢复与限制
 
-独立位置会并发运行。游标状态、已接受的行、计费状态与输出指纹在 Apify 迁移后依然保留。
-该 Actor 没有自设的运行超时限制。调用方提供的 Apify 超时设置仍会被遵守。
+一次运行可以读取多个地区。Apify 重启运行后，已交付的行和进度都会保留。Actor 不会自行添加时间限制，但会遵守你设置的任何 Apify 超时。
 
 ## 未完成的提取
 

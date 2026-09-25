@@ -20,7 +20,7 @@ most complete X data. X (Twitter) Brand Monitoring tracks your brand mentions
 with relevance, sentiment & customer-experience answers. Every other Apify Actor
 charges before filtering or deduplicating. Xquik charges only for delivered,
 unique, filter-matching results. AI costs are included in the per-tweet price.
-You pay no AI provider, buy no tokens & bring no key.
+You need no AI account, tokens or key.
 
 Monitor brand mentions on X (Twitter) & track sentiment changes between runs.
 **X (Twitter) Brand Monitoring with AI Analysis** collects every matching tweet.
@@ -100,14 +100,12 @@ the author's expressed attitude toward the target.
 
 Answers compare by decision. A `choice` answer compares by its category. A
 `score` answer compares by its nearest level. A `probability` answer compares by
-its yes-or-no decision at 0.5. A decision counts as changed in three cases. The
-earlier category falls below 0.4 probability. A score moves at least 0.6 levels.
-A yes/no probability lands at least 0.1 from the threshold. Near ties between
-runs stay `unchanged`, & so do shifts that keep the same decision. Model
-variation between runs does not fill your report. `changes` lists each changed
-question with its `previous` & `current` decision. Changes may come from model
-variation, new context or edited source data. They do not prove changed facts, &
-an absent tweet does not prove deletion.
+its yes-or-no decision at 0.5. A decision counts as changed only when it moves
+clearly. Near ties between runs stay `unchanged`, & so do shifts that keep the
+same decision. Model variation between runs does not fill your report. `changes`
+lists each changed question with its `previous` & `current` decision. Changes
+may come from model variation, new context or edited source data. They do not
+prove changed facts, & an absent tweet does not prove deletion.
 
 The baseline limit defaults to 100,000 rows. Duplicate tweet IDs, loading
 failures & changing dataset sizes stop comparison before collection. They never
@@ -134,8 +132,8 @@ analyzes it & fetches nothing from X.
 
 ## Pricing
 
-AI costs are included in the per-tweet price. You pay no AI provider, buy no
-tokens & bring no key.
+AI costs are included in the per-tweet price. You need no AI account, tokens or
+key.
 
 From $0.0003 per successfully analyzed tweet, with no start fee. The price
 includes collection. The analysis allowance is 8 questions, 8,000 bytes per
@@ -308,9 +306,9 @@ want to compare.
 
 The Actor collected & delivered the tweet, but the AI analysis did not complete.
 `analysis.reason` names the cause, such as `context_limit` when the tweet & its
-context exceed `maxContextBytes`, or `service_unavailable` after retries. These
-rows carry no result charge. Raise `maxContextBytes` (up to 12,000) or rerun the
-affected IDs.
+context exceed `maxContextBytes`, or `service_unavailable` when the analysis
+service is briefly unavailable. These rows carry no result charge. Raise
+`maxContextBytes` (up to 12,000) or rerun the affected IDs.
 
 ### Does the analysis verify facts?
 

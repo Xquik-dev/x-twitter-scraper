@@ -72,9 +72,9 @@ Xquik REST operations. Examples use sample values. Results reflect live data.
 
 ## Recovery and limits
 
-Independent locations run concurrently. Cursor state, accepted rows, billing
-state, and output fingerprints survive Apify migration. The Actor has no
-self-imposed run timeout. A caller-supplied Apify timeout remains respected.
+One run can read many locations. Delivered rows & progress survive an Apify
+restart. The Actor adds no time limit of its own. It respects any Apify timeout
+you set.
 
 ## Incomplete extraction
 

@@ -71,10 +71,9 @@ données en temps réel.
 
 ## Pagination et reprise
 
-Les ressources de List indépendantes s'exécutent en parallèle. Chaque
-lignée de curseur reste ordonnée. Les lignes acceptées, l'état de
-facturation, les curseurs et les empreintes survivent à une migration
-Apify. L'Actor n'a pas de délai d'expiration imposé.
+Un run peut lire de nombreuses Lists et ressources. Les lignes livrées et la
+progression survivent à un redémarrage d'Apify. L'Actor n'ajoute aucune limite
+de temps propre.
 
 ## Extraction incomplète
 

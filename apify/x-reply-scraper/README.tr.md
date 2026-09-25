@@ -30,7 +30,8 @@ kullanımını ayrıca faturalandırır. X girişi gerekmez.
 Filtreler veri kümesi yazımlarından önce çalışır. Yalnızca teslim edilen
 satırlar için ödeme yaparsın.
 
->
+> Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
+> "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
 ## Eksik çıkarma
 
@@ -46,10 +47,6 @@ listeler. Olası nedenler şunlar: `target_failed`, `page_limit`,
 bir kısmını verdiğini gösterir. Nedenlerden en az biri `retryable` ise
 çalıştırma da `retryable` olur.
 
-Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
-
-> "Twitter" ve "X", X Corp'un ticari markalarıdır.
-
 ## Bu Twitter yanıt scraper'ı ne yapar?
 
 X Reply Scraper, herkese açık yanıtları ve yorum konuşmalarını toplar. Tek
@@ -62,13 +59,10 @@ kümeleri için kullan.
 
 ### Yanıt toplama davranışı
 
-- Otomatik mod, eksik doğrudan sonuçları konuşma aramasına geçirir.
-- Otomatik Tweet yanıt sayfaları 300'e kadar satır ister.
-- Dört strateji doğrudan yanıtları, aramayı ve thread bağlamını kapsar.
+- Otomatik mod, doğrudan sonuçlar eksik kaldığında toplamaya devam eder.
+- `collectionStrategy`, farklı yanıt işleri için 4 mod sunar.
 - Toplu girdiler gönderi URL'lerini, Tweet ID'lerini, profilleri ve kullanıcı
   adlarını kabul eder.
-- Her ikisi de geçerli olduğunda profil hedefleri zaman akışını ve yazar
-  aramasını birleştirir.
 - Filtreler ve tekrar kaldırma faturalamadan önce çalışır.
 - Çıktı 4 sıralama modunu, 3 detay seviyesini ve 3 alan stilini destekler.
 - Her yanıt kaynak hedefini, üst ID'lerini, kök ID'sini ve derinliğini
@@ -76,11 +70,11 @@ kümeleri için kullan.
 - Devam imleçleri geriye dönük doldurmaları ve zamanlanmış çalıştırmaları
   destekler.
 - Boş çalıştırmalar `diagnostics`'e 1 ücretsiz kayıt yazar.
-- Sayfa ve hedef günlükleri, girdileri tekrarlamadan `fetchDurationMs`,
+- Çalıştırma günlükleri sayfa ve hedef sürelerini `fetchDurationMs`,
   `processingDurationMs`, `pushDurationMs`, `statusDurationMs`,
-  `fullPageDurationMs` ve `fullTargetDurationMs` içerir.
-- Kontrol noktaları, yeniden başlatmalardan sonra kabul edilen yanıtları,
-  zamanlamayı ve hataları korur.
+  `fullPageDurationMs` ve `fullTargetDurationMs` alanlarında gösterir.
+- Apify çalıştırmayı yeniden başlatırsa teslim edilen yanıtlar ve ilerleme
+  korunur.
 
 ### Her zaman en güncel yapıyı kullan
 
@@ -99,9 +93,9 @@ kullan.
 
 ## Hızlı başlangıç
 
-Başlangıç formu doğrulanmış herkese açık bir konuşmayı hedefler. En fazla 10
-sayfa üzerinde 25 tam, düz satıra kadar döndürür. Otomatik mod varsayılan
-olarak tüm konuşmayı arar. Tekilleştirme ve kaynak atfı açık kalır.
+İlk form doğrulanmış herkese açık bir konuşmayı hedefler. En fazla 25 tam, düz
+satır döndürür. Otomatik mod varsayılan olarak konuşmanın tamamını arar. Tekrar
+kaldırma ve kaynak bilgisi açık kalır.
 
 ### Bir gönderi URL'sinden yanıtları kazı
 
@@ -195,8 +189,8 @@ Aşağıdaki birincil alanları kullan.
 | --------------- | -------------------------------------------------- |
 | `startUrls`      | Karışık X gönderi ve profil URL'leri              |
 | `tweetIds`       | Sayısal gönderi ID'leri                            |
-| `usernames`      | Yazar aramalı profil zaman akışları                |
-| `startCursor`    | Kaydedilen bir kaynak imleçten bir hedefe devam et |
+| `usernames`      | Profillerin yanıt zaman akışları                  |
+| `startCursor`    | Kaydedilen bir imleçten bir hedefe devam et       |
 
 Görsel form yalnızca kanonik kontrolleri gösterir. Uyumluluk takma adları
 JSON, API, SDK, otomasyon ve kaydedilmiş görev girdilerinde kullanılabilir
@@ -220,36 +214,29 @@ Uyumluluk takma adları yaygın rakip girdileri kabul eder:
 Bozuk veya desteklenmeyen hedefler Actor'ı başarısız kılmaz. Hiçbir geçerli
 hedef kalmadığında çalıştırma uygulanabilir bir tanılama döndürür.
 
-Profil hedefleri, imleç sayfalamasını yazar aramasıyla birleştirir. Actor,
-çıktı ve faturalamadan önce tekrarlanan satırları kaldırır. Kaydedilmiş eski
-imleçler standart sayfalamayı korur.
+Actor, çıktı ve faturalamadan önce tekrarlanan satırları kaldırır.
 
 ## Kapsama stratejileri
 
 ### Otomatik tam kapsama
 
-Çoğu iş için `collectionStrategy: "auto"` kullan. Full veya nested kapsamlar
-tam yanıt çıkarmayla başlar. Kapsam, derinlik, sıralama ve yazar kontrolleri
-yanıt sınırlarından önce uygulanır. Çıkarma, kök olmayan hedeflerin
-altındaki alt öğeleri içerir. Eksik çıkarma, konuşma araması ve doğrudan
-yanıtları denemeden önce satırları korur. Tüm kaynakları biten bir gönderi
-bu adımları atlar, çünkü X gerisini gizler. O zaman durum metni, X'in kaç
-yanıtı gizlediğini söyler. Doğrudan kapsamlar gerektiğinde aramaya geri
-döner. Tamamlanmamış sayfalar devamlılıklarını korur. Açık stratejiler asla
-değişmez.
+Çoğu iş için `collectionStrategy: "auto"` kullan. Seçtiğin kapsamda ulaşabildiği
+her yanıtı toplar. Kapsam, derinlik, sıralama ve yazar kontrolleri sınırlarından
+önce uygulanır. Kök olmayan hedeflerin altındaki yanıtlar da dahildir. X bir
+thread'in bir kısmını gizlediğinde durum, X'in kaç yanıtı gizlediğini söyler.
+Diğer `collectionStrategy` değerleri asla mod değiştirmez.
 
-Tanılama kapsama eşiği, kaynak tükenmesini kanıtlamaz. Durmuş sayfalar,
-sınırlar, eksik veri veya hatalar kurtarmayı eksik bırakır.
+Tanılamalardaki bir kapsam değeri, X'te başka yanıt kalmadığını kanıtlamaz.
+Sınırlar, eksik veriler veya hatalar bir çalıştırmayı eksik bırakabilir.
 
-### Doğrudan yanıt uç noktası
+### Doğrudan yanıtlar
 
-X'in yanıt zaman akışını zorlamak için `collectionStrategy: "replies"`
-kullan. Bu, kaynak sıralamasını korur ve imleçleri destekler.
+Doğrudan yanıtları X'in kendi sırasıyla almak için
+`collectionStrategy: "replies"` kullan. Kaydedilmiş imleçleri destekler.
 
 ### Konuşma araması
 
-Geniş konuşma kapsaması için `collectionStrategy: "conversationSearch"`
-kullan. Actor, `conversation_id:<Tweet ID>` ile arar.
+Geniş konuşma kapsamı için `collectionStrategy: "conversationSearch"` kullan.
 
 ### Tam thread bağlamı
 
@@ -331,9 +318,8 @@ Desteklenen tüm filtreler veri kümesi yazımlarından önce çalışır.
 `maxItems`, çalıştırma genelinde teslim edilen satırları sınırlar.
 `maxItemsPerTarget`, her gönderiyi veya profili sınırlar.
 
-Bağımsız hedefler eşzamanlı çalışır. Her hedef sıralı imleç sayfalamasını
-korur. Veri kümesi yazımları üst sınırları, tekilleştirmeyi, atfı ve
-faturalamayı atomik tutar.
+Tek bir çalıştırma birçok hedefi okuyabilir. Sınırlar, tekrar kaldırma, kaynak
+bilgisi ve faturalama hepsinde doğru kalır.
 
 Actor, tekrarları faturalamadan önce kaldırır. Farklı hedeflerden gelen
 tekrarlanan satırları korumak için `dedupeAcrossTargets: false` ayarla.
@@ -452,18 +438,17 @@ Her Apify planında **teslim edilen satır başına $0.00015** ücret alınır. 
 satır başına `$0.00015`'e eşittir. Apify, platform kullanımını ayrıca
 faturalandırır.
 
-Xquik, teslim edilen veri satırı başına bir ücret uygular. Tanılamalar
-`diagnostics` içinde ücretsizdir. Başlangıç, URL, sorgu, sayfalama, filtre
-veya proxy ücreti uygulanmaz.
+Xquik, teslim edilen her veri satırı için bir ücret uygular. Tanılamalar
+`diagnostics` içinde ücretsizdir. Başlangıç, URL, sorgu, sayfalama veya filtre
+ücreti yoktur.
 
-Varsayılan Apify zaman aşımı `0`'dır, bu yüzden çalıştırmaların zaman
-sınırı yoktur. Actor, üst sınıra ulaşana veya uygun veriyi bitirene kadar
-devam eder. Çağıran yine de sonlu bir Apify zaman aşımı ayarlayabilir. O zaman
-`completionReason: "deadline_reached"`, o yapılandırılmış sınırın yaklaştığı
-anlamına gelir. Actor, kontrol noktaları, satırlar, raporlar ve başarılı bir
-çıkış için son 15 saniyeyi tutar. Zaten toplanan yanıtlar teslim edilmiş
-kalır ve bir kez faturalandırılır. Tamamlanmamış sayfalama devam
-ettirilebilir kalır.
+Varsayılan Apify zaman aşımı `0`'dır, bu yüzden çalıştırmaların zaman sınırı
+yoktur. Actor, üst sınıra ulaşana veya uygun veriyi bitirene kadar devam eder.
+Yine de sonlu bir Apify zaman aşımı ayarlayabilirsin. O zaman
+`completionReason: "deadline_reached"`, bu sınırın yaklaştığı anlamına gelir.
+Actor, sınırdan önce yanıtları ve raporu kaydedip düzgünce çıkar. Teslim edilen
+yanıtlar bir kez faturalandırılır. Tamamlanmayan hedeflere sonra devam
+edebilirsin.
 
 ## Herkese açık görev örnekleri
 
@@ -548,8 +533,8 @@ Yanıt veri kümeleri kişisel veri içerebilir. Yasal bir amaç seç. Saklamay�
 en aza indir. Dışa aktarımları koru. Gerekli olduğunda silme ve erişim
 taleplerine uy.
 
-Actor, korunan hesapları atlamaz. Müşteri X şifrelerini, oturum
-çerezlerini veya kimlik doğrulama token'larını istemez.
+Actor korumalı hesapları atlatmaz. X şifreni, çerezlerini veya token'larını asla
+istemez.
 
 ## İlgili Xquik Actor'ları
 

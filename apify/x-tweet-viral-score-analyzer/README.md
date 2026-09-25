@@ -19,8 +19,8 @@ Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. X Tweet Viral Score Analyzer adds a Viral Score estimate &
 a verdict to every tweet. Every other Apify Actor charges before filtering or
 deduplicating. Xquik charges only for delivered, unique, filter-matching
-results. AI costs are included in the per-tweet price. You pay no AI provider,
-buy no tokens & bring no key.
+results. AI costs are included in the per-tweet price. You need no AI account,
+tokens or key.
 
 Learn why tweets spread or flop & keep the original tweet data. **X Tweet Viral
 Score Analyzer with AI** collects matching tweets. The AI rates 8 traits of each
@@ -28,7 +28,7 @@ post. The Actor turns those answers into a Viral Score estimate from 0 to 100 &
 a verdict. Every row keeps real likes, reposts, replies & quotes, so you can
 compare each estimate with what happened.
 
-- **Viral Score per post** from fixed, published weights you can audit.
+- **Viral Score per post** from fixed, versioned rules.
 - **8 trait answers** show why a post scored high or low.
 - **Hard stops** cap posts that read as spam, ragebait or generic machine copy.
 - **Complete source records** with every field the tweet exposes.
@@ -67,22 +67,13 @@ predict likes or views. It does not reproduce how X ranks posts.
 The AI-written answer judges style only. It does not establish who wrote the
 post.
 
-### How the Actor computes the Viral Score
+### How the Viral Score works
 
-The Actor scales each 0-2 score to a share from 0 to 1. Then it adds points:
+Hook, clarity, payoff & the expected reaction raise the score. Wording that
+reads like generic machine copy lowers it.
 
-| Part                                      | Points         |
-| ----------------------------------------- | -------------- |
-| Hook                                      | up to 30       |
-| Clarity                                   | up to 20       |
-| Payoff, the higher of informative & funny | up to 30       |
-| Reaction                                  | up to 20       |
-| AI-written probability                    | minus up to 15 |
-
-Reaction earns a share of its 20 points: share 1, reply 0.8, like 0.6, argue 0.4
-& ignore 0. Hard stops then cap the score. Spam probability from 0.7 caps it
-at 20. Ragebait probability from 0.7 caps it at 35. AI-written probability from
-0.8 caps it at 60. The Actor rounds the result to a whole number.
+Hard stops cap the score of likely spam, ragebait & generic machine copy. The
+score is a whole number from 0 to 100.
 
 | Verdict       | Score     |
 | ------------- | --------- |
@@ -90,10 +81,10 @@ at 20. Ragebait probability from 0.7 caps it at 35. AI-written probability from
 | `edit_first`  | 40 to 69  |
 | `sleep_on_it` | 0 to 39   |
 
-`viral.weights` names the version of these rules, such as `viral_lite:1`. We
-bump it whenever a weight, stop or threshold changes. The score is `null` when
-the analysis failed, the Actor skipped it, or a default trait answer is missing.
-The Actor never fills a missing score with a guess.
+`viral.weights` names the version of these rules, such as `viral_lite:1`. It
+changes whenever the rules change. The score is `null` when the analysis failed,
+the Actor skipped it, or a default trait answer is missing. The Actor never
+fills a missing score with a guess.
 
 ## Algorithm Score estimate
 
@@ -149,8 +140,7 @@ Limits:
 
 - Fewer than 10 compared posts give a `null` calibration with the reason
   `too_few_posts`. Identical scores or rates give `no_variation`.
-- The Actor groups rates into buckets 0.1 wide to keep memory flat. Posts in one
-  bucket count as tied, so the correlation is approximate.
+- The correlation is approximate.
 - The calibration describes one run. A low score can mean the posts differ in
   timing, topic or audience, not that the wording estimate failed.
 - Young posts have not finished collecting engagement. Compare posts of similar
@@ -213,8 +203,8 @@ Paste your own text in `texts`. The Actor scores it & fetches nothing from X.
 
 ## Pricing
 
-AI costs are included in the per-tweet price. You pay no AI provider, buy no
-tokens & bring no key.
+AI costs are included in the per-tweet price. You need no AI account, tokens or
+key.
 
 From $0.0003 per successfully analyzed tweet, with no start fee. The price
 includes collection & the Viral Score. The analysis allowance is 8 questions,
@@ -298,12 +288,10 @@ the same analysis settings. Every row then gains a `monitor` object. Its status
 is `first_run` without a baseline, `new_to_baseline` for tweets the earlier run
 did not have, & `unchanged` or `changed` for tweets it had. `changes` lists each
 trait decision that moved from `previous` to `current`. Decisions compare by
-category, rounded score level, or yes/no at 0.5. A decision counts as changed in
-three cases. The earlier category falls below 0.4 probability. A score moves at
-least 0.6 levels. A yes/no probability lands at least 0.1 from the threshold.
-Near-tie jitter between runs stays unchanged. Baselines above `maxBaselineRows`
-(default 100,000) or from different settings stop the run before collection with
-a diagnostic row.
+category, rounded score level, or yes/no at 0.5. A decision counts as changed
+only when it moves clearly. Near-tie jitter between runs stays unchanged.
+Baselines above `maxBaselineRows` (default 100,000) or from different settings
+stop the run before collection with a diagnostic row.
 
 ## Task examples
 
@@ -344,9 +332,9 @@ Viral Score needs all 8 default questions, so custom questions leave it `null`.
 
 The Actor collected & delivered the tweet, but the AI analysis did not complete.
 `analysis.reason` names the cause, such as `context_limit` when the tweet & its
-context exceed `maxContextBytes`, or `service_unavailable` after retries. These
-rows carry no result charge & no score. Raise `maxContextBytes` (up to 12,000)
-or rerun the affected IDs.
+context exceed `maxContextBytes`, or `service_unavailable` when the analysis
+service is briefly unavailable. These rows carry no result charge & no score.
+Raise `maxContextBytes` (up to 12,000) or rerun the affected IDs.
 
 ### Does the analysis verify facts?
 

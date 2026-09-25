@@ -20,8 +20,8 @@ monde, avec les données X les plus complètes. X (Twitter) Brand Monitoring sui
 les mentions de votre marque avec pertinence, sentiment et réponses sur
 l'expérience client. Tous les autres Actors Apify facturent avant de filtrer ou
 de dédupliquer. Xquik ne facture que les résultats livrés, uniques et conformes
-aux filtres. Les coûts d'IA sont inclus dans le prix par tweet. Vous ne payez
-aucun fournisseur d'IA, n'achetez aucun jeton & n'apportez aucune clé.
+aux filtres. Les coûts d'IA sont inclus dans le prix par tweet. Vous n'avez
+besoin d'aucun compte d'IA, jeton ni clé.
 
 Surveillez les mentions de marque sur X (Twitter) et suivez les changements de
 sentiment entre les runs. **X (Twitter) Brand Monitoring with AI Analysis**
@@ -111,15 +111,13 @@ cible.
 Les réponses se comparent par décision. Une réponse `choice` se compare par sa
 catégorie. Une réponse `score` se compare par son niveau le plus proche. Une
 réponse `probability` se compare par sa décision oui-ou-non à 0,5. Une décision
-compte comme changée dans trois cas. La catégorie précédente tombe sous 0,4 de
-probabilité. Un score bouge d'au moins 0,6 niveau. Une probabilité oui/non se
-situe à au moins 0,1 du seuil. Les quasi-égalités entre les runs restent
-`unchanged`, & les évolutions qui conservent la même décision aussi. La
-variation du modèle entre les runs ne remplit pas votre rapport. `changes` liste
-chaque question modifiée avec sa décision `previous` & `current`. Les
-changements peuvent venir d'une variation du modèle, d'un nouveau contexte ou
-d'une donnée source modifiée. Ils ne prouvent pas des faits changés, & un tweet
-absent ne prouve pas une suppression.
+ne compte comme changée que si elle bouge nettement. Les quasi-égalités entre
+les runs restent `unchanged`, & les évolutions qui conservent la même décision
+aussi. La variation du modèle entre les runs ne remplit pas votre rapport.
+`changes` liste chaque question modifiée avec sa décision `previous` &
+`current`. Les changements peuvent venir d'une variation du modèle, d'un nouveau
+contexte ou d'une donnée source modifiée. Ils ne prouvent pas des faits changés,
+& un tweet absent ne prouve pas une suppression.
 
 La limite de référence est de 100 000 lignes par défaut. Les ID de tweet en
 double, les échecs de chargement et les tailles de dataset changeantes arrêtent
@@ -149,8 +147,8 @@ notes. L'Actor l'analyse & ne récupère rien sur X.
 
 ## Tarification
 
-Les coûts d'IA sont inclus dans le prix par tweet. Vous ne payez aucun
-fournisseur d'IA, n'achetez aucun jeton & n'apportez aucune clé.
+Les coûts d'IA sont inclus dans le prix par tweet. Vous n'avez besoin d'aucun
+compte d'IA, jeton ni clé.
 
 À partir de $0.0003 par tweet analysé avec succès, sans frais de démarrage. Le
 prix inclut la collecte. L'allocation d'analyse est de 8 questions, 8 000 octets
@@ -348,9 +346,10 @@ comparer.
 
 L'Actor a collecté & livré le tweet, mais l'analyse par IA ne s'est pas
 terminée. `analysis.reason` nomme la cause, comme `context_limit` quand le tweet
-et son contexte dépassent `maxContextBytes`, ou `service_unavailable` après des
-tentatives. Ces lignes n'entraînent aucun frais de résultat. Augmentez
-`maxContextBytes` (jusqu'à 12 000) ou relancez les ID concernés.
+et son contexte dépassent `maxContextBytes`, ou `service_unavailable` quand le
+service d'analyse est brièvement indisponible. Ces lignes n'entraînent aucun
+frais de résultat. Augmentez `maxContextBytes` (jusqu'à 12 000) ou relancez les
+ID concernés.
 
 ### L'analyse vérifie-t-elle les faits ?
 

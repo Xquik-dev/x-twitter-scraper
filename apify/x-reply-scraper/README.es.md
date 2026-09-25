@@ -30,7 +30,8 @@ plataforma por separado. No necesitas iniciar sesión en X.
 Los filtros se ejecutan antes de escribir en el conjunto de datos. Pagas solo
 por las filas entregadas.
 
->
+> Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
+> "Twitter" y "X" son marcas registradas de X Corp.
 
 ## Extracción incompleta
 
@@ -45,10 +46,6 @@ El texto de estado nombra cada causa de una detención anticipada.
 `deadline_reached`. `reply_reach` significa que X entregó solo una parte de
 un hilo. La ejecución es `retryable` cuando alguna causa lo es.
 
-Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
-
-> "Twitter" y "X" son marcas registradas de X Corp.
-
 ## ¿Qué hace este extractor de respuestas de Twitter?
 
 X Reply Scraper recopila respuestas públicas y conversaciones de comentarios.
@@ -61,15 +58,11 @@ de moderación y conjuntos de datos de conversaciones.
 
 ### Comportamiento de la recopilación de respuestas
 
-- El modo automático cambia los resultados directos incompletos a búsqueda
-  de conversación.
-- Las páginas automáticas de respuestas de tuits solicitan hasta 300 filas.
-- Cuatro estrategias cubren respuestas directas, búsqueda y contexto de
-  hilo.
+- El modo automático sigue recopilando cuando los resultados directos están
+  incompletos.
+- `collectionStrategy` ofrece 4 modos para distintos trabajos de respuestas.
 - Las entradas masivas aceptan URLs de publicaciones, IDs de tuits, perfiles
   y nombres de usuario.
-- Los objetivos de perfil combinan la línea de tiempo y la búsqueda por
-  autor cuando ambas aplican.
 - Los filtros y la eliminación de duplicados se ejecutan antes de facturar.
 - La salida admite 4 modos de orden, 3 niveles de detalle y 3 estilos de
   campo.
@@ -78,11 +71,11 @@ de moderación y conjuntos de datos de conversaciones.
 - Los cursores de continuación admiten reprocesos históricos y ejecuciones
   programadas.
 - Las ejecuciones vacías escriben 1 registro gratuito en `diagnostics`.
-- Los registros de página y objetivo incluyen `fetchDurationMs`,
-  `processingDurationMs`, `pushDurationMs`, `statusDurationMs`,
-  `fullPageDurationMs` y `fullTargetDurationMs` sin repetir las entradas.
-- Los puntos de control conservan las respuestas aceptadas, los tiempos y
-  los fallos después de reinicios.
+- Los registros de la ejecución muestran los tiempos por página y por objetivo
+  en `fetchDurationMs`, `processingDurationMs`, `pushDurationMs`,
+  `statusDurationMs`, `fullPageDurationMs` y `fullTargetDurationMs`.
+- Las ejecuciones conservan las respuestas entregadas y su progreso si Apify las
+  reinicia.
 
 ### Usa siempre la versión más reciente
 
@@ -104,9 +97,9 @@ temporales.
 ## Inicio rápido
 
 El formulario inicial apunta a una conversación pública verificada. Devuelve
-hasta 25 filas completas y planas en un máximo de 10 páginas. El modo
-automático busca la conversación completa de forma predeterminada. La
-eliminación de duplicados y la atribución de origen permanecen activadas.
+hasta 25 filas completas y planas. El modo automático busca la conversación
+completa de forma predeterminada. La eliminación de duplicados y la atribución
+de origen permanecen activadas.
 
 ### Extraer respuestas desde una URL de publicación
 
@@ -205,8 +198,8 @@ Usa los campos principales a continuación.
 | ------------- | ------------------------------------------------------ |
 | `startUrls`   | URLs mixtas de publicaciones y perfiles de X            |
 | `tweetIds`    | IDs numéricos de publicaciones                          |
-| `usernames`   | Líneas de tiempo de perfil con búsqueda por autor       |
-| `startCursor` | Reanuda un objetivo desde un cursor de origen guardado  |
+| `usernames`   | Respuestas publicadas por perfiles                      |
+| `startCursor` | Reanuda un objetivo desde un cursor guardado            |
 
 El formulario visual muestra solo los controles canónicos. Los alias de
 compatibilidad siguen disponibles en JSON, API, SDK, automatización y
@@ -231,40 +224,32 @@ Los objetivos malformados o no admitidos no hacen fallar al Actor. La
 ejecución devuelve un diagnóstico accionable cuando no queda ningún objetivo
 válido.
 
-Los objetivos de perfil combinan paginación por cursor con búsqueda por
-autor. El Actor elimina las filas duplicadas antes de la salida y de la
-facturación. Los cursores heredados guardados conservan la paginación
-estándar.
+El Actor elimina las filas duplicadas antes de la salida y la facturación.
 
 ## Estrategias de cobertura
 
 ### Automático completo
 
-Usa `collectionStrategy: "auto"` para la mayoría de los trabajos. Los
-alcances completos o anidados comienzan con la extracción completa de
-respuestas. Los controles de alcance, profundidad, orden y autor se aplican
-antes de los límites de respuesta. La extracción incluye los descendientes
-debajo de objetivos que no son la raíz. La extracción incompleta conserva
-las filas antes de intentar búsqueda de conversación y respuestas directas.
-Una publicación cuyas fuentes ya terminaron omite ambos pasos, porque X
-oculta el resto. En ese caso, el texto de estado indica cuántas respuestas
-oculta X. Los alcances directos recurren a la búsqueda cuando es necesario.
-Las páginas sin terminar conservan su continuación. Las estrategias
-explícitas nunca cambian.
+Usa `collectionStrategy: "auto"` para la mayoría de los trabajos. Recopila todas
+las respuestas que puede alcanzar para tu alcance. Los controles de alcance,
+profundidad, orden y autor se aplican antes de tus límites. Se incluyen las
+respuestas debajo de objetivos que no son raíz. Cuando X oculta parte de un
+hilo, el estado indica cuántas respuestas oculta X. Los demás valores de
+`collectionStrategy` nunca cambian de modo.
 
-El umbral de cobertura de diagnóstico no prueba el agotamiento de la
-fuente. Páginas estancadas, límites, datos faltantes o errores dejan la
-recuperación incompleta.
+Una cifra de cobertura en los diagnósticos no prueba que X no tenga más
+respuestas. Los límites, los datos faltantes o los errores pueden dejar una
+ejecución incompleta.
 
-### Extremo de respuesta directa
+### Respuestas directas
 
-Usa `collectionStrategy: "replies"` para forzar la línea de tiempo de
-respuestas de X. Esto conserva el orden de la fuente y admite cursores.
+Usa `collectionStrategy: "replies"` para obtener respuestas directas en el orden
+de X. Admite cursores guardados.
 
 ### Búsqueda de conversación
 
-Usa `collectionStrategy: "conversationSearch"` para una cobertura amplia de
-la conversación. El Actor busca por `conversation_id:<ID de tuit>`.
+Usa `collectionStrategy: "conversationSearch"` para una cobertura amplia de la
+conversación.
 
 ### Contexto completo del hilo
 
@@ -350,10 +335,8 @@ Usa `minLikes`, `minReplies`, `minRetweets`, `minQuotes`, `minViews` y
 `maxItems` limita las filas entregadas en toda la ejecución.
 `maxItemsPerTarget` limita cada publicación o perfil.
 
-Los objetivos independientes se ejecutan en paralelo. Cada objetivo conserva
-la paginación ordenada por cursor. Las escrituras del conjunto de datos
-mantienen los límites, la eliminación de duplicados, la atribución y la
-facturación de forma atómica.
+Una ejecución puede leer muchos objetivos. Los topes, la deduplicación, la
+atribución y la facturación se mantienen exactos en todos ellos.
 
 El Actor elimina duplicados antes de facturar. Configura
 `dedupeAcrossTargets: false` para conservar filas duplicadas de distintos
@@ -479,17 +462,15 @@ Cada plan de Apify cuesta **$0.00015 por fila entregada**. Esto equivale a
 
 Xquik aplica un cobro por cada fila de datos entregada. Los diagnósticos son
 gratuitos en `diagnostics`. No se aplica tarifa de inicio, URL, consulta,
-paginación, filtro o proxy.
+paginación ni filtro.
 
-El tiempo de espera predeterminado de Apify es `0`, por lo que las
-ejecuciones no tienen límite de tiempo. El Actor continúa hasta alcanzar
-el límite o agotar los datos elegibles. Quien invoca puede seguir
-configurando un tiempo de espera finito de Apify. Entonces,
-`completionReason: "deadline_reached"` significa que ese límite configurado
-está cerca. El Actor reserva los últimos 15 segundos para puntos de
-control, filas, reportes y una salida exitosa. Las respuestas ya
-recopiladas permanecen entregadas y se facturan una sola vez. La paginación
-sin terminar sigue siendo reanudable.
+El tiempo de espera predeterminado de Apify es `0`, así que las ejecuciones no
+tienen límite de tiempo. El Actor continúa hasta alcanzar el tope o agotar los
+datos elegibles. Aún puedes establecer un tiempo de espera finito de Apify.
+Entonces `completionReason: "deadline_reached"` significa que ese límite está
+cerca. El Actor guarda las respuestas y el informe, y termina correctamente
+antes del límite. Las respuestas entregadas se facturan una sola vez. Los
+objetivos sin terminar se pueden reanudar.
 
 ## Ejemplos de tareas públicas
 
@@ -574,8 +555,8 @@ Los conjuntos de datos de respuestas pueden contener datos personales. Elige
 un propósito lícito. Minimiza la retención. Protege las exportaciones.
 Respeta las solicitudes de eliminación y acceso cuando corresponda.
 
-El Actor no evade cuentas protegidas. No solicita contraseñas, cookies de
-sesión ni tokens de autenticación de X de los clientes.
+El Actor no evade cuentas protegidas. Nunca te pide tu contraseña, cookies ni
+tokens de X.
 
 ## Actors de Xquik relacionados
 

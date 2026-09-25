@@ -21,8 +21,7 @@ las menciones de tu marca con relevancia, sentimiento y respuestas de
 experiencia del cliente. Cualquier otro Actor de Apify cobra antes de filtrar o
 eliminar duplicados. Xquik cobra solo por resultados entregados, únicos y que
 coinciden con los filtros. Los costos de IA están incluidos en el precio por
-tweet. No pagas a ningún proveedor de IA, no compras tokens & no traes ninguna
-clave.
+tweet. No necesitas cuenta de IA, tokens ni clave.
 
 Monitorea menciones de marca en X (Twitter) y rastrea los cambios de sentimiento
 entre ejecuciones. **X (Twitter) Brand Monitoring with AI Analysis** recopila
@@ -109,15 +108,13 @@ sentimiento describe la actitud expresada por el autor hacia el objetivo.
 Las respuestas se comparan por decisión. Una respuesta `choice` se compara por
 su categoría. Una respuesta `score` se compara por su nivel más cercano. Una
 respuesta `probability` se compara por su decisión de sí o no en 0.5. Una
-decisión cuenta como cambiada en tres casos. La categoría anterior cae por
-debajo de 0.4 de probabilidad. Un puntaje se mueve al menos 0.6 niveles. Una
-probabilidad de sí/no queda a al menos 0.1 del umbral. Los empates cercanos
-entre ejecuciones permanecen `unchanged`, & también los cambios que mantienen la
-misma decisión. La variación del modelo entre ejecuciones no llena tu informe.
-`changes` enumera cada pregunta cambiada con su decisión `previous` & `current`.
-Los cambios pueden venir de variación del modelo, contexto nuevo o datos de
-origen editados. No prueban hechos cambiados, & un tuit ausente no prueba que
-fue eliminado.
+decisión cuenta como cambiada solo cuando se mueve con claridad. Los empates
+cercanos entre ejecuciones permanecen `unchanged`, & también los cambios que
+mantienen la misma decisión. La variación del modelo entre ejecuciones no llena
+tu informe. `changes` enumera cada pregunta cambiada con su decisión `previous`
+& `current`. Los cambios pueden venir de variación del modelo, contexto nuevo o
+datos de origen editados. No prueban hechos cambiados, & un tuit ausente no
+prueba que fue eliminado.
 
 El límite de línea base es de 100 000 filas por defecto. Los IDs de tuits
 duplicados, los fallos de carga y los tamaños de Dataset cambiantes detienen la
@@ -148,8 +145,8 @@ Actor lo analiza y no obtiene nada de X.
 
 ## Precios
 
-Los costos de IA están incluidos en el precio por tweet. No pagas a ningún
-proveedor de IA, no compras tokens & no traes ninguna clave.
+Los costos de IA están incluidos en el precio por tweet. No necesitas cuenta de
+IA, tokens ni clave.
 
 Desde $0.0003 por tuit analizado con éxito, sin tarifa de inicio. El precio
 incluye la recopilación. La capacidad de análisis es de 8 preguntas, 8000 bytes
@@ -339,9 +336,10 @@ quieras comparar.
 
 El Actor recopiló & entregó el tuit, pero el análisis con IA no se completó.
 `analysis.reason` indica la causa, como `context_limit` cuando el tuit y su
-contexto superan `maxContextBytes`, o `service_unavailable` tras varios
-reintentos. Estas filas no tienen costo de resultado. Aumenta
-`maxContextBytes` (hasta 12 000) o vuelve a ejecutar los IDs afectados.
+contexto superan `maxContextBytes`, o `service_unavailable` cuando el servicio
+de análisis no está disponible por un momento. Estas filas no tienen costo de
+resultado. Aumenta `maxContextBytes` (hasta 12 000) o vuelve a ejecutar los IDs
+afectados.
 
 ### ¿El análisis verifica hechos?
 

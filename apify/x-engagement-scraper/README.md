@@ -36,7 +36,7 @@ retweeters, and thread context. No X API key or login required.
 - Multiple engagement types and posts per run.
 - Global and per-resource caps.
 - Source post and engagement-type attribution.
-- Concurrent resources with saved cursor recovery.
+- Runs pick up where they left off after an Apify restart.
 
 ## Input
 
@@ -68,14 +68,12 @@ Tweet ID. Tweet and profile fields follow stable Xquik REST response shapes.
 Set `includeRetweetTimestamp` to `true` for `retweeters` results. The
 `retweetedAt` column contains the observed repost time in UTC.
 
-Each lookup checks the retweeter's newest available profile page. It matches the
-account and source post against actual repost records. Older, deleted, or
-unavailable repost records can leave the timestamp `null`. Failed timestamp
-lookups also leave `null`. The profile stays in the output. The lookup does not
-prove that an account never reposted a post.
+The Actor finds the repost time when X still shows that repost. Older, deleted
+or unavailable reposts leave the timestamp `null`. The profile stays in the
+output. A `null` value does not prove that an account never reposted a post.
 
-Extra reads increase latency. Leave this option disabled for profile-only
-results. Profile `createdAt` remains the account creation date. Tweet rows carry
+This option makes runs slower. Leave it disabled for profile-only results.
+Profile `createdAt` remains the account creation date. Tweet rows carry
 `retweetedAt` when they contain a repost event. Original post dates and scrape
 times never substitute for repost times. Result prices and delivered-row billing
 remain unchanged.
@@ -94,9 +92,8 @@ Xquik REST operations. Examples use sample values. Results reflect live data.
 
 ## Recovery and limits
 
-Independent post-resource pairs run concurrently. Cursor lineage remains
-ordered. Accepted rows, billing state, cursors, and fingerprints survive Apify
-migration. The Actor has no self-imposed timeout.
+One run can read many posts & engagement types. Delivered rows & progress
+survive an Apify restart. The Actor adds no time limit of its own.
 
 ## Incomplete extraction
 

@@ -76,8 +76,8 @@ Xquik REST operations. Examples use sample values. Results reflect live data.
 
 ## Pagination and recovery
 
-Independent targets run concurrently. Timelines use automatic coverage with all
-filters. Accepted rows, billing state, and fingerprints survive migration.
+One run can read many profiles. Timelines apply every filter you set. Delivered
+rows & progress survive an Apify restart.
 
 ## Incomplete extraction
 

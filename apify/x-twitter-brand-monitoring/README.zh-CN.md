@@ -15,11 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何搭配 Claude Code、Codex、Cursor 等使用 Xquik 抓取工具，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据。X
-(Twitter) Brand Monitoring 以相关性、情感与客户体验答案追踪你的品牌提及。
-其他所有 Apify Actor 都在过滤或去重之前就收费。Xquik 只为交付的、唯一的、
-符合过滤条件的结果收费。AI 费用已包含在每条推文的价格中。你无需向 AI
-提供商付费、无需购买 token，也无需自带密钥。
+Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据。X (Twitter) Brand Monitoring 以相关性、情感与客户体验答案追踪你的品牌提及。其他所有 Apify Actor 都在过滤或去重之前就收费。Xquik 只为交付的、唯一的、符合过滤条件的结果收费。AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
 
 监测 X（Twitter）上的品牌提及，并追踪运行之间的情感变化。**X (Twitter) Brand
 Monitoring with AI Analysis** 收集每条匹配的推文。它用 AI 为每条帖子回答相关性、
@@ -89,14 +85,7 @@ Monitoring with AI Analysis** 收集每条匹配的推文。它用 AI 为每条�
 | `not_comparable`         | 缺少必需的元数据、ID 或匹配设置            |
 | `analysis_unavailable`   | 该推文没有成功的分析结果                   |
 
-答案按判断进行比较。`choice` 答案按类别比较。`score`
-答案按最接近的等级比较。`probability` 答案按 0.5 处的是否判断比较。
-判断在三种情况下计为已更改。更早的类别概率降到 0.4 以下。分数移动至少 0.6
-个等级。是否概率与阈值相差至少 0.1。运行之间的临界平局保持 `unchanged`，
-保持相同判断的变化也是如此。运行之间的模型波动不会填满你的报告。`changes`
-列出每个已更改的问题及其 `previous` 与 `current` 判断。变化可能来自模型波动、
-新的上下文或被编辑的原始数据。它们不能证明事实已经改变，
-缺失的推文也不能证明该推文已被删除。
+答案按判断进行比较。`choice` 答案按类别比较。`score`答案按最接近的等级比较。`probability` 答案按 0.5 处的是否判断比较。只有判断发生明显变化时才计为已更改。运行之间的临界平局保持 `unchanged`，保持相同判断的变化也是如此。运行之间的模型波动不会填满你的报告。`changes`列出每个已更改的问题及其 `previous` 与 `current` 判断。变化可能来自模型波动、新的上下文或被编辑的原始数据。它们不能证明事实已经改变，缺失的推文也不能证明该推文已被删除。
 
 基线上限默认为 100,000 行。重复的推文 ID、
 加载失败与变化的数据集大小会在收集之前停止比较。它们绝不会变成空基线。
@@ -122,8 +111,7 @@ Monitoring with AI Analysis** 收集每条匹配的推文。它用 AI 为每条�
 
 ## 定价
 
-AI 费用已包含在每条推文的价格中。你无需向 AI 提供商付费、无需购买 token，
-也无需自带密钥。
+AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
 
 每成功分析一条推文起价 $0.0003，无起步费用。价格包含收集费用。分析额度为 8
 个问题、每个问题定义 8,000 字节、每条推文 12,000 字节上下文。
@@ -277,10 +265,7 @@ AI 费用已包含在每条推文的价格中。你无需向 AI 提供商付费�
 
 ### 为什么某一行返回的 `analysis.status` 是 `failed` 或 `skipped`？
 
-Actor 已收集并交付该推文，但 AI 分析未能完成。`analysis.reason` 会说明原因，
-例如推文及其上下文超过 `maxContextBytes` 时的 `context_limit`，或重试后仍失败的
-`service_unavailable`。这些行不产生结果费用。提高 `maxContextBytes`（最多
-12,000）或重新运行受影响的 ID。
+Actor 已收集并交付该推文，但 AI 分析未能完成。`analysis.reason` 会说明原因，例如推文及其上下文超过 `maxContextBytes` 时的 `context_limit`，或分析服务暂时不可用时的 `service_unavailable`。这些行不产生结果费用。提高 `maxContextBytes`（最多12,000）或重新运行受影响的 ID。
 
 ### 分析会核实事实吗？
 

@@ -80,11 +80,9 @@ données en temps réel.
 
 ## Reprise et limites
 
-Les localisations indépendantes s'exécutent en parallèle. L'état du
-curseur, les lignes acceptées, l'état de facturation et les empreintes de
-sortie survivent à une migration Apify. L'Actor n'a pas de délai
-d'expiration de run imposé. Un délai Apify fourni par l'appelant reste
-respecté.
+Un run peut lire de nombreux lieux. Les lignes livrées et la progression
+survivent à un redémarrage d'Apify. L'Actor n'ajoute aucune limite de temps
+propre. Il respecte tout délai Apify que vous définissez.
 
 ## Extraction incomplète
 

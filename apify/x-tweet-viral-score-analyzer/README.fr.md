@@ -15,13 +15,13 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Découvrez comment Framer utilise les scrapers Xquik avec Claude Code, Codex, Cursor et d'autres outils, à partir de 6:07.</a>
 </td></tr></table>
 
-Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher
-au monde, avec les données X les plus complètes. X Tweet Viral Score Analyzer
+Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
+monde, avec les données X les plus complètes. X Tweet Viral Score Analyzer
 ajoute une estimation de Viral Score & un verdict à chaque tweet. Tous les
 autres Actors Apify facturent avant de filtrer ou de dédupliquer. Xquik ne
-facture que les résultats livrés, uniques et conformes aux filtres. Les
-coûts d'IA sont inclus dans le prix par tweet. Vous ne payez aucun
-fournisseur d'IA, n'achetez aucun jeton & n'apportez aucune clé.
+facture que les résultats livrés, uniques et conformes aux filtres. Les coûts
+d'IA sont inclus dans le prix par tweet. Vous n'avez besoin d'aucun compte d'IA,
+jeton ni clé.
 
 Comprenez pourquoi des tweets se propagent ou échouent et conservez les
 données originales du tweet. **X Tweet Viral Score Analyzer with AI**
@@ -31,8 +31,7 @@ L'Actor transforme ces réponses en une estimation de Viral Score de 0 à 100
 réels, afin que vous puissiez comparer chaque estimation avec ce qui s'est
 passé.
 
-- **Viral Score par post** à partir de poids fixes et publiés que vous
-  pouvez vérifier.
+- **Viral Score par post** à partir de règles fixes et versionnées.
 - **8 réponses sur les traits** montrent pourquoi un post a obtenu un score
   élevé ou faible.
 - **Arrêts stricts** plafonnent les posts qui ressemblent à du spam, du
@@ -78,25 +77,13 @@ posts.
 La réponse « écrit par IA » ne juge que le style. Elle n'établit pas qui a
 écrit le post.
 
-### Comment l'Actor calcule le Viral Score
+### Comment fonctionne le Viral Score
 
-L'Actor convertit chaque score de 0 à 2 en une part de 0 à 1. Puis il
-ajoute des points :
+L'accroche, la clarté, l'apport et la réaction attendue font monter le score.
+Une formulation qui ressemble à un texte générique de machine le fait baisser.
 
-| Élément                                          | Points           |
-| ------------------------------------------------ | ---------------- |
-| Accroche                                         | jusqu'à 30       |
-| Clarté                                           | jusqu'à 20       |
-| Bénéfice, le plus élevé entre informatif & drôle | jusqu'à 30       |
-| Réaction                                         | jusqu'à 20       |
-| Probabilité « écrit par IA »                     | moins jusqu'à 15 |
-
-La réaction gagne une part de ses 20 points : partager 1, répondre 0,8,
-aimer 0,6, débattre 0,4 & ignorer 0. Les arrêts stricts plafonnent ensuite
-le score. Une probabilité de spam à partir de 0,7 le plafonne à 20. Une
-probabilité de ragebait à partir de 0,7 le plafonne à 35. Une probabilité
-« écrit par IA » à partir de 0,8 le plafonne à 60. L'Actor arrondit le
-résultat à un nombre entier.
+Des plafonds stricts limitent le score du spam probable, du ragebait et des
+textes génériques de machine. Le score est un nombre entier de 0 à 100.
 
 | Verdict       | Score    |
 | ------------- | -------- |
@@ -104,11 +91,10 @@ résultat à un nombre entier.
 | `edit_first`  | 40 à 69  |
 | `sleep_on_it` | 0 à 39   |
 
-`viral.weights` nomme la version de ces règles, comme `viral_lite:1`. Nous
-l'incrémentons chaque fois qu'un poids, un arrêt ou un seuil change. Le
-score est `null` quand l'analyse a échoué, quand l'Actor l'a ignorée, ou
-quand une réponse de trait par défaut manque. L'Actor ne remplace jamais un
-score manquant par une supposition.
+`viral.weights` nomme la version de ces règles, par exemple `viral_lite:1`. Elle
+change chaque fois que les règles changent. Le score vaut `null` quand l'analyse
+a échoué, que l'Actor l'a ignorée ou qu'une réponse de trait par défaut manque.
+L'Actor ne remplit jamais un score manquant par une supposition.
 
 ## Estimation de l'Algorithm Score
 
@@ -168,9 +154,7 @@ Limites :
 - Moins de 10 posts comparés donnent une calibration `null` avec la raison
   `too_few_posts`. Des scores ou des taux identiques donnent
   `no_variation`.
-- L'Actor regroupe les taux par groupes de 0,1 de large pour garder la
-  mémoire stable. Les posts d'un même groupe comptent comme ex aequo, donc
-  la corrélation est approximative.
+- La corrélation est approximative.
 - La calibration décrit un seul run. Un score faible peut signifier que les
   posts diffèrent par le moment, le sujet ou l'audience, pas que
   l'estimation du libellé a échoué.
@@ -245,7 +229,8 @@ sur X.
 
 ## Tarification
 
-Les coûts d'IA sont inclus dans le prix par tweet. Vous ne payez aucun fournisseur d'IA, n'achetez aucun jeton & n'apportez aucune clé.
+Les coûts d'IA sont inclus dans le prix par tweet. Vous n'avez besoin d'aucun
+compte d'IA, jeton ni clé.
 
 À partir de $0.0003 par tweet analysé avec succès, sans frais de
 démarrage. Le prix inclut la collecte & le Viral Score. L'allocation
@@ -333,19 +318,17 @@ correspondance vide.
 
 ## Comparer avec un run antérieur
 
-Passez `monitor.baselineDatasetId`, l'ID du dataset d'un run antérieur
-terminé avec les mêmes réglages d'analyse. Chaque ligne gagne alors un
-objet `monitor`. Son statut est `first_run` sans référence,
-`new_to_baseline` pour les tweets absents du run antérieur, & `unchanged`
-ou `changed` pour les tweets qu'il avait. `changes` liste chaque décision
-de trait ayant évolué de `previous` à `current`. Les décisions se comparent
-par catégorie, niveau de score arrondi, ou oui/non à 0,5. Une décision
-compte comme changée dans trois cas. La catégorie précédente tombe sous 0,4
-de probabilité. Un score bouge d'au moins 0,6 niveau. Une probabilité
-oui/non se situe à au moins 0,1 du seuil. Les fluctuations proches d'une
-égalité entre les runs restent inchangées. Les références au-delà de
-`maxBaselineRows` (par défaut 100 000) ou issues de réglages différents
-arrêtent le run avant la collecte avec une ligne de diagnostic.
+Passez `monitor.baselineDatasetId`, l'ID du dataset d'un run antérieur terminé
+avec les mêmes réglages d'analyse. Chaque ligne gagne alors un objet `monitor`.
+Son statut est `first_run` sans référence, `new_to_baseline` pour les tweets
+absents du run antérieur, & `unchanged` ou `changed` pour les tweets qu'il
+avait. `changes` liste chaque décision de trait ayant évolué de `previous` à
+`current`. Les décisions se comparent par catégorie, niveau de score arrondi, ou
+oui/non à 0,5. Une décision ne compte comme changée que si elle bouge nettement.
+Les fluctuations proches d'une égalité entre les runs restent inchangées. Les
+références au-delà de `maxBaselineRows` (par défaut 100 000) ou issues de
+réglages différents arrêtent le run avant la collecte avec une ligne de
+diagnostic.
 
 ## Exemples de tâches
 
@@ -390,11 +373,11 @@ des 8 questions par défaut, donc des questions personnalisées le laissent
 ### Pourquoi une ligne revient-elle avec un `analysis.status` de `failed` ou `skipped` ?
 
 L'Actor a collecté & livré le tweet, mais l'analyse par IA ne s'est pas
-terminée. `analysis.reason` nomme la cause, comme `context_limit` quand
-le tweet et son contexte dépassent `maxContextBytes`, ou
-`service_unavailable` après des tentatives. Ces lignes n'entraînent aucun
-frais de résultat & n'ont aucun score. Augmentez `maxContextBytes` (jusqu'à
-12 000) ou relancez les ID concernés.
+terminée. `analysis.reason` nomme la cause, comme `context_limit` quand le tweet
+et son contexte dépassent `maxContextBytes`, ou `service_unavailable` quand le
+service d'analyse est brièvement indisponible. Ces lignes n'entraînent aucun
+frais de résultat & n'ont aucun score. Augmentez `maxContextBytes` (jusqu'à 12 000)
+ou relancez les ID concernés.
 
 ### L'analyse vérifie-t-elle les faits ?
 

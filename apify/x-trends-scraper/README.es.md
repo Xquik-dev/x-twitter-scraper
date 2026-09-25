@@ -75,11 +75,9 @@ muestra. Los resultados reflejan datos en vivo.
 
 ## Recuperación y límites
 
-Las ubicaciones independientes se ejecutan de forma simultánea. El estado del
-cursor, las filas aceptadas, el estado de facturación y las huellas de salida
-sobreviven a una migración de Apify. El Actor no impone un tiempo de espera
-propio para la ejecución. Se respeta un tiempo de espera de Apify establecido
-por quien lo invoca.
+Una ejecución puede leer muchas ubicaciones. Las filas entregadas y el progreso
+se conservan tras un reinicio de Apify. El Actor no agrega un límite de tiempo
+propio. Respeta cualquier tiempo de espera de Apify que configures.
 
 ## Extracción incompleta
 

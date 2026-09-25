@@ -26,7 +26,8 @@ List & membri di Community di X (Twitter) **a partire da $0.00015 per profilo
 consegnato su ogni piano Apify**. Apify fattura l'uso della piattaforma
 separatamente. Nessun login X, costo di avvio o costo per query.
 
->
+> Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
+> "Twitter" e "X" sono marchi di X Corp.
 
 ## Estrazione incompleta
 
@@ -34,10 +35,6 @@ Un'estrazione interrotta scrive una diagnostica `partial` gratuita. I risultati
 disponibili restano intatti. Leggi `availableResults`, `failedTargets`,
 `retryable` e `nextAction` prima di riprovare. Un'uscita riuscita dell'Actor
 conferma la consegna, non l'estrazione completa.
-
-Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
-
-> "Twitter" e "X" sono marchi di X Corp.
 
 ## Cosa fa X Follower Scraper?
 
@@ -50,11 +47,11 @@ origine & la relazione.
 - Filtri & rimozione dei duplicati vengono eseguiti prima della fatturazione.
 - Un'esecuzione accetta handle, ID numerici, URL e percorsi brevi.
 - La modalità merge registra profili condivisi, sorgenti, relazioni & `overlapCount`.
-- I cursori automatici richiedono fino a 300 profili per pagina.
-- I cursori più vecchi mantengono il limite di 200 profili & si riavviano alla scadenza.
-- I log di pagina includono `fetchDurationMs`, `processingDurationMs`, `pushDurationMs`,
-  `statusDurationMs` & `fullPageDurationMs` senza ripetere i target.
-- I checkpoint conservano righe accettate, tempistiche & conteggi di errori dopo i riavvii.
+- I log dell'esecuzione mostrano i tempi di ogni pagina in `fetchDurationMs`,
+  `processingDurationMs`, `pushDurationMs`, `statusDurationMs` e
+  `fullPageDurationMs`.
+- Se Apify riavvia l'esecuzione, le righe consegnate e i progressi restano
+  salvati.
 
 ## Esempi di task
 
@@ -117,9 +114,9 @@ del profilo sorgente sicuro. La modalità compatta resta quella predefinita.
 origine in conflitto non permettono mai a un valore falso di nascondere uno
 stato di verifica vero.
 
-Lo stato relativo al visualizzatore appartiene all'account di fetch di Xquik,
-non al tuo dataset. I flag di follow, blocco, silenziamento, DM, notifica &
-simili relativi al visualizzatore vengono sempre rimossi, anche dall'output raw.
+Le righe non includono mai stati relativi al visualizzatore. Gli indicatori di
+follow, blocco, silenziamento, DM, notifica e simili vengono sempre rimossi,
+anche dall'output raw.
 
 ## Quanto costa estrarre i follower di X?
 
@@ -133,22 +130,19 @@ Ogni esito scrive `run-report`, inclusi gli esiti senza input & con input non
 valido. Il campo `version` riporta la versione esatta della sorgente
 dell'Actor pubblicata.
 
-`failedTargets` conta i target che si sono interrotti dopo un errore di
-lettura. I profili accettati restano righe di dati fatturabili. Queste
-esecuzioni usano `completionReason: "partial_failure"`. La paginazione rapida
-lato server segue lo stesso contratto di reportistica.
+`failedTargets` conta i target che si sono interrotti dopo un errore. I profili
+consegnati restano righe di dati fatturabili. Queste esecuzioni usano
+`completionReason: "partial_failure"`.
 
 Il timeout predefinito di Apify è `0`. Le esecuzioni non hanno limite di tempo.
-L'Actor segue ogni cursore attivo fino al limite o alla fine della sorgente.
-Un chiamante può comunque impostare un timeout finito. In tal caso
+L'Actor continua finché non raggiunge il limite o esaurisce i profili. Puoi
+comunque impostare un timeout finito. In tal caso
 `completionReason: "deadline_reached"` significa che quel limite è vicino.
-L'Actor riserva gli ultimi 15 secondi per checkpoint, righe, report & un'uscita
-pulita. I profili validi restano consegnati & vengono fatturati una sola
-volta. La paginazione non terminata resta ripristinabile.
+L'Actor salva i profili e il report, poi termina correttamente prima del limite.
+I profili consegnati vengono fatturati una sola volta.
 
-I target indipendenti vengono eseguiti in concorrenza. Ogni target mantiene una
-paginazione ordinata per cursore. Le scritture nel dataset mantengono atomici
-limiti, deduplicazione, attribuzione & fatturazione.
+Un'esecuzione può leggere molti target. Limiti, deduplicazione, attribuzione e
+fatturazione restano esatti su tutti.
 
 - Avvii, target & selezione della relazione non aggiungono alcun costo di
   query separato.
@@ -564,40 +558,35 @@ firmati & un server MCP.
 
 ## FAQ
 
-**Mi serve una chiave API X?** No. Questo scraper usa la propria
-infrastruttura. Non sono richiesti login o credenziali.
+**Mi serve una chiave API X?** No. Non ti servono chiave API X, login o
+credenziali.
 
 **Cosa limita un'esecuzione?** Il limite di elementi richiesto & il limite di
 spesa Apify fermano l'esecuzione. Si applicano comunque i limiti di account &
 piattaforma Apify.
 
-**Quanto è veloce?** Il tempo di esecuzione dipende dalla dimensione del
-target, dai filtri & dalla disponibilità a monte. Le esecuzioni filtrate in
-profondità salvano il progresso in Console ogni 5 pagine. Questo riduce il
-traffico non dati tra il recupero delle pagine.
+**Quanto è veloce?** Il tempo di esecuzione dipende dalla dimensione del target,
+dai filtri e dalla disponibilità di X.
 
 **Perché la mia esecuzione restituisce meno righe di `maxItems`?** Filtri come
 `minFollowers`, `verifiedOnly` & `bioContains` vengono applicati prima delle
 scritture. Allenta i filtri per ottenere più risultati.
 
-**Quanti follower posso estrarre da un singolo account?** X pagina gli account
-grandi a lotti. Aumenta il limite di tempo di esecuzione di Apify per recuperare
-più pagine. `maxItemsPerTarget` limita solo ogni singolo target.
+**Quanti follower posso estrarre da un singolo account?** Tutti quelli che X
+mostra per quell'account. L'esecuzione continua fino al tuo limite, al limite di
+spesa o alla fine dell'elenco. `maxItemsPerTarget` limita solo ogni singolo
+target.
 
-**L'Actor ritenta i fallimenti temporanei?** Sì. Effettua fino a 3 tentativi
-per pagina per timeout, 429 & risposte 5xx. Rispetta `Retry-After` quando
-presente. Altrimenti usa un backoff esponenziale. I fallimenti gravi
-conservano i risultati parziali.
+**L'Actor ritenta i fallimenti temporanei?** Sì. Si riprende da solo dagli
+errori temporanei di X. Gli errori gravi conservano i risultati parziali.
 
 **Cosa succede vicino al limite di tempo di esecuzione di Apify?** L'Actor non
-aggiunge alcuna scadenza di esecuzione più breve. Usa il limite configurato di
-Apify & mantiene gli ultimi 15 secondi per la finalizzazione. Scarica i
-profili, salva i checkpoint di paginazione, scrive il report & esce. Le righe
-non accettate dal dataset non vengono fatturate.
+aggiunge una scadenza propria più breve. Prima del tuo limite salva i profili,
+scrive il report e termina. Le righe che non arrivano mai nel dataset non
+vengono fatturate.
 
-**Posso riprendere da dove avevo interrotto?** L'input del cursore di ripresa
-non è ancora esposto. Rieseguire lo stesso target parte dalla sua prima
-pagina disponibile.
+**Posso riprendere da dove avevo interrotto?** Non ancora. Eseguire di nuovo lo
+stesso target riparte dall'inizio.
 
 **Posso usare l'API Apify per eseguirlo?** Sì. Consulta la
 [API tab](https://apify.com/xquik/x-follower-scraper/api) per esempi in

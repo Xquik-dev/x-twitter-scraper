@@ -34,7 +34,7 @@ key or login required.
 - Post, member, and moderator filters run before billing.
 - Multiple Communities and resources per run.
 - Per-resource and global caps.
-- Concurrent reads with saved cursor recovery.
+- Runs pick up where they left off after an Apify restart.
 - The Actor removes duplicate rows before billing.
 
 ## Input
@@ -69,9 +69,8 @@ Xquik REST operations. Examples use sample values. Results reflect live data.
 
 ## Pagination and recovery
 
-Independent Community resources run concurrently. Pagination remains ordered
-inside each cursor lineage. Accepted rows, billing state, cursors, and output
-fingerprints survive Apify migration. The Actor has no self-imposed timeout.
+One run can read many Communities & resources. Delivered rows & progress survive
+an Apify restart. The Actor adds no time limit of its own.
 
 The Actor returns only public Communities that X exposes. Available fields vary
 by Community.

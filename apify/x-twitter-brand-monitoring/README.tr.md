@@ -20,8 +20,8 @@ scraper hizmetidir. X (Twitter) Brand Monitoring, marka bahsedilmelerini ilgi,
 duygu durumu ve müşteri deneyimi yanıtlarıyla izler. Diğer tüm Apify Actor'ları
 filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim edilen,
 benzersiz, filtreyle eşleşen sonuçlar için ücret alır. Yapay zekâ maliyetleri
-tweet başına fiyata dahil. Yapay zekâ sağlayıcısına ödeme yapmazsın, token
-almazsın & anahtar getirmezsin.
+tweet başına fiyata dahil. Yapay zekâ hesabına, token'a veya anahtara ihtiyacın
+yok.
 
 X (Twitter)'da marka bahsedilmelerini izle ve çalıştırmalar arasındaki duygu
 durumu değişikliklerini takip et. **X (Twitter) Brand Monitoring with AI
@@ -105,14 +105,13 @@ Duygu durumu, yazarın hedefe yönelik ifade ettiği tutumu açıklar.
 Actor yanıtları karara göre karşılaştırır. Bir `choice` yanıtını kategorisine
 göre karşılaştırır. Bir `score` yanıtını en yakın seviyesine göre karşılaştırır.
 Bir `probability` yanıtını 0,5'teki evet ya da hayır kararına göre
-karşılaştırır. Bir karar üç durumda değişmiş sayılır. Önceki kategori 0,4
-olasılığın altına düşer. Bir puan en az 0,6 seviye hareket eder. Bir evet/hayır
-olasılığı eşikten en az 0,1 uzağa düşer. Çalıştırmalar arasındaki neredeyse
-berabere durumlar `unchanged` kalır & aynı kararı koruyan kaymalar da öyle
-kalır. Çalıştırmalar arasındaki model varyasyonu raporunu doldurmaz. `changes`,
-değişen her soruyu `previous` & `current` kararıyla listeler. Değişimler model
-varyasyonundan, yeni bağlamdan veya düzenlenmiş kaynak veriden gelebilir.
-Değişen gerçekleri kanıtlamazlar & eksik bir tweet silinmeyi kanıtlamaz.
+karşılaştırır. Bir karar yalnızca belirgin biçimde değiştiğinde değişmiş
+sayılır. Çalıştırmalar arasındaki neredeyse berabere durumlar `unchanged` kalır
+& aynı kararı koruyan kaymalar da öyle kalır. Çalıştırmalar arasındaki model
+varyasyonu raporunu doldurmaz. `changes`, değişen her soruyu `previous` &
+`current` kararıyla listeler. Değişimler model varyasyonundan, yeni bağlamdan
+veya düzenlenmiş kaynak veriden gelebilir. Değişen gerçekleri kanıtlamazlar &
+eksik bir tweet silinmeyi kanıtlamaz.
 
 Temel değer sınırı varsayılan olarak 100.000 satırdır. Tekrarlanan tweet
 ID'leri, yükleme hataları ve değişen veri kümesi boyutları, toplamadan önce
@@ -141,8 +140,8 @@ veya notlar. Actor metni analiz eder & X'ten hiçbir şey getirmez.
 
 ## Fiyatlandırma
 
-Yapay zekâ maliyetleri tweet başına fiyata dahil. Yapay zekâ sağlayıcısına ödeme
-yapmazsın, token almazsın & anahtar getirmezsin.
+Yapay zekâ maliyetleri tweet başına fiyata dahil. Yapay zekâ hesabına, token'a
+veya anahtara ihtiyacın yok.
 
 Başlangıç ücreti olmadan, başarıyla analiz edilen tweet başına $0.0003'ten
 başlar. Fiyat toplamayı içerir. Analiz ödeneği 8 soru, soru tanımı başına 8.000
@@ -329,9 +328,10 @@ eder. Score soruları en az 2 sıralı seviye kullanır. Karşılaştırmak iste
 
 Actor tweet'i topladı & teslim etti, ancak yapay zeka analizi tamamlanmadı.
 `analysis.reason`, tweet ve bağlamı `maxContextBytes`'ı aştığında
-`context_limit` veya yeniden denemelerden sonra `service_unavailable` gibi
-nedeni adlandırır. Bu satırların sonuç ücreti yoktur. `maxContextBytes`'ı
-(12.000'e kadar) artır veya etkilenen ID'leri yeniden çalıştır.
+`context_limit` veya analiz hizmeti kısa süre kullanılamadığında
+`service_unavailable` gibi nedeni adlandırır. Bu satırların sonuç ücreti yoktur.
+`maxContextBytes`'ı (12.000'e kadar) artır veya etkilenen ID'leri yeniden
+çalıştır.
 
 ### Analiz gerçekleri doğrular mı?
 

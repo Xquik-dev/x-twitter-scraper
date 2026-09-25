@@ -19,15 +19,12 @@ Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，拥�
 
 在每个 Apify 套餐上，以**每个交付的主页低至 $0.00015** 的价格抓取 X（Twitter）关注者、关注对象、已验证关注者、List 成员、List 订阅者和 Community 成员。Apify 会单独收取平台使用费。无需 X 登录、无启动费、无查询费。
 
->
+> Xquik 是独立的第三方服务，与 X Corp 没有关联。
+> "Twitter" 和 "X" 是 X Corp 的商标。
 
 ## 未完成的提取
 
 被中断的提取会写入一份免费的 `partial` 诊断记录。已获取的结果保持完整。重试前请先读取 `availableResults`、`failedTargets`、`retryable` 和 `nextAction`。Actor 成功退出只表示已交付，不代表提取已完成。
-
-Xquik 是独立的第三方服务，与 X Corp 没有关联。
-
-> "Twitter" 和 "X" 是 X Corp 的商标。
 
 ## X Follower Scraper 能做什么？
 
@@ -38,10 +35,8 @@ X Follower Scraper 返回关注者、关注对象、Lists 和 Communities 的可
 - 过滤和去重在计费之前执行。
 - 一次运行可接受用户名、数字 ID、URL 和短路径。
 - 合并模式会记录共享主页、来源、关系及 `overlapCount`。
-- 自动游标每页最多请求 300 个主页。
-- 旧版游标保持 200 个主页的限制，过期后会重新开始。
-- 分页日志包含 `fetchDurationMs`、`processingDurationMs`、`pushDurationMs`、`statusDurationMs` 和 `fullPageDurationMs`，不会重复目标。
-- 检查点会在重启后保留已接受的行、计时和失败次数。
+- 运行日志会在 `fetchDurationMs`、`processingDurationMs`、`pushDurationMs`、`statusDurationMs` 和 `fullPageDurationMs` 中显示每页耗时。
+- 如果 Apify 重启运行，已交付的行和进度都会保留。
 
 ## 任务示例
 
@@ -96,17 +91,17 @@ X Follower Scraper 返回关注者、关注对象、Lists 和 Communities 的可
 
 `verifiedOnly` 同时接受公开 Blue 认证和旧版认证主页。当来源标记出现冲突时，绝不会让某个 false 值掩盖真实的认证状态。
 
-与查看者相关的状态属于 Xquik 的抓取账号，而非你的数据集。关注、屏蔽、静音、私信、通知等与查看者相关的标记始终会被移除，raw 输出也不例外。
+结果行永远不会包含仅与查看者相关的状态。关注、屏蔽、静音、私信、通知等查看者标记都会被移除，原始输出也不例外。
 
 ## 抓取 X 关注者需要多少费用？
 
 在每个 Apify 套餐上，每个交付的主页收费 `$0.00015`。Apify 会单独收取你的平台使用费。Xquik 对每条交付的数据行收取一次费用。`diagnostics` 输出中的诊断记录是免费的。无需另外订阅 Xquik。无启动费。每次运行都会写入一条 `run-report` 记录，其中的 `estimatedChargeUsd` 是根据 Apify 向 Actor 提供的实时按事件计费价格计算得出的。每种结果都会写入 `run-report`，包括无输入和输入无效的退出情况。其 `version` 字段记录了确切发布的 Actor 源码版本。
 
-`failedTargets` 统计因读取失败而停止的目标数量。已接受的主页仍属于可计费的数据行。这些运行使用 `completionReason: "partial_failure"`。快速的服务端分页遵循相同的报告契约。
+`failedTargets` 统计出错后停止的目标数量。已交付的主页仍属于可计费的数据行。这些运行使用 `completionReason: "partial_failure"`。
 
-Apify 默认超时时间为 `0`，运行没有时间限制。Actor 会持续跟进每个实时游标，直到达到上限或来源结束。调用方仍可设置有限的超时时间，此时 `completionReason: "deadline_reached"` 表示即将达到该限制。Actor 会保留最后 15 秒用于处理检查点、数据行、报告和干净退出。有效主页仍会被交付并只计费一次。未完成的分页仍可继续。
+Apify 默认超时时间为 `0`，运行没有时间限制。Actor 会持续运行，直到达到上限或没有更多主页。你仍可设置有限的超时时间。此时 `completionReason: "deadline_reached"` 表示该限制即将到达。Actor 会在到达限制前保存主页和报告，然后正常退出。已交付的主页只计费一次。
 
-独立的目标会并发运行。每个目标都保持有序的游标分页。数据集写入会原子性地保持上限、去重、归属和计费的一致性。
+一次运行可以读取多个目标。上限、去重、归属和计费在所有目标之间都保持准确。
 
 - 启动、目标和关系选择不会额外收取查询费用。
 - 过滤条件（`minFollowers`、`verifiedOnly`、`bioContains`、`locationContains`、`minFollowing`、`maxFollowing`、`minStatuses`、`maxStatuses`、`minAccountAgeDays`、`verifiedType`、`usernameContains`、`hasWebsite`、`hasLocation`）会在主页进入数据集之前执行。
@@ -405,21 +400,21 @@ Xquik 还提供 47 个仪表盘工具、129 个 REST 操作、签名 webhook 以
 
 ## 常见问题
 
-**我需要 X API 密钥吗？** 不需要。该抓取工具使用自有基础设施，无需登录或凭证。
+**我需要 X API 密钥吗？** 不需要。无需 X API 密钥、登录或凭据。
 
 **什么会限制一次运行？** 你设置的条目数量上限和 Apify 支出上限会停止运行。Apify 账号和平台限制依然适用。
 
-**速度有多快？** 运行时长取决于目标规模、过滤条件和上游可用性。深度过滤的运行每 5 页会在 Console 中记录一次进度检查点，从而减少页面抓取之间的非数据流量。
+**速度有多快？** 运行时长取决于目标规模、过滤条件和 X 的可用性。
 
 **为什么我的运行返回的行数比 `maxItems` 少？** `minFollowers`、`verifiedOnly`、`bioContains` 等过滤条件会在写入前生效。放宽过滤条件可获得更多结果。
 
-**从单个账号最多能抓取多少关注者？** X 会以批次的形式对大账号进行分页。提高 Apify 的运行时长限制可获取更多页面。`maxItemsPerTarget` 只会限制单个目标的数量。
+**从单个账号最多能抓取多少关注者？** X 对该账号显示多少，就能抓取多少。运行会持续到达到你的上限、支出限制或列表末尾。`maxItemsPerTarget` 只限制每个目标。
 
-**Actor 会重试临时性失败吗？** 会。针对超时、429 和 5xx 响应，每页最多重试 3 次。如果响应中包含 `Retry-After`，会遵循该值；否则会使用指数退避策略。硬性失败会保留已获取的部分结果。
+**Actor 会重试临时性失败吗？** 会。它会自动从 X 的临时错误中恢复。严重失败时会保留部分结果。
 
-**接近 Apify 运行时长限制时会发生什么？** Actor 不会设置更短的运行截止时间，而是使用 Apify 配置的限制，并保留最后 15 秒用于收尾。它会刷新主页数据、保存分页检查点、写入报告并退出。未被数据集接受的行不会计费。
+**接近 Apify 运行时长限制时会发生什么？** Actor 不会自行设置更短的截止时间。在到达你的限制之前，它会保存主页、写入报告并退出。从未进入数据集的行不会计费。
 
-**我可以从上次中断的地方继续吗？** 目前尚未开放恢复游标的输入方式。重新运行相同目标会从其第一个可用页面开始。
+**我可以从上次中断的地方继续吗？** 暂时不行。重新运行相同目标会从头开始。
 
 **我可以使用 Apify API 运行它吗？** 可以。Python、JavaScript 和 cURL 示例请参见 [API tab](https://apify.com/xquik/x-follower-scraper/api)。
 

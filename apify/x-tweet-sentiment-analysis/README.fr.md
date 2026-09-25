@@ -15,13 +15,12 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Découvrez comment Framer utilise les scrapers Xquik avec Claude Code, Codex, Cursor et d'autres outils, à partir de 6:07.</a>
 </td></tr></table>
 
-Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher
-au monde, avec les données X les plus complètes. X Tweet Sentiment Analysis
-ajoute une attitude, une intensité & un sarcasme à chaque tweet. Tous les
-autres Actors Apify facturent avant de filtrer ou de dédupliquer. Xquik ne
-facture que les résultats livrés, uniques et conformes aux filtres. Les
-coûts d'IA sont inclus dans le prix par tweet. Vous ne payez aucun
-fournisseur d'IA, n'achetez aucun jeton & n'apportez aucune clé.
+Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
+monde, avec les données X les plus complètes. X Tweet Sentiment Analysis ajoute
+une attitude, une intensité & un sarcasme à chaque tweet. Tous les autres Actors
+Apify facturent avant de filtrer ou de dédupliquer. Xquik ne facture que les
+résultats livrés, uniques et conformes aux filtres. Les coûts d'IA sont inclus
+dans le prix par tweet. Vous n'avez besoin d'aucun compte d'IA, jeton ni clé.
 
 Mesurez l'attitude derrière les posts X (Twitter) et conservez les données
 originales du tweet. **X Tweet Sentiment Analysis with AI** collecte les
@@ -93,7 +92,8 @@ notes. L'Actor l'analyse & ne récupère rien sur X.
 
 ## Tarification
 
-Les coûts d'IA sont inclus dans le prix par tweet. Vous ne payez aucun fournisseur d'IA, n'achetez aucun jeton & n'apportez aucune clé.
+Les coûts d'IA sont inclus dans le prix par tweet. Vous n'avez besoin d'aucun
+compte d'IA, jeton ni clé.
 
 À partir de $0.0003 par tweet analysé avec succès, sans frais de
 démarrage. Le prix inclut la collecte. L'allocation d'analyse
@@ -166,20 +166,17 @@ ignorées portent une correspondance vide.
 
 ## Comparer avec un run antérieur
 
-Passez `monitor.baselineDatasetId`, l'ID du dataset d'un run antérieur
-terminé avec les mêmes réglages d'analyse. Chaque ligne gagne alors un
-objet `monitor`. Son statut est `first_run` sans référence,
-`new_to_baseline` pour les tweets absents du run antérieur, & `unchanged`
-ou `changed` pour les tweets qu'il avait. `changes` liste chaque décision
-de sentiment, niveau d'intensité ou sarcasme ayant évolué de `previous` à
-`current`. Les décisions se comparent par catégorie, niveau de score
-arrondi, ou oui/non à 0,5. Une décision compte comme changée dans trois
-cas. La catégorie précédente tombe sous 0,4 de probabilité. Un score bouge
-d'au moins 0,6 niveau. Une probabilité oui/non se situe à au moins 0,1 du
-seuil. Les fluctuations proches d'une
+Passez `monitor.baselineDatasetId`, l'ID du dataset d'un run antérieur terminé
+avec les mêmes réglages d'analyse. Chaque ligne gagne alors un objet `monitor`.
+Son statut est `first_run` sans référence, `new_to_baseline` pour les tweets
+absents du run antérieur, & `unchanged` ou `changed` pour les tweets qu'il
+avait. `changes` liste chaque décision de sentiment, niveau d'intensité ou
+sarcasme ayant évolué de `previous` à `current`. Les décisions se comparent par
+catégorie, niveau de score arrondi, ou oui/non à 0,5. Une décision ne compte
+comme changée que si elle bouge nettement. Les fluctuations proches d'une
 égalité entre les runs restent inchangées. Les références au-delà de
-`maxBaselineRows` (par défaut 100 000) ou issues de réglages différents
-arrêtent le run avant la collecte avec une ligne de diagnostic.
+`maxBaselineRows` (par défaut 100 000) ou issues de réglages différents arrêtent
+le run avant la collecte avec une ligne de diagnostic.
 
 ## Exemples de tâches
 
@@ -293,11 +290,11 @@ défaut : 1 à 8 questions de type `choice`, `score` ou `probability` avec
 ### Pourquoi une ligne revient-elle avec un `analysis.status` de `failed` ou `skipped` ?
 
 L'Actor a collecté & livré le tweet, mais l'analyse par IA ne s'est pas
-terminée. `analysis.reason` nomme la cause, comme `context_limit` quand
-le tweet et son contexte dépassent `maxContextBytes`, ou
-`service_unavailable` après des tentatives. Ces lignes n'entraînent aucun
-frais de résultat. Augmentez `maxContextBytes` (jusqu'à 12 000) ou
-relancez les ID concernés.
+terminée. `analysis.reason` nomme la cause, comme `context_limit` quand le tweet
+et son contexte dépassent `maxContextBytes`, ou `service_unavailable` quand le
+service d'analyse est brièvement indisponible. Ces lignes n'entraînent aucun
+frais de résultat. Augmentez `maxContextBytes` (jusqu'à 12 000) ou relancez les
+ID concernés.
 
 ### L'analyse vérifie-t-elle les faits ?
 

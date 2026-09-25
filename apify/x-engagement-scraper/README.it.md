@@ -37,7 +37,7 @@ X né il login.
 - Più tipi di engagement e post per esecuzione.
 - Limiti globali e per risorsa.
 - Attribuzione del post sorgente e del tipo di engagement.
-- Risorse concorrenti con recupero da cursore salvato.
+- Le esecuzioni riprendono da dove si erano fermate dopo un riavvio di Apify.
 
 ## Input
 
@@ -74,20 +74,17 @@ Imposta `includeRetweetTimestamp` su `true` per i risultati `retweeters`. La
 colonna `retweetedAt` contiene l'orario osservato della ripubblicazione in
 UTC.
 
-Ogni verifica controlla la pagina profilo più recente disponibile di chi ha
-retwittato. Confronta l'account e il post sorgente con i record di
-ripubblicazione effettivi. Record di ripubblicazione più vecchi, eliminati o
-non disponibili possono lasciare il timestamp `null`. Anche le verifiche del
-timestamp fallite lasciano `null`. Il profilo resta nell'output. La verifica non
-dimostra che un account non abbia mai ripubblicato un post.
+L'Actor trova l'ora del repost quando X mostra ancora quel repost. I repost più
+vecchi, eliminati o non disponibili lasciano il timestamp `null`. Il profilo
+resta nell'output. Un valore `null` non dimostra che un account non abbia mai
+ripubblicato un post.
 
-Le letture extra aumentano la latenza. Lascia questa opzione disattivata per
-i risultati solo profilo. `createdAt` del profilo resta la data di
-creazione dell'account. Le righe dei tweet portano `retweetedAt` quando
-contengono un evento di ripubblicazione. Le date del post originale e gli
-orari di scraping non sostituiscono mai gli orari di ripubblicazione. I
-prezzi dei risultati e la fatturazione per riga consegnata restano
-invariati.
+Questa opzione rende le esecuzioni più lente. Lasciala disattivata per risultati
+solo di profilo. Il `createdAt` del profilo resta la data di creazione
+dell'account. Le righe di tweet riportano `retweetedAt` quando contengono un
+evento di repost. Le date del post originale e gli orari di scraping non
+sostituiscono mai gli orari del repost. I prezzi dei risultati e la fatturazione
+per riga consegnata restano invariati.
 
 ## Prezzi
 
@@ -104,10 +101,9 @@ valori campione. I risultati riflettono dati live.
 
 ## Recupero e limiti
 
-Le coppie indipendenti post-risorsa vengono eseguite in concorrenza. La
-sequenza dei cursori resta ordinata. Righe accettate, stato di fatturazione,
-cursori e fingerprint sopravvivono alla migrazione Apify. L'Actor non ha
-timeout autoimposto.
+Un'esecuzione può leggere molti post e tipi di interazione. Le righe consegnate
+e i progressi superano un riavvio di Apify. L'Actor non aggiunge un proprio
+limite di tempo.
 
 ## Estrazione incompleta
 

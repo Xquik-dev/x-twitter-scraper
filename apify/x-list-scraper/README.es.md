@@ -67,10 +67,9 @@ Los resultados reflejan datos en vivo.
 
 ## Paginación y recuperación
 
-Los recursos de Lista independientes se ejecutan en paralelo. Cada linaje de
-cursor permanece ordenado. Las filas aceptadas, el estado de facturación, los
-cursores y las huellas digitales sobreviven a una migración de Apify. El Actor
-no tiene un tiempo de espera propio.
+Una ejecución puede leer muchas Listas y recursos. Las filas entregadas y el
+progreso se conservan tras un reinicio de Apify. El Actor no agrega un límite de
+tiempo propio.
 
 ## Extracción incompleta
 

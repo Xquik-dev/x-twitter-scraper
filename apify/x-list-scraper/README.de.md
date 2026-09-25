@@ -70,9 +70,9 @@ Beispielwerte. Ergebnisse spiegeln Live-Daten.
 
 ## Paginierung und Wiederherstellung
 
-Unabhängige Listenressourcen laufen gleichzeitig. Jede Cursor-Linie bleibt
-geordnet. Akzeptierte Datensätze, Abrechnungsstatus, Cursor und Fingerprints
-überstehen eine Apify-Migration. Der Actor hat kein eigenes Zeitlimit.
+Ein Run kann viele Listen und Ressourcen lesen. Gelieferte Datensätze und der
+Fortschritt überstehen einen Apify-Neustart. Der Actor setzt kein eigenes
+Zeitlimit.
 
 ## Unvollständige Extraktion
 

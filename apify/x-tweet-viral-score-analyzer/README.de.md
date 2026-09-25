@@ -16,12 +16,11 @@
 </td></tr></table>
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
-den umfassendsten X-Daten. X Tweet Viral Score Analyzer ergänzt jeden Tweet
-um eine Viral-Score-Schätzung & ein Urteil. Jeder andere Apify Actor
-berechnet, bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für
-gelieferte, eindeutige, filterkonforme Ergebnisse. Die KI-Kosten sind im Preis
-pro Tweet enthalten. Du bezahlst keinen KI-Anbieter, kaufst keine Tokens &
-bringst keinen Schlüssel mit.
+den umfassendsten X-Daten. X Tweet Viral Score Analyzer ergänzt jeden Tweet um
+eine Viral-Score-Schätzung & ein Urteil. Jeder andere Apify Actor berechnet,
+bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für gelieferte,
+eindeutige, filterkonforme Ergebnisse. Die KI-Kosten sind im Preis pro Tweet
+enthalten. Du brauchst kein KI-Konto, keine Tokens und keinen Schlüssel.
 
 Finde heraus, warum Tweets sich verbreiten oder floppen, & behalte die
 ursprünglichen Tweet-Daten. **X Tweet Viral Score Analyzer with AI** sammelt
@@ -30,8 +29,7 @@ aus diesen Antworten eine Viral-Score-Schätzung von 0 bis 100 & ein Urteil.
 Jeder Datensatz behält echte Likes, Reposts, Antworten & Zitate, sodass du
 jede Schätzung mit dem vergleichen kannst, was passiert ist.
 
-- **Viral Score pro Beitrag** aus festen, veröffentlichten Gewichten, die du
-  überprüfen kannst.
+- **Viral Score pro Beitrag** aus festen, versionierten Regeln.
 - **8 Antworten zu Merkmalen** zeigen, warum ein Beitrag hoch oder niedrig
   abschnitt.
 - **Harte Stopps** deckeln Beiträge, die wie Spam, Ragebait oder generischer
@@ -74,25 +72,13 @@ Likes oder Aufrufe voraus. Er bildet nicht nach, wie X Beiträge rankt.
 Die Antwort „KI-geschrieben" beurteilt nur den Stil. Sie stellt nicht fest,
 wer den Beitrag geschrieben hat.
 
-### So berechnet der Actor den Viral Score
+### So funktioniert der Viral Score
 
-Der Actor skaliert jeden Score von 0-2 auf einen Anteil von 0 bis 1. Dann
-addiert er Punkte:
+Hook, Klarheit, Mehrwert und die erwartete Reaktion heben den Score.
+Formulierungen, die wie generischer Maschinentext klingen, senken ihn.
 
-| Teil                                              | Punkte          |
-| ------------------------------------------------- | --------------- |
-| Hook                                              | bis zu 30       |
-| Klarheit                                          | bis zu 20       |
-| Mehrwert, der höhere Wert aus informativ & witzig | bis zu 30       |
-| Reaktion                                          | bis zu 20       |
-| Wahrscheinlichkeit für KI-geschrieben             | minus bis zu 15 |
-
-Die Reaktion erhält einen Anteil ihrer 20 Punkte: Teilen 1, Antworten 0,8,
-Liken 0,6, Streiten 0,4 & Ignorieren 0. Danach deckeln harte Stopps den Score.
-Eine Spam-Wahrscheinlichkeit ab 0,7 deckelt ihn bei 20. Eine
-Ragebait-Wahrscheinlichkeit ab 0,7 deckelt ihn bei 35. Eine
-Wahrscheinlichkeit für KI-geschrieben ab 0,8 deckelt ihn bei 60. Der Actor
-rundet das Ergebnis auf eine ganze Zahl.
+Harte Stopps deckeln den Score von wahrscheinlichem Spam, Ragebait und
+generischem Maschinentext. Der Score ist eine ganze Zahl von 0 bis 100.
 
 | Urteil        | Score      |
 | ------------- | ---------- |
@@ -100,11 +86,10 @@ rundet das Ergebnis auf eine ganze Zahl.
 | `edit_first`  | 40 bis 69  |
 | `sleep_on_it` | 0 bis 39   |
 
-`viral.weights` nennt die Version dieser Regeln, etwa `viral_lite:1`. Wir
-erhöhen sie, sobald sich ein Gewicht, ein Stopp oder ein Schwellenwert ändert.
-Der Score ist `null`, wenn die Analyse fehlgeschlagen ist, der Actor sie
-übersprungen hat oder eine Standardantwort zu einem Merkmal fehlt. Der Actor
-füllt einen fehlenden Score nie mit einer Vermutung.
+`viral.weights` nennt die Version dieser Regeln, etwa `viral_lite:1`. Sie ändert
+sich, sobald sich die Regeln ändern. Der Score ist `null`, wenn die Analyse
+fehlschlug, der Actor sie übersprang oder eine Standard-Merkmalsantwort fehlt.
+Der Actor füllt einen fehlenden Score nie mit einer Schätzung.
 
 ## Algorithm-Score-Schätzung
 
@@ -165,9 +150,7 @@ Grenzen:
 
 - Weniger als 10 verglichene Beiträge ergeben eine `null`-Kalibrierung mit dem
   Grund `too_few_posts`. Identische Scores oder Raten ergeben `no_variation`.
-- Der Actor gruppiert Raten in 0,1 breite Buckets, um den Speicherbedarf
-  konstant zu halten. Beiträge in einem Bucket zählen als gleichrangig, daher
-  ist die Korrelation ein Näherungswert.
+- Die Korrelation ist ein Näherungswert.
 - Die Kalibrierung beschreibt einen Run. Ein niedriger Wert kann bedeuten,
   dass sich die Beiträge in Timing, Thema oder Zielgruppe unterscheiden, nicht
   dass die Schätzung der Formulierung versagt hat.
@@ -237,7 +220,8 @@ von X ab.
 
 ## Preise
 
-Die KI-Kosten sind im Preis pro Tweet enthalten. Du bezahlst keinen KI-Anbieter, kaufst keine Tokens & bringst keinen Schlüssel mit.
+Die KI-Kosten sind im Preis pro Tweet enthalten. Du brauchst kein KI-Konto,
+keine Tokens und keinen Schlüssel.
 
 Ab $0.0003 pro erfolgreich analysiertem Tweet, ohne Startgebühr. Der
 Preis enthält die Erfassung & den Viral Score. Das Analyse-Kontingent umfasst
@@ -324,19 +308,16 @@ Fehlgeschlagene & übersprungene Datensätze führen eine leere Zuordnung.
 ## Mit einem früheren Run vergleichen
 
 Übergib `monitor.baselineDatasetId`, die Dataset-ID eines abgeschlossenen
-früheren Runs mit denselben Analyseeinstellungen. Jeder Datensatz erhält
-dann ein `monitor`-Objekt. Sein Status ist `first_run` ohne Baseline,
-`new_to_baseline` für Tweets, die der frühere Run nicht hatte, &
-`unchanged` oder `changed` für Tweets, die er hatte. `changes` listet
-jede Merkmal-Entscheidung, die sich von `previous` zu `current` geändert
-hat. Entscheidungen werden nach Kategorie, gerundeter Score-Stufe oder
-Ja/Nein bei 0,5 verglichen. Eine Entscheidung zählt in drei Fällen als
-geändert. Die frühere Kategorie fällt unter eine Wahrscheinlichkeit von 0,4.
-Ein Score bewegt sich um mindestens 0,6 Stufen. Eine
-Ja/Nein-Wahrscheinlichkeit landet mindestens 0,1 vom Schwellenwert entfernt.
-Fast unentschiedenes Rauschen zwischen Runs bleibt unverändert. Baselines über
-`maxBaselineRows` (Standard: 100.000) oder aus abweichenden Einstellungen
-stoppen den Run vor der Erfassung mit einem Diagnose-Datensatz.
+früheren Runs mit denselben Analyseeinstellungen. Jeder Datensatz erhält dann
+ein `monitor`-Objekt. Sein Status ist `first_run` ohne Baseline,
+`new_to_baseline` für Tweets, die der frühere Run nicht hatte, & `unchanged`
+oder `changed` für Tweets, die er hatte. `changes` listet jede
+Merkmal-Entscheidung, die sich von `previous` zu `current` geändert hat.
+Entscheidungen werden nach Kategorie, gerundeter Score-Stufe oder Ja/Nein bei
+0,5 verglichen. Eine Entscheidung zählt nur als geändert, wenn sie sich deutlich
+bewegt. Fast unentschiedenes Rauschen zwischen Runs bleibt unverändert.
+Baselines über `maxBaselineRows` (Standard: 100.000) oder aus abweichenden
+Einstellungen stoppen den Run vor der Erfassung mit einem Diagnose-Datensatz.
 
 ## Task-Beispiele
 
@@ -379,13 +360,12 @@ Standardfragen, daher lassen eigene Fragen ihn auf `null`.
 
 ### Warum kam ein Datensatz mit `analysis.status` `failed` oder `skipped` zurück?
 
-Der Actor hat den Tweet gesammelt & geliefert, aber die KI-Analyse
-wurde nicht abgeschlossen. `analysis.reason` nennt die Ursache, etwa
-`context_limit`, wenn der Tweet & sein Kontext `maxContextBytes`
-überschreiten, oder `service_unavailable` nach Wiederholungsversuchen.
-Diese Datensätze verursachen keine Ergebnisgebühr & erhalten keinen Score.
-Erhöhe `maxContextBytes` (bis zu 12.000) oder führe die betroffenen IDs erneut
-aus.
+Der Actor hat den Tweet gesammelt & geliefert, aber die KI-Analyse wurde nicht
+abgeschlossen. `analysis.reason` nennt die Ursache, etwa `context_limit`, wenn
+der Tweet & sein Kontext `maxContextBytes` überschreiten, oder
+`service_unavailable`, wenn der Analysedienst kurz nicht verfügbar ist. Diese
+Datensätze verursachen keine Ergebnisgebühr & erhalten keinen Score. Erhöhe
+`maxContextBytes` (bis zu 12.000) oder führe die betroffenen IDs erneut aus.
 
 ### Prüft die Analyse Fakten?
 

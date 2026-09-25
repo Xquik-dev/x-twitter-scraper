@@ -88,9 +88,9 @@ muestra. Los resultados reflejan datos en vivo.
 
 ## Paginación y recuperación
 
-Los objetivos independientes se ejecutan en paralelo. Las líneas de tiempo
-usan cobertura automática con todos los filtros. Las filas aceptadas, el
-estado de facturación y las huellas digitales sobreviven a una migración.
+Una ejecución puede leer muchos perfiles. Las líneas de tiempo aplican todos los
+filtros que configures. Las filas entregadas y el progreso se conservan tras un
+reinicio de Apify.
 
 ## Extracción incompleta
 

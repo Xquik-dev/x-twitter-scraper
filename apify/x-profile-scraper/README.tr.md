@@ -83,9 +83,9 @@ Sonuçlar canlı veriyi yansıtır.
 
 ## Sayfalama ve kurtarma
 
-Bağımsız hedefler eşzamanlı çalışır. Zaman akışları tüm filtrelerle otomatik
-kapsama kullanır. Kabul edilen satırlar, faturalama durumu ve parmak izleri
-göçten sağ çıkar.
+Tek bir çalıştırma birçok profili okuyabilir. Zaman akışları ayarladığın her
+filtreyi uygular. Teslim edilen satırlar ve ilerleme, Apify yeniden
+başlatmasından sonra korunur.
 
 ## Eksik çıkarma
 

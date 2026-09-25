@@ -69,10 +69,9 @@ risultati riflettono dati live.
 
 ## Paginazione e recupero
 
-Le risorse delle List indipendenti vengono eseguite in modo concorrente. Ogni
-lignaggio di cursore resta ordinato. Righe accettate, stato di fatturazione,
-cursori e fingerprint sopravvivono alla migrazione Apify. L'Actor non ha un
-timeout autoimposto.
+Un'esecuzione può leggere molte Liste e risorse. Le righe consegnate e i
+progressi superano un riavvio di Apify. L'Actor non aggiunge un proprio limite
+di tempo.
 
 ## Estrazione incompleta
 

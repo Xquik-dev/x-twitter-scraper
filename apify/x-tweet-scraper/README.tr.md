@@ -43,16 +43,11 @@ eder.
   modlarını destekler.
 - Tweet ID girdilerinin sabit bir sayı üst sınırı yoktur. Apify harcama ve
   zaman aşımı ayarları uygulanır.
-- Otomatik arama ve alıntı sayfaları 300'e kadar satır ister.
-- Kaydedilmiş imleçler orijinal sayfa sınırlarını korur ve süresi
-  dolduğunda yeniden başlar.
-- Profil modları, her ikisi de geçerli olduğunda zaman akışını ve yazar
-  aramasını birleştirir.
-- Sayfa günlükleri, hedefleri tekrarlamadan `fetchDurationMs`,
+- Çalıştırma günlükleri sayfa sürelerini `fetchDurationMs`,
   `processingDurationMs`, `pushDurationMs`, `statusDurationMs` ve
-  `fullPageDurationMs` içerir.
-- Kontrol noktaları, yeniden başlatmalardan sonra kabul edilen satırları,
-  zamanlamayı ve hata sayılarını korur.
+  `fullPageDurationMs` alanlarında gösterir.
+- Apify çalıştırmayı yeniden başlatırsa teslim edilen satırlar ve ilerleme
+  korunur.
 
 ### Her zaman en güncel yapıyı kullan
 
@@ -164,10 +159,9 @@ korur.
 Medya, kullanılabilirlik, geometri, etiketler, video varyantları,
 `watchNowUrl` ve `visitSiteUrl` eylemlerini içerir.
 
-Görüntüleyene özgü durum, veri kümene değil Xquik'in getirme hesabına
-aittir. Takip etme, engelleme, sessize alma, yer imi, beğeni, yeniden
-paylaşma, düzenleme izni ve benzeri görüntüleyen işaretleri, ham çıktı dahil
-her zaman kaldırılır.
+Satırlar asla görüntüleyene özgü durum içermez. Takip, engelleme, sessize alma,
+yer işareti, beğeni, repost, düzenleme izni ve benzeri görüntüleyen bayrakları
+her zaman kaldırılır, ham çıktıdan da.
 
 ## Tweet kazımanın maliyeti nedir?
 
@@ -182,25 +176,21 @@ başına ödeme fiyatından hesaplanan `estimatedChargeUsd` ile bir
 sonuç `run-report` yazar. Çalıştırma raporları veri satırlarını `realRows`
 içinde ve tanılamaları `diagnosticRows` içinde ayırır.
 
-Başka bir çalıştırmaya harcama yapmadan önce boş sonuçları anla.
-`filtering` nesnesi, raporlarda ve son tanılamalarda `serverFilteredRows`'u
-`actorFilteredRows`'tan ayırır. Bunlar, tekrarlanan kaynak satırları dahil
-işlenen sayfalar genelinde reddedilen satırları sayar.
-`pagesWithUnknownServerFiltering`, geçerli sunucu sayıları olmayan
-sayfaları belirler. Eksik sayılar boşluk olarak kalır. Filtrelenen satırlar
-asla sonuç ücreti gerektirmez.
+Başka bir çalıştırmaya harcama yapmadan önce boş sonuçları anla. Raporlardaki ve
+son tanılamalardaki `filtering` nesnesi, filtrelerinin kaldırdığı satırları
+sayar. `serverFilteredRows`, `actorFilteredRows` ve
+`pagesWithUnknownServerFiltering` alanlarına bak. Filtrelenen satırlar asla
+sonuç ücreti doğurmaz.
 
 Kaynak tükenmesi, çıkarmayı istediğin sınırın altında tamamlayabilir. Bu
 çalıştırmalar `completionReason: "source_exhausted"` ile
 `outcome: "complete"` raporlar. Kesintiye uğrayan çalıştırmalar kısmi
 sonuçlarını ve yeniden deneme rehberliğini korur.
 
-`failedSubtargets`, okuma hataları tarafından durdurulan sorguları ve
-profil hedeflerini sayar. Sayfalama ve ödeme hataları kısmi satırları ve
-tamamlanmamış imleçleri korur. Bunlar asla hedefin eksik olduğu anlamına
-gelmez. Kabul edilen satırlar veri satırları olarak kalır ve faturalamaya
-dahil edilir. Bu çalıştırmalar `completionReason: "partial_failure"`
-kullanır. Hızlı sunucu taraflı sayfalama aynı raporlama sözleşmesini izler.
+`failedSubtargets`, bir hatadan sonra duran sorguları ve profil hedeflerini
+sayar. Teslim edilen satırlar veri kümesinde kalır ve faturalamaya dahil olur.
+Bir hata, hedefin olmadığı anlamına gelmez. Bu çalıştırmalar
+`completionReason: "partial_failure"` kullanır.
 
 Kesintiye uğrayan çıkarma ayrıca ücretsiz bir `partial` tanılaması yazar.
 Mevcut sonuçlar bozulmadan kalır. Tanılama `availableResults`,
@@ -232,25 +222,17 @@ girdiğin haliyle `target` ve bir `reason` bulunur: `not_found`, `protected`,
 `search_unavailable` veya `likes_hidden`. Liste en fazla 100 kayıt tutar.
 Eksiksiz bir çalıştırma için onları girdiden çıkar.
 
-`completionReason: "pagination_safety_limit"` bir okuma hatası değildir. Bu,
-sayfalamanın geçerli satırları koruduğu, ardından sınırlı güvenlik sınırına
-ulaştığı anlamına gelir. En Yeni aramalar, geçerli kurtarma imleçleri kaldığı
-sürece boş sayfalar boyunca devam eder. En Popüler aramalar ve hesap penceresi
-kurtarma, 10 ardışık boş sayfadan sonra kontrol noktasına alınabilir. Hizmet
-durmuş sayfalama bildirirse çalıştırma satırlarını korur ve o hedefi hemen
-kontrol noktasına alır. Kontrol noktasına alınan bir çalıştırma eksik çıkarma
-bildirir ve devam ettirilebilir imleçleri korur. Ardışık boş sayfalardan sonra
-bile bir terminal sayfası sayfalamayı tamamlar. `failedSubtargets` `0` olarak
-kalır. Yalnızca kabul edilen veri kümesi satırları için ödersin.
+`completionReason: "pagination_safety_limit"` bir okuma hatası değildir.
+Çalıştırma geçerli satırlarını korudu, sonra artık yeni sonuç getirmeyen bir
+hedefi bitirdi. Çalıştırma eksik çıkarma bildirir. `failedSubtargets` `0` kalır.
+Yalnızca teslim edilen satırlar için ödersin.
 
-Varsayılan Apify zaman aşımı `0`'dır, bu yüzden çalıştırmaların zaman
-sınırı yoktur. Actor, üst sınıra ulaşana veya uygun veriyi bitirene kadar
-devam eder. Çağıran yine de sonlu bir Apify zaman aşımı ayarlayabilir. O zaman
-`completionReason: "deadline_reached"`, o yapılandırılmış sınırın
-yaklaştığı anlamına gelir. Actor, kontrol noktaları, satırlar, raporlar ve
-başarılı bir çıkış için son 15 saniyeyi tutar. Geçerli satırlar teslim
-edilmiş kalır ve bir kez faturalandırılır. Tamamlanmamış sayfalama devam
-ettirilebilir kalır.
+Varsayılan Apify zaman aşımı `0`'dır, bu yüzden çalıştırmaların zaman sınırı
+yoktur. Actor, üst sınıra ulaşana veya uygun veriyi bitirene kadar devam eder.
+Yine de sonlu bir Apify zaman aşımı ayarlayabilirsin. O zaman
+`completionReason: "deadline_reached"`, bu sınırın yaklaştığı anlamına gelir.
+Actor, sınırdan önce satırları ve raporu kaydedip düzgünce çıkar. Teslim edilen
+satırlar bir kez faturalandırılır.
 
 - Başlangıçlar, sorgular, URL'ler ve tekil Tweet aramaları ayrı bir ücret
   eklemez.
@@ -276,12 +258,10 @@ Tweet, profil, arama veya liste URL'lerinin karışımını yapıştır:
 }
 ```
 
-Actor, tweet URL'lerini 100'e kadar eşzamanlı gruplar halinde arar. Kısmi
-başarılı yanıtlar, çözülmemiş ID'leri bir kez yeniden kontrol eder. Grup çıktısı
-benzersiz kalır ve istenen ID'lerle eşleşir. Profil URL'leri, profil zaman
-akışını yazar aramasıyla birleştirir. Arama URL'leri sorguyu çıkarır. Liste
-URL'leri, genel `list:` araması yerine özel liste yolunu kullanır.
-`maxItems`, yapıştırılan tüm URL'ler genelinde sonuçları sınırlar.
+Tweet URL'leri o tweet'leri tekrarsız ve girdi sırana göre döndürür. Profil
+URL'leri hesabın gönderilerini döndürür. Arama URL'leri kendi sorgusunu
+çalıştırır. Liste URL'leri Listenin gönderilerini döndürür. `maxItems`,
+yapıştırılan tüm URL'lerdeki sonuçları sınırlar.
 
 ### 2. Toplu handle'lar
 
@@ -291,11 +271,11 @@ Birçok `from:username` araması için kısayol:
 { "twitterHandles": ["elonmusk", "nasa", "openai"], "maxItems": 100 }
 ```
 
-Her handle, imleç sayfalamasını yazar aramasıyla birleştirir. Actor, çıktı ve
-faturalamadan önce tekrarlanan satırları kaldırır. Kullanıcı adları isteğe bağlı
-bir `@` önekini kabul eder. Handle'lar ve profil URL'leri, X'teki Posts sekmesi
-gibi repost'ları tutar. Tarih veya filtre olsa bile bu değişmez. Onları çıkarmak
-için `tweetTypes.excludeRetweets` ayarla.
+Her handle o hesabın gönderilerini döndürür. Actor, çıktı ve faturalamadan önce
+tekrarlanan satırları kaldırır. Kullanıcı adları isteğe bağlı bir `@` önekini
+kabul eder. Handle'lar ve profil URL'leri, X'teki Posts sekmesi gibi repost'ları
+tutar. Tarih veya filtre olsa bile bu değişmez. Onları çıkarmak için
+`tweetTypes.excludeRetweets` ayarla.
 
 ### 3. Tweet ara
 
@@ -313,18 +293,11 @@ için `tweetTypes.excludeRetweets` ayarla.
 Search'e yönlendirilir. Bu, geçerli `searchTerms`'in boş bir arama
 döndürmesini önler.
 
-`from:elonmusk since:2026-01-01 until:2026-01-02` gibi tarih pencereli düz
-hesap geriye dönük doldurmaları, sınırlı bir hesap rotası kullanır. Güncel
-pencereler, profil zaman akışını yazar aramasıyla birleştirir. Geçmişe
-dönük pencereler tam arama kullanır. Uyumlu bitişik pencereler tek bir
-alımı paylaşır ve orijinal `searchTerm` atıflarını korur. `maxItems`, tüm
-arama terimleri genelinde sonuçları sınırlar. Tüm `since:`/`until:` ve
-unix zamanlı pencereler döndürülen her tweet'i doğrular. Filtrelenmiş
-hesap pencereleri, çıktı üst sınırını uygulamadan önce tam kaynak
-sayfalarını okur. Filtrelenmiş sayfalar, eşleşen tweet'ler veya sayfalama
-bitene kadar devam eder. Bağımsız arama terimleri eşzamanlı çalışır. Her
-terim, tutarlı derinlik ve atıf için sıralı imleç sayfalamasını korur.
-Hesap pencereleri yalnızca uyumlu olduklarında tek bir alımı paylaşır.
+`from:elonmusk since:2026-01-01 until:2026-01-02` gibi tarih pencereli hesap
+geriye dönük doldurmaları da çalışır. Her terim kendi `searchTerm` atfını korur.
+`maxItems`, tüm arama terimlerindeki sonuçları sınırlar. Actor, dönen her
+tweet'i `since:`, `until:` ve Unix zamanı pencerelerine göre doğrular. Filtreli
+aramalar, eşleşme bulana veya X'te sonuç kalmayana kadar okumaya devam eder.
 
 `from:` içeren bir arama terimi, X aramasıyla aynı sonuçları döndürür. Bu yüzden
 repost'ları dışarıda bırakır. Onları tutmak için `include:nativeretweets` ekle.
@@ -336,10 +309,8 @@ Yalnızca repost'lar için `filter:nativeretweets` kullan.
 { "tweetIds": ["1846987139428634858", "1858743654778892784"], "maxItems": 100 }
 ```
 
-Actor, istek başına 100 ID işler. Grupları eşzamanlı çalıştırır ve her
-tamamlanan grubu bir kez yazar. Kısmi yanıtlar yalnızca çözülmemiş ID'leri
-yeniden kontrol eder. Sonuçlar girdi sırasını korur, tekrarları kaldırır ve
-istenmeyen tweet'leri hariç tutar.
+Sonuçlar girdi sıranı korur, tekrarları atar ve yalnızca istediğin tweet'leri
+içerir.
 
 Aynı arama için kabul edilen takma adlar arasında `tweetId`, `tweetIDs`,
 `tweets`, `postIds`, `lookupPostIds`, `tweetUrls` ve `postUrls` bulunur.
@@ -385,42 +356,30 @@ bağlamını hariç tutar. Yalnızca yanıt sonuçlarına ihtiyacın olduğunda
 `filter:replies` veya `to:` aramasını kullan.
 
 Arama ve sayfalanmış Tweet modları `time.since`, `time.until`, Unix zaman
-damgalarını ve `lang`'i destekler. Bunlar profil Posts, With Replies,
-Media, Likes, Listeler, yanıtlar, alıntılar ve thread'leri içerir. Eşleşen
-düz tarih operatörleri de çalışır. Actor, faturalamadan önce her satırı
-doğrular. Alt tarih sınırı kapsayıcıdır. Üst sınır hariç tutucudur. Tarih
-filtreleri, kullanılabilir tarihi olmayan satırları hariç tutar. Dil
-filtreleri, eksik veya uyuşmayan dilleri hariç tutar. Filtrelenen satırlar
-asla istenen sonuç sınırını tüketmez. Sıralanmamış sonuçlar, eşleşen
-sonuçlardan önce daha eski Tweet'ler geldiğinde sayfalamaya devam eder.
-Tarih penceresi olan bir Liste çalıştırması doğrudan pencereye atlar. Bu
-yüzden 30 gün önceki bir gün, dün kadar sürer. Bir Listenin derinlerindeki bir
-pencere için Tweet'ler X'in Liste aramasından gelir. Bu arama, Liste zaman
-akışının gösterdiği birkaç yanıtı dışarıda bırakır. Bir Liste çalıştırması,
-art arda 3 sayfa yalnızca alt tarih sınırından eski Tweet'ler içerdiğinde de
-biter. Üst sınır hariç tutucu olduğu için `since` ve `until` için aynı tarih
-boş bir penceredir. 1 tam gün almak için `until` değerini sonraki güne ayarla.
-Tweet filtreleri kullanıcı listelerine veya doğrudan Tweet/makale
-aramalarına uygulanmaz.
+damgalarını ve `lang` alanını destekler. Bunlar profil Posts, With Replies,
+Media, Likes, Listeler, yanıtlar, alıntılar ve thread'lerdir. Eşleşen düz tarih
+operatörleri de çalışır. Actor, faturalamadan önce her satırı doğrular. Alt
+tarih sınırı dahildir. Üst sınır hariçtir. Tarih filtreleri kullanılabilir
+tarihi olmayan satırları hariç tutar. Dil filtreleri eksik veya eşleşmeyen
+dilleri hariç tutar. Filtrelenen satırlar istediğin sonuç sınırından asla
+düşmez. Tarih pencereli Liste çalıştırmaları eski günlere hızla ulaşır. Alt
+sınırını geçtiklerinde biterler. Bir Listenin çok gerisindeki pencereler birkaç
+yanıtı kaçırabilir. Üst sınır hariç olduğu için `since` ve `until` için aynı
+tarih boş bir penceredir. 1 tam gün için `until`'i bir sonraki güne ayarla.
+Tweet filtreleri kullanıcı listelerine veya doğrudan Tweet/makale aramalarına
+uygulanmaz.
 
 `time.withinTime` ve `within_time` aynı modlarda çalışır. `7d` değeri,
 çalıştırma okumaya başlamadan önceki son 7 günü tutar. 2006'dan önce başlayan
 bir pencere her gönderiyi tutar.
 
-`mode: "replies"` daha katıdır. Doğrudan zaman akışlarını, desteklenen
-sıralama modlarını, her ileri imleç modülünü, etiketlenmiş gizli içerik
-dallarını, bildirilen yanıt sayısına göre ölçeklenen zaman bölümlerini ve
-aramayı birleştirir. Her tweet satırının `inReplyToId`'si istenen tweet
-ID'sine eşittir. İç içe konuşma yanıtları asla doğrudan yanıt olarak
-sayılmaz. X, bildirilenden daha az yanıt gösteriyorsa Actor, güvenli kısmi
-satırları korur. Kapasite kaldığında `diagnostics`'e 1
-`replies-incomplete` kaydı ekler. Bir kapsama eşiğine ulaşmak, çıkarmanın
-tamamlandığı anlamına gelmez. Çalıştırma, sınırına veya doğrulanmış kaynak
-tükenmesine kadar kısmi kalır. `replyCoverage`, sayıları, stratejileri,
-sayfalama anormalliklerini, eksik alanları ve önerilen yedek planı
-bildirir. Actor, sıfır çıktı döndürmeden önce geçici yeniden deneme
-gecikmelerine uyar. Bir yanıt hedefi için 25.000'in üzerindeki toplamlar
-dahil, `maxItems`'i istediğin toplama ayarla.
+`mode: "replies"` daha katıdır. Her tweet satırının `inReplyToId`'si istenen
+tweet ID'sine eşittir. İç içe konuşma yanıtları asla doğrudan yanıt sayılmaz. X
+bildirdiğinden az yanıt gösterirse Actor bulduğu satırları korur. Sınırına
+ulaşılmadığında `diagnostics`'e 1 `replies-incomplete` kaydı ekler. Çalıştırma,
+sınırına ulaşana veya X'te yanıt kalmayana kadar kısmi kalır. `replyCoverage`,
+yanıt sayılarını ve kapsam ayrıntılarını bildirir. Bir yanıt hedefi için
+25.000'in üzerindeki toplamlar dahil, `maxItems`'i istediğin toplama ayarla.
 
 Makale satırları `resultType: "article"`, `sourceTweetId`, `article` ve
 isteğe bağlı `author` içerir. Etkileşim kullanıcı satırları
@@ -499,13 +458,11 @@ Kullanıcı, tarih, konum, medya ve etkileşim filtrelerini birleştir:
 }
 ```
 
-Her iki X arama modunu eşzamanlı çalıştırmak için
-`queryType: "Latest + Top"` ayarla. Actor, faturalamadan önce
-tekilleştirir ve kullanılmayan kapasiteyi her iki moddan da geriye doldurur.
-`Top`, ilgiye göre sıralanır ve kapsamlı değildir. Her eşleşen sorguyu bir
-`searchTerm` alanı olarak eklemek için `includeSearchTerms: true` ayarla.
-Kısa geçici okuma kesintileri, Actor bir tanılama döndürmeden önce bir
-ekstra yeniden deneme alır.
+Her iki X arama modunu tek çalıştırmada kullanmak için
+`queryType: "Latest + Top"` ayarla. Actor, faturalamadan önce tekrarları
+kaldırır ve sınırını iki moddan biriyle doldurur. `Top` alaka düzeyine göre
+sıralanır ve eksiksiz değildir. Eşleşen her sorguyu `searchTerm` alanı olarak
+eklemek için `includeSearchTerms: true` ayarla.
 
 `lang`'i ayarladığında Actor, döndürülen her tweet'in dilini doğrular.
 Uyuşmazlıkları atlar ve eşleşen tweet'ler için sayfalamaya devam eder.
@@ -622,19 +579,12 @@ belgelenmiş takma adları.
 Örnekler:
 
 - Start URLs'e bir tweet URL'si yapıştır.
-- Bir profil URL'si yapıştır veya kullanıcı adını X Handles'a ekle. Actor,
-  zaman akışını yazar aramasıyla birleştirir.
+- Bir profil URL'si yapıştır veya kullanıcı adını X Handles'a ekle.
 - Hesap geriye dönük doldurmaları için Search Term olarak
-  `from:user since:YYYY-MM-DD until:YYYY-MM-DD` kullan. Actor, alımdan
-  önce uyumlu pencereleri birleştirir. Güncel pencereler profil zaman
-  akışını yazar aramasıyla birleştirir. Geçmişe dönük pencereler tam arama
-  kullanır.
+  `from:user since:YYYY-MM-DD until:YYYY-MM-DD` kullan.
 - Start URLs'e bir liste URL'si yapıştır.
 - Gelişmiş aramalar için `twitterContent`'i `from:`, `since:`,
   `min_faves:` ve `filter:media` gibi filtrelerle birleştir.
-
-Scraper, liste URL'lerini genel `list:ID` araması yerine özel liste yolu
-üzerinden yönlendirir.
 
 ## Çıktı
 
@@ -691,13 +641,13 @@ Apify veri kümesinden JSON, CSV, Excel veya HTML olarak dışa aktar.
   ayarla. Apify bu sınırı Actor'a `ACTOR_MAX_TOTAL_CHARGE_USD` olarak
   gösterir ve Actor bunu maksimum faturalandırılabilir satır sayısına
   çevirir.
-- Eşzamanlı 100-ID grupları için `tweetIds`'i geçir. Hızlı kullanıcı zaman
-  akışı yolunu kullanmak için bir profil URL'si yapıştır.
+- Birçok tweet'i tek seferde aramak için `tweetIds` gönder. Tek bir hesabın
+  gönderilerini okumak için profil URL'si yapıştır.
 - Birçok sorgu çalıştırırken her sonucu kaynak arama terimiyle etiketlemek
   için `includeSearchTerms: true` ayarla.
-- Her iki X arama modunu eşzamanlı çalıştırmak için
-  `queryType: "Latest + Top"` ayarla. Tekilleştirme ve sonuç üst sınırları
-  atomik kalır.
+- Her iki X arama modunu tek çalıştırmada kullanmak için
+  `queryType: "Latest + Top"` ayarla. Tekrar kaldırma ve sonuç sınırları iki mod
+  için birlikte geçerlidir.
 - 1 saniyelik kontroller ve imzalı webhook'lar için Xquik hesap veya
   anahtar kelime monitörlerini kullan. Aktif monitörler her saniye kontrol
   eder.
@@ -794,7 +744,7 @@ MCP sunucusu sağlar.
 - [API dokümantasyonu](https://docs.xquik.com/introduction): REST API
   kılavuzları
 - [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets):
-  bu Actor'ı çalıştıran uç nokta
+  REST ile tweet ara
 - [Batch Tweets API](https://docs.xquik.com/api-reference/x/batch-tweets):
   ID'ye göre 100'e kadar tweet getir
 - [User Tweets API](https://docs.xquik.com/api-reference/x/user-tweets): bir
@@ -807,25 +757,20 @@ MCP sunucusu sağlar.
 
 ## SSS
 
-**X API anahtarına ihtiyacım var mı?** Hayır. Bu scraper kendi
-altyapısını kullanır. Giriş veya kimlik bilgisi gerekmez.
+**X API anahtarına ihtiyacım var mı?** Hayır. X API anahtarı, giriş veya kimlik
+bilgisi gerekmez.
 
 **Bir çalıştırmayı ne sınırlar?** İstediğin öğe sınırı ve Apify harcama
 sınırı çalıştırmayı durdurur. Apify hesap ve platform sınırları hâlâ
 geçerlidir.
 
-**Ne kadar hızlı?** Çalışma süresi rotaya, sonuç sayısına ve üst akış
-kullanılabilirliğine bağlıdır.
+**Ne kadar hızlı?** Çalışma süresi girdine, sonuç sayısına ve X'in
+erişilebilirliğine bağlıdır.
 
 **En Yeni araması neden X'in En Yeni sekmesinde görünmeyen gönderiler
-döndürüyor?** X, eşleşen bazı gönderileri açık En Yeni listesinin dışında
-bırakır ve onları yalnızca zaman sınırları olan bir aramaya döndürür. Bu Actor
-bir En Yeni aramasını yan yana zaman dilimleri olarak okur, böylece ikisini de
-alır. 1 sorgu için 100 gönderilik bir testte 83 gönderi, diğer 5 scraper'ın
-döndürdüğü gönderilerle eşleşti. 17 gönderiyi ise X yalnızca zaman sınırlı
-aramalara döndürdü. 17 gönderinin hepsi aynı zaman aralığının içindeydi. Her
-gönderi, sorgun için gerçek bir X arama sonucudur ve her gönderi için 1 kez
-ödersin.
+döndürüyor?** X, eşleşen bazı gönderileri En Yeni sekmesinin dışında bırakır. Bu
+Actor o gönderileri de döndürür. Her gönderi sorgun için gerçek bir X arama
+sonucudur ve her gönderi için bir kez ödersin.
 
 **Hangi arama operatörleri çalışıyor?** X gelişmiş araması yazarları,
 alıcıları, bahsetmeleri, tarihleri, etkileşimi, medyayı ve konumu destekler.

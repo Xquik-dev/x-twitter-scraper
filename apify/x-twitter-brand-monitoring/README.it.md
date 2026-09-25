@@ -21,7 +21,7 @@ menzioni del tuo brand con rilevanza, sentiment e risposte sull'esperienza
 cliente. Ogni altro Actor Apify addebita i costi prima di filtrare o
 deduplicare. Xquik addebita solo i risultati consegnati, unici e che
 corrispondono ai filtri. I costi dell'IA sono inclusi nel prezzo per tweet. Non
-paghi alcun provider di IA, non compri token & non porti alcuna chiave.
+ti servono account IA, token o chiavi.
 
 Monitora le menzioni del brand su X (Twitter) e traccia i cambiamenti di
 sentiment tra un'esecuzione e l'altra. **X (Twitter) Brand Monitoring with AI
@@ -105,10 +105,8 @@ descrive l'atteggiamento espresso dall'autore verso il target.
 Le risposte si confrontano per decisione. Una risposta di tipo `choice` si
 confronta per categoria. Una risposta di tipo `score` si confronta per il
 livello più vicino. Una risposta di tipo `probability` si confronta per la
-decisione sì/no a 0,5. Una decisione conta come cambiata in tre casi. La
-categoria precedente scende sotto lo 0,4 di probabilità. Un punteggio si sposta
-di almeno 0,6 livelli. Una probabilità sì/no si colloca ad almeno 0,1 dalla
-soglia. Le quasi parità tra esecuzioni restano `unchanged`, & così gli
+decisione sì/no a 0,5. Una decisione conta come cambiata solo quando si sposta
+in modo netto. Le quasi parità tra esecuzioni restano `unchanged`, & così gli
 spostamenti che mantengono la stessa decisione. La variazione del modello tra
 esecuzioni non riempie il tuo report. `changes` elenca ogni domanda cambiata con
 la sua decisione `previous` & `current`. I cambiamenti possono derivare da
@@ -141,8 +139,8 @@ lo analizza & non recupera nulla da X.
 
 ## Prezzi
 
-I costi dell'IA sono inclusi nel prezzo per tweet. Non paghi alcun provider di
-IA, non compri token & non porti alcuna chiave.
+I costi dell'IA sono inclusi nel prezzo per tweet. Non ti servono account IA,
+token o chiavi.
 
 A partire da $0.0003 per tweet analizzato con successo, senza costo di avvio. Il
 prezzo include la raccolta. La soglia per l'analisi è di 8 domande, 8.000 byte
@@ -327,9 +325,10 @@ ordinati. Mantieni le stesse domande tra le esecuzioni che vuoi confrontare.
 
 L'Actor ha raccolto & consegnato il tweet, ma l'analisi AI non si è completata.
 `analysis.reason` indica la causa, ad esempio `context_limit` quando il tweet e
-il suo contesto superano `maxContextBytes`, oppure `service_unavailable` dopo
-diversi tentativi. Queste righe non comportano addebiti sul risultato. Aumenta
-`maxContextBytes` (fino a 12.000) oppure riesegui gli ID interessati.
+il suo contesto superano `maxContextBytes`, oppure `service_unavailable` quando
+il servizio di analisi è momentaneamente non disponibile. Queste righe non
+comportano addebiti sul risultato. Aumenta `maxContextBytes` (fino a 12.000)
+oppure riesegui gli ID interessati.
 
 ### L'analisi verifica i fatti?
 

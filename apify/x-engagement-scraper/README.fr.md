@@ -38,7 +38,7 @@ Aucune clé API X ni connexion requise.
 - Plusieurs types d'engagement et posts par run.
 - Plafonds globaux et par ressource.
 - Attribution du post source et du type d'engagement.
-- Ressources simultanées avec reprise de curseur sauvegardé.
+- Les runs reprennent là où ils s'étaient arrêtés après un redémarrage d'Apify.
 
 ## Entrée
 
@@ -74,20 +74,17 @@ avant la facturation de l'Actor.
 Réglez `includeRetweetTimestamp` sur `true` pour les résultats `retweeters`.
 La colonne `retweetedAt` contient l'heure de repost observée en UTC.
 
-Chaque recherche vérifie la page de profil disponible la plus récente de la
-personne ayant reposté. Elle fait correspondre le compte et le post source
-avec les enregistrements de repost réels. Des enregistrements de repost plus
-anciens, supprimés ou indisponibles peuvent laisser l'horodatage à `null`.
-Les recherches d'horodatage échouées laissent aussi `null`. Le profil reste
-dans la sortie. La recherche ne prouve pas qu'un compte n'a jamais reposté un post.
+L'Actor trouve l'heure du repost quand X affiche encore ce repost. Les reposts
+anciens, supprimés ou indisponibles laissent l'horodatage à `null`. Le profil
+reste dans la sortie. Une valeur `null` ne prouve pas qu'un compte n'a jamais
+reposté un post.
 
-Des lectures supplémentaires augmentent la latence. Laissez cette option
-désactivée pour des résultats de profil uniquement. Le champ `createdAt` du
-profil reste la date de création du compte. Les lignes de tweet portent
-`retweetedAt` quand elles contiennent un événement de repost. Les dates de
-post d'origine et les heures de scraping ne remplacent jamais les heures de
-repost. Les prix des résultats et la facturation par ligne livrée restent
-inchangés.
+Cette option ralentit les runs. Laissez-la désactivée pour des résultats de
+profil uniquement. Le `createdAt` du profil reste la date de création du compte.
+Les lignes de tweet portent `retweetedAt` quand elles contiennent un événement
+de repost. Les dates de post d'origine et les heures de scraping ne remplacent
+jamais les heures de repost. Les prix des résultats et la facturation par ligne
+livrée restent inchangés.
 
 ## Tarification
 
@@ -106,10 +103,9 @@ données en temps réel.
 
 ## Reprise et limites
 
-Les paires post-ressource indépendantes s'exécutent en parallèle. La lignée
-de curseur reste ordonnée. Les lignes acceptées, l'état de facturation, les
-curseurs et les empreintes survivent à une migration Apify. L'Actor n'a pas
-de délai d'expiration imposé.
+Un run peut lire de nombreux posts et types d'engagement. Les lignes livrées et
+la progression survivent à un redémarrage d'Apify. L'Actor n'ajoute aucune
+limite de temps propre.
 
 ## Extraction incomplète
 

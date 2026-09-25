@@ -20,8 +20,7 @@ mondo, con i dati X più completi. X (Twitter) News Monitor ordina i post di new
 per formato, attribuzione della fonte e rilevanza. Ogni altro Actor Apify
 addebita i costi prima di filtrare o deduplicare. Xquik addebita solo i
 risultati consegnati, unici e che corrispondono ai filtri. I costi dell'IA sono
-inclusi nel prezzo per tweet. Non paghi alcun provider di IA, non compri token &
-non porti alcuna chiave.
+inclusi nel prezzo per tweet. Non ti servono account IA, token o chiavi.
 
 Ordina i post di news su X (Twitter) in base a cosa sono e conserva i dati
 originali del tweet. **X (Twitter) News Monitor with AI Analysis** raccoglie i
@@ -93,7 +92,8 @@ lo analizza & non recupera nulla da X.
 
 ## Prezzi
 
-I costi dell'IA sono inclusi nel prezzo per tweet. Non paghi alcun provider di IA, non compri token & non porti alcuna chiave.
+I costi dell'IA sono inclusi nel prezzo per tweet. Non ti servono account IA,
+token o chiavi.
 
 A partire da $0.0003 per tweet analizzato con successo, senza costo di avvio. Il
 prezzo include la raccolta. La soglia per l'analisi è di 8 domande, 8.000 byte
@@ -183,11 +183,9 @@ oggetto `monitor`. Il suo stato è `first_run` senza una baseline,
 `unchanged` o `changed` per i tweet che aveva. `changes` elenca ogni decisione
 su formato, attribuzione o rilevanza che è passata da `previous` a `current`. Le
 decisioni si confrontano per categoria, livello di punteggio arrotondato, o
-sì/no a 0,5. Una decisione conta come cambiata in tre casi. La categoria
-precedente scende sotto lo 0,4 di probabilità. Un punteggio si sposta di almeno
-0,6 livelli. Una probabilità sì/no si colloca ad almeno 0,1 dalla soglia. Le
-oscillazioni minime da quasi parità tra esecuzioni restano invariate. Le
-baseline che superano `maxBaselineRows` (default 100.000) o provenienti da
+sì/no a 0,5. Una decisione conta come cambiata solo quando si sposta in modo
+netto. Le oscillazioni minime da quasi parità tra esecuzioni restano invariate.
+Le baseline che superano `maxBaselineRows` (default 100.000) o provenienti da
 impostazioni diverse interrompono l'esecuzione prima della raccolta con una riga
 diagnostica.
 
@@ -295,9 +293,10 @@ almeno 2 livelli ordinati.
 
 L'Actor ha raccolto & consegnato il tweet, ma l'analisi AI non si è completata.
 `analysis.reason` indica la causa, ad esempio `context_limit` quando il tweet e
-il suo contesto superano `maxContextBytes`, oppure `service_unavailable` dopo
-diversi tentativi. Queste righe non comportano addebiti sul risultato. Aumenta
-`maxContextBytes` (fino a 12.000) oppure riesegui gli ID interessati.
+il suo contesto superano `maxContextBytes`, oppure `service_unavailable` quando
+il servizio di analisi è momentaneamente non disponibile. Queste righe non
+comportano addebiti sul risultato. Aumenta `maxContextBytes` (fino a 12.000)
+oppure riesegui gli ID interessati.
 
 ### L'analisi verifica i fatti?
 

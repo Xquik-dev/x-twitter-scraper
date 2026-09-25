@@ -35,7 +35,7 @@ risorse e Community in un unico run. Non serve una chiave API X né il login.
   fatturazione.
 - Più Community e risorse per run.
 - Limiti per risorsa e globali.
-- Letture concorrenti con recupero del cursore salvato.
+- Le esecuzioni riprendono da dove si erano fermate dopo un riavvio di Apify.
 - L'Actor rimuove le righe duplicate prima della fatturazione.
 
 ## Input
@@ -74,10 +74,9 @@ risultati riflettono dati live.
 
 ## Paginazione e recupero
 
-Le risorse delle Community indipendenti vengono eseguite in modo concorrente.
-La paginazione resta ordinata all'interno di ogni lignaggio di cursore. Righe
-accettate, stato di fatturazione, cursori e fingerprint di output
-sopravvivono alla migrazione Apify. L'Actor non ha un timeout autoimposto.
+Un'esecuzione può leggere molte Community e risorse. Le righe consegnate e i
+progressi superano un riavvio di Apify. L'Actor non aggiunge un proprio limite
+di tempo.
 
 L'Actor restituisce solo le Community pubbliche che X espone. I campi
 disponibili variano in base alla Community.

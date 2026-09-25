@@ -28,7 +28,8 @@ platform usage separately. You need no X login.
 
 Filters run before dataset writes. You pay only for delivered rows.
 
->
+> Xquik is an independent third-party service. Not affiliated with X Corp.
+> "Twitter" and "X" are trademarks of X Corp.
 
 ## Incomplete extraction
 
@@ -42,10 +43,6 @@ with its own `message`, `retryable` & `nextAction`. The causes are
 `target_failed`, `page_limit`, `reply_reach` & `deadline_reached`. `reply_reach`
 means X served only part of a thread. The run is `retryable` when any cause is.
 
-Xquik is an independent third-party service. Not affiliated with X Corp.
-
-> "Twitter" and "X" are trademarks of X Corp.
-
 ## What does this Twitter reply scraper do?
 
 X Reply Scraper collects public replies and comment conversations. It handles
@@ -56,20 +53,18 @@ ranking, lead discovery, moderation review, and conversation datasets.
 
 ### Reply collection behavior
 
-- Auto mode switches incomplete direct results to conversation search.
-- Automatic Tweet reply pages request up to 300 rows.
-- Four strategies cover direct replies, search, and thread context.
+- Auto mode keeps collecting when direct results are incomplete.
+- `collectionStrategy` offers 4 modes for different reply jobs.
 - Bulk inputs accept post URLs, Tweet IDs, profiles, and usernames.
-- Profile targets combine timeline and author search when both apply.
 - Filters and duplicate removal run before billing.
 - Output supports 4 sort modes, 3 detail levels, and 3 field styles.
 - Every reply keeps its source target, parent IDs, root ID, and depth.
 - Continuation cursors support backfills and scheduled runs.
 - Empty runs write 1 free record to `diagnostics`.
-- Page and target logs include `fetchDurationMs`, `processingDurationMs`,
-  `pushDurationMs`, `statusDurationMs`, `fullPageDurationMs`, and
-  `fullTargetDurationMs` without repeating inputs.
-- Checkpoints preserve accepted replies, timing, and failures after restarts.
+- Run logs show page & target timing in `fetchDurationMs`,
+  `processingDurationMs`, `pushDurationMs`, `statusDurationMs`,
+  `fullPageDurationMs` & `fullTargetDurationMs`.
+- Runs keep delivered replies & progress when Apify restarts them.
 
 ### Always use the latest build
 
@@ -87,8 +82,8 @@ with `latest`. Use exact builds only for temporary rollbacks.
 ## Quick start
 
 The initial form targets a verified public conversation. It returns up to 25
-full, flat rows across at most 10 pages. Auto mode searches the full
-conversation by default. Deduplication and source attribution stay on.
+full, flat rows. Auto mode searches the full conversation by default.
+Deduplication & source attribution stay on.
 
 ### Scrape replies from a post URL
 
@@ -174,12 +169,12 @@ Run this Actor through Apify MCP, API clients, x402, or Skyfire.
 
 Use the primary fields below.
 
-| Input         | Purpose                                      |
-| ------------- | -------------------------------------------- |
-| `startUrls`   | Mixed X post and profile URLs                |
-| `tweetIds`    | Numeric post IDs                             |
-| `usernames`   | Profile timelines with author search         |
-| `startCursor` | Resume one target from a saved source cursor |
+| Input         | Purpose                               |
+| ------------- | ------------------------------------- |
+| `startUrls`   | Mixed X post and profile URLs         |
+| `tweetIds`    | Numeric post IDs                      |
+| `usernames`   | Profile reply timelines               |
+| `startCursor` | Resume one target from a saved cursor |
 
 The visual form shows canonical controls only. Compatibility aliases stay
 available in JSON, API, SDK, automation, and saved task inputs. Explicit
@@ -201,35 +196,29 @@ Compatibility aliases accept common competitor inputs:
 Malformed or unsupported targets do not fail the Actor. The run returns an
 actionable diagnostic when no valid targets remain.
 
-Profile targets combine cursor pagination with author search. The Actor removes
-duplicate rows before output and billing. Saved legacy cursors retain standard
-pagination.
+The Actor removes duplicate rows before output & billing.
 
 ## Coverage strategies
 
 ### Auto complete
 
-Use `collectionStrategy: "auto"` for most jobs. Full or nested scopes start with
-complete reply extraction. Scope, depth, sort & author controls apply before
-response limits. Extraction includes descendants beneath non-root targets.
-Incomplete extraction preserves rows before trying conversation search & direct
-replies. A post whose every source ended skips them, since X hides the rest. The
-status then says how many replies X hides. Direct scopes fall back to search
-when needed. Unfinished pages keep their continuation. Explicit strategies never
-switch.
+Use `collectionStrategy: "auto"` for most jobs. It collects every reply it can
+reach for your scope. Scope, depth, sort & author controls apply before your
+limits. Replies below non-root targets are included. When X hides part of a
+thread, the status says how many replies X hides. The other `collectionStrategy`
+values never switch modes.
 
-The diagnostic coverage threshold does not prove source exhaustion. Stalled
-pages, limits, missing data, or errors keep recovery incomplete.
+A coverage figure in diagnostics does not prove X has no more replies. Limits,
+missing data or errors can leave a run incomplete.
 
-### Direct reply endpoint
+### Direct replies
 
-Use `collectionStrategy: "replies"` to force X's reply timeline. This keeps the
-source ordering and supports cursors.
+Use `collectionStrategy: "replies"` for direct replies in X's own order. It
+supports saved cursors.
 
 ### Conversation search
 
 Use `collectionStrategy: "conversationSearch"` for broad conversation coverage.
-The Actor searches by `conversation_id:<Tweet ID>`.
 
 ### Full thread context
 
@@ -309,9 +298,8 @@ Use `minLikes`, `minReplies`, `minRetweets`, `minQuotes`, `minViews`, and
 `maxItems` limits delivered rows across the run. `maxItemsPerTarget` limits each
 post or profile.
 
-Independent targets run concurrently. Each target keeps ordered cursor
-pagination. Dataset writes keep caps, deduplication, attribution, and billing
-atomic.
+One run can read many targets. Caps, deduplication, attribution & billing stay
+exact across them.
 
 The Actor removes duplicates before billing. Set `dedupeAcrossTargets: false` to
 preserve duplicate rows from different targets.
@@ -426,14 +414,14 @@ Every Apify plan costs **$0.00015 per delivered row**. This equals
 row. Apify bills platform usage separately.
 
 Xquik applies one charge per delivered data row. Diagnostics are free in
-`diagnostics`. No start, URL, query, pagination, filter, or proxy fee applies.
+`diagnostics`. No start, URL, query, pagination or filter fee applies.
 
 The default Apify timeout is `0`, so runs have no time limit. The Actor
-continues until it reaches the cap or runs out of eligible data. A caller can
-still set a finite Apify timeout. Then `completionReason: "deadline_reached"`
-means that configured limit is near. The Actor keeps the final 15 seconds for
-checkpoints, rows, reports, and a successful exit. Replies already collected
-remain delivered and bill once. Unfinished pagination remains resumable.
+continues until it reaches the cap or runs out of eligible data. You can still
+set a finite Apify timeout. Then `completionReason: "deadline_reached"` means
+that limit is near. The Actor saves replies & the report, then exits cleanly
+before the limit. Delivered replies bill once. Unfinished targets stay
+resumable.
 
 ## Public task examples
 
@@ -515,8 +503,8 @@ Collect only public data. Follow applicable laws and platform rules.
 Reply datasets can contain personal data. Choose a lawful purpose. Minimize
 retention. Protect exports. Honor deletion and access requests where required.
 
-The Actor does not bypass protected accounts. It does not request customer X
-passwords, session cookies, or authentication tokens.
+The Actor does not bypass protected accounts. It never asks for your X password,
+cookies or tokens.
 
 ## Related Xquik Actors
 

@@ -16,12 +16,12 @@
 </td></tr></table>
 
 Xquik es el servicio de extracción de X (Twitter) más rápido y económico del
-mundo, con los datos de X más completos. X Tweet Viral Score Analyzer agrega
-una estimación de Viral Score y un veredicto a cada tuit. Cualquier otro Actor
-de Apify cobra antes de filtrar o eliminar duplicados. Xquik cobra solo por
+mundo, con los datos de X más completos. X Tweet Viral Score Analyzer agrega una
+estimación de Viral Score y un veredicto a cada tuit. Cualquier otro Actor de
+Apify cobra antes de filtrar o eliminar duplicados. Xquik cobra solo por
 resultados entregados, únicos y que coinciden con los filtros. Los costos de IA
-están incluidos en el precio por tweet. No pagas a ningún proveedor de IA, no
-compras tokens & no traes ninguna clave.
+están incluidos en el precio por tweet. No necesitas cuenta de IA, tokens ni
+clave.
 
 Descubre por qué los tuits se difunden o fracasan y conserva los datos
 originales del tuit. **X Tweet Viral Score Analyzer with AI** recopila los
@@ -30,8 +30,7 @@ convierte esas respuestas en una estimación de Viral Score de 0 a 100 y un
 veredicto. Cada fila conserva los me gusta, republicaciones, respuestas y
 citas reales, así que puedes comparar cada estimación con lo que ocurrió.
 
-- **Viral Score por publicación** a partir de pesos fijos y publicados que
-  puedes auditar.
+- **Viral Score por publicación** a partir de reglas fijas y versionadas.
 - **8 respuestas sobre rasgos** muestran por qué una publicación obtuvo un
   puntaje alto o bajo.
 - **Topes estrictos** limitan las publicaciones que parecen spam, ragebait o
@@ -73,25 +72,13 @@ predice me gusta ni vistas. No reproduce cómo X clasifica las publicaciones.
 La respuesta de escrito por IA evalúa solo el estilo. No establece quién
 escribió la publicación.
 
-### Cómo calcula el Actor el Viral Score
+### Cómo funciona el Viral Score
 
-El Actor convierte cada puntaje de 0 a 2 en una proporción de 0 a 1. Luego
-suma puntos:
+El gancho, la claridad, el valor que aporta y la reacción esperada suben el
+puntaje. Un texto que suena a copia genérica de máquina lo baja.
 
-| Parte                                             | Puntos         |
-| ------------------------------------------------- | -------------- |
-| Gancho                                            | hasta 30       |
-| Claridad                                          | hasta 20       |
-| Recompensa, el mayor entre informativo y gracioso | hasta 30       |
-| Reacción                                          | hasta 20       |
-| Probabilidad de escrito por IA                    | resta hasta 15 |
-
-La reacción obtiene una proporción de sus 20 puntos: compartir 1, responder
-0.8, dar me gusta 0.6, discutir 0.4 e ignorar 0. Después, los topes estrictos
-limitan el puntaje. Una probabilidad de spam desde 0.7 lo limita a 20. Una
-probabilidad de ragebait desde 0.7 lo limita a 35. Una probabilidad de escrito
-por IA desde 0.8 lo limita a 60. El Actor redondea el resultado a un número
-entero.
+Los topes fijos limitan el puntaje de posible spam, ragebait y copia genérica de
+máquina. El puntaje es un número entero de 0 a 100.
 
 | Veredicto     | Puntaje  |
 | ------------- | -------- |
@@ -99,11 +86,10 @@ entero.
 | `edit_first`  | 40 a 69  |
 | `sleep_on_it` | 0 a 39   |
 
-`viral.weights` indica la versión de estas reglas, como `viral_lite:1`. La
-incrementamos cada vez que cambia un peso, un tope o un umbral. El puntaje es
-`null` cuando el análisis falló, el Actor lo omitió o falta una respuesta de
-rasgo predeterminada. El Actor nunca rellena un puntaje faltante con una
-suposición.
+`viral.weights` indica la versión de estas reglas, como `viral_lite:1`. Cambia
+cada vez que cambian las reglas. El puntaje es `null` cuando el análisis falló,
+el Actor lo omitió o falta una respuesta de rasgo predeterminada. El Actor nunca
+completa un puntaje faltante con una suposición.
 
 ## Estimación del Algorithm Score
 
@@ -161,9 +147,7 @@ Límites:
 
 - Menos de 10 publicaciones comparadas dan una calibración `null` con el
   motivo `too_few_posts`. Puntajes o tasas idénticos dan `no_variation`.
-- El Actor agrupa las tasas en intervalos de 0.1 de ancho para mantener
-  estable la memoria. Las publicaciones de un mismo intervalo cuentan como
-  empatadas, así que la correlación es aproximada.
+- La correlación es aproximada.
 - La calibración describe una sola ejecución. Un puntaje bajo puede significar
   que las publicaciones difieren en momento, tema o audiencia, no que la
   estimación de la redacción falló.
@@ -239,8 +223,8 @@ Pega tu propio texto en `texts`. El Actor lo puntúa y no obtiene nada de X.
 
 ## Precios
 
-Los costos de IA están incluidos en el precio por tweet. No pagas a ningún
-proveedor de IA, no compras tokens & no traes ninguna clave.
+Los costos de IA están incluidos en el precio por tweet. No necesitas cuenta de
+IA, tokens ni clave.
 
 Desde $0.0003 por tuit analizado con éxito, sin tarifa de inicio. El precio
 incluye la recopilación y el Viral Score. La capacidad de análisis es de 8
@@ -325,19 +309,17 @@ filas fallidas u omitidas tienen un mapa vacío.
 
 ## Comparar con una ejecución anterior
 
-Pasa `monitor.baselineDatasetId`, el ID del Dataset de una ejecución
-anterior completada con la misma configuración de análisis. Cada fila obtiene
-entonces un objeto `monitor`. Su estado es `first_run` sin línea base,
-`new_to_baseline` para tuits que la ejecución anterior no tenía, & `unchanged`
-o `changed` para tuits que sí tenía. `changes` enumera cada decisión de rasgo
-que cambió de `previous` a `current`. Las decisiones se comparan por
-categoría, nivel de puntaje redondeado o sí/no en 0.5. Una decisión cuenta
-como cambiada en tres casos. La categoría anterior cae por debajo de 0.4 de
-probabilidad. Un puntaje se mueve al menos 0.6 niveles. Una probabilidad de
-sí/no queda a al menos 0.1 del umbral. Las fluctuaciones de empate cercano
-entre ejecuciones se consideran sin cambios. Las líneas base por encima de
-`maxBaselineRows` (100 000 por defecto) o con configuraciones diferentes
-detienen la ejecución antes de la recopilación con una fila de diagnóstico.
+Pasa `monitor.baselineDatasetId`, el ID del Dataset de una ejecución anterior
+completada con la misma configuración de análisis. Cada fila obtiene entonces un
+objeto `monitor`. Su estado es `first_run` sin línea base, `new_to_baseline`
+para tuits que la ejecución anterior no tenía, & `unchanged` o `changed` para
+tuits que sí tenía. `changes` enumera cada decisión de rasgo que cambió de
+`previous` a `current`. Las decisiones se comparan por categoría, nivel de
+puntaje redondeado o sí/no en 0.5. Una decisión cuenta como cambiada solo cuando
+se mueve con claridad. Las fluctuaciones de empate cercano entre ejecuciones se
+consideran sin cambios. Las líneas base por encima de `maxBaselineRows` (100 000
+por defecto) o con configuraciones diferentes detienen la ejecución antes de la
+recopilación con una fila de diagnóstico.
 
 ## Ejemplos de tareas
 
@@ -382,9 +364,10 @@ preguntas predeterminadas, así que las preguntas personalizadas lo dejan en
 
 El Actor recopiló & entregó el tuit, pero el análisis con IA no se completó.
 `analysis.reason` indica la causa, como `context_limit` cuando el tuit y su
-contexto superan `maxContextBytes`, o `service_unavailable` tras varios
-reintentos. Estas filas no tienen costo de resultado ni puntaje. Aumenta
-`maxContextBytes` (hasta 12 000) o vuelve a ejecutar los IDs afectados.
+contexto superan `maxContextBytes`, o `service_unavailable` cuando el servicio
+de análisis no está disponible por un momento. Estas filas no tienen costo de
+resultado ni puntaje. Aumenta `maxContextBytes` (hasta 12 000) o vuelve a
+ejecutar los IDs afectados.
 
 ### ¿El análisis verifica hechos?
 

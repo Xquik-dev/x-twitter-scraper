@@ -86,9 +86,9 @@ données en temps réel.
 
 ## Pagination et reprise
 
-Les cibles indépendantes s'exécutent en parallèle. Les fils utilisent une
-couverture automatique avec tous les filtres. Les lignes acceptées, l'état
-de facturation et les empreintes survivent à une migration.
+Un run peut lire de nombreux profils. Les fils appliquent chaque filtre que vous
+définissez. Les lignes livrées et la progression survivent à un redémarrage
+d'Apify.
 
 ## Extraction incomplète
 

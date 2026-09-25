@@ -68,9 +68,9 @@ Sonuçlar canlı veriyi yansıtır.
 
 ## Sayfalama ve kurtarma
 
-Bağımsız Liste kaynakları eşzamanlı çalışır. Her imleç soyu sıralı kalır.
-Kabul edilen satırlar, faturalama durumu, imleçler ve parmak izleri Apify
-göçünden sağ çıkar. Actor'ın kendi kendine uyguladığı bir zaman aşımı yoktur.
+Tek bir çalıştırma birçok Listeyi ve kaynağı okuyabilir. Teslim edilen satırlar
+ve ilerleme, Apify yeniden başlatmasından sonra korunur. Actor kendi zaman
+sınırını eklemez.
 
 ## Eksik çıkarma
 

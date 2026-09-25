@@ -75,11 +75,9 @@ campione. I risultati riflettono dati in tempo reale.
 
 ## Ripristino e limiti
 
-Le località indipendenti vengono eseguite in parallelo. Lo stato del
-cursore, le righe accettate, lo stato di fatturazione e le impronte di
-output sopravvivono alla migrazione di Apify. L'Actor non ha un timeout di
-esecuzione autoimposto. Un timeout di Apify fornito dal chiamante resta
-rispettato.
+Un'esecuzione può leggere molte località. Le righe consegnate e i progressi
+superano un riavvio di Apify. L'Actor non aggiunge un proprio limite di tempo.
+Rispetta qualsiasi timeout Apify che imposti.
 
 ## Estrazione incompleta
 

@@ -20,8 +20,8 @@ con i dati X più completi. X (Twitter) Stock & Crypto AI Trading Signals
 trasforma i tweet in posizioni rialziste, ribassiste, neutre o miste per ogni
 titolo o moneta. Ogni altro Actor Apify addebita i costi prima di filtrare o
 deduplicare. Xquik addebita solo i risultati consegnati, unici e conformi ai
-filtri. I costi dell'IA sono inclusi nel prezzo per tweet. Non paghi alcun
-provider di IA, non compri token & non porti alcuna chiave.
+filtri. I costi dell'IA sono inclusi nel prezzo per tweet. Non ti servono
+account IA, token o chiavi.
 
 Leggi il sentiment dietro i post su azioni, criptovalute e trading su X
 (Twitter) e mantieni i dati originali del tweet. **X (Twitter) Stock & Crypto AI
@@ -95,7 +95,8 @@ lo analizza & non recupera nulla da X.
 
 ## Prezzi
 
-I costi dell'IA sono inclusi nel prezzo per tweet. Non paghi alcun provider di IA, non compri token & non porti alcuna chiave.
+I costi dell'IA sono inclusi nel prezzo per tweet. Non ti servono account IA,
+token o chiavi.
 
 Da $0.0003 per tweet analizzato con successo, senza costo iniziale. Il prezzo
 include la raccolta. La soglia per l'analisi è di 8 domande, 8.000 byte per
@@ -181,12 +182,10 @@ per i tweet che l'esecuzione precedente non aveva, & `unchanged` o `changed` per
 i tweet che aveva già. `changes` elenca ogni posizione, tipo di contenuto o
 livello di convinzione passato da `previous` a `current`. Le decisioni si
 confrontano per categoria, livello di punteggio arrotondato, o sì/no a 0,5. Una
-decisione conta come cambiata in tre casi. La categoria precedente scende sotto
-0,4 di probabilità. Un punteggio si sposta di almeno 0,6 livelli. Una
-probabilità sì/no si colloca ad almeno 0,1 dalla soglia. Le oscillazioni minime
-tra esecuzioni restano invariate. Le baseline sopra `maxBaselineRows`
-(predefinito 100.000) o con impostazioni diverse interrompono l'esecuzione prima
-della raccolta con una riga diagnostica.
+decisione conta come cambiata solo quando si sposta in modo netto. Le
+oscillazioni minime tra esecuzioni restano invariate. Le baseline sopra
+`maxBaselineRows` (predefinito 100.000) o con impostazioni diverse interrompono
+l'esecuzione prima della raccolta con una riga diagnostica.
 
 ## Esempi di task
 
@@ -287,9 +286,10 @@ post trattano i tuoi target come asset.
 
 L'Actor ha raccolto & consegnato il tweet, ma l'analisi IA non si è completata.
 `analysis.reason` indica la causa, come `context_limit` quando il tweet e il suo
-contesto superano `maxContextBytes`, oppure `service_unavailable` dopo i
-tentativi. Queste righe non comportano alcun addebito sul risultato. Aumenta
-`maxContextBytes` (fino a 12.000) o riesegui gli ID interessati.
+contesto superano `maxContextBytes`, oppure `service_unavailable` quando il
+servizio di analisi è momentaneamente non disponibile. Queste righe non
+comportano alcun addebito sul risultato. Aumenta `maxContextBytes` (fino a
+12.000) o riesegui gli ID interessati.
 
 ### L'analisi verifica i fatti?
 

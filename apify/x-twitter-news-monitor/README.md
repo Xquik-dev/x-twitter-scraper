@@ -19,8 +19,8 @@ Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. X (Twitter) News Monitor sorts news posts by format,
 source attribution & relevance. Every other Apify Actor charges before filtering
 or deduplicating. Xquik charges only for delivered, unique, filter-matching
-results. AI costs are included in the per-tweet price. You pay no AI provider,
-buy no tokens & bring no key.
+results. AI costs are included in the per-tweet price. You need no AI account,
+tokens or key.
 
 Sort news posts on X (Twitter) by what they are & keep the original tweet data.
 **X (Twitter) News Monitor with AI Analysis** collects posts about your topics,
@@ -89,8 +89,8 @@ analyzes it & fetches nothing from X.
 
 ## Pricing
 
-AI costs are included in the per-tweet price. You pay no AI provider, buy no
-tokens & bring no key.
+AI costs are included in the per-tweet price. You need no AI account, tokens or
+key.
 
 From $0.0003 per successfully analyzed tweet, with no start fee. The price
 includes collection. The analysis allowance is 8 questions, 8,000 bytes per
@@ -171,11 +171,9 @@ is `first_run` without a baseline, `new_to_baseline` for tweets the earlier run
 did not have, & `unchanged` or `changed` for tweets it had. `changes` lists each
 format, attribution or relevance decision that moved from `previous` to
 `current`. Decisions compare by category, rounded score level, or yes/no at 0.5.
-A decision counts as changed in three cases. The earlier category falls below
-0.4 probability. A score moves at least 0.6 levels. A yes/no probability lands
-at least 0.1 from the threshold. Near-tie jitter between runs stays unchanged.
-Baselines above `maxBaselineRows` (default 100,000) or from different settings
-stop the run before collection with a diagnostic row.
+A decision counts as changed only when it moves clearly. Near-tie jitter between
+runs stays unchanged. Baselines above `maxBaselineRows` (default 100,000) or
+from different settings stop the run before collection with a diagnostic row.
 
 ## Task examples
 
@@ -274,9 +272,9 @@ Yes. Custom `analysis.questions` replace the defaults: 1-8 `choice`, `score` or
 
 The Actor collected & delivered the tweet, but the AI analysis did not complete.
 `analysis.reason` names the cause, such as `context_limit` when the tweet & its
-context exceed `maxContextBytes`, or `service_unavailable` after retries. These
-rows carry no result charge. Raise `maxContextBytes` (up to 12,000) or rerun the
-affected IDs.
+context exceed `maxContextBytes`, or `service_unavailable` when the analysis
+service is briefly unavailable. These rows carry no result charge. Raise
+`maxContextBytes` (up to 12,000) or rerun the affected IDs.
 
 ### Does the analysis verify facts?
 

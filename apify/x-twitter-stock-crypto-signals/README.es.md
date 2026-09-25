@@ -21,8 +21,7 @@ Signals convierte tuits en posturas alcistas, bajistas, neutrales o mixtas por
 ticker o moneda. Todos los demás Actors de Apify cobran antes de filtrar o
 eliminar duplicados. Xquik cobra solo por resultados entregados, únicos y que
 coinciden con los filtros. Los costos de IA están incluidos en el precio por
-tweet. No pagas a ningún proveedor de IA, no compras tokens & no traes ninguna
-clave.
+tweet. No necesitas cuenta de IA, tokens ni clave.
 
 Lee la postura detrás de las publicaciones sobre acciones, cripto y trading en X
 (Twitter) y conserva los datos originales del tuit. **X (Twitter) Stock & Crypto
@@ -98,7 +97,8 @@ Actor lo analiza y no obtiene nada de X.
 
 ## Precios
 
-Los costos de IA están incluidos en el precio por tweet. No pagas a ningún proveedor de IA, no compras tokens & no traes ninguna clave.
+Los costos de IA están incluidos en el precio por tweet. No necesitas cuenta de
+IA, tokens ni clave.
 
 Desde $0.0003 por tuit analizado con éxito, sin tarifa de inicio. El precio
 incluye la recopilación. El límite de análisis es de 8 preguntas, 8000 bytes por
@@ -185,13 +185,11 @@ entonces un objeto `monitor`. Su estado es `first_run` sin línea base,
 `changed` para tuits que sí tenía. `changes` lista cada postura, tipo de
 contenido o nivel de convicción que cambió de `previous` a `current`. Las
 decisiones se comparan por categoría, nivel de puntaje redondeado, o sí/no en
-0.5. Una decisión cuenta como cambiada en tres casos. La categoría anterior cae
-por debajo de 0.4 de probabilidad. Un puntaje se mueve al menos 0.6 niveles. Una
-probabilidad de sí/no queda al menos a 0.1 del umbral. Las fluctuaciones
-marginales entre ejecuciones se consideran sin cambios. Las líneas base por
-encima de `maxBaselineRows` (100 000 por defecto) o de una configuración
-distinta detienen la ejecución antes de la recopilación con una fila de
-diagnóstico.
+0.5. Una decisión cuenta como cambiada solo cuando se mueve con claridad. Las
+fluctuaciones marginales entre ejecuciones se consideran sin cambios. Las líneas
+base por encima de `maxBaselineRows` (100 000 por defecto) o de una
+configuración distinta detienen la ejecución antes de la recopilación con una
+fila de diagnóstico.
 
 ## Ejemplos de tareas
 
@@ -299,9 +297,10 @@ publicaciones tratan tus objetivos como activos.
 
 El Actor recopiló & entregó el tuit, pero el análisis con IA no se completó.
 `analysis.reason` indica la causa, como `context_limit` cuando el tuit y su
-contexto superan `maxContextBytes`, o `service_unavailable` tras varios
-reintentos. Estas filas no generan cargo por resultado. Aumenta
-`maxContextBytes` (hasta 12 000) o vuelve a ejecutar los IDs afectados.
+contexto superan `maxContextBytes`, o `service_unavailable` cuando el servicio
+de análisis no está disponible por un momento. Estas filas no generan cargo por
+resultado. Aumenta `maxContextBytes` (hasta 12 000) o vuelve a ejecutar los IDs
+afectados.
 
 ### ¿El análisis verifica hechos?
 

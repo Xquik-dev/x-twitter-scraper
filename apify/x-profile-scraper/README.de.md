@@ -85,9 +85,8 @@ Beispielwerte. Ergebnisse spiegeln Live-Daten.
 
 ## Paginierung und Wiederherstellung
 
-Unabhängige Ziele laufen gleichzeitig. Timelines nutzen automatische
-Abdeckung mit allen Filtern. Akzeptierte Datensätze, Abrechnungsstatus und
-Fingerprints überstehen eine Migration.
+Ein Run kann viele Profile lesen. Timelines wenden jeden gesetzten Filter an.
+Gelieferte Datensätze und der Fortschritt überstehen einen Apify-Neustart.
 
 ## Unvollständige Extraktion
 

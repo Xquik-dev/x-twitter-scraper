@@ -28,7 +28,8 @@ Listas, suscriptores de Listas y miembros de Comunidades de X (Twitter)
 el uso de la plataforma por separado. Sin inicio de sesión en X, tarifa de
 inicio ni tarifa de consulta.
 
->
+> Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
+> "Twitter" y "X" son marcas registradas de X Corp.
 
 ## Extracción incompleta
 
@@ -36,10 +37,6 @@ Una extracción interrumpida escribe un diagnóstico `partial` gratuito. Los
 resultados disponibles permanecen intactos. Lee `availableResults`,
 `failedTargets`, `retryable` y `nextAction` antes de reintentar. Una salida
 exitosa del Actor confirma la entrega, no una extracción completa.
-
-Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
-
-> "Twitter" y "X" son marcas registradas de X Corp.
 
 ## ¿Qué hace X Follower Scraper?
 
@@ -54,14 +51,11 @@ objetivo de origen y su relación.
   cortas.
 - El modo de combinación registra perfiles compartidos, orígenes, relaciones
   y `overlapCount`.
-- Los cursores automáticos solicitan hasta 300 perfiles por página.
-- Los cursores antiguos mantienen su límite de 200 perfiles y se reinician
-  al expirar.
-- Los registros de página incluyen `fetchDurationMs`, `processingDurationMs`,
-  `pushDurationMs`, `statusDurationMs` y `fullPageDurationMs` sin repetir
-  objetivos.
-- Los checkpoints conservan las filas aceptadas, los tiempos y los conteos
-  de fallos después de reinicios.
+- Los registros de la ejecución muestran los tiempos de cada página en
+  `fetchDurationMs`, `processingDurationMs`, `pushDurationMs`,
+  `statusDurationMs` y `fullPageDurationMs`.
+- Las ejecuciones conservan las filas entregadas y su progreso si Apify las
+  reinicia.
 
 ## Ejemplos de tasks
 
@@ -125,10 +119,9 @@ predeterminado.
 indicadores de origen contradictorios nunca dejan que un valor falso oculte
 un estado de verificación verdadero.
 
-El estado relativo al visor pertenece a la cuenta de lectura de Xquik, no a
-tu dataset. Los indicadores de seguir, bloquear, silenciar, mensaje directo,
-notificación y similares siempre se eliminan, incluso en la salida sin
-procesar.
+Las filas nunca incluyen estado exclusivo del espectador. Las marcas de seguir,
+bloquear, silenciar, mensajes directos, notificaciones y similares se eliminan
+siempre, incluso de la salida raw.
 
 ## ¿Cuánto cuesta extraer seguidores de X?
 
@@ -142,24 +135,19 @@ vivo que Apify expone al Actor. Cada resultado escribe `run-report`,
 incluidas las salidas sin entrada y con entrada inválida. Su campo `version`
 informa la versión exacta del código fuente publicado del Actor.
 
-`failedTargets` cuenta los objetivos que se detuvieron tras un fallo de
-lectura. Los perfiles aceptados siguen siendo filas de datos facturables.
-Estas ejecuciones usan `completionReason: "partial_failure"`. La paginación
-rápida del lado del servidor sigue el mismo contrato de reportes.
+`failedTargets` cuenta los objetivos que se detuvieron tras un error. Los
+perfiles entregados siguen siendo filas de datos facturables. Estas ejecuciones
+usan `completionReason: "partial_failure"`.
 
-El tiempo de espera predeterminado de Apify es `0`. Las ejecuciones no
-tienen límite de tiempo. El Actor sigue cada cursor en vivo hasta el límite o
-el fin de la fuente. Quien invoca aún puede establecer un tiempo de espera
-finito. Entonces `completionReason: "deadline_reached"` significa que ese
-límite está cerca. El Actor reserva los últimos 15 segundos para
-checkpoints, filas, reportes y una salida limpia. Los perfiles válidos se
-siguen entregando y se facturan una sola vez. La paginación sin terminar
-sigue siendo reanudable.
+El tiempo de espera predeterminado de Apify es `0`. Las ejecuciones no tienen
+límite de tiempo. El Actor continúa hasta alcanzar el tope o quedarse sin
+perfiles. Aún puedes establecer un tiempo de espera finito. Entonces
+`completionReason: "deadline_reached"` significa que ese límite está cerca. El
+Actor guarda los perfiles y el informe, y termina correctamente antes del
+límite. Los perfiles entregados se facturan una sola vez.
 
-Los objetivos independientes se ejecutan de forma concurrente. Cada objetivo
-mantiene una paginación de cursor ordenada. Las escrituras del dataset
-mantienen los límites, la eliminación de duplicados, la atribución y la
-facturación de forma atómica.
+Una ejecución puede leer muchos objetivos. Los topes, la deduplicación, la
+atribución y la facturación se mantienen exactos en todos ellos.
 
 - Los inicios, los objetivos y la selección de relación no agregan cargo de
   consulta por separado.
@@ -592,40 +580,35 @@ webhooks firmados y un servidor MCP.
 
 ## Preguntas frecuentes
 
-**¿Necesito una clave de API de X?** No. Este extractor usa su propia
-infraestructura. No requiere inicio de sesión ni credenciales.
+**¿Necesito una clave de API de X?** No. No necesitas clave de API de X, inicio
+de sesión ni credenciales.
 
 **¿Qué limita una ejecución?** El límite de elementos que solicites y el
 límite de gasto de Apify detienen la ejecución. Los límites de cuenta y
 plataforma de Apify también se aplican.
 
-**¿Qué tan rápido es?** El tiempo de ejecución depende del tamaño del
-objetivo, los filtros y la disponibilidad ascendente. Las ejecuciones con
-filtros profundos guardan el progreso en Console cada 5 páginas. Esto
-reduce el tráfico sin datos entre las descargas de página.
+**¿Qué tan rápido es?** El tiempo de ejecución depende del tamaño del objetivo,
+los filtros y la disponibilidad de X.
 
 **¿Por qué mi ejecución devuelve menos filas que `maxItems`?** Filtros como
 `minFollowers`, `verifiedOnly` y `bioContains` se aplican antes de escribir.
 Relaja los filtros para obtener más resultados.
 
-**¿Cuántos seguidores puedo extraer de una sola cuenta?** X pagina las
-cuentas grandes en lotes. Aumenta el límite de tiempo de ejecución de Apify
-para obtener más páginas. `maxItemsPerTarget` solo limita cada objetivo.
+**¿Cuántos seguidores puedo extraer de una sola cuenta?** Tantos como X muestre
+para esa cuenta. La ejecución continúa hasta tu tope, tu límite de gasto o el
+final de la lista. `maxItemsPerTarget` solo limita cada objetivo.
 
-**¿El Actor reintenta los fallos temporales?** Sí. Hace hasta 3 intentos por
-página para tiempos de espera, respuestas 429 y 5xx. Respeta `Retry-After`
-cuando está presente. De lo contrario, usa retroceso exponencial. Los fallos
-irrecuperables conservan los resultados parciales.
+**¿El Actor reintenta los fallos temporales?** Sí. Se recupera por sí solo de
+los errores temporales de X. Los fallos graves conservan los resultados
+parciales.
 
 **¿Qué pasa cerca del límite de tiempo de ejecución de Apify?** El Actor no
-agrega un plazo de ejecución más corto. Usa el límite configurado de Apify y
-reserva los últimos 15 segundos para la finalización. Vuelca los perfiles,
-guarda el checkpoint de la paginación, escribe el reporte y termina. Las
-filas no aceptadas por el dataset no se facturan.
+agrega un plazo propio más corto. Antes de tu límite, guarda los perfiles,
+escribe el informe y termina. Las filas que nunca llegan al dataset no se
+facturan.
 
-**¿Puedo reanudar donde lo dejé?** La entrada de cursor de reanudación aún
-no está disponible. Volver a ejecutar el mismo objetivo empieza desde su
-primera página disponible.
+**¿Puedo reanudar donde lo dejé?** Todavía no. Si vuelves a ejecutar el mismo
+objetivo, empieza desde el principio.
 
 **¿Puedo usar la API de Apify para ejecutar esto?** Sí. Consulta la
 [pestaña API](https://apify.com/xquik/x-follower-scraper/api) para ver

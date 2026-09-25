@@ -34,7 +34,7 @@ einem Run. Kein X-API-Schlüssel oder Login erforderlich.
 - Filter für Beiträge, Mitglieder und Moderatoren laufen vor der Abrechnung.
 - Mehrere Communities und Ressourcen pro Run.
 - Obergrenzen pro Ressource und global.
-- Gleichzeitige Lesevorgänge mit gespeicherter Cursor-Wiederherstellung.
+- Runs machen nach einem Apify-Neustart dort weiter, wo sie aufgehört haben.
 - Der Actor entfernt doppelte Datensätze vor der Abrechnung.
 
 ## Eingabe
@@ -73,10 +73,9 @@ Beispielwerte. Ergebnisse spiegeln Live-Daten.
 
 ## Paginierung und Wiederherstellung
 
-Unabhängige Community-Ressourcen laufen gleichzeitig. Die Paginierung bleibt
-innerhalb jeder Cursor-Linie geordnet. Akzeptierte Datensätze, Abrechnungs-
-status, Cursor und Ausgabe-Fingerprints überstehen eine Apify-Migration. Der
-Actor hat kein eigenes Zeitlimit.
+Ein Run kann viele Communities und Ressourcen lesen. Gelieferte Datensätze und
+der Fortschritt überstehen einen Apify-Neustart. Der Actor setzt kein eigenes
+Zeitlimit.
 
 Der Actor gibt nur öffentliche Communities zurück, die X offenlegt.
 Die verfügbaren Felder variieren je nach Community.

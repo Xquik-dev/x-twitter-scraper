@@ -38,7 +38,7 @@ clave de API de X ni inicio de sesión.
   facturar.
 - Varias Comunidades y recursos por ejecución.
 - Límites por recurso y globales.
-- Lecturas concurrentes con recuperación de cursor guardado.
+- Las ejecuciones continúan donde se quedaron tras un reinicio de Apify.
 - El Actor elimina las filas duplicadas antes de facturar.
 
 ## Entrada
@@ -77,11 +77,9 @@ muestra. Los resultados reflejan datos en vivo.
 
 ## Paginación y recuperación
 
-Los recursos de Comunidad independientes se ejecutan de forma concurrente. La
-paginación permanece ordenada dentro de cada linaje de cursor. Las filas
-aceptadas, el estado de facturación, los cursores y las huellas de salida
-sobreviven a la migración de Apify. El Actor no tiene un tiempo de espera
-propio.
+Una ejecución puede leer muchas Comunidades y recursos. Las filas entregadas y
+el progreso se conservan tras un reinicio de Apify. El Actor no agrega un límite
+de tiempo propio.
 
 El Actor devuelve solo las Comunidades públicas que X expone. Los campos
 disponibles varían según la Comunidad.

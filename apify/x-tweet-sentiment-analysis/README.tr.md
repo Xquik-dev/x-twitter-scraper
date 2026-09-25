@@ -16,12 +16,11 @@
 </td></tr></table>
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
-scraper hizmetidir. X Tweet Sentiment Analysis, her tweet'e tutum, yoğunluk
-& alaycılık ekler. Diğer tüm Apify Actor'ları filtreleme veya
-tekilleştirmeden önce ücret alır. Xquik yalnızca teslim edilen, benzersiz,
-filtreyle eşleşen sonuçlar için ücret alır. Yapay zekâ maliyetleri tweet
-başına fiyata dahil. Yapay zekâ sağlayıcısına ödeme yapmazsın, token
-almazsın & anahtar getirmezsin.
+scraper hizmetidir. X Tweet Sentiment Analysis, her tweet'e tutum, yoğunluk &
+alaycılık ekler. Diğer tüm Apify Actor'ları filtreleme veya tekilleştirmeden
+önce ücret alır. Xquik yalnızca teslim edilen, benzersiz, filtreyle eşleşen
+sonuçlar için ücret alır. Yapay zekâ maliyetleri tweet başına fiyata dahil.
+Yapay zekâ hesabına, token'a veya anahtara ihtiyacın yok.
 
 X (Twitter) gönderilerinin arkasındaki tutumu ölç ve orijinal tweet verisini
 sakla. **X Tweet Sentiment Analysis with AI**, eşleşen tweet'leri toplar,
@@ -89,7 +88,8 @@ veya notlar. Actor metni analiz eder & X'ten hiçbir şey getirmez.
 
 ## Fiyatlandırma
 
-Yapay zekâ maliyetleri tweet başına fiyata dahil. Yapay zekâ sağlayıcısına ödeme yapmazsın, token almazsın & anahtar getirmezsin.
+Yapay zekâ maliyetleri tweet başına fiyata dahil. Yapay zekâ hesabına, token'a
+veya anahtara ihtiyacın yok.
 
 Başlangıç ücreti olmadan, başarıyla analiz edilen tweet başına $0.0003'ten
 başlar. Fiyat toplamayı içerir. Analiz ödeneği 8 soru, soru
@@ -159,17 +159,15 @@ ihtiyaç duymaz. Başarısız ve atlanan satırlar boş bir eşleme taşır.
 
 ## Önceki bir çalıştırmayla karşılaştır
 
-Aynı analiz ayarlarına sahip tamamlanmış önceki bir çalıştırmanın veri
-kümesi ID'si olan `monitor.baselineDatasetId`'yi geçir. O zaman her satır bir
-`monitor` nesnesi kazanır. Durumu, bir temel değer olmadan `first_run`,
-önceki çalıştırmada bulunmayan tweet'ler için `new_to_baseline` & sahip
-olduğu tweet'ler için `unchanged` veya `changed` olur. `changes`,
-`previous`'tan `current`'a taşınan her duygu durumu, yoğunluk seviyesi veya
-alaycılık kararını listeler. Kararlar kategoriye, yuvarlanmış puan
-seviyesine veya 0,5'te evet/hayır'a göre karşılaştırılır. Bir karar üç
-durumda değişmiş sayılır. Önceki kategori 0,4 olasılığın altına düşer. Bir
-puan en az 0,6 seviye hareket eder. Bir evet/hayır olasılığı eşikten en az
-0,1 uzağa düşer. Çalıştırmalar arasındaki yakın-berabere
+Aynı analiz ayarlarına sahip tamamlanmış önceki bir çalıştırmanın veri kümesi
+ID'si olan `monitor.baselineDatasetId`'yi geçir. O zaman her satır bir `monitor`
+nesnesi kazanır. Durumu, bir temel değer olmadan `first_run`, önceki
+çalıştırmada bulunmayan tweet'ler için `new_to_baseline` & sahip olduğu
+tweet'ler için `unchanged` veya `changed` olur. `changes`, `previous`'tan
+`current`'a taşınan her duygu durumu, yoğunluk seviyesi veya alaycılık kararını
+listeler. Kararlar kategoriye, yuvarlanmış puan seviyesine veya 0,5'te
+evet/hayır'a göre karşılaştırılır. Bir karar yalnızca belirgin biçimde
+değiştiğinde değişmiş sayılır. Çalıştırmalar arasındaki yakın-berabere
 titremeler değişmemiş kalır. `maxBaselineRows`'un (varsayılan 100.000)
 üzerindeki veya farklı ayarlardan gelen temel değerler, toplamadan önce bir
 tanılama satırıyla çalıştırmayı durdurur.
@@ -276,12 +274,12 @@ kategorili veya en az 2 sıralı seviyeli, 1-8 `choice`, `score` veya
 
 ### Bir satır neden `analysis.status`'u `failed` veya `skipped` olarak döndü?
 
-Actor tweet'i topladı & teslim etti, ancak yapay zeka analizi
-tamamlanmadı. `analysis.reason`, tweet ve bağlamı `maxContextBytes`'ı
-aştığında `context_limit` veya yeniden denemelerden sonra
-`service_unavailable` gibi nedeni adlandırır. Bu satırların sonuç ücreti
-yoktur. `maxContextBytes`'ı (12.000'e kadar) artır veya etkilenen ID'leri
-yeniden çalıştır.
+Actor tweet'i topladı & teslim etti, ancak yapay zeka analizi tamamlanmadı.
+`analysis.reason`, tweet ve bağlamı `maxContextBytes`'ı aştığında
+`context_limit` veya analiz hizmeti kısa süre kullanılamadığında
+`service_unavailable` gibi nedeni adlandırır. Bu satırların sonuç ücreti yoktur.
+`maxContextBytes`'ı (12.000'e kadar) artır veya etkilenen ID'leri yeniden
+çalıştır.
 
 ### Analiz gerçekleri doğrular mı?
 

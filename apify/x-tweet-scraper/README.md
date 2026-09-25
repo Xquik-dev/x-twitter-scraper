@@ -40,12 +40,9 @@ media. It accepts URLs, handles, List IDs, Tweet IDs, and search queries with
 - One input supports lookups, timelines, Lists, search, and engagement modes.
 - Tweet ID inputs have no fixed count cap. Apify spend and timeout settings
   apply.
-- Automatic search and quote pages request up to 300 rows.
-- Saved cursors retain their original page limits and restart when expired.
-- Profile modes combine timeline and author search when both apply.
-- Page logs include `fetchDurationMs`, `processingDurationMs`, `pushDurationMs`,
-  `statusDurationMs`, and `fullPageDurationMs` without repeating targets.
-- Checkpoints preserve accepted rows, timing, and failure counts after restarts.
+- Run logs show page timing in `fetchDurationMs`, `processingDurationMs`,
+  `pushDurationMs`, `statusDurationMs` & `fullPageDurationMs`.
+- Runs keep delivered rows & progress when Apify restarts them.
 
 ### Always use the latest build
 
@@ -150,9 +147,9 @@ the same supported safe fields recursively.
 Media includes availability, geometry, tags, video variants, `watchNowUrl`, and
 `visitSiteUrl` actions.
 
-Viewer-relative state belongs to Xquik's fetch account, not your dataset.
-Follow, block, mute, bookmark, like, repost, edit-permission, and similar viewer
-flags are always removed, including from raw output.
+Rows never include viewer-only state. Follow, block, mute, bookmark, like,
+repost, edit-permission & similar viewer flags are always removed, including
+from raw output.
 
 ## How much does it cost to scrape tweets?
 
@@ -167,21 +164,17 @@ live pay-per-event price Apify exposes to the Actor. Every outcome writes
 data rows in `realRows` and diagnostics in `diagnosticRows`.
 
 Understand empty results before spending on another run. The `filtering` object
-separates `serverFilteredRows` from `actorFilteredRows` in reports & final
-diagnostics. These count rejected rows across processed pages, including
-repeated source rows. `pagesWithUnknownServerFiltering` identifies pages without
-valid server counts. Missing counts remain gaps. Filtered rows never incur
-result charges.
+in reports & final diagnostics counts the rows your filters removed. See
+`serverFilteredRows`, `actorFilteredRows` & `pagesWithUnknownServerFiltering`.
+Filtered rows never incur result charges.
 
 Source exhaustion can complete extraction below your requested limit. These runs
 report `outcome: "complete"` with `completionReason: "source_exhausted"`.
 Interrupted runs retain their partial outcome & retry guidance.
 
-`failedSubtargets` counts queries and profile targets stopped by read failures.
-Pagination and payment failures preserve partial rows and unfinished cursors.
-They never imply that the target is missing. Accepted rows remain data rows and
-count toward billing. These runs use `completionReason: "partial_failure"`. Fast
-server-side pagination follows the same reporting contract.
+`failedSubtargets` counts queries & profile targets that stopped after an error.
+Delivered rows stay in the dataset & count toward billing. An error never means
+the target is missing. These runs use `completionReason: "partial_failure"`.
 
 Interrupted extraction also writes a free `partial` diagnostic. Available
 results remain intact. The diagnostic reports `availableResults`,
@@ -210,22 +203,16 @@ The diagnostic names those targets in `unavailableTargets`. Each entry has the
 `search_unavailable` or `likes_hidden`. The list holds up to 100 entries. Remove
 them from the input to get a complete run.
 
-`completionReason: "pagination_safety_limit"` is not a read failure. It means
-pagination retained valid rows, then reached its bounded safety limit. Latest
-searches continue through empty pages while valid recovery cursors remain. Top
-searches & account-window recovery may checkpoint after 10 consecutive empty
-pages. When the service reports stalled pagination, the run keeps its rows &
-checkpoints that target at once. A checkpointed run reports incomplete
-extraction & retains resumable cursors. A terminal page completes pagination
-even after consecutive empty pages. `failedSubtargets` stays `0`. You pay only
-for accepted dataset rows.
+`completionReason: "pagination_safety_limit"` is not a read failure. The run
+kept its valid rows, then ended a target that no longer returned new results.
+The run reports incomplete extraction. `failedSubtargets` stays `0`. You pay
+only for delivered rows.
 
 The default Apify timeout is `0`, so runs have no time limit. The Actor
-continues until it reaches the cap or runs out of eligible data. A caller can
-still set a finite Apify timeout. Then `completionReason: "deadline_reached"`
-means that configured limit is near. The Actor keeps the final 15 seconds for
-checkpoints, rows, reports, and a successful exit. Valid rows remain delivered
-and bill once. Unfinished pagination remains resumable.
+continues until it reaches the cap or runs out of eligible data. You can still
+set a finite Apify timeout. Then `completionReason: "deadline_reached"` means
+that limit is near. The Actor saves rows & the report, then exits cleanly before
+the limit. Delivered rows bill once.
 
 - Starts, queries, URLs, and single Tweet lookups add no separate fee.
 - The Actor removes duplicates before writing or billing rows.
@@ -250,12 +237,9 @@ Paste a mix of tweet, profile, search, or list URLs:
 }
 ```
 
-The Actor looks up tweet URLs in concurrent batches of up to 100. Partial
-successful responses recheck unresolved IDs once. Batch output stays unique and
-matches requested IDs. Profile URLs combine the profile timeline with author
-search. Search URLs extract the query. List URLs use the dedicated list path
-instead of generic `list:` search. `maxItems` caps results across all pasted
-URLs.
+Tweet URLs return those tweets, unique & in your input order. Profile URLs
+return the account's posts. Search URLs run their query. List URLs return the
+List's posts. `maxItems` caps results across all pasted URLs.
 
 ### 2. Bulk handles
 
@@ -265,10 +249,10 @@ Shorthand for many `from:username` searches:
 { "twitterHandles": ["elonmusk", "nasa", "openai"], "maxItems": 100 }
 ```
 
-Each handle combines cursor pagination with author search. The Actor removes
-duplicate rows before output and billing. Usernames accept an optional `@`
-prefix. Handles & profile URLs keep reposts, as the Posts tab on X does, even
-with dates or filters. Set `tweetTypes.excludeRetweets` to drop them.
+Each handle returns that account's posts. The Actor removes duplicate rows
+before output & billing. Usernames accept an optional `@` prefix. Handles &
+profile URLs keep reposts, as the Posts tab on X does, even with dates or
+filters. Set `tweetTypes.excludeRetweets` to drop them.
 
 ### 3. Search tweets
 
@@ -285,17 +269,12 @@ Set the **Search Terms** field to one or more queries:
 If `mode` is `tweet` or `tweets` without Tweet IDs, query input routes to
 Search. This prevents valid `searchTerms` from returning an empty lookup.
 
-Plain account backfills with date windows, such as
-`from:elonmusk since:2026-01-01 until:2026-01-02`, use a bounded account route.
-Recent windows combine the profile timeline with author search. Historical
-windows use exact search. Compatible adjacent windows share one retrieval and
-keep their original `searchTerm` attribution. `maxItems` caps results across all
-search terms. All `since:`/`until:` and unix-time windows verify each returned
-tweet. Filtered account windows read full source pages before applying the
-output cap. Filtered pages continue until matching tweets or pagination ends.
-Independent search terms run concurrently. Each term keeps ordered cursor
-pagination for consistent depth and attribution. Account windows share one
-retrieval only when they are compatible.
+Account backfills with date windows work too, such as
+`from:elonmusk since:2026-01-01 until:2026-01-02`. Each term keeps its own
+`searchTerm` attribution. `maxItems` caps results across all search terms. The
+Actor checks every returned tweet against `since:`, `until:` & Unix-time
+windows. Filtered searches keep reading until they find matches or X has no more
+results.
 
 A `from:` search term returns what X search returns, so it leaves out reposts.
 Add `include:nativeretweets` to keep them, or `filter:nativeretweets` for
@@ -307,9 +286,8 @@ reposts only.
 { "tweetIds": ["1846987139428634858", "1858743654778892784"], "maxItems": 100 }
 ```
 
-The Actor processes 100 IDs per request. It runs batches concurrently and writes
-each completed group once. Partial responses recheck only unresolved IDs.
-Results preserve input order, remove duplicates, and exclude unrequested tweets.
+Results keep your input order, drop duplicates & include only the tweets you
+asked for.
 
 Aliases accepted for the same lookup include `tweetId`, `tweetIDs`, `tweets`,
 `postIds`, `lookupPostIds`, `tweetUrls`, and `postUrls`.
@@ -353,37 +331,29 @@ profile posts and replies. The Actor excludes conversation context from other
 authors. Use `filter:replies` or `to:` search when you need reply-only results.
 
 Search & paginated Tweet modes support `time.since`, `time.until`, Unix
-timestamps, & `lang`. These include profile Posts, With Replies, Media, Likes,
-Lists, replies, quotes, & threads. Matching flat date operators work too. The
+timestamps & `lang`. These include profile Posts, With Replies, Media, Likes,
+Lists, replies, quotes & threads. Matching flat date operators work too. The
 Actor verifies each row before billing. The lower date bound is inclusive. The
 upper bound is exclusive. Date filters exclude rows without usable dates.
 Language filters exclude missing or mismatched languages. Filtered rows never
-consume your requested result limit. Unordered results keep paging when older
-Tweets precede matching results. A List run with a date window jumps straight to
-the window, so a day 30 days back takes about as long as yesterday. For a window
-deep in a List the Tweets come from X's List search, which leaves out a few
-replies that the List timeline shows. A List run also ends once 3 pages in a row
-hold only Tweets older than your lower date bound. Since the upper bound is
-exclusive, the same date for `since` & `until` is an empty window. Set `until`
-to the next day to get 1 full day. Tweet filters do not apply to user lists or
-direct Tweet/article lookups.
+consume your requested result limit. List runs with a date window reach older
+days quickly. They end once they pass your lower bound. Windows far back in a
+List can miss a few replies. Since the upper bound is exclusive, the same date
+for `since` & `until` is an empty window. Set `until` to the next day to get 1
+full day. Tweet filters do not apply to user lists or direct Tweet/article
+lookups.
 
 `time.withinTime` & `within_time` work in the same modes. A value of `7d` keeps
 the last 7 days before the run starts reading. A window reaching back before
 2006 keeps every post.
 
-`mode: "replies"` is stricter. It combines direct timelines, supported ranking
-modes, every forward cursor module, labeled hidden-content branches, time
-partitions scaled to the reported reply count, and search. Every tweet row has
-`inReplyToId` equal to the requested tweet ID. Nested conversation replies never
-count as direct replies. If X exposes fewer replies than reported, the Actor
-keeps the safe partial rows. It adds 1 `replies-incomplete` record to
-`diagnostics` when capacity remains. Reaching a coverage threshold does not mean
-extraction finished. The run stays partial until your limit or verified source
-exhaustion. `replyCoverage` reports counts, strategies, pagination anomalies,
-missing fields, and the recommended fallback. The Actor honors transient retry
-delays before returning zero output. Set `maxItems` to your requested total,
-including totals above 25,000 for one reply target.
+`mode: "replies"` is stricter. Every tweet row has `inReplyToId` equal to the
+requested tweet ID. Nested conversation replies never count as direct replies.
+If X shows fewer replies than it reports, the Actor keeps the rows it found. It
+adds 1 `replies-incomplete` record to `diagnostics` when your limit is not
+reached. The run stays partial until it reaches your limit or X has no more
+replies. `replyCoverage` reports reply counts & coverage details. Set `maxItems`
+to your requested total, including totals above 25,000 for one reply target.
 
 Article rows include `resultType: "article"`, `sourceTweetId`, `article`, and
 optional `author`. Engagement user rows include `resultType: "user"`,
@@ -454,12 +424,10 @@ Combine user, date, location, media, and engagement filters:
 }
 ```
 
-Set `queryType: "Latest + Top"` to run both X search modes concurrently. The
-Actor deduplicates before billing and backfills unused capacity from either
-mode. `Top` is relevance-ranked and is not exhaustive. Set
-`includeSearchTerms: true` to attach each matching query as a `searchTerm`
-field. Short transient read outages get one extra retry before the Actor returns
-a diagnostic.
+Set `queryType: "Latest + Top"` to run both X search modes in one run. The Actor
+removes duplicates before billing & fills your limit from either mode. `Top` is
+ranked by relevance & is not exhaustive. Set `includeSearchTerms: true` to
+attach each matching query as a `searchTerm` field.
 
 When you set `lang`, the Actor verifies each returned tweet's language. It skips
 mismatches and continues paging for matching tweets.
@@ -566,18 +534,12 @@ except at least one of: `startUrls`, `twitterHandles`, `listIds`, `tweetIds`,
 Examples:
 
 - Paste a tweet URL into Start URLs.
-- Paste a profile URL or add the username to X Handles. The Actor combines its
-  timeline with author search.
+- Paste a profile URL or add the username to X Handles.
 - Use `from:user since:YYYY-MM-DD until:YYYY-MM-DD` as a Search Term for account
-  backfills. The Actor merges compatible windows before retrieval. Recent
-  windows combine the profile timeline with author search. Historical windows
-  use exact search.
+  backfills.
 - Paste a list URL into Start URLs.
 - Combine `twitterContent` with filters such as `from:`, `since:`, `min_faves:`,
   and `filter:media` for advanced searches.
-
-The scraper routes list URLs through the dedicated list path instead of generic
-`list:ID` search.
 
 ## Output
 
@@ -630,12 +592,12 @@ Export as JSON, CSV, Excel, or HTML from the Apify dataset.
 - Set `maxTotalChargeUsd` in the Apify API, or Max cost per run in Console.
   Apify exposes that limit to the Actor as `ACTOR_MAX_TOTAL_CHARGE_USD`, and the
   Actor turns it into the maximum billable row count.
-- Pass `tweetIds` for concurrent 100-ID batches. Paste a profile URL to use the
-  fast user-timeline path.
+- Pass `tweetIds` to look up many tweets at once. Paste a profile URL to read
+  one account's posts.
 - Set `includeSearchTerms: true` when running many queries to tag each result
   with its source search term.
-- Set `queryType: "Latest + Top"` to run both X search modes concurrently.
-  Deduplication and result caps remain atomic.
+- Set `queryType: "Latest + Top"` to run both X search modes in one run.
+  Deduplication & result caps apply across both.
 - Use Xquik account or keyword monitors for 1-second checks and signed webhooks.
   Active monitors check every second.
 
@@ -723,8 +685,8 @@ Xquik also provides 47 dashboard tools, 129 REST operations, signed webhooks,
 and an MCP server.
 
 - [API documentation](https://docs.xquik.com/introduction): REST API guides
-- [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets): the
-  endpoint powering this Actor
+- [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets):
+  search tweets over REST
 - [Batch Tweets API](https://docs.xquik.com/api-reference/x/batch-tweets): fetch
   up to 100 tweets by ID
 - [User Tweets API](https://docs.xquik.com/api-reference/x/user-tweets): get a
@@ -736,22 +698,18 @@ and an MCP server.
 
 ## FAQ
 
-**Do I need an X API key?** No. This scraper uses its own infrastructure. No
-login or credentials required.
+**Do I need an X API key?** No. You need no X API key, login or credentials.
 
 **What limits a run?** Your requested item limit and Apify spend limit stop the
 run. Apify account and platform limits still apply.
 
-**How fast is it?** Runtime depends on route, result count, and upstream
+**How fast is it?** Runtime depends on your input, the result count & X
 availability.
 
 **Why does a Latest search return posts that X's Latest tab does not show?** X
-leaves some matching posts out of its open Latest list & returns them only to a
-search with time bounds. This Actor reads a Latest search as time slices side by
-side, so it gets both. In a test of 100 posts for 1 query, 83 matched the posts
-5 other scrapers returned & 17 were posts X returned only to the time-bounded
-searches. All 17 were inside the same time span. Every post is a real X search
-result for your query, & you pay for each post once.
+leaves some matching posts out of its Latest tab. This Actor returns those posts
+too. Every post is a real X search result for your query, & you pay for each
+post once.
 
 **Which search operators work?** X advanced search supports authors, recipients,
 mentions, dates, engagement, media, and location.

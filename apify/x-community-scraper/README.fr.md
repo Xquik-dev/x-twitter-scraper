@@ -37,7 +37,7 @@ connexion requise.
   facturation.
 - Plusieurs Communities et ressources par run.
 - Plafonds par ressource et globaux.
-- Lectures simultanées avec reprise de curseur sauvegardé.
+- Les runs reprennent là où ils s'étaient arrêtés après un redémarrage d'Apify.
 - L'Actor retire les lignes en double avant la facturation.
 
 ## Entrée
@@ -77,11 +77,9 @@ données en temps réel.
 
 ## Pagination et reprise
 
-Les ressources de Community indépendantes s'exécutent en parallèle. La
-pagination reste ordonnée à l'intérieur de chaque lignée de curseur. Les
-lignes acceptées, l'état de facturation, les curseurs et les empreintes de
-sortie survivent à une migration Apify. L'Actor n'a pas de délai
-d'expiration imposé.
+Un run peut lire de nombreuses Communautés et ressources. Les lignes livrées et
+la progression survivent à un redémarrage d'Apify. L'Actor n'ajoute aucune
+limite de temps propre.
 
 L'Actor renvoie uniquement les Communities publiques que X expose. Les
 champs disponibles varient selon la Community.

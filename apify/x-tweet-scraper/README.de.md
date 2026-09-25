@@ -42,15 +42,11 @@ Tweet-IDs und Suchanfragen mit über 50 Filtern.
   Interaktionsmodi.
 - Tweet-ID-Eingaben haben keine feste Anzahlobergrenze. Apify-Ausgaben- und
   Zeitlimit-Einstellungen gelten.
-- Automatische Such- und Zitatseiten fordern bis zu 300 Datensätze an.
-- Gespeicherte Cursor behalten ihre ursprünglichen Seitenlimits und starten
-  bei Ablauf neu.
-- Profilmodi kombinieren Timeline und Autorensuche, wenn beides zutrifft.
-- Seitenprotokolle enthalten `fetchDurationMs`, `processingDurationMs`,
-  `pushDurationMs`, `statusDurationMs` und `fullPageDurationMs`, ohne Ziele
-  zu wiederholen.
-- Checkpoints erhalten akzeptierte Datensätze, Timing und Fehleranzahlen
-  nach Neustarts.
+- Run-Protokolle zeigen die Seitenzeiten in `fetchDurationMs`,
+  `processingDurationMs`, `pushDurationMs`, `statusDurationMs` und
+  `fullPageDurationMs`.
+- Startet Apify einen Run neu, bleiben gelieferte Datensätze und der Fortschritt
+  erhalten.
 
 ### Immer den aktuellsten Build verwenden
 
@@ -162,10 +158,9 @@ Felder.
 Medien enthalten Verfügbarkeit, Geometrie, Tags, Video-Varianten,
 `watchNowUrl` und `visitSiteUrl`-Aktionen.
 
-Betrachterbezogener Status gehört zum Abrufkonto von Xquik, nicht zu
-deinem Dataset. Follow-, Block-, Mute-, Lesezeichen-, Like-, Repost-,
-Bearbeitungsberechtigungs- und ähnliche Betrachter-Flags werden immer
-entfernt, auch aus der Rohausgabe.
+Datensätze enthalten nie betrachterbezogenen Status. Folgen-, Blockieren-,
+Stummschalten-, Lesezeichen-, Like-, Repost-, Bearbeitungsrechte- und ähnliche
+Betrachter-Flags werden immer entfernt, auch aus der Raw-Ausgabe.
 
 ## Was kostet es, Tweets zu scrapen?
 
@@ -182,24 +177,20 @@ Abbrüche ohne Eingabe und mit ungültiger Eingabe. Run-Reports trennen
 Datendatensätze in `realRows` und Diagnosen in `diagnosticRows`.
 
 Verstehe leere Ergebnisse, bevor du für einen weiteren Run zahlst. Das
-Objekt `filtering` trennt `serverFilteredRows` von `actorFilteredRows` in
-Reports & finalen Diagnosen. Diese zählen abgelehnte Datensätze über
-verarbeitete Seiten hinweg, einschließlich wiederholter Quelldatensätze.
-`pagesWithUnknownServerFiltering` identifiziert Seiten ohne gültige
-Server-Zählungen. Fehlende Zählungen bleiben Lücken. Gefilterte
-Datensätze verursachen nie Ergebnisgebühren.
+`filtering`-Objekt in Berichten und finalen Diagnosen zählt die Datensätze, die
+deine Filter entfernt haben. Siehe `serverFilteredRows`, `actorFilteredRows` und
+`pagesWithUnknownServerFiltering`. Gefilterte Datensätze verursachen nie
+Ergebniskosten.
 
 Quellerschöpfung kann die Extraktion unterhalb deiner angeforderten
 Obergrenze abschließen. Diese Runs melden `outcome: "complete"` mit
 `completionReason: "source_exhausted"`. Unterbrochene Runs behalten ihr
 Teilergebnis & ihre Wiederholungsempfehlung.
 
-`failedSubtargets` zählt Suchanfragen und Profilziele, die durch
-Lesefehler gestoppt wurden. Paginierungs- und Zahlungsfehler erhalten
-Teilergebnisse und unvollständige Cursor. Sie bedeuten nie, dass das Ziel
-fehlt. Akzeptierte Datensätze bleiben Datendatensätze und zählen zur
-Abrechnung. Diese Runs nutzen `completionReason: "partial_failure"`.
-Schnelle serverseitige Paginierung folgt demselben Berichtsvertrag.
+`failedSubtargets` zählt Suchanfragen und Profilziele, die nach einem Fehler
+gestoppt haben. Gelieferte Datensätze bleiben im Dataset und zählen zur
+Abrechnung. Ein Fehler bedeutet nie, dass das Ziel fehlt. Diese Runs verwenden
+`completionReason: "partial_failure"`.
 
 Eine unterbrochene Extraktion schreibt außerdem eine kostenlose
 `partial`-Diagnose. Verfügbare Ergebnisse bleiben erhalten. Die Diagnose
@@ -232,26 +223,17 @@ Die Diagnose nennt diese Ziele in `unavailableTargets`. Jeder Eintrag hat das
 100 Einträge. Entferne sie aus der Eingabe, um einen vollständigen Run zu
 erhalten.
 
-`completionReason: "pagination_safety_limit"` ist kein Lesefehler. Es bedeutet,
-dass die Paginierung gültige Datensätze behalten hat und dann ihr begrenztes
-Sicherheitslimit erreicht hat. Latest-Suchen laufen durch leere Seiten weiter,
-solange gültige Wiederherstellungs-Cursor vorhanden sind. Top-Suchen &
-Konto-Fenster-Wiederherstellung können nach 10 aufeinanderfolgenden leeren
-Seiten einen Checkpoint setzen. Meldet der Dienst eine stockende Paginierung,
-behält der Run seine Zeilen & setzt für dieses Ziel sofort einen Checkpoint. Ein
-Run mit Checkpoint meldet eine unvollständige Extraktion & behält fortsetzbare
-Cursor. Eine finale Seite schließt die Paginierung auch nach
-aufeinanderfolgenden leeren Seiten ab. `failedSubtargets` bleibt `0`. Du zahlst
-nur für akzeptierte Dataset-Datensätze.
+`completionReason: "pagination_safety_limit"` ist kein Lesefehler. Der Run hat
+seine gültigen Datensätze behalten und dann ein Ziel beendet, das keine neuen
+Ergebnisse mehr lieferte. Der Run meldet eine unvollständige Extraktion.
+`failedSubtargets` bleibt `0`. Du zahlst nur für gelieferte Datensätze.
 
-Das Standard-Apify-Zeitlimit ist `0`, Runs haben also kein Zeitlimit. Der
-Actor läuft weiter, bis er die Obergrenze erreicht oder die verfügbaren Daten
-aufbraucht. Ein Aufrufer kann dennoch ein endliches Apify-Zeitlimit
-setzen. Dann bedeutet `completionReason: "deadline_reached"`, dass dieses
-konfigurierte Limit nahe ist. Der Actor reserviert die letzten 15
-Sekunden für Checkpoints, Datensätze, Reports und einen erfolgreichen
-Abschluss. Gültige Datensätze bleiben geliefert und werden einmal
-abgerechnet. Unvollständige Paginierung bleibt fortsetzbar.
+Das Standard-Timeout von Apify ist `0`, daher haben Runs kein Zeitlimit. Der
+Actor läuft weiter, bis er das Limit erreicht oder keine passenden Daten mehr
+findet. Du kannst trotzdem ein endliches Apify-Timeout setzen. Dann bedeutet
+`completionReason: "deadline_reached"`, dass dieses Limit nahe ist. Der Actor
+speichert Datensätze und Bericht und beendet sich vor dem Limit sauber.
+Gelieferte Datensätze werden einmal abgerechnet.
 
 - Starts, Suchen, URLs und einzelne Tweet-Lookups verursachen keine
   separate Gebühr.
@@ -278,13 +260,10 @@ Füge eine Mischung aus Tweet-, Profil-, Such- oder Listen-URLs ein:
 }
 ```
 
-Der Actor schlägt Tweet-URLs in gleichzeitigen Batches von bis zu 100 nach.
-Teilweise erfolgreiche Antworten prüfen nicht aufgelöste IDs einmal erneut.
-Die Batch-Ausgabe bleibt eindeutig und entspricht den angeforderten IDs.
-Profil-URLs kombinieren die Profil-Timeline mit Autorensuche. Such-URLs
-extrahieren die Suchanfrage. Listen-URLs nutzen den dedizierten
-Listen-Pfad statt der generischen `list:`-Suche. `maxItems` begrenzt die
-Ergebnisse über alle eingefügten URLs hinweg.
+Tweet-URLs liefern diese Tweets ohne Duplikate und in deiner Eingabereihenfolge.
+Profil-URLs liefern die Beiträge des Kontos. Such-URLs führen ihre Suchanfrage
+aus. Listen-URLs liefern die Beiträge der Liste. `maxItems` begrenzt die
+Ergebnisse über alle eingefügten URLs.
 
 ### 2. Handles in großen Mengen
 
@@ -294,11 +273,11 @@ Kurzform für viele `from:username`-Suchen:
 { "twitterHandles": ["elonmusk", "nasa", "openai"], "maxItems": 100 }
 ```
 
-Jedes Handle kombiniert Cursor-Paginierung mit Autorensuche. Der Actor entfernt
-doppelte Datensätze vor Ausgabe und Abrechnung. Nutzernamen akzeptieren ein
-optionales `@`-Präfix. Handles & Profil-URLs behalten Reposts, so wie der Tab
-„Beiträge" auf X. Das gilt auch mit Datumsangaben oder Filtern. Setze
-`tweetTypes.excludeRetweets`, um sie zu entfernen.
+Jeder Handle liefert die Beiträge dieses Kontos. Der Actor entfernt doppelte
+Datensätze vor Ausgabe und Abrechnung. Benutzernamen akzeptieren ein optionales
+`@`-Präfix. Handles und Profil-URLs behalten Reposts, wie der Posts-Tab auf X,
+auch mit Datum oder Filtern. Setze `tweetTypes.excludeRetweets`, um sie zu
+entfernen.
 
 ### 3. Tweets suchen
 
@@ -316,20 +295,12 @@ Wenn `mode` `tweet` oder `tweets` ohne Tweet-IDs ist, leitet die Eingabe
 einer Suchanfrage zur Suche. Das verhindert, dass gültige `searchTerms`
 einen leeren Lookup zurückgeben.
 
-Einfache Konto-Backfills mit Datumsfenstern, wie
-`from:elonmusk since:2026-01-01 until:2026-01-02`, nutzen eine begrenzte
-Konto-Route. Aktuelle Fenster kombinieren die Profil-Timeline mit
-Autorensuche. Historische Fenster nutzen exakte Suche. Kompatible,
-benachbarte Fenster teilen sich einen Abruf und behalten ihre
-ursprüngliche `searchTerm`-Zuordnung. `maxItems` begrenzt die Ergebnisse
-über alle Suchbegriffe hinweg. Alle `since:`/`until:`- und
-Unix-Zeit-Fenster verifizieren jeden zurückgegebenen Tweet. Gefilterte
-Konto-Fenster lesen vollständige Quellseiten, bevor die Ausgabeobergrenze
-angewendet wird. Gefilterte Seiten laufen weiter, bis passende Tweets
-gefunden sind oder die Paginierung endet. Unabhängige Suchbegriffe laufen
-gleichzeitig. Jeder Begriff behält eine geordnete Cursor-Paginierung für
-konsistente Tiefe und Zuordnung. Konto-Fenster teilen sich einen Abruf
-nur, wenn sie kompatibel sind.
+Konto-Backfills mit Datumsfenstern funktionieren ebenfalls, etwa
+`from:elonmusk since:2026-01-01 until:2026-01-02`. Jeder Begriff behält seine
+eigene `searchTerm`-Zuordnung. `maxItems` begrenzt die Ergebnisse über alle
+Suchbegriffe. Der Actor prüft jeden zurückgegebenen Tweet gegen `since:`-,
+`until:`- und Unix-Zeitfenster. Gefilterte Suchen lesen weiter, bis sie Treffer
+finden oder X keine Ergebnisse mehr hat.
 
 Ein `from:`-Suchbegriff liefert, was die X-Suche liefert. Er lässt also Reposts
 aus. Füge `include:nativeretweets` hinzu, um sie zu behalten. Nutze
@@ -341,11 +312,8 @@ aus. Füge `include:nativeretweets` hinzu, um sie zu behalten. Nutze
 { "tweetIds": ["1846987139428634858", "1858743654778892784"], "maxItems": 100 }
 ```
 
-Der Actor verarbeitet 100 IDs pro Anfrage. Er führt Batches gleichzeitig
-aus und schreibt jede abgeschlossene Gruppe einmal. Teilweise Antworten
-prüfen nur nicht aufgelöste IDs erneut. Ergebnisse behalten die
-Eingabereihenfolge, entfernen Duplikate und schließen nicht angeforderte
-Tweets aus.
+Ergebnisse behalten deine Eingabereihenfolge, entfernen Duplikate und enthalten
+nur die angefragten Tweets.
 
 Akzeptierte Aliasse für denselben Lookup sind `tweetId`, `tweetIDs`,
 `tweets`, `postIds`, `lookupPostIds`, `tweetUrls` und `postUrls`.
@@ -393,46 +361,31 @@ anderer Autoren aus. Nutze `filter:replies` oder `to:`-Suche, wenn du nur
 Antworten brauchst.
 
 Such- und paginierte Tweet-Modi unterstützen `time.since`, `time.until`,
-Unix-Zeitstempel & `lang`. Dazu gehören die Tabs „Beiträge", „Mit
-Antworten", „Medien" und „Likes" von Profilen, Listen, Antworten, Zitate
-& Threads. Passende flache Datumsoperatoren funktionieren ebenfalls. Der
-Actor verifiziert jeden Datensatz vor der Abrechnung. Die untere
-Datumsgrenze ist einschließend. Die obere ist ausschließend. Datumsfilter
-schließen Datensätze ohne nutzbares Datum aus. Sprachfilter schließen
-fehlende oder nicht passende Sprachen aus. Gefilterte Datensätze
-verbrauchen nie deine angeforderte Ergebnisobergrenze. Ungeordnete
-Ergebnisse paginieren weiter, wenn ältere Tweets vor passenden Ergebnissen
-liegen. Ein Listen-Run mit Datumsfenster springt direkt zum Fenster. Ein Tag
-vor 30 Tagen dauert also etwa so lange wie gestern. Für ein Fenster tief in
-einer Liste kommen die Tweets aus der Listensuche von X. Sie lässt einige
-Antworten aus, die die Listen-Timeline zeigt. Ein Listen-Run endet auch,
-sobald 3 Seiten in Folge nur Tweets enthalten, die älter als deine untere
-Datumsgrenze sind. Da die obere Grenze ausschließend ist, ergibt dasselbe
-Datum für `since` & `until` ein leeres Fenster. Setze `until` auf den nächsten
-Tag, um 1 vollen Tag zu erhalten. Tweet-Filter gelten nicht für Nutzerlisten
-oder direkte Tweet-/Artikel-Lookups.
+Unix-Zeitstempel und `lang`. Dazu gehören Profil-Posts, With Replies, Media,
+Likes, Listen, Antworten, Zitate und Threads. Passende flache Datumsoperatoren
+funktionieren ebenfalls. Der Actor prüft jeden Datensatz vor der Abrechnung. Die
+untere Datumsgrenze ist inklusiv. Die obere Grenze ist exklusiv. Datumsfilter
+schließen Datensätze ohne verwendbares Datum aus. Sprachfilter schließen
+fehlende oder abweichende Sprachen aus. Gefilterte Datensätze verbrauchen nie
+dein angefragtes Ergebnislimit. Listen-Runs mit Datumsfenster erreichen ältere
+Tage schnell. Sie enden, sobald sie deine untere Grenze passieren. Fenster weit
+zurück in einer Liste können einige Antworten auslassen. Da die obere Grenze
+exklusiv ist, ergibt dasselbe Datum für `since` & `until` ein leeres Fenster.
+Setze `until` auf den nächsten Tag, um 1 vollen Tag zu erhalten. Tweet-Filter
+gelten nicht für Nutzerlisten oder direkte Tweet- bzw. Artikel-Lookups.
 
 `time.withinTime` & `within_time` funktionieren in denselben Modi. Der Wert
 `7d` behält die letzten 7 Tage, bevor der Run zu lesen beginnt. Ein Fenster,
 das bis vor 2006 zurückreicht, behält jeden Beitrag.
 
-`mode: "replies"` ist strenger. Er kombiniert direkte Timelines,
-unterstützte Ranking-Modi, jedes vorwärtsgerichtete Cursor-Modul,
-gekennzeichnete versteckte Inhaltszweige, an die gemeldete Antwortanzahl
-angepasste Zeitpartitionen und Suche. Jeder Tweet-Datensatz hat
-`inReplyToId` gleich der angeforderten Tweet-ID. Verschachtelte
-Konversationsantworten zählen nie als direkte Antworten. Wenn X weniger
-Antworten offenlegt, als gemeldet, behält der Actor die sicheren
-Teildatensätze. Er fügt 1 `replies-incomplete`-Datensatz zu
-`diagnostics` hinzu, wenn noch Kapazität übrig ist. Das Erreichen einer
-Abdeckungsschwelle bedeutet nicht, dass die Extraktion abgeschlossen ist.
-Der Run bleibt teilweise, bis dein Limit oder eine verifizierte
-Quellerschöpfung erreicht ist. `replyCoverage` meldet Zählungen,
-Strategien, Paginierungsauffälligkeiten, fehlende Felder und die
-empfohlene Ausweichlösung. Der Actor beachtet vorübergehende
-Wiederholungsverzögerungen, bevor er eine leere Ausgabe zurückgibt. Setze
-`maxItems` auf deine angeforderte Gesamtzahl, auch für Gesamtzahlen über
-25.000 für ein Antwortziel.
+`mode: "replies"` ist strenger. Jeder Tweet-Datensatz hat `inReplyToId` gleich
+der angefragten Tweet-ID. Verschachtelte Konversationsantworten zählen nie als
+direkte Antworten. Zeigt X weniger Antworten, als es meldet, behält der Actor
+die gefundenen Datensätze. Er fügt 1 `replies-incomplete`-Eintrag zu
+`diagnostics` hinzu, wenn dein Limit nicht erreicht ist. Der Run bleibt
+partiell, bis er dein Limit erreicht oder X keine Antworten mehr hat.
+`replyCoverage` meldet Antwortzahlen und Details zur Abdeckung. Setze `maxItems`
+auf deine gewünschte Gesamtzahl, auch über 25.000 für ein Antwortziel.
 
 Artikel-Datensätze enthalten `resultType: "article"`, `sourceTweetId`,
 `article` und optional `author`. Interaktions-Nutzer-Datensätze enthalten
@@ -512,13 +465,11 @@ Kombiniere Nutzer-, Datums-, Standort-, Medien- und Interaktionsfilter:
 }
 ```
 
-Setze `queryType: "Latest + Top"`, um beide X-Suchmodi gleichzeitig
-auszuführen. Der Actor dedupliziert vor der Abrechnung und füllt
-ungenutzte Kapazität aus beiden Modi auf. `Top` ist relevanzsortiert und
-nicht erschöpfend. Setze `includeSearchTerms: true`, um jedes passende
-Ergebnis mit einem `searchTerm`-Feld zu kennzeichnen. Kurze
-vorübergehende Leseausfälle erhalten einen zusätzlichen Versuch, bevor der
-Actor eine Diagnose zurückgibt.
+Setze `queryType: "Latest + Top"`, um beide X-Suchmodi in einem Run zu nutzen.
+Der Actor entfernt Duplikate vor der Abrechnung und füllt dein Limit aus beiden
+Modi. `Top` ist nach Relevanz sortiert und nicht vollständig. Setze
+`includeSearchTerms: true`, um jede passende Suchanfrage als `searchTerm`-Feld
+anzuhängen.
 
 Wenn du `lang` setzt, verifiziert der Actor die Sprache jedes
 zurückgegebenen Tweets. Er überspringt nicht passende Treffer und
@@ -635,18 +586,12 @@ oder deren dokumentierte Aliasse.
 Beispiele:
 
 - Füge eine Tweet-URL in Start-URLs ein.
-- Füge eine Profil-URL ein oder ergänze den Nutzernamen zu X Handles. Der
-  Actor kombiniert dessen Timeline mit Autorensuche.
+- Füge eine Profil-URL ein oder ergänze den Nutzernamen zu X Handles.
 - Nutze `from:user since:YYYY-MM-DD until:YYYY-MM-DD` als Suchbegriff für
-  Konto-Backfills. Der Actor führt kompatible Fenster vor dem Abruf
-  zusammen. Aktuelle Fenster kombinieren die Profil-Timeline mit
-  Autorensuche. Historische Fenster nutzen exakte Suche.
+  Konto-Backfills.
 - Füge eine Listen-URL in Start-URLs ein.
 - Kombiniere `twitterContent` mit Filtern wie `from:`, `since:`,
   `min_faves:` und `filter:media` für erweiterte Suchen.
-
-Der Scraper leitet Listen-URLs über den dedizierten Listen-Pfad statt der
-generischen `list:ID`-Suche.
 
 ## Ausgabe
 
@@ -703,12 +648,12 @@ Exportiere als JSON, CSV, Excel oder HTML aus dem Apify-Dataset.
   der Console. Apify legt dieses Limit dem Actor als
   `ACTOR_MAX_TOTAL_CHARGE_USD` offen, und der Actor rechnet es in die
   maximal abrechenbare Datensatzanzahl um.
-- Übergib `tweetIds` für gleichzeitige Batches von 100 IDs. Füge eine
-  Profil-URL ein, um den schnellen Nutzer-Timeline-Pfad zu nutzen.
+- Übergib `tweetIds`, um viele Tweets auf einmal abzurufen. Füge eine Profil-URL
+  ein, um die Beiträge eines Kontos zu lesen.
 - Setze `includeSearchTerms: true`, wenn du viele Suchanfragen ausführst,
   um jedes Ergebnis mit seinem Quell-Suchbegriff zu kennzeichnen.
-- Setze `queryType: "Latest + Top"`, um beide X-Suchmodi gleichzeitig
-  auszuführen. Deduplizierung und Ergebnisobergrenzen bleiben atomar.
+- Setze `queryType: "Latest + Top"`, um beide X-Suchmodi in einem Run zu nutzen.
+  Deduplizierung und Ergebnislimits gelten für beide gemeinsam.
 - Nutze Xquik-Konto- oder Stichwort-Monitore für sekündliche Prüfungen
   und signierte Webhooks. Aktive Monitore prüfen jede Sekunde.
 
@@ -804,7 +749,7 @@ Webhooks und einen MCP-Server.
 - [API-Dokumentation](https://docs.xquik.com/introduction): Anleitungen zur
   REST-API
 - [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets):
-  der Endpunkt, der diesen Actor antreibt
+  sucht Tweets per REST
 - [Batch Tweets API](https://docs.xquik.com/api-reference/x/batch-tweets):
   ruft bis zu 100 Tweets per ID ab
 - [User Tweets API](https://docs.xquik.com/api-reference/x/user-tweets):
@@ -818,25 +763,20 @@ Webhooks und einen MCP-Server.
 
 ## FAQ
 
-**Brauche ich einen X-API-Schlüssel?** Nein. Dieser Scraper nutzt seine
-eigene Infrastruktur. Kein Login oder Zugangsdaten erforderlich.
+**Brauche ich einen X-API-Schlüssel?** Nein. Du brauchst keinen X-API-Schlüssel,
+keinen Login und keine Zugangsdaten.
 
 **Was begrenzt einen Run?** Dein angefordertes Item-Limit und das
 Apify-Ausgabenlimit stoppen den Run. Apify-Konto- und Plattformlimits
 gelten weiterhin.
 
-**Wie schnell ist es?** Die Laufzeit hängt von der Route, der
-Ergebnisanzahl und der Verfügbarkeit der Quelle ab.
+**Wie schnell ist es?** Die Laufzeit hängt von deiner Eingabe, der
+Ergebnisanzahl und der Verfügbarkeit von X ab.
 
 **Warum liefert eine Latest-Suche Beiträge, die der Latest-Tab von X nicht
-zeigt?** X lässt einige passende Beiträge aus seiner offenen Latest-Liste weg
-& liefert sie nur an eine Suche mit Zeitgrenzen. Dieser Actor liest eine
-Latest-Suche als Zeitscheiben nebeneinander, also bekommt er beides. In einem
-Test mit 100 Beiträgen für 1 Suchanfrage stimmten 83 mit den Beiträgen
-überein, die 5 andere Scraper lieferten. 17 waren Beiträge, die X nur an die
-zeitbegrenzten Suchen lieferte. Alle 17 lagen in derselben Zeitspanne. Jeder
-Beitrag ist ein echtes X-Suchergebnis für deine Suchanfrage, & du zahlst für
-jeden Beitrag 1 Mal.
+zeigt?** X lässt einige passende Beiträge aus seinem Latest-Tab weg. Dieser
+Actor liefert auch diese Beiträge. Jeder Beitrag ist ein echtes X-Suchergebnis
+für deine Suchanfrage, und du zahlst jeden Beitrag nur einmal.
 
 **Welche Suchoperatoren funktionieren?** X Advanced Search
 unterstützt Autoren, Empfänger, Erwähnungen, Daten, Interaktion, Medien

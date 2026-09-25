@@ -20,8 +20,7 @@ scraper hizmetidir. X (Twitter) News Monitor, haber gönderilerini biçim, kayna
 atfı ve ilgiye göre sıralar. Diğer tüm Apify Actor'ları filtreleme veya
 tekilleştirmeden önce ücret alır. Xquik yalnızca teslim edilen, benzersiz,
 filtreyle eşleşen sonuçlar için ücret alır. Yapay zekâ maliyetleri tweet başına
-fiyata dahil. Yapay zekâ sağlayıcısına ödeme yapmazsın, token almazsın & anahtar
-getirmezsin.
+fiyata dahil. Yapay zekâ hesabına, token'a veya anahtara ihtiyacın yok.
 
 X (Twitter)'daki haber gönderilerini ne olduklarına göre sırala ve orijinal
 tweet verisini sakla. **X (Twitter) News Monitor with AI Analysis**, konularınla
@@ -96,7 +95,8 @@ veya notlar. Actor metni analiz eder & X'ten hiçbir şey getirmez.
 
 ## Fiyatlandırma
 
-Yapay zekâ maliyetleri tweet başına fiyata dahil. Yapay zekâ sağlayıcısına ödeme yapmazsın, token almazsın & anahtar getirmezsin.
+Yapay zekâ maliyetleri tweet başına fiyata dahil. Yapay zekâ hesabına, token'a
+veya anahtara ihtiyacın yok.
 
 Başlangıç ücreti olmadan, başarıyla analiz edilen tweet başına $0.0003'ten
 başlar. Fiyata toplama dahil. Analiz ödeneği 8 soru, soru tanımı başına 8.000
@@ -185,12 +185,11 @@ bulunmayan tweet'ler için `new_to_baseline` & önceki çalıştırmada bulunan
 tweet'ler için `unchanged` veya `changed` olur. `changes`, `previous`'tan
 `current`'a geçen her biçim, atıf veya ilgi kararını listeler. Actor kararları
 kategoriye, yuvarlanmış puan seviyesine veya 0,5'te evet/hayır'a göre
-karşılaştırır. Bir karar üç durumda değişmiş sayılır. Önceki kategori 0,4
-olasılığın altına düşer. Bir puan en az 0,6 seviye hareket eder. Bir evet/hayır
-olasılığı eşikten en az 0,1 uzağa düşer. Çalıştırmalar arasındaki yakın-berabere
-titremeler değişmemiş kalır. `maxBaselineRows`'un (varsayılan 100.000)
-üzerindeki veya farklı ayarlardan gelen temel değerler, toplamadan önce bir
-tanılama satırıyla çalıştırmayı durdurur.
+karşılaştırır. Bir karar yalnızca belirgin biçimde değiştiğinde değişmiş
+sayılır. Çalıştırmalar arasındaki yakın-berabere titremeler değişmemiş kalır.
+`maxBaselineRows`'un (varsayılan 100.000) üzerindeki veya farklı ayarlardan
+gelen temel değerler, toplamadan önce bir tanılama satırıyla çalıştırmayı
+durdurur.
 
 ## Görev örnekleri
 
@@ -297,9 +296,10 @@ kategorili veya en az 2 sıralı seviyeli, 1-8 `choice`, `score` veya
 
 Actor tweet'i topladı & teslim etti, ancak yapay zeka analizi tamamlanmadı.
 `analysis.reason`, tweet ve bağlamı `maxContextBytes`'ı aştığında
-`context_limit` veya yeniden denemelerden sonra `service_unavailable` gibi
-nedeni adlandırır. Bu satırların sonuç ücreti yoktur. `maxContextBytes`'ı
-(12.000'e kadar) artır veya etkilenen ID'leri yeniden çalıştır.
+`context_limit` veya analiz hizmeti kısa süre kullanılamadığında
+`service_unavailable` gibi nedeni adlandırır. Bu satırların sonuç ücreti yoktur.
+`maxContextBytes`'ı (12.000'e kadar) artır veya etkilenen ID'leri yeniden
+çalıştır.
 
 ### Analiz gerçekleri doğrular mı?
 

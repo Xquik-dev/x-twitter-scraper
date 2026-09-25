@@ -20,8 +20,8 @@ den umfassendsten X-Daten. X (Twitter) Brand Monitoring verfolgt
 Markenerwähnungen mit Relevanz, Sentiment & Antworten zur Kundenerfahrung. Jeder
 andere Apify Actor berechnet, bevor gefiltert oder dedupliziert wird. Xquik
 berechnet nur für gelieferte, eindeutige, filterkonforme Ergebnisse. Die
-KI-Kosten sind im Preis pro Tweet enthalten. Du bezahlst keinen KI-Anbieter,
-kaufst keine Tokens & bringst keinen Schlüssel mit.
+KI-Kosten sind im Preis pro Tweet enthalten. Du brauchst kein KI-Konto, keine
+Tokens und keinen Schlüssel.
 
 Verfolge Markenerwähnungen auf X (Twitter) & beobachte Sentiment-Änderungen
 zwischen Runs. **X (Twitter) Brand Monitoring with AI Analysis** sammelt jeden
@@ -107,16 +107,13 @@ gegenüber dem Ziel.
 Der Actor vergleicht Antworten nach Entscheidung. Eine `choice`-Antwort
 vergleicht er nach ihrer Kategorie. Eine `score`-Antwort vergleicht er nach
 ihrer nächstgelegenen Stufe. Eine `probability`-Antwort vergleicht er nach ihrer
-Ja/Nein-Entscheidung bei 0,5. Eine Entscheidung zählt in drei Fällen als
-geändert. Die frühere Kategorie fällt unter eine Wahrscheinlichkeit von 0,4. Ein
-Score bewegt sich um mindestens 0,6 Stufen. Eine Ja/Nein-Wahrscheinlichkeit
-landet mindestens 0,1 vom Schwellenwert entfernt. Beinahe-Gleichstände zwischen
-Runs bleiben `unchanged`, & ebenso Verschiebungen, die dieselbe Entscheidung
-behalten. Modellschwankungen zwischen Runs füllen deinen Report nicht. `changes`
-listet jede geänderte Frage mit ihrer `previous`- & `current`-Entscheidung.
-Änderungen können von Modellschwankungen, neuem Kontext oder bearbeiteten
-Quelldaten kommen. Sie beweisen keine geänderten Fakten, & ein fehlender Tweet
-beweist keine Löschung.
+Ja/Nein-Entscheidung bei 0,5. Eine Entscheidung zählt nur als geändert, wenn sie
+sich deutlich bewegt. Beinahe-Gleichstände zwischen Runs bleiben `unchanged`, &
+ebenso Verschiebungen, die dieselbe Entscheidung behalten. Modellschwankungen
+zwischen Runs füllen deinen Report nicht. `changes` listet jede geänderte Frage
+mit ihrer `previous`- & `current`-Entscheidung. Änderungen können von
+Modellschwankungen, neuem Kontext oder bearbeiteten Quelldaten kommen. Sie
+beweisen keine geänderten Fakten, & ein fehlender Tweet beweist keine Löschung.
 
 Das Baseline-Limit liegt standardmäßig bei 100.000 Datensätzen. Doppelte
 Tweet-IDs, Ladefehler & sich ändernde Dataset-Größen stoppen den Vergleich vor
@@ -145,8 +142,8 @@ oder Notizen. Der Actor analysiert ihn & ruft nichts von X ab.
 
 ## Preise
 
-Die KI-Kosten sind im Preis pro Tweet enthalten. Du bezahlst keinen KI-Anbieter,
-kaufst keine Tokens & bringst keinen Schlüssel mit.
+Die KI-Kosten sind im Preis pro Tweet enthalten. Du brauchst kein KI-Konto,
+keine Tokens und keinen Schlüssel.
 
 Ab $0.0003 pro erfolgreich analysiertem Tweet, ohne Startgebühr. Der Preis
 enthält die Erfassung. Das Analyse-Kontingent umfasst 8 Fragen, 8.000 Byte pro
@@ -336,9 +333,9 @@ hinweg, die du vergleichen willst.
 Der Actor hat den Tweet gesammelt & geliefert, aber die KI-Analyse wurde nicht
 abgeschlossen. `analysis.reason` nennt die Ursache, etwa `context_limit`, wenn
 der Tweet & sein Kontext `maxContextBytes` überschreiten, oder
-`service_unavailable` nach Wiederholungsversuchen. Diese Datensätze verursachen
-keine Ergebnisgebühr. Erhöhe `maxContextBytes` (bis zu 12.000) oder führe die
-betroffenen IDs erneut aus.
+`service_unavailable`, wenn der Analysedienst kurz nicht verfügbar ist. Diese
+Datensätze verursachen keine Ergebnisgebühr. Erhöhe `maxContextBytes` (bis zu
+12.000) oder führe die betroffenen IDs erneut aus.
 
 ### Prüft die Analyse Fakten?
 

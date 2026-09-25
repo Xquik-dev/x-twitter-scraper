@@ -42,16 +42,11 @@ IDs de tuits y consultas de búsqueda con más de 50 filtros.
   búsqueda e interacción.
 - Las entradas de ID de tuit no tienen un límite de conteo fijo. Se aplican
   la configuración de gasto y tiempo de espera de Apify.
-- Las páginas automáticas de búsqueda y citas solicitan hasta 300 filas.
-- Los cursores guardados conservan sus límites de página originales y
-  reinician cuando vencen.
-- Los modos de perfil combinan línea de tiempo y búsqueda de autor cuando
-  ambos aplican.
-- Los registros de página incluyen `fetchDurationMs`, `processingDurationMs`,
-  `pushDurationMs`, `statusDurationMs` y `fullPageDurationMs` sin repetir
-  objetivos.
-- Los puntos de control conservan las filas aceptadas, los tiempos y los
-  conteos de fallos tras un reinicio.
+- Los registros de la ejecución muestran los tiempos de cada página en
+  `fetchDurationMs`, `processingDurationMs`, `pushDurationMs`,
+  `statusDurationMs` y `fullPageDurationMs`.
+- Las ejecuciones conservan las filas entregadas y su progreso si Apify las
+  reinicia.
 
 ### Usa siempre la compilación más reciente
 
@@ -164,10 +159,9 @@ recursiva.
 El contenido multimedia incluye disponibilidad, geometría, etiquetas,
 variantes de video, `watchNowUrl` y acciones `visitSiteUrl`.
 
-El estado relativo al visor pertenece a la cuenta de extracción de Xquik, no a
-tu conjunto de datos. Las marcas de seguir, bloquear, silenciar, marcador, me
-gusta, repostear, permiso de edición y similares siempre se eliminan, incluso
-de la salida sin procesar.
+Las filas nunca incluyen estado exclusivo del espectador. Las marcas de seguir,
+bloquear, silenciar, guardar, me gusta, repost, permiso de edición y similares
+se eliminan siempre, incluso de la salida raw.
 
 ## ¿Cuánto cuesta extraer tuits?
 
@@ -183,25 +177,21 @@ por evento en vivo que Apify expone al Actor. Cada resultado escribe
 informes de ejecución separan las filas de datos en `realRows` y los
 diagnósticos en `diagnosticRows`.
 
-Comprende los resultados vacíos antes de gastar en otra ejecución. El objeto
-`filtering` separa `serverFilteredRows` de `actorFilteredRows` en los informes
-y diagnósticos finales. Estos cuentan filas rechazadas en las páginas
-procesadas, incluidas las filas de origen repetidas.
-`pagesWithUnknownServerFiltering` identifica páginas sin conteos válidos del
-servidor. Los conteos faltantes permanecen como vacíos. Las filas filtradas
-nunca generan cargos de resultado.
+Entiende los resultados vacíos antes de gastar en otra ejecución. El objeto
+`filtering` de los informes y los diagnósticos finales cuenta las filas que tus
+filtros eliminaron. Consulta `serverFilteredRows`, `actorFilteredRows` y
+`pagesWithUnknownServerFiltering`. Las filas filtradas nunca generan cargos por
+resultado.
 
 El agotamiento de la fuente puede completar la extracción por debajo de tu
 límite solicitado. Estas ejecuciones reportan `outcome: "complete"` con
 `completionReason: "source_exhausted"`. Las ejecuciones interrumpidas
 conservan su resultado parcial y las indicaciones de reintento.
 
-`failedSubtargets` cuenta consultas y objetivos de perfil detenidos por fallos
-de lectura. La paginación y los fallos de pago conservan filas parciales y
-cursores sin terminar. Nunca implican que el objetivo esté ausente. Las filas
-aceptadas siguen siendo filas de datos y cuentan para la facturación. Estas
-ejecuciones usan `completionReason: "partial_failure"`. La paginación rápida
-del lado del servidor sigue el mismo contrato de reporte.
+`failedSubtargets` cuenta las consultas y los objetivos de perfil que se
+detuvieron tras un error. Las filas entregadas permanecen en el dataset y
+cuentan para la facturación. Un error nunca significa que el objetivo no exista.
+Estas ejecuciones usan `completionReason: "partial_failure"`.
 
 La extracción interrumpida también escribe un diagnóstico gratuito de
 `partial`. Los resultados disponibles permanecen intactos. El diagnóstico
@@ -234,26 +224,17 @@ el `target` tal como lo ingresaste y un `reason`: `not_found`, `protected`,
 `search_unavailable` o `likes_hidden`. La lista admite hasta 100 entradas.
 Quítalos de la entrada para obtener una ejecución completa.
 
-`completionReason: "pagination_safety_limit"` no es un fallo de lectura.
-Significa que la paginación conservó filas válidas y luego alcanzó su límite de
-seguridad acotado. Las búsquedas Latest continúan a través de páginas vacías
-mientras queden cursores de recuperación válidos. Las búsquedas Top y la
-recuperación por ventana de cuenta pueden establecer un punto de control tras 10
-páginas vacías consecutivas. Cuando el servicio reporta paginación estancada, la
-ejecución conserva sus filas y establece de inmediato un punto de control en ese
-objetivo. Una ejecución con punto de control reporta extracción incompleta y
-conserva cursores reanudables. Una página terminal completa la paginación
-incluso después de páginas vacías consecutivas. `failedSubtargets` permanece en
-`0`. Pagas solo por las filas de Dataset aceptadas.
+`completionReason: "pagination_safety_limit"` no es un fallo de lectura. La
+ejecución conservó sus filas válidas y luego terminó un objetivo que ya no
+devolvía resultados nuevos. La ejecución informa una extracción incompleta.
+`failedSubtargets` se mantiene en `0`. Solo pagas por las filas entregadas.
 
 El tiempo de espera predeterminado de Apify es `0`, así que las ejecuciones no
 tienen límite de tiempo. El Actor continúa hasta alcanzar el tope o agotar los
-datos elegibles. Quien invoca aún puede establecer un tiempo de espera finito
-de Apify. Entonces `completionReason: "deadline_reached"` significa que ese
-límite configurado está cerca. El Actor reserva los últimos 15 segundos para
-puntos de control, filas, informes y una salida exitosa. Las filas válidas se
-entregan y se facturan una sola vez. La paginación sin terminar permanece
-reanudable.
+datos elegibles. Aún puedes establecer un tiempo de espera finito de Apify.
+Entonces `completionReason: "deadline_reached"` significa que ese límite está
+cerca. El Actor guarda las filas y el informe, y termina correctamente antes del
+límite. Las filas entregadas se facturan una sola vez.
 
 - Los inicios, consultas, URLs y búsquedas de un solo tuit no agregan una
   tarifa separada.
@@ -279,13 +260,10 @@ Pega una mezcla de URLs de tuits, perfiles, búsquedas o listas:
 }
 ```
 
-El Actor busca las URLs de tuits en lotes concurrentes de hasta 100. Las
-respuestas parcialmente exitosas vuelven a verificar los IDs no resueltos una vez. La
-salida de cada lote permanece única y coincide con los IDs solicitados. Las
-URLs de perfil combinan la línea de tiempo del perfil con la búsqueda de
-autor. Las URLs de búsqueda extraen la consulta. Las URLs de lista usan la
-ruta dedicada de lista en lugar de la búsqueda genérica `list:`. `maxItems`
-limita los resultados en todas las URLs pegadas.
+Las URLs de tuits devuelven esos tuits, sin duplicados y en el orden de tu
+entrada. Las URLs de perfil devuelven las publicaciones de la cuenta. Las URLs
+de búsqueda ejecutan su consulta. Las URLs de lista devuelven las publicaciones
+de la Lista. `maxItems` limita los resultados de todas las URLs pegadas.
 
 ### 2. Nombres de usuario en lote
 
@@ -295,12 +273,11 @@ Atajo para muchas búsquedas de `from:nombredeusuario`:
 { "twitterHandles": ["elonmusk", "nasa", "openai"], "maxItems": 100 }
 ```
 
-Cada nombre de usuario combina la paginación por cursor con la búsqueda de
-autor. El Actor elimina las filas duplicadas antes de la salida y la
-facturación. Los nombres de usuario aceptan un prefijo `@` opcional. Los nombres
-de usuario y las URLs de perfil conservan los reposts, como la pestaña Posts en
-X. Esto aplica también con fechas o filtros. Configura
-`tweetTypes.excludeRetweets` para quitarlos.
+Cada nombre de usuario devuelve las publicaciones de esa cuenta. El Actor
+elimina las filas duplicadas antes de la salida y la facturación. Los nombres de
+usuario aceptan un prefijo `@` opcional. Los nombres de usuario y las URLs de
+perfil conservan los reposts, como la pestaña Posts en X. Esto aplica también
+con fechas o filtros. Configura `tweetTypes.excludeRetweets` para quitarlos.
 
 ### 3. Buscar tuits
 
@@ -318,20 +295,12 @@ Si `mode` es `tweet` o `tweets` sin IDs de tuit, la entrada de consulta se
 dirige a Search. Esto evita que un `searchTerms` válido devuelva una búsqueda
 directa vacía.
 
-Los rellenos simples de cuenta con ventanas de fecha, como
-`from:elonmusk since:2026-01-01 until:2026-01-02`, usan una ruta de cuenta
-acotada. Las ventanas recientes combinan la línea de tiempo del perfil con la
-búsqueda de autor. Las ventanas históricas usan búsqueda exacta. Las ventanas
-adyacentes compatibles comparten una sola recuperación y conservan su
-atribución original de `searchTerm`. `maxItems` limita los resultados en todos
-los términos de búsqueda. Todas las ventanas `since:`/`until:` y de tiempo
-Unix verifican cada tuit devuelto. Las ventanas de cuenta filtradas leen
-páginas de origen completas antes de aplicar el tope de salida. Las páginas
-filtradas continúan hasta que hay tuits coincidentes o termina la paginación.
-Los términos de búsqueda independientes se ejecutan de forma simultánea. Cada
-término conserva paginación por cursor ordenada para una profundidad y
-atribución consistentes. Las ventanas de cuenta comparten una sola
-recuperación solo cuando son compatibles.
+También funcionan los rellenos de cuenta con ventanas de fecha, como
+`from:elonmusk since:2026-01-01 until:2026-01-02`. Cada término conserva su
+propia atribución `searchTerm`. `maxItems` limita los resultados de todos los
+términos de búsqueda. El Actor verifica cada tuit devuelto contra las ventanas
+`since:`, `until:` y de tiempo Unix. Las búsquedas filtradas siguen leyendo
+hasta encontrar coincidencias o hasta que X no tenga más resultados.
 
 Un término de búsqueda con `from:` devuelve lo mismo que la búsqueda de X. Por
 eso omite los reposts. Agrega `include:nativeretweets` para conservarlos, o
@@ -343,10 +312,8 @@ eso omite los reposts. Agrega `include:nativeretweets` para conservarlos, o
 { "tweetIds": ["1846987139428634858", "1858743654778892784"], "maxItems": 100 }
 ```
 
-El Actor procesa 100 IDs por solicitud. Ejecuta los lotes de forma simultánea
-y escribe cada grupo completado una sola vez. Las respuestas parciales solo
-vuelven a verificar los IDs no resueltos. Los resultados conservan el orden de
-entrada, eliminan duplicados y excluyen tuits no solicitados.
+Los resultados conservan el orden de tu entrada, eliminan duplicados e incluyen
+solo los tuits que pediste.
 
 Los alias aceptados para la misma búsqueda incluyen `tweetId`, `tweetIDs`,
 `tweets`, `postIds`, `lookupPostIds`, `tweetUrls` y `postUrls`.
@@ -391,44 +358,33 @@ de conversación de otros autores. Usa `filter:replies` o la búsqueda `to:` cua
 necesites resultados solo de respuestas.
 
 Los modos de búsqueda y de tuit paginado admiten `time.since`, `time.until`,
-marcas de tiempo Unix y `lang`. Esto incluye Posts de perfil, With Replies,
-Media, Likes, Listas, respuestas, citas e hilos. Los operadores de fecha plana
-correspondientes también funcionan. El Actor verifica cada fila antes de
-facturar. El límite inferior de fecha es inclusivo. El límite superior es
-exclusivo. Los filtros de fecha excluyen filas sin fechas utilizables. Los
-filtros de idioma excluyen idiomas faltantes o no coincidentes. Las filas
-filtradas nunca consumen tu límite de resultados solicitado. Los resultados
-sin ordenar siguen paginando cuando tuits más antiguos preceden a los
-resultados coincidentes. Una ejecución de Lista con una ventana de fechas
-salta directo a la ventana, así que un día de hace 30 días tarda casi lo mismo
-que ayer. Para una ventana profunda en una Lista, los tuits vienen de la
-búsqueda de Listas de X, que omite algunas respuestas que la línea de tiempo de
-la Lista muestra. Una ejecución de Lista también termina cuando 3 páginas
-seguidas solo tienen tuits más antiguos que tu límite inferior de fecha. Como
-el límite superior es exclusivo, la misma fecha en `since` y `until` es una
-ventana vacía. Configura `until` al día siguiente para obtener 1 día completo.
-Los filtros de tuit no aplican a listas de usuarios ni a búsquedas directas de
-tuits o artículos.
+marcas de tiempo Unix y `lang`. Estos incluyen Posts del perfil, With Replies,
+Media, Likes, Listas, respuestas, citas e hilos. Los operadores de fecha planos
+equivalentes también funcionan. El Actor verifica cada fila antes de facturar.
+El límite inferior de fecha es inclusivo. El límite superior es exclusivo. Los
+filtros de fecha excluyen las filas sin fechas utilizables. Los filtros de
+idioma excluyen idiomas faltantes o que no coinciden. Las filas filtradas nunca
+consumen tu límite de resultados solicitado. Las ejecuciones de Lista con
+ventana de fecha llegan rápido a días anteriores. Terminan al pasar tu límite
+inferior. Las ventanas muy antiguas de una Lista pueden omitir algunas
+respuestas. Como el límite superior es exclusivo, la misma fecha en `since` y
+`until` es una ventana vacía. Configura `until` al día siguiente para obtener 1
+día completo. Los filtros de tuits no se aplican a listas de usuarios ni a
+búsquedas directas de tuits o artículos.
 
 `time.withinTime` y `within_time` funcionan en los mismos modos. Un valor de
 `7d` conserva los 7 días anteriores al momento en que la ejecución empieza a
 leer. Una ventana que empieza antes de 2006 conserva todas las publicaciones.
 
-`mode: "replies"` es más estricto. Combina líneas de tiempo directas, modos de
-clasificación admitidos, cada módulo de cursor hacia adelante, ramas de
-contenido oculto etiquetadas, particiones de tiempo escaladas al conteo de
-respuestas reportado, y búsqueda. Cada fila de tuit tiene `inReplyToId` igual
-al ID del tuit solicitado. Las respuestas de conversación anidadas nunca
-cuentan como respuestas directas. Si X expone menos respuestas de las
-reportadas, el Actor conserva las filas parciales seguras. Agrega 1 registro
-`replies-incomplete` a `diagnostics` cuando queda capacidad. Alcanzar un
-umbral de cobertura no significa que la extracción haya terminado. La
-ejecución permanece parcial hasta tu límite o el agotamiento verificado de la
-fuente. `replyCoverage` reporta conteos, estrategias, anomalías de paginación,
-campos faltantes y la alternativa recomendada. El Actor respeta los retrasos
-de reintento transitorios antes de devolver una salida vacía. Configura
-`maxItems` según tu total solicitado, incluidos totales superiores a 25 000
-para un solo objetivo de respuesta.
+`mode: "replies"` es más estricto. Cada fila de tuit tiene `inReplyToId` igual
+al ID del tuit solicitado. Las respuestas de conversación anidadas nunca cuentan
+como respuestas directas. Si X muestra menos respuestas de las que informa, el
+Actor conserva las filas que encontró. Agrega 1 registro `replies-incomplete` a
+`diagnostics` cuando no se alcanza tu límite. La ejecución permanece parcial
+hasta alcanzar tu límite o hasta que X no tenga más respuestas. `replyCoverage`
+informa los conteos de respuestas y detalles de cobertura. Configura `maxItems`
+según tu total solicitado, incluidos totales superiores a 25 000 para un solo
+objetivo de respuesta.
 
 Las filas de artículo incluyen `resultType: "article"`, `sourceTweetId`,
 `article` y `author` opcional. Las filas de usuario de interacción incluyen
@@ -509,13 +465,11 @@ interacción:
 }
 ```
 
-Configura `queryType: "Latest + Top"` para ejecutar ambos modos de búsqueda de
-X de forma simultánea. El Actor elimina duplicados antes de facturar y
-completa la capacidad no usada desde cualquiera de los dos modos. `Top` está
-clasificado por relevancia y no es exhaustivo. Configura
-`includeSearchTerms: true` para adjuntar cada consulta coincidente como un
-campo `searchTerm`. Las interrupciones de lectura transitorias breves reciben
-un reintento adicional antes de que el Actor devuelva un diagnóstico.
+Configura `queryType: "Latest + Top"` para usar ambos modos de búsqueda de X en
+una sola ejecución. El Actor elimina duplicados antes de facturar y completa tu
+límite con cualquiera de los dos modos. `Top` se ordena por relevancia y no es
+exhaustivo. Configura `includeSearchTerms: true` para adjuntar cada consulta
+coincidente como un campo `searchTerm`.
 
 Cuando configuras `lang`, el Actor verifica el idioma de cada tuit devuelto.
 Omite las discrepancias y continúa paginando en busca de tuits coincidentes.
@@ -631,19 +585,12 @@ documentados.
 Ejemplos:
 
 - Pega una URL de tuit en Start URLs.
-- Pega una URL de perfil o agrega el nombre de usuario en X Handles. El Actor
-  combina su línea de tiempo con la búsqueda de autor.
-- Usa `from:usuario since:AAAA-MM-DD until:AAAA-MM-DD` como término de
-  búsqueda para rellenos de cuenta. El Actor combina ventanas compatibles
-  antes de la recuperación. Las ventanas recientes combinan la línea de
-  tiempo del perfil con la búsqueda de autor. Las ventanas históricas usan
-  búsqueda exacta.
+- Pega una URL de perfil o agrega el nombre de usuario en X Handles.
+- Usa `from:usuario since:AAAA-MM-DD until:AAAA-MM-DD` como término de búsqueda
+  para rellenos de cuenta.
 - Pega una URL de lista en Start URLs.
 - Combina `twitterContent` con filtros como `from:`, `since:`, `min_faves:` y
   `filter:media` para búsquedas avanzadas.
-
-El extractor dirige las URLs de lista a través de la ruta dedicada de lista en
-lugar de la búsqueda genérica `list:ID`.
 
 ## Salida
 
@@ -700,13 +647,13 @@ Exporta como JSON, CSV, Excel o HTML desde el Dataset de Apify.
   Console. Apify expone ese límite al Actor como
   `ACTOR_MAX_TOTAL_CHARGE_USD`, y el Actor lo convierte en el conteo máximo de
   filas facturables.
-- Pasa `tweetIds` para lotes concurrentes de 100 IDs. Pega una URL de perfil
-  para usar la ruta rápida de línea de tiempo de usuario.
+- Pasa `tweetIds` para consultar muchos tuits a la vez. Pega una URL de perfil
+  para leer las publicaciones de una cuenta.
 - Configura `includeSearchTerms: true` cuando ejecutes muchas consultas para
   etiquetar cada resultado con su término de búsqueda de origen.
-- Configura `queryType: "Latest + Top"` para ejecutar ambos modos de búsqueda
-  de X de forma simultánea. La eliminación de duplicados y los topes de
-  resultado permanecen atómicos.
+- Configura `queryType: "Latest + Top"` para usar ambos modos de búsqueda de X
+  en una sola ejecución. La deduplicación y los topes de resultados se aplican a
+  ambos.
 - Usa los monitores de cuenta o palabra clave de Xquik para verificaciones
   cada 1 segundo y webhooks firmados. Los monitores activos verifican cada
   segundo.
@@ -804,7 +751,7 @@ firmados y un servidor MCP.
 - [Documentación de la API](https://docs.xquik.com/introduction): guías de la
   API REST
 - [API de Search Tweets](https://docs.xquik.com/api-reference/x/search-tweets):
-  el endpoint que impulsa este Actor
+  busca tuits por REST
 - [API de Batch Tweets](https://docs.xquik.com/api-reference/x/batch-tweets):
   obtén hasta 100 tuits por ID
 - [API de User Tweets](https://docs.xquik.com/api-reference/x/user-tweets):
@@ -818,26 +765,21 @@ firmados y un servidor MCP.
 
 ## Preguntas frecuentes
 
-**¿Necesito una clave de API de X?** No. Este extractor usa su propia
-infraestructura. No se requiere inicio de sesión ni credenciales.
+**¿Necesito una clave de API de X?** No. No necesitas clave de API de X, inicio
+de sesión ni credenciales.
 
 **¿Qué limita una ejecución?** Tu límite de elementos solicitado y el límite
 de gasto de Apify detienen la ejecución. Los límites de cuenta y plataforma de
 Apify siguen aplicando.
 
-**¿Qué tan rápido es?** El tiempo de ejecución depende de la ruta, el conteo
-de resultados y la disponibilidad de la fuente.
+**¿Qué tan rápido es?** El tiempo de ejecución depende de tu entrada, la
+cantidad de resultados y la disponibilidad de X.
 
-**¿Por qué una búsqueda Latest devuelve publicaciones que la pestaña Latest de
-X no muestra?** X deja algunas publicaciones coincidentes fuera de su lista
-Latest abierta y las devuelve solo a una búsqueda con límites de tiempo. Este
-Actor lee una búsqueda Latest como franjas de tiempo en paralelo, así que
-obtiene ambas. En una prueba de 100 publicaciones para 1 consulta, 83
-coincidieron con las publicaciones que devolvieron otros 5 extractores y 17
-fueron publicaciones que X devolvió solo a las búsquedas con límites de tiempo.
-Las 17 estaban dentro del mismo lapso de tiempo. Cada publicación es un
-resultado real de búsqueda de X para tu consulta, y pagas 1 vez por cada
-publicación.
+**¿Por qué una búsqueda Latest devuelve publicaciones que la pestaña Latest de X
+no muestra?** X deja fuera de su pestaña Latest algunas publicaciones que
+coinciden. Este Actor también devuelve esas publicaciones. Cada publicación es
+un resultado real de búsqueda de X para tu consulta, y pagas cada publicación
+una sola vez.
 
 **¿Qué operadores de búsqueda funcionan?** La búsqueda avanzada de X admite
 autores, destinatarios, menciones, fechas, interacción, contenido multimedia y

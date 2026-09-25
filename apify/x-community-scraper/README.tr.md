@@ -35,7 +35,8 @@ girişi gerekmez.
 - Gönderi, üye ve moderatör filtreleri faturalamadan önce çalışır.
 - Bir çalıştırmada birden fazla Topluluk ve kaynak.
 - Kaynak başına ve genel üst sınırlar.
-- Kaydedilen imleç kurtarmasıyla eşzamanlı okumalar.
+- Çalıştırmalar, Apify yeniden başlatmasından sonra kaldıkları yerden devam
+  eder.
 - Actor tekrarlanan satırları faturalamadan önce kaldırır.
 
 ## Girdi
@@ -72,10 +73,9 @@ Sonuçlar canlı veriyi yansıtır.
 
 ## Sayfalama ve kurtarma
 
-Bağımsız Topluluk kaynakları eşzamanlı çalışır. Sayfalama her imleç soyu
-içinde sıralı kalır. Kabul edilen satırlar, faturalama durumu, imleçler ve
-çıktı parmak izleri Apify göçünden sağ çıkar. Actor'ın kendi kendine
-uyguladığı bir zaman aşımı yoktur.
+Tek bir çalıştırma birçok Topluluğu ve kaynağı okuyabilir. Teslim edilen
+satırlar ve ilerleme, Apify yeniden başlatmasından sonra korunur. Actor kendi
+zaman sınırını eklemez.
 
 Actor yalnızca X'in gösterdiği herkese açık Toplulukları döndürür. Mevcut
 alanlar Topluluğa göre değişir.

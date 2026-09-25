@@ -20,8 +20,8 @@ monde, avec les données X les plus complètes. X (Twitter) Tweet Classifier
 répond à vos propres étiquettes, scores et questions oui/non sur chaque tweet.
 Tous les autres Actors Apify facturent avant de filtrer ou de dédupliquer. Xquik
 ne facture que les résultats livrés, uniques et conformes aux filtres. Les coûts
-d'IA sont inclus dans le prix par tweet. Vous ne payez aucun fournisseur d'IA,
-n'achetez aucun jeton & n'apportez aucune clé.
+d'IA sont inclus dans le prix par tweet. Vous n'avez besoin d'aucun compte d'IA,
+jeton ni clé.
 
 Classifiez les posts X (Twitter) avec vos propres questions et conservez les
 données originales du tweet. **X Tweet Classifier with AI Analysis** collecte
@@ -115,7 +115,8 @@ notes. L'Actor l'analyse & ne récupère rien sur X.
 
 ## Tarification
 
-Les coûts d'IA sont inclus dans le prix par tweet. Vous ne payez aucun fournisseur d'IA, n'achetez aucun jeton & n'apportez aucune clé.
+Les coûts d'IA sont inclus dans le prix par tweet. Vous n'avez besoin d'aucun
+compte d'IA, jeton ni clé.
 
 À partir de $0.0003 par tweet analysé avec succès, sans frais de démarrage. Le
 prix inclut la collecte. L'allocation d'analyse est de 8 questions, 8 000 octets
@@ -200,13 +201,11 @@ Son statut est `first_run` sans référence, `new_to_baseline` pour les tweets
 absents du run antérieur, & `unchanged` ou `changed` pour les tweets qu'il
 avait. `changes` liste chaque décision, pour l'une de vos questions, ayant
 évolué de `previous` à `current`. Les décisions se comparent par catégorie,
-niveau de score arrondi, ou oui/non à 0,5. Une décision compte comme changée
-dans trois cas. La catégorie précédente tombe sous 0,4 de probabilité. Un score
-bouge d'au moins 0,6 niveau. Une probabilité oui/non se situe à au moins 0,1 du
-seuil. Les fluctuations proches d'une égalité entre les runs restent inchangées.
-Les références au-delà de `maxBaselineRows` (par défaut 100 000) ou issues de
-réglages différents arrêtent le run avant la collecte avec une ligne de
-diagnostic.
+niveau de score arrondi, ou oui/non à 0,5. Une décision ne compte comme changée
+que si elle bouge nettement. Les fluctuations proches d'une égalité entre les
+runs restent inchangées. Les références au-delà de `maxBaselineRows` (par défaut
+100 000) ou issues de réglages différents arrêtent le run avant la collecte avec
+une ligne de diagnostic.
 
 ## Exemples de tâches
 
@@ -319,9 +318,10 @@ produit un résultat.
 
 L'Actor a collecté & livré le tweet, mais l'analyse par IA ne s'est pas
 terminée. `analysis.reason` nomme la cause, comme `context_limit` quand le tweet
-et son contexte dépassent `maxContextBytes`, ou `service_unavailable` après des
-tentatives. Ces lignes n'entraînent aucun frais de résultat. Augmentez
-`maxContextBytes` (jusqu'à 12 000) ou relancez les ID concernés.
+et son contexte dépassent `maxContextBytes`, ou `service_unavailable` quand le
+service d'analyse est brièvement indisponible. Ces lignes n'entraînent aucun
+frais de résultat. Augmentez `maxContextBytes` (jusqu'à 12 000) ou relancez les
+ID concernés.
 
 ### L'analyse vérifie-t-elle les faits ?
 

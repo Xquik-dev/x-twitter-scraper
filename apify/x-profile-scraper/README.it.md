@@ -85,9 +85,8 @@ campione. I risultati riflettono dati in tempo reale.
 
 ## Paginazione e ripristino
 
-I target indipendenti vengono eseguiti in parallelo. Le timeline usano una
-copertura automatica con tutti i filtri. Righe accettate, stato di
-fatturazione e impronte sopravvivono alla migrazione.
+Un'esecuzione può leggere molti profili. Le timeline applicano ogni filtro
+impostato. Le righe consegnate e i progressi superano un riavvio di Apify.
 
 ## Estrazione incompleta
 

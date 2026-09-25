@@ -17,11 +17,10 @@
 
 Xquik es el servicio de extracción de X (Twitter) más rápido y económico del
 mundo, con los datos de X más completos. X Tweet Sentiment Analysis agrega
-actitud, intensidad & sarcasmo a cada tuit. Cualquier otro Actor de Apify
-cobra antes de filtrar o eliminar duplicados. Xquik cobra solo por resultados
+actitud, intensidad & sarcasmo a cada tuit. Cualquier otro Actor de Apify cobra
+antes de filtrar o eliminar duplicados. Xquik cobra solo por resultados
 entregados, únicos y que coinciden con los filtros. Los costos de IA están
-incluidos en el precio por tweet. No pagas a ningún proveedor de IA, no
-compras tokens & no traes ninguna clave.
+incluidos en el precio por tweet. No necesitas cuenta de IA, tokens ni clave.
 
 Mide la actitud detrás de las publicaciones de X (Twitter) y conserva los
 datos originales del tuit. **X Tweet Sentiment Analysis with AI** recopila los
@@ -91,7 +90,8 @@ Actor lo analiza y no obtiene nada de X.
 
 ## Precios
 
-Los costos de IA están incluidos en el precio por tweet. No pagas a ningún proveedor de IA, no compras tokens & no traes ninguna clave.
+Los costos de IA están incluidos en el precio por tweet. No necesitas cuenta de
+IA, tokens ni clave.
 
 Desde $0.0003 por tuit analizado con éxito, sin tarifa de inicio. El precio
 incluye la recopilación. La capacidad de análisis es de 8
@@ -162,20 +162,18 @@ JSON. Las filas fallidas u omitidas tienen un mapa vacío.
 
 ## Comparar con una ejecución anterior
 
-Pasa `monitor.baselineDatasetId`, el ID del Dataset de una ejecución
-anterior completada con la misma configuración de análisis. Cada fila obtiene
-entonces un objeto `monitor`. Su estado es `first_run` sin línea base,
-`new_to_baseline` para tuits que la ejecución anterior no tenía, & `unchanged`
-o `changed` para tuits que sí tenía. `changes` enumera cada decisión de
-sentimiento, nivel de intensidad o sarcasmo que cambió de `previous` a
-`current`. Las decisiones se comparan por categoría, nivel de puntaje
-redondeado o sí/no en 0.5. Una decisión cuenta como cambiada en tres casos. La
-categoría anterior cae por debajo de 0.4 de probabilidad. Un puntaje se mueve
-al menos 0.6 niveles. Una probabilidad de sí/no queda a al menos 0.1 del
-umbral. Las fluctuaciones de empate cercano entre ejecuciones se consideran
-sin cambios. Las líneas base por encima de `maxBaselineRows` (100 000 por
-defecto) o con configuraciones diferentes detienen la ejecución antes de la
-recopilación con una fila de diagnóstico.
+Pasa `monitor.baselineDatasetId`, el ID del Dataset de una ejecución anterior
+completada con la misma configuración de análisis. Cada fila obtiene entonces un
+objeto `monitor`. Su estado es `first_run` sin línea base, `new_to_baseline`
+para tuits que la ejecución anterior no tenía, & `unchanged` o `changed` para
+tuits que sí tenía. `changes` enumera cada decisión de sentimiento, nivel de
+intensidad o sarcasmo que cambió de `previous` a `current`. Las decisiones se
+comparan por categoría, nivel de puntaje redondeado o sí/no en 0.5. Una decisión
+cuenta como cambiada solo cuando se mueve con claridad. Las fluctuaciones de
+empate cercano entre ejecuciones se consideran sin cambios. Las líneas base por
+encima de `maxBaselineRows` (100 000 por defecto) o con configuraciones
+diferentes detienen la ejecución antes de la recopilación con una fila de
+diagnóstico.
 
 ## Ejemplos de tareas
 
@@ -282,9 +280,10 @@ categorías o al menos 2 niveles ordenados.
 
 El Actor recopiló & entregó el tuit, pero el análisis con IA no se completó.
 `analysis.reason` indica la causa, como `context_limit` cuando el tuit y su
-contexto superan `maxContextBytes`, o `service_unavailable` tras varios
-reintentos. Estas filas no tienen costo de resultado. Aumenta
-`maxContextBytes` (hasta 12 000) o vuelve a ejecutar los IDs afectados.
+contexto superan `maxContextBytes`, o `service_unavailable` cuando el servicio
+de análisis no está disponible por un momento. Estas filas no tienen costo de
+resultado. Aumenta `maxContextBytes` (hasta 12 000) o vuelve a ejecutar los IDs
+afectados.
 
 ### ¿El análisis verifica hechos?
 

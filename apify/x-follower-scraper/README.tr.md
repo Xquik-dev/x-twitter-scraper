@@ -27,7 +27,8 @@ teslim edilen profil başına $0.00015'ten başlayarak** kazı. Apify, platform
 kullanımını ayrıca faturalandırır. X girişi, başlangıç ücreti veya sorgu
 ücreti yok.
 
->
+> Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
+> "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
 ## Eksik çıkarma
 
@@ -35,10 +36,6 @@ Kesintiye uğrayan çıkarma ücretsiz bir `partial` tanılaması yazar. Mevcut
 sonuçlar bozulmadan kalır. Yeniden denemeden önce `availableResults`,
 `failedTargets`, `retryable` ve `nextAction` alanlarını oku. Başarılı bir Actor
 çıkışı teslimatı doğrular, eksiksiz çıkarmayı değil.
-
-Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
-
-> "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
 ## X Follower Scraper ne yapar?
 
@@ -53,14 +50,11 @@ ilişkisini içerir.
   eder.
 - Birleştirme modu paylaşılan profilleri, kaynakları, ilişkileri ve
   `overlapCount`'u kaydeder.
-- Otomatik imleçler sayfa başına 300'e kadar profil ister.
-- Eski imleçler 200 profil sınırını korur ve süresi dolduğunda yeniden
-  başlar.
-- Sayfa günlükleri, hedefleri tekrarlamadan `fetchDurationMs`,
+- Çalıştırma günlükleri sayfa sürelerini `fetchDurationMs`,
   `processingDurationMs`, `pushDurationMs`, `statusDurationMs` ve
-  `fullPageDurationMs` içerir.
-- Kontrol noktaları, yeniden başlatmalardan sonra kabul edilen satırları,
-  zamanlamayı ve hata sayılarını korur.
+  `fullPageDurationMs` alanlarında gösterir.
+- Apify çalıştırmayı yeniden başlatırsa teslim edilen satırlar ve ilerleme
+  korunur.
 
 ## Görev örnekleri
 
@@ -123,9 +117,9 @@ veya `includeRaw: true` ayarla. Kompakt mod varsayılan olarak kalır.
 Çelişen kaynak işaretleri, yanlış bir değerin gerçek bir doğrulama durumunu
 gizlemesine asla izin vermez.
 
-Görüntüleyene özgü durum, veri kümene değil Xquik'in getirme hesabına aittir.
-Takip etme, engelleme, sessize alma, DM, bildirim ve benzeri görüntüleyen
-işaretleri, ham çıktı dahil her zaman kaldırılır.
+Satırlar asla görüntüleyene özgü durum içermez. Takip, engelleme, sessize alma,
+DM, bildirim ve benzeri görüntüleyen bayrakları her zaman kaldırılır, ham
+çıktıdan da.
 
 ## X takipçilerini kazımanın maliyeti nedir?
 
@@ -138,22 +132,19 @@ hesaplanan `estimatedChargeUsd` ile bir `run-report` kaydı yazar. Girdisiz ve
 geçersiz girdi çıkışları dahil her sonuç `run-report` yazar. `version` alanı
 yayınlanmış tam Actor kaynak sürümünü bildirir.
 
-`failedTargets`, bir okuma hatasından sonra duran hedefleri sayar. Kabul
-edilen profiller faturalandırılabilir veri satırları olarak kalır. Bu
-çalıştırmalar `completionReason: "partial_failure"` kullanır. Hızlı
-sunucu taraflı sayfalama aynı raporlama sözleşmesini izler.
+`failedTargets`, bir hatadan sonra duran hedefleri sayar. Teslim edilen
+profiller faturalanabilir veri satırları olarak kalır. Bu çalıştırmalar
+`completionReason: "partial_failure"` kullanır.
 
 Varsayılan Apify zaman aşımı `0`'dır. Çalıştırmaların zaman sınırı yoktur.
-Actor, üst sınıra veya kaynak sona erene kadar her canlı imleci takip eder.
-Çağıran yine de sonlu bir zaman aşımı ayarlayabilir. O zaman
-`completionReason: "deadline_reached"`, o sınırın yaklaştığı anlamına gelir.
-Actor, kontrol noktaları, satırlar, raporlar ve temiz bir çıkış için son 15
-saniyeyi ayırır. Geçerli profiller teslim edilmiş kalır ve bir kez
-faturalandırılır. Tamamlanmamış sayfalama devam ettirilebilir kalır.
+Actor, üst sınıra ulaşana veya profiller bitene kadar devam eder. Yine de sonlu
+bir zaman aşımı ayarlayabilirsin. O zaman
+`completionReason: "deadline_reached"`, bu sınırın yaklaştığı anlamına gelir.
+Actor, sınırdan önce profilleri ve raporu kaydedip düzgünce çıkar. Teslim edilen
+profiller bir kez faturalandırılır.
 
-Bağımsız hedefler eşzamanlı çalışır. Her hedef sıralı imleç sayfalamasını
-korur. Veri kümesi yazımları üst sınırları, tekilleştirmeyi, atfı ve
-faturalamayı atomik tutar.
+Tek bir çalıştırma birçok hedefi okuyabilir. Sınırlar, tekrar kaldırma, kaynak
+bilgisi ve faturalama hepsinde doğru kalır.
 
 - Başlangıçlar, hedefler ve ilişki seçimi ayrı bir sorgu ücreti eklemez.
 - Filtreler (`minFollowers`, `verifiedOnly`, `bioContains`,
@@ -571,40 +562,33 @@ MCP sunucusu sağlar.
 
 ## SSS
 
-**X API anahtarına ihtiyacım var mı?** Hayır. Bu scraper kendi
-altyapısını kullanır. Giriş veya kimlik bilgisi gerekmez.
+**X API anahtarına ihtiyacım var mı?** Hayır. X API anahtarı, giriş veya kimlik
+bilgisi gerekmez.
 
 **Bir çalıştırmayı ne sınırlar?** İstediğin öğe sınırı ve Apify harcama
 sınırı çalıştırmayı durdurur. Apify hesap ve platform sınırları hâlâ
 geçerlidir.
 
-**Ne kadar hızlı?** Çalışma süresi hedef boyutuna, filtrelere ve üst akış
-kullanılabilirliğine bağlıdır. Derin filtrelenmiş çalıştırmalar Console
-ilerlemesini her 5 sayfada bir kontrol noktasına alır. Bu, sayfa
-getirmeleri arasındaki veri dışı trafiği azaltır.
+**Ne kadar hızlı?** Çalışma süresi hedef boyutuna, filtrelere ve X'in
+erişilebilirliğine bağlıdır.
 
 **Neden çalıştırmam `maxItems`'ten daha az satır döndürüyor?** `minFollowers`,
 `verifiedOnly` ve `bioContains` gibi filtreler yazmadan önce uygulanır.
 Daha fazla sonuç döndürmek için filtreleri gevşet.
 
-**Tek bir hesaptan kaç takipçi kazıyabilirim?** X, büyük hesapları
-gruplar halinde sayfalar. Daha fazla sayfa getirmek için Apify'ın
-çalıştırma süresi sınırını artır. `maxItemsPerTarget` yalnızca her hedefi
-sınırlar.
+**Tek bir hesaptan kaç takipçi kazıyabilirim?** X o hesap için ne kadar
+gösteriyorsa o kadar. Çalıştırma, üst sınırına, harcama limitine veya listenin
+sonuna kadar devam eder. `maxItemsPerTarget` yalnızca her hedefi sınırlar.
 
-**Actor geçici hataları yeniden dener mi?** Evet. Zaman aşımları, 429 ve
-5xx yanıtları için sayfa başına en fazla 3 deneme yapar. Mevcut olduğunda
-`Retry-After`'a uyar. Aksi takdirde üstel geri çekilme kullanır. Kalıcı
-hatalar kısmi sonuçları korur.
+**Actor geçici hataları yeniden dener mi?** Evet. X'teki geçici hatalardan kendi
+kendine toparlanır. Kalıcı hatalarda kısmi sonuçlar korunur.
 
-**Apify çalıştırma süresi sınırına yaklaşınca ne olur?** Actor daha kısa
-bir çalıştırma son tarihi eklemez. Apify'ın yapılandırılmış sınırını kullanır
-ve sonlandırma için son 15 saniyeyi ayırır. Profilleri boşaltır, sayfalamayı
-kontrol noktasına alır, raporu yazar ve çıkar. Veri kümesi tarafından kabul
-edilmeyen satırlar faturalandırılmaz.
+**Apify çalıştırma süresi sınırına yaklaşınca ne olur?** Actor kendi daha kısa
+bir süre sınırı eklemez. Sınırından önce profilleri kaydeder, raporu yazar ve
+çıkar. Veri kümesine hiç ulaşmayan satırlar faturalandırılmaz.
 
-**Kaldığım yerden devam edebilir miyim?** Devam imleci girdisi henüz
-sunulmuyor. Aynı hedefi yeniden çalıştırmak, ilk mevcut sayfasından başlar.
+**Kaldığım yerden devam edebilir miyim?** Henüz değil. Aynı hedefi yeniden
+çalıştırırsan baştan başlar.
 
 **Bunu çalıştırmak için Apify API'yi kullanabilir miyim?** Evet. Python,
 JavaScript ve cURL örnekleri için

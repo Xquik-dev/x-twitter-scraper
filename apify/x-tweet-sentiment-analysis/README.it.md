@@ -16,12 +16,11 @@
 </td></tr></table>
 
 Xquik è il servizio di scraping X (Twitter) più veloce ed economico al mondo,
-con i dati X più completi. X Tweet Sentiment Analysis aggiunge
-atteggiamento, intensità & sarcasmo a ogni tweet. Ogni altro Actor Apify
-addebita il costo prima di filtrare o deduplicare. Xquik addebita solo i
-risultati consegnati, unici e conformi ai filtri. I costi dell'IA sono
-inclusi nel prezzo per tweet. Non paghi alcun provider di IA, non compri
-token & non porti alcuna chiave.
+con i dati X più completi. X Tweet Sentiment Analysis aggiunge atteggiamento,
+intensità & sarcasmo a ogni tweet. Ogni altro Actor Apify addebita il costo
+prima di filtrare o deduplicare. Xquik addebita solo i risultati consegnati,
+unici e conformi ai filtri. I costi dell'IA sono inclusi nel prezzo per tweet.
+Non ti servono account IA, token o chiavi.
 
 Misura l'atteggiamento dietro i post di X (Twitter) e mantieni i dati
 originali del tweet. **X Tweet Sentiment Analysis with AI** raccoglie i tweet
@@ -87,7 +86,8 @@ lo analizza & non recupera nulla da X.
 
 ## Prezzi
 
-I costi dell'IA sono inclusi nel prezzo per tweet. Non paghi alcun provider di IA, non compri token & non porti alcuna chiave.
+I costi dell'IA sono inclusi nel prezzo per tweet. Non ti servono account IA,
+token o chiavi.
 
 A partire da $0.0003 per tweet analizzato con successo, senza costo di avvio.
 Il prezzo include la raccolta. L'allowance di analisi è di 8 domande,
@@ -160,19 +160,16 @@ JSON. Le righe fallite o saltate portano una mappa vuota.
 ## Confronta con un'esecuzione precedente
 
 Passa `monitor.baselineDatasetId`, l'ID dataset di un'esecuzione precedente
-completata con le stesse impostazioni di analisi. Ogni riga guadagna allora
-un oggetto `monitor`. Il suo stato è `first_run` senza baseline,
-`new_to_baseline` per i tweet che l'esecuzione precedente non aveva, &
-`unchanged` o `changed` per i tweet che aveva. `changes` elenca ogni
-decisione di sentiment, livello di intensità o sarcasmo che si è spostata da
-`previous` a `current`. Le decisioni si confrontano per categoria, livello
-di punteggio arrotondato o sì/no a 0,5. Una decisione conta come cambiata in
-tre casi. La categoria precedente scende sotto lo 0,4 di probabilità. Un
-punteggio si sposta di almeno 0,6 livelli. Una probabilità sì/no atterra ad
-almeno 0,1 dalla soglia. Le oscillazioni quasi
-pari tra le esecuzioni restano invariate. Le baseline sopra
-`maxBaselineRows` (predefinito 100.000) o con impostazioni diverse
-interrompono l'esecuzione prima della raccolta con una riga di diagnostica.
+completata con le stesse impostazioni di analisi. Ogni riga guadagna allora un
+oggetto `monitor`. Il suo stato è `first_run` senza baseline, `new_to_baseline`
+per i tweet che l'esecuzione precedente non aveva, & `unchanged` o `changed` per
+i tweet che aveva. `changes` elenca ogni decisione di sentiment, livello di
+intensità o sarcasmo che si è spostata da `previous` a `current`. Le decisioni
+si confrontano per categoria, livello di punteggio arrotondato o sì/no a 0,5.
+Una decisione conta come cambiata solo quando si sposta in modo netto. Le
+oscillazioni quasi pari tra le esecuzioni restano invariate. Le baseline sopra
+`maxBaselineRows` (predefinito 100.000) o con impostazioni diverse interrompono
+l'esecuzione prima della raccolta con una riga di diagnostica.
 
 ## Esempi di task
 
@@ -275,12 +272,12 @@ almeno 2 livelli ordinati.
 
 ### Perché una riga è tornata con `analysis.status` `failed` o `skipped`?
 
-L'Actor ha raccolto & consegnato il tweet, ma l'analisi AI non si è
-completata. `analysis.reason` indica la causa, come `context_limit` quando
-il tweet e il suo contesto superano `maxContextBytes`, oppure
-`service_unavailable` dopo i tentativi. Queste righe non comportano alcun
-addebito sul risultato. Aumenta `maxContextBytes` (fino a 12.000) o riesegui
-gli ID interessati.
+L'Actor ha raccolto & consegnato il tweet, ma l'analisi AI non si è completata.
+`analysis.reason` indica la causa, come `context_limit` quando il tweet e il suo
+contesto superano `maxContextBytes`, oppure `service_unavailable` quando il
+servizio di analisi è momentaneamente non disponibile. Queste righe non
+comportano alcun addebito sul risultato. Aumenta `maxContextBytes` (fino a
+12.000) o riesegui gli ID interessati.
 
 ### L'analisi verifica i fatti?
 

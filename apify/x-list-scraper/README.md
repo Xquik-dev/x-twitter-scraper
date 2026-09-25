@@ -65,9 +65,8 @@ Xquik REST operations. Examples use sample values. Results reflect live data.
 
 ## Pagination and recovery
 
-Independent List resources run concurrently. Each cursor lineage remains
-ordered. Accepted rows, billing state, cursors, and fingerprints survive Apify
-migration. The Actor has no self-imposed timeout.
+One run can read many Lists & resources. Delivered rows & progress survive an
+Apify restart. The Actor adds no time limit of its own.
 
 ## Incomplete extraction
 

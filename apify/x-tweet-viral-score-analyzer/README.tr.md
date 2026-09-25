@@ -19,9 +19,8 @@ Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter
 scraper hizmetidir. X Tweet Viral Score Analyzer, her tweet'e bir Viral Score
 tahmini & bir karar ekler. Diğer tüm Apify Actor'ları filtreleme veya
 tekilleştirmeden önce ücret alır. Xquik yalnızca teslim edilen, benzersiz,
-filtreyle eşleşen sonuçlar için ücret alır. Yapay zekâ maliyetleri tweet
-başına fiyata dahil. Yapay zekâ sağlayıcısına ödeme yapmazsın, token
-almazsın & anahtar getirmezsin.
+filtreyle eşleşen sonuçlar için ücret alır. Yapay zekâ maliyetleri tweet başına
+fiyata dahil. Yapay zekâ hesabına, token'a veya anahtara ihtiyacın yok.
 
 Tweet'lerin neden yayıldığını veya tutmadığını öğren ve orijinal tweet
 verisini sakla. **X Tweet Viral Score Analyzer with AI**, eşleşen tweet'leri
@@ -30,8 +29,7 @@ yanıtları 0 ile 100 arasında bir Viral Score tahminine & bir karara çevirir.
 Her satır gerçek beğenileri, yeniden paylaşımları, yanıtları & alıntıları
 korur, böylece her tahmini gerçekte olanla karşılaştırabilirsin.
 
-- **Gönderi başına Viral Score**, denetleyebileceğin sabit ve yayımlanmış
-  ağırlıklardan gelir.
+- **Gönderi başına Viral Score**, sabit ve sürümlü kurallardan gelir.
 - **8 özellik yanıtı**, bir gönderinin neden yüksek veya düşük puan aldığını
   gösterir.
 - **Katı sınırlar**, spam, öfke tuzağı veya sıradan makine metni gibi okunan
@@ -74,24 +72,13 @@ veya görüntülenmeleri öngörmez. X'in gönderileri nasıl sıraladığını 
 Yapay zeka yazımı yanıtı yalnızca üslubu değerlendirir. Gönderiyi kimin
 yazdığını belirlemez.
 
-### Actor Viral Score'u nasıl hesaplar
+### Viral Score nasıl çalışır
 
-Actor her 0-2 puanını 0 ile 1 arasında bir paya ölçekler. Ardından puan
-ekler:
+Kanca, netlik, sunduğu değer ve beklenen tepki puanı yükseltir. Genel bir makine
+metni gibi okunan ifadeler puanı düşürür.
 
-| Bölüm                                          | Puan             |
-| ---------------------------------------------- | ---------------- |
-| Kanca                                          | en fazla 30      |
-| Netlik                                         | en fazla 20      |
-| Getiri, bilgilendirici & komikten yüksek olanı | en fazla 30      |
-| Tepki                                          | en fazla 20      |
-| Yapay zeka yazımı olasılığı                    | eksi en fazla 15 |
-
-Tepki, 20 puanının bir payını kazanır: paylaş 1, yanıtla 0,8, beğen 0,6,
-tartış 0,4 & yok say 0. Ardından katı sınırlar puanı sınırlar. 0,7'den
-itibaren spam olasılığı puanı 20'de sınırlar. 0,7'den itibaren öfke tuzağı
-olasılığı 35'te sınırlar. 0,8'den itibaren yapay zeka yazımı olasılığı 60'ta
-sınırlar. Actor sonucu tam sayıya yuvarlar.
+Kesin sınırlar, muhtemel spam, öfke yemi ve genel makine metinlerinin puanını
+sınırlar. Puan 0 ile 100 arasında bir tam sayıdır.
 
 | Karar         | Puan             |
 | ------------- | ---------------- |
@@ -99,11 +86,10 @@ sınırlar. Actor sonucu tam sayıya yuvarlar.
 | `edit_first`  | 40 ile 69 arası  |
 | `sleep_on_it` | 0 ile 39 arası   |
 
-`viral.weights`, bu kuralların sürümünü adlandırır, örneğin `viral_lite:1`.
-Bir ağırlık, sınır veya eşik her değiştiğinde sürümü artırırız. Analiz
-başarısız olduğunda, Actor analizi atladığında veya varsayılan bir özellik
-yanıtı eksik olduğunda puan `null` olur. Actor eksik bir puanı asla tahminle
-doldurmaz.
+`viral.weights`, bu kuralların sürümünü belirtir, örneğin `viral_lite:1`.
+Kurallar her değiştiğinde değişir. Analiz başarısız olduğunda, Actor atladığında
+veya varsayılan bir özellik yanıtı eksik olduğunda puan `null` olur. Actor eksik
+bir puanı asla tahminle doldurmaz.
 
 ## Algorithm Score tahmini
 
@@ -161,9 +147,7 @@ Sınırlar:
 
 - 10'dan az karşılaştırılan gönderi, `too_few_posts` nedeniyle `null` bir
   kalibrasyon verir. Aynı puanlar veya oranlar `no_variation` verir.
-- Actor belleği sabit tutmak için oranları 0,1 genişliğinde dilimlere
-  gruplar. Aynı dilimdeki gönderiler berabere sayılır, bu yüzden korelasyon
-  yaklaşıktır.
+- Korelasyon yaklaşıktır.
 - Kalibrasyon tek bir çalıştırmayı anlatır. Düşük bir puan, ifade tahmininin
   başarısız olduğunu değil, gönderilerin zamanlama, konu veya kitle açısından
   farklı olduğunu gösterebilir.
@@ -235,7 +219,8 @@ Kendi metnini `texts` alanına yapıştır. Actor metni puanlar & X'ten hiçbir
 
 ## Fiyatlandırma
 
-Yapay zekâ maliyetleri tweet başına fiyata dahil. Yapay zekâ sağlayıcısına ödeme yapmazsın, token almazsın & anahtar getirmezsin.
+Yapay zekâ maliyetleri tweet başına fiyata dahil. Yapay zekâ hesabına, token'a
+veya anahtara ihtiyacın yok.
 
 Başlangıç ücreti olmadan, başarıyla analiz edilen tweet başına $0.0003'ten
 başlar. Fiyat toplamayı & Viral Score'u içerir. Analiz ödeneği 8 soru, soru
@@ -319,19 +304,17 @@ ihtiyaç duymaz. Başarısız ve atlanan satırlar boş bir eşleme taşır.
 
 ## Önceki bir çalıştırmayla karşılaştır
 
-Aynı analiz ayarlarına sahip tamamlanmış önceki bir çalıştırmanın veri
-kümesi ID'si olan `monitor.baselineDatasetId`'yi geçir. O zaman her satır bir
-`monitor` nesnesi kazanır. Durumu, bir temel değer olmadan `first_run`,
-önceki çalıştırmada bulunmayan tweet'ler için `new_to_baseline` & sahip
-olduğu tweet'ler için `unchanged` veya `changed` olur. `changes`,
-`previous`'tan `current`'a taşınan her özellik kararını listeler. Kararlar
-kategoriye, yuvarlanmış puan seviyesine veya 0,5'te evet/hayır'a göre
-karşılaştırılır. Bir karar üç durumda değişmiş sayılır. Önceki kategori 0,4
-olasılığın altına düşer. Bir puan en az 0,6 seviye hareket eder. Bir
-evet/hayır olasılığı eşikten en az 0,1 uzağa düşer. Çalıştırmalar arasındaki
-yakın-berabere titremeler değişmemiş kalır. `maxBaselineRows`'un (varsayılan
-100.000) üzerindeki veya farklı ayarlardan gelen temel değerler, toplamadan
-önce bir tanılama satırıyla çalıştırmayı durdurur.
+Aynı analiz ayarlarına sahip tamamlanmış önceki bir çalıştırmanın veri kümesi
+ID'si olan `monitor.baselineDatasetId`'yi geçir. O zaman her satır bir `monitor`
+nesnesi kazanır. Durumu, bir temel değer olmadan `first_run`, önceki
+çalıştırmada bulunmayan tweet'ler için `new_to_baseline` & sahip olduğu
+tweet'ler için `unchanged` veya `changed` olur. `changes`, `previous`'tan
+`current`'a taşınan her özellik kararını listeler. Kararlar kategoriye,
+yuvarlanmış puan seviyesine veya 0,5'te evet/hayır'a göre karşılaştırılır. Bir
+karar yalnızca belirgin biçimde değiştiğinde değişmiş sayılır. Çalıştırmalar
+arasındaki yakın-berabere titremeler değişmemiş kalır. `maxBaselineRows`'un
+(varsayılan 100.000) üzerindeki veya farklı ayarlardan gelen temel değerler,
+toplamadan önce bir tanılama satırıyla çalıştırmayı durdurur.
 
 ## Görev örnekleri
 
@@ -373,12 +356,12 @@ bu yüzden özel sorular onu `null` bırakır.
 
 ### Bir satır neden `analysis.status`'u `failed` veya `skipped` olarak döndü?
 
-Actor tweet'i topladı & teslim etti, ancak yapay zeka analizi
-tamamlanmadı. `analysis.reason`, tweet ve bağlamı `maxContextBytes`'ı
-aştığında `context_limit` veya yeniden denemelerden sonra
-`service_unavailable` gibi nedeni adlandırır. Bu satırların sonuç ücreti &
-puanı yoktur. `maxContextBytes`'ı (12.000'e kadar) artır veya etkilenen
-ID'leri yeniden çalıştır.
+Actor tweet'i topladı & teslim etti, ancak yapay zeka analizi tamamlanmadı.
+`analysis.reason`, tweet ve bağlamı `maxContextBytes`'ı aştığında
+`context_limit` veya analiz hizmeti kısa süre kullanılamadığında
+`service_unavailable` gibi nedeni adlandırır. Bu satırların sonuç ücreti & puanı
+yoktur. `maxContextBytes`'ı (12.000'e kadar) artır veya etkilenen ID'leri
+yeniden çalıştır.
 
 ### Analiz gerçekleri doğrular mı?
 
