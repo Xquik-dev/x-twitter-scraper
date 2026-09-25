@@ -27,6 +27,8 @@ Xquikは、最も完全なXデータを備えた、世界最速かつ最安のX(
 
 抽出が中断されると、無料の `partial` 診断が書き込まれます。取得済みの結果はそのまま保持されます。再試行する前に `availableResults`、`failedTargets`、`retryable`、`nextAction` を確認してください。Actorが正常終了しても、それは配信の完了を意味するだけで、抽出が完全に終わったことを意味しません。
 
+ステータスのテキストは、実行が早期に停止した原因をすべて示します。`stopCauses` は各原因を列挙し、原因ごとに `message`、`retryable`、`nextAction` を示します。原因は `target_failed`、`page_limit`、`reply_reach`、`deadline_reached` です。`reply_reach` は、Xがスレッドの一部しか返さなかったことを意味します。いずれかの原因が `retryable` であれば、実行も `retryable` になります。
+
 Xquikは独立した第三者サービスです。X Corpとは提携していません。
 
 > 「Twitter」および「X」はX Corpの商標です。
@@ -180,7 +182,7 @@ Apifyは、固定されたビルド番号を `latest` に自動転送しませ�
 
 ### 自動での完全収集
 
-ほとんどの用途では `collectionStrategy: "auto"` を使用してください。フルまたは入れ子のスコープは、完全なリプライ抽出から始まります。スコープ、深さ、並び順、著者のコントロールは、レスポンス上限が適用される前に処理されます。抽出には、ルート以外のターゲットの下にある子孫が含まれます。抽出が不完全な場合、会話検索と直接リプライを試みる前に、既存の行を保持します。直接スコープは、必要に応じて検索にフォールバックします。未完了のページは、その継続状態を保持します。明示的な戦略が切り替わることはありません。
+ほとんどの用途では `collectionStrategy: "auto"` を使用してください。フルまたは入れ子のスコープは、完全なリプライ抽出から始まります。スコープ、深さ、並び順、著者のコントロールは、レスポンス上限が適用される前に処理されます。抽出には、ルート以外のターゲットの下にある子孫が含まれます。抽出が不完全な場合、会話検索と直接リプライを試みる前に、既存の行を保持します。すべてのソースが終了した投稿では、これらを省略します。残りはXが非表示にしているためです。その場合、ステータスのテキストには、Xが非表示にしているリプライの件数が表示されます。直接スコープは、必要に応じて検索にフォールバックします。未完了のページは、その継続状態を保持します。明示的な戦略が切り替わることはありません。
 
 診断上のカバレッジしきい値は、ソースが尽きたことを証明するものではありません。停滞したページ、上限、データの欠落、エラーがあると、復旧は不完全なままになります。
 
@@ -304,9 +306,10 @@ Actorは課金前に重複を削除します。異なるターゲットからの
 フルモードの行には、利用可能なソースメタデータも保持されます。これには、`isNoteTweet`、
 `isReply`、`isLimitedReply`、`isQuoteStatus`、`source`、`type`、
 `displayTextRange`、`contentDisclosure`、`conversationControl`、`article`、
-`limitedActions`、`reactionContext`、`card`、`communityId`、`communityNote`、
-`edit`、`isTranslatable`、`noteTweet`、`place`、`postCta`、`possiblySensitive`、
-`previousCounts`、`tombstone`、`unmentionedUserIds`、`viewState` が含まれます。
+`limitedActions`、`reactionContext`、`authorUnavailable`、`card`、`communityId`、
+`communityNote`、`edit`、`exclusiveContent`、`isTranslatable`、`noteTweet`、
+`place`、`postCta`、`possiblySensitive`、`previousCounts`、`tombstone`、
+`unmentionedUserIds`、`viewState` が含まれます。
 
 フラットな行は、会話の系統、ソースの詳細、結果タイプ、スキーマバージョンを保持します。正確なフィールドについてはOpenAPIを参照してください。
 

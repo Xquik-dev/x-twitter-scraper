@@ -39,6 +39,12 @@ resultados disponibles permanecen intactos. Lee `availableResults`,
 `failedTargets`, `retryable` y `nextAction` antes de reintentar. Una salida
 exitosa del Actor confirma la entrega, no una extracción completa.
 
+El texto de estado nombra cada causa de una detención anticipada.
+`stopCauses` enumera cada causa con su propio `message`, `retryable` y
+`nextAction`. Las causas son `target_failed`, `page_limit`, `reply_reach` y
+`deadline_reached`. `reply_reach` significa que X entregó solo una parte de
+un hilo. La ejecución es `retryable` cuando alguna causa lo es.
+
 Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 
 > "Twitter" y "X" son marcas registradas de X Corp.
@@ -240,9 +246,11 @@ respuestas. Los controles de alcance, profundidad, orden y autor se aplican
 antes de los límites de respuesta. La extracción incluye los descendientes
 debajo de objetivos que no son la raíz. La extracción incompleta conserva
 las filas antes de intentar búsqueda de conversación y respuestas directas.
-Los alcances directos recurren a la búsqueda cuando es necesario. Las
-páginas sin terminar conservan su continuación. Las estrategias explícitas
-nunca cambian.
+Una publicación cuyas fuentes ya terminaron omite ambos pasos, porque X
+oculta el resto. En ese caso, el texto de estado indica cuántas respuestas
+oculta X. Los alcances directos recurren a la búsqueda cuando es necesario.
+Las páginas sin terminar conservan su continuación. Las estrategias
+explícitas nunca cambian.
 
 El umbral de cobertura de diagnóstico no prueba el agotamiento de la
 fuente. Páginas estancadas, límites, datos faltantes o errores dejan la
@@ -391,9 +399,10 @@ Las filas completas también conservan los metadatos de origen disponibles.
 Esto incluye `isNoteTweet`, `isReply`, `isLimitedReply`, `isQuoteStatus`,
 `source`, `type`, `displayTextRange`, `contentDisclosure`,
 `conversationControl`, `article`, `limitedActions`, `reactionContext`,
-`card`, `communityId`, `communityNote`, `edit`, `isTranslatable`,
-`noteTweet`, `place`, `postCta`, `possiblySensitive`, `previousCounts`,
-`tombstone`, `unmentionedUserIds` y `viewState`.
+`authorUnavailable`, `card`, `communityId`, `communityNote`, `edit`,
+`exclusiveContent`, `isTranslatable`, `noteTweet`, `place`, `postCta`,
+`possiblySensitive`, `previousCounts`, `tombstone`, `unmentionedUserIds` y
+`viewState`.
 
 Las filas planas conservan la ascendencia de la conversación, los detalles
 de origen, el tipo de resultado y la versión del esquema. Consulta OpenAPI

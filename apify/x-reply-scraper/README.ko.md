@@ -36,6 +36,12 @@ Xquik은 가장 완전한 X 데이터를 보유한, 세계에서 가장 빠르�
 `nextAction`을 확인하세요. Actor가 성공적으로 종료되었다는 것은 전달이 확인됐다는
 뜻이지, 추출이 완료됐다는 뜻은 아닙니다.
 
+상태 메시지는 실행이 일찍 멈춘 원인을 모두 표시합니다. `stopCauses`는 각 원인을
+나열하고, 원인마다 `message`, `retryable` & `nextAction`을 따로 담습니다. 원인은
+`target_failed`, `page_limit`, `reply_reach` & `deadline_reached`입니다.
+`reply_reach`는 X가 스레드의 일부만 제공했다는 뜻입니다. 원인 중 하나라도
+`retryable`이면 실행도 `retryable`입니다.
+
 Xquik은 독립적인 제3자 서비스입니다. X Corp와 제휴 관계가 없습니다.
 
 > "Twitter"와 "X"는 X Corp의 상표입니다.
@@ -206,8 +212,10 @@ Apify MCP, API 클라이언트, x402 또는 Skyfire를 통해 이 Actor를 실�
 범위는 완전한 답글 추출로 시작합니다. 범위, 깊이, 정렬 & 작성자 컨트롤은 응답
 제한보다 먼저 적용됩니다. 추출에는 루트가 아닌 대상 아래의 하위 항목이
 포함됩니다. 불완전한 추출은 대화 검색 & 직접 답글을 시도하기 전에 행을
-보존합니다. 직접 범위는 필요할 때 검색으로 대체됩니다. 마치지 못한 페이지는
-연속성을 유지합니다. 명시적 전략은 절대 전환되지 않습니다.
+보존합니다. 모든 소스가 끝난 게시물은 X가 나머지를 숨기므로 이 단계를
+건너뜁니다. 이때 상태 메시지는 X가 숨기는 답글 수를 알려 줍니다. 직접 범위는
+필요할 때 검색으로 대체됩니다. 마치지 못한 페이지는 연속성을 유지합니다. 명시적
+전략은 절대 전환되지 않습니다.
 
 진단 커버리지 임계값은 소스 소진을 증명하지 않습니다. 정체된 페이지, 제한,
 누락된 데이터, 오류는 복구를 불완전한 상태로 남깁니다.
@@ -343,10 +351,10 @@ Actor는 과금 전에 중복을 제거합니다. 다른 대상의 중복 행을
 전체 행은 사용 가능한 소스 메타데이터도 보존합니다. 여기에는 `isNoteTweet`,
 `isReply`, `isLimitedReply`, `isQuoteStatus`, `source`, `type`,
 `displayTextRange`, `contentDisclosure`, `conversationControl`, `article`,
-`limitedActions`, `reactionContext`, `card`, `communityId`, `communityNote`,
-`edit`, `isTranslatable`, `noteTweet`, `place`, `postCta`,
-`possiblySensitive`, `previousCounts`, `tombstone`, `unmentionedUserIds`,
-`viewState`가 포함됩니다.
+`limitedActions`, `reactionContext`, `authorUnavailable`, `card`, `communityId`,
+`communityNote`, `edit`, `exclusiveContent`, `isTranslatable`, `noteTweet`,
+`place`, `postCta`, `possiblySensitive`, `previousCounts`, `tombstone`,
+`unmentionedUserIds`, `viewState`가 포함됩니다.
 
 플랫 행은 대화 계보, 소스 세부 정보, 결과 유형, 스키마 버전을 유지합니다.
 정확한 필드는 OpenAPI를 참고하세요.

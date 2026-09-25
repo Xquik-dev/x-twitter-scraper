@@ -39,6 +39,12 @@ risultati disponibili restano intatti. Leggi `availableResults`,
 `failedTargets`, `retryable` e `nextAction` prima di riprovare. Un'uscita
 riuscita dell'Actor conferma la consegna, non l'estrazione completa.
 
+Il messaggio di stato nomina ogni causa di un'interruzione anticipata.
+`stopCauses` elenca ogni causa con i propri `message`, `retryable` &
+`nextAction`. Le cause sono `target_failed`, `page_limit`, `reply_reach` &
+`deadline_reached`. `reply_reach` significa che X ha fornito solo una parte
+di un thread. L'esecuzione è `retryable` quando lo è almeno una causa.
+
 Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 
 > "Twitter" e "X" sono marchi di X Corp.
@@ -234,8 +240,10 @@ completi o annidati iniziano con un'estrazione completa delle risposte. I
 controlli di ambito, profondità, ordinamento e autore si applicano prima dei
 limiti di risposta. L'estrazione include i discendenti sotto i target non
 radice. L'estrazione incompleta conserva le righe prima di provare la
-ricerca per conversazione e le risposte dirette. Gli ambiti diretti passano
-alla ricerca quando necessario. Le pagine non completate mantengono la loro
+ricerca per conversazione e le risposte dirette. Un post con tutte le fonti
+terminate salta questi passaggi, perché X nasconde il resto. Il messaggio di
+stato indica poi quante risposte nasconde X. Gli ambiti diretti passano alla
+ricerca quando necessario. Le pagine non completate mantengono la loro
 continuazione. Le strategie esplicite non passano mai ad altre.
 
 La soglia di copertura diagnostica non dimostra l'esaurimento della fonte.
@@ -382,9 +390,10 @@ Le righe complete conservano anche i metadati di origine disponibili. Questi
 includono `isNoteTweet`, `isReply`, `isLimitedReply`, `isQuoteStatus`,
 `source`, `type`, `displayTextRange`, `contentDisclosure`,
 `conversationControl`, `article`, `limitedActions`, `reactionContext`,
-`card`, `communityId`, `communityNote`, `edit`, `isTranslatable`,
-`noteTweet`, `place`, `postCta`, `possiblySensitive`, `previousCounts`,
-`tombstone`, `unmentionedUserIds` e `viewState`.
+`authorUnavailable`, `card`, `communityId`, `communityNote`, `edit`,
+`exclusiveContent`, `isTranslatable`, `noteTweet`, `place`, `postCta`,
+`possiblySensitive`, `previousCounts`, `tombstone`, `unmentionedUserIds` e
+`viewState`.
 
 Le righe piatte mantengono l'ascendenza della conversazione, i dettagli di
 origine, il tipo di risultato e la versione dello schema. Consulta l'OpenAPI

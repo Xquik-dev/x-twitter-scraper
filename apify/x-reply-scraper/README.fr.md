@@ -39,6 +39,12 @@ résultats disponibles restent intacts. Consultez `availableResults`,
 `failedTargets`, `retryable` et `nextAction` avant de relancer. Une sortie
 d'Actor réussie confirme la livraison, pas l'extraction complète.
 
+Le texte de statut nomme chaque cause d'un arrêt anticipé. `stopCauses`
+liste chaque cause avec ses propres `message`, `retryable` et `nextAction`.
+Les causes sont `target_failed`, `page_limit`, `reply_reach` et
+`deadline_reached`. `reply_reach` signifie que X n'a fourni qu'une partie
+d'un thread. Le run est `retryable` dès qu'une cause l'est.
+
 Xquik est un service tiers indépendant. Non affilié à X Corp.
 
 > « Twitter » et « X » sont des marques déposées de X Corp.
@@ -241,9 +247,11 @@ complète. La portée, la profondeur, le tri et les contrôles d'auteur
 s'appliquent avant les limites de réponse. L'extraction inclut les
 descendants sous les cibles non racines. Une extraction incomplète
 préserve les lignes avant d'essayer la recherche de conversation et les
-réponses directes. Les portées directes basculent vers la recherche en cas
-de besoin. Les pages inachevées conservent leur continuation. Les
-stratégies explicites ne basculent jamais.
+réponses directes. Un post sans source restante saute ces étapes, car X
+masque le reste. Le texte de statut indique alors combien de réponses X
+masque. Les portées directes basculent vers la recherche en cas de besoin.
+Les pages inachevées conservent leur continuation. Les stratégies
+explicites ne basculent jamais.
 
 Le seuil de couverture du diagnostic ne prouve pas l'épuisement de la
 source. Des pages bloquées, des limites, des données manquantes ou des
@@ -389,9 +397,10 @@ Les lignes complètes préservent aussi les métadonnées source disponibles.
 Cela inclut `isNoteTweet`, `isReply`, `isLimitedReply`, `isQuoteStatus`,
 `source`, `type`, `displayTextRange`, `contentDisclosure`,
 `conversationControl`, `article`, `limitedActions`, `reactionContext`,
-`card`, `communityId`, `communityNote`, `edit`, `isTranslatable`,
-`noteTweet`, `place`, `postCta`, `possiblySensitive`, `previousCounts`,
-`tombstone`, `unmentionedUserIds` et `viewState`.
+`authorUnavailable`, `card`, `communityId`, `communityNote`, `edit`,
+`exclusiveContent`, `isTranslatable`, `noteTweet`, `place`, `postCta`,
+`possiblySensitive`, `previousCounts`, `tombstone`, `unmentionedUserIds` et
+`viewState`.
 
 Les lignes plates conservent l'ascendance de conversation, les détails
 source, le type de résultat et la version de schéma. Consultez l'OpenAPI

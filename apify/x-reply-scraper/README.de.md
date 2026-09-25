@@ -40,6 +40,13 @@ Verfügbare Ergebnisse bleiben erhalten. Lies `availableResults`,
 Ein erfolgreicher Actor-Abschluss bestätigt die Lieferung, nicht die
 vollständige Extraktion.
 
+Der Statustext nennt jede Ursache für einen vorzeitigen Stopp. `stopCauses`
+listet jede Ursache mit eigenen Feldern `message`, `retryable` &
+`nextAction`. Die Ursachen sind `target_failed`, `page_limit`, `reply_reach`
+& `deadline_reached`. `reply_reach` bedeutet, dass X nur einen Teil eines
+Threads geliefert hat. Der Run ist `retryable`, wenn mindestens 1 Ursache es
+ist.
+
 Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 
 > „Twitter" und „X" sind Marken von X Corp.
@@ -235,6 +242,8 @@ Extraktion. Bereich, Tiefe, Sortierung und Autoren-Steuerelemente greifen
 vor Antwortlimits. Die Extraktion umfasst Nachkommen unterhalb von
 Nicht-Wurzel-Zielen. Bei unvollständiger Extraktion bleiben Datensätze
 erhalten, bevor Konversationssuche & direkte Antworten versucht werden.
+Ein Beitrag, dessen Quellen alle beendet sind, überspringt beides, da X den
+Rest verbirgt. Der Statustext nennt dann, wie viele Antworten X verbirgt.
 Direkte Bereiche fallen bei Bedarf auf die Suche zurück. Unvollständige
 Seiten behalten ihre Fortsetzung. Explizite Strategien wechseln nie.
 
@@ -382,9 +391,10 @@ Vollständige Datensätze erhalten außerdem verfügbare Quellmetadaten. Dazu
 gehören `isNoteTweet`, `isReply`, `isLimitedReply`, `isQuoteStatus`,
 `source`, `type`, `displayTextRange`, `contentDisclosure`,
 `conversationControl`, `article`, `limitedActions`, `reactionContext`,
-`card`, `communityId`, `communityNote`, `edit`, `isTranslatable`,
-`noteTweet`, `place`, `postCta`, `possiblySensitive`, `previousCounts`,
-`tombstone`, `unmentionedUserIds` und `viewState`.
+`authorUnavailable`, `card`, `communityId`, `communityNote`, `edit`,
+`exclusiveContent`, `isTranslatable`, `noteTweet`, `place`, `postCta`,
+`possiblySensitive`, `previousCounts`, `tombstone`, `unmentionedUserIds` und
+`viewState`.
 
 Flache Datensätze behalten Konversationsabstammung, Quelldetails,
 Ergebnistyp und Schemaversion. Siehe OpenAPI für die genauen Felder.

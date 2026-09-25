@@ -37,6 +37,11 @@ remain intact. Read `availableResults`, `failedTargets`, `retryable`, and
 `nextAction` before retrying. A successful Actor exit confirms delivery, not
 complete extraction.
 
+The status names every cause of an early stop. `stopCauses` lists each cause
+with its own `message`, `retryable` & `nextAction`. The causes are
+`target_failed`, `page_limit`, `reply_reach` & `deadline_reached`. `reply_reach`
+means X served only part of a thread. The run is `retryable` when any cause is.
+
 Xquik is an independent third-party service. Not affiliated with X Corp.
 
 > "Twitter" and "X" are trademarks of X Corp.
@@ -208,8 +213,10 @@ Use `collectionStrategy: "auto"` for most jobs. Full or nested scopes start with
 complete reply extraction. Scope, depth, sort & author controls apply before
 response limits. Extraction includes descendants beneath non-root targets.
 Incomplete extraction preserves rows before trying conversation search & direct
-replies. Direct scopes fall back to search when needed. Unfinished pages keep
-their continuation. Explicit strategies never switch.
+replies. A post whose every source ended skips them, since X hides the rest. The
+status then says how many replies X hides. Direct scopes fall back to search
+when needed. Unfinished pages keep their continuation. Explicit strategies never
+switch.
 
 The diagnostic coverage threshold does not prove source exhaustion. Stalled
 pages, limits, missing data, or errors keep recovery incomplete.
@@ -346,9 +353,10 @@ Every full reply row can include these core fields:
 Full rows also preserve available source metadata. This includes `isNoteTweet`,
 `isReply`, `isLimitedReply`, `isQuoteStatus`, `source`, `type`,
 `displayTextRange`, `contentDisclosure`, `conversationControl`, `article`,
-`limitedActions`, `reactionContext`, `card`, `communityId`, `communityNote`,
-`edit`, `isTranslatable`, `noteTweet`, `place`, `postCta`, `possiblySensitive`,
-`previousCounts`, `tombstone`, `unmentionedUserIds`, and `viewState`.
+`limitedActions`, `reactionContext`, `authorUnavailable`, `card`, `communityId`,
+`communityNote`, `edit`, `exclusiveContent`, `isTranslatable`, `noteTweet`,
+`place`, `postCta`, `possiblySensitive`, `previousCounts`, `tombstone`,
+`unmentionedUserIds`, and `viewState`.
 
 Flat rows keep conversation ancestry, source details, result type, and schema
 version. See OpenAPI for the exact fields.

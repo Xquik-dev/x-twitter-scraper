@@ -39,6 +39,13 @@ sonuçlar bozulmadan kalır. Yeniden denemeden önce `availableResults`,
 `failedTargets`, `retryable` ve `nextAction` alanlarını oku. Başarılı bir Actor
 çıkışı teslimatı doğrular, eksiksiz çıkarmayı değil.
 
+Durum metni, çalıştırmayı erken durduran her nedeni belirtir. `stopCauses`,
+her nedeni kendi `message`, `retryable` ve `nextAction` alanlarıyla
+listeler. Olası nedenler şunlar: `target_failed`, `page_limit`,
+`reply_reach` ve `deadline_reached`. `reply_reach`, X'in thread'in sadece
+bir kısmını verdiğini gösterir. Nedenlerden en az biri `retryable` ise
+çalıştırma da `retryable` olur.
+
 Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
@@ -225,9 +232,11 @@ imleçler standart sayfalamayı korur.
 tam yanıt çıkarmayla başlar. Kapsam, derinlik, sıralama ve yazar kontrolleri
 yanıt sınırlarından önce uygulanır. Çıkarma, kök olmayan hedeflerin
 altındaki alt öğeleri içerir. Eksik çıkarma, konuşma araması ve doğrudan
-yanıtları denemeden önce satırları korur. Doğrudan kapsamlar gerektiğinde
-aramaya geri döner. Tamamlanmamış sayfalar devamlılıklarını korur. Açık
-stratejiler asla değişmez.
+yanıtları denemeden önce satırları korur. Tüm kaynakları biten bir gönderi
+bu adımları atlar, çünkü X gerisini gizler. O zaman durum metni, X'in kaç
+yanıtı gizlediğini söyler. Doğrudan kapsamlar gerektiğinde aramaya geri
+döner. Tamamlanmamış sayfalar devamlılıklarını korur. Açık stratejiler asla
+değişmez.
 
 Tanılama kapsama eşiği, kaynak tükenmesini kanıtlamaz. Durmuş sayfalar,
 sınırlar, eksik veri veya hatalar kurtarmayı eksik bırakır.
@@ -367,10 +376,10 @@ Her tam yanıt satırı şu temel alanları içerebilir:
 Tam satırlar ayrıca mevcut kaynak metadata'sını korur. Buna `isNoteTweet`,
 `isReply`, `isLimitedReply`, `isQuoteStatus`, `source`, `type`,
 `displayTextRange`, `contentDisclosure`, `conversationControl`, `article`,
-`limitedActions`, `reactionContext`, `card`, `communityId`, `communityNote`,
-`edit`, `isTranslatable`, `noteTweet`, `place`, `postCta`,
-`possiblySensitive`, `previousCounts`, `tombstone`, `unmentionedUserIds` ve
-`viewState` dahildir.
+`limitedActions`, `reactionContext`, `authorUnavailable`, `card`,
+`communityId`, `communityNote`, `edit`, `exclusiveContent`, `isTranslatable`,
+`noteTweet`, `place`, `postCta`, `possiblySensitive`, `previousCounts`,
+`tombstone`, `unmentionedUserIds` ve `viewState` dahildir.
 
 Düz satırlar konuşma soyunu, kaynak ayrıntılarını, sonuç türünü ve şema
 sürümünü korur. Tam alanlar için OpenAPI'a bak.

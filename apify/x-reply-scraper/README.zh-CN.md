@@ -33,6 +33,11 @@ Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，提�
 重试前请先查看 `availableResults`、`failedTargets`、`retryable` 和
 `nextAction`。Actor 成功退出只能确认交付情况，不代表抓取已完成。
 
+状态消息会写明运行提前停止的每个原因。`stopCauses` 会列出每个原因及其各自的
+`message`、`retryable` 和 `nextAction`。原因的取值为 `target_failed`、
+`page_limit`、`reply_reach` 和 `deadline_reached`。`reply_reach` 表示 X
+只提供了推文串的一部分。只要任一原因可重试，整个运行就会标记为 `retryable`。
+
 Xquik 是独立的第三方服务，与 X Corp 无关联。
 
 > "Twitter" 和 "X" 是 X Corp 的商标。
@@ -199,8 +204,9 @@ Apify 不会将固定的构建编号重定向到 `latest`。请将固定编号�
 大多数任务建议使用 `collectionStrategy: "auto"`。完整或嵌套范围会从完整回复
 抓取开始。范围、深度、排序及作者控件会在响应限制之前生效。抓取会包含非根
 目标之下的所有后代。未完成的抓取会先保留已有行，再尝试对话搜索和直接回复。
-直接范围会在需要时回退到搜索。未完成的页面会保留其延续状态。显式指定的
-策略不会切换。
+如果某个帖子的所有来源都已结束，就会跳过这些步骤，因为 X 隐藏了其余回复。
+此时状态消息会说明 X 隐藏了多少条回复。直接范围会在需要时回退到搜索。
+未完成的页面会保留其延续状态。显式指定的策略不会切换。
 
 诊断中的覆盖率阈值并不能证明来源已被穷尽。停滞的页面、限制、数据缺失或
 错误都会使恢复过程不完整。
@@ -336,9 +342,10 @@ Actor 会在计费之前去重。将 `dedupeAcrossTargets` 设为 `false` 可保
 完整行还会保留可获取的源元数据，包括 `isNoteTweet`、
 `isReply`、`isLimitedReply`、`isQuoteStatus`、`source`、`type`、
 `displayTextRange`、`contentDisclosure`、`conversationControl`、`article`、
-`limitedActions`、`reactionContext`、`card`、`communityId`、`communityNote`、
-`edit`、`isTranslatable`、`noteTweet`、`place`、`postCta`、`possiblySensitive`、
-`previousCounts`、`tombstone`、`unmentionedUserIds` 和 `viewState`。
+`limitedActions`、`reactionContext`、`authorUnavailable`、`card`、
+`communityId`、`communityNote`、`edit`、`exclusiveContent`、`isTranslatable`、
+`noteTweet`、`place`、`postCta`、`possiblySensitive`、`previousCounts`、
+`tombstone`、`unmentionedUserIds` 和 `viewState`。
 
 扁平化行保留了对话谱系、来源详情、结果类型及模式版本。具体字段请参见
 OpenAPI 文档。
