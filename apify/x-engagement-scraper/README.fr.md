@@ -118,6 +118,13 @@ résultats disponibles restent intacts. Consultez `availableResults`,
 `failedTargets`, `retryable` et `nextAction` avant de relancer. Une sortie
 d'Actor réussie confirme la livraison, pas l'extraction complète.
 
+Le texte de statut nomme chaque cause d'un arrêt anticipé. `stopCauses` liste
+chaque cause avec ses propres `message`, `retryable` et `nextAction`. Les causes
+sont `target_not_found`, `target_failed`, `pagination_safety_limit`,
+`reply_reach` et `deadline_reached`. `reply_reach` signifie que X n'a fourni
+qu'une partie d'un thread de réponses. Une cible introuvable n'y figure que si
+une autre cause a arrêté le run. Le run est `retryable` dès qu'une cause l'est.
+
 Xquik est un service tiers indépendant. Non affilié à X Corp.
 « Twitter » et « X » sont des marques déposées de X Corp.
 

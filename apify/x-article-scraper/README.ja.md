@@ -60,6 +60,8 @@ ActorはXが公開しているArticleのみを返します。Markdownはブロ�
 
 抽出が中断されると、無料の `partial` 診断が書き込まれます。取得済みの結果はそのまま保持されます。再試行する前に `availableResults`、`failedTargets`、`retryable`、`nextAction` を確認してください。Actorが正常終了しても、それは配信の完了を意味するだけで、抽出が完全に終わったことを意味しません。
 
+ステータスのテキストは、実行が早期に停止した原因をすべて示します。`stopCauses` は各原因を列挙し、原因ごとに `message`、`retryable`、`nextAction` を示します。原因は `target_not_found`、`target_failed`、`pagination_safety_limit`、`deadline_reached` です。存在しないターゲットは、別の原因で実行が停止した場合にのみ一覧に含まれます。いずれかの原因が再試行可能であれば、実行も `retryable` になります。
+
 Xquikは独立した第三者サービスです。X Corpとは提携していません。
 「Twitter」および「X」はX Corpの商標です。
 

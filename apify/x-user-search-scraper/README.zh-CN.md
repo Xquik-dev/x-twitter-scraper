@@ -53,6 +53,12 @@ Search Scraper 能按用户名、简介与地点查找用户。其他所有 Apif
 请先阅读 `availableResults`、`failedTargets`、`retryable` 与 `nextAction`。Actor
 成功退出只代表交付成功，不代表提取完整。
 
+状态消息会写明运行提前停止的每个原因。`stopCauses` 会列出每个原因及其各自的
+`message`、`retryable` 与 `nextAction`。原因的取值为 `target_not_found`、
+`target_failed`、`pagination_safety_limit` 与 `deadline_reached`。
+只有当其他原因导致运行停止时，不存在的目标才会出现在列表中。
+只要任一原因可重试，整个运行就会标记为 `retryable`。
+
 Xquik 是独立的第三方服务，与 X Corp 无关。“Twitter”与“X”是 X Corp 的商标。
 
 ## 相关 Xquik Actor

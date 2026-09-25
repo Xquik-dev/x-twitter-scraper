@@ -94,6 +94,13 @@ sonuçlar bozulmadan kalır. Yeniden denemeden önce `availableResults`,
 `failedTargets`, `retryable` ve `nextAction` alanlarını oku. Başarılı bir Actor
 çıkışı teslimatı doğrular, eksiksiz çıkarmayı değil.
 
+Durum metni, çalıştırmayı erken durduran her nedeni belirtir. `stopCauses`, her
+nedeni kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Olası
+nedenler şunlar: `target_not_found`, `target_failed`, `pagination_safety_limit`
+ve `deadline_reached`. Bulunamayan bir hedef, listeye sadece başka bir neden
+çalıştırmayı durdurduğunda girer. Nedenlerden en az biri yeniden denenebilirse
+çalıştırma da `retryable` olur.
+
 Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 "Twitter" ve "X", X Corp'un ticari markalarıdır.
 

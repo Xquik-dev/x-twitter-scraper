@@ -116,6 +116,14 @@ Verfügbare Ergebnisse bleiben erhalten. Lies `availableResults`,
 Ein erfolgreicher Actor-Abschluss bestätigt die Lieferung, nicht die
 vollständige Extraktion.
 
+Der Statustext nennt jede Ursache für einen vorzeitigen Stopp. `stopCauses`
+listet jede Ursache mit eigenen Feldern `message`, `retryable` & `nextAction`.
+Die Ursachen sind `target_not_found`, `target_failed`,
+`pagination_safety_limit`, `reply_reach` & `deadline_reached`. `reply_reach`
+bedeutet, dass X nur einen Teil eines Antwort-Threads geliefert hat. Fehlende
+Ziele kommen nur auf die Liste, wenn eine andere Ursache den Run stoppte. Der
+Run ist `retryable`, wenn mindestens 1 Ursache es ist.
+
 Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 „Twitter" und „X" sind Marken von X Corp.
 

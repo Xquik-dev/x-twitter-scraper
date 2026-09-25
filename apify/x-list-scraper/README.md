@@ -76,6 +76,12 @@ remain intact. Read `availableResults`, `failedTargets`, `retryable`, and
 `nextAction` before retrying. A successful Actor exit confirms delivery, not
 complete extraction.
 
+The status names every cause of an early stop. `stopCauses` lists each cause
+with its own `message`, `retryable` & `nextAction`. The causes are
+`target_not_found`, `target_failed`, `pagination_safety_limit` &
+`deadline_reached`. A missing target joins the list only when another cause
+stopped the run. The run is `retryable` when any cause is.
+
 Xquik is an independent third-party service. Not affiliated with X Corp.
 "Twitter" and "X" are trademarks of X Corp.
 

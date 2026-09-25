@@ -88,6 +88,13 @@ risultati disponibili restano intatti. Leggi `availableResults`,
 `failedTargets`, `retryable` e `nextAction` prima di riprovare. Un'uscita
 riuscita dell'Actor conferma la consegna, non l'estrazione completa.
 
+Il messaggio di stato nomina ogni causa di un'interruzione anticipata.
+`stopCauses` elenca ogni causa con i propri `message`, `retryable` e
+`nextAction`. Le cause sono `target_not_found`, `target_failed`,
+`pagination_safety_limit` e `deadline_reached`. Un target mancante entra
+nell'elenco solo se un'altra causa ha interrotto l'esecuzione. L'esecuzione è
+`retryable` quando lo è almeno una causa.
+
 Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 "Twitter" e "X" sono marchi di X Corp.
 

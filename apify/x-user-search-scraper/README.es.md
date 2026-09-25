@@ -63,6 +63,12 @@ resultados disponibles permanecen intactos. Revisa `availableResults`,
 `failedTargets`, `retryable` y `nextAction` antes de reintentar. Una salida
 exitosa del Actor confirma la entrega, no una extracción completa.
 
+El texto de estado nombra cada causa de una detención anticipada. `stopCauses`
+enumera cada causa con su propio `message`, `retryable` y `nextAction`. Las
+causas son `target_not_found`, `target_failed`, `pagination_safety_limit` y
+`deadline_reached`. Un objetivo faltante se suma a la lista solo si otra causa
+detuvo la ejecución. La ejecución es `retryable` cuando alguna causa lo es.
+
 Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 "Twitter" y "X" son marcas registradas de X Corp.
 

@@ -66,6 +66,8 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 
 抽出が中断された場合、無料の`partial`診断が書き込まれます。取得済みの結果はそのまま保持されます。再試行する前に`availableResults`、`failedTargets`、`retryable`、`nextAction`を確認してください。Actorが正常終了したことは、配信が成功したことを示すだけで、抽出が完全に完了したことを意味しません。
 
+ステータスのテキストは、実行が早期に停止した原因をすべて示します。`stopCauses`は各原因を列挙し、原因ごとに`message`、`retryable`、`nextAction`を示します。原因は`target_not_found`、`target_failed`、`pagination_safety_limit`、`deadline_reached`です。存在しないターゲットは、別の原因で実行が停止した場合にのみ一覧に含まれます。いずれかの原因が再試行可能であれば、実行も`retryable`になります。
+
 Xquikは独立したサードパーティサービスです。X Corpとは提携していません。「Twitter」および「X」はX Corpの商標です。
 
 ## 関連するXquik Actor

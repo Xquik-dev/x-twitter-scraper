@@ -95,6 +95,12 @@ Xquik REST 响应格式。
 `availableResults`、`failedTargets`、`retryable` 与 `nextAction`。Actor 成功退出只能确认已交付，
 不代表提取已完成。
 
+状态消息会写明运行提前停止的每个原因。`stopCauses` 会列出每个原因及其各自的 `message`、`retryable`
+与 `nextAction`。原因的取值为 `target_not_found`、`target_failed`、`pagination_safety_limit`、
+`reply_reach` 与 `deadline_reached`。`reply_reach` 表示 X 只提供了回复推文串的一部分。
+只有当其他原因导致运行停止时，不存在的目标才会出现在列表中。只要任一原因可重试，整个运行就会标记为
+`retryable`。
+
 Xquik 是独立的第三方服务，与 X Corp 无关联。"Twitter" 与 "X" 是 X Corp 的商标。
 
 ## 相关 Xquik Actor

@@ -107,6 +107,13 @@ Xquik REST 작업 중에서 선택하세요. 예시는 샘플 값을 사용합�
 `nextAction`을 확인하세요. Actor가 성공적으로 종료되었다는 것은 전달이 확인됐다는
 뜻이지, 추출이 완료됐다는 뜻은 아닙니다.
 
+상태 메시지는 실행이 일찍 멈춘 원인을 모두 표시합니다. `stopCauses`는 각 원인을
+나열하고, 원인마다 `message`, `retryable` & `nextAction`을 따로 담습니다. 원인은
+`target_not_found`, `target_failed`, `pagination_safety_limit`, `reply_reach` &
+`deadline_reached`입니다. `reply_reach`는 X가 답글 스레드의 일부만 제공했다는
+뜻입니다. 찾을 수 없는 대상은 다른 원인으로 실행이 멈췄을 때만 목록에
+들어갑니다. 원인 중 하나라도 재시도할 수 있으면 실행도 `retryable`입니다.
+
 Xquik은 독립적인 제3자 서비스입니다. X Corp와 제휴 관계가 없습니다. "Twitter"와
 "X"는 X Corp의 상표입니다.
 
