@@ -240,6 +240,96 @@ satırlar bir kez faturalandırılır.
 - Girdisiz, geçersiz girdi ve sıfır çıktılı çalıştırmalar, ücretsiz
   `diagnostics` çıktısına 1 uygulanabilir kayıt yazar.
 
+## Karşılaştırma testi
+
+X Tweet Scraper'ı 2026-09-27'de 11 başka tweet Actor'ıyla test ettik. Hepsi aynı
+aramayı yaptı. İşe yarar tweet başına en ucuz X Tweet Scraper oldu. Saniyede en
+çok işe yarar tweet'i de o teslim etti. Her çalıştırma herkese açık. Bir
+çalıştırmayı aç, girdisine, günlüğüne & veri kümesine bak.
+
+Diğer Actor'ların çoğu filtrelemeden veya tekilleştirmeden önce ücret alır. X
+Tweet Scraper yalnızca teslim edilen, benzersiz, filtreyle eşleşen tweet'ler
+için ücret alır. Böylece kullanabildiğin her tweet için daha az ödersin.
+
+### Karşılaştırma girdisi
+
+Bizim 4 çalıştırmamız bu girdiyi kullandı:
+
+```json
+{
+  "searchTerms": ["SpaceX Starship", "Starship launch", "#Starship"],
+  "queryType": "Latest + Top",
+  "lang": "en",
+  "tweetTypes": { "excludeReplies": true, "excludeRetweets": true },
+  "min_faves": 10,
+  "since": "2026-09-01_00:00:00_UTC",
+  "until": "2026-09-27_00:00:00_UTC",
+  "includeSearchTerms": true,
+  "maxItems": 1000
+}
+```
+
+- Diğer her Actor aynı terimleri, filtreleri & tarihleri kendi alanlarında aldı.
+- Tek sorgu alan Actor'lar, 3 terimi OR ile birleşmiş hâlde aldı.
+- Her Actor 1.000 tweet istedi ya da kendi daha düşük üst sınırını.
+- Çalıştırmalar tek tek yapıldı, hepsi Bronze katmanında.
+- Maliyette bize en yakın Actor, bizim çalıştırmalarımızın arasında 3 kez
+  çalıştı.
+
+### Her çalıştırmayı nasıl puanladık
+
+- İşe yarar bir tweet, çalıştırmada bir kez geçer & İngilizcedir.
+- Yanıt veya retweet değildir & en az 10 beğenisi vardır.
+- 2026-09-01 ile 2026-09-26 UTC arasında paylaşılmıştır.
+- En az 1 arama terimiyle eşleşir.
+- O terimin her kelimesi metinde, alıntılanan tweet'te veya yazar adlarında
+  geçer.
+- Bir Actor uzun metni kestiğinde kontrol tam gönderiyi okur.
+- İşe yarar tweet başına maliyet, müşterinin toplam harcamasının işe yarar tweet
+  sayısına bölümüdür.
+- Harcama, çalıştırmanın ücretlendirilen her olayını Bronze fiyatlarıyla sayar.
+- Bizim harcamamıza çalıştırmanın Apify kullanımı da eklenir, çünkü onu
+  müşterilerimiz öder.
+- Diğer Actor'lar Apify kullanımını fiyatlarına dahil eder.
+- Saniyede işe yarar tweet, işe yarar tweet sayısının saniye cinsinden toplam
+  süreye bölümüdür.
+- Toplam süre, çalıştırmanın Apify'daki başlangıcından bitişine kadar geçen
+  süredir.
+
+### Karşılaştırma sonuçları
+
+Actor adları, sloganları çıkarılmış Apify Store başlıklarıdır. Önce bizim
+çalıştırmalarımız, sonra diğerleri maliyete göre sıralanır.
+
+| Actor                                 | Geliştirici  | İşe yarar tweet | İşe yarar tweet başına maliyet | Saniyede işe yarar tweet | Herkese açık çalıştırma                                                   |
+| ------------------------------------- | ------------ | --------------: | -----------------------------: | -----------------------: | ------------------------------------------------------------------------- |
+| X Tweet Scraper                       | xquik        |             882 |                      $0.000177 |                     27.0 | [Çalıştırmayı gör](https://console.apify.com/view/runs/JJfsKql7EdiXsSX3T) |
+| X Tweet Scraper                       | xquik        |             868 |                      $0.000179 |                     27.4 | [Çalıştırmayı gör](https://console.apify.com/view/runs/58ye04whvCP63nmmW) |
+| X Tweet Scraper                       | xquik        |             869 |                      $0.000179 |                     25.8 | [Çalıştırmayı gör](https://console.apify.com/view/runs/ytoTpYCca2MShp4gh) |
+| X Tweet Scraper                       | xquik        |             879 |                      $0.000177 |                     29.1 | [Çalıştırmayı gör](https://console.apify.com/view/runs/CrJLYvAIG0Ji666rr) |
+| Twitter (X) Scraper                   | scrapesmith  |             813 |                      $0.000185 |                     10.5 | [Çalıştırmayı gör](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
+| Twitter (X) Scraper                   | scrapesmith  |             805 |                      $0.000187 |                     10.6 | [Çalıştırmayı gör](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
+| Twitter (X) Scraper                   | scrapesmith  |             805 |                      $0.000187 |                     10.7 | [Çalıştırmayı gör](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
+| Tweet Scraper                         | kaitoeasyapi |             880 |                      $0.000250 |                      9.1 | [Çalıştırmayı gör](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2) |
+| X (Twitter) Posts Search              | scraper_one  |             804 |                      $0.000314 |                      3.3 | [Çalıştırmayı gör](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0) |
+| Twitter (X) Scraper, varsayılan sınır | scrapesmith  |             124 |                      $0.000326 |                      5.3 | [Çalıştırmayı gör](https://console.apify.com/view/runs/Mc2fDehRqKqnEQAS7) |
+| Twitter Scraper                       | danek        |             807 |                      $0.000347 |                      5.0 | [Çalıştırmayı gör](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W) |
+| Twitter (X) Search Scraper API        | tweetapi     |             337 |                      $0.000374 |                      2.6 | [Çalıştırmayı gör](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb) |
+| X (Twitter) Advanced Search Scraper   | api-ninja    |             837 |                      $0.000430 |                      7.4 | [Çalıştırmayı gör](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib) |
+| Twitter (X.com) Scraper Unlimited     | apidojo      |             251 |                      $0.000494 |                     12.9 | [Çalıştırmayı gör](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta) |
+| Tweet Scraper V2                      | apidojo      |             481 |                      $0.000832 |                      7.8 | [Çalıştırmayı gör](https://console.apify.com/view/runs/PydoBgS1YRblg29bB) |
+| X.com Twitter API Scraper             | xtdata       |           1.378 |                      $0.001168 |                     11.9 | [Çalıştırmayı gör](https://console.apify.com/view/runs/U91dRXEvKvqu41aop) |
+| X (Twitter) Tweet Scraper             | seemuapps    |             805 |                      $0.001242 |                      6.9 | [Çalıştırmayı gör](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
+| Twitter Scraper                       | maximedupre  |              46 |                      $0.002846 |                      0.3 | [Çalıştırmayı gör](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
+
+- Her çalıştırmamız 1.000 sonucu $0.00015'ten ücretlendirdi. Apify kullanımı
+  buna eklenir.
+- Varsayılan sınır satırı, o Actor'ın terim başına 100 tweet'lik varsayılanını
+  korudu.
+- Twitter (X) Search Scraper API, çalıştırma başına en fazla 500 tweet döndürür.
+- X.com Twitter API Scraper, 1.000 sınırı için 2.011 tweet döndürdü.
+- maximedupre çalıştırması 187 tweet'ten sonra başarısız oldu.
+
 ## X Tweet Scraper'ı tweet verisi kazımak için nasıl kullanırım?
 
 ### 1. URL'leri doğrudan yapıştır
