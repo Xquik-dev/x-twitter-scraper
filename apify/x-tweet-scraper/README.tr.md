@@ -17,9 +17,9 @@
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. X Tweet Scraper, tweet'leri, yanıtları, profilleri,
-listeleri ve aramaları 50'den fazla filtreyle toplar. Diğer tüm Apify
-Actor'ları filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca
-teslim edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
+listeleri ve aramaları 50'den fazla filtreyle toplar. Diğer Apify
+Actor'larının çoğu filtreleme veya tekilleştirmeden önce ücret alır. Xquik
+yalnızca teslim edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
 
 Herkese açık X (Twitter) tweet'lerini **her Apify planında teslim edilen
 sonuç başına $0.00015'ten başlayarak** kazı. Apify, platform kullanımını
@@ -169,12 +169,15 @@ Her Apify planında teslim edilen satır başına `$0.00015` ücret alınır. Ap
 platform kullanımını ayrıca faturalandırır. Xquik, teslim edilen veri satırı
 başına bir ücret uygular. Tanılamalar `diagnostics` çıktısında ücretsizdir.
 
-Xquik aboneliği uygulanmaz. Ayrı bir başlangıç veya sorgu ücreti
-uygulanmaz. Her çalıştırma ayrıca, Apify'ın Actor'a gösterdiği canlı olay
-başına ödeme fiyatından hesaplanan `estimatedChargeUsd` ile bir
-`run-report` kaydı yazar. Girdisiz ve geçersiz girdi çıkışları dahil her
-sonuç `run-report` yazar. Çalıştırma raporları veri satırlarını `realRows`
-içinde ve tanılamaları `diagnosticRows` içinde ayırır.
+Xquik aboneliği uygulanmaz. Ayrı bir başlangıç veya sorgu ücreti uygulanmaz.
+Durum metni, çalıştırmanın neden durduğunu söyler. Ücretlendirilen sonuçları ve
+okunan hedefleri de sayar. Sorun yaşayan veya büyük bir çalıştırma ayrıca bir
+`run-report` kaydı yazar. Kaydın `estimatedChargeUsd` alanı, Apify'ın Actor'a
+gösterdiği canlı olay başına ödeme fiyatını kullanır. Sorunlu çalıştırmalar,
+girdisiz ve geçersiz girdi çıkışları dahil her zaman `run-report` yazar.
+Sorunsuz biten küçük bir çalıştırma bu kaydı atlar ve Apify kullanımından
+tasarruf eder. Çalıştırma raporları veri satırlarını `realRows` içinde ve
+tanılamaları `diagnosticRows` içinde ayırır.
 
 Başka bir çalıştırmaya harcama yapmadan önce boş sonuçları anla. Raporlardaki ve
 son tanılamalardaki `filtering` nesnesi, filtrelerinin kaldırdığı satırları
@@ -205,22 +208,29 @@ alanlarıyla listeler. Olası nedenler şunlar: `target_not_found`,
 `pagination_safety_limit`, `reply_reach` ve `deadline_reached`. Nedenlerden en
 az biri `retryable` ise çalıştırma da `retryable` olur.
 
-Korunan veya eksik hedefler, geçerli sonuçları olan çalıştırmalar dahil hata
-olarak sayılır. X'in çalıştıramadığı bir arama da hata sayılır. X.com böyle bir
-aramada "Something went wrong" gösterir. Çalıştırma bu aramayı yeniden denemeden
-hemen durdurur. X'in gizlediği beğeniler de hata sayılır. X bir gönderiyi kimin
-beğendiğini yalnızca yazarına gösterir. Bir hesabın beğendiği gönderileri de
-yalnızca o hesaba gösterir. Tüm hatalar kullanılamayan hedeflerle ilgili
-olduğunda tanılamalar `retryable: false` ayarlar. Hedef URL'lerini veya
-kullanıcı adlarını kontrol et ve kullanılabilir herkese açık hesapları seç. X'in
-çalıştıramadığı bir aramayı daralt veya filtrelerini değiştir. Gizli beğeniler
-yerine retweet edenleri, yanıtları veya gönderileri oku. Diğer hatalar,
-tamamlanmamış hedefler için yeniden deneme rehberliğini korur.
+Bulunamayan veya korunan bir hedef hata sayılmaz. X'te o hedef için okunacak bir
+şey yoktur. Bu yüzden çalıştırma diğer tüm hedefleri sonuna kadar okur.
+Çalıştırma `outcome: "complete"` bildirir. Tamamlanma nedeni okuduğu hedeflerden
+gelir, örneğin `source_exhausted`. `failedSubtargets` bu hedefleri dışarıda
+bırakır. Durum metni ve ücretsiz bir `complete` tanılaması onları sayar. Başka
+satırı olmayan bir çalıştırma bunun yerine `zero-output` tanılaması yazar.
+
+X'in çalıştıramadığı bir arama hata sayılır. X.com böyle bir aramada "Something
+went wrong" gösterir. Çalıştırma bu aramayı yeniden denemeden hemen durdurur.
+X'in gizlediği beğeniler de hata sayılır. X bir gönderiyi kimin beğendiğini
+yalnızca yazarına gösterir. Bir hesabın beğendiği gönderileri de yalnızca o
+hesaba gösterir. Tüm hatalar kullanılamayan hedeflerle ilgili olduğunda
+tanılamalar `retryable: false` ayarlar. Hedef URL'lerini veya kullanıcı adlarını
+kontrol et ve kullanılabilir herkese açık hesapları seç. X'in çalıştıramadığı
+bir aramayı daralt veya filtrelerini değiştir. Gizli beğeniler yerine retweet
+edenleri, yanıtları veya gönderileri oku. Diğer hatalar, tamamlanmamış hedefler
+için yeniden deneme rehberliğini korur.
 
 Tanılama bu hedefleri `unavailableTargets` içinde adlandırır. Her kayıtta senin
-girdiğin haliyle `target` ve bir `reason` bulunur: `not_found`, `protected`,
-`search_unavailable` veya `likes_hidden`. Liste en fazla 100 kayıt tutar.
-Eksiksiz bir çalıştırma için onları girdiden çıkar.
+girdiğin haliyle `target`, bir `reason` ve bir `nextAction` bulunur. Neden
+`not_found`, `protected`, `search_unavailable` veya `likes_hidden` olur. Bir
+arama kaydında, kaldırman gereken operatör gibi bir `fix` de olabilir. Liste en
+fazla 100 kayıt tutar. Onları girdiden çıkar.
 
 `completionReason: "pagination_safety_limit"` bir okuma hatası değildir.
 Çalıştırma geçerli satırlarını korudu, sonra artık yeni sonuç getirmeyen bir
@@ -560,6 +570,11 @@ adları olarak etiketler.
 | `filter:replies`         | `filter:replies`         | Yalnızca yanıt tweet'leri         |
 | `filter:quote`           | `filter:quote`           | Yalnızca alıntı tweet'leri        |
 | `filter:blue_verified`   | `filter:blue_verified`   | Yalnızca Premium kullanıcılar     |
+
+X artık `filter:vine`, `filter:consumer_video`, `filter:pro_video`,
+`filter:news` veya `retweets_of:` ile arama yapmıyor. Bunlardan birini içeren
+bir arama hemen biter. Düzeltmeyi söyleyen ücretsiz bir tanılama yazar. Her
+sorguyu en fazla 512 karakterde tut. X en fazla bu uzunlukta arama yapar.
 
 Tarih pencereleri kapsayıcı bir alt sınır ve hariç tutucu bir üst sınır
 kullanır. Actor, her tweet'i eklemeden veya ücretlendirmeden önce her iki

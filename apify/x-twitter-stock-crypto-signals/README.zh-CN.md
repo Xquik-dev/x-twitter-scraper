@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，拥有最完整的 X 数据。X (Twitter) Stock & Crypto AI Trading Signals 会将推文转化为针对每个股票代码或币种的看涨、看跌、中性或混合立场。其他所有 Apify Actor 都会在过滤或去重之前收费。Xquik 只对已交付、唯一且符合过滤条件的结果收费。AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
+Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，拥有最完整的 X 数据。X (Twitter) Stock & Crypto AI Trading Signals 会将推文转化为针对每个股票代码或币种的看涨、看跌、中性或混合立场。大多数其他 Apify Actor 都会在过滤或去重之前收费。Xquik 只对已交付、唯一且符合过滤条件的结果收费。AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
 
 在 X（Twitter）上读取股票、加密货币和交易相关帖子背后的立场，同时保留原始推文数据。**X (Twitter) Stock & Crypto AI Trading Signals** 会收集与你的股票代码或资产相关的帖子。然后它会为每条帖子添加由 AI 生成的立场、内容类型、信心程度和资产相关性。它能将明确的判断与含糊其辞的言论区分开，将分析与推广区分开，将谈论你所关注资产的帖子与仅仅提到同名词但无关的用法区分开。
 
@@ -52,6 +52,8 @@ Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，拥�
 | 信心程度 | 0 表示含糊其辞的言论，1 表示表达了观点，2 表示明确的判断或持仓      |
 | 相关性  | 该帖子将你关注的目标视为资产的概率      |
 
+当立场为中性或不明确时，信心程度始终为 0。没有方向的帖子无法明确表达方向。该回答会把全部概率放在 0 级，并沿用立场的 `confidence`。
+
 这些回答描述的是作者所表达的内容，并非投资建议，也不会核实相关说法、价格或备案信息。
 
 ## 分析你自己的文本
@@ -77,7 +79,7 @@ Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，拥�
 
 AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
 
-每条成功分析的推文低至 $0.0003，无启动费。价格已包含数据收集。分析额度为每条推文 8 个问题、每个问题定义 8,000 字节、上下文 12,000 字节。提取过滤和去重会在分析之前执行，因此被过滤掉或重复的行不会被分析，也不会计费。分析失败、被跳过的分析以及诊断行不产生结果费用。Apify 会单独收取平台使用费。Pricing 标签页会显示该费用。
+每条成功分析的推文低至 $0.0003，无启动费。价格已包含数据收集。分析额度为每条推文 8 个问题、每个问题定义 8,000 字节、上下文 64,000 字节。提取过滤和去重会在分析之前执行，因此被过滤掉或重复的行不会被分析，也不会计费。分析失败、被跳过的分析以及诊断行不产生结果费用。Apify 会单独收取平台使用费。Pricing 标签页会显示该费用。
 
 ## 输入与输出示例
 
@@ -117,7 +119,7 @@ AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或�
 
 ## 运行摘要与扁平化回答
 
-每次运行都会向其键值存储写入一条 `analysis-summary` 记录，并在运行报告的 `results.analysisSummary` 中重复该记录。它会统计已分析、失败和被跳过的行数，汇总互动数据，并对每个问题进行汇总。`cashtags` 会按 `$NVDA` 这样的 cashtag 统计立场分布，因此每个资产的看涨比例来自 `choices.stance`。`stance` 部分会附加按互动量加权的分布情况，以及互动量最高的看涨和看跌帖子。`conviction` 会报告均值和按互动量加权的均值。摘要会将数值四舍五入到小数点后 4 位。空运行会报告数量为零、均值为 `null`。每条 `cashtags` 记录还会附加 `signal`，其中包含看涨数量、看跌数量，以及一个介于 -1 到 1 之间的分数。该分数为 (看涨 - 看跌) / 行数。`monitor.changedRows` 会列出自基线以来立场发生变化的推文。每一行会列出 `sourceDomains`，即其链接指向的域名。设置 `monitor.baselineDatasetId` 后，摘要中的 `monitor` 部分会统计各比较状态的数量，并列出最多 50 条发生变化的行。
+每次运行都会向其键值存储写入一条 `analysis-summary` 记录。遇到问题的运行或大型运行还会写入 `run-report`。`run-report` 会在 `results.analysisSummary` 下重复该摘要。摘要会统计已分析、失败和被跳过的行数，汇总互动数据，并对每个问题进行汇总。`cashtags` 会按 `$NVDA` 这样的 cashtag 统计立场分布，因此每个资产的看涨比例来自 `choices.stance`。`stance` 部分会附加按互动量加权的分布情况，以及互动量最高的看涨和看跌帖子。`conviction` 会报告均值和按互动量加权的均值。摘要会将数值四舍五入到小数点后 4 位。空运行会报告数量为零、均值为 `null`。每条 `cashtags` 记录还会附加 `signal`，其中包含看涨数量、看跌数量，以及一个介于 -1 到 1 之间的分数。该分数为 (看涨 - 看跌) / 行数。`monitor.changedRows` 会列出自基线以来立场发生变化的推文。每一行会列出 `sourceDomains`，即其链接指向的域名。设置 `monitor.baselineDatasetId` 后，摘要中的 `monitor` 部分会统计各比较状态的数量，并列出最多 50 条发生变化的行。
 
 每个结果行还包含 `answers`，这是一个从问题 ID 映射到所选类别、评分或概率的扁平化映射。`Flat answers` 数据集视图以及 CSV 或 Excel 导出会在推文旁为每个问题显示一列，因此电子表格无需解析 JSON。失败或被跳过的行对应一个空映射。
 
@@ -179,7 +181,9 @@ Actor 页面上还有更多涵盖其他品牌、主题和市场的任务。
 
 ### 为什么某一行返回的 `analysis.status` 是 `failed` 或 `skipped`？
 
-Actor 已收集并交付该推文，但 AI 分析未能完成。`analysis.reason` 会说明原因，例如推文及其上下文超过 `maxContextBytes` 时的 `context_limit`，或分析服务暂时不可用时的 `service_unavailable`。这些行不产生结果费用。可以提高 `maxContextBytes`（最高 12,000），或重新运行受影响的 ID。
+Actor 已收集并交付该推文，但 AI 分析未能完成。`analysis.reason` 会说明原因。`context_limit` 表示你的上下文和目标没有给推文留出空间。`service_unavailable` 表示分析服务曾暂时不可用。这些行不产生结果费用。请缩短 `analysis.context`，或重新运行受影响的 ID。
+
+推文超过 `maxContextBytes` 时，Actor 仍会分析它。它会先截断被引用和被回复的帖子，再截断推文本身。此时 `analysis.contextAvailability.postText` 为 `truncated`。如需保留更多文本，可将 `maxContextBytes` 提高到最多 64,000。
 
 ### 该分析会核实事实吗？
 

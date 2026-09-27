@@ -17,7 +17,7 @@
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. X (Twitter) Tweet Classifier answers your own labels,
-scores & yes/no questions on every tweet. Every other Apify Actor charges before
+scores & yes/no questions on every tweet. Most other Apify Actors charge before
 filtering or deduplicating. Xquik charges only for delivered, unique,
 filter-matching results. AI costs are included in the per-tweet price. You need
 no AI account, tokens or key.
@@ -40,7 +40,7 @@ market sentiment. Custom questions replace them.
 1. Add tweet URLs, search terms, profile handles or tweet IDs.
 2. Set `maxItems` & the extraction filters your task needs.
 3. Add your questions under `analysis.questions`, or pick a preset with
-   `analysis.preset`.
+   `analysis.preset`. Without either, the Actor runs the `sentiment` preset.
 4. Run the Actor & open the dataset.
 
 Supported modes collect tweets, searches, profile posts, Lists, replies, quotes
@@ -77,9 +77,9 @@ Provide 1-8 questions with unique IDs, instructions & versions.
 
 Presets: `brand`, `complaints`, `competitors`, `purchase_intent`,
 `product_feedback`, `news`, `sentiment` & `market`. `maxContextBytes` defaults
-to 12,000 bytes. A smaller limit skips oversized context without truncation.
-`concurrency` defaults to 16 & accepts 1 through 16. Each question definition
-stays within an 8,000 byte allowance.
+to 64,000 bytes. A smaller limit cuts long posts to fit & marks them
+`truncated`. `concurrency` defaults to 16 & accepts 1 through 16. Each question
+definition stays within an 8,000 byte allowance.
 
 ## Analyze your own text
 
@@ -107,7 +107,7 @@ key.
 
 From $0.0003 per successfully analyzed tweet, with no start fee. The price
 includes collection. The analysis allowance is 8 questions, 8,000 bytes per
-question definition & 12,000 bytes of context per tweet. Extraction filters &
+question definition & 64,000 bytes of context per tweet. Extraction filters &
 deduplication run before analysis, so filtered-out & duplicate rows are never
 analyzed or charged. Failed & skipped analyses & diagnostic rows have no result
 charge. Apify bills platform usage separately. The Pricing tab shows it.
@@ -153,19 +153,30 @@ pending charges.
 
 ## Run summary & flat answers
 
-Each run writes an `analysis-summary` record to its key-value store & repeats it
-under `results.analysisSummary` in the run report. It counts analyzed, failed &
-skipped rows, sums engagement, and summarizes every question. Every custom
-question gets its own block: category counts & shares for choice questions, mean
-& level counts for score questions, yes & no counts for yes/no questions. The
-summary rounds numbers to 4 decimals. An empty run reports zero counts & `null`
-means. Pass `analysis.preset` with `brand`, `complaints`, `purchase_intent`,
-`product_feedback`, `competitors`, `sentiment`, `market` or `news` to run a
-built-in lens instead of custom questions. The summary then reports that lens
-per question. Every row lists `sourceDomains`, the hostnames it links to, &
-`cashtags` such as `$NVDA` found in its text. With `monitor.baselineDatasetId`
-set, the summary's `monitor` block counts comparison statuses & lists up to 50
-changed rows.
+A run writes an `analysis-summary` record to its key-value store in 4 cases:
+
+- It hits a problem or is large.
+- It sets `monitor` without `baselineDatasetId`, as the first run of a series.
+- Its comparison finds a changed, new or not comparable tweet.
+- It has `alwaysSaveRunRecords` on.
+
+Other runs skip the record. Their status names the top answer, like
+`Top sentiment: positive in 3 of 5 results.` A comparison without a change
+states `No change since the earlier run.` A run that hits a problem, or a large
+run, also writes `run-report`. So does a run with `alwaysSaveRunRecords` on.
+`run-report` repeats the summary under `results.analysisSummary`.
+
+The summary counts analyzed, failed & skipped rows, sums engagement, and
+summarizes every question. Every custom question gets its own block: category
+counts & shares for choice questions, mean & level counts for score questions,
+yes & no counts for yes/no questions. The summary rounds numbers to 4 decimals.
+An empty run reports zero counts & `null` means. Pass `analysis.preset` with
+`brand`, `complaints`, `purchase_intent`, `product_feedback`, `competitors`,
+`sentiment`, `market` or `news` to run a built-in lens instead of custom
+questions. The summary then reports that lens per question. Every row lists
+`sourceDomains`, the hostnames it links to, & `cashtags` such as `$NVDA` found
+in its text. With `monitor.baselineDatasetId` set, the summary's `monitor` block
+counts comparison statuses & lists up to 50 changed rows.
 
 Every result row also carries `answers`, a flat map from question ID to the
 chosen category, score, or probability. The `Flat answers` dataset view & CSV or
@@ -175,14 +186,16 @@ need no JSON parsing. Failed & skipped rows carry an empty map.
 ## Compare with an earlier run
 
 Pass `monitor.baselineDatasetId`, the dataset ID of a completed earlier run with
-the same analysis settings. Every row then gains a `monitor` object. Its status
-is `first_run` without a baseline, `new_to_baseline` for tweets the earlier run
-did not have, & `unchanged` or `changed` for tweets it had. `changes` lists each
-decision for any of your questions that moved from `previous` to `current`.
-Decisions compare by category, rounded score level, or yes/no at 0.5. A decision
-counts as changed only when it moves clearly. Near-tie jitter between runs stays
-unchanged. Baselines above `maxBaselineRows` (default 100,000) or from different
-settings stop the run before collection with a diagnostic row.
+the same analysis settings. The comparison reads that run's rows, so it works
+even when that run skipped its summary. Every row then gains a `monitor` object.
+Its status is `first_run` without a baseline, `new_to_baseline` for tweets the
+earlier run did not have, & `unchanged` or `changed` for tweets it had.
+`changes` lists each decision for any of your questions that moved from
+`previous` to `current`. Decisions compare by category, rounded score level, or
+yes/no at 0.5. A decision counts as changed only when it moves clearly. Near-tie
+jitter between runs stays unchanged. Baselines above `maxBaselineRows` (default
+100,000) or from different settings stop the run before collection with a
+diagnostic row.
 
 ## Task examples
 
@@ -279,10 +292,14 @@ questions over time, you can tell which wording produced a result.
 ### Why did a row come back with `analysis.status` of `failed` or `skipped`?
 
 The Actor collected & delivered the tweet, but the AI analysis did not complete.
-`analysis.reason` names the cause, such as `context_limit` when the tweet & its
-context exceed `maxContextBytes`, or `service_unavailable` when the analysis
-service is briefly unavailable. These rows carry no result charge. Raise
-`maxContextBytes` (up to 12,000) or rerun the affected IDs.
+`analysis.reason` names the cause. `context_limit` means your context & targets
+leave no room for the tweet. `service_unavailable` means the analysis service
+was briefly unavailable. These rows carry no result charge. Shorten
+`analysis.context` or rerun the affected IDs.
+
+The Actor still analyzes a tweet longer than `maxContextBytes`. It cuts quoted &
+replied-to posts first, then the tweet. `analysis.contextAvailability.postText`
+is then `truncated`. Raise `maxContextBytes` up to 64,000 to keep more text.
 
 ### Does the analysis verify facts?
 

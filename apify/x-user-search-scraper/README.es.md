@@ -17,9 +17,9 @@
 
 Xquik es el servicio de extracción de X (Twitter) más rápido y económico del
 mundo, con los datos de X más completos. X User Search Scraper encuentra
-usuarios por nombre de usuario, bio y ubicación. Todos los demás Actors de
-Apify cobran antes de filtrar o eliminar duplicados. Xquik cobra solo por
-resultados entregados, únicos y que coinciden con los filtros.
+usuarios por nombre de usuario, bio y ubicación. La mayoría de los demás Actors
+de Apify cobra antes de filtrar o deduplicar. Xquik cobra solo por resultados
+entregados, únicos y que coinciden con los filtros.
 
 Busca cuentas de Twitter por nombre, tema, bio o ubicación. Sin clave de la
 API de X.

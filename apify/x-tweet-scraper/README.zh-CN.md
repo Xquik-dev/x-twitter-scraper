@@ -17,7 +17,7 @@
 
 Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，提供最完整的 X
 数据。X Tweet Scraper 可通过 50 多种过滤器抓取推文、回复、主页、List
-和搜索结果。其他所有 Apify Actor 都会在过滤或去重之前收费。Xquik 只对
+和搜索结果。大多数其他 Apify Actor 都会在过滤或去重之前收费。Xquik 只对
 已交付、唯一且符合过滤条件的结果收费。
 
 在所有 Apify 套餐上，抓取公开 X（Twitter）推文的价格为**每条已交付结果
@@ -150,11 +150,13 @@ Apify 不会将固定的构建编号重定向到 `latest`。请将固定编号�
 平台使用费。Xquik 对每条已交付的数据行收取一次费用。`diagnostics`
 输出中的诊断记录免费。
 
-不收取 Xquik 订阅费，也不收取单独的启动费或查询费。每次运行还会写入
-一条 `run-report` 记录，其中 `estimatedChargeUsd` 根据 Apify 向 Actor
-公开的实时按事件付费价格计算得出。每种结果都会写入 `run-report`，包括
-无输入和输入无效的退出情况。运行报告会将数据行区分为 `realRows`，
-诊断记录区分为 `diagnosticRows`。
+不收取 Xquik 订阅费，也不收取单独的启动费或查询费。
+状态消息会说明运行停止的原因。它还会统计已收费的结果和已读取的目标。
+遇到问题的运行或大型运行还会写入一条 `run-report` 记录。其中的
+`estimatedChargeUsd` 采用 Apify 向 Actor 公开的实时按事件计费价格。
+遇到问题的运行总会写入 `run-report`，包括无输入和输入无效的退出情况。
+顺利完成的小型运行会跳过该记录，以节省 Apify 用量。运行报告会将数据行区分为
+`realRows`，诊断记录区分为 `diagnosticRows`。
 
 在为下一次运行付费之前，请先理解空结果的原因。报告和最终诊断中的 `filtering` 对象会统计被你的过滤条件移除的行数。请查看 `serverFilteredRows`、`actorFilteredRows` 和 `pagesWithUnknownServerFiltering`。被过滤的行永远不会产生结果费用。
 
@@ -175,19 +177,24 @@ Apify 不会将固定的构建编号重定向到 `latest`。请将固定编号�
 `pagination_safety_limit`、`reply_reach` 和 `deadline_reached`。只要任一原因
 可重试，整个运行就会标记为 `retryable`。
 
-受保护或不存在的目标都会被计为失败，即使运行中包含有效结果也是如此。X 无法执
-行的搜索也计为失败。对于这类搜索，X.com 会显示 "Something went wrong"，运行
-会立即停止该搜索，不再重试。X 隐藏的点赞也计为失败。X 只向作者显示谁点赞了其
-帖子，也只向账户本人显示该账户点赞过的帖子。当所有失败都与不可用的目标有关
-时，诊断记录会将 `retryable` 设为 `false`。请检查目标 URL 或用户名，并选择可
-用的公开账户。请缩小 X 无法执行的搜索的范围，或更改其过滤条件。请改为读取转
-推者、回复或帖子，而不是被隐藏的点赞。其他类型的失败会为未完成的目标保留重试
-指引。
+不存在或受保护的目标不算失败。X 上没有可读取的内容，
+因此运行会把其他所有目标读取到底。运行会报告 `outcome: "complete"`，
+完成原因取自已读取的目标，例如 `source_exhausted`。`failedSubtargets`
+不包含这些目标。状态消息和一条免费的 `complete` 诊断记录会统计它们。
+没有其他行的运行会改为写入一条 `zero-output` 诊断记录。
+
+X 无法执行的搜索算作失败。对于这类搜索，X.com 会显示 "Something went wrong"，
+运行会立即停止该搜索，不再重试。X 隐藏的点赞也计为失败。X
+只向作者显示谁点赞了其帖子，也只向账户本人显示该账户点赞过的帖子。
+当所有失败都与不可用的目标有关时，诊断记录会将 `retryable` 设为 `false`。
+请检查目标 URL 或用户名，并选择可用的公开账户。请缩小 X 无法执行的搜索的范围，
+或更改其过滤条件。请改为读取转推者、回复或帖子，而不是被隐藏的点赞。
+其他类型的失败会为未完成的目标保留重试指引。
 
 诊断记录会在 `unavailableTargets` 中列出这些目标。每个条目包含你输入时原样的
-`target` 和一个 `reason`，取值为 `not_found`、`protected`、
-`search_unavailable` 或 `likes_hidden`。该列表最多保存 100 个条目。从输入中
-移除它们，即可得到完整的运行。
+`target`、一个 `reason` 和一个 `nextAction`。`reason` 取值为 `not_found`、
+`protected`、`search_unavailable` 或 `likes_hidden`。搜索条目还可能带有 `fix`，
+例如需要删除的运算符。该列表最多保存 100 个条目。请从输入中移除它们。
 
 `completionReason: "pagination_safety_limit"` 并不代表读取失败。运行保留了有效行，然后结束了一个不再返回新结果的目标。运行会报告抓取不完整。`failedSubtargets` 保持为 `0`。你只需为已交付的行付费。
 
@@ -464,6 +471,11 @@ fields` 视图对应 `snake_case`。视图只负责选择列，永远不会重�
 | `filter:replies`         | `filter:replies`           | 仅返回回复类推文                |
 | `filter:quote`           | `filter:quote`             | 仅返回引用推文                  |
 | `filter:blue_verified`   | `filter:blue_verified`     | 仅返回 Premium 用户            |
+
+X 已不再支持使用 `filter:vine`、`filter:consumer_video`、`filter:pro_video`、
+`filter:news` 或 `retweets_of:` 搜索。包含其中任何一个的搜索会立即结束，
+并写入一条说明修复方法的免费诊断记录。每条查询请控制在 512 个字符以内，这是 X
+搜索的上限。
 
 日期窗口的下限为含边界，上限为不含边界。Actor 会在为每条推文计入结果
 或计费之前验证这两个边界。

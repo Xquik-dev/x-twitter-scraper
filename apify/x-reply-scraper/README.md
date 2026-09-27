@@ -17,11 +17,10 @@
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. X Reply Scraper collects replies, comments & whole
-conversations. Every other Apify Actor charges before filtering or
-deduplicating. Xquik charges only for delivered, unique, filter-matching
-results.
+conversations. Most other Apify Actors charge before filtering or deduplicating.
+Xquik charges only for delivered, unique, filter-matching results.
 
-Scrape X (Twitter) replies for **$0.00015 per delivered rows on every Apify
+Scrape X (Twitter) replies for **$0.00015 per delivered row on every Apify
 plan**. Paste post URLs, Tweet IDs, profile URLs, or usernames. Export replies,
 conversations, authors, engagement, entities, and media URLs. Apify bills your
 platform usage separately. You need no X login.
@@ -394,9 +393,12 @@ overwriting colliding source keys.
 Successful data rows use `resultType: "reply"`. Non-data exits write exactly 1
 free record to `diagnostics` with an actionable fix.
 
-Every outcome writes `run-report`, including no-input and invalid-input exits.
-The report schema documents completion, billing, failures, and saved cursors.
-Its `version` field reports the exact published Actor source version.
+The run status says why the run stopped. It also counts charged results &
+targets read. Runs with a problem always write `run-report`, including no-input
+and invalid-input exits. A large run writes it too. A small run that goes well
+skips it & saves Apify usage. The report schema documents completion, billing,
+failures, and saved cursors. Its `version` field reports the exact published
+Actor source version.
 
 Possible statuses include:
 

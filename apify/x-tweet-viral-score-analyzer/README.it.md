@@ -17,10 +17,10 @@
 
 Xquik è il servizio di scraping X (Twitter) più veloce ed economico al mondo,
 con i dati X più completi. X Tweet Viral Score Analyzer aggiunge una stima del
-Viral Score & un verdetto a ogni tweet. Ogni altro Actor Apify addebita il costo
-prima di filtrare o deduplicare. Xquik addebita solo i risultati consegnati,
-unici e conformi ai filtri. I costi dell'IA sono inclusi nel prezzo per tweet.
-Non ti servono account IA, token o chiavi.
+Viral Score & un verdetto a ogni tweet. La maggior parte degli altri Actor Apify
+addebita costi prima di filtrare o deduplicare. Xquik addebita solo i risultati
+consegnati, unici e conformi ai filtri. I costi dell'IA sono inclusi nel prezzo
+per tweet. Non ti servono account IA, token o chiavi.
 
 Scopri perché i tweet si diffondono o falliscono & mantieni i dati originali
 del tweet. **X Tweet Viral Score Analyzer with AI** raccoglie i tweet
@@ -221,7 +221,7 @@ token o chiavi.
 
 A partire da $0.0003 per tweet analizzato con successo, senza costo di avvio.
 Il prezzo include la raccolta & il Viral Score. L'allowance di analisi è di
-8 domande, 8.000 byte per definizione di domanda e 12.000 byte di contesto
+8 domande, 8.000 byte per definizione di domanda e 64.000 byte di contesto
 per tweet. I filtri di estrazione e la deduplicazione vengono eseguiti prima
 dell'analisi, quindi le righe filtrate e duplicate non vengono mai analizzate
 né addebitate. Le analisi fallite o saltate e le righe di diagnostica non
@@ -278,20 +278,20 @@ sospeso.
 
 ## Riepilogo dell'esecuzione e risposte piatte
 
-Ogni esecuzione scrive un record `analysis-summary` nel proprio key-value
-store e lo ripete sotto `results.analysisSummary` nel rapporto di
-esecuzione. Conta le righe analizzate, fallite e saltate, somma
-l'engagement e riassume ogni domanda. Il suo blocco `viral` riporta
-`averageScore`, il conteggio di ogni verdetto & quante righe l'Actor ha
-valutato o lasciato senza punteggio. Lo stesso blocco contiene `calibration`,
-`accounts` & `leaderboard`, descritti sopra. Le domande a punteggio riportano
-una media & una media pesata per engagement. La suddivisione `reaction`
-mostra quanti tweet rientrano in ogni reazione, & `top` elenca i tre tweet
-più coinvolgenti per reazione. Un'esecuzione vuota riporta conteggi a zero &
-una media `null`. Ogni riga elenca `sourceDomains`, i nomi host a cui
-rimanda, & `cashtags` come `$NVDA` trovati nel testo. Con
-`monitor.baselineDatasetId` impostato, il blocco `monitor` del riepilogo
-conta gli stati di confronto & elenca fino a 50 righe modificate.
+Ogni esecuzione scrive un record `analysis-summary` nel proprio key-value store.
+Un'esecuzione con un problema, o un'esecuzione grande, scrive anche
+`run-report`. Questo ripete il riepilogo sotto `results.analysisSummary`. Il
+riepilogo conta le righe analizzate, fallite e saltate, somma l'engagement e
+riassume ogni domanda. Il suo blocco `viral` riporta `averageScore`, il
+conteggio di ogni verdetto & quante righe l'Actor ha valutato o lasciato senza
+punteggio. Lo stesso blocco contiene `calibration`, `accounts` & `leaderboard`,
+descritti sopra. Le domande a punteggio riportano una media & una media pesata
+per engagement. La suddivisione `reaction` mostra quanti tweet rientrano in ogni
+reazione, & `top` elenca i tre tweet più coinvolgenti per reazione.
+Un'esecuzione vuota riporta conteggi a zero & una media `null`. Ogni riga elenca
+`sourceDomains`, i nomi host a cui rimanda, & `cashtags` come `$NVDA` trovati
+nel testo. Con `monitor.baselineDatasetId` impostato, il blocco `monitor` del
+riepilogo conta gli stati di confronto & elenca fino a 50 righe modificate.
 
 Ogni riga di risultato porta anche `viralScore`, `viralVerdict`,
 `viralAlgorithmScore`, `viralActualEngagementRate` & `answers`, una mappa
@@ -356,11 +356,16 @@ predefinite, quindi le domande personalizzate lo lasciano `null`.
 ### Perché una riga è tornata con `analysis.status` `failed` o `skipped`?
 
 L'Actor ha raccolto & consegnato il tweet, ma l'analisi AI non si è completata.
-`analysis.reason` indica la causa, come `context_limit` quando il tweet e il suo
-contesto superano `maxContextBytes`, oppure `service_unavailable` quando il
-servizio di analisi è momentaneamente non disponibile. Queste righe non
-comportano alcun addebito sul risultato & non hanno punteggio. Aumenta
-`maxContextBytes` (fino a 12.000) o riesegui gli ID interessati.
+`analysis.reason` indica la causa. `context_limit` significa che il tuo contesto
+& i tuoi target non lasciano spazio al tweet. `service_unavailable` significa
+che il servizio di analisi era momentaneamente non disponibile. Queste righe non
+comportano alcun addebito sul risultato & non hanno punteggio. Accorcia
+`analysis.context` o riesegui gli ID interessati.
+
+L'Actor analizza comunque un tweet più lungo di `maxContextBytes`. Taglia prima
+i post citati & quelli a cui risponde, poi il tweet.
+`analysis.contextAvailability.postText` diventa quindi `truncated`. Aumenta
+`maxContextBytes` fino a 64.000 per conservare più testo.
 
 ### L'analisi verifica i fatti?
 

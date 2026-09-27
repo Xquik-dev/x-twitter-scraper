@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何将 Xquik 抓取工具与 Claude Code、Codex、Cursor 等一起使用，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是速度最快、成本最低且数据最完整的 X（Twitter）抓取工具服务。X (Twitter) Tweet Classifier可为每条推文回答你自定义的标签、评分与是非问题。其他 Apify Actor 都在筛选或去重之前收费。Xquik只对已交付、唯一且符合筛选条件的结果收费。AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
+Xquik 是速度最快、成本最低且数据最完整的 X（Twitter）抓取工具服务。X (Twitter) Tweet Classifier可为每条推文回答你自定义的标签、评分与是非问题。大多数其他 Apify Actor 都会在筛选或去重之前收费。Xquik只对已交付、唯一且符合筛选条件的结果收费。AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
 
 用你自己的问题对 X（Twitter）帖子进行分类，同时保留原始推文数据。**X Tweet Classifier with AI
 Analysis** 会收集匹配的推文，然后为每条帖子回答 1 到 8 个类型化问题：用于客服分流的分类、
@@ -32,6 +32,7 @@ Analysis** 会收集匹配的推文，然后为每条帖子回答 1 到 8 个类
 1. 添加推文 URL、搜索词、主页用户名或推文 ID。
 2. 设置 `maxItems` 与任务所需的提取筛选条件。
 3. 在 `analysis.questions` 下添加你的问题，或通过 `analysis.preset` 选择预设。
+   如果两者都未设置，Actor 会运行 `sentiment` 预设。
 4. 运行 Actor 并打开数据集。
 
 支持的模式可收集推文、搜索结果、主页帖子、List、回复、引用推文与推文串。独立的文章提取
@@ -64,10 +65,11 @@ Analysis** 会收集匹配的推文，然后为每条帖子回答 1 到 8 个类
 - `score` 使用一个有序的 `levels` 数组，至少包含 2 个描述。
 - `probability` 返回 0 到 1 之间的值。可选的 `criteria` 包含 `yes` 与 `no` 描述。
 
-预设包括：`brand`、`complaints`、`competitors`、`purchase_intent`、`product_feedback`、`news`、
-`sentiment` 与 `market`。`maxContextBytes` 默认值为 12,000 字节。
-更小的限制会跳过超大上下文而不做截断。`concurrency` 默认值为 16，可接受 1 到 16 之间的值。
-每个问题定义都不能超过 8,000 字节的限额。
+预设包括：`brand`、`complaints`、`competitors`、`purchase_intent`、
+`product_feedback`、`news`、`sentiment` 与 `market`。`maxContextBytes` 默认值为
+64,000 字节。更小的限制会截断过长的帖子以适应限制，并将其标记为 `truncated`。
+`concurrency` 默认值为 16，可接受 1 到 16 之间的值。每个问题定义都不能超过 8,000
+字节的限额。
 
 ## 分析你自己的文本
 
@@ -93,7 +95,7 @@ Analysis** 会收集匹配的推文，然后为每条帖子回答 1 到 8 个类
 AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
 
 每条成功分析的推文起价 $0.0003，无启动费。价格包含收集环节。分析额度为每条推文 8 个问题、
-每个问题定义 8,000 字节，以及 12,000 字节的上下文。提取筛选与去重在分析之前进行，
+每个问题定义 8,000 字节，以及 64,000 字节的上下文。提取筛选与去重在分析之前进行，
 因此被筛掉与重复的行永远不会被分析或收费。分析失败、被跳过的分析与诊断行均不产生结果费用。Apify
 会单独对平台使用量计费。Pricing 选项卡会显示该费用。
 
@@ -136,16 +138,29 @@ AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或�
 
 ## 运行摘要与扁平化答案
 
-每次运行都会在键值存储中写入一条 `analysis-summary` 记录，并在运行报告的
-`results.analysisSummary` 中重复该记录。它会统计已分析、失败与被跳过的行数，汇总互动数据，
-并对每个问题进行摘要。每个自定义问题都有专属统计区块：choice 问题的分类计数与占比、score
+在以下 4 种情况下，运行会向其键值存储写入一条 `analysis-summary` 记录：
+
+- 运行遇到问题或规模较大。
+- 作为系列中的首次运行，设置了 `monitor` 但没有设置 `baselineDatasetId`。
+- 比较发现了已变化、新增或无法比较的推文。
+- 开启了 `alwaysSaveRunRecords`。
+
+其他运行会跳过该记录。它们的状态消息会写明最多的答案，例如
+`Top sentiment: positive in 3 of 5 results.` 没有变化的比较会显示
+`No change since the earlier run.` 遇到问题的运行或大型运行还会写入
+`run-report`。开启 `alwaysSaveRunRecords` 的运行也会写入。`run-report` 会在
+`results.analysisSummary` 下重复该摘要。
+
+摘要会统计已分析、失败与被跳过的行数，汇总互动数据，并对每个问题进行摘要。
+每个自定义问题都有专属统计区块：choice 问题的分类计数与占比、score
 问题的均值与各等级计数、是非问题的是与否计数。摘要会将数字四舍五入到 4 位小数。
-空运行的计数报告为零，均值报告为 `null`。将 `analysis.preset` 设为 `brand`、`complaints`、
-`purchase_intent`、`product_feedback`、`competitors`、`sentiment`、`market` 或 `news`
-可运行内置分析视角而非自定义问题。此时摘要会按该视角逐个问题报告。每一行会列出
-`sourceDomains`（其链接的域名）与 `cashtags`（其文本中出现的股票代码，如 `$NVDA`）。设置
-`monitor.baselineDatasetId` 后，摘要中的 `monitor` 区块会统计对比状态并列出最多 50
-条发生变化的行。
+空运行的计数报告为零，均值报告为 `null`。将 `analysis.preset` 设为 `brand`、
+`complaints`、`purchase_intent`、`product_feedback`、`competitors`、
+`sentiment`、`market` 或 `news` 可运行内置分析视角而非自定义问题。
+此时摘要会按该视角逐个问题报告。每一行会列出 `sourceDomains`（其链接的域名）与
+`cashtags`（其文本中出现的股票代码，如 `$NVDA`）。设置
+`monitor.baselineDatasetId` 后，摘要中的 `monitor` 区块会统计对比状态并列出最多
+50 条发生变化的行。
 
 每条结果行还携带 `answers`，这是一个从问题 ID 到所选分类、评分或概率的扁平映射。`Flat
 answers` 数据集视图以及 CSV 或 Excel 导出会在推文旁为每个问题显示单独一列，无需在电子
@@ -153,7 +168,7 @@ answers` 数据集视图以及 CSV 或 Excel 导出会在推文旁为每个问�
 
 ## 与早期运行对比
 
-传入 `monitor.baselineDatasetId`，即使用相同分析设置的早期已完成运行的数据集 ID。每一行都会获得一个 `monitor` 对象。其状态在没有基线时为 `first_run`，早期运行没有的推文为`new_to_baseline`，早期运行已有的推文为 `unchanged` 或 `changed`。`changes` 会列出你的问题中从`previous` 变为 `current` 的每个决策变化。决策对比按分类、四舍五入后的评分等级或以 0.5为界的是非判断进行。只有判断发生明显变化时才计为已更改。多次运行之间的临界抖动会保持为不变。超过 `maxBaselineRows`（默认100,000）的基线，或来自不同设置的基线，会在收集之前停止运行并写入一条诊断行。
+传入 `monitor.baselineDatasetId`，即使用相同分析设置的早期已完成运行的数据集 ID。比较会读取该运行的行，因此即使该运行跳过了摘要也能正常工作。每一行都会获得一个 `monitor` 对象。其状态在没有基线时为 `first_run`，早期运行没有的推文为`new_to_baseline`，早期运行已有的推文为 `unchanged` 或 `changed`。`changes` 会列出你的问题中从`previous` 变为 `current` 的每个决策变化。决策对比按分类、四舍五入后的评分等级或以 0.5为界的是非判断进行。只有判断发生明显变化时才计为已更改。多次运行之间的临界抖动会保持为不变。超过 `maxBaselineRows`（默认100,000）的基线，或来自不同设置的基线，会在收集之前停止运行并写入一条诊断行。
 
 ## 任务示例
 
@@ -231,7 +246,9 @@ Actor 页面上还有更多任务，覆盖更多工作流。
 
 ### 为什么某一行返回的 `analysis.status` 是 `failed` 或 `skipped`？
 
-Actor 已收集并交付该推文，但 AI 分析未能完成。`analysis.reason` 会说明原因，例如推文及其上下文超过 `maxContextBytes` 时会显示 `context_limit`，或分析服务暂时不可用时的 `service_unavailable`。这些行不产生结果费用。可提高 `maxContextBytes`（最高 12,000）或重新运行受影响的 ID。
+Actor 已收集并交付该推文，但 AI 分析未能完成。`analysis.reason` 会说明原因。`context_limit` 表示你的上下文和目标没有给推文留出空间。`service_unavailable` 表示分析服务曾暂时不可用。这些行不产生结果费用。请缩短 `analysis.context`，或重新运行受影响的 ID。
+
+推文超过 `maxContextBytes` 时，Actor 仍会分析它。它会先截断被引用和被回复的帖子，再截断推文本身。此时 `analysis.contextAvailability.postText` 为 `truncated`。如需保留更多文本，可将 `maxContextBytes` 提高到最多 64,000。
 
 ### 分析会核实事实吗？
 

@@ -15,10 +15,12 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Framer가 Xquik 스크레이퍼를 Claude Code, Codex, Cursor 등과 함께 사용하는 방법을 6:07부터 보세요.</a>
 </td></tr></table>
 
-Xquik은 가장 완전한 X 데이터를 보유한, 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서비스입니다. X (Twitter)
-Tweet Classifier는 모든 트윗에 대해 여러분만의 라벨, 점수 & 예/아니오 질문에 답합니다. 다른 모든 Apify Actor는
-필터링이나 중복 제거 전에 요금을 부과합니다. Xquik은 전달되고, 고유하며, 필터에 맞는 결과에만 요금을 부과합니다. AI 비용은 트윗당
-가격에 포함되어 있습니다. AI 계정, 토큰, 키가 필요하지 않습니다.
+Xquik은 가장 완전한 X 데이터를 보유한, 세계에서 가장 빠르고 저렴한 X(Twitter)
+스크레이퍼 서비스입니다. X (Twitter) Tweet Classifier는 모든 트윗에 대해
+여러분만의 라벨, 점수 & 예/아니오 질문에 답합니다. 다른 Apify Actor 대부분은
+필터링이나 중복 제거 전에 요금을 부과합니다. Xquik은 전달되고, 고유하며, 필터에
+맞는 결과에만 요금을 부과합니다. AI 비용은 트윗당 가격에 포함되어 있습니다. AI
+계정, 토큰, 키가 필요하지 않습니다.
 
 여러분만의 질문으로 X(Twitter) 게시물을 분류하면서 원본 트윗 데이터는 그대로
 유지하세요. **X Tweet Classifier with AI Analysis**는 일치하는 트윗을 수집한 뒤
@@ -39,7 +41,7 @@ Tweet Classifier는 모든 트윗에 대해 여러분만의 라벨, 점수 & 예
 1. 트윗 URL, 검색어, 프로필 핸들, 트윗 ID를 추가하세요.
 2. `maxItems`와 작업에 필요한 추출 필터를 설정하세요.
 3. `analysis.questions`에 여러분의 질문을 추가하거나 `analysis.preset`으로
-   프리셋을 선택하세요.
+   프리셋을 선택하세요. 둘 다 없으면 Actor는 `sentiment` 프리셋을 실행합니다.
 4. Actor를 실행하고 데이터셋을 열어보세요.
 
 지원되는 모드는 트윗, 검색, 프로필 게시물, 리스트, 답글, 인용, 스레드를
@@ -76,9 +78,9 @@ Tweet Classifier는 모든 트윗에 대해 여러분만의 라벨, 점수 & 예
 
 프리셋: `brand`, `complaints`, `competitors`, `purchase_intent`,
 `product_feedback`, `news`, `sentiment`, `market`. `maxContextBytes`는
-기본적으로 12,000바이트입니다. 더 작은 한도는 잘라내지 않고 큰 맥락을
-건너뜁니다. `concurrency`는 기본값 16이며 1부터 16까지 받아들입니다. 각 질문
-정의는 8,000바이트 허용량 이내로 유지됩니다.
+기본적으로 64,000바이트입니다. 더 작은 한도는 긴 게시물을 한도에 맞게 자르고
+`truncated`로 표시합니다. `concurrency`는 기본값 16이며 1부터 16까지
+받아들입니다. 각 질문 정의는 8,000바이트 허용량 이내로 유지됩니다.
 
 ## 직접 작성한 텍스트 분석하기
 
@@ -106,7 +108,7 @@ AI 비용은 트윗당 가격에 포함되어 있습니다. AI 계정, 토큰, �
 
 성공적으로 분석된 트윗당 $0.0003부터이며 시작 요금은 없습니다. 가격에는 수집이
 포함됩니다. 분석 허용량은 질문 8개, 질문 정의당 8,000바이트 & 트윗당 맥락
-12,000바이트입니다. 추출 필터 & 중복 제거는 분석 전에 실행되므로 필터링되어
+64,000바이트입니다. 추출 필터 & 중복 제거는 분석 전에 실행되므로 필터링되어
 제외되거나 중복된 행은 분석되거나 과금되지 않습니다. 실패하거나 건너뛴 분석과
 진단 행에는 결과 요금이 없습니다. Apify는 플랫폼 사용량을 별도로 청구합니다.
 Pricing 탭이 이를 보여줍니다.
@@ -151,16 +153,28 @@ Pricing 탭이 이를 보여줍니다.
 
 ## 실행 요약 & 플랫 답변
 
-각 실행은 키-값 저장소에 `analysis-summary` 레코드를 작성하고 실행 보고서의
-`results.analysisSummary` 아래에 이를 반복합니다. 분석된 행, 실패한 행, 건너뛴
-행을 집계하고, 참여도를 합산하며, 모든 질문을 요약합니다. 모든 커스텀 질문은
-자체 블록을 가집니다: choice 질문의 카테고리 수 & 비율, score 질문의 평균 &
-수준별 카운트, 예/아니오 질문의 예 & 아니오 카운트. 요약은 숫자를 소수점 4자리로
-반올림합니다. 빈 실행은 0 카운트 & `null` 평균을 보고합니다. `analysis.preset`에
-`brand`, `complaints`, `purchase_intent`, `product_feedback`, `competitors`,
-`sentiment`, `market`, `news`를 전달하면 커스텀 질문 대신 내장 렌즈를 실행할 수
-있습니다. 그러면 요약은 질문별로 해당 렌즈를 보고합니다. 모든 행은 링크된 호스트
-이름인 `sourceDomains` & 텍스트에서 발견된 `$NVDA` 같은 `cashtags`를 나열합니다.
+실행은 다음 4가지 경우에 키-값 저장소에 `analysis-summary` 레코드를 작성합니다.
+
+- 문제가 생겼거나 규모가 큰 경우.
+- 시리즈의 첫 실행으로 `baselineDatasetId` 없이 `monitor`를 설정한 경우.
+- 비교에서 변경되었거나, 새롭거나, 비교할 수 없는 트윗을 찾은 경우.
+- `alwaysSaveRunRecords`가 켜진 경우.
+
+다른 실행은 이 레코드를 건너뜁니다. 대신 상태 메시지에 가장 많은 답변이
+표시됩니다. 예: `Top sentiment: positive in 3 of 5 results.` 변경이 없는 비교는
+`No change since the earlier run.`을 표시합니다. 문제가 생긴 실행이나 큰 실행은
+`run-report`도 작성합니다. `alwaysSaveRunRecords`가 켜진 실행도 마찬가지입니다.
+`run-report`는 `results.analysisSummary` 아래에 요약을 반복합니다.
+
+요약은 분석된 행, 실패한 행, 건너뛴 행을 집계하고, 참여도를 합산하며, 모든
+질문을 요약합니다. 모든 커스텀 질문은 자체 블록을 가집니다: choice 질문의
+카테고리 수 & 비율, score 질문의 평균 & 수준별 카운트, 예/아니오 질문의 예 &
+아니오 카운트. 요약은 숫자를 소수점 4자리로 반올림합니다. 빈 실행은 0 카운트 &
+`null` 평균을 보고합니다. `analysis.preset`에 `brand`, `complaints`,
+`purchase_intent`, `product_feedback`, `competitors`, `sentiment`, `market`,
+`news`를 전달하면 커스텀 질문 대신 내장 렌즈를 실행할 수 있습니다. 그러면 요약은
+질문별로 해당 렌즈를 보고합니다. 모든 행은 링크된 호스트 이름인 `sourceDomains`
+& 텍스트에서 발견된 `$NVDA` 같은 `cashtags`를 나열합니다.
 `monitor.baselineDatasetId`가 설정된 경우 요약의 `monitor` 블록은 비교 상태를
 집계하고 변경된 행을 최대 50개까지 나열합니다.
 
@@ -171,13 +185,17 @@ Pricing 탭이 이를 보여줍니다.
 
 ## 이전 실행과 비교하기
 
-동일한 분석 설정으로 완료된 이전 실행의 데이터셋 ID인 `monitor.baselineDatasetId`를 전달하세요. 그러면 모든 행이
-`monitor` 객체를 얻습니다. 그 상태는 기준선이 없으면 `first_run`, 이전 실행에 없던 트윗이면
-`new_to_baseline`, 이전 실행에 있던 트윗이면 `unchanged`나 `changed`입니다. `changes`는
-`previous`에서 `current`로 바뀐 여러분의 질문에 대한 각 판단을 나열합니다. 판단은 카테고리, 반올림된 점수 수준, 또는 0.5
-기준의 예/아니오로 비교됩니다. 판단은 분명하게 바뀐 경우에만 변경된 것으로 집계됩니다. 실행 간의 근소한 흔들림은 변경되지 않은 것으로
-유지됩니다. `maxBaselineRows`(기본값 100,000)를 초과하거나 다른 설정에서 나온 기준선은 수집 전에 실행을 중단시키고 진단
-행을 남깁니다.
+동일한 분석 설정으로 완료된 이전 실행의 데이터셋 ID인
+`monitor.baselineDatasetId`를 전달하세요. 비교는 그 실행의 행을 읽으므로, 그
+실행이 요약을 건너뛰었어도 작동합니다. 그러면 모든 행이 `monitor` 객체를
+얻습니다. 그 상태는 기준선이 없으면 `first_run`, 이전 실행에 없던 트윗이면
+`new_to_baseline`, 이전 실행에 있던 트윗이면 `unchanged`나 `changed`입니다.
+`changes`는 `previous`에서 `current`로 바뀐 여러분의 질문에 대한 각 판단을
+나열합니다. 판단은 카테고리, 반올림된 점수 수준, 또는 0.5 기준의 예/아니오로
+비교됩니다. 판단은 분명하게 바뀐 경우에만 변경된 것으로 집계됩니다. 실행 간의
+근소한 흔들림은 변경되지 않은 것으로 유지됩니다. `maxBaselineRows`(기본값
+100,000)를 초과하거나 다른 설정에서 나온 기준선은 수집 전에 실행을 중단시키고
+진단 행을 남깁니다.
 
 ## 태스크 예시
 
@@ -268,10 +286,16 @@ Pricing 탭이 이를 보여줍니다.
 
 ### 왜 어떤 행은 `analysis.status`가 `failed`나 `skipped`로 돌아왔나요?
 
-Actor가 트윗을 수집해 전달했지만 AI 분석이 완료되지 않았습니다. `analysis.reason`은 트윗과 그 맥락이
-`maxContextBytes`를 초과할 때의 `context_limit`이나 분석 서비스를 잠시 사용할 수 없을 때의
-`service_unavailable` 같은 원인을 나타냅니다. 이런 행에는 결과 요금이 없습니다. `maxContextBytes`를 최대
-12,000까지 높이거나 해당 ID를 다시 실행하세요.
+Actor가 트윗을 수집해 전달했지만 AI 분석이 완료되지 않았습니다.
+`analysis.reason`은 원인을 나타냅니다. `context_limit`은 맥락과 대상이 트윗을
+넣을 공간을 남기지 않았다는 뜻입니다. `service_unavailable`은 분석 서비스를 잠시
+사용할 수 없었다는 뜻입니다. 이런 행에는 결과 요금이 없습니다.
+`analysis.context`를 줄이거나 해당 ID를 다시 실행하세요.
+
+Actor는 `maxContextBytes`보다 긴 트윗도 분석합니다. 먼저 인용된 게시물과 답글
+대상 게시물을 자르고, 그다음 트윗을 자릅니다. 이때
+`analysis.contextAvailability.postText`는 `truncated`가 됩니다. 더 많은 텍스트를
+유지하려면 `maxContextBytes`를 최대 64,000까지 높이세요.
 
 ### 분석이 사실을 검증하나요?
 

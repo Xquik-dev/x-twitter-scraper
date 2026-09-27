@@ -18,7 +18,7 @@
 Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher
 au monde, avec les données X les plus complètes. X Tweet Scraper collecte
 les tweets, réponses, profils, lists et recherches avec plus de 50 filtres.
-Tous les autres Actors Apify facturent avant de filtrer ou de dédupliquer.
+La plupart des autres Actors Apify facturent avant de filtrer ou de dédupliquer.
 Xquik ne facture que les résultats livrés, uniques et conformes aux filtres.
 
 Scrapez des tweets X (Twitter) publics pour **à partir de $0.00015 par
@@ -172,13 +172,15 @@ séparément l'usage de sa plateforme. Xquik applique une facturation par
 ligne de donnée livrée. Les diagnostics sont gratuits dans la sortie
 `diagnostics`.
 
-Aucun abonnement Xquik ne s'applique. Aucun frais de démarrage ou de
-requête séparé ne s'applique. Chaque run écrit aussi un enregistrement
-`run-report` avec `estimatedChargeUsd` calculé à partir du prix
-pay-per-event en temps réel qu'Apify expose à l'Actor. Chaque issue de
-run écrit `run-report`, y compris les sorties sans entrée et avec entrée
-invalide. Les rapports de run séparent les lignes de donnée dans
-`realRows` et les diagnostics dans `diagnosticRows`.
+Aucun abonnement Xquik ne s'applique. Aucun frais de démarrage ou de requête
+séparé ne s'applique. Le texte de statut indique pourquoi le run s'est arrêté.
+Il compte aussi les résultats facturés et les cibles lues. Un run avec un
+problème, ou un gros run, écrit aussi un enregistrement `run-report`. Son
+`estimatedChargeUsd` utilise le prix pay-per-event en temps réel qu'Apify expose
+à l'Actor. Les runs avec un problème écrivent toujours `run-report`. Cela inclut
+les sorties sans entrée et avec entrée invalide. Un petit run sans problème
+l'omet et économise de l'usage Apify. Les rapports de run séparent les lignes de
+donnée dans `realRows` et les diagnostics dans `diagnosticRows`.
 
 Comprenez les résultats vides avant de dépenser sur un autre run. L'objet
 `filtering` des rapports et des diagnostics finaux compte les lignes retirées
@@ -208,23 +210,31 @@ cause avec ses propres `message`, `retryable` et `nextAction`. Les causes sont
 `target_failed`, `pagination_safety_limit`, `reply_reach` et `deadline_reached`.
 Le run est `retryable` dès qu'une cause l'est.
 
-Les cibles protégées ou manquantes comptent comme des échecs, y compris les runs
-avec des résultats valides. Une recherche que X ne peut pas exécuter compte
-aussi. X.com affiche « Something went wrong » pour une telle recherche. Le run
-l'arrête aussitôt, sans nouvelle tentative. Les likes que X masque comptent
-aussi. X montre qui a aimé un post uniquement à son auteur. Il montre les posts
-qu'un compte a aimés uniquement à ce compte. Quand tous les échecs concernent
-des cibles indisponibles, les diagnostics fixent `retryable: false`. Vérifiez
-les URL ou noms d'utilisateur cibles et choisissez des comptes publics
-disponibles. Affinez une recherche que X ne peut pas exécuter ou changez ses
-filtres. Récupérez les personnes ayant reposté, les réponses ou les posts à la
-place des likes masqués. Les autres échecs conservent des conseils de nouvelle
-tentative pour les cibles inachevées.
+Une cible manquante ou protégée n'est pas un échec. X n'a rien à lire à cet
+endroit. Le run lit donc toutes les autres cibles jusqu'au bout. Il indique
+`outcome: "complete"`. La raison de fin vient des cibles lues, comme
+`source_exhausted`. `failedSubtargets` exclut ces cibles. Le texte de statut et
+un diagnostic `complete` gratuit les comptent. Un run sans autres lignes écrit
+plutôt un diagnostic `zero-output`.
+
+Une recherche que X ne peut pas exécuter compte comme un échec. X.com affiche «
+Something went wrong » pour une telle recherche. Le run l'arrête aussitôt, sans
+nouvelle tentative. Les likes que X masque comptent aussi. X montre qui a aimé
+un post uniquement à son auteur. Il montre les posts qu'un compte a aimés
+uniquement à ce compte. Quand tous les échecs concernent des cibles
+indisponibles, les diagnostics fixent `retryable: false`. Vérifiez les URL ou
+noms d'utilisateur cibles et choisissez des comptes publics disponibles. Affinez
+une recherche que X ne peut pas exécuter ou changez ses filtres. Récupérez les
+personnes ayant reposté, les réponses ou les posts à la place des likes masqués.
+Les autres échecs conservent des conseils de nouvelle tentative pour les cibles
+inachevées.
 
 Le diagnostic nomme ces cibles dans `unavailableTargets`. Chaque entrée contient
-la `target` telle que vous l'avez saisie et une `reason` : `not_found`,
-`protected`, `search_unavailable` ou `likes_hidden`. La liste contient jusqu'à
-100 entrées. Retirez-les de l'entrée pour obtenir un run complet.
+la `target` telle que vous l'avez saisie. Elle a aussi une `reason` et une
+`nextAction`. La raison est `not_found`, `protected`, `search_unavailable` ou
+`likes_hidden`. Une entrée de recherche peut aussi avoir un `fix`, comme
+l'opérateur à retirer. La liste contient jusqu'à 100 entrées. Retirez-les de
+l'entrée.
 
 `completionReason: "pagination_safety_limit"` n'est pas un échec de lecture. Le
 run a conservé ses lignes valides, puis a terminé une cible qui ne renvoyait
@@ -579,6 +589,11 @@ Le formulaire visuel les étiquette comme alias Legacy.
 | `filter:replies`             | `filter:replies`           | Uniquement les tweets de réponse     |
 | `filter:quote`                | `filter:quote`             | Uniquement les tweets citation       |
 | `filter:blue_verified`        | `filter:blue_verified`     | Uniquement les utilisateurs Premium  |
+
+X ne recherche plus avec `filter:vine`, `filter:consumer_video`,
+`filter:pro_video`, `filter:news` ou `retweets_of:`. Une recherche avec l'un
+d'eux s'arrête aussitôt. Elle écrit un diagnostic gratuit qui indique la
+correction. Limitez chaque requête à 512 caractères, le maximum que X recherche.
 
 Les fenêtres de date utilisent une borne inférieure inclusive et une
 borne supérieure exclusive. L'Actor vérifie les deux bornes avant

@@ -17,11 +17,11 @@
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. X (Twitter) Tweet Classifier, her tweet'te kendi
-etiketlerini, puanlarını ve evet/hayır sorularını yanıtlar. Diğer tüm Apify
-Actor'ları filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca
-teslim edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır. Yapay zekâ
-maliyetleri tweet başına fiyata dahil. Yapay zekâ hesabına, token'a veya
-anahtara ihtiyacın yok.
+etiketlerini, puanlarını ve evet/hayır sorularını yanıtlar. Diğer Apify
+Actor'larının çoğu filtreleme veya tekilleştirmeden önce ücret alır. Xquik
+yalnızca teslim edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
+Yapay zekâ maliyetleri tweet başına fiyata dahil. Yapay zekâ hesabına, token'a
+veya anahtara ihtiyacın yok.
 
 X (Twitter) gönderilerini kendi sorularınla sınıflandır ve orijinal tweet
 verisini sakla. **X Tweet Classifier with AI Analysis**, eşleşen tweet'leri
@@ -43,7 +43,8 @@ kapsar. Özel sorular bunların yerini alır.
    ekle.
 2. `maxItems`'i ve görevinin ihtiyaç duyduğu çıkarma filtrelerini ayarla.
 3. Sorularını `analysis.questions` altına ekle, ya da `analysis.preset` ile
-   hazır bir ayar seç.
+   hazır bir ayar seç. İkisi de yoksa Actor `sentiment` hazır ayarını
+   çalıştırır.
 4. Actor'ı çalıştır ve veri kümesini aç.
 
 Desteklenen modlar tweet'leri, aramaları, profil gönderilerini, Listeleri,
@@ -81,9 +82,10 @@ Benzersiz ID'leri, talimatları ve sürümleri olan 1-8 soru sağla.
 
 Hazır ayarlar: `brand`, `complaints`, `competitors`, `purchase_intent`,
 `product_feedback`, `news`, `sentiment` ve `market`. `maxContextBytes`
-varsayılan olarak 12.000 bayttır. Daha küçük bir sınır, kesme yapmadan aşırı
-büyük bağlamı atlar. `concurrency` varsayılan olarak 16'dır ve 1 ile 16 arasını
-kabul eder. Her soru tanımı 8.000 baytlık bir ödenek içinde kalır.
+varsayılan olarak 64.000 bayttır. Daha küçük bir sınır uzun gönderileri sığacak
+şekilde kısaltır ve `truncated` olarak işaretler. `concurrency` varsayılan
+olarak 16'dır ve 1 ile 16 arasını kabul eder. Her soru tanımı 8.000 baytlık bir
+ödenek içinde kalır.
 
 ## Kendi metnini analiz et
 
@@ -113,7 +115,7 @@ veya anahtara ihtiyacın yok.
 
 Başlangıç ücreti olmadan, başarıyla analiz edilen tweet başına $0.0003'ten
 başlar. Fiyata toplama dahil. Analiz ödeneği 8 soru, soru tanımı başına 8.000
-bayt & tweet başına 12.000 bayt bağlamdır. Çıkarma filtreleri ve tekilleştirme
+bayt & tweet başına 64.000 bayt bağlamdır. Çıkarma filtreleri ve tekilleştirme
 analizden önce çalışır, bu yüzden filtrelenmiş ve tekrarlanan satırlar hiçbir
 zaman analiz edilmez veya ücretlendirilmez. Başarısız ve atlanan analizler ile
 tanılama satırlarının sonuç ücreti yoktur. Apify, platform kullanımını ayrıca
@@ -161,20 +163,34 @@ satırları, ücretlendirilen analizleri ve bekleyen ücretleri ayırır.
 
 ## Çalıştırma özeti ve düz yanıtlar
 
-Her çalıştırma, anahtar-değer deposuna bir `analysis-summary` kaydı yazar ve
-çalıştırma raporunda `results.analysisSummary` altında tekrarlar. Analiz edilen,
-başarısız ve atlanan satırları sayar, etkileşimi toplar ve her soruyu özetler.
-Her özel soru kendi bloğunu alır: choice soruları için kategori sayıları ve
-payları, score soruları için ortalama ve seviye sayıları, evet/hayır soruları
-için evet ve hayır sayıları. Özet, sayıları 4 ondalık basamağa yuvarlar. Boş bir
-çalıştırma sıfır sayım & `null` ortalama bildirir. Özel sorular yerine yerleşik
-bir mercek çalıştırmak için `analysis.preset`'i `brand`, `complaints`,
-`purchase_intent`, `product_feedback`, `competitors`, `sentiment`, `market` veya
-`news` ile geçir. Özet daha sonra bu merceği soru başına bildirir. Her satır,
-bağlantı verdiği ana bilgisayar adlarını `sourceDomains`'te & metninde bulunan
-`$NVDA` gibi `cashtags`'i listeler. `monitor.baselineDatasetId` ayarlıyken
-özetin `monitor` bloğu karşılaştırma durumlarını sayar & 50'ye kadar değişen
-satırı listeler.
+Bir çalıştırma, 4 durumda anahtar-değer deposuna bir `analysis-summary` kaydı
+yazar:
+
+- Bir sorun yaşar veya büyüktür.
+- Bir serinin ilk çalıştırması olarak `baselineDatasetId` olmadan `monitor`
+  ayarlar.
+- Karşılaştırması değişen, yeni veya karşılaştırılamayan bir tweet bulur.
+- `alwaysSaveRunRecords` açıktır.
+
+Diğer çalıştırmalar bu kaydı atlar. Durum metinleri en sık yanıtı belirtir,
+örneğin `Top sentiment: positive in 3 of 5 results.` Değişiklik bulmayan bir
+karşılaştırma `No change since the earlier run.` yazar. Sorun yaşayan veya büyük
+bir çalıştırma ayrıca `run-report` yazar. `alwaysSaveRunRecords` açık olan bir
+çalıştırma da yazar. `run-report`, özeti `results.analysisSummary` altında
+tekrarlar.
+
+Özet, analiz edilen, başarısız ve atlanan satırları sayar, etkileşimi toplar ve
+her soruyu özetler. Her özel soru kendi bloğunu alır: choice soruları için
+kategori sayıları ve payları, score soruları için ortalama ve seviye sayıları,
+evet/hayır soruları için evet ve hayır sayıları. Özet, sayıları 4 ondalık
+basamağa yuvarlar. Boş bir çalıştırma sıfır sayım & `null` ortalama bildirir.
+Özel sorular yerine yerleşik bir mercek çalıştırmak için `analysis.preset`'i
+`brand`, `complaints`, `purchase_intent`, `product_feedback`, `competitors`,
+`sentiment`, `market` veya `news` ile geçir. Özet daha sonra bu merceği soru
+başına bildirir. Her satır, bağlantı verdiği ana bilgisayar adlarını
+`sourceDomains`'te & metninde bulunan `$NVDA` gibi `cashtags`'i listeler.
+`monitor.baselineDatasetId` ayarlıyken özetin `monitor` bloğu karşılaştırma
+durumlarını sayar & 50'ye kadar değişen satırı listeler.
 
 Her sonuç satırı ayrıca `answers`'ı da taşır. Bu, soru ID'sinden seçilen
 kategoriye, puana veya olasılığa düz bir eşlemedir. `Flat answers` veri kümesi
@@ -185,16 +201,18 @@ Başarısız ve atlanan satırlar boş bir eşleme taşır.
 ## Önceki bir çalıştırmayla karşılaştır
 
 Aynı analiz ayarlarına sahip tamamlanmış önceki bir çalıştırmanın veri kümesi
-ID'si olan `monitor.baselineDatasetId`'yi geçir. Böylece her satır bir `monitor`
-nesnesi kazanır. Durumu, temel değer yoksa `first_run`, önceki çalıştırmada
-bulunmayan tweet'ler için `new_to_baseline` & bulunan tweet'ler için `unchanged`
-veya `changed` olur. `changes`, `previous`'tan `current`'a taşınan sorularından
-herhangi biri için hareket eden her kararı listeler. Kararlar kategoriye,
-yuvarlanmış puan seviyesine veya 0,5'te evet/hayır'a göre karşılaştırılır. Bir
-karar yalnızca belirgin biçimde değiştiğinde değişmiş sayılır. Çalıştırmalar
-arasındaki yakın-berabere titremeler değişmemiş kalır. `maxBaselineRows`'un
-(varsayılan 100.000) üzerindeki veya farklı ayarlardan gelen temel değerler,
-toplamadan önce bir tanılama satırıyla çalıştırmayı durdurur.
+ID'si olan `monitor.baselineDatasetId`'yi geçir. Karşılaştırma o çalıştırmanın
+satırlarını okur. Bu yüzden o çalıştırma özetini atlamış olsa bile çalışır.
+Böylece her satır bir `monitor` nesnesi kazanır. Durumu, temel değer yoksa
+`first_run`, önceki çalıştırmada bulunmayan tweet'ler için `new_to_baseline` &
+bulunan tweet'ler için `unchanged` veya `changed` olur. `changes`,
+`previous`'tan `current`'a taşınan sorularından herhangi biri için hareket eden
+her kararı listeler. Kararlar kategoriye, yuvarlanmış puan seviyesine veya
+0,5'te evet/hayır'a göre karşılaştırılır. Bir karar yalnızca belirgin biçimde
+değiştiğinde değişmiş sayılır. Çalıştırmalar arasındaki yakın-berabere
+titremeler değişmemiş kalır. `maxBaselineRows`'un (varsayılan 100.000)
+üzerindeki veya farklı ayarlardan gelen temel değerler, toplamadan önce bir
+tanılama satırıyla çalıştırmayı durdurur.
 
 ## Görev örnekleri
 
@@ -297,11 +315,15 @@ içinde geliştirdiğinde hangi ifadenin bir sonucu ürettiğini anlayabilirsin.
 ### Bir satır neden `analysis.status`'u `failed` veya `skipped` olarak döndü?
 
 Actor tweet'i topladı & teslim etti, ancak yapay zeka analizi tamamlanmadı.
-`analysis.reason`, tweet ve bağlamı `maxContextBytes`'ı aştığında
-`context_limit` veya analiz hizmeti kısa süre kullanılamadığında
-`service_unavailable` gibi nedeni adlandırır. Bu satırların sonuç ücreti yoktur.
-`maxContextBytes`'ı (12.000'e kadar) artır veya etkilenen ID'leri yeniden
-çalıştır.
+`analysis.reason` nedeni adlandırır. `context_limit`, bağlamının ve hedeflerinin
+tweet'e yer bırakmadığı anlamına gelir. `service_unavailable`, analiz hizmetinin
+kısa süre kullanılamadığı anlamına gelir. Bu satırların sonuç ücreti yoktur.
+`analysis.context` alanını kısalt veya etkilenen ID'leri yeniden çalıştır.
+
+Actor, `maxContextBytes` sınırından uzun bir tweet'i yine de analiz eder. Önce
+alıntılanan ve yanıtlanan gönderileri, sonra tweet'i kısaltır. Bu durumda
+`analysis.contextAvailability.postText` değeri `truncated` olur. Daha fazla
+metin tutmak için `maxContextBytes` değerini 64.000'e kadar artır.
 
 ### Analiz gerçekleri doğrular mı?
 

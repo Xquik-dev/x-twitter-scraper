@@ -17,9 +17,9 @@
 
 Xquik è il servizio di scraping X (Twitter) più veloce ed economico al mondo,
 con i dati X più completi. X (Twitter) Tweet Classifier risponde con le tue
-etichette, punteggi e domande sì/no su ogni tweet. Ogni altro Actor Apify
-addebita i costi prima di filtrare o deduplicare. Xquik addebita solo i
-risultati consegnati, unici e conformi ai filtri. I costi dell'IA sono inclusi
+etichette, punteggi e domande sì/no su ogni tweet. La maggior parte degli altri
+Actor Apify addebita costi prima di filtrare o deduplicare. Xquik addebita solo
+i risultati consegnati, unici e conformi ai filtri. I costi dell'IA sono inclusi
 nel prezzo per tweet. Non ti servono account IA, token o chiavi.
 
 Classifica i post X (Twitter) con le tue domande e mantieni i dati originali del
@@ -42,8 +42,9 @@ mercato. Le domande personalizzate li sostituiscono.
 1. Aggiungi URL di tweet, termini di ricerca, handle di profilo o ID di
    tweet.
 2. Imposta `maxItems` e i filtri di estrazione necessari al tuo task.
-3. Aggiungi le tue domande in `analysis.questions`, oppure scegli un preset
-   con `analysis.preset`.
+3. Aggiungi le tue domande in `analysis.questions`, oppure scegli un preset con
+   `analysis.preset`. Senza nessuno dei due, l'Actor esegue il preset
+   `sentiment`.
 4. Esegui l'Actor e apri il dataset.
 
 Le modalità supportate raccolgono tweet, ricerche, post di profilo, List,
@@ -80,10 +81,10 @@ Fornisci 1-8 domande con ID, istruzioni e versioni univoci.
 
 Preset: `brand`, `complaints`, `competitors`, `purchase_intent`,
 `product_feedback`, `news`, `sentiment` e `market`. `maxContextBytes` è
-impostato di default a 12.000 byte. Un limite più piccolo salta il contesto
-troppo grande senza troncarlo. `concurrency` è impostato di default a 16 e
-accetta valori da 1 a 16. Ogni definizione di domanda resta entro una soglia di
-8.000 byte.
+impostato di default a 64.000 byte. Un limite più piccolo taglia i post lunghi &
+li segna come `truncated`. `concurrency` è impostato di default a 16 e accetta
+valori da 1 a 16. Ogni definizione di domanda resta entro una soglia di 8.000
+byte.
 
 ## Analizza il tuo testo
 
@@ -112,7 +113,7 @@ token o chiavi.
 
 Da $0.0003 per tweet analizzato con successo, senza costo iniziale. Il prezzo
 include la raccolta. La soglia per l'analisi è di 8 domande, 8.000 byte per
-definizione di domanda & 12.000 byte di contesto per tweet. I filtri di
+definizione di domanda & 64.000 byte di contesto per tweet. I filtri di
 estrazione e la deduplicazione vengono eseguiti prima dell'analisi, quindi le
 righe filtrate o duplicate non vengono mai analizzate né addebitate. Le analisi
 fallite o saltate e le righe diagnostiche non comportano alcun addebito sul
@@ -161,20 +162,34 @@ separa le righe raccolte, le analisi addebitate e gli addebiti in sospeso.
 
 ## Riepilogo dell'esecuzione e risposte in formato piatto
 
-Ogni esecuzione scrive un record `analysis-summary` nel proprio key-value store
-e lo ripete sotto `results.analysisSummary` nel report dell'esecuzione. Conta le
-righe analizzate, fallite e saltate, somma l'engagement e riassume ogni domanda.
-Ogni domanda personalizzata ottiene il proprio blocco: conteggi e quote per
-categoria per le domande a scelta, media e conteggi per livello per le domande a
-punteggio, conteggi di sì e no per le domande sì/no. Il riepilogo arrotonda i
-numeri a 4 decimali. Un'esecuzione vuota riporta conteggi zero & medie `null`.
-Passa `analysis.preset` con `brand`, `complaints`, `purchase_intent`,
-`product_feedback`, `competitors`, `sentiment`, `market` o `news` per eseguire
-una lente integrata al posto di domande personalizzate. Il riepilogo riporta poi
-quella lente per domanda. Ogni riga elenca `sourceDomains`, gli host a cui
-rimanda, & i `cashtags` come `$NVDA` trovati nel testo. Con
-`monitor.baselineDatasetId` impostato, il blocco `monitor` del riepilogo conta
-gli stati di confronto & elenca fino a 50 righe modificate.
+Un'esecuzione scrive un record `analysis-summary` nel proprio key-value store in
+4 casi:
+
+- Incontra un problema o è grande.
+- Imposta `monitor` senza `baselineDatasetId`, come prima esecuzione di una
+  serie.
+- Il suo confronto trova un tweet cambiato, nuovo o non confrontabile.
+- Ha `alwaysSaveRunRecords` attivo.
+
+Le altre esecuzioni saltano il record. Il loro messaggio di stato indica la
+risposta principale, come `Top sentiment: positive in 3 of 5 results.` Un
+confronto senza cambiamenti riporta `No change since the earlier run.`
+Un'esecuzione con un problema, o un'esecuzione grande, scrive anche
+`run-report`. Lo fa anche un'esecuzione con `alwaysSaveRunRecords` attivo.
+`run-report` ripete il riepilogo sotto `results.analysisSummary`.
+
+Il riepilogo conta le righe analizzate, fallite e saltate, somma l'engagement e
+riassume ogni domanda. Ogni domanda personalizzata ottiene il proprio blocco:
+conteggi e quote per categoria per le domande a scelta, media e conteggi per
+livello per le domande a punteggio, conteggi di sì e no per le domande sì/no. Il
+riepilogo arrotonda i numeri a 4 decimali. Un'esecuzione vuota riporta conteggi
+zero & medie `null`. Passa `analysis.preset` con `brand`, `complaints`,
+`purchase_intent`, `product_feedback`, `competitors`, `sentiment`, `market` o
+`news` per eseguire una lente integrata al posto di domande personalizzate. Il
+riepilogo riporta poi quella lente per domanda. Ogni riga elenca
+`sourceDomains`, gli host a cui rimanda, & i `cashtags` come `$NVDA` trovati nel
+testo. Con `monitor.baselineDatasetId` impostato, il blocco `monitor` del
+riepilogo conta gli stati di confronto & elenca fino a 50 righe modificate.
 
 Ogni riga di risultato include anche `answers`, una mappa piatta dall'ID
 della domanda alla categoria, al punteggio o alla probabilità scelti. La
@@ -185,16 +200,18 @@ il parsing del JSON. Le righe fallite o saltate contengono una mappa vuota.
 ## Confronto con un'esecuzione precedente
 
 Passa `monitor.baselineDatasetId`, l'ID del dataset di un'esecuzione precedente
-completata con le stesse impostazioni di analisi. Ogni riga ottiene quindi un
-oggetto `monitor`. Il suo stato è `first_run` senza baseline, `new_to_baseline`
-per i tweet che l'esecuzione precedente non aveva, & `unchanged` o `changed` per
-i tweet che aveva già. `changes` elenca ogni decisione per una qualsiasi delle
-tue domande passata da `previous` a `current`. Le decisioni si confrontano per
-categoria, livello di punteggio arrotondato, o sì/no a 0,5. Una decisione conta
-come cambiata solo quando si sposta in modo netto. Le oscillazioni minime tra
-esecuzioni restano invariate. Le baseline sopra `maxBaselineRows` (predefinito
-100.000) o con impostazioni diverse interrompono l'esecuzione prima della
-raccolta con una riga diagnostica.
+completata con le stesse impostazioni di analisi. Il confronto legge le righe di
+quell'esecuzione. Così funziona anche se quell'esecuzione ha saltato il
+riepilogo. Ogni riga ottiene quindi un oggetto `monitor`. Il suo stato è
+`first_run` senza baseline, `new_to_baseline` per i tweet che l'esecuzione
+precedente non aveva, & `unchanged` o `changed` per i tweet che aveva già.
+`changes` elenca ogni decisione per una qualsiasi delle tue domande passata da
+`previous` a `current`. Le decisioni si confrontano per categoria, livello di
+punteggio arrotondato, o sì/no a 0,5. Una decisione conta come cambiata solo
+quando si sposta in modo netto. Le oscillazioni minime tra esecuzioni restano
+invariate. Le baseline sopra `maxBaselineRows` (predefinito 100.000) o con
+impostazioni diverse interrompono l'esecuzione prima della raccolta con una riga
+diagnostica.
 
 ## Esempi di task
 
@@ -294,11 +311,16 @@ risultato.
 ### Perché una riga è tornata con `analysis.status` su `failed` o `skipped`?
 
 L'Actor ha raccolto & consegnato il tweet, ma l'analisi IA non si è completata.
-`analysis.reason` indica la causa, come `context_limit` quando il tweet e il suo
-contesto superano `maxContextBytes`, oppure `service_unavailable` quando il
-servizio di analisi è momentaneamente non disponibile. Queste righe non
-comportano alcun addebito sul risultato. Aumenta `maxContextBytes` (fino a
-12.000) o riesegui gli ID interessati.
+`analysis.reason` indica la causa. `context_limit` significa che il tuo contesto
+& i tuoi target non lasciano spazio al tweet. `service_unavailable` significa
+che il servizio di analisi era momentaneamente non disponibile. Queste righe non
+comportano alcun addebito sul risultato. Accorcia `analysis.context` o riesegui
+gli ID interessati.
+
+L'Actor analizza comunque un tweet più lungo di `maxContextBytes`. Taglia prima
+i post citati & quelli a cui risponde, poi il tweet.
+`analysis.contextAvailability.postText` diventa quindi `truncated`. Aumenta
+`maxContextBytes` fino a 64.000 per conservare più testo.
 
 ### L'analisi verifica i fatti?
 

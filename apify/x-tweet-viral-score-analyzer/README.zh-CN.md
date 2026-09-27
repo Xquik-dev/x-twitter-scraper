@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何搭配 Claude Code、Codex、Cursor 等使用 Xquik 抓取工具，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X数据。X Tweet Viral Score Analyzer 为每条推文添加 Viral Score 估算值与一个结论。其他所有 Apify Actor 都在过滤或去重之前就收费。Xquik 只为交付的、唯一的、符合过滤条件的结果收费。AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
+Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X数据。X Tweet Viral Score Analyzer 为每条推文添加 Viral Score 估算值与一个结论。大多数其他 Apify Actor 都会在过滤或去重之前收费。Xquik 只为交付的、唯一的、符合过滤条件的结果收费。AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
 
 了解推文为何传播或遇冷，并保留原始推文数据。
 **X Tweet Viral Score Analyzer with AI** 收集匹配的推文。AI 为每条帖子的
@@ -187,7 +187,7 @@ Actor 将每个 Viral Score 与实际结果对比。
 AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
 
 每成功分析一条推文起价 $0.0003，无起步费用。价格已包含收集费用与 Viral Score。
-分析额度为 8 个问题、每个问题定义 8,000 字节、每条推文 12,000 字节上下文。
+分析额度为 8 个问题、每个问题定义 8,000 字节、每条推文 64,000 字节上下文。
 提取过滤与去重在分析之前运行，因此被过滤掉的行与重复行永远不会被分析或收费。
 失败、跳过的分析以及诊断行不产生结果费用。Apify 会单独计算平台使用费。
 Pricing 标签页会显示该费用。
@@ -238,16 +238,18 @@ Pricing 标签页会显示该费用。
 
 ## 运行摘要与扁平化答案
 
-每次运行都会向其 key-value store 写入一条 `analysis-summary` 记录，并在运行
-报告中的 `results.analysisSummary` 下重复该记录。它统计已分析、失败与跳过的
-行数，汇总互动数据，并对每个问题作出总结。其 `viral` 块报告 `averageScore`、
+每次运行都会向其 key-value store 写入一条 `analysis-summary` 记录。
+遇到问题的运行或大型运行还会写入 `run-report`。`run-report` 会在
+`results.analysisSummary` 下重复该摘要。摘要统计已分析、失败与跳过的行数，
+汇总互动数据，并对每个问题作出总结。其 `viral` 块报告 `averageScore`、
 每种结论的数量，以及 Actor 已评分或未评分的行数。同一个块还包含上文介绍的
-`calibration`、`accounts` 与 `leaderboard`。分数类问题报告均值与按互动加权的
-均值。`reaction` 拆分显示每种反应下有多少条推文，`top` 列出每种反应下互动
-最多的三条推文。空运行报告零计数，平均值为 `null`。每一行都列出
-`sourceDomains`，即其链接指向的主机名，以及文本中发现的 `cashtags`，例如
-`$NVDA`。设置了 `monitor.baselineDatasetId` 时，摘要的 `monitor` 块统计比较
-状态，并列出最多 50 行变化。
+`calibration`、`accounts` 与 `leaderboard`。
+分数类问题报告均值与按互动加权的均值。`reaction`
+拆分显示每种反应下有多少条推文，`top` 列出每种反应下互动最多的三条推文。
+空运行报告零计数，平均值为 `null`。每一行都列出 `sourceDomains`，
+即其链接指向的主机名，以及文本中发现的 `cashtags`，例如 `$NVDA`。设置了
+`monitor.baselineDatasetId` 时，摘要的 `monitor` 块统计比较状态，并列出最多 50
+行变化。
 
 每条结果行还带有 `viralScore`、`viralVerdict`、`viralAlgorithmScore`、
 `viralActualEngagementRate` 与 `answers`，后者是从问题 ID 到所选类别、分数或
@@ -294,7 +296,9 @@ Pricing 标签页会显示该费用。
 
 ### 为什么某一行返回的 `analysis.status` 是 `failed` 或 `skipped`？
 
-Actor 已收集并交付该推文，但 AI 分析未能完成。`analysis.reason` 会说明原因，例如推文及其上下文超过 `maxContextBytes` 时的 `context_limit`，或分析服务暂时不可用时的 `service_unavailable`。这些行不产生结果费用，也没有分数。提高`maxContextBytes`（最多 12,000）或重新运行受影响的 ID。
+Actor 已收集并交付该推文，但 AI 分析未能完成。`analysis.reason` 会说明原因。`context_limit` 表示你的上下文和目标没有给推文留出空间。`service_unavailable` 表示分析服务曾暂时不可用。这些行不产生结果费用，也没有分数。请缩短 `analysis.context`，或重新运行受影响的 ID。
+
+推文超过 `maxContextBytes` 时，Actor 仍会分析它。它会先截断被引用和被回复的帖子，再截断推文本身。此时 `analysis.contextAvailability.postText` 为 `truncated`。如需保留更多文本，可将 `maxContextBytes` 提高到最多 64,000。
 
 ### 分析会核实事实吗？
 

@@ -17,9 +17,9 @@
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. X Media Downloader, gönderilerden ve profillerden
-fotoğrafları, videoları ve GIF'leri çıkarır veya depolar. Diğer tüm Apify
-Actor'ları filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca
-teslim edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
+fotoğrafları, videoları ve GIF'leri çıkarır veya depolar. Diğer Apify
+Actor'larının çoğu filtreleme veya tekilleştirmeden önce ücret alır. Xquik
+yalnızca teslim edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
 
 Gönderilerden ve profil Medya sekmelerinden Twitter medyasını indir veya
 doğrudan URL'leri çıkar. Fotoğrafları, videoları, GIF'leri ve metadata'yı
@@ -46,6 +46,10 @@ topla. X API anahtarı veya girişi gerekmez.
 
 Tek bir hedef yeterlidir. Dosyaları depolamak için `downloadMedia`'yı etkinleştir.
 80 MB'ın üzerindeki dosyalar yalnızca URL olarak kalır.
+
+Sorunsuz biten küçük çalıştırmalar `run-report` yazmaz ve Apify kullanımından
+tasarruf eder. Her çalıştırmada yazması için `alwaysSaveRunRecords` seçeneğini
+aç.
 
 ## Çıktı
 

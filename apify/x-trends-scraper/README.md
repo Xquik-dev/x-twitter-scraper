@@ -17,7 +17,7 @@
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. X Trends Scraper collects real-time trends by location
-with rank, volume & query. Every other Apify Actor charges before filtering or
+with rank, volume & query. Most other Apify Actors charge before filtering or
 deduplicating. Xquik charges only for delivered, unique, filter-matching
 results.
 
@@ -50,6 +50,9 @@ Use location names, numeric WOEIDs, or both:
 Supported shortcuts include Worldwide, United States, United Kingdom, Turkey,
 Brazil, Canada, France, Germany, India, Indonesia, Japan, Mexico, and Australia.
 Use `woeids` for any other supported location.
+
+Small runs that go well skip `run-report` & save Apify usage. Turn on
+`alwaysSaveRunRecords` to write it on every run.
 
 ## Output
 

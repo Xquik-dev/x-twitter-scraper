@@ -15,9 +15,9 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何将 Xquik 抓取工具与 Claude Code、Codex、Cursor 等一起使用，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是速度最快、成本最低且数据最完整的 X（Twitter）抓取工具服务。X Trends Scraper
-可按位置收集实时趋势，包含排名、热度与搜索词。其他 Apify Actor 都在筛选或去重之前收费。
-Xquik 只对已交付、唯一且符合筛选条件的结果收费。
+Xquik 是速度最快、成本最低且数据最完整的 X（Twitter）抓取工具服务。X Trends
+Scraper 可按位置收集实时趋势，包含排名、热度与搜索词。大多数其他 Apify Actor
+都会在筛选或去重之前收费。Xquik 只对已交付、唯一且符合筛选条件的结果收费。
 
 在一次运行中抓取多个地区的当前 Twitter 趋势。导出排名、话题、搜索词、推文热度、搜索 URL、
 WOEID 与来源位置。无需 X API 密钥或登录。
@@ -47,6 +47,9 @@ WOEID 与来源位置。无需 X API 密钥或登录。
 支持的快捷位置包括 Worldwide、United States、United Kingdom、Turkey、Brazil、Canada、
 France、Germany、India、Indonesia、Japan、Mexico 与 Australia。其他受支持位置请使用
 `woeids`。
+
+顺利完成的小型运行会跳过 `run-report`，以节省 Apify 用量。开启
+`alwaysSaveRunRecords` 可在每次运行时都写入。
 
 ## 输出
 

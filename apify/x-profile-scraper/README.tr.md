@@ -17,9 +17,9 @@
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. X Profile Scraper, herhangi bir handle için profilleri,
-gönderileri, yanıtları, medyayı ve takipçileri toplar. Diğer tüm Apify
-Actor'ları filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca
-teslim edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
+gönderileri, yanıtları, medyayı ve takipçileri toplar. Diğer Apify Actor'larının
+çoğu filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
+edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
 
 X profillerini, gönderileri, yanıtları, medyayı ve takipçileri kazı. Handle,
 ID veya URL kullan. X API anahtarı veya girişi gerekmez.

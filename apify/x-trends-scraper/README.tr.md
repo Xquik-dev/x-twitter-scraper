@@ -17,7 +17,7 @@
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. X Trends Scraper, sıralama, hacim ve sorguyla konuma göre
-gerçek zamanlı trendleri toplar. Diğer tüm Apify Actor'ları filtreleme veya
+gerçek zamanlı trendleri toplar. Diğer Apify Actor'larının çoğu filtreleme veya
 tekilleştirmeden önce ücret alır. Xquik yalnızca teslim edilen, benzersiz,
 filtreyle eşleşen sonuçlar için ücret alır.
 
@@ -50,6 +50,10 @@ Konum adlarını, sayısal WOEID'leri veya her ikisini birden kullan:
 Desteklenen kısayollar arasında Worldwide, United States, United Kingdom,
 Turkey, Brazil, Canada, France, Germany, India, Indonesia, Japan, Mexico ve
 Australia bulunur. Desteklenen başka bir konum için `woeids`'i kullan.
+
+Sorunsuz biten küçük çalıştırmalar `run-report` yazmaz ve Apify kullanımından
+tasarruf eder. Her çalıştırmada yazması için `alwaysSaveRunRecords` seçeneğini
+aç.
 
 ## Çıktı
 

@@ -17,9 +17,9 @@
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo con
 i dati X più completi. X Follower Scraper raccoglie follower, following, membri
-di List, iscritti & membri di community. Ogni altro Actor Apify addebita costi
-prima di filtrare o deduplicare. Xquik addebita solo i risultati consegnati,
-unici & conformi ai filtri.
+di List, iscritti & membri di community. La maggior parte degli altri Actor
+Apify addebita costi prima di filtrare o deduplicare. Xquik addebita solo i
+risultati consegnati, unici & conformi ai filtri.
 
 Estrai follower, following, follower verificati, membri di List, iscritti a
 List & membri di Community di X (Twitter) **a partire da $0.00015 per profilo
@@ -35,6 +35,13 @@ Un'estrazione interrotta scrive una diagnostica `partial` gratuita. I risultati
 disponibili restano intatti. Leggi `availableResults`, `failedTargets`,
 `retryable` e `nextAction` prima di riprovare. Un'uscita riuscita dell'Actor
 conferma la consegna, non l'estrazione completa.
+
+Il messaggio di stato nomina ogni causa di un'interruzione anticipata.
+`stopCauses` elenca ogni causa con i propri `message`, `retryable` &
+`nextAction`. Le cause sono `target_not_found`, `target_failed` &
+`deadline_reached`. Un account mancante entra nell'elenco solo se un'altra causa
+ha fermato l'esecuzione. L'esecuzione è `retryable` quando lo è almeno una
+causa.
 
 ## Cosa fa X Follower Scraper?
 
@@ -122,13 +129,16 @@ anche dall'output raw.
 
 Ogni piano Apify costa `$0.00015` per profilo consegnato. Apify fattura l'uso
 della tua piattaforma separatamente. Xquik applica un addebito per ogni riga di
-dati consegnata. Le diagnostiche sono gratuite nell'output `diagnostics`.
-Non si applica alcun abbonamento Xquik separato. Non si applica alcun costo di
-avvio. Ogni esecuzione scrive un record `run-report` con `estimatedChargeUsd`
-calcolato dal prezzo pay-per-event in tempo reale che Apify espone all'Actor.
-Ogni esito scrive `run-report`, inclusi gli esiti senza input & con input non
-valido. Il campo `version` riporta la versione esatta della sorgente
-dell'Actor pubblicata.
+dati consegnata. Le diagnostiche sono gratuite nell'output `diagnostics`. Non si
+applica alcun abbonamento Xquik separato. Non si applica alcun costo di avvio.
+Il messaggio di stato indica perché l'esecuzione si è fermata. Conta anche i
+risultati addebitati & i target letti. Un'esecuzione con un problema, o
+un'esecuzione grande, scrive anche un record `run-report`. Il suo
+`estimatedChargeUsd` usa il prezzo pay-per-event in tempo reale che Apify espone
+all'Actor. Le esecuzioni con un problema scrivono sempre `run-report`. Vale
+anche per le uscite senza input o con input non valido. Un'esecuzione piccola
+senza problemi lo salta & risparmia uso di Apify. Il campo `version` riporta la
+versione esatta della sorgente dell'Actor pubblicata.
 
 `failedTargets` conta i target che si sono interrotti dopo un errore. I profili
 consegnati restano righe di dati fatturabili. Queste esecuzioni usano

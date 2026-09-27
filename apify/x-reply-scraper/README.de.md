@@ -16,9 +16,9 @@
 </td></tr></table>
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
-den umfassendsten X-Daten. X Reply Scraper sammelt Antworten, Kommentare
-& ganze Unterhaltungen. Jeder andere Apify Actor berechnet, bevor gefiltert
-oder dedupliziert wird. Xquik berechnet nur für gelieferte, eindeutige,
+den umfassendsten X-Daten. X Reply Scraper sammelt Antworten, Kommentare & ganze
+Unterhaltungen. Die meisten anderen Apify Actors berechnen, bevor gefiltert oder
+dedupliziert wird. Xquik berechnet nur für gelieferte, eindeutige,
 filterkonforme Ergebnisse.
 
 Scrape X-(Twitter-)Antworten für **$0.00015 pro gelieferten Datensatz auf
@@ -434,10 +434,13 @@ Erfolgreiche Datendatensätze nutzen `resultType: "reply"`. Nicht-Daten-
 Abschlüsse schreiben genau 1 kostenlosen Datensatz in `diagnostics` mit
 einer verwertbaren Empfehlung.
 
-Jedes Ergebnis schreibt `run-report`, auch Abbrüche ohne Eingabe und mit
-ungültiger Eingabe. Das Report-Schema dokumentiert Abschluss, Abrechnung,
-Fehler und gespeicherte Cursor. Das Feld `version` darin gibt die exakte
-veröffentlichte Actor-Quellversion an.
+Der Statustext nennt, warum der Run gestoppt hat. Er zählt auch berechnete
+Ergebnisse & gelesene Ziele. Runs mit einem Problem schreiben immer
+`run-report`. Das gilt auch für Abbrüche ohne Eingabe und mit ungültiger
+Eingabe. Ein großer Run schreibt ihn ebenfalls. Ein kleiner Run ohne Probleme
+überspringt ihn & spart Apify-Nutzung. Das Report-Schema dokumentiert Abschluss,
+Abrechnung, Fehler und gespeicherte Cursor. Das Feld `version` darin gibt die
+exakte veröffentlichte Actor-Quellversion an.
 
 Mögliche Status umfassen:
 

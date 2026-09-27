@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，拥有最完整的 X 数据。X Follower Scraper 可收集关注者、关注对象、列表成员、订阅者与社群成员。其他所有 Apify Actor 都会在过滤或去重之前收费。Xquik 只对已交付、唯一且符合过滤条件的结果收费。
+Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，拥有最完整的 X 数据。X Follower Scraper 可收集关注者、关注对象、列表成员、订阅者与社群成员。大多数其他 Apify Actor 都会在过滤或去重之前收费。Xquik 只对已交付、唯一且符合过滤条件的结果收费。
 
 在每个 Apify 套餐上，以**每个交付的主页低至 $0.00015** 的价格抓取 X（Twitter）关注者、关注对象、已验证关注者、List 成员、List 订阅者和 Community 成员。Apify 会单独收取平台使用费。无需 X 登录、无启动费、无查询费。
 
@@ -25,6 +25,8 @@ Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，拥�
 ## 未完成的提取
 
 被中断的提取会写入一份免费的 `partial` 诊断记录。已获取的结果保持完整。重试前请先读取 `availableResults`、`failedTargets`、`retryable` 和 `nextAction`。Actor 成功退出只表示已交付，不代表提取已完成。
+
+状态消息会写明提前停止的每个原因。`stopCauses` 会列出每个原因及其各自的 `message`、`retryable` 和 `nextAction`。原因的取值为 `target_not_found`、`target_failed` 和 `deadline_reached`。只有当其他原因使运行停止时，不存在的账户才会列入其中。只要任一原因可重试，整个运行就会标记为 `retryable`。
 
 ## X Follower Scraper 能做什么？
 
@@ -95,7 +97,7 @@ X Follower Scraper 返回关注者、关注对象、Lists 和 Communities 的可
 
 ## 抓取 X 关注者需要多少费用？
 
-在每个 Apify 套餐上，每个交付的主页收费 `$0.00015`。Apify 会单独收取你的平台使用费。Xquik 对每条交付的数据行收取一次费用。`diagnostics` 输出中的诊断记录是免费的。无需另外订阅 Xquik。无启动费。每次运行都会写入一条 `run-report` 记录，其中的 `estimatedChargeUsd` 是根据 Apify 向 Actor 提供的实时按事件计费价格计算得出的。每种结果都会写入 `run-report`，包括无输入和输入无效的退出情况。其 `version` 字段记录了确切发布的 Actor 源码版本。
+在每个 Apify 套餐上，每个交付的主页收费 `$0.00015`。Apify 会单独收取你的平台使用费。Xquik 对每条交付的数据行收取一次费用。`diagnostics` 输出中的诊断记录是免费的。无需另外订阅 Xquik。无启动费。状态消息会说明运行停止的原因。它还会统计已收费的结果和已读取的目标。遇到问题的运行或大型运行还会写入一条 `run-report` 记录。其中的 `estimatedChargeUsd` 采用 Apify 向 Actor 公开的实时按事件计费价格。遇到问题的运行总会写入 `run-report`，包括无输入和输入无效的退出情况。顺利完成的小型运行会跳过该记录，以节省 Apify 用量。其 `version` 字段记录了确切发布的 Actor 源码版本。
 
 `failedTargets` 统计出错后停止的目标数量。已交付的主页仍属于可计费的数据行。这些运行使用 `completionReason: "partial_failure"`。
 

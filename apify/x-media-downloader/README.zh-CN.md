@@ -15,9 +15,9 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何将 Xquik 抓取工具与 Claude Code、Codex、Cursor 等配合使用，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据。X Media
-Downloader 能从帖子与主页中提取或存储照片、视频与 GIF。其他所有 Apify Actor 都会
-在过滤或去重之前就收费。Xquik 只为已交付、唯一且符合过滤条件的结果收费。
+Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据。X
+Media Downloader 能从帖子与主页中提取或存储照片、视频与 GIF。大多数其他 Apify
+Actor 都会在过滤或去重之前收费。Xquik 只为已交付、唯一且符合过滤条件的结果收费。
 
 从帖子与主页的媒体标签页下载 Twitter 媒体或提取直链 URL。采集照片、视频、GIF 与
 元数据。无需 X API 密钥或登录。
@@ -42,6 +42,9 @@ Downloader 能从帖子与主页中提取或存储照片、视频与 GIF。其�
 
 一个目标即可运行。启用 `downloadMedia` 可存储文件。超过 80 MB 的文件仅提供 URL，
 不会存储。
+
+顺利完成的小型运行会跳过 `run-report`，以节省 Apify 用量。开启
+`alwaysSaveRunRecords` 可在每次运行时都写入。
 
 ## 输出
 

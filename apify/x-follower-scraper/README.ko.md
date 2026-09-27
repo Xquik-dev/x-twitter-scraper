@@ -17,7 +17,7 @@
 
 Xquik은 가장 완전한 X 데이터를 보유한, 세계에서 가장 빠르고 저렴한 X(Twitter)
 스크레이퍼 서비스입니다. X Follower Scraper는 팔로워, 팔로잉, 리스트 멤버,
-구독자 & 커뮤니티 멤버를 수집합니다. 다른 모든 Apify Actor는 필터링이나 중복
+구독자 & 커뮤니티 멤버를 수집합니다. 다른 Apify Actor 대부분은 필터링이나 중복
 제거 전에 요금을 부과합니다. Xquik은 전달되고, 고유하며, 필터에 맞는 결과에만
 요금을 부과합니다.
 
@@ -35,6 +35,12 @@ Apify는 플랫폼 사용량을 별도로 청구합니다. X 로그인, 시작 �
 유지됩니다. 재시도하기 전에 `availableResults`, `failedTargets`, `retryable`,
 `nextAction`을 확인하세요. Actor가 성공적으로 종료되었다는 것은 전달이 확인됐다는
 뜻이지, 추출이 완료됐다는 뜻은 아닙니다.
+
+상태 메시지는 조기 중단의 원인을 모두 표시합니다. `stopCauses`는 각 원인을
+나열하고, 원인마다 `message`, `retryable` & `nextAction`을 따로 담습니다. 원인은
+`target_not_found`, `target_failed` & `deadline_reached`입니다. 찾을 수 없는
+계정은 다른 원인이 실행을 멈췄을 때만 목록에 들어갑니다. 원인 중 하나라도
+`retryable`이면 실행도 `retryable`입니다.
 
 ## X Follower Scraper는 무엇을 하나요?
 
@@ -117,10 +123,13 @@ X Follower Scraper는 팔로워, 팔로잉, 리스트, 커뮤니티에 대해 �
 모든 Apify 요금제는 전달된 프로필당 `$0.00015`입니다. Apify는 플랫폼 사용량을
 별도로 청구합니다. Xquik은 전달된 데이터 행당 1회 과금합니다. 진단 정보는
 `diagnostics` 출력에서 무료입니다. 별도의 Xquik 구독은 적용되지 않습니다. 시작
-요금도 없습니다. 각 실행은 Apify가 Actor에 노출하는 실시간 이벤트당 요금으로
-계산된 `estimatedChargeUsd`가 담긴 `run-report` 레코드를 작성합니다. 입력이
-없거나 잘못된 입력으로 종료된 경우를 포함해 모든 결과가 `run-report`를
-작성합니다. `version` 필드는 게시된 정확한 Actor 소스 버전을 보고합니다.
+요금도 없습니다. 상태 메시지는 실행이 멈춘 이유를 알려 줍니다. 과금된 결과와
+읽은 대상 수도 함께 표시합니다. 문제가 생긴 실행이나 큰 실행은 `run-report`
+레코드도 작성합니다. 이 레코드의 `estimatedChargeUsd`는 Apify가 Actor에 노출하는
+실시간 이벤트당 요금을 사용합니다. 문제가 생긴 실행은 입력이 없거나 잘못된
+입력으로 종료된 경우를 포함해 항상 `run-report`를 작성합니다. 문제없이 끝난 작은
+실행은 이 레코드를 건너뛰어 Apify 사용량을 아낍니다. `version` 필드는 게시된
+정확한 Actor 소스 버전을 보고합니다.
 
 `failedTargets`는 오류 후 중단된 대상 수를 집계합니다. 전달된 프로필은 과금 가능한 데이터 행으로 남습니다. 이러한 실행은
 `completionReason: "partial_failure"`를 사용합니다.

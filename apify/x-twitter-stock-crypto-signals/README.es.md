@@ -18,10 +18,10 @@
 Xquik es el servicio de extracción de X (Twitter) más rápido y económico del
 mundo, con los datos de X más completos. X (Twitter) Stock & Crypto AI Trading
 Signals convierte tuits en posturas alcistas, bajistas, neutrales o mixtas por
-ticker o moneda. Todos los demás Actors de Apify cobran antes de filtrar o
-eliminar duplicados. Xquik cobra solo por resultados entregados, únicos y que
-coinciden con los filtros. Los costos de IA están incluidos en el precio por
-tweet. No necesitas cuenta de IA, tokens ni clave.
+ticker o moneda. La mayoría de los demás Actors de Apify cobra antes de filtrar
+o deduplicar. Xquik cobra solo por resultados entregados, únicos y que coinciden
+con los filtros. Los costos de IA están incluidos en el precio por tweet. No
+necesitas cuenta de IA, tokens ni clave.
 
 Lee la postura detrás de las publicaciones sobre acciones, cripto y trading en X
 (Twitter) y conserva los datos originales del tuit. **X (Twitter) Stock & Crypto
@@ -70,6 +70,10 @@ activo de usos no relacionados de su nombre.
 | Convicción | 0 comentario matizado, 1 opinión declarada, 2 declaración o posición firme |
 | Relevancia | Probabilidad de que la publicación trate tus objetivos como activos |
 
+La convicción es 0 siempre que la postura sea neutral o poco clara. Una
+publicación sin dirección no puede afirmar una con firmeza. Esa respuesta pone
+toda la probabilidad en el nivel 0. Además toma el `confidence` de la postura.
+
 Las respuestas describen lo que expresan los autores. No son asesoría de
 inversión y no verifican afirmaciones, precios o reportes regulatorios.
 
@@ -102,7 +106,7 @@ IA, tokens ni clave.
 
 Desde $0.0003 por tuit analizado con éxito, sin tarifa de inicio. El precio
 incluye la recopilación. El límite de análisis es de 8 preguntas, 8000 bytes por
-definición de pregunta & 12 000 bytes de contexto por tuit. Los filtros de
+definición de pregunta & 64 000 bytes de contexto por tuit. Los filtros de
 extracción y la eliminación de duplicados se ejecutan antes del análisis, así
 que las filas filtradas o duplicadas nunca se analizan ni se cobran. Los
 análisis fallidos u omitidos y las filas de diagnóstico no generan cargo por
@@ -155,10 +159,11 @@ análisis cobrados y los cargos pendientes.
 ## Resumen de ejecución y respuestas planas
 
 Cada ejecución escribe un registro `analysis-summary` en su almacén de
-clave-valor y lo repite en `results.analysisSummary` dentro del informe de
-ejecución. Cuenta las filas analizadas, fallidas y omitidas, suma la interacción
-y resume cada pregunta. `cashtags` cuenta la postura por cashtag como `$NVDA`,
-así que la proporción alcista por activo proviene de `choices.stance`. El bloque
+clave-valor. Una ejecución con un problema, o una ejecución grande, también
+escribe `run-report`. Este repite el resumen en `results.analysisSummary`. El
+resumen cuenta las filas analizadas, fallidas y omitidas, suma la interacción y
+resume cada pregunta. `cashtags` cuenta la postura por cashtag como `$NVDA`, así
+que la proporción alcista por activo proviene de `choices.stance`. El bloque
 `stance` agrega la división ponderada por interacción y las publicaciones
 alcistas y bajistas con más interacción. `conviction` informa la media & la
 media ponderada por interacción. El resumen redondea los números a 4 decimales.
@@ -296,11 +301,16 @@ publicaciones tratan tus objetivos como activos.
 ### ¿Por qué una fila regresó con `analysis.status` en `failed` o `skipped`?
 
 El Actor recopiló & entregó el tuit, pero el análisis con IA no se completó.
-`analysis.reason` indica la causa, como `context_limit` cuando el tuit y su
-contexto superan `maxContextBytes`, o `service_unavailable` cuando el servicio
-de análisis no está disponible por un momento. Estas filas no generan cargo por
-resultado. Aumenta `maxContextBytes` (hasta 12 000) o vuelve a ejecutar los IDs
-afectados.
+`analysis.reason` indica la causa. `context_limit` significa que tu contexto y
+tus objetivos no dejan espacio para el tuit. `service_unavailable` significa que
+el servicio de análisis no estuvo disponible por un momento. Estas filas no
+generan cargo por resultado. Acorta `analysis.context` o vuelve a ejecutar los
+IDs afectados.
+
+El Actor analiza igual un tuit más largo que `maxContextBytes`. Primero recorta
+las publicaciones citadas y respondidas, luego el tuit. Entonces
+`analysis.contextAvailability.postText` queda en `truncated`. Sube
+`maxContextBytes` hasta 64 000 para conservar más texto.
 
 ### ¿El análisis verifica hechos?
 

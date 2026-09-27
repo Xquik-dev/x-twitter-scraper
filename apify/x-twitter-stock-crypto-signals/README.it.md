@@ -18,10 +18,10 @@
 Xquik è il servizio di scraping X (Twitter) più veloce ed economico al mondo,
 con i dati X più completi. X (Twitter) Stock & Crypto AI Trading Signals
 trasforma i tweet in posizioni rialziste, ribassiste, neutre o miste per ogni
-titolo o moneta. Ogni altro Actor Apify addebita i costi prima di filtrare o
-deduplicare. Xquik addebita solo i risultati consegnati, unici e conformi ai
-filtri. I costi dell'IA sono inclusi nel prezzo per tweet. Non ti servono
-account IA, token o chiavi.
+titolo o moneta. La maggior parte degli altri Actor Apify addebita costi prima
+di filtrare o deduplicare. Xquik addebita solo i risultati consegnati, unici e
+conformi ai filtri. I costi dell'IA sono inclusi nel prezzo per tweet. Non ti
+servono account IA, token o chiavi.
 
 Leggi il sentiment dietro i post su azioni, criptovalute e trading su X
 (Twitter) e mantieni i dati originali del tweet. **X (Twitter) Stock & Crypto AI
@@ -70,6 +70,10 @@ non correlati del suo nome.
 | Convinzione | 0 osservazione cauta, 1 opinione dichiarata, 2 dichiarazione o posizione ferma |
 | Pertinenza | Probabilità che il post tratti i tuoi target come asset          |
 
+La convinzione è 0 quando la posizione è neutra o non chiara. Un post senza
+direzione non può affermarne una con fermezza. Questa risposta mette tutta la
+probabilità sul livello 0. Prende la `confidence` della posizione.
+
 Le risposte descrivono ciò che gli autori esprimono. Non sono consulenza
 finanziaria e non verificano affermazioni, prezzi o comunicazioni ufficiali.
 
@@ -100,7 +104,7 @@ token o chiavi.
 
 Da $0.0003 per tweet analizzato con successo, senza costo iniziale. Il prezzo
 include la raccolta. La soglia per l'analisi è di 8 domande, 8.000 byte per
-definizione di domanda & 12.000 byte di contesto per tweet. I filtri di
+definizione di domanda & 64.000 byte di contesto per tweet. I filtri di
 estrazione e la deduplicazione vengono eseguiti prima dell'analisi, quindi le
 righe filtrate o duplicate non vengono mai analizzate né addebitate. Le analisi
 fallite o saltate e le righe diagnostiche non comportano alcun addebito sul
@@ -151,21 +155,22 @@ separa le righe raccolte, le analisi addebitate e gli addebiti in sospeso.
 
 ## Riepilogo dell'esecuzione e risposte in formato piatto
 
-Ogni esecuzione scrive un record `analysis-summary` nel proprio key-value store
-e lo ripete sotto `results.analysisSummary` nel report dell'esecuzione. Conta le
-righe analizzate, fallite e saltate, somma l'engagement e riassume ogni domanda.
-`cashtags` conta la posizione per cashtag come `$NVDA`, quindi il rapporto
-rialzista per asset deriva da `choices.stance`. Il blocco `stance` aggiunge la
-ripartizione ponderata per engagement e i post rialzisti e ribassisti con più
-engagement. `conviction` riporta la media & la media ponderata per engagement.
-Il riepilogo arrotonda i numeri a 4 decimali. Un'esecuzione vuota riporta
-conteggi zero & medie `null`. Ogni voce di `cashtags` aggiunge `signal` con un
-conteggio rialzista, un conteggio ribassista & un punteggio da -1 a 1. Il
-punteggio è (rialzisti - ribassisti) / righe. `monitor.changedRows` elenca i
-tweet la cui posizione è cambiata rispetto alla baseline. Ogni riga elenca
-`sourceDomains`, gli host a cui rimanda. Con `monitor.baselineDatasetId`
-impostato, il blocco `monitor` del riepilogo conta gli stati di confronto &
-elenca fino a 50 righe modificate.
+Ogni esecuzione scrive un record `analysis-summary` nel proprio key-value store.
+Un'esecuzione con un problema, o un'esecuzione grande, scrive anche
+`run-report`. Questo ripete il riepilogo sotto `results.analysisSummary`. Il
+riepilogo conta le righe analizzate, fallite e saltate, somma l'engagement e
+riassume ogni domanda. `cashtags` conta la posizione per cashtag come `$NVDA`,
+quindi il rapporto rialzista per asset deriva da `choices.stance`. Il blocco
+`stance` aggiunge la ripartizione ponderata per engagement e i post rialzisti e
+ribassisti con più engagement. `conviction` riporta la media & la media
+ponderata per engagement. Il riepilogo arrotonda i numeri a 4 decimali.
+Un'esecuzione vuota riporta conteggi zero & medie `null`. Ogni voce di
+`cashtags` aggiunge `signal` con un conteggio rialzista, un conteggio ribassista
+& un punteggio da -1 a 1. Il punteggio è (rialzisti - ribassisti) / righe.
+`monitor.changedRows` elenca i tweet la cui posizione è cambiata rispetto alla
+baseline. Ogni riga elenca `sourceDomains`, gli host a cui rimanda. Con
+`monitor.baselineDatasetId` impostato, il blocco `monitor` del riepilogo conta
+gli stati di confronto & elenca fino a 50 righe modificate.
 
 Ogni riga di risultato include anche `answers`, una mappa piatta dall'ID della
 domanda alla categoria, al punteggio o alla probabilità scelti. La vista
@@ -285,11 +290,16 @@ post trattano i tuoi target come asset.
 ### Perché una riga è tornata con `analysis.status` su `failed` o `skipped`?
 
 L'Actor ha raccolto & consegnato il tweet, ma l'analisi IA non si è completata.
-`analysis.reason` indica la causa, come `context_limit` quando il tweet e il suo
-contesto superano `maxContextBytes`, oppure `service_unavailable` quando il
-servizio di analisi è momentaneamente non disponibile. Queste righe non
-comportano alcun addebito sul risultato. Aumenta `maxContextBytes` (fino a
-12.000) o riesegui gli ID interessati.
+`analysis.reason` indica la causa. `context_limit` significa che il tuo contesto
+& i tuoi target non lasciano spazio al tweet. `service_unavailable` significa
+che il servizio di analisi era momentaneamente non disponibile. Queste righe non
+comportano alcun addebito sul risultato. Accorcia `analysis.context` o riesegui
+gli ID interessati.
+
+L'Actor analizza comunque un tweet più lungo di `maxContextBytes`. Taglia prima
+i post citati & quelli a cui risponde, poi il tweet.
+`analysis.contextAvailability.postText` diventa quindi `truncated`. Aumenta
+`maxContextBytes` fino a 64.000 per conservare più testo.
 
 ### L'analisi verifica i fatti?
 

@@ -15,11 +15,11 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Découvrez comment Framer utilise les scrapers Xquik avec Claude Code, Codex, Cursor et d'autres outils, à partir de 6:07.</a>
 </td></tr></table>
 
-Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher
-au monde, avec les données X les plus complètes. X Reply Scraper collecte
-les réponses, commentaires et conversations entières. Tous les autres
-Actors Apify facturent avant de filtrer ou de dédupliquer. Xquik ne facture
-que les résultats livrés, uniques et conformes aux filtres.
+Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
+monde, avec les données X les plus complètes. X Reply Scraper collecte les
+réponses, commentaires et conversations entières. La plupart des autres Actors
+Apify facturent avant de filtrer ou de dédupliquer. Xquik ne facture que les
+résultats livrés, uniques et conformes aux filtres.
 
 Scrapez les réponses X (Twitter) pour **$0.00015 par ligne livrée sur
 chaque plan Apify**. Collez des URL de post, des ID de Tweet, des URL de
@@ -440,10 +440,13 @@ Les lignes de donnée réussies utilisent `resultType: "reply"`. Les sorties
 sans donnée écrivent exactement 1 enregistrement gratuit dans
 `diagnostics` avec une correction exploitable.
 
-Chaque issue de run écrit `run-report`, y compris les sorties sans entrée
-et avec entrée invalide. Le schéma du rapport documente l'achèvement, la
-facturation, les échecs et les curseurs sauvegardés. Son champ `version`
-indique la version exacte du code source publié de l'Actor.
+Le texte de statut indique pourquoi le run s'est arrêté. Il compte aussi les
+résultats facturés et les cibles lues. Les runs avec un problème écrivent
+toujours `run-report`. Cela inclut les sorties sans entrée et avec entrée
+invalide. Un gros run l'écrit aussi. Un petit run sans problème l'omet et
+économise de l'usage Apify. Le schéma du rapport documente l'achèvement, la
+facturation, les échecs et les curseurs sauvegardés. Son champ `version` indique
+la version exacte du code source publié de l'Actor.
 
 Les statuts possibles incluent :
 

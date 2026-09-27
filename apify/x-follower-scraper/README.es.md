@@ -18,9 +18,9 @@
 Xquik es el servicio de extracción de datos de X (Twitter) más rápido y
 económico del mundo, con los datos más completos de X. X Follower Scraper
 recopila seguidores, cuentas seguidas, miembros de listas, suscriptores y
-miembros de comunidades. Todos los demás Actors de Apify cobran antes de
-filtrar o eliminar duplicados. Xquik solo cobra por resultados entregados,
-únicos y que coinciden con los filtros.
+miembros de comunidades. La mayoría de los demás Actors de Apify cobra antes de
+filtrar o deduplicar. Xquik solo cobra por resultados entregados, únicos y que
+coinciden con los filtros.
 
 Extrae seguidores, cuentas seguidas, seguidores verificados, miembros de
 Listas, suscriptores de Listas y miembros de Comunidades de X (Twitter)
@@ -37,6 +37,12 @@ Una extracción interrumpida escribe un diagnóstico `partial` gratuito. Los
 resultados disponibles permanecen intactos. Lee `availableResults`,
 `failedTargets`, `retryable` y `nextAction` antes de reintentar. Una salida
 exitosa del Actor confirma la entrega, no una extracción completa.
+
+El texto de estado nombra cada causa de una detención anticipada. `stopCauses`
+enumera cada causa con su propio `message`, `retryable` y `nextAction`. Las
+causas son `target_not_found`, `target_failed` y `deadline_reached`. Una cuenta
+faltante entra en la lista solo si otra causa detuvo la ejecución. La ejecución
+es `retryable` cuando alguna causa lo es.
 
 ## ¿Qué hace X Follower Scraper?
 
@@ -125,15 +131,18 @@ siempre, incluso de la salida raw.
 
 ## ¿Cuánto cuesta extraer seguidores de X?
 
-Cada plan de Apify cuesta `$0.00015` por perfil entregado. Apify factura el
-uso de tu plataforma por separado. Xquik aplica un cargo por cada fila de
-datos entregada. Los diagnósticos son gratuitos en la salida `diagnostics`.
-No se aplica ninguna suscripción de Xquik por separado. No se aplica tarifa
-de inicio. Cada ejecución escribe un registro `run-report` con
-`estimatedChargeUsd` calculado a partir del precio de pago por evento en
-vivo que Apify expone al Actor. Cada resultado escribe `run-report`,
-incluidas las salidas sin entrada y con entrada inválida. Su campo `version`
-informa la versión exacta del código fuente publicado del Actor.
+Cada plan de Apify cuesta `$0.00015` por perfil entregado. Apify factura el uso
+de tu plataforma por separado. Xquik aplica un cargo por cada fila de datos
+entregada. Los diagnósticos son gratuitos en la salida `diagnostics`. No se
+aplica ninguna suscripción de Xquik por separado. No se aplica tarifa de inicio.
+El texto de estado indica por qué se detuvo la ejecución. También cuenta los
+resultados cobrados y los objetivos leídos. Una ejecución con un problema, o una
+ejecución grande, también escribe un registro `run-report`. Su
+`estimatedChargeUsd` usa el precio actual por evento que Apify expone al Actor.
+Las ejecuciones con un problema siempre escriben `run-report`. Esto incluye las
+salidas sin entrada o con entrada inválida. Una ejecución pequeña que termina
+bien lo omite y ahorra uso de Apify. Su campo `version` informa la versión
+exacta del código fuente publicado del Actor.
 
 `failedTargets` cuenta los objetivos que se detuvieron tras un error. Los
 perfiles entregados siguen siendo filas de datos facturables. Estas ejecuciones

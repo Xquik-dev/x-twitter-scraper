@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">FramerがXquikのスクレイパーをClaude Code、Codex、Cursorなどと一緒に使う様子を6:07から視聴できます。</a>
 </td></tr></table>
 
-Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。X Trends Scraperは、順位、ボリューム、クエリを含む地域別のリアルタイムトレンドを収集します。他のApify Actorはすべて、フィルタリングや重複排除の前に課金します。Xquikは、配信済みでユニークかつフィルタ条件に一致する結果にのみ課金します。
+Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。X Trends Scraperは、順位、ボリューム、クエリを含む地域別のリアルタイムトレンドを収集します。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikは、配信済みでユニークかつフィルタ条件に一致する結果にのみ課金します。
 
 1回の実行で複数の地域にまたがる現在のTwitterトレンドをスクレイピングできます。順位、トピック、クエリ、ポスト数、検索URL、WOEID、取得元の地域をエクスポートします。X APIキーもログインも不要です。
 
@@ -42,6 +42,8 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 ```
 
 サポートされているショートカットには、Worldwide、United States、United Kingdom、Turkey、Brazil、Canada、France、Germany、India、Indonesia、Japan、Mexico、Australiaが含まれます。それ以外のサポート対象地域には`woeids`を使用してください。
+
+問題なく終わった小規模な実行では`run-report`を省略し、Apifyの利用料を節約します。毎回書き込むには、`alwaysSaveRunRecords`をオンにしてください。
 
 ## 出力
 

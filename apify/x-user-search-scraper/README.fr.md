@@ -15,11 +15,11 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Découvrez comment Framer utilise les scrapers Xquik avec Claude Code, Codex, Cursor et d'autres outils, à partir de 6:07.</a>
 </td></tr></table>
 
-Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher
-au monde, avec les données X les plus complètes. X User Search Scraper
-trouve des utilisateurs par handle, bio et localisation. Tous les autres
-Actors Apify facturent avant de filtrer ou de dédupliquer. Xquik ne facture
-que les résultats livrés, uniques et conformes aux filtres.
+Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
+monde, avec les données X les plus complètes. X User Search Scraper trouve des
+utilisateurs par handle, bio et localisation. La plupart des autres Actors Apify
+facturent avant de filtrer ou de dédupliquer. Xquik ne facture que les résultats
+livrés, uniques et conformes aux filtres.
 
 Recherchez des comptes Twitter par nom, sujet, bio ou localisation. Aucune
 clé API X.

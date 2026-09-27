@@ -17,8 +17,8 @@
 
 Xquik es el servicio de extracción de X (Twitter) más rápido y económico del
 mundo, con los datos de X más completos. X (Twitter) News Monitor clasifica
-publicaciones de noticias por formato, atribución de fuente y relevancia. Todos
-los demás Actors de Apify cobran antes de filtrar o eliminar duplicados. Xquik
+publicaciones de noticias por formato, atribución de fuente y relevancia. La
+mayoría de los demás Actors de Apify cobra antes de filtrar o deduplicar. Xquik
 cobra solo por resultados entregados, únicos y que coinciden con los filtros.
 Los costos de IA están incluidos en el precio por tweet. No necesitas cuenta de
 IA, tokens ni clave.
@@ -45,7 +45,7 @@ organizaciones, personas o temas que sigues.
 1. Agrega términos de búsqueda como `Nvidia earnings lang:en -filter:retweets`,
    nombres de usuario de cuentas de noticias o IDs de tuits.
 2. Configura `maxItems` y filtros de extracción como límites de fecha,
-   `filter:news` o un mínimo de reposts.
+   `filter:links` o un mínimo de reposts.
 3. Coloca las organizaciones, personas o temas que sigues y sus alias en
    `analysis.targets`, y acota el tema en `analysis.context`.
 4. Ejecuta el Actor y abre el conjunto de datos.
@@ -101,7 +101,7 @@ IA, tokens ni clave.
 
 Desde $0.0003 por tuit analizado con éxito, sin tarifa de inicio. El precio
 incluye la recopilación. El límite de análisis es de 8 preguntas, 8000 bytes por
-definición de pregunta y 12 000 bytes de contexto por tuit. Los filtros de
+definición de pregunta y 64 000 bytes de contexto por tuit. Los filtros de
 extracción y la eliminación de duplicados se ejecutan antes del análisis, así
 que las filas filtradas o duplicadas nunca se analizan ni se cobran. Los
 análisis fallidos u omitidos y las filas de diagnóstico no generan cargo por
@@ -151,9 +151,23 @@ análisis cobrados y los cargos pendientes.
 
 ## Resumen de ejecución y respuestas planas
 
-Cada ejecución escribe un registro `analysis-summary` en su almacén de
-clave-valor y lo repite en `results.analysisSummary` dentro del informe de
-ejecución. Cuenta las filas analizadas, fallidas y omitidas, suma la interacción
+Una ejecución escribe un registro `analysis-summary` en su almacén de
+clave-valor en 4 casos:
+
+- Tiene un problema o es grande.
+- Configura `monitor` sin `baselineDatasetId`, como primera ejecución de una
+  serie.
+- Su comparación encuentra un tuit cambiado, nuevo o no comparable.
+- Tiene `alwaysSaveRunRecords` activado.
+
+Las demás ejecuciones omiten el registro. Su texto de estado nombra la respuesta
+principal, como `Top format: reporting in 4 of 5 results.` Una comparación sin
+cambios indica `No change since the earlier run.` Una ejecución con un problema,
+o una ejecución grande, también escribe `run-report`. Lo mismo hace una
+ejecución con `alwaysSaveRunRecords` activado. `run-report` repite el resumen en
+`results.analysisSummary`.
+
+El resumen cuenta las filas analizadas, fallidas y omitidas, suma la interacción
 y resume cada pregunta.
 
 - La división de `format` separa el reportaje de la opinión, la especulación, la
@@ -183,13 +197,14 @@ JSON. Las filas fallidas u omitidas tienen un mapa vacío.
 ## Comparar con una ejecución anterior
 
 Pasa `monitor.baselineDatasetId`, el ID de conjunto de datos de una ejecución
-anterior completada con la misma configuración de análisis. Cada fila gana
-entonces un objeto `monitor`. Su estado es `first_run` sin línea base,
-`new_to_baseline` para tuits que la ejecución anterior no tenía, & `unchanged` o
-`changed` para tuits que sí tenía. `changes` lista cada decisión de formato,
-atribución o relevancia que cambió de `previous` a `current`. Las decisiones se
-comparan por categoría, nivel de puntaje redondeado, o sí/no en 0.5. Una
-decisión cuenta como cambiada solo cuando se mueve con claridad. Las
+anterior completada con la misma configuración de análisis. La comparación lee
+las filas de esa ejecución. Así funciona aunque esa ejecución haya omitido su
+resumen. Cada fila gana entonces un objeto `monitor`. Su estado es `first_run`
+sin línea base, `new_to_baseline` para tuits que la ejecución anterior no tenía,
+& `unchanged` o `changed` para tuits que sí tenía. `changes` lista cada decisión
+de formato, atribución o relevancia que cambió de `previous` a `current`. Las
+decisiones se comparan por categoría, nivel de puntaje redondeado, o sí/no en
+0.5. Una decisión cuenta como cambiada solo cuando se mueve con claridad. Las
 fluctuaciones marginales entre ejecuciones se consideran sin cambios. Las líneas
 base por encima de `maxBaselineRows` (100 000 por defecto) o de una
 configuración distinta detienen la ejecución antes de la recopilación con una
@@ -301,11 +316,16 @@ categorías o al menos 2 niveles ordenados.
 ### ¿Por qué una fila regresó con `analysis.status` en `failed` o `skipped`?
 
 El Actor recopiló & entregó el tuit, pero el análisis con IA no se completó.
-`analysis.reason` indica la causa, como `context_limit` cuando el tuit y su
-contexto superan `maxContextBytes`, o `service_unavailable` cuando el servicio
-de análisis no está disponible por un momento. Estas filas no generan cargo por
-resultado. Aumenta `maxContextBytes` (hasta 12 000) o vuelve a ejecutar los IDs
-afectados.
+`analysis.reason` indica la causa. `context_limit` significa que tu contexto y
+tus objetivos no dejan espacio para el tuit. `service_unavailable` significa que
+el servicio de análisis no estuvo disponible por un momento. Estas filas no
+generan cargo por resultado. Acorta `analysis.context` o vuelve a ejecutar los
+IDs afectados.
+
+El Actor analiza igual un tuit más largo que `maxContextBytes`. Primero recorta
+las publicaciones citadas y respondidas, luego el tuit. Entonces
+`analysis.contextAvailability.postText` queda en `truncated`. Sube
+`maxContextBytes` hasta 64 000 para conservar más texto.
 
 ### ¿El análisis verifica hechos?
 

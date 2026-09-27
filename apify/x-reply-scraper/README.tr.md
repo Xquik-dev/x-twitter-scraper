@@ -17,9 +17,9 @@
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. X Reply Scraper, yanıtları, yorumları ve tüm konuşmaları
-toplar. Diğer tüm Apify Actor'ları filtreleme veya tekilleştirmeden önce
-ücret alır. Xquik yalnızca teslim edilen, benzersiz, filtreyle eşleşen
-sonuçlar için ücret alır.
+toplar. Diğer Apify Actor'larının çoğu filtreleme veya tekilleştirmeden önce
+ücret alır. Xquik yalnızca teslim edilen, benzersiz, filtreyle eşleşen sonuçlar
+için ücret alır.
 
 X (Twitter) yanıtlarını **her Apify planında teslim edilen satır başına
 $0.00015'e** kazı. Gönderi URL'lerini, Tweet ID'lerini, profil URL'lerini
@@ -419,9 +419,13 @@ Başarılı veri satırları `resultType: "reply"` kullanır. Veri dışı çık
 uygulanabilir bir düzeltmeyle `diagnostics`'e tam olarak 1 ücretsiz kayıt
 yazar.
 
-Girdisiz ve geçersiz girdi çıkışları dahil her sonuç `run-report` yazar.
-Rapor şeması tamamlanmayı, faturalamayı, hataları ve kaydedilmiş imleçleri
-belgeler. `version` alanı yayınlanmış tam Actor kaynak sürümünü bildirir.
+Durum metni, çalıştırmanın neden durduğunu söyler. Ücretlendirilen sonuçları ve
+okunan hedefleri de sayar. Sorunlu çalıştırmalar, girdisiz ve geçersiz girdi
+çıkışları dahil her zaman `run-report` yazar. Büyük bir çalıştırma da bu kaydı
+yazar. Sorunsuz biten küçük bir çalıştırma bu kaydı atlar ve Apify kullanımından
+tasarruf eder. Rapor şeması tamamlanmayı, faturalamayı, hataları ve kaydedilmiş
+imleçleri belgeler. `version` alanı yayınlanmış tam Actor kaynak sürümünü
+bildirir.
 
 Olası durumlar arasında şunlar bulunur:
 

@@ -17,7 +17,7 @@
 
 Xquik은 가장 완전한 X 데이터를 보유한, 세계에서 가장 빠르고 저렴한 X(Twitter)
 스크레이퍼 서비스입니다. X Tweet Scraper는 50개 이상의 필터로 트윗, 답글,
-프로필, 리스트 & 검색을 수집합니다. 다른 모든 Apify Actor는 필터링이나 중복
+프로필, 리스트 & 검색을 수집합니다. 다른 Apify Actor 대부분은 필터링이나 중복
 제거 전에 요금을 부과합니다. Xquik은 전달되고, 고유하며, 필터에 맞는 결과에만
 요금을 부과합니다.
 
@@ -156,10 +156,13 @@ Apify의 [빌드 태그](https://docs.apify.com/platform/actors/development/buil
 `diagnostics` 출력에서 무료입니다.
 
 별도의 Xquik 구독은 적용되지 않습니다. 별도의 시작이나 쿼리 요금도 없습니다.
-각 실행은 Apify가 Actor에 노출하는 실시간 이벤트당 요금으로 계산된
-`estimatedChargeUsd`가 담긴 `run-report` 레코드도 작성합니다. 입력이 없거나
-잘못된 입력으로 종료된 경우를 포함해 모든 결과가 `run-report`를 작성합니다.
-실행 보고서는 `realRows`의 데이터 행과 `diagnosticRows`의 진단을 구분합니다.
+상태 메시지는 실행이 멈춘 이유를 알려 줍니다. 과금된 결과와 읽은 대상 수도 함께
+표시합니다. 문제가 생긴 실행이나 큰 실행은 `run-report` 레코드도 작성합니다. 이
+레코드의 `estimatedChargeUsd`는 Apify가 Actor에 노출하는 실시간 이벤트당 요금을
+사용합니다. 문제가 생긴 실행은 입력이 없거나 잘못된 입력으로 종료된 경우를
+포함해 항상 `run-report`를 작성합니다. 문제없이 끝난 작은 실행은 이 레코드를
+건너뛰어 Apify 사용량을 아낍니다. 실행 보고서는 `realRows`의 데이터 행과
+`diagnosticRows`의 진단을 구분합니다.
 
 다음 실행에 지출하기 전에 빈 결과의 원인을 파악하세요. 보고서 & 최종 진단의 `filtering` 객체는 필터가 제거한 행 수를 집계합니다.
 `serverFilteredRows`, `actorFilteredRows`, `pagesWithUnknownServerFiltering`을
@@ -186,8 +189,14 @@ Apify의 [빌드 태그](https://docs.apify.com/platform/actors/development/buil
 `deadline_reached`입니다. 원인 중 하나라도 `retryable`이면 실행도
 `retryable`입니다.
 
-보호되거나 누락된 대상은 유효한 결과가 있는 실행을 포함해 실패로 집계됩니다. X가
-실행할 수 없는 검색도 실패로 집계됩니다. X.com은 이런 검색에 "Something went
+찾을 수 없거나 보호된 대상은 실패가 아닙니다. X에 읽을 내용이 없기 때문입니다.
+그래서 실행은 다른 모든 대상을 끝까지 읽습니다. 실행은 `outcome: "complete"`를
+보고합니다. 완료 이유는 읽은 대상의 이유를 따르며, 예를 들면
+`source_exhausted`입니다. `failedSubtargets`에는 이런 대상이 포함되지 않습니다.
+상태 메시지와 무료 `complete` 진단이 이런 대상을 집계합니다. 다른 행이 없는
+실행은 대신 `zero-output` 진단을 작성합니다.
+
+X가 실행할 수 없는 검색은 실패로 집계됩니다. X.com은 이런 검색에 "Something went
 wrong"을 표시합니다. 실행은 재시도 없이 이 검색을 즉시 멈춥니다. X가 숨기는
 좋아요도 실패로 집계됩니다. X는 게시물에 좋아요를 누른 사람을 작성자에게만 보여
 줍니다. 계정이 좋아요를 누른 게시물도 그 계정에게만 보여 줍니다. 모든 실패가
@@ -198,9 +207,10 @@ URL이나 사용자 이름을 확인하고 사용 가능한 공개 계정을 선
 유지합니다.
 
 진단은 이런 대상을 `unavailableTargets`에 나열합니다. 각 항목에는 입력한
-그대로의 `target`과 `reason`이 있으며, `reason`은 `not_found`, `protected`,
-`search_unavailable` 또는 `likes_hidden`입니다. 목록은 최대 100개 항목을
-담습니다. 완전한 실행을 얻으려면 입력에서 이 대상을 빼세요.
+그대로의 `target`, `reason` & `nextAction`이 있습니다. `reason`은 `not_found`,
+`protected`, `search_unavailable` 또는 `likes_hidden`입니다. 검색 항목에는
+제거할 연산자 같은 `fix`가 있을 수도 있습니다. 목록은 최대 100개 항목을
+담습니다. 입력에서 이 대상을 빼세요.
 
 `completionReason: "pagination_safety_limit"`는 읽기 실패가 아닙니다. 실행은 유효한 행을 유지한 뒤 더
 이상 새 결과를 반환하지 않는 대상을 종료했습니다. 실행은 추출이 완료되지 않았다고 보고합니다. `failedSubtargets`는 `0`으로
@@ -506,6 +516,11 @@ Console은 다음 컨트롤을 제공합니다.
 | `filter:replies`       | `filter:replies`        | 답글 트윗만                  |
 | `filter:quote`         | `filter:quote`          | 인용 트윗만                  |
 | `filter:blue_verified` | `filter:blue_verified`  | Premium 사용자만              |
+
+X는 더 이상 `filter:vine`, `filter:consumer_video`, `filter:pro_video`,
+`filter:news`, `retweets_of:`로 검색하지 않습니다. 이 중 하나가 들어간 검색은
+즉시 끝납니다. 해결 방법을 알려 주는 무료 진단을 작성합니다. 각 쿼리는 X가
+검색하는 최대 길이인 512자 이하로 유지하세요.
 
 날짜 범위는 하한을 포함하고 상한을 제외합니다. Actor는 각 트윗을 추가하거나
 과금하기 전에 두 경계를 모두 검증합니다.

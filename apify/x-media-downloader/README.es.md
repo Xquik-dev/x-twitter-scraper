@@ -16,10 +16,10 @@
 </td></tr></table>
 
 Xquik es el servicio de extracción de datos de X (Twitter) más rápido y
-económico del mundo, con los datos de X más completos. X Media Downloader
-extrae o almacena fotos, videos y GIFs de publicaciones y perfiles. Todos los
-demás Actors de Apify cobran antes de filtrar o eliminar duplicados. Xquik
-cobra solo por resultados entregados, únicos y que cumplen los filtros.
+económico del mundo, con los datos de X más completos. X Media Downloader extrae
+o almacena fotos, videos y GIFs de publicaciones y perfiles. La mayoría de los
+demás Actors de Apify cobra antes de filtrar o deduplicar. Xquik cobra solo por
+resultados entregados, únicos y que cumplen los filtros.
 
 Descarga contenido multimedia de Twitter o extrae URLs directas de
 publicaciones y de las pestañas de contenido multimedia de perfiles. Recopila
@@ -47,6 +47,9 @@ sesión.
 
 Con un objetivo alcanza. Habilita `downloadMedia` para almacenar los archivos.
 Los archivos de más de 80 MB quedan solo como URL.
+
+Las ejecuciones pequeñas que terminan bien omiten `run-report` y ahorran uso de
+Apify. Activa `alwaysSaveRunRecords` para escribirlo en cada ejecución.
 
 ## Output
 

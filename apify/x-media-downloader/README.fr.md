@@ -15,11 +15,11 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Découvrez comment Framer utilise les scrapers Xquik avec Claude Code, Codex, Cursor et d'autres outils, à partir de 6:07.</a>
 </td></tr></table>
 
-Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher
-au monde, avec les données X les plus complètes. X Media Downloader extrait
-ou stocke des photos, vidéos et GIFs à partir de posts et de profils. Tous
-les autres Actors Apify facturent avant de filtrer ou de dédupliquer. Xquik
-ne facture que les résultats livrés, uniques et conformes aux filtres.
+Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
+monde, avec les données X les plus complètes. X Media Downloader extrait ou
+stocke des photos, vidéos et GIFs à partir de posts et de profils. La plupart
+des autres Actors Apify facturent avant de filtrer ou de dédupliquer. Xquik ne
+facture que les résultats livrés, uniques et conformes aux filtres.
 
 Téléchargez des médias Twitter ou extrayez des URL directes à partir des
 onglets Média de posts et de profils. Collectez photos, vidéos, GIFs et
@@ -46,6 +46,9 @@ métadonnées. Aucune clé API X ni connexion requise.
 
 Une seule cible suffit. Activez `downloadMedia` pour stocker les fichiers.
 Les fichiers de plus de 80 Mo restent en URL uniquement.
+
+Les petits runs sans problème omettent `run-report` et économisent de l'usage
+Apify. Activez `alwaysSaveRunRecords` pour l'écrire à chaque run.
 
 ## Sortie
 

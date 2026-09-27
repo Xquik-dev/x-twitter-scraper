@@ -17,7 +17,7 @@
 
 Xquik은 가장 완전한 X 데이터를 보유한, 세계에서 가장 빠르고 저렴한 X(Twitter)
 스크레이퍼 서비스입니다. X Trends Scraper는 순위, 볼륨 & 쿼리와 함께 위치별
-실시간 트렌드를 수집합니다. 다른 모든 Apify Actor는 필터링이나 중복 제거 전에
+실시간 트렌드를 수집합니다. 다른 Apify Actor 대부분은 필터링이나 중복 제거 전에
 요금을 부과합니다. Xquik은 전달되고, 고유하며, 필터에 맞는 결과에만 요금을
 부과합니다.
 
@@ -50,6 +50,9 @@ Xquik은 가장 완전한 X 데이터를 보유한, 세계에서 가장 빠르�
 지원되는 단축 표현에는 Worldwide, United States, United Kingdom, Turkey,
 Brazil, Canada, France, Germany, India, Indonesia, Japan, Mexico, Australia가
 있습니다. 다른 지원 위치에는 `woeids`를 사용하세요.
+
+문제없이 끝난 작은 실행은 `run-report`를 건너뛰어 Apify 사용량을 아낍니다. 모든
+실행에서 작성하려면 `alwaysSaveRunRecords`를 켜세요.
 
 ## 출력
 

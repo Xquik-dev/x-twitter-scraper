@@ -16,9 +16,9 @@
 </td></tr></table>
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
-den umfassendsten X-Daten. X Media Downloader extrahiert oder speichert
-Fotos, Videos & GIFs aus Beiträgen & Profilen. Jeder andere Apify Actor
-berechnet, bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für
+den umfassendsten X-Daten. X Media Downloader extrahiert oder speichert Fotos,
+Videos & GIFs aus Beiträgen & Profilen. Die meisten anderen Apify Actors
+berechnen, bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für
 gelieferte, eindeutige, filterkonforme Ergebnisse.
 
 Lade Twitter-Medien herunter oder extrahiere direkte URLs aus Beiträgen und
@@ -46,6 +46,9 @@ X-API-Schlüssel oder Login erforderlich.
 
 Ein Ziel genügt. Aktiviere `downloadMedia`, um Dateien zu speichern. Dateien
 über 80 MB bleiben nur als URL verfügbar.
+
+Kleine Runs ohne Probleme überspringen `run-report` & sparen Apify-Nutzung.
+Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 
 ## Ausgabe
 

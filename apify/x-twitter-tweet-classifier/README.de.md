@@ -17,10 +17,10 @@
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
 den umfassendsten X-Daten. X (Twitter) Tweet Classifier beantwortet deine
-eigenen Labels, Scores & Ja/Nein-Fragen für jeden Tweet. Jeder andere Apify
-Actor berechnet, bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für
-gelieferte, eindeutige, filterkonforme Ergebnisse. Die KI-Kosten sind im Preis
-pro Tweet enthalten. Du brauchst kein KI-Konto, keine Tokens und keinen
+eigenen Labels, Scores & Ja/Nein-Fragen für jeden Tweet. Die meisten anderen
+Apify Actors berechnen, bevor gefiltert oder dedupliziert wird. Xquik berechnet
+nur für gelieferte, eindeutige, filterkonforme Ergebnisse. Die KI-Kosten sind im
+Preis pro Tweet enthalten. Du brauchst kein KI-Konto, keine Tokens und keinen
 Schlüssel.
 
 Klassifiziere X-(Twitter-)Beiträge mit deinen eigenen Fragen & behalte die
@@ -44,7 +44,8 @@ News, Sentiment & Marktsentiment ab. Eigene Fragen ersetzen sie.
 1. Füge Tweet-URLs, Suchbegriffe, Profil-Handles oder Tweet-IDs hinzu.
 2. Setze `maxItems` & die Extraktionsfilter, die deine Aufgabe braucht.
 3. Trage deine Fragen unter `analysis.questions` ein, oder wähle eine
-   Voreinstellung mit `analysis.preset`.
+   Voreinstellung mit `analysis.preset`. Ohne beides führt der Actor die
+   Voreinstellung `sentiment` aus.
 4. Führe den Actor aus & öffne das Dataset.
 
 Unterstützte Modi sammeln Tweets, Suchen, Profilbeiträge, Listen,
@@ -83,9 +84,10 @@ Stelle 1-8 Fragen mit eindeutigen IDs, Anweisungen & Versionen bereit.
 
 Voreinstellungen: `brand`, `complaints`, `competitors`, `purchase_intent`,
 `product_feedback`, `news`, `sentiment` & `market`. `maxContextBytes` liegt
-standardmäßig bei 12.000 Byte. Ein kleineres Limit überspringt übergroßen
-Kontext ohne Kürzung. `concurrency` liegt standardmäßig bei 16 & akzeptiert 1
-bis 16. Jede Frage-Definition bleibt innerhalb eines Kontingents von 8.000 Byte.
+standardmäßig bei 64.000 Byte. Ein kleineres Limit kürzt lange Beiträge passend
+& markiert sie als `truncated`. `concurrency` liegt standardmäßig bei 16 &
+akzeptiert 1 bis 16. Jede Frage-Definition bleibt innerhalb eines Kontingents
+von 8.000 Byte.
 
 ## Eigenen Text analysieren
 
@@ -115,7 +117,7 @@ keine Tokens und keinen Schlüssel.
 
 Ab $0.0003 pro erfolgreich analysiertem Tweet, ohne Startgebühr. Der Preis
 enthält die Erfassung. Das Analyse-Kontingent umfasst 8 Fragen, 8.000 Byte pro
-Frage-Definition & 12.000 Byte Kontext pro Tweet. Extraktionsfilter &
+Frage-Definition & 64.000 Byte Kontext pro Tweet. Extraktionsfilter &
 Deduplizierung laufen vor der Analyse, sodass herausgefilterte & doppelte
 Datensätze nie analysiert oder berechnet werden. Fehlgeschlagene & übersprungene
 Analysen sowie Diagnose-Datensätze verursachen keine Ergebnisgebühr. Apify
@@ -164,21 +166,34 @@ Analysen & ausstehende Gebühren.
 
 ## Run-Zusammenfassung & flache Antworten
 
-Jeder Run schreibt einen `analysis-summary`-Datensatz in seinen Key-Value-Store
-& wiederholt ihn unter `results.analysisSummary` im Run-Report. Er zählt
-analysierte, fehlgeschlagene & übersprungene Datensätze, summiert Interaktionen
-und fasst jede Frage zusammen. Jede eigene Frage erhält ihren eigenen Block:
-Kategoriezählungen & -anteile für Choice-Fragen, Mittelwert & Stufenzählungen
-für Score-Fragen, Ja- & Nein-Zählungen für Ja/Nein-Fragen. Die Zusammenfassung
-rundet Zahlen auf 4 Nachkommastellen. Ein leerer Run meldet Nullwerte &
-`null`-Mittelwerte. Übergib `analysis.preset` mit `brand`, `complaints`,
-`purchase_intent`, `product_feedback`, `competitors`, `sentiment`, `market` oder
-`news`, um eine eingebaute Linse statt eigener Fragen zu nutzen. Die
-Zusammenfassung meldet dann diese Linse pro Frage. Jeder Datensatz listet
-`sourceDomains`, die Hostnamen, auf die er verlinkt, & `cashtags` wie `$NVDA`
-aus seinem Text. Ist `monitor.baselineDatasetId` gesetzt, zählt der
-`monitor`-Block der Zusammenfassung Vergleichsstatus & listet bis zu 50
-geänderte Datensätze.
+Ein Run schreibt in 4 Fällen einen `analysis-summary`-Datensatz in seinen
+Key-Value-Store:
+
+- Er hat ein Problem oder ist groß.
+- Er setzt `monitor` ohne `baselineDatasetId`, als erster Run einer Serie.
+- Sein Vergleich findet einen geänderten, neuen oder nicht vergleichbaren Tweet.
+- Er hat `alwaysSaveRunRecords` aktiviert.
+
+Andere Runs überspringen den Datensatz. Ihr Statustext nennt die häufigste
+Antwort, etwa `Top sentiment: positive in 3 of 5 results.` Ein Vergleich ohne
+Änderung meldet `No change since the earlier run.` Ein Run mit einem Problem
+oder ein großer Run schreibt zusätzlich `run-report`. Das gilt auch für einen
+Run mit aktiviertem `alwaysSaveRunRecords`. `run-report` wiederholt die
+Zusammenfassung unter `results.analysisSummary`.
+
+Die Zusammenfassung zählt analysierte, fehlgeschlagene & übersprungene
+Datensätze, summiert Interaktionen und fasst jede Frage zusammen. Jede eigene
+Frage erhält ihren eigenen Block: Kategoriezählungen & -anteile für
+Choice-Fragen, Mittelwert & Stufenzählungen für Score-Fragen, Ja- &
+Nein-Zählungen für Ja/Nein-Fragen. Die Zusammenfassung rundet Zahlen auf 4
+Nachkommastellen. Ein leerer Run meldet Nullwerte & `null`-Mittelwerte. Übergib
+`analysis.preset` mit `brand`, `complaints`, `purchase_intent`,
+`product_feedback`, `competitors`, `sentiment`, `market` oder `news`, um eine
+eingebaute Linse statt eigener Fragen zu nutzen. Die Zusammenfassung meldet dann
+diese Linse pro Frage. Jeder Datensatz listet `sourceDomains`, die Hostnamen,
+auf die er verlinkt, & `cashtags` wie `$NVDA` aus seinem Text. Ist
+`monitor.baselineDatasetId` gesetzt, zählt der `monitor`-Block der
+Zusammenfassung Vergleichsstatus & listet bis zu 50 geänderte Datensätze.
 
 Jeder Ergebnisdatensatz führt außerdem `answers`, eine flache Zuordnung
 von Frage-ID zu gewählter Kategorie, Score oder Wahrscheinlichkeit. Die
@@ -190,16 +205,18 @@ leere Zuordnung.
 ## Mit einem früheren Run vergleichen
 
 Übergib `monitor.baselineDatasetId`, die Dataset-ID eines abgeschlossenen
-früheren Runs mit denselben Analyseeinstellungen. Jeder Datensatz erhält dann
-ein `monitor`-Objekt. Sein Status ist `first_run` ohne Baseline,
-`new_to_baseline` für Tweets, die der frühere Run nicht hatte, & `unchanged`
-oder `changed` für Tweets, die er hatte. `changes` listet jede Entscheidung für
-eine deiner Fragen listet, die sich von `previous` zu `current` geändert hat.
-Entscheidungen werden nach Kategorie, gerundeter Score-Stufe oder Ja/Nein bei
-0,5 verglichen. Eine Entscheidung zählt nur als geändert, wenn sie sich deutlich
-bewegt. Fast unentschiedenes Rauschen zwischen Runs bleibt unverändert.
-Baselines über `maxBaselineRows` (Standard: 100.000) oder aus abweichenden
-Einstellungen stoppen den Run vor der Erfassung mit einem Diagnose-Datensatz.
+früheren Runs mit denselben Analyseeinstellungen. Der Vergleich liest die
+Datensätze dieses Runs. So funktioniert er auch, wenn dieser Run seine
+Zusammenfassung übersprungen hat. Jeder Datensatz erhält dann ein
+`monitor`-Objekt. Sein Status ist `first_run` ohne Baseline, `new_to_baseline`
+für Tweets, die der frühere Run nicht hatte, & `unchanged` oder `changed` für
+Tweets, die er hatte. `changes` listet jede Entscheidung für eine deiner Fragen
+listet, die sich von `previous` zu `current` geändert hat. Entscheidungen werden
+nach Kategorie, gerundeter Score-Stufe oder Ja/Nein bei 0,5 verglichen. Eine
+Entscheidung zählt nur als geändert, wenn sie sich deutlich bewegt. Fast
+unentschiedenes Rauschen zwischen Runs bleibt unverändert. Baselines über
+`maxBaselineRows` (Standard: 100.000) oder aus abweichenden Einstellungen
+stoppen den Run vor der Erfassung mit einem Diagnose-Datensatz.
 
 ## Task-Beispiele
 
@@ -303,11 +320,16 @@ erzeugt hat.
 ### Warum kam ein Datensatz mit `analysis.status` `failed` oder `skipped` zurück?
 
 Der Actor hat den Tweet gesammelt & geliefert, aber die KI-Analyse wurde nicht
-abgeschlossen. `analysis.reason` nennt die Ursache, etwa `context_limit`, wenn
-der Tweet & sein Kontext `maxContextBytes` überschreiten, oder
-`service_unavailable`, wenn der Analysedienst kurz nicht verfügbar ist. Diese
-Datensätze verursachen keine Ergebnisgebühr. Erhöhe `maxContextBytes` (bis zu
-12.000) oder führe die betroffenen IDs erneut aus.
+abgeschlossen. `analysis.reason` nennt die Ursache. `context_limit` bedeutet,
+dass dein Kontext & deine Ziele keinen Platz für den Tweet lassen.
+`service_unavailable` bedeutet, dass der Analysedienst kurz nicht verfügbar war.
+Diese Datensätze verursachen keine Ergebnisgebühr. Kürze `analysis.context` oder
+führe die betroffenen IDs erneut aus.
+
+Der Actor analysiert auch einen Tweet, der länger als `maxContextBytes` ist. Er
+kürzt zuerst zitierte & beantwortete Beiträge, dann den Tweet.
+`analysis.contextAvailability.postText` ist dann `truncated`. Erhöhe
+`maxContextBytes` auf bis zu 64.000, um mehr Text zu behalten.
 
 ### Prüft die Analyse Fakten?
 

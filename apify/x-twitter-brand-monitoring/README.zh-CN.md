@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何搭配 Claude Code、Codex、Cursor 等使用 Xquik 抓取工具，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据。X (Twitter) Brand Monitoring 以相关性、情感与客户体验答案追踪你的品牌提及。其他所有 Apify Actor 都在过滤或去重之前就收费。Xquik 只为交付的、唯一的、符合过滤条件的结果收费。AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
+Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据。X (Twitter) Brand Monitoring 以相关性、情感与客户体验答案追踪你的品牌提及。大多数其他 Apify Actor 都会在过滤或去重之前收费。Xquik 只为交付的、唯一的、符合过滤条件的结果收费。AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
 
 监测 X（Twitter）上的品牌提及，并追踪运行之间的情感变化。**X (Twitter) Brand
 Monitoring with AI Analysis** 收集每条匹配的推文。它用 AI 为每条帖子回答相关性、
@@ -41,8 +41,9 @@ Monitoring with AI Analysis** 收集每条匹配的推文。它用 AI 为每条�
 3. 在 `analysis.targets` 中填入你的品牌名称与别名，并在 `analysis.context`
    中描述该品牌。
 4. 运行 Actor，然后保留数据集 ID 用于下一次比较。
-5. 在下一次运行中，添加带有该 ID 的 `monitor.baselineDatasetId`。保持
-   问题、目标、上下文与上下文限制不变，以便答案可比较。
+5. 在下一次运行中，添加带有该 ID 的 `monitor.baselineDatasetId`。保持问题、
+   目标、上下文与上下文限制不变，以便答案可比较。比较会读取该数据集，
+   因此即使该运行跳过了摘要也能正常工作。
 
 ```json
 {
@@ -114,7 +115,7 @@ Monitoring with AI Analysis** 收集每条匹配的推文。它用 AI 为每条�
 AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
 
 每成功分析一条推文起价 $0.0003，无起步费用。价格包含收集费用。分析额度为 8
-个问题、每个问题定义 8,000 字节、每条推文 12,000 字节上下文。
+个问题、每个问题定义 8,000 字节、每条推文 64,000 字节上下文。
 提取过滤与去重在分析之前运行，因此你永远不会为被过滤掉的行或重复行付费。
 失败的分析、跳过的分析与诊断行不产生结果费用。Apify 按你的方案费率，对计算、
 存储与传输的平台使用量单独计费。Pricing 标签页会显示这项费用。
@@ -157,9 +158,20 @@ AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或�
 
 ## 运行摘要与扁平化答案
 
-每次运行都会向其 key-value store 写入一条 `analysis-summary` 记录，
-并在运行报告中的 `results.analysisSummary` 下重复该记录。它统计已分析、
-失败与跳过的行数，汇总互动数据，并对每个问题作出总结。
+在以下 4 种情况下，运行会向其 key-value store 写入一条 `analysis-summary` 记录：
+
+- 运行遇到问题或规模较大。
+- 作为系列中的首次运行，设置了 `monitor` 但没有设置 `baselineDatasetId`。
+- 比较发现了已变化、新增或无法比较的推文。
+- 开启了 `alwaysSaveRunRecords`。
+
+其他运行会跳过该记录。它们的状态消息会写明最多的答案，例如
+`Top sentiment: negative in 2 of 5 results.` 没有变化的比较会显示
+`No change since the earlier run.` 遇到问题的运行或大型运行还会写入
+`run-report`。开启 `alwaysSaveRunRecords` 的运行也会写入。`run-report` 会在
+`results.analysisSummary` 下重复该摘要。
+
+摘要统计已分析、失败与跳过的行数，汇总互动数据，并对每个问题作出总结。
 
 - `targets` 报告每个品牌或别名的提及数、声量占比与互动数据。
 - 每个 `targets` 条目都有 `top`，即每个答案类别下互动最多的三条提及。
@@ -265,7 +277,9 @@ AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或�
 
 ### 为什么某一行返回的 `analysis.status` 是 `failed` 或 `skipped`？
 
-Actor 已收集并交付该推文，但 AI 分析未能完成。`analysis.reason` 会说明原因，例如推文及其上下文超过 `maxContextBytes` 时的 `context_limit`，或分析服务暂时不可用时的 `service_unavailable`。这些行不产生结果费用。提高 `maxContextBytes`（最多12,000）或重新运行受影响的 ID。
+Actor 已收集并交付该推文，但 AI 分析未能完成。`analysis.reason` 会说明原因。`context_limit` 表示你的上下文和目标没有给推文留出空间。`service_unavailable` 表示分析服务曾暂时不可用。这些行不产生结果费用。请缩短 `analysis.context`，或重新运行受影响的 ID。
+
+推文超过 `maxContextBytes` 时，Actor 仍会分析它。它会先截断被引用和被回复的帖子，再截断推文本身。此时 `analysis.contextAvailability.postText` 为 `truncated`。如需保留更多文本，可将 `maxContextBytes` 提高到最多 64,000。
 
 ### 分析会核实事实吗？
 

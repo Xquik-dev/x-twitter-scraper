@@ -17,8 +17,8 @@
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. X (Twitter) Stock & Crypto AI Trading Signals turns tweets
-into bullish, bearish, neutral or mixed stances per ticker & coin. Every other
-Apify Actor charges before filtering or deduplicating. Xquik charges only for
+into bullish, bearish, neutral or mixed stances per ticker & coin. Most other
+Apify Actors charge before filtering or deduplicating. Xquik charges only for
 delivered, unique, filter-matching results. AI costs are included in the
 per-tweet price. You need no AI account, tokens or key.
 
@@ -65,6 +65,10 @@ uses of its name.
 | Conviction | 0 hedged remark, 1 stated view, 2 firm call or position      |
 | Relevance  | Probability that the post treats your targets as assets      |
 
+Conviction is 0 whenever the stance is neutral or unclear. A post without a
+direction cannot state one firmly. That answer puts all probability on level 0 &
+takes the stance's confidence.
+
 Answers describe what authors express. They are not investment advice & do not
 verify claims, prices or filings.
 
@@ -94,7 +98,7 @@ key.
 
 From $0.0003 per successfully analyzed tweet, with no start fee. The price
 includes collection. The analysis allowance is 8 questions, 8,000 bytes per
-question definition & 12,000 bytes of context per tweet. Extraction filters &
+question definition & 64,000 bytes of context per tweet. Extraction filters &
 deduplication run before analysis, so filtered-out & duplicate rows are never
 analyzed or charged. Failed & skipped analyses & diagnostic rows have no result
 charge. Apify bills platform usage separately. The Pricing tab shows it.
@@ -142,10 +146,11 @@ pending charges.
 
 ## Run summary & flat answers
 
-Each run writes an `analysis-summary` record to its key-value store & repeats it
-under `results.analysisSummary` in the run report. It counts analyzed, failed &
-skipped rows, sums engagement, and summarizes every question. `cashtags` counts
-stance per cashtag such as `$NVDA`, so the bullish ratio per asset comes from
+Each run writes an `analysis-summary` record to its key-value store. A run that
+hits a problem, or a large run, also writes `run-report`. It repeats the summary
+under `results.analysisSummary`. The summary counts analyzed, failed & skipped
+rows, sums engagement, and summarizes every question. `cashtags` counts stance
+per cashtag such as `$NVDA`, so the bullish ratio per asset comes from
 `choices.stance`. The `stance` block adds the engagement-weighted split & the
 most engaged bullish & bearish posts. `conviction` reports the mean & the
 engagement-weighted mean. The summary rounds numbers to 4 decimals. An empty run
@@ -269,10 +274,14 @@ as assets.
 ### Why did a row come back with `analysis.status` of `failed` or `skipped`?
 
 The Actor collected & delivered the tweet, but the AI analysis did not complete.
-`analysis.reason` names the cause, such as `context_limit` when the tweet & its
-context exceed `maxContextBytes`, or `service_unavailable` when the analysis
-service is briefly unavailable. These rows carry no result charge. Raise
-`maxContextBytes` (up to 12,000) or rerun the affected IDs.
+`analysis.reason` names the cause. `context_limit` means your context & targets
+leave no room for the tweet. `service_unavailable` means the analysis service
+was briefly unavailable. These rows carry no result charge. Shorten
+`analysis.context` or rerun the affected IDs.
+
+The Actor still analyzes a tweet longer than `maxContextBytes`. It cuts quoted &
+replied-to posts first, then the tweet. `analysis.contextAvailability.postText`
+is then `truncated`. Raise `maxContextBytes` up to 64,000 to keep more text.
 
 ### Does the analysis verify facts?
 

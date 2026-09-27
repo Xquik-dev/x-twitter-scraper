@@ -17,8 +17,8 @@
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
 den umfassendsten X-Daten. X Tweet Scraper sammelt Tweets, Antworten,
-Profile, Listen & Suchen mit über 50 Filtern. Jeder andere Apify Actor
-berechnet, bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für
+Profile, Listen & Suchen mit über 50 Filtern. Die meisten anderen Apify Actors
+berechnen, bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für
 gelieferte, eindeutige, filterkonforme Ergebnisse.
 
 Scrape öffentliche X-(Twitter-)Tweets für **ab $0.00015 pro geliefertem
@@ -169,12 +169,15 @@ berechnet deine Plattformnutzung separat. Xquik berechnet eine Gebühr pro
 geliefertem Datensatz. Diagnosen in der Ausgabe `diagnostics` sind
 kostenlos.
 
-Es gilt kein Xquik-Abonnement. Es gilt keine separate Start- oder
-Suchgebühr. Jeder Run schreibt außerdem einen `run-report`-Datensatz mit
-`estimatedChargeUsd`, berechnet aus dem Live-Pay-per-Event-Preis, den
-Apify dem Actor offenlegt. Jedes Ergebnis schreibt `run-report`, auch
-Abbrüche ohne Eingabe und mit ungültiger Eingabe. Run-Reports trennen
-Datendatensätze in `realRows` und Diagnosen in `diagnosticRows`.
+Es gilt kein Xquik-Abonnement. Es gilt keine separate Start- oder Suchgebühr.
+Der Statustext nennt, warum der Run gestoppt hat. Er zählt auch berechnete
+Ergebnisse & gelesene Ziele. Ein Run mit einem Problem oder ein großer Run
+schreibt zusätzlich einen `run-report`-Datensatz. Dessen `estimatedChargeUsd`
+nutzt den Live-Pay-per-Event-Preis, den Apify dem Actor offenlegt. Runs mit
+einem Problem schreiben immer `run-report`. Das gilt auch für Abbrüche ohne
+Eingabe und mit ungültiger Eingabe. Ein kleiner Run ohne Probleme überspringt
+ihn & spart Apify-Nutzung. Run-Reports trennen Datendatensätze in `realRows` und
+Diagnosen in `diagnosticRows`.
 
 Verstehe leere Ergebnisse, bevor du für einen weiteren Run zahlst. Das
 `filtering`-Objekt in Berichten und finalen Diagnosen zählt die Datensätze, die
@@ -205,12 +208,18 @@ mit eigenen Feldern `message`, `retryable` & `nextAction`. Die Ursachen sind
 `target_failed`, `pagination_safety_limit`, `reply_reach` & `deadline_reached`.
 Der Run ist `retryable`, wenn mindestens 1 Ursache es ist.
 
-Geschützte oder fehlende Ziele zählen als Fehler, auch bei Runs mit gültigen
-Ergebnissen. Das gilt auch für eine Suche, die X nicht ausführen kann. X.com
-zeigt für eine solche Suche „Something went wrong". Der Run stoppt sie sofort
-ohne Wiederholungen. Das gilt auch für Likes, die X verbirgt. X zeigt nur dem
-Autor, wer einen Beitrag gelikt hat. Die gelikten Beiträge eines Accounts zeigt
-X nur diesem Account. Wenn alle Fehler nicht verfügbare Ziele betreffen, setzen
+Ein fehlendes oder geschütztes Ziel ist kein Fehler. X hat dort nichts zu lesen.
+Deshalb liest der Run jedes andere Ziel bis zum Ende. Er meldet
+`outcome: "complete"`. Der Abschlussgrund stammt von den gelesenen Zielen, etwa
+`source_exhausted`. `failedSubtargets` lässt diese Ziele weg. Der Statustext &
+eine kostenlose `complete`-Diagnose zählen sie. Ein Run ohne andere Datensätze
+schreibt stattdessen eine `zero-output`-Diagnose.
+
+Eine Suche, die X nicht ausführen kann, zählt als Fehler. X.com zeigt für eine
+solche Suche „Something went wrong". Der Run stoppt sie sofort ohne
+Wiederholungen. Das gilt auch für Likes, die X verbirgt. X zeigt nur dem Autor,
+wer einen Beitrag gelikt hat. Die gelikten Beiträge eines Accounts zeigt X nur
+diesem Account. Wenn alle Fehler nicht verfügbare Ziele betreffen, setzen
 Diagnosen `retryable: false`. Prüfe Ziel-URLs oder Nutzernamen & wähle
 verfügbare öffentliche Accounts. Grenze eine Suche, die X nicht ausführen kann,
 weiter ein oder ändere ihre Filter. Rufe statt verborgener Likes Retweeter,
@@ -218,10 +227,11 @@ Antworten oder Beiträge ab. Andere Fehler behalten die Wiederholungsempfehlung
 für unvollständige Ziele.
 
 Die Diagnose nennt diese Ziele in `unavailableTargets`. Jeder Eintrag hat das
-`target`, so wie du es eingegeben hast, & einen `reason`: `not_found`,
-`protected`, `search_unavailable` oder `likes_hidden`. Die Liste fasst bis zu
-100 Einträge. Entferne sie aus der Eingabe, um einen vollständigen Run zu
-erhalten.
+`target`, so wie du es eingegeben hast. Dazu kommen ein `reason` & eine
+`nextAction`. Der Grund ist `not_found`, `protected`, `search_unavailable` oder
+`likes_hidden`. Ein Sucheintrag kann auch einen `fix` haben, etwa den zu
+entfernenden Operator. Die Liste fasst bis zu 100 Einträge. Entferne sie aus der
+Eingabe.
 
 `completionReason: "pagination_safety_limit"` ist kein Lesefehler. Der Run hat
 seine gültigen Datensätze behalten und dann ein Ziel beendet, das keine neuen
@@ -568,6 +578,11 @@ kennzeichnet sie als Legacy-Aliasse.
 | `filter:replies`            | `filter:replies`            | Nur Antwort-Tweets                  |
 | `filter:quote`              | `filter:quote`              | Nur Zitat-Tweets                    |
 | `filter:blue_verified`      | `filter:blue_verified`      | Nur Premium-Nutzer                  |
+
+X sucht nicht mehr mit `filter:vine`, `filter:consumer_video`,
+`filter:pro_video`, `filter:news` oder `retweets_of:`. Eine Suche mit einem
+davon endet sofort. Sie schreibt eine kostenlose Diagnose mit der Lösung. Halte
+jede Suchanfrage bei höchstens 512 Zeichen, dem Maximum für X-Suchen.
 
 Datumsfenster nutzen eine einschließende untere und eine ausschließende
 obere Grenze. Der Actor verifiziert beide Grenzen, bevor er einen Tweet

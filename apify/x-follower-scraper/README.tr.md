@@ -17,8 +17,8 @@
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. X Follower Scraper, takipçileri, takip edilenleri, liste
-üyelerini, aboneleri ve topluluk üyelerini toplar. Diğer tüm Apify Actor'ları
-filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
+üyelerini, aboneleri ve topluluk üyelerini toplar. Diğer Apify Actor'larının
+çoğu filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
 edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
 
 X (Twitter) takipçilerini, takip edilenleri, doğrulanmış takipçileri, Liste
@@ -36,6 +36,12 @@ Kesintiye uğrayan çıkarma ücretsiz bir `partial` tanılaması yazar. Mevcut
 sonuçlar bozulmadan kalır. Yeniden denemeden önce `availableResults`,
 `failedTargets`, `retryable` ve `nextAction` alanlarını oku. Başarılı bir Actor
 çıkışı teslimatı doğrular, eksiksiz çıkarmayı değil.
+
+Durum metni, erken durmanın her nedenini belirtir. `stopCauses`, her nedeni
+kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Olası
+nedenler şunlar: `target_not_found`, `target_failed` ve `deadline_reached`.
+Bulunamayan bir hesap, listeye yalnızca çalıştırmayı başka bir neden durdurduysa
+girer. Nedenlerden en az biri `retryable` ise çalıştırma da `retryable` olur.
 
 ## X Follower Scraper ne yapar?
 
@@ -125,12 +131,15 @@ DM, bildirim ve benzeri görüntüleyen bayrakları her zaman kaldırılır, ham
 
 Her Apify planında teslim edilen profil başına `$0.00015` ücret alınır. Apify,
 platform kullanımını ayrıca faturalandırır. Xquik, teslim edilen veri satırı
-başına bir ücret uygular. Tanılamalar `diagnostics` çıktısında ücretsizdir.
-Ayrı bir Xquik aboneliği gerekmez. Başlangıç ücreti uygulanmaz. Her
-çalıştırma, Apify'ın Actor'a gösterdiği canlı olay başına ödeme fiyatından
-hesaplanan `estimatedChargeUsd` ile bir `run-report` kaydı yazar. Girdisiz ve
-geçersiz girdi çıkışları dahil her sonuç `run-report` yazar. `version` alanı
-yayınlanmış tam Actor kaynak sürümünü bildirir.
+başına bir ücret uygular. Tanılamalar `diagnostics` çıktısında ücretsizdir. Ayrı
+bir Xquik aboneliği gerekmez. Başlangıç ücreti uygulanmaz. Durum metni,
+çalıştırmanın neden durduğunu söyler. Ücretlendirilen sonuçları ve okunan
+hedefleri de sayar. Sorun yaşayan veya büyük bir çalıştırma ayrıca bir
+`run-report` kaydı yazar. Kaydın `estimatedChargeUsd` alanı, Apify'ın Actor'a
+gösterdiği canlı olay başına ödeme fiyatını kullanır. Sorunlu çalıştırmalar,
+girdisiz ve geçersiz girdi çıkışları dahil her zaman `run-report` yazar.
+Sorunsuz biten küçük bir çalıştırma bu kaydı atlar ve Apify kullanımından
+tasarruf eder. `version` alanı yayınlanmış tam Actor kaynak sürümünü bildirir.
 
 `failedTargets`, bir hatadan sonra duran hedefleri sayar. Teslim edilen
 profiller faturalanabilir veri satırları olarak kalır. Bu çalıştırmalar

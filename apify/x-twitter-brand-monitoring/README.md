@@ -17,8 +17,8 @@
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. X (Twitter) Brand Monitoring tracks your brand mentions
-with relevance, sentiment & customer-experience answers. Every other Apify Actor
-charges before filtering or deduplicating. Xquik charges only for delivered,
+with relevance, sentiment & customer-experience answers. Most other Apify Actors
+charge before filtering or deduplicating. Xquik charges only for delivered,
 unique, filter-matching results. AI costs are included in the per-tweet price.
 You need no AI account, tokens or key.
 
@@ -53,7 +53,8 @@ how customers talk about you from run to run.
 4. Run the Actor, then keep the dataset ID for your next comparison.
 5. On the next run, add `monitor.baselineDatasetId` with that ID. Keep
    questions, targets, context & context limits unchanged so answers stay
-   comparable.
+   comparable. The comparison reads that dataset, so it works even when that run
+   skipped its summary.
 
 ```json
 {
@@ -137,7 +138,7 @@ key.
 
 From $0.0003 per successfully analyzed tweet, with no start fee. The price
 includes collection. The analysis allowance is 8 questions, 8,000 bytes per
-question definition & 12,000 bytes of context per tweet. Extraction filters &
+question definition & 64,000 bytes of context per tweet. Extraction filters &
 deduplication run before analysis, so you never pay for filtered-out or
 duplicate rows. Failed analyses, skipped analyses & diagnostic rows have no
 result charge. Apify bills platform usage for compute, storage & transfer
@@ -182,9 +183,21 @@ rows, charged analyses & pending charges.
 
 ## Run summary & flat answers
 
-Each run writes an `analysis-summary` record to its key-value store & repeats it
-under `results.analysisSummary` in the run report. It counts analyzed, failed &
-skipped rows, sums engagement, and summarizes every question.
+A run writes an `analysis-summary` record to its key-value store in 4 cases:
+
+- It hits a problem or is large.
+- It sets `monitor` without `baselineDatasetId`, as the first run of a series.
+- Its comparison finds a changed, new or not comparable tweet.
+- It has `alwaysSaveRunRecords` on.
+
+Other runs skip the record. Their status names the top answer, like
+`Top sentiment: negative in 2 of 5 results.` A comparison without a change
+states `No change since the earlier run.` A run that hits a problem, or a large
+run, also writes `run-report`. So does a run with `alwaysSaveRunRecords` on.
+`run-report` repeats the summary under `results.analysisSummary`.
+
+The summary counts analyzed, failed & skipped rows, sums engagement, and
+summarizes every question.
 
 - `targets` reports mentions, share of voice & engagement per brand or alias.
 - Each `targets` entry has `top`, its three most engaged mentions per answer
@@ -305,10 +318,14 @@ want to compare.
 ### Why did a row come back with `analysis.status` of `failed` or `skipped`?
 
 The Actor collected & delivered the tweet, but the AI analysis did not complete.
-`analysis.reason` names the cause, such as `context_limit` when the tweet & its
-context exceed `maxContextBytes`, or `service_unavailable` when the analysis
-service is briefly unavailable. These rows carry no result charge. Raise
-`maxContextBytes` (up to 12,000) or rerun the affected IDs.
+`analysis.reason` names the cause. `context_limit` means your context & targets
+leave no room for the tweet. `service_unavailable` means the analysis service
+was briefly unavailable. These rows carry no result charge. Shorten
+`analysis.context` or rerun the affected IDs.
+
+The Actor still analyzes a tweet longer than `maxContextBytes`. It cuts quoted &
+replied-to posts first, then the tweet. `analysis.contextAvailability.postText`
+is then `truncated`. Raise `maxContextBytes` up to 64,000 to keep more text.
 
 ### Does the analysis verify facts?
 

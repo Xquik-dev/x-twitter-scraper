@@ -15,10 +15,12 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Framer가 Xquik 스크레이퍼를 Claude Code, Codex, Cursor 등과 함께 사용하는 방법을 6:07부터 보세요.</a>
 </td></tr></table>
 
-Xquik은 가장 완전한 X 데이터를 보유한, 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서비스입니다. X Tweet Viral
-Score Analyzer는 모든 트윗에 Viral Score 추정치 & 판정을 추가합니다. 다른 모든 Apify Actor는 필터링이나 중복
-제거 전에 요금을 부과합니다. Xquik은 전달되고, 고유하며, 필터에 맞는 결과에만 요금을 부과합니다. AI 비용은 트윗당 가격에 포함되어
-있습니다. AI 계정, 토큰, 키가 필요하지 않습니다.
+Xquik은 가장 완전한 X 데이터를 보유한, 세계에서 가장 빠르고 저렴한 X(Twitter)
+스크레이퍼 서비스입니다. X Tweet Viral Score Analyzer는 모든 트윗에 Viral Score
+추정치 & 판정을 추가합니다. 다른 Apify Actor 대부분은 필터링이나 중복 제거 전에
+요금을 부과합니다. Xquik은 전달되고, 고유하며, 필터에 맞는 결과에만 요금을
+부과합니다. AI 비용은 트윗당 가격에 포함되어 있습니다. AI 계정, 토큰, 키가
+필요하지 않습니다.
 
 트윗이 왜 퍼지거나 묻히는지 알아보면서 원본 트윗 데이터는 그대로 유지하세요.
 **X Tweet Viral Score Analyzer with AI**는 일치하는 트윗을 수집합니다. AI는 각
@@ -204,7 +206,7 @@ AI 비용은 트윗당 가격에 포함되어 있습니다. AI 계정, 토큰, �
 
 성공적으로 분석된 트윗당 $0.0003부터이며 시작 요금은 없습니다. 가격에는
 수집 & Viral Score가 포함됩니다. 분석 허용량은 질문 8개, 질문 정의당
-8,000바이트, 트윗당 맥락 12,000바이트입니다. 추출 필터 & 중복 제거는 분석 전에
+8,000바이트, 트윗당 맥락 64,000바이트입니다. 추출 필터 & 중복 제거는 분석 전에
 실행되므로 필터링되어 제외되거나 중복된 행은 분석되거나 과금되지 않습니다.
 실패하거나 건너뛴 분석과 진단 행에는 결과 요금이 없습니다. Apify는 플랫폼
 사용량을 별도로 청구합니다. Pricing 탭이 이를 보여줍니다.
@@ -256,11 +258,12 @@ AI 비용은 트윗당 가격에 포함되어 있습니다. AI 계정, 토큰, �
 
 ## 실행 요약 & 플랫 답변
 
-각 실행은 키-값 저장소에 `analysis-summary` 레코드를 작성하고 실행
-보고서의 `results.analysisSummary` 아래에 이를 반복합니다. 분석된 행, 실패한
-행, 건너뛴 행을 집계하고, 참여도를 합산하며, 모든 질문을 요약합니다. `viral`
-블록은 `averageScore`, 각 판정의 개수, & Actor가 점수를 매긴 행과 매기지 않은
-행의 수를 보고합니다. 같은 블록에는 위에서 설명한 `calibration`, `accounts` &
+각 실행은 키-값 저장소에 `analysis-summary` 레코드를 작성합니다. 문제가 생긴
+실행이나 큰 실행은 `run-report`도 작성합니다. `run-report`는
+`results.analysisSummary` 아래에 요약을 반복합니다. 요약은 분석된 행, 실패한 행,
+건너뛴 행을 집계하고, 참여도를 합산하며, 모든 질문을 요약합니다. `viral` 블록은
+`averageScore`, 각 판정의 개수, & Actor가 점수를 매긴 행과 매기지 않은 행의 수를
+보고합니다. 같은 블록에는 위에서 설명한 `calibration`, `accounts` &
 `leaderboard`가 담깁니다. 점수 질문은 평균 & 참여도 가중 평균을 보고합니다.
 `reaction` 분포는 각 반응에 속하는 트윗 수를 보여주며, `top`은 반응별로 가장
 많이 참여된 트윗 3개를 나열합니다. 빈 실행은 0 카운트 & `null` 평균을
@@ -323,10 +326,16 @@ AI 비용은 트윗당 가격에 포함되어 있습니다. AI 계정, 토큰, �
 
 ### 왜 어떤 행은 `analysis.status`가 `failed`나 `skipped`로 돌아왔나요?
 
-Actor는 트윗을 수집 & 전달했지만 AI 분석이 완료되지 않았습니다. `analysis.reason`은 트윗과 그 맥락이
-`maxContextBytes`를 초과할 때의 `context_limit`이나 분석 서비스를 잠시 사용할 수 없을 때의
-`service_unavailable` 같은 원인을 나타냅니다. 이런 행에는 결과 요금도 점수도 없습니다. `maxContextBytes`를
-최대 12,000까지 높이거나 해당 ID를 다시 실행하세요.
+Actor는 트윗을 수집 & 전달했지만 AI 분석이 완료되지 않았습니다.
+`analysis.reason`은 원인을 나타냅니다. `context_limit`은 맥락과 대상이 트윗을
+넣을 공간을 남기지 않았다는 뜻입니다. `service_unavailable`은 분석 서비스를 잠시
+사용할 수 없었다는 뜻입니다. 이런 행에는 결과 요금도 점수도 없습니다.
+`analysis.context`를 줄이거나 해당 ID를 다시 실행하세요.
+
+Actor는 `maxContextBytes`보다 긴 트윗도 분석합니다. 먼저 인용된 게시물과 답글
+대상 게시물을 자르고, 그다음 트윗을 자릅니다. 이때
+`analysis.contextAvailability.postText`는 `truncated`가 됩니다. 더 많은 텍스트를
+유지하려면 `maxContextBytes`를 최대 64,000까지 높이세요.
 
 ### 분석이 사실을 검증하나요?
 

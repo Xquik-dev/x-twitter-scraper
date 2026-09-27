@@ -17,7 +17,7 @@
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. X Profile Scraper collects profiles, posts, replies, media
-& followers for any handle. Every other Apify Actor charges before filtering or
+& followers for any handle. Most other Apify Actors charge before filtering or
 deduplicating. Xquik charges only for delivered, unique, filter-matching
 results.
 

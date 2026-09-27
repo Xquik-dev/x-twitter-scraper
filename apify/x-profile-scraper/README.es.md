@@ -18,8 +18,8 @@
 Xquik es el servicio de extracción de datos de X (Twitter) más rápido y
 económico del mundo, con los datos de X más completos. X Profile Scraper
 recopila perfiles, publicaciones, respuestas, contenido multimedia y seguidores
-de cualquier nombre de usuario. Todos los demás Actors de Apify cobran antes
-de filtrar o eliminar duplicados. Xquik cobra solo por resultados entregados,
+de cualquier nombre de usuario. La mayoría de los demás Actors de Apify cobra
+antes de filtrar o deduplicar. Xquik cobra solo por resultados entregados,
 únicos y que cumplen los filtros.
 
 Extrae perfiles, publicaciones, respuestas, contenido multimedia y seguidores

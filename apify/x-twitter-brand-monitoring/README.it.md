@@ -18,8 +18,8 @@
 Xquik è il servizio di scraping per X (Twitter) più veloce ed economico al
 mondo, con i dati X più completi. X (Twitter) Brand Monitoring monitora le
 menzioni del tuo brand con rilevanza, sentiment e risposte sull'esperienza
-cliente. Ogni altro Actor Apify addebita i costi prima di filtrare o
-deduplicare. Xquik addebita solo i risultati consegnati, unici e che
+cliente. La maggior parte degli altri Actor Apify addebita costi prima di
+filtrare o deduplicare. Xquik addebita solo i risultati consegnati, unici e che
 corrispondono ai filtri. I costi dell'IA sono inclusi nel prezzo per tweet. Non
 ti servono account IA, token o chiavi.
 
@@ -56,8 +56,9 @@ te da un'esecuzione all'altra.
    il brand in `analysis.context`.
 4. Esegui l'Actor, poi conserva l'ID del dataset per il prossimo confronto.
 5. Nell'esecuzione successiva, aggiungi `monitor.baselineDatasetId` con
-   quell'ID. Mantieni invariati domande, target, contesto e limiti di
-   contesto in modo che le risposte restino confrontabili.
+   quell'ID. Mantieni invariati domande, target, contesto e limiti di contesto
+   in modo che le risposte restino confrontabili. Il confronto legge quel
+   dataset. Così funziona anche se quell'esecuzione ha saltato il riepilogo.
 
 ```json
 {
@@ -144,7 +145,7 @@ token o chiavi.
 
 A partire da $0.0003 per tweet analizzato con successo, senza costo di avvio. Il
 prezzo include la raccolta. La soglia per l'analisi è di 8 domande, 8.000 byte
-per definizione di domanda & 12.000 byte di contesto per tweet. I filtri di
+per definizione di domanda & 64.000 byte di contesto per tweet. I filtri di
 estrazione & la deduplicazione vengono eseguiti prima dell'analisi, quindi non
 paghi mai le righe filtrate o duplicate. Le analisi fallite, le analisi saltate
 & le righe diagnostiche non comportano addebiti sul risultato. Apify fattura
@@ -192,10 +193,24 @@ le righe raccolte, le analisi addebitate e gli addebiti in sospeso.
 
 ## Riepilogo dell'esecuzione e risposte in formato piatto
 
-Ogni esecuzione scrive un record `analysis-summary` nel proprio key-value store
-e lo ripete sotto `results.analysisSummary` nel report dell'esecuzione. Conta le
-righe analizzate, fallite e saltate, somma l'engagement e riepiloga ogni
-domanda.
+Un'esecuzione scrive un record `analysis-summary` nel proprio key-value store in
+4 casi:
+
+- Incontra un problema o è grande.
+- Imposta `monitor` senza `baselineDatasetId`, come prima esecuzione di una
+  serie.
+- Il suo confronto trova un tweet cambiato, nuovo o non confrontabile.
+- Ha `alwaysSaveRunRecords` attivo.
+
+Le altre esecuzioni saltano il record. Il loro messaggio di stato indica la
+risposta principale, come `Top sentiment: negative in 2 of 5 results.` Un
+confronto senza cambiamenti riporta `No change since the earlier run.`
+Un'esecuzione con un problema, o un'esecuzione grande, scrive anche
+`run-report`. Lo fa anche un'esecuzione con `alwaysSaveRunRecords` attivo.
+`run-report` ripete il riepilogo sotto `results.analysisSummary`.
+
+Il riepilogo conta le righe analizzate, fallite e saltate, somma l'engagement e
+riepiloga ogni domanda.
 
 - `targets` riporta menzioni, quota di voce & engagement per brand o alias.
 - Ogni voce di `targets` ha `top`, le sue tre menzioni con più engagement per
@@ -324,11 +339,16 @@ ordinati. Mantieni le stesse domande tra le esecuzioni che vuoi confrontare.
 ### Perché una riga è tornata con `analysis.status` su `failed` o `skipped`?
 
 L'Actor ha raccolto & consegnato il tweet, ma l'analisi AI non si è completata.
-`analysis.reason` indica la causa, ad esempio `context_limit` quando il tweet e
-il suo contesto superano `maxContextBytes`, oppure `service_unavailable` quando
-il servizio di analisi è momentaneamente non disponibile. Queste righe non
-comportano addebiti sul risultato. Aumenta `maxContextBytes` (fino a 12.000)
-oppure riesegui gli ID interessati.
+`analysis.reason` indica la causa. `context_limit` significa che il tuo contesto
+& i tuoi target non lasciano spazio al tweet. `service_unavailable` significa
+che il servizio di analisi era momentaneamente non disponibile. Queste righe non
+comportano addebiti sul risultato. Accorcia `analysis.context` o riesegui gli ID
+interessati.
+
+L'Actor analizza comunque un tweet più lungo di `maxContextBytes`. Taglia prima
+i post citati & quelli a cui risponde, poi il tweet.
+`analysis.contextAvailability.postText` diventa quindi `truncated`. Aumenta
+`maxContextBytes` fino a 64.000 per conservare più testo.
 
 ### L'analisi verifica i fatti?
 

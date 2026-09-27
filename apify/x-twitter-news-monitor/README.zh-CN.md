@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何搭配 Claude Code、Codex、Cursor 等使用 Xquik 抓取工具，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据。X (Twitter) News Monitor 按形式、来源归属与相关性对新闻帖子进行分类。其他所有Apify Actor 都在过滤或去重之前就收费。Xquik 只为交付的、唯一的、符合过滤条件的结果收费。AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
+Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据。X (Twitter) News Monitor 按形式、来源归属与相关性对新闻帖子进行分类。大多数其他 Apify Actor 都会在过滤或去重之前收费。Xquik 只为交付的、唯一的、符合过滤条件的结果收费。AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
 
 按新闻帖子的性质对其分类，并保留原始推文数据。**X (Twitter) News Monitor with
 AI Analysis** 收集关于你所关注话题的帖子，然后为每条帖子添加 AI 驱动的形式、来
@@ -31,7 +31,7 @@ AI Analysis** 收集关于你所关注话题的帖子，然后为每条帖子添
 
 1. 添加搜索词，例如 `Nvidia earnings lang:en -filter:retweets`、新闻账号
    用户名或推文 ID。
-2. 设置 `maxItems` 以及提取过滤条件，例如日期范围、`filter:news` 或最低
+2. 设置 `maxItems` 以及提取过滤条件，例如日期范围、`filter:links` 或最低
    转发数。
 3. 在 `analysis.targets` 中填入你所追踪的组织、人物或话题及其别名，并在
    `analysis.context` 中缩小话题范围。
@@ -82,7 +82,7 @@ AI Analysis** 收集关于你所关注话题的帖子，然后为每条帖子添
 AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
 
 每成功分析一条推文起价 $0.0003，无起步费用。价格已包含收集费用。分析额度为 8
-个问题、每个问题定义 8,000 字节、每条推文 12,000 字节上下文。提取过滤与去重在
+个问题、每个问题定义 8,000 字节、每条推文 64,000 字节上下文。提取过滤与去重在
 分析之前运行，因此被过滤掉的行与重复行永远不会被分析或收费。失败、跳过的分析以
 及诊断行不产生结果费用。Apify 会单独收取平台使用费。Pricing 标签页会显示该费
 用。
@@ -125,9 +125,20 @@ AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或�
 
 ## 运行摘要与扁平化答案
 
-每次运行都会向其 key-value store 写入一条 `analysis-summary` 记录，并在运行报
-告中的 `results.analysisSummary` 下重复该记录。它统计已分析、失败与跳过的行
-数，汇总互动数据，并对每个问题作出总结。
+在以下 4 种情况下，运行会向其 key-value store 写入一条 `analysis-summary` 记录：
+
+- 运行遇到问题或规模较大。
+- 作为系列中的首次运行，设置了 `monitor` 但没有设置 `baselineDatasetId`。
+- 比较发现了已变化、新增或无法比较的推文。
+- 开启了 `alwaysSaveRunRecords`。
+
+其他运行会跳过该记录。它们的状态消息会写明最多的答案，例如
+`Top format: reporting in 4 of 5 results.` 没有变化的比较会显示
+`No change since the earlier run.` 遇到问题的运行或大型运行还会写入
+`run-report`。开启 `alwaysSaveRunRecords` 的运行也会写入。`run-report` 会在
+`results.analysisSummary` 下重复该摘要。
+
+摘要统计已分析、失败与跳过的行数，汇总互动数据，并对每个问题作出总结。
 
 - `format` 拆分把报道与评论、猜测、推广与讽刺区分开。
 - `attribution` 统计具名、链接、第一手与缺失来源的数量。
@@ -148,7 +159,7 @@ AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或�
 
 ## 与更早的运行比较
 
-传入 `monitor.baselineDatasetId`，即一次使用相同分析设置完成的更早运行的数据集ID。之后每一行都会获得一个 `monitor` 对象。其状态在没有基线时为 `first_run`，更早运行中不存在的推文为 `new_to_baseline`，已存在的推文为 `unchanged` 或`changed`。`changes` 列出每个从 `previous` 变为 `current` 的形式、归属或相关性判断。判断按类别、四舍五入的分数等级或 0.5 处的是否判断进行比较。只有判断发生明显变化时才计为已更改。运行之间的临界抖动视为未变化。超过 `maxBaselineRows`（默认100,000）的基线或来自不同设置的基线，会在收集之前以诊断行的形式停止运行。
+传入 `monitor.baselineDatasetId`，即一次使用相同分析设置完成的更早运行的数据集ID。比较会读取该运行的行，因此即使该运行跳过了摘要也能正常工作。之后每一行都会获得一个 `monitor` 对象。其状态在没有基线时为 `first_run`，更早运行中不存在的推文为 `new_to_baseline`，已存在的推文为 `unchanged` 或`changed`。`changes` 列出每个从 `previous` 变为 `current` 的形式、归属或相关性判断。判断按类别、四舍五入的分数等级或 0.5 处的是否判断进行比较。只有判断发生明显变化时才计为已更改。运行之间的临界抖动视为未变化。超过 `maxBaselineRows`（默认100,000）的基线或来自不同设置的基线，会在收集之前以诊断行的形式停止运行。
 
 ## 任务示例
 
@@ -236,7 +247,9 @@ AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或�
 
 ### 为什么某一行返回的 `analysis.status` 是 `failed` 或 `skipped`？
 
-Actor 已收集并交付该推文，但 AI 分析未能完成。`analysis.reason` 会说明原因，例如推文及其上下文超过 `maxContextBytes` 时的 `context_limit`，或分析服务暂时不可用时的 `service_unavailable`。这些行不产生结果费用。提高 `maxContextBytes`（最多12,000）或重新运行受影响的 ID。
+Actor 已收集并交付该推文，但 AI 分析未能完成。`analysis.reason` 会说明原因。`context_limit` 表示你的上下文和目标没有给推文留出空间。`service_unavailable` 表示分析服务曾暂时不可用。这些行不产生结果费用。请缩短 `analysis.context`，或重新运行受影响的 ID。
+
+推文超过 `maxContextBytes` 时，Actor 仍会分析它。它会先截断被引用和被回复的帖子，再截断推文本身。此时 `analysis.contextAvailability.postText` 为 `truncated`。如需保留更多文本，可将 `maxContextBytes` 提高到最多 64,000。
 
 ### 分析会核实事实吗？
 

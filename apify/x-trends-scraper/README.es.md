@@ -16,10 +16,10 @@
 </td></tr></table>
 
 Xquik es el servicio de extracción de X (Twitter) más rápido y económico del
-mundo, con los datos de X más completos. X Trends Scraper recopila
-tendencias en tiempo real por ubicación con rango, volumen y consulta. Cualquier
-otro Actor de Apify cobra antes de filtrar o eliminar duplicados. Xquik cobra
-solo por resultados entregados, únicos y que coinciden con los filtros.
+mundo, con los datos de X más completos. X Trends Scraper recopila tendencias en
+tiempo real por ubicación con rango, volumen y consulta. La mayoría de los demás
+Actors de Apify cobra antes de filtrar o deduplicar. Xquik cobra solo por
+resultados entregados, únicos y que coinciden con los filtros.
 
 Extrae las tendencias actuales de Twitter en muchas ubicaciones en una sola
 ejecución. Exporta rango, tema, consulta, volumen de tuits, URL de búsqueda,
@@ -51,6 +51,9 @@ Usa nombres de ubicación, WOEID numéricos o ambos:
 Los atajos admitidos incluyen Worldwide, United States, United Kingdom, Turkey,
 Brazil, Canada, France, Germany, India, Indonesia, Japan, Mexico y Australia.
 Usa `woeids` para cualquier otra ubicación compatible.
+
+Las ejecuciones pequeñas que terminan bien omiten `run-report` y ahorran uso de
+Apify. Activa `alwaysSaveRunRecords` para escribirlo en cada ejecución.
 
 ## Salida
 

@@ -17,8 +17,8 @@
 
 Xquik es el servicio de extracción de X (Twitter) más rápido y económico del
 mundo, con los datos de X más completos. X Tweet Viral Score Analyzer agrega una
-estimación de Viral Score y un veredicto a cada tuit. Cualquier otro Actor de
-Apify cobra antes de filtrar o eliminar duplicados. Xquik cobra solo por
+estimación de Viral Score y un veredicto a cada tuit. La mayoría de los demás
+Actors de Apify cobra antes de filtrar o deduplicar. Xquik cobra solo por
 resultados entregados, únicos y que coinciden con los filtros. Los costos de IA
 están incluidos en el precio por tweet. No necesitas cuenta de IA, tokens ni
 clave.
@@ -228,7 +228,7 @@ IA, tokens ni clave.
 
 Desde $0.0003 por tuit analizado con éxito, sin tarifa de inicio. El precio
 incluye la recopilación y el Viral Score. La capacidad de análisis es de 8
-preguntas, 8000 bytes por definición de pregunta y 12 000 bytes de contexto
+preguntas, 8000 bytes por definición de pregunta y 64 000 bytes de contexto
 por tuit. Los filtros de extracción y la eliminación de duplicados se ejecutan
 antes del análisis, por lo que las filas descartadas y duplicadas nunca se
 analizan ni se cobran. Los análisis fallidos u omitidos y las filas de
@@ -286,19 +286,19 @@ análisis cobrados y los cargos pendientes.
 ## Resumen de ejecución y respuestas planas
 
 Cada ejecución escribe un registro `analysis-summary` en su almacén de
-clave-valor y lo repite bajo `results.analysisSummary` en el informe de
-ejecución. Cuenta las filas analizadas, fallidas y omitidas, suma la
-interacción y resume cada pregunta. Su bloque `viral` reporta `averageScore`,
-el conteo de cada veredicto y cuántas filas el Actor puntuó o dejó sin
-puntaje. El mismo bloque contiene `calibration`, `accounts` y `leaderboard`,
-descritos arriba. Las preguntas de puntaje reportan una media y una media
-ponderada por interacción. La división de `reaction` muestra cuántos tuits
-caen en cada reacción, y `top` enumera los tres tuits con más interacción por
-reacción. Una ejecución vacía reporta conteos en cero y un promedio `null`.
-Cada fila enumera `sourceDomains`, los nombres de host que enlaza, & `cashtags`
-como `$NVDA` encontrados en su texto. Con `monitor.baselineDatasetId`
-establecido, el bloque `monitor` del resumen cuenta los estados de comparación
-& enumera hasta 50 filas modificadas.
+clave-valor. Una ejecución con un problema, o una ejecución grande, también
+escribe `run-report`. Este repite el resumen en `results.analysisSummary`. El
+resumen cuenta las filas analizadas, fallidas y omitidas, suma la interacción y
+resume cada pregunta. Su bloque `viral` reporta `averageScore`, el conteo de
+cada veredicto y cuántas filas el Actor puntuó o dejó sin puntaje. El mismo
+bloque contiene `calibration`, `accounts` y `leaderboard`, descritos arriba. Las
+preguntas de puntaje reportan una media y una media ponderada por interacción.
+La división de `reaction` muestra cuántos tuits caen en cada reacción, y `top`
+enumera los tres tuits con más interacción por reacción. Una ejecución vacía
+reporta conteos en cero y un promedio `null`. Cada fila enumera `sourceDomains`,
+los nombres de host que enlaza, & `cashtags` como `$NVDA` encontrados en su
+texto. Con `monitor.baselineDatasetId` establecido, el bloque `monitor` del
+resumen cuenta los estados de comparación & enumera hasta 50 filas modificadas.
 
 Cada fila de resultado también incluye `viralScore`, `viralVerdict`,
 `viralAlgorithmScore`, `viralActualEngagementRate` y `answers`, un mapa plano
@@ -363,11 +363,16 @@ preguntas predeterminadas, así que las preguntas personalizadas lo dejan en
 ### ¿Por qué una fila regresó con `analysis.status` en `failed` o `skipped`?
 
 El Actor recopiló & entregó el tuit, pero el análisis con IA no se completó.
-`analysis.reason` indica la causa, como `context_limit` cuando el tuit y su
-contexto superan `maxContextBytes`, o `service_unavailable` cuando el servicio
-de análisis no está disponible por un momento. Estas filas no tienen costo de
-resultado ni puntaje. Aumenta `maxContextBytes` (hasta 12 000) o vuelve a
+`analysis.reason` indica la causa. `context_limit` significa que tu contexto y
+tus objetivos no dejan espacio para el tuit. `service_unavailable` significa que
+el servicio de análisis no estuvo disponible por un momento. Estas filas no
+tienen costo de resultado ni puntaje. Acorta `analysis.context` o vuelve a
 ejecutar los IDs afectados.
+
+El Actor analiza igual un tuit más largo que `maxContextBytes`. Primero recorta
+las publicaciones citadas y respondidas, luego el tuit. Entonces
+`analysis.contextAvailability.postText` queda en `truncated`. Sube
+`maxContextBytes` hasta 64 000 para conservar más texto.
 
 ### ¿El análisis verifica hechos?
 

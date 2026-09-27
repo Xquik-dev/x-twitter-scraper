@@ -16,8 +16,8 @@
 </td></tr></table>
 
 Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据。X List
-Scraper 能采集 List 帖子、成员与关注者。其他所有 Apify Actor 都会在过滤或去重之前
-就收费。Xquik 只为已交付、唯一且符合过滤条件的结果收费。
+Scraper 能采集 List 帖子、成员与关注者。大多数其他 Apify Actor
+都会在过滤或去重之前收费。Xquik 只为已交付、唯一且符合过滤条件的结果收费。
 
 从 List URL 或数字 ID 抓取 X List 的帖子、成员与关注者。可同时处理多个 List 与
 多种资源。无需 X API 密钥或登录。
@@ -42,6 +42,9 @@ Scraper 能采集 List 帖子、成员与关注者。其他所有 Apify Actor �
   "maxItems": 10000
 }
 ```
+
+顺利完成的小型运行会跳过 `run-report`，以节省 Apify 用量。开启
+`alwaysSaveRunRecords` 可在每次运行时都写入。
 
 ## 输出
 

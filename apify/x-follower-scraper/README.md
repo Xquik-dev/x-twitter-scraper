@@ -17,7 +17,7 @@
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. X Follower Scraper collects followers, following, list
-members, subscribers & community members. Every other Apify Actor charges before
+members, subscribers & community members. Most other Apify Actors charge before
 filtering or deduplicating. Xquik charges only for delivered, unique,
 filter-matching results.
 
@@ -35,6 +35,12 @@ Interrupted extraction writes a free `partial` diagnostic. Available results
 remain intact. Read `availableResults`, `failedTargets`, `retryable`, and
 `nextAction` before retrying. A successful Actor exit confirms delivery, not
 complete extraction.
+
+The status names every cause of an early stop. `stopCauses` lists each cause
+with its own `message`, `retryable` & `nextAction`. The causes are
+`target_not_found`, `target_failed` & `deadline_reached`. A missing account
+joins the list only when another cause stopped the run. The run is `retryable`
+when any cause is.
 
 ## What does X Follower Scraper do?
 
@@ -118,11 +124,13 @@ similar viewer flags are always removed, including from raw output.
 Every Apify plan costs `$0.00015` per delivered profile. Apify bills your
 platform usage separately. Xquik applies one charge per delivered data row.
 Diagnostics are free in the `diagnostics` output. No separate Xquik subscription
-applies. No start fee applies. Each run writes a `run-report` record with
-`estimatedChargeUsd` calculated from the live pay-per-event price Apify exposes
-to the Actor. Every outcome writes `run-report`, including no-input and
-invalid-input exits. Its `version` field reports the exact published Actor
-source version.
+applies. No start fee applies. The run status says why the run stopped. It also
+counts charged results & targets read. A run that hits a problem, or a large
+run, also writes a `run-report` record. Its `estimatedChargeUsd` uses the live
+pay-per-event price Apify exposes to the Actor. Runs with a problem always write
+`run-report`, including no-input and invalid-input exits. A small run that goes
+well skips it & saves Apify usage. Its `version` field reports the exact
+published Actor source version.
 
 `failedTargets` counts targets that stopped after an error. Delivered profiles
 remain billable data rows. These runs use `completionReason: "partial_failure"`.

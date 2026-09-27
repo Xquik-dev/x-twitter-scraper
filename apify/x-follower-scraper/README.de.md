@@ -17,9 +17,9 @@
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
 den umfassendsten X-Daten. X Follower Scraper sammelt Follower, Gefolgte,
-Listenmitglieder, Abonnenten & Community-Mitglieder. Jeder andere Apify Actor
-berechnet, bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für
-gelieferte, eindeutige, filterkonforme Ergebnisse.
+Listenmitglieder, Abonnenten & Community-Mitglieder. Die meisten anderen Apify
+Actors berechnen, bevor gefiltert oder dedupliziert wird. Xquik berechnet nur
+für gelieferte, eindeutige, filterkonforme Ergebnisse.
 
 Scrape X-(Twitter-)Follower, Gefolgte, verifizierte Follower,
 Listenmitglieder, Listenabonnenten und Community-Mitglieder für **ab
@@ -36,6 +36,12 @@ Verfügbare Ergebnisse bleiben erhalten. Lies `availableResults`,
 `failedTargets`, `retryable` und `nextAction`, bevor du es erneut versuchst.
 Ein erfolgreicher Actor-Abschluss bestätigt die Lieferung, nicht die
 vollständige Extraktion.
+
+Der Statustext nennt jede Ursache für einen vorzeitigen Stopp. `stopCauses`
+listet jede Ursache mit eigenen Feldern `message`, `retryable` & `nextAction`.
+Die Ursachen sind `target_not_found`, `target_failed` & `deadline_reached`. Ein
+fehlender Account zählt nur mit, wenn eine andere Ursache den Run stoppte. Der
+Run ist `retryable`, wenn mindestens 1 Ursache es ist.
 
 ## Was macht X Follower Scraper?
 
@@ -125,12 +131,15 @@ immer entfernt, auch aus der Raw-Ausgabe.
 
 Auf jedem Apify-Plan kostet es `$0.00015` pro geliefertem Profil. Apify
 berechnet deine Plattformnutzung separat. Xquik berechnet eine Gebühr pro
-geliefertem Datensatz. Diagnosen in der Ausgabe `diagnostics` sind kostenlos.
-Es gilt kein separates Xquik-Abonnement. Es gilt keine Startgebühr. Jeder
-Run schreibt einen `run-report`-Datensatz mit `estimatedChargeUsd`,
-berechnet aus dem Live-Pay-per-Event-Preis, den Apify dem Actor offenlegt.
-Jedes Ergebnis schreibt `run-report`, auch Abbrüche ohne Eingabe und mit
-ungültiger Eingabe. Das Feld `version` darin gibt die exakte veröffentlichte
+geliefertem Datensatz. Diagnosen in der Ausgabe `diagnostics` sind kostenlos. Es
+gilt kein separates Xquik-Abonnement. Es gilt keine Startgebühr. Der Statustext
+nennt, warum der Run gestoppt hat. Er zählt auch berechnete Ergebnisse &
+gelesene Ziele. Ein Run mit einem Problem oder ein großer Run schreibt
+zusätzlich einen `run-report`-Datensatz. Dessen `estimatedChargeUsd` nutzt den
+Live-Pay-per-Event-Preis, den Apify dem Actor offenlegt. Runs mit einem Problem
+schreiben immer `run-report`. Das gilt auch für Abbrüche ohne Eingabe und mit
+ungültiger Eingabe. Ein kleiner Run ohne Probleme überspringt ihn & spart
+Apify-Nutzung. Das Feld `version` darin gibt die exakte veröffentlichte
 Actor-Quellversion an.
 
 `failedTargets` zählt Ziele, die nach einem Fehler abgebrochen sind. Gelieferte

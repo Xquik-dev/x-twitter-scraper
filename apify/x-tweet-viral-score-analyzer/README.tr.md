@@ -17,7 +17,7 @@
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. X Tweet Viral Score Analyzer, her tweet'e bir Viral Score
-tahmini & bir karar ekler. Diğer tüm Apify Actor'ları filtreleme veya
+tahmini & bir karar ekler. Diğer Apify Actor'larının çoğu filtreleme veya
 tekilleştirmeden önce ücret alır. Xquik yalnızca teslim edilen, benzersiz,
 filtreyle eşleşen sonuçlar için ücret alır. Yapay zekâ maliyetleri tweet başına
 fiyata dahil. Yapay zekâ hesabına, token'a veya anahtara ihtiyacın yok.
@@ -224,7 +224,7 @@ veya anahtara ihtiyacın yok.
 
 Başlangıç ücreti olmadan, başarıyla analiz edilen tweet başına $0.0003'ten
 başlar. Fiyat toplamayı & Viral Score'u içerir. Analiz ödeneği 8 soru, soru
-tanımı başına 8.000 bayt ve tweet başına 12.000 bayt bağlamdır. Çıkarma
+tanımı başına 8.000 bayt ve tweet başına 64.000 bayt bağlamdır. Çıkarma
 filtreleri ve tekilleştirme analizden önce çalışır, bu yüzden filtrelenmiş
 ve tekrarlanan satırlar hiçbir zaman analiz edilmez veya ücretlendirilmez.
 Başarısız ve atlanan analizler ile tanılama satırlarının sonuç ücreti yoktur.
@@ -280,20 +280,20 @@ satırları, ücretlendirilen analizleri ve bekleyen ücretleri ayırır.
 
 ## Çalıştırma özeti ve düz yanıtlar
 
-Her çalıştırma, anahtar-değer deposuna bir `analysis-summary` kaydı yazar ve
-çalıştırma raporunda `results.analysisSummary` altında tekrarlar. Analiz
-edilen, başarısız ve atlanan satırları sayar, etkileşimi toplar ve her
-soruyu özetler. `viral` bloğu `averageScore` değerini, her kararın sayısını &
-Actor'ın kaç satırı puanladığını veya puansız bıraktığını bildirir. Aynı blok,
-yukarıda anlatılan `calibration`, `accounts` & `leaderboard` bloklarını
-tutar. Puan soruları bir ortalama & etkileşim ağırlıklı bir ortalama
-bildirir. `reaction` bölünmesi, kaç tweet'in her tepkiye düştüğünü gösterir &
-`top`, her tepki için en çok etkileşim alan üç tweet'i listeler. Boş bir
-çalıştırma sıfır sayım & `null` bir ortalama bildirir. Her satır, bağlantı
-verdiği ana bilgisayar adlarını `sourceDomains`'te & metninde bulunan `$NVDA`
-gibi `cashtags`'i listeler. `monitor.baselineDatasetId` ayarlıysa özetin
-`monitor` bloğu karşılaştırma durumlarını sayar & 50'ye kadar değişen satırı
-listeler.
+Her çalıştırma, anahtar-değer deposuna bir `analysis-summary` kaydı yazar. Sorun
+yaşayan veya büyük bir çalıştırma ayrıca `run-report` yazar. Bu rapor, özeti
+`results.analysisSummary` altında tekrarlar. Özet, analiz edilen, başarısız ve
+atlanan satırları sayar, etkileşimi toplar ve her soruyu özetler. `viral` bloğu
+`averageScore` değerini, her kararın sayısını & Actor'ın kaç satırı puanladığını
+veya puansız bıraktığını bildirir. Aynı blok, yukarıda anlatılan `calibration`,
+`accounts` & `leaderboard` bloklarını tutar. Puan soruları bir ortalama &
+etkileşim ağırlıklı bir ortalama bildirir. `reaction` bölünmesi, kaç tweet'in
+her tepkiye düştüğünü gösterir & `top`, her tepki için en çok etkileşim alan üç
+tweet'i listeler. Boş bir çalıştırma sıfır sayım & `null` bir ortalama bildirir.
+Her satır, bağlantı verdiği ana bilgisayar adlarını `sourceDomains`'te &
+metninde bulunan `$NVDA` gibi `cashtags`'i listeler. `monitor.baselineDatasetId`
+ayarlıysa özetin `monitor` bloğu karşılaştırma durumlarını sayar & 50'ye kadar
+değişen satırı listeler.
 
 Her sonuç satırı ayrıca `viralScore`, `viralVerdict`, `viralAlgorithmScore`,
 `viralActualEngagementRate` & `answers`'ı da taşır. `answers`, soru ID'sinden
@@ -357,11 +357,16 @@ bu yüzden özel sorular onu `null` bırakır.
 ### Bir satır neden `analysis.status`'u `failed` veya `skipped` olarak döndü?
 
 Actor tweet'i topladı & teslim etti, ancak yapay zeka analizi tamamlanmadı.
-`analysis.reason`, tweet ve bağlamı `maxContextBytes`'ı aştığında
-`context_limit` veya analiz hizmeti kısa süre kullanılamadığında
-`service_unavailable` gibi nedeni adlandırır. Bu satırların sonuç ücreti & puanı
-yoktur. `maxContextBytes`'ı (12.000'e kadar) artır veya etkilenen ID'leri
-yeniden çalıştır.
+`analysis.reason` nedeni adlandırır. `context_limit`, bağlamının ve hedeflerinin
+tweet'e yer bırakmadığı anlamına gelir. `service_unavailable`, analiz hizmetinin
+kısa süre kullanılamadığı anlamına gelir. Bu satırların sonuç ücreti & puanı
+yoktur. `analysis.context` alanını kısalt veya etkilenen ID'leri yeniden
+çalıştır.
+
+Actor, `maxContextBytes` sınırından uzun bir tweet'i yine de analiz eder. Önce
+alıntılanan ve yanıtlanan gönderileri, sonra tweet'i kısaltır. Bu durumda
+`analysis.contextAvailability.postText` değeri `truncated` olur. Daha fazla
+metin tutmak için `maxContextBytes` değerini 64.000'e kadar artır.
 
 ### Analiz gerçekleri doğrular mı?
 

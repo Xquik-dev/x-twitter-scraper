@@ -17,7 +17,7 @@
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. X Tweet Scraper collects tweets, replies, profiles, lists
-& searches with 50+ filters. Every other Apify Actor charges before filtering or
+& searches with 50+ filters. Most other Apify Actors charge before filtering or
 deduplicating. Xquik charges only for delivered, unique, filter-matching
 results.
 
@@ -157,11 +157,14 @@ Every Apify plan costs `$0.00015` per delivered row. Apify bills your platform
 usage separately. Xquik applies one charge per delivered data row. Diagnostics
 are free in the `diagnostics` output.
 
-No Xquik subscription applies. No separate start or query fee applies. Each run
-also writes a `run-report` record with `estimatedChargeUsd` calculated from the
-live pay-per-event price Apify exposes to the Actor. Every outcome writes
-`run-report`, including no-input and invalid-input exits. Run reports separate
-data rows in `realRows` and diagnostics in `diagnosticRows`.
+No Xquik subscription applies. No separate start or query fee applies. The run
+status says why the run stopped. It also counts charged results & targets read.
+A run that hits a problem, or a large run, also writes a `run-report` record.
+Its `estimatedChargeUsd` uses the live pay-per-event price Apify exposes to the
+Actor. Runs with a problem always write `run-report`, including no-input and
+invalid-input exits. A small run that goes well skips it & saves Apify usage.
+Run reports separate data rows in `realRows` and diagnostics in
+`diagnosticRows`.
 
 Understand empty results before spending on another run. The `filtering` object
 in reports & final diagnostics counts the rows your filters removed. See
@@ -188,20 +191,27 @@ stalled search says both. `stopCauses` lists each cause with its own `message`,
 `pagination_safety_limit`, `reply_reach` & `deadline_reached`. The run is
 `retryable` when any cause is.
 
-Protected or missing targets count as failures, including runs with valid
-results. So does a search X cannot run. X.com shows "Something went wrong" for
-such a search, & the run stops it at once without retries. So do likes X hides.
-X shows who liked a post only to its author, & the posts an account liked only
-to that account. When all failures concern unavailable targets, diagnostics set
-`retryable: false`. Check target URLs or usernames & choose available public
+A missing or protected target is no failure. X has nothing to read there, so the
+run reads every other target to the end. It reports `outcome: "complete"` with
+the completion reason of the targets it read, such as `source_exhausted`.
+`failedSubtargets` leaves those targets out. The status text & a free `complete`
+diagnostic count them. A run without other rows writes a `zero-output`
+diagnostic instead.
+
+A search X cannot run counts as a failure. X.com shows "Something went wrong"
+for such a search, & the run stops it at once without retries. So do likes X
+hides. X shows who liked a post only to its author, & the posts an account liked
+only to that account. When all failures concern unavailable targets, diagnostics
+set `retryable: false`. Check target URLs or usernames & choose available public
 accounts. Narrow a search X cannot run or change its filters. Read retweeters,
 replies or posts in place of hidden likes. Other failures retain retry guidance
 for unfinished targets.
 
 The diagnostic names those targets in `unavailableTargets`. Each entry has the
-`target` as you entered it & a `reason`: `not_found`, `protected`,
-`search_unavailable` or `likes_hidden`. The list holds up to 100 entries. Remove
-them from the input to get a complete run.
+`target` as you entered it, a `reason` & a `nextAction`. The reason is
+`not_found`, `protected`, `search_unavailable` or `likes_hidden`. A search entry
+can also have a `fix`, such as the operator to remove. The list holds up to 100
+entries. Remove them from the input.
 
 `completionReason: "pagination_safety_limit"` is not a read failure. The run
 kept its valid rows, then ended a target that no longer returned new results.
@@ -518,6 +528,11 @@ and use Legacy output. The visual form labels them as Legacy aliases.
 | `filter:replies`       | `filter:replies`       | Only reply tweets           |
 | `filter:quote`         | `filter:quote`         | Only quote tweets           |
 | `filter:blue_verified` | `filter:blue_verified` | Only Premium users          |
+
+X no longer searches `filter:vine`, `filter:consumer_video`, `filter:pro_video`,
+`filter:news` or `retweets_of:`. A search with one of them ends at once with a
+free diagnostic that names the fix. Keep each query to 512 characters or fewer,
+the most X searches.
 
 Date windows use an inclusive lower bound and exclusive upper bound. The Actor
 verifies both bounds before adding or charging for each tweet.

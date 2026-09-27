@@ -16,9 +16,9 @@
 </td></tr></table>
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo con
-i dati X più completi. X List Scraper raccoglie post, membri & follower
-delle List. Ogni altro Actor Apify addebita costi prima di filtrare o
-deduplicare. Xquik addebita solo per i risultati consegnati, unici e
+i dati X più completi. X List Scraper raccoglie post, membri & follower delle
+List. La maggior parte degli altri Actor Apify addebita costi prima di filtrare
+o deduplicare. Xquik addebita solo per i risultati consegnati, unici e
 corrispondenti ai filtri.
 
 Estrai post, membri e follower delle List X da URL o ID numerici delle List.
@@ -46,6 +46,9 @@ Elabora più List e risorse insieme. Non serve una chiave API X né il login.
   "maxItems": 10000
 }
 ```
+
+Le esecuzioni piccole senza problemi saltano `run-report` & risparmiano uso di
+Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
 
 ## Output
 

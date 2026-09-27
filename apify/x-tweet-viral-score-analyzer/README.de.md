@@ -17,10 +17,11 @@
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
 den umfassendsten X-Daten. X Tweet Viral Score Analyzer ergänzt jeden Tweet um
-eine Viral-Score-Schätzung & ein Urteil. Jeder andere Apify Actor berechnet,
-bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für gelieferte,
-eindeutige, filterkonforme Ergebnisse. Die KI-Kosten sind im Preis pro Tweet
-enthalten. Du brauchst kein KI-Konto, keine Tokens und keinen Schlüssel.
+eine Viral-Score-Schätzung & ein Urteil. Die meisten anderen Apify Actors
+berechnen, bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für
+gelieferte, eindeutige, filterkonforme Ergebnisse. Die KI-Kosten sind im Preis
+pro Tweet enthalten. Du brauchst kein KI-Konto, keine Tokens und keinen
+Schlüssel.
 
 Finde heraus, warum Tweets sich verbreiten oder floppen, & behalte die
 ursprünglichen Tweet-Daten. **X Tweet Viral Score Analyzer with AI** sammelt
@@ -225,7 +226,7 @@ keine Tokens und keinen Schlüssel.
 
 Ab $0.0003 pro erfolgreich analysiertem Tweet, ohne Startgebühr. Der
 Preis enthält die Erfassung & den Viral Score. Das Analyse-Kontingent umfasst
-8 Fragen, 8.000 Byte pro Frage-Definition & 12.000 Byte Kontext pro Tweet.
+8 Fragen, 8.000 Byte pro Frage-Definition & 64.000 Byte Kontext pro Tweet.
 Extraktionsfilter & Deduplizierung laufen vor der Analyse, sodass
 herausgefilterte & doppelte Datensätze nie analysiert oder berechnet
 werden. Fehlgeschlagene & übersprungene Analysen sowie Diagnose-Datensätze
@@ -282,21 +283,21 @@ abgerechnete Analysen & ausstehende Gebühren.
 
 ## Run-Zusammenfassung & flache Antworten
 
-Jeder Run schreibt einen `analysis-summary`-Datensatz in seinen
-Key-Value-Store & wiederholt ihn unter `results.analysisSummary` im
-Run-Report. Er zählt analysierte, fehlgeschlagene & übersprungene
-Datensätze, summiert Interaktionen und fasst jede Frage zusammen. Sein
-`viral`-Block meldet `averageScore`, die Anzahl jedes Urteils & wie viele
-Datensätze der Actor bewertet oder unbewertet gelassen hat. Derselbe Block
-enthält `calibration`, `accounts` & `leaderboard`, die oben beschrieben sind.
-Score-Fragen melden einen Mittelwert & einen nach Interaktionen gewichteten
-Mittelwert. Die Aufteilung `reaction` zeigt, wie viele Tweets in welche
-Reaktion fallen, & `top` listet die drei am stärksten interagierten Tweets pro
-Reaktion. Ein leerer Run meldet Nullwerte & einen `null`-Durchschnitt. Jeder
-Datensatz listet `sourceDomains`, die Hostnamen, auf die er verlinkt, &
-`cashtags` wie `$NVDA` aus seinem Text. Ist `monitor.baselineDatasetId`
-gesetzt, zählt der `monitor`-Block der Zusammenfassung Vergleichsstatus &
-listet bis zu 50 geänderte Datensätze.
+Jeder Run schreibt einen `analysis-summary`-Datensatz in seinen Key-Value-Store.
+Ein Run mit einem Problem oder ein großer Run schreibt zusätzlich `run-report`.
+Dieser wiederholt die Zusammenfassung unter `results.analysisSummary`. Die
+Zusammenfassung zählt analysierte, fehlgeschlagene & übersprungene Datensätze,
+summiert Interaktionen und fasst jede Frage zusammen. Sein `viral`-Block meldet
+`averageScore`, die Anzahl jedes Urteils & wie viele Datensätze der Actor
+bewertet oder unbewertet gelassen hat. Derselbe Block enthält `calibration`,
+`accounts` & `leaderboard`, die oben beschrieben sind. Score-Fragen melden einen
+Mittelwert & einen nach Interaktionen gewichteten Mittelwert. Die Aufteilung
+`reaction` zeigt, wie viele Tweets in welche Reaktion fallen, & `top` listet die
+drei am stärksten interagierten Tweets pro Reaktion. Ein leerer Run meldet
+Nullwerte & einen `null`-Durchschnitt. Jeder Datensatz listet `sourceDomains`,
+die Hostnamen, auf die er verlinkt, & `cashtags` wie `$NVDA` aus seinem Text.
+Ist `monitor.baselineDatasetId` gesetzt, zählt der `monitor`-Block der
+Zusammenfassung Vergleichsstatus & listet bis zu 50 geänderte Datensätze.
 
 Jeder Ergebnisdatensatz führt außerdem `viralScore`, `viralVerdict`,
 `viralAlgorithmScore`, `viralActualEngagementRate` & `answers`, eine flache
@@ -361,11 +362,16 @@ Standardfragen, daher lassen eigene Fragen ihn auf `null`.
 ### Warum kam ein Datensatz mit `analysis.status` `failed` oder `skipped` zurück?
 
 Der Actor hat den Tweet gesammelt & geliefert, aber die KI-Analyse wurde nicht
-abgeschlossen. `analysis.reason` nennt die Ursache, etwa `context_limit`, wenn
-der Tweet & sein Kontext `maxContextBytes` überschreiten, oder
-`service_unavailable`, wenn der Analysedienst kurz nicht verfügbar ist. Diese
-Datensätze verursachen keine Ergebnisgebühr & erhalten keinen Score. Erhöhe
-`maxContextBytes` (bis zu 12.000) oder führe die betroffenen IDs erneut aus.
+abgeschlossen. `analysis.reason` nennt die Ursache. `context_limit` bedeutet,
+dass dein Kontext & deine Ziele keinen Platz für den Tweet lassen.
+`service_unavailable` bedeutet, dass der Analysedienst kurz nicht verfügbar war.
+Diese Datensätze verursachen keine Ergebnisgebühr & erhalten keinen Score. Kürze
+`analysis.context` oder führe die betroffenen IDs erneut aus.
+
+Der Actor analysiert auch einen Tweet, der länger als `maxContextBytes` ist. Er
+kürzt zuerst zitierte & beantwortete Beiträge, dann den Tweet.
+`analysis.contextAvailability.postText` ist dann `truncated`. Erhöhe
+`maxContextBytes` auf bis zu 64.000, um mehr Text zu behalten.
 
 ### Prüft die Analyse Fakten?
 

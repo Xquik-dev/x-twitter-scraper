@@ -18,10 +18,10 @@
 Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
 monde, avec les données X les plus complètes. X (Twitter) Brand Monitoring suit
 les mentions de votre marque avec pertinence, sentiment et réponses sur
-l'expérience client. Tous les autres Actors Apify facturent avant de filtrer ou
-de dédupliquer. Xquik ne facture que les résultats livrés, uniques et conformes
-aux filtres. Les coûts d'IA sont inclus dans le prix par tweet. Vous n'avez
-besoin d'aucun compte d'IA, jeton ni clé.
+l'expérience client. La plupart des autres Actors Apify facturent avant de
+filtrer ou de dédupliquer. Xquik ne facture que les résultats livrés, uniques et
+conformes aux filtres. Les coûts d'IA sont inclus dans le prix par tweet. Vous
+n'avez besoin d'aucun compte d'IA, jeton ni clé.
 
 Surveillez les mentions de marque sur X (Twitter) et suivez les changements de
 sentiment entre les runs. **X (Twitter) Brand Monitoring with AI Analysis**
@@ -59,9 +59,10 @@ dont les clients parlent de vous.
    la marque dans `analysis.context`.
 4. Exécutez l'Actor, puis gardez l'ID du dataset pour votre prochaine
    comparaison.
-5. Au run suivant, ajoutez `monitor.baselineDatasetId` avec cet ID.
-   Gardez les questions, les cibles, le contexte et les limites de
-   contexte inchangés pour que les réponses restent comparables.
+5. Au run suivant, ajoutez `monitor.baselineDatasetId` avec cet ID. Gardez les
+   questions, les cibles, le contexte et les limites de contexte inchangés pour
+   que les réponses restent comparables. La comparaison lit ce dataset. Elle
+   fonctionne donc même si ce run a omis son résumé.
 
 ```json
 {
@@ -152,7 +153,7 @@ compte d'IA, jeton ni clé.
 
 À partir de $0.0003 par tweet analysé avec succès, sans frais de démarrage. Le
 prix inclut la collecte. L'allocation d'analyse est de 8 questions, 8 000 octets
-par définition de question & 12 000 octets de contexte par tweet. Les filtres
+par définition de question & 64 000 octets de contexte par tweet. Les filtres
 d'extraction & la déduplication s'exécutent avant l'analyse, donc vous ne payez
 jamais les lignes filtrées ou en double. Les analyses échouées, les analyses
 ignorées & les lignes de diagnostic n'entraînent aucun frais de résultat. Apify
@@ -201,10 +202,23 @@ analyses facturées et les frais en attente.
 
 ## Résumé de run et réponses à plat
 
-Chaque run écrit un enregistrement `analysis-summary` dans son key-value store
-et le répète sous `results.analysisSummary` dans le rapport de run. Il compte
-les lignes analysées, échouées et ignorées, totalise l'engagement, et résume
-chaque question.
+Un run écrit un enregistrement `analysis-summary` dans son key-value store dans
+4 cas :
+
+- Il rencontre un problème ou il est volumineux.
+- Il définit `monitor` sans `baselineDatasetId`, comme premier run d'une série.
+- Sa comparaison trouve un tweet modifié, nouveau ou non comparable.
+- Il a `alwaysSaveRunRecords` activé.
+
+Les autres runs omettent l'enregistrement. Leur statut nomme la réponse
+principale, comme `Top sentiment: negative in 2 of 5 results.` Une comparaison
+sans changement indique `No change since the earlier run.` Un run avec un
+problème, ou un gros run, écrit aussi `run-report`. C'est aussi le cas d'un run
+avec `alwaysSaveRunRecords` activé. `run-report` répète le résumé sous
+`results.analysisSummary`.
+
+Le résumé compte les lignes analysées, échouées et ignorées, totalise
+l'engagement, et résume chaque question.
 
 - `targets` rapporte les mentions, la part de voix & l'engagement par marque ou
   alias.
@@ -345,11 +359,16 @@ comparer.
 ### Pourquoi une ligne revient-elle avec un `analysis.status` de `failed` ou `skipped` ?
 
 L'Actor a collecté & livré le tweet, mais l'analyse par IA ne s'est pas
-terminée. `analysis.reason` nomme la cause, comme `context_limit` quand le tweet
-et son contexte dépassent `maxContextBytes`, ou `service_unavailable` quand le
-service d'analyse est brièvement indisponible. Ces lignes n'entraînent aucun
-frais de résultat. Augmentez `maxContextBytes` (jusqu'à 12 000) ou relancez les
-ID concernés.
+terminée. `analysis.reason` nomme la cause. `context_limit` signifie que votre
+contexte et vos cibles ne laissent aucune place au tweet. `service_unavailable`
+signifie que le service d'analyse était brièvement indisponible. Ces lignes
+n'entraînent aucun frais de résultat. Raccourcissez `analysis.context` ou
+relancez les ID concernés.
+
+L'Actor analyse quand même un tweet plus long que `maxContextBytes`. Il coupe
+d'abord les posts cités et ceux auxquels il répond, puis le tweet.
+`analysis.contextAvailability.postText` vaut alors `truncated`. Augmentez
+`maxContextBytes` jusqu'à 64 000 pour garder plus de texte.
 
 ### L'analyse vérifie-t-elle les faits ?
 

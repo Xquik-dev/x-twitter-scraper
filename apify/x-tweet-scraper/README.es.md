@@ -17,9 +17,9 @@
 
 Xquik es el servicio de extracción de X (Twitter) más rápido y económico del
 mundo, con los datos de X más completos. X Tweet Scraper recopila tuits,
-respuestas, perfiles, listas y búsquedas con más de 50 filtros. Cualquier otro
-Actor de Apify cobra antes de filtrar o eliminar duplicados. Xquik cobra solo
-por resultados entregados, únicos y que coinciden con los filtros.
+respuestas, perfiles, listas y búsquedas con más de 50 filtros. Los demás
+Actores de Apify suelen cobrar antes de filtrar o eliminar duplicados. Xquik
+cobra solo por resultados entregados, únicos y que coinciden con los filtros.
 
 Extrae tuits públicos de X (Twitter) **desde $0.00015 por resultado entregado
 en cualquier plan de Apify**. Apify factura el uso de la plataforma por
@@ -169,13 +169,16 @@ Todos los planes de Apify cuestan `$0.00015` por fila entregada. Apify factura
 el uso de tu plataforma por separado. Xquik aplica un cobro por cada fila de
 datos entregada. Los diagnósticos son gratuitos en la salida `diagnostics`.
 
-No se aplica ninguna suscripción de Xquik. No se aplica ninguna tarifa
-separada de inicio ni de consulta. Cada ejecución también escribe un registro
-`run-report` con `estimatedChargeUsd` calculado a partir del precio de pago
-por evento en vivo que Apify expone al Actor. Cada resultado escribe
-`run-report`, incluidas las salidas sin entrada o con entrada inválida. Los
-informes de ejecución separan las filas de datos en `realRows` y los
-diagnósticos en `diagnosticRows`.
+No se aplica ninguna suscripción de Xquik. No se aplica ninguna tarifa separada
+de inicio ni de consulta. El texto de estado indica por qué se detuvo la
+ejecución. También cuenta los resultados cobrados y los objetivos leídos. Una
+ejecución con un problema, o una ejecución grande, también escribe un registro
+`run-report`. Su `estimatedChargeUsd` usa el precio actual por evento que Apify
+expone al Actor. Las ejecuciones con un problema siempre escriben `run-report`.
+Esto incluye las salidas sin entrada o con entrada inválida. Una ejecución
+pequeña que termina bien lo omite y ahorra uso de Apify. Los informes de
+ejecución separan las filas de datos en `realRows` y los diagnósticos en
+`diagnosticRows`.
 
 Entiende los resultados vacíos antes de gastar en otra ejecución. El objeto
 `filtering` de los informes y los diagnósticos finales cuenta las filas que tus
@@ -206,23 +209,30 @@ ejecución con una cuenta faltante y una búsqueda estancada menciona ambas.
 `pagination_safety_limit`, `reply_reach` y `deadline_reached`. La ejecución es
 `retryable` cuando alguna causa lo es.
 
-Los objetivos protegidos o faltantes cuentan como fallos, incluidas las
-ejecuciones con resultados válidos. También cuenta una búsqueda que X no puede
-ejecutar. X.com muestra "Something went wrong" para esa búsqueda. La ejecución
-la detiene de inmediato, sin reintentos. También cuentan los me gusta que X
-oculta. X solo le muestra a su autor quién dio me gusta a una publicación. Las
-publicaciones que le gustaron a una cuenta solo las ve esa cuenta. Cuando todos
-los fallos se refieren a objetivos no disponibles, los diagnósticos establecen
-`retryable: false`. Verifica las URLs o nombres de usuario del objetivo y elige
-cuentas públicas disponibles. Acota una búsqueda que X no puede ejecutar o
-cambia sus filtros. En lugar de los me gusta ocultos, extrae usuarios que
-retuitean, respuestas o publicaciones. Otros fallos conservan indicaciones de
-reintento para los objetivos sin terminar.
+Un objetivo faltante o protegido no es un fallo. X no tiene nada que leer ahí.
+Por eso la ejecución lee todos los demás objetivos hasta el final. Informa
+`outcome: "complete"`. El motivo de finalización viene de los objetivos que
+leyó, como `source_exhausted`. `failedSubtargets` deja fuera esos objetivos. El
+texto de estado y un diagnóstico gratuito `complete` los cuentan. Una ejecución
+sin otras filas escribe en su lugar un diagnóstico `zero-output`.
+
+Una búsqueda que X no puede ejecutar cuenta como fallo. X.com muestra "Something
+went wrong" para esa búsqueda. La ejecución la detiene de inmediato, sin
+reintentos. También cuentan los me gusta que X oculta. X solo le muestra a su
+autor quién dio me gusta a una publicación. Las publicaciones que le gustaron a
+una cuenta solo las ve esa cuenta. Cuando todos los fallos se refieren a
+objetivos no disponibles, los diagnósticos establecen `retryable: false`.
+Verifica las URLs o nombres de usuario del objetivo y elige cuentas públicas
+disponibles. Acota una búsqueda que X no puede ejecutar o cambia sus filtros. En
+lugar de los me gusta ocultos, extrae usuarios que retuitean, respuestas o
+publicaciones. Otros fallos conservan indicaciones de reintento para los
+objetivos sin terminar.
 
 El diagnóstico nombra esos objetivos en `unavailableTargets`. Cada entrada tiene
-el `target` tal como lo ingresaste y un `reason`: `not_found`, `protected`,
-`search_unavailable` o `likes_hidden`. La lista admite hasta 100 entradas.
-Quítalos de la entrada para obtener una ejecución completa.
+el `target` tal como lo ingresaste, un `reason` y un `nextAction`. El motivo es
+`not_found`, `protected`, `search_unavailable` o `likes_hidden`. Una entrada de
+búsqueda también puede tener un `fix`, como el operador a quitar. La lista
+admite hasta 100 entradas. Quítalos de la entrada.
 
 `completionReason: "pagination_safety_limit"` no es un fallo de lectura. La
 ejecución conservó sus filas válidas y luego terminó un objetivo que ya no
@@ -567,6 +577,11 @@ alias heredados (Legacy).
 | `filter:replies`       | `filter:replies`       | Solo tuits de respuesta                |
 | `filter:quote`         | `filter:quote`         | Solo tuits cita                        |
 | `filter:blue_verified` | `filter:blue_verified` | Solo usuarios Premium                  |
+
+X ya no busca con `filter:vine`, `filter:consumer_video`, `filter:pro_video`,
+`filter:news` ni `retweets_of:`. Una búsqueda con uno de ellos termina de
+inmediato. Escribe un diagnóstico gratuito que indica la corrección. Mantén cada
+consulta en 512 caracteres o menos, el máximo que X busca.
 
 Las ventanas de fecha usan un límite inferior inclusivo y uno superior
 exclusivo. El Actor verifica ambos límites antes de agregar o cobrar por cada

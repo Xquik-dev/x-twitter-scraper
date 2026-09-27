@@ -15,12 +15,12 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Découvrez comment Framer utilise les scrapers Xquik avec Claude Code, Codex, Cursor et d'autres outils, à partir de 6:07.</a>
 </td></tr></table>
 
-Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher
-au monde, avec les données X les plus complètes. X Follower Scraper collecte
-les abonnés, les comptes suivis, les membres de list, les abonnés et les
-membres de community. Tous les autres Actors Apify facturent avant de
-filtrer ou de dédupliquer. Xquik ne facture que les résultats livrés,
-uniques et conformes aux filtres.
+Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
+monde, avec les données X les plus complètes. X Follower Scraper collecte les
+abonnés, les comptes suivis, les membres de list, les abonnés et les membres de
+community. La plupart des autres Actors Apify facturent avant de filtrer ou de
+dédupliquer. Xquik ne facture que les résultats livrés, uniques et conformes aux
+filtres.
 
 Scrapez les abonnés, les comptes suivis, les abonnés vérifiés, les membres
 de List, les abonnés de List et les membres de Community sur X (Twitter)
@@ -37,6 +37,12 @@ Une extraction interrompue écrit un diagnostic `partial` gratuit. Les
 résultats disponibles restent intacts. Consultez `availableResults`,
 `failedTargets`, `retryable` et `nextAction` avant de relancer. Une sortie
 d'Actor réussie confirme la livraison, pas l'extraction complète.
+
+Le texte de statut nomme toutes les causes d'un arrêt anticipé. `stopCauses`
+liste chaque cause avec ses propres `message`, `retryable` et `nextAction`. Les
+causes sont `target_not_found`, `target_failed` et `deadline_reached`. Un compte
+introuvable n'y figure que si une autre cause a arrêté le run. Le run est
+`retryable` dès qu'une cause l'est.
 
 ## Que fait X Follower Scraper ?
 
@@ -126,15 +132,18 @@ toujours retirés, y compris de la sortie raw.
 
 ## Combien coûte le scraping des abonnés X ?
 
-Chaque plan Apify coûte `$0.00015` par profil livré. Apify facture
-séparément l'usage de sa plateforme. Xquik applique une facturation par
-ligne de donnée livrée. Les diagnostics sont gratuits dans la sortie
-`diagnostics`. Aucun abonnement Xquik séparé ne s'applique. Aucun frais de
-démarrage ne s'applique. Chaque run écrit un enregistrement `run-report`
-avec `estimatedChargeUsd` calculé à partir du prix pay-per-event en temps
-réel qu'Apify expose à l'Actor. Chaque issue de run écrit `run-report`, y
-compris les sorties sans entrée et avec entrée invalide. Son champ
-`version` indique la version exacte du code source publié de l'Actor.
+Chaque plan Apify coûte `$0.00015` par profil livré. Apify facture séparément
+l'usage de sa plateforme. Xquik applique une facturation par ligne de donnée
+livrée. Les diagnostics sont gratuits dans la sortie `diagnostics`. Aucun
+abonnement Xquik séparé ne s'applique. Aucun frais de démarrage ne s'applique.
+Le texte de statut indique pourquoi le run s'est arrêté. Il compte aussi les
+résultats facturés et les cibles lues. Un run avec un problème, ou un gros run,
+écrit aussi un enregistrement `run-report`. Son `estimatedChargeUsd` utilise le
+prix pay-per-event en temps réel qu'Apify expose à l'Actor. Les runs avec un
+problème écrivent toujours `run-report`. Cela inclut les sorties sans entrée et
+avec entrée invalide. Un petit run sans problème l'omet et économise de l'usage
+Apify. Son champ `version` indique la version exacte du code source publié de
+l'Actor.
 
 `failedTargets` compte les cibles arrêtées après une erreur. Les profils livrés
 restent des lignes de données facturables. Ces runs utilisent

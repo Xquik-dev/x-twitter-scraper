@@ -15,10 +15,10 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Mira cómo Framer usa los extractores de Xquik con Claude Code, Codex, Cursor y más, desde el minuto 6:07.</a>
 </td></tr></table>
 
-Xquik es el servicio de extracción de datos de X (Twitter) más rápido y económico
-del mundo, con los datos de X más completos. X List Scraper recopila
-publicaciones, miembros y seguidores de Listas. Todos los demás Actors de Apify
-cobran antes de filtrar o eliminar duplicados. Xquik cobra solo por resultados
+Xquik es el servicio de extracción de datos de X (Twitter) más rápido y
+económico del mundo, con los datos de X más completos. X List Scraper recopila
+publicaciones, miembros y seguidores de Listas. La mayoría de los demás Actors
+de Apify cobra antes de filtrar o deduplicar. Xquik cobra solo por resultados
 entregados, únicos y que cumplen los filtros.
 
 Extrae publicaciones, miembros y seguidores de Listas de X desde URLs de Listas
@@ -45,6 +45,9 @@ API de X ni inicio de sesión.
   "maxItems": 10000
 }
 ```
+
+Las ejecuciones pequeñas que terminan bien omiten `run-report` y ahorran uso de
+Apify. Activa `alwaysSaveRunRecords` para escribirlo en cada ejecución.
 
 ## Output
 
