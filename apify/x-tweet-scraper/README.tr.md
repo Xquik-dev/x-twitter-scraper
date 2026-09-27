@@ -17,9 +17,9 @@
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. X Tweet Scraper, tweet'leri, yanıtları, profilleri,
-listeleri ve aramaları 50'den fazla filtreyle toplar. Diğer tüm Apify
-Actor'ları filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca
-teslim edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
+listeleri ve aramaları 50'den fazla filtreyle toplar. Diğer Apify
+Actor'larının çoğu filtreleme veya tekilleştirmeden önce ücret alır. Xquik
+yalnızca teslim edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
 
 Herkese açık X (Twitter) tweet'lerini **her Apify planında teslim edilen
 sonuç başına $0.00015'ten başlayarak** kazı. Apify, platform kullanımını
@@ -271,6 +271,8 @@ Bizim 4 çalıştırmamız bu girdiyi kullandı:
 
 - Diğer her Actor aynı terimleri, filtreleri & tarihleri kendi alanlarında aldı.
 - Tek sorgu alan Actor'lar, 3 terimi OR ile birleşmiş hâlde aldı.
+- X (Twitter) Posts Search sorguları 100 karakterle sınırlar, bu yüzden sorgusu
+  daha kısaydı.
 - Her Actor 1.000 tweet istedi ya da kendi daha düşük üst sınırını.
 - Çalıştırmalar tek tek yapıldı, hepsi Bronze katmanında.
 - Maliyette bize en yakın Actor, bizim çalıştırmalarımızın arasında 3 kez
@@ -278,13 +280,19 @@ Bizim 4 çalıştırmamız bu girdiyi kullandı:
 
 ### Her çalıştırmayı nasıl puanladık
 
-- İşe yarar bir tweet, çalıştırmada bir kez geçer & İngilizcedir.
+- Çalıştırma bir tweet'i tekrar döndürse de o tweet 1 kez sayılır.
+- İşe yarar bir tweet İngilizcedir.
 - Yanıt veya retweet değildir & en az 10 beğenisi vardır.
+- Bir gönderinin bahsetmeyle başlaması onu yanıt yapmaz.
 - 2026-09-01 ile 2026-09-26 UTC arasında paylaşılmıştır.
 - En az 1 arama terimiyle eşleşir.
 - O terimin her kelimesi metinde, alıntılanan tweet'te veya yazar adlarında
   geçer.
+- Büyük-küçük harf fark etmez & launch, launches içinde de eşleşir.
+- Metindeki bağlantılar eşleşmeye sayılmaz.
 - Bir Actor uzun metni kestiğinde kontrol tam gönderiyi okur.
+- Eksik dil veya yanıt bilgisi, o tweet için başka bir Actor'ın satırından
+  gelir.
 - İşe yarar tweet başına maliyet, müşterinin toplam harcamasının işe yarar tweet
   sayısına bölümüdür.
 - Harcama, çalıştırmanın ücretlendirilen her olayını Bronze fiyatlarıyla sayar.

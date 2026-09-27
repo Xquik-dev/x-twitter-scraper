@@ -17,8 +17,8 @@
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
 den umfassendsten X-Daten. X Tweet Scraper sammelt Tweets, Antworten,
-Profile, Listen & Suchen mit über 50 Filtern. Jeder andere Apify Actor
-berechnet, bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für
+Profile, Listen & Suchen mit über 50 Filtern. Die meisten anderen Apify Actors
+berechnen, bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für
 gelieferte, eindeutige, filterkonforme Ergebnisse.
 
 Scrape öffentliche X-(Twitter-)Tweets für **ab $0.00015 pro geliefertem
@@ -274,19 +274,27 @@ Unsere 4 Runs nutzten diese Eingabe:
 - Jeder andere Actor bekam dieselben Begriffe, Filter & Datumsangaben in seinen
   Feldern.
 - Actors mit nur 1 Suchanfrage bekamen die 3 Begriffe, verbunden mit OR.
+- X (Twitter) Posts Search erlaubt höchstens 100 Zeichen, daher war seine
+  Suchanfrage kürzer.
 - Jeder Actor forderte 1.000 Tweets an, oder sein eigenes, niedrigeres Maximum.
 - Die Runs liefen nacheinander, alle auf der Stufe Bronze.
 - Der kostenmäßig nächste Actor lief 3-mal, zwischen unseren Runs.
 
 ### So haben wir jeden Run bewertet
 
-- Ein nützlicher Tweet kommt im Run 1-mal vor & ist auf Englisch.
+- Jeder Tweet zählt 1-mal, auch wenn der Run ihn mehrfach liefert.
+- Ein nützlicher Tweet ist auf Englisch.
 - Er ist keine Antwort und kein Retweet & hat mindestens 10 Likes.
+- Beginnt ein Post mit einer Erwähnung, macht ihn das nicht zur Antwort.
 - Er wurde vom 2026-09-01 bis 2026-09-26 UTC gepostet.
 - Er passt zu mindestens 1 Suchbegriff.
 - Jedes Wort des Begriffs steht im Text, im zitierten Tweet oder in den
   Autorennamen.
+- Groß- und Kleinschreibung zählt nicht, & launch passt auch in launches.
+- Links im Text zählen nicht als Treffer.
 - Kürzt ein Actor lange Texte, liest die Prüfung den vollständigen Post.
+- Fehlen Sprache oder Antwortstatus, liest die Prüfung die Zeile eines anderen
+  Actors.
 - Kosten pro nützlichem Tweet sind die Gesamtausgaben des Kunden geteilt durch
   nützliche Tweets.
 - Die Ausgaben zählen jedes berechnete Ereignis des Runs zu Bronze-Preisen.

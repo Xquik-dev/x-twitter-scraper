@@ -17,7 +17,7 @@
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. X Tweet Scraper collects tweets, replies, profiles, lists
-& searches with 50+ filters. Every other Apify Actor charges before filtering or
+& searches with 50+ filters. Most other Apify Actors charge before filtering or
 deduplicating. Xquik charges only for delivered, unique, filter-matching
 results.
 
@@ -250,18 +250,25 @@ Our 4 runs used this input:
 
 - Every other Actor got the same terms, filters & dates in its own fields.
 - Actors that take 1 query got the 3 terms joined with OR.
+- X (Twitter) Posts Search caps queries at 100 characters, so its query was
+  shorter.
 - Each Actor asked for 1,000 tweets, or its own lower maximum.
 - The runs went 1 at a time, each on the Bronze tier.
 - The closest Actor on cost ran 3 times, between our runs.
 
 ### How we scored each run
 
-- A useful tweet appears once in the run & is in English.
+- Each tweet counts once, even when the run returns it again.
+- A useful tweet is in English.
 - It is not a reply or repost & has at least 10 likes.
+- Starting with a mention does not make a post a reply.
 - It was posted from 2026-09-01 to 2026-09-26 UTC.
 - It matches at least 1 search term.
 - Each word of that term appears in the text, quoted text or author names.
+- Matching ignores case, & launch also matches launches.
+- Links in the text do not count toward a match.
 - When an Actor cuts long text, the check reads the full post.
+- Missing language or reply data comes from another Actor's row for that tweet.
 - Cost per useful tweet is the customer's total spend divided by useful tweets.
 - Spend counts every charged event of the run at Bronze prices.
 - Our spend adds the run's Apify usage, because our customers pay it.

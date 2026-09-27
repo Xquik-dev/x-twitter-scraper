@@ -15,11 +15,11 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Guarda come Framer usa gli scraper Xquik con Claude Code, Codex, Cursor e altro, da 6:07.</a>
 </td></tr></table>
 
-Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo,
-con i dati X più completi. X Tweet Scraper raccoglie tweet, risposte, profili,
-liste & ricerche con oltre 50 filtri. Ogni altro Actor Apify addebita il costo
-prima di filtrare o deduplicare. Xquik addebita solo i risultati consegnati,
-unici & corrispondenti ai filtri.
+Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo, con
+i dati X più completi. X Tweet Scraper raccoglie tweet, risposte, profili, liste
+& ricerche con oltre 50 filtri. La maggior parte degli altri Actor Apify
+addebita prima di filtrare o deduplicare. Xquik addebita solo i risultati
+consegnati, unici & corrispondenti ai filtri.
 
 Estrai tweet pubblici di X (Twitter) a partire da **$0.00015 per risultato
 consegnato su ogni piano Apify**. Apify fattura l'uso della piattaforma
@@ -269,19 +269,26 @@ Le nostre 4 esecuzioni hanno usato questo input:
 - Ogni altro Actor ha ricevuto gli stessi termini, filtri & date nei propri
   campi.
 - Gli Actor con 1 sola query hanno ricevuto i 3 termini uniti con OR.
+- X (Twitter) Posts Search limita la query a 100 caratteri, quindi era più
+  corta.
 - Ogni Actor ha chiesto 1.000 tweet, o il proprio massimo se più basso.
 - Le esecuzioni sono andate 1 alla volta, tutte sul livello Bronze.
 - L'Actor più vicino nel costo ha girato 3 volte, tra le nostre esecuzioni.
 
 ### Come abbiamo valutato ogni esecuzione
 
-- Un tweet utile compare 1 volta nell'esecuzione & è in inglese.
+- Ogni tweet conta 1 volta, anche se l'esecuzione lo restituisce più volte.
+- Un tweet utile è in inglese.
 - Non è una risposta né un retweet & ha almeno 10 Mi piace.
+- Iniziare con una menzione non rende un post una risposta.
 - È stato pubblicato dal 2026-09-01 al 2026-09-26 UTC.
 - Corrisponde ad almeno 1 termine di ricerca.
 - Ogni parola del termine compare nel testo, nel tweet citato o nei nomi
   dell'autore.
+- Maiuscole e minuscole non contano, & launch trova anche launches.
+- I link nel testo non contano per la corrispondenza.
 - Se un Actor taglia un testo lungo, il controllo legge il post completo.
+- Lingua o stato di risposta mancanti arrivano dalla riga di un altro Actor.
 - Il costo per tweet utile divide la spesa totale per i tweet utili.
 - La spesa conta ogni evento addebitato dell'esecuzione ai prezzi Bronze.
 - La nostra spesa aggiunge l'uso di Apify, perché lo pagano i nostri clienti.

@@ -18,7 +18,7 @@
 Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher
 au monde, avec les données X les plus complètes. X Tweet Scraper collecte
 les tweets, réponses, profils, lists et recherches avec plus de 50 filtres.
-Tous les autres Actors Apify facturent avant de filtrer ou de dédupliquer.
+La plupart des autres Actors Apify facturent avant de filtrer ou de dédupliquer.
 Xquik ne facture que les résultats livrés, uniques et conformes aux filtres.
 
 Scrapez des tweets X (Twitter) publics pour **à partir de $0.00015 par
@@ -276,18 +276,25 @@ Nos 4 runs ont utilisé cette entrée :
 - Les autres Actors ont reçu les mêmes termes, filtres & dates dans leurs
   champs.
 - Les Actors à 1 seule requête ont reçu les 3 termes joints par OR.
+- X (Twitter) Posts Search limite ses requêtes à 100 caractères, d'où une
+  version courte.
 - Chaque Actor a demandé 1000 tweets, ou son propre maximum s'il est plus bas.
 - Les runs se sont suivis 1 par 1, tous au niveau Bronze.
 - L'Actor le plus proche en coût a tourné 3 fois, entre nos runs.
 
 ### Notre méthode de notation
 
-- Un tweet utile apparaît 1 fois dans le run & est en anglais.
+- Chaque tweet compte 1 fois, même si le run le renvoie plusieurs fois.
+- Un tweet utile est en anglais.
 - Ni réponse ni retweet, il a au moins 10 likes.
+- Commencer par une mention ne fait pas d'un post une réponse.
 - Il a été publié du 2026-09-01 au 2026-09-26 UTC.
 - Il correspond à au moins 1 terme de recherche.
 - Chaque mot du terme est dans le texte, la citation ou le nom d'auteur.
+- La casse ne compte pas, & launch trouve aussi launches.
+- Les liens du texte ne comptent pas pour la correspondance.
 - Si un Actor coupe un texte long, la vérification lit le post complet.
+- Une langue ou un statut de réponse manquant vient d'un autre Actor.
 - Le coût par tweet utile divise la dépense totale par les tweets utiles.
 - La dépense compte chaque événement facturé du run aux prix Bronze.
 - Notre dépense ajoute l'usage Apify du run, car nos clients le paient.

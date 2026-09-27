@@ -17,9 +17,9 @@
 
 Xquik es el servicio de extracción de X (Twitter) más rápido y económico del
 mundo, con los datos de X más completos. X Tweet Scraper recopila tuits,
-respuestas, perfiles, listas y búsquedas con más de 50 filtros. Cualquier otro
-Actor de Apify cobra antes de filtrar o eliminar duplicados. Xquik cobra solo
-por resultados entregados, únicos y que coinciden con los filtros.
+respuestas, perfiles, listas y búsquedas con más de 50 filtros. Los demás
+Actores de Apify suelen cobrar antes de filtrar o eliminar duplicados. Xquik
+cobra solo por resultados entregados, únicos y que coinciden con los filtros.
 
 Extrae tuits públicos de X (Twitter) **desde $0.00015 por resultado entregado
 en cualquier plan de Apify**. Apify factura el uso de la plataforma por
@@ -274,18 +274,25 @@ Nuestras 4 ejecuciones usaron esta entrada:
 - Los demás Actores recibieron los mismos términos, filtros & fechas en sus
   campos.
 - Los Actores que aceptan 1 consulta recibieron los 3 términos unidos con OR.
+- Como X (Twitter) Posts Search admite hasta 100 caracteres, su consulta fue
+  más corta.
 - Cada Actor pidió 1000 tuits, o su propio máximo si era menor.
 - Las ejecuciones fueron de 1 en 1, todas en el nivel Bronze.
 - El Actor más cercano en costo corrió 3 veces, entre nuestras ejecuciones.
 
 ### Cómo evaluamos cada ejecución
 
-- Un tuit útil aparece 1 vez en la ejecución & está en inglés.
+- Cada tuit cuenta 1 vez, aunque la ejecución lo devuelva de nuevo.
+- Un tuit útil está en inglés.
 - No es una respuesta ni un retuit & tiene al menos 10 me gusta.
+- Empezar con una mención no convierte una publicación en respuesta.
 - Se publicó del 2026-09-01 al 2026-09-26 UTC.
 - Coincide con al menos 1 término de búsqueda.
 - El texto, la cita o el nombre del autor contienen cada palabra del término.
+- No importan las mayúsculas, & launch también coincide con launches.
+- Los enlaces del texto no cuentan para la coincidencia.
 - Si un Actor corta un texto largo, la revisión lee la publicación completa.
+- Si faltan el idioma o el dato de respuesta, se leen de otro Actor.
 - El costo por tuit útil divide el gasto total entre los tuits útiles.
 - El gasto cuenta cada evento cobrado de la ejecución a precios de Bronze.
 - Nuestro gasto suma el uso de Apify, porque lo pagan nuestros clientes.
