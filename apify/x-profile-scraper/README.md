@@ -1,39 +1,56 @@
-<p align="center">
-  <strong>English</strong> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+**English** ·
+[Español](README.es.md)
+·
+[Türkçe](README.tr.md)
+·
+[简体中文](README.zh-CN.md)
+·
+[日本語](README.ja.md)
+·
+[한국어](README.ko.md)
+·
+[Deutsch](README.de.md)
+·
+[Français](README.fr.md)
+·
+[Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer connects Xquik MCP to coding agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Watch how Framer uses Xquik scrapers with Claude Code, Codex, Cursor, and more, from 6:07.</a>
-</td></tr></table>
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
+
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
+Claude Code, Codex, Cursor, and more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data. X Profile Scraper collects profiles, posts, replies, media
-& followers for any handle. Most other Apify Actors charge before filtering or
-deduplicating. Xquik charges only for delivered, unique, filter-matching
-results.
+most complete X data. Xquik's X Profile Scraper collects profiles, posts,
+replies, media & followers for any handle. Most other Apify Actors charge before
+filtering or deduplicating. Xquik charges only for delivered, unique,
+filter-matching results.
 
-Scrape X profiles, posts, replies, media, and followers. Use handles, IDs, or
-URLs. No X API key or login required.
+Scrape X profiles, posts, replies, media & followers from handles, IDs or URLs.
+You pay **$0.00015 per delivered row**, & Apify bills platform usage separately.
+You need no X API key or login.
 
-## Profiles and timelines
+> Xquik is an independent third-party service. Not affiliated with X Corp.
+> "Twitter" and "X" are trademarks of X Corp.
 
-- Extract bio, counts, verification, owner-entered location, website, and media.
-- Include X's best-effort public Account based in label when available.
-- Add Profile Posts and With Replies rows across available result pages.
-- Add media, followers, following, or verified followers.
-- Filter optional posts by date, media, verification, repost status, and
+## Profiles & timelines
+
+- Bio, counts, verification, owner-entered location, website & media.
+- X's best-effort public Account based in label when available.
+- Profile Posts & With Replies rows across available result pages.
+- Optional media, followers, following or verified followers.
+- Filters for optional posts by date, media, verification, repost status &
   metrics.
-- Filter optional profiles by audience, activity, age, and public metadata.
-- The Actor removes duplicate rows before billing.
+- Filters for optional profiles by audience, activity, age & public metadata.
+- Duplicate removal before billing.
+
+## How to scrape X profiles
+
+1. Open Xquik's X Profile Scraper in Apify Console.
+2. Add handles to `twitterHandles`, URLs to `startUrls` or IDs to `userIds`.
+3. Turn on resources such as `includeTweets` or `includeFollowers`.
+4. Set `maxItems` to cap delivered rows, then click Start.
+5. Download the dataset as JSON, CSV or Excel, or use the Apify API.
 
 ## Input
 
@@ -46,7 +63,7 @@ URLs. No X API key or login required.
 }
 ```
 
-One target is enough. The global `maxItems` cap includes profiles and selected
+One target is enough. The global `maxItems` cap includes profiles & selected
 resources.
 
 Small runs that go well skip `run-report` & save Apify usage. Turn on
@@ -55,48 +72,59 @@ Small runs that go well skip `run-report` & save Apify usage. Turn on
 ## Output
 
 Profile rows use `resultType: "profile"`. Optional rows use `profileTweet`,
-`profileReply`, `profileMedia`, `profileFollower`, `profileFollowing`, or
-`profileVerifiedFollower`. Every row keeps `sourceTarget`. Public fields remain
-in the Xquik REST response shape. X infers `accountBasedIn` from aggregated
-account-access IPs. `observedAt` records retrieval time. It does not state
-nationality, residence, identity, signup, post, or exact location.
+`profileReply`, `profileMedia`, `profileFollower`, `profileFollowing` or
+`profileVerifiedFollower`. Every row keeps `sourceTarget`. Public fields keep
+the Xquik REST response shape.
+
+X infers `accountBasedIn` from aggregated account-access IPs. The label does not
+state nationality, residence, identity, signup, post or exact location.
+`observedAt` records retrieval time. `accountBasedIn` is null when X shows no
+label. When X withholds it, the row has `accountBasedInUnavailable: true`
+instead.
 
 X has shown the posts an account liked only to that account since 2024.
 `includeLikes` returns no `profileLike` rows for other accounts.
 
-## Pricing
+Examples use sample values. Results reflect live data. A profile row looks like
+this:
 
-Every Apify plan costs **$0.00015 per delivered row**. Apify bills your platform
+```json
+{
+  "resultType": "profile",
+  "sourceTarget": "sample_user",
+  "username": "sample_user",
+  "name": "Sample User",
+  "followers": 1200,
+  "verified": false,
+  "accountBasedInUnavailable": true
+}
+```
+
+## How much does it cost to scrape X profiles?
+
+Every Apify plan costs $0.00015 per delivered row. Apify bills your platform
 usage separately.
 
 - One charge per delivered data row. Diagnostics are free in `diagnostics`.
-- No start, profile, or query fee.
+- No start, profile or query fee.
 - Deduplication runs before billing.
 - Apify maximum-total-charge settings cap delivered rows.
 
-Use `latest` unless you need an older build. Choose from 50 public tasks or 129
-Xquik REST operations. Examples use sample values. Results reflect live data.
+## Limits & recovery
 
-## Pagination and recovery
-
-One run can read many profiles. Timelines apply every filter you set. Delivered
-rows & progress survive an Apify restart.
-
-## Incomplete extraction
+Xquik's X Profile Scraper reads many profiles in 1 run. Every filter you set
+applies to timeline rows. Delivered rows & progress survive an Apify restart.
 
 Interrupted extraction writes a free `partial` diagnostic. Available results
-remain intact. Read `availableResults`, `failedTargets`, `retryable`, and
-`nextAction` before retrying. A successful Actor exit confirms delivery, not
+stay intact. Read `availableResults`, `failedTargets`, `retryable` &
+`nextAction` before you retry. A successful Actor exit confirms delivery, not
 complete extraction.
 
-The status names every cause of an early stop. `stopCauses` lists each cause
+The run status names every cause of an early stop. `stopCauses` lists each cause
 with its own `message`, `retryable` & `nextAction`. The causes are
 `target_not_found`, `target_failed`, `pagination_safety_limit` &
 `deadline_reached`. A missing target joins the list only when another cause
 stopped the run. The run is `retryable` when any cause is.
-
-Xquik is an independent third-party service. Not affiliated with X Corp.
-"Twitter" and "X" are trademarks of X Corp.
 
 ## Related Xquik Actors
 
@@ -161,3 +189,45 @@ diagnostics. Pick the one that matches the data you need.
   Estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
   trait answers. Use it when you study why tweets spread or flop. From $0.0003
   per analyzed tweet.
+
+## FAQ
+
+Answers to common questions, then where to get help.
+
+### Do I need an X API key or login?
+
+No. Xquik's X Profile Scraper needs no X API key, login or credentials.
+
+### Is it legal to scrape X profiles?
+
+Xquik's X Profile Scraper requests public X fields. Results can contain personal
+data. Confirm a lawful purpose & follow applicable privacy rules. Ask qualified
+counsel when uncertain.
+
+### Why did my run return no results?
+
+Open the free `diagnostics` output first. An empty run's status says to check
+your targets & filters. `stopCauses` gives each cause a `nextAction` to follow.
+The run lists each input it cannot read & says how to fix it. X hides likes, so
+`includeLikes` returns no `profileLike` rows for other accounts.
+
+### Can I use the API, schedules & integrations?
+
+Yes. Choose from 50 public tasks or 129 Xquik REST operations. The
+[API tab](https://apify.com/xquik/x-profile-scraper/api) has Python, JavaScript
+& cURL examples. Apify [schedules](https://docs.apify.com/platform/schedules)
+run Xquik's X Profile Scraper on a cron. Agents use
+[Apify MCP](https://docs.apify.com/platform/integrations/mcp). Use `latest`
+unless you need an older build.
+
+### Where do I get help?
+
+Open an issue on the Actor page or contact <support@xquik.com> with the run ID.
+Free diagnostics in the key-value store explain empty, partial or interrupted
+runs.
+
+### Can I get a custom solution?
+
+Yes. Visit [xquik.com](https://xquik.com) or read the
+[API docs](https://docs.xquik.com/introduction). They cover the dashboard, API,
+MCP server & webhooks.

@@ -11,38 +11,51 @@
 </p>
 
 <table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer conecta Xquik MCP con agentes de código"></a><br>
+<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer conecta Xquik MCP con agentes de codificación"></a><br>
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Mira cómo Framer usa los extractores de Xquik con Claude Code, Codex, Cursor y más, desde el minuto 6:07.</a>
 </td></tr></table>
 
-Xquik es el servicio de extracción de datos de X (Twitter) más rápido y
-económico del mundo, con los datos de X más completos. X Profile Scraper
-recopila perfiles, publicaciones, respuestas, contenido multimedia y seguidores
-de cualquier nombre de usuario. La mayoría de los demás Actors de Apify cobra
-antes de filtrar o deduplicar. Xquik cobra solo por resultados entregados,
-únicos y que cumplen los filtros.
+Xquik es el servicio de scraping de X (Twitter) más rápido y económico del
+mundo, con los datos de X más completos. X Profile Scraper de Xquik recopila
+perfiles, posts, respuestas, contenido multimedia y seguidores de cualquier
+nombre de usuario. La mayoría de los demás Actores de Apify cobran antes de
+filtrar o quitar duplicados. Xquik solo cobra los resultados entregados, únicos
+y que cumplen tus filtros.
 
-Extrae perfiles, publicaciones, respuestas, contenido multimedia y seguidores
-de X. Usa nombres de usuario, IDs o URLs. No requiere clave de API de X ni
-inicio de sesión.
+Extrae perfiles, posts, respuestas, contenido multimedia y seguidores de X a
+partir de nombres de usuario, IDs o URLs. Pagas **$0.00015 por fila entregada**,
+y Apify factura aparte el uso de la plataforma. No necesitas clave de API de X
+ni iniciar sesión.
 
-## Perfiles y líneas de tiempo
+> Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
+> "Twitter" y "X" son marcas registradas de X Corp.
 
-- Extrae biografía, contadores, verificación, ubicación indicada por el
-  usuario, sitio web y contenido multimedia.
-- Incluye, cuando esté disponible, la etiqueta "Account based in" de X, según
-  la estimación pública de X.
-- Agrega filas de Profile Posts y With Replies en las páginas de resultados
-  disponibles.
-- Agrega contenido multimedia, seguidores, cuentas seguidas o seguidores
-  verificados.
-- Filtra publicaciones opcionales por fecha, contenido multimedia,
-  verificación, estado de republicación y métricas.
-- Filtra perfiles opcionales por audiencia, actividad, antigüedad y metadatos
-  públicos.
-- El Actor elimina las filas duplicadas antes de facturar.
+## Perfiles y cronologías
 
-## Input
+- Biografía, conteos, verificación, ubicación que escribió el titular, sitio web
+  y contenido multimedia.
+- La etiqueta pública "Account based in" de X, una estimación aproximada, cuando
+  existe.
+- Filas de las pestañas Posts y Respuestas del perfil en todas las páginas de
+  resultados disponibles.
+- Contenido multimedia, seguidores, cuentas seguidas o seguidores verificados,
+  si los activas.
+- Filtros para los posts opcionales por fecha, contenido multimedia,
+  verificación, si son reposts y métricas.
+- Filtros para los perfiles opcionales por audiencia, actividad, antigüedad y
+  metadatos públicos.
+- Eliminación de duplicados antes de facturar.
+
+## Cómo extraer perfiles de X
+
+1. Abre X Profile Scraper de Xquik en Apify Console.
+2. Agrega nombres de usuario en `twitterHandles`, URLs en `startUrls` o IDs en
+   `userIds`.
+3. Activa recursos como `includeTweets` o `includeFollowers`.
+4. Define `maxItems` para limitar las filas entregadas y haz clic en Start.
+5. Descarga el dataset en JSON, CSV o Excel, o usa la API de Apify.
+
+## Entrada
 
 ```json
 {
@@ -53,130 +66,183 @@ inicio de sesión.
 }
 ```
 
-Con un objetivo alcanza. El límite global `maxItems` incluye perfiles y los
-recursos seleccionados.
+Con 1 objetivo alcanza. El límite global `maxItems` incluye los perfiles y los
+recursos que elijas.
 
-Las ejecuciones pequeñas que terminan bien omiten `run-report` y ahorran uso de
-Apify. Activa `alwaysSaveRunRecords` para escribirlo en cada ejecución.
+Las ejecuciones pequeñas sin problemas omiten `run-report` y ahorran uso de
+Apify. Activa `alwaysSaveRunRecords` para escribirlo en todas las ejecuciones.
 
-## Output
+## Salida
 
 Las filas de perfil usan `resultType: "profile"`. Las filas opcionales usan
 `profileTweet`, `profileReply`, `profileMedia`, `profileFollower`,
-`profileFollowing` o `profileVerifiedFollower`. Cada fila conserva
-`sourceTarget`. Los campos públicos permanecen en el formato de
-respuesta REST de Xquik. X infiere `accountBasedIn` a partir de IPs de acceso
-a la cuenta agregadas. `observedAt` registra el momento de la obtención. No
-indica nacionalidad, residencia, identidad, registro, publicación ni
-ubicación exacta.
+`profileFollowing` o `profileVerifiedFollower`. Todas las filas conservan
+`sourceTarget`. Los campos públicos mantienen la forma de respuesta de Xquik
+REST.
 
-Desde 2024, X muestra las publicaciones que le gustaron a una cuenta solo a
-esa cuenta. `includeLikes` no devuelve filas `profileLike` de otras cuentas.
+X deduce `accountBasedIn` a partir de IPs agregadas de acceso a la cuenta. La
+etiqueta no indica nacionalidad, residencia, identidad, registro, lugar de
+publicación ni ubicación exacta. `observedAt` registra la hora de la consulta.
+`accountBasedIn` es null cuando X no muestra la etiqueta. Cuando X la retiene,
+la fila trae `accountBasedInUnavailable: true` en su lugar.
 
-## Precios
+Desde 2024, X solo le muestra a cada cuenta los posts que esa cuenta marcó con
+Me gusta. `includeLikes` no devuelve filas `profileLike` de otras cuentas.
 
-Cada plan de Apify cuesta **$0.00015 por fila entregada**. Apify factura el
-uso de su plataforma por separado.
+Los ejemplos usan valores de muestra. Los resultados reflejan datos en vivo. Una
+fila de perfil se ve así:
 
-- Un cobro por cada fila de datos entregada. Los diagnósticos son gratuitos
-  en `diagnostics`.
-- Sin tarifa de inicio, de perfil ni de consulta.
-- La eliminación de duplicados se ejecuta antes de facturar.
-- La configuración de cargo máximo total de Apify limita las filas
-  entregadas.
+```json
+{
+  "resultType": "profile",
+  "sourceTarget": "sample_user",
+  "username": "sample_user",
+  "name": "Sample User",
+  "followers": 1200,
+  "verified": false,
+  "accountBasedInUnavailable": true
+}
+```
 
-Usa `latest` a menos que necesites una versión anterior. Elige entre 50
-tareas públicas o 129 operaciones REST de Xquik. Los ejemplos usan valores de
-muestra. Los resultados reflejan datos en vivo.
+## ¿Cuánto cuesta extraer perfiles de X?
 
-## Paginación y recuperación
+En todos los planes de Apify, cada fila entregada cuesta $0.00015. Apify factura
+aparte tu uso de la plataforma.
 
-Una ejecución puede leer muchos perfiles. Las líneas de tiempo aplican todos los
-filtros que configures. Las filas entregadas y el progreso se conservan tras un
-reinicio de Apify.
+- Un cobro por cada fila de datos entregada. Los diagnósticos son gratis en
+  `diagnostics`.
+- Sin tarifa de inicio, por perfil ni por consulta.
+- Xquik quita los duplicados antes de facturar.
+- El cargo total máximo que definas en Apify limita las filas entregadas.
 
-## Extracción incompleta
+## Límites y recuperación
 
-Una extracción interrumpida escribe un diagnóstico `partial` gratuito. Los
-resultados disponibles permanecen intactos. Lee `availableResults`,
-`failedTargets`, `retryable` y `nextAction` antes de reintentar. Una salida
-exitosa del Actor confirma la entrega, no una extracción completa.
+X Profile Scraper de Xquik lee muchos perfiles en 1 ejecución. Cada filtro que
+definas se aplica a las filas de la cronología. Las filas entregadas y el
+progreso se conservan tras un reinicio de Apify.
 
-El texto de estado nombra cada causa de una detención anticipada. `stopCauses`
-enumera cada causa con su propio `message`, `retryable` y `nextAction`. Las
-causas son `target_not_found`, `target_failed`, `pagination_safety_limit` y
-`deadline_reached`. Un objetivo faltante se suma a la lista solo si otra causa
-detuvo la ejecución. La ejecución es `retryable` cuando alguna causa lo es.
+Una extracción interrumpida escribe un diagnóstico `partial` gratis. Los
+resultados disponibles se conservan. Lee `availableResults`, `failedTargets`,
+`retryable` y `nextAction` antes de reintentar. Una salida exitosa del Actor
+confirma la entrega, no una extracción completa.
 
-Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
-"Twitter" y "X" son marcas registradas de X Corp.
+El estado de la ejecución nombra cada causa de una detención anticipada.
+`stopCauses` enumera cada causa con su propio `message`, `retryable` y
+`nextAction`. Las causas son `target_not_found`, `target_failed`,
+`pagination_safety_limit` y `deadline_reached`. Un objetivo inexistente entra en
+la lista solo si otra causa detuvo la ejecución. La ejecución es `retryable` si
+alguna causa lo es.
 
-## Actors de Xquik relacionados
+## Actores de Xquik relacionados
 
-Todos los Actors de Xquik comparten el mismo motor de extracción y la misma
-facturación basada en filtros con diagnósticos. Elige el que corresponda a
-los datos que necesitas.
+Todos los Actores de Xquik comparten el mismo motor de extracción, el cobro
+después de filtrar y los diagnósticos. Elige el que se ajuste a los datos que
+necesitas.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): extrae tuits
-  de búsquedas, líneas de tiempo de perfiles, Listas e IDs de tuits con más
-  de 50 filtros y exportaciones planas. Úsalo cuando necesites datos de
-  tuits sin análisis. Desde $0.00015 por fila.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): extrae
-  respuestas, comentarios y conversaciones completas bajo publicaciones con
-  más de 25 filtros. Úsalo cuando necesites la discusión debajo de los
-  tuits. Desde $0.00015 por fila.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Extrae
-  respuestas, citas, usuarios que retuitean e hilos para URLs o IDs de
-  publicaciones de forma masiva. Úsalo cuando mides quién
-  interactuó con las publicaciones. Desde $0.00015 por fila.
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): extrae posts de
+  búsquedas, cronologías de perfiles, Listas e IDs de posts con más de 50
+  filtros y exportaciones planas. Úsalo cuando necesites datos de posts sin
+  análisis. Desde $0.00015 por fila.
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): extrae respuestas,
+  comentarios y conversaciones completas debajo de posts con más de 25 filtros.
+  Úsalo cuando necesites la conversación debajo de los posts. Desde $0.00015 por
+  fila.
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): extrae
+  respuestas, citas, cuentas que hicieron repost e hilos de URLs o IDs de posts
+  en bloque. Úsalo cuando midas quién interactuó con los posts. Desde $0.00015
+  por fila.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): extrae
-  seguidores, cuentas seguidas, miembros de Listas, suscriptores y miembros
-  de Comunidades como filas de perfil. Úsalo cuando necesites listas de
-  audiencia o miembros. Desde $0.00015 por perfil.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  busca usuarios por nombre de usuario, biografía y ubicación con filtros de
-  seguidores, verificación, antigüedad y ubicación. Úsalo cuando construyas
-  listas de cuentas a partir de una búsqueda. Desde $0.00015 por perfil.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): extrae
-  publicaciones, miembros y seguidores de Listas desde URLs o IDs de Listas.
-  Úsalo cuando una Lista curada defina tus fuentes. Desde $0.00015 por fila.
+  seguidores, cuentas seguidas, miembros de Listas, suscriptores y miembros de
+  Comunidades como filas de perfil. Úsalo cuando necesites listas de audiencia o
+  de miembros. Desde $0.00015 por perfil.
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): busca
+  usuarios por nombre de usuario, biografía y ubicación con filtros de
+  seguidores, verificación, antigüedad y ubicación. Úsalo cuando crees listas de
+  cuentas a partir de búsquedas. Desde $0.00015 por perfil.
+- [X List Scraper](https://apify.com/xquik/x-list-scraper): extrae posts,
+  miembros y seguidores de Listas a partir de URLs o IDs de Listas. Úsalo cuando
+  una Lista curada defina tus fuentes. Desde $0.00015 por fila.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): extrae
-  información, publicaciones, búsquedas, miembros y moderadores de
-  Comunidades. Úsalo cuando tus fuentes sean Comunidades de X. Desde
-  $0.00015 por fila.
+  información, posts, búsquedas, miembros y moderadores de Comunidades. Úsalo
+  cuando tus fuentes sean Comunidades de X. Desde $0.00015 por fila.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): extrae
   tendencias en tiempo real por ubicación con posición, volumen, consulta y
-  WOEID. Úsalo cuando quieras saber qué es tendencia y dónde. Desde $0.00015
-  por tendencia.
+  WOEID. Úsalo cuando sigas qué es tendencia y dónde. Desde $0.00015 por
+  tendencia.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): extrae
-  Artículos largos de X en Markdown y texto con portadas, autores, fechas y
-  métricas. Úsalo cuando necesites cuerpos de artículos, no tuits. Desde
-  $0.00015 por artículo.
+  Artículos de X de formato largo como Markdown y texto con portadas, autores,
+  fechas y métricas. Úsalo cuando necesites el cuerpo de los Artículos, no
+  posts. Desde $0.00015 por artículo.
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader): extrae o
-  almacena fotos, videos y GIFs de publicaciones o perfiles con opciones de
-  MP4 y metadatos. Úsalo cuando necesites los archivos multimedia en sí.
-  Desde $0.00015 por fila de contenido multimedia.
+  guarda fotos, videos y GIFs de posts o perfiles con opciones de MP4 y
+  metadatos. Úsalo cuando necesites los archivos multimedia en sí. Desde
+  $0.00015 por fila de contenido multimedia.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
-  rastrea menciones de marca con relevancia, sentimiento y respuestas de
-  experiencia del cliente mediante IA, y compara ejecuciones. Úsalo cuando
-  sigas una marca a lo largo del tiempo. Desde $0.0003 por tuit analizado.
+  sigue menciones de marca con relevancia, sentimiento y respuestas de
+  experiencia del cliente generadas con IA, y compara ejecuciones. Úsalo cuando
+  vigiles una marca a lo largo del tiempo. Desde $0.0003 por post analizado.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
-  etiqueta actitud, intensidad y probabilidad de sarcasmo de cada tuit con
-  IA. Úsalo cuando necesites sentimiento general sobre cualquier tema.
-  Desde $0.0003 por tuit analizado.
+  etiqueta con IA la actitud, la intensidad y la probabilidad de sarcasmo de
+  cada post. Úsalo cuando necesites el sentimiento general sobre cualquier tema.
+  Desde $0.0003 por post analizado.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
-  etiqueta postura alcista, bajista, neutral o mixta, tipo de contenido,
-  convicción y relevancia de activos con IA. Úsalo cuando sigas acciones,
-  cripto o conversaciones de trading. Desde $0.0003 por tuit analizado.
+  etiqueta con IA la postura alcista, bajista, neutral o mixta, el tipo de
+  contenido, la convicción y la relevancia del activo. Úsalo cuando sigas
+  acciones, cripto o conversaciones de trading. Desde $0.0003 por post
+  analizado.
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
-  etiqueta publicaciones de noticias por formato, atribución de fuente y
-  relevancia de tema con IA. Úsalo cuando separes reportería de opinión.
-  Desde $0.0003 por tuit analizado.
+  etiqueta con IA los posts de noticias por formato, atribución de la fuente y
+  relevancia del tema. Úsalo cuando separes la información de la opinión. Desde
+  $0.0003 por post analizado.
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  responde tus propias preguntas de categoría, puntaje y sí/no para cada
-  tuit con IA. Úsalo cuando los análisis predefinidos no se ajusten a tus
-  etiquetas. Desde $0.0003 por tuit analizado.
+  responde con IA tus propias preguntas de categoría, puntuación y sí o no para
+  cada post. Úsalo cuando los análisis predefinidos no se ajusten a tus
+  etiquetas. Desde $0.0003 por post analizado.
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
-  Estima un Viral Score de 0 a 100 y un veredicto para cada tuit a partir de 8
-  respuestas de IA sobre sus rasgos. Úsalo cuando estudias por qué los tuits se
-  difunden o fracasan. Desde $0.0003 por tuit analizado.
+  estima un Viral Score de 0 a 100 y un veredicto para cada post a partir de 8
+  respuestas de IA sobre sus rasgos. Úsalo cuando estudies por qué un post se
+  difunde o fracasa. Desde $0.0003 por post analizado.
+
+## Preguntas frecuentes
+
+### ¿Necesito una clave de API de X o iniciar sesión?
+
+No. X Profile Scraper de Xquik no necesita clave de API de X, inicio de sesión
+ni credenciales.
+
+### ¿Es legal extraer perfiles de X?
+
+X Profile Scraper de Xquik solicita campos públicos de X. Los resultados pueden
+contener datos personales. Confirma que tu propósito es lícito y cumple las
+normas de privacidad aplicables. Si tienes dudas, consulta a un abogado
+calificado.
+
+### ¿Por qué mi ejecución no devolvió resultados?
+
+Abre primero la salida gratuita `diagnostics`. El estado de una ejecución vacía
+te pide revisar tus objetivos y filtros. `stopCauses` da a cada causa un
+`nextAction` que puedes seguir. La ejecución enumera cada entrada que no puede
+leer y explica cómo corregirla. X oculta los Me gusta, así que `includeLikes` no
+devuelve filas `profileLike` de otras cuentas.
+
+### ¿Puedo usar la API, las programaciones y las integraciones?
+
+Sí. Elige entre 50 tareas públicas o 129 operaciones REST de Xquik. La
+[pestaña API](https://apify.com/xquik/x-profile-scraper/api) tiene ejemplos en
+Python, JavaScript y cURL. Las
+[programaciones](https://docs.apify.com/platform/schedules) de Apify ejecutan X
+Profile Scraper de Xquik con un cron. Los agentes usan
+[Apify MCP](https://docs.apify.com/platform/integrations/mcp). Usa `latest`
+salvo que necesites una compilación anterior.
+
+### ¿Dónde consigo ayuda?
+
+Abre un issue en la página del Actor o escribe a support@xquik.com con el ID de
+la ejecución. Los diagnósticos gratuitos del almacén de clave-valor explican las
+ejecuciones vacías, parciales o interrumpidas.
+
+### ¿Puedo obtener una solución a medida?
+
+Sí. Visita [xquik.com](https://xquik.com) o lee la
+[documentación de la API](https://docs.xquik.com/introduction). Ahí encontrarás
+el panel, la API, el servidor MCP y los webhooks.

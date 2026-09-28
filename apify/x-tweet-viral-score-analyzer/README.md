@@ -1,47 +1,57 @@
-<p align="center">
-  <strong>English</strong> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+**English** ·
+[Español](README.es.md)
+·
+[Türkçe](README.tr.md)
+·
+[简体中文](README.zh-CN.md)
+·
+[日本語](README.ja.md)
+·
+[한국어](README.ko.md)
+·
+[Deutsch](README.de.md)
+·
+[Français](README.fr.md)
+·
+[Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer connects Xquik MCP to coding agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Watch how Framer uses Xquik scrapers with Claude Code, Codex, Cursor, and more, from 6:07.</a>
-</td></tr></table>
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
+
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
+Claude Code, Codex, Cursor, and more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data. X Tweet Viral Score Analyzer adds a Viral Score estimate &
-a verdict to every tweet. Most other Apify Actors charge before filtering or
-deduplicating. Xquik charges only for delivered, unique, filter-matching
-results. AI costs are included in the per-tweet price. You need no AI account,
-tokens or key.
+most complete X data. Xquik's X Tweet Viral Score Analyzer rates every tweet. It
+adds a Viral Score estimate & a verdict. Most other Apify Actors charge before
+filtering or deduplicating. Xquik charges only for delivered, unique,
+filter-matching results. AI costs are included in the per-tweet price. You need
+no AI account, tokens or key.
 
-Learn why tweets spread or flop & keep the original tweet data. **X Tweet Viral
-Score Analyzer with AI** collects matching tweets. The AI rates 8 traits of each
-post. The Actor turns those answers into a Viral Score estimate from 0 to 100 &
-a verdict. Every row keeps real likes, reposts, replies & quotes, so you can
-compare each estimate with what happened.
+Learn why tweets spread or flop & keep the original tweet data. Xquik's **X
+Tweet Viral Score Analyzer with AI** collects matching tweets. The AI rates 8
+traits of each post. The Actor turns those answers into a Viral Score estimate &
+a verdict. Every row keeps real likes, reposts, replies & quotes. Compare each
+estimate with what happened.
 
-- **Viral Score per post** from fixed, versioned rules.
-- **8 trait answers** show why a post scored high or low.
-- **Hard stops** cap posts that read as spam, ragebait or generic machine copy.
-- **Complete source records** with every field the tweet exposes.
+- **Viral Score per post.** Fixed, versioned rules compute each score from 0
+  to 100.
+- **8 trait answers.** They show why a post scored high or low.
+- **Hard stops.** They cap posts that read as spam, ragebait or generic machine
+  copy.
+- **Complete source records.** Every row keeps every field the tweet exposes.
 
-The Viral Score is an estimate of how well the wording works. It does not
-predict likes or views. It does not reproduce how X ranks posts.
+The Viral Score estimates how well the wording works. It does not predict likes
+or views. It does not reproduce how X ranks posts.
+
+> Xquik is an independent third-party service. Not affiliated with X Corp.
+> "Twitter" and "X" are trademarks of X Corp.
 
 ## How to check a tweet's viral score
 
 1. Add search terms, profile handles, tweet URLs or tweet IDs.
 2. Set `maxItems` & the extraction filters your task needs.
 3. Describe your audience in `analysis.context`, or leave the default.
-4. Run the Actor & open the `Viral Score` dataset view.
+4. Start the run & open the `Viral Score` dataset view.
 
 ```json
 {
@@ -67,7 +77,7 @@ predict likes or views. It does not reproduce how X ranks posts.
 The AI-written answer judges style only. It does not establish who wrote the
 post.
 
-### How the Viral Score works
+### How the viral score works
 
 Hook, clarity, payoff & the expected reaction raise the score. Wording that
 reads like generic machine copy lowers it.
@@ -82,15 +92,15 @@ score is a whole number from 0 to 100.
 | `sleep_on_it` | 0 to 39   |
 
 `viral.weights` names the version of these rules, such as `viral_lite:1`. It
-changes whenever the rules change. The score is `null` when the analysis failed,
-the Actor skipped it, or a default trait answer is missing. The Actor never
-fills a missing score with a guess.
+changes whenever the rules change. The score is `null` after a failed or skipped
+analysis. It is also `null` when a default trait answer is missing. Xquik's X
+Tweet Viral Score Analyzer never fills a missing score with a guess.
 
-## Algorithm Score estimate
+## Algorithm score estimate
 
 X published its ranking weights in the repository `xai-org/x-algorithm`, file
-`home-mixer/params/param.rs`. The Actor applies 4 of them to the public counts
-of each post:
+`home-mixer/params/param.rs`. Xquik's X Tweet Viral Score Analyzer applies 4 of
+them to each post's public counts:
 
 | Count  | Weight |
 | ------ | ------ |
@@ -106,7 +116,7 @@ divisor, `views` or `followers`. Compare scores with the same basis only.
 `viral.weightsVersion` names the weights, such as
 `x_algorithm_params:2026-09-18`.
 
-Limits:
+The estimate has these limits:
 
 - X multiplies each weight by a probability it predicts for one viewer. The
   Actor multiplies by observed counts. The result is an estimate, not the score
@@ -119,30 +129,30 @@ Limits:
 
 ## Predicted against actual
 
-The Actor compares each Viral Score with what happened.
-`viral.actualEngagementRate` is `log10(1 + weighted sum per 1,000 followers)`.
-The log limits the effect of one very large post. The rate is `null` when the
-follower count is missing or 0.
+Xquik's X Tweet Viral Score Analyzer compares each Viral Score with what
+happened. `viral.actualEngagementRate` is
+`log10(1 + weighted sum per 1,000 followers)`. The log limits the effect of one
+very large post. The rate is `null` when the follower count is missing or 0.
 
-The run summary's `viral.calibration` block reports:
+The run summary's `viral.calibration` block reports these fields:
 
-- `comparedPosts`: posts with a Viral Score & an actual rate.
-- `rankCorrelation`: a Spearman rank correlation from -1 to 1. It asks whether
-  higher scores went with higher rates.
-- `calibrationScore`: 100 times the correlation, floored at 0.
-- `overperformers` & `underperformers`: up to 5 posts each, with tweet ID, URL,
-  Viral Score, actual rate & `gap`.
+- `comparedPosts` counts posts with a Viral Score & an actual rate.
+- `rankCorrelation` is a Spearman rank correlation from -1 to 1. It shows
+  whether higher scores went with higher rates.
+- `calibrationScore` is 100 times the correlation, floored at 0.
+- `overperformers` & `underperformers` list up to 5 posts each. Each has its
+  tweet ID, URL, Viral Score, actual rate & `gap`.
 
 `gap` is the standardized actual rate minus the standardized Viral Score. A post
 enters a list when its gap reaches 1 standard deviation.
 
-Limits:
+The calibration has these limits:
 
 - Fewer than 10 compared posts give a `null` calibration with the reason
   `too_few_posts`. Identical scores or rates give `no_variation`.
 - The correlation is approximate.
 - The calibration describes one run. A low score can mean the posts differ in
-  timing, topic or audience, not that the wording estimate failed.
+  timing, topic or audience. It does not prove the wording estimate failed.
 - Young posts have not finished collecting engagement. Compare posts of similar
   age.
 
@@ -152,16 +162,17 @@ The run summary's `viral.accounts` block reports each author handle:
 
 - Post count, average Viral Score & average actual engagement rate.
 - The best & worst post by Viral Score, with tweet ID & URL.
-- Average Viral Score per bucket: posting hour in UTC, text length band, has
-  media, has link & self-thread.
+- Average Viral Score per bucket. Buckets are posting hour in UTC, text length
+  band, has media, has link & self-thread.
 
-Text length bands are `short` to 80 characters, `medium` to 200, `long` to 280 &
-`extended` above. A self-thread post replies to its own author.
+Text length bands are `short`, `medium`, `long` & `extended`. `short` ends at 80
+characters, `medium` at 200 & `long` at 280. `extended` covers longer text. A
+self-thread post replies to its own author.
 
-Limits:
+The report has these limits:
 
 - The report lists the 50 handles with the most scored posts.
-- The Actor follows the first 1,000 handles of a run. `untrackedPosts` counts
+- The report tracks the first 1,000 handles of a run. `untrackedPosts` counts
   scored posts from later handles & posts without a handle.
 - A bucket with few posts says little. Check `posts` before you compare
   averages.
@@ -174,7 +185,7 @@ report. `byViralScore` ranks by average Viral Score. `byActualEngagementRate`
 ranks by average actual rate. Each list holds up to 20 handles with `rank`,
 `posts` & `average`.
 
-Limits:
+The leaderboard has these limits:
 
 - A handle needs at least 3 scored posts to rank.
 - The rate list skips handles without a follower count.
@@ -183,7 +194,8 @@ Limits:
 
 ## Score a draft before you post
 
-Paste your own text in `texts`. The Actor scores it & fetches nothing from X.
+Paste your own text in `texts`. Xquik's X Tweet Viral Score Analyzer scores it &
+fetches nothing from X.
 
 ```json
 {
@@ -201,22 +213,22 @@ Paste your own text in `texts`. The Actor scores it & fetches nothing from X.
 - Each analyzed text costs the same $0.0003 as an analyzed tweet.
 - With `texts` set, the run analyzes only those texts. Run X targets separately.
 
-## Pricing
+## How much does it cost to check viral scores?
 
-AI costs are included in the per-tweet price. You need no AI account, tokens or
-key.
+Xquik's X Tweet Viral Score Analyzer costs from $0.0003 per analyzed tweet. It
+charges no start fee. The price includes collection, AI costs & the Viral Score.
+You need no AI account, tokens or key. The price covers up to 8 questions &
+64,000 bytes of context per tweet. Each question definition may use up to 8,000
+bytes.
 
-From $0.0003 per successfully analyzed tweet, with no start fee. The price
-includes collection & the Viral Score. The analysis allowance is 8 questions,
-8,000 bytes per question definition & 64,000 bytes of context per tweet.
-Extraction filters & deduplication run before analysis, so filtered-out &
-duplicate rows are never analyzed or charged. Failed & skipped analyses &
-diagnostic rows have no result charge. Apify bills platform usage separately.
-The Pricing tab shows it.
+Extraction filters & deduplication run before analysis. You never pay for
+filtered-out or duplicate rows. Failed analyses, skipped analyses & diagnostic
+rows have no result charge. Apify bills platform usage for compute, storage &
+transfer separately at your plan's rates. The Pricing tab shows it.
 
 ## Input & output examples
 
-The input above is copy-ready. Output rows look like this (abbreviated):
+The input above is copy-ready. An abbreviated output row looks like this:
 
 ```json
 {
@@ -254,11 +266,12 @@ The input above is copy-ready. Output rows look like this (abbreviated):
 
 Each result contains `tweet`, `analysis` & `viral`. Answers include types,
 question versions & available probabilities. `viral.stops` lists the hard stops
-that capped the score. A failed or skipped analysis keeps the collected tweet
-with an empty answer list, a `reason` & a `null` score. Free diagnostics in the
-key-value store explain invalid inputs, missing results & interrupted
-collection. The run report separates collected rows, charged analyses & pending
-charges.
+that capped the score. A row with a failed or skipped analysis keeps the
+collected tweet & a `reason`. Its answer list is empty & its score is `null`.
+
+Free diagnostics in the key-value store explain invalid inputs, missing results
+& interrupted collection. The run report separates collected rows, charged
+analyses & pending charges.
 
 ## Run summary & flat answers
 
@@ -271,45 +284,58 @@ A run writes an `analysis-summary` record to its key-value store in 4 cases:
 
 Other runs skip the record. Their status names the top answer, like
 `Average Viral Score: 64.` A comparison without a change states
-`No change since the earlier run.` A run that hits a problem, or a large run,
-also writes `run-report`. So does a run with `alwaysSaveRunRecords` on.
-`run-report` repeats the summary under `results.analysisSummary`.
+`No change since the earlier run.` A run that hits a problem or is large also
+writes `run-report`. So does a run with `alwaysSaveRunRecords` on. `run-report`
+repeats the summary under `results.analysisSummary`.
 
-The summary counts analyzed, failed & skipped rows, sums engagement, and
-summarizes every question. Its `viral` block reports `averageScore`, the count
-of each verdict, & how many rows the Actor scored or left unscored. The same
-block holds `calibration`, `accounts` & `leaderboard`, described above. Score
-questions report a mean & an engagement-weighted mean. The `reaction` split
-shows how many tweets fall into each reaction, & `top` lists the three most
-engaged tweets per reaction. An empty run reports zero counts & a `null`
-average. Every row lists `sourceDomains`, the hostnames it links to, &
-`cashtags` such as `$NVDA` found in its text. With `monitor.baselineDatasetId`
-set, the summary's `monitor` block counts comparison statuses & lists up to 50
-changed rows.
+The summary counts analyzed, failed & skipped rows. It sums engagement &
+summarizes every question.
+
+- The `viral` block reports `averageScore` & the count of each verdict. It also
+  counts scored & unscored rows.
+- The same block holds `calibration`, `accounts` & `leaderboard`, described
+  above.
+- Score questions report a mean & an engagement-weighted mean.
+- The `reaction` split shows how many tweets fall into each reaction.
+- `top` lists the 3 most engaged tweets per reaction.
+- Every row lists `sourceDomains`, the hostnames it links to.
+- Every row lists `cashtags` found in its text, such as `$NVDA`.
+- With `monitor.baselineDatasetId` set, the summary's `monitor` block counts
+  comparison statuses. It lists up to 50 changed rows.
+
+An empty run reports counts of 0 & a `null` average.
 
 Every result row also carries `viralScore`, `viralVerdict`,
-`viralAlgorithmScore`, `viralActualEngagementRate` & `answers`, a flat map from
-question ID to the chosen category, score, or probability. The `Viral Score`
-dataset view & CSV or Excel exports show these columns beside the tweet, so
-spreadsheets need no JSON parsing. Failed & skipped rows carry an empty map.
+`viralAlgorithmScore` & `viralActualEngagementRate`. It also carries `answers`,
+a flat map keyed by question ID. Each value is the chosen category, score or
+probability. The `Viral Score` dataset view & CSV or Excel exports show these
+columns. They sit beside the tweet, so spreadsheets need no JSON parsing. Failed
+& skipped rows carry an empty map.
 
 ## Compare with an earlier run
 
 Pass `monitor.baselineDatasetId`, the dataset ID of a completed earlier run with
-the same analysis settings. The comparison reads that run's rows, so it works
-even when that run skipped its summary. Every row then gains a `monitor` object.
-Its status is `first_run` without a baseline, `new_to_baseline` for tweets the
-earlier run did not have, & `unchanged` or `changed` for tweets it had.
+the same analysis settings. The comparison reads that run's rows. It works even
+when that run skipped its summary. Every row then gains a `monitor` object. Its
+status can be:
+
+- `first_run` without a baseline.
+- `new_to_baseline` for tweets the earlier run did not have.
+- `unchanged` or `changed` for tweets it had.
+
 `changes` lists each trait decision that moved from `previous` to `current`.
-Decisions compare by category, rounded score level, or yes/no at 0.5. A decision
-counts as changed only when it moves clearly. Near-tie jitter between runs stays
-unchanged. Baselines above `maxBaselineRows` (default 100,000) or from different
-settings stop the run before collection with a diagnostic row.
+Decisions compare by category, rounded score level or yes/no at 0.5. A decision
+counts as changed only when it moves clearly. Near ties between runs stay
+`unchanged`.
+
+A baseline above `maxBaselineRows`, or from different settings, stops the run
+before collection. The run then writes a diagnostic row. `maxBaselineRows`
+defaults to 100,000.
 
 ## Task examples
 
-Choose from 50 public tasks. Each starts from a real English search with a
-bounded `maxItems` & the `Viral Score` dataset view. Some add audience context.
+Choose from 50 public tasks. Each starts from a real English search & a bounded
+`maxItems`. It uses the `Viral Score` dataset view. Some add audience context.
 Edit the search or context before running.
 
 - [Viral score of AI startup launch tweets](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-ai-startup-launch-tweets)
@@ -329,6 +355,14 @@ The remaining tasks cover more topics & brand accounts on the Actor page.
 
 ## FAQ & support
 
+Answers to common questions, then where to get help.
+
+### Do I need an AI account, X API key or login?
+
+No. Xquik's X Tweet Viral Score Analyzer includes AI costs in its price. You
+need no AI account, tokens or key. You also need no X API key, login or
+credentials.
+
 ### Does a high score mean a tweet will go viral?
 
 No. The score estimates how well the wording works for a general reader. Timing,
@@ -337,17 +371,19 @@ engagement counts on each row before you rely on them.
 
 ### Can I use my own questions?
 
-Yes. Custom `analysis.questions` replace the defaults: 1-8 `choice`, `score` or
-`probability` questions with 2-255 categories or at least 2 ordered levels. The
-Viral Score needs all 8 default questions, so custom questions leave it `null`.
+Yes. Custom `analysis.questions` replace the defaults. Send 1 to 8 `choice`,
+`score` or `probability` questions. Choice questions accept 2 to 255 categories.
+Score questions need at least 2 ordered levels. The Viral Score needs all 8
+default questions, so custom questions leave it `null`.
 
-### Why did a row come back with `analysis.status` of `failed` or `skipped`?
+### Why did a row come back with a failed or skipped analysis?
 
-The Actor collected & delivered the tweet, but the AI analysis did not complete.
-`analysis.reason` names the cause. `context_limit` means your context & targets
-leave no room for the tweet. `service_unavailable` means the analysis service
-was briefly unavailable. These rows carry no result charge & no score. Shorten
-`analysis.context` or rerun the affected IDs.
+`analysis.status` is `failed` or `skipped`. The Actor collected & delivered the
+tweet, but the AI analysis did not complete. `analysis.reason` names the cause.
+`context_limit` means your context & targets leave no room for the tweet.
+`service_unavailable` means the analysis service was briefly unavailable. These
+rows carry no result charge & no score. Shorten `analysis.context` or rerun the
+affected IDs.
 
 The Actor still analyzes a tweet longer than `maxContextBytes`. It cuts quoted &
 replied-to posts first, then the tweet. `analysis.contextAvailability.postText`
@@ -356,8 +392,8 @@ is then `truncated`. Raise `maxContextBytes` up to 64,000 to keep more text.
 ### Does the analysis verify facts?
 
 No. Answers describe what the post expresses & how the post frames it.
-Probabilities express model confidence, not truth. Review important
-classifications against the original tweet, which every row keeps.
+Probabilities express AI confidence, not truth. Review important classifications
+against the original tweet, which every row keeps.
 
 ### Which languages work?
 
@@ -367,19 +403,31 @@ structure.
 
 ### How do I limit cost?
 
-Filters, deduplication & `maxItems` run before analysis, so the Actor analyzes &
-charges only unique, filter-matching tweets. Use precise search operators, date
-bounds & engagement floors, & start with a small `maxItems` to check answer
-quality before a large run.
+Filters, deduplication & `maxItems` run before analysis. You pay only for
+unique, filter-matching tweets. Use precise search operators, date bounds &
+engagement floors. Start with a small `maxItems` to check answer quality before
+a large run.
+
+### Is it legal to analyze X data?
+
+The Actor requests public X fields. Results can contain personal data. Confirm a
+lawful purpose & follow applicable privacy rules. Ask qualified counsel when
+uncertain.
+
+### Can I use the API, schedules & integrations?
+
+Yes. See the [API tab](https://apify.com/xquik/x-tweet-viral-score-analyzer/api)
+for Python, JavaScript & cURL examples. Use Apify
+[schedules](https://docs.apify.com/platform/schedules) for recurring runs. Pass
+the previous dataset ID as `monitor.baselineDatasetId` to see what changed.
+Apify integrations also connect runs to webhooks, Make, Zapier, n8n & Google
+Sheets.
 
 ### Where do I get help?
 
-Open an issue on the Actor page or contact support@xquik.com with the run ID.
+Open an issue on the Actor page or contact <support@xquik.com> with the run ID.
 Free diagnostics in the key-value store explain empty, partial or interrupted
 runs.
-
-Xquik is an independent third-party service. Not affiliated with X Corp.
-"Twitter" and "X" are trademarks of X Corp.
 
 ## Related Xquik Actors
 

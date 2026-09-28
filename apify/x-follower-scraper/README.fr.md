@@ -16,61 +16,269 @@
 </td></tr></table>
 
 Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
-monde, avec les données X les plus complètes. X Follower Scraper collecte les
-abonnés, les comptes suivis, les membres de list, les abonnés et les membres de
-community. La plupart des autres Actors Apify facturent avant de filtrer ou de
-dédupliquer. Xquik ne facture que les résultats livrés, uniques et conformes aux
-filtres.
+monde. Ses données X sont les plus complètes. X Follower Scraper de Xquik
+collecte les abonnés, les abonnements, les membres de Liste, les abonnés de
+Liste et les membres de Communauté. Des benchmarks publics prouvent qu'il est le
+moins cher et le plus rapide de 10 Actors d'abonnés. Ses lignes portent 1,9x
+plus de champs que celles de l'Actor médian, comme le montre le
+[benchmark ci-dessous](#benchmark). La plupart des autres Actors Apify facturent
+avant de filtrer ou de dédupliquer. Xquik facture seulement les résultats
+livrés, uniques et conformes à vos filtres.
 
-Scrapez les abonnés, les comptes suivis, les abonnés vérifiés, les membres
-de List, les abonnés de List et les membres de Community sur X (Twitter)
-pour **à partir de $0.00015 par profil livré sur chaque plan Apify**. Apify
-facture séparément l'usage de sa plateforme. Aucune connexion X, ni frais de
-démarrage, ni frais de requête.
+Scrapez les abonnés, les abonnements, les abonnés certifiés, les membres de
+Liste, les abonnés de Liste et les membres de Communauté sur X (Twitter). X
+Follower Scraper de Xquik coûte **à partir de $0.00015 par profil livré sur
+chaque plan Apify**. Apify facture l'usage de la plateforme à part. Vous n'avez
+pas besoin de connexion X, et Xquik ne facture pas de frais de démarrage ni de
+requête.
 
 > Xquik est un service tiers indépendant. Non affilié à X Corp.
-> « Twitter » et « X » sont des marques déposées de X Corp.
-
-## Extraction incomplète
-
-Une extraction interrompue écrit un diagnostic `partial` gratuit. Les
-résultats disponibles restent intacts. Consultez `availableResults`,
-`failedTargets`, `retryable` et `nextAction` avant de relancer. Une sortie
-d'Actor réussie confirme la livraison, pas l'extraction complète.
-
-Le texte de statut nomme toutes les causes d'un arrêt anticipé. `stopCauses`
-liste chaque cause avec ses propres `message`, `retryable` et `nextAction`. Les
-causes sont `target_not_found`, `target_failed` et `deadline_reached`. Un compte
-introuvable n'y figure que si une autre cause a arrêté le run. Le run est
-`retryable` dès qu'une cause l'est.
+> "Twitter" et "X" sont des marques déposées de X Corp.
 
 ## Que fait X Follower Scraper ?
 
-X Follower Scraper renvoie les données de profil public disponibles pour
-les abonnés, les comptes suivis, les Lists et les Communities. Chaque ligne
-inclut sa cible source et sa relation.
+X Follower Scraper de Xquik renvoie les données de profil publiques disponibles
+pour les abonnés, les abonnements, les Listes et les Communautés. Chaque ligne
+nomme sa cible source et sa relation.
 
 ### Comportement de base
 
-- Les filtres et la suppression des doublons s'exécutent avant la
-  facturation.
-- Un profil issu de plusieurs cibles apparaît et est facturé une seule fois par
-  défaut.
-- Un run accepte des handles, des ID numériques, des URL et des chemins
-  courts.
-- Le mode fusion enregistre les profils partagés, les sources, les
-  relations et `overlapCount`.
-- Les journaux du run affichent la durée de chaque page dans `fetchDurationMs`,
+- Les filtres et la suppression des doublons passent avant la facturation.
+- Par défaut, un profil commun à plusieurs cibles apparaît et se facture une
+  seule fois.
+- Un même run accepte des noms d'utilisateur, des ID numériques, des URL et des
+  chemins courts.
+- Le mode fusion enregistre les profils communs, les sources, les relations et
+  `overlapCount`.
+- Les logs du run montrent la durée de chaque page dans `fetchDurationMs`,
   `processingDurationMs`, `pushDurationMs`, `statusDurationMs` et
   `fullPageDurationMs`.
-- Si Apify redémarre un run, les lignes livrées et la progression sont
-  conservées.
+- Les runs gardent les lignes livrées et la progression quand Apify les
+  redémarre.
+
+### Quelles données X Follower Scraper peut-il extraire ?
+
+| Champ             | Description                                                   |
+| ----------------- | ------------------------------------------------------------- |
+| `id`              | ID numérique de l'utilisateur X                               |
+| `username`        | Nom d'utilisateur (sans `@`)                                  |
+| `name`            | Nom affiché                                                   |
+| `description`     | Texte de la bio                                               |
+| `followers`       | Nombre d'abonnés                                              |
+| `following`       | Nombre d'abonnements                                          |
+| `statusesCount`   | Total des posts publiés                                       |
+| `mediaCount`      | Total des médias publiés                                      |
+| `favouritesCount` | Total des J'aime donnés                                       |
+| `verified`        | Indicateur public combiné de certification Blue ou ancienne   |
+| `verifiedType`    | `blue`, `business`, `government` ou `none`                    |
+| `location`        | Localisation déclarée par le compte                           |
+| `url`             | URL du site web du profil                                     |
+| `profilePicture`  | URL de l'avatar (taille réelle)                               |
+| `coverPicture`    | URL de la bannière                                            |
+| `createdAt`       | Date de création du compte, en texte, fournie par X           |
+| `sourceTarget`    | Nom d'utilisateur ou ID d'où vient ce profil                  |
+| `sourceRelation`  | Relation : `followers`, `following`, `list_members`, ...      |
+| `sourceUrl`       | URL exacte où l'Actor a trouvé le profil                      |
+| `sourceTargets`   | Toutes les cibles qui ont trouvé ce profil en mode fusion     |
+| `sourceRelations` | Toutes les relations qui ont trouvé ce profil en mode fusion  |
+| `sourceUrls`      | Toutes les URL source qui ont trouvé ce profil en mode fusion |
+| `overlapCount`    | Nombre de paires relation-cible trouvées en mode fusion       |
+| `resultType`      | Type de ligne dans les modes de sortie full et raw            |
+| `raw`             | Profil source sûr, avant le formatage propre à l'Actor        |
+
+Les lignes suivent le contrat de profil public. Il couvre l'identité, les
+compteurs, la certification, la disponibilité, les affiliés, les données
+professionnelles et les biographies. L'attribution de la source, les entités et
+les ID des posts épinglés restent disponibles. Consultez OpenAPI pour la liste
+exacte des champs.
+
+Réglez `outputMode: "raw"` ou `includeRaw: true` pour ajouter un champ `raw`. Il
+contient une copie sûre du profil source. Le mode compact est le mode par
+défaut.
+
+`verifiedOnly` accepte les profils publics certifiés Blue ou par l'ancienne
+certification. Si les indicateurs de la source se contredisent, l'état certifié
+l'emporte.
+
+Les lignes n'incluent jamais d'état propre au compte qui consulte. Xquik retire
+les indicateurs d'abonnement, de blocage, de masquage, de MP, de notification et
+autres indicateurs de ce type. La sortie brute les retire aussi.
+
+## Cas d'usage
+
+- Enrichir des prospects & créer des datasets de recherche avec plus de champs
+  par profil. Le 2026-09-28, notre ligne médiane avait 28 champs. C'est 1,9x la
+  médiane de 9 autres Actors.
+- Exportez les abonnés de concurrents pour la prospection.
+- Comparez les audiences de votre compte, de vos concurrents et de personnalités
+  publiques.
+- Filtrez par nombre d'abonnés et par certification pour trouver les bons
+  profils.
+- Exportez les membres d'une Communauté X.
+- Créez des datasets publics de réseaux sociaux pour la recherche.
+- Segmentez des bases d'abonnés par mot-clé de bio, localisation ou type de
+  profil.
+
+## Comment utiliser X Follower Scraper pour scraper des données d'abonnés ?
+
+1. Ouvrez X Follower Scraper de Xquik dans Apify Console.
+2. Ajoutez des URL de profil, de Liste ou de Communauté, des noms d'utilisateur
+   X ou des ID numériques.
+3. Choisissez une relation, comme `followers` ou `verified_followers`.
+4. Réglez `maxItems` et d'éventuels filtres de profil.
+5. Lancez le run.
+6. Exportez le dataset en JSON, CSV, Excel ou HTML.
+
+Les entrées ci-dessous couvrent les cas courants.
+
+### Coller des URL de profil ou de Liste
+
+Collez des URL de profil, de Liste ou de Communauté. Chaque URL fixe la relation
+à scraper :
+
+```json
+{
+  "startUrls": [
+    { "url": "https://x.com/nasa/followers" },
+    { "url": "https://x.com/spacex/verified_followers" },
+    { "url": "https://x.com/elonmusk/following" },
+    { "url": "https://x.com/i/lists/1748648376080666720/members" },
+    { "url": "https://x.com/i/communities/1493446837214187523/members" }
+  ],
+  "maxItems": 5000
+}
+```
+
+### Noms d'utilisateur en masse
+
+`twitterHandles` est un raccourci pour de nombreuses cibles
+`/<handle>/followers`. Les noms d'utilisateur fonctionnent avec ou sans `@` :
+
+```json
+{
+  "twitterHandles": ["elonmusk", "nasa", "openai"],
+  "relation": "followers",
+  "maxItems": 1000
+}
+```
+
+`relation` fixe ce qu'il faut scraper pour chaque nom d'utilisateur. Utilisez
+`followers`, `following` ou `verified_followers`.
+
+La même entrée accepte aussi les alias `username`, `usernames` et `user_names`.
+
+### Runs multi-relations
+
+Réglez `relations` pour lire plusieurs relations des mêmes noms d'utilisateur :
+
+```json
+{
+  "usernames": ["nasa"],
+  "relations": ["followers", "following"],
+  "maxItems": 1000
+}
+```
+
+Des booléens comme `getFollowers`, `getFollowing`, `getVerifiedFollowers`,
+`getListMembers`, `getListFollowers` et `getCommunityMembers` fonctionnent
+aussi.
+
+### Scraper par ID numériques d'utilisateur, de Liste ou de Communauté
+
+```json
+{
+  "userIds": ["44196397"],
+  "listIds": ["1748648376080666720"],
+  "communityIds": ["1493446837214187523"],
+  "relation": "followers",
+  "maxItemsPerTarget": 500,
+  "maxItems": 1500
+}
+```
+
+Les ID d'utilisateur numériques acceptent aussi les alias `twitterUserIds` et
+`user_ids`.
+
+`relation` s'applique aux ID d'utilisateur numériques. Les ID de Liste lisent
+les membres par défaut. Les ID de Communauté lisent toujours les membres.
+`maxItemsPerTarget` empêche la première grosse cible d'épuiser `maxItems`.
+
+### Filtrer avant de payer
+
+Ajoutez des filtres pour que seuls les profils conformes entrent dans votre
+dataset :
+
+```json
+{
+  "twitterHandles": ["openai"],
+  "relation": "followers",
+  "minFollowers": 1000,
+  "verifiedOnly": true,
+  "verifiedType": "business",
+  "minStatuses": 100,
+  "usernameContains": "ai",
+  "bioContains": "founder, CEO",
+  "locationContains": "San Francisco",
+  "maxItems": 500
+}
+```
+
+L'Actor peut examiner plus de profils qu'il n'en écrit. Vous payez seulement les
+lignes qui passent tous les filtres et entrent dans votre dataset.
+
+Séparez les variantes de `bioContains` par des virgules ou des retours à la
+ligne. Un profil passe si sa bio contient l'un des termes fournis. La recherche
+ignore la casse.
+
+### Trouver les audiences communes
+
+Utilisez le mode fusion pour comparer des concurrents, des Listes, des
+Communautés ou des types de relation :
+
+```json
+{
+  "twitterHandles": ["openai", "anthropicai", "GoogleDeepMind"],
+  "relation": "followers",
+  "dedupeMode": "merge",
+  "maxItemsPerTarget": 5000,
+  "maxItems": 15000
+}
+```
+
+La sortie contient 1 ligne par profil unique. Les profils communs incluent
+`sourceTargets`, `sourceRelations`, `sourceUrls`, `sourceTargetKeys` et
+`overlapCount`. Triez par `overlapCount` ou exportez les lignes en CSV. Gardez
+`maxItems` assez haut pour que chaque cible ajoute des lignes. Utilisez
+`maxItemsPerTarget` pour régler la profondeur de chaque compte.
+
+### Formes d'URL acceptées
+
+| URL                                         | Relation                                       |
+| ------------------------------------------- | ---------------------------------------------- |
+| `https://x.com/<handle>/followers`          | `followers`                                    |
+| `https://x.com/<handle>/verified_followers` | `verified_followers`                           |
+| `https://x.com/<handle>/following`          | `following`                                    |
+| `https://x.com/<handle>`                    | `relation` par défaut (followers si non réglé) |
+| `https://x.com/i/lists/<id>/members`        | `list_members`                                 |
+| `https://x.com/i/lists/<id>/followers`      | `list_followers`                               |
+| `https://x.com/i/lists/<id>`                | `list_members`                                 |
+| `https://x.com/i/communities/<id>/members`  | `community_members`                            |
+| `https://x.com/i/communities/<id>`          | `community_members`                            |
+| `<handle>/followers`                        | `followers`                                    |
+| `<handle>/following`                        | `following`                                    |
+| `<handle>/verified_followers`               | `verified_followers`                           |
+| `lists/<id>/members`                        | `list_members`                                 |
+| `lists/<id>/followers`                      | `list_followers`                               |
+| `communities/<id>/members`                  | `community_members`                            |
+
+Les URL `twitter.com` et `mobile.twitter.com` fonctionnent aussi partout. Les
+URL sans `https://`, comme `x.com/nasa`, fonctionnent aussi.
 
 ## Exemples de tâches
 
-Choisissez parmi 50 tâches publiques. Chacune a une entrée bornée et une vue
-de dataset correspondante. Chaque tâche démarre avec une audience ou un
-filtre réel. Modifiez-la avant de l'exécuter.
+Choisissez parmi 50 tâches publiques. Chacune a une entrée limitée et une vue de
+dataset adaptée. Chaque tâche s'ouvre sur une vraie audience ou un vrai filtre.
+Modifiez-la avant de la lancer.
 
 - [Discover AI builders in OpenAI followers](https://apify.com/xquik/x-follower-scraper/examples/discover-ai-builders-in-openai-followers)
 - [Build an X audience dataset for AI agents](https://apify.com/xquik/x-follower-scraper/examples/build-agent-ready-x-audience-dataset)
@@ -85,108 +293,39 @@ filtre réel. Modifiez-la avant de l'exécuter.
 - [Collect Community members for AI agents](https://apify.com/xquik/x-follower-scraper/examples/collect-community-members-for-ai-agents)
 - [Create repeatable X follower snapshots](https://apify.com/xquik/x-follower-scraper/examples/create-repeatable-follower-snapshots)
 
-### Quelles données X Follower Scraper peut-il extraire ?
-
-| Champ             | Description                                              |
-| ----------------- | --------------------------------------------------------- |
-| `id`              | ID X numérique de l'utilisateur                           |
-| `username`        | Handle (sans `@`)                                          |
-| `name`            | Nom affiché                                                |
-| `description`     | Texte de la bio                                            |
-| `followers`       | Nombre d'abonnés                                           |
-| `following`       | Nombre de comptes suivis                                   |
-| `statusesCount`   | Total de tweets publiés                                    |
-| `mediaCount`      | Total de médias téléversés                                 |
-| `favouritesCount` | Total de likes donnés                                      |
-| `verified`        | Indicateur combiné Blue public ou vérifié historique       |
-| `verifiedType`    | `blue`, `business`, `government` ou `none`                 |
-| `location`        | Localisation autodéclarée                                  |
-| `url`             | URL du site web depuis le profil                           |
-| `profilePicture`  | URL de l'avatar (taille complète)                          |
-| `coverPicture`    | URL de la bannière                                         |
-| `createdAt`       | Chaîne d'horodatage de création du compte fournie par X    |
-| `sourceTarget`    | Handle / ID à partir duquel ce profil a été scrapé         |
-| `sourceRelation`  | Relation : `followers`, `following`, `list_members`, ...   |
-| `sourceUrl`       | URL exacte sur laquelle le profil a été découvert          |
-| `sourceTargets`   | Toutes les cibles ayant correspondu à ce profil en mode fusion |
-| `sourceRelations` | Toutes les relations ayant correspondu à ce profil en mode fusion |
-| `sourceUrls`      | Toutes les URL source ayant correspondu à ce profil en mode fusion |
-| `overlapCount`    | Nombre de paires relation-cible correspondantes en mode fusion |
-| `resultType`      | Type de ligne en mode de sortie complet et brut            |
-| `raw`             | Copie sûre du profil source avant mise en forme spécifique à l'Actor |
-
-Les lignes suivent le contrat de profil public. Il couvre l'identité, les
-compteurs, la vérification, la disponibilité, les affiliations, les données
-professionnelles et les biographies. L'attribution de source, les entités et
-les ID de tweet épinglé restent disponibles. Consultez l'OpenAPI pour la
-liste exacte des champs.
-
-Réglez `outputMode: "raw"` ou `includeRaw: true` pour inclure une copie
-`raw` du profil source sûr. Le mode compact reste la valeur par défaut.
-
-`verifiedOnly` accepte les profils Blue publics et vérifiés historiques. Des
-indicateurs source contradictoires ne laissent jamais une valeur fausse
-masquer un état de vérification vrai.
-
-Les lignes n'incluent jamais d'état propre au visualiseur. Les indicateurs
-d'abonnement, de blocage, de sourdine, de DM, de notification et similaires sont
-toujours retirés, y compris de la sortie raw.
-
 ## Combien coûte le scraping des abonnés X ?
 
-Chaque plan Apify coûte `$0.00015` par profil livré. Apify facture séparément
-l'usage de sa plateforme. Xquik applique une facturation par ligne de donnée
-livrée. Les diagnostics sont gratuits dans la sortie `diagnostics`. Aucun
-abonnement Xquik séparé ne s'applique. Aucun frais de démarrage ne s'applique.
-Le texte de statut indique pourquoi le run s'est arrêté. Il compte aussi les
-résultats facturés, les doublons écartés et les cibles lues. Un run avec un
-problème, ou un gros run, écrit aussi un enregistrement `run-report`. Son
-`estimatedChargeUsd` utilise le prix pay-per-event en temps réel qu'Apify expose
-à l'Actor. Les runs avec un problème écrivent toujours `run-report`. Cela inclut
-les sorties sans entrée et avec entrée invalide. Un petit run sans problème
-l'omet et économise de l'usage Apify. Activez `alwaysSaveRunRecords` pour
-l'écrire à chaque run. Son champ `version` indique la version exacte du code
-source publié de l'Actor.
-
-`failedTargets` compte les cibles arrêtées après une erreur. Les profils livrés
-restent des lignes de données facturables. Ces runs utilisent
-`completionReason: "partial_failure"`.
-
-Le délai d'expiration Apify par défaut est `0`. Les runs n'ont pas de limite de
-temps. L'Actor continue jusqu'à atteindre le plafond ou épuiser les profils.
-Vous pouvez néanmoins fixer un délai fini. Alors
-`completionReason: "deadline_reached"` signifie que cette limite est proche.
-L'Actor enregistre les profils et le rapport, puis se termine proprement avant
-la limite. Les profils livrés sont facturés une seule fois.
+X Follower Scraper de Xquik coûte $0.00015 par profil livré sur chaque plan
+Apify. Apify facture l'usage de votre plateforme à part. Xquik facture une fois
+par ligne de données livrée. Vous n'avez besoin d'aucun abonnement Xquik séparé,
+et Xquik ne facture pas le démarrage. Les démarrages, les cibles et le choix de
+relation ne sont pas facturés comme des requêtes à part.
 
 Un run peut lire de nombreuses cibles. Les plafonds, la déduplication,
-l'attribution et la facturation restent exacts sur l'ensemble.
+l'attribution et la facturation restent exacts sur toutes les cibles.
 
-- Les démarrages, cibles et sélections de relation n'ajoutent aucun frais
-  de requête séparé.
-- Les filtres (`minFollowers`, `verifiedOnly`, `bioContains`,
-  `locationContains`, `minFollowing`, `maxFollowing`, `minStatuses`,
-  `maxStatuses`, `minAccountAgeDays`, `verifiedType`, `usernameContains`,
-  `hasWebsite`, `hasLocation`) s'exécutent avant qu'un profil n'entre dans
-  votre dataset.
+- Les filtres passent avant qu'un profil entre dans votre dataset, donc les
+  lignes filtrées ne coûtent rien.
+- Les filtres numériques sont `minFollowers`, `maxFollowers`, `minFollowing`,
+  `maxFollowing`, `minStatuses`, `maxStatuses` et `minAccountAgeDays`.
+- Les filtres de profil sont `verifiedOnly`, `verifiedType`, `bioContains`,
+  `locationContains`, `usernameContains`, `hasWebsite` et `hasLocation`.
 - L'Actor retire les répétitions entre cibles avant l'écriture. Réglez
   `dedupeAcrossTargets: false` pour les garder.
-- Les lignes rejetées par le dataset ne sont pas facturées.
-- Les runs sans entrée, avec entrée invalide et sans sortie écrivent 1
-  enregistrement exploitable dans la sortie `diagnostics` gratuite.
+- Xquik ne facture jamais les lignes que le dataset rejette.
+- Les diagnostics sont gratuits dans la sortie `diagnostics`.
+- Les runs sans entrée, avec une entrée invalide ou sans sortie écrivent 1
+  enregistrement exploitable dans la sortie gratuite `diagnostics`.
 
-Réglez `maxTotalChargeUsd` dans l'API Apify, ou « Max cost per run » dans la
-Console, pour plafonner strictement les dépenses. Apify expose cette limite
-à l'Actor sous la forme `ACTOR_MAX_TOTAL_CHARGE_USD`, et l'Actor s'arrête
-avant d'accepter des lignes au-delà. Laissez `maxItems` vide pour que le run
-renvoie autant de profils que le plafond de dépense le permet. Ne réglez
-`maxItems` que lorsque vous voulez un plafond de résultats plus petit que
-celui autorisé par le budget.
+Un run qui rencontre un problème, ou un gros run, écrit aussi un enregistrement
+`run-report`. Son `estimatedChargeUsd` utilise le prix pay-per-event en vigueur
+qu'Apify transmet à l'Actor. Un petit run sans problème ne l'écrit pas et réduit
+l'usage Apify. Activez `alwaysSaveRunRecords` pour l'écrire à chaque run.
 
 ## Benchmark
 
-X Follower Scraper a battu 9 autres Actors d'abonnés sur le coût & la vitesse.
-Sa ligne médiane avait 28 champs, 1,9x la médiane des autres.
+X Follower Scraper de Xquik a battu 9 autres Actors d'abonnés sur le coût et la
+vitesse. Sa ligne médiane avait 28 champs, soit 1,9x la médiane des autres.
 
 | Actor                                                  | Profils utiles | Coût par profil utile | Profils utiles par seconde | Champs par ligne | Run public                                                                                                                                                                                     |
 | ------------------------------------------------------ | -------------: | --------------------: | -------------------------: | ---------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -210,239 +349,90 @@ additionne. Champs par ligne est la médiane des champs non vides, champs
 imbriqués compris. Une liste compte comme 1 champ. Ouvrez un run pour voir son
 entrée, son log & son dataset.
 
-## Comment utiliser X Follower Scraper pour scraper des données d'abonnés ?
-
-### 1. Collez des URL de profil ou de list
-
-Collez des URL de profil, de List ou de Community. Le scraper route chaque
-URL vers sa relation :
-
-```json
-{
-  "startUrls": [
-    { "url": "https://x.com/nasa/followers" },
-    { "url": "https://x.com/spacex/verified_followers" },
-    { "url": "https://x.com/elonmusk/following" },
-    { "url": "https://x.com/i/lists/1748648376080666720/members" },
-    { "url": "https://x.com/i/communities/1493446837214187523/members" }
-  ],
-  "maxItems": 5000
-}
-```
-
-### 2. Handles en masse
-
-Raccourci pour de nombreuses cibles `/<handle>/followers`. Les noms
-d'utilisateur acceptent `@` ou aucun préfixe :
-
-```json
-{
-  "twitterHandles": ["elonmusk", "nasa", "openai"],
-  "relation": "followers",
-  "maxItems": 1000
-}
-```
-
-Réglez `relation` sur `followers`, `following` ou `verified_followers`
-pour choisir la relation que l'Actor scrape pour chaque handle.
-
-Les alias acceptés pour la même entrée incluent `username`, `usernames` et
-`user_names`.
-
-### 3. Runs multi-relations
-
-```json
-{
-  "usernames": ["nasa"],
-  "relations": ["followers", "following"],
-  "maxItems": 1000
-}
-```
-
-Vous pouvez aussi utiliser des booléens tels que `getFollowers`,
-`getFollowing`, `getVerifiedFollowers`, `getListMembers`,
-`getListFollowers` et `getCommunityMembers`.
-
-### 4. Scraper par ID numériques d'utilisateur, de list ou de community
-
-```json
-{
-  "userIds": ["44196397"],
-  "listIds": ["1748648376080666720"],
-  "communityIds": ["1493446837214187523"],
-  "relation": "followers",
-  "maxItemsPerTarget": 500,
-  "maxItems": 1500
-}
-```
-
-Les alias acceptés pour les ID d'utilisateur numériques incluent
-`twitterUserIds` et `user_ids`.
-
-`relation` s'applique aux ID d'utilisateur numériques. Les ID de List
-utilisent par défaut les membres. Les ID de Community utilisent toujours
-les membres. `maxItemsPerTarget` empêche la première grande cible de
-consommer la limite globale.
-
-### 5. Filtrer avant de payer
-
-Appliquez des filtres pour que seuls les profils correspondants entrent
-dans votre dataset :
-
-```json
-{
-  "twitterHandles": ["openai"],
-  "relation": "followers",
-  "minFollowers": 1000,
-  "verifiedOnly": true,
-  "verifiedType": "business",
-  "minStatuses": 100,
-  "usernameContains": "ai",
-  "bioContains": "founder, CEO",
-  "locationContains": "San Francisco",
-  "maxItems": 500
-}
-```
-
-L'Actor peut inspecter plus de profils qu'il n'en écrit. Vous ne payez que
-pour les lignes qui passent tous les filtres et entrent dans votre dataset.
-
-Séparez les alternatives de `bioContains` par des virgules ou des retours à
-la ligne. Un profil passe quand sa bio contient l'un des termes fournis. La
-correspondance ne tient pas compte de la casse.
-
-### 6. Trouver un chevauchement d'audience
-
-Utilisez le mode fusion pour comparer des concurrents, des lists, des
-communities ou des types de relation :
-
-```json
-{
-  "twitterHandles": ["openai", "anthropicai", "GoogleDeepMind"],
-  "relation": "followers",
-  "dedupeMode": "merge",
-  "maxItemsPerTarget": 5000,
-  "maxItems": 15000
-}
-```
-
-La sortie contient une ligne par profil unique. Les profils partagés
-incluent `sourceTargets`, `sourceRelations`, `sourceUrls`,
-`sourceTargetKeys` et `overlapCount`, afin que vous puissiez trier par
-chevauchement ou exporter directement en CSV. Gardez `maxItems` assez
-élevé pour que chaque cible contribue des lignes. Utilisez
-`maxItemsPerTarget` pour contrôler la profondeur par compte.
-
-### Formes d'URL acceptées
-
-| URL                                          | Relation                                     |
-| --------------------------------------------- | --------------------------------------------- |
-| `https://x.com/<handle>/followers`            | `followers`                                   |
-| `https://x.com/<handle>/verified_followers`   | `verified_followers`                          |
-| `https://x.com/<handle>/following`            | `following`                                   |
-| `https://x.com/<handle>`                      | `relation` par défaut (followers si non réglé) |
-| `https://x.com/i/lists/<id>/members`          | `list_members`                                |
-| `https://x.com/i/lists/<id>/followers`        | `list_followers`                              |
-| `https://x.com/i/lists/<id>`                  | `list_members`                                |
-| `https://x.com/i/communities/<id>/members`    | `community_members`                           |
-| `https://x.com/i/communities/<id>`            | `community_members`                           |
-| `<handle>/followers`                          | `followers`                                   |
-| `<handle>/following`                          | `following`                                   |
-| `<handle>/verified_followers`                 | `verified_followers`                          |
-| `lists/<id>/members`                          | `list_members`                                |
-| `lists/<id>/followers`                        | `list_followers`                              |
-| `communities/<id>/members`                    | `community_members`                           |
-
-`twitter.com` et `mobile.twitter.com` sont aussi acceptés partout.
-
 ## Entrée
 
-Consultez l'onglet **Input** pour la liste complète des options. Tous les
-champs sont optionnels, sauf au moins un parmi : `startUrls`,
-`twitterHandles`, `userIds`, `listIds` ou `communityIds`, ou leurs alias
-documentés.
+L'onglet Input liste chaque option. Ajoutez au moins 1 champ parmi `startUrls`,
+`twitterHandles`, `userIds`, `listIds` ou `communityIds`. Leurs alias documentés
+comptent aussi. Tous les autres champs sont facultatifs.
 
-Exemples :
+Essayez ces entrées :
 
-- Ajoutez un handle concurrent à `twitterHandles` avec
+- Ajoutez le nom d'utilisateur d'un concurrent à `twitterHandles` avec
   `relation: "followers"`.
-- Collez `https://x.com/<handle>/verified_followers` dans Start URLs pour
-  les profils vérifiés.
-- Collez une URL de list dans Start URLs pour auditer ses membres.
-- Ajoutez 2 handles ou plus. Un profil partagé apparaît une fois, sous la
-  première cible. Utilisez `dedupeMode: "merge"` pour garder 1 ligne avec chaque
-  cible correspondante. Réglez `dedupeAcrossTargets: false` pour garder 1 ligne
-  par cible.
+- Collez `https://x.com/<handle>/verified_followers` dans Start URLs pour les
+  profils certifiés.
+- Collez une URL de Liste dans Start URLs pour auditer ses membres.
+- Ajoutez 2 noms d'utilisateur ou plus. Un profil commun apparaît une fois, sous
+  la première cible. Utilisez `dedupeMode: "merge"` pour garder 1 ligne avec
+  chaque cible correspondante. Réglez `dedupeAcrossTargets: false` pour garder 1
+  ligne par cible.
 
-### UX d'entrée Console et API
+### Saisie dans la Console et via l'API
 
-La Console expose ces contrôles :
+Le formulaire de la Console a ces contrôles :
 
 - Le champ Start URLs accepte des chaînes d'URL ou des objets
-  `{ "url": "..." }`. Son éditeur JSON préserve les deux formats d'API.
-- Relation, Output Mode et Dedupe Mode sont des sélecteurs validés.
-- Relations est un sélecteur multiple validé pour les runs
-  multi-relations.
-- Les limites de résultat acceptent des nombres entiers à partir de 1.
-- Les filtres de profil numériques acceptent des nombres entiers à partir
-  de 0.
+  `{ "url": "..." }`. Son éditeur JSON garde les 2 formats de l'API.
+- Relation, Output Mode et Dedupe Mode sont des listes déroulantes à choix
+  fixes.
+- Relations est une liste à choix multiples pour les runs multi-relations.
+- Les limites de résultats acceptent des nombres entiers de 1 ou plus.
+- Les filtres numériques de profil acceptent des nombres entiers de 0 ou plus.
 
-Utilisez les champs canoniques dans les nouvelles intégrations. Les alias de
-compatibilité restent disponibles en JSON, API, SDK, automatisation et entrées
-de tâche. Cela inclut `outputVariant` et `includeRaw` comme alias d'Output Mode.
-Cela inclut aussi `dedupeAcrossTargets` comme alias de Dedupe Mode. Le
-formulaire visuel masque les alias qui dupliquent un contrôle canonique. Les
-alias des entrées JSON existantes et des entrées de tâche sauvegardées
-continuent de fonctionner. Les entrées sauvegardées avec
-`dedupeAcrossTargets: false` ou `dedupeMode: "none"` gardent 1 ligne par cible.
+Utilisez les champs canoniques dans les nouvelles intégrations. Les alias
+fonctionnent toujours dans les entrées JSON, API, SDK, d'automatisation et de
+tâche. `outputVariant` et `includeRaw` sont des alias d'Output Mode.
+`dedupeAcrossTargets` est un alias de Dedupe Mode. Le formulaire visuel masque
+les alias qui font doublon avec un contrôle canonique. Les entrées JSON
+existantes et les entrées de tâche enregistrées avec des alias continuent de
+fonctionner. Les entrées enregistrées avec `dedupeAcrossTargets: false` ou
+`dedupeMode: "none"` gardent 1 ligne par cible.
 
 ### Migrer depuis un autre Actor d'abonnés
 
-Collez l'entrée que vous utilisez déjà. X Follower Scraper lit les noms de
-champ que d'autres Actors d'abonnés X utilisent et les associe à ses propres
-champs. Les noms canoniques restent la valeur par défaut documentée. Un
-alias ne supprime jamais un champ et ne change jamais ce que vous payez.
+Collez l'entrée que vous utilisez déjà. X Follower Scraper de Xquik lit les noms
+de champs des autres Actors d'abonnés X. Il les fait correspondre à ses propres
+champs. Les noms canoniques restent la norme documentée. Un alias ne supprime
+jamais un champ et ne change jamais ce que vous payez.
 
-| Champ que vous utilisez déjà                                                          | X Follower Scraper le lit comme |
-| ------------------------------------------------------------------------------------- | ------------------------------- |
-| `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`, `screenNames` | `twitterHandles`                |
-| `username`, `handle`, `screenName`, en une seule chaîne                               | `twitterHandles`                |
-| `twitterUserIds`, `user_ids`, `userIdList`                                            | `userIds`                       |
-| `user_id`, `userId`, en une seule chaîne                                              | `userIds`                       |
-| `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`                          | `startUrls`                     |
-| `profileUrl`, en une seule chaîne                                                     | `startUrls`                     |
-| `getFollowers`, `getFollowing`                                                        | `relations`                     |
-| `type` avec `followers` ou `following`                                                | `relation`                      |
-| `maxResults`, `max_results`, `resultsLimit`, `count`                                  | `maxItems`                      |
-| `scrapeAllResults`                                                                    | aucun plafond par cible         |
+| Champ que vous utilisez déjà                                                          | Xquik le lit comme      |
+| ------------------------------------------------------------------------------------- | ----------------------- |
+| `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`, `screenNames` | `twitterHandles`        |
+| `username`, `handle`, `screenName`, en une seule chaîne                               | `twitterHandles`        |
+| `twitterUserIds`, `user_ids`, `userIdList`                                            | `userIds`               |
+| `user_id`, `userId`, en une seule chaîne                                              | `userIds`               |
+| `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`                          | `startUrls`             |
+| `profileUrl`, en une seule chaîne                                                     | `startUrls`             |
+| `getFollowers`, `getFollowing`                                                        | `relations`             |
+| `type` avec `followers` ou `following`                                                | `relation`              |
+| `maxResults`, `max_results`, `resultsLimit`, `count`                                  | `maxItems`              |
+| `scrapeAllResults`                                                                    | aucun plafond par cible |
 
 2 noms ont un autre sens ici. Dans certains Actors, `maxFollowers` et
-`maxFollowing` plafonnent le nombre de lignes qu'un run récupère. Dans
-X Follower Scraper, ils filtrent les profils selon leurs nombres d'abonnés
-et de comptes suivis. Utilisez `maxItems` pour plafonner les lignes.
-X Follower Scraper n'a pas d'unité de page, donc remplacez `maxPages` par
-`maxItems`.
+`maxFollowing` plafonnent le nombre de lignes d'un run. Dans X Follower Scraper
+de Xquik, ils filtrent les profils selon leur nombre d'abonnés et d'abonnements.
+Utilisez `maxItems` pour plafonner les lignes. L'Actor n'a pas d'unité de page,
+donc remplacez `maxPages` par `maxItems`.
 
 ### Utilisez toujours la dernière build
 
-Les runs de Store utilisent la configuration de build `latest` de l'Actor.
-Les clients API doivent omettre le remplacement de build ou passer
-`build=latest`. Mettez à jour les Tasks et intégrations qui épinglent une
-build plus ancienne. Les builds épinglées ne bougent jamais
-automatiquement.
+Les runs lancés depuis le Store utilisent la build `latest` de X Follower
+Scraper de Xquik. Dans les appels API, omettez le choix de build ou passez
+`build=latest`. Mettez à jour les tâches et les intégrations qui figent une
+build plus ancienne. Une build figée ne change jamais d'elle-même.
 
 ## Sortie
 
-Chaque profil est un objet JSON. Le mode compact renvoie des champs publics
-normalisés, des champs de version de schéma et des métadonnées source
-quand elles sont disponibles :
+Chaque profil est un objet JSON. Le mode compact renvoie les champs publics
+normalisés, les champs de version de schéma et les métadonnées de source quand
+elles existent.
 
-Les schémas de dataset et de run-report décrivent chaque champ renvoyé. Les
-champs primitifs incluent aussi des exemples pour les agents et les
-intégrations générées.
+Les schémas du dataset et du run-report décrivent chaque champ renvoyé. Les
+champs primitifs portent aussi des exemples pour les agents et les intégrations
+générées.
 
-Les valeurs d'exemple sont illustratives. Les réponses reflètent les
-données source au moment du run.
+Les valeurs ci-dessous sont des exemples. Vos lignes portent les données en
+direct au moment du run. Une ligne compacte ressemble à ceci :
 
 ```json
 {
@@ -470,7 +460,7 @@ données source au moment du run.
 }
 ```
 
-Le mode fusion de déduplication ajoute des champs de chevauchement :
+Le mode de dédoublonnage fusion ajoute des champs de recoupement :
 
 ```json
 {
@@ -489,193 +479,230 @@ Le mode fusion de déduplication ajoute des champs de chevauchement :
 }
 ```
 
-Exportez en JSON, CSV, Excel ou HTML depuis le dataset Apify.
+Exportez le dataset Apify en JSON, CSV, Excel ou HTML.
 
 ## Options de run
 
-- Réglez la charge totale maximale Apify pour plafonner le coût du run.
-  Laissez `maxItems` vide pour obtenir le maximum de lignes dans ce budget,
-  ou réglez `maxItems` et `maxItemsPerTarget` quand vous voulez moins de
-  profils.
-- Combinez `minFollowers`, `verifiedOnly`, `verifiedType`, `minStatuses`,
-  `usernameContains`, `bioContains`, `locationContains`, `hasWebsite` et
-  `hasLocation` pour restreindre le dataset facturé.
-- Par défaut, les runs ne gardent que des profils uniques entre les cibles.
+Réglez `maxTotalChargeUsd` dans l'API Apify pour plafonner strictement la
+dépense. Dans la Console, cette limite s'appelle Max cost per run. Apify
+transmet cette limite à X Follower Scraper de Xquik sous la forme
+`ACTOR_MAX_TOTAL_CHARGE_USD`. Il s'arrête avant d'accepter des lignes au-delà de
+la limite. Laissez `maxItems` vide pour renvoyer autant de profils que le
+plafond de dépense le permet. Réglez `maxItems` et `maxItemsPerTarget` seulement
+si vous voulez moins de profils que le budget ne le permet.
+
+- Combinez des filtres de profil, comme `minFollowers`, `verifiedType` et
+  `bioContains`, pour réduire le dataset facturé.
+- Par défaut, les runs gardent seulement les profils uniques entre cibles.
   Réglez `dedupeAcrossTargets: false` pour garder 1 ligne par cible.
-- Réglez `dedupeMode: "merge"` pour obtenir une ligne par profil avec
-  chaque cible source correspondante attachée.
-- Réglez `outputMode: "full"` pour obtenir des champs de profil optionnels
-  tels que les ID de tweet épinglé, les entités et les métadonnées de
-  profil, quand disponibles.
-- Réglez `outputMode: "raw"` ou `includeRaw: true` pour inclure un objet
-  `raw` assaini aux côtés des champs normalisés.
-- Planifiez des runs d'Actor répétés et stockez chaque dataset pour
-  comparer les ID de profil. Les monitors Xquik émettent les événements de
-  tweet et de profil pris en charge, pas les changements de liste
-  d'abonnés.
+- Réglez `dedupeMode: "merge"` pour avoir 1 ligne par profil avec chaque cible
+  source correspondante.
+- Réglez `outputMode: "full"` pour les champs de profil optionnels, quand ils
+  existent. Ils incluent les ID des posts épinglés, les entités et les
+  métadonnées du profil.
+- Réglez `outputMode: "raw"` ou `includeRaw: true` pour inclure un objet `raw`
+  nettoyé à côté des champs normalisés.
+- Planifiez des runs répétés et gardez chaque dataset pour comparer les ID de
+  profil. Les moniteurs Xquik émettent les événements de post et de profil pris
+  en charge, pas les changements de listes d'abonnés.
 
-## Cas d'usage
+## Runs vides, partiels et arrêtés
 
-- Enrichir des prospects & créer des datasets de recherche avec plus de champs
-  par profil. Le 2026-09-28, notre ligne médiane avait 28 champs. C'est 1,9x la
-  médiane de 9 autres Actors.
-- Exporter les abonnés concurrents pour la recherche de prospects.
-- Comparer les audiences entre votre compte, vos concurrents et des
-  personnalités publiques.
-- Filtrer le nombre d'abonnés et la vérification pour trouver des profils
-  correspondants.
-- Exporter les membres de X Communities pertinentes.
-- Construire des datasets de réseau social public pour la recherche.
-- Segmenter les bases d'abonnés par mot-clé de bio, localisation ou type
-  de profil.
+X Follower Scraper de Xquik explique les runs vides, partiels et arrêtés avec
+des diagnostics gratuits. Une sortie réussie de l'Actor confirme la livraison,
+pas une extraction complète.
 
-## Responsabilité sur les données
+Un run interrompu écrit un diagnostic `partial` gratuit. Les résultats déjà
+livrés restent dans le dataset. Lisez `availableResults`, `failedTargets`,
+`retryable` et `nextAction` avant de relancer.
 
-L'Actor demande des champs de profil X publics. Les résultats peuvent
-contenir des données personnelles, y compris des localisations
-autodéclarées. Confirmez un objectif licite et suivez les règles de
-confidentialité applicables. Consultez un conseil juridique qualifié en
-cas de doute.
+Le statut du run dit pourquoi il s'est arrêté. Il compte aussi les résultats
+facturés, les doublons ignorés et les cibles lues. Le statut nomme chaque cause
+d'arrêt anticipé. `stopCauses` liste chaque cause avec ses propres `message`,
+`retryable` et `nextAction`. Les causes sont `target_not_found`,
+`target_protected`, `target_failed` et `deadline_reached`. Un compte introuvable
+n'entre dans la liste que si une autre cause a arrêté le run. Le run est
+`retryable` dès qu'une cause l'est.
+
+X garde privées les listes d'un compte protégé. Cette cible reçoit
+`target_protected` dans 1 diagnostic gratuit, et le run lit les autres cibles.
+
+`failedTargets` compte les cibles arrêtées après une erreur. Ces runs utilisent
+`completionReason: "partial_failure"`. Leurs profils livrés restent des lignes
+de données facturables.
+
+Le timeout Apify par défaut est `0`, donc les runs n'ont pas de limite de temps.
+Le run continue jusqu'au plafond ou jusqu'à la fin des profils. Vous pouvez
+quand même régler un timeout. `completionReason: "deadline_reached"` signifie
+alors que cette limite approche. Le run enregistre les profils et le rapport,
+puis s'arrête proprement avant la limite. Xquik facture une seule fois chaque
+profil livré.
+
+Les runs qui rencontrent un problème écrivent toujours `run-report`, y compris
+les sorties sans entrée ou avec une entrée invalide. `run-report` a aussi un
+champ `version` avec la version exacte de la source publiée de l'Actor.
 
 ## Actors Xquik associés
 
-Chaque Actor Xquik partage le même moteur d'extraction, la même facturation
-au filtre et les mêmes diagnostics. Choisissez celui qui correspond aux
+Tous les Actors Xquik partagent le même moteur d'extraction, la même facturation
+après filtrage et les mêmes diagnostics. Choisissez celui qui correspond aux
 données dont vous avez besoin.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) : scrape des
-  tweets depuis des recherches, des fils de profil, des Lists et des ID de
-  tweet avec plus de 50 filtres et des exports plats. Utilisez-le quand vous
-  avez besoin de données de tweet sans analyse. À partir de $0.00015 par
+  posts (tweets) depuis des recherches, des fils de profil, des Listes et des ID
+  de post, avec plus de 50 filtres et des exports plats. Utilisez-le quand vous
+  avez besoin de données de posts sans analyse. À partir de $0.00015 par
   ligne.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) : scrape
   des profils ainsi que leurs posts, réponses, médias et abonnés à partir de
-  handles, d'ID ou d'URL. Utilisez-le quand vous partez de comptes plutôt
-  que de recherches. À partir de $0.00015 par ligne.
+  noms d'utilisateur, d'ID ou d'URL. Utilisez-le quand vous partez de comptes
+  plutôt que de recherches. À partir de $0.00015 par ligne.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) : scrape des
   réponses, des commentaires et des conversations entières sous les posts
-  avec plus de 25 filtres. Utilisez-le quand vous avez besoin de la
-  discussion sous les tweets. À partir de $0.00015 par ligne.
+  avec plus de 25 filtres. Utilisez-le quand vous avez besoin des échanges
+  sous les posts. À partir de $0.00015 par ligne.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) :
-  scrape les réponses, citations, personnes ayant reposté et threads pour
-  des URL ou ID de post en masse. Utilisez-le pour mesurer qui s'est engagé avec des posts. À partir de $0.00015 par ligne.
+  scrape en masse les réponses, citations, comptes qui ont reposté et
+  discussions de posts, à partir d'URL ou d'ID. Utilisez-le pour mesurer qui a
+  interagi avec des posts. À partir de $0.00015 par ligne.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) :
-  recherche des utilisateurs par handle, bio et localisation avec des
-  filtres d'abonnés, de vérification, d'ancienneté et de localisation.
+  recherche des comptes par nom d'utilisateur, bio et localisation, avec des
+  filtres d'abonnés, de certification, d'ancienneté et de localisation.
   Utilisez-le pour créer des listes de comptes à partir d'une recherche. À
   partir de $0.00015 par profil.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper) : scrape les
-  posts, membres et abonnés d'une List à partir d'URL ou d'ID de List.
-  Utilisez-le quand une List organisée définit vos sources. À partir de
+  posts, membres et abonnés d'une Liste à partir d'URL ou d'ID de Liste.
+  Utilisez-le quand une Liste choisie définit vos sources. À partir de
   $0.00015 par ligne.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper) :
   scrape les infos, posts, recherches, membres et modérateurs d'une
-  Community. Utilisez-le quand vos sources sont des X Communities. À
+  Communauté. Utilisez-le quand vos sources sont des Communautés X. À
   partir de $0.00015 par ligne.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) : scrape les
-  tendances en temps réel par localisation avec rang, volume, requête et
-  WOEID. Utilisez-le pour suivre ce qui est tendance où. À partir de
+  tendances en temps réel par lieu, avec rang, volume, requête et WOEID.
+  Utilisez-le pour suivre les tendances de chaque lieu. À partir de
   $0.00015 par tendance.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper) : scrape
-  des X Articles longs en Markdown et texte avec couvertures, auteurs,
+  les Articles X longs en Markdown et en texte, avec couvertures, auteurs,
   dates et métriques. Utilisez-le quand vous avez besoin du corps des
-  articles, pas des tweets. À partir de $0.00015 par article.
+  Articles, pas des posts. À partir de $0.00015 par article.
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader) :
-  extrait ou stocke des photos, vidéos et GIFs à partir de posts ou de
+  extrait ou stocke des photos, vidéos et GIF à partir de posts ou de
   profils, avec des options MP4 et de métadonnées. Utilisez-le quand vous
   avez besoin des fichiers médias eux-mêmes. À partir de $0.00015 par
   ligne média.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring) :
   suit les mentions de marque avec pertinence, sentiment et réponses sur
-  l'expérience client par IA, et compare les runs. Utilisez-le pour
-  surveiller une marque dans le temps. À partir de $0.0003 par tweet
-  analysé.
+  l'expérience client par IA, et compare les runs. Utilisez-le pour surveiller
+  une marque dans le temps. À partir de $0.0003 par post analysé.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis) :
-  attribue une attitude, une intensité et une probabilité de sarcasme à
-  chaque tweet par IA. Utilisez-le pour un sentiment général sur n'importe
-  quel sujet. À partir de $0.0003 par tweet analysé.
+  attribue une attitude, une intensité et une probabilité de sarcasme à chaque
+  post par IA. Utilisez-le pour un sentiment général sur n'importe quel sujet. À
+  partir de $0.0003 par post analysé.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals) :
-  attribue une position haussière, baissière, neutre ou mixte, un type de
-  contenu, une conviction et une pertinence d'actif par IA. Utilisez-le
-  pour suivre les actions, la crypto ou les discussions de trading. À
-  partir de $0.0003 par tweet analysé.
+  attribue une orientation haussière, baissière, neutre ou mixte, un type de
+  contenu, une conviction et une pertinence d'actif par IA. Utilisez-le pour
+  suivre les actions, la crypto ou les discussions de trading. À partir de
+  $0.0003 par post analysé.
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor) :
-  attribue un format, une attribution de source et une pertinence de sujet
-  aux posts d'actualité par IA. Utilisez-le pour séparer le reportage du
-  commentaire. À partir de $0.0003 par tweet analysé.
+  attribue un format, une attribution de source et une pertinence de sujet aux
+  posts d'actualité par IA. Utilisez-le pour séparer le reportage du
+  commentaire. À partir de $0.0003 par post analysé.
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier) :
   répond à vos propres questions de catégorie, de score et de oui/non pour
-  chaque tweet par IA. Utilisez-le quand les analyses prédéfinies ne
-  correspondent pas à vos étiquettes. À partir de $0.0003 par tweet
-  analysé.
+  chaque post par IA. Utilisez-le quand les analyses prédéfinies ne
+  correspondent pas à vos étiquettes. À partir de $0.0003 par post analysé.
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer) :
-  estime un Viral Score de 0 à 100 et un verdict pour chaque tweet à partir
-  de 8 réponses d'IA sur ses traits. Utilisez-le quand vous étudiez pourquoi
-  des tweets se propagent ou échouent. À partir de $0.0003 par tweet
-  analysé.
+  estime un Viral Score de 0 à 100 et un verdict pour chaque post à partir de 8
+  critères notés par IA. Utilisez-le quand vous étudiez pourquoi des posts
+  percent ou font un flop. À partir de $0.0003 par post analysé.
 
 ## Besoin de plus que du scraping ?
 
-Xquik fournit aussi 47 outils de tableau de bord, 129 opérations REST, des
+Xquik propose aussi 47 outils de tableau de bord, 129 opérations REST, des
 webhooks signés et un serveur MCP.
 
-- [Documentation de l'API](https://docs.xquik.com/introduction) : guides
-  de l'API REST
-- [API Followers](https://docs.xquik.com/api-reference/x/followers) :
-  récupère les abonnés disponibles d'un compte
-- [API Following](https://docs.xquik.com/api-reference/x/following) :
-  obtient qui un utilisateur suit
-- [API List Members](https://docs.xquik.com/api-reference/x/list-members) :
-  exporte les membres d'une list X publique
-- [Serveur MCP](https://docs.xquik.com/mcp/overview) : découvrez et
-  exécutez les opérations JSON ou texte prises en charge
-- [Webhooks](https://docs.xquik.com/webhooks/overview) : recevez les
-  événements de tweet et de profil pris en charge
+- [Documentation de l'API](https://docs.xquik.com/introduction) : guides de
+  l'API REST
+- [Followers API](https://docs.xquik.com/api-reference/x/followers) : obtenez
+  les abonnés disponibles d'un compte
+- [Following API](https://docs.xquik.com/api-reference/x/following) : obtenez
+  les comptes qu'un utilisateur suit
+- [List Members API](https://docs.xquik.com/api-reference/x/list-members) :
+  exportez les membres d'une Liste X publique
+- [Serveur MCP](https://docs.xquik.com/mcp/overview) : découvrez et lancez les
+  opérations JSON ou texte prises en charge
+- [Webhooks](https://docs.xquik.com/webhooks/overview) : recevez les événements
+  de post et de profil pris en charge
 
 ## FAQ
 
-**Ai-je besoin d'une clé API X ?** Non. Vous n'avez besoin ni de clé API X, ni
-de connexion, ni d'identifiants.
+### Ai-je besoin d'une clé API X ?
 
-**Qu'est-ce qui limite un run ?** Votre limite d'éléments demandée et
-votre limite de dépense Apify arrêtent le run. Les limites de compte et de
-plateforme Apify s'appliquent toujours.
+Non. Vous n'avez besoin ni de clé API X, ni de connexion, ni d'identifiants.
 
-**Quelle est sa vitesse ?** Le temps d'exécution dépend de la taille de la
-cible, des filtres et de la disponibilité de X.
+### Qu'est-ce qui limite un run ?
 
-**Pourquoi mon run renvoie-t-il moins de lignes que `maxItems` ?** Des
-filtres tels que `minFollowers`, `verifiedOnly` et `bioContains`
-s'appliquent avant l'écriture. Assouplissez les filtres pour obtenir plus
-de résultats.
+Votre limite d'éléments et votre limite de dépense Apify arrêtent le run. Les
+limites de votre compte Apify et de la plateforme s'appliquent toujours.
 
-**Combien d'abonnés puis-je scraper depuis un seul compte ?** Autant que X en
-affiche pour ce compte. Le run continue jusqu'à votre plafond, votre limite de
-dépense ou la fin de la liste. `maxItemsPerTarget` plafonne seulement chaque
-cible.
+### Quelle est sa vitesse ?
 
-**L'Actor relance-t-il les échecs temporaires ?** Oui. Il se rétablit seul des
-erreurs temporaires de X. Les échecs graves conservent les résultats partiels.
+La vitesse de X Follower Scraper de Xquik dépend de la taille de la cible, des
+filtres et de la disponibilité de X. Ses 2 runs de [benchmark](#benchmark) ont
+atteint 38,4 et 68,5 profils utiles par seconde.
 
-**Que se passe-t-il près de la limite de temps de run Apify ?** L'Actor n'ajoute
-aucune échéance plus courte. Avant votre limite, il enregistre les profils,
-écrit le rapport et se termine. Les lignes qui n'atteignent jamais le dataset ne
-sont pas facturées.
+### Pourquoi mon run renvoie-t-il moins de lignes que `maxItems` ?
 
-**Puis-je reprendre là où je m'étais arrêté ?** Pas encore. Relancer la même
-cible repart du début.
+Les filtres comme `minFollowers`, `verifiedOnly` et `bioContains` s'appliquent
+avant l'écriture. Assouplissez-les pour obtenir plus de résultats. X Follower
+Scraper de Xquik retire aussi les répétitions entre cibles.
 
-**Puis-je utiliser l'API Apify pour l'exécuter ?** Oui. Consultez
-l'[onglet API](https://apify.com/xquik/x-follower-scraper/api) pour des
+### Combien d'abonnés puis-je scraper sur un seul compte ?
+
+Autant que X en affiche pour ce compte. Le run continue jusqu'à votre plafond,
+votre limite de dépense ou la fin de la liste. `maxItemsPerTarget` plafonne
+seulement chaque cible.
+
+### L'Actor relance-t-il les échecs temporaires ?
+
+Oui. Il se remet seul des erreurs temporaires de X. Après un échec définitif, le
+run garde ses résultats partiels.
+
+### Que se passe-t-il près de la limite de temps d'un run Apify ?
+
+X Follower Scraper de Xquik n'ajoute aucune échéance plus courte. Avant votre
+limite, il enregistre les profils, écrit le rapport et s'arrête. Les lignes qui
+n'atteignent jamais le dataset ne coûtent rien.
+
+### Puis-je reprendre là où je me suis arrêté ?
+
+Pas encore. Un nouveau run sur la même cible repart du début.
+
+### Puis-je utiliser l'API Apify pour lancer cet Actor ?
+
+Oui. L'[onglet API](https://apify.com/xquik/x-follower-scraper/api) propose des
 exemples en Python, JavaScript et cURL.
 
-**Puis-je planifier des scrapes récurrents ?** Oui. Utilisez la
-[planification](https://docs.apify.com/platform/schedules) intégrée
-d'Apify pour exécuter cet Actor sur un cron. Comparez les datasets
-stockés pour trouver les changements d'abonnés.
+### Puis-je planifier des scrapings récurrents ?
 
-**Où signaler un problème ?** Utilisez l'onglet Issues sur la page de cet
-Actor.
+Oui. Utilisez la [planification](https://docs.apify.com/platform/schedules)
+intégrée d'Apify pour lancer cet Actor selon un cron. Comparez les datasets
+enregistrés pour repérer les changements d'abonnés.
 
-**Où sont les documents de l'API ?** Lisez la
-[documentation de l'API](https://docs.xquik.com/introduction).
+### Est-il légal de scraper des données X ?
+
+X Follower Scraper de Xquik collecte des champs de profil publics de X. Les
+résultats peuvent contenir des données personnelles, dont des localisations
+déclarées. Assurez-vous d'avoir une finalité licite et respectez les règles de
+protection des données applicables. En cas de doute, demandez conseil à un
+juriste qualifié.
+
+### Où trouver de l'aide ?
+
+Ouvrez une issue dans l'onglet Issues de la page de l'Actor. Vous pouvez aussi
+écrire à support@xquik.com avec l'ID du run.
+
+### Où est la documentation de l'API ?
+
+Lisez la [documentation de l'API](https://docs.xquik.com/introduction).

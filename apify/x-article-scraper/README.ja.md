@@ -12,27 +12,48 @@
 
 <table align="center"><tr><td align="center">
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="FramerがXquik MCPをコーディングエージェントに接続する様子"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">FramerがClaude Code、Codex、Cursorなどと一緒にXquikのスクレイパーを使う方法を6:07から見る。</a>
+<a href="https://youtu.be/4UOSpoOoC3Y?t=367">FramerがXquikのスクレイパーをClaude Code、Codex、Cursorなどと一緒に使う様子を6:07から視聴できます。</a>
 </td></tr></table>
 
-Xquikは、最も完全なXデータを備えた、世界最速かつ最安のX(Twitter)スクレイパーサービスです。X Article Scraperは、長文のX記事をMarkdown、テキスト、カバー画像、著者、日付、指標に変換します。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikは、配信済みでユニークかつフィルター条件に一致した結果にのみ課金します。
+Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX Article Scraperは、長文のXの記事（Articles）をMarkdownとテキストに変換します。カバー画像、著者、日付、指標も付けます。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。
 
-投稿URLまたは数値のTweet IDから、長文のX記事を抽出します。X APIキーやログインは不要です。
+ポストのURLまたは数値のポストIDから、長文のXの記事を抽出します。料金は**配信された記事1件につき$0.00015**で、Apifyのプラットフォーム利用料は別途かかります。X APIキーやログインは不要です。
+
+> Xquikは独立したサードパーティサービスです。X Corpとは提携していません。
+> 「Twitter」および「X」はX Corpの商標です。
+
+## 記事のデータと形式
+
+- ブロック、太字、斜体の範囲を保つMarkdown。
+- 元の書式を保つ `contents` ブロック。
+- 同じ実行で使えるポストURLと数値のポストID。
+- 課金前の重複排除。
+
+XquikのX Article Scraperは、リンクのメタデータを推測で補いません。ApifyはMarkdownをテキストとして表示します。
+
+## Xの記事をスクレイピングする方法
+
+1. Apify ConsoleでXquikのX Article Scraperを開きます。
+2. 記事ポストのURLを `startUrls` に、ポストIDを `tweetIds` に貼り付けます。
+3. `maxItems` で配信する記事数の上限を決め、Startをクリックします。
+4. データセットをJSON、CSV、Excelでダウンロードするか、Apify APIを使います。
 
 ## 入力
 
-| フィールド              | 目的                                        | デフォルト |
+| フィールド             | 用途                                       | デフォルト |
 | ---------------------- | ------------------------------------------ | -------- |
-| `startUrls`            | 公開されているArticle投稿のURL              | なし     |
-| `tweetIds`             | 数値のArticle Tweet ID                      | なし     |
-| `maxItems`             | 配信されるArticleの総数上限                 | `100000` |
-| `dedupeAcrossTargets`  | 課金前に重複するArticle IDを削除            | `true`   |
-| `maxConcurrency`       | 独立したArticle読み取りの並列数             | `100`    |
-| `alwaysSaveRunRecords` | すべての実行で `run-report` を保存          | `false`  |
+| `startUrls`            | 記事を含む公開ポストのURL                  | なし     |
+| `tweetIds`             | 記事ポストの数値ID                         | なし     |
+| `maxItems`             | 配信する記事数の全体上限                   | `100000` |
+| `dedupeAcrossTargets`  | 課金前に重複した記事IDを削除               | `true`   |
+| `maxConcurrency`       | 独立した記事読み取りの並列数               | `100`    |
+| `alwaysSaveRunRecords` | すべての実行で `run-report` を保存         | `false`  |
 
 ## 出力
 
-Outputタブは `Articles` を開きます。`Results` は各行にリンクします。`Run Report` は件数、完了状況、所要時間、異常のリンクです。問題が発生した実行や大規模な実行では、このレポートが書き込まれます。問題なく終わった小規模な実行では、代わりに実行ステータスに件数が表示されます。毎回書き込むには、`alwaysSaveRunRecords` をオンにしてください。
+Outputタブを開くと `Articles` が表示されます。`Results` は各行へのリンクです。`Run Report` は件数、完了状況、所要時間、異常へのリンクです。問題が起きた実行と大規模な実行は、このレポートを書き込みます。問題なく終わった小規模な実行は、代わりに実行ステータスに件数を表示します。毎回書き込むには `alwaysSaveRunRecords` をオンにしてください。
+
+例はサンプル値です。実際の結果にはライブデータが入ります。記事の行には次のフィールドがあります。
 
 ```json
 {
@@ -41,48 +62,67 @@ Outputタブは `Articles` を開きます。`Results` は各行にリンクし�
 }
 ```
 
-各行には著者、出典、カバー画像、時刻、指標が追加されます。JSONまたはテーブル形式でエクスポートできます。
+行には著者、出典、カバー画像、時刻、指標も入ります。JSONまたは表形式でエクスポートできます。
 
-## 完了と課金
+## Xの記事のスクレイピングにかかる費用は？
 
-重複排除は課金前に実行されます。配信されたデータ行ごとに課金され、開始料金はかかりません。すべてのApifyプランで、**配信された記事1件につき$0.00015**です。診断情報は `diagnostics` 出力内で無料です。Apifyはプラットフォーム利用料を別途請求します。
+すべてのApifyプランで、配信された記事1件につき$0.00015です。Apifyのプラットフォーム利用料は別途かかります。
 
-## APIとMCP
+- 課金は配信したデータ行1件につき1回です。`diagnostics` の診断情報は無料です。
+- 開始料金はかかりません。
+- 重複排除は課金前に行います。
 
-50個の公開タスクまたは129個のREST操作から選べます。エージェントは
-[Apify MCP](https://docs.apify.com/platform/integrations/mcp)を使用します。単発の読み取りには
-[Xquik REST](https://docs.xquik.com/api-reference/x/get-article)を使用します。
+## 制限と復旧
 
-## 制限とフォーマット
+XquikのX Article Scraperが返すのは、Xが表示する公開記事だけです。
 
-ActorはXが公開しているArticleのみを返します。Markdownはブロック、太字、斜体の範囲を保持します。`contents` は元の書式を保持します。リンクのメタデータは決して推測しません。例ではサンプル値を使用しています。結果はライブデータを反映します。Apifyは Markdown をテキストとして表示します。`latest` を使用してください。URLとIDは混在させて指定できます。
+抽出が中断されると、無料の `partial` 診断を書き込みます。取得済みの結果はそのまま残ります。再試行する前に `availableResults`、`failedTargets`、`retryable`、`nextAction` を確認してください。Actorの正常終了が示すのは配信の完了です。抽出が最後まで終わったことは意味しません。
 
-## 抽出が不完全な場合
-
-抽出が中断されると、無料の `partial` 診断が書き込まれます。取得済みの結果はそのまま保持されます。再試行する前に `availableResults`、`failedTargets`、`retryable`、`nextAction` を確認してください。Actorが正常終了しても、それは配信の完了を意味するだけで、抽出が完全に終わったことを意味しません。
-
-ステータスのテキストは、実行が早期に停止した原因をすべて示します。`stopCauses` は各原因を列挙し、原因ごとに `message`、`retryable`、`nextAction` を示します。原因は `target_not_found`、`target_failed`、`pagination_safety_limit`、`deadline_reached` です。存在しないターゲットは、別の原因で実行が停止した場合にのみ一覧に含まれます。いずれかの原因が再試行可能であれば、実行も `retryable` になります。
-
-Xquikは独立した第三者サービスです。X Corpとは提携していません。
-「Twitter」および「X」はX Corpの商標です。
+実行ステータスは、早期停止の原因をすべて示します。`stopCauses` は各原因を挙げ、それぞれに `message`、`retryable`、`nextAction` を付けます。原因は `target_not_found`、`target_failed`、`pagination_safety_limit`、`deadline_reached` です。存在しない対象が一覧に入るのは、別の原因で実行が止まった場合だけです。いずれかの原因が再試行可能なら、実行も `retryable` になります。
 
 ## 関連するXquik Actor
 
-すべてのXquik Actorは、同じ抽出エンジン、フィルター優先の課金、診断機能を共有しています。必要なデータに合ったものを選んでください。
+すべてのXquik Actorは、同じ抽出エンジン、フィルター優先の課金、診断機能を共有しています。必要なデータに合うものを選んでください。
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): 検索、プロフィールのタイムライン、リスト、Tweet IDから、50以上のフィルターとフラットなエクスポートでポストをスクレイピングします。分析なしでポストデータが必要なときに使用します。1行あたり$0.00015から。
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): ハンドル、ID、URLからプロフィールとそのポスト、リプライ、メディア、フォロワーをスクレイピングします。検索ではなくアカウントから始めるときに使用してください。1行あたり$0.00015から。
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25以上のフィルターで、投稿へのリプライ、コメント、会話全体をスクレイピングします。ポストの下にある議論が必要なときに使用します。1行あたり$0.00015から。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): ポストのURLまたはIDから、リプライ、引用ポスト、リポストしたユーザー、スレッドを一括でスクレイピングします。誰がポストにエンゲージしたかを測定するときに使用してください。1行あたり$0.00015から。
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): フォロワー、フォロー中、リストメンバー、購読者、コミュニティメンバーをプロフィール行としてスクレイピングします。オーディエンスやメンバーリストが必要なときに使用します。1プロフィールあたり$0.00015から。
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): ハンドル名、自己紹介、所在地でユーザーを検索し、フォロワー数、認証、アカウント年数、所在地でフィルタリングします。検索からアカウントリストを構築するときに使用します。1プロフィールあたり$0.00015から。
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): リストのURLまたはIDから、リストの投稿、メンバー、フォロワーをスクレイピングします。厳選されたリストが情報源となるときに使用します。1行あたり$0.00015から。
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): コミュニティ情報、投稿、検索、メンバー、モデレーターをスクレイピングします。情報源がXコミュニティであるときに使用します。1行あたり$0.00015から。
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): 順位、ボリューム、クエリ、WOEIDとともに、地域別のリアルタイムトレンドをスクレイピングします。どこで何がトレンドになっているかを追跡するときに使用します。1トレンドあたり$0.00015から。
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader): MP4やメタデータのオプション付きで、投稿やプロフィールから写真、動画、GIFを抽出または保存します。メディアファイル自体が必要なときに使用します。1メディア行あたり$0.00015から。
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring): AIによる関連性、感情、カスタマーエクスペリエンスの回答でブランドの言及を追跡し、実行結果を比較します。長期的にブランドを監視するときに使用します。分析済みポスト1件あたり$0.0003から。
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis): AIですべてのポストの態度、強度、皮肉の確率をラベル付けします。あらゆるトピックの一般的な感情分析が必要なときに使用します。分析済みポスト1件あたり$0.0003から。
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals): AIで強気、弱気、中立、または混合のスタンス、コンテンツタイプ、確信度、資産との関連性をラベル付けします。株式、暗号資産、取引に関する話題を追うときに使用します。分析済みポスト1件あたり$0.0003から。
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor): AIでニュース投稿を形式、情報源の帰属、トピックの関連性でラベル付けします。報道とコメンタリーを区別するときに使用します。分析済みポスト1件あたり$0.0003から。
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier): AIですべてのポストに対して、独自のカテゴリー、スコア、はい/いいえの質問に答えます。既定の分析があなたのラベルに合わないときに使用します。分析済みポスト1件あたり$0.0003から。
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer): AIによる8つの特性への回答から、すべてのポストについて0から100のViral Scoreと判定を推定します。ポストが広がる理由や伸びない理由を調べるときに使用してください。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): 検索、プロフィールのタイムライン、リスト、ポストIDから、50以上のフィルターでポストをスクレイピングし、フラットな形式で出力します。分析なしでポストデータが必要なときに使います。1行あたり$0.00015から。
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): ユーザー名、ID、URLから、プロフィールとそのポスト、返信、メディア、フォロワーをスクレイピングします。検索ではなくアカウントから始めるときに使います。1行あたり$0.00015から。
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25以上のフィルターで、ポストへの返信、コメント、会話全体をスクレイピングします。ポストの下の議論が必要なときに使います。1行あたり$0.00015から。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): ポストのURLまたはIDから、返信、引用ポスト、リポストしたユーザー、スレッドを一括でスクレイピングします。誰がポストに反応したかを測るときに使います。1行あたり$0.00015から。
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): フォロワー、フォロー中、リストのメンバー、購読者、コミュニティのメンバーをプロフィール行としてスクレイピングします。オーディエンスやメンバーの一覧が必要なときに使います。1プロフィールあたり$0.00015から。
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): ユーザー名、自己紹介、所在地でユーザーを検索し、フォロワー数、認証、アカウント年数、所在地で絞り込みます。検索からアカウントの一覧を作るときに使います。1プロフィールあたり$0.00015から。
+- [X List Scraper](https://apify.com/xquik/x-list-scraper): リストのURLまたはIDから、リストのポスト、メンバー、フォロワーをスクレイピングします。厳選したリストを情報源にするときに使います。1行あたり$0.00015から。
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper): コミュニティの情報、ポスト、検索結果、メンバー、モデレーターをスクレイピングします。Xのコミュニティを情報源にするときに使います。1行あたり$0.00015から。
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): 地域別のリアルタイムトレンドを、順位、ボリューム、クエリ、WOEIDとともにスクレイピングします。どこで何がトレンドかを追うときに使います。1トレンドあたり$0.00015から。
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader): ポストやプロフィールから写真、動画、GIFを抽出または保存します。MP4とメタデータのオプションがあります。メディアファイルそのものが必要なときに使います。1メディア行あたり$0.00015から。
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring): ブランドへの言及を、AIによる関連性、感情、顧客体験の回答とともに追跡し、実行どうしを比較します。ブランドを継続して見守るときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis): すべてのポストに、AIで態度、強度、皮肉の確率のラベルを付けます。任意のトピックの全体的な感情を知りたいときに使います。分析済みポスト1件あたり$0.0003から。
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals): AIで、強気、弱気、中立、混在のスタンス、コンテンツの種類、確信度、資産との関連性のラベルを付けます。株、暗号資産、トレードの話題を追うときに使います。分析済みポスト1件あたり$0.0003から。
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor): AIで、ニュースのポストに形式、情報源の明示、トピックとの関連性のラベルを付けます。報道と論評を分けるときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier): すべてのポストについて、独自のカテゴリー、スコア、はい/いいえの質問にAIが答えます。既定の分析が自分のラベルに合わないときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer): AIによる8つの特性の回答から、すべてのポストについて0から100のViral Scoreと判定を推定します。ポストが広がる理由や伸びない理由を調べるときに使います。分析済みポスト1件あたり$0.0003から。
+
+## よくある質問
+
+### X APIキーやログインは必要ですか？
+
+いいえ。XquikのX Article Scraperは、X APIキー、ログイン、認証情報を必要としません。
+
+### Xの記事をスクレイピングしても合法ですか？
+
+XquikのX Article Scraperは、Xの公開フィールドを取得します。結果には個人データが含まれることがあります。目的が合法であることを確認し、適用されるプライバシー規則に従ってください。判断に迷う場合は、資格のある弁護士に相談してください。
+
+### 実行結果が0件だったのはなぜですか？
+
+まず無料の `diagnostics` 出力を開いてください。結果が空の実行では、ステータスが対象とフィルターの確認を促します。`stopCauses` は原因ごとに、次に取る行動を `nextAction` で示します。読み取れないリンクがあれば、実行が警告して直し方を示します。XquikのX Article Scraperが返すのは、Xが表示する公開記事だけです。
+
+### API、スケジュール、連携は使えますか？
+
+はい。50個の公開タスクと129個のXquik REST操作から選べます。[APIタブ](https://apify.com/xquik/x-article-scraper/api)には、Python、JavaScript、cURLの例があります。Apifyの[スケジュール](https://docs.apify.com/platform/schedules)を使うと、XquikのX Article Scraperをcronで実行できます。エージェントは[Apify MCP](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。1件ずつ読み取るなら[Xquik REST](https://docs.xquik.com/api-reference/x/get-article)を使えます。古いビルドが必要な場合を除き、`latest` を使ってください。
+
+### どこでサポートを受けられますか？
+
+Actorページでissueを開くか、実行IDを添えてsupport@xquik.comに連絡してください。キーバリューストアにある無料の診断情報が、空の実行、部分的な実行、中断された実行の理由を説明します。
+
+### カスタムソリューションを依頼できますか？
+
+はい。[xquik.com](https://xquik.com)にアクセスするか、[APIドキュメント](https://docs.xquik.com/introduction)をお読みください。ダッシュボード、API、MCPサーバー、Webhookについて説明しています。

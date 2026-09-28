@@ -15,59 +15,261 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Framer'ın Xquik scraper'larını Claude Code, Codex, Cursor ve daha fazlasıyla nasıl kullandığını 6:07'den itibaren izle.</a>
 </td></tr></table>
 
-Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
-scraper hizmetidir. X Follower Scraper, takipçileri, takip edilenleri, liste
-üyelerini, aboneleri ve topluluk üyelerini toplar. Diğer Apify Actor'larının
-çoğu filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
-edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
+Xquik, en eksiksiz X verisini sunan, dünyanın en hızlı ve en ucuz X (Twitter)
+scraper hizmetidir. Xquik'in X Follower Scraper'ı takipçileri, takip edilenleri,
+Liste üyelerini, aboneleri ve Topluluk üyelerini toplar. Herkese açık
+karşılaştırma testleri, takipçi kazıyan 10 Actor arasında en ucuz ve en
+hızlısının bu olduğunu kanıtlıyor.
+[Aşağıdaki karşılaştırma testinin](#karşılaştırma-testi) gösterdiği gibi
+satırları, medyan Actor'ın 1,9 katı alan taşır. Diğer Apify Actor'larının çoğu,
+filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
+edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır.
 
-X (Twitter) takipçilerini, takip edilenleri, doğrulanmış takipçileri, Liste
-üyelerini, Liste abonelerini ve Topluluk üyelerini **her Apify planında
-teslim edilen profil başına $0.00015'ten başlayarak** kazı. Apify, platform
-kullanımını ayrıca faturalandırır. X girişi, başlangıç ücreti veya sorgu
-ücreti yok.
+X (Twitter) takipçilerini, takip edilenleri, onaylı takipçileri, Liste
+üyelerini, Liste abonelerini ve Topluluk üyelerini kazı. Xquik'in X Follower
+Scraper'ı **her Apify planında teslim edilen profil başına $0.00015'ten
+başlar**. Apify, platform kullanımını ayrıca faturalandırır. X girişi gerekmez,
+Xquik başlatma veya sorgu ücreti de eklemez.
 
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-## Eksik çıkarma
-
-Kesintiye uğrayan çıkarma ücretsiz bir `partial` tanılaması yazar. Mevcut
-sonuçlar bozulmadan kalır. Yeniden denemeden önce `availableResults`,
-`failedTargets`, `retryable` ve `nextAction` alanlarını oku. Başarılı bir Actor
-çıkışı teslimatı doğrular, eksiksiz çıkarmayı değil.
-
-Durum metni, erken durmanın her nedenini belirtir. `stopCauses`, her nedeni
-kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Olası
-nedenler şunlar: `target_not_found`, `target_failed` ve `deadline_reached`.
-Bulunamayan bir hesap, listeye yalnızca çalıştırmayı başka bir neden durdurduysa
-girer. Nedenlerden en az biri `retryable` ise çalıştırma da `retryable` olur.
-
 ## X Follower Scraper ne yapar?
 
-X Follower Scraper, takipçiler, takip edilenler, Listeler ve Topluluklar için
-mevcut herkese açık profil verisini döndürür. Her satır kaynak hedefini ve
-ilişkisini içerir.
+Xquik'in X Follower Scraper'ı takipçiler, takip edilenler, Listeler ve
+Topluluklar için erişilebilen herkese açık profil verisini döndürür. Her satır
+kaynak hedefini ve ilişkisini belirtir.
 
 ### Temel davranış
 
-- Filtreler ve tekrar kaldırma faturalamadan önce çalışır.
-- Birden fazla hedefte çıkan bir profil varsayılan olarak bir kez görünür ve
-  ücretlendirilir.
-- Bir çalıştırma handle'ları, sayısal ID'leri, URL'leri ve kısa yolları kabul
-  eder.
-- Birleştirme modu paylaşılan profilleri, kaynakları, ilişkileri ve
-  `overlapCount`'u kaydeder.
+- Filtreler ve tekilleştirme faturalamadan önce çalışır.
+- Varsayılan olarak birden çok hedefte çıkan bir profil 1 kez görünür ve 1 kez
+  ücretlenir.
+- Tek bir çalıştırma kullanıcı adı, sayısal ID, URL ve kısa yol kabul eder.
+- Birleştirme modu ortak profilleri, kaynakları, ilişkileri ve `overlapCount`
+  değerini kaydeder.
 - Çalıştırma günlükleri sayfa sürelerini `fetchDurationMs`,
   `processingDurationMs`, `pushDurationMs`, `statusDurationMs` ve
   `fullPageDurationMs` alanlarında gösterir.
 - Apify çalıştırmayı yeniden başlatırsa teslim edilen satırlar ve ilerleme
   korunur.
 
+### X Follower Scraper hangi verileri çıkarabilir?
+
+| Alan              | Açıklama                                                    |
+| ----------------- | ----------------------------------------------------------- |
+| `id`              | Sayısal X kullanıcı ID'si                                   |
+| `username`        | Kullanıcı adı (`@` olmadan)                                 |
+| `name`            | Görünen ad                                                  |
+| `description`     | Biyografi metni                                             |
+| `followers`       | Takipçi sayısı                                              |
+| `following`       | Takip edilen sayısı                                         |
+| `statusesCount`   | Paylaşılan toplam gönderi                                   |
+| `mediaCount`      | Yüklenen toplam medya                                       |
+| `favouritesCount` | Verilen toplam beğeni                                       |
+| `verified`        | Herkese açık Blue veya eski onay işaretinin birleşik değeri |
+| `verifiedType`    | `blue`, `business`, `government` veya `none`                |
+| `location`        | Kullanıcının yazdığı konum                                  |
+| `url`             | Profildeki web sitesi URL'si                                |
+| `profilePicture`  | Profil fotoğrafı URL'si (tam boyut)                         |
+| `coverPicture`    | Kapak fotoğrafı URL'si                                      |
+| `createdAt`       | X'ten gelen hesap oluşturma zaman damgası metni             |
+| `sourceTarget`    | Bu profili kazıdığın kullanıcı adı / ID                     |
+| `sourceRelation`  | İlişki: `followers`, `following`, `list_members`, ...       |
+| `sourceUrl`       | Profilin bulunduğu tam URL                                  |
+| `sourceTargets`   | Birleştirme modunda bu profille eşleşen tüm hedefler        |
+| `sourceRelations` | Birleştirme modunda bu profille eşleşen tüm ilişkiler       |
+| `sourceUrls`      | Birleştirme modunda bu profille eşleşen tüm kaynak URL'leri |
+| `overlapCount`    | Birleştirme modunda eşleşen ilişki-hedef çifti sayısı       |
+| `resultType`      | Full ve raw çıktı modlarında satır türü                     |
+| `raw`             | Actor'a özgü biçimlendirmeden önceki güvenli kaynak profil  |
+
+Satırlar herkese açık profil sözleşmesine uyar. Bu sözleşme kimlik, sayılar,
+onay durumu, kullanılabilirlik, bağlı hesaplar, profesyonel veriler ve
+biyografileri kapsar. Kaynak bilgisi, entity verileri ve sabitlenmiş gönderi
+ID'leri de gelir. Alanların tam listesi için OpenAPI'ye bak.
+
+`raw` alanı eklemek için `outputMode: "raw"` veya `includeRaw: true` ayarla. Bu
+alan kaynak profilin güvenli bir kopyasını tutar. Varsayılan mod kompakttır.
+
+`verifiedOnly`, herkese açık Blue ve eski onaylı profilleri kabul eder. Kaynak
+bayrakları çelişirse gerçek onay durumu geçerli olur.
+
+Satırlar yalnızca görüntüleyene ait durumu asla içermez. Xquik takip,
+engelleme, sessize alma, Direkt Mesaj, bildirim ve benzeri görüntüleyen
+bayraklarını kaldırır. Ham çıktı da bunları atar.
+
+## Kullanım örnekleri
+
+- Potansiyel müşteri verisini zenginleştir & profil başına daha çok alanla
+  araştırma veri kümeleri kur. Medyan satırımızda 2026-09-28'de 28 alan vardı.
+  Bu, 9 başka Actor'ın medyanının 1,9 katı.
+- Rakiplerin takipçilerini potansiyel müşteri araştırması için dışa aktar.
+- Kendi hesabının, rakiplerinin ve tanınmış kişilerin kitlelerini karşılaştır.
+- Uygun profilleri bulmak için takipçi sayısına ve onay durumuna göre filtrele.
+- X Topluluk üyelerini dışa aktar.
+- Araştırma için herkese açık sosyal ağ veri kümeleri oluştur.
+- Takipçi kitlelerini biyografi kelimesine, konuma veya profil türüne göre ayır.
+
+## X Follower Scraper ile takipçi verisi nasıl kazınır?
+
+1. Apify Console'da Xquik'in X Follower Scraper'ını aç.
+2. Profil, Liste veya Topluluk URL'si, X kullanıcı adı ya da sayısal ID ekle.
+3. `followers` veya `verified_followers` gibi bir ilişki seç.
+4. `maxItems` değerini ve gereken profil filtrelerini ayarla.
+5. Çalıştırmayı başlat.
+6. Veri kümesini JSON, CSV, Excel veya HTML olarak dışa aktar.
+
+Aşağıdaki girdiler sık yapılan işleri kapsar.
+
+### Profil veya Liste URL'si yapıştır
+
+Profil, Liste veya Topluluk URL'lerini yapıştır. Her URL, kazınacak ilişkiyi
+belirler:
+
+```json
+{
+  "startUrls": [
+    { "url": "https://x.com/nasa/followers" },
+    { "url": "https://x.com/spacex/verified_followers" },
+    { "url": "https://x.com/elonmusk/following" },
+    { "url": "https://x.com/i/lists/1748648376080666720/members" },
+    { "url": "https://x.com/i/communities/1493446837214187523/members" }
+  ],
+  "maxItems": 5000
+}
+```
+
+### Toplu kullanıcı adları
+
+`twitterHandles`, birçok `/<handle>/followers` hedefinin kısa yoludur.
+Kullanıcı adlarını `@` ile ya da `@` olmadan yazabilirsin:
+
+```json
+{
+  "twitterHandles": ["elonmusk", "nasa", "openai"],
+  "relation": "followers",
+  "maxItems": 1000
+}
+```
+
+`relation`, her kullanıcı adı için neyin kazınacağını belirler. `followers`,
+`following` veya `verified_followers` kullan.
+
+Aynı girdi `username`, `usernames` ve `user_names` takma adlarını da kabul
+eder.
+
+### Çok ilişkili çalıştırmalar
+
+Aynı kullanıcı adları için birden çok ilişkiyi okumak istiyorsan `relations`
+ayarla:
+
+```json
+{
+  "usernames": ["nasa"],
+  "relations": ["followers", "following"],
+  "maxItems": 1000
+}
+```
+
+`getFollowers`, `getFollowing`, `getVerifiedFollowers`, `getListMembers`,
+`getListFollowers` ve `getCommunityMembers` gibi boolean alanlar da çalışır.
+
+### Sayısal kullanıcı, Liste veya Topluluk ID'siyle kazı
+
+```json
+{
+  "userIds": ["44196397"],
+  "listIds": ["1748648376080666720"],
+  "communityIds": ["1493446837214187523"],
+  "relation": "followers",
+  "maxItemsPerTarget": 500,
+  "maxItems": 1500
+}
+```
+
+Sayısal kullanıcı ID'leri `twitterUserIds` ve `user_ids` takma adlarını da
+kabul eder.
+
+`relation` sayısal kullanıcı ID'lerine uygulanır. Liste ID'leri varsayılan
+olarak üyeleri okur. Topluluk ID'leri her zaman üyeleri okur.
+`maxItemsPerTarget`, ilk büyük hedefin `maxItems` sınırının tamamını
+tüketmesini önler.
+
+### Ödemeden önce filtrele
+
+Veri kümene yalnızca uyan profillerin girmesi için filtre ekle:
+
+```json
+{
+  "twitterHandles": ["openai"],
+  "relation": "followers",
+  "minFollowers": 1000,
+  "verifiedOnly": true,
+  "verifiedType": "business",
+  "minStatuses": 100,
+  "usernameContains": "ai",
+  "bioContains": "founder, CEO",
+  "locationContains": "San Francisco",
+  "maxItems": 500
+}
+```
+
+Actor yazdığından daha çok profili inceleyebilir. Yalnızca tüm filtreleri geçip
+veri kümene giren satırlar için ödersin.
+
+`bioContains` seçeneklerini virgülle veya yeni satırla ayır. Biyografisinde
+verdiğin terimlerden biri geçen profil filtreyi geçer. Eşleşme büyük ve küçük
+harfe bakmaz.
+
+### Kitle örtüşmesini bul
+
+Rakipleri, Listeleri, Toplulukları veya ilişki türlerini karşılaştırmak için
+birleştirme modunu kullan:
+
+```json
+{
+  "twitterHandles": ["openai", "anthropicai", "GoogleDeepMind"],
+  "relation": "followers",
+  "dedupeMode": "merge",
+  "maxItemsPerTarget": 5000,
+  "maxItems": 15000
+}
+```
+
+Çıktıda her benzersiz profil için 1 satır olur. Ortak profillerde
+`sourceTargets`, `sourceRelations`, `sourceUrls`, `sourceTargetKeys` ve
+`overlapCount` bulunur. `overlapCount` alanına göre sırala ya da satırları CSV
+olarak dışa aktar. Her hedefin satır ekleyebilmesi için `maxItems` değerini
+yeterince yüksek tut. Her hesabın derinliğini `maxItemsPerTarget` ile ayarla.
+
+### Kabul edilen URL biçimleri
+
+| URL                                         | İlişki                                           |
+| ------------------------------------------- | ------------------------------------------------ |
+| `https://x.com/<handle>/followers`          | `followers`                                      |
+| `https://x.com/<handle>/verified_followers` | `verified_followers`                             |
+| `https://x.com/<handle>/following`          | `following`                                      |
+| `https://x.com/<handle>`                    | varsayılan `relation` (ayarlanmamışsa followers) |
+| `https://x.com/i/lists/<id>/members`        | `list_members`                                   |
+| `https://x.com/i/lists/<id>/followers`      | `list_followers`                                 |
+| `https://x.com/i/lists/<id>`                | `list_members`                                   |
+| `https://x.com/i/communities/<id>/members`  | `community_members`                              |
+| `https://x.com/i/communities/<id>`          | `community_members`                              |
+| `<handle>/followers`                        | `followers`                                      |
+| `<handle>/following`                        | `following`                                      |
+| `<handle>/verified_followers`               | `verified_followers`                             |
+| `lists/<id>/members`                        | `list_members`                                   |
+| `lists/<id>/followers`                      | `list_followers`                                 |
+| `communities/<id>/members`                  | `community_members`                              |
+
+`twitter.com` ve `mobile.twitter.com` URL'leri de her yerde çalışır.
+`x.com/nasa` gibi `https://` olmadan yazılan URL'ler de çalışır.
+
 ## Görev örnekleri
 
-50 herkese açık görevden seç. Her birinin sınırlı bir girdisi ve eşleşen bir
-veri kümesi görünümü vardır. Her görev gerçek bir kitle veya filtreyle açılır.
+50 herkese açık görevden birini seç. Her görevin sınırlı bir girdisi ve uygun
+bir veri kümesi görünümü var. Her görev gerçek bir kitle veya filtreyle açılır.
 Çalıştırmadan önce düzenle.
 
 - [Discover AI builders in OpenAI followers](https://apify.com/xquik/x-follower-scraper/examples/discover-ai-builders-in-openai-followers)
@@ -83,103 +285,43 @@ veri kümesi görünümü vardır. Her görev gerçek bir kitle veya filtreyle a
 - [Collect Community members for AI agents](https://apify.com/xquik/x-follower-scraper/examples/collect-community-members-for-ai-agents)
 - [Create repeatable X follower snapshots](https://apify.com/xquik/x-follower-scraper/examples/create-repeatable-follower-snapshots)
 
-### X Follower Scraper hangi verileri çıkarabilir?
+## X takipçilerini kazımak ne kadar tutar?
 
-| Alan               | Açıklama                                                |
-| ------------------ | -------------------------------------------------------- |
-| `id`                | Sayısal X kullanıcı ID'si                                |
-| `username`          | Handle (`@` olmadan)                                     |
-| `name`              | Görünen ad                                               |
-| `description`       | Biyografi metni                                          |
-| `followers`         | Takipçi sayısı                                           |
-| `following`         | Takip edilen sayısı                                      |
-| `statusesCount`     | Toplam gönderilen tweet                                  |
-| `mediaCount`        | Toplam yüklenen medya                                    |
-| `favouritesCount`   | Toplam verilen beğeni                                    |
-| `verified`          | Birleşik herkese açık Blue veya eski doğrulama işareti   |
-| `verifiedType`      | `blue`, `business`, `government` veya `none`             |
-| `location`          | Kendi bildirdiği konum                                   |
-| `url`               | Profilden web sitesi URL'si                              |
-| `profilePicture`    | Avatar URL'si (tam boyut)                                |
-| `coverPicture`      | Kapak görseli URL'si                                     |
-| `createdAt`         | X'ten hesap oluşturma zaman damgası dizesi               |
-| `sourceTarget`      | Bu profili kazıdığın handle/ID                           |
-| `sourceRelation`    | İlişki: `followers`, `following`, `list_members`, ...    |
-| `sourceUrl`         | Profilin keşfedildiği tam URL                            |
-| `sourceTargets`     | Birleştirme modunda bu profille eşleşen tüm hedefler     |
-| `sourceRelations`   | Birleştirme modunda bu profille eşleşen tüm ilişkiler    |
-| `sourceUrls`        | Birleştirme modunda bu profille eşleşen tüm kaynak URL'ler |
-| `overlapCount`      | Birleştirme modunda eşleşen ilişki-hedef çifti sayısı    |
-| `resultType`        | Full ve raw çıktı modlarında satır türü                  |
-| `raw`               | Actor'a özgü biçimlendirmeden önceki güvenli kaynak profil |
+Xquik'in X Follower Scraper'ı her Apify planında teslim edilen profil başına
+$0.00015 tutar. Apify, platform kullanımını ayrıca faturalandırır. Xquik,
+teslim edilen her veri satırı için 1 kez ücret alır. Ayrı bir Xquik aboneliği
+gerekmez, Xquik başlatma ücreti de eklemez. Başlatma, hedef ve ilişki seçimi
+ayrı bir sorgu ücreti getirmez.
 
-Satırlar herkese açık profil sözleşmesini izler. Bu sözleşme kimliği,
-sayaçları, doğrulamayı, kullanılabilirliği, iştirakleri, profesyonel verileri
-ve biyografileri kapsar. Kaynak atfı, varlıklar ve sabitlenmiş tweet ID'leri
-kullanılabilir kalır. Tam alanlar için OpenAPI'a bak.
+Tek bir çalıştırma birçok hedefi okuyabilir. Sınırlar, tekilleştirme, kaynak
+bilgisi ve faturalama tüm hedeflerde doğru kalır.
 
-Güvenli kaynak profilin bir `raw` kopyasını eklemek için `outputMode: "raw"`
-veya `includeRaw: true` ayarla. Kompakt mod varsayılan olarak kalır.
-
-`verifiedOnly`, herkese açık Blue ve eski doğrulanmış profilleri kabul eder.
-Çelişen kaynak işaretleri, yanlış bir değerin gerçek bir doğrulama durumunu
-gizlemesine asla izin vermez.
-
-Satırlar asla görüntüleyene özgü durum içermez. Takip, engelleme, sessize alma,
-DM, bildirim ve benzeri görüntüleyen bayrakları her zaman kaldırılır, ham
-çıktıdan da.
-
-## X takipçilerini kazımanın maliyeti nedir?
-
-Her Apify planında teslim edilen profil başına `$0.00015` ücret alınır. Apify,
-platform kullanımını ayrıca faturalandırır. Xquik, teslim edilen veri satırı
-başına bir ücret uygular. Tanılamalar `diagnostics` çıktısında ücretsizdir. Ayrı
-bir Xquik aboneliği gerekmez. Başlangıç ücreti uygulanmaz. Durum metni,
-çalıştırmanın neden durduğunu söyler. Ücretlendirilen sonuçları, atlanan
-tekrarları ve okunan hedefleri de sayar. Sorun yaşayan veya büyük bir çalıştırma
-ayrıca bir `run-report` kaydı yazar. Kaydın `estimatedChargeUsd` alanı, Apify'ın
-Actor'a gösterdiği canlı olay başına ödeme fiyatını kullanır. Sorunlu
-çalıştırmalar, girdisiz ve geçersiz girdi çıkışları dahil her zaman `run-report`
-yazar. Sorunsuz biten küçük bir çalıştırma bu kaydı atlar ve Apify kullanımından
-tasarruf eder. Her çalıştırmada yazması için `alwaysSaveRunRecords` seçeneğini
-aç. `version` alanı yayınlanmış tam Actor kaynak sürümünü bildirir.
-
-`failedTargets`, bir hatadan sonra duran hedefleri sayar. Teslim edilen
-profiller faturalanabilir veri satırları olarak kalır. Bu çalıştırmalar
-`completionReason: "partial_failure"` kullanır.
-
-Varsayılan Apify zaman aşımı `0`'dır. Çalıştırmaların zaman sınırı yoktur.
-Actor, üst sınıra ulaşana veya profiller bitene kadar devam eder. Yine de sonlu
-bir zaman aşımı ayarlayabilirsin. O zaman
-`completionReason: "deadline_reached"`, bu sınırın yaklaştığı anlamına gelir.
-Actor, sınırdan önce profilleri ve raporu kaydedip düzgünce çıkar. Teslim edilen
-profiller bir kez faturalandırılır.
-
-Tek bir çalıştırma birçok hedefi okuyabilir. Sınırlar, tekrar kaldırma, kaynak
-bilgisi ve faturalama hepsinde doğru kalır.
-
-- Başlangıçlar, hedefler ve ilişki seçimi ayrı bir sorgu ücreti eklemez.
-- Filtreler (`minFollowers`, `verifiedOnly`, `bioContains`,
-  `locationContains`, `minFollowing`, `maxFollowing`, `minStatuses`,
-  `maxStatuses`, `minAccountAgeDays`, `verifiedType`, `usernameContains`,
-  `hasWebsite`, `hasLocation`), bir profil veri kümene girmeden önce çalışır.
+- Filtreler profil veri kümene girmeden önce çalışır, bu yüzden filtrelenen
+  satırlar ücretsizdir.
+- Sayı filtreleri `minFollowers`, `maxFollowers`, `minFollowing`,
+  `maxFollowing`, `minStatuses`, `maxStatuses` ve `minAccountAgeDays`
+  alanlarıdır.
+- Profil filtreleri `verifiedOnly`, `verifiedType`, `bioContains`,
+  `locationContains`, `usernameContains`, `hasWebsite` ve `hasLocation`
+  alanlarıdır.
 - Actor, hedefler arasındaki tekrarları yazmadan önce kaldırır. Onları tutmak
   için `dedupeAcrossTargets: false` ayarla.
-- Veri kümesi tarafından reddedilen satırlar faturalandırılmaz.
-- Girdisiz, geçersiz girdi ve sıfır çıktılı çalıştırmalar, ücretsiz
-  `diagnostics` çıktısına 1 uygulanabilir kayıt yazar.
+- Xquik, veri kümesinin reddettiği satırları asla faturalamaz.
+- Tanılamalar `diagnostics` çıktısında ücretsizdir.
+- Girdisiz, geçersiz girdili ve sıfır çıktılı çalıştırmalar, ücretsiz
+  `diagnostics` çıktısına ne yapman gerektiğini söyleyen 1 kayıt yazar.
 
-Harcamayı sabit bir üst sınıra oturtmak için Apify API'sinde
-`maxTotalChargeUsd`'yi veya Console'da Max cost per run'ı ayarla. Apify bu
-sınırı Actor'a `ACTOR_MAX_TOTAL_CHARGE_USD` olarak gösterir ve Actor, bunun
-ötesinde satır kabul etmeden önce durur. Bütçenin izin verdiği kadar profil
-döndürmesi için `maxItems`'i boş bırak. `maxItems`'i yalnızca bütçenin izin
-vereceğinden daha küçük bir sonuç üst sınırı istediğinde ayarla.
+Sorun yaşayan veya büyük bir çalıştırma ayrıca bir `run-report` kaydı yazar.
+Bu kayıttaki `estimatedChargeUsd`, Apify'ın Actor'a bildirdiği canlı olay
+başına ödeme fiyatını kullanır. Sorunsuz biten küçük bir çalıştırma bu kaydı
+atlar, böylece Apify kullanımı azalır. Kaydı her çalıştırmada almak için
+`alwaysSaveRunRecords` seçeneğini aç.
 
 ## Karşılaştırma testi
 
-X Follower Scraper, maliyette & hızda 9 başka takipçi Actor'ını geçti. Medyan
-satırında 28 alan vardı, diğerlerinin medyanının 1,9 katı.
+Xquik'in X Follower Scraper'ı, takipçi kazıyan diğer 9 Actor'ı maliyette ve
+hızda geride bıraktı. Medyan satırında 28 alan vardı. Bu, diğerlerinin
+medyanının 1,9 katı.
 
 | Actor                                                  | İşe yarar profil | İşe yarar profil başına maliyet | Saniyede işe yarar profil | Satır başına alan | Herkese açık çalıştırma                                                                                                                                                                                             |
 | ------------------------------------------------------ | ---------------: | ------------------------------: | ------------------------: | ----------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -203,231 +345,86 @@ kullanımı dahil. 3 çalıştırmalı bir satır, hepsini toplar. Satır başı
 boş olmayan alanların medyan sayısıdır, iç içe olanlar dahil. Bir liste 1 alan
 sayılır. Girdisini, günlüğünü & veri kümesini görmek için bir çalıştırmayı aç.
 
-## X Follower Scraper'ı takipçi verisi kazımak için nasıl kullanırım?
-
-### 1. Profil veya liste URL'lerini yapıştır
-
-Profil, Liste veya Topluluk URL'lerini yapıştır. Scraper her URL'yi
-ilişkisine yönlendirir:
-
-```json
-{
-  "startUrls": [
-    { "url": "https://x.com/nasa/followers" },
-    { "url": "https://x.com/spacex/verified_followers" },
-    { "url": "https://x.com/elonmusk/following" },
-    { "url": "https://x.com/i/lists/1748648376080666720/members" },
-    { "url": "https://x.com/i/communities/1493446837214187523/members" }
-  ],
-  "maxItems": 5000
-}
-```
-
-### 2. Toplu handle'lar
-
-Birçok `/<handle>/followers` hedefi için kısayol. Kullanıcı adları `@` ile
-veya öneksiz kabul edilir:
-
-```json
-{
-  "twitterHandles": ["elonmusk", "nasa", "openai"],
-  "relation": "followers",
-  "maxItems": 1000
-}
-```
-
-Actor'ın her handle için kazıyacağı ilişkiyi seçmek üzere `relation`'ı
-`followers`, `following` veya `verified_followers` olarak ayarla.
-
-Aynı girdi için kabul edilen takma adlar arasında `username`, `usernames` ve
-`user_names` bulunur.
-
-### 3. Çoklu ilişki çalıştırmaları
-
-```json
-{
-  "usernames": ["nasa"],
-  "relations": ["followers", "following"],
-  "maxItems": 1000
-}
-```
-
-`getFollowers`, `getFollowing`, `getVerifiedFollowers`, `getListMembers`,
-`getListFollowers` ve `getCommunityMembers` gibi booleanları da
-kullanabilirsin.
-
-### 4. Sayısal kullanıcı, liste veya topluluk ID'leriyle kazı
-
-```json
-{
-  "userIds": ["44196397"],
-  "listIds": ["1748648376080666720"],
-  "communityIds": ["1493446837214187523"],
-  "relation": "followers",
-  "maxItemsPerTarget": 500,
-  "maxItems": 1500
-}
-```
-
-Sayısal kullanıcı ID'leri için kabul edilen takma adlar arasında
-`twitterUserIds` ve `user_ids` bulunur.
-
-`relation`, sayısal kullanıcı ID'lerine uygulanır. Liste ID'leri varsayılan
-olarak üyeleri kullanır. Topluluk ID'leri her zaman üyeleri kullanır.
-`maxItemsPerTarget`, ilk büyük hedefin genel sınırı tüketmesini önler.
-
-### 5. Ödeme yapmadan önce filtrele
-
-Yalnızca eşleşen profillerin veri kümene girmesi için filtreler uygula:
-
-```json
-{
-  "twitterHandles": ["openai"],
-  "relation": "followers",
-  "minFollowers": 1000,
-  "verifiedOnly": true,
-  "verifiedType": "business",
-  "minStatuses": 100,
-  "usernameContains": "ai",
-  "bioContains": "founder, CEO",
-  "locationContains": "San Francisco",
-  "maxItems": 500
-}
-```
-
-Actor, yazdığından daha fazla profil inceleyebilir. Yalnızca her filtreyi
-geçen ve veri kümene giren satırlar için ödeme yaparsın.
-
-`bioContains` alternatiflerini virgül veya yeni satırla ayır. Bir profil,
-biyografisi sağlanan terimlerden herhangi birini içerdiğinde geçer. Eşleşme
-büyük/küçük harfe duyarsız kalır.
-
-### 6. Kitle örtüşmesi bul
-
-Rakipleri, listeleri, toplulukları veya ilişki türlerini karşılaştırmak için
-birleştirme modunu kullan:
-
-```json
-{
-  "twitterHandles": ["openai", "anthropicai", "GoogleDeepMind"],
-  "relation": "followers",
-  "dedupeMode": "merge",
-  "maxItemsPerTarget": 5000,
-  "maxItems": 15000
-}
-```
-
-Çıktı, benzersiz profil başına bir satır içerir. Paylaşılan profiller
-`sourceTargets`, `sourceRelations`, `sourceUrls`, `sourceTargetKeys` ve
-`overlapCount` içerir, böylece örtüşmeye göre sıralayabilir veya doğrudan
-CSV'ye aktarabilirsin. Her hedefin satır katkısı yapabilmesi için
-`maxItems`'i yeterince yüksek tut. Hesap başına derinliği kontrol etmek için
-`maxItemsPerTarget`'i kullan.
-
-### Kabul edilen URL biçimleri
-
-| URL                                         | İlişki                                    |
-| -------------------------------------------- | ------------------------------------------ |
-| `https://x.com/<handle>/followers`           | `followers`                                |
-| `https://x.com/<handle>/verified_followers`  | `verified_followers`                       |
-| `https://x.com/<handle>/following`           | `following`                                |
-| `https://x.com/<handle>`                     | varsayılan `relation` (ayarlanmamışsa followers) |
-| `https://x.com/i/lists/<id>/members`         | `list_members`                             |
-| `https://x.com/i/lists/<id>/followers`       | `list_followers`                           |
-| `https://x.com/i/lists/<id>`                 | `list_members`                             |
-| `https://x.com/i/communities/<id>/members`   | `community_members`                        |
-| `https://x.com/i/communities/<id>`           | `community_members`                        |
-| `<handle>/followers`                         | `followers`                                |
-| `<handle>/following`                         | `following`                                |
-| `<handle>/verified_followers`                | `verified_followers`                       |
-| `lists/<id>/members`                         | `list_members`                             |
-| `lists/<id>/followers`                       | `list_followers`                           |
-| `communities/<id>/members`                   | `community_members`                        |
-
-`twitter.com` ve `mobile.twitter.com` her yerde ayrıca kabul edilir.
-
 ## Girdi
 
-Tam seçenek listesi için **Input** sekmesine bak. Şunlardan en az biri hariç
-tüm alanlar isteğe bağlıdır: `startUrls`, `twitterHandles`, `userIds`,
-`listIds` veya `communityIds`, ya da bunların belgelenmiş takma adları.
+Input sekmesi tüm seçenekleri listeler. `startUrls`, `twitterHandles`,
+`userIds`, `listIds` veya `communityIds` alanlarından en az 1 tanesini doldur.
+Belgelenmiş takma adları da sayılır. Diğer tüm alanlar isteğe bağlıdır.
 
-Örnekler:
+Şu girdileri dene:
 
-- `twitterHandles`'a `relation: "followers"` ile bir rakip handle ekle.
-- Doğrulanmış profiller için Start URLs'e
+- `relation: "followers"` ile `twitterHandles` alanına bir rakibin kullanıcı
+  adını ekle.
+- Onaylı profiller için Start URLs alanına
   `https://x.com/<handle>/verified_followers` yapıştır.
-- Üyelerini denetlemek için Start URLs'e bir liste URL'si yapıştır.
-- 2 veya daha fazla handle ekle. Paylaşılan bir profil, ilk hedefin altında bir
-  kez görünür. Her eşleşen hedefi içeren 1 satır tutmak için
+- Üyelerini incelemek için Start URLs alanına bir Liste URL'si yapıştır.
+- 2 veya daha fazla kullanıcı adı ekle. Ortak bir profil ilk hedefin altında 1
+  kez görünür. Eşleşen tüm hedeflerle 1 satır tutmak için
   `dedupeMode: "merge"` kullan. Hedef başına 1 satır tutmak için
   `dedupeAcrossTargets: false` ayarla.
 
-### Console ve API girdi deneyimi
+### Console ve API girdisi
 
-Console şu kontrolleri gösterir:
+Console formunda şu kontroller var:
 
-- Start URLs alanı, URL dizelerini veya `{ "url": "..." }` nesnelerini kabul
-  eder. JSON düzenleyicisi her iki API biçimini de korur.
-- Relation, Output Mode ve Dedupe Mode doğrulanmış seçim alanlarıdır.
-- Relations, çoklu ilişki çalıştırmaları için doğrulanmış bir çoklu seçim
-  alanıdır.
-- Sonuç sınırları 1 veya daha büyük tam sayıları kabul eder.
-- Sayısal profil filtreleri 0 veya daha büyük tam sayıları kabul eder.
+- Start URLs alanı URL metni veya `{ "url": "..." }` nesnesi kabul eder. JSON
+  düzenleyicisi iki API biçimini de korur.
+- Relation, Output Mode ve Dedupe Mode sabit seçenekli listelerdir.
+- Relations, çok ilişkili çalıştırmalar için çoklu seçim listesidir.
+- Sonuç sınırları 1 veya daha büyük tam sayı kabul eder.
+- Sayısal profil filtreleri 0 veya daha büyük tam sayı kabul eder.
 
-Yeni entegrasyonlarda kanonik alanları kullan. Uyumluluk takma adları JSON, API,
-SDK, otomasyon ve görev girdilerinde kullanılabilir kalır. Buna Output Mode
-takma adları olarak `outputVariant` ve `includeRaw` da dahildir. Ayrıca bir
-Dedupe Mode takma adı olarak `dedupeAcrossTargets`'i de içerir. Görsel form,
-kanonik bir kontrolü tekrarlayan takma adları gizler. Mevcut JSON ve kaydedilmiş
-görev girdilerindeki takma adlar çalışmaya devam eder.
-`dedupeAcrossTargets: false` veya `dedupeMode: "none"` içeren kaydedilmiş
-girdiler hedef başına 1 satır tutar.
+Yeni entegrasyonlarda kanonik alanları kullan. Takma adlar JSON, API, SDK,
+otomasyon ve görev girdilerinde yine çalışır. `outputVariant` ve `includeRaw`,
+Output Mode takma adlarıdır. `dedupeAcrossTargets`, bir Dedupe Mode takma
+adıdır. Görsel form, kanonik bir kontrolün tekrarı olan takma adları gizler.
+Takma ad içeren mevcut JSON ve kayıtlı görev girdileri çalışmaya devam eder.
+`dedupeAcrossTargets: false` veya `dedupeMode: "none"` içeren kayıtlı girdiler
+hedef başına 1 satır tutar.
 
-### Başka bir takipçi Actor'ından geç
+### Başka bir takipçi Actor'ından geçiş yap
 
-Zaten kullandığın girdiyi yapıştır. X Follower Scraper, diğer X takipçi
-Actor'larının kullandığı alan adlarını okur ve kendi alanlarına eşler. Kanonik
-adlar belgelenmiş varsayılan olarak kalır. Bir takma ad asla bir alanı
-düşürmez ve ödediğin tutarı asla değiştirmez.
+Zaten kullandığın girdiyi yapıştır. Xquik'in X Follower Scraper'ı, takipçi
+kazıyan diğer X Actor'larının kullandığı alan adlarını okur. Bunları kendi
+alanlarına eşler. Belgelenmiş varsayılan yine kanonik adlardır. Bir takma ad
+asla bir alanı düşürmez ve ödediğin tutarı değiştirmez.
 
-| Zaten kullandığın alan                                                                | X Follower Scraper bunu şöyle okur |
-| ------------------------------------------------------------------------------------- | ---------------------------------- |
-| `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`, `screenNames` | `twitterHandles`                   |
-| `username`, `handle`, `screenName`, tek bir dize olarak                               | `twitterHandles`                   |
-| `twitterUserIds`, `user_ids`, `userIdList`                                            | `userIds`                          |
-| `user_id`, `userId`, tek bir dize olarak                                              | `userIds`                          |
-| `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`                          | `startUrls`                        |
-| `profileUrl`, tek bir dize olarak                                                     | `startUrls`                        |
-| `getFollowers`, `getFollowing`                                                        | `relations`                        |
-| `followers` veya `following` değeriyle `type`                                         | `relation`                         |
-| `maxResults`, `max_results`, `resultsLimit`, `count`                                  | `maxItems`                         |
-| `scrapeAllResults`                                                                    | hedef başına üst sınır yok         |
+| Zaten kullandığın alan                                                                | Xquik bunu şöyle okur  |
+| ------------------------------------------------------------------------------------- | ---------------------- |
+| `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`, `screenNames` | `twitterHandles`       |
+| tek metin olarak `username`, `handle`, `screenName`                                   | `twitterHandles`       |
+| `twitterUserIds`, `user_ids`, `userIdList`                                            | `userIds`              |
+| tek metin olarak `user_id`, `userId`                                                  | `userIds`              |
+| `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`                          | `startUrls`            |
+| tek metin olarak `profileUrl`                                                         | `startUrls`            |
+| `getFollowers`, `getFollowing`                                                        | `relations`            |
+| `followers` veya `following` değerli `type`                                           | `relation`             |
+| `maxResults`, `max_results`, `resultsLimit`, `count`                                  | `maxItems`             |
+| `scrapeAllResults`                                                                    | hedef başına sınır yok |
 
-2 ad burada başka bir anlama gelir. Bazı Actor'larda `maxFollowers` ve
-`maxFollowing`, bir çalıştırmanın kaç satır getireceğini sınırlar. X Follower
-Scraper'da ise profilleri takipçi ve takip edilen sayılarına göre filtreler.
-Satırları sınırlamak için `maxItems` kullan. X Follower Scraper'da sayfa birimi
-yoktur, bu yüzden `maxPages` yerine `maxItems` kullan.
+2 ad burada başka anlama gelir. Bazı Actor'larda `maxFollowers` ve
+`maxFollowing`, bir çalıştırmanın döndürdüğü satır sayısını sınırlar. Xquik'in
+X Follower Scraper'ında ise profilleri takipçi ve takip edilen sayılarına göre
+filtreler. Satırları sınırlamak için `maxItems` kullan. Actor'da sayfa birimi
+yok, bu yüzden `maxPages` yerine `maxItems` kullan.
 
-### Her zaman en güncel yapıyı kullan
+### Her zaman en güncel derlemeyi kullan
 
-Store çalıştırmaları Actor'ın `latest` yapı yapılandırmasını kullanır. API
-istemcileri yapı geçersiz kılmasını atlamalı veya `build=latest` geçmelidir.
-Eski bir yapıya sabitlenmiş Görevleri ve entegrasyonları güncelle. Sabitlenmiş
-yapılar asla otomatik olarak taşınmaz.
+Xquik'in X Follower Scraper'ı, Store çalıştırmalarında `latest` derlemesiyle
+çalışır. API çağrılarında derleme seçimini boş bırak ya da `build=latest`
+gönder. Eski bir derlemeye sabitlenmiş görevleri ve entegrasyonları güncelle.
+Sabitlenmiş derlemeler kendiliğinden değişmez.
 
 ## Çıktı
 
-Her profil bir JSON nesnesidir. Kompakt mod, normalleştirilmiş herkese açık
-alanları, şema sürümü alanlarını ve mevcut olduğunda kaynak metadata'yı
-döndürür:
+Her profil bir JSON nesnesidir. Kompakt mod normalize edilmiş herkese açık
+alanları, şema sürümü alanlarını ve varsa kaynak metadata'sını döndürür.
 
-Veri kümesi ve run-report şemaları döndürülen her alanı açıklar. Temel
-alanlar ayrıca ajanlar ve üretilen entegrasyonlar için örnekler içerir.
+Veri kümesi ve run-report şemaları dönen her alanı açıklar. Basit alanlarda
+ajanlar ve üretilen entegrasyonlar için örnekler de var.
 
-Örnek değerler açıklayıcıdır. Yanıtlar çalıştırma zamanındaki kaynak veriyi
-yansıtır.
+Aşağıdaki değerler yalnızca örnektir. Satırların çalıştırma anındaki canlı
+veriyi taşır. Kompakt bir satır şöyle görünür:
 
 ```json
 {
@@ -455,7 +452,7 @@ yansıtır.
 }
 ```
 
-Birleştirme tekilleştirme modu örtüşme alanları ekler:
+Birleştirme modu örtüşme alanları ekler:
 
 ```json
 {
@@ -474,180 +471,227 @@ Birleştirme tekilleştirme modu örtüşme alanları ekler:
 }
 ```
 
-Apify veri kümesinden JSON, CSV, Excel veya HTML olarak dışa aktar.
+Apify veri kümesini JSON, CSV, Excel veya HTML olarak dışa aktar.
 
 ## Çalıştırma seçenekleri
 
-- Çalıştırma maliyetini sınırlamak için Apify maksimum toplam ücretini
-  ayarla. O bütçe içinde maksimum satır için `maxItems`'i boş bırak, ya da
-  daha az profil istediğinde `maxItems` ve `maxItemsPerTarget`'i ayarla.
-- Faturalandırılan veri kümesini daraltmak için `minFollowers`,
-  `verifiedOnly`, `verifiedType`, `minStatuses`, `usernameContains`,
-  `bioContains`, `locationContains`, `hasWebsite` ve `hasLocation`'ı
-  birleştir.
-- Çalıştırmalar varsayılan olarak hedefler genelinde yalnızca benzersiz
+Harcamaya kesin bir sınır koymak için Apify API'de `maxTotalChargeUsd` ayarla.
+Console'da aynı sınırın adı Max cost per run. Apify bu sınırı Xquik'in X
+Follower Scraper'ına `ACTOR_MAX_TOTAL_CHARGE_USD` olarak iletir. Actor, sınırı
+aşan satırları kabul etmeden önce durur. Harcama sınırının izin verdiği kadar
+profil almak için `maxItems` alanını boş bırak. `maxItems` ve
+`maxItemsPerTarget` değerlerini yalnızca bütçenin izin verdiğinden daha az
+profil istiyorsan ayarla.
+
+- Faturalanan veri kümesini daraltmak için `minFollowers`, `verifiedType` ve
+  `bioContains` gibi profil filtrelerini birleştir.
+- Varsayılan olarak çalıştırmalar hedefler arasında yalnızca benzersiz
   profilleri tutar. Hedef başına 1 satır tutmak için
   `dedupeAcrossTargets: false` ayarla.
-- Her eşleşen kaynak hedefin eklendiği profil başına tek satır elde etmek
-  için `dedupeMode: "merge"` ayarla.
-- Mevcut olduğunda sabitlenmiş tweet ID'leri, varlıklar ve profil metadata'sı
-  gibi isteğe bağlı profil alanları elde etmek için `outputMode: "full"`
-  ayarla.
-- Normalleştirilmiş alanların yanında sanitize edilmiş bir `raw` nesnesi
-  eklemek için `outputMode: "raw"` veya `includeRaw: true` ayarla.
-- Profil ID'lerini karşılaştırmak için tekrarlayan Actor çalıştırmaları
-  planla ve her veri kümesini sakla. Xquik monitörleri desteklenen tweet ve
-  profil olaylarını yayınlar, takipçi listesi değişikliklerini değil.
+- Her profil için eşleşen tüm kaynak hedefleriyle 1 satır almak için
+  `dedupeMode: "merge"` ayarla.
+- Varsa isteğe bağlı profil alanları için `outputMode: "full"` ayarla. Bunlar
+  sabitlenmiş gönderi ID'lerini, entity verilerini ve profil metadata'sını
+  kapsar.
+- Normalize alanların yanına temizlenmiş bir `raw` nesnesi eklemek için
+  `outputMode: "raw"` veya `includeRaw: true` ayarla.
+- Tekrarlanan çalıştırmalar planla ve profil ID'lerini karşılaştırmak için her
+  veri kümesini sakla. Xquik izlemeleri desteklenen gönderi ve profil olaylarını
+  gönderir, takipçi listesi değişikliklerini göndermez.
 
-## Kullanım örnekleri
+## Boş, kısmi ve durdurulan çalıştırmalar
 
-- Potansiyel müşteri verisini zenginleştir & profil başına daha çok alanla
-  araştırma veri kümeleri kur. Medyan satırımızda 2026-09-28'de 28 alan vardı.
-  Bu, 9 başka Actor'ın medyanının 1,9 katı.
-- Potansiyel müşteri araştırması için rakip takipçilerini dışa aktar.
-- Hesabın, rakiplerin ve kamu figürlerinin kitlelerini karşılaştır.
-- Eşleşen profilleri bulmak için takipçi sayısını ve doğrulamayı filtrele.
-- İlgili X Topluluklarının üyelerini dışa aktar.
-- Araştırma için herkese açık sosyal ağ veri kümeleri oluştur.
-- Takipçi tabanlarını biyografi anahtar kelimesine, konuma veya profil
-  türüne göre segmentlere ayır.
+Xquik'in X Follower Scraper'ı boş, kısmi ve durdurulan çalıştırmaları ücretsiz
+tanılamalarla açıklar. Actor'ın başarıyla bitmesi teslimatı doğrular. Tüm
+verinin çekildiğini doğrulamaz.
 
-## Veri sorumluluğu
+Kesilen bir çalıştırma ücretsiz bir `partial` tanılaması yazar. Teslim edilmiş
+sonuçlar veri kümesinde kalır. Yeniden denemeden önce `availableResults`,
+`failedTargets`, `retryable` ve `nextAction` alanlarını oku.
 
-Actor, herkese açık X profil alanlarını ister. Sonuçlar, kendi bildirilen
-konumlar dahil kişisel veri içerebilir. Yasal bir amaç doğrula ve geçerli
-gizlilik kurallarına uy. Belirsizlik durumunda yetkin bir hukuk danışmanına
-sor.
+Çalıştırma durumu, çalıştırmanın neden durduğunu söyler. Ücretlendirilen
+sonuçları, atlanan tekrarları ve okunan hedefleri de sayar. Durum, erken
+durmanın her nedenini söyler. `stopCauses` her nedeni kendi `message`,
+`retryable` ve `nextAction` alanlarıyla listeler. Nedenler şunlardır:
+`target_not_found`, `target_protected`, `target_failed` ve `deadline_reached`.
+Bulunamayan bir hesap, listeye yalnızca çalıştırmayı başka bir neden
+durdurduysa girer. Nedenlerden biri `retryable` ise çalıştırma da `retryable`
+olur.
+
+X, korumalı bir hesabın listelerini gizli tutar. Bu hedef 1 ücretsiz tanılamada
+`target_protected` alır. Çalıştırma diğer hedefleri okumaya devam eder.
+
+`failedTargets`, bir hatadan sonra duran hedefleri sayar. Bu çalıştırmalar
+`completionReason: "partial_failure"` kullanır. Teslim ettikleri profiller
+faturalanan veri satırı olarak kalır.
+
+Varsayılan Apify zaman aşımı `0` olduğu için çalıştırmaların süre sınırı yoktur.
+Çalıştırma, üst sınıra ulaşana veya profil bitene kadar devam eder. Yine de
+sonlu bir zaman aşımı ayarlayabilirsin. O zaman
+`completionReason: "deadline_reached"` bu sınırın yaklaştığını gösterir.
+Çalıştırma profilleri ve raporu kaydeder, sonra sınırdan önce düzgünce çıkar.
+Teslim edilen profiller 1 kez ücretlenir.
+
+Sorunlu çalıştırmalar her zaman `run-report` yazar. Girdisiz ve geçersiz
+girdili çıkışlar da buna dahil. `run-report` içinde yayımlanan Actor kaynağının
+tam sürümünü veren bir `version` alanı da var.
 
 ## İlgili Xquik Actor'ları
 
-Her Xquik Actor'ı aynı çıkarma motorunu, önce filtreleyen faturalandırmayı ve
+Her Xquik Actor'ı aynı veri çekme motorunu, önce filtreleyen faturalandırmayı ve
 tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): Aramalardan,
-  profil zaman akışlarından, Listelerden ve tweet ID'lerinden 50'den fazla
-  filtre ve düz dışa aktarımla tweet kazır. Analiz değil sadece tweet verisi
-  gerektiğinde kullan. Satır başına $0.00015'ten başlar.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Handle, ID
-  veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını ve
+  profil zaman akışlarından, Listelerden ve gönderi ID'lerinden 50'den fazla
+  filtre ve düz dışa aktarımla gönderi kazır. Analiz değil, yalnızca gönderi
+  verisi gerektiğinde kullan. Satır başına $0.00015'ten başlar.
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Kullanıcı adı,
+  ID veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını ve
   takipçilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
   başına $0.00015'ten başlar.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25'ten fazla
   filtreyle gönderilerin altındaki yanıtları, yorumları ve tüm konuşmaları
-  kazır. Tweet'lerin altındaki tartışmaya ihtiyacın olduğunda kullan. Satır
+  kazır. Gönderilerin altındaki tartışmaya ihtiyacın olduğunda kullan. Satır
   başına $0.00015'ten başlar.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Gönderi
-  URL'leri veya ID'leri için toplu olarak yanıtları, alıntıları, retweet
-  edenleri ve thread'leri kazır. Gönderilerle kimin etkileşime
+  URL'leri veya ID'leri için toplu olarak yanıtları, alıntıları, yeniden
+  gönderenleri ve gönderi dizilerini kazır. Gönderilerle kimin etkileşime
   girdiğini ölçtüğünde kullan. Satır başına $0.00015'ten başlar.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Handle, biyografi ve konuma göre kullanıcıları takipçi, doğrulama, hesap
+  Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay, hesap
   yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri oluşturduğunda
   kullan. Profil başına $0.00015'ten başlar.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): Liste URL'lerinden
   veya ID'lerinden Liste gönderilerini, üyelerini ve takipçilerini kazır.
-  Kaynaklarını küratörlü bir Liste belirlediğinde kullan. Satır başına
+  Kaynaklarını özenle seçilmiş bir Liste belirlediğinde kullan. Satır başına
   $0.00015'ten başlar.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Topluluk
   bilgilerini, gönderilerini, aramalarını, üyelerini ve moderatörlerini kazır.
   Kaynakların X Toplulukları olduğunda kullan. Satır başına $0.00015'ten başlar.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Sıralama,
-  hacim, sorgu ve WOEID ile konuma göre gerçek zamanlı trendleri kazır. Nerede
-  neyin trend olduğunu takip ettiğinde kullan. Trend başına $0.00015'ten başlar.
+  hacim, sorgu ve WOEID ile konuma göre gerçek zamanlı gündemi kazır. Nerede
+  neyin gündemde olduğunu takip ettiğinde kullan. Gündem başlığı başına
+  $0.00015'ten başlar.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): Uzun biçimli
   X Makalelerini kapak, yazar, tarih ve metriklerle Markdown ve metin olarak
-  kazır. Tweet değil makale gövdesi gerektiğinde kullan. Makale başına
+  kazır. Gönderi değil, makale gövdesi gerektiğinde kullan. Makale başına
   $0.00015'ten başlar.
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader): Gönderilerden
   veya profillerden fotoğrafları, videoları ve GIF'leri MP4 ve metadata
   seçenekleriyle çıkarır veya depolar. Medya dosyalarının kendisine ihtiyacın
   olduğunda kullan. Medya satırı başına $0.00015'ten başlar.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
-  Yapay zeka destekli ilgi, duygu durumu ve müşteri deneyimi yanıtlarıyla marka
-  bahsedilmelerini izler ve çalıştırmaları karşılaştırır. Bir markayı zaman
-  içinde takip ettiğinde kullan. Analiz edilen tweet başına $0.0003'ten başlar.
+  Markadan bahseden gönderileri yapay zeka destekli ilgi, duygu durumu ve
+  müşteri deneyimi cevaplarıyla izler. Çalıştırmaları da karşılaştırır. Bir
+  markayı zaman içinde takip ettiğinde kullan. Analiz edilen gönderi başına
+  $0.0003'ten başlar.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
-  Yapay zeka ile her tweet için tutum, yoğunluk ve alaycılık olasılığını
+  Yapay zeka ile her gönderi için tutum, yoğunluk ve alaycılık olasılığını
   etiketler. Herhangi bir konuda genel duygu durumuna ihtiyacın olduğunda
-  kullan. Analiz edilen tweet başına $0.0003'ten başlar.
+  kullan. Analiz edilen gönderi başına $0.0003'ten başlar.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
   Yapay zeka ile yükseliş, düşüş, nötr veya karışık duruşu, içerik türünü,
   kesinliği ve varlık ilgisini etiketler. Hisse senedi, kripto veya alım satım
-  konuşmalarını takip ettiğinde kullan. Analiz edilen tweet başına $0.0003'ten
-  başlar.
+  konuşmalarını takip ettiğinde kullan. Analiz edilen gönderi başına
+  $0.0003'ten başlar.
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
   Yapay zeka ile haber gönderilerini biçim, kaynak atfı ve konu ilgisine göre
-  etiketler. Haberi yorumdan ayırdığında kullan. Analiz edilen tweet başına
+  etiketler. Haberi yorumdan ayırdığında kullan. Analiz edilen gönderi başına
   $0.0003'ten başlar.
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  Yapay zeka ile her tweet için kendi kategori, puan ve evet/hayır sorularını
-  yanıtlar. Hazır analizler etiketlerine uymadığında kullan. Analiz edilen
-  tweet başına $0.0003'ten başlar.
+  Yapay zeka ile her gönderi için kendi kategori, puan ve evet/hayır
+  sorularını cevaplar. Hazır analizler etiketlerine uymadığında kullan. Analiz
+  edilen gönderi başına $0.0003'ten başlar.
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
-  Yapay zekanın 8 özellik yanıtından her tweet için 0 ile 100 arasında bir
-  Viral Score ve bir karar tahmin eder. Tweet'lerin neden yayıldığını veya
-  tutmadığını incelediğinde kullan. Analiz edilen tweet başına $0.0003'ten
+  Yapay zekanın 8 özellik cevabından her gönderi için 0 ile 100 arasında bir
+  Viral Score ve bir karar tahmin eder. Gönderilerin neden yayıldığını veya
+  tutmadığını incelediğinde kullan. Analiz edilen gönderi başına $0.0003'ten
   başlar.
 
-## Kazımadan fazlasına mı ihtiyacın var?
+## Kazımadan fazlası mı lazım?
 
-Xquik ayrıca 47 dashboard aracı, 129 REST işlemi, imzalı webhook'lar ve bir
-MCP sunucusu sağlar.
+Xquik ayrıca 47 panel aracı, 129 REST işlemi, imzalı webhook'lar ve bir MCP
+sunucusu sunar.
 
-- [API dokümantasyonu](https://docs.xquik.com/introduction): REST API
-  kılavuzları
+- [API belgeleri](https://docs.xquik.com/introduction): REST API kılavuzları
 - [Followers API](https://docs.xquik.com/api-reference/x/followers): bir
-  hesabın mevcut takipçilerini getir
+  hesabın erişilebilen takipçilerini al
 - [Following API](https://docs.xquik.com/api-reference/x/following): bir
   kullanıcının kimleri takip ettiğini al
 - [List Members API](https://docs.xquik.com/api-reference/x/list-members):
-  herkese açık bir X listesinden üyeleri dışa aktar
+  herkese açık bir X Listesinin üyelerini dışa aktar
 - [MCP sunucusu](https://docs.xquik.com/mcp/overview): desteklenen JSON veya
   metin işlemlerini keşfet ve çalıştır
-- [Webhooks](https://docs.xquik.com/webhooks/overview): desteklenen Tweet ve
+- [Webhooks](https://docs.xquik.com/webhooks/overview): desteklenen gönderi ve
   profil olaylarını al
 
 ## SSS
 
-**X API anahtarına ihtiyacım var mı?** Hayır. X API anahtarı, giriş veya kimlik
-bilgisi gerekmez.
+### X API anahtarı gerekir mi?
 
-**Bir çalıştırmayı ne sınırlar?** İstediğin öğe sınırı ve Apify harcama
-sınırı çalıştırmayı durdurur. Apify hesap ve platform sınırları hâlâ
-geçerlidir.
+Hayır. X API anahtarı, giriş veya kimlik bilgisi gerekmez.
 
-**Ne kadar hızlı?** Çalışma süresi hedef boyutuna, filtrelere ve X'in
-erişilebilirliğine bağlıdır.
+### Bir çalıştırmayı ne sınırlar?
 
-**Neden çalıştırmam `maxItems`'ten daha az satır döndürüyor?** `minFollowers`,
-`verifiedOnly` ve `bioContains` gibi filtreler yazmadan önce uygulanır.
-Daha fazla sonuç döndürmek için filtreleri gevşet.
+Öğe sınırın ve Apify harcama sınırın çalıştırmayı durdurur. Apify hesap ve
+platform sınırları yine geçerlidir.
 
-**Tek bir hesaptan kaç takipçi kazıyabilirim?** X o hesap için ne kadar
-gösteriyorsa o kadar. Çalıştırma, üst sınırına, harcama limitine veya listenin
-sonuna kadar devam eder. `maxItemsPerTarget` yalnızca her hedefi sınırlar.
+### Ne kadar hızlı?
 
-**Actor geçici hataları yeniden dener mi?** Evet. X'teki geçici hatalardan kendi
-kendine toparlanır. Kalıcı hatalarda kısmi sonuçlar korunur.
+Xquik'in X Follower Scraper'ında hız, hedef büyüklüğüne, filtrelere ve X'in
+erişim durumuna bağlıdır. Actor'ın 2 [karşılaştırma testi](#karşılaştırma-testi)
+çalıştırması saniyede 38,4 ve 68,5 işe yarar profile ulaştı.
 
-**Apify çalıştırma süresi sınırına yaklaşınca ne olur?** Actor kendi daha kısa
-bir süre sınırı eklemez. Sınırından önce profilleri kaydeder, raporu yazar ve
-çıkar. Veri kümesine hiç ulaşmayan satırlar faturalandırılmaz.
+### Çalıştırmam neden `maxItems` değerinden az satır döndürüyor?
 
-**Kaldığım yerden devam edebilir miyim?** Henüz değil. Aynı hedefi yeniden
-çalıştırırsan baştan başlar.
+`minFollowers`, `verifiedOnly` ve `bioContains` gibi filtreler yazmadan önce
+uygulanır. Daha çok sonuç için onları gevşet. Xquik'in X Follower Scraper'ı
+hedefler arasındaki tekrarları da kaldırır.
 
-**Bunu çalıştırmak için Apify API'yi kullanabilir miyim?** Evet. Python,
-JavaScript ve cURL örnekleri için
+### Tek bir hesaptan kaç takipçi kazıyabilirim?
+
+X o hesap için kaç tane gösteriyorsa o kadar. Çalıştırma, üst sınırına,
+harcama sınırına veya listenin sonuna kadar devam eder. `maxItemsPerTarget`
+yalnızca her hedefi ayrı ayrı sınırlar.
+
+### Actor geçici hataları yeniden dener mi?
+
+Evet. Geçici X hatalarından kendiliğinden toparlanır. Kalıcı bir hatadan sonra
+çalıştırma kısmi sonuçlarını korur.
+
+### Apify çalıştırma süresi sınırına yaklaşınca ne olur?
+
+Xquik'in X Follower Scraper'ı kendi başına daha kısa bir süre sınırı eklemez.
+Sınırından önce profilleri kaydeder, raporu yazar ve çıkar. Veri kümesine
+ulaşmayan satırlar ücretsizdir.
+
+### Kaldığım yerden devam edebilir miyim?
+
+Henüz değil. Aynı hedefte yeni bir çalıştırma baştan başlar.
+
+### Bunu Apify API ile çalıştırabilir miyim?
+
+Evet. Python, JavaScript ve cURL örnekleri için
 [API sekmesine](https://apify.com/xquik/x-follower-scraper/api) bak.
 
-**Tekrarlayan kazımalar planlayabilir miyim?** Evet. Bu Actor'ı bir cron
-üzerinde çalıştırmak için Apify'ın yerleşik
-[zamanlamasını](https://docs.apify.com/platform/schedules) kullan. Takipçi
-değişikliklerini bulmak için kaydedilmiş veri kümelerini karşılaştır.
+### Düzenli kazıma planlayabilir miyim?
 
-**Sorunları nereye bildiririm?** Bu Actor'ın sayfasındaki Issues sekmesini
-kullan.
+Evet. Bu Actor'ı bir cron takvimiyle çalıştırmak için Apify'ın yerleşik
+[zamanlama](https://docs.apify.com/platform/schedules) özelliğini kullan.
+Takipçi değişikliklerini bulmak için kayıtlı veri kümelerini karşılaştır.
 
-**API dokümanları nerede?** [API dokümantasyonunu](https://docs.xquik.com/introduction)
-oku.
+### X verisini kazımak yasal mı?
+
+Xquik'in X Follower Scraper'ı herkese açık X profil alanlarını çeker.
+Sonuçlarda, kullanıcının yazdığı konumlar dahil kişisel veri olabilir. Amacının
+yasal olduğundan emin ol ve geçerli gizlilik kurallarına uy. Emin değilsen
+yetkin bir hukukçuya danış.
+
+### Nereden yardım alırım?
+
+Actor sayfasındaki Issues sekmesinde bir issue aç. Çalıştırma ID'siyle
+support@xquik.com adresine de yazabilirsin.
+
+### API belgeleri nerede?
+
+[API belgelerini](https://docs.xquik.com/introduction) oku.

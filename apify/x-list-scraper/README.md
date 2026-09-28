@@ -1,38 +1,56 @@
-<p align="center">
-  <strong>English</strong> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+**English** ·
+[Español](README.es.md)
+·
+[Türkçe](README.tr.md)
+·
+[简体中文](README.zh-CN.md)
+·
+[日本語](README.ja.md)
+·
+[한국어](README.ko.md)
+·
+[Deutsch](README.de.md)
+·
+[Français](README.fr.md)
+·
+[Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer connects Xquik MCP to coding agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Watch how Framer uses Xquik scrapers with Claude Code, Codex, Cursor, and more, from 6:07.</a>
-</td></tr></table>
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
+
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
+Claude Code, Codex, Cursor, and more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data. X List Scraper collects List posts, members & followers.
-Most other Apify Actors charge before filtering or deduplicating. Xquik charges
-only for delivered, unique, filter-matching results.
+most complete X data. Xquik's X List Scraper collects List posts, members &
+followers. Most other Apify Actors charge before filtering or deduplicating.
+Xquik charges only for delivered, unique, filter-matching results.
 
-Scrape X List posts, members, and followers from List URLs or numeric IDs.
-Process multiple Lists and resources together. No X API key or login required.
+Scrape posts, members & followers from X List URLs or numeric List IDs. You pay
+**$0.00015 per delivered row**, & Apify bills platform usage separately. You
+need no X API key or login.
 
-## List data and filters
+> Xquik is an independent third-party service. Not affiliated with X Corp.
+> "Twitter" and "X" are trademarks of X Corp.
 
-- List posts with text, author, metrics, media, and timestamps.
-- List members and List followers.
-- Optional reply inclusion for post timelines.
-- Date, Unix-time, language, media, engagement, verification, and profile
-  filters.
-- Multiple Lists and resource types per run.
-- Global and per-resource caps.
-- Pagination resumes after migration. The Actor removes duplicate rows.
+## List data & filters
+
+- List posts with text, author, metrics, media & timestamps.
+- List members & List followers.
+- Optional replies in List posts.
+- Filters for dates, Unix time, language, media, engagement, verification &
+  profiles.
+- Many Lists & resource types in 1 run.
+- A global cap & a cap for each List resource.
+- Runs resume after an Apify migration.
+- Duplicate removal before billing.
+
+## How to scrape X lists
+
+1. Open Xquik's X List Scraper in Apify Console.
+2. Paste List URLs into `startUrls` or numeric List IDs into `listIds`.
+3. Pick `resources` & add filters such as `sinceDate` or `minLikes`.
+4. Set `maxItems` to cap delivered rows, then click Start.
+5. Download the dataset as JSON, CSV or Excel, or use the Apify API.
 
 ## Input
 
@@ -50,42 +68,48 @@ Small runs that go well skip `run-report` & save Apify usage. Turn on
 
 ## Output
 
-Rows use `listTweet`, `listMember`, or `listFollower` as `resultType` and retain
-the input List ID in `sourceTarget`. The row body uses the stable Xquik Tweet or
-profile response shape.
+Each row sets `resultType` to `listTweet`, `listMember` or `listFollower`.
+`sourceTarget` keeps the input List ID. The row body uses the stable Xquik Tweet
+or profile response shape.
 
-## Pricing
+Examples use sample values. Results reflect live data. A List member row looks
+like this:
 
-Every Apify plan costs **$0.00015 per delivered row**. Apify bills your platform
+```json
+{
+  "resultType": "listMember",
+  "sourceTarget": "1748648376080666720",
+  "username": "sample_user",
+  "name": "Sample User",
+  "followers": 1200,
+  "verified": false
+}
+```
+
+## How much does it cost to scrape X lists?
+
+Every Apify plan costs $0.00015 per delivered row. Apify bills your platform
 usage separately.
 
 - One charge per delivered data row. Diagnostics are free in `diagnostics`.
-- No start, List, or resource fee.
+- No start, List or resource fee.
 - Deduplication runs before billing.
 
-Use `latest` unless you need an older build. Choose from 50 public tasks or 129
-Xquik REST operations. Examples use sample values. Results reflect live data.
+## Limits & recovery
 
-## Pagination and recovery
-
-One run can read many Lists & resources. Delivered rows & progress survive an
-Apify restart. The Actor adds no time limit of its own.
-
-## Incomplete extraction
+Xquik's X List Scraper reads many Lists & resources in 1 run. Delivered rows &
+progress survive an Apify restart. The Actor adds no time limit of its own.
 
 Interrupted extraction writes a free `partial` diagnostic. Available results
-remain intact. Read `availableResults`, `failedTargets`, `retryable`, and
-`nextAction` before retrying. A successful Actor exit confirms delivery, not
+stay intact. Read `availableResults`, `failedTargets`, `retryable` &
+`nextAction` before you retry. A successful Actor exit confirms delivery, not
 complete extraction.
 
-The status names every cause of an early stop. `stopCauses` lists each cause
+The run status names every cause of an early stop. `stopCauses` lists each cause
 with its own `message`, `retryable` & `nextAction`. The causes are
 `target_not_found`, `target_failed`, `pagination_safety_limit` &
 `deadline_reached`. A missing target joins the list only when another cause
 stopped the run. The run is `retryable` when any cause is.
-
-Xquik is an independent third-party service. Not affiliated with X Corp.
-"Twitter" and "X" are trademarks of X Corp.
 
 ## Related Xquik Actors
 
@@ -151,3 +175,44 @@ diagnostics. Pick the one that matches the data you need.
   Estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
   trait answers. Use it when you study why tweets spread or flop. From $0.0003
   per analyzed tweet.
+
+## FAQ
+
+Answers to common questions, then where to get help.
+
+### Do I need an X API key or login?
+
+No. Xquik's X List Scraper needs no X API key, login or credentials.
+
+### Is it legal to scrape X lists?
+
+Xquik's X List Scraper requests public X fields. Results can contain personal
+data. Confirm a lawful purpose & follow applicable privacy rules. Ask qualified
+counsel when uncertain.
+
+### Why did my run return no results?
+
+Open the free `diagnostics` output first. An empty run's status says to check
+your targets & filters. `stopCauses` gives each cause a `nextAction` to follow.
+The run lists each input it cannot read & says how to fix it.
+
+### Can I use the API, schedules & integrations?
+
+Yes. Choose from 50 public tasks or 129 Xquik REST operations. The
+[API tab](https://apify.com/xquik/x-list-scraper/api) has Python, JavaScript &
+cURL examples. Apify [schedules](https://docs.apify.com/platform/schedules) run
+Xquik's X List Scraper on a cron. Agents use
+[Apify MCP](https://docs.apify.com/platform/integrations/mcp). Use `latest`
+unless you need an older build.
+
+### Where do I get help?
+
+Open an issue on the Actor page or contact <support@xquik.com> with the run ID.
+Free diagnostics in the key-value store explain empty, partial or interrupted
+runs.
+
+### Can I get a custom solution?
+
+Yes. Visit [xquik.com](https://xquik.com) or read the
+[API docs](https://docs.xquik.com/introduction). They cover the dashboard, API,
+MCP server & webhooks.

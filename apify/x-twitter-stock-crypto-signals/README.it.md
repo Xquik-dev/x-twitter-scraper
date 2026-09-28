@@ -12,43 +12,47 @@
 
 <table align="center"><tr><td align="center">
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer collega Xquik MCP agli agenti di coding"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Guarda come Framer usa gli scraper Xquik con Claude Code, Codex, Cursor e altri, dal minuto 6:07.</a>
+<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Guarda come Framer usa gli scraper Xquik con Claude Code, Codex, Cursor e altro, da 6:07.</a>
 </td></tr></table>
 
-Xquik è il servizio di scraping X (Twitter) più veloce ed economico al mondo,
-con i dati X più completi. X (Twitter) Stock & Crypto AI Trading Signals
-trasforma i tweet in posizioni rialziste, ribassiste, neutre o miste per ogni
-titolo o moneta. La maggior parte degli altri Actor Apify addebita costi prima
-di filtrare o deduplicare. Xquik addebita solo i risultati consegnati, unici e
-conformi ai filtri. I costi dell'IA sono inclusi nel prezzo per tweet. Non ti
-servono account IA, token o chiavi.
+Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo, con
+i dati X più completi. X (Twitter) Stock & Crypto AI Trading Signals di Xquik
+trasforma i post (tweet) in posizioni. Ogni posizione è rialzista, ribassista,
+neutra o mista, per ticker & moneta. La maggior parte degli altri Actor Apify fa
+pagare prima di filtrare o deduplicare. Xquik fa pagare solo i risultati
+consegnati, unici e conformi ai filtri. I costi AI sono inclusi nel prezzo per
+post. Non ti servono account AI, token o chiavi.
 
-Leggi il sentiment dietro i post su azioni, criptovalute e trading su X
-(Twitter) e mantieni i dati originali del tweet. **X (Twitter) Stock & Crypto AI
-Trading Signals** raccoglie post sui tuoi titoli o asset. Poi aggiunge a ogni
-post una posizione, un tipo di contenuto, un livello di convinzione & una
-pertinenza dell'asset generati dall'IA. Separa le dichiarazioni ferme dalle
-osservazioni caute, l'analisi dalla promozione e i post sul tuo asset dagli usi
-non correlati del suo nome.
+Leggi la posizione dietro i post su azioni, crypto & trading su X (Twitter).
+**X (Twitter) Stock & Crypto AI Trading Signals** di Xquik raccoglie i post sui
+tuoi asset. A ogni post aggiunge con AI una posizione, un tipo di contenuto, un
+livello di convinzione & la rilevanza per l'asset. Distingui le previsioni
+decise dalle osservazioni prudenti & l'analisi dalla promozione. Individua i
+post che usano il nome del tuo asset per altro.
 
-- **Posizione per post.** Ogni post è di posizione rialzista, ribassista,
-  neutra, mista o non chiara.
-- **Tipo di contenuto** distingue analisi, notizie, idee di trading, promozione,
-  umorismo e domande.
-- **Convinzione** separa le dichiarazioni e le posizioni ferme dalle
-  osservazioni caute.
-- **Pertinenza** filtra gli usi non correlati di un titolo o nome societario.
-- **Record sorgente completi** per ogni campo esposto dal tweet.
+- **Posizione per post.** Ogni post è rialzista, ribassista, neutro, misto o
+  poco chiaro.
+- **Tipo di contenuto.** Distingue analisi, notizie, idee di trading,
+  promozione, umorismo & domande.
+- **Convinzione.** Separa previsioni & posizioni decise dalle osservazioni
+  prudenti.
+- **Rilevanza.** Ti aiuta a scartare gli usi non pertinenti di un ticker o del
+  nome di un'azienda.
+- **Record di origine completi.** Ogni riga conserva tutti i campi che il post
+  rende disponibili.
+
+> Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
+> "Twitter" e "X" sono marchi di X Corp.
 
 ## Come analizzare il sentiment di mercato su X
 
 1. Aggiungi termini di ricerca come `$NVDA lang:en -filter:retweets`, query con
-   cashtag, handle di profilo o ID di tweet.
-2. Imposta `maxItems` e i filtri di estrazione come limiti di data o Mi piace
-   minimi.
-3. Inserisci nomi di asset, ticker e alias in `analysis.targets` e descrivi
+   cashtag, nomi utente dei profili o ID dei post.
+2. Imposta `maxItems` & filtri di estrazione come limiti di data o un minimo di
+   Mi piace.
+3. Inserisci nomi degli asset, ticker & alias in `analysis.targets` & descrivi
    l'asset in `analysis.context`.
-4. Esegui l'Actor e apri il dataset.
+4. Avvia l'esecuzione & apri il dataset.
 
 ```json
 {
@@ -61,26 +65,26 @@ non correlati del suo nome.
 }
 ```
 
-### A cosa risponde l'Actor
+### Cosa risponde l'Actor
 
-| Domanda    | Risposta                                                       |
-| ---------- | --------------------------------------------------------------- |
-| Posizione  | Rialzista, ribassista, neutra, mista o non chiara                |
-| Contenuto  | Analisi, notizia, trade, promozione, umorismo, domanda o non chiaro |
-| Convinzione | 0 osservazione cauta, 1 opinione dichiarata, 2 dichiarazione o posizione ferma |
-| Pertinenza | Probabilità che il post tratti i tuoi target come asset          |
+| Domanda     | Risposta                                                                |
+| ----------- | ----------------------------------------------------------------------- |
+| Posizione   | Rialzista, ribassista, neutra, mista o poco chiara                      |
+| Contenuto   | Analisi, notizia, trade, promozione, umorismo, domanda o poco chiaro    |
+| Convinzione | 0 osservazione prudente, 1 opinione espressa, 2 previsione o posizione decisa |
+| Rilevanza   | Probabilità che il post tratti i tuoi target come asset                 |
 
-La convinzione è 0 quando la posizione è neutra o non chiara. Un post senza
-direzione non può affermarne una con fermezza. Questa risposta mette tutta la
-probabilità sul livello 0. Prende la `confidence` della posizione.
+La convinzione è 0 quando la posizione è neutra o poco chiara. Un post senza
+direzione non può esprimerne una con decisione. Quella risposta mette tutta la
+probabilità sul livello 0 & prende la confidenza della posizione.
 
-Le risposte descrivono ciò che gli autori esprimono. Non sono consulenza
-finanziaria e non verificano affermazioni, prezzi o comunicazioni ufficiali.
+Le risposte descrivono ciò che esprimono gli autori. Non sono consulenza
+finanziaria & non verificano affermazioni, prezzi o documenti societari.
 
 ## Analizza il tuo testo
 
-Incolla il tuo testo in `texts`: bozze, risposte, recensioni o note. L'Actor
-lo analizza & non recupera nulla da X.
+Incolla in `texts` le tue bozze, risposte, recensioni o note. X (Twitter) Stock
+& Crypto AI Trading Signals di Xquik le analizza. Non recupera nulla da X.
 
 ```json
 {
@@ -91,30 +95,30 @@ lo analizza & non recupera nulla da X.
 }
 ```
 
-- Ogni testo diventa 1 riga con le stesse risposte `analysis` di un tweet.
-- `tweet.id` è `text:1`, `text:2` & così via, & `tweet.type` è `text`.
-- Ogni testo analizzato costa gli stessi $0.0003 di un tweet analizzato.
-- Con `texts` impostato, l'esecuzione analizza solo quei testi. Esegui i
-  target X separatamente.
+- Ogni testo diventa 1 riga con le stesse risposte `analysis` di un post.
+- `tweet.id` vale `text:1`, `text:2` e così via. `tweet.type` vale `text`.
+- Ogni testo analizzato costa gli stessi $0.0003 di un post analizzato.
+- Con `texts` impostato, l'esecuzione analizza solo quei testi. Avvia a parte i
+  target di X.
 
-## Prezzi
+## Quanto costa analizzare il sentiment di mercato su X?
 
-I costi dell'IA sono inclusi nel prezzo per tweet. Non ti servono account IA,
-token o chiavi.
+X (Twitter) Stock & Crypto AI Trading Signals di Xquik costa da $0.0003 per post
+analizzato. Non c'è costo di avvio. Il prezzo include la raccolta & i costi AI.
+Non ti servono account AI, token o chiavi. Il prezzo copre fino a 8 domande &
+64.000 byte di contesto per post. Ogni definizione di domanda può usare fino a
+8.000 byte.
 
-Da $0.0003 per tweet analizzato con successo, senza costo iniziale. Il prezzo
-include la raccolta. La soglia per l'analisi è di 8 domande, 8.000 byte per
-definizione di domanda & 64.000 byte di contesto per tweet. I filtri di
-estrazione e la deduplicazione vengono eseguiti prima dell'analisi, quindi le
-righe filtrate o duplicate non vengono mai analizzate né addebitate. Le analisi
-fallite o saltate e le righe diagnostiche non comportano alcun addebito sul
-risultato. Apify fattura separatamente l'utilizzo della piattaforma. La scheda
-Pricing lo mostra.
+I filtri di estrazione & la deduplicazione agiscono prima dell'analisi. Non
+paghi mai le righe filtrate o duplicate. Le analisi fallite, le analisi saltate
+& le righe di diagnostica non hanno addebiti sul risultato. Apify fattura a
+parte l'uso della piattaforma per calcolo, storage & trasferimento, alle tariffe
+del tuo piano. La scheda Pricing lo mostra.
 
-## Esempi di input e output
+## Esempi di input & output
 
-L'input sopra è pronto all'uso. Le righe di output sono simili a questa
-(abbreviata):
+L'input qui sopra è pronto da copiare. Una riga di output abbreviata ha questo
+aspetto:
 
 ```json
 {
@@ -146,72 +150,86 @@ L'input sopra è pronto all'uso. Le righe di output sono simili a questa
 }
 ```
 
-Ogni risultato contiene `tweet` e `analysis`. Le risposte includono tipi,
-versioni delle domande e le probabilità disponibili. Un'analisi fallita o
-saltata mantiene il tweet raccolto con un elenco di risposte vuoto e un
-`reason`. Le diagnostiche gratuite nel key-value store spiegano input non
-validi, risultati mancanti e raccolte interrotte, e il report dell'esecuzione
-separa le righe raccolte, le analisi addebitate e gli addebiti in sospeso.
+Ogni risultato contiene `tweet` & `analysis`. Le risposte includono tipi,
+versioni delle domande & probabilità disponibili. Una riga con un'analisi
+fallita o saltata conserva il post raccolto & un `reason`. Il suo elenco di
+risposte è vuoto.
 
-## Riepilogo dell'esecuzione e risposte in formato piatto
+La diagnostica gratuita nel key-value store spiega input non validi, risultati
+mancanti & raccolte interrotte. Il report dell'esecuzione separa righe raccolte,
+analisi addebitate & addebiti in sospeso.
 
-Un'esecuzione scrive un record `analysis-summary` nel proprio key-value store in
-4 casi:
+## Riepilogo dell'esecuzione & risposte piatte
+
+Un'esecuzione scrive un record `analysis-summary` nel suo key-value store in 4
+casi:
 
 - Incontra un problema o è grande.
 - Imposta `monitor` senza `baselineDatasetId`, come prima esecuzione di una
   serie.
-- Il suo confronto trova un tweet cambiato, nuovo o non confrontabile.
+- Il suo confronto trova un post cambiato, nuovo o non confrontabile.
 - Ha `alwaysSaveRunRecords` attivo.
 
-Le altre esecuzioni saltano il record. Il loro messaggio di stato indica la
-risposta principale, come `Top stance: bullish in 3 of 5 results.` Un confronto
-senza cambiamenti riporta `No change since the earlier run.` Un'esecuzione con
-un problema, o un'esecuzione grande, scrive anche `run-report`. Lo fa anche
-un'esecuzione con `alwaysSaveRunRecords` attivo. `run-report` ripete il
-riepilogo sotto `results.analysisSummary`.
+Le altre esecuzioni saltano il record. Il loro stato nomina la risposta
+principale, come `Top stance: bullish in 3 of 5 results.` Un confronto senza
+cambiamenti riporta `No change since the earlier run.` Anche le esecuzioni
+grandi o con un problema scrivono `run-report`, come quelle con
+`alwaysSaveRunRecords` attivo. `run-report` ripete il riepilogo sotto
+`results.analysisSummary`.
 
-Il riepilogo conta le righe analizzate, fallite e saltate, somma l'engagement e
-riassume ogni domanda. `cashtags` conta la posizione per cashtag come `$NVDA`,
-quindi il rapporto rialzista per asset deriva da `choices.stance`. Il blocco
-`stance` aggiunge la ripartizione ponderata per engagement e i post rialzisti e
-ribassisti con più engagement. `conviction` riporta la media & la media
-ponderata per engagement. Il riepilogo arrotonda i numeri a 4 decimali.
-Un'esecuzione vuota riporta conteggi zero & medie `null`. Ogni voce di
-`cashtags` aggiunge `signal` con un conteggio rialzista, un conteggio ribassista
-& un punteggio da -1 a 1. Il punteggio è (rialzisti - ribassisti) / righe.
-`monitor.changedRows` elenca i tweet la cui posizione è cambiata rispetto alla
-baseline. Ogni riga elenca `sourceDomains`, gli host a cui rimanda. Con
-`monitor.baselineDatasetId` impostato, il blocco `monitor` del riepilogo conta
-gli stati di confronto & elenca fino a 50 righe modificate.
+Il riepilogo conta le righe analizzate, fallite & saltate. Somma l'engagement &
+riassume ogni domanda.
 
-Ogni riga di risultato include anche `answers`, una mappa piatta dall'ID della
-domanda alla categoria, al punteggio o alla probabilità scelti. La vista
-dataset `Flat answers` e le esportazioni CSV o Excel mostrano una colonna per
-domanda accanto al tweet, così i fogli di calcolo non richiedono il parsing
-del JSON. Le righe fallite o saltate contengono una mappa vuota.
+- `cashtags` conta la posizione per ogni cashtag, come `$NVDA`. Il rapporto
+  rialzista di ogni asset deriva da `choices.stance`.
+- Ogni voce di `cashtags` aggiunge `signal`, con i conteggi rialzisti &
+  ribassisti. Il suo punteggio va da -1 a 1. È il numero di post rialzisti meno
+  quelli ribassisti, diviso per le righe.
+- Il blocco `stance` aggiunge la suddivisione pesata per engagement & i post
+  rialzisti & ribassisti con più engagement.
+- `conviction` riporta la media & la media pesata per engagement.
+- `monitor.changedRows` elenca i post con posizione cambiata rispetto alla
+  baseline.
+- Ogni riga elenca `sourceDomains`, gli hostname a cui rimanda.
+- Con `monitor.baselineDatasetId` impostato, il blocco `monitor` del riepilogo
+  conta gli stati del confronto. Elenca fino a 50 righe cambiate.
 
-## Confronto con un'esecuzione precedente
+Il riepilogo arrotonda i numeri a 4 decimali. Un'esecuzione vuota riporta
+conteggi a 0 & medie `null`.
+
+Ogni riga di risultato riporta anche `answers`, una mappa piatta con l'ID della
+domanda come chiave. Ogni valore è la categoria, il punteggio o la probabilità
+scelti. La vista `Flat answers` del dataset & gli export CSV o Excel mostrano 1
+colonna per domanda. Le colonne stanno accanto al post, quindi i fogli di
+calcolo non devono leggere JSON. Le righe fallite & saltate riportano una mappa
+vuota.
+
+## Confronta con un'esecuzione precedente
 
 Passa `monitor.baselineDatasetId`, l'ID del dataset di un'esecuzione precedente
 completata con le stesse impostazioni di analisi. Il confronto legge le righe di
-quell'esecuzione, quindi funziona anche se quell'esecuzione ha saltato il
-riepilogo. Ogni riga ottiene quindi un oggetto `monitor`. Il suo stato è
-`first_run` senza baseline, `new_to_baseline` per i tweet che l'esecuzione
-precedente non aveva, & `unchanged` o `changed` per i tweet che aveva già.
+quell'esecuzione. Funziona anche se quell'esecuzione ha saltato il riepilogo.
+Ogni riga riceve poi un oggetto `monitor`. Il suo stato può essere:
+
+- `first_run` senza baseline.
+- `new_to_baseline` per i post che l'esecuzione precedente non aveva.
+- `unchanged` o `changed` per i post che aveva.
+
 `changes` elenca ogni posizione, tipo di contenuto o livello di convinzione
 passato da `previous` a `current`. Le decisioni si confrontano per categoria,
-livello di punteggio arrotondato, o sì/no a 0,5. Una decisione conta come
-cambiata solo quando si sposta in modo netto. Le oscillazioni minime tra
-esecuzioni restano invariate. Le baseline sopra `maxBaselineRows` (predefinito
-100.000) o con impostazioni diverse interrompono l'esecuzione prima della
-raccolta con una riga diagnostica.
+livello di punteggio arrotondato o sì/no a 0,5. Una decisione conta come
+cambiata solo quando si sposta in modo netto. I quasi pareggi tra esecuzioni
+restano `unchanged`.
+
+Una baseline sopra `maxBaselineRows`, o con impostazioni diverse, ferma
+l'esecuzione prima della raccolta. L'esecuzione scrive poi una riga di
+diagnostica. `maxBaselineRows` vale 100.000 di default.
 
 ## Esempi di task
 
-Scegli tra 50 task pubblici. Ognuno parte da una ricerca reale in inglese con
-un `maxItems` limitato, target e contesto già pronti, e la vista dataset
-generale. Modifica la ricerca o i target prima di eseguire.
+Scegli tra 50 task pubblici. Ognuno parte da una ricerca reale in inglese & da
+un `maxItems` limitato. Include target & contesto già pronti, più la vista
+overview del dataset. Modifica la ricerca o i target prima di avviarlo.
 
 - [Nvidia (NVDA) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/nvda-market-sentiment-on-x)
 - [Tesla (TSLA) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/tsla-market-sentiment-on-x)
@@ -226,123 +244,142 @@ generale. Modifica la ricerca o i target prima di eseguire.
 - [Strategy (MSTR) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/mstr-market-sentiment-on-x)
 - [Robinhood (HOOD) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/hood-market-sentiment-on-x)
 
-I task rimanenti coprono altri brand, argomenti e mercati nella pagina
-dell'Actor.
+Gli altri task, nella pagina dell'Actor, coprono altri brand, argomenti &
+mercati.
 
 ## Actor Xquik correlati
 
-Ogni Actor Xquik condivide lo stesso motore di estrazione, la fatturazione
-basata sui filtri e le diagnostiche. Scegli quello adatto ai dati di cui hai
-bisogno.
+Ogni Actor Xquik usa lo stesso motore di estrazione, fattura dopo i filtri &
+offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): Raccoglie
-  tweet da ricerche, timeline di profilo, List e ID di tweet con oltre 50
-  filtri ed esportazioni piatte. Usalo quando ti servono dati sui tweet senza
-  analisi. Da $0.00015 per riga.
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): estrae post da
+  ricerche, timeline dei profili, liste & ID dei post con oltre 50 filtri &
+  export piatti. Usalo quando ti servono dati sui post senza analisi. Da
+  $0.00015 per riga.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): estrae
-  profili con i relativi post, risposte, media & follower da handle, ID o URL.
-  Usalo quando parti dagli account invece che dalle ricerche. Da $0.00015 per
-  riga.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Raccoglie
-  risposte, commenti e intere conversazioni sotto i post con oltre 25 filtri.
-  Usalo quando ti serve la discussione sotto i tweet. Da $0.00015 per riga.
+  profili con i relativi post, risposte, media & follower da nomi utente, ID o
+  URL. Usalo quando parti dagli account invece che dalle ricerche. Da $0.00015
+  per riga.
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): estrae risposte,
+  commenti & intere conversazioni sotto i post con oltre 25 filtri. Usalo
+  quando ti serve la discussione sotto i post. Da $0.00015 per riga.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): estrae
-  risposte, citazioni, retweeter & thread per URL o ID di post in blocco.
-  Usalo quando misuri chi ha interagito con i post. Da $0.00015 per riga.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper):
-  Raccoglie follower, following, membri di List, iscritti e membri di
-  Community come righe di profilo. Usalo quando ti servono liste di pubblico o
+  risposte, citazioni, utenti che hanno fatto repost & thread da URL o ID di
+  post in blocco. Usalo quando misuri chi ha interagito con i post. Da $0.00015
+  per riga.
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): estrae
+  follower, following, membri & follower delle liste e membri delle community
+  come righe di profilo. Usalo quando ti servono elenchi di pubblico o di
   membri. Da $0.00015 per profilo.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Cerca utenti per handle, bio e posizione con filtri per follower, verifica,
-  età e posizione. Usalo quando costruisci liste di account dalla ricerca. Da
-  $0.00015 per profilo.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): Raccoglie post,
-  membri e follower di List da URL o ID di List. Usalo quando una List
+  cerca utenti per nome utente, bio & posizione con filtri su follower,
+  verifica, età & posizione. Usalo quando costruisci elenchi di account dalla
+  ricerca. Da $0.00015 per profilo.
+- [X List Scraper](https://apify.com/xquik/x-list-scraper): estrae post,
+  membri & follower delle liste da URL o ID delle liste. Usalo quando una lista
   curata definisce le tue fonti. Da $0.00015 per riga.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper):
-  Raccoglie informazioni, post, ricerche, membri e moderatori di Community.
-  Usalo quando le tue fonti sono X Communities. Da $0.00015 per riga.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Raccoglie
-  tendenze in tempo reale per posizione con rank, volume, query e WOEID.
-  Usalo quando monitori cosa è di tendenza e dove. Da $0.00015 per tendenza.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): Raccoglie
-  gli X Article in formato lungo come Markdown e testo con copertine, autori,
-  date e metriche. Usalo quando ti servono i corpi degli articoli, non i
-  tweet. Da $0.00015 per articolo.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader): Estrae o
-  archivia foto, video e GIF da post o profili con opzioni MP4 e metadati.
-  Usalo quando ti servono i file media stessi. Da $0.00015 per riga media.
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper): estrae
+  informazioni, post, ricerche, membri & moderatori delle community. Usalo
+  quando le tue fonti sono community di X. Da $0.00015 per riga.
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): estrae le
+  tendenze in tempo reale per località con posizione in classifica, volume,
+  query & WOEID. Usalo quando segui cosa è di tendenza e dove. Da $0.00015 per
+  tendenza.
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper): raccoglie
+  gli articoli lunghi di X come Markdown & testo, con copertine, autori, date &
+  metriche. Usalo quando ti serve il corpo degli articoli, non i post. Da
+  $0.00015 per articolo.
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader): estrae o
+  archivia foto, video & GIF da post o profili con opzioni MP4 & metadati.
+  Usalo quando ti servono i file multimediali veri e propri. Da $0.00015 per
+  riga di media.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
-  Monitora le menzioni del brand con pertinenza, sentiment e risposte sulla
-  customer experience generate dall'IA e confronta le esecuzioni. Usalo
-  quando segui un brand nel tempo. Da $0.0003 per tweet analizzato.
+  monitora le menzioni del brand con rilevanza, sentiment & risposte sulla
+  customer experience generate con AI, poi confronta le esecuzioni. Usalo
+  quando osservi un brand nel tempo. Da $0.0003 per post analizzato.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
-  Etichetta atteggiamento, intensità e probabilità di sarcasmo per ogni tweet
-  con l'IA. Usalo quando ti serve un sentiment generale su qualsiasi
-  argomento. Da $0.0003 per tweet analizzato.
+  etichetta atteggiamento, intensità & probabilità di sarcasmo di ogni post con
+  AI. Usalo quando ti serve il sentiment generale su qualsiasi argomento. Da
+  $0.0003 per post analizzato.
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
-  Etichetta i post di notizie per formato, attribuzione della fonte e
-  pertinenza dell'argomento con l'IA. Usalo quando separi il giornalismo dal
-  commento. Da $0.0003 per tweet analizzato.
+  etichetta con AI i post di notizie per formato, attribuzione della fonte &
+  rilevanza dell'argomento. Usalo quando separi le notizie dai commenti. Da
+  $0.0003 per post analizzato.
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  Risponde alle tue domande personalizzate su categoria, punteggio e sì/no
-  per ogni tweet con l'IA. Usalo quando le analisi predefinite non si
-  adattano alle tue etichette. Da $0.0003 per tweet analizzato.
+  risponde con AI alle tue domande di categoria, punteggio & sì/no su ogni
+  post. Usalo quando le analisi preimpostate non si adattano alle tue
+  etichette. Da $0.0003 per post analizzato.
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
-  stima un Viral Score da 0 a 100 & un verdetto per ogni tweet da 8 risposte
-  dell'IA sui tratti. Usalo quando studi perché i tweet si diffondono o
-  falliscono. Da $0.0003 per tweet analizzato.
+  stima un Viral Score da 0 a 100 & un verdetto per ogni post da 8 risposte AI
+  sui suoi tratti. Usalo quando studi perché i post si diffondono o falliscono.
+  Da $0.0003 per post analizzato.
 
-## FAQ e supporto
+## FAQ & supporto
 
-### Posso monitorare più titoli in un'unica esecuzione?
+### Serve un account AI, una chiave API X o il login?
 
-Sì. Elenca ogni asset in `analysis.targets` con i suoi ticker e alias, e
-combina i termini di ricerca. Le risposte sulla pertinenza ti dicono quali
-post trattano i tuoi target come asset.
+No. X (Twitter) Stock & Crypto AI Trading Signals di Xquik include i costi AI
+nel prezzo. Non ti servono account AI, token o chiavi. Non ti servono nemmeno
+chiave API X, login o credenziali.
 
-### Perché una riga è tornata con `analysis.status` su `failed` o `skipped`?
+### Posso seguire più ticker in 1 esecuzione?
 
-L'Actor ha raccolto & consegnato il tweet, ma l'analisi IA non si è completata.
-`analysis.reason` indica la causa. `context_limit` significa che il tuo contesto
-& i tuoi target non lasciano spazio al tweet. `service_unavailable` significa
-che il servizio di analisi era momentaneamente non disponibile. Queste righe non
-comportano alcun addebito sul risultato. Accorcia `analysis.context` o riesegui
-gli ID interessati.
+Sì. Elenca in `analysis.targets` ogni asset con i suoi ticker & alias. Combina i
+loro termini di ricerca. Le risposte sulla rilevanza ti dicono quali post
+trattano i tuoi target come asset.
 
-L'Actor analizza comunque un tweet più lungo di `maxContextBytes`. Taglia prima
-i post citati & quelli a cui risponde, poi il tweet.
-`analysis.contextAvailability.postText` diventa quindi `truncated`. Aumenta
+### Perché una riga ha `analysis.status` `failed` o `skipped`?
+
+L'Actor ha raccolto & consegnato il post, ma l'analisi AI non si è completata.
+`analysis.reason` indica la causa. `context_limit` significa che contesto &
+target non lasciano spazio al post. `service_unavailable` significa che il
+servizio di analisi era momentaneamente non disponibile. Queste righe non hanno
+addebiti sul risultato. Accorcia `analysis.context` o riavvia gli ID
+interessati.
+
+L'Actor analizza comunque un post più lungo di `maxContextBytes`. Taglia prima
+i post citati & quelli a cui risponde, poi il post stesso.
+`analysis.contextAvailability.postText` diventa quindi `truncated`. Alza
 `maxContextBytes` fino a 64.000 per conservare più testo.
 
 ### L'analisi verifica i fatti?
 
-No. Le risposte descrivono ciò che il post esprime & come il post lo formula. Le
-probabilità esprimono la fiducia del modello, non la verità. Rivedi le
-classificazioni importanti confrontandole con il tweet originale, che ogni riga
-conserva.
+No. Le risposte descrivono cosa esprime il post & come lo presenta. Le
+probabilità esprimono la fiducia dell'AI, non la verità. Controlla le
+classificazioni importanti sul post originale, che ogni riga conserva.
 
 ### Quali lingue funzionano?
 
 L'estrazione supporta ogni lingua servita da X. Validiamo l'analisi prima sugli
-scenari clienti in inglese. Le altre lingue supportate restituiscono risposte
-con la stessa struttura. Le categorie `unclear` & le probabilità mostrano
-l'incertezza in ogni lingua.
+scenari dei clienti in inglese. Le altre lingue supportate restituiscono
+risposte con la stessa struttura. Le categorie `unclear` & le probabilità
+mostrano l'incertezza in ogni lingua.
 
-### Come limito i costi?
+### Come limito il costo?
 
-Filtri, deduplicazione e `maxItems` vengono eseguiti prima dell'analisi, quindi
-l'Actor analizza & addebita solo i tweet unici e conformi ai filtri. Usa
-operatori di ricerca precisi, limiti di data e soglie minime di engagement, e
-inizia con un `maxItems` piccolo per verificare la qualità delle risposte prima
-di un'esecuzione ampia.
+Filtri, deduplicazione & `maxItems` agiscono prima dell'analisi. Paghi solo i
+post unici & conformi ai filtri. Usa operatori di ricerca precisi, limiti di
+data & soglie di engagement. Parti con un `maxItems` piccolo per verificare la
+qualità delle risposte prima di un'esecuzione grande.
 
-### Dove ricevo assistenza?
+### È legale analizzare i dati di X?
 
-Apri un problema nella pagina dell'Actor o contatta support@xquik.com con
-l'ID dell'esecuzione. Le diagnostiche gratuite nel key-value store spiegano
-le esecuzioni vuote, parziali o interrotte.
+L'Actor raccoglie campi pubblici di X. I risultati possono contenere dati
+personali. Verifica di avere uno scopo lecito & rispetta le norme sulla privacy
+applicabili. Nel dubbio, chiedi a un legale qualificato.
 
-Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
-"Twitter" e "X" sono marchi di X Corp.
+### Posso usare l'API, le pianificazioni & le integrazioni?
+
+Sì. Consulta la
+[scheda API](https://apify.com/xquik/x-twitter-stock-crypto-signals/api) per
+esempi in Python, JavaScript & cURL. Usa le
+[pianificazioni](https://docs.apify.com/platform/schedules) di Apify per le
+esecuzioni ricorrenti. Passa l'ID del dataset precedente come
+`monitor.baselineDatasetId` per vedere cosa è cambiato. Le integrazioni di Apify
+collegano le esecuzioni anche a webhook, Make, Zapier, n8n & Google Sheets.
+
+### Dove trovo assistenza?
+
+Apri una issue nella pagina dell'Actor o scrivi a support@xquik.com con l'ID
+dell'esecuzione. La diagnostica gratuita nel key-value store spiega le
+esecuzioni vuote, parziali o interrotte.

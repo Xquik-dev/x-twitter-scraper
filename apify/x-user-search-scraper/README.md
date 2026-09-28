@@ -1,29 +1,52 @@
-<p align="center">
-  <strong>English</strong> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+**English** ·
+[Español](README.es.md)
+·
+[Türkçe](README.tr.md)
+·
+[简体中文](README.zh-CN.md)
+·
+[日本語](README.ja.md)
+·
+[한국어](README.ko.md)
+·
+[Deutsch](README.de.md)
+·
+[Français](README.fr.md)
+·
+[Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer connects Xquik MCP to coding agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Watch how Framer uses Xquik scrapers with Claude Code, Codex, Cursor, and more, from 6:07.</a>
-</td></tr></table>
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
+
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
+Claude Code, Codex, Cursor, and more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data. X User Search Scraper finds users by handle, bio &
+most complete X data. Xquik's X User Search Scraper finds users by handle, bio &
 location. Most other Apify Actors charge before filtering or deduplicating.
 Xquik charges only for delivered, unique, filter-matching results.
 
-Search Twitter accounts by name, topic, bio, or location. No X API key.
+Search Twitter accounts by name, topic, bio or location. You need no X API key
+or login. You pay **$0.00015 per delivered profile**, & Apify bills platform
+usage separately.
 
-- Filter audience, posts, age, verification, website, location, bio & username.
-- Resume one query from a saved cursor. Migrations preserve accepted work.
+> Xquik is an independent third-party service. Not affiliated with X Corp.
+> "Twitter" and "X" are trademarks of X Corp.
+
+## Account data & filters
+
+- Filters for audience, posts, age, verification, website, location, bio &
+  username.
+- Resume 1 query from a saved cursor in `startCursor`.
+- Migrations preserve accepted work.
+- Filters & duplicate removal before billing.
+
+## How to search X users
+
+1. Open Xquik's X User Search Scraper in Apify Console.
+2. Enter names, topics, bios or locations in `searchTerms`.
+3. Add filters such as `minFollowers`, `verifiedOnly` or `locationContains`.
+4. Set `maxItems` to cap delivered profiles, then click Start.
+5. Download the dataset as JSON, CSV or Excel, or use the Apify API.
 
 ## Input
 
@@ -40,33 +63,43 @@ Small runs that go well skip `run-report` & save Apify usage. Turn on
 
 ## Output
 
-Each row contains a profile and its originating query in `sourceTarget`.
+Each row holds a profile & its originating query in `sourceTarget`.
 
-## Pricing
+Examples use sample values. Results reflect live data. A profile row looks like
+this:
 
-Every plan costs **$0.00015 per delivered profile**. Apify bills platform usage
-separately.
+```json
+{
+  "username": "sample_user",
+  "name": "Sample User",
+  "description": "Sample bio about artificial intelligence",
+  "followers": 2500,
+  "verified": false,
+  "sourceTarget": "artificial intelligence"
+}
+```
+
+## How much does it cost to search X users?
+
+Every Apify plan costs $0.00015 per delivered profile. Apify bills your platform
+usage separately.
 
 - One charge per delivered data row. Diagnostics are free in `diagnostics`.
-- No start, query, or page fee. Filters and deduplication run before billing.
+- No start, query or page fee.
+- Filters & deduplication run before billing.
 
-Choose from 50 public tasks. 129 REST operations use sample values & live data.
-
-## Incomplete extraction
+## Limits & recovery
 
 Interrupted extraction writes a free `partial` diagnostic. Available results
-remain intact. Read `availableResults`, `failedTargets`, `retryable`, and
-`nextAction` before retrying. A successful Actor exit confirms delivery, not
+stay intact. Read `availableResults`, `failedTargets`, `retryable` &
+`nextAction` before you retry. A successful Actor exit confirms delivery, not
 complete extraction.
 
-The status names every cause of an early stop. `stopCauses` lists each cause
+The run status names every cause of an early stop. `stopCauses` lists each cause
 with its own `message`, `retryable` & `nextAction`. The causes are
 `target_not_found`, `target_failed`, `pagination_safety_limit` &
 `deadline_reached`. A missing target joins the list only when another cause
 stopped the run. The run is `retryable` when any cause is.
-
-Xquik is an independent third-party service. Not affiliated with X Corp.
-"Twitter" and "X" are trademarks of X Corp.
 
 ## Related Xquik Actors
 
@@ -131,3 +164,44 @@ diagnostics. Pick the one that matches the data you need.
   Estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
   trait answers. Use it when you study why tweets spread or flop. From $0.0003
   per analyzed tweet.
+
+## FAQ
+
+Answers to common questions, then where to get help.
+
+### Do I need an X API key or login?
+
+No. Xquik's X User Search Scraper needs no X API key, login or credentials.
+
+### Is it legal to scrape X accounts?
+
+Xquik's X User Search Scraper requests public X fields. Results can contain
+personal data. Confirm a lawful purpose & follow applicable privacy rules. Ask
+qualified counsel when uncertain.
+
+### Why did my run return no results?
+
+Open the free `diagnostics` output first. An empty run's status says to check
+your targets & filters. `stopCauses` gives each cause a `nextAction` to follow.
+
+### Can I use the API, schedules & integrations?
+
+Yes. Choose from 50 public tasks or 129 Xquik REST operations. The
+[API tab](https://apify.com/xquik/x-user-search-scraper/api) has Python,
+JavaScript & cURL examples. Apify
+[schedules](https://docs.apify.com/platform/schedules) run Xquik's X User Search
+Scraper on a cron. Agents use
+[Apify MCP](https://docs.apify.com/platform/integrations/mcp). Use `latest`
+unless you need an older build.
+
+### Where do I get help?
+
+Open an issue on the Actor page or contact <support@xquik.com> with the run ID.
+Free diagnostics in the key-value store explain empty, partial or interrupted
+runs.
+
+### Can I get a custom solution?
+
+Yes. Visit [xquik.com](https://xquik.com) or read the
+[API docs](https://docs.xquik.com/introduction). They cover the dashboard, API,
+MCP server & webhooks.

@@ -1,46 +1,75 @@
-<p align="center">
-  <strong>English</strong> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+**English** ·
+[Español](README.es.md)
+·
+[Türkçe](README.tr.md)
+·
+[简体中文](README.zh-CN.md)
+·
+[日本語](README.ja.md)
+·
+[한국어](README.ko.md)
+·
+[Deutsch](README.de.md)
+·
+[Français](README.fr.md)
+·
+[Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer connects Xquik MCP to coding agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Watch how Framer uses Xquik scrapers with Claude Code, Codex, Cursor, and more, from 6:07.</a>
-</td></tr></table>
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
+
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
+Claude Code, Codex, Cursor, and more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data. X Article Scraper turns long-form X Articles into
-Markdown, text, covers, authors, dates & metrics. Most other Apify Actors charge
-before filtering or deduplicating. Xquik charges only for delivered, unique,
-filter-matching results.
+most complete X data. Xquik's X Article Scraper turns long-form X Articles into
+Markdown & text. It adds covers, authors, dates & metrics. Most other Apify
+Actors charge before filtering or deduplicating. Xquik charges only for
+delivered, unique, filter-matching results.
 
-Extract long-form X Articles from post URLs or numeric Tweet IDs. No X API key
-or login required.
+Extract long-form X Articles from post URLs or numeric Tweet IDs. You pay
+**$0.00015 per delivered article**, & Apify bills platform usage separately. You
+need no X API key or login.
+
+> Xquik is an independent third-party service. Not affiliated with X Corp.
+> "Twitter" and "X" are trademarks of X Corp.
+
+## Article data & format
+
+- Markdown that keeps blocks, bold & italic ranges.
+- `contents` blocks that keep the source formatting.
+- Post URLs & numeric Tweet IDs in the same run.
+- Duplicate removal before billing.
+
+Xquik's X Article Scraper never guesses link metadata. Apify shows Markdown as
+text.
+
+## How to scrape X articles
+
+1. Open Xquik's X Article Scraper in Apify Console.
+2. Paste Article post URLs into `startUrls` or Tweet IDs into `tweetIds`.
+3. Set `maxItems` to cap delivered Articles, then click Start.
+4. Download the dataset as JSON, CSV or Excel, or use the Apify API.
 
 ## Input
 
-| Field                  | Purpose                                    | Default  |
-| ---------------------- | ------------------------------------------ | -------- |
-| `startUrls`            | Public Article post URLs                   | None     |
-| `tweetIds`             | Numeric Article Tweet IDs                  | None     |
-| `maxItems`             | Global delivered-Article cap               | `100000` |
-| `dedupeAcrossTargets`  | Remove repeated Article IDs before billing | `true`   |
-| `maxConcurrency`       | Parallel independent Article reads         | `100`    |
-| `alwaysSaveRunRecords` | Save `run-report` on every run             | `false`  |
+| Field                  | Purpose                                  | Default  |
+| ---------------------- | ---------------------------------------- | -------- |
+| `startUrls`            | Public Article post URLs                 | None     |
+| `tweetIds`             | Numeric Article Tweet IDs                | None     |
+| `maxItems`             | Global delivered-Article cap             | `100000` |
+| `dedupeAcrossTargets`  | Drop repeated Article IDs before billing | `true`   |
+| `maxConcurrency`       | Parallel independent Article reads       | `100`    |
+| `alwaysSaveRunRecords` | Save `run-report` on every run           | `false`  |
 
 ## Output
 
 The Output tab opens `Articles`. `Results` links to rows. `Run Report` links to
-counts, completion, duration, and anomalies. A run that hits a problem, or a
-large run, writes it. A small run that goes well states its counts in the run
+counts, completion, duration & anomalies. A run that hits a problem, or a large
+run, writes the report. A small run that goes well states its counts in the run
 status instead. Turn on `alwaysSaveRunRecords` to write it on every run.
+
+Examples use sample values. Results reflect live data. An Article row includes
+these fields:
 
 ```json
 {
@@ -49,42 +78,31 @@ status instead. Turn on `alwaysSaveRunRecords` to write it on every run.
 }
 ```
 
-Rows add author, source, cover, time, and metrics. Export JSON or tables.
+Rows add author, source, cover, time & metrics. Export JSON or tables.
 
-## Completion & billing
+## How much does it cost to scrape X articles?
 
-Deduplication runs before billing. Pay per delivered data row, with no start
-fee. Every Apify plan costs **$0.00015 per delivered article**. Diagnostics are
-free in the `diagnostics` output. Apify bills your platform usage separately.
+Every Apify plan costs $0.00015 per delivered article. Apify bills your platform
+usage separately.
 
-## API & MCP
+- One charge per delivered data row. Diagnostics are free in `diagnostics`.
+- No start fee.
+- Deduplication runs before billing.
 
-Choose from 50 public tasks or 129 REST operations. Agents use
-[Apify MCP](https://docs.apify.com/platform/integrations/mcp). Single reads use
-[Xquik REST](https://docs.xquik.com/api-reference/x/get-article).
+## Limits & recovery
 
-## Limits and format
-
-The Actor returns only public Articles that X exposes. Markdown preserves
-blocks, bold, and italic ranges. `contents` retains source formatting. It never
-guesses link metadata. Examples use sample values. Results reflect live data.
-Apify shows Markdown as text. Use `latest`. URLs and IDs can mix.
-
-## Incomplete extraction
+Xquik's X Article Scraper returns only public Articles that X exposes.
 
 Interrupted extraction writes a free `partial` diagnostic. Available results
-remain intact. Read `availableResults`, `failedTargets`, `retryable`, and
-`nextAction` before retrying. A successful Actor exit confirms delivery, not
+stay intact. Read `availableResults`, `failedTargets`, `retryable` &
+`nextAction` before you retry. A successful Actor exit confirms delivery, not
 complete extraction.
 
-The status names every cause of an early stop. `stopCauses` lists each cause
+The run status names every cause of an early stop. `stopCauses` lists each cause
 with its own `message`, `retryable` & `nextAction`. The causes are
 `target_not_found`, `target_failed`, `pagination_safety_limit` &
 `deadline_reached`. A missing target joins the list only when another cause
 stopped the run. The run is `retryable` when any cause is.
-
-Xquik is an independent third-party service. Not affiliated with X Corp.
-"Twitter" and "X" are trademarks of X Corp.
 
 ## Related Xquik Actors
 
@@ -150,3 +168,46 @@ diagnostics. Pick the one that matches the data you need.
   Estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
   trait answers. Use it when you study why tweets spread or flop. From $0.0003
   per analyzed tweet.
+
+## FAQ
+
+Answers to common questions, then where to get help.
+
+### Do I need an X API key or login?
+
+No. Xquik's X Article Scraper needs no X API key, login or credentials.
+
+### Is it legal to scrape X articles?
+
+Xquik's X Article Scraper requests public X fields. Results can contain personal
+data. Confirm a lawful purpose & follow applicable privacy rules. Ask qualified
+counsel when uncertain.
+
+### Why did my run return no results?
+
+Open the free `diagnostics` output first. An empty run's status says to check
+your targets & filters. `stopCauses` gives each cause a `nextAction` to follow.
+The run warns about links it cannot read & says how to fix them. Xquik's X
+Article Scraper returns only public Articles that X exposes.
+
+### Can I use the API, schedules & integrations?
+
+Yes. Choose from 50 public tasks or 129 Xquik REST operations. The
+[API tab](https://apify.com/xquik/x-article-scraper/api) has Python, JavaScript
+& cURL examples. Apify [schedules](https://docs.apify.com/platform/schedules)
+run Xquik's X Article Scraper on a cron. Agents use
+[Apify MCP](https://docs.apify.com/platform/integrations/mcp). Single reads use
+[Xquik REST](https://docs.xquik.com/api-reference/x/get-article). Use `latest`
+unless you need an older build.
+
+### Where do I get help?
+
+Open an issue on the Actor page or contact <support@xquik.com> with the run ID.
+Free diagnostics in the key-value store explain empty, partial or interrupted
+runs.
+
+### Can I get a custom solution?
+
+Yes. Visit [xquik.com](https://xquik.com) or read the
+[API docs](https://docs.xquik.com/introduction). They cover the dashboard, API,
+MCP server & webhooks.

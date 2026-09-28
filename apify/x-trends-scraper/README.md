@@ -1,43 +1,60 @@
-<p align="center">
-  <strong>English</strong> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+**English** ·
+[Español](README.es.md)
+·
+[Türkçe](README.tr.md)
+·
+[简体中文](README.zh-CN.md)
+·
+[日本語](README.ja.md)
+·
+[한국어](README.ko.md)
+·
+[Deutsch](README.de.md)
+·
+[Français](README.fr.md)
+·
+[Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer connects Xquik MCP to coding agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Watch how Framer uses Xquik scrapers with Claude Code, Codex, Cursor, and more, from 6:07.</a>
-</td></tr></table>
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
+
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
+Claude Code, Codex, Cursor, and more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data. X Trends Scraper collects real-time trends by location
-with rank, volume & query. Most other Apify Actors charge before filtering or
-deduplicating. Xquik charges only for delivered, unique, filter-matching
-results.
+most complete X data. Xquik's X Trends Scraper collects real-time trends by
+location with rank, volume & query. Most other Apify Actors charge before
+filtering or deduplicating. Xquik charges only for delivered, unique,
+filter-matching results.
 
-Scrape current Twitter trends across many locations in one run. Export rank,
-topic, query, Tweet volume, search URL, WOEID, and source location. No X API key
-or login required.
+Scrape current Twitter trends across many locations in 1 run. You pay **$0.00015
+per delivered row**, & Apify bills platform usage separately. You need no X API
+key or login.
 
-## Locations and trend data
+> Xquik is an independent third-party service. Not affiliated with X Corp.
+> "Twitter" and "X" are trademarks of X Corp.
 
-- Run multiple countries or WOEIDs concurrently.
-- Return up to 50 current trends per location.
-- Preserve location attribution on every row.
-- Label hashtag rows and whether Tweet volume is available.
-- Deduplicate equivalent inputs before billing.
-- Export JSON, CSV, Excel, XML, and RSS through Apify datasets.
-- Resume from saved state after an Apify migration.
+## Locations & trend data
+
+- Multiple countries or WOEIDs, read concurrently.
+- Up to 50 current trends for each location.
+- Rank, topic, query, Tweet volume, search URL, WOEID & source location.
+- Location attribution on every row.
+- Labels for hashtag rows & for available Tweet volume.
+- Duplicate removal for equivalent inputs before billing.
+- JSON, CSV, Excel, XML & RSS exports through Apify datasets.
+- Runs resume from saved state after an Apify migration.
+
+## How to scrape X trends
+
+1. Open Xquik's X Trends Scraper in Apify Console.
+2. Enter location names in `locations` or numeric WOEIDs in `woeids`.
+3. Set `maxTrendsPerLocation`, up to 50 trends for each location.
+4. Set `maxItems` to cap delivered rows, then click Start.
+5. Download the dataset as JSON, CSV or Excel, or use the Apify API.
 
 ## Input
 
-Use location names, numeric WOEIDs, or both:
+Use location names, numeric WOEIDs or both:
 
 ```json
 {
@@ -47,53 +64,59 @@ Use location names, numeric WOEIDs, or both:
 }
 ```
 
-Supported shortcuts include Worldwide, United States, United Kingdom, Turkey,
-Brazil, Canada, France, Germany, India, Indonesia, Japan, Mexico, and Australia.
-Use `woeids` for any other supported location.
+Supported shortcuts include Worldwide, United States, United Kingdom, Turkey &
+Brazil. Canada, France, Germany, India, Indonesia, Japan, Mexico & Australia
+work too. Use `woeids` for any other supported location.
 
 Small runs that go well skip `run-report` & save Apify usage. Turn on
 `alwaysSaveRunRecords` to write it on every run.
 
 ## Output
 
-Each trend is one dataset row with `name`, `rank`, `tweetVolume`, `query`,
-`url`, `woeid`, `sourceTarget`, and `resultType`. Missing source fields stay
-absent. The Actor invents no values.
+Each trend is 1 dataset row. Rows carry `name`, `rank`, `tweetVolume`, `query`,
+`url`, `woeid`, `sourceTarget` & `resultType`. Missing source fields stay
+absent. Xquik's X Trends Scraper invents no values.
 
-## Pricing
+Examples use sample values. Results reflect live data. A trend row looks like
+this:
 
-Every Apify plan costs **$0.00015 per delivered row**. Apify bills your platform
+```json
+{
+  "name": "#SampleTrend",
+  "rank": 1,
+  "tweetVolume": 12000,
+  "isHashtag": true,
+  "woeid": 1,
+  "sourceTarget": "Worldwide"
+}
+```
+
+## How much does it cost to scrape X trends?
+
+Every Apify plan costs $0.00015 per delivered row. Apify bills your platform
 usage separately.
 
 - One charge per delivered data row. Diagnostics are free in `diagnostics`.
-- No start, query, or location fee.
-- The Actor removes duplicates before billing.
+- No start, query or location fee.
+- Deduplication runs before billing.
 - Apify maximum-total-charge settings cap delivered rows.
 
-Use `latest` unless you need an older build. Choose from 50 public tasks or 129
-Xquik REST operations. Examples use sample values. Results reflect live data.
+## Limits & recovery
 
-## Recovery and limits
-
-One run can read many locations. Delivered rows & progress survive an Apify
-restart. The Actor adds no time limit of its own. It respects any Apify timeout
-you set.
-
-## Incomplete extraction
+Xquik's X Trends Scraper reads many locations in 1 run. Delivered rows &
+progress survive an Apify restart. The Actor adds no time limit of its own. It
+respects any Apify timeout you set.
 
 Interrupted extraction writes a free `partial` diagnostic. Available results
-remain intact. Read `availableResults`, `failedTargets`, `retryable`, and
-`nextAction` before retrying. A successful Actor exit confirms delivery, not
+stay intact. Read `availableResults`, `failedTargets`, `retryable` &
+`nextAction` before you retry. A successful Actor exit confirms delivery, not
 complete extraction.
 
-The status names every cause of an early stop. `stopCauses` lists each cause
+The run status names every cause of an early stop. `stopCauses` lists each cause
 with its own `message`, `retryable` & `nextAction`. The causes are
 `target_not_found`, `target_failed`, `pagination_safety_limit` &
 `deadline_reached`. A missing target joins the list only when another cause
 stopped the run. The run is `retryable` when any cause is.
-
-Xquik is an independent third-party service. Not affiliated with X Corp.
-"Twitter" and "X" are trademarks of X Corp.
 
 ## Related Xquik Actors
 
@@ -159,3 +182,44 @@ diagnostics. Pick the one that matches the data you need.
   Estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
   trait answers. Use it when you study why tweets spread or flop. From $0.0003
   per analyzed tweet.
+
+## FAQ
+
+Answers to common questions, then where to get help.
+
+### Do I need an X API key or login?
+
+No. Xquik's X Trends Scraper needs no X API key, login or credentials.
+
+### Is it legal to scrape X trends?
+
+Xquik's X Trends Scraper requests public X fields. Results can contain personal
+data. Confirm a lawful purpose & follow applicable privacy rules. Ask qualified
+counsel when uncertain.
+
+### Why did my run return no results?
+
+Open the free `diagnostics` output first. An empty run's status says to check
+your targets & filters. `stopCauses` gives each cause a `nextAction` to follow.
+The run names each unknown location & says what to use instead.
+
+### Can I use the API, schedules & integrations?
+
+Yes. Choose from 50 public tasks or 129 Xquik REST operations. The
+[API tab](https://apify.com/xquik/x-trends-scraper/api) has Python, JavaScript &
+cURL examples. Apify [schedules](https://docs.apify.com/platform/schedules) run
+Xquik's X Trends Scraper on a cron. Agents use
+[Apify MCP](https://docs.apify.com/platform/integrations/mcp). Use `latest`
+unless you need an older build.
+
+### Where do I get help?
+
+Open an issue on the Actor page or contact <support@xquik.com> with the run ID.
+Free diagnostics in the key-value store explain empty, partial or interrupted
+runs.
+
+### Can I get a custom solution?
+
+Yes. Visit [xquik.com](https://xquik.com) or read the
+[API docs](https://docs.xquik.com/introduction). They cover the dashboard, API,
+MCP server & webhooks.

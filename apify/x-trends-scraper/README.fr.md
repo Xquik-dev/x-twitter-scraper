@@ -16,30 +16,43 @@
 </td></tr></table>
 
 Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
-monde, avec les données X les plus complètes. X Trends Scraper collecte les
-tendances en temps réel par localisation avec le rang, le volume et la requête.
-La plupart des autres Actors Apify facturent avant de filtrer ou de dédupliquer.
-Xquik ne facture que les résultats livrés, uniques et conformes aux filtres.
+monde. Ses données X sont les plus complètes. X Trends Scraper de Xquik collecte
+les tendances en temps réel par lieu, avec le rang, le volume et la requête. La
+plupart des autres Actors Apify facturent avant de filtrer ou de dédupliquer.
+Xquik facture seulement les résultats livrés, uniques et conformes à vos
+filtres.
 
-Scrapez les tendances Twitter actuelles sur de nombreuses localisations en
-un seul run. Exportez le rang, le sujet, la requête, le volume de Tweet,
-l'URL de recherche, le WOEID et la localisation source. Aucune clé API X ni
-connexion requise.
+Scrapez les tendances Twitter (X) actuelles de nombreux lieux en 1 run. Vous
+payez **$0.00015 par ligne livrée**, et Apify facture l'usage de la plateforme à
+part. Vous n'avez besoin ni de clé API X ni de connexion.
 
-## Localisations et données de tendance
+> Xquik est un service tiers indépendant. Non affilié à X Corp.
+> "Twitter" et "X" sont des marques déposées de X Corp.
 
-- Exécutez plusieurs pays ou WOEID en parallèle.
-- Renvoyez jusqu'à 50 tendances actuelles par localisation.
-- Conservez l'attribution de localisation sur chaque ligne.
-- Étiquetez les lignes de hashtag et indiquez si le volume de Tweet est
-  disponible.
-- Dédupliquez les entrées équivalentes avant la facturation.
-- Exportez en JSON, CSV, Excel, XML et RSS via les datasets Apify.
-- Reprenez à partir de l'état sauvegardé après une migration Apify.
+## Lieux et données de tendances
+
+- Plusieurs pays ou WOEID, lus en parallèle.
+- Jusqu'à 50 tendances actuelles par lieu.
+- Le rang, le sujet, la requête, le volume de posts, l'URL de recherche, le
+  WOEID et le lieu source.
+- Le lieu indiqué sur chaque ligne.
+- Des libellés pour les lignes de hashtag et pour le volume de posts disponible.
+- La suppression des doublons entre entrées équivalentes, avant la facturation.
+- Des exports JSON, CSV, Excel, XML et RSS via les datasets Apify.
+- Les runs reprennent depuis un état enregistré après une migration Apify.
+
+## Comment scraper les tendances X
+
+1. Ouvrez X Trends Scraper de Xquik dans Apify Console.
+2. Saisissez des noms de lieux dans `locations` ou des WOEID numériques dans
+   `woeids`.
+3. Réglez `maxTrendsPerLocation`, jusqu'à 50 tendances par lieu.
+4. Réglez `maxItems` pour plafonner les lignes livrées, puis cliquez sur Start.
+5. Téléchargez le dataset en JSON, CSV ou Excel, ou passez par l'API Apify.
 
 ## Entrée
 
-Utilisez des noms de localisation, des WOEID numériques, ou les deux :
+Utilisez des noms de lieux, des WOEID numériques ou les deux :
 
 ```json
 {
@@ -49,133 +62,178 @@ Utilisez des noms de localisation, des WOEID numériques, ou les deux :
 }
 ```
 
-Les raccourcis pris en charge incluent Worldwide, United States, United
-Kingdom, Turkey, Brazil, Canada, France, Germany, India, Indonesia, Japan,
-Mexico et Australia. Utilisez `woeids` pour toute autre localisation prise
-en charge.
+Les raccourcis acceptés incluent Worldwide, United States, United Kingdom,
+Turkey et Brazil. Canada, France, Germany, India, Indonesia, Japan, Mexico et
+Australia fonctionnent aussi. Utilisez `woeids` pour tout autre lieu pris en
+charge.
 
-Les petits runs sans problème omettent `run-report` et économisent de l'usage
+Les petits runs sans problème n'écrivent pas `run-report` et réduisent l'usage
 Apify. Activez `alwaysSaveRunRecords` pour l'écrire à chaque run.
 
 ## Sortie
 
-Chaque tendance est une ligne de dataset avec `name`, `rank`, `tweetVolume`,
-`query`, `url`, `woeid`, `sourceTarget` et `resultType`. Les champs source
-manquants restent absents. L'Actor n'invente aucune valeur.
+Chaque tendance donne 1 ligne de dataset. Les lignes portent `name`, `rank`,
+`tweetVolume`, `query`, `url`, `woeid`, `sourceTarget` et `resultType`. Les
+champs absents de la source restent absents. X Trends Scraper de Xquik n'invente
+aucune valeur.
 
-## Tarification
+Les exemples utilisent des valeurs fictives. Les résultats reflètent les données
+en direct. Une ligne de tendance ressemble à ceci :
 
-Chaque plan Apify coûte **$0.00015 par ligne livrée**. Apify facture
-séparément l'usage de sa plateforme.
+```json
+{
+  "name": "#SampleTrend",
+  "rank": 1,
+  "tweetVolume": 12000,
+  "isHashtag": true,
+  "woeid": 1,
+  "sourceTarget": "Worldwide"
+}
+```
 
-- Une facturation par ligne de donnée livrée. Les diagnostics sont gratuits
+## Combien coûte le scraping des tendances X ?
+
+Le prix est de $0.00015 par ligne livrée sur chaque plan Apify. Apify facture
+l'usage de votre plateforme à part.
+
+- Une facturation par ligne de données livrée. Les diagnostics sont gratuits
   dans `diagnostics`.
-- Aucun frais de démarrage, de requête ou de localisation.
-- L'Actor retire les doublons avant la facturation.
-- Les paramètres Apify de charge totale maximale plafonnent les lignes
-  livrées.
+- Pas de frais de démarrage, de requête ou de lieu.
+- La déduplication a lieu avant la facturation.
+- Les réglages de coût total maximal d'Apify plafonnent les lignes livrées.
 
-Utilisez `latest` sauf si vous avez besoin d'une build plus ancienne.
-Choisissez parmi 50 tâches publiques ou 129 opérations Xquik REST. Les
-exemples utilisent des valeurs d'illustration. Les résultats reflètent des
-données en temps réel.
+## Limites et reprise
 
-## Reprise et limites
+X Trends Scraper de Xquik lit de nombreux lieux en 1 run. Un redémarrage d'Apify
+ne fait perdre ni les lignes livrées ni la progression. L'Actor n'ajoute aucune
+limite de temps. Il respecte tout timeout Apify que vous réglez.
 
-Un run peut lire de nombreux lieux. Les lignes livrées et la progression
-survivent à un redémarrage d'Apify. L'Actor n'ajoute aucune limite de temps
-propre. Il respecte tout délai Apify que vous définissez.
+Une extraction interrompue écrit un diagnostic `partial` gratuit. Les résultats
+disponibles restent intacts. Lisez `availableResults`, `failedTargets`,
+`retryable` et `nextAction` avant de relancer. Une sortie réussie de l'Actor
+confirme la livraison, pas une extraction complète.
 
-## Extraction incomplète
-
-Une extraction interrompue écrit un diagnostic `partial` gratuit. Les
-résultats disponibles restent intacts. Consultez `availableResults`,
-`failedTargets`, `retryable` et `nextAction` avant de relancer. Une sortie
-d'Actor réussie confirme la livraison, pas l'extraction complète.
-
-Le texte de statut nomme chaque cause d'un arrêt anticipé. `stopCauses` liste
-chaque cause avec ses propres `message`, `retryable` et `nextAction`. Les causes
-sont `target_not_found`, `target_failed`, `pagination_safety_limit` et
-`deadline_reached`. Une cible introuvable n'y figure que si une autre cause a
-arrêté le run. Le run est `retryable` dès qu'une cause l'est.
-
-Xquik est un service tiers indépendant. Non affilié à X Corp.
-« Twitter » et « X » sont des marques déposées de X Corp.
+Le statut du run nomme chaque cause d'arrêt anticipé. `stopCauses` liste chaque
+cause avec ses propres `message`, `retryable` et `nextAction`. Les causes sont
+`target_not_found`, `target_failed`, `pagination_safety_limit` et
+`deadline_reached`. Une cible introuvable n'entre dans la liste que si une autre
+cause a arrêté le run. Le run est `retryable` dès qu'une cause l'est.
 
 ## Actors Xquik associés
 
-Chaque Actor Xquik partage le même moteur d'extraction, la même facturation
-au filtre et les mêmes diagnostics. Choisissez celui qui correspond aux
+Tous les Actors Xquik partagent le même moteur d'extraction, la même facturation
+après filtrage et les mêmes diagnostics. Choisissez celui qui correspond aux
 données dont vous avez besoin.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) : scrape des
-  tweets depuis des recherches, des fils de profil, des Lists et des ID de
-  tweet avec plus de 50 filtres et des exports plats. Utilisez-le quand vous
-  avez besoin de données de tweet sans analyse. À partir de $0.00015 par
+  posts (tweets) depuis des recherches, des fils de profil, des Listes et des ID
+  de post, avec plus de 50 filtres et des exports plats. Utilisez-le quand vous
+  avez besoin de données de posts sans analyse. À partir de $0.00015 par
   ligne.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) : scrape
   des profils ainsi que leurs posts, réponses, médias et abonnés à partir de
-  handles, d'ID ou d'URL. Utilisez-le quand vous partez de comptes plutôt
-  que de recherches. À partir de $0.00015 par ligne.
+  noms d'utilisateur, d'ID ou d'URL. Utilisez-le quand vous partez de comptes
+  plutôt que de recherches. À partir de $0.00015 par ligne.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) : scrape des
   réponses, des commentaires et des conversations entières sous les posts
-  avec plus de 25 filtres. Utilisez-le quand vous avez besoin de la
-  discussion sous les tweets. À partir de $0.00015 par ligne.
+  avec plus de 25 filtres. Utilisez-le quand vous avez besoin des échanges
+  sous les posts. À partir de $0.00015 par ligne.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) :
-  scrape les réponses, citations, personnes ayant reposté et threads pour
-  des URL ou ID de post en masse. Utilisez-le pour mesurer qui s'est engagé avec des posts. À partir de $0.00015 par ligne.
+  scrape en masse les réponses, citations, comptes qui ont reposté et
+  discussions de posts, à partir d'URL ou d'ID. Utilisez-le pour mesurer qui a
+  interagi avec des posts. À partir de $0.00015 par ligne.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) : scrape
-  les abonnés, les comptes suivis, les membres de List, les abonnés de List
-  et les membres de Community sous forme de lignes de profil. Utilisez-le
-  quand vous avez besoin de listes d'audience ou de membres. À partir de
+  les abonnés, les abonnements, les membres et abonnés de Liste et les
+  membres de Communauté sous forme de lignes de profil. Utilisez-le quand
+  vous avez besoin de listes d'audience ou de membres. À partir de
   $0.00015 par profil.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) :
-  recherche des utilisateurs par handle, bio et localisation avec des
-  filtres d'abonnés, de vérification, d'ancienneté et de localisation.
+  recherche des comptes par nom d'utilisateur, bio et localisation, avec des
+  filtres d'abonnés, de certification, d'ancienneté et de localisation.
   Utilisez-le pour créer des listes de comptes à partir d'une recherche. À
   partir de $0.00015 par profil.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper) : scrape les
-  posts, membres et abonnés d'une List à partir d'URL ou d'ID de List.
-  Utilisez-le quand une List organisée définit vos sources. À partir de
+  posts, membres et abonnés d'une Liste à partir d'URL ou d'ID de Liste.
+  Utilisez-le quand une Liste choisie définit vos sources. À partir de
   $0.00015 par ligne.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper) :
   scrape les infos, posts, recherches, membres et modérateurs d'une
-  Community. Utilisez-le quand vos sources sont des X Communities. À
+  Communauté. Utilisez-le quand vos sources sont des Communautés X. À
   partir de $0.00015 par ligne.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper) : scrape
-  des X Articles longs en Markdown et texte avec couvertures, auteurs,
+  les Articles X longs en Markdown et en texte, avec couvertures, auteurs,
   dates et métriques. Utilisez-le quand vous avez besoin du corps des
-  articles, pas des tweets. À partir de $0.00015 par article.
+  Articles, pas des posts. À partir de $0.00015 par article.
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader) :
-  extrait ou stocke des photos, vidéos et GIFs à partir de posts ou de
+  extrait ou stocke des photos, vidéos et GIF à partir de posts ou de
   profils, avec des options MP4 et de métadonnées. Utilisez-le quand vous
   avez besoin des fichiers médias eux-mêmes. À partir de $0.00015 par
   ligne média.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring) :
   suit les mentions de marque avec pertinence, sentiment et réponses sur
-  l'expérience client par IA, et compare les runs. Utilisez-le pour
-  surveiller une marque dans le temps. À partir de $0.0003 par tweet
-  analysé.
+  l'expérience client par IA, et compare les runs. Utilisez-le pour surveiller
+  une marque dans le temps. À partir de $0.0003 par post analysé.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis) :
-  attribue une attitude, une intensité et une probabilité de sarcasme à
-  chaque tweet par IA. Utilisez-le pour un sentiment général sur n'importe
-  quel sujet. À partir de $0.0003 par tweet analysé.
+  attribue une attitude, une intensité et une probabilité de sarcasme à chaque
+  post par IA. Utilisez-le pour un sentiment général sur n'importe quel sujet. À
+  partir de $0.0003 par post analysé.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals) :
-  attribue une position haussière, baissière, neutre ou mixte, un type de
-  contenu, une conviction et une pertinence d'actif par IA. Utilisez-le
-  pour suivre les actions, la crypto ou les discussions de trading. À
-  partir de $0.0003 par tweet analysé.
+  attribue une orientation haussière, baissière, neutre ou mixte, un type de
+  contenu, une conviction et une pertinence d'actif par IA. Utilisez-le pour
+  suivre les actions, la crypto ou les discussions de trading. À partir de
+  $0.0003 par post analysé.
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor) :
-  attribue un format, une attribution de source et une pertinence de sujet
-  aux posts d'actualité par IA. Utilisez-le pour séparer le reportage du
-  commentaire. À partir de $0.0003 par tweet analysé.
+  attribue un format, une attribution de source et une pertinence de sujet aux
+  posts d'actualité par IA. Utilisez-le pour séparer le reportage du
+  commentaire. À partir de $0.0003 par post analysé.
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier) :
   répond à vos propres questions de catégorie, de score et de oui/non pour
-  chaque tweet par IA. Utilisez-le quand les analyses prédéfinies ne
-  correspondent pas à vos étiquettes. À partir de $0.0003 par tweet
-  analysé.
+  chaque post par IA. Utilisez-le quand les analyses prédéfinies ne
+  correspondent pas à vos étiquettes. À partir de $0.0003 par post analysé.
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer) :
-  estime un Viral Score de 0 à 100 et un verdict pour chaque tweet à partir
-  de 8 réponses d'IA sur ses traits. Utilisez-le quand vous étudiez pourquoi
-  des tweets se propagent ou échouent. À partir de $0.0003 par tweet
-  analysé.
+  estime un Viral Score de 0 à 100 et un verdict pour chaque post à partir de 8
+  critères notés par IA. Utilisez-le quand vous étudiez pourquoi des posts
+  percent ou font un flop. À partir de $0.0003 par post analysé.
+
+## FAQ
+
+### Ai-je besoin d'une clé API X ou d'une connexion ?
+
+Non. X Trends Scraper de Xquik n'a besoin ni de clé API X, ni de connexion, ni
+d'identifiants.
+
+### Est-il légal de scraper les tendances X ?
+
+X Trends Scraper de Xquik collecte des champs publics de X. Les résultats
+peuvent contenir des données personnelles. Assurez-vous d'avoir une finalité
+licite et respectez les règles de protection des données applicables. En cas de
+doute, demandez conseil à un juriste qualifié.
+
+### Pourquoi mon run n'a-t-il renvoyé aucun résultat ?
+
+Ouvrez d'abord la sortie gratuite `diagnostics`. Le statut d'un run vide vous
+invite à vérifier vos cibles et vos filtres. `stopCauses` donne à chaque cause
+une `nextAction` à suivre. Le run nomme chaque lieu inconnu et indique quoi
+utiliser à la place.
+
+### Puis-je utiliser l'API, les planifications et les intégrations ?
+
+Oui. Choisissez parmi 50 tâches publiques ou 129 opérations REST de Xquik.
+L'[onglet API](https://apify.com/xquik/x-trends-scraper/api) propose des
+exemples en Python, JavaScript et cURL. Les
+[planifications](https://docs.apify.com/platform/schedules) Apify lancent X
+Trends Scraper de Xquik selon un cron. Les agents passent par
+[Apify MCP](https://docs.apify.com/platform/integrations/mcp). Utilisez
+`latest`, sauf si vous avez besoin d'une build plus ancienne.
+
+### Où trouver de l'aide ?
+
+Ouvrez une issue sur la page de l'Actor ou écrivez à support@xquik.com avec l'ID
+du run. Les diagnostics gratuits du key-value store expliquent les runs vides,
+partiels ou interrompus.
+
+### Puis-je obtenir une solution sur mesure ?
+
+Oui. Rendez-vous sur [xquik.com](https://xquik.com) ou lisez la
+[documentation de l'API](https://docs.xquik.com/introduction). Elle couvre le
+tableau de bord, l'API, le serveur MCP et les webhooks.

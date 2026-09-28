@@ -15,51 +15,53 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Sieh dir an, wie Framer Xquik-Scraper mit Claude Code, Codex, Cursor und mehr nutzt, ab Minute 6:07.</a>
 </td></tr></table>
 
-Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
-den umfassendsten X-Daten. X (Twitter) Brand Monitoring verfolgt
-Markenerwähnungen mit Relevanz, Sentiment & Antworten zur Kundenerfahrung. Die
-meisten anderen Apify Actors berechnen, bevor gefiltert oder dedupliziert wird.
-Xquik berechnet nur für gelieferte, eindeutige, filterkonforme Ergebnisse. Die
-KI-Kosten sind im Preis pro Tweet enthalten. Du brauchst kein KI-Konto, keine
-Tokens und keinen Schlüssel.
+Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
+liefert die vollständigsten X-Daten. X (Twitter) Brand Monitoring von Xquik
+verfolgt Erwähnungen deiner Marke mit Antworten zu Relevanz, Sentiment &
+Kundenerfahrung. Die meisten anderen Apify Actors rechnen ab, bevor sie filtern
+oder Duplikate entfernen. Xquik rechnet nur gelieferte, eindeutige Ergebnisse
+ab, die zu deinen Filtern passen. Die KI-Kosten sind im Preis pro Post
+enthalten. Du brauchst keinen KI-Account, keine Tokens & keinen Schlüssel.
 
-Verfolge Markenerwähnungen auf X (Twitter) & beobachte Sentiment-Änderungen
-zwischen Runs. **X (Twitter) Brand Monitoring with AI Analysis** sammelt jeden
-passenden Tweet. Es beantwortet für jeden Beitrag Fragen zu Relevanz, Sentiment
-& Kundenerfahrung mit KI. Es vergleicht diese Antworten mit einem früheren
-Dataset, damit du siehst, was sich geändert hat. Jeder Datensatz behält die
-ursprünglichen Tweet-Daten, sodass Exporte, Überprüfungen & Folgeanalysen keinen
-zweiten Scrape brauchen.
+Überwache Markenerwähnungen auf X (Twitter) & verfolge Änderungen im Sentiment
+zwischen Runs. **X (Twitter) Brand Monitoring with AI Analysis** von Xquik
+sammelt jeden passenden Post (Tweet). Es beantwortet mit KI für jeden Post
+Fragen zu Relevanz, Sentiment & Kundenerfahrung. Es vergleicht diese Antworten
+mit einem früheren Dataset. So siehst du, was sich geändert hat. Jeder
+Datensatz behält die Originaldaten des Posts. Exporte, Prüfungen &
+Folgeanalysen brauchen keinen zweiten Scrape.
 
 Beobachte eine Marke, eine Produktlinie oder eine Kampagne auf Beschwerden, Lob
-& Kaufanfragen. Briefe Support- & Marketing-Teams mit echten Beiträgen. Führe
-eine Historie von Run zu Run, wie Kunden über dich sprechen.
+& Kauffragen. Informiere Support- & Marketing-Teams mit echten Posts. Halte
+fest, wie Kunden von Run zu Run über dich sprechen.
 
-- **Jedes Feld des Quell-Tweets.** Text, Autor, Zähler, Medien, Links, zitierte
-  & beantwortete Beiträge bleiben neben den Antworten.
+- **Jedes Feld des Quellposts.** Text, Autor, Zähler, Medien, Links, zitierte &
+  beantwortete Posts bleiben neben den Antworten.
 - **Typisierte Antworten.** Jeder Datensatz hat eine
-  Relevanz-Wahrscheinlichkeit, eine Sentiment-Kategorie mit Wahrscheinlichkeiten
-  & eine Kundenerfahrungs-Kategorie.
-- **Änderungsverfolgung.** Runs vergleichen nach Entscheidung, sodass kleine
-  Wahrscheinlichkeitsverschiebungen nicht als Änderungen zählen.
-- **Filterbasierte Abrechnung.** Du zahlst nur für eindeutige, filterkonforme
-  Tweets mit erfolgreicher Analyse.
+  Relevanz-Wahrscheinlichkeit, eine Sentiment-Kategorie mit
+  Wahrscheinlichkeiten & eine Kategorie zur Kundenerfahrung.
+- **Änderungsverfolgung.** Der Vergleich zwischen Runs prüft Entscheidungen.
+  Kleine Verschiebungen der Wahrscheinlichkeit zählen also nicht als Änderung.
+- **Abrechnung nach dem Filtern.** Du zahlst nur für eindeutige Posts mit
+  erfolgreicher Analyse, die zu deinen Filtern passen.
+
+> Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
+> "Twitter" und "X" sind Marken von X Corp.
 
 ## So überwachst du eine Marke auf X
 
-1. Füge Suchbegriffe hinzu (zum Beispiel
-   `(Sony OR "WH-1000XM5") headphones lang:en`), Profil-Handles, Tweet-URLs
-   oder Tweet-IDs.
-2. Setze `maxItems` & die Extraktionsfilter, die deine Aufgabe braucht, wie
-   Datumsgrenzen, Mindest-Likes oder Ausschluss von Antworten.
+1. Füge Suchbegriffe, Nutzernamen von Profilen, Post-URLs oder Post-IDs hinzu.
+   Suche zum Beispiel `(Sony OR "WH-1000XM5") headphones lang:en`.
+2. Setze `maxItems` & die Extraktionsfilter, die deine Aufgabe braucht.
+   Beispiele sind Datumsgrenzen, eine Mindestzahl an Gefällt-mir-Angaben & der
+   Ausschluss von Antworten.
 3. Trage deine Markennamen & Aliasse unter `analysis.targets` ein & beschreibe
    die Marke in `analysis.context`.
-4. Führe den Actor aus, dann behalte die Dataset-ID für deinen nächsten
-   Vergleich.
-5. Ergänze im nächsten Run `monitor.baselineDatasetId` mit dieser ID. Halte
+4. Starte den Run & notiere dir die Dataset-ID für den nächsten Vergleich.
+5. Ergänze im nächsten Run `monitor.baselineDatasetId` mit dieser ID. Lass
    Fragen, Ziele, Kontext & Kontextgrenzen unverändert, damit die Antworten
-   vergleichbar bleiben. Der Vergleich liest dieses Dataset. So funktioniert er
-   auch, wenn dieser Run seine Zusammenfassung übersprungen hat.
+   vergleichbar bleiben. Der Vergleich liest dieses Dataset. Er funktioniert
+   also auch, wenn dieser Run seine Zusammenfassung übersprungen hat.
 
 ```json
 {
@@ -78,52 +80,55 @@ eine Historie von Run zu Run, wie Kunden über dich sprechen.
 }
 ```
 
-Ziele leiten die Klassifizierung. Sie erstellen keine Suchanfragen und
-entfernen keine irrelevanten Tweets automatisch, daher wähle Suchbegriffe &
-Filter, die zu deiner Recherche passen.
+Ziele steuern die Klassifizierung. Sie erstellen keine Suchanfragen & entfernen
+keine irrelevanten Posts. Wähle Suchbegriffe & Filter, die zu deiner Recherche
+passen.
 
 ### Was der Monitor beantwortet
 
-| Frage                | Antwort                                                    |
-| --------------------- | -------------------------------------------------------------- |
-| Markenrelevanz         | Wahrscheinlichkeit, dass der Tweet dein Ziel behandelt          |
-| Sentiment              | Positiv, negativ, gemischt, neutral oder unklar                 |
-| Kundenerfahrung        | Kunde, Interessent, Beobachter oder unklar                      |
+| Frage           | Antwort                                               |
+| --------------- | ----------------------------------------------------- |
+| Markenrelevanz  | Wahrscheinlichkeit, dass der Post dein Ziel behandelt |
+| Sentiment       | Positiv, negativ, gemischt, neutral oder unklar       |
+| Kundenerfahrung | Kunde, Interessent, Beobachter oder unklar            |
 
-Nutze Relevanz-Wahrscheinlichkeiten, um mehrdeutige Namensvettern zu
-überprüfen. Sentiment beschreibt die vom Autor ausgedrückte Haltung
-gegenüber dem Ziel.
+Nutze die Relevanz-Wahrscheinlichkeiten, um mehrdeutige Namensvettern zu
+prüfen. Sentiment beschreibt die Haltung, die der Autor gegenüber dem Ziel
+ausdrückt.
 
-### Wie Vergleiche funktionieren
+### So funktionieren Vergleiche
 
-| Vergleichsstatus         | Bedeutung                                                     |
-| -------------------------- | ------------------------------------------------------------------ |
-| `first_run`                 | Keine Baseline wurde angegeben                                     |
-| `new_to_baseline`           | Diese Tweet-ID fehlte in der Baseline                               |
-| `unchanged`                 | Jede vergleichbare Entscheidung stimmt überein                     |
-| `changed`                   | Mindestens 1 Entscheidung weicht ab                                 |
-| `not_comparable`            | Erforderliche Metadaten, IDs oder Abgleichseinstellungen fehlen     |
-| `analysis_unavailable`      | Dieser Tweet hat keine erfolgreiche Analyse                         |
+| Vergleichsstatus       | Bedeutung                                                |
+| ---------------------- | -------------------------------------------------------- |
+| `first_run`            | Es gab keine Baseline                                    |
+| `new_to_baseline`      | Diese Post-ID fehlte in der Baseline                     |
+| `unchanged`            | Jede vergleichbare Entscheidung stimmt überein           |
+| `changed`              | Mindestens 1 Entscheidung weicht ab                      |
+| `not_comparable`       | Nötige Metadaten, IDs oder passende Einstellungen fehlen |
+| `analysis_unavailable` | Dieser Post hat keine erfolgreiche Analyse               |
 
 Der Actor vergleicht Antworten nach Entscheidung. Eine `choice`-Antwort
 vergleicht er nach ihrer Kategorie. Eine `score`-Antwort vergleicht er nach
 ihrer nächstgelegenen Stufe. Eine `probability`-Antwort vergleicht er nach ihrer
-Ja/Nein-Entscheidung bei 0,5. Eine Entscheidung zählt nur als geändert, wenn sie
-sich deutlich bewegt. Beinahe-Gleichstände zwischen Runs bleiben `unchanged`, &
-ebenso Verschiebungen, die dieselbe Entscheidung behalten. Modellschwankungen
-zwischen Runs füllen deinen Report nicht. `changes` listet jede geänderte Frage
-mit ihrer `previous`- & `current`-Entscheidung. Änderungen können von
-Modellschwankungen, neuem Kontext oder bearbeiteten Quelldaten kommen. Sie
-beweisen keine geänderten Fakten, & ein fehlender Tweet beweist keine Löschung.
+Ja/Nein-Entscheidung bei 0,5. Eine Entscheidung zählt nur als geändert, wenn
+sie sich deutlich bewegt. Knappe Fälle zwischen Runs bleiben `unchanged`. Das
+gilt auch für Verschiebungen, die dieselbe Entscheidung behalten. Kleine
+KI-Unterschiede zwischen Runs erscheinen also nicht als Änderungen.
 
-Das Baseline-Limit liegt standardmäßig bei 100.000 Datensätzen. Doppelte
-Tweet-IDs, Ladefehler & sich ändernde Dataset-Größen stoppen den Vergleich vor
-der Erfassung. Sie werden nie zu einer leeren Baseline.
+`changes` listet jede geänderte Frage mit ihrer Entscheidung `previous` &
+`current`. Änderungen können von KI-Schwankungen, neuem Kontext oder
+bearbeiteten Quelldaten kommen. Sie beweisen keine geänderten Fakten. Ein
+fehlender Post beweist auch keine Löschung.
+
+Das Baseline-Limit `maxBaselineRows` liegt standardmäßig bei 100.000
+Datensätzen. Doppelte Post-IDs, Ladefehler & sich ändernde Dataset-Größen
+stoppen den Vergleich vor der Erfassung. Sie werden nie zu einer leeren
+Baseline.
 
 ## Eigenen Text analysieren
 
-Füge deinen eigenen Text in `texts` ein: Entwürfe, Antworten, Rezensionen
-oder Notizen. Der Actor analysiert ihn & ruft nichts von X ab.
+Füge eigene Entwürfe, Antworten, Rezensionen oder Notizen in `texts` ein.
+X (Twitter) Brand Monitoring von Xquik analysiert sie. Es ruft nichts von X ab.
 
 ```json
 {
@@ -135,30 +140,30 @@ oder Notizen. Der Actor analysiert ihn & ruft nichts von X ab.
 ```
 
 - Jeder Text wird zu 1 Datensatz mit denselben `analysis`-Antworten wie ein
-  Tweet.
-- `tweet.id` ist `text:1`, `text:2` & so weiter, & `tweet.type` ist `text`.
-- Jeder analysierte Text kostet dieselben $0.0003 wie ein analysierter Tweet.
-- Ist `texts` gesetzt, analysiert der Run nur diese Texte. Führe X-Ziele
-  separat aus.
+  Post.
+- `tweet.id` ist `text:1`, `text:2` usw. `tweet.type` ist `text`.
+- Jeder analysierte Text kostet dieselben $0.0003 wie ein analysierter Post.
+- Ist `texts` gesetzt, analysiert der Run nur diese Texte. Starte X-Ziele in
+  einem eigenen Run.
 
-## Preise
+## Was kostet es, eine Marke auf X zu überwachen?
 
-Die KI-Kosten sind im Preis pro Tweet enthalten. Du brauchst kein KI-Konto,
-keine Tokens und keinen Schlüssel.
+X (Twitter) Brand Monitoring von Xquik kostet ab $0.0003 pro analysiertem Post.
+Es verlangt keine Startgebühr. Der Preis enthält Erfassung & KI-Kosten. Du
+brauchst keinen KI-Account, keine Tokens & keinen Schlüssel. Der Preis deckt bis
+zu 8 Fragen & 64.000 Byte Kontext pro Post ab. Jede Frage-Definition darf bis zu
+8.000 Byte nutzen.
 
-Ab $0.0003 pro erfolgreich analysiertem Tweet, ohne Startgebühr. Der Preis
-enthält die Erfassung. Das Analyse-Kontingent umfasst 8 Fragen, 8.000 Byte pro
-Frage-Definition & 64.000 Byte Kontext pro Tweet. Extraktionsfilter &
-Deduplizierung laufen vor der Analyse, sodass du nie für herausgefilterte oder
-doppelte Datensätze zahlst. Fehlgeschlagene Analysen, übersprungene Analysen &
-Diagnose-Datensätze verursachen keine Ergebnisgebühr. Apify berechnet die
-Plattformnutzung für Rechenleistung, Speicher & Transfer separat zu den Sätzen
-deines Plans. Der Tab Pricing zeigt sie.
+Extraktionsfilter & Deduplizierung laufen vor der Analyse. Herausgefilterte oder
+doppelte Datensätze zahlst du nie. Fehlgeschlagene Analysen, übersprungene
+Analysen & Diagnose-Datensätze kosten keine Ergebnisgebühr. Apify berechnet die
+Plattformnutzung für Rechenzeit, Speicher & Datentransfer separat, zu den
+Preisen deines Plans. Der Tab Pricing zeigt sie.
 
 ## Eingabe- & Ausgabebeispiele
 
-Die obige Eingabe ist kopierfertig. Ausgabedatensätze sehen so aus
-(gekürzt):
+Die Eingabe oben kannst du direkt kopieren. Ein gekürzter Ausgabedatensatz sieht
+so aus:
 
 ```json
 {
@@ -186,14 +191,14 @@ Die obige Eingabe ist kopierfertig. Ausgabedatensätze sehen so aus
 ```
 
 Jedes Ergebnis enthält `tweet`, `analysis` & `monitor`. Antworten enthalten
-Typen, Fragenversionen & verfügbare Wahrscheinlichkeiten. Fehlender Zitat-,
-Antwort-, Autoren- & Medienkontext bleibt unter
-`analysis.contextAvailability` explizit sichtbar. Eine fehlgeschlagene oder
-übersprungene Analyse behält den gesammelten Tweet mit einer leeren
-Antwortliste & einem `reason`. Kostenlose Diagnosen im Key-Value-Store
-erklären ungültige Eingaben, fehlende Ergebnisse & unterbrochene Erfassung,
-& der Run-Report trennt gesammelte Datensätze, abgerechnete Analysen &
-ausstehende Gebühren.
+Typen, Fragenversionen & verfügbare Wahrscheinlichkeiten.
+`analysis.contextAvailability` meldet fehlenden Kontext zu Zitat, Antwort, Autor
+& Medien. Ein Datensatz mit fehlgeschlagener oder übersprungener Analyse behält
+den gesammelten Post & einen `reason`. Seine Antwortliste ist leer.
+
+Kostenlose Diagnosen im Key-Value-Store erklären ungültige Eingaben, fehlende
+Ergebnisse & unterbrochene Erfassung. Der Run-Report trennt gesammelte
+Datensätze, abgerechnete Analysen & ausstehende Gebühren.
 
 ## Run-Zusammenfassung & flache Antworten
 
@@ -202,51 +207,50 @@ Key-Value-Store:
 
 - Er hat ein Problem oder ist groß.
 - Er setzt `monitor` ohne `baselineDatasetId`, als erster Run einer Serie.
-- Sein Vergleich findet einen geänderten, neuen oder nicht vergleichbaren Tweet.
+- Sein Vergleich findet einen geänderten, neuen oder nicht vergleichbaren Post.
 - Er hat `alwaysSaveRunRecords` aktiviert.
 
-Andere Runs überspringen den Datensatz. Ihr Statustext nennt die häufigste
-Antwort, etwa `Top sentiment: negative in 2 of 5 results.` Ein Vergleich ohne
-Änderung meldet `No change since the earlier run.` Ein Run mit einem Problem
-oder ein großer Run schreibt zusätzlich `run-report`. Das gilt auch für einen
-Run mit aktiviertem `alwaysSaveRunRecords`. `run-report` wiederholt die
-Zusammenfassung unter `results.analysisSummary`.
+Andere Runs überspringen den Datensatz. Ihr Status nennt die wichtigste Antwort,
+etwa `Top sentiment: negative in 2 of 5 results.` Ein Vergleich ohne Änderung
+meldet `No change since the earlier run.` Ein Run mit einem Problem oder ein
+großer Run schreibt zusätzlich `run-report`. Das gilt auch für einen Run mit
+aktiviertem `alwaysSaveRunRecords`. `run-report` wiederholt die Zusammenfassung
+unter `results.analysisSummary`.
 
 Die Zusammenfassung zählt analysierte, fehlgeschlagene & übersprungene
-Datensätze, summiert Interaktionen und fasst jede Frage zusammen.
+Datensätze. Sie summiert Interaktionen & fasst jede Frage zusammen.
 
-- `targets` meldet Erwähnungen, Share of Voice & Interaktion pro Marke oder
+- `targets` meldet Erwähnungen, Share of Voice & Interaktionen pro Marke oder
   Alias.
-- Jeder `targets`-Eintrag hat `top`, seine drei Erwähnungen mit der meisten
-  Interaktion pro Antwortkategorie. Nutze es für Alarme zu den stärksten
+- Jeder Eintrag in `targets` hat `top`, seine 3 Erwähnungen mit den meisten
+  Interaktionen pro Antwortkategorie. Nutze es für Alarme zu den stärksten
   negativen & positiven Erwähnungen.
-- Jeder `targets`-Eintrag hat `choices`, die Antwortaufteilung unter Tweets, die
-  diese Marke erwähnen.
-- Der `sentiment`-Block listet unter `top` die drei positiven & negativen
-  Erwähnungen mit der meisten Interaktion.
-- `relevance` zählt die Erwähnungen, die die Marke betreffen.
-- `monitor.changedRows` listet Tweets, deren Entscheidungen sich seit der
+- Jeder Eintrag in `targets` hat `choices`, die Verteilung der Antworten unter
+  Posts, die diese Marke erwähnen.
+- Der Block `sentiment` listet unter `top` die 3 positiven & negativen
+  Erwähnungen mit den meisten Interaktionen.
+- `relevance` zählt die Erwähnungen, die wirklich die Marke betreffen.
+- `monitor.changedRows` listet Posts, deren Entscheidungen sich seit der
   Baseline geändert haben. Sende sie an einen Webhook oder einen Alarm.
-- Ist `monitor.baselineDatasetId` gesetzt, zählt der `monitor`-Block
-  Vergleichsstatus & listet bis zu 50 geänderte Datensätze.
+- Ist `monitor.baselineDatasetId` gesetzt, zählt der Block `monitor` die
+  Vergleichsstatus. Er listet bis zu 50 geänderte Datensätze.
 - Jeder Datensatz listet `sourceDomains`, die Hostnamen, auf die er verlinkt.
 
 Die Zusammenfassung rundet Zahlen auf 4 Nachkommastellen. Ein leerer Run meldet
-Nullwerte & `null`-Mittelwerte.
+Zählwerte von 0 & `null`-Mittelwerte.
 
-Jeder Ergebnisdatensatz führt außerdem `answers`, eine flache Zuordnung
-von Frage-ID zu gewählter Kategorie, Score oder Wahrscheinlichkeit. Die
-Dataset-Ansicht „Flat answers" sowie CSV- oder Excel-Exporte zeigen eine
-Spalte pro Frage neben dem Tweet, sodass Tabellenkalkulationen kein JSON
-parsen müssen. Fehlgeschlagene & übersprungene Datensätze führen eine
-leere Zuordnung.
+Jeder Ergebnisdatensatz enthält außerdem `answers`, eine flache Zuordnung mit
+der Frage-ID als Schlüssel. Jeder Wert ist die gewählte Kategorie, der Score
+oder die Wahrscheinlichkeit. Die Dataset-Ansicht `Flat answers` & CSV- oder
+Excel-Exporte zeigen 1 Spalte pro Frage. Die Spalten stehen neben dem Post,
+Tabellen brauchen also kein JSON-Parsing. Fehlgeschlagene & übersprungene
+Datensätze enthalten eine leere Zuordnung.
 
 ## Task-Beispiele
 
-Wähle aus 50 öffentlichen Tasks. Jeder startet mit einer echten
-englischen Suche mit begrenztem `maxItems`, vorgefertigten Zielen &
-Kontext, & der Übersichts-Dataset-Ansicht. Bearbeite die Suche oder die
-Ziele vor dem Ausführen.
+Wähle aus 50 öffentlichen Tasks. Jeder startet mit einer echten englischen Suche
+& einem begrenzten `maxItems`. Er enthält fertige Ziele, Kontext & die
+Dataset-Ansicht Overview. Passe Suche oder Ziele an, bevor du startest.
 
 - [Monitor Nike brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-nike-brand-mentions-on-x)
 - [Monitor Starbucks brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-starbucks-brand-mentions-on-x)
@@ -261,107 +265,109 @@ Ziele vor dem Ausführen.
 - [Monitor Duolingo brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-duolingo-brand-mentions-on-x)
 - [Monitor Lululemon brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-lululemon-brand-mentions-on-x)
 
-Die übrigen Tasks decken weitere Marken, Themen & Märkte auf der
-Actor-Seite ab.
+Die übrigen Tasks auf der Actor-Seite decken weitere Marken, Themen & Märkte ab.
 
-## Verwandte Xquik Actors
+## Verwandte Xquik-Actors
 
-Jeder Xquik Actor nutzt dieselbe Extraktions-Engine, filterbasierte
-Abrechnung & Diagnosen. Wähle den, der zu deinen Daten passt.
+Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, rechnet erst nach dem
+Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): Scrapt Tweets
-  aus Suchen, Profil-Timelines, Listen & Tweet-IDs mit über 50 Filtern &
-  flachen Exporten. Nutze ihn, wenn du Tweet-Daten ohne Analyse brauchst. Ab
-  $0.00015 pro Datensatz.
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): Scrapt Posts aus
+  Suchen, Profil-Timelines, Listen & Post-IDs mit über 50 Filtern & flachen
+  Exporten. Nutze ihn, wenn du Post-Daten ohne Analyse brauchst. Ab $0.00015
+  pro Datensatz.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Scrapt
-  Profile samt Beiträgen, Antworten, Medien & Followern anhand von Handles, IDs
+  Profile samt Posts, Antworten, Medien & Followern anhand von Nutzernamen, IDs
   oder URLs. Nutze ihn, wenn du von Accounts statt von Suchen ausgehst. Ab
   $0.00015 pro Datensatz.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Scrapt
-  Antworten, Kommentare & ganze Unterhaltungen unter Beiträgen mit über 25
-  Filtern. Nutze ihn, wenn du die Diskussion unter Tweets brauchst. Ab
-  $0.00015 pro Datensatz.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Scrapt
-  Antworten, Zitate, Retweeter & Threads zu Beitrags-URLs oder -IDs in
-  großen Mengen. Nutze ihn, wenn du misst, wer mit Beiträgen interagiert hat.
-  Ab $0.00015 pro Datensatz.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Scrapt
-  Follower, Gefolgte, Listenmitglieder, Abonnenten & Community-Mitglieder als
-  Profil-Datensätze. Nutze ihn, wenn du Zielgruppen- oder Mitgliederlisten
-  brauchst. Ab $0.00015 pro Profil.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Sucht Nutzer nach Handle, Bio & Standort mit Filtern für Follower,
-  Verifizierung, Kontoalter & Standort. Nutze ihn, wenn du Account-Listen aus
-  einer Suche aufbaust. Ab $0.00015 pro Profil.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): Scrapt
-  Listenbeiträge, -mitglieder & -follower aus Listen-URLs oder -IDs. Nutze
-  ihn, wenn eine kuratierte Liste deine Quellen festlegt. Ab $0.00015 pro
+  Antworten, Kommentare & ganze Konversationen unter Posts mit über 25 Filtern.
+  Nutze ihn, wenn du die Diskussion unter Posts brauchst. Ab $0.00015 pro
   Datensatz.
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Scrapt
+  Antworten, Zitate, Reposter & Threads zu Post-URLs oder -IDs in großen
+  Mengen. Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015
+  pro Datensatz.
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Scrapt
+  Follower, gefolgte Accounts, Listenmitglieder, Abonnenten &
+  Community-Mitglieder als Profil-Datensätze. Nutze ihn, wenn du Zielgruppen-
+  oder Mitgliederlisten brauchst. Ab $0.00015 pro Profil.
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
+  Sucht Nutzer nach Nutzername, Bio & Standort mit Filtern für Follower,
+  Verifizierung, Account-Alter & Standort. Nutze ihn, wenn du Account-Listen
+  aus einer Suche aufbaust. Ab $0.00015 pro Profil.
+- [X List Scraper](https://apify.com/xquik/x-list-scraper): Scrapt Posts,
+  Mitglieder & Follower von Listen aus Listen-URLs oder -IDs. Nutze ihn, wenn
+  eine kuratierte Liste deine Quellen festlegt. Ab $0.00015 pro Datensatz.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapt
-  Community-Infos, Beiträge, Suchen, Mitglieder & Moderatoren. Nutze ihn,
-  wenn deine Quellen X-Communities sind. Ab $0.00015 pro Datensatz.
+  Community-Infos, Posts, Suchen, Mitglieder & Moderatoren. Nutze ihn, wenn
+  deine Quellen X-Communities sind. Ab $0.00015 pro Datensatz.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapt
   Echtzeit-Trends nach Standort mit Rang, Volumen, Suchbegriff & WOEID. Nutze
   ihn, wenn du verfolgst, was wo gerade angesagt ist. Ab $0.00015 pro Trend.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapt
   lange X-Artikel als Markdown & Text mit Titelbildern, Autoren, Daten &
-  Kennzahlen. Nutze ihn, wenn du Artikeltexte statt Tweets brauchst. Ab
+  Kennzahlen. Nutze ihn, wenn du Artikeltexte statt Posts brauchst. Ab
   $0.00015 pro Artikel.
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader):
-  Extrahiert oder speichert Fotos, Videos & GIFs aus Beiträgen oder Profilen
-  mit MP4- & Metadaten-Optionen. Nutze ihn, wenn du die Mediendateien selbst
+  Extrahiert oder speichert Fotos, Videos & GIFs aus Posts oder Profilen mit
+  MP4- & Metadaten-Optionen. Nutze ihn, wenn du die Mediendateien selbst
   brauchst. Ab $0.00015 pro Medien-Datensatz.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
   Kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden
-  Tweet mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema
-  brauchst. Ab $0.0003 pro analysiertem Tweet.
+  Post mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema
+  brauchst. Ab $0.0003 pro analysiertem Post.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
   Kennzeichnet bullische, bärische, neutrale oder gemischte Haltung,
   Inhaltstyp, Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du
-  Aktien, Krypto oder Trading-Talk verfolgst. Ab $0.0003 pro analysiertem
-  Tweet.
+  Aktien, Krypto oder Trading-Talk verfolgst. Ab $0.0003 pro analysiertem Post.
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
-  Kennzeichnet News-Beiträge nach Format, Quellenangabe & Themenrelevanz mit
-  KI. Nutze ihn, wenn du Berichterstattung von Kommentaren trennst. Ab
-  $0.0003 pro analysiertem Tweet.
+  Kennzeichnet News-Posts nach Format, Quellenangabe & Themenrelevanz mit KI.
+  Nutze ihn, wenn du Berichterstattung von Kommentaren trennst. Ab $0.0003 pro
+  analysiertem Post.
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  Beantwortet deine eigenen Kategorie-, Score- & Ja/Nein-Fragen für jeden
-  Tweet mit KI. Nutze ihn, wenn die vorgefertigten Analysen nicht zu deinen
-  Labels passen. Ab $0.0003 pro analysiertem Tweet.
+  Beantwortet deine eigenen Kategorie-, Score- & Ja/Nein-Fragen für jeden Post
+  mit KI. Nutze ihn, wenn die vorgefertigten Analysen nicht zu deinen Labels
+  passen. Ab $0.0003 pro analysiertem Post.
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
-  Schätzt für jeden Tweet einen Viral Score von 0 bis 100 & ein Urteil aus 8
-  KI-Antworten zu Merkmalen. Nutze ihn, wenn du untersuchst, warum Tweets sich
-  verbreiten oder floppen. Ab $0.0003 pro analysiertem Tweet.
+  Schätzt für jeden Post einen Viral Score von 0 bis 100 & ein Urteil aus 8
+  KI-Antworten zu Merkmalen. Nutze ihn, wenn du untersuchst, warum Posts sich
+  verbreiten oder floppen. Ab $0.0003 pro analysiertem Post.
 
 ## FAQ & Support
 
+### Brauche ich einen KI-Account, einen X-API-Schlüssel oder einen Login?
+
+Nein. X (Twitter) Brand Monitoring von Xquik enthält die KI-Kosten im Preis. Du
+brauchst keinen KI-Account, keine Tokens & keinen Schlüssel. Du brauchst auch
+keinen X-API-Schlüssel, keinen Login & keine Zugangsdaten.
+
 ### Kann ich eigene Fragen nutzen?
 
-Ja. Eigene `analysis.questions` ersetzen die Standardwerte. Sende 1-8 `choice`-,
-`score`- oder `probability`-Fragen. Choice-Fragen akzeptieren 2-255 Kategorien.
-Scores nutzen mindestens 2 geordnete Stufen. Halte dieselben Fragen über Runs
-hinweg, die du vergleichen willst.
+Ja. Eigene `analysis.questions` ersetzen die Standardfragen. Sende 1 bis 8
+Fragen vom Typ `choice`, `score` oder `probability`. Choice-Fragen akzeptieren 2
+bis 255 Kategorien. Score-Fragen brauchen mindestens 2 geordnete Stufen.
+Behalte dieselben Fragen in allen Runs, die du vergleichen willst.
 
 ### Warum kam ein Datensatz mit `analysis.status` `failed` oder `skipped` zurück?
 
-Der Actor hat den Tweet gesammelt & geliefert, aber die KI-Analyse wurde nicht
-abgeschlossen. `analysis.reason` nennt die Ursache. `context_limit` bedeutet,
-dass dein Kontext & deine Ziele keinen Platz für den Tweet lassen.
-`service_unavailable` bedeutet, dass der Analysedienst kurz nicht verfügbar war.
-Diese Datensätze verursachen keine Ergebnisgebühr. Kürze `analysis.context` oder
-führe die betroffenen IDs erneut aus.
+Der Actor hat den Post gesammelt & geliefert, aber die KI-Analyse lief nicht zu
+Ende. `analysis.reason` nennt die Ursache. `context_limit` bedeutet, dass dein
+Kontext & deine Ziele keinen Platz für den Post lassen. `service_unavailable`
+bedeutet, dass der Analysedienst kurz nicht erreichbar war. Diese Datensätze
+kosten keine Ergebnisgebühr. Kürze `analysis.context` oder starte einen
+neuen Run für die betroffenen IDs.
 
-Der Actor analysiert auch einen Tweet, der länger als `maxContextBytes` ist. Er
-kürzt zuerst zitierte & beantwortete Beiträge, dann den Tweet.
+Der Actor analysiert auch einen Post, der länger als `maxContextBytes` ist. Er
+kürzt zuerst zitierte & beantwortete Posts, dann den Post selbst.
 `analysis.contextAvailability.postText` ist dann `truncated`. Erhöhe
 `maxContextBytes` auf bis zu 64.000, um mehr Text zu behalten.
 
 ### Prüft die Analyse Fakten?
 
-Nein. Antworten beschreiben, was der Beitrag ausdrückt & wie der Beitrag es
-formuliert. Wahrscheinlichkeiten drücken die Modellsicherheit aus, nicht die
-Wahrheit. Überprüfe wichtige Einstufungen anhand des ursprünglichen Tweets, den
-jeder Datensatz behält.
+Nein. Antworten beschreiben, was der Post ausdrückt & wie er es darstellt.
+Wahrscheinlichkeiten drücken die Sicherheit der KI aus, nicht die Wahrheit.
+Prüfe wichtige Einstufungen am Originalpost, den jeder Datensatz behält.
 
 ### Welche Sprachen funktionieren?
 
@@ -372,16 +378,28 @@ Wahrscheinlichkeiten zeigen Unsicherheit in jeder Sprache.
 
 ### Wie begrenze ich die Kosten?
 
-Filter, Deduplizierung & `maxItems` laufen vor der Analyse, sodass der Actor nur
-eindeutige, filterkonforme Tweets analysiert & berechnet. Nutze präzise
-Suchoperatoren, Datumsgrenzen & Interaktionsuntergrenzen, & starte mit einem
-kleinen `maxItems`, um die Antwortqualität vor einem großen Run zu prüfen.
+Filter, Deduplizierung & `maxItems` laufen vor der Analyse. Du zahlst nur für
+eindeutige Posts, die zu deinen Filtern passen. Nutze präzise Suchoperatoren,
+Datumsgrenzen & Mindestwerte für Interaktionen. Starte mit einem kleinen
+`maxItems`, um die Qualität der Antworten vor einem großen Run zu prüfen.
+
+### Ist es legal, X-Daten zu analysieren?
+
+Der Actor fragt öffentliche X-Felder ab. Ergebnisse können personenbezogene
+Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist. Befolge geltende
+Datenschutzregeln. Hol dir bei Unsicherheit qualifizierten Rechtsrat.
+
+### Kann ich API, Zeitpläne & Integrationen nutzen?
+
+Ja. Im [API-Tab](https://apify.com/xquik/x-twitter-brand-monitoring/api)
+findest du Beispiele für Python, JavaScript & cURL. Nutze
+Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) für wiederkehrende
+Runs. Übergib die vorherige Dataset-ID als `monitor.baselineDatasetId`, um
+Änderungen zu sehen. Apify-Integrationen verbinden Runs auch mit Webhooks, Make,
+Zapier, n8n & Google Sheets.
 
 ### Wo bekomme ich Hilfe?
 
-Öffne ein Issue auf der Actor-Seite oder kontaktiere
-support@xquik.com mit der Run-ID. Kostenlose Diagnosen im
-Key-Value-Store erklären leere, teilweise oder unterbrochene Runs.
-
-Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
-„Twitter" und „X" sind Marken von X Corp.
+Öffne ein Issue auf der Actor-Seite oder schreib mit der Run-ID an
+support@xquik.com. Kostenlose Diagnosen im Key-Value-Store erklären leere,
+unvollständige oder unterbrochene Runs.

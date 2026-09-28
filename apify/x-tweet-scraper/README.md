@@ -1,72 +1,366 @@
-<p align="center">
-  <strong>English</strong> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+**English** ·
+[Español](README.es.md)
+·
+[Türkçe](README.tr.md)
+·
+[简体中文](README.zh-CN.md)
+·
+[日本語](README.ja.md)
+·
+[한국어](README.ko.md)
+·
+[Deutsch](README.de.md)
+·
+[Français](README.fr.md)
+·
+[Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer connects Xquik MCP to coding agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Watch how Framer uses Xquik scrapers with Claude Code, Codex, Cursor, and more, from 6:07.</a>
-</td></tr></table>
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
+
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
+Claude Code, Codex, Cursor, and more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data. X Tweet Scraper collects tweets, replies, profiles, lists
-& searches with 50+ filters. Most other Apify Actors charge before filtering or
-deduplicating. Xquik charges only for delivered, unique, filter-matching
-results.
+most complete X data. Xquik's X Tweet Scraper collects tweets, replies,
+profiles, lists & searches with 50+ filters. Public benchmarks prove it is the
+cheapest & fastest of 12 tweet Actors. Its rows carry 2x the median Actor's
+fields, as the [benchmark below](#benchmark) shows. Most other Apify Actors
+charge before filtering or deduplicating. Xquik charges only for delivered,
+unique, filter-matching results.
 
-Scrape public X (Twitter) tweets for **from $0.00015 per delivered result on
-every Apify plan**. Apify bills platform usage separately. No X login, start
-fee, or query fee. Built by [Xquik](https://xquik.com).
+Scrape public X (Twitter) tweets **from $0.00015 per delivered result on every
+Apify plan**. Apify bills platform usage separately. You need no X login, & you
+pay no start or query fee. Built by [Xquik](https://xquik.com).
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
 ## What does X Tweet Scraper do?
 
-X Tweet Scraper returns tweets, engagement metrics, public author profiles, and
-media. It accepts URLs, handles, List IDs, Tweet IDs, and search queries with
-50+ filters.
+Xquik's X Tweet Scraper returns tweets, engagement metrics, public author
+profiles & media. It accepts URLs, handles, List IDs, Tweet IDs & search queries
+with 50+ filters.
 
-### Core behavior
+### Key features
 
-- Filters and duplicate removal run before billing.
-- One input supports lookups, timelines, Lists, search, and engagement modes.
-- Tweet ID inputs have no fixed count cap. Apify spend and timeout settings
-  apply.
+- Filters & duplicate removal run before billing.
+- One input supports lookups, timelines, Lists, search & engagement modes.
+- Tweet ID inputs have no fixed count cap. Your Apify spend & timeout settings
+  still apply.
 - Run logs show page timing in `fetchDurationMs`, `processingDurationMs`,
   `pushDurationMs`, `statusDurationMs` & `fullPageDurationMs`.
 - Runs keep delivered rows & progress when Apify restarts them.
 
-### Always use the latest build
+### Use cases
 
-Select `latest` for every run to receive all published fixes.
+- Feed research, enrichment, analytics & AI training with more fields per tweet.
+  Our median row had 63 fields on 2026-09-27. That is 2x the median of 11 other
+  Actors.
+- Track brand sentiment across tweets.
+- Monitor competitor posts & industry terms.
+- Find prospects in public conversations.
+- Collect public datasets for research.
+- Find posts with high public engagement.
 
-If you specify no build, Apify uses this Actor's `latest` default. Console runs
-and standard API examples inherit that default.
+### What data can X Tweet Scraper extract?
 
-Saved tasks may override the Actor default. Schedules and task integrations
-reuse that choice. Keep every override set to `latest`.
+| Field                  | Description                                      |
+| ---------------------- | ------------------------------------------------ |
+| `id`                   | Tweet ID                                         |
+| `text`                 | Full text, including Note Tweets up to 25k chars |
+| `createdAt`            | X native timestamp string                        |
+| `likeCount`            | Number of likes                                  |
+| `retweetCount`         | Number of retweets                               |
+| `replyCount`           | Number of replies                                |
+| `quoteCount`           | Number of quote tweets                           |
+| `viewCount`            | Number of views                                  |
+| `bookmarkCount`        | Number of bookmarks                              |
+| `lang`                 | Tweet language                                   |
+| `url`                  | Direct link to tweet                             |
+| `tweetUrl`             | Flat output tweet URL alias                      |
+| `twitterUrl`           | Flat output `twitter.com` URL                    |
+| `author`               | Author fields: username, bio, website, counts    |
+| `authorUsername`       | Flat output author handle                        |
+| `authorFollowers`      | Flat output author follower count                |
+| `authorUrl`            | Flat output author website when available        |
+| `authorDescription`    | Flat output author bio text                      |
+| `authorCoverPicture`   | Flat output author banner image URL              |
+| `authorPinnedTweetIds` | Flat output author pinned tweet IDs              |
+| `media`                | Attached images, videos, GIFs                    |
+| `mediaUrls`            | Flat output media URLs                           |
+| `imageUrls`            | Flat output image URLs                           |
+| `videoUrls`            | Flat output video URLs                           |
+| `entities`             | Hashtags, URLs, mentions, and video timestamps   |
+| `displayTextRange`     | X display text range when available              |
+| `contentDisclosure`    | Disclosure metadata when available               |
+| `conversationControl`  | Reply policy and public conversation owner       |
+| `reactionContext`      | Public post and user referenced by a reaction    |
+| `limitedActions`       | Public interaction restrictions and prompts      |
+| `isLimitedReply`       | Whether replies are limited                      |
+| `isNoteTweet`          | Whether this is a Note Tweet (long-form post)    |
+| `isQuoteStatus`        | Whether this tweet quotes another tweet          |
+| `isRetweet`            | Whether this row is a retweet, original attached |
+| `isPinned`             | Whether the author pinned this post, flat rows   |
+| `isReply`              | Whether this tweet is a reply                    |
+| `quoted_tweet`         | Quoted tweet object (if quote tweet)             |
+| `conversationId`       | Thread/conversation ID                           |
+| `resultType`           | Row type for rich, engagement & diagnostic rows  |
+| `sourceTweetId`        | Source tweet ID for article and engagement modes |
+| `article`              | Structured article data in `mode: "article"`     |
 
-Apify does not redirect exact build numbers to `latest`. Replace pinned numbers
-with `latest`. Use an exact build only for temporary rollback or
-reproducibility.
+Optional tweet metadata includes `authorUnavailable`, `card`, `communityId`,
+`communityNote`, `edit`, `exclusiveContent`, `noteTweet` & `postCta`.
+`isTranslatable`, `place`, `possiblySensitive` & `viewState` keep other public
+context. `previousCounts` keeps pre-edit engagement. `tombstone` keeps
+visibility notices. `unmentionedUserIds` lists users who left the conversation.
+See OpenAPI for the exact fields.
 
-Read Apify's
-[build tags](https://docs.apify.com/platform/actors/development/builds-and-runs/builds),
-[run options](https://docs.apify.com/platform/actors/running/runs-and-builds),
-and [task documentation](https://docs.apify.com/platform/actors/running/tasks).
+Nested `author` objects carry public profile fields. They cover identity,
+counts, verification, availability, professional data & profile biographies.
+
+Retweet rows set `isRetweet` to `true`. Their `text` carries the original post
+in full. `retweeted_tweet` holds the original post with its author & counts.
+
+Tweet rows also keep `type`, `source`, `inReplyToId`, `inReplyToUserId`,
+`inReplyToUsername` & `retweeted_tweet`. Quoted & reposted tweets carry the same
+fields at every nesting level.
+
+Media carries availability, geometry, tags & video variants. It also carries the
+`watchNowUrl` & `visitSiteUrl` actions.
+
+Rows never include viewer-only state. The Actor removes follow, block, mute,
+bookmark, like, repost, edit-permission & similar viewer flags. Raw output drops
+them too.
+
+## How do I use X Tweet Scraper to scrape tweet data?
+
+Each example below is a complete input. Pick the one that fits your data.
+
+Follow these steps in Apify Console:
+
+1. Open a [task example](#task-examples) or the Input tab.
+2. Add URLs, handles, Tweet IDs or search terms.
+3. Set `maxItems` & any filters you need.
+4. Click Start & wait for the run to finish.
+5. Export the dataset as JSON, CSV, Excel or HTML.
+
+The recipes below show the input for each source.
+
+### Paste URLs
+
+Paste any mix of tweet, profile, search or List URLs:
+
+```json
+{
+  "startUrls": [
+    { "url": "https://x.com/elonmusk/status/1846987139428634858" },
+    { "url": "https://x.com/nasa" },
+    { "url": "https://x.com/search?q=AI%20lang%3Aen" },
+    { "url": "https://x.com/i/lists/1748648376080666720" }
+  ],
+  "maxItems": 500
+}
+```
+
+Tweet URLs return those tweets, unique & in your input order. Profile URLs
+return the account's posts. Search URLs run their query. List URLs return the
+List's posts. `maxItems` caps results across all pasted URLs.
+
+### Scrape many handles
+
+Handles work as shorthand for many `from:username` searches:
+
+```json
+{ "twitterHandles": ["elonmusk", "nasa", "openai"], "maxItems": 100 }
+```
+
+Each handle returns that account's posts. The Actor removes duplicate rows
+before output & billing. You can add usernames with or without `@`. Handles &
+profile URLs keep reposts, as the Posts tab on X does. They keep them even with
+dates or filters. Set `tweetTypes.excludeRetweets` to drop them.
+
+### Search tweets
+
+Put one or more queries in the Search terms field:
+
+```json
+{
+  "searchTerms": ["from:elonmusk AI", "#bitcoin lang:en"],
+  "maxItems": 1000,
+  "queryType": "Latest"
+}
+```
+
+With `mode` set to `tweet` or `tweets` & no Tweet IDs, queries run as Search.
+Valid `searchTerms` then never return an empty lookup.
+
+Account backfills with date windows work too, such as
+`from:elonmusk since:2026-01-01 until:2026-01-02`. Each term keeps its own
+`searchTerm` attribution. `maxItems` caps results across all search terms. The
+Actor checks every returned tweet against `since:`, `until:` & Unix-time
+windows. Filtered searches keep reading until they find matches or X has no more
+results.
+
+A `from:` search term returns what X search returns, so it leaves out reposts.
+Add `include:nativeretweets` to keep them, or `filter:nativeretweets` for
+reposts only.
+
+### Look up tweets by ID
+
+```json
+{ "tweetIds": ["1846987139428634858", "1858743654778892784"], "maxItems": 100 }
+```
+
+Results keep your input order, drop duplicates & include only the tweets you
+asked for. The lookup also accepts `tweetId`, `tweetIDs`, `tweets`, `postIds`,
+`lookupPostIds`, `tweetUrls` & `postUrls`.
+
+### Engagement, thread & article modes
+
+Set `mode` to force one route, whatever other fields the input holds:
+
+```json
+{ "mode": "replies", "replyTweetIds": ["1846987139428634858"], "maxItems": 100 }
+```
+
+Tweet & search modes are `tweet`, `tweets` & `search`. Profile modes are
+`profileTweets`, `profileReplies`, `profileMedia` & `profileLikes`. `listTweets`
+reads List posts, & `article` reads the X article in a post. Modes for a single
+post are `replies`, `quotes`, `thread`, `retweeters` & `favoriters`.
+
+`profileTweets` follows the profile Posts tab on X. It returns the account's
+posts, reposts & replies to its own posts. Rows come in date order. The Actor
+drops replies to other accounts before billing. It also drops conversation
+context from other authors.
+
+For original posts only, exclude the types you do not want:
+
+```json
+{
+  "mode": "profileTweets",
+  "twitterHandles": ["apify"],
+  "tweetTypes": { "excludeReplies": true, "excludeRetweets": true },
+  "maxItems": 100
+}
+```
+
+`tweetTypes.excludeReplies`, `excludeRetweets` & `excludeQuotes` work on every
+source. A search sends them to X as `-filter:replies`, `-filter:nativeretweets`
+& `-filter:quote`. On a profile or a List, the Actor drops those rows itself.
+Excluded rows never reach the dataset, so you never pay for them. They never
+count toward `maxItems` either.
+
+`profileReplies` follows X's With Replies tab. It returns the account's own
+posts & replies. The Actor excludes conversation context from other authors. Use
+`filter:replies` or a `to:` search for reply-only results.
+
+Search & paginated Tweet modes support `time.since`, `time.until`, Unix
+timestamps & `lang`. These include profile Posts, With Replies, Media, Likes,
+Lists, replies, quotes & threads. Matching flat date operators work too. The
+Actor verifies each row before billing. The lower date bound is inclusive. The
+upper bound is exclusive. Date filters exclude rows without usable dates.
+Language filters exclude missing or mismatched languages. Filtered rows never
+use up your result limit.
+
+The same date for `since` & `until` gives an empty window. Set `until` to the
+next day to get 1 full day. List runs with a date window reach older days
+quickly. They end once they pass your lower bound. Windows far back in a List
+can miss a few replies. Tweet filters do not apply to user lists or direct Tweet
+or article lookups.
+
+`time.withinTime` & `within_time` work in the same modes. A value of `7d` keeps
+the last 7 days before the run starts reading. A window reaching back before
+2006 keeps every post.
+
+`mode: "replies"` is stricter. Every tweet row has `inReplyToId` equal to the
+requested tweet ID. Nested conversation replies never count as direct replies.
+If X shows fewer replies than it reports, the Actor keeps the rows it found. It
+adds 1 `replies-incomplete` record to `diagnostics` when your limit is not
+reached. The run stays partial until it reaches your limit or X has no more
+replies. `replyCoverage` reports reply counts & coverage details. Set `maxItems`
+to the total you want, even above 25,000 for one reply target.
+
+Article rows include `resultType: "article"`, `sourceTweetId`, `article` &
+optional `author`. Engagement user rows include `resultType: "user"`,
+`sourceTweetId` & `engagementMode`.
+
+Retweeters work as a normal public engagement mode. Favoriters are best effort.
+X may show likers only on eligible or owner-visible posts. Profile likes are
+best effort too, since many public profiles have no readable Likes tab. If X
+shows no users or liked tweets, the Actor writes a free `diagnostics` record.
+Tweet rows can carry bookmark counts. X does not show which accounts bookmarked
+a post.
+
+### Export flat CSV rows
+
+Keep the default nested JSON fields, or add spreadsheet-friendly columns:
+
+```json
+{ "searchTerms": ["from:nasa moon"], "maxItems": 100, "outputPreset": "flat" }
+```
+
+Flat output keeps `author` & `media` unchanged. It adds top-level fields such as
+`authorUsername`, `authorName`, `authorFollowers`, `tweetUrl`, `twitterUrl`,
+`mediaUrls`, `imageUrls` & `videoUrls`.
+
+Every flat tweet row carries `media`. A tweet without media has an empty list.
+Each row then has the same keys in a spreadsheet or typed pipeline.
+
+### Choose field names
+
+Legacy field names are the default. Pick a style for rich or raw results:
+
+```json
+{
+  "searchTerms": ["from:nasa moon"],
+  "maxItems": 100,
+  "outputVariant": "rich",
+  "fieldStyle": "snake_case"
+}
+```
+
+Use `camelCase` or `snake_case` for top-level & nested result fields. Flat snake
+case output includes fields such as `author_username` & `media_urls`. Safe
+source snapshots under `raw` keep their original source keys. Conflicting source
+names also stay unchanged to prevent data loss.
+
+Legacy diagnostics use `resultType`, `actorVersion` & `replyCoverage`. Rich &
+raw output apply `fieldStyle` at every nesting level. For example, snake case
+uses `result_type`, `actor_version` & `reply_coverage`. The Overview dataset
+view works with either style. Choose the Console view matching the run's
+`fieldStyle`. `camelCase fields` expects `camelCase`. `snake_case fields`
+expects `snake_case`. Views select columns only. They never rename stored or
+exported data.
+
+### Combine advanced filters
+
+Combine user, date, location, media & engagement filters:
+
+```json
+{
+  "twitterContent": "AI",
+  "from": "elonmusk",
+  "since": "2026-01-01_00:00:00_UTC",
+  "until": "2026-03-01_00:00:00_UTC",
+  "lang": "en",
+  "filter:media": true,
+  "min_faves": 1000,
+  "maxItems": 500
+}
+```
+
+Set `queryType: "Latest + Top"` to run both X search modes in one run. The Actor
+removes duplicates before billing & fills your limit from either mode. `Top`
+sorts by relevance & does not return every match. Set `includeSearchTerms: true`
+to attach each matching query as a `searchTerm` field.
+
+When you set `lang`, the Actor verifies each returned tweet's language. It skips
+mismatches & keeps reading for matching tweets.
 
 ## Task examples
 
-Choose from 50 public tasks. Each has a bounded input and a matching dataset
-view. Every task opens with a real search or target. Edit it before running.
+Choose from 50 public tasks. Each has a bounded input & a matching dataset view.
+Every task opens with a real search or target. Edit it before you run it.
 
 - [Fetch fresh X posts for AI agents](https://apify.com/xquik/x-tweet-scraper/examples/search-x-posts-for-ai-agents)
 - [Build an X dataset for RAG](https://apify.com/xquik/x-tweet-scraper/examples/build-x-rag-dataset)
@@ -81,158 +375,33 @@ view. Every task opens with a real search or target. Edit it before running.
 - [Extract a complete Twitter thread](https://apify.com/xquik/x-tweet-scraper/examples/extract-complete-twitter-thread)
 - [Collect Spanish AI conversations](https://apify.com/xquik/x-tweet-scraper/examples/collect-spanish-ai-conversations)
 
-### What data can X Tweet Scraper extract?
-
-| Field                  | Description                                              |
-| ---------------------- | -------------------------------------------------------- |
-| `id`                   | Tweet ID                                                 |
-| `text`                 | Full tweet text (including Note Tweets up to 25k chars)  |
-| `createdAt`            | X native timestamp string                                |
-| `likeCount`            | Number of likes                                          |
-| `retweetCount`         | Number of retweets                                       |
-| `replyCount`           | Number of replies                                        |
-| `quoteCount`           | Number of quote tweets                                   |
-| `viewCount`            | Number of views                                          |
-| `bookmarkCount`        | Number of bookmarks                                      |
-| `lang`                 | Tweet language                                           |
-| `url`                  | Direct link to tweet                                     |
-| `tweetUrl`             | Flat output tweet URL alias                              |
-| `twitterUrl`           | Flat output twitter.com-formatted URL                    |
-| `author`               | Available author fields (username, bio, website, counts) |
-| `authorUsername`       | Flat output author handle                                |
-| `authorFollowers`      | Flat output author follower count                        |
-| `authorUrl`            | Flat output author website when available                |
-| `authorDescription`    | Flat output author bio text                              |
-| `authorCoverPicture`   | Flat output author banner image URL                      |
-| `authorPinnedTweetIds` | Flat output author pinned tweet IDs                      |
-| `media`                | Attached images, videos, GIFs                            |
-| `mediaUrls`            | Flat output media URLs                                   |
-| `imageUrls`            | Flat output image URLs                                   |
-| `videoUrls`            | Flat output video URLs                                   |
-| `entities`             | Hashtags, URLs, mentions, and video timestamps           |
-| `displayTextRange`     | X display text range when available                      |
-| `contentDisclosure`    | Disclosure metadata when available                       |
-| `conversationControl`  | Reply policy and public conversation owner               |
-| `reactionContext`      | Public post and user referenced by a reaction            |
-| `limitedActions`       | Public interaction restrictions and prompts              |
-| `isLimitedReply`       | Whether replies are limited                              |
-| `isNoteTweet`          | Whether this is a Note Tweet (long-form post)            |
-| `isQuoteStatus`        | Whether this tweet quotes another tweet                  |
-| `isRetweet`            | Whether this row is a retweet, original attached         |
-| `isPinned`             | Whether the author pinned this post, flat rows           |
-| `isReply`              | Whether this tweet is a reply                            |
-| `quoted_tweet`         | Quoted tweet object (if quote tweet)                     |
-| `conversationId`       | Thread/conversation ID                                   |
-| `resultType`           | Row type for rich rows, engagement rows, and diagnostics |
-| `sourceTweetId`        | Source tweet ID for article and engagement modes         |
-| `article`              | Structured article data in `mode: "article"`             |
-
-Optional tweet metadata may include `authorUnavailable`, `card`, `communityId`,
-`communityNote`, `edit`, `exclusiveContent`, `noteTweet`, and `postCta`.
-`isTranslatable`, `place`, `possiblySensitive`, and `viewState` preserve other
-public context. `previousCounts` preserves pre-edit engagement. `tombstone`
-preserves notices. `unmentionedUserIds` lists users who left the conversation.
-See OpenAPI for the exact fields.
-
-Nested authors follow the public profile contract. It covers identity, counts,
-verification, availability, professional data, and profile biographies.
-
-Retweet rows set `isRetweet` to `true`. Their `text` carries the original post
-in full, and `retweeted_tweet` holds the original post with its author & counts.
-
-Tweet rows also preserve `type`, `source`, `inReplyToId`, `inReplyToUserId`,
-`inReplyToUsername`, and `retweeted_tweet`. Quoted and reposted tweets preserve
-the same supported safe fields recursively.
-
-Media includes availability, geometry, tags, video variants, `watchNowUrl`, and
-`visitSiteUrl` actions.
-
-Rows never include viewer-only state. Follow, block, mute, bookmark, like,
-repost, edit-permission & similar viewer flags are always removed, including
-from raw output.
-
 ## How much does it cost to scrape tweets?
 
-Every Apify plan costs `$0.00015` per delivered row. Apify bills your platform
-usage separately. Xquik applies one charge per delivered data row. Diagnostics
-are free in the `diagnostics` output.
+Xquik's X Tweet Scraper costs $0.00015 per delivered row on every Apify plan.
+Apify bills your platform usage separately. Xquik applies one charge per
+delivered data row. Diagnostics are free in the `diagnostics` output.
 
-No Xquik subscription applies. No separate start or query fee applies. The run
-status says why the run stopped. It also counts charged results & targets read.
-A run that hits a problem, or a large run, also writes a `run-report` record.
-Its `estimatedChargeUsd` uses the live pay-per-event price Apify exposes to the
-Actor. Runs with a problem always write `run-report`, including no-input and
-invalid-input exits. A small run that goes well skips it & saves Apify usage.
-Turn on `alwaysSaveRunRecords` to write it on every run. Run reports separate
-data rows in `realRows` and diagnostics in `diagnosticRows`.
-
-Understand empty results before spending on another run. The `filtering` object
-in reports & final diagnostics counts the rows your filters removed. See
-`serverFilteredRows`, `actorFilteredRows` & `pagesWithUnknownServerFiltering`.
-Filtered rows never incur result charges.
-
-Source exhaustion can complete extraction below your requested limit. These runs
-report `outcome: "complete"` with `completionReason: "source_exhausted"`.
-Interrupted runs retain their partial outcome & retry guidance.
-
-`failedSubtargets` counts queries & profile targets that stopped after an error.
-Delivered rows stay in the dataset & count toward billing. An error never means
-the target is missing. These runs use `completionReason: "partial_failure"`.
-
-Interrupted extraction also writes a free `partial` diagnostic. Available
-results remain intact. The diagnostic reports `availableResults`,
-`failedTargets`, `retryable`, and `nextAction`. A successful Actor exit confirms
-delivery, not complete extraction.
-
-The status text names every cause of the stop. A run with a missing account & a
-stalled search says both. `stopCauses` lists each cause with its own `message`,
-`retryable` & `nextAction`. The causes are `target_not_found`,
-`target_protected`, `search_unavailable`, `likes_hidden`, `target_failed`,
-`pagination_safety_limit`, `reply_reach` & `deadline_reached`. The run is
-`retryable` when any cause is.
-
-A missing or protected target is no failure. X has nothing to read there, so the
-run reads every other target to the end. It reports `outcome: "complete"` with
-the completion reason of the targets it read, such as `source_exhausted`.
-`failedSubtargets` leaves those targets out. The status text & a free `complete`
-diagnostic count them. A run without other rows writes a `zero-output`
-diagnostic instead.
-
-A search X cannot run counts as a failure. X.com shows "Something went wrong"
-for such a search, & the run stops it at once without retries. So do likes X
-hides. X shows who liked a post only to its author, & the posts an account liked
-only to that account. When all failures concern unavailable targets, diagnostics
-set `retryable: false`. Check target URLs or usernames & choose available public
-accounts. Narrow a search X cannot run or change its filters. Read retweeters,
-replies or posts in place of hidden likes. Other failures retain retry guidance
-for unfinished targets.
-
-The diagnostic names those targets in `unavailableTargets`. Each entry has the
-`target` as you entered it, a `reason` & a `nextAction`. The reason is
-`not_found`, `protected`, `search_unavailable` or `likes_hidden`. A search entry
-can also have a `fix`, such as the operator to remove. The list holds up to 100
-entries. Remove them from the input.
-
-`completionReason: "pagination_safety_limit"` is not a read failure. The run
-kept its valid rows, then ended a target that no longer returned new results.
-The run reports incomplete extraction. `failedSubtargets` stays `0`. You pay
-only for delivered rows.
-
-The default Apify timeout is `0`, so runs have no time limit. The Actor
-continues until it reaches the cap or runs out of eligible data. You can still
-set a finite Apify timeout. Then `completionReason: "deadline_reached"` means
-that limit is near. The Actor saves rows & the report, then exits cleanly before
-the limit. Delivered rows bill once.
-
-- Starts, queries, URLs, and single Tweet lookups add no separate fee.
-- The Actor removes duplicates before writing or billing rows.
-- No-input, invalid-input, and zero-output runs write 1 actionable record to the
+- You need no Xquik subscription.
+- You pay no separate start or query fee. URLs & single Tweet lookups add no fee
+  either.
+- Filters & deduplication run before billing. You never pay for filtered or
+  duplicate rows.
+- No-input, invalid-input & zero-output runs write 1 actionable record to the
   free `diagnostics` output.
+
+A run that hits a problem, or a large run, also writes a `run-report` record.
+Its `estimatedChargeUsd` uses the live pay-per-event price from Apify. Runs with
+a problem always write `run-report`, including no-input and invalid-input exits.
+A small run that goes well skips it & saves Apify usage. Turn on
+`alwaysSaveRunRecords` to write it on every run. Run reports separate data rows
+in `realRows` from diagnostics in `diagnosticRows`.
+
+To cap what a run can spend, see [Run options](#run-options).
 
 ## Benchmark
 
-X Tweet Scraper beat 11 other tweet Actors on cost & speed. Its median row had
-63 fields, 2x the median of the others.
+Xquik's X Tweet Scraper beat 11 other tweet Actors on cost & speed. Its median
+row had 63 fields, 2x the median of the others.
 
 | Actor                                                             | Useful tweets | Cost per useful tweet | Useful tweets per second | Fields per row | Public run                                                        |
 | ----------------------------------------------------------------- | ------------: | --------------------: | -----------------------: | -------------: | ----------------------------------------------------------------- |
@@ -261,341 +430,211 @@ usage our customers pay. Fields per row is the median count of non-empty fields,
 nested ones included. A list counts as 1 field. Open a run for its input, log &
 dataset.
 
-## How do I use X Tweet Scraper to scrape tweet data?
+## Empty, partial & stopped runs
 
-### 1. Paste URLs directly
+Xquik's X Tweet Scraper explains empty, partial & stopped runs for free. The run
+status says why the run stopped. It also counts charged results & targets read.
 
-Paste a mix of tweet, profile, search, or list URLs:
+### Empty results
 
-```json
-{
-  "startUrls": [
-    { "url": "https://x.com/elonmusk/status/1846987139428634858" },
-    { "url": "https://x.com/nasa" },
-    { "url": "https://x.com/search?q=AI%20lang%3Aen" },
-    { "url": "https://x.com/i/lists/1748648376080666720" }
-  ],
-  "maxItems": 500
-}
-```
+Check an empty result before you pay for another run. The `filtering` object in
+reports & final diagnostics counts the rows your filters removed. Read
+`serverFilteredRows`, `actorFilteredRows` & `pagesWithUnknownServerFiltering`.
+You never pay result charges for filtered rows.
 
-Tweet URLs return those tweets, unique & in your input order. Profile URLs
-return the account's posts. Search URLs run their query. List URLs return the
-List's posts. `maxItems` caps results across all pasted URLs.
+A run can finish below your limit when X has no more results. It reports
+`outcome: "complete"` with `completionReason: "source_exhausted"`. Interrupted
+runs keep their partial outcome & retry guidance.
 
-### 2. Bulk handles
+### Partial runs
 
-Shorthand for many `from:username` searches:
+`failedSubtargets` counts queries & profile targets that stopped after an error.
+Delivered rows stay in the dataset & count toward billing. An error never means
+the target is missing. These runs use `completionReason: "partial_failure"`.
 
-```json
-{ "twitterHandles": ["elonmusk", "nasa", "openai"], "maxItems": 100 }
-```
+An interrupted run also writes a free `partial` diagnostic. Results already
+delivered stay intact. The diagnostic reports `availableResults`,
+`failedTargets`, `retryable` & `nextAction`. A successful Actor exit confirms
+delivery. It does not confirm complete extraction.
 
-Each handle returns that account's posts. The Actor removes duplicate rows
-before output & billing. Usernames accept an optional `@` prefix. Handles &
-profile URLs keep reposts, as the Posts tab on X does, even with dates or
-filters. Set `tweetTypes.excludeRetweets` to drop them.
+### Stop causes
 
-### 3. Search tweets
+The status text names every cause of the stop. A run with a missing account & a
+stalled search says both. `stopCauses` lists each cause with its own `message`,
+`retryable` & `nextAction`. The causes are `target_not_found`,
+`target_protected`, `search_unavailable`, `likes_hidden`, `target_failed`,
+`pagination_safety_limit`, `reply_reach` & `deadline_reached`. The run is
+`retryable` when any cause is.
 
-Set the **Search Terms** field to one or more queries:
+### Missing & unavailable targets
 
-```json
-{
-  "searchTerms": ["from:elonmusk AI", "#bitcoin lang:en"],
-  "maxItems": 1000,
-  "queryType": "Latest"
-}
-```
+A missing or protected target is not a failure. X has nothing to read there. The
+run reads every other target to the end. It reports `outcome: "complete"`. Its
+completion reason comes from the targets it read, such as `source_exhausted`.
+`failedSubtargets` leaves those targets out. The status text & a free `complete`
+diagnostic count them. A run without other rows writes a `zero-output`
+diagnostic instead.
 
-If `mode` is `tweet` or `tweets` without Tweet IDs, query input routes to
-Search. This prevents valid `searchTerms` from returning an empty lookup.
+A search X cannot run counts as a failure. X.com shows "Something went wrong"
+for such a search. The run stops it at once without retries. Likes X hides also
+count as failures & stop at once. X shows who liked a post only to its author.
+It shows an account's liked posts only to that account.
 
-Account backfills with date windows work too, such as
-`from:elonmusk since:2026-01-01 until:2026-01-02`. Each term keeps its own
-`searchTerm` attribution. `maxItems` caps results across all search terms. The
-Actor checks every returned tweet against `since:`, `until:` & Unix-time
-windows. Filtered searches keep reading until they find matches or X has no more
-results.
+When all failures concern unavailable targets, diagnostics set
+`retryable: false`. Check target URLs or usernames & choose available public
+accounts. Narrow a search X cannot run or change its filters. Read retweeters,
+replies or posts instead of hidden likes. Other failures keep retry guidance for
+unfinished targets.
 
-A `from:` search term returns what X search returns, so it leaves out reposts.
-Add `include:nativeretweets` to keep them, or `filter:nativeretweets` for
-reposts only.
+The diagnostic names those targets in `unavailableTargets`. Each entry has the
+`target` as you entered it, a `reason` & a `nextAction`. The reason is
+`not_found`, `protected`, `search_unavailable` or `likes_hidden`. A search entry
+can also have a `fix`, such as the operator to remove. The list holds up to 100
+entries. Remove those targets from your input.
 
-### 4. Lookup tweets by ID
+### Safety & time limits
 
-```json
-{ "tweetIds": ["1846987139428634858", "1858743654778892784"], "maxItems": 100 }
-```
+`completionReason: "pagination_safety_limit"` is not a read failure. The run
+kept its valid rows. It then ended a target that stopped returning new results.
+The run reports incomplete extraction. `failedSubtargets` stays `0`. You pay
+only for delivered rows.
 
-Results keep your input order, drop duplicates & include only the tweets you
-asked for.
-
-Aliases accepted for the same lookup include `tweetId`, `tweetIDs`, `tweets`,
-`postIds`, `lookupPostIds`, `tweetUrls`, and `postUrls`.
-
-### 5. Explicit engagement, thread, and article modes
-
-Use `mode` when you want one route, regardless of other input fields:
-
-```json
-{ "mode": "replies", "replyTweetIds": ["1846987139428634858"], "maxItems": 100 }
-```
-
-Supported explicit modes: `tweet`, `tweets`, `search`, `profileTweets`,
-`profileReplies`, `profileMedia`, `profileLikes`, `listTweets`, `article`,
-`replies`, `quotes`, `thread`, `retweeters`, and `favoriters`.
-
-`profileTweets` follows the profile Posts tab on X. It returns the account's
-posts, its reposts & its replies to its own posts, in date order. Replies to
-other accounts & conversation context from other authors are left out before
-billing.
-
-For original posts only, exclude the types you do not want:
-
-```json
-{
-  "mode": "profileTweets",
-  "twitterHandles": ["apify"],
-  "tweetTypes": { "excludeReplies": true, "excludeRetweets": true },
-  "maxItems": 100
-}
-```
-
-`tweetTypes.excludeReplies`, `excludeRetweets` & `excludeQuotes` work on every
-source. A search sends them to X as `-filter:replies`, `-filter:nativeretweets`
-& `-filter:quote`. On a profile or a List the Actor drops those rows itself.
-Excluded rows never reach the dataset, so you never pay for them, & they never
-count toward `maxItems`.
-
-`profileReplies` follows X's With Replies tab. It returns target-authored
-profile posts and replies. The Actor excludes conversation context from other
-authors. Use `filter:replies` or `to:` search when you need reply-only results.
-
-Search & paginated Tweet modes support `time.since`, `time.until`, Unix
-timestamps & `lang`. These include profile Posts, With Replies, Media, Likes,
-Lists, replies, quotes & threads. Matching flat date operators work too. The
-Actor verifies each row before billing. The lower date bound is inclusive. The
-upper bound is exclusive. Date filters exclude rows without usable dates.
-Language filters exclude missing or mismatched languages. Filtered rows never
-consume your requested result limit. List runs with a date window reach older
-days quickly. They end once they pass your lower bound. Windows far back in a
-List can miss a few replies. Since the upper bound is exclusive, the same date
-for `since` & `until` is an empty window. Set `until` to the next day to get 1
-full day. Tweet filters do not apply to user lists or direct Tweet/article
-lookups.
-
-`time.withinTime` & `within_time` work in the same modes. A value of `7d` keeps
-the last 7 days before the run starts reading. A window reaching back before
-2006 keeps every post.
-
-`mode: "replies"` is stricter. Every tweet row has `inReplyToId` equal to the
-requested tweet ID. Nested conversation replies never count as direct replies.
-If X shows fewer replies than it reports, the Actor keeps the rows it found. It
-adds 1 `replies-incomplete` record to `diagnostics` when your limit is not
-reached. The run stays partial until it reaches your limit or X has no more
-replies. `replyCoverage` reports reply counts & coverage details. Set `maxItems`
-to your requested total, including totals above 25,000 for one reply target.
-
-Article rows include `resultType: "article"`, `sourceTweetId`, `article`, and
-optional `author`. Engagement user rows include `resultType: "user"`,
-`sourceTweetId`, and `engagementMode`.
-
-Retweeters remain a normal public engagement mode. Favoriters are best effort: X
-may only expose liking users for eligible or owner-visible posts. Profile likes
-are also best effort because many public profiles do not expose a readable Likes
-tab. If X does not expose users or liked tweets, the Actor writes a free
-`diagnostics` record. Bookmark counts can appear on tweet rows, but X does not
-expose the specific accounts that bookmarked a post.
-
-### 6. Flat CSV output
-
-Keep the default nested JSON fields, or add spreadsheet-friendly columns:
-
-```json
-{ "searchTerms": ["from:nasa moon"], "maxItems": 100, "outputPreset": "flat" }
-```
-
-Flat output keeps `author` and `media` unchanged and also adds top-level fields
-such as `authorUsername`, `authorName`, `authorFollowers`, `tweetUrl`,
-`twitterUrl`, `mediaUrls`, `imageUrls`, and `videoUrls`.
-
-Every flat tweet row carries `media`. A tweet without media has an empty list,
-so each row has the same keys in a spreadsheet or a typed pipeline.
-
-### 7. Select field naming
-
-Keep legacy field names by default. Select a style for rich or raw result data:
-
-```json
-{
-  "searchTerms": ["from:nasa moon"],
-  "maxItems": 100,
-  "outputVariant": "rich",
-  "fieldStyle": "snake_case"
-}
-```
-
-Use `camelCase` or `snake_case` for top-level and nested result fields. Flat
-snake case output includes fields such as `author_username` and `media_urls`.
-Safe source snapshots under `raw` keep their original source keys. Conflicting
-source names also stay unchanged to prevent data loss.
-
-Legacy diagnostics use `resultType`, `actorVersion`, and `replyCoverage`. Rich
-and raw output apply `fieldStyle` recursively. For example, snake case uses
-`result_type`, `actor_version`, and `reply_coverage`. The Overview dataset view
-works with either style. Choose the Console view matching the run's
-`fieldStyle`. `camelCase fields` expects `camelCase`. `snake_case fields`
-expects `snake_case`. Views select columns only. They never rename stored or
-exported data.
-
-### 8. Advanced filters
-
-Combine user, date, location, media, and engagement filters:
-
-```json
-{
-  "twitterContent": "AI",
-  "from": "elonmusk",
-  "since": "2026-01-01_00:00:00_UTC",
-  "until": "2026-03-01_00:00:00_UTC",
-  "lang": "en",
-  "filter:media": true,
-  "min_faves": 1000,
-  "maxItems": 500
-}
-```
-
-Set `queryType: "Latest + Top"` to run both X search modes in one run. The Actor
-removes duplicates before billing & fills your limit from either mode. `Top` is
-ranked by relevance & is not exhaustive. Set `includeSearchTerms: true` to
-attach each matching query as a `searchTerm` field.
-
-When you set `lang`, the Actor verifies each returned tweet's language. It skips
-mismatches and continues paging for matching tweets.
-
-### Migrate from another tweet Actor
-
-Paste the input you already use. X Tweet Scraper reads the field names that
-other tweet Actors use & maps them to its own fields. Canonical names stay the
-documented default. An alias never drops a field & never changes what you pay.
-The input form lists canonical fields only, so it stays short. Aliases work in
-JSON, API, SDK, automation & saved task inputs.
-
-| Field you already use                                                                                                                                                  | X Tweet Scraper reads it as                                              |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`                                                                                             | `startUrls`                                                              |
-| `profileUrl`, as one string                                                                                                                                            | `startUrls`                                                              |
-| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids`, or `tweetId` as one string                                                                  | `tweetIds`                                                               |
-| `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`, `screenNames`, `profileTweets`                                                                 | `twitterHandles`                                                         |
-| `username`, `handle`, `screenName`, as one string                                                                                                                      | `twitterHandles`                                                         |
-| `searchTerms`, `searchQueries`, `queries`, `search`, as a list or one search per line                                                                                  | `searchTerms`                                                            |
-| `twitterContent`, `query`, `searchQuery`                                                                                                                               | `twitterContent`                                                         |
-| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
-| `sort`                                                                                                                                                                 | `queryType`                                                              |
-| `tweetLanguage`, `language`                                                                                                                                            | `lang`                                                                   |
-| `author`, `inReplyTo`, `mentioning`                                                                                                                                    | `from`, `to`, `@`                                                        |
-| `start`, `startDate`, `end`, `endDate`                                                                                                                                 | `since`, `until`                                                         |
-| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                                | `min_retweets`, `min_faves`, `min_replies`                               |
-| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                               | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
-| `geotaggedNear`, `withinRadius`                                                                                                                                        | `near`, `within`                                                         |
-| `quickDateRange` from the Google Search Scraper, such as `d7`, `w2`, `m1` or `y`                                                                                       | `since_time`, counted back from the run start                            |
-
-How a pasted input behaves:
-
-- Every source runs. An input with start URLs, handles, search terms, list IDs &
-  tweet IDs runs them all, & `maxItems` applies across the run.
-- A search query next to `searchTerms` runs as 1 more term.
-- A profile URL written as `x.com/@name` reads like `x.com/name`.
-- When you set an alias & its canonical field, the canonical value wins. The run
-  log names the alias that lost.
-- The run log names every field the Actor does not read, such as
-  `customMapFunction`. Nothing is dropped without notice.
-- A row cap must be a whole number of 1 or more. `maxResults: 0` stops the run
-  before anything is fetched or charged.
-- `quickDateRange: "m1"` reads the past month on every route. Months & years
-  count back on the calendar. A value without h, d, w, m or y stops the run
-  before it reads or charges anything.
-- The Actor has no page unit. Replace `maxPages` with `maxItems`.
-- The Actor has no user ID field. Send handles or profile URLs instead of
-  `userId` or `user_ids`.
-- Search operator fields such as `from`, `min_faves`, `since_time` &
-  `filter:images` already use the names X uses, so they need no mapping.
-
-### Console & API input UX
-
-The Console exposes these controls:
-
-- Mode, Output Variant, Field Style, Output Preset, and Sort By are validated
-  selects.
-- The Start URLs and Profile URLs fields accept strings or `{ "url": "..." }`
-  objects. Their JSON editors preserve both API formats.
-- Structured Filters exposes grouped controls without nested JSON.
-- Canonical filter groups keep equivalent flat operators out of the form. JSON,
-  API, SDK, automation, and saved task inputs still accept them.
-- Max Items and Max Items Per Target accept whole numbers of 1 or more.
-  Engagement thresholds accept whole numbers of 0 or more.
-
-Use canonical fields in new integrations. The aliases in the migration table
-above stay available. `includeRaw` is an alias for `outputVariant: "raw"`.
-Historical `outputVariant` values such as `compact` and `full` remain accepted
-and use Legacy output. The visual form labels them as Legacy aliases.
-
-### Top supported search operators
-
-| Operator               | Example                | Purpose                     |
-| ---------------------- | ---------------------- | --------------------------- |
-| `from:`                | `from:elonmusk`        | Only tweets by this user    |
-| `to:`                  | `to:OpenAI`            | Only replies to this user   |
-| `@`                    | `@nasa`                | Tweets mentioning this user |
-| `list:`                | `list:123456`          | Tweets from list members    |
-| `lang:`                | `lang:en`              | Filter by language          |
-| `since:` / `until:`    | `since:2026-01-01`     | Date range                  |
-| `min_faves:`           | `min_faves:100`        | Engagement threshold        |
-| `min_retweets:`        | `min_retweets:50`      | Retweet threshold           |
-| `filter:media`         | `filter:media`         | X media search operator     |
-| `filter:videos`        | `filter:videos`        | X video search operator     |
-| `filter:images`        | `filter:images`        | X image search operator     |
-| `filter:links`         | `filter:links`         | Only tweets with links      |
-| `filter:replies`       | `filter:replies`       | Only reply tweets           |
-| `filter:quote`         | `filter:quote`         | Only quote tweets           |
-| `filter:blue_verified` | `filter:blue_verified` | Only Premium users          |
-
-X no longer searches `filter:vine`, `filter:consumer_video`, `filter:pro_video`,
-`filter:news` or `retweets_of:`. A search with one of them ends at once with a
-free diagnostic that names the fix. Keep each query to 512 characters or fewer,
-the most X searches.
-
-Date windows use an inclusive lower bound and exclusive upper bound. The Actor
-verifies both bounds before adding or charging for each tweet.
-
-For the full operator list, see
-[Twitter Advanced Search](https://github.com/igorbrigadir/twitter-advanced-search).
+The default Apify timeout is `0`, so runs have no time limit. The Actor
+continues until it reaches your cap or runs out of eligible data. You can still
+set a finite Apify timeout. Then `completionReason: "deadline_reached"` means
+that limit is near. The Actor saves rows & the report, then exits cleanly before
+the limit. You pay once for each delivered row.
 
 ## Input
 
-See the **Input** tab for the complete list of options. All fields are optional
-except at least one of: `startUrls`, `twitterHandles`, `listIds`, `tweetIds`,
-`searchTerms`, `twitterContent`, or their documented aliases.
+The Input tab lists every option. Give at least one of `startUrls`,
+`twitterHandles`, `listIds`, `tweetIds`, `searchTerms` or `twitterContent`.
+Their documented aliases work too. Every other field is optional.
 
 Examples:
 
 - Paste a tweet URL into Start URLs.
-- Paste a profile URL or add the username to X Handles.
-- Use `from:user since:YYYY-MM-DD until:YYYY-MM-DD` as a Search Term for account
+- Paste a profile URL, or add the username to X handles.
+- Use `from:user since:YYYY-MM-DD until:YYYY-MM-DD` as a search term for account
   backfills.
-- Paste a list URL into Start URLs.
-- Combine `twitterContent` with filters such as `from:`, `since:`, `min_faves:`,
-  and `filter:media` for advanced searches.
+- Paste a List URL into Start URLs.
+- Combine `twitterContent` with filters such as `from:`, `since:`, `min_faves:`
+  & `filter:media` for advanced searches.
+
+### Top supported search operators
+
+| Operator               | Example                | Purpose                   |
+| ---------------------- | ---------------------- | ------------------------- |
+| `from:`                | `from:elonmusk`        | Only tweets by this user  |
+| `to:`                  | `to:OpenAI`            | Only replies to this user |
+| `@`                    | `@nasa`                | Mentions of this user     |
+| `list:`                | `list:123456`          | Tweets from list members  |
+| `lang:`                | `lang:en`              | Filter by language        |
+| `since:` / `until:`    | `since:2026-01-01`     | Date range                |
+| `min_faves:`           | `min_faves:100`        | Engagement threshold      |
+| `min_retweets:`        | `min_retweets:50`      | Retweet threshold         |
+| `filter:media`         | `filter:media`         | X media search operator   |
+| `filter:videos`        | `filter:videos`        | X video search operator   |
+| `filter:images`        | `filter:images`        | X image search operator   |
+| `filter:links`         | `filter:links`         | Only tweets with links    |
+| `filter:replies`       | `filter:replies`       | Only reply tweets         |
+| `filter:quote`         | `filter:quote`         | Only quote tweets         |
+| `filter:blue_verified` | `filter:blue_verified` | Only Premium users        |
+
+X no longer searches `filter:vine`, `filter:consumer_video`, `filter:pro_video`,
+`filter:news` or `retweets_of:`. A search with one of them ends at once. A free
+diagnostic names the fix. Keep each query to 512 characters or fewer. X searches
+no more than that.
+
+Date windows include the lower bound & exclude the upper bound. The Actor checks
+both bounds before it adds or charges for each tweet.
+
+For the full operator list, see
+[Twitter Advanced Search](https://github.com/igorbrigadir/twitter-advanced-search).
+
+### Migrate from another tweet Actor
+
+Paste the input you already use. Xquik's X Tweet Scraper reads the field names
+other tweet Actors use. It maps them to its own fields. Canonical names stay the
+documented default. An alias never drops a field & never changes what you pay.
+The input form lists canonical fields only, so it stays short. Aliases work in
+JSON, API, SDK, automation & saved task inputs.
+
+Each line names the fields you already use, then the field they map to:
+
+- `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`:
+  `startUrls`
+- `profileUrl`, as one string: `startUrls`
+- `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids`, or
+  `tweetId` as one string: `tweetIds`
+- `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`,
+  `screenNames`, `profileTweets`: `twitterHandles`
+- `username`, `handle`, `screenName`, as one string: `twitterHandles`
+- `searchTerms`, `searchQueries`, `queries`, `search`, as a list or one search
+  per line: `searchTerms`
+- `twitterContent`, `query`, `searchQuery`: `twitterContent`
+- `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`,
+  `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`,
+  `maxTweets`, `tweetsDesired`: `maxItems`
+- `sort`: `queryType`
+- `tweetLanguage`, `language`: `lang`
+- `author`, `inReplyTo`, `mentioning`: `from`, `to`, `@`
+- `start`, `startDate`, `end`, `endDate`: `since`, `until`
+- `minimumRetweets`, `minimumFavorites`, `minimumReplies`: `min_retweets`,
+  `min_faves`, `min_replies`
+- `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`: `filter:images`,
+  `filter:videos`, `filter:quote`, `filter:blue_verified`
+- `geotaggedNear`, `withinRadius`: `near`, `within`
+- `quickDateRange` from the Google Search Scraper, such as `d7`, `w2`, `m1` or
+  `y`: `since_time`, counted back from the run start
+
+How a pasted input behaves:
+
+- Every source runs. An input with URLs, handles, search terms, List IDs & Tweet
+  IDs runs them all. `maxItems` applies across the whole run.
+- A search query next to `searchTerms` runs as 1 more term.
+- A profile URL written as `x.com/@name` reads like `x.com/name`.
+- When you set an alias & its canonical field, the canonical value wins. The run
+  log names the alias that lost.
+- The run log names every field the Actor ignores, such as `customMapFunction`.
+  The Actor never drops a field silently.
+- A row cap must be a whole number of 1 or more. `maxResults: 0` stops the run
+  before it reads or charges anything.
+- `quickDateRange: "m1"` reads the past month on every route. Months & years
+  count back on the calendar. Without h, d, w, m or y, the run stops before any
+  read or charge.
+- The Actor has no page unit. Replace `maxPages` with `maxItems`.
+- The Actor has no user ID field. Send handles or profile URLs instead of
+  `userId` or `user_ids`.
+- Search operator fields such as `from`, `min_faves`, `since_time` &
+  `filter:images` already use X's names. They need no mapping.
+
+### Console & API input
+
+The Console form has these controls:
+
+- Mode, Output Variant, Field Style, Output Preset & Sort By are validated
+  dropdowns.
+- Start URLs & Profile URLs accept strings or `{ "url": "..." }` objects. Their
+  JSON editors keep both API formats.
+- Structured filters offer grouped controls, so you need no nested JSON.
+- The form hides flat operators that a filter group already covers. JSON, API,
+  SDK, automation & saved task inputs still accept them.
+- Max Items & Max Items Per Target accept whole numbers of 1 or more. Engagement
+  thresholds accept whole numbers of 0 or more.
+
+Use canonical fields in new integrations. The aliases in the migration table
+above stay available. `includeRaw` is an alias for `outputVariant: "raw"`. Older
+`outputVariant` values such as `compact` & `full` still work as Legacy output.
+The form labels them as Legacy aliases.
 
 ## Output
 
-Each tweet is a JSON object with available metadata:
+Each tweet row is a JSON object with the metadata X makes available. The dataset
+& run-report schemas give each field a title, description & example. AI agents
+can read them without guessing what a field means.
 
-Dataset and run-report schemas include field titles, descriptions, and examples.
-Agents can inspect them without guessing field meaning.
-
-Sample values are illustrative. Responses reflect source data at run time.
+Sample values are illustrative. Your runs return live data from X.
 
 ```json
 {
@@ -630,40 +669,42 @@ Sample values are illustrative. Responses reflect source data at run time.
 }
 ```
 
-Export as JSON, CSV, Excel, or HTML from the Apify dataset.
+Export the dataset as JSON, CSV, Excel or HTML.
 
 ## Run options
 
-- Set Apify max total charge to cap run cost. Leave `maxItems` empty for maximum
-  rows within that budget, or set `maxItems` when you want fewer tweets.
+- Set Apify's max total charge to cap run cost. Leave `maxItems` empty to get
+  the most rows that budget allows. Set `maxItems` when you want fewer tweets.
 - Set `maxTotalChargeUsd` in the Apify API, or Max cost per run in Console.
-  Apify exposes that limit to the Actor as `ACTOR_MAX_TOTAL_CHARGE_USD`, and the
+  Apify passes that limit to the Actor as `ACTOR_MAX_TOTAL_CHARGE_USD`. The
   Actor turns it into the maximum billable row count.
 - Pass `tweetIds` to look up many tweets at once. Paste a profile URL to read
   one account's posts.
-- Set `includeSearchTerms: true` when running many queries to tag each result
-  with its source search term.
+- With many queries, set `includeSearchTerms: true` to tag each result with its
+  search term.
 - Set `queryType: "Latest + Top"` to run both X search modes in one run.
   Deduplication & result caps apply across both.
-- Use Xquik account or keyword monitors for 1-second checks and signed webhooks.
+- Use Xquik account or keyword monitors for 1-second checks & signed webhooks.
   Active monitors check every second.
 
-## Use cases
+### Always use the latest build
 
-- Feed research, enrichment, analytics & AI training with more fields per tweet.
-  Our median row had 63 fields on 2026-09-27. That is 2x the median of 11 other
-  Actors.
-- Track brand sentiment across tweets.
-- Monitor competitor posts and industry terms.
-- Find prospects in public conversations.
-- Collect public datasets for research.
-- Find posts with high public engagement.
+Select `latest` for every run to get every published fix.
 
-## Data responsibility
+If you pick no build, Apify runs Xquik's X Tweet Scraper on its `latest`
+default. Console runs & standard API examples inherit that default.
 
-The Actor requests public X fields. Results can contain personal data. Confirm a
-lawful purpose and follow applicable privacy rules. Ask qualified counsel when
-uncertain.
+Saved tasks can override the Actor default. Schedules & task integrations reuse
+that choice. Keep every override set to `latest`.
+
+Apify does not redirect exact build numbers to `latest`. Replace pinned numbers
+with `latest`. Use an exact build only for a temporary rollback or to reproduce
+a run.
+
+Read Apify's
+[build tags](https://docs.apify.com/platform/actors/development/builds-and-runs/builds),
+[run options](https://docs.apify.com/platform/actors/running/runs-and-builds) &
+[task documentation](https://docs.apify.com/platform/actors/running/tasks).
 
 ## Related Xquik Actors
 
@@ -731,8 +772,8 @@ diagnostics. Pick the one that matches the data you need.
 
 ## Need more than scraping?
 
-Xquik also provides 47 dashboard tools, 129 REST operations, signed webhooks,
-and an MCP server.
+Xquik also provides 47 dashboard tools, 129 REST operations, signed webhooks &
+an MCP server.
 
 - [API documentation](https://docs.xquik.com/introduction): REST API guides
 - [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets):
@@ -743,39 +784,65 @@ and an MCP server.
   user's timeline
 - [MCP server](https://docs.xquik.com/mcp/overview): discover supported tools
 - [Webhooks](https://docs.xquik.com/webhooks/overview): signed event delivery
-- [GitHub](https://github.com/Xquik-dev/x-twitter-scraper): source code and
-  issue tracker
+- [GitHub](https://github.com/Xquik-dev/x-twitter-scraper): source code & issue
+  tracker
 
 ## FAQ
 
-**Do I need an X API key?** No. You need no X API key, login or credentials.
+Answers to common questions, then where to get help.
 
-**What limits a run?** Your requested item limit and Apify spend limit stop the
-run. Apify account and platform limits still apply.
+### Do I need an X API key?
 
-**How fast is it?** Runtime depends on your input, the result count & X
+No. You need no X API key, login or credentials.
+
+### What limits a run?
+
+Your item limit & your Apify spend limit stop the run. Apify account & platform
+limits still apply.
+
+### How fast is it?
+
+Xquik's X Tweet Scraper delivered 25.8 to 29.1 useful tweets per second in the
+[benchmark](#benchmark). Runtime depends on your input, the result count & X
 availability.
 
-**Why does a Latest search return posts that X's Latest tab does not show?** X
-leaves some matching posts out of its Latest tab. This Actor returns those posts
-too. Every post is a real X search result for your query, & you pay for each
-post once.
+### Why do I get posts that X's search tab leaves out?
 
-**Which search operators work?** X advanced search supports authors, recipients,
-mentions, dates, engagement, media, and location.
+X leaves some matching posts out of its Latest tab. Xquik's X Tweet Scraper
+returns those posts too. Every post is a real X search result for your query.
+You pay for each post once.
 
-**Can I use the Apify API to run this?** Yes. See the
-[API tab](https://apify.com/xquik/x-tweet-scraper/api) for Python, JavaScript,
-and cURL examples.
+### Which search operators work?
 
-**Can I schedule recurring scrapes?** Yes. Use Apify's built-in
-[scheduling](https://docs.apify.com/platform/schedules) to run this Actor on a
-cron.
+X advanced search supports authors, recipients, mentions, dates, engagement,
+media & location. See
+[Top supported search operators](#top-supported-search-operators) for examples.
 
-**Where do I report issues?** Open an issue on
-[GitHub](https://github.com/Xquik-dev/x-twitter-scraper/issues) or use the
-Issues tab on this Actor's page.
+### Can I use the Apify API to run this?
 
-**Can I get a custom solution?** Yes. Visit [xquik.com](https://xquik.com) or
-read the [API docs](https://docs.xquik.com/introduction) for the dashboard, API,
-MCP server, and webhooks.
+Yes. See the [API tab](https://apify.com/xquik/x-tweet-scraper/api) for Python,
+JavaScript & cURL examples.
+
+### Can I schedule recurring scrapes?
+
+Yes. Use Apify's built-in
+[scheduling](https://docs.apify.com/platform/schedules) to run Xquik's X Tweet
+Scraper on a cron.
+
+### Can I get a custom solution?
+
+Yes. Visit [xquik.com](https://xquik.com) or read the
+[API docs](https://docs.xquik.com/introduction) for the dashboard, API, MCP
+server & webhooks.
+
+### Is it legal to scrape X data?
+
+Xquik's X Tweet Scraper requests public X fields. Results can contain personal
+data. Confirm a lawful purpose & follow the privacy rules that apply to you. Ask
+qualified counsel when unsure.
+
+### Where do I get help?
+
+Open an issue in the Issues tab on the Actor page, or on
+[GitHub](https://github.com/Xquik-dev/x-twitter-scraper/issues). You can also
+contact <support@xquik.com> with the run ID.

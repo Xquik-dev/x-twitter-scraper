@@ -15,37 +15,41 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Guarda come Framer usa gli scraper Xquik con Claude Code, Codex, Cursor e altro, da 6:07.</a>
 </td></tr></table>
 
-Xquik è il servizio di scraping X (Twitter) più veloce ed economico al mondo,
-con i dati X più completi. X Tweet Viral Score Analyzer aggiunge una stima del
-Viral Score & un verdetto a ogni tweet. La maggior parte degli altri Actor Apify
-addebita costi prima di filtrare o deduplicare. Xquik addebita solo i risultati
-consegnati, unici e conformi ai filtri. I costi dell'IA sono inclusi nel prezzo
-per tweet. Non ti servono account IA, token o chiavi.
+Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo, con
+i dati X più completi. X Tweet Viral Score Analyzer di Xquik valuta ogni post
+(tweet). Aggiunge una stima del Viral Score & un verdetto. La maggior parte degli
+altri Actor Apify fa pagare prima di filtrare o deduplicare. Xquik fa pagare
+solo i risultati consegnati, unici e conformi ai filtri. I costi AI sono inclusi
+nel prezzo per post. Non ti servono account AI, token o chiavi.
 
-Scopri perché i tweet si diffondono o falliscono & mantieni i dati originali
-del tweet. **X Tweet Viral Score Analyzer with AI** raccoglie i tweet
-corrispondenti. L'IA valuta 8 tratti di ogni post. L'Actor trasforma quelle
-risposte in una stima del Viral Score da 0 a 100 & in un verdetto. Ogni riga
-mantiene Mi piace, repost, risposte & citazioni reali, così puoi confrontare
-ogni stima con ciò che è successo.
+Scopri perché i post si diffondono o falliscono & conserva i dati originali del
+post. **X Tweet Viral Score Analyzer with AI** di Xquik raccoglie i post
+pertinenti. L'AI valuta 8 tratti di ogni post. L'Actor trasforma quelle risposte
+in una stima del Viral Score & in un verdetto. Ogni riga conserva Mi piace,
+repost, risposte & citazioni reali. Confronta ogni stima con ciò che è successo.
 
-- **Viral Score per post** da regole fisse e versionate.
-- **8 risposte sui tratti** mostrano perché un post ha un punteggio alto o
+- **Viral Score per post.** Regole fisse & versionate calcolano ogni punteggio
+  da 0 a 100.
+- **8 risposte sui tratti.** Mostrano perché un post ha un punteggio alto o
   basso.
-- **Stop rigidi** limitano i post che sembrano spam, ragebait o testo generico
-  scritto da una macchina.
-- **Record sorgente completi** con ogni campo che il tweet espone.
+- **Blocchi rigidi.** Limitano i post che sembrano spam, ragebait o testo
+  generico scritto da una macchina.
+- **Record di origine completi.** Ogni riga conserva tutti i campi che il post
+  rende disponibili.
 
-Il Viral Score è una stima di quanto funziona la formulazione. Non prevede
-Mi piace o visualizzazioni. Non riproduce il modo in cui X classifica i post.
+Il Viral Score stima quanto funziona la formulazione. Non prevede Mi piace o
+visualizzazioni. Non riproduce il modo in cui X classifica i post.
+
+> Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
+> "Twitter" e "X" sono marchi di X Corp.
 
 ## Come controllare il viral score di un tweet
 
-1. Aggiungi termini di ricerca, handle di profilo, URL di tweet o ID di tweet.
-2. Imposta `maxItems` e i filtri di estrazione di cui il tuo task ha bisogno.
-3. Descrivi il tuo pubblico in `analysis.context`, oppure lascia il valore
+1. Aggiungi termini di ricerca, nomi utente dei profili, URL o ID dei post.
+2. Imposta `maxItems` & i filtri di estrazione che servono al tuo task.
+3. Descrivi il tuo pubblico in `analysis.context` o lascia il valore
    predefinito.
-4. Esegui l'Actor & apri la vista dataset `Viral Score`.
+4. Avvia l'esecuzione & apri la vista `Viral Score` del dataset.
 
 ```json
 {
@@ -55,29 +59,29 @@ Mi piace o visualizzazioni. Non riproduce il modo in cui X classifica i post.
 }
 ```
 
-### A cosa risponde l'Actor
+### Cosa risponde l'Actor
 
 | Domanda       | Risposta                                                                           |
 | ------------- | ---------------------------------------------------------------------------------- |
 | Gancio        | 0 nessun gancio, 1 apertura chiara, 2 apertura incisiva                            |
 | Chiarezza     | 0 confuso, 1 richiede sforzo, 2 chiaro alla prima lettura                          |
 | Informativo   | 0 niente di nuovo, 1 concetto già noto, 2 spunto utile                             |
-| Divertente    | 0 non divertente, 1 leggermente divertente, 2 abbastanza divertente da condividere |
-| Ragebait      | Probabilità che il post provochi soprattutto indignazione                          |
-| Scritto da IA | Probabilità che il testo sembri un testo generico scritto da una macchina          |
+| Divertente    | 0 non divertente, 1 un po' divertente, 2 abbastanza divertente da condividere      |
+| Ragebait      | Probabilità che il post punti soprattutto a indignare                              |
+| Scritto da AI | Probabilità che il testo sembri generico & scritto da una macchina                 |
 | Spam          | Probabilità di spam, truffa, giveaway o engagement farming                         |
 | Reazione      | Condividere, rispondere, mettere Mi piace, discutere o ignorare                    |
 
-La risposta Scritto da IA giudica solo lo stile. Non stabilisce chi ha scritto
+La risposta "Scritto da AI" giudica solo lo stile. Non stabilisce chi ha scritto
 il post.
 
 ### Come funziona il Viral Score
 
-Gancio, chiarezza, valore offerto e reazione attesa alzano il punteggio. Un
-testo che sembra una copia generica da macchina lo abbassa.
+Gancio, chiarezza, valore offerto & reazione attesa alzano il punteggio. Un
+testo che sembra generico & scritto da una macchina lo abbassa.
 
-I blocchi rigidi limitano il punteggio di probabile spam, ragebait e copia
-generica da macchina. Il punteggio è un numero intero da 0 a 100.
+I blocchi rigidi limitano il punteggio di probabile spam, ragebait & testo
+generico da macchina. Il punteggio è un numero intero da 0 a 100.
 
 | Verdetto      | Punteggio   |
 | ------------- | ----------- |
@@ -85,116 +89,120 @@ generica da macchina. Il punteggio è un numero intero da 0 a 100.
 | `edit_first`  | da 40 a 69  |
 | `sleep_on_it` | da 0 a 39   |
 
-`viral.weights` indica la versione di queste regole, ad esempio `viral_lite:1`.
-Cambia ogni volta che cambiano le regole. Il punteggio è `null` quando l'analisi
-è fallita, l'Actor l'ha saltata o manca una risposta di tratto predefinita.
-L'Actor non riempie mai un punteggio mancante con una stima.
+`viral.weights` indica la versione di queste regole, come `viral_lite:1`. Cambia
+ogni volta che cambiano le regole. Il punteggio è `null` dopo un'analisi fallita
+o saltata. È `null` anche quando manca una risposta predefinita su un tratto. X
+Tweet Viral Score Analyzer di Xquik non riempie mai un punteggio mancante con
+una stima.
 
 ## Stima dell'Algorithm Score
 
 X ha pubblicato i suoi pesi di ranking nel repository `xai-org/x-algorithm`,
-file `home-mixer/params/param.rs`. L'Actor ne applica 4 ai conteggi pubblici
-di ogni post:
+file `home-mixer/params/param.rs`. X Tweet Viral Score Analyzer di Xquik ne
+applica 4 ai conteggi pubblici di ogni post:
 
 | Conteggio | Peso |
 | --------- | ---- |
-| Mi piace  | 0,5  |
+| Mi piace  | 0.5  |
 | Risposta  | 5    |
 | Repost    | 1    |
 | Citazione | 5    |
 
-`viral.algorithmWeightedSum` è la somma di ogni conteggio moltiplicato per il
-suo peso. `viral.algorithmScore` divide quella somma per le visualizzazioni &
-moltiplica per 1.000. Un post senza conteggio di visualizzazioni usa invece i
+`viral.algorithmWeightedSum` è la somma di ogni conteggio per il suo peso.
+`viral.algorithmScore` divide quella somma per le visualizzazioni & la
+moltiplica per 1.000. Un post senza conteggio delle visualizzazioni usa invece i
 follower. `viral.algorithmBasis` indica il divisore, `views` o `followers`.
 Confronta solo punteggi con la stessa base. `viral.weightsVersion` indica i
 pesi, come `x_algorithm_params:2026-09-18`.
 
-Limiti:
+La stima ha questi limiti:
 
 - X moltiplica ogni peso per una probabilità che prevede per un singolo
-  spettatore. L'Actor moltiplica per i conteggi osservati. Il risultato è una
-  stima, non il punteggio che X calcola.
-- X non pubblica alcun peso per segnalibri o visualizzazioni. La somma li
-  esclude entrambi.
-- X usa più segnali di questi 4, come il tempo di permanenza & le
+  utente. L'Actor moltiplica per i conteggi osservati. Il risultato è una
+  stima, non il punteggio che calcola X.
+- X non pubblica pesi per segnalibri o visualizzazioni. La somma li esclude
+  entrambi.
+- X usa altri segnali oltre a questi 4, come il tempo di permanenza & le
   condivisioni. I dati pubblici non li mostrano.
-- Il punteggio è `null` quando un post non ha visualizzazioni & nessun
-  conteggio di follower.
-- L'IA non vede mai questi conteggi. Legge solo il testo & il contesto.
+- Il punteggio è `null` quando un post non ha visualizzazioni né conteggio dei
+  follower.
+- L'AI non vede mai questi conteggi. Legge solo il testo & il contesto.
 
 ## Previsto contro reale
 
-L'Actor confronta ogni Viral Score con ciò che è successo.
-`viral.actualEngagementRate` è `log10(1 + weighted sum per 1,000 followers)`.
-Il logaritmo limita l'effetto di un singolo post molto grande. Il tasso è
-`null` quando il conteggio di follower manca o è 0.
+X Tweet Viral Score Analyzer di Xquik confronta ogni Viral Score con ciò che è
+successo. `viral.actualEngagementRate` è
+`log10(1 + weighted sum per 1,000 followers)`. Il logaritmo limita l'effetto di
+un singolo post molto grande. Il tasso è `null` quando il conteggio dei follower
+manca o è 0.
 
-Il blocco `viral.calibration` del riepilogo dell'esecuzione riporta:
+Il blocco `viral.calibration` del riepilogo dell'esecuzione riporta questi
+campi:
 
-- `comparedPosts`: i post con un Viral Score & un tasso reale.
-- `rankCorrelation`: una correlazione per ranghi di Spearman da -1 a 1. Chiede
-  se a punteggi più alti corrispondono tassi più alti.
-- `calibrationScore`: 100 volte la correlazione, con minimo 0.
-- `overperformers` & `underperformers`: fino a 5 post ciascuno, con ID del
-  tweet, URL, Viral Score, tasso reale & `gap`.
+- `comparedPosts` conta i post con un Viral Score & un tasso reale.
+- `rankCorrelation` è una correlazione per ranghi di Spearman da -1 a 1. Mostra
+  se a punteggi più alti sono corrisposti tassi più alti.
+- `calibrationScore` è 100 volte la correlazione, con minimo 0.
+- `overperformers` & `underperformers` elencano fino a 5 post ciascuno. Ognuno
+  riporta ID del post, URL, Viral Score, tasso reale & `gap`.
 
 `gap` è il tasso reale standardizzato meno il Viral Score standardizzato. Un
 post entra in un elenco quando il suo gap raggiunge 1 deviazione standard.
 
-Limiti:
+La calibrazione ha questi limiti:
 
-- Meno di 10 post confrontati danno una calibrazione `null` con il motivo
+- Con meno di 10 post confrontati la calibrazione è `null`, con il motivo
   `too_few_posts`. Punteggi o tassi identici danno `no_variation`.
 - La correlazione è approssimata.
-- La calibrazione descrive una sola esecuzione. Un punteggio basso può
-  significare che i post differiscono per tempistica, argomento o pubblico,
-  non che la stima sulla formulazione ha fallito.
-- I post recenti non hanno finito di raccogliere engagement. Confronta post
-  di età simile.
+- La calibrazione descrive una sola esecuzione. Un punteggio basso può voler
+  dire che i post differiscono per orario, argomento o pubblico. Non prova che
+  la stima sulla formulazione abbia fallito.
+- I post recenti non hanno finito di raccogliere engagement. Confronta post di
+  età simile.
 
 ## Report degli account
 
-Il blocco `viral.accounts` del riepilogo dell'esecuzione riporta ogni handle
-di autore:
+Il blocco `viral.accounts` del riepilogo dell'esecuzione riporta ogni nome
+utente degli autori:
 
 - Numero di post, Viral Score medio & tasso medio di engagement reale.
-- Il post migliore & il peggiore per Viral Score, con ID del tweet & URL.
-- Viral Score medio per fascia: ora di pubblicazione in UTC, banda di
-  lunghezza del testo, con media, con link & self-thread.
+- Il post migliore & il peggiore per Viral Score, con ID del post & URL.
+- Viral Score medio per fascia. Le fasce sono ora di pubblicazione in UTC,
+  lunghezza del testo, presenza di media, presenza di link & self-thread.
 
-Le bande di lunghezza del testo sono `short` fino a 80 caratteri, `medium`
-fino a 200, `long` fino a 280 & `extended` oltre. Un post self-thread risponde
-al proprio autore.
+Le fasce di lunghezza del testo sono `short`, `medium`, `long` & `extended`.
+`short` arriva a 80 caratteri, `medium` a 200 & `long` a 280. `extended` copre
+i testi più lunghi. Un post self-thread risponde al proprio autore.
 
-Limiti:
+Il report ha questi limiti:
 
-- Il report elenca i 50 handle con più post valutati.
-- L'Actor segue i primi 1.000 handle di un'esecuzione. `untrackedPosts` conta
-  i post valutati degli handle successivi & i post senza handle.
+- Il report elenca i 50 nomi utente con più post valutati.
+- Il report segue i primi 1.000 nomi utente di un'esecuzione. `untrackedPosts`
+  conta i post valutati dei nomi utente successivi & i post senza nome utente.
 - Una fascia con pochi post dice poco. Controlla `posts` prima di confrontare
   le medie.
-- Le fasce mostrano cosa è andato insieme in questa esecuzione. Non mostrano
-  la causa.
+- Le fasce mostrano cosa è andato insieme in questa esecuzione. Non mostrano la
+  causa.
 
 ## Classifica
 
-Il blocco `viral.leaderboard` del riepilogo dell'esecuzione classifica gli
-handle del report degli account. `byViralScore` classifica per Viral Score
-medio. `byActualEngagementRate` classifica per tasso reale medio. Ogni elenco
-contiene fino a 20 handle con `rank`, `posts` & `average`.
+Il blocco `viral.leaderboard` del riepilogo dell'esecuzione mette in classifica
+i nomi utente del report degli account. `byViralScore` ordina per Viral Score
+medio. `byActualEngagementRate` ordina per tasso reale medio. Ogni elenco
+contiene fino a 20 nomi utente con `rank`, `posts` & `average`.
 
-Limiti:
+La classifica ha questi limiti:
 
-- Un handle ha bisogno di almeno 3 post valutati per entrare in classifica.
-- L'elenco dei tassi salta gli handle senza conteggio di follower.
-- A parità, decide prima il numero maggiore di post, poi il nome dell'handle.
-- La classifica copre i post di una sola esecuzione, non l'intera storia di
-  un account.
+- Un nome utente entra in classifica solo con almeno 3 post valutati.
+- L'elenco dei tassi salta i nomi utente senza conteggio dei follower.
+- A parità decide il numero di post, poi il nome utente.
+- La classifica copre i post di una sola esecuzione, non l'intera storia di un
+  account.
 
 ## Valuta una bozza prima di pubblicare
 
-Incolla il tuo testo in `texts`. L'Actor lo valuta & non recupera nulla da X.
+Incolla il tuo testo in `texts`. X Tweet Viral Score Analyzer di Xquik lo valuta
+& non recupera nulla da X.
 
 ```json
 {
@@ -207,31 +215,31 @@ Incolla il tuo testo in `texts`. L'Actor lo valuta & non recupera nulla da X.
 ```
 
 - Ogni testo diventa 1 riga con `viralScore`, `viralVerdict` & `viral.stops`.
-- `tweet.id` è `text:1`, `text:2` & così via, & `tweet.type` è `text`.
+- `tweet.id` vale `text:1`, `text:2` e così via. `tweet.type` vale `text`.
 - Una bozza non ha ancora Mi piace o visualizzazioni, quindi
   `viral.algorithmScore` resta `null`.
-- Ogni testo analizzato costa gli stessi $0.0003 di un tweet analizzato.
-- Con `texts` impostato, l'esecuzione analizza solo quei testi. Esegui i
-  target X separatamente.
+- Ogni testo analizzato costa gli stessi $0.0003 di un post analizzato.
+- Con `texts` impostato, l'esecuzione analizza solo quei testi. Avvia a parte i
+  target di X.
 
-## Prezzi
+## Quanto costa controllare il viral score?
 
-I costi dell'IA sono inclusi nel prezzo per tweet. Non ti servono account IA,
-token o chiavi.
+X Tweet Viral Score Analyzer di Xquik costa da $0.0003 per post analizzato. Non
+c'è costo di avvio. Il prezzo include la raccolta, i costi AI & il Viral Score.
+Non ti servono account AI, token o chiavi. Il prezzo copre fino a 8 domande &
+64.000 byte di contesto per post. Ogni definizione di domanda può usare fino a
+8.000 byte.
 
-A partire da $0.0003 per tweet analizzato con successo, senza costo di avvio.
-Il prezzo include la raccolta & il Viral Score. L'allowance di analisi è di
-8 domande, 8.000 byte per definizione di domanda e 64.000 byte di contesto
-per tweet. I filtri di estrazione e la deduplicazione vengono eseguiti prima
-dell'analisi, quindi le righe filtrate e duplicate non vengono mai analizzate
-né addebitate. Le analisi fallite o saltate e le righe di diagnostica non
-comportano alcun addebito sul risultato. Apify fattura separatamente l'uso
-della piattaforma. La scheda Pricing lo mostra.
+I filtri di estrazione & la deduplicazione agiscono prima dell'analisi. Non
+paghi mai le righe filtrate o duplicate. Le analisi fallite, le analisi saltate
+& le righe di diagnostica non hanno addebiti sul risultato. Apify fattura a
+parte l'uso della piattaforma per calcolo, storage & trasferimento, alle tariffe
+del tuo piano. La scheda Pricing lo mostra.
 
-## Esempi di input e output
+## Esempi di input & output
 
-L'input sopra è pronto per la copia. Le righe di output hanno questo aspetto
-(abbreviato):
+L'input qui sopra è pronto da copiare. Una riga di output abbreviata ha questo
+aspetto:
 
 ```json
 {
@@ -268,73 +276,84 @@ L'input sopra è pronto per la copia. Le righe di output hanno questo aspetto
 ```
 
 Ogni risultato contiene `tweet`, `analysis` & `viral`. Le risposte includono
-tipi, versioni delle domande e probabilità disponibili. `viral.stops` elenca
-gli stop rigidi che hanno limitato il punteggio. Un'analisi fallita o saltata
-mantiene il tweet raccolto con un elenco di risposte vuoto, un `reason` & un
-punteggio `null`. Diagnostiche gratuite nel key-value store spiegano input
-non validi, risultati mancanti e raccolte interrotte. Il rapporto di
-esecuzione separa le righe raccolte, le analisi addebitate e gli addebiti in
-sospeso.
+tipi, versioni delle domande & probabilità disponibili. `viral.stops` elenca i
+blocchi rigidi che hanno limitato il punteggio. Una riga con un'analisi fallita
+o saltata conserva il post raccolto & un `reason`. Il suo elenco di risposte è
+vuoto & il suo punteggio è `null`.
 
-## Riepilogo dell'esecuzione e risposte piatte
+La diagnostica gratuita nel key-value store spiega input non validi, risultati
+mancanti & raccolte interrotte. Il report dell'esecuzione separa righe raccolte,
+analisi addebitate & addebiti in sospeso.
 
-Un'esecuzione scrive un record `analysis-summary` nel proprio key-value store in
-4 casi:
+## Riepilogo dell'esecuzione & risposte piatte
+
+Un'esecuzione scrive un record `analysis-summary` nel suo key-value store in 4
+casi:
 
 - Incontra un problema o è grande.
 - Imposta `monitor` senza `baselineDatasetId`, come prima esecuzione di una
   serie.
-- Il suo confronto trova un tweet cambiato, nuovo o non confrontabile.
+- Il suo confronto trova un post cambiato, nuovo o non confrontabile.
 - Ha `alwaysSaveRunRecords` attivo.
 
-Le altre esecuzioni saltano il record. Il loro messaggio di stato indica la
-risposta principale, come `Average Viral Score: 64.` Un confronto senza
-cambiamenti riporta `No change since the earlier run.` Un'esecuzione con un
-problema, o un'esecuzione grande, scrive anche `run-report`. Lo fa anche
-un'esecuzione con `alwaysSaveRunRecords` attivo. `run-report` ripete il
-riepilogo sotto `results.analysisSummary`.
+Le altre esecuzioni saltano il record. Il loro stato nomina la risposta
+principale, come `Average Viral Score: 64.` Un confronto senza cambiamenti
+riporta `No change since the earlier run.` Anche le esecuzioni grandi o con un
+problema scrivono `run-report`, come quelle con `alwaysSaveRunRecords` attivo.
+`run-report` ripete il riepilogo sotto `results.analysisSummary`.
 
-Il riepilogo conta le righe analizzate, fallite e saltate, somma l'engagement e
-riassume ogni domanda. Il suo blocco `viral` riporta `averageScore`, il
-conteggio di ogni verdetto & quante righe l'Actor ha valutato o lasciato senza
-punteggio. Lo stesso blocco contiene `calibration`, `accounts` & `leaderboard`,
-descritti sopra. Le domande a punteggio riportano una media & una media pesata
-per engagement. La suddivisione `reaction` mostra quanti tweet rientrano in ogni
-reazione, & `top` elenca i tre tweet più coinvolgenti per reazione.
-Un'esecuzione vuota riporta conteggi a zero & una media `null`. Ogni riga elenca
-`sourceDomains`, i nomi host a cui rimanda, & `cashtags` come `$NVDA` trovati
-nel testo. Con `monitor.baselineDatasetId` impostato, il blocco `monitor` del
-riepilogo conta gli stati di confronto & elenca fino a 50 righe modificate.
+Il riepilogo conta le righe analizzate, fallite & saltate. Somma l'engagement &
+riassume ogni domanda.
 
-Ogni riga di risultato porta anche `viralScore`, `viralVerdict`,
-`viralAlgorithmScore`, `viralActualEngagementRate` & `answers`, una mappa
-piatta dall'ID domanda alla categoria, al punteggio o alla probabilità
-scelti. La vista dataset `Viral Score` e gli export CSV o Excel mostrano
-queste colonne accanto al tweet, così i fogli di calcolo non necessitano di
-parsing JSON. Le righe fallite o saltate portano una mappa vuota.
+- Il blocco `viral` riporta `averageScore` & il conteggio di ogni verdetto.
+  Conta anche le righe con & senza punteggio.
+- Lo stesso blocco contiene `calibration`, `accounts` & `leaderboard`, descritti
+  sopra.
+- Le domande a punteggio riportano una media & una media pesata per
+  engagement.
+- La suddivisione `reaction` mostra quanti post rientrano in ogni reazione.
+- `top` elenca i 3 post con più engagement per ogni reazione.
+- Ogni riga elenca `sourceDomains`, gli hostname a cui rimanda.
+- Ogni riga elenca i `cashtags` presenti nel testo, come `$NVDA`.
+- Con `monitor.baselineDatasetId` impostato, il blocco `monitor` del riepilogo
+  conta gli stati del confronto. Elenca fino a 50 righe cambiate.
+
+Un'esecuzione vuota riporta conteggi a 0 & una media `null`.
+
+Ogni riga di risultato riporta anche `viralScore`, `viralVerdict`,
+`viralAlgorithmScore` & `viralActualEngagementRate`. Riporta anche `answers`,
+una mappa piatta con l'ID della domanda come chiave. Ogni valore è la categoria,
+il punteggio o la probabilità scelti. La vista `Viral Score` del dataset & gli
+export CSV o Excel mostrano queste colonne. Stanno accanto al post, quindi i
+fogli di calcolo non devono leggere JSON. Le righe fallite & saltate riportano
+una mappa vuota.
 
 ## Confronta con un'esecuzione precedente
 
-Passa `monitor.baselineDatasetId`, l'ID dataset di un'esecuzione precedente
+Passa `monitor.baselineDatasetId`, l'ID del dataset di un'esecuzione precedente
 completata con le stesse impostazioni di analisi. Il confronto legge le righe di
-quell'esecuzione, quindi funziona anche se quell'esecuzione ha saltato il
-riepilogo. Ogni riga guadagna allora un oggetto `monitor`. Il suo stato è
-`first_run` senza baseline, `new_to_baseline` per i tweet che l'esecuzione
-precedente non aveva, & `unchanged` o `changed` per i tweet che aveva. `changes`
-elenca ogni decisione su un tratto che si è spostata da `previous` a `current`.
+quell'esecuzione. Funziona anche se quell'esecuzione ha saltato il riepilogo.
+Ogni riga riceve poi un oggetto `monitor`. Il suo stato può essere:
+
+- `first_run` senza baseline.
+- `new_to_baseline` per i post che l'esecuzione precedente non aveva.
+- `unchanged` o `changed` per i post che aveva.
+
+`changes` elenca ogni decisione sui tratti passata da `previous` a `current`.
 Le decisioni si confrontano per categoria, livello di punteggio arrotondato o
 sì/no a 0,5. Una decisione conta come cambiata solo quando si sposta in modo
-netto. Le oscillazioni quasi pari tra le esecuzioni restano invariate. Le
-baseline sopra `maxBaselineRows` (predefinito 100.000) o con impostazioni
-diverse interrompono l'esecuzione prima della raccolta con una riga di
-diagnostica.
+netto. I quasi pareggi tra esecuzioni restano `unchanged`.
+
+Una baseline sopra `maxBaselineRows`, o con impostazioni diverse, ferma
+l'esecuzione prima della raccolta. L'esecuzione scrive poi una riga di
+diagnostica. `maxBaselineRows` vale 100.000 di default.
 
 ## Esempi di task
 
-Scegli tra 50 task pubblici. Ognuno parte da una ricerca reale in inglese
-con un `maxItems` limitato & la vista dataset `Viral Score`. Alcuni
-aggiungono il contesto sul pubblico. Modifica la ricerca o il contesto prima
-di eseguire.
+Scegli tra 50 task pubblici. Ognuno parte da una ricerca reale in inglese & da
+un `maxItems` limitato. Usa la vista `Viral Score` del dataset. Alcuni
+aggiungono il contesto sul pubblico. Modifica la ricerca o il contesto prima di
+avviarlo.
 
 - [Viral score of AI startup launch tweets](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-ai-startup-launch-tweets)
 - [Viral score of SaaS founder build in public posts](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-saas-founder-build-in-public-posts)
@@ -349,134 +368,150 @@ di eseguire.
 - [Viral score audit of Duolingo posts](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-audit-of-duolingo-posts)
 - [Viral score audit of Wendy's posts](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-audit-of-wendys-posts)
 
-I task rimanenti coprono altri argomenti & account di brand nella pagina
-dell'Actor.
+Gli altri task, nella pagina dell'Actor, coprono altri argomenti & account di
+brand.
 
-## FAQ e supporto
+## FAQ & supporto
+
+### Serve un account AI, una chiave API X o il login?
+
+No. X Tweet Viral Score Analyzer di Xquik include i costi AI nel prezzo. Non ti
+servono account AI, token o chiavi. Non ti servono nemmeno chiave API X, login o
+credenziali.
 
 ### Un punteggio alto significa che un tweet diventerà virale?
 
-No. Il punteggio stima quanto funziona la formulazione per un lettore
-generico. Anche tempistica, dimensione del pubblico, media & fortuna decidono
-la portata. Confronta i punteggi con i conteggi reali di engagement di ogni
-riga prima di farci affidamento.
+No. Il punteggio stima quanto funziona la formulazione per un lettore generico.
+Anche orario, dimensione del pubblico, media & fortuna decidono la diffusione.
+Confronta i punteggi con i conteggi reali di engagement di ogni riga prima di
+fidarti.
 
-### Posso usare le mie domande personalizzate?
+### Posso usare le mie domande?
 
-Sì. Le `analysis.questions` personalizzate sostituiscono quelle predefinite:
-da 1 a 8 domande `choice`, `score` o `probability` con da 2 a 255 categorie o
-almeno 2 livelli ordinati. Il Viral Score richiede tutte le 8 domande
-predefinite, quindi le domande personalizzate lo lasciano `null`.
+Sì. Le `analysis.questions` personalizzate sostituiscono quelle predefinite.
+Invia da 1 a 8 domande `choice`, `score` o `probability`. Le domande `choice`
+accettano da 2 a 255 categorie. Le domande `score` richiedono almeno 2 livelli
+ordinati. Il Viral Score richiede tutte le 8 domande predefinite, quindi con
+domande personalizzate resta `null`.
 
-### Perché una riga è tornata con `analysis.status` `failed` o `skipped`?
+### Perché una riga ha `analysis.status` `failed` o `skipped`?
 
-L'Actor ha raccolto & consegnato il tweet, ma l'analisi AI non si è completata.
-`analysis.reason` indica la causa. `context_limit` significa che il tuo contesto
-& i tuoi target non lasciano spazio al tweet. `service_unavailable` significa
-che il servizio di analisi era momentaneamente non disponibile. Queste righe non
-comportano alcun addebito sul risultato & non hanno punteggio. Accorcia
-`analysis.context` o riesegui gli ID interessati.
+L'Actor ha raccolto & consegnato il post, ma l'analisi AI non si è completata.
+`analysis.reason` indica la causa. `context_limit` significa che contesto &
+target non lasciano spazio al post. `service_unavailable` significa che il
+servizio di analisi era momentaneamente non disponibile. Queste righe non hanno
+addebiti sul risultato né punteggio. Accorcia `analysis.context` o riavvia gli
+ID interessati.
 
-L'Actor analizza comunque un tweet più lungo di `maxContextBytes`. Taglia prima
-i post citati & quelli a cui risponde, poi il tweet.
-`analysis.contextAvailability.postText` diventa quindi `truncated`. Aumenta
+L'Actor analizza comunque un post più lungo di `maxContextBytes`. Taglia prima
+i post citati & quelli a cui risponde, poi il post stesso.
+`analysis.contextAvailability.postText` diventa quindi `truncated`. Alza
 `maxContextBytes` fino a 64.000 per conservare più testo.
 
 ### L'analisi verifica i fatti?
 
-No. Le risposte descrivono ciò che il post esprime & come il post lo
-formula. Le probabilità esprimono la fiducia del modello, non la verità. Rivedi le
-classificazioni importanti confrontandole con il tweet originale, che ogni
-riga conserva.
+No. Le risposte descrivono cosa esprime il post & come lo presenta. Le
+probabilità esprimono la fiducia dell'AI, non la verità. Controlla le
+classificazioni importanti sul post originale, che ogni riga conserva.
 
 ### Quali lingue funzionano?
 
-L'estrazione supporta ogni lingua servita da X. Validiamo l'analisi prima
-sugli scenari clienti in inglese. Le altre lingue supportate restituiscono
+L'estrazione supporta ogni lingua servita da X. Validiamo l'analisi prima sugli
+scenari dei clienti in inglese. Le altre lingue supportate restituiscono
 risposte con la stessa struttura.
 
 ### Come limito il costo?
 
-Filtri, deduplicazione e `maxItems` vengono eseguiti prima dell'analisi,
-quindi l'Actor analizza & addebita solo i tweet unici e conformi ai
-filtri. Usa operatori di ricerca precisi, limiti di data e soglie di
-engagement, e inizia con un `maxItems` piccolo per verificare la qualità
-delle risposte prima di un'esecuzione grande.
+Filtri, deduplicazione & `maxItems` agiscono prima dell'analisi. Paghi solo i
+post unici & conformi ai filtri. Usa operatori di ricerca precisi, limiti di
+data & soglie di engagement. Parti con un `maxItems` piccolo per verificare la
+qualità delle risposte prima di un'esecuzione grande.
 
-### Dove ottengo aiuto?
+### È legale analizzare i dati di X?
 
-Apri un problema nella pagina dell'Actor o contatta support@xquik.com con
-l'ID dell'esecuzione. Diagnostiche gratuite nel key-value store spiegano le
+L'Actor raccoglie campi pubblici di X. I risultati possono contenere dati
+personali. Verifica di avere uno scopo lecito & rispetta le norme sulla privacy
+applicabili. Nel dubbio, chiedi a un legale qualificato.
+
+### Posso usare l'API, le pianificazioni & le integrazioni?
+
+Sì. Consulta la
+[scheda API](https://apify.com/xquik/x-tweet-viral-score-analyzer/api) per
+esempi in Python, JavaScript & cURL. Usa le
+[pianificazioni](https://docs.apify.com/platform/schedules) di Apify per le
+esecuzioni ricorrenti. Passa l'ID del dataset precedente come
+`monitor.baselineDatasetId` per vedere cosa è cambiato. Le integrazioni di Apify
+collegano le esecuzioni anche a webhook, Make, Zapier, n8n & Google Sheets.
+
+### Dove trovo assistenza?
+
+Apri una issue nella pagina dell'Actor o scrivi a support@xquik.com con l'ID
+dell'esecuzione. La diagnostica gratuita nel key-value store spiega le
 esecuzioni vuote, parziali o interrotte.
-
-Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
-"Twitter" e "X" sono marchi di X Corp.
 
 ## Actor Xquik correlati
 
-Ogni Actor Xquik condivide lo stesso motore di estrazione, la fatturazione
-filter-first e la diagnostica. Scegli quello che corrisponde ai dati di cui
-hai bisogno.
+Ogni Actor Xquik usa lo stesso motore di estrazione, fattura dopo i filtri &
+offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): raccoglie tweet
-  da ricerche, timeline di profilo, List e ID di tweet con oltre 50 filtri ed
-  export piatti. Usalo quando ti servono dati sui tweet senza analisi. A
-  partire da $0.00015 per riga.
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): estrae post da
+  ricerche, timeline dei profili, liste & ID dei post con oltre 50 filtri &
+  export piatti. Usalo quando ti servono dati sui post senza analisi. Da
+  $0.00015 per riga.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): estrae
-  profili con i relativi post, risposte, media & follower da handle, ID o URL.
-  Usalo quando parti dagli account invece che dalle ricerche. Da $0.00015 per
-  riga.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): raccoglie
-  risposte, commenti e intere conversazioni sotto i post con oltre 25 filtri.
-  Usalo quando ti serve la discussione sotto i tweet. A partire da $0.00015
+  profili con i relativi post, risposte, media & follower da nomi utente, ID o
+  URL. Usalo quando parti dagli account invece che dalle ricerche. Da $0.00015
   per riga.
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): estrae risposte,
+  commenti & intere conversazioni sotto i post con oltre 25 filtri. Usalo
+  quando ti serve la discussione sotto i post. Da $0.00015 per riga.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): estrae
-  risposte, citazioni, retweeter & thread per URL o ID di post in blocco.
-  Usalo quando misuri chi ha interagito con i post. Da $0.00015 per riga.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): raccoglie
-  follower, following, membri di List, iscritti e membri di Community come
-  righe profilo. Usalo quando ti servono liste di audience o membri. A
-  partire da $0.00015 per profilo.
+  risposte, citazioni, utenti che hanno fatto repost & thread da URL o ID di
+  post in blocco. Usalo quando misuri chi ha interagito con i post. Da $0.00015
+  per riga.
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): estrae
+  follower, following, membri & follower delle liste e membri delle community
+  come righe di profilo. Usalo quando ti servono elenchi di pubblico o di
+  membri. Da $0.00015 per profilo.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  cerca utenti per handle, bio e posizione con filtri per follower,
-  verifica, età e posizione. Usalo quando costruisci liste di account a
-  partire da una ricerca. A partire da $0.00015 per profilo.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): raccoglie post,
-  membri e follower di List da URL o ID di List. Usalo quando una List
-  curata definisce le tue fonti. A partire da $0.00015 per riga.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper):
-  raccoglie informazioni, post, ricerche, membri e moderatori di Community.
-  Usalo quando le tue fonti sono X Community. A partire da $0.00015 per riga.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): raccoglie
-  tendenze in tempo reale per posizione con rank, volume, query e WOEID.
-  Usalo quando monitori cosa è di tendenza e dove. A partire da $0.00015 per
+  cerca utenti per nome utente, bio & posizione con filtri su follower,
+  verifica, età & posizione. Usalo quando costruisci elenchi di account dalla
+  ricerca. Da $0.00015 per profilo.
+- [X List Scraper](https://apify.com/xquik/x-list-scraper): estrae post,
+  membri & follower delle liste da URL o ID delle liste. Usalo quando una lista
+  curata definisce le tue fonti. Da $0.00015 per riga.
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper): estrae
+  informazioni, post, ricerche, membri & moderatori delle community. Usalo
+  quando le tue fonti sono community di X. Da $0.00015 per riga.
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): estrae le
+  tendenze in tempo reale per località con posizione in classifica, volume,
+  query & WOEID. Usalo quando segui cosa è di tendenza e dove. Da $0.00015 per
   tendenza.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): raccoglie
-  articoli lunghi di X come Markdown e testo con copertine, autori, date e
-  metriche. Usalo quando ti servono i corpi degli articoli, non i tweet. A
-  partire da $0.00015 per articolo.
+  gli articoli lunghi di X come Markdown & testo, con copertine, autori, date &
+  metriche. Usalo quando ti serve il corpo degli articoli, non i post. Da
+  $0.00015 per articolo.
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader): estrae o
-  archivia foto, video e GIF da post o profili con opzioni MP4 e metadati.
-  Usalo quando ti servono i file media stessi. A partire da $0.00015 per riga
-  media.
+  archivia foto, video & GIF da post o profili con opzioni MP4 & metadati.
+  Usalo quando ti servono i file multimediali veri e propri. Da $0.00015 per
+  riga di media.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
-  monitora le menzioni del brand con rilevanza AI, sentiment e risposte
-  sull'esperienza cliente, e confronta le esecuzioni. Usalo quando osservi un
-  brand nel tempo. A partire da $0.0003 per tweet analizzato.
+  monitora le menzioni del brand con rilevanza, sentiment & risposte sulla
+  customer experience generate con AI, poi confronta le esecuzioni. Usalo
+  quando osservi un brand nel tempo. Da $0.0003 per post analizzato.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
-  etichetta atteggiamento, intensità e probabilità di sarcasmo per ogni
-  tweet con l'AI. Usalo quando ti serve il sentiment generale su qualsiasi
-  argomento. A partire da $0.0003 per tweet analizzato.
+  etichetta atteggiamento, intensità & probabilità di sarcasmo di ogni post con
+  AI. Usalo quando ti serve il sentiment generale su qualsiasi argomento. Da
+  $0.0003 per post analizzato.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
-  etichetta posizione rialzista, ribassista, neutra o mista, tipo di
-  contenuto, convinzione e rilevanza dell'asset con l'AI. Usalo quando segui
-  stock, crypto o discussioni di trading. A partire da $0.0003 per tweet
-  analizzato.
+  etichetta con AI la posizione rialzista, ribassista, neutra o mista, il tipo
+  di contenuto, la convinzione & la rilevanza per l'asset. Usalo quando segui
+  azioni, crypto o discussioni di trading. Da $0.0003 per post analizzato.
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
-  etichetta i post di notizie per formato, attribuzione della fonte e
-  rilevanza dell'argomento con l'AI. Usalo quando separi il reporting dal
-  commento. A partire da $0.0003 per tweet analizzato.
+  etichetta con AI i post di notizie per formato, attribuzione della fonte &
+  rilevanza dell'argomento. Usalo quando separi le notizie dai commenti. Da
+  $0.0003 per post analizzato.
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  risponde alle tue domande personalizzate di categoria, punteggio e sì/no
-  per ogni tweet con l'AI. Usalo quando le analisi preimpostate non si
-  adattano alle tue etichette. A partire da $0.0003 per tweet analizzato.
+  risponde con AI alle tue domande di categoria, punteggio & sì/no su ogni
+  post. Usalo quando le analisi preimpostate non si adattano alle tue
+  etichette. Da $0.0003 per post analizzato.

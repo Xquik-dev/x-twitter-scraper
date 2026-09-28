@@ -1,89 +1,70 @@
-<p align="center">
-  <strong>English</strong> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+**English** ·
+[Español](README.es.md)
+·
+[Türkçe](README.tr.md)
+·
+[简体中文](README.zh-CN.md)
+·
+[日本語](README.ja.md)
+·
+[한국어](README.ko.md)
+·
+[Deutsch](README.de.md)
+·
+[Français](README.fr.md)
+·
+[Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer connects Xquik MCP to coding agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Watch how Framer uses Xquik scrapers with Claude Code, Codex, Cursor, and more, from 6:07.</a>
-</td></tr></table>
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
+
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
+Claude Code, Codex, Cursor, and more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data. X Reply Scraper collects replies, comments & whole
+most complete X data. Xquik's X Reply Scraper collects replies, comments & whole
 conversations. Most other Apify Actors charge before filtering or deduplicating.
-Xquik charges only for delivered, unique, filter-matching results.
+Xquik charges only for **delivered, unique, filter-matching results**.
 
-Scrape X (Twitter) replies for **$0.00015 per delivered row on every Apify
-plan**. Paste post URLs, Tweet IDs, profile URLs, or usernames. Export replies,
-conversations, authors, engagement, entities, and media URLs. Apify bills your
-platform usage separately. You need no X login.
-
-Filters run before dataset writes. You pay only for delivered rows.
+Scrape X (Twitter) replies for **$0.00015 per delivered row** on every Apify
+plan. Paste post URLs, Tweet IDs, profile URLs or usernames. Export replies,
+conversations, authors, engagement, entities & media URLs. Apify bills your
+platform usage separately. You need no X login. Filters run before dataset
+writes, so you pay only for delivered rows.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## Incomplete extraction
-
-Interrupted extraction writes a free `partial` diagnostic. Available results
-remain intact. Read `availableResults`, `failedTargets`, `retryable`, and
-`nextAction` before retrying. A successful Actor exit confirms delivery, not
-complete extraction.
-
-The status names every cause of an early stop. `stopCauses` lists each cause
-with its own `message`, `retryable` & `nextAction`. The causes are
-`target_not_found`, `target_failed`, `page_limit`, `reply_reach` &
-`deadline_reached`. `reply_reach` means X served only part of a thread. A
-missing post or account is no failure. The status names it, such as "X has no
-match for 1 target." It joins `stopCauses` only when another cause stopped the
-run. The run is `retryable` when any cause is.
-
 ## What does this Twitter reply scraper do?
 
-X Reply Scraper collects public replies and comment conversations. It handles
-single posts, bulk URL lists, Tweet IDs, and user reply timelines.
+Xquik's X Reply Scraper collects public replies & comment conversations. It
+handles single posts, bulk URL lists, Tweet IDs & user reply timelines.
 
-Use it for sentiment analysis, customer feedback, community research, reply
-ranking, lead discovery, moderation review, and conversation datasets.
+Use it for sentiment analysis, customer feedback & community research. Other
+uses include reply ranking, lead discovery, moderation review & conversation
+datasets.
 
 ### Reply collection behavior
 
 - Auto mode keeps collecting when direct results are incomplete.
 - `collectionStrategy` offers 4 modes for different reply jobs.
-- Bulk inputs accept post URLs, Tweet IDs, profiles, and usernames.
-- Filters and duplicate removal run before billing.
-- Output supports 4 sort modes, 3 detail levels, and 3 field styles.
-- Every reply keeps its source target, parent IDs, root ID, and depth.
-- Continuation cursors support backfills and scheduled runs.
+- Bulk inputs accept post URLs, Tweet IDs, profiles & usernames.
+- Filters & duplicate removal run before billing.
+- Output supports 4 sort modes, 3 detail levels & 3 field styles.
+- Every reply keeps its source target, parent IDs, root ID & depth.
+- Continuation cursors support backfills & scheduled runs.
 - Empty runs write 1 free record to `diagnostics`.
 - Run logs show page & target timing in `fetchDurationMs`,
   `processingDurationMs`, `pushDurationMs`, `statusDurationMs`,
   `fullPageDurationMs` & `fullTargetDurationMs`.
 - Runs keep delivered replies & progress when Apify restarts them.
 
-### Always use the latest build
+## How to scrape X replies
 
-Select `latest` for every run to receive all published fixes.
+1. Paste post URLs, Tweet IDs, profile URLs or usernames.
+2. Set `maxItems`, `scope` & the filters your job needs.
+3. Run Xquik's X Reply Scraper & open the dataset.
 
-If you specify no build, Apify uses this Actor's `latest` default. Console runs
-and standard API examples inherit that default.
-
-Saved tasks may override the Actor default. Schedules and task integrations
-reuse that choice. Keep every override set to `latest`.
-
-Apify does not redirect exact build numbers to `latest`. Replace pinned numbers
-with `latest`. Use exact builds only for temporary rollbacks.
-
-## Quick start
-
-The initial form targets a verified public conversation. It returns up to 25
+The prefilled form targets a verified public conversation. It returns up to 25
 full, flat rows. Auto mode searches the full conversation by default.
 Deduplication & source attribution stay on.
 
@@ -96,7 +77,7 @@ Deduplication & source attribution stay on.
 }
 ```
 
-### Scrape replies from Tweet IDs
+### Scrape replies from tweet IDs
 
 ```json
 {
@@ -152,24 +133,43 @@ Deduplication & source attribution stay on.
 }
 ```
 
-Sample values are illustrative. Responses reflect source data at run time.
+## How much does it cost to scrape X replies?
+
+Xquik's X Reply Scraper costs $0.00015 per delivered row on every Apify plan.
+Apify bills platform usage separately.
+
+Xquik applies one charge per delivered data row. Replies that your filters or
+deduplication remove cost nothing. Diagnostic records in `diagnostics` are free.
+No start, URL, query, pagination or filter fee applies.
+
+## Public task examples
+
+Choose from 50 public tasks. Each has a bounded input & a matching dataset view.
+Edit any task before you run it.
+
+Start with these examples:
+
+- [Collect replies for AI agents](https://apify.com/xquik/x-reply-scraper/examples/collect-replies-for-ai-agents)
+- [Build an X reply RAG dataset](https://apify.com/xquik/x-reply-scraper/examples/build-x-reply-rag-dataset)
+- [Archive replies for LLM processing](https://apify.com/xquik/x-reply-scraper/examples/archive-replies-for-llm-processing)
+- [Extract reply leads for CRM](https://apify.com/xquik/x-reply-scraper/examples/extract-reply-leads-for-crm)
 
 ## AI agent & MCP readiness
 
-Run this Actor through Apify MCP, API clients, x402, or Skyfire.
+Run Xquik's X Reply Scraper through Apify MCP, API clients, x402 or Skyfire.
 
 - Limited permissions protect unrelated Apify account data.
-- Pay-per-event billing supports deterministic result-based costs.
-- Standby mode stays disabled for agentic-payment compatibility.
-- Typed schemas expose replies, run reports, and continuation cursors.
+- Pay-per-event billing ties cost to delivered results.
+- Standby mode stays off for compatibility with agentic payments.
+- Typed schemas describe replies, run reports & continuation cursors.
 - Bounded defaults prevent accidental unbounded agent runs.
-- Stable `camelCase` and `snake_case` modes simplify tool chaining.
-- Diagnostic rows include a status, message, and recovery action.
-- Run reports include exact outcomes, stop reasons, and charge estimates.
+- Stable `camelCase` & `snake_case` modes simplify tool chaining.
+- Diagnostic rows include a status, a message & a recovery action.
+- Run reports include exact outcomes, stop reasons & charge estimates.
 
 ## Reply targets & input aliases
 
-Use the primary fields below.
+Use these primary fields.
 
 | Input         | Purpose                               |
 | ------------- | ------------------------------------- |
@@ -178,11 +178,11 @@ Use the primary fields below.
 | `usernames`   | Profile reply timelines               |
 | `startCursor` | Resume one target from a saved cursor |
 
-The visual form shows canonical controls only. Compatibility aliases stay
-available in JSON, API, SDK, automation, and saved task inputs. Explicit
-canonical and alias fields keep their existing resolution order when combined.
+The input form shows canonical controls only. Compatibility aliases still work
+in JSON, API, SDK, automation & saved task inputs. When you combine canonical &
+alias fields, their existing resolution order applies.
 
-Compatibility aliases accept common competitor inputs:
+These aliases accept common field names from other scrapers:
 
 - URL aliases: `urls`, `tweetUrls`, `postUrls`, `profileUrls`
 - ID aliases: `conversationIds`, `postIds`, `ids`, `tweetId`, `id`
@@ -195,18 +195,18 @@ Compatibility aliases accept common competitor inputs:
 - Original post alias: `includeOriginalTweet`
 - Output aliases: `outputVariant`, `includeRaw`
 
-Malformed or unsupported targets do not fail the Actor. The run returns an
-actionable diagnostic when no valid targets remain.
-
-The Actor removes duplicate rows before output & billing.
+Malformed or unsupported targets do not fail the Actor. When no valid target
+remains, the run writes a diagnostic with the fix.
 
 ## Coverage strategies
+
+Pick how the Actor collects replies. Auto fits most jobs.
 
 ### Auto complete
 
 Use `collectionStrategy: "auto"` for most jobs. It collects every reply it can
 reach for your scope. Scope, depth, sort & author controls apply before your
-limits. Replies below non-root targets are included. When X hides part of a
+limits. It includes replies below non-root targets. When X hides part of a
 thread, the status says how many replies X hides. The other `collectionStrategy`
 values never switch modes.
 
@@ -237,22 +237,22 @@ Use `scope` to choose the result shape.
 | `nested` | Keep replies to replies at depth 2+          |
 | `all`    | Keep every available direct and nested reply |
 
-Use `maxDepth` to bound nesting. Parent links may be absent when X omits a
-conversation ancestor. The Actor preserves the best available depth.
+Use `maxDepth` to limit nesting. When X omits a conversation ancestor, the
+parent link can be missing. The Actor preserves the best available depth.
 
 ## Sorting
 
 Use `sort` with these values:
 
-- `relevance` preserves X source order
+- `relevance` keeps X source order
 - `latest` sorts newest first
 - `oldest` sorts oldest first
 - `likes` sorts highest like count first
 
-Profile targets collect the requested unique, filtered result count before
-sorting it. Tweet targets retain global sorting.
+Profile targets collect your requested count of unique, filtered results, then
+sort them. Tweet targets keep global sorting.
 
-The `sortBy` and `queryType` compatibility aliases remain supported.
+The `sortBy` & `queryType` compatibility aliases still work.
 
 ## Reply filters
 
@@ -284,16 +284,141 @@ All supported filters run before dataset writes.
 
 ### Engagement filters
 
-Use `minLikes`, `minReplies`, `minRetweets`, `minQuotes`, `minViews`, and
+Use `minLikes`, `minReplies`, `minRetweets`, `minQuotes`, `minViews` &
 `minBookmarks`. The `minFaves` alias maps to `minLikes`.
 
 ### Media & time filters
 
 - Set `hasMediaOnly: true` for replies with public media.
-- Set `mediaType` to `any`, `image`, `video`, `gif`, or `link`.
+- Set `mediaType` to `any`, `image`, `video`, `gif` or `link`.
 - Set `since` for an inclusive start timestamp.
 - Set `until` for an exclusive end timestamp.
-- Use `sinceTime` and `untilTime` as compatibility aliases.
+- Use `sinceTime` & `untilTime` as compatibility aliases.
+
+## Output fields
+
+The dataset & run-report schemas describe every returned field. Primitive fields
+also carry examples for agents & generated integrations.
+
+Every full reply row can include these core fields:
+
+| Field               | Description                                           |
+| ------------------- | ----------------------------------------------------- |
+| `id`                | Reply ID                                              |
+| `text`              | Reply text                                            |
+| `fullText`          | Long-form reply text                                  |
+| `createdAt`         | Reply timestamp                                       |
+| `lang`              | X language code                                       |
+| `url`               | Direct reply URL                                      |
+| `conversationId`    | X conversation ID                                     |
+| `inReplyToId`       | Immediate parent ID                                   |
+| `inReplyToUserId`   | Parent author ID                                      |
+| `inReplyToUsername` | Parent username                                       |
+| `likeCount`         | Likes                                                 |
+| `replyCount`        | Child replies                                         |
+| `retweetCount`      | Reposts                                               |
+| `quoteCount`        | Quotes                                                |
+| `viewCount`         | Views                                                 |
+| `bookmarkCount`     | Bookmarks                                             |
+| `author`            | Available public author metadata                      |
+| `media`             | Images, videos, GIFs, and variants                    |
+| `entities`          | Hashtags, cashtags, mentions, URLs & video timestamps |
+| `quoted_tweet`      | Quoted post when available                            |
+| `retweeted_tweet`   | Reposted post when available                          |
+
+Full rows also keep available source metadata:
+
+- Post type fields are `type`, `isReply`, `isQuoteStatus`, `isNoteTweet`,
+  `isLimitedReply` & `isTranslatable`.
+- Text details are `displayTextRange`, `noteTweet`, `article` & `card`.
+- Labels & notices are `contentDisclosure`, `communityNote`,
+  `possiblySensitive`, `tombstone` & `exclusiveContent`.
+- Conversation details are `conversationControl`, `limitedActions` &
+  `unmentionedUserIds`.
+- Context fields are `source`, `place`, `communityId`, `reactionContext` &
+  `postCta`.
+- Edit & availability fields are `edit`, `previousCounts`, `viewState` &
+  `authorUnavailable`.
+
+Flat rows keep conversation ancestry, source details, result type & schema
+version. See OpenAPI for the exact fields.
+
+### Author metadata
+
+Nested authors follow the public profile contract. It covers identity, counts,
+verification, availability, professional data & profile biographies.
+
+Flat output adds `authorId`, `authorUsername`, `authorName`, `authorFollowers`,
+`authorFollowing` & `authorVerified`.
+
+### Media metadata
+
+Media covers availability, geometry, tags & video variants. It also has the
+`watchNowUrl` & `visitSiteUrl` actions.
+
+Flat output adds `mediaUrls`.
+
+### Output example
+
+A trimmed reply row looks like this:
+
+```json
+{
+  "resultType": "reply",
+  "id": "1881423000000000000",
+  "url": "https://x.com/example/status/1881423000000000000",
+  "text": "Thanks for sharing this update.",
+  "createdAt": "2026-08-09T12:00:00.000Z",
+  "lang": "en",
+  "conversationId": "1881422000000000000",
+  "rootTweetId": "1881422000000000000",
+  "parentReplyId": "1881422000000000000",
+  "depth": 1,
+  "isDirectReply": true,
+  "likeCount": 42,
+  "replyCount": 3,
+  "retweetCount": 5,
+  "quoteCount": 2,
+  "viewCount": 1000,
+  "bookmarkCount": 7,
+  "authorUsername": "example",
+  "authorName": "Example User",
+  "authorFollowers": 1000,
+  "authorVerified": false,
+  "mediaUrls": ["https://pbs.twimg.com/media/example.jpg"],
+  "sourceTweetId": "1881422000000000000",
+  "sourceTarget": "1881422000000000000"
+}
+```
+
+Sample values are illustrative. Real runs return live data.
+
+## Output modes
+
+Pick how wide each dataset row is.
+
+### Compact
+
+Set `outputMode: "compact"` for a narrower dataset. It keeps text, conversation,
+author, engagement & media fields.
+
+### Full
+
+Set `outputMode: "full"` to keep every supported public field.
+
+### Raw
+
+Set `outputMode: "raw"` to add a sanitized source snapshot under `raw`.
+
+### Nested or flat
+
+The default `flat` layout keeps nested objects & adds author fields for tables.
+Set `outputPreset: "nested"` to omit the added flat fields.
+
+### Field naming
+
+Set `fieldStyle` to `source`, `camelCase` or `snake_case`. The Actor avoids
+overwriting colliding source keys.
 
 ## Limits, billing & continuation
 
@@ -303,123 +428,13 @@ post or profile.
 One run can read many targets. Caps, deduplication, attribution & billing stay
 exact across them.
 
-The Actor removes duplicates before billing. Set `dedupeAcrossTargets: false` to
-preserve duplicate rows from different targets.
+The Actor removes duplicate rows before output & billing. Set
+`dedupeAcrossTargets: false` to keep duplicate rows from different targets.
 
 After a page-limited run, read `next-cursors` from the default key-value store.
 Pass one cursor through `startCursor` to continue that target.
 
-## Output fields
-
-Dataset and run-report schemas describe every returned field. Primitive fields
-also include examples for agents and generated integrations.
-
-Every full reply row can include these core fields:
-
-| Field               | Description                                              |
-| ------------------- | -------------------------------------------------------- |
-| `id`                | Reply ID                                                 |
-| `text`              | Reply text                                               |
-| `fullText`          | Long-form reply text                                     |
-| `createdAt`         | Reply timestamp                                          |
-| `lang`              | X language code                                          |
-| `url`               | Direct reply URL                                         |
-| `conversationId`    | X conversation ID                                        |
-| `inReplyToId`       | Immediate parent ID                                      |
-| `inReplyToUserId`   | Parent author ID                                         |
-| `inReplyToUsername` | Parent username                                          |
-| `likeCount`         | Likes                                                    |
-| `replyCount`        | Child replies                                            |
-| `retweetCount`      | Reposts                                                  |
-| `quoteCount`        | Quotes                                                   |
-| `viewCount`         | Views                                                    |
-| `bookmarkCount`     | Bookmarks                                                |
-| `author`            | Available public author metadata                         |
-| `media`             | Images, videos, GIFs, and variants                       |
-| `entities`          | Hashtags, cashtags, mentions, URLs, and video timestamps |
-| `quoted_tweet`      | Quoted post when available                               |
-| `retweeted_tweet`   | Reposted post when available                             |
-
-Full rows also preserve available source metadata. This includes `isNoteTweet`,
-`isReply`, `isLimitedReply`, `isQuoteStatus`, `source`, `type`,
-`displayTextRange`, `contentDisclosure`, `conversationControl`, `article`,
-`limitedActions`, `reactionContext`, `authorUnavailable`, `card`, `communityId`,
-`communityNote`, `edit`, `exclusiveContent`, `isTranslatable`, `noteTweet`,
-`place`, `postCta`, `possiblySensitive`, `previousCounts`, `tombstone`,
-`unmentionedUserIds`, and `viewState`.
-
-Flat rows keep conversation ancestry, source details, result type, and schema
-version. See OpenAPI for the exact fields.
-
-### Author metadata
-
-Nested authors follow the public profile contract. It covers identity, counts,
-verification, availability, professional data, and profile biographies.
-
-Flat output adds `authorId`, `authorUsername`, `authorName`, `authorFollowers`,
-`authorFollowing`, and `authorVerified`.
-
-### Media metadata
-
-Media includes availability, geometry, tags, video variants, `watchNowUrl`, and
-`visitSiteUrl` actions.
-
-Flat output adds `mediaUrls`.
-
-## Output modes
-
-### Compact
-
-Set `outputMode: "compact"` to reduce dataset width. It preserves text,
-conversation, author, engagement, and media fields.
-
-### Full
-
-Set `outputMode: "full"` to preserve every supported public field.
-
-### Raw
-
-Set `outputMode: "raw"` to add a sanitized source snapshot under `raw`.
-
-### Nested or flat
-
-The default `flat` layout keeps nested objects and adds author fields for
-tables. Set `outputPreset: "nested"` to omit the added flat fields.
-
-### Field naming
-
-Set `fieldStyle` to `source`, `camelCase`, or `snake_case`. The Actor avoids
-overwriting colliding source keys.
-
-## Diagnostics
-
-Successful data rows use `resultType: "reply"`. Non-data exits write exactly 1
-free record to `diagnostics` with an actionable fix.
-
-The run status says why the run stopped. It also counts charged results &
-targets read. Runs with a problem always write `run-report`, including no-input
-and invalid-input exits. A large run writes it too. A small run that goes well
-skips it & saves Apify usage. Turn on `alwaysSaveRunRecords` to write it on
-every run. The report schema documents completion, billing, failures, and saved
-cursors. Its `version` field reports the exact published Actor source version.
-
-Possible statuses include:
-
-- `no-input`
-- `invalid-input`
-- `replies-incomplete`
-- `zero-output`
-- `aborted`
-- `unexpected-error`
-
-## How much does it cost?
-
-Every Apify plan costs **$0.00015 per delivered row**. This equals
-`$0.00015` per
-row. Apify bills platform usage separately.
-
-Xquik applies one charge per delivered data row. Diagnostics are free in
-`diagnostics`. No start, URL, query, pagination or filter fee applies.
+### Apify timeout
 
 The default Apify timeout is `0`, so runs have no time limit. The Actor
 continues until it reaches the cap or runs out of eligible data. You can still
@@ -428,19 +443,50 @@ that limit is near. The Actor saves replies & the report, then exits cleanly
 before the limit. Delivered replies bill once. Unfinished targets stay
 resumable.
 
-## Public task examples
+## Incomplete extraction
 
-Choose from 50 public tasks. Each has a bounded input and a matching dataset
-view. Edit any task before running it.
+An interrupted run writes a free `partial` diagnostic. Available results stay
+intact. Read `availableResults`, `failedTargets`, `retryable` & `nextAction`
+before you retry. A successful Actor exit confirms delivery, not complete
+extraction.
 
-Start with these examples:
+The status names every cause of an early stop. `stopCauses` lists each cause
+with its own `message`, `retryable` & `nextAction`. The causes are
+`target_not_found`, `target_failed`, `page_limit`, `reply_reach` &
+`deadline_reached`. `reply_reach` means X served only part of a thread.
 
-- [Collect replies for AI agents](https://apify.com/xquik/x-reply-scraper/examples/collect-replies-for-ai-agents)
-- [Build an X reply RAG dataset](https://apify.com/xquik/x-reply-scraper/examples/build-x-reply-rag-dataset)
-- [Archive replies for LLM processing](https://apify.com/xquik/x-reply-scraper/examples/archive-replies-for-llm-processing)
-- [Extract reply leads for CRM](https://apify.com/xquik/x-reply-scraper/examples/extract-reply-leads-for-crm)
+A missing post or account does not count as a failure. The status names it, such
+as "X has no match for 1 target." It joins `stopCauses` only when another cause
+stopped the run. The run is `retryable` when any cause is.
 
-## API example
+## Diagnostics
+
+Successful data rows use `resultType: "reply"`. Runs that exit without data
+write exactly 1 free record to `diagnostics`. The record says how to fix the
+problem.
+
+The run status says why the run stopped. It also counts charged results &
+targets read. Runs with a problem always write `run-report`, including no-input
+and invalid-input exits. A large run writes it too. A small run that goes well
+skips it & saves Apify usage. Turn on `alwaysSaveRunRecords` to write it on
+every run.
+
+The report schema documents completion, billing, failures & saved cursors. Its
+`version` field reports the exact published Actor source version.
+
+The `status` field uses these values:
+
+- `no-input`
+- `invalid-input`
+- `replies-incomplete`
+- `zero-output`
+- `aborted`
+- `unexpected-error`
+
+## API examples
+
+Each example runs Xquik's X Reply Scraper & returns the dataset items. Replace
+`<APIFY_API_TOKEN>` with your Apify API token.
 
 ### JavaScript
 
@@ -481,7 +527,8 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
 ### cURL
 
 ```bash
-curl "https://api.apify.com/v2/acts/xquik~x-reply-scraper/run-sync-get-dataset-items" \
+actor=xquik~x-reply-scraper
+curl "https://api.apify.com/v2/acts/$actor/run-sync-get-dataset-items" \
   -X POST \
   -H "Authorization: Bearer <APIFY_API_TOKEN>" \
   -H "Content-Type: application/json" \
@@ -490,26 +537,30 @@ curl "https://api.apify.com/v2/acts/xquik~x-reply-scraper/run-sync-get-dataset-i
 
 ## Automation & integrations
 
-Run the Actor through Apify schedules, webhooks, API clients, Make, Zapier, n8n,
-Google Sheets, cloud storage, or the
+Run Xquik's X Reply Scraper through Apify schedules, webhooks or API clients.
+Connect it to Make, Zapier, n8n, Google Sheets or cloud storage. Agents can call
+it through the
 [Apify MCP server](https://docs.apify.com/platform/integrations/mcp).
 
 Eligible agent workflows can also use
 [x402](https://docs.apify.com/integrations/x402) or
 [Skyfire](https://docs.apify.com/integrations/skyfire).
 
-Xquik also provides 47 dashboard tools, 129 REST operations, signed webhooks,
-and an MCP server.
+Xquik also offers 47 dashboard tools, 129 REST operations, signed webhooks & an
+MCP server.
 
-## Responsible use
+### Always use the latest build
 
-Collect only public data. Follow applicable laws and platform rules.
+Select `latest` for every run to get all published fixes.
 
-Reply datasets can contain personal data. Choose a lawful purpose. Minimize
-retention. Protect exports. Honor deletion and access requests where required.
+If you specify no build, Apify uses this Actor's `latest` default. Console runs
+& standard API examples inherit that default.
 
-The Actor does not bypass protected accounts. It never asks for your X password,
-cookies or tokens.
+Saved tasks may override the Actor default. Schedules & task integrations reuse
+that choice. Keep every override set to `latest`.
+
+Apify does not redirect exact build numbers to `latest`. Replace pinned numbers
+with `latest`. Use exact builds only for temporary rollbacks.
 
 ## Related Xquik Actors
 
@@ -575,3 +626,44 @@ diagnostics. Pick the one that matches the data you need.
   Estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
   trait answers. Use it when you study why tweets spread or flop. From $0.0003
   per analyzed tweet.
+
+## FAQ
+
+Answers to common questions, then where to get help.
+
+### Do I need an X API key or login?
+
+No. You need no X API key, login or credentials. Xquik's X Reply Scraper never
+asks for your X password, cookies or tokens.
+
+### Is it legal to scrape X replies?
+
+Xquik's X Reply Scraper collects public replies & does not bypass protected
+accounts. Collect only public data. Follow applicable laws & platform rules.
+
+Reply datasets can contain personal data. Choose a lawful purpose. Minimize
+retention. Protect exports. Honor deletion & access requests where required. Ask
+qualified counsel when uncertain.
+
+### Why did my run return fewer replies than the post shows?
+
+When X hides part of a thread, the status says how many replies X hides.
+`reply_reach` in `stopCauses` means X served only part of a thread. Filters,
+deduplication, `scope`, `maxDepth` & your limits also lower the count.
+
+### Can I use the API, schedules & integrations?
+
+Yes. The [API tab](https://apify.com/xquik/x-reply-scraper/api) shows Python,
+JavaScript & cURL examples. Use Apify
+[schedules](https://docs.apify.com/platform/schedules) to run Xquik's X Reply
+Scraper on a cron. It also connects to Make, Zapier, n8n & Google Sheets.
+
+### Where do I get help?
+
+Open an issue on the Actor page or contact <support@xquik.com> with the run ID.
+
+### Can I get a custom solution?
+
+Yes. Visit [xquik.com](https://xquik.com) or read the
+[API docs](https://docs.xquik.com/introduction). Xquik offers a dashboard, a
+REST API, an MCP server & webhooks.

@@ -1,47 +1,56 @@
-<p align="center">
-  <strong>English</strong> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+**English** ·
+[Español](README.es.md)
+·
+[Türkçe](README.tr.md)
+·
+[简体中文](README.zh-CN.md)
+·
+[日本語](README.ja.md)
+·
+[한국어](README.ko.md)
+·
+[Deutsch](README.de.md)
+·
+[Français](README.fr.md)
+·
+[Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer connects Xquik MCP to coding agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Watch how Framer uses Xquik scrapers with Claude Code, Codex, Cursor, and more, from 6:07.</a>
-</td></tr></table>
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
+
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
+Claude Code, Codex, Cursor, and more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data. X (Twitter) Tweet Classifier answers your own labels,
-scores & yes/no questions on every tweet. Most other Apify Actors charge before
-filtering or deduplicating. Xquik charges only for delivered, unique,
-filter-matching results. AI costs are included in the per-tweet price. You need
-no AI account, tokens or key.
+most complete X data. Xquik's X (Twitter) Tweet Classifier answers your own
+questions on every tweet. Ask for labels, scores or yes/no answers. Most other
+Apify Actors charge before filtering or deduplicating. Xquik charges only for
+delivered, unique, filter-matching results. AI costs are included in the
+per-tweet price. You need no AI account, tokens or key.
 
 Classify X (Twitter) posts with your own questions & keep the original tweet
-data. **X Tweet Classifier with AI Analysis** collects matching tweets, then
-answers 1-8 typed questions per post: categories for support triage, scores for
-prioritization & probabilities for relevance. Presets cover brand monitoring,
-complaints, competitors, purchase intent, product feedback, news, sentiment &
-market sentiment. Custom questions replace them.
+data. Xquik's **X Tweet Classifier with AI Analysis** collects matching tweets.
+It answers 1 to 8 typed questions per post. Use categories for support triage,
+scores for prioritization & probabilities for relevance. Presets cover brand
+monitoring, complaints, competitors, purchase intent, product feedback, news,
+sentiment & market sentiment. Custom questions replace them.
 
-- **Typed answers** with probabilities, confidence & question versions.
+- **Typed answers.** Answers carry probabilities, confidence & question
+  versions.
 - **Your questions, your categories.** Each question takes up to 255 categories.
-- **Complete source records** for every field the tweet exposes.
+- **Complete source records.** Every row keeps every field the tweet exposes.
 - **Filter-first billing.** You pay only for unique, filter-matching tweets with
   a successful analysis.
+
+> Xquik is an independent third-party service. Not affiliated with X Corp.
+> "Twitter" and "X" are trademarks of X Corp.
 
 ## How to classify tweets with custom questions
 
 1. Add tweet URLs, search terms, profile handles or tweet IDs.
 2. Set `maxItems` & the extraction filters your task needs.
 3. Add your questions under `analysis.questions`, or pick a preset with
-   `analysis.preset`. Without either, the Actor runs the `sentiment` preset.
-4. Run the Actor & open the dataset.
+   `analysis.preset`. Without either, the run uses the `sentiment` preset.
+4. Start the run & open the dataset.
 
 Supported modes collect tweets, searches, profile posts, Lists, replies, quotes
 & threads. Standalone article extraction & user lists are not classification
@@ -68,23 +77,23 @@ inputs.
 
 ### Questions & limits
 
-Provide 1-8 questions with unique IDs, instructions & versions.
+Provide 1 to 8 questions with unique IDs, instructions & versions.
 
-- `choice` uses 2-255 named `categories` with descriptions or null values.
-- `score` uses an ordered `levels` array containing at least 2 descriptions.
+- `choice` uses 2 to 255 named `categories` with descriptions or null values.
+- `score` uses an ordered `levels` array with at least 2 descriptions.
 - `probability` returns a value between 0 & 1. Optional `criteria` contain `yes`
   & `no` descriptions.
 
-Presets: `brand`, `complaints`, `competitors`, `purchase_intent`,
+The presets are `brand`, `complaints`, `competitors`, `purchase_intent`,
 `product_feedback`, `news`, `sentiment` & `market`. `maxContextBytes` defaults
 to 64,000 bytes. A smaller limit cuts long posts to fit & marks them
-`truncated`. `concurrency` defaults to 16 & accepts 1 through 16. Each question
-definition stays within an 8,000 byte allowance.
+`truncated`. `concurrency` defaults to 16 & accepts 1 to 16. Each question
+definition may use up to 8,000 bytes.
 
 ## Analyze your own text
 
-Paste your own text in `texts`: drafts, replies, reviews or notes. The Actor
-analyzes it & fetches nothing from X.
+Paste your own drafts, replies, reviews or notes in `texts`. Xquik's X Tweet
+Classifier analyzes them. It fetches nothing from X.
 
 ```json
 {
@@ -100,21 +109,21 @@ analyzes it & fetches nothing from X.
 - Each analyzed text costs the same $0.0003 as an analyzed tweet.
 - With `texts` set, the run analyzes only those texts. Run X targets separately.
 
-## Pricing
+## How much does it cost to classify tweets?
 
-AI costs are included in the per-tweet price. You need no AI account, tokens or
-key.
+Xquik's X Tweet Classifier costs from $0.0003 per analyzed tweet. It charges no
+start fee. The price includes collection & AI costs. You need no AI account,
+tokens or key. The price covers up to 8 questions & 64,000 bytes of context per
+tweet. Each question definition may use up to 8,000 bytes.
 
-From $0.0003 per successfully analyzed tweet, with no start fee. The price
-includes collection. The analysis allowance is 8 questions, 8,000 bytes per
-question definition & 64,000 bytes of context per tweet. Extraction filters &
-deduplication run before analysis, so filtered-out & duplicate rows are never
-analyzed or charged. Failed & skipped analyses & diagnostic rows have no result
-charge. Apify bills platform usage separately. The Pricing tab shows it.
+Extraction filters & deduplication run before analysis. You never pay for
+filtered-out or duplicate rows. Failed analyses, skipped analyses & diagnostic
+rows have no result charge. Apify bills platform usage for compute, storage &
+transfer separately at your plan's rates. The Pricing tab shows it.
 
 ## Input & output examples
 
-The input above is copy-ready. Output rows look like this (abbreviated):
+The input above is copy-ready. An abbreviated output row looks like this:
 
 ```json
 {
@@ -145,11 +154,12 @@ The input above is copy-ready. Output rows look like this (abbreviated):
 ```
 
 Each result contains `tweet` & `analysis`. Answers include types, question
-versions & available probabilities. A failed or skipped analysis keeps the
-collected tweet with an empty answer list & a `reason`. Free diagnostics in the
-key-value store explain invalid inputs, missing results & interrupted
-collection, & the run report separates collected rows, charged analyses &
-pending charges.
+versions & available probabilities. A row with a failed or skipped analysis
+keeps the collected tweet & a `reason`. Its answer list is empty.
+
+Free diagnostics in the key-value store explain invalid inputs, missing results
+& interrupted collection. The run report separates collected rows, charged
+analyses & pending charges.
 
 ## Run summary & flat answers
 
@@ -162,45 +172,59 @@ A run writes an `analysis-summary` record to its key-value store in 4 cases:
 
 Other runs skip the record. Their status names the top answer, like
 `Top sentiment: positive in 3 of 5 results.` A comparison without a change
-states `No change since the earlier run.` A run that hits a problem, or a large
-run, also writes `run-report`. So does a run with `alwaysSaveRunRecords` on.
+states `No change since the earlier run.` A run that hits a problem or is large
+also writes `run-report`. So does a run with `alwaysSaveRunRecords` on.
 `run-report` repeats the summary under `results.analysisSummary`.
 
-The summary counts analyzed, failed & skipped rows, sums engagement, and
-summarizes every question. Every custom question gets its own block: category
-counts & shares for choice questions, mean & level counts for score questions,
-yes & no counts for yes/no questions. The summary rounds numbers to 4 decimals.
-An empty run reports zero counts & `null` means. Pass `analysis.preset` with
-`brand`, `complaints`, `purchase_intent`, `product_feedback`, `competitors`,
-`sentiment`, `market` or `news` to run a built-in lens instead of custom
-questions. The summary then reports that lens per question. Every row lists
-`sourceDomains`, the hostnames it links to, & `cashtags` such as `$NVDA` found
-in its text. With `monitor.baselineDatasetId` set, the summary's `monitor` block
-counts comparison statuses & lists up to 50 changed rows.
+The summary counts analyzed, failed & skipped rows. It sums engagement &
+summarizes every question. Every custom question gets its own block.
 
-Every result row also carries `answers`, a flat map from question ID to the
-chosen category, score, or probability. The `Flat answers` dataset view & CSV or
-Excel exports show one column per question beside the tweet, so spreadsheets
-need no JSON parsing. Failed & skipped rows carry an empty map.
+- A choice question reports category counts & shares.
+- A score question reports its mean & level counts.
+- A yes/no question reports yes & no counts.
+- Every row lists `sourceDomains`, the hostnames it links to.
+- Every row lists `cashtags` found in its text, such as `$NVDA`.
+- With `monitor.baselineDatasetId` set, the summary's `monitor` block counts
+  comparison statuses. It lists up to 50 changed rows.
+
+The summary rounds numbers to 4 decimals. An empty run reports counts of 0 &
+`null` means.
+
+Set `analysis.preset` to run a built-in preset instead of custom questions. It
+accepts `brand`, `complaints`, `purchase_intent`, `product_feedback`,
+`competitors`, `sentiment`, `market` or `news`. The summary then reports each
+question of that preset.
+
+Every result row also carries `answers`, a flat map keyed by question ID. Each
+value is the chosen category, score or probability. The `Flat answers` dataset
+view & CSV or Excel exports show 1 column per question. The columns sit beside
+the tweet, so spreadsheets need no JSON parsing. Failed & skipped rows carry an
+empty map.
 
 ## Compare with an earlier run
 
 Pass `monitor.baselineDatasetId`, the dataset ID of a completed earlier run with
-the same analysis settings. The comparison reads that run's rows, so it works
-even when that run skipped its summary. Every row then gains a `monitor` object.
-Its status is `first_run` without a baseline, `new_to_baseline` for tweets the
-earlier run did not have, & `unchanged` or `changed` for tweets it had.
+the same analysis settings. The comparison reads that run's rows. It works even
+when that run skipped its summary. Every row then gains a `monitor` object. Its
+status can be:
+
+- `first_run` without a baseline.
+- `new_to_baseline` for tweets the earlier run did not have.
+- `unchanged` or `changed` for tweets it had.
+
 `changes` lists each decision for any of your questions that moved from
-`previous` to `current`. Decisions compare by category, rounded score level, or
-yes/no at 0.5. A decision counts as changed only when it moves clearly. Near-tie
-jitter between runs stays unchanged. Baselines above `maxBaselineRows` (default
-100,000) or from different settings stop the run before collection with a
-diagnostic row.
+`previous` to `current`. Decisions compare by category, rounded score level or
+yes/no at 0.5. A decision counts as changed only when it moves clearly. Near
+ties between runs stay `unchanged`.
+
+A baseline above `maxBaselineRows`, or from different settings, stops the run
+before collection. The run then writes a diagnostic row. `maxBaselineRows`
+defaults to 100,000.
 
 ## Task examples
 
-Choose from 50 public tasks. Each starts from a real English search with a
-bounded `maxItems`, ready-made custom questions & the overview dataset view.
+Choose from 50 public tasks. Each starts from a real English search & a bounded
+`maxItems`. It includes ready-made custom questions & the overview dataset view.
 Edit the search or the questions before running.
 
 - [Triage customer support requests on X](https://apify.com/xquik/x-twitter-tweet-classifier/examples/triage-support-requests-on-x)
@@ -284,18 +308,26 @@ diagnostics. Pick the one that matches the data you need.
 
 ## FAQ & support
 
+Answers to common questions, then where to get help.
+
+### Do I need an AI account, X API key or login?
+
+No. Xquik's X Tweet Classifier includes AI costs in its price. You need no AI
+account, tokens or key. You also need no X API key, login or credentials.
+
 ### Do question versions matter?
 
 Yes. Every answer stores the `version` you give its question. When you refine
 questions over time, you can tell which wording produced a result.
 
-### Why did a row come back with `analysis.status` of `failed` or `skipped`?
+### Why did a row come back with a failed or skipped analysis?
 
-The Actor collected & delivered the tweet, but the AI analysis did not complete.
-`analysis.reason` names the cause. `context_limit` means your context & targets
-leave no room for the tweet. `service_unavailable` means the analysis service
-was briefly unavailable. These rows carry no result charge. Shorten
-`analysis.context` or rerun the affected IDs.
+`analysis.status` is `failed` or `skipped`. The Actor collected & delivered the
+tweet, but the AI analysis did not complete. `analysis.reason` names the cause.
+`context_limit` means your context & targets leave no room for the tweet.
+`service_unavailable` means the analysis service was briefly unavailable. These
+rows carry no result charge. Shorten `analysis.context` or rerun the affected
+IDs.
 
 The Actor still analyzes a tweet longer than `maxContextBytes`. It cuts quoted &
 replied-to posts first, then the tweet. `analysis.contextAvailability.postText`
@@ -304,8 +336,8 @@ is then `truncated`. Raise `maxContextBytes` up to 64,000 to keep more text.
 ### Does the analysis verify facts?
 
 No. Answers describe what the post expresses & how the post frames it.
-Probabilities express model confidence, not truth. Review important
-classifications against the original tweet, which every row keeps.
+Probabilities express AI confidence, not truth. Review important classifications
+against the original tweet, which every row keeps.
 
 ### Which languages work?
 
@@ -316,16 +348,28 @@ language.
 
 ### How do I limit cost?
 
-Filters, deduplication & `maxItems` run before analysis, so the Actor analyzes &
-charges only unique, filter-matching tweets. Use precise search operators, date
-bounds & engagement floors, & start with a small `maxItems` to check answer
-quality before a large run.
+Filters, deduplication & `maxItems` run before analysis. You pay only for
+unique, filter-matching tweets. Use precise search operators, date bounds &
+engagement floors. Start with a small `maxItems` to check answer quality before
+a large run.
+
+### Is it legal to analyze X data?
+
+The Actor requests public X fields. Results can contain personal data. Confirm a
+lawful purpose & follow applicable privacy rules. Ask qualified counsel when
+uncertain.
+
+### Can I use the API, schedules & integrations?
+
+Yes. See the [API tab](https://apify.com/xquik/x-twitter-tweet-classifier/api)
+for Python, JavaScript & cURL examples. Use Apify
+[schedules](https://docs.apify.com/platform/schedules) for recurring runs. Pass
+the previous dataset ID as `monitor.baselineDatasetId` to see what changed.
+Apify integrations also connect runs to webhooks, Make, Zapier, n8n & Google
+Sheets.
 
 ### Where do I get help?
 
-Open an issue on the Actor page or contact support@xquik.com with the run ID.
+Open an issue on the Actor page or contact <support@xquik.com> with the run ID.
 Free diagnostics in the key-value store explain empty, partial or interrupted
 runs.
-
-Xquik is an independent third-party service. Not affiliated with X Corp.
-"Twitter" and "X" are trademarks of X Corp.

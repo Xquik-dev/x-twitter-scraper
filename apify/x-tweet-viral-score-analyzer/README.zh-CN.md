@@ -11,32 +11,29 @@
 </p>
 
 <table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer 将 Xquik MCP 连接到编程 agent"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何搭配 Claude Code、Codex、Cursor 等使用 Xquik 抓取工具，从 6:07 开始。</a>
+<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer 将 Xquik MCP 连接到编程 Agent"></a><br>
+<a href="https://youtu.be/4UOSpoOoC3Y?t=367">从 6:07 开始，观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具。</a>
 </td></tr></table>
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X数据。X Tweet Viral Score Analyzer 为每条推文添加 Viral Score 估算值与一个结论。大多数其他 Apify Actor 都会在过滤或去重之前收费。Xquik 只为交付的、唯一的、符合过滤条件的结果收费。AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
+Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X Tweet Viral Score Analyzer 为每条帖子评分，并加上 Viral Score 估算值和结论。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付、不重复且符合过滤条件的结果收费。AI 费用已包含在每条帖子的价格中。你不需要 AI 账号、token 或密钥。
 
-了解推文为何传播或遇冷，并保留原始推文数据。
-**X Tweet Viral Score Analyzer with AI** 收集匹配的推文。AI 为每条帖子的
-8 个特征打分。Actor 将这些答案转换为 0 到 100 的 Viral Score 估算值与一个
-结论。每一行都保留真实的点赞、转推、回复与引用，因此你可以将每个估算值与
-实际结果对比。
+了解帖子（推文）为何走红或遇冷，同时保留原始帖子数据。Xquik 的 **X Tweet Viral Score Analyzer with AI** 收集匹配的帖子。AI 为每条帖子的 8 个特征打分，该 Actor 再把这些答案换算成 Viral Score 估算值和结论。每行都保留真实的喜欢、转帖、回复和引用数。你可以拿每个估算值和实际结果对比。
 
-- **每条帖子的 Viral Score**，基于固定且带版本号的规则。
-- **8 个特征答案**说明一条帖子得分高或低的原因。
-- **硬性限制**为读起来像垃圾内容、愤怒诱饵或通用机器文案的帖子设置分数上限。
-- **完整的原始记录**，包含该推文暴露的每个字段。
+- **每条帖子的 Viral Score。** 固定且带版本号的规则为每条帖子算出 0 到 100 的分数。
+- **8 个特征答案。** 说明帖子得分高或低的原因。
+- **硬性上限。** 读起来像垃圾内容、引战内容或通用机器文案的帖子，分数会被封顶。
+- **完整的原始记录。** 每行都保留该帖子公开的所有字段。
 
-Viral Score 估算的是措辞的效果。它不预测点赞数或浏览量。它不复现 X 对帖子的
-排序方式。
+Viral Score 估算的是措辞的效果。它不预测喜欢数或查看次数，也不复现 X 对帖子的排序方式。
 
-## 如何查看推文的 Viral Score
+> Xquik 是独立的第三方服务，与 X Corp 无关联。“Twitter”和“X”是 X Corp 的商标。
 
-1. 添加搜索词、主页用户名、推文链接或推文 ID。
-2. 设置 `maxItems` 以及任务所需的提取过滤条件。
+## 如何查看帖子（推文）的 Viral Score
+
+1. 添加搜索词、个人资料用户名、帖子 URL 或帖子 ID。
+2. 设置 `maxItems` 和任务需要的提取过滤条件。
 3. 在 `analysis.context` 中描述你的受众，或保留默认值。
-4. 运行 Actor 并打开 `Viral Score` 数据集视图。
+4. 开始运行，然后打开 `Viral Score` 数据集视图。
 
 ```json
 {
@@ -46,125 +43,107 @@ Viral Score 估算的是措辞的效果。它不预测点赞数或浏览量。�
 }
 ```
 
-### Actor 回答的问题
+### 该 Actor 回答什么
 
-| 问题     | 答案                                            |
-| -------- | ----------------------------------------------- |
-| 钩子     | 0 没有钩子，1 开头清楚，2 开头抓人              |
-| 清晰度   | 0 令人困惑，1 需要费力理解，2 一读就懂          |
-| 信息量   | 0 没有新内容，1 熟悉的观点，2 有用的收获        |
-| 趣味性   | 0 不好笑，1 略微有趣，2 好笑到值得分享          |
-| 愤怒诱饵 | 帖子主要在煽动愤怒的概率                        |
-| AI 写作  | 文本读起来像通用机器文案的概率                  |
-| 垃圾内容 | 属于垃圾内容、诈骗、抽奖或刷互动的概率          |
-| 反应     | 分享、回复、点赞、争论或忽略                    |
+| 问题 | 答案 |
+| --- | --- |
+| 开头吸引力 | 0 为开头没有吸引力，1 为开头清楚，2 为开头抓人 |
+| 清晰度 | 0 为令人困惑，1 为需要费力理解，2 为一读就懂 |
+| 信息量 | 0 为没有新内容，1 为常见观点，2 为有用的收获 |
+| 幽默感 | 0 为不好笑，1 为略微有趣，2 为好笑到值得分享 |
+| 引战 | 帖子主要在煽动愤怒的概率 |
+| AI 写作感 | 文本读起来像通用机器文案的概率 |
+| 垃圾内容 | 属于垃圾内容、诈骗、抽奖或刷互动的概率 |
+| 反应 | 分享、回复、喜欢、争论或忽略 |
 
-AI 写作答案只判断文风。它不认定帖子由谁撰写。
+AI 写作感答案只判断文风，不能确定帖子是谁写的。
 
-### Viral Score 如何运作
+### Viral Score 如何计算
 
-开头吸引力、清晰度、价值和预期反应会提高分数。读起来像通用机器文案的措辞会降低分数。
+开头吸引力、清晰度、收获和预期反应会提高分数。读起来像通用机器文案的措辞会降低分数。
 
-硬性上限会限制疑似垃圾信息、煽怒内容和通用机器文案的分数。分数是 0 到 100 之间的整数。
+硬性上限会限制疑似垃圾内容、引战内容和通用机器文案的分数。分数是 0 到 100 的整数。
 
-| 结论          | 分数      |
-| ------------- | --------- |
-| `send_it`     | 70 到 100 |
-| `edit_first`  | 40 到 69  |
-| `sleep_on_it` | 0 到 39   |
+| 结论 | 分数 |
+| --- | --- |
+| `send_it` | 70 到 100 |
+| `edit_first` | 40 到 69 |
+| `sleep_on_it` | 0 到 39 |
 
-`viral.weights` 标明这些规则的版本，例如 `viral_lite:1`。规则每次变化时它都会随之变化。当分析失败、Actor 跳过分析或缺少某个默认特征答案时，分数为 `null`。Actor 从不用猜测填补缺失的分数。
+`viral.weights` 标明这些规则的版本，例如 `viral_lite:1`。规则一变，它就会变。分析失败或被跳过后，分数为 `null`。缺少某个默认特征答案时，分数也为 `null`。Xquik 的 X Tweet Viral Score Analyzer 不会用猜测值填补缺失的分数。
 
 ## Algorithm Score 估算
 
-X 在代码仓库 `xai-org/x-algorithm` 的文件 `home-mixer/params/param.rs` 中公开了
-其排序权重。Actor 将其中 4 个权重应用于每条帖子的公开计数：
+X 在代码仓库 `xai-org/x-algorithm` 的 `home-mixer/params/param.rs` 文件中公开了排序权重。Xquik 的 X Tweet Viral Score Analyzer 把其中 4 个权重用于每条帖子的公开计数：
 
 | 计数 | 权重 |
-| ---- | ---- |
-| 点赞 | 0.5  |
-| 回复 | 5    |
-| 转推 | 1    |
-| 引用 | 5    |
+| --- | --- |
+| 喜欢 | 0.5 |
+| 回复 | 5 |
+| 转帖 | 1 |
+| 引用 | 5 |
 
-`viral.algorithmWeightedSum` 是每项计数乘以其权重后的总和。
-`viral.algorithmScore` 将该总和除以浏览量，再乘以 1,000。没有浏览量的帖子
-改用关注者数。`viral.algorithmBasis` 标明除数，即 `views` 或 `followers`。只比较
-基准相同的分数。`viral.weightsVersion` 标明权重版本，例如
-`x_algorithm_params:2026-09-18`。
+`viral.algorithmWeightedSum` 是每项计数乘以权重后的总和。`viral.algorithmScore` 把这个总和除以查看次数，再乘以 1,000。没有查看次数的帖子改用关注者数。`viral.algorithmBasis` 标明除数是 `views` 还是 `followers`。只比较基准相同的分数。`viral.weightsVersion` 标明权重版本，例如 `x_algorithm_params:2026-09-18`。
 
-局限：
+这个估算有以下局限：
 
-- X 将每个权重乘以它为单个浏览者预测的概率。Actor 乘以的是观测到的计数。
-  结果是一个估算值，而不是 X 计算的分数。
-- X 没有公开书签或浏览量的权重。总和不包含这两项。
-- X 使用的信号多于这 4 项，例如停留时长与分享。公开数据不显示这些信号。
-- 帖子既没有浏览量也没有关注者数时，分数为 `null`。
-- AI 永远看不到这些计数。它只读取文本与上下文。
+- X 把每个权重乘以它为单个查看者预测的概率。该 Actor 乘以的是观测到的计数。结果是估算值，不是 X 算出的分数。
+- X 没有公开书签或查看次数的权重。总和不包含这两项。
+- X 使用的信号不止这 4 项，例如停留时长和分享。公开数据看不到这些信号。
+- 帖子既没有查看次数也没有关注者数时，分数为 `null`。
+- AI 看不到这些计数，只读取文本和上下文。
 
 ## 预测与实际对比
 
-Actor 将每个 Viral Score 与实际结果对比。
-`viral.actualEngagementRate` 为 `log10(1 + weighted sum per 1,000 followers)`。
-对数限制了单条超大帖子的影响。关注者数缺失或为 0 时，该比率为 `null`。
+Xquik 的 X Tweet Viral Score Analyzer 把每个 Viral Score 与实际结果对比。`viral.actualEngagementRate` 为 `log10(1 + weighted sum per 1,000 followers)`。取对数可以减小单条超大帖子的影响。关注者数缺失或为 0 时，该比率为 `null`。
 
-运行摘要的 `viral.calibration` 块报告：
+运行摘要的 `viral.calibration` 块报告以下字段：
 
-- `comparedPosts`：同时具有 Viral Score 与实际比率的帖子。
-- `rankCorrelation`：取值 -1 到 1 的 Spearman 等级相关系数。它考察更高的分数
-  是否对应更高的比率。
-- `calibrationScore`：相关系数乘以 100，最低为 0。
-- `overperformers` 与 `underperformers`：各最多 5 条帖子，包含推文 ID、URL、
-  Viral Score、实际比率与 `gap`。
+- `comparedPosts` 统计同时有 Viral Score 和实际比率的帖子。
+- `rankCorrelation` 是取值 -1 到 1 的 Spearman 等级相关系数，显示分数越高的帖子，实际比率是否也越高。
+- `calibrationScore` 是相关系数乘以 100，最低为 0。
+- `overperformers` 和 `underperformers` 各列出最多 5 条帖子。每条都有帖子 ID、URL、Viral Score、实际比率和 `gap`。
 
-`gap` 是标准化的实际比率减去标准化的 Viral Score。帖子的 gap 达到 1 个标准差时
-进入列表。
+`gap` 是标准化的实际比率减去标准化的 Viral Score。gap 达到 1 个标准差时，帖子会进入相应清单。
 
-局限：
+校准有以下局限：
 
-- 对比的帖子少于 10 条时，校准结果为 `null`，原因为 `too_few_posts`。分数或
-  比率完全相同时，原因为 `no_variation`。
+- 对比的帖子少于 10 条时，校准为 `null`，原因为 `too_few_posts`。分数或比率完全相同时，原因为 `no_variation`。
 - 相关系数是近似值。
-- 校准只描述一次运行。分数低可能意味着帖子在时机、话题或受众上存在差异，
-  而不是措辞估算失效。
-- 新帖子尚未完成互动积累。请比较发布时长相近的帖子。
+- 校准只描述一次运行。分数低可能说明帖子在发布时间、话题或受众上不同，不能证明措辞估算失效。
+- 新帖子的互动还没积累完。请比较发布时长相近的帖子。
 
 ## 账号报告
 
-运行摘要的 `viral.accounts` 块报告每个作者用户名：
+运行摘要的 `viral.accounts` 块按作者用户名报告：
 
-- 帖子数、平均 Viral Score 与平均实际互动率。
-- 按 Viral Score 计的最佳与最差帖子，包含推文 ID 与 URL。
-- 每个桶的平均 Viral Score：UTC 发帖小时、文本长度区间、有媒体、有链接与
-  自回复推文串。
+- 帖子数、平均 Viral Score 和平均实际互动率。
+- Viral Score 最高和最低的帖子，附帖子 ID 和 URL。
+- 每个分组的平均 Viral Score。分组包括 UTC 发帖小时、文本长度区间、是否有媒体、是否有链接和是否为自回复帖子串。
 
-文本长度区间为：`short` 至 80 个字符，`medium` 至 200，`long` 至 280，
-`extended` 为超过 280。自回复推文串帖子回复的是其作者自己。
+文本长度区间有 `short`、`medium`、`long` 和 `extended`。`short` 到 80 个字符为止，`medium` 到 200，`long` 到 280。`extended` 涵盖更长的文本。自回复帖子串中的帖子回复的是作者自己。
 
-局限：
+报告有以下局限：
 
 - 报告列出已评分帖子最多的 50 个用户名。
-- Actor 跟踪一次运行中的前 1,000 个用户名。`untrackedPosts` 统计来自之后的
-  用户名以及没有用户名的已评分帖子。
-- 帖子很少的桶说明不了什么。比较平均值之前请先查看 `posts`。
-- 桶显示的是本次运行中同时出现的情况。它们不显示因果关系。
+- 报告跟踪一次运行中的前 1,000 个用户名。`untrackedPosts` 统计之后出现的用户名的已评分帖子，以及没有用户名的帖子。
+- 帖子很少的分组说明不了什么。比较平均值前，请先看 `posts`。
+- 分组只显示本次运行中哪些情况同时出现，不代表因果关系。
 
 ## 排行榜
 
-运行摘要的 `viral.leaderboard` 块为账号报告中的用户名排名。`byViralScore` 按
-平均 Viral Score 排名。`byActualEngagementRate` 按平均实际比率排名。每个列表
-最多包含 20 个用户名，带有 `rank`、`posts` 与 `average`。
+运行摘要的 `viral.leaderboard` 块为账号报告中的用户名排名。`byViralScore` 按平均 Viral Score 排名。`byActualEngagementRate` 按平均实际比率排名。每个榜单最多 20 个用户名，带有 `rank`、`posts` 和 `average`。
 
-局限：
+排行榜有以下局限：
 
-- 一个用户名至少需要 3 条已评分帖子才能上榜。
-- 比率列表跳过没有关注者数的用户名。
-- 并列时先比帖子数，再比用户名。
-- 排行榜涵盖一次运行中的帖子，而不是账号的全部历史。
+- 用户名至少要有 3 条已评分帖子才能上榜。
+- 比率榜跳过没有关注者数的用户名。
+- 并列时，先比帖子数，再按用户名排序。
+- 排行榜只涵盖一次运行的帖子，不代表账号的全部历史。
 
-## 发帖前先为草稿评分
+## 发帖前先给草稿打分
 
-将你自己的文本粘贴到 `texts` 中。Actor 为其评分，不会从 X 获取任何内容。
+把你自己的文本粘贴到 `texts` 中。Xquik 的 X Tweet Viral Score Analyzer 会给它打分，不会从 X 获取任何内容。
 
 ```json
 {
@@ -176,25 +155,21 @@ Actor 将每个 Viral Score 与实际结果对比。
 }
 ```
 
-- 每段文本生成 1 行，带有 `viralScore`、`viralVerdict` 与 `viral.stops`。
+- 每段文本生成 1 行，包含 `viralScore`、`viralVerdict` 和 `viral.stops`。
 - `tweet.id` 依次为 `text:1`、`text:2` 等，`tweet.type` 为 `text`。
-- 草稿还没有点赞或浏览量，因此 `viral.algorithmScore` 保持为 `null`。
-- 每段已分析文本的费用与一条已分析推文相同，均为 $0.0003。
-- 设置 `texts` 后，运行只分析这些文本。X 目标请另行运行。
+- 草稿还没有喜欢或查看次数，所以 `viral.algorithmScore` 保持为 `null`。
+- 每段已分析文本的费用与一条已分析帖子相同，都是 $0.0003。
+- 设置 `texts` 后，运行只分析这些文本。X 目标请另外运行。
 
-## 定价
+## 查看 Viral Score 要花多少钱？
 
-AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或密钥。
+Xquik 的 X Tweet Viral Score Analyzer 每条已分析帖子 $0.0003 起，不收启动费。价格包含收集、AI 费用和 Viral Score。你不需要 AI 账号、token 或密钥。这个价格涵盖每条帖子最多 8 个问题和 64,000 字节的上下文。每个问题定义最多可用 8,000 字节。
 
-每成功分析一条推文起价 $0.0003，无起步费用。价格已包含收集费用与 Viral Score。
-分析额度为 8 个问题、每个问题定义 8,000 字节、每条推文 64,000 字节上下文。
-提取过滤与去重在分析之前运行，因此被过滤掉的行与重复行永远不会被分析或收费。
-失败、跳过的分析以及诊断行不产生结果费用。Apify 会单独计算平台使用费。
-Pricing 标签页会显示该费用。
+提取过滤和去重在分析之前进行。被过滤的行和重复行都不收费。失败的分析、跳过的分析和诊断行不产生结果费用。Apify 会按你套餐的费率，另行收取计算、存储和传输的平台使用费。Pricing 标签页会显示这部分费用。
 
 ## 输入与输出示例
 
-上方输入可直接复制使用。输出行如下所示（已省略部分内容）：
+上面的输入可以直接复制使用。一行省略后的输出如下：
 
 ```json
 {
@@ -230,161 +205,128 @@ Pricing 标签页会显示该费用。
 }
 ```
 
-每条结果都包含 `tweet`、`analysis` 与 `viral`。答案包括类型、问题版本及可用
-概率。`viral.stops` 列出为分数封顶的硬性限制。失败或跳过的分析会保留已收集的
-推文，答案列表为空，并附带 `reason` 与 `null` 分数。key-value store 中的免费
-诊断信息会说明无效输入、缺失结果与中断的收集。运行报告会将已收集的行、
-已收费的分析与待收费项分开列出。
+每条结果都包含 `tweet`、`analysis` 和 `viral`。答案包括类型、问题版本和可用的概率。`viral.stops` 列出封顶分数的硬性上限。分析失败或被跳过的行会保留已收集的帖子和一个 `reason`，答案列表为空，分数为 `null`。
 
-## 运行摘要与扁平化答案
+键值存储中的免费诊断信息会说明无效输入、缺失结果和中断的收集。运行报告把已收集的行、已收费的分析和待收取的费用分开列出。
 
-在以下 4 种情况下，运行会向其 key-value store 写入一条 `analysis-summary` 记录：
+## 运行摘要与扁平答案
+
+运行在以下 4 种情况下，会向键值存储写入一条 `analysis-summary` 记录：
 
 - 运行遇到问题或规模较大。
-- 作为系列中的首次运行，设置了 `monitor` 但没有设置 `baselineDatasetId`。
-- 比较发现了已变化、新增或无法比较的推文。
+- 设置了 `monitor` 但没有 `baselineDatasetId`，即系列中的第一次运行。
+- 比较发现了已变化、新增或无法比较的帖子。
 - 开启了 `alwaysSaveRunRecords`。
 
-其他运行会跳过该记录。它们的状态消息会写明最主要的答案，例如
-`Average Viral Score: 64.` 没有变化的比较会显示
-`No change since the earlier run.` 遇到问题的运行或大型运行还会写入
-`run-report`。开启 `alwaysSaveRunRecords` 的运行也会写入。`run-report` 会在
-`results.analysisSummary` 下重复该摘要。
+其他运行会跳过这条记录。它们的状态会写明占比最高的答案，例如 `Average Viral Score: 64.`。没有变化的比较会显示 `No change since the earlier run.`。运行遇到问题或规模较大时，还会写入 `run-report`。开启 `alwaysSaveRunRecords` 的运行也会写入。`run-report` 会在 `results.analysisSummary` 下重复这份摘要。
 
-摘要统计已分析、失败与跳过的行数，
-汇总互动数据，并对每个问题作出总结。其 `viral` 块报告 `averageScore`、
-每种结论的数量，以及 Actor 已评分或未评分的行数。同一个块还包含上文介绍的
-`calibration`、`accounts` 与 `leaderboard`。
-分数类问题报告均值与按互动加权的均值。`reaction`
-拆分显示每种反应下有多少条推文，`top` 列出每种反应下互动最多的三条推文。
-空运行报告零计数，平均值为 `null`。每一行都列出 `sourceDomains`，
-即其链接指向的主机名，以及文本中发现的 `cashtags`，例如 `$NVDA`。设置了
-`monitor.baselineDatasetId` 时，摘要的 `monitor` 块统计比较状态，并列出最多 50
-行变化。
+摘要统计已分析、失败和跳过的行，汇总互动数据，并总结每个问题。
 
-每条结果行还带有 `viralScore`、`viralVerdict`、`viralAlgorithmScore`、
-`viralActualEngagementRate` 与 `answers`，后者是从问题 ID 到所选类别、分数或
-概率的扁平化映射。`Viral Score` 数据集视图以及 CSV 或 Excel 导出会在推文旁
-显示这些列，因此电子表格无需解析 JSON。失败与跳过的行携带空映射。
+- `viral` 块报告 `averageScore` 和每种结论的数量，也统计已评分和未评分的行。
+- 同一个块还包含上文介绍的 `calibration`、`accounts` 和 `leaderboard`。
+- 评分题报告平均值和按互动加权的平均值。
+- `reaction` 分布显示每种反应下各有多少条帖子。
+- `top` 列出每种反应下互动最多的 3 条帖子。
+- 每行都列出 `sourceDomains`，即它链接到的主机名。
+- 每行都列出文本中出现的 `cashtags`，例如 `$NVDA`。
+- 设置 `monitor.baselineDatasetId` 时，摘要的 `monitor` 块会统计比较状态，并列出最多 50 个已变化的行。
 
-## 与更早的运行比较
+空运行的计数为 0，平均值为 `null`。
 
-传入 `monitor.baselineDatasetId`（一次使用相同分析设置完成的更早运行的数据集 ID）。比较会读取该运行的行，因此即使该运行跳过了摘要也能正常工作。此后每一行都会获得一个 `monitor` 对象。其状态在没有基线时为`first_run`，更早运行中不存在的推文为 `new_to_baseline`，已存在的推文为`unchanged` 或 `changed`。`changes` 列出每个从 `previous` 变为 `current` 的特征判断。判断按类别、四舍五入的分数等级或 0.5 处的是否判断进行比较。只有判断发生明显变化时才计为已更改。运行之间的临界抖动视为未变化。超过 `maxBaselineRows`（默认 100,000）的基线或来自不同设置的基线，会在收集之前以诊断行的形式停止运行。
+每个结果行还带有 `viralScore`、`viralVerdict`、`viralAlgorithmScore` 和 `viralActualEngagementRate`，以及 `answers`。`answers` 是一个以问题 ID 为键的扁平映射，每个值是所选的类别、分数或概率。`Viral Score` 数据集视图以及 CSV 或 Excel 导出会显示这些列。这些列就在帖子旁边，所以电子表格不需要解析 JSON。失败和跳过的行带有空映射。
+
+## 与之前的运行比较
+
+传入 `monitor.baselineDatasetId`，即之前一次已完成、分析设置相同的运行的数据集 ID。比较会读取那次运行的行，所以即使那次运行跳过了摘要，也能正常比较。之后每行都会多一个 `monitor` 对象。它的状态可能是：
+
+- 没有基线时为 `first_run`。
+- 之前的运行中没有的帖子为 `new_to_baseline`。
+- 之前的运行中已有的帖子为 `unchanged` 或 `changed`。
+
+`changes` 列出从 `previous` 变为 `current` 的每个特征判断。判断按类别、四舍五入后的分数等级，或以 0.5 为界的“是/否”结论来比较。只有判断明显变化时，才算已变化。两次运行之间接近持平的结果仍为 `unchanged`。
+
+基线超过 `maxBaselineRows` 或来自不同设置时，运行会在收集前停止，并写入一条诊断行。`maxBaselineRows` 默认为 100,000。
 
 ## 任务示例
 
-从 50 个公开任务中选择。每个任务都从一个真实的英文搜索开始，配有受限的
-`maxItems` 与 `Viral Score` 数据集视图。部分任务添加了受众上下文。运行前可
-编辑搜索或上下文。
+你可以从 50 个公开任务中选择。每个任务都从一个真实的英文搜索和有上限的 `maxItems` 开始，并使用 `Viral Score` 数据集视图。有些任务还加了受众上下文。运行前可以修改搜索或上下文。
 
-- [Viral score of AI startup launch tweets](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-ai-startup-launch-tweets)
-- [Viral score of SaaS founder build in public posts](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-saas-founder-build-in-public-posts)
-- [Viral score of Product Hunt launch posts](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-product-hunt-launch-posts)
-- [Viral score of Developer tool announcements](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-developer-tool-announcements)
-- [Viral score of Open source release posts](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-open-source-release-posts)
-- [Viral score of Crypto project announcements](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-crypto-project-announcements)
-- [Viral score of Parenting humor posts](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-parenting-humor-posts)
-- [Viral score of Office humor posts](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-office-humor-posts)
-- [Viral score of Pet photo captions](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-pet-photo-captions)
-- [Viral score audit of NASA posts](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-audit-of-nasa-posts)
-- [Viral score audit of Duolingo posts](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-audit-of-duolingo-posts)
-- [Viral score audit of Wendy's posts](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-audit-of-wendys-posts)
+- [AI 创业公司发布帖子的 Viral Score](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-ai-startup-launch-tweets)
+- [SaaS 创始人公开构建帖子的 Viral Score](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-saas-founder-build-in-public-posts)
+- [Product Hunt 发布帖子的 Viral Score](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-product-hunt-launch-posts)
+- [开发者工具公告的 Viral Score](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-developer-tool-announcements)
+- [开源版本发布帖子的 Viral Score](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-open-source-release-posts)
+- [加密货币项目公告的 Viral Score](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-crypto-project-announcements)
+- [育儿幽默帖子的 Viral Score](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-parenting-humor-posts)
+- [职场幽默帖子的 Viral Score](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-office-humor-posts)
+- [宠物照片配文的 Viral Score](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-pet-photo-captions)
+- [NASA 帖子的 Viral Score 审查](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-audit-of-nasa-posts)
+- [Duolingo 帖子的 Viral Score 审查](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-audit-of-duolingo-posts)
+- [Wendy's 帖子的 Viral Score 审查](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-audit-of-wendys-posts)
 
-其余任务在 Actor 页面上涵盖更多话题与品牌账号。
+Actor 页面上的其余任务涵盖更多话题和品牌账号。
 
 ## 常见问题与支持
 
-### 高分意味着推文一定会爆红吗？
+### 我需要 AI 账号、X API 密钥或登录吗？
 
-不是。分数估算的是措辞对普通读者的效果。时机、受众规模、媒体与运气也决定
-触达范围。在依赖分数之前，请将其与每一行上的真实互动计数对比。
+不需要。Xquik 的 X Tweet Viral Score Analyzer 的价格已包含 AI 费用。你不需要 AI 账号、token 或密钥，也不需要 X API 密钥、登录或任何凭据。
 
-### 我可以使用自己的问题吗？
+### 分数高就代表帖子会走红吗？
 
-可以。自定义 `analysis.questions` 会替换默认问题：1 到 8 个 `choice`、
-`score` 或 `probability` 类型的问题，类别数为 2 到 255 个，或至少 2 个
-有序等级。Viral Score 需要全部 8 个默认问题，因此使用自定义问题时它为 `null`。
+不会。分数估算的是措辞对普通读者的效果。发布时机、受众规模、媒体和运气也决定传播范围。依赖分数之前，请先与每行的真实互动数对比。
 
-### 为什么某一行返回的 `analysis.status` 是 `failed` 或 `skipped`？
+### 可以使用自己的问题吗？
 
-Actor 已收集并交付该推文，但 AI 分析未能完成。`analysis.reason` 会说明原因。`context_limit` 表示你的上下文和目标没有给推文留出空间。`service_unavailable` 表示分析服务曾暂时不可用。这些行不产生结果费用，也没有分数。请缩短 `analysis.context`，或重新运行受影响的 ID。
+可以。自定义的 `analysis.questions` 会替换默认问题。可以发送 1 到 8 个 `choice`、`score` 或 `probability` 问题。选择题接受 2 到 255 个类别。评分题至少需要 2 个有序等级。Viral Score 需要全部 8 个默认问题，所以使用自定义问题时它为 `null`。
 
-推文超过 `maxContextBytes` 时，Actor 仍会分析它。它会先截断被引用和被回复的帖子，再截断推文本身。此时 `analysis.contextAvailability.postText` 为 `truncated`。如需保留更多文本，可将 `maxContextBytes` 提高到最多 64,000。
+### 为什么某行的 `analysis.status` 是 `failed` 或 `skipped`？
+
+该 Actor 已收集并交付这条帖子，但 AI 分析没有完成。`analysis.reason` 会写明原因。`context_limit` 表示你的上下文和目标没有给帖子留出空间。`service_unavailable` 表示分析服务曾短暂不可用。这些行不产生结果费用，也没有分数。请缩短 `analysis.context`，或重新运行受影响的 ID。
+
+帖子超过 `maxContextBytes` 时，该 Actor 仍会分析它。它先截断被引用和被回复的帖子，再截断这条帖子本身。这时 `analysis.contextAvailability.postText` 为 `truncated`。要保留更多文本，可以把 `maxContextBytes` 提高到最多 64,000。
 
 ### 分析会核实事实吗？
 
-不会。答案描述的是帖子表达了什么、以及帖子如何表述它。概率表达的是模型置信度，
-而非事实真伪。请对照每一行都保留的原始推文，核查重要的分类结果。
+不会。答案描述帖子表达了什么，以及帖子如何表述。概率表示 AI 的置信度，不代表事实。重要的分类结果请对照原始帖子核查，每行都保留了原帖。
 
 ### 支持哪些语言？
 
-提取支持 X 提供的所有语言。我们首先在英文客户场景中验证分析。其他受支持
-的语言会返回结构相同的答案。
+提取支持 X 提供的所有语言。我们先在英文客户场景中验证分析。其他支持的语言返回结构相同的答案。
 
 ### 如何控制成本？
 
-过滤、去重与 `maxItems` 都在分析之前运行，因此 Actor 只分析唯一的、符合过滤条件的
-推文并只对它们收费。使用精确的搜索操作符、日期范围与互动下限，并先用
-较小的 `maxItems` 检查答案质量，再进行大规模运行。
+过滤、去重和 `maxItems` 都在分析之前生效。你只为不重复且符合过滤条件的帖子付费。使用精确的搜索运算符、日期范围和互动下限。大规模运行前，先用较小的 `maxItems` 检查答案质量。
+
+### 分析 X 数据合法吗？
+
+该 Actor 请求的是公开的 X 字段。结果可能包含个人数据。请确认用途合法，并遵守适用的隐私规定。不确定时，请咨询专业律师。
+
+### 可以使用 API、定时调度和集成吗？
+
+可以。[API 标签页](https://apify.com/xquik/x-tweet-viral-score-analyzer/api) 提供 Python、JavaScript 和 cURL 示例。用 Apify [定时调度](https://docs.apify.com/platform/schedules) 定期运行。把上一次的数据集 ID 作为 `monitor.baselineDatasetId` 传入，就能看到变化。Apify 集成还能把运行连接到 webhook、Make、Zapier、n8n 和 Google Sheets。
 
 ### 在哪里获取帮助？
 
-在 Actor 页面上提交 issue，或联系 support@xquik.com 并附上运行 ID。
-key-value store 中的免费诊断信息会说明空、部分完成或中断的运行。
-
-Xquik 是独立的第三方服务，与 X Corp 没有关联。
-“Twitter” 与 “X” 是 X Corp 的商标。
+在 Actor 页面提交 issue，或带上运行 ID 联系 support@xquik.com。键值存储中的免费诊断信息会说明运行为何为空、不完整或被中断。
 
 ## 相关 Xquik Actor
 
-每个 Xquik Actor 都共享同一套提取引擎、先过滤后计费的规则与诊断机制。
-选择与你所需数据匹配的那一个。
+所有 Xquik Actor 都使用同一套提取引擎、先过滤后计费的规则和诊断功能。按你需要的数据选择对应的 Actor。
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper)：从搜索、主页
-  时间线、List 与推文 ID 抓取推文，提供 50 多种过滤条件与扁平化导出。当你
-  只需要推文数据而无需分析时使用。每行起价 $0.00015。
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从
-  用户名、ID 或 URL 抓取主页及其帖子、回复、媒体和关注者。适用于从账户
-  出发而非从搜索出发的场景。起价为每行 $0.00015。
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)：抓取帖子下的
-  回复、评论与完整对话，提供 25 多种过滤条件。当你需要推文下方的讨论时
-  使用。每行起价 $0.00015。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)：
-  批量抓取帖子 URL 或 ID 对应的回复、引用、转推者及推文串。
-  适用于衡量谁与帖子产生了互动。起价为每行 $0.00015。
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)：以主页
-  行的形式抓取关注者、正在关注、List 成员、订阅者与 Community 成员。当你
-  需要受众或成员列表时使用。每个主页起价 $0.00015。
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)：
-  按用户名、简介与地区搜索用户，支持关注者数、认证状态、账号年龄与地区
-  过滤。当你要从搜索构建账号列表时使用。每个主页起价 $0.00015。
-- [X List Scraper](https://apify.com/xquik/x-list-scraper)：从 List 链接或
-  ID 抓取 List 帖子、成员与关注者。当你的数据来源由一个精选 List 决定时
-  使用。每行起价 $0.00015。
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper)：抓取
-  Community 信息、帖子、搜索结果、成员与管理员。当你的数据来源是 X
-  Community 时使用。每行起价 $0.00015。
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper)：按地区抓取
-  实时趋势，包含排名、热度、查询词与 WOEID。当你要追踪各地正在流行什么时
-  使用。每条趋势起价 $0.00015。
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper)：以
-  Markdown 与文本形式抓取长文 X Article，包含封面、作者、日期与指标。当你
-  需要文章正文而非推文时使用。每篇文章起价 $0.00015。
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader)：从帖子
-  或主页提取或存储照片、视频与 GIF，提供 MP4 与元数据选项。当你需要媒体
-  文件本身时使用。每个媒体行起价 $0.00015。
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)：
-  以 AI 相关性、情感与客户体验答案追踪品牌提及，并比较不同运行。当你要
-  长期观察一个品牌时使用。每条已分析推文起价 $0.0003。
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)：
-  用 AI 为每条推文标注态度、强度与讽刺概率。当你需要针对任意话题的通用
-  情感分析时使用。每条已分析推文起价 $0.0003。
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)：
-  用 AI 标注看涨、看跌、中性或混合立场、内容类型、信念强度与资产相关性。
-  当你要关注股票、加密货币或交易讨论时使用。每条已分析推文起价 $0.0003。
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)：
-  用 AI 按形式、来源归属与话题相关性标注新闻帖子。当你要把报道与评论区分
-  开时使用。每条已分析推文起价 $0.0003。
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)：
-  用 AI 为每条推文回答你自己定义的类别、分数与是否问题。当预设分析不适合
-  你的标签体系时使用。每条已分析推文起价 $0.0003。
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper)：从搜索、个人资料时间线、列表和帖子 ID 抓取帖子，提供 50 多个过滤条件和扁平导出。适合只要帖子数据、不做分析的场景。每行 $0.00015 起。
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从用户名、ID 或 URL 抓取个人资料，以及这些账号的帖子、回复、媒体和关注者。适合从账号而不是搜索入手的场景。每行 $0.00015 起。
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)：抓取帖子下的回复、评论和完整对话，提供 25 多个过滤条件。适合需要帖子下方讨论的场景。每行 $0.00015 起。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)：按帖子 URL 或 ID 批量抓取回复、引用、转帖者和帖子串。适合衡量谁与帖子有过互动的场景。每行 $0.00015 起。
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)：抓取关注者、正在关注的账号、列表成员、订阅者和社群成员，输出为个人资料行。适合需要受众或成员名单的场景。每条个人资料 $0.00015 起。
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)：按用户名、简介和位置搜索用户，可按关注者数、认证状态、账号年龄和位置过滤。适合通过搜索建立账号名单的场景。每条个人资料 $0.00015 起。
+- [X List Scraper](https://apify.com/xquik/x-list-scraper)：从列表 URL 或 ID 抓取列表帖子、成员和关注者。适合用精选列表确定来源的场景。每行 $0.00015 起。
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper)：抓取社群信息、帖子、搜索结果、成员和版主。适合来源是 X 社群的场景。每行 $0.00015 起。
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper)：按位置抓取实时趋势，附带排名、帖子量、查询词和 WOEID。适合追踪各地热门话题的场景。每条趋势 $0.00015 起。
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper)：把长篇 X 文章抓取为 Markdown 和纯文本，附带封面、作者、日期和指标。适合需要文章正文而不是帖子的场景。每篇文章 $0.00015 起。
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader)：从帖子或个人资料提取或存储照片、视频和 GIF，可选 MP4 和元数据。适合需要媒体文件本身的场景。每条媒体行 $0.00015 起。
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)：追踪品牌提及，用 AI 判断相关性和情感、回答客户体验问题，并比较各次运行。适合长期关注一个品牌的场景。每条已分析帖子 $0.0003 起。
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)：用 AI 为每条帖子标注态度、强度和讽刺概率。适合了解任意话题整体情感的场景。每条已分析帖子 $0.0003 起。
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)：用 AI 标注看涨、看跌、中性或混合立场，以及内容类型、信心程度和资产相关性。适合关注股票、加密货币或交易讨论的场景。每条已分析帖子 $0.0003 起。
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)：用 AI 按形式、来源标注和话题相关性标注新闻帖子。适合区分新闻报道和评论的场景。每条已分析帖子 $0.0003 起。
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)：用 AI 为每条帖子回答你自定义的分类、评分和是非问题。适合预设分析不符合你的标签的场景。每条已分析帖子 $0.0003 起。

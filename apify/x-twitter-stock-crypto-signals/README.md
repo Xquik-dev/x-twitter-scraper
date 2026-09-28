@@ -1,40 +1,48 @@
-<p align="center">
-  <strong>English</strong> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+**English** ·
+[Español](README.es.md)
+·
+[Türkçe](README.tr.md)
+·
+[简体中文](README.zh-CN.md)
+·
+[日本語](README.ja.md)
+·
+[한국어](README.ko.md)
+·
+[Deutsch](README.de.md)
+·
+[Français](README.fr.md)
+·
+[Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer connects Xquik MCP to coding agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Watch how Framer uses Xquik scrapers with Claude Code, Codex, Cursor, and more, from 6:07.</a>
-</td></tr></table>
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
+
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
+Claude Code, Codex, Cursor, and more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data. X (Twitter) Stock & Crypto AI Trading Signals turns tweets
-into bullish, bearish, neutral or mixed stances per ticker & coin. Most other
-Apify Actors charge before filtering or deduplicating. Xquik charges only for
-delivered, unique, filter-matching results. AI costs are included in the
-per-tweet price. You need no AI account, tokens or key.
+most complete X data. Xquik's X (Twitter) Stock & Crypto AI Trading Signals
+turns tweets into stances. Each stance is bullish, bearish, neutral or mixed,
+per ticker & coin. Most other Apify Actors charge before filtering or
+deduplicating. Xquik charges only for delivered, unique, filter-matching
+results. AI costs are included in the per-tweet price. You need no AI account,
+tokens or key.
 
-Read the stance behind stock, crypto & trading posts on X (Twitter) & keep the
-original tweet data. **X (Twitter) Stock & Crypto AI Trading Signals** collects
-posts about your tickers or assets. It then adds an AI-powered stance, content
-type, conviction level & asset relevance to every post. Separate firm calls from
-hedged remarks, analysis from promotion, & posts about your asset from unrelated
-uses of its name.
+Read the stance behind stock, crypto & trading posts on X (Twitter). Xquik's **X
+(Twitter) Stock & Crypto AI Trading Signals** collects posts about your assets.
+It adds an AI-powered stance, content type, conviction level & asset relevance
+to every post. Separate firm calls from hedged remarks & analysis from
+promotion. Spot posts that use your asset's name for something else.
 
 - **Stance per post.** Each post is bullish, bearish, neutral, mixed or unclear.
-- **Content type** tells analysis, news, trade ideas, promotion, humor &
+- **Content type.** It tells analysis, news, trade ideas, promotion, humor &
   questions apart.
-- **Conviction** separates firm calls & positions from hedged remarks.
-- **Relevance** filters out unrelated uses of a ticker or company name.
-- **Complete source records** for every field the tweet exposes.
+- **Conviction.** It separates firm calls & positions from hedged remarks.
+- **Relevance.** It helps you drop unrelated uses of a ticker or company name.
+- **Complete source records.** Every row keeps every field the tweet exposes.
+
+> Xquik is an independent third-party service. Not affiliated with X Corp.
+> "Twitter" and "X" are trademarks of X Corp.
 
 ## How to analyze market sentiment on X
 
@@ -43,7 +51,7 @@ uses of its name.
 2. Set `maxItems` & extraction filters such as date bounds or minimum likes.
 3. Put asset names, tickers & aliases under `analysis.targets` & describe the
    asset in `analysis.context`.
-4. Run the Actor & open the dataset.
+4. Start the run & open the dataset.
 
 ```json
 {
@@ -74,8 +82,8 @@ verify claims, prices or filings.
 
 ## Analyze your own text
 
-Paste your own text in `texts`: drafts, replies, reviews or notes. The Actor
-analyzes it & fetches nothing from X.
+Paste your own drafts, replies, reviews or notes in `texts`. Xquik's X (Twitter)
+Stock & Crypto AI Trading Signals analyzes them. It fetches nothing from X.
 
 ```json
 {
@@ -91,21 +99,22 @@ analyzes it & fetches nothing from X.
 - Each analyzed text costs the same $0.0003 as an analyzed tweet.
 - With `texts` set, the run analyzes only those texts. Run X targets separately.
 
-## Pricing
+## How much does it cost to analyze market sentiment on X?
 
-AI costs are included in the per-tweet price. You need no AI account, tokens or
-key.
+Xquik's X (Twitter) Stock & Crypto AI Trading Signals costs from $0.0003 per
+analyzed tweet. It charges no start fee. The price includes collection & AI
+costs. You need no AI account, tokens or key. The price covers up to 8 questions
+& 64,000 bytes of context per tweet. Each question definition may use up to
+8,000 bytes.
 
-From $0.0003 per successfully analyzed tweet, with no start fee. The price
-includes collection. The analysis allowance is 8 questions, 8,000 bytes per
-question definition & 64,000 bytes of context per tweet. Extraction filters &
-deduplication run before analysis, so filtered-out & duplicate rows are never
-analyzed or charged. Failed & skipped analyses & diagnostic rows have no result
-charge. Apify bills platform usage separately. The Pricing tab shows it.
+Extraction filters & deduplication run before analysis. You never pay for
+filtered-out or duplicate rows. Failed analyses, skipped analyses & diagnostic
+rows have no result charge. Apify bills platform usage for compute, storage &
+transfer separately at your plan's rates. The Pricing tab shows it.
 
 ## Input & output examples
 
-The input above is copy-ready. Output rows look like this (abbreviated):
+The input above is copy-ready. An abbreviated output row looks like this:
 
 ```json
 {
@@ -138,11 +147,12 @@ The input above is copy-ready. Output rows look like this (abbreviated):
 ```
 
 Each result contains `tweet` & `analysis`. Answers include types, question
-versions & available probabilities. A failed or skipped analysis keeps the
-collected tweet with an empty answer list & a `reason`. Free diagnostics in the
-key-value store explain invalid inputs, missing results & interrupted
-collection, & the run report separates collected rows, charged analyses &
-pending charges.
+versions & available probabilities. A row with a failed or skipped analysis
+keeps the collected tweet & a `reason`. Its answer list is empty.
+
+Free diagnostics in the key-value store explain invalid inputs, missing results
+& interrupted collection. The run report separates collected rows, charged
+analyses & pending charges.
 
 ## Run summary & flat answers
 
@@ -155,46 +165,58 @@ A run writes an `analysis-summary` record to its key-value store in 4 cases:
 
 Other runs skip the record. Their status names the top answer, like
 `Top stance: bullish in 3 of 5 results.` A comparison without a change states
-`No change since the earlier run.` A run that hits a problem, or a large run,
-also writes `run-report`. So does a run with `alwaysSaveRunRecords` on.
-`run-report` repeats the summary under `results.analysisSummary`.
+`No change since the earlier run.` A run that hits a problem or is large also
+writes `run-report`. So does a run with `alwaysSaveRunRecords` on. `run-report`
+repeats the summary under `results.analysisSummary`.
 
-The summary counts analyzed, failed & skipped rows, sums engagement, and
-summarizes every question. `cashtags` counts stance per cashtag such as `$NVDA`,
-so the bullish ratio per asset comes from `choices.stance`. The `stance` block
-adds the engagement-weighted split & the most engaged bullish & bearish posts.
-`conviction` reports the mean & the engagement-weighted mean. The summary rounds
-numbers to 4 decimals. An empty run reports zero counts & `null` means. Each
-`cashtags` entry adds `signal` with a bullish count, a bearish count & a score
-from -1 to 1. The score is (bullish - bearish) / rows. `monitor.changedRows`
-lists tweets whose stance moved since the baseline. Every row lists
-`sourceDomains`, the hostnames it links to. With `monitor.baselineDatasetId`
-set, the summary's `monitor` block counts comparison statuses & lists up to 50
-changed rows.
+The summary counts analyzed, failed & skipped rows. It sums engagement &
+summarizes every question.
 
-Every result row also carries `answers`, a flat map from question ID to the
-chosen category, score, or probability. The `Flat answers` dataset view & CSV or
-Excel exports show one column per question beside the tweet, so spreadsheets
-need no JSON parsing. Failed & skipped rows carry an empty map.
+- `cashtags` counts stance per cashtag, such as `$NVDA`. Each asset's bullish
+  ratio comes from `choices.stance`.
+- Each `cashtags` entry adds `signal` with bullish & bearish counts. Its score
+  runs from -1 to 1. The score is bullish minus bearish, divided by rows.
+- The `stance` block adds the engagement-weighted split & the most engaged
+  bullish & bearish posts.
+- `conviction` reports the mean & the engagement-weighted mean.
+- `monitor.changedRows` lists tweets whose stance moved since the baseline.
+- Every row lists `sourceDomains`, the hostnames it links to.
+- With `monitor.baselineDatasetId` set, the summary's `monitor` block counts
+  comparison statuses. It lists up to 50 changed rows.
+
+The summary rounds numbers to 4 decimals. An empty run reports counts of 0 &
+`null` means.
+
+Every result row also carries `answers`, a flat map keyed by question ID. Each
+value is the chosen category, score or probability. The `Flat answers` dataset
+view & CSV or Excel exports show 1 column per question. The columns sit beside
+the tweet, so spreadsheets need no JSON parsing. Failed & skipped rows carry an
+empty map.
 
 ## Compare with an earlier run
 
 Pass `monitor.baselineDatasetId`, the dataset ID of a completed earlier run with
-the same analysis settings. The comparison reads that run's rows, so it works
-even when that run skipped its summary. Every row then gains a `monitor` object.
-Its status is `first_run` without a baseline, `new_to_baseline` for tweets the
-earlier run did not have, & `unchanged` or `changed` for tweets it had.
+the same analysis settings. The comparison reads that run's rows. It works even
+when that run skipped its summary. Every row then gains a `monitor` object. Its
+status can be:
+
+- `first_run` without a baseline.
+- `new_to_baseline` for tweets the earlier run did not have.
+- `unchanged` or `changed` for tweets it had.
+
 `changes` lists each stance, content type or conviction level that moved from
-`previous` to `current`. Decisions compare by category, rounded score level, or
-yes/no at 0.5. A decision counts as changed only when it moves clearly. Near-tie
-jitter between runs stays unchanged. Baselines above `maxBaselineRows` (default
-100,000) or from different settings stop the run before collection with a
-diagnostic row.
+`previous` to `current`. Decisions compare by category, rounded score level or
+yes/no at 0.5. A decision counts as changed only when it moves clearly. Near
+ties between runs stay `unchanged`.
+
+A baseline above `maxBaselineRows`, or from different settings, stops the run
+before collection. The run then writes a diagnostic row. `maxBaselineRows`
+defaults to 100,000.
 
 ## Task examples
 
-Choose from 50 public tasks. Each starts from a real English search with a
-bounded `maxItems`, ready-made targets & context, & the overview dataset view.
+Choose from 50 public tasks. Each starts from a real English search & a bounded
+`maxItems`. It includes ready-made targets, context & the overview dataset view.
 Edit the search or targets before running.
 
 - [Nvidia (NVDA) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/nvda-market-sentiment-on-x)
@@ -278,19 +300,28 @@ diagnostics. Pick the one that matches the data you need.
 
 ## FAQ & support
 
+Answers to common questions, then where to get help.
+
+### Do I need an AI account, X API key or login?
+
+No. Xquik's X (Twitter) Stock & Crypto AI Trading Signals includes AI costs in
+its price. You need no AI account, tokens or key. You also need no X API key,
+login or credentials.
+
 ### Can I track several tickers in one run?
 
-Yes. List every asset under `analysis.targets` with its tickers & aliases, &
-combine search terms. Relevance answers tell you which posts treat your targets
-as assets.
+Yes. List every asset with its tickers & aliases under `analysis.targets`.
+Combine their search terms. Relevance answers tell you which posts treat your
+targets as assets.
 
-### Why did a row come back with `analysis.status` of `failed` or `skipped`?
+### Why did a row come back with a failed or skipped analysis?
 
-The Actor collected & delivered the tweet, but the AI analysis did not complete.
-`analysis.reason` names the cause. `context_limit` means your context & targets
-leave no room for the tweet. `service_unavailable` means the analysis service
-was briefly unavailable. These rows carry no result charge. Shorten
-`analysis.context` or rerun the affected IDs.
+`analysis.status` is `failed` or `skipped`. The Actor collected & delivered the
+tweet, but the AI analysis did not complete. `analysis.reason` names the cause.
+`context_limit` means your context & targets leave no room for the tweet.
+`service_unavailable` means the analysis service was briefly unavailable. These
+rows carry no result charge. Shorten `analysis.context` or rerun the affected
+IDs.
 
 The Actor still analyzes a tweet longer than `maxContextBytes`. It cuts quoted &
 replied-to posts first, then the tweet. `analysis.contextAvailability.postText`
@@ -299,8 +330,8 @@ is then `truncated`. Raise `maxContextBytes` up to 64,000 to keep more text.
 ### Does the analysis verify facts?
 
 No. Answers describe what the post expresses & how the post frames it.
-Probabilities express model confidence, not truth. Review important
-classifications against the original tweet, which every row keeps.
+Probabilities express AI confidence, not truth. Review important classifications
+against the original tweet, which every row keeps.
 
 ### Which languages work?
 
@@ -311,16 +342,29 @@ language.
 
 ### How do I limit cost?
 
-Filters, deduplication & `maxItems` run before analysis, so the Actor analyzes &
-charges only unique, filter-matching tweets. Use precise search operators, date
-bounds & engagement floors, & start with a small `maxItems` to check answer
-quality before a large run.
+Filters, deduplication & `maxItems` run before analysis. You pay only for
+unique, filter-matching tweets. Use precise search operators, date bounds &
+engagement floors. Start with a small `maxItems` to check answer quality before
+a large run.
+
+### Is it legal to analyze X data?
+
+The Actor requests public X fields. Results can contain personal data. Confirm a
+lawful purpose & follow applicable privacy rules. Ask qualified counsel when
+uncertain.
+
+### Can I use the API, schedules & integrations?
+
+Yes. See the
+[API tab](https://apify.com/xquik/x-twitter-stock-crypto-signals/api) for
+Python, JavaScript & cURL examples. Use Apify
+[schedules](https://docs.apify.com/platform/schedules) for recurring runs. Pass
+the previous dataset ID as `monitor.baselineDatasetId` to see what changed.
+Apify integrations also connect runs to webhooks, Make, Zapier, n8n & Google
+Sheets.
 
 ### Where do I get help?
 
-Open an issue on the Actor page or contact support@xquik.com with the run ID.
+Open an issue on the Actor page or contact <support@xquik.com> with the run ID.
 Free diagnostics in the key-value store explain empty, partial or interrupted
 runs.
-
-Xquik is an independent third-party service. Not affiliated with X Corp.
-"Twitter" and "X" are trademarks of X Corp.

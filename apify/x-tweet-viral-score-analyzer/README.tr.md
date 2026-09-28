@@ -15,38 +15,42 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Framer'ın Xquik scraper'larını Claude Code, Codex, Cursor ve daha fazlasıyla nasıl kullandığını 6:07'den itibaren izle.</a>
 </td></tr></table>
 
-Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
-scraper hizmetidir. X Tweet Viral Score Analyzer, her tweet'e bir Viral Score
-tahmini & bir karar ekler. Diğer Apify Actor'larının çoğu filtreleme veya
-tekilleştirmeden önce ücret alır. Xquik yalnızca teslim edilen, benzersiz,
-filtreyle eşleşen sonuçlar için ücret alır. Yapay zekâ maliyetleri tweet başına
-fiyata dahil. Yapay zekâ hesabına, token'a veya anahtara ihtiyacın yok.
+Xquik, en eksiksiz X verisini sunan, dünyanın en hızlı ve en ucuz X (Twitter)
+scraper hizmetidir. Xquik'in X Tweet Viral Score Analyzer'ı her gönderiyi
+(tweet'i) puanlar. Her birine bir Viral Score tahmini ve bir karar ekler. Diğer
+Apify Actor'larının çoğu, filtrelemeden veya tekilleştirmeden önce ücret alır.
+Xquik yalnızca teslim edilen, benzersiz ve filtrene uyan sonuçlar için ücret
+alır. Yapay zeka maliyetleri gönderi başına fiyata dahildir. Yapay zeka hesabı,
+token veya anahtar gerekmez.
 
-Tweet'lerin neden yayıldığını veya tutmadığını öğren ve orijinal tweet
-verisini sakla. **X Tweet Viral Score Analyzer with AI**, eşleşen tweet'leri
-toplar. Yapay zeka her gönderinin 8 özelliğini değerlendirir. Actor bu
-yanıtları 0 ile 100 arasında bir Viral Score tahminine & bir karara çevirir.
-Her satır gerçek beğenileri, yeniden paylaşımları, yanıtları & alıntıları
-korur, böylece her tahmini gerçekte olanla karşılaştırabilirsin.
+Gönderilerin neden yayıldığını veya tutmadığını öğren, orijinal gönderi
+verisini de sakla. Xquik'in **X Tweet Viral Score Analyzer with AI** Actor'ı
+eşleşen gönderileri toplar. Yapay zeka her gönderinin 8 özelliğini puanlar.
+Actor bu cevapları bir Viral Score tahminine ve bir karara çevirir. Her satır
+gerçek beğenileri, yeniden gönderileri, yanıtları ve alıntıları korur. Her
+tahmini gerçekte olanla karşılaştır.
 
-- **Gönderi başına Viral Score**, sabit ve sürümlü kurallardan gelir.
-- **8 özellik yanıtı**, bir gönderinin neden yüksek veya düşük puan aldığını
+- **Gönderi başına Viral Score.** Sabit ve sürümlü kurallar her puanı 0 ile 100
+  arasında hesaplar.
+- **8 özellik cevabı.** Bir gönderinin neden yüksek veya düşük puan aldığını
   gösterir.
-- **Katı sınırlar**, spam, öfke tuzağı veya sıradan makine metni gibi okunan
+- **Kesin sınırlar.** Spam, öfke yemi veya sıradan makine metni gibi okunan
   gönderilerin puanını sınırlar.
-- **Eksiksiz kaynak kayıtları**, tweet'in gösterdiği her alanla.
+- **Eksiksiz kaynak kayıtları.** Her satır, gönderinin sunduğu tüm alanları
+  tutar.
 
-Viral Score, ifadenin ne kadar iyi işlediğine dair bir tahmindir. Beğenileri
-veya görüntülenmeleri öngörmez. X'in gönderileri nasıl sıraladığını yeniden
-üretmez.
+Viral Score, ifadenin ne kadar işe yaradığını tahmin eder. Beğeni veya
+görüntülenme öngörmez. X'in gönderileri nasıl sıraladığını da yeniden üretmez.
 
-## Bir tweet'in Viral Score'u nasıl kontrol edilir
+> Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
+> "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-1. Arama terimleri, profil handle'ları, tweet URL'leri veya tweet ID'leri
-   ekle.
-2. `maxItems`'i ve görevinin ihtiyaç duyduğu çıkarma filtrelerini ayarla.
-3. Kitleni `analysis.context` içinde tanımla ya da varsayılanı bırak.
-4. Actor'ı çalıştır ve `Viral Score` veri kümesi görünümünü aç.
+## Bir tweet'in viral puanı nasıl kontrol edilir
+
+1. Arama terimi, profil kullanıcı adı, gönderi URL'si veya gönderi ID'si ekle.
+2. `maxItems` değerini ve işinin gerektirdiği veri çekme filtrelerini ayarla.
+3. Kitleni `analysis.context` içinde anlat ya da varsayılanı bırak.
+4. Çalıştırmayı başlat ve `Viral Score` veri kümesi görünümünü aç.
 
 ```json
 {
@@ -56,29 +60,29 @@ veya görüntülenmeleri öngörmez. X'in gönderileri nasıl sıraladığını 
 }
 ```
 
-### Actor neyi yanıtlar
+### Actor neyi cevaplar
 
-| Soru              | Yanıt                                                        |
-| ----------------- | ------------------------------------------------------------ |
-| Kanca             | 0 kanca yok, 1 net açılış, 2 keskin açılış                   |
-| Netlik            | 0 kafa karıştırıcı, 1 çaba istiyor, 2 ilk okumada net        |
-| Bilgilendirici    | 0 yeni bir şey yok, 1 bilinen bir nokta, 2 işe yarar çıkarım |
-| Komik             | 0 komik değil, 1 hafif eğlenceli, 2 paylaşılacak kadar komik |
-| Öfke tuzağı       | Gönderinin esas olarak öfke kışkırtma olasılığı              |
-| Yapay zeka yazımı | Metnin sıradan makine metni gibi okunma olasılığı            |
-| Spam              | Spam, dolandırıcılık, çekiliş veya etkileşim kasma olasılığı |
-| Tepki             | Paylaş, yanıtla, beğen, tartış veya yok say                  |
+| Soru              | Cevap                                                            |
+| ----------------- | ---------------------------------------------------------------- |
+| Kanca             | 0 kanca yok, 1 net bir açılış, 2 keskin bir açılış               |
+| Netlik            | 0 kafa karıştırıcı, 1 çaba istiyor, 2 ilk okumada net            |
+| Bilgi değeri      | 0 yeni bir şey yok, 1 bilinen bir nokta, 2 işe yarar bir çıkarım |
+| Mizah             | 0 komik değil, 1 biraz eğlenceli, 2 paylaşılacak kadar komik     |
+| Öfke yemi         | Gönderinin esas olarak öfke kışkırtma olasılığı                  |
+| Yapay zeka yazımı | Metnin sıradan makine metni gibi okunma olasılığı                |
+| Spam              | Spam, dolandırıcılık, çekiliş veya etkileşim kasma olasılığı     |
+| Tepki             | Paylaş, yanıtla, beğen, tartış veya geç                          |
 
-Yapay zeka yazımı yanıtı yalnızca üslubu değerlendirir. Gönderiyi kimin
+Yapay zeka yazımı cevabı yalnızca üslubu değerlendirir. Gönderiyi kimin
 yazdığını belirlemez.
 
 ### Viral Score nasıl çalışır
 
-Kanca, netlik, sunduğu değer ve beklenen tepki puanı yükseltir. Genel bir makine
+Kanca, netlik, sunduğu fayda ve beklenen tepki puanı yükseltir. Sıradan makine
 metni gibi okunan ifadeler puanı düşürür.
 
-Kesin sınırlar, muhtemel spam, öfke yemi ve genel makine metinlerinin puanını
-sınırlar. Puan 0 ile 100 arasında bir tam sayıdır.
+Olası spam, öfke yemi ve sıradan makine metni kesin sınırlara takılır, puanları
+sınırlanır. Puan 0 ile 100 arasında bir tam sayıdır.
 
 | Karar         | Puan             |
 | ------------- | ---------------- |
@@ -86,117 +90,120 @@ sınırlar. Puan 0 ile 100 arasında bir tam sayıdır.
 | `edit_first`  | 40 ile 69 arası  |
 | `sleep_on_it` | 0 ile 39 arası   |
 
-`viral.weights`, bu kuralların sürümünü belirtir, örneğin `viral_lite:1`.
-Kurallar her değiştiğinde değişir. Analiz başarısız olduğunda, Actor atladığında
-veya varsayılan bir özellik yanıtı eksik olduğunda puan `null` olur. Actor eksik
-bir puanı asla tahminle doldurmaz.
+`viral.weights` bu kuralların sürümünü belirtir, örneğin `viral_lite:1`.
+Kurallar her değiştiğinde bu değer de değişir. Başarısız veya atlanan bir
+analizden sonra puan `null` olur. Varsayılan bir özellik cevabı eksikse de
+`null` olur. Xquik'in X Tweet Viral Score Analyzer'ı eksik bir puanı asla
+tahminle doldurmaz.
 
 ## Algorithm Score tahmini
 
-X, sıralama ağırlıklarını `xai-org/x-algorithm` deposunda,
-`home-mixer/params/param.rs` dosyasında yayımladı. Actor bunlardan 4'ünü her
-gönderinin herkese açık sayılarına uygular:
+X, sıralama ağırlıklarını `xai-org/x-algorithm` deposundaki
+`home-mixer/params/param.rs` dosyasında yayımladı. Xquik'in X Tweet Viral Score
+Analyzer'ı bunlardan 4'ünü her gönderinin herkese açık sayılarına uygular:
 
-| Sayı             | Ağırlık |
-| ---------------- | ------- |
-| Beğeni           | 0,5     |
-| Yanıt            | 5       |
-| Yeniden paylaşım | 1       |
-| Alıntı           | 5       |
+| Sayı            | Ağırlık |
+| --------------- | ------- |
+| Beğeni          | 0.5     |
+| Yanıt           | 5       |
+| Yeniden gönderi | 1       |
+| Alıntı          | 5       |
 
-`viral.algorithmWeightedSum`, her sayının kendi ağırlığıyla çarpımlarının
-toplamıdır. `viral.algorithmScore` bu toplamı görüntülenmelere böler & 1.000
-ile çarpar. Görüntülenme sayısı olmayan bir gönderi bunun yerine takipçileri
-kullanır. `viral.algorithmBasis` böleni adlandırır: `views` veya `followers`.
-Yalnızca aynı temele sahip puanları karşılaştır. `viral.weightsVersion`
-ağırlıkları adlandırır, örneğin `x_algorithm_params:2026-09-18`.
+`viral.algorithmWeightedSum`, her sayının ağırlığıyla çarpımlarının toplamıdır.
+`viral.algorithmScore` bu toplamı görüntülenmeye böler ve 1.000 ile çarpar.
+Görüntülenme sayısı olmayan bir gönderide takipçi sayısı kullanılır.
+`viral.algorithmBasis` böleni belirtir, `views` veya `followers`. Puanları
+yalnızca aynı temelle karşılaştır. `viral.weightsVersion` ağırlıkları belirtir,
+örneğin `x_algorithm_params:2026-09-18`.
 
-Sınırlar:
+Tahminin şu sınırları var:
 
-- X her ağırlığı tek bir izleyici için öngördüğü bir olasılıkla çarpar. Actor
-  gözlemlenen sayılarla çarpar. Sonuç bir tahmindir, X'in hesapladığı puan
+- X her ağırlığı, tek bir izleyici için öngördüğü bir olasılıkla çarpar. Actor
+  gözlenen sayılarla çarpar. Sonuç bir tahmindir, X'in hesapladığı puan
   değildir.
-- X, yer imleri veya görüntülenmeler için ağırlık yayımlamaz. Toplam ikisini
+- X yer işaretleri ve görüntülenmeler için ağırlık yayımlamaz. Toplam ikisini
   de dışarıda bırakır.
-- X bu 4 sinyalden fazlasını kullanır, örneğin gönderide kalma süresi &
+- X bu 4 sinyalden fazlasını kullanır, örneğin gönderide kalma süresi ve
   paylaşımlar. Herkese açık veri bunları göstermez.
-- Bir gönderinin görüntülenmesi & takipçi sayısı yoksa puan `null` olur.
-- Yapay zeka bu sayıları asla görmez. Yalnızca metni & bağlamı okur.
+- Bir gönderinin görüntülenmesi ve takipçi sayısı yoksa puan `null` olur.
+- Yapay zeka bu sayıları asla görmez. Yalnızca metni ve bağlamı okur.
 
 ## Tahmin ve gerçekleşen
 
-Actor her Viral Score'u gerçekte olanla karşılaştırır.
-`viral.actualEngagementRate`,
+Xquik'in X Tweet Viral Score Analyzer'ı her Viral Score'u gerçekte olanla
+karşılaştırır. `viral.actualEngagementRate`,
 `log10(1 + weighted sum per 1,000 followers)` değeridir. Logaritma, çok büyük
 tek bir gönderinin etkisini sınırlar. Takipçi sayısı eksikse veya 0 ise oran
 `null` olur.
 
-Çalıştırma özetinin `viral.calibration` bloğu şunları bildirir:
+Çalıştırma özetinin `viral.calibration` bloğu şu alanları bildirir:
 
-- `comparedPosts`: Viral Score'u & gerçekleşen oranı olan gönderiler.
-- `rankCorrelation`: -1 ile 1 arasında bir Spearman sıra korelasyonu. Yüksek
-  puanların yüksek oranlarla birlikte gidip gitmediğine bakar.
-- `calibrationScore`: korelasyonun 100 katı, alt sınırı 0.
-- `overperformers` & `underperformers`: her biri en fazla 5 gönderi, tweet
-  ID'si, URL, Viral Score, gerçekleşen oran & `gap` ile.
+- `comparedPosts`, Viral Score'u ve gerçekleşen oranı olan gönderileri sayar.
+- `rankCorrelation`, -1 ile 1 arasında bir Spearman sıra korelasyonudur. Yüksek
+  puanların yüksek oranlarla birlikte gidip gitmediğini gösterir.
+- `calibrationScore`, korelasyonun 100 katıdır. En düşük değeri 0'dır.
+- `overperformers` ve `underperformers` en fazla 5'er gönderi listeler. Her
+  birinde gönderi ID'si, URL, Viral Score, gerçekleşen oran ve `gap` bulunur.
 
 `gap`, standartlaştırılmış gerçekleşen oran eksi standartlaştırılmış Viral
-Score'dur. Farkı 1 standart sapmaya ulaşan gönderi bir listeye girer.
+Score'dur. Farkı 1 standart sapmaya ulaşan gönderi listeye girer.
 
-Sınırlar:
+Kalibrasyonun şu sınırları var:
 
 - 10'dan az karşılaştırılan gönderi, `too_few_posts` nedeniyle `null` bir
   kalibrasyon verir. Aynı puanlar veya oranlar `no_variation` verir.
 - Korelasyon yaklaşıktır.
-- Kalibrasyon tek bir çalıştırmayı anlatır. Düşük bir puan, ifade tahmininin
-  başarısız olduğunu değil, gönderilerin zamanlama, konu veya kitle açısından
-  farklı olduğunu gösterebilir.
+- Kalibrasyon tek bir çalıştırmayı anlatır. Düşük bir puan, gönderilerin
+  zamanlama, konu veya kitle bakımından farklı olduğunu gösterebilir. İfade
+  tahmininin başarısız olduğunu kanıtlamaz.
 - Yeni gönderiler etkileşim toplamayı bitirmemiştir. Benzer yaştaki
   gönderileri karşılaştır.
 
 ## Hesap raporu
 
-Çalıştırma özetinin `viral.accounts` bloğu her yazar handle'ını bildirir:
+Çalıştırma özetinin `viral.accounts` bloğu her yazarın kullanıcı adı için
+şunları bildirir:
 
-- Gönderi sayısı, ortalama Viral Score & ortalama gerçekleşen etkileşim oranı.
-- Viral Score'a göre en iyi & en kötü gönderi, tweet ID'si & URL ile.
-- Dilim başına ortalama Viral Score: UTC paylaşım saati, metin uzunluğu bandı,
-  medya var, bağlantı var & kendi thread'i.
+- Gönderi sayısı, ortalama Viral Score ve ortalama gerçekleşen etkileşim oranı.
+- Viral Score'a göre en iyi ve en kötü gönderi, gönderi ID'si ve URL ile.
+- Dilim başına ortalama Viral Score. Dilimler UTC paylaşım saati, metin uzunluğu
+  bandı, medya varlığı, bağlantı varlığı ve kendi gönderi dizisidir.
 
-Metin uzunluğu bantları şöyledir: 80 karaktere kadar `short`, 200'e kadar
-`medium`, 280'e kadar `long` & üzeri `extended`. Kendi thread'indeki bir
-gönderi kendi yazarına yanıt verir.
+Metin uzunluğu bantları `short`, `medium`, `long` ve `extended`. `short` 80
+karakterde, `medium` 200'de, `long` 280'de biter. `extended` daha uzun metinleri
+kapsar. Kendi gönderi dizisindeki bir gönderi, kendi yazarına yanıt verir.
 
-Sınırlar:
+Raporun şu sınırları var:
 
-- Rapor, en çok puanlanmış gönderisi olan 50 handle'ı listeler.
-- Actor bir çalıştırmanın ilk 1.000 handle'ını takip eder. `untrackedPosts`,
-  sonraki handle'ların puanlanmış gönderilerini & handle'sız gönderileri
-  sayar.
+- Rapor, en çok puanlanmış gönderisi olan 50 kullanıcı adını listeler.
+- Rapor bir çalıştırmanın ilk 1.000 kullanıcı adını izler. `untrackedPosts`,
+  sonraki kullanıcı adlarının puanlanmış gönderilerini ve kullanıcı adı olmayan
+  gönderileri sayar.
 - Az gönderili bir dilim pek bir şey söylemez. Ortalamaları karşılaştırmadan
   önce `posts` değerine bak.
-- Dilimler bu çalıştırmada nelerin birlikte gittiğini gösterir. Nedenselliği
+- Dilimler bu çalıştırmada nelerin birlikte görüldüğünü gösterir. Nedeni
   göstermez.
 
 ## Lider tablosu
 
-Çalıştırma özetinin `viral.leaderboard` bloğu, hesap raporundaki handle'ları
-sıralar. `byViralScore` ortalama Viral Score'a göre sıralar.
+Çalıştırma özetinin `viral.leaderboard` bloğu, hesap raporundaki kullanıcı
+adlarını sıralar. `byViralScore` ortalama Viral Score'a göre sıralar.
 `byActualEngagementRate` ortalama gerçekleşen orana göre sıralar. Her liste
-`rank`, `posts` & `average` ile en fazla 20 handle tutar.
+`rank`, `posts` ve `average` ile en fazla 20 kullanıcı adı tutar.
 
-Sınırlar:
+Lider tablosunun şu sınırları var:
 
-- Bir handle'ın sıralamaya girmesi için en az 3 puanlanmış gönderisi olmalı.
-- Oran listesi, takipçi sayısı olmayan handle'ları atlar.
-- Eşitliği önce daha fazla gönderi, sonra handle adı bozar.
+- Bir kullanıcı adının sıralamaya girmesi için en az 3 puanlanmış gönderisi
+  olmalı.
+- Oran listesi, takipçi sayısı olmayan kullanıcı adlarını atlar.
+- Eşitliği önce daha çok gönderi, sonra kullanıcı adı bozar.
 - Lider tablosu bir hesabın tüm geçmişini değil, tek bir çalıştırmanın
   gönderilerini kapsar.
 
 ## Paylaşmadan önce bir taslağı puanla
 
-Kendi metnini `texts` alanına yapıştır. Actor metni puanlar & X'ten hiçbir
-şey getirmez.
+Kendi metnini `texts` alanına yapıştır. Xquik'in X Tweet Viral Score
+Analyzer'ı metni puanlar ve X'ten hiçbir şey çekmez.
 
 ```json
 {
@@ -208,33 +215,33 @@ Kendi metnini `texts` alanına yapıştır. Actor metni puanlar & X'ten hiçbir
 }
 ```
 
-- Her metin `viralScore`, `viralVerdict` & `viral.stops` içeren 1 satır olur.
-- `tweet.id` değeri `text:1`, `text:2` & devamı şeklindedir, `tweet.type` ise
+- Her metin `viralScore`, `viralVerdict` ve `viral.stops` içeren 1 satır olur.
+- `tweet.id` değeri `text:1`, `text:2` diye devam eder. `tweet.type` değeri
   `text` olur.
-- Bir taslağın henüz beğenisi veya görüntülenmesi yoktur, bu yüzden
+- Taslağın henüz beğenisi veya görüntülenmesi yok, bu yüzden
   `viral.algorithmScore` `null` kalır.
-- Analiz edilen her metin, analiz edilen bir tweet gibi $0.0003 tutar.
-- `texts` ayarlıyken çalıştırma yalnızca o metinleri analiz eder. X hedeflerini
+- Analiz edilen her metin, analiz edilen bir gönderiyle aynı $0.0003 tutar.
+- `texts` ayarlıysa çalıştırma yalnızca bu metinleri analiz eder. X hedeflerini
   ayrı çalıştır.
 
-## Fiyatlandırma
+## Viral puanı kontrol etmek ne kadar tutar?
 
-Yapay zekâ maliyetleri tweet başına fiyata dahil. Yapay zekâ hesabına, token'a
-veya anahtara ihtiyacın yok.
+Xquik'in X Tweet Viral Score Analyzer'ı analiz edilen gönderi başına
+$0.0003'ten başlar. Başlatma ücreti almaz. Fiyata toplama, yapay zeka
+maliyetleri ve Viral Score dahildir. Yapay zeka hesabı, token veya anahtar
+gerekmez. Fiyat gönderi başına en fazla 8 soruyu ve 64.000 bayt bağlamı kapsar.
+Her soru tanımı en fazla 8.000 bayt olabilir.
 
-Başlangıç ücreti olmadan, başarıyla analiz edilen tweet başına $0.0003'ten
-başlar. Fiyat toplamayı & Viral Score'u içerir. Analiz ödeneği 8 soru, soru
-tanımı başına 8.000 bayt ve tweet başına 64.000 bayt bağlamdır. Çıkarma
-filtreleri ve tekilleştirme analizden önce çalışır, bu yüzden filtrelenmiş
-ve tekrarlanan satırlar hiçbir zaman analiz edilmez veya ücretlendirilmez.
-Başarısız ve atlanan analizler ile tanılama satırlarının sonuç ücreti yoktur.
-Apify, platform kullanımını ayrıca faturalandırır. Pricing sekmesi bunu
-gösterir.
+Veri çekme filtreleri ve tekilleştirme analizden önce çalışır. Filtrelenen veya
+tekrarlanan satırlar için asla ödemezsin. Başarısız analizlerin, atlanan
+analizlerin ve tanılama satırlarının sonuç ücreti yok. Apify işlem, depolama ve
+aktarım kullanımını planının ücretleriyle ayrıca faturalandırır. Pricing
+sekmesi bunu gösterir.
 
 ## Girdi ve çıktı örnekleri
 
-Yukarıdaki girdi kopyalamaya hazırdır. Çıktı satırları şöyle görünür
-(kısaltılmış):
+Yukarıdaki girdiyi olduğu gibi kopyalayabilirsin. Kısaltılmış bir çıktı satırı
+şöyle görünür:
 
 ```json
 {
@@ -270,72 +277,85 @@ Yukarıdaki girdi kopyalamaya hazırdır. Çıktı satırları şöyle görünü
 }
 ```
 
-Her sonuç `tweet`, `analysis` ve `viral` içerir. Yanıtlar türleri, soru
-sürümlerini ve mevcut olasılıkları içerir. `viral.stops`, puanı sınırlayan
-katı sınırları listeler. Başarısız veya atlanan bir analiz, boş bir yanıt
-listesi, bir `reason` ve `null` bir puan ile toplanan tweet'i korur.
-Anahtar-değer deposundaki ücretsiz tanılamalar, geçersiz girdileri, eksik
-sonuçları ve kesintiye uğrayan toplamayı açıklar. Çalıştırma raporu toplanan
-satırları, ücretlendirilen analizleri ve bekleyen ücretleri ayırır.
+Her sonuçta `tweet`, `analysis` ve `viral` bulunur. Cevaplarda türler, soru
+sürümleri ve varsa olasılıklar yer alır. `viral.stops`, puanı sınırlayan kesin
+sınırları listeler. Analizi başarısız olan veya atlanan bir satır, toplanan
+gönderiyi ve bir `reason` alanını tutar. Cevap listesi boştur, puanı `null`
+olur.
 
-## Çalıştırma özeti ve düz yanıtlar
+Anahtar-değer deposundaki ücretsiz tanılamalar geçersiz girdileri, eksik
+sonuçları ve kesilen toplamayı açıklar. Çalıştırma raporu toplanan satırları,
+ücretlendirilen analizleri ve bekleyen ücretleri ayrı tutar.
 
-Bir çalıştırma, 4 durumda anahtar-değer deposuna bir `analysis-summary` kaydı
+## Çalıştırma özeti ve düz cevaplar
+
+Bir çalıştırma 4 durumda anahtar-değer deposuna bir `analysis-summary` kaydı
 yazar:
 
-- Bir sorun yaşar veya büyüktür.
-- Bir serinin ilk çalıştırması olarak `baselineDatasetId` olmadan `monitor`
-  ayarlar.
-- Karşılaştırması değişen, yeni veya karşılaştırılamayan bir tweet bulur.
-- `alwaysSaveRunRecords` açıktır.
+- Bir sorunla karşılaşırsa veya büyükse.
+- Bir serinin ilk çalıştırması olarak `monitor` alanını `baselineDatasetId`
+  olmadan ayarlarsa.
+- Karşılaştırması değişen, yeni veya karşılaştırılamayan bir gönderi bulursa.
+- `alwaysSaveRunRecords` açıksa.
 
-Diğer çalıştırmalar bu kaydı atlar. Durum metinleri ana yanıtı belirtir, örneğin
+Diğer çalıştırmalar bu kaydı atlar. Durumları en önemli cevabı söyler, örneğin
 `Average Viral Score: 64.` Değişiklik bulmayan bir karşılaştırma
-`No change since the earlier run.` yazar. Sorun yaşayan veya büyük bir
-çalıştırma ayrıca `run-report` yazar. `alwaysSaveRunRecords` açık olan bir
-çalıştırma da yazar. `run-report`, özeti `results.analysisSummary` altında
+`No change since the earlier run.` yazar. Sorunla karşılaşan veya büyük bir
+çalıştırma `run-report` da yazar. `alwaysSaveRunRecords` açık olan bir
+çalıştırma da yazar. `run-report` özeti `results.analysisSummary` altında
 tekrarlar.
 
-Özet, analiz edilen, başarısız ve atlanan satırları sayar, etkileşimi toplar ve
-her soruyu özetler. `viral` bloğu `averageScore` değerini, her kararın sayısını
-& Actor'ın kaç satırı puanladığını veya puansız bıraktığını bildirir. Aynı blok,
-yukarıda anlatılan `calibration`, `accounts` & `leaderboard` bloklarını tutar.
-Puan soruları bir ortalama & etkileşim ağırlıklı bir ortalama bildirir.
-`reaction` bölünmesi, kaç tweet'in her tepkiye düştüğünü gösterir & `top`, her
-tepki için en çok etkileşim alan üç tweet'i listeler. Boş bir çalıştırma sıfır
-sayım & `null` bir ortalama bildirir. Her satır, bağlantı verdiği ana bilgisayar
-adlarını `sourceDomains`'te & metninde bulunan `$NVDA` gibi `cashtags`'i
-listeler. `monitor.baselineDatasetId` ayarlıysa özetin `monitor` bloğu
-karşılaştırma durumlarını sayar & 50'ye kadar değişen satırı listeler.
+Özet analiz edilen, başarısız ve atlanan satırları sayar. Etkileşimi toplar ve
+her soruyu özetler.
 
-Her sonuç satırı ayrıca `viralScore`, `viralVerdict`, `viralAlgorithmScore`,
-`viralActualEngagementRate` & `answers`'ı da taşır. `answers`, soru ID'sinden
-seçilen kategoriye, puana veya olasılığa düz bir eşlemedir. `Viral Score`
-veri kümesi görünümü ve CSV veya Excel dışa aktarımları, bu sütunları
-tweet'in yanında gösterir, böylece elektronik tablolar JSON ayrıştırmasına
-ihtiyaç duymaz. Başarısız ve atlanan satırlar boş bir eşleme taşır.
+- `viral` bloğu `averageScore` değerini ve her kararın sayısını bildirir.
+  Puanlanan ve puanlanmayan satırları da sayar.
+- Aynı blok yukarıda anlatılan `calibration`, `accounts` ve `leaderboard`
+  alanlarını tutar.
+- Puan soruları bir ortalama ve etkileşim ağırlıklı bir ortalama bildirir.
+- `reaction` dağılımı, her tepkiye kaç gönderinin düştüğünü gösterir.
+- `top` her tepki için en çok etkileşim alan 3 gönderiyi listeler.
+- Her satır, bağlantı verdiği alan adlarını `sourceDomains` içinde listeler.
+- Her satır, metnindeki `$NVDA` gibi `cashtags` değerlerini listeler.
+- `monitor.baselineDatasetId` ayarlıysa özetin `monitor` bloğu karşılaştırma
+  durumlarını sayar. En fazla 50 değişen satırı listeler.
+
+Boş bir çalıştırma 0 sayılar ve `null` bir ortalama bildirir.
+
+Her sonuç satırı ayrıca `viralScore`, `viralVerdict`, `viralAlgorithmScore` ve
+`viralActualEngagementRate` taşır. Soru ID'sine göre anahtarlanmış düz bir
+eşlem olan `answers` alanını da taşır. Her değer seçilen kategori, puan veya
+olasılıktır. `Viral Score` veri kümesi görünümü ve CSV ya da Excel dışa
+aktarımları bu sütunları gösterir. Sütunlar gönderinin yanında durur, bu yüzden
+tablolarda JSON ayrıştırmaya gerek kalmaz. Başarısız ve atlanan satırlarda
+eşlem boştur.
 
 ## Önceki bir çalıştırmayla karşılaştır
 
-Aynı analiz ayarlarına sahip tamamlanmış önceki bir çalıştırmanın veri kümesi
-ID'si olan `monitor.baselineDatasetId`'yi geçir. Karşılaştırma o çalıştırmanın
-satırlarını okur. Bu yüzden o çalıştırma özetini atlamış olsa bile çalışır. O
-zaman her satır bir `monitor` nesnesi kazanır. Durumu, bir temel değer olmadan
-`first_run`, önceki çalıştırmada bulunmayan tweet'ler için `new_to_baseline` &
-sahip olduğu tweet'ler için `unchanged` veya `changed` olur. `changes`,
-`previous`'tan `current`'a taşınan her özellik kararını listeler. Kararlar
-kategoriye, yuvarlanmış puan seviyesine veya 0,5'te evet/hayır'a göre
-karşılaştırılır. Bir karar yalnızca belirgin biçimde değiştiğinde değişmiş
-sayılır. Çalıştırmalar arasındaki yakın-berabere titremeler değişmemiş kalır.
-`maxBaselineRows`'un (varsayılan 100.000) üzerindeki veya farklı ayarlardan
-gelen temel değerler, toplamadan önce bir tanılama satırıyla çalıştırmayı
-durdurur.
+Aynı analiz ayarlarıyla tamamlanmış önceki bir çalıştırmanın veri kümesi ID'sini
+`monitor.baselineDatasetId` olarak gönder. Karşılaştırma o çalıştırmanın
+satırlarını okur. O çalıştırma özetini atlamış olsa bile çalışır. Ardından her
+satıra bir `monitor` nesnesi eklenir. Durumu şunlardan biri olabilir:
+
+- Temel çalıştırma yoksa `first_run`.
+- Önceki çalıştırmada olmayan gönderiler için `new_to_baseline`.
+- Önceki çalıştırmada olan gönderiler için `unchanged` veya `changed`.
+
+`changes`, `previous` değerinden `current` değerine geçen her özellik kararını
+listeler. Kararlar kategoriye, yuvarlanmış puan düzeyine veya 0,5'teki
+evet/hayır eşiğine göre karşılaştırılır. Bir karar yalnızca belirgin biçimde
+değiştiğinde değişmiş sayılır. Çalıştırmalar arasındaki küçük farklar
+`unchanged` kalır.
+
+`maxBaselineRows` değerini aşan veya farklı ayarlardan gelen bir temel
+çalıştırma, çalıştırmayı toplamadan önce durdurur. Çalıştırma sonra bir
+tanılama satırı yazar. `maxBaselineRows` varsayılan olarak 100.000'dir.
 
 ## Görev örnekleri
 
-50 herkese açık görevden seç. Her biri sınırlı bir `maxItems` ile gerçek bir
-İngilizce aramayla başlar & `Viral Score` veri kümesi görünümüyle gelir.
-Bazıları kitle bağlamı ekler. Çalıştırmadan önce aramayı veya bağlamı
+50 herkese açık görevden birini seç. Her görev gerçek bir İngilizce aramayla ve
+sınırlı bir `maxItems` ile başlar. `Viral Score` veri kümesi görünümünü
+kullanır. Bazıları kitle bağlamı ekler. Çalıştırmadan önce aramayı veya bağlamı
 düzenle.
 
 - [Viral score of AI startup launch tweets](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-of-ai-startup-launch-tweets)
@@ -351,133 +371,152 @@ düzenle.
 - [Viral score audit of Duolingo posts](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-audit-of-duolingo-posts)
 - [Viral score audit of Wendy's posts](https://apify.com/xquik/x-tweet-viral-score-analyzer/examples/viral-score-audit-of-wendys-posts)
 
-Kalan görevler, Actor sayfasında daha fazla konu ve marka hesabını kapsar.
+Kalan görevler Actor sayfasında daha çok konuyu ve marka hesabını kapsar.
 
 ## SSS ve destek
 
-### Yüksek puan, bir tweet'in viral olacağı anlamına mı gelir?
+### Yapay zeka hesabı, X API anahtarı veya giriş gerekir mi?
 
-Hayır. Puan, ifadenin genel bir okur için ne kadar iyi işlediğini tahmin
-eder. Zamanlama, kitle büyüklüğü, medya & şans da erişimi belirler. Puanlara
-güvenmeden önce onları her satırdaki gerçek etkileşim sayılarıyla
-karşılaştır.
+Hayır. Xquik'in X Tweet Viral Score Analyzer'ı yapay zeka maliyetlerini
+fiyatına katar. Yapay zeka hesabı, token veya anahtar gerekmez. X API anahtarı,
+giriş veya kimlik bilgisi de gerekmez.
+
+### Yüksek puan, gönderinin viral olacağı anlamına mı gelir?
+
+Hayır. Puan, ifadenin genel bir okur için ne kadar işe yaradığını tahmin eder.
+Zamanlama, kitle büyüklüğü, medya ve şans da erişimi belirler. Puanlara
+güvenmeden önce onları her satırdaki gerçek etkileşim sayılarıyla karşılaştır.
 
 ### Kendi sorularımı kullanabilir miyim?
 
-Evet. Özel `analysis.questions`, varsayılanların yerini alır: 2-255
-kategorili veya en az 2 sıralı seviyeli, 1-8 `choice`, `score` veya
-`probability` sorusu. Viral Score 8 varsayılan sorunun hepsine ihtiyaç duyar,
-bu yüzden özel sorular onu `null` bırakır.
+Evet. Özel `analysis.questions` varsayılan soruların yerini alır. 1 ile 8
+arasında `choice`, `score` veya `probability` sorusu gönder. Seçim soruları 2
+ile 255 arasında kategori kabul eder. Puan sorularında en az 2 sıralı düzey
+olmalı. Viral Score varsayılan 8 sorunun hepsine ihtiyaç duyar, bu yüzden özel
+sorularda `null` kalır.
 
-### Bir satır neden `analysis.status`'u `failed` veya `skipped` olarak döndü?
+### Bir satır neden `analysis.status` değeri `failed` veya `skipped` olarak döndü?
 
-Actor tweet'i topladı & teslim etti, ancak yapay zeka analizi tamamlanmadı.
-`analysis.reason` nedeni adlandırır. `context_limit`, bağlamının ve hedeflerinin
-tweet'e yer bırakmadığı anlamına gelir. `service_unavailable`, analiz hizmetinin
-kısa süre kullanılamadığı anlamına gelir. Bu satırların sonuç ücreti & puanı
-yoktur. `analysis.context` alanını kısalt veya etkilenen ID'leri yeniden
+Actor gönderiyi topladı ve teslim etti, ama yapay zeka analizi tamamlanmadı.
+`analysis.reason` nedeni belirtir. `context_limit`, bağlamının ve hedeflerinin
+gönderiye yer bırakmadığı anlamına gelir. `service_unavailable`, analiz
+hizmetine kısa bir süre erişilemediği anlamına gelir. Bu satırların sonuç ücreti
+ve puanı yok. `analysis.context` alanını kısalt ya da etkilenen ID'leri yeniden
 çalıştır.
 
-Actor, `maxContextBytes` sınırından uzun bir tweet'i yine de analiz eder. Önce
-alıntılanan ve yanıtlanan gönderileri, sonra tweet'i kısaltır. Bu durumda
-`analysis.contextAvailability.postText` değeri `truncated` olur. Daha fazla
-metin tutmak için `maxContextBytes` değerini 64.000'e kadar artır.
+Actor, `maxContextBytes` değerinden uzun bir gönderiyi de analiz eder. Önce
+alıntılanan ve yanıtlanan gönderileri, sonra gönderinin kendisini kısaltır. Bu
+durumda `analysis.contextAvailability.postText` değeri `truncated` olur. Daha
+çok metin tutmak için `maxContextBytes` değerini 64.000'e kadar yükselt.
 
-### Analiz gerçekleri doğrular mı?
+### Analiz doğruluk kontrolü yapar mı?
 
-Hayır. Yanıtlar, gönderinin ne ifade ettiğini & bunu nasıl çerçevelediğini
-açıklar. Olasılıklar model güvenini ifade eder, gerçeği değil. Önemli
-sınıflandırmaları, her satırın koruduğu orijinal tweet'e karşı gözden
-geçir.
+Hayır. Cevaplar, gönderinin ne ifade ettiğini ve bunu nasıl çerçevelediğini
+anlatır. Olasılıklar yapay zekanın güvenini gösterir, doğruluğu değil. Önemli
+sınıflandırmaları her satırda duran orijinal gönderiyle karşılaştır.
 
 ### Hangi diller çalışır?
 
-Çıkarma, X'in sunduğu her dili destekler. Analizi önce İngilizce müşteri
-senaryolarında doğruluyoruz. Diğer desteklenen diller aynı yapıda yanıtlar
+Veri çekme, X'in sunduğu her dili destekler. Analizi önce İngilizce müşteri
+senaryolarında doğruluyoruz. Desteklenen diğer diller aynı yapıda cevap
 döndürür.
 
 ### Maliyeti nasıl sınırlarım?
 
-Filtreler, tekilleştirme & `maxItems` analizden önce çalışır, bu yüzden
-Actor yalnızca benzersiz, filtreyle eşleşen tweet'leri analiz eder &
-ücretlendirir. Kesin arama operatörleri, tarih sınırları ve etkileşim
-tabanları kullan, ve büyük bir çalıştırmadan önce yanıt kalitesini
-kontrol etmek için küçük bir `maxItems` ile başla.
+Filtreler, tekilleştirme ve `maxItems` analizden önce çalışır. Yalnızca
+benzersiz ve filtrene uyan gönderiler için ödersin. Kesin arama operatörleri,
+tarih sınırları ve etkileşim alt sınırları kullan. Büyük bir çalıştırmadan önce
+cevap kalitesini görmek için küçük bir `maxItems` ile başla.
 
-### Yardımı nereden alırım?
+### X verisini analiz etmek yasal mı?
 
-Actor sayfasında bir sorun aç veya çalıştırma ID'siyle
-support@xquik.com ile iletişime geç. Anahtar-değer deposundaki ücretsiz
-tanılamalar boş, kısmi veya kesintiye uğramış çalıştırmaları açıklar.
+Actor herkese açık X alanlarını çeker. Sonuçlarda kişisel veri olabilir.
+Amacının yasal olduğundan emin ol ve geçerli gizlilik kurallarına uy. Emin
+değilsen yetkin bir hukukçuya danış.
 
-Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
-"Twitter" ve "X", X Corp'un ticari markalarıdır.
+### API'yi, zamanlamaları ve entegrasyonları kullanabilir miyim?
+
+Evet. Python, JavaScript ve cURL örnekleri için
+[API sekmesine](https://apify.com/xquik/x-tweet-viral-score-analyzer/api) bak.
+Düzenli çalıştırmalar için Apify
+[zamanlamalarını](https://docs.apify.com/platform/schedules) kullan. Neyin
+değiştiğini görmek için önceki veri kümesi ID'sini `monitor.baselineDatasetId`
+olarak gönder. Apify entegrasyonları çalıştırmaları webhook'lara, Make, Zapier,
+n8n ve Google Sheets'e de bağlar.
+
+### Nereden yardım alırım?
+
+Actor sayfasında bir issue aç ya da çalıştırma ID'siyle support@xquik.com
+adresine yaz. Anahtar-değer deposundaki ücretsiz tanılamalar boş, kısmi veya
+kesilen çalıştırmaları açıklar.
 
 ## İlgili Xquik Actor'ları
 
-Her Xquik Actor'ı aynı çıkarma motorunu, önce filtreleyen faturalandırmayı ve
+Her Xquik Actor'ı aynı veri çekme motorunu, önce filtreleyen faturalandırmayı ve
 tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): Aramalardan,
-  profil zaman akışlarından, Listelerden ve tweet ID'lerinden 50'den fazla
-  filtre ve düz dışa aktarımla tweet kazır. Analiz değil sadece tweet verisi
-  gerektiğinde kullan. Satır başına $0.00015'ten başlar.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Handle, ID
-  veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını ve
+  profil zaman akışlarından, Listelerden ve gönderi ID'lerinden 50'den fazla
+  filtre ve düz dışa aktarımla gönderi kazır. Analiz değil, yalnızca gönderi
+  verisi gerektiğinde kullan. Satır başına $0.00015'ten başlar.
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Kullanıcı adı,
+  ID veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını ve
   takipçilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
   başına $0.00015'ten başlar.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25'ten fazla
   filtreyle gönderilerin altındaki yanıtları, yorumları ve tüm konuşmaları
-  kazır. Tweet'lerin altındaki tartışmaya ihtiyacın olduğunda kullan. Satır
+  kazır. Gönderilerin altındaki tartışmaya ihtiyacın olduğunda kullan. Satır
   başına $0.00015'ten başlar.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Gönderi
-  URL'leri veya ID'leri için toplu olarak yanıtları, alıntıları, retweet
-  edenleri ve thread'leri kazır. Gönderilerle kimin etkileşime
+  URL'leri veya ID'leri için toplu olarak yanıtları, alıntıları, yeniden
+  gönderenleri ve gönderi dizilerini kazır. Gönderilerle kimin etkileşime
   girdiğini ölçtüğünde kullan. Satır başına $0.00015'ten başlar.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Takipçileri,
   takip edilenleri, Liste üyelerini, aboneleri ve Topluluk üyelerini profil
   satırları olarak kazır. Kitle veya üye listelerine ihtiyacın olduğunda kullan.
   Profil başına $0.00015'ten başlar.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Handle, biyografi ve konuma göre kullanıcıları takipçi, doğrulama, hesap
+  Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay, hesap
   yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri oluşturduğunda
   kullan. Profil başına $0.00015'ten başlar.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): Liste URL'lerinden
   veya ID'lerinden Liste gönderilerini, üyelerini ve takipçilerini kazır.
-  Kaynaklarını küratörlü bir Liste belirlediğinde kullan. Satır başına
+  Kaynaklarını özenle seçilmiş bir Liste belirlediğinde kullan. Satır başına
   $0.00015'ten başlar.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Topluluk
   bilgilerini, gönderilerini, aramalarını, üyelerini ve moderatörlerini kazır.
   Kaynakların X Toplulukları olduğunda kullan. Satır başına $0.00015'ten başlar.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Sıralama,
-  hacim, sorgu ve WOEID ile konuma göre gerçek zamanlı trendleri kazır. Nerede
-  neyin trend olduğunu takip ettiğinde kullan. Trend başına $0.00015'ten başlar.
+  hacim, sorgu ve WOEID ile konuma göre gerçek zamanlı gündemi kazır. Nerede
+  neyin gündemde olduğunu takip ettiğinde kullan. Gündem başlığı başına
+  $0.00015'ten başlar.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): Uzun biçimli
   X Makalelerini kapak, yazar, tarih ve metriklerle Markdown ve metin olarak
-  kazır. Tweet değil makale gövdesi gerektiğinde kullan. Makale başına
+  kazır. Gönderi değil, makale gövdesi gerektiğinde kullan. Makale başına
   $0.00015'ten başlar.
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader): Gönderilerden
   veya profillerden fotoğrafları, videoları ve GIF'leri MP4 ve metadata
   seçenekleriyle çıkarır veya depolar. Medya dosyalarının kendisine ihtiyacın
   olduğunda kullan. Medya satırı başına $0.00015'ten başlar.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
-  Yapay zeka destekli ilgi, duygu durumu ve müşteri deneyimi yanıtlarıyla marka
-  bahsedilmelerini izler ve çalıştırmaları karşılaştırır. Bir markayı zaman
-  içinde takip ettiğinde kullan. Analiz edilen tweet başına $0.0003'ten başlar.
+  Markadan bahseden gönderileri yapay zeka destekli ilgi, duygu durumu ve
+  müşteri deneyimi cevaplarıyla izler. Çalıştırmaları da karşılaştırır. Bir
+  markayı zaman içinde takip ettiğinde kullan. Analiz edilen gönderi başına
+  $0.0003'ten başlar.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
-  Yapay zeka ile her tweet için tutum, yoğunluk ve alaycılık olasılığını
+  Yapay zeka ile her gönderi için tutum, yoğunluk ve alaycılık olasılığını
   etiketler. Herhangi bir konuda genel duygu durumuna ihtiyacın olduğunda
-  kullan. Analiz edilen tweet başına $0.0003'ten başlar.
+  kullan. Analiz edilen gönderi başına $0.0003'ten başlar.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
   Yapay zeka ile yükseliş, düşüş, nötr veya karışık duruşu, içerik türünü,
   kesinliği ve varlık ilgisini etiketler. Hisse senedi, kripto veya alım satım
-  konuşmalarını takip ettiğinde kullan. Analiz edilen tweet başına $0.0003'ten
-  başlar.
+  konuşmalarını takip ettiğinde kullan. Analiz edilen gönderi başına
+  $0.0003'ten başlar.
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
   Yapay zeka ile haber gönderilerini biçim, kaynak atfı ve konu ilgisine göre
-  etiketler. Haberi yorumdan ayırdığında kullan. Analiz edilen tweet başına
+  etiketler. Haberi yorumdan ayırdığında kullan. Analiz edilen gönderi başına
   $0.0003'ten başlar.
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  Yapay zeka ile her tweet için kendi kategori, puan ve evet/hayır sorularını
-  yanıtlar. Hazır analizler etiketlerine uymadığında kullan. Analiz edilen
-  tweet başına $0.0003'ten başlar.
+  Yapay zeka ile her gönderi için kendi kategori, puan ve evet/hayır
+  sorularını cevaplar. Hazır analizler etiketlerine uymadığında kullan. Analiz
+  edilen gönderi başına $0.0003'ten başlar.
