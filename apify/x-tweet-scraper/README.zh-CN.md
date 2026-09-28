@@ -205,6 +205,96 @@ Apify 的默认超时为 `0`，因此运行没有时间限制。Actor 会持续�
 - 无输入、输入无效及零输出的运行会向免费的 `diagnostics` 输出写入 1
   条可操作的记录。
 
+## 基准测试
+
+我们于 2026-09-27 测试了 X Tweet Scraper 和其他 11 个推文 Actor。
+所有 Actor 都运行了同一个搜索。
+X Tweet Scraper 每条有用推文的成本最低。
+它每秒交付的有用推文也最多。
+每次运行都已公开。
+打开一次运行，即可查看其输入、日志和数据集。
+
+大多数其他 Actor 会在过滤或去重之前收费。
+X Tweet Scraper 只对已交付、唯一且符合过滤条件的推文收费。
+因此，每条可用推文你都付得更少。
+
+### 基准测试输入
+
+我们的 4 次运行使用了以下输入：
+
+```json
+{
+  "searchTerms": ["SpaceX Starship", "Starship launch", "#Starship"],
+  "queryType": "Latest + Top",
+  "lang": "en",
+  "tweetTypes": { "excludeReplies": true, "excludeRetweets": true },
+  "min_faves": 10,
+  "since": "2026-09-01_00:00:00_UTC",
+  "until": "2026-09-27_00:00:00_UTC",
+  "includeSearchTerms": true,
+  "maxItems": 1000
+}
+```
+
+- 其他每个 Actor 都通过自己的字段获得了相同的搜索词、过滤条件和日期。
+- 只接受 1 个查询的 Actor 获得了用 OR 连接的 3 个搜索词。
+- X (Twitter) Posts Search 的查询上限为 100 个字符，因此它收到的查询更短。
+- 每个 Actor 都请求 1,000 条推文；如果其上限更低，则请求其上限。
+- 各次运行逐一进行，全部使用 Bronze 等级。
+- 成本最接近的 Actor 在我们的运行之间运行了 3 次。
+
+### 我们如何为每次运行评分
+
+- 即使运行多次返回同一条推文，也只计 1 次。
+- 有用推文为英文。
+- 它不是回复或转推，且至少有 10 个点赞。
+- 仅以提及开头的帖子不算回复。
+- 它发布于 2026-09-01 至 2026-09-26（UTC）之间。
+- 它至少匹配 1 个搜索词。
+- 匹配指该搜索词的每个单词都出现在正文、引用推文或作者名称中。
+- 匹配不区分大小写，launch 也能匹配 launches。
+- 正文中的链接不计入匹配。
+- 如果某个 Actor 截断了长文本，检查会读取完整帖子。
+- 如果某行缺少语言或回复信息，则读取其他 Actor 对同一推文的行。
+- 每条有用推文的成本等于客户总支出除以有用推文数。
+- 支出按 Bronze 价格计算该次运行的每个计费事件。
+- 我们的支出还加上该次运行的 Apify 使用费，因为这部分由客户支付。
+- 其他 Actor 已将 Apify 使用费计入其价格。
+- 每秒有用推文数等于有用推文数除以总运行时间（秒）。
+- 总运行时间从运行在 Apify 上开始算起，到运行结束为止。
+
+### 基准测试结果
+
+Actor 名称是去掉宣传语后的 Apify Store 标题。
+我们的运行排在最前，其余按成本排序。
+
+| Actor                               | 开发者       | 有用推文 | 每条有用推文成本 | 每秒有用推文 | 公开运行                                                          |
+| ----------------------------------- | ------------ | -------: | ---------------: | -----------: | ----------------------------------------------------------------- |
+| X Tweet Scraper                     | xquik        |      882 |        $0.000177 |         27.0 | [查看运行](https://console.apify.com/view/runs/JJfsKql7EdiXsSX3T) |
+| X Tweet Scraper                     | xquik        |      868 |        $0.000179 |         27.4 | [查看运行](https://console.apify.com/view/runs/58ye04whvCP63nmmW) |
+| X Tweet Scraper                     | xquik        |      869 |        $0.000179 |         25.8 | [查看运行](https://console.apify.com/view/runs/ytoTpYCca2MShp4gh) |
+| X Tweet Scraper                     | xquik        |      879 |        $0.000177 |         29.1 | [查看运行](https://console.apify.com/view/runs/CrJLYvAIG0Ji666rr) |
+| Twitter (X) Scraper                 | scrapesmith  |      813 |        $0.000185 |         10.5 | [查看运行](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
+| Twitter (X) Scraper                 | scrapesmith  |      805 |        $0.000187 |         10.6 | [查看运行](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
+| Twitter (X) Scraper                 | scrapesmith  |      805 |        $0.000187 |         10.7 | [查看运行](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
+| Tweet Scraper                       | kaitoeasyapi |      880 |        $0.000250 |          9.1 | [查看运行](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2) |
+| X (Twitter) Posts Search            | scraper_one  |      804 |        $0.000314 |          3.3 | [查看运行](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0) |
+| Twitter (X) Scraper，默认上限       | scrapesmith  |      124 |        $0.000326 |          5.3 | [查看运行](https://console.apify.com/view/runs/Mc2fDehRqKqnEQAS7) |
+| Twitter Scraper                     | danek        |      807 |        $0.000347 |          5.0 | [查看运行](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W) |
+| Twitter (X) Search Scraper API      | tweetapi     |      337 |        $0.000374 |          2.6 | [查看运行](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb) |
+| X (Twitter) Advanced Search Scraper | api-ninja    |      837 |        $0.000430 |          7.4 | [查看运行](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib) |
+| Twitter (X.com) Scraper Unlimited   | apidojo      |      251 |        $0.000494 |         12.9 | [查看运行](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta) |
+| Tweet Scraper V2                    | apidojo      |      481 |        $0.000832 |          7.8 | [查看运行](https://console.apify.com/view/runs/PydoBgS1YRblg29bB) |
+| X.com Twitter API Scraper           | xtdata       |    1,378 |        $0.001168 |         11.9 | [查看运行](https://console.apify.com/view/runs/U91dRXEvKvqu41aop) |
+| X (Twitter) Tweet Scraper           | seemuapps    |      805 |        $0.001242 |          6.9 | [查看运行](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
+| Twitter Scraper                     | maximedupre  |       46 |        $0.002846 |          0.3 | [查看运行](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
+
+- 我们的每次运行按每条 $0.00015 对 1,000 条结果计费，另加 Apify 使用费。
+- 默认上限这一行保留了该 Actor 的默认值：每个搜索词 100 条推文。
+- Twitter (X) Search Scraper API 每次运行最多返回 500 条推文。
+- X.com Twitter API Scraper 在上限为 1,000 条时返回了 2,011 条推文。
+- maximedupre 的运行在返回 187 条推文后失败。
+
 ## 如何使用 X Tweet Scraper 抓取推文数据？
 
 ### 1. 直接粘贴 URL
