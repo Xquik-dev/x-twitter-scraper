@@ -43,6 +43,7 @@ Monitoring with AI Analysis** 收集每条匹配的推文。它用 AI 为每条�
 4. 运行 Actor，然后保留数据集 ID 用于下一次比较。
 5. 在下一次运行中，添加带有该 ID 的 `monitor.baselineDatasetId`。保持问题、
    目标、上下文与上下文限制不变，以便答案可比较。
+   比较会读取该数据集，因此即使该运行跳过了摘要也能正常工作。
 
 ```json
 {
@@ -157,9 +158,20 @@ AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或�
 
 ## 运行摘要与扁平化答案
 
-每次运行都会向其 key-value store 写入一条 `analysis-summary` 记录，
-并在运行报告中的 `results.analysisSummary` 下重复该记录。它统计已分析、
-失败与跳过的行数，汇总互动数据，并对每个问题作出总结。
+在以下 4 种情况下，运行会向其 key-value store 写入一条 `analysis-summary` 记录：
+
+- 运行遇到问题或规模较大。
+- 作为系列中的首次运行，设置了 `monitor` 但没有设置 `baselineDatasetId`。
+- 比较发现了已变化、新增或无法比较的推文。
+- 开启了 `alwaysSaveRunRecords`。
+
+其他运行会跳过该记录。它们的状态消息会写明最多的答案，例如
+`Top sentiment: negative in 2 of 5 results.` 没有变化的比较会显示
+`No change since the earlier run.` 遇到问题的运行或大型运行还会写入
+`run-report`。开启 `alwaysSaveRunRecords` 的运行也会写入。`run-report` 会在
+`results.analysisSummary` 下重复该摘要。
+
+摘要统计已分析、失败与跳过的行数，汇总互动数据，并对每个问题作出总结。
 
 - `targets` 报告每个品牌或别名的提及数、声量占比与互动数据。
 - 每个 `targets` 条目都有 `top`，即每个答案类别下互动最多的三条提及。

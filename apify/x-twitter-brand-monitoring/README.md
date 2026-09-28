@@ -53,7 +53,8 @@ how customers talk about you from run to run.
 4. Run the Actor, then keep the dataset ID for your next comparison.
 5. On the next run, add `monitor.baselineDatasetId` with that ID. Keep
    questions, targets, context & context limits unchanged so answers stay
-   comparable.
+   comparable. The comparison reads that dataset, so it works even when that run
+   skipped its summary.
 
 ```json
 {
@@ -182,9 +183,21 @@ rows, charged analyses & pending charges.
 
 ## Run summary & flat answers
 
-Each run writes an `analysis-summary` record to its key-value store & repeats it
-under `results.analysisSummary` in the run report. It counts analyzed, failed &
-skipped rows, sums engagement, and summarizes every question.
+A run writes an `analysis-summary` record to its key-value store in 4 cases:
+
+- It hits a problem or is large.
+- It sets `monitor` without `baselineDatasetId`, as the first run of a series.
+- Its comparison finds a changed, new or not comparable tweet.
+- It has `alwaysSaveRunRecords` on.
+
+Other runs skip the record. Their status names the top answer, like
+`Top sentiment: negative in 2 of 5 results.` A comparison without a change
+states `No change since the earlier run.` A run that hits a problem, or a large
+run, also writes `run-report`. So does a run with `alwaysSaveRunRecords` on.
+`run-report` repeats the summary under `results.analysisSummary`.
+
+The summary counts analyzed, failed & skipped rows, sums engagement, and
+summarizes every question.
 
 - `targets` reports mentions, share of voice & engagement per brand or alias.
 - Each `targets` entry has `top`, its three most engaged mentions per answer

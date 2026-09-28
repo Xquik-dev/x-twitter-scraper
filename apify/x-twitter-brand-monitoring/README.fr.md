@@ -61,7 +61,8 @@ dont les clients parlent de vous.
    comparaison.
 5. Au run suivant, ajoutez `monitor.baselineDatasetId` avec cet ID. Gardez les
    questions, les cibles, le contexte et les limites de contexte inchangés pour
-   que les réponses restent comparables.
+   que les réponses restent comparables. La comparaison lit ce dataset. Elle
+   fonctionne donc même si ce run a omis son résumé.
 
 ```json
 {
@@ -201,10 +202,23 @@ analyses facturées et les frais en attente.
 
 ## Résumé de run et réponses à plat
 
-Chaque run écrit un enregistrement `analysis-summary` dans son key-value store
-et le répète sous `results.analysisSummary` dans le rapport de run. Il compte
-les lignes analysées, échouées et ignorées, totalise l'engagement, et résume
-chaque question.
+Un run écrit un enregistrement `analysis-summary` dans son key-value store dans
+4 cas :
+
+- Il rencontre un problème ou il est volumineux.
+- Il définit `monitor` sans `baselineDatasetId`, comme premier run d'une série.
+- Sa comparaison trouve un tweet modifié, nouveau ou non comparable.
+- Il a `alwaysSaveRunRecords` activé.
+
+Les autres runs omettent l'enregistrement. Leur statut nomme la réponse
+principale, comme `Top sentiment: negative in 2 of 5 results.` Une comparaison
+sans changement indique `No change since the earlier run.` Un run avec un
+problème, ou un gros run, écrit aussi `run-report`. C'est aussi le cas d'un run
+avec `alwaysSaveRunRecords` activé. `run-report` répète le résumé sous
+`results.analysisSummary`.
+
+Le résumé compte les lignes analysées, échouées et ignorées, totalise
+l'engagement, et résume chaque question.
 
 - `targets` rapporte les mentions, la part de voix & l'engagement par marque ou
   alias.

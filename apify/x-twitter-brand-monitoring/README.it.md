@@ -57,7 +57,8 @@ te da un'esecuzione all'altra.
 4. Esegui l'Actor, poi conserva l'ID del dataset per il prossimo confronto.
 5. Nell'esecuzione successiva, aggiungi `monitor.baselineDatasetId` con
    quell'ID. Mantieni invariati domande, target, contesto e limiti di contesto
-   in modo che le risposte restino confrontabili.
+   in modo che le risposte restino confrontabili. Il confronto legge quel
+   dataset. Così funziona anche se quell'esecuzione ha saltato il riepilogo.
 
 ```json
 {
@@ -192,10 +193,24 @@ le righe raccolte, le analisi addebitate e gli addebiti in sospeso.
 
 ## Riepilogo dell'esecuzione e risposte in formato piatto
 
-Ogni esecuzione scrive un record `analysis-summary` nel proprio key-value store
-e lo ripete sotto `results.analysisSummary` nel report dell'esecuzione. Conta le
-righe analizzate, fallite e saltate, somma l'engagement e riepiloga ogni
-domanda.
+Un'esecuzione scrive un record `analysis-summary` nel proprio key-value store in
+4 casi:
+
+- Incontra un problema o è grande.
+- Imposta `monitor` senza `baselineDatasetId`, come prima esecuzione di una
+  serie.
+- Il suo confronto trova un tweet cambiato, nuovo o non confrontabile.
+- Ha `alwaysSaveRunRecords` attivo.
+
+Le altre esecuzioni saltano il record. Il loro messaggio di stato indica la
+risposta principale, come `Top sentiment: negative in 2 of 5 results.` Un
+confronto senza cambiamenti riporta `No change since the earlier run.`
+Un'esecuzione con un problema, o un'esecuzione grande, scrive anche
+`run-report`. Lo fa anche un'esecuzione con `alwaysSaveRunRecords` attivo.
+`run-report` ripete il riepilogo sotto `results.analysisSummary`.
+
+Il riepilogo conta le righe analizzate, fallite e saltate, somma l'engagement e
+riassume ogni domanda.
 
 - `targets` riporta menzioni, quota di voce & engagement per brand o alias.
 - Ogni voce di `targets` ha `top`, le sue tre menzioni con più engagement per

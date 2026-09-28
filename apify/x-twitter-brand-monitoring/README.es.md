@@ -60,7 +60,8 @@ una ejecución a otra.
    comparación.
 5. En la siguiente ejecución, agrega `monitor.baselineDatasetId` con ese ID.
    Mantén sin cambios las preguntas, objetivos, contexto y límites de contexto
-   para que las respuestas sigan siendo comparables.
+   para que las respuestas sigan siendo comparables. La comparación lee ese
+   Dataset. Así funciona aunque esa ejecución haya omitido su resumen.
 
 ```json
 {
@@ -199,9 +200,23 @@ pendientes.
 
 ## Resumen de ejecución y respuestas planas
 
-Cada ejecución escribe un registro `analysis-summary` en su almacén de
-clave-valor y lo repite bajo `results.analysisSummary` en el informe de
-ejecución. Cuenta las filas analizadas, fallidas y omitidas, suma la interacción
+Una ejecución escribe un registro `analysis-summary` en su almacén de
+clave-valor en 4 casos:
+
+- Tiene un problema o es grande.
+- Configura `monitor` sin `baselineDatasetId`, como primera ejecución de una
+  serie.
+- Su comparación encuentra un tuit cambiado, nuevo o no comparable.
+- Tiene `alwaysSaveRunRecords` activado.
+
+Las demás ejecuciones omiten el registro. Su texto de estado nombra la respuesta
+principal, como `Top sentiment: negative in 2 of 5 results.` Una comparación sin
+cambios indica `No change since the earlier run.` Una ejecución con un problema,
+o una ejecución grande, también escribe `run-report`. Lo mismo hace una
+ejecución con `alwaysSaveRunRecords` activado. `run-report` repite el resumen en
+`results.analysisSummary`.
+
+El resumen cuenta las filas analizadas, fallidas y omitidas, suma la interacción
 y resume cada pregunta.
 
 - `targets` reporta menciones, participación de voz & interacción por marca o

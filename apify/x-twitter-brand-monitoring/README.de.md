@@ -58,7 +58,8 @@ eine Historie von Run zu Run, wie Kunden über dich sprechen.
    Vergleich.
 5. Ergänze im nächsten Run `monitor.baselineDatasetId` mit dieser ID. Halte
    Fragen, Ziele, Kontext & Kontextgrenzen unverändert, damit die Antworten
-   vergleichbar bleiben.
+   vergleichbar bleiben. Der Vergleich liest dieses Dataset. So funktioniert er
+   auch, wenn dieser Run seine Zusammenfassung übersprungen hat.
 
 ```json
 {
@@ -196,10 +197,23 @@ ausstehende Gebühren.
 
 ## Run-Zusammenfassung & flache Antworten
 
-Jeder Run schreibt einen `analysis-summary`-Datensatz in seinen Key-Value-Store
-& wiederholt ihn unter `results.analysisSummary` im Run-Report. Er zählt
-analysierte, fehlgeschlagene & übersprungene Datensätze, summiert Interaktionen
-und fasst jede Frage zusammen.
+Ein Run schreibt in 4 Fällen einen `analysis-summary`-Datensatz in seinen
+Key-Value-Store:
+
+- Er hat ein Problem oder ist groß.
+- Er setzt `monitor` ohne `baselineDatasetId`, als erster Run einer Serie.
+- Sein Vergleich findet einen geänderten, neuen oder nicht vergleichbaren Tweet.
+- Er hat `alwaysSaveRunRecords` aktiviert.
+
+Andere Runs überspringen den Datensatz. Ihr Statustext nennt die häufigste
+Antwort, etwa `Top sentiment: negative in 2 of 5 results.` Ein Vergleich ohne
+Änderung meldet `No change since the earlier run.` Ein Run mit einem Problem
+oder ein großer Run schreibt zusätzlich `run-report`. Das gilt auch für einen
+Run mit aktiviertem `alwaysSaveRunRecords`. `run-report` wiederholt die
+Zusammenfassung unter `results.analysisSummary`.
+
+Die Zusammenfassung zählt analysierte, fehlgeschlagene & übersprungene
+Datensätze, summiert Interaktionen und fasst jede Frage zusammen.
 
 - `targets` meldet Erwähnungen, Share of Voice & Interaktion pro Marke oder
   Alias.

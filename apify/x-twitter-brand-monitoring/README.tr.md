@@ -57,7 +57,8 @@ bilgilendir. Müşterilerin senin hakkında nasıl konuştuğunun geçmişini
    ID'sini sakla.
 5. Bir sonraki çalıştırmada, `monitor.baselineDatasetId`'yi o ID ile ekle.
    Yanıtların karşılaştırılabilir kalması için soruları, hedefleri, bağlamı ve
-   bağlam sınırlarını değiştirmeden tut.
+   bağlam sınırlarını değiştirmeden tut. Karşılaştırma o veri kümesini okur. Bu
+   yüzden o çalıştırma özetini atlamış olsa bile çalışır.
 
 ```json
 {
@@ -193,9 +194,24 @@ raporu ise toplanan satırları, ücretlendirilen analizleri ve bekleyen
 
 ## Çalıştırma özeti ve düz yanıtlar
 
-Her çalıştırma, anahtar-değer deposuna bir `analysis-summary` kaydı yazar ve
-çalıştırma raporunda `results.analysisSummary` altında tekrarlar. Analiz edilen,
-başarısız ve atlanan satırları sayar, etkileşimi toplar ve her soruyu özetler.
+Bir çalıştırma, 4 durumda anahtar-değer deposuna bir `analysis-summary` kaydı
+yazar:
+
+- Bir sorun yaşar veya büyüktür.
+- Bir serinin ilk çalıştırması olarak `baselineDatasetId` olmadan `monitor`
+  ayarlar.
+- Karşılaştırması değişen, yeni veya karşılaştırılamayan bir tweet bulur.
+- `alwaysSaveRunRecords` açıktır.
+
+Diğer çalıştırmalar bu kaydı atlar. Durum metinleri en sık yanıtı belirtir,
+örneğin `Top sentiment: negative in 2 of 5 results.` Değişiklik bulmayan bir
+karşılaştırma `No change since the earlier run.` yazar. Sorun yaşayan veya büyük
+bir çalıştırma ayrıca `run-report` yazar. `alwaysSaveRunRecords` açık olan bir
+çalıştırma da yazar. `run-report`, özeti `results.analysisSummary` altında
+tekrarlar.
+
+Özet, analiz edilen, başarısız ve atlanan satırları sayar, etkileşimi toplar ve
+her soruyu özetler.
 
 - `targets`, marka veya takma ad başına bahsedilmeleri, ses payını & etkileşimi
   bildirir.
