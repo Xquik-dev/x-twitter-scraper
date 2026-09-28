@@ -176,6 +176,87 @@ sınırı Actor'a `ACTOR_MAX_TOTAL_CHARGE_USD` olarak gösterir ve Actor, bunun
 döndürmesi için `maxItems`'i boş bırak. `maxItems`'i yalnızca bütçenin izin
 vereceğinden daha küçük bir sonuç üst sınırı istediğinde ayarla.
 
+## Karşılaştırma testi
+
+X Follower Scraper'ı 2026-09-28'de 9 başka takipçi Actor'ıyla test ettik. Hepsi
+aynı 3 hesabın takipçilerini okudu. İşe yarar profil başına en ucuz X Follower
+Scraper oldu. Saniyede en çok işe yarar profili de o teslim etti. Her çalıştırma
+herkese açık. Bir çalıştırmayı aç, girdisine, günlüğüne & veri kümesine bak.
+
+Diğer Actor'ların çoğu filtrelemeden veya tekilleştirmeden önce ücret alır. X
+Follower Scraper yalnızca teslim edilen, benzersiz, filtreyle eşleşen profiller
+için ücret alır. Böylece kullanabildiğin her profil için daha az ödersin.
+
+### Karşılaştırma girdisi
+
+Bizim 2 çalıştırmamız bu girdiyi kullandı:
+
+```json
+{
+  "twitterHandles": ["NASA", "SpaceX", "esa"],
+  "relation": "followers",
+  "dedupeAcrossTargets": true,
+  "minFollowers": 1,
+  "minStatuses": 1,
+  "minAccountAgeDays": 30,
+  "maxItemsPerTarget": 334,
+  "maxItems": 1000
+}
+```
+
+- Diğer her Actor NASA, SpaceX & esa takipçilerini kendi alanlarıyla okudu.
+- Her biri hesap başına 334 takipçi istedi. Bu sınırı olmayanlar 1.000 istedi.
+- 3 Actor her hesap için 1 kez çalıştı. Her çalıştırmanın sınırı 334'tü.
+- Çalıştırmalar tek tek yapıldı, hepsi Bronze katmanında.
+- Bizim 2 çalıştırmamız en başta & en sonda yapıldı.
+
+### Her çalıştırmayı nasıl puanladık
+
+- Çalıştırma bir profili tekrar döndürse de o profil 1 kez sayılır.
+- İşe yarar bir profilin en az 1 takipçisi & en az 1 gönderisi vardır.
+- Hesabı, çalıştırma tarihinde en az 30 günlüktür.
+- 3 hesabın kendi profilleri asla işe yarar sayılmaz.
+- Eksik sayaçlar veya katılma tarihleri, o profil için başka bir Actor'ın
+  satırından gelir.
+- Hiçbir satırda katılma tarihi yoksa kontrol onu profil ID'sinden okur.
+- Hiçbir satırda sayaçları olmayan bir profil işe yarar sayılmaz.
+- İşe yarar profil başına maliyet, müşterinin toplam harcamasının işe yarar
+  profil sayısına bölümüdür.
+- Harcama, çalıştırmanın ücretlendirilen her olayını Bronze fiyatlarıyla sayar.
+- Bizim harcamamıza çalıştırmanın Apify kullanımı da eklenir, çünkü onu
+  müşterilerimiz öder.
+- Diğer Actor'lar Apify kullanımını fiyatlarına dahil eder.
+- Saniyede işe yarar profil, işe yarar profil sayısının saniye cinsinden toplam
+  süreye bölümüdür.
+- Toplam süre, çalıştırmanın Apify'daki başlangıcından bitişine kadar geçen
+  süredir.
+- 3 çalıştırmalı bir satır harcamayı, işe yarar profilleri & toplam süreyi
+  toplar.
+
+### Karşılaştırma sonuçları
+
+Actor adları, fiyatları ve sloganları çıkarılmış Apify Store başlıklarıdır. Önce
+bizim çalıştırmalarımız, sonra diğerleri maliyete göre sıralanır.
+
+| Actor                                     | Geliştirici    | İşe yarar profil | İşe yarar profil başına maliyet | Saniyede işe yarar profil | Herkese açık çalıştırma                                                                                                                                                                                             |
+| ----------------------------------------- | -------------- | ---------------: | ------------------------------: | ------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| X Follower Scraper                        | xquik          |            1.000 |                       $0.000155 |                      68.5 | [Çalıştırmayı gör](https://console.apify.com/view/runs/X8Vnx8Ytuk5AzWiK7)                                                                                                                                           |
+| X Follower Scraper                        | xquik          |              999 |                       $0.000155 |                      38.4 | [Çalıştırmayı gör](https://console.apify.com/view/runs/lPqjfUn8767FpIDis)                                                                                                                                           |
+| X (Twitter) Scraper                       | b2b_leads      |              286 |                       $0.000388 |                       3.1 | [Çalıştırmayı gör](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                                           |
+| Twitter (X) Follower Scraper              | kaitoeasyapi   |              356 |                       $0.000506 |                      21.9 | [Çalıştırmayı gör](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                                           |
+| X (Twitter) Followers Scraper             | api-ninja      |              350 |                       $0.000809 |                       7.0 | [Çalıştırmayı gör](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                                           |
+| Scweet Twitter/X Scraper                  | altimis        |              332 |                       $0.000922 |                       1.1 | [Çalıştırmayı gör](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)                                                                                                                                           |
+| Fast Twitter (X) User Scraper API         | apidojo        |              323 |                       $0.001160 |                       7.3 | [Çalıştırmayı gör](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)                                                                                                                                           |
+| Twitter (X) Scraper                       | atomus         |              323 |                       $0.001272 |                       6.2 | [Çalıştırmayı gör](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)                                                                                                                                           |
+| Twitter / X API Flat & Simple             | practicaltools |              283 |                       $0.002036 |                       6.5 | [Çalıştırma 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb), [Çalıştırma 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK), [Çalıştırma 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX) |
+| Twitter Scraper                           | maximedupre    |              320 |                       $0.002192 |                       2.1 | [Çalıştırma 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [Çalıştırma 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [Çalıştırma 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
+| X (Twitter) Followers & Following Scraper | seemuapps      |              286 |                       $0.003504 |                       3.9 | [Çalıştırma 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [Çalıştırma 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [Çalıştırma 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
+
+- Her çalıştırmamız 1.000 profili $0.00015'ten ücretlendirdi. Apify kullanımı
+  buna eklenir.
+- Twitter (X) Follower Scraper, hesap başına 334 sınırı için 1.200 profil
+  döndürdü.
+
 ## X Follower Scraper'ı takipçi verisi kazımak için nasıl kullanırım?
 
 ### 1. Profil veya liste URL'lerini yapıştır

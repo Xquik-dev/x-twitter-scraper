@@ -181,6 +181,85 @@ ejecución devuelva tantos perfiles como el tope de gasto lo permita.
 Configura `maxItems` solo cuando quieras un límite de resultados menor al
 que permitiría el presupuesto.
 
+## Prueba comparativa
+
+Probamos X Follower Scraper & otros 9 Actors de seguidores el 2026-09-28. Todos
+leyeron los seguidores de las mismas 3 cuentas. X Follower Scraper tuvo el menor
+costo por perfil útil. También entregó más perfiles útiles por segundo. Cada
+ejecución es pública. Abre una ejecución para revisar su entrada, registro &
+dataset.
+
+La mayoría de los otros Actors cobran antes de filtrar o eliminar duplicados. X
+Follower Scraper solo cobra perfiles entregados, únicos y que cumplen los
+filtros. Así pagas menos por cada perfil que puedes usar.
+
+### Entrada de la prueba
+
+Nuestras 2 ejecuciones usaron esta entrada:
+
+```json
+{
+  "twitterHandles": ["NASA", "SpaceX", "esa"],
+  "relation": "followers",
+  "dedupeAcrossTargets": true,
+  "minFollowers": 1,
+  "minStatuses": 1,
+  "minAccountAgeDays": 30,
+  "maxItemsPerTarget": 334,
+  "maxItems": 1000
+}
+```
+
+- Los demás Actors leyeron los seguidores de NASA, SpaceX & esa con sus campos.
+- Cada uno pidió 334 seguidores por cuenta, o 1000 si no tenía ese límite.
+- 3 Actors corrieron 1 vez por cuenta, cada vez con un límite de 334.
+- Las ejecuciones fueron de 1 en 1, todas en el nivel Bronze.
+- Nuestras 2 ejecuciones fueron la primera & la última.
+
+### Cómo evaluamos cada ejecución
+
+- Cada perfil cuenta 1 vez, aunque la ejecución lo devuelva de nuevo.
+- Un perfil útil tiene al menos 1 seguidor & al menos 1 publicación.
+- Su cuenta tiene al menos 30 días de antigüedad en la fecha de la ejecución.
+- Los propios perfiles de las 3 cuentas nunca se consideran útiles.
+- Los conteos o fechas de registro faltantes salen de la fila de otro Actor.
+- Si ninguna fila trae la fecha de registro, la revisión la lee del ID del
+  perfil.
+- Un perfil sin conteos en ninguna fila no se considera útil.
+- El costo por perfil útil divide el gasto total entre los perfiles útiles.
+- El gasto cuenta cada evento cobrado de la ejecución a precios de Bronze.
+- Nuestro gasto suma el uso de Apify, porque lo pagan nuestros clientes.
+- Los demás Actors incluyen el uso de Apify en su precio.
+- Para los perfiles útiles por segundo, dividimos entre el tiempo total en
+  segundos.
+- El tiempo total va del inicio al final de la ejecución en Apify.
+- Una fila con 3 ejecuciones suma su gasto, sus perfiles útiles & su tiempo
+  total.
+
+### Resultados de la prueba
+
+Los nombres de los Actors son los títulos de Apify Store sin precio ni eslogan.
+Primero van nuestras ejecuciones, luego las demás por costo.
+
+| Actor                                     | Desarrollador  | Perfiles útiles | Costo por perfil útil | Perfiles útiles por segundo | Ejecución pública                                                                                                                                                                                                |
+| ----------------------------------------- | -------------- | --------------: | --------------------: | --------------------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| X Follower Scraper                        | xquik          |            1000 |             $0.000155 |                        68.5 | [Ver ejecución](https://console.apify.com/view/runs/X8Vnx8Ytuk5AzWiK7)                                                                                                                                           |
+| X Follower Scraper                        | xquik          |             999 |             $0.000155 |                        38.4 | [Ver ejecución](https://console.apify.com/view/runs/lPqjfUn8767FpIDis)                                                                                                                                           |
+| X (Twitter) Scraper                       | b2b_leads      |             286 |             $0.000388 |                         3.1 | [Ver ejecución](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                                           |
+| Twitter (X) Follower Scraper              | kaitoeasyapi   |             356 |             $0.000506 |                        21.9 | [Ver ejecución](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                                           |
+| X (Twitter) Followers Scraper             | api-ninja      |             350 |             $0.000809 |                         7.0 | [Ver ejecución](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                                           |
+| Scweet Twitter/X Scraper                  | altimis        |             332 |             $0.000922 |                         1.1 | [Ver ejecución](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)                                                                                                                                           |
+| Fast Twitter (X) User Scraper API         | apidojo        |             323 |             $0.001160 |                         7.3 | [Ver ejecución](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)                                                                                                                                           |
+| Twitter (X) Scraper                       | atomus         |             323 |             $0.001272 |                         6.2 | [Ver ejecución](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)                                                                                                                                           |
+| Twitter / X API Flat & Simple             | practicaltools |             283 |             $0.002036 |                         6.5 | [Ejecución 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb), [Ejecución 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK), [Ejecución 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX) |
+| Twitter Scraper                           | maximedupre    |             320 |             $0.002192 |                         2.1 | [Ejecución 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [Ejecución 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [Ejecución 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
+| X (Twitter) Followers & Following Scraper | seemuapps      |             286 |             $0.003504 |                         3.9 | [Ejecución 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [Ejecución 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [Ejecución 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
+
+- Nuestras ejecuciones cobraron 1000 perfiles cada una a $0.00015, más el uso de
+  Apify.
+- Twitter (X) Follower Scraper devolvió 1200 perfiles con un límite de 334 por
+  cuenta.
+
 ## ¿Cómo uso X Follower Scraper para extraer datos de seguidores?
 
 ### 1. Pega URLs de perfil o de lista

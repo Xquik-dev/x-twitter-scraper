@@ -164,6 +164,81 @@ it. Leave `maxItems` empty to let the run return as many profiles as the spend
 cap allows. Set `maxItems` only when you want a smaller result cap than the
 budget would allow.
 
+## Benchmark
+
+We tested X Follower Scraper & 9 other follower Actors on 2026-09-28. All read
+the followers of the same 3 accounts. X Follower Scraper cost the least per
+useful profile. It also delivered the most useful profiles per second. Every run
+is public. Open a run to check its input, log & dataset.
+
+Most other Actors charge before filtering or deduplicating. X Follower Scraper
+charges only for delivered, unique, filter-matching profiles. So you pay less
+for each profile you can use.
+
+### Benchmark input
+
+Our 2 runs used this input:
+
+```json
+{
+  "twitterHandles": ["NASA", "SpaceX", "esa"],
+  "relation": "followers",
+  "dedupeAcrossTargets": true,
+  "minFollowers": 1,
+  "minStatuses": 1,
+  "minAccountAgeDays": 30,
+  "maxItemsPerTarget": 334,
+  "maxItems": 1000
+}
+```
+
+- Every other Actor read the followers of NASA, SpaceX & esa in its own fields.
+- Each asked for 334 followers per account, or 1,000 without that limit.
+- 3 Actors ran once per account, each with a limit of 334.
+- The runs went 1 at a time, each on the Bronze tier.
+- Our 2 runs came first & last.
+
+### How we scored each run
+
+- Each profile counts once, even when the run returns it again.
+- A useful profile has at least 1 follower & at least 1 post.
+- Its account is at least 30 days old on the run date.
+- The 3 accounts' own profiles never count as useful.
+- Missing counts or join dates come from another Actor's row for that profile.
+- With no join date in any row, the check reads it from the profile ID.
+- A profile with no counts in any row does not count as useful.
+- Cost per useful profile is the customer's total spend divided by useful
+  profiles.
+- Spend counts every charged event of the run at Bronze prices.
+- Our spend adds the run's Apify usage, because our customers pay it.
+- The other Actors include Apify usage in their price.
+- Useful profiles per second is useful profiles divided by wall time in seconds.
+- Wall time runs from the run's start to its finish on Apify.
+- A row with 3 runs adds up their spend, useful profiles & wall time.
+
+### Benchmark results
+
+Actor names are Apify Store titles without prices or taglines. Our runs come
+first, then the others by cost.
+
+| Actor                                     | Developer      | Useful profiles | Cost per useful profile | Useful profiles per second | Public run                                                                                                                                                                                     |
+| ----------------------------------------- | -------------- | --------------: | ----------------------: | -------------------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| X Follower Scraper                        | xquik          |           1,000 |               $0.000155 |                       68.5 | [View run](https://console.apify.com/view/runs/X8Vnx8Ytuk5AzWiK7)                                                                                                                              |
+| X Follower Scraper                        | xquik          |             999 |               $0.000155 |                       38.4 | [View run](https://console.apify.com/view/runs/lPqjfUn8767FpIDis)                                                                                                                              |
+| X (Twitter) Scraper                       | b2b_leads      |             286 |               $0.000388 |                        3.1 | [View run](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                              |
+| Twitter (X) Follower Scraper              | kaitoeasyapi   |             356 |               $0.000506 |                       21.9 | [View run](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                              |
+| X (Twitter) Followers Scraper             | api-ninja      |             350 |               $0.000809 |                        7.0 | [View run](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                              |
+| Scweet Twitter/X Scraper                  | altimis        |             332 |               $0.000922 |                        1.1 | [View run](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)                                                                                                                              |
+| Fast Twitter (X) User Scraper API         | apidojo        |             323 |               $0.001160 |                        7.3 | [View run](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)                                                                                                                              |
+| Twitter (X) Scraper                       | atomus         |             323 |               $0.001272 |                        6.2 | [View run](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)                                                                                                                              |
+| Twitter / X API Flat & Simple             | practicaltools |             283 |               $0.002036 |                        6.5 | [Run 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb), [Run 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK), [Run 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX) |
+| Twitter Scraper                           | maximedupre    |             320 |               $0.002192 |                        2.1 | [Run 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [Run 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [Run 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
+| X (Twitter) Followers & Following Scraper | seemuapps      |             286 |               $0.003504 |                        3.9 | [Run 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [Run 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [Run 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
+
+- Our runs charged 1,000 profiles each at $0.00015, plus Apify usage.
+- Twitter (X) Follower Scraper returned 1,200 profiles for a limit of 334 per
+  account.
+
 ## How do I use X Follower Scraper to scrape follower data?
 
 ### 1. Paste profile or list URLs

@@ -159,6 +159,82 @@ Console에서 실행당 최대 비용을 설정하세요. Apify는 이 제한을
 전에 멈춥니다. 예산 상한이 허용하는 만큼 많은 프로필을 반환하려면 `maxItems`를
 비워두세요. 예산보다 작은 결과 상한을 원할 때만 `maxItems`를 설정하세요.
 
+## 벤치마크
+
+2026-09-28에 X Follower Scraper와 다른 팔로워 Actor 9개를 테스트했습니다. 모두
+같은 계정 3개의 팔로워를 읽었습니다. 유용한 프로필당 비용은 X Follower Scraper가
+가장 낮았습니다. 초당 전달한 유용한 프로필도 가장 많았습니다. 모든 실행은
+공개되어 있습니다. 실행을 열어 입력, 로그 & 데이터셋을 확인하세요.
+
+다른 Actor 대부분은 필터링이나 중복 제거 전에 요금을 부과합니다. X Follower
+Scraper는 전달되고, 고유하며, 필터에 맞는 프로필에만 요금을 부과합니다. 그래서
+쓸 수 있는 프로필 1개당 더 적게 냅니다.
+
+### 벤치마크 입력
+
+저희 실행 2회는 이 입력을 사용했습니다.
+
+```json
+{
+  "twitterHandles": ["NASA", "SpaceX", "esa"],
+  "relation": "followers",
+  "dedupeAcrossTargets": true,
+  "minFollowers": 1,
+  "minStatuses": 1,
+  "minAccountAgeDays": 30,
+  "maxItemsPerTarget": 334,
+  "maxItems": 1000
+}
+```
+
+- 다른 Actor는 각자의 필드로 NASA, SpaceX & esa의 팔로워를 읽었습니다.
+- 각 Actor는 계정당 팔로워 334명을 요청했고, 계정당 한도가 없으면 1,000명을
+  요청했습니다.
+- Actor 3개는 계정마다 1회씩 실행했고, 각 실행의 한도는 334개였습니다.
+- 실행은 1회씩 차례로 진행했고, 모두 Bronze 등급을 사용했습니다.
+- 저희 실행 2회는 맨 처음과 맨 마지막에 진행했습니다.
+
+### 실행 평가 방법
+
+- 실행이 같은 프로필을 여러 번 반환해도 그 프로필은 1번만 셉니다.
+- 유용한 프로필은 팔로워가 1명 이상이고 게시물이 1개 이상입니다.
+- 실행일 기준으로 계정이 생성된 지 30일 이상 지났습니다.
+- 대상 계정 3개 자체의 프로필은 유용한 프로필로 세지 않습니다.
+- 개수나 가입일 정보가 없으면 같은 프로필의 다른 Actor 행에서 읽습니다.
+- 어느 행에도 가입일이 없으면, 검사는 프로필 ID에서 가입일을 읽습니다.
+- 어느 행에도 개수가 없는 프로필은 유용한 프로필로 세지 않습니다.
+- 유용한 프로필당 비용은 고객의 총지출을 유용한 프로필 수로 나눈 값입니다.
+- 지출은 실행에서 청구된 모든 이벤트를 Bronze 가격으로 계산합니다.
+- 저희 지출에는 실행의 Apify 사용량을 더합니다. 고객이 직접 내기 때문입니다.
+- 다른 Actor는 Apify 사용량을 가격에 포함합니다.
+- 초당 유용한 프로필은 유용한 프로필 수를 총 실행 시간(초)으로 나눈 값입니다.
+- 총 실행 시간은 Apify에서 실행이 시작된 때부터 끝날 때까지입니다.
+- 실행이 3회인 행은 그 실행들의 지출, 유용한 프로필 & 총 실행 시간을 합산합니다.
+
+### 벤치마크 결과
+
+Actor 이름은 가격과 홍보 문구를 뺀 Apify Store 제목입니다. 저희 실행을 먼저,
+나머지를 비용순으로 나열했습니다.
+
+| Actor                                     | 개발자         | 유용한 프로필 | 유용한 프로필당 비용 | 초당 유용한 프로필 | 공개 실행                                                                                                                                                                                         |
+| ----------------------------------------- | -------------- | ------------: | -------------------: | -----------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| X Follower Scraper                        | xquik          |         1,000 |            $0.000155 |               68.5 | [실행 보기](https://console.apify.com/view/runs/X8Vnx8Ytuk5AzWiK7)                                                                                                                                |
+| X Follower Scraper                        | xquik          |           999 |            $0.000155 |               38.4 | [실행 보기](https://console.apify.com/view/runs/lPqjfUn8767FpIDis)                                                                                                                                |
+| X (Twitter) Scraper                       | b2b_leads      |           286 |            $0.000388 |                3.1 | [실행 보기](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                                |
+| Twitter (X) Follower Scraper              | kaitoeasyapi   |           356 |            $0.000506 |               21.9 | [실행 보기](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                                |
+| X (Twitter) Followers Scraper             | api-ninja      |           350 |            $0.000809 |                7.0 | [실행 보기](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                                |
+| Scweet Twitter/X Scraper                  | altimis        |           332 |            $0.000922 |                1.1 | [실행 보기](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)                                                                                                                                |
+| Fast Twitter (X) User Scraper API         | apidojo        |           323 |            $0.001160 |                7.3 | [실행 보기](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)                                                                                                                                |
+| Twitter (X) Scraper                       | atomus         |           323 |            $0.001272 |                6.2 | [실행 보기](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)                                                                                                                                |
+| Twitter / X API Flat & Simple             | practicaltools |           283 |            $0.002036 |                6.5 | [실행 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb), [실행 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK), [실행 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX) |
+| Twitter Scraper                           | maximedupre    |           320 |            $0.002192 |                2.1 | [실행 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [실행 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [실행 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
+| X (Twitter) Followers & Following Scraper | seemuapps      |           286 |            $0.003504 |                3.9 | [실행 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [실행 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [실행 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
+
+- 저희 실행은 각각 프로필 1,000개를 $0.00015에 청구했고, Apify 사용량이
+  더해집니다.
+- Twitter (X) Follower Scraper는 계정당 한도 334개에 대해 프로필 1,200개를
+  반환했습니다.
+
 ## X Follower Scraper로 팔로워 데이터를 스크랩하는 방법
 
 ### 1. 프로필이나 리스트 URL 붙여넣기
