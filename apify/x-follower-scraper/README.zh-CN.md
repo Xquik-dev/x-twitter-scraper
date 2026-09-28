@@ -116,70 +116,32 @@ Apify 默认超时时间为 `0`，运行没有时间限制。Actor 会持续运�
 
 ## 基准测试
 
-我们于 2026-09-28 测试了 X Follower Scraper 和其他 9 个关注者 Actor。所有 Actor 都读取了同样 3 个账号的关注者。X Follower Scraper 每个有用主页的成本最低。它每秒交付的有用主页也最多。每次运行都已公开。打开一次运行，即可查看其输入、日志和数据集。
+X Follower Scraper 在成本和速度上胜过其他 9 个关注者 Actor。
+它的中位数行有 28 个字段，是其他 Actor 中位数的 1.9 倍。
 
-大多数其他 Actor 会在过滤或去重之前收费。X Follower Scraper 只对已交付、唯一且符合过滤条件的主页收费。因此，每个可用主页你都付得更少。
+| Actor                                                  | 有用主页 | 每个有用主页成本 | 每秒有用主页 | 每行字段数 | 公开运行                                                                                                                                                                                          |
+| ------------------------------------------------------ | -------: | ---------------: | -----------: | ---------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| xquik/x-follower-scraper                               |    1,000 |        $0.000155 |         68.5 |         27 | [查看运行](https://console.apify.com/view/runs/X8Vnx8Ytuk5AzWiK7)                                                                                                                                 |
+| xquik/x-follower-scraper                               |      999 |        $0.000155 |         38.4 |         28 | [查看运行](https://console.apify.com/view/runs/lPqjfUn8767FpIDis)                                                                                                                                 |
+| b2b_leads/X-Real-Time-Data                             |      286 |        $0.000388 |          3.1 |         21 | [查看运行](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                                 |
+| kaitoeasyapi/premium-x-follower-scraper-following-data |      356 |        $0.000506 |         21.9 |         50 | [查看运行](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                                 |
+| api-ninja/x-twitter-followers-scraper                  |      350 |        $0.000809 |          7.0 |          8 | [查看运行](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                                 |
+| altimis/scweet                                         |      332 |        $0.000922 |          1.1 |         21 | [查看运行](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)                                                                                                                                 |
+| apidojo/twitter-user-scraper                           |      323 |        $0.001160 |          7.3 |         25 | [查看运行](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)                                                                                                                                 |
+| atomus/twitter-scraper                                 |      323 |        $0.001272 |          6.2 |         13 | [查看运行](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)                                                                                                                                 |
+| practicaltools/cheap-simple-twitter-api                |      283 |        $0.002036 |          6.5 |          4 | [运行 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb), [运行 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK), [运行 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX) |
+| maximedupre/twitter-scraper                            |      320 |        $0.002192 |          2.1 |         15 | [运行 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [运行 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [运行 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
+| seemuapps/x-followers-following-scraper                |      286 |        $0.003504 |          3.9 |          9 | [运行 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [运行 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [运行 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
 
-### 基准测试输入
-
-我们的 2 次运行使用了以下输入：
-
-```json
-{
-  "twitterHandles": ["NASA", "SpaceX", "esa"],
-  "relation": "followers",
-  "dedupeAcrossTargets": true,
-  "minFollowers": 1,
-  "minStatuses": 1,
-  "minAccountAgeDays": 30,
-  "maxItemsPerTarget": 334,
-  "maxItems": 1000
-}
-```
-
-- 其他每个 Actor 都通过自己的字段读取了 NASA、SpaceX 和 esa 的关注者。
-- 每个 Actor 都为每个账号请求 334 个关注者；如果不支持按账号设上限，则请求 1,000 个。
-- 有 3 个 Actor 对每个账号各运行 1 次，每次上限为 334。
-- 各次运行逐一进行，全部使用 Bronze 等级。
-- 我们的 2 次运行分别在最前和最后进行。
-
-### 我们如何为每次运行评分
-
-- 即使运行多次返回同一个主页，也只计 1 次。
-- 有用主页至少有 1 个关注者和 1 条帖子。
-- 截至运行当天，其账号已注册至少 30 天。
-- 这 3 个账号本身的主页一律不算有用主页。
-- 如果某行缺少计数或注册日期，则读取其他 Actor 对同一主页的行。
-- 如果所有行都没有注册日期，检查会从主页 ID 中读取。
-- 如果所有行都没有某个主页的计数，该主页不算有用主页。
-- 每个有用主页的成本等于客户总支出除以有用主页数。
-- 支出按 Bronze 价格计算该次运行的每个计费事件。
-- 我们的支出还加上该次运行的 Apify 使用费，因为这部分由客户支付。
-- 其他 Actor 已将 Apify 使用费计入其价格。
-- 每秒有用主页数等于有用主页数除以总运行时间（秒）。
-- 总运行时间从运行在 Apify 上开始算起，到运行结束为止。
-- 含 3 次运行的行会将这 3 次运行的支出、有用主页数和总运行时间相加。
-
-### 基准测试结果
-
-Actor 名称是去掉价格和宣传语后的 Apify Store 标题。我们的运行排在最前，其余按成本排序。
-
-| Actor                                     | 开发者         | 有用主页 | 每个有用主页成本 | 每秒有用主页 | 公开运行                                                                                                                                                                                          |
-| ----------------------------------------- | -------------- | -------: | ---------------: | -----------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| X Follower Scraper                        | xquik          |    1,000 |        $0.000155 |         68.5 | [查看运行](https://console.apify.com/view/runs/X8Vnx8Ytuk5AzWiK7)                                                                                                                                 |
-| X Follower Scraper                        | xquik          |      999 |        $0.000155 |         38.4 | [查看运行](https://console.apify.com/view/runs/lPqjfUn8767FpIDis)                                                                                                                                 |
-| X (Twitter) Scraper                       | b2b_leads      |      286 |        $0.000388 |          3.1 | [查看运行](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                                 |
-| Twitter (X) Follower Scraper              | kaitoeasyapi   |      356 |        $0.000506 |         21.9 | [查看运行](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                                 |
-| X (Twitter) Followers Scraper             | api-ninja      |      350 |        $0.000809 |          7.0 | [查看运行](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                                 |
-| Scweet Twitter/X Scraper                  | altimis        |      332 |        $0.000922 |          1.1 | [查看运行](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)                                                                                                                                 |
-| Fast Twitter (X) User Scraper API         | apidojo        |      323 |        $0.001160 |          7.3 | [查看运行](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)                                                                                                                                 |
-| Twitter (X) Scraper                       | atomus         |      323 |        $0.001272 |          6.2 | [查看运行](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)                                                                                                                                 |
-| Twitter / X API Flat & Simple             | practicaltools |      283 |        $0.002036 |          6.5 | [运行 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb), [运行 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK), [运行 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX) |
-| Twitter Scraper                           | maximedupre    |      320 |        $0.002192 |          2.1 | [运行 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [运行 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [运行 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
-| X (Twitter) Followers & Following Scraper | seemuapps      |      286 |        $0.003504 |          3.9 | [运行 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [运行 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [运行 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
-
-- 我们的每次运行按每个 $0.00015 对 1,000 个主页计费，另加 Apify 使用费。
-- Twitter (X) Follower Scraper 在每个账号上限为 334 个时返回了 1,200 个主页。
+每个 Actor 都在 2026-09-28 读取了 NASA、SpaceX 和 esa 的关注者。
+所有运行都使用 Bronze 等级。
+有用主页是唯一的，账号至少 30 天，至少有 1 个关注者和 1 条帖子。
+成本是客户为每个有用主页支付的总费用。
+我们的成本包含客户支付的 Apify 平台使用费。
+含 3 次运行的行会把它们相加。
+每行字段数是非空字段数的中位数，包括嵌套字段。
+一个列表计为 1 个字段。
+打开一次运行，即可查看其输入、日志和数据集。
 
 ## 如何使用 X Follower Scraper 抓取关注者数据？
 
@@ -419,6 +381,7 @@ Store 运行使用 Actor 的 `latest` 构建配置。API 客户端应省略构�
 
 ## 使用场景
 
+- 用每个主页更多的字段补全潜在客户数据并构建研究数据集。我们的中位数行在 2026-09-28 有 28 个字段。这是其他 9 个 Actor 中位数的 1.9 倍。
 - 导出竞争对手的关注者用于潜在客户调研。
 - 比较你的账号、竞争对手和公众人物之间的受众。
 - 通过关注者数量和认证状态过滤，找到符合条件的主页。

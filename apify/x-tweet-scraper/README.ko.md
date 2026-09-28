@@ -228,94 +228,35 @@ URL이나 사용자 이름을 확인하고 사용 가능한 공개 계정을 선
 
 ## 벤치마크
 
-2026-09-27에 X Tweet Scraper와 다른 트윗 Actor 11개를 테스트했습니다. 모두 같은
-검색을 실행했습니다. 유용한 트윗당 비용은 X Tweet Scraper가 가장 낮았습니다.
-초당 전달한 유용한 트윗도 가장 많았습니다. 모든 실행은 공개되어 있습니다. 실행을
-열어 입력, 로그 & 데이터셋을 확인하세요.
+X Tweet Scraper는 비용 & 속도에서 다른 트윗 Actor 11개를 앞섰습니다. 중앙값
+행에는 필드가 63개 있었고, 다른 Actor 중앙값의 2배였습니다.
 
-다른 Actor 대부분은 필터링이나 중복 제거 전에 요금을 부과합니다. X Tweet
-Scraper는 전달되고, 고유하며, 필터에 맞는 트윗에만 요금을 부과합니다. 그래서 쓸
-수 있는 트윗 1개당 더 적게 냅니다.
+| Actor                                                             | 유용한 트윗 | 유용한 트윗당 비용 | 초당 유용한 트윗 | 행당 필드 수 | 공개 실행                                                          |
+| ----------------------------------------------------------------- | ----------: | -----------------: | ---------------: | -----------: | ------------------------------------------------------------------ |
+| xquik/x-tweet-scraper                                             |         882 |          $0.000177 |             27.0 |           63 | [실행 보기](https://console.apify.com/view/runs/JJfsKql7EdiXsSX3T) |
+| xquik/x-tweet-scraper                                             |         868 |          $0.000179 |             27.4 |           63 | [실행 보기](https://console.apify.com/view/runs/58ye04whvCP63nmmW) |
+| xquik/x-tweet-scraper                                             |         869 |          $0.000179 |             25.8 |           63 | [실행 보기](https://console.apify.com/view/runs/ytoTpYCca2MShp4gh) |
+| xquik/x-tweet-scraper                                             |         879 |          $0.000177 |             29.1 |           63 | [실행 보기](https://console.apify.com/view/runs/CrJLYvAIG0Ji666rr) |
+| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |         813 |          $0.000185 |             10.5 |           36 | [실행 보기](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
+| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |         805 |          $0.000187 |             10.6 |           36 | [실행 보기](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
+| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |         805 |          $0.000187 |             10.7 |           36 | [실행 보기](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
+| kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest |         880 |          $0.000250 |              9.1 |           46 | [실행 보기](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2) |
+| scraper_one/x-posts-search                                        |         804 |          $0.000314 |              3.3 |           14 | [실행 보기](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0) |
+| danek/twitter-scraper                                             |         807 |          $0.000347 |              5.0 |           27 | [실행 보기](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W) |
+| tweetapi/twitter-x-search-scraper                                 |         337 |          $0.000374 |              2.6 |           28 | [실행 보기](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb) |
+| api-ninja/x-twitter-advanced-search                               |         837 |          $0.000430 |              7.4 |           28 | [실행 보기](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib) |
+| apidojo/twitter-scraper-lite                                      |         251 |          $0.000494 |             12.9 |           54 | [실행 보기](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta) |
+| apidojo/tweet-scraper                                             |         481 |          $0.000832 |              7.8 |           55 | [실행 보기](https://console.apify.com/view/runs/PydoBgS1YRblg29bB) |
+| xtdata/twitter-x-scraper                                          |       1,378 |          $0.001168 |             11.9 |           67 | [실행 보기](https://console.apify.com/view/runs/U91dRXEvKvqu41aop) |
+| seemuapps/x-tweet-scraper                                         |         805 |          $0.001242 |              6.9 |           24 | [실행 보기](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
+| maximedupre/twitter-scraper                                       |          46 |          $0.002846 |              0.3 |           31 | [실행 보기](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
 
-### 벤치마크 입력
-
-저희 실행 4회는 이 입력을 사용했습니다.
-
-```json
-{
-  "searchTerms": ["SpaceX Starship", "Starship launch", "#Starship"],
-  "queryType": "Latest + Top",
-  "lang": "en",
-  "tweetTypes": { "excludeReplies": true, "excludeRetweets": true },
-  "min_faves": 10,
-  "since": "2026-09-01_00:00:00_UTC",
-  "until": "2026-09-27_00:00:00_UTC",
-  "includeSearchTerms": true,
-  "maxItems": 1000
-}
-```
-
-- 다른 Actor는 각자의 필드로 같은 검색어, 필터 & 날짜를 받았습니다.
-- 쿼리를 1개만 받는 Actor는 3개 검색어를 OR로 묶어 받았습니다.
-- X (Twitter) Posts Search는 쿼리를 100자로 제한해서 더 짧은 쿼리를
-  받았습니다.
-- 각 Actor는 트윗 1,000개를 요청했고, 최대치가 더 낮으면 그 값을 요청했습니다.
-- 실행은 1회씩 차례로 진행했고, 모두 Bronze 등급을 사용했습니다.
-- 비용이 가장 가까운 Actor는 저희 실행 사이에 3회 실행했습니다.
-
-### 실행 평가 방법
-
-- 실행이 같은 트윗을 여러 번 반환해도 그 트윗은 1번만 셉니다.
-- 유용한 트윗은 영어입니다.
-- 답글이나 리트윗이 아니며 좋아요가 10개 이상입니다.
-- 멘션으로 시작한다고 해서 답글이 되지는 않습니다.
-- 2026-09-01부터 2026-09-26(UTC) 사이에 게시되었습니다.
-- 검색어 1개 이상과 일치합니다.
-- 일치란 검색어의 모든 단어가 본문, 인용 트윗, 작성자 이름 중 하나에 있다는
-  뜻입니다.
-- 대소문자는 구분하지 않으며, launch는 launches에도 일치합니다.
-- 본문의 링크는 일치 판정에 쓰지 않습니다.
-- Actor가 긴 본문을 자르면, 검사는 전체 게시물을 읽습니다.
-- 언어나 답글 정보가 없으면 같은 트윗의 다른 Actor 행에서 읽습니다.
-- 유용한 트윗당 비용은 고객의 총지출을 유용한 트윗 수로 나눈 값입니다.
-- 지출은 실행에서 청구된 모든 이벤트를 Bronze 가격으로 계산합니다.
-- 저희 지출에는 실행의 Apify 사용량을 더합니다. 고객이 직접 내기 때문입니다.
-- 다른 Actor는 Apify 사용량을 가격에 포함합니다.
-- 초당 유용한 트윗은 유용한 트윗 수를 총 실행 시간(초)으로 나눈 값입니다.
-- 총 실행 시간은 Apify에서 실행이 시작된 때부터 끝날 때까지입니다.
-
-### 벤치마크 결과
-
-Actor 이름은 홍보 문구를 뺀 Apify Store 제목입니다. 저희 실행을 먼저, 나머지를
-비용순으로 나열했습니다.
-
-| Actor                               | 개발자       | 유용한 트윗 | 유용한 트윗당 비용 | 초당 유용한 트윗 | 공개 실행                                                          |
-| ----------------------------------- | ------------ | ----------: | -----------------: | ---------------: | ------------------------------------------------------------------ |
-| X Tweet Scraper                     | xquik        |         882 |          $0.000177 |             27.0 | [실행 보기](https://console.apify.com/view/runs/JJfsKql7EdiXsSX3T) |
-| X Tweet Scraper                     | xquik        |         868 |          $0.000179 |             27.4 | [실행 보기](https://console.apify.com/view/runs/58ye04whvCP63nmmW) |
-| X Tweet Scraper                     | xquik        |         869 |          $0.000179 |             25.8 | [실행 보기](https://console.apify.com/view/runs/ytoTpYCca2MShp4gh) |
-| X Tweet Scraper                     | xquik        |         879 |          $0.000177 |             29.1 | [실행 보기](https://console.apify.com/view/runs/CrJLYvAIG0Ji666rr) |
-| Twitter (X) Scraper                 | scrapesmith  |         813 |          $0.000185 |             10.5 | [실행 보기](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
-| Twitter (X) Scraper                 | scrapesmith  |         805 |          $0.000187 |             10.6 | [실행 보기](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
-| Twitter (X) Scraper                 | scrapesmith  |         805 |          $0.000187 |             10.7 | [실행 보기](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
-| Tweet Scraper                       | kaitoeasyapi |         880 |          $0.000250 |              9.1 | [실행 보기](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2) |
-| X (Twitter) Posts Search            | scraper_one  |         804 |          $0.000314 |              3.3 | [실행 보기](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0) |
-| Twitter (X) Scraper, 기본 한도      | scrapesmith  |         124 |          $0.000326 |              5.3 | [실행 보기](https://console.apify.com/view/runs/Mc2fDehRqKqnEQAS7) |
-| Twitter Scraper                     | danek        |         807 |          $0.000347 |              5.0 | [실행 보기](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W) |
-| Twitter (X) Search Scraper API      | tweetapi     |         337 |          $0.000374 |              2.6 | [실행 보기](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb) |
-| X (Twitter) Advanced Search Scraper | api-ninja    |         837 |          $0.000430 |              7.4 | [실행 보기](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib) |
-| Twitter (X.com) Scraper Unlimited   | apidojo      |         251 |          $0.000494 |             12.9 | [실행 보기](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta) |
-| Tweet Scraper V2                    | apidojo      |         481 |          $0.000832 |              7.8 | [실행 보기](https://console.apify.com/view/runs/PydoBgS1YRblg29bB) |
-| X.com Twitter API Scraper           | xtdata       |       1,378 |          $0.001168 |             11.9 | [실행 보기](https://console.apify.com/view/runs/U91dRXEvKvqu41aop) |
-| X (Twitter) Tweet Scraper           | seemuapps    |         805 |          $0.001242 |              6.9 | [실행 보기](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
-| Twitter Scraper                     | maximedupre  |          46 |          $0.002846 |              0.3 | [실행 보기](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
-
-- 저희 실행은 각각 결과 1,000개를 $0.00015에 청구했고, Apify 사용량이
-  더해집니다.
-- 기본 한도 행은 해당 Actor의 기본값인 검색어당 트윗 100개를 유지했습니다.
-- Twitter (X) Search Scraper API는 실행당 최대 500개의 트윗을 반환합니다.
-- X.com Twitter API Scraper는 한도 1,000개에 대해 트윗 2,011개를 반환했습니다.
-- maximedupre 실행은 트윗 187개 이후 실패했습니다.
+모든 Actor는 2026-09-27에 같은 검색 & 필터로 실행했습니다. 모든 실행은 Bronze
+등급을 사용했습니다. 유용한 트윗은 좋아요가 10개 이상인 고유한 영어 원본
+게시물입니다. 비용은 유용한 트윗 1개당 고객의 총지출입니다. 저희 비용에는 고객이
+내는 Apify 사용량이 포함됩니다. 행당 필드 수는 비어 있지 않은 필드 수의
+중앙값이며, 중첩 필드도 포함합니다. 목록은 필드 1개로 셉니다. 실행을 열어 입력,
+로그 & 데이터셋을 확인하세요.
 
 ## X Tweet Scraper로 트윗 데이터를 스크랩하는 방법
 
@@ -699,6 +640,9 @@ Apify 데이터셋에서 JSON, CSV, Excel, HTML로 내보낼 수 있습니다.
 
 ## 사용 사례
 
+- 트윗당 더 많은 필드로 리서치, 데이터 보강, 분석 & AI 학습을 지원하세요. 저희
+  중앙값 행에는 2026-09-27에 필드가 63개 있었습니다. 다른 Actor 11개 중앙값의
+  2배입니다.
 - 트윗 전반에서 브랜드 감정을 추적하세요.
 - 경쟁사 게시물과 업계 용어를 모니터링하세요.
 - 공개 대화에서 잠재 고객을 찾으세요.

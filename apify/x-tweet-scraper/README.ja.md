@@ -156,85 +156,29 @@ Xが実行できない検索は、失敗として数えられます。このよ�
 
 ## ベンチマーク
 
-2026-09-27に、X Tweet Scraperと他の11個のポスト用Actorをテストしました。すべて同じ検索を実行しました。有効なポスト1件あたりのコストは、X Tweet Scraperが最も低くなりました。1秒あたりに配信した有効なポストの数も最多でした。すべての実行は公開されています。実行を開くと、入力、ログ、データセットを確認できます。
+X Tweet Scraperは、コストと速度で他の11個のポスト用Actorを上回りました。中央値の行には63個のフィールドがあり、他のActorの中央値の2倍でした。
 
-他のActorの多くは、フィルタリングや重複排除の前に課金します。X Tweet Scraperは、配信済みでユニークかつフィルタ条件に一致するポストにのみ課金します。そのため、使えるポスト1件あたりの支払いが少なくなります。
+| Actor                                                             | 有効なポスト | 有効なポスト1件あたりのコスト | 1秒あたりの有効なポスト | 1行あたりのフィールド数 | 公開された実行                                                      |
+| ----------------------------------------------------------------- | -----------: | ----------------------------: | ----------------------: | ----------------------: | ------------------------------------------------------------------- |
+| xquik/x-tweet-scraper                                             |          882 |                     $0.000177 |                    27.0 |                      63 | [実行を見る](https://console.apify.com/view/runs/JJfsKql7EdiXsSX3T) |
+| xquik/x-tweet-scraper                                             |          868 |                     $0.000179 |                    27.4 |                      63 | [実行を見る](https://console.apify.com/view/runs/58ye04whvCP63nmmW) |
+| xquik/x-tweet-scraper                                             |          869 |                     $0.000179 |                    25.8 |                      63 | [実行を見る](https://console.apify.com/view/runs/ytoTpYCca2MShp4gh) |
+| xquik/x-tweet-scraper                                             |          879 |                     $0.000177 |                    29.1 |                      63 | [実行を見る](https://console.apify.com/view/runs/CrJLYvAIG0Ji666rr) |
+| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |          813 |                     $0.000185 |                    10.5 |                      36 | [実行を見る](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
+| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |          805 |                     $0.000187 |                    10.6 |                      36 | [実行を見る](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
+| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |          805 |                     $0.000187 |                    10.7 |                      36 | [実行を見る](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
+| kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest |          880 |                     $0.000250 |                     9.1 |                      46 | [実行を見る](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2) |
+| scraper_one/x-posts-search                                        |          804 |                     $0.000314 |                     3.3 |                      14 | [実行を見る](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0) |
+| danek/twitter-scraper                                             |          807 |                     $0.000347 |                     5.0 |                      27 | [実行を見る](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W) |
+| tweetapi/twitter-x-search-scraper                                 |          337 |                     $0.000374 |                     2.6 |                      28 | [実行を見る](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb) |
+| api-ninja/x-twitter-advanced-search                               |          837 |                     $0.000430 |                     7.4 |                      28 | [実行を見る](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib) |
+| apidojo/twitter-scraper-lite                                      |          251 |                     $0.000494 |                    12.9 |                      54 | [実行を見る](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta) |
+| apidojo/tweet-scraper                                             |          481 |                     $0.000832 |                     7.8 |                      55 | [実行を見る](https://console.apify.com/view/runs/PydoBgS1YRblg29bB) |
+| xtdata/twitter-x-scraper                                          |        1,378 |                     $0.001168 |                    11.9 |                      67 | [実行を見る](https://console.apify.com/view/runs/U91dRXEvKvqu41aop) |
+| seemuapps/x-tweet-scraper                                         |          805 |                     $0.001242 |                     6.9 |                      24 | [実行を見る](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
+| maximedupre/twitter-scraper                                       |           46 |                     $0.002846 |                     0.3 |                      31 | [実行を見る](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
 
-### ベンチマークの入力
-
-当社の4回の実行では、次の入力を使いました。
-
-```json
-{
-  "searchTerms": ["SpaceX Starship", "Starship launch", "#Starship"],
-  "queryType": "Latest + Top",
-  "lang": "en",
-  "tweetTypes": { "excludeReplies": true, "excludeRetweets": true },
-  "min_faves": 10,
-  "since": "2026-09-01_00:00:00_UTC",
-  "until": "2026-09-27_00:00:00_UTC",
-  "includeSearchTerms": true,
-  "maxItems": 1000
-}
-```
-
-- 他のActorには、それぞれの入力欄で同じ語句、フィルタ、日付を渡しました。
-- クエリを1つだけ受け付けるActorには、3つの語句をORでつないで渡しました。
-- X (Twitter) Posts Searchはクエリの上限が100文字のため、短くしたクエリを渡しました。
-- 各Actorは1,000件のポストを要求しました。上限がそれより低いActorは、その上限を要求しました。
-- 実行は1回ずつ順番に行い、すべてBronzeティアを使いました。
-- コストが最も近いActorは、当社の実行の合間に3回実行しました。
-
-### 各実行の評価方法
-
-- 実行が同じポストを複数回返しても、そのポストは1件として数えます。
-- 有効なポストは英語です。
-- リプライやリポストではなく、いいねが10件以上あります。
-- メンションで始まるだけのポストは、リプライとして扱いません。
-- 投稿日時は2026-09-01から2026-09-26(UTC)の間です。
-- 少なくとも1つの検索語句に一致します。
-- 一致とは、語句のすべての単語が本文、引用ポスト、投稿者名のいずれかに含まれることです。
-- 大文字と小文字は区別しません。launchはlaunchesにも一致します。
-- 本文中のリンクは一致の判定に使いません。
-- Actorが長い本文を切り詰めている場合は、ポスト全文で判定します。
-- 言語やリプライの情報がない行は、同じポストの他のActorの行で補います。
-- 有効なポスト1件あたりのコストは、顧客の総支出を有効なポスト数で割った値です。
-- 支出は、実行で課金されたすべてのイベントをBronzeの価格で数えます。
-- 当社の支出には、実行のApify利用料を加えます。当社の顧客が支払うためです。
-- 他のActorは、Apify利用料を価格に含めています。
-- 1秒あたりの有効なポストは、有効なポスト数を経過時間(秒)で割った値です。
-- 経過時間は、Apify上での実行開始から終了までの時間です。
-
-### ベンチマーク結果
-
-Actor名は、キャッチコピーを除いたApify Storeのタイトルです。当社の実行を先に、その他をコスト順に並べています。
-
-| Actor                               | 開発者       | 有効なポスト | 有効なポスト1件あたりのコスト | 1秒あたりの有効なポスト | 公開された実行                                                      |
-| ----------------------------------- | ------------ | -----------: | ----------------------------: | ----------------------: | ------------------------------------------------------------------- |
-| X Tweet Scraper                     | xquik        |          882 |                     $0.000177 |                    27.0 | [実行を見る](https://console.apify.com/view/runs/JJfsKql7EdiXsSX3T) |
-| X Tweet Scraper                     | xquik        |          868 |                     $0.000179 |                    27.4 | [実行を見る](https://console.apify.com/view/runs/58ye04whvCP63nmmW) |
-| X Tweet Scraper                     | xquik        |          869 |                     $0.000179 |                    25.8 | [実行を見る](https://console.apify.com/view/runs/ytoTpYCca2MShp4gh) |
-| X Tweet Scraper                     | xquik        |          879 |                     $0.000177 |                    29.1 | [実行を見る](https://console.apify.com/view/runs/CrJLYvAIG0Ji666rr) |
-| Twitter (X) Scraper                 | scrapesmith  |          813 |                     $0.000185 |                    10.5 | [実行を見る](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
-| Twitter (X) Scraper                 | scrapesmith  |          805 |                     $0.000187 |                    10.6 | [実行を見る](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
-| Twitter (X) Scraper                 | scrapesmith  |          805 |                     $0.000187 |                    10.7 | [実行を見る](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
-| Tweet Scraper                       | kaitoeasyapi |          880 |                     $0.000250 |                     9.1 | [実行を見る](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2) |
-| X (Twitter) Posts Search            | scraper_one  |          804 |                     $0.000314 |                     3.3 | [実行を見る](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0) |
-| Twitter (X) Scraper、デフォルト上限 | scrapesmith  |          124 |                     $0.000326 |                     5.3 | [実行を見る](https://console.apify.com/view/runs/Mc2fDehRqKqnEQAS7) |
-| Twitter Scraper                     | danek        |          807 |                     $0.000347 |                     5.0 | [実行を見る](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W) |
-| Twitter (X) Search Scraper API      | tweetapi     |          337 |                     $0.000374 |                     2.6 | [実行を見る](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb) |
-| X (Twitter) Advanced Search Scraper | api-ninja    |          837 |                     $0.000430 |                     7.4 | [実行を見る](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib) |
-| Twitter (X.com) Scraper Unlimited   | apidojo      |          251 |                     $0.000494 |                    12.9 | [実行を見る](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta) |
-| Tweet Scraper V2                    | apidojo      |          481 |                     $0.000832 |                     7.8 | [実行を見る](https://console.apify.com/view/runs/PydoBgS1YRblg29bB) |
-| X.com Twitter API Scraper           | xtdata       |        1,378 |                     $0.001168 |                    11.9 | [実行を見る](https://console.apify.com/view/runs/U91dRXEvKvqu41aop) |
-| X (Twitter) Tweet Scraper           | seemuapps    |          805 |                     $0.001242 |                     6.9 | [実行を見る](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
-| Twitter Scraper                     | maximedupre  |           46 |                     $0.002846 |                     0.3 | [実行を見る](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
-
-- 当社の各実行は1,000件の結果を$0.00015で課金し、これにApify利用料が加わります。
-- デフォルト上限の行は、そのActorのデフォルトである語句ごとに100件のポストのままです。
-- Twitter (X) Search Scraper APIは、1回の実行で最大500件のポストを返します。
-- X.com Twitter API Scraperは、上限1,000件に対して2,011件のポストを返しました。
-- maximedupreの実行は、187件のポストの後に失敗しました。
+各Actorは2026-09-27に同じ検索と同じフィルタで実行しました。すべての実行でBronzeティアを使いました。有効なポストとは、10件以上のいいねがある、ユニークな英語のオリジナルポストです。コストは、有効なポスト1件あたりの顧客の総支払額です。当社のコストには、お客様が支払うApify使用料を含みます。1行あたりのフィールド数は、空でないフィールド数の中央値で、ネストされたフィールドも含みます。リストは1フィールドとして数えます。実行を開くと、入力、ログ、データセットを確認できます。
 
 ## X Tweet Scraperでポストデータをスクレイピングする方法
 
@@ -522,6 +466,7 @@ Apifyのデータセットから、JSON、CSV、Excel、HTMLとしてエクス�
 
 ## ユースケース
 
+- ポストごとにより多くのフィールドを使い、調査、データ補完、分析、AI学習に活用する。当社の中央値の行は、2026-09-27に63個のフィールドがありました。これは他の11個のActorの中央値の2倍です。
 - ポスト全体のブランド感情を追跡する。
 - 競合他社のポストや業界用語を監視する。
 - 公開の会話から見込み客を見つける。

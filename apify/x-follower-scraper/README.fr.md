@@ -185,82 +185,30 @@ celui autorisé par le budget.
 
 ## Benchmark
 
-Nous avons testé X Follower Scraper & 9 autres Actors d'abonnés le 2026-09-28.
-Tous ont lu les abonnés des 3 mêmes comptes. X Follower Scraper a coûté le moins
-par profil utile. Il a aussi livré le plus de profils utiles par seconde. Chaque
-run est public. Ouvrez un run pour vérifier son entrée, son log & son dataset.
+X Follower Scraper a battu 9 autres Actors d'abonnés sur le coût & la vitesse.
+Sa ligne médiane avait 28 champs, 1,9x la médiane des autres.
 
-La plupart des autres Actors facturent avant de filtrer ou de dédupliquer. X
-Follower Scraper ne facture que les profils livrés, uniques & conformes aux
-filtres. Vous payez donc moins pour chaque profil utilisable.
+| Actor                                                  | Profils utiles | Coût par profil utile | Profils utiles par seconde | Champs par ligne | Run public                                                                                                                                                                                     |
+| ------------------------------------------------------ | -------------: | --------------------: | -------------------------: | ---------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| xquik/x-follower-scraper                               |           1000 |             $0.000155 |                       68.5 |               27 | [Voir le run](https://console.apify.com/view/runs/X8Vnx8Ytuk5AzWiK7)                                                                                                                           |
+| xquik/x-follower-scraper                               |            999 |             $0.000155 |                       38.4 |               28 | [Voir le run](https://console.apify.com/view/runs/lPqjfUn8767FpIDis)                                                                                                                           |
+| b2b_leads/X-Real-Time-Data                             |            286 |             $0.000388 |                        3.1 |               21 | [Voir le run](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                           |
+| kaitoeasyapi/premium-x-follower-scraper-following-data |            356 |             $0.000506 |                       21.9 |               50 | [Voir le run](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                           |
+| api-ninja/x-twitter-followers-scraper                  |            350 |             $0.000809 |                        7.0 |                8 | [Voir le run](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                           |
+| altimis/scweet                                         |            332 |             $0.000922 |                        1.1 |               21 | [Voir le run](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)                                                                                                                           |
+| apidojo/twitter-user-scraper                           |            323 |             $0.001160 |                        7.3 |               25 | [Voir le run](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)                                                                                                                           |
+| atomus/twitter-scraper                                 |            323 |             $0.001272 |                        6.2 |               13 | [Voir le run](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)                                                                                                                           |
+| practicaltools/cheap-simple-twitter-api                |            283 |             $0.002036 |                        6.5 |                4 | [Run 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb), [Run 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK), [Run 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX) |
+| maximedupre/twitter-scraper                            |            320 |             $0.002192 |                        2.1 |               15 | [Run 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [Run 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [Run 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
+| seemuapps/x-followers-following-scraper                |            286 |             $0.003504 |                        3.9 |                9 | [Run 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [Run 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [Run 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
 
-### Entrée du benchmark
-
-Nos 2 runs ont utilisé cette entrée :
-
-```json
-{
-  "twitterHandles": ["NASA", "SpaceX", "esa"],
-  "relation": "followers",
-  "dedupeAcrossTargets": true,
-  "minFollowers": 1,
-  "minStatuses": 1,
-  "minAccountAgeDays": 30,
-  "maxItemsPerTarget": 334,
-  "maxItems": 1000
-}
-```
-
-- Les autres Actors ont lu les abonnés de NASA, SpaceX & esa via leurs propres
-  champs.
-- Chacun a demandé 334 abonnés par compte, ou 1000 sans cette limite.
-- 3 Actors ont tourné 1 fois par compte, chacun avec une limite de 334.
-- Les runs se sont suivis 1 par 1, tous au niveau Bronze.
-- Nos 2 runs sont passés en premier & en dernier.
-
-### Notre méthode de notation
-
-- Chaque profil compte 1 fois, même si le run le renvoie plusieurs fois.
-- Un profil utile a au moins 1 abonné & au moins 1 post.
-- Son compte a au moins 30 jours à la date du run.
-- Les profils des 3 comptes eux-mêmes ne comptent jamais comme utiles.
-- Les compteurs ou dates d'inscription manquants viennent de la ligne d'un autre
-  Actor pour ce profil.
-- Si aucune ligne n'a de date d'inscription, la vérification la lit dans l'ID du
-  profil.
-- Si aucune ligne n'a ses compteurs, le profil ne compte pas comme utile.
-- Le coût par profil utile divise la dépense totale par les profils utiles.
-- La dépense compte chaque événement facturé du run aux prix Bronze.
-- Notre dépense ajoute l'usage Apify du run, car nos clients le paient.
-- Les autres Actors incluent l'usage Apify dans leur prix.
-- Pour les profils utiles par seconde, on divise par la durée totale en
-  secondes.
-- La durée totale va du début à la fin du run sur Apify.
-- Une ligne à 3 runs additionne leur dépense, leurs profils utiles & leur durée
-  totale.
-
-### Résultats du benchmark
-
-Les noms d'Actor sont les titres de l'Apify Store sans prix ni slogan. Nos runs
-viennent d'abord, puis les autres par coût.
-
-| Actor                                     | Développeur    | Profils utiles | Coût par profil utile | Profils utiles par seconde | Run public                                                                                                                                                                                     |
-| ----------------------------------------- | -------------- | -------------: | --------------------: | -------------------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| X Follower Scraper                        | xquik          |           1000 |             $0.000155 |                       68.5 | [Voir le run](https://console.apify.com/view/runs/X8Vnx8Ytuk5AzWiK7)                                                                                                                           |
-| X Follower Scraper                        | xquik          |            999 |             $0.000155 |                       38.4 | [Voir le run](https://console.apify.com/view/runs/lPqjfUn8767FpIDis)                                                                                                                           |
-| X (Twitter) Scraper                       | b2b_leads      |            286 |             $0.000388 |                        3.1 | [Voir le run](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                           |
-| Twitter (X) Follower Scraper              | kaitoeasyapi   |            356 |             $0.000506 |                       21.9 | [Voir le run](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                           |
-| X (Twitter) Followers Scraper             | api-ninja      |            350 |             $0.000809 |                        7.0 | [Voir le run](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                           |
-| Scweet Twitter/X Scraper                  | altimis        |            332 |             $0.000922 |                        1.1 | [Voir le run](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)                                                                                                                           |
-| Fast Twitter (X) User Scraper API         | apidojo        |            323 |             $0.001160 |                        7.3 | [Voir le run](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)                                                                                                                           |
-| Twitter (X) Scraper                       | atomus         |            323 |             $0.001272 |                        6.2 | [Voir le run](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)                                                                                                                           |
-| Twitter / X API Flat & Simple             | practicaltools |            283 |             $0.002036 |                        6.5 | [Run 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb), [Run 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK), [Run 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX) |
-| Twitter Scraper                           | maximedupre    |            320 |             $0.002192 |                        2.1 | [Run 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [Run 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [Run 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
-| X (Twitter) Followers & Following Scraper | seemuapps      |            286 |             $0.003504 |                        3.9 | [Run 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [Run 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [Run 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
-
-- Nos runs ont facturé 1000 profils chacun à $0.00015, plus l'usage Apify.
-- Twitter (X) Follower Scraper a renvoyé 1200 profils pour une limite de 334 par
-  compte.
+Chaque Actor a lu les abonnés de NASA, SpaceX & esa le 2026-09-28. Tous les runs
+ont utilisé le niveau Bronze. Un profil utile est unique, a 30+ jours, 1+ abonné
+& 1+ post. Le coût est la dépense totale du client par profil utile. Le nôtre
+inclut l'usage Apify que payent nos clients. Une ligne avec 3 runs les
+additionne. Champs par ligne est la médiane des champs non vides, champs
+imbriqués compris. Une liste compte comme 1 champ. Ouvrez un run pour voir son
+entrée, son log & son dataset.
 
 ## Comment utiliser X Follower Scraper pour scraper des données d'abonnés ?
 
@@ -568,6 +516,9 @@ Exportez en JSON, CSV, Excel ou HTML depuis le dataset Apify.
 
 ## Cas d'usage
 
+- Enrichir des prospects & créer des datasets de recherche avec plus de champs
+  par profil. Le 2026-09-28, notre ligne médiane avait 28 champs. C'est 1,9x la
+  médiane de 9 autres Actors.
 - Exporter les abonnés concurrents pour la recherche de prospects.
 - Comparer les audiences entre votre compte, vos concurrents et des
   personnalités publiques.

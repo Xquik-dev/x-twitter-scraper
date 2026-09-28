@@ -255,96 +255,36 @@ límite. Las filas entregadas se facturan una sola vez.
 
 ## Prueba comparativa
 
-Probamos X Tweet Scraper & otros 11 Actores de tuits el 2026-09-27. Todos
-hicieron la misma búsqueda. X Tweet Scraper tuvo el menor costo por tuit útil.
-También entregó más tuits útiles por segundo. Cada ejecución es pública. Abre
-una ejecución para revisar su entrada, registro & conjunto de datos.
+X Tweet Scraper superó a otros 11 Actores de tuits en costo & velocidad. Su fila
+mediana tuvo 63 campos, 2x la mediana de los demás.
 
-La mayoría de los otros Actores cobran antes de filtrar o eliminar duplicados. X
-Tweet Scraper solo cobra tuits entregados, únicos y que cumplen los filtros. Así
-pagas menos por cada tuit que puedes usar.
+| Actor                                                             | Tuits útiles | Costo por tuit útil | Tuits útiles por segundo | Campos por fila | Ejecución pública                                                      |
+| ----------------------------------------------------------------- | -----------: | ------------------: | -----------------------: | --------------: | ---------------------------------------------------------------------- |
+| xquik/x-tweet-scraper                                             |          882 |           $0.000177 |                     27.0 |              63 | [Ver ejecución](https://console.apify.com/view/runs/JJfsKql7EdiXsSX3T) |
+| xquik/x-tweet-scraper                                             |          868 |           $0.000179 |                     27.4 |              63 | [Ver ejecución](https://console.apify.com/view/runs/58ye04whvCP63nmmW) |
+| xquik/x-tweet-scraper                                             |          869 |           $0.000179 |                     25.8 |              63 | [Ver ejecución](https://console.apify.com/view/runs/ytoTpYCca2MShp4gh) |
+| xquik/x-tweet-scraper                                             |          879 |           $0.000177 |                     29.1 |              63 | [Ver ejecución](https://console.apify.com/view/runs/CrJLYvAIG0Ji666rr) |
+| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |          813 |           $0.000185 |                     10.5 |              36 | [Ver ejecución](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
+| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |          805 |           $0.000187 |                     10.6 |              36 | [Ver ejecución](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
+| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |          805 |           $0.000187 |                     10.7 |              36 | [Ver ejecución](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
+| kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest |          880 |           $0.000250 |                      9.1 |              46 | [Ver ejecución](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2) |
+| scraper_one/x-posts-search                                        |          804 |           $0.000314 |                      3.3 |              14 | [Ver ejecución](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0) |
+| danek/twitter-scraper                                             |          807 |           $0.000347 |                      5.0 |              27 | [Ver ejecución](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W) |
+| tweetapi/twitter-x-search-scraper                                 |          337 |           $0.000374 |                      2.6 |              28 | [Ver ejecución](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb) |
+| api-ninja/x-twitter-advanced-search                               |          837 |           $0.000430 |                      7.4 |              28 | [Ver ejecución](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib) |
+| apidojo/twitter-scraper-lite                                      |          251 |           $0.000494 |                     12.9 |              54 | [Ver ejecución](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta) |
+| apidojo/tweet-scraper                                             |          481 |           $0.000832 |                      7.8 |              55 | [Ver ejecución](https://console.apify.com/view/runs/PydoBgS1YRblg29bB) |
+| xtdata/twitter-x-scraper                                          |         1378 |           $0.001168 |                     11.9 |              67 | [Ver ejecución](https://console.apify.com/view/runs/U91dRXEvKvqu41aop) |
+| seemuapps/x-tweet-scraper                                         |          805 |           $0.001242 |                      6.9 |              24 | [Ver ejecución](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
+| maximedupre/twitter-scraper                                       |           46 |           $0.002846 |                      0.3 |              31 | [Ver ejecución](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
 
-### Entrada de la prueba
-
-Nuestras 4 ejecuciones usaron esta entrada:
-
-```json
-{
-  "searchTerms": ["SpaceX Starship", "Starship launch", "#Starship"],
-  "queryType": "Latest + Top",
-  "lang": "en",
-  "tweetTypes": { "excludeReplies": true, "excludeRetweets": true },
-  "min_faves": 10,
-  "since": "2026-09-01_00:00:00_UTC",
-  "until": "2026-09-27_00:00:00_UTC",
-  "includeSearchTerms": true,
-  "maxItems": 1000
-}
-```
-
-- Los demás Actores recibieron los mismos términos, filtros & fechas en sus
-  campos.
-- Los Actores que aceptan 1 consulta recibieron los 3 términos unidos con OR.
-- Como X (Twitter) Posts Search admite hasta 100 caracteres, su consulta fue
-  más corta.
-- Cada Actor pidió 1000 tuits, o su propio máximo si era menor.
-- Las ejecuciones fueron de 1 en 1, todas en el nivel Bronze.
-- El Actor más cercano en costo corrió 3 veces, entre nuestras ejecuciones.
-
-### Cómo evaluamos cada ejecución
-
-- Cada tuit cuenta 1 vez, aunque la ejecución lo devuelva de nuevo.
-- Un tuit útil está en inglés.
-- No es una respuesta ni un retuit & tiene al menos 10 me gusta.
-- Empezar con una mención no convierte una publicación en respuesta.
-- Se publicó del 2026-09-01 al 2026-09-26 UTC.
-- Coincide con al menos 1 término de búsqueda.
-- El texto, la cita o el nombre del autor contienen cada palabra del término.
-- No importan las mayúsculas, & launch también coincide con launches.
-- Los enlaces del texto no cuentan para la coincidencia.
-- Si un Actor corta un texto largo, la revisión lee la publicación completa.
-- Si faltan el idioma o el dato de respuesta, se leen de otro Actor.
-- El costo por tuit útil divide el gasto total entre los tuits útiles.
-- El gasto cuenta cada evento cobrado de la ejecución a precios de Bronze.
-- Nuestro gasto suma el uso de Apify, porque lo pagan nuestros clientes.
-- Los demás Actores incluyen el uso de Apify en su precio.
-- Para los tuits útiles por segundo, dividimos entre el tiempo total en
-  segundos.
-- El tiempo total va del inicio al final de la ejecución en Apify.
-
-### Resultados de la prueba
-
-Los nombres de los Actores son los títulos de Apify Store sin su eslogan.
-Primero van nuestras ejecuciones, luego las demás por costo.
-
-| Actor                                      | Desarrollador | Tuits útiles | Costo por tuit útil | Tuits útiles por segundo | Ejecución pública                                                      |
-| ------------------------------------------ | ------------- | -----------: | ------------------: | -----------------------: | ---------------------------------------------------------------------- |
-| X Tweet Scraper                            | xquik         |          882 |           $0.000177 |                     27.0 | [Ver ejecución](https://console.apify.com/view/runs/JJfsKql7EdiXsSX3T) |
-| X Tweet Scraper                            | xquik         |          868 |           $0.000179 |                     27.4 | [Ver ejecución](https://console.apify.com/view/runs/58ye04whvCP63nmmW) |
-| X Tweet Scraper                            | xquik         |          869 |           $0.000179 |                     25.8 | [Ver ejecución](https://console.apify.com/view/runs/ytoTpYCca2MShp4gh) |
-| X Tweet Scraper                            | xquik         |          879 |           $0.000177 |                     29.1 | [Ver ejecución](https://console.apify.com/view/runs/CrJLYvAIG0Ji666rr) |
-| Twitter (X) Scraper                        | scrapesmith   |          813 |           $0.000185 |                     10.5 | [Ver ejecución](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
-| Twitter (X) Scraper                        | scrapesmith   |          805 |           $0.000187 |                     10.6 | [Ver ejecución](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
-| Twitter (X) Scraper                        | scrapesmith   |          805 |           $0.000187 |                     10.7 | [Ver ejecución](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
-| Tweet Scraper                              | kaitoeasyapi  |          880 |           $0.000250 |                      9.1 | [Ver ejecución](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2) |
-| X (Twitter) Posts Search                   | scraper_one   |          804 |           $0.000314 |                      3.3 | [Ver ejecución](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0) |
-| Twitter (X) Scraper, límite predeterminado | scrapesmith   |          124 |           $0.000326 |                      5.3 | [Ver ejecución](https://console.apify.com/view/runs/Mc2fDehRqKqnEQAS7) |
-| Twitter Scraper                            | danek         |          807 |           $0.000347 |                      5.0 | [Ver ejecución](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W) |
-| Twitter (X) Search Scraper API             | tweetapi      |          337 |           $0.000374 |                      2.6 | [Ver ejecución](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb) |
-| X (Twitter) Advanced Search Scraper        | api-ninja     |          837 |           $0.000430 |                      7.4 | [Ver ejecución](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib) |
-| Twitter (X.com) Scraper Unlimited          | apidojo       |          251 |           $0.000494 |                     12.9 | [Ver ejecución](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta) |
-| Tweet Scraper V2                           | apidojo       |          481 |           $0.000832 |                      7.8 | [Ver ejecución](https://console.apify.com/view/runs/PydoBgS1YRblg29bB) |
-| X.com Twitter API Scraper                  | xtdata        |         1378 |           $0.001168 |                     11.9 | [Ver ejecución](https://console.apify.com/view/runs/U91dRXEvKvqu41aop) |
-| X (Twitter) Tweet Scraper                  | seemuapps     |          805 |           $0.001242 |                      6.9 | [Ver ejecución](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
-| Twitter Scraper                            | maximedupre   |           46 |           $0.002846 |                      0.3 | [Ver ejecución](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
-
-- Nuestras ejecuciones cobraron 1000 resultados cada una a $0.00015, más el uso
-  de Apify.
-- La fila con límite predeterminado mantuvo los 100 tuits por término de ese
-  Actor.
-- Twitter (X) Search Scraper API devuelve como máximo 500 tuits por ejecución.
-- X.com Twitter API Scraper devolvió 2011 tuits con un límite de 1000.
-- La ejecución de maximedupre falló después de 187 tuits.
+Cada Actor hizo la misma búsqueda con los mismos filtros el 2026-09-27. Todas
+las ejecuciones usaron el nivel Bronze. Un tuit útil es una publicación original
+única en inglés con 10+ me gusta. El costo es el gasto total del cliente por
+tuit útil. El nuestro incluye el uso de Apify que pagan nuestros clientes.
+Campos por fila es la mediana de campos no vacíos, incluidos los anidados. Una
+lista cuenta como 1 campo. Abre una ejecución para ver su entrada, registro &
+conjunto de datos.
 
 ## ¿Cómo uso X Tweet Scraper para extraer datos de tuits?
 
@@ -769,6 +709,9 @@ Exporta como JSON, CSV, Excel o HTML desde el Dataset de Apify.
 
 ## Casos de uso
 
+- Alimenta investigación, enriquecimiento, analítica & entrenamiento de IA con
+  más campos por tuit. Nuestra fila mediana tuvo 63 campos el 2026-09-27. Es 2x
+  la mediana de otros 11 Actores.
 - Rastrear el sentimiento de marca en los tuits.
 - Monitorear publicaciones de la competencia y términos del sector.
 - Encontrar prospectos en conversaciones públicas.

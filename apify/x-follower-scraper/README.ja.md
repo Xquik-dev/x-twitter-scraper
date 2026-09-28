@@ -119,70 +119,23 @@ Apifyのデフォルトのタイムアウトは `0` です。実行に時間制�
 
 ## ベンチマーク
 
-2026-09-28に、X Follower Scraperと他の9個のフォロワー用Actorをテストしました。すべて同じ3つのアカウントのフォロワーを読み取りました。有効なプロフィール1件あたりのコストは、X Follower Scraperが最も低くなりました。1秒あたりに配信した有効なプロフィールの数も最多でした。すべての実行は公開されています。実行を開くと、入力、ログ、データセットを確認できます。
+X Follower Scraperは、コストと速度で他の9個のフォロワー用Actorを上回りました。中央値の行には28個のフィールドがあり、他のActorの中央値の1.9倍でした。
 
-他のActorの多くは、フィルタリングや重複排除の前に課金します。X Follower Scraperは、配信済みでユニークかつフィルター条件に一致するプロフィールにのみ課金します。そのため、使えるプロフィール1件あたりの支払いが少なくなります。
+| Actor                                                  | 有効なプロフィール | 有効なプロフィール1件あたりのコスト | 1秒あたりの有効なプロフィール | 1行あたりのフィールド数 | 公開された実行                                                                                                                                                                                 |
+| ------------------------------------------------------ | -----------------: | ----------------------------------: | ----------------------------: | ----------------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| xquik/x-follower-scraper                               |              1,000 |                           $0.000155 |                          68.5 |                      27 | [実行を見る](https://console.apify.com/view/runs/X8Vnx8Ytuk5AzWiK7)                                                                                                                            |
+| xquik/x-follower-scraper                               |                999 |                           $0.000155 |                          38.4 |                      28 | [実行を見る](https://console.apify.com/view/runs/lPqjfUn8767FpIDis)                                                                                                                            |
+| b2b_leads/X-Real-Time-Data                             |                286 |                           $0.000388 |                           3.1 |                      21 | [実行を見る](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                            |
+| kaitoeasyapi/premium-x-follower-scraper-following-data |                356 |                           $0.000506 |                          21.9 |                      50 | [実行を見る](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                            |
+| api-ninja/x-twitter-followers-scraper                  |                350 |                           $0.000809 |                           7.0 |                       8 | [実行を見る](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                            |
+| altimis/scweet                                         |                332 |                           $0.000922 |                           1.1 |                      21 | [実行を見る](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)                                                                                                                            |
+| apidojo/twitter-user-scraper                           |                323 |                           $0.001160 |                           7.3 |                      25 | [実行を見る](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)                                                                                                                            |
+| atomus/twitter-scraper                                 |                323 |                           $0.001272 |                           6.2 |                      13 | [実行を見る](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)                                                                                                                            |
+| practicaltools/cheap-simple-twitter-api                |                283 |                           $0.002036 |                           6.5 |                       4 | [実行1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb), [実行2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK), [実行3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX) |
+| maximedupre/twitter-scraper                            |                320 |                           $0.002192 |                           2.1 |                      15 | [実行1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [実行2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [実行3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
+| seemuapps/x-followers-following-scraper                |                286 |                           $0.003504 |                           3.9 |                       9 | [実行1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [実行2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [実行3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
 
-### ベンチマークの入力
-
-当社の2回の実行では、次の入力を使いました。
-
-```json
-{
-  "twitterHandles": ["NASA", "SpaceX", "esa"],
-  "relation": "followers",
-  "dedupeAcrossTargets": true,
-  "minFollowers": 1,
-  "minStatuses": 1,
-  "minAccountAgeDays": 30,
-  "maxItemsPerTarget": 334,
-  "maxItems": 1000
-}
-```
-
-- 他のActorは、それぞれの入力欄でNASA、SpaceX、esaのフォロワーを読み取りました。
-- 各Actorは、アカウントごとに334人のフォロワーを要求しました。アカウントごとの上限がないActorは、1,000人を要求しました。
-- 3つのActorは、アカウントごとに1回ずつ、上限334件で実行しました。
-- 実行は1回ずつ順番に行い、すべてBronzeティアを使いました。
-- 当社の2回の実行は、最初と最後に行いました。
-
-### 各実行の評価方法
-
-- 実行が同じプロフィールを複数回返しても、そのプロフィールは1件として数えます。
-- 有効なプロフィールには、フォロワーが1人以上、ポストが1件以上あります。
-- そのアカウントは、実行日の時点で作成から30日以上経っています。
-- 対象の3アカウント自体のプロフィールは、有効なプロフィールに数えません。
-- 各種カウントやアカウント作成日がない行は、同じプロフィールの他のActorの行で補います。
-- どの行にもアカウント作成日がない場合は、プロフィールIDから作成日を読み取ります。
-- どの行にも各種カウントがないプロフィールは、有効なプロフィールに数えません。
-- 有効なプロフィール1件あたりのコストは、顧客の総支出を有効なプロフィール数で割った値です。
-- 支出は、実行で課金されたすべてのイベントをBronzeの価格で数えます。
-- 当社の支出には、実行のApify利用料を加えます。当社の顧客が支払うためです。
-- 他のActorは、Apify利用料を価格に含めています。
-- 1秒あたりの有効なプロフィールは、有効なプロフィール数を経過時間(秒)で割った値です。
-- 経過時間は、Apify上での実行開始から終了までの時間です。
-- 3回の実行をまとめた行では、3回分の支出、有効なプロフィール数、経過時間を合計します。
-
-### ベンチマーク結果
-
-Actor名は、価格とキャッチコピーを除いたApify Storeのタイトルです。当社の実行を先に、その他をコスト順に並べています。
-
-| Actor                                     | 開発者         | 有効なプロフィール | 有効なプロフィール1件あたりのコスト | 1秒あたりの有効なプロフィール | 公開された実行                                                                                                                                                                                 |
-| ----------------------------------------- | -------------- | -----------------: | ----------------------------------: | ----------------------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| X Follower Scraper                        | xquik          |              1,000 |                           $0.000155 |                          68.5 | [実行を見る](https://console.apify.com/view/runs/X8Vnx8Ytuk5AzWiK7)                                                                                                                            |
-| X Follower Scraper                        | xquik          |                999 |                           $0.000155 |                          38.4 | [実行を見る](https://console.apify.com/view/runs/lPqjfUn8767FpIDis)                                                                                                                            |
-| X (Twitter) Scraper                       | b2b_leads      |                286 |                           $0.000388 |                           3.1 | [実行を見る](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                            |
-| Twitter (X) Follower Scraper              | kaitoeasyapi   |                356 |                           $0.000506 |                          21.9 | [実行を見る](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                            |
-| X (Twitter) Followers Scraper             | api-ninja      |                350 |                           $0.000809 |                           7.0 | [実行を見る](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                            |
-| Scweet Twitter/X Scraper                  | altimis        |                332 |                           $0.000922 |                           1.1 | [実行を見る](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)                                                                                                                            |
-| Fast Twitter (X) User Scraper API         | apidojo        |                323 |                           $0.001160 |                           7.3 | [実行を見る](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)                                                                                                                            |
-| Twitter (X) Scraper                       | atomus         |                323 |                           $0.001272 |                           6.2 | [実行を見る](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)                                                                                                                            |
-| Twitter / X API Flat & Simple             | practicaltools |                283 |                           $0.002036 |                           6.5 | [実行1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb), [実行2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK), [実行3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX) |
-| Twitter Scraper                           | maximedupre    |                320 |                           $0.002192 |                           2.1 | [実行1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [実行2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [実行3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
-| X (Twitter) Followers & Following Scraper | seemuapps      |                286 |                           $0.003504 |                           3.9 | [実行1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [実行2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [実行3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
-
-- 当社の各実行は1,000件のプロフィールを$0.00015で課金し、これにApify利用料が加わります。
-- Twitter (X) Follower Scraperは、アカウントごとの上限334件に対して1,200件のプロフィールを返しました。
+各Actorは2026-09-28に、NASA、SpaceX、esaのフォロワーを読み取りました。すべての実行でBronzeティアを使いました。有効なプロフィールとは、作成から30日以上で、フォロワーとポストが1件以上あるユニークなプロフィールです。コストは、有効なプロフィール1件あたりの顧客の総支払額です。当社のコストには、お客様が支払うApify使用料を含みます。3回の実行がある行は、それらを合計しています。1行あたりのフィールド数は、空でないフィールド数の中央値で、ネストされたフィールドも含みます。リストは1フィールドとして数えます。実行を開くと、入力、ログ、データセットを確認できます。
 
 ## X Follower Scraperを使ってフォロワーデータをスクレイピングする方法
 
@@ -422,6 +375,7 @@ Apifyのデータセットから、JSON、CSV、Excel、HTMLとしてエクス�
 
 ## ユースケース
 
+- プロフィールごとにより多くのフィールドを使い、リードを補完し、調査用データセットを作る。当社の中央値の行は、2026-09-28に28個のフィールドがありました。これは他の9個のActorの中央値の1.9倍です。
 - リード調査のために、競合のフォロワーをエクスポートする。
 - 自社アカウント、競合、著名人のオーディエンスを比較する。
 - フォロワー数と認証状態でフィルタリングし、一致するプロフィールを見つける。
