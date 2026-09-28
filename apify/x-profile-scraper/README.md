@@ -49,6 +49,9 @@ URLs. No X API key or login required.
 One target is enough. The global `maxItems` cap includes profiles and selected
 resources.
 
+Small runs that go well skip `run-report` & save Apify usage. Turn on
+`alwaysSaveRunRecords` to write it on every run.
+
 ## Output
 
 Profile rows use `resultType: "profile"`. Optional rows use `profileTweet`,

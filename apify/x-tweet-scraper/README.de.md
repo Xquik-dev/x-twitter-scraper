@@ -176,7 +176,8 @@ schreibt zusätzlich einen `run-report`-Datensatz. Dessen `estimatedChargeUsd`
 nutzt den Live-Pay-per-Event-Preis, den Apify dem Actor offenlegt. Runs mit
 einem Problem schreiben immer `run-report`. Das gilt auch für Abbrüche ohne
 Eingabe und mit ungültiger Eingabe. Ein kleiner Run ohne Probleme überspringt
-ihn & spart Apify-Nutzung. Run-Reports trennen Datendatensätze in `realRows` und
+ihn & spart Apify-Nutzung. Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem
+Run zu schreiben. Run-Reports trennen Datendatensätze in `realRows` und
 Diagnosen in `diagnosticRows`.
 
 Verstehe leere Ergebnisse, bevor du für einen weiteren Run zahlst. Das

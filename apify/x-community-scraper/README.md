@@ -17,7 +17,7 @@
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. X Community Scraper collects Community info, posts,
-searches, members & moderators. Every other Apify Actor charges before filtering
+searches, members & moderators. Most other Apify Actors charge before filtering
 or deduplicating. Xquik charges only for delivered, unique, filter-matching
 results.
 
@@ -48,6 +48,9 @@ key or login required.
 ```
 
 For keyword search, include `"search"` in `resources` and provide `query`.
+
+Small runs that go well skip `run-report` & save Apify usage. Turn on
+`alwaysSaveRunRecords` to write it on every run.
 
 ## Output
 

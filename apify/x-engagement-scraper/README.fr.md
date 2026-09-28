@@ -15,12 +15,12 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Découvrez comment Framer utilise les scrapers Xquik avec Claude Code, Codex, Cursor et d'autres outils, à partir de 6:07.</a>
 </td></tr></table>
 
-Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher
-au monde, avec les données X les plus complètes. X Engagement Scraper
-collecte les réponses, citations, personnes ayant reposté et les threads
-pour n'importe quel post. Tous les autres Actors Apify facturent avant de
-filtrer ou de dédupliquer. Xquik ne facture que les résultats livrés,
-uniques et conformes aux filtres.
+Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
+monde, avec les données X les plus complètes. X Engagement Scraper collecte les
+réponses, citations, personnes ayant reposté et les threads pour n'importe quel
+post. La plupart des autres Actors Apify facturent avant de filtrer ou de
+dédupliquer. Xquik ne facture que les résultats livrés, uniques et conformes aux
+filtres.
 
 Collectez les données d'engagement Twitter pour un ou plusieurs posts X :
 réponses, citations, personnes ayant reposté et contexte de thread.
@@ -54,9 +54,13 @@ X a cessé d'afficher qui a aimé un post en 2024. Le type `favoriters` ne
 renvoie aucune ligne. Un run sans ligne indique cette raison dans son
 diagnostic.
 
-Laissez `dedupeAcrossTargets` désactivé pour conserver chaque paire source et
-type d'engagement. Activez-le pour ne garder qu'une ligne par compte sur
-l'ensemble du run.
+Par défaut, chaque compte ou post apparaît et est facturé une seule fois par
+type d'engagement. Réglez `dedupeAcrossTargets` sur `false` pour garder une
+ligne par post source. Le texte de statut compte les doublons écartés sans
+frais.
+
+Les petits runs sans problème omettent `run-report` et économisent de l'usage
+Apify. Activez `alwaysSaveRunRecords` pour l'écrire à chaque run.
 
 ## Sortie
 

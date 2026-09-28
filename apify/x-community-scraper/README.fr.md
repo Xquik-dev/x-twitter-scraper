@@ -15,12 +15,11 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Découvrez comment Framer utilise les scrapers Xquik avec Claude Code, Codex, Cursor et d'autres outils, à partir de 6:07.</a>
 </td></tr></table>
 
-Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher
-au monde, avec les données X les plus complètes. X Community Scraper
-collecte les infos, posts, recherches, membres et modérateurs d'une
-Community. Tous les autres Actors Apify facturent avant de filtrer ou de
-dédupliquer. Xquik ne facture que les résultats livrés, uniques et conformes
-aux filtres.
+Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
+monde, avec les données X les plus complètes. X Community Scraper collecte les
+infos, posts, recherches, membres et modérateurs d'une Community. La plupart des
+autres Actors Apify facturent avant de filtrer ou de dédupliquer. Xquik ne
+facture que les résultats livrés, uniques et conformes aux filtres.
 
 Collectez les infos, posts, correspondances par mot-clé, membres et
 modérateurs d'une Community Twitter à partir d'URL ou d'ID de Community.
@@ -52,6 +51,9 @@ connexion requise.
 
 Pour la recherche par mot-clé, incluez `"search"` dans `resources` et
 fournissez `query`.
+
+Les petits runs sans problème omettent `run-report` et économisent de l'usage
+Apify. Activez `alwaysSaveRunRecords` pour l'écrire à chaque run.
 
 ## Sortie
 

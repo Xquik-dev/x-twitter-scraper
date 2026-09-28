@@ -280,20 +280,33 @@ satırları, ücretlendirilen analizleri ve bekleyen ücretleri ayırır.
 
 ## Çalıştırma özeti ve düz yanıtlar
 
-Her çalıştırma, anahtar-değer deposuna bir `analysis-summary` kaydı yazar. Sorun
-yaşayan veya büyük bir çalıştırma ayrıca `run-report` yazar. Bu rapor, özeti
-`results.analysisSummary` altında tekrarlar. Özet, analiz edilen, başarısız ve
-atlanan satırları sayar, etkileşimi toplar ve her soruyu özetler. `viral` bloğu
-`averageScore` değerini, her kararın sayısını & Actor'ın kaç satırı puanladığını
-veya puansız bıraktığını bildirir. Aynı blok, yukarıda anlatılan `calibration`,
-`accounts` & `leaderboard` bloklarını tutar. Puan soruları bir ortalama &
-etkileşim ağırlıklı bir ortalama bildirir. `reaction` bölünmesi, kaç tweet'in
-her tepkiye düştüğünü gösterir & `top`, her tepki için en çok etkileşim alan üç
-tweet'i listeler. Boş bir çalıştırma sıfır sayım & `null` bir ortalama bildirir.
-Her satır, bağlantı verdiği ana bilgisayar adlarını `sourceDomains`'te &
-metninde bulunan `$NVDA` gibi `cashtags`'i listeler. `monitor.baselineDatasetId`
-ayarlıysa özetin `monitor` bloğu karşılaştırma durumlarını sayar & 50'ye kadar
-değişen satırı listeler.
+Bir çalıştırma, 4 durumda anahtar-değer deposuna bir `analysis-summary` kaydı
+yazar:
+
+- Bir sorun yaşar veya büyüktür.
+- Bir serinin ilk çalıştırması olarak `baselineDatasetId` olmadan `monitor`
+  ayarlar.
+- Karşılaştırması değişen, yeni veya karşılaştırılamayan bir tweet bulur.
+- `alwaysSaveRunRecords` açıktır.
+
+Diğer çalıştırmalar bu kaydı atlar. Durum metinleri ana yanıtı belirtir, örneğin
+`Average Viral Score: 64.` Değişiklik bulmayan bir karşılaştırma
+`No change since the earlier run.` yazar. Sorun yaşayan veya büyük bir
+çalıştırma ayrıca `run-report` yazar. `alwaysSaveRunRecords` açık olan bir
+çalıştırma da yazar. `run-report`, özeti `results.analysisSummary` altında
+tekrarlar.
+
+Özet, analiz edilen, başarısız ve atlanan satırları sayar, etkileşimi toplar ve
+her soruyu özetler. `viral` bloğu `averageScore` değerini, her kararın sayısını
+& Actor'ın kaç satırı puanladığını veya puansız bıraktığını bildirir. Aynı blok,
+yukarıda anlatılan `calibration`, `accounts` & `leaderboard` bloklarını tutar.
+Puan soruları bir ortalama & etkileşim ağırlıklı bir ortalama bildirir.
+`reaction` bölünmesi, kaç tweet'in her tepkiye düştüğünü gösterir & `top`, her
+tepki için en çok etkileşim alan üç tweet'i listeler. Boş bir çalıştırma sıfır
+sayım & `null` bir ortalama bildirir. Her satır, bağlantı verdiği ana bilgisayar
+adlarını `sourceDomains`'te & metninde bulunan `$NVDA` gibi `cashtags`'i
+listeler. `monitor.baselineDatasetId` ayarlıysa özetin `monitor` bloğu
+karşılaştırma durumlarını sayar & 50'ye kadar değişen satırı listeler.
 
 Her sonuç satırı ayrıca `viralScore`, `viralVerdict`, `viralAlgorithmScore`,
 `viralActualEngagementRate` & `answers`'ı da taşır. `answers`, soru ID'sinden
@@ -305,16 +318,18 @@ ihtiyaç duymaz. Başarısız ve atlanan satırlar boş bir eşleme taşır.
 ## Önceki bir çalıştırmayla karşılaştır
 
 Aynı analiz ayarlarına sahip tamamlanmış önceki bir çalıştırmanın veri kümesi
-ID'si olan `monitor.baselineDatasetId`'yi geçir. O zaman her satır bir `monitor`
-nesnesi kazanır. Durumu, bir temel değer olmadan `first_run`, önceki
-çalıştırmada bulunmayan tweet'ler için `new_to_baseline` & sahip olduğu
-tweet'ler için `unchanged` veya `changed` olur. `changes`, `previous`'tan
-`current`'a taşınan her özellik kararını listeler. Kararlar kategoriye,
-yuvarlanmış puan seviyesine veya 0,5'te evet/hayır'a göre karşılaştırılır. Bir
-karar yalnızca belirgin biçimde değiştiğinde değişmiş sayılır. Çalıştırmalar
-arasındaki yakın-berabere titremeler değişmemiş kalır. `maxBaselineRows`'un
-(varsayılan 100.000) üzerindeki veya farklı ayarlardan gelen temel değerler,
-toplamadan önce bir tanılama satırıyla çalıştırmayı durdurur.
+ID'si olan `monitor.baselineDatasetId`'yi geçir. Karşılaştırma o çalıştırmanın
+satırlarını okur. Bu yüzden o çalıştırma özetini atlamış olsa bile çalışır. O
+zaman her satır bir `monitor` nesnesi kazanır. Durumu, bir temel değer olmadan
+`first_run`, önceki çalıştırmada bulunmayan tweet'ler için `new_to_baseline` &
+sahip olduğu tweet'ler için `unchanged` veya `changed` olur. `changes`,
+`previous`'tan `current`'a taşınan her özellik kararını listeler. Kararlar
+kategoriye, yuvarlanmış puan seviyesine veya 0,5'te evet/hayır'a göre
+karşılaştırılır. Bir karar yalnızca belirgin biçimde değiştiğinde değişmiş
+sayılır. Çalıştırmalar arasındaki yakın-berabere titremeler değişmemiş kalır.
+`maxBaselineRows`'un (varsayılan 100.000) üzerindeki veya farklı ayarlardan
+gelen temel değerler, toplamadan önce bir tanılama satırıyla çalıştırmayı
+durdurur.
 
 ## Görev örnekleri
 

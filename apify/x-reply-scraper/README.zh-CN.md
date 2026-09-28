@@ -35,9 +35,12 @@ Reply Scraper 用于收集回复、评论及完整对话。大多数其他 Apify
 `nextAction`。Actor 成功退出只能确认交付情况，不代表抓取已完成。
 
 状态消息会写明运行提前停止的每个原因。`stopCauses` 会列出每个原因及其各自的
-`message`、`retryable` 和 `nextAction`。原因的取值为 `target_failed`、
-`page_limit`、`reply_reach` 和 `deadline_reached`。`reply_reach` 表示 X
-只提供了推文串的一部分。只要任一原因可重试，整个运行就会标记为 `retryable`。
+`message`、`retryable` 和 `nextAction`。原因的取值为 `target_not_found`、
+`target_failed`、`page_limit`、`reply_reach` 和 `deadline_reached`。
+`reply_reach` 表示 X 只提供了推文串的一部分。帖子或账号不存在不算失败。
+状态消息会写明这一点，例如 "X has no match for 1 target." 只有当其他原因
+使运行停止时，它才会加入 `stopCauses`。只要任一原因可重试，整个运行就会
+标记为 `retryable`。
 
 ## 这个 Twitter 回复抓取工具能做什么？
 
@@ -380,8 +383,9 @@ OpenAPI 文档。
 状态消息会说明运行停止的原因。它还会统计已收费的结果和已读取的目标。
 遇到问题的运行总会写入 `run-report`，包括无输入和输入无效的退出情况。
 大型运行也会写入。顺利完成的小型运行会跳过该记录，以节省 Apify 用量。
-该报告的模式记录了完成情况、计费、失败及已保存的游标。其 `version`
-字段记录确切的已发布 Actor 源代码版本。
+开启 `alwaysSaveRunRecords` 可在每次运行时都写入。该报告的模式记录了
+完成情况、计费、失败及已保存的游标。其 `version` 字段记录确切的已发布
+Actor 源代码版本。
 
 可能出现的状态包括：
 

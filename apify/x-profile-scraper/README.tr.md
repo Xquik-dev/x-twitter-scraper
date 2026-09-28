@@ -53,6 +53,10 @@ ID veya URL kullan. X API anahtarı veya girişi gerekmez.
 Tek bir hedef yeterlidir. Genel `maxItems` üst sınırı profilleri ve seçili
 kaynakları içerir.
 
+Sorunsuz biten küçük çalıştırmalar `run-report` yazmaz ve Apify kullanımından
+tasarruf eder. Her çalıştırmada yazması için `alwaysSaveRunRecords` seçeneğini
+aç.
+
 ## Çıktı
 
 Profil satırları `resultType: "profile"` kullanır. İsteğe bağlı satırlar

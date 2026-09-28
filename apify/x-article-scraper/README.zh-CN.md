@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据。X Article
-Scraper 能将长篇 X Article 转换为 Markdown、纯文本、封面、作者、日期与指标。其他所有
+Scraper 能将长篇 X Article 转换为 Markdown、纯文本、封面、作者、日期与指标。大多数其他
 Apify Actor 都会在过滤或去重之前就收费。Xquik 只为已交付、唯一且符合过滤条件的结果收费。
 
 从帖子 URL 或数字 Tweet ID 提取长篇 X Article。无需 X API 密钥或登录。
@@ -24,17 +24,19 @@ Apify Actor 都会在过滤或去重之前就收费。Xquik 只为已交付、�
 ## 输入参数
 
 | 字段                   | 用途                                | 默认值   |
-| --------------------- | ------------------------------------ | -------- |
-| `startUrls`           | 公开 Article 帖子 URL                | 无       |
-| `tweetIds`            | 数字 Article Tweet ID                | 无       |
-| `maxItems`            | 全局已交付 Article 上限               | `100000` |
-| `dedupeAcrossTargets` | 在计费前移除重复的 Article ID         | `true`   |
-| `maxConcurrency`      | 并行独立 Article 读取数               | `100`    |
+| ---------------------- | ------------------------------------ | -------- |
+| `startUrls`            | 公开 Article 帖子 URL                | 无       |
+| `tweetIds`             | 数字 Article Tweet ID                | 无       |
+| `maxItems`             | 全局已交付 Article 上限               | `100000` |
+| `dedupeAcrossTargets`  | 在计费前移除重复的 Article ID         | `true`   |
+| `maxConcurrency`       | 并行独立 Article 读取数               | `100`    |
+| `alwaysSaveRunRecords` | 每次运行都保存 `run-report`           | `false`  |
 
 ## 输出
 
 Output 标签页打开 `Articles`。`Results` 链接到各行数据。`Run Report` 链接到计数、
-完成情况、耗时与异常。
+完成情况、耗时与异常。遇到问题的运行或大型运行会写入它。顺利完成的小型运行会改为在
+运行状态中给出计数。开启 `alwaysSaveRunRecords` 可在每次运行时都写入。
 
 ```json
 {

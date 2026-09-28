@@ -44,6 +44,9 @@ Scraper 可为任意用户名收集主页、帖子、回复、媒体与关注者
 
 一个目标即可运行。全局 `maxItems` 上限涵盖主页及所选资源。
 
+顺利完成的小型运行会跳过 `run-report`，以节省 Apify 用量。开启
+`alwaysSaveRunRecords` 可在每次运行时都写入。
+
 ## 输出
 
 主页行使用 `resultType: "profile"`。可选行使用 `profileTweet`、`profileReply`、

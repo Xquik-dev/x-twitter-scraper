@@ -40,11 +40,14 @@ résultats disponibles restent intacts. Consultez `availableResults`,
 `failedTargets`, `retryable` et `nextAction` avant de relancer. Une sortie
 d'Actor réussie confirme la livraison, pas l'extraction complète.
 
-Le texte de statut nomme chaque cause d'un arrêt anticipé. `stopCauses`
-liste chaque cause avec ses propres `message`, `retryable` et `nextAction`.
-Les causes sont `target_failed`, `page_limit`, `reply_reach` et
-`deadline_reached`. `reply_reach` signifie que X n'a fourni qu'une partie
-d'un thread. Le run est `retryable` dès qu'une cause l'est.
+Le texte de statut nomme chaque cause d'un arrêt anticipé. `stopCauses` liste
+chaque cause avec ses propres `message`, `retryable` et `nextAction`. Les causes
+sont `target_not_found`, `target_failed`, `page_limit`, `reply_reach` et
+`deadline_reached`. `reply_reach` signifie que X n'a fourni qu'une partie d'un
+thread. Un post ou un compte introuvable n'est pas un échec. Le texte de statut
+le nomme, par exemple « X has no match for 1 target. » Il ne rejoint
+`stopCauses` que si une autre cause a arrêté le run. Le run est `retryable` dès
+qu'une cause l'est.
 
 ## Que fait ce scraper de réponses Twitter ?
 
@@ -444,9 +447,10 @@ Le texte de statut indique pourquoi le run s'est arrêté. Il compte aussi les
 résultats facturés et les cibles lues. Les runs avec un problème écrivent
 toujours `run-report`. Cela inclut les sorties sans entrée et avec entrée
 invalide. Un gros run l'écrit aussi. Un petit run sans problème l'omet et
-économise de l'usage Apify. Le schéma du rapport documente l'achèvement, la
-facturation, les échecs et les curseurs sauvegardés. Son champ `version` indique
-la version exacte du code source publié de l'Actor.
+économise de l'usage Apify. Activez `alwaysSaveRunRecords` pour l'écrire à
+chaque run. Le schéma du rapport documente l'achèvement, la facturation, les
+échecs et les curseurs sauvegardés. Son champ `version` indique la version
+exacte du code source publié de l'Actor.
 
 Les statuts possibles incluent :
 

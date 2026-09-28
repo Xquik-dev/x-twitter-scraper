@@ -35,6 +35,7 @@ X Follower Scraperは、フォロワー、フォロー中、リスト、コミ�
 ### 基本的な動作
 
 - フィルタリングと重複削除は課金前に実行されます。
+- 複数のターゲットに共通するプロフィールは、デフォルトで1回だけ表示され、1回だけ課金されます。
 - 1回の実行で、ハンドル名、数値ID、URL、短縮パスを受け付けます。
 - マージモードでは、共有されたプロフィール、ソース、関係性、`overlapCount` が記録されます。
 - 実行ログには、ページごとの所要時間が`fetchDurationMs`、`processingDurationMs`、`pushDurationMs`、`statusDurationMs`、`fullPageDurationMs`として表示されます。
@@ -97,7 +98,7 @@ X Follower Scraperは、フォロワー、フォロー中、リスト、コミ�
 
 ## Xのフォロワーをスクレイピングする費用はいくらか
 
-すべてのApifyプランで、配信されたプロフィール1件につき `$0.00015` です。Apifyはプラットフォーム利用料を別途請求します。Xquikは、配信されたデータ行ごとに1回課金します。診断情報は `diagnostics` 出力内で無料です。別途Xquikのサブスクリプションは不要です。開始料金もかかりません。実行のステータスには、実行が停止した理由が表示されます。課金された結果と読み取った対象の数も示します。問題が発生した実行や大規模な実行では、`run-report` レコードも書き込まれます。その `estimatedChargeUsd` には、Actorに公開されているApifyのライブの従量課金価格が使われます。問題が発生した実行では、入力なしや無効な入力での終了を含め、必ず `run-report` が書き込まれます。問題なく終わった小規模な実行ではこれを省略し、Apifyの利用料を節約します。その `version` フィールドは、公開されているActorソースの正確なバージョンを示します。
+すべてのApifyプランで、配信されたプロフィール1件につき `$0.00015` です。Apifyはプラットフォーム利用料を別途請求します。Xquikは、配信されたデータ行ごとに1回課金します。診断情報は `diagnostics` 出力内で無料です。別途Xquikのサブスクリプションは不要です。開始料金もかかりません。実行のステータスには、実行が停止した理由が表示されます。課金された結果、スキップした重複、読み取った対象の数も示します。問題が発生した実行や大規模な実行では、`run-report` レコードも書き込まれます。その `estimatedChargeUsd` には、Actorに公開されているApifyのライブの従量課金価格が使われます。問題が発生した実行では、入力なしや無効な入力での終了を含め、必ず `run-report` が書き込まれます。問題なく終わった小規模な実行ではこれを省略し、Apifyの利用料を節約します。毎回書き込むには、`alwaysSaveRunRecords` をオンにしてください。その `version` フィールドは、公開されているActorソースの正確なバージョンを示します。
 
 `failedTargets` は、エラーの後に停止したターゲットの数をカウントします。配信済みのプロフィールは課金対象のデータ行のままです。これらの実行では `completionReason: "partial_failure"` を使用します。
 
@@ -110,7 +111,7 @@ Apifyのデフォルトのタイムアウトは `0` です。実行に時間制�
   `minFollowing`、`maxFollowing`、`minStatuses`、`maxStatuses`、
   `minAccountAgeDays`、`verifiedType`、`usernameContains`、`hasWebsite`、
   `hasLocation`)は、プロフィールがデータセットに入る前に実行されます。
-- `dedupeAcrossTargets: true` の場合、Actorは書き込み前に重複を削除します。
+- Actorは書き込み前に、ターゲット間の重複を削除します。重複を保持するには、`dedupeAcrossTargets: false` を設定してください。
 - データセットに拒否された行は課金されません。
 - 入力なし、無効な入力、出力ゼロの実行では、無料の `diagnostics` 出力に1件の実用的なレコードが書き込まれます。
 
@@ -250,7 +251,7 @@ Actorは、書き込む数よりも多くのプロフィールを調べる場合
 - 競合のハンドル名を `relation: "followers"` とともに `twitterHandles` に追加する。
 - 認証済みプロフィールを取得するために、`https://x.com/<handle>/verified_followers` をStart URLsに貼り付ける。
 - リストのメンバーを監査するために、リストのURLをStart URLsに貼り付ける。
-- ハンドル名を2件以上追加する。最初に一致したプロフィール行だけを保持するには `dedupeMode: "first"` を設定し、一致したすべてのソースターゲットを持つ1行を保持するには `dedupeMode: "merge"` を使用する。
+- ハンドル名を2件以上追加する。共有されているプロフィールは、最初のターゲットの下に1回だけ表示される。一致したすべてのターゲットを持つ1行を保持するには `dedupeMode: "merge"` を使用する。ターゲットごとに1行を保持するには `dedupeAcrossTargets: false` を設定する。
 
 ### ConsoleとAPIの入力UX
 
@@ -262,7 +263,7 @@ Consoleでは、次のコントロールが提供されます。
 - 結果件数の上限は、1以上の整数を受け付けます。
 - 数値のプロフィールフィルターは、0以上の整数を受け付けます。
 
-新しい連携では、正規のフィールドを使用してください。互換性のためのエイリアスは、JSON、API、SDK、自動化、タスクの入力で引き続き利用できます。これには、Output Modeのエイリアスとしての `outputVariant` と `includeRaw` が含まれます。また、Dedupe Modeのエイリアスとしての `dedupeAcrossTargets` も含まれます。ビジュアルフォームは、正規のコントロールと重複するエイリアスを非表示にします。既存のJSONおよび保存済みタスクの入力は、現在の動作を維持します。
+新しい連携では、正規のフィールドを使用してください。互換性のためのエイリアスは、JSON、API、SDK、自動化、タスクの入力で引き続き利用できます。これには、Output Modeのエイリアスとしての `outputVariant` と `includeRaw` が含まれます。また、Dedupe Modeのエイリアスとしての `dedupeAcrossTargets` も含まれます。ビジュアルフォームは、正規のコントロールと重複するエイリアスを非表示にします。既存のJSONおよび保存済みタスクの入力にあるエイリアスは、引き続き機能します。`dedupeAcrossTargets: false` または `dedupeMode: "none"` を含む保存済みの入力は、ターゲットごとに1行を保持します。
 
 ### 別のフォロワーActorから移行する
 
@@ -346,7 +347,7 @@ Apifyのデータセットから、JSON、CSV、Excel、HTMLとしてエクス�
 
 - Apifyの最大合計課金額を設定して、実行コストに上限を設けます。その予算内で最大件数の行を得るには `maxItems` を空のままにし、より少ないプロフィール数にしたい場合は `maxItems` と `maxItemsPerTarget` を設定します。
 - `minFollowers`、`verifiedOnly`、`verifiedType`、`minStatuses`、`usernameContains`、`bioContains`、`locationContains`、`hasWebsite`、`hasLocation` を組み合わせて、課金対象のデータセットを絞り込みます。
-- 複数の競合ハンドル名をスクレイピングする際に、全ターゲットを通じて一意のプロフィールのみを得るには `dedupeMode: "first"` を設定します。
+- 実行では、デフォルトで全ターゲットを通じて一意のプロフィールのみが保持されます。ターゲットごとに1行を保持するには `dedupeAcrossTargets: false` を設定します。
 - 一致したすべてのソースターゲットを添付した、プロフィールごとに1行を得るには `dedupeMode: "merge"` を設定します。
 - 利用可能な場合に、固定ポストのID、エンティティ、プロフィールのメタデータなどの任意のプロフィールフィールドを得るには `outputMode: "full"` を設定します。
 - 正規化されたフィールドとともに、サニタイズされた `raw` オブジェクトを含めるには `outputMode: "raw"` または `includeRaw: true` を設定します。

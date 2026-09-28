@@ -39,6 +39,9 @@ X-API-Schlüssel.
 }
 ```
 
+Kleine Runs ohne Probleme überspringen `run-report` & sparen Apify-Nutzung.
+Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
+
 ## Ausgabe
 
 Jeder Datensatz enthält ein Profil und die zugehörige Suche in

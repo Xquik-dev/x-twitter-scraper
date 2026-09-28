@@ -42,11 +42,13 @@ Ein erfolgreicher Actor-Abschluss bestätigt die Lieferung, nicht die
 vollständige Extraktion.
 
 Der Statustext nennt jede Ursache für einen vorzeitigen Stopp. `stopCauses`
-listet jede Ursache mit eigenen Feldern `message`, `retryable` &
-`nextAction`. Die Ursachen sind `target_failed`, `page_limit`, `reply_reach`
-& `deadline_reached`. `reply_reach` bedeutet, dass X nur einen Teil eines
-Threads geliefert hat. Der Run ist `retryable`, wenn mindestens 1 Ursache es
-ist.
+listet jede Ursache mit eigenen Feldern `message`, `retryable` & `nextAction`.
+Die Ursachen sind `target_not_found`, `target_failed`, `page_limit`,
+`reply_reach` & `deadline_reached`. `reply_reach` bedeutet, dass X nur einen
+Teil eines Threads geliefert hat. Ein fehlender Beitrag oder Account ist kein
+Fehler. Der Statustext nennt ihn, etwa „X has no match for 1 target." In
+`stopCauses` erscheint er nur, wenn eine andere Ursache den Run gestoppt hat.
+Der Run ist `retryable`, wenn mindestens 1 Ursache es ist.
 
 ## Was macht dieser Twitter-Antworten-Scraper?
 
@@ -438,7 +440,8 @@ Der Statustext nennt, warum der Run gestoppt hat. Er zählt auch berechnete
 Ergebnisse & gelesene Ziele. Runs mit einem Problem schreiben immer
 `run-report`. Das gilt auch für Abbrüche ohne Eingabe und mit ungültiger
 Eingabe. Ein großer Run schreibt ihn ebenfalls. Ein kleiner Run ohne Probleme
-überspringt ihn & spart Apify-Nutzung. Das Report-Schema dokumentiert Abschluss,
+überspringt ihn & spart Apify-Nutzung. Aktiviere `alwaysSaveRunRecords`, um ihn
+bei jedem Run zu schreiben. Das Report-Schema dokumentiert Abschluss,
 Abrechnung, Fehler und gespeicherte Cursor. Das Feld `version` darin gibt die
 exakte veröffentlichte Actor-Quellversion an.
 

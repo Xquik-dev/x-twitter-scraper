@@ -158,12 +158,25 @@ análisis cobrados y los cargos pendientes.
 
 ## Resumen de ejecución y respuestas planas
 
-Cada ejecución escribe un registro `analysis-summary` en su almacén de
-clave-valor. Una ejecución con un problema, o una ejecución grande, también
-escribe `run-report`. Este repite el resumen en `results.analysisSummary`. El
-resumen cuenta las filas analizadas, fallidas y omitidas, suma la interacción y
-resume cada pregunta. `cashtags` cuenta la postura por cashtag como `$NVDA`, así
-que la proporción alcista por activo proviene de `choices.stance`. El bloque
+Una ejecución escribe un registro `analysis-summary` en su almacén de
+clave-valor en 4 casos:
+
+- Tiene un problema o es grande.
+- Configura `monitor` sin `baselineDatasetId`, como primera ejecución de una
+  serie.
+- Su comparación encuentra un tuit cambiado, nuevo o no comparable.
+- Tiene `alwaysSaveRunRecords` activado.
+
+Las demás ejecuciones omiten el registro. Su texto de estado nombra la respuesta
+principal, como `Top stance: bullish in 3 of 5 results.` Una comparación sin
+cambios indica `No change since the earlier run.` Una ejecución con un problema,
+o una ejecución grande, también escribe `run-report`. Lo mismo hace una
+ejecución con `alwaysSaveRunRecords` activado. `run-report` repite el resumen en
+`results.analysisSummary`.
+
+El resumen cuenta las filas analizadas, fallidas y omitidas, suma la interacción
+y resume cada pregunta. `cashtags` cuenta la postura por cashtag como `$NVDA`,
+así que la proporción alcista por activo proviene de `choices.stance`. El bloque
 `stance` agrega la división ponderada por interacción y las publicaciones
 alcistas y bajistas con más interacción. `conviction` informa la media & la
 media ponderada por interacción. El resumen redondea los números a 4 decimales.
@@ -184,13 +197,14 @@ JSON. Las filas fallidas u omitidas tienen un mapa vacío.
 ## Comparar con una ejecución anterior
 
 Pasa `monitor.baselineDatasetId`, el ID de conjunto de datos de una ejecución
-anterior completada con la misma configuración de análisis. Cada fila gana
-entonces un objeto `monitor`. Su estado es `first_run` sin línea base,
-`new_to_baseline` para tuits que la ejecución anterior no tenía, & `unchanged` o
-`changed` para tuits que sí tenía. `changes` lista cada postura, tipo de
-contenido o nivel de convicción que cambió de `previous` a `current`. Las
-decisiones se comparan por categoría, nivel de puntaje redondeado, o sí/no en
-0.5. Una decisión cuenta como cambiada solo cuando se mueve con claridad. Las
+anterior completada con la misma configuración de análisis. La comparación lee
+las filas de esa ejecución. Así funciona aunque esa ejecución haya omitido su
+resumen. Cada fila gana entonces un objeto `monitor`. Su estado es `first_run`
+sin línea base, `new_to_baseline` para tuits que la ejecución anterior no tenía,
+& `unchanged` o `changed` para tuits que sí tenía. `changes` lista cada postura,
+tipo de contenido o nivel de convicción que cambió de `previous` a `current`.
+Las decisiones se comparan por categoría, nivel de puntaje redondeado, o sí/no
+en 0.5. Una decisión cuenta como cambiada solo cuando se mueve con claridad. Las
 fluctuaciones marginales entre ejecuciones se consideran sin cambios. Las líneas
 base por encima de `maxBaselineRows` (100 000 por defecto) o de una
 configuración distinta detienen la ejecución antes de la recopilación con una

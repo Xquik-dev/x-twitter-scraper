@@ -17,9 +17,9 @@
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo con
 i dati X più completi. X Article Scraper trasforma gli Article X lunghi in
-Markdown, testo, copertine, autori, date & metriche. Ogni altro Actor Apify
-addebita costi prima di filtrare o deduplicare. Xquik addebita solo per i
-risultati consegnati, unici e corrispondenti ai filtri.
+Markdown, testo, copertine, autori, date & metriche. La maggior parte degli
+altri Actor Apify addebita costi prima di filtrare o deduplicare. Xquik addebita
+solo per i risultati consegnati, unici e corrispondenti ai filtri.
 
 Estrai Article X lunghi da URL dei post o ID Tweet numerici. Non serve una
 chiave API X né il login.
@@ -33,11 +33,15 @@ chiave API X né il login.
 | `maxItems`             | Limite globale di Article consegnati           | `100000`    |
 | `dedupeAcrossTargets`  | Rimuove Article ID ripetuti prima della fatturazione | `true` |
 | `maxConcurrency`       | Letture Article indipendenti in parallelo      | `100`       |
+| `alwaysSaveRunRecords` | Salva `run-report` a ogni esecuzione           | `false`     |
 
 ## Output
 
 La scheda Output apre `Articles`. `Results` rimanda alle righe. `Run Report`
-rimanda a conteggi, completamento, durata e anomalie.
+rimanda a conteggi, completamento, durata e anomalie. Un'esecuzione con un
+problema, o un'esecuzione grande, lo scrive. Un'esecuzione piccola senza
+problemi riporta invece i conteggi nel messaggio di stato. Attiva
+`alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
 
 ```json
 {

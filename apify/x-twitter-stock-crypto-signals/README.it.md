@@ -155,10 +155,23 @@ separa le righe raccolte, le analisi addebitate e gli addebiti in sospeso.
 
 ## Riepilogo dell'esecuzione e risposte in formato piatto
 
-Ogni esecuzione scrive un record `analysis-summary` nel proprio key-value store.
-Un'esecuzione con un problema, o un'esecuzione grande, scrive anche
-`run-report`. Questo ripete il riepilogo sotto `results.analysisSummary`. Il
-riepilogo conta le righe analizzate, fallite e saltate, somma l'engagement e
+Un'esecuzione scrive un record `analysis-summary` nel proprio key-value store in
+4 casi:
+
+- Incontra un problema o è grande.
+- Imposta `monitor` senza `baselineDatasetId`, come prima esecuzione di una
+  serie.
+- Il suo confronto trova un tweet cambiato, nuovo o non confrontabile.
+- Ha `alwaysSaveRunRecords` attivo.
+
+Le altre esecuzioni saltano il record. Il loro messaggio di stato indica la
+risposta principale, come `Top stance: bullish in 3 of 5 results.` Un confronto
+senza cambiamenti riporta `No change since the earlier run.` Un'esecuzione con
+un problema, o un'esecuzione grande, scrive anche `run-report`. Lo fa anche
+un'esecuzione con `alwaysSaveRunRecords` attivo. `run-report` ripete il
+riepilogo sotto `results.analysisSummary`.
+
+Il riepilogo conta le righe analizzate, fallite e saltate, somma l'engagement e
 riassume ogni domanda. `cashtags` conta la posizione per cashtag come `$NVDA`,
 quindi il rapporto rialzista per asset deriva da `choices.stance`. Il blocco
 `stance` aggiunge la ripartizione ponderata per engagement e i post rialzisti e
@@ -181,16 +194,18 @@ del JSON. Le righe fallite o saltate contengono una mappa vuota.
 ## Confronto con un'esecuzione precedente
 
 Passa `monitor.baselineDatasetId`, l'ID del dataset di un'esecuzione precedente
-completata con le stesse impostazioni di analisi. Ogni riga ottiene quindi un
-oggetto `monitor`. Il suo stato è `first_run` senza baseline, `new_to_baseline`
-per i tweet che l'esecuzione precedente non aveva, & `unchanged` o `changed` per
-i tweet che aveva già. `changes` elenca ogni posizione, tipo di contenuto o
-livello di convinzione passato da `previous` a `current`. Le decisioni si
-confrontano per categoria, livello di punteggio arrotondato, o sì/no a 0,5. Una
-decisione conta come cambiata solo quando si sposta in modo netto. Le
-oscillazioni minime tra esecuzioni restano invariate. Le baseline sopra
-`maxBaselineRows` (predefinito 100.000) o con impostazioni diverse interrompono
-l'esecuzione prima della raccolta con una riga diagnostica.
+completata con le stesse impostazioni di analisi. Il confronto legge le righe di
+quell'esecuzione, quindi funziona anche se quell'esecuzione ha saltato il
+riepilogo. Ogni riga ottiene quindi un oggetto `monitor`. Il suo stato è
+`first_run` senza baseline, `new_to_baseline` per i tweet che l'esecuzione
+precedente non aveva, & `unchanged` o `changed` per i tweet che aveva già.
+`changes` elenca ogni posizione, tipo di contenuto o livello di convinzione
+passato da `previous` a `current`. Le decisioni si confrontano per categoria,
+livello di punteggio arrotondato, o sì/no a 0,5. Una decisione conta come
+cambiata solo quando si sposta in modo netto. Le oscillazioni minime tra
+esecuzioni restano invariate. Le baseline sopra `maxBaselineRows` (predefinito
+100.000) o con impostazioni diverse interrompono l'esecuzione prima della
+raccolta con una riga diagnostica.
 
 ## Esempi di task
 

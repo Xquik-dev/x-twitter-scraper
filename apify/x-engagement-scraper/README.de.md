@@ -16,9 +16,9 @@
 </td></tr></table>
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
-den umfassendsten X-Daten. X Engagement Scraper sammelt Antworten,
-Zitate, Retweeter & Threads zu jedem Beitrag. Jeder andere Apify Actor
-berechnet, bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für
+den umfassendsten X-Daten. X Engagement Scraper sammelt Antworten, Zitate,
+Retweeter & Threads zu jedem Beitrag. Die meisten anderen Apify Actors
+berechnen, bevor gefiltert oder dedupliziert wird. Xquik berechnet nur für
 gelieferte, eindeutige, filterkonforme Ergebnisse.
 
 Sammle Twitter-Interaktionsdaten für einen oder mehrere X-Beiträge: Antworten,
@@ -53,9 +53,13 @@ X zeigt seit 2024 nicht mehr, wer einen Beitrag gelikt hat. Der Typ
 `favoriters` liefert keine Datensätze. Ein Run ohne Datensätze nennt diesen
 Grund in seiner Diagnose.
 
-Lass `dedupeAcrossTargets` deaktiviert, um jede Quelle-Interaktionstyp-
-Kombination zu behalten. Schalte es ein, um im gesamten Run einen Datensatz
-pro Account zu behalten.
+Standardmäßig erscheint jeder Account oder Beitrag einmal pro Interaktionstyp &
+wird einmal berechnet. Setze `dedupeAcrossTargets` auf `false`, um für jeden
+Quellbeitrag einen Datensatz zu behalten. Der Statustext zählt die kostenlos
+übersprungenen Duplikate.
+
+Kleine Runs ohne Probleme überspringen `run-report` & sparen Apify-Nutzung.
+Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 
 ## Ausgabe
 

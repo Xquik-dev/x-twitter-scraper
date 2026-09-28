@@ -53,6 +53,9 @@ URL. Non servono chiave API X né login.
 Un solo target è sufficiente. Il limite globale `maxItems` include i profili
 e le risorse selezionate.
 
+Le esecuzioni piccole senza problemi saltano `run-report` e risparmiano uso di
+Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
+
 ## Output
 
 Le righe di profilo usano `resultType: "profile"`. Le righe opzionali usano

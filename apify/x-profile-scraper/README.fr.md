@@ -53,6 +53,9 @@ des handles, des ID ou des URL. Aucune clé API X ni connexion requise.
 Une seule cible suffit. Le plafond global `maxItems` inclut les profils et
 les ressources sélectionnées.
 
+Les petits runs sans problème omettent `run-report` et économisent de l'usage
+Apify. Activez `alwaysSaveRunRecords` pour l'écrire à chaque run.
+
 ## Sortie
 
 Les lignes de profil utilisent `resultType: "profile"`. Les lignes

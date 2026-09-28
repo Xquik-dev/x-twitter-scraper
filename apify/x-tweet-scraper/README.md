@@ -163,8 +163,8 @@ A run that hits a problem, or a large run, also writes a `run-report` record.
 Its `estimatedChargeUsd` uses the live pay-per-event price Apify exposes to the
 Actor. Runs with a problem always write `run-report`, including no-input and
 invalid-input exits. A small run that goes well skips it & saves Apify usage.
-Run reports separate data rows in `realRows` and diagnostics in
-`diagnosticRows`.
+Turn on `alwaysSaveRunRecords` to write it on every run. Run reports separate
+data rows in `realRows` and diagnostics in `diagnosticRows`.
 
 Understand empty results before spending on another run. The `filtering` object
 in reports & final diagnostics counts the rows your filters removed. See

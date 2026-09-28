@@ -53,6 +53,9 @@ IDs oder URLs. Kein X-API-Schlüssel oder Login erforderlich.
 Ein Ziel genügt. Die globale Obergrenze `maxItems` umfasst Profile und
 ausgewählte Ressourcen.
 
+Kleine Runs ohne Probleme überspringen `run-report` & sparen Apify-Nutzung.
+Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
+
 ## Ausgabe
 
 Profil-Datensätze nutzen `resultType: "profile"`. Optionale Datensätze

@@ -51,6 +51,7 @@ relation.
 ### Core behavior
 
 - Filters and duplicate removal run before billing.
+- A profile from several targets appears & is charged once by default.
 - One run accepts handles, numeric IDs, URLs, and short paths.
 - Merge mode records shared profiles, sources, relations, and `overlapCount`.
 - Run logs show page timing in `fetchDurationMs`, `processingDurationMs`,
@@ -125,12 +126,13 @@ Every Apify plan costs `$0.00015` per delivered profile. Apify bills your
 platform usage separately. Xquik applies one charge per delivered data row.
 Diagnostics are free in the `diagnostics` output. No separate Xquik subscription
 applies. No start fee applies. The run status says why the run stopped. It also
-counts charged results & targets read. A run that hits a problem, or a large
-run, also writes a `run-report` record. Its `estimatedChargeUsd` uses the live
-pay-per-event price Apify exposes to the Actor. Runs with a problem always write
-`run-report`, including no-input and invalid-input exits. A small run that goes
-well skips it & saves Apify usage. Its `version` field reports the exact
-published Actor source version.
+counts charged results, skipped duplicates & targets read. A run that hits a
+problem, or a large run, also writes a `run-report` record. Its
+`estimatedChargeUsd` uses the live pay-per-event price Apify exposes to the
+Actor. Runs with a problem always write `run-report`, including no-input and
+invalid-input exits. A small run that goes well skips it & saves Apify usage.
+Turn on `alwaysSaveRunRecords` to write it on every run. Its `version` field
+reports the exact published Actor source version.
 
 `failedTargets` counts targets that stopped after an error. Delivered profiles
 remain billable data rows. These runs use `completionReason: "partial_failure"`.
@@ -149,7 +151,8 @@ exact across them.
   `minFollowing`, `maxFollowing`, `minStatuses`, `maxStatuses`,
   `minAccountAgeDays`, `verifiedType`, `usernameContains`, `hasWebsite`,
   `hasLocation`) run before a profile enters your dataset.
-- With `dedupeAcrossTargets: true`, the Actor removes repeats before writing.
+- The Actor removes repeats across targets before writing. Set
+  `dedupeAcrossTargets: false` to keep them.
 - Rows rejected by the dataset are not billed.
 - No-input, invalid-input, and zero-output runs write 1 actionable record to the
   free `diagnostics` output.
@@ -312,9 +315,9 @@ Examples:
 - Paste `https://x.com/<handle>/verified_followers` into Start URLs for verified
   profiles.
 - Paste a list URL into Start URLs to audit its members.
-- Add 2+ handles. Set `dedupeMode: "first"` to keep only the first matching
-  profile row, or use `dedupeMode: "merge"` to keep one row with all matching
-  source targets.
+- Add 2+ handles. A shared profile appears once, under the first target. Use
+  `dedupeMode: "merge"` to keep 1 row with every matching target. Set
+  `dedupeAcrossTargets: false` to keep 1 row per target.
 
 ### Console & API input UX
 
@@ -331,7 +334,9 @@ Use canonical fields in new integrations. Compatibility aliases remain available
 in JSON, API, SDK, automation, and task inputs. This includes `outputVariant`
 and `includeRaw` as Output Mode aliases. It also includes `dedupeAcrossTargets`
 as a Dedupe Mode alias. The visual form hides aliases that duplicate a canonical
-control. Existing JSON and saved task inputs keep their current behavior.
+control. Aliases in existing JSON and saved task inputs keep working. Saved
+inputs with `dedupeAcrossTargets: false` or `dedupeMode: "none"` keep 1 row per
+target.
 
 ### Migrate from another follower Actor
 
@@ -429,8 +434,8 @@ Export as JSON, CSV, Excel, or HTML from the Apify dataset.
 - Combine `minFollowers`, `verifiedOnly`, `verifiedType`, `minStatuses`,
   `usernameContains`, `bioContains`, `locationContains`, `hasWebsite`, and
   `hasLocation` to narrow the billed dataset.
-- Set `dedupeMode: "first"` when scraping multiple competitor handles to get
-  only unique profiles across all targets.
+- Runs keep only unique profiles across targets by default. Set
+  `dedupeAcrossTargets: false` to keep 1 row per target.
 - Set `dedupeMode: "merge"` to get one row per profile with every matching
   source target attached.
 - Set `outputMode: "full"` to get optional profile fields such as pinned tweet

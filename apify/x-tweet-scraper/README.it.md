@@ -174,8 +174,9 @@ problema, o un'esecuzione grande, scrive anche un record `run-report`. Il suo
 `estimatedChargeUsd` usa il prezzo pay-per-event in tempo reale che Apify espone
 all'Actor. Le esecuzioni con un problema scrivono sempre `run-report`. Vale
 anche per le uscite senza input o con input non valido. Un'esecuzione piccola
-senza problemi lo salta & risparmia uso di Apify. I run report separano le righe
-di dati in `realRows` e la diagnostica in `diagnosticRows`.
+senza problemi lo salta & risparmia uso di Apify. Attiva `alwaysSaveRunRecords`
+per scriverlo a ogni esecuzione. I run report separano le righe di dati in
+`realRows` e la diagnostica in `diagnosticRows`.
 
 Capisci i risultati vuoti prima di spendere per un'altra esecuzione. L'oggetto
 `filtering` nei report e nella diagnostica finale conta le righe rimosse dai

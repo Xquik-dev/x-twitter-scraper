@@ -49,6 +49,9 @@ X 프로필, 게시물, 답글, 미디어, 팔로워를 스크랩하세요. 핸�
 대상 1개면 충분합니다. 전체 `maxItems` 상한에는 프로필과 선택한 리소스가 함께
 포함됩니다.
 
+문제없이 끝난 작은 실행은 `run-report`를 건너뛰어 Apify 사용량을 아낍니다. 모든
+실행에서 작성하려면 `alwaysSaveRunRecords`를 켜세요.
+
 ## 출력
 
 프로필 행은 `resultType: "profile"`을 사용합니다. 선택적 행은 `profileTweet`,

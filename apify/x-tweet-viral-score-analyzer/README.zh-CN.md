@@ -238,9 +238,20 @@ Pricing 标签页会显示该费用。
 
 ## 运行摘要与扁平化答案
 
-每次运行都会向其 key-value store 写入一条 `analysis-summary` 记录。
-遇到问题的运行或大型运行还会写入 `run-report`。`run-report` 会在
-`results.analysisSummary` 下重复该摘要。摘要统计已分析、失败与跳过的行数，
+在以下 4 种情况下，运行会向其 key-value store 写入一条 `analysis-summary` 记录：
+
+- 运行遇到问题或规模较大。
+- 作为系列中的首次运行，设置了 `monitor` 但没有设置 `baselineDatasetId`。
+- 比较发现了已变化、新增或无法比较的推文。
+- 开启了 `alwaysSaveRunRecords`。
+
+其他运行会跳过该记录。它们的状态消息会写明最主要的答案，例如
+`Average Viral Score: 64.` 没有变化的比较会显示
+`No change since the earlier run.` 遇到问题的运行或大型运行还会写入
+`run-report`。开启 `alwaysSaveRunRecords` 的运行也会写入。`run-report` 会在
+`results.analysisSummary` 下重复该摘要。
+
+摘要统计已分析、失败与跳过的行数，
 汇总互动数据，并对每个问题作出总结。其 `viral` 块报告 `averageScore`、
 每种结论的数量，以及 Actor 已评分或未评分的行数。同一个块还包含上文介绍的
 `calibration`、`accounts` 与 `leaderboard`。
@@ -258,7 +269,7 @@ Pricing 标签页会显示该费用。
 
 ## 与更早的运行比较
 
-传入 `monitor.baselineDatasetId`（一次使用相同分析设置完成的更早运行的数据集 ID）。此后每一行都会获得一个 `monitor` 对象。其状态在没有基线时为`first_run`，更早运行中不存在的推文为 `new_to_baseline`，已存在的推文为`unchanged` 或 `changed`。`changes` 列出每个从 `previous` 变为 `current` 的特征判断。判断按类别、四舍五入的分数等级或 0.5 处的是否判断进行比较。只有判断发生明显变化时才计为已更改。运行之间的临界抖动视为未变化。超过 `maxBaselineRows`（默认 100,000）的基线或来自不同设置的基线，会在收集之前以诊断行的形式停止运行。
+传入 `monitor.baselineDatasetId`（一次使用相同分析设置完成的更早运行的数据集 ID）。比较会读取该运行的行，因此即使该运行跳过了摘要也能正常工作。此后每一行都会获得一个 `monitor` 对象。其状态在没有基线时为`first_run`，更早运行中不存在的推文为 `new_to_baseline`，已存在的推文为`unchanged` 或 `changed`。`changes` 列出每个从 `previous` 变为 `current` 的特征判断。判断按类别、四舍五入的分数等级或 0.5 处的是否判断进行比较。只有判断发生明显变化时才计为已更改。运行之间的临界抖动视为未变化。超过 `maxBaselineRows`（默认 100,000）的基线或来自不同设置的基线，会在收集之前以诊断行的形式停止运行。
 
 ## 任务示例
 

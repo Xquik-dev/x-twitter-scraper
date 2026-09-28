@@ -17,8 +17,8 @@
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
 den umfassendsten X-Daten. X Article Scraper wandelt lange X-Artikel in
-Markdown, Text, Titelbilder, Autoren, Daten & Kennzahlen um. Jeder andere
-Apify Actor berechnet, bevor gefiltert oder dedupliziert wird. Xquik berechnet
+Markdown, Text, Titelbilder, Autoren, Daten & Kennzahlen um. Die meisten anderen
+Apify Actors berechnen, bevor gefiltert oder dedupliziert wird. Xquik berechnet
 nur für gelieferte, eindeutige, filterkonforme Ergebnisse.
 
 Extrahiere lange X-Artikel aus Beitrags-URLs oder numerischen Tweet-IDs. Kein
@@ -26,18 +26,22 @@ X-API-Schlüssel oder Login erforderlich.
 
 ## Eingabe
 
-| Feld                   | Zweck                                          | Standard |
-| ----------------------- | ----------------------------------------------- | -------- |
-| `startUrls`              | Öffentliche Artikel-Beitrags-URLs                | Keiner   |
-| `tweetIds`               | Numerische Artikel-Tweet-IDs                     | Keiner   |
-| `maxItems`               | Globale Obergrenze für gelieferte Artikel        | `100000` |
-| `dedupeAcrossTargets`    | Entfernt doppelte Artikel-IDs vor der Abrechnung | `true`   |
-| `maxConcurrency`         | Parallele, unabhängige Artikel-Lesevorgänge      | `100`    |
+| Feld                   | Zweck                                            | Standard |
+| ---------------------- | ------------------------------------------------ | -------- |
+| `startUrls`            | Öffentliche Artikel-Beitrags-URLs                | Keiner   |
+| `tweetIds`             | Numerische Artikel-Tweet-IDs                     | Keiner   |
+| `maxItems`             | Globale Obergrenze für gelieferte Artikel        | `100000` |
+| `dedupeAcrossTargets`  | Entfernt doppelte Artikel-IDs vor der Abrechnung | `true`   |
+| `maxConcurrency`       | Parallele, unabhängige Artikel-Lesevorgänge      | `100`    |
+| `alwaysSaveRunRecords` | Speichert `run-report` bei jedem Run             | `false`  |
 
 ## Ausgabe
 
 Der Tab „Ausgabe" öffnet `Articles`. `Results` verlinkt zu den Datensätzen.
-`Run Report` verlinkt zu Anzahlen, Abschluss, Dauer und Auffälligkeiten.
+`Run Report` verlinkt zu Anzahlen, Abschluss, Dauer und Auffälligkeiten. Ein Run
+mit einem Problem oder ein großer Run schreibt ihn. Ein kleiner Run ohne
+Probleme nennt seine Anzahlen stattdessen im Statustext. Aktiviere
+`alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 
 ```json
 {

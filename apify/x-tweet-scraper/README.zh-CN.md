@@ -155,7 +155,8 @@ Apify 不会将固定的构建编号重定向到 `latest`。请将固定编号�
 遇到问题的运行或大型运行还会写入一条 `run-report` 记录。其中的
 `estimatedChargeUsd` 采用 Apify 向 Actor 公开的实时按事件计费价格。
 遇到问题的运行总会写入 `run-report`，包括无输入和输入无效的退出情况。
-顺利完成的小型运行会跳过该记录，以节省 Apify 用量。运行报告会将数据行区分为
+顺利完成的小型运行会跳过该记录，以节省 Apify 用量。开启
+`alwaysSaveRunRecords` 可在每次运行时都写入。运行报告会将数据行区分为
 `realRows`，诊断记录区分为 `diagnosticRows`。
 
 在为下一次运行付费之前，请先理解空结果的原因。报告和最终诊断中的 `filtering` 对象会统计被你的过滤条件移除的行数。请查看 `serverFilteredRows`、`actorFilteredRows` 和 `pagesWithUnknownServerFiltering`。被过滤的行永远不会产生结果费用。

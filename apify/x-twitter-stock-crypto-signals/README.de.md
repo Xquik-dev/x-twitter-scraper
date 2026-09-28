@@ -157,23 +157,36 @@ Analysen & ausstehende Gebühren.
 
 ## Run-Zusammenfassung & flache Antworten
 
-Jeder Run schreibt einen `analysis-summary`-Datensatz in seinen Key-Value-Store.
-Ein Run mit einem Problem oder ein großer Run schreibt zusätzlich `run-report`.
-Dieser wiederholt die Zusammenfassung unter `results.analysisSummary`. Die
-Zusammenfassung zählt analysierte, fehlgeschlagene & übersprungene Datensätze,
-summiert Interaktionen und fasst jede Frage zusammen. `cashtags` zählt die
-Haltung pro Cashtag wie `$NVDA`, sodass die bullische Quote pro Asset aus
-`choices.stance` stammt. Der `stance`-Block ergänzt die interaktionsgewichtete
-Aufteilung & die am stärksten interagierten bullischen & bärischen Beiträge.
-`conviction` meldet den Mittelwert & den interaktionsgewichteten Mittelwert. Die
-Zusammenfassung rundet Zahlen auf 4 Nachkommastellen. Ein leerer Run meldet
-Nullwerte & `null`-Mittelwerte. Jeder `cashtags`-Eintrag ergänzt `signal` mit
-einer Anzahl bullisch, einer Anzahl bärisch & einem Score von -1 bis 1. Der
-Score ist (bullisch - bärisch) / Datensätze. `monitor.changedRows` listet
-Tweets, deren Haltung sich seit der Baseline geändert hat. Jeder Datensatz
-listet `sourceDomains`, die Hostnamen, auf die er verlinkt. Ist
-`monitor.baselineDatasetId` gesetzt, zählt der `monitor`-Block der
-Zusammenfassung Vergleichsstatus & listet bis zu 50 geänderte Datensätze.
+Ein Run schreibt in 4 Fällen einen `analysis-summary`-Datensatz in seinen
+Key-Value-Store:
+
+- Er hat ein Problem oder ist groß.
+- Er setzt `monitor` ohne `baselineDatasetId`, als erster Run einer Serie.
+- Sein Vergleich findet einen geänderten, neuen oder nicht vergleichbaren Tweet.
+- Er hat `alwaysSaveRunRecords` aktiviert.
+
+Andere Runs überspringen den Datensatz. Ihr Statustext nennt die häufigste
+Antwort, etwa `Top stance: bullish in 3 of 5 results.` Ein Vergleich ohne
+Änderung meldet `No change since the earlier run.` Ein Run mit einem Problem
+oder ein großer Run schreibt zusätzlich `run-report`. Das gilt auch für einen
+Run mit aktiviertem `alwaysSaveRunRecords`. `run-report` wiederholt die
+Zusammenfassung unter `results.analysisSummary`.
+
+Die Zusammenfassung zählt analysierte, fehlgeschlagene & übersprungene
+Datensätze, summiert Interaktionen und fasst jede Frage zusammen. `cashtags`
+zählt die Haltung pro Cashtag wie `$NVDA`, sodass die bullische Quote pro Asset
+aus `choices.stance` stammt. Der `stance`-Block ergänzt die
+interaktionsgewichtete Aufteilung & die am stärksten interagierten bullischen &
+bärischen Beiträge. `conviction` meldet den Mittelwert & den
+interaktionsgewichteten Mittelwert. Die Zusammenfassung rundet Zahlen auf 4
+Nachkommastellen. Ein leerer Run meldet Nullwerte & `null`-Mittelwerte. Jeder
+`cashtags`-Eintrag ergänzt `signal` mit einer Anzahl bullisch, einer Anzahl
+bärisch & einem Score von -1 bis 1. Der Score ist (bullisch - bärisch) /
+Datensätze. `monitor.changedRows` listet Tweets, deren Haltung sich seit der
+Baseline geändert hat. Jeder Datensatz listet `sourceDomains`, die Hostnamen,
+auf die er verlinkt. Ist `monitor.baselineDatasetId` gesetzt, zählt der
+`monitor`-Block der Zusammenfassung Vergleichsstatus & listet bis zu 50
+geänderte Datensätze.
 
 Jeder Ergebnisdatensatz führt außerdem `answers`, eine flache Zuordnung
 von Frage-ID zu gewählter Kategorie, Score oder Wahrscheinlichkeit. Die
@@ -185,17 +198,18 @@ leere Zuordnung.
 ## Mit einem früheren Run vergleichen
 
 Übergib `monitor.baselineDatasetId`, die Dataset-ID eines abgeschlossenen
-früheren Runs mit denselben Analyseeinstellungen. Jeder Datensatz erhält dann
-ein `monitor`-Objekt. Sein Status ist `first_run` ohne Baseline,
-`new_to_baseline` für Tweets, die der frühere Run nicht hatte, & `unchanged`
-oder `changed` für Tweets, die er hatte. `changes` listet jede Haltungs-,
-Inhaltstyp- oder Überzeugungsstufen-Entscheidung listet, die sich von `previous`
-zu `current` geändert hat. Entscheidungen werden nach Kategorie, gerundeter
-Score-Stufe oder Ja/Nein bei 0,5 verglichen. Eine Entscheidung zählt nur als
-geändert, wenn sie sich deutlich bewegt. Fast unentschiedenes Rauschen zwischen
-Runs bleibt unverändert. Baselines über `maxBaselineRows` (Standard: 100.000)
-oder aus abweichenden Einstellungen stoppen den Run vor der Erfassung mit einem
-Diagnose-Datensatz.
+früheren Runs mit denselben Analyseeinstellungen. Der Vergleich liest die
+Datensätze dieses Runs. So funktioniert er auch, wenn dieser Run seine
+Zusammenfassung übersprungen hat. Jeder Datensatz erhält dann ein
+`monitor`-Objekt. Sein Status ist `first_run` ohne Baseline, `new_to_baseline`
+für Tweets, die der frühere Run nicht hatte, & `unchanged` oder `changed` für
+Tweets, die er hatte. `changes` listet jede Haltungs-, Inhaltstyp- oder
+Überzeugungsstufen-Entscheidung, die sich von `previous` zu `current` geändert
+hat. Entscheidungen werden nach Kategorie, gerundeter Score-Stufe oder Ja/Nein
+bei 0,5 verglichen. Eine Entscheidung zählt nur als geändert, wenn sie sich
+deutlich bewegt. Fast unentschiedenes Rauschen zwischen Runs bleibt unverändert.
+Baselines über `maxBaselineRows` (Standard: 100.000) oder aus abweichenden
+Einstellungen stoppen den Run vor der Erfassung mit einem Diagnose-Datensatz.
 
 ## Task-Beispiele
 

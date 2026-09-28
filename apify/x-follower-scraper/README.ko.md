@@ -50,6 +50,7 @@ X Follower Scraper는 팔로워, 팔로잉, 리스트, 커뮤니티에 대해 �
 ### 기본 동작
 
 - 필터 & 중복 제거는 과금 전에 실행됩니다.
+- 여러 대상에서 나온 프로필은 기본적으로 1회만 표시되고 과금됩니다.
 - 한 번의 실행에서 핸들, 숫자 ID, URL, 짧은 경로를 받아들입니다.
 - 병합 모드는 공유된 프로필, 소스, 관계, `overlapCount`를 기록합니다.
 - 실행 로그는 `fetchDurationMs`, `processingDurationMs`, `pushDurationMs`,
@@ -123,12 +124,13 @@ X Follower Scraper는 팔로워, 팔로잉, 리스트, 커뮤니티에 대해 �
 모든 Apify 요금제는 전달된 프로필당 `$0.00015`입니다. Apify는 플랫폼 사용량을
 별도로 청구합니다. Xquik은 전달된 데이터 행당 1회 과금합니다. 진단 정보는
 `diagnostics` 출력에서 무료입니다. 별도의 Xquik 구독은 적용되지 않습니다. 시작
-요금도 없습니다. 상태 메시지는 실행이 멈춘 이유를 알려 줍니다. 과금된 결과와
-읽은 대상 수도 함께 표시합니다. 문제가 생긴 실행이나 큰 실행은 `run-report`
-레코드도 작성합니다. 이 레코드의 `estimatedChargeUsd`는 Apify가 Actor에 노출하는
-실시간 이벤트당 요금을 사용합니다. 문제가 생긴 실행은 입력이 없거나 잘못된
-입력으로 종료된 경우를 포함해 항상 `run-report`를 작성합니다. 문제없이 끝난 작은
-실행은 이 레코드를 건너뛰어 Apify 사용량을 아낍니다. `version` 필드는 게시된
+요금도 없습니다. 상태 메시지는 실행이 멈춘 이유를 알려 줍니다. 과금된 결과,
+건너뛴 중복, 읽은 대상 수도 함께 표시합니다. 문제가 생긴 실행이나 큰 실행은
+`run-report` 레코드도 작성합니다. 이 레코드의 `estimatedChargeUsd`는 Apify가
+Actor에 노출하는 실시간 이벤트당 요금을 사용합니다. 문제가 생긴 실행은 입력이
+없거나 잘못된 입력으로 종료된 경우를 포함해 항상 `run-report`를 작성합니다.
+문제없이 끝난 작은 실행은 이 레코드를 건너뛰어 Apify 사용량을 아낍니다. 모든
+실행에서 작성하려면 `alwaysSaveRunRecords`를 켜세요. `version` 필드는 게시된
 정확한 Actor 소스 버전을 보고합니다.
 
 `failedTargets`는 오류 후 중단된 대상 수를 집계합니다. 전달된 프로필은 과금 가능한 데이터 행으로 남습니다. 이러한 실행은
@@ -145,7 +147,8 @@ X Follower Scraper는 팔로워, 팔로잉, 리스트, 커뮤니티에 대해 �
   `minFollowing`, `maxFollowing`, `minStatuses`, `maxStatuses`,
   `minAccountAgeDays`, `verifiedType`, `usernameContains`, `hasWebsite`,
   `hasLocation`)는 프로필이 데이터셋에 들어가기 전에 실행됩니다.
-- `dedupeAcrossTargets: true`이면 Actor가 쓰기 전에 중복을 제거합니다.
+- Actor는 쓰기 전에 대상 간 중복을 제거합니다. 중복을 유지하려면
+  `dedupeAcrossTargets: false`를 설정하세요.
 - 데이터셋에서 거부된 행은 과금되지 않습니다.
 - 입력이 없거나, 입력이 잘못됐거나, 출력이 0인 실행은 무료 `diagnostics`
   출력에 실행 가능한 레코드 1건을 작성합니다.
@@ -309,9 +312,10 @@ Actor는 기록하는 것보다 더 많은 프로필을 검사할 수 있습니�
 - 인증된 프로필을 위해 `https://x.com/<handle>/verified_followers`를 Start
   URLs에 붙여넣으세요.
 - 리스트 URL을 Start URLs에 붙여넣어 멤버를 감사하세요.
-- 핸들을 2개 이상 추가하세요. 처음 일치하는 프로필 행만 유지하려면
-  `dedupeMode: "first"`를 설정하고, 일치하는 모든 소스 대상이 담긴 행 하나만
-  유지하려면 `dedupeMode: "merge"`를 사용하세요.
+- 핸들을 2개 이상 추가하세요. 공유된 프로필은 첫 번째 대상 아래에 1회만
+  표시됩니다. 일치하는 모든 대상이 담긴 행 1개를 유지하려면
+  `dedupeMode: "merge"`를 사용하세요. 대상마다 행 1개를 유지하려면
+  `dedupeAcrossTargets: false`를 설정하세요.
 
 ### Console & API 입력 UX
 
@@ -328,7 +332,9 @@ Console은 다음 컨트롤을 제공합니다.
 저장된 태스크 입력에서 계속 사용할 수 있습니다. 여기에는 Output Mode 별칭인
 `outputVariant`와 `includeRaw`도 포함됩니다. Dedupe Mode 별칭인
 `dedupeAcrossTargets`도 포함됩니다. 시각적 폼은 표준 컨트롤과 중복되는 별칭을
-숨깁니다. 기존 JSON과 저장된 태스크 입력은 현재 동작을 유지합니다.
+숨깁니다. 기존 JSON과 저장된 태스크 입력의 별칭은 계속 작동합니다.
+`dedupeAcrossTargets: false`나 `dedupeMode: "none"`이 있는 저장된 입력은
+대상마다 행 1개를 유지합니다.
 
 ### 다른 팔로워 Actor에서 옮겨오기
 
@@ -427,8 +433,8 @@ Apify 데이터셋에서 JSON, CSV, Excel, HTML로 내보낼 수 있습니다.
 - `minFollowers`, `verifiedOnly`, `verifiedType`, `minStatuses`,
   `usernameContains`, `bioContains`, `locationContains`, `hasWebsite`,
   `hasLocation`을 조합해 과금되는 데이터셋을 좁히세요.
-- 여러 경쟁사 핸들을 스크랩하며 전체 대상에서 고유한 프로필만 얻으려면
-  `dedupeMode: "first"`를 설정하세요.
+- 실행은 기본적으로 전체 대상에서 고유한 프로필만 유지합니다. 대상마다 행 1개를
+  유지하려면 `dedupeAcrossTargets: false`를 설정하세요.
 - 일치하는 모든 소스 대상이 첨부된 프로필당 하나의 행을 얻으려면
   `dedupeMode: "merge"`를 설정하세요.
 - 고정 트윗 ID, 엔터티, 프로필 메타데이터 등 선택적 프로필 필드를 사용

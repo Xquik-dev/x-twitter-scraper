@@ -16,10 +16,10 @@
 </td></tr></table>
 
 Xquik è il servizio di scraping X (Twitter) più veloce ed economico al mondo,
-con i dati X più completi. X Engagement Scraper raccoglie risposte,
-citazioni, chi ha retwittato e thread per qualsiasi post. Ogni altro Actor
-Apify addebita il costo prima di filtrare o deduplicare. Xquik addebita solo
-i risultati consegnati, unici e conformi ai filtri.
+con i dati X più completi. X Engagement Scraper raccoglie risposte, citazioni,
+chi ha retwittato e thread per qualsiasi post. La maggior parte degli altri
+Actor Apify addebita il costo prima di filtrare o deduplicare. Xquik addebita
+solo i risultati consegnati, unici e conformi ai filtri.
 
 Raccogli dati di engagement Twitter per uno o più post X: risposte,
 citazioni, chi ha retwittato e contesto del thread. Non serve una chiave API
@@ -53,9 +53,13 @@ X ha smesso di mostrare chi ha messo Mi piace a un post nel 2024. Il tipo
 `favoriters` non restituisce righe. Un'esecuzione senza righe indica questo
 motivo nella sua diagnostica.
 
-Lascia `dedupeAcrossTargets` disattivato per mantenere ogni abbinamento tra
-sorgente ed engagement. Attivalo per mantenere una riga per account
-nell'intera esecuzione.
+Per impostazione predefinita, ogni account o post compare e viene addebitato una
+sola volta per tipo di engagement. Imposta `dedupeAcrossTargets` su `false` per
+mantenere una riga per ogni post sorgente. Il messaggio di stato conta i
+duplicati saltati senza addebito.
+
+Le esecuzioni piccole senza problemi saltano `run-report` e risparmiano uso di
+Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
 
 ## Output
 

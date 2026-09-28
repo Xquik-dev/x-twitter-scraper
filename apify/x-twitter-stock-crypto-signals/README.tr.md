@@ -155,22 +155,35 @@ satırları, ücretlendirilen analizleri ve bekleyen ücretleri ayırır.
 
 ## Çalıştırma özeti ve düz yanıtlar
 
-Her çalıştırma, anahtar-değer deposuna bir `analysis-summary` kaydı yazar. Sorun
-yaşayan veya büyük bir çalıştırma ayrıca `run-report` yazar. Bu rapor, özeti
-`results.analysisSummary` altında tekrarlar. Özet, analiz edilen, başarısız ve
-atlanan satırları sayar, etkileşimi toplar ve her soruyu özetler. `cashtags`,
-`$NVDA` gibi cashtag başına duruşu sayar, bu yüzden varlık başına yükseliş oranı
-`choices.stance`'ten gelir. `stance` bloğu, etkileşim ağırlıklı bölünmeyi ve en
-çok etkileşim alan yükseliş ve düşüş gönderilerini ekler. `conviction`,
-ortalamayı & etkileşim ağırlıklı ortalamayı bildirir. Özet, sayıları 4 ondalık
-basamağa yuvarlar. Boş bir çalıştırma sıfır sayım & `null` ortalama bildirir.
-Her `cashtags` girişi `signal` ekler. `signal` bir yükseliş sayısı, bir düşüş
-sayısı & -1 ile 1 arası bir puan içerir. Puan, (yükseliş - düşüş) / satır
-değerine eşittir. `monitor.changedRows`, duruşu temel değerden bu yana hareket
-eden tweet'leri listeler. Her satır, bağlantı verdiği ana bilgisayar adlarını
-`sourceDomains`'te listeler. `monitor.baselineDatasetId` ayarlıyken özetin
-`monitor` bloğu karşılaştırma durumlarını sayar & 50'ye kadar değişen satırı
-listeler.
+Bir çalıştırma, 4 durumda anahtar-değer deposuna bir `analysis-summary` kaydı
+yazar:
+
+- Bir sorun yaşar veya büyüktür.
+- Bir serinin ilk çalıştırması olarak `baselineDatasetId` olmadan `monitor`
+  ayarlar.
+- Karşılaştırması değişen, yeni veya karşılaştırılamayan bir tweet bulur.
+- `alwaysSaveRunRecords` açıktır.
+
+Diğer çalıştırmalar bu kaydı atlar. Durum metinleri en sık yanıtı belirtir,
+örneğin `Top stance: bullish in 3 of 5 results.` Değişiklik bulmayan bir
+karşılaştırma `No change since the earlier run.` yazar. Sorun yaşayan veya büyük
+bir çalıştırma ayrıca `run-report` yazar. `alwaysSaveRunRecords` açık olan bir
+çalıştırma da yazar. `run-report`, özeti `results.analysisSummary` altında
+tekrarlar.
+
+Özet, analiz edilen, başarısız ve atlanan satırları sayar, etkileşimi toplar ve
+her soruyu özetler. `cashtags`, `$NVDA` gibi cashtag başına duruşu sayar, bu
+yüzden varlık başına yükseliş oranı `choices.stance`'ten gelir. `stance` bloğu,
+etkileşim ağırlıklı bölünmeyi ve en çok etkileşim alan yükseliş ve düşüş
+gönderilerini ekler. `conviction`, ortalamayı & etkileşim ağırlıklı ortalamayı
+bildirir. Özet, sayıları 4 ondalık basamağa yuvarlar. Boş bir çalıştırma sıfır
+sayım & `null` ortalama bildirir. Her `cashtags` girişi `signal` ekler. `signal`
+bir yükseliş sayısı, bir düşüş sayısı & -1 ile 1 arası bir puan içerir. Puan,
+(yükseliş - düşüş) / satır değerine eşittir. `monitor.changedRows`, duruşu temel
+değerden bu yana hareket eden tweet'leri listeler. Her satır, bağlantı verdiği
+ana bilgisayar adlarını `sourceDomains`'te listeler. `monitor.baselineDatasetId`
+ayarlıyken özetin `monitor` bloğu karşılaştırma durumlarını sayar & 50'ye kadar
+değişen satırı listeler.
 
 Her sonuç satırı ayrıca `answers`'ı da taşır. Bu, soru ID'sinden seçilen
 kategoriye, puana veya olasılığa düz bir eşlemedir. `Flat answers` veri kümesi
@@ -181,16 +194,18 @@ Başarısız ve atlanan satırlar boş bir eşleme taşır.
 ## Önceki bir çalıştırmayla karşılaştır
 
 Aynı analiz ayarlarına sahip tamamlanmış önceki bir çalıştırmanın veri kümesi
-ID'si olan `monitor.baselineDatasetId`'yi geçir. Böylece her satır bir `monitor`
-nesnesi kazanır. Durumu, temel değer yoksa `first_run`, önceki çalıştırmada
-bulunmayan tweet'ler için `new_to_baseline` & bulunan tweet'ler için `unchanged`
-veya `changed` olur. `changes`, `previous`'tan `current`'a taşınan her duruş,
-içerik türü veya kesinlik seviyesini listeler. Kararlar kategoriye, yuvarlanmış
-puan seviyesine veya 0,5'te evet/hayır'a göre karşılaştırılır. Bir karar
-yalnızca belirgin biçimde değiştiğinde değişmiş sayılır. Çalıştırmalar
-arasındaki yakın-berabere titremeler değişmemiş kalır. `maxBaselineRows`'un
-(varsayılan 100.000) üzerindeki veya farklı ayarlardan gelen temel değerler,
-toplamadan önce bir tanılama satırıyla çalıştırmayı durdurur.
+ID'si olan `monitor.baselineDatasetId`'yi geçir. Karşılaştırma o çalıştırmanın
+satırlarını okur. Bu yüzden o çalıştırma özetini atlamış olsa bile çalışır.
+Böylece her satır bir `monitor` nesnesi kazanır. Durumu, temel değer yoksa
+`first_run`, önceki çalıştırmada bulunmayan tweet'ler için `new_to_baseline` &
+bulunan tweet'ler için `unchanged` veya `changed` olur. `changes`,
+`previous`'tan `current`'a taşınan her duruş, içerik türü veya kesinlik
+seviyesini listeler. Kararlar kategoriye, yuvarlanmış puan seviyesine veya
+0,5'te evet/hayır'a göre karşılaştırılır. Bir karar yalnızca belirgin biçimde
+değiştiğinde değişmiş sayılır. Çalıştırmalar arasındaki yakın-berabere
+titremeler değişmemiş kalır. `maxBaselineRows`'un (varsayılan 100.000)
+üzerindeki veya farklı ayarlardan gelen temel değerler, toplamadan önce bir
+tanılama satırıyla çalıştırmayı durdurur.
 
 ## Görev örnekleri
 

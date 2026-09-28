@@ -40,12 +40,14 @@ sonuçlar bozulmadan kalır. Yeniden denemeden önce `availableResults`,
 `failedTargets`, `retryable` ve `nextAction` alanlarını oku. Başarılı bir Actor
 çıkışı teslimatı doğrular, eksiksiz çıkarmayı değil.
 
-Durum metni, çalıştırmayı erken durduran her nedeni belirtir. `stopCauses`,
-her nedeni kendi `message`, `retryable` ve `nextAction` alanlarıyla
-listeler. Olası nedenler şunlar: `target_failed`, `page_limit`,
-`reply_reach` ve `deadline_reached`. `reply_reach`, X'in thread'in sadece
-bir kısmını verdiğini gösterir. Nedenlerden en az biri `retryable` ise
-çalıştırma da `retryable` olur.
+Durum metni, çalıştırmayı erken durduran her nedeni belirtir. `stopCauses`, her
+nedeni kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Olası
+nedenler şunlar: `target_not_found`, `target_failed`, `page_limit`,
+`reply_reach` ve `deadline_reached`. `reply_reach`, X'in thread'in sadece bir
+kısmını verdiğini gösterir. Bulunamayan bir gönderi veya hesap hata sayılmaz.
+Durum metni bunu belirtir, örneğin "X has no match for 1 target." Bu durum,
+yalnızca çalıştırmayı başka bir neden durdurduysa `stopCauses` içine girer.
+Nedenlerden en az biri `retryable` ise çalıştırma da `retryable` olur.
 
 ## Bu Twitter yanıt scraper'ı ne yapar?
 
@@ -423,9 +425,9 @@ Durum metni, çalıştırmanın neden durduğunu söyler. Ücretlendirilen sonu�
 okunan hedefleri de sayar. Sorunlu çalıştırmalar, girdisiz ve geçersiz girdi
 çıkışları dahil her zaman `run-report` yazar. Büyük bir çalıştırma da bu kaydı
 yazar. Sorunsuz biten küçük bir çalıştırma bu kaydı atlar ve Apify kullanımından
-tasarruf eder. Rapor şeması tamamlanmayı, faturalamayı, hataları ve kaydedilmiş
-imleçleri belgeler. `version` alanı yayınlanmış tam Actor kaynak sürümünü
-bildirir.
+tasarruf eder. Her çalıştırmada yazması için `alwaysSaveRunRecords` seçeneğini
+aç. Rapor şeması tamamlanmayı, faturalamayı, hataları ve kaydedilmiş imleçleri
+belgeler. `version` alanı yayınlanmış tam Actor kaynak sürümünü bildirir.
 
 Olası durumlar arasında şunlar bulunur:
 

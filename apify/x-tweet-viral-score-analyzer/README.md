@@ -262,19 +262,30 @@ charges.
 
 ## Run summary & flat answers
 
-Each run writes an `analysis-summary` record to its key-value store. A run that
-hits a problem, or a large run, also writes `run-report`. It repeats the summary
-under `results.analysisSummary`. The summary counts analyzed, failed & skipped
-rows, sums engagement, and summarizes every question. Its `viral` block reports
-`averageScore`, the count of each verdict, & how many rows the Actor scored or
-left unscored. The same block holds `calibration`, `accounts` & `leaderboard`,
-described above. Score questions report a mean & an engagement-weighted mean.
-The `reaction` split shows how many tweets fall into each reaction, & `top`
-lists the three most engaged tweets per reaction. An empty run reports zero
-counts & a `null` average. Every row lists `sourceDomains`, the hostnames it
-links to, & `cashtags` such as `$NVDA` found in its text. With
-`monitor.baselineDatasetId` set, the summary's `monitor` block counts comparison
-statuses & lists up to 50 changed rows.
+A run writes an `analysis-summary` record to its key-value store in 4 cases:
+
+- It hits a problem or is large.
+- It sets `monitor` without `baselineDatasetId`, as the first run of a series.
+- Its comparison finds a changed, new or not comparable tweet.
+- It has `alwaysSaveRunRecords` on.
+
+Other runs skip the record. Their status names the top answer, like
+`Average Viral Score: 64.` A comparison without a change states
+`No change since the earlier run.` A run that hits a problem, or a large run,
+also writes `run-report`. So does a run with `alwaysSaveRunRecords` on.
+`run-report` repeats the summary under `results.analysisSummary`.
+
+The summary counts analyzed, failed & skipped rows, sums engagement, and
+summarizes every question. Its `viral` block reports `averageScore`, the count
+of each verdict, & how many rows the Actor scored or left unscored. The same
+block holds `calibration`, `accounts` & `leaderboard`, described above. Score
+questions report a mean & an engagement-weighted mean. The `reaction` split
+shows how many tweets fall into each reaction, & `top` lists the three most
+engaged tweets per reaction. An empty run reports zero counts & a `null`
+average. Every row lists `sourceDomains`, the hostnames it links to, &
+`cashtags` such as `$NVDA` found in its text. With `monitor.baselineDatasetId`
+set, the summary's `monitor` block counts comparison statuses & lists up to 50
+changed rows.
 
 Every result row also carries `viralScore`, `viralVerdict`,
 `viralAlgorithmScore`, `viralActualEngagementRate` & `answers`, a flat map from
@@ -285,14 +296,15 @@ spreadsheets need no JSON parsing. Failed & skipped rows carry an empty map.
 ## Compare with an earlier run
 
 Pass `monitor.baselineDatasetId`, the dataset ID of a completed earlier run with
-the same analysis settings. Every row then gains a `monitor` object. Its status
-is `first_run` without a baseline, `new_to_baseline` for tweets the earlier run
-did not have, & `unchanged` or `changed` for tweets it had. `changes` lists each
-trait decision that moved from `previous` to `current`. Decisions compare by
-category, rounded score level, or yes/no at 0.5. A decision counts as changed
-only when it moves clearly. Near-tie jitter between runs stays unchanged.
-Baselines above `maxBaselineRows` (default 100,000) or from different settings
-stop the run before collection with a diagnostic row.
+the same analysis settings. The comparison reads that run's rows, so it works
+even when that run skipped its summary. Every row then gains a `monitor` object.
+Its status is `first_run` without a baseline, `new_to_baseline` for tweets the
+earlier run did not have, & `unchanged` or `changed` for tweets it had.
+`changes` lists each trait decision that moved from `previous` to `current`.
+Decisions compare by category, rounded score level, or yes/no at 0.5. A decision
+counts as changed only when it moves clearly. Near-tie jitter between runs stays
+unchanged. Baselines above `maxBaselineRows` (default 100,000) or from different
+settings stop the run before collection with a diagnostic row.
 
 ## Task examples
 

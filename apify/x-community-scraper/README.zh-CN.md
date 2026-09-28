@@ -16,7 +16,7 @@
 </td></tr></table>
 
 Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据。X Community
-Scraper 能采集 Community 信息、帖子、搜索结果、成员与管理员。其他所有 Apify Actor
+Scraper 能采集 Community 信息、帖子、搜索结果、成员与管理员。大多数其他 Apify Actor
 都会在过滤或去重之前就收费。Xquik 只为已交付、唯一且符合过滤条件的结果收费。
 
 从 Community URL 或 ID 采集 Twitter Community 信息、帖子、关键词匹配结果、成员与
@@ -45,6 +45,9 @@ Scraper 能采集 Community 信息、帖子、搜索结果、成员与管理员�
 ```
 
 若需关键词搜索，请在 `resources` 中加入 `"search"` 并提供 `query`。
+
+顺利完成的小型运行会跳过 `run-report`，以节省 Apify 用量。开启
+`alwaysSaveRunRecords` 可在每次运行时都写入。
 
 ## 输出
 

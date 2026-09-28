@@ -54,6 +54,8 @@ inclut sa cible source et sa relation.
 
 - Les filtres et la suppression des doublons s'exécutent avant la
   facturation.
+- Un profil issu de plusieurs cibles apparaît et est facturé une seule fois par
+  défaut.
 - Un run accepte des handles, des ID numériques, des URL et des chemins
   courts.
 - Le mode fusion enregistre les profils partagés, les sources, les
@@ -137,13 +139,14 @@ l'usage de sa plateforme. Xquik applique une facturation par ligne de donnée
 livrée. Les diagnostics sont gratuits dans la sortie `diagnostics`. Aucun
 abonnement Xquik séparé ne s'applique. Aucun frais de démarrage ne s'applique.
 Le texte de statut indique pourquoi le run s'est arrêté. Il compte aussi les
-résultats facturés et les cibles lues. Un run avec un problème, ou un gros run,
-écrit aussi un enregistrement `run-report`. Son `estimatedChargeUsd` utilise le
-prix pay-per-event en temps réel qu'Apify expose à l'Actor. Les runs avec un
-problème écrivent toujours `run-report`. Cela inclut les sorties sans entrée et
-avec entrée invalide. Un petit run sans problème l'omet et économise de l'usage
-Apify. Son champ `version` indique la version exacte du code source publié de
-l'Actor.
+résultats facturés, les doublons écartés et les cibles lues. Un run avec un
+problème, ou un gros run, écrit aussi un enregistrement `run-report`. Son
+`estimatedChargeUsd` utilise le prix pay-per-event en temps réel qu'Apify expose
+à l'Actor. Les runs avec un problème écrivent toujours `run-report`. Cela inclut
+les sorties sans entrée et avec entrée invalide. Un petit run sans problème
+l'omet et économise de l'usage Apify. Activez `alwaysSaveRunRecords` pour
+l'écrire à chaque run. Son champ `version` indique la version exacte du code
+source publié de l'Actor.
 
 `failedTargets` compte les cibles arrêtées après une erreur. Les profils livrés
 restent des lignes de données facturables. Ces runs utilisent
@@ -166,8 +169,8 @@ l'attribution et la facturation restent exacts sur l'ensemble.
   `maxStatuses`, `minAccountAgeDays`, `verifiedType`, `usernameContains`,
   `hasWebsite`, `hasLocation`) s'exécutent avant qu'un profil n'entre dans
   votre dataset.
-- Avec `dedupeAcrossTargets: true`, l'Actor retire les répétitions avant
-  l'écriture.
+- L'Actor retire les répétitions entre cibles avant l'écriture. Réglez
+  `dedupeAcrossTargets: false` pour les garder.
 - Les lignes rejetées par le dataset ne sont pas facturées.
 - Les runs sans entrée, avec entrée invalide et sans sortie écrivent 1
   enregistrement exploitable dans la sortie `diagnostics` gratuite.
@@ -339,10 +342,10 @@ Exemples :
 - Collez `https://x.com/<handle>/verified_followers` dans Start URLs pour
   les profils vérifiés.
 - Collez une URL de list dans Start URLs pour auditer ses membres.
-- Ajoutez 2 handles ou plus. Réglez `dedupeMode: "first"` pour ne garder
-  que la première ligne de profil correspondante, ou utilisez
-  `dedupeMode: "merge"` pour garder une ligne avec toutes les cibles source
-  correspondantes.
+- Ajoutez 2 handles ou plus. Un profil partagé apparaît une fois, sous la
+  première cible. Utilisez `dedupeMode: "merge"` pour garder 1 ligne avec chaque
+  cible correspondante. Réglez `dedupeAcrossTargets: false` pour garder 1 ligne
+  par cible.
 
 ### UX d'entrée Console et API
 
@@ -357,13 +360,14 @@ La Console expose ces contrôles :
 - Les filtres de profil numériques acceptent des nombres entiers à partir
   de 0.
 
-Utilisez les champs canoniques dans les nouvelles intégrations. Les alias
-de compatibilité restent disponibles en JSON, API, SDK, automatisation et
-entrées de tâche. Cela inclut `outputVariant` et `includeRaw` comme alias
-d'Output Mode. Cela inclut aussi `dedupeAcrossTargets` comme alias de
-Dedupe Mode. Le formulaire visuel masque les alias qui dupliquent un
-contrôle canonique. Les entrées JSON et de tâche sauvegardées existantes
-conservent leur comportement actuel.
+Utilisez les champs canoniques dans les nouvelles intégrations. Les alias de
+compatibilité restent disponibles en JSON, API, SDK, automatisation et entrées
+de tâche. Cela inclut `outputVariant` et `includeRaw` comme alias d'Output Mode.
+Cela inclut aussi `dedupeAcrossTargets` comme alias de Dedupe Mode. Le
+formulaire visuel masque les alias qui dupliquent un contrôle canonique. Les
+alias des entrées JSON existantes et des entrées de tâche sauvegardées
+continuent de fonctionner. Les entrées sauvegardées avec
+`dedupeAcrossTargets: false` ou `dedupeMode: "none"` gardent 1 ligne par cible.
 
 ### Migrer depuis un autre Actor d'abonnés
 
@@ -469,9 +473,8 @@ Exportez en JSON, CSV, Excel ou HTML depuis le dataset Apify.
 - Combinez `minFollowers`, `verifiedOnly`, `verifiedType`, `minStatuses`,
   `usernameContains`, `bioContains`, `locationContains`, `hasWebsite` et
   `hasLocation` pour restreindre le dataset facturé.
-- Réglez `dedupeMode: "first"` quand vous scrapez plusieurs handles
-  concurrents pour n'obtenir que des profils uniques sur toutes les
-  cibles.
+- Par défaut, les runs ne gardent que des profils uniques entre les cibles.
+  Réglez `dedupeAcrossTargets: false` pour garder 1 ligne par cible.
 - Réglez `dedupeMode: "merge"` pour obtenir une ligne par profil avec
   chaque cible source correspondante attachée.
 - Réglez `outputMode: "full"` pour obtenir des champs de profil optionnels

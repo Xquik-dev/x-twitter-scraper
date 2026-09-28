@@ -52,6 +52,8 @@ origine & la relazione.
 ### Comportamento principale
 
 - Filtri & rimozione dei duplicati vengono eseguiti prima della fatturazione.
+- Un profilo presente in più target compare & viene addebitato una sola volta
+  per impostazione predefinita.
 - Un'esecuzione accetta handle, ID numerici, URL e percorsi brevi.
 - La modalità merge registra profili condivisi, sorgenti, relazioni & `overlapCount`.
 - I log dell'esecuzione mostrano i tempi di ogni pagina in `fetchDurationMs`,
@@ -132,13 +134,14 @@ della tua piattaforma separatamente. Xquik applica un addebito per ogni riga di
 dati consegnata. Le diagnostiche sono gratuite nell'output `diagnostics`. Non si
 applica alcun abbonamento Xquik separato. Non si applica alcun costo di avvio.
 Il messaggio di stato indica perché l'esecuzione si è fermata. Conta anche i
-risultati addebitati & i target letti. Un'esecuzione con un problema, o
-un'esecuzione grande, scrive anche un record `run-report`. Il suo
+risultati addebitati, i duplicati saltati & i target letti. Un'esecuzione con un
+problema, o un'esecuzione grande, scrive anche un record `run-report`. Il suo
 `estimatedChargeUsd` usa il prezzo pay-per-event in tempo reale che Apify espone
 all'Actor. Le esecuzioni con un problema scrivono sempre `run-report`. Vale
 anche per le uscite senza input o con input non valido. Un'esecuzione piccola
-senza problemi lo salta & risparmia uso di Apify. Il campo `version` riporta la
-versione esatta della sorgente dell'Actor pubblicata.
+senza problemi lo salta & risparmia uso di Apify. Attiva `alwaysSaveRunRecords`
+per scriverlo a ogni esecuzione. Il campo `version` riporta la versione esatta
+della sorgente dell'Actor pubblicata.
 
 `failedTargets` conta i target che si sono interrotti dopo un errore. I profili
 consegnati restano righe di dati fatturabili. Queste esecuzioni usano
@@ -160,8 +163,8 @@ fatturazione restano esatti su tutti.
   `minFollowing`, `maxFollowing`, `minStatuses`, `maxStatuses`,
   `minAccountAgeDays`, `verifiedType`, `usernameContains`, `hasWebsite`,
   `hasLocation`) vengono applicati prima che un profilo entri nel tuo dataset.
-- Con `dedupeAcrossTargets: true`, l'Actor rimuove i duplicati prima della
-  scrittura.
+- L'Actor rimuove i duplicati tra i target prima della scrittura. Imposta
+  `dedupeAcrossTargets: false` per mantenerli.
 - Le righe rifiutate dal dataset non vengono fatturate.
 - Le esecuzioni senza input, con input non valido & senza output scrivono 1
   record utile nell'output gratuito `diagnostics`.
@@ -331,9 +334,10 @@ Esempi:
 - Incolla `https://x.com/<handle>/verified_followers` in Start URLs per i
   profili verificati.
 - Incolla un URL di List in Start URLs per verificarne i membri.
-- Aggiungi 2+ handle. Imposta `dedupeMode: "first"` per mantenere solo la prima
-  riga di profilo corrispondente, oppure usa `dedupeMode: "merge"` per
-  mantenere una riga con tutti i target di origine corrispondenti.
+- Aggiungi 2+ handle. Un profilo condiviso compare una volta, sotto il primo
+  target. Usa `dedupeMode: "merge"` per mantenere 1 riga con ogni target
+  corrispondente. Imposta `dedupeAcrossTargets: false` per mantenere 1 riga per
+  target.
 
 ### UX di input Console & API
 
@@ -350,8 +354,10 @@ Usa i campi canonici nelle nuove integrazioni. Gli alias di compatibilità
 restano disponibili in JSON, API, SDK, automazione & input dei task. Questo
 include `outputVariant` & `includeRaw` come alias di Output Mode. Include anche
 `dedupeAcrossTargets` come alias di Dedupe Mode. Il modulo visuale nasconde gli
-alias che duplicano un controllo canonico. Gli input JSON esistenti & i task
-salvati mantengono il loro comportamento attuale.
+alias che duplicano un controllo canonico. Gli alias negli input JSON esistenti
+& nei task salvati continuano a funzionare. Gli input salvati con
+`dedupeAcrossTargets: false` o `dedupeMode: "none"` mantengono 1 riga per
+target.
 
 ### Migra da un altro Actor di follower
 
@@ -453,8 +459,9 @@ Esporta come JSON, CSV, Excel o HTML dal dataset Apify.
 - Combina `minFollowers`, `verifiedOnly`, `verifiedType`, `minStatuses`,
   `usernameContains`, `bioContains`, `locationContains`, `hasWebsite` &
   `hasLocation` per restringere il dataset fatturato.
-- Imposta `dedupeMode: "first"` quando estrai più handle concorrenti per
-  ottenere solo profili unici tra tutti i target.
+- Le esecuzioni mantengono solo profili unici tra i target per impostazione
+  predefinita. Imposta `dedupeAcrossTargets: false` per mantenere 1 riga per
+  target.
 - Imposta `dedupeMode: "merge"` per ottenere una riga per profilo con ogni
   target di origine corrispondente allegato.
 - Imposta `outputMode: "full"` per ottenere campi di profilo facoltativi come

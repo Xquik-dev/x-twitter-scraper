@@ -35,6 +35,9 @@ Search Twitter accounts by name, topic, bio, or location. No X API key.
 }
 ```
 
+Small runs that go well skip `run-report` & save Apify usage. Turn on
+`alwaysSaveRunRecords` to write it on every run.
+
 ## Output
 
 Each row contains a profile and its originating query in `sourceTarget`.

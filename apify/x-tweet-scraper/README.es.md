@@ -176,7 +176,8 @@ ejecución con un problema, o una ejecución grande, también escribe un registr
 `run-report`. Su `estimatedChargeUsd` usa el precio actual por evento que Apify
 expone al Actor. Las ejecuciones con un problema siempre escriben `run-report`.
 Esto incluye las salidas sin entrada o con entrada inválida. Una ejecución
-pequeña que termina bien lo omite y ahorra uso de Apify. Los informes de
+pequeña que termina bien lo omite y ahorra uso de Apify. Activa
+`alwaysSaveRunRecords` para escribirlo en cada ejecución. Los informes de
 ejecución separan las filas de datos en `realRows` y los diagnósticos en
 `diagnosticRows`.
 

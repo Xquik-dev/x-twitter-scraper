@@ -176,8 +176,9 @@ okunan hedefleri de sayar. Sorun yaşayan veya büyük bir çalıştırma ayrıc
 gösterdiği canlı olay başına ödeme fiyatını kullanır. Sorunlu çalıştırmalar,
 girdisiz ve geçersiz girdi çıkışları dahil her zaman `run-report` yazar.
 Sorunsuz biten küçük bir çalıştırma bu kaydı atlar ve Apify kullanımından
-tasarruf eder. Çalıştırma raporları veri satırlarını `realRows` içinde ve
-tanılamaları `diagnosticRows` içinde ayırır.
+tasarruf eder. Her çalıştırmada yazması için `alwaysSaveRunRecords` seçeneğini
+aç. Çalıştırma raporları veri satırlarını `realRows` içinde ve tanılamaları
+`diagnosticRows` içinde ayırır.
 
 Başka bir çalıştırmaya harcama yapmadan önce boş sonuçları anla. Raporlardaki ve
 son tanılamalardaki `filtering` nesnesi, filtrelerinin kaldırdığı satırları

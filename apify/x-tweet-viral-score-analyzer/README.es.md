@@ -285,11 +285,24 @@ análisis cobrados y los cargos pendientes.
 
 ## Resumen de ejecución y respuestas planas
 
-Cada ejecución escribe un registro `analysis-summary` en su almacén de
-clave-valor. Una ejecución con un problema, o una ejecución grande, también
-escribe `run-report`. Este repite el resumen en `results.analysisSummary`. El
-resumen cuenta las filas analizadas, fallidas y omitidas, suma la interacción y
-resume cada pregunta. Su bloque `viral` reporta `averageScore`, el conteo de
+Una ejecución escribe un registro `analysis-summary` en su almacén de
+clave-valor en 4 casos:
+
+- Tiene un problema o es grande.
+- Configura `monitor` sin `baselineDatasetId`, como primera ejecución de una
+  serie.
+- Su comparación encuentra un tuit cambiado, nuevo o no comparable.
+- Tiene `alwaysSaveRunRecords` activado.
+
+Las demás ejecuciones omiten el registro. Su texto de estado nombra la respuesta
+principal, como `Average Viral Score: 64.` Una comparación sin cambios indica
+`No change since the earlier run.` Una ejecución con un problema, o una
+ejecución grande, también escribe `run-report`. Lo mismo hace una ejecución con
+`alwaysSaveRunRecords` activado. `run-report` repite el resumen en
+`results.analysisSummary`.
+
+El resumen cuenta las filas analizadas, fallidas y omitidas, suma la interacción
+y resume cada pregunta. Su bloque `viral` reporta `averageScore`, el conteo de
 cada veredicto y cuántas filas el Actor puntuó o dejó sin puntaje. El mismo
 bloque contiene `calibration`, `accounts` y `leaderboard`, descritos arriba. Las
 preguntas de puntaje reportan una media y una media ponderada por interacción.
@@ -310,16 +323,17 @@ filas fallidas u omitidas tienen un mapa vacío.
 ## Comparar con una ejecución anterior
 
 Pasa `monitor.baselineDatasetId`, el ID del Dataset de una ejecución anterior
-completada con la misma configuración de análisis. Cada fila obtiene entonces un
-objeto `monitor`. Su estado es `first_run` sin línea base, `new_to_baseline`
-para tuits que la ejecución anterior no tenía, & `unchanged` o `changed` para
-tuits que sí tenía. `changes` enumera cada decisión de rasgo que cambió de
-`previous` a `current`. Las decisiones se comparan por categoría, nivel de
-puntaje redondeado o sí/no en 0.5. Una decisión cuenta como cambiada solo cuando
-se mueve con claridad. Las fluctuaciones de empate cercano entre ejecuciones se
-consideran sin cambios. Las líneas base por encima de `maxBaselineRows` (100 000
-por defecto) o con configuraciones diferentes detienen la ejecución antes de la
-recopilación con una fila de diagnóstico.
+completada con la misma configuración de análisis. La comparación lee las filas
+de esa ejecución. Así funciona aunque esa ejecución haya omitido su resumen.
+Cada fila obtiene entonces un objeto `monitor`. Su estado es `first_run` sin
+línea base, `new_to_baseline` para tuits que la ejecución anterior no tenía, &
+`unchanged` o `changed` para tuits que sí tenía. `changes` enumera cada decisión
+de rasgo que cambió de `previous` a `current`. Las decisiones se comparan por
+categoría, nivel de puntaje redondeado o sí/no en 0.5. Una decisión cuenta como
+cambiada solo cuando se mueve con claridad. Las fluctuaciones de empate cercano
+entre ejecuciones se consideran sin cambios. Las líneas base por encima de
+`maxBaselineRows` (100 000 por defecto) o con configuraciones diferentes
+detienen la ejecución antes de la recopilación con una fila de diagnóstico.
 
 ## Ejemplos de tareas
 

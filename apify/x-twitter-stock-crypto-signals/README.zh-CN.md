@@ -119,13 +119,22 @@ AI 费用已包含在每条推文的价格中。你无需 AI 账户、token 或�
 
 ## 运行摘要与扁平化回答
 
-每次运行都会向其键值存储写入一条 `analysis-summary` 记录。遇到问题的运行或大型运行还会写入 `run-report`。`run-report` 会在 `results.analysisSummary` 下重复该摘要。摘要会统计已分析、失败和被跳过的行数，汇总互动数据，并对每个问题进行汇总。`cashtags` 会按 `$NVDA` 这样的 cashtag 统计立场分布，因此每个资产的看涨比例来自 `choices.stance`。`stance` 部分会附加按互动量加权的分布情况，以及互动量最高的看涨和看跌帖子。`conviction` 会报告均值和按互动量加权的均值。摘要会将数值四舍五入到小数点后 4 位。空运行会报告数量为零、均值为 `null`。每条 `cashtags` 记录还会附加 `signal`，其中包含看涨数量、看跌数量，以及一个介于 -1 到 1 之间的分数。该分数为 (看涨 - 看跌) / 行数。`monitor.changedRows` 会列出自基线以来立场发生变化的推文。每一行会列出 `sourceDomains`，即其链接指向的域名。设置 `monitor.baselineDatasetId` 后，摘要中的 `monitor` 部分会统计各比较状态的数量，并列出最多 50 条发生变化的行。
+在以下 4 种情况下，运行会向其键值存储写入一条 `analysis-summary` 记录：
+
+- 运行遇到问题或规模较大。
+- 作为系列中的首次运行，设置了 `monitor` 但没有设置 `baselineDatasetId`。
+- 比较发现了已变化、新增或无法比较的推文。
+- 开启了 `alwaysSaveRunRecords`。
+
+其他运行会跳过该记录。它们的状态消息会写明最多的回答，例如 `Top stance: bullish in 3 of 5 results.` 没有变化的比较会显示 `No change since the earlier run.` 遇到问题的运行或大型运行还会写入 `run-report`。开启 `alwaysSaveRunRecords` 的运行也会写入。`run-report` 会在 `results.analysisSummary` 下重复该摘要。
+
+摘要会统计已分析、失败和被跳过的行数，汇总互动数据，并对每个问题进行汇总。`cashtags` 会按 `$NVDA` 这样的 cashtag 统计立场分布，因此每个资产的看涨比例来自 `choices.stance`。`stance` 部分会附加按互动量加权的分布情况，以及互动量最高的看涨和看跌帖子。`conviction` 会报告均值和按互动量加权的均值。摘要会将数值四舍五入到小数点后 4 位。空运行会报告数量为零、均值为 `null`。每条 `cashtags` 记录还会附加 `signal`，其中包含看涨数量、看跌数量，以及一个介于 -1 到 1 之间的分数。该分数为 (看涨 - 看跌) / 行数。`monitor.changedRows` 会列出自基线以来立场发生变化的推文。每一行会列出 `sourceDomains`，即其链接指向的域名。设置 `monitor.baselineDatasetId` 后，摘要中的 `monitor` 部分会统计各比较状态的数量，并列出最多 50 条发生变化的行。
 
 每个结果行还包含 `answers`，这是一个从问题 ID 映射到所选类别、评分或概率的扁平化映射。`Flat answers` 数据集视图以及 CSV 或 Excel 导出会在推文旁为每个问题显示一列，因此电子表格无需解析 JSON。失败或被跳过的行对应一个空映射。
 
 ## 与更早的运行进行比较
 
-传入 `monitor.baselineDatasetId`，即一次采用相同分析设置且已完成的更早运行的数据集 ID。每一行就会新增一个 `monitor` 对象。其状态在没有基线时为 `first_run`，基线中不存在该推文时为 `new_to_baseline`，基线中存在该推文时为 `unchanged` 或 `changed`。`changes` 会列出每一项从 `previous` 变为 `current` 的立场、内容类型或信心程度。比较时按类别、四舍五入后的评分等级或以 0.5 为界的是/否值进行判断。只有判断发生明显变化时才计为已更改。运行之间的临界抖动仍视为未变化。超过 `maxBaselineRows`（默认 100,000）的基线，或来自不同设置的基线，会在数据收集开始前停止运行，并写入一条诊断记录。
+传入 `monitor.baselineDatasetId`，即一次采用相同分析设置且已完成的更早运行的数据集 ID。比较会读取该运行的行，因此即使该运行跳过了摘要也能正常工作。每一行就会新增一个 `monitor` 对象。其状态在没有基线时为 `first_run`，基线中不存在该推文时为 `new_to_baseline`，基线中存在该推文时为 `unchanged` 或 `changed`。`changes` 会列出每一项从 `previous` 变为 `current` 的立场、内容类型或信心程度。比较时按类别、四舍五入后的评分等级或以 0.5 为界的是/否值进行判断。只有判断发生明显变化时才计为已更改。运行之间的临界抖动仍视为未变化。超过 `maxBaselineRows`（默认 100,000）的基线，或来自不同设置的基线，会在数据收集开始前停止运行，并写入一条诊断记录。
 
 ## 任务示例
 

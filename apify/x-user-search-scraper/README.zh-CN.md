@@ -34,6 +34,9 @@ Search Scraper 能按用户名、简介与地点查找用户。大多数其他 A
 }
 ```
 
+顺利完成的小型运行会跳过 `run-report`，以节省 Apify 用量。开启
+`alwaysSaveRunRecords` 可在每次运行时都写入。
+
 ## 输出
 
 每行包含一个主页及其在 `sourceTarget` 中记录的来源查询。

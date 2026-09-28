@@ -15,12 +15,11 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Découvrez comment Framer utilise les scrapers Xquik avec Claude Code, Codex, Cursor et d'autres outils, à partir de 6:07.</a>
 </td></tr></table>
 
-Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher
-au monde, avec les données X les plus complètes. X Article Scraper transforme
-les X Articles longs en Markdown, texte, couvertures, auteurs, dates et
-métriques. Tous les autres Actors Apify facturent avant de filtrer ou de
-dédupliquer. Xquik ne facture que les résultats livrés, uniques et conformes
-aux filtres.
+Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
+monde, avec les données X les plus complètes. X Article Scraper transforme les X
+Articles longs en Markdown, texte, couvertures, auteurs, dates et métriques. La
+plupart des autres Actors Apify facturent avant de filtrer ou de dédupliquer.
+Xquik ne facture que les résultats livrés, uniques et conformes aux filtres.
 
 Extrayez des X Articles longs à partir d'URL de posts ou d'ID de Tweet
 numériques. Aucune clé API X ni connexion requise.
@@ -34,11 +33,15 @@ numériques. Aucune clé API X ni connexion requise.
 | `maxItems`              | Plafond global d'Articles livrés                | `100000`   |
 | `dedupeAcrossTargets`   | Retire les ID d'Article répétés avant facturation | `true`   |
 | `maxConcurrency`        | Lectures d'Articles indépendantes en parallèle | `100`      |
+| `alwaysSaveRunRecords` | Enregistre `run-report` à chaque run           | `false`    |
 
 ## Sortie
 
 L'onglet Output ouvre `Articles`. `Results` renvoie aux lignes. `Run Report`
-renvoie aux comptes, à l'achèvement, à la durée et aux anomalies.
+renvoie aux comptes, à l'achèvement, à la durée et aux anomalies. Un run avec un
+problème, ou un gros run, l'écrit. Un petit run sans problème donne plutôt ses
+comptes dans le texte de statut. Activez `alwaysSaveRunRecords` pour l'écrire à
+chaque run.
 
 ```json
 {

@@ -36,6 +36,9 @@ Cerca account Twitter per nome, argomento, bio o posizione. Nessuna chiave API X
 }
 ```
 
+Le esecuzioni piccole senza problemi saltano `run-report` e risparmiano uso di
+Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
+
 ## Output
 
 Ogni riga contiene un profilo e la query di origine in `sourceTarget`.

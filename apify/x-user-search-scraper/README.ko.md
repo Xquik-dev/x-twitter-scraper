@@ -38,6 +38,9 @@ Xquik은 가장 완전한 X 데이터를 보유한, 세계에서 가장 빠르�
 }
 ```
 
+문제없이 끝난 작은 실행은 `run-report`를 건너뛰어 Apify 사용량을 아낍니다. 모든
+실행에서 작성하려면 `alwaysSaveRunRecords`를 켜세요.
+
 ## 출력
 
 각 행에는 프로필과 그 원본 쿼리가 `sourceTarget`에 담겨 있습니다.

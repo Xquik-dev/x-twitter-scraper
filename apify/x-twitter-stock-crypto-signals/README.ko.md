@@ -145,20 +145,30 @@ Pricing 탭이 이를 보여줍니다.
 
 ## 실행 요약 & 플랫 답변
 
-각 실행은 키-값 저장소에 `analysis-summary` 레코드를 작성합니다. 문제가 생긴
-실행이나 큰 실행은 `run-report`도 작성합니다. `run-report`는
-`results.analysisSummary` 아래에 요약을 반복합니다. 요약은 분석된 행, 실패한 행,
-건너뛴 행을 집계하고, 참여도를 합산하며, 모든 질문을 요약합니다. `cashtags`는
-`$NVDA` 같은 캐시태그별 입장을 집계하므로 자산별 강세 비율은
-`choices.stance`에서 확인할 수 있습니다. `stance` 블록은 참여도 가중 분포와 가장
-많이 참여된 강세 & 약세 게시물을 추가합니다. `conviction`은 평균 & 참여도 가중
-평균을 보고합니다. 요약은 숫자를 소수점 4자리로 반올림합니다. 빈 실행은 0 카운트
-& `null` 평균을 보고합니다. 각 `cashtags` 항목은 강세 수, 약세 수 & -1에서 1
-사이 점수가 담긴 `signal`을 추가합니다. 점수는 (강세 - 약세) / 행 수입니다.
-`monitor.changedRows`는 기준선 이후 입장이 바뀐 트윗을 나열합니다. 모든 행은
-링크된 호스트 이름인 `sourceDomains`를 나열합니다. `monitor.baselineDatasetId`가
-설정된 경우 요약의 `monitor` 블록은 비교 상태를 집계하고 변경된 행을 최대
-50개까지 나열합니다.
+실행은 다음 4가지 경우에 키-값 저장소에 `analysis-summary` 레코드를 작성합니다.
+
+- 문제가 생겼거나 규모가 큰 경우.
+- 시리즈의 첫 실행으로 `baselineDatasetId` 없이 `monitor`를 설정한 경우.
+- 비교에서 변경되었거나, 새롭거나, 비교할 수 없는 트윗을 찾은 경우.
+- `alwaysSaveRunRecords`가 켜진 경우.
+
+다른 실행은 이 레코드를 건너뜁니다. 대신 상태 메시지에 가장 많은 답변이
+표시됩니다. 예: `Top stance: bullish in 3 of 5 results.` 변경이 없는 비교는
+`No change since the earlier run.`을 표시합니다. 문제가 생긴 실행이나 큰 실행은
+`run-report`도 작성합니다. `alwaysSaveRunRecords`가 켜진 실행도 마찬가지입니다.
+`run-report`는 `results.analysisSummary` 아래에 요약을 반복합니다.
+
+요약은 분석된 행, 실패한 행, 건너뛴 행을 집계하고, 참여도를 합산하며, 모든
+질문을 요약합니다. `cashtags`는 `$NVDA` 같은 캐시태그별 입장을 집계하므로 자산별
+강세 비율은 `choices.stance`에서 확인할 수 있습니다. `stance` 블록은 참여도 가중
+분포와 가장 많이 참여된 강세 & 약세 게시물을 추가합니다. `conviction`은 평균 &
+참여도 가중 평균을 보고합니다. 요약은 숫자를 소수점 4자리로 반올림합니다. 빈
+실행은 0 카운트 & `null` 평균을 보고합니다. 각 `cashtags` 항목은 강세 수, 약세
+수 & -1에서 1 사이 점수가 담긴 `signal`을 추가합니다. 점수는 (강세 - 약세) / 행
+수입니다. `monitor.changedRows`는 기준선 이후 입장이 바뀐 트윗을 나열합니다.
+모든 행은 링크된 호스트 이름인 `sourceDomains`를 나열합니다.
+`monitor.baselineDatasetId`가 설정된 경우 요약의 `monitor` 블록은 비교 상태를
+집계하고 변경된 행을 최대 50개까지 나열합니다.
 
 모든 결과 행에는 질문 ID를 선택된 카테고리, 점수, 확률에 매핑하는 플랫
 맵인 `answers`도 포함됩니다. `Flat answers` 데이터셋 뷰와 CSV나 Excel
@@ -167,7 +177,8 @@ Pricing 탭이 이를 보여줍니다.
 
 ## 이전 실행과 비교하기
 
-동일한 분석 설정으로 완료된 이전 실행의 데이터셋 ID인 `monitor.baselineDatasetId`를 전달하세요. 그러면 모든 행이
+동일한 분석 설정으로 완료된 이전 실행의 데이터셋 ID인 `monitor.baselineDatasetId`를 전달하세요. 비교는 그 실행의
+행을 읽으므로, 그 실행이 요약을 건너뛰었어도 작동합니다. 그러면 모든 행이
 `monitor` 객체를 얻습니다. 그 상태는 기준선이 없으면 `first_run`, 이전 실행에 없던 트윗이면
 `new_to_baseline`, 이전 실행에 있던 트윗이면 `unchanged`나 `changed`입니다. `changes`는
 `previous`에서 `current`로 바뀐 각 입장, 콘텐츠 유형, 확신 수준을 나열합니다. 판단은 카테고리, 반올림된 점수 수준, 또는

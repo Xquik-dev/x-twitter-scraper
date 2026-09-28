@@ -17,9 +17,9 @@
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. X Article Scraper, uzun biçimli X Makalelerini Markdown,
-metin, kapak görseli, yazar, tarih ve metriklere dönüştürür. Diğer tüm Apify
-Actor'ları filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca
-teslim edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
+metin, kapak görseli, yazar, tarih ve metriklere dönüştürür. Diğer Apify
+Actor'larının çoğu filtreleme veya tekilleştirmeden önce ücret alır. Xquik
+yalnızca teslim edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
 
 Gönderi URL'lerinden veya sayısal Tweet ID'lerinden uzun biçimli X Makalelerini
 çıkar. X API anahtarı veya girişi gerekmez.
@@ -33,11 +33,15 @@ Gönderi URL'lerinden veya sayısal Tweet ID'lerinden uzun biçimli X Makaleleri
 | `maxItems`             | Genel teslim edilen Makale üst sınırı          | `100000`   |
 | `dedupeAcrossTargets`  | Faturalamadan önce tekrarlanan Makale ID'lerini kaldır | `true` |
 | `maxConcurrency`       | Paralel bağımsız Makale okumaları              | `100`      |
+| `alwaysSaveRunRecords` | Her çalıştırmada `run-report` kaydet           | `false`    |
 
 ## Çıktı
 
 Çıktı sekmesi `Articles`'ı açar. `Results` satırlara bağlanır. `Run Report`
-sayımlara, tamamlanmaya, süreye ve anormalliklere bağlanır.
+sayımlara, tamamlanmaya, süreye ve anormalliklere bağlanır. Sorun yaşayan veya
+büyük bir çalıştırma bu raporu yazar. Sorunsuz biten küçük bir çalıştırma ise
+sayımlarını durum metninde verir. Her çalıştırmada yazması için
+`alwaysSaveRunRecords` seçeneğini aç.
 
 ```json
 {

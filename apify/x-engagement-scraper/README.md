@@ -17,7 +17,7 @@
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. X Engagement Scraper collects replies, quotes, retweeters
-& threads for any post. Every other Apify Actor charges before filtering or
+& threads for any post. Most other Apify Actors charge before filtering or
 deduplicating. Xquik charges only for delivered, unique, filter-matching
 results.
 
@@ -51,8 +51,12 @@ retweeters, and thread context. No X API key or login required.
 X stopped showing who liked a post in 2024. The `favoriters` type returns no
 rows. A run with no rows states that reason in its diagnostic.
 
-Keep `dedupeAcrossTargets` off to retain each source and engagement pairing.
-Turn it on to keep one row per account across the run.
+By default, each account or post appears & is charged once per engagement type.
+Set `dedupeAcrossTargets` to `false` to keep a row for each source post. The run
+status counts the duplicates it skipped at no charge.
+
+Small runs that go well skip `run-report` & save Apify usage. Turn on
+`alwaysSaveRunRecords` to write it on every run.
 
 ## Output
 

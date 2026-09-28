@@ -52,6 +52,8 @@ seine Beziehung.
 ### Kernverhalten
 
 - Filter und Duplikatentfernung laufen vor der Abrechnung.
+- Ein Profil aus mehreren Zielen erscheint standardmäßig einmal & wird einmal
+  berechnet.
 - Ein Run akzeptiert Handles, numerische IDs, URLs und Kurzpfade.
 - Der Merge-Modus erfasst gemeinsame Profile, Quellen, Beziehungen und
   `overlapCount`.
@@ -133,14 +135,15 @@ Auf jedem Apify-Plan kostet es `$0.00015` pro geliefertem Profil. Apify
 berechnet deine Plattformnutzung separat. Xquik berechnet eine Gebühr pro
 geliefertem Datensatz. Diagnosen in der Ausgabe `diagnostics` sind kostenlos. Es
 gilt kein separates Xquik-Abonnement. Es gilt keine Startgebühr. Der Statustext
-nennt, warum der Run gestoppt hat. Er zählt auch berechnete Ergebnisse &
-gelesene Ziele. Ein Run mit einem Problem oder ein großer Run schreibt
-zusätzlich einen `run-report`-Datensatz. Dessen `estimatedChargeUsd` nutzt den
-Live-Pay-per-Event-Preis, den Apify dem Actor offenlegt. Runs mit einem Problem
-schreiben immer `run-report`. Das gilt auch für Abbrüche ohne Eingabe und mit
-ungültiger Eingabe. Ein kleiner Run ohne Probleme überspringt ihn & spart
-Apify-Nutzung. Das Feld `version` darin gibt die exakte veröffentlichte
-Actor-Quellversion an.
+nennt, warum der Run gestoppt hat. Er zählt auch berechnete Ergebnisse,
+übersprungene Duplikate & gelesene Ziele. Ein Run mit einem Problem oder ein
+großer Run schreibt zusätzlich einen `run-report`-Datensatz. Dessen
+`estimatedChargeUsd` nutzt den Live-Pay-per-Event-Preis, den Apify dem Actor
+offenlegt. Runs mit einem Problem schreiben immer `run-report`. Das gilt auch
+für Abbrüche ohne Eingabe und mit ungültiger Eingabe. Ein kleiner Run ohne
+Probleme überspringt ihn & spart Apify-Nutzung. Aktiviere
+`alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben. Das Feld `version`
+darin gibt die exakte veröffentlichte Actor-Quellversion an.
 
 `failedTargets` zählt Ziele, die nach einem Fehler abgebrochen sind. Gelieferte
 Profile bleiben abrechenbare Datensätze. Diese Runs verwenden
@@ -162,8 +165,8 @@ bleiben über alle hinweg exakt.
   `minFollowing`, `maxFollowing`, `minStatuses`, `maxStatuses`,
   `minAccountAgeDays`, `verifiedType`, `usernameContains`, `hasWebsite`,
   `hasLocation`) laufen, bevor ein Profil in dein Dataset gelangt.
-- Bei `dedupeAcrossTargets: true` entfernt der Actor Duplikate vor dem
-  Schreiben.
+- Der Actor entfernt Duplikate über Ziele hinweg vor dem Schreiben. Setze
+  `dedupeAcrossTargets: false`, um sie zu behalten.
 - Vom Dataset abgelehnte Datensätze werden nicht abgerechnet.
 - Runs ohne Eingabe, mit ungültiger Eingabe und ohne Ausgabe schreiben 1
   verwertbaren Datensatz in die kostenlose Ausgabe `diagnostics`.
@@ -331,10 +334,10 @@ Beispiele:
 - Füge `https://x.com/<handle>/verified_followers` in Start-URLs ein, um
   verifizierte Profile zu erhalten.
 - Füge eine Listen-URL in Start-URLs ein, um deren Mitglieder zu prüfen.
-- Füge 2 oder mehr Handles hinzu. Setze `dedupeMode: "first"`, um nur den
-  ersten passenden Profil-Datensatz zu behalten, oder nutze
-  `dedupeMode: "merge"`, um einen Datensatz mit allen passenden Quellzielen
-  zu behalten.
+- Füge 2 oder mehr Handles hinzu. Ein gemeinsames Profil erscheint einmal, unter
+  dem ersten Ziel. Nutze `dedupeMode: "merge"`, um 1 Datensatz mit jedem
+  passenden Ziel zu behalten. Setze `dedupeAcrossTargets: false`, um 1 Datensatz
+  pro Ziel zu behalten.
 
 ### Console- & API-Eingabe-UX
 
@@ -348,12 +351,14 @@ Die Console bietet folgende Steuerelemente:
 - Ergebnisobergrenzen akzeptieren ganze Zahlen ab 1.
 - Numerische Profilfilter akzeptieren ganze Zahlen ab 0.
 
-Nutze kanonische Felder in neuen Integrationen. Kompatibilitätsaliasse
-bleiben in JSON, API, SDK, Automatisierung und Task-Eingaben verfügbar. Dazu
-gehören `outputVariant` und `includeRaw` als Aliasse für Output Mode. Ebenso
+Nutze kanonische Felder in neuen Integrationen. Kompatibilitätsaliasse bleiben
+in JSON, API, SDK, Automatisierung und Task-Eingaben verfügbar. Dazu gehören
+`outputVariant` und `includeRaw` als Aliasse für Output Mode. Ebenso
 `dedupeAcrossTargets` als Alias für Dedupe Mode. Das visuelle Formular blendet
-Aliasse aus, die ein kanonisches Steuerelement duplizieren. Bestehende
-JSON- und gespeicherte Task-Eingaben behalten ihr aktuelles Verhalten.
+Aliasse aus, die ein kanonisches Steuerelement duplizieren. Aliasse in
+bestehenden JSON- und gespeicherten Task-Eingaben funktionieren weiter.
+Gespeicherte Eingaben mit `dedupeAcrossTargets: false` oder `dedupeMode: "none"`
+behalten 1 Datensatz pro Ziel.
 
 ### Von einem anderen Follower-Actor migrieren
 
@@ -457,8 +462,8 @@ Exportiere als JSON, CSV, Excel oder HTML aus dem Apify-Dataset.
 - Kombiniere `minFollowers`, `verifiedOnly`, `verifiedType`, `minStatuses`,
   `usernameContains`, `bioContains`, `locationContains`, `hasWebsite` und
   `hasLocation`, um das abgerechnete Dataset einzugrenzen.
-- Setze `dedupeMode: "first"`, wenn du mehrere Wettbewerber-Handles scrapst,
-  um nur eindeutige Profile über alle Ziele hinweg zu erhalten.
+- Runs behalten standardmäßig nur eindeutige Profile über alle Ziele hinweg.
+  Setze `dedupeAcrossTargets: false`, um 1 Datensatz pro Ziel zu behalten.
 - Setze `dedupeMode: "merge"`, um einen Datensatz pro Profil mit jedem
   passenden Quellziel zu erhalten.
 - Setze `outputMode: "full"`, um optionale Profilfelder wie angeheftete

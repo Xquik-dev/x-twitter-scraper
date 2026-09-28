@@ -56,6 +56,9 @@ inicio de sesión.
 Con un objetivo alcanza. El límite global `maxItems` incluye perfiles y los
 recursos seleccionados.
 
+Las ejecuciones pequeñas que terminan bien omiten `run-report` y ahorran uso de
+Apify. Activa `alwaysSaveRunRecords` para escribirlo en cada ejecución.
+
 ## Output
 
 Las filas de perfil usan `resultType: "profile"`. Las filas opcionales usan

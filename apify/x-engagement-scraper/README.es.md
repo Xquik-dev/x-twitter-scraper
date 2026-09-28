@@ -18,7 +18,7 @@
 Xquik es el servicio de extracción de datos de X (Twitter) más rápido y
 económico del mundo, con los datos más completos de X. X Engagement Scraper
 recopila respuestas, citas, usuarios que retuitean e hilos de cualquier
-publicación. Todos los demás Actors de Apify cobran antes de filtrar o
+publicación. La mayoría de los demás Actors de Apify cobra antes de filtrar o
 eliminar duplicados. Xquik solo cobra por resultados entregados, únicos y que
 coinciden con los filtros.
 
@@ -54,9 +54,13 @@ X dejó de mostrar quién dio me gusta a una publicación en 2024. El tipo
 `favoriters` no devuelve filas. Una ejecución sin filas indica ese motivo en
 su diagnóstico.
 
-Mantén `dedupeAcrossTargets` desactivado para conservar cada combinación de
-origen e interacción. Actívalo para mantener una fila por cuenta en toda la
-ejecución.
+Por defecto, cada cuenta o publicación aparece y se cobra una vez por tipo de
+interacción. Configura `dedupeAcrossTargets` en `false` para conservar una fila
+por cada publicación de origen. El texto de estado cuenta los duplicados
+omitidos sin cargo.
+
+Las ejecuciones pequeñas que terminan bien omiten `run-report` y ahorran uso de
+Apify. Activa `alwaysSaveRunRecords` para escribirlo en cada ejecución.
 
 ## Salida
 

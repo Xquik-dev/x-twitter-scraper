@@ -161,22 +161,34 @@ collectées, les analyses facturées et les frais en attente.
 
 ## Résumé de run et réponses à plat
 
-Chaque run écrit un enregistrement `analysis-summary` dans son key-value store.
-Un run avec un problème, ou un gros run, écrit aussi `run-report`. Celui-ci
-répète le résumé sous `results.analysisSummary`. Le résumé compte les lignes
-analysées, échouées et ignorées, totalise l'engagement, et résume chaque
-question. `cashtags` compte la position par cashtag tel que `$NVDA`, donc le
-ratio haussier par actif provient de `choices.stance`. Le bloc `stance` ajoute
-la répartition pondérée par l'engagement et les posts haussiers et baissiers les
-plus engagés. `conviction` rapporte la moyenne & la moyenne pondérée par
-l'engagement. Le résumé arrondit les nombres à 4 décimales. Un run vide indique
-des comptes à zéro & des moyennes `null`. Chaque entrée `cashtags` ajoute
-`signal` avec un compte haussier, un compte baissier & un score de -1 à 1. Le
-score vaut (haussier - baissier) / lignes. `monitor.changedRows` liste les
-tweets dont la position a évolué depuis la référence. Chaque ligne liste
-`sourceDomains`, les noms d'hôte qu'elle lie. Avec `monitor.baselineDatasetId`
-réglé, le bloc `monitor` du résumé compte les statuts de comparaison & liste
-jusqu'à 50 lignes modifiées.
+Un run écrit un enregistrement `analysis-summary` dans son key-value store dans
+4 cas :
+
+- Il rencontre un problème ou il est volumineux.
+- Il définit `monitor` sans `baselineDatasetId`, comme premier run d'une série.
+- Sa comparaison trouve un tweet modifié, nouveau ou non comparable.
+- Il a `alwaysSaveRunRecords` activé.
+
+Les autres runs omettent l'enregistrement. Leur statut nomme la réponse
+principale, comme `Top stance: bullish in 3 of 5 results.` Une comparaison sans
+changement indique `No change since the earlier run.` Un run avec un problème,
+ou un gros run, écrit aussi `run-report`. C'est aussi le cas d'un run avec
+`alwaysSaveRunRecords` activé. `run-report` répète le résumé sous
+`results.analysisSummary`.
+
+Le résumé compte les lignes analysées, échouées et ignorées, totalise
+l'engagement, et résume chaque question. `cashtags` compte la position par
+cashtag tel que `$NVDA`, donc le ratio haussier par actif provient de
+`choices.stance`. Le bloc `stance` ajoute la répartition pondérée par
+l'engagement et les posts haussiers et baissiers les plus engagés. `conviction`
+rapporte la moyenne & la moyenne pondérée par l'engagement. Le résumé arrondit
+les nombres à 4 décimales. Un run vide indique des comptes à zéro & des moyennes
+`null`. Chaque entrée `cashtags` ajoute `signal` avec un compte haussier, un
+compte baissier & un score de -1 à 1. Le score vaut (haussier - baissier) /
+lignes. `monitor.changedRows` liste les tweets dont la position a évolué depuis
+la référence. Chaque ligne liste `sourceDomains`, les noms d'hôte qu'elle lie.
+Avec `monitor.baselineDatasetId` réglé, le bloc `monitor` du résumé compte les
+statuts de comparaison & liste jusqu'à 50 lignes modifiées.
 
 Chaque ligne de résultat porte aussi `answers`, une correspondance plate
 de l'ID de question vers la catégorie, le score ou la probabilité
@@ -188,12 +200,13 @@ ignorées portent une correspondance vide.
 ## Comparer avec un run antérieur
 
 Passez `monitor.baselineDatasetId`, l'ID du dataset d'un run antérieur terminé
-avec les mêmes réglages d'analyse. Chaque ligne gagne alors un objet `monitor`.
-Son statut est `first_run` sans référence, `new_to_baseline` pour les tweets
-absents du run antérieur, & `unchanged` ou `changed` pour les tweets qu'il
-avait. `changes` liste chaque position, type de contenu ou niveau de conviction
-ayant évolué de `previous` à `current`. Les décisions se comparent par
-catégorie, niveau de score arrondi, ou oui/non à 0,5. Une décision ne compte
+avec les mêmes réglages d'analyse. La comparaison lit les lignes de ce run. Elle
+fonctionne donc même si ce run a omis son résumé. Chaque ligne gagne alors un
+objet `monitor`. Son statut est `first_run` sans référence, `new_to_baseline`
+pour les tweets absents du run antérieur, & `unchanged` ou `changed` pour les
+tweets qu'il avait. `changes` liste chaque position, type de contenu ou niveau
+de conviction ayant évolué de `previous` à `current`. Les décisions se comparent
+par catégorie, niveau de score arrondi, ou oui/non à 0,5. Une décision ne compte
 comme changée que si elle bouge nettement. Les fluctuations proches d'une
 égalité entre les runs restent inchangées. Les références au-delà de
 `maxBaselineRows` (par défaut 100 000) ou issues de réglages différents arrêtent

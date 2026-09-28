@@ -17,7 +17,7 @@
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. X Community Scraper, Topluluk bilgilerini, gönderilerini,
-aramalarını, üyelerini ve moderatörlerini toplar. Diğer tüm Apify Actor'ları
+aramalarını, üyelerini ve moderatörlerini toplar. Diğer Apify Actor'larının çoğu
 filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim edilen,
 benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
 
@@ -50,6 +50,10 @@ girişi gerekmez.
 ```
 
 Anahtar kelime araması için `resources` içine `"search"` ekle ve `query` sağla.
+
+Sorunsuz biten küçük çalıştırmalar `run-report` yazmaz ve Apify kullanımından
+tasarruf eder. Her çalıştırmada yazması için `alwaysSaveRunRecords` seçeneğini
+aç.
 
 ## Çıktı
 

@@ -179,8 +179,9 @@ problème, ou un gros run, écrit aussi un enregistrement `run-report`. Son
 `estimatedChargeUsd` utilise le prix pay-per-event en temps réel qu'Apify expose
 à l'Actor. Les runs avec un problème écrivent toujours `run-report`. Cela inclut
 les sorties sans entrée et avec entrée invalide. Un petit run sans problème
-l'omet et économise de l'usage Apify. Les rapports de run séparent les lignes de
-donnée dans `realRows` et les diagnostics dans `diagnosticRows`.
+l'omet et économise de l'usage Apify. Activez `alwaysSaveRunRecords` pour
+l'écrire à chaque run. Les rapports de run séparent les lignes de donnée dans
+`realRows` et les diagnostics dans `diagnosticRows`.
 
 Comprenez les résultats vides avant de dépenser sur un autre run. L'objet
 `filtering` des rapports et des diagnostics finaux compte les lignes retirées

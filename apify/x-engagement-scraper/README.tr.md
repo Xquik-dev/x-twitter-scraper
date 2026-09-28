@@ -17,9 +17,9 @@
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. X Engagement Scraper, herhangi bir gönderi için yanıtları,
-alıntıları, retweet edenleri ve thread'leri toplar. Diğer tüm Apify Actor'ları
-filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim edilen,
-benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
+alıntıları, retweet edenleri ve thread'leri toplar. Diğer Apify Actor'larının
+çoğu filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
+edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
 
 Bir veya daha fazla X gönderisi için Twitter etkileşim verisini topla: yanıtlar,
 alıntılar, retweet edenler ve thread bağlamı. X API anahtarı veya girişi
@@ -53,8 +53,14 @@ gerekmez.
 X, 2024'te bir gönderiyi kimlerin beğendiğini göstermeyi bıraktı. `favoriters`
 türü satır döndürmez. Satırsız bir çalıştırma bu nedeni tanılamasında belirtir.
 
-Her kaynak ve etkileşim eşleşmesini korumak için `dedupeAcrossTargets`'ı kapalı
-tut. Çalıştırma genelinde hesap başına tek satır tutmak için aç.
+Varsayılan olarak her hesap veya gönderi, etkileşim türü başına bir kez görünür
+ve ücretlendirilir. Her kaynak gönderi için ayrı satır tutmak istersen
+`dedupeAcrossTargets`'ı `false` olarak ayarla. Durum metni, atlanan ve
+ücretlendirilmeyen tekrarları sayar.
+
+Sorunsuz biten küçük çalıştırmalar `run-report` yazmaz ve Apify kullanımından
+tasarruf eder. Her çalıştırmada yazması için `alwaysSaveRunRecords` seçeneğini
+aç.
 
 ## Çıktı
 

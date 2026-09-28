@@ -17,27 +17,30 @@
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. X Article Scraper turns long-form X Articles into
-Markdown, text, covers, authors, dates & metrics. Every other Apify Actor
-charges before filtering or deduplicating. Xquik charges only for delivered,
-unique, filter-matching results.
+Markdown, text, covers, authors, dates & metrics. Most other Apify Actors charge
+before filtering or deduplicating. Xquik charges only for delivered, unique,
+filter-matching results.
 
 Extract long-form X Articles from post URLs or numeric Tweet IDs. No X API key
 or login required.
 
 ## Input
 
-| Field                 | Purpose                                    | Default  |
-| --------------------- | ------------------------------------------ | -------- |
-| `startUrls`           | Public Article post URLs                   | None     |
-| `tweetIds`            | Numeric Article Tweet IDs                  | None     |
-| `maxItems`            | Global delivered-Article cap               | `100000` |
-| `dedupeAcrossTargets` | Remove repeated Article IDs before billing | `true`   |
-| `maxConcurrency`      | Parallel independent Article reads         | `100`    |
+| Field                  | Purpose                                    | Default  |
+| ---------------------- | ------------------------------------------ | -------- |
+| `startUrls`            | Public Article post URLs                   | None     |
+| `tweetIds`             | Numeric Article Tweet IDs                  | None     |
+| `maxItems`             | Global delivered-Article cap               | `100000` |
+| `dedupeAcrossTargets`  | Remove repeated Article IDs before billing | `true`   |
+| `maxConcurrency`       | Parallel independent Article reads         | `100`    |
+| `alwaysSaveRunRecords` | Save `run-report` on every run             | `false`  |
 
 ## Output
 
 The Output tab opens `Articles`. `Results` links to rows. `Run Report` links to
-counts, completion, duration, and anomalies.
+counts, completion, duration, and anomalies. A run that hits a problem, or a
+large run, writes it. A small run that goes well states its counts in the run
+status instead. Turn on `alwaysSaveRunRecords` to write it on every run.
 
 ```json
 {

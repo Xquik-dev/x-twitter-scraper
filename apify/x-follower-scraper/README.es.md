@@ -53,6 +53,7 @@ objetivo de origen y su relación.
 ### Comportamiento principal
 
 - Los filtros y la eliminación de duplicados se ejecutan antes de facturar.
+- Por defecto, un perfil de varios objetivos aparece y se cobra una sola vez.
 - Una ejecución acepta nombres de usuario, IDs numéricos, URLs y rutas
   cortas.
 - El modo de combinación registra perfiles compartidos, orígenes, relaciones
@@ -136,13 +137,14 @@ de tu plataforma por separado. Xquik aplica un cargo por cada fila de datos
 entregada. Los diagnósticos son gratuitos en la salida `diagnostics`. No se
 aplica ninguna suscripción de Xquik por separado. No se aplica tarifa de inicio.
 El texto de estado indica por qué se detuvo la ejecución. También cuenta los
-resultados cobrados y los objetivos leídos. Una ejecución con un problema, o una
-ejecución grande, también escribe un registro `run-report`. Su
-`estimatedChargeUsd` usa el precio actual por evento que Apify expone al Actor.
-Las ejecuciones con un problema siempre escriben `run-report`. Esto incluye las
-salidas sin entrada o con entrada inválida. Una ejecución pequeña que termina
-bien lo omite y ahorra uso de Apify. Su campo `version` informa la versión
-exacta del código fuente publicado del Actor.
+resultados cobrados, los duplicados omitidos y los objetivos leídos. Una
+ejecución con un problema, o una ejecución grande, también escribe un registro
+`run-report`. Su `estimatedChargeUsd` usa el precio actual por evento que Apify
+expone al Actor. Las ejecuciones con un problema siempre escriben `run-report`.
+Esto incluye las salidas sin entrada o con entrada inválida. Una ejecución
+pequeña que termina bien lo omite y ahorra uso de Apify. Activa
+`alwaysSaveRunRecords` para escribirlo en cada ejecución. Su campo `version`
+informa la versión exacta del código fuente publicado del Actor.
 
 `failedTargets` cuenta los objetivos que se detuvieron tras un error. Los
 perfiles entregados siguen siendo filas de datos facturables. Estas ejecuciones
@@ -165,8 +167,8 @@ atribución y la facturación se mantienen exactos en todos ellos.
   `maxStatuses`, `minAccountAgeDays`, `verifiedType`, `usernameContains`,
   `hasWebsite`, `hasLocation`) se ejecutan antes de que un perfil entre a tu
   dataset.
-- Con `dedupeAcrossTargets: true`, el Actor elimina los repetidos antes
-  de escribir.
+- El Actor elimina los repetidos entre objetivos antes de escribir. Configura
+  `dedupeAcrossTargets: false` para conservarlos.
 - Las filas rechazadas por el dataset no se facturan.
 - Las ejecuciones sin entrada, con entrada inválida y sin salida escriben 1
   registro accionable en la salida gratuita `diagnostics`.
@@ -337,10 +339,10 @@ Ejemplos:
 - Pega `https://x.com/<handle>/verified_followers` en Start URLs para
   perfiles verificados.
 - Pega una URL de lista en Start URLs para auditar sus miembros.
-- Agrega 2 o más nombres de usuario. Configura `dedupeMode: "first"` para
-  conservar solo la primera fila de perfil coincidente, o usa
-  `dedupeMode: "merge"` para conservar una fila con todos los objetivos de
-  origen coincidentes.
+- Agrega 2 o más nombres de usuario. Un perfil compartido aparece una sola vez,
+  bajo el primer objetivo. Usa `dedupeMode: "merge"` para conservar 1 fila con
+  cada objetivo coincidente. Configura `dedupeAcrossTargets: false` para
+  conservar 1 fila por objetivo.
 
 ### Experiencia de entrada en Console y API
 
@@ -353,13 +355,14 @@ Console expone estos controles:
 - Los límites de resultados aceptan números enteros de 1 o más.
 - Los filtros numéricos de perfil aceptan números enteros de 0 o más.
 
-Usa campos canónicos en integraciones nuevas. Los alias de compatibilidad
-siguen disponibles en JSON, API, SDK, automatización y entradas de task.
-Esto incluye `outputVariant` e `includeRaw` como alias de Output Mode.
-También incluye `dedupeAcrossTargets` como alias de Dedupe Mode. El
-formulario visual oculta los alias que duplican un control canónico. Las
-entradas JSON existentes y las de task guardadas conservan su comportamiento
-actual.
+Usa campos canónicos en integraciones nuevas. Los alias de compatibilidad siguen
+disponibles en JSON, API, SDK, automatización y entradas de task. Esto incluye
+`outputVariant` e `includeRaw` como alias de Output Mode. También incluye
+`dedupeAcrossTargets` como alias de Dedupe Mode. El formulario visual oculta los
+alias que duplican un control canónico. Los alias siguen funcionando en entradas
+JSON existentes y en entradas de task guardadas. Las entradas guardadas con
+`dedupeAcrossTargets: false` o `dedupeMode: "none"` conservan 1 fila por
+objetivo.
 
 ### Migra desde otro Actor de seguidores
 
@@ -464,8 +467,9 @@ Exporta en JSON, CSV, Excel o HTML desde el dataset de Apify.
 - Combina `minFollowers`, `verifiedOnly`, `verifiedType`, `minStatuses`,
   `usernameContains`, `bioContains`, `locationContains`, `hasWebsite` y
   `hasLocation` para acotar el dataset facturado.
-- Configura `dedupeMode: "first"` al extraer varios nombres de usuario de la
-  competencia para obtener solo perfiles únicos en todos los objetivos.
+- Por defecto, las ejecuciones conservan solo perfiles únicos en todos los
+  objetivos. Configura `dedupeAcrossTargets: false` para conservar 1 fila por
+  objetivo.
 - Configura `dedupeMode: "merge"` para obtener una fila por perfil con cada
   objetivo de origen coincidente adjunto.
 - Configura `outputMode: "full"` para obtener campos de perfil opcionales,

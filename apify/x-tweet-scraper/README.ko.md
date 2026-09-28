@@ -161,7 +161,8 @@ Apify의 [빌드 태그](https://docs.apify.com/platform/actors/development/buil
 레코드의 `estimatedChargeUsd`는 Apify가 Actor에 노출하는 실시간 이벤트당 요금을
 사용합니다. 문제가 생긴 실행은 입력이 없거나 잘못된 입력으로 종료된 경우를
 포함해 항상 `run-report`를 작성합니다. 문제없이 끝난 작은 실행은 이 레코드를
-건너뛰어 Apify 사용량을 아낍니다. 실행 보고서는 `realRows`의 데이터 행과
+건너뛰어 Apify 사용량을 아낍니다. 모든 실행에서 작성하려면
+`alwaysSaveRunRecords`를 켜세요. 실행 보고서는 `realRows`의 데이터 행과
 `diagnosticRows`의 진단을 구분합니다.
 
 다음 실행에 지출하기 전에 빈 결과의 원인을 파악하세요. 보고서 & 최종 진단의 `filtering` 객체는 필터가 제거한 행 수를 집계합니다.

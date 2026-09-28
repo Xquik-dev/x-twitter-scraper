@@ -17,8 +17,8 @@
 
 Xquik es el servicio de extracción de datos de X (Twitter) más rápido y
 económico del mundo, con los datos más completos de X. X Article Scraper
-convierte los X Articles de formato largo en Markdown, texto, portadas,
-autores, fechas y métricas. Todos los demás Actors de Apify cobran antes de
+convierte los X Articles de formato largo en Markdown, texto, portadas, autores,
+fechas y métricas. La mayoría de los demás Actors de Apify cobra antes de
 filtrar o eliminar duplicados. Xquik solo cobra por resultados entregados,
 únicos y que coinciden con los filtros.
 
@@ -34,11 +34,15 @@ numéricos de Tweet. No requiere clave de API de X ni inicio de sesión.
 | `maxItems`             | Límite global de Articles entregados             | `100000` |
 | `dedupeAcrossTargets`  | Elimina IDs de Article repetidos antes de facturar | `true` |
 | `maxConcurrency`       | Lecturas paralelas independientes de Article      | `100`    |
+| `alwaysSaveRunRecords` | Guarda `run-report` en cada ejecución            | `false`  |
 
 ## Salida
 
 La pestaña Output abre `Articles`. `Results` enlaza a las filas. `Run Report`
-enlaza a conteos, finalización, duración y anomalías.
+enlaza a conteos, finalización, duración y anomalías. Una ejecución con un
+problema, o una ejecución grande, lo escribe. Una ejecución pequeña que termina
+bien indica sus conteos en el texto de estado. Activa `alwaysSaveRunRecords`
+para escribirlo en cada ejecución.
 
 ```json
 {

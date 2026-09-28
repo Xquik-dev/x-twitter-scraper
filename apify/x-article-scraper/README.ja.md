@@ -15,23 +15,24 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">FramerがClaude Code、Codex、Cursorなどと一緒にXquikのスクレイパーを使う方法を6:07から見る。</a>
 </td></tr></table>
 
-Xquikは、最も完全なXデータを備えた、世界最速かつ最安のX(Twitter)スクレイパーサービスです。X Article Scraperは、長文のX記事をMarkdown、テキスト、カバー画像、著者、日付、指標に変換します。他のApify Actorはすべて、フィルタリングや重複排除の前に課金します。Xquikは、配信済みでユニークかつフィルター条件に一致した結果にのみ課金します。
+Xquikは、最も完全なXデータを備えた、世界最速かつ最安のX(Twitter)スクレイパーサービスです。X Article Scraperは、長文のX記事をMarkdown、テキスト、カバー画像、著者、日付、指標に変換します。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikは、配信済みでユニークかつフィルター条件に一致した結果にのみ課金します。
 
 投稿URLまたは数値のTweet IDから、長文のX記事を抽出します。X APIキーやログインは不要です。
 
 ## 入力
 
-| フィールド             | 目的                                        | デフォルト |
-| --------------------- | ------------------------------------------ | -------- |
-| `startUrls`           | 公開されているArticle投稿のURL              | なし     |
-| `tweetIds`            | 数値のArticle Tweet ID                      | なし     |
-| `maxItems`            | 配信されるArticleの総数上限                 | `100000` |
-| `dedupeAcrossTargets` | 課金前に重複するArticle IDを削除            | `true`   |
-| `maxConcurrency`      | 独立したArticle読み取りの並列数             | `100`    |
+| フィールド              | 目的                                        | デフォルト |
+| ---------------------- | ------------------------------------------ | -------- |
+| `startUrls`            | 公開されているArticle投稿のURL              | なし     |
+| `tweetIds`             | 数値のArticle Tweet ID                      | なし     |
+| `maxItems`             | 配信されるArticleの総数上限                 | `100000` |
+| `dedupeAcrossTargets`  | 課金前に重複するArticle IDを削除            | `true`   |
+| `maxConcurrency`       | 独立したArticle読み取りの並列数             | `100`    |
+| `alwaysSaveRunRecords` | すべての実行で `run-report` を保存          | `false`  |
 
 ## 出力
 
-Outputタブは `Articles` を開きます。`Results` は各行にリンクします。`Run Report` は件数、完了状況、所要時間、異常のリンクです。
+Outputタブは `Articles` を開きます。`Results` は各行にリンクします。`Run Report` は件数、完了状況、所要時間、異常のリンクです。問題が発生した実行や大規模な実行では、このレポートが書き込まれます。問題なく終わった小規模な実行では、代わりに実行ステータスに件数が表示されます。毎回書き込むには、`alwaysSaveRunRecords` をオンにしてください。
 
 ```json
 {

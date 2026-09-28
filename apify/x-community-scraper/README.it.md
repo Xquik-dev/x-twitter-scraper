@@ -17,9 +17,9 @@
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo con
 i dati X più completi. X Community Scraper raccoglie informazioni, post,
-ricerche, membri & moderatori delle Community. Ogni altro Actor Apify addebita
-costi prima di filtrare o deduplicare. Xquik addebita solo per i risultati
-consegnati, unici e corrispondenti ai filtri.
+ricerche, membri & moderatori delle Community. La maggior parte degli altri
+Actor Apify addebita costi prima di filtrare o deduplicare. Xquik addebita solo
+per i risultati consegnati, unici e corrispondenti ai filtri.
 
 Raccogli informazioni, post, corrispondenze per parole chiave, membri e
 moderatori delle Community Twitter da URL o ID delle Community. Combina
@@ -50,6 +50,9 @@ risorse e Community in un unico run. Non serve una chiave API X né il login.
 
 Per la ricerca per parole chiave, includi `"search"` in `resources` e fornisci
 `query`.
+
+Le esecuzioni piccole senza problemi saltano `run-report` & risparmiano uso di
+Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
 
 ## Output
 

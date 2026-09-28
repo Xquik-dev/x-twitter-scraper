@@ -39,6 +39,9 @@ API de X.
 }
 ```
 
+Las ejecuciones pequeñas que terminan bien omiten `run-report` y ahorran uso de
+Apify. Activa `alwaysSaveRunRecords` para escribirlo en cada ejecución.
+
 ## Salida
 
 Cada fila contiene un perfil y su consulta de origen en `sourceTarget`.

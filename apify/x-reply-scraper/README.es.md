@@ -40,11 +40,14 @@ resultados disponibles permanecen intactos. Lee `availableResults`,
 `failedTargets`, `retryable` y `nextAction` antes de reintentar. Una salida
 exitosa del Actor confirma la entrega, no una extracción completa.
 
-El texto de estado nombra cada causa de una detención anticipada.
-`stopCauses` enumera cada causa con su propio `message`, `retryable` y
-`nextAction`. Las causas son `target_failed`, `page_limit`, `reply_reach` y
-`deadline_reached`. `reply_reach` significa que X entregó solo una parte de
-un hilo. La ejecución es `retryable` cuando alguna causa lo es.
+El texto de estado nombra cada causa de una detención anticipada. `stopCauses`
+enumera cada causa con su propio `message`, `retryable` y `nextAction`. Las
+causas son `target_not_found`, `target_failed`, `page_limit`, `reply_reach` y
+`deadline_reached`. `reply_reach` significa que X entregó solo una parte de un
+hilo. Una publicación o cuenta faltante no es un fallo. El texto de estado la
+nombra, como "X has no match for 1 target." Solo se suma a `stopCauses` si otra
+causa detuvo la ejecución. La ejecución es `retryable` cuando alguna causa lo
+es.
 
 ## ¿Qué hace este extractor de respuestas de Twitter?
 
@@ -445,10 +448,10 @@ El texto de estado indica por qué se detuvo la ejecución. También cuenta los
 resultados cobrados y los objetivos leídos. Las ejecuciones con un problema
 siempre escriben `run-report`. Esto incluye las salidas sin entrada o con
 entrada inválida. Una ejecución grande también lo escribe. Una ejecución pequeña
-que termina bien lo omite y ahorra uso de Apify. El esquema del reporte
-documenta la finalización, la facturación, los fallos y los cursores guardados.
-Su campo `version` informa la versión exacta del código fuente publicado del
-Actor.
+que termina bien lo omite y ahorra uso de Apify. Activa `alwaysSaveRunRecords`
+para escribirlo en cada ejecución. El esquema del reporte documenta la
+finalización, la facturación, los fallos y los cursores guardados. Su campo
+`version` informa la versión exacta del código fuente publicado del Actor.
 
 Los posibles estados incluyen:
 

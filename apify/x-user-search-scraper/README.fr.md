@@ -39,6 +39,9 @@ clé API X.
 }
 ```
 
+Les petits runs sans problème omettent `run-report` et économisent de l'usage
+Apify. Activez `alwaysSaveRunRecords` pour l'écrire à chaque run.
+
 ## Sortie
 
 Chaque ligne contient un profil et sa requête d'origine dans
