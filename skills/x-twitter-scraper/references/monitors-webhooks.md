@@ -6,11 +6,11 @@ Read events by polling, or receive them at an HTTPS webhook.
 ## Cost and consent
 
 Each active monitor costs 21 credits per hour, events and webhook deliveries
-included. Reading stored events with `GET /events` costs nothing. Creation needs 22 available credits, and an account monitor also
-bills 1 credit for the username lookup. Before the first create
-call, show the whole setup: target, event types, webhook URL if any, cost, and
-the stop calls. Get one yes for that setup, then create the monitor and the
-webhook.
+included. Reading stored events with `GET /events` costs nothing. Creation
+needs 22 available credits, and an account monitor also bills 1 credit for
+the username lookup. Before the first create call, show the whole setup:
+target, event types, webhook URL if any, cost, and the stop calls. Get one
+yes for that setup, then create the monitor and the webhook.
 
 ## Monitors
 
@@ -51,14 +51,14 @@ monitor with a query such as `@my_brand`.
 
 `GET /events?monitorId=<id>&limit=50` or `GET /events?keywordMonitorId=<id>`.
 Filter with `eventType`. The response holds `events`, `hasMore`, and
-`nextCursor`; pass `nextCursor` back as `cursor`. Each event has `id`, `type`, `monitorId`, `monitorType`,
-`occurredAt`, and `data`, plus `keywordMonitorId` and `query` for keyword
-monitors. Events come newest first, and `nextCursor` pages toward older
-events. For a scheduled poll, request the first page without a cursor, keep
-the IDs you already handled, and stop at the first event whose ID you have.
-Follow `nextCursor` only while a page holds no handled event. Save the state
-file before printing or forwarding events. Pause a monitor
-instead of deleting it when its stored events still matter.
+`nextCursor`; pass `nextCursor` back as `cursor`. Each event has `id`, `type`,
+`monitorId`, `monitorType`, `occurredAt`, and `data`, plus `keywordMonitorId`
+and `query` for keyword monitors. Events come newest first, and `nextCursor`
+pages toward older events. For a scheduled poll, request the first page
+without a cursor, keep the IDs you already handled, and stop at the first
+event whose ID you have. Follow `nextCursor` only while a page holds no
+handled event. Save the state file before printing or forwarding events. Pause
+a monitor instead of deleting it when its stored events still matter.
 
 ## Webhooks
 
@@ -72,9 +72,8 @@ event types.
 | --- | --- |
 | Send a signed test and get `success` and `statusCode` in the response | `POST /webhooks/{id}/test` |
 | Check event deliveries, which leave out tests | `GET /webhooks/{id}/deliveries` |
-| Pause | `PATCH /webhooks/{id}` with `{"isActive": false}` |
+| Pause or deactivate. Deliveries stop, and the webhook is kept | `PATCH /webhooks/{id}` with `{"isActive": false}`, or `DELETE /webhooks/{id}` |
 | Test, then resume a paused webhook | `POST /webhooks/{id}/resume` |
-| Deactivate | `DELETE /webhooks/{id}` |
 
 ## Verify every delivery
 

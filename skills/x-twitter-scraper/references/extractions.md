@@ -1,8 +1,9 @@
 # Extraction jobs
 
 Use an extraction for a complete list, a large dataset, or a file export.
-Each job bills per delivered result, and filters apply before billing, so
-excluded rows cost nothing.
+Each job bills 1 credit per delivered tweet or profile, and
+`article_extractor` 5 per article. So 10,000 tweets cost 10,000 credits, or
+$1.50. Filters apply before billing, so excluded rows cost nothing.
 
 ## Flow
 
@@ -15,9 +16,9 @@ excluded rows cost nothing.
 3. Show those numbers. `creditsRequired` is the most the job can charge,
    not a promise: skipped or filtered rows cost nothing. `estimatedResults` is
    a conservative billing count, such as the follower count or the
-   `resultsLimit` cap, not a count of matching posts. `source` names which one it used. When `allowed` is false, the
-   balance cannot fund the job, so lower `resultsLimit` or add credits in the
-   dashboard.
+   `resultsLimit` cap, not a count of matching posts. `source` names which one
+   it used. When `allowed` is false, the balance cannot fund the job, so lower
+   `resultsLimit` or add credits in the dashboard.
 4. Ask the user to confirm the estimate. Create nothing before a yes.
 5. `POST /extractions` with the same body and a new `Idempotency-Key`. A
    retry with the same key returns the original job instead of a second one.

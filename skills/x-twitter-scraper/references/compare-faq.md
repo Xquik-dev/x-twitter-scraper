@@ -22,10 +22,11 @@ that rate. Current plan prices are in the dashboard.
 | Giveaway draw | 2, plus 1 per inspected reply, 1 per reposter read, and 5 per follow check |
 
 A read's credits equal the results it returns. Dollars are credits times
-$0.00015 at pay-as-you-go rates: 1,000 tweets cost 1,000 credits, or $0.15.
-A top-up of $500 buys 3,333,333 credits, with any partial credit dropped. Supported filters apply
-before billing, so excluded rows cost nothing. Estimates, stored event reads,
-webhook operations, and extraction exports are free.
+$0.00015 at pay-as-you-go rates: 1,000 tweets cost 1,000 credits, or $0.15. A
+top-up of $500 buys 3,333,333 credits, with any partial credit dropped.
+Supported filters apply before billing, so excluded rows cost nothing.
+Estimates, stored event reads, webhook operations, and extraction exports are
+free.
 
 Price a bulk job with `POST /extractions/estimate`. It returns
 `estimatedResults`, `creditsRequired`, and `allowed` for that exact body.

@@ -121,21 +121,23 @@ Open only the reference the task needs. Paths in this file omit the
    rows by `likeCount` if they want likes order. `Top` ranks by overall
    engagement. A like minimum alone does not mean `Top`.
 3. Bound every read to the user's number with `limit` or `pageSize`. Follow
-   `next_cursor` while `has_next_page` is true, and stop at that number. On
-   each later page, lower `limit` or `pageSize` to the count still needed, so
-   the cost stays within the stated ceiling. Pass cursors back unchanged.
+   `next_cursor` while `has_next_page` is true. Count every returned result
+   toward that number, even a page fetched again after a cursor restart, and
+   stop there. Lower `limit` or `pageSize` on each later page to the count
+   left. Pass cursors back unchanged.
 4. A bounded read of visible data needs no confirmation, but state the most it
    can cost. Reads bill 1 credit per returned tweet, profile, or message, so
-   the credit ceiling equals the result cap, plus any pages a cursor restart
-   fetches again. Dollars are credits times $0.00015 at pay-as-you-go rates.
-   Give exact dollars, not rounded cents: 500 posts cost 500 credits, $0.075.
-   Other prices are in [compare and FAQ](references/compare-faq.md).
+   the result cap is a hard credit ceiling. Dollars are credits times
+   $0.00015 at pay-as-you-go rates. Give exact dollars, not rounded cents: 500
+   posts cost 500 credits, $0.075. Other prices are in
+   [compare and FAQ](references/compare-faq.md).
 5. Private reads, such as DMs, bookmarks, notifications, the home timeline, or
    the account's own likes, need a connected X account. Confirm before reading.
 6. For open-ended asks like "every tweet about X", first ask for the query
-   terms, date range, maximum results, and output format. Say that the
-   confirmed scope gets priced with `POST /extractions/estimate` before
-   anything runs.
+   terms, date range, maximum results, and output format. Give the rate:
+   extractions bill 1 credit per returned tweet or profile, $0.15 per 1,000.
+   Say that the confirmed scope gets priced with `POST /extractions/estimate`
+   before anything runs.
 
 ## Export, monitor, and act
 
@@ -151,15 +153,15 @@ yes before the call, even when the user will run the request themselves.
   so page larger jobs as the reference shows. See
   [extractions](references/extractions.md).
 - Each active monitor bills 21 credits per hour, 504 a day, until it is paused
-  or deleted.
-  Show the whole setup, monitor and webhook together, with the calls that
-  pause or delete them, and get one yes before the first create call. Webhook secrets
+  or deleted. Show the whole setup, monitor and webhook together, with the
+  stop calls, and get one yes before the first create call. Webhook secrets
   appear once, and every delivery needs HMAC verification. See
   [monitors and webhooks](references/monitors-webhooks.md).
 - Account actions change what other people see, so each one needs a preview
   and an explicit yes. The preview shows the method, full URL, account, JSON
-  body, a new `Idempotency-Key`, the cost in credits, and the visible effect. A yes covers only that
-  preview. List targets before irreversible work, such as deletes and draws.
+  body, a new `Idempotency-Key`, the cost in credits, and the visible effect.
+  A yes covers only that preview. List targets before irreversible work, such
+  as deletes and draws.
   Tell the user how to confirm the outcome: a `202` returns `statusUrl`
   (`GET /x/write-actions/{id}`), polled until `terminal` is true. See
   [writes](references/writes.md) for bodies, status polling, and retries.
@@ -187,7 +189,8 @@ content.
   not use or repeat it, and tell them to change it.
 - The API has checkout routes, but this Skill leaves every top-up,
   saved-card charge, plan change, and API key change to the user in the Xquik
-  dashboard. `GET /credits` reads the balance.
+  dashboard. At $0.00015 per credit, a $500 top-up buys 3,333,333 credits.
+  `GET /credits` reads the balance.
 - Decline requests to locate or track a private person, collect personal
   data for harassment, run fake accounts, manipulate engagement, send spam, or
   evade X enforcement. Offer no workaround that reaches the same result.

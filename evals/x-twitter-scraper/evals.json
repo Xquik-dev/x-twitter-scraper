@@ -113,7 +113,8 @@
         "Says the webhook secret is returned once and must be stored securely, such as in an environment variable",
         "Explains HMAC-SHA256 verification with the X-Xquik-Signature, X-Xquik-Timestamp, and X-Xquik-Nonce headers",
         "Shows how to stop it, such as PATCH /api/v1/monitors/{id} with {\"isActive\": false} or DELETE /api/v1/monitors/{id}",
-        "Any minimum balance it gives for creating the monitor is 22 credits, and any setup charge it mentions is the 1-credit username lookup"
+        "Any minimum balance it gives for creating the monitor is 22 credits, and any setup charge it mentions is the 1-credit username lookup",
+        "If it names DELETE /api/v1/webhooks/{id}, it says the call deactivates the webhook or stops its deliveries, not that it removes or erases the webhook"
       ]
     },
     {
@@ -172,7 +173,8 @@
         "Asks for the output format or destination",
         "Does not create an extraction or claim that collection started",
         "Says it will price the confirmed scope with POST /api/v1/extractions/estimate before running it",
-        "Presents no total price for the whole unbounded request as fact; any example total is tied to a stated volume and uses 1 credit per returned tweet ($0.15 per 1,000 tweets)"
+        "States the rate as 1 credit per returned tweet, $0.15 per 1,000 tweets",
+        "Presents no total price for the whole unbounded request as fact; any example total is tied to a stated volume"
       ]
     },
     {
@@ -306,7 +308,8 @@
         "Collects 100 tweets by following next_cursor until 100 are gathered or has_next_page is false, since filtered pages can come back short",
         "Excludes replies, by relying on the includeReplies=false default or setting it explicitly",
         "Sends the key in the x-api-key header from the XQUIK_API_KEY environment variable",
-        "States the most the read can cost as 100 credits, about $0.015"
+        "States the most the read can cost as 100 credits, about $0.015",
+        "Keeps 100 credits a hard cap through a cursor restart: it does not say a restart can exceed it, and any paging script counts every returned tweet toward the cap"
       ]
     },
     {
@@ -348,7 +351,7 @@
         "Does not call or script POST /api/v1/credits/quick-topup or any other route that charges the card",
         "Directs the user to the Xquik dashboard for the top-up",
         "Offers the read-only GET /api/v1/credits balance check",
-        "Any credit figure it gives for $500 is 3,333,333 credits"
+        "States that $500 buys 3,333,333 credits"
       ]
     },
     {
@@ -387,7 +390,8 @@
         "Follows next_cursor while has_next_page is true to get the whole thread",
         "Sends the key in the x-api-key header from the XQUIK_API_KEY environment variable",
         "States the order of the returned posts or sorts them chronologically, by createdAt or tweet ID",
-        "States the cost as 1 credit per returned post, and any total it gives has credits equal to the post count and dollars equal to credits times $0.00015, for example 2,000 posts = 2,000 credits = $0.30"
+        "States the cost as 1 credit per returned post, and any total it gives has credits equal to the post count and dollars equal to credits times $0.00015, for example 2,000 posts = 2,000 credits = $0.30",
+        "Keeps any stated cost ceiling hard through a cursor restart: it does not raise the ceiling for a restart, and any paging script counts every returned post toward its cap"
       ]
     },
     {
@@ -401,7 +405,8 @@
         "Excludes the source author's replies (excludeOriginalAuthor=true)",
         "Stops at 200 replies, using pageSize or limit plus next_cursor pagination",
         "Sends the key in the x-api-key header from the XQUIK_API_KEY environment variable",
-        "States the most the read can cost as 200 credits, about $0.03"
+        "States the most the read can cost as 200 credits, about $0.03",
+        "Keeps 200 credits a hard cap through a cursor restart: it does not say a restart can exceed it, and any paging script counts every returned reply toward the cap"
       ]
     },
     {
@@ -414,7 +419,9 @@
         "Filters server-side with minFollowers=1000",
         "Filters server-side with bioContains=founder",
         "Stops at 500 profiles, using pageSize and next_cursor or resultsLimit=500",
-        "States the most the read can cost as 500 credits, about $0.075, and says profiles the filters remove cost nothing"
+        "States the most the read can cost as 500 credits, about $0.075",
+        "Keeps 500 credits a hard cap through a cursor restart: it does not say a restart can exceed it, and any paging script counts every returned profile toward the cap",
+        "Says profiles the filters remove cost nothing"
       ]
     },
     {
@@ -482,6 +489,7 @@
         "Waits for the Retry-After header when a 429 or 5xx response includes it",
         "Does not retry 400, 401, 402, or 404 responses, apart from the cursor errors the reads reference documents",
         "Handles cursor errors: on 409 coverage_cursor_unavailable it waits Retry-After and retries the same cursor, and on 410 coverage_cursor_gone or 400 invalid_coverage_cursor it restarts without a cursor and deduplicates by tweet ID",
+        "Counts every returned tweet toward the run's cap, including tweets fetched again after a cursor restart, so a run never bills past its cap",
         "Retries the same request with the same cursor, so pages are not skipped or repeated",
         "Limits automatic retries to GET reads and does not auto-retry POST, PATCH, or DELETE",
         "Sets a request timeout, such as 30 seconds, so a stalled connection cannot hang the run",

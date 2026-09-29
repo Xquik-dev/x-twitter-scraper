@@ -179,25 +179,25 @@ script should ride that out on reads instead of dropping requests:
 - Never retry `POST`, `PATCH`, or `DELETE` automatically. See
   [writes](writes.md#responses-and-retries).
 
-A paging loop that stops at the user's number and restarts once on a gone
-cursor. A restart bills the pages it fetches again:
+A paging loop that restarts once on a gone cursor. It counts every returned
+tweet toward the user's number, refetched ones included, so the bill never
+passes that cap. After a restart it can keep fewer unique rows:
 
 ```python
-wanted, rows, seen, cursor, restarted = 500, [], set(), None, False
-while len(rows) < wanted:
-    params = {"q": "acme", "limit": wanted - len(rows), "cursor": cursor}
+wanted, billed, rows, cursor, restarted = 500, 0, {}, None, False
+while billed < wanted:
+    params = {"q": "acme", "limit": wanted - billed, "cursor": cursor}
     try:
         page = get_json("/x/tweets/search", params)
     except XquikError as err:
         code = err.body.get("error") if isinstance(err.body, dict) else None
         if restarted or code not in ("coverage_cursor_gone", "invalid_coverage_cursor"):
             raise
-        cursor, restarted = None, True  # seen skips rows already kept
+        cursor, restarted = None, True
         continue
+    billed += len(page["tweets"])
     for tweet in page["tweets"]:
-        if tweet["id"] not in seen:
-            seen.add(tweet["id"])
-            rows.append(tweet)
+        rows.setdefault(tweet["id"], tweet)  # keeps each tweet once
     if not page["has_next_page"]:
         break
     cursor = page["next_cursor"]
