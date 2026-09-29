@@ -67,7 +67,7 @@ della moderazione & dataset di conversazioni.
 3. Avvia X Reply Scraper di Xquik & apri il dataset.
 
 Il modulo precompilato punta a una conversazione pubblica verificata.
-Restituisce fino a 25 righe complete & piatte. Di default, la modalità auto
+Restituisce fino a 1.000 righe complete & piatte. Di default, la modalità auto
 cerca nell'intera conversazione. Deduplicazione & attribuzione dell'origine
 restano attive.
 

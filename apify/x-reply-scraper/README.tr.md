@@ -67,7 +67,7 @@ kümeleri için de işe yarar.
 3. Xquik'in X Reply Scraper'ını çalıştır ve veri kümesini aç.
 
 Önceden doldurulmuş form, çalıştığı doğrulanmış herkese açık bir konuşmayı
-hedefler. En fazla 25 tam, düz satır döndürür. Auto modu varsayılan olarak
+hedefler. En fazla 1.000 tam, düz satır döndürür. Auto modu varsayılan olarak
 konuşmanın tamamını arar. Tekilleştirme ve kaynak bilgisi açık kalır.
 
 ### Gönderi URL'sinden yanıt kazı

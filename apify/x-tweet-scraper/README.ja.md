@@ -271,7 +271,7 @@ Search termsフィールドに1つ以上のクエリを入れます。
 - [TwitterデータをCSVにエクスポートする](https://apify.com/xquik/x-tweet-scraper/examples/export-twitter-data-to-csv)
 - [OpenAIのポストへのリプライを収集する](https://apify.com/xquik/x-tweet-scraper/examples/collect-replies-to-an-openai-post)
 - [Twitterのスレッド全体を抽出する](https://apify.com/xquik/x-tweet-scraper/examples/extract-complete-twitter-thread)
-- [スペイン語のAI関連の会話を収集する](https://apify.com/xquik/x-tweet-scraper/examples/collect-spanish-ai-conversations)
+- [電気自動車に関する会話を収集する](https://apify.com/xquik/x-tweet-scraper/examples/collect-electric-vehicle-conversations)
 
 ## ポストのスクレイピングにかかる費用は？
 

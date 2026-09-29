@@ -67,7 +67,7 @@ Konversations-Datasets.
 3. Starte X Reply Scraper von Xquik & öffne das Dataset.
 
 Das vorausgefüllte Formular zielt auf eine verifizierte öffentliche
-Konversation. Es liefert bis zu 25 vollständige, flache Datensätze. Der
+Konversation. Es liefert bis zu 1.000 vollständige, flache Datensätze. Der
 Auto-Modus durchsucht standardmäßig die ganze Konversation. Deduplizierung &
 Quellzuordnung bleiben aktiv.
 

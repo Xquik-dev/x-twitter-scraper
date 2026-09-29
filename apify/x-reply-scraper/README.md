@@ -64,8 +64,8 @@ datasets.
 2. Set `maxItems`, `scope` & the filters your job needs.
 3. Run Xquik's X Reply Scraper & open the dataset.
 
-The prefilled form targets a verified public conversation. It returns up to 25
-full, flat rows. Auto mode searches the full conversation by default.
+The prefilled form targets a verified public conversation. It returns up to
+1,000 full, flat rows. Auto mode searches the full conversation by default.
 Deduplication & source attribution stay on.
 
 ### Scrape replies from a post URL

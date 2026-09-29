@@ -69,7 +69,7 @@ de prospects, à la revue de modération et aux datasets de conversations.
 3. Lancez X Reply Scraper de Xquik et ouvrez le dataset.
 
 Le formulaire prérempli cible une conversation publique vérifiée. Il renvoie
-jusqu'à 25 lignes complètes et plates. Le mode auto cherche dans toute la
+jusqu'à 1 000 lignes complètes et plates. Le mode auto cherche dans toute la
 conversation par défaut. La déduplication et l'attribution de la source restent
 activées.
 

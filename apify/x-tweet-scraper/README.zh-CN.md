@@ -270,7 +270,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 - [将 Twitter 数据导出为 CSV](https://apify.com/xquik/x-tweet-scraper/examples/export-twitter-data-to-csv)
 - [收集对某条 OpenAI 帖子的回复](https://apify.com/xquik/x-tweet-scraper/examples/collect-replies-to-an-openai-post)
 - [提取完整的 Twitter 推文串](https://apify.com/xquik/x-tweet-scraper/examples/extract-complete-twitter-thread)
-- [收集西班牙语 AI 对话](https://apify.com/xquik/x-tweet-scraper/examples/collect-spanish-ai-conversations)
+- [收集电动汽车相关对话](https://apify.com/xquik/x-tweet-scraper/examples/collect-electric-vehicle-conversations)
 
 ## 抓取帖子（推文）要花多少钱？
 

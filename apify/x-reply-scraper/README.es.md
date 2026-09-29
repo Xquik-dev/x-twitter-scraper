@@ -68,9 +68,9 @@ moderación y crear datasets de conversaciones.
 3. Ejecuta X Reply Scraper de Xquik y abre el dataset.
 
 El formulario precargado apunta a una conversación pública verificada. Devuelve
-hasta 25 filas completas y planas. De forma predeterminada, el modo auto busca
-en toda la conversación. La eliminación de duplicados y la atribución del origen
-siguen activas.
+hasta 1,000 filas completas y planas. De forma predeterminada, el modo auto
+busca en toda la conversación. La eliminación de duplicados y la atribución del
+origen siguen activas.
 
 ### Extrae respuestas desde la URL de un post
 
