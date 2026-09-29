@@ -56,7 +56,7 @@ avec plus de 50 filtres.
 ### Cas d'usage
 
 - Alimenter la recherche, l'enrichissement, l'analyse & l'entraînement d'IA avec
-  plus de champs par tweet. Le 2026-09-27, notre ligne médiane avait 63 champs.
+  plus de champs par tweet. Le 2026-09-29, notre ligne médiane avait 63 champs.
   C'est 2x la médiane de 11 autres Actors.
 - Suivez le sentiment envers une marque dans les posts.
 - Surveillez les posts des concurrents et les termes de votre secteur.
@@ -439,10 +439,10 @@ vitesse. Sa ligne médiane avait 63 champs, soit 2x la médiane des autres.
 
 | Actor                                                             | Tweets utiles | Coût par tweet utile | Tweets utiles par seconde | Champs par ligne | Run public                                                           |
 | ----------------------------------------------------------------- | ------------: | -------------------: | ------------------------: | ---------------: | -------------------------------------------------------------------- |
-| xquik/x-tweet-scraper                                             |           882 |            $0.000177 |                      27.0 |               63 | [Voir le run](https://console.apify.com/view/runs/JJfsKql7EdiXsSX3T) |
-| xquik/x-tweet-scraper                                             |           868 |            $0.000179 |                      27.4 |               63 | [Voir le run](https://console.apify.com/view/runs/58ye04whvCP63nmmW) |
-| xquik/x-tweet-scraper                                             |           869 |            $0.000179 |                      25.8 |               63 | [Voir le run](https://console.apify.com/view/runs/ytoTpYCca2MShp4gh) |
-| xquik/x-tweet-scraper                                             |           879 |            $0.000177 |                      29.1 |               63 | [Voir le run](https://console.apify.com/view/runs/CrJLYvAIG0Ji666rr) |
+| xquik/x-tweet-scraper                                             |           890 |            $0.000175 |                      39.2 |               63 | [Voir le run](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX) |
+| xquik/x-tweet-scraper                                             |           883 |            $0.000176 |                      25.2 |               63 | [Voir le run](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf) |
+| xquik/x-tweet-scraper                                             |           882 |            $0.000177 |                      25.7 |               63 | [Voir le run](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba) |
+| xquik/x-tweet-scraper                                             |           877 |            $0.000178 |                      26.9 |               63 | [Voir le run](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |           813 |            $0.000185 |                      10.5 |               36 | [Voir le run](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |           805 |            $0.000187 |                      10.6 |               36 | [Voir le run](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |           805 |            $0.000187 |                      10.7 |               36 | [Voir le run](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
@@ -457,12 +457,14 @@ vitesse. Sa ligne médiane avait 63 champs, soit 2x la médiane des autres.
 | seemuapps/x-tweet-scraper                                         |           805 |            $0.001242 |                       6.9 |               24 | [Voir le run](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
 | maximedupre/twitter-scraper                                       |            46 |            $0.002846 |                       0.3 |               31 | [Voir le run](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
 
-Chaque Actor a lancé la même recherche avec les mêmes filtres le 2026-09-27.
-Tous les runs ont utilisé le niveau Bronze. Un tweet utile est un post original
-unique en anglais avec 10+ likes. Le coût est la dépense totale du client par
-tweet utile. Le nôtre inclut l'usage Apify que payent nos clients. Champs par
-ligne est la médiane des champs non vides, champs imbriqués compris. Une liste
-compte comme 1 champ. Ouvrez un run pour voir son entrée, son log & son dataset.
+Chaque Actor a lancé la même recherche avec les mêmes filtres. Les autres Actors
+ont tourné le 2026-09-27. Les runs de Xquik ont utilisé `outputVariant: "rich"`
+le 2026-09-29. Tous les runs ont utilisé le niveau Bronze. Un tweet utile est un
+post original unique en anglais avec 10+ likes. Le coût est la dépense totale du
+client par tweet utile. Le nôtre inclut l'usage Apify que payent nos clients.
+Champs par ligne est la médiane des champs non vides, champs imbriqués compris.
+Une liste compte comme 1 champ. Ouvrez un run pour voir son entrée, son log &
+son dataset.
 
 ## Runs vides, partiels et arrêtés
 
@@ -862,7 +864,7 @@ limites de votre compte Apify et de la plateforme s'appliquent toujours.
 
 ### Quelle est sa vitesse ?
 
-X Tweet Scraper de Xquik a livré de 25,8 à 29,1 posts utiles par seconde dans le
+X Tweet Scraper de Xquik a livré de 25,2 à 39,2 posts utiles par seconde dans le
 [benchmark](#benchmark). La durée dépend de votre entrée, du nombre de résultats
 et de la disponibilité de X.
 

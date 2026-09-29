@@ -19,11 +19,11 @@ Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
 monde. Ses données X sont les plus complètes. X Follower Scraper de Xquik
 collecte les abonnés, les abonnements, les membres de Liste, les abonnés de
 Liste et les membres de Communauté. Des benchmarks publics prouvent qu'il est le
-moins cher et le plus rapide de 10 Actors d'abonnés. Ses lignes portent 1,9x
-plus de champs que celles de l'Actor médian, comme le montre le
-[benchmark ci-dessous](#benchmark). La plupart des autres Actors Apify facturent
-avant de filtrer ou de dédupliquer. Xquik facture seulement les résultats
-livrés, uniques et conformes à vos filtres.
+moins cher et le plus rapide de 10 Actors d'abonnés. Ses lignes
+(`outputMode: "full"`) portent 2,5x plus de champs que celles de l'Actor médian,
+comme le montre le [benchmark ci-dessous](#benchmark). La plupart des autres
+Actors Apify facturent avant de filtrer ou de dédupliquer. Xquik facture
+seulement les résultats livrés, uniques et conformes à vos filtres.
 
 Scrapez les abonnés, les abonnements, les abonnés certifiés, les membres de
 Liste, les abonnés de Liste et les membres de Communauté sur X (Twitter). X
@@ -107,8 +107,8 @@ autres indicateurs de ce type. La sortie brute les retire aussi.
 ## Cas d'usage
 
 - Enrichir des prospects & créer des datasets de recherche avec plus de champs
-  par profil. Le 2026-09-28, notre ligne médiane avait 28 champs. C'est 1,9x la
-  médiane de 9 autres Actors.
+  par profil. Le 2026-09-29, notre ligne médiane (`outputMode: "full"`) avait 38
+  champs. C'est 2,5x la médiane de 9 autres Actors.
 - Exportez les abonnés de concurrents pour la prospection.
 - Comparez les audiences de votre compte, de vos concurrents et de personnalités
   publiques.
@@ -325,12 +325,13 @@ l'usage Apify. Activez `alwaysSaveRunRecords` pour l'écrire à chaque run.
 ## Benchmark
 
 X Follower Scraper de Xquik a battu 9 autres Actors d'abonnés sur le coût et la
-vitesse. Sa ligne médiane avait 28 champs, soit 1,9x la médiane des autres.
+vitesse. Sa ligne médiane (`outputMode: "full"`) avait 38 champs, soit 2,5x la
+médiane des autres.
 
 | Actor                                                  | Profils utiles | Coût par profil utile | Profils utiles par seconde | Champs par ligne | Run public                                                                                                                                                                                     |
 | ------------------------------------------------------ | -------------: | --------------------: | -------------------------: | ---------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| xquik/x-follower-scraper                               |           1000 |             $0.000155 |                       68.5 |               27 | [Voir le run](https://console.apify.com/view/runs/X8Vnx8Ytuk5AzWiK7)                                                                                                                           |
-| xquik/x-follower-scraper                               |            999 |             $0.000155 |                       38.4 |               28 | [Voir le run](https://console.apify.com/view/runs/lPqjfUn8767FpIDis)                                                                                                                           |
+| xquik/x-follower-scraper                               |           1000 |             $0.000155 |                      100.0 |               38 | [Voir le run](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)                                                                                                                           |
+| xquik/x-follower-scraper                               |           1000 |             $0.000155 |                       77.9 |               38 | [Voir le run](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)                                                                                                                           |
 | b2b_leads/X-Real-Time-Data                             |            286 |             $0.000388 |                        3.1 |               21 | [Voir le run](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                           |
 | kaitoeasyapi/premium-x-follower-scraper-following-data |            356 |             $0.000506 |                       21.9 |               50 | [Voir le run](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                           |
 | api-ninja/x-twitter-followers-scraper                  |            350 |             $0.000809 |                        7.0 |                8 | [Voir le run](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                           |
@@ -341,13 +342,14 @@ vitesse. Sa ligne médiane avait 28 champs, soit 1,9x la médiane des autres.
 | maximedupre/twitter-scraper                            |            320 |             $0.002192 |                        2.1 |               15 | [Run 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [Run 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [Run 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
 | seemuapps/x-followers-following-scraper                |            286 |             $0.003504 |                        3.9 |                9 | [Run 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [Run 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [Run 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
 
-Chaque Actor a lu les abonnés de NASA, SpaceX & esa le 2026-09-28. Tous les runs
-ont utilisé le niveau Bronze. Un profil utile est unique, a 30+ jours, 1+ abonné
-& 1+ post. Le coût est la dépense totale du client par profil utile. Le nôtre
-inclut l'usage Apify que payent nos clients. Une ligne avec 3 runs les
-additionne. Champs par ligne est la médiane des champs non vides, champs
-imbriqués compris. Une liste compte comme 1 champ. Ouvrez un run pour voir son
-entrée, son log & son dataset.
+Chaque Actor a lu les abonnés de NASA, SpaceX & esa. Les autres Actors ont
+tourné le 2026-09-28. Les runs de Xquik ont utilisé `outputMode: "full"` le
+2026-09-29. Tous les runs ont utilisé le niveau Bronze. Un profil utile est
+unique, a 30+ jours, 1+ abonné & 1+ post. Le coût est la dépense totale du
+client par profil utile. Le nôtre inclut l'usage Apify que payent nos clients.
+Une ligne avec 3 runs les additionne. Champs par ligne est la médiane des champs
+non vides, champs imbriqués compris. Une liste compte comme 1 champ. Ouvrez un
+run pour voir son entrée, son log & son dataset.
 
 ## Entrée
 
@@ -650,7 +652,7 @@ limites de votre compte Apify et de la plateforme s'appliquent toujours.
 
 La vitesse de X Follower Scraper de Xquik dépend de la taille de la cible, des
 filtres et de la disponibilité de X. Ses 2 runs de [benchmark](#benchmark) ont
-atteint 38,4 et 68,5 profils utiles par seconde.
+atteint 77,9 et 100,0 profils utiles par seconde.
 
 ### Pourquoi mon run renvoie-t-il moins de lignes que `maxItems` ?
 

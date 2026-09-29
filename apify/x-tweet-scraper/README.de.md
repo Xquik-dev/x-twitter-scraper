@@ -54,7 +54,7 @@ Suchanfragen mit über 50 Filtern.
 ### Anwendungsfälle
 
 - Versorge Forschung, Anreicherung, Analysen & KI-Training mit mehr Feldern pro
-  Tweet. Am 2026-09-27 hatte unsere Median-Zeile 63 Felder. Das ist das 2-Fache
+  Tweet. Am 2026-09-29 hatte unsere Median-Zeile 63 Felder. Das ist das 2-Fache
   des Medians von 11 anderen Actors.
 - Verfolge die Stimmung zu deiner Marke über viele Posts.
 - Beobachte Posts von Wettbewerbern & Begriffe deiner Branche.
@@ -426,10 +426,10 @@ Sein Median-Datensatz hatte 63 Felder, das 2-Fache des Medians der anderen.
 
 | Actor                                                             | Nützliche Tweets | Kosten pro nützlichem Tweet | Nützliche Tweets pro Sekunde | Felder pro Zeile | Öffentlicher Run                                                     |
 | ----------------------------------------------------------------- | ---------------: | --------------------------: | ---------------------------: | ---------------: | -------------------------------------------------------------------- |
-| xquik/x-tweet-scraper                                             |              882 |                   $0.000177 |                         27.0 |               63 | [Run ansehen](https://console.apify.com/view/runs/JJfsKql7EdiXsSX3T) |
-| xquik/x-tweet-scraper                                             |              868 |                   $0.000179 |                         27.4 |               63 | [Run ansehen](https://console.apify.com/view/runs/58ye04whvCP63nmmW) |
-| xquik/x-tweet-scraper                                             |              869 |                   $0.000179 |                         25.8 |               63 | [Run ansehen](https://console.apify.com/view/runs/ytoTpYCca2MShp4gh) |
-| xquik/x-tweet-scraper                                             |              879 |                   $0.000177 |                         29.1 |               63 | [Run ansehen](https://console.apify.com/view/runs/CrJLYvAIG0Ji666rr) |
+| xquik/x-tweet-scraper                                             |              890 |                   $0.000175 |                         39.2 |               63 | [Run ansehen](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX) |
+| xquik/x-tweet-scraper                                             |              883 |                   $0.000176 |                         25.2 |               63 | [Run ansehen](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf) |
+| xquik/x-tweet-scraper                                             |              882 |                   $0.000177 |                         25.7 |               63 | [Run ansehen](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba) |
+| xquik/x-tweet-scraper                                             |              877 |                   $0.000178 |                         26.9 |               63 | [Run ansehen](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |              813 |                   $0.000185 |                         10.5 |               36 | [Run ansehen](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |              805 |                   $0.000187 |                         10.6 |               36 | [Run ansehen](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |              805 |                   $0.000187 |                         10.7 |               36 | [Run ansehen](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
@@ -444,13 +444,14 @@ Sein Median-Datensatz hatte 63 Felder, das 2-Fache des Medians der anderen.
 | seemuapps/x-tweet-scraper                                         |              805 |                   $0.001242 |                          6.9 |               24 | [Run ansehen](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
 | maximedupre/twitter-scraper                                       |               46 |                   $0.002846 |                          0.3 |               31 | [Run ansehen](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
 
-Jeder Actor lief am 2026-09-27 mit derselben Suche & denselben Filtern. Alle
-Runs liefen auf der Stufe Bronze. Ein nützlicher Tweet ist ein eindeutiger
-englischer Originalpost mit 10+ Likes. Kosten sind die Gesamtausgaben des Kunden
-pro nützlichem Tweet. Unsere enthalten die Apify-Nutzung, die unsere Kunden
-zahlen. Felder pro Zeile ist der Median der nicht leeren Felder, verschachtelte
-inklusive. Eine Liste zählt als 1 Feld. Öffne einen Run für Eingabe,
-Run-Protokoll & Dataset.
+Jeder Actor lief mit derselben Suche & denselben Filtern. Die anderen Actors
+liefen am 2026-09-27. Die Runs von Xquik setzten `outputVariant: "rich"` &
+liefen am 2026-09-29. Alle Runs liefen auf der Stufe Bronze. Ein nützlicher
+Tweet ist ein eindeutiger englischer Originalpost mit 10+ Likes. Kosten sind die
+Gesamtausgaben des Kunden pro nützlichem Tweet. Unsere enthalten die
+Apify-Nutzung, die unsere Kunden zahlen. Felder pro Zeile ist der Median der
+nicht leeren Felder, verschachtelte inklusive. Eine Liste zählt als 1 Feld.
+Öffne einen Run für Eingabe, Run-Protokoll & Dataset.
 
 ## Leere, unvollständige & gestoppte Runs
 
@@ -836,7 +837,7 @@ Apify-Accounts & der Plattform gelten weiterhin.
 
 ### Wie schnell ist der Actor?
 
-X Tweet Scraper von Xquik lieferte im [Benchmark](#benchmark) 25,8 bis 29,1
+X Tweet Scraper von Xquik lieferte im [Benchmark](#benchmark) 25,2 bis 39,2
 nützliche Posts pro Sekunde. Die Laufzeit hängt von deiner Eingabe, der
 Ergebniszahl & der Verfügbarkeit von X ab.
 

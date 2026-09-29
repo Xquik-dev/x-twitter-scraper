@@ -54,7 +54,7 @@ IDs de Listas, IDs de posts y consultas de búsqueda con más de 50 filtros.
 ### Casos de uso
 
 - Alimenta investigación, enriquecimiento, analítica & entrenamiento de IA con
-  más campos por tuit. Nuestra fila mediana tuvo 63 campos el 2026-09-27. Es 2x
+  más campos por tuit. Nuestra fila mediana tuvo 63 campos el 2026-09-29. Es 2x
   la mediana de otros 11 Actores.
 - Sigue el sentimiento de marca en los posts.
 - Vigila los posts de la competencia y los términos de tu sector.
@@ -428,10 +428,10 @@ velocidad. Su fila mediana tuvo 63 campos, 2x la mediana de los demás.
 
 | Actor                                                             | Tuits útiles | Costo por tuit útil | Tuits útiles por segundo | Campos por fila | Ejecución pública                                                      |
 | ----------------------------------------------------------------- | -----------: | ------------------: | -----------------------: | --------------: | ---------------------------------------------------------------------- |
-| xquik/x-tweet-scraper                                             |          882 |           $0.000177 |                     27.0 |              63 | [Ver ejecución](https://console.apify.com/view/runs/JJfsKql7EdiXsSX3T) |
-| xquik/x-tweet-scraper                                             |          868 |           $0.000179 |                     27.4 |              63 | [Ver ejecución](https://console.apify.com/view/runs/58ye04whvCP63nmmW) |
-| xquik/x-tweet-scraper                                             |          869 |           $0.000179 |                     25.8 |              63 | [Ver ejecución](https://console.apify.com/view/runs/ytoTpYCca2MShp4gh) |
-| xquik/x-tweet-scraper                                             |          879 |           $0.000177 |                     29.1 |              63 | [Ver ejecución](https://console.apify.com/view/runs/CrJLYvAIG0Ji666rr) |
+| xquik/x-tweet-scraper                                             |          890 |           $0.000175 |                     39.2 |              63 | [Ver ejecución](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX) |
+| xquik/x-tweet-scraper                                             |          883 |           $0.000176 |                     25.2 |              63 | [Ver ejecución](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf) |
+| xquik/x-tweet-scraper                                             |          882 |           $0.000177 |                     25.7 |              63 | [Ver ejecución](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba) |
+| xquik/x-tweet-scraper                                             |          877 |           $0.000178 |                     26.9 |              63 | [Ver ejecución](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |          813 |           $0.000185 |                     10.5 |              36 | [Ver ejecución](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |          805 |           $0.000187 |                     10.6 |              36 | [Ver ejecución](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |          805 |           $0.000187 |                     10.7 |              36 | [Ver ejecución](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
@@ -446,13 +446,14 @@ velocidad. Su fila mediana tuvo 63 campos, 2x la mediana de los demás.
 | seemuapps/x-tweet-scraper                                         |          805 |           $0.001242 |                      6.9 |              24 | [Ver ejecución](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
 | maximedupre/twitter-scraper                                       |           46 |           $0.002846 |                      0.3 |              31 | [Ver ejecución](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
 
-Cada Actor hizo la misma búsqueda con los mismos filtros el 2026-09-27. Todas
-las ejecuciones usaron el nivel Bronze. Un tuit útil es una publicación original
-única en inglés con 10+ me gusta. El costo es el gasto total del cliente por
-tuit útil. El nuestro incluye el uso de Apify que pagan nuestros clientes.
-Campos por fila es la mediana de campos no vacíos, incluidos los anidados. Una
-lista cuenta como 1 campo. Abre una ejecución para ver su entrada, registro &
-conjunto de datos.
+Cada Actor hizo la misma búsqueda con los mismos filtros. Los otros Actores
+corrieron el 2026-09-27. Las ejecuciones de Xquik usaron `outputVariant: "rich"`
+y corrieron el 2026-09-29. Todas las ejecuciones usaron el nivel Bronze. Un tuit
+útil es una publicación original única en inglés con 10+ me gusta. El costo es
+el gasto total del cliente por tuit útil. El nuestro incluye el uso de Apify que
+pagan nuestros clientes. Campos por fila es la mediana de campos no vacíos,
+incluidos los anidados. Una lista cuenta como 1 campo. Abre una ejecución para
+ver su entrada, registro & conjunto de datos.
 
 ## Ejecuciones vacías, parciales y detenidas
 
@@ -846,7 +847,7 @@ límites de tu cuenta y de la plataforma de Apify siguen vigentes.
 
 ### ¿Qué tan rápido es?
 
-X Tweet Scraper de Xquik entregó de 25.8 a 29.1 posts útiles por segundo en la
+X Tweet Scraper de Xquik entregó de 25.2 a 39.2 posts útiles por segundo en la
 [prueba comparativa](#prueba-comparativa). El tiempo de ejecución depende de tu
 entrada, la cantidad de resultados y la disponibilidad de X.
 

@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">从 6:07 开始，观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具。</a>
 </td></tr></table>
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X Follower Scraper 收集关注者、正在关注的账号、列表成员、订阅者和社群成员。公开基准测试证明，它是 10 个关注者 Actor 中最便宜、最快的。它每行的字段数是各 Actor 中位数的 1.9 倍，详见[下方基准测试](#基准测试)。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付、不重复且符合过滤条件的结果收费。
+Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X Follower Scraper 收集关注者、正在关注的账号、列表成员、订阅者和社群成员。公开基准测试证明，它是 10 个关注者 Actor 中最便宜、最快的。它每行的字段数（`outputMode: "full"`）是各 Actor 中位数的 2.5 倍，详见[下方基准测试](#基准测试)。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付、不重复且符合过滤条件的结果收费。
 
 抓取 X（Twitter）的关注者、正在关注的账号、已认证关注者、列表成员、列表订阅者和社群成员。Xquik 的 X Follower Scraper **在所有 Apify 套餐上均为每条已交付个人资料 $0.00015 起**。Apify 另行收取平台使用费。无需登录 X，Xquik 也不收启动费或查询费。
 
@@ -74,7 +74,7 @@ Xquik 的 X Follower Scraper 返回关注者、正在关注的账号、列表和
 
 ## 使用场景
 
-- 用每个主页更多的字段补全潜在客户数据并构建研究数据集。我们的中位数行在 2026-09-28 有 28 个字段。这是其他 9 个 Actor 中位数的 1.9 倍。
+- 用每个主页更多的字段补全潜在客户数据并构建研究数据集。我们的中位数行（`outputMode: "full"`）在 2026-09-29 有 38 个字段。这是其他 9 个 Actor 中位数的 2.5 倍。
 - 导出竞争对手的关注者，用于潜在客户研究。
 - 比较你的账号、竞争对手和公众人物的受众。
 - 按关注者数和认证状态过滤，找到符合条件的个人资料。
@@ -253,12 +253,12 @@ Xquik 的 X Follower Scraper 在所有 Apify 套餐上都按每条已交付个�
 
 ## 基准测试
 
-Xquik 的 X Follower Scraper 在成本和速度上胜过其他 9 个关注者 Actor。它的中位数行有 28 个字段，是其他 Actor 中位数的 1.9 倍。
+Xquik 的 X Follower Scraper 在成本和速度上胜过其他 9 个关注者 Actor。它的中位数行（`outputMode: "full"`）有 38 个字段，是其他 Actor 中位数的 2.5 倍。
 
 | Actor                                                  | 有用主页 | 每个有用主页成本 | 每秒有用主页 | 每行字段数 | 公开运行                                                                                                                                                                                          |
 | ------------------------------------------------------ | -------: | ---------------: | -----------: | ---------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| xquik/x-follower-scraper                               |    1,000 |        $0.000155 |         68.5 |         27 | [查看运行](https://console.apify.com/view/runs/X8Vnx8Ytuk5AzWiK7)                                                                                                                                 |
-| xquik/x-follower-scraper                               |      999 |        $0.000155 |         38.4 |         28 | [查看运行](https://console.apify.com/view/runs/lPqjfUn8767FpIDis)                                                                                                                                 |
+| xquik/x-follower-scraper                               |    1,000 |        $0.000155 |        100.0 |         38 | [查看运行](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)                                                                                                                                 |
+| xquik/x-follower-scraper                               |    1,000 |        $0.000155 |         77.9 |         38 | [查看运行](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)                                                                                                                                 |
 | b2b_leads/X-Real-Time-Data                             |      286 |        $0.000388 |          3.1 |         21 | [查看运行](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                                 |
 | kaitoeasyapi/premium-x-follower-scraper-following-data |      356 |        $0.000506 |         21.9 |         50 | [查看运行](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                                 |
 | api-ninja/x-twitter-followers-scraper                  |      350 |        $0.000809 |          7.0 |          8 | [查看运行](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                                 |
@@ -269,7 +269,7 @@ Xquik 的 X Follower Scraper 在成本和速度上胜过其他 9 个关注者 Ac
 | maximedupre/twitter-scraper                            |      320 |        $0.002192 |          2.1 |         15 | [运行 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [运行 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [运行 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
 | seemuapps/x-followers-following-scraper                |      286 |        $0.003504 |          3.9 |          9 | [运行 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [运行 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [运行 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
 
-每个 Actor 都在 2026-09-28 读取了 NASA、SpaceX 和 esa 的关注者。
+每个 Actor 都读取了 NASA、SpaceX 和 esa 的关注者。其他 Actor 在 2026-09-28 运行，Xquik 的运行在 2026-09-29 使用了 `outputMode: "full"`。
 所有运行都使用 Bronze 等级。
 有用主页是唯一的，账号至少 30 天，至少有 1 个关注者和 1 条帖子。
 成本是客户为每个有用主页支付的总费用。
@@ -451,7 +451,7 @@ Xquik 还提供 47 个仪表盘工具、129 个 REST 操作、签名 webhook 和
 
 ### 它有多快？
 
-Xquik 的 X Follower Scraper 的速度取决于目标规模、过滤条件和 X 的可用性。它的 2 次[基准测试](#基准测试)运行分别达到每秒 38.4 和 68.5 条有效个人资料。
+Xquik 的 X Follower Scraper 的速度取决于目标规模、过滤条件和 X 的可用性。它的 2 次[基准测试](#基准测试)运行分别达到每秒 77.9 和 100.0 条有效个人资料。
 
 ### 为什么运行返回的行少于 `maxItems`？
 

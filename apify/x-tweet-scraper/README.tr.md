@@ -55,7 +55,7 @@ gönderi ID'si ve arama sorgusu kabul eder. 50'den fazla filtre sunar.
 ### Kullanım örnekleri
 
 - Araştırma, zenginleştirme, analiz & yapay zekâ eğitimini tweet başına daha çok
-  alanla besle. Medyan satırımızda 2026-09-27'de 63 alan vardı. Bu, 11 başka
+  alanla besle. Medyan satırımızda 2026-09-29'da 63 alan vardı. Bu, 11 başka
   Actor'ın medyanının 2 katı.
 - Gönderilerdeki marka duygu durumunu takip et.
 - Rakip gönderilerini ve sektör terimlerini izle.
@@ -425,10 +425,10 @@ katı.
 
 | Actor                                                             | İşe yarar tweet | İşe yarar tweet başına maliyet | Saniyede işe yarar tweet | Satır başına alan | Herkese açık çalıştırma                                                   |
 | ----------------------------------------------------------------- | --------------: | -----------------------------: | -----------------------: | ----------------: | ------------------------------------------------------------------------- |
-| xquik/x-tweet-scraper                                             |             882 |                      $0.000177 |                     27.0 |                63 | [Çalıştırmayı gör](https://console.apify.com/view/runs/JJfsKql7EdiXsSX3T) |
-| xquik/x-tweet-scraper                                             |             868 |                      $0.000179 |                     27.4 |                63 | [Çalıştırmayı gör](https://console.apify.com/view/runs/58ye04whvCP63nmmW) |
-| xquik/x-tweet-scraper                                             |             869 |                      $0.000179 |                     25.8 |                63 | [Çalıştırmayı gör](https://console.apify.com/view/runs/ytoTpYCca2MShp4gh) |
-| xquik/x-tweet-scraper                                             |             879 |                      $0.000177 |                     29.1 |                63 | [Çalıştırmayı gör](https://console.apify.com/view/runs/CrJLYvAIG0Ji666rr) |
+| xquik/x-tweet-scraper                                             |             890 |                      $0.000175 |                     39.2 |                63 | [Çalıştırmayı gör](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX) |
+| xquik/x-tweet-scraper                                             |             883 |                      $0.000176 |                     25.2 |                63 | [Çalıştırmayı gör](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf) |
+| xquik/x-tweet-scraper                                             |             882 |                      $0.000177 |                     25.7 |                63 | [Çalıştırmayı gör](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba) |
+| xquik/x-tweet-scraper                                             |             877 |                      $0.000178 |                     26.9 |                63 | [Çalıştırmayı gör](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |             813 |                      $0.000185 |                     10.5 |                36 | [Çalıştırmayı gör](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |             805 |                      $0.000187 |                     10.6 |                36 | [Çalıştırmayı gör](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |             805 |                      $0.000187 |                     10.7 |                36 | [Çalıştırmayı gör](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
@@ -443,13 +443,14 @@ katı.
 | seemuapps/x-tweet-scraper                                         |             805 |                      $0.001242 |                      6.9 |                24 | [Çalıştırmayı gör](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
 | maximedupre/twitter-scraper                                       |              46 |                      $0.002846 |                      0.3 |                31 | [Çalıştırmayı gör](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
 
-Her Actor 2026-09-27'de aynı aramayı aynı filtrelerle yaptı. Tüm çalıştırmalar
-Bronze katmanındaydı. İşe yarar tweet; benzersiz, İngilizce, orijinal ve en az
-10 beğenili bir gönderidir. Maliyet, müşterinin işe yarar tweet başına toplam
-harcamasıdır. Bizimkine müşterilerimizin ödediği Apify kullanımı dahil. Satır
-başına alan, boş olmayan alanların medyan sayısıdır, iç içe olanlar dahil. Bir
-liste 1 alan sayılır. Girdisini, günlüğünü & veri kümesini görmek için bir
-çalıştırmayı aç.
+Her Actor aynı aramayı aynı filtrelerle yaptı. Diğer Actor'lar 2026-09-27'de
+çalıştı. Xquik'in çalıştırmaları 2026-09-29'da `outputVariant: "rich"` ile
+çalıştı. Tüm çalıştırmalar Bronze katmanındaydı. İşe yarar tweet; benzersiz,
+İngilizce, orijinal ve en az 10 beğenili bir gönderidir. Maliyet, müşterinin işe
+yarar tweet başına toplam harcamasıdır. Bizimkine müşterilerimizin ödediği Apify
+kullanımı dahil. Satır başına alan, boş olmayan alanların medyan sayısıdır, iç
+içe olanlar dahil. Bir liste 1 alan sayılır. Girdisini, günlüğünü & veri
+kümesini görmek için bir çalıştırmayı aç.
 
 ## Boş, kısmi ve durdurulan çalıştırmalar
 
@@ -838,7 +839,7 @@ platform sınırları yine geçerlidir.
 ### Ne kadar hızlı?
 
 Xquik'in X Tweet Scraper'ı [karşılaştırma testinde](#karşılaştırma-testi)
-saniyede 25,8 ile 29,1 arası işe yarar gönderi teslim etti. Çalışma süresi
+saniyede 25,2 ile 39,2 arası işe yarar gönderi teslim etti. Çalışma süresi
 girdine, sonuç sayısına ve X'in erişim durumuna bağlıdır.
 
 ### Latest araması neden X'in En Yeni sekmesinde görünmeyen gönderiler döndürüyor?

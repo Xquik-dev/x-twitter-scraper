@@ -19,11 +19,11 @@ Xquik es el servicio de scraping de X (Twitter) más rápido y económico del
 mundo, con los datos de X más completos. X Follower Scraper de Xquik recopila
 seguidores, cuentas seguidas, miembros de Listas, suscriptores y miembros de
 Comunidades. Pruebas comparativas públicas demuestran que es el más económico y
-rápido de 10 Actores que extraen seguidores. Sus filas traen 1.9x los campos del
-Actor mediano, como muestra la
-[prueba comparativa de abajo](#prueba-comparativa). La mayoría de los demás
-Actores de Apify cobran antes de filtrar o quitar duplicados. Xquik solo cobra
-los resultados entregados, únicos y que cumplen tus filtros.
+rápido de 10 Actores que extraen seguidores. Sus filas (`outputMode: "full"`)
+traen 2.5x los campos del Actor mediano, como muestra la [prueba comparativa de
+abajo](#prueba-comparativa). La mayoría de los demás Actores de Apify cobran
+antes de filtrar o quitar duplicados. Xquik solo cobra los resultados
+entregados, únicos y que cumplen tus filtros.
 
 Extrae seguidores, cuentas seguidas, seguidores verificados, miembros de Listas,
 suscriptores de Listas y miembros de Comunidades de X (Twitter). X Follower
@@ -103,8 +103,8 @@ y otras similares. La salida raw también las quita.
 ## Casos de uso
 
 - Enriquece leads & crea conjuntos de datos de investigación con más campos por
-  perfil. Nuestra fila mediana tuvo 28 campos el 2026-09-28. Es 1.9x la mediana
-  de otros 9 Actores.
+  perfil. Nuestra fila mediana (`outputMode: "full"`) tuvo 38 campos el
+  2026-09-29. Es 2.5x la mediana de otros 9 Actores.
 - Exporta los seguidores de la competencia para buscar leads.
 - Compara audiencias entre tu cuenta, la competencia y figuras públicas.
 - Filtra por cantidad de seguidores y verificación para encontrar perfiles que
@@ -321,12 +321,13 @@ ejecuciones.
 ## Prueba comparativa
 
 X Follower Scraper de Xquik superó a otros 9 Actores de seguidores en costo y
-velocidad. Su fila mediana tuvo 28 campos, 1.9x la mediana de los demás.
+velocidad. Su fila mediana (`outputMode: "full"`) tuvo 38 campos, 2.5x la
+mediana de los demás.
 
 | Actor                                                  | Perfiles útiles | Costo por perfil útil | Perfiles útiles por segundo | Campos por fila | Ejecución pública                                                                                                                                                                                                |
 | ------------------------------------------------------ | --------------: | --------------------: | --------------------------: | --------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| xquik/x-follower-scraper                               |            1000 |             $0.000155 |                        68.5 |              27 | [Ver ejecución](https://console.apify.com/view/runs/X8Vnx8Ytuk5AzWiK7)                                                                                                                                           |
-| xquik/x-follower-scraper                               |             999 |             $0.000155 |                        38.4 |              28 | [Ver ejecución](https://console.apify.com/view/runs/lPqjfUn8767FpIDis)                                                                                                                                           |
+| xquik/x-follower-scraper                               |            1000 |             $0.000155 |                       100.0 |              38 | [Ver ejecución](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)                                                                                                                                           |
+| xquik/x-follower-scraper                               |            1000 |             $0.000155 |                        77.9 |              38 | [Ver ejecución](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)                                                                                                                                           |
 | b2b_leads/X-Real-Time-Data                             |             286 |             $0.000388 |                         3.1 |              21 | [Ver ejecución](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                                           |
 | kaitoeasyapi/premium-x-follower-scraper-following-data |             356 |             $0.000506 |                        21.9 |              50 | [Ver ejecución](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                                           |
 | api-ninja/x-twitter-followers-scraper                  |             350 |             $0.000809 |                         7.0 |               8 | [Ver ejecución](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                                           |
@@ -337,13 +338,14 @@ velocidad. Su fila mediana tuvo 28 campos, 1.9x la mediana de los demás.
 | maximedupre/twitter-scraper                            |             320 |             $0.002192 |                         2.1 |              15 | [Ejecución 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [Ejecución 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [Ejecución 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
 | seemuapps/x-followers-following-scraper                |             286 |             $0.003504 |                         3.9 |               9 | [Ejecución 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [Ejecución 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [Ejecución 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
 
-Cada Actor leyó los seguidores de NASA, SpaceX & esa el 2026-09-28. Todas las
-ejecuciones usaron el nivel Bronze. Un perfil útil es único, tiene 30+ días, 1+
-seguidor & 1+ publicación. El costo es el gasto total del cliente por perfil
-útil. El nuestro incluye el uso de Apify que pagan nuestros clientes. Una fila
-con 3 ejecuciones las suma. Campos por fila es la mediana de campos no vacíos,
-incluidos los anidados. Una lista cuenta como 1 campo. Abre una ejecución para
-ver su entrada, registro & conjunto de datos.
+Cada Actor leyó los seguidores de NASA, SpaceX & esa. Los otros Actores
+corrieron el 2026-09-28. Las ejecuciones de Xquik usaron `outputMode: "full"` y
+corrieron el 2026-09-29. Todas las ejecuciones usaron el nivel Bronze. Un perfil
+útil es único, tiene 30+ días, 1+ seguidor & 1+ publicación. El costo es el
+gasto total del cliente por perfil útil. El nuestro incluye el uso de Apify que
+pagan nuestros clientes. Una fila con 3 ejecuciones las suma. Campos por fila es
+la mediana de campos no vacíos, incluidos los anidados. Una lista cuenta como 1
+campo. Abre una ejecución para ver su entrada, registro & conjunto de datos.
 
 ## Entrada
 
@@ -638,9 +640,9 @@ límites de tu cuenta y de la plataforma de Apify siguen vigentes.
 ### ¿Qué tan rápido es?
 
 La velocidad de X Follower Scraper de Xquik depende del tamaño del objetivo, los
-filtros y la disponibilidad de X. Sus 2 ejecuciones de la
-[prueba comparativa](#prueba-comparativa) llegaron a 38.4 y 68.5 perfiles útiles
-por segundo.
+filtros y la disponibilidad de X. Sus 2 ejecuciones de la [prueba
+comparativa](#prueba-comparativa) llegaron a 77.9 y 100.0 perfiles útiles por
+segundo.
 
 ### ¿Por qué mi ejecución devuelve menos filas que `maxItems`?
 

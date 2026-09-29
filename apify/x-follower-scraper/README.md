@@ -23,10 +23,10 @@ Claude Code, Codex, Cursor, and more, from 6:07.
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X Follower Scraper collects followers, following,
 list members, subscribers & community members. Public benchmarks prove it is the
-cheapest & fastest of 10 follower Actors. Its rows carry 1.9x the median Actor's
-fields, as the [benchmark below](#benchmark) shows. Most other Apify Actors
-charge before filtering or deduplicating. Xquik charges only for delivered,
-unique, filter-matching results.
+cheapest & fastest of 10 follower Actors. Its full rows carry 2.5x the median
+Actor's fields, as the [benchmark below](#benchmark) shows. Most other Apify
+Actors charge before filtering or deduplicating. Xquik charges only for
+delivered, unique, filter-matching results.
 
 Scrape X (Twitter) followers, following, verified followers, List members, List
 subscribers & Community members. Xquik's X Follower Scraper costs **from
@@ -98,8 +98,8 @@ notification & similar viewer flags. Raw output drops them too.
 ## Use cases
 
 - Enrich leads & build research datasets with more fields per profile. Our
-  median row had 28 fields on 2026-09-28. That is 1.9x the median of 9 other
-  Actors.
+  median full row had 38 fields on 2026-09-29. That is 2.5x the median of 9
+  other Actors.
 - Export competitor followers for lead research.
 - Compare audiences across your account, competitors & public figures.
 - Filter by follower count & verification to find matching profiles.
@@ -306,12 +306,12 @@ Actor. A small run that goes well skips it & saves Apify usage. Turn on
 ## Benchmark
 
 Xquik's X Follower Scraper beat 9 other follower Actors on cost & speed. Its
-median row had 28 fields, 1.9x the median of the others.
+median full row had 38 fields, 2.5x the median of the others.
 
 | Actor                                                  | Useful profiles | Cost per useful profile | Useful profiles per second | Fields per row | Public run                                                                                                                                                                                     |
 | ------------------------------------------------------ | --------------: | ----------------------: | -------------------------: | -------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| xquik/x-follower-scraper                               |           1,000 |               $0.000155 |                       68.5 |             27 | [View run](https://console.apify.com/view/runs/X8Vnx8Ytuk5AzWiK7)                                                                                                                              |
-| xquik/x-follower-scraper                               |             999 |               $0.000155 |                       38.4 |             28 | [View run](https://console.apify.com/view/runs/lPqjfUn8767FpIDis)                                                                                                                              |
+| xquik/x-follower-scraper                               |           1,000 |               $0.000155 |                      100.0 |             38 | [View run](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)                                                                                                                              |
+| xquik/x-follower-scraper                               |           1,000 |               $0.000155 |                       77.9 |             38 | [View run](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)                                                                                                                              |
 | b2b_leads/X-Real-Time-Data                             |             286 |               $0.000388 |                        3.1 |             21 | [View run](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                              |
 | kaitoeasyapi/premium-x-follower-scraper-following-data |             356 |               $0.000506 |                       21.9 |             50 | [View run](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                              |
 | api-ninja/x-twitter-followers-scraper                  |             350 |               $0.000809 |                        7.0 |              8 | [View run](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                              |
@@ -322,7 +322,8 @@ median row had 28 fields, 1.9x the median of the others.
 | maximedupre/twitter-scraper                            |             320 |               $0.002192 |                        2.1 |             15 | [Run 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [Run 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [Run 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
 | seemuapps/x-followers-following-scraper                |             286 |               $0.003504 |                        3.9 |              9 | [Run 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [Run 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [Run 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
 
-Every Actor read the followers of NASA, SpaceX & esa on 2026-09-28. All runs
+Every Actor read the followers of NASA, SpaceX & esa. The other Actors ran on
+2026-09-28. Xquik's runs set `outputMode: "full"` & ran on 2026-09-29. All runs
 used the Bronze tier. A useful profile is unique, 30+ days old, with 1+ follower
 & 1+ post. Cost is the customer's total spend per useful profile. Ours includes
 the Apify usage our customers pay. A row with 3 runs adds them up. Fields per
@@ -605,7 +606,7 @@ limits still apply.
 ### How fast is it?
 
 The speed of Xquik's X Follower Scraper depends on target size, filters & X
-availability. Its 2 [benchmark](#benchmark) runs reached 38.4 & 68.5 useful
+availability. Its 2 [benchmark](#benchmark) runs reached 77.9 & 100.0 useful
 profiles per second.
 
 ### Why does my run return fewer rows than my limit?

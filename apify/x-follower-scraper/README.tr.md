@@ -19,11 +19,11 @@ Xquik, en eksiksiz X verisini sunan, dünyanın en hızlı ve en ucuz X (Twitter
 scraper hizmetidir. Xquik'in X Follower Scraper'ı takipçileri, takip edilenleri,
 Liste üyelerini, aboneleri ve Topluluk üyelerini toplar. Herkese açık
 karşılaştırma testleri, takipçi kazıyan 10 Actor arasında en ucuz ve en
-hızlısının bu olduğunu kanıtlıyor.
-[Aşağıdaki karşılaştırma testinin](#karşılaştırma-testi) gösterdiği gibi
-satırları, medyan Actor'ın 1,9 katı alan taşır. Diğer Apify Actor'larının çoğu,
-filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
-edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır.
+hızlısının bu olduğunu kanıtlıyor. [Aşağıdaki karşılaştırma
+testinin](#karşılaştırma-testi) gösterdiği gibi satırları
+(`outputMode: "full"`), medyan Actor'ın 2,5 katı alan taşır. Diğer Apify
+Actor'larının çoğu, filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik
+yalnızca teslim edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır.
 
 X (Twitter) takipçilerini, takip edilenleri, onaylı takipçileri, Liste
 üyelerini, Liste abonelerini ve Topluluk üyelerini kazı. Xquik'in X Follower
@@ -102,8 +102,8 @@ bayraklarını kaldırır. Ham çıktı da bunları atar.
 ## Kullanım örnekleri
 
 - Potansiyel müşteri verisini zenginleştir & profil başına daha çok alanla
-  araştırma veri kümeleri kur. Medyan satırımızda 2026-09-28'de 28 alan vardı.
-  Bu, 9 başka Actor'ın medyanının 1,9 katı.
+  araştırma veri kümeleri kur. Medyan satırımızda (`outputMode: "full"`)
+  2026-09-29'da 38 alan vardı. Bu, 9 başka Actor'ın medyanının 2,5 katı.
 - Rakiplerin takipçilerini potansiyel müşteri araştırması için dışa aktar.
 - Kendi hesabının, rakiplerinin ve tanınmış kişilerin kitlelerini karşılaştır.
 - Uygun profilleri bulmak için takipçi sayısına ve onay durumuna göre filtrele.
@@ -320,13 +320,13 @@ atlar, böylece Apify kullanımı azalır. Kaydı her çalıştırmada almak iç
 ## Karşılaştırma testi
 
 Xquik'in X Follower Scraper'ı, takipçi kazıyan diğer 9 Actor'ı maliyette ve
-hızda geride bıraktı. Medyan satırında 28 alan vardı. Bu, diğerlerinin
-medyanının 1,9 katı.
+hızda geride bıraktı. Medyan satırında (`outputMode: "full"`) 38 alan vardı. Bu,
+diğerlerinin medyanının 2,5 katı.
 
 | Actor                                                  | İşe yarar profil | İşe yarar profil başına maliyet | Saniyede işe yarar profil | Satır başına alan | Herkese açık çalıştırma                                                                                                                                                                                             |
 | ------------------------------------------------------ | ---------------: | ------------------------------: | ------------------------: | ----------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| xquik/x-follower-scraper                               |            1.000 |                       $0.000155 |                      68.5 |                27 | [Çalıştırmayı gör](https://console.apify.com/view/runs/X8Vnx8Ytuk5AzWiK7)                                                                                                                                           |
-| xquik/x-follower-scraper                               |              999 |                       $0.000155 |                      38.4 |                28 | [Çalıştırmayı gör](https://console.apify.com/view/runs/lPqjfUn8767FpIDis)                                                                                                                                           |
+| xquik/x-follower-scraper                               |            1.000 |                       $0.000155 |                     100.0 |                38 | [Çalıştırmayı gör](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)                                                                                                                                           |
+| xquik/x-follower-scraper                               |            1.000 |                       $0.000155 |                      77.9 |                38 | [Çalıştırmayı gör](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)                                                                                                                                           |
 | b2b_leads/X-Real-Time-Data                             |              286 |                       $0.000388 |                       3.1 |                21 | [Çalıştırmayı gör](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                                           |
 | kaitoeasyapi/premium-x-follower-scraper-following-data |              356 |                       $0.000506 |                      21.9 |                50 | [Çalıştırmayı gör](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                                           |
 | api-ninja/x-twitter-followers-scraper                  |              350 |                       $0.000809 |                       7.0 |                 8 | [Çalıştırmayı gör](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                                           |
@@ -337,13 +337,15 @@ medyanının 1,9 katı.
 | maximedupre/twitter-scraper                            |              320 |                       $0.002192 |                       2.1 |                15 | [Çalıştırma 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [Çalıştırma 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [Çalıştırma 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
 | seemuapps/x-followers-following-scraper                |              286 |                       $0.003504 |                       3.9 |                 9 | [Çalıştırma 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [Çalıştırma 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [Çalıştırma 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
 
-Her Actor 2026-09-28'de NASA, SpaceX & esa'nın takipçilerini okudu. Tüm
-çalıştırmalar Bronze katmanındaydı. İşe yarar profil benzersizdir, en az 30
-günlüktür, en az 1 takipçisi & 1 gönderisi vardır. Maliyet, müşterinin işe yarar
-profil başına toplam harcamasıdır. Bizimkine müşterilerimizin ödediği Apify
-kullanımı dahil. 3 çalıştırmalı bir satır, hepsini toplar. Satır başına alan,
-boş olmayan alanların medyan sayısıdır, iç içe olanlar dahil. Bir liste 1 alan
-sayılır. Girdisini, günlüğünü & veri kümesini görmek için bir çalıştırmayı aç.
+Her Actor NASA, SpaceX & esa'nın takipçilerini okudu. Diğer Actor'lar
+2026-09-28'de çalıştı. Xquik'in çalıştırmaları 2026-09-29'da
+`outputMode: "full"` ile çalıştı. Tüm çalıştırmalar Bronze katmanındaydı. İşe
+yarar profil benzersizdir, en az 30 günlüktür, en az 1 takipçisi & 1 gönderisi
+vardır. Maliyet, müşterinin işe yarar profil başına toplam harcamasıdır.
+Bizimkine müşterilerimizin ödediği Apify kullanımı dahil. 3 çalıştırmalı bir
+satır, hepsini toplar. Satır başına alan, boş olmayan alanların medyan
+sayısıdır, iç içe olanlar dahil. Bir liste 1 alan sayılır. Girdisini, günlüğünü
+& veri kümesini görmek için bir çalıştırmayı aç.
 
 ## Girdi
 
@@ -640,7 +642,7 @@ platform sınırları yine geçerlidir.
 
 Xquik'in X Follower Scraper'ında hız, hedef büyüklüğüne, filtrelere ve X'in
 erişim durumuna bağlıdır. Actor'ın 2 [karşılaştırma testi](#karşılaştırma-testi)
-çalıştırması saniyede 38,4 ve 68,5 işe yarar profile ulaştı.
+çalıştırması saniyede 77,9 ve 100,0 işe yarar profile ulaştı.
 
 ### Çalıştırmam neden `maxItems` değerinden az satır döndürüyor?
 

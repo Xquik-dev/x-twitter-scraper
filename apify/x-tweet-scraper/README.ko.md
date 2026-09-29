@@ -50,7 +50,7 @@ Xquik의 X Tweet Scraper는 게시물, 참여 지표, 공개 작성자 프로필
 ### 사용 사례
 
 - 트윗당 더 많은 필드로 리서치, 데이터 보강, 분석 & AI 학습을 지원하세요. 저희
-  중앙값 행에는 2026-09-27에 필드가 63개 있었습니다. 다른 Actor 11개 중앙값의
+  중앙값 행에는 2026-09-29에 필드가 63개 있었습니다. 다른 Actor 11개 중앙값의
   2배입니다.
 - 게시물 전반의 브랜드 감정을 추적하세요.
 - 경쟁사 게시물 & 업계 용어를 모니터링하세요.
@@ -405,10 +405,10 @@ Xquik의 X Tweet Scraper는 비용 & 속도에서 다른 게시물 Actor 11개�
 
 | Actor                                                             | 유용한 트윗 | 유용한 트윗당 비용 | 초당 유용한 트윗 | 행당 필드 수 | 공개 실행                                                          |
 | ----------------------------------------------------------------- | ----------: | -----------------: | ---------------: | -----------: | ------------------------------------------------------------------ |
-| xquik/x-tweet-scraper                                             |         882 |          $0.000177 |             27.0 |           63 | [실행 보기](https://console.apify.com/view/runs/JJfsKql7EdiXsSX3T) |
-| xquik/x-tweet-scraper                                             |         868 |          $0.000179 |             27.4 |           63 | [실행 보기](https://console.apify.com/view/runs/58ye04whvCP63nmmW) |
-| xquik/x-tweet-scraper                                             |         869 |          $0.000179 |             25.8 |           63 | [실행 보기](https://console.apify.com/view/runs/ytoTpYCca2MShp4gh) |
-| xquik/x-tweet-scraper                                             |         879 |          $0.000177 |             29.1 |           63 | [실행 보기](https://console.apify.com/view/runs/CrJLYvAIG0Ji666rr) |
+| xquik/x-tweet-scraper                                             |         890 |          $0.000175 |             39.2 |           63 | [실행 보기](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX) |
+| xquik/x-tweet-scraper                                             |         883 |          $0.000176 |             25.2 |           63 | [실행 보기](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf) |
+| xquik/x-tweet-scraper                                             |         882 |          $0.000177 |             25.7 |           63 | [실행 보기](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba) |
+| xquik/x-tweet-scraper                                             |         877 |          $0.000178 |             26.9 |           63 | [실행 보기](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |         813 |          $0.000185 |             10.5 |           36 | [실행 보기](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |         805 |          $0.000187 |             10.6 |           36 | [실행 보기](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |         805 |          $0.000187 |             10.7 |           36 | [실행 보기](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
@@ -423,7 +423,8 @@ Xquik의 X Tweet Scraper는 비용 & 속도에서 다른 게시물 Actor 11개�
 | seemuapps/x-tweet-scraper                                         |         805 |          $0.001242 |              6.9 |           24 | [실행 보기](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
 | maximedupre/twitter-scraper                                       |          46 |          $0.002846 |              0.3 |           31 | [실행 보기](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
 
-모든 Actor는 2026-09-27에 같은 검색 & 필터로 실행했습니다. 모든 실행은 Bronze
+모든 Actor는 같은 검색 & 필터로 실행했습니다. 다른 Actor는 2026-09-27에, Xquik
+실행은 2026-09-29에 `outputVariant: "rich"`로 실행했습니다. 모든 실행은 Bronze
 등급을 사용했습니다. 유용한 트윗은 좋아요가 10개 이상인 고유한 영어 원본
 게시물입니다. 비용은 유용한 트윗 1개당 고객의 총지출입니다. 저희 비용에는 고객이
 내는 Apify 사용량이 포함됩니다. 행당 필드 수는 비어 있지 않은 필드 수의
@@ -792,7 +793,7 @@ Xquik은 대시보드 도구 47개, REST 작업 129개, 서명된 웹훅 & MCP �
 ### 얼마나 빠른가요?
 
 Xquik의 X Tweet Scraper는 [벤치마크](#벤치마크)에서 초당 유용한 게시물을
-25.8개에서 29.1개 전달했습니다. 실행 시간은 입력, 결과 수 & X 가용성에 따라
+25.2개에서 39.2개 전달했습니다. 실행 시간은 입력, 결과 수 & X 가용성에 따라
 달라집니다.
 
 ### 최신 검색에서 X의 최신 탭에 없는 게시물이 나오는 이유는 무엇인가요?

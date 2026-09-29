@@ -36,7 +36,7 @@ XquikのX Tweet Scraperは、ポスト、エンゲージメント指標、著者
 
 ### ユースケース
 
-- ポストごとにより多くのフィールドを使い、調査、データ補完、分析、AI学習に活用する。当社の中央値の行は、2026-09-27に63個のフィールドがありました。これは他の11個のActorの中央値の2倍です。
+- ポストごとにより多くのフィールドを使い、調査、データ補完、分析、AI学習に活用する。当社の中央値の行は、2026-09-29に63個のフィールドがありました。これは他の11個のActorの中央値の2倍です。
 - ポストに表れるブランドへの感情を追跡できます。
 - 競合のポストや業界の用語を監視できます。
 - 公開の会話から見込み客を見つけられます。
@@ -292,10 +292,10 @@ XquikのX Tweet Scraperは、コストと速度で他の11のポスト用Actor�
 
 | Actor                                                             | 有効なポスト | 有効なポスト1件あたりのコスト | 1秒あたりの有効なポスト | 1行あたりのフィールド数 | 公開された実行                                                      |
 | ----------------------------------------------------------------- | -----------: | ----------------------------: | ----------------------: | ----------------------: | ------------------------------------------------------------------- |
-| xquik/x-tweet-scraper                                             |          882 |                     $0.000177 |                    27.0 |                      63 | [実行を見る](https://console.apify.com/view/runs/JJfsKql7EdiXsSX3T) |
-| xquik/x-tweet-scraper                                             |          868 |                     $0.000179 |                    27.4 |                      63 | [実行を見る](https://console.apify.com/view/runs/58ye04whvCP63nmmW) |
-| xquik/x-tweet-scraper                                             |          869 |                     $0.000179 |                    25.8 |                      63 | [実行を見る](https://console.apify.com/view/runs/ytoTpYCca2MShp4gh) |
-| xquik/x-tweet-scraper                                             |          879 |                     $0.000177 |                    29.1 |                      63 | [実行を見る](https://console.apify.com/view/runs/CrJLYvAIG0Ji666rr) |
+| xquik/x-tweet-scraper                                             |          890 |                     $0.000175 |                    39.2 |                      63 | [実行を見る](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX) |
+| xquik/x-tweet-scraper                                             |          883 |                     $0.000176 |                    25.2 |                      63 | [実行を見る](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf) |
+| xquik/x-tweet-scraper                                             |          882 |                     $0.000177 |                    25.7 |                      63 | [実行を見る](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba) |
+| xquik/x-tweet-scraper                                             |          877 |                     $0.000178 |                    26.9 |                      63 | [実行を見る](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |          813 |                     $0.000185 |                    10.5 |                      36 | [実行を見る](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |          805 |                     $0.000187 |                    10.6 |                      36 | [実行を見る](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |          805 |                     $0.000187 |                    10.7 |                      36 | [実行を見る](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
@@ -310,7 +310,7 @@ XquikのX Tweet Scraperは、コストと速度で他の11のポスト用Actor�
 | seemuapps/x-tweet-scraper                                         |          805 |                     $0.001242 |                     6.9 |                      24 | [実行を見る](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
 | maximedupre/twitter-scraper                                       |           46 |                     $0.002846 |                     0.3 |                      31 | [実行を見る](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
 
-各Actorは2026-09-27に同じ検索と同じフィルタで実行しました。すべての実行でBronzeティアを使いました。有効なポストとは、10件以上のいいねがある、ユニークな英語のオリジナルポストです。コストは、有効なポスト1件あたりの顧客の総支払額です。当社のコストには、お客様が支払うApify使用料を含みます。1行あたりのフィールド数は、空でないフィールド数の中央値で、ネストされたフィールドも含みます。リストは1フィールドとして数えます。実行を開くと、入力、ログ、データセットを確認できます。
+各Actorは同じ検索と同じフィルタで実行しました。他のActorは2026-09-27に、Xquikの実行は2026-09-29に`outputVariant: "rich"`で実行しました。すべての実行でBronzeティアを使いました。有効なポストとは、10件以上のいいねがある、ユニークな英語のオリジナルポストです。コストは、有効なポスト1件あたりの顧客の総支払額です。当社のコストには、お客様が支払うApify使用料を含みます。1行あたりのフィールド数は、空でないフィールド数の中央値で、ネストされたフィールドも含みます。リストは1フィールドとして数えます。実行を開くと、入力、ログ、データセットを確認できます。
 
 ## 空の実行、部分的な実行、停止した実行
 
@@ -541,7 +541,7 @@ Xquikは、47個のダッシュボードツール、129個のREST操作、署名
 
 ### どのくらい速いですか？
 
-XquikのX Tweet Scraperは、[ベンチマーク](#ベンチマーク)で1秒あたり25.8件から29.1件の有効なポストを配信しました。実行時間は、入力、結果の件数、Xの可用性によって変わります。
+XquikのX Tweet Scraperは、[ベンチマーク](#ベンチマーク)で1秒あたり25.2件から39.2件の有効なポストを配信しました。実行時間は、入力、結果の件数、Xの可用性によって変わります。
 
 ### Latest検索で、Xの最新タブにないポストが返るのはなぜですか？
 

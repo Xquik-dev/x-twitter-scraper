@@ -35,7 +35,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 
 ### 使用场景
 
-- 用每条推文更多的字段支持研究、数据补全、分析和 AI 训练。我们的中位数行在 2026-09-27 有 63 个字段。这是其他 11 个 Actor 中位数的 2 倍。
+- 用每条推文更多的字段支持研究、数据补全、分析和 AI 训练。我们的中位数行在 2026-09-29 有 63 个字段。这是其他 11 个 Actor 中位数的 2 倍。
 - 追踪帖子中的品牌情感。
 - 监测竞争对手的帖子和行业术语。
 - 在公开对话中寻找潜在客户。
@@ -291,10 +291,10 @@ Xquik 的 X Tweet Scraper 在成本和速度上胜过其他 11 个帖子抓取 A
 
 | Actor                                                             | 有用推文 | 每条有用推文成本 | 每秒有用推文 | 每行字段数 | 公开运行                                                          |
 | ----------------------------------------------------------------- | -------: | ---------------: | -----------: | ---------: | ----------------------------------------------------------------- |
-| xquik/x-tweet-scraper                                             |      882 |        $0.000177 |         27.0 |         63 | [查看运行](https://console.apify.com/view/runs/JJfsKql7EdiXsSX3T) |
-| xquik/x-tweet-scraper                                             |      868 |        $0.000179 |         27.4 |         63 | [查看运行](https://console.apify.com/view/runs/58ye04whvCP63nmmW) |
-| xquik/x-tweet-scraper                                             |      869 |        $0.000179 |         25.8 |         63 | [查看运行](https://console.apify.com/view/runs/ytoTpYCca2MShp4gh) |
-| xquik/x-tweet-scraper                                             |      879 |        $0.000177 |         29.1 |         63 | [查看运行](https://console.apify.com/view/runs/CrJLYvAIG0Ji666rr) |
+| xquik/x-tweet-scraper                                             |      890 |        $0.000175 |         39.2 |         63 | [查看运行](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX) |
+| xquik/x-tweet-scraper                                             |      883 |        $0.000176 |         25.2 |         63 | [查看运行](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf) |
+| xquik/x-tweet-scraper                                             |      882 |        $0.000177 |         25.7 |         63 | [查看运行](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba) |
+| xquik/x-tweet-scraper                                             |      877 |        $0.000178 |         26.9 |         63 | [查看运行](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |      813 |        $0.000185 |         10.5 |         36 | [查看运行](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |      805 |        $0.000187 |         10.6 |         36 | [查看运行](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |      805 |        $0.000187 |         10.7 |         36 | [查看运行](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
@@ -309,7 +309,7 @@ Xquik 的 X Tweet Scraper 在成本和速度上胜过其他 11 个帖子抓取 A
 | seemuapps/x-tweet-scraper                                         |      805 |        $0.001242 |          6.9 |         24 | [查看运行](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
 | maximedupre/twitter-scraper                                       |       46 |        $0.002846 |          0.3 |         31 | [查看运行](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
 
-每个 Actor 都在 2026-09-27 运行了同一个搜索和相同的过滤条件。
+每个 Actor 都运行了同一个搜索和相同的过滤条件。其他 Actor 在 2026-09-27 运行，Xquik 的运行在 2026-09-29 使用了 `outputVariant: "rich"`。
 所有运行都使用 Bronze 等级。
 有用推文是唯一的英文原创帖子，且至少有 10 个赞。
 成本是客户为每条有用推文支付的总费用。
@@ -547,7 +547,7 @@ Xquik 还提供 47 个仪表盘工具、129 个 REST 操作、签名 webhook 和
 
 ### 它有多快？
 
-在[基准测试](#基准测试)中，Xquik 的 X Tweet Scraper 每秒交付 25.8 到 29.1 条有效帖子。运行时间取决于你的输入、结果数量和 X 的可用性。
+在[基准测试](#基准测试)中，Xquik 的 X Tweet Scraper 每秒交付 25.2 到 39.2 条有效帖子。运行时间取决于你的输入、结果数量和 X 的可用性。
 
 ### 为什么“最新”搜索会返回 X“最新”标签页里没有的帖子？
 

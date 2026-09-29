@@ -54,7 +54,7 @@ post & query di ricerca con oltre 50 filtri.
 ### Casi d'uso
 
 - Alimentare ricerca, arricchimento, analisi & addestramento IA con più campi
-  per tweet. Il 2026-09-27 la nostra riga mediana aveva 63 campi. È 2x la
+  per tweet. Il 2026-09-29 la nostra riga mediana aveva 63 campi. È 2x la
   mediana di altri 11 Actor.
 - Segui il sentiment del brand nei post.
 - Monitora i post dei concorrenti & i termini del tuo settore.
@@ -424,10 +424,10 @@ estraggono post. La sua riga mediana aveva 63 campi, 2x la mediana degli altri.
 
 | Actor                                                             | Tweet utili | Costo per tweet utile | Tweet utili al secondo | Campi per riga | Esecuzione pubblica                                                      |
 | ----------------------------------------------------------------- | ----------: | --------------------: | ---------------------: | -------------: | ------------------------------------------------------------------------ |
-| xquik/x-tweet-scraper                                             |         882 |             $0.000177 |                   27.0 |             63 | [Vedi esecuzione](https://console.apify.com/view/runs/JJfsKql7EdiXsSX3T) |
-| xquik/x-tweet-scraper                                             |         868 |             $0.000179 |                   27.4 |             63 | [Vedi esecuzione](https://console.apify.com/view/runs/58ye04whvCP63nmmW) |
-| xquik/x-tweet-scraper                                             |         869 |             $0.000179 |                   25.8 |             63 | [Vedi esecuzione](https://console.apify.com/view/runs/ytoTpYCca2MShp4gh) |
-| xquik/x-tweet-scraper                                             |         879 |             $0.000177 |                   29.1 |             63 | [Vedi esecuzione](https://console.apify.com/view/runs/CrJLYvAIG0Ji666rr) |
+| xquik/x-tweet-scraper                                             |         890 |             $0.000175 |                   39.2 |             63 | [Vedi esecuzione](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX) |
+| xquik/x-tweet-scraper                                             |         883 |             $0.000176 |                   25.2 |             63 | [Vedi esecuzione](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf) |
+| xquik/x-tweet-scraper                                             |         882 |             $0.000177 |                   25.7 |             63 | [Vedi esecuzione](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba) |
+| xquik/x-tweet-scraper                                             |         877 |             $0.000178 |                   26.9 |             63 | [Vedi esecuzione](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |         813 |             $0.000185 |                   10.5 |             36 | [Vedi esecuzione](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |         805 |             $0.000187 |                   10.6 |             36 | [Vedi esecuzione](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |         805 |             $0.000187 |                   10.7 |             36 | [Vedi esecuzione](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
@@ -442,12 +442,14 @@ estraggono post. La sua riga mediana aveva 63 campi, 2x la mediana degli altri.
 | seemuapps/x-tweet-scraper                                         |         805 |             $0.001242 |                    6.9 |             24 | [Vedi esecuzione](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
 | maximedupre/twitter-scraper                                       |          46 |             $0.002846 |                    0.3 |             31 | [Vedi esecuzione](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
 
-Ogni Actor ha eseguito la stessa ricerca con gli stessi filtri il 2026-09-27.
-Tutte le esecuzioni hanno usato il livello Bronze. Un tweet utile è un post
-originale unico in inglese con 10+ like. Il costo è la spesa totale del cliente
-per tweet utile. Il nostro include l'uso di Apify che pagano i nostri clienti.
-Campi per riga è la mediana dei campi non vuoti, inclusi quelli annidati. Una
-lista conta come 1 campo. Apri un'esecuzione per vedere input, log & dataset.
+Ogni Actor ha eseguito la stessa ricerca con gli stessi filtri. Gli altri Actor
+sono stati eseguiti il 2026-09-27. Le esecuzioni di Xquik hanno usato
+`outputVariant: "rich"` il 2026-09-29. Tutte le esecuzioni hanno usato il
+livello Bronze. Un tweet utile è un post originale unico in inglese con 10+
+like. Il costo è la spesa totale del cliente per tweet utile. Il nostro include
+l'uso di Apify che pagano i nostri clienti. Campi per riga è la mediana dei
+campi non vuoti, inclusi quelli annidati. Una lista conta come 1 campo. Apri
+un'esecuzione per vedere input, log & dataset.
 
 ## Esecuzioni vuote, parziali & interrotte
 
@@ -834,8 +836,8 @@ l'esecuzione. Restano validi i limiti dell'account & della piattaforma Apify.
 
 ### Quanto è veloce?
 
-Nel [benchmark](#benchmark), X Tweet Scraper di Xquik ha consegnato da 25,8 a
-29,1 post utili al secondo. Il tempo di esecuzione dipende dal tuo input, dal
+Nel [benchmark](#benchmark), X Tweet Scraper di Xquik ha consegnato da 25,2 a
+39,2 post utili al secondo. Il tempo di esecuzione dipende dal tuo input, dal
 numero di risultati & dalla disponibilità di X.
 
 ### Perché una ricerca Latest restituisce post che la scheda Più recenti di X non mostra?

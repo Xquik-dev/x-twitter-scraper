@@ -19,7 +19,7 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 완전한 X 데이터를 제공합니다. Xquik의 X Follower Scraper는 팔로워, 팔로잉,
 리스트 멤버, 구독자 & 커뮤니티 멤버를 수집합니다. 공개 벤치마크가 입증하듯
 팔로워 Actor 10개 중 가장 저렴하고 빠릅니다. [아래 벤치마크](#벤치마크)에서 보듯
-행당 필드 수도 Actor 중앙값의 1.9배입니다. 다른 Apify Actor는 대부분 필터링이나
+행당 필드 수(`outputMode: "full"`)도 Actor 중앙값의 2.5배입니다. 다른 Apify Actor는 대부분 필터링이나
 중복 제거 전에 요금을 부과합니다. Xquik은 필터에 맞고 중복되지 않은 결과를
 전달했을 때만 요금을 받습니다.
 
@@ -95,8 +95,8 @@ Xquik의 X Follower Scraper는 팔로워, 팔로잉, 리스트 & 커뮤니티의
 ## 사용 사례
 
 - 프로필당 더 많은 필드로 리드를 보강하고 리서치 데이터셋을 만드세요. 저희
-  중앙값 행에는 2026-09-28에 필드가 28개 있었습니다. 다른 Actor 9개 중앙값의
-  1.9배입니다.
+  중앙값 행(`outputMode: "full"`)에는 2026-09-29에 필드가 38개 있었습니다. 다른
+  Actor 9개 중앙값의 2.5배입니다.
 - 리드 조사를 위해 경쟁사 팔로워를 내보내세요.
 - 내 계정, 경쟁사 & 공인의 오디언스를 비교하세요.
 - 팔로워 수 & 인증 여부로 필터링해 조건에 맞는 프로필을 찾으세요.
@@ -302,12 +302,13 @@ $0.00015입니다. Apify 플랫폼 사용료는 Apify가 따로 청구합니다.
 ## 벤치마크
 
 Xquik의 X Follower Scraper는 비용 & 속도에서 다른 팔로워 Actor 9개를 앞섰습니다.
-이 Actor의 중앙값 행에는 필드가 28개 있었고, 다른 Actor 중앙값의 1.9배였습니다.
+이 Actor의 중앙값 행(`outputMode: "full"`)에는 필드가 38개 있었고, 다른 Actor
+중앙값의 2.5배였습니다.
 
 | Actor                                                  | 유용한 프로필 | 유용한 프로필당 비용 | 초당 유용한 프로필 | 행당 필드 수 | 공개 실행                                                                                                                                                                                         |
 | ------------------------------------------------------ | ------------: | -------------------: | -----------------: | -----------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| xquik/x-follower-scraper                               |         1,000 |            $0.000155 |               68.5 |           27 | [실행 보기](https://console.apify.com/view/runs/X8Vnx8Ytuk5AzWiK7)                                                                                                                                |
-| xquik/x-follower-scraper                               |           999 |            $0.000155 |               38.4 |           28 | [실행 보기](https://console.apify.com/view/runs/lPqjfUn8767FpIDis)                                                                                                                                |
+| xquik/x-follower-scraper                               |         1,000 |            $0.000155 |              100.0 |           38 | [실행 보기](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)                                                                                                                                |
+| xquik/x-follower-scraper                               |         1,000 |            $0.000155 |               77.9 |           38 | [실행 보기](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)                                                                                                                                |
 | b2b_leads/X-Real-Time-Data                             |           286 |            $0.000388 |                3.1 |           21 | [실행 보기](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                                |
 | kaitoeasyapi/premium-x-follower-scraper-following-data |           356 |            $0.000506 |               21.9 |           50 | [실행 보기](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                                |
 | api-ninja/x-twitter-followers-scraper                  |           350 |            $0.000809 |                7.0 |            8 | [실행 보기](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                                |
@@ -318,8 +319,9 @@ Xquik의 X Follower Scraper는 비용 & 속도에서 다른 팔로워 Actor 9개
 | maximedupre/twitter-scraper                            |           320 |            $0.002192 |                2.1 |           15 | [실행 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [실행 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [실행 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
 | seemuapps/x-followers-following-scraper                |           286 |            $0.003504 |                3.9 |            9 | [실행 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [실행 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [실행 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
 
-모든 Actor는 2026-09-28에 NASA, SpaceX & esa의 팔로워를 읽었습니다. 모든 실행은
-Bronze 등급을 사용했습니다. 유용한 프로필은 고유하고, 생성된 지 30일 이상이며,
+모든 Actor는 NASA, SpaceX & esa의 팔로워를 읽었습니다. 다른 Actor는
+2026-09-28에, Xquik 실행은 2026-09-29에 `outputMode: "full"`로 실행했습니다.
+모든 실행은 Bronze 등급을 사용했습니다. 유용한 프로필은 고유하고, 생성된 지 30일 이상이며,
 팔로워 1명 & 게시물 1개 이상이 있습니다. 비용은 유용한 프로필 1개당 고객의
 총지출입니다. 저희 비용에는 고객이 내는 Apify 사용량이 포함됩니다. 실행이 3개인
 행은 그 합계입니다. 행당 필드 수는 비어 있지 않은 필드 수의 중앙값이며, 중첩
@@ -600,8 +602,8 @@ Xquik은 대시보드 도구 47개, REST 작업 129개, 서명된 웹훅 & MCP �
 ### 얼마나 빠른가요?
 
 Xquik의 X Follower Scraper는 대상 규모, 필터 & X 가용성에 따라 속도가
-달라집니다. [벤치마크](#벤치마크) 실행 2개에서는 초당 유용한 프로필이 38.4개 &
-68.5개였습니다.
+달라집니다. [벤치마크](#벤치마크) 실행 2개에서는 초당 유용한 프로필이 77.9개 &
+100.0개였습니다.
 
 ### 실행 결과가 `maxItems`보다 적은 이유는 무엇인가요?
 

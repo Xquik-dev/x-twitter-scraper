@@ -54,8 +54,8 @@ with 50+ filters.
 ### Use cases
 
 - Feed research, enrichment, analytics & AI training with more fields per tweet.
-  Our median row had 63 fields on 2026-09-27. That is 2x the median of 11 other
-  Actors.
+  Our median rich row had 63 fields on 2026-09-29. That is 2x the median of 11
+  other Actors.
 - Track brand sentiment across tweets.
 - Monitor competitor posts & industry terms.
 - Find prospects in public conversations.
@@ -405,10 +405,10 @@ row had 63 fields, 2x the median of the others.
 
 | Actor                                                             | Useful tweets | Cost per useful tweet | Useful tweets per second | Fields per row | Public run                                                        |
 | ----------------------------------------------------------------- | ------------: | --------------------: | -----------------------: | -------------: | ----------------------------------------------------------------- |
-| xquik/x-tweet-scraper                                             |           882 |             $0.000177 |                     27.0 |             63 | [View run](https://console.apify.com/view/runs/JJfsKql7EdiXsSX3T) |
-| xquik/x-tweet-scraper                                             |           868 |             $0.000179 |                     27.4 |             63 | [View run](https://console.apify.com/view/runs/58ye04whvCP63nmmW) |
-| xquik/x-tweet-scraper                                             |           869 |             $0.000179 |                     25.8 |             63 | [View run](https://console.apify.com/view/runs/ytoTpYCca2MShp4gh) |
-| xquik/x-tweet-scraper                                             |           879 |             $0.000177 |                     29.1 |             63 | [View run](https://console.apify.com/view/runs/CrJLYvAIG0Ji666rr) |
+| xquik/x-tweet-scraper                                             |           890 |             $0.000175 |                     39.2 |             63 | [View run](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX) |
+| xquik/x-tweet-scraper                                             |           883 |             $0.000176 |                     25.2 |             63 | [View run](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf) |
+| xquik/x-tweet-scraper                                             |           882 |             $0.000177 |                     25.7 |             63 | [View run](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba) |
+| xquik/x-tweet-scraper                                             |           877 |             $0.000178 |                     26.9 |             63 | [View run](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |           813 |             $0.000185 |                     10.5 |             36 | [View run](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |           805 |             $0.000187 |                     10.6 |             36 | [View run](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
 | scrapesmith/twitter-x-scraper-tweets-profiles-replies             |           805 |             $0.000187 |                     10.7 |             36 | [View run](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
@@ -423,7 +423,8 @@ row had 63 fields, 2x the median of the others.
 | seemuapps/x-tweet-scraper                                         |           805 |             $0.001242 |                      6.9 |             24 | [View run](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
 | maximedupre/twitter-scraper                                       |            46 |             $0.002846 |                      0.3 |             31 | [View run](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
 
-Every Actor ran the same search & filters on 2026-09-27. All runs used the
+Every Actor ran the same search & filters. The other Actors ran on 2026-09-27.
+Xquik's runs set `outputVariant: "rich"` & ran on 2026-09-29. All runs used the
 Bronze tier. A useful tweet is a unique English original post with 10+ likes.
 Cost is the customer's total spend per useful tweet. Ours includes the Apify
 usage our customers pay. Fields per row is the median count of non-empty fields,
@@ -802,7 +803,7 @@ limits still apply.
 
 ### How fast is it?
 
-Xquik's X Tweet Scraper delivered 25.8 to 29.1 useful tweets per second in the
+Xquik's X Tweet Scraper delivered 25.2 to 39.2 useful tweets per second in the
 [benchmark](#benchmark). Runtime depends on your input, the result count & X
 availability.
 

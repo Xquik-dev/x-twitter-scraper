@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">FramerがXquikのスクレイパーをClaude Code、Codex、Cursorなどと一緒に使う様子を6:07から視聴できます。</a>
 </td></tr></table>
 
-Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX Follower Scraperは、フォロワー、フォロー中、リストのメンバー、購読者、コミュニティのメンバーを収集します。公開ベンチマークで、10のフォロワー用Actorの中で最も安く、最も速いことが実証されています。[下のベンチマーク](#ベンチマーク)のとおり、1行あたりのフィールド数は他のActorの中央値の1.9倍です。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。
+Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX Follower Scraperは、フォロワー、フォロー中、リストのメンバー、購読者、コミュニティのメンバーを収集します。公開ベンチマークで、10のフォロワー用Actorの中で最も安く、最も速いことが実証されています。[下のベンチマーク](#ベンチマーク)のとおり、1行あたりのフィールド数（`outputMode: "full"`）は他のActorの中央値の2.5倍です。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。
 
 X(Twitter)のフォロワー、フォロー中、認証済みフォロワー、リストのメンバー、リストの購読者、コミュニティのメンバーをスクレイピングします。XquikのX Follower Scraperの料金は、**すべてのApifyプランで配信されたプロフィール1件あたり$0.00015から**です。Apifyのプラットフォーム利用料は別途かかります。Xへのログインは不要で、Xquikの開始料金もクエリ料金もかかりません。
 
@@ -75,7 +75,7 @@ XquikのX Follower Scraperは、フォロワー、フォロー中、リスト、
 
 ## ユースケース
 
-- プロフィールごとにより多くのフィールドを使い、リードを補完し、調査用データセットを作る。当社の中央値の行は、2026-09-28に28個のフィールドがありました。これは他の9個のActorの中央値の1.9倍です。
+- プロフィールごとにより多くのフィールドを使い、リードを補完し、調査用データセットを作る。当社の中央値の行（`outputMode: "full"`）は、2026-09-29に38個のフィールドがありました。これは他の9個のActorの中央値の2.5倍です。
 - 競合のフォロワーをエクスポートして、見込み客を調べられます。
 - 自社アカウント、競合、著名人のオーディエンスを比べられます。
 - フォロワー数と認証で絞り込み、条件に合うプロフィールを見つけられます。
@@ -254,12 +254,12 @@ XquikのX Follower Scraperは、すべてのApifyプランで配信されたプ�
 
 ## ベンチマーク
 
-XquikのX Follower Scraperは、コストと速度で他の9つのフォロワー用Actorを上回りました。1行あたりのフィールド数の中央値は28で、他のActorの中央値の1.9倍でした。
+XquikのX Follower Scraperは、コストと速度で他の9つのフォロワー用Actorを上回りました。1行あたりのフィールド数の中央値（`outputMode: "full"`）は38で、他のActorの中央値の2.5倍でした。
 
 | Actor                                                  | 有効なプロフィール | 有効なプロフィール1件あたりのコスト | 1秒あたりの有効なプロフィール | 1行あたりのフィールド数 | 公開された実行                                                                                                                                                                                 |
 | ------------------------------------------------------ | -----------------: | ----------------------------------: | ----------------------------: | ----------------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| xquik/x-follower-scraper                               |              1,000 |                           $0.000155 |                          68.5 |                      27 | [実行を見る](https://console.apify.com/view/runs/X8Vnx8Ytuk5AzWiK7)                                                                                                                            |
-| xquik/x-follower-scraper                               |                999 |                           $0.000155 |                          38.4 |                      28 | [実行を見る](https://console.apify.com/view/runs/lPqjfUn8767FpIDis)                                                                                                                            |
+| xquik/x-follower-scraper                               |              1,000 |                           $0.000155 |                         100.0 |                      38 | [実行を見る](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)                                                                                                                            |
+| xquik/x-follower-scraper                               |              1,000 |                           $0.000155 |                          77.9 |                      38 | [実行を見る](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)                                                                                                                            |
 | b2b_leads/X-Real-Time-Data                             |                286 |                           $0.000388 |                           3.1 |                      21 | [実行を見る](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                            |
 | kaitoeasyapi/premium-x-follower-scraper-following-data |                356 |                           $0.000506 |                          21.9 |                      50 | [実行を見る](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                            |
 | api-ninja/x-twitter-followers-scraper                  |                350 |                           $0.000809 |                           7.0 |                       8 | [実行を見る](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                            |
@@ -270,7 +270,7 @@ XquikのX Follower Scraperは、コストと速度で他の9つのフォロワ�
 | maximedupre/twitter-scraper                            |                320 |                           $0.002192 |                           2.1 |                      15 | [実行1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [実行2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [実行3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
 | seemuapps/x-followers-following-scraper                |                286 |                           $0.003504 |                           3.9 |                       9 | [実行1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [実行2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [実行3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
 
-各Actorは2026-09-28に、NASA、SpaceX、esaのフォロワーを読み取りました。すべての実行でBronzeティアを使いました。有効なプロフィールとは、作成から30日以上で、フォロワーとポストが1件以上あるユニークなプロフィールです。コストは、有効なプロフィール1件あたりの顧客の総支払額です。当社のコストには、お客様が支払うApify使用料を含みます。3回の実行がある行は、それらを合計しています。1行あたりのフィールド数は、空でないフィールド数の中央値で、ネストされたフィールドも含みます。リストは1フィールドとして数えます。実行を開くと、入力、ログ、データセットを確認できます。
+各Actorは、NASA、SpaceX、esaのフォロワーを読み取りました。他のActorは2026-09-28に、Xquikの実行は2026-09-29に`outputMode: "full"`で実行しました。すべての実行でBronzeティアを使いました。有効なプロフィールとは、作成から30日以上で、フォロワーとポストが1件以上あるユニークなプロフィールです。コストは、有効なプロフィール1件あたりの顧客の総支払額です。当社のコストには、お客様が支払うApify使用料を含みます。3回の実行がある行は、それらを合計しています。1行あたりのフィールド数は、空でないフィールド数の中央値で、ネストされたフィールドも含みます。リストは1フィールドとして数えます。実行を開くと、入力、ログ、データセットを確認できます。
 
 ## 入力
 
@@ -444,7 +444,7 @@ Xquikは、47個のダッシュボードツール、129個のREST操作、署名
 
 ### どのくらい速いですか？
 
-XquikのX Follower Scraperの速度は、対象の規模、フィルター、Xの可用性によって変わります。[ベンチマーク](#ベンチマーク)の2回の実行では、1秒あたり38.4件と68.5件の有効なプロフィールを取得しました。
+XquikのX Follower Scraperの速度は、対象の規模、フィルター、Xの可用性によって変わります。[ベンチマーク](#ベンチマーク)の2回の実行では、1秒あたり77.9件と100.0件の有効なプロフィールを取得しました。
 
 ### 結果が `maxItems` より少ないのはなぜですか？
 
