@@ -32,7 +32,7 @@ page = get_json(
 | `GET /x/tweets/{id}` | Tweet ID |
 | `GET /x/tweets?ids=` | Up to 100 comma-separated tweet IDs |
 | `GET /x/tweets/{id}/replies` | `pageSize` (1 to 300), `sort` (`relevance`, `latest`, `oldest`, `likes`), `excludeOriginalAuthor`, `includeOriginalPost`, `hasMediaOnly`, `scope`, `cursor` |
-| `GET /x/tweets/{id}/quotes` | `pageSize` (1 to 300), `sinceTime`, `untilTime`, `cursor` |
+| `GET /x/tweets/{id}/quotes` | `pageSize` (1 to 300), `sinceTime`, `untilTime`, `includeReplies`, `cursor` |
 | `GET /x/tweets/{id}/thread` | Visible posts in the conversation thread, from any author: `pageSize` (1 to 100), `cursor` |
 | `GET /x/tweets/{id}/retweeters` | `pageSize` (1 to 200), profile filters, `cursor` |
 | `GET /x/tweets/{id}/favoriters` | `pageSize` (1 to 200), profile filters, `cursor` |
@@ -67,9 +67,9 @@ does not return them. A filtered page can be empty and still have a next page.
 | --- | --- |
 | `GET /x/users/{id}` | Profile: `followers`, `following`, `description` (bio), `verified`, `isVerified`, `isBlueVerified`, `verifiedType`, `statusesCount`, `location`, `createdAt` |
 | `GET /x/users/search` | `q` (required), `pageSize` (1 to 100), profile filters, `cursor` |
-| `GET /x/users/batch` | `ids` (comma-separated user IDs) |
-| `GET /x/users/{id}/tweets` | `pageSize` (1 to 300, default 20), `includeReplies` (default `false`), tweet filters, `cursor` |
-| `GET /x/users/{id}/replies` | The user's With Replies timeline: `pageSize` (1 to 300), tweet filters, `cursor` |
+| `GET /x/users/batch` | `ids` (comma-separated user IDs), profile filters |
+| `GET /x/users/{id}/tweets` | `pageSize` (1 to 300, default 20), `sinceTime`, `untilTime`, `includeReplies` (default `false`), tweet filters, `cursor` |
+| `GET /x/users/{id}/replies` | With Replies timeline: `pageSize` (1 to 300), `sinceTime`, `untilTime`, tweet filters, `cursor` |
 | `GET /x/users/{id}/media` | `pageSize` (1 to 100), tweet filters, `cursor` |
 | `GET /x/users/{id}/mentions` | `pageSize` (1 to 100), `sinceTime`, `untilTime`, tweet filters, `cursor` |
 | `GET /x/users/{id}/likes` | `pageSize` (1 to 100), tweet filters, `cursor`. Needs a connected X account for the owner's likes |

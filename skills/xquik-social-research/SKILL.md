@@ -90,9 +90,8 @@ If the user says `under N`, set the shared cap to `N - 1` or less. A request
 under 100 records must never total 100.
 
 Fresh cursorless Tweet Search with `queryType=Latest` is newest-first across
-pages. Existing cursors retain their established ordering. Thread reads accept
-32 effective result filters, excluding `nativeRetweets`, `sinceTime`, and
-`untilTime`. Check OpenAPI for their exact names.
+pages. Existing cursors retain their established ordering. Thread reads take
+every result filter except `sinceTime` and `untilTime`, named as in OpenAPI.
 
 ## Process each request
 
