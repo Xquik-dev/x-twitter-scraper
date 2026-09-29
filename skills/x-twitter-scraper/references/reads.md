@@ -74,6 +74,10 @@ does not return them. A filtered page can be empty and still have a next page.
 | `GET /x/users/{id}/mentions` | `pageSize` (1 to 100), `sinceTime`, `untilTime`, tweet filters, `cursor` |
 | `GET /x/users/{id}/likes` | `pageSize` (1 to 100), tweet filters, `cursor`. Needs a connected X account for the owner's likes |
 
+Verification: `isBlueVerified` means X shows the blue badge. `isVerified` and
+`verified` mean X marks the profile as verified. `verifiedType` names the kind,
+such as `Business`. Report only the values the response returns.
+
 ## Relationships
 
 | Route | Key parameters |
@@ -134,7 +138,9 @@ permission to republish.
 These need a connected X account and user confirmation before the read:
 
 - `GET /x/dm/{userId}/history?account=<connected handle>`: `userId` is the
-  other person's numeric ID. Resolve it with `GET /x/users/{username}`.
+  other person's numeric ID. Resolve it with `GET /x/users/{username}`. It
+  bills 1 credit per returned message and has no page size, so the last page
+  can go past a message target. Give the cost per message, not a hard cap.
 - `GET /x/bookmarks`, `GET /x/bookmarks/folders`, `GET /x/notifications`,
   `GET /x/timeline`
 - `GET /x/accounts` lists connected accounts.
@@ -163,12 +169,39 @@ script should ride that out on reads instead of dropping requests:
   exponentially from about 1 second, cap each wait at 30 seconds, and add
   jitter. Stop after about 5 minutes and report the last error.
 - Retry the same URL and cursor, so pages are not skipped or repeated.
+- Set a request timeout, such as 30 seconds, so a stalled connection cannot
+  hang a run. A recurring job that appends rows should skip IDs it already
+  wrote.
 - Do not retry other `4xx` errors. Fix the request, or handle the cursor
   errors above.
-- Parse error bodies safely. A `5xx` can return an HTML page, so parsing it
-  as JSON throws.
+- Parse bodies safely. An outage can return an HTML page, even with a `2xx`
+  status, so parsing it as JSON throws. Retry that case.
 - Never retry `POST`, `PATCH`, or `DELETE` automatically. See
   [writes](writes.md#responses-and-retries).
+
+A paging loop that stops at the user's number and restarts once on a gone
+cursor. A restart bills the pages it fetches again:
+
+```python
+wanted, rows, seen, cursor, restarted = 500, [], set(), None, False
+while len(rows) < wanted:
+    params = {"q": "acme", "limit": wanted - len(rows), "cursor": cursor}
+    try:
+        page = get_json("/x/tweets/search", params)
+    except XquikError as err:
+        code = err.body.get("error") if isinstance(err.body, dict) else None
+        if restarted or code not in ("coverage_cursor_gone", "invalid_coverage_cursor"):
+            raise
+        cursor, restarted = None, True  # seen skips rows already kept
+        continue
+    for tweet in page["tweets"]:
+        if tweet["id"] not in seen:
+            seen.add(tweet["id"])
+            rows.append(tweet)
+    if not page["has_next_page"]:
+        break
+    cursor = page["next_cursor"]
+```
 
 In JavaScript, `fetch` rejects on a refused or reset connection, so catch that
 as a retryable failure. Read `await response.text()` and parse it inside
@@ -207,7 +240,8 @@ def retry_after(response):
         return None
 
 
-def error_body(response):
+def read_body(response):
+    """Return parsed JSON, or up to 200 characters of a non-JSON body."""
     try:
         return response.json()
     except ValueError:
@@ -227,12 +261,13 @@ def get_json(path, params=None, budget_s=300):
         except NETWORK_ERRORS as exc:
             problem = f"connection failed: {exc}"
         else:
-            if response.ok:
-                return response.json()
-            status, body = response.status_code, error_body(response)
+            status, body = response.status_code, read_body(response)
+            if response.ok and not isinstance(body, str):
+                return body
             wait = retry_after(response)
             problem = f"{status}: {body}"
-            if status < 500 and status != 429 and (status != 409 or wait is None):
+            busy_cursor = status == 409 and wait is not None
+            if not (response.ok or status >= 500 or status == 429 or busy_cursor):
                 raise XquikError(problem, status, body)
         if wait is None:
             wait = min(30.0, 2.0**attempt) * random.uniform(0.5, 1.0)

@@ -9,17 +9,21 @@ that rate. Current plan prices are in the dashboard.
 
 | Work | Credits |
 | --- | --- |
-| Tweet search, timelines, replies, mentions, and tweet extractions | 1 per returned tweet |
+| Tweet search, timelines, replies, quotes, threads, mentions, list and community posts, and tweet extractions | 1 per returned tweet |
 | Followers, following, likers, retweeters, and people extractions | 1 per returned profile |
+| DM history | 1 per returned message |
 | Profile or tweet lookup | 1 per call |
 | Follow check, article | 5 per call |
 | Trends | 3 per call |
 | Media download | 1 per tweet with media |
 | Post or reply | 30, plus 2 per started MB of media |
 | Like, repost, follow, their undo calls, remove follower, DM, delete, media upload | 10 per call |
-| Active monitor | 21 per hour, about 500 a day |
+| Active monitor | 21 per hour, 504 a day |
+| Giveaway draw | 2, plus 1 per inspected reply, 1 per reposter read, and 5 per follow check |
 
-At pay-as-you-go rates, 1,000 tweets cost $0.15. Supported filters apply
+A read's credits equal the results it returns. Dollars are credits times
+$0.00015 at pay-as-you-go rates: 1,000 tweets cost 1,000 credits, or $0.15.
+A top-up of $500 buys 3,333,333 credits, with any partial credit dropped. Supported filters apply
 before billing, so excluded rows cost nothing. Estimates, stored event reads,
 webhook operations, and extraction exports are free.
 

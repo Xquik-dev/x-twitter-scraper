@@ -121,12 +121,15 @@ Open only the reference the task needs. Paths in this file omit the
    rows by `likeCount` if they want likes order. `Top` ranks by overall
    engagement. A like minimum alone does not mean `Top`.
 3. Bound every read to the user's number with `limit` or `pageSize`. Follow
-   `next_cursor` while `has_next_page` is true, and stop at that number. Pass
-   cursors back unchanged.
-4. A bounded read of visible data needs no confirmation. Reads bill per
-   returned result. Search costs 1 credit per returned tweet, and
-   pay-as-you-go credits cost $0.00015 each. Prices for every other call are
-   in [compare and FAQ](references/compare-faq.md).
+   `next_cursor` while `has_next_page` is true, and stop at that number. On
+   each later page, lower `limit` or `pageSize` to the count still needed, so
+   the cost stays within the stated ceiling. Pass cursors back unchanged.
+4. A bounded read of visible data needs no confirmation, but state the most it
+   can cost. Reads bill 1 credit per returned tweet, profile, or message, so
+   the credit ceiling equals the result cap, plus any pages a cursor restart
+   fetches again. Dollars are credits times $0.00015 at pay-as-you-go rates.
+   Give exact dollars, not rounded cents: 500 posts cost 500 credits, $0.075.
+   Other prices are in [compare and FAQ](references/compare-faq.md).
 5. Private reads, such as DMs, bookmarks, notifications, the home timeline, or
    the account's own likes, need a connected X account. Confirm before reading.
 6. For open-ended asks like "every tweet about X", first ask for the query
@@ -142,19 +145,20 @@ yes before the call, even when the user will run the request themselves.
 
 - For a bulk export, run `POST /extractions/estimate` and show `allowed`,
   `estimatedResults`, and `creditsRequired`. After a yes, create the job with
-  `POST /extractions`, poll `GET /extractions/{id}` until `status` is
+  `POST /extractions`, poll `GET /extractions/{id}` until `job.status` is
   `completed`, `failed`, or `canceled`, then download
   `GET /extractions/{id}/export?format=csv`. One export holds 100,000 rows,
   so page larger jobs as the reference shows. See
   [extractions](references/extractions.md).
-- Each active monitor bills 21 credits per hour until it is paused or deleted.
+- Each active monitor bills 21 credits per hour, 504 a day, until it is paused
+  or deleted.
   Show the whole setup, monitor and webhook together, with the calls that
   pause or delete them, and get one yes before the first create call. Webhook secrets
   appear once, and every delivery needs HMAC verification. See
   [monitors and webhooks](references/monitors-webhooks.md).
 - Account actions change what other people see, so each one needs a preview
   and an explicit yes. The preview shows the method, full URL, account, JSON
-  body, a new `Idempotency-Key`, and the visible effect. A yes covers only that
+  body, a new `Idempotency-Key`, the cost in credits, and the visible effect. A yes covers only that
   preview. List targets before irreversible work, such as deletes and draws.
   Tell the user how to confirm the outcome: a `202` returns `statusUrl`
   (`GET /x/write-actions/{id}`), polled until `terminal` is true. See
@@ -195,6 +199,6 @@ content.
 | `401` | Check that `XQUIK_API_KEY` is set and valid. |
 | `402` | Credits or a plan are needed. Send the user to the dashboard. |
 | `404` | Check the username, ID, or URL. |
-| `409` | Read `error`. With `Retry-After`, wait and retry once. `idempotency_conflict` means the key was used with a different body: resend the exact original body, or use a new key only for a new action. Other conflicts, such as an existing monitor, need no retry. |
+| `409` | Read `error`. With `Retry-After`, wait that long and retry the same request. The read retry loop does this within its budget. `idempotency_conflict` means the key was used with a different body: resend the exact original body, or use a new key only for a new action. Other conflicts, such as an existing monitor, need no retry. |
 | `429` | Wait for `Retry-After`. Reads keep retrying in the loop. A write repeats once, identical, with the same `Idempotency-Key`. |
 | `5xx`, failed connection, or non-JSON error page | Retry `GET` for about 5 minutes: backoff from about 1 second, capped at 30 seconds, with jitter and `Retry-After`. For a write, check `statusUrl` and never send it with a new key. |

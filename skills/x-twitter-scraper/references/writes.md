@@ -35,7 +35,8 @@ Every write returns an action record with `status`, `terminal`,
 - `200`: the action is terminal. Check `status`, because `failed` and
   `expired` are terminal too. A new post's ID is in `tweetId` and `result.id`.
 - `202`: accepted. Poll `statusUrl`, which is `GET /x/write-actions/{id}`,
-  every `pollAfterMs` until `terminal` is true.
+  every `pollAfterMs` until `terminal` is true. `statusUrl` is a path that
+  already starts with `/api/v1`, so prefix only `https://xquik.com`.
 - Timeout or lost response: do not send a new request, because the first one
   may have gone through. Retry the identical request with the same
   `Idempotency-Key`; Xquik returns the original action instead of acting

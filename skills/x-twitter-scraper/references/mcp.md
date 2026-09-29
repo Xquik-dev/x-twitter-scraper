@@ -19,5 +19,6 @@ checking that `docs`, `search`, and `execute` appear.
 
 Use an API key only when the client cannot run OAuth. Keep it in an
 environment variable or the client's secret store, and reference it from the
-config, for example Codex's `bearer_token_env_var = "XQUIK_API_KEY"`. Never
+config. The client sends it as `Authorization: Bearer <key>`, for example
+through Codex's `bearer_token_env_var = "XQUIK_API_KEY"`. Never
 commit a key to a config file in a repository.

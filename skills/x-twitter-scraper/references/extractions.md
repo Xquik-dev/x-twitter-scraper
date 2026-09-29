@@ -10,15 +10,18 @@ excluded rows cost nothing.
    `resultsLimit` when the user set a cap. Without a cap the API uses 10,000.
 2. `POST /extractions/estimate` with that body. It is free and creates
    nothing. The response holds `allowed`, `estimatedResults`,
-   `creditsRequired`, `creditsAvailable`, and `source`.
-3. Show those numbers. `estimatedResults` is a conservative billing count, such
-   as the follower count or the `resultsLimit` cap, not a count of matching
-   posts. `source` names which one it used. When `allowed` is false, the
+   `creditsRequired`, `creditsAvailable`, and `source`. `creditsRequired` and
+   `creditsAvailable` are numeric strings, so convert them before any math.
+3. Show those numbers. `creditsRequired` is the most the job can charge,
+   not a promise: skipped or filtered rows cost nothing. `estimatedResults` is
+   a conservative billing count, such as the follower count or the
+   `resultsLimit` cap, not a count of matching posts. `source` names which one it used. When `allowed` is false, the
    balance cannot fund the job, so lower `resultsLimit` or add credits in the
    dashboard.
 4. Ask the user to confirm the estimate. Create nothing before a yes.
-5. `POST /extractions` with the same body. A `202` response returns the job
-   `id`, `status`, and `statusUrl`.
+5. `POST /extractions` with the same body and a new `Idempotency-Key`. A
+   retry with the same key returns the original job instead of a second one.
+   A `202` response returns the job `id`, `status`, and `statusUrl`.
 6. Poll `GET /extractions/{id}` until `job.status` is `completed`, `failed`, or
    `canceled`. The response holds `job`, `results`, `hasMore`, `nextCursor`,
    and `pollAfterMs`. Wait
@@ -28,8 +31,9 @@ excluded rows cost nothing.
 7. Always give the download call: `GET /extractions/{id}/export?format=csv`.
    Formats: `csv`, `json`, `md`, `md-document`, `pdf`, `txt`, `xlsx`. One
    export holds up to 100,000 rows, and PDF up to 10,000. For a larger job,
-   also page `GET /extractions/{id}?limit=1000&cursor=<nextCursor>` and
-   append the rows to the file.
+   skip the export and write every row by paging
+   `GET /extractions/{id}?limit=1000` from the start, passing `nextCursor`
+   back as `cursor`, so no row appears twice.
 
 `DELETE /extractions/{id}` cancels a running job.
 
