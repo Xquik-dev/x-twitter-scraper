@@ -475,10 +475,9 @@ Usa l'SDK o lo strumento adatto al progetto.
 - [Fatturazione](https://docs.xquik.com/guides/billing)
 - [Flusso di estrazione](https://docs.xquik.com/guides/extraction-workflow)
 - [Guida MCP](https://docs.xquik.com/mcp/overview)
-- [Guida all'API X con 112 domande](skills/x-twitter-scraper/references/twitter-api-alternative-faq.md)
-- [Guida alla sicurezza](skills/x-twitter-scraper/references/security.md)
-- [Esempi Python](skills/x-twitter-scraper/references/python-examples.md)
-- [Confronto tra API](skills/x-twitter-scraper/references/compare-twitter-apis.md)
+- [Guida alle richieste API X](skills/x-twitter-scraper/references/reads.md)
+- [Guida alla sicurezza](skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
+- [Confronto tra API](skills/x-twitter-scraper/references/compare-faq.md)
 - [README inglese completa](README.md)
 
 ## Data del contratto

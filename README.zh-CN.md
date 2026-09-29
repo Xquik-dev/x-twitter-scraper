@@ -461,10 +461,9 @@ gemini skills list
 - [计费](https://docs.xquik.com/guides/billing)
 - [批量提取流程](https://docs.xquik.com/guides/extraction-workflow)
 - [MCP 指南](https://docs.xquik.com/mcp/overview)
-- [112 个 X API 问题指南](skills/x-twitter-scraper/references/twitter-api-alternative-faq.md)
-- [安全指南](skills/x-twitter-scraper/references/security.md)
-- [Python 示例](skills/x-twitter-scraper/references/python-examples.md)
-- [API 对比](skills/x-twitter-scraper/references/compare-twitter-apis.md)
+- [X API 请求指南](skills/x-twitter-scraper/references/reads.md)
+- [安全指南](skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
+- [API 对比](skills/x-twitter-scraper/references/compare-faq.md)
 - [英文完整版 README](README.md)
 
 ## 合同日期

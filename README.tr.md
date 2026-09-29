@@ -478,10 +478,9 @@ Projene uyan SDK'yı veya aracı kullan.
 - [Ücretlendirme](https://docs.xquik.com/guides/billing)
 - [Toplu iş akışı](https://docs.xquik.com/guides/extraction-workflow)
 - [MCP kılavuzu](https://docs.xquik.com/mcp/overview)
-- [112 soruluk X API kılavuzu](skills/x-twitter-scraper/references/twitter-api-alternative-faq.md)
-- [Güvenlik kılavuzu](skills/x-twitter-scraper/references/security.md)
-- [Python örnekleri](skills/x-twitter-scraper/references/python-examples.md)
-- [API karşılaştırması](skills/x-twitter-scraper/references/compare-twitter-apis.md)
+- [X API istek kılavuzu](skills/x-twitter-scraper/references/reads.md)
+- [Güvenlik kılavuzu](skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
+- [API karşılaştırması](skills/x-twitter-scraper/references/compare-faq.md)
 - [İngilizce README](README.md)
 
 ## Sözleşme tarihi

@@ -470,10 +470,9 @@ gemini skills list
 - [課金](https://docs.xquik.com/guides/billing)
 - [一括取得フロー](https://docs.xquik.com/guides/extraction-workflow)
 - [MCP ガイド](https://docs.xquik.com/mcp/overview)
-- [112 問の X API ガイド](skills/x-twitter-scraper/references/twitter-api-alternative-faq.md)
-- [セキュリティガイド](skills/x-twitter-scraper/references/security.md)
-- [Python の例](skills/x-twitter-scraper/references/python-examples.md)
-- [API 比較](skills/x-twitter-scraper/references/compare-twitter-apis.md)
+- [X API リクエストガイド](skills/x-twitter-scraper/references/reads.md)
+- [セキュリティガイド](skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
+- [API 比較](skills/x-twitter-scraper/references/compare-faq.md)
 - [英語版 README](README.md)
 
 ## 契約の確認日

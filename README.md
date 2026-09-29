@@ -452,7 +452,7 @@ Create webhooks with an HTTPS `url` and `eventTypes`. Store the HMAC secret when
 created. Verify `X-Xquik-Timestamp`, `X-Xquik-Nonce`, and
 `X-Xquik-Signature`. Use event cursors to recover after downtime.
 
-Read the [webhook guide](skills/x-twitter-scraper/references/monitor-twitter-webhooks.md).
+Read the [webhook guide](skills/x-twitter-scraper/references/monitors-webhooks.md).
 
 ## Account and agent safety
 
@@ -550,8 +550,8 @@ Get qualified advice for regulated, sensitive, or unclear work.
 - [Billing](https://docs.xquik.com/guides/billing)
 - [Extraction workflow](https://docs.xquik.com/guides/extraction-workflow)
 - [MCP](https://docs.xquik.com/mcp/overview)
-- [112-question X API guide](skills/x-twitter-scraper/references/twitter-api-alternative-faq.md)
-- [Security guidance](skills/x-twitter-scraper/references/security.md)
+- [X API request guide](skills/x-twitter-scraper/references/reads.md)
+- [Security guidance](skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
 
 ## License
 

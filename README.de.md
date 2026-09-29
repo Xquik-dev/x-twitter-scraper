@@ -480,10 +480,9 @@ Nutze das passende SDK oder Werkzeug für dein Projekt.
 - [Abrechnung](https://docs.xquik.com/guides/billing)
 - [Ablauf für Massenextraktionen](https://docs.xquik.com/guides/extraction-workflow)
 - [MCP-Anleitung](https://docs.xquik.com/mcp/overview)
-- [X-API-Leitfaden mit 112 Fragen](skills/x-twitter-scraper/references/twitter-api-alternative-faq.md)
-- [Sicherheitsleitfaden](skills/x-twitter-scraper/references/security.md)
-- [Python-Beispiele](skills/x-twitter-scraper/references/python-examples.md)
-- [API-Vergleich](skills/x-twitter-scraper/references/compare-twitter-apis.md)
+- [X-API-Anfrageleitfaden](skills/x-twitter-scraper/references/reads.md)
+- [Sicherheitsleitfaden](skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
+- [API-Vergleich](skills/x-twitter-scraper/references/compare-faq.md)
 - [Vollständige englische README](README.md)
 
 ## Vertragsdatum

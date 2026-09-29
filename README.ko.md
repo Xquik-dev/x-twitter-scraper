@@ -471,10 +471,9 @@ gemini skills list
 - [요금 안내](https://docs.xquik.com/guides/billing)
 - [대량 추출 흐름](https://docs.xquik.com/guides/extraction-workflow)
 - [MCP 가이드](https://docs.xquik.com/mcp/overview)
-- [112개 X API 질문 가이드](skills/x-twitter-scraper/references/twitter-api-alternative-faq.md)
-- [보안 가이드](skills/x-twitter-scraper/references/security.md)
-- [Python 예제](skills/x-twitter-scraper/references/python-examples.md)
-- [API 비교](skills/x-twitter-scraper/references/compare-twitter-apis.md)
+- [X API 요청 가이드](skills/x-twitter-scraper/references/reads.md)
+- [보안 가이드](skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
+- [API 비교](skills/x-twitter-scraper/references/compare-faq.md)
 - [영문 전체 README](README.md)
 
 ## 계약 확인일
