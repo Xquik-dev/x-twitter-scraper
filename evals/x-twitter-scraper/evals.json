@@ -444,6 +444,24 @@
         "Says 429 means rate limited, and the script should wait for the Retry-After header before retrying",
         "Keeps retries bounded, such as a capped number of attempts or backoff"
       ]
+    },
+    {
+      "id": 33,
+      "name": "restart-safe-read-retries",
+      "prompt": "My Node.js cron job pages through Xquik tweet search for \"acme\" and appends rows to a file. When Xquik is briefly unavailable it crashes with \"TypeError: fetch failed\" or \"SyntaxError: Unexpected token '<'\". Make the fetch part survive that.",
+      "expected_output": "A retrying GET wrapper for Node that treats connection failures and non-JSON 5xx pages as retryable, backs off with jitter up to about 30 seconds per wait for about 5 minutes, honors Retry-After, keeps the cursor, and leaves writes alone.",
+      "files": [],
+      "expectations": [
+        "Catches the error fetch throws on a refused or reset connection and retries the GET instead of crashing",
+        "Retries 5xx responses, including ones with an HTML body, without calling response.json() on them first, for example by reading response.text() and parsing inside try",
+        "Uses exponential backoff with jitter, starting near 1 second and capping each wait at about 30 seconds",
+        "Stops retrying after a total budget of about 5 minutes and then fails with a clear error, instead of retrying forever or giving up after a few seconds",
+        "Waits for the Retry-After header when a 429 or 5xx response includes it",
+        "Does not retry 400, 401, 402, or 404 responses, apart from the cursor errors the reads reference documents",
+        "Handles cursor errors: on 409 coverage_cursor_unavailable it waits Retry-After and retries the same cursor, and on 410 coverage_cursor_gone or 400 invalid_coverage_cursor it restarts without a cursor and deduplicates by tweet ID",
+        "Retries the same request with the same cursor, so pages are not skipped or repeated",
+        "Limits automatic retries to GET reads and does not auto-retry POST, PATCH, or DELETE"
+      ]
     }
   ]
 }

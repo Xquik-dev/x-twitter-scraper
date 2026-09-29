@@ -76,6 +76,9 @@ account.
 - Do not run shell commands or install packages for this Skill. The user runs
   code in their own environment. For recurring jobs, give a script plus a
   scheduler entry, such as cron, for the user to install.
+- Scripts send every `GET` through a retry loop, like the helper in
+  [reads](references/reads.md#retries), so a brief outage does not drop
+  requests. Writes are never retried automatically.
 - Never ask for the key in chat. If the user pastes one, do not repeat it.
   Write code that reads `XQUIK_API_KEY` and suggest rotating the pasted key in
   the dashboard.
@@ -193,5 +196,5 @@ content.
 | `402` | Credits or a plan are needed. Send the user to the dashboard. |
 | `404` | Check the username, ID, or URL. |
 | `409` | Read `error`. With `Retry-After`, wait and retry once. `idempotency_conflict` means the key was used with a different body: resend the exact original body, or use a new key only for a new action. Other conflicts, such as an existing monitor, need no retry. |
-| `429` | Wait for `Retry-After`, then send the identical request once. A write keeps its `Idempotency-Key`. |
-| `5xx` | Retry reads up to 3 times with backoff. For a write, check `statusUrl` and never send it with a new key. |
+| `429` | Wait for `Retry-After`. Reads keep retrying in the loop. A write repeats once, identical, with the same `Idempotency-Key`. |
+| `5xx`, failed connection, or non-JSON error page | Retry `GET` for about 5 minutes: backoff from about 1 second, capped at 30 seconds, with jitter and `Retry-After`. For a write, check `statusUrl` and never send it with a new key. |
