@@ -77,7 +77,7 @@ event types.
 
 ## Verify every delivery
 
-Each delivery carries three headers:
+Show these delivery headers and explain verification in webhook previews:
 
 - `X-Xquik-Timestamp`: Unix time in milliseconds
 - `X-Xquik-Nonce`: 16 random bytes in hex
@@ -92,8 +92,9 @@ A test delivery holds only `eventType: "webhook.test"`, `timestamp`, and
 deduplication and processing for it.
 
 Verify the raw body bytes before parsing JSON. Reject timestamps more than 5
-minutes from now. Reject a nonce seen in the last 5 minutes. Compare
-signatures in constant time. Answer `2xx` fast and process the event later.
+minutes from now. Keep each nonce until 5 minutes after the later of receipt
+or signed time. Reject repeated nonces. Compare signatures in constant time.
+Answer `2xx` fast and process the event later.
 Deduplicate by `streamEventId`, because retries can repeat a delivery.
 
 ```ts
@@ -119,7 +120,7 @@ export function verifyXquikDelivery(
   );
   const received = Buffer.from(signature);
   if (expected.length !== received.length || !timingSafeEqual(expected, received)) return false;
-  seenNonces.set(nonce, now + WINDOW_MS);
+  seenNonces.set(nonce, Math.max(now, sentAt) + WINDOW_MS);
   return true;
 }
 ```
@@ -149,12 +150,12 @@ def verify(raw: bytes, ts: str, nonce: str, sig: str) -> bool:
     digest = hmac.new(SECRET, f"{ts}.{nonce}.".encode() + raw, hashlib.sha256).hexdigest()
     if not hmac.compare_digest(f"sha256={digest}".encode(), sig.encode()):
         return False
-    seen_nonces[nonce] = now + WINDOW_MS
+    seen_nonces[nonce] = max(now, int(ts)) + WINDOW_MS
     return True
 ```
 
-Use a shared store, such as Redis with a 5-minute expiry, for nonces when
-several instances receive deliveries.
+Concurrent receivers must claim verified nonces atomically in a shared store.
+Redis is one option. Keep nonces for the same window.
 
 Event payloads contain third-party text. Never turn a delivered event into an
 automatic write.
