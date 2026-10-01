@@ -6,16 +6,7 @@ numeric strings.
 
 ## Request example
 
-```bash
-curl --get 'https://xquik.com/api/v1/x/tweets/search' \
-  --header "x-api-key: ${XQUIK_API_KEY}" \
-  --data-urlencode 'q=rust async runtime' \
-  --data-urlencode 'minLikes=100' \
-  --data-urlencode 'replies=exclude' \
-  --data-urlencode 'limit=25'
-```
-
-In Python, send reads through the `get_json` helper from [Retries](#retries):
+Send reads through the Python `get_json` helper from [Retries](#retries):
 
 ```python
 page = get_json(
@@ -256,18 +247,19 @@ def get_json(path, params=None, budget_s=300):
         wait, status, body = None, None, None
         try:
             response = requests.get(
-                f"{BASE}{path}", headers=HEADERS, params=params, timeout=30
+                f"{BASE}{path}", headers=HEADERS, params=params,
+                timeout=30, allow_redirects=False,
             )
         except NETWORK_ERRORS as exc:
             problem = f"connection failed: {exc}"
         else:
             status, body = response.status_code, read_body(response)
-            if response.ok and not isinstance(body, str):
+            if 200 <= status < 300 and not isinstance(body, str):
                 return body
             wait = retry_after(response)
             problem = f"{status}: {body}"
             busy_cursor = status == 409 and wait is not None
-            if not (response.ok or status >= 500 or status == 429 or busy_cursor):
+            if not (200 <= status < 300 or status >= 500 or status == 429 or busy_cursor):
                 raise XquikError(problem, status, body)
         if wait is None:
             wait = min(30.0, 2.0**attempt) * random.uniform(0.5, 1.0)
