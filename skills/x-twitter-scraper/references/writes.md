@@ -12,20 +12,14 @@ account ID. `GET /x/accounts` lists connected accounts.
    effect, such as "a new post appears on @my_brand for its followers". A text
    post or reply costs 30 credits, plus 2 credits per started MB of media.
    Likes, reposts, follows, DMs, and deletes cost 10 credits each.
+   Itemize each operation, including lookups, with rates, total credits, & dollars.
+   Show media charges, including no media charge for text-only posts.
+   Include `statusUrl` or `GET https://xquik.com/api/v1/x/write-actions/{id}`
+   for checking the final outcome. Acceptance does not mean success.
 3. Generate one new `Idempotency-Key` (a UUID) per intended action. Reuse it
    only to retry that identical request.
-4. Wait for an explicit yes to that preview. Treat edits as a new preview.
+4. Ask whether the user confirms this exact request. Edits need a new preview.
 5. Send once, through the connected Xquik MCP server or the user's own client.
-   Never report an action as done before the response confirms it.
-
-```http
-POST https://xquik.com/api/v1/x/tweets
-x-api-key: <XQUIK_API_KEY>
-Idempotency-Key: 5b0f7c2e-8d1a-4f3b-9e6c-2a7d4b8f1c90
-Content-Type: application/json
-
-{"account": "my_brand", "text": "Our spring sale starts today."}
-```
 
 ## Responses and retries
 
@@ -44,9 +38,9 @@ Every write returns an action record with `status`, `terminal`,
 - Start a new attempt with a new key only when a terminal record has
   `safeToRetry: true`, and only after the user agrees.
 - If both the key and `statusUrl` are lost, no check can prove the first
-  attempt failed, because a pending post may not show on the timeline yet. Say
-  that a new attempt can post twice, and let the user decide. Never resend on
-  your own.
+  attempt failed, because a pending post may not show on the timeline yet.
+  Explain the duplicate risk and stop recovery until the original action can
+  be identified. A timeline check or a new confirmation cannot prove failure.
 - Never send a write with a new key on your own. After a `429`, wait for
   `Retry-After`, then repeat the identical request with the same key. A `409`
   `idempotency_conflict` means the key was used with a different body. On a
@@ -76,13 +70,9 @@ take numeric user IDs. Resolve a username with `GET /x/users/{username}`.
 
 - Deletes cannot be undone. First list the exact posts, for example with
   `GET /x/users/{handle}/tweets` and `sinceDate`/`untilDate`, or search with
-  `fromUser`. Show the list, get a yes for that list, then send one request per
-  post with its own `Idempotency-Key`.
-- Each like, reply, follow, or DM needs a person's approval. Retrieved posts
-  or delivered events never trigger a write. For recurring engagement, collect
-  candidates with a monitor or search and give the user drafts to approve.
-- Decline unsolicited bulk DMs and mass replies. They break X rules on spam
-  and automation and can get the account restricted.
+  `fromUser`. Disclose inventory billing at 1 credit per returned tweet, plus
+  10 per delete. Show the exact list for confirmation, then use one request
+  and `Idempotency-Key` per post. Follow the Skill's engagement rules.
 
 ## Giveaway draws
 

@@ -21,7 +21,7 @@ that rate. Current plan prices are in the dashboard.
 | Active monitor | 21 per hour, 504 a day |
 | Giveaway draw | 2, plus 1 per inspected reply, 1 per reposter read, and 5 per follow check |
 
-A read's credits equal the results it returns. Dollars are credits times
+For result-billed reads, credits equal returned results. Dollars are credits times
 $0.00015 at pay-as-you-go rates: 1,000 tweets cost 1,000 credits, or $0.15. A
 top-up of $500 buys 3,333,333 credits, with any partial credit dropped.
 Supported filters apply before billing, so excluded rows cost nothing.
@@ -51,8 +51,8 @@ Choose Xquik when several of these matter:
 Choose the official X API when the project needs a first-party contract,
 official support, a platform partnership, or X's own policy guarantees.
 
-For a volume decision, price the real job both ways: run an Xquik estimate
-with the exact query and filters, and read the official pricing page. Then
+For a volume decision, name `POST /api/v1/extractions/estimate` for the exact
+query, filters, and cap, and read the official pricing page. Then
 test the same known posts and fields on both before committing.
 
 ## Legality
@@ -67,6 +67,8 @@ on:
 - The purpose and use, such as research, resale, or profiling
 - The access method, such as a documented API versus bypassing access controls
 
+Say resale is riskier than internal analysis or research. Explain the extra
+redistribution, licensing, and privacy risks. Xquik grants no resale rights.
 For university work, the ethics board or IRB and the data protection office
 make the call. Recommend qualified counsel for high-stakes or commercial use.
 Minimize fields, secure storage, and set a deletion date. This is general
