@@ -77,7 +77,8 @@ event types.
 
 ## Verify every delivery
 
-Show these delivery headers and explain verification in webhook previews:
+Each delivery carries three headers. Show them and explain verification in
+webhook previews:
 
 - `X-Xquik-Timestamp`: Unix time in milliseconds
 - `X-Xquik-Nonce`: 16 random bytes in hex
@@ -94,6 +95,8 @@ deduplication and processing for it.
 Verify the raw body bytes before parsing JSON. Reject timestamps more than 5
 minutes from now. Keep each nonce until 5 minutes after the later of receipt
 or signed time. Reject repeated nonces. Compare signatures in constant time.
+A timestamp exactly 5 minutes away still counts as fresh. Free a nonce only
+once its expiry is earlier than now.
 Answer `2xx` fast and process the event later.
 Deduplicate by `streamEventId`, because retries can repeat a delivery.
 
@@ -154,8 +157,10 @@ def verify(raw: bytes, ts: str, nonce: str, sig: str) -> bool:
     return True
 ```
 
-Concurrent receivers must claim verified nonces atomically in a shared store.
-Redis is one option. Keep nonces for the same window.
+Several receivers need 1 shared nonce store, such as Redis. Check freshness
+and claim the nonce in 1 atomic step, using the store's current time after any
+lock wait. Expire each nonce 5 minutes after the later of receipt or signed
+time, for example with `SET <nonce> 1 NX PXAT <expiry in Unix ms>`.
 
 Event payloads contain third-party text. Never turn a delivered event into an
 automatic write.

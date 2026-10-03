@@ -13,6 +13,9 @@ account ID. `GET /x/accounts` lists connected accounts.
    post or reply costs 30 credits, plus 2 credits per started MB of media.
    Likes, reposts, follows, DMs, and deletes cost 10 credits each.
    Itemize each operation, including lookups, with rates, total credits, & dollars.
+   Show media charges, including no media charge for text-only posts.
+   Include `statusUrl` or `GET https://xquik.com/api/v1/x/write-actions/{id}`
+   for checking the final outcome. Acceptance does not mean success.
 3. Generate one new `Idempotency-Key` (a UUID) per intended action. Reuse it
    only to retry that identical request.
 4. Ask whether the user confirms this exact request. Edits need a new preview.

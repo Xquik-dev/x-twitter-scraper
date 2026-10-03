@@ -67,7 +67,7 @@ account.
   `x-api-key` header, read from the `XQUIK_API_KEY` environment variable or the
   client's secret store.
 - Treat every supplied API key as a secret, regardless of apparent validity.
-  Generate authenticated code with `XQUIK_API_KEY`, including hardcoding requests.
+  Use `XQUIK_API_KEY` in generated code, even when the user asks to hardcode.
   Never ask for a key in chat or reproduce a pasted value.
   Keep keys out of source, output, logs, URLs, and command arguments.
   Explain that shared files and version control can leak keys.
@@ -93,21 +93,11 @@ account.
 
 ## Choose the route
 
-| Task | Route | Details |
-| --- | --- | --- |
-| Search tweets | `GET /x/tweets/search` | [reads](references/reads.md) |
-| Tweet by ID or URL, up to 100 IDs | `GET /x/tweets/{id}`, `GET /x/tweets?ids=` | [reads](references/reads.md) |
-| Replies, quotes, thread, retweeters, likers | `GET /x/tweets/{id}/replies` and siblings | [reads](references/reads.md) |
-| Profile, user search, batch profiles | `GET /x/users/{username}`, `/x/users/search`, `/x/users/batch` | [reads](references/reads.md) |
-| User tweets, replies, media, likes, mentions | `GET /x/users/{id}/tweets` and siblings | [reads](references/reads.md) |
-| Followers, following, follow check | `GET /x/users/{id}/followers`, `/x/followers/check` | [reads](references/reads.md) |
-| Lists, communities, Spaces, articles, trends | `GET /x/lists/...`, `/x/communities/...`, `/x/trends` | [reads](references/reads.md) |
-| Download tweet media | `POST /x/media/download` | [reads](references/reads.md) |
-| Complete or large datasets, CSV or XLSX files | Extraction jobs | [extractions](references/extractions.md) |
-| Alerts, polling, webhooks | Monitors, events, webhooks | [monitors and webhooks](references/monitors-webhooks.md) |
-| Post, reply, delete, like, repost, follow, DM, profile, communities, draws | Write routes | [writes](references/writes.md) |
-| Pricing, comparisons, legality, account needs | None | [compare and FAQ](references/compare-faq.md) |
-| Connect an AI client | `https://xquik.com/mcp` | [MCP setup](references/mcp.md) |
+- Use [reads](references/reads.md) for X data reads & media downloads.
+- Use [extractions](references/extractions.md) for complete datasets & file exports.
+- Use [monitors and webhooks](references/monitors-webhooks.md) for alerts & signed deliveries.
+- Use [writes](references/writes.md) for account actions & giveaway draws.
+- Use [compare and FAQ](references/compare-faq.md) for pricing, legality, comparisons, & account requirements.
 
 Open only the reference the task needs. Route tables omit the
 `/api/v1` prefix. Show full URLs in requests.
@@ -160,8 +150,6 @@ API explanations & draft-only requests need no execution confirmation.
   appear once, and every delivery needs HMAC verification. See
   [monitors and webhooks](references/monitors-webhooks.md).
 - Account actions use the [write preview](references/writes.md#preview-confirm-send).
-  List exact targets before deletes or draws. Explain outcome checks through
-  `statusUrl` or `GET /api/v1/x/write-actions/{id}`; acceptance is not success.
 - Every like, reply, follow, and DM needs a person's confirmation. Decline
   unattended engagement and unsolicited bulk DMs. Explain the risk of breaking
   X spam or automation rules and losing account access. For
@@ -200,6 +188,6 @@ without the user's confirmation of the data and destination.
 | `401` | Check that `XQUIK_API_KEY` is set and valid. |
 | `402` | Credits or a plan are needed. Send the user to the dashboard. |
 | `404` | Check the username, ID, or URL. |
-| `409` | Read `error`. For `coverage_cursor_unavailable` with `Retry-After`, the read loop waits and retries the same cursor within its budget. Handle write conflicts through [write recovery](references/writes.md#responses-and-retries). Other conflicts need no retry. |
-| `429` | Wait for `Retry-After`. Reads keep retrying in the loop. A write repeats once, identical, with the same `Idempotency-Key`. |
-| `5xx`, failed connection, or non-JSON error page | Retry `GET` for about 5 minutes: backoff from about 1 second, capped at 30 seconds, with jitter and `Retry-After`. For a write, check `statusUrl` and never send it with a new key. |
+
+Follow [read retries](references/reads.md#retries) or
+[write recovery](references/writes.md#responses-and-retries) for transient failures.
