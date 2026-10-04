@@ -110,4 +110,4 @@ This Skill requires a connected account. The user connects new accounts on the X
 
 ## Related guides
 
-For all 128 REST operations, see [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md) in this repository.
+For every REST operation, see [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md) in this repository.
