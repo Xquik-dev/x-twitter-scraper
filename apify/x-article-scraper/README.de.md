@@ -47,6 +47,18 @@ Text an.
    Start.
 4. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
 
+`startUrls` nimmt jede URL als einfachen String oder als Objekt
+`{ "url": "..." }`:
+
+```json
+{
+  "startUrls": [
+    "https://x.com/github/status/2082201573976056245",
+    { "url": "https://x.com/satyanadella/status/2066182223213293753" }
+  ]
+}
+```
+
 ## Eingabe
 
 | Feld                   | Zweck                                            | Standard |
@@ -141,9 +153,17 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapt
   Community-Infos, Posts, Suchen, Mitglieder & Moderatoren. Nutze ihn, wenn
   deine Quellen X-Communities sind. Ab $0.00015 pro Datensatz.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Findet Spaces nach
+  Stichwort & liest ihre Titel, Status, Zeiten, Zuhörerzahlen, Hosts & Sprecher.
+  Liest auch Broadcasts per URL oder ID. Nutze ihn, wenn du Live-Audio &
+  Live-Video auf X verfolgst. Ab $0.00015 pro Space oder Broadcast.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapt
   Echtzeit-Trends nach Standort mit Rang, Volumen, Suchbegriff & WOEID. Nutze
   ihn, wenn du verfolgst, was wo gerade angesagt ist. Ab $0.00015 pro Trend.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapt
+  X-Stellenanzeigen nach Stichwort, Ort, Arbeitsmodell, Karrierestufe &
+  Unternehmen, mit Gehältern & Bewerbungslinks. Nutze ihn, wenn du auf X
+  veröffentlichte Stellen sammelst. Ab $0.00015 pro Job.
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader):
   Extrahiert oder speichert Fotos, Videos & GIFs aus Posts oder Profilen mit
   MP4- & Metadaten-Optionen. Nutze ihn, wenn du die Mediendateien selbst

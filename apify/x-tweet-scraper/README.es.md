@@ -107,6 +107,8 @@ IDs de Listas, IDs de posts y consultas de búsqueda con más de 50 filtros.
 | `resultType`           | Tipo de fila para filas completas, de interacción y diagnósticos                |
 | `sourceTweetId`        | ID del post de origen en los modos de artículo e interacción                    |
 | `article`              | Datos estructurados del artículo en `mode: "article"`                           |
+| `translation`          | Traducción de X en `mode: "translation"`                                        |
+| `embed`                | HTML para insertar y enlace en `mode: "embed"`                                  |
 
 Los metadatos opcionales del post incluyen `authorUnavailable`, `card`,
 `communityId`, `communityNote`, `edit`, `exclusiveContent`, `noteTweet` y
@@ -232,7 +234,7 @@ Los modos de posts y búsqueda son `tweet`, `tweets` y `search`. Los modos de
 perfil son `profileTweets`, `profileReplies`, `profileMedia` y `profileLikes`.
 `listTweets` lee los posts de una Lista, y `article` lee el Artículo de X de un
 post. Los modos para un solo post son `replies`, `quotes`, `thread`,
-`retweeters` y `favoriters`.
+`retweeters`, `favoriters`, `translation` y `embed`.
 
 `profileTweets` sigue la pestaña Posts del perfil en X. Devuelve los posts, los
 reposts y las respuestas de la cuenta a sus propios posts. Las filas llegan en
@@ -303,6 +305,38 @@ no tienen una pestaña Me gusta legible. Si X no muestra usuarios ni posts con M
 gusta, el Actor escribe un registro gratuito en `diagnostics`. Las filas de
 posts pueden traer la cantidad de elementos guardados. X no muestra qué cuentas
 guardaron un post.
+
+### Traduce posts y obtén el HTML para insertarlos
+
+`mode: "translation"` devuelve la traducción de X de cada post. Define
+`translateTo` con un código de idioma, como `en`, `es`, `pt-br` o `zh-tw`. El
+valor predeterminado es `en`:
+
+```json
+{
+  "mode": "translation",
+  "tweetIds": ["2082577277246972300"],
+  "translateTo": "es"
+}
+```
+
+Cada fila tiene `resultType: "translation"`, `sourceTweetId` y `translation`.
+Ese objeto contiene `language`, `sourceLanguage`, `text` y `entities`.
+
+`mode: "embed"` devuelve el HTML que inserta cada post en un sitio web:
+
+```json
+{ "mode": "embed", "tweetIds": ["2082577277246972300"], "embedTheme": "dark" }
+```
+
+Cada fila tiene `resultType: "embed"`, `sourceTweetId` y `embed`. Ese objeto
+contiene `url`, `authorName`, `authorUrl`, `html` y `width`. `embedHideMedia`,
+`embedHideThread` y `embedOmitScript` dejan fuera el contenido multimedia, el
+post al que responde o el script del widget.
+
+Ambos modos leen IDs de posts y URLs de posts en `startUrls`. Cada post da 1
+fila al precio habitual por fila. Un post que X no tiene no da ninguna fila ni
+genera cobro.
 
 ### Exporta filas CSV planas
 
@@ -776,10 +810,19 @@ necesitas.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): extrae
   información, posts, búsquedas, miembros y moderadores de Comunidades. Úsalo
   cuando tus fuentes sean Comunidades de X. Desde $0.00015 por fila.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): encuentra Espacios
+  por palabra clave y lee sus títulos, estados, horas, cantidad de oyentes,
+  anfitriones y oradores. También lee transmisiones por URL o ID. Úsalo cuando
+  sigas el audio y el video en vivo en X. Desde $0.00015 por Espacio o
+  transmisión.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): extrae
   tendencias en tiempo real por ubicación con posición, volumen, consulta y
   WOEID. Úsalo cuando sigas qué es tendencia y dónde. Desde $0.00015 por
   tendencia.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): extrae ofertas de
+  empleo de X por palabra clave, lugar, modalidad de trabajo, nivel de
+  experiencia y empresa, con salarios y enlaces para postularse. Úsalo cuando
+  recopiles vacantes publicadas en X. Desde $0.00015 por empleo.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): extrae
   Artículos de X de formato largo como Markdown y texto con portadas, autores,
   fechas y métricas. Úsalo cuando necesites el cuerpo de los Artículos, no

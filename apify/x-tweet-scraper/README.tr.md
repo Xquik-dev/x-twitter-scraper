@@ -108,6 +108,8 @@ gönderi ID'si ve arama sorgusu kabul eder. 50'den fazla filtre sunar.
 | `resultType`           | Zengin satırlar, etkileşim satırları ve tanılamalar için satır türü         |
 | `sourceTweetId`        | Makale ve etkileşim modları için kaynak gönderi ID'si                       |
 | `article`              | `mode: "article"` içinde yapılandırılmış makale verisi                      |
+| `translation`          | `mode: "translation"` içinde X'in çevirisi                                  |
+| `embed`                | `mode: "embed"` içinde gömme HTML'i ve bağlantı                             |
 
 İsteğe bağlı gönderi metadata'sında `authorUnavailable`, `card`, `communityId`,
 `communityNote`, `edit`, `exclusiveContent`, `noteTweet` ve `postCta` bulunur.
@@ -233,7 +235,7 @@ Gönderi ve arama modları `tweet`, `tweets` ve `search`. Profil modları
 `profileTweets`, `profileReplies`, `profileMedia` ve `profileLikes`.
 `listTweets` Liste gönderilerini okur. `article` ise bir gönderideki X
 makalesini okur. Tek bir gönderi için modlar `replies`, `quotes`, `thread`,
-`retweeters` ve `favoriters`.
+`retweeters`, `favoriters`, `translation` ve `embed`.
 
 `profileTweets`, X'teki profilin Gönderiler sekmesini izler. Hesabın
 gönderilerini, yeniden gönderilerini ve kendi gönderilerine verdiği yanıtları
@@ -302,6 +304,38 @@ görebildiği gönderilerde gösterebilir. Profil beğenileri de garantili deği
 kullanıcı veya beğenilen gönderi göstermezse Actor ücretsiz bir `diagnostics`
 kaydı yazar. Gönderi satırlarında yer işareti sayısı olabilir. X, bir gönderiyi
 hangi hesapların yer işaretlerine eklediğini göstermez.
+
+### Gönderileri çevir ve gömme HTML'ini al
+
+`mode: "translation"` her gönderinin X çevirisini döndürür. `translateTo`
+alanına `en`, `es`, `pt-br` veya `zh-tw` gibi bir dil kodu yaz. Varsayılan değer
+`en`:
+
+```json
+{
+  "mode": "translation",
+  "tweetIds": ["2082577277246972300"],
+  "translateTo": "es"
+}
+```
+
+Her satırda `resultType: "translation"`, `sourceTweetId` ve `translation`
+bulunur. Bu nesne `language`, `sourceLanguage`, `text` ve `entities` taşır.
+
+`mode: "embed"` her gönderiyi bir web sitesine gömen HTML'i döndürür:
+
+```json
+{ "mode": "embed", "tweetIds": ["2082577277246972300"], "embedTheme": "dark" }
+```
+
+Her satırda `resultType: "embed"`, `sourceTweetId` ve `embed` bulunur. Bu nesne
+`url`, `authorName`, `authorUrl`, `html` ve `width` taşır. `embedHideMedia`,
+`embedHideThread` ve `embedOmitScript`; medyayı, yanıtlanan gönderiyi veya
+widget betiğini dışarıda bırakır.
+
+İki mod da gönderi ID'lerini ve `startUrls` içindeki gönderi URL'lerini okur.
+Her gönderi, normal satır fiyatıyla 1 satır verir. X'te olmayan bir gönderi
+satır vermez ve ücret çıkarmaz.
 
 ### Düz CSV satırları dışa aktar
 
@@ -767,10 +801,19 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Topluluk
   bilgilerini, gönderilerini, aramalarını, üyelerini ve moderatörlerini kazır.
   Kaynakların X Toplulukları olduğunda kullan. Satır başına $0.00015'ten başlar.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Sohbet Odalarını
+  anahtar kelimeyle bulur; başlıklarını, durumlarını, zamanlarını, dinleyici
+  sayılarını, sunucularını ve konuşmacılarını okur. Yayınları da URL veya ID ile
+  okur. X'teki canlı ses ve video yayınlarını takip ettiğinde kullan. Sohbet
+  Odası veya yayın başına $0.00015'ten başlar.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Sıralama,
   hacim, sorgu ve WOEID ile konuma göre gerçek zamanlı gündemi kazır. Nerede
   neyin gündemde olduğunu takip ettiğinde kullan. Gündem başlığı başına
   $0.00015'ten başlar.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): X iş ilanlarını
+  anahtar kelime, yer, çalışma şekli, kıdem ve şirkete göre maaş ve başvuru
+  bağlantılarıyla kazır. X'te yayımlanan iş ilanlarını topladığında kullan. İlan
+  başına $0.00015'ten başlar.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): Uzun biçimli
   X Makalelerini kapak, yazar, tarih ve metriklerle Markdown ve metin olarak
   kazır. Gönderi değil, makale gövdesi gerektiğinde kullan. Makale başına

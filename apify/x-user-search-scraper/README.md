@@ -36,6 +36,8 @@ usage separately.
 
 - Filters for audience, posts, age, verification, website, location, bio &
   username.
+- Search Autocomplete mode: the accounts, topics, hashtags & cashtags X suggests
+  for each search term.
 - Resume 1 query from a saved cursor in `startCursor`.
 - Migrations preserve accepted work.
 - Filters & duplicate removal before billing.
@@ -61,6 +63,39 @@ usage separately.
 Small runs that go well skip `run-report` & save Apify usage. Turn on
 `alwaysSaveRunRecords` to write it on every run.
 
+## Search autocomplete
+
+Set `mode` to `autocomplete` to read what X suggests while someone types. Each
+search term returns suggested accounts, topics, hashtags & cashtags.
+
+```json
+{
+  "searchTerms": ["nasa", "$tsla"],
+  "mode": "autocomplete",
+  "suggestionTypes": ["users", "cashtags"],
+  "maxItems": 100
+}
+```
+
+- Start a term with `#` for hashtags or `$` for cashtags.
+- `suggestionTypes` keeps only the types you choose.
+- Each row names its `suggestionType` & the text to search in `suggestion`.
+- A cashtag row carries `price`, `marketCap` & `dailyChangePercent`.
+- Profile filters apply to Profile Search only.
+
+A suggestion row looks like this:
+
+```json
+{
+  "suggestionType": "user",
+  "suggestion": "@sample_user",
+  "username": "sample_user",
+  "name": "Sample User",
+  "verified": true,
+  "sourceTarget": "sample"
+}
+```
+
 ## Output
 
 Each row holds a profile & its originating query in `sourceTarget`.
@@ -81,8 +116,9 @@ this:
 
 ## How much does it cost to search X users?
 
-Every Apify plan costs $0.00015 per delivered profile. Apify bills your platform
-usage separately.
+Every Apify plan costs $0.00015 per delivered profile. A Search Autocomplete
+suggestion costs the same per delivered row. Apify bills your platform usage
+separately.
 
 - One charge per delivered data row. Diagnostics are free in `diagnostics`.
 - No start, query or page fee.
@@ -130,9 +166,17 @@ diagnostics. Pick the one that matches the data you need.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapes
   Community info, posts, searches, members & moderators. Use it when your
   sources are X Communities. From $0.00015 per row.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Finds Spaces by
+  keyword & reads their titles, states, times, listener counts, hosts &
+  speakers. Also reads broadcasts by URL or ID. Use it when you track live audio
+  & video on X. From $0.00015 per Space or broadcast.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapes
   real-time trends by location with rank, volume, query & WOEID. Use it when you
   track what is trending where. From $0.00015 per trend.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapes X job
+  listings by keyword, place, workplace, seniority & company, with salaries &
+  apply links. Use it when you collect job openings posted on X. From $0.00015
+  per job.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapes
   long-form X Articles as Markdown & text with covers, authors, dates & metrics.
   Use it when you need article bodies, not tweets. From $0.00015 per article.
@@ -186,7 +230,7 @@ your targets & filters. `stopCauses` gives each cause a `nextAction` to follow.
 
 ### Can I use the API, schedules & integrations?
 
-Yes. Choose from 50 public tasks or 129 Xquik REST operations. The
+Yes. Choose from 50 public tasks or the Xquik REST API. The
 [API tab](https://apify.com/xquik/x-user-search-scraper/api) has Python,
 JavaScript & cURL examples. Apify
 [schedules](https://docs.apify.com/platform/schedules) run Xquik's X User Search

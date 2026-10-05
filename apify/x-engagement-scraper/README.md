@@ -55,6 +55,17 @@ separately. You need no X API key or login.
 4. Set `maxItems` to cap delivered rows, then click Start.
 5. Download the dataset as JSON, CSV or Excel, or use the Apify API.
 
+`startUrls` takes each URL as a plain string or as a `{ "url": "..." }` object:
+
+```json
+{
+  "startUrls": [
+    "https://x.com/OpenAI/status/2082577277246972300",
+    { "url": "https://x.com/jack/status/20" }
+  ]
+}
+```
+
 ## Input
 
 ```json
@@ -78,8 +89,9 @@ Small runs that go well skip `run-report` & save Apify usage. Turn on
 ## Output
 
 Each row sets `resultType` to `tweet`, `replies`, `completeReplies`, `quotes`,
-`retweeters`, `favoriters` or `thread`. `sourceTarget` holds the source Tweet
-ID. Tweet & profile fields follow stable Xquik REST response shapes.
+`retweeters`, `favoriters`, `thread` or `repostCheck`. `sourceTarget` holds the
+source Tweet ID. Tweet & profile fields follow stable Xquik REST response
+shapes.
 
 `completeReplies` keeps every returned row. The run report counts partial
 coverage in `incompleteTargets`. Filters run before billing.
@@ -97,6 +109,27 @@ this:
   "likeCount": 12
 }
 ```
+
+## Repost check
+
+Add `repostCheck` to `engagementTypes` & list accounts in `repostCheckUsers` to
+learn whether each account reposted each post:
+
+```json
+{
+  "tweetIds": ["2098439298617856319"],
+  "engagementTypes": ["repostCheck"],
+  "repostCheckUsers": ["discord", "nasa"]
+}
+```
+
+Each check is 1 row with `isRetweeted`, `retweetedAt`, `retweetId`,
+`checkedPosts` & `complete`. Its `id` is `repostCheck:<post ID>:<account>`. The
+check reads each account's newest posts. A repost older than those posts reads
+as `false` with `complete: false`.
+
+A run of only `repostCheck` & `tweet` rows keeps your input order: each post,
+then its accounts as you listed them.
 
 ## Retweet timestamps
 
@@ -170,9 +203,17 @@ diagnostics. Pick the one that matches the data you need.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapes
   Community info, posts, searches, members & moderators. Use it when your
   sources are X Communities. From $0.00015 per row.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Finds Spaces by
+  keyword & reads their titles, states, times, listener counts, hosts &
+  speakers. Also reads broadcasts by URL or ID. Use it when you track live audio
+  & video on X. From $0.00015 per Space or broadcast.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapes
   real-time trends by location with rank, volume, query & WOEID. Use it when you
   track what is trending where. From $0.00015 per trend.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapes X job
+  listings by keyword, place, workplace, seniority & company, with salaries &
+  apply links. Use it when you collect job openings posted on X. From $0.00015
+  per job.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapes
   long-form X Articles as Markdown & text with covers, authors, dates & metrics.
   Use it when you need article bodies, not tweets. From $0.00015 per article.
@@ -228,7 +269,7 @@ who liked a post in 2024, so `favoriters` returns no rows.
 
 ### Can I use the API, schedules & integrations?
 
-Yes. Choose from 50 public tasks or 129 Xquik REST operations. The
+Yes. Choose from 50 public tasks or the Xquik REST API. The
 [API tab](https://apify.com/xquik/x-engagement-scraper/api) has Python,
 JavaScript & cURL examples. Apify
 [schedules](https://docs.apify.com/platform/schedules) run Xquik's X Engagement

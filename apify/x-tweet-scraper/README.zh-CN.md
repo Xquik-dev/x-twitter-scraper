@@ -87,6 +87,8 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 | `resultType` | 丰富行、互动行和诊断记录的行类型 |
 | `sourceTweetId` | 文章和互动模式下的源帖子 ID |
 | `article` | `mode: "article"` 下的结构化文章数据 |
+| `translation` | `mode: "translation"` 下 X 的翻译 |
+| `embed` | `mode: "embed"` 下的嵌入 HTML 和链接 |
 
 可选的帖子元数据包括 `authorUnavailable`、`card`、`communityId`、`communityNote`、`edit`、`exclusiveContent`、`noteTweet` 和 `postCta`。`isTranslatable`、`place`、`possiblySensitive` 和 `viewState` 保存其他公开上下文。`previousCounts` 保存编辑前的互动数据。`tombstone` 保存可见性提示。`unmentionedUserIds` 列出退出对话的用户。具体字段见 OpenAPI。
 
@@ -174,7 +176,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 { "mode": "replies", "replyTweetIds": ["1846987139428634858"], "maxItems": 100 }
 ```
 
-帖子和搜索模式有 `tweet`、`tweets` 和 `search`。个人资料模式有 `profileTweets`、`profileReplies`、`profileMedia` 和 `profileLikes`。`listTweets` 读取列表帖子，`article` 读取帖子中的 X 文章。针对单条帖子的模式有 `replies`、`quotes`、`thread`、`retweeters` 和 `favoriters`。
+帖子和搜索模式有 `tweet`、`tweets` 和 `search`。个人资料模式有 `profileTweets`、`profileReplies`、`profileMedia` 和 `profileLikes`。`listTweets` 读取列表帖子，`article` 读取帖子中的 X 文章。针对单条帖子的模式有 `replies`、`quotes`、`thread`、`retweeters`、`favoriters`、`translation` 和 `embed`。
 
 `profileTweets` 对应 X 个人资料的“帖子”标签页。它返回该账号的帖子、转帖和对自己帖子的回复。行按日期排序。该 Actor 在计费前去掉回复其他账号的帖子，也去掉其他作者的对话上下文。
 
@@ -204,6 +206,30 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 文章行包含 `resultType: "article"`、`sourceTweetId`、`article` 和可选的 `author`。互动用户行包含 `resultType: "user"`、`sourceTweetId` 和 `engagementMode`。
 
 转帖者是常规的公开互动模式。喜欢者只能尽力获取，X 可能只在符合条件或作者本人可见的帖子上显示喜欢者。个人资料的喜欢也只能尽力获取，因为很多公开个人资料没有可读取的“喜欢”标签页。X 没有显示任何用户或喜欢过的帖子时，该 Actor 会写入一条免费的 `diagnostics` 记录。帖子行可以带有书签数。X 不显示哪些账号把帖子加入了书签。
+
+### 翻译帖子并获取嵌入 HTML
+
+`mode: "translation"` 返回 X 对每条帖子的翻译。把 `translateTo` 设为语言代码，例如 `en`、`es`、`pt-br` 或 `zh-tw`。默认值为 `en`：
+
+```json
+{
+  "mode": "translation",
+  "tweetIds": ["2082577277246972300"],
+  "translateTo": "es"
+}
+```
+
+每行包含 `resultType: "translation"`、`sourceTweetId` 和 `translation`。该对象包含 `language`、`sourceLanguage`、`text` 和 `entities`。
+
+`mode: "embed"` 返回把每条帖子嵌入网站的 HTML：
+
+```json
+{ "mode": "embed", "tweetIds": ["2082577277246972300"], "embedTheme": "dark" }
+```
+
+每行包含 `resultType: "embed"`、`sourceTweetId` 和 `embed`。该对象包含 `url`、`authorName`、`authorUrl`、`html` 和 `width`。`embedHideMedia`、`embedHideThread` 和 `embedOmitScript` 可以去掉媒体、被回复的帖子或小组件脚本。
+
+两种模式都读取帖子 ID 和 `startUrls` 中的帖子 URL。每条帖子按常规的每行价格产生 1 行。X 上不存在的帖子不产生行，也不收费。
 
 ### 导出扁平 CSV 行
 
@@ -513,7 +539,9 @@ Apify 不会把固定的构建编号重定向到 `latest`。请把固定编号�
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)：按用户名、简介和位置搜索用户，可按关注者数、认证状态、账号年龄和位置过滤。适合通过搜索建立账号名单的场景。每条个人资料 $0.00015 起。
 - [X List Scraper](https://apify.com/xquik/x-list-scraper)：从列表 URL 或 ID 抓取列表帖子、成员和关注者。适合用精选列表确定来源的场景。每行 $0.00015 起。
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper)：抓取社群信息、帖子、搜索结果、成员和版主。适合来源是 X 社群的场景。每行 $0.00015 起。
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper)：按关键词查找空间，读取标题、状态、时间、听众数、主持人和发言人，也可按 URL 或 ID 读取直播。适合追踪 X 上实时音频和视频的场景。每个空间或直播 $0.00015 起。
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper)：按位置抓取实时趋势，附带排名、帖子量、查询词和 WOEID。适合追踪各地热门话题的场景。每条趋势 $0.00015 起。
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper)：按关键词、地点、办公方式、职级和公司抓取 X 职位，附带薪资和申请链接。适合收集发布在 X 上的职位空缺的场景。每个职位 $0.00015 起。
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper)：把长篇 X 文章抓取为 Markdown 和纯文本，附带封面、作者、日期和指标。适合需要文章正文而不是帖子的场景。每篇文章 $0.00015 起。
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader)：从帖子或个人资料提取或存储照片、视频和 GIF，可选 MP4 和元数据。适合需要媒体文件本身的场景。每条媒体行 $0.00015 起。
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)：追踪品牌提及，用 AI 判断相关性和情感、回答客户体验问题，并比较各次运行。适合长期关注一个品牌的场景。每条已分析帖子 $0.0003 起。

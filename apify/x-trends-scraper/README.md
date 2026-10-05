@@ -35,8 +35,11 @@ key or login.
 
 ## Locations & trend data
 
-- Multiple countries or WOEIDs, read concurrently.
+- Multiple countries, towns or WOEIDs, read concurrently.
 - Up to 50 current trends for each location.
+- A list of every place X offers trends for, with its WOEID, country & type.
+- X place search, with the place ID that X post search takes.
+- X hashflags: the custom emoji X shows after some hashtags.
 - Rank, topic, query, Tweet volume, search URL, WOEID & source location.
 - Location attribution on every row.
 - Labels for hashtag rows & for available Tweet volume.
@@ -49,7 +52,7 @@ key or login.
 1. Open Xquik's X Trends Scraper in Apify Console.
 2. Enter location names in `locations` or numeric WOEIDs in `woeids`.
 3. Set `maxTrendsPerLocation`, up to 50 trends for each location.
-4. Set `maxItems` to cap delivered rows, then click Start.
+4. Set `maxItems` to cap delivered rows for the whole run, then click Start.
 5. Download the dataset as JSON, CSV or Excel, or use the Apify API.
 
 ## Input
@@ -64,9 +67,56 @@ Use location names, numeric WOEIDs or both:
 }
 ```
 
-Supported shortcuts include Worldwide, United States, United Kingdom, Turkey &
-Brazil. Canada, France, Germany, India, Indonesia, Japan, Mexico & Australia
-work too. Use `woeids` for any other supported location.
+`locations` takes any country or town X offers trends for, such as Worldwide,
+United States, Japan or London. 2-letter country codes work too. A name X offers
+no trends for returns no rows & costs nothing. `woeids` takes numeric WOEIDs.
+
+To see every name & WOEID, turn on `listLocations`. The run then lists the
+places X offers trends for instead of trends:
+
+```json
+{ "listLocations": true, "country": "TR", "maxItems": 100 }
+```
+
+`country` takes a name or 2-letter code. `placeType` takes `country`, `town`,
+`worldwide` or `unknown`. `nameContains` keeps places whose name holds your
+text. Leave all 3 empty to list every place.
+
+To search X places by name, fill `placeSearchTerms`. The run then returns places
+instead of trends:
+
+```json
+{ "placeSearchTerms": ["New York"], "maxItems": 20 }
+```
+
+Each place has the `id` that X post search takes as `place`. X ranks the places,
+so their order can differ between runs. X lists up to 20 places for a name, &
+fewer for a few names, such as New York. The run keeps only places with the name
+you typed, so New Delhi returns no rows & costs nothing.
+
+`maxItems` caps the whole run & fills it term by term, so the first term can use
+it all. Set `maxItemsPerTarget` to give each term an even share:
+
+```json
+{
+  "placeSearchTerms": ["Paris", "Rome"],
+  "maxItems": 20,
+  "maxItemsPerTarget": 10
+}
+```
+
+To list X hashflags, turn on `listHashflags`. A hashflag is the custom emoji X
+shows after a hashtag for a set time:
+
+```json
+{ "listHashflags": true, "hashtagContains": "football" }
+```
+
+The run lists the hashflags X shows now. Turn off `activeOnly` to add ended &
+upcoming ones. `hashtagContains` keeps hashtags that hold your text.
+
+A run reads 1 kind of row. `listLocations` wins over `listHashflags`, which wins
+over `placeSearchTerms`. Without any of them, the run reads trends.
 
 Small runs that go well skip `run-report` & save Apify usage. Turn on
 `alwaysSaveRunRecords` to write it on every run.
@@ -74,8 +124,9 @@ Small runs that go well skip `run-report` & save Apify usage. Turn on
 ## Output
 
 Each trend is 1 dataset row. Rows carry `name`, `rank`, `tweetVolume`, `query`,
-`url`, `woeid`, `sourceTarget` & `resultType`. Missing source fields stay
-absent. Xquik's X Trends Scraper invents no values.
+`url`, `woeid`, `sourceTarget` & `resultType`. `sourceTarget` is the location as
+you wrote it. Missing source fields stay absent. Xquik's X Trends Scraper
+invents no values.
 
 Examples use sample values. Results reflect live data. A trend row looks like
 this:
@@ -91,12 +142,66 @@ this:
 }
 ```
 
+With `listLocations`, each place is 1 dataset row. Rows carry `woeid`, `name`,
+`country`, `countryCode`, `placeType`, `placeTypeCode`, `parentWoeid`, `url` &
+`resultType`. `url` is X's legacy reference for the place & may not open. A
+trend location row looks like this:
+
+```json
+{
+  "woeid": 2344116,
+  "name": "Istanbul",
+  "country": "Turkey",
+  "countryCode": "TR",
+  "placeType": "Town",
+  "placeTypeCode": 7,
+  "parentWoeid": 23424969,
+  "resultType": "trendLocation"
+}
+```
+
+With `placeSearchTerms`, each place is 1 dataset row. Rows carry `id`, `name`,
+`fullName`, `country`, `countryCode`, `placeType`, `url`, `centroid`,
+`boundingBox`, `attributes`, `containedWithin`, `sourceTarget` & `resultType`.
+`centroid` holds longitude, then latitude. A place row looks like this:
+
+```json
+{
+  "id": "0123456789abcdef",
+  "name": "Sample City",
+  "fullName": "Sample City, Sample Country",
+  "country": "Sample Country",
+  "countryCode": "US",
+  "placeType": "city",
+  "centroid": [-73.97, 40.78],
+  "sourceTarget": "New York",
+  "resultType": "place"
+}
+```
+
+With `listHashflags`, each hashflag is 1 dataset row. Rows carry `hashtag`,
+`assetUrl`, `startsAt`, `endsAt`, `isHashfettiEnabled`, `animations` &
+`resultType`. A hashflag row looks like this:
+
+```json
+{
+  "hashtag": "SampleHashtag",
+  "assetUrl": "https://abs.twimg.com/hashflags/Sample/Sample.png",
+  "startsAt": "2026-10-02T10:00:00.000Z",
+  "endsAt": "2027-01-03T14:59:00.000Z",
+  "isHashfettiEnabled": false,
+  "animations": [],
+  "resultType": "hashflag"
+}
+```
+
 ## How much does it cost to scrape X trends?
 
 Every Apify plan costs $0.00015 per delivered row. Apify bills your platform
 usage separately.
 
 - One charge per delivered data row. Diagnostics are free in `diagnostics`.
+- A trend location, place or hashflag row costs the same as a trend row.
 - No start, query or location fee.
 - Deduplication runs before billing.
 - Apify maximum-total-charge settings cap delivered rows.
@@ -151,6 +256,14 @@ diagnostics. Pick the one that matches the data you need.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapes
   Community info, posts, searches, members & moderators. Use it when your
   sources are X Communities. From $0.00015 per row.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Finds Spaces by
+  keyword & reads their titles, states, times, listener counts, hosts &
+  speakers. Also reads broadcasts by URL or ID. Use it when you track live audio
+  & video on X. From $0.00015 per Space or broadcast.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapes X job
+  listings by keyword, place, workplace, seniority & company, with salaries &
+  apply links. Use it when you collect job openings posted on X. From $0.00015
+  per job.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapes
   long-form X Articles as Markdown & text with covers, authors, dates & metrics.
   Use it when you need article bodies, not tweets. From $0.00015 per article.
@@ -201,11 +314,12 @@ counsel when uncertain.
 
 Open the free `diagnostics` output first. An empty run's status says to check
 your targets & filters. `stopCauses` gives each cause a `nextAction` to follow.
-The run names each unknown location & says what to use instead.
+A location X offers no trends for returns no rows. Turn on `listLocations` to
+see the names X takes.
 
 ### Can I use the API, schedules & integrations?
 
-Yes. Choose from 50 public tasks or 129 Xquik REST operations. The
+Yes. Choose from 50 public tasks or the Xquik REST API. The
 [API tab](https://apify.com/xquik/x-trends-scraper/api) has Python, JavaScript &
 cURL examples. Apify [schedules](https://docs.apify.com/platform/schedules) run
 Xquik's X Trends Scraper on a cron. Agents use

@@ -33,6 +33,7 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 - 1회 실행에서 여러 검색어를 동시에 읽기.
 - 지역, 근무 형태, 직급, 고용 형태 & 회사 필터.
 - 채용 공고 URL & 공고 ID를 전체 공고로 읽기.
+- 이름으로 찾는 채용 지역 & `locationId`에 넣는 ID.
 - 제목, 급여 범위, 통화, 지원 링크, 근무지 & 채용 계정.
 - 모든 행에 일반 텍스트 & 마크다운 전체 설명 포함.
 - 모든 행에 검색 정보 표시.
@@ -49,6 +50,17 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
    좁히세요.
 4. `maxItems`로 전달할 행 수의 상한을 정하고 Start를 클릭하세요.
 5. 데이터셋을 JSON, CSV 또는 Excel로 내려받거나 Apify API를 사용하세요.
+
+`startUrls`는 각 URL을 일반 문자열 또는 `{ "url": "..." }` 객체로 받습니다.
+
+```json
+{
+  "startUrls": [
+    "https://x.com/i/jobs/1899202395210649861",
+    { "url": "https://x.com/i/jobs/1899202395210649861" }
+  ]
+}
+```
 
 ## 입력
 
@@ -80,8 +92,14 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 ```
 
 `location`에는 지역 이름을 넣습니다. `locationId`는 그 대신 West New York이 아닌
-New York City처럼 정확한 지역 1곳을 지정합니다. 지역 ID는 Xquik의 채용 지역
-API로 찾으세요.
+New York City처럼 정확한 지역 1곳을 지정합니다.
+
+지역 ID는 이름으로 찾으세요. `locationSearchTerms`를 넣은 실행은 채용 공고 대신
+지역을 나열합니다.
+
+```json
+{ "locationSearchTerms": ["New York"], "maxItems": 20 }
+```
 
 문제없이 끝난 작은 실행은 `run-report`를 건너뛰어 Apify 사용량을 아낍니다. 모든
 실행에서 보고서를 기록하려면 `alwaysSaveRunRecords`를 켜세요.
@@ -116,6 +134,17 @@ Xquik의 X Jobs Scraper는 값을 지어내지 않습니다.
   "account": { "username": "example", "verified": true },
   "sourceTarget": "software engineer",
   "resultType": "job"
+}
+```
+
+채용 지역은 각각 행 1개이며, `locationId`에 넣는 `id`가 들어 있습니다.
+
+```json
+{
+  "id": "1720462281920696805",
+  "name": "New York City, NY",
+  "sourceTarget": "New York",
+  "resultType": "jobLocation"
 }
 ```
 
@@ -179,6 +208,10 @@ Apify가 실행을 다시 시작해도 전달된 행 & 진행 상황은 유지�
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): 커뮤니티
   정보, 게시물, 검색 결과, 멤버 & 모더레이터를 스크랩합니다. X 커뮤니티에서
   데이터를 모을 때 사용하세요. 행당 $0.00015부터입니다.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): 키워드로
+  스페이스를 찾고 제목, 상태, 시간, 청취자 수, 호스트 & 스피커를 읽습니다.
+  URL이나 ID로 방송도 읽습니다. X의 라이브 오디오 & 동영상을 추적할 때
+  사용하세요. 스페이스 또는 방송당 $0.00015부터입니다.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): 위치별 실시간
   트렌드를 순위, 볼륨, 쿼리 & WOEID와 함께 스크랩합니다. 어디에서 무엇이
   트렌드인지 추적할 때 사용하세요. 트렌드당 $0.00015부터입니다.

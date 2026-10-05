@@ -38,7 +38,7 @@ You need no X API key or login.
 - Bio, counts, verification, owner-entered location, website & media.
 - X's best-effort public Account based in label when available.
 - Profile Posts & With Replies rows across available result pages.
-- Optional media, followers, following or verified followers.
+- Optional media, Highlights, followers, following or verified followers.
 - Filters for optional posts by date, media, verification, repost status &
   metrics.
 - Filters for optional profiles by audience, activity, age & public metadata.
@@ -51,6 +51,12 @@ You need no X API key or login.
 3. Turn on resources such as `includeTweets` or `includeFollowers`.
 4. Set `maxItems` to cap delivered rows, then click Start.
 5. Download the dataset as JSON, CSV or Excel, or use the Apify API.
+
+`startUrls` takes each URL as a plain string or as a `{ "url": "..." }` object:
+
+```json
+{ "startUrls": ["https://x.com/nasa", { "url": "https://x.com/OpenAI" }] }
+```
 
 ## Input
 
@@ -72,9 +78,12 @@ Small runs that go well skip `run-report` & save Apify usage. Turn on
 ## Output
 
 Profile rows use `resultType: "profile"`. Optional rows use `profileTweet`,
-`profileReply`, `profileMedia`, `profileFollower`, `profileFollowing` or
-`profileVerifiedFollower`. Every row keeps `sourceTarget`. Public fields keep
-the Xquik REST response shape.
+`profileReply`, `profileMedia`, `profileHighlight`, `profileFollower`,
+`profileFollowing` or `profileVerifiedFollower`. Every row keeps `sourceTarget`.
+Public fields keep the Xquik REST response shape.
+
+`includeHighlights` adds the posts on each profile's Highlights tab, in X's
+order. A profile without highlights adds no rows.
 
 X infers `accountBasedIn` from aggregated account-access IPs. The label does not
 state nationality, residence, identity, signup, post or exact location.
@@ -122,9 +131,10 @@ complete extraction.
 
 The run status names every cause of an early stop. `stopCauses` lists each cause
 with its own `message`, `retryable` & `nextAction`. The causes are
-`target_not_found`, `target_failed`, `pagination_safety_limit` &
-`deadline_reached`. A missing target joins the list only when another cause
-stopped the run. The run is `retryable` when any cause is.
+`target_not_found`, `target_suspended`, `target_failed`,
+`pagination_safety_limit` & `deadline_reached`. `target_suspended` names the
+accounts X suspended. A missing or suspended target joins the list only when
+another cause stopped the run. The run is `retryable` when any cause is.
 
 ## Related Xquik Actors
 
@@ -155,9 +165,17 @@ diagnostics. Pick the one that matches the data you need.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapes
   Community info, posts, searches, members & moderators. Use it when your
   sources are X Communities. From $0.00015 per row.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Finds Spaces by
+  keyword & reads their titles, states, times, listener counts, hosts &
+  speakers. Also reads broadcasts by URL or ID. Use it when you track live audio
+  & video on X. From $0.00015 per Space or broadcast.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapes
   real-time trends by location with rank, volume, query & WOEID. Use it when you
   track what is trending where. From $0.00015 per trend.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapes X job
+  listings by keyword, place, workplace, seniority & company, with salaries &
+  apply links. Use it when you collect job openings posted on X. From $0.00015
+  per job.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapes
   long-form X Articles as Markdown & text with covers, authors, dates & metrics.
   Use it when you need article bodies, not tweets. From $0.00015 per article.
@@ -213,7 +231,7 @@ The run lists each input it cannot read & says how to fix it. X hides likes, so
 
 ### Can I use the API, schedules & integrations?
 
-Yes. Choose from 50 public tasks or 129 Xquik REST operations. The
+Yes. Choose from 50 public tasks or the Xquik REST API. The
 [API tab](https://apify.com/xquik/x-profile-scraper/api) has Python, JavaScript
 & cURL examples. Apify [schedules](https://docs.apify.com/platform/schedules)
 run Xquik's X Profile Scraper on a cron. Agents use

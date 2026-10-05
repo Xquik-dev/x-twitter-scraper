@@ -22,13 +22,14 @@ Claude Code, Codex, Cursor, and more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X Community Scraper collects Community info,
-posts, searches, members & moderators. Most other Apify Actors charge before
-filtering or deduplicating. Xquik charges only for delivered, unique,
-filter-matching results.
+posts, media, searches, members & moderators, & finds Communities by keyword or
+topic. Most other Apify Actors charge before filtering or deduplicating. Xquik
+charges only for delivered, unique, filter-matching results.
 
-Collect Twitter Community info, posts, keyword matches, members & moderators
-from Community URLs or IDs. You pay **$0.00015 per delivered row**, & Apify
-bills platform usage separately. You need no X API key or login.
+Collect Twitter Community info, posts, media, keyword matches, members &
+moderators from Community URLs or IDs. Find Communities by keyword or topic, or
+list the ones X suggests. You pay **$0.00015 per delivered row**, & Apify bills
+platform usage separately. You need no X API key or login.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
@@ -36,7 +37,11 @@ bills platform usage separately. You need no X API key or login.
 ## Community data & filters
 
 - Community metadata & rules when X exposes them.
-- Latest Community posts.
+- Communities found by keyword, with their full record.
+- The most popular Communities of a topic, such as Technology.
+- The Communities X suggests to join, & every Community topic.
+- Community posts, newest first or in Top order.
+- A Community's Media tab: posts with photos or videos.
 - Keyword search with Latest or Top ordering.
 - Community members & moderators.
 - Post, member & moderator filters that run before billing.
@@ -53,6 +58,17 @@ bills platform usage separately. You need no X API key or login.
 4. Set `maxItems` to cap delivered rows, then click Start.
 5. Download the dataset as JSON, CSV or Excel, or use the Apify API.
 
+`startUrls` takes each URL as a plain string or as a `{ "url": "..." }` object:
+
+```json
+{
+  "startUrls": [
+    "https://x.com/i/communities/1493446837214187523",
+    { "url": "https://x.com/i/communities/1493446837214187523" }
+  ]
+}
+```
+
 ## Input
 
 ```json
@@ -63,16 +79,33 @@ bills platform usage separately. You need no X API key or login.
 }
 ```
 
-For keyword search, add `"search"` to `resources` & set `query`.
+For keyword search, add `"search"` to `resources` & set `query`. Add `"media"`
+for the Media tab. Set `postsOrder` to `Top` for the Top Posts.
+
+To find Communities instead, send keywords or topics:
+
+```json
+{
+  "searchTerms": ["artificial intelligence"],
+  "topics": ["Technology"],
+  "maxItems": 100
+}
+```
+
+Each found Community carries its rules, creator, admin & member profiles. Set
+`includeDetails` to `false` for a faster run with the short record. Turn on
+`includeSuggested` for the Communities X suggests, which can differ per run, or
+`listTopics` for every topic & its subtopics.
 
 Small runs that go well skip `run-report` & save Apify usage. Turn on
 `alwaysSaveRunRecords` to write it on every run.
 
 ## Output
 
-Each row sets `resultType` to `community`, `communityTweet`, `communityMember`
-or `communityModerator`. Every row includes `sourceTarget` for the input
-Community. Xquik's X Community Scraper keeps source fields & invents no values.
+Each row sets `resultType` to `community`, `communityTweet`, `communityMedia`,
+`communityMember`, `communityModerator` or `communityTopic`. Every row includes
+`sourceTarget` for the input Community, keyword or topic. Xquik's X Community
+Scraper keeps source fields & invents no values.
 
 Examples use sample values. Results reflect live data. A Community info row
 looks like this:
@@ -94,6 +127,7 @@ usage separately.
 
 - One charge per delivered data row. Diagnostics are free in `diagnostics`.
 - No start, Community, resource or query fee.
+- A found Community costs 1 row, with or without its full record.
 - Deduplication runs before billing.
 
 ## Limits & recovery
@@ -144,9 +178,17 @@ diagnostics. Pick the one that matches the data you need.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): Scrapes List posts,
   members & followers from List URLs or IDs. Use it when a curated List defines
   your sources. From $0.00015 per row.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Finds Spaces by
+  keyword & reads their titles, states, times, listener counts, hosts &
+  speakers. Also reads broadcasts by URL or ID. Use it when you track live audio
+  & video on X. From $0.00015 per Space or broadcast.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapes
   real-time trends by location with rank, volume, query & WOEID. Use it when you
   track what is trending where. From $0.00015 per trend.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapes X job
+  listings by keyword, place, workplace, seniority & company, with salaries &
+  apply links. Use it when you collect job openings posted on X. From $0.00015
+  per job.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapes
   long-form X Articles as Markdown & text with covers, authors, dates & metrics.
   Use it when you need article bodies, not tweets. From $0.00015 per article.
@@ -202,7 +244,7 @@ Community Scraper returns only public Communities that X exposes.
 
 ### Can I use the API, schedules & integrations?
 
-Yes. Choose from 50 public tasks or 129 Xquik REST operations. The
+Yes. Choose from 50 public tasks or the Xquik REST API. The
 [API tab](https://apify.com/xquik/x-community-scraper/api) has Python,
 JavaScript & cURL examples. Apify
 [schedules](https://docs.apify.com/platform/schedules) run Xquik's X Community

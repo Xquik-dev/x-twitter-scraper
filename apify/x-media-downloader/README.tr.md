@@ -47,6 +47,13 @@ gerekmez.
 4. Teslim edilecek satır sayısını `maxItems` ile sınırla, sonra Start'a tıkla.
 5. Veri kümesini JSON, CSV veya Excel olarak indir ya da Apify API'yi kullan.
 
+`startUrls` ve `profileUrls` her URL'yi düz metin olarak ya da
+`{ "url": "..." }` nesnesi olarak alır:
+
+```json
+{ "profileUrls": ["https://x.com/nasa", { "url": "https://x.com/OpenAI" }] }
+```
+
 `profileUrls` ve `tweetIds` de hedef olarak çalışır.
 
 ## Girdi
@@ -146,10 +153,19 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Topluluk
   bilgilerini, gönderilerini, aramalarını, üyelerini ve moderatörlerini kazır.
   Kaynakların X Toplulukları olduğunda kullan. Satır başına $0.00015'ten başlar.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Sohbet Odalarını
+  anahtar kelimeyle bulur; başlıklarını, durumlarını, zamanlarını, dinleyici
+  sayılarını, sunucularını ve konuşmacılarını okur. Yayınları da URL veya ID ile
+  okur. X'teki canlı ses ve video yayınlarını takip ettiğinde kullan. Sohbet
+  Odası veya yayın başına $0.00015'ten başlar.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Sıralama,
   hacim, sorgu ve WOEID ile konuma göre gerçek zamanlı gündemi kazır. Nerede
   neyin gündemde olduğunu takip ettiğinde kullan. Gündem başlığı başına
   $0.00015'ten başlar.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): X iş ilanlarını
+  anahtar kelime, yer, çalışma şekli, kıdem ve şirkete göre maaş ve başvuru
+  bağlantılarıyla kazır. X'te yayımlanan iş ilanlarını topladığında kullan. İlan
+  başına $0.00015'ten başlar.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): Uzun biçimli
   X Makalelerini kapak, yazar, tarih ve metriklerle Markdown ve metin olarak
   kazır. Gönderi değil, makale gövdesi gerektiğinde kullan. Makale başına

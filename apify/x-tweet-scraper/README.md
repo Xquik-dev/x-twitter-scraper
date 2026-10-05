@@ -107,6 +107,8 @@ with 50+ filters.
 | `resultType`           | Row type for rich, engagement & diagnostic rows  |
 | `sourceTweetId`        | Source tweet ID for article and engagement modes |
 | `article`              | Structured article data in `mode: "article"`     |
+| `translation`          | X's translation in `mode: "translation"`         |
+| `embed`                | Embed HTML & link in `mode: "embed"`             |
 
 Optional tweet metadata includes `authorUnavailable`, `card`, `communityId`,
 `communityNote`, `edit`, `exclusiveContent`, `noteTweet` & `postCta`.
@@ -114,6 +116,10 @@ Optional tweet metadata includes `authorUnavailable`, `card`, `communityId`,
 context. `previousCounts` keeps pre-edit engagement. `tombstone` keeps
 visibility notices. `unmentionedUserIds` lists users who left the conversation.
 See OpenAPI for the exact fields.
+
+Set `outputVariant: "rich"` for the most data per row. Rich rows add
+`hasCommunityNotes`, `quotedTweetPermalink`, `unavailableAuthorId` & media
+`sourceUser` at the end. Legacy rows stay unchanged.
 
 Nested `author` objects carry public profile fields. They cover identity,
 counts, verification, availability, professional data & profile biographies.
@@ -153,7 +159,7 @@ Paste any mix of tweet, profile, search or List URLs:
 ```json
 {
   "startUrls": [
-    { "url": "https://x.com/elonmusk/status/1846987139428634858" },
+    { "url": "https://x.com/jack/status/20" },
     { "url": "https://x.com/nasa" },
     { "url": "https://x.com/search?q=AI%20lang%3Aen" },
     { "url": "https://x.com/i/lists/1748648376080666720" }
@@ -208,25 +214,36 @@ reposts only.
 ### Look up tweets by ID
 
 ```json
-{ "tweetIds": ["1846987139428634858", "1858743654778892784"], "maxItems": 100 }
+{ "tweetIds": ["20", "2082577277246972300"], "maxItems": 100 }
 ```
 
 Results keep your input order, drop duplicates & include only the tweets you
 asked for. The lookup also accepts `tweetId`, `tweetIDs`, `tweets`, `postIds`,
 `lookupPostIds`, `tweetUrls` & `postUrls`.
 
+Put all your IDs in 1 run. Each run pays Apify the same start cost. With 1 ID
+per run, Apify usage adds about $0.00008 to each tweet. With 188 IDs in 1 run,
+it adds about $0.000005. A run of fewer than 5 IDs ends with this tip.
+
 ### Engagement, thread & article modes
 
 Set `mode` to force one route, whatever other fields the input holds:
 
 ```json
-{ "mode": "replies", "replyTweetIds": ["1846987139428634858"], "maxItems": 100 }
+{ "mode": "replies", "replyTweetIds": ["2082577277246972300"], "maxItems": 100 }
 ```
 
 Tweet & search modes are `tweet`, `tweets` & `search`. Profile modes are
-`profileTweets`, `profileReplies`, `profileMedia` & `profileLikes`. `listTweets`
-reads List posts, & `article` reads the X article in a post. Modes for a single
-post are `replies`, `quotes`, `thread`, `retweeters` & `favoriters`.
+`profileTweets`, `profileReplies`, `profileMedia`, `profileLikes` &
+`profileMentions`. `listTweets` reads List posts, & `article` reads the X
+article in a post. Modes for a single post are `replies`, `quotes`, `thread`,
+`retweeters`, `favoriters`, `translation` & `embed`.
+
+`profileMentions` returns the posts that mention each handle, newest first:
+
+```json
+{ "mode": "profileMentions", "twitterHandles": ["nasa"], "maxItems": 100 }
+```
 
 `profileTweets` follows the profile Posts tab on X. It returns the account's
 posts, reposts & replies to its own posts. Rows come in date order. The Actor
@@ -290,6 +307,36 @@ best effort too, since many public profiles have no readable Likes tab. If X
 shows no users or liked tweets, the Actor writes a free `diagnostics` record.
 Tweet rows can carry bookmark counts. X does not show which accounts bookmarked
 a post.
+
+### Translate tweets & get embed HTML
+
+`mode: "translation"` returns X's translation of each tweet. Set `translateTo`
+to a language code such as `en`, `es`, `pt-br` or `zh-tw`. It defaults to `en`:
+
+```json
+{
+  "mode": "translation",
+  "tweetIds": ["2082577277246972300"],
+  "translateTo": "es"
+}
+```
+
+Each row has `resultType: "translation"`, `sourceTweetId` & `translation`. That
+object holds `language`, `sourceLanguage`, `text` & `entities`.
+
+`mode: "embed"` returns the HTML that embeds each tweet on a website:
+
+```json
+{ "mode": "embed", "tweetIds": ["2082577277246972300"], "embedTheme": "dark" }
+```
+
+Each row has `resultType: "embed"`, `sourceTweetId` & `embed`. That object holds
+`url`, `authorName`, `authorUrl`, `html` & `width`. `embedHideMedia`,
+`embedHideThread` & `embedOmitScript` leave media, the parent tweet or the
+widget script out.
+
+Both modes read tweet IDs & tweet URLs in `startUrls`. Each tweet gives 1 row at
+the usual row price. A tweet X does not have gives no row & no charge.
 
 ### Export flat CSV rows
 
@@ -403,25 +450,57 @@ To cap what a run can spend, see [Run options](#run-options).
 Xquik's X Tweet Scraper beat 11 other tweet Actors on cost & speed. Its median
 row had 63 fields, 2x the median of the others.
 
-| Actor                                                             | Useful tweets | Cost per useful tweet | Useful tweets per second | Fields per row | Public run                                                        |
-| ----------------------------------------------------------------- | ------------: | --------------------: | -----------------------: | -------------: | ----------------------------------------------------------------- |
-| xquik/x-tweet-scraper                                             |           890 |             $0.000175 |                     39.2 |             63 | [View run](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX) |
-| xquik/x-tweet-scraper                                             |           883 |             $0.000176 |                     25.2 |             63 | [View run](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf) |
-| xquik/x-tweet-scraper                                             |           882 |             $0.000177 |                     25.7 |             63 | [View run](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba) |
-| xquik/x-tweet-scraper                                             |           877 |             $0.000178 |                     26.9 |             63 | [View run](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W) |
-| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |           813 |             $0.000185 |                     10.5 |             36 | [View run](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
-| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |           805 |             $0.000187 |                     10.6 |             36 | [View run](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
-| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |           805 |             $0.000187 |                     10.7 |             36 | [View run](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
-| kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest |           880 |             $0.000250 |                      9.1 |             46 | [View run](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2) |
-| scraper_one/x-posts-search                                        |           804 |             $0.000314 |                      3.3 |             14 | [View run](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0) |
-| danek/twitter-scraper                                             |           807 |             $0.000347 |                      5.0 |             27 | [View run](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W) |
-| tweetapi/twitter-x-search-scraper                                 |           337 |             $0.000374 |                      2.6 |             28 | [View run](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb) |
-| api-ninja/x-twitter-advanced-search                               |           837 |             $0.000430 |                      7.4 |             28 | [View run](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib) |
-| apidojo/twitter-scraper-lite                                      |           251 |             $0.000494 |                     12.9 |             54 | [View run](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta) |
-| apidojo/tweet-scraper                                             |           481 |             $0.000832 |                      7.8 |             55 | [View run](https://console.apify.com/view/runs/PydoBgS1YRblg29bB) |
-| xtdata/twitter-x-scraper                                          |         1,378 |             $0.001168 |                     11.9 |             67 | [View run](https://console.apify.com/view/runs/U91dRXEvKvqu41aop) |
-| seemuapps/x-tweet-scraper                                         |           805 |             $0.001242 |                      6.9 |             24 | [View run](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
-| maximedupre/twitter-scraper                                       |            46 |             $0.002846 |                      0.3 |             31 | [View run](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
+- `xquik/x-tweet-scraper`: 890 useful tweets, $0.000175 per useful tweet, 39.2
+  per second & 63 fields per row.
+  [View run](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
+- `xquik/x-tweet-scraper`: 883 useful tweets, $0.000176 per useful tweet, 25.2
+  per second & 63 fields per row.
+  [View run](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
+- `xquik/x-tweet-scraper`: 882 useful tweets, $0.000177 per useful tweet, 25.7
+  per second & 63 fields per row.
+  [View run](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
+- `xquik/x-tweet-scraper`: 877 useful tweets, $0.000178 per useful tweet, 26.9
+  per second & 63 fields per row.
+  [View run](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 813 useful tweets,
+  $0.000185 per useful tweet, 10.5 per second & 36 fields per row.
+  [View run](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 805 useful tweets,
+  $0.000187 per useful tweet, 10.6 per second & 36 fields per row.
+  [View run](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 805 useful tweets,
+  $0.000187 per useful tweet, 10.7 per second & 36 fields per row.
+  [View run](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
+- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest`: 880
+  useful tweets, $0.000250 per useful tweet, 9.1 per second & 46 fields per row.
+  [View run](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
+- `scraper_one/x-posts-search`: 804 useful tweets, $0.000314 per useful tweet,
+  3.3 per second & 14 fields per row.
+  [View run](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
+- `danek/twitter-scraper`: 807 useful tweets, $0.000347 per useful tweet, 5.0
+  per second & 27 fields per row.
+  [View run](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
+- `tweetapi/twitter-x-search-scraper`: 337 useful tweets, $0.000374 per useful
+  tweet, 2.6 per second & 28 fields per row.
+  [View run](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
+- `api-ninja/x-twitter-advanced-search`: 837 useful tweets, $0.000430 per useful
+  tweet, 7.4 per second & 28 fields per row.
+  [View run](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
+- `apidojo/twitter-scraper-lite`: 251 useful tweets, $0.000494 per useful tweet,
+  12.9 per second & 54 fields per row.
+  [View run](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
+- `apidojo/tweet-scraper`: 481 useful tweets, $0.000832 per useful tweet, 7.8
+  per second & 55 fields per row.
+  [View run](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
+- `xtdata/twitter-x-scraper`: 1,378 useful tweets, $0.001168 per useful tweet,
+  11.9 per second & 67 fields per row.
+  [View run](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
+- `seemuapps/x-tweet-scraper`: 805 useful tweets, $0.001242 per useful tweet,
+  6.9 per second & 24 fields per row.
+  [View run](https://console.apify.com/view/runs/FstursEw43TbcipYU)
+- `maximedupre/twitter-scraper`: 46 useful tweets, $0.002846 per useful tweet,
+  0.3 per second & 31 fields per row.
+  [View run](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
 
 Every Actor ran the same search & filters. The other Actors ran on 2026-09-27.
 Xquik's runs set `outputVariant: "rich"` & ran on 2026-09-29. All runs used the
@@ -463,9 +542,9 @@ delivery. It does not confirm complete extraction.
 The status text names every cause of the stop. A run with a missing account & a
 stalled search says both. `stopCauses` lists each cause with its own `message`,
 `retryable` & `nextAction`. The causes are `target_not_found`,
-`target_protected`, `search_unavailable`, `likes_hidden`, `target_failed`,
-`pagination_safety_limit`, `reply_reach` & `deadline_reached`. The run is
-`retryable` when any cause is.
+`target_suspended`, `target_protected`, `search_unavailable`, `likes_hidden`,
+`target_failed`, `pagination_safety_limit`, `reply_reach` & `deadline_reached`.
+The run is `retryable` when any cause is.
 
 ### Missing & unavailable targets
 
@@ -489,9 +568,9 @@ unfinished targets.
 
 The diagnostic names those targets in `unavailableTargets`. Each entry has the
 `target` as you entered it, a `reason` & a `nextAction`. The reason is
-`not_found`, `protected`, `search_unavailable` or `likes_hidden`. A search entry
-can also have a `fix`, such as the operator to remove. The list holds up to 100
-entries. Remove those targets from your input.
+`not_found`, `suspended`, `protected`, `search_unavailable` or `likes_hidden`. A
+search entry can also have a `fix`, such as the operator to remove. The list
+holds up to 100 entries. Remove those targets from your input.
 
 ### Safety & time limits
 
@@ -639,9 +718,9 @@ Sample values are illustrative. Your runs return live data from X.
 
 ```json
 {
-  "id": "1846987139428634858",
-  "text": "The future of AI is...",
-  "createdAt": "Sun Mar 15 12:00:00 +0000 2026",
+  "id": "20",
+  "text": "just setting up my twttr",
+  "createdAt": "Tue Mar 21 20:50:14 +0000 2006",
   "retweetCount": 500,
   "replyCount": 120,
   "likeCount": 5000,
@@ -649,12 +728,12 @@ Sample values are illustrative. Your runs return live data from X.
   "viewCount": 1200000,
   "bookmarkCount": 300,
   "lang": "en",
-  "url": "https://x.com/elonmusk/status/1846987139428634858",
+  "url": "https://x.com/jack/status/20",
   "author": {
-    "id": "44196397",
-    "username": "elonmusk",
-    "name": "Elon Musk",
-    "followers": 180000000,
+    "id": "12",
+    "username": "jack",
+    "name": "jack",
+    "followers": 6000000,
     "verified": true
   },
   "media": [{ "type": "photo", "url": "https://..." }],
@@ -666,7 +745,7 @@ Sample values are illustrative. Your runs return live data from X.
   "isNoteTweet": false,
   "isQuoteStatus": false,
   "isReply": false,
-  "conversationId": "1846987139428634858"
+  "conversationId": "20"
 }
 ```
 
@@ -736,9 +815,17 @@ diagnostics. Pick the one that matches the data you need.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapes
   Community info, posts, searches, members & moderators. Use it when your
   sources are X Communities. From $0.00015 per row.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Finds Spaces by
+  keyword & reads their titles, states, times, listener counts, hosts &
+  speakers. Also reads broadcasts by URL or ID. Use it when you track live audio
+  & video on X. From $0.00015 per Space or broadcast.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapes
   real-time trends by location with rank, volume, query & WOEID. Use it when you
   track what is trending where. From $0.00015 per trend.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapes X job
+  listings by keyword, place, workplace, seniority & company, with salaries &
+  apply links. Use it when you collect job openings posted on X. From $0.00015
+  per job.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapes
   long-form X Articles as Markdown & text with covers, authors, dates & metrics.
   Use it when you need article bodies, not tweets. From $0.00015 per article.
@@ -773,8 +860,8 @@ diagnostics. Pick the one that matches the data you need.
 
 ## Need more than scraping?
 
-Xquik also provides 47 dashboard tools, 129 REST operations, signed webhooks &
-an MCP server.
+Xquik also provides 47 dashboard tools, a REST API, signed webhooks & an MCP
+server.
 
 - [API documentation](https://docs.xquik.com/introduction): REST API guides
 - [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets):
