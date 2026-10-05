@@ -180,6 +180,10 @@ ein vollständiges Profil. Ein Account ohne Affiliates liefert keine Datensätze
 Nutze `subscriptions` für die Creator, die ein Account abonniert hat. Ein
 Account, der seine Abonnements verbirgt, liefert keine Datensätze.
 
+Nutze `similar` für die Accounts, die X als ähnlich zu einem Account listet.
+Jeder Datensatz ist ein vollständiges Profil. X listet nur wenige Accounts &
+kann die Auswahl zwischen Runs ändern.
+
 Dieselbe Eingabe akzeptiert auch `username`, `usernames` & `user_names` als
 Aliasse.
 

@@ -31,7 +31,8 @@ uso de la plataforma. No necesitas clave de API de X ni iniciar sesión.
 
 ## Datos y formato de los Artículos
 
-- Markdown que conserva los bloques y los rangos en negrita y cursiva.
+- Markdown con encabezados, listas, negrita, cursiva, enlaces e imágenes, sin
+  HTML.
 - Bloques `contents` que conservan el formato original.
 - URLs de posts e IDs numéricos de posts en la misma ejecución.
 - Todos los Artículos que publicó una cuenta, a partir de su nombre de usuario o
@@ -86,8 +87,16 @@ fila de Artículo incluye estos campos:
 
 ```json
 {
-  "markdown": "# Article title\n\nPlain Article text",
-  "contents": [{ "type": "paragraph", "text": "Plain Article text" }]
+  "markdown": "# Article title\n\nPlain **Article** text",
+  "bodyMarkdown": "Plain **Article** text",
+  "bodyText": "Plain Article text",
+  "contents": [
+    {
+      "type": "paragraph",
+      "text": "Plain Article text",
+      "inlineStyleRanges": [{ "offset": 6, "length": 7, "style": "Bold" }]
+    }
+  ]
 }
 ```
 

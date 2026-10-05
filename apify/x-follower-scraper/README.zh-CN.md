@@ -134,6 +134,8 @@ Xquik 的 X Follower Scraper 返回关注者、正在关注的账号、列表和
 
 用 `subscriptions` 获取某个账号订阅的创作者。隐藏订阅的账号不返回任何行。
 
+用 `similar` 获取 X 列为与某个账号相似的账号。每行是一条完整的个人资料。X 只列出少量账号，并且每次运行的结果可能不同。
+
 同一输入还接受 `username`、`usernames` 和 `user_names` 作为别名。
 
 ### 多关系运行

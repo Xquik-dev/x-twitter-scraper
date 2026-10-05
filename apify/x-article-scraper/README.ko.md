@@ -30,7 +30,7 @@ Apify Actor는 대부분 필터링이나 중복 제거 전에 요금을 부과�
 
 ## 아티클 데이터 & 형식
 
-- 블록, 굵게 & 기울임꼴 범위를 유지하는 마크다운.
+- 제목, 목록, 굵게, 기울임꼴, 링크 & 이미지를 담고 HTML은 없는 마크다운.
 - 원본 서식을 유지하는 `contents` 블록.
 - 게시물 URL & 숫자 게시물 ID를 한 실행에서 함께 사용.
 - 사용자 아이디나 프로필 URL로 계정이 게시한 모든 아티클 조회.
@@ -83,8 +83,16 @@ Output 탭을 열면 `Articles`가 나옵니다. `Results`에서는 결과 행�
 
 ```json
 {
-  "markdown": "# Article title\n\nPlain Article text",
-  "contents": [{ "type": "paragraph", "text": "Plain Article text" }]
+  "markdown": "# Article title\n\nPlain **Article** text",
+  "bodyMarkdown": "Plain **Article** text",
+  "bodyText": "Plain Article text",
+  "contents": [
+    {
+      "type": "paragraph",
+      "text": "Plain Article text",
+      "inlineStyleRanges": [{ "offset": 6, "length": 7, "style": "Bold" }]
+    }
+  ]
 }
 ```
 

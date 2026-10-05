@@ -31,7 +31,7 @@ de la plateforme à part. Vous n'avez besoin ni de clé API X ni de connexion.
 
 ## Données et format des Articles
 
-- Du Markdown qui garde les blocs et les passages en gras ou en italique.
+- Du Markdown avec titres, listes, gras, italique, liens et images, sans HTML.
 - Des blocs `contents` qui gardent la mise en forme d'origine.
 - Des URL de posts et des ID de post numériques dans le même run.
 - Tous les Articles publiés par un compte, à partir de son nom d'utilisateur ou
@@ -87,8 +87,16 @@ en direct. Une ligne d'Article contient ces champs :
 
 ```json
 {
-  "markdown": "# Article title\n\nPlain Article text",
-  "contents": [{ "type": "paragraph", "text": "Plain Article text" }]
+  "markdown": "# Article title\n\nPlain **Article** text",
+  "bodyMarkdown": "Plain **Article** text",
+  "bodyText": "Plain Article text",
+  "contents": [
+    {
+      "type": "paragraph",
+      "text": "Plain Article text",
+      "inlineStyleRanges": [{ "offset": 6, "length": 7, "style": "Bold" }]
+    }
+  ]
 }
 ```
 

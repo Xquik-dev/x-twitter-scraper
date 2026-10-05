@@ -30,7 +30,7 @@ della piattaforma. Non ti servono una chiave API X né il login.
 
 ## Dati & formato degli articoli
 
-- Markdown che conserva blocchi, grassetto & corsivo.
+- Markdown con titoli, elenchi, grassetto, corsivo, link & immagini, senza HTML.
 - Blocchi `contents` che mantengono la formattazione originale.
 - URL di post & ID numerici dei post nella stessa esecuzione.
 - Ogni articolo pubblicato da un account, dal suo nome utente o dall'URL del
@@ -87,8 +87,16 @@ articolo include questi campi:
 
 ```json
 {
-  "markdown": "# Article title\n\nPlain Article text",
-  "contents": [{ "type": "paragraph", "text": "Plain Article text" }]
+  "markdown": "# Article title\n\nPlain **Article** text",
+  "bodyMarkdown": "Plain **Article** text",
+  "bodyText": "Plain Article text",
+  "contents": [
+    {
+      "type": "paragraph",
+      "text": "Plain Article text",
+      "inlineStyleRanges": [{ "offset": 6, "length": 7, "style": "Bold" }]
+    }
+  ]
 }
 ```
 

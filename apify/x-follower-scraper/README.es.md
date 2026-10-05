@@ -181,6 +181,10 @@ perfil completo. Una cuenta sin afiliados no devuelve filas.
 Usa `subscriptions` para los creadores a los que se suscribe una cuenta. Una
 cuenta que oculta sus suscripciones no devuelve filas.
 
+Usa `similar` para las cuentas que X indica como similares a una cuenta. Cada
+fila es un perfil completo. X indica pocas cuentas y puede cambiarlas entre
+ejecuciones.
+
 La misma entrada también acepta `username`, `usernames` y `user_names` como
 alias.
 
