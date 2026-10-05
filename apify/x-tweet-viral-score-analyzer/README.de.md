@@ -378,6 +378,8 @@ ab.
 
 ## FAQ & Support
 
+Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
+
 ### Brauche ich einen KI-Account, einen X-API-Schlüssel oder einen Login?
 
 Nein. X Tweet Viral Score Analyzer von Xquik enthält die KI-Kosten im Preis. Du
@@ -399,14 +401,15 @@ bis 255 Kategorien. Score-Fragen brauchen mindestens 2 geordnete Stufen. Der
 Viral Score braucht alle 8 Standardfragen. Eigene Fragen lassen ihn daher auf
 `null`.
 
-### Warum kam ein Datensatz mit `analysis.status` `failed` oder `skipped` zurück?
+### Warum hat ein Datensatz eine fehlgeschlagene oder übersprungene Analyse?
 
-Der Actor hat den Post gesammelt & geliefert, aber die KI-Analyse lief nicht zu
-Ende. `analysis.reason` nennt die Ursache. `context_limit` bedeutet, dass dein
-Kontext & deine Ziele keinen Platz für den Post lassen. `service_unavailable`
-bedeutet, dass der Analysedienst kurz nicht erreichbar war. Diese Datensätze
-kosten keine Ergebnisgebühr & bekommen keinen Score. Kürze `analysis.context`
-oder starte einen neuen Run für die betroffenen IDs.
+`analysis.status` ist `failed` oder `skipped`. Der Actor hat den Post gesammelt
+& geliefert, aber die KI-Analyse lief nicht zu Ende. `analysis.reason` nennt die
+Ursache. `context_limit` bedeutet, dass dein Kontext & deine Ziele keinen Platz
+für den Post lassen. `service_unavailable` bedeutet, dass der Analysedienst kurz
+nicht erreichbar war. Diese Datensätze kosten keine Ergebnisgebühr & bekommen
+keinen Score. Kürze `analysis.context` oder starte einen neuen Run für die
+betroffenen IDs.
 
 Der Actor analysiert auch einen Post, der länger als `maxContextBytes` ist. Er
 kürzt zuerst zitierte & beantwortete Posts, dann den Post selbst.

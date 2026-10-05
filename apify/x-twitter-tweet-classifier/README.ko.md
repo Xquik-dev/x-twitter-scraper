@@ -307,6 +307,8 @@ Apify가 따로 청구합니다. Pricing 탭에서 확인할 수 있습니다.
 
 ## 자주 묻는 질문 & 지원
 
+자주 묻는 질문에 먼저 답하고, 이어서 도움받을 곳을 안내합니다.
+
 ### AI 계정, X API 키나 로그인이 필요한가요?
 
 아니요. Xquik의 X Tweet Classifier는 가격에 AI 비용이 포함되어 있습니다. AI
@@ -317,13 +319,13 @@ Apify가 따로 청구합니다. Pricing 탭에서 확인할 수 있습니다.
 네. 모든 답변에는 질문에 지정한 `version`이 저장됩니다. 시간이 지나며 질문을
 다듬어도 어떤 문구로 나온 결과인지 구분할 수 있습니다.
 
-### `analysis.status`가 `failed`나 `skipped`인 행은 왜 생기나요?
+### 분석이 실패했거나 건너뛴 행은 왜 나오나요?
 
-Actor가 게시물을 수집해 전달했지만 AI 분석이 끝나지 않은 경우입니다.
-`analysis.reason`에 원인이 나옵니다. `context_limit`은 맥락 & 대상이 길어
-게시물이 들어갈 자리가 없다는 뜻입니다. `service_unavailable`은 분석 서비스를
-잠시 쓸 수 없었다는 뜻입니다. 이런 행에는 결과 요금이 없습니다.
-`analysis.context`를 줄이거나 해당 ID를 다시 실행하세요.
+`analysis.status`가 `failed` 또는 `skipped`입니다. Actor가 게시물을 수집해
+전달했지만 AI 분석이 끝나지 않았습니다. `analysis.reason`에 원인이 나옵니다.
+`context_limit`은 맥락 & 대상이 길어 게시물이 들어갈 자리가 없다는 뜻입니다.
+`service_unavailable`은 분석 서비스를 잠시 쓸 수 없었다는 뜻입니다. 이런 행에는
+결과 요금이 없습니다. `analysis.context`를 줄이거나 해당 ID를 다시 실행하세요.
 
 게시물이 `maxContextBytes`보다 길어도 Actor는 분석합니다. 인용한 게시물 & 답글
 대상 게시물을 먼저 자르고, 그다음 게시물 본문을 자릅니다. 이때

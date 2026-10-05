@@ -104,7 +104,7 @@ Analyzer'ı bunlardan 4'ünü her gönderinin herkese açık sayılarına uygula
 
 | Sayı            | Ağırlık |
 | --------------- | ------- |
-| Beğeni          | 0.5     |
+| Beğeni          | 0,5     |
 | Yanıt           | 5       |
 | Yeniden gönderi | 1       |
 | Alıntı          | 5       |
@@ -375,6 +375,8 @@ Kalan görevler Actor sayfasında daha çok konuyu ve marka hesabını kapsar.
 
 ## SSS ve destek
 
+Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
+
 ### Yapay zeka hesabı, X API anahtarı veya giriş gerekir mi?
 
 Hayır. Xquik'in X Tweet Viral Score Analyzer'ı yapay zeka maliyetlerini
@@ -395,14 +397,14 @@ ile 255 arasında kategori kabul eder. Puan sorularında en az 2 sıralı düzey
 olmalı. Viral Score varsayılan 8 sorunun hepsine ihtiyaç duyar, bu yüzden özel
 sorularda `null` kalır.
 
-### Bir satır neden `analysis.status` değeri `failed` veya `skipped` olarak döndü?
+### Bir satır neden başarısız veya atlanan bir analizle döndü?
 
-Actor gönderiyi topladı ve teslim etti, ama yapay zeka analizi tamamlanmadı.
-`analysis.reason` nedeni belirtir. `context_limit`, bağlamının ve hedeflerinin
-gönderiye yer bırakmadığı anlamına gelir. `service_unavailable`, analiz
-hizmetine kısa bir süre erişilemediği anlamına gelir. Bu satırların sonuç ücreti
-ve puanı yok. `analysis.context` alanını kısalt ya da etkilenen ID'leri yeniden
-çalıştır.
+`analysis.status` değeri `failed` veya `skipped` olur. Actor gönderiyi topladı
+ve teslim etti, ama yapay zeka analizi tamamlanmadı. `analysis.reason` nedeni
+belirtir. `context_limit`, bağlamının ve hedeflerinin gönderiye yer bırakmadığı
+anlamına gelir. `service_unavailable`, analiz hizmetine kısa bir süre
+erişilemediği anlamına gelir. Bu satırların sonuç ücreti ve puanı yok.
+`analysis.context` alanını kısalt ya da etkilenen ID'leri yeniden çalıştır.
 
 Actor, `maxContextBytes` değerinden uzun bir gönderiyi de analiz eder. Önce
 alıntılanan ve yanıtlanan gönderileri, sonra gönderinin kendisini kısaltır. Bu

@@ -175,7 +175,7 @@ Apify가 실행을 다시 시작해도 전달된 행 & 진행 상황은 유지�
 `message`, `retryable` & `nextAction`을 따로 담아 나열합니다. 원인은
 `target_not_found`, `target_failed`, `pagination_safety_limit` &
 `deadline_reached`입니다. 찾을 수 없는 대상은 다른 원인으로 실행이 멈췄을 때만
-목록에 들어갑니다. 원인 중 하나라도 `retryable`이면 실행도 `retryable`입니다.
+목록에 들어갑니다. 원인 중 하나라도 재시도할 수 있으면 실행도 `retryable`입니다.
 
 ## 관련 Xquik Actor
 

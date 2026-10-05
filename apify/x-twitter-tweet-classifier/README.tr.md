@@ -335,6 +335,8 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 ## SSS ve destek
 
+Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
+
 ### Yapay zeka hesabı, X API anahtarı veya giriş gerekir mi?
 
 Hayır. Xquik'in X Tweet Classifier'ı yapay zeka maliyetlerini fiyatına katar.
@@ -346,14 +348,14 @@ kimlik bilgisi de gerekmez.
 Evet. Her cevap, sorusuna verdiğin `version` değerini saklar. Soruları zamanla
 iyileştirdiğinde hangi ifadenin hangi sonucu verdiğini ayırt edebilirsin.
 
-### Bir satır neden `analysis.status` değeri `failed` veya `skipped` olarak döndü?
+### Bir satır neden başarısız veya atlanan bir analizle döndü?
 
-Actor gönderiyi topladı ve teslim etti, ama yapay zeka analizi tamamlanmadı.
-`analysis.reason` nedeni belirtir. `context_limit`, bağlamının ve hedeflerinin
-gönderiye yer bırakmadığı anlamına gelir. `service_unavailable`, analiz
-hizmetine kısa bir süre erişilemediği anlamına gelir. Bu satırların sonuç ücreti
-yok. `analysis.context` alanını kısalt ya da etkilenen ID'leri yeniden
-çalıştır.
+`analysis.status` değeri `failed` veya `skipped` olur. Actor gönderiyi topladı
+ve teslim etti, ama yapay zeka analizi tamamlanmadı. `analysis.reason` nedeni
+belirtir. `context_limit`, bağlamının ve hedeflerinin gönderiye yer bırakmadığı
+anlamına gelir. `service_unavailable`, analiz hizmetine kısa bir süre
+erişilemediği anlamına gelir. Bu satırların sonuç ücreti yok. `analysis.context`
+alanını kısalt ya da etkilenen ID'leri yeniden çalıştır.
 
 Actor, `maxContextBytes` değerinden uzun bir gönderiyi de analiz eder. Önce
 alıntılanan ve yanıtlanan gönderileri, sonra gönderinin kendisini kısaltır. Bu

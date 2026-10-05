@@ -209,6 +209,8 @@ XquikのX (Twitter) Brand Monitoringは、分析済みポスト1件あたり$0.0
 
 ## よくある質問とサポート
 
+よくある質問に答えたあと、サポートを受けられる場所を案内します。
+
 ### AIのアカウント、X APIキー、ログインは必要ですか？
 
 いいえ。XquikのX (Twitter) Brand Monitoringは、AIの費用を料金に含めています。AIのアカウント、トークン、キーは不要です。X APIキー、ログイン、認証情報も必要ありません。
@@ -217,9 +219,9 @@ XquikのX (Twitter) Brand Monitoringは、分析済みポスト1件あたり$0.0
 
 はい。カスタムの`analysis.questions`がデフォルトの質問に置き換わります。`choice`、`score`、`probability`の質問を1個から8個送ってください。choiceの質問には2個から255個のカテゴリーを指定できます。scoreの質問には、順序のあるレベルが2つ以上必要です。比較したい実行どうしでは、同じ質問を使ってください。
 
-### `analysis.status`が`failed`や`skipped`の行が返るのはなぜですか？
+### 分析が失敗またはスキップされた行が返るのはなぜですか？
 
-Actorはポストを収集して配信しましたが、AIの分析が完了しませんでした。`analysis.reason`が原因を示します。`context_limit`は、コンテキストと対象でいっぱいになり、ポストを入れる余地がないことを示します。`service_unavailable`は、分析サービスが一時的に使えなかったことを示します。これらの行に結果料金はかかりません。`analysis.context`を短くするか、該当するIDを再実行してください。
+`analysis.status`は`failed`か`skipped`です。Actorはポストを収集して配信しましたが、AIの分析が完了しませんでした。`analysis.reason`が原因を示します。`context_limit`は、コンテキストと対象でいっぱいになり、ポストを入れる余地がないことを示します。`service_unavailable`は、分析サービスが一時的に使えなかったことを示します。これらの行に結果料金はかかりません。`analysis.context`を短くするか、該当するIDを再実行してください。
 
 `maxContextBytes`より長いポストも、Actorは分析します。まず引用元と返信先のポストを削り、次にポスト本体を削ります。このとき`analysis.contextAvailability.postText`は`truncated`になります。より多くのテキストを残すには、`maxContextBytes`を最大64,000まで上げてください。
 

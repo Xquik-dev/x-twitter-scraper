@@ -157,7 +157,7 @@ Chaque lieu d'emploi donne 1 ligne avec l'`id` que `locationId` accepte :
 ## Combien coûte le scraping d'offres d'emploi X ?
 
 Le prix est de $0.00015 par ligne livrée sur chaque plan Apify. Apify facture
-l'usage de votre plateforme à part.
+votre usage de la plateforme à part.
 
 - Une facturation par ligne de données livrée. Les diagnostics sont gratuits
   dans `diagnostics`.

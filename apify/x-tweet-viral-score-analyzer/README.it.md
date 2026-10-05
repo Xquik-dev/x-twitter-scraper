@@ -17,10 +17,10 @@
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo, con
 i dati X più completi. X Tweet Viral Score Analyzer di Xquik valuta ogni post
-(tweet). Aggiunge una stima del Viral Score & un verdetto. La maggior parte degli
-altri Actor Apify fa pagare prima di filtrare o deduplicare. Xquik fa pagare
-solo i risultati consegnati, unici e conformi ai filtri. I costi AI sono inclusi
-nel prezzo per post. Non ti servono account AI, token o chiavi.
+(tweet). Aggiunge una stima del Viral Score & un verdetto. La maggior parte
+degli altri Actor Apify fa pagare prima di filtrare o deduplicare. Xquik fa
+pagare solo i risultati consegnati, unici e conformi ai filtri. I costi AI sono
+inclusi nel prezzo per post. Non ti servono account AI, token o chiavi.
 
 Scopri perché i post si diffondono o falliscono & conserva i dati originali del
 post. **X Tweet Viral Score Analyzer with AI** di Xquik raccoglie i post
@@ -103,7 +103,7 @@ applica 4 ai conteggi pubblici di ogni post:
 
 | Conteggio | Peso |
 | --------- | ---- |
-| Mi piace  | 0.5  |
+| Mi piace  | 0,5  |
 | Risposta  | 5    |
 | Repost    | 1    |
 | Citazione | 5    |
@@ -373,6 +373,8 @@ brand.
 
 ## FAQ & supporto
 
+Le risposte alle domande più comuni, poi dove trovare assistenza.
+
 ### Serve un account AI, una chiave API X o il login?
 
 No. X Tweet Viral Score Analyzer di Xquik include i costi AI nel prezzo. Non ti
@@ -389,19 +391,19 @@ fidarti.
 ### Posso usare le mie domande?
 
 Sì. Le `analysis.questions` personalizzate sostituiscono quelle predefinite.
-Invia da 1 a 8 domande `choice`, `score` o `probability`. Le domande `choice`
-accettano da 2 a 255 categorie. Le domande `score` richiedono almeno 2 livelli
-ordinati. Il Viral Score richiede tutte le 8 domande predefinite, quindi con
-domande personalizzate resta `null`.
+Invia da 1 a 8 domande `choice`, `score` o `probability`. Le domande a scelta
+accettano da 2 a 255 categorie. Le domande a punteggio richiedono almeno 2
+livelli ordinati. Il Viral Score richiede tutte le 8 domande predefinite, quindi
+con domande personalizzate resta `null`.
 
-### Perché una riga ha `analysis.status` `failed` o `skipped`?
+### Perché una riga è tornata con un'analisi fallita o saltata?
 
-L'Actor ha raccolto & consegnato il post, ma l'analisi AI non si è completata.
-`analysis.reason` indica la causa. `context_limit` significa che contesto &
-target non lasciano spazio al post. `service_unavailable` significa che il
-servizio di analisi era momentaneamente non disponibile. Queste righe non hanno
-addebiti sul risultato né punteggio. Accorcia `analysis.context` o riavvia gli
-ID interessati.
+`analysis.status` vale `failed` o `skipped`. L'Actor ha raccolto & consegnato il
+post, ma l'analisi AI non si è completata. `analysis.reason` indica la causa.
+`context_limit` significa che contesto & target non lasciano spazio al post.
+`service_unavailable` significa che il servizio di analisi era momentaneamente
+non disponibile. Queste righe non hanno addebiti sul risultato né punteggio.
+Accorcia `analysis.context` o riavvia gli ID interessati.
 
 L'Actor analizza comunque un post più lungo di `maxContextBytes`. Taglia prima
 i post citati & quelli a cui risponde, poi il post stesso.
