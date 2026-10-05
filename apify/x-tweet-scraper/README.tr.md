@@ -54,9 +54,9 @@ gönderi ID'si ve arama sorgusu kabul eder. 50'den fazla filtre sunar.
 
 ### Kullanım örnekleri
 
-- Araştırma, zenginleştirme, analiz & yapay zekâ eğitimini tweet başına daha çok
-  alanla besle. Medyan satırımızda 2026-09-29'da 63 alan vardı. Bu, 11 başka
-  Actor'ın medyanının 2 katı.
+- Araştırma, zenginleştirme, analiz ve yapay zeka eğitimini gönderi başına daha
+  çok alanla besle. Medyan zengin satırımızda 2026-09-29'da 63 alan vardı. Bu,
+  diğer 11 Actor'ın medyanının 2 katı.
 - Gönderilerdeki marka duygu durumunu takip et.
 - Rakip gönderilerini ve sektör terimlerini izle.
 - Herkese açık konuşmalarda potansiyel müşteri bul.
@@ -65,51 +65,51 @@ gönderi ID'si ve arama sorgusu kabul eder. 50'den fazla filtre sunar.
 
 ### X Tweet Scraper hangi verileri çıkarabilir?
 
-| Alan                   | Açıklama                                                                    |
-| ---------------------- | --------------------------------------------------------------------------- |
-| `id`                   | Gönderi ID'si                                                               |
-| `text`                 | Gönderinin tam metni (25 bin karaktere kadar Note Tweet'ler dahil)          |
-| `createdAt`            | X'in kendi zaman damgası metni                                              |
-| `likeCount`            | Beğeni sayısı                                                               |
-| `retweetCount`         | Yeniden gönderi sayısı                                                      |
-| `replyCount`           | Yanıt sayısı                                                                |
-| `quoteCount`           | Alıntı sayısı                                                               |
-| `viewCount`            | Görüntülenme sayısı                                                         |
-| `bookmarkCount`        | Yer işareti sayısı                                                          |
-| `lang`                 | Gönderi dili                                                                |
-| `url`                  | Gönderinin doğrudan bağlantısı                                              |
-| `tweetUrl`             | Düz çıktıdaki gönderi URL'si takma adı                                      |
-| `twitterUrl`           | Düz çıktıdaki twitter.com biçimli URL                                       |
-| `author`               | Erişilebilen yazar alanları (kullanıcı adı, biyografi, web sitesi, sayılar) |
-| `authorUsername`       | Düz çıktıdaki yazar kullanıcı adı                                           |
-| `authorFollowers`      | Düz çıktıdaki yazar takipçi sayısı                                          |
-| `authorUrl`            | Varsa düz çıktıdaki yazar web sitesi                                        |
-| `authorDescription`    | Düz çıktıdaki yazar biyografisi                                             |
-| `authorCoverPicture`   | Düz çıktıdaki yazar kapak görseli URL'si                                    |
-| `authorPinnedTweetIds` | Düz çıktıdaki yazarın sabitlenmiş gönderi ID'leri                           |
-| `media`                | Ekli görseller, videolar, GIF'ler                                           |
-| `mediaUrls`            | Düz çıktıdaki medya URL'leri                                                |
-| `imageUrls`            | Düz çıktıdaki görsel URL'leri                                               |
-| `videoUrls`            | Düz çıktıdaki video URL'leri                                                |
-| `entities`             | Hashtag'ler, URL'ler, bahsetmeler ve video zaman damgaları                  |
-| `displayTextRange`     | Varsa X'in görünen metin aralığı                                            |
-| `contentDisclosure`    | Varsa içerik beyanı metadata'sı                                             |
-| `conversationControl`  | Yanıt kuralı ve herkese açık konuşma sahibi                                 |
-| `reactionContext`      | Bir tepkinin işaret ettiği herkese açık gönderi ve kullanıcı                |
-| `limitedActions`       | Herkese açık etkileşim kısıtlamaları ve uyarıları                           |
-| `isLimitedReply`       | Yanıtların kısıtlı olup olmadığı                                            |
-| `isNoteTweet`          | Bunun bir Note Tweet (uzun gönderi) olup olmadığı                           |
-| `isQuoteStatus`        | Bu gönderinin başka bir gönderiyi alıntılayıp alıntılamadığı                |
-| `isRetweet`            | Bu satırın yeniden gönderi olup olmadığı, orijinali ekli                    |
-| `isPinned`             | Yazarın bu gönderiyi sabitleyip sabitlemediği, düz satırlarda               |
-| `isReply`              | Bu gönderinin bir yanıt olup olmadığı                                       |
-| `quoted_tweet`         | Alıntılanan gönderi nesnesi (alıntıysa)                                     |
-| `conversationId`       | Gönderi dizisi/konuşma ID'si                                                |
-| `resultType`           | Zengin satırlar, etkileşim satırları ve tanılamalar için satır türü         |
-| `sourceTweetId`        | Makale ve etkileşim modları için kaynak gönderi ID'si                       |
-| `article`              | `mode: "article"` içinde yapılandırılmış makale verisi                      |
-| `translation`          | `mode: "translation"` içinde X'in çevirisi                                  |
-| `embed`                | `mode: "embed"` içinde gömme HTML'i ve bağlantı                             |
+| Alan                   | Açıklama                                                            |
+| ---------------------- | ------------------------------------------------------------------- |
+| `id`                   | Gönderi ID'si                                                       |
+| `text`                 | Gönderinin tam metni (25 bin karaktere kadar Note Tweet'ler dahil)  |
+| `createdAt`            | X'in kendi zaman damgası metni                                      |
+| `likeCount`            | Beğeni sayısı                                                       |
+| `retweetCount`         | Yeniden gönderi sayısı                                              |
+| `replyCount`           | Yanıt sayısı                                                        |
+| `quoteCount`           | Alıntı sayısı                                                       |
+| `viewCount`            | Görüntülenme sayısı                                                 |
+| `bookmarkCount`        | Yer işareti sayısı                                                  |
+| `lang`                 | Gönderi dili                                                        |
+| `url`                  | Gönderinin doğrudan bağlantısı                                      |
+| `tweetUrl`             | Düz çıktıdaki gönderi URL'si takma adı                              |
+| `twitterUrl`           | Düz çıktıdaki `twitter.com` URL'si                                  |
+| `author`               | Yazar alanları: kullanıcı adı, biyografi, web sitesi, sayılar       |
+| `authorUsername`       | Düz çıktıdaki yazar kullanıcı adı                                   |
+| `authorFollowers`      | Düz çıktıdaki yazar takipçi sayısı                                  |
+| `authorUrl`            | Varsa düz çıktıdaki yazar web sitesi                                |
+| `authorDescription`    | Düz çıktıdaki yazar biyografisi                                     |
+| `authorCoverPicture`   | Düz çıktıdaki yazar kapak görseli URL'si                            |
+| `authorPinnedTweetIds` | Düz çıktıdaki yazarın sabitlenmiş gönderi ID'leri                   |
+| `media`                | Ekli görseller, videolar, GIF'ler                                   |
+| `mediaUrls`            | Düz çıktıdaki medya URL'leri                                        |
+| `imageUrls`            | Düz çıktıdaki görsel URL'leri                                       |
+| `videoUrls`            | Düz çıktıdaki video URL'leri                                        |
+| `entities`             | Hashtag'ler, URL'ler, bahsetmeler ve video zaman damgaları          |
+| `displayTextRange`     | Varsa X'in görünen metin aralığı                                    |
+| `contentDisclosure`    | Varsa içerik beyanı metadata'sı                                     |
+| `conversationControl`  | Yanıt kuralı ve herkese açık konuşma sahibi                         |
+| `reactionContext`      | Bir tepkinin işaret ettiği herkese açık gönderi ve kullanıcı        |
+| `limitedActions`       | Herkese açık etkileşim kısıtlamaları ve uyarıları                   |
+| `isLimitedReply`       | Yanıtların kısıtlı olup olmadığı                                    |
+| `isNoteTweet`          | Bunun bir Note Tweet (uzun gönderi) olup olmadığı                   |
+| `isQuoteStatus`        | Bu gönderinin başka bir gönderiyi alıntılayıp alıntılamadığı        |
+| `isRetweet`            | Bu satırın yeniden gönderi olup olmadığı, orijinali ekli            |
+| `isPinned`             | Yazarın bu gönderiyi sabitleyip sabitlemediği, düz satırlarda       |
+| `isReply`              | Bu gönderinin bir yanıt olup olmadığı                               |
+| `quoted_tweet`         | Alıntılanan gönderi nesnesi (alıntıysa)                             |
+| `conversationId`       | Gönderi dizisi/konuşma ID'si                                        |
+| `resultType`           | Zengin satırlar, etkileşim satırları ve tanılamalar için satır türü |
+| `sourceTweetId`        | Makale ve etkileşim modları için kaynak gönderi ID'si               |
+| `article`              | `mode: "article"` içinde yapılandırılmış makale verisi              |
+| `translation`          | `mode: "translation"` içinde X'in çevirisi                          |
+| `embed`                | `mode: "embed"` içinde gömme HTML'i ve bağlantı                     |
 
 İsteğe bağlı gönderi metadata'sında `authorUnavailable`, `card`, `communityId`,
 `communityNote`, `edit`, `exclusiveContent`, `noteTweet` ve `postCta` bulunur.
@@ -117,6 +117,10 @@ gönderi ID'si ve arama sorgusu kabul eder. 50'den fazla filtre sunar.
 bağlamı tutar. `previousCounts` düzenleme öncesi etkileşimi tutar. `tombstone`
 görünürlük uyarılarını tutar. `unmentionedUserIds` konuşmadan ayrılan
 kullanıcıları listeler. Alanların tam listesi için OpenAPI'ye bak.
+
+Satır başına en çok veri için `outputVariant: "rich"` ayarla. Zengin satırlar
+sona `hasCommunityNotes`, `quotedTweetPermalink`, `unavailableAuthorId` ve medya
+`sourceUser` alanlarını ekler. Legacy satırlar değişmeden kalır.
 
 İç içe `author` nesneleri herkese açık profil alanlarını taşır. Bu alanlar
 kimlik, sayılar, onay durumu, kullanılabilirlik, profesyonel veriler ve profil
@@ -139,6 +143,8 @@ görüntüleyen bayraklarını kaldırır. Ham çıktı da bunları atar.
 
 ## X Tweet Scraper ile tweet verisi nasıl kazınır?
 
+Aşağıdaki her örnek eksiksiz bir girdidir. Verine uyanı seç.
+
 Apify Console'da şu adımları izle:
 
 1. Bir [görev örneği](#görev-örnekleri) ya da Input sekmesini aç.
@@ -156,7 +162,7 @@ Gönderi, profil, arama veya Liste URL'lerini karışık yapıştırabilirsin:
 ```json
 {
   "startUrls": [
-    { "url": "https://x.com/elonmusk/status/1846987139428634858" },
+    { "url": "https://x.com/jack/status/20" },
     { "url": "https://x.com/nasa" },
     { "url": "https://x.com/search?q=AI%20lang%3Aen" },
     { "url": "https://x.com/i/lists/1748648376080666720" }
@@ -215,12 +221,17 @@ yeniden gönderileri dışarıda bırakır. Onları tutmak için
 ### Gönderileri ID ile getir
 
 ```json
-{ "tweetIds": ["1846987139428634858", "1858743654778892784"], "maxItems": 100 }
+{ "tweetIds": ["20", "2082577277246972300"], "maxItems": 100 }
 ```
 
 Sonuçlar girdi sırasını korur, tekrarları atar ve yalnızca istediğin gönderileri
 içerir. Bu sorgu `tweetId`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`,
 `tweetUrls` ve `postUrls` alanlarını da kabul eder.
+
+Tüm ID'lerini 1 çalıştırmaya koy. Her çalıştırma Apify'a aynı başlatma
+maliyetini öder. Çalıştırma başına 1 ID ile Apify kullanımı her gönderiye
+yaklaşık $0.00008 ekler. 1 çalıştırmada 188 ID ile yaklaşık $0.000005 ekler.
+5'ten az ID içeren bir çalıştırma bu ipucuyla biter.
 
 ### Etkileşim, gönderi dizisi ve makale modları
 
@@ -228,14 +239,21 @@ Girdideki diğer alanlardan bağımsız olarak tek bir modu seçmek için `mode`
 ayarla:
 
 ```json
-{ "mode": "replies", "replyTweetIds": ["1846987139428634858"], "maxItems": 100 }
+{ "mode": "replies", "replyTweetIds": ["2082577277246972300"], "maxItems": 100 }
 ```
 
 Gönderi ve arama modları `tweet`, `tweets` ve `search`. Profil modları
-`profileTweets`, `profileReplies`, `profileMedia` ve `profileLikes`.
-`listTweets` Liste gönderilerini okur. `article` ise bir gönderideki X
-makalesini okur. Tek bir gönderi için modlar `replies`, `quotes`, `thread`,
-`retweeters`, `favoriters`, `translation` ve `embed`.
+`profileTweets`, `profileReplies`, `profileMedia`, `profileLikes` ve
+`profileMentions`. `listTweets` Liste gönderilerini okur. `article` ise bir
+gönderideki X makalesini okur. Tek bir gönderi için modlar `replies`, `quotes`,
+`thread`, `retweeters`, `favoriters`, `translation` ve `embed`.
+
+`profileMentions`, her kullanıcı adından bahseden gönderileri en yeniden
+başlayarak döndürür:
+
+```json
+{ "mode": "profileMentions", "twitterHandles": ["nasa"], "maxItems": 100 }
+```
 
 `profileTweets`, X'teki profilin Gönderiler sekmesini izler. Hesabın
 gönderilerini, yeniden gönderilerini ve kendi gönderilerine verdiği yanıtları
@@ -457,34 +475,70 @@ Xquik'in X Tweet Scraper'ı, gönderi kazıyan diğer 11 Actor'ı maliyette ve h
 geride bıraktı. Medyan satırında 63 alan vardı. Bu, diğerlerinin medyanının 2
 katı.
 
-| Actor                                                             | İşe yarar tweet | İşe yarar tweet başına maliyet | Saniyede işe yarar tweet | Satır başına alan | Herkese açık çalıştırma                                                   |
-| ----------------------------------------------------------------- | --------------: | -----------------------------: | -----------------------: | ----------------: | ------------------------------------------------------------------------- |
-| xquik/x-tweet-scraper                                             |             890 |                      $0.000175 |                     39.2 |                63 | [Çalıştırmayı gör](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX) |
-| xquik/x-tweet-scraper                                             |             883 |                      $0.000176 |                     25.2 |                63 | [Çalıştırmayı gör](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf) |
-| xquik/x-tweet-scraper                                             |             882 |                      $0.000177 |                     25.7 |                63 | [Çalıştırmayı gör](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba) |
-| xquik/x-tweet-scraper                                             |             877 |                      $0.000178 |                     26.9 |                63 | [Çalıştırmayı gör](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W) |
-| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |             813 |                      $0.000185 |                     10.5 |                36 | [Çalıştırmayı gör](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
-| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |             805 |                      $0.000187 |                     10.6 |                36 | [Çalıştırmayı gör](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
-| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |             805 |                      $0.000187 |                     10.7 |                36 | [Çalıştırmayı gör](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
-| kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest |             880 |                      $0.000250 |                      9.1 |                46 | [Çalıştırmayı gör](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2) |
-| scraper_one/x-posts-search                                        |             804 |                      $0.000314 |                      3.3 |                14 | [Çalıştırmayı gör](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0) |
-| danek/twitter-scraper                                             |             807 |                      $0.000347 |                      5.0 |                27 | [Çalıştırmayı gör](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W) |
-| tweetapi/twitter-x-search-scraper                                 |             337 |                      $0.000374 |                      2.6 |                28 | [Çalıştırmayı gör](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb) |
-| api-ninja/x-twitter-advanced-search                               |             837 |                      $0.000430 |                      7.4 |                28 | [Çalıştırmayı gör](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib) |
-| apidojo/twitter-scraper-lite                                      |             251 |                      $0.000494 |                     12.9 |                54 | [Çalıştırmayı gör](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta) |
-| apidojo/tweet-scraper                                             |             481 |                      $0.000832 |                      7.8 |                55 | [Çalıştırmayı gör](https://console.apify.com/view/runs/PydoBgS1YRblg29bB) |
-| xtdata/twitter-x-scraper                                          |           1.378 |                      $0.001168 |                     11.9 |                67 | [Çalıştırmayı gör](https://console.apify.com/view/runs/U91dRXEvKvqu41aop) |
-| seemuapps/x-tweet-scraper                                         |             805 |                      $0.001242 |                      6.9 |                24 | [Çalıştırmayı gör](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
-| maximedupre/twitter-scraper                                       |              46 |                      $0.002846 |                      0.3 |                31 | [Çalıştırmayı gör](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
+- `xquik/x-tweet-scraper`: 890 işe yarar gönderi, işe yarar gönderi başına
+  $0.000175, saniyede 39,2 ve satır başına 63 alan.
+  [Çalıştırmayı gör](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
+- `xquik/x-tweet-scraper`: 883 işe yarar gönderi, işe yarar gönderi başına
+  $0.000176, saniyede 25,2 ve satır başına 63 alan.
+  [Çalıştırmayı gör](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
+- `xquik/x-tweet-scraper`: 882 işe yarar gönderi, işe yarar gönderi başına
+  $0.000177, saniyede 25,7 ve satır başına 63 alan.
+  [Çalıştırmayı gör](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
+- `xquik/x-tweet-scraper`: 877 işe yarar gönderi, işe yarar gönderi başına
+  $0.000178, saniyede 26,9 ve satır başına 63 alan.
+  [Çalıştırmayı gör](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 813 işe yarar
+  gönderi, işe yarar gönderi başına $0.000185, saniyede 10,5 ve satır başına 36
+  alan.
+  [Çalıştırmayı gör](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 805 işe yarar
+  gönderi, işe yarar gönderi başına $0.000187, saniyede 10,6 ve satır başına 36
+  alan.
+  [Çalıştırmayı gör](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 805 işe yarar
+  gönderi, işe yarar gönderi başına $0.000187, saniyede 10,7 ve satır başına 36
+  alan.
+  [Çalıştırmayı gör](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
+- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest`: 880 işe
+  yarar gönderi, işe yarar gönderi başına $0.000250, saniyede 9,1 ve satır
+  başına 46 alan.
+  [Çalıştırmayı gör](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
+- `scraper_one/x-posts-search`: 804 işe yarar gönderi, işe yarar gönderi başına
+  $0.000314, saniyede 3,3 ve satır başına 14 alan.
+  [Çalıştırmayı gör](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
+- `danek/twitter-scraper`: 807 işe yarar gönderi, işe yarar gönderi başına
+  $0.000347, saniyede 5,0 ve satır başına 27 alan.
+  [Çalıştırmayı gör](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
+- `tweetapi/twitter-x-search-scraper`: 337 işe yarar gönderi, işe yarar gönderi
+  başına $0.000374, saniyede 2,6 ve satır başına 28 alan.
+  [Çalıştırmayı gör](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
+- `api-ninja/x-twitter-advanced-search`: 837 işe yarar gönderi, işe yarar
+  gönderi başına $0.000430, saniyede 7,4 ve satır başına 28 alan.
+  [Çalıştırmayı gör](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
+- `apidojo/twitter-scraper-lite`: 251 işe yarar gönderi, işe yarar gönderi
+  başına $0.000494, saniyede 12,9 ve satır başına 54 alan.
+  [Çalıştırmayı gör](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
+- `apidojo/tweet-scraper`: 481 işe yarar gönderi, işe yarar gönderi başına
+  $0.000832, saniyede 7,8 ve satır başına 55 alan.
+  [Çalıştırmayı gör](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
+- `xtdata/twitter-x-scraper`: 1.378 işe yarar gönderi, işe yarar gönderi başına
+  $0.001168, saniyede 11,9 ve satır başına 67 alan.
+  [Çalıştırmayı gör](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
+- `seemuapps/x-tweet-scraper`: 805 işe yarar gönderi, işe yarar gönderi başına
+  $0.001242, saniyede 6,9 ve satır başına 24 alan.
+  [Çalıştırmayı gör](https://console.apify.com/view/runs/FstursEw43TbcipYU)
+- `maximedupre/twitter-scraper`: 46 işe yarar gönderi, işe yarar gönderi başına
+  $0.002846, saniyede 0,3 ve satır başına 31 alan.
+  [Çalıştırmayı gör](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
 
 Her Actor aynı aramayı aynı filtrelerle yaptı. Diğer Actor'lar 2026-09-27'de
 çalıştı. Xquik'in çalıştırmaları 2026-09-29'da `outputVariant: "rich"` ile
-çalıştı. Tüm çalıştırmalar Bronze katmanındaydı. İşe yarar tweet; benzersiz,
-İngilizce, orijinal ve en az 10 beğenili bir gönderidir. Maliyet, müşterinin işe
-yarar tweet başına toplam harcamasıdır. Bizimkine müşterilerimizin ödediği Apify
-kullanımı dahil. Satır başına alan, boş olmayan alanların medyan sayısıdır, iç
-içe olanlar dahil. Bir liste 1 alan sayılır. Girdisini, günlüğünü & veri
-kümesini görmek için bir çalıştırmayı aç.
+çalıştı. Tüm çalıştırmalar Bronze katmanındaydı. İşe yarar gönderi benzersiz,
+İngilizce ve orijinaldir, en az 10 beğenisi vardır. Maliyet, müşterinin işe
+yarar gönderi başına toplam harcamasıdır. Bizimkine müşterilerimizin ödediği
+Apify kullanımı dahil. Satır başına alan, boş olmayan alanların medyan
+sayısıdır, iç içe olanlar dahil. Bir liste 1 alan sayılır. Girdisini, günlüğünü
+ve veri kümesini görmek için bir çalıştırmayı aç.
 
 ## Boş, kısmi ve durdurulan çalıştırmalar
 
@@ -521,9 +575,10 @@ başarıyla bitmesi teslimatı doğrular. Tüm verinin çekildiğini doğrulamaz
 Durum metni, durmanın her nedenini söyler. Hem bulunamayan bir hesap hem takılan
 bir arama varsa ikisini de yazar. `stopCauses` her nedeni kendi `message`,
 `retryable` ve `nextAction` alanlarıyla listeler. Nedenler şunlardır:
-`target_not_found`, `target_protected`, `search_unavailable`, `likes_hidden`,
-`target_failed`, `pagination_safety_limit`, `reply_reach` ve `deadline_reached`.
-Nedenlerden biri `retryable` ise çalıştırma da `retryable` olur.
+`target_not_found`, `target_suspended`, `target_protected`,
+`search_unavailable`, `likes_hidden`, `target_failed`,
+`pagination_safety_limit`, `reply_reach` ve `deadline_reached`. Nedenlerden biri
+yeniden denenebiliyorsa çalıştırma da `retryable` olur.
 
 ### Bulunamayan ve erişilemeyen hedefler
 
@@ -549,9 +604,9 @@ yönergesi kalır.
 
 Tanılama bu hedefleri `unavailableTargets` içinde listeler. Her kayıtta senin
 yazdığın haliyle `target`, bir `reason` ve bir `nextAction` bulunur. Neden
-`not_found`, `protected`, `search_unavailable` veya `likes_hidden` olur. Bir
-arama kaydında, kaldırman gereken operatör gibi bir `fix` de olabilir. Liste en
-fazla 100 kayıt tutar. Bu hedefleri girdinden çıkar.
+`not_found`, `suspended`, `protected`, `search_unavailable` veya `likes_hidden`
+olur. Bir arama kaydında, kaldırman gereken operatör gibi bir `fix` de olabilir.
+Liste en fazla 100 kayıt tutar. Bu hedefleri girdinden çıkar.
 
 ### Güvenlik ve süre sınırları
 
@@ -625,24 +680,33 @@ düşürmez ve ödediğin tutarı değiştirmez. Girdi formu yalnızca kanonik a
 listeler, böylece kısa kalır. Takma adlar JSON, API, SDK, otomasyon ve kayıtlı
 görev girdilerinde çalışır.
 
-| Zaten kullandığın alan                                                                                                                                                 | Xquik bunu şöyle okur                                                    |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`                                                                                             | `startUrls`                                                              |
-| tek metin olarak `profileUrl`                                                                                                                                          | `startUrls`                                                              |
-| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids` veya tek metin olarak `tweetId`                                                              | `tweetIds`                                                               |
-| `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`, `screenNames`, `profileTweets`                                                                 | `twitterHandles`                                                         |
-| tek metin olarak `username`, `handle`, `screenName`                                                                                                                    | `twitterHandles`                                                         |
-| `searchTerms`, `searchQueries`, `queries`, `search`, liste olarak veya her satırda 1 arama                                                                             | `searchTerms`                                                            |
-| `twitterContent`, `query`, `searchQuery`                                                                                                                               | `twitterContent`                                                         |
-| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
-| `sort`                                                                                                                                                                 | `queryType`                                                              |
-| `tweetLanguage`, `language`                                                                                                                                            | `lang`                                                                   |
-| `author`, `inReplyTo`, `mentioning`                                                                                                                                    | `from`, `to`, `@`                                                        |
-| `start`, `startDate`, `end`, `endDate`                                                                                                                                 | `since`, `until`                                                         |
-| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                                | `min_retweets`, `min_faves`, `min_replies`                               |
-| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                               | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
-| `geotaggedNear`, `withinRadius`                                                                                                                                        | `near`, `within`                                                         |
-| Google Search Scraper'daki `quickDateRange`, örneğin `d7`, `w2`, `m1` veya `y`                                                                                         | `since_time`, çalıştırmanın başlangıcından geriye sayılır                |
+Her satır önce zaten kullandığın alanları, sonra eşlendikleri alanı yazar:
+
+- `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`:
+  `startUrls`
+- tek metin olarak `profileUrl`: `startUrls`
+- `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids` veya
+  tek metin olarak `tweetId`: `tweetIds`
+- `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`,
+  `screenNames`, `profileTweets`: `twitterHandles`
+- tek metin olarak `username`, `handle`, `screenName`: `twitterHandles`
+- `searchTerms`, `searchQueries`, `queries`, `search`, liste olarak veya her
+  satırda 1 arama: `searchTerms`
+- `twitterContent`, `query`, `searchQuery`: `twitterContent`
+- `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`,
+  `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`,
+  `maxTweets`, `tweetsDesired`: `maxItems`
+- `sort`: `queryType`
+- `tweetLanguage`, `language`: `lang`
+- `author`, `inReplyTo`, `mentioning`: `from`, `to`, `@`
+- `start`, `startDate`, `end`, `endDate`: `since`, `until`
+- `minimumRetweets`, `minimumFavorites`, `minimumReplies`: `min_retweets`,
+  `min_faves`, `min_replies`
+- `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`: `filter:images`,
+  `filter:videos`, `filter:quote`, `filter:blue_verified`
+- `geotaggedNear`, `withinRadius`: `near`, `within`
+- Google Search Scraper'daki `quickDateRange`, örneğin `d7`, `w2`, `m1` veya
+  `y`: `since_time`, çalıştırmanın başlangıcından geriye sayılır
 
 Yapıştırdığın girdi şöyle davranır:
 
@@ -697,9 +761,9 @@ Aşağıdaki değerler yalnızca örnektir. Çalıştırmaların X'ten canlı ve
 
 ```json
 {
-  "id": "1846987139428634858",
-  "text": "The future of AI is...",
-  "createdAt": "Sun Mar 15 12:00:00 +0000 2026",
+  "id": "20",
+  "text": "just setting up my twttr",
+  "createdAt": "Tue Mar 21 20:50:14 +0000 2006",
   "retweetCount": 500,
   "replyCount": 120,
   "likeCount": 5000,
@@ -707,12 +771,12 @@ Aşağıdaki değerler yalnızca örnektir. Çalıştırmaların X'ten canlı ve
   "viewCount": 1200000,
   "bookmarkCount": 300,
   "lang": "en",
-  "url": "https://x.com/elonmusk/status/1846987139428634858",
+  "url": "https://x.com/jack/status/20",
   "author": {
-    "id": "44196397",
-    "username": "elonmusk",
-    "name": "Elon Musk",
-    "followers": 180000000,
+    "id": "12",
+    "username": "jack",
+    "name": "jack",
+    "followers": 6000000,
     "verified": true
   },
   "media": [{ "type": "photo", "url": "https://..." }],
@@ -724,7 +788,7 @@ Aşağıdaki değerler yalnızca örnektir. Çalıştırmaların X'ten canlı ve
   "isNoteTweet": false,
   "isQuoteStatus": false,
   "isReply": false,
-  "conversationId": "1846987139428634858"
+  "conversationId": "20"
 }
 ```
 
@@ -852,7 +916,7 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 ## Kazımadan fazlası mı lazım?
 
-Xquik ayrıca 47 panel aracı, 129 REST işlemi, imzalı webhook'lar ve bir MCP
+Xquik ayrıca 47 panel aracı, bir REST API, imzalı webhook'lar ve bir MCP
 sunucusu sunar.
 
 - [API belgeleri](https://docs.xquik.com/introduction): REST API kılavuzları
@@ -870,6 +934,8 @@ sunucusu sunar.
 
 ## SSS
 
+Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
+
 ### X API anahtarı gerekir mi?
 
 Hayır. X API anahtarı, giriş veya kimlik bilgisi gerekmez.
@@ -885,7 +951,7 @@ Xquik'in X Tweet Scraper'ı [karşılaştırma testinde](#karşılaştırma-test
 saniyede 25,2 ile 39,2 arası işe yarar gönderi teslim etti. Çalışma süresi
 girdine, sonuç sayısına ve X'in erişim durumuna bağlıdır.
 
-### Latest araması neden X'in En Yeni sekmesinde görünmeyen gönderiler döndürüyor?
+### X'in arama sekmesinin dışarıda bıraktığı gönderileri neden alıyorum?
 
 X, eşleşen bazı gönderileri En Yeni sekmesine koymaz. Xquik'in X Tweet
 Scraper'ı bu gönderileri de döndürür. Her gönderi, sorgun için gerçek bir X

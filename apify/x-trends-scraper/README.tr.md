@@ -21,7 +21,7 @@ gündemi sıra, hacim ve sorguyla toplar. Diğer Apify Actor'larının çoğu,
 filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
 edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır.
 
-Güncel Twitter gündemini (trendleri) tek çalıştırmada birçok konumdan kazı.
+Güncel Twitter gündemini (trendleri) 1 çalıştırmada birçok konumdan kazı.
 **Teslim edilen satır başına $0.00015** ödersin. Apify, platform kullanımını
 ayrıca faturalandırır. X API anahtarı ya da giriş gerekmez.
 
@@ -30,8 +30,11 @@ ayrıca faturalandırır. X API anahtarı ya da giriş gerekmez.
 
 ## Konumlar ve gündem verisi
 
-- Aynı anda okunan birden çok ülke veya WOEID.
+- Aynı anda okunan birden çok ülke, şehir veya WOEID.
 - Her konum için en fazla 50 güncel gündem başlığı.
+- X'in gündem sunduğu her yerin WOEID'si, ülkesi ve türüyle listesi.
+- X gönderi aramasının kabul ettiği yer ID'siyle X yer araması.
+- X hashflag'leri: X'in bazı hashtag'lerden sonra gösterdiği özel emojiler.
 - Sıra, konu, sorgu, gönderi hacmi, arama URL'si, WOEID ve kaynak konum.
 - Her satırda konum bilgisi.
 - Hashtag satırlarını ve gönderi hacmi olan satırları gösteren işaretler.
@@ -46,7 +49,8 @@ ayrıca faturalandırır. X API anahtarı ya da giriş gerekmez.
    gir.
 3. `maxTrendsPerLocation` değerini ayarla. Her konum için en fazla 50 gündem
    başlığı alabilirsin.
-4. Teslim edilecek satır sayısını `maxItems` ile sınırla, sonra Start'a tıkla.
+4. Tüm çalıştırmada teslim edilecek satır sayısını `maxItems` ile sınırla, sonra
+   Start'a tıkla.
 5. Veri kümesini JSON, CSV veya Excel olarak indir ya da Apify API'yi kullan.
 
 ## Girdi
@@ -61,9 +65,61 @@ Konum adlarını, sayısal WOEID'leri veya ikisini birden kullan:
 }
 ```
 
-Desteklenen kısayollar arasında Worldwide, United States, United Kingdom,
-Turkey ve Brazil var. Canada, France, Germany, India, Indonesia, Japan, Mexico
-ve Australia da çalışır. Desteklenen diğer konumlar için `woeids` kullan.
+`locations`, X'in gündem sunduğu her ülkeyi veya şehri kabul eder, örneğin
+Worldwide, United States, Japan veya London. 2 harfli ülke kodları da çalışır.
+X'in gündem sunmadığı bir ad satır döndürmez ve ücret çıkarmaz. `woeids` sayısal
+WOEID'leri kabul eder.
+
+Her adı ve WOEID'yi görmek için `listLocations` seçeneğini aç. Çalıştırma o
+zaman gündem yerine X'in gündem sunduğu yerleri listeler:
+
+```json
+{ "listLocations": true, "country": "TR", "maxItems": 100 }
+```
+
+`country` bir ad veya 2 harfli kod kabul eder. `placeType`; `country`, `town`,
+`worldwide` veya `unknown` kabul eder. `nameContains`, adında senin metnin geçen
+yerleri tutar. Her yeri listelemek için 3'ünü de boş bırak.
+
+X yerlerini ada göre aramak için `placeSearchTerms` alanını doldur. Çalıştırma o
+zaman gündem yerine yerleri döndürür:
+
+```json
+{ "placeSearchTerms": ["New York"], "maxItems": 20 }
+```
+
+Her yer, X gönderi aramasının `place` olarak kabul ettiği `id` değerini taşır.
+Yerleri X sıralar, bu yüzden sıraları çalıştırmalar arasında değişebilir. X bir
+ad için en fazla 20 yer listeler. New York gibi birkaç ad için daha azını
+listeler. Çalıştırma yalnızca yazdığın adı taşıyan yerleri tutar. Bu yüzden New
+Delhi satır döndürmez ve ücret çıkarmaz.
+
+`maxItems` tüm çalıştırmayı sınırlar ve sınırı terim terim doldurur. Bu yüzden
+ilk terim hepsini kullanabilir. Her terime eşit pay vermek için
+`maxItemsPerTarget` ayarla:
+
+```json
+{
+  "placeSearchTerms": ["Paris", "Rome"],
+  "maxItems": 20,
+  "maxItemsPerTarget": 10
+}
+```
+
+X hashflag'lerini listelemek için `listHashflags` seçeneğini aç. Hashflag, X'in
+bir hashtag'den sonra belirli bir süre gösterdiği özel emojidir:
+
+```json
+{ "listHashflags": true, "hashtagContains": "football" }
+```
+
+Çalıştırma, X'in şu anda gösterdiği hashflag'leri listeler. Bitmiş ve yaklaşan
+hashflag'leri eklemek için `activeOnly` seçeneğini kapat. `hashtagContains`,
+senin metnini içeren hashtag'leri tutar.
+
+Bir çalıştırma 1 tür satır okur. `listLocations`, `listHashflags` seçeneğinden,
+o da `placeSearchTerms` alanından önce gelir. Hiçbiri yoksa çalıştırma gündemi
+okur.
 
 Sorunsuz biten küçük çalıştırmalar `run-report` yazmaz, böylece Apify kullanımı
 azalır. Raporu her çalıştırmada almak için `alwaysSaveRunRecords` seçeneğini aç.
@@ -71,9 +127,9 @@ azalır. Raporu her çalıştırmada almak için `alwaysSaveRunRecords` seçene�
 ## Çıktı
 
 Her gündem başlığı 1 veri kümesi satırıdır. Satırlarda `name`, `rank`,
-`tweetVolume`, `query`, `url`, `woeid`, `sourceTarget` ve `resultType`
-bulunur. Eksik kaynak alanları satıra eklenmez. Xquik'in X Trends Scraper'ı
-hiçbir değer uydurmaz.
+`tweetVolume`, `query`, `url`, `woeid`, `sourceTarget` ve `resultType` bulunur.
+`sourceTarget`, senin yazdığın haliyle konumdur. Eksik kaynak alanları satıra
+eklenmez. Xquik'in X Trends Scraper'ı hiçbir değer uydurmaz.
 
 Aşağıdaki değerler yalnızca örnektir. Gerçek sonuçlar canlı veriden gelir. Bir
 gündem satırı şöyle görünür:
@@ -89,6 +145,60 @@ gündem satırı şöyle görünür:
 }
 ```
 
+`listLocations` ile her yer 1 veri kümesi satırıdır. Satırlarda `woeid`, `name`,
+`country`, `countryCode`, `placeType`, `placeTypeCode`, `parentWoeid`, `url` ve
+`resultType` bulunur. `url`, X'in yer için eski referansıdır ve açılmayabilir.
+Bir gündem konumu satırı şöyle görünür:
+
+```json
+{
+  "woeid": 2344116,
+  "name": "Istanbul",
+  "country": "Turkey",
+  "countryCode": "TR",
+  "placeType": "Town",
+  "placeTypeCode": 7,
+  "parentWoeid": 23424969,
+  "resultType": "trendLocation"
+}
+```
+
+`placeSearchTerms` ile her yer 1 veri kümesi satırıdır. Satırlarda `id`, `name`,
+`fullName`, `country`, `countryCode`, `placeType`, `url`, `centroid`,
+`boundingBox`, `attributes`, `containedWithin`, `sourceTarget` ve `resultType`
+bulunur. `centroid` önce boylamı, sonra enlemi tutar. Bir yer satırı şöyle
+görünür:
+
+```json
+{
+  "id": "0123456789abcdef",
+  "name": "Sample City",
+  "fullName": "Sample City, Sample Country",
+  "country": "Sample Country",
+  "countryCode": "US",
+  "placeType": "city",
+  "centroid": [-73.97, 40.78],
+  "sourceTarget": "New York",
+  "resultType": "place"
+}
+```
+
+`listHashflags` ile her hashflag 1 veri kümesi satırıdır. Satırlarda `hashtag`,
+`assetUrl`, `startsAt`, `endsAt`, `isHashfettiEnabled`, `animations` ve
+`resultType` bulunur. Bir hashflag satırı şöyle görünür:
+
+```json
+{
+  "hashtag": "SampleHashtag",
+  "assetUrl": "https://abs.twimg.com/hashflags/Sample/Sample.png",
+  "startsAt": "2026-10-02T10:00:00.000Z",
+  "endsAt": "2027-01-03T14:59:00.000Z",
+  "isHashfettiEnabled": false,
+  "animations": [],
+  "resultType": "hashflag"
+}
+```
+
 ## X gündemini kazımak ne kadar tutar?
 
 Her Apify planında teslim edilen satır başına $0.00015 ödersin. Apify, platform
@@ -96,13 +206,14 @@ kullanımını ayrıca faturalandırır.
 
 - Teslim edilen her veri satırı için 1 kez ödersin. Tanılamalar `diagnostics`
   içinde ücretsizdir.
+- Bir gündem konumu, yer veya hashflag satırı bir gündem satırıyla aynı tutar.
 - Başlatma, sorgu veya konum ücreti yok.
 - Tekilleştirme faturalamadan önce çalışır.
 - Apify'ın maksimum toplam ücret ayarları teslim edilen satırları sınırlar.
 
 ## Sınırlar ve kurtarma
 
-Xquik'in X Trends Scraper'ı tek çalıştırmada birçok konumu okur. Apify
+Xquik'in X Trends Scraper'ı 1 çalıştırmada birçok konumu okur. Apify
 çalıştırmayı yeniden başlatsa da teslim edilen satırlar ve ilerleme korunur.
 Actor kendi başına süre sınırı eklemez. Ayarladığın Apify zaman aşımına uyar.
 
@@ -115,8 +226,8 @@ bitmesi teslimatı doğrular. Tüm verinin çekildiğini doğrulamaz.
 kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Nedenler
 şunlardır: `target_not_found`, `target_failed`, `pagination_safety_limit` ve
 `deadline_reached`. Bulunamayan bir hedef, listeye yalnızca çalıştırmayı başka
-bir neden durdurduysa girer. Nedenlerden biri `retryable` ise çalıştırma da
-`retryable` olur.
+bir neden durdurduysa girer. Nedenlerden biri yeniden denenebiliyorsa çalıştırma
+da `retryable` olur.
 
 ## İlgili Xquik Actor'ları
 
@@ -201,6 +312,8 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 ## SSS
 
+Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
+
 ### X API anahtarı veya giriş gerekir mi?
 
 Hayır. Xquik'in X Trends Scraper'ı X API anahtarı, giriş ya da kimlik bilgisi
@@ -216,12 +329,12 @@ uy. Emin değilsen yetkin bir hukukçuya danış.
 
 Önce ücretsiz `diagnostics` çıktısını aç. Boş bir çalıştırmanın durumu,
 hedeflerini ve filtrelerini kontrol etmeni söyler. `stopCauses` her neden için
-izleyeceğin bir `nextAction` verir. Çalıştırma bilinmeyen her konumu adıyla
-belirtir ve yerine ne kullanacağını söyler.
+izleyeceğin bir `nextAction` verir. X'in gündem sunmadığı bir konum satır
+döndürmez. X'in kabul ettiği adları görmek için `listLocations` seçeneğini aç.
 
 ### API'yi, zamanlamaları ve entegrasyonları kullanabilir miyim?
 
-Evet. 50 herkese açık görevden veya 129 Xquik REST işleminden birini seç.
+Evet. 50 herkese açık görevden birini veya Xquik REST API'yi seç.
 [API sekmesinde](https://apify.com/xquik/x-trends-scraper/api) Python,
 JavaScript ve cURL örnekleri var. Apify
 [zamanlamaları](https://docs.apify.com/platform/schedules), Xquik'in X Trends

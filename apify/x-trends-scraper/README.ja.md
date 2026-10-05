@@ -23,8 +23,11 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 
 ## 地域とトレンドデータ
 
-- 同時に読み取る複数の国やWOEID。
+- 同時に読み取る複数の国、都市、WOEID。
 - 地域ごとに最大50件の現在のトレンド。
+- Xがトレンドを提供するすべての場所の一覧。WOEID、国、種類が付きます。
+- Xの場所検索。Xのポスト検索で使える場所IDが付きます。
+- Xのハッシュフラッグ: 一部のハッシュタグの後ろにXが表示するカスタム絵文字。
 - 順位、トピック、クエリ、ポスト数、検索URL、WOEID、取得元の地域。
 - すべての行に付く地域の帰属情報。
 - ハッシュタグの行と、ポスト数を取得できる行のラベル。
@@ -37,7 +40,7 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 1. Apify ConsoleでXquikのX Trends Scraperを開きます。
 2. 地域名を`locations`に、数値のWOEIDを`woeids`に入力します。
 3. `maxTrendsPerLocation`を設定します。地域ごとに最大50件です。
-4. `maxItems`で配信する行数の上限を決め、Startをクリックします。
+4. `maxItems`で実行全体の配信行数に上限をかけ、Startをクリックします。
 5. データセットをJSON、CSV、Excelでダウンロードするか、Apify APIを使います。
 
 ## 入力
@@ -52,13 +55,49 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 }
 ```
 
-使えるショートカットには、Worldwide、United States、United Kingdom、Turkey、Brazilがあります。Canada、France、Germany、India、Indonesia、Japan、Mexico、Australiaも使えます。それ以外の対応地域には`woeids`を使ってください。
+`locations`には、Xがトレンドを提供する国や都市を指定できます。たとえばWorldwide、United States、Japan、Londonです。2文字の国コードも使えます。Xがトレンドを提供しない名前は、行を返さず、料金もかかりません。`woeids`には数値のWOEIDを指定します。
+
+すべての名前とWOEIDを見るには、`listLocations`をオンにします。実行は、トレンドの代わりに、Xがトレンドを提供する場所を一覧にします。
+
+```json
+{ "listLocations": true, "country": "TR", "maxItems": 100 }
+```
+
+`country`には、名前か2文字のコードを指定します。`placeType`には、`country`、`town`、`worldwide`、`unknown`のいずれかを指定します。`nameContains`は、名前に指定したテキストを含む場所を残します。3つとも空にすると、すべての場所を一覧にします。
+
+Xの場所を名前で検索するには、`placeSearchTerms`を入力します。実行は、トレンドの代わりに場所を返します。
+
+```json
+{ "placeSearchTerms": ["New York"], "maxItems": 20 }
+```
+
+各場所には、Xのポスト検索が`place`として受け付ける`id`が入ります。場所はXが順位付けするので、実行ごとに順序が変わることがあります。Xは1つの名前につき最大20件の場所を挙げます。New Yorkなど一部の名前では、それより少なくなります。実行は、入力した名前の場所だけを残します。そのため、New Delhiは行を返さず、料金もかかりません。
+
+`maxItems`は実行全体に上限をかけ、検索語の順に埋めていきます。そのため、最初の検索語が上限をすべて使うことがあります。各検索語に均等に割り当てるには、`maxItemsPerTarget`を設定します。
+
+```json
+{
+  "placeSearchTerms": ["Paris", "Rome"],
+  "maxItems": 20,
+  "maxItemsPerTarget": 10
+}
+```
+
+Xのハッシュフラッグを一覧にするには、`listHashflags`をオンにします。ハッシュフラッグは、Xが一定の期間、ハッシュタグの後ろに表示するカスタム絵文字です。
+
+```json
+{ "listHashflags": true, "hashtagContains": "football" }
+```
+
+実行は、Xが今表示しているハッシュフラッグを一覧にします。終了したものと今後のものも加えるには、`activeOnly`をオフにします。`hashtagContains`は、指定したテキストを含むハッシュタグを残します。
+
+1回の実行が読み取る行の種類は1つです。優先順位は、`listLocations`、`listHashflags`、`placeSearchTerms`の順です。どれも指定しなければ、実行はトレンドを読み取ります。
 
 問題なく終わった小規模な実行は`run-report`を書き込まず、Apifyの利用料を節約します。毎回書き込むには`alwaysSaveRunRecords`をオンにしてください。
 
 ## 出力
 
-各トレンドがデータセットの1行になります。行には`name`、`rank`、`tweetVolume`、`query`、`url`、`woeid`、`sourceTarget`、`resultType`が入ります。取得元にないフィールドは、行にも入りません。XquikのX Trends Scraperは値を作り出しません。
+各トレンドがデータセットの1行になります。行には`name`、`rank`、`tweetVolume`、`query`、`url`、`woeid`、`sourceTarget`、`resultType`が入ります。`sourceTarget`は、入力したままの地域です。取得元にないフィールドは、行にも入りません。XquikのX Trends Scraperは値を作り出しません。
 
 例はサンプル値です。実際の結果にはライブデータが入ります。トレンドの行は次のようになります。
 
@@ -73,11 +112,57 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 }
 ```
 
+`listLocations`を使うと、各場所がデータセットの1行になります。行には`woeid`、`name`、`country`、`countryCode`、`placeType`、`placeTypeCode`、`parentWoeid`、`url`、`resultType`が入ります。`url`は、その場所に対するXの従来の参照先で、開けないことがあります。トレンド地域の行は次のようになります。
+
+```json
+{
+  "woeid": 2344116,
+  "name": "Istanbul",
+  "country": "Turkey",
+  "countryCode": "TR",
+  "placeType": "Town",
+  "placeTypeCode": 7,
+  "parentWoeid": 23424969,
+  "resultType": "trendLocation"
+}
+```
+
+`placeSearchTerms`を使うと、各場所がデータセットの1行になります。行には`id`、`name`、`fullName`、`country`、`countryCode`、`placeType`、`url`、`centroid`、`boundingBox`、`attributes`、`containedWithin`、`sourceTarget`、`resultType`が入ります。`centroid`には、経度、緯度の順に入ります。場所の行は次のようになります。
+
+```json
+{
+  "id": "0123456789abcdef",
+  "name": "Sample City",
+  "fullName": "Sample City, Sample Country",
+  "country": "Sample Country",
+  "countryCode": "US",
+  "placeType": "city",
+  "centroid": [-73.97, 40.78],
+  "sourceTarget": "New York",
+  "resultType": "place"
+}
+```
+
+`listHashflags`を使うと、各ハッシュフラッグがデータセットの1行になります。行には`hashtag`、`assetUrl`、`startsAt`、`endsAt`、`isHashfettiEnabled`、`animations`、`resultType`が入ります。ハッシュフラッグの行は次のようになります。
+
+```json
+{
+  "hashtag": "SampleHashtag",
+  "assetUrl": "https://abs.twimg.com/hashflags/Sample/Sample.png",
+  "startsAt": "2026-10-02T10:00:00.000Z",
+  "endsAt": "2027-01-03T14:59:00.000Z",
+  "isHashfettiEnabled": false,
+  "animations": [],
+  "resultType": "hashflag"
+}
+```
+
 ## Xのトレンドのスクレイピングにかかる費用は？
 
 すべてのApifyプランで、配信された行1件につき$0.00015です。Apifyのプラットフォーム利用料は別途かかります。
 
 - 課金は配信したデータ行1件につき1回です。`diagnostics`の診断情報は無料です。
+- トレンド地域、場所、ハッシュフラッグの行の料金は、トレンドの行と同じです。
 - 開始料金、クエリ料金、地域料金はかかりません。
 - 重複排除は課金前に行います。
 - Apifyの最大合計課金額の設定で、配信する行数に上限をかけられます。
@@ -115,6 +200,8 @@ XquikのX Trends Scraperは、1回の実行で多数の地域を読み取りま�
 
 ## よくある質問
 
+よくある質問に答えたあと、サポートを受けられる場所を案内します。
+
 ### X APIキーやログインは必要ですか？
 
 いいえ。XquikのX Trends Scraperは、X APIキー、ログイン、認証情報を必要としません。
@@ -125,11 +212,11 @@ XquikのX Trends Scraperは、Xの公開フィールドを取得します。結�
 
 ### 実行結果が0件だったのはなぜですか？
 
-まず無料の`diagnostics`出力を開いてください。結果が空の実行では、ステータスが対象とフィルターの確認を促します。`stopCauses`は原因ごとに、次に取る行動を`nextAction`で示します。不明な地域があれば、実行がそれぞれの名前を挙げ、代わりに使う値を示します。
+まず無料の`diagnostics`出力を開いてください。結果が空の実行では、ステータスが対象とフィルターの確認を促します。`stopCauses`は原因ごとに、次に取る行動を`nextAction`で示します。Xがトレンドを提供しない地域は、行を返しません。Xが受け付ける名前を見るには、`listLocations`をオンにしてください。
 
 ### API、スケジュール、連携は使えますか？
 
-はい。50個の公開タスクと129個のXquik REST操作から選べます。[APIタブ](https://apify.com/xquik/x-trends-scraper/api)には、Python、JavaScript、cURLの例があります。Apifyの[スケジュール](https://docs.apify.com/platform/schedules)を使うと、XquikのX Trends Scraperをcronで実行できます。エージェントは[Apify MCP](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。古いビルドが必要な場合を除き、`latest`を使ってください。
+はい。50個の公開タスクかXquik REST APIから選べます。[APIタブ](https://apify.com/xquik/x-trends-scraper/api)には、Python、JavaScript、cURLの例があります。Apifyの[スケジュール](https://docs.apify.com/platform/schedules)を使うと、XquikのX Trends Scraperをcronで実行できます。エージェントは[Apify MCP](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。古いビルドが必要な場合を除き、`latest`を使ってください。
 
 ### どこでサポートを受けられますか？
 

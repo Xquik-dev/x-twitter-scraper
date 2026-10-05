@@ -23,8 +23,11 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 ## 位置与趋势数据
 
-- 同时读取多个国家或 WOEID。
+- 同时读取多个国家、城镇或 WOEID。
 - 每个位置最多 50 条当前趋势。
+- X 提供趋势的所有地点的列表，附带 WOEID、国家和类型。
+- X 地点搜索，附带 X 帖子搜索使用的地点 ID。
+- X hashflag：X 在某些话题标签后显示的自定义表情符号。
 - 排名、话题、查询词、帖子量、搜索 URL、WOEID 和来源位置。
 - 每行都标明所属位置。
 - 为话题标签行和有帖子量的行加上标记。
@@ -37,7 +40,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 1. 在 Apify Console 中打开 Xquik 的 X Trends Scraper。
 2. 在 `locations` 中输入位置名称，或在 `woeids` 中输入数字 WOEID。
 3. 设置 `maxTrendsPerLocation`，每个位置最多 50 条趋势。
-4. 用 `maxItems` 设置交付行数的上限，然后点击 Start。
+4. 用 `maxItems` 设置整个运行交付行数的上限，然后点击 Start。
 5. 以 JSON、CSV 或 Excel 格式下载数据集，或使用 Apify API。
 
 ## 输入
@@ -52,13 +55,49 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 }
 ```
 
-支持的快捷名称包括 Worldwide、United States、United Kingdom、Turkey 和 Brazil。Canada、France、Germany、India、Indonesia、Japan、Mexico 和 Australia 也可以使用。其他支持的位置请用 `woeids`。
+`locations` 接受 X 提供趋势的任何国家或城镇，例如 Worldwide、United States、Japan 或 London。也可以用 2 位字母的国家代码。X 不提供趋势的名称不返回任何行，也不收费。`woeids` 接受数字 WOEID。
+
+要查看每个名称和 WOEID，请开启 `listLocations`。这时运行会列出 X 提供趋势的地点，而不是趋势：
+
+```json
+{ "listLocations": true, "country": "TR", "maxItems": 100 }
+```
+
+`country` 接受名称或 2 位字母代码。`placeType` 接受 `country`、`town`、`worldwide` 或 `unknown`。`nameContains` 保留名称包含你的文本的地点。3 项都留空时，列出所有地点。
+
+要按名称搜索 X 地点，请填写 `placeSearchTerms`。这时运行会返回地点，而不是趋势：
+
+```json
+{ "placeSearchTerms": ["New York"], "maxItems": 20 }
+```
+
+每个地点都有 `id`，X 帖子搜索把它用作 `place`。地点由 X 排序，所以不同运行之间顺序可能不同。X 为一个名称最多列出 20 个地点，少数名称更少，例如 New York。运行只保留名称与你输入一致的地点，所以 New Delhi 不返回任何行，也不收费。
+
+`maxItems` 是整个运行的上限，并按搜索词依次填满，所以第一个搜索词可能用完全部额度。设置 `maxItemsPerTarget`，让每个搜索词获得相同的份额：
+
+```json
+{
+  "placeSearchTerms": ["Paris", "Rome"],
+  "maxItems": 20,
+  "maxItemsPerTarget": 10
+}
+```
+
+要列出 X hashflag，请开启 `listHashflags`。hashflag 是 X 在限定时间内显示在话题标签后的自定义表情符号：
+
+```json
+{ "listHashflags": true, "hashtagContains": "football" }
+```
+
+运行会列出 X 当前显示的 hashflag。关闭 `activeOnly`，可加入已结束和即将开始的 hashflag。`hashtagContains` 保留包含你的文本的话题标签。
+
+1 次运行只读取 1 种行。`listLocations` 优先于 `listHashflags`，后者又优先于 `placeSearchTerms`。这些都没有设置时，运行读取趋势。
 
 顺利完成的小型运行会跳过 `run-report`，节省 Apify 用量。开启 `alwaysSaveRunRecords` 后，每次运行都会写入报告。
 
 ## 输出
 
-每条趋势是数据集中的 1 行。行中包含 `name`、`rank`、`tweetVolume`、`query`、`url`、`woeid`、`sourceTarget` 和 `resultType`。来源缺少的字段不会出现。Xquik 的 X Trends Scraper 不编造任何值。
+每条趋势是数据集中的 1 行。行中包含 `name`、`rank`、`tweetVolume`、`query`、`url`、`woeid`、`sourceTarget` 和 `resultType`。`sourceTarget` 是你填写的位置，保持原样。来源缺少的字段不会出现。Xquik 的 X Trends Scraper 不编造任何值。
 
 示例使用样例值，实际结果来自实时数据。一行趋势数据如下：
 
@@ -73,11 +112,57 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 }
 ```
 
+使用 `listLocations` 时，每个地点是数据集中的 1 行。行中包含 `woeid`、`name`、`country`、`countryCode`、`placeType`、`placeTypeCode`、`parentWoeid`、`url` 和 `resultType`。`url` 是 X 为该地点保留的旧版引用，可能无法打开。一行趋势位置数据如下：
+
+```json
+{
+  "woeid": 2344116,
+  "name": "Istanbul",
+  "country": "Turkey",
+  "countryCode": "TR",
+  "placeType": "Town",
+  "placeTypeCode": 7,
+  "parentWoeid": 23424969,
+  "resultType": "trendLocation"
+}
+```
+
+使用 `placeSearchTerms` 时，每个地点是数据集中的 1 行。行中包含 `id`、`name`、`fullName`、`country`、`countryCode`、`placeType`、`url`、`centroid`、`boundingBox`、`attributes`、`containedWithin`、`sourceTarget` 和 `resultType`。`centroid` 先保存经度，再保存纬度。一行地点数据如下：
+
+```json
+{
+  "id": "0123456789abcdef",
+  "name": "Sample City",
+  "fullName": "Sample City, Sample Country",
+  "country": "Sample Country",
+  "countryCode": "US",
+  "placeType": "city",
+  "centroid": [-73.97, 40.78],
+  "sourceTarget": "New York",
+  "resultType": "place"
+}
+```
+
+使用 `listHashflags` 时，每个 hashflag 是数据集中的 1 行。行中包含 `hashtag`、`assetUrl`、`startsAt`、`endsAt`、`isHashfettiEnabled`、`animations` 和 `resultType`。一行 hashflag 数据如下：
+
+```json
+{
+  "hashtag": "SampleHashtag",
+  "assetUrl": "https://abs.twimg.com/hashflags/Sample/Sample.png",
+  "startsAt": "2026-10-02T10:00:00.000Z",
+  "endsAt": "2027-01-03T14:59:00.000Z",
+  "isHashfettiEnabled": false,
+  "animations": [],
+  "resultType": "hashflag"
+}
+```
+
 ## 抓取 X 趋势要花多少钱？
 
 所有 Apify 套餐的价格都是每个已交付行 $0.00015。Apify 另行收取平台使用费。
 
 - 每个已交付的数据行收费一次。`diagnostics` 中的诊断信息免费。
+- 趋势位置行、地点行或 hashflag 行与趋势行价格相同。
 - 没有启动费、查询费或位置费。
 - 计费前先去重。
 - Apify 的最高总费用设置会限制交付行数。
@@ -88,7 +173,7 @@ Xquik 的 X Trends Scraper 在 1 次运行中读取多个位置。已交付的�
 
 提取中断时，会写入一条免费的 `partial` 诊断。已获取的结果不受影响。重试前，先查看 `availableResults`、`failedTargets`、`retryable` 和 `nextAction`。Actor 成功退出只说明结果已交付，不代表提取完整。
 
-运行状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_failed`、`pagination_safety_limit` 和 `deadline_reached`。只有在其他原因让运行停止时，缺失的目标才会列入 `stopCauses`。只要有一个原因可重试，整个运行就是 `retryable`。
+运行状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_failed`、`pagination_safety_limit` 和 `deadline_reached`。只有在其他原因让运行停止时，缺失的目标才会一并列出。只要有一个原因可重试，整个运行就是 `retryable`。
 
 ## 相关 Xquik Actor
 
@@ -115,6 +200,8 @@ Xquik 的 X Trends Scraper 在 1 次运行中读取多个位置。已交付的�
 
 ## 常见问题
 
+先解答常见问题，再说明在哪里获取帮助。
+
 ### 我需要 X API 密钥或登录吗？
 
 不需要。Xquik 的 X Trends Scraper 不需要 X API 密钥、登录或任何凭据。
@@ -125,11 +212,11 @@ Xquik 的 X Trends Scraper 请求的是公开的 X 字段。结果可能包含�
 
 ### 为什么我的运行没有返回结果？
 
-先打开免费的 `diagnostics` 输出。空运行的状态会提示你检查目标和过滤条件。`stopCauses` 为每个原因给出下一步操作 `nextAction`。运行会列出每个无法识别的位置，并说明应改用什么。
+先打开免费的 `diagnostics` 输出。空运行的状态会提示你检查目标和过滤条件。`stopCauses` 为每个原因给出下一步操作 `nextAction`。X 不提供趋势的位置不返回任何行。开启 `listLocations`，查看 X 接受的名称。
 
 ### 可以使用 API、定时调度和集成吗？
 
-可以。你可以从 50 个公开任务或 129 个 Xquik REST 操作中选择。[API 标签页](https://apify.com/xquik/x-trends-scraper/api) 提供 Python、JavaScript 和 cURL 示例。Apify [定时调度](https://docs.apify.com/platform/schedules) 可以按 cron 运行 Xquik 的 X Trends Scraper。Agent 可以通过 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) 调用它。除非需要旧构建，否则请使用 `latest`。
+可以。你可以从 50 个公开任务或 Xquik REST API 中选择。[API 标签页](https://apify.com/xquik/x-trends-scraper/api) 提供 Python、JavaScript 和 cURL 示例。Apify [定时调度](https://docs.apify.com/platform/schedules) 可以按 cron 运行 Xquik 的 X Trends Scraper。Agent 可以通过 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) 调用它。除非需要旧构建，否则请使用 `latest`。
 
 ### 在哪里获取帮助？
 

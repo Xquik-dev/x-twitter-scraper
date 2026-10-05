@@ -93,6 +93,64 @@ ab.
 - Ist `texts` gesetzt, analysiert der Run nur diese Texte. Starte X-Ziele in
   einem eigenen Run.
 
+## Von einem anderen Sentiment-Actor wechseln
+
+Nutze 1 Namen pro Einstellung, wenn du eine vorhandene Eingabe anpasst.
+
+| Vorhandener Eingabename                             | Xquik-Feld       |
+| --------------------------------------------------- | ---------------- |
+| `query`, `searchQuery`                              | `twitterContent` |
+| `queries`, `searchQueries`, `search`                | `searchTerms`    |
+| `handles`, `usernames`, `username`, `profileTweets` | `twitterHandles` |
+| `tweetUrls`, `postUrls`, `urls`                     | `startUrls`      |
+| `tweetIDs`, `tweet_ids`, `postIds`, `tweetId`       | `tweetIds`       |
+| `maxTweets`, `maxResults`, `count`, `max_posts`     | `maxItems`       |
+| `sort`                                              | `queryType`      |
+| `tweetLanguage`, `language`                         | `lang`           |
+| `startDate`, `endDate`                              | `since`, `until` |
+
+Der Actor akzeptiert diese gängigen Namen direkt. Nutze `Latest` oder `Top` für
+`sort`. Behalte Sprachcodes & Datumsgrenzen bei. Limits gelten für alle Ziele
+zusammen. Diese Eingabe ist startbereit:
+
+```json
+{ "searchTerms": ["from:NASA"], "sort": "Latest", "maxItems": 5 }
+```
+
+Andere Eingaben musst du vor dem Run umwandeln.
+
+Packe eine einzelne `tweetUrl` in `startUrls`:
+
+```json
+{ "startUrls": ["https://x.com/NASA/status/2105727882588807607"] }
+```
+
+Lege `text`, `Texts`, Dataset-Strings oder Datei-Strings in `texts` ab:
+
+```json
+{ "texts": ["Support fixed my issue. Thank you."] }
+```
+
+Mache aus `hashtag` oder `cashtag` Such-Strings:
+
+```json
+{ "searchTerms": ["#Artemis lang:en", "$AAPL lang:en"], "maxItems": 5 }
+```
+
+Ersetze `minLikes`, `minReplies` & `minRetweets` durch diese Feldnamen:
+
+```json
+{ "min_faves": 10, "min_replies": 2, "min_retweets": 3 }
+```
+
+Ergebnisse behalten den Originaldatensatz in `tweet` & die Antworten in
+`analysis.answers`. Ordne positive, negative & neutrale Labels den passenden
+Sentiment-Kategorien zu. Behalte `mixed` & `unclear` als eigene Kategorien.
+Andere Sentiment-Scores können andere Skalen & Bedeutungen nutzen. Die
+Intensität von Xquik reicht von 0 bis 2 & kann Dezimalstellen enthalten.
+Sarkasmus ist eine Wahrscheinlichkeit. Die Konfidenz beschreibt, wie sicher eine
+Antwort ist.
+
 ## Was kostet es, das Sentiment von Tweets zu analysieren?
 
 X Tweet Sentiment Analysis von Xquik kostet ab $0.0003 pro analysiertem Post.
@@ -209,24 +267,454 @@ Run vor der Erfassung. Der Run schreibt dann einen Diagnose-Datensatz.
 
 ## Task-Beispiele
 
-Wähle aus 50 öffentlichen Tasks. Jeder startet mit einer echten englischen Suche
-& einem begrenzten `maxItems`. Er enthält fertige Ziele, Kontext & die
-Dataset-Ansicht Overview. Passe Suche oder Ziele an, bevor du startest.
+Wähle aus 50 öffentlichen Tasks. Starte mit dem Beispiel, das zu deiner Frage
+passt. Die meisten Tasks nutzen kleine Obergrenzen. Die 2 datierten Suchen
+fordern 50 Posts an. Öffne einen Task, um seine gespeicherte Eingabe zu nutzen.
+Die kopierfertigen Eingaben & die beobachtete Ausbeute unten helfen dir bei der
+Wahl der Einstellungen.
 
-- [Sentiment of season finale reactions](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-season-finale-reactions)
-- [Sentiment of iPhone launch posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-iphone-launch-posts)
-- [Sentiment of the Super Bowl halftime show](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-super-bowl-halftime-show)
-- [Sentiment toward a new electric car model](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-toward-new-electric-car)
-- [Sentiment of Marvel movie audiences](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-marvel-movie-audiences)
-- [Sentiment of Taylor Swift album reactions](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-taylor-swift-album-reactions)
-- [Sentiment of a video game launch](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-video-game-launch)
-- [Sentiment about remote work](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-remote-work)
-- [Sentiment of airline passengers](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airline-passengers)
-- [Sentiment of college football fans](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-college-football-fans)
-- [Sentiment about interest rate decisions](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-interest-rates)
-- [Sentiment toward electric scooters](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-toward-electric-scooters)
+Jeder erfolgreiche Datensatz liefert Sentiment, Intensität &
+Sarkasmus-Wahrscheinlichkeit. Jeder behält seinen Originalpost oder den
+übergebenen Text neben den Antworten. Diese Beispiele nutzen englische Eingaben
+& Sprachfilter. Ein Sprachlabel kann anderssprachigen Text in einem Post oder
+Zitat trotzdem übersehen.
 
-Die übrigen Tasks auf der Actor-Seite decken weitere Marken, Themen & Märkte ab.
+Ohne Ziele beschreibt eine Antwort das Hauptthema des Posts. Eine
+Stichwort-Erwähnung kann etwas anderes betreffen. Bei mehreren Zielen beschreibt
+die Sentiment-Antwort sie gemeinsam. Sie liefert keine eigene Antwort für jedes
+Ziel.
+
+Die Gefällt-mir-Angaben eines Profils können verborgen sein. Nutze die Antworten
+oder Posts des Profils, wenn sie nicht verfügbar sind.
+
+Suchergebnisse können Ankündigungen, Werbung, Witze & wiederholten Text
+enthalten. Unterschiedliche Post-IDs belegen keine unabhängigen Reaktionen oder
+Kundenidentitäten. Meinungsphrasen & Interaktionsfilter wählen eine Stichprobe
+aus. Prüfe die Posts, bevor du sie als Feedback zählst. Die Analyse prüft ihre
+Behauptungen nicht.
+
+### Getestete Task-Eingaben
+
+Öffne einen Task. Sein Tab Input hat visuelle Felder & JSON. Kopiere das JSON
+oder ändere die Felder vor dem Start.
+[Apify erklärt Task-Eingaben](https://docs.apify.com/actors/running/tasks).
+
+Die Datumsangaben der Tests nutzen UTC. Die Ausbeute beschreibt den
+aufgezeichneten Run, keine garantierte Menge. Die datierten Beispiele mit 50
+Posts zeigen, warum eindeutige IDs keine unabhängigen Meinungen sind.
+
+#### Rezensionsentwürfe zum Finale
+
+[Season finale review texts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-season-finale-reactions)
+
+Trenne Lob von Kritik in deinen Rezensionsentwürfen zum Finale. Der Run am
+2026-10-01 ergab 3 eindeutige übergebene Texte. Obergrenze: 3. Das sind deine
+eigenen Beispieltexte, keine Publikumsforschung.
+
+#### Diskussion zum Smartphone-Launch
+
+[September 2026 iPhone launch posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-iphone-launch-posts)
+
+Prüfe die Launch-Diskussion in einem festen Datumsfenster im September. Der Run
+am 2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Ankündigungen und
+persönliche Meinungen können beide Treffer sein.
+
+#### Rezensionen zur Halbzeitshow
+
+[Halftime show review texts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-super-bowl-halftime-show)
+
+Prüfe gemischte Urteile und Sarkasmus in deinen Rezensionen zur Halbzeitshow.
+Der Run am 2026-10-01 ergab 3 eindeutige übergebene Texte. Obergrenze: 3. Das
+sind deine eigenen Beispielrezensionen, keine Live-Reaktionen auf die Show.
+
+#### Erfahrungen mit Elektroautos
+
+[Electric car experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-toward-new-electric-car)
+
+Finde Posts über das Fahren oder die Wahl eines Elektroautos. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Persönliche Formulierungen
+können auch auf Witze oder Berichte aus zweiter Hand passen.
+
+#### Filmdiskussion
+
+[Marvel movie discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-marvel-movie-audiences)
+
+Prüfe die Filmdiskussion, bevor du Publikumskommentare auswählst. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Marvel kann auch auf andere
+Verwendungen des Wortes passen.
+
+#### Begleittexte zu Medien einer Künstlerin
+
+[Taylor Swift media caption tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-taylor-swift-album-reactions)
+
+Prüfe den Wortlaut der Künstlerin neben aktuellen Medien. Der Run am 2026-10-01
+ergab 5 eindeutige Posts. Obergrenze: 5. Begleittexte können nicht alles
+beschreiben, was Bilder oder Videos zeigen.
+
+#### Thread zu einem Spiele-Release
+
+[Game release update thread](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-video-game-launch)
+
+Lies eine Ankündigung neben Antworten über konkurrierende Spiele. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Der Thread erwähnt mehrere
+Spiele und enthält seinen Eröffnungspost.
+
+#### Diskussion über Remote-Arbeit
+
+[Remote work discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-remote-work)
+
+Vergleiche Haltungen in der Diskussion über Remote-Arbeit. Der Run am 2026-10-01
+ergab 5 eindeutige Posts. Obergrenze: 5. Stellenanzeigen und wiederholte
+Meinungen können auftauchen.
+
+#### Posts über Airlines
+
+[Airline discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airline-passengers)
+
+Prüfe Airline-Erwähnungen, bevor du Service-Feedback auswählst. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Eine Erwähnung belegt nicht,
+dass der Autor Passagier ist.
+
+#### Diskussion über College Football
+
+[College football discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-college-football-fans)
+
+Trenne Fan-Meinungen von Werbung für College Football. Der Run am 2026-10-01
+ergab 5 eindeutige Posts. Obergrenze: 5. Vorschauen und Werbung können neben
+Fan-Meinungen Treffer sein.
+
+#### Diskussion über Zinsen
+
+[Interest rate discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-interest-rates)
+
+Prüfe Haltungen zu Markt und Politik rund um Zinsen. Der Run am 2026-10-01 ergab
+5 eindeutige Posts. Obergrenze: 5. Das Hauptthema kann ein Politiker oder der
+Markt sein.
+
+#### Diskussion über Scooter
+
+[Electric scooter discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-toward-electric-scooters)
+
+Finde die Scooter-Diskussion, bevor du Fahrer-Feedback auswählst. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Anzeigen, Studien und Witze
+können neben persönlichen Erfahrungen Treffer sein.
+
+#### Erfahrungen mit Restaurants
+
+[New restaurant experiences](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-restaurant-openings)
+
+Prüfe Formulierungen in der Ich-Form über neue Restaurants. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Persönliche Formulierungen
+können auch in Einladungen oder Empfehlungen vorkommen.
+
+#### Ton im Feed einer öffentlichen Liste
+
+[Public list feed tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-ai-coding-assistants)
+
+Prüfe den Ton der Posts in einer öffentlichen Liste. Der Run am 2026-10-01 ergab
+5 eindeutige Posts. Obergrenze: 5. Mitglieder können über andere Themen sprechen
+und den Wortlaut einer anderen Person reposten.
+
+#### Antworten eines Geräteprofils
+
+[Google device profile reply tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-smart-home-device-owners)
+
+Prüfe den Wortlaut eines Geräteprofils, einschließlich Antworten. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Fehlt der Kontext des
+übergeordneten Posts, kann eine Profil-Antwort weniger aussagen.
+
+#### Marathontraining
+
+[Marathon training discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-marathon-runners)
+
+Finde Haltungen in Trainings-Updates und Marathonplänen. Der Run am 2026-10-01
+ergab 5 eindeutige Posts. Obergrenze: 5. Pläne und Werbung können neben Updates
+von Läufern auftauchen.
+
+#### Reiseplanung
+
+[Personal Tokyo trip posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-tourist-destinations)
+
+Prüfe persönliche Reisepläne und Reiseberichte. Der Run am 2026-10-01 ergab 5
+eindeutige Posts. Obergrenze: 5. Events mit Tokyo im Namen können Treffer sein,
+ohne eine Japanreise zu beschreiben.
+
+#### Diskussion über Streaming-Preise
+
+[Netflix price discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-streaming-price-increases)
+
+Finde Bedenken zu Netflix-Preisen, bevor du Kündigungsgründe prüfst. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Preisformulierungen wählen
+Bedenken aus, keine repräsentative Zuschauer-Stichprobe.
+
+#### Einkauf von Schulbedarf
+
+[August 2026 school supply posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-back-to-school-shoppers)
+
+Prüfe 50 Posts über Schulbedarf in einem August-Fenster. Der Run am 2026-10-01
+ergab 50 eindeutige Posts. Obergrenze: 50. Die 50 IDs enthielten in unserer
+Prüfung 42 Datensätze mit klarem Themenbezug.
+
+#### Zugverspätungen
+
+[Train delay experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-public-transit)
+
+Finde Beschwerden und Erfahrungen mit verspäteten Zügen. Der Run am 2026-10-01
+ergab 5 eindeutige Posts. Obergrenze: 5. Persönliche Formulierungen finden
+offizielle Meldungen eventuell nicht.
+
+#### Diskussion über Tierfutter
+
+[Pet food experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-pet-food-brands)
+
+Prüfe Tierfutter-Erwähnungen in der breiteren Diskussion über Tierpflege. Der
+Run am 2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Diskussionen über
+Pflege oder Tiermedizin können Futtermarken beiläufig erwähnen.
+
+#### Ausgewählte Fantasy-Sport-Posts
+
+[Fantasy sports post batch](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-fantasy-football-apps)
+
+Analysiere eine ausgewählte Gruppe von Fantasy-Sport-Posts. Der Run am
+2026-10-01 ergab 2 eindeutige Posts. Obergrenze: 2. Labels betreffen das Thema
+jedes Posts, nicht automatisch eine App.
+
+#### Erfahrungen mit Cafés
+
+[Coffee shop experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-coffee-shop-customers)
+
+Finde Kommentare zu Cafés, bevor du Kunden-Feedback auswählst. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Beschwerden von Autoren
+bleiben ungeprüfte Aussagen.
+
+#### Immobilienmarkt
+
+[Housing market discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-housing-market)
+
+Prüfe Meinungen und Nachrichten zum Immobilienmarkt. Der Run am 2026-10-01 ergab
+5 eindeutige Posts. Obergrenze: 5. Nachrichten und Meinungen können verschiedene
+Marktthemen betreffen.
+
+#### Turnierdiskussion
+
+[League of Legends tournament posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-esports-tournament-viewers)
+
+Trenne die Turnierdiskussion von Werbung für Tickets oder Matches. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Ticketanzeigen und
+Spielberichte sind keine Zuschauermeinungen.
+
+#### Posts eines Podcast-Herausgebers
+
+[Podcast publisher post tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-podcast-episodes)
+
+Prüfe die eigene Kommunikation des Podcast-Herausgebers. Der Run am 2026-10-01
+ergab 5 eindeutige Posts. Obergrenze: 5. Der Ton des Herausgebers misst keine
+Hörerzufriedenheit.
+
+#### Fitnessstudio-Vergleiche
+
+[Gym comparison review texts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-gym-memberships)
+
+Prüfe die gemeinsame Haltung gegenüber 2 Fitnessstudios in deinen Rezensionen.
+Der Run am 2026-10-01 ergab 3 eindeutige übergebene Texte. Obergrenze: 3. Beide
+Ziele teilen sich 1 Sentiment-Antwort pro Text.
+
+#### Mietwagen
+
+[Car rental experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-car-rental-customers)
+
+Finde Kommentare zu Mietwagen, bevor du Service-Probleme prüfst. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Anfragen und Werbung können
+neben Berichten von Mietern Treffer sein.
+
+#### Campus-Diskussion
+
+[University cost and campus posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-university-life)
+
+Prüfe die Campus-Diskussion, bevor du Posts zu Kosten auswählst. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Campus-Nachrichten und
+Kritik belegen keine Erfahrungen von Studierenden.
+
+#### Hochzeitsplanung
+
+[Personal wedding planning posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-wedding-planning-posts)
+
+Finde Formulierungen in der Ich-Form über Hochzeitspläne und Kosten. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Geschichten, Witze und
+beiläufige Formulierungen können neben Planungserfahrungen Treffer sein.
+
+#### Ladeerfahrungen
+
+[EV charging experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-ev-charging-experiences)
+
+Prüfe Ladeerfahrungen in der Diskussion über Elektrofahrzeuge. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Das Laden kann gegenüber
+einem anderen Fahrzeugthema zweitrangig sein.
+
+#### Diskussion über Steuererklärungen
+
+[Spring 2026 TurboTax filing posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-tax-filing-software)
+
+Prüfe die Diskussion über Steuererklärungen in einem festen Datumsfenster im
+Frühjahr. Der Run am 2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Posts
+belegen keine aktuellen Gebühren oder Steuerregeln.
+
+#### Freizeitpark-Besuche
+
+[Theme park visit discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-theme-park-visitors)
+
+Finde Freizeitpark-Erwähnungen, bevor du Reaktionen auf Besuche auswählst. Der
+Run am 2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Längere Posts über
+ein anderes Thema können durch beiläufige Erwähnungen Treffer sein.
+
+#### Ausgaben für Lebensmittel
+
+[Grocery budget experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-grocery-prices)
+
+Finde Kommentare in der Ich-Form über Ausgaben für Lebensmittel. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Breitere Diskussionen über
+Politik, Ernährung oder Creator können Ausgaben für Lebensmittel erwähnen.
+
+#### Kamera-Diskussion
+
+[Phone camera discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-phone-camera-reviews)
+
+Prüfe Kamera-Erwähnungen neben Fotos, Rezensionen und Ankündigungen. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Kamera-Erwähnungen können in
+anderen Ankündigungen beiläufig sein.
+
+#### Ausgewählter Sneaker-Post
+
+[A selected sneaker post](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-sneaker-drop-reactions)
+
+Analysiere einen bekannten Post ohne breite Stichwortsuche. Der Run am
+2026-10-01 ergab 1 eindeutigen Post. Obergrenze: 1. Dieser ausgewählte
+Begleittext beschreibt nicht jedes Detail seines Bildes.
+
+#### Support-Chatbots
+
+[Support chatbot discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-customer-support-chatbots)
+
+Finde die Diskussion über Support-Chatbots, bevor du Service-Beschwerden
+auswählst. Der Run am 2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Bots
+für emotionale Unterstützung und Antworten von Unternehmen können auch Treffer
+sein.
+
+#### Festival-Diskussion
+
+[April 2026 Coachella discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-music-festival-attendees)
+
+Prüfe 50 Festival-Posts in einem April-Fenster. Der Run am 2026-10-01 ergab 50
+eindeutige Posts. Obergrenze: 50. Die 50 IDs enthielten 47 Datensätze mit
+Themenbezug und wiederholte Nachrichtentexte.
+
+#### Stromrechnungen
+
+[Electricity bill discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-electric-bills)
+
+Prüfe persönliche Stromkosten neben der politischen Diskussion. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Politische Behauptungen und
+Preisprognosen bleiben ungeprüft.
+
+#### Kaderwechsel im Basketball
+
+[NBA trade and signing discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-nba-trade-reactions)
+
+Finde die Diskussion über Trades und Verpflichtungen, bevor du Fan-Reaktionen
+auswählst. Der Run am 2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Andere
+Meldungen können Spieler oder Teams beiläufig erwähnen.
+
+#### Diskussion über Aufenthalte
+
+[Airbnb stay discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-airbnb-stays)
+
+Konzentriere dich in der Diskussion über Aufenthalte auf Haltungen gegenüber
+Airbnb. Der Run am 2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Werbung
+von Gastgebern und App-Posts können neben Berichten von Gästen auftauchen.
+
+#### Reaktionen auf Bücher
+
+[Book reading reaction posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-book-club-readers)
+
+Prüfe Lesereaktionen, ohne eine Mitgliedschaft im Buchclub anzunehmen. Der Run
+am 2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Filmvergleiche und
+persönliche Meinungen zu Büchern können beide Treffer sein.
+
+#### Erfahrungen mit Kochboxen
+
+[HelloFresh experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-meal-kit-services)
+
+Finde Kommentare zu Kochboxen, bevor du Produkterfahrungen prüfst. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Pläne, Anzeigen und breitere
+persönliche Geschichten können die Marke erwähnen.
+
+#### Renndiskussion
+
+[Formula 1 race discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-formula-one-race-weekends)
+
+Prüfe die Renndiskussion neben Aussagen von Teams und Fahrern. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Zitierte Fahreraussagen
+können sich über verschiedene IDs wiederholen.
+
+#### Erfahrungen mit Dating-Apps
+
+[Dating app experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-dating-app-experiences)
+
+Finde Erfahrungen mit Dating-Apps, Bemerkungen zu Matches und Witze. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Bemerkungen zu Matches und
+Witze belegen keine Kundenidentitäten.
+
+#### Posts über Wartezeiten am Flughafen
+
+[Airport wait and lounge posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airport-travelers)
+
+Prüfe Kommentare zu Wartezeiten am Flughafen neben Reisehinweisen. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Offizielle Hinweise können
+neben persönlichen Warteerfahrungen auftauchen.
+
+#### Diskussion über Schulessen
+
+[School lunch discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-school-lunch-programs)
+
+Prüfe persönliche Posts und die politische Debatte über Schulessen. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Autoren können auch
+Institutionen sein, nicht nur Eltern.
+
+#### Bierverkostung
+
+[Craft beer tasting posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-craft-beer-drinkers)
+
+Finde Meinungen aus Bierverkostungen, bevor du Rezensionsbeispiele auswählst.
+Der Run am 2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Knappen
+Begleittexten mit Link kann der Kontext für eine klare Haltung fehlen.
+
+#### Zitate einer Docking-Ankündigung
+
+[SpaceX docking announcement quotes](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-space-launches)
+
+Prüfe Zitate einer Docking-Ankündigung nach einem festen Zeitpunkt. Der Run am
+2026-10-01 ergab 5 eindeutige Posts. Obergrenze: 5. Zitate können Einladungen
+oder neutrale Beschreibungen sein, nicht nur Reaktionen.
+
+#### Antworten auf einen Geburtstagspost
+
+[NASA birthday replies](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-replies-to-a-news-post)
+
+Prüfe direkte Antworten auf einen Geburtstagspost. Der Run am 2026-10-01 ergab 5
+eindeutige Posts. Obergrenze: 5. Fehlt der Kontext des Ausgangsposts, kann das
+Analyseergebnis einer Antwort weniger aussagen.
+
+Halte `maxItems` klein, während du Ergebnisse prüfst. Eine Obergrenze begrenzt
+die Ausgabe, nicht die verfügbare Menge. Gibt es weniger passende Posts, prüfe
+den Run-Report, bevor du deine Filter änderst. Lockere 1 Einstellung nach der
+anderen, etwa Datumsangaben oder einen Mindestwert für Interaktionen. Notiere
+die Einstellung, die du geändert hast.
+
+Prüfe bei fehlgeschlagenen Analysen `analysis.reason` & wiederhole nur die
+betroffenen IDs. Prüfe bei unvollständigen Antworten die kostenlose Diagnose,
+bevor du sie als vollständig wertest. Begleittexte zu Medien können nicht alles
+beschreiben, was ein Bild oder Video zeigt. Fehlender Zitat- oder Antwortkontext
+kann ein Analyseergebnis unsicher machen.
 
 ## Verwandte Xquik-Actors
 
@@ -305,6 +793,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
 ## FAQ & Support
 
+Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
+
 ### Brauche ich einen KI-Account, einen X-API-Schlüssel oder einen Login?
 
 Nein. X Tweet Sentiment Analysis von Xquik enthält die KI-Kosten im Preis. Du
@@ -318,14 +808,14 @@ Fragen vom Typ `choice`, `score` oder `probability`. Choice-Fragen akzeptieren 2
 bis 255 Kategorien. Score-Fragen brauchen mindestens 2 geordnete Stufen.
 Behalte dieselben Fragen in allen Runs, die du vergleichen willst.
 
-### Warum kam ein Datensatz mit `analysis.status` `failed` oder `skipped` zurück?
+### Warum hat ein Datensatz eine fehlgeschlagene oder übersprungene Analyse?
 
-Der Actor hat den Post gesammelt & geliefert, aber die KI-Analyse lief nicht zu
-Ende. `analysis.reason` nennt die Ursache. `context_limit` bedeutet, dass dein
-Kontext & deine Ziele keinen Platz für den Post lassen. `service_unavailable`
-bedeutet, dass der Analysedienst kurz nicht erreichbar war. Diese Datensätze
-kosten keine Ergebnisgebühr. Kürze `analysis.context` oder starte einen
-neuen Run für die betroffenen IDs.
+`analysis.status` ist `failed` oder `skipped`. Der Actor hat den Post gesammelt
+& geliefert, aber die KI-Analyse lief nicht zu Ende. `analysis.reason` nennt die
+Ursache. `context_limit` bedeutet, dass dein Kontext & deine Ziele keinen Platz
+für den Post lassen. `service_unavailable` bedeutet, dass der Analysedienst kurz
+nicht erreichbar war. Diese Datensätze kosten keine Ergebnisgebühr. Kürze
+`analysis.context` oder starte einen neuen Run für die betroffenen IDs.
 
 Der Actor analysiert auch einen Post, der länger als `maxContextBytes` ist. Er
 kürzt zuerst zitierte & beantwortete Posts, dann den Post selbst.

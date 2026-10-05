@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">从 6:07 开始，观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具。</a>
 </td></tr></table>
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X Follower Scraper 收集关注者、正在关注的账号、列表成员、订阅者和社群成员。公开基准测试证明，它是 10 个关注者 Actor 中最便宜、最快的。它每行的字段数（`outputMode: "full"`）是各 Actor 中位数的 2.5 倍，详见[下方基准测试](#基准测试)。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付、不重复且符合过滤条件的结果收费。
+Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X Follower Scraper 收集关注者、正在关注的账号、列表成员、订阅者和社群成员。公开基准测试证明，它是 10 个关注者 Actor 中最便宜、最快的。它的完整行字段数是各 Actor 中位数的 2.5 倍，详见[下方基准测试](#基准测试)。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付、不重复且符合过滤条件的结果收费。
 
 抓取 X（Twitter）的关注者、正在关注的账号、已认证关注者、列表成员、列表订阅者和社群成员。Xquik 的 X Follower Scraper **在所有 Apify 套餐上均为每条已交付个人资料 $0.00015 起**。Apify 另行收取平台使用费。无需登录 X，Xquik 也不收启动费或查询费。
 
@@ -68,13 +68,15 @@ Xquik 的 X Follower Scraper 返回关注者、正在关注的账号、列表和
 
 设置 `outputMode: "raw"` 或 `includeRaw: true` 可以添加 `raw` 字段，其中保存源个人资料的安全副本。默认为精简模式。
 
+设置 `outputMode: "full"`，让每行包含最多的数据。X 发送时，每行最多保留 13 个名单字段，例如 `listedCount`、`defaultProfileImage` 和 `advertiserAccountType`。完整行把它们放在末尾。精简行更小，存储成本更低。
+
 `verifiedOnly` 接受公开的 Blue 认证和旧版认证个人资料。来源标记互相冲突时，按已认证处理。
 
 数据行从不包含仅对查看者可见的状态。Xquik 会移除关注、屏蔽、隐藏、私信、通知等查看者标记。原始输出同样不含这些标记。
 
 ## 使用场景
 
-- 用每个主页更多的字段补全潜在客户数据并构建研究数据集。我们的中位数行（`outputMode: "full"`）在 2026-09-29 有 38 个字段。这是其他 9 个 Actor 中位数的 2.5 倍。
+- 借助每个个人资料的更多字段，补全潜在客户数据并构建研究数据集。我们的完整行在 2026-09-29 的中位数是 38 个字段。这是其他 9 个 Actor 中位数的 2.5 倍。
 - 导出竞争对手的关注者，用于潜在客户研究。
 - 比较你的账号、竞争对手和公众人物的受众。
 - 按关注者数和认证状态过滤，找到符合条件的个人资料。
@@ -83,6 +85,8 @@ Xquik 的 X Follower Scraper 返回关注者、正在关注的账号、列表和
 - 按简介关键词、位置或个人资料类型细分关注者群体。
 
 ## 如何用 X Follower Scraper 抓取关注者数据？
+
+下面的每个示例都是一份完整的输入。选择适合你数据的那个。
 
 1. 在 Apify Console 中打开 Xquik 的 X Follower Scraper。
 2. 添加个人资料、列表或社群 URL、X 用户名或数字 ID。
@@ -123,6 +127,12 @@ Xquik 的 X Follower Scraper 返回关注者、正在关注的账号、列表和
 ```
 
 `relation` 决定每个用户名要抓取什么。可以用 `followers`、`following` 或 `verified_followers`。
+
+只需要用户 ID 时，用 `follower_ids` 或 `following_ids`。每行包含 1 个用户 ID、它的来源目标和关系，每页最多 5,000 个 ID。个人资料过滤条件需要个人资料字段，所以这 2 种关系请把它们留空。
+
+用 `affiliates` 获取某个组织列为关联账号的账号，例如一家公司的员工和产品。每行是一条完整的个人资料。没有关联账号的账号不返回任何行。
+
+用 `subscriptions` 获取某个账号订阅的创作者。隐藏订阅的账号不返回任何行。
 
 同一输入还接受 `username`、`usernames` 和 `user_names` 作为别名。
 
@@ -194,7 +204,7 @@ Xquik 的 X Follower Scraper 返回关注者、正在关注的账号、列表和
 }
 ```
 
-输出中每个不重复的个人资料占 1 行。共同的个人资料包含 `sourceTargets`、`sourceRelations`、`sourceUrls`、`sourceTargetKeys` 和 `overlapCount`。可以按 `overlapCount` 排序，或把行导出为 CSV。`maxItems` 要设得足够高，让每个目标都能加入行。用 `maxItemsPerTarget` 设置每个账号的抓取深度。
+输出中每个不重复的个人资料占 1 行。共同的个人资料包含 `sourceTargets`、`sourceRelations`、`sourceUrls`、`sourceTargetKeys` 和 `overlapCount`。可以按 `overlapCount` 排序，或把行导出为 CSV。行按你的目标顺序排列。`maxItems` 要设得足够高，让每个目标都能加入行。`maxItems` 提前结束运行时，保留下来的个人资料在不同运行之间可能变化。用 `maxItemsPerTarget` 设置每个账号的抓取深度。
 
 ### 支持的 URL 格式
 
@@ -203,7 +213,8 @@ Xquik 的 X Follower Scraper 返回关注者、正在关注的账号、列表和
 | `https://x.com/<handle>/followers` | `followers` |
 | `https://x.com/<handle>/verified_followers` | `verified_followers` |
 | `https://x.com/<handle>/following` | `following` |
-| `https://x.com/<handle>` | 默认 `relation`（未设置时为 followers） |
+| `https://x.com/<handle>/affiliates` | `affiliates` |
+| `https://x.com/<handle>` | `relation`，未设置时为 `followers` |
 | `https://x.com/i/lists/<id>/members` | `list_members` |
 | `https://x.com/i/lists/<id>/followers` | `list_followers` |
 | `https://x.com/i/lists/<id>` | `list_members` |
@@ -212,6 +223,7 @@ Xquik 的 X Follower Scraper 返回关注者、正在关注的账号、列表和
 | `<handle>/followers` | `followers` |
 | `<handle>/following` | `following` |
 | `<handle>/verified_followers` | `verified_followers` |
+| `<handle>/affiliates` | `affiliates` |
 | `lists/<id>/members` | `list_members` |
 | `lists/<id>/followers` | `list_followers` |
 | `communities/<id>/members` | `community_members` |
@@ -239,7 +251,7 @@ Xquik 的 X Follower Scraper 返回关注者、正在关注的账号、列表和
 
 Xquik 的 X Follower Scraper 在所有 Apify 套餐上都按每条已交付个人资料 $0.00015 收费。Apify 另行收取平台使用费。Xquik 对每个已交付的数据行收费一次。不需要单独订阅 Xquik，Xquik 也不收启动费。启动、目标和关系选择都不另收查询费。
 
-1 次运行可以读取多个目标。上限、去重、来源标注和计费在所有目标之间都保持准确。
+1 次运行可以读取多个目标。上限、去重和计费在所有目标之间都保持准确。
 
 - 过滤在个人资料进入数据集之前进行，所以被过滤的行不收费。
 - 数字过滤条件有 `minFollowers`、`maxFollowers`、`minFollowing`、`maxFollowing`、`minStatuses`、`maxStatuses` 和 `minAccountAgeDays`。
@@ -253,31 +265,21 @@ Xquik 的 X Follower Scraper 在所有 Apify 套餐上都按每条已交付个�
 
 ## 基准测试
 
-Xquik 的 X Follower Scraper 在成本和速度上胜过其他 9 个关注者 Actor。它的中位数行（`outputMode: "full"`）有 38 个字段，是其他 Actor 中位数的 2.5 倍。
+Xquik 的 X Follower Scraper 在成本和速度上胜过其他 9 个关注者 Actor。它的完整行中位数是 38 个字段，是其他 Actor 中位数的 2.5 倍。
 
-| Actor                                                  | 有用主页 | 每个有用主页成本 | 每秒有用主页 | 每行字段数 | 公开运行                                                                                                                                                                                          |
-| ------------------------------------------------------ | -------: | ---------------: | -----------: | ---------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| xquik/x-follower-scraper                               |    1,000 |        $0.000155 |        100.0 |         38 | [查看运行](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)                                                                                                                                 |
-| xquik/x-follower-scraper                               |    1,000 |        $0.000155 |         77.9 |         38 | [查看运行](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)                                                                                                                                 |
-| b2b_leads/X-Real-Time-Data                             |      286 |        $0.000388 |          3.1 |         21 | [查看运行](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                                 |
-| kaitoeasyapi/premium-x-follower-scraper-following-data |      356 |        $0.000506 |         21.9 |         50 | [查看运行](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                                 |
-| api-ninja/x-twitter-followers-scraper                  |      350 |        $0.000809 |          7.0 |          8 | [查看运行](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                                 |
-| altimis/scweet                                         |      332 |        $0.000922 |          1.1 |         21 | [查看运行](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)                                                                                                                                 |
-| apidojo/twitter-user-scraper                           |      323 |        $0.001160 |          7.3 |         25 | [查看运行](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)                                                                                                                                 |
-| atomus/twitter-scraper                                 |      323 |        $0.001272 |          6.2 |         13 | [查看运行](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)                                                                                                                                 |
-| practicaltools/cheap-simple-twitter-api                |      283 |        $0.002036 |          6.5 |          4 | [运行 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb), [运行 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK), [运行 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX) |
-| maximedupre/twitter-scraper                            |      320 |        $0.002192 |          2.1 |         15 | [运行 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [运行 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [运行 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
-| seemuapps/x-followers-following-scraper                |      286 |        $0.003504 |          3.9 |          9 | [运行 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [运行 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [运行 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
+- `xquik/x-follower-scraper`：1,000 个有用个人资料，每个有用个人资料 $0.000155，每秒 100.0 个，每行 38 个字段。[查看运行](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
+- `xquik/x-follower-scraper`：1,000 个有用个人资料，每个有用个人资料 $0.000155，每秒 77.9 个，每行 38 个字段。[查看运行](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
+- `b2b_leads/X-Real-Time-Data`：286 个有用个人资料，每个有用个人资料 $0.000388，每秒 3.1 个，每行 21 个字段。[查看运行](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
+- `kaitoeasyapi/premium-x-follower-scraper-following-data`：356 个有用个人资料，每个有用个人资料 $0.000506，每秒 21.9 个，每行 50 个字段。[查看运行](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
+- `api-ninja/x-twitter-followers-scraper`：350 个有用个人资料，每个有用个人资料 $0.000809，每秒 7.0 个，每行 8 个字段。[查看运行](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
+- `altimis/scweet`：332 个有用个人资料，每个有用个人资料 $0.000922，每秒 1.1 个，每行 21 个字段。[查看运行](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
+- `apidojo/twitter-user-scraper`：323 个有用个人资料，每个有用个人资料 $0.001160，每秒 7.3 个，每行 25 个字段。[查看运行](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
+- `atomus/twitter-scraper`：323 个有用个人资料，每个有用个人资料 $0.001272，每秒 6.2 个，每行 13 个字段。[查看运行](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
+- `practicaltools/cheap-simple-twitter-api`：283 个有用个人资料，每个有用个人资料 $0.002036，每秒 6.5 个，每行 4 个字段。[运行 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb)、[运行 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK)、[运行 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
+- `maximedupre/twitter-scraper`：320 个有用个人资料，每个有用个人资料 $0.002192，每秒 2.1 个，每行 15 个字段。[运行 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs)、[运行 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39)、[运行 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
+- `seemuapps/x-followers-following-scraper`：286 个有用个人资料，每个有用个人资料 $0.003504，每秒 3.9 个，每行 9 个字段。[运行 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj)、[运行 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ)、[运行 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
 
-每个 Actor 都读取了 NASA、SpaceX 和 esa 的关注者。其他 Actor 在 2026-09-28 运行，Xquik 的运行在 2026-09-29 使用了 `outputMode: "full"`。
-所有运行都使用 Bronze 等级。
-有用主页是唯一的，账号至少 30 天，至少有 1 个关注者和 1 条帖子。
-成本是客户为每个有用主页支付的总费用。
-我们的成本包含客户支付的 Apify 平台使用费。
-含 3 次运行的行会把它们相加。
-每行字段数是非空字段数的中位数，包括嵌套字段。
-一个列表计为 1 个字段。
-打开一次运行，即可查看其输入、日志和数据集。
+每个 Actor 都读取了 NASA、SpaceX 和 esa 的关注者。其他 Actor 在 2026-09-28 运行，Xquik 的运行在 2026-09-29 使用了 `outputMode: "full"`。所有运行都使用 Bronze 等级。有用个人资料指不重复的个人资料，账号创建至少 30 天，至少有 1 个关注者和 1 条帖子。成本是客户为每个有用个人资料支付的总费用。我们的成本包含客户支付的 Apify 平台使用费。含 3 次运行的行会把它们相加。每行字段数是非空字段数的中位数，包括嵌套字段。一个列表计为 1 个字段。打开一次运行，即可查看其输入、日志和数据集。
 
 ## 输入
 
@@ -288,7 +290,7 @@ Input 标签页列出了所有选项。至少添加 `startUrls`、`twitterHandle
 - 把竞争对手的用户名加到 `twitterHandles`，并设置 `relation: "followers"`。
 - 把 `https://x.com/<handle>/verified_followers` 粘贴到 Start URLs，获取已认证的个人资料。
 - 把列表 URL 粘贴到 Start URLs，查看它的成员。
-- 添加 2 个或更多用户名。共同的个人资料只出现一次，归在第一个目标下。用 `dedupeMode: "merge"` 保留 1 行，并列出所有匹配的目标。设置 `dedupeAcrossTargets: false`，每个目标各保留 1 行。
+- 添加 2 个或更多用户名。共同的个人资料只出现一次，归在最先返回它的目标下。这个目标在不同运行之间可能变化。用 `dedupeMode: "merge"` 得到 1 个稳定的行，并列出所有匹配的目标。设置 `dedupeAcrossTargets: false`，每个目标各保留 1 行。
 
 ### Console 与 API 输入
 
@@ -306,18 +308,18 @@ Console 表单有以下控件：
 
 直接粘贴你现在用的输入。Xquik 的 X Follower Scraper 能读取其他 X 关注者 Actor 使用的字段名，并映射到自己的字段。标准名称仍是文档中的默认写法。别名从不丢弃字段，也不改变你的费用。
 
-| 你现在用的字段 | Xquik 读取为 |
-| --- | --- |
-| `twitterHandles`、`usernames`、`user_names`、`handles`、`userNameList`、`screenNames` | `twitterHandles` |
-| 单个字符串形式的 `username`、`handle`、`screenName` | `twitterHandles` |
-| `twitterUserIds`、`user_ids`、`userIdList` | `userIds` |
-| 单个字符串形式的 `user_id`、`userId` | `userIds` |
-| `startUrls`、`urls`、`targets`、`profileUrls`、`accountUrls` | `startUrls` |
-| 单个字符串形式的 `profileUrl` | `startUrls` |
-| `getFollowers`、`getFollowing` | `relations` |
-| 值为 `followers` 或 `following` 的 `type` | `relation` |
-| `maxResults`、`max_results`、`resultsLimit`、`count` | `maxItems` |
-| `scrapeAllResults` | 不设单目标上限 |
+每一项先列出你现在用的字段，再列出它们映射到的字段：
+
+- `twitterHandles`、`usernames`、`user_names`、`handles`、`userNameList`、`screenNames`：`twitterHandles`
+- 单个字符串形式的 `username`、`handle`、`screenName`：`twitterHandles`
+- `twitterUserIds`、`user_ids`、`userIdList`：`userIds`
+- 单个字符串形式的 `user_id`、`userId`：`userIds`
+- `startUrls`、`urls`、`targets`、`profileUrls`、`accountUrls`：`startUrls`
+- 单个字符串形式的 `profileUrl`：`startUrls`
+- `getFollowers`、`getFollowing`：`relations`
+- 值为 `followers` 或 `following` 的 `type`：`relation`
+- `maxResults`、`max_results`、`resultsLimit`、`count`：`maxItems`
+- `scrapeAllResults`：不设单目标上限
 
 有 2 个字段名在这里含义不同。在一些 Actor 中，`maxFollowers` 和 `maxFollowing` 限制一次运行返回的行数。在 Xquik 的 X Follower Scraper 中，它们按关注者数和正在关注数过滤个人资料。要限制行数，请用 `maxItems`。该 Actor 没有“页”这个单位，所以请把 `maxPages` 换成 `maxItems`。
 
@@ -397,7 +399,7 @@ Xquik 的 X Follower Scraper 用免费诊断说明运行为何为空、部分完
 
 中断的运行会写入一条免费的 `partial` 诊断。已交付的结果留在数据集中。重试前，先查看 `availableResults`、`failedTargets`、`retryable` 和 `nextAction`。
 
-运行状态会说明运行为何停止，并统计已计费的结果、跳过的重复项和已读取的目标。状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_protected`、`target_failed` 和 `deadline_reached`。只有在其他原因让运行停止时，不存在的账号才会列入 `stopCauses`。只要有一个原因可重试，整个运行就是 `retryable`。
+运行状态会说明运行为何停止，并统计已计费的结果、跳过的重复项和已读取的目标。状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_suspended`、`target_protected`、`target_failed` 和 `deadline_reached`。`target_suspended` 列出被 X 冻结的账号。只有在其他原因让运行停止时，不存在或被冻结的账号才会一并列出。只要有一个原因可重试，整个运行就是 `retryable`。
 
 X 不公开受保护账号的关注关系名单。这类目标会在 1 条免费诊断中标为 `target_protected`，运行会继续读取其他目标。
 
@@ -432,7 +434,7 @@ Apify 默认超时为 `0`，所以运行没有时间限制。运行会一直进�
 
 ## 不只需要抓取？
 
-Xquik 还提供 47 个仪表盘工具、129 个 REST 操作、签名 webhook 和一个 MCP 服务器。
+Xquik 还提供 47 个仪表盘工具、一个 REST API、签名 webhook 和一个 MCP 服务器。
 
 - [API 文档](https://docs.xquik.com/introduction)：REST API 指南
 - [Followers API](https://docs.xquik.com/api-reference/x/followers)：获取账号可获取的关注者
@@ -442,6 +444,8 @@ Xquik 还提供 47 个仪表盘工具、129 个 REST 操作、签名 webhook 和
 - [Webhooks](https://docs.xquik.com/webhooks/overview)：接收支持的帖子和个人资料事件
 
 ## 常见问题
+
+先解答常见问题，再说明在哪里获取帮助。
 
 ### 我需要 X API 密钥吗？
 
@@ -455,7 +459,7 @@ Xquik 还提供 47 个仪表盘工具、129 个 REST 操作、签名 webhook 和
 
 Xquik 的 X Follower Scraper 的速度取决于目标规模、过滤条件和 X 的可用性。它的 2 次[基准测试](#基准测试)运行分别达到每秒 77.9 和 100.0 条有效个人资料。
 
-### 为什么运行返回的行少于 `maxItems`？
+### 为什么运行返回的行少于我设置的上限？
 
 `minFollowers`、`verifiedOnly` 和 `bioContains` 等过滤条件在写入前生效。放宽它们可以返回更多结果。Xquik 的 X Follower Scraper 还会移除跨目标的重复项。
 

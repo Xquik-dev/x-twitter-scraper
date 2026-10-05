@@ -30,8 +30,12 @@ piattaforma. Non ti servono una chiave API X né il login.
 
 ## Località & dati sulle tendenze
 
-- Più paesi o WOEID, letti in parallelo.
+- Più paesi, città o WOEID, letti in parallelo.
 - Fino a 50 tendenze attuali per ogni località.
+- Un elenco di tutti i luoghi per cui X offre tendenze, con WOEID, paese & tipo.
+- La ricerca di luoghi di X, con l'ID del luogo che la ricerca di post di X
+  accetta.
+- Gli hashflag di X: le emoji personalizzate che X mostra dopo alcuni hashtag.
 - Posizione in classifica, argomento, query, volume di post, URL di ricerca,
   WOEID & località di origine.
 - Attribuzione della località su ogni riga.
@@ -46,7 +50,8 @@ piattaforma. Non ti servono una chiave API X né il login.
 2. Inserisci i nomi delle località in `locations` o i WOEID numerici in
    `woeids`.
 3. Imposta `maxTrendsPerLocation`, fino a 50 tendenze per ogni località.
-4. Imposta `maxItems` per limitare le righe consegnate, poi fai clic su Start.
+4. Imposta `maxItems` per limitare le righe consegnate nell'intera esecuzione,
+   poi fai clic su Start.
 5. Scarica il dataset in JSON, CSV o Excel, oppure usa l'API di Apify.
 
 ## Input
@@ -61,10 +66,61 @@ Usa nomi di località, WOEID numerici o entrambi:
 }
 ```
 
-Le scorciatoie supportate includono Worldwide, United States, United Kingdom,
-Turkey & Brazil. Funzionano anche Canada, France, Germany, India, Indonesia,
-Japan, Mexico & Australia. Usa `woeids` per qualsiasi altra località
-supportata.
+`locations` accetta qualsiasi paese o città per cui X offre tendenze, come
+Worldwide, United States, Japan o London. Funzionano anche i codici paese di 2
+lettere. Un nome per cui X non offre tendenze non restituisce righe & non costa
+nulla. `woeids` accetta WOEID numerici.
+
+Per vedere ogni nome & WOEID, attiva `listLocations`. L'esecuzione elenca allora
+i luoghi per cui X offre tendenze, al posto delle tendenze:
+
+```json
+{ "listLocations": true, "country": "TR", "maxItems": 100 }
+```
+
+`country` accetta un nome o un codice di 2 lettere. `placeType` accetta
+`country`, `town`, `worldwide` o `unknown`. `nameContains` tiene i luoghi il cui
+nome contiene il tuo testo. Lascia vuoti tutti e 3 per elencare ogni luogo.
+
+Per cercare i luoghi di X per nome, compila `placeSearchTerms`. L'esecuzione
+restituisce allora luoghi al posto delle tendenze:
+
+```json
+{ "placeSearchTerms": ["New York"], "maxItems": 20 }
+```
+
+Ogni luogo ha l'`id` che la ricerca di post di X accetta come `place`. X ordina
+i luoghi, quindi il loro ordine può cambiare da un'esecuzione all'altra. X
+elenca fino a 20 luoghi per un nome, & meno per alcuni nomi, come New York.
+L'esecuzione tiene solo i luoghi con il nome che hai scritto, quindi New Delhi
+non restituisce righe & non costa nulla.
+
+`maxItems` limita l'intera esecuzione & la riempie un termine alla volta, quindi
+il primo termine può usarlo tutto. Imposta `maxItemsPerTarget` per dare a ogni
+termine una quota uguale:
+
+```json
+{
+  "placeSearchTerms": ["Paris", "Rome"],
+  "maxItems": 20,
+  "maxItemsPerTarget": 10
+}
+```
+
+Per elencare gli hashflag di X, attiva `listHashflags`. Un hashflag è l'emoji
+personalizzata che X mostra dopo un hashtag per un periodo stabilito:
+
+```json
+{ "listHashflags": true, "hashtagContains": "football" }
+```
+
+L'esecuzione elenca gli hashflag che X mostra ora. Disattiva `activeOnly` per
+aggiungere quelli terminati & quelli in arrivo. `hashtagContains` tiene gli
+hashtag che contengono il tuo testo.
+
+Un'esecuzione legge 1 tipo di riga. `listLocations` prevale su `listHashflags`,
+che prevale su `placeSearchTerms`. Senza nessuno di questi, l'esecuzione legge
+le tendenze.
 
 Le esecuzioni piccole senza problemi saltano `run-report` & risparmiano uso di
 Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
@@ -72,9 +128,9 @@ Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
 ## Output
 
 Ogni tendenza è 1 riga del dataset. Le righe riportano `name`, `rank`,
-`tweetVolume`, `query`, `url`, `woeid`, `sourceTarget` & `resultType`. I campi
-di origine mancanti restano assenti. X Trends Scraper di Xquik non inventa
-valori.
+`tweetVolume`, `query`, `url`, `woeid`, `sourceTarget` & `resultType`.
+`sourceTarget` è la località come l'hai scritta. I campi di origine mancanti
+restano assenti. X Trends Scraper di Xquik non inventa valori.
 
 Gli esempi usano valori fittizi. I risultati contengono dati live. Una riga di
 tendenza ha questo aspetto:
@@ -90,6 +146,61 @@ tendenza ha questo aspetto:
 }
 ```
 
+Con `listLocations`, ogni luogo è 1 riga del dataset. Le righe riportano
+`woeid`, `name`, `country`, `countryCode`, `placeType`, `placeTypeCode`,
+`parentWoeid`, `url` & `resultType`. `url` è il riferimento legacy di X per il
+luogo & potrebbe non aprirsi. Una riga di località di tendenza ha questo
+aspetto:
+
+```json
+{
+  "woeid": 2344116,
+  "name": "Istanbul",
+  "country": "Turkey",
+  "countryCode": "TR",
+  "placeType": "Town",
+  "placeTypeCode": 7,
+  "parentWoeid": 23424969,
+  "resultType": "trendLocation"
+}
+```
+
+Con `placeSearchTerms`, ogni luogo è 1 riga del dataset. Le righe riportano
+`id`, `name`, `fullName`, `country`, `countryCode`, `placeType`, `url`,
+`centroid`, `boundingBox`, `attributes`, `containedWithin`, `sourceTarget` &
+`resultType`. `centroid` contiene la longitudine, poi la latitudine. Una riga di
+luogo ha questo aspetto:
+
+```json
+{
+  "id": "0123456789abcdef",
+  "name": "Sample City",
+  "fullName": "Sample City, Sample Country",
+  "country": "Sample Country",
+  "countryCode": "US",
+  "placeType": "city",
+  "centroid": [-73.97, 40.78],
+  "sourceTarget": "New York",
+  "resultType": "place"
+}
+```
+
+Con `listHashflags`, ogni hashflag è 1 riga del dataset. Le righe riportano
+`hashtag`, `assetUrl`, `startsAt`, `endsAt`, `isHashfettiEnabled`, `animations`
+& `resultType`. Una riga di hashflag ha questo aspetto:
+
+```json
+{
+  "hashtag": "SampleHashtag",
+  "assetUrl": "https://abs.twimg.com/hashflags/Sample/Sample.png",
+  "startsAt": "2026-10-02T10:00:00.000Z",
+  "endsAt": "2027-01-03T14:59:00.000Z",
+  "isHashfettiEnabled": false,
+  "animations": [],
+  "resultType": "hashflag"
+}
+```
+
 ## Quanto costa estrarre le tendenze di X?
 
 Su ogni piano Apify paghi $0.00015 per riga consegnata. Apify fattura a parte il
@@ -97,6 +208,8 @@ tuo uso della piattaforma.
 
 - Un addebito per ogni riga di dati consegnata. La diagnostica in `diagnostics`
   è gratuita.
+- Una riga di località di tendenza, luogo o hashflag costa quanto una riga di
+  tendenza.
 - Nessun costo di avvio, per query o per località.
 - La deduplicazione avviene prima della fatturazione.
 - Le impostazioni di Apify sull'addebito massimo totale limitano le righe
@@ -197,6 +310,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
 ## FAQ
 
+Le risposte alle domande più comuni, poi dove trovare assistenza.
+
 ### Serve una chiave API X o il login?
 
 No. X Trends Scraper di Xquik non richiede chiave API X, login o credenziali.
@@ -211,15 +326,16 @@ norme sulla privacy applicabili. Nel dubbio, chiedi a un legale qualificato.
 
 Apri prima l'output gratuito `diagnostics`. Lo stato di un'esecuzione vuota ti
 dice di controllare target & filtri. `stopCauses` assegna a ogni causa un
-`nextAction` da seguire. L'esecuzione nomina ogni località sconosciuta & dice
-cosa usare al suo posto.
+`nextAction` da seguire. Una località per cui X non offre tendenze non
+restituisce righe. Attiva `listLocations` per vedere i nomi che X accetta.
 
 ### Posso usare l'API, le pianificazioni & le integrazioni?
 
-Sì. Scegli tra 50 task pubblici o 129 operazioni REST di Xquik. La
+Sì. Scegli tra 50 task pubblici o l'API REST di Xquik. La
 [scheda API](https://apify.com/xquik/x-trends-scraper/api) ha esempi in Python,
-JavaScript & cURL. Le [pianificazioni](https://docs.apify.com/platform/schedules)
-di Apify avviano X Trends Scraper di Xquik con un cron. Gli agenti usano
+JavaScript & cURL. Le
+[pianificazioni](https://docs.apify.com/platform/schedules) di Apify avviano X
+Trends Scraper di Xquik con un cron. Gli agenti usano
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp). Usa `latest`, a
 meno che non ti serva una build precedente.
 

@@ -53,8 +53,8 @@ post & query di ricerca con oltre 50 filtri.
 
 ### Casi d'uso
 
-- Alimentare ricerca, arricchimento, analisi & addestramento IA con più campi
-  per tweet. Il 2026-09-29 la nostra riga mediana aveva 63 campi. È 2x la
+- Alimenta ricerca, arricchimento, analisi & addestramento AI con più campi per
+  tweet. Il 2026-09-29 la nostra riga rich mediana aveva 63 campi. È 2x la
   mediana di altri 11 Actor.
 - Segui il sentiment del brand nei post.
 - Monitora i post dei concorrenti & i termini del tuo settore.
@@ -78,8 +78,8 @@ post & query di ricerca con oltre 50 filtri.
 | `lang`                 | Lingua del post                                                     |
 | `url`                  | Link diretto al post                                                |
 | `tweetUrl`             | Alias dell'URL del post nell'output piatto                          |
-| `twitterUrl`           | URL in formato twitter.com nell'output piatto                       |
-| `author`               | Campi disponibili dell'autore (nome utente, bio, sito, conteggi)    |
+| `twitterUrl`           | URL `twitter.com` nell'output piatto                                |
+| `author`               | Campi dell'autore: nome utente, bio, sito, conteggi                 |
 | `authorUsername`       | Nome utente dell'autore nell'output piatto                          |
 | `authorFollowers`      | Numero di follower dell'autore nell'output piatto                   |
 | `authorUrl`            | Sito web dell'autore nell'output piatto, quando disponibile         |
@@ -118,6 +118,11 @@ della modifica. `tombstone` conserva gli avvisi di visibilità.
 `unmentionedUserIds` elenca gli utenti che hanno lasciato la conversazione.
 Consulta OpenAPI per i campi esatti.
 
+Imposta `outputVariant: "rich"` per avere il massimo dei dati per riga. Le righe
+rich aggiungono in fondo `hasCommunityNotes`, `quotedTweetPermalink`,
+`unavailableAuthorId` & `sourceUser` dei media. Le righe legacy restano
+invariate.
+
 Gli oggetti `author` annidati riportano i campi pubblici del profilo. Coprono
 identità, conteggi, verifica, disponibilità, dati professionali & biografie del
 profilo.
@@ -139,6 +144,8 @@ permesso di modifica & simili. Anche l'output raw li elimina.
 
 ## Come uso X Tweet Scraper per estrarre dati dai tweet?
 
+Ogni esempio qui sotto è un input completo. Scegli quello adatto ai tuoi dati.
+
 Segui questi passaggi in Apify Console:
 
 1. Apri un [esempio di task](#esempi-di-task) o la scheda Input.
@@ -156,7 +163,7 @@ Incolla un mix qualsiasi di URL di post, profili, ricerche o liste:
 ```json
 {
   "startUrls": [
-    { "url": "https://x.com/elonmusk/status/1846987139428634858" },
+    { "url": "https://x.com/jack/status/20" },
     { "url": "https://x.com/nasa" },
     { "url": "https://x.com/search?q=AI%20lang%3Aen" },
     { "url": "https://x.com/i/lists/1748648376080666720" }
@@ -214,27 +221,39 @@ quindi esclude i repost. Aggiungi `include:nativeretweets` per tenerli, oppure
 ### Cerca i post per ID
 
 ```json
-{ "tweetIds": ["1846987139428634858", "1858743654778892784"], "maxItems": 100 }
+{ "tweetIds": ["20", "2082577277246972300"], "maxItems": 100 }
 ```
 
 I risultati mantengono l'ordine del tuo input, eliminano i duplicati & includono
 solo i post richiesti. La ricerca per ID accetta anche `tweetId`, `tweetIDs`,
 `tweets`, `postIds`, `lookupPostIds`, `tweetUrls` & `postUrls`.
 
+Metti tutti i tuoi ID in 1 esecuzione. Ogni esecuzione paga ad Apify lo stesso
+costo di avvio. Con 1 ID per esecuzione, l'uso di Apify aggiunge circa $0.00008
+a ogni post. Con 188 ID in 1 esecuzione, aggiunge circa $0.000005. Un'esecuzione
+con meno di 5 ID termina con questo consiglio.
+
 ### Modalità engagement, thread & articolo
 
 Imposta `mode` per forzare un percorso, qualunque altro campo contenga l'input:
 
 ```json
-{ "mode": "replies", "replyTweetIds": ["1846987139428634858"], "maxItems": 100 }
+{ "mode": "replies", "replyTweetIds": ["2082577277246972300"], "maxItems": 100 }
 ```
 
 Le modalità per post & ricerche sono `tweet`, `tweets` & `search`. Le modalità
-per i profili sono `profileTweets`, `profileReplies`, `profileMedia` &
-`profileLikes`. `listTweets` legge i post di una lista, mentre `article` legge
-l'articolo di X contenuto in un post. Le modalità per un singolo post sono
-`replies`, `quotes`, `thread`, `retweeters`, `favoriters`, `translation` &
-`embed`.
+per i profili sono `profileTweets`, `profileReplies`, `profileMedia`,
+`profileLikes` & `profileMentions`. `listTweets` legge i post di una lista,
+mentre `article` legge l'articolo di X contenuto in un post. Le modalità per un
+singolo post sono `replies`, `quotes`, `thread`, `retweeters`, `favoriters`,
+`translation` & `embed`.
+
+`profileMentions` restituisce i post che menzionano ogni nome utente, dal più
+recente:
+
+```json
+{ "mode": "profileMentions", "twitterHandles": ["nasa"], "maxItems": 100 }
+```
 
 `profileTweets` segue la scheda Post del profilo su X. Restituisce i post
 dell'account, i suoi repost & le sue risposte ai propri post. Le righe arrivano
@@ -295,13 +314,14 @@ Le righe degli articoli includono `resultType: "article"`, `sourceTweetId`,
 `article` & un `author` facoltativo. Le righe utente di engagement includono
 `resultType: "user"`, `sourceTweetId` & `engagementMode`.
 
-`retweeters` funziona come una normale modalità di engagement pubblico.
-`favoriters` funziona al meglio delle possibilità. X può mostrare chi ha messo
-Mi piace solo sui post idonei o visibili all'autore. Anche i Mi piace del
-profilo funzionano al meglio, perché molti profili pubblici non hanno una scheda
-Mi piace leggibile. Se X non mostra utenti o post con Mi piace, l'Actor scrive un
-record `diagnostics` gratuito. Le righe dei post possono riportare il numero di
-segnalibri. X non mostra quali account hanno salvato un post nei segnalibri.
+La modalità retweeters funziona come una normale modalità di engagement
+pubblico. La modalità favoriters funziona al meglio delle possibilità. X può
+mostrare chi ha messo Mi piace solo sui post idonei o visibili all'autore. Anche
+i Mi piace del profilo funzionano al meglio delle possibilità, perché molti
+profili pubblici non hanno una scheda Mi piace leggibile. Se X non mostra utenti
+o post con Mi piace, l'Actor scrive un record `diagnostics` gratuito. Le righe
+dei post possono riportare il numero di segnalibri. X non mostra quali account
+hanno salvato un post nei segnalibri.
 
 ### Traduci i post & ottieni l'HTML di incorporamento
 
@@ -457,31 +477,63 @@ Per fissare un tetto alla spesa di un'esecuzione, vedi
 Su costo & velocità, X Tweet Scraper di Xquik ha battuto altri 11 Actor che
 estraggono post. La sua riga mediana aveva 63 campi, 2x la mediana degli altri.
 
-| Actor                                                             | Tweet utili | Costo per tweet utile | Tweet utili al secondo | Campi per riga | Esecuzione pubblica                                                      |
-| ----------------------------------------------------------------- | ----------: | --------------------: | ---------------------: | -------------: | ------------------------------------------------------------------------ |
-| xquik/x-tweet-scraper                                             |         890 |             $0.000175 |                   39.2 |             63 | [Vedi esecuzione](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX) |
-| xquik/x-tweet-scraper                                             |         883 |             $0.000176 |                   25.2 |             63 | [Vedi esecuzione](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf) |
-| xquik/x-tweet-scraper                                             |         882 |             $0.000177 |                   25.7 |             63 | [Vedi esecuzione](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba) |
-| xquik/x-tweet-scraper                                             |         877 |             $0.000178 |                   26.9 |             63 | [Vedi esecuzione](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W) |
-| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |         813 |             $0.000185 |                   10.5 |             36 | [Vedi esecuzione](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
-| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |         805 |             $0.000187 |                   10.6 |             36 | [Vedi esecuzione](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
-| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |         805 |             $0.000187 |                   10.7 |             36 | [Vedi esecuzione](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
-| kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest |         880 |             $0.000250 |                    9.1 |             46 | [Vedi esecuzione](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2) |
-| scraper_one/x-posts-search                                        |         804 |             $0.000314 |                    3.3 |             14 | [Vedi esecuzione](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0) |
-| danek/twitter-scraper                                             |         807 |             $0.000347 |                    5.0 |             27 | [Vedi esecuzione](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W) |
-| tweetapi/twitter-x-search-scraper                                 |         337 |             $0.000374 |                    2.6 |             28 | [Vedi esecuzione](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb) |
-| api-ninja/x-twitter-advanced-search                               |         837 |             $0.000430 |                    7.4 |             28 | [Vedi esecuzione](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib) |
-| apidojo/twitter-scraper-lite                                      |         251 |             $0.000494 |                   12.9 |             54 | [Vedi esecuzione](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta) |
-| apidojo/tweet-scraper                                             |         481 |             $0.000832 |                    7.8 |             55 | [Vedi esecuzione](https://console.apify.com/view/runs/PydoBgS1YRblg29bB) |
-| xtdata/twitter-x-scraper                                          |       1.378 |             $0.001168 |                   11.9 |             67 | [Vedi esecuzione](https://console.apify.com/view/runs/U91dRXEvKvqu41aop) |
-| seemuapps/x-tweet-scraper                                         |         805 |             $0.001242 |                    6.9 |             24 | [Vedi esecuzione](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
-| maximedupre/twitter-scraper                                       |          46 |             $0.002846 |                    0.3 |             31 | [Vedi esecuzione](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
+- `xquik/x-tweet-scraper`: 890 tweet utili, $0.000175 per tweet utile, 39,2 al
+  secondo & 63 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
+- `xquik/x-tweet-scraper`: 883 tweet utili, $0.000176 per tweet utile, 25,2 al
+  secondo & 63 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
+- `xquik/x-tweet-scraper`: 882 tweet utili, $0.000177 per tweet utile, 25,7 al
+  secondo & 63 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
+- `xquik/x-tweet-scraper`: 877 tweet utili, $0.000178 per tweet utile, 26,9 al
+  secondo & 63 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 813 tweet utili,
+  $0.000185 per tweet utile, 10,5 al secondo & 36 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 805 tweet utili,
+  $0.000187 per tweet utile, 10,6 al secondo & 36 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 805 tweet utili,
+  $0.000187 per tweet utile, 10,7 al secondo & 36 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
+- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest`: 880 tweet
+  utili, $0.000250 per tweet utile, 9,1 al secondo & 46 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
+- `scraper_one/x-posts-search`: 804 tweet utili, $0.000314 per tweet utile, 3,3
+  al secondo & 14 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
+- `danek/twitter-scraper`: 807 tweet utili, $0.000347 per tweet utile, 5,0 al
+  secondo & 27 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
+- `tweetapi/twitter-x-search-scraper`: 337 tweet utili, $0.000374 per tweet
+  utile, 2,6 al secondo & 28 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
+- `api-ninja/x-twitter-advanced-search`: 837 tweet utili, $0.000430 per tweet
+  utile, 7,4 al secondo & 28 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
+- `apidojo/twitter-scraper-lite`: 251 tweet utili, $0.000494 per tweet utile,
+  12,9 al secondo & 54 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
+- `apidojo/tweet-scraper`: 481 tweet utili, $0.000832 per tweet utile, 7,8 al
+  secondo & 55 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
+- `xtdata/twitter-x-scraper`: 1.378 tweet utili, $0.001168 per tweet utile, 11,9
+  al secondo & 67 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
+- `seemuapps/x-tweet-scraper`: 805 tweet utili, $0.001242 per tweet utile, 6,9
+  al secondo & 24 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/FstursEw43TbcipYU)
+- `maximedupre/twitter-scraper`: 46 tweet utili, $0.002846 per tweet utile, 0,3
+  al secondo & 31 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
 
 Ogni Actor ha eseguito la stessa ricerca con gli stessi filtri. Gli altri Actor
 sono stati eseguiti il 2026-09-27. Le esecuzioni di Xquik hanno usato
 `outputVariant: "rich"` il 2026-09-29. Tutte le esecuzioni hanno usato il
-livello Bronze. Un tweet utile è un post originale unico in inglese con 10+
-like. Il costo è la spesa totale del cliente per tweet utile. Il nostro include
+livello Bronze. Un tweet utile è un post originale unico in inglese con 10+ Mi
+piace. Il costo è la spesa totale del cliente per tweet utile. Il nostro include
 l'uso di Apify che pagano i nostri clienti. Campi per riga è la mediana dei
 campi non vuoti, inclusi quelli annidati. Una lista conta come 1 campo. Apri
 un'esecuzione per vedere input, log & dataset.
@@ -522,9 +574,10 @@ riuscita dell'Actor conferma la consegna. Non conferma l'estrazione completa.
 Il testo dello stato nomina ogni causa dell'arresto. Un'esecuzione con un
 account mancante & una ricerca bloccata le cita entrambe. `stopCauses` elenca
 ogni causa con i propri `message`, `retryable` & `nextAction`. Le cause sono
-`target_not_found`, `target_protected`, `search_unavailable`, `likes_hidden`,
-`target_failed`, `pagination_safety_limit`, `reply_reach` & `deadline_reached`.
-L'esecuzione è `retryable` quando lo è almeno una causa.
+`target_not_found`, `target_suspended`, `target_protected`,
+`search_unavailable`, `likes_hidden`, `target_failed`,
+`pagination_safety_limit`, `reply_reach` & `deadline_reached`. L'esecuzione è
+`retryable` quando lo è almeno una causa.
 
 ### Target mancanti & non disponibili
 
@@ -541,18 +594,18 @@ tentativi. Anche i Mi piace che X nasconde contano come errori & si fermano
 subito. X mostra chi ha messo Mi piace a un post solo al suo autore. Mostra i
 post a cui un account ha messo Mi piace solo a quell'account.
 
-Quando tutti gli errori riguardano target non disponibili, la diagnostica imposta
-`retryable: false`. Controlla gli URL o i nomi utente dei target & scegli account
-pubblici disponibili. Restringi una ricerca che X non riesce a eseguire o
-cambiane i filtri. Al posto dei Mi piace nascosti, leggi utenti che hanno fatto
-repost, risposte o post. Gli altri errori conservano le indicazioni per
-riprovare i target non finiti.
+Quando tutti gli errori riguardano target non disponibili, la diagnostica
+imposta `retryable: false`. Controlla gli URL o i nomi utente dei target &
+scegli account pubblici disponibili. Restringi una ricerca che X non riesce a
+eseguire o cambiane i filtri. Al posto dei Mi piace nascosti, leggi utenti che
+hanno fatto repost, risposte o post. Gli altri errori conservano le indicazioni
+per riprovare i target non finiti.
 
 La diagnostica nomina quei target in `unavailableTargets`. Ogni voce ha il
 `target` come lo hai inserito, un `reason` & un `nextAction`. Il motivo è
-`not_found`, `protected`, `search_unavailable` o `likes_hidden`. Una voce di
-ricerca può avere anche un `fix`, come l'operatore da rimuovere. L'elenco
-contiene fino a 100 voci. Rimuovi quei target dal tuo input.
+`not_found`, `suspended`, `protected`, `search_unavailable` o `likes_hidden`.
+Una voce di ricerca può avere anche un `fix`, come l'operatore da rimuovere.
+L'elenco contiene fino a 100 voci. Rimuovi quei target dal tuo input.
 
 ### Limiti di sicurezza & di tempo
 
@@ -625,24 +678,33 @@ canonici restano quelli documentati di default. Un alias non scarta mai un campo
 così resta breve. Gli alias funzionano negli input JSON, API, SDK, di
 automazione & dei task salvati.
 
-| Campo che usi già                                                                                                                                                      | Xquik lo legge come                                                      |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`                                                                                             | `startUrls`                                                              |
-| `profileUrl`, come stringa singola                                                                                                                                     | `startUrls`                                                              |
-| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids`, o `tweetId` come stringa singola                                                            | `tweetIds`                                                               |
-| `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`, `screenNames`, `profileTweets`                                                                 | `twitterHandles`                                                         |
-| `username`, `handle`, `screenName`, come stringa singola                                                                                                               | `twitterHandles`                                                         |
-| `searchTerms`, `searchQueries`, `queries`, `search`, come elenco o 1 ricerca per riga                                                                                  | `searchTerms`                                                            |
-| `twitterContent`, `query`, `searchQuery`                                                                                                                               | `twitterContent`                                                         |
-| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
-| `sort`                                                                                                                                                                 | `queryType`                                                              |
-| `tweetLanguage`, `language`                                                                                                                                            | `lang`                                                                   |
-| `author`, `inReplyTo`, `mentioning`                                                                                                                                    | `from`, `to`, `@`                                                        |
-| `start`, `startDate`, `end`, `endDate`                                                                                                                                 | `since`, `until`                                                         |
-| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                                | `min_retweets`, `min_faves`, `min_replies`                               |
-| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                               | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
-| `geotaggedNear`, `withinRadius`                                                                                                                                        | `near`, `within`                                                         |
-| `quickDateRange` del Google Search Scraper, come `d7`, `w2`, `m1` o `y`                                                                                                | `since_time`, contato a ritroso dall'avvio dell'esecuzione               |
+Ogni voce elenca i campi che usi già, poi il campo a cui corrispondono:
+
+- `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`:
+  `startUrls`
+- `profileUrl`, come stringa singola: `startUrls`
+- `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids`, o
+  `tweetId` come stringa singola: `tweetIds`
+- `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`,
+  `screenNames`, `profileTweets`: `twitterHandles`
+- `username`, `handle`, `screenName`, come stringa singola: `twitterHandles`
+- `searchTerms`, `searchQueries`, `queries`, `search`, come elenco o 1 ricerca
+  per riga: `searchTerms`
+- `twitterContent`, `query`, `searchQuery`: `twitterContent`
+- `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`,
+  `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`,
+  `maxTweets`, `tweetsDesired`: `maxItems`
+- `sort`: `queryType`
+- `tweetLanguage`, `language`: `lang`
+- `author`, `inReplyTo`, `mentioning`: `from`, `to`, `@`
+- `start`, `startDate`, `end`, `endDate`: `since`, `until`
+- `minimumRetweets`, `minimumFavorites`, `minimumReplies`: `min_retweets`,
+  `min_faves`, `min_replies`
+- `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`: `filter:images`,
+  `filter:videos`, `filter:quote`, `filter:blue_verified`
+- `geotaggedNear`, `withinRadius`: `near`, `within`
+- `quickDateRange` del Google Search Scraper, come `d7`, `w2`, `m1` o `y`:
+  `since_time`, contato a ritroso dall'avvio dell'esecuzione
 
 Come si comporta un input incollato:
 
@@ -701,9 +763,9 @@ da X.
 
 ```json
 {
-  "id": "1846987139428634858",
-  "text": "The future of AI is...",
-  "createdAt": "Sun Mar 15 12:00:00 +0000 2026",
+  "id": "20",
+  "text": "just setting up my twttr",
+  "createdAt": "Tue Mar 21 20:50:14 +0000 2006",
   "retweetCount": 500,
   "replyCount": 120,
   "likeCount": 5000,
@@ -711,12 +773,12 @@ da X.
   "viewCount": 1200000,
   "bookmarkCount": 300,
   "lang": "en",
-  "url": "https://x.com/elonmusk/status/1846987139428634858",
+  "url": "https://x.com/jack/status/20",
   "author": {
-    "id": "44196397",
-    "username": "elonmusk",
-    "name": "Elon Musk",
-    "followers": 180000000,
+    "id": "12",
+    "username": "jack",
+    "name": "jack",
+    "followers": 6000000,
     "verified": true
   },
   "media": [{ "type": "photo", "url": "https://..." }],
@@ -728,7 +790,7 @@ da X.
   "isNoteTweet": false,
   "isQuoteStatus": false,
   "isReply": false,
-  "conversationId": "1846987139428634858"
+  "conversationId": "20"
 }
 ```
 
@@ -849,8 +911,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
 ## Ti serve più dello scraping?
 
-Xquik offre anche 47 strumenti nella dashboard, 129 operazioni REST, webhook
-firmati & un server MCP.
+Xquik offre anche 47 strumenti nella dashboard, un'API REST, webhook firmati &
+un server MCP.
 
 - [Documentazione API](https://docs.xquik.com/introduction): guide all'API REST
 - [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets):
@@ -868,6 +930,8 @@ firmati & un server MCP.
 
 ## FAQ
 
+Le risposte alle domande più comuni, poi dove trovare assistenza.
+
 ### Serve una chiave API X?
 
 No. Non ti servono chiave API X, login o credenziali.
@@ -883,7 +947,7 @@ Nel [benchmark](#benchmark), X Tweet Scraper di Xquik ha consegnato da 25,2 a
 39,2 post utili al secondo. Il tempo di esecuzione dipende dal tuo input, dal
 numero di risultati & dalla disponibilità di X.
 
-### Perché una ricerca Latest restituisce post che la scheda Più recenti di X non mostra?
+### Perché ricevo post che la scheda di ricerca di X non mostra?
 
 X lascia fuori dalla scheda Più recenti alcuni post che corrispondono. X Tweet
 Scraper di Xquik restituisce anche quei post. Ogni post è un vero risultato
@@ -892,8 +956,8 @@ della ricerca di X per la tua query. Paghi ogni post una sola volta.
 ### Quali operatori di ricerca funzionano?
 
 La ricerca avanzata di X supporta autori, destinatari, menzioni, date,
-engagement, media & posizione. Consulta
-[Principali operatori di ricerca supportati](#principali-operatori-di-ricerca-supportati)
+engagement, media & posizione. Consulta i
+[principali operatori supportati](#principali-operatori-di-ricerca-supportati)
 per gli esempi.
 
 ### Posso usare l'API di Apify per avviarlo?

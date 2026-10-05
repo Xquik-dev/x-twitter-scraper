@@ -17,12 +17,14 @@
 
 Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
 monde. Ses données X sont les plus complètes. X List Scraper de Xquik collecte
-les posts, les membres et les abonnés d'une Liste. La plupart des autres Actors
-Apify facturent avant de filtrer ou de dédupliquer. Xquik facture seulement les
-résultats livrés, uniques et conformes à vos filtres.
+les détails, les posts, les membres et les abonnés d'une Liste, et trouve des
+Listes par mot-clé. La plupart des autres Actors Apify facturent avant de
+filtrer ou de dédupliquer. Xquik facture seulement les résultats livrés, uniques
+et conformes à vos filtres.
 
-Scrapez les posts, les membres et les abonnés de Listes X à partir d'URL ou d'ID
-de Liste numériques. Vous payez **$0.00015 par ligne livrée**, et Apify facture
+Scrapez les détails, les posts, les membres et les abonnés de Listes X à partir
+d'URL ou d'ID de Liste numériques. Ou trouvez des Listes publiques avec des
+termes de recherche. Vous payez **$0.00015 par ligne livrée**, et Apify facture
 l'usage de la plateforme à part. Vous n'avez besoin ni de clé API X ni de
 connexion.
 
@@ -31,13 +33,20 @@ connexion.
 
 ## Données de Liste et filtres
 
+- Les détails de la Liste : nom, description, nombres de membres et d'abonnés,
+  date de création, bannière et profil public du propriétaire.
 - Les posts de la Liste avec texte, auteur, métriques, médias et horodatages.
 - Les membres et les abonnés de la Liste.
+- La recherche de Listes par mot-clé. Chaque ligne est 1 Liste avec son
+  propriétaire, son nombre de membres et son nombre d'abonnés.
 - Les réponses dans les posts de la Liste, en option.
 - Des filtres de date, d'horodatage Unix, de langue, de médias, d'engagement, de
   certification et de profil.
+- Les Listes publiques qu'un compte a créées ou dont il est membre, à partir de
+  son nom d'utilisateur ou de l'URL de son profil.
 - Plusieurs Listes et types de ressources en 1 run.
-- Un plafond global et un plafond par ressource de Liste.
+- Un plafond global et un plafond par ressource de Liste ou par terme de
+  recherche.
 - Les runs reprennent après une migration Apify.
 - La suppression des doublons avant la facturation.
 
@@ -45,7 +54,8 @@ connexion.
 
 1. Ouvrez X List Scraper de Xquik dans Apify Console.
 2. Collez des URL de Liste dans `startUrls` ou des ID de Liste numériques dans
-   `listIds`.
+   `listIds`. Pour trouver des Listes, ajoutez plutôt des mots-clés dans
+   `searchTerms`.
 3. Choisissez `resources` et ajoutez des filtres comme `sinceDate` ou
    `minLikes`.
 4. Réglez `maxItems` pour plafonner les lignes livrées, puis cliquez sur Start.
@@ -68,10 +78,16 @@ connexion.
 ```json
 {
   "listIds": ["1748648376080666720"],
-  "resources": ["tweets", "members", "followers"],
+  "resources": ["info", "tweets", "members", "followers"],
   "includeReplies": false,
   "maxItems": 10000
 }
+```
+
+Pour trouver des Listes par mot-clé, envoyez des termes de recherche :
+
+```json
+{ "searchTerms": ["space news", "climate science"], "maxItemsPerTarget": 50 }
 ```
 
 Les petits runs sans problème n'écrivent pas `run-report` et réduisent l'usage
@@ -79,12 +95,55 @@ Apify. Activez `alwaysSaveRunRecords` pour l'écrire à chaque run.
 
 ## Sortie
 
-Dans chaque ligne, `resultType` vaut `listTweet`, `listMember` ou
-`listFollower`. `sourceTarget` garde l'ID de la Liste d'entrée. Le corps de la
-ligne suit la structure stable des réponses de Xquik pour un post ou un profil.
+Dans chaque ligne, `resultType` vaut `list`, `listTweet`, `listMember` ou
+`listFollower`. `sourceTarget` garde l'ID de la Liste d'entrée, ou le terme de
+recherche qui a trouvé une ligne `list`. Une ligne `list` contient les détails
+d'une Liste, 1 par Liste. Les autres lignes suivent la structure stable des
+réponses de Xquik pour un post ou un profil.
+
+### Les Listes d'un compte
+
+Ajoutez des noms d'utilisateur dans `twitterHandles`, ou des URL de profil dans
+`startUrls`, pour lister les Listes publiques de chaque compte :
+
+```json
+{ "twitterHandles": ["verge"], "accountLists": ["created", "memberships"] }
+```
+
+`created` liste les Listes que le compte a créées, et `memberships` les Listes
+qui le contiennent. Chaque Liste donne 1 ligne. Son `resultType` vaut
+`createdList` ou `listMembership`, et son `sourceTarget` est le nom
+d'utilisateur. La ligne porte aussi `id`, `name`, `description`, `memberCount`,
+`subscriberCount`, `createdAt`, `bannerUrl` et le profil `owner`. X montre une
+Liste privée seulement à son propriétaire, donc les Listes privées restent
+exclues.
+
+Les Listes créées par chaque compte arrivent avant celles dont il est membre.
+L'Actor lit les comptes en parallèle, donc les lignes de comptes différents
+arrivent au fil de la lecture. Regroupez-les par `sourceTarget`.
+
+Une ligne correspond à 1 compte et 1 Liste. Une Liste commune à 2 de vos comptes
+donne 2 lignes, 1 sous chacun. Xquik facture chaque ligne. `dedupeAcrossTargets`
+ne retire jamais ces lignes.
 
 Les exemples utilisent des valeurs fictives. Les résultats reflètent les données
-en direct. Une ligne de membre de Liste ressemble à ceci :
+en direct. Une ligne de détails de Liste ressemble à ceci :
+
+```json
+{
+  "resultType": "list",
+  "sourceTarget": "4143408",
+  "id": "4143408",
+  "name": "NASA Centers",
+  "description": "NASA has 10 centers http://www.nasa.gov/about/sites",
+  "memberCount": 11,
+  "subscriberCount": 859,
+  "createdAt": "2009-12-02T22:41:02.000Z",
+  "owner": { "username": "NASA", "name": "NASA" }
+}
+```
+
+Une ligne de membre de Liste ressemble à ceci :
 
 ```json
 {
@@ -97,10 +156,26 @@ en direct. Une ligne de membre de Liste ressemble à ceci :
 }
 ```
 
+Une ligne `list` issue d'un terme de recherche ressemble à ceci :
+
+```json
+{
+  "resultType": "list",
+  "sourceTarget": "space news",
+  "id": "1000000000000000001",
+  "name": "Sample Space News",
+  "description": "Sample accounts that post space news.",
+  "url": "https://x.com/i/lists/1000000000000000001",
+  "memberCount": 35,
+  "subscriberCount": 76,
+  "owner": { "username": "sample_user", "name": "Sample User" }
+}
+```
+
 ## Combien coûte le scraping de Listes X ?
 
 Le prix est de $0.00015 par ligne livrée sur chaque plan Apify. Apify facture
-l'usage de votre plateforme à part.
+votre usage de la plateforme à part.
 
 - Une facturation par ligne de données livrée. Les diagnostics sont gratuits
   dans `diagnostics`.
@@ -211,6 +286,8 @@ données dont vous avez besoin.
 
 ## FAQ
 
+Les réponses aux questions fréquentes, puis où trouver de l'aide.
+
 ### Ai-je besoin d'une clé API X ou d'une connexion ?
 
 Non. X List Scraper de Xquik n'a besoin ni de clé API X, ni de connexion, ni
@@ -232,7 +309,7 @@ indique comment la corriger.
 
 ### Puis-je utiliser l'API, les planifications et les intégrations ?
 
-Oui. Choisissez parmi 50 tâches publiques ou 129 opérations REST de Xquik.
+Oui. Choisissez parmi 50 tâches publiques ou l'API REST de Xquik.
 L'[onglet API](https://apify.com/xquik/x-list-scraper/api) propose des exemples
 en Python, JavaScript et cURL. Les
 [planifications](https://docs.apify.com/platform/schedules) Apify lancent X List

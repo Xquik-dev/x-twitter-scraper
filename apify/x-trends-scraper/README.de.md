@@ -31,8 +31,12 @@ separat. Du brauchst keinen X-API-Schlüssel & keinen Login.
 
 ## Standorte & Trenddaten
 
-- Mehrere Länder oder WOEIDs, parallel gelesen.
+- Mehrere Länder, Städte oder WOEIDs, parallel gelesen.
 - Bis zu 50 aktuelle Trends pro Standort.
+- Eine Liste aller Orte, für die X Trends anbietet, mit WOEID, Land & Typ.
+- X-Ortssuche, mit der Orts-ID, die die X-Postsuche annimmt.
+- X-Hashflags: die benutzerdefinierten Emojis, die X nach manchen Hashtags
+  zeigt.
 - Rang, Thema, Suchbegriff, Post-Volumen (Tweet-Volumen), Such-URL, WOEID &
   Quellstandort.
 - Standortzuordnung in jedem Datensatz.
@@ -46,8 +50,8 @@ separat. Du brauchst keinen X-API-Schlüssel & keinen Login.
 1. Öffne X Trends Scraper von Xquik in der Apify Console.
 2. Gib Standortnamen in `locations` oder numerische WOEIDs in `woeids` ein.
 3. Setze `maxTrendsPerLocation` auf bis zu 50 Trends pro Standort.
-4. Setze `maxItems`, um die gelieferten Datensätze zu begrenzen. Klicke dann
-   auf Start.
+4. Setze `maxItems`, um die gelieferten Datensätze für den gesamten Run zu
+   begrenzen. Klicke dann auf Start.
 5. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
 
 ## Eingabe
@@ -62,10 +66,62 @@ Nutze Standortnamen, numerische WOEIDs oder beides:
 }
 ```
 
-Unterstützte Kurzformen sind unter anderem Worldwide, United States, United
-Kingdom, Turkey & Brazil. Auch Canada, France, Germany, India, Indonesia, Japan,
-Mexico & Australia funktionieren. Nutze `woeids` für jeden anderen
-unterstützten Standort.
+`locations` nimmt jedes Land & jede Stadt an, für die X Trends anbietet, etwa
+Worldwide, United States, Japan oder London. Ländercodes mit 2 Buchstaben
+funktionieren auch. Ein Name, für den X keine Trends anbietet, liefert keine
+Datensätze & kostet nichts. `woeids` nimmt numerische WOEIDs an.
+
+Aktiviere `listLocations`, um jeden Namen & jede WOEID zu sehen. Der Run listet
+dann statt Trends die Orte, für die X Trends anbietet:
+
+```json
+{ "listLocations": true, "country": "TR", "maxItems": 100 }
+```
+
+`country` nimmt einen Namen oder einen Code mit 2 Buchstaben an. `placeType`
+nimmt `country`, `town`, `worldwide` oder `unknown` an. `nameContains` behält
+Orte, deren Name deinen Text enthält. Lass alle 3 leer, um jeden Ort zu listen.
+
+Fülle `placeSearchTerms` aus, um X-Orte nach Namen zu suchen. Der Run liefert
+dann Orte statt Trends:
+
+```json
+{ "placeSearchTerms": ["New York"], "maxItems": 20 }
+```
+
+Jeder Ort hat die `id`, die die X-Postsuche als `place` annimmt. X ordnet die
+Orte nach Rang, ihre Reihenfolge kann sich also zwischen Runs unterscheiden. X
+listet bis zu 20 Orte für einen Namen & weniger für einige Namen, etwa New York.
+Der Run behält nur Orte mit dem Namen, den du eingegeben hast. New Delhi liefert
+also keine Datensätze & kostet nichts.
+
+`maxItems` begrenzt den gesamten Run & füllt ihn Begriff für Begriff. Der erste
+Begriff kann also alles verbrauchen. Setze `maxItemsPerTarget`, um jedem Begriff
+einen gleichen Anteil zu geben:
+
+```json
+{
+  "placeSearchTerms": ["Paris", "Rome"],
+  "maxItems": 20,
+  "maxItemsPerTarget": 10
+}
+```
+
+Aktiviere `listHashflags`, um X-Hashflags zu listen. Ein Hashflag ist das
+benutzerdefinierte Emoji, das X für eine festgelegte Zeit nach einem Hashtag
+zeigt:
+
+```json
+{ "listHashflags": true, "hashtagContains": "football" }
+```
+
+Der Run listet die Hashflags, die X gerade zeigt. Deaktiviere `activeOnly`, um
+beendete & kommende zu ergänzen. `hashtagContains` behält Hashtags, die deinen
+Text enthalten.
+
+Ein Run liest 1 Art von Datensatz. `listLocations` hat Vorrang vor
+`listHashflags`, das Vorrang vor `placeSearchTerms` hat. Ohne eines davon liest
+der Run Trends.
 
 Kleine Runs ohne Probleme überspringen `run-report` & sparen Apify-Nutzung.
 Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
@@ -73,7 +129,8 @@ Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 ## Ausgabe
 
 Jeder Trend ist 1 Datensatz im Dataset. Datensätze enthalten `name`, `rank`,
-`tweetVolume`, `query`, `url`, `woeid`, `sourceTarget` & `resultType`. Fehlende
+`tweetVolume`, `query`, `url`, `woeid`, `sourceTarget` & `resultType`.
+`sourceTarget` ist der Standort, wie du ihn geschrieben hast. Fehlende
 Quellfelder bleiben weg. X Trends Scraper von Xquik erfindet keine Werte.
 
 Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
@@ -90,6 +147,61 @@ Trend-Datensatz sieht so aus:
 }
 ```
 
+Mit `listLocations` ist jeder Ort 1 Datensatz im Dataset. Datensätze enthalten
+`woeid`, `name`, `country`, `countryCode`, `placeType`, `placeTypeCode`,
+`parentWoeid`, `url` & `resultType`. `url` ist der alte Verweis von X auf den
+Ort & öffnet sich eventuell nicht. Ein Datensatz für einen Trend-Standort sieht
+so aus:
+
+```json
+{
+  "woeid": 2344116,
+  "name": "Istanbul",
+  "country": "Turkey",
+  "countryCode": "TR",
+  "placeType": "Town",
+  "placeTypeCode": 7,
+  "parentWoeid": 23424969,
+  "resultType": "trendLocation"
+}
+```
+
+Mit `placeSearchTerms` ist jeder Ort 1 Datensatz im Dataset. Datensätze
+enthalten `id`, `name`, `fullName`, `country`, `countryCode`, `placeType`,
+`url`, `centroid`, `boundingBox`, `attributes`, `containedWithin`,
+`sourceTarget` & `resultType`. `centroid` enthält erst den Längengrad, dann den
+Breitengrad. Ein Orts-Datensatz sieht so aus:
+
+```json
+{
+  "id": "0123456789abcdef",
+  "name": "Sample City",
+  "fullName": "Sample City, Sample Country",
+  "country": "Sample Country",
+  "countryCode": "US",
+  "placeType": "city",
+  "centroid": [-73.97, 40.78],
+  "sourceTarget": "New York",
+  "resultType": "place"
+}
+```
+
+Mit `listHashflags` ist jedes Hashflag 1 Datensatz im Dataset. Datensätze
+enthalten `hashtag`, `assetUrl`, `startsAt`, `endsAt`, `isHashfettiEnabled`,
+`animations` & `resultType`. Ein Hashflag-Datensatz sieht so aus:
+
+```json
+{
+  "hashtag": "SampleHashtag",
+  "assetUrl": "https://abs.twimg.com/hashflags/Sample/Sample.png",
+  "startsAt": "2026-10-02T10:00:00.000Z",
+  "endsAt": "2027-01-03T14:59:00.000Z",
+  "isHashfettiEnabled": false,
+  "animations": [],
+  "resultType": "hashflag"
+}
+```
+
 ## Was kostet es, X-Trends zu scrapen?
 
 Auf jedem Apify-Plan kostet ein gelieferter Datensatz $0.00015. Apify berechnet
@@ -97,6 +209,8 @@ deine Plattformnutzung separat.
 
 - Eine Gebühr pro geliefertem Datensatz. Diagnosen in `diagnostics` sind
   kostenlos.
+- Ein Datensatz für einen Trend-Standort, einen Ort oder ein Hashflag kostet so
+  viel wie ein Trend-Datensatz.
 - Keine Gebühr für Start, Suchanfragen oder Standorte.
 - Die Deduplizierung läuft vor der Abrechnung.
 - Die Apify-Einstellung für die maximale Gesamtgebühr begrenzt die gelieferten
@@ -199,6 +313,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
 ## FAQ
 
+Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
+
 ### Brauche ich einen X-API-Schlüssel oder Login?
 
 Nein. X Trends Scraper von Xquik braucht keinen X-API-Schlüssel, keinen Login &
@@ -214,12 +330,13 @@ geltende Datenschutzregeln. Hol dir bei Unsicherheit qualifizierten Rechtsrat.
 
 Öffne zuerst die kostenlose Ausgabe `diagnostics`. Der Status eines leeren Runs
 rät dir, Ziele & Filter zu prüfen. `stopCauses` gibt jeder Ursache eine
-`nextAction`, der du folgen kannst. Der Run nennt jeden unbekannten Standort &
-sagt, was du stattdessen nutzen kannst.
+`nextAction`, der du folgen kannst. Ein Standort, für den X keine Trends
+anbietet, liefert keine Datensätze. Aktiviere `listLocations`, um die Namen zu
+sehen, die X annimmt.
 
 ### Kann ich API, Zeitpläne & Integrationen nutzen?
 
-Ja. Wähle aus 50 öffentlichen Tasks oder 129 REST-Operationen von Xquik. Der
+Ja. Wähle aus 50 öffentlichen Tasks oder der REST-API von Xquik. Der
 [API-Tab](https://apify.com/xquik/x-trends-scraper/api) enthält Beispiele für
 Python, JavaScript & cURL.
 Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) starten

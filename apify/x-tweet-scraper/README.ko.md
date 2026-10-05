@@ -50,8 +50,8 @@ Xquik의 X Tweet Scraper는 게시물, 참여 지표, 공개 작성자 프로필
 ### 사용 사례
 
 - 트윗당 더 많은 필드로 리서치, 데이터 보강, 분석 & AI 학습을 지원하세요. 저희
-  중앙값 행에는 2026-09-29에 필드가 63개 있었습니다. 다른 Actor 11개 중앙값의
-  2배입니다.
+  중앙값 rich 행에는 2026-09-29에 필드가 63개 있었습니다. 다른 Actor 11개
+  중앙값의 2배입니다.
 - 게시물 전반의 브랜드 감정을 추적하세요.
 - 경쟁사 게시물 & 업계 용어를 모니터링하세요.
 - 공개 대화에서 잠재 고객을 찾으세요.
@@ -60,51 +60,51 @@ Xquik의 X Tweet Scraper는 게시물, 참여 지표, 공개 작성자 프로필
 
 ### X Tweet Scraper로 어떤 데이터를 추출할 수 있나요?
 
-| 필드                   | 설명                                                 |
-| ---------------------- | ---------------------------------------------------- |
-| `id`                   | 게시물 ID                                            |
-| `text`                 | 게시물 전체 텍스트, 최대 25k자의 장문 게시물 포함    |
-| `createdAt`            | X 원본 타임스탬프 문자열                             |
-| `likeCount`            | 마음에 들어요 수                                     |
-| `retweetCount`         | 재게시 수                                            |
-| `replyCount`           | 답글 수                                              |
-| `quoteCount`           | 인용 수                                              |
-| `viewCount`            | 조회수                                               |
-| `bookmarkCount`        | 북마크 수                                            |
-| `lang`                 | 게시물 언어                                          |
-| `url`                  | 게시물 바로가기 링크                                 |
-| `tweetUrl`             | 플랫 출력의 게시물 URL 별칭                          |
-| `twitterUrl`           | 플랫 출력의 twitter.com 형식 URL                     |
-| `author`               | 제공되는 작성자 필드(사용자 아이디, 자기소개, 웹사이트, 각종 수치) |
-| `authorUsername`       | 플랫 출력의 작성자 사용자 아이디                     |
-| `authorFollowers`      | 플랫 출력의 작성자 팔로워 수                         |
-| `authorUrl`            | 플랫 출력의 작성자 웹사이트(있는 경우)               |
-| `authorDescription`    | 플랫 출력의 작성자 자기소개                          |
-| `authorCoverPicture`   | 플랫 출력의 작성자 헤더 이미지 URL                   |
-| `authorPinnedTweetIds` | 플랫 출력의 작성자 고정 게시물 ID                    |
-| `media`                | 첨부된 이미지, 동영상, GIF                           |
-| `mediaUrls`            | 플랫 출력의 미디어 URL                               |
-| `imageUrls`            | 플랫 출력의 이미지 URL                               |
-| `videoUrls`            | 플랫 출력의 동영상 URL                               |
-| `entities`             | 해시태그, URL, 멘션, 동영상 타임스탬프               |
-| `displayTextRange`     | X 표시 텍스트 범위(있는 경우)                        |
-| `contentDisclosure`    | 콘텐츠 고지 메타데이터(있는 경우)                    |
-| `conversationControl`  | 답글 허용 정책 & 공개 대화 소유자                    |
-| `reactionContext`      | 반응이 가리키는 공개 게시물 & 사용자                 |
-| `limitedActions`       | 공개 상호작용 제한 & 안내                            |
-| `isLimitedReply`       | 답글 제한 여부                                       |
-| `isNoteTweet`          | 장문 게시물(Note Tweet) 여부                         |
-| `isQuoteStatus`        | 다른 게시물을 인용하는지 여부                        |
-| `isRetweet`            | 재게시 행인지 여부(원본 포함)                        |
-| `isPinned`             | 작성자가 고정한 게시물인지 여부(플랫 행)             |
-| `isReply`              | 답글인지 여부                                        |
-| `quoted_tweet`         | 인용된 게시물 객체(인용 게시물인 경우)               |
-| `conversationId`       | 스레드/대화 ID                                       |
-| `resultType`           | 리치 행, 참여 행, 진단 행의 유형                     |
-| `sourceTweetId`        | 아티클 & 참여 모드의 원본 게시물 ID                  |
-| `article`              | `mode: "article"`의 구조화된 아티클 데이터           |
-| `translation`          | `mode: "translation"`의 X 번역                       |
-| `embed`                | `mode: "embed"`의 임베드 HTML & 링크                 |
+| 필드                   | 설명                                                      |
+| ---------------------- | --------------------------------------------------------- |
+| `id`                   | 게시물 ID                                                 |
+| `text`                 | 게시물 전체 텍스트, 최대 25k자의 장문 게시물 포함         |
+| `createdAt`            | X 원본 타임스탬프 문자열                                  |
+| `likeCount`            | 마음에 들어요 수                                          |
+| `retweetCount`         | 재게시 수                                                 |
+| `replyCount`           | 답글 수                                                   |
+| `quoteCount`           | 인용 수                                                   |
+| `viewCount`            | 조회수                                                    |
+| `bookmarkCount`        | 북마크 수                                                 |
+| `lang`                 | 게시물 언어                                               |
+| `url`                  | 게시물 바로가기 링크                                      |
+| `tweetUrl`             | 플랫 출력의 게시물 URL 별칭                               |
+| `twitterUrl`           | 플랫 출력의 `twitter.com` 형식 URL                        |
+| `author`               | 작성자 필드(사용자 아이디, 자기소개, 웹사이트, 각종 수치) |
+| `authorUsername`       | 플랫 출력의 작성자 사용자 아이디                          |
+| `authorFollowers`      | 플랫 출력의 작성자 팔로워 수                              |
+| `authorUrl`            | 플랫 출력의 작성자 웹사이트(있는 경우)                    |
+| `authorDescription`    | 플랫 출력의 작성자 자기소개                               |
+| `authorCoverPicture`   | 플랫 출력의 작성자 헤더 이미지 URL                        |
+| `authorPinnedTweetIds` | 플랫 출력의 작성자 고정 게시물 ID                         |
+| `media`                | 첨부된 이미지, 동영상, GIF                                |
+| `mediaUrls`            | 플랫 출력의 미디어 URL                                    |
+| `imageUrls`            | 플랫 출력의 이미지 URL                                    |
+| `videoUrls`            | 플랫 출력의 동영상 URL                                    |
+| `entities`             | 해시태그, URL, 멘션, 동영상 타임스탬프                    |
+| `displayTextRange`     | X 표시 텍스트 범위(있는 경우)                             |
+| `contentDisclosure`    | 콘텐츠 고지 메타데이터(있는 경우)                         |
+| `conversationControl`  | 답글 허용 정책 & 공개 대화 소유자                         |
+| `reactionContext`      | 반응이 가리키는 공개 게시물 & 사용자                      |
+| `limitedActions`       | 공개 상호작용 제한 & 안내                                 |
+| `isLimitedReply`       | 답글 제한 여부                                            |
+| `isNoteTweet`          | 장문 게시물(Note Tweet) 여부                              |
+| `isQuoteStatus`        | 다른 게시물을 인용하는지 여부                             |
+| `isRetweet`            | 재게시 행인지 여부(원본 포함)                             |
+| `isPinned`             | 작성자가 고정한 게시물인지 여부(플랫 행)                  |
+| `isReply`              | 답글인지 여부                                             |
+| `quoted_tweet`         | 인용된 게시물 객체(인용 게시물인 경우)                    |
+| `conversationId`       | 스레드/대화 ID                                            |
+| `resultType`           | 리치 행, 참여 행, 진단 행의 유형                          |
+| `sourceTweetId`        | 아티클 & 참여 모드의 원본 게시물 ID                       |
+| `article`              | `mode: "article"`의 구조화된 아티클 데이터                |
+| `translation`          | `mode: "translation"`의 X 번역                            |
+| `embed`                | `mode: "embed"`의 임베드 HTML & 링크                      |
 
 선택적 게시물 메타데이터에는 `authorUnavailable`, `card`, `communityId`,
 `communityNote`, `edit`, `exclusiveContent`, `noteTweet` & `postCta`가 있습니다.
@@ -112,6 +112,10 @@ Xquik의 X Tweet Scraper는 게시물, 참여 지표, 공개 작성자 프로필
 맥락을 담습니다. `previousCounts`는 수정 전 참여 수치를 담습니다. `tombstone`은
 표시 제한 안내를 담습니다. `unmentionedUserIds`는 대화에서 나간 사용자를
 나열합니다. 정확한 필드는 OpenAPI를 참고하세요.
+
+행당 데이터를 가장 많이 받으려면 `outputVariant: "rich"`를 설정하세요. 리치 행은
+끝에 `hasCommunityNotes`, `quotedTweetPermalink`, `unavailableAuthorId` &
+미디어의 `sourceUser`를 더합니다. 레거시 행은 그대로입니다.
 
 중첩된 `author` 객체에는 공개 프로필 필드가 들어 있습니다. 신원, 각종 수치,
 인증, 계정 상태, 프로페셔널 정보 & 프로필 자기소개를 다룹니다.
@@ -133,6 +137,8 @@ Xquik의 X Tweet Scraper는 게시물, 참여 지표, 공개 작성자 프로필
 
 ## X Tweet Scraper로 게시물(트윗) 데이터를 스크랩하려면 어떻게 하나요?
 
+아래 예시는 각각 완전한 입력입니다. 데이터에 맞는 예시를 고르세요.
+
 Apify Console에서 다음 단계를 따르세요.
 
 1. [태스크 예시](#태스크-예시)나 Input 탭을 여세요.
@@ -150,7 +156,7 @@ Apify Console에서 다음 단계를 따르세요.
 ```json
 {
   "startUrls": [
-    { "url": "https://x.com/elonmusk/status/1846987139428634858" },
+    { "url": "https://x.com/jack/status/20" },
     { "url": "https://x.com/nasa" },
     { "url": "https://x.com/search?q=AI%20lang%3Aen" },
     { "url": "https://x.com/i/lists/1748648376080666720" }
@@ -205,26 +211,37 @@ Search terms 필드에 쿼리를 1개 이상 넣으세요.
 ### ID로 게시물 조회
 
 ```json
-{ "tweetIds": ["1846987139428634858", "1858743654778892784"], "maxItems": 100 }
+{ "tweetIds": ["20", "2082577277246972300"], "maxItems": 100 }
 ```
 
 결과는 입력 순서를 지키고, 중복을 빼고, 요청한 게시물만 담습니다. 조회에는
 `tweetId`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweetUrls` &
 `postUrls`도 쓸 수 있습니다.
 
+ID는 모두 실행 1개에 넣으세요. 실행마다 Apify에 같은 시작 비용을 냅니다. 실행당
+ID가 1개면 Apify 사용료가 게시물마다 약 $0.00008씩 더 붙습니다. 실행 1개에 ID가
+188개면 약 $0.000005씩 더 붙습니다. ID가 5개 미만인 실행은 끝날 때 이 팁을 보여
+줍니다.
+
 ### 참여, 스레드 & 아티클 모드
 
 입력에 다른 필드가 있어도 한 경로로만 실행하려면 `mode`를 설정하세요.
 
 ```json
-{ "mode": "replies", "replyTweetIds": ["1846987139428634858"], "maxItems": 100 }
+{ "mode": "replies", "replyTweetIds": ["2082577277246972300"], "maxItems": 100 }
 ```
 
 게시물 & 검색 모드는 `tweet`, `tweets` & `search`입니다. 프로필 모드는
-`profileTweets`, `profileReplies`, `profileMedia` & `profileLikes`입니다.
-`listTweets`는 리스트 게시물을, `article`은 게시물 속 X 아티클을 읽습니다.
-게시물 1개를 대상으로 하는 모드는 `replies`, `quotes`, `thread`, `retweeters`,
-`favoriters`, `translation` & `embed`입니다.
+`profileTweets`, `profileReplies`, `profileMedia`, `profileLikes` &
+`profileMentions`입니다. `listTweets`는 리스트 게시물을, `article`은 게시물 속 X
+아티클을 읽습니다. 게시물 1개를 대상으로 하는 모드는 `replies`, `quotes`,
+`thread`, `retweeters`, `favoriters`, `translation` & `embed`입니다.
+
+`profileMentions`는 각 사용자 아이디를 멘션한 게시물을 최신순으로 반환합니다.
+
+```json
+{ "mode": "profileMentions", "twitterHandles": ["nasa"], "maxItems": 100 }
+```
 
 `profileTweets`는 X 프로필의 게시물 탭과 같게 동작합니다. 그 계정의 게시물,
 재게시 & 자기 게시물에 단 답글을 반환합니다. 행은 날짜순으로 나옵니다. 다른
@@ -436,29 +453,61 @@ Apify 플랫폼 사용료는 Apify가 따로 청구합니다. Xquik은 전달된
 Xquik의 X Tweet Scraper는 비용 & 속도에서 다른 게시물 Actor 11개를 앞섰습니다.
 이 Actor의 중앙값 행에는 필드가 63개 있었고, 다른 Actor 중앙값의 2배였습니다.
 
-| Actor                                                             | 유용한 트윗 | 유용한 트윗당 비용 | 초당 유용한 트윗 | 행당 필드 수 | 공개 실행                                                          |
-| ----------------------------------------------------------------- | ----------: | -----------------: | ---------------: | -----------: | ------------------------------------------------------------------ |
-| xquik/x-tweet-scraper                                             |         890 |          $0.000175 |             39.2 |           63 | [실행 보기](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX) |
-| xquik/x-tweet-scraper                                             |         883 |          $0.000176 |             25.2 |           63 | [실행 보기](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf) |
-| xquik/x-tweet-scraper                                             |         882 |          $0.000177 |             25.7 |           63 | [실행 보기](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba) |
-| xquik/x-tweet-scraper                                             |         877 |          $0.000178 |             26.9 |           63 | [실행 보기](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W) |
-| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |         813 |          $0.000185 |             10.5 |           36 | [실행 보기](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
-| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |         805 |          $0.000187 |             10.6 |           36 | [실행 보기](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
-| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |         805 |          $0.000187 |             10.7 |           36 | [실행 보기](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
-| kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest |         880 |          $0.000250 |              9.1 |           46 | [실행 보기](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2) |
-| scraper_one/x-posts-search                                        |         804 |          $0.000314 |              3.3 |           14 | [실행 보기](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0) |
-| danek/twitter-scraper                                             |         807 |          $0.000347 |              5.0 |           27 | [실행 보기](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W) |
-| tweetapi/twitter-x-search-scraper                                 |         337 |          $0.000374 |              2.6 |           28 | [실행 보기](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb) |
-| api-ninja/x-twitter-advanced-search                               |         837 |          $0.000430 |              7.4 |           28 | [실행 보기](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib) |
-| apidojo/twitter-scraper-lite                                      |         251 |          $0.000494 |             12.9 |           54 | [실행 보기](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta) |
-| apidojo/tweet-scraper                                             |         481 |          $0.000832 |              7.8 |           55 | [실행 보기](https://console.apify.com/view/runs/PydoBgS1YRblg29bB) |
-| xtdata/twitter-x-scraper                                          |       1,378 |          $0.001168 |             11.9 |           67 | [실행 보기](https://console.apify.com/view/runs/U91dRXEvKvqu41aop) |
-| seemuapps/x-tweet-scraper                                         |         805 |          $0.001242 |              6.9 |           24 | [실행 보기](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
-| maximedupre/twitter-scraper                                       |          46 |          $0.002846 |              0.3 |           31 | [실행 보기](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
+- `xquik/x-tweet-scraper`: 유용한 트윗 890개, 유용한 트윗당 $0.000175, 초당
+  39.2개 & 행당 필드 63개.
+  [실행 보기](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
+- `xquik/x-tweet-scraper`: 유용한 트윗 883개, 유용한 트윗당 $0.000176, 초당
+  25.2개 & 행당 필드 63개.
+  [실행 보기](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
+- `xquik/x-tweet-scraper`: 유용한 트윗 882개, 유용한 트윗당 $0.000177, 초당
+  25.7개 & 행당 필드 63개.
+  [실행 보기](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
+- `xquik/x-tweet-scraper`: 유용한 트윗 877개, 유용한 트윗당 $0.000178, 초당
+  26.9개 & 행당 필드 63개.
+  [실행 보기](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 유용한 트윗 813개,
+  유용한 트윗당 $0.000185, 초당 10.5개 & 행당 필드 36개.
+  [실행 보기](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 유용한 트윗 805개,
+  유용한 트윗당 $0.000187, 초당 10.6개 & 행당 필드 36개.
+  [실행 보기](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 유용한 트윗 805개,
+  유용한 트윗당 $0.000187, 초당 10.7개 & 행당 필드 36개.
+  [실행 보기](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
+- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest`: 유용한
+  트윗 880개, 유용한 트윗당 $0.000250, 초당 9.1개 & 행당 필드 46개.
+  [실행 보기](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
+- `scraper_one/x-posts-search`: 유용한 트윗 804개, 유용한 트윗당 $0.000314, 초당
+  3.3개 & 행당 필드 14개.
+  [실행 보기](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
+- `danek/twitter-scraper`: 유용한 트윗 807개, 유용한 트윗당 $0.000347, 초당
+  5.0개 & 행당 필드 27개.
+  [실행 보기](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
+- `tweetapi/twitter-x-search-scraper`: 유용한 트윗 337개, 유용한 트윗당
+  $0.000374, 초당 2.6개 & 행당 필드 28개.
+  [실행 보기](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
+- `api-ninja/x-twitter-advanced-search`: 유용한 트윗 837개, 유용한 트윗당
+  $0.000430, 초당 7.4개 & 행당 필드 28개.
+  [실행 보기](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
+- `apidojo/twitter-scraper-lite`: 유용한 트윗 251개, 유용한 트윗당 $0.000494,
+  초당 12.9개 & 행당 필드 54개.
+  [실행 보기](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
+- `apidojo/tweet-scraper`: 유용한 트윗 481개, 유용한 트윗당 $0.000832, 초당
+  7.8개 & 행당 필드 55개.
+  [실행 보기](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
+- `xtdata/twitter-x-scraper`: 유용한 트윗 1,378개, 유용한 트윗당 $0.001168, 초당
+  11.9개 & 행당 필드 67개.
+  [실행 보기](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
+- `seemuapps/x-tweet-scraper`: 유용한 트윗 805개, 유용한 트윗당 $0.001242, 초당
+  6.9개 & 행당 필드 24개.
+  [실행 보기](https://console.apify.com/view/runs/FstursEw43TbcipYU)
+- `maximedupre/twitter-scraper`: 유용한 트윗 46개, 유용한 트윗당 $0.002846, 초당
+  0.3개 & 행당 필드 31개.
+  [실행 보기](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
 
 모든 Actor는 같은 검색 & 필터로 실행했습니다. 다른 Actor는 2026-09-27에, Xquik
 실행은 2026-09-29에 `outputVariant: "rich"`로 실행했습니다. 모든 실행은 Bronze
-등급을 사용했습니다. 유용한 트윗은 좋아요가 10개 이상인 고유한 영어 원본
+등급을 사용했습니다. 유용한 트윗은 마음에 들어요가 10개 이상인 고유한 영어 원본
 게시물입니다. 비용은 유용한 트윗 1개당 고객의 총지출입니다. 저희 비용에는 고객이
 내는 Apify 사용량이 포함됩니다. 행당 필드 수는 비어 있지 않은 필드 수의
 중앙값이며, 중첩 필드도 포함합니다. 목록은 필드 1개로 셉니다. 실행을 열어 입력,
@@ -497,9 +546,10 @@ X에 결과가 더 없으면 실행이 한도보다 적게 끝날 수 있습니�
 상태 메시지는 중단 원인을 모두 알려 줍니다. 찾을 수 없는 계정 & 멈춘 검색이 함께
 있으면 둘 다 알려 줍니다. `stopCauses`는 원인마다 `message`, `retryable` &
 `nextAction`을 따로 담아 나열합니다. 원인은 `target_not_found`,
-`target_protected`, `search_unavailable`, `likes_hidden`, `target_failed`,
-`pagination_safety_limit`, `reply_reach` & `deadline_reached`입니다. 원인 중
-하나라도 `retryable`이면 실행도 `retryable`입니다.
+`target_suspended`, `target_protected`, `search_unavailable`, `likes_hidden`,
+`target_failed`, `pagination_safety_limit`, `reply_reach` &
+`deadline_reached`입니다. 원인 중 하나라도 재시도할 수 있으면 실행도
+`retryable`입니다.
 
 ### 찾을 수 없거나 볼 수 없는 대상
 
@@ -524,9 +574,9 @@ wrong"을 표시합니다. 실행은 재시도하지 않고 그 검색을 바로
 
 진단은 이런 대상을 `unavailableTargets`에 적습니다. 각 항목에는 입력한 그대로의
 `target`, `reason` & `nextAction`이 들어 있습니다. 이유는 `not_found`,
-`protected`, `search_unavailable`, `likes_hidden` 중 하나입니다. 검색 항목에는
-제거할 연산자 같은 `fix`가 붙기도 합니다. 목록에는 최대 100개 항목이 들어갑니다.
-입력에서 이런 대상을 빼세요.
+`suspended`, `protected`, `search_unavailable`, `likes_hidden` 중 하나입니다.
+검색 항목에는 제거할 연산자 같은 `fix`가 붙기도 합니다. 목록에는 최대 100개
+항목이 들어갑니다. 입력에서 이런 대상을 빼세요.
 
 ### 안전 한도 & 시간 제한
 
@@ -559,23 +609,23 @@ Input 탭에 모든 옵션이 있습니다. `startUrls`, `twitterHandles`, `list
 
 ### 주요 지원 검색 연산자
 
-| 연산자                 | 예시                   | 용도                        |
-| ---------------------- | ---------------------- | --------------------------- |
-| `from:`                | `from:elonmusk`        | 이 사용자의 게시물만        |
-| `to:`                  | `to:OpenAI`            | 이 사용자에게 보낸 답글만   |
-| `@`                    | `@nasa`                | 이 사용자를 멘션한 게시물   |
-| `list:`                | `list:123456`          | 리스트 멤버의 게시물        |
-| `lang:`                | `lang:en`              | 언어로 필터링               |
-| `since:` / `until:`    | `since:2026-01-01`     | 날짜 범위                   |
-| `min_faves:`           | `min_faves:100`        | 참여 기준값                 |
-| `min_retweets:`        | `min_retweets:50`      | 재게시 기준값               |
-| `filter:media`         | `filter:media`         | X 미디어 검색 연산자        |
-| `filter:videos`        | `filter:videos`        | X 동영상 검색 연산자        |
-| `filter:images`        | `filter:images`        | X 이미지 검색 연산자        |
-| `filter:links`         | `filter:links`         | 링크가 있는 게시물만        |
-| `filter:replies`       | `filter:replies`       | 답글만                      |
-| `filter:quote`         | `filter:quote`         | 인용 게시물만               |
-| `filter:blue_verified` | `filter:blue_verified` | Premium 사용자만            |
+| 연산자                 | 예시                   | 용도                      |
+| ---------------------- | ---------------------- | ------------------------- |
+| `from:`                | `from:elonmusk`        | 이 사용자의 게시물만      |
+| `to:`                  | `to:OpenAI`            | 이 사용자에게 보낸 답글만 |
+| `@`                    | `@nasa`                | 이 사용자를 멘션한 게시물 |
+| `list:`                | `list:123456`          | 리스트 멤버의 게시물      |
+| `lang:`                | `lang:en`              | 언어로 필터링             |
+| `since:` / `until:`    | `since:2026-01-01`     | 날짜 범위                 |
+| `min_faves:`           | `min_faves:100`        | 참여 기준값               |
+| `min_retweets:`        | `min_retweets:50`      | 재게시 기준값             |
+| `filter:media`         | `filter:media`         | X 미디어 검색 연산자      |
+| `filter:videos`        | `filter:videos`        | X 동영상 검색 연산자      |
+| `filter:images`        | `filter:images`        | X 이미지 검색 연산자      |
+| `filter:links`         | `filter:links`         | 링크가 있는 게시물만      |
+| `filter:replies`       | `filter:replies`       | 답글만                    |
+| `filter:quote`         | `filter:quote`         | 인용 게시물만             |
+| `filter:blue_verified` | `filter:blue_verified` | Premium 사용자만          |
 
 X는 더 이상 `filter:vine`, `filter:consumer_video`, `filter:pro_video`,
 `filter:news`, `retweets_of:`로 검색하지 않습니다. 이 중 하나가 들어간 검색은
@@ -597,24 +647,33 @@ Actor가 쓰는 필드 이름을 읽고 자체 필드로 연결합니다. 문서
 양식에는 표준 필드만 나오므로 짧게 유지됩니다. 별칭은 JSON, API, SDK, 자동화 &
 저장된 태스크 입력에서 작동합니다.
 
-| 이미 쓰는 필드                                                                                                                                                         | Xquik이 읽는 필드                                                        |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`                                                                                             | `startUrls`                                                              |
-| 문자열 1개인 `profileUrl`                                                                                                                                              | `startUrls`                                                              |
-| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids` 또는 문자열 1개인 `tweetId`                                                                  | `tweetIds`                                                               |
-| `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`, `screenNames`, `profileTweets`                                                                 | `twitterHandles`                                                         |
-| 문자열 1개인 `username`, `handle`, `screenName`                                                                                                                        | `twitterHandles`                                                         |
-| 목록이나 한 줄에 검색 1개씩 쓴 `searchTerms`, `searchQueries`, `queries`, `search`                                                                                     | `searchTerms`                                                            |
-| `twitterContent`, `query`, `searchQuery`                                                                                                                               | `twitterContent`                                                         |
-| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
-| `sort`                                                                                                                                                                 | `queryType`                                                              |
-| `tweetLanguage`, `language`                                                                                                                                            | `lang`                                                                   |
-| `author`, `inReplyTo`, `mentioning`                                                                                                                                    | `from`, `to`, `@`                                                        |
-| `start`, `startDate`, `end`, `endDate`                                                                                                                                 | `since`, `until`                                                         |
-| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                                | `min_retweets`, `min_faves`, `min_replies`                               |
-| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                               | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
-| `geotaggedNear`, `withinRadius`                                                                                                                                        | `near`, `within`                                                         |
-| Google Search Scraper의 `quickDateRange`(예: `d7`, `w2`, `m1`, `y`)                                                                                                     | 실행 시작 시점부터 거꾸로 센 `since_time`                                |
+각 줄은 이미 쓰는 필드를 먼저 적고, 이어서 연결되는 필드를 적습니다.
+
+- `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`:
+  `startUrls`
+- 문자열 1개인 `profileUrl`: `startUrls`
+- `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids` 또는
+  문자열 1개인 `tweetId`: `tweetIds`
+- `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`,
+  `screenNames`, `profileTweets`: `twitterHandles`
+- 문자열 1개인 `username`, `handle`, `screenName`: `twitterHandles`
+- 목록이나 한 줄에 검색 1개씩 쓴 `searchTerms`, `searchQueries`, `queries`,
+  `search`: `searchTerms`
+- `twitterContent`, `query`, `searchQuery`: `twitterContent`
+- `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`,
+  `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`,
+  `maxTweets`, `tweetsDesired`: `maxItems`
+- `sort`: `queryType`
+- `tweetLanguage`, `language`: `lang`
+- `author`, `inReplyTo`, `mentioning`: `from`, `to`, `@`
+- `start`, `startDate`, `end`, `endDate`: `since`, `until`
+- `minimumRetweets`, `minimumFavorites`, `minimumReplies`: `min_retweets`,
+  `min_faves`, `min_replies`
+- `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`: `filter:images`,
+  `filter:videos`, `filter:quote`, `filter:blue_verified`
+- `geotaggedNear`, `withinRadius`: `near`, `within`
+- Google Search Scraper의 `quickDateRange`(예: `d7`, `w2`, `m1`, `y`): 실행 시작
+  시점부터 거꾸로 센 `since_time`
 
 붙여넣은 입력은 다음과 같이 동작합니다.
 
@@ -646,8 +705,8 @@ Console 양식에는 다음 컨트롤이 있습니다.
 - Start URLs & Profile URLs는 문자열이나 `{ "url": "..." }` 객체를 받습니다.
   JSON 편집기는 두 API 형식을 모두 유지합니다.
 - 구조화된 필터는 그룹별 컨트롤을 제공하므로 중첩 JSON을 쓸 필요가 없습니다.
-- 양식은 필터 그룹이 이미 다루는 플랫 연산자를 숨깁니다. JSON, API, SDK, 자동화 &
-  저장된 태스크 입력에서는 여전히 쓸 수 있습니다.
+- 양식은 필터 그룹이 이미 다루는 플랫 연산자를 숨깁니다. JSON, API, SDK, 자동화
+  & 저장된 태스크 입력에서는 여전히 쓸 수 있습니다.
 - Max Items & Max Items Per Target에는 1 이상의 정수를 넣습니다. 참여 기준값에는
   0 이상의 정수를 넣습니다.
 
@@ -666,9 +725,9 @@ run-report 스키마는 필드마다 제목, 설명 & 예시를 제공합니다.
 
 ```json
 {
-  "id": "1846987139428634858",
-  "text": "The future of AI is...",
-  "createdAt": "Sun Mar 15 12:00:00 +0000 2026",
+  "id": "20",
+  "text": "just setting up my twttr",
+  "createdAt": "Tue Mar 21 20:50:14 +0000 2006",
   "retweetCount": 500,
   "replyCount": 120,
   "likeCount": 5000,
@@ -676,12 +735,12 @@ run-report 스키마는 필드마다 제목, 설명 & 예시를 제공합니다.
   "viewCount": 1200000,
   "bookmarkCount": 300,
   "lang": "en",
-  "url": "https://x.com/elonmusk/status/1846987139428634858",
+  "url": "https://x.com/jack/status/20",
   "author": {
-    "id": "44196397",
-    "username": "elonmusk",
-    "name": "Elon Musk",
-    "followers": 180000000,
+    "id": "12",
+    "username": "jack",
+    "name": "jack",
+    "followers": 6000000,
     "verified": true
   },
   "media": [{ "type": "photo", "url": "https://..." }],
@@ -693,7 +752,7 @@ run-report 스키마는 필드마다 제목, 설명 & 예시를 제공합니다.
   "isNoteTweet": false,
   "isQuoteStatus": false,
   "isReply": false,
-  "conversationId": "1846987139428634858"
+  "conversationId": "20"
 }
 ```
 
@@ -804,8 +863,7 @@ Apify의
 
 ## 스크랩 이상이 필요하신가요?
 
-Xquik은 대시보드 도구 47개, REST 작업 129개, 서명된 웹훅 & MCP 서버도
-제공합니다.
+Xquik은 대시보드 도구 47개, REST API, 서명된 웹훅 & MCP 서버도 제공합니다.
 
 - [API 문서](https://docs.xquik.com/introduction): REST API 가이드
 - [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets):
@@ -820,6 +878,8 @@ Xquik은 대시보드 도구 47개, REST 작업 129개, 서명된 웹훅 & MCP �
   트래커
 
 ## 자주 묻는 질문
+
+자주 묻는 질문에 먼저 답하고, 이어서 도움받을 곳을 안내합니다.
 
 ### X API 키가 필요한가요?
 

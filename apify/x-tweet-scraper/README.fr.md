@@ -55,9 +55,9 @@ avec plus de 50 filtres.
 
 ### Cas d'usage
 
-- Alimenter la recherche, l'enrichissement, l'analyse & l'entraînement d'IA avec
-  plus de champs par tweet. Le 2026-09-29, notre ligne médiane avait 63 champs.
-  C'est 2x la médiane de 11 autres Actors.
+- Alimentez la recherche, l'enrichissement, l'analyse et l'entraînement d'IA
+  avec plus de champs par post. Le 2026-09-29, notre ligne riche médiane avait
+  63 champs. C'est 2x la médiane de 11 autres Actors.
 - Suivez le sentiment envers une marque dans les posts.
 - Surveillez les posts des concurrents et les termes de votre secteur.
 - Trouvez des prospects dans les conversations publiques.
@@ -66,51 +66,51 @@ avec plus de 50 filtres.
 
 ### Quelles données X Tweet Scraper peut-il extraire ?
 
-| Champ                  | Description                                                               |
-| ---------------------- | ------------------------------------------------------------------------- |
-| `id`                   | ID du post                                                                |
-| `text`                 | Texte complet du post (y compris les Note Tweets jusqu'à 25k caractères)  |
-| `createdAt`            | Horodatage natif de X, en texte                                           |
-| `likeCount`            | Nombre de J'aime                                                          |
-| `retweetCount`         | Nombre de reposts                                                         |
-| `replyCount`           | Nombre de réponses                                                        |
-| `quoteCount`           | Nombre de citations                                                       |
-| `viewCount`            | Nombre de vues                                                            |
-| `bookmarkCount`        | Nombre de signets                                                         |
-| `lang`                 | Langue du post                                                            |
-| `url`                  | Lien direct vers le post                                                  |
-| `tweetUrl`             | Alias de l'URL du post en sortie plate                                    |
-| `twitterUrl`           | URL au format twitter.com en sortie plate                                 |
-| `author`               | Champs d'auteur disponibles (nom d'utilisateur, bio, site web, compteurs) |
-| `authorUsername`       | Nom d'utilisateur de l'auteur en sortie plate                             |
-| `authorFollowers`      | Nombre d'abonnés de l'auteur en sortie plate                              |
-| `authorUrl`            | Site web de l'auteur en sortie plate, quand il existe                     |
-| `authorDescription`    | Bio de l'auteur en sortie plate                                           |
-| `authorCoverPicture`   | URL de la bannière de l'auteur en sortie plate                            |
-| `authorPinnedTweetIds` | ID des posts épinglés de l'auteur en sortie plate                         |
-| `media`                | Images, vidéos et GIF joints                                              |
-| `mediaUrls`            | URL des médias en sortie plate                                            |
-| `imageUrls`            | URL des images en sortie plate                                            |
-| `videoUrls`            | URL des vidéos en sortie plate                                            |
-| `entities`             | Hashtags, URL, mentions et horodatages vidéo                              |
-| `displayTextRange`     | Plage de texte affichée par X, quand elle existe                          |
-| `contentDisclosure`    | Métadonnées de divulgation, quand elles existent                          |
-| `conversationControl`  | Règle de réponse et propriétaire public de la conversation                |
-| `reactionContext`      | Post et utilisateur publics visés par une réaction                        |
-| `limitedActions`       | Restrictions et invites d'interaction publiques                           |
-| `isLimitedReply`       | Indique si les réponses sont limitées                                     |
-| `isNoteTweet`          | Indique s'il s'agit d'un Note Tweet (post long)                           |
-| `isQuoteStatus`        | Indique si ce post en cite un autre                                       |
-| `isRetweet`            | Indique si cette ligne est un repost, avec l'original joint               |
-| `isPinned`             | Indique si l'auteur a épinglé ce post, en lignes plates                   |
-| `isReply`              | Indique si ce post est une réponse                                        |
-| `quoted_tweet`         | Objet du post cité (pour une citation)                                    |
-| `conversationId`       | ID de la discussion ou de la conversation                                 |
-| `resultType`           | Type de ligne pour les lignes riches, d'engagement et de diagnostic       |
-| `sourceTweetId`        | ID du post source pour les modes Article et engagement                    |
-| `article`              | Données d'Article structurées en `mode: "article"`                        |
-| `translation`          | Traduction de X en `mode: "translation"`                                  |
-| `embed`                | HTML d'intégration et lien en `mode: "embed"`                             |
+| Champ                  | Description                                                              |
+| ---------------------- | ------------------------------------------------------------------------ |
+| `id`                   | ID du post                                                               |
+| `text`                 | Texte complet du post (y compris les Note Tweets jusqu'à 25k caractères) |
+| `createdAt`            | Horodatage natif de X, en texte                                          |
+| `likeCount`            | Nombre de J'aime                                                         |
+| `retweetCount`         | Nombre de reposts                                                        |
+| `replyCount`           | Nombre de réponses                                                       |
+| `quoteCount`           | Nombre de citations                                                      |
+| `viewCount`            | Nombre de vues                                                           |
+| `bookmarkCount`        | Nombre de signets                                                        |
+| `lang`                 | Langue du post                                                           |
+| `url`                  | Lien direct vers le post                                                 |
+| `tweetUrl`             | Alias de l'URL du post en sortie plate                                   |
+| `twitterUrl`           | URL `twitter.com` en sortie plate                                        |
+| `author`               | Champs d'auteur : nom d'utilisateur, bio, site web, compteurs            |
+| `authorUsername`       | Nom d'utilisateur de l'auteur en sortie plate                            |
+| `authorFollowers`      | Nombre d'abonnés de l'auteur en sortie plate                             |
+| `authorUrl`            | Site web de l'auteur en sortie plate, quand il existe                    |
+| `authorDescription`    | Bio de l'auteur en sortie plate                                          |
+| `authorCoverPicture`   | URL de la bannière de l'auteur en sortie plate                           |
+| `authorPinnedTweetIds` | ID des posts épinglés de l'auteur en sortie plate                        |
+| `media`                | Images, vidéos et GIF joints                                             |
+| `mediaUrls`            | URL des médias en sortie plate                                           |
+| `imageUrls`            | URL des images en sortie plate                                           |
+| `videoUrls`            | URL des vidéos en sortie plate                                           |
+| `entities`             | Hashtags, URL, mentions et horodatages vidéo                             |
+| `displayTextRange`     | Plage de texte affichée par X, quand elle existe                         |
+| `contentDisclosure`    | Métadonnées de divulgation, quand elles existent                         |
+| `conversationControl`  | Règle de réponse et propriétaire public de la conversation               |
+| `reactionContext`      | Post et utilisateur publics visés par une réaction                       |
+| `limitedActions`       | Restrictions et invites d'interaction publiques                          |
+| `isLimitedReply`       | Indique si les réponses sont limitées                                    |
+| `isNoteTweet`          | Indique s'il s'agit d'un Note Tweet (post long)                          |
+| `isQuoteStatus`        | Indique si ce post en cite un autre                                      |
+| `isRetweet`            | Indique si cette ligne est un repost, avec l'original joint              |
+| `isPinned`             | Indique si l'auteur a épinglé ce post, en lignes plates                  |
+| `isReply`              | Indique si ce post est une réponse                                       |
+| `quoted_tweet`         | Objet du post cité (pour une citation)                                   |
+| `conversationId`       | ID de la discussion ou de la conversation                                |
+| `resultType`           | Type de ligne pour les lignes riches, d'engagement et de diagnostic      |
+| `sourceTweetId`        | ID du post source pour les modes Article et engagement                   |
+| `article`              | Données d'Article structurées en `mode: "article"`                       |
+| `translation`          | Traduction de X en `mode: "translation"`                                 |
+| `embed`                | HTML d'intégration et lien en `mode: "embed"`                            |
 
 Les métadonnées de post optionnelles incluent `authorUnavailable`, `card`,
 `communityId`, `communityNote`, `edit`, `exclusiveContent`, `noteTweet` et
@@ -119,6 +119,11 @@ d'autres éléments de contexte public. `previousCounts` garde l'engagement
 d'avant la modification. `tombstone` garde les avis de visibilité.
 `unmentionedUserIds` liste les utilisateurs qui ont quitté la conversation.
 Consultez OpenAPI pour la liste exacte des champs.
+
+Réglez `outputVariant: "rich"` pour obtenir le plus de données par ligne. Les
+lignes riches ajoutent à la fin `hasCommunityNotes`, `quotedTweetPermalink`,
+`unavailableAuthorId` et le `sourceUser` des médias. Les lignes Legacy restent
+inchangées.
 
 Les objets `author` imbriqués portent les champs de profil publics. Ils couvrent
 l'identité, les compteurs, la certification, la disponibilité, les données
@@ -142,6 +147,9 @@ sortie brute les retire aussi.
 
 ## Comment utiliser X Tweet Scraper pour scraper des tweets ?
 
+Chaque exemple ci-dessous est une entrée complète. Choisissez celui qui
+correspond à vos données.
+
 Suivez ces étapes dans Apify Console :
 
 1. Ouvrez un [exemple de tâche](#exemples-de-tâches) ou l'onglet Input.
@@ -161,7 +169,7 @@ Listes :
 ```json
 {
   "startUrls": [
-    { "url": "https://x.com/elonmusk/status/1846987139428634858" },
+    { "url": "https://x.com/jack/status/20" },
     { "url": "https://x.com/nasa" },
     { "url": "https://x.com/search?q=AI%20lang%3Aen" },
     { "url": "https://x.com/i/lists/1748648376080666720" }
@@ -221,12 +229,17 @@ laisse de côté les reposts. Ajoutez `include:nativeretweets` pour les garder, 
 ### Retrouver des posts par ID
 
 ```json
-{ "tweetIds": ["1846987139428634858", "1858743654778892784"], "maxItems": 100 }
+{ "tweetIds": ["20", "2082577277246972300"], "maxItems": 100 }
 ```
 
 Les résultats gardent l'ordre de votre entrée, retirent les doublons et
 incluent seulement les posts demandés. La consultation accepte aussi `tweetId`,
 `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweetUrls` et `postUrls`.
+
+Mettez tous vos ID dans 1 run. Chaque run paie à Apify le même coût de
+démarrage. Avec 1 ID par run, l'usage Apify ajoute environ $0.00008 à chaque
+post. Avec 188 ID dans 1 run, il ajoute environ $0.000005. Un run de moins de 5
+ID se termine par ce conseil.
 
 ### Modes engagement, discussion et Article
 
@@ -234,14 +247,21 @@ Réglez `mode` pour imposer un mode, quels que soient les autres champs de
 l'entrée :
 
 ```json
-{ "mode": "replies", "replyTweetIds": ["1846987139428634858"], "maxItems": 100 }
+{ "mode": "replies", "replyTweetIds": ["2082577277246972300"], "maxItems": 100 }
 ```
 
 Les modes de post et de recherche sont `tweet`, `tweets` et `search`. Les modes
-de profil sont `profileTweets`, `profileReplies`, `profileMedia` et
-`profileLikes`. `listTweets` lit les posts d'une Liste, et `article` lit
+de profil sont `profileTweets`, `profileReplies`, `profileMedia`, `profileLikes`
+et `profileMentions`. `listTweets` lit les posts d'une Liste, et `article` lit
 l'Article X contenu dans un post. Les modes pour un seul post sont `replies`,
 `quotes`, `thread`, `retweeters`, `favoriters`, `translation` et `embed`.
+
+`profileMentions` renvoie les posts qui mentionnent chaque nom d'utilisateur, du
+plus récent au plus ancien :
+
+```json
+{ "mode": "profileMentions", "twitterHandles": ["nasa"], "maxItems": 100 }
+```
 
 `profileTweets` suit l'onglet Posts du profil sur X. Il renvoie les posts du
 compte, ses reposts et ses réponses à ses propres posts. Les lignes arrivent par
@@ -443,7 +463,7 @@ cible. Modifiez-la avant de la lancer.
 ## Combien coûte le scraping de tweets ?
 
 X Tweet Scraper de Xquik coûte $0.00015 par ligne livrée sur chaque plan Apify.
-Apify facture l'usage de votre plateforme à part. Xquik facture une fois par
+Apify facture votre usage de la plateforme à part. Xquik facture une fois par
 ligne de données livrée. Les diagnostics sont gratuits dans la sortie
 `diagnostics`.
 
@@ -471,34 +491,66 @@ Pour plafonner ce qu'un run peut dépenser, voir les
 X Tweet Scraper de Xquik a battu 11 autres Actors de posts sur le coût et la
 vitesse. Sa ligne médiane avait 63 champs, soit 2x la médiane des autres.
 
-| Actor                                                             | Tweets utiles | Coût par tweet utile | Tweets utiles par seconde | Champs par ligne | Run public                                                           |
-| ----------------------------------------------------------------- | ------------: | -------------------: | ------------------------: | ---------------: | -------------------------------------------------------------------- |
-| xquik/x-tweet-scraper                                             |           890 |            $0.000175 |                      39.2 |               63 | [Voir le run](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX) |
-| xquik/x-tweet-scraper                                             |           883 |            $0.000176 |                      25.2 |               63 | [Voir le run](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf) |
-| xquik/x-tweet-scraper                                             |           882 |            $0.000177 |                      25.7 |               63 | [Voir le run](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba) |
-| xquik/x-tweet-scraper                                             |           877 |            $0.000178 |                      26.9 |               63 | [Voir le run](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W) |
-| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |           813 |            $0.000185 |                      10.5 |               36 | [Voir le run](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E) |
-| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |           805 |            $0.000187 |                      10.6 |               36 | [Voir le run](https://console.apify.com/view/runs/p1MUeElsamZUepTpm) |
-| scrapesmith/twitter-x-scraper-tweets-profiles-replies             |           805 |            $0.000187 |                      10.7 |               36 | [Voir le run](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB) |
-| kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest |           880 |            $0.000250 |                       9.1 |               46 | [Voir le run](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2) |
-| scraper_one/x-posts-search                                        |           804 |            $0.000314 |                       3.3 |               14 | [Voir le run](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0) |
-| danek/twitter-scraper                                             |           807 |            $0.000347 |                       5.0 |               27 | [Voir le run](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W) |
-| tweetapi/twitter-x-search-scraper                                 |           337 |            $0.000374 |                       2.6 |               28 | [Voir le run](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb) |
-| api-ninja/x-twitter-advanced-search                               |           837 |            $0.000430 |                       7.4 |               28 | [Voir le run](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib) |
-| apidojo/twitter-scraper-lite                                      |           251 |            $0.000494 |                      12.9 |               54 | [Voir le run](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta) |
-| apidojo/tweet-scraper                                             |           481 |            $0.000832 |                       7.8 |               55 | [Voir le run](https://console.apify.com/view/runs/PydoBgS1YRblg29bB) |
-| xtdata/twitter-x-scraper                                          |          1378 |            $0.001168 |                      11.9 |               67 | [Voir le run](https://console.apify.com/view/runs/U91dRXEvKvqu41aop) |
-| seemuapps/x-tweet-scraper                                         |           805 |            $0.001242 |                       6.9 |               24 | [Voir le run](https://console.apify.com/view/runs/FstursEw43TbcipYU) |
-| maximedupre/twitter-scraper                                       |            46 |            $0.002846 |                       0.3 |               31 | [Voir le run](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w) |
+- `xquik/x-tweet-scraper` : 890 tweets utiles, $0.000175 par tweet utile, 39,2
+  par seconde et 63 champs par ligne.
+  [Voir le run](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
+- `xquik/x-tweet-scraper` : 883 tweets utiles, $0.000176 par tweet utile, 25,2
+  par seconde et 63 champs par ligne.
+  [Voir le run](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
+- `xquik/x-tweet-scraper` : 882 tweets utiles, $0.000177 par tweet utile, 25,7
+  par seconde et 63 champs par ligne.
+  [Voir le run](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
+- `xquik/x-tweet-scraper` : 877 tweets utiles, $0.000178 par tweet utile, 26,9
+  par seconde et 63 champs par ligne.
+  [Voir le run](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` : 813 tweets utiles,
+  $0.000185 par tweet utile, 10,5 par seconde et 36 champs par ligne.
+  [Voir le run](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` : 805 tweets utiles,
+  $0.000187 par tweet utile, 10,6 par seconde et 36 champs par ligne.
+  [Voir le run](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` : 805 tweets utiles,
+  $0.000187 par tweet utile, 10,7 par seconde et 36 champs par ligne.
+  [Voir le run](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
+- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` : 880
+  tweets utiles, $0.000250 par tweet utile, 9,1 par seconde et 46 champs par
+  ligne. [Voir le run](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
+- `scraper_one/x-posts-search` : 804 tweets utiles, $0.000314 par tweet utile,
+  3,3 par seconde et 14 champs par ligne.
+  [Voir le run](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
+- `danek/twitter-scraper` : 807 tweets utiles, $0.000347 par tweet utile, 5,0
+  par seconde et 27 champs par ligne.
+  [Voir le run](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
+- `tweetapi/twitter-x-search-scraper` : 337 tweets utiles, $0.000374 par tweet
+  utile, 2,6 par seconde et 28 champs par ligne.
+  [Voir le run](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
+- `api-ninja/x-twitter-advanced-search` : 837 tweets utiles, $0.000430 par tweet
+  utile, 7,4 par seconde et 28 champs par ligne.
+  [Voir le run](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
+- `apidojo/twitter-scraper-lite` : 251 tweets utiles, $0.000494 par tweet utile,
+  12,9 par seconde et 54 champs par ligne.
+  [Voir le run](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
+- `apidojo/tweet-scraper` : 481 tweets utiles, $0.000832 par tweet utile, 7,8
+  par seconde et 55 champs par ligne.
+  [Voir le run](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
+- `xtdata/twitter-x-scraper` : 1 378 tweets utiles, $0.001168 par tweet utile,
+  11,9 par seconde et 67 champs par ligne.
+  [Voir le run](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
+- `seemuapps/x-tweet-scraper` : 805 tweets utiles, $0.001242 par tweet utile,
+  6,9 par seconde et 24 champs par ligne.
+  [Voir le run](https://console.apify.com/view/runs/FstursEw43TbcipYU)
+- `maximedupre/twitter-scraper` : 46 tweets utiles, $0.002846 par tweet utile,
+  0,3 par seconde et 31 champs par ligne.
+  [Voir le run](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
 
 Chaque Actor a lancé la même recherche avec les mêmes filtres. Les autres Actors
 ont tourné le 2026-09-27. Les runs de Xquik ont utilisé `outputVariant: "rich"`
 le 2026-09-29. Tous les runs ont utilisé le niveau Bronze. Un tweet utile est un
-post original unique en anglais avec 10+ likes. Le coût est la dépense totale du
-client par tweet utile. Le nôtre inclut l'usage Apify que payent nos clients.
-Champs par ligne est la médiane des champs non vides, champs imbriqués compris.
-Une liste compte comme 1 champ. Ouvrez un run pour voir son entrée, son log &
-son dataset.
+post original unique en anglais avec au moins 10 J'aime. Le coût est la dépense
+totale du client par tweet utile. Le nôtre inclut l'usage Apify que payent nos
+clients. Champs par ligne est le nombre médian de champs non vides, champs
+imbriqués compris. Une liste compte comme 1 champ. Ouvrez un run pour voir son
+entrée, son log et son dataset.
 
 ## Runs vides, partiels et arrêtés
 
@@ -535,9 +587,10 @@ confirme la livraison. Elle ne confirme pas une extraction complète.
 Le texte de statut nomme chaque cause de l'arrêt. Un run avec un compte
 introuvable et une recherche bloquée cite les 2. `stopCauses` liste chaque cause
 avec ses propres `message`, `retryable` et `nextAction`. Les causes sont
-`target_not_found`, `target_protected`, `search_unavailable`, `likes_hidden`,
-`target_failed`, `pagination_safety_limit`, `reply_reach` et
-`deadline_reached`. Le run est `retryable` dès qu'une cause l'est.
+`target_not_found`, `target_suspended`, `target_protected`,
+`search_unavailable`, `likes_hidden`, `target_failed`,
+`pagination_safety_limit`, `reply_reach` et `deadline_reached`. Le run est
+`retryable` dès qu'une cause l'est.
 
 ### Cibles introuvables et indisponibles
 
@@ -563,10 +616,10 @@ gardent des conseils de relance pour les cibles inachevées.
 
 Le diagnostic nomme ces cibles dans `unavailableTargets`. Chaque entrée a la
 `target` telle que vous l'avez saisie, une `reason` et une `nextAction`. La
-raison est `not_found`, `protected`, `search_unavailable` ou `likes_hidden`. Une
-entrée de recherche peut aussi avoir un `fix`, par exemple l'opérateur à
-retirer. La liste contient jusqu'à 100 entrées. Retirez ces cibles de votre
-entrée.
+raison est `not_found`, `suspended`, `protected`, `search_unavailable` ou
+`likes_hidden`. Une entrée de recherche peut aussi avoir un `fix`, par exemple
+l'opérateur à retirer. La liste contient jusqu'à 100 entrées. Retirez ces cibles
+de votre entrée.
 
 ### Limites de sécurité et de temps
 
@@ -640,24 +693,34 @@ jamais un champ et ne change jamais ce que vous payez. Le formulaire d'entrée
 liste seulement les champs canoniques, pour rester court. Les alias fonctionnent
 dans les entrées JSON, API, SDK, d'automatisation et de tâches enregistrées.
 
-| Champ que vous utilisez déjà                                                                                                                                           | Xquik le lit comme                                                       |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`                                                                                             | `startUrls`                                                              |
-| `profileUrl`, en une seule chaîne                                                                                                                                      | `startUrls`                                                              |
-| `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids`, ou `tweetId` en une seule chaîne                                                            | `tweetIds`                                                               |
-| `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`, `screenNames`, `profileTweets`                                                                 | `twitterHandles`                                                         |
-| `username`, `handle`, `screenName`, en une seule chaîne                                                                                                                | `twitterHandles`                                                         |
-| `searchTerms`, `searchQueries`, `queries`, `search`, en liste ou une recherche par ligne                                                                               | `searchTerms`                                                            |
-| `twitterContent`, `query`, `searchQuery`                                                                                                                               | `twitterContent`                                                         |
-| `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`, `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`, `maxTweets`, `tweetsDesired` | `maxItems`                                                               |
-| `sort`                                                                                                                                                                 | `queryType`                                                              |
-| `tweetLanguage`, `language`                                                                                                                                            | `lang`                                                                   |
-| `author`, `inReplyTo`, `mentioning`                                                                                                                                    | `from`, `to`, `@`                                                        |
-| `start`, `startDate`, `end`, `endDate`                                                                                                                                 | `since`, `until`                                                         |
-| `minimumRetweets`, `minimumFavorites`, `minimumReplies`                                                                                                                | `min_retweets`, `min_faves`, `min_replies`                               |
-| `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`                                                                                                               | `filter:images`, `filter:videos`, `filter:quote`, `filter:blue_verified` |
-| `geotaggedNear`, `withinRadius`                                                                                                                                        | `near`, `within`                                                         |
-| `quickDateRange` de Google Search Scraper, comme `d7`, `w2`, `m1` ou `y`                                                                                               | `since_time`, compté à rebours depuis le début du run                    |
+Chaque ligne nomme les champs que vous utilisez déjà, puis le champ auquel ils
+correspondent :
+
+- `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls` :
+  `startUrls`
+- `profileUrl`, en une seule chaîne : `startUrls`
+- `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids`, ou
+  `tweetId` en une seule chaîne : `tweetIds`
+- `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`,
+  `screenNames`, `profileTweets` : `twitterHandles`
+- `username`, `handle`, `screenName`, en une seule chaîne : `twitterHandles`
+- `searchTerms`, `searchQueries`, `queries`, `search`, en liste ou une recherche
+  par ligne : `searchTerms`
+- `twitterContent`, `query`, `searchQuery` : `twitterContent`
+- `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`,
+  `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`,
+  `maxTweets`, `tweetsDesired` : `maxItems`
+- `sort` : `queryType`
+- `tweetLanguage`, `language` : `lang`
+- `author`, `inReplyTo`, `mentioning` : `from`, `to`, `@`
+- `start`, `startDate`, `end`, `endDate` : `since`, `until`
+- `minimumRetweets`, `minimumFavorites`, `minimumReplies` : `min_retweets`,
+  `min_faves`, `min_replies`
+- `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue` : `filter:images`,
+  `filter:videos`, `filter:quote`, `filter:blue_verified`
+- `geotaggedNear`, `withinRadius` : `near`, `within`
+- `quickDateRange` de Google Search Scraper, comme `d7`, `w2`, `m1` ou `y` :
+  `since_time`, compté à rebours depuis le début du run
 
 Comportement d'une entrée collée :
 
@@ -716,9 +779,9 @@ Les valeurs sont des exemples. Vos runs renvoient les données en direct de X.
 
 ```json
 {
-  "id": "1846987139428634858",
-  "text": "The future of AI is...",
-  "createdAt": "Sun Mar 15 12:00:00 +0000 2026",
+  "id": "20",
+  "text": "just setting up my twttr",
+  "createdAt": "Tue Mar 21 20:50:14 +0000 2006",
   "retweetCount": 500,
   "replyCount": 120,
   "likeCount": 5000,
@@ -726,12 +789,12 @@ Les valeurs sont des exemples. Vos runs renvoient les données en direct de X.
   "viewCount": 1200000,
   "bookmarkCount": 300,
   "lang": "en",
-  "url": "https://x.com/elonmusk/status/1846987139428634858",
+  "url": "https://x.com/jack/status/20",
   "author": {
-    "id": "44196397",
-    "username": "elonmusk",
-    "name": "Elon Musk",
-    "followers": 180000000,
+    "id": "12",
+    "username": "jack",
+    "name": "jack",
+    "followers": 6000000,
     "verified": true
   },
   "media": [{ "type": "photo", "url": "https://..." }],
@@ -743,7 +806,7 @@ Les valeurs sont des exemples. Vos runs renvoient les données en direct de X.
   "isNoteTweet": false,
   "isQuoteStatus": false,
   "isReply": false,
-  "conversationId": "1846987139428634858"
+  "conversationId": "20"
 }
 ```
 
@@ -876,8 +939,8 @@ données dont vous avez besoin.
 
 ## Besoin de plus que du scraping ?
 
-Xquik propose aussi 47 outils de tableau de bord, 129 opérations REST, des
-webhooks signés et un serveur MCP.
+Xquik propose aussi 47 outils de tableau de bord, une API REST, des webhooks
+signés et un serveur MCP.
 
 - [Documentation de l'API](https://docs.xquik.com/introduction) : guides de
   l'API REST
@@ -896,6 +959,8 @@ webhooks signés et un serveur MCP.
 
 ## FAQ
 
+Les réponses aux questions fréquentes, puis où trouver de l'aide.
+
 ### Ai-je besoin d'une clé API X ?
 
 Non. Vous n'avez besoin ni de clé API X, ni de connexion, ni d'identifiants.
@@ -907,11 +972,11 @@ limites de votre compte Apify et de la plateforme s'appliquent toujours.
 
 ### Quelle est sa vitesse ?
 
-X Tweet Scraper de Xquik a livré de 25,2 à 39,2 posts utiles par seconde dans le
-[benchmark](#benchmark). La durée dépend de votre entrée, du nombre de résultats
-et de la disponibilité de X.
+X Tweet Scraper de Xquik a livré de 25,2 à 39,2 tweets utiles par seconde dans
+le [benchmark](#benchmark). La durée dépend de votre entrée, du nombre de
+résultats et de la disponibilité de X.
 
-### Pourquoi une recherche Latest renvoie-t-elle des posts que l'onglet Récent de X n'affiche pas ?
+### Pourquoi ai-je des posts que l'onglet de recherche de X laisse de côté ?
 
 X laisse certains posts correspondants hors de son onglet Récent. X Tweet
 Scraper de Xquik renvoie aussi ces posts. Chaque post est un vrai résultat de
@@ -921,7 +986,7 @@ recherche X pour votre requête. Vous payez chaque post une seule fois.
 
 La recherche avancée de X prend en charge les auteurs, les destinataires, les
 mentions, les dates, l'engagement, les médias et le lieu. Voir les
-[principaux opérateurs de recherche pris en charge](#principaux-opérateurs-de-recherche-pris-en-charge)
+[opérateurs pris en charge](#principaux-opérateurs-de-recherche-pris-en-charge)
 pour des exemples.
 
 ### Puis-je utiliser l'API Apify pour lancer cet Actor ?
