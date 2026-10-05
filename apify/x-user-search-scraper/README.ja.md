@@ -24,6 +24,7 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 ## アカウントのデータとフィルター
 
 - オーディエンス、ポスト、アカウント年数、認証、ウェブサイト、所在地、自己紹介、ユーザー名のフィルター。
+- Search Autocompleteモード: 各検索語に対してXが提案するアカウント、トピック、ハッシュタグ、キャッシュタグ。
 - `startCursor`に保存したカーソルからの、1つのクエリの再開。
 - マイグレーションでも失われない、受け付け済みの処理。
 - 課金前のフィルターと重複排除。
@@ -48,6 +49,38 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 
 問題なく終わった小規模な実行は`run-report`を書き込まず、Apifyの利用料を節約します。毎回書き込むには`alwaysSaveRunRecords`をオンにしてください。
 
+## 検索のオートコンプリート
+
+検索語の入力中にXが提案する内容を読み取るには、`mode`を`autocomplete`に設定します。各検索語は、提案されたアカウント、トピック、ハッシュタグ、キャッシュタグを返します。
+
+```json
+{
+  "searchTerms": ["nasa", "$tsla"],
+  "mode": "autocomplete",
+  "suggestionTypes": ["users", "cashtags"],
+  "maxItems": 100
+}
+```
+
+- ハッシュタグには`#`、キャッシュタグには`$`で検索語を始めます。
+- `suggestionTypes`は、選んだ種類だけを残します。
+- 各行は、種類を`suggestionType`に、検索に使うテキストを`suggestion`に示します。
+- キャッシュタグの行には、`price`、`marketCap`、`dailyChangePercent`が入ります。
+- プロフィールのフィルターは、Profile Searchにだけ適用されます。
+
+提案の行は次のようになります。
+
+```json
+{
+  "suggestionType": "user",
+  "suggestion": "@sample_user",
+  "username": "sample_user",
+  "name": "Sample User",
+  "verified": true,
+  "sourceTarget": "sample"
+}
+```
+
 ## 出力
 
 各行には、プロフィールと、その取得元のクエリを示す`sourceTarget`が入ります。
@@ -67,7 +100,7 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 
 ## Xのユーザーを検索する費用は？
 
-すべてのApifyプランで、配信されたプロフィール1件につき$0.00015です。Apifyのプラットフォーム利用料は別途かかります。
+すべてのApifyプランで、配信されたプロフィール1件につき$0.00015です。Search Autocompleteの提案も、配信された行1件につき同じ料金です。Apifyのプラットフォーム利用料は別途かかります。
 
 - 課金は配信したデータ行1件につき1回です。`diagnostics`の診断情報は無料です。
 - 開始料金、クエリ料金、ページ料金はかかりません。
@@ -104,6 +137,8 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 
 ## よくある質問
 
+よくある質問に答えたあと、サポートを受けられる場所を案内します。
+
 ### X APIキーやログインは必要ですか？
 
 いいえ。XquikのX User Search Scraperは、X APIキー、ログイン、認証情報を必要としません。
@@ -118,7 +153,7 @@ XquikのX User Search Scraperは、Xの公開フィールドを取得します�
 
 ### API、スケジュール、連携は使えますか？
 
-はい。50個の公開タスクと129個のXquik REST操作から選べます。[APIタブ](https://apify.com/xquik/x-user-search-scraper/api)には、Python、JavaScript、cURLの例があります。Apifyの[スケジュール](https://docs.apify.com/platform/schedules)を使うと、XquikのX User Search Scraperをcronで実行できます。エージェントは[Apify MCP](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。古いビルドが必要な場合を除き、`latest`を使ってください。
+はい。50個の公開タスクかXquik REST APIから選べます。[APIタブ](https://apify.com/xquik/x-user-search-scraper/api)には、Python、JavaScript、cURLの例があります。Apifyの[スケジュール](https://docs.apify.com/platform/schedules)を使うと、XquikのX User Search Scraperをcronで実行できます。エージェントは[Apify MCP](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。古いビルドが必要な場合を除き、`latest`を使ってください。
 
 ### どこでサポートを受けられますか？
 

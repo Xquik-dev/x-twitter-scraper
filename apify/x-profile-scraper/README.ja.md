@@ -27,7 +27,7 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 - 自己紹介、各種カウント、認証、本人が入力した所在地、ウェブサイト、メディア。
 - 表示される場合は、Xがベストエフォートで公開する所在地ラベル（Account based in）。
 - 取得できる結果ページ全体にわたる、プロフィールのポストタブと返信タブ（With Replies）の行。
-- 任意で追加できるメディア、フォロワー、フォロー中、認証済みフォロワー。
+- 任意で追加できるメディア、ハイライト、フォロワー、フォロー中、認証済みフォロワー。
 - 追加したポストを、日付、メディア、認証、リポストかどうか、指標で絞り込むフィルター。
 - 追加したプロフィールを、オーディエンス、活動量、アカウント年数、公開メタデータで絞り込むフィルター。
 - 課金前の重複排除。
@@ -63,7 +63,9 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 
 ## 出力
 
-プロフィールの行は `resultType: "profile"` を使います。追加の行は `profileTweet`、`profileReply`、`profileMedia`、`profileFollower`、`profileFollowing`、`profileVerifiedFollower` のいずれかを使います。すべての行に `sourceTarget` が残ります。公開フィールドはXquik RESTのレスポンス形式のままです。
+プロフィールの行は `resultType: "profile"` を使います。追加の行は `profileTweet`、`profileReply`、`profileMedia`、`profileHighlight`、`profileFollower`、`profileFollowing`、`profileVerifiedFollower` のいずれかを使います。すべての行に `sourceTarget` が残ります。公開フィールドはXquik RESTのレスポンス形式のままです。
+
+`includeHighlights` は、各プロフィールのハイライトタブにあるポストを、Xの順序で追加します。ハイライトのないプロフィールは、行を追加しません。
 
 Xは `accountBasedIn` を、アカウントへのアクセス元IPを集計して推定します。このラベルは、国籍、居住地、身元、登録地、ポストした場所、正確な位置を示すものではありません。`observedAt` は取得した時刻を記録します。Xがラベルを表示しない場合、`accountBasedIn` はnullです。Xがラベルを伏せている場合は、代わりに `accountBasedInUnavailable: true` が入ります。
 
@@ -98,7 +100,7 @@ XquikのX Profile Scraperは、1回の実行で多数のプロフィールを読
 
 抽出が中断されると、無料の `partial` 診断を書き込みます。取得済みの結果はそのまま残ります。再試行する前に `availableResults`、`failedTargets`、`retryable`、`nextAction` を確認してください。Actorの正常終了が示すのは配信の完了です。抽出が最後まで終わったことは意味しません。
 
-実行ステータスは、早期停止の原因をすべて示します。`stopCauses` は各原因を挙げ、それぞれに `message`、`retryable`、`nextAction` を付けます。原因は `target_not_found`、`target_failed`、`pagination_safety_limit`、`deadline_reached` です。存在しない対象が一覧に入るのは、別の原因で実行が止まった場合だけです。いずれかの原因が再試行可能なら、実行も `retryable` になります。
+実行ステータスは、早期停止の原因をすべて示します。`stopCauses` は各原因を挙げ、それぞれに `message`、`retryable`、`nextAction` を付けます。原因は `target_not_found`、`target_suspended`、`target_failed`、`pagination_safety_limit`、`deadline_reached` です。`target_suspended` は、Xが凍結したアカウントを示します。存在しない対象や凍結された対象が一覧に入るのは、別の原因で実行が止まった場合だけです。いずれかの原因が再試行可能なら、実行も `retryable` になります。
 
 ## 関連するXquik Actor
 
@@ -125,6 +127,8 @@ XquikのX Profile Scraperは、1回の実行で多数のプロフィールを読
 
 ## よくある質問
 
+よくある質問に答えたあと、サポートを受けられる場所を案内します。
+
 ### X APIキーやログインは必要ですか？
 
 いいえ。XquikのX Profile Scraperは、X APIキー、ログイン、認証情報を必要としません。
@@ -139,7 +143,7 @@ XquikのX Profile Scraperは、Xの公開フィールドを取得します。結
 
 ### API、スケジュール、連携は使えますか？
 
-はい。50個の公開タスクと129個のXquik REST操作から選べます。[APIタブ](https://apify.com/xquik/x-profile-scraper/api)には、Python、JavaScript、cURLの例があります。Apifyの[スケジュール](https://docs.apify.com/platform/schedules)を使うと、XquikのX Profile Scraperをcronで実行できます。エージェントは[Apify MCP](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。古いビルドが必要な場合を除き、`latest` を使ってください。
+はい。50個の公開タスクかXquik REST APIから選べます。[APIタブ](https://apify.com/xquik/x-profile-scraper/api)には、Python、JavaScript、cURLの例があります。Apifyの[スケジュール](https://docs.apify.com/platform/schedules)を使うと、XquikのX Profile Scraperをcronで実行できます。エージェントは[Apify MCP](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。古いビルドが必要な場合を除き、`latest` を使ってください。
 
 ### どこでサポートを受けられますか？
 

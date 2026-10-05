@@ -66,13 +66,13 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 X 从 2024 年起不再显示谁喜欢了某条帖子。`favoriters` 类型不返回任何行。没有返回行的运行会在诊断中说明这个原因。
 
-默认情况下，每个账号或帖子在每种互动类型中只出现一次，也只收费一次。把 `dedupeAcrossTargets` 设为 `false`，可为每条源帖子各保留一行。运行状态会统计跳过的重复项，这些重复项不收费。
+默认情况下，每个账号或帖子在每种互动类型中只出现一次，也只收费 1 次。把 `dedupeAcrossTargets` 设为 `false`，可为每条源帖子各保留一行。运行状态会统计跳过的重复项，这些重复项不收费。
 
 顺利完成的小型运行会跳过 `run-report`，节省 Apify 用量。开启 `alwaysSaveRunRecords` 后，每次运行都会写入报告。
 
 ## 输出
 
-每行的 `resultType` 为 `tweet`、`replies`、`completeReplies`、`quotes`、`retweeters`、`favoriters` 或 `thread`。`sourceTarget` 保存源帖子 ID。帖子和个人资料字段沿用 Xquik REST 稳定的响应结构。
+每行的 `resultType` 为 `tweet`、`replies`、`completeReplies`、`quotes`、`retweeters`、`favoriters`、`thread` 或 `repostCheck`。`sourceTarget` 保存源帖子 ID。帖子和个人资料字段沿用 Xquik REST 稳定的响应结构。
 
 `completeReplies` 保留返回的每一行。运行报告在 `incompleteTargets` 中统计覆盖不完整的目标。过滤在计费前进行。
 
@@ -88,6 +88,22 @@ X 从 2024 年起不再显示谁喜欢了某条帖子。`favoriters` 类型不�
   "likeCount": 12
 }
 ```
+
+## 转帖检查
+
+把 `repostCheck` 添加到 `engagementTypes`，并在 `repostCheckUsers` 中列出账号，就能知道每个账号是否转帖了每条帖子：
+
+```json
+{
+  "tweetIds": ["2098439298617856319"],
+  "engagementTypes": ["repostCheck"],
+  "repostCheckUsers": ["discord", "nasa"]
+}
+```
+
+每次检查生成 1 行，包含 `isRetweeted`、`retweetedAt`、`retweetId`、`checkedPosts` 和 `complete`。它的 `id` 为 `repostCheck:<post ID>:<account>`。检查会读取每个账号最新的帖子。比这些帖子更早的转帖会显示为 `false`，并带有 `complete: false`。
+
+只包含 `repostCheck` 和 `tweet` 行的运行会保持你的输入顺序：先是每条帖子，再是它的账号，按你列出的顺序排列。
 
 ## 转帖时间戳
 
@@ -111,7 +127,7 @@ Xquik 的 X Engagement Scraper 在 1 次运行中读取多条帖子和多种互�
 
 提取中断时，会写入一条免费的 `partial` 诊断。已获取的结果不受影响。重试前，先查看 `availableResults`、`failedTargets`、`retryable` 和 `nextAction`。Actor 成功退出只说明结果已交付，不代表提取完整。
 
-运行状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_failed`、`pagination_safety_limit`、`reply_reach` 和 `deadline_reached`。`reply_reach` 表示 X 只提供了回复串的一部分。只有在其他原因让运行停止时，缺失的目标才会列入 `stopCauses`。只要有一个原因可重试，整个运行就是 `retryable`。
+运行状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_failed`、`pagination_safety_limit`、`reply_reach` 和 `deadline_reached`。`reply_reach` 表示 X 只提供了回复串的一部分。只有在其他原因让运行停止时，缺失的目标才会一并列出。只要有一个原因可重试，整个运行就是 `retryable`。
 
 ## 相关 Xquik Actor
 
@@ -138,6 +154,8 @@ Xquik 的 X Engagement Scraper 在 1 次运行中读取多条帖子和多种互�
 
 ## 常见问题
 
+先解答常见问题，再说明在哪里获取帮助。
+
 ### 我需要 X API 密钥或登录吗？
 
 不需要。Xquik 的 X Engagement Scraper 不需要 X API 密钥、登录或任何凭据。
@@ -152,7 +170,7 @@ Xquik 的 X Engagement Scraper 请求的是公开的 X 字段。结果可能包�
 
 ### 可以使用 API、定时调度和集成吗？
 
-可以。你可以从 50 个公开任务或 129 个 Xquik REST 操作中选择。[API 标签页](https://apify.com/xquik/x-engagement-scraper/api) 提供 Python、JavaScript 和 cURL 示例。Apify [定时调度](https://docs.apify.com/platform/schedules) 可以按 cron 运行 Xquik 的 X Engagement Scraper。Agent 可以通过 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) 调用它。除非需要旧构建，否则请使用 `latest`。
+可以。你可以从 50 个公开任务或 Xquik REST API 中选择。[API 标签页](https://apify.com/xquik/x-engagement-scraper/api) 提供 Python、JavaScript 和 cURL 示例。Apify [定时调度](https://docs.apify.com/platform/schedules) 可以按 cron 运行 Xquik 的 X Engagement Scraper。Agent 可以通过 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) 调用它。除非需要旧构建，否则请使用 `latest`。
 
 ### 在哪里获取帮助？
 

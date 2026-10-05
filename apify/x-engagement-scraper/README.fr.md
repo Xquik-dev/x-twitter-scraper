@@ -89,9 +89,9 @@ Apify. Activez `alwaysSaveRunRecords` pour l'écrire à chaque run.
 ## Sortie
 
 Dans chaque ligne, `resultType` vaut `tweet`, `replies`, `completeReplies`,
-`quotes`, `retweeters`, `favoriters` ou `thread`. `sourceTarget` contient l'ID
-du post source. Les champs de post et de profil suivent la structure stable des
-réponses de l'API REST de Xquik.
+`quotes`, `retweeters`, `favoriters`, `thread` ou `repostCheck`. `sourceTarget`
+contient l'ID du post source. Les champs de post et de profil suivent la
+structure stable des réponses de l'API REST de Xquik.
 
 `completeReplies` garde chaque ligne renvoyée. Le rapport du run compte la
 couverture partielle dans `incompleteTargets`. Les filtres s'appliquent avant la
@@ -110,6 +110,29 @@ en direct. Une ligne de réponse ressemble à ceci :
   "likeCount": 12
 }
 ```
+
+## Vérification de repost
+
+Ajoutez `repostCheck` à `engagementTypes` et listez des comptes dans
+`repostCheckUsers` pour savoir si chaque compte a reposté chaque post :
+
+```json
+{
+  "tweetIds": ["2098439298617856319"],
+  "engagementTypes": ["repostCheck"],
+  "repostCheckUsers": ["discord", "nasa"]
+}
+```
+
+Chaque vérification donne 1 ligne avec `isRetweeted`, `retweetedAt`,
+`retweetId`, `checkedPosts` et `complete`. Son `id` est
+`repostCheck:<post ID>:<account>`. La vérification lit les posts les plus
+récents de chaque compte. Un repost plus ancien que ces posts apparaît comme
+`false` avec `complete: false`.
+
+Un run qui contient seulement des lignes `repostCheck` et `tweet` garde l'ordre
+de votre entrée : chaque post, puis ses comptes dans l'ordre où vous les avez
+listés.
 
 ## Horodatage des reposts (retweets)
 
@@ -131,7 +154,7 @@ restent les mêmes.
 ## Combien coûte le scraping de l'engagement de posts X ?
 
 Le prix est de $0.00015 par ligne livrée sur chaque plan Apify. Apify facture
-l'usage de votre plateforme à part.
+votre usage de la plateforme à part.
 
 - Une facturation par ligne de données livrée. Les diagnostics sont gratuits
   dans `diagnostics`.
@@ -243,6 +266,8 @@ données dont vous avez besoin.
 
 ## FAQ
 
+Les réponses aux questions fréquentes, puis où trouver de l'aide.
+
 ### Ai-je besoin d'une clé API X ou d'une connexion ?
 
 Non. X Engagement Scraper de Xquik n'a besoin ni de clé API X, ni de connexion,
@@ -265,7 +290,7 @@ donc `favoriters` ne renvoie aucune ligne.
 
 ### Puis-je utiliser l'API, les planifications et les intégrations ?
 
-Oui. Choisissez parmi 50 tâches publiques ou 129 opérations REST de Xquik.
+Oui. Choisissez parmi 50 tâches publiques ou l'API REST de Xquik.
 L'[onglet API](https://apify.com/xquik/x-engagement-scraper/api) propose des
 exemples en Python, JavaScript et cURL. Les
 [planifications](https://docs.apify.com/platform/schedules) Apify lancent X

@@ -27,6 +27,7 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 - ブロック、太字、斜体の範囲を保つMarkdown。
 - 元の書式を保つ `contents` ブロック。
 - 同じ実行で使えるポストURLと数値のポストID。
+- アカウントが公開したすべての記事。ユーザー名かプロフィールのURLから取得します。
 - 課金前の重複排除。
 
 XquikのX Article Scraperは、リンクのメタデータを推測で補いません。ApifyはMarkdownをテキストとして表示します。
@@ -34,7 +35,7 @@ XquikのX Article Scraperは、リンクのメタデータを推測で補いま�
 ## Xの記事をスクレイピングする方法
 
 1. Apify ConsoleでXquikのX Article Scraperを開きます。
-2. 記事ポストのURLを `startUrls` に、ポストIDを `tweetIds` に貼り付けます。
+2. 記事ポストのURLを `startUrls` に、ポストIDを `tweetIds` に貼り付けます。アカウントの記事を一覧にするには、そのユーザー名を `twitterHandles` に追加します。
 3. `maxItems` で配信する記事数の上限を決め、Startをクリックします。
 4. データセットをJSON、CSV、Excelでダウンロードするか、Apify APIを使います。
 
@@ -51,14 +52,15 @@ XquikのX Article Scraperは、リンクのメタデータを推測で補いま�
 
 ## 入力
 
-| フィールド             | 用途                                       | デフォルト |
-| ---------------------- | ------------------------------------------ | -------- |
-| `startUrls`            | 記事を含む公開ポストのURL                  | なし     |
-| `tweetIds`             | 記事ポストの数値ID                         | なし     |
-| `maxItems`             | 配信する記事数の全体上限                   | `100000` |
-| `dedupeAcrossTargets`  | 課金前に重複した記事IDを削除               | `true`   |
-| `maxConcurrency`       | 独立した記事読み取りの並列数               | `100`    |
-| `alwaysSaveRunRecords` | すべての実行で `run-report` を保存         | `false`  |
+| フィールド             | 用途                                        | デフォルト |
+| ---------------------- | ------------------------------------------- | ---------- |
+| `startUrls`            | 記事を含む公開ポストまたはプロフィールのURL | なし       |
+| `tweetIds`             | 記事ポストの数値ID                          | なし       |
+| `twitterHandles`       | 記事を一覧にするアカウント                  | なし       |
+| `maxItems`             | 配信する記事数の全体上限                    | `100000`   |
+| `dedupeAcrossTargets`  | 課金前に重複した記事IDを削除                | `true`     |
+| `maxConcurrency`       | 独立した記事読み取りの並列数                | `100`      |
+| `alwaysSaveRunRecords` | すべての実行で `run-report` を保存          | `false`    |
 
 ## 出力
 
@@ -75,6 +77,8 @@ Outputタブを開くと `Articles` が表示されます。`Results` は各行�
 
 行には著者、出典、カバー画像、時刻、指標も入ります。JSONまたは表形式でエクスポートできます。
 
+`twitterHandles` のユーザー名、または `startUrls` のプロフィールURLは、そのアカウントの記事を新しい順に一覧にします。各記事は `articlePreview` の行で、記事の `title`、`previewText`、`coverImageUrl`、`articleId`、日付、ポストの指標が入ります。Xはそこに本文を載せないので、行に `markdown` や `contents` はありません。記事の全文を取得するには、その `tweetId` で実行してください。
+
 ## Xの記事のスクレイピングにかかる費用は？
 
 すべてのApifyプランで、配信された記事1件につき$0.00015です。Apifyのプラットフォーム利用料は別途かかります。
@@ -89,7 +93,7 @@ XquikのX Article Scraperが返すのは、Xが表示する公開記事だけで
 
 抽出が中断されると、無料の `partial` 診断を書き込みます。取得済みの結果はそのまま残ります。再試行する前に `availableResults`、`failedTargets`、`retryable`、`nextAction` を確認してください。Actorの正常終了が示すのは配信の完了です。抽出が最後まで終わったことは意味しません。
 
-実行ステータスは、早期停止の原因をすべて示します。`stopCauses` は各原因を挙げ、それぞれに `message`、`retryable`、`nextAction` を付けます。原因は `target_not_found`、`target_failed`、`pagination_safety_limit`、`deadline_reached` です。存在しない対象が一覧に入るのは、別の原因で実行が止まった場合だけです。いずれかの原因が再試行可能なら、実行も `retryable` になります。
+実行ステータスは、早期停止の原因をすべて示します。`stopCauses` は各原因を挙げ、それぞれに `message`、`retryable`、`nextAction` を付けます。原因は `target_not_found`、`target_suspended`、`target_failed`、`pagination_safety_limit`、`deadline_reached` です。`target_suspended` は、Xが凍結したアカウントを示します。存在しない対象や凍結された対象が一覧に入るのは、別の原因で実行が止まった場合だけです。いずれかの原因が再試行可能なら、実行も `retryable` になります。
 
 ## 関連するXquik Actor
 
@@ -116,6 +120,8 @@ XquikのX Article Scraperが返すのは、Xが表示する公開記事だけで
 
 ## よくある質問
 
+よくある質問に答えたあと、サポートを受けられる場所を案内します。
+
 ### X APIキーやログインは必要ですか？
 
 いいえ。XquikのX Article Scraperは、X APIキー、ログイン、認証情報を必要としません。
@@ -130,7 +136,7 @@ XquikのX Article Scraperは、Xの公開フィールドを取得します。結
 
 ### API、スケジュール、連携は使えますか？
 
-はい。50個の公開タスクと129個のXquik REST操作から選べます。[APIタブ](https://apify.com/xquik/x-article-scraper/api)には、Python、JavaScript、cURLの例があります。Apifyの[スケジュール](https://docs.apify.com/platform/schedules)を使うと、XquikのX Article Scraperをcronで実行できます。エージェントは[Apify MCP](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。1件ずつ読み取るなら[Xquik REST](https://docs.xquik.com/api-reference/x/get-article)を使えます。古いビルドが必要な場合を除き、`latest` を使ってください。
+はい。50個の公開タスクかXquik REST APIから選べます。[APIタブ](https://apify.com/xquik/x-article-scraper/api)には、Python、JavaScript、cURLの例があります。Apifyの[スケジュール](https://docs.apify.com/platform/schedules)を使うと、XquikのX Article Scraperをcronで実行できます。エージェントは[Apify MCP](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。1件ずつ読み取るなら[Xquik REST](https://docs.xquik.com/api-reference/x/get-article)を使えます。古いビルドが必要な場合を除き、`latest` を使ってください。
 
 ### どこでサポートを受けられますか？
 

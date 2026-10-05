@@ -32,8 +32,9 @@ Profil**, & Apify berechnet die Plattformnutzung separat.
 
 - Filter für Zielgruppe, Posts, Alter, Verifizierung, Website, Standort, Bio &
   Nutzername.
-- Eine Suchanfrage lässt sich ab einem gespeicherten Cursor in `startCursor`
-  fortsetzen.
+- Modus Search Autocomplete: die Accounts, Themen, Hashtags & Cashtags, die X
+  für jeden Suchbegriff vorschlägt.
+- Setze 1 Suchanfrage ab einem gespeicherten Cursor in `startCursor` fort.
 - Bei einer Migration bleibt bereits erledigte Arbeit erhalten.
 - Filter & Duplikatentfernung vor der Abrechnung.
 
@@ -59,6 +60,40 @@ Profil**, & Apify berechnet die Plattformnutzung separat.
 Kleine Runs ohne Probleme überspringen `run-report` & sparen Apify-Nutzung.
 Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 
+## Such-Autovervollständigung
+
+Setze `mode` auf `autocomplete`, um zu lesen, was X beim Tippen vorschlägt.
+Jeder Suchbegriff liefert vorgeschlagene Accounts, Themen, Hashtags & Cashtags.
+
+```json
+{
+  "searchTerms": ["nasa", "$tsla"],
+  "mode": "autocomplete",
+  "suggestionTypes": ["users", "cashtags"],
+  "maxItems": 100
+}
+```
+
+- Beginne einen Begriff mit `#` für Hashtags oder mit `$` für Cashtags.
+- `suggestionTypes` behält nur die Typen, die du wählst.
+- Jeder Datensatz nennt seinen `suggestionType` & in `suggestion` den Text für
+  die Suche.
+- Ein Cashtag-Datensatz enthält `price`, `marketCap` & `dailyChangePercent`.
+- Profilfilter gelten nur für Profile Search.
+
+Ein Vorschlags-Datensatz sieht so aus:
+
+```json
+{
+  "suggestionType": "user",
+  "suggestion": "@sample_user",
+  "username": "sample_user",
+  "name": "Sample User",
+  "verified": true,
+  "sourceTarget": "sample"
+}
+```
+
 ## Ausgabe
 
 Jeder Datensatz enthält ein Profil & in `sourceTarget` die Suchanfrage, die es
@@ -80,7 +115,8 @@ Profil-Datensatz sieht so aus:
 
 ## Was kostet es, Nutzer auf X zu suchen?
 
-Auf jedem Apify-Plan kostet ein geliefertes Profil $0.00015. Apify berechnet
+Auf jedem Apify-Plan kostet ein geliefertes Profil $0.00015. Ein Vorschlag aus
+Search Autocomplete kostet pro geliefertem Datensatz dasselbe. Apify berechnet
 deine Plattformnutzung separat.
 
 - Eine Gebühr pro geliefertem Datensatz. Diagnosen in `diagnostics` sind
@@ -180,6 +216,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
 ## FAQ
 
+Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
+
 ### Brauche ich einen X-API-Schlüssel oder Login?
 
 Nein. X User Search Scraper von Xquik braucht keinen X-API-Schlüssel, keinen
@@ -199,7 +237,7 @@ rät dir, Ziele & Filter zu prüfen. `stopCauses` gibt jeder Ursache eine
 
 ### Kann ich API, Zeitpläne & Integrationen nutzen?
 
-Ja. Wähle aus 50 öffentlichen Tasks oder 129 REST-Operationen von Xquik. Der
+Ja. Wähle aus 50 öffentlichen Tasks oder der REST-API von Xquik. Der
 [API-Tab](https://apify.com/xquik/x-user-search-scraper/api) enthält Beispiele
 für Python, JavaScript & cURL.
 Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) starten

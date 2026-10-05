@@ -24,7 +24,7 @@ seulement les **résultats livrés, uniques et conformes à vos filtres**.
 Scrapez les réponses X (Twitter) pour **$0.00015 par ligne livrée** sur chaque
 plan Apify. Collez des URL de posts, des ID de post, des URL de profil ou des
 noms d'utilisateur. Exportez les réponses, les conversations, les auteurs,
-l'engagement, les entités et les URL des médias. Apify facture l'usage de votre
+l'engagement, les entités et les URL des médias. Apify facture votre usage de la
 plateforme à part. Vous n'avez pas besoin de connexion X. Les filtres passent
 avant l'écriture dans le dataset, donc vous payez seulement les lignes livrées.
 
@@ -45,7 +45,7 @@ de prospects, à la revue de modération et aux datasets de conversations.
 
 - Le mode auto continue la collecte quand les résultats directs sont
   incomplets.
-- `collectionStrategy` propose 4 modes pour différents besoins.
+- `collectionStrategy` règle la façon dont l'Actor collecte les réponses.
 - Les entrées en masse acceptent des URL de posts, des ID de post, des profils
   et des noms d'utilisateur.
 - Les filtres et la suppression des doublons passent avant la facturation.
@@ -215,6 +215,9 @@ correction.
 
 ## Stratégies de couverture
 
+Choisissez comment l'Actor collecte les réponses. Le mode auto convient à la
+plupart des cas.
+
 ### Mode auto complet
 
 Utilisez `collectionStrategy: "auto"` dans la plupart des cas. Il collecte
@@ -244,6 +247,13 @@ Utilisez `collectionStrategy: "thread"` pour lire le contexte de la conversation
 source. Réglez `includeOriginalPost: true` pour garder le post racine à la
 profondeur 0.
 
+### Réponses masquées
+
+Utilisez `collectionStrategy: "hiddenReplies"` pour les réponses que l'auteur du
+post a masquées. X les liste de la plus ancienne à la plus récente, avec les
+réponses qui leur sont adressées. Chaque ligne a `resultType: "hiddenReply"`. Un
+post sans réponses masquées ne renvoie aucune ligne.
+
 ## Contrôles des réponses directes et imbriquées
 
 Utilisez `scope` pour choisir la forme du résultat.
@@ -266,6 +276,9 @@ Utilisez `sort` avec ces valeurs :
 - `latest` trie du plus récent au plus ancien
 - `oldest` trie du plus ancien au plus récent
 - `likes` trie par nombre de J'aime, du plus haut au plus bas
+
+La recherche X sous-estime les J'aime de certaines réponses anciennes, donc les
+runs `likes` peuvent les manquer.
 
 Les cibles de profil collectent le nombre demandé de résultats uniques et
 filtrés, puis les trient. Les cibles de post gardent un tri global.
@@ -417,6 +430,8 @@ Les valeurs sont des exemples. Les vrais runs renvoient des données en direct.
 
 ## Modes de sortie
 
+Choisissez la largeur de chaque ligne du dataset.
+
 ### Compact
 
 Réglez `outputMode: "compact"` pour un dataset plus léger. Il garde les champs
@@ -425,6 +440,13 @@ de texte, de conversation, d'auteur, d'engagement et de médias.
 ### Full
 
 Réglez `outputMode: "full"` pour garder chaque champ public pris en charge.
+
+### Rich
+
+Réglez `outputMode: "rich"` pour obtenir le plus de données par ligne. Les
+lignes riches gardent toutes les colonnes du mode Full et ajoutent à la fin
+`hasCommunityNotes`, `quotedTweetPermalink`, `unavailableAuthorId` et le
+`sourceUser` des médias.
 
 ### Raw
 
@@ -574,8 +596,8 @@ Les workflows d'agents éligibles peuvent aussi utiliser
 [x402](https://docs.apify.com/integrations/x402) ou
 [Skyfire](https://docs.apify.com/integrations/skyfire).
 
-Xquik propose aussi 47 outils de tableau de bord, 129 opérations REST, des
-webhooks signés et un serveur MCP.
+Xquik propose aussi 47 outils de tableau de bord, une API REST, des webhooks
+signés et un serveur MCP.
 
 ### Utilisez toujours la dernière build
 
@@ -679,6 +701,8 @@ données dont vous avez besoin.
   percent ou font un flop. À partir de $0.0003 par post analysé.
 
 ## FAQ
+
+Les réponses aux questions fréquentes, puis où trouver de l'aide.
 
 ### Ai-je besoin d'une clé API X ou d'une connexion ?
 

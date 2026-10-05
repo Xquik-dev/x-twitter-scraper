@@ -65,11 +65,11 @@ Posts über die Organisationen, Personen oder Themen, die du verfolgst.
 
 ### Was der Actor beantwortet
 
-| Frage         | Antwort                                                                            |
-| ------------- | ---------------------------------------------------------------------------------- |
-| Format        | Berichterstattung, Kommentar, Spekulation, Werbung, Satire, ohne Bezug oder unklar |
-| Quellenangabe | Genannt, verlinkt, aus erster Hand, fehlend oder unklar                            |
-| Relevanz      | Wahrscheinlichkeit, dass das berichtete Ereignis deine Ziele betrifft              |
+- Format: Berichterstattung, Kommentar, Spekulation, Werbung, Satire, ohne Bezug
+  oder unklar
+- Quellenangabe: Genannt, verlinkt, aus erster Hand, fehlend oder unklar
+- Relevanz: Wahrscheinlichkeit, dass das berichtete Ereignis deine Ziele
+  betrifft
 
 Die Klassifizierung prüft keine Fakten. Eine genannte Quelle ist nicht
 automatisch glaubwürdig. Die Quellenangabe beschreibt, was der Post darstellt.
@@ -318,6 +318,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
 ## FAQ & Support
 
+Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
+
 ### Brauche ich einen KI-Account, einen X-API-Schlüssel oder einen Login?
 
 Nein. X (Twitter) News Monitor von Xquik enthält die KI-Kosten im Preis. Du
@@ -331,14 +333,14 @@ Fragen vom Typ `choice`, `score` oder `probability`. Choice-Fragen akzeptieren 2
 bis 255 Kategorien. Score-Fragen brauchen mindestens 2 geordnete Stufen.
 Behalte dieselben Fragen in allen Runs, die du vergleichen willst.
 
-### Warum kam ein Datensatz mit `analysis.status` `failed` oder `skipped` zurück?
+### Warum hat ein Datensatz eine fehlgeschlagene oder übersprungene Analyse?
 
-Der Actor hat den Post gesammelt & geliefert, aber die KI-Analyse lief nicht zu
-Ende. `analysis.reason` nennt die Ursache. `context_limit` bedeutet, dass dein
-Kontext & deine Ziele keinen Platz für den Post lassen. `service_unavailable`
-bedeutet, dass der Analysedienst kurz nicht erreichbar war. Diese Datensätze
-kosten keine Ergebnisgebühr. Kürze `analysis.context` oder starte einen
-neuen Run für die betroffenen IDs.
+`analysis.status` ist `failed` oder `skipped`. Der Actor hat den Post gesammelt
+& geliefert, aber die KI-Analyse lief nicht zu Ende. `analysis.reason` nennt die
+Ursache. `context_limit` bedeutet, dass dein Kontext & deine Ziele keinen Platz
+für den Post lassen. `service_unavailable` bedeutet, dass der Analysedienst kurz
+nicht erreichbar war. Diese Datensätze kosten keine Ergebnisgebühr. Kürze
+`analysis.context` oder starte einen neuen Run für die betroffenen IDs.
 
 Der Actor analysiert auch einen Post, der länger als `maxContextBytes` ist. Er
 kürzt zuerst zitierte & beantwortete Posts, dann den Post selbst.

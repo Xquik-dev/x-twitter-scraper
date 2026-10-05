@@ -32,6 +32,8 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 
 - 오디언스, 게시물, 계정 연령, 인증, 웹사이트, 위치, 자기소개 & 사용자 아이디
   필터.
+- Search Autocomplete 모드: X가 검색어마다 추천하는 계정, 주제, 해시태그 &
+  캐시태그.
 - `startCursor`에 저장된 커서로 쿼리 1개를 이어서 실행.
 - 마이그레이션 후에도 이미 처리한 작업 유지.
 - 과금 전 필터링 & 중복 제거.
@@ -57,6 +59,40 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 문제없이 끝난 작은 실행은 `run-report`를 건너뛰어 Apify 사용량을 아낍니다. 모든
 실행에서 보고서를 기록하려면 `alwaysSaveRunRecords`를 켜세요.
 
+## 검색 자동 완성
+
+누군가 입력하는 동안 X가 추천하는 내용을 읽으려면 `mode`를 `autocomplete`로
+설정하세요. 검색어마다 추천 계정, 주제, 해시태그 & 캐시태그를 반환합니다.
+
+```json
+{
+  "searchTerms": ["nasa", "$tsla"],
+  "mode": "autocomplete",
+  "suggestionTypes": ["users", "cashtags"],
+  "maxItems": 100
+}
+```
+
+- 해시태그는 `#`로, 캐시태그는 `$`로 검색어를 시작하세요.
+- `suggestionTypes`는 선택한 유형만 남깁니다.
+- 각 행에는 `suggestionType` & 검색할 텍스트를 담은 `suggestion`이 들어
+  있습니다.
+- 캐시태그 행에는 `price`, `marketCap` & `dailyChangePercent`가 들어 있습니다.
+- 프로필 필터는 Profile Search에만 적용됩니다.
+
+추천 행은 다음과 같습니다.
+
+```json
+{
+  "suggestionType": "user",
+  "suggestion": "@sample_user",
+  "username": "sample_user",
+  "name": "Sample User",
+  "verified": true,
+  "sourceTarget": "sample"
+}
+```
+
 ## 출력
 
 각 행에는 프로필이 들어 있고, `sourceTarget`에는 그 프로필을 찾은 쿼리가 들어
@@ -78,8 +114,9 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 
 ## X 사용자 검색 비용은 얼마인가요?
 
-모든 Apify 요금제에서 전달된 프로필 1개당 $0.00015입니다. Apify 플랫폼 사용료는
-Apify가 따로 청구합니다.
+모든 Apify 요금제에서 전달된 프로필 1개당 $0.00015입니다. Search Autocomplete
+추천도 전달된 행 1개당 같은 요금입니다. Apify 플랫폼 사용료는 Apify가 따로
+청구합니다.
 
 - 전달된 데이터 행 1개마다 한 번 과금합니다. 진단은 `diagnostics`에서 무료로
   제공합니다.
@@ -97,7 +134,7 @@ Apify가 따로 청구합니다.
 `message`, `retryable` & `nextAction`을 따로 담아 나열합니다. 원인은
 `target_not_found`, `target_failed`, `pagination_safety_limit` &
 `deadline_reached`입니다. 찾을 수 없는 대상은 다른 원인으로 실행이 멈췄을 때만
-목록에 들어갑니다. 원인 중 하나라도 `retryable`이면 실행도 `retryable`입니다.
+목록에 들어갑니다. 원인 중 하나라도 재시도할 수 있으면 실행도 `retryable`입니다.
 
 ## 관련 Xquik Actor
 
@@ -169,6 +206,8 @@ Apify가 따로 청구합니다.
 
 ## 자주 묻는 질문
 
+자주 묻는 질문에 먼저 답하고, 이어서 도움받을 곳을 안내합니다.
+
 ### X API 키나 로그인이 필요한가요?
 
 아니요. Xquik의 X User Search Scraper는 X API 키, 로그인, 자격 증명이 모두 필요
@@ -188,9 +227,9 @@ Xquik의 X User Search Scraper는 공개 X 필드를 요청합니다. 결과에�
 
 ### API, 스케줄 & 연동을 사용할 수 있나요?
 
-네. 공개 태스크 50개나 Xquik REST 작업 129개 중에서 고르세요.
-[API 탭](https://apify.com/xquik/x-user-search-scraper/api)에 Python, JavaScript &
-cURL 예시가 있습니다. Apify
+네. 공개 태스크 50개나 Xquik REST API 중에서 고르세요.
+[API 탭](https://apify.com/xquik/x-user-search-scraper/api)에 Python, JavaScript
+& cURL 예시가 있습니다. Apify
 [스케줄](https://docs.apify.com/platform/schedules)로 Xquik의 X User Search
 Scraper를 cron 일정에 맞춰 실행할 수 있습니다. 에이전트는
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp)를 사용합니다. 이전

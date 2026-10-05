@@ -17,15 +17,16 @@
 
 Xquik, en eksiksiz X verisini sunan, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. Xquik'in X Community Scraper'ı Topluluk bilgilerini,
-gönderilerini, aramalarını, üyelerini ve moderatörlerini toplar. Diğer Apify
-Actor'larının çoğu, filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik
-yalnızca teslim edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır.
+gönderilerini, medyasını, aramalarını, üyelerini ve moderatörlerini toplar,
+anahtar kelime veya konuyla da Topluluk bulur. Diğer Apify Actor'larının çoğu,
+filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
+edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır.
 
-Twitter Topluluklarının bilgilerini, gönderilerini, anahtar kelime
+Twitter Topluluklarının bilgilerini, gönderilerini, medyasını, anahtar kelime
 eşleşmelerini, üyelerini ve moderatörlerini Topluluk URL'lerinden veya
-ID'lerinden topla. **Teslim edilen satır başına $0.00015** ödersin. Apify,
-platform kullanımını ayrıca faturalandırır. X API anahtarı ya da giriş
-gerekmez.
+ID'lerinden topla. Toplulukları anahtar kelime veya konuyla bul ya da X'in
+önerdiklerini listele. **Teslim edilen satır başına $0.00015** ödersin. Apify,
+platform kullanımını ayrıca faturalandırır. X API anahtarı ya da giriş gerekmez.
 
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
@@ -33,11 +34,15 @@ gerekmez.
 ## Topluluk verileri ve filtreler
 
 - X gösteriyorsa Topluluk metadata'sı ve kuralları.
-- En yeni Topluluk gönderileri.
+- Anahtar kelimeyle bulunan Topluluklar, tam kayıtlarıyla.
+- Technology gibi bir konunun en popüler Toplulukları.
+- X'in katılmanı önerdiği Topluluklar ve her Topluluk konusu.
+- En yeniden başlayarak veya popüler sıralamayla Topluluk gönderileri.
+- Bir Topluluğun Medya sekmesi: fotoğraflı veya videolu gönderiler.
 - En yeni veya popüler sıralamalı anahtar kelime araması.
 - Topluluk üyeleri ve moderatörleri.
 - Faturalamadan önce çalışan gönderi, üye ve moderatör filtreleri.
-- Tek çalıştırmada birçok Topluluk ve veri türü.
+- 1 çalıştırmada birçok Topluluk ve veri türü.
 - Genel bir sınır ve her veri türü için ayrı bir sınır.
 - Apify yeniden başlatsa da çalıştırma kaldığı yerden sürer.
 - Faturalamadan önce tekilleştirme.
@@ -74,17 +79,34 @@ alır:
 ```
 
 Anahtar kelime araması için `resources` listesine `"search"` ekle ve `query`
-ayarla.
+ayarla. Medya sekmesi için `"media"` ekle. Popüler gönderiler için `postsOrder`
+değerini `Top` yap.
+
+Bunun yerine Topluluk bulmak için anahtar kelime veya konu gönder:
+
+```json
+{
+  "searchTerms": ["artificial intelligence"],
+  "topics": ["Technology"],
+  "maxItems": 100
+}
+```
+
+Bulunan her Topluluk kurallarını, kurucusunu, yönetici ve üye profillerini
+taşır. Kısa kayıtla daha hızlı bir çalıştırma için `includeDetails` değerini
+`false` yap. X'in önerdiği Topluluklar için `includeSuggested` seçeneğini aç.
+Bunlar her çalıştırmada değişebilir. Her konu ve alt konuları için `listTopics`
+seçeneğini aç.
 
 Sorunsuz biten küçük çalıştırmalar `run-report` yazmaz, böylece Apify kullanımı
 azalır. Raporu her çalıştırmada almak için `alwaysSaveRunRecords` seçeneğini aç.
 
 ## Çıktı
 
-Her satırın `resultType` değeri `community`, `communityTweet`, `communityMember`
-veya `communityModerator` olur. Her satırda girdideki Topluluk için
-`sourceTarget` bulunur. Xquik'in X Community Scraper'ı kaynak alanlarını korur
-ve hiçbir değer uydurmaz.
+Her satırın `resultType` değeri `community`, `communityTweet`, `communityMedia`,
+`communityMember`, `communityModerator` veya `communityTopic` olur. Her satırda
+girdideki Topluluk, anahtar kelime veya konu için `sourceTarget` bulunur.
+Xquik'in X Community Scraper'ı kaynak alanlarını korur ve hiçbir değer uydurmaz.
 
 Aşağıdaki değerler yalnızca örnektir. Gerçek sonuçlar canlı veriden gelir. Bir
 Topluluk bilgi satırı şöyle görünür:
@@ -107,11 +129,12 @@ kullanımını ayrıca faturalandırır.
 - Teslim edilen her veri satırı için 1 kez ödersin. Tanılamalar `diagnostics`
   içinde ücretsizdir.
 - Başlatma, Topluluk, veri türü veya sorgu ücreti yok.
+- Bulunan bir Topluluk, tam kaydı olsun olmasın 1 satır tutar.
 - Tekilleştirme faturalamadan önce çalışır.
 
 ## Sınırlar ve kurtarma
 
-Xquik'in X Community Scraper'ı tek çalıştırmada birçok Topluluğu ve veri türünü
+Xquik'in X Community Scraper'ı 1 çalıştırmada birçok Topluluğu ve veri türünü
 okur. Apify çalıştırmayı yeniden başlatsa da teslim edilen satırlar ve ilerleme
 korunur. Actor kendi başına süre sınırı eklemez. Yalnızca X'in gösterdiği
 herkese açık Toplulukları döndürür. Erişilebilen alanlar Topluluğa göre değişir.
@@ -125,8 +148,8 @@ bitmesi teslimatı doğrular. Tüm verinin çekildiğini doğrulamaz.
 kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Nedenler
 şunlardır: `target_not_found`, `target_failed`, `pagination_safety_limit` ve
 `deadline_reached`. Bulunamayan bir hedef, listeye yalnızca çalıştırmayı başka
-bir neden durdurduysa girer. Nedenlerden biri `retryable` ise çalıştırma da
-`retryable` olur.
+bir neden durdurduysa girer. Nedenlerden biri yeniden denenebiliyorsa çalıştırma
+da `retryable` olur.
 
 ## İlgili Xquik Actor'ları
 
@@ -212,6 +235,8 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 ## SSS
 
+Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
+
 ### X API anahtarı veya giriş gerekir mi?
 
 Hayır. Xquik'in X Community Scraper'ı X API anahtarı, giriş ya da kimlik
@@ -233,7 +258,7 @@ Toplulukları döndürür.
 
 ### API'yi, zamanlamaları ve entegrasyonları kullanabilir miyim?
 
-Evet. 50 herkese açık görevden veya 129 Xquik REST işleminden birini seç.
+Evet. 50 herkese açık görevden birini veya Xquik REST API'yi seç.
 [API sekmesinde](https://apify.com/xquik/x-community-scraper/api) Python,
 JavaScript ve cURL örnekleri var. Apify
 [zamanlamaları](https://docs.apify.com/platform/schedules), Xquik'in X Community

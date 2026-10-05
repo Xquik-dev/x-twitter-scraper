@@ -32,7 +32,9 @@ livré**, et Apify facture l'usage de la plateforme à part.
 
 - Des filtres d'audience, de posts, d'ancienneté, de certification, de site web,
   de localisation, de bio et de nom d'utilisateur.
-- La reprise d'une requête depuis un curseur enregistré dans `startCursor`.
+- Le mode Search Autocomplete : les comptes, sujets, hashtags et cashtags que X
+  suggère pour chaque terme de recherche.
+- La reprise de 1 requête depuis un curseur enregistré dans `startCursor`.
 - Les migrations conservent le travail déjà accepté.
 - Les filtres et la suppression des doublons avant la facturation.
 
@@ -58,6 +60,41 @@ livré**, et Apify facture l'usage de la plateforme à part.
 Les petits runs sans problème n'écrivent pas `run-report` et réduisent l'usage
 Apify. Activez `alwaysSaveRunRecords` pour l'écrire à chaque run.
 
+## Autocomplétion de recherche
+
+Réglez `mode` sur `autocomplete` pour lire ce que X suggère pendant la saisie.
+Chaque terme de recherche renvoie des suggestions de comptes, de sujets, de
+hashtags et de cashtags.
+
+```json
+{
+  "searchTerms": ["nasa", "$tsla"],
+  "mode": "autocomplete",
+  "suggestionTypes": ["users", "cashtags"],
+  "maxItems": 100
+}
+```
+
+- Commencez un terme par `#` pour les hashtags ou par `$` pour les cashtags.
+- `suggestionTypes` garde seulement les types que vous choisissez.
+- Chaque ligne indique son `suggestionType` et, dans `suggestion`, le texte à
+  rechercher.
+- Une ligne de cashtag porte `price`, `marketCap` et `dailyChangePercent`.
+- Les filtres de profil s'appliquent seulement à Profile Search.
+
+Une ligne de suggestion ressemble à ceci :
+
+```json
+{
+  "suggestionType": "user",
+  "suggestion": "@sample_user",
+  "username": "sample_user",
+  "name": "Sample User",
+  "verified": true,
+  "sourceTarget": "sample"
+}
+```
+
 ## Sortie
 
 Chaque ligne contient un profil et, dans `sourceTarget`, la requête qui l'a
@@ -79,8 +116,9 @@ en direct. Une ligne de profil ressemble à ceci :
 
 ## Combien coûte la recherche de comptes X ?
 
-Le prix est de $0.00015 par profil livré sur chaque plan Apify. Apify facture
-l'usage de votre plateforme à part.
+Le prix est de $0.00015 par profil livré sur chaque plan Apify. Une suggestion
+Search Autocomplete coûte le même prix par ligne livrée. Apify facture votre
+usage de la plateforme à part.
 
 - Une facturation par ligne de données livrée. Les diagnostics sont gratuits
   dans `diagnostics`.
@@ -186,6 +224,8 @@ données dont vous avez besoin.
 
 ## FAQ
 
+Les réponses aux questions fréquentes, puis où trouver de l'aide.
+
 ### Ai-je besoin d'une clé API X ou d'une connexion ?
 
 Non. X User Search Scraper de Xquik n'a besoin ni de clé API X, ni de connexion,
@@ -206,7 +246,7 @@ une `nextAction` à suivre.
 
 ### Puis-je utiliser l'API, les planifications et les intégrations ?
 
-Oui. Choisissez parmi 50 tâches publiques ou 129 opérations REST de Xquik.
+Oui. Choisissez parmi 50 tâches publiques ou l'API REST de Xquik.
 L'[onglet API](https://apify.com/xquik/x-user-search-scraper/api) propose des
 exemples en Python, JavaScript et cURL. Les
 [planifications](https://docs.apify.com/platform/schedules) Apify lancent X User

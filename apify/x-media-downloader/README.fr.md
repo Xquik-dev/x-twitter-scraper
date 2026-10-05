@@ -94,7 +94,7 @@ en direct. Une ligne de photo ressemble à ceci :
 ## Combien coûte le téléchargement de médias X ?
 
 Le prix est de $0.00015 par ligne livrée sur chaque plan Apify. Apify facture
-l'usage de votre plateforme à part.
+votre usage de la plateforme à part.
 
 - Une facturation par ligne de données livrée. Les diagnostics sont gratuits
   dans `diagnostics`.
@@ -110,10 +110,12 @@ confirme la livraison, pas une extraction complète.
 
 Le statut du run nomme chaque cause d'arrêt anticipé. `stopCauses` liste chaque
 cause avec ses propres `message`, `retryable` et `nextAction`. Les causes sont
-`target_not_found`, `target_failed`, `pagination_safety_limit`, `reply_reach` et
-`deadline_reached`. `reply_reach` signifie que X n'a renvoyé qu'une partie des
-réponses d'une conversation. Une cible introuvable n'entre dans la liste que si
-une autre cause a arrêté le run. Le run est `retryable` dès qu'une cause l'est.
+`target_not_found`, `target_suspended`, `target_failed`,
+`pagination_safety_limit`, `reply_reach` et `deadline_reached`.
+`target_suspended` nomme les comptes que X a suspendus. `reply_reach` signifie
+que X n'a renvoyé qu'une partie des réponses d'une conversation. Une cible
+introuvable ou suspendue n'entre dans la liste que si une autre cause a arrêté
+le run. Le run est `retryable` dès qu'une cause l'est.
 
 ## Actors Xquik associés
 
@@ -201,6 +203,8 @@ données dont vous avez besoin.
 
 ## FAQ
 
+Les réponses aux questions fréquentes, puis où trouver de l'aide.
+
 ### Ai-je besoin d'une clé API X ou d'une connexion ?
 
 Non. X Media Downloader de Xquik n'a besoin ni de clé API X, ni de connexion, ni
@@ -222,7 +226,7 @@ indique comment la corriger.
 
 ### Puis-je utiliser l'API, les planifications et les intégrations ?
 
-Oui. Choisissez parmi 50 tâches publiques ou 129 opérations REST de Xquik.
+Oui. Choisissez parmi 50 tâches publiques ou l'API REST de Xquik.
 L'[onglet API](https://apify.com/xquik/x-media-downloader/api) propose des
 exemples en Python, JavaScript et cURL. Les
 [planifications](https://docs.apify.com/platform/schedules) Apify lancent X

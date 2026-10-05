@@ -73,7 +73,7 @@ Xは2024年、ポストにいいねしたユーザーの表示をやめました
 
 ## 出力
 
-各行の `resultType` は `tweet`、`replies`、`completeReplies`、`quotes`、`retweeters`、`favoriters`、`thread` のいずれかです。`sourceTarget` には元ポストのIDが入ります。ポストとプロフィールのフィールドは、安定したXquik RESTのレスポンス形式に従います。
+各行の `resultType` は `tweet`、`replies`、`completeReplies`、`quotes`、`retweeters`、`favoriters`、`thread`、`repostCheck` のいずれかです。`sourceTarget` には元ポストのIDが入ります。ポストとプロフィールのフィールドは、安定したXquik RESTのレスポンス形式に従います。
 
 `completeReplies` は返されたすべての行を残します。実行レポートは、一部しか取得できなかった対象を `incompleteTargets` に数えます。フィルターは課金前に適用されます。
 
@@ -89,6 +89,22 @@ Xは2024年、ポストにいいねしたユーザーの表示をやめました
   "likeCount": 12
 }
 ```
+
+## リポストの確認
+
+各アカウントが各ポストをリポストしたかどうかを調べるには、`engagementTypes` に `repostCheck` を加え、`repostCheckUsers` にアカウントを並べます。
+
+```json
+{
+  "tweetIds": ["2098439298617856319"],
+  "engagementTypes": ["repostCheck"],
+  "repostCheckUsers": ["discord", "nasa"]
+}
+```
+
+確認1件につき1行で、`isRetweeted`、`retweetedAt`、`retweetId`、`checkedPosts`、`complete` が入ります。その `id` は `repostCheck:<post ID>:<account>` です。確認では、各アカウントの最新のポストを読み取ります。それらのポストより古いリポストは `false` になり、`complete: false` が付きます。
+
+`repostCheck` と `tweet` の行だけの実行は、入力した順序を保ちます。各ポストの後に、指定した順でそのアカウントが並びます。
 
 ## リポストのタイムスタンプ
 
@@ -139,6 +155,8 @@ XquikのX Engagement Scraperは、1回の実行で多数のポストとエンゲ
 
 ## よくある質問
 
+よくある質問に答えたあと、サポートを受けられる場所を案内します。
+
 ### X APIキーやログインは必要ですか？
 
 いいえ。XquikのX Engagement Scraperは、X APIキー、ログイン、認証情報を必要としません。
@@ -153,7 +171,7 @@ XquikのX Engagement Scraperは、Xの公開フィールドを取得します。
 
 ### API、スケジュール、連携は使えますか？
 
-はい。50個の公開タスクと129個のXquik REST操作から選べます。[APIタブ](https://apify.com/xquik/x-engagement-scraper/api)には、Python、JavaScript、cURLの例があります。Apifyの[スケジュール](https://docs.apify.com/platform/schedules)を使うと、XquikのX Engagement Scraperをcronで実行できます。エージェントは[Apify MCP](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。古いビルドが必要な場合を除き、`latest` を使ってください。
+はい。50個の公開タスクかXquik REST APIから選べます。[APIタブ](https://apify.com/xquik/x-engagement-scraper/api)には、Python、JavaScript、cURLの例があります。Apifyの[スケジュール](https://docs.apify.com/platform/schedules)を使うと、XquikのX Engagement Scraperをcronで実行できます。エージェントは[Apify MCP](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。古いビルドが必要な場合を除き、`latest` を使ってください。
 
 ### どこでサポートを受けられますか？
 

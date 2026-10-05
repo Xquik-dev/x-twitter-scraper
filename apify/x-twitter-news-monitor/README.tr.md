@@ -64,11 +64,9 @@ tut.
 
 ### Actor neyi cevaplar
 
-| Soru  | Cevap                                                            |
-| ----- | ---------------------------------------------------------------- |
-| Biçim | Haber, yorum, spekülasyon, tanıtım, hiciv, ilgisiz veya belirsiz |
-| Atıf  | Adlandırılmış, bağlantılı, ilk elden, yok veya belirsiz          |
-| İlgi  | Aktarılan olayın hedeflerinle ilgili olma olasılığı              |
+- Biçim: Haber, yorum, spekülasyon, tanıtım, hiciv, ilgisiz veya belirsiz
+- Atıf: Adlandırılmış, bağlantılı, ilk elden, yok veya belirsiz
+- İlgi: Aktarılan olayın hedeflerinle ilgili olma olasılığı
 
 Sınıflandırma doğruluk kontrolü yapmaz. Bir kaynağın adını vermek onu güvenilir
 yapmaz. Atıf, gönderinin neyi sunduğunu anlatır.
@@ -321,6 +319,8 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 ## SSS ve destek
 
+Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
+
 ### Yapay zeka hesabı, X API anahtarı veya giriş gerekir mi?
 
 Hayır. Xquik'in X (Twitter) News Monitor Actor'ı yapay zeka maliyetlerini
@@ -334,14 +334,14 @@ arasında `choice`, `score` veya `probability` sorusu gönder. Seçim soruları 
 ile 255 arasında kategori kabul eder. Puan sorularında en az 2 sıralı düzey
 olmalı. Karşılaştırmak istediğin çalıştırmalarda aynı soruları kullan.
 
-### Bir satır neden `analysis.status` değeri `failed` veya `skipped` olarak döndü?
+### Bir satır neden başarısız veya atlanan bir analizle döndü?
 
-Actor gönderiyi topladı ve teslim etti, ama yapay zeka analizi tamamlanmadı.
-`analysis.reason` nedeni belirtir. `context_limit`, bağlamının ve hedeflerinin
-gönderiye yer bırakmadığı anlamına gelir. `service_unavailable`, analiz
-hizmetine kısa bir süre erişilemediği anlamına gelir. Bu satırların sonuç ücreti
-yok. `analysis.context` alanını kısalt ya da etkilenen ID'leri yeniden
-çalıştır.
+`analysis.status` değeri `failed` veya `skipped` olur. Actor gönderiyi topladı
+ve teslim etti, ama yapay zeka analizi tamamlanmadı. `analysis.reason` nedeni
+belirtir. `context_limit`, bağlamının ve hedeflerinin gönderiye yer bırakmadığı
+anlamına gelir. `service_unavailable`, analiz hizmetine kısa bir süre
+erişilemediği anlamına gelir. Bu satırların sonuç ücreti yok. `analysis.context`
+alanını kısalt ya da etkilenen ID'leri yeniden çalıştır.
 
 Actor, `maxContextBytes` değerinden uzun bir gönderiyi de analiz eder. Önce
 alıntılanan ve yanıtlanan gönderileri, sonra gönderinin kendisini kısaltır. Bu

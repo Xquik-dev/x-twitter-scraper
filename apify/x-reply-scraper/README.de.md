@@ -44,7 +44,7 @@ Konversations-Datasets.
 ### So sammelt der Actor Antworten
 
 - Der Auto-Modus sammelt weiter, wenn direkte Ergebnisse unvollständig sind.
-- `collectionStrategy` bietet 4 Modi für verschiedene Antwort-Aufgaben.
+- `collectionStrategy` legt fest, wie der Actor Antworten sammelt.
 - Du kannst viele Post-URLs, Post-IDs, Profile & Nutzernamen auf einmal
   eingeben.
 - Filter & Duplikatentfernung laufen vor der Abrechnung.
@@ -207,6 +207,8 @@ Bleibt kein gültiges Ziel übrig, schreibt der Run eine Diagnose mit der Lösun
 
 ## Abdeckungsstrategien
 
+Wähle, wie der Actor Antworten sammelt. Auto passt für die meisten Aufgaben.
+
 ### Automatisch vollständig
 
 Nutze `collectionStrategy: "auto"` für die meisten Aufgaben. Der Modus sammelt
@@ -236,6 +238,13 @@ Nutze `collectionStrategy: "thread"`, um den Kontext der Quellkonversation zu
 lesen. Setze `includeOriginalPost: true`, um den Ausgangspost als Tiefe 0 zu
 behalten.
 
+### Verborgene Antworten
+
+Nutze `collectionStrategy: "hiddenReplies"` für die Antworten, die der Autor des
+Posts verborgen hat. X listet die ältesten zuerst, zusammen mit den Antworten
+darauf. Jeder Datensatz hat `resultType: "hiddenReply"`. Ein Post ohne
+verborgene Antworten liefert keine Datensätze.
+
 ## Direkte & verschachtelte Antworten steuern
 
 Mit `scope` wählst du die Form des Ergebnisses.
@@ -258,6 +267,9 @@ Nutze `sort` mit diesen Werten:
 - `latest` zeigt die neuesten zuerst
 - `oldest` zeigt die ältesten zuerst
 - `likes` zeigt die meisten Gefällt-mir-Angaben zuerst
+
+Die X-Suche zählt bei manchen älteren Antworten zu wenige Gefällt-mir-Angaben.
+Runs mit `likes` können diese Antworten also übersehen.
 
 Profilziele sammeln erst die angefragte Zahl eindeutiger, gefilterter
 Ergebnisse & sortieren sie dann. Post-Ziele behalten die globale Sortierung.
@@ -406,6 +418,8 @@ Live-Daten.
 
 ## Ausgabemodi
 
+Wähle, wie breit jeder Datensatz im Dataset ist.
+
 ### Kompakt
 
 Setze `outputMode: "compact"` für ein schmaleres Dataset. Es behält Felder zu
@@ -414,6 +428,12 @@ Text, Konversation, Autor, Interaktion & Medien.
 ### Vollständig
 
 Setze `outputMode: "full"`, um jedes unterstützte öffentliche Feld zu behalten.
+
+### Rich
+
+Setze `outputMode: "rich"` für die meisten Daten pro Datensatz. Rich-Datensätze
+behalten jede Spalte des Modus full & ergänzen am Ende `hasCommunityNotes`,
+`quotedTweetPermalink`, `unavailableAuthorId` & `sourceUser` für Medien.
 
 ### Raw
 
@@ -564,8 +584,8 @@ Berechtigte Agent-Workflows können auch
 [x402](https://docs.apify.com/integrations/x402) oder
 [Skyfire](https://docs.apify.com/integrations/skyfire) nutzen.
 
-Xquik bietet außerdem 47 Dashboard-Tools, 129 REST-Operationen, signierte
-Webhooks & einen MCP-Server.
+Xquik bietet außerdem 47 Dashboard-Tools, eine REST-API, signierte Webhooks &
+einen MCP-Server.
 
 ### Immer den neuesten Build verwenden
 
@@ -657,6 +677,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   verbreiten oder floppen. Ab $0.0003 pro analysiertem Post.
 
 ## FAQ
+
+Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
 
 ### Brauche ich einen X-API-Schlüssel oder Login?
 

@@ -34,6 +34,8 @@ de la plateforme à part. Vous n'avez besoin ni de clé API X ni de connexion.
 - Du Markdown qui garde les blocs et les passages en gras ou en italique.
 - Des blocs `contents` qui gardent la mise en forme d'origine.
 - Des URL de posts et des ID de post numériques dans le même run.
+- Tous les Articles publiés par un compte, à partir de son nom d'utilisateur ou
+  de l'URL de son profil.
 - La suppression des doublons avant la facturation.
 
 X Article Scraper de Xquik ne devine jamais les métadonnées des liens. Apify
@@ -43,7 +45,8 @@ affiche le Markdown sous forme de texte.
 
 1. Ouvrez X Article Scraper de Xquik dans Apify Console.
 2. Collez des URL de posts d'Article dans `startUrls` ou des ID de post dans
-   `tweetIds`.
+   `tweetIds`. Pour lister les Articles d'un compte, ajoutez son nom
+   d'utilisateur dans `twitterHandles`.
 3. Réglez `maxItems` pour plafonner les Articles livrés, puis cliquez sur Start.
 4. Téléchargez le dataset en JSON, CSV ou Excel, ou passez par l'API Apify.
 
@@ -63,8 +66,9 @@ affiche le Markdown sous forme de texte.
 
 | Champ                  | Rôle                                                 | Par défaut |
 | ---------------------- | ---------------------------------------------------- | ---------- |
-| `startUrls`            | URL publiques de posts d'Article                     | Aucune     |
+| `startUrls`            | URL publiques de posts d'Article ou de profils       | Aucune     |
 | `tweetIds`             | ID de post numériques d'Articles                     | Aucun      |
+| `twitterHandles`       | Comptes dont l'Actor liste les Articles              | Aucun      |
 | `maxItems`             | Plafond global d'Articles livrés                     | `100000`   |
 | `dedupeAcrossTargets`  | Retire les ID d'Article répétés avant la facturation | `true`     |
 | `maxConcurrency`       | Lectures d'Articles indépendantes en parallèle       | `100`      |
@@ -91,10 +95,17 @@ en direct. Une ligne d'Article contient ces champs :
 Les lignes ajoutent l'auteur, la source, la couverture, l'heure et les
 métriques. Exportez en JSON ou en tableaux.
 
+Un nom d'utilisateur dans `twitterHandles`, ou une URL de profil dans
+`startUrls`, liste les Articles de ce compte, du plus récent au plus ancien.
+Chacun est une ligne `articlePreview` avec le `title`, le `previewText`, la
+`coverImageUrl` et l'`articleId` de l'Article, ses dates et les métriques du
+post. X n'y liste pas le corps, donc la ligne n'a ni `markdown` ni `contents`.
+Lancez un run avec son `tweetId` pour obtenir l'Article complet.
+
 ## Combien coûte le scraping d'Articles X ?
 
 Le prix est de $0.00015 par article livré sur chaque plan Apify. Apify facture
-l'usage de votre plateforme à part.
+votre usage de la plateforme à part.
 
 - Une facturation par ligne de données livrée. Les diagnostics sont gratuits
   dans `diagnostics`.
@@ -113,9 +124,11 @@ confirme la livraison, pas une extraction complète.
 
 Le statut du run nomme chaque cause d'arrêt anticipé. `stopCauses` liste chaque
 cause avec ses propres `message`, `retryable` et `nextAction`. Les causes sont
-`target_not_found`, `target_failed`, `pagination_safety_limit` et
-`deadline_reached`. Une cible introuvable n'entre dans la liste que si une autre
-cause a arrêté le run. Le run est `retryable` dès qu'une cause l'est.
+`target_not_found`, `target_suspended`, `target_failed`,
+`pagination_safety_limit` et `deadline_reached`. `target_suspended` nomme les
+comptes que X a suspendus. Une cible introuvable ou suspendue n'entre dans la
+liste que si une autre cause a arrêté le run. Le run est `retryable` dès qu'une
+cause l'est.
 
 ## Actors Xquik associés
 
@@ -204,6 +217,8 @@ données dont vous avez besoin.
 
 ## FAQ
 
+Les réponses aux questions fréquentes, puis où trouver de l'aide.
+
 ### Ai-je besoin d'une clé API X ou d'une connexion ?
 
 Non. X Article Scraper de Xquik n'a besoin ni de clé API X, ni de connexion, ni
@@ -226,7 +241,7 @@ Articles publics accessibles sur X.
 
 ### Puis-je utiliser l'API, les planifications et les intégrations ?
 
-Oui. Choisissez parmi 50 tâches publiques ou 129 opérations REST de Xquik.
+Oui. Choisissez parmi 50 tâches publiques ou l'API REST de Xquik.
 L'[onglet API](https://apify.com/xquik/x-article-scraper/api) propose des
 exemples en Python, JavaScript et cURL. Les
 [planifications](https://docs.apify.com/platform/schedules) Apify lancent X

@@ -33,6 +33,7 @@ Apify Actor는 대부분 필터링이나 중복 제거 전에 요금을 부과�
 - 블록, 굵게 & 기울임꼴 범위를 유지하는 마크다운.
 - 원본 서식을 유지하는 `contents` 블록.
 - 게시물 URL & 숫자 게시물 ID를 한 실행에서 함께 사용.
+- 사용자 아이디나 프로필 URL로 계정이 게시한 모든 아티클 조회.
 - 과금 전 중복 제거.
 
 Xquik의 X Article Scraper는 링크 메타데이터를 추측하지 않습니다. Apify는
@@ -42,6 +43,7 @@ Xquik의 X Article Scraper는 링크 메타데이터를 추측하지 않습니�
 
 1. Apify Console에서 Xquik의 X Article Scraper를 여세요.
 2. 아티클 게시물 URL은 `startUrls`에, 게시물 ID는 `tweetIds`에 붙여넣으세요.
+   계정의 아티클을 나열하려면 사용자 아이디를 `twitterHandles`에 추가하세요.
 3. `maxItems`로 전달할 아티클 수의 상한을 정하고 Start를 클릭하세요.
 4. 데이터셋을 JSON, CSV 또는 Excel로 내려받거나 Apify API를 사용하세요.
 
@@ -58,14 +60,15 @@ Xquik의 X Article Scraper는 링크 메타데이터를 추측하지 않습니�
 
 ## 입력
 
-| 필드                   | 용도                                | 기본값   |
-| ---------------------- | ----------------------------------- | -------- |
-| `startUrls`            | 공개 아티클 게시물 URL              | 없음     |
-| `tweetIds`             | 숫자로 된 아티클 게시물 ID          | 없음     |
-| `maxItems`             | 전달할 아티클의 전체 상한           | `100000` |
-| `dedupeAcrossTargets`  | 과금 전 중복 아티클 ID 제거         | `true`   |
-| `maxConcurrency`       | 동시에 처리하는 독립 아티클 읽기 수 | `100`    |
-| `alwaysSaveRunRecords` | 모든 실행에서 `run-report` 저장     | `false`  |
+| 필드                   | 용도                                   | 기본값   |
+| ---------------------- | -------------------------------------- | -------- |
+| `startUrls`            | 공개 아티클 게시물 URL 또는 프로필 URL | 없음     |
+| `tweetIds`             | 숫자로 된 아티클 게시물 ID             | 없음     |
+| `twitterHandles`       | 아티클을 나열할 계정                   | 없음     |
+| `maxItems`             | 전달할 아티클의 전체 상한              | `100000` |
+| `dedupeAcrossTargets`  | 과금 전 중복 아티클 ID 제거            | `true`   |
+| `maxConcurrency`       | 동시에 처리하는 독립 아티클 읽기 수    | `100`    |
+| `alwaysSaveRunRecords` | 모든 실행에서 `run-report` 저장        | `false`  |
 
 ## 출력
 
@@ -88,6 +91,12 @@ Output 탭을 열면 `Articles`가 나옵니다. `Results`에서는 결과 행�
 행에는 작성자, 출처, 커버, 시간 & 지표도 들어갑니다. JSON이나 표 형식으로 내보낼
 수 있습니다.
 
+`twitterHandles`의 사용자 아이디나 `startUrls`의 프로필 URL은 그 계정의 아티클을
+최신순으로 나열합니다. 각 아티클은 `articlePreview` 행이며 아티클의 `title`,
+`previewText`, `coverImageUrl`, `articleId`, 날짜 & 게시물 지표가 들어 있습니다.
+X는 그 목록에 본문을 싣지 않으므로 이 행에는 `markdown`이나 `contents`가
+없습니다. 전체 아티클을 받으려면 그 행의 `tweetId`로 실행하세요.
+
 ## X 아티클 스크랩 비용은 얼마인가요?
 
 모든 Apify 요금제에서 전달된 아티클 1개당 $0.00015입니다. Apify 플랫폼 사용료는
@@ -109,9 +118,11 @@ Xquik의 X Article Scraper는 X가 공개한 아티클만 반환합니다.
 
 실행 상태는 실행이 일찍 멈춘 원인을 모두 알려 줍니다. `stopCauses`는 원인마다
 `message`, `retryable` & `nextAction`을 따로 담아 나열합니다. 원인은
-`target_not_found`, `target_failed`, `pagination_safety_limit` &
-`deadline_reached`입니다. 찾을 수 없는 대상은 다른 원인으로 실행이 멈췄을 때만
-목록에 들어갑니다. 원인 중 하나라도 `retryable`이면 실행도 `retryable`입니다.
+`target_not_found`, `target_suspended`, `target_failed`,
+`pagination_safety_limit` & `deadline_reached`입니다. `target_suspended`는 X가
+정지한 계정을 알려 줍니다. 찾을 수 없거나 정지된 대상은 다른 원인으로 실행이
+멈췄을 때만 목록에 들어갑니다. 원인 중 하나라도 재시도할 수 있으면 실행도
+`retryable`입니다.
 
 ## 관련 Xquik Actor
 
@@ -183,6 +194,8 @@ Xquik의 X Article Scraper는 X가 공개한 아티클만 반환합니다.
 
 ## 자주 묻는 질문
 
+자주 묻는 질문에 먼저 답하고, 이어서 도움받을 곳을 안내합니다.
+
 ### X API 키나 로그인이 필요한가요?
 
 아니요. Xquik의 X Article Scraper는 X API 키, 로그인, 자격 증명이 모두 필요
@@ -203,7 +216,7 @@ Xquik의 X Article Scraper는 X가 공개한 아티클만 반환합니다.
 
 ### API, 스케줄 & 연동을 사용할 수 있나요?
 
-네. 공개 태스크 50개나 Xquik REST 작업 129개 중에서 고르세요.
+네. 공개 태스크 50개나 Xquik REST API 중에서 고르세요.
 [API 탭](https://apify.com/xquik/x-article-scraper/api)에 Python, JavaScript &
 cURL 예시가 있습니다. Apify
 [스케줄](https://docs.apify.com/platform/schedules)로 Xquik의 X Article

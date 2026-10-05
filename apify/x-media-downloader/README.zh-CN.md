@@ -88,7 +88,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 提取中断时，会写入一条免费的 `partial` 诊断。已获取的结果不受影响。重试前，先查看 `availableResults`、`failedTargets`、`retryable` 和 `nextAction`。Actor 成功退出只说明结果已交付，不代表提取完整。
 
-运行状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_failed`、`pagination_safety_limit`、`reply_reach` 和 `deadline_reached`。`reply_reach` 表示 X 只提供了回复串的一部分。只有在其他原因让运行停止时，缺失的目标才会列入 `stopCauses`。只要有一个原因可重试，整个运行就是 `retryable`。
+运行状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_suspended`、`target_failed`、`pagination_safety_limit`、`reply_reach` 和 `deadline_reached`。`target_suspended` 列出被 X 冻结的账号。`reply_reach` 表示 X 只提供了回复串的一部分。只有在其他原因让运行停止时，缺失或被冻结的目标才会一并列出。只要有一个原因可重试，整个运行就是 `retryable`。
 
 ## 相关 Xquik Actor
 
@@ -115,6 +115,8 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 ## 常见问题
 
+先解答常见问题，再说明在哪里获取帮助。
+
 ### 我需要 X API 密钥或登录吗？
 
 不需要。Xquik 的 X Media Downloader 不需要 X API 密钥、登录或任何凭据。
@@ -129,7 +131,7 @@ Xquik 的 X Media Downloader 请求的是公开的 X 字段。结果可能包含
 
 ### 可以使用 API、定时调度和集成吗？
 
-可以。你可以从 50 个公开任务或 129 个 Xquik REST 操作中选择。[API 标签页](https://apify.com/xquik/x-media-downloader/api) 提供 Python、JavaScript 和 cURL 示例。Apify [定时调度](https://docs.apify.com/platform/schedules) 可以按 cron 运行 Xquik 的 X Media Downloader。Agent 可以通过 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) 调用它。除非需要旧构建，否则请使用 `latest`。
+可以。你可以从 50 个公开任务或 Xquik REST API 中选择。[API 标签页](https://apify.com/xquik/x-media-downloader/api) 提供 Python、JavaScript 和 cURL 示例。Apify [定时调度](https://docs.apify.com/platform/schedules) 可以按 cron 运行 Xquik 的 X Media Downloader。Agent 可以通过 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) 调用它。除非需要旧构建，否则请使用 `latest`。
 
 ### 在哪里获取帮助？
 

@@ -38,7 +38,7 @@ faturalandırır. X API anahtarı ya da giriş gerekmez.
 - Metin, yazar, medya ve metriklerle alıntı gönderiler.
 - Yeniden gönderen profilleri.
 - Her kaynak gönderinin çevresindeki konuşma bağlamı.
-- Tek çalıştırmada birçok etkileşim türü ve gönderi.
+- 1 çalıştırmada birçok etkileşim türü ve gönderi.
 - Genel bir sınır ve her etkileşim türü için ayrı bir sınır.
 - Kaynak gönderi ve etkileşim türü bilgisi.
 - Apify yeniden başlatsa da çalıştırma kaldığı yerden sürer.
@@ -88,9 +88,9 @@ azalır. Raporu her çalıştırmada almak için `alwaysSaveRunRecords` seçene�
 ## Çıktı
 
 Her satırın `resultType` değeri `tweet`, `replies`, `completeReplies`, `quotes`,
-`retweeters`, `favoriters` veya `thread` olur. `sourceTarget` kaynak gönderi
-ID'sini tutar. Gönderi ve profil alanları sabit Xquik REST yanıt biçimlerini
-izler.
+`retweeters`, `favoriters`, `thread` veya `repostCheck` olur. `sourceTarget`
+kaynak gönderi ID'sini tutar. Gönderi ve profil alanları sabit Xquik REST yanıt
+biçimlerini izler.
 
 `completeReplies` dönen her satırı tutar. Çalıştırma raporu kısmi kapsamayı
 `incompleteTargets` içinde sayar. Filtreler faturalamadan önce çalışır.
@@ -108,6 +108,28 @@ yanıt satırı şöyle görünür:
   "likeCount": 12
 }
 ```
+
+## Yeniden gönderi kontrolü
+
+Her hesabın her gönderiyi yeniden gönderip göndermediğini öğrenmek için
+`engagementTypes` listesine `repostCheck` ekle ve hesapları `repostCheckUsers`
+içinde listele:
+
+```json
+{
+  "tweetIds": ["2098439298617856319"],
+  "engagementTypes": ["repostCheck"],
+  "repostCheckUsers": ["discord", "nasa"]
+}
+```
+
+Her kontrol `isRetweeted`, `retweetedAt`, `retweetId`, `checkedPosts` ve
+`complete` içeren 1 satırdır. `id` değeri `repostCheck:<post ID>:<account>`
+olur. Kontrol her hesabın en yeni gönderilerini okur. Bu gönderilerden eski bir
+yeniden gönderi `complete: false` ile `false` olarak okunur.
+
+Yalnızca `repostCheck` ve `tweet` satırlarından oluşan bir çalıştırma girdi
+sıranı korur: önce her gönderi, sonra listelediğin sırayla hesapları.
 
 ## Yeniden gönderi zaman damgaları
 
@@ -137,7 +159,7 @@ kullanımını ayrıca faturalandırır.
 
 ## Sınırlar ve kurtarma
 
-Xquik'in X Engagement Scraper'ı tek çalıştırmada birçok gönderiyi ve etkileşim
+Xquik'in X Engagement Scraper'ı 1 çalıştırmada birçok gönderiyi ve etkileşim
 türünü okur. Apify çalıştırmayı yeniden başlatsa da teslim edilen satırlar ve
 ilerleme korunur. Actor kendi başına süre sınırı eklemez.
 
@@ -152,7 +174,7 @@ kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Nedenler
 `reply_reach` ve `deadline_reached`. `reply_reach`, X'in bir yanıt konuşmasının
 yalnızca bir kısmını sunduğu anlamına gelir. Bulunamayan bir hedef, listeye
 yalnızca çalıştırmayı başka bir neden durdurduysa girer. Nedenlerden biri
-`retryable` ise çalıştırma da `retryable` olur.
+yeniden denenebiliyorsa çalıştırma da `retryable` olur.
 
 ## İlgili Xquik Actor'ları
 
@@ -237,6 +259,8 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 ## SSS
 
+Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
+
 ### X API anahtarı veya giriş gerekir mi?
 
 Hayır. Xquik'in X Engagement Scraper'ı X API anahtarı, giriş ya da kimlik
@@ -258,7 +282,7 @@ göstermeyi bıraktı, bu yüzden `favoriters` satır döndürmez.
 
 ### API'yi, zamanlamaları ve entegrasyonları kullanabilir miyim?
 
-Evet. 50 herkese açık görevden veya 129 Xquik REST işleminden birini seç.
+Evet. 50 herkese açık görevden birini veya Xquik REST API'yi seç.
 [API sekmesinde](https://apify.com/xquik/x-engagement-scraper/api) Python,
 JavaScript ve cURL örnekleri var. Apify
 [zamanlamaları](https://docs.apify.com/platform/schedules), Xquik'in X

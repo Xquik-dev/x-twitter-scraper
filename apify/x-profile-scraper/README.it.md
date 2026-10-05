@@ -32,9 +32,9 @@ piattaforma. Non ti servono una chiave API X né il login.
 
 - Bio, conteggi, verifica, posizione indicata dall'utente, sito web & media.
 - L'etichetta pubblica "Account based in" di X, quando X la mostra.
-- Righe delle schede Post & Risposte del profilo su tutte le pagine di
-  risultati disponibili.
-- Media, follower, following o follower verificati, a scelta.
+- Righe delle schede Post & Risposte del profilo su tutte le pagine di risultati
+  disponibili.
+- Media, post In evidenza, follower, following o follower verificati, a scelta.
 - Filtri sui post opzionali per data, media, verifica, stato di repost &
   metriche.
 - Filtri sui profili opzionali per pubblico, attività, età & metadati pubblici.
@@ -76,18 +76,23 @@ Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
 ## Output
 
 Le righe di profilo usano `resultType: "profile"`. Le righe opzionali usano
-`profileTweet`, `profileReply`, `profileMedia`, `profileFollower`,
-`profileFollowing` o `profileVerifiedFollower`. Ogni riga conserva
-`sourceTarget`. I campi pubblici seguono il formato dell'API REST di Xquik.
+`profileTweet`, `profileReply`, `profileMedia`, `profileHighlight`,
+`profileFollower`, `profileFollowing` o `profileVerifiedFollower`. Ogni riga
+conserva `sourceTarget`. I campi pubblici seguono il formato dell'API REST di
+Xquik.
 
-X deduce `accountBasedIn` dagli IP aggregati di accesso all'account.
-L'etichetta non indica nazionalità, residenza, identità, iscrizione, post o
-posizione esatta. `observedAt` registra il momento del recupero.
-`accountBasedIn` è null quando X non mostra l'etichetta. Quando X la trattiene,
-la riga riporta invece `accountBasedInUnavailable: true`.
+`includeHighlights` aggiunge i post della scheda In evidenza di ogni profilo,
+nell'ordine di X. Un profilo senza post in evidenza non aggiunge righe.
 
-Dal 2024 X mostra i post a cui un account ha messo Mi piace solo a quell'account.
-`includeLikes` non restituisce righe `profileLike` per gli altri account.
+X deduce `accountBasedIn` dagli IP aggregati di accesso all'account. L'etichetta
+non indica nazionalità, residenza, identità, iscrizione, post o posizione
+esatta. `observedAt` registra il momento del recupero. `accountBasedIn` è null
+quando X non mostra l'etichetta. Quando X la trattiene, la riga riporta invece
+`accountBasedInUnavailable: true`.
+
+Dal 2024 X mostra i post a cui un account ha messo Mi piace solo a
+quell'account. `includeLikes` non restituisce righe `profileLike` per gli altri
+account.
 
 Gli esempi usano valori fittizi. I risultati contengono dati live. Una riga di
 profilo ha questo aspetto:
@@ -129,10 +134,11 @@ conferma la consegna, non l'estrazione completa.
 
 Lo stato dell'esecuzione nomina ogni causa di un arresto anticipato.
 `stopCauses` elenca ogni causa con i propri `message`, `retryable` &
-`nextAction`. Le cause sono `target_not_found`, `target_failed`,
-`pagination_safety_limit` & `deadline_reached`. Un target mancante entra
-nell'elenco solo se un'altra causa ha fermato l'esecuzione. L'esecuzione è
-`retryable` quando lo è almeno una causa.
+`nextAction`. Le cause sono `target_not_found`, `target_suspended`,
+`target_failed`, `pagination_safety_limit` & `deadline_reached`.
+`target_suspended` nomina gli account che X ha sospeso. Un target mancante o
+sospeso entra nell'elenco solo se un'altra causa ha fermato l'esecuzione.
+L'esecuzione è `retryable` quando lo è almeno una causa.
 
 ## Actor Xquik correlati
 
@@ -211,6 +217,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
 ## FAQ
 
+Le risposte alle domande più comuni, poi dove trovare assistenza.
+
 ### Serve una chiave API X o il login?
 
 No. X Profile Scraper di Xquik non richiede chiave API X, login o credenziali.
@@ -231,10 +239,11 @@ restituisce righe `profileLike` per gli altri account.
 
 ### Posso usare l'API, le pianificazioni & le integrazioni?
 
-Sì. Scegli tra 50 task pubblici o 129 operazioni REST di Xquik. La
+Sì. Scegli tra 50 task pubblici o l'API REST di Xquik. La
 [scheda API](https://apify.com/xquik/x-profile-scraper/api) ha esempi in Python,
-JavaScript & cURL. Le [pianificazioni](https://docs.apify.com/platform/schedules)
-di Apify avviano X Profile Scraper di Xquik con un cron. Gli agenti usano
+JavaScript & cURL. Le
+[pianificazioni](https://docs.apify.com/platform/schedules) di Apify avviano X
+Profile Scraper di Xquik con un cron. Gli agenti usano
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp). Usa `latest`, a
 meno che non ti serva una build precedente.
 

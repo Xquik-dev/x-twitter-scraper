@@ -45,7 +45,7 @@ della moderazione & dataset di conversazioni.
 
 - La modalità auto continua a raccogliere quando i risultati diretti sono
   incompleti.
-- `collectionStrategy` offre 4 modalità per esigenze diverse sulle risposte.
+- `collectionStrategy` definisce come l'Actor raccoglie le risposte.
 - Gli input in blocco accettano URL di post, ID dei post, profili & nomi utente.
 - Filtri & rimozione dei duplicati agiscono prima della fatturazione.
 - L'output supporta 4 ordinamenti, 3 livelli di dettaglio & 3 stili di campo.
@@ -180,12 +180,12 @@ Avvia X Reply Scraper di Xquik tramite Apify MCP, client API, x402 o Skyfire.
 
 Usa questi campi principali.
 
-| Input         | Scopo                                     |
-| ------------- | ----------------------------------------- |
-| `startUrls`   | URL misti di post & profili di X          |
-| `tweetIds`    | ID numerici dei post                      |
-| `usernames`   | Timeline delle risposte dei profili       |
-| `startCursor` | Riprende un target da un cursore salvato  |
+| Input         | Scopo                                    |
+| ------------- | ---------------------------------------- |
+| `startUrls`   | URL misti di post & profili di X         |
+| `tweetIds`    | ID numerici dei post                     |
+| `usernames`   | Timeline delle risposte dei profili      |
+| `startCursor` | Riprende un target da un cursore salvato |
 
 Il modulo di input mostra solo i controlli canonici. Gli alias di compatibilità
 funzionano ancora negli input JSON, API, SDK, di automazione & dei task salvati.
@@ -210,10 +210,13 @@ nessun target valido, l'esecuzione scrive una diagnostica con la correzione.
 
 ## Strategie di copertura
 
+Scegli come l'Actor raccoglie le risposte. Auto va bene per la maggior parte dei
+casi.
+
 ### Completamento automatico
 
 Usa `collectionStrategy: "auto"` per la maggior parte dei casi. Raccoglie ogni
-risposta che riesce a raggiungere per il tuo `scope`. I controlli di ambito,
+risposta che riesce a raggiungere per il tuo ambito. I controlli di ambito,
 profondità, ordinamento & autore agiscono prima dei tuoi limiti. Include le
 risposte sotto target che non sono radice. Quando X nasconde parte di un thread,
 lo stato dice quante risposte X nasconde. Gli altri valori di
@@ -238,6 +241,13 @@ Usa `collectionStrategy: "thread"` per leggere il contesto della conversazione
 di origine. Imposta `includeOriginalPost: true` per tenere il post radice a
 profondità 0.
 
+### Risposte nascoste
+
+Usa `collectionStrategy: "hiddenReplies"` per le risposte che l'autore del post
+ha nascosto. X le elenca dalla più vecchia, con le risposte che hanno ricevuto.
+Ogni riga ha `resultType: "hiddenReply"`. Un post senza risposte nascoste non
+restituisce righe.
+
 ## Controlli delle risposte dirette & annidate
 
 Usa `scope` per scegliere la forma del risultato.
@@ -261,8 +271,11 @@ Usa `sort` con questi valori:
 - `oldest` mette prima le più vecchie
 - `likes` mette prima quelle con più Mi piace
 
-I target di profilo raccolgono il numero richiesto di risultati unici & filtrati,
-poi li ordinano. I target di post mantengono l'ordinamento globale.
+La ricerca di X sottostima i Mi piace di alcune risposte più vecchie, quindi le
+esecuzioni `likes` possono perderle.
+
+I target di profilo raccolgono il numero richiesto di risultati unici &
+filtrati, poi li ordinano. I target di post mantengono l'ordinamento globale.
 
 Gli alias di compatibilità `sortBy` & `queryType` funzionano ancora.
 
@@ -285,14 +298,14 @@ Tutti i filtri supportati agiscono prima della scrittura nel dataset.
 
 ### Filtri per autore & lingua
 
-| Input                   | Comportamento                                 |
-| ----------------------- | --------------------------------------------- |
-| `fromUser`              | Tiene un solo autore di risposte              |
-| `toUser`                | Tiene le risposte rivolte a un nome utente    |
-| `lang`                  | Tiene un codice lingua di X                   |
-| `verifiedOnly`          | Richiede un qualsiasi segnale di verifica     |
-| `blueVerifiedOnly`      | Richiede la verifica X Premium                |
-| `excludeOriginalAuthor` | Rimuove le risposte dell'autore a sé stesso   |
+| Input                   | Comportamento                               |
+| ----------------------- | ------------------------------------------- |
+| `fromUser`              | Tiene un solo autore di risposte            |
+| `toUser`                | Tiene le risposte rivolte a un nome utente  |
+| `lang`                  | Tiene un codice lingua di X                 |
+| `verifiedOnly`          | Richiede un qualsiasi segnale di verifica   |
+| `blueVerifiedOnly`      | Richiede la verifica X Premium              |
+| `excludeOriginalAuthor` | Rimuove le risposte dell'autore a sé stesso |
 
 ### Filtri di engagement
 
@@ -314,29 +327,29 @@ campi primitivi riportano anche esempi per agenti & integrazioni generate.
 
 Ogni riga completa di risposta può includere questi campi principali:
 
-| Campo               | Descrizione                                         |
-| ------------------- | --------------------------------------------------- |
-| `id`                | ID della risposta                                   |
-| `text`              | Testo della risposta                                |
-| `fullText`          | Testo lungo della risposta                          |
-| `createdAt`         | Timestamp della risposta                            |
-| `lang`              | Codice lingua di X                                  |
-| `url`               | URL diretto della risposta                          |
-| `conversationId`    | ID della conversazione su X                         |
-| `inReplyToId`       | ID del genitore diretto                             |
-| `inReplyToUserId`   | ID dell'autore del genitore                         |
-| `inReplyToUsername` | Nome utente del genitore                            |
-| `likeCount`         | Mi piace                                            |
-| `replyCount`        | Risposte figlie                                     |
-| `retweetCount`      | Repost                                              |
-| `quoteCount`        | Citazioni                                           |
-| `viewCount`         | Visualizzazioni                                     |
-| `bookmarkCount`     | Segnalibri                                          |
-| `author`            | Metadati pubblici disponibili dell'autore           |
-| `media`             | Immagini, video, GIF & varianti                     |
-| `entities`          | Hashtag, cashtag, menzioni, URL & timestamp video   |
-| `quoted_tweet`      | Post citato, quando disponibile                     |
-| `retweeted_tweet`   | Post originale del repost, quando disponibile       |
+| Campo               | Descrizione                                       |
+| ------------------- | ------------------------------------------------- |
+| `id`                | ID della risposta                                 |
+| `text`              | Testo della risposta                              |
+| `fullText`          | Testo lungo della risposta                        |
+| `createdAt`         | Timestamp della risposta                          |
+| `lang`              | Codice lingua di X                                |
+| `url`               | URL diretto della risposta                        |
+| `conversationId`    | ID della conversazione su X                       |
+| `inReplyToId`       | ID del genitore diretto                           |
+| `inReplyToUserId`   | ID dell'autore del genitore                       |
+| `inReplyToUsername` | Nome utente del genitore                          |
+| `likeCount`         | Mi piace                                          |
+| `replyCount`        | Risposte figlie                                   |
+| `retweetCount`      | Repost                                            |
+| `quoteCount`        | Citazioni                                         |
+| `viewCount`         | Visualizzazioni                                   |
+| `bookmarkCount`     | Segnalibri                                        |
+| `author`            | Metadati pubblici disponibili dell'autore         |
+| `media`             | Immagini, video, GIF & varianti                   |
+| `entities`          | Hashtag, cashtag, menzioni, URL & timestamp video |
+| `quoted_tweet`      | Post citato, quando disponibile                   |
+| `retweeted_tweet`   | Post originale del repost, quando disponibile     |
 
 Le righe complete conservano anche i metadati di origine disponibili:
 
@@ -410,6 +423,8 @@ live.
 
 ## Modalità di output
 
+Scegli quanto è larga ogni riga del dataset.
+
 ### Compatta
 
 Imposta `outputMode: "compact"` per un dataset più snello. Conserva i campi di
@@ -418,6 +433,13 @@ testo, conversazione, autore, engagement & media.
 ### Completa
 
 Imposta `outputMode: "full"` per conservare ogni campo pubblico supportato.
+
+### Rich
+
+Imposta `outputMode: "rich"` per avere il massimo dei dati per riga. Le righe
+rich conservano ogni colonna della modalità completa & aggiungono in fondo
+`hasCommunityNotes`, `quotedTweetPermalink`, `unavailableAuthorId` &
+`sourceUser` dei media.
 
 ### Raw
 
@@ -558,17 +580,17 @@ curl "https://api.apify.com/v2/acts/$actor/run-sync-get-dataset-items" \
 
 ## Automazione & integrazioni
 
-Avvia X Reply Scraper di Xquik con pianificazioni, webhook o client API di Apify.
-Collegalo a Make, Zapier, n8n, Google Sheets o a uno storage cloud. Gli agenti
-possono chiamarlo tramite il
+Avvia X Reply Scraper di Xquik con pianificazioni, webhook o client API di
+Apify. Collegalo a Make, Zapier, n8n, Google Sheets o a uno storage cloud. Gli
+agenti possono chiamarlo tramite il
 [server Apify MCP](https://docs.apify.com/platform/integrations/mcp).
 
 I flussi di agenti idonei possono usare anche
 [x402](https://docs.apify.com/integrations/x402) o
 [Skyfire](https://docs.apify.com/integrations/skyfire).
 
-Xquik offre anche 47 strumenti nella dashboard, 129 operazioni REST, webhook
-firmati & un server MCP.
+Xquik offre anche 47 strumenti nella dashboard, un'API REST, webhook firmati &
+un server MCP.
 
 ### Usa sempre la build più recente
 
@@ -661,6 +683,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
 ## FAQ
 
+Le risposte alle domande più comuni, poi dove trovare assistenza.
+
 ### Serve una chiave API X o il login?
 
 No. Non ti servono chiave API X, login o credenziali. X Reply Scraper di Xquik
@@ -677,7 +701,7 @@ Conserva i dati il meno possibile. Proteggi gli export. Rispetta le richieste di
 cancellazione & di accesso, quando previsto. Nel dubbio, chiedi a un legale
 qualificato.
 
-### Perché la mia esecuzione ha restituito meno risposte di quelle mostrate dal post?
+### Perché la mia esecuzione ha meno risposte di quante ne mostra il post?
 
 Quando X nasconde parte di un thread, lo stato dice quante risposte X nasconde.
 `reply_reach` in `stopCauses` significa che X ha fornito solo una parte di un
@@ -694,8 +718,8 @@ Google Sheets.
 
 ### Dove trovo assistenza?
 
-Apri una issue nella pagina dell'Actor o scrivi a
-[support@xquik.com](mailto:support@xquik.com) con l'ID dell'esecuzione.
+Apri una issue nella pagina dell'Actor o scrivi a support@xquik.com con l'ID
+dell'esecuzione.
 
 ### Posso avere una soluzione personalizzata?
 

@@ -42,7 +42,7 @@ URL 목록, 게시물 ID & 사용자 답글 타임라인을 처리합니다.
 ### 답글 수집 동작
 
 - 자동 모드는 직접 답글 결과가 불완전하면 계속 수집합니다.
-- `collectionStrategy`는 답글 작업에 따라 고를 수 있는 모드 4가지를 제공합니다.
+- `collectionStrategy`는 Actor가 답글을 수집하는 방식을 정합니다.
 - 대량 입력에는 게시물 URL, 게시물 ID, 프로필 & 사용자 아이디를 넣을 수
   있습니다.
 - 필터링 & 중복 제거는 과금 전에 실행됩니다.
@@ -62,8 +62,8 @@ URL 목록, 게시물 ID & 사용자 답글 타임라인을 처리합니다.
 3. Xquik의 X Reply Scraper를 실행하고 데이터셋을 여세요.
 
 미리 채워진 양식은 검증된 공개 대화를 대상으로 합니다. full 수준의 플랫 행을
-최대 1,000개 반환합니다. 자동 모드는 기본적으로 대화 전체를 검색합니다. 중복 제거 &
-원본 표시는 켜진 상태로 유지됩니다.
+최대 1,000개 반환합니다. 자동 모드는 기본적으로 대화 전체를 검색합니다. 중복
+제거 & 원본 표시는 켜진 상태로 유지됩니다.
 
 ### 게시물 URL로 답글 스크랩
 
@@ -169,12 +169,12 @@ Xquik의 X Reply Scraper는 Apify MCP, API 클라이언트, x402 또는 Skyfire�
 
 다음 기본 필드를 쓰세요.
 
-| 입력          | 용도                                  |
-| ------------- | ------------------------------------- |
-| `startUrls`   | X 게시물 & 프로필 URL 혼합            |
-| `tweetIds`    | 숫자 게시물 ID                        |
-| `usernames`   | 프로필 답글 타임라인                  |
-| `startCursor` | 저장된 커서로 대상 1개 이어서 실행    |
+| 입력          | 용도                               |
+| ------------- | ---------------------------------- |
+| `startUrls`   | X 게시물 & 프로필 URL 혼합         |
+| `tweetIds`    | 숫자 게시물 ID                     |
+| `usernames`   | 프로필 답글 타임라인               |
+| `startCursor` | 저장된 커서로 대상 1개 이어서 실행 |
 
 입력 양식에는 표준 컨트롤만 나옵니다. 호환용 별칭은 JSON, API, SDK, 자동화 &
 저장된 태스크 입력에서 계속 작동합니다. 표준 필드 & 별칭 필드를 함께 쓰면 기존
@@ -196,6 +196,8 @@ Xquik의 X Reply Scraper는 Apify MCP, API 클라이언트, x402 또는 Skyfire�
 대상이 하나도 남지 않으면 실행은 해결 방법이 담긴 진단을 기록합니다.
 
 ## 수집 전략
+
+Actor가 답글을 수집하는 방식을 고르세요. 대부분의 작업에는 자동 모드가 맞습니다.
 
 ### 자동 완전 수집
 
@@ -222,6 +224,13 @@ X 자체 순서대로 직접 답글을 받으려면 `collectionStrategy: "replie
 원본 대화 맥락을 읽으려면 `collectionStrategy: "thread"`를 쓰세요. 루트 게시물을
 깊이 0으로 남기려면 `includeOriginalPost: true`를 설정하세요.
 
+### 숨겨진 답글
+
+게시물 작성자가 숨긴 답글을 받으려면 `collectionStrategy: "hiddenReplies"`를
+쓰세요. X는 숨겨진 답글을 오래된 순으로, 그 답글에 달린 답글과 함께 나열합니다.
+각 행에는 `resultType: "hiddenReply"`가 들어 있습니다. 숨겨진 답글이 없는
+게시물은 행을 반환하지 않습니다.
+
 ## 직접 답글 & 중첩 답글 설정
 
 결과 형태는 `scope`로 고르세요.
@@ -243,6 +252,9 @@ X 자체 순서대로 직접 답글을 받으려면 `collectionStrategy: "replie
 - `latest`는 최신순으로 정렬합니다.
 - `oldest`는 오래된 순으로 정렬합니다.
 - `likes`는 마음에 들어요가 많은 순으로 정렬합니다.
+
+X 검색은 일부 오래된 답글의 마음에 들어요 수를 실제보다 적게 셉니다. 그래서
+`likes` 실행은 그런 답글을 놓칠 수 있습니다.
 
 프로필 대상은 요청한 수만큼 중복 없이 필터를 거친 결과를 모은 뒤 정렬합니다.
 게시물 대상은 전체 정렬을 유지합니다.
@@ -268,14 +280,14 @@ X 자체 순서대로 직접 답글을 받으려면 `collectionStrategy: "replie
 
 ### 작성자 & 언어 필터
 
-| 입력                    | 동작                                     |
-| ----------------------- | ---------------------------------------- |
-| `fromUser`              | 답글 작성자 1명만 유지                   |
-| `toUser`                | 사용자 아이디 1개에 보낸 답글만 유지     |
-| `lang`                  | X 언어 코드 1개만 유지                   |
-| `verifiedOnly`          | 공개 인증 표시가 하나라도 있어야 함      |
-| `blueVerifiedOnly`      | X Premium 인증 필수                      |
-| `excludeOriginalAuthor` | 원본 작성자의 셀프 답글 제외             |
+| 입력                    | 동작                                 |
+| ----------------------- | ------------------------------------ |
+| `fromUser`              | 답글 작성자 1명만 유지               |
+| `toUser`                | 사용자 아이디 1개에 보낸 답글만 유지 |
+| `lang`                  | X 언어 코드 1개만 유지               |
+| `verifiedOnly`          | 공개 인증 표시가 하나라도 있어야 함  |
+| `blueVerifiedOnly`      | X Premium 인증 필수                  |
+| `excludeOriginalAuthor` | 원본 작성자의 셀프 답글 제외         |
 
 ### 참여 필터
 
@@ -297,29 +309,29 @@ X 자체 순서대로 직접 답글을 받으려면 `collectionStrategy: "replie
 
 full 답글 행에는 다음 핵심 필드가 들어갈 수 있습니다.
 
-| 필드                | 설명                                            |
-| ------------------- | ----------------------------------------------- |
-| `id`                | 답글 ID                                         |
-| `text`              | 답글 텍스트                                     |
-| `fullText`          | 장문 답글 텍스트                                |
-| `createdAt`         | 답글 타임스탬프                                 |
-| `lang`              | X 언어 코드                                     |
-| `url`               | 답글 바로가기 URL                               |
-| `conversationId`    | X 대화 ID                                       |
-| `inReplyToId`       | 바로 위 부모 ID                                 |
-| `inReplyToUserId`   | 부모 작성자 ID                                  |
-| `inReplyToUsername` | 부모 작성자 사용자 아이디                       |
-| `likeCount`         | 마음에 들어요 수                                |
-| `replyCount`        | 하위 답글 수                                    |
-| `retweetCount`      | 재게시 수                                       |
-| `quoteCount`        | 인용 수                                         |
-| `viewCount`         | 조회수                                          |
-| `bookmarkCount`     | 북마크 수                                       |
-| `author`            | 제공되는 공개 작성자 메타데이터                 |
-| `media`             | 이미지, 동영상, GIF & 변형                      |
+| 필드                | 설명                                              |
+| ------------------- | ------------------------------------------------- |
+| `id`                | 답글 ID                                           |
+| `text`              | 답글 텍스트                                       |
+| `fullText`          | 장문 답글 텍스트                                  |
+| `createdAt`         | 답글 타임스탬프                                   |
+| `lang`              | X 언어 코드                                       |
+| `url`               | 답글 바로가기 URL                                 |
+| `conversationId`    | X 대화 ID                                         |
+| `inReplyToId`       | 바로 위 부모 ID                                   |
+| `inReplyToUserId`   | 부모 작성자 ID                                    |
+| `inReplyToUsername` | 부모 작성자 사용자 아이디                         |
+| `likeCount`         | 마음에 들어요 수                                  |
+| `replyCount`        | 하위 답글 수                                      |
+| `retweetCount`      | 재게시 수                                         |
+| `quoteCount`        | 인용 수                                           |
+| `viewCount`         | 조회수                                            |
+| `bookmarkCount`     | 북마크 수                                         |
+| `author`            | 제공되는 공개 작성자 메타데이터                   |
+| `media`             | 이미지, 동영상, GIF & 변형                        |
 | `entities`          | 해시태그, 캐시태그, 멘션, URL & 동영상 타임스탬프 |
-| `quoted_tweet`      | 인용된 게시물(있는 경우)                        |
-| `retweeted_tweet`   | 재게시된 게시물(있는 경우)                      |
+| `quoted_tweet`      | 인용된 게시물(있는 경우)                          |
+| `retweeted_tweet`   | 재게시된 게시물(있는 경우)                        |
 
 full 행에는 제공되는 원본 메타데이터도 남습니다.
 
@@ -390,6 +402,8 @@ full 행에는 제공되는 원본 메타데이터도 남습니다.
 
 ## 출력 모드
 
+각 데이터셋 행에 데이터를 얼마나 담을지 고르세요.
+
 ### Compact 모드
 
 더 간결한 데이터셋을 받으려면 `outputMode: "compact"`를 설정하세요. 텍스트,
@@ -398,6 +412,12 @@ full 행에는 제공되는 원본 메타데이터도 남습니다.
 ### Full 모드
 
 지원하는 공개 필드를 모두 남기려면 `outputMode: "full"`을 설정하세요.
+
+### Rich 모드
+
+행당 데이터를 가장 많이 받으려면 `outputMode: "rich"`를 설정하세요. Rich 행은
+full 열을 모두 남기고 끝에 `hasCommunityNotes`, `quotedTweetPermalink`,
+`unavailableAuthorId` & 미디어의 `sourceUser`를 더합니다.
 
 ### Raw 모드
 
@@ -451,7 +471,7 @@ Apify 기본 제한 시간은 `0`이므로 실행에 시간 제한이 없습니�
 
 찾을 수 없는 게시물이나 계정은 실패로 세지 않습니다. 상태 메시지는 "X has no
 match for 1 target."처럼 그 대상을 알려 줍니다. 다른 원인으로 실행이 멈췄을 때만
-`stopCauses`에 들어갑니다. 원인 중 하나라도 `retryable`이면 실행도
+`stopCauses`에 들어갑니다. 원인 중 하나라도 재시도할 수 있으면 실행도
 `retryable`입니다.
 
 ## 진단
@@ -541,8 +561,7 @@ Xquik의 X Reply Scraper는 Apify 스케줄, 웹훅 또는 API 클라이언트�
 [x402](https://docs.apify.com/integrations/x402)나
 [Skyfire](https://docs.apify.com/integrations/skyfire)도 쓸 수 있습니다.
 
-Xquik은 대시보드 도구 47개, REST 작업 129개, 서명된 웹훅 & MCP 서버도
-제공합니다.
+Xquik은 대시보드 도구 47개, REST API, 서명된 웹훅 & MCP 서버도 제공합니다.
 
 ### 항상 최신 빌드 사용
 
@@ -627,6 +646,8 @@ Apify는 특정 빌드 번호를 `latest`로 바꿔 주지 않습니다. 고정�
   게시물당 $0.0003부터입니다.
 
 ## 자주 묻는 질문
+
+자주 묻는 질문에 먼저 답하고, 이어서 도움받을 곳을 안내합니다.
 
 ### X API 키나 로그인이 필요한가요?
 

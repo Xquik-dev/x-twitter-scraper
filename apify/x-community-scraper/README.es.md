@@ -17,14 +17,16 @@
 
 Xquik es el servicio de scraping de X (Twitter) más rápido y económico del
 mundo, con los datos de X más completos. X Community Scraper de Xquik recopila
-información, posts, búsquedas, miembros y moderadores de Comunidades. La mayoría
-de los demás Actores de Apify cobran antes de filtrar o quitar duplicados. Xquik
-solo cobra los resultados entregados, únicos y que cumplen tus filtros.
+información, posts, contenido multimedia, búsquedas, miembros y moderadores de
+Comunidades, y encuentra Comunidades por palabra clave o tema. La mayoría de los
+demás Actores de Apify cobran antes de filtrar o quitar duplicados. Xquik solo
+cobra los resultados entregados, únicos y que cumplen tus filtros.
 
-Recopila información, posts, coincidencias de palabras clave, miembros y
-moderadores de Comunidades de X (antes Twitter). Usa URLs o IDs de Comunidades.
-Pagas **$0.00015 por fila entregada**, y Apify factura aparte el uso de la
-plataforma. No necesitas clave de API de X ni iniciar sesión.
+Recopila información, posts, contenido multimedia, coincidencias de palabras
+clave, miembros y moderadores de Comunidades de X (antes Twitter). Usa URLs o
+IDs de Comunidades. Encuentra Comunidades por palabra clave o tema, o enumera
+las que X sugiere. Pagas **$0.00015 por fila entregada**, y Apify factura aparte
+el uso de la plataforma. No necesitas clave de API de X ni iniciar sesión.
 
 > Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 > "Twitter" y "X" son marcas registradas de X Corp.
@@ -32,7 +34,11 @@ plataforma. No necesitas clave de API de X ni iniciar sesión.
 ## Datos y filtros de Comunidades
 
 - Metadatos y reglas de la Comunidad, cuando X los muestra.
-- Los posts más recientes de la Comunidad.
+- Comunidades encontradas por palabra clave, con su registro completo.
+- Las Comunidades más populares de un tema, como Technology.
+- Las Comunidades que X sugiere para unirte y todos los temas de Comunidades.
+- Posts de la Comunidad, primero los más recientes o en orden Destacados.
+- La pestaña Multimedia de una Comunidad: posts con fotos o videos.
 - Búsqueda por palabra clave ordenada por Más recientes o Destacados.
 - Miembros y moderadores de la Comunidad.
 - Filtros de posts, miembros y moderadores que se aplican antes de facturar.
@@ -71,6 +77,24 @@ plataforma. No necesitas clave de API de X ni iniciar sesión.
 ```
 
 Para buscar por palabra clave, agrega `"search"` a `resources` y define `query`.
+Agrega `"media"` para la pestaña Multimedia. Define `postsOrder` como `Top` para
+los posts Destacados.
+
+En cambio, para encontrar Comunidades, envía palabras clave o temas:
+
+```json
+{
+  "searchTerms": ["artificial intelligence"],
+  "topics": ["Technology"],
+  "maxItems": 100
+}
+```
+
+Cada Comunidad encontrada trae sus reglas y los perfiles de su creador,
+administradores y miembros. Define `includeDetails` como `false` para una
+ejecución más rápida con el registro corto. Activa `includeSuggested` para las
+Comunidades que X sugiere, que pueden variar en cada ejecución, o `listTopics`
+para todos los temas y sus subtemas.
 
 Las ejecuciones pequeñas sin problemas omiten `run-report` y ahorran uso de
 Apify. Activa `alwaysSaveRunRecords` para escribirlo en todas las ejecuciones.
@@ -78,9 +102,10 @@ Apify. Activa `alwaysSaveRunRecords` para escribirlo en todas las ejecuciones.
 ## Salida
 
 Cada fila define `resultType` como `community`, `communityTweet`,
-`communityMember` o `communityModerator`. Todas las filas incluyen
-`sourceTarget` con la Comunidad de entrada. X Community Scraper de Xquik
-conserva los campos de origen y no inventa valores.
+`communityMedia`, `communityMember`, `communityModerator` o `communityTopic`.
+Todas las filas incluyen `sourceTarget` con la Comunidad, la palabra clave o el
+tema de entrada. X Community Scraper de Xquik conserva los campos de origen y no
+inventa valores.
 
 Los ejemplos usan valores de muestra. Los resultados reflejan datos en vivo. Una
 fila de información de Comunidad se ve así:
@@ -103,6 +128,7 @@ aparte tu uso de la plataforma.
 - Un cobro por cada fila de datos entregada. Los diagnósticos son gratis en
   `diagnostics`.
 - Sin tarifa de inicio, por Comunidad, por recurso ni por consulta.
+- Una Comunidad encontrada cuesta 1 fila, con o sin su registro completo.
 - Xquik quita los duplicados antes de facturar.
 
 ## Límites y recuperación
@@ -206,6 +232,8 @@ necesitas.
 
 ## Preguntas frecuentes
 
+Respuestas a preguntas comunes y, luego, dónde conseguir ayuda.
+
 ### ¿Necesito una clave de API de X o iniciar sesión?
 
 No. X Community Scraper de Xquik no necesita clave de API de X, inicio de sesión
@@ -228,7 +256,7 @@ Comunidades públicas que X muestra.
 
 ### ¿Puedo usar la API, las programaciones y las integraciones?
 
-Sí. Elige entre 50 tareas públicas o 129 operaciones REST de Xquik. La
+Sí. Elige entre 50 tareas públicas o la API REST de Xquik. La
 [pestaña API](https://apify.com/xquik/x-community-scraper/api) tiene ejemplos en
 Python, JavaScript y cURL. Las
 [programaciones](https://docs.apify.com/platform/schedules) de Apify ejecutan X

@@ -46,11 +46,9 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 ### 该 Actor 回答什么
 
-| 问题 | 答案 |
-| --- | --- |
-| 形式 | 报道、评论、猜测、推广、讽刺、无关或不明确 |
-| 来源标注 | 写明来源、链接来源、亲历、无来源或不明确 |
-| 相关性 | 所报道事件与你的目标有关的概率 |
+- 形式：报道、评论、猜测、推广、讽刺、无关或不明确
+- 来源标注：写明来源、链接来源、亲历、无来源或不明确
+- 相关性：所报道事件与你的目标有关的概率
 
 分类不核实事实。写明来源不代表来源可信。来源标注描述的是帖子呈现的内容。
 
@@ -195,6 +193,8 @@ Actor 页面上的其余任务涵盖更多品牌、话题和市场。
 
 ## 常见问题与支持
 
+先解答常见问题，再说明在哪里获取帮助。
+
 ### 我需要 AI 账号、X API 密钥或登录吗？
 
 不需要。Xquik 的 X (Twitter) News Monitor 的价格已包含 AI 费用。你不需要 AI 账号、token 或密钥，也不需要 X API 密钥、登录或任何凭据。
@@ -203,9 +203,9 @@ Actor 页面上的其余任务涵盖更多品牌、话题和市场。
 
 可以。自定义的 `analysis.questions` 会替换默认问题。可以发送 1 到 8 个 `choice`、`score` 或 `probability` 问题。选择题接受 2 到 255 个类别。评分题至少需要 2 个有序等级。要比较的多次运行请保持问题不变。
 
-### 为什么某行的 `analysis.status` 是 `failed` 或 `skipped`？
+### 为什么某行返回时分析失败或被跳过？
 
-该 Actor 已收集并交付这条帖子，但 AI 分析没有完成。`analysis.reason` 会写明原因。`context_limit` 表示你的上下文和目标没有给帖子留出空间。`service_unavailable` 表示分析服务曾短暂不可用。这些行不产生结果费用。请缩短 `analysis.context`，或重新运行受影响的 ID。
+`analysis.status` 为 `failed` 或 `skipped`。该 Actor 已收集并交付这条帖子，但 AI 分析没有完成。`analysis.reason` 会写明原因。`context_limit` 表示你的上下文和目标没有给帖子留出空间。`service_unavailable` 表示分析服务曾短暂不可用。这些行不产生结果费用。请缩短 `analysis.context`，或重新运行受影响的 ID。
 
 帖子超过 `maxContextBytes` 时，该 Actor 仍会分析它。它先截断被引用和被回复的帖子，再截断这条帖子本身。这时 `analysis.contextAvailability.postText` 为 `truncated`。要保留更多文本，可以把 `maxContextBytes` 提高到最多 64,000。
 

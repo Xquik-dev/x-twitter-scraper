@@ -34,6 +34,8 @@ uso de la plataforma. No necesitas clave de API de X ni iniciar sesión.
 - Markdown que conserva los bloques y los rangos en negrita y cursiva.
 - Bloques `contents` que conservan el formato original.
 - URLs de posts e IDs numéricos de posts en la misma ejecución.
+- Todos los Artículos que publicó una cuenta, a partir de su nombre de usuario o
+  de la URL de su perfil.
 - Eliminación de duplicados antes de facturar.
 
 X Article Scraper de Xquik nunca adivina los metadatos de los enlaces. Apify
@@ -43,6 +45,8 @@ muestra el Markdown como texto.
 
 1. Abre X Article Scraper de Xquik en Apify Console.
 2. Pega URLs de posts con Artículos en `startUrls` o IDs de posts en `tweetIds`.
+   Para enumerar los Artículos de una cuenta, agrega su nombre de usuario en
+   `twitterHandles`.
 3. Define `maxItems` para limitar los Artículos entregados y haz clic en Start.
 4. Descarga el dataset en JSON, CSV o Excel, o usa la API de Apify.
 
@@ -61,8 +65,9 @@ muestra el Markdown como texto.
 
 | Campo                  | Uso                                                | Valor predeterminado |
 | ---------------------- | -------------------------------------------------- | -------------------- |
-| `startUrls`            | URLs públicas de posts con Artículo                | Ninguno              |
+| `startUrls`            | URLs públicas de posts con Artículo o de perfiles  | Ninguno              |
 | `tweetIds`             | IDs numéricos de posts con Artículo                | Ninguno              |
+| `twitterHandles`       | Cuentas cuyos Artículos se enumeran                | Ninguno              |
 | `maxItems`             | Límite global de Artículos entregados              | `100000`             |
 | `dedupeAcrossTargets`  | Quita IDs de Artículos repetidos antes de facturar | `true`               |
 | `maxConcurrency`       | Lecturas paralelas e independientes de Artículos   | `100`                |
@@ -89,6 +94,13 @@ fila de Artículo incluye estos campos:
 Las filas agregan autor, fuente, portada, hora y métricas. Exporta en JSON o en
 tablas.
 
+Un nombre de usuario en `twitterHandles`, o una URL de perfil en `startUrls`,
+enumera los Artículos de esa cuenta, primero los más recientes. Cada uno es una
+fila `articlePreview` con `title`, `previewText`, `coverImageUrl` y `articleId`
+del Artículo, sus fechas y las métricas del post. X no muestra el cuerpo ahí,
+así que la fila no tiene `markdown` ni `contents`. Ejecuta su `tweetId` para
+obtener el Artículo completo.
+
 ## ¿Cuánto cuesta extraer Artículos de X?
 
 En todos los planes de Apify, cada artículo entregado cuesta $0.00015. Apify
@@ -110,10 +122,11 @@ confirma la entrega, no una extracción completa.
 
 El estado de la ejecución nombra cada causa de una detención anticipada.
 `stopCauses` enumera cada causa con su propio `message`, `retryable` y
-`nextAction`. Las causas son `target_not_found`, `target_failed`,
-`pagination_safety_limit` y `deadline_reached`. Un objetivo inexistente entra en
-la lista solo si otra causa detuvo la ejecución. La ejecución es `retryable` si
-alguna causa lo es.
+`nextAction`. Las causas son `target_not_found`, `target_suspended`,
+`target_failed`, `pagination_safety_limit` y `deadline_reached`.
+`target_suspended` nombra las cuentas que X suspendió. Un objetivo inexistente o
+suspendido entra en la lista solo si otra causa detuvo la ejecución. La
+ejecución es `retryable` si alguna causa lo es.
 
 ## Actores de Xquik relacionados
 
@@ -196,6 +209,8 @@ necesitas.
 
 ## Preguntas frecuentes
 
+Respuestas a preguntas comunes y, luego, dónde conseguir ayuda.
+
 ### ¿Necesito una clave de API de X o iniciar sesión?
 
 No. X Article Scraper de Xquik no necesita clave de API de X, inicio de sesión
@@ -218,7 +233,7 @@ los Artículos públicos que X muestra.
 
 ### ¿Puedo usar la API, las programaciones y las integraciones?
 
-Sí. Elige entre 50 tareas públicas o 129 operaciones REST de Xquik. La
+Sí. Elige entre 50 tareas públicas o la API REST de Xquik. La
 [pestaña API](https://apify.com/xquik/x-article-scraper/api) tiene ejemplos en
 Python, JavaScript y cURL. Las
 [programaciones](https://docs.apify.com/platform/schedules) de Apify ejecutan X

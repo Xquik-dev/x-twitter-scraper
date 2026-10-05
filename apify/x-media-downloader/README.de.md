@@ -111,11 +111,12 @@ Extraktion.
 
 Der Run-Status nennt jede Ursache für einen vorzeitigen Stopp. `stopCauses`
 listet jede Ursache mit eigenen Feldern `message`, `retryable` & `nextAction`.
-Die Ursachen sind `target_not_found`, `target_failed`,
-`pagination_safety_limit`, `reply_reach` & `deadline_reached`. `reply_reach`
+Die Ursachen sind `target_not_found`, `target_suspended`, `target_failed`,
+`pagination_safety_limit`, `reply_reach` & `deadline_reached`.
+`target_suspended` nennt die Accounts, die X gesperrt hat. `reply_reach`
 bedeutet, dass X nur einen Teil eines Antwort-Threads geliefert hat. Ein
-fehlendes Ziel kommt nur auf die Liste, wenn eine andere Ursache den Run
-gestoppt hat. Der Run ist `retryable`, wenn mindestens 1 Ursache es ist.
+fehlendes oder gesperrtes Ziel kommt nur auf die Liste, wenn eine andere Ursache
+den Run gestoppt hat. Der Run ist `retryable`, wenn mindestens 1 Ursache es ist.
 
 ## Verwandte Xquik-Actors
 
@@ -194,6 +195,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
 ## FAQ
 
+Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
+
 ### Brauche ich einen X-API-Schlüssel oder Login?
 
 Nein. X Media Downloader von Xquik braucht keinen X-API-Schlüssel, keinen Login
@@ -214,7 +217,7 @@ lesen kann, & sagt, wie du sie korrigierst.
 
 ### Kann ich API, Zeitpläne & Integrationen nutzen?
 
-Ja. Wähle aus 50 öffentlichen Tasks oder 129 REST-Operationen von Xquik. Der
+Ja. Wähle aus 50 öffentlichen Tasks oder der REST-API von Xquik. Der
 [API-Tab](https://apify.com/xquik/x-media-downloader/api) enthält Beispiele für
 Python, JavaScript & cURL.
 Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) starten

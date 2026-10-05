@@ -89,7 +89,7 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 
 抽出が中断されると、無料の `partial` 診断を書き込みます。取得済みの結果はそのまま残ります。再試行する前に `availableResults`、`failedTargets`、`retryable`、`nextAction` を確認してください。Actorの正常終了が示すのは配信の完了です。抽出が最後まで終わったことは意味しません。
 
-実行ステータスは、早期停止の原因をすべて示します。`stopCauses` は各原因を挙げ、それぞれに `message`、`retryable`、`nextAction` を付けます。原因は `target_not_found`、`target_failed`、`pagination_safety_limit`、`reply_reach`、`deadline_reached` です。`reply_reach` は、Xが返信スレッドの一部しか返さなかったことを示します。存在しない対象が一覧に入るのは、別の原因で実行が止まった場合だけです。いずれかの原因が再試行可能なら、実行も `retryable` になります。
+実行ステータスは、早期停止の原因をすべて示します。`stopCauses` は各原因を挙げ、それぞれに `message`、`retryable`、`nextAction` を付けます。原因は `target_not_found`、`target_suspended`、`target_failed`、`pagination_safety_limit`、`reply_reach`、`deadline_reached` です。`target_suspended` は、Xが凍結したアカウントを示します。`reply_reach` は、Xが返信スレッドの一部しか返さなかったことを示します。存在しない対象や凍結された対象が一覧に入るのは、別の原因で実行が止まった場合だけです。いずれかの原因が再試行可能なら、実行も `retryable` になります。
 
 ## 関連するXquik Actor
 
@@ -116,6 +116,8 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 
 ## よくある質問
 
+よくある質問に答えたあと、サポートを受けられる場所を案内します。
+
 ### X APIキーやログインは必要ですか？
 
 いいえ。XquikのX Media Downloaderは、X APIキー、ログイン、認証情報を必要としません。
@@ -130,7 +132,7 @@ XquikのX Media Downloaderは、Xの公開フィールドを取得します。�
 
 ### API、スケジュール、連携は使えますか？
 
-はい。50個の公開タスクと129個のXquik REST操作から選べます。[APIタブ](https://apify.com/xquik/x-media-downloader/api)には、Python、JavaScript、cURLの例があります。Apifyの[スケジュール](https://docs.apify.com/platform/schedules)を使うと、XquikのX Media Downloaderをcronで実行できます。エージェントは[Apify MCP](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。古いビルドが必要な場合を除き、`latest` を使ってください。
+はい。50個の公開タスクかXquik REST APIから選べます。[APIタブ](https://apify.com/xquik/x-media-downloader/api)には、Python、JavaScript、cURLの例があります。Apifyの[スケジュール](https://docs.apify.com/platform/schedules)を使うと、XquikのX Media Downloaderをcronで実行できます。エージェントは[Apify MCP](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。古いビルドが必要な場合を除き、`latest` を使ってください。
 
 ### どこでサポートを受けられますか？
 

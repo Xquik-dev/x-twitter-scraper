@@ -17,14 +17,16 @@
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo, con
 i dati X più completi. X Community Scraper di Xquik raccoglie informazioni,
-post, ricerche, membri & moderatori delle community. La maggior parte degli
-altri Actor Apify fa pagare prima di filtrare o deduplicare. Xquik fa pagare
-solo i risultati consegnati, unici e conformi ai filtri.
+post, media, ricerche, membri & moderatori delle community, & trova le community
+per parola chiave o argomento. La maggior parte degli altri Actor Apify fa
+pagare prima di filtrare o deduplicare. Xquik fa pagare solo i risultati
+consegnati, unici e conformi ai filtri.
 
-Raccogli informazioni, post, risultati per parola chiave, membri & moderatori
-delle community di X (Twitter) da URL o ID delle community. Paghi **$0.00015
-per riga consegnata**. Apify fattura a parte l'uso della piattaforma. Non ti
-servono una chiave API X né il login.
+Raccogli informazioni, post, media, risultati per parola chiave, membri &
+moderatori delle community di X (Twitter) da URL o ID delle community. Trova le
+community per parola chiave o argomento, oppure elenca quelle che X suggerisce.
+Paghi **$0.00015 per riga consegnata**. Apify fattura a parte l'uso della
+piattaforma. Non ti servono una chiave API X né il login.
 
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.
@@ -32,7 +34,11 @@ servono una chiave API X né il login.
 ## Dati & filtri delle community
 
 - Metadati & regole della community, quando X li mostra.
-- Post più recenti della community.
+- Community trovate per parola chiave, con il loro record completo.
+- Le community più popolari di un argomento, come Technology.
+- Le community a cui X suggerisce di unirsi, & ogni argomento delle community.
+- Post della community, dal più recente o in ordine Top.
+- La scheda Media di una community: post con foto o video.
 - Ricerca per parola chiave con ordinamento Latest o Top.
 - Membri & moderatori della community.
 - Filtri su post, membri & moderatori applicati prima della fatturazione.
@@ -72,7 +78,24 @@ servono una chiave API X né il login.
 ```
 
 Per la ricerca per parola chiave, aggiungi `"search"` a `resources` & imposta
-`query`.
+`query`. Aggiungi `"media"` per la scheda Media. Imposta `postsOrder` su `Top`
+per i post Top.
+
+Per trovare invece le community, invia parole chiave o argomenti:
+
+```json
+{
+  "searchTerms": ["artificial intelligence"],
+  "topics": ["Technology"],
+  "maxItems": 100
+}
+```
+
+Ogni community trovata riporta le sue regole & i profili di creatore,
+amministratori & membri. Imposta `includeDetails` su `false` per un'esecuzione
+più veloce con il record breve. Attiva `includeSuggested` per le community che X
+suggerisce, che possono cambiare a ogni esecuzione, oppure `listTopics` per ogni
+argomento & i suoi sottoargomenti.
 
 Le esecuzioni piccole senza problemi saltano `run-report` & risparmiano uso di
 Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
@@ -80,9 +103,10 @@ Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
 ## Output
 
 Ogni riga imposta `resultType` su `community`, `communityTweet`,
-`communityMember` o `communityModerator`. Ogni riga include `sourceTarget` per
-la community di input. X Community Scraper di Xquik conserva i campi di origine
-& non inventa valori.
+`communityMedia`, `communityMember`, `communityModerator` o `communityTopic`.
+Ogni riga include `sourceTarget` per la community, la parola chiave o
+l'argomento di input. X Community Scraper di Xquik conserva i campi di origine &
+non inventa valori.
 
 Gli esempi usano valori fittizi. I risultati contengono dati live. Una riga di
 informazioni sulla community ha questo aspetto:
@@ -105,12 +129,13 @@ tuo uso della piattaforma.
 - Un addebito per ogni riga di dati consegnata. La diagnostica in `diagnostics`
   è gratuita.
 - Nessun costo di avvio, per community, per risorsa o per query.
+- Una community trovata costa 1 riga, con o senza il suo record completo.
 - La deduplicazione avviene prima della fatturazione.
 
 ## Limiti & recupero
 
-X Community Scraper di Xquik legge molte community & risorse in 1 esecuzione.
-Le righe consegnate & i progressi restano dopo un riavvio di Apify. L'Actor non
+X Community Scraper di Xquik legge molte community & risorse in 1 esecuzione. Le
+righe consegnate & i progressi restano dopo un riavvio di Apify. L'Actor non
 aggiunge un limite di tempo proprio. Restituisce solo le community pubbliche che
 X mostra. I campi disponibili variano da community a community.
 
@@ -204,6 +229,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
 ## FAQ
 
+Le risposte alle domande più comuni, poi dove trovare assistenza.
+
 ### Serve una chiave API X o il login?
 
 No. X Community Scraper di Xquik non richiede chiave API X, login o credenziali.
@@ -224,7 +251,7 @@ community pubbliche che X mostra.
 
 ### Posso usare l'API, le pianificazioni & le integrazioni?
 
-Sì. Scegli tra 50 task pubblici o 129 operazioni REST di Xquik. La
+Sì. Scegli tra 50 task pubblici o l'API REST di Xquik. La
 [scheda API](https://apify.com/xquik/x-community-scraper/api) ha esempi in
 Python, JavaScript & cURL. Le
 [pianificazioni](https://docs.apify.com/platform/schedules) di Apify avviano X

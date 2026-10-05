@@ -26,6 +26,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 - Markdown 保留区块、粗体和斜体范围。
 - `contents` 区块保留原始格式。
 - 同一次运行可以混用帖子 URL 和数字帖子 ID。
+- 通过用户名或个人资料 URL，获取一个账号发布的每篇文章。
 - 计费前去除重复项。
 
 Xquik 的 X Article Scraper 从不猜测链接元数据。Apify 会把 Markdown 显示为纯文本。
@@ -33,7 +34,7 @@ Xquik 的 X Article Scraper 从不猜测链接元数据。Apify 会把 Markdown 
 ## 如何抓取 X 文章
 
 1. 在 Apify Console 中打开 Xquik 的 X Article Scraper。
-2. 把文章的帖子 URL 粘贴到 `startUrls`，或把帖子 ID 粘贴到 `tweetIds`。
+2. 把文章的帖子 URL 粘贴到 `startUrls`，或把帖子 ID 粘贴到 `tweetIds`。要列出某个账号的文章，把它的用户名添加到 `twitterHandles`。
 3. 用 `maxItems` 设置交付文章的上限，然后点击 Start。
 4. 以 JSON、CSV 或 Excel 格式下载数据集，或使用 Apify API。
 
@@ -52,8 +53,9 @@ Xquik 的 X Article Scraper 从不猜测链接元数据。Apify 会把 Markdown 
 
 | 字段 | 用途 | 默认值 |
 | --- | --- | --- |
-| `startUrls` | 公开文章的帖子 URL | 无 |
+| `startUrls` | 公开文章的帖子 URL 或个人资料 URL | 无 |
 | `tweetIds` | 文章的数字帖子 ID | 无 |
+| `twitterHandles` | 要列出其文章的账号 | 无 |
 | `maxItems` | 已交付文章的全局上限 | `100000` |
 | `dedupeAcrossTargets` | 计费前移除重复的文章 ID | `true` |
 | `maxConcurrency` | 并行读取的独立文章数 | `100` |
@@ -74,6 +76,8 @@ Output 标签页会打开 `Articles`。`Results` 链接到数据行。`Run Repor
 
 数据行还包含作者、来源、封面、时间和指标。可以导出为 JSON 或表格。
 
+`twitterHandles` 中的用户名或 `startUrls` 中的个人资料 URL，会按从新到旧的顺序列出该账号的文章。每篇文章是一个 `articlePreview` 行，包含文章的 `title`、`previewText`、`coverImageUrl`、`articleId`、日期和帖子指标。X 在那里不列出正文，所以该行没有 `markdown` 或 `contents`。用它的 `tweetId` 运行一次，就能获取完整文章。
+
 ## 抓取 X 文章要花多少钱？
 
 所有 Apify 套餐的价格都是每篇已交付文章 $0.00015。Apify 另行收取平台使用费。
@@ -88,7 +92,7 @@ Xquik 的 X Article Scraper 只返回 X 公开展示的文章。
 
 提取中断时，会写入一条免费的 `partial` 诊断。已获取的结果不受影响。重试前，先查看 `availableResults`、`failedTargets`、`retryable` 和 `nextAction`。Actor 成功退出只说明结果已交付，不代表提取完整。
 
-运行状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_failed`、`pagination_safety_limit` 和 `deadline_reached`。只有在其他原因让运行停止时，缺失的目标才会列入 `stopCauses`。只要有一个原因可重试，整个运行就是 `retryable`。
+运行状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_suspended`、`target_failed`、`pagination_safety_limit` 和 `deadline_reached`。`target_suspended` 列出被 X 冻结的账号。只有在其他原因让运行停止时，缺失或被冻结的目标才会一并列出。只要有一个原因可重试，整个运行就是 `retryable`。
 
 ## 相关 Xquik Actor
 
@@ -115,6 +119,8 @@ Xquik 的 X Article Scraper 只返回 X 公开展示的文章。
 
 ## 常见问题
 
+先解答常见问题，再说明在哪里获取帮助。
+
 ### 我需要 X API 密钥或登录吗？
 
 不需要。Xquik 的 X Article Scraper 不需要 X API 密钥、登录或任何凭据。
@@ -129,7 +135,7 @@ Xquik 的 X Article Scraper 请求的是公开的 X 字段。结果可能包含�
 
 ### 可以使用 API、定时调度和集成吗？
 
-可以。你可以从 50 个公开任务或 129 个 Xquik REST 操作中选择。[API 标签页](https://apify.com/xquik/x-article-scraper/api) 提供 Python、JavaScript 和 cURL 示例。Apify [定时调度](https://docs.apify.com/platform/schedules) 可以按 cron 运行 Xquik 的 X Article Scraper。Agent 可以通过 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) 调用它。读取单篇文章可以用 [Xquik REST](https://docs.xquik.com/api-reference/x/get-article)。除非需要旧构建，否则请使用 `latest`。
+可以。你可以从 50 个公开任务或 Xquik REST API 中选择。[API 标签页](https://apify.com/xquik/x-article-scraper/api) 提供 Python、JavaScript 和 cURL 示例。Apify [定时调度](https://docs.apify.com/platform/schedules) 可以按 cron 运行 Xquik 的 X Article Scraper。Agent 可以通过 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) 调用它。读取单篇文章可以用 [Xquik REST](https://docs.xquik.com/api-reference/x/get-article)。除非需要旧构建，否则请使用 `latest`。
 
 ### 在哪里获取帮助？
 

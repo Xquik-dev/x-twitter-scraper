@@ -30,7 +30,7 @@ Xquik 的 X Reply Scraper 收集公开回复和评论对话。它可以处理单
 ### 回复收集方式
 
 - 直接结果不完整时，自动模式会继续收集。
-- `collectionStrategy` 为不同的回复任务提供 4 种模式。
+- `collectionStrategy` 设置该 Actor 收集回复的方式。
 - 批量输入支持帖子 URL、帖子 ID、个人资料和用户名。
 - 过滤和去重都在计费前完成。
 - 输出支持 4 种排序方式、3 种详细程度和 3 种字段风格。
@@ -172,6 +172,8 @@ Xquik 对每个已交付的数据行收费一次。被你的过滤条件或去�
 
 ## 覆盖策略
 
+选择该 Actor 收集回复的方式。自动模式适合大多数任务。
+
 ### 自动完整收集
 
 大多数任务使用 `collectionStrategy: "auto"`。它会在你设定的范围内收集能获取到的每条回复。范围、深度、排序和作者控制先于你的上限生效。非根目标下的回复也会包含在内。X 隐藏了部分帖子串时，状态会说明 X 隐藏了多少条回复。其他 `collectionStrategy` 值不会切换到别的模式。
@@ -189,6 +191,10 @@ Xquik 对每个已交付的数据行收费一次。被你的过滤条件或去�
 ### 完整帖子串上下文
 
 使用 `collectionStrategy: "thread"` 读取源对话的上下文。设置 `includeOriginalPost: true`，把根帖子保留为深度 0。
+
+### 被隐藏的回复
+
+使用 `collectionStrategy: "hiddenReplies"`，获取帖子作者隐藏的回复。X 按从早到晚的顺序列出它们，并附上对它们的回复。每行都带有 `resultType: "hiddenReply"`。没有被隐藏回复的帖子不返回任何行。
 
 ## 直接回复与嵌套回复控制
 
@@ -210,6 +216,8 @@ Xquik 对每个已交付的数据行收费一次。被你的过滤条件或去�
 - `latest` 最新的排在前面
 - `oldest` 最早的排在前面
 - `likes` 喜欢数最高的排在前面
+
+X 搜索会少计一些较早回复的喜欢数，所以按 `likes` 排序的运行可能漏掉这些回复。
 
 个人资料目标先收集你要求数量的、已过滤且不重复的结果，再排序。帖子目标保持全局排序。
 
@@ -345,6 +353,8 @@ Xquik 对每个已交付的数据行收费一次。被你的过滤条件或去�
 
 ## 输出模式
 
+选择每个数据集行有多宽。
+
 ### 精简
 
 设置 `outputMode: "compact"`，得到更窄的数据集。它保留正文、对话、作者、互动和媒体字段。
@@ -352,6 +362,10 @@ Xquik 对每个已交付的数据行收费一次。被你的过滤条件或去�
 ### 完整
 
 设置 `outputMode: "full"`，保留所有支持的公开字段。
+
+### 丰富
+
+设置 `outputMode: "rich"`，让每行包含最多的数据。丰富行保留完整模式的每一列，并在末尾加上 `hasCommunityNotes`、`quotedTweetPermalink`、`unavailableAuthorId` 和媒体的 `sourceUser`。
 
 ### 原始
 
@@ -461,7 +475,7 @@ curl "https://api.apify.com/v2/acts/$actor/run-sync-get-dataset-items" \
 
 符合条件的 Agent 工作流还可以使用 [x402](https://docs.apify.com/integrations/x402) 或 [Skyfire](https://docs.apify.com/integrations/skyfire)。
 
-Xquik 还提供 47 个仪表盘工具、129 个 REST 操作、签名 webhook 和一个 MCP 服务器。
+Xquik 还提供 47 个仪表盘工具、一个 REST API、签名 webhook 和一个 MCP 服务器。
 
 ### 始终使用最新构建
 
@@ -497,6 +511,8 @@ Apify 不会把固定的构建编号重定向到 `latest`。请把固定编号�
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)：根据 8 个 AI 特征答案，为每条帖子估算 0 到 100 的 Viral Score 和结论。适合研究帖子为何走红或遇冷的场景。每条已分析帖子 $0.0003 起。
 
 ## 常见问题
+
+先解答常见问题，再说明在哪里获取帮助。
 
 ### 我需要 X API 密钥或登录吗？
 
