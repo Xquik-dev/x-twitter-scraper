@@ -200,7 +200,7 @@ Une ligne de diffusion a `resultType: "broadcast"` et ressemble à ceci :
 ## Combien coûte le scraping de Spaces X ?
 
 Le prix est de $0.00015 par Space ou diffusion livré sur chaque plan Apify.
-Apify facture l'usage de votre plateforme à part.
+Apify facture votre usage de la plateforme à part.
 
 - Une facturation par ligne de données livrée. Les diagnostics sont gratuits
   dans `diagnostics`.

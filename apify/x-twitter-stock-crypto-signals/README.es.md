@@ -328,6 +328,8 @@ necesitas.
 
 ## Preguntas frecuentes y soporte
 
+Respuestas a preguntas comunes y, luego, dónde conseguir ayuda.
+
 ### ¿Necesito una cuenta de IA, una clave de API de X o iniciar sesión?
 
 No. X (Twitter) Stock & Crypto AI Trading Signals de Xquik incluye los costos de
@@ -340,14 +342,14 @@ Sí. Enumera cada activo con sus tickers y alias en `analysis.targets`. Combina
 sus términos de búsqueda. Las respuestas de relevancia te dicen qué posts tratan
 a tus objetivos como activos.
 
-### ¿Por qué una fila volvió con `analysis.status` en `failed` o `skipped`?
+### ¿Por qué una fila volvió con un análisis fallido u omitido?
 
-El Actor recopiló y entregó el post, pero el análisis con IA no se completó.
-`analysis.reason` indica la causa. `context_limit` significa que tu contexto y
-tus objetivos no dejan espacio para el post. `service_unavailable` significa que
-el servicio de análisis no estuvo disponible por un momento. Estas filas no
-tienen cargo por resultado. Acorta `analysis.context` o vuelve a ejecutar los
-IDs afectados.
+`analysis.status` es `failed` o `skipped`. El Actor recopiló y entregó el post,
+pero el análisis con IA no se completó. `analysis.reason` indica la causa.
+`context_limit` significa que tu contexto y tus objetivos no dejan espacio para
+el post. `service_unavailable` significa que el servicio de análisis no estuvo
+disponible por un momento. Estas filas no tienen cargo por resultado. Acorta
+`analysis.context` o vuelve a ejecutar los IDs afectados.
 
 El Actor analiza incluso los posts más largos que `maxContextBytes`. Primero
 recorta los posts citados y respondidos, y luego el post. En ese caso,

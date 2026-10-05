@@ -26,9 +26,9 @@ Classifica i post di X (Twitter) con le tue domande & conserva i dati originali
 del post. **X Tweet Classifier with AI Analysis** di Xquik raccoglie i post
 pertinenti. Per ogni post risponde alle tue domande tipizzate, da 1 a 8. Usa le
 categorie per smistare le richieste di supporto, i punteggi per le priorità & le
-probabilità per la rilevanza. I preset coprono monitoraggio del brand, lamentele,
-concorrenti, intenzione d'acquisto, feedback sui prodotti, notizie, sentiment &
-sentiment di mercato. Le domande personalizzate li sostituiscono.
+probabilità per la rilevanza. I preset coprono monitoraggio del brand,
+lamentele, concorrenti, intenzione d'acquisto, feedback sui prodotti, notizie,
+sentiment & sentiment di mercato. Le domande personalizzate li sostituiscono.
 
 - **Risposte tipizzate.** Le risposte riportano probabilità, confidenza &
   versioni delle domande.
@@ -328,6 +328,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
 ## FAQ & supporto
 
+Le risposte alle domande più comuni, poi dove trovare assistenza.
+
 ### Serve un account AI, una chiave API X o il login?
 
 No. X Tweet Classifier di Xquik include i costi AI nel prezzo. Non ti servono
@@ -340,14 +342,14 @@ Sì. Ogni risposta salva la `version` che assegni alla sua domanda. Quando
 affini le domande nel tempo, puoi capire quale formulazione ha prodotto un
 risultato.
 
-### Perché una riga ha `analysis.status` `failed` o `skipped`?
+### Perché una riga è tornata con un'analisi fallita o saltata?
 
-L'Actor ha raccolto & consegnato il post, ma l'analisi AI non si è completata.
-`analysis.reason` indica la causa. `context_limit` significa che contesto &
-target non lasciano spazio al post. `service_unavailable` significa che il
-servizio di analisi era momentaneamente non disponibile. Queste righe non hanno
-addebiti sul risultato. Accorcia `analysis.context` o riavvia gli ID
-interessati.
+`analysis.status` vale `failed` o `skipped`. L'Actor ha raccolto & consegnato il
+post, ma l'analisi AI non si è completata. `analysis.reason` indica la causa.
+`context_limit` significa che contesto & target non lasciano spazio al post.
+`service_unavailable` significa che il servizio di analisi era momentaneamente
+non disponibile. Queste righe non hanno addebiti sul risultato. Accorcia
+`analysis.context` o riavvia gli ID interessati.
 
 L'Actor analizza comunque un post più lungo di `maxContextBytes`. Taglia prima
 i post citati & quelli a cui risponde, poi il post stesso.

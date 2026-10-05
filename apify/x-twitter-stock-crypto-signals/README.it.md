@@ -67,12 +67,12 @@ post che usano il nome del tuo asset per altro.
 
 ### Cosa risponde l'Actor
 
-| Domanda     | Risposta                                                                |
-| ----------- | ----------------------------------------------------------------------- |
-| Posizione   | Rialzista, ribassista, neutra, mista o poco chiara                      |
-| Contenuto   | Analisi, notizia, trade, promozione, umorismo, domanda o poco chiaro    |
+| Domanda     | Risposta                                                                      |
+| ----------- | ----------------------------------------------------------------------------- |
+| Posizione   | Rialzista, ribassista, neutra, mista o poco chiara                            |
+| Contenuto   | Analisi, notizia, trade, promozione, umorismo, domanda o poco chiaro          |
 | Convinzione | 0 osservazione prudente, 1 opinione espressa, 2 previsione o posizione decisa |
-| Rilevanza   | Probabilità che il post tratti i tuoi target come asset                 |
+| Rilevanza   | Probabilità che il post tratti i tuoi target come asset                       |
 
 La convinzione è 0 quando la posizione è neutra o poco chiara. Un post senza
 direzione non può esprimerne una con decisione. Quella risposta mette tutta la
@@ -324,6 +324,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
 ## FAQ & supporto
 
+Le risposte alle domande più comuni, poi dove trovare assistenza.
+
 ### Serve un account AI, una chiave API X o il login?
 
 No. X (Twitter) Stock & Crypto AI Trading Signals di Xquik include i costi AI
@@ -336,14 +338,14 @@ Sì. Elenca in `analysis.targets` ogni asset con i suoi ticker & alias. Combina 
 loro termini di ricerca. Le risposte sulla rilevanza ti dicono quali post
 trattano i tuoi target come asset.
 
-### Perché una riga ha `analysis.status` `failed` o `skipped`?
+### Perché una riga è tornata con un'analisi fallita o saltata?
 
-L'Actor ha raccolto & consegnato il post, ma l'analisi AI non si è completata.
-`analysis.reason` indica la causa. `context_limit` significa che contesto &
-target non lasciano spazio al post. `service_unavailable` significa che il
-servizio di analisi era momentaneamente non disponibile. Queste righe non hanno
-addebiti sul risultato. Accorcia `analysis.context` o riavvia gli ID
-interessati.
+`analysis.status` vale `failed` o `skipped`. L'Actor ha raccolto & consegnato il
+post, ma l'analisi AI non si è completata. `analysis.reason` indica la causa.
+`context_limit` significa che contesto & target non lasciano spazio al post.
+`service_unavailable` significa che il servizio di analisi era momentaneamente
+non disponibile. Queste righe non hanno addebiti sul risultato. Accorcia
+`analysis.context` o riavvia gli ID interessati.
 
 L'Actor analizza comunque un post più lungo di `maxContextBytes`. Taglia prima
 i post citati & quelli a cui risponde, poi il post stesso.

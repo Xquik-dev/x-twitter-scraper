@@ -91,14 +91,14 @@ Xquik의 **X (Twitter) Brand Monitoring with AI Analysis**는 조건에 맞는 �
 
 ### 비교 방식
 
-| 비교 상태              | 의미                                          |
-| ---------------------- | --------------------------------------------- |
-| `first_run`            | 기준 데이터셋을 지정하지 않음                 |
-| `new_to_baseline`      | 기준 데이터셋에 이 게시물 ID가 없음           |
-| `unchanged`            | 비교 가능한 판정이 모두 같음                  |
-| `changed`              | 판정이 1개 이상 다름                          |
+| 비교 상태              | 의미                                            |
+| ---------------------- | ----------------------------------------------- |
+| `first_run`            | 기준 데이터셋을 지정하지 않음                   |
+| `new_to_baseline`      | 기준 데이터셋에 이 게시물 ID가 없음             |
+| `unchanged`            | 비교 가능한 판정이 모두 같음                    |
+| `changed`              | 판정이 1개 이상 다름                            |
 | `not_comparable`       | 필요한 메타데이터, ID 또는 일치하는 설정이 없음 |
-| `analysis_unavailable` | 이 게시물에 성공한 분석이 없음                |
+| `analysis_unavailable` | 이 게시물에 성공한 분석이 없음                  |
 
 답변은 판정으로 비교합니다. `choice` 답변은 카테고리로 비교합니다. `score`
 답변은 가장 가까운 단계로 비교합니다. `probability` 답변은 0.5 기준의 예/아니오
@@ -316,6 +316,8 @@ Apify가 따로 청구합니다. Pricing 탭에서 확인할 수 있습니다.
 
 ## 자주 묻는 질문 & 지원
 
+자주 묻는 질문에 먼저 답하고, 이어서 도움받을 곳을 안내합니다.
+
 ### AI 계정, X API 키나 로그인이 필요한가요?
 
 아니요. Xquik의 X (Twitter) Brand Monitoring은 가격에 AI 비용이 포함되어
@@ -329,13 +331,13 @@ Apify가 따로 청구합니다. Pricing 탭에서 확인할 수 있습니다.
 2개에서 255개까지 넣을 수 있습니다. score 질문에는 순서가 있는 단계가 2개 이상
 필요합니다. 비교하려는 실행끼리는 같은 질문을 유지하세요.
 
-### `analysis.status`가 `failed`나 `skipped`인 행은 왜 생기나요?
+### 분석이 실패했거나 건너뛴 행은 왜 나오나요?
 
-Actor가 게시물을 수집해 전달했지만 AI 분석이 끝나지 않은 경우입니다.
-`analysis.reason`에 원인이 나옵니다. `context_limit`은 맥락 & 대상이 길어
-게시물이 들어갈 자리가 없다는 뜻입니다. `service_unavailable`은 분석 서비스를
-잠시 쓸 수 없었다는 뜻입니다. 이런 행에는 결과 요금이 없습니다.
-`analysis.context`를 줄이거나 해당 ID를 다시 실행하세요.
+`analysis.status`가 `failed` 또는 `skipped`입니다. Actor가 게시물을 수집해
+전달했지만 AI 분석이 끝나지 않았습니다. `analysis.reason`에 원인이 나옵니다.
+`context_limit`은 맥락 & 대상이 길어 게시물이 들어갈 자리가 없다는 뜻입니다.
+`service_unavailable`은 분석 서비스를 잠시 쓸 수 없었다는 뜻입니다. 이런 행에는
+결과 요금이 없습니다. `analysis.context`를 줄이거나 해당 ID를 다시 실행하세요.
 
 게시물이 `maxContextBytes`보다 길어도 Actor는 분석합니다. 인용한 게시물 & 답글
 대상 게시물을 먼저 자르고, 그다음 게시물 본문을 자릅니다. 이때

@@ -376,6 +376,8 @@ Las demás tareas cubren más temas y cuentas de marcas en la página del Actor.
 
 ## Preguntas frecuentes y soporte
 
+Respuestas a preguntas comunes y, luego, dónde conseguir ayuda.
+
 ### ¿Necesito una cuenta de IA, una clave de API de X o iniciar sesión?
 
 No. X Tweet Viral Score Analyzer de Xquik incluye los costos de IA en su precio.
@@ -397,14 +399,14 @@ Envía de 1 a 8 preguntas `choice`, `score` o `probability`. Las preguntas
 2 niveles ordenados. El Viral Score necesita las 8 preguntas predeterminadas,
 así que con preguntas personalizadas queda en `null`.
 
-### ¿Por qué una fila volvió con `analysis.status` en `failed` o `skipped`?
+### ¿Por qué una fila volvió con un análisis fallido u omitido?
 
-El Actor recopiló y entregó el post, pero el análisis con IA no se completó.
-`analysis.reason` indica la causa. `context_limit` significa que tu contexto y
-tus objetivos no dejan espacio para el post. `service_unavailable` significa que
-el servicio de análisis no estuvo disponible por un momento. Estas filas no
-tienen cargo por resultado ni puntaje. Acorta `analysis.context` o vuelve a
-ejecutar los IDs afectados.
+`analysis.status` es `failed` o `skipped`. El Actor recopiló y entregó el post,
+pero el análisis con IA no se completó. `analysis.reason` indica la causa.
+`context_limit` significa que tu contexto y tus objetivos no dejan espacio para
+el post. `service_unavailable` significa que el servicio de análisis no estuvo
+disponible por un momento. Estas filas no tienen cargo por resultado ni puntaje.
+Acorta `analysis.context` o vuelve a ejecutar los IDs afectados.
 
 El Actor analiza incluso los posts más largos que `maxContextBytes`. Primero
 recorta los posts citados y respondidos, y luego el post. En ese caso,

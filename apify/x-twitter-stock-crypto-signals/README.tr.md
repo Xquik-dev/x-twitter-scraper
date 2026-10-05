@@ -328,6 +328,8 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 ## SSS ve destek
 
+Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
+
 ### Yapay zeka hesabı, X API anahtarı veya giriş gerekir mi?
 
 Hayır. Xquik'in X (Twitter) Stock & Crypto AI Trading Signals Actor'ı yapay
@@ -340,14 +342,14 @@ Evet. Her varlığı hisse kodları ve takma adlarıyla `analysis.targets` altı
 yaz. Arama terimlerini birleştir. İlgi cevapları, hangi gönderilerin
 hedeflerini yatırım varlığı olarak ele aldığını söyler.
 
-### Bir satır neden `analysis.status` değeri `failed` veya `skipped` olarak döndü?
+### Bir satır neden başarısız veya atlanan bir analizle döndü?
 
-Actor gönderiyi topladı ve teslim etti, ama yapay zeka analizi tamamlanmadı.
-`analysis.reason` nedeni belirtir. `context_limit`, bağlamının ve hedeflerinin
-gönderiye yer bırakmadığı anlamına gelir. `service_unavailable`, analiz
-hizmetine kısa bir süre erişilemediği anlamına gelir. Bu satırların sonuç ücreti
-yok. `analysis.context` alanını kısalt ya da etkilenen ID'leri yeniden
-çalıştır.
+`analysis.status` değeri `failed` veya `skipped` olur. Actor gönderiyi topladı
+ve teslim etti, ama yapay zeka analizi tamamlanmadı. `analysis.reason` nedeni
+belirtir. `context_limit`, bağlamının ve hedeflerinin gönderiye yer bırakmadığı
+anlamına gelir. `service_unavailable`, analiz hizmetine kısa bir süre
+erişilemediği anlamına gelir. Bu satırların sonuç ücreti yok. `analysis.context`
+alanını kısalt ya da etkilenen ID'leri yeniden çalıştır.
 
 Actor, `maxContextBytes` değerinden uzun bir gönderiyi de analiz eder. Önce
 alıntılanan ve yanıtlanan gönderileri, sonra gönderinin kendisini kısaltır. Bu

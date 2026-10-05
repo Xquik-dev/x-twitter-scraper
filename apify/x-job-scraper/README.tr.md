@@ -178,8 +178,8 @@ bitmesi teslimatı doğrular. Tüm verinin çekildiğini doğrulamaz.
 kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Nedenler
 şunlardır: `target_not_found`, `target_failed`, `pagination_safety_limit` ve
 `deadline_reached`. Bulunamayan bir hedef, listeye yalnızca çalıştırmayı başka
-bir neden durdurduysa girer. Nedenlerden biri `retryable` ise çalıştırma da
-`retryable` olur.
+bir neden durdurduysa girer. Nedenlerden biri yeniden denenebiliyorsa çalıştırma
+da `retryable` olur.
 
 ## İlgili Xquik Actor'ları
 
@@ -264,7 +264,7 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 ## SSS
 
-Sık sorulan soruların cevapları, ardından nereden yardım alacağın.
+Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
 
 ### X API anahtarı veya giriş gerekir mi?
 

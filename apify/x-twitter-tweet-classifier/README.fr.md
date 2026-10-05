@@ -345,6 +345,8 @@ données dont vous avez besoin.
 
 ## FAQ et support
 
+Les réponses aux questions fréquentes, puis où trouver de l'aide.
+
 ### Ai-je besoin d'un compte d'IA, d'une clé API X ou d'une connexion ?
 
 Non. X Tweet Classifier de Xquik inclut les coûts d'IA dans son prix. Aucun
@@ -357,14 +359,14 @@ Oui. Chaque réponse enregistre la `version` que vous donnez à sa question. Qua
 vous affinez vos questions au fil du temps, vous savez quelle formulation a
 produit un résultat.
 
-### Pourquoi une ligne revient-elle avec `analysis.status` à `failed` ou `skipped` ?
+### Pourquoi une ligne revient-elle avec une analyse échouée ou ignorée ?
 
-L'Actor a collecté et livré le post, mais l'analyse par IA n'a pas abouti.
-`analysis.reason` nomme la cause. `context_limit` signifie que votre contexte et
-vos cibles ne laissent pas de place au post. `service_unavailable` signifie que
-le service d'analyse était brièvement indisponible. Ces lignes ne sont pas
-facturées comme résultats. Raccourcissez `analysis.context` ou relancez les ID
-concernés.
+`analysis.status` vaut `failed` ou `skipped`. L'Actor a collecté et livré le
+post, mais l'analyse par IA n'a pas abouti. `analysis.reason` nomme la cause.
+`context_limit` signifie que votre contexte et vos cibles ne laissent pas de
+place au post. `service_unavailable` signifie que le service d'analyse était
+brièvement indisponible. Xquik ne facture pas ces lignes comme résultats.
+Raccourcissez `analysis.context` ou relancez les ID concernés.
 
 L'Actor analyse quand même un post plus long que `maxContextBytes`. Il coupe
 d'abord les posts cités et les posts auxquels il répond, puis le post lui-même.

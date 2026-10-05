@@ -233,7 +233,7 @@ Xquik 的 X Tweet Viral Score Analyzer 每条已分析帖子 $0.0003 起，不�
 
 空运行的计数为 0，平均值为 `null`。
 
-每个结果行还带有 `viralScore`、`viralVerdict`、`viralAlgorithmScore` 和 `viralActualEngagementRate`，以及 `answers`。`answers` 是一个以问题 ID 为键的扁平映射，每个值是所选的类别、分数或概率。`Viral Score` 数据集视图以及 CSV 或 Excel 导出会显示这些列。这些列就在帖子旁边，所以电子表格不需要解析 JSON。失败和跳过的行带有空映射。
+每个结果行还带有 `viralScore`、`viralVerdict`、`viralAlgorithmScore` 和 `viralActualEngagementRate`。它还带有 `answers`，这是一个以问题 ID 为键的扁平映射。每个值是所选的类别、分数或概率。`Viral Score` 数据集视图以及 CSV 或 Excel 导出会显示这些列。这些列就在帖子旁边，所以电子表格不需要解析 JSON。失败和跳过的行带有空映射。
 
 ## 与之前的运行比较
 
@@ -268,6 +268,8 @@ Actor 页面上的其余任务涵盖更多话题和品牌账号。
 
 ## 常见问题与支持
 
+先解答常见问题，再说明在哪里获取帮助。
+
 ### 我需要 AI 账号、X API 密钥或登录吗？
 
 不需要。Xquik 的 X Tweet Viral Score Analyzer 的价格已包含 AI 费用。你不需要 AI 账号、token 或密钥，也不需要 X API 密钥、登录或任何凭据。
@@ -280,9 +282,9 @@ Actor 页面上的其余任务涵盖更多话题和品牌账号。
 
 可以。自定义的 `analysis.questions` 会替换默认问题。可以发送 1 到 8 个 `choice`、`score` 或 `probability` 问题。选择题接受 2 到 255 个类别。评分题至少需要 2 个有序等级。Viral Score 需要全部 8 个默认问题，所以使用自定义问题时它为 `null`。
 
-### 为什么某行的 `analysis.status` 是 `failed` 或 `skipped`？
+### 为什么某行返回时分析失败或被跳过？
 
-该 Actor 已收集并交付这条帖子，但 AI 分析没有完成。`analysis.reason` 会写明原因。`context_limit` 表示你的上下文和目标没有给帖子留出空间。`service_unavailable` 表示分析服务曾短暂不可用。这些行不产生结果费用，也没有分数。请缩短 `analysis.context`，或重新运行受影响的 ID。
+`analysis.status` 为 `failed` 或 `skipped`。该 Actor 已收集并交付这条帖子，但 AI 分析没有完成。`analysis.reason` 会写明原因。`context_limit` 表示你的上下文和目标没有给帖子留出空间。`service_unavailable` 表示分析服务曾短暂不可用。这些行不产生结果费用，也没有分数。请缩短 `analysis.context`，或重新运行受影响的 ID。
 
 帖子超过 `maxContextBytes` 时，该 Actor 仍会分析它。它先截断被引用和被回复的帖子，再截断这条帖子本身。这时 `analysis.contextAvailability.postText` 为 `truncated`。要保留更多文本，可以把 `maxContextBytes` 提高到最多 64,000。
 
