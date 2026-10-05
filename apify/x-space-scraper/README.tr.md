@@ -17,13 +17,14 @@
 
 Xquik, en eksiksiz X verisini sunan, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. Xquik'in X Space Scraper'ı Sohbet Odalarını anahtar kelime,
-sunucu veya hashtag ile bulur ve URL ya da ID ile okur. Diğer Apify
-Actor'larının çoğu, filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik
-yalnızca teslim edilen ve benzersiz sonuçlar için ücret alır.
+sunucu veya hashtag ile bulur, Sohbet Odalarını ve yayınları (broadcasts) URL ya
+da ID ile okur. Diğer Apify Actor'larının çoğu, filtrelemeden veya
+tekilleştirmeden önce ücret alır. Xquik yalnızca teslim edilen ve benzersiz
+sonuçlar için ücret alır.
 
 Her konuda canlı, planlanmış veya bitmiş Twitter Sohbet Odalarını (Spaces) bul.
-X API anahtarı ya da giriş gerekmez. **Teslim edilen Sohbet Odası başına
-$0.00015** ödersin. Apify, platform kullanımını ayrıca faturalandırır.
+X API anahtarı ya da giriş gerekmez. **Teslim edilen Sohbet Odası veya yayın
+başına $0.00015** ödersin. Apify, platform kullanımını ayrıca faturalandırır.
 
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
@@ -36,7 +37,14 @@ $0.00015** ödersin. Apify, platform kullanımını ayrıca faturalandırır.
   hesaplar.
 - Sunucunun herkese açık profili, yardımcı sunucular, konuşmacılar ve X'in
   listelediği dinleyiciler.
-- Kayıt, klip ve kilit ayarları ile Sohbet Odasını duyuran gönderi.
+- Kayıt, klip ve kilit ayarları ile Sohbet Odasını duyuran gönderi; metni,
+  sayıları ve yazarıyla.
+- Sunucuların ve konuşmacıların Sohbet Odasında paylaştığı gönderiler; kimin, ne
+  zaman paylaştığıyla.
+- Bitmiş bir Sohbet Odasının kaydı, `includeReplay` ile HLS oynatma listesi
+  URL'si olarak.
+- URL veya ID ile yayınlar: başlık, durum, zamanlar, izleyici sayıları ve
+  sunucu.
 - Faturalamadan önce tekilleştirme: 2 arama teriminin bulduğu bir Sohbet Odası 1
   satırdır.
 
@@ -47,9 +55,22 @@ $0.00015** ödersin. Apify, platform kullanımını ayrıca faturalandırır.
    gir.
 3. Ya da Sohbet Odası URL'lerini `startUrls` alanına, Sohbet Odası ID'lerini
    `spaceIds` alanına yapıştır.
-4. Teslim edilecek Sohbet Odası sayısını `maxItems` ile sınırla, sonra Start'a
-   tıkla.
-5. Veri kümesini JSON, CSV veya Excel olarak indir ya da Apify API'yi kullan.
+4. Yayınlar için URL'lerini `startUrls` alanına ya da ID'lerini `broadcastIds`
+   alanına yapıştır.
+5. Teslim edilecek satır sayısını `maxItems` ile sınırla, sonra Start'a tıkla.
+6. Veri kümesini JSON, CSV veya Excel olarak indir ya da Apify API'yi kullan.
+
+`startUrls` her URL'yi düz metin olarak ya da `{ "url": "..." }` nesnesi olarak
+alır:
+
+```json
+{
+  "startUrls": [
+    "https://x.com/i/spaces/1OGwblLjnQMKB",
+    { "url": "https://x.com/i/broadcasts/1nGeLMWbkpaKX" }
+  ]
+}
+```
 
 ## Girdi
 
@@ -84,13 +105,33 @@ Zaten bildiğin Sohbet Odalarını URL veya ID ile oku:
 }
 ```
 
+Bitmiş her Sohbet Odasının kaydını almak için `includeReplay` seçeneğini aç:
+
+```json
+{ "spaceIds": ["1OGwblLjnQMKB"], "includeReplay": true }
+```
+
+Satır o zaman `replay` taşır: `url` (HLS oynatma listesi), `streamType` ve
+`status`. Canlı, planlanmış veya kaydı olmayan bir Sohbet Odasında `replay`
+olmaz. Kayıt için ek ücret ödemezsin.
+
+X'in `x.com/i/broadcasts` adresinde barındırdığı canlı videoları, yani
+yayınları, URL veya ID ile oku:
+
+```json
+{
+  "startUrls": [{ "url": "https://x.com/i/broadcasts/1nGeLMWbkpaKX" }],
+  "broadcastIds": ["1nGeLMWbkpaKX"]
+}
+```
+
 Sorunsuz biten küçük çalıştırmalar `run-report` yazmaz, böylece Apify kullanımı
 azalır. Raporu her çalıştırmada almak için `alwaysSaveRunRecords` seçeneğini aç.
 
 ## Çıktı
 
-Her satırda 1 Sohbet Odası ve `sourceTarget` içinde arama terimi, URL'si veya
-ID'si bulunur.
+Her satırda 1 Sohbet Odası veya yayın ve `sourceTarget` içinde arama terimi,
+URL'si veya ID'si bulunur. `resultType`, `space` veya `broadcast` olur.
 
 Aşağıdaki değerler yalnızca örnektir. Gerçek sonuçlar canlı veriden gelir. Bir
 Sohbet Odası satırı şöyle görünür:
@@ -109,6 +150,14 @@ Sohbet Odası satırı şöyle görünür:
   "admins": [{ "username": "sample_host", "name": "Sample Host" }],
   "speakers": [{ "username": "sample_speaker", "name": "Sample Speaker" }],
   "listeners": [],
+  "sharings": [
+    {
+      "id": "2106511178339881415",
+      "sharedAt": "2026-03-11T17:20:16.658Z",
+      "sharedBy": { "username": "sample_speaker", "name": "Sample Speaker" },
+      "tweet": { "id": "2105620368836706789", "text": "Sample shared post" }
+    }
+  ],
   "resultType": "space",
   "sourceTarget": "bitcoin"
 }
@@ -128,10 +177,29 @@ Sohbet Odası satırı şöyle görünür:
 tutabilir. X, abonelere veya bir Topluluğa özel Sohbet Odasını yalnızca o
 kitleye gösterir, bu yüzden bu Sohbet Odaları satır döndürmez.
 
+Bir yayın satırında `resultType: "broadcast"` bulunur ve satır şöyle görünür:
+
+```json
+{
+  "id": "1SampleBcast1",
+  "title": "Sample launch broadcast",
+  "state": "Ended",
+  "startedAt": "2026-09-17T00:54:56.506Z",
+  "endedAt": "2026-09-17T01:17:35.036Z",
+  "totalWatched": 161758,
+  "totalWatching": 21639,
+  "width": 3840,
+  "height": 2160,
+  "creator": { "username": "sample_host", "name": "Sample Host" },
+  "resultType": "broadcast",
+  "sourceTarget": "1SampleBcast1"
+}
+```
+
 ## X Sohbet Odalarını kazımak ne kadar tutar?
 
-Her Apify planında teslim edilen Sohbet Odası başına $0.00015 ödersin. Apify,
-platform kullanımını ayrıca faturalandırır.
+Her Apify planında teslim edilen Sohbet Odası veya yayın başına $0.00015
+ödersin. Apify, platform kullanımını ayrıca faturalandırır.
 
 - Teslim edilen her veri satırı için 1 kez ödersin. Tanılamalar `diagnostics`
   içinde ücretsizdir.

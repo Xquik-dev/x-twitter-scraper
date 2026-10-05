@@ -15,9 +15,9 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">FramerがXquikのスクレイパーをClaude Code、Codex、Cursorなどと一緒に使う様子を6:07から視聴できます。</a>
 </td></tr></table>
 
-Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX Space Scraperは、キーワード、ホスト、ハッシュタグからスペースを見つけ、URLまたはIDでスペースを読み取ります。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した結果のうち、重複がないものだけです。
+Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX Space Scraperは、キーワード、ホスト、ハッシュタグからスペースを見つけ、URLまたはIDでスペースとブロードキャストを読み取ります。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した結果のうち、重複がないものだけです。
 
-あらゆるトピックのTwitterスペースを、ライブ中、予定済み、終了済みを問わず見つけます。X APIキーやログインは不要です。料金は**配信されたスペース1件につき$0.00015**で、Apifyのプラットフォーム利用料は別途かかります。
+あらゆるトピックのTwitterスペースを、ライブ中、予定済み、終了済みを問わず見つけます。X APIキーやログインは不要です。料金は**配信されたスペースまたはブロードキャスト1件につき$0.00015**で、Apifyのプラットフォーム利用料は別途かかります。
 
 > Xquikは独立したサードパーティサービスです。X Corpとは提携していません。
 > 「Twitter」および「X」はX Corpの商標です。
@@ -27,7 +27,10 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 - 各スペースのタイトル、状態、予定時刻、開始時刻、終了時刻。
 - ライブのリスナー数、リプレイの再生数、いまスペースにいるアカウント。
 - ホストの公開プロフィール、共同ホスト、スピーカー、Xが表示するリスナー。
-- リプレイ、クリップ、ロックの設定と、スペースを告知するポスト。
+- リプレイ、クリップ、ロックの設定と、スペースを告知するポスト（本文、各種カウント、作成者を含む）。
+- ホストとスピーカーがスペースで共有したポストと、共有した人、共有した時刻。
+- 終了したスペースの録音。`includeReplay` をオンにすると、HLSプレイリストのURLとして入ります。
+- URLまたはIDで指定したブロードキャスト: タイトル、状態、時刻、視聴数、ホスト。
 - 課金前の重複排除: 2つの検索語句が見つけた同じスペースは1行です。
 
 ## Xのスペースを見つける方法
@@ -35,8 +38,20 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 1. Apify ConsoleでXquikのX Space Scraperを開きます。
 2. 単語、ハッシュタグ、Xの検索演算子を `searchTerms` に入力します。
 3. または、スペースのURLを `startUrls` に、スペースIDを `spaceIds` に貼り付けます。
-4. `maxItems` で配信するスペース数の上限を決め、Startをクリックします。
-5. データセットをJSON、CSV、Excelでダウンロードするか、Apify APIを使います。
+4. ブロードキャストは、URLを `startUrls` に、IDを `broadcastIds` に貼り付けます。
+5. `maxItems` で配信する行数の上限を決め、Startをクリックします。
+6. データセットをJSON、CSV、Excelでダウンロードするか、Apify APIを使います。
+
+`startUrls` は、各URLを文字列のまま、または `{ "url": "..." }` オブジェクトとして受け取ります。
+
+```json
+{
+  "startUrls": [
+    "https://x.com/i/spaces/1OGwblLjnQMKB",
+    { "url": "https://x.com/i/broadcasts/1nGeLMWbkpaKX" }
+  ]
+}
+```
 
 ## 入力
 
@@ -69,11 +84,28 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 }
 ```
 
+終了した各スペースの録音を取得するには、`includeReplay` をオンにします。
+
+```json
+{ "spaceIds": ["1OGwblLjnQMKB"], "includeReplay": true }
+```
+
+その行には `replay` が入り、HLSプレイリストの `url` と、`streamType`、`status` を含みます。ライブ中、予定済み、または録音のないスペースには `replay` が入りません。録音に追加料金はかかりません。
+
+Xが `x.com/i/broadcasts` で配信するライブ動画であるブロードキャストを、URLまたはIDで読み取ります。
+
+```json
+{
+  "startUrls": [{ "url": "https://x.com/i/broadcasts/1nGeLMWbkpaKX" }],
+  "broadcastIds": ["1nGeLMWbkpaKX"]
+}
+```
+
 問題なく終わった小規模な実行は `run-report` を書き込まず、Apifyの利用料を節約します。毎回書き込むには `alwaysSaveRunRecords` をオンにしてください。
 
 ## 出力
 
-各行には1件のスペースが入り、`sourceTarget` にその検索語句、URL、またはIDが入ります。
+各行には1件のスペースまたはブロードキャストが入り、`sourceTarget` にその検索語句、URL、またはIDが入ります。`resultType` は `space` または `broadcast` です。
 
 例はサンプル値です。実際の結果にはライブデータが入ります。スペースの行は次のようになります。
 
@@ -91,6 +123,14 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
   "admins": [{ "username": "sample_host", "name": "Sample Host" }],
   "speakers": [{ "username": "sample_speaker", "name": "Sample Speaker" }],
   "listeners": [],
+  "sharings": [
+    {
+      "id": "2106511178339881415",
+      "sharedAt": "2026-03-11T17:20:16.658Z",
+      "sharedBy": { "username": "sample_speaker", "name": "Sample Speaker" },
+      "tweet": { "id": "2105620368836706789", "text": "Sample shared post" }
+    }
+  ],
   "resultType": "space",
   "sourceTarget": "bitcoin"
 }
@@ -108,9 +148,28 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 
 `Ended` と `TimedOut` のスペースには `endedAt` が入り、どちらも録音を残せます。Xはサブスクライバー向けやコミュニティ向けのスペースをその対象者にだけ表示するため、こうしたスペースは行を返しません。
 
+ブロードキャストの行は `resultType: "broadcast"` を持ち、次のようになります。
+
+```json
+{
+  "id": "1SampleBcast1",
+  "title": "Sample launch broadcast",
+  "state": "Ended",
+  "startedAt": "2026-09-17T00:54:56.506Z",
+  "endedAt": "2026-09-17T01:17:35.036Z",
+  "totalWatched": 161758,
+  "totalWatching": 21639,
+  "width": 3840,
+  "height": 2160,
+  "creator": { "username": "sample_host", "name": "Sample Host" },
+  "resultType": "broadcast",
+  "sourceTarget": "1SampleBcast1"
+}
+```
+
 ## Xのスペースのスクレイピングにかかる費用は？
 
-すべてのApifyプランで、配信されたスペース1件につき$0.00015です。Apifyのプラットフォーム利用料は別途かかります。
+すべてのApifyプランで、配信されたスペースまたはブロードキャスト1件につき$0.00015です。Apifyのプラットフォーム利用料は別途かかります。
 
 - 課金は配信したデータ行1件につき1回です。`diagnostics` の診断情報は無料です。
 - 開始料金、検索料金、ページ料金はかかりません。
