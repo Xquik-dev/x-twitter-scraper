@@ -31,7 +31,7 @@ Plattformnutzung separat. Du brauchst keinen X-API-Schlüssel & keinen Login.
 
 ## Artikeldaten & Format
 
-- Markdown, das Blöcke sowie fette & kursive Passagen erhält.
+- Markdown mit Überschriften, Listen, Fett, Kursiv, Links & Bildern, ohne HTML.
 - `contents`-Blöcke, die die Quellformatierung behalten.
 - Post-URLs & numerische Post-IDs im selben Run.
 - Jeder Artikel, den ein Account veröffentlicht hat, anhand von Nutzername oder
@@ -88,8 +88,16 @@ Artikel-Datensatz enthält diese Felder:
 
 ```json
 {
-  "markdown": "# Article title\n\nPlain Article text",
-  "contents": [{ "type": "paragraph", "text": "Plain Article text" }]
+  "markdown": "# Article title\n\nPlain **Article** text",
+  "bodyMarkdown": "Plain **Article** text",
+  "bodyText": "Plain Article text",
+  "contents": [
+    {
+      "type": "paragraph",
+      "text": "Plain Article text",
+      "inlineStyleRanges": [{ "offset": 6, "length": 7, "style": "Bold" }]
+    }
+  ]
 }
 ```
 

@@ -35,7 +35,7 @@ need no X API key or login.
 
 ## Article data & format
 
-- Markdown that keeps blocks, bold & italic ranges.
+- Markdown with headings, lists, bold, italic, links & images, without HTML.
 - `contents` blocks that keep the source formatting.
 - Post URLs & numeric Tweet IDs in the same run.
 - Every Article an account published, from its handle or profile URL.
@@ -87,8 +87,16 @@ these fields:
 
 ```json
 {
-  "markdown": "# Article title\n\nPlain Article text",
-  "contents": [{ "type": "paragraph", "text": "Plain Article text" }]
+  "markdown": "# Article title\n\nPlain **Article** text",
+  "bodyMarkdown": "Plain **Article** text",
+  "bodyText": "Plain Article text",
+  "contents": [
+    {
+      "type": "paragraph",
+      "text": "Plain Article text",
+      "inlineStyleRanges": [{ "offset": 6, "length": 7, "style": "Bold" }]
+    }
+  ]
 }
 ```
 

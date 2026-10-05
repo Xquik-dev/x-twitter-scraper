@@ -32,7 +32,7 @@ gerekmez.
 
 ## Makale verisi ve biçimi
 
-- Blokları, kalın ve italik aralıkları koruyan Markdown.
+- Başlık, liste, kalın, italik, bağlantı ve görsel içeren, HTML'siz Markdown.
 - Kaynak biçimlendirmeyi koruyan `contents` blokları.
 - Aynı çalıştırmada gönderi URL'leri ve sayısal gönderi ID'leri.
 - Bir hesabın yayımladığı her Makale, kullanıcı adından veya profil URL'sinden.
@@ -87,8 +87,16 @@ Makale satırında şu alanlar bulunur:
 
 ```json
 {
-  "markdown": "# Article title\n\nPlain Article text",
-  "contents": [{ "type": "paragraph", "text": "Plain Article text" }]
+  "markdown": "# Article title\n\nPlain **Article** text",
+  "bodyMarkdown": "Plain **Article** text",
+  "bodyText": "Plain Article text",
+  "contents": [
+    {
+      "type": "paragraph",
+      "text": "Plain Article text",
+      "inlineStyleRanges": [{ "offset": 6, "length": 7, "style": "Bold" }]
+    }
+  ]
 }
 ```
 

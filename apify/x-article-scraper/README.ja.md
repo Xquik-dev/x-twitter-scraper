@@ -24,7 +24,7 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 
 ## 記事のデータと形式
 
-- ブロック、太字、斜体の範囲を保つMarkdown。
+- 見出し、リスト、太字、斜体、リンク、画像を含み、HTMLを含まないMarkdown。
 - 元の書式を保つ `contents` ブロック。
 - 同じ実行で使えるポストURLと数値のポストID。
 - アカウントが公開したすべての記事。ユーザー名かプロフィールのURLから取得します。
@@ -70,8 +70,16 @@ Outputタブを開くと `Articles` が表示されます。`Results` は各行�
 
 ```json
 {
-  "markdown": "# Article title\n\nPlain Article text",
-  "contents": [{ "type": "paragraph", "text": "Plain Article text" }]
+  "markdown": "# Article title\n\nPlain **Article** text",
+  "bodyMarkdown": "Plain **Article** text",
+  "bodyText": "Plain Article text",
+  "contents": [
+    {
+      "type": "paragraph",
+      "text": "Plain Article text",
+      "inlineStyleRanges": [{ "offset": 6, "length": 7, "style": "Bold" }]
+    }
+  ]
 }
 ```
 

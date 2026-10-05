@@ -175,6 +175,10 @@ hesabı olmayan bir hesap satır döndürmez.
 Bir hesabın abone olduğu içerik üreticileri için `subscriptions` kullan.
 Aboneliklerini gizleyen bir hesap satır döndürmez.
 
+X'in bir hesaba benzer olarak listelediği hesaplar için `similar` kullan. Her
+satır tam bir profildir. X kısa bir hesap listesi verir ve bu liste
+çalıştırmalar arasında değişebilir.
+
 Aynı girdi `username`, `usernames` ve `user_names` takma adlarını da kabul
 eder.
 

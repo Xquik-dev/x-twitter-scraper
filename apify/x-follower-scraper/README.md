@@ -170,6 +170,9 @@ affiliates returns no rows.
 Use `subscriptions` for the creators an account subscribes to. An account that
 hides its subscriptions returns no rows.
 
+Use `similar` for the accounts X lists as similar to an account. Each row is a
+full profile. X lists a short set of accounts & can change it between runs.
+
 The same input also accepts `username`, `usernames` & `user_names` as aliases.
 
 ### Multi-relation runs

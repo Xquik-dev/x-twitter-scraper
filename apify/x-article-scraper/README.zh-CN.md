@@ -23,7 +23,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 ## 文章数据与格式
 
-- Markdown 保留区块、粗体和斜体范围。
+- Markdown 包含标题、列表、粗体、斜体、链接和图片，不含 HTML。
 - `contents` 区块保留原始格式。
 - 同一次运行可以混用帖子 URL 和数字帖子 ID。
 - 通过用户名或个人资料 URL，获取一个账号发布的每篇文章。
@@ -69,8 +69,16 @@ Output 标签页会打开 `Articles`。`Results` 链接到数据行。`Run Repor
 
 ```json
 {
-  "markdown": "# Article title\n\nPlain Article text",
-  "contents": [{ "type": "paragraph", "text": "Plain Article text" }]
+  "markdown": "# Article title\n\nPlain **Article** text",
+  "bodyMarkdown": "Plain **Article** text",
+  "bodyText": "Plain Article text",
+  "contents": [
+    {
+      "type": "paragraph",
+      "text": "Plain Article text",
+      "inlineStyleRanges": [{ "offset": 6, "length": 7, "style": "Bold" }]
+    }
+  ]
 }
 ```
 

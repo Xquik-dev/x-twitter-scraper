@@ -186,6 +186,10 @@ ligne est un profil complet. Un compte sans affiliés ne renvoie aucune ligne.
 Utilisez `subscriptions` pour les créateurs auxquels un compte a souscrit. Un
 compte qui masque ses souscriptions ne renvoie aucune ligne.
 
+Utilisez `similar` pour les comptes que X liste comme similaires à un compte.
+Chaque ligne est un profil complet. X liste peu de comptes et peut changer cette
+liste d'un run à l'autre.
+
 La même entrée accepte aussi les alias `username`, `usernames` et `user_names`.
 
 ### Runs multi-relations

@@ -175,6 +175,10 @@ completo. Un account senza affiliati non restituisce righe.
 Usa `subscriptions` per i creator a cui un account è abbonato. Un account che
 nasconde i suoi abbonamenti non restituisce righe.
 
+Usa `similar` per gli account che X elenca come simili a un account. Ogni riga è
+un profilo completo. X elenca pochi account & può cambiarli tra un'esecuzione e
+l'altra.
+
 Lo stesso input accetta anche gli alias `username`, `usernames` & `user_names`.
 
 ### Esecuzioni con più relazioni
