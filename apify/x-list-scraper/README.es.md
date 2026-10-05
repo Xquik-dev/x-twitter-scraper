@@ -16,29 +16,36 @@
 </td></tr></table>
 
 Xquik es el servicio de scraping de X (Twitter) más rápido y económico del
-mundo, con los datos de X más completos. X List Scraper de Xquik recopila posts,
-miembros y seguidores de Listas. La mayoría de los demás Actores de Apify cobran
-antes de filtrar o quitar duplicados. Xquik solo cobra los resultados
-entregados, únicos y que cumplen tus filtros.
+mundo, con los datos de X más completos. X List Scraper de Xquik recopila
+detalles, posts, miembros y seguidores de Listas, y encuentra Listas por palabra
+clave. La mayoría de los demás Actores de Apify cobran antes de filtrar o quitar
+duplicados. Xquik solo cobra los resultados entregados, únicos y que cumplen tus
+filtros.
 
-Extrae posts, miembros y seguidores de Listas de X a partir de URLs o IDs
-numéricos de Listas. Pagas **$0.00015 por fila entregada**, y Apify factura
-aparte el uso de la plataforma. No necesitas clave de API de X ni iniciar
-sesión.
+Extrae detalles, posts, miembros y seguidores de Listas de X a partir de URLs o
+IDs numéricos de Listas, o encuentra Listas públicas con términos de búsqueda.
+Pagas **$0.00015 por fila entregada**, y Apify factura aparte el uso de la
+plataforma. No necesitas clave de API de X ni iniciar sesión.
 
 > Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 > "Twitter" y "X" son marcas registradas de X Corp.
 
 ## Datos y filtros de Listas
 
+- Detalles de Listas: nombre, descripción, cantidad de miembros y de seguidores,
+  fecha de creación, imagen de encabezado y el perfil público del dueño.
 - Posts de Listas con texto, autor, métricas, contenido multimedia y marcas de
   tiempo.
 - Miembros y seguidores de Listas.
+- Búsqueda de Listas por palabra clave. Cada fila es 1 Lista con su dueño, su
+  cantidad de miembros y su cantidad de seguidores.
 - Respuestas opcionales en los posts de Listas.
 - Filtros de fechas, tiempo Unix, idioma, contenido multimedia, interacción,
   verificación y perfiles.
+- Las Listas públicas que una cuenta creó o en las que está, a partir de su
+  nombre de usuario o de la URL de su perfil.
 - Muchas Listas y tipos de recurso en 1 ejecución.
-- Un límite global y un límite para cada recurso de Lista.
+- Un límite global y un límite para cada recurso de Lista o término de búsqueda.
 - Las ejecuciones se reanudan tras una migración de Apify.
 - Eliminación de duplicados antes de facturar.
 
@@ -46,6 +53,7 @@ sesión.
 
 1. Abre X List Scraper de Xquik en Apify Console.
 2. Pega URLs de Listas en `startUrls` o IDs numéricos de Listas en `listIds`.
+   Para encontrar Listas, agrega en su lugar palabras clave en `searchTerms`.
 3. Elige `resources` y agrega filtros como `sinceDate` o `minLikes`.
 4. Define `maxItems` para limitar las filas entregadas y haz clic en Start.
 5. Descarga el dataset en JSON, CSV o Excel, o usa la API de Apify.
@@ -66,10 +74,16 @@ sesión.
 ```json
 {
   "listIds": ["1748648376080666720"],
-  "resources": ["tweets", "members", "followers"],
+  "resources": ["info", "tweets", "members", "followers"],
   "includeReplies": false,
   "maxItems": 10000
 }
+```
+
+Para encontrar Listas por palabra clave, envía términos de búsqueda:
+
+```json
+{ "searchTerms": ["space news", "climate science"], "maxItemsPerTarget": 50 }
 ```
 
 Las ejecuciones pequeñas sin problemas omiten `run-report` y ahorran uso de
@@ -77,12 +91,54 @@ Apify. Activa `alwaysSaveRunRecords` para escribirlo en todas las ejecuciones.
 
 ## Salida
 
-Cada fila define `resultType` como `listTweet`, `listMember` o `listFollower`.
-`sourceTarget` guarda el ID de la Lista de entrada. El cuerpo de la fila usa la
-forma estable de respuesta de post o de perfil de Xquik.
+Cada fila define `resultType` como `list`, `listTweet`, `listMember` o
+`listFollower`. `sourceTarget` guarda el ID de la Lista de entrada, o el término
+de búsqueda que encontró una fila `list`. Una fila `list` guarda los detalles de
+una Lista, 1 por Lista. Las demás filas usan la forma estable de respuesta de
+post o de perfil de Xquik.
+
+### Las Listas de una cuenta
+
+Agrega nombres de usuario en `twitterHandles`, o URLs de perfil en `startUrls`,
+para enumerar las Listas públicas de cada cuenta:
+
+```json
+{ "twitterHandles": ["verge"], "accountLists": ["created", "memberships"] }
+```
+
+`created` enumera las Listas que creó la cuenta y `memberships`, las Listas que
+la incluyen. Cada Lista es 1 fila con `resultType` `createdList` o
+`listMembership`, `sourceTarget` con el nombre de usuario, e `id`, `name`,
+`description`, `memberCount`, `subscriberCount`, `createdAt`, `bannerUrl` y el
+perfil `owner`. X muestra una Lista privada solo a su dueño, así que las Listas
+privadas quedan fuera.
+
+Las Listas creadas de cada cuenta van antes que sus membresías. El Actor lee las
+cuentas en paralelo, así que las filas de distintas cuentas llegan a medida que
+se leen. Agrúpalas por `sourceTarget`.
+
+Una fila es 1 cuenta y 1 Lista. Una Lista que comparten 2 de tus cuentas son 2
+filas, 1 bajo cada una. Xquik cobra cada fila. `dedupeAcrossTargets` nunca quita
+estas filas.
 
 Los ejemplos usan valores de muestra. Los resultados reflejan datos en vivo. Una
-fila de miembro de Lista se ve así:
+fila de detalles de Lista se ve así:
+
+```json
+{
+  "resultType": "list",
+  "sourceTarget": "4143408",
+  "id": "4143408",
+  "name": "NASA Centers",
+  "description": "NASA has 10 centers http://www.nasa.gov/about/sites",
+  "memberCount": 11,
+  "subscriberCount": 859,
+  "createdAt": "2009-12-02T22:41:02.000Z",
+  "owner": { "username": "NASA", "name": "NASA" }
+}
+```
+
+Una fila de miembro de Lista se ve así:
 
 ```json
 {
@@ -92,6 +148,22 @@ fila de miembro de Lista se ve así:
   "name": "Sample User",
   "followers": 1200,
   "verified": false
+}
+```
+
+Una fila `list` de un término de búsqueda se ve así:
+
+```json
+{
+  "resultType": "list",
+  "sourceTarget": "space news",
+  "id": "1000000000000000001",
+  "name": "Sample Space News",
+  "description": "Sample accounts that post space news.",
+  "url": "https://x.com/i/lists/1000000000000000001",
+  "memberCount": 35,
+  "subscriberCount": 76,
+  "owner": { "username": "sample_user", "name": "Sample User" }
 }
 ```
 
@@ -205,6 +277,8 @@ necesitas.
 
 ## Preguntas frecuentes
 
+Respuestas a preguntas comunes y, luego, dónde conseguir ayuda.
+
 ### ¿Necesito una clave de API de X o iniciar sesión?
 
 No. X List Scraper de Xquik no necesita clave de API de X, inicio de sesión ni
@@ -226,7 +300,7 @@ leer y explica cómo corregirla.
 
 ### ¿Puedo usar la API, las programaciones y las integraciones?
 
-Sí. Elige entre 50 tareas públicas o 129 operaciones REST de Xquik. La
+Sí. Elige entre 50 tareas públicas o la API REST de Xquik. La
 [pestaña API](https://apify.com/xquik/x-list-scraper/api) tiene ejemplos en
 Python, JavaScript y cURL. Las
 [programaciones](https://docs.apify.com/platform/schedules) de Apify ejecutan X

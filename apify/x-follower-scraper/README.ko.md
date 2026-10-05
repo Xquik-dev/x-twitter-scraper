@@ -19,9 +19,9 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 완전한 X 데이터를 제공합니다. Xquik의 X Follower Scraper는 팔로워, 팔로잉,
 리스트 멤버, 구독자 & 커뮤니티 멤버를 수집합니다. 공개 벤치마크가 입증하듯
 팔로워 Actor 10개 중 가장 저렴하고 빠릅니다. [아래 벤치마크](#벤치마크)에서 보듯
-행당 필드 수(`outputMode: "full"`)도 Actor 중앙값의 2.5배입니다. 다른 Apify Actor는 대부분 필터링이나
-중복 제거 전에 요금을 부과합니다. Xquik은 필터에 맞고 중복되지 않은 결과를
-전달했을 때만 요금을 받습니다.
+full 행의 필드 수도 Actor 중앙값의 2.5배입니다. 다른 Apify Actor는 대부분
+필터링이나 중복 제거 전에 요금을 부과합니다. Xquik은 필터에 맞고 중복되지 않은
+결과를 전달했을 때만 요금을 받습니다.
 
 X(Twitter)의 팔로워, 팔로잉, 인증된 팔로워, 리스트 멤버, 리스트 구독자 &
 커뮤니티 멤버를 스크랩하세요. Xquik의 X Follower Scraper는 **모든 Apify
@@ -49,33 +49,33 @@ Xquik의 X Follower Scraper는 팔로워, 팔로잉, 리스트 & 커뮤니티의
 
 ### X Follower Scraper로 어떤 데이터를 추출할 수 있나요?
 
-| 필드              | 설명                                                    |
-| ----------------- | ------------------------------------------------------- |
-| `id`              | 숫자 X 사용자 ID                                        |
-| `username`        | 사용자 아이디(`@` 제외)                                 |
-| `name`            | 표시 이름                                               |
-| `description`     | 자기소개 텍스트                                         |
-| `followers`       | 팔로워 수                                               |
-| `following`       | 팔로잉 수                                               |
-| `statusesCount`   | 작성한 게시물 총수                                      |
-| `mediaCount`      | 올린 미디어 총수                                        |
-| `favouritesCount` | 누른 마음에 들어요 총수                                 |
-| `verified`        | 공개 Blue 인증 또는 기존 인증을 합친 플래그             |
-| `verifiedType`    | `blue`, `business`, `government` 또는 `none`            |
-| `location`        | 본인이 입력한 위치                                      |
-| `url`             | 프로필의 웹사이트 URL                                   |
-| `profilePicture`  | 프로필 사진 URL(원본 크기)                              |
-| `coverPicture`    | 헤더 이미지 URL                                         |
-| `createdAt`       | X의 계정 생성 타임스탬프 문자열                         |
-| `sourceTarget`    | 이 프로필을 스크랩한 사용자 아이디 / ID                 |
-| `sourceRelation`  | 관계: `followers`, `following`, `list_members`, ...     |
-| `sourceUrl`       | 프로필을 찾은 정확한 URL                                |
-| `sourceTargets`   | 병합 모드에서 이 프로필과 일치한 모든 대상              |
-| `sourceRelations` | 병합 모드에서 이 프로필과 일치한 모든 관계              |
-| `sourceUrls`      | 병합 모드에서 이 프로필과 일치한 모든 원본 URL          |
-| `overlapCount`    | 병합 모드에서 일치한 관계 & 대상 쌍의 수                |
-| `resultType`      | full & raw 출력 모드의 행 유형                          |
-| `raw`             | Actor 전용 서식을 적용하기 전의 안전한 원본 프로필      |
+| 필드              | 설명                                                |
+| ----------------- | --------------------------------------------------- |
+| `id`              | 숫자 X 사용자 ID                                    |
+| `username`        | 사용자 아이디(`@` 제외)                             |
+| `name`            | 표시 이름                                           |
+| `description`     | 자기소개 텍스트                                     |
+| `followers`       | 팔로워 수                                           |
+| `following`       | 팔로잉 수                                           |
+| `statusesCount`   | 작성한 게시물 총수                                  |
+| `mediaCount`      | 올린 미디어 총수                                    |
+| `favouritesCount` | 누른 마음에 들어요 총수                             |
+| `verified`        | 공개 Blue 인증 또는 기존 인증을 합친 플래그         |
+| `verifiedType`    | `blue`, `business`, `government` 또는 `none`        |
+| `location`        | 본인이 입력한 위치                                  |
+| `url`             | 프로필의 웹사이트 URL                               |
+| `profilePicture`  | 프로필 사진 URL(원본 크기)                          |
+| `coverPicture`    | 헤더 이미지 URL                                     |
+| `createdAt`       | X의 계정 생성 타임스탬프 문자열                     |
+| `sourceTarget`    | 이 프로필을 스크랩한 사용자 아이디 / ID             |
+| `sourceRelation`  | 관계: `followers`, `following`, `list_members`, ... |
+| `sourceUrl`       | 프로필을 찾은 정확한 URL                            |
+| `sourceTargets`   | 병합 모드에서 이 프로필과 일치한 모든 대상          |
+| `sourceRelations` | 병합 모드에서 이 프로필과 일치한 모든 관계          |
+| `sourceUrls`      | 병합 모드에서 이 프로필과 일치한 모든 원본 URL      |
+| `overlapCount`    | 병합 모드에서 일치한 관계 & 대상 쌍의 수            |
+| `resultType`      | full & raw 출력 모드의 행 유형                      |
+| `raw`             | Actor 전용 서식을 적용하기 전의 안전한 원본 프로필  |
 
 행은 공개 프로필 규격을 따릅니다. 신원, 각종 수치, 인증, 계정 상태, 제휴,
 프로페셔널 정보 & 자기소개를 다룹니다. 원본 표시, 엔티티 & 고정 게시물 ID도
@@ -84,6 +84,11 @@ Xquik의 X Follower Scraper는 팔로워, 팔로잉, 리스트 & 커뮤니티의
 `raw` 필드를 추가하려면 `outputMode: "raw"`나 `includeRaw: true`를 설정하세요.
 이 필드에는 원본 프로필의 안전한 사본이 들어 있습니다. 기본값은 compact
 모드입니다.
+
+행당 데이터를 가장 많이 받으려면 `outputMode: "full"`을 설정하세요. 모든 행은
+X가 보내는 경우 `listedCount`, `defaultProfileImage` & `advertiserAccountType`
+같은 목록 필드를 최대 13개까지 남깁니다. full 행은 이 필드를 끝에 둡니다.
+compact 행은 더 작고 저장 비용이 적게 듭니다.
 
 `verifiedOnly`는 공개 Blue 인증 & 기존 인증 프로필을 받습니다. 원본 플래그가
 서로 다르면 인증된 쪽으로 판단합니다.
@@ -95,8 +100,8 @@ Xquik의 X Follower Scraper는 팔로워, 팔로잉, 리스트 & 커뮤니티의
 ## 사용 사례
 
 - 프로필당 더 많은 필드로 리드를 보강하고 리서치 데이터셋을 만드세요. 저희
-  중앙값 행(`outputMode: "full"`)에는 2026-09-29에 필드가 38개 있었습니다. 다른
-  Actor 9개 중앙값의 2.5배입니다.
+  중앙값 full 행에는 2026-09-29에 필드가 38개 있었습니다. 다른 Actor 9개
+  중앙값의 2.5배입니다.
 - 리드 조사를 위해 경쟁사 팔로워를 내보내세요.
 - 내 계정, 경쟁사 & 공인의 오디언스를 비교하세요.
 - 팔로워 수 & 인증 여부로 필터링해 조건에 맞는 프로필을 찾으세요.
@@ -105,6 +110,8 @@ Xquik의 X Follower Scraper는 팔로워, 팔로잉, 리스트 & 커뮤니티의
 - 자기소개 키워드, 위치, 프로필 유형으로 팔로워층을 나누세요.
 
 ## X Follower Scraper로 팔로워 데이터를 스크랩하려면 어떻게 하나요?
+
+아래 예시는 각각 완전한 입력입니다. 데이터에 맞는 예시를 고르세요.
 
 1. Apify Console에서 Xquik의 X Follower Scraper를 여세요.
 2. 프로필, 리스트, 커뮤니티 URL이나 X 사용자 아이디, 숫자 ID를 추가하세요.
@@ -147,6 +154,18 @@ Xquik의 X Follower Scraper는 팔로워, 팔로잉, 리스트 & 커뮤니티의
 
 `relation`은 모든 사용자 아이디에서 무엇을 스크랩할지 정합니다. `followers`,
 `following`, `verified_followers` 중 하나를 쓰세요.
+
+사용자 ID만 필요하면 `follower_ids`나 `following_ids`를 쓰세요. 각 행에는 사용자
+ID 1개, 원본 대상 & 관계가 들어 있고, 페이지 1개에는 ID가 최대 5,000개
+들어갑니다. 프로필 필터에는 프로필 필드가 필요하므로 이 2개 관계에서는 비워
+두세요.
+
+회사의 직원 & 제품처럼 조직이 제휴 계정으로 등록한 계정을 받으려면
+`affiliates`를 쓰세요. 각 행은 전체 프로필입니다. 제휴 계정이 없는 계정은 행을
+반환하지 않습니다.
+
+계정이 구독하는 크리에이터를 받으려면 `subscriptions`를 쓰세요. 구독을 숨긴
+계정은 행을 반환하지 않습니다.
 
 같은 입력에서 `username`, `usernames` & `user_names`도 별칭으로 쓸 수 있습니다.
 
@@ -226,28 +245,32 @@ Xquik의 X Follower Scraper는 팔로워, 팔로잉, 리스트 & 커뮤니티의
 출력에는 고유한 프로필마다 행이 1개씩 있습니다. 겹치는 프로필에는
 `sourceTargets`, `sourceRelations`, `sourceUrls`, `sourceTargetKeys` &
 `overlapCount`가 들어갑니다. `overlapCount`로 정렬하거나 행을 CSV로 내보내세요.
-모든 대상이 행을 추가할 수 있도록 `maxItems`를 넉넉하게 두세요. 계정마다 얼마나
-깊이 읽을지는 `maxItemsPerTarget`으로 정하세요.
+행은 대상 순서를 따릅니다. 모든 대상이 행을 추가할 수 있도록 `maxItems`를
+넉넉하게 두세요. `maxItems` 때문에 실행이 일찍 끝나면 남는 프로필이 실행마다
+달라질 수 있습니다. 계정마다 얼마나 깊이 읽을지는 `maxItemsPerTarget`으로
+정하세요.
 
 ### 지원하는 URL 형식
 
-| URL                                         | 관계                                    |
-| ------------------------------------------- | --------------------------------------- |
-| `https://x.com/<handle>/followers`          | `followers`                             |
-| `https://x.com/<handle>/verified_followers` | `verified_followers`                    |
-| `https://x.com/<handle>/following`          | `following`                             |
-| `https://x.com/<handle>`                    | 기본 `relation`(설정하지 않으면 followers) |
-| `https://x.com/i/lists/<id>/members`        | `list_members`                          |
-| `https://x.com/i/lists/<id>/followers`      | `list_followers`                        |
-| `https://x.com/i/lists/<id>`                | `list_members`                          |
-| `https://x.com/i/communities/<id>/members`  | `community_members`                     |
-| `https://x.com/i/communities/<id>`          | `community_members`                     |
-| `<handle>/followers`                        | `followers`                             |
-| `<handle>/following`                        | `following`                             |
-| `<handle>/verified_followers`               | `verified_followers`                    |
-| `lists/<id>/members`                        | `list_members`                          |
-| `lists/<id>/followers`                      | `list_followers`                        |
-| `communities/<id>/members`                  | `community_members`                     |
+| URL                                         | 관계                           |
+| ------------------------------------------- | ------------------------------ |
+| `https://x.com/<handle>/followers`          | `followers`                    |
+| `https://x.com/<handle>/verified_followers` | `verified_followers`           |
+| `https://x.com/<handle>/following`          | `following`                    |
+| `https://x.com/<handle>/affiliates`         | `affiliates`                   |
+| `https://x.com/<handle>`                    | `relation`, 없으면 `followers` |
+| `https://x.com/i/lists/<id>/members`        | `list_members`                 |
+| `https://x.com/i/lists/<id>/followers`      | `list_followers`               |
+| `https://x.com/i/lists/<id>`                | `list_members`                 |
+| `https://x.com/i/communities/<id>/members`  | `community_members`            |
+| `https://x.com/i/communities/<id>`          | `community_members`            |
+| `<handle>/followers`                        | `followers`                    |
+| `<handle>/following`                        | `following`                    |
+| `<handle>/verified_followers`               | `verified_followers`           |
+| `<handle>/affiliates`                       | `affiliates`                   |
+| `lists/<id>/members`                        | `list_members`                 |
+| `lists/<id>/followers`                      | `list_followers`               |
+| `communities/<id>/members`                  | `community_members`            |
 
 `twitter.com` & `mobile.twitter.com` URL도 어디서나 작동합니다. `x.com/nasa`처럼
 `https://`가 없는 URL도 됩니다.
@@ -278,8 +301,8 @@ $0.00015입니다. Apify 플랫폼 사용료는 Apify가 따로 청구합니다.
 데이터 행 1개마다 한 번 과금합니다. 별도의 Xquik 구독은 필요 없고, 시작 요금도
 없습니다. 시작, 대상 & 관계 선택에도 별도의 쿼리 요금이 붙지 않습니다.
 
-한 실행으로 여러 대상을 읽을 수 있습니다. 상한, 중복 제거, 원본 표시 & 과금은
-모든 대상에서 정확하게 유지됩니다.
+한 실행으로 여러 대상을 읽을 수 있습니다. 상한, 중복 제거 & 과금은 모든 대상에서
+정확하게 유지됩니다.
 
 - 필터는 프로필이 데이터셋에 들어가기 전에 실행되므로, 필터에서 빠진 행에는
   비용이 없습니다.
@@ -302,31 +325,57 @@ $0.00015입니다. Apify 플랫폼 사용료는 Apify가 따로 청구합니다.
 ## 벤치마크
 
 Xquik의 X Follower Scraper는 비용 & 속도에서 다른 팔로워 Actor 9개를 앞섰습니다.
-이 Actor의 중앙값 행(`outputMode: "full"`)에는 필드가 38개 있었고, 다른 Actor
-중앙값의 2.5배였습니다.
+이 Actor의 중앙값 full 행에는 필드가 38개 있었고, 다른 Actor 중앙값의
+2.5배였습니다.
 
-| Actor                                                  | 유용한 프로필 | 유용한 프로필당 비용 | 초당 유용한 프로필 | 행당 필드 수 | 공개 실행                                                                                                                                                                                         |
-| ------------------------------------------------------ | ------------: | -------------------: | -----------------: | -----------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| xquik/x-follower-scraper                               |         1,000 |            $0.000155 |              100.0 |           38 | [실행 보기](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)                                                                                                                                |
-| xquik/x-follower-scraper                               |         1,000 |            $0.000155 |               77.9 |           38 | [실행 보기](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)                                                                                                                                |
-| b2b_leads/X-Real-Time-Data                             |           286 |            $0.000388 |                3.1 |           21 | [실행 보기](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                                |
-| kaitoeasyapi/premium-x-follower-scraper-following-data |           356 |            $0.000506 |               21.9 |           50 | [실행 보기](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                                |
-| api-ninja/x-twitter-followers-scraper                  |           350 |            $0.000809 |                7.0 |            8 | [실행 보기](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                                |
-| altimis/scweet                                         |           332 |            $0.000922 |                1.1 |           21 | [실행 보기](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)                                                                                                                                |
-| apidojo/twitter-user-scraper                           |           323 |            $0.001160 |                7.3 |           25 | [실행 보기](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)                                                                                                                                |
-| atomus/twitter-scraper                                 |           323 |            $0.001272 |                6.2 |           13 | [실행 보기](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)                                                                                                                                |
-| practicaltools/cheap-simple-twitter-api                |           283 |            $0.002036 |                6.5 |            4 | [실행 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb), [실행 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK), [실행 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX) |
-| maximedupre/twitter-scraper                            |           320 |            $0.002192 |                2.1 |           15 | [실행 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [실행 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [실행 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
-| seemuapps/x-followers-following-scraper                |           286 |            $0.003504 |                3.9 |            9 | [실행 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [실행 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [실행 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
+- `xquik/x-follower-scraper`: 유용한 프로필 1,000개, 유용한 프로필당 $0.000155,
+  초당 100.0개 & 행당 필드 38개.
+  [실행 보기](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
+- `xquik/x-follower-scraper`: 유용한 프로필 1,000개, 유용한 프로필당 $0.000155,
+  초당 77.9개 & 행당 필드 38개.
+  [실행 보기](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
+- `b2b_leads/X-Real-Time-Data`: 유용한 프로필 286개, 유용한 프로필당 $0.000388,
+  초당 3.1개 & 행당 필드 21개.
+  [실행 보기](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
+- `kaitoeasyapi/premium-x-follower-scraper-following-data`: 유용한 프로필 356개,
+  유용한 프로필당 $0.000506, 초당 21.9개 & 행당 필드 50개.
+  [실행 보기](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
+- `api-ninja/x-twitter-followers-scraper`: 유용한 프로필 350개, 유용한 프로필당
+  $0.000809, 초당 7.0개 & 행당 필드 8개.
+  [실행 보기](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
+- `altimis/scweet`: 유용한 프로필 332개, 유용한 프로필당 $0.000922, 초당 1.1개 &
+  행당 필드 21개.
+  [실행 보기](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
+- `apidojo/twitter-user-scraper`: 유용한 프로필 323개, 유용한 프로필당
+  $0.001160, 초당 7.3개 & 행당 필드 25개.
+  [실행 보기](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
+- `atomus/twitter-scraper`: 유용한 프로필 323개, 유용한 프로필당 $0.001272, 초당
+  6.2개 & 행당 필드 13개.
+  [실행 보기](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
+- `practicaltools/cheap-simple-twitter-api`: 유용한 프로필 283개, 유용한
+  프로필당 $0.002036, 초당 6.5개 & 행당 필드 4개.
+  [실행 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb),
+  [실행 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK),
+  [실행 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
+- `maximedupre/twitter-scraper`: 유용한 프로필 320개, 유용한 프로필당 $0.002192,
+  초당 2.1개 & 행당 필드 15개.
+  [실행 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs),
+  [실행 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39),
+  [실행 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
+- `seemuapps/x-followers-following-scraper`: 유용한 프로필 286개, 유용한
+  프로필당 $0.003504, 초당 3.9개 & 행당 필드 9개.
+  [실행 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj),
+  [실행 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ),
+  [실행 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
 
 모든 Actor는 NASA, SpaceX & esa의 팔로워를 읽었습니다. 다른 Actor는
 2026-09-28에, Xquik 실행은 2026-09-29에 `outputMode: "full"`로 실행했습니다.
-모든 실행은 Bronze 등급을 사용했습니다. 유용한 프로필은 고유하고, 생성된 지 30일 이상이며,
-팔로워 1명 & 게시물 1개 이상이 있습니다. 비용은 유용한 프로필 1개당 고객의
-총지출입니다. 저희 비용에는 고객이 내는 Apify 사용량이 포함됩니다. 실행이 3개인
-행은 그 합계입니다. 행당 필드 수는 비어 있지 않은 필드 수의 중앙값이며, 중첩
-필드도 포함합니다. 목록은 필드 1개로 셉니다. 실행을 열어 입력, 로그 & 데이터셋을
-확인하세요.
+모든 실행은 Bronze 등급을 사용했습니다. 유용한 프로필은 고유하고, 생성된 지 30일
+이상이며, 팔로워 1명 & 게시물 1개 이상이 있습니다. 비용은 유용한 프로필 1개당
+고객의 총지출입니다. 저희 비용에는 고객이 내는 Apify 사용량이 포함됩니다. 실행이
+3개인 행은 그 합계입니다. 행당 필드 수는 비어 있지 않은 필드 수의 중앙값이며,
+중첩 필드도 포함합니다. 목록은 필드 1개로 셉니다. 실행을 열어 입력, 로그 &
+데이터셋을 확인하세요.
 
 ## 입력
 
@@ -341,10 +390,10 @@ Input 탭에 모든 옵션이 있습니다. `startUrls`, `twitterHandles`, `user
 - 인증된 프로필을 받으려면 `https://x.com/<handle>/verified_followers`를 Start
   URLs에 붙여넣으세요.
 - 리스트 멤버를 점검하려면 리스트 URL을 Start URLs에 붙여넣으세요.
-- 사용자 아이디를 2개 이상 추가하세요. 겹치는 프로필은 첫 번째 대상 아래에 한
-  번만 나옵니다. 일치한 대상을 모두 담은 행 1개를 남기려면
-  `dedupeMode: "merge"`를 쓰세요. 대상마다 행 1개를 남기려면
-  `dedupeAcrossTargets: false`를 설정하세요.
+- 사용자 아이디를 2개 이상 추가하세요. 겹치는 프로필은 그 프로필을 먼저 반환한
+  대상 아래에 한 번만 나옵니다. 그 대상은 실행마다 달라질 수 있습니다. 일치한
+  대상을 모두 담은 안정적인 행 1개를 받으려면 `dedupeMode: "merge"`를 쓰세요.
+  대상마다 행 1개를 남기려면 `dedupeAcrossTargets: false`를 설정하세요.
 
 ### Console & API 입력
 
@@ -370,18 +419,19 @@ Console 양식에는 다음 컨트롤이 있습니다.
 Actor가 쓰는 필드 이름을 읽고 자체 필드로 연결합니다. 문서상 기본값은 계속 표준
 이름입니다. 별칭을 써도 필드가 빠지지 않고 요금도 달라지지 않습니다.
 
-| 이미 쓰는 필드                                                                        | Xquik이 읽는 필드 |
-| ------------------------------------------------------------------------------------- | ----------------- |
-| `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`, `screenNames` | `twitterHandles`  |
-| 문자열 1개인 `username`, `handle`, `screenName`                                       | `twitterHandles`  |
-| `twitterUserIds`, `user_ids`, `userIdList`                                            | `userIds`         |
-| 문자열 1개인 `user_id`, `userId`                                                      | `userIds`         |
-| `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`                          | `startUrls`       |
-| 문자열 1개인 `profileUrl`                                                             | `startUrls`       |
-| `getFollowers`, `getFollowing`                                                        | `relations`       |
-| `followers`나 `following` 값을 가진 `type`                                            | `relation`        |
-| `maxResults`, `max_results`, `resultsLimit`, `count`                                  | `maxItems`        |
-| `scrapeAllResults`                                                                    | 대상별 상한 없음  |
+각 줄은 이미 쓰는 필드를 먼저 적고, 이어서 연결되는 필드를 적습니다.
+
+- `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`,
+  `screenNames`: `twitterHandles`
+- 문자열 1개인 `username`, `handle`, `screenName`: `twitterHandles`
+- `twitterUserIds`, `user_ids`, `userIdList`: `userIds`
+- 문자열 1개인 `user_id`, `userId`: `userIds`
+- `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`: `startUrls`
+- 문자열 1개인 `profileUrl`: `startUrls`
+- `getFollowers`, `getFollowing`: `relations`
+- `followers`나 `following` 값을 가진 `type`: `relation`
+- `maxResults`, `max_results`, `resultsLimit`, `count`: `maxItems`
+- `scrapeAllResults`: 대상별 상한 없음
 
 이름 2개는 여기서 뜻이 다릅니다. 일부 Actor에서 `maxFollowers` &
 `maxFollowing`은 실행이 반환하는 행 수의 상한입니다. Xquik의 X Follower
@@ -488,9 +538,10 @@ Xquik의 X Follower Scraper는 결과가 없거나, 일부만 나왔거나, 중�
 실행 상태는 실행이 멈춘 이유를 알려 줍니다. 과금된 결과, 건너뛴 중복 & 읽은 대상
 수도 셉니다. 상태는 실행이 일찍 멈춘 원인을 모두 알려 줍니다. `stopCauses`는
 원인마다 `message`, `retryable` & `nextAction`을 따로 담아 나열합니다. 원인은
-`target_not_found`, `target_protected`, `target_failed` &
-`deadline_reached`입니다. 찾을 수 없는 계정은 다른 원인으로 실행이 멈췄을 때만
-목록에 들어갑니다. 원인 중 하나라도 `retryable`이면 실행도 `retryable`입니다.
+`target_not_found`, `target_suspended`, `target_protected`, `target_failed` &
+`deadline_reached`입니다. `target_suspended`는 X가 정지한 계정을 알려 줍니다.
+찾을 수 없거나 정지된 계정은 다른 원인으로 실행이 멈췄을 때만 목록에 들어갑니다.
+원인 중 하나라도 재시도할 수 있으면 실행도 `retryable`입니다.
 
 X는 비공개 계정의 목록을 공개하지 않습니다. 그런 대상은 무료 진단 1개에
 `target_protected`로 기록되고, 실행은 나머지 대상을 읽습니다.
@@ -580,8 +631,7 @@ Apify 기본 제한 시간은 `0`이므로 실행에 시간 제한이 없습니�
 
 ## 스크랩 이상이 필요하신가요?
 
-Xquik은 대시보드 도구 47개, REST 작업 129개, 서명된 웹훅 & MCP 서버도
-제공합니다.
+Xquik은 대시보드 도구 47개, REST API, 서명된 웹훅 & MCP 서버도 제공합니다.
 
 - [API 문서](https://docs.xquik.com/introduction): REST API 가이드
 - [Followers API](https://docs.xquik.com/api-reference/x/followers): 계정의
@@ -596,6 +646,8 @@ Xquik은 대시보드 도구 47개, REST 작업 129개, 서명된 웹훅 & MCP �
   이벤트 받기
 
 ## 자주 묻는 질문
+
+자주 묻는 질문에 먼저 답하고, 이어서 도움받을 곳을 안내합니다.
 
 ### X API 키가 필요한가요?
 
@@ -612,7 +664,7 @@ Xquik의 X Follower Scraper는 대상 규모, 필터 & X 가용성에 따라 속
 달라집니다. [벤치마크](#벤치마크) 실행 2개에서는 초당 유용한 프로필이 77.9개 &
 100.0개였습니다.
 
-### 실행 결과가 `maxItems`보다 적은 이유는 무엇인가요?
+### 실행 결과가 한도보다 적은 이유는 무엇인가요?
 
 `minFollowers`, `verifiedOnly` & `bioContains` 같은 필터는 기록 전에 적용됩니다.
 결과를 더 받으려면 필터를 완화하세요. Xquik의 X Follower Scraper는 대상 사이의

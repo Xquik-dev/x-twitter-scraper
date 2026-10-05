@@ -15,27 +15,30 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">从 6:07 开始，观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具。</a>
 </td></tr></table>
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X List Scraper 收集列表帖子、成员和关注者。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付、不重复且符合过滤条件的结果收费。
+Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X List Scraper 收集列表详情、帖子、成员和关注者，并按关键词查找列表。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付、不重复且符合过滤条件的结果收费。
 
-从 X 列表 URL 或数字列表 ID 抓取帖子、成员和关注者。费用为**每个已交付行 $0.00015**，Apify 另行收取平台使用费。无需 X API 密钥，也无需登录。
+从 X 列表 URL 或数字列表 ID 抓取详情、帖子、成员和关注者，或用搜索词查找公开列表。费用为**每个已交付行 $0.00015**，Apify 另行收取平台使用费。无需 X API 密钥，也无需登录。
 
 > Xquik 是独立的第三方服务，与 X Corp 无关联。“Twitter”和“X”是 X Corp 的商标。
 
 ## 列表数据与过滤条件
 
+- 列表详情：名称、描述、成员数和关注者数、创建时间、横幅和所有者的公开个人资料。
 - 列表帖子，包含正文、作者、指标、媒体和时间戳。
 - 列表成员和列表关注者。
+- 按关键词搜索列表。每行是 1 个列表，附带所有者、成员数和关注者数。
 - 可选择包含列表帖子中的回复。
 - 可按日期、Unix 时间、语言、媒体、互动量、认证状态和个人资料过滤。
+- 通过用户名或个人资料 URL，获取一个账号创建或被加入的公开列表。
 - 1 次运行可读取多个列表和多种资源类型。
-- 全局上限，以及每种列表资源各自的上限。
+- 全局上限，以及每种列表资源或每个搜索词各自的上限。
 - Apify 迁移后，运行会继续。
 - 计费前去除重复项。
 
 ## 如何抓取 X 列表
 
 1. 在 Apify Console 中打开 Xquik 的 X List Scraper。
-2. 把列表 URL 粘贴到 `startUrls`，或把数字列表 ID 粘贴到 `listIds`。
+2. 把列表 URL 粘贴到 `startUrls`，或把数字列表 ID 粘贴到 `listIds`。要查找列表，改为把关键词添加到 `searchTerms`。
 3. 选择 `resources`，并添加 `sinceDate` 或 `minLikes` 等过滤条件。
 4. 用 `maxItems` 设置交付行数的上限，然后点击 Start。
 5. 以 JSON、CSV 或 Excel 格式下载数据集，或使用 Apify API。
@@ -56,19 +59,55 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 ```json
 {
   "listIds": ["1748648376080666720"],
-  "resources": ["tweets", "members", "followers"],
+  "resources": ["info", "tweets", "members", "followers"],
   "includeReplies": false,
   "maxItems": 10000
 }
+```
+
+要按关键词查找列表，请发送搜索词：
+
+```json
+{ "searchTerms": ["space news", "climate science"], "maxItemsPerTarget": 50 }
 ```
 
 顺利完成的小型运行会跳过 `run-report`，节省 Apify 用量。开启 `alwaysSaveRunRecords` 后，每次运行都会写入报告。
 
 ## 输出
 
-每行的 `resultType` 为 `listTweet`、`listMember` 或 `listFollower`。`sourceTarget` 保存输入的列表 ID。行的主体沿用 Xquik 稳定的帖子或个人资料响应结构。
+每行的 `resultType` 为 `list`、`listTweet`、`listMember` 或 `listFollower`。`sourceTarget` 保存输入的列表 ID，或找到某个 `list` 行的搜索词。`list` 行保存一个列表的详情，每个列表 1 行。其他行沿用 Xquik 稳定的帖子或个人资料响应结构。
 
-示例使用样例值，实际结果来自实时数据。一行列表成员数据如下：
+### 账号的列表
+
+把用户名添加到 `twitterHandles`，或把个人资料 URL 添加到 `startUrls`，就能列出每个账号的公开列表：
+
+```json
+{ "twitterHandles": ["verge"], "accountLists": ["created", "memberships"] }
+```
+
+`created` 列出该账号创建的列表，`memberships` 列出包含该账号的列表。每个列表是 1 行，`resultType` 为 `createdList` 或 `listMembership`，`sourceTarget` 为该用户名，并带有 `id`、`name`、`description`、`memberCount`、`subscriberCount`、`createdAt`、`bannerUrl` 和 `owner` 个人资料。X 只向所有者显示私密列表，所以私密列表不会出现。
+
+每个账号创建的列表排在它被加入的列表之前。该 Actor 并行读取多个账号，所以不同账号的行会按读取顺序到达。请按 `sourceTarget` 分组。
+
+1 行对应 1 个账号和 1 个列表。你的 2 个账号共有的列表是 2 行，每个账号下各 1 行。每行都会收费。`dedupeAcrossTargets` 从不移除这些行。
+
+示例使用样例值，实际结果来自实时数据。一行列表详情数据如下：
+
+```json
+{
+  "resultType": "list",
+  "sourceTarget": "4143408",
+  "id": "4143408",
+  "name": "NASA Centers",
+  "description": "NASA has 10 centers http://www.nasa.gov/about/sites",
+  "memberCount": 11,
+  "subscriberCount": 859,
+  "createdAt": "2009-12-02T22:41:02.000Z",
+  "owner": { "username": "NASA", "name": "NASA" }
+}
+```
+
+一行列表成员数据如下：
 
 ```json
 {
@@ -78,6 +117,22 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
   "name": "Sample User",
   "followers": 1200,
   "verified": false
+}
+```
+
+来自搜索词的 `list` 行如下：
+
+```json
+{
+  "resultType": "list",
+  "sourceTarget": "space news",
+  "id": "1000000000000000001",
+  "name": "Sample Space News",
+  "description": "Sample accounts that post space news.",
+  "url": "https://x.com/i/lists/1000000000000000001",
+  "memberCount": 35,
+  "subscriberCount": 76,
+  "owner": { "username": "sample_user", "name": "Sample User" }
 }
 ```
 
@@ -95,7 +150,7 @@ Xquik 的 X List Scraper 在 1 次运行中读取多个列表和多种资源。�
 
 提取中断时，会写入一条免费的 `partial` 诊断。已获取的结果不受影响。重试前，先查看 `availableResults`、`failedTargets`、`retryable` 和 `nextAction`。Actor 成功退出只说明结果已交付，不代表提取完整。
 
-运行状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_failed`、`pagination_safety_limit` 和 `deadline_reached`。只有在其他原因让运行停止时，缺失的目标才会列入 `stopCauses`。只要有一个原因可重试，整个运行就是 `retryable`。
+运行状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_failed`、`pagination_safety_limit` 和 `deadline_reached`。只有在其他原因让运行停止时，缺失的目标才会一并列出。只要有一个原因可重试，整个运行就是 `retryable`。
 
 ## 相关 Xquik Actor
 
@@ -122,6 +177,8 @@ Xquik 的 X List Scraper 在 1 次运行中读取多个列表和多种资源。�
 
 ## 常见问题
 
+先解答常见问题，再说明在哪里获取帮助。
+
 ### 我需要 X API 密钥或登录吗？
 
 不需要。Xquik 的 X List Scraper 不需要 X API 密钥、登录或任何凭据。
@@ -136,7 +193,7 @@ Xquik 的 X List Scraper 请求的是公开的 X 字段。结果可能包含个�
 
 ### 可以使用 API、定时调度和集成吗？
 
-可以。你可以从 50 个公开任务或 129 个 Xquik REST 操作中选择。[API 标签页](https://apify.com/xquik/x-list-scraper/api) 提供 Python、JavaScript 和 cURL 示例。Apify [定时调度](https://docs.apify.com/platform/schedules) 可以按 cron 运行 Xquik 的 X List Scraper。Agent 可以通过 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) 调用它。除非需要旧构建，否则请使用 `latest`。
+可以。你可以从 50 个公开任务或 Xquik REST API 中选择。[API 标签页](https://apify.com/xquik/x-list-scraper/api) 提供 Python、JavaScript 和 cURL 示例。Apify [定时调度](https://docs.apify.com/platform/schedules) 可以按 cron 运行 Xquik 的 X List Scraper。Agent 可以通过 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) 调用它。除非需要旧构建，否则请使用 `latest`。
 
 ### 在哪里获取帮助？
 

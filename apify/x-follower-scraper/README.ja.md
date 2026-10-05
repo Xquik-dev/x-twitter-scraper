@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">FramerがXquikのスクレイパーをClaude Code、Codex、Cursorなどと一緒に使う様子を6:07から視聴できます。</a>
 </td></tr></table>
 
-Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX Follower Scraperは、フォロワー、フォロー中、リストのメンバー、購読者、コミュニティのメンバーを収集します。公開ベンチマークで、10のフォロワー用Actorの中で最も安く、最も速いことが実証されています。[下のベンチマーク](#ベンチマーク)のとおり、1行あたりのフィールド数（`outputMode: "full"`）は他のActorの中央値の2.5倍です。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。
+Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX Follower Scraperは、フォロワー、フォロー中、リストのメンバー、購読者、コミュニティのメンバーを収集します。公開ベンチマークで、10のフォロワー用Actorの中で最も安く、最も速いことが実証されています。[下のベンチマーク](#ベンチマーク)のとおり、フル出力の行のフィールド数は、他のActorの中央値の2.5倍です。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。
 
 X(Twitter)のフォロワー、フォロー中、認証済みフォロワー、リストのメンバー、リストの購読者、コミュニティのメンバーをスクレイピングします。XquikのX Follower Scraperの料金は、**すべてのApifyプランで配信されたプロフィール1件あたり$0.00015から**です。Apifyのプラットフォーム利用料は別途かかります。Xへのログインは不要で、Xquikの開始料金もクエリ料金もかかりません。
 
@@ -69,13 +69,15 @@ XquikのX Follower Scraperは、フォロワー、フォロー中、リスト、
 
 `raw` フィールドを加えるには、`outputMode: "raw"` か `includeRaw: true` を設定します。このフィールドには、元のプロフィールの安全なコピーが入ります。デフォルトはコンパクトモードです。
 
+1行あたりのデータを最も多くするには、`outputMode: "full"` を設定します。どの行も、Xが送る場合は、一覧のフィールドを最大13個残します。`listedCount`、`defaultProfileImage`、`advertiserAccountType` などです。フル出力の行は、それらを末尾に置きます。コンパクトな行は小さいままで、保存のコストも低くなります。
+
 `verifiedOnly` は、公開のBlue認証と従来の認証のプロフィールを通します。元のフラグが食い違う場合は、認証済みを示すフラグを優先します。
 
 行には、閲覧者だけに見える状態は入りません。Xquikは、フォロー、ブロック、ミュート、DM、通知などの閲覧者のフラグを削除します。raw出力からも削除します。
 
 ## ユースケース
 
-- プロフィールごとにより多くのフィールドを使い、リードを補完し、調査用データセットを作る。当社の中央値の行（`outputMode: "full"`）は、2026-09-29に38個のフィールドがありました。これは他の9個のActorの中央値の2.5倍です。
+- プロフィールごとにより多くのフィールドを使って、見込み客の情報を補完し、調査用データセットを作れます。当社のフル出力の行は、2026-09-29時点でフィールド数の中央値が38でした。これは他の9個のActorの中央値の2.5倍です。
 - 競合のフォロワーをエクスポートして、見込み客を調べられます。
 - 自社アカウント、競合、著名人のオーディエンスを比べられます。
 - フォロワー数と認証で絞り込み、条件に合うプロフィールを見つけられます。
@@ -84,6 +86,8 @@ XquikのX Follower Scraperは、フォロワー、フォロー中、リスト、
 - 自己紹介のキーワード、所在地、プロフィールの種類で、フォロワー層を分けられます。
 
 ## X Follower Scraperでフォロワーデータをスクレイピングする方法
+
+以下の例はどれも完全な入力です。自分のデータに合うものを選んでください。
 
 1. Apify ConsoleでXquikのX Follower Scraperを開きます。
 2. プロフィール、リスト、コミュニティのURL、Xのユーザー名、数値IDを追加します。
@@ -124,6 +128,12 @@ XquikのX Follower Scraperは、フォロワー、フォロー中、リスト、
 ```
 
 `relation` で、各ユーザー名について何をスクレイピングするかを決めます。`followers`、`following`、`verified_followers` のいずれかを使います。
+
+ユーザーIDだけが必要なら、`follower_ids` か `following_ids` を使います。各行には、ユーザーID 1件、元の対象、関係が入ります。1ページには最大5,000件のIDが入ります。プロフィールのフィルターにはプロフィールのフィールドが必要なので、この2つの関係では空のままにしてください。
+
+組織が関連アカウントとして挙げているアカウントには、`affiliates` を使います。企業のスタッフや製品などです。各行は完全なプロフィールです。関連アカウントのないアカウントは、行を返しません。
+
+アカウントが購読しているクリエイターには、`subscriptions` を使います。購読を非公開にしているアカウントは、行を返しません。
 
 同じ入力は、別名の `username`、`usernames`、`user_names` も受け付けます。
 
@@ -195,27 +205,29 @@ XquikのX Follower Scraperは、フォロワー、フォロー中、リスト、
 }
 ```
 
-出力は、重複のないプロフィールごとに1行です。共通のプロフィールには、`sourceTargets`、`sourceRelations`、`sourceUrls`、`sourceTargetKeys`、`overlapCount` が入ります。`overlapCount` で並べ替えたり、行をCSVにエクスポートしたりできます。すべての対象が行を追加できるよう、`maxItems` は十分に大きくしてください。アカウントごとの取得件数は `maxItemsPerTarget` で決めます。
+出力は、重複のないプロフィールごとに1行です。共通のプロフィールには、`sourceTargets`、`sourceRelations`、`sourceUrls`、`sourceTargetKeys`、`overlapCount` が入ります。`overlapCount` で並べ替えたり、行をCSVにエクスポートしたりできます。行は対象の順に並びます。すべての対象が行を追加できるよう、`maxItems` は十分に大きくしてください。`maxItems` で実行が早く終わると、残るプロフィールは実行ごとに変わることがあります。アカウントごとの取得件数は `maxItemsPerTarget` で決めます。
 
 ### 対応するURLの形式
 
-| URL                                         | 関係                                    |
-| ------------------------------------------- | --------------------------------------- |
-| `https://x.com/<handle>/followers`          | `followers`                             |
-| `https://x.com/<handle>/verified_followers` | `verified_followers`                    |
-| `https://x.com/<handle>/following`          | `following`                             |
-| `https://x.com/<handle>`                    | デフォルトの `relation`（未設定ならfollowers） |
-| `https://x.com/i/lists/<id>/members`        | `list_members`                          |
-| `https://x.com/i/lists/<id>/followers`      | `list_followers`                        |
-| `https://x.com/i/lists/<id>`                | `list_members`                          |
-| `https://x.com/i/communities/<id>/members`  | `community_members`                     |
-| `https://x.com/i/communities/<id>`          | `community_members`                     |
-| `<handle>/followers`                        | `followers`                             |
-| `<handle>/following`                        | `following`                             |
-| `<handle>/verified_followers`               | `verified_followers`                    |
-| `lists/<id>/members`                        | `list_members`                          |
-| `lists/<id>/followers`                      | `list_followers`                        |
-| `communities/<id>/members`                  | `community_members`                     |
+| URL                                         | 関係                                 |
+| ------------------------------------------- | ------------------------------------ |
+| `https://x.com/<handle>/followers`          | `followers`                          |
+| `https://x.com/<handle>/verified_followers` | `verified_followers`                 |
+| `https://x.com/<handle>/following`          | `following`                          |
+| `https://x.com/<handle>/affiliates`         | `affiliates`                         |
+| `https://x.com/<handle>`                    | `relation`（未設定なら `followers`） |
+| `https://x.com/i/lists/<id>/members`        | `list_members`                       |
+| `https://x.com/i/lists/<id>/followers`      | `list_followers`                     |
+| `https://x.com/i/lists/<id>`                | `list_members`                       |
+| `https://x.com/i/communities/<id>/members`  | `community_members`                  |
+| `https://x.com/i/communities/<id>`          | `community_members`                  |
+| `<handle>/followers`                        | `followers`                          |
+| `<handle>/following`                        | `following`                          |
+| `<handle>/verified_followers`               | `verified_followers`                 |
+| `<handle>/affiliates`                       | `affiliates`                         |
+| `lists/<id>/members`                        | `list_members`                       |
+| `lists/<id>/followers`                      | `list_followers`                     |
+| `communities/<id>/members`                  | `community_members`                  |
 
 `twitter.com` と `mobile.twitter.com` のURLも、すべての箇所で使えます。`x.com/nasa` のように `https://` のないURLも使えます。
 
@@ -240,7 +252,7 @@ XquikのX Follower Scraperは、フォロワー、フォロー中、リスト、
 
 XquikのX Follower Scraperは、すべてのApifyプランで配信されたプロフィール1件につき$0.00015です。Apifyのプラットフォーム利用料は別途かかります。Xquikの課金は、配信したデータ行1件につき1回です。Xquikのサブスクリプションは別途必要なく、開始料金もかかりません。開始、対象、関係の選択に、別のクエリ料金はかかりません。
 
-1回の実行で多数の対象を読み取れます。上限、重複排除、帰属情報、課金は、すべての対象で正確に保たれます。
+1回の実行で多数の対象を読み取れます。上限、重複排除、課金は、すべての対象で正確に保たれます。
 
 - フィルターはプロフィールがデータセットに入る前に適用されるので、除かれた行に料金はかかりません。
 - 数値のフィルターは `minFollowers`、`maxFollowers`、`minFollowing`、`maxFollowing`、`minStatuses`、`maxStatuses`、`minAccountAgeDays` です。
@@ -254,23 +266,21 @@ XquikのX Follower Scraperは、すべてのApifyプランで配信されたプ�
 
 ## ベンチマーク
 
-XquikのX Follower Scraperは、コストと速度で他の9つのフォロワー用Actorを上回りました。1行あたりのフィールド数の中央値（`outputMode: "full"`）は38で、他のActorの中央値の2.5倍でした。
+XquikのX Follower Scraperは、コストと速度で他の9つのフォロワー用Actorを上回りました。フル出力の行のフィールド数の中央値は38で、他のActorの中央値の2.5倍でした。
 
-| Actor                                                  | 有効なプロフィール | 有効なプロフィール1件あたりのコスト | 1秒あたりの有効なプロフィール | 1行あたりのフィールド数 | 公開された実行                                                                                                                                                                                 |
-| ------------------------------------------------------ | -----------------: | ----------------------------------: | ----------------------------: | ----------------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| xquik/x-follower-scraper                               |              1,000 |                           $0.000155 |                         100.0 |                      38 | [実行を見る](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)                                                                                                                            |
-| xquik/x-follower-scraper                               |              1,000 |                           $0.000155 |                          77.9 |                      38 | [実行を見る](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)                                                                                                                            |
-| b2b_leads/X-Real-Time-Data                             |                286 |                           $0.000388 |                           3.1 |                      21 | [実行を見る](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                            |
-| kaitoeasyapi/premium-x-follower-scraper-following-data |                356 |                           $0.000506 |                          21.9 |                      50 | [実行を見る](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                            |
-| api-ninja/x-twitter-followers-scraper                  |                350 |                           $0.000809 |                           7.0 |                       8 | [実行を見る](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                            |
-| altimis/scweet                                         |                332 |                           $0.000922 |                           1.1 |                      21 | [実行を見る](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)                                                                                                                            |
-| apidojo/twitter-user-scraper                           |                323 |                           $0.001160 |                           7.3 |                      25 | [実行を見る](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)                                                                                                                            |
-| atomus/twitter-scraper                                 |                323 |                           $0.001272 |                           6.2 |                      13 | [実行を見る](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)                                                                                                                            |
-| practicaltools/cheap-simple-twitter-api                |                283 |                           $0.002036 |                           6.5 |                       4 | [実行1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb), [実行2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK), [実行3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX) |
-| maximedupre/twitter-scraper                            |                320 |                           $0.002192 |                           2.1 |                      15 | [実行1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [実行2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [実行3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
-| seemuapps/x-followers-following-scraper                |                286 |                           $0.003504 |                           3.9 |                       9 | [実行1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [実行2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [実行3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
+- `xquik/x-follower-scraper`: 有効なプロフィールは1,000件、有効なプロフィール1件あたり$0.000155、1秒あたり100.0件、1行あたり38フィールドです。[実行を見る](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
+- `xquik/x-follower-scraper`: 有効なプロフィールは1,000件、有効なプロフィール1件あたり$0.000155、1秒あたり77.9件、1行あたり38フィールドです。[実行を見る](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
+- `b2b_leads/X-Real-Time-Data`: 有効なプロフィールは286件、有効なプロフィール1件あたり$0.000388、1秒あたり3.1件、1行あたり21フィールドです。[実行を見る](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
+- `kaitoeasyapi/premium-x-follower-scraper-following-data`: 有効なプロフィールは356件、有効なプロフィール1件あたり$0.000506、1秒あたり21.9件、1行あたり50フィールドです。[実行を見る](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
+- `api-ninja/x-twitter-followers-scraper`: 有効なプロフィールは350件、有効なプロフィール1件あたり$0.000809、1秒あたり7.0件、1行あたり8フィールドです。[実行を見る](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
+- `altimis/scweet`: 有効なプロフィールは332件、有効なプロフィール1件あたり$0.000922、1秒あたり1.1件、1行あたり21フィールドです。[実行を見る](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
+- `apidojo/twitter-user-scraper`: 有効なプロフィールは323件、有効なプロフィール1件あたり$0.001160、1秒あたり7.3件、1行あたり25フィールドです。[実行を見る](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
+- `atomus/twitter-scraper`: 有効なプロフィールは323件、有効なプロフィール1件あたり$0.001272、1秒あたり6.2件、1行あたり13フィールドです。[実行を見る](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
+- `practicaltools/cheap-simple-twitter-api`: 有効なプロフィールは283件、有効なプロフィール1件あたり$0.002036、1秒あたり6.5件、1行あたり4フィールドです。[実行1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb)、[実行2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK)、[実行3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
+- `maximedupre/twitter-scraper`: 有効なプロフィールは320件、有効なプロフィール1件あたり$0.002192、1秒あたり2.1件、1行あたり15フィールドです。[実行1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs)、[実行2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39)、[実行3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
+- `seemuapps/x-followers-following-scraper`: 有効なプロフィールは286件、有効なプロフィール1件あたり$0.003504、1秒あたり3.9件、1行あたり9フィールドです。[実行1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj)、[実行2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ)、[実行3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
 
-各Actorは、NASA、SpaceX、esaのフォロワーを読み取りました。他のActorは2026-09-28に、Xquikの実行は2026-09-29に`outputMode: "full"`で実行しました。すべての実行でBronzeティアを使いました。有効なプロフィールとは、作成から30日以上で、フォロワーとポストが1件以上あるユニークなプロフィールです。コストは、有効なプロフィール1件あたりの顧客の総支払額です。当社のコストには、お客様が支払うApify使用料を含みます。3回の実行がある行は、それらを合計しています。1行あたりのフィールド数は、空でないフィールド数の中央値で、ネストされたフィールドも含みます。リストは1フィールドとして数えます。実行を開くと、入力、ログ、データセットを確認できます。
+各Actorは、NASA、SpaceX、esaのフォロワーを読み取りました。他のActorは2026-09-28に、Xquikの実行は2026-09-29に `outputMode: "full"` で実行しました。すべての実行でBronzeティアを使いました。有効なプロフィールとは、作成から30日以上で、フォロワーとポストが1件以上ある重複のないプロフィールです。コストは、有効なプロフィール1件あたりの顧客の総支払額です。当社のコストには、顧客が支払うApifyの利用料を含みます。3回の実行がある行は、それらを合計しています。1行あたりのフィールド数は、空でないフィールド数の中央値で、入れ子のフィールドも含みます。リストは1フィールドとして数えます。実行を開くと、入力、ログ、データセットを確認できます。
 
 ## 入力
 
@@ -281,7 +291,7 @@ Inputタブにすべてのオプションがあります。`startUrls`、`twitte
 - 競合のユーザー名を `twitterHandles` に追加し、`relation: "followers"` を指定します。
 - 認証済みのプロフィールを取得するには、`https://x.com/<handle>/verified_followers` をStart URLsに貼り付けます。
 - リストのメンバーを確認するには、リストのURLをStart URLsに貼り付けます。
-- ユーザー名を2つ以上追加します。共通のプロフィールは、最初の対象の下に1回だけ出力されます。一致したすべての対象を持つ1行を残すには、`dedupeMode: "merge"` を使います。対象ごとに1行を残すには、`dedupeAcrossTargets: false` を設定します。
+- ユーザー名を2つ以上追加します。共通のプロフィールは、それを最初に返した対象の下に1回だけ出力されます。その対象は実行ごとに変わることがあります。一致したすべての対象を持つ安定した1行を得るには、`dedupeMode: "merge"` を使います。対象ごとに1行を残すには、`dedupeAcrossTargets: false` を設定します。
 
 ### ConsoleとAPIの入力
 
@@ -299,18 +309,18 @@ Consoleのフォームには次のコントロールがあります。
 
 今使っている入力をそのまま貼り付けてください。XquikのX Follower Scraperは、他のXフォロワー用Actorのフィールド名を読み取ります。そして、自身のフィールドに対応付けます。ドキュメント上のデフォルトは、引き続き正規の名前です。別名のせいでフィールドが失われたり、料金が変わったりすることはありません。
 
-| すでに使っているフィールド                                                            | Xquikでの読み取り先 |
-| ------------------------------------------------------------------------------------- | ------------------- |
-| `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`, `screenNames` | `twitterHandles`    |
-| `username`, `handle`, `screenName`（1つの文字列として）                               | `twitterHandles`    |
-| `twitterUserIds`, `user_ids`, `userIdList`                                            | `userIds`           |
-| `user_id`, `userId`（1つの文字列として）                                              | `userIds`           |
-| `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`                          | `startUrls`         |
-| `profileUrl`（1つの文字列として）                                                     | `startUrls`         |
-| `getFollowers`, `getFollowing`                                                        | `relations`         |
-| `followers` か `following` を指定した `type`                                          | `relation`          |
-| `maxResults`, `max_results`, `resultsLimit`, `count`                                  | `maxItems`          |
-| `scrapeAllResults`                                                                    | 対象ごとの上限なし  |
+各項目は、すでに使っているフィールドを挙げ、その後に対応付け先のフィールドを示します。
+
+- `twitterHandles`、`usernames`、`user_names`、`handles`、`userNameList`、`screenNames`: `twitterHandles`
+- 1つの文字列としての `username`、`handle`、`screenName`: `twitterHandles`
+- `twitterUserIds`、`user_ids`、`userIdList`: `userIds`
+- 1つの文字列としての `user_id`、`userId`: `userIds`
+- `startUrls`、`urls`、`targets`、`profileUrls`、`accountUrls`: `startUrls`
+- 1つの文字列としての `profileUrl`: `startUrls`
+- `getFollowers`、`getFollowing`: `relations`
+- `followers` か `following` を指定した `type`: `relation`
+- `maxResults`、`max_results`、`resultsLimit`、`count`: `maxItems`
+- `scrapeAllResults`: 対象ごとの上限なし
 
 2つの名前は、ここでは意味が異なります。一部のActorでは、`maxFollowers` と `maxFollowing` は実行が返す行数の上限です。XquikのX Follower Scraperでは、フォロワー数とフォロー中の数でプロフィールを絞り込むフィルターです。行数の上限には `maxItems` を使ってください。このActorにはページという単位がないので、`maxPages` は `maxItems` に置き換えてください。
 
@@ -390,7 +400,7 @@ XquikのX Follower Scraperは、空の実行、部分的な実行、停止した
 
 中断された実行は、無料の `partial` 診断を書き込みます。配信済みの結果はデータセットに残ります。再試行する前に `availableResults`、`failedTargets`、`retryable`、`nextAction` を確認してください。
 
-実行ステータスは、実行が止まった理由を示します。課金された結果、スキップした重複、読み取った対象の数も数えます。ステータスは、早期停止の原因をすべて示します。`stopCauses` は各原因を挙げ、それぞれに `message`、`retryable`、`nextAction` を付けます。原因は `target_not_found`、`target_protected`、`target_failed`、`deadline_reached` です。存在しないアカウントが一覧に入るのは、別の原因で実行が止まった場合だけです。いずれかの原因が再試行可能なら、実行も `retryable` になります。
+実行ステータスは、実行が止まった理由を示します。課金された結果、スキップした重複、読み取った対象の数も数えます。ステータスは、早期停止の原因をすべて示します。`stopCauses` は各原因を挙げ、それぞれに `message`、`retryable`、`nextAction` を付けます。原因は `target_not_found`、`target_suspended`、`target_protected`、`target_failed`、`deadline_reached` です。`target_suspended` は、Xが凍結したアカウントを示します。存在しないアカウントや凍結されたアカウントが一覧に入るのは、別の原因で実行が止まった場合だけです。いずれかの原因が再試行可能なら、実行も `retryable` になります。
 
 Xは、非公開アカウントのフォロワーやフォロー中の一覧を公開しません。その対象には、無料の診断1件で `target_protected` が付きます。実行は、ほかの対象の読み取りを続けます。
 
@@ -425,7 +435,7 @@ Xは、非公開アカウントのフォロワーやフォロー中の一覧を�
 
 ## スクレイピング以外も必要ですか？
 
-Xquikは、47個のダッシュボードツール、129個のREST操作、署名付きWebhook、MCPサーバーも提供しています。
+Xquikは、47個のダッシュボードツール、REST API、署名付きWebhook、MCPサーバーも提供しています。
 
 - [APIドキュメント](https://docs.xquik.com/introduction): REST APIのガイド
 - [Followers API](https://docs.xquik.com/api-reference/x/followers): アカウントの取得できるフォロワーを取得
@@ -435,6 +445,8 @@ Xquikは、47個のダッシュボードツール、129個のREST操作、署名
 - [Webhooks](https://docs.xquik.com/webhooks/overview): 対応するポストとプロフィールのイベントを受信
 
 ## よくある質問
+
+よくある質問に答えたあと、サポートを受けられる場所を案内します。
 
 ### X APIキーは必要ですか？
 
@@ -448,7 +460,7 @@ Xquikは、47個のダッシュボードツール、129個のREST操作、署名
 
 XquikのX Follower Scraperの速度は、対象の規模、フィルター、Xの可用性によって変わります。[ベンチマーク](#ベンチマーク)の2回の実行では、1秒あたり77.9件と100.0件の有効なプロフィールを取得しました。
 
-### 結果が `maxItems` より少ないのはなぜですか？
+### 実行が返す行が上限より少ないのはなぜですか？
 
 `minFollowers`、`verifiedOnly`、`bioContains` などのフィルターは、書き込みの前に適用されます。結果を増やすには、フィルターを緩めてください。XquikのX Follower Scraperは、対象間の重複も除きます。
 

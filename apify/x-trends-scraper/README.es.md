@@ -31,8 +31,14 @@ de la plataforma. No necesitas clave de API de X ni iniciar sesión.
 
 ## Ubicaciones y datos de tendencias
 
-- Varios países o WOEIDs, leídos en paralelo.
+- Varios países, ciudades o WOEIDs, leídos en paralelo.
 - Hasta 50 tendencias actuales por ubicación.
+- Una lista de todos los lugares donde X ofrece tendencias, con su WOEID, país y
+  tipo.
+- Búsqueda de lugares de X, con el ID de lugar que acepta la búsqueda de posts
+  de X.
+- Hashflags de X: el emoji personalizado que X muestra después de algunos
+  hashtags.
 - Posición, tema, consulta, volumen de posts, URL de búsqueda, WOEID y ubicación
   de origen.
 - La ubicación de origen en cada fila.
@@ -47,7 +53,8 @@ de la plataforma. No necesitas clave de API de X ni iniciar sesión.
 1. Abre X Trends Scraper de Xquik en Apify Console.
 2. Escribe nombres de ubicación en `locations` o WOEIDs numéricos en `woeids`.
 3. Define `maxTrendsPerLocation`, hasta 50 tendencias por ubicación.
-4. Define `maxItems` para limitar las filas entregadas y haz clic en Start.
+4. Define `maxItems` para limitar las filas entregadas de toda la ejecución y
+   haz clic en Start.
 5. Descarga el dataset en JSON, CSV o Excel, o usa la API de Apify.
 
 ## Entrada
@@ -62,9 +69,63 @@ Usa nombres de ubicación, WOEIDs numéricos o ambos:
 }
 ```
 
-Los atajos disponibles incluyen Worldwide, United States, United Kingdom, Turkey
-y Brazil. Canada, France, Germany, India, Indonesia, Japan, Mexico y Australia
-también funcionan. Usa `woeids` para cualquier otra ubicación compatible.
+`locations` acepta cualquier país o ciudad donde X ofrece tendencias, como
+Worldwide, United States, Japan o London. Los códigos de país de 2 letras
+también funcionan. Un nombre para el que X no ofrece tendencias no devuelve
+filas y no cuesta nada. `woeids` acepta WOEIDs numéricos.
+
+Para ver todos los nombres y WOEIDs, activa `listLocations`. La ejecución
+enumera entonces los lugares donde X ofrece tendencias, en lugar de tendencias:
+
+```json
+{ "listLocations": true, "country": "TR", "maxItems": 100 }
+```
+
+`country` acepta un nombre o un código de 2 letras. `placeType` acepta
+`country`, `town`, `worldwide` o `unknown`. `nameContains` conserva los lugares
+cuyo nombre contiene tu texto. Deja los 3 vacíos para enumerar todos los
+lugares.
+
+Para buscar lugares de X por nombre, completa `placeSearchTerms`. La ejecución
+devuelve entonces lugares en lugar de tendencias:
+
+```json
+{ "placeSearchTerms": ["New York"], "maxItems": 20 }
+```
+
+Cada lugar tiene el `id` que la búsqueda de posts de X acepta como `place`. X
+ordena los lugares, así que su orden puede variar entre ejecuciones. X enumera
+hasta 20 lugares por nombre, y menos para algunos nombres, como New York. La
+ejecución conserva solo los lugares con el nombre que escribiste, así que New
+Delhi no devuelve filas y no cuesta nada.
+
+`maxItems` limita toda la ejecución y se llena término por término, así que el
+primer término puede usarlo todo. Define `maxItemsPerTarget` para dar a cada
+término una parte igual:
+
+```json
+{
+  "placeSearchTerms": ["Paris", "Rome"],
+  "maxItems": 20,
+  "maxItemsPerTarget": 10
+}
+```
+
+Para enumerar los hashflags de X, activa `listHashflags`. Un hashflag es el
+emoji personalizado que X muestra después de un hashtag durante un tiempo
+definido:
+
+```json
+{ "listHashflags": true, "hashtagContains": "football" }
+```
+
+La ejecución enumera los hashflags que X muestra ahora. Desactiva `activeOnly`
+para agregar los que ya terminaron y los próximos. `hashtagContains` conserva
+los hashtags que contienen tu texto.
+
+Una ejecución lee 1 tipo de fila. `listLocations` tiene prioridad sobre
+`listHashflags`, que tiene prioridad sobre `placeSearchTerms`. Sin ninguno de
+ellos, la ejecución lee tendencias.
 
 Las ejecuciones pequeñas sin problemas omiten `run-report` y ahorran uso de
 Apify. Activa `alwaysSaveRunRecords` para escribirlo en todas las ejecuciones.
@@ -72,9 +133,9 @@ Apify. Activa `alwaysSaveRunRecords` para escribirlo en todas las ejecuciones.
 ## Salida
 
 Cada tendencia es 1 fila del dataset. Las filas traen `name`, `rank`,
-`tweetVolume`, `query`, `url`, `woeid`, `sourceTarget` y `resultType`. Los
-campos que faltan en el origen quedan ausentes. X Trends Scraper de Xquik no
-inventa valores.
+`tweetVolume`, `query`, `url`, `woeid`, `sourceTarget` y `resultType`.
+`sourceTarget` es la ubicación tal como la escribiste. Los campos que faltan en
+el origen quedan ausentes. X Trends Scraper de Xquik no inventa valores.
 
 Los ejemplos usan valores de muestra. Los resultados reflejan datos en vivo. Una
 fila de tendencia se ve así:
@@ -90,6 +151,59 @@ fila de tendencia se ve así:
 }
 ```
 
+Con `listLocations`, cada lugar es 1 fila del dataset. Las filas traen `woeid`,
+`name`, `country`, `countryCode`, `placeType`, `placeTypeCode`, `parentWoeid`,
+`url` y `resultType`. `url` es la referencia antigua de X para el lugar y puede
+no abrirse. Una fila de ubicación de tendencias se ve así:
+
+```json
+{
+  "woeid": 2344116,
+  "name": "Istanbul",
+  "country": "Turkey",
+  "countryCode": "TR",
+  "placeType": "Town",
+  "placeTypeCode": 7,
+  "parentWoeid": 23424969,
+  "resultType": "trendLocation"
+}
+```
+
+Con `placeSearchTerms`, cada lugar es 1 fila del dataset. Las filas traen `id`,
+`name`, `fullName`, `country`, `countryCode`, `placeType`, `url`, `centroid`,
+`boundingBox`, `attributes`, `containedWithin`, `sourceTarget` y `resultType`.
+`centroid` guarda la longitud y, luego, la latitud. Una fila de lugar se ve así:
+
+```json
+{
+  "id": "0123456789abcdef",
+  "name": "Sample City",
+  "fullName": "Sample City, Sample Country",
+  "country": "Sample Country",
+  "countryCode": "US",
+  "placeType": "city",
+  "centroid": [-73.97, 40.78],
+  "sourceTarget": "New York",
+  "resultType": "place"
+}
+```
+
+Con `listHashflags`, cada hashflag es 1 fila del dataset. Las filas traen
+`hashtag`, `assetUrl`, `startsAt`, `endsAt`, `isHashfettiEnabled`, `animations`
+y `resultType`. Una fila de hashflag se ve así:
+
+```json
+{
+  "hashtag": "SampleHashtag",
+  "assetUrl": "https://abs.twimg.com/hashflags/Sample/Sample.png",
+  "startsAt": "2026-10-02T10:00:00.000Z",
+  "endsAt": "2027-01-03T14:59:00.000Z",
+  "isHashfettiEnabled": false,
+  "animations": [],
+  "resultType": "hashflag"
+}
+```
+
 ## ¿Cuánto cuesta extraer tendencias de X?
 
 En todos los planes de Apify, cada fila entregada cuesta $0.00015. Apify factura
@@ -97,6 +211,8 @@ aparte tu uso de la plataforma.
 
 - Un cobro por cada fila de datos entregada. Los diagnósticos son gratis en
   `diagnostics`.
+- Una fila de ubicación de tendencias, de lugar o de hashflag cuesta lo mismo
+  que una fila de tendencia.
 - Sin tarifa de inicio, por consulta ni por ubicación.
 - Xquik quita los duplicados antes de facturar.
 - El cargo total máximo que definas en Apify limita las filas entregadas.
@@ -201,6 +317,8 @@ necesitas.
 
 ## Preguntas frecuentes
 
+Respuestas a preguntas comunes y, luego, dónde conseguir ayuda.
+
 ### ¿Necesito una clave de API de X o iniciar sesión?
 
 No. X Trends Scraper de Xquik no necesita clave de API de X, inicio de sesión ni
@@ -217,12 +335,12 @@ calificado.
 
 Abre primero la salida gratuita `diagnostics`. El estado de una ejecución vacía
 te pide revisar tus objetivos y filtros. `stopCauses` da a cada causa un
-`nextAction` que puedes seguir. La ejecución nombra cada ubicación desconocida y
-te dice qué usar en su lugar.
+`nextAction` que puedes seguir. Una ubicación para la que X no ofrece tendencias
+no devuelve filas. Activa `listLocations` para ver los nombres que X acepta.
 
 ### ¿Puedo usar la API, las programaciones y las integraciones?
 
-Sí. Elige entre 50 tareas públicas o 129 operaciones REST de Xquik. La
+Sí. Elige entre 50 tareas públicas o la API REST de Xquik. La
 [pestaña API](https://apify.com/xquik/x-trends-scraper/api) tiene ejemplos en
 Python, JavaScript y cURL. Las
 [programaciones](https://docs.apify.com/platform/schedules) de Apify ejecutan X

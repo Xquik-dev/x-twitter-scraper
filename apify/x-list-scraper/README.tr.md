@@ -16,26 +16,34 @@
 </td></tr></table>
 
 Xquik, en eksiksiz X verisini sunan, dünyanın en hızlı ve en ucuz X (Twitter)
-scraper hizmetidir. Xquik'in X List Scraper'ı Liste gönderilerini, üyelerini ve
-takipçilerini toplar. Diğer Apify Actor'larının çoğu, filtrelemeden veya
-tekilleştirmeden önce ücret alır. Xquik yalnızca teslim edilen, benzersiz ve
-filtrene uyan sonuçlar için ücret alır.
+scraper hizmetidir. Xquik'in X List Scraper'ı Liste ayrıntılarını,
+gönderilerini, üyelerini ve takipçilerini toplar, anahtar kelimeyle de Liste
+bulur. Diğer Apify Actor'larının çoğu, filtrelemeden veya tekilleştirmeden önce
+ücret alır. Xquik yalnızca teslim edilen, benzersiz ve filtrene uyan sonuçlar
+için ücret alır.
 
-X Liste URL'lerinden veya sayısal Liste ID'lerinden gönderi, üye ve takipçi
-kazı. **Teslim edilen satır başına $0.00015** ödersin. Apify, platform
-kullanımını ayrıca faturalandırır. X API anahtarı ya da giriş gerekmez.
+X Liste URL'lerinden veya sayısal Liste ID'lerinden ayrıntı, gönderi, üye ve
+takipçi kazı ya da arama terimleriyle herkese açık Listeler bul. **Teslim edilen
+satır başına $0.00015** ödersin. Apify, platform kullanımını ayrıca
+faturalandırır. X API anahtarı ya da giriş gerekmez.
 
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
 ## Liste verileri ve filtreler
 
+- Liste ayrıntıları: ad, açıklama, üye ve takipçi sayıları, oluşturulma zamanı,
+  kapak görseli ve sahibinin herkese açık profili.
 - Metin, yazar, metrik, medya ve zaman damgasıyla Liste gönderileri.
 - Liste üyeleri ve Liste takipçileri.
+- Anahtar kelimeyle Liste araması. Her satır 1 Listedir; sahibini, üye sayısını
+  ve takipçi sayısını taşır.
 - Liste gönderilerinde isteğe bağlı yanıtlar.
 - Tarih, Unix zamanı, dil, medya, etkileşim, onay ve profil filtreleri.
-- Tek çalıştırmada birçok Liste ve veri türü.
-- Genel bir sınır ve her Liste veri türü için ayrı bir sınır.
+- Bir hesabın oluşturduğu veya içinde yer aldığı herkese açık Listeler,
+  kullanıcı adından veya profil URL'sinden.
+- 1 çalıştırmada birçok Liste ve veri türü.
+- Genel bir sınır ve her Liste veri türü veya arama terimi için ayrı bir sınır.
 - Apify çalıştırmayı taşısa da çalıştırma kaldığı yerden sürer.
 - Faturalamadan önce tekilleştirme.
 
@@ -43,7 +51,8 @@ kullanımını ayrıca faturalandırır. X API anahtarı ya da giriş gerekmez.
 
 1. Apify Console'da Xquik'in X List Scraper'ını aç.
 2. Liste URL'lerini `startUrls` alanına ya da sayısal Liste ID'lerini `listIds`
-   alanına yapıştır.
+   alanına yapıştır. Liste bulmak için bunun yerine `searchTerms` alanına
+   anahtar kelime ekle.
 3. `resources` seç ve `sinceDate` veya `minLikes` gibi filtreler ekle.
 4. Teslim edilecek satır sayısını `maxItems` ile sınırla, sonra Start'a tıkla.
 5. Veri kümesini JSON, CSV veya Excel olarak indir ya da Apify API'yi kullan.
@@ -65,10 +74,16 @@ alır:
 ```json
 {
   "listIds": ["1748648376080666720"],
-  "resources": ["tweets", "members", "followers"],
+  "resources": ["info", "tweets", "members", "followers"],
   "includeReplies": false,
   "maxItems": 10000
 }
+```
+
+Listeleri anahtar kelimeyle bulmak için arama terimleri gönder:
+
+```json
+{ "searchTerms": ["space news", "climate science"], "maxItemsPerTarget": 50 }
 ```
 
 Sorunsuz biten küçük çalıştırmalar `run-report` yazmaz, böylece Apify kullanımı
@@ -76,12 +91,54 @@ azalır. Raporu her çalıştırmada almak için `alwaysSaveRunRecords` seçene�
 
 ## Çıktı
 
-Her satırın `resultType` değeri `listTweet`, `listMember` veya `listFollower`
-olur. `sourceTarget` girdideki Liste ID'sini tutar. Satır gövdesi sabit Xquik
-gönderi veya profil yanıt biçimini kullanır.
+Her satırın `resultType` değeri `list`, `listTweet`, `listMember` veya
+`listFollower` olur. `sourceTarget` girdideki Liste ID'sini ya da bir `list`
+satırını bulan arama terimini tutar. Bir `list` satırı bir Listenin
+ayrıntılarını tutar, Liste başına 1 tane. Diğer satırlar sabit Xquik gönderi
+veya profil yanıt biçimini kullanır.
+
+### Bir hesabın Listeleri
+
+Her hesabın herkese açık Listelerini listelemek için `twitterHandles` alanına
+kullanıcı adı ya da `startUrls` alanına profil URL'si ekle:
+
+```json
+{ "twitterHandles": ["verge"], "accountLists": ["created", "memberships"] }
+```
+
+`created` hesabın oluşturduğu Listeleri, `memberships` ise hesabı içeren
+Listeleri listeler. Her Liste 1 satırdır. Satırda `resultType` değeri
+`createdList` veya `listMembership` olur, `sourceTarget` kullanıcı adını tutar.
+Satır `id`, `name`, `description`, `memberCount`, `subscriberCount`,
+`createdAt`, `bannerUrl` ve `owner` profilini de taşır. X gizli bir Listeyi
+yalnızca sahibine gösterir, bu yüzden gizli Listeler dışarıda kalır.
+
+Her hesabın oluşturduğu Listeler, üyeliklerinden önce gelir. Actor hesapları
+aynı anda okur, bu yüzden farklı hesapların satırları okundukça gelir. Onları
+`sourceTarget` alanına göre grupla.
+
+Bir satır 1 hesap ve 1 Listedir. Hesaplarından 2'sinin paylaştığı bir Liste 2
+satırdır, her birinin altında 1 tane. Her satır için ödersin.
+`dedupeAcrossTargets` bu satırları asla kaldırmaz.
 
 Aşağıdaki değerler yalnızca örnektir. Gerçek sonuçlar canlı veriden gelir. Bir
-Liste üyesi satırı şöyle görünür:
+Liste ayrıntıları satırı şöyle görünür:
+
+```json
+{
+  "resultType": "list",
+  "sourceTarget": "4143408",
+  "id": "4143408",
+  "name": "NASA Centers",
+  "description": "NASA has 10 centers http://www.nasa.gov/about/sites",
+  "memberCount": 11,
+  "subscriberCount": 859,
+  "createdAt": "2009-12-02T22:41:02.000Z",
+  "owner": { "username": "NASA", "name": "NASA" }
+}
+```
+
+Bir Liste üyesi satırı şöyle görünür:
 
 ```json
 {
@@ -91,6 +148,22 @@ Liste üyesi satırı şöyle görünür:
   "name": "Sample User",
   "followers": 1200,
   "verified": false
+}
+```
+
+Bir arama teriminden gelen `list` satırı şöyle görünür:
+
+```json
+{
+  "resultType": "list",
+  "sourceTarget": "space news",
+  "id": "1000000000000000001",
+  "name": "Sample Space News",
+  "description": "Sample accounts that post space news.",
+  "url": "https://x.com/i/lists/1000000000000000001",
+  "memberCount": 35,
+  "subscriberCount": 76,
+  "owner": { "username": "sample_user", "name": "Sample User" }
 }
 ```
 
@@ -106,7 +179,7 @@ kullanımını ayrıca faturalandırır.
 
 ## Sınırlar ve kurtarma
 
-Xquik'in X List Scraper'ı tek çalıştırmada birçok Listeyi ve veri türünü okur.
+Xquik'in X List Scraper'ı 1 çalıştırmada birçok Listeyi ve veri türünü okur.
 Apify çalıştırmayı yeniden başlatsa da teslim edilen satırlar ve ilerleme
 korunur. Actor kendi başına süre sınırı eklemez.
 
@@ -119,8 +192,8 @@ bitmesi teslimatı doğrular. Tüm verinin çekildiğini doğrulamaz.
 kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Nedenler
 şunlardır: `target_not_found`, `target_failed`, `pagination_safety_limit` ve
 `deadline_reached`. Bulunamayan bir hedef, listeye yalnızca çalıştırmayı başka
-bir neden durdurduysa girer. Nedenlerden biri `retryable` ise çalıştırma da
-`retryable` olur.
+bir neden durdurduysa girer. Nedenlerden biri yeniden denenebiliyorsa çalıştırma
+da `retryable` olur.
 
 ## İlgili Xquik Actor'ları
 
@@ -205,6 +278,8 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 ## SSS
 
+Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
+
 ### X API anahtarı veya giriş gerekir mi?
 
 Hayır. Xquik'in X List Scraper'ı X API anahtarı, giriş ya da kimlik bilgisi
@@ -225,7 +300,7 @@ ve nasıl düzelteceğini söyler.
 
 ### API'yi, zamanlamaları ve entegrasyonları kullanabilir miyim?
 
-Evet. 50 herkese açık görevden veya 129 Xquik REST işleminden birini seç.
+Evet. 50 herkese açık görevden birini veya Xquik REST API'yi seç.
 [API sekmesinde](https://apify.com/xquik/x-list-scraper/api) Python, JavaScript
 ve cURL örnekleri var. Apify
 [zamanlamaları](https://docs.apify.com/platform/schedules), Xquik'in X List

@@ -19,11 +19,11 @@ Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) 
 liefert die vollständigsten X-Daten. X Follower Scraper von Xquik sammelt
 Follower, gefolgte Accounts, Listenmitglieder, Abonnenten &
 Community-Mitglieder. Öffentliche Benchmarks belegen, dass er unter 10
-Follower-Actors der günstigste & schnellste ist. Seine Datensätze
-(`outputMode: "full"`) haben 2,5-mal so viele Felder wie beim Median-Actor. Das
-zeigt der [Benchmark unten](#benchmark). Die meisten anderen Apify Actors
-rechnen ab, bevor sie filtern oder Duplikate entfernen. Xquik rechnet nur
-gelieferte, eindeutige Ergebnisse ab, die zu deinen Filtern passen.
+Follower-Actors der günstigste & schnellste ist. Seine Datensätze im Modus full
+haben 2,5-mal so viele Felder wie beim Median-Actor. Das zeigt der
+[Benchmark unten](#benchmark). Die meisten anderen Apify Actors rechnen ab,
+bevor sie filtern oder Duplikate entfernen. Xquik rechnet nur gelieferte,
+eindeutige Ergebnisse ab, die zu deinen Filtern passen.
 
 Scrape auf X (Twitter) Follower, gefolgte Accounts, verifizierte Follower,
 Listenmitglieder, Listen-Abonnenten & Community-Mitglieder. X Follower Scraper
@@ -92,6 +92,12 @@ Setze `outputMode: "raw"` oder `includeRaw: true`, um ein Feld `raw`
 hinzuzufügen. Es enthält eine sichere Kopie des Quellprofils. Standard ist der
 kompakte Modus.
 
+Setze `outputMode: "full"` für die meisten Daten pro Datensatz. Jeder Datensatz
+behält bis zu 13 Listenfelder, wenn X sie sendet, etwa `listedCount`,
+`defaultProfileImage` & `advertiserAccountType`. Datensätze im Modus full
+stellen sie ans Ende. Kompakte Datensätze bleiben kleiner & kosten weniger
+Speicher.
+
 `verifiedOnly` akzeptiert öffentliche Profile mit Blue- oder
 Legacy-Verifizierung. Widersprechen sich Quell-Flags, gewinnt der echte
 Verifizierungsstatus.
@@ -103,8 +109,8 @@ Mitteilungen & Ähnliches. Auch die Raw-Ausgabe enthält sie nicht.
 ## Anwendungsfälle
 
 - Reichere Leads an & baue Forschungsdatasets mit mehr Feldern pro Profil. Am
-  2026-09-29 hatte unsere Median-Zeile (`outputMode: "full"`) 38 Felder. Das ist
-  das 2,5-Fache des Medians von 9 anderen Actors.
+  2026-09-29 hatte unser Median-Datensatz im Modus full 38 Felder. Das ist das
+  2,5-Fache des Medians von 9 anderen Actors.
 - Exportiere Follower von Wettbewerbern für die Lead-Recherche.
 - Vergleiche die Zielgruppen deines Accounts, deiner Wettbewerber & öffentlicher
   Personen.
@@ -114,6 +120,9 @@ Mitteilungen & Ähnliches. Auch die Raw-Ausgabe enthält sie nicht.
 - Segmentiere Follower nach Stichwort in der Bio, Standort oder Profiltyp.
 
 ## Wie scrape ich Follower-Daten mit X Follower Scraper?
+
+Jedes Beispiel unten ist eine vollständige Eingabe. Wähle das, das zu deinen
+Daten passt.
 
 1. Öffne X Follower Scraper von Xquik in der Apify Console.
 2. Füge Profil-, Listen- oder Community-URLs, X-Nutzernamen oder numerische IDs
@@ -158,6 +167,18 @@ Nutzernamen funktionieren mit oder ohne `@`:
 
 `relation` legt fest, was der Actor für jeden Nutzernamen scrapt. Nutze
 `followers`, `following` oder `verified_followers`.
+
+Nutze `follower_ids` oder `following_ids`, wenn du nur Nutzer-IDs brauchst.
+Jeder Datensatz enthält 1 Nutzer-ID, ihr Quellziel & ihre Beziehung, & eine
+Seite fasst bis zu 5.000 IDs. Profilfilter brauchen Profilfelder. Lass sie also
+für diese 2 Beziehungen leer.
+
+Nutze `affiliates` für die Accounts, die eine Organisation als ihre Affiliates
+listet, etwa Mitarbeitende & Produkte eines Unternehmens. Jeder Datensatz ist
+ein vollständiges Profil. Ein Account ohne Affiliates liefert keine Datensätze.
+
+Nutze `subscriptions` für die Creator, die ein Account abonniert hat. Ein
+Account, der seine Abonnements verbirgt, liefert keine Datensätze.
 
 Dieselbe Eingabe akzeptiert auch `username`, `usernames` & `user_names` als
 Aliasse.
@@ -238,31 +259,35 @@ Beziehungstypen zu vergleichen:
 }
 ```
 
-Die Ausgabe hat 1 Datensatz pro eindeutigem Profil. Gemeinsame Profile
-enthalten `sourceTargets`, `sourceRelations`, `sourceUrls`, `sourceTargetKeys` &
+Die Ausgabe hat 1 Datensatz pro eindeutigem Profil. Gemeinsame Profile enthalten
+`sourceTargets`, `sourceRelations`, `sourceUrls`, `sourceTargetKeys` &
 `overlapCount`. Sortiere nach `overlapCount` oder exportiere die Datensätze als
-CSV. Halte `maxItems` hoch genug, damit jedes Ziel Datensätze beiträgt. Mit
+CSV. Die Datensätze folgen der Reihenfolge deiner Ziele. Halte `maxItems` hoch
+genug, damit jedes Ziel Datensätze beiträgt. Beendet `maxItems` einen Run
+vorzeitig, können sich die behaltenen Profile zwischen Runs ändern. Mit
 `maxItemsPerTarget` legst du die Tiefe pro Account fest.
 
 ### Akzeptierte URL-Formen
 
-| URL                                         | Beziehung                                   |
-| ------------------------------------------- | ------------------------------------------- |
-| `https://x.com/<handle>/followers`          | `followers`                                 |
-| `https://x.com/<handle>/verified_followers` | `verified_followers`                        |
-| `https://x.com/<handle>/following`          | `following`                                 |
-| `https://x.com/<handle>`                    | Standard-`relation` (followers, falls leer) |
-| `https://x.com/i/lists/<id>/members`        | `list_members`                              |
-| `https://x.com/i/lists/<id>/followers`      | `list_followers`                            |
-| `https://x.com/i/lists/<id>`                | `list_members`                              |
-| `https://x.com/i/communities/<id>/members`  | `community_members`                         |
-| `https://x.com/i/communities/<id>`          | `community_members`                         |
-| `<handle>/followers`                        | `followers`                                 |
-| `<handle>/following`                        | `following`                                 |
-| `<handle>/verified_followers`               | `verified_followers`                        |
-| `lists/<id>/members`                        | `list_members`                              |
-| `lists/<id>/followers`                      | `list_followers`                            |
-| `communities/<id>/members`                  | `community_members`                         |
+| URL                                         | Beziehung                     |
+| ------------------------------------------- | ----------------------------- |
+| `https://x.com/<handle>/followers`          | `followers`                   |
+| `https://x.com/<handle>/verified_followers` | `verified_followers`          |
+| `https://x.com/<handle>/following`          | `following`                   |
+| `https://x.com/<handle>/affiliates`         | `affiliates`                  |
+| `https://x.com/<handle>`                    | `relation`, sonst `followers` |
+| `https://x.com/i/lists/<id>/members`        | `list_members`                |
+| `https://x.com/i/lists/<id>/followers`      | `list_followers`              |
+| `https://x.com/i/lists/<id>`                | `list_members`                |
+| `https://x.com/i/communities/<id>/members`  | `community_members`           |
+| `https://x.com/i/communities/<id>`          | `community_members`           |
+| `<handle>/followers`                        | `followers`                   |
+| `<handle>/following`                        | `following`                   |
+| `<handle>/verified_followers`               | `verified_followers`          |
+| `<handle>/affiliates`                       | `affiliates`                  |
+| `lists/<id>/members`                        | `list_members`                |
+| `lists/<id>/followers`                      | `list_followers`              |
+| `communities/<id>/members`                  | `community_members`           |
 
 URLs mit `twitter.com` & `mobile.twitter.com` funktionieren ebenfalls überall.
 Auch URLs ohne `https://` funktionieren, etwa `x.com/nasa`.
@@ -294,8 +319,8 @@ Gebühr pro geliefertem Datensatz. Du brauchst kein separates Xquik-Abonnement
 & Xquik verlangt keine Startgebühr. Starts, Ziele & die Wahl der Beziehung
 kosten keine separate Suchgebühr.
 
-Ein Run kann viele Ziele lesen. Limits, Deduplizierung, Zuordnung & Abrechnung
-bleiben über alle Ziele exakt.
+Ein Run kann viele Ziele lesen. Limits, Deduplizierung & Abrechnung bleiben über
+alle Ziele exakt.
 
 - Filter laufen, bevor ein Profil in dein Dataset kommt. Gefilterte Datensätze
   kosten also nichts.
@@ -319,22 +344,49 @@ Probleme überspringt ihn & spart Apify-Nutzung. Aktiviere
 ## Benchmark
 
 X Follower Scraper von Xquik schlug 9 andere Follower-Actors bei Kosten & Tempo.
-Sein Median-Datensatz (`outputMode: "full"`) hatte 38 Felder, das 2,5-Fache des
-Medians der anderen.
+Sein Median-Datensatz im Modus full hatte 38 Felder, das 2,5-Fache des Medians
+der anderen.
 
-| Actor                                                  | Nützliche Profile | Kosten pro nützlichem Profil | Nützliche Profile pro Sekunde | Felder pro Zeile | Öffentlicher Run                                                                                                                                                                               |
-| ------------------------------------------------------ | ----------------: | ---------------------------: | ----------------------------: | ---------------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| xquik/x-follower-scraper                               |             1.000 |                    $0.000155 |                         100.0 |               38 | [Run ansehen](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)                                                                                                                           |
-| xquik/x-follower-scraper                               |             1.000 |                    $0.000155 |                          77.9 |               38 | [Run ansehen](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)                                                                                                                           |
-| b2b_leads/X-Real-Time-Data                             |               286 |                    $0.000388 |                           3.1 |               21 | [Run ansehen](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                           |
-| kaitoeasyapi/premium-x-follower-scraper-following-data |               356 |                    $0.000506 |                          21.9 |               50 | [Run ansehen](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                           |
-| api-ninja/x-twitter-followers-scraper                  |               350 |                    $0.000809 |                           7.0 |                8 | [Run ansehen](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                           |
-| altimis/scweet                                         |               332 |                    $0.000922 |                           1.1 |               21 | [Run ansehen](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)                                                                                                                           |
-| apidojo/twitter-user-scraper                           |               323 |                    $0.001160 |                           7.3 |               25 | [Run ansehen](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)                                                                                                                           |
-| atomus/twitter-scraper                                 |               323 |                    $0.001272 |                           6.2 |               13 | [Run ansehen](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)                                                                                                                           |
-| practicaltools/cheap-simple-twitter-api                |               283 |                    $0.002036 |                           6.5 |                4 | [Run 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb), [Run 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK), [Run 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX) |
-| maximedupre/twitter-scraper                            |               320 |                    $0.002192 |                           2.1 |               15 | [Run 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [Run 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [Run 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
-| seemuapps/x-followers-following-scraper                |               286 |                    $0.003504 |                           3.9 |                9 | [Run 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [Run 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [Run 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
+- `xquik/x-follower-scraper`: 1.000 nützliche Profile, $0.000155 pro nützlichem
+  Profil, 100,0 pro Sekunde & 38 Felder pro Datensatz.
+  [Run ansehen](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
+- `xquik/x-follower-scraper`: 1.000 nützliche Profile, $0.000155 pro nützlichem
+  Profil, 77,9 pro Sekunde & 38 Felder pro Datensatz.
+  [Run ansehen](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
+- `b2b_leads/X-Real-Time-Data`: 286 nützliche Profile, $0.000388 pro nützlichem
+  Profil, 3,1 pro Sekunde & 21 Felder pro Datensatz.
+  [Run ansehen](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
+- `kaitoeasyapi/premium-x-follower-scraper-following-data`: 356 nützliche
+  Profile, $0.000506 pro nützlichem Profil, 21,9 pro Sekunde & 50 Felder pro
+  Datensatz.
+  [Run ansehen](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
+- `api-ninja/x-twitter-followers-scraper`: 350 nützliche Profile, $0.000809 pro
+  nützlichem Profil, 7,0 pro Sekunde & 8 Felder pro Datensatz.
+  [Run ansehen](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
+- `altimis/scweet`: 332 nützliche Profile, $0.000922 pro nützlichem Profil, 1,1
+  pro Sekunde & 21 Felder pro Datensatz.
+  [Run ansehen](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
+- `apidojo/twitter-user-scraper`: 323 nützliche Profile, $0.001160 pro
+  nützlichem Profil, 7,3 pro Sekunde & 25 Felder pro Datensatz.
+  [Run ansehen](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
+- `atomus/twitter-scraper`: 323 nützliche Profile, $0.001272 pro nützlichem
+  Profil, 6,2 pro Sekunde & 13 Felder pro Datensatz.
+  [Run ansehen](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
+- `practicaltools/cheap-simple-twitter-api`: 283 nützliche Profile, $0.002036
+  pro nützlichem Profil, 6,5 pro Sekunde & 4 Felder pro Datensatz.
+  [Run 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb),
+  [Run 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK),
+  [Run 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
+- `maximedupre/twitter-scraper`: 320 nützliche Profile, $0.002192 pro nützlichem
+  Profil, 2,1 pro Sekunde & 15 Felder pro Datensatz.
+  [Run 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs),
+  [Run 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39),
+  [Run 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
+- `seemuapps/x-followers-following-scraper`: 286 nützliche Profile, $0.003504
+  pro nützlichem Profil, 3,9 pro Sekunde & 9 Felder pro Datensatz.
+  [Run 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj),
+  [Run 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ),
+  [Run 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
 
 Jeder Actor las die Follower von NASA, SpaceX & esa. Die anderen Actors liefen
 am 2026-09-28. Die Runs von Xquik setzten `outputMode: "full"` & liefen am
@@ -342,13 +394,13 @@ am 2026-09-28. Die Runs von Xquik setzten `outputMode: "full"` & liefen am
 eindeutig, 30+ Tage alt und hat 1+ Follower & 1+ Post. Kosten sind die
 Gesamtausgaben des Kunden pro nützlichem Profil. Unsere enthalten die
 Apify-Nutzung, die unsere Kunden zahlen. Eine Zeile mit 3 Runs addiert sie.
-Felder pro Zeile ist der Median der nicht leeren Felder, verschachtelte
-inklusive. Eine Liste zählt als 1 Feld. Öffne einen Run für Eingabe,
-Run-Protokoll & Dataset.
+Felder pro Datensatz ist der Median der Anzahl nicht leerer Felder,
+verschachtelte inklusive. Eine Liste zählt als 1 Feld. Öffne einen Run für
+Eingabe, Run-Protokoll & Dataset.
 
 ## Eingabe
 
-Der Tab Input listet alle Optionen. Gib mindestens eines dieser Felder an:
+Der Tab Input listet alle Optionen. Gib mindestens 1 dieser Felder an:
 `startUrls`, `twitterHandles`, `userIds`, `listIds` oder `communityIds`. Ihre
 dokumentierten Aliasse zählen auch. Alle anderen Felder sind optional.
 
@@ -359,10 +411,10 @@ Probiere diese Eingaben:
 - Füge `https://x.com/<handle>/verified_followers` unter Start URLs ein, um
   verifizierte Profile zu erhalten.
 - Füge eine Listen-URL unter Start URLs ein, um ihre Mitglieder zu prüfen.
-- Füge mindestens 2 Nutzernamen hinzu. Ein gemeinsames Profil erscheint einmal,
-  unter dem ersten Ziel. Nutze `dedupeMode: "merge"`, um 1 Datensatz mit jedem
-  passenden Ziel zu behalten. Setze `dedupeAcrossTargets: false`, um 1 Datensatz
-  pro Ziel zu behalten.
+- Füge 2+ Nutzernamen hinzu. Ein gemeinsames Profil erscheint einmal, unter dem
+  Ziel, das es zuerst liefert. Dieses Ziel kann sich zwischen Runs ändern. Nutze
+  `dedupeMode: "merge"` für 1 stabilen Datensatz mit jedem passenden Ziel. Setze
+  `dedupeAcrossTargets: false`, um 1 Datensatz pro Ziel zu behalten.
 
 ### Eingabe in Console & API
 
@@ -391,18 +443,20 @@ Feldnamen anderer Follower-Actors für X. Er ordnet sie seinen eigenen Feldern
 zu. Kanonische Namen bleiben der dokumentierte Standard. Ein Alias verwirft nie
 ein Feld & ändert nie, was du zahlst.
 
-| Feld, das du schon nutzt                                                              | Xquik liest es als        |
-| ------------------------------------------------------------------------------------- | ------------------------- |
-| `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`, `screenNames` | `twitterHandles`          |
-| `username`, `handle`, `screenName` als einzelner String                               | `twitterHandles`          |
-| `twitterUserIds`, `user_ids`, `userIdList`                                            | `userIds`                 |
-| `user_id`, `userId` als einzelner String                                              | `userIds`                 |
-| `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`                          | `startUrls`               |
-| `profileUrl` als einzelner String                                                     | `startUrls`               |
-| `getFollowers`, `getFollowing`                                                        | `relations`               |
-| `type` mit `followers` oder `following`                                               | `relation`                |
-| `maxResults`, `max_results`, `resultsLimit`, `count`                                  | `maxItems`                |
-| `scrapeAllResults`                                                                    | keine Obergrenze pro Ziel |
+Jede Zeile nennt die Felder, die du schon nutzt, dann das Feld, dem der Actor
+sie zuordnet:
+
+- `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`,
+  `screenNames`: `twitterHandles`
+- `username`, `handle`, `screenName`, als einzelner String: `twitterHandles`
+- `twitterUserIds`, `user_ids`, `userIdList`: `userIds`
+- `user_id`, `userId`, als einzelner String: `userIds`
+- `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`: `startUrls`
+- `profileUrl`, als einzelner String: `startUrls`
+- `getFollowers`, `getFollowing`: `relations`
+- `type` mit `followers` oder `following`: `relation`
+- `maxResults`, `max_results`, `resultsLimit`, `count`: `maxItems`
+- `scrapeAllResults`: keine Obergrenze pro Ziel
 
 2 Namen bedeuten hier etwas anderes. In manchen Actors begrenzen `maxFollowers`
 & `maxFollowing`, wie viele Datensätze ein Run liefert. In X Follower Scraper
@@ -513,9 +567,11 @@ Der Run-Status nennt den Grund für den Stopp. Er zählt auch berechnete
 Ergebnisse, übersprungene Duplikate & gelesene Ziele. Der Status nennt jede
 Ursache für einen vorzeitigen Stopp. `stopCauses` listet jede Ursache mit
 eigenen Feldern `message`, `retryable` & `nextAction`. Die Ursachen sind
-`target_not_found`, `target_protected`, `target_failed` & `deadline_reached`.
-Ein fehlender Account kommt nur auf die Liste, wenn eine andere Ursache den Run
-gestoppt hat. Der Run ist `retryable`, wenn mindestens 1 Ursache es ist.
+`target_not_found`, `target_suspended`, `target_protected`, `target_failed` &
+`deadline_reached`. `target_suspended` nennt die Accounts, die X gesperrt hat.
+Ein fehlender oder gesperrter Account kommt nur auf die Liste, wenn eine andere
+Ursache den Run gestoppt hat. Der Run ist `retryable`, wenn mindestens 1 Ursache
+es ist.
 
 X hält die Listen eines geschützten Accounts privat. Für dieses Ziel meldet 1
 kostenlose Diagnose `target_protected`. Der Run liest die anderen Ziele weiter.
@@ -612,8 +668,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
 ## Brauchst du mehr als Scraping?
 
-Xquik bietet außerdem 47 Dashboard-Tools, 129 REST-Operationen, signierte
-Webhooks & einen MCP-Server.
+Xquik bietet außerdem 47 Dashboard-Tools, eine REST-API, signierte Webhooks &
+einen MCP-Server.
 
 - [API-Dokumentation](https://docs.xquik.com/introduction): Anleitungen zur
   REST-API
@@ -630,6 +686,8 @@ Webhooks & einen MCP-Server.
 
 ## FAQ
 
+Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
+
 ### Brauche ich einen X-API-Schlüssel?
 
 Nein. Du brauchst keinen X-API-Schlüssel, keinen Login & keine Zugangsdaten.
@@ -645,7 +703,7 @@ Das Tempo von X Follower Scraper von Xquik hängt von der Zielgröße, den Filte
 & der Verfügbarkeit von X ab. Seine 2 Runs im [Benchmark](#benchmark) erreichten
 77,9 & 100,0 nützliche Profile pro Sekunde.
 
-### Warum liefert mein Run weniger Datensätze als `maxItems`?
+### Warum liefert mein Run weniger Datensätze als mein Limit?
 
 Filter wie `minFollowers`, `verifiedOnly` & `bioContains` greifen vor dem
 Schreiben. Lockere sie, um mehr Ergebnisse zu erhalten. X Follower Scraper von

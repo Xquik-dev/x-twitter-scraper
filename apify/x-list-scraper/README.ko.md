@@ -16,26 +16,32 @@
 </td></tr></table>
 
 Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서비스이며, 가장
-완전한 X 데이터를 제공합니다. Xquik의 X List Scraper는 리스트 게시물, 멤버 &
-팔로워를 수집합니다. 다른 Apify Actor는 대부분 필터링이나 중복 제거 전에 요금을
-부과합니다. Xquik은 필터에 맞고 중복되지 않은 결과를 전달했을 때만 요금을
-받습니다.
+완전한 X 데이터를 제공합니다. Xquik의 X List Scraper는 리스트 상세 정보, 게시물,
+멤버 & 팔로워를 수집하고 키워드로 리스트를 찾습니다. 다른 Apify Actor는 대부분
+필터링이나 중복 제거 전에 요금을 부과합니다. Xquik은 필터에 맞고 중복되지 않은
+결과를 전달했을 때만 요금을 받습니다.
 
-X 리스트 URL이나 숫자로 된 리스트 ID로 게시물, 멤버 & 팔로워를 스크랩하세요.
-요금은 **전달된 행 1개당 $0.00015**이며, Apify 플랫폼 사용료는 Apify가 따로
-청구합니다. X API 키나 로그인은 필요 없습니다.
+X 리스트 URL이나 숫자로 된 리스트 ID로 상세 정보, 게시물, 멤버 & 팔로워를
+스크랩하거나 검색어로 공개 리스트를 찾으세요. 요금은 **전달된 행 1개당
+$0.00015**이며, Apify 플랫폼 사용료는 Apify가 따로 청구합니다. X API 키나
+로그인은 필요 없습니다.
 
 > Xquik은 독립적인 제3자 서비스입니다. X Corp와 제휴 관계가 없습니다.
 > "Twitter"와 "X"는 X Corp의 상표입니다.
 
 ## 리스트 데이터 & 필터
 
+- 리스트 상세 정보: 이름, 설명, 멤버 수 & 팔로워 수, 생성 시각, 배너 & 소유자의
+  공개 프로필.
 - 텍스트, 작성자, 지표, 미디어 & 타임스탬프가 담긴 리스트 게시물.
 - 리스트 멤버 & 리스트 팔로워.
+- 키워드로 리스트 검색. 각 행은 리스트 1개이며 소유자, 멤버 수 & 팔로워 수가
+  들어 있습니다.
 - 리스트 게시물의 답글 포함 여부 선택.
 - 날짜, 유닉스 시간, 언어, 미디어, 참여, 인증 & 프로필 필터.
+- 사용자 아이디나 프로필 URL로 계정이 만들었거나 속해 있는 공개 리스트 조회.
 - 한 실행에서 여러 리스트 & 리소스 유형 처리.
-- 전체 상한 & 리스트 리소스별 상한.
+- 전체 상한 & 리스트 리소스별 또는 검색어별 상한.
 - Apify 마이그레이션 후에도 이어서 진행.
 - 과금 전 중복 제거.
 
@@ -43,6 +49,7 @@ X 리스트 URL이나 숫자로 된 리스트 ID로 게시물, 멤버 & 팔로�
 
 1. Apify Console에서 Xquik의 X List Scraper를 여세요.
 2. 리스트 URL은 `startUrls`에, 숫자로 된 리스트 ID는 `listIds`에 붙여넣으세요.
+   리스트를 찾으려면 대신 `searchTerms`에 키워드를 추가하세요.
 3. `resources`를 고르고 `sinceDate`나 `minLikes` 같은 필터를 추가하세요.
 4. `maxItems`로 전달할 행 수의 상한을 정하고 Start를 클릭하세요.
 5. 데이터셋을 JSON, CSV 또는 Excel로 내려받거나 Apify API를 사용하세요.
@@ -63,10 +70,16 @@ X 리스트 URL이나 숫자로 된 리스트 ID로 게시물, 멤버 & 팔로�
 ```json
 {
   "listIds": ["1748648376080666720"],
-  "resources": ["tweets", "members", "followers"],
+  "resources": ["info", "tweets", "members", "followers"],
   "includeReplies": false,
   "maxItems": 10000
 }
+```
+
+키워드로 리스트를 찾으려면 검색어를 보내세요.
+
+```json
+{ "searchTerms": ["space news", "climate science"], "maxItemsPerTarget": 50 }
 ```
 
 문제없이 끝난 작은 실행은 `run-report`를 건너뛰어 Apify 사용량을 아낍니다. 모든
@@ -74,12 +87,53 @@ X 리스트 URL이나 숫자로 된 리스트 ID로 게시물, 멤버 & 팔로�
 
 ## 출력
 
-각 행의 `resultType`은 `listTweet`, `listMember`, `listFollower` 중 하나입니다.
-`sourceTarget`에는 입력한 리스트 ID가 남습니다. 행 본문은 Xquik의 안정적인
-게시물 또는 프로필 응답 형식을 따릅니다.
+각 행의 `resultType`은 `list`, `listTweet`, `listMember`, `listFollower` 중
+하나입니다. `sourceTarget`에는 입력한 리스트 ID나 `list` 행을 찾은 검색어가
+남습니다. `list` 행에는 리스트의 상세 정보가 리스트당 1개씩 들어 있습니다.
+나머지 행은 Xquik의 안정적인 게시물 또는 프로필 응답 형식을 따릅니다.
 
-예시는 샘플 값입니다. 실제 결과는 실시간 데이터를 따릅니다. 리스트 멤버 행은
-다음과 같습니다.
+### 계정의 리스트
+
+각 계정의 공개 리스트를 나열하려면 `twitterHandles`에 사용자 아이디를, 또는
+`startUrls`에 프로필 URL을 추가하세요.
+
+```json
+{ "twitterHandles": ["verge"], "accountLists": ["created", "memberships"] }
+```
+
+`created`는 계정이 만든 리스트를, `memberships`는 계정이 속해 있는 리스트를
+나열합니다. 리스트 1개가 행 1개입니다. 행에는 `createdList` 또는
+`listMembership`인 `resultType`, 사용자 아이디가 들어간 `sourceTarget` & `id`,
+`name`, `description`, `memberCount`, `subscriberCount`, `createdAt`,
+`bannerUrl` & `owner` 프로필이 들어 있습니다. X는 비공개 리스트를 소유자에게만
+보여 주므로 비공개 리스트는 빠집니다.
+
+계정마다 만든 리스트가 속해 있는 리스트보다 먼저 나옵니다. 이 Actor는 계정을
+동시에 읽으므로 서로 다른 계정의 행은 읽히는 순서대로 도착합니다.
+`sourceTarget`으로 묶으세요.
+
+행 1개는 계정 1개 & 리스트 1개입니다. 입력한 계정 2개가 함께 가진 리스트는
+계정마다 1개씩, 행 2개가 됩니다. 각 행에 요금이 부과됩니다.
+`dedupeAcrossTargets`는 이런 행을 제거하지 않습니다.
+
+예시는 샘플 값입니다. 실제 결과는 실시간 데이터를 따릅니다. 리스트 상세 정보
+행은 다음과 같습니다.
+
+```json
+{
+  "resultType": "list",
+  "sourceTarget": "4143408",
+  "id": "4143408",
+  "name": "NASA Centers",
+  "description": "NASA has 10 centers http://www.nasa.gov/about/sites",
+  "memberCount": 11,
+  "subscriberCount": 859,
+  "createdAt": "2009-12-02T22:41:02.000Z",
+  "owner": { "username": "NASA", "name": "NASA" }
+}
+```
+
+리스트 멤버 행은 다음과 같습니다.
 
 ```json
 {
@@ -89,6 +143,22 @@ X 리스트 URL이나 숫자로 된 리스트 ID로 게시물, 멤버 & 팔로�
   "name": "Sample User",
   "followers": 1200,
   "verified": false
+}
+```
+
+검색어로 찾은 `list` 행은 다음과 같습니다.
+
+```json
+{
+  "resultType": "list",
+  "sourceTarget": "space news",
+  "id": "1000000000000000001",
+  "name": "Sample Space News",
+  "description": "Sample accounts that post space news.",
+  "url": "https://x.com/i/lists/1000000000000000001",
+  "memberCount": 35,
+  "subscriberCount": 76,
+  "owner": { "username": "sample_user", "name": "Sample User" }
 }
 ```
 
@@ -117,7 +187,7 @@ Xquik의 X List Scraper는 한 실행에서 여러 리스트 & 리소스를 읽�
 `message`, `retryable` & `nextAction`을 따로 담아 나열합니다. 원인은
 `target_not_found`, `target_failed`, `pagination_safety_limit` &
 `deadline_reached`입니다. 찾을 수 없는 대상은 다른 원인으로 실행이 멈췄을 때만
-목록에 들어갑니다. 원인 중 하나라도 `retryable`이면 실행도 `retryable`입니다.
+목록에 들어갑니다. 원인 중 하나라도 재시도할 수 있으면 실행도 `retryable`입니다.
 
 ## 관련 Xquik Actor
 
@@ -190,6 +260,8 @@ Xquik의 X List Scraper는 한 실행에서 여러 리스트 & 리소스를 읽�
 
 ## 자주 묻는 질문
 
+자주 묻는 질문에 먼저 답하고, 이어서 도움받을 곳을 안내합니다.
+
 ### X API 키나 로그인이 필요한가요?
 
 아니요. Xquik의 X List Scraper는 X API 키, 로그인, 자격 증명이 모두 필요
@@ -210,7 +282,7 @@ Xquik의 X List Scraper는 공개 X 필드를 요청합니다. 결과에는 개�
 
 ### API, 스케줄 & 연동을 사용할 수 있나요?
 
-네. 공개 태스크 50개나 Xquik REST 작업 129개 중에서 고르세요.
+네. 공개 태스크 50개나 Xquik REST API 중에서 고르세요.
 [API 탭](https://apify.com/xquik/x-list-scraper/api)에 Python, JavaScript & cURL
 예시가 있습니다. Apify [스케줄](https://docs.apify.com/platform/schedules)로
 Xquik의 X List Scraper를 cron 일정에 맞춰 실행할 수 있습니다. 에이전트는

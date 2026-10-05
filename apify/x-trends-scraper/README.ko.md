@@ -30,8 +30,11 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 
 ## 위치 & 트렌드 데이터
 
-- 여러 국가나 WOEID를 동시에 읽기.
+- 여러 국가, 도시 또는 WOEID를 동시에 읽기.
 - 위치마다 현재 트렌드 최대 50개.
+- X가 트렌드를 제공하는 모든 장소의 목록과 각 장소의 WOEID, 국가 & 유형.
+- X 장소 검색, X 게시물 검색에 넣는 장소 ID 포함.
+- X 해시플래그: X가 일부 해시태그 뒤에 보여 주는 맞춤 이모지.
 - 순위, 주제, 쿼리, 게시물 수, 검색 URL, WOEID & 원본 위치.
 - 모든 행에 위치 정보 표시.
 - 해시태그 행 & 제공되는 게시물 수를 알려 주는 라벨.
@@ -44,7 +47,7 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 1. Apify Console에서 Xquik의 X Trends Scraper를 여세요.
 2. `locations`에 위치 이름을, `woeids`에 숫자로 된 WOEID를 입력하세요.
 3. `maxTrendsPerLocation`을 설정하세요. 위치마다 최대 50개까지 받을 수 있습니다.
-4. `maxItems`로 전달할 행 수의 상한을 정하고 Start를 클릭하세요.
+4. `maxItems`로 실행 전체에서 전달할 행 수의 상한을 정하고 Start를 클릭하세요.
 5. 데이터셋을 JSON, CSV 또는 Excel로 내려받거나 Apify API를 사용하세요.
 
 ## 입력
@@ -59,9 +62,60 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 }
 ```
 
-지원하는 단축 이름에는 Worldwide, United States, United Kingdom, Turkey &
-Brazil이 있습니다. Canada, France, Germany, India, Indonesia, Japan, Mexico &
-Australia도 사용할 수 있습니다. 그 밖의 지원 위치는 `woeids`를 사용하세요.
+`locations`에는 Worldwide, United States, Japan, London처럼 X가 트렌드를
+제공하는 국가나 도시를 넣습니다. 2글자 국가 코드도 쓸 수 있습니다. X가 트렌드를
+제공하지 않는 이름은 행을 반환하지 않고 비용도 없습니다. `woeids`에는 숫자
+WOEID를 넣습니다.
+
+모든 이름 & WOEID를 보려면 `listLocations`를 켜세요. 그러면 실행은 트렌드 대신
+X가 트렌드를 제공하는 장소를 나열합니다.
+
+```json
+{ "listLocations": true, "country": "TR", "maxItems": 100 }
+```
+
+`country`에는 이름이나 2글자 코드를 넣습니다. `placeType`에는 `country`, `town`,
+`worldwide` 또는 `unknown`을 넣습니다. `nameContains`는 이름에 입력한 텍스트가
+들어 있는 장소만 남깁니다. 3개를 모두 비워 두면 모든 장소를 나열합니다.
+
+이름으로 X 장소를 검색하려면 `placeSearchTerms`를 채우세요. 그러면 실행은 트렌드
+대신 장소를 반환합니다.
+
+```json
+{ "placeSearchTerms": ["New York"], "maxItems": 20 }
+```
+
+각 장소에는 X 게시물 검색이 `place`로 받는 `id`가 들어 있습니다. X가 장소의
+순위를 매기므로 실행마다 순서가 다를 수 있습니다. X는 이름 1개에 장소를 최대
+20개까지 나열하며, New York 같은 일부 이름에는 더 적게 나열합니다. 실행은 입력한
+이름을 가진 장소만 남기므로 New Delhi는 행을 반환하지 않고 비용도 없습니다.
+
+`maxItems`는 실행 전체의 상한이며 검색어 순서대로 채워지므로, 첫 검색어가 상한을
+모두 쓸 수 있습니다. 검색어마다 같은 몫을 주려면 `maxItemsPerTarget`을
+설정하세요.
+
+```json
+{
+  "placeSearchTerms": ["Paris", "Rome"],
+  "maxItems": 20,
+  "maxItemsPerTarget": 10
+}
+```
+
+X 해시플래그를 나열하려면 `listHashflags`를 켜세요. 해시플래그는 X가 정해진 기간
+동안 해시태그 뒤에 보여 주는 맞춤 이모지입니다.
+
+```json
+{ "listHashflags": true, "hashtagContains": "football" }
+```
+
+실행은 X가 지금 보여 주는 해시플래그를 나열합니다. 끝난 것 & 예정된 것도
+넣으려면 `activeOnly`를 끄세요. `hashtagContains`는 입력한 텍스트가 들어 있는
+해시태그만 남깁니다.
+
+실행 1개는 1가지 종류의 행만 읽습니다. 우선순위는 `listLocations`,
+`listHashflags`, `placeSearchTerms` 순입니다. 셋 다 없으면 실행은 트렌드를
+읽습니다.
 
 문제없이 끝난 작은 실행은 `run-report`를 건너뛰어 Apify 사용량을 아낍니다. 모든
 실행에서 보고서를 기록하려면 `alwaysSaveRunRecords`를 켜세요.
@@ -69,8 +123,9 @@ Australia도 사용할 수 있습니다. 그 밖의 지원 위치는 `woeids`를
 ## 출력
 
 트렌드 1개가 데이터셋 행 1개입니다. 행에는 `name`, `rank`, `tweetVolume`,
-`query`, `url`, `woeid`, `sourceTarget` & `resultType`이 들어 있습니다. 원본에
-없는 필드는 행에서 빠집니다. Xquik의 X Trends Scraper는 값을 지어내지 않습니다.
+`query`, `url`, `woeid`, `sourceTarget` & `resultType`이 들어 있습니다.
+`sourceTarget`은 입력한 그대로의 위치입니다. 원본에 없는 필드는 행에서 빠집니다.
+Xquik의 X Trends Scraper는 값을 지어내지 않습니다.
 
 예시는 샘플 값입니다. 실제 결과는 실시간 데이터를 따릅니다. 트렌드 행은 다음과
 같습니다.
@@ -86,6 +141,60 @@ Australia도 사용할 수 있습니다. 그 밖의 지원 위치는 `woeids`를
 }
 ```
 
+`listLocations`를 쓰면 장소 1개가 데이터셋 행 1개입니다. 행에는 `woeid`, `name`,
+`country`, `countryCode`, `placeType`, `placeTypeCode`, `parentWoeid`, `url` &
+`resultType`이 들어 있습니다. `url`은 X가 예전에 쓰던 장소 참조이며 열리지 않을
+수 있습니다. 트렌드 위치 행은 다음과 같습니다.
+
+```json
+{
+  "woeid": 2344116,
+  "name": "Istanbul",
+  "country": "Turkey",
+  "countryCode": "TR",
+  "placeType": "Town",
+  "placeTypeCode": 7,
+  "parentWoeid": 23424969,
+  "resultType": "trendLocation"
+}
+```
+
+`placeSearchTerms`를 쓰면 장소 1개가 데이터셋 행 1개입니다. 행에는 `id`, `name`,
+`fullName`, `country`, `countryCode`, `placeType`, `url`, `centroid`,
+`boundingBox`, `attributes`, `containedWithin`, `sourceTarget` & `resultType`이
+들어 있습니다. `centroid`에는 경도, 위도 순으로 들어 있습니다. 장소 행은 다음과
+같습니다.
+
+```json
+{
+  "id": "0123456789abcdef",
+  "name": "Sample City",
+  "fullName": "Sample City, Sample Country",
+  "country": "Sample Country",
+  "countryCode": "US",
+  "placeType": "city",
+  "centroid": [-73.97, 40.78],
+  "sourceTarget": "New York",
+  "resultType": "place"
+}
+```
+
+`listHashflags`를 쓰면 해시플래그 1개가 데이터셋 행 1개입니다. 행에는 `hashtag`,
+`assetUrl`, `startsAt`, `endsAt`, `isHashfettiEnabled`, `animations` &
+`resultType`이 들어 있습니다. 해시플래그 행은 다음과 같습니다.
+
+```json
+{
+  "hashtag": "SampleHashtag",
+  "assetUrl": "https://abs.twimg.com/hashflags/Sample/Sample.png",
+  "startsAt": "2026-10-02T10:00:00.000Z",
+  "endsAt": "2027-01-03T14:59:00.000Z",
+  "isHashfettiEnabled": false,
+  "animations": [],
+  "resultType": "hashflag"
+}
+```
+
 ## X 트렌드 스크랩 비용은 얼마인가요?
 
 모든 Apify 요금제에서 전달된 행 1개당 $0.00015입니다. Apify 플랫폼 사용료는
@@ -93,6 +202,7 @@ Apify가 따로 청구합니다.
 
 - 전달된 데이터 행 1개마다 한 번 과금합니다. 진단은 `diagnostics`에서 무료로
   제공합니다.
+- 트렌드 위치 행, 장소 행, 해시플래그 행의 요금은 트렌드 행과 같습니다.
 - 시작, 쿼리, 위치 요금이 없습니다.
 - 과금 전에 중복을 제거합니다.
 - Apify의 최대 총 청구액 설정에 따라 전달되는 행 수가 제한됩니다.
@@ -112,7 +222,7 @@ Xquik의 X Trends Scraper는 한 실행에서 여러 위치를 읽습니다. Api
 `message`, `retryable` & `nextAction`을 따로 담아 나열합니다. 원인은
 `target_not_found`, `target_failed`, `pagination_safety_limit` &
 `deadline_reached`입니다. 찾을 수 없는 대상은 다른 원인으로 실행이 멈췄을 때만
-목록에 들어갑니다. 원인 중 하나라도 `retryable`이면 실행도 `retryable`입니다.
+목록에 들어갑니다. 원인 중 하나라도 재시도할 수 있으면 실행도 `retryable`입니다.
 
 ## 관련 Xquik Actor
 
@@ -185,6 +295,8 @@ Xquik의 X Trends Scraper는 한 실행에서 여러 위치를 읽습니다. Api
 
 ## 자주 묻는 질문
 
+자주 묻는 질문에 먼저 답하고, 이어서 도움받을 곳을 안내합니다.
+
 ### X API 키나 로그인이 필요한가요?
 
 아니요. Xquik의 X Trends Scraper는 X API 키, 로그인, 자격 증명이 모두 필요
@@ -200,12 +312,12 @@ Xquik의 X Trends Scraper는 공개 X 필드를 요청합니다. 결과에는 �
 
 먼저 무료 `diagnostics` 출력을 여세요. 결과가 없는 실행은 상태 메시지에서 대상 &
 필터를 확인하라고 안내합니다. `stopCauses`는 원인마다 따라 할 `nextAction`을
-알려 줍니다. 알 수 없는 위치가 있으면 실행이 그 이름을 알려 주고 대신 쓸 값을
-안내합니다.
+알려 줍니다. X가 트렌드를 제공하지 않는 위치는 행을 반환하지 않습니다. X가 받는
+이름을 보려면 `listLocations`를 켜세요.
 
 ### API, 스케줄 & 연동을 사용할 수 있나요?
 
-네. 공개 태스크 50개나 Xquik REST 작업 129개 중에서 고르세요.
+네. 공개 태스크 50개나 Xquik REST API 중에서 고르세요.
 [API 탭](https://apify.com/xquik/x-trends-scraper/api)에 Python, JavaScript &
 cURL 예시가 있습니다. Apify
 [스케줄](https://docs.apify.com/platform/schedules)로 Xquik의 X Trends Scraper를

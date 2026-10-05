@@ -16,28 +16,36 @@
 </td></tr></table>
 
 Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
-liefert die vollständigsten X-Daten. X List Scraper von Xquik sammelt Posts,
-Mitglieder & Follower von Listen. Die meisten anderen Apify Actors rechnen ab,
-bevor sie filtern oder Duplikate entfernen. Xquik rechnet nur gelieferte,
-eindeutige Ergebnisse ab, die zu deinen Filtern passen.
+liefert die vollständigsten X-Daten. X List Scraper von Xquik sammelt Details,
+Posts, Mitglieder & Follower von Listen & findet Listen per Stichwort. Die
+meisten anderen Apify Actors rechnen ab, bevor sie filtern oder Duplikate
+entfernen. Xquik rechnet nur gelieferte, eindeutige Ergebnisse ab, die zu deinen
+Filtern passen.
 
-Scrape Posts (Tweets), Mitglieder & Follower aus URLs von X-Listen oder aus
-numerischen Listen-IDs. Du zahlst **$0.00015 pro geliefertem Datensatz**, &
-Apify berechnet die Plattformnutzung separat. Du brauchst keinen
-X-API-Schlüssel & keinen Login.
+Scrape Details, Posts (Tweets), Mitglieder & Follower aus URLs von X-Listen oder
+aus numerischen Listen-IDs. Oder finde öffentliche Listen mit Suchbegriffen. Du
+zahlst **$0.00015 pro geliefertem Datensatz**, & Apify berechnet die
+Plattformnutzung separat. Du brauchst keinen X-API-Schlüssel & keinen Login.
 
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
 
 ## Listendaten & Filter
 
+- Listendetails: Name, Beschreibung, Mitglieder- & Follower-Zahl,
+  Erstellungszeit, Banner & das öffentliche Profil des Inhabers.
 - Posts der Liste mit Text, Autor, Kennzahlen, Medien & Zeitstempeln.
 - Mitglieder & Follower der Liste.
+- Listensuche per Stichwort. Jeder Datensatz ist 1 Liste mit Inhaber,
+  Mitgliederzahl & Follower-Zahl.
 - Optional auch Antworten in den Posts der Liste.
 - Filter für Datum, Unix-Zeit, Sprache, Medien, Interaktion, Verifizierung &
   Profile.
+- Die öffentlichen Listen, die ein Account erstellt hat oder auf denen er steht,
+  anhand von Nutzername oder Profil-URL.
 - Viele Listen & Ressourcentypen in 1 Run.
-- Eine globale Obergrenze & eine Obergrenze pro Listen-Ressource.
+- Eine globale Obergrenze & eine Obergrenze pro Listen-Ressource oder
+  Suchbegriff.
 - Runs laufen nach einer Apify-Migration weiter.
 - Duplikatentfernung vor der Abrechnung.
 
@@ -45,6 +53,7 @@ X-API-Schlüssel & keinen Login.
 
 1. Öffne X List Scraper von Xquik in der Apify Console.
 2. Füge Listen-URLs in `startUrls` oder numerische Listen-IDs in `listIds` ein.
+   Um Listen zu finden, trage stattdessen Stichwörter in `searchTerms` ein.
 3. Wähle `resources` & ergänze Filter wie `sinceDate` oder `minLikes`.
 4. Setze `maxItems`, um die gelieferten Datensätze zu begrenzen. Klicke dann
    auf Start.
@@ -67,10 +76,16 @@ X-API-Schlüssel & keinen Login.
 ```json
 {
   "listIds": ["1748648376080666720"],
-  "resources": ["tweets", "members", "followers"],
+  "resources": ["info", "tweets", "members", "followers"],
   "includeReplies": false,
   "maxItems": 10000
 }
+```
+
+Sende Suchbegriffe, um Listen per Stichwort zu finden:
+
+```json
+{ "searchTerms": ["space news", "climate science"], "maxItemsPerTarget": 50 }
 ```
 
 Kleine Runs ohne Probleme überspringen `run-report` & sparen Apify-Nutzung.
@@ -78,12 +93,54 @@ Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 
 ## Ausgabe
 
-Jeder Datensatz setzt `resultType` auf `listTweet`, `listMember` oder
-`listFollower`. `sourceTarget` enthält die eingegebene Listen-ID. Der Inhalt des
-Datensatzes folgt dem stabilen Response-Format von Xquik für Posts oder Profile.
+Jeder Datensatz setzt `resultType` auf `list`, `listTweet`, `listMember` oder
+`listFollower`. `sourceTarget` enthält die eingegebene Listen-ID oder den
+Suchbegriff, der einen `list`-Datensatz gefunden hat. Ein `list`-Datensatz
+enthält die Details einer Liste, 1 pro Liste. Andere Datensätze folgen dem
+stabilen Response-Format von Xquik für Posts oder Profile.
+
+### Listen eines Accounts
+
+Trage Nutzernamen in `twitterHandles` oder Profil-URLs in `startUrls` ein, um
+die öffentlichen Listen jedes Accounts zu listen:
+
+```json
+{ "twitterHandles": ["verge"], "accountLists": ["created", "memberships"] }
+```
+
+`created` listet die Listen, die der Account erstellt hat, & `memberships` die
+Listen, auf denen er steht. Jede Liste ist 1 Datensatz mit `resultType`
+`createdList` oder `listMembership`, dem Nutzernamen in `sourceTarget` & `id`,
+`name`, `description`, `memberCount`, `subscriberCount`, `createdAt`,
+`bannerUrl` & dem Profil `owner`. X zeigt eine private Liste nur ihrem Inhaber,
+private Listen fehlen also.
+
+Die erstellten Listen jedes Accounts kommen vor seinen Mitgliedschaften. Der
+Actor liest Accounts parallel. Datensätze verschiedener Accounts kommen also an,
+wie er sie liest. Gruppiere sie nach `sourceTarget`.
+
+Ein Datensatz ist 1 Account & 1 Liste. Eine Liste, die 2 deiner Accounts
+gemeinsam haben, ergibt 2 Datensätze, 1 pro Account. Du zahlst für jeden
+Datensatz. `dedupeAcrossTargets` entfernt diese Datensätze nie.
 
 Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
-Datensatz für ein Listenmitglied sieht so aus:
+Datensatz mit Listendetails sieht so aus:
+
+```json
+{
+  "resultType": "list",
+  "sourceTarget": "4143408",
+  "id": "4143408",
+  "name": "NASA Centers",
+  "description": "NASA has 10 centers http://www.nasa.gov/about/sites",
+  "memberCount": 11,
+  "subscriberCount": 859,
+  "createdAt": "2009-12-02T22:41:02.000Z",
+  "owner": { "username": "NASA", "name": "NASA" }
+}
+```
+
+Ein Datensatz für ein Listenmitglied sieht so aus:
 
 ```json
 {
@@ -93,6 +150,22 @@ Datensatz für ein Listenmitglied sieht so aus:
   "name": "Sample User",
   "followers": 1200,
   "verified": false
+}
+```
+
+Ein `list`-Datensatz aus einem Suchbegriff sieht so aus:
+
+```json
+{
+  "resultType": "list",
+  "sourceTarget": "space news",
+  "id": "1000000000000000001",
+  "name": "Sample Space News",
+  "description": "Sample accounts that post space news.",
+  "url": "https://x.com/i/lists/1000000000000000001",
+  "memberCount": 35,
+  "subscriberCount": 76,
+  "owner": { "username": "sample_user", "name": "Sample User" }
 }
 ```
 
@@ -203,6 +276,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
 ## FAQ
 
+Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
+
 ### Brauche ich einen X-API-Schlüssel oder Login?
 
 Nein. X List Scraper von Xquik braucht keinen X-API-Schlüssel, keinen Login &
@@ -223,7 +298,7 @@ lesen kann, & sagt, wie du sie korrigierst.
 
 ### Kann ich API, Zeitpläne & Integrationen nutzen?
 
-Ja. Wähle aus 50 öffentlichen Tasks oder 129 REST-Operationen von Xquik. Der
+Ja. Wähle aus 50 öffentlichen Tasks oder der REST-API von Xquik. Der
 [API-Tab](https://apify.com/xquik/x-list-scraper/api) enthält Beispiele für
 Python, JavaScript & cURL.
 Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) starten

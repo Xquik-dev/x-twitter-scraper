@@ -19,10 +19,10 @@ Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo, c
 i dati X più completi. X Follower Scraper di Xquik raccoglie follower,
 following, membri & follower delle liste e membri delle community. I benchmark
 pubblici dimostrano che è il più economico & veloce tra 10 Actor di follower. Le
-sue righe (`outputMode: "full"`) hanno 2,5x i campi dell'Actor mediano, come
-mostra il [benchmark qui sotto](#benchmark). La maggior parte degli altri Actor
-Apify fa pagare prima di filtrare o deduplicare. Xquik fa pagare solo i
-risultati consegnati, unici e conformi ai filtri.
+sue righe full hanno 2,5x i campi dell'Actor mediano, come mostra il
+[benchmark qui sotto](#benchmark). La maggior parte degli altri Actor Apify fa
+pagare prima di filtrare o deduplicare. Xquik fa pagare solo i risultati
+consegnati, unici e conformi ai filtri.
 
 Estrai da X (Twitter) follower, following, follower verificati, membri delle
 liste, follower delle liste & membri delle community. X Follower Scraper di
@@ -54,43 +54,47 @@ origine & la relazione.
 
 ### Quali dati può estrarre X Follower Scraper?
 
-| Campo             | Descrizione                                                     |
-| ----------------- | --------------------------------------------------------------- |
-| `id`              | ID numerico dell'utente X                                       |
-| `username`        | Nome utente (senza `@`)                                         |
-| `name`            | Nome visualizzato                                               |
-| `description`     | Testo della bio                                                 |
-| `followers`       | Numero di follower                                              |
-| `following`       | Numero di following                                             |
-| `statusesCount`   | Totale dei post pubblicati                                      |
-| `mediaCount`      | Totale dei media caricati                                       |
-| `favouritesCount` | Totale dei Mi piace messi                                       |
-| `verified`        | Indicatore combinato di verifica pubblica Blue o legacy         |
-| `verifiedType`    | `blue`, `business`, `government` o `none`                       |
-| `location`        | Posizione indicata dall'utente                                  |
-| `url`             | URL del sito web dal profilo                                    |
-| `profilePicture`  | URL dell'avatar (dimensione piena)                              |
-| `coverPicture`    | URL del banner                                                  |
-| `createdAt`       | Stringa di X con data & ora di creazione dell'account           |
-| `sourceTarget`    | Nome utente / ID da cui hai estratto questo profilo             |
-| `sourceRelation`  | Relazione: `followers`, `following`, `list_members`, ...        |
-| `sourceUrl`       | URL esatto in cui è stato trovato il profilo                    |
-| `sourceTargets`   | Tutti i target che corrispondono al profilo in modalità merge   |
-| `sourceRelations` | Tutte le relazioni che corrispondono al profilo in modalità merge |
-| `sourceUrls`      | Tutti gli URL di origine del profilo in modalità merge          |
+| Campo             | Descrizione                                                        |
+| ----------------- | ------------------------------------------------------------------ |
+| `id`              | ID numerico dell'utente X                                          |
+| `username`        | Nome utente (senza `@`)                                            |
+| `name`            | Nome visualizzato                                                  |
+| `description`     | Testo della bio                                                    |
+| `followers`       | Numero di follower                                                 |
+| `following`       | Numero di following                                                |
+| `statusesCount`   | Totale dei post pubblicati                                         |
+| `mediaCount`      | Totale dei media caricati                                          |
+| `favouritesCount` | Totale dei Mi piace messi                                          |
+| `verified`        | Indicatore combinato di verifica pubblica Blue o legacy            |
+| `verifiedType`    | `blue`, `business`, `government` o `none`                          |
+| `location`        | Posizione indicata dall'utente                                     |
+| `url`             | URL del sito web dal profilo                                       |
+| `profilePicture`  | URL dell'avatar (dimensione piena)                                 |
+| `coverPicture`    | URL del banner                                                     |
+| `createdAt`       | Stringa di X con data & ora di creazione dell'account              |
+| `sourceTarget`    | Nome utente / ID da cui hai estratto questo profilo                |
+| `sourceRelation`  | Relazione: `followers`, `following`, `list_members`, ...           |
+| `sourceUrl`       | URL esatto in cui è stato trovato il profilo                       |
+| `sourceTargets`   | Tutti i target che corrispondono al profilo in modalità merge      |
+| `sourceRelations` | Tutte le relazioni che corrispondono al profilo in modalità merge  |
+| `sourceUrls`      | Tutti gli URL di origine del profilo in modalità merge             |
 | `overlapCount`    | Numero di coppie relazione-target corrispondenti in modalità merge |
-| `resultType`      | Tipo di riga nelle modalità di output full & raw                |
-| `raw`             | Profilo di origine sicuro, prima della formattazione dell'Actor |
+| `resultType`      | Tipo di riga nelle modalità di output full & raw                   |
+| `raw`             | Profilo di origine sicuro, prima della formattazione dell'Actor    |
 
-Le righe seguono il contratto dei profili pubblici. Il contratto copre
-identità, conteggi, verifica, disponibilità, affiliati, dati professionali &
-biografie. Restano
-disponibili attribuzione dell'origine, entità & ID dei post fissati. Consulta
-OpenAPI per i campi esatti.
+Le righe seguono il contratto dei profili pubblici. Il contratto copre identità,
+conteggi, verifica, disponibilità, affiliati, dati professionali & biografie.
+Restano disponibili attribuzione dell'origine, entità & ID dei post fissati.
+Consulta OpenAPI per i campi esatti.
 
 Imposta `outputMode: "raw"` o `includeRaw: true` per aggiungere un campo `raw`.
 Contiene una copia sicura del profilo di origine. La modalità compatta è quella
 predefinita.
+
+Imposta `outputMode: "full"` per avere il massimo dei dati per riga. Ogni riga
+conserva fino a 13 campi di elenco quando X li invia, come `listedCount`,
+`defaultProfileImage` & `advertiserAccountType`. Le righe full li mettono in
+fondo. Le righe compatte restano più piccole & costano meno da archiviare.
 
 `verifiedOnly` accetta i profili con verifica pubblica Blue & legacy. Se gli
 indicatori di origine sono in conflitto, vince lo stato di verifica vero.
@@ -102,8 +106,8 @@ simili. Anche l'output raw li elimina.
 ## Casi d'uso
 
 - Arricchisci i lead & crea dataset di ricerca con più campi per profilo. Il
-  2026-09-29 la nostra riga mediana (`outputMode: "full"`) aveva 38 campi. È
-  2,5x la mediana di altri 9 Actor.
+  2026-09-29 la nostra riga full mediana aveva 38 campi. È 2,5x la mediana di
+  altri 9 Actor.
 - Esporta i follower dei concorrenti per cercare lead.
 - Confronta il pubblico del tuo account, dei concorrenti & di personaggi
   pubblici.
@@ -113,6 +117,8 @@ simili. Anche l'output raw li elimina.
 - Segmenta i follower per parola chiave nella bio, posizione o tipo di profilo.
 
 ## Come uso X Follower Scraper per estrarre i dati dei follower?
+
+Ogni esempio qui sotto è un input completo. Scegli quello adatto ai tuoi dati.
 
 1. Apri X Follower Scraper di Xquik in Apify Console.
 2. Aggiungi URL di profili, liste o community, nomi utente di X o ID numerici.
@@ -156,6 +162,18 @@ nomi utente funzionano con o senza `@`:
 
 `relation` stabilisce cosa estrarre per ogni nome utente. Usa `followers`,
 `following` o `verified_followers`.
+
+Usa `follower_ids` o `following_ids` quando ti servono solo gli ID utente. Ogni
+riga contiene 1 ID utente, il suo target di origine & la sua relazione, & una
+pagina contiene fino a 5.000 ID. I filtri sui profili richiedono i campi del
+profilo, quindi lasciali vuoti per queste 2 relazioni.
+
+Usa `affiliates` per gli account che un'organizzazione elenca come suoi
+affiliati, come il personale & i prodotti di un'azienda. Ogni riga è un profilo
+completo. Un account senza affiliati non restituisce righe.
+
+Usa `subscriptions` per i creator a cui un account è abbonato. Un account che
+nasconde i suoi abbonamenti non restituisce righe.
 
 Lo stesso input accetta anche gli alias `username`, `usernames` & `user_names`.
 
@@ -218,8 +236,8 @@ L'Actor può esaminare più profili di quanti ne scrive. Paghi solo le righe che
 superano ogni filtro & entrano nel tuo dataset.
 
 Separa le alternative di `bioContains` con virgole o a capo. Un profilo passa
-quando la sua bio contiene almeno uno dei termini. Il confronto ignora
-maiuscole & minuscole.
+quando la sua bio contiene almeno uno dei termini. Il confronto ignora maiuscole
+& minuscole.
 
 ### Trova la sovrapposizione di pubblico
 
@@ -238,29 +256,33 @@ relazione:
 
 L'output ha 1 riga per ogni profilo unico. I profili condivisi includono
 `sourceTargets`, `sourceRelations`, `sourceUrls`, `sourceTargetKeys` &
-`overlapCount`. Ordina per `overlapCount` o esporta le righe in CSV. Tieni
-`maxItems` abbastanza alto perché ogni target aggiunga righe. Usa
+`overlapCount`. Ordina per `overlapCount` o esporta le righe in CSV. Le righe
+seguono l'ordine dei tuoi target. Tieni `maxItems` abbastanza alto perché ogni
+target aggiunga righe. Quando `maxItems` chiude in anticipo un'esecuzione, i
+profili che tiene possono cambiare da un'esecuzione all'altra. Usa
 `maxItemsPerTarget` per impostare la profondità di ogni account.
 
 ### Formati URL accettati
 
-| URL                                         | Relazione                                        |
-| ------------------------------------------- | ------------------------------------------------ |
-| `https://x.com/<handle>/followers`          | `followers`                                      |
-| `https://x.com/<handle>/verified_followers` | `verified_followers`                             |
-| `https://x.com/<handle>/following`          | `following`                                      |
-| `https://x.com/<handle>`                    | `relation` predefinita (followers se non impostata) |
-| `https://x.com/i/lists/<id>/members`        | `list_members`                                   |
-| `https://x.com/i/lists/<id>/followers`      | `list_followers`                                 |
-| `https://x.com/i/lists/<id>`                | `list_members`                                   |
-| `https://x.com/i/communities/<id>/members`  | `community_members`                              |
-| `https://x.com/i/communities/<id>`          | `community_members`                              |
-| `<handle>/followers`                        | `followers`                                      |
-| `<handle>/following`                        | `following`                                      |
-| `<handle>/verified_followers`               | `verified_followers`                             |
-| `lists/<id>/members`                        | `list_members`                                   |
-| `lists/<id>/followers`                      | `list_followers`                                 |
-| `communities/<id>/members`                  | `community_members`                              |
+| URL                                         | Relazione                          |
+| ------------------------------------------- | ---------------------------------- |
+| `https://x.com/<handle>/followers`          | `followers`                        |
+| `https://x.com/<handle>/verified_followers` | `verified_followers`               |
+| `https://x.com/<handle>/following`          | `following`                        |
+| `https://x.com/<handle>/affiliates`         | `affiliates`                       |
+| `https://x.com/<handle>`                    | `relation`, altrimenti `followers` |
+| `https://x.com/i/lists/<id>/members`        | `list_members`                     |
+| `https://x.com/i/lists/<id>/followers`      | `list_followers`                   |
+| `https://x.com/i/lists/<id>`                | `list_members`                     |
+| `https://x.com/i/communities/<id>/members`  | `community_members`                |
+| `https://x.com/i/communities/<id>`          | `community_members`                |
+| `<handle>/followers`                        | `followers`                        |
+| `<handle>/following`                        | `following`                        |
+| `<handle>/verified_followers`               | `verified_followers`               |
+| `<handle>/affiliates`                       | `affiliates`                       |
+| `lists/<id>/members`                        | `list_members`                     |
+| `lists/<id>/followers`                      | `list_followers`                   |
+| `communities/<id>/members`                  | `community_members`                |
 
 Funzionano ovunque anche gli URL `twitter.com` & `mobile.twitter.com`. Vanno
 bene anche gli URL senza `https://`, come `x.com/nasa`.
@@ -292,8 +314,8 @@ addebito per ogni riga di dati consegnata. Non ti serve un abbonamento Xquik
 separato & Xquik non aggiunge costi di avvio. Avvii, target & scelta della
 relazione non aggiungono costi di query separati.
 
-Un'esecuzione può leggere molti target. Limiti, deduplicazione, attribuzione &
-fatturazione restano esatti su tutti.
+Un'esecuzione può leggere molti target. Limiti, deduplicazione & fatturazione
+restano esatti su tutti.
 
 - I filtri agiscono prima che un profilo entri nel tuo dataset, quindi le righe
   filtrate non costano nulla.
@@ -316,22 +338,47 @@ uso di Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
 ## Benchmark
 
 X Follower Scraper di Xquik ha battuto altri 9 Actor di follower su costo &
-velocità. La sua riga mediana (`outputMode: "full"`) aveva 38 campi, 2,5x la
-mediana degli altri.
+velocità. La sua riga full mediana aveva 38 campi, 2,5x la mediana degli altri.
 
-| Actor                                                  | Profili utili | Costo per profilo utile | Profili utili al secondo | Campi per riga | Esecuzione pubblica                                                                                                                                                                                                 |
-| ------------------------------------------------------ | ------------: | ----------------------: | -----------------------: | -------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| xquik/x-follower-scraper                               |         1.000 |               $0.000155 |                    100.0 |             38 | [Vedi esecuzione](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)                                                                                                                                            |
-| xquik/x-follower-scraper                               |         1.000 |               $0.000155 |                     77.9 |             38 | [Vedi esecuzione](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)                                                                                                                                            |
-| b2b_leads/X-Real-Time-Data                             |           286 |               $0.000388 |                      3.1 |             21 | [Vedi esecuzione](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)                                                                                                                                            |
-| kaitoeasyapi/premium-x-follower-scraper-following-data |           356 |               $0.000506 |                     21.9 |             50 | [Vedi esecuzione](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)                                                                                                                                            |
-| api-ninja/x-twitter-followers-scraper                  |           350 |               $0.000809 |                      7.0 |              8 | [Vedi esecuzione](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)                                                                                                                                            |
-| altimis/scweet                                         |           332 |               $0.000922 |                      1.1 |             21 | [Vedi esecuzione](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)                                                                                                                                            |
-| apidojo/twitter-user-scraper                           |           323 |               $0.001160 |                      7.3 |             25 | [Vedi esecuzione](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)                                                                                                                                            |
-| atomus/twitter-scraper                                 |           323 |               $0.001272 |                      6.2 |             13 | [Vedi esecuzione](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)                                                                                                                                            |
-| practicaltools/cheap-simple-twitter-api                |           283 |               $0.002036 |                      6.5 |              4 | [Esecuzione 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb), [Esecuzione 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK), [Esecuzione 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX) |
-| maximedupre/twitter-scraper                            |           320 |               $0.002192 |                      2.1 |             15 | [Esecuzione 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs), [Esecuzione 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39), [Esecuzione 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm) |
-| seemuapps/x-followers-following-scraper                |           286 |               $0.003504 |                      3.9 |              9 | [Esecuzione 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj), [Esecuzione 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ), [Esecuzione 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj) |
+- `xquik/x-follower-scraper`: 1.000 profili utili, $0.000155 per profilo utile,
+  100,0 al secondo & 38 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
+- `xquik/x-follower-scraper`: 1.000 profili utili, $0.000155 per profilo utile,
+  77,9 al secondo & 38 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
+- `b2b_leads/X-Real-Time-Data`: 286 profili utili, $0.000388 per profilo utile,
+  3,1 al secondo & 21 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
+- `kaitoeasyapi/premium-x-follower-scraper-following-data`: 356 profili utili,
+  $0.000506 per profilo utile, 21,9 al secondo & 50 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
+- `api-ninja/x-twitter-followers-scraper`: 350 profili utili, $0.000809 per
+  profilo utile, 7,0 al secondo & 8 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
+- `altimis/scweet`: 332 profili utili, $0.000922 per profilo utile, 1,1 al
+  secondo & 21 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
+- `apidojo/twitter-user-scraper`: 323 profili utili, $0.001160 per profilo
+  utile, 7,3 al secondo & 25 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
+- `atomus/twitter-scraper`: 323 profili utili, $0.001272 per profilo utile, 6,2
+  al secondo & 13 campi per riga.
+  [Vedi esecuzione](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
+- `practicaltools/cheap-simple-twitter-api`: 283 profili utili, $0.002036 per
+  profilo utile, 6,5 al secondo & 4 campi per riga.
+  [Esecuzione 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb),
+  [Esecuzione 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK),
+  [Esecuzione 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
+- `maximedupre/twitter-scraper`: 320 profili utili, $0.002192 per profilo utile,
+  2,1 al secondo & 15 campi per riga.
+  [Esecuzione 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs),
+  [Esecuzione 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39),
+  [Esecuzione 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
+- `seemuapps/x-followers-following-scraper`: 286 profili utili, $0.003504 per
+  profilo utile, 3,9 al secondo & 9 campi per riga.
+  [Esecuzione 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj),
+  [Esecuzione 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ),
+  [Esecuzione 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
 
 Ogni Actor ha letto i follower di NASA, SpaceX & esa. Gli altri Actor sono stati
 eseguiti il 2026-09-28. Le esecuzioni di Xquik hanno usato `outputMode: "full"`
@@ -356,7 +403,8 @@ Prova questi input:
   profili verificati.
 - Incolla l'URL di una lista in Start URLs per controllarne i membri.
 - Aggiungi 2 o più nomi utente. Un profilo condiviso compare una volta, sotto il
-  primo target. Usa `dedupeMode: "merge"` per tenere 1 riga con ogni target
+  target che lo restituisce per primo. Quel target può cambiare da un'esecuzione
+  all'altra. Usa `dedupeMode: "merge"` per avere 1 riga stabile con ogni target
   corrispondente. Imposta `dedupeAcrossTargets: false` per tenere 1 riga per
   target.
 
@@ -386,18 +434,19 @@ usati da altri Actor di follower di X. Li converte nei propri campi. I nomi
 canonici restano quelli documentati di default. Un alias non scarta mai un campo
 & non cambia mai quanto paghi.
 
-| Campo che usi già                                                                     | Xquik lo legge come      |
-| ------------------------------------------------------------------------------------- | ------------------------ |
-| `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`, `screenNames` | `twitterHandles`         |
-| `username`, `handle`, `screenName`, come stringa singola                              | `twitterHandles`         |
-| `twitterUserIds`, `user_ids`, `userIdList`                                            | `userIds`                |
-| `user_id`, `userId`, come stringa singola                                             | `userIds`                |
-| `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`                          | `startUrls`              |
-| `profileUrl`, come stringa singola                                                    | `startUrls`              |
-| `getFollowers`, `getFollowing`                                                        | `relations`              |
-| `type` con `followers` o `following`                                                  | `relation`               |
-| `maxResults`, `max_results`, `resultsLimit`, `count`                                  | `maxItems`               |
-| `scrapeAllResults`                                                                    | nessun limite per target |
+Ogni voce elenca i campi che usi già, poi il campo a cui corrispondono:
+
+- `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`,
+  `screenNames`: `twitterHandles`
+- `username`, `handle`, `screenName`, come stringa singola: `twitterHandles`
+- `twitterUserIds`, `user_ids`, `userIdList`: `userIds`
+- `user_id`, `userId`, come stringa singola: `userIds`
+- `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`: `startUrls`
+- `profileUrl`, come stringa singola: `startUrls`
+- `getFollowers`, `getFollowing`: `relations`
+- `type` con `followers` o `following`: `relation`
+- `maxResults`, `max_results`, `resultsLimit`, `count`: `maxItems`
+- `scrapeAllResults`: nessun limite per target
 
 Qui 2 nomi hanno un altro significato. In alcuni Actor `maxFollowers` &
 `maxFollowing` limitano quante righe restituisce un'esecuzione. In X Follower
@@ -408,9 +457,9 @@ sostituisci `maxPages` con `maxItems`.
 ### Usa sempre la build più recente
 
 Le esecuzioni dallo Store usano la build `latest` di X Follower Scraper di
-Xquik. Nelle chiamate API, ometti l'override della build o passa
-`build=latest`. Aggiorna i Task & le integrazioni che fissano una build più
-vecchia. Le build fissate non si aggiornano mai da sole.
+Xquik. Nelle chiamate API, ometti l'override della build o passa `build=latest`.
+Aggiorna i Task & le integrazioni che fissano una build più vecchia. Le build
+fissate non si aggiornano mai da sole.
 
 ## Output
 
@@ -480,8 +529,8 @@ prima di accettare righe oltre il limite. Lascia vuoto `maxItems` per ottenere
 tutti i profili che il tetto di spesa consente. Imposta `maxItems` &
 `maxItemsPerTarget` solo se vuoi meno profili di quanti ne consente il budget.
 
-- Combina filtri sui profili come `minFollowers`, `verifiedType` &
-  `bioContains` per restringere il dataset fatturato.
+- Combina filtri sui profili come `minFollowers`, `verifiedType` & `bioContains`
+  per restringere il dataset fatturato.
 - Di default, le esecuzioni tengono solo i profili unici tra i target. Imposta
   `dedupeAcrossTargets: false` per tenere 1 riga per target.
 - Imposta `dedupeMode: "merge"` per avere 1 riga per profilo con ogni target di
@@ -508,13 +557,14 @@ Lo stato dell'esecuzione dice perché si è fermata. Conta anche i risultati
 addebitati, i duplicati saltati & i target letti. Lo stato nomina ogni causa di
 un arresto anticipato. `stopCauses` elenca ogni causa con i propri `message`,
 `retryable` & `nextAction`. Le cause sono `target_not_found`,
-`target_protected`, `target_failed` & `deadline_reached`. Un account mancante
-entra nell'elenco solo se un'altra causa ha fermato l'esecuzione. L'esecuzione è
-`retryable` quando lo è almeno una causa.
+`target_suspended`, `target_protected`, `target_failed` & `deadline_reached`.
+`target_suspended` nomina gli account che X ha sospeso. Un account mancante o
+sospeso entra nell'elenco solo se un'altra causa ha fermato l'esecuzione.
+L'esecuzione è `retryable` quando lo è almeno una causa.
 
-X mantiene privati gli elenchi di follower & following di un account protetto.
-Quel target riceve `target_protected` in 1 diagnostica gratuita & l'esecuzione
-legge gli altri target.
+X mantiene privati gli elenchi di un account protetto. Quel target riceve
+`target_protected` in 1 diagnostica gratuita & l'esecuzione legge gli altri
+target.
 
 `failedTargets` conta i target che si sono fermati dopo un errore. Queste
 esecuzioni usano `completionReason: "partial_failure"`. I loro profili
@@ -528,8 +578,8 @@ L'esecuzione salva profili & report, poi termina in modo pulito prima del
 limite. I profili consegnati si pagano una volta.
 
 Le esecuzioni con un problema scrivono sempre `run-report`, incluse le uscite
-senza input o con input non valido. `run-report` ha anche un campo `version`
-con la versione esatta del codice sorgente pubblicato dell'Actor.
+senza input o con input non valido. `run-report` ha anche un campo `version` con
+la versione esatta del codice sorgente pubblicato dell'Actor.
 
 ## Actor Xquik correlati
 
@@ -608,8 +658,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
 ## Ti serve più dello scraping?
 
-Xquik offre anche 47 strumenti nella dashboard, 129 operazioni REST, webhook
-firmati & un server MCP.
+Xquik offre anche 47 strumenti nella dashboard, un'API REST, webhook firmati &
+un server MCP.
 
 - [Documentazione API](https://docs.xquik.com/introduction): guide all'API REST
 - [Followers API](https://docs.xquik.com/api-reference/x/followers): ottieni i
@@ -624,6 +674,8 @@ firmati & un server MCP.
   supportati su post & profili
 
 ## FAQ
+
+Le risposte alle domande più comuni, poi dove trovare assistenza.
 
 ### Serve una chiave API X?
 
@@ -640,7 +692,7 @@ La velocità di X Follower Scraper di Xquik dipende da dimensione del target,
 filtri & disponibilità di X. Le sue 2 esecuzioni del [benchmark](#benchmark)
 hanno raggiunto 77,9 & 100,0 profili utili al secondo.
 
-### Perché la mia esecuzione restituisce meno righe di `maxItems`?
+### Perché la mia esecuzione restituisce meno righe del mio limite?
 
 Filtri come `minFollowers`, `verifiedOnly` & `bioContains` agiscono prima della
 scrittura. Allentali per ottenere più risultati. X Follower Scraper di Xquik

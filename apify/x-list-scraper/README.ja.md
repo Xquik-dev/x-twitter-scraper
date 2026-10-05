@@ -15,28 +15,31 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">FramerがXquikのスクレイパーをClaude Code、Codex、Cursorなどと一緒に使う様子を6:07から視聴できます。</a>
 </td></tr></table>
 
-Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX List Scraperは、リストのポスト、メンバー、フォロワーを収集します。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。
+Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX List Scraperは、リストの詳細、ポスト、メンバー、フォロワーを収集し、キーワードでリストを見つけます。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。
 
-XのリストのURLまたは数値のリストIDから、ポスト、メンバー、フォロワーをスクレイピングします。料金は**配信された行1件につき$0.00015**で、Apifyのプラットフォーム利用料は別途かかります。X APIキーやログインは不要です。
+XのリストのURLまたは数値のリストIDから、詳細、ポスト、メンバー、フォロワーをスクレイピングします。検索語で公開リストを見つけることもできます。料金は**配信された行1件につき$0.00015**で、Apifyのプラットフォーム利用料は別途かかります。X APIキーやログインは不要です。
 
 > Xquikは独立したサードパーティサービスです。X Corpとは提携していません。
 > 「Twitter」および「X」はX Corpの商標です。
 
 ## リストのデータとフィルター
 
+- リストの詳細: 名前、説明、メンバー数、フォロワー数、作成日時、バナー、所有者の公開プロフィール。
 - テキスト、著者、指標、メディア、タイムスタンプを含むリストのポスト。
 - リストのメンバーとリストのフォロワー。
+- キーワードによるリストの検索。各行は1つのリストで、所有者、メンバー数、フォロワー数が付きます。
 - リストのポストに返信を含めるオプション。
 - 日付、Unix時間、言語、メディア、エンゲージメント、認証、プロフィールのフィルター。
+- アカウントが作成した公開リストと、そのアカウントが入っている公開リスト。ユーザー名かプロフィールのURLから取得します。
 - 1回の実行で扱える複数のリストとリソースの種類。
-- 全体の上限と、リストのリソースごとの上限。
+- 全体の上限と、リストのリソースまたは検索語ごとの上限。
 - Apifyのマイグレーション後に再開する実行。
 - 課金前の重複排除。
 
 ## Xのリストをスクレイピングする方法
 
 1. Apify ConsoleでXquikのX List Scraperを開きます。
-2. リストのURLを `startUrls` に、数値のリストIDを `listIds` に貼り付けます。
+2. リストのURLを `startUrls` に、数値のリストIDを `listIds` に貼り付けます。リストを見つけるには、代わりにキーワードを `searchTerms` に追加します。
 3. `resources` を選び、`sinceDate` や `minLikes` などのフィルターを追加します。
 4. `maxItems` で配信する行数の上限を決め、Startをクリックします。
 5. データセットをJSON、CSV、Excelでダウンロードするか、Apify APIを使います。
@@ -57,19 +60,55 @@ XのリストのURLまたは数値のリストIDから、ポスト、メンバ�
 ```json
 {
   "listIds": ["1748648376080666720"],
-  "resources": ["tweets", "members", "followers"],
+  "resources": ["info", "tweets", "members", "followers"],
   "includeReplies": false,
   "maxItems": 10000
 }
+```
+
+キーワードでリストを見つけるには、検索語を送ります。
+
+```json
+{ "searchTerms": ["space news", "climate science"], "maxItemsPerTarget": 50 }
 ```
 
 問題なく終わった小規模な実行は `run-report` を書き込まず、Apifyの利用料を節約します。毎回書き込むには `alwaysSaveRunRecords` をオンにしてください。
 
 ## 出力
 
-各行の `resultType` は `listTweet`、`listMember`、`listFollower` のいずれかです。`sourceTarget` には入力したリストIDが残ります。行の本体は、安定したXquikのポストまたはプロフィールのレスポンス形式を使います。
+各行の `resultType` は `list`、`listTweet`、`listMember`、`listFollower` のいずれかです。`sourceTarget` には、入力したリストIDか、`list` の行を見つけた検索語が残ります。`list` の行にはリストの詳細が入り、リストごとに1行です。ほかの行は、安定したXquikのポストまたはプロフィールのレスポンス形式を使います。
 
-例はサンプル値です。実際の結果にはライブデータが入ります。リストのメンバー行は次のようになります。
+### アカウントのリスト
+
+各アカウントの公開リストを一覧にするには、ユーザー名を `twitterHandles` に、またはプロフィールのURLを `startUrls` に追加します。
+
+```json
+{ "twitterHandles": ["verge"], "accountLists": ["created", "memberships"] }
+```
+
+`created` はアカウントが作成したリストを、`memberships` はそのアカウントが入っているリストを一覧にします。各リストは1行です。行には、`createdList` か `listMembership` の `resultType`、ユーザー名を設定した `sourceTarget`、`id`、`name`、`description`、`memberCount`、`subscriberCount`、`createdAt`、`bannerUrl`、`owner` のプロフィールが入ります。Xは非公開リストを所有者にだけ表示するので、非公開リストは含まれません。
+
+各アカウントでは、作成したリストが、入っているリストより先に並びます。Actorは複数のアカウントを並行して読み取るので、異なるアカウントの行は読み取った順に届きます。`sourceTarget` でグループ化してください。
+
+1行は、1つのアカウントと1つのリストの組です。指定したアカウントのうち2つが共有するリストは2行になり、それぞれの下に1行ずつ入ります。どの行も課金されます。`dedupeAcrossTargets` がこれらの行を除くことはありません。
+
+例はサンプル値です。実際の結果にはライブデータが入ります。リストの詳細の行は次のようになります。
+
+```json
+{
+  "resultType": "list",
+  "sourceTarget": "4143408",
+  "id": "4143408",
+  "name": "NASA Centers",
+  "description": "NASA has 10 centers http://www.nasa.gov/about/sites",
+  "memberCount": 11,
+  "subscriberCount": 859,
+  "createdAt": "2009-12-02T22:41:02.000Z",
+  "owner": { "username": "NASA", "name": "NASA" }
+}
+```
+
+リストのメンバー行は次のようになります。
 
 ```json
 {
@@ -79,6 +118,22 @@ XのリストのURLまたは数値のリストIDから、ポスト、メンバ�
   "name": "Sample User",
   "followers": 1200,
   "verified": false
+}
+```
+
+検索語から得た `list` の行は次のようになります。
+
+```json
+{
+  "resultType": "list",
+  "sourceTarget": "space news",
+  "id": "1000000000000000001",
+  "name": "Sample Space News",
+  "description": "Sample accounts that post space news.",
+  "url": "https://x.com/i/lists/1000000000000000001",
+  "memberCount": 35,
+  "subscriberCount": 76,
+  "owner": { "username": "sample_user", "name": "Sample User" }
 }
 ```
 
@@ -123,6 +178,8 @@ XquikのX List Scraperは、1回の実行で多数のリストとリソースを
 
 ## よくある質問
 
+よくある質問に答えたあと、サポートを受けられる場所を案内します。
+
 ### X APIキーやログインは必要ですか？
 
 いいえ。XquikのX List Scraperは、X APIキー、ログイン、認証情報を必要としません。
@@ -137,7 +194,7 @@ XquikのX List Scraperは、Xの公開フィールドを取得します。結果
 
 ### API、スケジュール、連携は使えますか？
 
-はい。50個の公開タスクと129個のXquik REST操作から選べます。[APIタブ](https://apify.com/xquik/x-list-scraper/api)には、Python、JavaScript、cURLの例があります。Apifyの[スケジュール](https://docs.apify.com/platform/schedules)を使うと、XquikのX List Scraperをcronで実行できます。エージェントは[Apify MCP](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。古いビルドが必要な場合を除き、`latest` を使ってください。
+はい。50個の公開タスクかXquik REST APIから選べます。[APIタブ](https://apify.com/xquik/x-list-scraper/api)には、Python、JavaScript、cURLの例があります。Apifyの[スケジュール](https://docs.apify.com/platform/schedules)を使うと、XquikのX List Scraperをcronで実行できます。エージェントは[Apify MCP](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。古いビルドが必要な場合を除き、`latest` を使ってください。
 
 ### どこでサポートを受けられますか？
 
