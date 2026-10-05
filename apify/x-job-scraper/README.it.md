@@ -35,6 +35,7 @@ chiave API X né il login.
 - Filtri su luogo, modalità di lavoro, livello di esperienza, tipo di contratto
   & azienda.
 - URL & ID delle offerte letti come annunci completi.
+- Località di lavoro per nome, ciascuna con l'ID che `locationId` accetta.
 - Titolo, fascia retributiva, valuta, link di candidatura, località & account
   che assume.
 - Descrizioni complete in testo semplice & Markdown su ogni riga.
@@ -51,6 +52,18 @@ chiave API X né il login.
 3. Restringi la ricerca con `location`, `locationType`, `seniority` o `company`.
 4. Imposta `maxItems` per limitare le righe consegnate, poi fai clic su Start.
 5. Scarica il dataset in JSON, CSV o Excel, oppure usa l'API di Apify.
+
+`startUrls` accetta ogni URL come stringa semplice o come oggetto
+`{ "url": "..." }`:
+
+```json
+{
+  "startUrls": [
+    "https://x.com/i/jobs/1899202395210649861",
+    { "url": "https://x.com/i/jobs/1899202395210649861" }
+  ]
+}
+```
 
 ## Input
 
@@ -82,8 +95,14 @@ Leggi offerte note tramite URL o ID:
 ```
 
 `location` accetta il nome di un luogo. `locationId` fissa invece 1 luogo
-esatto, come New York City anziché West New York. Trova gli ID dei luoghi con
-l'API delle località di lavoro di Xquik.
+esatto, come New York City anziché West New York.
+
+Trova gli ID dei luoghi per nome. Un'esecuzione con `locationSearchTerms` elenca
+i luoghi invece delle offerte:
+
+```json
+{ "locationSearchTerms": ["New York"], "maxItems": 20 }
+```
 
 Le esecuzioni piccole senza problemi saltano `run-report` & risparmiano uso di
 Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
@@ -119,6 +138,17 @@ offerta ha questo aspetto:
   "account": { "username": "example", "verified": true },
   "sourceTarget": "software engineer",
   "resultType": "job"
+}
+```
+
+Ogni località di lavoro è 1 riga con l'`id` che `locationId` accetta:
+
+```json
+{
+  "id": "1720462281920696805",
+  "name": "New York City, NY",
+  "sourceTarget": "New York",
+  "resultType": "jobLocation"
 }
 ```
 
@@ -188,6 +218,10 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): estrae
   informazioni, post, ricerche, membri & moderatori delle community. Usalo
   quando le tue fonti sono community di X. Da $0.00015 per riga.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): trova gli Spazi
+  per parola chiave & ne legge titoli, stati, orari, numero di ascoltatori, host
+  & relatori. Legge anche le trasmissioni tramite URL o ID. Usalo quando segui
+  audio & video in diretta su X. Da $0.00015 per Spazio o trasmissione.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): estrae le
   tendenze in tempo reale per località con posizione in classifica, volume,
   query & WOEID. Usalo quando segui cosa è di tendenza e dove. Da $0.00015 per

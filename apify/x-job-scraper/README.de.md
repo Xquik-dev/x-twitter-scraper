@@ -35,6 +35,7 @@ keinen Login.
 - Viele Suchbegriffe in 1 Run, parallel gelesen.
 - Filter für Ort, Arbeitsmodell, Karrierestufe, Anstellungsart & Unternehmen.
 - Job-URLs & Job-IDs, als vollständige Anzeigen gelesen.
+- Job-Standorte nach Name, jeweils mit der ID, die `locationId` annimmt.
 - Titel, Gehaltsspanne, Währung, Bewerbungslink, Standort & einstellender
   Account.
 - Vollständige Beschreibungen als Klartext & Markdown in jedem Datensatz.
@@ -52,6 +53,18 @@ keinen Login.
 4. Setze `maxItems`, um die gelieferten Datensätze zu begrenzen. Klicke dann auf
    Start.
 5. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
+
+`startUrls` nimmt jede URL als einfachen String oder als Objekt
+`{ "url": "..." }`:
+
+```json
+{
+  "startUrls": [
+    "https://x.com/i/jobs/1899202395210649861",
+    { "url": "https://x.com/i/jobs/1899202395210649861" }
+  ]
+}
+```
 
 ## Eingabe
 
@@ -83,8 +96,14 @@ Lies bekannte Jobs per URL oder ID:
 ```
 
 `location` akzeptiert einen Ortsnamen. `locationId` legt stattdessen 1 exakten
-Ort fest, etwa New York City statt West New York. Finde Orts-IDs mit der
-Xquik-API für Job-Standorte.
+Ort fest, etwa New York City statt West New York.
+
+Finde Orts-IDs nach Name. Ein Run mit `locationSearchTerms` listet Orte statt
+Jobs auf:
+
+```json
+{ "locationSearchTerms": ["New York"], "maxItems": 20 }
+```
 
 Kleine Runs ohne Probleme überspringen `run-report` & sparen Apify-Nutzung.
 Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
@@ -119,6 +138,17 @@ Job-Datensatz sieht so aus:
   "account": { "username": "example", "verified": true },
   "sourceTarget": "software engineer",
   "resultType": "job"
+}
+```
+
+Jeder Job-Standort ist 1 Datensatz mit der `id`, die `locationId` annimmt:
+
+```json
+{
+  "id": "1720462281920696805",
+  "name": "New York City, NY",
+  "sourceTarget": "New York",
+  "resultType": "jobLocation"
 }
 ```
 
@@ -188,6 +218,10 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapt
   Community-Infos, Posts, Suchen, Mitglieder & Moderatoren. Nutze ihn, wenn
   deine Quellen X-Communities sind. Ab $0.00015 pro Datensatz.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Findet Spaces nach
+  Stichwort & liest ihre Titel, Status, Zeiten, Zuhörerzahlen, Hosts & Sprecher.
+  Liest auch Broadcasts per URL oder ID. Nutze ihn, wenn du Live-Audio &
+  Live-Video auf X verfolgst. Ab $0.00015 pro Space oder Broadcast.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapt
   Echtzeit-Trends nach Standort mit Rang, Volumen, Suchbegriff & WOEID. Nutze
   ihn, wenn du verfolgst, was wo gerade angesagt ist. Ab $0.00015 pro Trend.

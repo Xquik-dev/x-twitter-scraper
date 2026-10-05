@@ -36,6 +36,7 @@ API X ni de connexion.
 - Des filtres de lieu, de mode de travail, de niveau d'expérience, de type de
   contrat et d'entreprise.
 - Des URL et des ID d'offre lus comme des annonces complètes.
+- Des lieux d'emploi par nom, chacun avec l'ID que `locationId` accepte.
 - Le titre, la fourchette de salaire, la devise, le lien de candidature, le lieu
   et le compte qui recrute.
 - Les descriptions complètes en texte brut et en Markdown sur chaque ligne.
@@ -53,6 +54,18 @@ API X ni de connexion.
    `company`.
 4. Réglez `maxItems` pour plafonner les lignes livrées, puis cliquez sur Start.
 5. Téléchargez le dataset en JSON, CSV ou Excel, ou passez par l'API Apify.
+
+`startUrls` accepte chaque URL comme simple chaîne ou comme objet
+`{ "url": "..." }` :
+
+```json
+{
+  "startUrls": [
+    "https://x.com/i/jobs/1899202395210649861",
+    { "url": "https://x.com/i/jobs/1899202395210649861" }
+  ]
+}
+```
 
 ## Entrée
 
@@ -84,8 +97,14 @@ Lisez des offres connues par URL ou par ID :
 ```
 
 `location` accepte un nom de lieu. `locationId` fixe à la place 1 lieu exact,
-comme New York City plutôt que West New York. Trouvez les ID de lieu avec l'API
-des lieux d'emploi de Xquik.
+comme New York City plutôt que West New York.
+
+Trouvez les ID de lieu par nom. Un run avec `locationSearchTerms` liste des
+lieux au lieu d'offres :
+
+```json
+{ "locationSearchTerms": ["New York"], "maxItems": 20 }
+```
 
 Les petits runs sans problème n'écrivent pas `run-report` et réduisent l'usage
 Apify. Activez `alwaysSaveRunRecords` pour l'écrire à chaque run.
@@ -121,6 +140,17 @@ en direct. Une ligne d'offre ressemble à ceci :
   "account": { "username": "example", "verified": true },
   "sourceTarget": "software engineer",
   "resultType": "job"
+}
+```
+
+Chaque lieu d'emploi donne 1 ligne avec l'`id` que `locationId` accepte :
+
+```json
+{
+  "id": "1720462281920696805",
+  "name": "New York City, NY",
+  "sourceTarget": "New York",
+  "resultType": "jobLocation"
 }
 ```
 
@@ -192,6 +222,11 @@ données dont vous avez besoin.
   les infos, posts, recherches, membres et modérateurs d'une Communauté.
   Utilisez-le quand vos sources sont des Communautés X. À partir de $0.00015 par
   ligne.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) : trouve des Spaces
+  par mot-clé et lit leurs titres, états, heures, nombres d'auditeurs, hôtes et
+  intervenants. Lit aussi des diffusions par URL ou par ID. Utilisez-le quand
+  vous suivez l'audio et la vidéo en direct sur X. À partir de $0.00015 par
+  Space ou diffusion.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) : scrape les
   tendances en temps réel par lieu, avec rang, volume, requête et WOEID.
   Utilisez-le pour suivre les tendances de chaque lieu. À partir de $0.00015 par

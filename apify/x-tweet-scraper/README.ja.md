@@ -88,6 +88,8 @@ XquikのX Tweet Scraperは、ポスト、エンゲージメント指標、著者
 | `resultType`           | リッチな行、エンゲージメントの行、診断情報の行の種類     |
 | `sourceTweetId`        | 記事モードとエンゲージメントモードでの元ポストID         |
 | `article`              | `mode: "article"`での構造化された記事データ              |
+| `translation`          | `mode: "translation"`でのXによる翻訳                     |
+| `embed`                | `mode: "embed"`での埋め込みHTMLとリンク                  |
 
 任意のポストメタデータには、`authorUnavailable`、`card`、`communityId`、`communityNote`、`edit`、`exclusiveContent`、`noteTweet`、`postCta`があります。`isTranslatable`、`place`、`possiblySensitive`、`viewState`は、その他の公開の文脈を残します。`previousCounts`は編集前のエンゲージメントを残します。`tombstone`は表示に関する通知を残します。`unmentionedUserIds`は、会話から抜けたユーザーを挙げます。正確なフィールドはOpenAPIを参照してください。
 
@@ -175,7 +177,7 @@ Search termsフィールドに1つ以上のクエリを入れます。
 { "mode": "replies", "replyTweetIds": ["1846987139428634858"], "maxItems": 100 }
 ```
 
-ポストと検索のモードは`tweet`、`tweets`、`search`です。プロフィールのモードは`profileTweets`、`profileReplies`、`profileMedia`、`profileLikes`です。`listTweets`はリストのポストを読み取り、`article`はポスト内のXの記事を読み取ります。1件のポストに対するモードは`replies`、`quotes`、`thread`、`retweeters`、`favoriters`です。
+ポストと検索のモードは`tweet`、`tweets`、`search`です。プロフィールのモードは`profileTweets`、`profileReplies`、`profileMedia`、`profileLikes`です。`listTweets`はリストのポストを読み取り、`article`はポスト内のXの記事を読み取ります。1件のポストに対するモードは`replies`、`quotes`、`thread`、`retweeters`、`favoriters`、`translation`、`embed`です。
 
 `profileTweets`は、Xのプロフィールの「ポスト」タブと同じ内容を返します。アカウントのポスト、リポスト、自分のポストへの返信です。行は日付順に並びます。このActorは、他のアカウントへの返信を課金前に除きます。他の著者による会話の文脈も除きます。
 
@@ -205,6 +207,30 @@ Search termsフィールドに1つ以上のクエリを入れます。
 記事の行には、`resultType: "article"`、`sourceTweetId`、`article`、任意の`author`が入ります。エンゲージメントのユーザー行には、`resultType: "user"`、`sourceTweetId`、`engagementMode`が入ります。
 
 リポストしたユーザーの取得は、通常の公開エンゲージメントモードです。いいねしたユーザーの取得はベストエフォートです。Xは、条件を満たすポストや、所有者に見えるポストでしか、いいねしたユーザーを表示しないことがあります。プロフィールのいいねもベストエフォートです。多くの公開プロフィールには、読み取れるいいねタブがないためです。Xがユーザーやいいねしたポストを表示しない場合、このActorは無料の`diagnostics`レコードを書き込みます。ポストの行にはブックマーク数が入ることがあります。どのアカウントがポストをブックマークしたかは、Xが表示しません。
+
+### ポストを翻訳し、埋め込みHTMLを取得する
+
+`mode: "translation"` は、各ポストのXによる翻訳を返します。`translateTo` に `en`、`es`、`pt-br`、`zh-tw` などの言語コードを指定します。既定値は `en` です。
+
+```json
+{
+  "mode": "translation",
+  "tweetIds": ["2082577277246972300"],
+  "translateTo": "es"
+}
+```
+
+各行には `resultType: "translation"`、`sourceTweetId`、`translation` が入ります。このオブジェクトには `language`、`sourceLanguage`、`text`、`entities` が入ります。
+
+`mode: "embed"` は、各ポストをウェブサイトに埋め込むHTMLを返します。
+
+```json
+{ "mode": "embed", "tweetIds": ["2082577277246972300"], "embedTheme": "dark" }
+```
+
+各行には `resultType: "embed"`、`sourceTweetId`、`embed` が入ります。このオブジェクトには `url`、`authorName`、`authorUrl`、`html`、`width` が入ります。`embedHideMedia`、`embedHideThread`、`embedOmitScript` を使うと、メディア、返信先のポスト、ウィジェットのスクリプトを省けます。
+
+どちらのモードも、ポストIDと `startUrls` のポストURLを読み取ります。ポスト1件につき1行で、料金は通常の1行分です。Xにないポストは行にならず、料金もかかりません。
 
 ### フラットなCSVの行をエクスポートする
 
@@ -507,7 +533,9 @@ Apifyの[ビルドタグ](https://docs.apify.com/platform/actors/development/bui
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): ユーザー名、自己紹介、所在地でユーザーを検索し、フォロワー数、認証、アカウント年数、所在地で絞り込みます。検索からアカウントの一覧を作るときに使います。1プロフィールあたり$0.00015から。
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): リストのURLまたはIDから、リストのポスト、メンバー、フォロワーをスクレイピングします。厳選したリストを情報源にするときに使います。1行あたり$0.00015から。
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): コミュニティの情報、ポスト、検索結果、メンバー、モデレーターをスクレイピングします。Xのコミュニティを情報源にするときに使います。1行あたり$0.00015から。
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): キーワードからスペースを見つけ、タイトル、状態、時刻、リスナー数、ホスト、スピーカーを読み取ります。URLまたはIDでブロードキャストも読み取ります。Xのライブ音声とライブ動画を追うときに使います。スペースまたはブロードキャスト1件あたり$0.00015から。
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): 地域別のリアルタイムトレンドを、順位、ボリューム、クエリ、WOEIDとともにスクレイピングします。どこで何がトレンドかを追うときに使います。1トレンドあたり$0.00015から。
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): キーワード、勤務地、勤務形態、職位レベル、企業からXの求人を、給与と応募リンクとともにスクレイピングします。Xに掲載された求人を集めるときに使います。1求人あたり$0.00015から。
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): 長文のXの記事を、カバー画像、著者、日付、指標とともにMarkdownとテキストでスクレイピングします。ポストではなく記事の本文が必要なときに使います。1記事あたり$0.00015から。
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader): ポストやプロフィールから写真、動画、GIFを抽出または保存します。MP4とメタデータのオプションがあります。メディアファイルそのものが必要なときに使います。1メディア行あたり$0.00015から。
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring): ブランドへの言及を、AIによる関連性、感情、顧客体験の回答とともに追跡し、実行どうしを比較します。ブランドを継続して見守るときに使います。分析済みポスト1件あたり$0.0003から。

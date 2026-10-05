@@ -38,6 +38,7 @@ You need no X API key or login.
 - Many search terms in 1 run, read concurrently.
 - Filters for place, workplace type, seniority, employment type & company.
 - Job URLs & job IDs read as full listings.
+- Job locations by name, each with the ID that `locationId` takes.
 - Title, salary range, currency, apply link, location & hiring account.
 - Full descriptions as plain text & Markdown on every row.
 - Search attribution on every row.
@@ -52,6 +53,17 @@ You need no X API key or login.
 3. Narrow the search with `location`, `locationType`, `seniority` or `company`.
 4. Set `maxItems` to cap delivered rows, then click Start.
 5. Download the dataset as JSON, CSV or Excel, or use the Apify API.
+
+`startUrls` takes each URL as a plain string or as a `{ "url": "..." }` object:
+
+```json
+{
+  "startUrls": [
+    "https://x.com/i/jobs/1899202395210649861",
+    { "url": "https://x.com/i/jobs/1899202395210649861" }
+  ]
+}
+```
 
 ## Input
 
@@ -82,8 +94,14 @@ Read known jobs by URL or ID:
 ```
 
 `location` takes a place name. `locationId` pins 1 exact place instead, such as
-New York City rather than West New York. Find place IDs with Xquik's job
-locations API.
+New York City rather than West New York.
+
+Find place IDs by name. A run with `locationSearchTerms` lists places instead of
+jobs:
+
+```json
+{ "locationSearchTerms": ["New York"], "maxItems": 20 }
+```
 
 Small runs that go well skip `run-report` & save Apify usage. Turn on
 `alwaysSaveRunRecords` to write it on every run.
@@ -118,6 +136,17 @@ this:
   "account": { "username": "example", "verified": true },
   "sourceTarget": "software engineer",
   "resultType": "job"
+}
+```
+
+Each job location is 1 row with the `id` that `locationId` takes:
+
+```json
+{
+  "id": "1720462281920696805",
+  "name": "New York City, NY",
+  "sourceTarget": "New York",
+  "resultType": "jobLocation"
 }
 ```
 
@@ -182,6 +211,10 @@ diagnostics. Pick the one that matches the data you need.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapes
   Community info, posts, searches, members & moderators. Use it when your
   sources are X Communities. From $0.00015 per row.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Finds Spaces by
+  keyword & reads their titles, states, times, listener counts, hosts &
+  speakers. Also reads broadcasts by URL or ID. Use it when you track live audio
+  & video on X. From $0.00015 per Space or broadcast.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapes
   real-time trends by location with rank, volume, query & WOEID. Use it when you
   track what is trending where. From $0.00015 per trend.

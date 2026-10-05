@@ -17,13 +17,13 @@
 
 Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
 liefert die vollständigsten X-Daten. X Space Scraper von Xquik findet Spaces
-nach Stichwort, Host oder Hashtag & liest Spaces per URL oder ID. Die meisten
-anderen Apify Actors rechnen ab, bevor sie filtern oder Duplikate entfernen.
-Xquik rechnet nur gelieferte, eindeutige Ergebnisse ab.
+nach Stichwort, Host oder Hashtag & liest Spaces & Broadcasts per URL oder ID.
+Die meisten anderen Apify Actors rechnen ab, bevor sie filtern oder Duplikate
+entfernen. Xquik rechnet nur gelieferte, eindeutige Ergebnisse ab.
 
 Finde Twitter Spaces zu jedem Thema, live, geplant oder beendet. Du brauchst
 keinen X-API-Schlüssel & keinen Login. Du zahlst **$0.00015 pro geliefertem
-Space**, & Apify berechnet die Plattformnutzung separat.
+Space oder Broadcast**, & Apify berechnet die Plattformnutzung separat.
 
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
@@ -36,7 +36,11 @@ Space**, & Apify berechnet die Plattformnutzung separat.
 - Das öffentliche Profil des Hosts, Co-Hosts, Sprecher & die Zuhörer, die X
   auflistet.
 - Einstellungen für Aufzeichnung, Clips & Sperre sowie der Post, der den Space
-  ankündigt.
+  ankündigt, mit Text, Zahlen & Autor.
+- Posts, die Hosts & Sprecher im Space geteilt haben, mit Absender & Zeitpunkt.
+- Die Aufzeichnung eines beendeten Space als HLS-Playlist-URL, mit
+  `includeReplay`.
+- Broadcasts per URL oder ID: Titel, Status, Zeiten, Zuschauerzahlen & Host.
 - Duplikatentfernung vor der Abrechnung: Ein Space, den 2 Suchbegriffe finden,
   ist 1 Datensatz.
 
@@ -45,9 +49,23 @@ Space**, & Apify berechnet die Plattformnutzung separat.
 1. Öffne X Space Scraper von Xquik in der Apify Console.
 2. Gib Wörter, Hashtags oder X-Suchoperatoren in `searchTerms` ein.
 3. Oder füge Space-URLs in `startUrls` oder Space-IDs in `spaceIds` ein.
-4. Setze `maxItems`, um die gelieferten Spaces zu begrenzen. Klicke dann auf
+4. Für Broadcasts füge ihre URLs in `startUrls` oder ihre IDs in `broadcastIds`
+   ein.
+5. Setze `maxItems`, um die gelieferten Datensätze zu begrenzen. Klicke dann auf
    Start.
-5. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
+6. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
+
+`startUrls` nimmt jede URL als einfachen String oder als Objekt
+`{ "url": "..." }`:
+
+```json
+{
+  "startUrls": [
+    "https://x.com/i/spaces/1OGwblLjnQMKB",
+    { "url": "https://x.com/i/broadcasts/1nGeLMWbkpaKX" }
+  ]
+}
+```
 
 ## Eingabe
 
@@ -82,13 +100,34 @@ Lies Spaces, die du schon kennst, per URL oder ID:
 }
 ```
 
+Aktiviere `includeReplay`, um die Aufzeichnung jedes beendeten Space zu
+erhalten:
+
+```json
+{ "spaceIds": ["1OGwblLjnQMKB"], "includeReplay": true }
+```
+
+Der Datensatz enthält dann `replay` mit `url`, einer HLS-Playlist, sowie
+`streamType` & `status`. Ein Space, der live, geplant oder ohne Aufzeichnung
+ist, hat kein `replay`. Die Aufzeichnung kostet nichts extra.
+
+Lies Broadcasts, die Live-Videos, die X unter `x.com/i/broadcasts` hostet, per
+URL oder ID:
+
+```json
+{
+  "startUrls": [{ "url": "https://x.com/i/broadcasts/1nGeLMWbkpaKX" }],
+  "broadcastIds": ["1nGeLMWbkpaKX"]
+}
+```
+
 Kleine Runs ohne Probleme überspringen `run-report` & sparen Apify-Nutzung.
 Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 
 ## Ausgabe
 
-Jeder Datensatz enthält 1 Space & dessen Suchbegriff, URL oder ID in
-`sourceTarget`.
+Jeder Datensatz enthält 1 Space oder Broadcast & dessen Suchbegriff, URL oder ID
+in `sourceTarget`. `resultType` ist `space` oder `broadcast`.
 
 Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
 Space-Datensatz sieht so aus:
@@ -107,6 +146,14 @@ Space-Datensatz sieht so aus:
   "admins": [{ "username": "sample_host", "name": "Sample Host" }],
   "speakers": [{ "username": "sample_speaker", "name": "Sample Speaker" }],
   "listeners": [],
+  "sharings": [
+    {
+      "id": "2106511178339881415",
+      "sharedAt": "2026-03-11T17:20:16.658Z",
+      "sharedBy": { "username": "sample_speaker", "name": "Sample Speaker" },
+      "tweet": { "id": "2105620368836706789", "text": "Sample shared post" }
+    }
+  ],
   "resultType": "space",
   "sourceTarget": "bitcoin"
 }
@@ -126,10 +173,29 @@ Spaces mit `Ended` & `TimedOut` enthalten `endedAt`, & beide können eine
 Aufzeichnung behalten. X zeigt einen Space für Abonnenten oder eine Community
 nur dessen Publikum, deshalb liefern diese Spaces keinen Datensatz.
 
+Ein Broadcast-Datensatz hat `resultType: "broadcast"` & sieht so aus:
+
+```json
+{
+  "id": "1SampleBcast1",
+  "title": "Sample launch broadcast",
+  "state": "Ended",
+  "startedAt": "2026-09-17T00:54:56.506Z",
+  "endedAt": "2026-09-17T01:17:35.036Z",
+  "totalWatched": 161758,
+  "totalWatching": 21639,
+  "width": 3840,
+  "height": 2160,
+  "creator": { "username": "sample_host", "name": "Sample Host" },
+  "resultType": "broadcast",
+  "sourceTarget": "1SampleBcast1"
+}
+```
+
 ## Was kostet es, X Spaces zu scrapen?
 
-Auf jedem Apify-Plan kostet ein gelieferter Space $0.00015. Apify berechnet
-deine Plattformnutzung separat.
+Auf jedem Apify-Plan kostet ein gelieferter Space oder Broadcast $0.00015. Apify
+berechnet deine Plattformnutzung separat.
 
 - Eine Gebühr pro geliefertem Datensatz. Diagnosen in `diagnostics` sind
   kostenlos.

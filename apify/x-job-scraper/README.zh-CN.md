@@ -26,6 +26,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 - 1 次运行可同时读取多个搜索词。
 - 可按地点、办公方式、职级、雇佣类型和公司过滤。
 - 职位 URL 和职位 ID 按完整职位读取。
+- 按名称查找职位地点，每个地点都带有 `locationId` 接受的 ID。
 - 职位名称、薪资范围、币种、申请链接、工作地点和招聘账号。
 - 每行都包含纯文本和 Markdown 格式的完整描述。
 - 每行都标明所属搜索。
@@ -40,6 +41,17 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 3. 用 `location`、`locationType`、`seniority` 或 `company` 缩小搜索范围。
 4. 用 `maxItems` 设置交付行数的上限，然后点击 Start。
 5. 以 JSON、CSV 或 Excel 格式下载数据集，或使用 Apify API。
+
+`startUrls` 中的每个 URL 可以写成普通字符串，也可以写成 `{ "url": "..." }` 对象：
+
+```json
+{
+  "startUrls": [
+    "https://x.com/i/jobs/1899202395210649861",
+    { "url": "https://x.com/i/jobs/1899202395210649861" }
+  ]
+}
+```
 
 ## 输入
 
@@ -66,7 +78,13 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 }
 ```
 
-`location` 接受地点名称。`locationId` 则锁定 1 个确切地点，例如 New York City 而不是 West New York。可以用 Xquik 的职位地点 API 查找地点 ID。
+`location` 接受地点名称。`locationId` 则锁定 1 个确切地点，例如 New York City 而不是 West New York。
+
+可以按名称查找地点 ID。带 `locationSearchTerms` 的运行会列出地点，而不是职位：
+
+```json
+{ "locationSearchTerms": ["New York"], "maxItems": 20 }
+```
 
 顺利完成的小型运行会跳过 `run-report`，节省 Apify 用量。开启 `alwaysSaveRunRecords` 后，每次运行都会写入报告。
 
@@ -93,6 +111,17 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
   "account": { "username": "example", "verified": true },
   "sourceTarget": "software engineer",
   "resultType": "job"
+}
+```
+
+每个职位地点是 1 行，带有 `locationId` 接受的 `id`：
+
+```json
+{
+  "id": "1720462281920696805",
+  "name": "New York City, NY",
+  "sourceTarget": "New York",
+  "resultType": "jobLocation"
 }
 ```
 
@@ -126,6 +155,7 @@ Xquik 的 X Jobs Scraper 在 1 次运行中读取多个搜索和职位 URL。已
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)：按用户名、简介和位置搜索用户，可按关注者数、认证状态、账号年龄和位置过滤。适合通过搜索建立账号名单的场景。每条个人资料 $0.00015 起。
 - [X List Scraper](https://apify.com/xquik/x-list-scraper)：从列表 URL 或 ID 抓取列表帖子、成员和关注者。适合用精选列表确定来源的场景。每行 $0.00015 起。
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper)：抓取社群信息、帖子、搜索结果、成员和版主。适合来源是 X 社群的场景。每行 $0.00015 起。
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper)：按关键词查找空间，读取标题、状态、时间、听众数、主持人和发言人，也可按 URL 或 ID 读取直播。适合追踪 X 上实时音频和视频的场景。每个空间或直播 $0.00015 起。
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper)：按位置抓取实时趋势，附带排名、帖子量、查询词和 WOEID。适合追踪各地热门话题的场景。每条趋势 $0.00015 起。
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper)：把长篇 X 文章抓取为 Markdown 和纯文本，附带封面、作者、日期和指标。适合需要文章正文而不是帖子的场景。每篇文章 $0.00015 起。
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader)：从帖子或个人资料提取或存储照片、视频和 GIF，可选 MP4 和元数据。适合需要媒体文件本身的场景。每条媒体行 $0.00015 起。

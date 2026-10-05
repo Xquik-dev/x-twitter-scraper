@@ -52,6 +52,17 @@ No necesitas clave de API de X ni iniciar sesión.
 4. Define `maxItems` para limitar las filas entregadas y haz clic en Start.
 5. Descarga el dataset en JSON, CSV o Excel, o usa la API de Apify.
 
+`startUrls` acepta cada URL como texto simple o como objeto `{ "url": "..." }`:
+
+```json
+{
+  "startUrls": [
+    "https://x.com/OpenAI/status/2082577277246972300",
+    { "url": "https://x.com/jack/status/20" }
+  ]
+}
+```
+
 ## Entrada
 
 ```json
@@ -177,10 +188,19 @@ necesitas.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): extrae
   información, posts, búsquedas, miembros y moderadores de Comunidades. Úsalo
   cuando tus fuentes sean Comunidades de X. Desde $0.00015 por fila.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): encuentra Espacios
+  por palabra clave y lee sus títulos, estados, horas, cantidad de oyentes,
+  anfitriones y oradores. También lee transmisiones por URL o ID. Úsalo cuando
+  sigas el audio y el video en vivo en X. Desde $0.00015 por Espacio o
+  transmisión.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): extrae
   tendencias en tiempo real por ubicación con posición, volumen, consulta y
   WOEID. Úsalo cuando sigas qué es tendencia y dónde. Desde $0.00015 por
   tendencia.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): extrae ofertas de
+  empleo de X por palabra clave, lugar, modalidad de trabajo, nivel de
+  experiencia y empresa, con salarios y enlaces para postularse. Úsalo cuando
+  recopiles vacantes publicadas en X. Desde $0.00015 por empleo.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): extrae
   Artículos de X de formato largo como Markdown y texto con portadas, autores,
   fechas y métricas. Úsalo cuando necesites el cuerpo de los Artículos, no

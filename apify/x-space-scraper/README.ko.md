@@ -17,13 +17,13 @@
 
 Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서비스이며, 가장
 완전한 X 데이터를 제공합니다. Xquik의 X Space Scraper는 키워드, 호스트 또는
-해시태그로 스페이스를 찾고 URL이나 ID로 스페이스를 읽습니다. 다른 Apify Actor는
-대부분 필터링이나 중복 제거 전에 요금을 부과합니다. Xquik은 중복되지 않은 결과를
-전달했을 때만 요금을 받습니다.
+해시태그로 스페이스를 찾고 URL이나 ID로 스페이스 & 방송(broadcast)을 읽습니다.
+다른 Apify Actor는 대부분 필터링이나 중복 제거 전에 요금을 부과합니다. Xquik은
+중복되지 않은 결과를 전달했을 때만 요금을 받습니다.
 
 어떤 주제든 진행 중이거나 예정되었거나 종료된 Twitter 스페이스를 찾으세요. X API
-키나 로그인은 필요 없습니다. 요금은 **전달된 스페이스 1개당 $0.00015**이며,
-Apify 플랫폼 사용료는 Apify가 따로 청구합니다.
+키나 로그인은 필요 없습니다. 요금은 **전달된 스페이스 또는 방송 1개당
+$0.00015**이며, Apify 플랫폼 사용료는 Apify가 따로 청구합니다.
 
 > Xquik은 독립적인 제3자 서비스입니다. X Corp와 제휴 관계가 없습니다.
 > "Twitter"와 "X"는 X Corp의 상표입니다.
@@ -33,7 +33,11 @@ Apify 플랫폼 사용료는 Apify가 따로 청구합니다.
 - 각 스페이스의 제목, 상태 & 예정, 시작 & 종료 시간.
 - 실시간 청취자 수, 다시 듣기 재생 수 & 지금 스페이스에 있는 계정.
 - 호스트의 공개 프로필, 공동 호스트, 스피커 & X가 표시하는 청취자.
-- 다시 듣기, 클립 & 잠금 설정, 그리고 스페이스를 알리는 게시물.
+- 다시 듣기, 클립 & 잠금 설정, 그리고 스페이스를 알리는 게시물과 그 본문, 수치
+  & 작성자.
+- 호스트 & 스피커가 스페이스에서 공유한 게시물, 공유한 사람 & 시간.
+- 종료된 스페이스의 녹음. `includeReplay`를 켜면 HLS 재생 목록 URL로 들어옵니다.
+- URL이나 ID로 읽는 방송: 제목, 상태, 시간, 시청 수 & 호스트.
 - 과금 전 중복 제거: 검색어 2개가 찾은 스페이스는 행 1개입니다.
 
 ## X 스페이스 찾는 방법
@@ -41,8 +45,20 @@ Apify 플랫폼 사용료는 Apify가 따로 청구합니다.
 1. Apify Console에서 Xquik의 X Space Scraper를 여세요.
 2. `searchTerms`에 단어, 해시태그 또는 X 검색 연산자를 입력하세요.
 3. 또는 `startUrls`에 스페이스 URL을, `spaceIds`에 스페이스 ID를 붙여넣으세요.
-4. `maxItems`로 전달할 스페이스 수의 상한을 정하고 Start를 클릭하세요.
-5. 데이터셋을 JSON, CSV 또는 Excel로 내려받거나 Apify API를 사용하세요.
+4. 방송은 URL을 `startUrls`에, ID를 `broadcastIds`에 붙여넣으세요.
+5. `maxItems`로 전달할 행 수의 상한을 정하고 Start를 클릭하세요.
+6. 데이터셋을 JSON, CSV 또는 Excel로 내려받거나 Apify API를 사용하세요.
+
+`startUrls`는 각 URL을 일반 문자열 또는 `{ "url": "..." }` 객체로 받습니다.
+
+```json
+{
+  "startUrls": [
+    "https://x.com/i/spaces/1OGwblLjnQMKB",
+    { "url": "https://x.com/i/broadcasts/1nGeLMWbkpaKX" }
+  ]
+}
+```
 
 ## 입력
 
@@ -77,13 +93,33 @@ Apify 플랫폼 사용료는 Apify가 따로 청구합니다.
 }
 ```
 
+종료된 각 스페이스의 녹음을 받으려면 `includeReplay`를 켜세요.
+
+```json
+{ "spaceIds": ["1OGwblLjnQMKB"], "includeReplay": true }
+```
+
+그러면 행에 `replay`가 들어갑니다. HLS 재생 목록인 `url`과 `streamType` &
+`status`를 담습니다. 진행 중이거나 예정되었거나 녹음이 없는 스페이스에는
+`replay`가 없습니다. 녹음에는 추가 요금이 없습니다.
+
+X가 `x.com/i/broadcasts`에서 제공하는 라이브 동영상인 방송은 URL이나 ID로
+읽습니다.
+
+```json
+{
+  "startUrls": [{ "url": "https://x.com/i/broadcasts/1nGeLMWbkpaKX" }],
+  "broadcastIds": ["1nGeLMWbkpaKX"]
+}
+```
+
 문제없이 끝난 작은 실행은 `run-report`를 건너뛰어 Apify 사용량을 아낍니다. 모든
 실행에서 보고서를 기록하려면 `alwaysSaveRunRecords`를 켜세요.
 
 ## 출력
 
-각 행에는 스페이스 1개 & 해당 검색어, URL 또는 ID를 담은 `sourceTarget`이 들어
-있습니다.
+각 행에는 스페이스 또는 방송 1개 & 해당 검색어, URL 또는 ID를 담은
+`sourceTarget`이 들어 있습니다. `resultType`은 `space` 또는 `broadcast`입니다.
 
 예시는 샘플 값입니다. 실제 결과는 실시간 데이터를 따릅니다. 스페이스 행은 다음과
 같습니다.
@@ -102,6 +138,14 @@ Apify 플랫폼 사용료는 Apify가 따로 청구합니다.
   "admins": [{ "username": "sample_host", "name": "Sample Host" }],
   "speakers": [{ "username": "sample_speaker", "name": "Sample Speaker" }],
   "listeners": [],
+  "sharings": [
+    {
+      "id": "2106511178339881415",
+      "sharedAt": "2026-03-11T17:20:16.658Z",
+      "sharedBy": { "username": "sample_speaker", "name": "Sample Speaker" },
+      "tweet": { "id": "2105620368836706789", "text": "Sample shared post" }
+    }
+  ],
   "resultType": "space",
   "sourceTarget": "bitcoin"
 }
@@ -121,10 +165,29 @@ Apify 플랫폼 사용료는 Apify가 따로 청구합니다.
 있습니다. X는 구독자나 커뮤니티 전용 스페이스를 해당 대상에게만 보여 주므로,
 이런 스페이스는 행을 반환하지 않습니다.
 
+방송 행에는 `resultType: "broadcast"`가 들어 있고 다음과 같습니다.
+
+```json
+{
+  "id": "1SampleBcast1",
+  "title": "Sample launch broadcast",
+  "state": "Ended",
+  "startedAt": "2026-09-17T00:54:56.506Z",
+  "endedAt": "2026-09-17T01:17:35.036Z",
+  "totalWatched": 161758,
+  "totalWatching": 21639,
+  "width": 3840,
+  "height": 2160,
+  "creator": { "username": "sample_host", "name": "Sample Host" },
+  "resultType": "broadcast",
+  "sourceTarget": "1SampleBcast1"
+}
+```
+
 ## X 스페이스 스크랩 비용은 얼마인가요?
 
-모든 Apify 요금제에서 전달된 스페이스 1개당 $0.00015입니다. Apify 플랫폼
-사용료는 Apify가 따로 청구합니다.
+모든 Apify 요금제에서 전달된 스페이스 또는 방송 1개당 $0.00015입니다. Apify
+플랫폼 사용료는 Apify가 따로 청구합니다.
 
 - 전달된 데이터 행 1개마다 한 번 과금합니다. 진단은 `diagnostics`에서 무료로
   제공합니다.

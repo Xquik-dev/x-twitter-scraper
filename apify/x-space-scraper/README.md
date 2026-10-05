@@ -22,12 +22,13 @@ Claude Code, Codex, Cursor, and more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X Space Scraper finds Spaces by keyword, host or
-hashtag & reads Spaces by URL or ID. Most other Apify Actors charge before
-filtering or deduplicating. Xquik charges only for delivered, unique results.
+hashtag & reads Spaces & broadcasts by URL or ID. Most other Apify Actors charge
+before filtering or deduplicating. Xquik charges only for delivered, unique
+results.
 
 Find Twitter Spaces about any topic, live, scheduled or ended. You need no X API
-key or login. You pay **$0.00015 per delivered Space**, & Apify bills platform
-usage separately.
+key or login. You pay **$0.00015 per delivered Space or broadcast**, & Apify
+bills platform usage separately.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
@@ -37,7 +38,12 @@ usage separately.
 - Title, state & the scheduled, start & end times of each Space.
 - Live listener count, replay plays & the accounts in the Space now.
 - The host's public profile, co-hosts, speakers & listeners X lists.
-- Replay, clipping & lock settings, plus the post that announces the Space.
+- Replay, clipping & lock settings, plus the post that announces the Space, with
+  its text, counts & author.
+- Posts the hosts & speakers shared in the Space, with who shared each & when.
+- The recording of a Space that is over, as an HLS playlist URL, with
+  `includeReplay`.
+- Broadcasts by URL or ID: title, state, times, watch counts & host.
 - Duplicate removal before billing: a Space that 2 search terms find is 1 row.
 
 ## How to find X Spaces
@@ -45,8 +51,21 @@ usage separately.
 1. Open Xquik's X Space Scraper in Apify Console.
 2. Enter words, hashtags or X search operators in `searchTerms`.
 3. Or paste Space URLs in `startUrls`, or Space IDs in `spaceIds`.
-4. Set `maxItems` to cap delivered Spaces, then click Start.
-5. Download the dataset as JSON, CSV or Excel, or use the Apify API.
+4. For broadcasts, paste their URLs in `startUrls` or their IDs in
+   `broadcastIds`.
+5. Set `maxItems` to cap delivered rows, then click Start.
+6. Download the dataset as JSON, CSV or Excel, or use the Apify API.
+
+`startUrls` takes each URL as a plain string or as a `{ "url": "..." }` object:
+
+```json
+{
+  "startUrls": [
+    "https://x.com/i/spaces/1OGwblLjnQMKB",
+    { "url": "https://x.com/i/broadcasts/1nGeLMWbkpaKX" }
+  ]
+}
+```
 
 ## Input
 
@@ -81,12 +100,32 @@ Read Spaces you already know by URL or ID:
 }
 ```
 
+Turn on `includeReplay` to get the recording of each Space that is over:
+
+```json
+{ "spaceIds": ["1OGwblLjnQMKB"], "includeReplay": true }
+```
+
+The row then carries `replay` with `url`, an HLS playlist, plus `streamType` &
+`status`. A Space that is live, scheduled or without a recording has no
+`replay`. The replay costs nothing extra.
+
+Read broadcasts, the live video X hosts at `x.com/i/broadcasts`, by URL or ID:
+
+```json
+{
+  "startUrls": [{ "url": "https://x.com/i/broadcasts/1nGeLMWbkpaKX" }],
+  "broadcastIds": ["1nGeLMWbkpaKX"]
+}
+```
+
 Small runs that go well skip `run-report` & save Apify usage. Turn on
 `alwaysSaveRunRecords` to write it on every run.
 
 ## Output
 
-Each row holds 1 Space & its search term, URL or ID in `sourceTarget`.
+Each row holds 1 Space or broadcast & its search term, URL or ID in
+`sourceTarget`. `resultType` is `space` or `broadcast`.
 
 Examples use sample values. Results reflect live data. A Space row looks like
 this:
@@ -105,6 +144,14 @@ this:
   "admins": [{ "username": "sample_host", "name": "Sample Host" }],
   "speakers": [{ "username": "sample_speaker", "name": "Sample Speaker" }],
   "listeners": [],
+  "sharings": [
+    {
+      "id": "2106511178339881415",
+      "sharedAt": "2026-03-11T17:20:16.658Z",
+      "sharedBy": { "username": "sample_speaker", "name": "Sample Speaker" },
+      "tweet": { "id": "2105620368836706789", "text": "Sample shared post" }
+    }
+  ],
   "resultType": "space",
   "sourceTarget": "bitcoin"
 }
@@ -124,10 +171,29 @@ this:
 shows a Space for subscribers or a Community only to its audience, so those
 Spaces return no row.
 
+A broadcast row has `resultType: "broadcast"` & looks like this:
+
+```json
+{
+  "id": "1SampleBcast1",
+  "title": "Sample launch broadcast",
+  "state": "Ended",
+  "startedAt": "2026-09-17T00:54:56.506Z",
+  "endedAt": "2026-09-17T01:17:35.036Z",
+  "totalWatched": 161758,
+  "totalWatching": 21639,
+  "width": 3840,
+  "height": 2160,
+  "creator": { "username": "sample_host", "name": "Sample Host" },
+  "resultType": "broadcast",
+  "sourceTarget": "1SampleBcast1"
+}
+```
+
 ## How much does it cost to scrape X Spaces?
 
-Every Apify plan costs $0.00015 per delivered Space. Apify bills your platform
-usage separately.
+Every Apify plan costs $0.00015 per delivered Space or broadcast. Apify bills
+your platform usage separately.
 
 - One charge per delivered data row. Diagnostics are free in `diagnostics`.
 - No start, search or page fee.

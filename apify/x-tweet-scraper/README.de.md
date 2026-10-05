@@ -107,6 +107,8 @@ Suchanfragen mit über 50 Filtern.
 | `resultType`           | Datensatztyp für Rich-, Interaktions- & Diagnose-Datensätze       |
 | `sourceTweetId`        | ID des Quellposts für Artikel- & Interaktionsmodi                 |
 | `article`              | Strukturierte Artikeldaten in `mode: "article"`                   |
+| `translation`          | Übersetzung von X in `mode: "translation"`                        |
+| `embed`                | Einbettungs-HTML & Link in `mode: "embed"`                        |
 
 Optionale Post-Metadaten umfassen `authorUnavailable`, `card`, `communityId`,
 `communityNote`, `edit`, `exclusiveContent`, `noteTweet` & `postCta`.
@@ -232,7 +234,7 @@ Post- & Suchmodi sind `tweet`, `tweets` & `search`. Profilmodi sind
 `profileTweets`, `profileReplies`, `profileMedia` & `profileLikes`.
 `listTweets` liest die Posts einer Liste & `article` liest den X-Artikel in
 einem Post. Modi für einen einzelnen Post sind `replies`, `quotes`, `thread`,
-`retweeters` & `favoriters`.
+`retweeters`, `favoriters`, `translation` & `embed`.
 
 `profileTweets` folgt dem Tab Posts im Profil auf X. Er liefert die Posts des
 Accounts, seine Reposts & seine Antworten auf eigene Posts. Die Datensätze
@@ -302,6 +304,39 @@ Gefällt-mir-Angaben eines Profils liefert er nur, soweit möglich. Viele
 oder mit Gefällt mir markierten Posts, schreibt der Actor einen kostenlosen
 `diagnostics`-Datensatz. Post-Datensätze können Lesezeichen-Zahlen enthalten. X
 zeigt aber nicht, welche Accounts einen Post als Lesezeichen gespeichert haben.
+
+### Posts übersetzen & Einbettungs-HTML abrufen
+
+`mode: "translation"` liefert die Übersetzung von X für jeden Post. Setze
+`translateTo` auf einen Sprachcode wie `en`, `es`, `pt-br` oder `zh-tw`. Der
+Standard ist `en`:
+
+```json
+{
+  "mode": "translation",
+  "tweetIds": ["2082577277246972300"],
+  "translateTo": "es"
+}
+```
+
+Jeder Datensatz hat `resultType: "translation"`, `sourceTweetId` &
+`translation`. Dieses Objekt enthält `language`, `sourceLanguage`, `text` &
+`entities`.
+
+`mode: "embed"` liefert das HTML, das jeden Post auf einer Website einbettet:
+
+```json
+{ "mode": "embed", "tweetIds": ["2082577277246972300"], "embedTheme": "dark" }
+```
+
+Jeder Datensatz hat `resultType: "embed"`, `sourceTweetId` & `embed`. Dieses
+Objekt enthält `url`, `authorName`, `authorUrl`, `html` & `width`.
+`embedHideMedia`, `embedHideThread` & `embedOmitScript` lassen Medien, den
+beantworteten Post oder das Widget-Skript weg.
+
+Beide Modi lesen Post-IDs & Post-URLs in `startUrls`. Jeder Post ergibt 1
+Datensatz zum üblichen Preis pro Datensatz. Ein Post, den X nicht hat, ergibt
+keinen Datensatz & keine Gebühr.
 
 ### Flache CSV-Datensätze exportieren
 
@@ -768,9 +803,17 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapt
   Community-Infos, Posts, Suchen, Mitglieder & Moderatoren. Nutze ihn, wenn
   deine Quellen X-Communities sind. Ab $0.00015 pro Datensatz.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Findet Spaces nach
+  Stichwort & liest ihre Titel, Status, Zeiten, Zuhörerzahlen, Hosts & Sprecher.
+  Liest auch Broadcasts per URL oder ID. Nutze ihn, wenn du Live-Audio &
+  Live-Video auf X verfolgst. Ab $0.00015 pro Space oder Broadcast.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapt
   Echtzeit-Trends nach Standort mit Rang, Volumen, Suchbegriff & WOEID. Nutze
   ihn, wenn du verfolgst, was wo gerade angesagt ist. Ab $0.00015 pro Trend.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapt
+  X-Stellenanzeigen nach Stichwort, Ort, Arbeitsmodell, Karrierestufe &
+  Unternehmen, mit Gehältern & Bewerbungslinks. Nutze ihn, wenn du auf X
+  veröffentlichte Stellen sammelst. Ab $0.00015 pro Job.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapt
   lange X-Artikel als Markdown & Text mit Titelbildern, Autoren, Daten &
   Kennzahlen. Nutze ihn, wenn du Artikeltexte statt Posts brauchst. Ab

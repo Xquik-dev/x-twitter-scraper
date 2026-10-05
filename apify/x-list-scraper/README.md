@@ -21,46 +21,70 @@
 Claude Code, Codex, Cursor, and more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
-most complete X data. Xquik's X List Scraper collects List posts, members &
-followers. Most other Apify Actors charge before filtering or deduplicating.
-Xquik charges only for delivered, unique, filter-matching results.
+most complete X data. Xquik's X List Scraper collects List details, posts,
+members & followers, & finds Lists by keyword. Most other Apify Actors charge
+before filtering or deduplicating. Xquik charges only for delivered, unique,
+filter-matching results.
 
-Scrape posts, members & followers from X List URLs or numeric List IDs. You pay
-**$0.00015 per delivered row**, & Apify bills platform usage separately. You
-need no X API key or login.
+Scrape details, posts, members & followers from X List URLs or numeric List IDs,
+or find public Lists with search terms. You pay **$0.00015 per delivered row**,
+& Apify bills platform usage separately. You need no X API key or login.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
 ## List data & filters
 
+- List details: name, description, member & follower counts, creation time,
+  banner & the owner's public profile.
 - List posts with text, author, metrics, media & timestamps.
 - List members & List followers.
+- List search by keyword. Each row is 1 List with its owner, member count &
+  follower count.
 - Optional replies in List posts.
 - Filters for dates, Unix time, language, media, engagement, verification &
   profiles.
+- The public Lists an account created or is on, from its handle or profile URL.
 - Many Lists & resource types in 1 run.
-- A global cap & a cap for each List resource.
+- A global cap & a cap for each List resource or search term.
 - Runs resume after an Apify migration.
 - Duplicate removal before billing.
 
 ## How to scrape X lists
 
 1. Open Xquik's X List Scraper in Apify Console.
-2. Paste List URLs into `startUrls` or numeric List IDs into `listIds`.
+2. Paste List URLs into `startUrls` or numeric List IDs into `listIds`. To find
+   Lists, add keywords to `searchTerms` instead.
 3. Pick `resources` & add filters such as `sinceDate` or `minLikes`.
 4. Set `maxItems` to cap delivered rows, then click Start.
 5. Download the dataset as JSON, CSV or Excel, or use the Apify API.
+
+`startUrls` takes each URL as a plain string or as a `{ "url": "..." }` object:
+
+```json
+{
+  "startUrls": [
+    "https://x.com/i/lists/1748648376080666720",
+    { "url": "https://x.com/nasa" }
+  ]
+}
+```
 
 ## Input
 
 ```json
 {
   "listIds": ["1748648376080666720"],
-  "resources": ["tweets", "members", "followers"],
+  "resources": ["info", "tweets", "members", "followers"],
   "includeReplies": false,
   "maxItems": 10000
 }
+```
+
+To find Lists by keyword, send search terms:
+
+```json
+{ "searchTerms": ["space news", "climate science"], "maxItemsPerTarget": 50 }
 ```
 
 Small runs that go well skip `run-report` & save Apify usage. Turn on
@@ -68,12 +92,51 @@ Small runs that go well skip `run-report` & save Apify usage. Turn on
 
 ## Output
 
-Each row sets `resultType` to `listTweet`, `listMember` or `listFollower`.
-`sourceTarget` keeps the input List ID. The row body uses the stable Xquik Tweet
-or profile response shape.
+Each row sets `resultType` to `list`, `listTweet`, `listMember` or
+`listFollower`. `sourceTarget` keeps the input List ID, or the search term that
+found a `list` row. A `list` row holds a List's details, 1 per List. Other rows
+use the stable Xquik Tweet or profile response shape.
 
-Examples use sample values. Results reflect live data. A List member row looks
+### An account's Lists
+
+Add handles to `twitterHandles`, or profile URLs to `startUrls`, to list each
+account's public Lists:
+
+```json
+{ "twitterHandles": ["verge"], "accountLists": ["created", "memberships"] }
+```
+
+`created` lists the Lists the account made & `memberships` the Lists that hold
+it. Each List is 1 row with `resultType` `createdList` or `listMembership`,
+`sourceTarget` set to the handle, & `id`, `name`, `description`, `memberCount`,
+`subscriberCount`, `createdAt`, `bannerUrl` & the `owner` profile. X shows a
+private List only to its owner, so private Lists stay out.
+
+Each account's created Lists come before its memberships. The Actor reads
+accounts side by side, so rows of different accounts arrive as they are read.
+Group them by `sourceTarget`.
+
+A row is 1 account & 1 List. A List that 2 of your accounts share is 2 rows, 1
+under each. Each row is charged. `dedupeAcrossTargets` never removes these rows.
+
+Examples use sample values. Results reflect live data. A List details row looks
 like this:
+
+```json
+{
+  "resultType": "list",
+  "sourceTarget": "4143408",
+  "id": "4143408",
+  "name": "NASA Centers",
+  "description": "NASA has 10 centers http://www.nasa.gov/about/sites",
+  "memberCount": 11,
+  "subscriberCount": 859,
+  "createdAt": "2009-12-02T22:41:02.000Z",
+  "owner": { "username": "NASA", "name": "NASA" }
+}
+```
+
+A List member row looks like this:
 
 ```json
 {
@@ -83,6 +146,22 @@ like this:
   "name": "Sample User",
   "followers": 1200,
   "verified": false
+}
+```
+
+A `list` row from a search term looks like this:
+
+```json
+{
+  "resultType": "list",
+  "sourceTarget": "space news",
+  "id": "1000000000000000001",
+  "name": "Sample Space News",
+  "description": "Sample accounts that post space news.",
+  "url": "https://x.com/i/lists/1000000000000000001",
+  "memberCount": 35,
+  "subscriberCount": 76,
+  "owner": { "username": "sample_user", "name": "Sample User" }
 }
 ```
 
@@ -141,9 +220,17 @@ diagnostics. Pick the one that matches the data you need.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapes
   Community info, posts, searches, members & moderators. Use it when your
   sources are X Communities. From $0.00015 per row.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Finds Spaces by
+  keyword & reads their titles, states, times, listener counts, hosts &
+  speakers. Also reads broadcasts by URL or ID. Use it when you track live audio
+  & video on X. From $0.00015 per Space or broadcast.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapes
   real-time trends by location with rank, volume, query & WOEID. Use it when you
   track what is trending where. From $0.00015 per trend.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapes X job
+  listings by keyword, place, workplace, seniority & company, with salaries &
+  apply links. Use it when you collect job openings posted on X. From $0.00015
+  per job.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapes
   long-form X Articles as Markdown & text with covers, authors, dates & metrics.
   Use it when you need article bodies, not tweets. From $0.00015 per article.
@@ -198,7 +285,7 @@ The run lists each input it cannot read & says how to fix it.
 
 ### Can I use the API, schedules & integrations?
 
-Yes. Choose from 50 public tasks or 129 Xquik REST operations. The
+Yes. Choose from 50 public tasks or the Xquik REST API. The
 [API tab](https://apify.com/xquik/x-list-scraper/api) has Python, JavaScript &
 cURL examples. Apify [schedules](https://docs.apify.com/platform/schedules) run
 Xquik's X List Scraper on a cron. Agents use

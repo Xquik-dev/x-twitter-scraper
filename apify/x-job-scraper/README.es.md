@@ -36,6 +36,7 @@ iniciar sesión.
 - Filtros de lugar, modalidad de trabajo, nivel de experiencia, tipo de empleo y
   empresa.
 - URLs e IDs de empleos leídos como ofertas completas.
+- Ubicaciones de empleo por nombre, cada una con el ID que acepta `locationId`.
 - Título, rango salarial, moneda, enlace para postularse, ubicación y cuenta que
   contrata.
 - Descripciones completas en texto plano y Markdown en cada fila.
@@ -53,6 +54,17 @@ iniciar sesión.
 3. Acota la búsqueda con `location`, `locationType`, `seniority` o `company`.
 4. Define `maxItems` para limitar las filas entregadas y haz clic en Start.
 5. Descarga el dataset en JSON, CSV o Excel, o usa la API de Apify.
+
+`startUrls` acepta cada URL como texto simple o como objeto `{ "url": "..." }`:
+
+```json
+{
+  "startUrls": [
+    "https://x.com/i/jobs/1899202395210649861",
+    { "url": "https://x.com/i/jobs/1899202395210649861" }
+  ]
+}
+```
 
 ## Entrada
 
@@ -84,8 +96,14 @@ Lee empleos conocidos por URL o ID:
 ```
 
 `location` acepta el nombre de un lugar. En cambio, `locationId` fija 1 lugar
-exacto, como New York City en vez de West New York. Encuentra los IDs de lugares
-con la API de ubicaciones de empleos de Xquik.
+exacto, como New York City en vez de West New York.
+
+Encuentra los IDs de lugares por nombre. Una ejecución con `locationSearchTerms`
+lista lugares en vez de empleos:
+
+```json
+{ "locationSearchTerms": ["New York"], "maxItems": 20 }
+```
 
 Las ejecuciones pequeñas sin problemas omiten `run-report` y ahorran uso de
 Apify. Activa `alwaysSaveRunRecords` para escribirlo en todas las ejecuciones.
@@ -121,6 +139,17 @@ fila de empleo se ve así:
   "account": { "username": "example", "verified": true },
   "sourceTarget": "software engineer",
   "resultType": "job"
+}
+```
+
+Cada ubicación de empleo es 1 fila con el `id` que acepta `locationId`:
+
+```json
+{
+  "id": "1720462281920696805",
+  "name": "New York City, NY",
+  "sourceTarget": "New York",
+  "resultType": "jobLocation"
 }
 ```
 
@@ -191,6 +220,11 @@ necesitas.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): extrae
   información, posts, búsquedas, miembros y moderadores de Comunidades. Úsalo
   cuando tus fuentes sean Comunidades de X. Desde $0.00015 por fila.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): encuentra Espacios
+  por palabra clave y lee sus títulos, estados, horas, cantidad de oyentes,
+  anfitriones y oradores. También lee transmisiones por URL o ID. Úsalo cuando
+  sigas el audio y el video en vivo en X. Desde $0.00015 por Espacio o
+  transmisión.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): extrae
   tendencias en tiempo real por ubicación con posición, volumen, consulta y
   WOEID. Úsalo cuando sigas qué es tendencia y dónde. Desde $0.00015 por

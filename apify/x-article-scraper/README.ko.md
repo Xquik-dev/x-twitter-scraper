@@ -45,6 +45,17 @@ Xquik의 X Article Scraper는 링크 메타데이터를 추측하지 않습니�
 3. `maxItems`로 전달할 아티클 수의 상한을 정하고 Start를 클릭하세요.
 4. 데이터셋을 JSON, CSV 또는 Excel로 내려받거나 Apify API를 사용하세요.
 
+`startUrls`는 각 URL을 일반 문자열 또는 `{ "url": "..." }` 객체로 받습니다.
+
+```json
+{
+  "startUrls": [
+    "https://x.com/github/status/2082201573976056245",
+    { "url": "https://x.com/satyanadella/status/2066182223213293753" }
+  ]
+}
+```
+
 ## 입력
 
 | 필드                   | 용도                                | 기본값   |
@@ -133,9 +144,16 @@ Xquik의 X Article Scraper는 X가 공개한 아티클만 반환합니다.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): 커뮤니티
   정보, 게시물, 검색 결과, 멤버 & 모더레이터를 스크랩합니다. X 커뮤니티에서
   데이터를 모을 때 사용하세요. 행당 $0.00015부터입니다.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): 키워드로
+  스페이스를 찾고 제목, 상태, 시간, 청취자 수, 호스트 & 스피커를 읽습니다.
+  URL이나 ID로 방송도 읽습니다. X의 라이브 오디오 & 동영상을 추적할 때
+  사용하세요. 스페이스 또는 방송당 $0.00015부터입니다.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): 위치별 실시간
   트렌드를 순위, 볼륨, 쿼리 & WOEID와 함께 스크랩합니다. 어디에서 무엇이
   트렌드인지 추적할 때 사용하세요. 트렌드당 $0.00015부터입니다.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): 키워드, 지역, 근무
+  형태, 직급 & 회사별로 X 채용 공고를 급여 & 지원 링크와 함께 스크랩합니다. X에
+  올라온 채용 공고를 모을 때 사용하세요. 공고당 $0.00015부터입니다.
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader): 게시물이나
   프로필의 사진, 동영상 & GIF를 추출하거나 저장합니다. MP4 & 메타데이터 옵션을
   지원합니다. 미디어 파일 자체가 필요할 때 사용하세요. 미디어 행당

@@ -103,6 +103,8 @@ Xquik의 X Tweet Scraper는 게시물, 참여 지표, 공개 작성자 프로필
 | `resultType`           | 리치 행, 참여 행, 진단 행의 유형                     |
 | `sourceTweetId`        | 아티클 & 참여 모드의 원본 게시물 ID                  |
 | `article`              | `mode: "article"`의 구조화된 아티클 데이터           |
+| `translation`          | `mode: "translation"`의 X 번역                       |
+| `embed`                | `mode: "embed"`의 임베드 HTML & 링크                 |
 
 선택적 게시물 메타데이터에는 `authorUnavailable`, `card`, `communityId`,
 `communityNote`, `edit`, `exclusiveContent`, `noteTweet` & `postCta`가 있습니다.
@@ -221,8 +223,8 @@ Search terms 필드에 쿼리를 1개 이상 넣으세요.
 게시물 & 검색 모드는 `tweet`, `tweets` & `search`입니다. 프로필 모드는
 `profileTweets`, `profileReplies`, `profileMedia` & `profileLikes`입니다.
 `listTweets`는 리스트 게시물을, `article`은 게시물 속 X 아티클을 읽습니다.
-게시물 1개를 대상으로 하는 모드는 `replies`, `quotes`, `thread`, `retweeters` &
-`favoriters`입니다.
+게시물 1개를 대상으로 하는 모드는 `replies`, `quotes`, `thread`, `retweeters`,
+`favoriters`, `translation` & `embed`입니다.
 
 `profileTweets`는 X 프로필의 게시물 탭과 같게 동작합니다. 그 계정의 게시물,
 재게시 & 자기 게시물에 단 답글을 반환합니다. 행은 날짜순으로 나옵니다. 다른
@@ -287,6 +289,37 @@ Search terms 필드에 쿼리를 1개 이상 넣으세요.
 주지 않으면 이 Actor는 무료 `diagnostics` 레코드를 기록합니다. 게시물 행에는
 북마크 수가 들어 있을 수 있습니다. X는 어떤 계정이 게시물을 북마크했는지 보여
 주지 않습니다.
+
+### 게시물 번역 & 임베드 HTML 받기
+
+`mode: "translation"`은 각 게시물의 X 번역을 반환합니다. `translateTo`에 `en`,
+`es`, `pt-br`, `zh-tw` 같은 언어 코드를 넣으세요. 기본값은 `en`입니다.
+
+```json
+{
+  "mode": "translation",
+  "tweetIds": ["2082577277246972300"],
+  "translateTo": "es"
+}
+```
+
+각 행에는 `resultType: "translation"`, `sourceTweetId` & `translation`이 들어
+있습니다. 이 객체에는 `language`, `sourceLanguage`, `text` & `entities`가 들어
+있습니다.
+
+`mode: "embed"`는 각 게시물을 웹사이트에 임베드하는 HTML을 반환합니다.
+
+```json
+{ "mode": "embed", "tweetIds": ["2082577277246972300"], "embedTheme": "dark" }
+```
+
+각 행에는 `resultType: "embed"`, `sourceTweetId` & `embed`가 들어 있습니다. 이
+객체에는 `url`, `authorName`, `authorUrl`, `html` & `width`가 들어 있습니다.
+`embedHideMedia`, `embedHideThread` & `embedOmitScript`는 미디어, 답글 대상
+게시물 또는 위젯 스크립트를 뺍니다.
+
+두 모드 모두 게시물 ID & `startUrls`의 게시물 URL을 읽습니다. 게시물 1개는 일반
+행 요금으로 행 1개가 됩니다. X에 없는 게시물은 행도 요금도 없습니다.
 
 ### 플랫 CSV 행 내보내기
 
@@ -728,9 +761,16 @@ Apify의
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): 커뮤니티
   정보, 게시물, 검색 결과, 멤버 & 모더레이터를 스크랩합니다. X 커뮤니티에서
   데이터를 모을 때 사용하세요. 행당 $0.00015부터입니다.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): 키워드로
+  스페이스를 찾고 제목, 상태, 시간, 청취자 수, 호스트 & 스피커를 읽습니다.
+  URL이나 ID로 방송도 읽습니다. X의 라이브 오디오 & 동영상을 추적할 때
+  사용하세요. 스페이스 또는 방송당 $0.00015부터입니다.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): 위치별 실시간
   트렌드를 순위, 볼륨, 쿼리 & WOEID와 함께 스크랩합니다. 어디에서 무엇이
   트렌드인지 추적할 때 사용하세요. 트렌드당 $0.00015부터입니다.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): 키워드, 지역, 근무
+  형태, 직급 & 회사별로 X 채용 공고를 급여 & 지원 링크와 함께 스크랩합니다. X에
+  올라온 채용 공고를 모을 때 사용하세요. 공고당 $0.00015부터입니다.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): 장문의 X
   아티클을 커버, 작성자, 날짜 & 지표와 함께 마크다운 & 텍스트로 스크랩합니다.
   게시물이 아니라 아티클 본문이 필요할 때 사용하세요. 아티클당

@@ -15,9 +15,9 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">从 6:07 开始，观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具。</a>
 </td></tr></table>
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X Space Scraper 按关键词、主持人或话题标签查找空间，并按 URL 或 ID 读取空间。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付且不重复的结果收费。
+Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X Space Scraper 按关键词、主持人或话题标签查找空间，并按 URL 或 ID 读取空间和直播（Broadcasts）。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付且不重复的结果收费。
 
-查找任意话题的 Twitter 空间（Spaces），无论是正在直播、已预定还是已结束。无需 X API 密钥，也无需登录。费用为**每个已交付空间 $0.00015**，Apify 另行收取平台使用费。
+查找任意话题的 Twitter 空间（Spaces），无论是正在直播、已预定还是已结束。无需 X API 密钥，也无需登录。费用为**每个已交付空间或直播 $0.00015**，Apify 另行收取平台使用费。
 
 > Xquik 是独立的第三方服务，与 X Corp 无关联。“Twitter”和“X”是 X Corp 的商标。
 
@@ -26,7 +26,10 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 - 每个空间的标题、状态，以及预定时间、开始时间和结束时间。
 - 实时听众数、回放播放次数，以及当前在空间中的账号。
 - 主持人的公开个人资料、联合主持人、发言人，以及 X 列出的听众。
-- 回放、剪辑和锁定设置，以及宣布该空间的帖子。
+- 回放、剪辑和锁定设置，以及宣布该空间的帖子，含正文、各项计数和作者。
+- 主持人和发言人在空间中分享的帖子，以及分享者和分享时间。
+- 已结束空间的录音：开启 `includeReplay` 后，以 HLS 播放列表 URL 的形式提供。
+- 按 URL 或 ID 读取直播：标题、状态、时间、观看数和主持人。
 - 计费前去除重复项：2 个搜索词找到的同一个空间只算 1 行。
 
 ## 如何查找 X 空间
@@ -34,8 +37,20 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 1. 在 Apify Console 中打开 Xquik 的 X Space Scraper。
 2. 在 `searchTerms` 中输入词语、话题标签或 X 搜索运算符。
 3. 或者把空间 URL 粘贴到 `startUrls`，或把空间 ID 粘贴到 `spaceIds`。
-4. 用 `maxItems` 设置交付空间数的上限，然后点击 Start。
-5. 以 JSON、CSV 或 Excel 格式下载数据集，或使用 Apify API。
+4. 读取直播时，把直播 URL 粘贴到 `startUrls`，或把直播 ID 粘贴到 `broadcastIds`。
+5. 用 `maxItems` 设置交付行数的上限，然后点击 Start。
+6. 以 JSON、CSV 或 Excel 格式下载数据集，或使用 Apify API。
+
+`startUrls` 中的每个 URL 可以写成普通字符串，也可以写成 `{ "url": "..." }` 对象：
+
+```json
+{
+  "startUrls": [
+    "https://x.com/i/spaces/1OGwblLjnQMKB",
+    { "url": "https://x.com/i/broadcasts/1nGeLMWbkpaKX" }
+  ]
+}
+```
 
 ## 输入
 
@@ -68,11 +83,28 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 }
 ```
 
+开启 `includeReplay`，即可获取每个已结束空间的录音：
+
+```json
+{ "spaceIds": ["1OGwblLjnQMKB"], "includeReplay": true }
+```
+
+这一行会带上 `replay`，其中有 `url`（HLS 播放列表）、`streamType` 和 `status`。正在直播、已预定或没有录音的空间不带 `replay`。录音不额外收费。
+
+按 URL 或 ID 读取直播，也就是 X 在 `x.com/i/broadcasts` 上托管的实时视频：
+
+```json
+{
+  "startUrls": [{ "url": "https://x.com/i/broadcasts/1nGeLMWbkpaKX" }],
+  "broadcastIds": ["1nGeLMWbkpaKX"]
+}
+```
+
 顺利完成的小型运行会跳过 `run-report`，节省 Apify 用量。开启 `alwaysSaveRunRecords` 后，每次运行都会写入报告。
 
 ## 输出
 
-每行包含 1 个空间，并在 `sourceTarget` 中记录它的搜索词、URL 或 ID。
+每行包含 1 个空间或直播，并在 `sourceTarget` 中记录它的搜索词、URL 或 ID。`resultType` 为 `space` 或 `broadcast`。
 
 示例使用样例值，实际结果来自实时数据。一行空间数据如下：
 
@@ -90,6 +122,14 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
   "admins": [{ "username": "sample_host", "name": "Sample Host" }],
   "speakers": [{ "username": "sample_speaker", "name": "Sample Speaker" }],
   "listeners": [],
+  "sharings": [
+    {
+      "id": "2106511178339881415",
+      "sharedAt": "2026-03-11T17:20:16.658Z",
+      "sharedBy": { "username": "sample_speaker", "name": "Sample Speaker" },
+      "tweet": { "id": "2105620368836706789", "text": "Sample shared post" }
+    }
+  ],
   "resultType": "space",
   "sourceTarget": "bitcoin"
 }
@@ -107,9 +147,28 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 `Ended` 和 `TimedOut` 的空间带有 `endedAt`，两者都可能保留录音。面向订阅者或社群的空间，X 只向对应受众展示，因此这些空间不会返回任何行。
 
+直播行的 `resultType` 为 `"broadcast"`，示例如下：
+
+```json
+{
+  "id": "1SampleBcast1",
+  "title": "Sample launch broadcast",
+  "state": "Ended",
+  "startedAt": "2026-09-17T00:54:56.506Z",
+  "endedAt": "2026-09-17T01:17:35.036Z",
+  "totalWatched": 161758,
+  "totalWatching": 21639,
+  "width": 3840,
+  "height": 2160,
+  "creator": { "username": "sample_host", "name": "Sample Host" },
+  "resultType": "broadcast",
+  "sourceTarget": "1SampleBcast1"
+}
+```
+
 ## 抓取 X 空间要花多少钱？
 
-所有 Apify 套餐的价格都是每个已交付空间 $0.00015。Apify 另行收取平台使用费。
+所有 Apify 套餐的价格都是每个已交付空间或直播 $0.00015。Apify 另行收取平台使用费。
 
 - 每个已交付的数据行收费一次。`diagnostics` 中的诊断信息免费。
 - 没有启动费、搜索费或分页费。

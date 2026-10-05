@@ -51,6 +51,18 @@ connexion.
 4. Réglez `maxItems` pour plafonner les lignes livrées, puis cliquez sur Start.
 5. Téléchargez le dataset en JSON, CSV ou Excel, ou passez par l'API Apify.
 
+`startUrls` accepte chaque URL comme simple chaîne ou comme objet
+`{ "url": "..." }` :
+
+```json
+{
+  "startUrls": [
+    "https://x.com/i/lists/1748648376080666720",
+    { "url": "https://x.com/nasa" }
+  ]
+}
+```
+
 ## Entrée
 
 ```json
@@ -149,10 +161,19 @@ données dont vous avez besoin.
   scrape les infos, posts, recherches, membres et modérateurs d'une
   Communauté. Utilisez-le quand vos sources sont des Communautés X. À
   partir de $0.00015 par ligne.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) : trouve des Spaces
+  par mot-clé et lit leurs titres, états, heures, nombres d'auditeurs, hôtes et
+  intervenants. Lit aussi des diffusions par URL ou par ID. Utilisez-le quand
+  vous suivez l'audio et la vidéo en direct sur X. À partir de $0.00015 par
+  Space ou diffusion.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) : scrape les
   tendances en temps réel par lieu, avec rang, volume, requête et WOEID.
   Utilisez-le pour suivre les tendances de chaque lieu. À partir de
   $0.00015 par tendance.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) : scrape les offres
+  d'emploi X par mot-clé, lieu, mode de travail, niveau d'expérience et
+  entreprise, avec salaires et liens de candidature. Utilisez-le quand vous
+  collectez des offres d'emploi publiées sur X. À partir de $0.00015 par offre.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper) : scrape
   les Articles X longs en Markdown et en texte, avec couvertures, auteurs,
   dates et métriques. Utilisez-le quand vous avez besoin du corps des

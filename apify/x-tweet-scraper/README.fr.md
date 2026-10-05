@@ -109,6 +109,8 @@ avec plus de 50 filtres.
 | `resultType`           | Type de ligne pour les lignes riches, d'engagement et de diagnostic       |
 | `sourceTweetId`        | ID du post source pour les modes Article et engagement                    |
 | `article`              | Données d'Article structurées en `mode: "article"`                        |
+| `translation`          | Traduction de X en `mode: "translation"`                                  |
+| `embed`                | HTML d'intégration et lien en `mode: "embed"`                             |
 
 Les métadonnées de post optionnelles incluent `authorUnavailable`, `card`,
 `communityId`, `communityNote`, `edit`, `exclusiveContent`, `noteTweet` et
@@ -239,7 +241,7 @@ Les modes de post et de recherche sont `tweet`, `tweets` et `search`. Les modes
 de profil sont `profileTweets`, `profileReplies`, `profileMedia` et
 `profileLikes`. `listTweets` lit les posts d'une Liste, et `article` lit
 l'Article X contenu dans un post. Les modes pour un seul post sont `replies`,
-`quotes`, `thread`, `retweeters` et `favoriters`.
+`quotes`, `thread`, `retweeters`, `favoriters`, `translation` et `embed`.
 
 `profileTweets` suit l'onglet Posts du profil sur X. Il renvoie les posts du
 compte, ses reposts et ses réponses à ses propres posts. Les lignes arrivent par
@@ -313,6 +315,38 @@ n'ont pas d'onglet J'aime lisible. Si X ne montre ni utilisateurs ni posts
 aimés, l'Actor écrit un enregistrement `diagnostics` gratuit. Les lignes de post
 peuvent porter le nombre de signets. X ne montre pas quels comptes ont ajouté un
 post à leurs signets.
+
+### Traduire des posts et obtenir le HTML d'intégration
+
+`mode: "translation"` renvoie la traduction par X de chaque post. Réglez
+`translateTo` sur un code de langue comme `en`, `es`, `pt-br` ou `zh-tw`. La
+valeur par défaut est `en` :
+
+```json
+{
+  "mode": "translation",
+  "tweetIds": ["2082577277246972300"],
+  "translateTo": "es"
+}
+```
+
+Chaque ligne a `resultType: "translation"`, `sourceTweetId` et `translation`.
+Cet objet contient `language`, `sourceLanguage`, `text` et `entities`.
+
+`mode: "embed"` renvoie le HTML qui intègre chaque post sur un site web :
+
+```json
+{ "mode": "embed", "tweetIds": ["2082577277246972300"], "embedTheme": "dark" }
+```
+
+Chaque ligne a `resultType: "embed"`, `sourceTweetId` et `embed`. Cet objet
+contient `url`, `authorName`, `authorUrl`, `html` et `width`. `embedHideMedia`,
+`embedHideThread` et `embedOmitScript` retirent les médias, le post auquel il
+répond ou le script du widget.
+
+Les deux modes lisent les ID de post et les URL de post dans `startUrls`. Chaque
+post donne 1 ligne au prix habituel par ligne. Un post que X n'a pas ne donne
+aucune ligne et aucun frais.
 
 ### Exporter des lignes CSV plates
 
@@ -792,10 +826,19 @@ données dont vous avez besoin.
   scrape les infos, posts, recherches, membres et modérateurs d'une
   Communauté. Utilisez-le quand vos sources sont des Communautés X. À
   partir de $0.00015 par ligne.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) : trouve des Spaces
+  par mot-clé et lit leurs titres, états, heures, nombres d'auditeurs, hôtes et
+  intervenants. Lit aussi des diffusions par URL ou par ID. Utilisez-le quand
+  vous suivez l'audio et la vidéo en direct sur X. À partir de $0.00015 par
+  Space ou diffusion.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) : scrape les
   tendances en temps réel par lieu, avec rang, volume, requête et WOEID.
   Utilisez-le pour suivre les tendances de chaque lieu. À partir de
   $0.00015 par tendance.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) : scrape les offres
+  d'emploi X par mot-clé, lieu, mode de travail, niveau d'expérience et
+  entreprise, avec salaires et liens de candidature. Utilisez-le quand vous
+  collectez des offres d'emploi publiées sur X. À partir de $0.00015 par offre.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper) : scrape
   les Articles X longs en Markdown et en texte, avec couvertures, auteurs,
   dates et métriques. Utilisez-le quand vous avez besoin du corps des

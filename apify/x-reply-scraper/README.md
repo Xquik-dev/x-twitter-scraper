@@ -46,7 +46,7 @@ datasets.
 ### Reply collection behavior
 
 - Auto mode keeps collecting when direct results are incomplete.
-- `collectionStrategy` offers 4 modes for different reply jobs.
+- `collectionStrategy` sets how the Actor collects replies.
 - Bulk inputs accept post URLs, Tweet IDs, profiles & usernames.
 - Filters & duplicate removal run before billing.
 - Output supports 4 sort modes, 3 detail levels & 3 field styles.
@@ -227,6 +227,12 @@ Use `collectionStrategy: "conversationSearch"` for broad conversation coverage.
 Use `collectionStrategy: "thread"` to read the source conversation context. Set
 `includeOriginalPost: true` to keep the root post as depth 0.
 
+### Hidden replies
+
+Use `collectionStrategy: "hiddenReplies"` for the replies the post's author hid.
+X lists them oldest first, with the replies to them. Each row has
+`resultType: "hiddenReply"`. A post without hidden replies returns no rows.
+
 ## Direct & nested reply controls
 
 Use `scope` to choose the result shape.
@@ -248,6 +254,8 @@ Use `sort` with these values:
 - `latest` sorts newest first
 - `oldest` sorts oldest first
 - `likes` sorts highest like count first
+
+X search undercounts likes on some older replies, so `likes` runs can miss them.
 
 Profile targets collect your requested count of unique, filtered results, then
 sort them. Tweet targets keep global sorting.
@@ -406,6 +414,12 @@ author, engagement & media fields.
 
 Set `outputMode: "full"` to keep every supported public field.
 
+### Rich
+
+Set `outputMode: "rich"` for the most data per row. Rich rows keep every full
+column & add `hasCommunityNotes`, `quotedTweetPermalink`, `unavailableAuthorId`
+& media `sourceUser` at the end.
+
 ### Raw
 
 Set `outputMode: "raw"` to add a sanitized source snapshot under `raw`.
@@ -546,8 +560,8 @@ Eligible agent workflows can also use
 [x402](https://docs.apify.com/integrations/x402) or
 [Skyfire](https://docs.apify.com/integrations/skyfire).
 
-Xquik also offers 47 dashboard tools, 129 REST operations, signed webhooks & an
-MCP server.
+Xquik also offers 47 dashboard tools, a REST API, signed webhooks & an MCP
+server.
 
 ### Always use the latest build
 
@@ -592,9 +606,17 @@ diagnostics. Pick the one that matches the data you need.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapes
   Community info, posts, searches, members & moderators. Use it when your
   sources are X Communities. From $0.00015 per row.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Finds Spaces by
+  keyword & reads their titles, states, times, listener counts, hosts &
+  speakers. Also reads broadcasts by URL or ID. Use it when you track live audio
+  & video on X. From $0.00015 per Space or broadcast.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapes
   real-time trends by location with rank, volume, query & WOEID. Use it when you
   track what is trending where. From $0.00015 per trend.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapes X job
+  listings by keyword, place, workplace, seniority & company, with salaries &
+  apply links. Use it when you collect job openings posted on X. From $0.00015
+  per job.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapes
   long-form X Articles as Markdown & text with covers, authors, dates & metrics.
   Use it when you need article bodies, not tweets. From $0.00015 per article.

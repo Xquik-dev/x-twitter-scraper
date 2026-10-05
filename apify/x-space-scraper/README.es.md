@@ -17,14 +17,15 @@
 
 Xquik es el servicio de scraping de X (Twitter) más rápido y económico del
 mundo, con los datos de X más completos. X Space Scraper de Xquik encuentra
-Espacios por palabra clave, anfitrión o hashtag y lee Espacios por URL o ID. La
-mayoría de los demás Actores de Apify cobran antes de filtrar o quitar
-duplicados. Xquik solo cobra los resultados entregados y únicos.
+Espacios por palabra clave, anfitrión o hashtag y lee Espacios y transmisiones
+(broadcasts) por URL o ID. La mayoría de los demás Actores de Apify cobran antes
+de filtrar o quitar duplicados. Xquik solo cobra los resultados entregados y
+únicos.
 
 Encuentra Espacios de Twitter (Spaces) sobre cualquier tema, en vivo,
 programados o finalizados. No necesitas clave de API de X ni iniciar sesión.
-Pagas **$0.00015 por Espacio entregado**, y Apify factura aparte el uso de la
-plataforma.
+Pagas **$0.00015 por Espacio o transmisión entregados**, y Apify factura aparte
+el uso de la plataforma.
 
 > Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 > "Twitter" y "X" son marcas registradas de X Corp.
@@ -37,7 +38,13 @@ plataforma.
 - El perfil público del anfitrión, los coanfitriones, los oradores y los oyentes
   que X muestra.
 - Ajustes de repetición, clips y bloqueo, además del post que anuncia el
-  Espacio.
+  Espacio, con su texto, sus métricas y su autor.
+- Posts que los anfitriones y oradores compartieron en el Espacio, con quién
+  compartió cada uno y cuándo.
+- La grabación de un Espacio finalizado, como URL de lista HLS, con
+  `includeReplay`.
+- Transmisiones por URL o ID: título, estado, horas, cantidad de espectadores y
+  anfitrión.
 - Eliminación de duplicados antes de facturar: un Espacio que encuentran 2
   términos de búsqueda es 1 fila.
 
@@ -46,8 +53,21 @@ plataforma.
 1. Abre X Space Scraper de Xquik en Apify Console.
 2. Escribe palabras, hashtags u operadores de búsqueda de X en `searchTerms`.
 3. O pega URLs de Espacios en `startUrls`, o IDs de Espacios en `spaceIds`.
-4. Define `maxItems` para limitar los Espacios entregados y haz clic en Start.
-5. Descarga el dataset en JSON, CSV o Excel, o usa la API de Apify.
+4. Para transmisiones, pega sus URLs en `startUrls` o sus IDs en
+   `broadcastIds`.
+5. Define `maxItems` para limitar las filas entregadas y haz clic en Start.
+6. Descarga el dataset en JSON, CSV o Excel, o usa la API de Apify.
+
+`startUrls` acepta cada URL como texto simple o como objeto `{ "url": "..." }`:
+
+```json
+{
+  "startUrls": [
+    "https://x.com/i/spaces/1OGwblLjnQMKB",
+    { "url": "https://x.com/i/broadcasts/1nGeLMWbkpaKX" }
+  ]
+}
+```
 
 ## Entrada
 
@@ -82,13 +102,33 @@ Lee Espacios que ya conoces por URL o ID:
 }
 ```
 
+Activa `includeReplay` para obtener la grabación de cada Espacio finalizado:
+
+```json
+{ "spaceIds": ["1OGwblLjnQMKB"], "includeReplay": true }
+```
+
+La fila trae entonces `replay` con `url`, una lista HLS, además de `streamType`
+y `status`. Un Espacio en vivo, programado o sin grabación no trae `replay`. La
+grabación no tiene costo adicional.
+
+Lee transmisiones, el video en vivo que X aloja en `x.com/i/broadcasts`, por URL
+o ID:
+
+```json
+{
+  "startUrls": [{ "url": "https://x.com/i/broadcasts/1nGeLMWbkpaKX" }],
+  "broadcastIds": ["1nGeLMWbkpaKX"]
+}
+```
+
 Las ejecuciones pequeñas sin problemas omiten `run-report` y ahorran uso de
 Apify. Activa `alwaysSaveRunRecords` para escribirlo en todas las ejecuciones.
 
 ## Salida
 
-Cada fila contiene 1 Espacio y su término de búsqueda, URL o ID en
-`sourceTarget`.
+Cada fila contiene 1 Espacio o transmisión y su término de búsqueda, URL o ID en
+`sourceTarget`. `resultType` es `space` o `broadcast`.
 
 Los ejemplos usan valores de muestra. Los resultados reflejan datos en vivo. Una
 fila de Espacio se ve así:
@@ -107,6 +147,14 @@ fila de Espacio se ve así:
   "admins": [{ "username": "sample_host", "name": "Sample Host" }],
   "speakers": [{ "username": "sample_speaker", "name": "Sample Speaker" }],
   "listeners": [],
+  "sharings": [
+    {
+      "id": "2106511178339881415",
+      "sharedAt": "2026-03-11T17:20:16.658Z",
+      "sharedBy": { "username": "sample_speaker", "name": "Sample Speaker" },
+      "tweet": { "id": "2105620368836706789", "text": "Sample shared post" }
+    }
+  ],
   "resultType": "space",
   "sourceTarget": "bitcoin"
 }
@@ -126,10 +174,29 @@ Los Espacios `Ended` y `TimedOut` traen `endedAt`, y ambos pueden conservar una
 grabación. X muestra un Espacio para suscriptores o de una Comunidad solo a su
 audiencia, así que esos Espacios no devuelven ninguna fila.
 
+Una fila de transmisión tiene `resultType: "broadcast"` y se ve así:
+
+```json
+{
+  "id": "1SampleBcast1",
+  "title": "Sample launch broadcast",
+  "state": "Ended",
+  "startedAt": "2026-09-17T00:54:56.506Z",
+  "endedAt": "2026-09-17T01:17:35.036Z",
+  "totalWatched": 161758,
+  "totalWatching": 21639,
+  "width": 3840,
+  "height": 2160,
+  "creator": { "username": "sample_host", "name": "Sample Host" },
+  "resultType": "broadcast",
+  "sourceTarget": "1SampleBcast1"
+}
+```
+
 ## ¿Cuánto cuesta extraer Espacios de X?
 
-En todos los planes de Apify, cada Espacio entregado cuesta $0.00015. Apify
-factura aparte tu uso de la plataforma.
+En todos los planes de Apify, cada Espacio o transmisión entregados cuesta
+$0.00015. Apify factura aparte tu uso de la plataforma.
 
 - Un cobro por cada fila de datos entregada. Los diagnósticos son gratis en
   `diagnostics`.

@@ -33,6 +33,7 @@ platform kullanımını ayrıca faturalandırır. X API anahtarı ya da giriş g
 - 1 çalıştırmada aynı anda okunan birçok arama terimi.
 - Yer, çalışma şekli, kıdem, istihdam türü ve şirket filtreleri.
 - Tam ilan olarak okunan iş ilanı URL'leri ve ID'leri.
+- Ada göre iş konumları; her biri `locationId` alanının aldığı ID ile.
 - Başlık, maaş aralığı, para birimi, başvuru bağlantısı, konum ve işe alan
   hesap.
 - Her satırda düz metin ve Markdown olarak tam açıklama.
@@ -49,6 +50,18 @@ platform kullanımını ayrıca faturalandırır. X API anahtarı ya da giriş g
 3. Aramayı `location`, `locationType`, `seniority` veya `company` ile daralt.
 4. Teslim edilecek satır sayısını `maxItems` ile sınırla, sonra Start'a tıkla.
 5. Veri kümesini JSON, CSV veya Excel olarak indir ya da Apify API'yi kullan.
+
+`startUrls` her URL'yi düz metin olarak ya da `{ "url": "..." }` nesnesi olarak
+alır:
+
+```json
+{
+  "startUrls": [
+    "https://x.com/i/jobs/1899202395210649861",
+    { "url": "https://x.com/i/jobs/1899202395210649861" }
+  ]
+}
+```
 
 ## Girdi
 
@@ -80,8 +93,14 @@ Bildiğin ilanları URL veya ID ile oku:
 ```
 
 `location` bir yer adı alır. `locationId` ise 1 kesin yeri sabitler, örneğin
-West New York yerine New York City. Yer ID'lerini Xquik'in iş konumları
-API'siyle bul.
+West New York yerine New York City.
+
+Yer ID'lerini ada göre bul. `locationSearchTerms` içeren bir çalıştırma, iş
+ilanları yerine yerleri listeler:
+
+```json
+{ "locationSearchTerms": ["New York"], "maxItems": 20 }
+```
 
 Sorunsuz biten küçük çalıştırmalar `run-report` yazmaz, böylece Apify kullanımı
 azalır. Raporu her çalıştırmada almak için `alwaysSaveRunRecords` seçeneğini aç.
@@ -117,6 +136,17 @@ iş ilanı satırı şöyle görünür:
   "account": { "username": "example", "verified": true },
   "sourceTarget": "software engineer",
   "resultType": "job"
+}
+```
+
+Her iş konumu, `locationId` alanının aldığı `id` ile 1 satırdır:
+
+```json
+{
+  "id": "1720462281920696805",
+  "name": "New York City, NY",
+  "sourceTarget": "New York",
+  "resultType": "jobLocation"
 }
 ```
 
@@ -187,6 +217,11 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Topluluk
   bilgilerini, gönderilerini, aramalarını, üyelerini ve moderatörlerini kazır.
   Kaynakların X Toplulukları olduğunda kullan. Satır başına $0.00015'ten başlar.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Sohbet Odalarını
+  anahtar kelimeyle bulur; başlıklarını, durumlarını, zamanlarını, dinleyici
+  sayılarını, sunucularını ve konuşmacılarını okur. Yayınları da URL veya ID ile
+  okur. X'teki canlı ses ve video yayınlarını takip ettiğinde kullan. Sohbet
+  Odası veya yayın başına $0.00015'ten başlar.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Sıralama, hacim,
   sorgu ve WOEID ile konuma göre gerçek zamanlı gündemi kazır. Nerede neyin
   gündemde olduğunu takip ettiğinde kullan. Gündem başlığı başına $0.00015'ten

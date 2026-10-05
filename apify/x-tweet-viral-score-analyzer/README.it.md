@@ -483,10 +483,18 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): estrae
   informazioni, post, ricerche, membri & moderatori delle community. Usalo
   quando le tue fonti sono community di X. Da $0.00015 per riga.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): trova gli Spazi
+  per parola chiave & ne legge titoli, stati, orari, numero di ascoltatori, host
+  & relatori. Legge anche le trasmissioni tramite URL o ID. Usalo quando segui
+  audio & video in diretta su X. Da $0.00015 per Spazio o trasmissione.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): estrae le
   tendenze in tempo reale per località con posizione in classifica, volume,
   query & WOEID. Usalo quando segui cosa è di tendenza e dove. Da $0.00015 per
   tendenza.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): estrae le offerte di
+  lavoro di X per parola chiave, luogo, modalità di lavoro, livello di
+  esperienza & azienda, con stipendi & link di candidatura. Usalo quando
+  raccogli le offerte di lavoro pubblicate su X. Da $0.00015 per offerta.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): raccoglie
   gli articoli lunghi di X come Markdown & testo, con copertine, autori, date &
   metriche. Usalo quando ti serve il corpo degli articoli, non i post. Da

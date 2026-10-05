@@ -107,6 +107,8 @@ post & query di ricerca con oltre 50 filtri.
 | `resultType`           | Tipo di riga per righe rich, righe di engagement & diagnostica      |
 | `sourceTweetId`        | ID del post di origine nelle modalità articolo & engagement         |
 | `article`              | Dati strutturati dell'articolo in `mode: "article"`                 |
+| `translation`          | Traduzione di X in `mode: "translation"`                            |
+| `embed`                | HTML di incorporamento & link in `mode: "embed"`                    |
 
 I metadati facoltativi del post includono `authorUnavailable`, `card`,
 `communityId`, `communityNote`, `edit`, `exclusiveContent`, `noteTweet` &
@@ -231,7 +233,8 @@ Le modalità per post & ricerche sono `tweet`, `tweets` & `search`. Le modalità
 per i profili sono `profileTweets`, `profileReplies`, `profileMedia` &
 `profileLikes`. `listTweets` legge i post di una lista, mentre `article` legge
 l'articolo di X contenuto in un post. Le modalità per un singolo post sono
-`replies`, `quotes`, `thread`, `retweeters` & `favoriters`.
+`replies`, `quotes`, `thread`, `retweeters`, `favoriters`, `translation` &
+`embed`.
 
 `profileTweets` segue la scheda Post del profilo su X. Restituisce i post
 dell'account, i suoi repost & le sue risposte ai propri post. Le righe arrivano
@@ -299,6 +302,38 @@ profilo funzionano al meglio, perché molti profili pubblici non hanno una sched
 Mi piace leggibile. Se X non mostra utenti o post con Mi piace, l'Actor scrive un
 record `diagnostics` gratuito. Le righe dei post possono riportare il numero di
 segnalibri. X non mostra quali account hanno salvato un post nei segnalibri.
+
+### Traduci i post & ottieni l'HTML di incorporamento
+
+`mode: "translation"` restituisce la traduzione di X di ogni post. Imposta
+`translateTo` su un codice lingua come `en`, `es`, `pt-br` o `zh-tw`. Il valore
+predefinito è `en`:
+
+```json
+{
+  "mode": "translation",
+  "tweetIds": ["2082577277246972300"],
+  "translateTo": "es"
+}
+```
+
+Ogni riga ha `resultType: "translation"`, `sourceTweetId` & `translation`.
+Questo oggetto contiene `language`, `sourceLanguage`, `text` & `entities`.
+
+`mode: "embed"` restituisce l'HTML che incorpora ogni post in un sito web:
+
+```json
+{ "mode": "embed", "tweetIds": ["2082577277246972300"], "embedTheme": "dark" }
+```
+
+Ogni riga ha `resultType: "embed"`, `sourceTweetId` & `embed`. Questo oggetto
+contiene `url`, `authorName`, `authorUrl`, `html` & `width`. `embedHideMedia`,
+`embedHideThread` & `embedOmitScript` escludono i contenuti multimediali, il
+post a cui risponde o lo script del widget.
+
+Entrambe le modalità leggono ID dei post & URL dei post in `startUrls`. Ogni
+post dà 1 riga al prezzo abituale per riga. Un post che X non ha non dà alcuna
+riga né alcun addebito.
 
 ### Esporta righe CSV piatte
 
@@ -767,10 +802,18 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): estrae
   informazioni, post, ricerche, membri & moderatori delle community. Usalo
   quando le tue fonti sono community di X. Da $0.00015 per riga.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): trova gli Spazi
+  per parola chiave & ne legge titoli, stati, orari, numero di ascoltatori, host
+  & relatori. Legge anche le trasmissioni tramite URL o ID. Usalo quando segui
+  audio & video in diretta su X. Da $0.00015 per Spazio o trasmissione.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): estrae le
   tendenze in tempo reale per località con posizione in classifica, volume,
   query & WOEID. Usalo quando segui cosa è di tendenza e dove. Da $0.00015 per
   tendenza.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): estrae le offerte di
+  lavoro di X per parola chiave, luogo, modalità di lavoro, livello di
+  esperienza & azienda, con stipendi & link di candidatura. Usalo quando
+  raccogli le offerte di lavoro pubblicate su X. Da $0.00015 per offerta.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper): raccoglie
   gli articoli lunghi di X come Markdown & testo, con copertine, autori, date &
   metriche. Usalo quando ti serve il corpo degli articoli, non i post. Da
