@@ -15,9 +15,9 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">FramerがXquikのスクレイパーをClaude Code、Codex、Cursorなどと一緒に使う様子を6:07から視聴できます。</a>
 </td></tr></table>
 
-Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX Community Scraperは、コミュニティの情報、ポスト、検索結果、メンバー、モデレーターを収集します。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。
+Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX Community Scraperは、コミュニティの情報、ポスト、メディア、検索結果、メンバー、モデレーターを収集し、キーワードやトピックでコミュニティを見つけます。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。
 
-コミュニティのURLまたはIDから、X(Twitter)のコミュニティの情報、ポスト、キーワードに一致するポスト、メンバー、モデレーターを収集します。料金は**配信された行1件につき$0.00015**で、Apifyのプラットフォーム利用料は別途かかります。X APIキーやログインは不要です。
+コミュニティのURLまたはIDから、X(Twitter)のコミュニティの情報、ポスト、メディア、キーワードに一致するポスト、メンバー、モデレーターを収集します。キーワードやトピックでコミュニティを見つけたり、Xがおすすめするコミュニティを一覧にしたりできます。料金は**配信された行1件につき$0.00015**で、Apifyのプラットフォーム利用料は別途かかります。X APIキーやログインは不要です。
 
 > Xquikは独立したサードパーティサービスです。X Corpとは提携していません。
 > 「Twitter」および「X」はX Corpの商標です。
@@ -25,7 +25,11 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 ## コミュニティのデータとフィルター
 
 - コミュニティのメタデータとルール（Xが表示している場合）。
-- コミュニティの最新ポスト。
+- キーワードで見つけたコミュニティと、その完全なレコード。
+- Technologyなど、あるトピックで最も人気のあるコミュニティ。
+- Xが参加をおすすめするコミュニティと、すべてのコミュニティトピック。
+- 新しい順またはTop（話題）の順に並ぶコミュニティのポスト。
+- コミュニティのメディアタブ: 写真や動画付きのポスト。
 - Latest（最新）またはTop（話題）の並び順によるキーワード検索。
 - コミュニティのメンバーとモデレーター。
 - 課金前に適用するポスト、メンバー、モデレーターのフィルター。
@@ -63,13 +67,25 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 }
 ```
 
-キーワード検索では、`resources` に `"search"` を加え、`query` を設定します。
+キーワード検索では、`resources` に `"search"` を加え、`query` を設定します。メディアタブには `"media"` を加えます。話題のポストには、`postsOrder` を `Top` に設定します。
+
+代わりにコミュニティを見つけるには、キーワードかトピックを送ります。
+
+```json
+{
+  "searchTerms": ["artificial intelligence"],
+  "topics": ["Technology"],
+  "maxItems": 100
+}
+```
+
+見つかった各コミュニティには、ルール、作成者、管理者、メンバーのプロフィールが入ります。短いレコードでより速く実行するには、`includeDetails` を `false` に設定します。Xがおすすめするコミュニティには `includeSuggested` をオンにします。おすすめは実行ごとに変わることがあります。すべてのトピックとそのサブトピックには `listTopics` をオンにします。
 
 問題なく終わった小規模な実行は `run-report` を書き込まず、Apifyの利用料を節約します。毎回書き込むには `alwaysSaveRunRecords` をオンにしてください。
 
 ## 出力
 
-各行の `resultType` は `community`、`communityTweet`、`communityMember`、`communityModerator` のいずれかです。すべての行に、入力したコミュニティを示す `sourceTarget` が入ります。XquikのX Community Scraperは元のフィールドを保ち、値を作り出しません。
+各行の `resultType` は `community`、`communityTweet`、`communityMedia`、`communityMember`、`communityModerator`、`communityTopic` のいずれかです。すべての行に、入力したコミュニティ、キーワード、トピックを示す `sourceTarget` が入ります。XquikのX Community Scraperは元のフィールドを保ち、値を作り出しません。
 
 例はサンプル値です。実際の結果にはライブデータが入ります。コミュニティ情報の行は次のようになります。
 
@@ -89,6 +105,7 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 
 - 課金は配信したデータ行1件につき1回です。`diagnostics` の診断情報は無料です。
 - 開始料金、コミュニティ料金、リソース料金、クエリ料金はかかりません。
+- 見つかったコミュニティは、完全なレコードの有無にかかわらず1行分の料金です。
 - 重複排除は課金前に行います。
 
 ## 制限と復旧
@@ -124,6 +141,8 @@ XquikのX Community Scraperは、1回の実行で多数のコミュニティと�
 
 ## よくある質問
 
+よくある質問に答えたあと、サポートを受けられる場所を案内します。
+
 ### X APIキーやログインは必要ですか？
 
 いいえ。XquikのX Community Scraperは、X APIキー、ログイン、認証情報を必要としません。
@@ -138,7 +157,7 @@ XquikのX Community Scraperは、Xの公開フィールドを取得します。�
 
 ### API、スケジュール、連携は使えますか？
 
-はい。50個の公開タスクと129個のXquik REST操作から選べます。[APIタブ](https://apify.com/xquik/x-community-scraper/api)には、Python、JavaScript、cURLの例があります。Apifyの[スケジュール](https://docs.apify.com/platform/schedules)を使うと、XquikのX Community Scraperをcronで実行できます。エージェントは[Apify MCP](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。古いビルドが必要な場合を除き、`latest` を使ってください。
+はい。50個の公開タスクかXquik REST APIから選べます。[APIタブ](https://apify.com/xquik/x-community-scraper/api)には、Python、JavaScript、cURLの例があります。Apifyの[スケジュール](https://docs.apify.com/platform/schedules)を使うと、XquikのX Community Scraperをcronで実行できます。エージェントは[Apify MCP](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。古いビルドが必要な場合を除き、`latest` を使ってください。
 
 ### どこでサポートを受けられますか？
 

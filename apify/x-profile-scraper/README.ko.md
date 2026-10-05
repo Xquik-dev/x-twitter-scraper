@@ -33,7 +33,7 @@ Apify가 따로 청구합니다. X API 키나 로그인은 필요 없습니다.
 - 자기소개, 각종 수치, 인증 여부, 계정 주인이 입력한 위치, 웹사이트 & 미디어.
 - X가 추정해 공개하는 계정 기반 지역(Account based in) 라벨(있는 경우).
 - 제공되는 모든 결과 페이지의 프로필 게시물 행 & 답글 포함 행.
-- 필요하면 미디어, 팔로워, 팔로잉 또는 인증된 팔로워도 수집.
+- 필요하면 미디어, 하이라이트, 팔로워, 팔로잉 또는 인증된 팔로워도 수집.
 - 선택한 게시물에 적용하는 날짜, 미디어, 인증, 재게시 여부 & 지표 필터.
 - 선택한 프로필에 적용하는 오디언스, 활동, 계정 연령 & 공개 메타데이터 필터.
 - 과금 전 중복 제거.
@@ -73,9 +73,12 @@ Apify가 따로 청구합니다. X API 키나 로그인은 필요 없습니다.
 ## 출력
 
 프로필 행은 `resultType: "profile"`을 사용합니다. 선택 항목 행은 `profileTweet`,
-`profileReply`, `profileMedia`, `profileFollower`, `profileFollowing`,
-`profileVerifiedFollower` 중 하나를 사용합니다. 모든 행에 `sourceTarget`이
-남습니다. 공개 필드는 Xquik REST 응답 형식을 그대로 따릅니다.
+`profileReply`, `profileMedia`, `profileHighlight`, `profileFollower`,
+`profileFollowing`, `profileVerifiedFollower` 중 하나를 사용합니다. 모든 행에
+`sourceTarget`이 남습니다. 공개 필드는 Xquik REST 응답 형식을 그대로 따릅니다.
+
+`includeHighlights`는 각 프로필의 하이라이트 탭에 있는 게시물을 X의 순서대로
+추가합니다. 하이라이트가 없는 프로필은 행을 추가하지 않습니다.
 
 X는 계정 접속 IP를 집계해 `accountBasedIn`을 추정합니다. 이 라벨은 국적, 거주지,
 신원, 가입 위치, 게시 위치, 정확한 위치를 나타내지 않습니다. `observedAt`에는
@@ -126,9 +129,11 @@ Xquik의 X Profile Scraper는 한 실행에서 여러 프로필을 읽습니다.
 
 실행 상태는 실행이 일찍 멈춘 원인을 모두 알려 줍니다. `stopCauses`는 원인마다
 `message`, `retryable` & `nextAction`을 따로 담아 나열합니다. 원인은
-`target_not_found`, `target_failed`, `pagination_safety_limit` &
-`deadline_reached`입니다. 찾을 수 없는 대상은 다른 원인으로 실행이 멈췄을 때만
-목록에 들어갑니다. 원인 중 하나라도 `retryable`이면 실행도 `retryable`입니다.
+`target_not_found`, `target_suspended`, `target_failed`,
+`pagination_safety_limit` & `deadline_reached`입니다. `target_suspended`는 X가
+정지한 계정을 알려 줍니다. 찾을 수 없거나 정지된 대상은 다른 원인으로 실행이
+멈췄을 때만 목록에 들어갑니다. 원인 중 하나라도 재시도할 수 있으면 실행도
+`retryable`입니다.
 
 ## 관련 Xquik Actor
 
@@ -201,6 +206,8 @@ Xquik의 X Profile Scraper는 한 실행에서 여러 프로필을 읽습니다.
 
 ## 자주 묻는 질문
 
+자주 묻는 질문에 먼저 답하고, 이어서 도움받을 곳을 안내합니다.
+
 ### X API 키나 로그인이 필요한가요?
 
 아니요. Xquik의 X Profile Scraper는 X API 키, 로그인, 자격 증명이 모두 필요
@@ -222,7 +229,7 @@ Xquik의 X Profile Scraper는 공개 X 필드를 요청합니다. 결과에는 �
 
 ### API, 스케줄 & 연동을 사용할 수 있나요?
 
-네. 공개 태스크 50개나 Xquik REST 작업 129개 중에서 고르세요.
+네. 공개 태스크 50개나 Xquik REST API 중에서 고르세요.
 [API 탭](https://apify.com/xquik/x-profile-scraper/api)에 Python, JavaScript &
 cURL 예시가 있습니다. Apify
 [스케줄](https://docs.apify.com/platform/schedules)로 Xquik의 X Profile

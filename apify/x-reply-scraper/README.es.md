@@ -45,7 +45,7 @@ moderación y crear datasets de conversaciones.
 
 - El modo auto sigue recopilando cuando los resultados directos están
   incompletos.
-- `collectionStrategy` ofrece 4 modos para distintos trabajos con respuestas.
+- `collectionStrategy` define cómo recopila el Actor las respuestas.
 - Las entradas en bloque aceptan URLs de posts, IDs de posts, perfiles y nombres
   de usuario.
 - Los filtros y la eliminación de duplicados se aplican antes de facturar.
@@ -215,6 +215,9 @@ corrección.
 
 ## Estrategias de cobertura
 
+Elige cómo recopila el Actor las respuestas. Auto sirve para la mayoría de los
+trabajos.
+
 ### Modo auto completo
 
 Usa `collectionStrategy: "auto"` para la mayoría de los trabajos. Recopila todas
@@ -244,6 +247,13 @@ Usa `collectionStrategy: "thread"` para leer el contexto de la conversación de
 origen. Define `includeOriginalPost: true` para conservar el post raíz con
 profundidad 0.
 
+### Respuestas ocultas
+
+Usa `collectionStrategy: "hiddenReplies"` para las respuestas que ocultó el
+autor del post. X las enumera de la más antigua a la más nueva, junto con sus
+respuestas. Cada fila tiene `resultType: "hiddenReply"`. Un post sin respuestas
+ocultas no devuelve filas.
+
 ## Controles de respuestas directas y anidadas
 
 Usa `scope` para elegir la forma del resultado.
@@ -266,6 +276,9 @@ Usa `sort` con estos valores:
 - `latest` ordena de más nuevo a más antiguo
 - `oldest` ordena de más antiguo a más nuevo
 - `likes` ordena por cantidad de Me gusta, de mayor a menor
+
+La búsqueda de X cuenta de menos los Me gusta de algunas respuestas antiguas,
+así que las ejecuciones con `likes` pueden omitirlas.
 
 Los objetivos de perfil recopilan la cantidad que pediste de resultados únicos y
 filtrados, y luego los ordenan. Los objetivos de post conservan el orden global.
@@ -418,6 +431,8 @@ en vivo.
 
 ## Modos de salida
 
+Elige qué tan ancha es cada fila del dataset.
+
 ### Compacto
 
 Define `outputMode: "compact"` para obtener un dataset más reducido. Conserva
@@ -427,6 +442,13 @@ los campos de texto, conversación, autor, interacción y contenido multimedia.
 
 Define `outputMode: "full"` para conservar todos los campos públicos
 compatibles.
+
+### Rich
+
+Define `outputMode: "rich"` para obtener la mayor cantidad de datos por fila.
+Las filas rich conservan todas las columnas del modo completo y agregan al final
+`hasCommunityNotes`, `quotedTweetPermalink`, `unavailableAuthorId` y el
+`sourceUser` del contenido multimedia.
 
 ### Raw
 
@@ -576,7 +598,7 @@ Los flujos de agentes elegibles también pueden usar
 [x402](https://docs.apify.com/integrations/x402) o
 [Skyfire](https://docs.apify.com/integrations/skyfire).
 
-Xquik también ofrece 47 herramientas en el panel, 129 operaciones REST, webhooks
+Xquik también ofrece 47 herramientas en el panel, una API REST, webhooks
 firmados y un servidor MCP.
 
 ### Usa siempre la compilación más reciente
@@ -676,6 +698,8 @@ necesitas.
   difunde o fracasa. Desde $0.0003 por post analizado.
 
 ## Preguntas frecuentes
+
+Respuestas a preguntas comunes y, luego, dónde conseguir ayuda.
 
 ### ¿Necesito una clave de API de X o iniciar sesión?
 

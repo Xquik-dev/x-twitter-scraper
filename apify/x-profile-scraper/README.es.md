@@ -38,8 +38,8 @@ ni iniciar sesión.
   existe.
 - Filas de las pestañas Posts y Respuestas del perfil en todas las páginas de
   resultados disponibles.
-- Contenido multimedia, seguidores, cuentas seguidas o seguidores verificados,
-  si los activas.
+- Contenido multimedia, Destacados, seguidores, cuentas seguidas o seguidores
+  verificados, si los activas.
 - Filtros para los posts opcionales por fecha, contenido multimedia,
   verificación, si son reposts y métricas.
 - Filtros para los perfiles opcionales por audiencia, actividad, antigüedad y
@@ -81,10 +81,13 @@ Apify. Activa `alwaysSaveRunRecords` para escribirlo en todas las ejecuciones.
 ## Salida
 
 Las filas de perfil usan `resultType: "profile"`. Las filas opcionales usan
-`profileTweet`, `profileReply`, `profileMedia`, `profileFollower`,
-`profileFollowing` o `profileVerifiedFollower`. Todas las filas conservan
-`sourceTarget`. Los campos públicos mantienen la forma de respuesta de Xquik
-REST.
+`profileTweet`, `profileReply`, `profileMedia`, `profileHighlight`,
+`profileFollower`, `profileFollowing` o `profileVerifiedFollower`. Todas las
+filas conservan `sourceTarget`. Los campos públicos mantienen la forma de
+respuesta de Xquik REST.
+
+`includeHighlights` agrega los posts de la pestaña Destacados de cada perfil, en
+el orden de X. Un perfil sin destacados no agrega filas.
 
 X deduce `accountBasedIn` a partir de IPs agregadas de acceso a la cuenta. La
 etiqueta no indica nacionalidad, residencia, identidad, registro, lugar de
@@ -134,10 +137,11 @@ confirma la entrega, no una extracción completa.
 
 El estado de la ejecución nombra cada causa de una detención anticipada.
 `stopCauses` enumera cada causa con su propio `message`, `retryable` y
-`nextAction`. Las causas son `target_not_found`, `target_failed`,
-`pagination_safety_limit` y `deadline_reached`. Un objetivo inexistente entra en
-la lista solo si otra causa detuvo la ejecución. La ejecución es `retryable` si
-alguna causa lo es.
+`nextAction`. Las causas son `target_not_found`, `target_suspended`,
+`target_failed`, `pagination_safety_limit` y `deadline_reached`.
+`target_suspended` nombra las cuentas que X suspendió. Un objetivo inexistente o
+suspendido entra en la lista solo si otra causa detuvo la ejecución. La
+ejecución es `retryable` si alguna causa lo es.
 
 ## Actores de Xquik relacionados
 
@@ -220,6 +224,8 @@ necesitas.
 
 ## Preguntas frecuentes
 
+Respuestas a preguntas comunes y, luego, dónde conseguir ayuda.
+
 ### ¿Necesito una clave de API de X o iniciar sesión?
 
 No. X Profile Scraper de Xquik no necesita clave de API de X, inicio de sesión
@@ -242,7 +248,7 @@ devuelve filas `profileLike` de otras cuentas.
 
 ### ¿Puedo usar la API, las programaciones y las integraciones?
 
-Sí. Elige entre 50 tareas públicas o 129 operaciones REST de Xquik. La
+Sí. Elige entre 50 tareas públicas o la API REST de Xquik. La
 [pestaña API](https://apify.com/xquik/x-profile-scraper/api) tiene ejemplos en
 Python, JavaScript y cURL. Las
 [programaciones](https://docs.apify.com/platform/schedules) de Apify ejecutan X

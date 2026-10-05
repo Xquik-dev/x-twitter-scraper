@@ -32,6 +32,8 @@ Apify, platform kullanımını ayrıca faturalandırır.
 
 - Kitle, gönderi, hesap yaşı, onay, web sitesi, konum, biyografi ve kullanıcı
   adı filtreleri.
+- Search Autocomplete modu: X'in her arama terimi için önerdiği hesaplar,
+  konular, hashtag'ler ve cashtag'ler.
 - 1 sorguyu `startCursor` içindeki kayıtlı imleçten sürdür.
 - Çalıştırma taşınsa da kabul edilen iş kaybolmaz.
 - Filtreler ve tekilleştirme faturalamadan önce çalışır.
@@ -57,6 +59,41 @@ Apify, platform kullanımını ayrıca faturalandırır.
 Sorunsuz biten küçük çalıştırmalar `run-report` yazmaz, böylece Apify kullanımı
 azalır. Raporu her çalıştırmada almak için `alwaysSaveRunRecords` seçeneğini aç.
 
+## Arama otomatik tamamlama
+
+Birisi yazarken X'in ne önerdiğini okumak için `mode` değerini `autocomplete`
+yap. Her arama terimi önerilen hesapları, konuları, hashtag'leri ve cashtag'leri
+döndürür.
+
+```json
+{
+  "searchTerms": ["nasa", "$tsla"],
+  "mode": "autocomplete",
+  "suggestionTypes": ["users", "cashtags"],
+  "maxItems": 100
+}
+```
+
+- Hashtag'ler için terimi `#` ile, cashtag'ler için `$` ile başlat.
+- `suggestionTypes` yalnızca seçtiğin türleri tutar.
+- Her satır kendi `suggestionType` değerini, aranacak metni de `suggestion`
+  içinde verir.
+- Bir cashtag satırı `price`, `marketCap` ve `dailyChangePercent` taşır.
+- Profil filtreleri yalnızca Profile Search modunda uygulanır.
+
+Bir öneri satırı şöyle görünür:
+
+```json
+{
+  "suggestionType": "user",
+  "suggestion": "@sample_user",
+  "username": "sample_user",
+  "name": "Sample User",
+  "verified": true,
+  "sourceTarget": "sample"
+}
+```
+
 ## Çıktı
 
 Her satırda bir profil bulunur. Profili getiren sorgu `sourceTarget`
@@ -78,7 +115,8 @@ profil satırı şöyle görünür:
 
 ## X kullanıcılarını aramak ne kadar tutar?
 
-Her Apify planında teslim edilen profil başına $0.00015 ödersin. Apify, platform
+Her Apify planında teslim edilen profil başına $0.00015 ödersin. Bir Search
+Autocomplete önerisi teslim edilen satır başına aynı tutar. Apify, platform
 kullanımını ayrıca faturalandırır.
 
 - Teslim edilen her veri satırı için 1 kez ödersin. Tanılamalar `diagnostics`
@@ -97,8 +135,8 @@ bitmesi teslimatı doğrular. Tüm verinin çekildiğini doğrulamaz.
 kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Nedenler
 şunlardır: `target_not_found`, `target_failed`, `pagination_safety_limit` ve
 `deadline_reached`. Bulunamayan bir hedef, listeye yalnızca çalıştırmayı başka
-bir neden durdurduysa girer. Nedenlerden biri `retryable` ise çalıştırma da
-`retryable` olur.
+bir neden durdurduysa girer. Nedenlerden biri yeniden denenebiliyorsa çalıştırma
+da `retryable` olur.
 
 ## İlgili Xquik Actor'ları
 
@@ -183,6 +221,8 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 ## SSS
 
+Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
+
 ### X API anahtarı veya giriş gerekir mi?
 
 Hayır. Xquik'in X User Search Scraper'ı X API anahtarı, giriş ya da kimlik
@@ -202,7 +242,7 @@ izleyeceğin bir `nextAction` verir.
 
 ### API'yi, zamanlamaları ve entegrasyonları kullanabilir miyim?
 
-Evet. 50 herkese açık görevden veya 129 Xquik REST işleminden birini seç.
+Evet. 50 herkese açık görevden birini veya Xquik REST API'yi seç.
 [API sekmesinde](https://apify.com/xquik/x-user-search-scraper/api) Python,
 JavaScript ve cURL örnekleri var. Apify
 [zamanlamaları](https://docs.apify.com/platform/schedules), Xquik'in X User

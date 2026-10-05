@@ -15,16 +15,20 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">从 6:07 开始，观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具。</a>
 </td></tr></table>
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X Community Scraper 收集社群信息、帖子、搜索结果、成员和版主。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付、不重复且符合过滤条件的结果收费。
+Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X Community Scraper 收集社群信息、帖子、媒体、搜索结果、成员和版主，并按关键词或话题查找社群。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付、不重复且符合过滤条件的结果收费。
 
-从社群 URL 或 ID 收集 Twitter 社群（X Communities）的信息、帖子、关键词匹配结果、成员和版主。费用为**每个已交付行 $0.00015**，Apify 另行收取平台使用费。无需 X API 密钥，也无需登录。
+从社群 URL 或 ID 收集 Twitter 社群（X Communities）的信息、帖子、媒体、关键词匹配结果、成员和版主。按关键词或话题查找社群，或列出 X 推荐的社群。费用为**每个已交付行 $0.00015**，Apify 另行收取平台使用费。无需 X API 密钥，也无需登录。
 
 > Xquik 是独立的第三方服务，与 X Corp 无关联。“Twitter”和“X”是 X Corp 的商标。
 
 ## 社群数据与过滤条件
 
 - X 公开时，提供社群元数据和规则。
-- 社群最新帖子。
+- 按关键词找到的社群，附带完整记录。
+- 某个话题下最受欢迎的社群，例如 Technology。
+- X 推荐加入的社群，以及每个社群话题。
+- 社群帖子，按从新到旧或“热门”顺序排列。
+- 社群的“媒体”标签页：带照片或视频的帖子。
 - 关键词搜索，可按“最新”或“热门”排序。
 - 社群成员和版主。
 - 帖子、成员和版主过滤条件，在计费前生效。
@@ -62,13 +66,25 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 }
 ```
 
-要做关键词搜索，把 `"search"` 加入 `resources`，并设置 `query`。
+要做关键词搜索，把 `"search"` 加入 `resources`，并设置 `query`。要读取“媒体”标签页，加入 `"media"`。要读取“热门”帖子，把 `postsOrder` 设为 `Top`。
+
+要改为查找社群，请发送关键词或话题：
+
+```json
+{
+  "searchTerms": ["artificial intelligence"],
+  "topics": ["Technology"],
+  "maxItems": 100
+}
+```
+
+找到的每个社群都带有规则，以及创建者、管理员和成员的个人资料。把 `includeDetails` 设为 `false`，运行更快，只返回简短记录。开启 `includeSuggested`，获取 X 推荐的社群，每次运行的结果可能不同。开启 `listTopics`，获取每个话题及其子话题。
 
 顺利完成的小型运行会跳过 `run-report`，节省 Apify 用量。开启 `alwaysSaveRunRecords` 后，每次运行都会写入报告。
 
 ## 输出
 
-每行的 `resultType` 为 `community`、`communityTweet`、`communityMember` 或 `communityModerator`。每行都有 `sourceTarget`，指向输入的社群。Xquik 的 X Community Scraper 保留原始字段，不编造任何值。
+每行的 `resultType` 为 `community`、`communityTweet`、`communityMedia`、`communityMember`、`communityModerator` 或 `communityTopic`。每行都有 `sourceTarget`，指向输入的社群、关键词或话题。Xquik 的 X Community Scraper 保留原始字段，不编造任何值。
 
 示例使用样例值，实际结果来自实时数据。一行社群信息如下：
 
@@ -88,6 +104,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 - 每个已交付的数据行收费一次。`diagnostics` 中的诊断信息免费。
 - 没有启动费、社群费、资源费或查询费。
+- 找到的每个社群计 1 行，无论是否带完整记录。
 - 计费前先去重。
 
 ## 限制与恢复
@@ -96,7 +113,7 @@ Xquik 的 X Community Scraper 在 1 次运行中读取多个社群和多种资�
 
 提取中断时，会写入一条免费的 `partial` 诊断。已获取的结果不受影响。重试前，先查看 `availableResults`、`failedTargets`、`retryable` 和 `nextAction`。Actor 成功退出只说明结果已交付，不代表提取完整。
 
-运行状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_failed`、`pagination_safety_limit` 和 `deadline_reached`。只有在其他原因让运行停止时，缺失的目标才会列入 `stopCauses`。只要有一个原因可重试，整个运行就是 `retryable`。
+运行状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_failed`、`pagination_safety_limit` 和 `deadline_reached`。只有在其他原因让运行停止时，缺失的目标才会一并列出。只要有一个原因可重试，整个运行就是 `retryable`。
 
 ## 相关 Xquik Actor
 
@@ -123,6 +140,8 @@ Xquik 的 X Community Scraper 在 1 次运行中读取多个社群和多种资�
 
 ## 常见问题
 
+先解答常见问题，再说明在哪里获取帮助。
+
 ### 我需要 X API 密钥或登录吗？
 
 不需要。Xquik 的 X Community Scraper 不需要 X API 密钥、登录或任何凭据。
@@ -137,7 +156,7 @@ Xquik 的 X Community Scraper 请求的是公开的 X 字段。结果可能包�
 
 ### 可以使用 API、定时调度和集成吗？
 
-可以。你可以从 50 个公开任务或 129 个 Xquik REST 操作中选择。[API 标签页](https://apify.com/xquik/x-community-scraper/api) 提供 Python、JavaScript 和 cURL 示例。Apify [定时调度](https://docs.apify.com/platform/schedules) 可以按 cron 运行 Xquik 的 X Community Scraper。Agent 可以通过 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) 调用它。除非需要旧构建，否则请使用 `latest`。
+可以。你可以从 50 个公开任务或 Xquik REST API 中选择。[API 标签页](https://apify.com/xquik/x-community-scraper/api) 提供 Python、JavaScript 和 cURL 示例。Apify [定时调度](https://docs.apify.com/platform/schedules) 可以按 cron 运行 Xquik 的 X Community Scraper。Agent 可以通过 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) 调用它。除非需要旧构建，否则请使用 `latest`。
 
 ### 在哪里获取帮助？
 

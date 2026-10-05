@@ -78,10 +78,10 @@ X zeigt seit 2024 nicht mehr, wer einen Post mit Gefällt mir markiert hat. Der
 Typ `favoriters` liefert keine Datensätze. Ein Run ohne Datensätze nennt diesen
 Grund in seiner Diagnose.
 
-Standardmäßig erscheint jeder Account oder Post einmal pro Interaktionstyp &
-kostet einmal. Setze `dedupeAcrossTargets` auf `false`, um für jeden Quellpost
-einen Datensatz zu behalten. Der Run-Status zählt die übersprungenen Duplikate,
-die nichts kosten.
+Standardmäßig erscheint jeder Account oder Post einmal pro Interaktionstyp, mit
+1 Gebühr. Setze `dedupeAcrossTargets` auf `false`, um für jeden Quellpost einen
+Datensatz zu behalten. Der Run-Status zählt die übersprungenen Duplikate, die
+nichts kosten.
 
 Kleine Runs ohne Probleme überspringen `run-report` & sparen Apify-Nutzung.
 Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
@@ -89,9 +89,9 @@ Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 ## Ausgabe
 
 Jeder Datensatz setzt `resultType` auf `tweet`, `replies`, `completeReplies`,
-`quotes`, `retweeters`, `favoriters` oder `thread`. `sourceTarget` enthält die
-ID des Quellposts. Post- & Profilfelder folgen den stabilen Response-Formaten
-der Xquik-REST-API.
+`quotes`, `retweeters`, `favoriters`, `thread` oder `repostCheck`.
+`sourceTarget` enthält die ID des Quellposts. Post- & Profilfelder folgen den
+stabilen Response-Formaten der Xquik-REST-API.
 
 `completeReplies` behält jeden gelieferten Datensatz. Der Run-Report zählt
 unvollständige Abdeckung in `incompleteTargets`. Filter laufen vor der
@@ -110,6 +110,27 @@ Antwort-Datensatz sieht so aus:
   "likeCount": 12
 }
 ```
+
+## Repost-Prüfung
+
+Füge `repostCheck` zu `engagementTypes` hinzu & liste Accounts in
+`repostCheckUsers`. So erfährst du, ob jeder Account jeden Post repostet hat:
+
+```json
+{
+  "tweetIds": ["2098439298617856319"],
+  "engagementTypes": ["repostCheck"],
+  "repostCheckUsers": ["discord", "nasa"]
+}
+```
+
+Jede Prüfung ist 1 Datensatz mit `isRetweeted`, `retweetedAt`, `retweetId`,
+`checkedPosts` & `complete`. Seine `id` ist `repostCheck:<post ID>:<account>`.
+Die Prüfung liest die neuesten Posts jedes Accounts. Ein Repost, der älter ist
+als diese Posts, erscheint als `false` mit `complete: false`.
+
+Ein Run nur mit `repostCheck`- & `tweet`-Datensätzen behält deine
+Eingabereihenfolge: jeder Post, dann seine Accounts in deiner Reihenfolge.
 
 ## Zeitstempel von Reposts (Retweets)
 
@@ -235,6 +256,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
 ## FAQ
 
+Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
+
 ### Brauche ich einen X-API-Schlüssel oder Login?
 
 Nein. X Engagement Scraper von Xquik braucht keinen X-API-Schlüssel, keinen
@@ -257,7 +280,7 @@ Datensätze.
 
 ### Kann ich API, Zeitpläne & Integrationen nutzen?
 
-Ja. Wähle aus 50 öffentlichen Tasks oder 129 REST-Operationen von Xquik. Der
+Ja. Wähle aus 50 öffentlichen Tasks oder der REST-API von Xquik. Der
 [API-Tab](https://apify.com/xquik/x-engagement-scraper/api) enthält Beispiele
 für Python, JavaScript & cURL.
 Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) starten

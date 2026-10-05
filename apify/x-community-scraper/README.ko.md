@@ -17,12 +17,14 @@
 
 Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서비스이며, 가장
 완전한 X 데이터를 제공합니다. Xquik의 X Community Scraper는 커뮤니티 정보,
-게시물, 검색 결과, 멤버 & 모더레이터를 수집합니다. 다른 Apify Actor는 대부분
-필터링이나 중복 제거 전에 요금을 부과합니다. Xquik은 필터에 맞고 중복되지 않은
-결과를 전달했을 때만 요금을 받습니다.
+게시물, 미디어, 검색 결과, 멤버 & 모더레이터를 수집하고 키워드나 주제로
+커뮤니티를 찾습니다. 다른 Apify Actor는 대부분 필터링이나 중복 제거 전에 요금을
+부과합니다. Xquik은 필터에 맞고 중복되지 않은 결과를 전달했을 때만 요금을
+받습니다.
 
-커뮤니티 URL이나 ID로 Twitter 커뮤니티 정보, 게시물, 키워드 검색 결과, 멤버 &
-모더레이터를 수집하세요. 요금은 **전달된 행 1개당 $0.00015**이며, Apify 플랫폼
+커뮤니티 URL이나 ID로 Twitter 커뮤니티 정보, 게시물, 미디어, 키워드 검색 결과,
+멤버 & 모더레이터를 수집하세요. 키워드나 주제로 커뮤니티를 찾거나 X가 추천하는
+커뮤니티를 나열하세요. 요금은 **전달된 행 1개당 $0.00015**이며, Apify 플랫폼
 사용료는 Apify가 따로 청구합니다. X API 키나 로그인은 필요 없습니다.
 
 > Xquik은 독립적인 제3자 서비스입니다. X Corp와 제휴 관계가 없습니다.
@@ -31,7 +33,11 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 ## 커뮤니티 데이터 & 필터
 
 - X가 공개하는 경우 커뮤니티 메타데이터 & 규칙.
-- 최신 커뮤니티 게시물.
+- 키워드로 찾은 커뮤니티와 전체 레코드.
+- Technology 같은 주제의 가장 인기 있는 커뮤니티.
+- X가 가입을 추천하는 커뮤니티 & 모든 커뮤니티 주제.
+- 최신순 또는 인기순으로 정렬한 커뮤니티 게시물.
+- 커뮤니티의 미디어 탭: 사진이나 동영상이 있는 게시물.
 - 최신순 또는 인기순 정렬을 지원하는 키워드 검색.
 - 커뮤니티 멤버 & 모더레이터.
 - 과금 전에 실행되는 게시물, 멤버 & 모더레이터 필터.
@@ -70,16 +76,34 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 ```
 
 키워드 검색을 하려면 `resources`에 `"search"`를 추가하고 `query`를 지정하세요.
+미디어 탭을 받으려면 `"media"`를 추가하세요. 인기 게시물을 받으려면
+`postsOrder`를 `Top`으로 설정하세요.
+
+대신 커뮤니티를 찾으려면 키워드나 주제를 보내세요.
+
+```json
+{
+  "searchTerms": ["artificial intelligence"],
+  "topics": ["Technology"],
+  "maxItems": 100
+}
+```
+
+찾은 커뮤니티마다 규칙, 개설자, 관리자 & 멤버 프로필이 들어 있습니다. 짧은
+레코드로 더 빠르게 실행하려면 `includeDetails`를 `false`로 설정하세요. X가
+추천하는 커뮤니티를 받으려면 `includeSuggested`를 켜세요. 추천은 실행마다 다를
+수 있습니다. 모든 주제 & 하위 주제를 받으려면 `listTopics`를 켜세요.
 
 문제없이 끝난 작은 실행은 `run-report`를 건너뛰어 Apify 사용량을 아낍니다. 모든
 실행에서 보고서를 기록하려면 `alwaysSaveRunRecords`를 켜세요.
 
 ## 출력
 
-각 행의 `resultType`은 `community`, `communityTweet`, `communityMember`,
-`communityModerator` 중 하나입니다. 모든 행에는 입력한 커뮤니티를 가리키는
-`sourceTarget`이 들어 있습니다. Xquik의 X Community Scraper는 원본 필드를 그대로
-두고 값을 지어내지 않습니다.
+각 행의 `resultType`은 `community`, `communityTweet`, `communityMedia`,
+`communityMember`, `communityModerator`, `communityTopic` 중 하나입니다. 모든
+행에는 입력한 커뮤니티, 키워드 또는 주제를 가리키는 `sourceTarget`이 들어
+있습니다. Xquik의 X Community Scraper는 원본 필드를 그대로 두고 값을 지어내지
+않습니다.
 
 예시는 샘플 값입니다. 실제 결과는 실시간 데이터를 따릅니다. 커뮤니티 정보 행은
 다음과 같습니다.
@@ -102,6 +126,7 @@ Apify가 따로 청구합니다.
 - 전달된 데이터 행 1개마다 한 번 과금합니다. 진단은 `diagnostics`에서 무료로
   제공합니다.
 - 시작, 커뮤니티, 리소스, 쿼리 요금이 없습니다.
+- 찾은 커뮤니티는 전체 레코드가 있든 없든 행 1개 요금입니다.
 - 과금 전에 중복을 제거합니다.
 
 ## 제한 & 복구
@@ -120,7 +145,7 @@ Apify가 실행을 다시 시작해도 전달된 행 & 진행 상황은 유지�
 `message`, `retryable` & `nextAction`을 따로 담아 나열합니다. 원인은
 `target_not_found`, `target_failed`, `pagination_safety_limit` &
 `deadline_reached`입니다. 찾을 수 없는 대상은 다른 원인으로 실행이 멈췄을 때만
-목록에 들어갑니다. 원인 중 하나라도 `retryable`이면 실행도 `retryable`입니다.
+목록에 들어갑니다. 원인 중 하나라도 재시도할 수 있으면 실행도 `retryable`입니다.
 
 ## 관련 Xquik Actor
 
@@ -193,6 +218,8 @@ Apify가 실행을 다시 시작해도 전달된 행 & 진행 상황은 유지�
 
 ## 자주 묻는 질문
 
+자주 묻는 질문에 먼저 답하고, 이어서 도움받을 곳을 안내합니다.
+
 ### X API 키나 로그인이 필요한가요?
 
 아니요. Xquik의 X Community Scraper는 X API 키, 로그인, 자격 증명이 모두 필요
@@ -213,7 +240,7 @@ Xquik의 X Community Scraper는 공개 X 필드를 요청합니다. 결과에는
 
 ### API, 스케줄 & 연동을 사용할 수 있나요?
 
-네. 공개 태스크 50개나 Xquik REST 작업 129개 중에서 고르세요.
+네. 공개 태스크 50개나 Xquik REST API 중에서 고르세요.
 [API 탭](https://apify.com/xquik/x-community-scraper/api)에 Python, JavaScript &
 cURL 예시가 있습니다. Apify
 [스케줄](https://docs.apify.com/platform/schedules)로 Xquik의 X Community

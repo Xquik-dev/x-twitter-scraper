@@ -111,11 +111,13 @@ bitmesi teslimatı doğrular. Tüm verinin çekildiğini doğrulamaz.
 
 Çalıştırma durumu, erken durmanın her nedenini söyler. `stopCauses` her nedeni
 kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Nedenler
-şunlardır: `target_not_found`, `target_failed`, `pagination_safety_limit`,
-`reply_reach` ve `deadline_reached`. `reply_reach`, X'in bir yanıt konuşmasının
-yalnızca bir kısmını sunduğu anlamına gelir. Bulunamayan bir hedef, listeye
-yalnızca çalıştırmayı başka bir neden durdurduysa girer. Nedenlerden biri
-`retryable` ise çalıştırma da `retryable` olur.
+şunlardır: `target_not_found`, `target_suspended`, `target_failed`,
+`pagination_safety_limit`, `reply_reach` ve `deadline_reached`.
+`target_suspended`, X'in askıya aldığı hesapları belirtir. `reply_reach`, X'in
+bir yanıt konuşmasının yalnızca bir kısmını sunduğu anlamına gelir. Bulunamayan
+veya askıya alınmış bir hedef, listeye yalnızca çalıştırmayı başka bir neden
+durdurduysa girer. Nedenlerden biri yeniden denenebiliyorsa çalıştırma da
+`retryable` olur.
 
 ## İlgili Xquik Actor'ları
 
@@ -200,6 +202,8 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 ## SSS
 
+Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
+
 ### X API anahtarı veya giriş gerekir mi?
 
 Hayır. Xquik'in X Media Downloader'ı X API anahtarı, giriş ya da kimlik bilgisi
@@ -220,7 +224,7 @@ ve nasıl düzelteceğini söyler.
 
 ### API'yi, zamanlamaları ve entegrasyonları kullanabilir miyim?
 
-Evet. 50 herkese açık görevden veya 129 Xquik REST işleminden birini seç.
+Evet. 50 herkese açık görevden birini veya Xquik REST API'yi seç.
 [API sekmesinde](https://apify.com/xquik/x-media-downloader/api) Python,
 JavaScript ve cURL örnekleri var. Apify
 [zamanlamaları](https://docs.apify.com/platform/schedules), Xquik'in X Media

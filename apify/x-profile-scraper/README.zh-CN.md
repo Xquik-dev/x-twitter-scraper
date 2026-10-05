@@ -26,7 +26,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 - 简介、各项计数、认证状态、账号主人填写的位置、网站和媒体。
 - X 尽力提供的公开“账号所在地”（Account based in）标签，有则返回。
 - 个人资料“帖子”和“回复”标签页中的行，覆盖所有可用结果页。
-- 可选媒体、关注者、正在关注的账号或已认证关注者。
+- 可选媒体、亮点、关注者、正在关注的账号或已认证关注者。
 - 可选帖子可按日期、媒体、认证状态、是否转帖和指标过滤。
 - 可选个人资料可按受众、活跃度、账号年龄和公开元数据过滤。
 - 计费前去除重复项。
@@ -62,7 +62,9 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 ## 输出
 
-个人资料行使用 `resultType: "profile"`。可选行使用 `profileTweet`、`profileReply`、`profileMedia`、`profileFollower`、`profileFollowing` 或 `profileVerifiedFollower`。每行都保留 `sourceTarget`。公开字段沿用 Xquik REST 的响应结构。
+个人资料行使用 `resultType: "profile"`。可选行使用 `profileTweet`、`profileReply`、`profileMedia`、`profileHighlight`、`profileFollower`、`profileFollowing` 或 `profileVerifiedFollower`。每行都保留 `sourceTarget`。公开字段沿用 Xquik REST 的响应结构。
+
+`includeHighlights` 会按 X 的顺序，添加每个个人资料“亮点”标签页中的帖子。没有亮点的个人资料不添加任何行。
 
 X 根据汇总的账号访问 IP 推断 `accountBasedIn`。这个标签不代表国籍、居住地、身份、注册地、发帖地点或确切位置。`observedAt` 记录获取时间。X 没有显示标签时，`accountBasedIn` 为 null。X 隐藏该标签时，行中改为 `accountBasedInUnavailable: true`。
 
@@ -97,7 +99,7 @@ Xquik 的 X Profile Scraper 在 1 次运行中读取多个个人资料。你设�
 
 提取中断时，会写入一条免费的 `partial` 诊断。已获取的结果不受影响。重试前，先查看 `availableResults`、`failedTargets`、`retryable` 和 `nextAction`。Actor 成功退出只说明结果已交付，不代表提取完整。
 
-运行状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_failed`、`pagination_safety_limit` 和 `deadline_reached`。只有在其他原因让运行停止时，缺失的目标才会列入 `stopCauses`。只要有一个原因可重试，整个运行就是 `retryable`。
+运行状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_suspended`、`target_failed`、`pagination_safety_limit` 和 `deadline_reached`。`target_suspended` 列出被 X 冻结的账号。只有在其他原因让运行停止时，缺失或被冻结的目标才会一并列出。只要有一个原因可重试，整个运行就是 `retryable`。
 
 ## 相关 Xquik Actor
 
@@ -124,6 +126,8 @@ Xquik 的 X Profile Scraper 在 1 次运行中读取多个个人资料。你设�
 
 ## 常见问题
 
+先解答常见问题，再说明在哪里获取帮助。
+
 ### 我需要 X API 密钥或登录吗？
 
 不需要。Xquik 的 X Profile Scraper 不需要 X API 密钥、登录或任何凭据。
@@ -138,7 +142,7 @@ Xquik 的 X Profile Scraper 请求的是公开的 X 字段。结果可能包含�
 
 ### 可以使用 API、定时调度和集成吗？
 
-可以。你可以从 50 个公开任务或 129 个 Xquik REST 操作中选择。[API 标签页](https://apify.com/xquik/x-profile-scraper/api) 提供 Python、JavaScript 和 cURL 示例。Apify [定时调度](https://docs.apify.com/platform/schedules) 可以按 cron 运行 Xquik 的 X Profile Scraper。Agent 可以通过 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) 调用它。除非需要旧构建，否则请使用 `latest`。
+可以。你可以从 50 个公开任务或 Xquik REST API 中选择。[API 标签页](https://apify.com/xquik/x-profile-scraper/api) 提供 Python、JavaScript 和 cURL 示例。Apify [定时调度](https://docs.apify.com/platform/schedules) 可以按 cron 运行 Xquik 的 X Profile Scraper。Agent 可以通过 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) 调用它。除非需要旧构建，否则请使用 `latest`。
 
 ### 在哪里获取帮助？
 

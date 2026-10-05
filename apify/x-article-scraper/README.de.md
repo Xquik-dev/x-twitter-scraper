@@ -34,6 +34,8 @@ Plattformnutzung separat. Du brauchst keinen X-API-Schlüssel & keinen Login.
 - Markdown, das Blöcke sowie fette & kursive Passagen erhält.
 - `contents`-Blöcke, die die Quellformatierung behalten.
 - Post-URLs & numerische Post-IDs im selben Run.
+- Jeder Artikel, den ein Account veröffentlicht hat, anhand von Nutzername oder
+  Profil-URL.
 - Duplikatentfernung vor der Abrechnung.
 
 X Article Scraper von Xquik errät nie Link-Metadaten. Apify zeigt Markdown als
@@ -43,6 +45,8 @@ Text an.
 
 1. Öffne X Article Scraper von Xquik in der Apify Console.
 2. Füge URLs von Artikel-Posts in `startUrls` oder Post-IDs in `tweetIds` ein.
+   Um die Artikel eines Accounts zu listen, trage seinen Nutzernamen in
+   `twitterHandles` ein.
 3. Setze `maxItems`, um die gelieferten Artikel zu begrenzen. Klicke dann auf
    Start.
 4. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
@@ -63,8 +67,9 @@ Text an.
 
 | Feld                   | Zweck                                            | Standard |
 | ---------------------- | ------------------------------------------------ | -------- |
-| `startUrls`            | Öffentliche URLs von Artikel-Posts               | Keiner   |
+| `startUrls`            | Öffentliche URLs von Artikel-Posts oder Profilen | Keiner   |
 | `tweetIds`             | Numerische Post-IDs von Artikeln                 | Keiner   |
+| `twitterHandles`       | Accounts, deren Artikel der Actor listet         | Keiner   |
 | `maxItems`             | Globale Obergrenze für gelieferte Artikel        | `100000` |
 | `dedupeAcrossTargets`  | Entfernt doppelte Artikel-IDs vor der Abrechnung | `true`   |
 | `maxConcurrency`       | Parallele, unabhängige Artikelabrufe             | `100`    |
@@ -91,6 +96,13 @@ Artikel-Datensatz enthält diese Felder:
 Datensätze ergänzen Autor, Quelle, Titelbild, Zeit & Kennzahlen. Exportiere als
 JSON oder Tabelle.
 
+Ein Nutzername in `twitterHandles` oder eine Profil-URL in `startUrls` listet
+die Artikel dieses Accounts, neueste zuerst. Jeder ist ein
+`articlePreview`-Datensatz mit `title`, `previewText`, `coverImageUrl`,
+`articleId`, Datumsangaben & Post-Kennzahlen des Artikels. X listet dort keinen
+Artikeltext, der Datensatz hat also kein `markdown` & keine `contents`. Starte
+einen Run mit seiner `tweetId`, um den vollständigen Artikel zu erhalten.
+
 ## Was kostet es, X-Artikel zu scrapen?
 
 Auf jedem Apify-Plan kostet ein gelieferter Artikel $0.00015. Apify berechnet
@@ -113,10 +125,11 @@ Extraktion.
 
 Der Run-Status nennt jede Ursache für einen vorzeitigen Stopp. `stopCauses`
 listet jede Ursache mit eigenen Feldern `message`, `retryable` & `nextAction`.
-Die Ursachen sind `target_not_found`, `target_failed`, `pagination_safety_limit`
-& `deadline_reached`. Ein fehlendes Ziel kommt nur auf die Liste, wenn eine
-andere Ursache den Run gestoppt hat. Der Run ist `retryable`, wenn mindestens 1
-Ursache es ist.
+Die Ursachen sind `target_not_found`, `target_suspended`, `target_failed`,
+`pagination_safety_limit` & `deadline_reached`. `target_suspended` nennt die
+Accounts, die X gesperrt hat. Ein fehlendes oder gesperrtes Ziel kommt nur auf
+die Liste, wenn eine andere Ursache den Run gestoppt hat. Der Run ist
+`retryable`, wenn mindestens 1 Ursache es ist.
 
 ## Verwandte Xquik-Actors
 
@@ -195,6 +208,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
 ## FAQ
 
+Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
+
 ### Brauche ich einen X-API-Schlüssel oder Login?
 
 Nein. X Article Scraper von Xquik braucht keinen X-API-Schlüssel, keinen Login &
@@ -216,7 +231,7 @@ kann, & sagt, wie du sie korrigierst. X Article Scraper von Xquik liefert nur
 
 ### Kann ich API, Zeitpläne & Integrationen nutzen?
 
-Ja. Wähle aus 50 öffentlichen Tasks oder 129 REST-Operationen von Xquik. Der
+Ja. Wähle aus 50 öffentlichen Tasks oder der REST-API von Xquik. Der
 [API-Tab](https://apify.com/xquik/x-article-scraper/api) enthält Beispiele für
 Python, JavaScript & cURL.
 Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) starten

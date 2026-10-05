@@ -34,10 +34,12 @@ X-API-Schlüssel & keinen Login.
 
 - Bio, Zähler, Verifizierung, vom Inhaber angegebener Standort, Website &
   Medien.
-- Die öffentliche Angabe "Account based in" von X, falls X sie liefert.
+- Die öffentliche, unverbindliche Angabe "Account based in" von X, falls X sie
+  liefert.
 - Datensätze aus den Profil-Tabs Posts & Antworten über alle verfügbaren
   Ergebnisseiten.
-- Optional Medien, Follower, gefolgte Accounts oder verifizierte Follower.
+- Optional Medien, Highlights, Follower, gefolgte Accounts oder verifizierte
+  Follower.
 - Filter für optionale Posts nach Datum, Medien, Verifizierung, Repost-Status &
   Kennzahlen.
 - Filter für optionale Profile nach Zielgruppe, Aktivität, Alter & öffentlichen
@@ -81,10 +83,13 @@ Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 ## Ausgabe
 
 Profil-Datensätze nutzen `resultType: "profile"`. Optionale Datensätze nutzen
-`profileTweet`, `profileReply`, `profileMedia`, `profileFollower`,
-`profileFollowing` oder `profileVerifiedFollower`. Jeder Datensatz behält
-`sourceTarget`. Öffentliche Felder folgen dem Response-Format der
-Xquik-REST-API.
+`profileTweet`, `profileReply`, `profileMedia`, `profileHighlight`,
+`profileFollower`, `profileFollowing` oder `profileVerifiedFollower`. Jeder
+Datensatz behält `sourceTarget`. Öffentliche Felder folgen dem Response-Format
+der Xquik-REST-API.
+
+`includeHighlights` ergänzt die Posts im Tab Highlights jedes Profils, in der
+Reihenfolge von X. Ein Profil ohne Highlights ergänzt keine Datensätze.
 
 X leitet `accountBasedIn` aus aggregierten IP-Adressen der Account-Zugriffe ab.
 Die Angabe sagt nichts über Staatsangehörigkeit, Wohnsitz, Identität,
@@ -138,10 +143,11 @@ Extraktion.
 
 Der Run-Status nennt jede Ursache für einen vorzeitigen Stopp. `stopCauses`
 listet jede Ursache mit eigenen Feldern `message`, `retryable` & `nextAction`.
-Die Ursachen sind `target_not_found`, `target_failed`, `pagination_safety_limit`
-& `deadline_reached`. Ein fehlendes Ziel kommt nur auf die Liste, wenn eine
-andere Ursache den Run gestoppt hat. Der Run ist `retryable`, wenn mindestens 1
-Ursache es ist.
+Die Ursachen sind `target_not_found`, `target_suspended`, `target_failed`,
+`pagination_safety_limit` & `deadline_reached`. `target_suspended` nennt die
+Accounts, die X gesperrt hat. Ein fehlendes oder gesperrtes Ziel kommt nur auf
+die Liste, wenn eine andere Ursache den Run gestoppt hat. Der Run ist
+`retryable`, wenn mindestens 1 Ursache es ist.
 
 ## Verwandte Xquik-Actors
 
@@ -220,6 +226,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
 ## FAQ
 
+Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
+
 ### Brauche ich einen X-API-Schlüssel oder Login?
 
 Nein. X Profile Scraper von Xquik braucht keinen X-API-Schlüssel, keinen Login &
@@ -242,7 +250,7 @@ Deshalb liefert `includeLikes` für andere Accounts keine
 
 ### Kann ich API, Zeitpläne & Integrationen nutzen?
 
-Ja. Wähle aus 50 öffentlichen Tasks oder 129 REST-Operationen von Xquik. Der
+Ja. Wähle aus 50 öffentlichen Tasks oder der REST-API von Xquik. Der
 [API-Tab](https://apify.com/xquik/x-profile-scraper/api) enthält Beispiele für
 Python, JavaScript & cURL.
 Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) starten

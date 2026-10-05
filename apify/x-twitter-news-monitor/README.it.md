@@ -63,11 +63,10 @@ sulle organizzazioni, le persone o gli argomenti che segui.
 
 ### Cosa risponde l'Actor
 
-| Domanda      | Risposta                                                                       |
-| ------------ | ------------------------------------------------------------------------------ |
-| Formato      | Cronaca, commento, speculazione, promozione, satira, non pertinente o poco chiaro |
-| Attribuzione | Nominata, linkata, di prima mano, assente o poco chiara                        |
-| Rilevanza    | Probabilità che l'evento riportato riguardi i tuoi target                      |
+- Formato: Cronaca, commento, speculazione, promozione, satira, non pertinente o
+  poco chiaro
+- Attribuzione: Nominata, linkata, di prima mano, assente o poco chiara
+- Rilevanza: Probabilità che l'evento riportato riguardi i tuoi target
 
 La classificazione non verifica i fatti. Nominare una fonte non la rende
 credibile. L'attribuzione descrive ciò che il post presenta.
@@ -313,6 +312,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
 ## FAQ & supporto
 
+Le risposte alle domande più comuni, poi dove trovare assistenza.
+
 ### Serve un account AI, una chiave API X o il login?
 
 No. X (Twitter) News Monitor di Xquik include i costi AI nel prezzo. Non ti
@@ -322,18 +323,18 @@ credenziali.
 ### Posso usare le mie domande?
 
 Sì. Le `analysis.questions` personalizzate sostituiscono quelle predefinite.
-Invia da 1 a 8 domande `choice`, `score` o `probability`. Le domande `choice`
-accettano da 2 a 255 categorie. Le domande `score` richiedono almeno 2 livelli
-ordinati. Usa le stesse domande nelle esecuzioni che vuoi confrontare.
+Invia da 1 a 8 domande `choice`, `score` o `probability`. Le domande a scelta
+accettano da 2 a 255 categorie. Le domande a punteggio richiedono almeno 2
+livelli ordinati. Usa le stesse domande nelle esecuzioni che vuoi confrontare.
 
-### Perché una riga ha `analysis.status` `failed` o `skipped`?
+### Perché una riga è tornata con un'analisi fallita o saltata?
 
-L'Actor ha raccolto & consegnato il post, ma l'analisi AI non si è completata.
-`analysis.reason` indica la causa. `context_limit` significa che contesto &
-target non lasciano spazio al post. `service_unavailable` significa che il
-servizio di analisi era momentaneamente non disponibile. Queste righe non hanno
-addebiti sul risultato. Accorcia `analysis.context` o riavvia gli ID
-interessati.
+`analysis.status` vale `failed` o `skipped`. L'Actor ha raccolto & consegnato il
+post, ma l'analisi AI non si è completata. `analysis.reason` indica la causa.
+`context_limit` significa che contesto & target non lasciano spazio al post.
+`service_unavailable` significa che il servizio di analisi era momentaneamente
+non disponibile. Queste righe non hanno addebiti sul risultato. Accorcia
+`analysis.context` o riavvia gli ID interessati.
 
 L'Actor analizza comunque un post più lungo di `maxContextBytes`. Taglia prima
 i post citati & quelli a cui risponde, poi il post stesso.

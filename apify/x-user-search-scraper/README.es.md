@@ -32,6 +32,8 @@ entregado**, y Apify factura aparte el uso de la plataforma.
 
 - Filtros de audiencia, posts, antigüedad, verificación, sitio web, ubicación,
   biografía y nombre de usuario.
+- Modo Search Autocomplete: las cuentas, los temas, los hashtags y los cashtags
+  que X sugiere para cada término de búsqueda.
 - Reanuda 1 consulta desde un cursor guardado en `startCursor`.
 - Las migraciones conservan el trabajo ya aceptado.
 - Filtros y eliminación de duplicados antes de facturar.
@@ -57,6 +59,41 @@ entregado**, y Apify factura aparte el uso de la plataforma.
 Las ejecuciones pequeñas sin problemas omiten `run-report` y ahorran uso de
 Apify. Activa `alwaysSaveRunRecords` para escribirlo en todas las ejecuciones.
 
+## Autocompletado de búsqueda
+
+Define `mode` como `autocomplete` para leer lo que X sugiere mientras alguien
+escribe. Cada término de búsqueda devuelve cuentas, temas, hashtags y cashtags
+sugeridos.
+
+```json
+{
+  "searchTerms": ["nasa", "$tsla"],
+  "mode": "autocomplete",
+  "suggestionTypes": ["users", "cashtags"],
+  "maxItems": 100
+}
+```
+
+- Empieza un término con `#` para hashtags o con `$` para cashtags.
+- `suggestionTypes` conserva solo los tipos que elijas.
+- Cada fila indica su `suggestionType` y, en `suggestion`, el texto que debes
+  buscar.
+- Una fila de cashtag trae `price`, `marketCap` y `dailyChangePercent`.
+- Los filtros de perfil solo se aplican a Profile Search.
+
+Una fila de sugerencia se ve así:
+
+```json
+{
+  "suggestionType": "user",
+  "suggestion": "@sample_user",
+  "username": "sample_user",
+  "name": "Sample User",
+  "verified": true,
+  "sourceTarget": "sample"
+}
+```
+
 ## Salida
 
 Cada fila contiene un perfil y, en `sourceTarget`, la consulta que lo encontró.
@@ -77,7 +114,8 @@ fila de perfil se ve así:
 
 ## ¿Cuánto cuesta buscar usuarios de X?
 
-En todos los planes de Apify, cada perfil entregado cuesta $0.00015. Apify
+En todos los planes de Apify, cada perfil entregado cuesta $0.00015. Una
+sugerencia de Search Autocomplete cuesta lo mismo por fila entregada. Apify
 factura aparte tu uso de la plataforma.
 
 - Un cobro por cada fila de datos entregada. Los diagnósticos son gratis en
@@ -180,6 +218,8 @@ necesitas.
 
 ## Preguntas frecuentes
 
+Respuestas a preguntas comunes y, luego, dónde conseguir ayuda.
+
 ### ¿Necesito una clave de API de X o iniciar sesión?
 
 No. X User Search Scraper de Xquik no necesita clave de API de X, inicio de
@@ -200,7 +240,7 @@ te pide revisar tus objetivos y filtros. `stopCauses` da a cada causa un
 
 ### ¿Puedo usar la API, las programaciones y las integraciones?
 
-Sí. Elige entre 50 tareas públicas o 129 operaciones REST de Xquik. La
+Sí. Elige entre 50 tareas públicas o la API REST de Xquik. La
 [pestaña API](https://apify.com/xquik/x-user-search-scraper/api) tiene ejemplos
 en Python, JavaScript y cURL. Las
 [programaciones](https://docs.apify.com/platform/schedules) de Apify ejecutan X

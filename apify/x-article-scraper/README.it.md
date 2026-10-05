@@ -33,6 +33,8 @@ della piattaforma. Non ti servono una chiave API X né il login.
 - Markdown che conserva blocchi, grassetto & corsivo.
 - Blocchi `contents` che mantengono la formattazione originale.
 - URL di post & ID numerici dei post nella stessa esecuzione.
+- Ogni articolo pubblicato da un account, dal suo nome utente o dall'URL del
+  profilo.
 - Rimozione dei duplicati prima della fatturazione.
 
 X Article Scraper di Xquik non inventa mai i metadati dei link. Apify mostra il
@@ -41,7 +43,9 @@ Markdown come testo.
 ## Come estrarre gli articoli di X
 
 1. Apri X Article Scraper di Xquik in Apify Console.
-2. Incolla gli URL dei post degli articoli in `startUrls` o gli ID in `tweetIds`.
+2. Incolla gli URL dei post degli articoli in `startUrls` o gli ID in
+   `tweetIds`. Per elencare gli articoli di un account, aggiungi il suo nome
+   utente a `twitterHandles`.
 3. Imposta `maxItems` per limitare gli articoli consegnati, poi fai clic su
    Start.
 4. Scarica il dataset in JSON, CSV o Excel, oppure usa l'API di Apify.
@@ -60,14 +64,15 @@ Markdown come testo.
 
 ## Input
 
-| Campo                  | Scopo                                               | Predefinito |
-| ---------------------- | --------------------------------------------------- | ----------- |
-| `startUrls`            | URL pubblici dei post degli articoli                | Nessuno     |
-| `tweetIds`             | ID numerici dei post degli articoli                 | Nessuno     |
-| `maxItems`             | Limite globale di articoli consegnati               | `100000`    |
-| `dedupeAcrossTargets`  | Rimuove gli ID ripetuti prima della fatturazione    | `true`      |
-| `maxConcurrency`       | Letture di articoli indipendenti in parallelo       | `100`       |
-| `alwaysSaveRunRecords` | Salva `run-report` a ogni esecuzione                | `false`     |
+| Campo                  | Scopo                                            | Predefinito |
+| ---------------------- | ------------------------------------------------ | ----------- |
+| `startUrls`            | URL pubblici di post degli articoli o di profili | Nessuno     |
+| `tweetIds`             | ID numerici dei post degli articoli              | Nessuno     |
+| `twitterHandles`       | Account di cui elencare gli articoli             | Nessuno     |
+| `maxItems`             | Limite globale di articoli consegnati            | `100000`    |
+| `dedupeAcrossTargets`  | Rimuove gli ID ripetuti prima della fatturazione | `true`      |
+| `maxConcurrency`       | Letture di articoli indipendenti in parallelo    | `100`       |
+| `alwaysSaveRunRecords` | Salva `run-report` a ogni esecuzione             | `false`     |
 
 ## Output
 
@@ -90,6 +95,13 @@ articolo include questi campi:
 Le righe aggiungono autore, fonte, copertina, orario & metriche. Esporta in JSON
 o in tabelle.
 
+Un nome utente in `twitterHandles`, o un URL di profilo in `startUrls`, elenca
+gli articoli di quell'account dal più recente. Ognuno è una riga
+`articlePreview` con `title`, `previewText`, `coverImageUrl` & `articleId`
+dell'articolo, date & metriche del post. Lì X non mostra il corpo, quindi la
+riga non ha `markdown` né `contents`. Esegui il suo `tweetId` per ottenere
+l'articolo completo.
+
 ## Quanto costa estrarre gli articoli di X?
 
 Su ogni piano Apify paghi $0.00015 per articolo consegnato. Apify fattura a
@@ -111,10 +123,11 @@ conferma la consegna, non l'estrazione completa.
 
 Lo stato dell'esecuzione nomina ogni causa di un arresto anticipato.
 `stopCauses` elenca ogni causa con i propri `message`, `retryable` &
-`nextAction`. Le cause sono `target_not_found`, `target_failed`,
-`pagination_safety_limit` & `deadline_reached`. Un target mancante entra
-nell'elenco solo se un'altra causa ha fermato l'esecuzione. L'esecuzione è
-`retryable` quando lo è almeno una causa.
+`nextAction`. Le cause sono `target_not_found`, `target_suspended`,
+`target_failed`, `pagination_safety_limit` & `deadline_reached`.
+`target_suspended` nomina gli account che X ha sospeso. Un target mancante o
+sospeso entra nell'elenco solo se un'altra causa ha fermato l'esecuzione.
+L'esecuzione è `retryable` quando lo è almeno una causa.
 
 ## Actor Xquik correlati
 
@@ -193,6 +206,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
 ## FAQ
 
+Le risposte alle domande più comuni, poi dove trovare assistenza.
+
 ### Serve una chiave API X o il login?
 
 No. X Article Scraper di Xquik non richiede chiave API X, login o credenziali.
@@ -213,10 +228,11 @@ articoli pubblici che X mostra.
 
 ### Posso usare l'API, le pianificazioni & le integrazioni?
 
-Sì. Scegli tra 50 task pubblici o 129 operazioni REST di Xquik. La
+Sì. Scegli tra 50 task pubblici o l'API REST di Xquik. La
 [scheda API](https://apify.com/xquik/x-article-scraper/api) ha esempi in Python,
-JavaScript & cURL. Le [pianificazioni](https://docs.apify.com/platform/schedules)
-di Apify avviano X Article Scraper di Xquik con un cron. Gli agenti usano
+JavaScript & cURL. Le
+[pianificazioni](https://docs.apify.com/platform/schedules) di Apify avviano X
+Article Scraper di Xquik con un cron. Gli agenti usano
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp). Le letture
 singole usano [Xquik REST](https://docs.xquik.com/api-reference/x/get-article).
 Usa `latest`, a meno che non ti serva una build precedente.

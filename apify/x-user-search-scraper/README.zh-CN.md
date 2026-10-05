@@ -24,7 +24,8 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 ## 账号数据与过滤条件
 
 - 可按受众、帖子、账号年龄、认证状态、网站、位置、简介和用户名过滤。
-- 用 `startCursor` 中保存的游标继续某个查询。
+- 搜索自动补全模式：X 为每个搜索词建议的账号、话题、话题标签和 cashtag。
+- 用 `startCursor` 中保存的游标继续 1 个查询。
 - 迁移不会丢失已接受的结果。
 - 计费前先过滤并去除重复项。
 
@@ -48,6 +49,38 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 顺利完成的小型运行会跳过 `run-report`，节省 Apify 用量。开启 `alwaysSaveRunRecords` 后，每次运行都会写入报告。
 
+## 搜索自动补全
+
+把 `mode` 设为 `autocomplete`，读取有人输入时 X 给出的建议。每个搜索词返回建议的账号、话题、话题标签和 cashtag。
+
+```json
+{
+  "searchTerms": ["nasa", "$tsla"],
+  "mode": "autocomplete",
+  "suggestionTypes": ["users", "cashtags"],
+  "maxItems": 100
+}
+```
+
+- 搜索词以 `#` 开头查话题标签，以 `$` 开头查 cashtag。
+- `suggestionTypes` 只保留你选择的类型。
+- 每行在 `suggestionType` 中写明类型，在 `suggestion` 中给出要搜索的文本。
+- cashtag 行带有 `price`、`marketCap` 和 `dailyChangePercent`。
+- 个人资料过滤条件只作用于个人资料搜索。
+
+一行建议数据如下：
+
+```json
+{
+  "suggestionType": "user",
+  "suggestion": "@sample_user",
+  "username": "sample_user",
+  "name": "Sample User",
+  "verified": true,
+  "sourceTarget": "sample"
+}
+```
+
 ## 输出
 
 每行包含一条个人资料，`sourceTarget` 中记录它来自哪个查询。
@@ -67,7 +100,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 ## 搜索 X 用户要花多少钱？
 
-所有 Apify 套餐的价格都是每条已交付个人资料 $0.00015。Apify 另行收取平台使用费。
+所有 Apify 套餐的价格都是每条已交付个人资料 $0.00015。搜索自动补全的建议按每个已交付行收取同样的价格。Apify 另行收取平台使用费。
 
 - 每个已交付的数据行收费一次。`diagnostics` 中的诊断信息免费。
 - 没有启动费、查询费或翻页费。
@@ -77,7 +110,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 提取中断时，会写入一条免费的 `partial` 诊断。已获取的结果不受影响。重试前，先查看 `availableResults`、`failedTargets`、`retryable` 和 `nextAction`。Actor 成功退出只说明结果已交付，不代表提取完整。
 
-运行状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_failed`、`pagination_safety_limit` 和 `deadline_reached`。只有在其他原因让运行停止时，缺失的目标才会列入 `stopCauses`。只要有一个原因可重试，整个运行就是 `retryable`。
+运行状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_failed`、`pagination_safety_limit` 和 `deadline_reached`。只有在其他原因让运行停止时，缺失的目标才会一并列出。只要有一个原因可重试，整个运行就是 `retryable`。
 
 ## 相关 Xquik Actor
 
@@ -104,6 +137,8 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 ## 常见问题
 
+先解答常见问题，再说明在哪里获取帮助。
+
 ### 我需要 X API 密钥或登录吗？
 
 不需要。Xquik 的 X User Search Scraper 不需要 X API 密钥、登录或任何凭据。
@@ -118,7 +153,7 @@ Xquik 的 X User Search Scraper 请求的是公开的 X 字段。结果可能包
 
 ### 可以使用 API、定时调度和集成吗？
 
-可以。你可以从 50 个公开任务或 129 个 Xquik REST 操作中选择。[API 标签页](https://apify.com/xquik/x-user-search-scraper/api) 提供 Python、JavaScript 和 cURL 示例。Apify [定时调度](https://docs.apify.com/platform/schedules) 可以按 cron 运行 Xquik 的 X User Search Scraper。Agent 可以通过 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) 调用它。除非需要旧构建，否则请使用 `latest`。
+可以。你可以从 50 个公开任务或 Xquik REST API 中选择。[API 标签页](https://apify.com/xquik/x-user-search-scraper/api) 提供 Python、JavaScript 和 cURL 示例。Apify [定时调度](https://docs.apify.com/platform/schedules) 可以按 cron 运行 Xquik 的 X User Search Scraper。Agent 可以通过 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) 调用它。除非需要旧构建，否则请使用 `latest`。
 
 ### 在哪里获取帮助？
 

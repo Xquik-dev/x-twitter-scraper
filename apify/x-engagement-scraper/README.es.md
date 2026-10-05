@@ -88,9 +88,9 @@ Apify. Activa `alwaysSaveRunRecords` para escribirlo en todas las ejecuciones.
 ## Salida
 
 Cada fila define `resultType` como `tweet`, `replies`, `completeReplies`,
-`quotes`, `retweeters`, `favoriters` o `thread`. `sourceTarget` guarda el ID del
-post de origen. Los campos de posts y perfiles siguen las formas estables de
-respuesta de Xquik REST.
+`quotes`, `retweeters`, `favoriters`, `thread` o `repostCheck`. `sourceTarget`
+guarda el ID del post de origen. Los campos de posts y perfiles siguen las
+formas estables de respuesta de Xquik REST.
 
 `completeReplies` conserva todas las filas devueltas. El informe de la ejecución
 cuenta la cobertura parcial en `incompleteTargets`. Los filtros se aplican antes
@@ -109,6 +109,27 @@ fila de respuesta se ve así:
   "likeCount": 12
 }
 ```
+
+## Verificación de reposts
+
+Agrega `repostCheck` a `engagementTypes` y enumera cuentas en `repostCheckUsers`
+para saber si cada cuenta hizo repost de cada post:
+
+```json
+{
+  "tweetIds": ["2098439298617856319"],
+  "engagementTypes": ["repostCheck"],
+  "repostCheckUsers": ["discord", "nasa"]
+}
+```
+
+Cada verificación es 1 fila con `isRetweeted`, `retweetedAt`, `retweetId`,
+`checkedPosts` y `complete`. Su `id` es `repostCheck:<post ID>:<account>`. La
+verificación lee los posts más recientes de cada cuenta. Un repost anterior a
+esos posts aparece como `false` con `complete: false`.
+
+Una ejecución con solo filas `repostCheck` y `tweet` conserva el orden de tu
+entrada: cada post y, luego, sus cuentas tal como las enumeraste.
 
 ## Marcas de tiempo de los reposts
 
@@ -237,6 +258,8 @@ necesitas.
 
 ## Preguntas frecuentes
 
+Respuestas a preguntas comunes y, luego, dónde conseguir ayuda.
+
 ### ¿Necesito una clave de API de X o iniciar sesión?
 
 No. X Engagement Scraper de Xquik no necesita clave de API de X, inicio de
@@ -259,7 +282,7 @@ con Me gusta, así que `favoriters` no devuelve filas.
 
 ### ¿Puedo usar la API, las programaciones y las integraciones?
 
-Sí. Elige entre 50 tareas públicas o 129 operaciones REST de Xquik. La
+Sí. Elige entre 50 tareas públicas o la API REST de Xquik. La
 [pestaña API](https://apify.com/xquik/x-engagement-scraper/api) tiene ejemplos
 en Python, JavaScript y cURL. Las
 [programaciones](https://docs.apify.com/platform/schedules) de Apify ejecutan X

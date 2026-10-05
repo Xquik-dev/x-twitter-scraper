@@ -85,9 +85,9 @@ X는 2024년부터 게시물에 마음에 들어요를 누른 사람을 공개�
 ## 출력
 
 각 행의 `resultType`은 `tweet`, `replies`, `completeReplies`, `quotes`,
-`retweeters`, `favoriters`, `thread` 중 하나입니다. `sourceTarget`에는 원본
-게시물 ID가 들어 있습니다. 게시물 & 프로필 필드는 Xquik REST의 안정적인 응답
-형식을 따릅니다.
+`retweeters`, `favoriters`, `thread`, `repostCheck` 중 하나입니다.
+`sourceTarget`에는 원본 게시물 ID가 들어 있습니다. 게시물 & 프로필 필드는 Xquik
+REST의 안정적인 응답 형식을 따릅니다.
 
 `completeReplies`는 반환된 행을 모두 남깁니다. 실행 보고서는 일부만 수집된
 대상을 `incompleteTargets`에 셉니다. 필터는 과금 전에 실행됩니다.
@@ -105,6 +105,28 @@ X는 2024년부터 게시물에 마음에 들어요를 누른 사람을 공개�
   "likeCount": 12
 }
 ```
+
+## 재게시 확인
+
+각 계정이 각 게시물을 재게시했는지 알아보려면 `engagementTypes`에
+`repostCheck`를 추가하고 `repostCheckUsers`에 계정을 나열하세요.
+
+```json
+{
+  "tweetIds": ["2098439298617856319"],
+  "engagementTypes": ["repostCheck"],
+  "repostCheckUsers": ["discord", "nasa"]
+}
+```
+
+확인 1건은 `isRetweeted`, `retweetedAt`, `retweetId`, `checkedPosts` &
+`complete`가 담긴 행 1개입니다. 행의 `id`는
+`repostCheck:<post ID>:<account>`입니다. 확인은 각 계정의 최신 게시물을
+읽습니다. 그 게시물들보다 오래된 재게시는 `complete: false`와 함께 `false`로
+나옵니다.
+
+`repostCheck` & `tweet` 행만 있는 실행은 입력 순서를 지킵니다. 게시물이 먼저
+나오고, 이어서 나열한 순서대로 계정이 나옵니다.
 
 ## 재게시(리트윗) 시각
 
@@ -147,7 +169,7 @@ Apify가 실행을 다시 시작해도 전달된 행 & 진행 상황은 유지�
 `target_not_found`, `target_failed`, `pagination_safety_limit`, `reply_reach` &
 `deadline_reached`입니다. `reply_reach`는 X가 답글 스레드의 일부만 제공했다는
 뜻입니다. 찾을 수 없는 대상은 다른 원인으로 실행이 멈췄을 때만 목록에
-들어갑니다. 원인 중 하나라도 `retryable`이면 실행도 `retryable`입니다.
+들어갑니다. 원인 중 하나라도 재시도할 수 있으면 실행도 `retryable`입니다.
 
 ## 관련 Xquik Actor
 
@@ -220,6 +242,8 @@ Apify가 실행을 다시 시작해도 전달된 행 & 진행 상황은 유지�
 
 ## 자주 묻는 질문
 
+자주 묻는 질문에 먼저 답하고, 이어서 도움받을 곳을 안내합니다.
+
 ### X API 키나 로그인이 필요한가요?
 
 아니요. Xquik의 X Engagement Scraper는 X API 키, 로그인, 자격 증명이 모두 필요
@@ -241,9 +265,9 @@ Xquik의 X Engagement Scraper는 공개 X 필드를 요청합니다. 결과에�
 
 ### API, 스케줄 & 연동을 사용할 수 있나요?
 
-네. 공개 태스크 50개나 Xquik REST 작업 129개 중에서 고르세요.
-[API 탭](https://apify.com/xquik/x-engagement-scraper/api)에 Python, JavaScript &
-cURL 예시가 있습니다. Apify
+네. 공개 태스크 50개나 Xquik REST API 중에서 고르세요.
+[API 탭](https://apify.com/xquik/x-engagement-scraper/api)에 Python, JavaScript
+& cURL 예시가 있습니다. Apify
 [스케줄](https://docs.apify.com/platform/schedules)로 Xquik의 X Engagement
 Scraper를 cron 일정에 맞춰 실행할 수 있습니다. 에이전트는
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp)를 사용합니다. 이전

@@ -35,6 +35,7 @@ gerekmez.
 - Blokları, kalın ve italik aralıkları koruyan Markdown.
 - Kaynak biçimlendirmeyi koruyan `contents` blokları.
 - Aynı çalıştırmada gönderi URL'leri ve sayısal gönderi ID'leri.
+- Bir hesabın yayımladığı her Makale, kullanıcı adından veya profil URL'sinden.
 - Faturalamadan önce tekilleştirme.
 
 Xquik'in X Article Scraper'ı bağlantı metadata'sını asla tahmin etmez. Apify,
@@ -44,7 +45,8 @@ Markdown'ı metin olarak gösterir.
 
 1. Apify Console'da Xquik'in X Article Scraper'ını aç.
 2. Makale gönderisi URL'lerini `startUrls` alanına ya da gönderi ID'lerini
-   `tweetIds` alanına yapıştır.
+   `tweetIds` alanına yapıştır. Bir hesabın Makalelerini listelemek için
+   kullanıcı adını `twitterHandles` alanına ekle.
 3. Teslim edilecek Makale sayısını `maxItems` ile sınırla, sonra Start'a tıkla.
 4. Veri kümesini JSON, CSV veya Excel olarak indir ya da Apify API'yi kullan.
 
@@ -64,8 +66,9 @@ alır:
 
 | Alan                   | Amaç                                                    | Varsayılan |
 | ---------------------- | ------------------------------------------------------- | ---------- |
-| `startUrls`            | Herkese açık Makale gönderisi URL'leri                  | Yok        |
+| `startUrls`            | Herkese açık Makale gönderisi veya profil URL'leri      | Yok        |
 | `tweetIds`             | Sayısal Makale gönderisi ID'leri                        | Yok        |
+| `twitterHandles`       | Makaleleri listelenecek hesaplar                        | Yok        |
 | `maxItems`             | Teslim edilen Makaleler için genel sınır                | `100000`   |
 | `dedupeAcrossTargets`  | Tekrarlanan Makale ID'lerini faturalamadan önce çıkarır | `true`     |
 | `maxConcurrency`       | Paralel ve bağımsız Makale okumaları                    | `100`      |
@@ -92,6 +95,13 @@ Makale satırında şu alanlar bulunur:
 Satırlar yazar, kaynak, kapak, zaman ve metrik alanlarını da taşır. JSON veya
 tablo olarak dışa aktar.
 
+`twitterHandles` içindeki bir kullanıcı adı veya `startUrls` içindeki bir profil
+URL'si, o hesabın Makalelerini en yeniden başlayarak listeler. Her biri
+Makalenin `title`, `previewText`, `coverImageUrl`, `articleId`, tarih ve gönderi
+metriklerini taşıyan bir `articlePreview` satırıdır. X orada Makale gövdesini
+vermez, bu yüzden satırda `markdown` veya `contents` olmaz. Makalenin tamamını
+almak için Actor'ı `tweetId` değeriyle çalıştır.
+
 ## X Makalelerini kazımak ne kadar tutar?
 
 Her Apify planında teslim edilen makale başına $0.00015 ödersin. Apify, platform
@@ -114,10 +124,11 @@ bitmesi teslimatı doğrular. Tüm verinin çekildiğini doğrulamaz.
 
 Çalıştırma durumu, erken durmanın her nedenini söyler. `stopCauses` her nedeni
 kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Nedenler
-şunlardır: `target_not_found`, `target_failed`, `pagination_safety_limit` ve
-`deadline_reached`. Bulunamayan bir hedef, listeye yalnızca çalıştırmayı başka
-bir neden durdurduysa girer. Nedenlerden biri `retryable` ise çalıştırma da
-`retryable` olur.
+şunlardır: `target_not_found`, `target_suspended`, `target_failed`,
+`pagination_safety_limit` ve `deadline_reached`. `target_suspended`, X'in askıya
+aldığı hesapları belirtir. Bulunamayan veya askıya alınmış bir hedef, listeye
+yalnızca çalıştırmayı başka bir neden durdurduysa girer. Nedenlerden biri
+yeniden denenebiliyorsa çalıştırma da `retryable` olur.
 
 ## İlgili Xquik Actor'ları
 
@@ -202,6 +213,8 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 ## SSS
 
+Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
+
 ### X API anahtarı veya giriş gerekir mi?
 
 Hayır. Xquik'in X Article Scraper'ı X API anahtarı, giriş ya da kimlik bilgisi
@@ -223,7 +236,7 @@ açık Makaleleri döndürür.
 
 ### API'yi, zamanlamaları ve entegrasyonları kullanabilir miyim?
 
-Evet. 50 herkese açık görevden veya 129 Xquik REST işleminden birini seç.
+Evet. 50 herkese açık görevden birini veya Xquik REST API'yi seç.
 [API sekmesinde](https://apify.com/xquik/x-article-scraper/api) Python,
 JavaScript ve cURL örnekleri var. Apify
 [zamanlamaları](https://docs.apify.com/platform/schedules), Xquik'in X Article

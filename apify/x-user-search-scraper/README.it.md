@@ -22,8 +22,8 @@ prima di filtrare o deduplicare. Xquik fa pagare solo i risultati consegnati,
 unici e conformi ai filtri.
 
 Cerca account di X (Twitter) per nome, argomento, bio o posizione. Non ti
-servono una chiave API X né il login. Paghi **$0.00015 per profilo
-consegnato**. Apify fattura a parte l'uso della piattaforma.
+servono una chiave API X né il login. Paghi **$0.00015 per profilo consegnato**.
+Apify fattura a parte l'uso della piattaforma.
 
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.
@@ -32,6 +32,8 @@ consegnato**. Apify fattura a parte l'uso della piattaforma.
 
 - Filtri su pubblico, post, età, verifica, sito web, posizione, bio & nome
   utente.
+- Modalità Search Autocomplete: gli account, gli argomenti, gli hashtag & i
+  cashtag che X suggerisce per ogni termine di ricerca.
 - Riprendi 1 query da un cursore salvato in `startCursor`.
 - Il lavoro già accettato resta salvato dopo una migrazione di Apify.
 - Filtri & rimozione dei duplicati prima della fatturazione.
@@ -57,6 +59,41 @@ consegnato**. Apify fattura a parte l'uso della piattaforma.
 Le esecuzioni piccole senza problemi saltano `run-report` & risparmiano uso di
 Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
 
+## Completamento automatico della ricerca
+
+Imposta `mode` su `autocomplete` per leggere cosa suggerisce X mentre qualcuno
+scrive. Ogni termine di ricerca restituisce account, argomenti, hashtag &
+cashtag suggeriti.
+
+```json
+{
+  "searchTerms": ["nasa", "$tsla"],
+  "mode": "autocomplete",
+  "suggestionTypes": ["users", "cashtags"],
+  "maxItems": 100
+}
+```
+
+- Inizia un termine con `#` per gli hashtag o con `$` per i cashtag.
+- `suggestionTypes` tiene solo i tipi che scegli.
+- Ogni riga indica il suo `suggestionType` & il testo da cercare in
+  `suggestion`.
+- Una riga di cashtag riporta `price`, `marketCap` & `dailyChangePercent`.
+- I filtri sui profili valgono solo per Profile Search.
+
+Una riga di suggerimento ha questo aspetto:
+
+```json
+{
+  "suggestionType": "user",
+  "suggestion": "@sample_user",
+  "username": "sample_user",
+  "name": "Sample User",
+  "verified": true,
+  "sourceTarget": "sample"
+}
+```
+
 ## Output
 
 Ogni riga contiene un profilo & la query di origine in `sourceTarget`.
@@ -77,7 +114,8 @@ profilo ha questo aspetto:
 
 ## Quanto costa cercare utenti su X?
 
-Su ogni piano Apify paghi $0.00015 per profilo consegnato. Apify fattura a parte
+Su ogni piano Apify paghi $0.00015 per profilo consegnato. Un suggerimento di
+Search Autocomplete costa lo stesso per riga consegnata. Apify fattura a parte
 il tuo uso della piattaforma.
 
 - Un addebito per ogni riga di dati consegnata. La diagnostica in `diagnostics`
@@ -176,6 +214,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
 ## FAQ
 
+Le risposte alle domande più comuni, poi dove trovare assistenza.
+
 ### Serve una chiave API X o il login?
 
 No. X User Search Scraper di Xquik non richiede chiave API X, login o
@@ -195,7 +235,7 @@ dice di controllare target & filtri. `stopCauses` assegna a ogni causa un
 
 ### Posso usare l'API, le pianificazioni & le integrazioni?
 
-Sì. Scegli tra 50 task pubblici o 129 operazioni REST di Xquik. La
+Sì. Scegli tra 50 task pubblici o l'API REST di Xquik. La
 [scheda API](https://apify.com/xquik/x-user-search-scraper/api) ha esempi in
 Python, JavaScript & cURL. Le
 [pianificazioni](https://docs.apify.com/platform/schedules) di Apify avviano X

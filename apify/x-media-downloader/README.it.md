@@ -109,10 +109,11 @@ conferma la consegna, non l'estrazione completa.
 
 Lo stato dell'esecuzione nomina ogni causa di un arresto anticipato.
 `stopCauses` elenca ogni causa con i propri `message`, `retryable` &
-`nextAction`. Le cause sono `target_not_found`, `target_failed`,
-`pagination_safety_limit`, `reply_reach` & `deadline_reached`. `reply_reach`
-significa che X ha fornito solo una parte di un thread di risposte. Un target
-mancante entra nell'elenco solo se un'altra causa ha fermato l'esecuzione.
+`nextAction`. Le cause sono `target_not_found`, `target_suspended`,
+`target_failed`, `pagination_safety_limit`, `reply_reach` & `deadline_reached`.
+`target_suspended` nomina gli account che X ha sospeso. `reply_reach` significa
+che X ha fornito solo una parte di un thread di risposte. Un target mancante o
+sospeso entra nell'elenco solo se un'altra causa ha fermato l'esecuzione.
 L'esecuzione è `retryable` quando lo è almeno una causa.
 
 ## Actor Xquik correlati
@@ -192,6 +193,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
 ## FAQ
 
+Le risposte alle domande più comuni, poi dove trovare assistenza.
+
 ### Serve una chiave API X o il login?
 
 No. X Media Downloader di Xquik non richiede chiave API X, login o credenziali.
@@ -211,7 +214,7 @@ dice di controllare target & filtri. `stopCauses` assegna a ogni causa un
 
 ### Posso usare l'API, le pianificazioni & le integrazioni?
 
-Sì. Scegli tra 50 task pubblici o 129 operazioni REST di Xquik. La
+Sì. Scegli tra 50 task pubblici o l'API REST di Xquik. La
 [scheda API](https://apify.com/xquik/x-media-downloader/api) ha esempi in
 Python, JavaScript & cURL. Le
 [pianificazioni](https://docs.apify.com/platform/schedules) di Apify avviano X

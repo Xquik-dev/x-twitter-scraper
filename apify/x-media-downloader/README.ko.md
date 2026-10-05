@@ -108,10 +108,12 @@ Apify가 따로 청구합니다.
 
 실행 상태는 실행이 일찍 멈춘 원인을 모두 알려 줍니다. `stopCauses`는 원인마다
 `message`, `retryable` & `nextAction`을 따로 담아 나열합니다. 원인은
-`target_not_found`, `target_failed`, `pagination_safety_limit`, `reply_reach` &
-`deadline_reached`입니다. `reply_reach`는 X가 답글 스레드의 일부만 제공했다는
-뜻입니다. 찾을 수 없는 대상은 다른 원인으로 실행이 멈췄을 때만 목록에
-들어갑니다. 원인 중 하나라도 `retryable`이면 실행도 `retryable`입니다.
+`target_not_found`, `target_suspended`, `target_failed`,
+`pagination_safety_limit`, `reply_reach` & `deadline_reached`입니다.
+`target_suspended`는 X가 정지한 계정을 알려 줍니다. `reply_reach`는 X가 답글
+스레드의 일부만 제공했다는 뜻입니다. 찾을 수 없거나 정지된 대상은 다른 원인으로
+실행이 멈췄을 때만 목록에 들어갑니다. 원인 중 하나라도 재시도할 수 있으면 실행도
+`retryable`입니다.
 
 ## 관련 Xquik Actor
 
@@ -183,6 +185,8 @@ Apify가 따로 청구합니다.
 
 ## 자주 묻는 질문
 
+자주 묻는 질문에 먼저 답하고, 이어서 도움받을 곳을 안내합니다.
+
 ### X API 키나 로그인이 필요한가요?
 
 아니요. Xquik의 X Media Downloader는 X API 키, 로그인, 자격 증명이 모두 필요
@@ -203,7 +207,7 @@ Xquik의 X Media Downloader는 공개 X 필드를 요청합니다. 결과에는 
 
 ### API, 스케줄 & 연동을 사용할 수 있나요?
 
-네. 공개 태스크 50개나 Xquik REST 작업 129개 중에서 고르세요.
+네. 공개 태스크 50개나 Xquik REST API 중에서 고르세요.
 [API 탭](https://apify.com/xquik/x-media-downloader/api)에 Python, JavaScript &
 cURL 예시가 있습니다. Apify
 [스케줄](https://docs.apify.com/platform/schedules)로 Xquik의 X Media

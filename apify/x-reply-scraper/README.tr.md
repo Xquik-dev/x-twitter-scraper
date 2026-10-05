@@ -44,7 +44,7 @@ kümeleri için de işe yarar.
 ### Yanıt toplama davranışı
 
 - Auto modu, doğrudan sonuçlar eksik kaldığında toplamaya devam eder.
-- `collectionStrategy`, farklı yanıt işleri için 4 mod sunar.
+- `collectionStrategy`, Actor'ın yanıtları nasıl toplayacağını belirler.
 - Toplu girdiler gönderi URL'si, gönderi ID'si, profil ve kullanıcı adı kabul
   eder.
 - Filtreler ve tekilleştirme faturalamadan önce çalışır.
@@ -206,6 +206,8 @@ kalmazsa çalıştırma düzeltmeyi söyleyen bir tanılama yazar.
 
 ## Kapsama stratejileri
 
+Actor'ın yanıtları nasıl toplayacağını seç. Auto çoğu işe uyar.
+
 ### Otomatik tam toplama
 
 Çoğu iş için `collectionStrategy: "auto"` kullan. Seçtiğin kapsamda ulaşabildiği
@@ -231,6 +233,13 @@ Konuşmayı geniş kapsamak için `collectionStrategy: "conversationSearch"` kul
 Kaynak konuşmanın bağlamını okumak için `collectionStrategy: "thread"` kullan.
 Kök gönderiyi derinlik 0 olarak tutmak için `includeOriginalPost: true` ayarla.
 
+### Gizlenen yanıtlar
+
+Gönderi yazarının gizlediği yanıtlar için `collectionStrategy: "hiddenReplies"`
+kullan. X bunları, onlara verilen yanıtlarla birlikte en eskiden başlayarak
+listeler. Her satırda `resultType: "hiddenReply"` bulunur. Gizlenen yanıtı
+olmayan bir gönderi satır döndürmez.
+
 ## Doğrudan ve iç içe yanıt kontrolleri
 
 Sonucun biçimini seçmek için `scope` kullan.
@@ -253,6 +262,9 @@ korur.
 - `latest` en yeniyi öne alır
 - `oldest` en eskiyi öne alır
 - `likes` en çok beğeni alanı öne alır
+
+X araması bazı eski yanıtlardaki beğenileri eksik sayar, bu yüzden `likes`
+çalıştırmaları onları kaçırabilir.
 
 Profil hedefleri istediğin sayıda benzersiz, filtrelenmiş sonucu toplar, sonra
 sıralar. Gönderi hedeflerinde genel sıralama korunur.
@@ -401,6 +413,8 @@ Bu değerler yalnızca örnektir. Gerçek çalıştırmalar canlı veri döndür
 
 ## Çıktı modları
 
+Her veri kümesi satırının ne kadar geniş olacağını seç.
+
 ### Kompakt
 
 Daha dar bir veri kümesi için `outputMode: "compact"` ayarla. Metin, konuşma,
@@ -409,6 +423,12 @@ yazar, etkileşim ve medya alanlarını tutar.
 ### Tam
 
 Desteklenen tüm herkese açık alanları tutmak için `outputMode: "full"` ayarla.
+
+### Zengin
+
+Satır başına en çok veri için `outputMode: "rich"` ayarla. Zengin satırlar tam
+moddaki her sütunu tutar ve sona `hasCommunityNotes`, `quotedTweetPermalink`,
+`unavailableAuthorId` ve medya `sourceUser` alanlarını ekler.
 
 ### Ham
 
@@ -465,8 +485,8 @@ sunduğu anlamına gelir.
 
 Bulunamayan bir gönderi veya hesap hata sayılmaz. Durum bunu belirtir, örneğin
 "X has no match for 1 target." Bu hedef `stopCauses` listesine yalnızca
-çalıştırmayı başka bir neden durdurduysa girer. Nedenlerden biri `retryable`
-ise çalıştırma da `retryable` olur.
+çalıştırmayı başka bir neden durdurduysa girer. Nedenlerden biri yeniden
+denenebiliyorsa çalıştırma da `retryable` olur.
 
 ## Tanılamalar
 
@@ -556,7 +576,7 @@ depolamaya bağla. Ajanlar onu
 Uygun ajan iş akışları [x402](https://docs.apify.com/integrations/x402) veya
 [Skyfire](https://docs.apify.com/integrations/skyfire) da kullanabilir.
 
-Xquik ayrıca 47 panel aracı, 129 REST işlemi, imzalı webhook'lar ve bir MCP
+Xquik ayrıca 47 panel aracı, bir REST API, imzalı webhook'lar ve bir MCP
 sunucusu sunar.
 
 ### Her zaman en güncel derlemeyi kullan
@@ -655,6 +675,8 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   başlar.
 
 ## SSS
+
+Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
 
 ### X API anahtarı veya giriş gerekir mi?
 

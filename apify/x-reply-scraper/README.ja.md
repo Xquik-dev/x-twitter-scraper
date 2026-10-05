@@ -31,7 +31,7 @@ XquikのX Reply Scraperは、公開されている返信とコメントの会話
 ### 返信の収集の動作
 
 - 自動モードは、直接の結果が不完全な場合も収集を続けます。
-- `collectionStrategy` には、用途に応じた4つのモードがあります。
+- `collectionStrategy` で、Actorが返信を収集する方法を決めます。
 - 一括入力は、ポストのURL、ポストID、プロフィール、ユーザー名を受け付けます。
 - フィルターと重複排除は課金前に行います。
 - 出力は、4種類の並び順、3段階の詳細レベル、3種類のフィールドスタイルに対応します。
@@ -173,6 +173,8 @@ XquikのX Reply Scraperは、Apify MCP、APIクライアント、x402、Skyfire�
 
 ## 収集範囲の戦略
 
+Actorが返信を収集する方法を選んでください。ほとんどのジョブには自動モードが合います。
+
 ### 自動の完全収集
 
 ほとんどのジョブでは `collectionStrategy: "auto"` を使ってください。指定した範囲で取得できる返信をすべて収集します。範囲、深さ、並び順、著者の設定は、上限より前に適用されます。ルート以外の対象の下にある返信も含みます。Xがスレッドの一部を非表示にしている場合、非表示の返信の数をステータスに示します。ほかの `collectionStrategy` の値では、モードが切り替わることはありません。
@@ -191,14 +193,18 @@ Xの表示順で直接の返信を取得するには、`collectionStrategy: "rep
 
 元の会話の文脈を読み取るには、`collectionStrategy: "thread"` を使います。ルートのポストを深さ0として残すには、`includeOriginalPost: true` を設定します。
 
+### 非表示の返信
+
+ポストの著者が非表示にした返信には、`collectionStrategy: "hiddenReplies"` を使います。Xはこれらを古い順に、それぞれへの返信とともに並べます。各行には `resultType: "hiddenReply"` が入ります。非表示の返信がないポストは、行を返しません。
+
 ## 直接の返信と入れ子の返信の設定
 
 結果の形は `scope` で選びます。
 
-| 値       | 結果                                         |
-| -------- | -------------------------------------------- |
-| `direct` | 深さ1の返信を残す                            |
-| `nested` | 深さ2以上の、返信への返信を残す              |
+| 値       | 結果                                           |
+| -------- | ---------------------------------------------- |
+| `direct` | 深さ1の返信を残す                              |
+| `nested` | 深さ2以上の、返信への返信を残す                |
 | `all`    | 取得できる直接の返信と入れ子の返信をすべて残す |
 
 入れ子の深さは `maxDepth` で制限します。Xが会話の上位のポストを省いた場合、親へのリンクが欠けることがあります。Actorは、取得できる範囲で最も正確な深さを残します。
@@ -211,6 +217,8 @@ Xの表示順で直接の返信を取得するには、`collectionStrategy: "rep
 - `latest` は新しい順に並べます
 - `oldest` は古い順に並べます
 - `likes` はいいねが多い順に並べます
+
+Xの検索では、一部の古い返信のいいね数が実際より少なくなります。そのため、`likes` の実行ではそうした返信が漏れることがあります。
 
 プロフィールが対象の場合は、指定した件数の、重複がなくフィルターを通った結果を集めてから並べ替えます。ポストが対象の場合は、全体での並び順を保ちます。
 
@@ -262,29 +270,29 @@ Xの表示順で直接の返信を取得するには、`collectionStrategy: "rep
 
 フルの返信行には、次の主なフィールドが入ることがあります。
 
-| フィールド          | 説明                                                     |
-| ------------------- | -------------------------------------------------------- |
-| `id`                | 返信のID                                                 |
-| `text`              | 返信のテキスト                                           |
-| `fullText`          | 長文の返信テキスト                                       |
-| `createdAt`         | 返信のタイムスタンプ                                     |
-| `lang`              | Xの言語コード                                            |
-| `url`               | 返信への直接URL                                          |
-| `conversationId`    | Xの会話ID                                                |
-| `inReplyToId`       | 直接の親のID                                             |
-| `inReplyToUserId`   | 親の著者のID                                             |
-| `inReplyToUsername` | 親のユーザー名                                           |
-| `likeCount`         | いいね数                                                 |
-| `replyCount`        | 子の返信数                                               |
-| `retweetCount`      | リポスト数                                               |
-| `quoteCount`        | 引用数                                                   |
-| `viewCount`         | 表示回数                                                 |
-| `bookmarkCount`     | ブックマーク数                                           |
-| `author`            | 取得できる公開の著者メタデータ                           |
-| `media`             | 画像、動画、GIF、バリアント                              |
+| フィールド          | 説明                                                                |
+| ------------------- | ------------------------------------------------------------------- |
+| `id`                | 返信のID                                                            |
+| `text`              | 返信のテキスト                                                      |
+| `fullText`          | 長文の返信テキスト                                                  |
+| `createdAt`         | 返信のタイムスタンプ                                                |
+| `lang`              | Xの言語コード                                                       |
+| `url`               | 返信への直接URL                                                     |
+| `conversationId`    | Xの会話ID                                                           |
+| `inReplyToId`       | 直接の親のID                                                        |
+| `inReplyToUserId`   | 親の著者のID                                                        |
+| `inReplyToUsername` | 親のユーザー名                                                      |
+| `likeCount`         | いいね数                                                            |
+| `replyCount`        | 子の返信数                                                          |
+| `retweetCount`      | リポスト数                                                          |
+| `quoteCount`        | 引用数                                                              |
+| `viewCount`         | 表示回数                                                            |
+| `bookmarkCount`     | ブックマーク数                                                      |
+| `author`            | 取得できる公開の著者メタデータ                                      |
+| `media`             | 画像、動画、GIF、バリアント                                         |
 | `entities`          | ハッシュタグ、キャッシュタグ、メンション、URL、動画のタイムスタンプ |
-| `quoted_tweet`      | 取得できる場合の引用元ポスト                             |
-| `retweeted_tweet`   | 取得できる場合のリポスト元ポスト                         |
+| `quoted_tweet`      | 取得できる場合の引用元ポスト                                        |
+| `retweeted_tweet`   | 取得できる場合のリポスト元ポスト                                    |
 
 フルの行には、取得できる元のメタデータも残ります。
 
@@ -346,6 +354,8 @@ Xの表示順で直接の返信を取得するには、`collectionStrategy: "rep
 
 ## 出力モード
 
+データセットの各行の幅を選んでください。
+
 ### コンパクト
 
 データセットの列を絞るには `outputMode: "compact"` を設定します。テキスト、会話、著者、エンゲージメント、メディアのフィールドは残ります。
@@ -353,6 +363,10 @@ Xの表示順で直接の返信を取得するには、`collectionStrategy: "rep
 ### フル
 
 対応するすべての公開フィールドを残すには `outputMode: "full"` を設定します。
+
+### リッチ
+
+1行あたりのデータを最も多くするには、`outputMode: "rich"` を設定します。リッチな行は、フルの列をすべて残し、末尾に `hasCommunityNotes`、`quotedTweetPermalink`、`unavailableAuthorId`、メディアの `sourceUser` を加えます。
 
 ### Raw
 
@@ -462,7 +476,7 @@ XquikのX Reply Scraperは、Apifyのスケジュール、Webhook、APIクライ
 
 対象となるエージェントのワークフローでは、[x402](https://docs.apify.com/integrations/x402)や[Skyfire](https://docs.apify.com/integrations/skyfire)も使えます。
 
-Xquikは、47個のダッシュボードツール、129個のREST操作、署名付きWebhook、MCPサーバーも提供しています。
+Xquikは、47個のダッシュボードツール、REST API、署名付きWebhook、MCPサーバーも提供しています。
 
 ### 常に最新のビルドを使う
 
@@ -498,6 +512,8 @@ Apifyは、特定のビルド番号を `latest` に転送しません。固定�
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer): AIによる8つの特性の回答から、すべてのポストについて0から100のViral Scoreと判定を推定します。ポストが広がる理由や伸びない理由を調べるときに使います。分析済みポスト1件あたり$0.0003から。
 
 ## よくある質問
+
+よくある質問に答えたあと、サポートを受けられる場所を案内します。
 
 ### X APIキーやログインは必要ですか？
 
