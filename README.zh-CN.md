@@ -405,6 +405,12 @@ bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
 bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
 ```
 
+要把应用代码从官方 X API 迁移到 Xquik，请添加 [X API 替代 Skill](https://github.com/Xquik-dev/x-api)：
+
+```bash
+bunx skills@1.5.3 add Xquik-dev/x-api
+```
+
 ### LobeHub
 
 登录 LobeHub，安装两个 Skill，并确认结果：

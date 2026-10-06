@@ -415,6 +415,12 @@ bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
 bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
 ```
 
+앱 코드를 공식 X API에서 옮기려면 [X API 대안 Skill](https://github.com/Xquik-dev/x-api)을 추가하세요.
+
+```bash
+bunx skills@1.5.3 add Xquik-dev/x-api
+```
+
 ### LobeHub
 
 LobeHub에 로그인하고 두 Skill을 설치한 뒤 확인하세요.
