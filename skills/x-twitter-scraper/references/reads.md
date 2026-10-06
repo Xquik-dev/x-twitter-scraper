@@ -127,6 +127,54 @@ one tweet, or `{"tweetIds": ["<id>", "..."]}` for up to 50 tweets.
 A download grants no reuse rights. Tell the user to confirm permission before
 using the media in their own work.
 
+## AI analysis
+
+These routes read posts and answer questions about each one with AI. Send a
+JSON body with `POST`. Each analyzed post bills 2 credits, read included.
+
+| Route | Answers |
+| --- | --- |
+| `POST /x/analysis/sentiment` | `sentiment`, `intensity`, `sarcasm` |
+| `POST /x/analysis/brand` | `relevance`, `sentiment`, `experience` for the brand in `analysis.targets` |
+| `POST /x/analysis/news` | `format`, `attribution`, `relevance` for the topic in `analysis.targets` |
+| `POST /x/analysis/market-signals` | `stance`, `content`, `conviction`, `relevance`, plus bullish & bearish counts per cashtag |
+| `POST /x/analysis/viral-score` | 8 wording traits, `viralScore` from 0 to 100 & `viralVerdict` |
+| `POST /x/analysis/classify` | 1 to 8 questions you write in `analysis.questions` |
+
+Send exactly 1 source:
+
+- `tweetIds`: up to 100 post IDs or URLs.
+- `texts`: up to 100 texts of the user's, such as drafts. Nothing is read
+  from X.
+- A search: `query`, `username`, `listId`, `quotesOf`, or `repliesTo`, alone
+  or together, with `sinceTime`, `untilTime`, `queryType`, `limit` (1 to 100,
+  default 20), and `cursor`.
+
+`analysis` is optional: `targets` (names with `aliases`), `context`,
+`questions`, or a `preset`. Question IDs and category names are lower case
+with underscores.
+
+Send each analysis once with the helpers from [Retries](#retries). A refused
+call bills nothing. Ask the user before sending it again.
+
+```python
+response = requests.post(
+    f"{BASE}/x/analysis/brand",
+    headers=HEADERS,
+    json={"username": "Sony", "limit": 50, "analysis": {"targets": [{"name": "Sony"}]}},
+    timeout=60,
+    allow_redirects=False,
+)
+page = read_body(response)
+if not 200 <= response.status_code < 300 or isinstance(page, str):
+    raise XquikError(f"{response.status_code}: {page}", response.status_code, page)
+```
+
+The response holds `results` (each post with its `answers`), `unanalyzed`
+(free, with a `reason`), `analysisSummary` (totals per question, target and
+cashtag), `has_next_page`, and `next_cursor`. Answers describe what posts say.
+They do not verify claims or give investment advice.
+
 ## Private reads
 
 These need a connected X account:

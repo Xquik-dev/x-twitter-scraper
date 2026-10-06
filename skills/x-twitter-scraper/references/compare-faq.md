@@ -15,6 +15,7 @@ that rate. Current plan prices are in the dashboard.
 | Profile or tweet lookup | 1 per call |
 | Follow check, article | 5 per call |
 | Trends | 3 per call |
+| AI analysis of a post or your own text | 2 per analyzed post |
 | Media download | 1 per tweet with media |
 | Post or reply | 30, plus 2 per started MB of media |
 | Like, repost, follow, their undo calls, remove follower, DM, delete, media upload | 10 per call |

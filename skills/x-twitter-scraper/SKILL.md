@@ -1,6 +1,6 @@
 ---
 name: x-twitter-scraper
-description: "Use Xquik to fetch X (Twitter) data or act through a connected account: search, profiles, followers, replies, threads, timelines, media downloads, bulk exports, trends, monitors, signed webhooks, draws, posts, likes, follows, and DMs. Also use for hashtag or @handle tracking when no other network is named, Xquik MCP setup, pricing, and X API comparisons. Skip data from other social networks, code that stays on the official X API (such as tweepy with an X developer bearer token), official X widget implementation, and content drafting or analysis without an API task. Not affiliated with X Corp."
+description: "Use Xquik to fetch X (Twitter) data or act through a connected account: search, profiles, followers, replies, threads, timelines, media downloads, bulk exports, trends, monitors, signed webhooks, draws, posts, likes, follows, DMs, and AI analysis of posts (sentiment, brand mentions, news, market signals, viral score, custom labels). Also use for hashtag or @handle tracking when no other network is named, Xquik MCP setup, pricing, and X API comparisons. Skip data from other social networks, code that stays on the official X API (such as tweepy with an X developer bearer token), official X widget implementation, and content drafting or analysis without an API task. Not affiliated with X Corp."
 license: MIT
 metadata:
   author: Xquik
@@ -89,6 +89,7 @@ account actions need an X account connected in the Xquik dashboard.
 | Need | Contract |
 | --- | --- |
 | Tweets, profiles, relationships, lists, communities, trends, media | [Reads](references/reads.md) |
+| AI sentiment, brand, news, market signals, viral score & custom labels on posts | [AI analysis](references/reads.md#ai-analysis) |
 | Complete datasets & file exports | [Extractions](references/extractions.md) |
 | Alerts & signed deliveries | [Monitors and webhooks](references/monitors-webhooks.md) |
 | Posts, likes, follows, DMs, deletes & giveaway draws | [Writes](references/writes.md) |
@@ -130,6 +131,8 @@ task needs.
 - An active monitor bills 21 credits per hour, so 504 a day. Pausing or
   deleting it stops the billing.
 - A post costs 30 credits. A like, repost, follow, DM, or delete costs 10.
+- AI analysis bills 2 credits per analyzed post, so $0.0003. Posts without an
+  analysis cost nothing.
 - [Pricing](references/compare-faq.md#pricing-facts) lists every rate.
 - A cost quote names the billed unit, the credit rate & the hard ceiling. For
   known quantities, sum every operation, lookups included. Show total credits
