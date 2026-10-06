@@ -6,20 +6,21 @@ account ID. `GET /x/accounts` lists connected accounts.
 
 ## Preview, confirm, send
 
-1. Resolve every field: account, target ID, exact text, media, reply target.
-   Ask for anything missing instead of guessing.
-2. Show the preview: method, full URL, headers, JSON body, cost, and the
-   effect, such as "a new post appears on @my_brand for its followers". A text
-   post or reply costs 30 credits, plus 2 credits per started MB of media.
-   Likes, reposts, follows, DMs, and deletes cost 10 credits each.
-   Itemize each operation, including lookups, with rates, total credits, & dollars.
-   Show media charges, including no media charge for text-only posts.
-   Include `statusUrl` or `GET https://xquik.com/api/v1/x/write-actions/{id}`
-   for checking the final outcome. Acceptance does not mean success.
-3. Generate one new `Idempotency-Key` (a UUID) per intended action. Reuse it
-   only to retry that identical request.
-4. Ask whether the user confirms this exact request. Edits need a new preview.
-5. Send once, through the connected Xquik MCP server or the user's own client.
+- Resolve every field before a preview: account, target ID, exact text,
+  media & reply target. Ask for a missing one instead of guessing.
+- The preview shows the method, full URL, headers, JSON body, cost & effect.
+  An effect reads like "a new post appears on @my_brand for its followers".
+- A text post or reply costs 30 credits, plus 2 per started MB of media.
+  Likes, reposts, follows, DMs & deletes cost 10 credits each.
+- Itemize each operation, lookups included, with rates, total credits &
+  dollars. Show the media charge, or say a text-only post has none.
+- Include `statusUrl`, or `GET https://xquik.com/api/v1/x/write-actions/{id}`,
+  for the final outcome. Acceptance does not mean success.
+- Each intended action gets 1 new `Idempotency-Key`, a UUID. Reuse it only to
+  retry that identical request.
+- Ask whether the user confirms this exact request. An edit needs a new
+  preview.
+- Send once, through the connected Xquik MCP server or the user's own client.
 
 ## Responses and retries
 
