@@ -423,6 +423,12 @@ bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
 bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
 ```
 
+Para pasar el código de tu app de la API oficial de X a Xquik, agrega el [Skill de alternativa a la API de X](https://github.com/Xquik-dev/x-api):
+
+```bash
+bunx skills@1.5.3 add Xquik-dev/x-api
+```
+
 ### LobeHub
 
 Inicia sesión en LobeHub, instala los Skills y confírmalos:

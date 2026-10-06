@@ -422,6 +422,12 @@ bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
 bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
 ```
 
+Uygulama kodunu resmi X API'den taşımak için [X API alternatifi Skill'ini](https://github.com/Xquik-dev/x-api) ekle:
+
+```bash
+bunx skills@1.5.3 add Xquik-dev/x-api
+```
+
 ### LobeHub
 
 LobeHub'a giriş yap, Skill'leri kur ve doğrula:

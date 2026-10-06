@@ -414,6 +414,12 @@ bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
 bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
 ```
 
+アプリのコードを公式 X API から移行するには、[X API 代替 Skill](https://github.com/Xquik-dev/x-api) を追加します。
+
+```bash
+bunx skills@1.5.3 add Xquik-dev/x-api
+```
+
 ### LobeHub
 
 LobeHub にログインし、2 つの Skill をインストールして確認します。

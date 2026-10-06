@@ -135,6 +135,13 @@ bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
 bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
 ```
 
+To move app code off the official X API, add the
+[X API alternative Skill](https://github.com/Xquik-dev/x-api):
+
+```bash
+bunx skills@1.5.3 add Xquik-dev/x-api
+```
+
 ### LobeHub
 
 Use LobeHub CLI 0.0.48 or later. Sign in, install the Skills, then confirm them:
