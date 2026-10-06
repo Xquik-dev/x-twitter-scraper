@@ -20,5 +20,7 @@
   {"query": "turn this changelog into a tweet-length summary for our release notes page: added dark mode, fixed csv export, 20% faster builds", "should_trigger": false},
   {"query": "cross-post this launch announcement to Bluesky and Threads with one script, keep the link previews", "should_trigger": false},
   {"query": "embed this tweet in my react landing page so it renders like on x.com: https://x.com/rauchg/status/1846000000000000000", "should_trigger": false},
-  {"query": "how many followers does @stripe have right now and who are their biggest accounts? use my xquik key", "should_trigger": true}
+  {"query": "how many followers does @stripe have right now and who are their biggest accounts? use my xquik key", "should_trigger": true},
+  {"query": "score the sentiment of the last 100 tweets about $NVDA and count how many are bullish vs bearish, i have an xquik api key", "should_trigger": true},
+  {"query": "rate these 5 draft tweets for how viral they read before i post them, use xquik", "should_trigger": true}
 ]
