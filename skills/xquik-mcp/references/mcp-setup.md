@@ -251,5 +251,5 @@ eligible read routes only.
 
 ## After setup
 
-[Use docs, search, & execute safely](../SKILL.md#work-from-live-discovery).
+[Use docs, search, & execute safely](../SKILL.md#tools).
 Binary downloads & uncataloged account changes use REST or dashboard flows.
