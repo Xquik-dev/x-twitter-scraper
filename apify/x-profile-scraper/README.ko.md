@@ -28,104 +28,259 @@ Apify가 따로 청구합니다. X API 키나 로그인은 필요 없습니다.
 > Xquik은 독립적인 제3자 서비스입니다. X Corp와 제휴 관계가 없습니다.
 > "Twitter"와 "X"는 X Corp의 상표입니다.
 
-## 프로필 & 타임라인
+## X Profile Scraper는 무엇을 하나요?
 
-- 자기소개, 각종 수치, 인증 여부, 계정 주인이 입력한 위치, 웹사이트 & 미디어.
-- X가 추정해 공개하는 계정 기반 지역(Account based in) 라벨(있는 경우).
-- 제공되는 모든 결과 페이지의 프로필 게시물 행 & 답글 포함 행.
-- 필요하면 미디어, 하이라이트, 팔로워, 팔로잉 또는 인증된 팔로워도 수집.
-- 선택한 게시물에 적용하는 날짜, 미디어, 인증, 재게시 여부 & 지표 필터.
-- 선택한 프로필에 적용하는 오디언스, 활동, 계정 연령 & 공개 메타데이터 필터.
-- 과금 전 중복 제거.
+Xquik의 X Profile Scraper는 사용자 아이디, 숫자 사용자 ID 또는 프로필 URL로 공개
+X(Twitter) 프로필을 반환합니다. 각 프로필에 게시물, 답글, 미디어, 하이라이트,
+팔로워, 팔로잉 & 인증된 팔로워를 추가할 수 있습니다. 자기소개를 번역하고 지금
+라이브 방송 중인 계정도 확인합니다.
 
-## X 프로필 스크랩 방법
+### 주요 기능
 
-1. Apify Console에서 Xquik의 X Profile Scraper를 여세요.
+- 사용자 아이디, ID 또는 URL로 실행 1번에 여러 프로필을 읽습니다.
+- 게시물, 답글, 미디어, 하이라이트, 팔로워, 팔로잉 또는 인증된 팔로워를 별도
+  행으로 추가합니다.
+- `translateBioTo`에 넣은 언어 코드로 각 자기소개를 번역합니다.
+- `checkLiveNow`로 각 프로필이 지금 라이브 방송 중인지 확인합니다.
+- 날짜, 언어, 미디어 & 참여 지표로 게시물을 필터링합니다.
+- 오디언스 규모, 계정 연령 & 인증 여부로 프로필을 필터링합니다.
+- 필터링 & 중복 제거는 과금 전에 실행됩니다.
+- Apify가 실행을 다시 시작해도 전달된 행 & 진행 상황은 유지됩니다.
+
+### 사용 사례
+
+- 자기소개, 웹사이트, 위치 & 오디언스 규모로 리드 목록을 보강하세요.
+- 팔로워, 게시물 & 인증 여부로 경쟁 계정을 비교하세요.
+- 오디언스, 계정 연령 & 참여도로 크리에이터를 검증하세요.
+- 계정의 게시물, 미디어 & 하이라이트를 보관하세요.
+- 팔로워 & 팔로잉으로 계정의 네트워크를 파악하세요.
+- 크리에이터 & 브랜드의 라이브 방송을 지켜보세요.
+- 다른 시장의 자기소개를 내 언어로 읽으세요.
+
+### X Profile Scraper로 어떤 데이터를 추출할 수 있나요?
+
+프로필 행은 `resultType: "profile"`을 사용합니다. 주요 필드는 다음과 같습니다.
+
+| 필드               | 설명                                       |
+| ------------------ | ------------------------------------------ |
+| `id`               | 숫자 사용자 ID                             |
+| `username`         | `@`를 뺀 사용자 아이디                     |
+| `name`             | 표시 이름                                  |
+| `description`      | 자기소개 텍스트                            |
+| `url`              | 프로필 행의 웹사이트                       |
+| `location`         | 계정 주인이 입력한 위치                    |
+| `followers`        | 팔로워 수                                  |
+| `following`        | 팔로잉 수                                  |
+| `statusesCount`    | 게시물 수                                  |
+| `mediaCount`       | 미디어 게시물 수                           |
+| `favouritesCount`  | 계정이 누른 마음에 들어요 수               |
+| `listedCount`      | 계정이 포함된 공개 리스트 수               |
+| `createdAt`        | 계정 생성 시각                             |
+| `verified`         | X가 인증으로 표시하는지 여부               |
+| `isBlueVerified`   | 계정의 X Blue 인증 여부                    |
+| `verifiedType`     | `Government` 같은 인증 유형                |
+| `profilePicture`   | 프로필 이미지 URL                          |
+| `coverPicture`     | 헤더 이미지 URL                            |
+| `pinnedTweetIds`   | 고정된 게시물 ID                           |
+| `professional`     | 프로페셔널 카테고리 & 유형                 |
+| `accountBasedIn`   | X가 최대한 추정한 국가 또는 지역 라벨      |
+| `connectedVia`     | 계정이 처음 X에 연결된 방식                |
+| `usernameChanges`  | 사용자 아이디 변경 횟수 & 마지막 변경 시점 |
+| `birthdate`        | 계정이 공개한 생일 정보                    |
+| `subscribersCount` | 구독자 수(X가 보내는 경우)                 |
+| `tipJar`           | 공개 팁 링크                               |
+| `protected`        | 계정이 게시물을 보호하는지 여부            |
+| `unavailable`      | 계정을 사용할 수 없는지 여부               |
+| `sourceTarget`     | 입력한 사용자 아이디, ID 또는 URL          |
+
+`identityVerification`, `isAutomated`, `automatedBy`, `withheldInCountries` &
+`verificationReason` 같은 나머지 필드는 모두 데이터셋 스키마에 설명되어 있습니다.
+
+선택 항목 행은 Xquik REST 응답 형식을 그대로 따릅니다.
+
+| `resultType`              | 켜는 옵션                  | 행 단위           |
+| ------------------------- | -------------------------- | ----------------- |
+| `profileTweet`            | `includeTweets`            | 게시물            |
+| `profileReply`            | `includeReplies`           | 게시물 또는 답글  |
+| `profileMedia`            | `includeMedia`             | 미디어 게시물     |
+| `profileHighlight`        | `includeHighlights`        | 하이라이트 게시물 |
+| `profileFollower`         | `includeFollowers`         | 팔로워            |
+| `profileFollowing`        | `includeFollowing`         | 팔로잉 계정       |
+| `profileVerifiedFollower` | `includeVerifiedFollowers` | 인증된 팔로워     |
+| `profileBioTranslation`   | `translateBioTo`           | 번역된 자기소개   |
+| `profileLive`             | `checkLiveNow`             | 확인한 프로필     |
+
+내가 계정을 팔로우하거나 차단했는지처럼 보는 사람에게만 해당하는 상태는 행에
+들어가지 않습니다.
+
+## X Profile Scraper로 프로필 데이터를 스크랩하려면 어떻게 하나요?
+
+Apify Console에서 다음 단계를 따르세요.
+
+1. [태스크 예시](#태스크-예시)나 Input 탭을 여세요.
 2. 사용자 아이디는 `twitterHandles`에, URL은 `startUrls`에, ID는 `userIds`에
    추가하세요.
-3. `includeTweets`나 `includeFollowers` 같은 리소스를 켜세요.
-4. `maxItems`로 전달할 행 수의 상한을 정하고 Start를 클릭하세요.
-5. 데이터셋을 JSON, CSV 또는 Excel로 내려받거나 Apify API를 사용하세요.
+3. `includeTweets`처럼 필요한 리소스를 켜세요.
+4. `maxItems`와 필요한 필터를 설정한 다음 Start를 클릭하세요.
+5. 데이터셋을 JSON, CSV, Excel 또는 HTML로 내보내세요.
 
-`startUrls`는 각 URL을 일반 문자열 또는 `{ "url": "..." }` 객체로 받습니다.
+아래 예시는 각각 완전한 입력입니다.
+
+### 여러 프로필 스크랩
 
 ```json
-{ "startUrls": ["https://x.com/nasa", { "url": "https://x.com/OpenAI" }] }
+{ "twitterHandles": ["nasa", "OpenAI", "apify"], "maxItems": 100 }
 ```
 
-## 입력
+사용자 아이디 1개마다 프로필 행 1개를 반환합니다. 사용자 아이디는 `@`를 붙여도,
+빼도 됩니다.
+
+### 프로필 URL이나 ID 붙여넣기
+
+`startUrls`는 각 URL을 일반 문자열 또는 `{ "url": "..." }` 객체로 받습니다.
+`userIds`는 숫자 X 사용자 ID를 받습니다.
 
 ```json
 {
-  "twitterHandles": ["OpenAI", "apify"],
-  "includeTweets": true,
-  "includeReplies": false,
-  "maxItems": 10000
+  "startUrls": ["https://x.com/nasa", { "url": "https://x.com/OpenAI" }],
+  "userIds": ["11348282"],
+  "maxItems": 100
 }
 ```
 
-대상은 1개면 충분합니다. 전체 상한인 `maxItems`에는 프로필 & 선택한 리소스가
-모두 포함됩니다.
+같은 사용자 아이디를 2번 넣어도 1번만 읽습니다.
 
-문제없이 끝난 작은 실행은 `run-report`를 건너뛰어 Apify 사용량을 아낍니다. 모든
-실행에서 보고서를 기록하려면 `alwaysSaveRunRecords`를 켜세요.
+### 게시물, 답글 & 미디어 추가
 
-## 출력
+```json
+{
+  "twitterHandles": ["nasa"],
+  "includeTweets": true,
+  "includeMedia": true,
+  "sinceDate": "2026-01-01",
+  "maxItems": 500
+}
+```
 
-프로필 행은 `resultType: "profile"`을 사용합니다. 선택 항목 행은 `profileTweet`,
-`profileReply`, `profileMedia`, `profileHighlight`, `profileFollower`,
-`profileFollowing`, `profileVerifiedFollower` 중 하나를 사용합니다. 모든 행에
-`sourceTarget`이 남습니다. 공개 필드는 Xquik REST 응답 형식을 그대로 따릅니다.
+`includeTweets`는 프로필의 게시물 탭을 따릅니다. `includeReplies`는 답글 탭을
+따릅니다. `includeMedia`는 미디어 탭을 따릅니다. `includeHighlights`는
+하이라이트 탭에 있는 게시물을 X의 순서대로 추가합니다. 하이라이트가 없는
+프로필은 행을 추가하지 않습니다.
 
-`includeHighlights`는 각 프로필의 하이라이트 탭에 있는 게시물을 X의 순서대로
-추가합니다. 하이라이트가 없는 프로필은 행을 추가하지 않습니다.
+### 인기 게시물만 남기기
 
-X는 계정 접속 IP를 집계해 `accountBasedIn`을 추정합니다. 이 라벨은 국적, 거주지,
-신원, 가입 위치, 게시 위치, 정확한 위치를 나타내지 않습니다. `observedAt`에는
-데이터를 가져온 시각이 기록됩니다. X에 라벨이 없으면 `accountBasedIn`은
-null입니다. X가 라벨을 숨기면 행에 대신 `accountBasedInUnavailable: true`가
-들어갑니다.
+```json
+{
+  "twitterHandles": ["nasa"],
+  "includeTweets": true,
+  "minLikes": 1000,
+  "mediaType": "videos",
+  "maxItems": 200
+}
+```
+
+게시물 필터는 선택 항목인 게시물 행에 적용됩니다. 필터에서 빠진 행은 데이터셋에
+들어가지 않으므로 요금을 내지 않습니다.
+
+### 팔로워 & 팔로잉 내보내기
+
+```json
+{
+  "twitterHandles": ["apify"],
+  "includeFollowers": true,
+  "minFollowers": 1000,
+  "verifiedOnly": true,
+  "maxItems": 1000
+}
+```
+
+`includeFollowers`, `includeFollowing` & `includeVerifiedFollowers`는 계정
+1개마다 프로필 행 1개를 추가합니다. 프로필 필터는 이 행 & 기본 프로필에 모두
+적용됩니다.
+
+### 자기소개 번역
+
+```json
+{ "twitterHandles": ["nasa", "SpaceX"], "translateBioTo": "es" }
+```
+
+번역 1개는 `text`, `language` & `sourceLanguage`를 담은 `profileBioTranslation`
+행 1개입니다. 자기소개가 없는 프로필은 행도 요금도 생기지 않습니다.
+
+### 지금 라이브 중인 계정 확인
+
+```json
+{ "twitterHandles": ["nasa", "SpaceX"], "checkLiveNow": true }
+```
+
+확인 1번은 `live`, `userId`, `userName` & `broadcast`를 담은 `profileLive` 행
+1개입니다. `broadcast`에는 라이브 중이거나 끝난 프로필의 최근 방송이 들어가고,
+없으면 null입니다. 찾을 수 없는 프로필은 행을 추가하지 않습니다.
+
+## 태스크 예시
+
+공개 태스크 50개 중에서 고르세요. 태스크마다 범위가 정해진 입력 & 그에 맞는
+데이터셋 뷰가 있습니다. 실행하기 전에 태스크를 수정하세요.
+
+- [X 계정 1개의 프로필 카드 가져오기](https://apify.com/xquik/x-profile-scraper/examples/get-an-x-profile-card)
+- [경쟁 브랜드의 프로필 비교하기](https://apify.com/xquik/x-profile-scraper/examples/compare-competitor-brand-profiles)
+- [숫자 사용자 ID를 프로필로 변환하기](https://apify.com/xquik/x-profile-scraper/examples/resolve-numeric-user-ids-to-profiles)
+- [계정 1개의 최근 게시물 수집하기](https://apify.com/xquik/x-profile-scraper/examples/collect-recent-posts-from-an-account)
+- [계정에서 마음에 들어요를 가장 많이 받은 게시물 찾기](https://apify.com/xquik/x-profile-scraper/examples/find-an-accounts-most-liked-posts)
+- [계정이 올린 동영상 수집하기](https://apify.com/xquik/x-profile-scraper/examples/collect-videos-from-an-account)
+- [계정의 1년 치 게시물 보관하기](https://apify.com/xquik/x-profile-scraper/examples/archive-one-year-of-posts)
+- [계정의 팔로워 내보내기](https://apify.com/xquik/x-profile-scraper/examples/export-the-followers-of-an-account)
+- [회사의 인증된 팔로워 내보내기](https://apify.com/xquik/x-profile-scraper/examples/export-verified-followers)
+- [팔로워가 10,000명 이상인 팔로워 찾기](https://apify.com/xquik/x-profile-scraper/examples/find-influential-followers)
+- [디자인 툴 2개의 오디언스 겹침 측정하기](https://apify.com/xquik/x-profile-scraper/examples/measure-audience-overlap)
+- [계정 1개 전체 점검하기](https://apify.com/xquik/x-profile-scraper/examples/run-a-full-account-audit)
+
+## X 프로필 스크랩 비용은 얼마인가요?
+
+Xquik의 X Profile Scraper는 모든 Apify 요금제에서 전달된 행 1개당
+$0.00015입니다. Apify 플랫폼 사용료는 Apify가 따로 청구합니다. Xquik은 전달된
+데이터 행 1개마다 한 번 과금합니다. 진단은 `diagnostics` 출력에서 무료로
+제공합니다.
+
+- Xquik 구독은 필요 없습니다.
+- 별도의 시작, 프로필, 쿼리 요금이 없습니다.
+- 필터링 & 중복 제거는 과금 전에 실행됩니다. 필터에서 빠진 행이나 중복 행에는
+  요금을 내지 않습니다.
+- 자기소개가 없는 프로필에는 번역 요금이 붙지 않습니다.
+- 찾을 수 없는 프로필에는 라이브 확인 요금이 붙지 않습니다.
+- Apify의 최대 총 청구액 설정에 따라 전달되는 행 수가 제한됩니다.
+
+문제가 생긴 실행이나 큰 실행은 `run-report` 레코드도 기록합니다. 문제없이 끝난
+작은 실행은 이 레코드를 건너뛰어 Apify 사용량을 아낍니다. 모든 실행에서
+기록하려면 `alwaysSaveRunRecords`를 켜세요.
+
+실행당 지출 상한을 정하려면 [실행 옵션](#실행-옵션)을 보세요.
+
+## 빈 실행, 부분 실행 & 중단된 실행
+
+Xquik의 X Profile Scraper는 결과가 없거나, 일부만 나왔거나, 중단된 실행의 이유를
+무료로 설명합니다. 실행 상태는 실행이 멈춘 이유를 알려 줍니다. 과금된 결과 &
+읽은 대상 수도 셉니다.
+
+### 빈 결과
+
+결과가 없는 실행은 상태 메시지에서 대상 & 필터를 확인하라고 안내합니다. 필터에서
+빠진 행은 결과 한도를 차지하지 않습니다. 모든 대상을 읽고도 행을 하나도 받지
+못한 실행은 레코드를 기록하지 않습니다. 대신 상태 메시지에서 이유 & 바꿀 점을
+알려 줍니다.
 
 X는 2024년부터 계정이 마음에 들어요를 누른 게시물을 그 계정 본인에게만 보여
 줍니다. 그래서 다른 계정에 대해서는 `includeLikes`가 `profileLike` 행을 반환하지
 않습니다.
 
-예시는 샘플 값입니다. 실제 결과는 실시간 데이터를 따릅니다. 프로필 행은 다음과
-같습니다.
+### 부분 실행
 
-```json
-{
-  "resultType": "profile",
-  "sourceTarget": "sample_user",
-  "username": "sample_user",
-  "name": "Sample User",
-  "followers": 1200,
-  "verified": false,
-  "accountBasedInUnavailable": true
-}
-```
-
-## X 프로필 스크랩 비용은 얼마인가요?
-
-모든 Apify 요금제에서 전달된 행 1개당 $0.00015입니다. Apify 플랫폼 사용료는
-Apify가 따로 청구합니다.
-
-- 전달된 데이터 행 1개마다 한 번 과금합니다. 진단은 `diagnostics`에서 무료로
-  제공합니다.
-- 시작, 프로필, 쿼리 요금이 없습니다.
-- 과금 전에 중복을 제거합니다.
-- Apify의 최대 총 청구액 설정에 따라 전달되는 행 수가 제한됩니다.
-
-## 제한 & 복구
-
-Xquik의 X Profile Scraper는 한 실행에서 여러 프로필을 읽습니다. 설정한 필터는
-모두 타임라인 행에 적용됩니다. Apify가 실행을 다시 시작해도 전달된 행 & 진행
-상황은 유지됩니다.
-
-추출이 중단되면 무료 `partial` 진단을 기록합니다. 이미 받은 결과는 그대로
+추출이 중단되면 무료 `partial` 진단을 기록합니다. 전달된 행은 데이터셋에 그대로
 남습니다. 다시 시도하기 전에 `availableResults`, `failedTargets`, `retryable` &
 `nextAction`을 확인하세요. Actor가 성공으로 종료되면 전달이 끝났다는 뜻입니다.
 추출이 모두 끝났다는 뜻은 아닙니다.
+
+### 중단 원인
 
 실행 상태는 실행이 일찍 멈춘 원인을 모두 알려 줍니다. `stopCauses`는 원인마다
 `message`, `retryable` & `nextAction`을 따로 담아 나열합니다. 원인은
@@ -134,6 +289,101 @@ Xquik의 X Profile Scraper는 한 실행에서 여러 프로필을 읽습니다.
 정지한 계정을 알려 줍니다. 찾을 수 없거나 정지된 대상은 다른 원인으로 실행이
 멈췄을 때만 목록에 들어갑니다. 원인 중 하나라도 재시도할 수 있으면 실행도
 `retryable`입니다.
+
+## 입력
+
+Input 탭에 모든 옵션이 있습니다. `twitterHandles`, `startUrls`, `userIds` 중 1개
+이상을 넣으세요. 나머지 필드는 모두 선택 사항입니다.
+
+| 필드                           | 기능                                                           |
+| ------------------------------ | -------------------------------------------------------------- |
+| `twitterHandles`               | `@`를 붙이거나 뺀 사용자 아이디                                |
+| `startUrls`                    | x.com 또는 twitter.com의 프로필 URL                            |
+| `userIds`                      | 숫자 X 사용자 ID                                               |
+| `maxItems`                     | 실행 전체에서 전달할 행 수의 상한                              |
+| `maxItemsPerTarget`            | 프로필이나 리소스마다 받을 행 수의 상한                        |
+| `includeTweets`                | 게시물 탭 추가                                                 |
+| `includeReplies`               | 답글 탭 추가                                                   |
+| `includeMedia`                 | 미디어 탭 추가                                                 |
+| `includeHighlights`            | 하이라이트 탭 추가                                             |
+| `includeLikes`                 | 마음에 들어요 탭 추가(X가 다른 계정에 숨김)                    |
+| `includeFollowers`             | 팔로워 추가                                                    |
+| `includeFollowing`             | 팔로잉 계정 추가                                               |
+| `includeVerifiedFollowers`     | 인증된 팔로워 추가                                             |
+| `translateBioTo`               | 각 자기소개를 `es` 같은 언어 코드로 번역                       |
+| `checkLiveNow`                 | 각 프로필이 지금 라이브 방송 중인지 확인                       |
+| `sinceDate`, `untilDate`       | 날짜 범위 안의 게시물만 유지                                   |
+| `language`                     | 언어 코드 1개의 게시물만 유지                                  |
+| `mediaType`                    | 이미지, 동영상, GIF, 링크가 있거나 미디어가 없는 게시물만 유지 |
+| `minViews`, `minLikes`         | 조회수나 마음에 들어요 수가 기준 이상인 게시물만 유지          |
+| `minReplies`, `minRetweets`    | 답글 수나 재게시 수가 기준 이상인 게시물만 유지                |
+| `nativeRetweets`               | 네이티브 재게시물만 유지                                       |
+| `verifiedOnly`                 | 인증된 작성자나 프로필만 유지                                  |
+| `minFollowers`, `maxFollowers` | 오디언스 범위 안의 프로필만 유지                               |
+| `minAccountAgeDays`            | 계정 연령이 이 일수 이상인 프로필만 유지                       |
+| `dedupeAcrossTargets`          | 프로필 간 중복 행을 과금 전에 제거                             |
+
+### 알맞은 입력 고르기
+
+- 프로필 카드만 필요하면 사용자 아이디를 넣고 `include` 옵션은 모두 끄세요.
+- 계정을 보관하려면 `includeTweets`, `includeMedia` & `includeHighlights`를 켜고
+  `sinceDate`를 설정하세요.
+- 인기 콘텐츠를 원하면 `includeTweets`에 `minLikes`나 `minViews`를 더하세요.
+- 리드 목록을 만들려면 `includeFollowers`를 `minFollowers` &
+  `minAccountAgeDays`와 함께 켜세요.
+- 오디언스 겹침을 보려면 사용자 아이디 2개를 넣고 `includeFollowers`를 켠 다음
+  `dedupeAcrossTargets: false`로 설정하세요. 그러면 공통 팔로워가 각 사용자
+  아이디 아래에 모두 나타납니다.
+
+## 출력
+
+각 행은 JSON 객체입니다. 데이터셋 스키마가 필드마다 제목 & 설명을 제공하므로 AI
+에이전트가 추측 없이 행을 읽을 수 있습니다.
+
+예시는 샘플 값입니다. 실제 결과는 실시간 데이터를 따릅니다. 프로필 행은 다음과
+같습니다.
+
+```json
+{
+  "resultType": "profile",
+  "sourceTarget": "sample_user",
+  "id": "1234567890",
+  "username": "sample_user",
+  "name": "Sample User",
+  "description": "Building tools for researchers.",
+  "url": "https://example.com",
+  "location": "Lisbon",
+  "followers": 1200,
+  "following": 310,
+  "statusesCount": 4200,
+  "verified": false,
+  "createdAt": "Tue Mar 21 20:50:14 +0000 2017",
+  "accountBasedInUnavailable": true
+}
+```
+
+X는 계정 접속 IP를 집계해 `accountBasedIn`을 추정합니다. 이 라벨은 국적, 거주지,
+신원, 가입 위치, 게시 위치, 정확한 위치를 나타내지 않습니다. `observedAt`에는
+데이터를 가져온 시각이 기록됩니다. X에 라벨이 없으면 `accountBasedIn`은
+null입니다. X가 라벨을 숨기면 행에 대신 `accountBasedInUnavailable: true`가
+들어갑니다.
+
+데이터셋을 JSON, CSV, Excel 또는 HTML로 내보내세요.
+
+## 실행 옵션
+
+- 실행 비용 상한을 정하려면 Apify의 최대 총 청구액을 설정하세요. 그 예산 안에서
+  가장 많은 행을 받으려면 `maxItems`를 높게 두세요.
+- Apify API에서는 `maxTotalChargeUsd`를, Console에서는 Max cost per run을
+  설정하세요.
+- 모든 프로필을 실행 1번에 넣으세요. 실행마다 Apify에 같은 시작 비용을 냅니다.
+- `maxConcurrency`는 동시에 처리할 프로필 수를 정합니다. 기본값이 가장 빠르면서
+  안전한 설정입니다.
+- 1초 단위 확인 & 서명된 웹훅이 필요하면 Xquik 계정 모니터를 쓰세요. 활성
+  모니터는 매초 확인합니다.
+
+배포된 수정 사항을 모두 받으려면 모든 실행에서 `latest`를 고르세요. 저장된
+태스크 & 스케줄은 자체 빌드 선택을 유지하므로 `latest`로 두세요.
 
 ## 관련 Xquik Actor
 
@@ -204,6 +454,24 @@ Xquik의 X Profile Scraper는 한 실행에서 여러 프로필을 읽습니다.
   추정합니다. 게시물이 왜 퍼지거나 묻히는지 분석할 때 사용하세요. 분석한
   게시물당 $0.0003부터입니다.
 
+## 스크랩 이상이 필요하신가요?
+
+Xquik은 대시보드 도구 53개, REST API, 서명된 웹훅 & MCP 서버도 제공합니다.
+
+- [API 문서](https://docs.xquik.com/introduction): REST API 가이드
+- [Profile Lookup API](https://docs.xquik.com/api-reference/x/twitter-profile-lookup):
+  공개 프로필 1개 가져오기
+- [User Tweets API](https://docs.xquik.com/api-reference/x/user-tweets):
+  사용자의 게시물 가져오기
+- [Followers API](https://docs.xquik.com/api-reference/x/followers): 계정의
+  팔로워 가져오기
+- [Bio Translation API](https://docs.xquik.com/api-reference/x/user-bio-translation):
+  프로필 자기소개 번역하기
+- [Live Status API](https://docs.xquik.com/api-reference/x/user-live-status):
+  사용자가 라이브 중인지 확인하기
+- [MCP 서버](https://docs.xquik.com/mcp/overview): 지원 도구 살펴보기
+- [웹훅](https://docs.xquik.com/webhooks/overview): 서명된 이벤트 전달
+
 ## 자주 묻는 질문
 
 자주 묻는 질문에 먼저 답하고, 이어서 도움받을 곳을 안내합니다.
@@ -213,6 +481,44 @@ Xquik의 X Profile Scraper는 한 실행에서 여러 프로필을 읽습니다.
 아니요. Xquik의 X Profile Scraper는 X API 키, 로그인, 자격 증명이 모두 필요
 없습니다.
 
+### 실행 1번에 프로필을 몇 개까지 스크랩할 수 있나요?
+
+입력한 만큼 스크랩할 수 있습니다. `maxItems` & Apify 지출 한도가 행 수를
+제한합니다.
+
+### X 프로필을 CSV나 Excel로 내보낼 수 있나요?
+
+네. Storage 탭에서 데이터셋을 JSON, CSV, Excel 또는 HTML로 내보내세요.
+
+### Twitter 사용자의 팔로워를 스크랩할 수 있나요?
+
+네. `includeFollowers`, `includeFollowing` 또는 `includeVerifiedFollowers`를
+켜세요. 계정 1개가 행 1개입니다.
+
+### 프로필의 웹사이트 & 위치도 가져오나요?
+
+네. `url`에는 웹사이트가, `location`에는 계정 주인이 입력한 텍스트가 들어갑니다.
+
+### 보호된 계정도 스크랩할 수 있나요?
+
+공개 프로필 행은 `protected: true`와 함께 받을 수 있습니다. X는 보호된 계정의
+게시물 & 팔로워를 승인된 팔로워에게만 보여 줍니다.
+
+### 계정이 지금 라이브 중인지 어떻게 알 수 있나요?
+
+`checkLiveNow: true`로 설정하세요. 각 프로필에 `live` & 최근 방송을 담은
+`profileLive` 행이 생깁니다.
+
+### 자기소개를 번역할 수 있나요?
+
+네. `translateBioTo`를 `es`나 `pt-br` 같은 언어 코드로 설정하세요. 자기소개가
+없는 프로필은 행을 추가하지 않습니다.
+
+### includeLikes가 아무것도 반환하지 않는 이유는 무엇인가요?
+
+X는 2024년부터 계정이 마음에 들어요를 누른 게시물을 그 계정 본인에게만 보여
+줍니다. 이 Actor를 포함해 다른 계정은 이 게시물을 읽을 수 없습니다.
+
 ### X 프로필을 스크랩해도 합법인가요?
 
 Xquik의 X Profile Scraper는 공개 X 필드를 요청합니다. 결과에는 개인정보가 들어
@@ -221,11 +527,10 @@ Xquik의 X Profile Scraper는 공개 X 필드를 요청합니다. 결과에는 �
 
 ### 실행 결과가 비어 있는 이유는 무엇인가요?
 
-먼저 무료 `diagnostics` 출력을 여세요. 결과가 없는 실행은 상태 메시지에서 대상 &
-필터를 확인하라고 안내합니다. `stopCauses`는 원인마다 따라 할 `nextAction`을
-알려 줍니다. 읽을 수 없는 입력이 있으면 실행이 하나씩 나열하고 해결 방법을 알려
-줍니다. X가 마음에 들어요 목록을 숨기므로, 다른 계정에 대해서는 `includeLikes`가
-`profileLike` 행을 반환하지 않습니다.
+먼저 실행 상태를 읽으세요. 결과가 없는 실행은 상태 메시지에서 대상 & 필터를
+확인하라고 안내합니다. 확인이 필요한 일이 있으면 무료 `diagnostics` 출력이
+나타납니다. 그 안의 `stopCauses`는 원인마다 따라 할 `nextAction`을 알려 줍니다.
+읽을 수 없는 입력이 있으면 실행이 하나씩 나열하고 해결 방법을 알려 줍니다.
 
 ### API, 스케줄 & 연동을 사용할 수 있나요?
 
@@ -237,14 +542,14 @@ Scraper를 cron 일정에 맞춰 실행할 수 있습니다. 에이전트는
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp)를 사용합니다. 이전
 빌드가 꼭 필요하지 않다면 `latest`를 사용하세요.
 
-### 도움은 어디서 받을 수 있나요?
-
-Actor 페이지에서 이슈를 열거나 실행 ID와 함께 support@xquik.com으로 문의하세요.
-키-값 저장소의 무료 진단이 결과가 없거나, 일부만 나왔거나, 중단된 실행의 원인을
-설명합니다.
-
 ### 맞춤 솔루션을 받을 수 있나요?
 
 네. [xquik.com](https://xquik.com)을 방문하거나
 [API 문서](https://docs.xquik.com/introduction)를 읽어 보세요. 대시보드, API,
 MCP 서버 & 웹훅 안내가 있습니다.
+
+### 도움은 어디서 받을 수 있나요?
+
+Actor 페이지에서 이슈를 열거나 실행 ID와 함께 <support@xquik.com>으로
+문의하세요. 키-값 저장소의 무료 진단이 확인이 필요한 실행을 설명합니다. 행을
+하나도 받지 못한 실행은 상태 메시지에서 이유를 알려 줍니다.

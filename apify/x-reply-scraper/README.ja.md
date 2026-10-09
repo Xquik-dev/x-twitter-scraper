@@ -22,13 +22,11 @@ X(Twitter)の返信を、すべてのApifyプランで**配信された行1件�
 > Xquikは独立したサードパーティサービスです。X Corpとは提携していません。
 > 「Twitter」および「X」はX Corpの商標です。
 
-## このTwitterリプライ（返信）スクレイパーでできること
+## X Reply Scraperでできること
 
 XquikのX Reply Scraperは、公開されている返信とコメントの会話を収集します。1件のポスト、URLの一括リスト、ポストID、ユーザーの返信タイムラインを扱えます。
 
-感情分析、顧客フィードバック、コミュニティ調査に使えます。返信のランキング、見込み客の発掘、モデレーションの確認、会話データセットの作成にも使えます。
-
-### 返信の収集の動作
+### 主な機能
 
 - 自動モードは、直接の結果が不完全な場合も収集を続けます。
 - `collectionStrategy` で、Actorが返信を収集する方法を決めます。
@@ -37,11 +35,61 @@ XquikのX Reply Scraperは、公開されている返信とコメントの会話
 - 出力は、4種類の並び順、3段階の詳細レベル、3種類のフィールドスタイルに対応します。
 - すべての返信に、元の対象、親ID、ルートID、深さが残ります。
 - 継続用のカーソルで、過去分の取得と定期実行ができます。
-- 空の実行は、`diagnostics` に無料のレコードを1件書き込みます。
+- 対応が必要な実行は、`diagnostics` に無料のレコードを1件書き込みます。すべての対象を読み取っても返信が見つからなかった実行は、何も書き込みません。理由はステータスが示します。
 - 実行ログには、ページごとと対象ごとの所要時間が `fetchDurationMs`、`processingDurationMs`、`pushDurationMs`、`statusDurationMs`、`fullPageDurationMs`、`fullTargetDurationMs` に表示されます。
 - Apifyが実行を再起動しても、配信済みの返信と進捗は残ります。
 
-## Xの返信をスクレイピングする方法
+### 活用例
+
+- ブランドや製品のポストへの返信から、感情と顧客フィードバックを測定します。
+- 話題になったポストで、いいねが最も多い返信とコメントを順位付けします。
+- 公開の返信で質問したりニーズを挙げたりしている見込み客を見つけます。
+- モデレーション、スパム、嫌がらせの観点から返信を確認します。
+- 研究やAIの学習用データセットのために、会話全体を再構成します。
+- 1つのアカウントが顧客にどう返信しているかを、継続して追跡します。
+
+### X Reply Scraperで抽出できるデータ
+
+データセットと実行レポートのスキーマは、返すすべてのフィールドを説明します。プリミティブなフィールドには、エージェントや自動生成された連携のための例も付きます。
+
+フルの返信行には、次の主なフィールドが入ることがあります。
+
+| フィールド          | 説明                                                                |
+| ------------------- | ------------------------------------------------------------------- |
+| `id`                | 返信のID                                                            |
+| `text`              | 返信のテキスト                                                      |
+| `fullText`          | 長文の返信テキスト                                                  |
+| `createdAt`         | 返信のタイムスタンプ                                                |
+| `lang`              | Xの言語コード                                                       |
+| `url`               | 返信への直接URL                                                     |
+| `conversationId`    | Xの会話ID                                                           |
+| `inReplyToId`       | 直接の親のID                                                        |
+| `inReplyToUserId`   | 親の著者のID                                                        |
+| `inReplyToUsername` | 親のユーザー名                                                      |
+| `likeCount`         | いいね数                                                            |
+| `replyCount`        | 子の返信数                                                          |
+| `retweetCount`      | リポスト数                                                          |
+| `quoteCount`        | 引用数                                                              |
+| `viewCount`         | 表示回数                                                            |
+| `bookmarkCount`     | ブックマーク数                                                      |
+| `author`            | 取得できる公開の著者メタデータ                                      |
+| `media`             | 画像、動画、GIF、バリアント                                         |
+| `entities`          | ハッシュタグ、キャッシュタグ、メンション、URL、動画のタイムスタンプ |
+| `quoted_tweet`      | 取得できる場合の引用元ポスト                                        |
+| `retweeted_tweet`   | 取得できる場合のリポスト元ポスト                                    |
+
+フルの行には、取得できる元のメタデータも残ります。
+
+- ポストの種類のフィールドは `type`、`isReply`、`isQuoteStatus`、`isNoteTweet`、`isLimitedReply`、`isTranslatable` です。
+- テキストの詳細は `displayTextRange`、`noteTweet`、`article`、`card` です。
+- ラベルと通知は `contentDisclosure`、`communityNote`、`possiblySensitive`、`tombstone`、`exclusiveContent` です。
+- 会話の詳細は `conversationControl`、`limitedActions`、`unmentionedUserIds` です。
+- 文脈のフィールドは `source`、`place`、`communityId`、`communityName`、`reactionContext`、`postCta` です。
+- 編集と表示可否のフィールドは `edit`、`previousCounts`、`viewState`、`authorUnavailable` です。
+
+フラットな行には、会話の系統、元データの詳細、結果の種類、スキーマのバージョンが残ります。正確なフィールドはOpenAPIを参照してください。
+
+## X Reply Scraperで返信をスクレイピングする方法
 
 1. ポストのURL、ポストID、プロフィールのURL、ユーザー名を貼り付けます。
 2. `maxItems`、`scope`、必要なフィルターを設定します。
@@ -114,37 +162,65 @@ XquikのX Reply Scraperは、公開されている返信とコメントの会話
 }
 ```
 
+## タスクの例
+
+50個の公開タスクから選べます。どのタスクにも、上限を決めた入力と、対応するデータセットビューがあります。実行前にタスクを編集できます。
+
+- [Xのポストの返信とTwitterのコメントをスクレイピングする](https://apify.com/xquik/x-reply-scraper/examples/scrape-post-replies)
+- [Twitterの返信を一括でスクレイピングする](https://apify.com/xquik/x-reply-scraper/examples/scrape-bulk-post-replies)
+- [Twitterの返信の会話を再構成する](https://apify.com/xquik/x-reply-scraper/examples/rebuild-full-conversation)
+- [Twitterの返信をいいね数で順位付けする](https://apify.com/xquik/x-reply-scraper/examples/rank-most-liked-replies)
+- [ポストへの最新の返信をスクレイピングする](https://apify.com/xquik/x-reply-scraper/examples/collect-latest-replies)
+- [Twitterの返信からスパムを除く](https://apify.com/xquik/x-reply-scraper/examples/exclude-spam-keywords)
+- [英語のTwitterの返信をスクレイピングする](https://apify.com/xquik/x-reply-scraper/examples/collect-english-replies)
+- [認証済みアカウントのTwitterの返信をスクレイピングする](https://apify.com/xquik/x-reply-scraper/examples/collect-verified-replies)
+- [メディア付きのTwitterの返信をスクレイピングする](https://apify.com/xquik/x-reply-scraper/examples/collect-media-replies)
+- [ユーザーのTwitterの返信タイムラインをスクレイピングする](https://apify.com/xquik/x-reply-scraper/examples/scrape-profile-replies)
+- [AIエージェント向けにTwitterの返信を収集する](https://apify.com/xquik/x-reply-scraper/examples/collect-replies-for-ai-agents)
+- [Xの返信でRAG用データセットを作る](https://apify.com/xquik/x-reply-scraper/examples/build-x-reply-rag-dataset)
+- [LLM向けにTwitterの返信を保存する](https://apify.com/xquik/x-reply-scraper/examples/archive-replies-for-llm-processing)
+- [CRM向けにXの返信から見込み客を抽出する](https://apify.com/xquik/x-reply-scraper/examples/extract-reply-leads-for-crm)
+
 ## Xの返信のスクレイピングにかかる費用は？
 
 XquikのX Reply Scraperは、すべてのApifyプランで配信された行1件につき$0.00015です。Apifyのプラットフォーム利用料は別途かかります。
 
 Xquikの課金は、配信したデータ行1件につき1回です。フィルターや重複排除で除いた返信には料金がかかりません。`diagnostics` の診断レコードは無料です。開始、URL、クエリ、ページ送り、フィルターの料金はかかりません。
 
-## 公開タスクの例
+## 空の実行、部分的な実行、停止した実行
 
-50個の公開タスクから選べます。どのタスクにも、上限を決めた入力と、対応するデータセットビューがあります。実行前にタスクを編集できます。
+XquikのX Reply Scraperは、空の実行、部分的な実行、停止した実行の理由を無料で説明します。実行ステータスは、実行が止まった理由を示します。課金された結果と読み取った対象の数も数えます。すべての対象を読み取っても返信が見つからなかった実行は、レコードを書き込みません。その理由と変更すべき点は、ステータスが示します。
 
-まずは次の例から始めてください。
+### 抽出が不完全な場合
 
-- [AIエージェント向けに返信を収集する](https://apify.com/xquik/x-reply-scraper/examples/collect-replies-for-ai-agents)
-- [Xの返信でRAG用データセットを作る](https://apify.com/xquik/x-reply-scraper/examples/build-x-reply-rag-dataset)
-- [LLMで処理するために返信を保存する](https://apify.com/xquik/x-reply-scraper/examples/archive-replies-for-llm-processing)
-- [CRM向けに返信から見込み客を抽出する](https://apify.com/xquik/x-reply-scraper/examples/extract-reply-leads-for-crm)
+中断された実行は、無料の `partial` 診断を書き込みます。取得済みの結果はそのまま残ります。再試行する前に `availableResults`、`failedTargets`、`retryable`、`nextAction` を確認してください。Actorの正常終了が示すのは配信の完了です。抽出が最後まで終わったことは意味しません。
 
-## AIエージェントとMCPへの対応
+ステータスは、早期停止の原因をすべて示します。`stopCauses` は各原因を挙げ、それぞれに `message`、`retryable`、`nextAction` を付けます。原因は `target_not_found`、`target_failed`、`page_limit`、`reply_reach`、`deadline_reached` です。`reply_reach` は、Xがスレッドの一部しか返さなかったことを示します。
 
-XquikのX Reply Scraperは、Apify MCP、APIクライアント、x402、Skyfireから実行できます。
+存在しないポストやアカウントは、失敗として数えません。ステータスは、"X has no match for 1 target." のようにそれを示します。`stopCauses` に入るのは、別の原因で実行が止まった場合だけです。いずれかの原因が再試行可能なら、実行も `retryable` になります。
 
-- 限定された権限で、無関係なApifyアカウントのデータを守ります。
-- イベント課金で、費用は配信した結果に連動します。
-- エージェント決済と両立させるため、スタンバイモードはオフのままです。
-- 型付きのスキーマが、返信、実行レポート、継続用カーソルを記述します。
-- 上限付きのデフォルト値で、エージェントが誤って無制限に実行するのを防ぎます。
-- 安定した `camelCase` と `snake_case` のモードで、ツールをつなぎやすくなります。
-- 診断行には、ステータス、メッセージ、復旧のためのアクションが入ります。
-- 実行レポートには、正確な結果、停止理由、課金見積もりが入ります。
+### 診断
 
-## 返信の対象と入力の別名
+成功したデータ行は `resultType: "reply"` を使います。対応が必要な実行は、`diagnostics` に無料のレコードをちょうど1件書き込みます。たとえば、無効な入力、スキップされた対象、早期停止の場合です。そのレコードが直し方を示します。すべての対象を読み取っても返信が見つからなかった実行は、何も書き込みません。理由はステータスが示します。
+
+実行ステータスは、実行が止まった理由を示します。課金された結果と読み取った対象の数も数えます。問題が起きた実行は、入力なしや無効な入力での終了も含めて、必ず `run-report` を書き込みます。大規模な実行も書き込みます。問題なく終わった小規模な実行は書き込まず、Apifyの利用料を節約します。毎回書き込むには `alwaysSaveRunRecords` をオンにしてください。
+
+レポートのスキーマは、完了状況、課金、失敗、保存したカーソルを説明します。`version` フィールドは、公開されているActorのソースの正確なバージョンを示します。
+
+`status` フィールドは次の値を使います。
+
+- `no-input`
+- `invalid-input`
+- `replies-incomplete`
+- `zero-output`
+- `aborted`
+- `unexpected-error`
+
+## 入力
+
+Inputタブには、すべてのオプションが表示されます。ポストのURL、ポストID、プロフィールのURL、ユーザー名のうち、少なくとも1つを指定してください。ほかのフィールドはすべて任意です。
+
+### 返信の対象と入力の別名
 
 次の主要なフィールドを使ってください。
 
@@ -171,33 +247,35 @@ XquikのX Reply Scraperは、Apify MCP、APIクライアント、x402、Skyfire�
 
 形式が正しくない対象や未対応の対象があっても、Actorは失敗しません。有効な対象が1つも残らない場合、実行は直し方を示す診断を書き込みます。
 
-## 収集範囲の戦略
+### 収集範囲の戦略
 
 Actorが返信を収集する方法を選んでください。ほとんどのジョブには自動モードが合います。
 
-### 自動の完全収集
+#### 自動の完全収集
 
 ほとんどのジョブでは `collectionStrategy: "auto"` を使ってください。指定した範囲で取得できる返信をすべて収集します。範囲、深さ、並び順、著者の設定は、上限より前に適用されます。ルート以外の対象の下にある返信も含みます。Xがスレッドの一部を非表示にしている場合、非表示の返信の数をステータスに示します。ほかの `collectionStrategy` の値では、モードが切り替わることはありません。
 
 診断情報のカバレッジの数値は、Xにそれ以上返信がないことの証明にはなりません。上限、データの欠落、エラーで、実行が未完了になることがあります。
 
-### 直接の返信
+#### 直接の返信
 
 Xの表示順で直接の返信を取得するには、`collectionStrategy: "replies"` を使います。保存したカーソルに対応しています。
 
-### 会話検索
+#### 会話検索
 
 会話を幅広く集めるには、`collectionStrategy: "conversationSearch"` を使います。
 
-### スレッド全体の文脈
+#### スレッド全体の文脈
 
 元の会話の文脈を読み取るには、`collectionStrategy: "thread"` を使います。ルートのポストを深さ0として残すには、`includeOriginalPost: true` を設定します。
 
-### 非表示の返信
+#### 非表示の返信
 
-ポストの著者が非表示にした返信には、`collectionStrategy: "hiddenReplies"` を使います。Xはこれらを古い順に、それぞれへの返信とともに並べます。各行には `resultType: "hiddenReply"` が入ります。非表示の返信がないポストは、行を返しません。
+デフォルトの `auto` 戦略は、ポストの著者が非表示にした返信も加えます。それぞれが `resultType: "hiddenReply"` の行になり、通常の行と同じ料金がかかり、`maxItems` に数えられます。実行がこれらを読み取るのは、ポストの返信数がXに表示されている数より多い場合だけです。そのため、非表示の返信がないポストに追加の費用はかかりません。除外するには、`includeHiddenReplies: false` を設定します。
 
-## 直接の返信と入れ子の返信の設定
+非表示の返信だけを取得するには、`collectionStrategy: "hiddenReplies"` を使います。Xはこれらを古い順に、それぞれへの返信とともに並べます。非表示の返信がないポストは、行を返しません。
+
+### 直接の返信と入れ子の返信の設定
 
 結果の形は `scope` で選びます。
 
@@ -209,7 +287,7 @@ Xの表示順で直接の返信を取得するには、`collectionStrategy: "rep
 
 入れ子の深さは `maxDepth` で制限します。Xが会話の上位のポストを省いた場合、親へのリンクが欠けることがあります。Actorは、取得できる範囲で最も正確な深さを残します。
 
-## 並び替え
+### 並び替え
 
 `sort` には次の値を使います。
 
@@ -224,11 +302,11 @@ Xの検索では、一部の古い返信のいいね数が実際より少なく�
 
 互換用の別名 `sortBy` と `queryType` も引き続き使えます。
 
-## 返信のフィルター
+### 返信のフィルター
 
 対応するフィルターはすべて、データセットへの書き込み前に適用されます。
 
-### テキストとエンティティのフィルター
+#### テキストとエンティティのフィルター
 
 | 入力             | 動作                              |
 | ---------------- | --------------------------------- |
@@ -241,7 +319,7 @@ Xの検索では、一部の古い返信のいいね数が実際より少なく�
 | `cashtags`       | 1つ以上のキャッシュタグを求める   |
 | `mentioning`     | @メンションを求める               |
 
-### 著者と言語のフィルター
+#### 著者と言語のフィルター
 
 | 入力                    | 動作                                   |
 | ----------------------- | -------------------------------------- |
@@ -252,11 +330,11 @@ Xの検索では、一部の古い返信のいいね数が実際より少なく�
 | `blueVerifiedOnly`      | X Premiumの認証を求める                |
 | `excludeOriginalAuthor` | 元のポストの著者による自己返信を除く   |
 
-### エンゲージメントのフィルター
+#### エンゲージメントのフィルター
 
 `minLikes`、`minReplies`、`minRetweets`、`minQuotes`、`minViews`、`minBookmarks` を使います。別名の `minFaves` は `minLikes` に対応します。
 
-### メディアと日時のフィルター
+#### メディアと日時のフィルター
 
 - 公開メディア付きの返信に絞るには、`hasMediaOnly: true` を設定します。
 - `mediaType` を `any`、`image`、`video`、`gif`、`link` のいずれかに設定します。
@@ -264,46 +342,9 @@ Xの検索では、一部の古い返信のいいね数が実際より少なく�
 - `until` には、範囲に含めない終了日時を設定します。
 - 互換用の別名として `sinceTime` と `untilTime` も使えます。
 
-## 出力フィールド
+## 出力
 
-データセットと実行レポートのスキーマは、返すすべてのフィールドを説明します。プリミティブなフィールドには、エージェントや自動生成された連携のための例も付きます。
-
-フルの返信行には、次の主なフィールドが入ることがあります。
-
-| フィールド          | 説明                                                                |
-| ------------------- | ------------------------------------------------------------------- |
-| `id`                | 返信のID                                                            |
-| `text`              | 返信のテキスト                                                      |
-| `fullText`          | 長文の返信テキスト                                                  |
-| `createdAt`         | 返信のタイムスタンプ                                                |
-| `lang`              | Xの言語コード                                                       |
-| `url`               | 返信への直接URL                                                     |
-| `conversationId`    | Xの会話ID                                                           |
-| `inReplyToId`       | 直接の親のID                                                        |
-| `inReplyToUserId`   | 親の著者のID                                                        |
-| `inReplyToUsername` | 親のユーザー名                                                      |
-| `likeCount`         | いいね数                                                            |
-| `replyCount`        | 子の返信数                                                          |
-| `retweetCount`      | リポスト数                                                          |
-| `quoteCount`        | 引用数                                                              |
-| `viewCount`         | 表示回数                                                            |
-| `bookmarkCount`     | ブックマーク数                                                      |
-| `author`            | 取得できる公開の著者メタデータ                                      |
-| `media`             | 画像、動画、GIF、バリアント                                         |
-| `entities`          | ハッシュタグ、キャッシュタグ、メンション、URL、動画のタイムスタンプ |
-| `quoted_tweet`      | 取得できる場合の引用元ポスト                                        |
-| `retweeted_tweet`   | 取得できる場合のリポスト元ポスト                                    |
-
-フルの行には、取得できる元のメタデータも残ります。
-
-- ポストの種類のフィールドは `type`、`isReply`、`isQuoteStatus`、`isNoteTweet`、`isLimitedReply`、`isTranslatable` です。
-- テキストの詳細は `displayTextRange`、`noteTweet`、`article`、`card` です。
-- ラベルと通知は `contentDisclosure`、`communityNote`、`possiblySensitive`、`tombstone`、`exclusiveContent` です。
-- 会話の詳細は `conversationControl`、`limitedActions`、`unmentionedUserIds` です。
-- 文脈のフィールドは `source`、`place`、`communityId`、`reactionContext`、`postCta` です。
-- 編集と表示可否のフィールドは `edit`、`previousCounts`、`viewState`、`authorUnavailable` です。
-
-フラットな行には、会話の系統、元データの詳細、結果の種類、スキーマのバージョンが残ります。正確なフィールドはOpenAPIを参照してください。
+返信の各行はJSONオブジェクトです。データセットと実行レポートのスキーマがすべてのフィールドを説明するので、AIエージェントは推測せずに行を読み取れます。データセットはJSON、CSV、Excel、HTMLでエクスポートできます。
 
 ### 著者のメタデータ
 
@@ -352,35 +393,37 @@ Xの検索では、一部の古い返信のいいね数が実際より少なく�
 
 サンプル値は説明用です。実際の実行ではライブデータが返ります。
 
-## 出力モード
+### 出力モード
 
 データセットの各行の幅を選んでください。
 
-### コンパクト
+#### コンパクト
 
 データセットの列を絞るには `outputMode: "compact"` を設定します。テキスト、会話、著者、エンゲージメント、メディアのフィールドは残ります。
 
-### フル
+#### フル
 
 対応するすべての公開フィールドを残すには `outputMode: "full"` を設定します。
 
-### リッチ
+#### リッチ
 
 1行あたりのデータを最も多くするには、`outputMode: "rich"` を設定します。リッチな行は、フルの列をすべて残し、末尾に `hasCommunityNotes`、`quotedTweetPermalink`、`unavailableAuthorId`、メディアの `sourceUser` を加えます。
 
-### Raw
+#### Raw
 
 `raw` の下にサニタイズ済みの元データのスナップショットを加えるには、`outputMode: "raw"` を設定します。
 
-### 入れ子またはフラット
+#### 入れ子またはフラット
 
 デフォルトの `flat` レイアウトは、入れ子のオブジェクトを残したまま、表向けの著者フィールドを加えます。加えたフラットなフィールドを省くには、`outputPreset: "nested"` を設定します。
 
-### フィールドの命名
+#### フィールドの命名
 
 `fieldStyle` を `source`、`camelCase`、`snake_case` のいずれかに設定します。Actorは、名前が衝突する元のキーを上書きしないようにします。
 
-## 上限、課金、継続
+## 実行オプション
+
+### 上限、課金、継続
 
 `maxItems` は、実行全体で配信する行数を制限します。`maxItemsPerTarget` は、ポストやプロフィールごとの行数を制限します。
 
@@ -390,40 +433,15 @@ Actorは、出力と課金の前に重複した行を除きます。異なる対
 
 ページ数の上限で止まった実行の後は、デフォルトのキーバリューストアから `next-cursors` を読み取ってください。その対象を続けるには、カーソルを1つ `startCursor` に渡します。
 
-### Apifyのタイムアウト
+#### Apifyのタイムアウト
 
 デフォルトのApifyタイムアウトは `0` なので、実行に時間制限はありません。Actorは、上限に達するか、対象のデータがなくなるまで続けます。有限のApifyタイムアウトを設定することもできます。その場合、`completionReason: "deadline_reached"` は、その上限が近いことを示します。Actorは上限の前に返信とレポートを保存し、正常に終了します。配信済みの返信の課金は1回だけです。終わっていない対象は、後から再開できます。
 
-## 抽出が不完全な場合
-
-中断された実行は、無料の `partial` 診断を書き込みます。取得済みの結果はそのまま残ります。再試行する前に `availableResults`、`failedTargets`、`retryable`、`nextAction` を確認してください。Actorの正常終了が示すのは配信の完了です。抽出が最後まで終わったことは意味しません。
-
-ステータスは、早期停止の原因をすべて示します。`stopCauses` は各原因を挙げ、それぞれに `message`、`retryable`、`nextAction` を付けます。原因は `target_not_found`、`target_failed`、`page_limit`、`reply_reach`、`deadline_reached` です。`reply_reach` は、Xがスレッドの一部しか返さなかったことを示します。
-
-存在しないポストやアカウントは、失敗として数えません。ステータスは、"X has no match for 1 target." のようにそれを示します。`stopCauses` に入るのは、別の原因で実行が止まった場合だけです。いずれかの原因が再試行可能なら、実行も `retryable` になります。
-
-## 診断
-
-成功したデータ行は `resultType: "reply"` を使います。データなしで終わった実行は、`diagnostics` に無料のレコードをちょうど1件書き込みます。そのレコードが直し方を示します。
-
-実行ステータスは、実行が止まった理由を示します。課金された結果と読み取った対象の数も数えます。問題が起きた実行は、入力なしや無効な入力での終了も含めて、必ず `run-report` を書き込みます。大規模な実行も書き込みます。問題なく終わった小規模な実行は書き込まず、Apifyの利用料を節約します。毎回書き込むには `alwaysSaveRunRecords` をオンにしてください。
-
-レポートのスキーマは、完了状況、課金、失敗、保存したカーソルを説明します。`version` フィールドは、公開されているActorのソースの正確なバージョンを示します。
-
-`status` フィールドは次の値を使います。
-
-- `no-input`
-- `invalid-input`
-- `replies-incomplete`
-- `zero-output`
-- `aborted`
-- `unexpected-error`
-
-## APIの例
+### APIの例
 
 どの例も、XquikのX Reply Scraperを実行してデータセットのアイテムを返します。`<APIFY_API_TOKEN>` は、自分のApify APIトークンに置き換えてください。
 
-### JavaScript
+#### JavaScript
 
 ```javascript
 import { ApifyClient } from 'apify-client';
@@ -442,7 +460,7 @@ const { items } = await client.dataset(run.defaultDatasetId).listItems();
 console.log(items);
 ```
 
-### Python
+#### Python
 
 ```python
 from apify_client import ApifyClient
@@ -459,7 +477,7 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     print(item)
 ```
 
-### cURL
+#### cURL
 
 ```bash
 actor=xquik~x-reply-scraper
@@ -470,13 +488,26 @@ curl "https://api.apify.com/v2/acts/$actor/run-sync-get-dataset-items" \
   -d '{"tweetIds":["2082577277246972300"],"maxItems":100}'
 ```
 
-## 自動化と連携
+### 自動化と連携
 
 XquikのX Reply Scraperは、Apifyのスケジュール、Webhook、APIクライアントから実行できます。Make、Zapier、n8n、Googleスプレッドシート、クラウドストレージとも連携できます。エージェントは[Apify MCPサーバー](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。
 
 対象となるエージェントのワークフローでは、[x402](https://docs.apify.com/integrations/x402)や[Skyfire](https://docs.apify.com/integrations/skyfire)も使えます。
 
-Xquikは、47個のダッシュボードツール、REST API、署名付きWebhook、MCPサーバーも提供しています。
+Xquikは、53個のダッシュボードツール、REST API、署名付きWebhook、MCPサーバーも提供しています。
+
+### AIエージェントとMCPへの対応
+
+XquikのX Reply Scraperは、Apify MCP、APIクライアント、x402、Skyfireから実行できます。
+
+- 限定された権限で、無関係なApifyアカウントのデータを守ります。
+- イベント課金で、費用は配信した結果に連動します。
+- エージェント決済と両立させるため、スタンバイモードはオフのままです。
+- 型付きのスキーマが、返信、実行レポート、継続用カーソルを記述します。
+- 上限付きのデフォルト値で、エージェントが誤って無制限に実行するのを防ぎます。
+- 安定した `camelCase` と `snake_case` のモードで、ツールをつなぎやすくなります。
+- 診断行には、ステータス、メッセージ、復旧のためのアクションが入ります。
+- 実行レポートには、正確な結果、停止理由、課金見積もりが入ります。
 
 ### 常に最新のビルドを使う
 
@@ -511,9 +542,49 @@ Apifyは、特定のビルド番号を `latest` に転送しません。固定�
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier): すべてのポストについて、独自のカテゴリー、スコア、はい/いいえの質問にAIが答えます。既定の分析が自分のラベルに合わないときに使います。分析済みポスト1件あたり$0.0003から。
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer): AIによる8つの特性の回答から、すべてのポストについて0から100のViral Scoreと判定を推定します。ポストが広がる理由や伸びない理由を調べるときに使います。分析済みポスト1件あたり$0.0003から。
 
+## スクレイピング以外の機能も必要ですか？
+
+Xquikは、53個のダッシュボードツール、REST API、署名付きWebhook、MCPサーバーも提供しています。
+
+- [APIドキュメント](https://docs.xquik.com/introduction): REST APIのガイド
+- [ポストの返信API](https://docs.xquik.com/api-reference/x/tweet-replies): ポストへの返信を取得します
+- [非表示の返信API](https://docs.xquik.com/api-reference/x/tweet-hidden-replies): 著者が非表示にした返信を取得します
+- [スレッドAPI](https://docs.xquik.com/api-reference/x/tweet-thread): スレッド全体を取得します
+- [ユーザーの返信API](https://docs.xquik.com/api-reference/x/user-replies): ユーザーの返信を取得します
+- [MCPサーバー](https://docs.xquik.com/mcp/overview): 対応しているツールを確認できます
+- [Webhook](https://docs.xquik.com/webhooks/overview): 署名付きのイベント配信
+
 ## よくある質問
 
 よくある質問に答えたあと、サポートを受けられる場所を案内します。
+
+### ポストのコメントをスクレイピングするには？
+
+ポストのURLを `startUrls` に貼り付けて、「Start」をクリックしてください。Xではコメントを返信と呼ぶため、コメント1件が返信の1行になります。
+
+### 多数のポストの返信を一度にスクレイピングできますか？
+
+はい。1回の実行に、多数のポストのURLやポストIDを貼り付けてください。各返信には、元のポストが `sourceTarget` に残ります。
+
+### 入れ子の返信も含まれますか？
+
+はい。デフォルトの `scope` は、直接の返信と入れ子の返信を収集します。ポストへの返信だけが必要な場合は、`scope` を `direct` に設定してください。`maxDepth` で、実行がたどる深さを制限できます。
+
+### 著者が非表示にした返信も取得できますか？
+
+はい。デフォルトの `auto` 戦略は、それらを `hiddenReply` の行として加えます。除外するには、`includeHiddenReplies: false` を設定してください。
+
+### 返信をいいね数や日付で並べ替えられますか？
+
+はい。`sort` を設定すると、返信をいいね数で順位付けしたり、新しい順や古い順に並べたりできます。
+
+### 返信をCSVやExcelにエクスポートできますか？
+
+はい。データセットはCSV、Excel、JSON、HTMLでエクスポートできます。フラット出力では、1行に1件の返信が入り、その横に著者のフィールドが並びます。
+
+### ポストではなくユーザーの返信をスクレイピングできますか？
+
+はい。プロフィールのURLかユーザー名を貼り付けてください。実行は、そのユーザーの返信タイムラインを読み取ります。
 
 ### X APIキーやログインは必要ですか？
 
@@ -535,7 +606,7 @@ Xがスレッドの一部を非表示にしている場合、非表示の返信�
 
 ### どこでサポートを受けられますか？
 
-Actorページでissueを開くか、実行IDを添えて[support@xquik.com](mailto:support@xquik.com)に連絡してください。
+Actorページでissueを開くか、実行IDを添えて<support@xquik.com>に連絡してください。
 
 ### カスタムソリューションを依頼できますか？
 

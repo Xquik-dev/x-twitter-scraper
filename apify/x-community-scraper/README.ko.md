@@ -30,29 +30,96 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 > Xquik은 독립적인 제3자 서비스입니다. X Corp와 제휴 관계가 없습니다.
 > "Twitter"와 "X"는 X Corp의 상표입니다.
 
-## 커뮤니티 데이터 & 필터
+## X Community Scraper는 무엇을 하나요?
 
-- X가 공개하는 경우 커뮤니티 메타데이터 & 규칙.
-- 키워드로 찾은 커뮤니티와 전체 레코드.
-- Technology 같은 주제의 가장 인기 있는 커뮤니티.
-- X가 가입을 추천하는 커뮤니티 & 모든 커뮤니티 주제.
-- 최신순 또는 인기순으로 정렬한 커뮤니티 게시물.
-- 커뮤니티의 미디어 탭: 사진이나 동영상이 있는 게시물.
-- 최신순 또는 인기순 정렬을 지원하는 키워드 검색.
-- 커뮤니티 멤버 & 모더레이터.
-- 과금 전에 실행되는 게시물, 멤버 & 모더레이터 필터.
-- 한 실행에서 여러 커뮤니티 & 리소스 처리.
-- 전체 상한 & 리소스별 상한.
-- Apify가 실행을 다시 시작해도 이어서 진행.
-- 과금 전 중복 제거.
+Xquik의 X Community Scraper는 URL이나 ID로 공개 X(Twitter) 커뮤니티를 읽습니다.
+커뮤니티마다 정보, 게시물, 미디어, 키워드 검색 결과, 멤버 & 모더레이터를
+반환합니다. 키워드나 주제로 커뮤니티를 찾고, X가 추천하는 커뮤니티도 나열합니다.
 
-## X 커뮤니티 스크랩 방법
+### 주요 기능
 
-1. Apify Console에서 Xquik의 X Community Scraper를 여세요.
+- 실행 1번으로 여러 커뮤니티 & 리소스를 읽습니다.
+- 규칙, 가입 질문, 개설자, 관리자 & 주제가 담긴 커뮤니티 정보를 받습니다.
+- 게시물을 최신순으로 받거나, X가 가장 높게 평가한 인기 게시물을 받습니다.
+- 미디어 탭을 수집하거나 키워드로 커뮤니티 게시물을 검색합니다.
+- 멤버 & 모더레이터를 내보내거나 이름으로 멤버를 찾습니다.
+- 키워드나 주제로 커뮤니티를 찾고 전체 레코드를 받습니다.
+- 날짜, 언어, 미디어 & 참여로 게시물을 필터링합니다.
+- 오디언스 규모, 계정 연령 & 인증 여부로 멤버를 필터링합니다.
+- 필터 & 중복 제거는 과금 전에 실행됩니다.
+- Apify가 실행을 다시 시작해도 전달된 행 & 진행 상황은 유지됩니다.
+
+### 활용 사례
+
+- 틈새 커뮤니티의 멤버로 리드 목록을 만드세요.
+- 사용자 커뮤니티에서 제품 피드백 & 기능 요청을 추적하세요.
+- 창업자들 사이의 출시 소식, 채용 게시물 & 투자 뉴스를 찾으세요.
+- 규모, 주제 & 활동량으로 커뮤니티를 비교하세요.
+- 커뮤니티에 게시하기 전에 그 커뮤니티의 규칙을 읽어 보세요.
+- 커뮤니티의 모더레이터 & 팔로워가 가장 많은 멤버를 찾으세요.
+- 크리에이티브 리서치를 위해 이미지나 동영상이 있는 게시물을 수집하세요.
+
+### X Community Scraper로 어떤 데이터를 추출할 수 있나요?
+
+커뮤니티 행은 `resultType: "community"`를 사용합니다. 주요 필드는 다음과
+같습니다.
+
+| 필드              | 설명                                         |
+| ----------------- | -------------------------------------------- |
+| `id`              | 커뮤니티 ID                                  |
+| `name`            | 커뮤니티 이름                                |
+| `description`     | 커뮤니티 설명                                |
+| `url`             | 커뮤니티 URL                                 |
+| `member_count`    | 멤버 수                                      |
+| `moderator_count` | 모더레이터 수                                |
+| `rules`           | 커뮤니티 규칙                                |
+| `question`        | 가입하는 사용자에게 커뮤니티가 묻는 질문     |
+| `primary_topic`   | X가 커뮤니티를 분류한 주제                   |
+| `searchTags`      | X가 커뮤니티를 찾을 때 쓰는 태그             |
+| `creator`         | 개설자의 공개 프로필                         |
+| `admin`           | 관리자의 공개 프로필                         |
+| `membersFacepile` | X가 커뮤니티 페이지에서 미리 보여 주는 멤버  |
+| `is_nsfw`         | 커뮤니티가 민감한 콘텐츠로 표시되었는지 여부 |
+| `banner`          | 배너 URL, 크기 & 주요 색상                   |
+| `sourceTarget`    | 입력한 URL, ID, 키워드 또는 주제             |
+
+리소스마다 고유한 유형의 행이 추가됩니다.
+
+| `resultType`         | 리소스 또는 입력         | 행 1개당                      |
+| -------------------- | ------------------------ | ----------------------------- |
+| `community`          | `info`, 키워드, 주제     | 커뮤니티                      |
+| `communityTweet`     | `tweets`, `search`       | 게시물                        |
+| `communityMedia`     | `media`                  | 사진이나 동영상이 있는 게시물 |
+| `communityMember`    | `members`, `memberNames` | 멤버                          |
+| `communityModerator` | `moderators`             | 모더레이터                    |
+| `communityTopic`     | `listTopics`             | 주제                          |
+
+게시물 행에는 `text`, `createdAt`, `likeCount`, `replyCount`, `retweetCount`,
+`viewCount`, `media` & `author` 프로필이 들어 있습니다. 멤버 & 모더레이터
+행에는 `username`, `followers`, `verified` & `communityRole` 같은 프로필 필드가
+들어 있습니다.
+
+## X Community Scraper로 커뮤니티 데이터를 스크랩하려면 어떻게 하나요?
+
+Apify Console에서 다음 단계를 따르세요.
+
+1. [태스크 예시](#태스크-예시)나 Input 탭을 여세요.
 2. 커뮤니티 URL은 `startUrls`에, ID는 `communityIds`에 붙여넣으세요.
 3. `resources`를 고르고 `sinceDate`나 `minLikes` 같은 필터를 추가하세요.
-4. `maxItems`로 전달할 행 수의 상한을 정하고 Start를 클릭하세요.
-5. 데이터셋을 JSON, CSV 또는 Excel로 내려받거나 Apify API를 사용하세요.
+4. `maxItems`를 설정하고 Start를 클릭하세요.
+5. 데이터셋을 JSON, CSV, Excel 또는 HTML로 내보내세요.
+
+아래 레시피는 각각 그대로 쓸 수 있는 완전한 입력입니다.
+
+### 커뮤니티 정보 & 최근 게시물 가져오기
+
+```json
+{
+  "communityIds": ["1493446837214187523"],
+  "resources": ["info", "tweets"],
+  "maxItems": 200
+}
+```
 
 `startUrls`는 각 URL을 일반 문자열 또는 `{ "url": "..." }` 객체로 받습니다.
 
@@ -65,21 +132,63 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 }
 ```
 
-## 입력
+### 인기 게시물 수집하기
 
 ```json
 {
   "communityIds": ["1493446837214187523"],
-  "resources": ["info", "tweets", "members", "moderators"],
-  "maxItems": 10000
+  "resources": ["tweets"],
+  "postsOrder": "Top",
+  "minLikes": 50,
+  "maxItems": 100
 }
 ```
 
-키워드 검색을 하려면 `resources`에 `"search"`를 추가하고 `query`를 지정하세요.
-미디어 탭을 받으려면 `"media"`를 추가하세요. 인기 게시물을 받으려면
-`postsOrder`를 `Top`으로 설정하세요.
+X가 가장 높게 평가한 게시물을 받으려면 `postsOrder`를 `Top`으로 설정하세요.
+미디어 탭을 받으려면 `resources`에 `"media"`를 추가하세요.
 
-대신 커뮤니티를 찾으려면 키워드나 주제를 보내세요.
+### 커뮤니티 게시물 검색하기
+
+```json
+{
+  "communityIds": ["1493446837214187523"],
+  "resources": ["search"],
+  "query": "pricing",
+  "queryType": "Latest",
+  "maxItems": 100
+}
+```
+
+### 멤버 & 모더레이터 내보내기
+
+```json
+{
+  "communityIds": ["1493446837214187523"],
+  "resources": ["members", "moderators"],
+  "minFollowers": 1000,
+  "maxItems": 1000
+}
+```
+
+멤버 필터는 멤버 & 모더레이터 행에 적용됩니다. 필터에서 걸러진 행은 데이터셋에
+들어가지 않으므로 요금이 부과되지 않습니다.
+
+### 이름으로 멤버 찾기
+
+```json
+{
+  "communityIds": ["1493446837214187523"],
+  "memberNames": ["marckohlbrugge"],
+  "maxItems": 100
+}
+```
+
+x.com의 멤버 검색처럼 X는 이름마다 일치하는 계정을 최대 10개까지 확인합니다.
+찾은 멤버는 각각 `communityRole`이 담긴 `communityMember` 행 1개가 됩니다.
+`memberNames`를 사용하는 실행은 `resources`에 지정하지 않은 다른 리소스를 읽지
+않습니다.
+
+### 키워드나 주제로 커뮤니티 찾기
 
 ```json
 {
@@ -94,16 +203,123 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 추천하는 커뮤니티를 받으려면 `includeSuggested`를 켜세요. 추천은 실행마다 다를
 수 있습니다. 모든 주제 & 하위 주제를 받으려면 `listTopics`를 켜세요.
 
-문제없이 끝난 작은 실행은 `run-report`를 건너뛰어 Apify 사용량을 아낍니다. 모든
-실행에서 보고서를 기록하려면 `alwaysSaveRunRecords`를 켜세요.
+## 태스크 예시
+
+공개 태스크 50개 중에서 고르세요. 각 태스크에는 범위가 정해진 입력 & 그에 맞는
+데이터셋 뷰가 있습니다. 실행하기 전에 태스크를 원하는 대로 수정하세요.
+
+- [X 커뮤니티 개요 가져오기](https://apify.com/xquik/x-community-scraper/examples/get-an-x-community-overview)
+- [최근 게시물과 함께 X 커뮤니티 세부 정보 가져오기](https://apify.com/xquik/x-community-scraper/examples/get-community-details-with-recent-posts)
+- [X 커뮤니티에서 기술 분야 인기 게시물 찾기](https://apify.com/xquik/x-community-scraper/examples/find-top-technology-posts-in-a-community)
+- [X 커뮤니티 멤버 내보내기](https://apify.com/xquik/x-community-scraper/examples/export-x-community-members)
+- [X 커뮤니티의 인증된 멤버 내보내기](https://apify.com/xquik/x-community-scraper/examples/export-verified-community-members)
+- [X 커뮤니티의 모더레이터 나열하기](https://apify.com/xquik/x-community-scraper/examples/list-x-community-moderators)
+- [규모 & 주제로 개발자 커뮤니티 비교하기](https://apify.com/xquik/x-community-scraper/examples/compare-developer-communities-by-size)
+- [게시하기 전에 X 커뮤니티 규칙 읽기](https://apify.com/xquik/x-community-scraper/examples/read-community-rules-before-you-post)
+- [스타트업 커뮤니티에서 투자 게시물 찾기](https://apify.com/xquik/x-community-scraper/examples/find-funding-posts-in-a-startup-community)
+- [소프트웨어 엔지니어링 커뮤니티에서 채용 게시물 찾기](https://apify.com/xquik/x-community-scraper/examples/find-hiring-posts-in-a-software-community)
+- [오디언스가 큰 스타트업 커뮤니티 멤버 찾기](https://apify.com/xquik/x-community-scraper/examples/find-startup-community-members-with-big-audiences)
+- [작은 X 커뮤니티를 처음부터 끝까지 점검하기](https://apify.com/xquik/x-community-scraper/examples/audit-a-small-community-end-to-end)
+
+## X 커뮤니티 스크랩 비용은 얼마인가요?
+
+Xquik의 X Community Scraper는 모든 Apify 요금제에서 전달된 행 1개당
+$0.00015입니다. Apify 플랫폼 사용료는 Apify가 따로 청구합니다. Xquik은 전달된
+데이터 행 1개마다 한 번 과금합니다. 진단은 `diagnostics` 출력에서 무료로
+제공합니다.
+
+- Xquik 구독은 필요 없습니다.
+- 시작, 커뮤니티, 리소스, 쿼리 요금을 따로 내지 않습니다.
+- 찾은 커뮤니티는 전체 레코드가 있든 없든 행 1개 요금입니다.
+- 필터 & 중복 제거는 과금 전에 실행됩니다. 걸러지거나 중복된 행에는 요금이
+  부과되지 않습니다.
+- Apify의 최대 총 요금 설정이 전달되는 행 수를 제한합니다.
+
+문제가 생긴 실행이나 큰 실행은 `run-report` 레코드도 기록합니다. 문제없이 끝난
+작은 실행은 이 레코드를 건너뛰어 Apify 사용량을 아낍니다. 모든 실행에서 보고서를
+기록하려면 `alwaysSaveRunRecords`를 켜세요.
+
+실행 1번에 쓸 수 있는 비용의 상한을 정하려면 [실행 옵션](#실행-옵션)을
+참고하세요.
+
+## 빈 결과, 일부만 끝난 실행 & 중단된 실행
+
+Xquik의 X Community Scraper는 결과가 없거나, 일부만 나왔거나, 중단된 실행의
+원인을 무료로 설명합니다. 실행 상태는 실행이 멈춘 이유를 알려 줍니다. 과금된
+결과 & 읽은 대상의 수도 함께 알려 줍니다.
+
+### 빈 결과
+
+결과가 없는 실행은 상태 메시지에서 대상 & 필터를 확인하라고 안내합니다. 필터에서
+걸러진 행은 결과 상한을 차지하지 않습니다. 모든 대상을 읽고도 행을 받지 못한
+실행은 레코드를 기록하지 않습니다. 대신 상태 메시지에서 이유 & 바꿀 점을 알려
+줍니다. 이 Actor는 X가 공개한 커뮤니티만 반환합니다. 제공되는 필드는 커뮤니티마다
+다릅니다.
+
+### 일부만 끝난 실행
+
+추출이 중단되면 무료 `partial` 진단을 기록합니다. 전달된 행은 데이터셋에 그대로
+남습니다. 다시 시도하기 전에 `availableResults`, `failedTargets`, `retryable` &
+`nextAction`을 확인하세요. Actor가 성공으로 종료되면 전달이 끝났다는 뜻입니다.
+추출이 모두 끝났다는 뜻은 아닙니다.
+
+### 중단 원인
+
+실행 상태는 실행이 일찍 멈춘 원인을 모두 알려 줍니다. `stopCauses`는 원인마다
+`message`, `retryable` & `nextAction`을 따로 담아 나열합니다. 원인은
+`target_not_found`, `target_failed`, `pagination_safety_limit` &
+`deadline_reached`입니다. 찾을 수 없는 대상은 다른 원인으로 실행이 멈췄을 때만
+목록에 들어갑니다. 원인 중 하나라도 재시도할 수 있으면 실행도 `retryable`입니다.
+이 Actor는 자체 시간 제한을 두지 않습니다.
+
+## 입력
+
+Input 탭에 모든 옵션이 나와 있습니다. 커뮤니티 URL이나 ID, 키워드, 주제를
+입력하거나 `includeSuggested` 또는 `listTopics`를 켜세요. 나머지 필드는 모두
+선택 사항입니다.
+
+| 필드                           | 기능                                                         |
+| ------------------------------ | ------------------------------------------------------------ |
+| `startUrls`                    | x.com의 커뮤니티 URL                                         |
+| `communityIds`                 | 숫자로 된 커뮤니티 ID                                        |
+| `resources`                    | `info`, `tweets`, `media`, `search`, `members`, `moderators` |
+| `query`                        | `search` 리소스에 쓸 키워드                                  |
+| `queryType`                    | 키워드 검색의 `Latest` 또는 `Top` 정렬                       |
+| `postsOrder`                   | 게시물의 `Latest` 또는 `Top` 정렬                            |
+| `memberNames`                  | 멤버 중에서 찾을 이름이나 사용자 아이디                      |
+| `searchTerms`                  | 커뮤니티를 찾을 키워드                                       |
+| `topics`                       | `Technology` 같은 주제 이름이나 ID                           |
+| `includeSuggested`             | X가 가입을 추천하는 커뮤니티 추가                            |
+| `listTopics`                   | 모든 커뮤니티 주제 & 하위 주제 추가                          |
+| `includeDetails`               | 키워드나 주제로 찾은 커뮤니티에 전체 레코드 추가             |
+| `maxItems`                     | 실행 전체에서 전달할 행 수의 상한                            |
+| `maxItemsPerTarget`            | 커뮤니티 리소스마다 받을 행 수의 상한                        |
+| `sinceDate`, `untilDate`       | 날짜 범위 안의 게시물만 유지                                 |
+| `language`                     | 언어 코드 1개에 해당하는 게시물만 유지                       |
+| `mediaType`                    | 미디어 유형으로 게시물 유지: 이미지, 동영상, GIF, 링크, 없음 |
+| `minViews`, `minLikes`         | 조회수나 마음에 들어요 수가 기준 이상인 게시물만 유지        |
+| `minReplies`, `minRetweets`    | 답글 수나 재게시 수가 기준 이상인 게시물만 유지              |
+| `nativeRetweets`               | 네이티브 재게시만 유지                                       |
+| `verifiedOnly`                 | 인증된 작성자, 멤버 또는 모더레이터만 유지                   |
+| `minFollowers`, `maxFollowers` | 팔로워 수 범위 안의 멤버만 유지                              |
+| `minAccountAgeDays`            | 계정 연령이 이 일수 이상인 멤버만 유지                       |
+| `dedupeAcrossTargets`          | 과금 전에 여러 커뮤니티에서 중복된 행 제거                   |
+
+### 알맞은 입력 고르기
+
+- 빠르게 살펴보려면 기본 리소스인 `info` & `tweets`를 그대로 두세요.
+- 리드 목록을 만들려면 `members`를 고르고 `minFollowers` & `verifiedOnly`를
+  함께 쓰세요.
+- 제품 리서치에는 `search`를 고르고 `bug`나 `pricing` 같은 `query`를 지정하세요.
+- 크리에이티브 리서치에는 `media`를 고르고 `mediaType`을 설정하세요.
+- 커뮤니티를 찾으려면 ID 없이 `searchTerms`나 `topics`를 보내세요.
 
 ## 출력
 
-각 행의 `resultType`은 `community`, `communityTweet`, `communityMedia`,
-`communityMember`, `communityModerator`, `communityTopic` 중 하나입니다. 모든
-행에는 입력한 커뮤니티, 키워드 또는 주제를 가리키는 `sourceTarget`이 들어
-있습니다. Xquik의 X Community Scraper는 원본 필드를 그대로 두고 값을 지어내지
-않습니다.
+각 행은 JSON 객체입니다. 모든 행에는 입력한 커뮤니티, 키워드 또는 주제를
+가리키는 `sourceTarget`이 들어 있습니다. Xquik의 X Community Scraper는 원본
+필드를 그대로 두고 값을 지어내지 않습니다. 데이터셋 스키마에는 필드마다 제목 &
+설명이 있습니다.
 
 예시는 샘플 값입니다. 실제 결과는 실시간 데이터를 따릅니다. 커뮤니티 정보 행은
 다음과 같습니다.
@@ -112,40 +328,30 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 {
   "resultType": "community",
   "sourceTarget": "1493446837214187523",
+  "id": "1493446837214187523",
   "name": "Sample Community",
+  "description": "A place to share what you build.",
   "member_count": 1200,
-  "moderator_count": 4
+  "moderator_count": 4,
+  "primary_topic": "Technology"
 }
 ```
 
-## X 커뮤니티 스크랩 비용은 얼마인가요?
+데이터셋을 JSON, CSV, Excel 또는 HTML로 내보내세요.
 
-모든 Apify 요금제에서 전달된 행 1개당 $0.00015입니다. Apify 플랫폼 사용료는
-Apify가 따로 청구합니다.
+## 실행 옵션
 
-- 전달된 데이터 행 1개마다 한 번 과금합니다. 진단은 `diagnostics`에서 무료로
-  제공합니다.
-- 시작, 커뮤니티, 리소스, 쿼리 요금이 없습니다.
-- 찾은 커뮤니티는 전체 레코드가 있든 없든 행 1개 요금입니다.
-- 과금 전에 중복을 제거합니다.
+- 실행 비용의 상한을 정하려면 Apify의 최대 총 요금을 설정하세요. 예산 안에서
+  가장 많은 행을 받으려면 `maxItems`를 높게 두세요.
+- Apify API에서는 `maxTotalChargeUsd`를, Console에서는 Max cost per run을
+  설정하세요.
+- 모든 커뮤니티를 실행 1번에 넣으세요. 실행마다 Apify에 같은 시작 비용을 냅니다.
+- `maxItemsPerTarget`은 커뮤니티 리소스마다 행 수의 상한을 정합니다.
+- `maxConcurrency`는 동시에 실행할 커뮤니티 리소스 수를 정합니다. 기본값이
+  안전하면서 가장 빠른 설정입니다.
 
-## 제한 & 복구
-
-Xquik의 X Community Scraper는 한 실행에서 여러 커뮤니티 & 리소스를 읽습니다.
-Apify가 실행을 다시 시작해도 전달된 행 & 진행 상황은 유지됩니다. 이 Actor는 자체
-시간 제한을 두지 않습니다. X가 공개한 커뮤니티만 반환합니다. 제공되는 필드는
-커뮤니티마다 다릅니다.
-
-추출이 중단되면 무료 `partial` 진단을 기록합니다. 이미 받은 결과는 그대로
-남습니다. 다시 시도하기 전에 `availableResults`, `failedTargets`, `retryable` &
-`nextAction`을 확인하세요. Actor가 성공으로 종료되면 전달이 끝났다는 뜻입니다.
-추출이 모두 끝났다는 뜻은 아닙니다.
-
-실행 상태는 실행이 일찍 멈춘 원인을 모두 알려 줍니다. `stopCauses`는 원인마다
-`message`, `retryable` & `nextAction`을 따로 담아 나열합니다. 원인은
-`target_not_found`, `target_failed`, `pagination_safety_limit` &
-`deadline_reached`입니다. 찾을 수 없는 대상은 다른 원인으로 실행이 멈췄을 때만
-목록에 들어갑니다. 원인 중 하나라도 재시도할 수 있으면 실행도 `retryable`입니다.
+배포된 모든 수정 사항을 받으려면 모든 실행에서 `latest`를 선택하세요. 저장된
+태스크 & 스케줄은 자체 빌드 선택을 유지하므로 `latest`로 두세요.
 
 ## 관련 Xquik Actor
 
@@ -216,6 +422,22 @@ Apify가 실행을 다시 시작해도 전달된 행 & 진행 상황은 유지�
   추정합니다. 게시물이 왜 퍼지거나 묻히는지 분석할 때 사용하세요. 분석한
   게시물당 $0.0003부터입니다.
 
+## 스크랩 외에 더 필요한 기능이 있나요?
+
+Xquik은 대시보드 도구 53개, REST API, 서명된 웹훅 & MCP 서버도 제공합니다.
+
+- [API 문서](https://docs.xquik.com/introduction): REST API 가이드
+- [커뮤니티 정보 API](https://docs.xquik.com/api-reference/x/community-info):
+  커뮤니티 1개의 레코드 가져오기
+- [커뮤니티 게시물 API](https://docs.xquik.com/api-reference/x/community-tweets):
+  커뮤니티 게시물 가져오기
+- [커뮤니티 멤버 API](https://docs.xquik.com/api-reference/x/community-members):
+  커뮤니티 멤버 내보내기
+- [커뮤니티 찾기 API](https://docs.xquik.com/api-reference/x/community-find):
+  키워드로 커뮤니티 찾기
+- [MCP 서버](https://docs.xquik.com/mcp/overview): 지원 도구 확인하기
+- [웹훅](https://docs.xquik.com/webhooks/overview): 서명된 이벤트 전달
+
 ## 자주 묻는 질문
 
 자주 묻는 질문에 먼저 답하고, 이어서 도움받을 곳을 안내합니다.
@@ -225,6 +447,35 @@ Apify가 실행을 다시 시작해도 전달된 행 & 진행 상황은 유지�
 아니요. Xquik의 X Community Scraper는 X API 키, 로그인, 자격 증명이 모두 필요
 없습니다.
 
+### 커뮤니티 ID는 어떻게 찾나요?
+
+x.com에서 커뮤니티를 여세요. URL에서 `/i/communities/` 뒤에 오는 숫자가
+ID입니다. URL 전체를 `startUrls`에 붙여넣어도 됩니다.
+
+### X 커뮤니티 멤버를 CSV나 Excel로 내보낼 수 있나요?
+
+네. `members` 리소스를 고른 다음 데이터셋을 CSV, Excel, JSON 또는 HTML로
+내보내세요.
+
+### ID 없이 커뮤니티를 찾을 수 있나요?
+
+네. 키워드는 `searchTerms`에, 주제는 `topics`에 넣어 보내세요. 찾은 커뮤니티는
+각각 전체 레코드가 담긴 행 1개가 됩니다.
+
+### 커뮤니티의 인기 게시물을 받을 수 있나요?
+
+네. `postsOrder`를 `Top`으로 설정하세요. 가장 인기 있는 게시물만 남기려면
+`minLikes`나 `minViews`를 추가하세요.
+
+### 실행 1번에 커뮤니티를 몇 개까지 스크랩할 수 있나요?
+
+입력한 만큼 스크랩할 수 있습니다. `maxItems` & Apify 지출 한도가 행 수의 상한을
+정합니다.
+
+### 비공개 커뮤니티도 읽나요?
+
+아니요. Xquik의 X Community Scraper는 X가 공개한 커뮤니티만 반환합니다.
+
 ### X 커뮤니티를 스크랩해도 합법인가요?
 
 Xquik의 X Community Scraper는 공개 X 필드를 요청합니다. 결과에는 개인정보가 들어
@@ -233,10 +484,10 @@ Xquik의 X Community Scraper는 공개 X 필드를 요청합니다. 결과에는
 
 ### 실행 결과가 비어 있는 이유는 무엇인가요?
 
-먼저 무료 `diagnostics` 출력을 여세요. 결과가 없는 실행은 상태 메시지에서 대상 &
-필터를 확인하라고 안내합니다. `stopCauses`는 원인마다 따라 할 `nextAction`을
-알려 줍니다. 읽을 수 없는 입력이 있으면 실행이 하나씩 나열하고 해결 방법을 알려
-줍니다. Xquik의 X Community Scraper는 X가 공개한 커뮤니티만 반환합니다.
+먼저 실행 상태를 읽어 보세요. 결과가 없는 실행은 상태 메시지에서 대상 & 필터를
+확인하라고 안내합니다. 확인이 필요한 문제가 있으면 무료 `diagnostics` 출력이
+나타납니다. 그 안의 `stopCauses`는 원인마다 따라 할 `nextAction`을 알려 줍니다.
+읽을 수 없는 입력이 있으면 실행이 하나씩 나열하고 해결 방법을 알려 줍니다.
 
 ### API, 스케줄 & 연동을 사용할 수 있나요?
 
@@ -248,14 +499,14 @@ Scraper를 cron 일정에 맞춰 실행할 수 있습니다. 에이전트는
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp)를 사용합니다. 이전
 빌드가 꼭 필요하지 않다면 `latest`를 사용하세요.
 
-### 도움은 어디서 받을 수 있나요?
-
-Actor 페이지에서 이슈를 열거나 실행 ID와 함께 support@xquik.com으로 문의하세요.
-키-값 저장소의 무료 진단이 결과가 없거나, 일부만 나왔거나, 중단된 실행의 원인을
-설명합니다.
-
 ### 맞춤 솔루션을 받을 수 있나요?
 
 네. [xquik.com](https://xquik.com)을 방문하거나
 [API 문서](https://docs.xquik.com/introduction)를 읽어 보세요. 대시보드, API,
 MCP 서버 & 웹훅 안내가 있습니다.
+
+### 도움은 어디서 받을 수 있나요?
+
+Actor 페이지에서 이슈를 열거나 실행 ID와 함께 <support@xquik.com>으로
+문의하세요. 확인이 필요한 실행은 키-값 저장소의 무료 진단이 원인을 설명합니다.
+행을 받지 못한 실행은 상태 메시지에서 이유를 알려 줍니다.

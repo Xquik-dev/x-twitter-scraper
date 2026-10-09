@@ -31,30 +31,100 @@ platform kullanımını ayrıca faturalandırır. X API anahtarı ya da giriş g
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-## Topluluk verileri ve filtreler
+## X Community Scraper ne yapar?
 
-- X gösteriyorsa Topluluk metadata'sı ve kuralları.
-- Anahtar kelimeyle bulunan Topluluklar, tam kayıtlarıyla.
-- Technology gibi bir konunun en popüler Toplulukları.
-- X'in katılmanı önerdiği Topluluklar ve her Topluluk konusu.
-- En yeniden başlayarak veya popüler sıralamayla Topluluk gönderileri.
-- Bir Topluluğun Medya sekmesi: fotoğraflı veya videolu gönderiler.
-- En yeni veya popüler sıralamalı anahtar kelime araması.
-- Topluluk üyeleri ve moderatörleri.
-- Faturalamadan önce çalışan gönderi, üye ve moderatör filtreleri.
-- 1 çalıştırmada birçok Topluluk ve veri türü.
-- Genel bir sınır ve her veri türü için ayrı bir sınır.
-- Apify yeniden başlatsa da çalıştırma kaldığı yerden sürer.
-- Faturalamadan önce tekilleştirme.
+Xquik'in X Community Scraper'ı herkese açık X (Twitter) Topluluklarını
+URL'lerinden veya ID'lerinden okur. Her Topluluğun bilgilerini, gönderilerini,
+medyasını, anahtar kelime eşleşmelerini, üyelerini ve moderatörlerini döndürür.
+Toplulukları anahtar kelime veya konuyla da bulur ve X'in önerdiklerini listeler.
 
-## X Toplulukları nasıl kazınır
+### Temel özellikler
 
-1. Apify Console'da Xquik'in X Community Scraper'ını aç.
+- 1 çalıştırmada birçok Topluluğu ve veri türünü oku.
+- Topluluk bilgilerini kural, katılma sorusu, kurucu, yönetici ve konuyla al.
+- En yeni gönderileri ya da X'in en üste koyduğu popüler gönderileri topla.
+- Medya sekmesini topla ya da Topluluk gönderilerinde anahtar kelimeyle ara.
+- Üyeleri ve moderatörleri dışa aktar ya da üyeleri adıyla bul.
+- Toplulukları anahtar kelime veya konuyla, tam kayıtlarıyla birlikte bul.
+- Gönderileri tarih, dil, medya ve etkileşime göre filtrele.
+- Üyeleri kitle büyüklüğü, hesap yaşı ve onay durumuna göre filtrele.
+- Filtreleme ve tekilleştirme faturalamadan önce çalışır.
+- Apify çalıştırmayı yeniden başlatsa da teslim edilen satırlar ve ilerleme
+  korunur.
+
+### Kullanım alanları
+
+- Niş bir Topluluğun üyelerinden potansiyel müşteri listeleri oluştur.
+- Bir kullanıcı Topluluğundaki ürün geri bildirimlerini ve özellik isteklerini
+  takip et.
+- Kurucuların lansman, işe alım ve yatırım haberlerini bul.
+- Toplulukları büyüklük, konu ve etkinliğe göre karşılaştır.
+- Bir Topluluğa gönderi paylaşmadan önce kurallarını oku.
+- Bir Topluluğun moderatörlerini ve en çok takip edilen üyelerini bul.
+- Yaratıcı araştırma için görselli veya videolu gönderileri topla.
+
+### X Community Scraper hangi verileri çıkarabilir?
+
+Topluluk satırlarında `resultType: "community"` kullanılır. Başlıca alanlar
+şunlardır:
+
+| Alan              | Açıklama                                        |
+| ----------------- | ----------------------------------------------- |
+| `id`              | Topluluk ID'si                                  |
+| `name`            | Topluluk adı                                    |
+| `description`     | Topluluk açıklaması                             |
+| `url`             | Topluluk URL'si                                 |
+| `member_count`    | Üye sayısı                                      |
+| `moderator_count` | Moderatör sayısı                                |
+| `rules`           | Topluluk kuralları                              |
+| `question`        | Topluluğun katılan kullanıcıya sorduğu soru     |
+| `primary_topic`   | X'in Topluluğu sınıflandırdığı konu             |
+| `searchTags`      | X'in Topluluğu bulmak için kullandığı etiketler |
+| `creator`         | Kurucunun herkese açık profili                  |
+| `admin`           | Yöneticinin herkese açık profili                |
+| `membersFacepile` | X'in Topluluk sayfasında önizlediği üyeler      |
+| `is_nsfw`         | Topluluğun hassas olarak işaretli olup olmadığı |
+| `banner`          | Kapak görseli URL'si, boyutu ve ana renkleri    |
+| `sourceTarget`    | Girdiğin URL, ID, anahtar kelime veya konu      |
+
+Her veri türü kendi türünde satırlar ekler:
+
+| `resultType`         | Veri türü veya girdi               | Her satır bir                   |
+| -------------------- | ---------------------------------- | ------------------------------- |
+| `community`          | `info`, anahtar kelimeler, konular | Topluluk                        |
+| `communityTweet`     | `tweets`, `search`                 | Gönderi                         |
+| `communityMedia`     | `media`                            | Fotoğraflı veya videolu gönderi |
+| `communityMember`    | `members`, `memberNames`           | Üye                             |
+| `communityModerator` | `moderators`                       | Moderatör                       |
+| `communityTopic`     | `listTopics`                       | Konu                            |
+
+Gönderi satırlarında `text`, `createdAt`, `likeCount`, `replyCount`,
+`retweetCount`, `viewCount`, `media` ve `author` profili bulunur. Üye ve
+moderatör satırlarında `username`, `followers`, `verified` ve `communityRole`
+gibi profil alanları bulunur.
+
+## Topluluk verilerini kazımak için X Community Scraper'ı nasıl kullanırım?
+
+Apify Console'da şu adımları izle:
+
+1. Bir [görev örneğini](#görev-örnekleri) ya da Input sekmesini aç.
 2. Topluluk URL'lerini `startUrls` alanına ya da ID'leri `communityIds` alanına
    yapıştır.
 3. `resources` seç ve `sinceDate` veya `minLikes` gibi filtreler ekle.
-4. Teslim edilecek satır sayısını `maxItems` ile sınırla, sonra Start'a tıkla.
-5. Veri kümesini JSON, CSV veya Excel olarak indir ya da Apify API'yi kullan.
+4. `maxItems` değerini ayarla, sonra Start'a tıkla.
+5. Veri kümesini JSON, CSV, Excel veya HTML olarak dışa aktar.
+
+Aşağıdaki her örnek eksiksiz bir girdidir.
+
+### Topluluk bilgilerini ve son gönderileri al
+
+```json
+{
+  "communityIds": ["1493446837214187523"],
+  "resources": ["info", "tweets"],
+  "maxItems": 200
+}
+```
 
 `startUrls` her URL'yi düz metin olarak ya da `{ "url": "..." }` nesnesi olarak
 alır:
@@ -68,21 +138,63 @@ alır:
 }
 ```
 
-## Girdi
+### Popüler gönderileri topla
 
 ```json
 {
   "communityIds": ["1493446837214187523"],
-  "resources": ["info", "tweets", "members", "moderators"],
-  "maxItems": 10000
+  "resources": ["tweets"],
+  "postsOrder": "Top",
+  "minLikes": 50,
+  "maxItems": 100
 }
 ```
 
-Anahtar kelime araması için `resources` listesine `"search"` ekle ve `query`
-ayarla. Medya sekmesi için `"media"` ekle. Popüler gönderiler için `postsOrder`
-değerini `Top` yap.
+X'in en üst sıraya koyduğu gönderiler için `postsOrder` değerini `Top` yap.
+Medya sekmesi için `resources` listesine `"media"` ekle.
 
-Bunun yerine Topluluk bulmak için anahtar kelime veya konu gönder:
+### Bir Topluluğun gönderilerinde ara
+
+```json
+{
+  "communityIds": ["1493446837214187523"],
+  "resources": ["search"],
+  "query": "pricing",
+  "queryType": "Latest",
+  "maxItems": 100
+}
+```
+
+### Üyeleri ve moderatörleri dışa aktar
+
+```json
+{
+  "communityIds": ["1493446837214187523"],
+  "resources": ["members", "moderators"],
+  "minFollowers": 1000,
+  "maxItems": 1000
+}
+```
+
+Üye filtreleri üye ve moderatör satırlarına uygulanır. Filtrelenen satırlar veri
+kümesine hiç ulaşmaz, bu yüzden onlar için asla ödeme yapmazsın.
+
+### Üyeleri adıyla bul
+
+```json
+{
+  "communityIds": ["1493446837214187523"],
+  "memberNames": ["marckohlbrugge"],
+  "maxItems": 100
+}
+```
+
+x.com'daki üye aramasında olduğu gibi X, her ad için en fazla 10 eşleşen hesabı
+kontrol eder. Bulunan her üye, `communityRole` değeriyle birlikte 1
+`communityMember` satırıdır. `memberNames` içeren bir çalıştırma, `resources`
+içinde belirtilmedikçe başka veri türü okumaz.
+
+### Toplulukları anahtar kelime veya konuyla bul
 
 ```json
 {
@@ -98,15 +210,124 @@ taşır. Kısa kayıtla daha hızlı bir çalıştırma için `includeDetails` d
 Bunlar her çalıştırmada değişebilir. Her konu ve alt konuları için `listTopics`
 seçeneğini aç.
 
-Sorunsuz biten küçük çalıştırmalar `run-report` yazmaz, böylece Apify kullanımı
-azalır. Raporu her çalıştırmada almak için `alwaysSaveRunRecords` seçeneğini aç.
+## Görev örnekleri
+
+50 herkese açık görevden birini seç. Her görevin sınırlı bir girdisi ve buna
+uygun bir veri kümesi görünümü var. Bir görevi çalıştırmadan önce düzenle.
+
+- [Bir X Topluluğuna genel bakış al](https://apify.com/xquik/x-community-scraper/examples/get-an-x-community-overview)
+- [Bir X Topluluğunun ayrıntılarını son gönderileriyle al](https://apify.com/xquik/x-community-scraper/examples/get-community-details-with-recent-posts)
+- [Bir X Topluluğundaki popüler teknoloji gönderilerini bul](https://apify.com/xquik/x-community-scraper/examples/find-top-technology-posts-in-a-community)
+- [X Topluluğu üyelerini dışa aktar](https://apify.com/xquik/x-community-scraper/examples/export-x-community-members)
+- [Bir X Topluluğunun onaylanmış üyelerini dışa aktar](https://apify.com/xquik/x-community-scraper/examples/export-verified-community-members)
+- [Bir X Topluluğunun moderatörlerini listele](https://apify.com/xquik/x-community-scraper/examples/list-x-community-moderators)
+- [Geliştirici Topluluklarını büyüklük ve konuya göre karşılaştır](https://apify.com/xquik/x-community-scraper/examples/compare-developer-communities-by-size)
+- [Gönderi paylaşmadan önce bir X Topluluğunun kurallarını oku](https://apify.com/xquik/x-community-scraper/examples/read-community-rules-before-you-post)
+- [Bir girişim Topluluğundaki yatırım gönderilerini bul](https://apify.com/xquik/x-community-scraper/examples/find-funding-posts-in-a-startup-community)
+- [Bir yazılım mühendisliği Topluluğundaki işe alım gönderilerini bul](https://apify.com/xquik/x-community-scraper/examples/find-hiring-posts-in-a-software-community)
+- [Büyük kitlesi olan girişim Topluluğu üyelerini bul](https://apify.com/xquik/x-community-scraper/examples/find-startup-community-members-with-big-audiences)
+- [Küçük bir X Topluluğunu baştan sona incele](https://apify.com/xquik/x-community-scraper/examples/audit-a-small-community-end-to-end)
+
+## X Topluluklarını kazımak ne kadar tutar?
+
+Xquik'in X Community Scraper'ı her Apify planında teslim edilen satır başına
+$0.00015 tutar. Apify, platform kullanımını ayrıca faturalandırır. Xquik, teslim
+edilen her veri satırı için 1 kez ücret alır. Tanılamalar `diagnostics`
+çıktısında ücretsizdir.
+
+- Xquik aboneliği gerekmez.
+- Ayrı bir başlatma, Topluluk, veri türü veya sorgu ücreti ödemezsin.
+- Bulunan bir Topluluk, tam kaydı olsun olmasın 1 satır tutar.
+- Filtreleme ve tekilleştirme faturalamadan önce çalışır. Filtrelenen veya
+  tekrar eden satırlar için asla ödeme yapmazsın.
+- Apify'daki maksimum toplam ücret ayarları teslim edilen satırları sınırlar.
+
+Sorun yaşayan ya da büyük bir çalıştırma ayrıca bir `run-report` kaydı yazar.
+Sorunsuz biten küçük bir çalıştırma bu kaydı yazmaz, böylece Apify kullanımı
+azalır. Kaydı her çalıştırmada yazmak için `alwaysSaveRunRecords` seçeneğini aç.
+
+Bir çalıştırmanın harcamasını sınırlamak için
+[Çalıştırma seçenekleri](#çalıştırma-seçenekleri) bölümüne bak.
+
+## Boş, kısmi ve durdurulan çalıştırmalar
+
+Xquik'in X Community Scraper'ı boş, kısmi ve durdurulan çalıştırmaları ücretsiz
+açıklar. Çalıştırma durumu, çalıştırmanın neden durduğunu söyler. Ücretlendirilen
+sonuçları ve okunan hedefleri de sayar.
+
+### Boş sonuçlar
+
+Boş bir çalıştırmanın durumu, hedeflerini ve filtrelerini kontrol etmeni söyler.
+Filtrelenen satırlar sonuç sınırını asla tüketmez. Her hedefi okuyup hiç satır
+alamayan bir çalıştırma kayıt yazmaz. Durumu, nedenini ve neyi değiştirmen
+gerektiğini söyler. Actor yalnızca X'in gösterdiği herkese açık Toplulukları
+döndürür. Erişilebilen alanlar Topluluğa göre değişir.
+
+### Kısmi çalıştırmalar
+
+Veri çekme yarıda kesilirse Actor ücretsiz bir `partial` tanılaması yazar.
+Teslim edilen satırlar veri kümesinde kalır. Yeniden denemeden önce
+`availableResults`, `failedTargets`, `retryable` ve `nextAction` alanlarını oku.
+Actor'ın başarıyla bitmesi teslimatı doğrular. Tüm verinin çekildiğini
+doğrulamaz.
+
+### Durma nedenleri
+
+Çalıştırma durumu, erken durmanın her nedenini söyler. `stopCauses` her nedeni
+kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Nedenler
+şunlardır: `target_not_found`, `target_failed`, `pagination_safety_limit` ve
+`deadline_reached`. Bulunamayan bir hedef, listeye yalnızca çalıştırmayı başka
+bir neden durdurduysa girer. Nedenlerden biri yeniden denenebiliyorsa çalıştırma
+da `retryable` olur. Actor kendi başına süre sınırı eklemez.
+
+## Girdi
+
+Input sekmesi tüm seçenekleri listeler. Topluluk URL'leri, ID'leri, anahtar
+kelimeler veya konular gir ya da `includeSuggested` veya `listTopics` seçeneğini
+aç. Diğer tüm alanlar isteğe bağlıdır.
+
+| Alan                           | Ne yapar                                                              |
+| ------------------------------ | --------------------------------------------------------------------- |
+| `startUrls`                    | x.com'daki Topluluk URL'leri                                          |
+| `communityIds`                 | Sayısal Topluluk ID'leri                                              |
+| `resources`                    | `info`, `tweets`, `media`, `search`, `members`, `moderators`          |
+| `query`                        | `search` veri türü için anahtar kelime                                |
+| `queryType`                    | Anahtar kelime araması için `Latest` veya `Top` sıralaması            |
+| `postsOrder`                   | Gönderiler için `Latest` veya `Top` sıralaması                        |
+| `memberNames`                  | Üyeler arasında aranacak adlar veya kullanıcı adları                  |
+| `searchTerms`                  | Topluluk bulmak için anahtar kelimeler                                |
+| `topics`                       | `Technology` gibi konu adları veya ID'leri                            |
+| `includeSuggested`             | X'in katılmanı önerdiği Toplulukları ekler                            |
+| `listTopics`                   | Her Topluluk konusunu ve alt konularını ekler                         |
+| `includeDetails`               | Anahtar kelime veya konuyla bulunan Topluluklara tam kayıt ekler      |
+| `maxItems`                     | Tüm çalıştırmada teslim edilecek satır sınırı                         |
+| `maxItemsPerTarget`            | Her Topluluk veri türü için satır sınırı                              |
+| `sinceDate`, `untilDate`       | Bir tarih aralığındaki gönderileri tutar                              |
+| `language`                     | 1 dil kodundaki gönderileri tutar                                     |
+| `mediaType`                    | Görsel, video, GIF, bağlantı içeren veya medyasız gönderileri tutar   |
+| `minViews`, `minLikes`         | Bir görüntülenme veya beğeni sayısının üstündeki gönderileri tutar    |
+| `minReplies`, `minRetweets`    | Bir yanıt veya yeniden gönderi sayısının üstündeki gönderileri tutar  |
+| `nativeRetweets`               | Yalnızca doğrudan yeniden gönderileri tutar                           |
+| `verifiedOnly`                 | Onaylanmış yazarları, üyeleri veya moderatörleri tutar                |
+| `minFollowers`, `maxFollowers` | Bir takipçi aralığındaki üyeleri tutar                                |
+| `minAccountAgeDays`            | Hesabı en az bu kadar günlük olan üyeleri tutar                       |
+| `dedupeAcrossTargets`          | Topluluklar arasında tekrar eden satırları faturalamadan önce çıkarır |
+
+### Doğru girdileri seç
+
+- Hızlı bir bakış için varsayılan `info` ve `tweets` veri türlerini koru.
+- Potansiyel müşteri listeleri için `minFollowers` ve `verifiedOnly` ile
+  `members` seç.
+- Ürün araştırması için `bug` veya `pricing` gibi bir `query` ile `search` seç.
+- Yaratıcı araştırma için `media` seç ve `mediaType` ayarla.
+- Topluluk keşfetmek için ID vermeden `searchTerms` veya `topics` gönder.
 
 ## Çıktı
 
-Her satırın `resultType` değeri `community`, `communityTweet`, `communityMedia`,
-`communityMember`, `communityModerator` veya `communityTopic` olur. Her satırda
-girdideki Topluluk, anahtar kelime veya konu için `sourceTarget` bulunur.
-Xquik'in X Community Scraper'ı kaynak alanlarını korur ve hiçbir değer uydurmaz.
+Her satır bir JSON nesnesidir. Her satırda girdideki Topluluk, anahtar kelime
+veya konu için `sourceTarget` bulunur. Xquik'in X Community Scraper'ı kaynak
+alanlarını korur ve hiçbir değer uydurmaz. Veri kümesi şeması her alana bir
+başlık ve açıklama verir.
 
 Aşağıdaki değerler yalnızca örnektir. Gerçek sonuçlar canlı veriden gelir. Bir
 Topluluk bilgi satırı şöyle görünür:
@@ -115,41 +336,33 @@ Topluluk bilgi satırı şöyle görünür:
 {
   "resultType": "community",
   "sourceTarget": "1493446837214187523",
+  "id": "1493446837214187523",
   "name": "Sample Community",
+  "description": "A place to share what you build.",
   "member_count": 1200,
-  "moderator_count": 4
+  "moderator_count": 4,
+  "primary_topic": "Technology"
 }
 ```
 
-## X Topluluklarını kazımak ne kadar tutar?
+Veri kümesini JSON, CSV, Excel veya HTML olarak dışa aktar.
 
-Her Apify planında teslim edilen satır başına $0.00015 ödersin. Apify, platform
-kullanımını ayrıca faturalandırır.
+## Çalıştırma seçenekleri
 
-- Teslim edilen her veri satırı için 1 kez ödersin. Tanılamalar `diagnostics`
-  içinde ücretsizdir.
-- Başlatma, Topluluk, veri türü veya sorgu ücreti yok.
-- Bulunan bir Topluluk, tam kaydı olsun olmasın 1 satır tutar.
-- Tekilleştirme faturalamadan önce çalışır.
+- Çalıştırma maliyetini sınırlamak için Apify'da maksimum toplam ücreti ayarla.
+  Bütçenin izin verdiği en fazla satırı almak için `maxItems` değerini yüksek
+  bırak.
+- Apify API'de `maxTotalChargeUsd` değerini, Console'da ise Max cost per run
+  ayarını kullan.
+- Tüm Topluluklarını 1 çalıştırmaya koy. Her çalıştırma Apify'a aynı başlatma
+  maliyetini öder.
+- `maxItemsPerTarget` her Topluluk veri türünün satırlarını sınırlar.
+- `maxConcurrency` aynı anda kaç Topluluk veri türünün çalışacağını belirler.
+  Varsayılan değer en hızlı güvenli ayardır.
 
-## Sınırlar ve kurtarma
-
-Xquik'in X Community Scraper'ı 1 çalıştırmada birçok Topluluğu ve veri türünü
-okur. Apify çalıştırmayı yeniden başlatsa da teslim edilen satırlar ve ilerleme
-korunur. Actor kendi başına süre sınırı eklemez. Yalnızca X'in gösterdiği
-herkese açık Toplulukları döndürür. Erişilebilen alanlar Topluluğa göre değişir.
-
-Çalıştırma yarıda kesilirse Actor ücretsiz bir `partial` tanılaması yazar. Elde
-edilen sonuçlar olduğu gibi kalır. Yeniden denemeden önce `availableResults`,
-`failedTargets`, `retryable` ve `nextAction` alanlarını oku. Actor'ın başarıyla
-bitmesi teslimatı doğrular. Tüm verinin çekildiğini doğrulamaz.
-
-Çalıştırma durumu, erken durmanın her nedenini söyler. `stopCauses` her nedeni
-kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Nedenler
-şunlardır: `target_not_found`, `target_failed`, `pagination_safety_limit` ve
-`deadline_reached`. Bulunamayan bir hedef, listeye yalnızca çalıştırmayı başka
-bir neden durdurduysa girer. Nedenlerden biri yeniden denenebiliyorsa çalıştırma
-da `retryable` olur.
+Yayımlanan her düzeltmeyi almak için her çalıştırmada `latest` derlemesini seç.
+Kayıtlı görevler ve zamanlamalar kendi derleme seçimini korur. Bu seçimi
+`latest` olarak bırak.
 
 ## İlgili Xquik Actor'ları
 
@@ -233,6 +446,24 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   tutmadığını incelediğinde kullan. Analiz edilen gönderi başına $0.0003'ten
   başlar.
 
+## Kazımadan fazlasına mı ihtiyacın var?
+
+Xquik ayrıca 53 panel aracı, bir REST API, imzalı webhook'lar ve bir MCP
+sunucusu sunar.
+
+- [API belgeleri](https://docs.xquik.com/introduction): REST API kılavuzları
+- [Topluluk Bilgisi API'si](https://docs.xquik.com/api-reference/x/community-info):
+  1 Topluluğun kaydını al
+- [Topluluk Gönderileri API'si](https://docs.xquik.com/api-reference/x/community-tweets):
+  bir Topluluğun gönderilerini al
+- [Topluluk Üyeleri API'si](https://docs.xquik.com/api-reference/x/community-members):
+  bir Topluluğun üyelerini dışa aktar
+- [Topluluk Bulma API'si](https://docs.xquik.com/api-reference/x/community-find):
+  anahtar kelimeyle Topluluk bul
+- [MCP sunucusu](https://docs.xquik.com/mcp/overview): desteklenen araçları
+  keşfet
+- [Webhook'lar](https://docs.xquik.com/webhooks/overview): imzalı olay teslimatı
+
 ## SSS
 
 Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
@@ -242,6 +473,35 @@ Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
 Hayır. Xquik'in X Community Scraper'ı X API anahtarı, giriş ya da kimlik
 bilgisi istemez.
 
+### Bir Topluluğun ID'sini nasıl bulurum?
+
+Topluluğu x.com'da aç. ID, URL'de `/i/communities/` kısmından sonraki sayıdır.
+URL'nin tamamını `startUrls` alanına da yapıştırabilirsin.
+
+### X Topluluğu üyelerini CSV veya Excel olarak dışa aktarabilir miyim?
+
+Evet. `members` veri türünü seç, sonra veri kümesini CSV, Excel, JSON veya HTML
+olarak dışa aktar.
+
+### ID'sini bilmeden bir Topluluk bulabilir miyim?
+
+Evet. Anahtar kelimeleri `searchTerms` alanında ya da konuları `topics` alanında
+gönder. Bulunan her Topluluk, tam kaydıyla 1 satırdır.
+
+### Bir Topluluğun popüler gönderilerini alabilir miyim?
+
+Evet. `postsOrder` değerini `Top` yap. Yalnızca en popüler gönderileri tutmak
+için `minLikes` veya `minViews` ekle.
+
+### 1 çalıştırmada kaç Topluluk kazıyabilirim?
+
+Listelediğin kadar. Satır sayısını `maxItems` ve Apify harcama sınırın belirler.
+
+### Gizli Toplulukları okur mu?
+
+Hayır. Xquik'in X Community Scraper'ı yalnızca X'in gösterdiği herkese açık
+Toplulukları döndürür.
+
 ### X Topluluklarını kazımak yasal mı?
 
 Xquik'in X Community Scraper'ı herkese açık X alanlarını çeker. Sonuçlarda
@@ -250,11 +510,11 @@ kurallarına uy. Emin değilsen yetkin bir hukukçuya danış.
 
 ### Çalıştırmam neden sonuç döndürmedi?
 
-Önce ücretsiz `diagnostics` çıktısını aç. Boş bir çalıştırmanın durumu,
-hedeflerini ve filtrelerini kontrol etmeni söyler. `stopCauses` her neden için
+Önce çalıştırma durumunu oku. Boş bir çalıştırmanın durumu, hedeflerini ve
+filtrelerini kontrol etmeni söyler. Ücretsiz `diagnostics` çıktısı, ilgilenmen
+gereken bir şey olduğunda görünür. Çıktıdaki `stopCauses` her neden için
 izleyeceğin bir `nextAction` verir. Çalıştırma okuyamadığı her girdiyi listeler
-ve nasıl düzelteceğini söyler. Bu Actor yalnızca X'in gösterdiği herkese açık
-Toplulukları döndürür.
+ve nasıl düzelteceğini söyler.
 
 ### API'yi, zamanlamaları ve entegrasyonları kullanabilir miyim?
 
@@ -266,14 +526,15 @@ Scraper'ını bir cron takvimiyle çalıştırır. Ajanlar
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) kullanır. Eski bir
 derlemeye ihtiyacın yoksa `latest` derlemesini kullan.
 
-### Nereden yardım alırım?
-
-Actor sayfasında bir issue aç ya da çalıştırma ID'siyle support@xquik.com
-adresine yaz. Anahtar-değer deposundaki ücretsiz tanılamalar boş, kısmi veya
-kesilen çalıştırmaları açıklar.
-
 ### Bana özel bir çözüm alabilir miyim?
 
 Evet. [xquik.com](https://xquik.com) adresini ziyaret et ya da
 [API belgelerini](https://docs.xquik.com/introduction) oku. Bu kaynaklar paneli,
 API'yi, MCP sunucusunu ve webhook'ları anlatır.
+
+### Nereden yardım alırım?
+
+Actor sayfasında bir issue aç ya da çalıştırma ID'siyle <support@xquik.com>
+adresine yaz. Anahtar-değer deposundaki ücretsiz tanılamalar, ilgilenmen gereken
+çalıştırmaları açıklar. Hiç satır almayan bir çalıştırma nedenini durumunda
+söyler.
