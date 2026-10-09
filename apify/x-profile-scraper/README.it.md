@@ -28,109 +28,264 @@ piattaforma. Non ti servono una chiave API X né il login.
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.
 
-## Profili & timeline
+## Cosa fa X Profile Scraper?
 
-- Bio, conteggi, verifica, posizione indicata dall'utente, sito web & media.
-- L'etichetta pubblica "Account based in" di X, quando X la mostra.
-- Righe delle schede Post & Risposte del profilo su tutte le pagine di risultati
-  disponibili.
-- Media, post In evidenza, follower, following o follower verificati, a scelta.
-- Filtri sui post opzionali per data, media, verifica, stato di repost &
-  metriche.
-- Filtri sui profili opzionali per pubblico, attività, età & metadati pubblici.
-- Rimozione dei duplicati prima della fatturazione.
+X Profile Scraper di Xquik restituisce profili pubblici di X (Twitter) da nomi
+utente, ID utente numerici o URL di profilo. Ogni profilo può aggiungere i suoi
+post, risposte, media, post In evidenza, follower, following & follower
+verificati. Traduce anche le bio & verifica chi è in diretta ora.
 
-## Come estrarre i profili di X
+### Funzionalità principali
 
-1. Apri X Profile Scraper di Xquik in Apify Console.
+- Leggi molti profili in 1 esecuzione da nomi utente, ID o URL.
+- Aggiungi post, risposte, media, post In evidenza, follower, following o
+  follower verificati come righe separate.
+- Traduci ogni bio con `translateBioTo`, indicando un codice lingua.
+- Verifica se ogni profilo è in diretta ora con `checkLiveNow`.
+- Filtra i post per data, lingua, media & interazioni.
+- Filtra i profili per dimensione del pubblico, età dell'account & verifica.
+- I filtri & la rimozione dei duplicati avvengono prima della fatturazione.
+- Le esecuzioni conservano le righe consegnate & i progressi quando Apify le
+  riavvia.
+
+### Casi d'uso
+
+- Arricchisci liste di lead con bio, siti web, posizioni & dimensione del
+  pubblico.
+- Confronta gli account dei concorrenti per follower, post & verifica.
+- Valuta i creator per pubblico, età dell'account & interazioni.
+- Archivia post, media & post In evidenza di un account.
+- Mappa la rete di un account attraverso i suoi follower & following.
+- Tieni d'occhio creator & brand per non perdere le loro dirette.
+- Leggi nella tua lingua le bio di altri mercati.
+
+### Quali dati può estrarre X Profile Scraper?
+
+Le righe di profilo usano `resultType: "profile"`. Questi sono i campi
+principali:
+
+| Campo              | Descrizione                                        |
+| ------------------ | -------------------------------------------------- |
+| `id`               | ID utente numerico                                 |
+| `username`         | Nome utente senza `@`                              |
+| `name`             | Nome visualizzato                                  |
+| `description`      | Testo della bio                                    |
+| `url`              | Sito web nelle righe di profilo                    |
+| `location`         | Posizione indicata dall'utente                     |
+| `followers`        | Numero di follower                                 |
+| `following`        | Numero di account seguiti                          |
+| `statusesCount`    | Numero di post                                     |
+| `mediaCount`       | Numero di post con media                           |
+| `favouritesCount`  | Mi piace messi dall'account                        |
+| `listedCount`      | Liste pubbliche che includono l'account            |
+| `createdAt`        | Data di creazione dell'account                     |
+| `verified`         | Se X segnala la verifica                           |
+| `isBlueVerified`   | Se l'account ha la verifica X Blue                 |
+| `verifiedType`     | Categoria di verifica, come `Government`           |
+| `profilePicture`   | URL dell'immagine del profilo                      |
+| `coverPicture`     | URL dell'immagine di intestazione                  |
+| `pinnedTweetIds`   | ID dei post fissati                                |
+| `professional`     | Categoria & tipo professionale                     |
+| `accountBasedIn`   | Etichetta di paese o regione stimata da X          |
+| `connectedVia`     | Come l'account si è collegato a X la prima volta   |
+| `usernameChanges`  | Numero di cambi del nome utente & data dell'ultimo |
+| `birthdate`        | Parti della data di nascita rese pubbliche         |
+| `subscribersCount` | Numero di abbonati, quando X lo invia              |
+| `tipJar`           | Link pubblici per le mance                         |
+| `protected`        | Se l'account protegge i suoi post                  |
+| `unavailable`      | Se l'account non è disponibile                     |
+| `sourceTarget`     | Il nome utente, l'ID o l'URL che hai inserito      |
+
+Lo schema del dataset documenta ogni altro campo, come `identityVerification`,
+`isAutomated`, `automatedBy`, `withheldInCountries` & `verificationReason`.
+
+Le righe opzionali mantengono il formato delle risposte dell'API REST di Xquik:
+
+| `resultType`              | Attivato da                | Una riga per        |
+| ------------------------- | -------------------------- | ------------------- |
+| `profileTweet`            | `includeTweets`            | Post                |
+| `profileReply`            | `includeReplies`           | Post o risposta     |
+| `profileMedia`            | `includeMedia`             | Post con media      |
+| `profileHighlight`        | `includeHighlights`        | Post in evidenza    |
+| `profileFollower`         | `includeFollowers`         | Follower            |
+| `profileFollowing`        | `includeFollowing`         | Account seguito     |
+| `profileVerifiedFollower` | `includeVerifiedFollowers` | Follower verificato |
+| `profileBioTranslation`   | `translateBioTo`           | Bio tradotta        |
+| `profileLive`             | `checkLiveNow`             | Profilo controllato |
+
+Le righe non includono mai stati visibili solo a chi legge, ad esempio se segui
+o blocchi un account.
+
+## Come uso X Profile Scraper per estrarre i dati dei profili?
+
+Segui questi passaggi in Apify Console:
+
+1. Apri un [esempio di task](#esempi-di-task) o la scheda Input.
 2. Aggiungi i nomi utente in `twitterHandles`, gli URL in `startUrls` o gli ID
    in `userIds`.
-3. Attiva risorse come `includeTweets` o `includeFollowers`.
-4. Imposta `maxItems` per limitare le righe consegnate, poi fai clic su Start.
-5. Scarica il dataset in JSON, CSV o Excel, oppure usa l'API di Apify.
+3. Attiva le risorse che ti servono, come `includeTweets`.
+4. Imposta `maxItems` & gli eventuali filtri, poi fai clic su Start.
+5. Esporta il dataset in JSON, CSV, Excel o HTML.
 
-`startUrls` accetta ogni URL come stringa semplice o come oggetto
-`{ "url": "..." }`:
+Ogni ricetta qui sotto è un input completo.
+
+### Estrai molti profili
 
 ```json
-{ "startUrls": ["https://x.com/nasa", { "url": "https://x.com/OpenAI" }] }
+{ "twitterHandles": ["nasa", "OpenAI", "apify"], "maxItems": 100 }
 ```
 
-## Input
+Ogni nome utente restituisce 1 riga di profilo. I nomi utente funzionano con o
+senza `@`.
+
+### Incolla URL o ID di profili
+
+`startUrls` accetta ogni URL come stringa semplice o come oggetto
+`{ "url": "..." }`. `userIds` accetta ID utente numerici di X:
 
 ```json
 {
-  "twitterHandles": ["OpenAI", "apify"],
-  "includeTweets": true,
-  "includeReplies": false,
-  "maxItems": 10000
+  "startUrls": ["https://x.com/nasa", { "url": "https://x.com/OpenAI" }],
+  "userIds": ["11348282"],
+  "maxItems": 100
 }
 ```
 
-Basta un target. Il limite globale `maxItems` include i profili & le risorse
-selezionate.
+Un nome utente indicato 2 volte viene letto 1 volta sola.
 
-Le esecuzioni piccole senza problemi saltano `run-report` & risparmiano uso di
-Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
+### Aggiungi post, risposte & media
 
-## Output
+```json
+{
+  "twitterHandles": ["nasa"],
+  "includeTweets": true,
+  "includeMedia": true,
+  "sinceDate": "2026-01-01",
+  "maxItems": 500
+}
+```
 
-Le righe di profilo usano `resultType: "profile"`. Le righe opzionali usano
-`profileTweet`, `profileReply`, `profileMedia`, `profileHighlight`,
-`profileFollower`, `profileFollowing` o `profileVerifiedFollower`. Ogni riga
-conserva `sourceTarget`. I campi pubblici seguono il formato dell'API REST di
-Xquik.
+`includeTweets` segue la scheda Post del profilo. `includeReplies` segue la sua
+scheda Risposte. `includeMedia` segue la sua scheda Media. `includeHighlights`
+aggiunge i post della sua scheda In evidenza, nell'ordine di X. Un profilo senza
+post in evidenza non aggiunge righe.
 
-`includeHighlights` aggiunge i post della scheda In evidenza di ogni profilo,
-nell'ordine di X. Un profilo senza post in evidenza non aggiunge righe.
+### Tieni solo i post popolari
 
-X deduce `accountBasedIn` dagli IP aggregati di accesso all'account. L'etichetta
-non indica nazionalità, residenza, identità, iscrizione, post o posizione
-esatta. `observedAt` registra il momento del recupero. `accountBasedIn` è null
-quando X non mostra l'etichetta. Quando X la trattiene, la riga riporta invece
-`accountBasedInUnavailable: true`.
+```json
+{
+  "twitterHandles": ["nasa"],
+  "includeTweets": true,
+  "minLikes": 1000,
+  "mediaType": "videos",
+  "maxItems": 200
+}
+```
+
+I filtri sui post valgono per le righe di post opzionali. Le righe filtrate non
+arrivano mai nel dataset, quindi non le paghi mai.
+
+### Esporta follower & following
+
+```json
+{
+  "twitterHandles": ["apify"],
+  "includeFollowers": true,
+  "minFollowers": 1000,
+  "verifiedOnly": true,
+  "maxItems": 1000
+}
+```
+
+`includeFollowers`, `includeFollowing` & `includeVerifiedFollowers` aggiungono
+1 riga di profilo per account. I filtri sui profili valgono per queste righe &
+per i profili principali.
+
+### Traduci le bio
+
+```json
+{ "twitterHandles": ["nasa", "SpaceX"], "translateBioTo": "es" }
+```
+
+Ogni traduzione è 1 riga `profileBioTranslation` con `text`, `language` &
+`sourceLanguage`. Un profilo senza bio non aggiunge righe né addebiti.
+
+### Controlla chi è in diretta ora
+
+```json
+{ "twitterHandles": ["nasa", "SpaceX"], "checkLiveNow": true }
+```
+
+Ogni controllo è 1 riga `profileLive` con `live`, `userId`, `userName` &
+`broadcast`. `broadcast` contiene l'ultima trasmissione del profilo, in diretta
+o conclusa, oppure null. Un profilo mancante non aggiunge righe.
+
+## Esempi di task
+
+Scegli tra 50 task pubblici. Ognuno ha un input limitato & una vista del dataset
+corrispondente. Modifica un task prima di avviarlo.
+
+- [Ottieni la scheda profilo di un account X](https://apify.com/xquik/x-profile-scraper/examples/get-an-x-profile-card)
+- [Confronta i profili di brand concorrenti](https://apify.com/xquik/x-profile-scraper/examples/compare-competitor-brand-profiles)
+- [Converti ID utente numerici in profili](https://apify.com/xquik/x-profile-scraper/examples/resolve-numeric-user-ids-to-profiles)
+- [Raccogli i post recenti di un account](https://apify.com/xquik/x-profile-scraper/examples/collect-recent-posts-from-an-account)
+- [Trova i post di un account con più Mi piace](https://apify.com/xquik/x-profile-scraper/examples/find-an-accounts-most-liked-posts)
+- [Raccogli i video pubblicati da un account](https://apify.com/xquik/x-profile-scraper/examples/collect-videos-from-an-account)
+- [Archivia 1 anno solare di un account](https://apify.com/xquik/x-profile-scraper/examples/archive-one-year-of-posts)
+- [Esporta i follower di un account](https://apify.com/xquik/x-profile-scraper/examples/export-the-followers-of-an-account)
+- [Esporta i follower verificati di un'azienda](https://apify.com/xquik/x-profile-scraper/examples/export-verified-followers)
+- [Trova i follower con 10.000 o più follower](https://apify.com/xquik/x-profile-scraper/examples/find-influential-followers)
+- [Misura la sovrapposizione del pubblico di 2 strumenti di design](https://apify.com/xquik/x-profile-scraper/examples/measure-audience-overlap)
+- [Esegui un audit completo di un account](https://apify.com/xquik/x-profile-scraper/examples/run-a-full-account-audit)
+
+## Quanto costa estrarre i profili di X?
+
+X Profile Scraper di Xquik costa $0.00015 per riga consegnata su ogni piano
+Apify. Apify fattura a parte il tuo uso della piattaforma. Xquik applica un
+addebito per ogni riga di dati consegnata. La diagnostica nell'output
+`diagnostics` è gratuita.
+
+- Non ti serve un abbonamento Xquik.
+- Non paghi costi separati di avvio, per profilo o per query.
+- I filtri & la deduplicazione avvengono prima della fatturazione. Non paghi mai
+  righe filtrate o duplicate.
+- Un profilo senza bio non aggiunge addebiti di traduzione.
+- Un profilo mancante non aggiunge addebiti per il controllo della diretta.
+- Le impostazioni di Apify sull'addebito massimo totale limitano le righe
+  consegnate.
+
+Un'esecuzione che incontra un problema, o un'esecuzione grande, scrive anche un
+record `run-report`. Un'esecuzione piccola senza problemi lo salta & risparmia
+uso di Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
+
+Per limitare quanto può spendere un'esecuzione, consulta
+[Opzioni di esecuzione](#opzioni-di-esecuzione).
+
+## Esecuzioni vuote, parziali & interrotte
+
+X Profile Scraper di Xquik spiega gratis le esecuzioni vuote, parziali &
+interrotte. Lo stato dell'esecuzione dice perché si è fermata. Conta anche i
+risultati addebitati & i target letti.
+
+### Risultati vuoti
+
+Lo stato di un'esecuzione vuota ti dice di controllare target & filtri. Le righe
+filtrate non consumano mai il tuo limite di risultati. Un'esecuzione che legge
+ogni target & non ottiene righe non scrive alcun record. Il suo stato dice
+perché & cosa cambiare.
 
 Dal 2024 X mostra i post a cui un account ha messo Mi piace solo a
 quell'account. `includeLikes` non restituisce righe `profileLike` per gli altri
 account.
 
-Gli esempi usano valori fittizi. I risultati contengono dati live. Una riga di
-profilo ha questo aspetto:
+### Esecuzioni parziali
 
-```json
-{
-  "resultType": "profile",
-  "sourceTarget": "sample_user",
-  "username": "sample_user",
-  "name": "Sample User",
-  "followers": 1200,
-  "verified": false,
-  "accountBasedInUnavailable": true
-}
-```
-
-## Quanto costa estrarre i profili di X?
-
-Su ogni piano Apify paghi $0.00015 per riga consegnata. Apify fattura a parte il
-tuo uso della piattaforma.
-
-- Un addebito per ogni riga di dati consegnata. La diagnostica in `diagnostics`
-  è gratuita.
-- Nessun costo di avvio, per profilo o per query.
-- La deduplicazione avviene prima della fatturazione.
-- Le impostazioni di Apify sull'addebito massimo totale limitano le righe
-  consegnate.
-
-## Limiti & recupero
-
-X Profile Scraper di Xquik legge molti profili in 1 esecuzione. Ogni filtro che
-imposti vale per le righe della timeline. Le righe consegnate & i progressi
-restano dopo un riavvio di Apify.
-
-Un'estrazione interrotta scrive una diagnostica `partial` gratuita. I risultati
-disponibili restano intatti. Leggi `availableResults`, `failedTargets`,
+Un'estrazione interrotta scrive una diagnostica `partial` gratuita. Le righe
+consegnate restano nel dataset. Leggi `availableResults`, `failedTargets`,
 `retryable` & `nextAction` prima di riprovare. Un'uscita riuscita dell'Actor
 conferma la consegna, non l'estrazione completa.
+
+### Cause di arresto
 
 Lo stato dell'esecuzione nomina ogni causa di un arresto anticipato.
 `stopCauses` elenca ogni causa con i propri `message`, `retryable` &
@@ -139,6 +294,104 @@ Lo stato dell'esecuzione nomina ogni causa di un arresto anticipato.
 `target_suspended` nomina gli account che X ha sospeso. Un target mancante o
 sospeso entra nell'elenco solo se un'altra causa ha fermato l'esecuzione.
 L'esecuzione è `retryable` quando lo è almeno una causa.
+
+## Input
+
+La scheda Input elenca ogni opzione. Indica almeno 1 tra `twitterHandles`,
+`startUrls` o `userIds`. Tutti gli altri campi sono opzionali.
+
+| Campo                          | Cosa fa                                                         |
+| ------------------------------ | --------------------------------------------------------------- |
+| `twitterHandles`               | Nomi utente, con o senza `@`                                    |
+| `startUrls`                    | URL di profili su x.com o twitter.com                           |
+| `userIds`                      | ID utente numerici di X                                         |
+| `maxItems`                     | Limite di righe consegnate in tutta l'esecuzione                |
+| `maxItemsPerTarget`            | Limite di righe per ogni profilo o risorsa                      |
+| `includeTweets`                | Aggiunge la scheda Post                                         |
+| `includeReplies`               | Aggiunge la scheda Risposte                                     |
+| `includeMedia`                 | Aggiunge la scheda Media                                        |
+| `includeHighlights`            | Aggiunge la scheda In evidenza                                  |
+| `includeLikes`                 | Aggiunge i post con Mi piace, che X nasconde agli altri account |
+| `includeFollowers`             | Aggiunge i follower                                             |
+| `includeFollowing`             | Aggiunge gli account seguiti                                    |
+| `includeVerifiedFollowers`     | Aggiunge i follower verificati                                  |
+| `translateBioTo`               | Traduce ogni bio in una lingua, con un codice come `es`         |
+| `checkLiveNow`                 | Verifica se ogni profilo è in diretta ora                       |
+| `sinceDate`, `untilDate`       | Tiene i post in un intervallo di date                           |
+| `language`                     | Tiene i post di 1 lingua, indicata dal codice                   |
+| `mediaType`                    | Tiene i post con immagini, video, GIF, link o senza media       |
+| `minViews`, `minLikes`         | Tiene i post sopra un numero di visualizzazioni o Mi piace      |
+| `minReplies`, `minRetweets`    | Tiene i post sopra un numero di risposte o repost               |
+| `nativeRetweets`               | Tiene solo i repost nativi                                      |
+| `verifiedOnly`                 | Tiene autori o profili verificati                               |
+| `minFollowers`, `maxFollowers` | Tiene i profili in una fascia di pubblico                       |
+| `minAccountAgeDays`            | Tiene i profili con almeno questa età in giorni                 |
+| `dedupeAcrossTargets`          | Elimina le righe ripetute tra profili prima della fatturazione  |
+
+### Scegli gli input giusti
+
+- Per la sola scheda profilo, indica i nomi utente & lascia disattivata ogni
+  opzione `include`.
+- Per archiviare un account, attiva `includeTweets`, `includeMedia` &
+  `includeHighlights`, poi imposta `sinceDate`.
+- Per i contenuti migliori, aggiungi `minLikes` o `minViews` a `includeTweets`.
+- Per le liste di lead, attiva `includeFollowers` con `minFollowers` &
+  `minAccountAgeDays`.
+- Per la sovrapposizione del pubblico, indica 2 nomi utente, attiva
+  `includeFollowers` & imposta `dedupeAcrossTargets: false`. Così un follower in
+  comune compare sotto ogni nome utente.
+
+## Output
+
+Ogni riga è un oggetto JSON. Lo schema del dataset dà a ogni campo un titolo &
+una descrizione, così gli agenti AI leggono le righe senza tirare a indovinare.
+
+Gli esempi usano valori fittizi. I risultati contengono dati live. Una riga di
+profilo ha questo aspetto:
+
+```json
+{
+  "resultType": "profile",
+  "sourceTarget": "sample_user",
+  "id": "1234567890",
+  "username": "sample_user",
+  "name": "Sample User",
+  "description": "Building tools for researchers.",
+  "url": "https://example.com",
+  "location": "Lisbon",
+  "followers": 1200,
+  "following": 310,
+  "statusesCount": 4200,
+  "verified": false,
+  "createdAt": "Tue Mar 21 20:50:14 +0000 2017",
+  "accountBasedInUnavailable": true
+}
+```
+
+X deduce `accountBasedIn` dagli IP aggregati di accesso all'account. L'etichetta
+non indica nazionalità, residenza, identità, iscrizione, post o posizione
+esatta. `observedAt` registra il momento del recupero. `accountBasedIn` è null
+quando X non mostra l'etichetta. Quando X la trattiene, la riga riporta invece
+`accountBasedInUnavailable: true`.
+
+Esporta il dataset in JSON, CSV, Excel o HTML.
+
+## Opzioni di esecuzione
+
+- Imposta l'addebito massimo totale di Apify per limitare il costo
+  dell'esecuzione. Lascia `maxItems` alto per ottenere tutte le righe che il
+  budget consente.
+- Imposta `maxTotalChargeUsd` nell'API di Apify, o Max cost per run in Console.
+- Metti tutti i tuoi profili in 1 esecuzione. Ogni esecuzione paga ad Apify lo
+  stesso costo di avvio.
+- `maxConcurrency` imposta quanti profili vengono elaborati in contemporanea. Il
+  valore predefinito è l'impostazione sicura più veloce.
+- Usa i monitor degli account di Xquik per controlli ogni secondo & webhook
+  firmati. I monitor attivi controllano ogni secondo.
+
+Seleziona `latest` per ogni esecuzione per ricevere ogni correzione pubblicata.
+I task salvati & le pianificazioni mantengono la propria scelta di build, quindi
+lasciala su `latest`.
 
 ## Actor Xquik correlati
 
@@ -215,6 +468,27 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   sui suoi tratti. Usalo quando studi perché i post si diffondono o falliscono.
   Da $0.0003 per post analizzato.
 
+## Ti serve più dello scraping?
+
+Xquik offre anche 53 strumenti nella dashboard, un'API REST, webhook firmati &
+un server MCP.
+
+- [Documentazione API](https://docs.xquik.com/introduction): guide all'API REST
+- [Profile Lookup API](https://docs.xquik.com/api-reference/x/twitter-profile-lookup):
+  ottieni 1 profilo pubblico
+- [User Tweets API](https://docs.xquik.com/api-reference/x/user-tweets): ottieni
+  i post di un utente
+- [Followers API](https://docs.xquik.com/api-reference/x/followers): ottieni i
+  follower di un account
+- [Bio Translation API](https://docs.xquik.com/api-reference/x/user-bio-translation):
+  traduci la bio di un profilo
+- [Live Status API](https://docs.xquik.com/api-reference/x/user-live-status):
+  verifica se un utente è in diretta
+- [Server MCP](https://docs.xquik.com/mcp/overview): scopri gli strumenti
+  supportati
+- [Webhook](https://docs.xquik.com/webhooks/overview): consegna firmata degli
+  eventi
+
 ## FAQ
 
 Le risposte alle domande più comuni, poi dove trovare assistenza.
@@ -222,6 +496,45 @@ Le risposte alle domande più comuni, poi dove trovare assistenza.
 ### Serve una chiave API X o il login?
 
 No. X Profile Scraper di Xquik non richiede chiave API X, login o credenziali.
+
+### Quanti profili posso estrarre in 1 esecuzione?
+
+Tutti quelli che elenchi. `maxItems` & il tuo limite di spesa su Apify limitano
+le righe.
+
+### Posso esportare i profili di X in CSV o Excel?
+
+Sì. Esporta il dataset in JSON, CSV, Excel o HTML dalla scheda Storage.
+
+### Posso estrarre i follower di un utente Twitter?
+
+Sì. Attiva `includeFollowers`, `includeFollowing` o
+`includeVerifiedFollowers`. Ogni account è 1 riga.
+
+### Ottiene il sito web & la posizione di un profilo?
+
+Sì. `url` contiene il sito web & `location` contiene il testo scritto
+dall'utente.
+
+### Posso estrarre gli account protetti?
+
+Ottieni la riga di profilo pubblica, con `protected: true`. X mostra i post & i
+follower di un account protetto solo ai suoi follower approvati.
+
+### Come faccio a sapere se un account è in diretta ora?
+
+Imposta `checkLiveNow: true`. Ogni profilo riceve una riga `profileLive` con
+`live` & la sua ultima trasmissione.
+
+### Può tradurre le bio?
+
+Sì. Imposta `translateBioTo` su un codice lingua, come `es` o `pt-br`. Un
+profilo senza bio non aggiunge righe.
+
+### Perché includeLikes non restituisce nulla?
+
+Dal 2024 X mostra i post a cui un account ha messo Mi piace solo a
+quell'account. Gli altri account, compreso questo Actor, non possono leggerli.
 
 ### È legale estrarre i profili di X?
 
@@ -231,11 +544,11 @@ norme sulla privacy applicabili. Nel dubbio, chiedi a un legale qualificato.
 
 ### Perché la mia esecuzione non ha restituito risultati?
 
-Apri prima l'output gratuito `diagnostics`. Lo stato di un'esecuzione vuota ti
-dice di controllare target & filtri. `stopCauses` assegna a ogni causa un
+Leggi prima lo stato dell'esecuzione. Lo stato di un'esecuzione vuota ti dice di
+controllare target & filtri. L'output gratuito `diagnostics` compare quando
+qualcosa richiede attenzione. Il suo `stopCauses` assegna a ogni causa un
 `nextAction` da seguire. L'esecuzione elenca ogni input che non riesce a leggere
-& spiega come correggerlo. X nasconde i Mi piace, quindi `includeLikes` non
-restituisce righe `profileLike` per gli altri account.
+& spiega come correggerlo.
 
 ### Posso usare l'API, le pianificazioni & le integrazioni?
 
@@ -247,14 +560,15 @@ Profile Scraper di Xquik con un cron. Gli agenti usano
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp). Usa `latest`, a
 meno che non ti serva una build precedente.
 
-### Dove trovo assistenza?
-
-Apri una issue nella pagina dell'Actor o scrivi a support@xquik.com con l'ID
-dell'esecuzione. La diagnostica gratuita nel key-value store spiega le
-esecuzioni vuote, parziali o interrotte.
-
 ### Posso avere una soluzione personalizzata?
 
 Sì. Visita [xquik.com](https://xquik.com) o leggi la
 [documentazione API](https://docs.xquik.com/introduction). Copre dashboard, API,
 server MCP & webhook.
+
+### Dove trovo assistenza?
+
+Apri una issue nella pagina dell'Actor o scrivi a <support@xquik.com> con l'ID
+dell'esecuzione. La diagnostica gratuita nel key-value store spiega le
+esecuzioni che richiedono attenzione. Un'esecuzione che non ottiene righe ne
+indica il motivo nel suo stato.

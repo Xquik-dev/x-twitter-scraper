@@ -21,13 +21,11 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 > Xquik 是独立的第三方服务，与 X Corp 无关联。“Twitter”和“X”是 X Corp 的商标。
 
-## 这个 Twitter 回复抓取工具能做什么？
+## X Reply Scraper 能做什么？
 
 Xquik 的 X Reply Scraper 收集公开回复和评论对话。它可以处理单条帖子、批量 URL 列表、帖子 ID 和用户的回复时间线。
 
-它适合情感分析、客户反馈和社群研究。其他用途包括回复排名、发现潜在客户、审核内容和构建对话数据集。
-
-### 回复收集方式
+### 主要功能
 
 - 直接结果不完整时，自动模式会继续收集。
 - `collectionStrategy` 设置该 Actor 收集回复的方式。
@@ -36,11 +34,61 @@ Xquik 的 X Reply Scraper 收集公开回复和评论对话。它可以处理单
 - 输出支持 4 种排序方式、3 种详细程度和 3 种字段风格。
 - 每条回复都保留来源目标、父级 ID、根 ID 和层级深度。
 - 续抓游标支持补抓历史数据和定时运行。
-- 空运行会向 `diagnostics` 写入 1 条免费记录。
+- 需要关注的运行会向 `diagnostics` 写入 1 条免费记录。读取了所有目标但没有找到回复的运行不写入记录，它的状态会说明原因。
 - 运行日志在 `fetchDurationMs`、`processingDurationMs`、`pushDurationMs`、`statusDurationMs`、`fullPageDurationMs` 和 `fullTargetDurationMs` 中显示每页和每个目标的耗时。
 - Apify 重启运行后，已交付的回复和进度都会保留。
 
-## 如何抓取 X 回复
+### 使用场景
+
+- 衡量品牌和产品帖子下的情感倾向和客户反馈。
+- 按喜欢数为热门帖子下的回复和评论排名。
+- 在公开回复中找到提出问题或说出需求的潜在客户。
+- 审核回复，找出垃圾信息和滥用内容。
+- 重建完整对话，用于研究和 AI 训练数据集。
+- 长期追踪某个账号如何回复它的客户。
+
+### X Reply Scraper 能提取哪些数据？
+
+数据集和运行报告的 schema 描述了每个返回字段。基础字段还附有示例，方便 Agent 和自动生成的集成使用。
+
+每个完整回复行可以包含以下核心字段：
+
+| 字段 | 说明 |
+| --- | --- |
+| `id` | 回复 ID |
+| `text` | 回复正文 |
+| `fullText` | 长回复的完整正文 |
+| `createdAt` | 回复时间戳 |
+| `lang` | X 语言代码 |
+| `url` | 回复的直接 URL |
+| `conversationId` | X 对话 ID |
+| `inReplyToId` | 直接父级 ID |
+| `inReplyToUserId` | 父级作者 ID |
+| `inReplyToUsername` | 父级用户名 |
+| `likeCount` | 喜欢数 |
+| `replyCount` | 下级回复数 |
+| `retweetCount` | 转帖数 |
+| `quoteCount` | 引用数 |
+| `viewCount` | 查看次数 |
+| `bookmarkCount` | 书签数 |
+| `author` | 可获取的公开作者元数据 |
+| `media` | 图片、视频、GIF 及其变体 |
+| `entities` | 话题标签、cashtag、提及、URL 和视频时间戳 |
+| `quoted_tweet` | 被引用的帖子（如有） |
+| `retweeted_tweet` | 被转帖的帖子（如有） |
+
+完整行还会保留可获取的源元数据：
+
+- 帖子类型字段：`type`、`isReply`、`isQuoteStatus`、`isNoteTweet`、`isLimitedReply` 和 `isTranslatable`。
+- 文本细节：`displayTextRange`、`noteTweet`、`article` 和 `card`。
+- 标签和提示：`contentDisclosure`、`communityNote`、`possiblySensitive`、`tombstone` 和 `exclusiveContent`。
+- 对话细节：`conversationControl`、`limitedActions` 和 `unmentionedUserIds`。
+- 上下文字段：`source`、`place`、`communityId`、`communityName`、`reactionContext` 和 `postCta`。
+- 编辑和可用性字段：`edit`、`previousCounts`、`viewState` 和 `authorUnavailable`。
+
+扁平行保留对话上级链、来源详情、结果类型和 schema 版本。具体字段见 OpenAPI。
+
+## 如何用 X Reply Scraper 抓取回复？
 
 1. 粘贴帖子 URL、帖子 ID、个人资料 URL 或用户名。
 2. 设置 `maxItems`、`scope` 和任务所需的过滤条件。
@@ -113,37 +161,65 @@ Xquik 的 X Reply Scraper 收集公开回复和评论对话。它可以处理单
 }
 ```
 
+## 任务示例
+
+你可以从 50 个公开任务中选择。每个任务都有设了上限的输入和对应的数据集视图。运行前可以修改任何任务。
+
+- [抓取 X 帖子回复和 Twitter 评论](https://apify.com/xquik/x-reply-scraper/examples/scrape-post-replies)
+- [批量抓取 Twitter 回复](https://apify.com/xquik/x-reply-scraper/examples/scrape-bulk-post-replies)
+- [重建 Twitter 回复对话](https://apify.com/xquik/x-reply-scraper/examples/rebuild-full-conversation)
+- [按喜欢数为 Twitter 回复排名](https://apify.com/xquik/x-reply-scraper/examples/rank-most-liked-replies)
+- [抓取最新的帖子回复](https://apify.com/xquik/x-reply-scraper/examples/collect-latest-replies)
+- [移除 Twitter 回复中的垃圾信息](https://apify.com/xquik/x-reply-scraper/examples/exclude-spam-keywords)
+- [抓取英文 Twitter 回复](https://apify.com/xquik/x-reply-scraper/examples/collect-english-replies)
+- [抓取已认证账号的 Twitter 回复](https://apify.com/xquik/x-reply-scraper/examples/collect-verified-replies)
+- [抓取带媒体的 Twitter 回复](https://apify.com/xquik/x-reply-scraper/examples/collect-media-replies)
+- [抓取用户的 Twitter 回复时间线](https://apify.com/xquik/x-reply-scraper/examples/scrape-profile-replies)
+- [为 AI Agent 收集 Twitter 回复](https://apify.com/xquik/x-reply-scraper/examples/collect-replies-for-ai-agents)
+- [构建 X 回复 RAG 数据集](https://apify.com/xquik/x-reply-scraper/examples/build-x-reply-rag-dataset)
+- [归档 Twitter 回复供 LLM 处理](https://apify.com/xquik/x-reply-scraper/examples/archive-replies-for-llm-processing)
+- [提取 X 回复中的潜在客户到 CRM](https://apify.com/xquik/x-reply-scraper/examples/extract-reply-leads-for-crm)
+
 ## 抓取 X 回复要花多少钱？
 
 Xquik 的 X Reply Scraper 在所有 Apify 套餐上都按每个已交付行 $0.00015 收费。Apify 另行收取平台使用费。
 
 Xquik 对每个已交付的数据行收费一次。被你的过滤条件或去重移除的回复不收费。`diagnostics` 中的诊断记录免费。没有启动费、URL 费、查询费、翻页费或过滤费。
 
-## 公开任务示例
+## 空运行、部分完成和已停止的运行
 
-你可以从 50 个公开任务中选择。每个任务都有设了上限的输入和对应的数据集视图。运行前可以修改任何任务。
+Xquik 的 X Reply Scraper 会免费说明空运行、部分完成和已停止的运行。运行状态会说明运行为何停止，并统计已计费的结果和已读取的目标。读取了所有目标但没有找到回复的运行不写入记录，它的状态会说明原因和需要修改的地方。
 
-从这些示例开始：
+### 提取不完整
 
-- [为 AI Agent 收集回复](https://apify.com/xquik/x-reply-scraper/examples/collect-replies-for-ai-agents)
-- [构建 X 回复 RAG 数据集](https://apify.com/xquik/x-reply-scraper/examples/build-x-reply-rag-dataset)
-- [归档回复供 LLM 处理](https://apify.com/xquik/x-reply-scraper/examples/archive-replies-for-llm-processing)
-- [提取回复中的潜在客户到 CRM](https://apify.com/xquik/x-reply-scraper/examples/extract-reply-leads-for-crm)
+中断的运行会写入一条免费的 `partial` 诊断。已获取的结果不受影响。重试前，先查看 `availableResults`、`failedTargets`、`retryable` 和 `nextAction`。Actor 成功退出只说明结果已交付，不代表提取完整。
 
-## 面向 AI Agent 与 MCP
+状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_failed`、`page_limit`、`reply_reach` 和 `deadline_reached`。`reply_reach` 表示 X 只提供了帖子串的一部分。
 
-可以通过 Apify MCP、API 客户端、x402 或 Skyfire 运行 Xquik 的 X Reply Scraper。
+帖子或账号不存在不算失败。状态会写明这一点，例如“X has no match for 1 target.”。只有在其他原因让运行停止时，它才会列入 `stopCauses`。只要有一个原因可重试，整个运行就是 `retryable`。
 
-- 有限权限保护无关的 Apify 账号数据。
-- 按事件计费，费用与已交付结果挂钩。
-- Standby 模式保持关闭，以兼容 Agent 支付。
-- 类型化 schema 描述回复、运行报告和续抓游标。
-- 默认值设有上限，防止 Agent 意外发起无上限的运行。
-- 稳定的 `camelCase` 和 `snake_case` 模式让工具串联更简单。
-- 诊断行包含状态、消息和恢复操作。
-- 运行报告包含确切结果、停止原因和费用估算。
+### 诊断
 
-## 回复目标与输入别名
+成功的数据行使用 `resultType: "reply"`。需要关注的运行会向 `diagnostics` 写入恰好 1 条免费记录，例如输入无效、目标被跳过或提前停止。记录会说明如何解决问题。读取了所有目标但没有找到回复的运行不写入记录，它的状态会说明原因。
+
+运行状态会说明运行为何停止，并统计已计费的结果和已读取的目标。出现问题的运行总会写入 `run-report`，包括没有输入和输入无效时的退出。大型运行也会写入。顺利完成的小型运行会跳过它，节省 Apify 用量。开启 `alwaysSaveRunRecords` 后，每次运行都会写入。
+
+报告 schema 记录完成情况、计费、失败和已保存的游标。其中的 `version` 字段给出已发布 Actor 源码的确切版本。
+
+`status` 字段使用以下值：
+
+- `no-input`
+- `invalid-input`
+- `replies-incomplete`
+- `zero-output`
+- `aborted`
+- `unexpected-error`
+
+## 输入
+
+Input 标签页列出了所有选项。至少提供 1 个帖子 URL、帖子 ID、个人资料 URL 或用户名。其他字段都是可选的。
+
+### 回复目标与输入别名
 
 请使用以下主要字段。
 
@@ -170,33 +246,35 @@ Xquik 对每个已交付的数据行收费一次。被你的过滤条件或去�
 
 格式错误或不受支持的目标不会让 Actor 失败。没有剩余的有效目标时，运行会写入一条诊断，并附上修正方法。
 
-## 覆盖策略
+### 覆盖策略
 
 选择该 Actor 收集回复的方式。自动模式适合大多数任务。
 
-### 自动完整收集
+#### 自动完整收集
 
 大多数任务使用 `collectionStrategy: "auto"`。它会在你设定的范围内收集能获取到的每条回复。范围、深度、排序和作者控制先于你的上限生效。非根目标下的回复也会包含在内。X 隐藏了部分帖子串时，状态会说明 X 隐藏了多少条回复。其他 `collectionStrategy` 值不会切换到别的模式。
 
 诊断中的覆盖率数值不能证明 X 没有更多回复。上限、数据缺失或错误都可能让运行不完整。
 
-### 直接回复
+#### 直接回复
 
 使用 `collectionStrategy: "replies"`，按 X 自己的顺序获取直接回复。它支持保存的游标。
 
-### 对话搜索
+#### 对话搜索
 
 使用 `collectionStrategy: "conversationSearch"`，覆盖更广的对话。
 
-### 完整帖子串上下文
+#### 完整帖子串上下文
 
 使用 `collectionStrategy: "thread"` 读取源对话的上下文。设置 `includeOriginalPost: true`，把根帖子保留为深度 0。
 
-### 被隐藏的回复
+#### 被隐藏的回复
 
-使用 `collectionStrategy: "hiddenReplies"`，获取帖子作者隐藏的回复。X 按从早到晚的顺序列出它们，并附上对它们的回复。每行都带有 `resultType: "hiddenReply"`。没有被隐藏回复的帖子不返回任何行。
+默认的 `auto` 策略会加入帖子作者隐藏的回复。每条都是带有 `resultType: "hiddenReply"` 的一行，按普通行价格计费，并计入 `maxItems`。只有当帖子的回复计数多于 X 显示的回复时，运行才会读取它们，所以没有被隐藏回复的帖子不会产生额外费用。设置 `includeHiddenReplies: false` 可以排除它们。
 
-## 直接回复与嵌套回复控制
+使用 `collectionStrategy: "hiddenReplies"`，只获取被隐藏的回复。X 按从早到晚的顺序列出它们，并附上对它们的回复。没有被隐藏回复的帖子不返回任何行。
+
+### 直接回复与嵌套回复控制
 
 用 `scope` 选择结果形式。
 
@@ -208,7 +286,7 @@ Xquik 对每个已交付的数据行收费一次。被你的过滤条件或去�
 
 用 `maxDepth` 限制嵌套层级。X 省略某个对话上级时，父级链接可能缺失。该 Actor 会保留能得到的最准确深度。
 
-## 排序
+### 排序
 
 `sort` 可以使用以下值：
 
@@ -223,11 +301,11 @@ X 搜索会少计一些较早回复的喜欢数，所以按 `likes` 排序的运
 
 `sortBy` 和 `queryType` 兼容别名仍然有效。
 
-## 回复过滤条件
+### 回复过滤条件
 
 所有支持的过滤条件都在写入数据集之前生效。
 
-### 文本与实体过滤条件
+#### 文本与实体过滤条件
 
 | 输入 | 行为 |
 | --- | --- |
@@ -240,7 +318,7 @@ X 搜索会少计一些较早回复的喜欢数，所以按 `likes` 排序的运
 | `cashtags` | 至少包含 1 个 cashtag |
 | `mentioning` | 必须包含一个 @提及 |
 
-### 作者与语言过滤条件
+#### 作者与语言过滤条件
 
 | 输入 | 行为 |
 | --- | --- |
@@ -251,11 +329,11 @@ X 搜索会少计一些较早回复的喜欢数，所以按 `likes` 排序的运
 | `blueVerifiedOnly` | 要求 X Premium 认证 |
 | `excludeOriginalAuthor` | 移除源帖子作者的自我回复 |
 
-### 互动过滤条件
+#### 互动过滤条件
 
 使用 `minLikes`、`minReplies`、`minRetweets`、`minQuotes`、`minViews` 和 `minBookmarks`。`minFaves` 别名对应 `minLikes`。
 
-### 媒体与时间过滤条件
+#### 媒体与时间过滤条件
 
 - 设置 `hasMediaOnly: true`，只保留带公开媒体的回复。
 - 把 `mediaType` 设为 `any`、`image`、`video`、`gif` 或 `link`。
@@ -263,46 +341,9 @@ X 搜索会少计一些较早回复的喜欢数，所以按 `likes` 排序的运
 - 设置 `until` 作为结束时间戳，不包含该时间点。
 - `sinceTime` 和 `untilTime` 可作为兼容别名使用。
 
-## 输出字段
+## 输出
 
-数据集和运行报告的 schema 描述了每个返回字段。基础字段还附有示例，方便 Agent 和自动生成的集成使用。
-
-每个完整回复行可以包含以下核心字段：
-
-| 字段 | 说明 |
-| --- | --- |
-| `id` | 回复 ID |
-| `text` | 回复正文 |
-| `fullText` | 长回复的完整正文 |
-| `createdAt` | 回复时间戳 |
-| `lang` | X 语言代码 |
-| `url` | 回复的直接 URL |
-| `conversationId` | X 对话 ID |
-| `inReplyToId` | 直接父级 ID |
-| `inReplyToUserId` | 父级作者 ID |
-| `inReplyToUsername` | 父级用户名 |
-| `likeCount` | 喜欢数 |
-| `replyCount` | 下级回复数 |
-| `retweetCount` | 转帖数 |
-| `quoteCount` | 引用数 |
-| `viewCount` | 查看次数 |
-| `bookmarkCount` | 书签数 |
-| `author` | 可获取的公开作者元数据 |
-| `media` | 图片、视频、GIF 及其变体 |
-| `entities` | 话题标签、cashtag、提及、URL 和视频时间戳 |
-| `quoted_tweet` | 被引用的帖子（如有） |
-| `retweeted_tweet` | 被转帖的帖子（如有） |
-
-完整行还会保留可获取的源元数据：
-
-- 帖子类型字段：`type`、`isReply`、`isQuoteStatus`、`isNoteTweet`、`isLimitedReply` 和 `isTranslatable`。
-- 文本细节：`displayTextRange`、`noteTweet`、`article` 和 `card`。
-- 标签和提示：`contentDisclosure`、`communityNote`、`possiblySensitive`、`tombstone` 和 `exclusiveContent`。
-- 对话细节：`conversationControl`、`limitedActions` 和 `unmentionedUserIds`。
-- 上下文字段：`source`、`place`、`communityId`、`reactionContext` 和 `postCta`。
-- 编辑和可用性字段：`edit`、`previousCounts`、`viewState` 和 `authorUnavailable`。
-
-扁平行保留对话上级链、来源详情、结果类型和 schema 版本。具体字段见 OpenAPI。
+每个回复行都是一个 JSON 对象。数据集和运行报告的 schema 描述了每个字段，AI Agent 无需猜测就能读取数据行。数据集可以导出为 JSON、CSV、Excel 或 HTML。
 
 ### 作者元数据
 
@@ -351,35 +392,37 @@ X 搜索会少计一些较早回复的喜欢数，所以按 `likes` 排序的运
 
 示例值仅作说明，实际运行返回实时数据。
 
-## 输出模式
+### 输出模式
 
 选择每个数据集行有多宽。
 
-### 精简
+#### 精简
 
 设置 `outputMode: "compact"`，得到更窄的数据集。它保留正文、对话、作者、互动和媒体字段。
 
-### 完整
+#### 完整
 
 设置 `outputMode: "full"`，保留所有支持的公开字段。
 
-### 丰富
+#### 丰富
 
 设置 `outputMode: "rich"`，让每行包含最多的数据。丰富行保留完整模式的每一列，并在末尾加上 `hasCommunityNotes`、`quotedTweetPermalink`、`unavailableAuthorId` 和媒体的 `sourceUser`。
 
-### 原始
+#### 原始
 
 设置 `outputMode: "raw"`，在 `raw` 下加入经过清理的源数据快照。
 
-### 嵌套或扁平
+#### 嵌套或扁平
 
 默认的 `flat` 布局保留嵌套对象，并为表格加上作者字段。设置 `outputPreset: "nested"` 可以省略这些额外的扁平字段。
 
-### 字段命名
+#### 字段命名
 
 把 `fieldStyle` 设为 `source`、`camelCase` 或 `snake_case`。该 Actor 不会覆盖名称冲突的源字段。
 
-## 限制、计费与续抓
+## 运行选项
+
+### 限制、计费与续抓
 
 `maxItems` 限制整次运行交付的行数。`maxItemsPerTarget` 限制每条帖子或每个个人资料的行数。
 
@@ -389,40 +432,15 @@ X 搜索会少计一些较早回复的喜欢数，所以按 `likes` 排序的运
 
 因翻页限制结束的运行，可以从默认键值存储读取 `next-cursors`。通过 `startCursor` 传入一个游标，即可继续该目标。
 
-### Apify 超时
+#### Apify 超时
 
 Apify 默认超时为 `0`，所以运行没有时间限制。该 Actor 会一直运行，直到达到上限或没有更多符合条件的数据。你仍然可以设置有限的 Apify 超时。这时 `completionReason: "deadline_reached"` 表示快到时限了。该 Actor 会保存回复和报告，然后在时限前正常退出。已交付的回复只计费一次。未完成的目标之后可以继续。
 
-## 提取不完整
-
-中断的运行会写入一条免费的 `partial` 诊断。已获取的结果不受影响。重试前，先查看 `availableResults`、`failedTargets`、`retryable` 和 `nextAction`。Actor 成功退出只说明结果已交付，不代表提取完整。
-
-状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `target_not_found`、`target_failed`、`page_limit`、`reply_reach` 和 `deadline_reached`。`reply_reach` 表示 X 只提供了帖子串的一部分。
-
-帖子或账号不存在不算失败。状态会写明这一点，例如“X has no match for 1 target.”。只有在其他原因让运行停止时，它才会列入 `stopCauses`。只要有一个原因可重试，整个运行就是 `retryable`。
-
-## 诊断
-
-成功的数据行使用 `resultType: "reply"`。没有数据就退出的运行，会向 `diagnostics` 写入恰好 1 条免费记录。记录会说明如何解决问题。
-
-运行状态会说明运行为何停止，并统计已计费的结果和已读取的目标。出现问题的运行总会写入 `run-report`，包括没有输入和输入无效时的退出。大型运行也会写入。顺利完成的小型运行会跳过它，节省 Apify 用量。开启 `alwaysSaveRunRecords` 后，每次运行都会写入。
-
-报告 schema 记录完成情况、计费、失败和已保存的游标。其中的 `version` 字段给出已发布 Actor 源码的确切版本。
-
-`status` 字段使用以下值：
-
-- `no-input`
-- `invalid-input`
-- `replies-incomplete`
-- `zero-output`
-- `aborted`
-- `unexpected-error`
-
-## API 示例
+### API 示例
 
 每个示例都会运行 Xquik 的 X Reply Scraper 并返回数据集条目。把 `<APIFY_API_TOKEN>` 替换为你的 Apify API token。
 
-### JavaScript
+#### JavaScript
 
 ```javascript
 import { ApifyClient } from 'apify-client';
@@ -441,7 +459,7 @@ const { items } = await client.dataset(run.defaultDatasetId).listItems();
 console.log(items);
 ```
 
-### Python
+#### Python
 
 ```python
 from apify_client import ApifyClient
@@ -458,7 +476,7 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     print(item)
 ```
 
-### cURL
+#### cURL
 
 ```bash
 actor=xquik~x-reply-scraper
@@ -469,13 +487,26 @@ curl "https://api.apify.com/v2/acts/$actor/run-sync-get-dataset-items" \
   -d '{"tweetIds":["2082577277246972300"],"maxItems":100}'
 ```
 
-## 自动化与集成
+### 自动化与集成
 
 可以通过 Apify 定时调度、webhook 或 API 客户端运行 Xquik 的 X Reply Scraper。它能连接 Make、Zapier、n8n、Google Sheets 或云存储。Agent 可以通过 [Apify MCP 服务器](https://docs.apify.com/platform/integrations/mcp) 调用它。
 
 符合条件的 Agent 工作流还可以使用 [x402](https://docs.apify.com/integrations/x402) 或 [Skyfire](https://docs.apify.com/integrations/skyfire)。
 
-Xquik 还提供 47 个仪表盘工具、一个 REST API、签名 webhook 和一个 MCP 服务器。
+Xquik 还提供 53 个仪表盘工具、一个 REST API、签名 webhook 和一个 MCP 服务器。
+
+### 面向 AI Agent 与 MCP
+
+可以通过 Apify MCP、API 客户端、x402 或 Skyfire 运行 Xquik 的 X Reply Scraper。
+
+- 有限权限保护无关的 Apify 账号数据。
+- 按事件计费，费用与已交付结果挂钩。
+- Standby 模式保持关闭，以兼容 Agent 支付。
+- 类型化 schema 描述回复、运行报告和续抓游标。
+- 默认值设有上限，防止 Agent 意外发起无上限的运行。
+- 稳定的 `camelCase` 和 `snake_case` 模式让工具串联更简单。
+- 诊断行包含状态、消息和恢复操作。
+- 运行报告包含确切结果、停止原因和费用估算。
 
 ### 始终使用最新构建
 
@@ -510,9 +541,49 @@ Apify 不会把固定的构建编号重定向到 `latest`。请把固定编号�
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)：用 AI 为每条帖子回答你自定义的分类、评分和是非问题。适合预设分析不符合你的标签的场景。每条已分析帖子 $0.0003 起。
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)：根据 8 个 AI 特征答案，为每条帖子估算 0 到 100 的 Viral Score 和结论。适合研究帖子为何走红或遇冷的场景。每条已分析帖子 $0.0003 起。
 
+## 需要抓取以外的功能？
+
+Xquik 还提供 53 个仪表盘工具、一个 REST API、签名 webhook 和一个 MCP 服务器。
+
+- [API 文档](https://docs.xquik.com/introduction)：REST API 指南
+- [帖子回复 API](https://docs.xquik.com/api-reference/x/tweet-replies)：获取一条帖子的回复
+- [隐藏回复 API](https://docs.xquik.com/api-reference/x/tweet-hidden-replies)：获取作者隐藏的回复
+- [帖子串 API](https://docs.xquik.com/api-reference/x/tweet-thread)：获取整个帖子串
+- [用户回复 API](https://docs.xquik.com/api-reference/x/user-replies)：获取某个用户的回复
+- [MCP 服务器](https://docs.xquik.com/mcp/overview)：查看支持的工具
+- [Webhook](https://docs.xquik.com/webhooks/overview)：签名事件推送
+
 ## 常见问题
 
 先解答常见问题，再说明在哪里获取帮助。
+
+### 如何抓取一条帖子下的评论？
+
+把帖子 URL 粘贴到 `startUrls`，然后点击 Start。X 把评论称为回复，所以每条评论就是 1 个回复行。
+
+### 可以一次抓取多条帖子的回复吗？
+
+可以。在 1 次运行中粘贴多个帖子 URL 或帖子 ID。每条回复都会在 `sourceTarget` 中保留来源帖子。
+
+### 包含嵌套回复吗？
+
+包含。默认的 `scope` 会收集直接回复和嵌套回复。把 `scope` 设为 `direct`，只获取对帖子本身的回复。`maxDepth` 限制运行读取的层级深度。
+
+### 能获取作者隐藏的回复吗？
+
+能。默认的 `auto` 策略会把它们作为 `hiddenReply` 行加入。设置 `includeHiddenReplies: false` 可以跳过它们。
+
+### 可以按喜欢数或日期给回复排序吗？
+
+可以。设置 `sort`，按喜欢数为回复排名，或把最新或最早的回复排在前面。
+
+### 可以把回复导出为 CSV 或 Excel 吗？
+
+可以。数据集可以导出为 CSV、Excel、JSON 或 HTML。扁平输出每行 1 条回复，作者字段就在旁边。
+
+### 可以抓取某个用户的回复，而不是某条帖子的回复吗？
+
+可以。粘贴个人资料 URL 或用户名，运行就会读取该用户的回复时间线。
 
 ### 我需要 X API 密钥或登录吗？
 
@@ -534,7 +605,7 @@ X 隐藏了部分帖子串时，状态会说明 X 隐藏了多少条回复。`st
 
 ### 在哪里获取帮助？
 
-在 Actor 页面提交 issue，或带上运行 ID 联系 [support@xquik.com](mailto:support@xquik.com)。
+在 Actor 页面提交 issue，或带上运行 ID 联系 <support@xquik.com>。
 
 ### 可以获得定制方案吗？
 

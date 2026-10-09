@@ -31,17 +31,13 @@ avant l'écriture dans le dataset, donc vous payez seulement les lignes livrées
 > Xquik est un service tiers indépendant. Non affilié à X Corp.
 > "Twitter" et "X" sont des marques déposées de X Corp.
 
-## Que fait ce scraper de réponses Twitter ?
+## Que fait X Reply Scraper ?
 
 X Reply Scraper de Xquik collecte les réponses publiques et les conversations de
 commentaires. Il traite les posts seuls, les listes d'URL en masse, les ID de
 post et les fils de réponses des comptes.
 
-Utilisez-le pour l'analyse de sentiment, les retours clients et l'étude des
-communautés en ligne. Il sert aussi au classement des réponses, à la recherche
-de prospects, à la revue de modération et aux datasets de conversations.
-
-### Comportement de collecte des réponses
+### Fonctionnalités clés
 
 - Le mode auto continue la collecte quand les résultats directs sont
   incomplets.
@@ -54,14 +50,80 @@ de prospects, à la revue de modération et aux datasets de conversations.
   profondeur.
 - Les curseurs de reprise facilitent la récupération d'historique et les runs
   planifiés.
-- Les runs vides écrivent 1 enregistrement gratuit dans `diagnostics`.
+- Les runs qui demandent votre attention écrivent 1 enregistrement gratuit dans
+  `diagnostics`. Un run qui lit chaque cible sans trouver de réponse n'en écrit
+  aucun. Son statut explique pourquoi.
 - Les logs du run montrent la durée par page et par cible dans
   `fetchDurationMs`, `processingDurationMs`, `pushDurationMs`,
   `statusDurationMs`, `fullPageDurationMs` et `fullTargetDurationMs`.
 - Les runs gardent les réponses livrées et la progression quand Apify les
   redémarre.
 
-## Comment scraper des réponses X
+### Cas d'usage
+
+- Mesurez le sentiment et les retours clients sous les posts de marques et de
+  produits.
+- Classez les réponses et les commentaires qui ont le plus de J'aime sous un
+  post viral.
+- Trouvez des prospects qui posent des questions ou expriment un besoin dans des
+  réponses publiques.
+- Examinez les réponses pour la modération, le spam et les abus.
+- Reconstituez des conversations entières pour la recherche et les datasets
+  d'entraînement d'IA.
+- Suivez dans le temps la façon dont un compte répond à ses clients.
+
+### Quelles données X Reply Scraper peut-il extraire ?
+
+Les schémas du dataset et du run-report décrivent chaque champ renvoyé. Les
+champs primitifs portent aussi des exemples pour les agents et les intégrations
+générées.
+
+Chaque ligne de réponse complète peut inclure ces champs principaux :
+
+| Champ               | Description                                            |
+| ------------------- | ------------------------------------------------------ |
+| `id`                | ID de la réponse                                       |
+| `text`              | Texte de la réponse                                    |
+| `fullText`          | Texte long de la réponse                               |
+| `createdAt`         | Horodatage de la réponse                               |
+| `lang`              | Code de langue X                                       |
+| `url`               | URL directe de la réponse                              |
+| `conversationId`    | ID de la conversation X                                |
+| `inReplyToId`       | ID du parent direct                                    |
+| `inReplyToUserId`   | ID de l'auteur du parent                               |
+| `inReplyToUsername` | Nom d'utilisateur du parent                            |
+| `likeCount`         | J'aime                                                 |
+| `replyCount`        | Réponses enfants                                       |
+| `retweetCount`      | Reposts                                                |
+| `quoteCount`        | Citations                                              |
+| `viewCount`         | Vues                                                   |
+| `bookmarkCount`     | Signets                                                |
+| `author`            | Métadonnées publiques disponibles de l'auteur          |
+| `media`             | Images, vidéos, GIF et variantes                       |
+| `entities`          | Hashtags, cashtags, mentions, URL et horodatages vidéo |
+| `quoted_tweet`      | Post cité, quand il est disponible                     |
+| `retweeted_tweet`   | Post reposté, quand il est disponible                  |
+
+Les lignes complètes gardent aussi les métadonnées de source disponibles :
+
+- Les champs de type de post sont `type`, `isReply`, `isQuoteStatus`,
+  `isNoteTweet`, `isLimitedReply` et `isTranslatable`.
+- Les détails du texte sont `displayTextRange`, `noteTweet`, `article` et
+  `card`.
+- Les libellés et avis sont `contentDisclosure`, `communityNote`,
+  `possiblySensitive`, `tombstone` et `exclusiveContent`.
+- Les détails de conversation sont `conversationControl`, `limitedActions` et
+  `unmentionedUserIds`.
+- Les champs de contexte sont `source`, `place`, `communityId`,
+  `communityName`, `reactionContext` et `postCta`.
+- Les champs de modification et de disponibilité sont `edit`, `previousCounts`,
+  `viewState` et `authorUnavailable`.
+
+Les lignes plates gardent l'ascendance de la conversation, les détails de la
+source, le type de résultat et la version du schéma. Consultez OpenAPI pour la
+liste exacte des champs.
+
+## Comment utiliser X Reply Scraper pour scraper des réponses ?
 
 1. Collez des URL de posts, des ID de post, des URL de profil ou des noms
    d'utilisateur.
@@ -138,6 +200,26 @@ activées.
 }
 ```
 
+## Exemples de tâches
+
+Choisissez parmi 50 tâches publiques. Chacune a une entrée limitée et une vue de
+dataset adaptée. Modifiez n'importe quelle tâche avant de la lancer.
+
+- [Scraper les réponses aux posts X et les commentaires Twitter](https://apify.com/xquik/x-reply-scraper/examples/scrape-post-replies)
+- [Scraper des réponses Twitter en masse](https://apify.com/xquik/x-reply-scraper/examples/scrape-bulk-post-replies)
+- [Reconstituer une conversation de réponses Twitter](https://apify.com/xquik/x-reply-scraper/examples/rebuild-full-conversation)
+- [Classer les réponses Twitter par J'aime](https://apify.com/xquik/x-reply-scraper/examples/rank-most-liked-replies)
+- [Scraper les dernières réponses à un post](https://apify.com/xquik/x-reply-scraper/examples/collect-latest-replies)
+- [Retirer le spam des réponses Twitter](https://apify.com/xquik/x-reply-scraper/examples/exclude-spam-keywords)
+- [Scraper les réponses Twitter en anglais](https://apify.com/xquik/x-reply-scraper/examples/collect-english-replies)
+- [Scraper les réponses Twitter de comptes certifiés](https://apify.com/xquik/x-reply-scraper/examples/collect-verified-replies)
+- [Scraper les réponses Twitter avec médias](https://apify.com/xquik/x-reply-scraper/examples/collect-media-replies)
+- [Scraper le fil de réponses Twitter d'un compte](https://apify.com/xquik/x-reply-scraper/examples/scrape-profile-replies)
+- [Collecter des réponses Twitter pour les agents IA](https://apify.com/xquik/x-reply-scraper/examples/collect-replies-for-ai-agents)
+- [Créer un dataset RAG de réponses X](https://apify.com/xquik/x-reply-scraper/examples/build-x-reply-rag-dataset)
+- [Archiver des réponses Twitter pour les LLM](https://apify.com/xquik/x-reply-scraper/examples/archive-replies-for-llm-processing)
+- [Extraire des prospects des réponses X pour un CRM](https://apify.com/xquik/x-reply-scraper/examples/extract-reply-leads-for-crm)
+
 ## Combien coûte le scraping de réponses X ?
 
 X Reply Scraper de Xquik coûte $0.00015 par ligne livrée sur chaque plan Apify.
@@ -148,38 +230,68 @@ ou la déduplication retirent ne coûtent rien. Les enregistrements de diagnosti
 dans `diagnostics` sont gratuits. Xquik ne facture ni le démarrage, ni les URL,
 ni les requêtes, ni la pagination, ni les filtres.
 
-## Exemples de tâches publiques
+## Runs vides, partiels et arrêtés
 
-Choisissez parmi 50 tâches publiques. Chacune a une entrée limitée et une vue de
-dataset adaptée. Modifiez n'importe quelle tâche avant de la lancer.
+X Reply Scraper de Xquik explique gratuitement les runs vides, partiels et
+arrêtés. Le statut du run dit pourquoi il s'est arrêté. Il compte aussi les
+résultats facturés et les cibles lues. Un run qui lit chaque cible sans trouver
+de réponse n'écrit aucun enregistrement. Son statut explique pourquoi et ce
+qu'il faut changer.
 
-Commencez par ces exemples :
+### Extraction incomplète
 
-- [Collect replies for AI agents](https://apify.com/xquik/x-reply-scraper/examples/collect-replies-for-ai-agents)
-- [Build an X reply RAG dataset](https://apify.com/xquik/x-reply-scraper/examples/build-x-reply-rag-dataset)
-- [Archive replies for LLM processing](https://apify.com/xquik/x-reply-scraper/examples/archive-replies-for-llm-processing)
-- [Extract reply leads for CRM](https://apify.com/xquik/x-reply-scraper/examples/extract-reply-leads-for-crm)
+Un run interrompu écrit un diagnostic `partial` gratuit. Les résultats
+disponibles restent intacts. Lisez `availableResults`, `failedTargets`,
+`retryable` et `nextAction` avant de relancer. Une sortie réussie de l'Actor
+confirme la livraison, pas une extraction complète.
 
-## Prêt pour les agents IA et MCP
+Le statut nomme chaque cause d'arrêt anticipé. `stopCauses` liste chaque cause
+avec ses propres `message`, `retryable` et `nextAction`. Les causes sont
+`target_not_found`, `target_failed`, `page_limit`, `reply_reach` et
+`deadline_reached`. `reply_reach` signifie que X n'a renvoyé qu'une partie d'une
+discussion.
 
-Lancez X Reply Scraper de Xquik via Apify MCP, des clients API, x402 ou Skyfire.
+Un post ou un compte introuvable ne compte pas comme un échec. Le statut le
+nomme, par exemple "X has no match for 1 target." Il n'entre dans `stopCauses`
+que si une autre cause a arrêté le run. Le run est `retryable` dès qu'une cause
+l'est.
 
-- Des permissions limitées protègent les autres données de votre compte Apify.
-- La facturation pay-per-event lie le coût aux résultats livrés.
-- Le mode Standby reste désactivé pour garantir la compatibilité avec les
-  paiements agentiques.
-- Des schémas typés décrivent les réponses, les rapports de run et les curseurs
-  de reprise.
-- Des valeurs par défaut bornées évitent qu'un agent lance par accident un run
-  sans limite.
-- Les modes stables `camelCase` et `snake_case` simplifient l'enchaînement
-  d'outils.
-- Les lignes de diagnostic incluent un statut, un message et une action de
-  reprise.
-- Les rapports de run incluent les résultats exacts, les raisons d'arrêt et les
-  estimations de coût.
+### Diagnostics
 
-## Cibles de réponses et alias d'entrée
+Les lignes de données réussies utilisent `resultType: "reply"`. Un run qui
+demande votre attention écrit exactement 1 enregistrement gratuit dans
+`diagnostics`. C'est le cas d'une entrée invalide, d'une cible ignorée ou d'un
+arrêt anticipé. Cet enregistrement indique comment corriger le problème. Un run
+qui lit chaque cible sans trouver de réponse n'en écrit aucun. Son statut
+explique pourquoi.
+
+Le statut du run dit pourquoi il s'est arrêté. Il compte aussi les résultats
+facturés et les cibles lues. Les runs qui rencontrent un problème écrivent
+toujours `run-report`, y compris les sorties sans entrée ou avec une entrée
+invalide. Un gros run l'écrit aussi. Un petit run sans problème ne l'écrit pas
+et réduit l'usage Apify. Activez `alwaysSaveRunRecords` pour l'écrire à chaque
+run.
+
+Le schéma du rapport documente l'achèvement, la facturation, les échecs et les
+curseurs enregistrés. Son champ `version` donne la version exacte de la source
+publiée de l'Actor.
+
+Le champ `status` utilise ces valeurs :
+
+- `no-input`
+- `invalid-input`
+- `replies-incomplete`
+- `zero-output`
+- `aborted`
+- `unexpected-error`
+
+## Entrée
+
+L'onglet Input liste toutes les options. Indiquez au moins 1 URL de post, ID de
+post, URL de profil ou nom d'utilisateur. Tous les autres champs sont
+facultatifs.
+
+### Cibles de réponses et alias d'entrée
 
 Utilisez ces champs principaux.
 
@@ -213,12 +325,12 @@ Des cibles mal formées ou non prises en charge ne font pas échouer l'Actor.
 Quand il ne reste aucune cible valide, le run écrit un diagnostic avec la
 correction.
 
-## Stratégies de couverture
+### Stratégies de couverture
 
 Choisissez comment l'Actor collecte les réponses. Le mode auto convient à la
 plupart des cas.
 
-### Mode auto complet
+#### Mode auto complet
 
 Utilisez `collectionStrategy: "auto"` dans la plupart des cas. Il collecte
 chaque réponse qu'il peut atteindre dans votre périmètre. Les contrôles de
@@ -231,30 +343,37 @@ Un chiffre de couverture dans les diagnostics ne prouve pas que X n'a plus de
 réponses. Des limites, des données manquantes ou des erreurs peuvent laisser un
 run incomplet.
 
-### Réponses directes
+#### Réponses directes
 
 Utilisez `collectionStrategy: "replies"` pour les réponses directes, dans
 l'ordre de X. Ce mode accepte les curseurs enregistrés.
 
-### Recherche de conversation
+#### Recherche de conversation
 
 Utilisez `collectionStrategy: "conversationSearch"` pour couvrir largement la
 conversation.
 
-### Contexte complet de la discussion
+#### Contexte complet de la discussion
 
 Utilisez `collectionStrategy: "thread"` pour lire le contexte de la conversation
 source. Réglez `includeOriginalPost: true` pour garder le post racine à la
 profondeur 0.
 
-### Réponses masquées
+#### Réponses masquées
 
-Utilisez `collectionStrategy: "hiddenReplies"` pour les réponses que l'auteur du
-post a masquées. X les liste de la plus ancienne à la plus récente, avec les
-réponses qui leur sont adressées. Chaque ligne a `resultType: "hiddenReply"`. Un
-post sans réponses masquées ne renvoie aucune ligne.
+La stratégie `auto` par défaut ajoute les réponses que l'auteur du post a
+masquées. Chacune devient une ligne avec `resultType: "hiddenReply"`, au prix
+habituel d'une ligne, et compte dans `maxItems`. Le run les lit seulement quand
+le post compte plus de réponses que X n'en affiche. Un post sans réponses
+masquées ne coûte donc rien de plus. Réglez `includeHiddenReplies: false` pour
+les exclure.
 
-## Contrôles des réponses directes et imbriquées
+Utilisez `collectionStrategy: "hiddenReplies"` pour obtenir seulement les
+réponses masquées. X les liste de la plus ancienne à la plus récente, avec les
+réponses qui leur sont adressées. Un post sans réponses masquées ne renvoie
+aucune ligne.
+
+### Contrôles des réponses directes et imbriquées
 
 Utilisez `scope` pour choisir la forme du résultat.
 
@@ -268,7 +387,7 @@ Utilisez `maxDepth` pour limiter l'imbrication. Quand X omet un ancêtre de la
 conversation, le lien vers le parent peut manquer. L'Actor garde la meilleure
 profondeur disponible.
 
-## Tri
+### Tri
 
 Utilisez `sort` avec ces valeurs :
 
@@ -285,11 +404,11 @@ filtrés, puis les trient. Les cibles de post gardent un tri global.
 
 Les alias de compatibilité `sortBy` et `queryType` fonctionnent toujours.
 
-## Filtres de réponses
+### Filtres de réponses
 
 Tous les filtres pris en charge passent avant l'écriture dans le dataset.
 
-### Filtres de texte et d'entités
+#### Filtres de texte et d'entités
 
 | Entrée           | Comportement                            |
 | ---------------- | --------------------------------------- |
@@ -302,7 +421,7 @@ Tous les filtres pris en charge passent avant l'écriture dans le dataset.
 | `cashtags`       | Exiger au moins 1 cashtag               |
 | `mentioning`     | Exiger une @mention                     |
 
-### Filtres d'auteur et de langue
+#### Filtres d'auteur et de langue
 
 | Entrée                  | Comportement                                         |
 | ----------------------- | ---------------------------------------------------- |
@@ -313,12 +432,12 @@ Tous les filtres pris en charge passent avant l'écriture dans le dataset.
 | `blueVerifiedOnly`      | Exiger la certification X Premium                    |
 | `excludeOriginalAuthor` | Retirer les auto-réponses de l'auteur source         |
 
-### Filtres d'engagement
+#### Filtres d'engagement
 
 Utilisez `minLikes`, `minReplies`, `minRetweets`, `minQuotes`, `minViews` et
 `minBookmarks`. L'alias `minFaves` correspond à `minLikes`.
 
-### Filtres de médias et de temps
+#### Filtres de médias et de temps
 
 - Réglez `hasMediaOnly: true` pour les réponses avec des médias publics.
 - Réglez `mediaType` sur `any`, `image`, `video`, `gif` ou `link`.
@@ -326,56 +445,11 @@ Utilisez `minLikes`, `minReplies`, `minRetweets`, `minQuotes`, `minViews` et
 - Réglez `until` pour un horodatage de fin exclu.
 - Utilisez `sinceTime` et `untilTime` comme alias de compatibilité.
 
-## Champs de sortie
+## Sortie
 
-Les schémas du dataset et du run-report décrivent chaque champ renvoyé. Les
-champs primitifs portent aussi des exemples pour les agents et les intégrations
-générées.
-
-Chaque ligne de réponse complète peut inclure ces champs principaux :
-
-| Champ               | Description                                            |
-| ------------------- | ------------------------------------------------------ |
-| `id`                | ID de la réponse                                       |
-| `text`              | Texte de la réponse                                    |
-| `fullText`          | Texte long de la réponse                               |
-| `createdAt`         | Horodatage de la réponse                               |
-| `lang`              | Code de langue X                                       |
-| `url`               | URL directe de la réponse                              |
-| `conversationId`    | ID de la conversation X                                |
-| `inReplyToId`       | ID du parent direct                                    |
-| `inReplyToUserId`   | ID de l'auteur du parent                               |
-| `inReplyToUsername` | Nom d'utilisateur du parent                            |
-| `likeCount`         | J'aime                                                 |
-| `replyCount`        | Réponses enfants                                       |
-| `retweetCount`      | Reposts                                                |
-| `quoteCount`        | Citations                                              |
-| `viewCount`         | Vues                                                   |
-| `bookmarkCount`     | Signets                                                |
-| `author`            | Métadonnées publiques disponibles de l'auteur          |
-| `media`             | Images, vidéos, GIF et variantes                       |
-| `entities`          | Hashtags, cashtags, mentions, URL et horodatages vidéo |
-| `quoted_tweet`      | Post cité, quand il est disponible                     |
-| `retweeted_tweet`   | Post reposté, quand il est disponible                  |
-
-Les lignes complètes gardent aussi les métadonnées de source disponibles :
-
-- Les champs de type de post sont `type`, `isReply`, `isQuoteStatus`,
-  `isNoteTweet`, `isLimitedReply` et `isTranslatable`.
-- Les détails du texte sont `displayTextRange`, `noteTweet`, `article` et
-  `card`.
-- Les libellés et avis sont `contentDisclosure`, `communityNote`,
-  `possiblySensitive`, `tombstone` et `exclusiveContent`.
-- Les détails de conversation sont `conversationControl`, `limitedActions` et
-  `unmentionedUserIds`.
-- Les champs de contexte sont `source`, `place`, `communityId`,
-  `reactionContext` et `postCta`.
-- Les champs de modification et de disponibilité sont `edit`, `previousCounts`,
-  `viewState` et `authorUnavailable`.
-
-Les lignes plates gardent l'ascendance de la conversation, les détails de la
-source, le type de résultat et la version du schéma. Consultez OpenAPI pour la
-liste exacte des champs.
+Chaque ligne de réponse est un objet JSON. Les schémas du dataset et du
+run-report décrivent chaque champ, donc les agents IA peuvent lire les lignes
+sans deviner. Exportez le dataset en JSON, CSV, Excel ou HTML.
 
 ### Métadonnées de l'auteur
 
@@ -428,43 +502,45 @@ Une ligne de réponse abrégée ressemble à ceci :
 
 Les valeurs sont des exemples. Les vrais runs renvoient des données en direct.
 
-## Modes de sortie
+### Modes de sortie
 
 Choisissez la largeur de chaque ligne du dataset.
 
-### Compact
+#### Compact
 
 Réglez `outputMode: "compact"` pour un dataset plus léger. Il garde les champs
 de texte, de conversation, d'auteur, d'engagement et de médias.
 
-### Full
+#### Full
 
 Réglez `outputMode: "full"` pour garder chaque champ public pris en charge.
 
-### Rich
+#### Rich
 
 Réglez `outputMode: "rich"` pour obtenir le plus de données par ligne. Les
 lignes riches gardent toutes les colonnes du mode Full et ajoutent à la fin
 `hasCommunityNotes`, `quotedTweetPermalink`, `unavailableAuthorId` et le
 `sourceUser` des médias.
 
-### Raw
+#### Raw
 
 Réglez `outputMode: "raw"` pour ajouter un instantané nettoyé de la source sous
 `raw`.
 
-### Imbriqué ou plat
+#### Imbriqué ou plat
 
 La disposition `flat` par défaut garde les objets imbriqués et ajoute des champs
 d'auteur pour les tableaux. Réglez `outputPreset: "nested"` pour omettre ces
 champs plats ajoutés.
 
-### Nommage des champs
+#### Nommage des champs
 
 Réglez `fieldStyle` sur `source`, `camelCase` ou `snake_case`. L'Actor évite
 d'écraser les clés source en conflit.
 
-## Limites, facturation et reprise
+## Options d'exécution
+
+### Limites, facturation et reprise
 
 `maxItems` limite les lignes livrées sur tout le run. `maxItemsPerTarget` limite
 chaque post ou profil.
@@ -479,7 +555,7 @@ différentes.
 Après un run limité en pages, lisez `next-cursors` dans le key-value store par
 défaut. Passez un curseur dans `startCursor` pour continuer cette cible.
 
-### Timeout Apify
+#### Timeout Apify
 
 Le timeout Apify par défaut est `0`, donc les runs n'ont pas de limite de temps.
 L'Actor continue jusqu'au plafond ou jusqu'à la fin des données éligibles. Vous
@@ -489,56 +565,12 @@ L'Actor enregistre les réponses et le rapport, puis s'arrête proprement avant 
 limite. Xquik facture une seule fois chaque réponse livrée. Vous pouvez
 reprendre les cibles inachevées.
 
-## Extraction incomplète
-
-Un run interrompu écrit un diagnostic `partial` gratuit. Les résultats
-disponibles restent intacts. Lisez `availableResults`, `failedTargets`,
-`retryable` et `nextAction` avant de relancer. Une sortie réussie de l'Actor
-confirme la livraison, pas une extraction complète.
-
-Le statut nomme chaque cause d'arrêt anticipé. `stopCauses` liste chaque cause
-avec ses propres `message`, `retryable` et `nextAction`. Les causes sont
-`target_not_found`, `target_failed`, `page_limit`, `reply_reach` et
-`deadline_reached`. `reply_reach` signifie que X n'a renvoyé qu'une partie d'une
-discussion.
-
-Un post ou un compte introuvable ne compte pas comme un échec. Le statut le
-nomme, par exemple "X has no match for 1 target." Il n'entre dans `stopCauses`
-que si une autre cause a arrêté le run. Le run est `retryable` dès qu'une cause
-l'est.
-
-## Diagnostics
-
-Les lignes de données réussies utilisent `resultType: "reply"`. Les runs qui se
-terminent sans données écrivent exactement 1 enregistrement gratuit dans
-`diagnostics`. Cet enregistrement indique comment corriger le problème.
-
-Le statut du run dit pourquoi il s'est arrêté. Il compte aussi les résultats
-facturés et les cibles lues. Les runs qui rencontrent un problème écrivent
-toujours `run-report`, y compris les sorties sans entrée ou avec une entrée
-invalide. Un gros run l'écrit aussi. Un petit run sans problème ne l'écrit pas
-et réduit l'usage Apify. Activez `alwaysSaveRunRecords` pour l'écrire à chaque
-run.
-
-Le schéma du rapport documente l'achèvement, la facturation, les échecs et les
-curseurs enregistrés. Son champ `version` donne la version exacte de la source
-publiée de l'Actor.
-
-Le champ `status` utilise ces valeurs :
-
-- `no-input`
-- `invalid-input`
-- `replies-incomplete`
-- `zero-output`
-- `aborted`
-- `unexpected-error`
-
-## Exemples d'API
+### Exemples d'API
 
 Chaque exemple lance X Reply Scraper de Xquik et renvoie les éléments du
 dataset. Remplacez `<APIFY_API_TOKEN>` par votre jeton d'API Apify.
 
-### JavaScript
+#### JavaScript
 
 ```javascript
 import { ApifyClient } from 'apify-client';
@@ -557,7 +589,7 @@ const { items } = await client.dataset(run.defaultDatasetId).listItems();
 console.log(items);
 ```
 
-### Python
+#### Python
 
 ```python
 from apify_client import ApifyClient
@@ -574,7 +606,7 @@ for item in client.dataset(run["defaultDatasetId"]).iterate_items():
     print(item)
 ```
 
-### cURL
+#### cURL
 
 ```bash
 actor=xquik~x-reply-scraper
@@ -585,7 +617,7 @@ curl "https://api.apify.com/v2/acts/$actor/run-sync-get-dataset-items" \
   -d '{"tweetIds":["2082577277246972300"],"maxItems":100}'
 ```
 
-## Automatisation et intégrations
+### Automatisation et intégrations
 
 Lancez X Reply Scraper de Xquik via les planifications Apify, des webhooks ou
 des clients API. Connectez-le à Make, Zapier, n8n, Google Sheets ou un stockage
@@ -596,8 +628,27 @@ Les workflows d'agents éligibles peuvent aussi utiliser
 [x402](https://docs.apify.com/integrations/x402) ou
 [Skyfire](https://docs.apify.com/integrations/skyfire).
 
-Xquik propose aussi 47 outils de tableau de bord, une API REST, des webhooks
+Xquik propose aussi 53 outils de tableau de bord, une API REST, des webhooks
 signés et un serveur MCP.
+
+### Prêt pour les agents IA et MCP
+
+Lancez X Reply Scraper de Xquik via Apify MCP, des clients API, x402 ou Skyfire.
+
+- Des permissions limitées protègent les autres données de votre compte Apify.
+- La facturation pay-per-event lie le coût aux résultats livrés.
+- Le mode Standby reste désactivé pour garantir la compatibilité avec les
+  paiements agentiques.
+- Des schémas typés décrivent les réponses, les rapports de run et les curseurs
+  de reprise.
+- Des valeurs par défaut bornées évitent qu'un agent lance par accident un run
+  sans limite.
+- Les modes stables `camelCase` et `snake_case` simplifient l'enchaînement
+  d'outils.
+- Les lignes de diagnostic incluent un statut, un message et une action de
+  reprise.
+- Les rapports de run incluent les résultats exacts, les raisons d'arrêt et les
+  estimations de coût.
 
 ### Utilisez toujours la dernière build
 
@@ -700,9 +751,66 @@ données dont vous avez besoin.
   critères notés par IA. Utilisez-le quand vous étudiez pourquoi des posts
   percent ou font un flop. À partir de $0.0003 par post analysé.
 
+## Besoin de plus que du scraping ?
+
+Xquik propose aussi 53 outils de tableau de bord, une API REST, des webhooks
+signés et un serveur MCP.
+
+- [Documentation de l'API](https://docs.xquik.com/introduction) : guides de
+  l'API REST
+- [API des réponses](https://docs.xquik.com/api-reference/x/tweet-replies) :
+  obtenir les réponses à un post
+- [API des réponses masquées](https://docs.xquik.com/api-reference/x/tweet-hidden-replies) :
+  obtenir les réponses qu'un auteur a masquées
+- [API des discussions](https://docs.xquik.com/api-reference/x/tweet-thread) :
+  obtenir une discussion entière
+- [API des réponses d'un utilisateur](https://docs.xquik.com/api-reference/x/user-replies) :
+  obtenir les réponses d'un utilisateur
+- [Serveur MCP](https://docs.xquik.com/mcp/overview) : découvrir les outils pris
+  en charge
+- [Webhooks](https://docs.xquik.com/webhooks/overview) : livraison d'événements
+  signés
+
 ## FAQ
 
 Les réponses aux questions fréquentes, puis où trouver de l'aide.
+
+### Comment scraper les commentaires d'un post ?
+
+Collez l'URL du post dans `startUrls` et cliquez sur Start. X appelle les
+commentaires des réponses, donc chaque commentaire correspond à 1 ligne de
+réponse.
+
+### Puis-je scraper les réponses de nombreux posts à la fois ?
+
+Oui. Collez de nombreuses URL de posts ou ID de post dans 1 seul run. Chaque
+réponse garde le post source dans `sourceTarget`.
+
+### Inclut-il les réponses imbriquées ?
+
+Oui. Le `scope` par défaut collecte les réponses directes et imbriquées. Réglez
+`scope` sur `direct` pour garder seulement les réponses au post. `maxDepth`
+limite la profondeur d'un run.
+
+### Récupère-t-il les réponses que l'auteur a masquées ?
+
+Oui. La stratégie `auto` par défaut les ajoute en lignes `hiddenReply`. Réglez
+`includeHiddenReplies: false` pour les ignorer.
+
+### Puis-je trier les réponses par J'aime ou par date ?
+
+Oui. Réglez `sort` pour classer les réponses par J'aime, ou pour afficher
+d'abord les plus récentes ou les plus anciennes.
+
+### Puis-je exporter les réponses en CSV ou Excel ?
+
+Oui. Exportez le dataset en CSV, Excel, JSON ou HTML. La sortie plate garde 1
+réponse par ligne, avec les champs d'auteur à côté.
+
+### Puis-je scraper les réponses d'un utilisateur plutôt que celles d'un post ?
+
+Oui. Collez une URL de profil ou un nom d'utilisateur. Le run lit le fil de
+réponses de cet utilisateur.
 
 ### Ai-je besoin d'une clé API X ou d'une connexion ?
 
@@ -738,8 +846,8 @@ et Google Sheets.
 
 ### Où trouver de l'aide ?
 
-Ouvrez une issue sur la page de l'Actor ou écrivez à
-[support@xquik.com](mailto:support@xquik.com) avec l'ID du run.
+Ouvrez une issue sur la page de l'Actor ou écrivez à <support@xquik.com> avec
+l'ID du run.
 
 ### Puis-je obtenir une solution sur mesure ?
 

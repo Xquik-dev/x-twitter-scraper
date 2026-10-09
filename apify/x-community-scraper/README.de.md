@@ -31,30 +31,98 @@ separat. Du brauchst keinen X-API-Schlüssel & keinen Login.
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
 
-## Community-Daten & Filter
+## Was macht X Community Scraper?
 
-- Metadaten & Regeln der Community, wenn X sie zeigt.
-- Per Stichwort gefundene Communities, mit vollständigem Datensatz.
-- Die beliebtesten Communities eines Themas, etwa Technology.
-- Die Communities, die X zum Beitreten vorschlägt, & jedes Community-Thema.
-- Posts der Community, neueste zuerst oder in Top-Reihenfolge.
-- Der Tab Medien einer Community: Posts mit Fotos oder Videos.
-- Stichwortsuche mit Sortierung nach Neueste oder Top.
-- Mitglieder & Moderatoren der Community.
-- Filter für Posts, Mitglieder & Moderatoren, die vor der Abrechnung laufen.
-- Viele Communities & Ressourcen in 1 Run.
-- Eine globale Obergrenze & eine Obergrenze pro Ressource.
-- Runs laufen nach einem Apify-Neustart weiter.
-- Duplikatentfernung vor der Abrechnung.
+X Community Scraper von Xquik liest öffentliche Communities auf X (Twitter) aus
+ihren URLs oder IDs. Er liefert für jede Community Infos, Posts, Medien,
+Stichwort-Treffer, Mitglieder & Moderatoren. Er findet auch Communities per
+Stichwort oder Thema & listet die, die X vorschlägt.
 
-## So scrapst du X-Communities
+### Wichtigste Funktionen
 
-1. Öffne X Community Scraper von Xquik in der Apify Console.
+- Lies viele Communities & Ressourcen in 1 Run.
+- Hol dir Community-Infos mit Regeln, Beitrittsfrage, Ersteller, Admin & Thema.
+- Sammle Posts, neueste zuerst, oder die Top-Posts, die X am höchsten einstuft.
+- Sammle den Tab Medien oder durchsuche die Posts einer Community per Stichwort.
+- Exportiere Mitglieder & Moderatoren oder finde Mitglieder per Name.
+- Finde Communities per Stichwort oder Thema, mit vollständigen Datensätzen.
+- Filtere Posts nach Datum, Sprache, Medien & Interaktionen.
+- Filtere Mitglieder nach Reichweite, Account-Alter & Verifizierung.
+- Filter & Duplikatentfernung laufen vor der Abrechnung.
+- Runs behalten gelieferte Datensätze & Fortschritt, wenn Apify sie neu startet.
+
+### Anwendungsfälle
+
+- Erstelle Lead-Listen aus den Mitgliedern einer Nischen-Community.
+- Verfolge Produktfeedback & Funktionswünsche in einer Nutzer-Community.
+- Finde Launches, Stellenanzeigen & Finanzierungsnews unter Gründern.
+- Vergleiche Communities nach Größe, Thema & Aktivität.
+- Lies die Regeln einer Community, bevor du dort postest.
+- Finde die Moderatoren einer Community & ihre Mitglieder mit den meisten
+  Followern.
+- Sammle Posts mit Bildern oder Videos für kreative Recherche.
+
+### Welche Daten kann X Community Scraper extrahieren?
+
+Community-Datensätze nutzen `resultType: "community"`. Das sind die wichtigsten
+Felder:
+
+| Feld              | Beschreibung                                     |
+| ----------------- | ------------------------------------------------ |
+| `id`              | Community-ID                                     |
+| `name`            | Name der Community                               |
+| `description`     | Beschreibung der Community                       |
+| `url`             | URL der Community                                |
+| `member_count`    | Anzahl der Mitglieder                            |
+| `moderator_count` | Anzahl der Moderatoren                           |
+| `rules`           | Regeln der Community                             |
+| `question`        | Was die Community beim Beitritt fragt            |
+| `primary_topic`   | Das Thema, dem X die Community zuordnet          |
+| `searchTags`      | Tags, über die X die Community findet            |
+| `creator`         | Das öffentliche Profil des Erstellers            |
+| `admin`           | Das öffentliche Profil des Admins                |
+| `membersFacepile` | Vorschau der Mitglieder auf der Community-Seite  |
+| `is_nsfw`         | Ob die Community als sensibel markiert ist       |
+| `banner`          | Banner-URL, Größe & Hauptfarben                  |
+| `sourceTarget`    | URL, ID, Stichwort oder Thema aus deiner Eingabe |
+
+Jede Ressource fügt Datensätze ihres eigenen Typs hinzu:
+
+| `resultType`         | Ressource oder Eingabe      | 1 Datensatz pro          |
+| -------------------- | --------------------------- | ------------------------ |
+| `community`          | `info`, Stichwörter, Themen | Community                |
+| `communityTweet`     | `tweets`, `search`          | Post                     |
+| `communityMedia`     | `media`                     | Post mit Foto oder Video |
+| `communityMember`    | `members`, `memberNames`    | Mitglied                 |
+| `communityModerator` | `moderators`                | Moderator                |
+| `communityTopic`     | `listTopics`                | Thema                    |
+
+Post-Datensätze enthalten `text`, `createdAt`, `likeCount`, `replyCount`,
+`retweetCount`, `viewCount`, `media` & das Profil `author`. Datensätze von
+Mitgliedern & Moderatoren enthalten die Profilfelder, etwa `username`,
+`followers`, `verified` & `communityRole`.
+
+## Wie nutze ich X Community Scraper, um Community-Daten zu scrapen?
+
+Folge diesen Schritten in der Apify Console:
+
+1. Öffne ein [Task-Beispiel](#task-beispiele) oder den Input-Tab.
 2. Füge Community-URLs in `startUrls` oder IDs in `communityIds` ein.
 3. Wähle `resources` & ergänze Filter wie `sinceDate` oder `minLikes`.
-4. Setze `maxItems`, um die gelieferten Datensätze zu begrenzen. Klicke dann
-   auf Start.
-5. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
+4. Setze `maxItems` & klicke dann auf Start.
+5. Exportiere das Dataset als JSON, CSV, Excel oder HTML.
+
+Jedes Rezept unten ist eine vollständige Eingabe.
+
+### Community-Infos & neueste Posts abrufen
+
+```json
+{
+  "communityIds": ["1493446837214187523"],
+  "resources": ["info", "tweets"],
+  "maxItems": 200
+}
+```
 
 `startUrls` nimmt jede URL als einfachen String oder als Objekt
 `{ "url": "..." }`:
@@ -68,21 +136,63 @@ separat. Du brauchst keinen X-API-Schlüssel & keinen Login.
 }
 ```
 
-## Eingabe
+### Top-Posts sammeln
 
 ```json
 {
   "communityIds": ["1493446837214187523"],
-  "resources": ["info", "tweets", "members", "moderators"],
-  "maxItems": 10000
+  "resources": ["tweets"],
+  "postsOrder": "Top",
+  "minLikes": 50,
+  "maxItems": 100
 }
 ```
 
-Für die Stichwortsuche füge `"search"` zu `resources` hinzu & setze `query`.
-Füge `"media"` für den Tab Medien hinzu. Setze `postsOrder` auf `Top` für die
-Top-Posts.
+Setze `postsOrder` auf `Top` für die Posts, die X am höchsten einstuft. Füge
+`"media"` zu `resources` hinzu, um den Tab Medien zu lesen.
 
-Sende stattdessen Stichwörter oder Themen, um Communities zu finden:
+### Posts einer Community durchsuchen
+
+```json
+{
+  "communityIds": ["1493446837214187523"],
+  "resources": ["search"],
+  "query": "pricing",
+  "queryType": "Latest",
+  "maxItems": 100
+}
+```
+
+### Mitglieder & Moderatoren exportieren
+
+```json
+{
+  "communityIds": ["1493446837214187523"],
+  "resources": ["members", "moderators"],
+  "minFollowers": 1000,
+  "maxItems": 1000
+}
+```
+
+Mitgliederfilter gelten für Datensätze von Mitgliedern & Moderatoren. Gefilterte
+Datensätze landen nie im Dataset, also zahlst du nie dafür.
+
+### Mitglieder per Name finden
+
+```json
+{
+  "communityIds": ["1493446837214187523"],
+  "memberNames": ["marckohlbrugge"],
+  "maxItems": 100
+}
+```
+
+X prüft bis zu 10 passende Accounts pro Name, wie die Mitgliedersuche auf x.com.
+Jedes gefundene Mitglied ist 1 Datensatz `communityMember` mit seiner
+`communityRole`. Ein Run mit `memberNames` liest keine andere Ressource, außer
+`resources` nennt sie.
+
+### Communities per Stichwort oder Thema finden
 
 ```json
 {
@@ -98,16 +208,128 @@ dem kurzen Datensatz. Aktiviere `includeSuggested` für die Communities, die X
 vorschlägt. Sie können sich je Run unterscheiden. Oder aktiviere `listTopics`
 für jedes Thema & seine Unterthemen.
 
-Kleine Runs ohne Probleme überspringen `run-report` & sparen Apify-Nutzung.
-Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
+## Task-Beispiele
+
+Wähle aus 50 öffentlichen Tasks. Jeder hat eine begrenzte Eingabe & eine
+passende Dataset-Ansicht. Bearbeite einen Task, bevor du ihn startest.
+
+- [Überblick über eine X-Community abrufen](https://apify.com/xquik/x-community-scraper/examples/get-an-x-community-overview)
+- [Details einer X-Community mit neuesten Posts abrufen](https://apify.com/xquik/x-community-scraper/examples/get-community-details-with-recent-posts)
+- [Top-Posts zu Technologie in einer X-Community finden](https://apify.com/xquik/x-community-scraper/examples/find-top-technology-posts-in-a-community)
+- [Mitglieder einer X-Community exportieren](https://apify.com/xquik/x-community-scraper/examples/export-x-community-members)
+- [Verifizierte Mitglieder einer X-Community exportieren](https://apify.com/xquik/x-community-scraper/examples/export-verified-community-members)
+- [Moderatoren einer X-Community auflisten](https://apify.com/xquik/x-community-scraper/examples/list-x-community-moderators)
+- [Entwickler-Communities nach Größe & Thema vergleichen](https://apify.com/xquik/x-community-scraper/examples/compare-developer-communities-by-size)
+- [Regeln einer X-Community vor dem Posten lesen](https://apify.com/xquik/x-community-scraper/examples/read-community-rules-before-you-post)
+- [Finanzierungsposts in einer Startup-Community finden](https://apify.com/xquik/x-community-scraper/examples/find-funding-posts-in-a-startup-community)
+- [Stellenanzeigen in einer Software-Engineering-Community finden](https://apify.com/xquik/x-community-scraper/examples/find-hiring-posts-in-a-software-community)
+- [Mitglieder einer Startup-Community mit großer Reichweite finden](https://apify.com/xquik/x-community-scraper/examples/find-startup-community-members-with-big-audiences)
+- [Eine kleine X-Community komplett prüfen](https://apify.com/xquik/x-community-scraper/examples/audit-a-small-community-end-to-end)
+
+## Was kostet es, X-Communities zu scrapen?
+
+X Community Scraper von Xquik kostet auf jedem Apify-Plan $0.00015 pro
+geliefertem Datensatz. Apify berechnet deine Plattformnutzung separat. Xquik
+erhebt 1 Gebühr pro geliefertem Datensatz. Diagnosen in der Ausgabe
+`diagnostics` sind kostenlos.
+
+- Du brauchst kein Xquik-Abo.
+- Du zahlst keine separate Gebühr für Start, Communities, Ressourcen oder
+  Suchanfragen.
+- Eine gefundene Community kostet 1 Datensatz, mit oder ohne vollständige
+  Details.
+- Filter & Deduplizierung laufen vor der Abrechnung. Du zahlst nie für
+  gefilterte oder doppelte Datensätze.
+- Die Apify-Einstellung für maximale Gesamtkosten begrenzt die gelieferten
+  Datensätze.
+
+Ein Run mit Problemen oder ein großer Run schreibt zusätzlich einen Eintrag
+`run-report`. Ein kleiner Run ohne Probleme überspringt ihn & spart
+Apify-Nutzung. Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu
+schreiben.
+
+Unter [Run-Optionen](#run-optionen) steht, wie du die Kosten eines Runs
+begrenzt.
+
+## Leere, unvollständige & gestoppte Runs
+
+X Community Scraper von Xquik erklärt leere, unvollständige & gestoppte Runs
+kostenlos. Der Run-Status nennt den Grund für den Stopp. Er zählt auch
+abgerechnete Ergebnisse & gelesene Ziele.
+
+### Leere Ergebnisse
+
+Der Status eines leeren Runs rät dir, Ziele & Filter zu prüfen. Gefilterte
+Datensätze verbrauchen nie dein Ergebnislimit. Ein Run, der jedes Ziel liest &
+keinen Datensatz zurückbekommt, schreibt keinen Eintrag. Sein Status nennt den
+Grund & sagt, was du ändern solltest. Der Actor liefert nur öffentliche
+Communities, die X zeigt. Die verfügbaren Felder variieren je nach Community.
+
+### Unvollständige Runs
+
+Eine unterbrochene Extraktion schreibt eine kostenlose `partial`-Diagnose.
+Gelieferte Datensätze bleiben im Dataset. Lies `availableResults`,
+`failedTargets`, `retryable` & `nextAction`, bevor du es erneut versuchst. Ein
+erfolgreicher Actor-Abschluss bestätigt die Lieferung, nicht die vollständige
+Extraktion.
+
+### Stoppursachen
+
+Der Run-Status nennt jede Ursache für einen vorzeitigen Stopp. `stopCauses`
+listet jede Ursache mit eigenen Feldern `message`, `retryable` & `nextAction`.
+Die Ursachen sind `target_not_found`, `target_failed`, `pagination_safety_limit`
+& `deadline_reached`. Ein fehlendes Ziel kommt nur auf die Liste, wenn eine
+andere Ursache den Run gestoppt hat. Der Run ist `retryable`, wenn mindestens 1
+Ursache es ist. Der Actor setzt kein eigenes Zeitlimit.
+
+## Eingabe
+
+Der Input-Tab listet jede Option. Gib Community-URLs oder -IDs, Stichwörter
+oder Themen an oder aktiviere `includeSuggested` oder `listTopics`. Jedes andere
+Feld ist optional.
+
+| Feld                           | Funktion                                                           |
+| ------------------------------ | ------------------------------------------------------------------ |
+| `startUrls`                    | Community-URLs auf x.com                                           |
+| `communityIds`                 | Numerische Community-IDs                                           |
+| `resources`                    | `info`, `tweets`, `media`, `search`, `members`, `moderators`       |
+| `query`                        | Stichwort für die Ressource `search`                               |
+| `queryType`                    | Reihenfolge `Latest` oder `Top` für die Stichwortsuche             |
+| `postsOrder`                   | Reihenfolge `Latest` oder `Top` für Posts                          |
+| `memberNames`                  | Namen oder Nutzernamen für die Mitgliedersuche                     |
+| `searchTerms`                  | Stichwörter, um Communities zu finden                              |
+| `topics`                       | Themennamen oder -IDs, etwa `Technology`                           |
+| `includeSuggested`             | Ergänzt die Communities, die X zum Beitreten vorschlägt            |
+| `listTopics`                   | Ergänzt jedes Community-Thema & seine Unterthemen                  |
+| `includeDetails`               | Ergänzt Details zu per Stichwort oder Thema gefundenen Communities |
+| `maxItems`                     | Obergrenze für gelieferte Datensätze im ganzen Run                 |
+| `maxItemsPerTarget`            | Obergrenze für Datensätze pro Community-Ressource                  |
+| `sinceDate`, `untilDate`       | Behält Posts in einem Zeitraum                                     |
+| `language`                     | Behält Posts mit 1 Sprachcode                                      |
+| `mediaType`                    | Behält Posts mit Bildern, Videos, GIFs, Links oder ohne Medien     |
+| `minViews`, `minLikes`         | Behält Posts über einer Zahl an Aufrufen oder Likes                |
+| `minReplies`, `minRetweets`    | Behält Posts über einer Zahl an Antworten oder Reposts             |
+| `nativeRetweets`               | Behält nur native Reposts                                          |
+| `verifiedOnly`                 | Behält verifizierte Autoren, Mitglieder oder Moderatoren           |
+| `minFollowers`, `maxFollowers` | Behält Mitglieder in einem Reichweitenbereich                      |
+| `minAccountAgeDays`            | Behält Mitglieder, deren Account mindestens so viele Tage alt ist  |
+| `dedupeAcrossTargets`          | Entfernt Duplikate über Communities hinweg vor der Abrechnung      |
+
+### Die richtigen Eingaben wählen
+
+- Für einen schnellen Überblick behalte die Standard-Ressourcen `info` &
+  `tweets`.
+- Für Lead-Listen wähle `members` mit `minFollowers` & `verifiedOnly`.
+- Für Produktrecherche wähle `search` mit einer `query` wie `bug` oder `pricing`.
+- Für kreative Recherche wähle `media` & setze `mediaType`.
+- Um Communities zu entdecken, sende `searchTerms` oder `topics` ohne IDs.
 
 ## Ausgabe
 
-Jeder Datensatz setzt `resultType` auf `community`, `communityTweet`,
-`communityMedia`, `communityMember`, `communityModerator` oder `communityTopic`.
-Jeder Datensatz enthält `sourceTarget` für die eingegebene Community, das
-Stichwort oder das Thema. X Community Scraper von Xquik behält die Quellfelder &
-erfindet keine Werte.
+Jeder Datensatz ist ein JSON-Objekt. Jeder Datensatz enthält `sourceTarget` für
+die eingegebene Community, das Stichwort oder das Thema. X Community Scraper von
+Xquik behält die Quellfelder & erfindet keine Werte. Das Dataset-Schema gibt
+jedem Feld einen Titel & eine Beschreibung.
 
 Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
 Datensatz mit Community-Infos sieht so aus:
@@ -116,43 +338,33 @@ Datensatz mit Community-Infos sieht so aus:
 {
   "resultType": "community",
   "sourceTarget": "1493446837214187523",
+  "id": "1493446837214187523",
   "name": "Sample Community",
+  "description": "A place to share what you build.",
   "member_count": 1200,
-  "moderator_count": 4
+  "moderator_count": 4,
+  "primary_topic": "Technology"
 }
 ```
 
-## Was kostet es, X-Communities zu scrapen?
+Exportiere das Dataset als JSON, CSV, Excel oder HTML.
 
-Auf jedem Apify-Plan kostet ein gelieferter Datensatz $0.00015. Apify berechnet
-deine Plattformnutzung separat.
+## Run-Optionen
 
-- Eine Gebühr pro geliefertem Datensatz. Diagnosen in `diagnostics` sind
-  kostenlos.
-- Keine Gebühr für Start, Communities, Ressourcen oder Suchanfragen.
-- Eine gefundene Community kostet 1 Datensatz, mit oder ohne vollständige
-  Details.
-- Die Deduplizierung läuft vor der Abrechnung.
+- Setze die maximalen Gesamtkosten von Apify, um die Run-Kosten zu begrenzen.
+  Lass `maxItems` hoch, um so viele Datensätze zu erhalten, wie das Budget
+  erlaubt.
+- Setze `maxTotalChargeUsd` in der Apify-API oder Max cost per run in der
+  Console.
+- Pack alle deine Communities in 1 Run. Jeder Run zahlt Apify dieselben
+  Startkosten.
+- `maxItemsPerTarget` begrenzt die Datensätze jeder Community-Ressource.
+- `maxConcurrency` legt fest, wie viele Community-Ressourcen gleichzeitig
+  laufen. Der Standardwert ist die schnellste sichere Einstellung.
 
-## Limits & Wiederherstellung
-
-X Community Scraper von Xquik liest viele Communities & Ressourcen in 1 Run.
-Gelieferte Datensätze & Fortschritt überstehen einen Apify-Neustart. Der Actor
-setzt kein eigenes Zeitlimit. Er liefert nur öffentliche Communities, die X
-zeigt. Die verfügbaren Felder variieren je nach Community.
-
-Eine unterbrochene Extraktion schreibt eine kostenlose `partial`-Diagnose.
-Verfügbare Ergebnisse bleiben erhalten. Lies `availableResults`,
-`failedTargets`, `retryable` & `nextAction`, bevor du es erneut versuchst. Ein
-erfolgreicher Actor-Abschluss bestätigt die Lieferung, nicht die vollständige
-Extraktion.
-
-Der Run-Status nennt jede Ursache für einen vorzeitigen Stopp. `stopCauses`
-listet jede Ursache mit eigenen Feldern `message`, `retryable` & `nextAction`.
-Die Ursachen sind `target_not_found`, `target_failed`, `pagination_safety_limit`
-& `deadline_reached`. Ein fehlendes Ziel kommt nur auf die Liste, wenn eine
-andere Ursache den Run gestoppt hat. Der Run ist `retryable`, wenn mindestens 1
-Ursache es ist.
+Wähle `latest` für jeden Run, um jeden veröffentlichten Fix zu erhalten.
+Gespeicherte Tasks & Zeitpläne behalten ihre eigene Build-Wahl, also lass sie
+auf `latest`.
 
 ## Verwandte Xquik-Actors
 
@@ -230,6 +442,25 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   KI-Antworten zu Merkmalen. Nutze ihn, wenn du untersuchst, warum Posts sich
   verbreiten oder floppen. Ab $0.0003 pro analysiertem Post.
 
+## Brauchst du mehr als Scraping?
+
+Xquik bietet außerdem 53 Dashboard-Tools, eine REST-API, signierte Webhooks &
+einen MCP-Server.
+
+- [API-Dokumentation](https://docs.xquik.com/introduction): Anleitungen zur
+  REST-API
+- [API für Community-Infos](https://docs.xquik.com/api-reference/x/community-info):
+  Datensatz von 1 Community abrufen
+- [API für Community-Posts](https://docs.xquik.com/api-reference/x/community-tweets):
+  Posts einer Community abrufen
+- [API für Community-Mitglieder](https://docs.xquik.com/api-reference/x/community-members):
+  Mitglieder einer Community exportieren
+- [API zum Finden von Communities](https://docs.xquik.com/api-reference/x/community-find):
+  Communities per Stichwort finden
+- [MCP-Server](https://docs.xquik.com/mcp/overview): unterstützte Tools entdecken
+- [Webhooks](https://docs.xquik.com/webhooks/overview): signierte
+  Event-Zustellung
+
 ## FAQ
 
 Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
@@ -239,6 +470,36 @@ Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
 Nein. X Community Scraper von Xquik braucht keinen X-API-Schlüssel, keinen
 Login & keine Zugangsdaten.
 
+### Wie finde ich die ID einer Community?
+
+Öffne die Community auf x.com. Die ID ist die Zahl nach `/i/communities/` in
+der URL. Du kannst auch die ganze URL in `startUrls` einfügen.
+
+### Kann ich Mitglieder einer X-Community als CSV oder Excel exportieren?
+
+Ja. Wähle die Ressource `members` & exportiere dann das Dataset als CSV, Excel,
+JSON oder HTML.
+
+### Kann ich eine Community ohne ihre ID finden?
+
+Ja. Sende Stichwörter in `searchTerms` oder Themen in `topics`. Jede gefundene
+Community ist 1 Datensatz mit vollständigen Details.
+
+### Kann ich die Top-Posts einer Community abrufen?
+
+Ja. Setze `postsOrder` auf `Top`. Ergänze `minLikes` oder `minViews`, um nur
+die beliebtesten Posts zu behalten.
+
+### Wie viele Communities kann ich in 1 Run scrapen?
+
+So viele, wie du angibst. `maxItems` & dein Apify-Ausgabenlimit begrenzen die
+Datensätze.
+
+### Liest der Actor private Communities?
+
+Nein. X Community Scraper von Xquik liefert nur öffentliche Communities, die X
+zeigt.
+
 ### Ist es legal, X-Communities zu scrapen?
 
 X Community Scraper von Xquik fragt öffentliche X-Felder ab. Ergebnisse können
@@ -247,11 +508,11 @@ geltende Datenschutzregeln. Hol dir bei Unsicherheit qualifizierten Rechtsrat.
 
 ### Warum hat mein Run keine Ergebnisse geliefert?
 
-Öffne zuerst die kostenlose Ausgabe `diagnostics`. Der Status eines leeren Runs
-rät dir, Ziele & Filter zu prüfen. `stopCauses` gibt jeder Ursache eine
+Lies zuerst den Run-Status. Der Status eines leeren Runs rät dir, Ziele & Filter
+zu prüfen. Die kostenlose Ausgabe `diagnostics` erscheint, wenn etwas deine
+Aufmerksamkeit braucht. Ihr Feld `stopCauses` gibt jeder Ursache eine
 `nextAction`, der du folgen kannst. Der Run listet jede Eingabe, die er nicht
-lesen kann, & sagt, wie du sie korrigierst. X Community Scraper von Xquik
-liefert nur öffentliche Communities, die X zeigt.
+lesen kann, & sagt, wie du sie korrigierst.
 
 ### Kann ich API, Zeitpläne & Integrationen nutzen?
 
@@ -263,14 +524,15 @@ X Community Scraper von Xquik per Cron. Agents nutzen
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp). Nutze `latest`,
 außer du brauchst einen älteren Build.
 
-### Wo bekomme ich Hilfe?
-
-Öffne ein Issue auf der Actor-Seite oder schreib mit der Run-ID an
-support@xquik.com. Kostenlose Diagnosen im Key-Value-Store erklären leere,
-unvollständige oder unterbrochene Runs.
-
 ### Kann ich eine individuelle Lösung bekommen?
 
 Ja. Besuche [xquik.com](https://xquik.com) oder lies die
 [API-Dokumentation](https://docs.xquik.com/introduction). Sie deckt Dashboard,
 API, MCP-Server & Webhooks ab.
+
+### Wo bekomme ich Hilfe?
+
+Öffne ein Issue auf der Actor-Seite oder schreib mit der Run-ID an
+<support@xquik.com>. Kostenlose Diagnosen im Key-Value-Store erklären Runs, die
+Aufmerksamkeit brauchen. Ein Run ohne Datensätze nennt den Grund in seinem
+Status.

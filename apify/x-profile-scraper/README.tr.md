@@ -29,109 +29,265 @@ anahtarı ya da giriş gerekmez.
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-## Profiller ve zaman akışları
+## X Profile Scraper ne yapar?
 
-- Biyografi, sayılar, onay durumu, hesap sahibinin yazdığı konum, web sitesi ve
-  medya.
-- Varsa X'in herkese açık Account based in etiketi. X bu etiketi garanti etmez.
-- Erişilebilen sonuç sayfalarındaki profil Gönderiler ve Yanıtlar satırları.
-- İsteğe bağlı medya, Öne Çıkanlar, takipçiler, takip edilenler veya onaylı
-  takipçiler.
-- İsteğe bağlı gönderiler için tarih, medya, onay, yeniden gönderi durumu ve
-  metrik filtreleri.
-- İsteğe bağlı profiller için kitle, etkinlik, hesap yaşı ve herkese açık
-  metadata filtreleri.
-- Faturalamadan önce tekilleştirme.
+Xquik'in X Profile Scraper'ı kullanıcı adlarından, sayısal kullanıcı ID'lerinden
+veya profil URL'lerinden herkese açık X (Twitter) profillerini döndürür. Her
+profil kendi gönderilerini, yanıtlarını, medyasını, Öne Çıkanlarını,
+takipçilerini, takip edilenlerini ve onaylı takipçilerini ekleyebilir. Ayrıca
+biyografileri çevirir ve kimin şu an canlı yayında olduğunu kontrol eder.
 
-## X profilleri nasıl kazınır
+### Temel özellikler
 
-1. Apify Console'da Xquik'in X Profile Scraper'ını aç.
-2. Kullanıcı adlarını `twitterHandles`, URL'leri `startUrls`, ID'leri `userIds`
-   alanına ekle.
-3. `includeTweets` veya `includeFollowers` gibi veri türlerini aç.
-4. Teslim edilecek satır sayısını `maxItems` ile sınırla, sonra Start'a tıkla.
-5. Veri kümesini JSON, CSV veya Excel olarak indir ya da Apify API'yi kullan.
+- Kullanıcı adı, ID veya URL ile 1 çalıştırmada birçok profil oku.
+- Gönderileri, yanıtları, medyayı, Öne Çıkanları, takipçileri, takip edilenleri
+  veya onaylı takipçileri ayrı satırlar olarak ekle.
+- `translateBioTo` ile her biyografiyi kodunu verdiğin dile çevir.
+- `checkLiveNow` ile her profilin şu an canlı yayında olup olmadığına bak.
+- Gönderileri tarih, dil, medya ve etkileşime göre filtrele.
+- Profilleri kitle büyüklüğü, hesap yaşı ve onay durumuna göre filtrele.
+- Filtreler ve tekilleştirme faturalamadan önce çalışır.
+- Apify çalıştırmayı yeniden başlatsa da teslim edilen satırlar ve ilerleme
+  korunur.
 
-`startUrls` her URL'yi düz metin olarak ya da `{ "url": "..." }` nesnesi olarak
-alır:
+### Kullanım alanları
+
+- Potansiyel müşteri listelerini biyografi, web sitesi, konum ve kitle
+  büyüklüğüyle zenginleştir.
+- Rakip hesapları takipçi, gönderi ve onay durumuna göre karşılaştır.
+- İçerik üreticilerini kitle, hesap yaşı ve etkileşime göre değerlendir.
+- Bir hesabın gönderilerini, medyasını ve Öne Çıkanlarını arşivle.
+- Takipçiler ve takip edilenler üzerinden bir hesabın ağını çıkar.
+- İçerik üreticilerinin ve markaların canlı yayınlarını takip et.
+- Başka pazarlardaki biyografileri kendi dilinde oku.
+
+### X Profile Scraper hangi verileri çeker?
+
+Profil satırları `resultType: "profile"` kullanır. Başlıca alanlar şunlar:
+
+| Alan               | Açıklama                                              |
+| ------------------ | ----------------------------------------------------- |
+| `id`               | Sayısal kullanıcı ID'si                               |
+| `username`         | `@` olmadan kullanıcı adı                             |
+| `name`             | Görünen ad                                            |
+| `description`      | Biyografi metni                                       |
+| `url`              | Profil satırlarındaki web sitesi                      |
+| `location`         | Hesap sahibinin yazdığı konum                         |
+| `followers`        | Takipçi sayısı                                        |
+| `following`        | Takip edilen sayısı                                   |
+| `statusesCount`    | Gönderi sayısı                                        |
+| `mediaCount`       | Medya gönderisi sayısı                                |
+| `favouritesCount`  | Hesabın yaptığı beğeni sayısı                         |
+| `listedCount`      | Hesabı içeren herkese açık Liste sayısı               |
+| `createdAt`        | Hesabın oluşturulma zamanı                            |
+| `verified`         | X'in hesabı onaylı gösterip göstermediği              |
+| `isBlueVerified`   | Hesabın X Blue onayı olup olmadığı                    |
+| `verifiedType`     | `Government` gibi onay kategorisi                     |
+| `profilePicture`   | Profil fotoğrafı URL'si                               |
+| `coverPicture`     | Kapak fotoğrafı URL'si                                |
+| `pinnedTweetIds`   | Sabitlenmiş gönderi ID'leri                           |
+| `professional`     | Profesyonel kategori ve tür                           |
+| `accountBasedIn`   | X'in tahmine dayalı ülke veya bölge etiketi           |
+| `connectedVia`     | Hesabın X'e ilk nasıl bağlandığı                      |
+| `usernameChanges`  | Kullanıcı adının kaç kez ve en son ne zaman değiştiği |
+| `birthdate`        | Hesabın herkese açtığı doğum tarihi bilgileri         |
+| `subscribersCount` | Abone sayısı, X gönderiyorsa                          |
+| `tipJar`           | Herkese açık bahşiş bağlantıları                      |
+| `protected`        | Hesabın gönderilerini koruyup korumadığı              |
+| `unavailable`      | Hesabın erişilemez olup olmadığı                      |
+| `sourceTarget`     | Girdiğin kullanıcı adı, ID veya URL                   |
+
+Veri kümesi şeması, `identityVerification`, `isAutomated`, `automatedBy`,
+`withheldInCountries` ve `verificationReason` gibi diğer tüm alanları açıklar.
+
+İsteğe bağlı satırlar Xquik REST yanıt biçimini korur:
+
+| `resultType`              | Açan seçenek               | Her satır             |
+| ------------------------- | -------------------------- | --------------------- |
+| `profileTweet`            | `includeTweets`            | Gönderi               |
+| `profileReply`            | `includeReplies`           | Gönderi veya yanıt    |
+| `profileMedia`            | `includeMedia`             | Medya gönderisi       |
+| `profileHighlight`        | `includeHighlights`        | Öne çıkarılan gönderi |
+| `profileFollower`         | `includeFollowers`         | Takipçi               |
+| `profileFollowing`        | `includeFollowing`         | Takip edilen hesap    |
+| `profileVerifiedFollower` | `includeVerifiedFollowers` | Onaylı takipçi        |
+| `profileBioTranslation`   | `translateBioTo`           | Çevrilmiş biyografi   |
+| `profileLive`             | `checkLiveNow`             | Kontrol edilen profil |
+
+Satırlar, bir hesabı takip edip etmediğin ya da engelleyip engellemediğin gibi
+yalnızca sana özel durumları içermez.
+
+## Profil verisini kazımak için X Profile Scraper'ı nasıl kullanırım?
+
+Apify Console'da şu adımları izle:
+
+1. Bir [görev örneğini](#görev-örnekleri) veya Input sekmesini aç.
+2. Kullanıcı adlarını `twitterHandles`, URL'leri `startUrls` veya ID'leri
+   `userIds` alanına ekle.
+3. `includeTweets` gibi ihtiyacın olan veri türlerini aç.
+4. `maxItems` değerini ve istediğin filtreleri ayarla, sonra Start'a tıkla.
+5. Veri kümesini JSON, CSV, Excel veya HTML olarak dışa aktar.
+
+Aşağıdaki her tarif eksiksiz bir girdidir.
+
+### Birçok profili kazı
 
 ```json
-{ "startUrls": ["https://x.com/nasa", { "url": "https://x.com/OpenAI" }] }
+{ "twitterHandles": ["nasa", "OpenAI", "apify"], "maxItems": 100 }
 ```
 
-## Girdi
+Her kullanıcı adı 1 profil satırı döndürür. Kullanıcı adları `@` ile de `@`
+olmadan da çalışır.
+
+### Profil URL'lerini veya ID'lerini yapıştır
+
+`startUrls` her URL'yi düz metin olarak ya da `{ "url": "..." }` nesnesi olarak
+alır. `userIds` sayısal X kullanıcı ID'lerini alır:
 
 ```json
 {
-  "twitterHandles": ["OpenAI", "apify"],
-  "includeTweets": true,
-  "includeReplies": false,
-  "maxItems": 10000
+  "startUrls": ["https://x.com/nasa", { "url": "https://x.com/OpenAI" }],
+  "userIds": ["11348282"],
+  "maxItems": 100
 }
 ```
 
-1 hedef yeterli. Genel `maxItems` sınırı profilleri ve seçilen veri türlerini
-kapsar.
+2 kez yazdığın bir kullanıcı adı 1 kez okunur.
 
-Sorunsuz biten küçük çalıştırmalar `run-report` yazmaz, böylece Apify kullanımı
-azalır. Raporu her çalıştırmada almak için `alwaysSaveRunRecords` seçeneğini aç.
+### Gönderi, yanıt ve medya ekle
 
-## Çıktı
+```json
+{
+  "twitterHandles": ["nasa"],
+  "includeTweets": true,
+  "includeMedia": true,
+  "sinceDate": "2026-01-01",
+  "maxItems": 500
+}
+```
 
-Profil satırları `resultType: "profile"` kullanır. İsteğe bağlı satırlar
-`profileTweet`, `profileReply`, `profileMedia`, `profileHighlight`,
-`profileFollower`, `profileFollowing` veya `profileVerifiedFollower` kullanır.
-Her satır `sourceTarget` alanını tutar. Herkese açık alanlar Xquik REST yanıt
-biçimini korur.
+`includeTweets` profilin Gönderiler sekmesini okur. `includeReplies` Yanıtlar
+sekmesini okur. `includeMedia` Medya sekmesini okur. `includeHighlights`, Öne
+Çıkanlar sekmesindeki gönderileri X'in sırasıyla ekler. Öne çıkanı olmayan bir
+profil satır eklemez.
 
-`includeHighlights`, her profilin Öne Çıkanlar sekmesindeki gönderileri X'in
-sırasıyla ekler. Öne çıkanı olmayan bir profil satır eklemez.
+### Yalnızca popüler gönderileri tut
 
-X, `accountBasedIn` değerini hesaba erişilen IP'lerin toplu verisinden çıkarır.
-Etiket uyruk, ikamet, kimlik, kayıt yeri, gönderi yeri veya kesin konum
-belirtmez. `observedAt` verinin alındığı zamanı kaydeder. X etiket
-göstermiyorsa `accountBasedIn` null olur. X etiketi gizliyorsa satırda bunun
-yerine `accountBasedInUnavailable: true` bulunur.
+```json
+{
+  "twitterHandles": ["nasa"],
+  "includeTweets": true,
+  "minLikes": 1000,
+  "mediaType": "videos",
+  "maxItems": 200
+}
+```
+
+Gönderi filtreleri isteğe bağlı gönderi satırlarına uygulanır. Filtrelenen
+satırlar veri kümesine hiç ulaşmaz, bu yüzden onlar için hiç ödeme yapmazsın.
+
+### Takipçileri ve takip edilenleri dışa aktar
+
+```json
+{
+  "twitterHandles": ["apify"],
+  "includeFollowers": true,
+  "minFollowers": 1000,
+  "verifiedOnly": true,
+  "maxItems": 1000
+}
+```
+
+`includeFollowers`, `includeFollowing` ve `includeVerifiedFollowers` her hesap
+için 1 profil satırı ekler. Profil filtreleri hem bu satırlara hem de ana
+profillere uygulanır.
+
+### Biyografileri çevir
+
+```json
+{ "twitterHandles": ["nasa", "SpaceX"], "translateBioTo": "es" }
+```
+
+Her çeviri 1 `profileBioTranslation` satırıdır ve `text`, `language` ile
+`sourceLanguage` alanlarını içerir. Biyografisi olmayan bir profil ne satır ne
+de ücret ekler.
+
+### Kimin şu an canlı yayında olduğunu kontrol et
+
+```json
+{ "twitterHandles": ["nasa", "SpaceX"], "checkLiveNow": true }
+```
+
+Her kontrol 1 `profileLive` satırıdır ve `live`, `userId`, `userName` ile
+`broadcast` alanlarını içerir. `broadcast`, profilin canlı ya da bitmiş son
+yayınını tutar. Yayın yoksa null olur. Bulunamayan bir profil satır eklemez.
+
+## Görev örnekleri
+
+50 herkese açık görev arasından seç. Her birinin sınırlı bir girdisi ve buna
+uyan bir veri kümesi görünümü var. Çalıştırmadan önce görevi düzenle.
+
+- [1 X hesabının profil kartını al](https://apify.com/xquik/x-profile-scraper/examples/get-an-x-profile-card)
+- [Rakip markaların profillerini karşılaştır](https://apify.com/xquik/x-profile-scraper/examples/compare-competitor-brand-profiles)
+- [Sayısal kullanıcı ID'lerini profillere dönüştür](https://apify.com/xquik/x-profile-scraper/examples/resolve-numeric-user-ids-to-profiles)
+- [1 hesabın son gönderilerini topla](https://apify.com/xquik/x-profile-scraper/examples/collect-recent-posts-from-an-account)
+- [Bir hesabın en çok beğenilen gönderilerini bul](https://apify.com/xquik/x-profile-scraper/examples/find-an-accounts-most-liked-posts)
+- [Bir hesabın paylaştığı videoları topla](https://apify.com/xquik/x-profile-scraper/examples/collect-videos-from-an-account)
+- [Bir hesabın 1 takvim yılını arşivle](https://apify.com/xquik/x-profile-scraper/examples/archive-one-year-of-posts)
+- [Bir hesabın takipçilerini dışa aktar](https://apify.com/xquik/x-profile-scraper/examples/export-the-followers-of-an-account)
+- [Bir şirketin onaylı takipçilerini dışa aktar](https://apify.com/xquik/x-profile-scraper/examples/export-verified-followers)
+- [10.000 veya daha fazla takipçisi olan takipçileri bul](https://apify.com/xquik/x-profile-scraper/examples/find-influential-followers)
+- [2 tasarım aracının kitle örtüşmesini ölç](https://apify.com/xquik/x-profile-scraper/examples/measure-audience-overlap)
+- [1 hesabı baştan sona denetle](https://apify.com/xquik/x-profile-scraper/examples/run-a-full-account-audit)
+
+## X profillerini kazımak ne kadar tutar?
+
+Xquik'in X Profile Scraper'ı her Apify planında teslim edilen satır başına
+$0.00015 tutar. Apify, platform kullanımını ayrıca faturalandırır. Xquik teslim
+edilen her veri satırı için 1 kez ücret alır. Tanılamalar `diagnostics`
+çıktısında ücretsizdir.
+
+- Xquik aboneliğine ihtiyacın yok.
+- Ayrı bir başlatma, profil veya sorgu ücreti ödemezsin.
+- Filtreler ve tekilleştirme faturalamadan önce çalışır. Filtrelenen veya tekrar
+  eden satırlar için hiç ödeme yapmazsın.
+- Biyografisi olmayan bir profil çeviri ücreti eklemez.
+- Bulunamayan bir profil canlı yayın kontrolü ücreti eklemez.
+- Apify'ın maksimum toplam ücret ayarları teslim edilen satırları sınırlar.
+
+Sorunla karşılaşan ya da büyük bir çalıştırma ayrıca bir `run-report` kaydı
+yazar. Sorunsuz biten küçük bir çalıştırma bu kaydı yazmaz, böylece Apify
+kullanımı azalır. Raporu her çalıştırmada almak için `alwaysSaveRunRecords`
+seçeneğini aç.
+
+Bir çalıştırmanın harcamasını sınırlamak için
+[Çalıştırma seçenekleri](#çalıştırma-seçenekleri) bölümüne bak.
+
+## Boş, kısmi ve durdurulan çalıştırmalar
+
+Xquik'in X Profile Scraper'ı boş, kısmi ve durdurulan çalıştırmaları ücretsiz
+açıklar. Çalıştırma durumu, çalıştırmanın neden durduğunu söyler. Ücretlendirilen
+sonuçları ve okunan hedefleri de sayar.
+
+### Boş sonuçlar
+
+Boş bir çalıştırmanın durumu, hedeflerini ve filtrelerini kontrol etmeni söyler.
+Filtrelenen satırlar sonuç sınırını hiç tüketmez. Her hedefi okuyup hiç satır
+alamayan bir çalıştırma kayıt yazmaz. Durumu nedenini ve neyi değiştirmen
+gerektiğini söyler.
 
 X, 2024'ten beri bir hesabın beğendiği gönderileri yalnızca o hesaba
 gösteriyor. `includeLikes` diğer hesaplar için `profileLike` satırı döndürmez.
 
-Aşağıdaki değerler yalnızca örnektir. Gerçek sonuçlar canlı veriden gelir. Bir
-profil satırı şöyle görünür:
+### Kısmi çalıştırmalar
 
-```json
-{
-  "resultType": "profile",
-  "sourceTarget": "sample_user",
-  "username": "sample_user",
-  "name": "Sample User",
-  "followers": 1200,
-  "verified": false,
-  "accountBasedInUnavailable": true
-}
-```
+Veri çekme yarıda kesilirse Actor ücretsiz bir `partial` tanılaması yazar.
+Teslim edilen satırlar veri kümesinde kalır. Yeniden denemeden önce
+`availableResults`, `failedTargets`, `retryable` ve `nextAction` alanlarını oku.
+Actor'ın başarıyla bitmesi teslimatı doğrular. Tüm verinin çekildiğini
+doğrulamaz.
 
-## X profillerini kazımak ne kadar tutar?
-
-Her Apify planında teslim edilen satır başına $0.00015 ödersin. Apify, platform
-kullanımını ayrıca faturalandırır.
-
-- Teslim edilen her veri satırı için 1 kez ödersin. Tanılamalar `diagnostics`
-  içinde ücretsizdir.
-- Başlatma, profil veya sorgu ücreti yok.
-- Tekilleştirme faturalamadan önce çalışır.
-- Apify'ın maksimum toplam ücret ayarları teslim edilen satırları sınırlar.
-
-## Sınırlar ve kurtarma
-
-Xquik'in X Profile Scraper'ı 1 çalıştırmada birçok profili okur. Ayarladığın her
-filtre zaman akışı satırlarına uygulanır. Apify çalıştırmayı yeniden başlatsa da
-teslim edilen satırlar ve ilerleme korunur.
-
-Çalıştırma yarıda kesilirse Actor ücretsiz bir `partial` tanılaması yazar. Elde
-edilen sonuçlar olduğu gibi kalır. Yeniden denemeden önce `availableResults`,
-`failedTargets`, `retryable` ve `nextAction` alanlarını oku. Actor'ın başarıyla
-bitmesi teslimatı doğrular. Tüm verinin çekildiğini doğrulamaz.
+### Durma nedenleri
 
 Çalıştırma durumu, erken durmanın her nedenini söyler. `stopCauses` her nedeni
 kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Nedenler
@@ -140,6 +296,105 @@ kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Nedenler
 aldığı hesapları belirtir. Bulunamayan veya askıya alınmış bir hedef, listeye
 yalnızca çalıştırmayı başka bir neden durdurduysa girer. Nedenlerden biri
 yeniden denenebiliyorsa çalıştırma da `retryable` olur.
+
+## Girdi
+
+Input sekmesi her seçeneği listeler. `twitterHandles`, `startUrls` veya
+`userIds` alanlarından en az 1'ini doldur. Diğer tüm alanlar isteğe bağlıdır.
+
+| Alan                           | Ne yapar                                                            |
+| ------------------------------ | ------------------------------------------------------------------- |
+| `twitterHandles`               | `@` ile veya `@` olmadan kullanıcı adları                           |
+| `startUrls`                    | x.com veya twitter.com üzerindeki profil URL'leri                   |
+| `userIds`                      | Sayısal X kullanıcı ID'leri                                         |
+| `maxItems`                     | Tüm çalıştırmada teslim edilecek satır sınırı                       |
+| `maxItemsPerTarget`            | Her profil veya veri türü için satır sınırı                         |
+| `includeTweets`                | Gönderiler sekmesini ekler                                          |
+| `includeReplies`               | Yanıtlar sekmesini ekler                                            |
+| `includeMedia`                 | Medya sekmesini ekler                                               |
+| `includeHighlights`            | Öne Çıkanlar sekmesini ekler                                        |
+| `includeLikes`                 | Beğenilen gönderileri ekler, X bunları diğer hesaplardan gizler     |
+| `includeFollowers`             | Takipçileri ekler                                                   |
+| `includeFollowing`             | Takip edilen hesapları ekler                                        |
+| `includeVerifiedFollowers`     | Onaylı takipçileri ekler                                            |
+| `translateBioTo`               | Her biyografiyi `es` gibi kodu verilen dile çevirir                 |
+| `checkLiveNow`                 | Her profilin şu an canlı yayında olup olmadığına bakar              |
+| `sinceDate`, `untilDate`       | Bir tarih aralığındaki gönderileri tutar                            |
+| `language`                     | 1 dil kodundaki gönderileri tutar                                   |
+| `mediaType`                    | Görsel, video, GIF, bağlantı içeren veya medyasız gönderileri tutar |
+| `minViews`, `minLikes`         | Görüntülenme veya beğeni sayısı eşiği aşan gönderileri tutar        |
+| `minReplies`, `minRetweets`    | Yanıt veya yeniden gönderi sayısı eşiği aşan gönderileri tutar      |
+| `nativeRetweets`               | Yalnızca doğrudan yeniden gönderileri tutar                         |
+| `verifiedOnly`                 | Onaylı yazarları veya profilleri tutar                              |
+| `minFollowers`, `maxFollowers` | Belirli bir kitle aralığındaki profilleri tutar                     |
+| `minAccountAgeDays`            | En az bu kadar gün önce açılmış profilleri tutar                    |
+| `dedupeAcrossTargets`          | Profiller arasında tekrar eden satırları faturalamadan önce çıkarır |
+
+### Doğru girdileri seç
+
+- Yalnızca profil kartı için kullanıcı adlarını gir ve tüm `include`
+  seçeneklerini kapalı bırak.
+- Hesap arşivi için `includeTweets`, `includeMedia` ve `includeHighlights`
+  seçeneklerini aç, `sinceDate` değerini ayarla.
+- En iyi içerik için `includeTweets` ile `minLikes` veya `minViews` kullan.
+- Potansiyel müşteri listeleri için `includeFollowers` seçeneğini `minFollowers`
+  ve `minAccountAgeDays` ile birlikte aç.
+- Kitle örtüşmesi için 2 kullanıcı adı gir, `includeFollowers` seçeneğini aç ve
+  `dedupeAcrossTargets: false` ayarla. Böylece ortak bir takipçi her kullanıcı
+  adının altında görünür.
+
+## Çıktı
+
+Her satır bir JSON nesnesidir. Veri kümesi şeması her alana bir başlık ve
+açıklama verir, böylece yapay zeka ajanları satırları tahmin etmeden okuyabilir.
+
+Aşağıdaki değerler yalnızca örnektir. Gerçek sonuçlar canlı veriden gelir. Bir
+profil satırı şöyle görünür:
+
+```json
+{
+  "resultType": "profile",
+  "sourceTarget": "sample_user",
+  "id": "1234567890",
+  "username": "sample_user",
+  "name": "Sample User",
+  "description": "Building tools for researchers.",
+  "url": "https://example.com",
+  "location": "Lisbon",
+  "followers": 1200,
+  "following": 310,
+  "statusesCount": 4200,
+  "verified": false,
+  "createdAt": "Tue Mar 21 20:50:14 +0000 2017",
+  "accountBasedInUnavailable": true
+}
+```
+
+X, `accountBasedIn` değerini hesaba erişilen IP'lerin toplu verisinden çıkarır.
+Etiket uyruk, ikamet, kimlik, kayıt yeri, gönderi yeri veya kesin konum
+belirtmez. `observedAt` verinin alındığı zamanı kaydeder. X etiket
+göstermiyorsa `accountBasedIn` null olur. X etiketi gizliyorsa satırda bunun
+yerine `accountBasedInUnavailable: true` bulunur.
+
+Veri kümesini JSON, CSV, Excel veya HTML olarak dışa aktar.
+
+## Çalıştırma seçenekleri
+
+- Çalıştırma maliyetini sınırlamak için Apify'ın maksimum toplam ücret ayarını
+  kullan. Bu bütçenin izin verdiği en fazla satırı almak için `maxItems`
+  değerini yüksek bırak.
+- Apify API'de `maxTotalChargeUsd` değerini, Console'da ise Max cost per run
+  ayarını belirle.
+- Tüm profillerini 1 çalıştırmaya koy. Her çalıştırma Apify'a aynı başlatma
+  maliyetini öder.
+- `maxConcurrency` aynı anda kaç profilin işleneceğini belirler. Varsayılan
+  değer en hızlı güvenli ayardır.
+- 1 saniyelik kontroller ve imzalı webhook'lar için Xquik hesap monitörlerini
+  kullan. Aktif monitörler her saniye kontrol eder.
+
+Yayımlanan her düzeltmeyi almak için her çalıştırmada `latest` seç. Kayıtlı
+görevler ve zamanlamalar kendi derleme seçimlerini korur, bu yüzden onları da
+`latest` üzerinde tut.
 
 ## İlgili Xquik Actor'ları
 
@@ -222,6 +477,26 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   tutmadığını incelediğinde kullan. Analiz edilen gönderi başına $0.0003'ten
   başlar.
 
+## Kazımadan fazlasına mı ihtiyacın var?
+
+Xquik ayrıca 53 panel aracı, bir REST API, imzalı webhook'lar ve bir MCP
+sunucusu sunar.
+
+- [API belgeleri](https://docs.xquik.com/introduction): REST API kılavuzları
+- [Profile Lookup API](https://docs.xquik.com/api-reference/x/twitter-profile-lookup):
+  herkese açık 1 profili al
+- [User Tweets API](https://docs.xquik.com/api-reference/x/user-tweets): bir
+  kullanıcının gönderilerini al
+- [Followers API](https://docs.xquik.com/api-reference/x/followers): bir hesabın
+  takipçilerini al
+- [Bio Translation API](https://docs.xquik.com/api-reference/x/user-bio-translation):
+  bir profil biyografisini çevir
+- [Live Status API](https://docs.xquik.com/api-reference/x/user-live-status):
+  bir kullanıcının canlı yayında olup olmadığını kontrol et
+- [MCP sunucusu](https://docs.xquik.com/mcp/overview): desteklenen araçları
+  keşfet
+- [Webhook'lar](https://docs.xquik.com/webhooks/overview): imzalı olay teslimi
+
 ## SSS
 
 Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
@@ -231,6 +506,44 @@ Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
 Hayır. Xquik'in X Profile Scraper'ı X API anahtarı, giriş ya da kimlik bilgisi
 istemez.
 
+### 1 çalıştırmada kaç profil kazıyabilirim?
+
+Listelediğin kadar. Satır sayısını `maxItems` ve Apify harcama sınırın belirler.
+
+### X profillerini CSV veya Excel olarak dışa aktarabilir miyim?
+
+Evet. Veri kümesini Storage sekmesinden JSON, CSV, Excel veya HTML olarak dışa
+aktar.
+
+### Bir Twitter kullanıcısının takipçilerini kazıyabilir miyim?
+
+Evet. `includeFollowers`, `includeFollowing` veya `includeVerifiedFollowers`
+seçeneğini aç. Her hesap 1 satırdır.
+
+### Profilin web sitesini ve konumunu alıyor mu?
+
+Evet. `url` web sitesini, `location` ise hesap sahibinin yazdığı metni tutar.
+
+### Korumalı hesapları kazıyabilir miyim?
+
+Herkese açık profil satırını `protected: true` ile alırsın. X, korumalı bir
+hesabın gönderilerini ve takipçilerini yalnızca onayladığı takipçilere gösterir.
+
+### Bir hesabın şu an canlı yayında olup olmadığını nasıl anlarım?
+
+`checkLiveNow: true` ayarla. Her profil, `live` alanını ve son yayınını içeren
+bir `profileLive` satırı alır.
+
+### Biyografileri çevirebilir mi?
+
+Evet. `translateBioTo` alanına `es` veya `pt-br` gibi bir dil kodu gir.
+Biyografisi olmayan bir profil satır eklemez.
+
+### includeLikes neden hiçbir şey döndürmüyor?
+
+X, 2024'ten beri bir hesabın beğendiği gönderileri yalnızca o hesaba
+gösteriyor. Bu Actor dahil diğer hesaplar bunları okuyamaz.
+
 ### X profillerini kazımak yasal mı?
 
 Xquik'in X Profile Scraper'ı herkese açık X alanlarını çeker. Sonuçlarda
@@ -239,11 +552,11 @@ kurallarına uy. Emin değilsen yetkin bir hukukçuya danış.
 
 ### Çalıştırmam neden sonuç döndürmedi?
 
-Önce ücretsiz `diagnostics` çıktısını aç. Boş bir çalıştırmanın durumu,
-hedeflerini ve filtrelerini kontrol etmeni söyler. `stopCauses` her neden için
+Önce çalıştırma durumunu oku. Boş bir çalıştırmanın durumu, hedeflerini ve
+filtrelerini kontrol etmeni söyler. Ücretsiz `diagnostics` çıktısı, ilgilenmen
+gereken bir şey olduğunda görünür. Buradaki `stopCauses` her neden için
 izleyeceğin bir `nextAction` verir. Çalıştırma okuyamadığı her girdiyi listeler
-ve nasıl düzelteceğini söyler. X beğenileri gizlediği için `includeLikes`
-diğer hesaplar için `profileLike` satırı döndürmez.
+ve nasıl düzelteceğini söyler.
 
 ### API'yi, zamanlamaları ve entegrasyonları kullanabilir miyim?
 
@@ -255,14 +568,15 @@ Scraper'ını bir cron takvimiyle çalıştırır. Ajanlar
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) kullanır. Eski bir
 derlemeye ihtiyacın yoksa `latest` derlemesini kullan.
 
-### Nereden yardım alırım?
-
-Actor sayfasında bir issue aç ya da çalıştırma ID'siyle support@xquik.com
-adresine yaz. Anahtar-değer deposundaki ücretsiz tanılamalar boş, kısmi veya
-kesilen çalıştırmaları açıklar.
-
 ### Bana özel bir çözüm alabilir miyim?
 
 Evet. [xquik.com](https://xquik.com) adresini ziyaret et ya da
 [API belgelerini](https://docs.xquik.com/introduction) oku. Bu kaynaklar paneli,
 API'yi, MCP sunucusunu ve webhook'ları anlatır.
+
+### Nereden yardım alırım?
+
+Actor sayfasında bir issue aç ya da çalıştırma ID'siyle <support@xquik.com>
+adresine yaz. Anahtar-değer deposundaki ücretsiz tanılamalar ilgilenmen gereken
+çalıştırmaları açıklar. Hiç satır alamayan bir çalıştırma nedenini durumunda
+söyler.
