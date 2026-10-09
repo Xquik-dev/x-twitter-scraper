@@ -412,6 +412,7 @@ X 검색은 일부 오래된 답글의 마음에 들어요 수를 실제보다 �
 
 - 공개 미디어가 있는 답글만 받으려면 `hasMediaOnly: true`를 설정하세요.
 - `mediaType`은 `any`, `image`, `video`, `gif`, `link` 중 하나로 설정하세요.
+- 미디어나 링크가 없는 텍스트 답글만 원하면 `mediaType`을 `none`으로 설정하세요.
 - 시작 시각(포함)은 `since`로 설정하세요.
 - 종료 시각(미포함)은 `until`로 설정하세요.
 - 호환용 별칭으로 `sinceTime` & `untilTime`을 쓸 수 있습니다.

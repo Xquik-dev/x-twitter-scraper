@@ -437,6 +437,7 @@ Usa `minLikes`, `minReplies`, `minRetweets`, `minQuotes`, `minViews` y
 - Define `hasMediaOnly: true` para obtener respuestas con contenido multimedia
   público.
 - Define `mediaType` como `any`, `image`, `video`, `gif` o `link`.
+- Define `mediaType` como `none` para respuestas de texto sin multimedia ni enlaces.
 - Define `since` para una marca de tiempo inicial inclusiva.
 - Define `until` para una marca de tiempo final exclusiva.
 - Usa `sinceTime` y `untilTime` como alias de compatibilidad.

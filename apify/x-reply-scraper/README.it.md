@@ -425,6 +425,7 @@ Usa `minLikes`, `minReplies`, `minRetweets`, `minQuotes`, `minViews` &
 
 - Imposta `hasMediaOnly: true` per le risposte con media pubblici.
 - Imposta `mediaType` su `any`, `image`, `video`, `gif` o `link`.
+- Imposta `mediaType` su `none` per le risposte di solo testo, senza media né link.
 - Imposta `since` per un timestamp di inizio incluso.
 - Imposta `until` per un timestamp di fine escluso.
 - Usa `sinceTime` & `untilTime` come alias di compatibilità.

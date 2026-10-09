@@ -337,6 +337,7 @@ X 搜索会少计一些较早回复的喜欢数，所以按 `likes` 排序的运
 
 - 设置 `hasMediaOnly: true`，只保留带公开媒体的回复。
 - 把 `mediaType` 设为 `any`、`image`、`video`、`gif` 或 `link`。
+- 把 `mediaType` 设为 `none`，只保留不含媒体和链接的纯文字回复。
 - 设置 `since` 作为起始时间戳，包含该时间点。
 - 设置 `until` 作为结束时间戳，不包含该时间点。
 - `sinceTime` 和 `untilTime` 可作为兼容别名使用。

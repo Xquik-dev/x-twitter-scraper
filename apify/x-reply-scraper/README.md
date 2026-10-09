@@ -406,6 +406,7 @@ Use `minLikes`, `minReplies`, `minRetweets`, `minQuotes`, `minViews` &
 
 - Set `hasMediaOnly: true` for replies with public media.
 - Set `mediaType` to `any`, `image`, `video`, `gif` or `link`.
+- Set `mediaType` to `none` for text replies without media or links.
 - Set `since` for an inclusive start timestamp.
 - Set `until` for an exclusive end timestamp.
 - Use `sinceTime` & `untilTime` as compatibility aliases.

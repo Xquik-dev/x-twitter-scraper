@@ -273,6 +273,9 @@ Inputタブにすべてのオプションがあります。`twitterHandles`、`s
 | `verifiedOnly`                 | 認証済みの著者やプロフィールだけを残す        |
 | `minFollowers`, `maxFollowers` | フォロワー数が範囲内のプロフィールを残す      |
 | `minAccountAgeDays`            | 作成からこの日数以上たったプロフィールを残す  |
+| `hasWebsite`, `hasLocation` | ウェブサイトまたは所在地を記載したプロフィールを残す |
+| `bioContains` | 自己紹介にこれらの語のいずれかを含むプロフィールを残す |
+| `locationContains` | 所在地にこのテキストを含むプロフィールを残す |
 | `dedupeAcrossTargets`          | プロフィール間で重複する行を課金前に除く      |
 
 ### 適切な入力を選ぶ
@@ -381,6 +384,7 @@ Xquikは、53個のダッシュボードツール、REST API、署名付きWebho
 ### プロフィールのウェブサイトと所在地も取得できますか？
 
 はい。`url` にはウェブサイトが、`location` には本人が入力したテキストが入ります。
+`hasWebsite` と `hasLocation` を設定すると、それらを記載したプロフィールだけを残せます。
 
 ### 非公開アカウントをスクレイピングできますか？
 

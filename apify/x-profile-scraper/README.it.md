@@ -326,6 +326,9 @@ La scheda Input elenca ogni opzione. Indica almeno 1 tra `twitterHandles`,
 | `verifiedOnly`                 | Tiene autori o profili verificati                               |
 | `minFollowers`, `maxFollowers` | Tiene i profili in una fascia di pubblico                       |
 | `minAccountAgeDays`            | Tiene i profili con almeno questa età in giorni                 |
+| `hasWebsite`, `hasLocation` | Tiene i profili che indicano un sito web o una località |
+| `bioContains` | Tiene i profili la cui bio contiene 1 di queste parole |
+| `locationContains` | Tiene i profili la cui località contiene questo testo |
 | `dedupeAcrossTargets`          | Elimina le righe ripetute tra profili prima della fatturazione  |
 
 ### Scegli gli input giusti
@@ -515,6 +518,7 @@ Sì. Attiva `includeFollowers`, `includeFollowing` o
 
 Sì. `url` contiene il sito web & `location` contiene il testo scritto
 dall'utente.
+Imposta `hasWebsite` & `hasLocation` per tenere solo i profili che li indicano.
 
 ### Posso estrarre gli account protetti?
 
