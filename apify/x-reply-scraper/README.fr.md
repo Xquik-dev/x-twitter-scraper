@@ -441,6 +441,7 @@ Utilisez `minLikes`, `minReplies`, `minRetweets`, `minQuotes`, `minViews` et
 
 - Réglez `hasMediaOnly: true` pour les réponses avec des médias publics.
 - Réglez `mediaType` sur `any`, `image`, `video`, `gif` ou `link`.
+- Réglez `mediaType` sur `none` pour les réponses texte sans médias ni liens.
 - Réglez `since` pour un horodatage de début inclus.
 - Réglez `until` pour un horodatage de fin exclu.
 - Utilisez `sinceTime` et `untilTime` comme alias de compatibilité.

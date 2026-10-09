@@ -328,6 +328,9 @@ Input sekmesi her seçeneği listeler. `twitterHandles`, `startUrls` veya
 | `verifiedOnly`                 | Onaylı yazarları veya profilleri tutar                              |
 | `minFollowers`, `maxFollowers` | Belirli bir kitle aralığındaki profilleri tutar                     |
 | `minAccountAgeDays`            | En az bu kadar gün önce açılmış profilleri tutar                    |
+| `hasWebsite`, `hasLocation` | Web sitesi veya konum belirten profilleri tutar |
+| `bioContains` | Biyografisinde bu kelimelerden biri geçen profilleri tutar |
+| `locationContains` | Konumunda bu metin geçen profilleri tutar |
 | `dedupeAcrossTargets`          | Profiller arasında tekrar eden satırları faturalamadan önce çıkarır |
 
 ### Doğru girdileri seç
@@ -523,6 +526,7 @@ seçeneğini aç. Her hesap 1 satırdır.
 ### Profilin web sitesini ve konumunu alıyor mu?
 
 Evet. `url` web sitesini, `location` ise hesap sahibinin yazdığı metni tutar.
+Sadece bunları belirten profilleri tutmak için `hasWebsite` ve `hasLocation` değerlerini aç.
 
 ### Korumalı hesapları kazıyabilir miyim?
 

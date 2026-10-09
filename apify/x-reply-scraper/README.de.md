@@ -430,6 +430,7 @@ Nutze `minLikes`, `minReplies`, `minRetweets`, `minQuotes`, `minViews` &
 
 - Setze `hasMediaOnly: true` für Antworten mit öffentlichen Medien.
 - Setze `mediaType` auf `any`, `image`, `video`, `gif` oder `link`.
+- Setze `mediaType` auf `none` für Textantworten ohne Medien oder Links.
 - Setze `since` für einen inklusiven Startzeitpunkt.
 - Setze `until` für einen exklusiven Endzeitpunkt.
 - Nutze `sinceTime` & `untilTime` als Kompatibilitätsaliasse.

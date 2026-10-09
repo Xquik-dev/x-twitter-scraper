@@ -321,6 +321,9 @@ Input 탭에 모든 옵션이 있습니다. `twitterHandles`, `startUrls`, `user
 | `verifiedOnly`                 | 인증된 작성자나 프로필만 유지                                  |
 | `minFollowers`, `maxFollowers` | 오디언스 범위 안의 프로필만 유지                               |
 | `minAccountAgeDays`            | 계정 연령이 이 일수 이상인 프로필만 유지                       |
+| `hasWebsite`, `hasLocation` | 웹사이트나 위치를 적은 프로필만 유지 |
+| `bioContains` | 소개에 이 단어 중 하나가 있는 프로필만 유지 |
+| `locationContains` | 위치에 이 텍스트가 있는 프로필만 유지 |
 | `dedupeAcrossTargets`          | 프로필 간 중복 행을 과금 전에 제거                             |
 
 ### 알맞은 입력 고르기
@@ -498,6 +501,7 @@ Xquik은 대시보드 도구 53개, REST API, 서명된 웹훅 & MCP 서버도 �
 ### 프로필의 웹사이트 & 위치도 가져오나요?
 
 네. `url`에는 웹사이트가, `location`에는 계정 주인이 입력한 텍스트가 들어갑니다.
+`hasWebsite`와 `hasLocation`을 설정하면 이를 적은 프로필만 남길 수 있습니다.
 
 ### 보호된 계정도 스크랩할 수 있나요?
 

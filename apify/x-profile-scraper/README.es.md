@@ -331,6 +331,9 @@ opcionales.
 | `verifiedOnly`                 | Conserva autores o perfiles verificados                          |
 | `minFollowers`, `maxFollowers` | Conserva los perfiles dentro de un rango de audiencia            |
 | `minAccountAgeDays`            | Conserva los perfiles con al menos estos días de antigüedad      |
+| `hasWebsite`, `hasLocation` | Conserva los perfiles que indican un sitio web o una ubicación |
+| `bioContains` | Conserva los perfiles cuya biografía tiene 1 de estas palabras |
+| `locationContains` | Conserva los perfiles cuya ubicación tiene este texto |
 | `dedupeAcrossTargets`          | Descarta filas repetidas entre perfiles antes de facturar        |
 
 ### Elige las entradas correctas
@@ -527,6 +530,7 @@ Cada cuenta es 1 fila.
 
 Sí. `url` contiene el sitio web y `location` contiene el texto que escribió el
 titular.
+Define `hasWebsite` y `hasLocation` para conservar solo los perfiles que los indican.
 
 ### ¿Puedo extraer cuentas protegidas?
 

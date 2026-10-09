@@ -328,6 +328,9 @@ Der Input-Tab zeigt jede Option. Gib mindestens 1 von `twitterHandles`,
 | `verifiedOnly`                 | Behält verifizierte Autoren oder Profile                        |
 | `minFollowers`, `maxFollowers` | Behält Profile in einem Follower-Bereich                        |
 | `minAccountAgeDays`            | Behält Profile, die mindestens so viele Tage alt sind           |
+| `hasWebsite`, `hasLocation` | Behält Profile, die eine Website oder einen Ort angeben |
+| `bioContains` | Behält Profile, deren Bio eines dieser Wörter enthält |
+| `locationContains` | Behält Profile, deren Ort diesen Text enthält |
 | `dedupeAcrossTargets`          | Entfernt profilübergreifende Duplikate vor der Abrechnung       |
 
 ### Die richtigen Eingaben wählen
@@ -516,6 +519,7 @@ Ja. Aktiviere `includeFollowers`, `includeFollowing` oder
 ### Liefert der Scraper Website & Standort eines Profils?
 
 Ja. `url` enthält die Website & `location` den vom Inhaber eingegebenen Text.
+Setze `hasWebsite` & `hasLocation`, um nur Profile zu behalten, die sie angeben.
 
 ### Kann ich geschützte Accounts scrapen?
 

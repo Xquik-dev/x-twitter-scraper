@@ -319,6 +319,9 @@ The Input tab lists every option. Give at least 1 of `twitterHandles`,
 | `verifiedOnly`                 | Keep verified authors or profiles                     |
 | `minFollowers`, `maxFollowers` | Keep profiles inside an audience range                |
 | `minAccountAgeDays`            | Keep profiles at least this many days old             |
+| `hasWebsite`, `hasLocation`    | Keep profiles that list a website or a location       |
+| `bioContains`                  | Keep profiles whose bio has 1 of these words          |
+| `locationContains`             | Keep profiles whose location has this text            |
 | `dedupeAcrossTargets`          | Drop rows repeated across profiles before billing     |
 
 ### Pick the right inputs
@@ -496,7 +499,8 @@ Yes. Turn on `includeFollowers`, `includeFollowing` or
 
 ### Does it get a profile's website & location?
 
-Yes. `url` holds the website & `location` holds the text the owner typed.
+Yes. `url` holds the website & `location` holds the text the owner typed. Set
+`hasWebsite` & `hasLocation` to keep only profiles that list them.
 
 ### Can I scrape protected accounts?
 

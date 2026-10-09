@@ -422,6 +422,7 @@ Desteklenen tüm filtreler veri kümesine yazmadan önce çalışır.
 
 - Herkese açık medyası olan yanıtlar için `hasMediaOnly: true` ayarla.
 - `mediaType` değerini `any`, `image`, `video`, `gif` veya `link` yap.
+- Medya veya link içermeyen metin yanıtları için `mediaType` değerini `none` yap.
 - Dahil olan bir başlangıç zamanı için `since` ayarla.
 - Hariç tutulan bir bitiş zamanı için `until` ayarla.
 - `sinceTime` ve `untilTime` alanlarını uyumluluk takma adı olarak kullan.

@@ -328,6 +328,9 @@ optionnels.
 | `verifiedOnly`                 | Garde les auteurs ou profils certifiés                        |
 | `minFollowers`, `maxFollowers` | Garde les profils dans une fourchette d'audience              |
 | `minAccountAgeDays`            | Garde les profils âgés d'au moins ce nombre de jours          |
+| `hasWebsite`, `hasLocation` | Garde les profils qui indiquent un site web ou une localisation |
+| `bioContains` | Garde les profils dont la bio contient 1 de ces mots |
+| `locationContains` | Garde les profils dont la localisation contient ce texte |
 | `dedupeAcrossTargets`          | Retire les lignes répétées entre profils avant la facturation |
 
 ### Choisir les bonnes entrées
@@ -529,6 +532,7 @@ Oui. Activez `includeFollowers`, `includeFollowing` ou
 
 Oui. `url` contient le site web et `location` contient le texte saisi par le
 titulaire.
+Activez `hasWebsite` et `hasLocation` pour ne garder que les profils qui les indiquent.
 
 ### Puis-je scraper des comptes protégés ?
 

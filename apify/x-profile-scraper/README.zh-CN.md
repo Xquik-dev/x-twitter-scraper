@@ -272,6 +272,9 @@ Input 标签页列出了所有选项。`twitterHandles`、`startUrls` 和 `userI
 | `verifiedOnly`                 | 只保留已认证的作者或个人资料                |
 | `minFollowers`, `maxFollowers` | 只保留受众规模在范围内的个人资料            |
 | `minAccountAgeDays`            | 只保留账号年龄至少达到该天数的个人资料      |
+| `hasWebsite`, `hasLocation` | 只保留填写了网站或位置的个人资料 |
+| `bioContains` | 只保留简介包含其中某个词的个人资料 |
+| `locationContains` | 只保留位置包含该文字的个人资料 |
 | `dedupeAcrossTargets`          | 计费前删除在多个个人资料间重复的行          |
 
 ### 选择合适的输入
@@ -380,6 +383,7 @@ Xquik 还提供 53 个仪表盘工具、REST API、签名 webhook 和 MCP 服务
 ### 能获取个人资料的网站和位置吗？
 
 可以。`url` 保存网站，`location` 保存账号主人填写的文字。
+设置 `hasWebsite` 和 `hasLocation`，只保留填写了这些信息的个人资料。
 
 ### 可以抓取受保护的账号吗？
 
