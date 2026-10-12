@@ -655,18 +655,92 @@ Each line names the fields you already use, then the field they map to:
 - `twitterContent`, `query`, `searchQuery`: `twitterContent`
 - `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`,
   `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`,
-  `maxTweets`, `tweetsDesired`: `maxItems`
+  `maxTweets`, `tweetsDesired`, `maxTotalTweets`: `maxItems`
+- `per_profile_limit`: `maxItemsPerTarget`
 - `sort`: `queryType`
-- `tweetLanguage`, `language`: `lang`
-- `author`, `inReplyTo`, `mentioning`: `from`, `to`, `@`
-- `start`, `startDate`, `end`, `endDate`: `since`, `until`
-- `minimumRetweets`, `minimumFavorites`, `minimumReplies`: `min_retweets`,
-  `min_faves`, `min_replies`
-- `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`: `filter:images`,
-  `filter:videos`, `filter:quote`, `filter:blue_verified`
-- `geotaggedNear`, `withinRadius`: `near`, `within`
+- `search_type`, `searchType`, `query_type`, `search_sort`: `queryType` for
+  `Top` & `Latest` in any case. `Media`, `Photos` & `Videos` turn on
+  `filter:media`, `filter:images` & `filter:videos`.
+- `tweetLanguage`, `language`, `contentLanguage`: `lang`
+- `author`, `fromUser`: `from`
+- `inReplyTo`, `toUser`: `to`
+- `mentioning`: `@`
+- `start`, `startDate`, `timeSince`: `since`
+- `end`, `endDate`, `timeUntil`: `until`
+- `timeSinceUnix`, `sinceTime`, `timeUntilUnix`, `untilTime`, in seconds:
+  `since_time`, `until_time`
+- `timeWithinTime`, `withinTime`: `within_time`
+- `timeWindowHours`, `timeWindow`: `within_time`, as hours & as days
+- `timeSinceId`, `sinceId`, `timeMaxId`, `maxId`: `since_id`, `max_id`
 - `quickDateRange` from the Google Search Scraper, such as `d7`, `w2`, `m1` or
   `y`: `since_time`, counted back from the run start
+- `minimumFavorites`, `minLikes`, `min_likes`, `minFaves`, `engagementMinLikes`,
+  `Minimum_likes`: `min_faves`
+- `minimumRetweets`, `minRetweets`, `engagementMinRetweets`: `min_retweets`
+- `minimumReplies`, `minReplies`, `engagementMinReplies`, `Minimum_replies`:
+  `min_replies`
+- `engagementMaxLikes`, `maxLikes`, `engagementMaxRetweets`, `maxRetweets`,
+  `engagementMaxReplies`: `engagement.maxLikes`, `engagement.maxRetweets`,
+  `engagement.maxReplies`
+- `onlyImage`, `onlyImages`, `has_images`: `filter:images`
+- `onlyVideo`, `onlyVideos`, `has_videos`: `filter:videos`
+- `onlyWithMedia`, `mediaOnly`: `filter:media`
+- `onlyQuote`, `onlyQuotes`: `filter:quote`
+- `onlyTwitterBlue`, `usersBlueVerifiedOnly`, `blue_verified_only`,
+  `onlyBlueVerified`: `filter:blue_verified`
+- `engagementHasEngagement`, `hasEngagement`: `filter:has_engagement`
+- `mediaHasLinks`, `has_links`, `requireLinks`: `filter:links`
+- `mediaHasMentions`, `has_mentions`, `requireMentions`: `filter:mentions`
+- `mediaHasHashtags`, `has_hashtags`, `requireHashtags`: `filter:hashtags`
+- `mediaNewsOnly`, `mediaSafeContentOnly`: `filter:news`, `filter:safe`
+- `mediaTypes`, with 1 type: the `filter:` field of that type
+- `mediaSubtype`: `filter:media`, `filter:images` or `filter:videos`
+- `includeNativeRetweets`, `includeRetweets`: `include:nativeretweets`
+- `excludeReplies`, `excludeRetweets`, `includeRetweets` set to false,
+  `tweetTypesExclude`: `tweetTypes.excludeReplies`, `tweetTypes.excludeRetweets`
+  & `tweetTypes.excludeQuotes`
+- `tweetTypes` as a list with 1 type: `tweetTypes.replies`, `tweetTypes.quotes`
+  or `tweetTypes.nativeRetweets`
+- `tweetSubtype`: `tweetTypes.replies` or `tweetTypes.quotes`. `self_threads`
+  adds the operator `filter:self_threads`.
+- `geotaggedNear`, `geoNear`: `near`
+- `withinRadius`, `geoWithinRadius`, `geoWithin`: `within`
+- `geoGeocode`: `geocode`
+- `tweetConversationId`, `tweetQuotedTweetId`, `tweetQuotedUserId`:
+  `conversation_id`, `quoted_tweet_id`, `quoted_user_id`
+- `cardName`, `tweetPollTypes`: `card_name`
+- `search_query`: `twitterContent`
+- `profile_urls`: `startUrls` for links, `twitterHandles` for handles
+- `lookup_post_ids`, or `id` as one string: `tweetIds`
+- `tweets` as 1 comma list: `tweetIds`
+
+Some fields have no field here. Each adds the X search operator it stands for to
+every search of the run. The run log lists the operators it added at the start:
+
+- `usersFromUsers`, `from_users`, `usersToUsers`, `to_users`,
+  `usersListMembers`: `from:`, `to:` & `list:`. Several values run as
+  alternatives, such as `(from:a OR from:b)`.
+- `usersMentionUsers`, `mentioning_users`: `@name`
+- `usersExcludeFromUsers`: `-from:`
+- `onlyVerifiedUsers`, `usersVerifiedOnly`, `verified_only`: `filter:verified`
+- `placeObjectId`, `geoPlaceId`, `placeId`, `place`: `place:`
+- `cardDomain`: `card_domain:`
+- `appsSources`, `appsExcludeSources`: `source:` & `-source:`
+- `contentKeywords`, `contentExactPhrases`, `contentHashtags`,
+  `contentCashtags`, each with 1 value: the word, the quoted phrase, `#tag` &
+  `$tag`
+- `contentExcludeKeywords`, `contentExcludeHashtags`, `exclude_words`,
+  `hashtags_exclude`: `-word` & `-#tag`
+- `all_words`, `exact_phrases`: every word & phrase must match
+- `any_words`, `hashtags_any`: alternatives, such as `(#a OR #b)`
+- `contentQuestionMarks`: `?`
+- `contentEmoticons`: `:)` for `positive`, `:(` for `negative`
+- `tweet_type`: `filter:replies`, `filter:retweets` & their `-filter:` forms
+
+Modes named in words map to `mode`: `Advanced Search` to `search`,
+`Get Tweet by ID` to `tweet`, `Get a Few Tweets` to `tweets`, `Get Replies` to
+`replies`, `Get Quotes` to `quotes`, `Get Retweeters` to `retweeters` &
+`Get Favoriters` to `favoriters`.
 
 How a pasted input behaves:
 
@@ -688,6 +762,17 @@ How a pasted input behaves:
   `userId` or `user_ids`.
 - Search operator fields such as `from`, `min_faves`, `since_time` &
   `filter:images` already use X's names. They need no mapping.
+- A list that another Actor does not call all-of or any-of runs with 1 value:
+  `contentKeywords`, `contentExactPhrases`, `contentHashtags`,
+  `contentCashtags`, `usersMentionUsers`, `mediaTypes` & `tweetTypes`. With more
+  values the run stops before any read or charge. Its message says how to write
+  them as 1 search term.
+- `search_type` set to `People` or `Lists`, `source_mode` set to `followers`, an
+  `engagementLevel` preset & the mode `Get Similar Tweets` stop the run before
+  any read or charge. The message names the Actor or the field to use.
+- `category` set to `tweets` or `info` changes nothing. The job of another
+  Actor, such as `followers`, `user_info` or `replies`, stops the run. It reads
+  & charges nothing. The message names that Actor.
 
 ### Console & API input
 

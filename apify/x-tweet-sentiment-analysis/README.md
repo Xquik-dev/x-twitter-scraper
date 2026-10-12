@@ -106,9 +106,11 @@ Use 1 name per setting when adapting an existing input.
 | `tweetLanguage`, `language`                         | `lang`           |
 | `startDate`, `endDate`                              | `since`, `until` |
 
-The Actor accepts these common names directly. Use `Latest` or `Top` for `sort`.
-Keep language codes & date boundaries. Limits apply across all targets. This
-input is ready to run:
+The Actor accepts these common names directly. It also reads the filter names of
+other tweet Actors. A filter with no field here becomes an X search operator on
+every search of the run, & the run log lists those operators at the start. Use
+`Latest` or `Top` for `sort`. Keep language codes & date boundaries. Limits
+apply across all targets. This input is ready to run:
 
 ```json
 { "searchTerms": ["from:NASA"], "sort": "Latest", "maxItems": 5 }

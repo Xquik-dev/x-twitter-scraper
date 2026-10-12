@@ -695,18 +695,95 @@ Her satır önce zaten kullandığın alanları, sonra eşlendikleri alanı yaza
 - `twitterContent`, `query`, `searchQuery`: `twitterContent`
 - `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`,
   `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`,
-  `maxTweets`, `tweetsDesired`: `maxItems`
+  `maxTweets`, `tweetsDesired`, `maxTotalTweets`: `maxItems`
+- `per_profile_limit`: `maxItemsPerTarget`
 - `sort`: `queryType`
-- `tweetLanguage`, `language`: `lang`
-- `author`, `inReplyTo`, `mentioning`: `from`, `to`, `@`
-- `start`, `startDate`, `end`, `endDate`: `since`, `until`
-- `minimumRetweets`, `minimumFavorites`, `minimumReplies`: `min_retweets`,
-  `min_faves`, `min_replies`
-- `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`: `filter:images`,
-  `filter:videos`, `filter:quote`, `filter:blue_verified`
-- `geotaggedNear`, `withinRadius`: `near`, `within`
+- `search_type`, `searchType`, `query_type`, `search_sort`: `Top` ve `Latest`
+  için `queryType`, büyük veya küçük harfle. `Media`, `Photos` ve `Videos`,
+  `filter:media`, `filter:images` ve `filter:videos` alanlarını açar.
+- `tweetLanguage`, `language`, `contentLanguage`: `lang`
+- `author`, `fromUser`: `from`
+- `inReplyTo`, `toUser`: `to`
+- `mentioning`: `@`
+- `start`, `startDate`, `timeSince`: `since`
+- `end`, `endDate`, `timeUntil`: `until`
+- saniye olarak `timeSinceUnix`, `sinceTime`, `timeUntilUnix`, `untilTime`:
+  `since_time`, `until_time`
+- `timeWithinTime`, `withinTime`: `within_time`
+- `timeWindowHours`, `timeWindow`: saat ve gün olarak `within_time`
+- `timeSinceId`, `sinceId`, `timeMaxId`, `maxId`: `since_id`, `max_id`
 - Google Search Scraper'daki `quickDateRange`, örneğin `d7`, `w2`, `m1` veya
   `y`: `since_time`, çalıştırmanın başlangıcından geriye sayılır
+- `minimumFavorites`, `minLikes`, `min_likes`, `minFaves`, `engagementMinLikes`,
+  `Minimum_likes`: `min_faves`
+- `minimumRetweets`, `minRetweets`, `engagementMinRetweets`: `min_retweets`
+- `minimumReplies`, `minReplies`, `engagementMinReplies`, `Minimum_replies`:
+  `min_replies`
+- `engagementMaxLikes`, `maxLikes`, `engagementMaxRetweets`, `maxRetweets`,
+  `engagementMaxReplies`: `engagement.maxLikes`, `engagement.maxRetweets`,
+  `engagement.maxReplies`
+- `onlyImage`, `onlyImages`, `has_images`: `filter:images`
+- `onlyVideo`, `onlyVideos`, `has_videos`: `filter:videos`
+- `onlyWithMedia`, `mediaOnly`: `filter:media`
+- `onlyQuote`, `onlyQuotes`: `filter:quote`
+- `onlyTwitterBlue`, `usersBlueVerifiedOnly`, `blue_verified_only`,
+  `onlyBlueVerified`: `filter:blue_verified`
+- `engagementHasEngagement`, `hasEngagement`: `filter:has_engagement`
+- `mediaHasLinks`, `has_links`, `requireLinks`: `filter:links`
+- `mediaHasMentions`, `has_mentions`, `requireMentions`: `filter:mentions`
+- `mediaHasHashtags`, `has_hashtags`, `requireHashtags`: `filter:hashtags`
+- `mediaNewsOnly`, `mediaSafeContentOnly`: `filter:news`, `filter:safe`
+- 1 tür içeren `mediaTypes`: o türün `filter:` alanı
+- `mediaSubtype`: `filter:media`, `filter:images` veya `filter:videos`
+- `includeNativeRetweets`, `includeRetweets`: `include:nativeretweets`
+- `excludeReplies`, `excludeRetweets`, false olarak ayarlanmış
+  `includeRetweets`, `tweetTypesExclude`: `tweetTypes.excludeReplies`,
+  `tweetTypes.excludeRetweets` ve `tweetTypes.excludeQuotes`
+- 1 tür içeren liste olarak `tweetTypes`: `tweetTypes.replies`,
+  `tweetTypes.quotes` veya `tweetTypes.nativeRetweets`
+- `tweetSubtype`: `tweetTypes.replies` veya `tweetTypes.quotes`. `self_threads`,
+  `filter:self_threads` operatörünü ekler.
+- `geotaggedNear`, `geoNear`: `near`
+- `withinRadius`, `geoWithinRadius`, `geoWithin`: `within`
+- `geoGeocode`: `geocode`
+- `tweetConversationId`, `tweetQuotedTweetId`, `tweetQuotedUserId`:
+  `conversation_id`, `quoted_tweet_id`, `quoted_user_id`
+- `cardName`, `tweetPollTypes`: `card_name`
+- `search_query`: `twitterContent`
+- `profile_urls`: bağlantılar için `startUrls`, kullanıcı adları için
+  `twitterHandles`
+- `lookup_post_ids` veya tek metin olarak `id`: `tweetIds`
+- virgülle ayrılmış 1 liste olarak `tweets`: `tweetIds`
+
+Bazı alanların burada karşılığı yok. Her biri, temsil ettiği X arama operatörünü
+çalıştırmanın her aramasına ekler. Çalıştırma günlüğü, eklediği operatörleri en
+başta listeler:
+
+- `usersFromUsers`, `from_users`, `usersToUsers`, `to_users`,
+  `usersListMembers`: `from:`, `to:` ve `list:`. Birden çok değer alternatif
+  olarak çalışır, örneğin `(from:a OR from:b)`.
+- `usersMentionUsers`, `mentioning_users`: `@name`
+- `usersExcludeFromUsers`: `-from:`
+- `onlyVerifiedUsers`, `usersVerifiedOnly`, `verified_only`: `filter:verified`
+- `placeObjectId`, `geoPlaceId`, `placeId`, `place`: `place:`
+- `cardDomain`: `card_domain:`
+- `appsSources`, `appsExcludeSources`: `source:` ve `-source:`
+- her biri 1 değer içeren `contentKeywords`, `contentExactPhrases`,
+  `contentHashtags`, `contentCashtags`: kelime, tırnak içindeki ifade, `#tag` ve
+  `$tag`
+- `contentExcludeKeywords`, `contentExcludeHashtags`, `exclude_words`,
+  `hashtags_exclude`: `-word` ve `-#tag`
+- `all_words`, `exact_phrases`: her kelime ve her ifade eşleşmeli
+- `any_words`, `hashtags_any`: alternatifler, örneğin `(#a OR #b)`
+- `contentQuestionMarks`: `?`
+- `contentEmoticons`: `positive` için `:)`, `negative` için `:(`
+- `tweet_type`: `filter:replies`, `filter:retweets` ve bunların `-filter:`
+  biçimleri
+
+Kelimelerle yazılan modlar `mode` alanına eşlenir. `Advanced Search`, `search`
+olur. `Get Tweet by ID`, `tweet` olur. `Get a Few Tweets`, `tweets` olur.
+`Get Replies`, `replies` olur. `Get Quotes`, `quotes` olur. `Get Retweeters`,
+`retweeters` olur. `Get Favoriters`, `favoriters` olur.
 
 Yapıştırdığın girdi şöyle davranır:
 
@@ -729,6 +806,19 @@ Yapıştırdığın girdi şöyle davranır:
   ya da profil URL'si gönder.
 - `from`, `min_faves`, `since_time` ve `filter:images` gibi arama operatörü
   alanları zaten X'in adlarını kullanır. Eşleme gerektirmez.
+- Başka bir Actor'ın "hepsi" ya da "herhangi biri" diye tanımlamadığı bir liste
+  1 değerle çalışır: `contentKeywords`, `contentExactPhrases`,
+  `contentHashtags`, `contentCashtags`, `usersMentionUsers`, `mediaTypes` ve
+  `tweetTypes`. Daha fazla değerde çalıştırma hiçbir okuma veya ücret olmadan
+  durur. Mesaj, bunları 1 arama terimi olarak nasıl yazacağını söyler.
+- `People` veya `Lists` olarak ayarlanmış `search_type`, `followers` olarak
+  ayarlanmış `source_mode`, bir `engagementLevel` ön ayarı ve
+  `Get Similar Tweets` modu, çalıştırmayı hiçbir okuma veya ücret olmadan
+  durdurur. Mesaj, kullanman gereken Actor'ı veya alanı yazar.
+- `tweets` veya `info` olarak ayarlanmış `category` hiçbir şeyi değiştirmez.
+  `followers`, `user_info` veya `replies` gibi başka bir Actor'ın işi
+  çalıştırmayı durdurur. Hiçbir şey okunmaz ve ücretlendirilmez. Mesaj o Actor'ı
+  yazar.
 
 ### Console ve API girdisi
 

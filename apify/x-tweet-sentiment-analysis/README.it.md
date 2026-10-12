@@ -105,9 +105,12 @@ Usa 1 nome per impostazione quando adatti un input esistente.
 | `tweetLanguage`, `language`                         | `lang`           |
 | `startDate`, `endDate`                              | `since`, `until` |
 
-L'Actor accetta direttamente questi nomi comuni. Usa `Latest` o `Top` per
-`sort`. Mantieni i codici lingua & i limiti di data. I limiti valgono per tutti
-i target insieme. Questo input è pronto da avviare:
+L'Actor accetta direttamente questi nomi comuni. Legge anche i nomi dei filtri
+di altri Actor di tweet. Un filtro senza campo qui diventa un operatore di
+ricerca di X in ogni ricerca dell'esecuzione, & il log dell'esecuzione elenca
+questi operatori all'inizio. Usa `Latest` o `Top` per `sort`. Mantieni i codici
+lingua & i limiti di data. I limiti valgono per tutti i target insieme. Questo
+input è pronto da avviare:
 
 ```json
 { "searchTerms": ["from:NASA"], "sort": "Latest", "maxItems": 5 }

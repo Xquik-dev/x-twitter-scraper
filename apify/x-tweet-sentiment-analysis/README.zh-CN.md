@@ -85,7 +85,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 | `tweetLanguage`、`language` | `lang` |
 | `startDate`、`endDate` | `since`、`until` |
 
-该 Actor 直接接受这些常见名称。`sort` 请用 `Latest` 或 `Top`。语言代码和日期边界保持不变。上限作用于所有目标。下面的输入可以直接运行：
+该 Actor 直接接受这些常见名称。它还能读取其他帖子抓取 Actor 的过滤字段名。在这里没有对应字段的过滤条件，会变成本次运行每一次搜索中的 X 搜索运算符，运行日志会在开头列出这些运算符。`sort` 请用 `Latest` 或 `Top`。语言代码和日期边界保持不变。上限作用于所有目标。下面的输入可以直接运行：
 
 ```json
 { "searchTerms": ["from:NASA"], "sort": "Latest", "maxItems": 5 }
