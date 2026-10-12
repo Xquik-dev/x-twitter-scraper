@@ -1,0 +1,333 @@
+**English** ·
+[Español](README.es.md)
+·
+[Türkçe](README.tr.md)
+·
+[简体中文](README.zh-CN.md)
+·
+[日本語](README.ja.md)
+·
+[한국어](README.ko.md)
+·
+[Deutsch](README.de.md)
+·
+[Français](README.fr.md)
+·
+[Italiano](README.it.md)
+
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
+
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
+Claude Code, Codex, Cursor, and more, from 6:07.
+
+Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
+most complete X data. Xquik's X Account Location Scraper checks where X accounts
+are based, with no X cookies or login. Most other Apify Actors charge before
+filtering or deduplicating. Xquik charges only for delivered, unique,
+filter-matching results.
+
+Paste usernames, profile URLs or user IDs & get X's "Account based in" label for
+every account in 1 run. The label is X's best-effort country or region for an
+account. It is not nationality, residence or exact location. You pay **$0.00015
+per delivered row**, & Apify bills platform usage separately.
+
+> Xquik is an independent third-party service. Not affiliated with X Corp.
+> "Twitter" and "X" are trademarks of X Corp.
+
+## Account details in every row
+
+- X's "Account based in" label, as a country or a region.
+- The 2-letter ISO code of that country.
+- Whether X notes that the label may be inaccurate.
+- How the account first connected to X, such as Web or an app store country.
+- The platform & the country code in that connection.
+- How often the account changed its username, & when it last did.
+- The organization X shows the account is affiliated with.
+- The account's age in days & a link to its profile.
+- The full public profile: name, bio, counts, verification, dates & images.
+- A second read of any account whose label X withholds, at no extra charge.
+- Many accounts in 1 run, read concurrently & delivered in input order.
+- Usernames with or without @, x.com & twitter.com URLs & numeric user IDs.
+- Duplicate removal before billing.
+- JSON, CSV, Excel, XML & RSS exports through Apify datasets.
+- Runs resume from saved state after an Apify migration.
+
+## How to check where X accounts are based
+
+1. Open Xquik's X Account Location Scraper in Apify Console.
+2. Paste usernames, profile URLs or user IDs into `twitterHandles`.
+3. Set `maxItems` to cap delivered rows, then click Start.
+4. Download the dataset as JSON, CSV or Excel, or use the Apify API.
+
+You enter no X cookies, login or API key at any step.
+
+## Input
+
+`twitterHandles` takes every form of an account, in any mix:
+
+```json
+{
+  "twitterHandles": [
+    "BBCWorld",
+    "@OpenAI",
+    "https://x.com/NASA",
+    "https://twitter.com/github",
+    "11348282"
+  ],
+  "maxItems": 1000
+}
+```
+
+`startUrls` & `userIds` take the same forms. `startUrls` takes each URL as a
+plain string or as a `{ "url": "..." }` object:
+
+```json
+{
+  "startUrls": ["https://x.com/nasa", { "url": "https://x.com/OpenAI" }],
+  "userIds": ["742143"]
+}
+```
+
+A user ID stays the same when an account changes its username, so use `userIds`
+for lists you keep. `userNames` works as another name for `twitterHandles`.
+
+An account the input names twice is delivered & charged once, also when 1 entry
+is its handle & the other its user ID. `maxItems` keeps the first accounts of
+the input. Small runs that go well skip `run-report` & save Apify usage. Turn on
+`alwaysSaveRunRecords` to write it on every run.
+
+## Output
+
+Each account is 1 dataset row. What X's About page shows comes first:
+`accountBasedIn`, `accountBasedInUnavailable`, `accountBasedInAccurate`,
+`affiliateUsername`, `connectedVia`, `connectedViaAccurate` & `usernameChanges`.
+The full public profile follows, with `id`, `username`, `name`, `description`,
+`followers`, `following`, `verified`, `verifiedType`, `createdAt`,
+`profilePicture` & more. 5 fields the Actor works out from the profile come
+last: `accountBasedInCountryCode`, `connectedViaPlatform`,
+`connectedViaCountryCode`, `accountAgeDays` & `profileUrl`. Missing source
+fields stay absent, & a code the Actor cannot match stays out. Xquik's X Account
+Location Scraper invents no values.
+
+Examples use sample values. Results reflect live data. A row looks like this:
+
+```json
+{
+  "accountBasedIn": {
+    "value": "United Kingdom",
+    "level": "country",
+    "observedAt": "2026-10-12T09:00:00.000Z"
+  },
+  "accountBasedInAccurate": true,
+  "affiliateUsername": "sample_org",
+  "connectedVia": "Web",
+  "usernameChanges": {
+    "count": 1,
+    "lastChangedAt": "2021-03-04T10:00:00.000Z"
+  },
+  "id": "1234567890",
+  "username": "sample_user",
+  "name": "Sample User",
+  "followers": 1200,
+  "verified": true,
+  "createdAt": "2017-03-21T20:50:14.000Z",
+  "accountBasedInCountryCode": "GB",
+  "connectedViaPlatform": "web",
+  "accountAgeDays": 3491,
+  "profileUrl": "https://x.com/sample_user",
+  "resultType": "profile",
+  "sourceTarget": "sample_user"
+}
+```
+
+A row tells 3 cases apart:
+
+| The row holds                     | It means                            | What to do                   |
+| --------------------------------- | ----------------------------------- | ---------------------------- |
+| `accountBasedIn` with a `value`   | X shows this label for the account. | Use it.                      |
+| `accountBasedIn: null`            | X shows no label for this account.  | Nothing. X has none to show. |
+| `accountBasedInUnavailable: true` | X withheld the label on both reads. | Run the account again later. |
+
+When X withholds a label, the run reads that account 1 more time before it
+delivers the row. The second read is free. A label still withheld is unknown,
+not absent. Such a row carries the public profile without the About fields, &
+the run status counts these accounts. Each of the 3 cases is 1 delivered row.
+
+## What the label means
+
+X infers `accountBasedIn` from aggregated account-access IPs. The label does not
+state nationality, residence, identity, signup, post or exact location. `level`
+says whether X shows a country or a wider region. `observedAt` records retrieval
+time. `accountBasedInAccurate` is `false` when X notes that the label may be
+inaccurate. `connectedVia` says how the account first connected to X, &
+`connectedViaAccurate` is `false` when X notes that its country may be
+inaccurate. `connectedViaPlatform` is `web`, `ios` or `android`. The 2 country
+codes come from the names X writes, so a region has none. `location` is the text
+the account owner wrote on the profile, which is a different field.
+
+## How much does it cost to check X account locations?
+
+Every Apify plan costs $0.00015 per delivered row. Apify bills your platform
+usage separately.
+
+- One charge per delivered data row. Diagnostics are free in `diagnostics`.
+- No start or lookup fee.
+- An account X does not have adds no row & no charge.
+- The second read of a withheld label costs nothing extra.
+- Deduplication runs before billing.
+- Apify maximum-total-charge settings cap delivered rows.
+
+## Limits & recovery
+
+Xquik's X Account Location Scraper reads many accounts in 1 run. Delivered rows
+& progress survive an Apify restart. The Actor adds no time limit of its own. It
+respects any Apify timeout you set.
+
+The run status names the accounts X has no match for & says to check the handle,
+ID or URL. It also names suspended accounts. Interrupted extraction writes a
+free `partial` diagnostic. Available results stay intact. Read
+`availableResults`, `failedTargets`, `retryable` & `nextAction` before you
+retry. A successful Actor exit confirms delivery, not complete extraction.
+
+The run status names every cause of an early stop. `stopCauses` lists each cause
+with its own `message`, `retryable` & `nextAction`. The causes are
+`target_not_found`, `target_suspended`, `target_failed` & `deadline_reached`. A
+missing or suspended target joins the list only when another cause stopped the
+run. The run is `retryable` when any cause is.
+
+## Related Xquik Actors
+
+Every Xquik Actor shares the same extraction engine, filter-first billing &
+diagnostics. Pick the one that matches the data you need.
+
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): Scrapes tweets
+  from searches, profile timelines, Lists & tweet IDs with 50+ filters & flat
+  exports. Use it when you need tweet data without analysis. From $0.00015 per
+  row.
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Scrapes
+  profiles plus their posts, replies, media & followers from handles, IDs or
+  URLs. Use it when you start from accounts rather than searches. From $0.00015
+  per row.
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Scrapes replies,
+  comments & whole conversations under posts with 25+ filters. Use it when you
+  need the discussion beneath tweets. From $0.00015 per row.
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Scrapes
+  replies, quotes, retweeters & threads for post URLs or IDs in bulk. Use it
+  when you measure who engaged with posts. From $0.00015 per row.
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Scrapes
+  followers, following, List members, subscribers & Community members as profile
+  rows. Use it when you need audience or member lists. From $0.00015 per
+  profile.
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
+  Searches users by handle, bio & location with follower, verification, age &
+  location filters. Use it when you build account lists from search. From
+  $0.00015 per profile.
+- [X List Scraper](https://apify.com/xquik/x-list-scraper): Scrapes List posts,
+  members & followers from List URLs or IDs. Use it when a curated List defines
+  your sources. From $0.00015 per row.
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapes
+  Community info, posts, searches, members & moderators. Use it when your
+  sources are X Communities. From $0.00015 per row.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Finds Spaces by
+  keyword & reads their titles, states, times, listener counts, hosts &
+  speakers. Also reads broadcasts by URL or ID. Use it when you track live audio
+  & video on X. From $0.00015 per Space or broadcast.
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapes
+  real-time trends by location with rank, volume, query & WOEID. Use it when you
+  track what is trending where. From $0.00015 per trend.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapes X job
+  listings by keyword, place, workplace, seniority & company, with salaries &
+  apply links. Use it when you collect job openings posted on X. From $0.00015
+  per job.
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapes
+  long-form X Articles as Markdown & text with covers, authors, dates & metrics.
+  Use it when you need article bodies, not tweets. From $0.00015 per article.
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader): Extracts or
+  stores photos, videos & GIFs from posts or profiles with MP4 & metadata
+  options. Use it when you need the media files themselves. From $0.00015 per
+  media row.
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
+  Tracks brand mentions with AI relevance, sentiment & customer-experience
+  answers & compares runs. Use it when you watch a brand over time. From $0.0003
+  per analyzed tweet.
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
+  Labels attitude, intensity & sarcasm probability for every tweet with AI. Use
+  it when you need general sentiment on any topic. From $0.0003 per analyzed
+  tweet.
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
+  Labels bullish, bearish, neutral or mixed stance, content type, conviction &
+  asset relevance with AI. Use it when you follow stocks, crypto or trading
+  talk. From $0.0003 per analyzed tweet.
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
+  Labels news posts by format, source attribution & topic relevance with AI. Use
+  it when you separate reporting from commentary. From $0.0003 per analyzed
+  tweet.
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
+  Answers your own category, score & yes/no questions for every tweet with AI.
+  Use it when the preset analyses do not fit your labels. From $0.0003 per
+  analyzed tweet.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
+  trait answers. Use it when you study why tweets spread or flop. From $0.0003
+  per analyzed tweet.
+
+## FAQ
+
+Answers to common questions, then where to get help.
+
+### Do I need X cookies, an API key or a login?
+
+No. Xquik's X Account Location Scraper needs no X cookies, API key, login or
+credentials. Every read runs on Xquik's infrastructure.
+
+### Does the label show where the account owner lives?
+
+No. It is X's best-effort label for the account. It does not state nationality,
+residence or exact location, & X itself marks some labels as possibly
+inaccurate.
+
+### Why does a row say `accountBasedInUnavailable`?
+
+X withheld the label on both reads of the run. The label is unknown, not absent.
+Run the account again later to get it. `accountBasedIn: null` is different: X
+shows no label for that account.
+
+### How many accounts can I check in 1 run?
+
+As many as you paste. A run can return 100,000 rows & more. Raise `maxItems`
+above the 1,000 the form starts with for a larger list.
+
+### Is it legal to check where X accounts are based?
+
+Xquik's X Account Location Scraper requests public X fields. Results can contain
+personal data. Confirm a lawful purpose & follow applicable privacy rules. Ask
+qualified counsel when uncertain.
+
+### Why did my run return no results?
+
+Read the run status first. An empty run's status says to check the handle, ID or
+URL of each account X has no match for. The free `diagnostics` output appears
+when something needs attention. Its `stopCauses` gives each cause a `nextAction`
+to follow.
+
+### Can I use the API, schedules & integrations?
+
+Yes. Use the Apify API or the Xquik REST API. The
+[API tab](https://apify.com/xquik/x-account-location-scraper/api) has Python,
+JavaScript & cURL examples. Apify
+[schedules](https://docs.apify.com/platform/schedules) run Xquik's X Account
+Location Scraper on a cron. Agents use
+[Apify MCP](https://docs.apify.com/platform/integrations/mcp). Use `latest`
+unless you need an older build.
+
+### Where do I get help?
+
+Open an issue on the Actor page or contact <support@xquik.com> with the run ID.
+Free diagnostics in the key-value store explain runs that need attention. A run
+that gets no row back says why in its status.
+
+### Can I get a custom solution?
+
+Yes. Visit [xquik.com](https://xquik.com) or read the
+[API docs](https://docs.xquik.com/introduction). They cover the dashboard, API,
+MCP server & webhooks.
