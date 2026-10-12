@@ -67,8 +67,8 @@ Konum adlarını, sayısal WOEID'leri veya ikisini birden kullan:
 
 `locations`, X'in gündem sunduğu her ülkeyi veya şehri kabul eder, örneğin
 Worldwide, United States, Japan veya London. 2 harfli ülke kodları da çalışır.
-X'in gündem sunmadığı bir ad satır döndürmez ve ücret çıkarmaz. `woeids` sayısal
-WOEID'leri kabul eder.
+X'in gündem sunmadığı bir ad satır döndürmez ve ücretlendirilmez. `woeids`
+sayısal WOEID'leri kabul eder.
 
 Her adı ve WOEID'yi görmek için `listLocations` seçeneğini aç. Çalıştırma o
 zaman gündem yerine X'in gündem sunduğu yerleri listeler:
@@ -92,7 +92,7 @@ Her yer, X gönderi aramasının `place` olarak kabul ettiği `id` değerini ta�
 Yerleri X sıralar, bu yüzden sıraları çalıştırmalar arasında değişebilir. X bir
 ad için en fazla 20 yer listeler. New York gibi birkaç ad için daha azını
 listeler. Çalıştırma yalnızca yazdığın adı taşıyan yerleri tutar. Bu yüzden New
-Delhi satır döndürmez ve ücret çıkarmaz.
+Delhi satır döndürmez ve ücretlendirilmez.
 
 `maxItems` tüm çalıştırmayı sınırlar ve sınırı terim terim doldurur. Bu yüzden
 ilk terim hepsini kullanabilir. Her terime eşit pay vermek için
@@ -259,9 +259,9 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   satırları olarak kazır. Kitle veya üye listelerine ihtiyacın olduğunda kullan.
   Profil başına $0.00015'ten başlar.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay, hesap
-  yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri oluşturduğunda
-  kullan. Profil başına $0.00015'ten başlar.
+  Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay işareti,
+  hesap yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri
+  oluşturduğunda kullan. Profil başına $0.00015'ten başlar.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
   X'in "Account based in" etiketi, X'e nasıl bağlandıkları ve kullanıcı adı
   değişiklikleriyle hesapların nerede bulunduğunu kontrol eder. Hesapların

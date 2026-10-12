@@ -295,9 +295,9 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   satırları olarak kazır. Kitle veya üye listelerine ihtiyacın olduğunda kullan.
   Profil başına $0.00015'ten başlar.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay, hesap
-  yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri oluşturduğunda
-  kullan. Profil başına $0.00015'ten başlar.
+  Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay işareti,
+  hesap yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri
+  oluşturduğunda kullan. Profil başına $0.00015'ten başlar.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
   X'in "Account based in" etiketi, X'e nasıl bağlandıkları ve kullanıcı adı
   değişiklikleriyle hesapların nerede bulunduğunu kontrol eder. Hesapların

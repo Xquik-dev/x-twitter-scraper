@@ -39,7 +39,7 @@ faturalandırır. X API anahtarı ya da giriş gerekmez.
 - Anahtar kelimeyle Liste araması. Her satır 1 Listedir; sahibini, üye sayısını
   ve takipçi sayısını taşır.
 - Liste gönderilerinde isteğe bağlı yanıtlar.
-- Tarih, Unix zamanı, dil, medya, etkileşim, onay ve profil filtreleri.
+- Tarih, Unix zamanı, dil, medya, etkileşim, onay işareti ve profil filtreleri.
 - Bir hesabın oluşturduğu veya içinde yer aldığı herkese açık Listeler,
   kullanıcı adından veya profil URL'sinden.
 - 1 çalıştırmada birçok Liste ve veri türü.
@@ -225,9 +225,9 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   satırları olarak kazır. Kitle veya üye listelerine ihtiyacın olduğunda kullan.
   Profil başına $0.00015'ten başlar.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay, hesap
-  yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri oluşturduğunda
-  kullan. Profil başına $0.00015'ten başlar.
+  Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay işareti,
+  hesap yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri
+  oluşturduğunda kullan. Profil başına $0.00015'ten başlar.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
   X'in "Account based in" etiketi, X'e nasıl bağlandıkları ve kullanıcı adı
   değişiklikleriyle hesapların nerede bulunduğunu kontrol eder. Hesapların

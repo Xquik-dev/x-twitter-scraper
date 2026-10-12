@@ -35,8 +35,8 @@ $0.00015** ödersin. Apify, platform kullanımını ayrıca faturalandırır.
 - Alıntının tam metni, bağlantısı, dili ve paylaşılma zamanı.
 - Beğeniler, yanıtlar, yeniden gönderiler, alıntılar, görüntülenmeler ve yer
   işaretleri.
-- Yazarın herkese açık profilinin tamamı: ad, biyografi, takipçiler, onay ve
-  daha fazlası.
+- Yazarın herkese açık profilinin tamamı: ad, biyografi, takipçiler, onay
+  işareti ve daha fazlası.
 - Bağlantılarıyla birlikte fotoğraflar, videolar ve GIF'ler.
 - Metinde geçen hashtag'ler, bahsetmeler ve bağlantılar.
 - Alıntılanan gönderinin kendisi, aynı biçimde.
@@ -179,9 +179,9 @@ kullanımını ayrıca faturalandırır.
 - Teslim edilen her veri satırı için 1 kez ödersin. Tanılamalar `diagnostics`
   içinde ücretsizdir.
 - Başlatma ücreti yok.
-- X'te bulunmayan bir gönderi satır eklemez ve ücret çıkarmaz.
+- X'te bulunmayan bir gönderi satır eklemez ve ücretlendirilmez.
 - Filtreler ve `uniqueAuthors` faturalamadan önce çalışır, bu yüzden elenen bir
-  alıntı ücret çıkarmaz.
+  alıntı ücretlendirilmez.
 - Tekilleştirme faturalamadan önce çalışır.
 - Apify'ın maksimum toplam ücret ayarları teslim edilen satırları sınırlar.
 
@@ -228,9 +228,9 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   satırları olarak kazır. Kitle veya üye listelerine ihtiyacın olduğunda kullan.
   Profil başına $0.00015'ten başlar.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay, hesap
-  yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri oluşturduğunda
-  kullan. Profil başına $0.00015'ten başlar.
+  Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay işareti,
+  hesap yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri
+  oluşturduğunda kullan. Profil başına $0.00015'ten başlar.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
   X'in "Account based in" etiketi, X'e nasıl bağlandıkları ve kullanıcı adı
   değişiklikleriyle hesapların nerede bulunduğunu kontrol eder. Hesapların

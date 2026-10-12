@@ -23,7 +23,7 @@ yalnızca teslim edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır
 
 Kullanıcı adlarını yapıştır, bir hesabın takipçilerini tara ya da X
 kullanıcılarını ara. E-posta yayımlayan her profili alırsın ve e-posta en başta
-gelir. E-postası olmayan bir profil teslim edilmez ve ücret çıkarmaz. **Teslim
+gelir. E-postası olmayan bir profil teslim edilmez ve ücretlendirilmez. **Teslim
 edilen satır başına $0.00015** ödersin. Apify, platform kullanımını ayrıca
 faturalandırır.
 
@@ -39,8 +39,8 @@ faturalandırır.
 - Profilin yayımladığı telefon numaraları, örneğin bir WhatsApp bağlantısı.
 - Profilin web sitesi ve biyografi bağlantıları, her biri LinkedIn, GitHub veya
   Telegram gibi ağıyla birlikte.
-- Herkese açık profilin tamamı: ad, biyografi, sayılar, onay, tarihler ve
-  görseller.
+- Herkese açık profilin tamamı: ad, biyografi, sayılar, onay işareti, tarihler
+  ve görseller.
 - 1 çalıştırmada 3 kaynak: hesaplar, bu hesapların takipçileri veya takip
   ettikleri ve kullanıcı aramaları.
 - E-posta alan adı, iş e-postası, takipçi, hesap yaşı, biyografi ve konuma göre
@@ -224,8 +224,8 @@ kullanımını ayrıca faturalandırır.
 - Teslim edilen her veri satırı için 1 kez ödersin. Tanılamalar `diagnostics`
   içinde ücretsizdir.
 - Başlatma veya sorgulama ücreti yok.
-- E-postası olmayan bir profil satır eklemez ve ücret çıkarmaz.
-- X'te bulunmayan bir hesap satır eklemez ve ücret çıkarmaz.
+- E-postası olmayan bir profil satır eklemez ve ücretlendirilmez.
+- X'te bulunmayan bir hesap satır eklemez ve ücretlendirilmez.
 - Tekilleştirme faturalamadan önce çalışır.
 - Apify'ın maksimum toplam ücret ayarları teslim edilen satırları sınırlar.
 
@@ -251,11 +251,16 @@ doğrulamaz.
 Çalıştırma durumu, erken durmanın her nedenini söyler. `stopCauses` her nedeni
 kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Nedenler
 şunlardır: `scan_limit`, `target_not_found`, `target_suspended`, `target_failed`
-ve `deadline_reached`. Çalıştırmanın `maxScan` sınırında durdurduğu bir liste
-`scan_limit` nedenidir ve çalıştırma raporu bu listeleri `scanLimitedTargets`
-içinde sayar. Bulunamayan veya askıya alınmış bir hedef, listeye yalnızca
-çalıştırmayı başka bir neden durdurduysa girer. Nedenlerden biri yeniden
-denenebiliyorsa çalıştırma da `retryable` olur.
+ve `deadline_reached`. `maxScan` sınırında durdurulan bir liste ya da
+bulunamayan veya askıya alınmış bir hedef, listeye yalnızca çalıştırmayı başka
+bir neden durdurduysa girer. Nedenlerden biri yeniden denenebiliyorsa çalıştırma
+da `retryable` olur.
+
+Çalıştırmanın `maxScan` sınırında durdurduğu bir liste hiçbir çalıştırmayı erken
+bitirmez. Satırı olan bir çalıştırma tamamlanır. Durumu kaç satır okuduğunu ve
+`maxScan` değerini artırman gerektiğini söyler. Bunun için tanılama yazmaz,
+böylece bir kayıt yazımından tasarruf edersin. Çalıştırma raporu bu listeleri
+`scanLimitedTargets` içinde sayar.
 
 ## İlgili Xquik Actor'ları
 
@@ -287,9 +292,9 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   satırları olarak kazır. Kitle veya üye listelerine ihtiyacın olduğunda kullan.
   Profil başına $0.00015'ten başlar.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay, hesap
-  yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri oluşturduğunda
-  kullan. Profil başına $0.00015'ten başlar.
+  Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay işareti,
+  hesap yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri
+  oluşturduğunda kullan. Profil başına $0.00015'ten başlar.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
   X'in "Account based in" etiketi, X'e nasıl bağlandıkları ve kullanıcı adı
   değişiklikleriyle hesapların nerede bulunduğunu kontrol eder. Hesapların

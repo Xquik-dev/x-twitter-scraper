@@ -248,11 +248,16 @@ conferma la consegna, non l'estrazione completa.
 Lo stato dell'esecuzione nomina ogni causa di un arresto anticipato.
 `stopCauses` elenca ogni causa con i propri `message`, `retryable` &
 `nextAction`. Le cause sono `scan_limit`, `target_not_found`,
-`target_suspended`, `target_failed` & `deadline_reached`. Un elenco che
-l'esecuzione ferma a `maxScan` è una causa `scan_limit`, & il report
-dell'esecuzione conta questi elenchi in `scanLimitedTargets`. Un target mancante
-o sospeso entra nell'elenco solo se un'altra causa ha fermato l'esecuzione.
-L'esecuzione è `retryable` quando lo è almeno una causa.
+`target_suspended`, `target_failed` & `deadline_reached`. Un target mancante o
+sospeso o un elenco fermato a `maxScan` entra nell'elenco solo se un'altra causa
+ha fermato l'esecuzione. L'esecuzione è `retryable` quando lo è almeno una
+causa.
+
+Un elenco che l'esecuzione ferma a `maxScan` non chiude in anticipo nessuna
+esecuzione. Un'esecuzione con righe termina, & il suo stato dice quante righe ha
+letto & di alzare `maxScan`. Non scrive alcuna diagnostica per questo, così
+risparmi la scrittura di un record. Un report dell'esecuzione conta questi
+elenchi in `scanLimitedTargets`.
 
 ## Actor Xquik correlati
 
