@@ -1,0 +1,351 @@
+<p align="center">
+  <a href="README.md">English</a> ·
+  <a href="README.es.md">Español</a> ·
+  <a href="README.tr.md">Türkçe</a> ·
+  <a href="README.zh-CN.md">简体中文</a> ·
+  <a href="README.ja.md">日本語</a> ·
+  <a href="README.ko.md">한국어</a> ·
+  <strong>Deutsch</strong> ·
+  <a href="README.fr.md">Français</a> ·
+  <a href="README.it.md">Italiano</a>
+</p>
+
+<table align="center"><tr><td align="center">
+<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer verbindet Xquik MCP mit Coding-Agents"></a><br>
+<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Sieh dir an, wie Framer Xquik-Scraper mit Claude Code, Codex, Cursor und mehr nutzt, ab Minute 6:07.</a>
+</td></tr></table>
+
+Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
+liefert die vollständigsten X-Daten. X Quote Tweets Scraper von Xquik sammelt
+die Posts, die öffentliche X-Posts zitieren, ohne X-Cookies & ohne Login. Die
+meisten anderen Apify Actors rechnen ab, bevor sie filtern oder Duplikate
+entfernen. Xquik rechnet nur gelieferte, eindeutige Ergebnisse ab, die zu deinen
+Filtern passen.
+
+Füge Post-URLs oder Post-IDs (Tweet-IDs) ein & erhalte in 1 Run für jeden Post
+jedes Zitat, das X bereitstellt. Jeder Datensatz enthält das Zitat, das
+vollständige öffentliche Profil seines Autors & den zitierten Post. Du zahlst
+**$0.00015 pro geliefertem Datensatz**, & Apify berechnet die Plattformnutzung
+separat.
+
+> Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
+> "Twitter" und "X" sind Marken von X Corp.
+
+## Zitat-Daten in jedem Datensatz
+
+- Der vollständige Text des Zitats, sein Link, seine Sprache & seine
+  Veröffentlichungszeit.
+- Gefällt-mir-Angaben, Antworten, Reposts, Zitate, Aufrufe & Lesezeichen.
+- Das vollständige öffentliche Profil des Autors: Name, Bio, Follower,
+  Verifizierung & mehr.
+- Fotos, Videos & GIFs mit ihren Links.
+- Hashtags, Erwähnungen & Links aus dem Text.
+- Der zitierte Post selbst, in derselben Struktur.
+- `sourceTarget`, der Post aus der Eingabe, den der Datensatz zitiert.
+- `position`, der Platz des Datensatzes im Run, & `scrapedAt`, sein
+  Lieferzeitpunkt.
+- Viele Posts in 1 Run, jeder gelesen bis zum Ende dessen, was X bereitstellt.
+- Die neuesten zuerst oder die Zitate, die X am höchsten rankt.
+- 11 Filter: Sprache, Datumsangaben, Medientyp, 6 Mindestwerte & verifizierte
+  Autoren.
+- 1 Datensatz pro Autor, wenn du Personen statt Posts brauchst.
+- Post-URLs von x.com & twitter.com oder numerische Post-IDs.
+- Duplikatentfernung vor der Abrechnung.
+- Exporte als JSON, CSV, Excel, XML & RSS über Apify-Datasets.
+- Runs laufen nach einer Apify-Migration mit gespeichertem Zustand weiter.
+
+## So scrapst du Zitat-Posts
+
+1. Öffne X Quote Tweets Scraper von Xquik in der Apify Console.
+2. Füge Post-URLs in `startUrls` oder Post-IDs in `tweetIds` ein.
+3. Setze `maxItems`, um die gelieferten Datensätze zu begrenzen. Klicke dann auf
+   Start.
+4. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
+
+Du gibst in keinem Schritt X-Cookies, einen Login oder einen API-Schlüssel ein.
+Du nimmst keinen Seiten-Cursor von einem Run in den nächsten mit.
+
+## Eingabe
+
+`startUrls` nimmt jede Post-URL als einfachen String oder als Objekt
+`{ "url": "..." }`. `tweetIds` nimmt Post-IDs, & eine Post-URL funktioniert dort
+auch:
+
+```json
+{
+  "startUrls": [
+    "https://x.com/OpenAI/status/2082577277246972300",
+    { "url": "https://twitter.com/jack/status/20" }
+  ],
+  "tweetIds": ["2082201573976056245"],
+  "maxItems": 1000
+}
+```
+
+Sortierung, Filter & Obergrenzen stehen neben den Posts:
+
+```json
+{
+  "tweetIds": ["2082577277246972300"],
+  "sort": "top",
+  "language": "en",
+  "minLikes": 10,
+  "sinceDate": "2026-10-01",
+  "maxItemsPerTarget": 200,
+  "uniqueAuthors": true
+}
+```
+
+- `sort` ist `latest` für die neuesten Zitate zuerst oder `top` für die Zitate,
+  die X am höchsten rankt.
+- `includeReplies` behält Antworten, die den Post zitieren, so wie die
+  Zitate-Ansicht von X sie auflistet. Die Option ist an, solange du sie nicht
+  ausschaltest.
+- `uniqueAuthors` behält von jedem Autor das erste Zitat des Runs. Das Dataset
+  enthält dann 1 Datensatz pro Autor, nicht pro Zitat. Du zahlst für die
+  gelieferten Datensätze.
+- `maxItems` begrenzt den ganzen Run & `maxItemsPerTarget` begrenzt jeden Post.
+- Die Filter sind `language`, `sinceDate`, `untilDate`, `mediaType`, `minLikes`,
+  `minReplies`, `minRetweets`, `minQuotes`, `minViews`, `minBookmarks` &
+  `verifiedOnly`.
+
+Ein Post, den die Eingabe 2-mal nennt, wird 1-mal gelesen. `tweetUrls`,
+`tweetId`, `tweets` & `tweet_id` funktionieren als andere Namen für die Posts.
+Kleine Runs ohne Probleme überspringen `run-report` & sparen Apify-Nutzung.
+Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
+
+## Ausgabe
+
+Jedes Zitat ist 1 Datensatz im Dataset mit `id`, `url`, `text`, `createdAt`,
+`lang`, `likeCount`, `replyCount`, `retweetCount`, `quoteCount`, `viewCount`,
+`bookmarkCount`, `media`, `entities`, `author`, `quotedTweetId` &
+`quoted_tweet`. Der Actor ergänzt `sourceTarget`, `position`, `scrapedAt` &
+`resultType`. Fehlende Quellfelder bleiben weg. X Quote Tweets Scraper von Xquik
+erfindet keine Werte.
+
+Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
+Datensatz sieht so aus:
+
+```json
+{
+  "id": "1900000000000000001",
+  "url": "https://x.com/sample_user/status/1900000000000000001",
+  "text": "Worth a read. The second chart says it all.",
+  "createdAt": "2026-10-11T09:00:00.000Z",
+  "lang": "en",
+  "likeCount": 42,
+  "replyCount": 3,
+  "retweetCount": 5,
+  "quoteCount": 1,
+  "viewCount": 1800,
+  "bookmarkCount": 2,
+  "author": {
+    "id": "1234567890",
+    "username": "sample_user",
+    "name": "Sample User",
+    "followers": 1200,
+    "verified": true
+  },
+  "quotedTweetId": "1900000000000000000",
+  "quoted_tweet": {
+    "id": "1900000000000000000",
+    "text": "Our new report is out."
+  },
+  "resultType": "quotes",
+  "sourceTarget": "1900000000000000000",
+  "position": 1,
+  "scrapedAt": "2026-10-12T09:00:00.000Z"
+}
+```
+
+`position` zählt gelieferte Datensätze ab 1, nach Filtern & Deduplizierung. Das
+Dataset hat 2 Tabellenansichten. "Quote Tweets" zeigt jedes Zitat mit seinen
+Zahlen. "Quote Authors" zeigt, wer jeden Post zitiert hat, mit den Profilfeldern
+des Autors als Spalten.
+
+## Was X bereitstellt
+
+2 Grenzen kommen von X, & X Quote Tweets Scraper von Xquik nennt sie klar:
+
+- Die X-Suche bestimmt, wie weit die Zitate eines Posts mit sehr vielen Zitaten
+  zurückreichen. Ein Run liest jedes Zitat, das X bereitstellt, & stoppt dort.
+- `top` ist das Ranking von X, nicht das von Xquik. Es ist keine Reihenfolge
+  nach Gefällt-mir-Angaben. Ein späterer Datensatz kann mehr Gefällt-mir-Angaben
+  haben als ein früherer.
+
+## Was kostet es, Zitat-Posts zu scrapen?
+
+Auf jedem Apify-Plan kostet ein gelieferter Datensatz $0.00015. Apify berechnet
+deine Plattformnutzung separat.
+
+- Eine Gebühr pro geliefertem Datensatz. Diagnosen in `diagnostics` sind
+  kostenlos.
+- Keine Gebühr für den Start.
+- Ein Post, den es auf X nicht gibt, bringt keinen Datensatz & keine Gebühr.
+- Filter & `uniqueAuthors` laufen vor der Abrechnung. Ein verworfenes Zitat
+  kostet also nichts.
+- Die Deduplizierung läuft vor der Abrechnung.
+- Die Apify-Einstellung für die maximale Gesamtgebühr begrenzt die gelieferten
+  Datensätze.
+
+## Limits & Wiederherstellung
+
+X Quote Tweets Scraper von Xquik liest viele Posts in 1 Run. Gelieferte
+Datensätze & Fortschritt überstehen einen Apify-Neustart. Der Actor setzt kein
+eigenes Zeitlimit. Er hält jedes Apify-Timeout ein, das du setzt.
+
+Der Run-Status nennt die Posts, für die X keinen Treffer hat, & rät dir, URL
+oder ID zu prüfen. Eine unterbrochene Extraktion schreibt eine kostenlose
+`partial`-Diagnose. Verfügbare Ergebnisse bleiben erhalten. Lies
+`availableResults`, `failedTargets`, `retryable` & `nextAction`, bevor du es
+erneut versuchst. Ein erfolgreicher Actor-Abschluss bestätigt die Lieferung,
+nicht die vollständige Extraktion.
+
+Der Run-Status nennt jede Ursache für einen vorzeitigen Stopp. `stopCauses`
+listet jede Ursache mit eigenen Feldern `message`, `retryable` & `nextAction`.
+Der Run ist `retryable`, wenn mindestens 1 Ursache es ist.
+
+## Verwandte Xquik-Actors
+
+Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, rechnet erst nach dem
+Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
+
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): Scrapt Posts aus
+  Suchen, Profil-Timelines, Listen & Post-IDs mit über 50 Filtern & flachen
+  Exporten. Nutze ihn, wenn du Post-Daten ohne Analyse brauchst. Ab $0.00015 pro
+  Datensatz.
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Scrapt Profile
+  samt Posts, Antworten, Medien & Followern anhand von Nutzernamen, IDs oder
+  URLs. Nutze ihn, wenn du von Accounts statt von Suchen ausgehst. Ab $0.00015
+  pro Datensatz.
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Scrapt Antworten,
+  Kommentare & ganze Konversationen unter Posts mit über 25 Filtern. Nutze ihn,
+  wenn du die Diskussion unter Posts brauchst. Ab $0.00015 pro Datensatz.
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Scrapt
+  Antworten, Zitate, Reposter & Threads zu Post-URLs oder -IDs in großen Mengen.
+  Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015 pro
+  Datensatz.
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Scrapt
+  Follower, gefolgte Accounts, Listenmitglieder, Abonnenten &
+  Community-Mitglieder als Profil-Datensätze. Nutze ihn, wenn du Zielgruppen-
+  oder Mitgliederlisten brauchst. Ab $0.00015 pro Profil.
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): Sucht
+  Nutzer nach Nutzername, Bio & Standort mit Filtern für Follower,
+  Verifizierung, Account-Alter & Standort. Nutze ihn, wenn du Account-Listen aus
+  einer Suche aufbaust. Ab $0.00015 pro Profil.
+- [X List Scraper](https://apify.com/xquik/x-list-scraper): Scrapt Posts,
+  Mitglieder & Follower von Listen aus Listen-URLs oder -IDs. Nutze ihn, wenn
+  eine kuratierte Liste deine Quellen festlegt. Ab $0.00015 pro Datensatz.
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapt
+  Community-Infos, Posts, Suchen, Mitglieder & Moderatoren. Nutze ihn, wenn
+  deine Quellen X-Communities sind. Ab $0.00015 pro Datensatz.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Findet Spaces nach
+  Stichwort & liest ihre Titel, Status, Zeiten, Zuhörerzahlen, Hosts & Sprecher.
+  Liest auch Broadcasts per URL oder ID. Nutze ihn, wenn du Live-Audio &
+  Live-Video auf X verfolgst. Ab $0.00015 pro Space oder Broadcast.
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapt
+  Echtzeit-Trends nach Standort mit Rang, Volumen, Suchbegriff & WOEID. Nutze
+  ihn, wenn du verfolgst, was wo gerade angesagt ist. Ab $0.00015 pro Trend.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapt
+  X-Stellenanzeigen nach Stichwort, Ort, Arbeitsmodell, Karrierestufe &
+  Unternehmen, mit Gehältern & Bewerbungslinks. Nutze ihn, wenn du auf X
+  veröffentlichte Stellen sammelst. Ab $0.00015 pro Job.
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapt lange
+  X-Artikel als Markdown & Text mit Titelbildern, Autoren, Daten & Kennzahlen.
+  Nutze ihn, wenn du Artikeltexte statt Posts brauchst. Ab $0.00015 pro Artikel.
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader): Extrahiert
+  oder speichert Fotos, Videos & GIFs aus Posts oder Profilen mit MP4- &
+  Metadaten-Optionen. Nutze ihn, wenn du die Mediendateien selbst brauchst. Ab
+  $0.00015 pro Medien-Datensatz.
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
+  Verfolgt Markenerwähnungen mit KI-Relevanz, Sentiment & Antworten zur
+  Kundenerfahrung & vergleicht Runs. Nutze ihn, wenn du eine Marke über längere
+  Zeit beobachtest. Ab $0.0003 pro analysiertem Post.
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
+  Kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden Post
+  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema brauchst. Ab
+  $0.0003 pro analysiertem Post.
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
+  Kennzeichnet bullische, bärische, neutrale oder gemischte Haltung, Inhaltstyp,
+  Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du Aktien, Krypto
+  oder Trading-Talk verfolgst. Ab $0.0003 pro analysiertem Post.
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
+  Kennzeichnet News-Posts nach Format, Quellenangabe & Themenrelevanz mit KI.
+  Nutze ihn, wenn du Berichterstattung von Kommentaren trennst. Ab $0.0003 pro
+  analysiertem Post.
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
+  Beantwortet deine eigenen Kategorie-, Score- & Ja/Nein-Fragen für jeden Post
+  mit KI. Nutze ihn, wenn die vorgefertigten Analysen nicht zu deinen Labels
+  passen. Ab $0.0003 pro analysiertem Post.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+  Schätzt für jeden Post einen Viral Score von 0 bis 100 & ein Urteil aus 8
+  KI-Antworten zu Merkmalen. Nutze ihn, wenn du untersuchst, warum Posts sich
+  verbreiten oder floppen. Ab $0.0003 pro analysiertem Post.
+
+## FAQ
+
+Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
+
+### Brauche ich X-Cookies, einen API-Schlüssel oder einen Login?
+
+Nein. X Quote Tweets Scraper von Xquik braucht keine X-Cookies, keinen
+API-Schlüssel, keinen Login & keine Zugangsdaten. Jeder Abruf läuft auf der
+Infrastruktur von Xquik.
+
+### Kann ich die Zitate vieler Posts in 1 Run scrapen?
+
+Ja. Füge so viele Post-URLs oder Post-IDs ein, wie du brauchst. `sourceTarget`
+sagt in jedem Datensatz, welchen Post er zitiert.
+
+### Wie viele Zitate kann 1 Run liefern?
+
+Ein Run kann 100.000 Datensätze & mehr liefern. Erhöhe `maxItems` für einen
+vollständigen Export über die 1.000, mit denen das Formular startet.
+
+### Warum liefert ein Post mit sehr vielen Zitaten weniger Zitate, als sein Zähler zeigt?
+
+Die X-Suche bestimmt, wie weit die Zitate eines Posts mit sehr vielen Zitaten
+zurückreichen. Der Run liefert jedes Zitat, das X bereitstellt. Der Zähler
+enthält auch Zitate von privaten oder entfernten Accounts.
+
+### Wie bekomme ich 1 Datensatz pro Person, die einen Post zitiert hat?
+
+Aktiviere `uniqueAuthors`. Der Run behält das erste Zitat jedes Autors &
+überspringt die späteren ohne Gebühr.
+
+### Ist es legal, Zitat-Posts zu scrapen?
+
+X Quote Tweets Scraper von Xquik fragt öffentliche X-Posts ab. Ergebnisse können
+personenbezogene Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist. Befolge
+geltende Datenschutzregeln. Hol dir bei Unsicherheit qualifizierten Rechtsrat.
+
+### Warum hat mein Run keine Ergebnisse geliefert?
+
+Lies zuerst den Run-Status. Der Status eines leeren Runs sagt, ob X für einen
+Post keinen Treffer hat oder ob der Post keine Zitate hat, die zu deinen Filtern
+passen. Die kostenlose Ausgabe `diagnostics` erscheint, wenn etwas deine
+Aufmerksamkeit braucht. Ihr Feld `stopCauses` gibt jeder Ursache eine
+`nextAction`, der du folgen kannst.
+
+### Kann ich API, Zeitpläne & Integrationen nutzen?
+
+Ja. Nutze die Apify-API oder die REST-API von Xquik. Der
+[API-Tab](https://apify.com/xquik/x-quote-tweets-scraper/api) enthält Beispiele
+für Python, JavaScript & cURL.
+Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) starten X Quote
+Tweets Scraper von Xquik per Cron. Agents nutzen
+[Apify MCP](https://docs.apify.com/platform/integrations/mcp). Nutze `latest`,
+außer du brauchst einen älteren Build.
+
+### Wo bekomme ich Hilfe?
+
+Öffne ein Issue auf der Actor-Seite oder schreib mit der Run-ID an
+<support@xquik.com>. Kostenlose Diagnosen im Key-Value-Store erklären Runs, die
+Aufmerksamkeit brauchen. Ein Run, der keinen Datensatz zurückbekommt, sagt in
+seinem Status, warum.
+
+### Kann ich eine individuelle Lösung bekommen?
+
+Ja. Besuche [xquik.com](https://xquik.com) oder lies die
+[API-Dokumentation](https://docs.xquik.com/introduction). Sie deckt Dashboard,
+API, MCP-Server & Webhooks ab.
