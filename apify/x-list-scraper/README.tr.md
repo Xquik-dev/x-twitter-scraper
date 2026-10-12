@@ -233,6 +233,11 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   değişiklikleriyle hesapların nerede bulunduğunu kontrol eder. Hesapların
   nerede bulunduğunu doğrulaman gerektiğinde kullan. Hesap başına $0.00015'ten
   başlar.
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper): Kullanıcı
+  adlarından, takipçilerden veya kullanıcı aramalarından, hesapların
+  profillerinde yayımladığı e-postaları, telefonları ve bağlantıları alır.
+  Profillerin yayımladığı e-postalara ihtiyacın olduğunda kullan. Profil başına
+  $0.00015'ten başlar.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Topluluk
   bilgilerini, gönderilerini, aramalarını, üyelerini ve moderatörlerini kazır.
   Kaynakların X Toplulukları olduğunda kullan. Satır başına $0.00015'ten başlar.

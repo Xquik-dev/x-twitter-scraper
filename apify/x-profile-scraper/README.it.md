@@ -465,6 +465,10 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   verifica dove hanno sede gli account con l'etichetta "Posizione account" di X,
   il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando ti
   serve verificare dove hanno sede gli account. Da $0.00015 per account.
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper): ottiene le email,
+  i numeri di telefono & i link che gli account pubblicano sui propri profili,
+  da nomi utente, follower o ricerche di utenti. Usalo quando ti servono le
+  email che i profili pubblicano. Da $0.00015 per profilo.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): estrae post,
   membri & follower delle liste da URL o ID delle liste. Usalo quando una lista
   curata definisce le tue fonti. Da $0.00015 per riga.

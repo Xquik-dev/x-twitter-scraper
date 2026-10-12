@@ -233,6 +233,11 @@ données dont vous avez besoin.
   façon dont ils se sont connectés à X et leurs changements de nom
   d'utilisateur. Utilisez-le quand vous vérifiez où sont basés des comptes. À
   partir de $0.00015 par compte.
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) : récupère les
+  e-mails, téléphones et liens que les comptes publient sur leur profil, à
+  partir de noms d'utilisateur, d'abonnés ou de recherches d'utilisateurs.
+  Utilisez-le quand vous avez besoin des e-mails que les profils publient. À
+  partir de $0.00015 par profil.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper) : scrape les
   posts, membres et abonnés d'une Liste à partir d'URL ou d'ID de Liste.
   Utilisez-le quand une Liste choisie définit vos sources. À partir de

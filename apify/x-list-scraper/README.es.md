@@ -233,6 +233,10 @@ necesitas.
   consulta dónde tienen su sede las cuentas con la etiqueta "Cuenta con sede en"
   de X, cómo se conectaron a X y sus cambios de nombre de usuario. Úsalo cuando
   verifiques dónde tienen su sede las cuentas. Desde $0.00015 por cuenta.
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper): obtiene los
+  correos, teléfonos y enlaces que las cuentas publican en sus perfiles, a
+  partir de nombres de usuario, seguidores o búsquedas de usuarios. Úsalo cuando
+  necesites los correos que publican los perfiles. Desde $0.00015 por perfil.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): extrae
   información, posts, búsquedas, miembros y moderadores de Comunidades. Úsalo
   cuando tus fuentes sean Comunidades de X. Desde $0.00015 por fila.

@@ -490,6 +490,11 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   değişiklikleriyle hesapların nerede bulunduğunu kontrol eder. Hesapların
   nerede bulunduğunu doğrulaman gerektiğinde kullan. Hesap başına $0.00015'ten
   başlar.
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper): Kullanıcı
+  adlarından, takipçilerden veya kullanıcı aramalarından, hesapların
+  profillerinde yayımladığı e-postaları, telefonları ve bağlantıları alır.
+  Profillerin yayımladığı e-postalara ihtiyacın olduğunda kullan. Profil başına
+  $0.00015'ten başlar.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): Liste URL'lerinden
   veya ID'lerinden Liste gönderilerini, üyelerini ve takipçilerini kazır.
   Kaynaklarını özenle seçilmiş bir Liste belirlediğinde kullan. Satır başına
