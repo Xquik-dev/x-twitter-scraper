@@ -352,7 +352,7 @@ curl --request POST 'https://xquik.com/api/v1/extractions/estimate' \
 ## Monitore, Ereignisse und Webhooks
 
 Konto- und Schlüsselwort-Monitore prüfen Änderungen fortlaufend. Ein aktiver
-Monitor kostet 21 Credits pro Stunde. Gespeicherte Ereignisse und Webhook-
+Monitor kostet 30 Credits pro Stunde. Gespeicherte Ereignisse und Webhook-
 Zustellungen sind enthalten. Prüfe `X-Xquik-Timestamp`, `X-Xquik-Nonce` und
 `X-Xquik-Signature` vor der Verarbeitung.
 

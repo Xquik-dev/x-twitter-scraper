@@ -347,7 +347,7 @@ curl --request POST 'https://xquik.com/api/v1/extractions/estimate' \
 ## モニター、イベント、webhook
 
 アカウントとキーワードの monitor は変化を継続確認します。有効な monitor は
-1 時間に 21 クレジットです。保存イベントと webhook 配信は含まれます。処理前に
+1 時間に 30 クレジットです。保存イベントと webhook 配信は含まれます。処理前に
 `X-Xquik-Timestamp`、`X-Xquik-Nonce`、`X-Xquik-Signature` を検証します。
 
 範囲を絞ったクエリでキーワードモニターを作成します。

@@ -349,7 +349,7 @@ curl --request POST 'https://xquik.com/api/v1/extractions/estimate' \
 ## Monitor, eventi e webhook
 
 I monitor di account e parole chiave controllano i cambiamenti di continuo. Un
-monitor attivo costa 21 crediti all'ora. Gli eventi salvati e le consegne webhook
+monitor attivo costa 30 crediti all'ora. Gli eventi salvati e le consegne webhook
 sono inclusi. Verifica `X-Xquik-Timestamp`, `X-Xquik-Nonce` e
 `X-Xquik-Signature` prima di elaborare un evento.
 

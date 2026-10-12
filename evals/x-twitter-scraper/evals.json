@@ -97,7 +97,7 @@
         "Explains the risk: repetitive automated replies can break X automation or spam rules and get the account restricted",
         "Offers a safe alternative that collects mentions (keyword monitor, mentions read, or search) and queues drafts for the user to approve",
         "Any route it names for the alternative is a real Xquik route, such as POST /api/v1/monitors/keywords, GET /api/v1/x/users/{id}/mentions, or GET /api/v1/x/tweets/search",
-        "Any cost it states matches the published rates exactly: 10 credits per like, 30 per reply, 21 credits per hour for a monitor, and 1 credit per returned tweet for a search"
+        "Any cost it states matches the published rates exactly: 10 credits per like, 30 per reply, 30 credits per hour for a monitor, and 1 credit per returned tweet for a search"
       ]
     },
     {
@@ -109,11 +109,11 @@
       "expectations": [
         "Creates an account monitor with POST /api/v1/monitors using username OpenAI and eventTypes tweet.new and tweet.reply",
         "Registers the endpoint with POST /api/v1/webhooks using the https://hooks.acme.dev/xquik URL and matching event types",
-        "Discloses that an active monitor keeps billing while it runs at 21 credits per hour, with any daily figure given as 504 credits (about $0.076, or $0.08 rounded), and asks for confirmation before creating anything",
+        "Discloses that an active monitor keeps billing while it runs at 30 credits per hour, with any daily figure given as 720 credits (about $0.108, or $0.11 rounded), and asks for confirmation before creating anything",
         "Says the webhook secret is returned once and must be stored securely, such as in an environment variable",
         "Explains HMAC-SHA256 verification with the X-Xquik-Signature, X-Xquik-Timestamp, and X-Xquik-Nonce headers",
         "Shows how to stop it, such as PATCH /api/v1/monitors/{id} with {\"isActive\": false} or DELETE /api/v1/monitors/{id}",
-        "Any minimum balance it gives for creating the monitor is 22 credits, and any setup charge it mentions is the 1-credit username lookup",
+        "Any minimum balance it gives for creating the monitor is 30 credits, and it names no setup or username lookup charge",
         "If it names DELETE /api/v1/webhooks/{id}, it says the call deactivates the webhook or stops its deliveries, not that it removes or erases the webhook"
       ]
     },
@@ -293,8 +293,8 @@
         "Discloses that the active monitor keeps billing while it runs and asks for confirmation before creating it",
         "Shows how to pause or delete the monitor with PATCH or DELETE /api/v1/monitors/keywords/{id}",
         "Does not resume each run from a stored nextCursor as if it pointed to newer events, since events come newest first",
-        "States the monitor cost as 21 credits per hour and says reading stored events costs nothing",
-        "Any minimum balance it gives for creating the monitor is 22 credits"
+        "States the monitor cost as 30 credits per hour and says reading stored events costs nothing",
+        "Any minimum balance it gives for creating the monitor is 30 credits"
       ]
     },
     {

@@ -340,7 +340,7 @@ curl --request POST 'https://xquik.com/api/v1/extractions/estimate' \
 
 ## 监控、事件与 webhook
 
-账号和关键词 monitor 会持续检查变化。每个活跃 monitor 每小时消耗 21 个
+账号和关键词 monitor 会持续检查变化。每个活跃 monitor 每小时消耗 30 个
 信用点。已保存事件和 webhook 交付已包含。处理事件前，请验证
 `X-Xquik-Timestamp`、`X-Xquik-Nonce` 和 `X-Xquik-Signature`。
 

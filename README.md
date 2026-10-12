@@ -443,7 +443,7 @@ an estimate as a final invoice.
 ## Monitoring, events, and webhooks
 
 Create account or keyword monitors for ongoing detection. Active monitors check
-every second. Each active monitor costs 21 credits per hour. Stored events and
+every second. Each active monitor costs 30 credits per hour. Stored events and
 webhook deliveries are included.
 
 ```bash

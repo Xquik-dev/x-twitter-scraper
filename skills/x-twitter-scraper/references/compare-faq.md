@@ -19,7 +19,7 @@ that rate. Current plan prices are in the dashboard.
 | Media download | 1 per tweet with media |
 | Post or reply | 30, plus 2 per started MB of media |
 | Like, repost, follow, their undo calls, remove follower, DM, delete, media upload | 10 per call |
-| Active monitor | 21 per hour, 504 a day |
+| Active monitor | 30 per hour, 720 a day |
 | Giveaway draw | 2, plus 1 per inspected reply, 1 per reposter read, and 5 per follow check |
 
 For result-billed reads, credits equal returned results. Dollars are credits times
