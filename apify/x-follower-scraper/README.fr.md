@@ -104,7 +104,9 @@ cher à stocker.
 
 `verifiedOnly` accepte les profils publics certifiés Blue ou par l'ancienne
 certification. Si les indicateurs de la source se contredisent, l'état certifié
-l'emporte.
+l'emporte. `blueVerifiedOnly` garde les profils que X marque comme certifiés
+Blue. X marque aussi ainsi de nombreux comptes d'entreprises et de
+gouvernements. Réglez `verifiedType` pour garder 1 type de badge.
 
 Les lignes n'incluent jamais d'état propre au compte qui consulte. Xquik retire
 les indicateurs d'abonnement, de blocage, de masquage, de MP, de notification et
@@ -337,8 +339,9 @@ facturation restent exacts sur toutes les cibles.
   lignes filtrées ne coûtent rien.
 - Les filtres numériques sont `minFollowers`, `maxFollowers`, `minFollowing`,
   `maxFollowing`, `minStatuses`, `maxStatuses` et `minAccountAgeDays`.
-- Les filtres de profil sont `verifiedOnly`, `verifiedType`, `bioContains`,
-  `locationContains`, `usernameContains`, `hasWebsite` et `hasLocation`.
+- Les filtres de profil sont `verifiedOnly`, `blueVerifiedOnly`, `verifiedType`,
+  `bioContains`, `locationContains`, `usernameContains`, `hasWebsite` et
+  `hasLocation`.
 - L'Actor retire les répétitions entre cibles avant l'écriture. Réglez
   `dedupeAcrossTargets: false` pour les garder.
 - Xquik ne facture jamais les lignes que le dataset rejette.
@@ -480,6 +483,25 @@ correspondent :
 - `minTweets` : `minStatuses`
 - `includeRawUser` : `includeRaw`
 - `outputVariant` : `outputMode`
+- `requireEmail` : `hasEmail`
+- `requireWebsite` : `hasWebsite`. Il garde un profil avec n'importe quel lien
+  dans son champ de site web, et le statut du run le dit.
+- `onlyVerified`, `blue_verified_only` : `blueVerifiedOnly`. Dans une entrée
+  avec `source_mode`, `blue_verified_only` reste sans effet.
+- `verification` : `any_verified` règle `verifiedOnly`, `blue_verified` règle
+  `blueVerifiedOnly`, `business` et `government` règlent `verifiedType`.
+  `unverified` arrête le run avant toute lecture ou facturation.
+- `bioKeywords` : `bioContains`. Il suffit que 1 de ses termes corresponde.
+- `locationKeywords` avec 1 valeur : `locationContains`. Avec plus de valeurs,
+  le run s'arrête avant toute lecture ou facturation.
+- `emailDomains` en liste : `emailDomains`
+- `outputEmail`, `resolveShortLinks` : aucun champ nécessaire. Chaque ligne
+  contient ses e-mails et les liens complets de X.
+- `findEmails`, `extractEmails` : aucun champ. Les lignes contiennent les
+  e-mails qu'un profil publie sur X. Le statut du run indique que l'Actor ne lit
+  aucun site lié.
+- `validateEmails` : aucun champ. Le statut du run indique que les e-mails
+  arrivent tels que publiés, car l'Actor ne vérifie aucune boîte mail.
 
 Comportement d'une entrée collée :
 

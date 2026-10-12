@@ -91,7 +91,9 @@ X가 보내는 경우 `listedCount`, `defaultProfileImage` & `advertiserAccountT
 compact 행은 더 작고 저장 비용이 적게 듭니다.
 
 `verifiedOnly`는 공개 Blue 인증 & 기존 인증 프로필을 받습니다. 원본 플래그가
-서로 다르면 인증된 쪽으로 판단합니다.
+서로 다르면 인증된 쪽으로 판단합니다. `blueVerifiedOnly`는 X가 Blue 인증으로
+표시한 프로필만 남깁니다. X는 많은 기업 & 정부 계정에도 같은 표시를 합니다. 배지
+유형 1개만 남기려면 `verifiedType`을 설정하세요.
 
 행에는 보는 사람에게만 해당하는 상태가 들어가지 않습니다. Xquik은 팔로우, 차단,
 뮤트, 쪽지(DM), 알림 & 비슷한 뷰어 전용 플래그를 제거합니다. raw 출력에서도
@@ -312,8 +314,9 @@ $0.00015입니다. Apify 플랫폼 사용료는 Apify가 따로 청구합니다.
   비용이 없습니다.
 - 숫자 필터는 `minFollowers`, `maxFollowers`, `minFollowing`, `maxFollowing`,
   `minStatuses`, `maxStatuses` & `minAccountAgeDays`입니다.
-- 프로필 필터는 `verifiedOnly`, `verifiedType`, `bioContains`,
-  `locationContains`, `usernameContains`, `hasWebsite` & `hasLocation`입니다.
+- 프로필 필터는 `verifiedOnly`, `blueVerifiedOnly`, `verifiedType`,
+  `bioContains`, `locationContains`, `usernameContains`, `hasWebsite` &
+  `hasLocation`입니다.
 - 이 Actor는 기록하기 전에 대상 사이의 중복을 제거합니다. 중복을 남기려면
   `dedupeAcrossTargets: false`를 설정하세요.
 - 데이터셋이 거부한 행은 과금하지 않습니다.
@@ -449,6 +452,24 @@ Actor가 쓰는 필드 이름을 읽고 자체 필드로 연결합니다. 문서
 - `minTweets`: `minStatuses`
 - `includeRawUser`: `includeRaw`
 - `outputVariant`: `outputMode`
+- `requireEmail`: `hasEmail`
+- `requireWebsite`: `hasWebsite`. 웹사이트 필드에 링크가 하나라도 있는 프로필을
+  남기며, 실행 상태가 이를 알립니다.
+- `onlyVerified`, `blue_verified_only`: `blueVerifiedOnly`. `source_mode`가 있는
+  입력에서는 `blue_verified_only`가 적용되지 않습니다.
+- `verification`: `any_verified`는 `verifiedOnly`를, `blue_verified`는
+  `blueVerifiedOnly`를, `business` & `government`는 `verifiedType`을 설정합니다.
+  `unverified`는 읽기나 과금 전에 실행을 멈춥니다.
+- `bioKeywords`: `bioContains`. 용어 중 1개만 일치하면 됩니다.
+- 값이 1개인 `locationKeywords`: `locationContains`. 값이 더 많으면 읽기나 과금
+  전에 실행이 멈춥니다.
+- 목록으로 보낸 `emailDomains`: `emailDomains`
+- `outputEmail`, `resolveShortLinks`: 필드가 필요 없습니다. 모든 행에 해당
+  이메일 & X의 전체 링크가 들어 있습니다.
+- `findEmails`, `extractEmails`: 필드 없음. 행에는 프로필이 X에 공개한 이메일이
+  들어 있습니다. 실행 상태가 이 Actor는 연결된 사이트를 읽지 않는다고 알립니다.
+- `validateEmails`: 필드 없음. 이 Actor는 메일함을 확인하지 않으므로 실행 상태가
+  이메일이 공개된 그대로 나온다고 알립니다.
 
 붙여넣은 입력은 다음과 같이 동작합니다.
 

@@ -317,6 +317,7 @@ The Input tab lists every option. Give at least 1 of `twitterHandles`,
 | `minReplies`, `minRetweets`    | Keep posts above a reply or repost count              |
 | `nativeRetweets`               | Keep only native reposts                              |
 | `verifiedOnly`                 | Keep verified authors or profiles                     |
+| `blueVerifiedOnly`             | Keep authors or profiles X marks as blue verified     |
 | `minFollowers`, `maxFollowers` | Keep profiles inside an audience range                |
 | `minAccountAgeDays`            | Keep profiles at least this many days old             |
 | `hasWebsite`, `hasLocation`    | Keep profiles that list a website or a location       |
@@ -336,6 +337,21 @@ map to:
 - `maxProfiles`, `maxResults`: `maxItems`
 - `shouldScrapeFollowers`, `shouldScrapeFollowings`: `includeFollowers`,
   `includeFollowing`
+- `requireEmail`: `hasEmail`
+- `requireWebsite`: `hasWebsite`. It keeps a profile with any link in its
+  website field, & the run status says so.
+- `filterByBlueVerified`: `blueVerifiedOnly`. `false` stops the run before any
+  read or charge.
+- `bioKeywords`: `bioContains`. Any 1 of its terms may match.
+- `locationKeywords` with 1 value: `locationContains`. More values stop the run
+  before any read or charge.
+- `emailDomains` as a list: `emailDomains`
+- `outputEmail`, `resolveShortLinks`: no field needed. Every row carries its
+  emails & X's full links.
+- `findEmails`, `extractEmails`: no field. Rows carry the emails a profile
+  publishes on X. The run status says the Actor reads no linked site.
+- `validateEmails`: no field. The run status says emails come as published,
+  since the Actor checks no mailbox.
 
 `category` set to `user_info` changes nothing. A category that is another
 Actor's job, such as `tweets` or `followers`, stops the run. It reads & charges

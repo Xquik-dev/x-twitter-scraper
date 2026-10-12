@@ -319,6 +319,7 @@ Input 탭에 모든 옵션이 있습니다. `twitterHandles`, `startUrls`, `user
 | `minReplies`, `minRetweets`    | 답글 수나 재게시 수가 기준 이상인 게시물만 유지                |
 | `nativeRetweets`               | 네이티브 재게시물만 유지                                       |
 | `verifiedOnly`                 | 인증된 작성자나 프로필만 유지                                  |
+| `blueVerifiedOnly`             | X가 Blue 인증으로 표시한 작성자나 프로필만 유지                |
 | `minFollowers`, `maxFollowers` | 오디언스 범위 안의 프로필만 유지                               |
 | `minAccountAgeDays`            | 계정 연령이 이 일수 이상인 프로필만 유지                       |
 | `hasWebsite`, `hasLocation` | 웹사이트나 위치를 적은 프로필만 유지 |
@@ -338,6 +339,21 @@ Actor의 다음 필드 이름을 읽습니다. 각 줄은 그쪽 필드를 먼�
 - `maxProfiles`, `maxResults`: `maxItems`
 - `shouldScrapeFollowers`, `shouldScrapeFollowings`: `includeFollowers`,
   `includeFollowing`
+- `requireEmail`: `hasEmail`
+- `requireWebsite`: `hasWebsite`. 웹사이트 필드에 링크가 하나라도 있는 프로필을
+  남기며, 실행 상태가 이를 알립니다.
+- `filterByBlueVerified`: `blueVerifiedOnly`. `false`는 읽기나 과금 전에 실행을
+  멈춥니다.
+- `bioKeywords`: `bioContains`. 용어 중 1개만 일치하면 됩니다.
+- 값이 1개인 `locationKeywords`: `locationContains`. 값이 더 많으면 읽기나 과금
+  전에 실행이 멈춥니다.
+- 목록으로 보낸 `emailDomains`: `emailDomains`
+- `outputEmail`, `resolveShortLinks`: 필드가 필요 없습니다. 모든 행에 해당
+  이메일 & X의 전체 링크가 들어 있습니다.
+- `findEmails`, `extractEmails`: 필드 없음. 행에는 프로필이 X에 공개한 이메일이
+  들어 있습니다. 실행 상태가 이 Actor는 연결된 사이트를 읽지 않는다고 알립니다.
+- `validateEmails`: 필드 없음. 이 Actor는 메일함을 확인하지 않으므로 실행 상태가
+  이메일이 공개된 그대로 나온다고 알립니다.
 
 `user_info`로 설정한 `category`는 아무것도 바꾸지 않습니다. `tweets`나
 `followers`처럼 다른 Actor가 하는 일을 가리키는 카테고리는 실행을 멈춥니다.

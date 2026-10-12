@@ -98,7 +98,9 @@ fazla 13 liste alanını tutar. Tam satırlar bunları sona koyar. Kompakt satı
 daha küçük kalır ve depolaması daha ucuzdur.
 
 `verifiedOnly`, herkese açık Blue ve eski onaylı profilleri kabul eder. Kaynak
-bayrakları çelişirse gerçek onay durumu geçerli olur.
+bayrakları çelişirse gerçek onay durumu geçerli olur. `blueVerifiedOnly`, X'in
+Blue onaylı olarak işaretlediği profilleri tutar. X birçok şirket ve devlet
+hesabını da böyle işaretler. 1 rozet türünü tutmak için `verifiedType` ayarla.
 
 Satırlar yalnızca görüntüleyene ait durumu asla içermez. Xquik takip,
 engelleme, sessize alma, Direkt Mesaj, bildirim ve benzeri görüntüleyen
@@ -328,9 +330,9 @@ faturalama tüm hedeflerde doğru kalır.
 - Sayı filtreleri `minFollowers`, `maxFollowers`, `minFollowing`,
   `maxFollowing`, `minStatuses`, `maxStatuses` ve `minAccountAgeDays`
   alanlarıdır.
-- Profil filtreleri `verifiedOnly`, `verifiedType`, `bioContains`,
-  `locationContains`, `usernameContains`, `hasWebsite` ve `hasLocation`
-  alanlarıdır.
+- Profil filtreleri `verifiedOnly`, `blueVerifiedOnly`, `verifiedType`,
+  `bioContains`, `locationContains`, `usernameContains`, `hasWebsite` ve
+  `hasLocation` alanlarıdır.
 - Actor, hedefler arasındaki tekrarları yazmadan önce kaldırır. Onları tutmak
   için `dedupeAcrossTargets: false` ayarla.
 - Xquik, veri kümesinin reddettiği satırları asla faturalamaz.
@@ -472,6 +474,25 @@ Her satır önce zaten kullandığın alanları, sonra eşlendikleri alanı yaza
 - `minTweets`: `minStatuses`
 - `includeRawUser`: `includeRaw`
 - `outputVariant`: `outputMode`
+- `requireEmail`: `hasEmail`
+- `requireWebsite`: `hasWebsite`. Web sitesi alanında herhangi bir bağlantı olan
+  profili tutar ve çalıştırma durumu bunu söyler.
+- `onlyVerified`, `blue_verified_only`: `blueVerifiedOnly`. `source_mode` içeren
+  bir girdide `blue_verified_only` etkisiz kalır.
+- `verification`: `any_verified` `verifiedOnly` alanını, `blue_verified`
+  `blueVerifiedOnly` alanını, `business` ve `government` `verifiedType` alanını
+  ayarlar. `unverified` çalıştırmayı hiçbir okuma veya ücret olmadan durdurur.
+- `bioKeywords`: `bioContains`. Terimlerinden 1 tanesinin eşleşmesi yeter.
+- 1 değerli `locationKeywords`: `locationContains`. Daha fazla değer
+  çalıştırmayı hiçbir okuma veya ücret olmadan durdurur.
+- liste olarak `emailDomains`: `emailDomains`
+- `outputEmail`, `resolveShortLinks`: alan gerekmez. Her satır kendi
+  e-postalarını ve X'in tam bağlantılarını taşır.
+- `findEmails`, `extractEmails`: alan yok. Satırlar, profilin X'te yayımladığı
+  e-postaları taşır. Çalıştırma durumu, Actor'ın bağlantılı siteleri okumadığını
+  söyler.
+- `validateEmails`: alan yok. Actor posta kutusu denetlemediği için çalıştırma
+  durumu, e-postaların yayımlandığı gibi geldiğini söyler.
 
 Yapıştırdığın girdi şöyle davranır:
 

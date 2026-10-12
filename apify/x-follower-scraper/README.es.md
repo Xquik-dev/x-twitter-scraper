@@ -100,7 +100,10 @@ los ponen al final. Las filas compactas siguen siendo más pequeñas y cuesta
 menos almacenarlas.
 
 `verifiedOnly` acepta perfiles públicos con verificación Blue o antigua. Si las
-marcas del origen se contradicen, gana el estado verificado.
+marcas del origen se contradicen, gana el estado verificado. `blueVerifiedOnly`
+conserva los perfiles que X marca como verificados con Blue. X también marca así
+muchas cuentas de empresas y gobiernos. Define `verifiedType` para conservar 1
+tipo de insignia.
 
 Las filas nunca incluyen estados que solo ve el espectador. Xquik quita las
 marcas de seguimiento, bloqueo, silencio, Mensajes Directos (MD), notificaciones
@@ -332,8 +335,9 @@ duplicados y el cobro se mantienen exactos en todos ellos.
   filas filtradas no cuestan nada.
 - Los filtros numéricos son `minFollowers`, `maxFollowers`, `minFollowing`,
   `maxFollowing`, `minStatuses`, `maxStatuses` y `minAccountAgeDays`.
-- Los filtros de perfil son `verifiedOnly`, `verifiedType`, `bioContains`,
-  `locationContains`, `usernameContains`, `hasWebsite` y `hasLocation`.
+- Los filtros de perfil son `verifiedOnly`, `blueVerifiedOnly`, `verifiedType`,
+  `bioContains`, `locationContains`, `usernameContains`, `hasWebsite` y
+  `hasLocation`.
 - El Actor quita las repeticiones entre objetivos antes de escribir. Define
   `dedupeAcrossTargets: false` para conservarlas.
 - Xquik nunca cobra las filas que el dataset rechaza.
@@ -473,6 +477,25 @@ Cada línea nombra los campos que ya usas y, luego, el campo al que se asignan:
 - `minTweets`: `minStatuses`
 - `includeRawUser`: `includeRaw`
 - `outputVariant`: `outputMode`
+- `requireEmail`: `hasEmail`
+- `requireWebsite`: `hasWebsite`. Conserva un perfil con cualquier enlace en su
+  campo de sitio web, y el estado de la ejecución lo indica.
+- `onlyVerified`, `blue_verified_only`: `blueVerifiedOnly`. En una entrada con
+  `source_mode`, `blue_verified_only` no tiene efecto.
+- `verification`: `any_verified` define `verifiedOnly`, `blue_verified` define
+  `blueVerifiedOnly`, `business` y `government` definen `verifiedType`.
+  `unverified` detiene la ejecución antes de leer o cobrar.
+- `bioKeywords`: `bioContains`. Basta con que coincida 1 de sus términos.
+- `locationKeywords` con 1 valor: `locationContains`. Con más valores, la
+  ejecución se detiene antes de leer o cobrar.
+- `emailDomains` como lista: `emailDomains`
+- `outputEmail`, `resolveShortLinks`: no necesitan campo. Cada fila incluye sus
+  correos y los enlaces completos de X.
+- `findEmails`, `extractEmails`: sin campo. Las filas incluyen los correos que
+  un perfil publica en X. El estado de la ejecución indica que el Actor no lee
+  ningún sitio enlazado.
+- `validateEmails`: sin campo. El estado de la ejecución indica que los correos
+  llegan tal como se publican, porque el Actor no verifica ningún buzón.
 
 Cómo se comporta una entrada pegada:
 

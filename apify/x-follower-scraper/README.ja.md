@@ -71,7 +71,7 @@ XquikのX Follower Scraperは、フォロワー、フォロー中、リスト、
 
 1行あたりのデータを最も多くするには、`outputMode: "full"` を設定します。どの行も、Xが送る場合は、一覧のフィールドを最大13個残します。`listedCount`、`defaultProfileImage`、`advertiserAccountType` などです。フル出力の行は、それらを末尾に置きます。コンパクトな行は小さいままで、保存のコストも低くなります。
 
-`verifiedOnly` は、公開のBlue認証と従来の認証のプロフィールを通します。元のフラグが食い違う場合は、認証済みを示すフラグを優先します。
+`verifiedOnly` は、公開のBlue認証と従来の認証のプロフィールを通します。元のフラグが食い違う場合は、認証済みを示すフラグを優先します。`blueVerifiedOnly` は、XがBlue認証済みと示すプロフィールだけを残します。Xは多くの企業や政府機関のアカウントにも同じ印を付けます。バッジの種類を1つに絞るには `verifiedType` を設定してください。
 
 行には、閲覧者だけに見える状態は入りません。Xquikは、フォロー、ブロック、ミュート、DM、通知などの閲覧者のフラグを削除します。raw出力からも削除します。
 
@@ -258,7 +258,7 @@ XquikのX Follower Scraperは、すべてのApifyプランで配信されたプ�
 
 - フィルターはプロフィールがデータセットに入る前に適用されるので、除かれた行に料金はかかりません。
 - 数値のフィルターは `minFollowers`、`maxFollowers`、`minFollowing`、`maxFollowing`、`minStatuses`、`maxStatuses`、`minAccountAgeDays` です。
-- プロフィールのフィルターは `verifiedOnly`、`verifiedType`、`bioContains`、`locationContains`、`usernameContains`、`hasWebsite`、`hasLocation` です。
+- プロフィールのフィルターは `verifiedOnly`、`blueVerifiedOnly`、`verifiedType`、`bioContains`、`locationContains`、`usernameContains`、`hasWebsite`、`hasLocation` です。
 - Actorは、書き込む前に対象間の重複を除きます。重複を残すには `dedupeAcrossTargets: false` を設定します。
 - データセットが受け付けなかった行に、Xquikが課金することはありません。
 - 診断情報は `diagnostics` 出力で無料です。
@@ -332,6 +332,16 @@ Consoleのフォームには次のコントロールがあります。
 - `minTweets`: `minStatuses`
 - `includeRawUser`: `includeRaw`
 - `outputVariant`: `outputMode`
+- `requireEmail`: `hasEmail`
+- `requireWebsite`: `hasWebsite`。ウェブサイト欄にリンクが1つでもあるプロフィールを残し、実行ステータスにその旨が示されます。
+- `onlyVerified`、`blue_verified_only`: `blueVerifiedOnly`。`source_mode` を含む入力では、`blue_verified_only` は効果を持ちません。
+- `verification`: `any_verified` は `verifiedOnly` を、`blue_verified` は `blueVerifiedOnly` を、`business` と `government` は `verifiedType` を設定します。`unverified` を指定すると、読み取りや課金の前に実行が止まります。
+- `bioKeywords`: `bioContains`。語句のうち1つが一致すれば十分です。
+- 値が1つの `locationKeywords`: `locationContains`。値が2つ以上あると、読み取りや課金の前に実行が止まります。
+- リストとしての `emailDomains`: `emailDomains`
+- `outputEmail`、`resolveShortLinks`: フィールドは不要です。すべての行に、その行のメールアドレスとXの完全なリンクが含まれます。
+- `findEmails`、`extractEmails`: 対応するフィールドはありません。行には、プロフィールがX上で公開しているメールアドレスが含まれます。実行ステータスには、このActorがリンク先のサイトを読み取らないことが示されます。
+- `validateEmails`: 対応するフィールドはありません。このActorはメールボックスを確認しないため、実行ステータスには、メールアドレスが公開されているとおりに届くことが示されます。
 
 貼り付けた入力は次のように動きます。
 

@@ -60,6 +60,31 @@ Profil**, & Apify berechnet die Plattformnutzung separat.
 Kleine Runs ohne Probleme überspringen `run-report` & sparen Apify-Nutzung.
 Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 
+### Von einem anderen Actor für die Nutzersuche wechseln
+
+Füge die Eingabe ein, die du schon nutzt. X User Search Scraper von Xquik liest
+diese Feldnamen anderer Actors. Jede Zeile nennt ihre Felder, dann das Feld, dem
+der Actor sie zuordnet:
+
+- `requireEmail`, `requireWebsite`: `hasEmail`, `hasWebsite`
+- `verification`: `any_verified` setzt `verifiedOnly`, `blue_verified` setzt
+  `blueVerifiedOnly`, `business` & `government` setzen `verifiedType`.
+  `unverified` stoppt den Run, bevor er etwas liest oder berechnet.
+- `bioKeywords`: `bioContains`. Es genügt, wenn 1 der Begriffe passt.
+- `locationKeywords` mit 1 Wert: `locationContains`. Mehr Werte stoppen den Run,
+  bevor er etwas liest oder berechnet.
+- `emailDomains` als Liste: `emailDomains`
+- `outputEmail`, `resolveShortLinks`: kein Feld nötig. Jeder Datensatz enthält
+  seine E-Mails & die vollständigen Links von X.
+- `findEmails`, `extractEmails`: kein Feld. Datensätze enthalten die E-Mails,
+  die ein Profil auf X veröffentlicht. Der Run-Status sagt, dass der Actor keine
+  verlinkte Website liest.
+- `validateEmails`: kein Feld. Der Run-Status sagt, dass E-Mails so kommen, wie
+  sie veröffentlicht sind, weil der Actor kein Postfach prüft.
+
+Setzt du einen dieser Namen & sein kanonisches Feld, gewinnt der kanonische
+Wert. Das Run-Log nennt das Feld, das verloren hat.
+
 ## Such-Autovervollständigung
 
 Setze `mode` auf `autocomplete`, um zu lesen, was X beim Tippen vorschlägt.

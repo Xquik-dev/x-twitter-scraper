@@ -326,6 +326,7 @@ optionnels.
 | `minReplies`, `minRetweets`    | Garde les posts dépassant un nombre de réponses ou de reposts |
 | `nativeRetweets`               | Garde seulement les reposts natifs                            |
 | `verifiedOnly`                 | Garde les auteurs ou profils certifiés                        |
+| `blueVerifiedOnly`             | Garde les auteurs ou profils que X marque certifiés Blue      |
 | `minFollowers`, `maxFollowers` | Garde les profils dans une fourchette d'audience              |
 | `minAccountAgeDays`            | Garde les profils âgés d'au moins ce nombre de jours          |
 | `hasWebsite`, `hasLocation` | Garde les profils qui indiquent un site web ou une localisation |
@@ -345,6 +346,22 @@ champ auquel ils correspondent :
 - `maxProfiles`, `maxResults` : `maxItems`
 - `shouldScrapeFollowers`, `shouldScrapeFollowings` : `includeFollowers`,
   `includeFollowing`
+- `requireEmail` : `hasEmail`
+- `requireWebsite` : `hasWebsite`. Il garde un profil avec n'importe quel lien
+  dans son champ de site web, et le statut du run le dit.
+- `filterByBlueVerified` : `blueVerifiedOnly`. `false` arrête le run avant toute
+  lecture ou facturation.
+- `bioKeywords` : `bioContains`. Il suffit que 1 de ses termes corresponde.
+- `locationKeywords` avec 1 valeur : `locationContains`. Avec plus de valeurs,
+  le run s'arrête avant toute lecture ou facturation.
+- `emailDomains` en liste : `emailDomains`
+- `outputEmail`, `resolveShortLinks` : aucun champ nécessaire. Chaque ligne
+  contient ses e-mails et les liens complets de X.
+- `findEmails`, `extractEmails` : aucun champ. Les lignes contiennent les
+  e-mails qu'un profil publie sur X. Le statut du run indique que l'Actor ne lit
+  aucun site lié.
+- `validateEmails` : aucun champ. Le statut du run indique que les e-mails
+  arrivent tels que publiés, car l'Actor ne vérifie aucune boîte mail.
 
 `category` réglé sur `user_info` ne change rien. Une catégorie qui relève d'un
 autre Actor, comme `tweets` ou `followers`, arrête le run. Il ne lit et ne

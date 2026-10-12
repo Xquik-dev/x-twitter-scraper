@@ -49,6 +49,21 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 顺利完成的小型运行会跳过 `run-report`，节省 Apify 用量。开启 `alwaysSaveRunRecords` 后，每次运行都会写入报告。
 
+### 从其他用户搜索 Actor 迁移
+
+直接粘贴你现在用的输入。Xquik 的 X User Search Scraper 能读取其他 Actor 的这些字段名。每一项先列出它们的字段，再列出映射到的字段：
+
+- `requireEmail`、`requireWebsite`：`hasEmail`、`hasWebsite`
+- `verification`：`any_verified` 设置 `verifiedOnly`，`blue_verified` 设置 `blueVerifiedOnly`，`business` 和 `government` 设置 `verifiedType`。`unverified` 会让运行在读取或计费前停止。
+- `bioKeywords`：`bioContains`。只要匹配其中 1 个词即可。
+- 只含 1 个值的 `locationKeywords`：`locationContains`。值更多时，运行会在读取或计费前停止。
+- 列表形式的 `emailDomains`：`emailDomains`
+- `outputEmail`、`resolveShortLinks`：不需要字段。每一行都包含它的邮箱和 X 的完整链接。
+- `findEmails`、`extractEmails`：没有对应字段。每一行包含个人资料在 X 上公开的邮箱。运行状态会说明该 Actor 不读取链接的网站。
+- `validateEmails`：没有对应字段。该 Actor 不验证邮箱，因此运行状态会说明邮箱按公开的原样提供。
+
+同时设置其中一个名称和它的标准字段时，以标准字段的值为准。运行日志会写明被忽略的字段。
+
 ## 搜索自动补全
 
 把 `mode` 设为 `autocomplete`，读取有人输入时 X 给出的建议。每个搜索词返回建议的账号、话题、话题标签和 cashtag。
