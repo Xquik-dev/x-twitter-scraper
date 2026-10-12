@@ -255,11 +255,16 @@ Actor-Abschluss bestätigt die Lieferung, nicht die vollständige Extraktion.
 Der Run-Status nennt jede Ursache für einen vorzeitigen Stopp. `stopCauses`
 listet jede Ursache mit eigenen Feldern `message`, `retryable` & `nextAction`.
 Die Ursachen sind `scan_limit`, `target_not_found`, `target_suspended`,
-`target_failed` & `deadline_reached`. Eine Liste, die der Run bei `maxScan`
-stoppt, ist eine `scan_limit`-Ursache, & der Run-Report zählt solche Listen in
-`scanLimitedTargets`. Ein fehlendes oder gesperrtes Ziel kommt nur auf die
-Liste, wenn eine andere Ursache den Run gestoppt hat. Der Run ist `retryable`,
-wenn mindestens 1 Ursache es ist.
+`target_failed` & `deadline_reached`. Ein fehlendes oder gesperrtes Ziel oder
+eine bei `maxScan` gestoppte Liste kommt nur auf die Liste, wenn eine andere
+Ursache den Run gestoppt hat. Der Run ist `retryable`, wenn mindestens 1 Ursache
+es ist.
+
+Eine Liste, die der Run bei `maxScan` stoppt, beendet keinen Run vorzeitig. Ein
+Run mit Datensätzen läuft zu Ende, & sein Status sagt, wie viele Datensätze er
+gelesen hat, & rät dir, `maxScan` zu erhöhen. Dafür schreibt er keine Diagnose.
+Das spart dir das Schreiben eines Eintrags. Ein Run-Report zählt solche Listen
+in `scanLimitedTargets`.
 
 ## Verwandte Xquik-Actors
 

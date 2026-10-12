@@ -251,10 +251,15 @@ confirme la livraison, pas une extraction complète.
 Le statut du run nomme chaque cause d'arrêt anticipé. `stopCauses` liste chaque
 cause avec ses propres `message`, `retryable` et `nextAction`. Les causes sont
 `scan_limit`, `target_not_found`, `target_suspended`, `target_failed` et
-`deadline_reached`. Une liste que le run arrête à `maxScan` est une cause
-`scan_limit`, et le rapport du run compte ces listes dans `scanLimitedTargets`.
-Une cible introuvable ou suspendue n'entre dans la liste que si une autre cause
-a arrêté le run. Le run est `retryable` dès qu'une cause l'est.
+`deadline_reached`. Une cible introuvable ou suspendue, ou une liste arrêtée à
+`maxScan`, n'entre dans la liste que si une autre cause a arrêté le run. Le run
+est `retryable` dès qu'une cause l'est.
+
+Une liste que le run arrête à `maxScan` ne provoque aucun arrêt anticipé. Un run
+qui a des lignes va jusqu'au bout, et son statut indique combien de lignes il a
+lues et vous invite à monter `maxScan`. Il n'écrit aucun diagnostic pour cela,
+ce qui vous évite l'écriture d'un enregistrement. Un rapport de run compte ces
+listes dans `scanLimitedTargets`.
 
 ## Actors Xquik associés
 

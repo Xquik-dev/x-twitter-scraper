@@ -254,11 +254,16 @@ completa.
 El estado de la ejecución nombra cada causa de una detención anticipada.
 `stopCauses` enumera cada causa con su propio `message`, `retryable` y
 `nextAction`. Las causas son `scan_limit`, `target_not_found`,
-`target_suspended`, `target_failed` y `deadline_reached`. Una lista que la
-ejecución detiene en `maxScan` es una causa `scan_limit`, y el informe de la
-ejecución cuenta esas listas en `scanLimitedTargets`. Un objetivo inexistente o
-suspendido entra en la lista solo si otra causa detuvo la ejecución. La
-ejecución es `retryable` si alguna causa lo es.
+`target_suspended`, `target_failed` y `deadline_reached`. Un objetivo
+inexistente o suspendido, o una lista detenida en `maxScan`, entra en la lista
+solo si otra causa detuvo la ejecución. La ejecución es `retryable` si alguna
+causa lo es.
+
+Una lista que la ejecución detiene en `maxScan` no termina ninguna ejecución
+antes de tiempo. Una ejecución con filas finaliza, y su estado dice cuántas
+filas leyó y te pide subir `maxScan`. No escribe ningún diagnóstico por eso, lo
+que te ahorra la escritura de un registro. El informe de una ejecución cuenta
+esas listas en `scanLimitedTargets`.
 
 ## Actores de Xquik relacionados
 

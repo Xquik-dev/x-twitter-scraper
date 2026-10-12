@@ -175,7 +175,9 @@ Xquik 的 X Email Scraper 在 1 次运行中读取多个账号、名单和搜索
 
 运行状态会列出 X 上找不到匹配的账号，并提示你检查用户名、ID 或 URL。它还会列出被冻结的账号。提取中断时，会写入一条免费的 `partial` 诊断。已获取的结果不受影响。重试前，先查看 `availableResults`、`failedTargets`、`retryable` 和 `nextAction`。Actor 成功退出只说明结果已交付，不代表提取完整。
 
-运行状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `scan_limit`、`target_not_found`、`target_suspended`、`target_failed` 和 `deadline_reached`。运行在 `maxScan` 处停止读取的名单属于 `scan_limit` 原因，运行报告会在 `scanLimitedTargets` 中统计这类名单。只有在其他原因让运行停止时，缺失或被冻结的目标才会一并列出。只要有一个原因可重试，整个运行就是 `retryable`。
+运行状态会写明提前停止的每个原因。`stopCauses` 列出每个原因，并附上各自的 `message`、`retryable` 和 `nextAction`。原因包括 `scan_limit`、`target_not_found`、`target_suspended`、`target_failed` 和 `deadline_reached`。只有在其他原因让运行停止时，缺失或被冻结的目标，或在 `maxScan` 处停止读取的名单，才会一并列出。只要有一个原因可重试，整个运行就是 `retryable`。
+
+运行在 `maxScan` 处停止读取的名单不会让任何运行提前结束。有行的运行会正常完成，它的状态会说明读取了多少行，并提示你调高 `maxScan`。它不会为此写入诊断，为你省下 1 次记录写入。运行报告会在 `scanLimitedTargets` 中统计这类名单。
 
 ## 相关 Xquik Actor
 

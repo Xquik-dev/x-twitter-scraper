@@ -176,7 +176,9 @@ XquikのX Email Scraperは、1回の実行で多数のアカウント、リス�
 
 実行ステータスは、Xで一致するものが見つからないアカウントを挙げ、ユーザー名、ID、URLの確認を促します。凍結されたアカウントも挙げます。抽出が中断されると、無料の `partial` 診断を書き込みます。取得済みの結果はそのまま残ります。再試行する前に `availableResults`、`failedTargets`、`retryable`、`nextAction` を確認してください。Actorの正常終了が示すのは配信の完了です。抽出が最後まで終わったことは意味しません。
 
-実行ステータスは、早期停止の原因をすべて示します。`stopCauses` は各原因を挙げ、それぞれに `message`、`retryable`、`nextAction` を付けます。原因は `scan_limit`、`target_not_found`、`target_suspended`、`target_failed`、`deadline_reached` です。実行が `maxScan` で止めたリストは `scan_limit` の原因になり、実行レポートはそうしたリストを `scanLimitedTargets` に数えます。存在しない対象や凍結された対象が一覧に入るのは、別の原因で実行が止まった場合だけです。いずれかの原因が再試行可能なら、実行も `retryable` になります。
+実行ステータスは、早期停止の原因をすべて示します。`stopCauses` は各原因を挙げ、それぞれに `message`、`retryable`、`nextAction` を付けます。原因は `scan_limit`、`target_not_found`、`target_suspended`、`target_failed`、`deadline_reached` です。存在しない対象や凍結された対象、`maxScan` で止まったリストが一覧に入るのは、別の原因で実行が止まった場合だけです。いずれかの原因が再試行可能なら、実行も `retryable` になります。
+
+実行が `maxScan` で止めたリストが、実行を早期に終わらせることはありません。行のある実行は完了し、そのステータスは読み取った行数を示して、`maxScan` を大きくするよう促します。そのための診断は書き込まないので、レコードの書き込み1回分を節約できます。実行レポートは、そうしたリストを `scanLimitedTargets` に数えます。
 
 ## 関連するXquik Actor
 

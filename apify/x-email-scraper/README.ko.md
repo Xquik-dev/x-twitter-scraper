@@ -235,10 +235,14 @@ Actor가 성공으로 종료되면 전달이 끝났다는 뜻입니다. 추출�
 실행 상태는 실행이 일찍 멈춘 원인을 모두 알려 줍니다. `stopCauses`는 원인마다
 `message`, `retryable` & `nextAction`을 따로 담아 나열합니다. 원인은
 `scan_limit`, `target_not_found`, `target_suspended`, `target_failed` &
-`deadline_reached`입니다. 실행이 `maxScan`에서 멈춘 목록은 `scan_limit`
-원인이며, 실행 보고서는 이런 목록을 `scanLimitedTargets`에 셉니다. 찾을 수
-없거나 정지된 대상은 다른 원인으로 실행이 멈췄을 때만 목록에 들어갑니다. 원인 중
-하나라도 재시도할 수 있으면 실행도 `retryable`입니다.
+`deadline_reached`입니다. 찾을 수 없거나 정지된 대상 또는 `maxScan`에서 멈춘
+목록은 다른 원인으로 실행이 멈췄을 때만 원인 목록에 들어갑니다. 원인 중 하나라도
+재시도할 수 있으면 실행도 `retryable`입니다.
+
+실행이 `maxScan`에서 멈춘 목록은 실행을 일찍 끝내지 않습니다. 행이 있는 실행은
+정상 종료하며, 상태가 읽은 행 수를 알려 주고 `maxScan`을 높이라고 안내합니다.
+이때는 진단을 기록하지 않아 레코드 쓰기 1번을 아낍니다. 실행 보고서는 이런
+목록을 `scanLimitedTargets`에 셉니다.
 
 ## 관련 Xquik Actor
 

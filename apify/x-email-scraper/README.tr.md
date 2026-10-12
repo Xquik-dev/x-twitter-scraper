@@ -251,11 +251,16 @@ doğrulamaz.
 Çalıştırma durumu, erken durmanın her nedenini söyler. `stopCauses` her nedeni
 kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Nedenler
 şunlardır: `scan_limit`, `target_not_found`, `target_suspended`, `target_failed`
-ve `deadline_reached`. Çalıştırmanın `maxScan` sınırında durdurduğu bir liste
-`scan_limit` nedenidir ve çalıştırma raporu bu listeleri `scanLimitedTargets`
-içinde sayar. Bulunamayan veya askıya alınmış bir hedef, listeye yalnızca
-çalıştırmayı başka bir neden durdurduysa girer. Nedenlerden biri yeniden
-denenebiliyorsa çalıştırma da `retryable` olur.
+ve `deadline_reached`. `maxScan` sınırında durdurulan bir liste ya da
+bulunamayan veya askıya alınmış bir hedef, listeye yalnızca çalıştırmayı başka
+bir neden durdurduysa girer. Nedenlerden biri yeniden denenebiliyorsa çalıştırma
+da `retryable` olur.
+
+Çalıştırmanın `maxScan` sınırında durdurduğu bir liste hiçbir çalıştırmayı erken
+bitirmez. Satırı olan bir çalıştırma tamamlanır. Durumu kaç satır okuduğunu ve
+`maxScan` değerini artırman gerektiğini söyler. Bunun için tanılama yazmaz,
+böylece bir kayıt yazımından tasarruf edersin. Çalıştırma raporu bu listeleri
+`scanLimitedTargets` içinde sayar.
 
 ## İlgili Xquik Actor'ları
 

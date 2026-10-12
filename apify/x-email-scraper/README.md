@@ -238,10 +238,13 @@ retry. A successful Actor exit confirms delivery, not complete extraction.
 The run status names every cause of an early stop. `stopCauses` lists each cause
 with its own `message`, `retryable` & `nextAction`. The causes are `scan_limit`,
 `target_not_found`, `target_suspended`, `target_failed` & `deadline_reached`. A
-list the run stops at `maxScan` is a `scan_limit` cause, & the run report counts
-such lists in `scanLimitedTargets`. A missing or suspended target joins the list
-only when another cause stopped the run. The run is `retryable` when any cause
-is.
+missing or suspended target or a list stopped at `maxScan` joins the list only
+when another cause stopped the run. The run is `retryable` when any cause is.
+
+A list the run stops at `maxScan` ends no run early. A run with rows finishes, &
+its status says how many rows it read & to raise `maxScan`. It writes no
+diagnostic for that, which saves you a record write. A run report counts such
+lists in `scanLimitedTargets`.
 
 ## Related Xquik Actors
 
