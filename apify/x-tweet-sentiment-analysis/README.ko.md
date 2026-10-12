@@ -100,7 +100,9 @@ Sentiment Analysis가 이를 분석합니다. X에서는 아무것도 가져오�
 | `tweetLanguage`, `language`                         | `lang`           |
 | `startDate`, `endDate`                              | `since`, `until` |
 
-이 Actor는 이런 흔한 이름을 그대로 받습니다. `sort`에는 `Latest` 또는 `Top`을
+이 Actor는 이런 흔한 이름을 그대로 받습니다. 다른 게시물 Actor의 필터 이름도
+읽습니다. 여기에 필드가 없는 필터는 실행의 모든 검색에서 X 검색 연산자가 되고,
+실행 로그는 시작할 때 그 연산자를 나열합니다. `sort`에는 `Latest` 또는 `Top`을
 쓰세요. 언어 코드 & 날짜 경계는 그대로 두세요. 상한은 모든 대상에 걸쳐
 적용됩니다. 다음 입력은 바로 실행할 수 있습니다.
 

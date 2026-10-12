@@ -108,9 +108,12 @@ Utilisez 1 nom par réglage quand vous adaptez une entrée existante.
 | `tweetLanguage`, `language`                         | `lang`           |
 | `startDate`, `endDate`                              | `since`, `until` |
 
-L'Actor accepte directement ces noms courants. Utilisez `Latest` ou `Top` pour
-`sort`. Gardez les codes de langue et les bornes de date. Les limites
-s'appliquent à l'ensemble des cibles. Cette entrée est prête à lancer :
+L'Actor accepte directement ces noms courants. Il lit aussi les noms de filtres
+d'autres Actors de posts. Un filtre sans champ ici devient un opérateur de
+recherche X dans chaque recherche du run, et le log du run liste ces opérateurs
+au début. Utilisez `Latest` ou `Top` pour `sort`. Gardez les codes de langue et
+les bornes de date. Les limites s'appliquent à l'ensemble des cibles. Cette
+entrée est prête à lancer :
 
 ```json
 { "searchTerms": ["from:NASA"], "sort": "Latest", "maxItems": 5 }

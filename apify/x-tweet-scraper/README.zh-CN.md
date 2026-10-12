@@ -434,15 +434,69 @@ X 不再支持搜索 `filter:vine`、`filter:consumer_video`、`filter:pro_video
 - 单个字符串形式的 `username`、`handle`、`screenName`：`twitterHandles`
 - `searchTerms`、`searchQueries`、`queries`、`search`，列表形式或每行一个搜索：`searchTerms`
 - `twitterContent`、`query`、`searchQuery`：`twitterContent`
-- `maxItems`、`maxResults`、`max_results`、`resultsLimit`、`count`、`resultsCount`、`numberOfTweets`、`maxPosts`、`max_posts`、`max_items`、`maxTweets`、`tweetsDesired`：`maxItems`
+- `maxItems`、`maxResults`、`max_results`、`resultsLimit`、`count`、`resultsCount`、`numberOfTweets`、`maxPosts`、`max_posts`、`max_items`、`maxTweets`、`tweetsDesired`、`maxTotalTweets`：`maxItems`
+- `per_profile_limit`：`maxItemsPerTarget`
 - `sort`：`queryType`
-- `tweetLanguage`、`language`：`lang`
-- `author`、`inReplyTo`、`mentioning`：`from`、`to`、`@`
-- `start`、`startDate`、`end`、`endDate`：`since`、`until`
-- `minimumRetweets`、`minimumFavorites`、`minimumReplies`：`min_retweets`、`min_faves`、`min_replies`
-- `onlyImage`、`onlyVideo`、`onlyQuote`、`onlyTwitterBlue`：`filter:images`、`filter:videos`、`filter:quote`、`filter:blue_verified`
-- `geotaggedNear`、`withinRadius`：`near`、`within`
+- `search_type`、`searchType`、`query_type`、`search_sort`：`Top` 和 `Latest` 不分大小写，映射到 `queryType`。`Media`、`Photos` 和 `Videos` 会打开 `filter:media`、`filter:images` 和 `filter:videos`。
+- `tweetLanguage`、`language`、`contentLanguage`：`lang`
+- `author`、`fromUser`：`from`
+- `inReplyTo`、`toUser`：`to`
+- `mentioning`：`@`
+- `start`、`startDate`、`timeSince`：`since`
+- `end`、`endDate`、`timeUntil`：`until`
+- 以秒为单位的 `timeSinceUnix`、`sinceTime`、`timeUntilUnix`、`untilTime`：`since_time`、`until_time`
+- `timeWithinTime`、`withinTime`：`within_time`
+- `timeWindowHours`、`timeWindow`：`within_time`，分别按小时和按天
+- `timeSinceId`、`sinceId`、`timeMaxId`、`maxId`：`since_id`、`max_id`
 - Google Search Scraper 的 `quickDateRange`，例如 `d7`、`w2`、`m1` 或 `y`：`since_time`，从运行开始时往回计算
+- `minimumFavorites`、`minLikes`、`min_likes`、`minFaves`、`engagementMinLikes`、`Minimum_likes`：`min_faves`
+- `minimumRetweets`、`minRetweets`、`engagementMinRetweets`：`min_retweets`
+- `minimumReplies`、`minReplies`、`engagementMinReplies`、`Minimum_replies`：`min_replies`
+- `engagementMaxLikes`、`maxLikes`、`engagementMaxRetweets`、`maxRetweets`、`engagementMaxReplies`：`engagement.maxLikes`、`engagement.maxRetweets`、`engagement.maxReplies`
+- `onlyImage`、`onlyImages`、`has_images`：`filter:images`
+- `onlyVideo`、`onlyVideos`、`has_videos`：`filter:videos`
+- `onlyWithMedia`、`mediaOnly`：`filter:media`
+- `onlyQuote`、`onlyQuotes`：`filter:quote`
+- `onlyTwitterBlue`、`usersBlueVerifiedOnly`、`blue_verified_only`、`onlyBlueVerified`：`filter:blue_verified`
+- `engagementHasEngagement`、`hasEngagement`：`filter:has_engagement`
+- `mediaHasLinks`、`has_links`、`requireLinks`：`filter:links`
+- `mediaHasMentions`、`has_mentions`、`requireMentions`：`filter:mentions`
+- `mediaHasHashtags`、`has_hashtags`、`requireHashtags`：`filter:hashtags`
+- `mediaNewsOnly`、`mediaSafeContentOnly`：`filter:news`、`filter:safe`
+- 只含 1 种类型的 `mediaTypes`：该类型对应的 `filter:` 字段
+- `mediaSubtype`：`filter:media`、`filter:images` 或 `filter:videos`
+- `includeNativeRetweets`、`includeRetweets`：`include:nativeretweets`
+- `excludeReplies`、`excludeRetweets`、设为 false 的 `includeRetweets`、`tweetTypesExclude`：`tweetTypes.excludeReplies`、`tweetTypes.excludeRetweets` 和 `tweetTypes.excludeQuotes`
+- 只含 1 种类型的列表形式的 `tweetTypes`：`tweetTypes.replies`、`tweetTypes.quotes` 或 `tweetTypes.nativeRetweets`
+- `tweetSubtype`：`tweetTypes.replies` 或 `tweetTypes.quotes`。`self_threads` 会添加运算符 `filter:self_threads`。
+- `geotaggedNear`、`geoNear`：`near`
+- `withinRadius`、`geoWithinRadius`、`geoWithin`：`within`
+- `geoGeocode`：`geocode`
+- `tweetConversationId`、`tweetQuotedTweetId`、`tweetQuotedUserId`：`conversation_id`、`quoted_tweet_id`、`quoted_user_id`
+- `cardName`、`tweetPollTypes`：`card_name`
+- `search_query`：`twitterContent`
+- `profile_urls`：链接映射到 `startUrls`，用户名映射到 `twitterHandles`
+- `lookup_post_ids`，或单个字符串形式的 `id`：`tweetIds`
+- 用逗号分隔的 1 个列表形式的 `tweets`：`tweetIds`
+
+有些字段在这里没有对应的字段。它们各自代表的 X 搜索运算符会加到本次运行的每一次搜索中。运行日志会在开头列出添加的运算符：
+
+- `usersFromUsers`、`from_users`、`usersToUsers`、`to_users`、`usersListMembers`：`from:`、`to:` 和 `list:`。多个值按“任一匹配”运行，例如 `(from:a OR from:b)`。
+- `usersMentionUsers`、`mentioning_users`：`@name`
+- `usersExcludeFromUsers`：`-from:`
+- `onlyVerifiedUsers`、`usersVerifiedOnly`、`verified_only`：`filter:verified`
+- `placeObjectId`、`geoPlaceId`、`placeId`、`place`：`place:`
+- `cardDomain`：`card_domain:`
+- `appsSources`、`appsExcludeSources`：`source:` 和 `-source:`
+- 各含 1 个值的 `contentKeywords`、`contentExactPhrases`、`contentHashtags`、`contentCashtags`：该词、带引号的短语、`#tag` 和 `$tag`
+- `contentExcludeKeywords`、`contentExcludeHashtags`、`exclude_words`、`hashtags_exclude`：`-word` 和 `-#tag`
+- `all_words`、`exact_phrases`：每个词和每个短语都必须匹配
+- `any_words`、`hashtags_any`：任一匹配，例如 `(#a OR #b)`
+- `contentQuestionMarks`：`?`
+- `contentEmoticons`：`positive` 对应 `:)`，`negative` 对应 `:(`
+- `tweet_type`：`filter:replies`、`filter:retweets` 以及它们的 `-filter:` 形式
+
+用文字写的模式会映射到 `mode`：`Advanced Search` 对应 `search`，`Get Tweet by ID` 对应 `tweet`，`Get a Few Tweets` 对应 `tweets`，`Get Replies` 对应 `replies`，`Get Quotes` 对应 `quotes`，`Get Retweeters` 对应 `retweeters`，`Get Favoriters` 对应 `favoriters`。
 
 粘贴的输入会这样处理：
 
@@ -456,6 +510,9 @@ X 不再支持搜索 `filter:vine`、`filter:consumer_video`、`filter:pro_video
 - 该 Actor 没有“页”这个单位。请把 `maxPages` 换成 `maxItems`。
 - 该 Actor 没有用户 ID 字段。请发送用户名或个人资料 URL，不要用 `userId` 或 `user_ids`。
 - `from`、`min_faves`、`since_time` 和 `filter:images` 等搜索运算符字段已经使用 X 的名称，不需要映射。
+- 其他 Actor 没有说明是“全部匹配”还是“任一匹配”的列表，只含 1 个值时才会运行：`contentKeywords`、`contentExactPhrases`、`contentHashtags`、`contentCashtags`、`usersMentionUsers`、`mediaTypes` 和 `tweetTypes`。值更多时，运行会在读取或计费前停止。提示信息会说明如何把它们写成 1 个搜索词。
+- 设为 `People` 或 `Lists` 的 `search_type`、设为 `followers` 的 `source_mode`、`engagementLevel` 预设以及 `Get Similar Tweets` 模式，都会让运行在读取或计费前停止。提示信息会写明应使用的 Actor 或字段。
+- 设为 `tweets` 或 `info` 的 `category` 不会改变任何行为。属于其他 Actor 职责的值，例如 `followers`、`user_info` 或 `replies`，会让运行停止，不读取也不计费。提示信息会写明该 Actor。
 
 ### Console 与 API 输入
 

@@ -108,7 +108,10 @@ Usa 1 nombre por ajuste cuando adaptes una entrada existente.
 | `tweetLanguage`, `language`                         | `lang`           |
 | `startDate`, `endDate`                              | `since`, `until` |
 
-El Actor acepta estos nombres comunes directamente. Usa `Latest` o `Top` en
+El Actor acepta estos nombres comunes directamente. También lee los nombres de
+filtro de otros Actores de posts. Un filtro sin campo aquí se convierte en un
+operador de búsqueda de X en todas las búsquedas de la ejecución, y el registro
+de la ejecución enumera esos operadores al inicio. Usa `Latest` o `Top` en
 `sort`. Conserva los códigos de idioma y los límites de fecha. Los topes se
 aplican a todos los objetivos en conjunto. Esta entrada está lista para
 ejecutar:

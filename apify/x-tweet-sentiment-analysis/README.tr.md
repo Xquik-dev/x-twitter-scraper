@@ -108,9 +108,12 @@ Mevcut bir girdiyi uyarlarken her ayar için 1 ad kullan.
 | `tweetLanguage`, `language`                         | `lang`           |
 | `startDate`, `endDate`                              | `since`, `until` |
 
-Actor bu yaygın adları doğrudan kabul eder. `sort` için `Latest` veya `Top`
-kullan. Dil kodlarını ve tarih sınırlarını koru. Sınırlar tüm hedeflerin toplamı
-için geçerlidir. Bu girdi çalıştırmaya hazır:
+Actor bu yaygın adları doğrudan kabul eder. Diğer gönderi Actor'larının filtre
+adlarını da okur. Burada alanı olmayan bir filtre, çalıştırmanın her aramasında
+bir X arama operatörüne dönüşür ve çalıştırma günlüğü bu operatörleri en başta
+listeler. `sort` için `Latest` veya `Top` kullan. Dil kodlarını ve tarih
+sınırlarını koru. Sınırlar tüm hedeflerin toplamı için geçerlidir. Bu girdi
+çalıştırmaya hazır:
 
 ```json
 { "searchTerms": ["from:NASA"], "sort": "Latest", "maxItems": 5 }
