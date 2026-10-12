@@ -86,6 +86,21 @@ The run status counts the duplicates it skipped at no charge.
 Small runs that go well skip `run-report` & save Apify usage. Turn on
 `alwaysSaveRunRecords` to write it on every run.
 
+### Migrate from another engagement Actor
+
+The Actor reads these field names of other engagement Actors:
+
+- `urls`: `startUrls`
+- `category`: `engagementTypes`. `replies`, `retweets`, `info` & `checkRetweet`
+  read as `replies`, `retweeters`, `tweet` & `repostCheck`.
+- `resultsPerCategory`: `maxItemsPerTarget`
+- `retweetCheckUsername`: `repostCheckUsers`
+
+A `category` that is another Actor's job, such as `followers` or `tweets`, stops
+the run. It reads & charges nothing. The message names the Actor to use. When
+you set one of these names & its canonical field, the canonical value wins. The
+run log names the field that lost.
+
 ## Output
 
 Each row sets `resultType` to `tweet`, `replies`, `completeReplies`, `quotes`,

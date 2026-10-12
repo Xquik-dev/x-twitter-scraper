@@ -434,14 +434,41 @@ Actor가 쓰는 필드 이름을 읽고 자체 필드로 연결합니다. 문서
 - 문자열 1개인 `profileUrl`: `startUrls`
 - `getFollowers`, `getFollowing`: `relations`
 - `followers`나 `following` 값을 가진 `type`: `relation`
-- `maxResults`, `max_results`, `resultsLimit`, `count`: `maxItems`
+- `relationship`, `relationshipType`, `listType`, `scrape_type`: `relation`
+- `relationships`: `relations`
+- `followers`, `following` 또는 `both` 값을 가진 `mode`: `relation` 또는
+  `relations`
+- `followers`, `following` 또는 `affiliates` 값을 가진 `category`: `relation`
+- `profile_urls`: 링크는 `startUrls`, 사용자 아이디는 `twitterHandles`
+- `maxResults`, `max_results`, `resultsLimit`, `count`, `max_items`: `maxItems`
+- `per_profile_limit`, `maxItemsPerUser`, `maxUsersPerAccount`,
+  `max_followers_per_user`, `max_following_per_user`, `follower_limit`:
+  `maxItemsPerTarget`. 0이면 계정별 상한이 없습니다. `max_following_per_user`는
+  `relation`도 `following`으로 설정합니다.
 - `scrapeAllResults`: 대상별 상한 없음
+- `minTweets`: `minStatuses`
+- `includeRawUser`: `includeRaw`
+- `outputVariant`: `outputMode`
+
+붙여넣은 입력은 다음과 같이 동작합니다.
+
+- 다른 말로 적은 목록은 이 Actor가 쓰는 이름으로 읽습니다. `followings`,
+  `Verified Followers` & `verifiedFollowers`는 `relation`에서도 `following` &
+  `verified_followers`로 읽습니다.
+- 별칭 & 표준 필드를 함께 설정하면 표준 필드 값을 씁니다. 실행 로그에 무시된
+  별칭이 나옵니다.
+- `mutuals`처럼 이 Actor가 읽지 않는 목록은 읽기나 과금 전에 실행을 멈춥니다.
+- 다른 Actor가 하는 일을 가리키는 모드도 같은 방식으로 실행을 멈춥니다.
+  `source_mode`에서는 `search` & `profiles`입니다. `mode`에서는 `profiles` &
+  `all`입니다. `category`에서는 `tweets`, `user_info`, `replies` 같은 일입니다.
+  메시지가 써야 할 Actor를 알려 줍니다.
 
 이름 2개는 여기서 뜻이 다릅니다. 일부 Actor에서 `maxFollowers` &
 `maxFollowing`은 실행이 반환하는 행 수의 상한입니다. Xquik의 X Follower
 Scraper에서는 팔로워 수 & 팔로잉 수로 프로필을 거르는 필터입니다. 행 수 상한은
-`maxItems`로 정하세요. 이 Actor에는 페이지 단위가 없으므로 `maxPages` 대신
-`maxItems`를 쓰세요.
+`maxItems`로 정하세요. `maxFollowers`만 설정하고 행 상한이 없는 실행은 계정을
+걸러 냈다고 로그 & 마지막 상태에 알립니다. 이 Actor에는 페이지 단위가 없으므로
+`maxPages` 대신 `maxItems`를 쓰세요.
 
 ### 항상 최신 빌드 사용
 

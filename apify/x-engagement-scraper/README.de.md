@@ -86,6 +86,21 @@ nichts kosten.
 Kleine Runs ohne Probleme überspringen `run-report` & sparen Apify-Nutzung.
 Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 
+### Von einem anderen Engagement-Actor wechseln
+
+Der Actor liest diese Feldnamen anderer Engagement-Actors:
+
+- `urls`: `startUrls`
+- `category`: `engagementTypes`. `replies`, `retweets`, `info` & `checkRetweet`
+  liest der Actor als `replies`, `retweeters`, `tweet` & `repostCheck`.
+- `resultsPerCategory`: `maxItemsPerTarget`
+- `retweetCheckUsername`: `repostCheckUsers`
+
+Eine `category`, die die Aufgabe eines anderen Actors ist, etwa `followers` oder
+`tweets`, stoppt den Run. Er liest & berechnet nichts. Die Meldung nennt den
+Actor, den du nutzen sollst. Setzt du einen dieser Namen & sein kanonisches
+Feld, gewinnt der kanonische Wert. Das Run-Log nennt das Feld, das verloren hat.
+
 ## Ausgabe
 
 Jeder Datensatz setzt `resultType` auf `tweet`, `replies`, `completeReplies`,

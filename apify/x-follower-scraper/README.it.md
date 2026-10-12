@@ -449,14 +449,42 @@ Ogni voce elenca i campi che usi già, poi il campo a cui corrispondono:
 - `profileUrl`, come stringa singola: `startUrls`
 - `getFollowers`, `getFollowing`: `relations`
 - `type` con `followers` o `following`: `relation`
-- `maxResults`, `max_results`, `resultsLimit`, `count`: `maxItems`
+- `relationship`, `relationshipType`, `listType`, `scrape_type`: `relation`
+- `relationships`: `relations`
+- `mode` con `followers`, `following` o `both`: `relation` o `relations`
+- `category` con `followers`, `following` o `affiliates`: `relation`
+- `profile_urls`: `startUrls` per i link, `twitterHandles` per i nomi utente
+- `maxResults`, `max_results`, `resultsLimit`, `count`, `max_items`: `maxItems`
+- `per_profile_limit`, `maxItemsPerUser`, `maxUsersPerAccount`,
+  `max_followers_per_user`, `max_following_per_user`, `follower_limit`:
+  `maxItemsPerTarget`. 0 non mette alcun limite per account.
+  `max_following_per_user` imposta anche `relation` su `following`.
 - `scrapeAllResults`: nessun limite per target
+- `minTweets`: `minStatuses`
+- `includeRawUser`: `includeRaw`
+- `outputVariant`: `outputMode`
+
+Come si comporta un input incollato:
+
+- Un elenco indicato con altre parole viene letto come il nome che gli dà questo
+  Actor. `followings`, `Verified Followers` & `verifiedFollowers` vengono letti
+  come `following` & `verified_followers`, anche in `relation`.
+- Quando imposti un alias & il suo campo canonico, vince il valore canonico. Il
+  log dell'esecuzione nomina l'alias scartato.
+- Un elenco che l'Actor non legge, come `mutuals`, ferma l'esecuzione prima di
+  leggere o addebitare qualcosa.
+- Una modalità che è compito di un altro Actor ferma l'esecuzione allo stesso
+  modo. Per `source_mode` sono `search` & `profiles`. Per `mode` sono `profiles`
+  & `all`. Per `category` è un compito come `tweets`, `user_info` o `replies`.
+  Il messaggio nomina l'Actor da usare.
 
 Qui 2 nomi hanno un altro significato. In alcuni Actor `maxFollowers` &
 `maxFollowing` limitano quante righe restituisce un'esecuzione. In X Follower
 Scraper di Xquik filtrano i profili per numero di follower & di following. Usa
-`maxItems` per limitare le righe. L'Actor non ha un'unità pagina, quindi
-sostituisci `maxPages` con `maxItems`.
+`maxItems` per limitare le righe. Un'esecuzione che imposta `maxFollowers` &
+nessun limite di righe indica nel log & nell'ultimo stato che ha filtrato gli
+account. L'Actor non ha un'unità pagina, quindi sostituisci `maxPages` con
+`maxItems`.
 
 ### Usa sempre la build più recente
 

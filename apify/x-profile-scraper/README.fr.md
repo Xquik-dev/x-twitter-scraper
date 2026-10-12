@@ -333,6 +333,25 @@ optionnels.
 | `locationContains` | Garde les profils dont la localisation contient ce texte |
 | `dedupeAcrossTargets`          | Retire les lignes répétées entre profils avant la facturation |
 
+### Migrer depuis un autre Actor de profils
+
+Collez l'entrée que vous utilisez déjà. X Profile Scraper de Xquik lit ces noms
+de champs d'autres Actors de profils. Chaque ligne nomme leurs champs, puis le
+champ auquel ils correspondent :
+
+- `profiles`, `userNames`, `usernames`, `handles`, `screenNames` :
+  `twitterHandles`
+- `urls`, `profileUrls` : `startUrls`
+- `maxProfiles`, `maxResults` : `maxItems`
+- `shouldScrapeFollowers`, `shouldScrapeFollowings` : `includeFollowers`,
+  `includeFollowing`
+
+`category` réglé sur `user_info` ne change rien. Une catégorie qui relève d'un
+autre Actor, comme `tweets` ou `followers`, arrête le run. Il ne lit et ne
+facture rien. Le message nomme l'Actor à utiliser. Si vous réglez un alias et
+son champ canonique, la valeur canonique l'emporte. Le log du run nomme l'alias
+écarté.
+
 ### Choisir les bonnes entrées
 
 - Pour une simple fiche de profil, indiquez des noms d'utilisateur et laissez

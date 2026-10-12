@@ -324,6 +324,25 @@ The Input tab lists every option. Give at least 1 of `twitterHandles`,
 | `locationContains`             | Keep profiles whose location has this text            |
 | `dedupeAcrossTargets`          | Drop rows repeated across profiles before billing     |
 
+### Migrate from another profile Actor
+
+Paste the input you already use. Xquik's X Profile Scraper reads these field
+names of other profile Actors. Each line names their fields, then the field they
+map to:
+
+- `profiles`, `userNames`, `usernames`, `handles`, `screenNames`:
+  `twitterHandles`
+- `urls`, `profileUrls`: `startUrls`
+- `maxProfiles`, `maxResults`: `maxItems`
+- `shouldScrapeFollowers`, `shouldScrapeFollowings`: `includeFollowers`,
+  `includeFollowing`
+
+`category` set to `user_info` changes nothing. A category that is another
+Actor's job, such as `tweets` or `followers`, stops the run. It reads & charges
+nothing. The message names the Actor to use. When you set an alias & its
+canonical field, the canonical value wins. The run log names the alias that
+lost.
+
 ### Pick the right inputs
 
 - For a profile card alone, give handles & leave every `include` option off.

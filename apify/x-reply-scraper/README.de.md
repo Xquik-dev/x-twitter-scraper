@@ -301,17 +301,33 @@ Rangfolge.
 
 Diese Aliasse akzeptieren gängige Feldnamen anderer Scraper:
 
-- URL-Aliasse: `urls`, `tweetUrls`, `postUrls`, `profileUrls`
+- URL-Aliasse: `urls`, `tweetUrls`, `postUrls`, `profileUrls` & `twitterUrl` als
+  einzelner String
 - ID-Aliasse: `conversationIds`, `postIds`, `ids`, `tweetId`, `id`
 - Nutzernamen-Aliasse: `twitterHandles`, `screenname`
 - Aliasse für das globale Limit: `maxResults`, `max_results`, `resultsLimit`,
   `maxReplies`
-- Aliasse pro Ziel: `maxRepliesPerTweet`, `maxCommentsPerPost`
+- Aliasse pro Ziel: `maxRepliesPerTweet`, `maxCommentsPerPost`,
+  `resultsPerCategory`
 - Such-Alias: `useSearch`
 - Aliasse für verschachtelte Antworten: `includeNestedReplies`,
   `includeRepliesOfReplies`
-- Alias für den Originalpost: `includeOriginalTweet`
+- Alias für die Tiefe: `depth` als `1`, `2` oder `3` für `maxDepth`. `full`
+  setzt kein Limit.
+- Alias für den Umfang: `onlyDirectReplies` für `scope: "direct"`
+- Aliasse für den Originalpost: `includeOriginalTweet`, `includeSourceTweet`.
+  Mit `includeSourceTweet` begrenzt `resultsPerCategory` die Antworten & der
+  Post ist 1 Datensatz mehr.
+- Alias für den Autor: `excludeOpSelfReplies` für `excludeOriginalAuthor`
+- Aliasse für die Sortierung: `sortBy` & `queryType` für `sort`. `top`, `newest`
+  & `mostLiked` liest der Actor als `relevance`, `latest` & `likes`.
 - Ausgabe-Aliasse: `outputVariant`, `includeRaw`
+
+`category` auf `replies` ändert nichts. Eine Kategorie, die die Aufgabe eines
+anderen Actors ist, etwa `retweets` oder `info`, stoppt den Run. Er liest &
+berechnet nichts. Die Meldung nennt den Actor, den du nutzen sollst. Setzt du
+einen dieser Aliasse & sein kanonisches Feld, gewinnt der kanonische Wert. Das
+Run-Log nennt den Alias, der verloren hat.
 
 Fehlerhafte oder nicht unterstützte Ziele lassen den Actor nicht scheitern.
 Bleibt kein gültiges Ziel übrig, schreibt der Run eine Diagnose mit der Lösung.

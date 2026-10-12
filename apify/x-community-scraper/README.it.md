@@ -313,6 +313,12 @@ altri campi sono facoltativi.
 | `minAccountAgeDays`            | Mantiene i membri con un account di almeno questo numero di giorni              |
 | `dedupeAcrossTargets`          | Elimina le righe ripetute tra community prima della fatturazione                |
 
+### Migra da un altro Actor di community
+
+I nomi `ranking` & `sort` funzionano come `postsOrder`. `Top` o `Relevance`
+legge i post in cima. Quando imposti uno di questi & `postsOrder`, vince il
+valore di `postsOrder`. Il log dell'esecuzione nomina il campo scartato.
+
 ### Scegli gli input giusti
 
 - Per uno sguardo rapido, mantieni le risorse predefinite `info` & `tweets`.

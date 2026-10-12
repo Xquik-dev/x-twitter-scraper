@@ -70,6 +70,17 @@ X 从 2024 年起不再显示谁喜欢了某条帖子。`favoriters` 类型不�
 
 顺利完成的小型运行会跳过 `run-report`，节省 Apify 用量。开启 `alwaysSaveRunRecords` 后，每次运行都会写入报告。
 
+### 从其他互动 Actor 迁移
+
+该 Actor 能读取其他互动 Actor 的这些字段名：
+
+- `urls`：`startUrls`
+- `category`：`engagementTypes`。`replies`、`retweets`、`info` 和 `checkRetweet` 会读取为 `replies`、`retweeters`、`tweet` 和 `repostCheck`。
+- `resultsPerCategory`：`maxItemsPerTarget`
+- `retweetCheckUsername`：`repostCheckUsers`
+
+属于其他 Actor 职责的 `category`，例如 `followers` 或 `tweets`，会让运行停止，不读取也不计费。提示信息会写明应使用的 Actor。同时设置其中一个名称和它的标准字段时，以标准字段的值为准。运行日志会写明被忽略的字段。
+
 ## 输出
 
 每行的 `resultType` 为 `tweet`、`replies`、`completeReplies`、`quotes`、`retweeters`、`favoriters`、`thread` 或 `repostCheck`。`sourceTarget` 保存源帖子 ID。帖子和个人资料字段沿用 Xquik REST 稳定的响应结构。

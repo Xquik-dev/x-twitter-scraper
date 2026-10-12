@@ -456,14 +456,44 @@ Her satır önce zaten kullandığın alanları, sonra eşlendikleri alanı yaza
 - tek metin olarak `profileUrl`: `startUrls`
 - `getFollowers`, `getFollowing`: `relations`
 - `followers` veya `following` değerli `type`: `relation`
-- `maxResults`, `max_results`, `resultsLimit`, `count`: `maxItems`
+- `relationship`, `relationshipType`, `listType`, `scrape_type`: `relation`
+- `relationships`: `relations`
+- `followers`, `following` veya `both` değerli `mode`: `relation` veya
+  `relations`
+- `followers`, `following` veya `affiliates` değerli `category`: `relation`
+- `profile_urls`: bağlantılar için `startUrls`, kullanıcı adları için
+  `twitterHandles`
+- `maxResults`, `max_results`, `resultsLimit`, `count`, `max_items`: `maxItems`
+- `per_profile_limit`, `maxItemsPerUser`, `maxUsersPerAccount`,
+  `max_followers_per_user`, `max_following_per_user`, `follower_limit`:
+  `maxItemsPerTarget`. 0, hesap başına sınır koymaz. `max_following_per_user`
+  ayrıca `relation` alanını `following` yapar.
 - `scrapeAllResults`: hedef başına sınır yok
+- `minTweets`: `minStatuses`
+- `includeRawUser`: `includeRaw`
+- `outputVariant`: `outputMode`
+
+Yapıştırdığın girdi şöyle davranır:
+
+- Başka kelimelerle yazılmış bir liste, bu Actor'ın ona verdiği ad olarak
+  okunur. `followings`, `Verified Followers` ve `verifiedFollowers`, `relation`
+  içinde de `following` ve `verified_followers` olarak okunur.
+- Bir takma adı ve kanonik alanını birlikte ayarlarsan kanonik değer geçerli
+  olur. Çalıştırma günlüğü geçersiz kalan takma adı yazar.
+- Actor'ın okumadığı bir liste, örneğin `mutuals`, çalıştırmayı hiçbir okuma
+  veya ücret olmadan durdurur.
+- Başka bir Actor'ın işi olan bir mod da çalıştırmayı aynı şekilde durdurur.
+  `source_mode` için bunlar `search` ve `profiles` değerleridir. `mode` için
+  `profiles` ve `all` değerleridir. `category` için `tweets`, `user_info` veya
+  `replies` gibi bir iştir. Mesaj, kullanman gereken Actor'ı yazar.
 
 2 ad burada başka anlama gelir. Bazı Actor'larda `maxFollowers` ve
-`maxFollowing`, bir çalıştırmanın döndürdüğü satır sayısını sınırlar. Xquik'in
-X Follower Scraper'ında ise profilleri takipçi ve takip edilen sayılarına göre
-filtreler. Satırları sınırlamak için `maxItems` kullan. Actor'da sayfa birimi
-yok, bu yüzden `maxPages` yerine `maxItems` kullan.
+`maxFollowing`, bir çalıştırmanın döndürdüğü satır sayısını sınırlar. Xquik'in X
+Follower Scraper'ında ise profilleri takipçi ve takip edilen sayılarına göre
+filtreler. Satırları sınırlamak için `maxItems` kullan. `maxFollowers` ayarlayıp
+satır sınırı koymayan bir çalıştırma, günlüğünde ve son durumunda hesapları
+filtrelediğini söyler. Actor'da sayfa birimi yok, bu yüzden `maxPages` yerine
+`maxItems` kullan.
 
 ### Her zaman en güncel derlemeyi kullan
 

@@ -326,6 +326,25 @@ Input 탭에 모든 옵션이 있습니다. `twitterHandles`, `startUrls`, `user
 | `locationContains` | 위치에 이 텍스트가 있는 프로필만 유지 |
 | `dedupeAcrossTargets`          | 프로필 간 중복 행을 과금 전에 제거                             |
 
+### 다른 프로필 Actor에서 옮겨오기
+
+이미 쓰는 입력을 그대로 붙여넣으세요. Xquik의 X Profile Scraper는 다른 프로필
+Actor의 다음 필드 이름을 읽습니다. 각 줄은 그쪽 필드를 먼저 적고, 이어서
+연결되는 필드를 적습니다.
+
+- `profiles`, `userNames`, `usernames`, `handles`, `screenNames`:
+  `twitterHandles`
+- `urls`, `profileUrls`: `startUrls`
+- `maxProfiles`, `maxResults`: `maxItems`
+- `shouldScrapeFollowers`, `shouldScrapeFollowings`: `includeFollowers`,
+  `includeFollowing`
+
+`user_info`로 설정한 `category`는 아무것도 바꾸지 않습니다. `tweets`나
+`followers`처럼 다른 Actor가 하는 일을 가리키는 카테고리는 실행을 멈춥니다.
+아무것도 읽거나 과금하지 않습니다. 메시지가 써야 할 Actor를 알려 줍니다. 별칭 &
+표준 필드를 함께 설정하면 표준 필드 값을 씁니다. 실행 로그에 무시된 별칭이
+나옵니다.
+
 ### 알맞은 입력 고르기
 
 - 프로필 카드만 필요하면 사용자 아이디를 넣고 `include` 옵션은 모두 끄세요.

@@ -285,16 +285,31 @@ alias fields, their existing resolution order applies.
 
 These aliases accept common field names from other scrapers:
 
-- URL aliases: `urls`, `tweetUrls`, `postUrls`, `profileUrls`
+- URL aliases: `urls`, `tweetUrls`, `postUrls`, `profileUrls`, & `twitterUrl` as
+  one string
 - ID aliases: `conversationIds`, `postIds`, `ids`, `tweetId`, `id`
 - Username aliases: `twitterHandles`, `screenname`
 - Global limit aliases: `maxResults`, `max_results`, `resultsLimit`,
   `maxReplies`
-- Per-target aliases: `maxRepliesPerTweet`, `maxCommentsPerPost`
+- Per-target aliases: `maxRepliesPerTweet`, `maxCommentsPerPost`,
+  `resultsPerCategory`
 - Search alias: `useSearch`
 - Nested reply aliases: `includeNestedReplies`, `includeRepliesOfReplies`
-- Original post alias: `includeOriginalTweet`
+- Depth alias: `depth` as `1`, `2` or `3` for `maxDepth`. `full` sets no limit.
+- Scope alias: `onlyDirectReplies` for `scope: "direct"`
+- Original post aliases: `includeOriginalTweet`, `includeSourceTweet`. With
+  `includeSourceTweet`, `resultsPerCategory` caps the replies & the post is 1
+  more row.
+- Author alias: `excludeOpSelfReplies` for `excludeOriginalAuthor`
+- Sort aliases: `sortBy` & `queryType` for `sort`. `top`, `newest` & `mostLiked`
+  read as `relevance`, `latest` & `likes`.
 - Output aliases: `outputVariant`, `includeRaw`
+
+`category` set to `replies` changes nothing. A category that is another Actor's
+job, such as `retweets` or `info`, stops the run. It reads & charges nothing.
+The message names the Actor to use. When you set one of these aliases & its
+canonical field, the canonical value wins. The run log names the alias that
+lost.
 
 Malformed or unsupported targets do not fail the Actor. When no valid target
 remains, the run writes a diagnostic with the fix.

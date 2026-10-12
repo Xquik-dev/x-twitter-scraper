@@ -458,14 +458,43 @@ Cada línea nombra los campos que ya usas y, luego, el campo al que se asignan:
 - `profileUrl`, como una sola cadena: `startUrls`
 - `getFollowers`, `getFollowing`: `relations`
 - `type` con `followers` o `following`: `relation`
-- `maxResults`, `max_results`, `resultsLimit`, `count`: `maxItems`
+- `relationship`, `relationshipType`, `listType`, `scrape_type`: `relation`
+- `relationships`: `relations`
+- `mode` con `followers`, `following` o `both`: `relation` o `relations`
+- `category` con `followers`, `following` o `affiliates`: `relation`
+- `profile_urls`: `startUrls` para enlaces, `twitterHandles` para nombres de
+  usuario
+- `maxResults`, `max_results`, `resultsLimit`, `count`, `max_items`: `maxItems`
+- `per_profile_limit`, `maxItemsPerUser`, `maxUsersPerAccount`,
+  `max_followers_per_user`, `max_following_per_user`, `follower_limit`:
+  `maxItemsPerTarget`. 0 no pone tope por cuenta. `max_following_per_user`
+  también pone `relation` en `following`.
 - `scrapeAllResults`: sin tope por objetivo
+- `minTweets`: `minStatuses`
+- `includeRawUser`: `includeRaw`
+- `outputVariant`: `outputMode`
+
+Cómo se comporta una entrada pegada:
+
+- Una lista nombrada con otras palabras se lee como el nombre que este Actor le
+  da. `followings`, `Verified Followers` y `verifiedFollowers` se leen como
+  `following` y `verified_followers`, también en `relation`.
+- Si defines un alias y su campo canónico, gana el valor canónico. El registro
+  de la ejecución nombra el alias que perdió.
+- Una lista que el Actor no lee, como `mutuals`, detiene la ejecución antes de
+  leer o cobrar.
+- Un modo que es tarea de otro Actor detiene la ejecución de la misma forma. En
+  `source_mode` son `search` y `profiles`. En `mode` son `profiles` y `all`. En
+  `category` es una tarea como `tweets`, `user_info` o `replies`. El mensaje
+  nombra el Actor que debes usar.
 
 2 nombres significan otra cosa aquí. En algunos Actores, `maxFollowers` y
 `maxFollowing` limitan cuántas filas devuelve una ejecución. En X Follower
 Scraper de Xquik, filtran perfiles por su cantidad de seguidores y de cuentas
-seguidas. Usa `maxItems` para limitar las filas. El Actor no tiene unidad de
-página, así que reemplaza `maxPages` por `maxItems`.
+seguidas. Usa `maxItems` para limitar las filas. Una ejecución que define
+`maxFollowers` y ningún tope de filas indica en su registro y en su último
+estado que filtró cuentas. El Actor no tiene unidad de página, así que reemplaza
+`maxPages` por `maxItems`.
 
 ### Usa siempre la compilación más reciente
 

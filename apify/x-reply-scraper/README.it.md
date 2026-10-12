@@ -298,16 +298,32 @@ attuale.
 
 Questi alias accettano i nomi di campo comuni di altri scraper:
 
-- Alias URL: `urls`, `tweetUrls`, `postUrls`, `profileUrls`
+- Alias URL: `urls`, `tweetUrls`, `postUrls`, `profileUrls` & `twitterUrl` come
+  stringa singola
 - Alias ID: `conversationIds`, `postIds`, `ids`, `tweetId`, `id`
 - Alias nome utente: `twitterHandles`, `screenname`
 - Alias limite globale: `maxResults`, `max_results`, `resultsLimit`,
   `maxReplies`
-- Alias per target: `maxRepliesPerTweet`, `maxCommentsPerPost`
+- Alias per target: `maxRepliesPerTweet`, `maxCommentsPerPost`,
+  `resultsPerCategory`
 - Alias ricerca: `useSearch`
 - Alias risposte annidate: `includeNestedReplies`, `includeRepliesOfReplies`
-- Alias post originale: `includeOriginalTweet`
+- Alias profondità: `depth` come `1`, `2` o `3` per `maxDepth`. `full` non mette
+  alcun limite.
+- Alias ambito: `onlyDirectReplies` per `scope: "direct"`
+- Alias post originale: `includeOriginalTweet`, `includeSourceTweet`. Con
+  `includeSourceTweet`, `resultsPerCategory` limita le risposte & il post è 1
+  riga in più.
+- Alias autore: `excludeOpSelfReplies` per `excludeOriginalAuthor`
+- Alias ordinamento: `sortBy` & `queryType` per `sort`. `top`, `newest` &
+  `mostLiked` vengono letti come `relevance`, `latest` & `likes`.
 - Alias output: `outputVariant`, `includeRaw`
+
+`category` impostato su `replies` non cambia nulla. Una categoria che è compito
+di un altro Actor, come `retweets` o `info`, ferma l'esecuzione. Non legge & non
+addebita nulla. Il messaggio nomina l'Actor da usare. Quando imposti uno di
+questi alias & il suo campo canonico, vince il valore canonico. Il log
+dell'esecuzione nomina l'alias scartato.
 
 I target malformati o non supportati non fanno fallire l'Actor. Quando non resta
 nessun target valido, l'esecuzione scrive una diagnostica con la correzione.

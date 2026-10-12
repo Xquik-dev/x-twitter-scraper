@@ -85,6 +85,21 @@ addebito.
 Le esecuzioni piccole senza problemi saltano `run-report` & risparmiano uso di
 Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
 
+### Migra da un altro Actor di engagement
+
+L'Actor legge questi nomi di campo di altri Actor di engagement:
+
+- `urls`: `startUrls`
+- `category`: `engagementTypes`. `replies`, `retweets`, `info` & `checkRetweet`
+  vengono letti come `replies`, `retweeters`, `tweet` & `repostCheck`.
+- `resultsPerCategory`: `maxItemsPerTarget`
+- `retweetCheckUsername`: `repostCheckUsers`
+
+Una `category` che è compito di un altro Actor, come `followers` o `tweets`,
+ferma l'esecuzione. Non legge & non addebita nulla. Il messaggio nomina l'Actor
+da usare. Quando imposti uno di questi nomi & il suo campo canonico, vince il
+valore canonico. Il log dell'esecuzione nomina il campo scartato.
+
 ## Output
 
 Ogni riga imposta `resultType` su `tweet`, `replies`, `completeReplies`,

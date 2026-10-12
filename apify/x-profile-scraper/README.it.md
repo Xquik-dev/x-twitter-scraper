@@ -331,6 +331,25 @@ La scheda Input elenca ogni opzione. Indica almeno 1 tra `twitterHandles`,
 | `locationContains` | Tiene i profili la cui località contiene questo testo |
 | `dedupeAcrossTargets`          | Elimina le righe ripetute tra profili prima della fatturazione  |
 
+### Migra da un altro Actor di profili
+
+Incolla l'input che usi già. X Profile Scraper di Xquik legge questi nomi di
+campo di altri Actor di profili. Ogni voce elenca i loro campi, poi il campo a
+cui corrispondono:
+
+- `profiles`, `userNames`, `usernames`, `handles`, `screenNames`:
+  `twitterHandles`
+- `urls`, `profileUrls`: `startUrls`
+- `maxProfiles`, `maxResults`: `maxItems`
+- `shouldScrapeFollowers`, `shouldScrapeFollowings`: `includeFollowers`,
+  `includeFollowing`
+
+`category` impostato su `user_info` non cambia nulla. Una categoria che è
+compito di un altro Actor, come `tweets` o `followers`, ferma l'esecuzione. Non
+legge & non addebita nulla. Il messaggio nomina l'Actor da usare. Quando imposti
+un alias & il suo campo canonico, vince il valore canonico. Il log
+dell'esecuzione nomina l'alias scartato.
+
 ### Scegli gli input giusti
 
 - Per la sola scheda profilo, indica i nomi utente & lascia disattivata ogni

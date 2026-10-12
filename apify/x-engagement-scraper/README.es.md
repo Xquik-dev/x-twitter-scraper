@@ -85,6 +85,21 @@ duplicados que omitió sin cobro.
 Las ejecuciones pequeñas sin problemas omiten `run-report` y ahorran uso de
 Apify. Activa `alwaysSaveRunRecords` para escribirlo en todas las ejecuciones.
 
+### Migra desde otro Actor de interacciones
+
+El Actor lee estos nombres de campo de otros Actores de interacciones:
+
+- `urls`: `startUrls`
+- `category`: `engagementTypes`. `replies`, `retweets`, `info` y `checkRetweet`
+  se leen como `replies`, `retweeters`, `tweet` y `repostCheck`.
+- `resultsPerCategory`: `maxItemsPerTarget`
+- `retweetCheckUsername`: `repostCheckUsers`
+
+Una `category` que es tarea de otro Actor, como `followers` o `tweets`, detiene
+la ejecución. No lee ni cobra nada. El mensaje nombra el Actor que debes usar.
+Si defines uno de estos nombres y su campo canónico, gana el valor canónico. El
+registro de la ejecución nombra el campo que perdió.
+
 ## Salida
 
 Cada fila define `resultType` como `tweet`, `replies`, `completeReplies`,

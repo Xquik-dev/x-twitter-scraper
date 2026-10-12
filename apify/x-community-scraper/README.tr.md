@@ -313,6 +313,13 @@ aç. Diğer tüm alanlar isteğe bağlıdır.
 | `minAccountAgeDays`            | Hesabı en az bu kadar günlük olan üyeleri tutar                       |
 | `dedupeAcrossTargets`          | Topluluklar arasında tekrar eden satırları faturalamadan önce çıkarır |
 
+### Başka bir Topluluk Actor'ından geçiş yap
+
+`ranking` ve `sort` adları `postsOrder` gibi çalışır. `Top` veya `Relevance`, en
+üst sıradaki gönderileri okur. Bunlardan birini ve `postsOrder` alanını birlikte
+ayarlarsan `postsOrder` değeri geçerli olur. Çalıştırma günlüğü geçersiz kalan
+alanı yazar.
+
 ### Doğru girdileri seç
 
 - Hızlı bir bakış için varsayılan `info` ve `tweets` veri türlerini koru.
