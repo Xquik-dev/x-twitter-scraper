@@ -662,18 +662,92 @@ Actor가 쓰는 필드 이름을 읽고 자체 필드로 연결합니다. 문서
 - `twitterContent`, `query`, `searchQuery`: `twitterContent`
 - `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`,
   `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`,
-  `maxTweets`, `tweetsDesired`: `maxItems`
+  `maxTweets`, `tweetsDesired`, `maxTotalTweets`: `maxItems`
+- `per_profile_limit`: `maxItemsPerTarget`
 - `sort`: `queryType`
-- `tweetLanguage`, `language`: `lang`
-- `author`, `inReplyTo`, `mentioning`: `from`, `to`, `@`
-- `start`, `startDate`, `end`, `endDate`: `since`, `until`
-- `minimumRetweets`, `minimumFavorites`, `minimumReplies`: `min_retweets`,
-  `min_faves`, `min_replies`
-- `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`: `filter:images`,
-  `filter:videos`, `filter:quote`, `filter:blue_verified`
-- `geotaggedNear`, `withinRadius`: `near`, `within`
+- `search_type`, `searchType`, `query_type`, `search_sort`: `Top` & `Latest`는
+  대소문자와 상관없이 `queryType`. `Media`, `Photos` & `Videos`는
+  `filter:media`, `filter:images` & `filter:videos`를 켭니다.
+- `tweetLanguage`, `language`, `contentLanguage`: `lang`
+- `author`, `fromUser`: `from`
+- `inReplyTo`, `toUser`: `to`
+- `mentioning`: `@`
+- `start`, `startDate`, `timeSince`: `since`
+- `end`, `endDate`, `timeUntil`: `until`
+- 초 단위인 `timeSinceUnix`, `sinceTime`, `timeUntilUnix`, `untilTime`:
+  `since_time`, `until_time`
+- `timeWithinTime`, `withinTime`: `within_time`
+- `timeWindowHours`, `timeWindow`: 각각 시간 & 일 단위의 `within_time`
+- `timeSinceId`, `sinceId`, `timeMaxId`, `maxId`: `since_id`, `max_id`
 - Google Search Scraper의 `quickDateRange`(예: `d7`, `w2`, `m1`, `y`): 실행 시작
   시점부터 거꾸로 센 `since_time`
+- `minimumFavorites`, `minLikes`, `min_likes`, `minFaves`, `engagementMinLikes`,
+  `Minimum_likes`: `min_faves`
+- `minimumRetweets`, `minRetweets`, `engagementMinRetweets`: `min_retweets`
+- `minimumReplies`, `minReplies`, `engagementMinReplies`, `Minimum_replies`:
+  `min_replies`
+- `engagementMaxLikes`, `maxLikes`, `engagementMaxRetweets`, `maxRetweets`,
+  `engagementMaxReplies`: `engagement.maxLikes`, `engagement.maxRetweets`,
+  `engagement.maxReplies`
+- `onlyImage`, `onlyImages`, `has_images`: `filter:images`
+- `onlyVideo`, `onlyVideos`, `has_videos`: `filter:videos`
+- `onlyWithMedia`, `mediaOnly`: `filter:media`
+- `onlyQuote`, `onlyQuotes`: `filter:quote`
+- `onlyTwitterBlue`, `usersBlueVerifiedOnly`, `blue_verified_only`,
+  `onlyBlueVerified`: `filter:blue_verified`
+- `engagementHasEngagement`, `hasEngagement`: `filter:has_engagement`
+- `mediaHasLinks`, `has_links`, `requireLinks`: `filter:links`
+- `mediaHasMentions`, `has_mentions`, `requireMentions`: `filter:mentions`
+- `mediaHasHashtags`, `has_hashtags`, `requireHashtags`: `filter:hashtags`
+- `mediaNewsOnly`, `mediaSafeContentOnly`: `filter:news`, `filter:safe`
+- 유형 1개가 든 `mediaTypes`: 그 유형의 `filter:` 필드
+- `mediaSubtype`: `filter:media`, `filter:images` 또는 `filter:videos`
+- `includeNativeRetweets`, `includeRetweets`: `include:nativeretweets`
+- `excludeReplies`, `excludeRetweets`, false로 설정한 `includeRetweets`,
+  `tweetTypesExclude`: `tweetTypes.excludeReplies`, `tweetTypes.excludeRetweets`
+  & `tweetTypes.excludeQuotes`
+- 유형 1개가 든 목록인 `tweetTypes`: `tweetTypes.replies`, `tweetTypes.quotes`
+  또는 `tweetTypes.nativeRetweets`
+- `tweetSubtype`: `tweetTypes.replies` 또는 `tweetTypes.quotes`.
+  `self_threads`는 `filter:self_threads` 연산자를 추가합니다.
+- `geotaggedNear`, `geoNear`: `near`
+- `withinRadius`, `geoWithinRadius`, `geoWithin`: `within`
+- `geoGeocode`: `geocode`
+- `tweetConversationId`, `tweetQuotedTweetId`, `tweetQuotedUserId`:
+  `conversation_id`, `quoted_tweet_id`, `quoted_user_id`
+- `cardName`, `tweetPollTypes`: `card_name`
+- `search_query`: `twitterContent`
+- `profile_urls`: 링크는 `startUrls`, 사용자 아이디는 `twitterHandles`
+- `lookup_post_ids` 또는 문자열 1개인 `id`: `tweetIds`
+- 쉼표로 구분한 목록 1개인 `tweets`: `tweetIds`
+
+일부 필드는 여기에 대응하는 필드가 없습니다. 각 필드는 자신이 뜻하는 X 검색
+연산자를 실행의 모든 검색에 추가합니다. 실행 로그는 시작할 때 추가한 연산자를
+나열합니다.
+
+- `usersFromUsers`, `from_users`, `usersToUsers`, `to_users`,
+  `usersListMembers`: `from:`, `to:` & `list:`. 값이 여러 개면
+  `(from:a OR from:b)`처럼 대안으로 실행됩니다.
+- `usersMentionUsers`, `mentioning_users`: `@name`
+- `usersExcludeFromUsers`: `-from:`
+- `onlyVerifiedUsers`, `usersVerifiedOnly`, `verified_only`: `filter:verified`
+- `placeObjectId`, `geoPlaceId`, `placeId`, `place`: `place:`
+- `cardDomain`: `card_domain:`
+- `appsSources`, `appsExcludeSources`: `source:` & `-source:`
+- 값이 각각 1개인 `contentKeywords`, `contentExactPhrases`, `contentHashtags`,
+  `contentCashtags`: 단어, 따옴표로 묶은 구문, `#tag` & `$tag`
+- `contentExcludeKeywords`, `contentExcludeHashtags`, `exclude_words`,
+  `hashtags_exclude`: `-word` & `-#tag`
+- `all_words`, `exact_phrases`: 모든 단어 & 구문이 일치해야 합니다
+- `any_words`, `hashtags_any`: `(#a OR #b)` 같은 대안
+- `contentQuestionMarks`: `?`
+- `contentEmoticons`: `positive`는 `:)`, `negative`는 `:(`
+- `tweet_type`: `filter:replies`, `filter:retweets` & 각각의 `-filter:` 형태
+
+단어로 적은 모드는 `mode`로 연결됩니다. `Advanced Search`는 `search`,
+`Get Tweet by ID`는 `tweet`, `Get a Few Tweets`는 `tweets`, `Get Replies`는
+`replies`, `Get Quotes`는 `quotes`, `Get Retweeters`는 `retweeters` &
+`Get Favoriters`는 `favoriters`입니다.
 
 붙여넣은 입력은 다음과 같이 동작합니다.
 
@@ -695,6 +769,17 @@ Actor가 쓰는 필드 이름을 읽고 자체 필드로 연결합니다. 문서
   아이디나 프로필 URL을 보내세요.
 - `from`, `min_faves`, `since_time` & `filter:images` 같은 검색 연산자 필드는
   이미 X의 이름을 씁니다. 따로 연결할 필요가 없습니다.
+- 다른 Actor가 '모두 일치'인지 '하나만 일치'인지 밝히지 않은 목록은 값 1개로
+  실행됩니다: `contentKeywords`, `contentExactPhrases`, `contentHashtags`,
+  `contentCashtags`, `usersMentionUsers`, `mediaTypes` & `tweetTypes`. 값이 더
+  많으면 읽기나 과금 전에 실행이 멈춥니다. 메시지가 검색어 1개로 쓰는 방법을
+  알려 줍니다.
+- `People`나 `Lists`로 설정한 `search_type`, `followers`로 설정한 `source_mode`,
+  `engagementLevel` 프리셋 & `Get Similar Tweets` 모드는 읽기나 과금 전에 실행을
+  멈춥니다. 메시지가 써야 할 Actor나 필드를 알려 줍니다.
+- `tweets`나 `info`로 설정한 `category`는 아무것도 바꾸지 않습니다. `followers`,
+  `user_info`, `replies`처럼 다른 Actor가 하는 일은 실행을 멈춥니다. 아무것도
+  읽거나 과금하지 않습니다. 메시지가 그 Actor를 알려 줍니다.
 
 ### Console & API 입력
 

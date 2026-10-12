@@ -109,9 +109,11 @@ Nutze 1 Namen pro Einstellung, wenn du eine vorhandene Eingabe anpasst.
 | `tweetLanguage`, `language`                         | `lang`           |
 | `startDate`, `endDate`                              | `since`, `until` |
 
-Der Actor akzeptiert diese gängigen Namen direkt. Nutze `Latest` oder `Top` für
-`sort`. Behalte Sprachcodes & Datumsgrenzen bei. Limits gelten für alle Ziele
-zusammen. Diese Eingabe ist startbereit:
+Der Actor akzeptiert diese gängigen Namen direkt. Er liest auch die Filternamen
+anderer Tweet-Actors. Ein Filter ohne eigenes Feld wird zu einem X-Suchoperator
+in jeder Suche des Runs, & das Run-Log listet diese Operatoren am Anfang. Nutze
+`Latest` oder `Top` für `sort`. Behalte Sprachcodes & Datumsgrenzen bei. Limits
+gelten für alle Ziele zusammen. Diese Eingabe ist startbereit:
 
 ```json
 { "searchTerms": ["from:NASA"], "sort": "Latest", "maxItems": 5 }

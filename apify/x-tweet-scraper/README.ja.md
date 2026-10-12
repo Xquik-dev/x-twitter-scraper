@@ -435,15 +435,69 @@ Xは、`filter:vine`、`filter:consumer_video`、`filter:pro_video`、`filter:ne
 - 1つの文字列としての`username`、`handle`、`screenName`: `twitterHandles`
 - `searchTerms`、`searchQueries`、`queries`、`search`（リスト、または1行に1つの検索）: `searchTerms`
 - `twitterContent`、`query`、`searchQuery`: `twitterContent`
-- `maxItems`、`maxResults`、`max_results`、`resultsLimit`、`count`、`resultsCount`、`numberOfTweets`、`maxPosts`、`max_posts`、`max_items`、`maxTweets`、`tweetsDesired`: `maxItems`
+- `maxItems`、`maxResults`、`max_results`、`resultsLimit`、`count`、`resultsCount`、`numberOfTweets`、`maxPosts`、`max_posts`、`max_items`、`maxTweets`、`tweetsDesired`、`maxTotalTweets`: `maxItems`
+- `per_profile_limit`: `maxItemsPerTarget`
 - `sort`: `queryType`
-- `tweetLanguage`、`language`: `lang`
-- `author`、`inReplyTo`、`mentioning`: `from`、`to`、`@`
-- `start`、`startDate`、`end`、`endDate`: `since`、`until`
-- `minimumRetweets`、`minimumFavorites`、`minimumReplies`: `min_retweets`、`min_faves`、`min_replies`
-- `onlyImage`、`onlyVideo`、`onlyQuote`、`onlyTwitterBlue`: `filter:images`、`filter:videos`、`filter:quote`、`filter:blue_verified`
-- `geotaggedNear`、`withinRadius`: `near`、`within`
+- `search_type`、`searchType`、`query_type`、`search_sort`: `Top`と`Latest`は大文字小文字を問わず`queryType`。`Media`、`Photos`、`Videos`は`filter:media`、`filter:images`、`filter:videos`をオンにします。
+- `tweetLanguage`、`language`、`contentLanguage`: `lang`
+- `author`、`fromUser`: `from`
+- `inReplyTo`、`toUser`: `to`
+- `mentioning`: `@`
+- `start`、`startDate`、`timeSince`: `since`
+- `end`、`endDate`、`timeUntil`: `until`
+- 秒単位の`timeSinceUnix`、`sinceTime`、`timeUntilUnix`、`untilTime`: `since_time`、`until_time`
+- `timeWithinTime`、`withinTime`: `within_time`
+- `timeWindowHours`、`timeWindow`: それぞれ時間単位と日単位の`within_time`
+- `timeSinceId`、`sinceId`、`timeMaxId`、`maxId`: `since_id`、`max_id`
 - Google Search Scraperの`quickDateRange`（`d7`、`w2`、`m1`、`y`など）: `since_time`（実行開始時点からさかのぼって計算）
+- `minimumFavorites`、`minLikes`、`min_likes`、`minFaves`、`engagementMinLikes`、`Minimum_likes`: `min_faves`
+- `minimumRetweets`、`minRetweets`、`engagementMinRetweets`: `min_retweets`
+- `minimumReplies`、`minReplies`、`engagementMinReplies`、`Minimum_replies`: `min_replies`
+- `engagementMaxLikes`、`maxLikes`、`engagementMaxRetweets`、`maxRetweets`、`engagementMaxReplies`: `engagement.maxLikes`、`engagement.maxRetweets`、`engagement.maxReplies`
+- `onlyImage`、`onlyImages`、`has_images`: `filter:images`
+- `onlyVideo`、`onlyVideos`、`has_videos`: `filter:videos`
+- `onlyWithMedia`、`mediaOnly`: `filter:media`
+- `onlyQuote`、`onlyQuotes`: `filter:quote`
+- `onlyTwitterBlue`、`usersBlueVerifiedOnly`、`blue_verified_only`、`onlyBlueVerified`: `filter:blue_verified`
+- `engagementHasEngagement`、`hasEngagement`: `filter:has_engagement`
+- `mediaHasLinks`、`has_links`、`requireLinks`: `filter:links`
+- `mediaHasMentions`、`has_mentions`、`requireMentions`: `filter:mentions`
+- `mediaHasHashtags`、`has_hashtags`、`requireHashtags`: `filter:hashtags`
+- `mediaNewsOnly`、`mediaSafeContentOnly`: `filter:news`、`filter:safe`
+- 種類が1つの`mediaTypes`: その種類の`filter:`フィールド
+- `mediaSubtype`: `filter:media`、`filter:images`、または`filter:videos`
+- `includeNativeRetweets`、`includeRetweets`: `include:nativeretweets`
+- `excludeReplies`、`excludeRetweets`、falseに設定した`includeRetweets`、`tweetTypesExclude`: `tweetTypes.excludeReplies`、`tweetTypes.excludeRetweets`、`tweetTypes.excludeQuotes`
+- 種類が1つのリストとしての`tweetTypes`: `tweetTypes.replies`、`tweetTypes.quotes`、または`tweetTypes.nativeRetweets`
+- `tweetSubtype`: `tweetTypes.replies`、または`tweetTypes.quotes`。`self_threads`は演算子`filter:self_threads`を追加します。
+- `geotaggedNear`、`geoNear`: `near`
+- `withinRadius`、`geoWithinRadius`、`geoWithin`: `within`
+- `geoGeocode`: `geocode`
+- `tweetConversationId`、`tweetQuotedTweetId`、`tweetQuotedUserId`: `conversation_id`、`quoted_tweet_id`、`quoted_user_id`
+- `cardName`、`tweetPollTypes`: `card_name`
+- `search_query`: `twitterContent`
+- `profile_urls`: リンクは`startUrls`、ユーザー名は`twitterHandles`
+- `lookup_post_ids`、または1つの文字列としての`id`: `tweetIds`
+- カンマ区切りの1つのリストとしての`tweets`: `tweetIds`
+
+一部のフィールドには、ここに対応するフィールドがありません。それぞれが表すXの検索演算子を、実行中のすべての検索に追加します。実行ログには、追加した演算子が最初に一覧で記録されます。
+
+- `usersFromUsers`、`from_users`、`usersToUsers`、`to_users`、`usersListMembers`: `from:`、`to:`、`list:`。値が複数ある場合は、`(from:a OR from:b)`のように「いずれか」として実行されます。
+- `usersMentionUsers`、`mentioning_users`: `@name`
+- `usersExcludeFromUsers`: `-from:`
+- `onlyVerifiedUsers`、`usersVerifiedOnly`、`verified_only`: `filter:verified`
+- `placeObjectId`、`geoPlaceId`、`placeId`、`place`: `place:`
+- `cardDomain`: `card_domain:`
+- `appsSources`、`appsExcludeSources`: `source:`、`-source:`
+- 値がそれぞれ1つの`contentKeywords`、`contentExactPhrases`、`contentHashtags`、`contentCashtags`: 単語、引用符で囲んだフレーズ、`#tag`、`$tag`
+- `contentExcludeKeywords`、`contentExcludeHashtags`、`exclude_words`、`hashtags_exclude`: `-word`、`-#tag`
+- `all_words`、`exact_phrases`: すべての単語とフレーズが一致する必要があります
+- `any_words`、`hashtags_any`: `(#a OR #b)`のような「いずれか」の条件
+- `contentQuestionMarks`: `?`
+- `contentEmoticons`: `positive`は`:)`、`negative`は`:(`
+- `tweet_type`: `filter:replies`、`filter:retweets`、およびそれぞれの`-filter:`形式
+
+言葉で書かれたモードは`mode`に対応付けます。`Advanced Search`は`search`、`Get Tweet by ID`は`tweet`、`Get a Few Tweets`は`tweets`、`Get Replies`は`replies`、`Get Quotes`は`quotes`、`Get Retweeters`は`retweeters`、`Get Favoriters`は`favoriters`です。
 
 貼り付けた入力は次のように動きます。
 
@@ -457,6 +511,9 @@ Xは、`filter:vine`、`filter:consumer_video`、`filter:pro_video`、`filter:ne
 - このActorにはページという単位がありません。`maxPages`は`maxItems`に置き換えてください。
 - このActorにはユーザーIDのフィールドがありません。`userId`や`user_ids`の代わりに、ユーザー名かプロフィールのURLを送ってください。
 - `from`、`min_faves`、`since_time`、`filter:images`などの検索演算子のフィールドは、すでにXと同じ名前です。対応付けは不要です。
+- 他のActorが「すべて一致」か「いずれか一致」かを示していないリストは、値が1つのときに実行されます: `contentKeywords`、`contentExactPhrases`、`contentHashtags`、`contentCashtags`、`usersMentionUsers`、`mediaTypes`、`tweetTypes`。値が2つ以上あると、読み取りや課金の前に実行が止まります。メッセージには、それらを1つの検索語として書く方法が示されます。
+- `People`または`Lists`に設定した`search_type`、`followers`に設定した`source_mode`、`engagementLevel`のプリセット、`Get Similar Tweets`モードは、読み取りや課金の前に実行を止めます。メッセージには、使うべきActorまたはフィールドが示されます。
+- `tweets`または`info`に設定した`category`は、何も変えません。`followers`、`user_info`、`replies`など、他のActorの役割にあたる値は実行を止めます。何も読み取らず、課金もしません。メッセージには、そのActorが示されます。
 
 ### ConsoleとAPIの入力
 

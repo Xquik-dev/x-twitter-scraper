@@ -697,18 +697,93 @@ sie zuordnet:
 - `twitterContent`, `query`, `searchQuery`: `twitterContent`
 - `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`,
   `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`,
-  `maxTweets`, `tweetsDesired`: `maxItems`
+  `maxTweets`, `tweetsDesired`, `maxTotalTweets`: `maxItems`
+- `per_profile_limit`: `maxItemsPerTarget`
 - `sort`: `queryType`
-- `tweetLanguage`, `language`: `lang`
-- `author`, `inReplyTo`, `mentioning`: `from`, `to`, `@`
-- `start`, `startDate`, `end`, `endDate`: `since`, `until`
-- `minimumRetweets`, `minimumFavorites`, `minimumReplies`: `min_retweets`,
-  `min_faves`, `min_replies`
-- `onlyImage`, `onlyVideo`, `onlyQuote`, `onlyTwitterBlue`: `filter:images`,
-  `filter:videos`, `filter:quote`, `filter:blue_verified`
-- `geotaggedNear`, `withinRadius`: `near`, `within`
+- `search_type`, `searchType`, `query_type`, `search_sort`: `queryType` für
+  `Top` & `Latest`, egal in welcher Schreibweise. `Media`, `Photos` & `Videos`
+  schalten `filter:media`, `filter:images` & `filter:videos` ein.
+- `tweetLanguage`, `language`, `contentLanguage`: `lang`
+- `author`, `fromUser`: `from`
+- `inReplyTo`, `toUser`: `to`
+- `mentioning`: `@`
+- `start`, `startDate`, `timeSince`: `since`
+- `end`, `endDate`, `timeUntil`: `until`
+- `timeSinceUnix`, `sinceTime`, `timeUntilUnix`, `untilTime`, in Sekunden:
+  `since_time`, `until_time`
+- `timeWithinTime`, `withinTime`: `within_time`
+- `timeWindowHours`, `timeWindow`: `within_time`, als Stunden & als Tage
+- `timeSinceId`, `sinceId`, `timeMaxId`, `maxId`: `since_id`, `max_id`
 - `quickDateRange` aus dem Google Search Scraper, etwa `d7`, `w2`, `m1` oder
   `y`: `since_time`, ab dem Run-Start zurückgerechnet
+- `minimumFavorites`, `minLikes`, `min_likes`, `minFaves`, `engagementMinLikes`,
+  `Minimum_likes`: `min_faves`
+- `minimumRetweets`, `minRetweets`, `engagementMinRetweets`: `min_retweets`
+- `minimumReplies`, `minReplies`, `engagementMinReplies`, `Minimum_replies`:
+  `min_replies`
+- `engagementMaxLikes`, `maxLikes`, `engagementMaxRetweets`, `maxRetweets`,
+  `engagementMaxReplies`: `engagement.maxLikes`, `engagement.maxRetweets`,
+  `engagement.maxReplies`
+- `onlyImage`, `onlyImages`, `has_images`: `filter:images`
+- `onlyVideo`, `onlyVideos`, `has_videos`: `filter:videos`
+- `onlyWithMedia`, `mediaOnly`: `filter:media`
+- `onlyQuote`, `onlyQuotes`: `filter:quote`
+- `onlyTwitterBlue`, `usersBlueVerifiedOnly`, `blue_verified_only`,
+  `onlyBlueVerified`: `filter:blue_verified`
+- `engagementHasEngagement`, `hasEngagement`: `filter:has_engagement`
+- `mediaHasLinks`, `has_links`, `requireLinks`: `filter:links`
+- `mediaHasMentions`, `has_mentions`, `requireMentions`: `filter:mentions`
+- `mediaHasHashtags`, `has_hashtags`, `requireHashtags`: `filter:hashtags`
+- `mediaNewsOnly`, `mediaSafeContentOnly`: `filter:news`, `filter:safe`
+- `mediaTypes`, mit 1 Typ: das `filter:`-Feld dieses Typs
+- `mediaSubtype`: `filter:media`, `filter:images` oder `filter:videos`
+- `includeNativeRetweets`, `includeRetweets`: `include:nativeretweets`
+- `excludeReplies`, `excludeRetweets`, `includeRetweets` auf false,
+  `tweetTypesExclude`: `tweetTypes.excludeReplies`, `tweetTypes.excludeRetweets`
+  & `tweetTypes.excludeQuotes`
+- `tweetTypes` als Liste mit 1 Typ: `tweetTypes.replies`, `tweetTypes.quotes`
+  oder `tweetTypes.nativeRetweets`
+- `tweetSubtype`: `tweetTypes.replies` oder `tweetTypes.quotes`. `self_threads`
+  fügt den Operator `filter:self_threads` hinzu.
+- `geotaggedNear`, `geoNear`: `near`
+- `withinRadius`, `geoWithinRadius`, `geoWithin`: `within`
+- `geoGeocode`: `geocode`
+- `tweetConversationId`, `tweetQuotedTweetId`, `tweetQuotedUserId`:
+  `conversation_id`, `quoted_tweet_id`, `quoted_user_id`
+- `cardName`, `tweetPollTypes`: `card_name`
+- `search_query`: `twitterContent`
+- `profile_urls`: `startUrls` für Links, `twitterHandles` für Nutzernamen
+- `lookup_post_ids` oder `id` als einzelner String: `tweetIds`
+- `tweets` als 1 kommagetrennte Liste: `tweetIds`
+
+Manche Felder haben hier kein eigenes Feld. Jedes fügt den X-Suchoperator, für
+den es steht, jeder Suche des Runs hinzu. Das Run-Log listet die hinzugefügten
+Operatoren am Anfang:
+
+- `usersFromUsers`, `from_users`, `usersToUsers`, `to_users`,
+  `usersListMembers`: `from:`, `to:` & `list:`. Mehrere Werte laufen als
+  Alternativen, etwa `(from:a OR from:b)`.
+- `usersMentionUsers`, `mentioning_users`: `@name`
+- `usersExcludeFromUsers`: `-from:`
+- `onlyVerifiedUsers`, `usersVerifiedOnly`, `verified_only`: `filter:verified`
+- `placeObjectId`, `geoPlaceId`, `placeId`, `place`: `place:`
+- `cardDomain`: `card_domain:`
+- `appsSources`, `appsExcludeSources`: `source:` & `-source:`
+- `contentKeywords`, `contentExactPhrases`, `contentHashtags`,
+  `contentCashtags`, jeweils mit 1 Wert: das Wort, die Phrase in
+  Anführungszeichen, `#tag` & `$tag`
+- `contentExcludeKeywords`, `contentExcludeHashtags`, `exclude_words`,
+  `hashtags_exclude`: `-word` & `-#tag`
+- `all_words`, `exact_phrases`: jedes Wort & jede Phrase muss vorkommen
+- `any_words`, `hashtags_any`: Alternativen, etwa `(#a OR #b)`
+- `contentQuestionMarks`: `?`
+- `contentEmoticons`: `:)` für `positive`, `:(` für `negative`
+- `tweet_type`: `filter:replies`, `filter:retweets` & ihre `-filter:`-Formen
+
+In Worten benannte Modi ordnet der Actor `mode` zu: `Advanced Search` zu
+`search`, `Get Tweet by ID` zu `tweet`, `Get a Few Tweets` zu `tweets`,
+`Get Replies` zu `replies`, `Get Quotes` zu `quotes`, `Get Retweeters` zu
+`retweeters` & `Get Favoriters` zu `favoriters`.
 
 So verhält sich eine eingefügte Eingabe:
 
@@ -716,12 +791,12 @@ So verhält sich eine eingefügte Eingabe:
   Listen-IDs & Post-IDs führt alle aus. `maxItems` gilt für den gesamten Run.
 - Eine Suchanfrage neben `searchTerms` läuft als 1 weiterer Begriff.
 - Eine Profil-URL der Form `x.com/@name` liest der Actor wie `x.com/name`.
-- Setzt du einen Alias & sein kanonisches Feld, gewinnt der kanonische Wert.
-  Das Run-Log nennt den Alias, der verloren hat.
+- Setzt du einen Alias & sein kanonisches Feld, gewinnt der kanonische Wert. Das
+  Run-Log nennt den Alias, der verloren hat.
 - Das Run-Log nennt jedes Feld, das der Actor ignoriert, etwa
   `customMapFunction`. Der Actor verwirft nie still ein Feld.
-- Eine Obergrenze für Datensätze muss eine ganze Zahl ab 1 sein.
-  `maxResults: 0` stoppt den Run, bevor er etwas liest oder berechnet.
+- Eine Obergrenze für Datensätze muss eine ganze Zahl ab 1 sein. `maxResults: 0`
+  stoppt den Run, bevor er etwas liest oder berechnet.
 - `quickDateRange: "m1"` liest auf jeder Route den letzten Monat. Monate & Jahre
   zählen im Kalender zurück. Fehlt h, d, w, m oder y, stoppt der Run, bevor er
   etwas liest oder berechnet.
@@ -730,6 +805,18 @@ So verhält sich eine eingefügte Eingabe:
   statt `userId` oder `user_ids`.
 - Suchoperator-Felder wie `from`, `min_faves`, `since_time` & `filter:images`
   nutzen schon die Namen von X. Sie brauchen keine Zuordnung.
+- Eine Liste, bei der ein anderer Actor nicht sagt, ob alle Werte oder nur einer
+  passen müssen, läuft mit 1 Wert: `contentKeywords`, `contentExactPhrases`,
+  `contentHashtags`, `contentCashtags`, `usersMentionUsers`, `mediaTypes` &
+  `tweetTypes`. Bei mehr Werten stoppt der Run, bevor er etwas liest oder
+  berechnet. Die Meldung sagt, wie du sie als 1 Suchbegriff schreibst.
+- `search_type` auf `People` oder `Lists`, `source_mode` auf `followers`, ein
+  `engagementLevel`-Preset & der Modus `Get Similar Tweets` stoppen den Run,
+  bevor er etwas liest oder berechnet. Die Meldung nennt den Actor oder das
+  Feld, das du nutzen sollst.
+- `category` auf `tweets` oder `info` ändert nichts. Die Aufgabe eines anderen
+  Actors, etwa `followers`, `user_info` oder `replies`, stoppt den Run. Er liest
+  & berechnet nichts. Die Meldung nennt diesen Actor.
 
 ### Eingabe in Console & API
 
