@@ -30,8 +30,8 @@ Apify, platform kullanımını ayrıca faturalandırır.
 
 ## Hesap verileri ve filtreler
 
-- Kitle, gönderi, hesap yaşı, onay, web sitesi, konum, biyografi ve kullanıcı
-  adı filtreleri.
+- Kitle, gönderi, hesap yaşı, onay işareti, web sitesi, konum, biyografi ve
+  kullanıcı adı filtreleri.
 - Search Autocomplete modu: X'in her arama terimi için önerdiği hesaplar,
   konular, hashtag'ler ve cashtag'ler.
 - 1 sorguyu `startCursor` içindeki kayıtlı imleçten sürdür.

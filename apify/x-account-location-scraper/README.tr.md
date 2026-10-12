@@ -41,8 +41,8 @@ başına $0.00015** ödersin. Apify, platform kullanımını ayrıca faturaland�
 - Hesabın kullanıcı adını kaç kez ve en son ne zaman değiştirdiği.
 - X'in hesabı bağlı gösterdiği kuruluş.
 - Gün cinsinden hesap yaşı ve profil bağlantısı.
-- Herkese açık profilin tamamı: ad, biyografi, sayılar, onay, tarihler ve
-  görseller.
+- Herkese açık profilin tamamı: ad, biyografi, sayılar, onay işareti, tarihler
+  ve görseller.
 - X'in etiketini vermediği her hesap için ek ücret olmadan ikinci bir okuma.
 - 1 çalıştırmada aynı anda okunan ve girdi sırasıyla teslim edilen birçok hesap.
 - @ ile veya @ olmadan kullanıcı adları, x.com ve twitter.com URL'leri ve
@@ -180,8 +180,8 @@ kullanımını ayrıca faturalandırır.
 - Teslim edilen her veri satırı için 1 kez ödersin. Tanılamalar `diagnostics`
   içinde ücretsizdir.
 - Başlatma veya sorgulama ücreti yok.
-- X'te bulunmayan bir hesap satır eklemez ve ücret çıkarmaz.
-- Verilmeyen bir etiketin ikinci okuması ek ücret çıkarmaz.
+- X'te bulunmayan bir hesap satır eklemez ve ücretlendirilmez.
+- Verilmeyen bir etiketin ikinci okuması ayrıca ücretlendirilmez.
 - Tekilleştirme faturalamadan önce çalışır.
 - Apify'ın maksimum toplam ücret ayarları teslim edilen satırları sınırlar.
 
@@ -236,9 +236,9 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   satırları olarak kazır. Kitle veya üye listelerine ihtiyacın olduğunda kullan.
   Profil başına $0.00015'ten başlar.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay, hesap
-  yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri oluşturduğunda
-  kullan. Profil başına $0.00015'ten başlar.
+  Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay işareti,
+  hesap yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri
+  oluşturduğunda kullan. Profil başına $0.00015'ten başlar.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper): Kullanıcı
   adlarından, takipçilerden veya kullanıcı aramalarından, hesapların
   profillerinde yayımladığı e-postaları, telefonları ve bağlantıları alır.
