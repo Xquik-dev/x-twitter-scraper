@@ -184,10 +184,18 @@ necesitas.
   respuestas, citas, cuentas que hicieron repost e hilos de URLs o IDs de posts
   en bloque. Úsalo cuando midas quién interactuó con los posts. Desde $0.00015
   por fila.
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
+  extrae los posts que citan posts, con texto, multimedia, conteos, autores y 11
+  filtros. Úsalo cuando estudies quién citó posts y qué dijo. Desde $0.00015 por
+  post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): extrae
   seguidores, cuentas seguidas, miembros de Listas, suscriptores y miembros de
   Comunidades como filas de perfil. Úsalo cuando necesites listas de audiencia o
   de miembros. Desde $0.00015 por perfil.
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
+  consulta dónde tienen su sede las cuentas con la etiqueta "Cuenta con sede en"
+  de X, cómo se conectaron a X y sus cambios de nombre de usuario. Úsalo cuando
+  verifiques dónde tienen su sede las cuentas. Desde $0.00015 por cuenta.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): extrae posts,
   miembros y seguidores de Listas a partir de URLs o IDs de Listas. Úsalo cuando
   una Lista curada defina tus fuentes. Desde $0.00015 por fila.

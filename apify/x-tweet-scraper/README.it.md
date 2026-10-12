@@ -938,6 +938,10 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   risposte, citazioni, utenti che hanno fatto repost & thread da URL o ID di
   post in blocco. Usalo quando misuri chi ha interagito con i post. Da $0.00015
   per riga.
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
+  estrae i post che citano altri post, con testo, media, conteggi, autori & 11
+  filtri. Usalo quando studi chi ha citato dei post & cosa ha detto. Da $0.00015
+  per post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): estrae
   follower, following, membri & follower delle liste e membri delle community
   come righe di profilo. Usalo quando ti servono elenchi di pubblico o di
@@ -946,6 +950,10 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   cerca utenti per nome utente, bio & posizione con filtri su follower,
   verifica, età & posizione. Usalo quando costruisci elenchi di account dalla
   ricerca. Da $0.00015 per profilo.
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
+  verifica dove hanno sede gli account con l'etichetta "Posizione account" di X,
+  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando ti
+  serve verificare dove hanno sede gli account. Da $0.00015 per account.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): estrae post,
   membri & follower delle liste da URL o ID delle liste. Usalo quando una lista
   curata definisce le tue fonti. Da $0.00015 per riga.

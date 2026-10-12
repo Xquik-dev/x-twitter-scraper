@@ -207,6 +207,10 @@ Xquik의 X List Scraper는 한 실행에서 여러 리스트 & 리소스를 읽�
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): 게시물
   URL이나 ID로 답글, 인용, 재게시한 사람 & 스레드를 대량으로 스크랩합니다. 누가
   게시물에 반응했는지 측정할 때 사용하세요. 행당 $0.00015부터입니다.
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
+  게시물을 인용한 게시물을 텍스트, 미디어, 수치, 작성자 & 11개의 필터와 함께
+  스크랩합니다. 누가 게시물을 인용했고 무엇을 말했는지 살펴볼 때 사용하세요.
+  게시물당 $0.00015부터입니다.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): 팔로워,
   팔로잉, 리스트 멤버, 구독자 & 커뮤니티 멤버를 프로필 행으로 스크랩합니다.
   오디언스나 멤버 목록이 필요할 때 사용하세요. 프로필당 $0.00015부터입니다.
@@ -214,6 +218,10 @@ Xquik의 X List Scraper는 한 실행에서 여러 리스트 & 리소스를 읽�
   아이디, 자기소개 & 위치로 사용자를 검색합니다. 팔로워, 인증, 계정 연령 & 위치
   필터를 지원합니다. 검색으로 계정 목록을 만들 때 사용하세요. 프로필당
   $0.00015부터입니다.
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
+  X의 "Account based in"(계정 기반 위치) 라벨, X에 연결된 방식 & 사용자 아이디
+  변경 내역으로 계정이 어디에 기반을 두고 있는지 확인합니다. 계정의 기반 위치를
+  검증할 때 사용하세요. 계정당 $0.00015부터입니다.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): 커뮤니티
   정보, 게시물, 검색 결과, 멤버 & 모더레이터를 스크랩합니다. X 커뮤니티에서
   데이터를 모을 때 사용하세요. 행당 $0.00015부터입니다.

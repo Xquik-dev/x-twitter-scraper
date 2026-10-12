@@ -630,10 +630,18 @@ Apify 기본 제한 시간은 `0`이므로 실행에 시간 제한이 없습니�
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): 게시물
   URL이나 ID로 답글, 인용, 재게시한 사람 & 스레드를 대량으로 스크랩합니다. 누가
   게시물에 반응했는지 측정할 때 사용하세요. 행당 $0.00015부터입니다.
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
+  게시물을 인용한 게시물을 텍스트, 미디어, 수치, 작성자 & 11개의 필터와 함께
+  스크랩합니다. 누가 게시물을 인용했고 무엇을 말했는지 살펴볼 때 사용하세요.
+  게시물당 $0.00015부터입니다.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): 사용자
   아이디, 자기소개 & 위치로 사용자를 검색합니다. 팔로워, 인증, 계정 연령 & 위치
   필터를 지원합니다. 검색으로 계정 목록을 만들 때 사용하세요. 프로필당
   $0.00015부터입니다.
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
+  X의 "Account based in"(계정 기반 위치) 라벨, X에 연결된 방식 & 사용자 아이디
+  변경 내역으로 계정이 어디에 기반을 두고 있는지 확인합니다. 계정의 기반 위치를
+  검증할 때 사용하세요. 계정당 $0.00015부터입니다.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): 리스트 URL이나 ID로
   리스트 게시물, 멤버 & 팔로워를 스크랩합니다. 직접 고른 리스트로 수집 대상을
   정할 때 사용하세요. 행당 $0.00015부터입니다.

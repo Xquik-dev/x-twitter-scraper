@@ -228,6 +228,10 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   utenti per nome utente, bio & posizione con filtri su follower, verifica, età
   & posizione. Usalo quando costruisci elenchi di account dalla ricerca. Da
   $0.00015 per profilo.
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
+  verifica dove hanno sede gli account con l'etichetta "Posizione account" di X,
+  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando ti
+  serve verificare dove hanno sede gli account. Da $0.00015 per account.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): estrae post, membri
   & follower delle liste da URL o ID delle liste. Usalo quando una lista curata
   definisce le tue fonti. Da $0.00015 per riga.

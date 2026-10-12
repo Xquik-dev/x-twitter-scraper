@@ -702,6 +702,10 @@ données dont vous avez besoin.
   scrape en masse les réponses, citations, comptes qui ont reposté et
   discussions de posts, à partir d'URL ou d'ID. Utilisez-le pour mesurer qui a
   interagi avec des posts. À partir de $0.00015 par ligne.
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper) :
+  scrape les posts qui citent des posts, avec le texte, les médias, les
+  compteurs, les auteurs et 11 filtres. Utilisez-le quand vous étudiez qui a
+  cité des posts et ce qu'ils ont dit. À partir de $0.00015 par post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) : scrape
   les abonnés, les abonnements, les membres et abonnés de Liste et les
   membres de Communauté sous forme de lignes de profil. Utilisez-le quand
@@ -712,6 +716,11 @@ données dont vous avez besoin.
   filtres d'abonnés, de certification, d'ancienneté et de localisation.
   Utilisez-le pour créer des listes de comptes à partir d'une recherche. À
   partir de $0.00015 par profil.
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper) :
+  vérifie où sont basés les comptes avec le libellé "Account based in" de X, la
+  façon dont ils se sont connectés à X et leurs changements de nom
+  d'utilisateur. Utilisez-le quand vous vérifiez où sont basés des comptes. À
+  partir de $0.00015 par compte.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper) : scrape les
   posts, membres et abonnés d'une Liste à partir d'URL ou d'ID de Liste.
   Utilisez-le quand une Liste choisie définit vos sources. À partir de

@@ -473,6 +473,10 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   URL'leri veya ID'leri için toplu olarak yanıtları, alıntıları, yeniden
   gönderenleri ve gönderi dizilerini kazır. Gönderilerle kimin etkileşime
   girdiğini ölçtüğünde kullan. Satır başına $0.00015'ten başlar.
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
+  Gönderileri alıntılayan gönderileri metin, medya, sayılar, yazarlar ve 11
+  filtreyle kazır. Gönderileri kimin alıntıladığını ve ne dediğini incelemek
+  istediğinde kullan. Gönderi başına $0.00015'ten başlar.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Takipçileri,
   takip edilenleri, Liste üyelerini, aboneleri ve Topluluk üyelerini profil
   satırları olarak kazır. Kitle veya üye listelerine ihtiyacın olduğunda kullan.
@@ -481,6 +485,11 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay, hesap
   yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri oluşturduğunda
   kullan. Profil başına $0.00015'ten başlar.
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
+  X'in "Account based in" etiketi, X'e nasıl bağlandıkları ve kullanıcı adı
+  değişiklikleriyle hesapların nerede bulunduğunu kontrol eder. Hesapların
+  nerede bulunduğunu doğrulaman gerektiğinde kullan. Hesap başına $0.00015'ten
+  başlar.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): Liste URL'lerinden
   veya ID'lerinden Liste gönderilerini, üyelerini ve takipçilerini kazır.
   Kaynaklarını özenle seçilmiş bir Liste belirlediğinde kullan. Satır başına
