@@ -59,6 +59,31 @@ Apify, platform kullanımını ayrıca faturalandırır.
 Sorunsuz biten küçük çalıştırmalar `run-report` yazmaz, böylece Apify kullanımı
 azalır. Raporu her çalıştırmada almak için `alwaysSaveRunRecords` seçeneğini aç.
 
+### Başka bir kullanıcı arama Actor'ından geçiş yap
+
+Zaten kullandığın girdiyi yapıştır. Xquik'in X User Search Scraper'ı, diğer
+Actor'ların şu alan adlarını okur. Her satır önce onların alanlarını, sonra
+eşlendikleri alanı yazar:
+
+- `requireEmail`, `requireWebsite`: `hasEmail`, `hasWebsite`
+- `verification`: `any_verified` `verifiedOnly` alanını, `blue_verified`
+  `blueVerifiedOnly` alanını, `business` ve `government` `verifiedType` alanını
+  ayarlar. `unverified` çalıştırmayı hiçbir okuma veya ücret olmadan durdurur.
+- `bioKeywords`: `bioContains`. Terimlerinden 1 tanesinin eşleşmesi yeter.
+- 1 değerli `locationKeywords`: `locationContains`. Daha fazla değer
+  çalıştırmayı hiçbir okuma veya ücret olmadan durdurur.
+- liste olarak `emailDomains`: `emailDomains`
+- `outputEmail`, `resolveShortLinks`: alan gerekmez. Her satır kendi
+  e-postalarını ve X'in tam bağlantılarını taşır.
+- `findEmails`, `extractEmails`: alan yok. Satırlar, profilin X'te yayımladığı
+  e-postaları taşır. Çalıştırma durumu, Actor'ın bağlantılı siteleri okumadığını
+  söyler.
+- `validateEmails`: alan yok. Actor posta kutusu denetlemediği için çalıştırma
+  durumu, e-postaların yayımlandığı gibi geldiğini söyler.
+
+Bu adlardan birini ve kanonik alanını birlikte ayarlarsan kanonik değer geçerli
+olur. Çalıştırma günlüğü geçersiz kalan alanı yazar.
+
 ## Arama otomatik tamamlama
 
 Birisi yazarken X'in ne önerdiğini okumak için `mode` değerini `autocomplete`

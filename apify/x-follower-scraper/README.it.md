@@ -98,6 +98,9 @@ fondo. Le righe compatte restano più piccole & costano meno da archiviare.
 
 `verifiedOnly` accetta i profili con verifica pubblica Blue & legacy. Se gli
 indicatori di origine sono in conflitto, vince lo stato di verifica vero.
+`blueVerifiedOnly` tiene i profili che X segna come verificati Blue. X segna
+così anche molti account di aziende & enti pubblici. Imposta `verifiedType` per
+tenere 1 tipo di badge.
 
 Le righe non includono mai stati visibili solo a chi guarda. Xquik rimuove gli
 indicatori di follow, blocco, silenziamento, Messaggi Diretti, notifiche &
@@ -325,8 +328,9 @@ restano esatti su tutti.
   filtrate non costano nulla.
 - I filtri numerici sono `minFollowers`, `maxFollowers`, `minFollowing`,
   `maxFollowing`, `minStatuses`, `maxStatuses` & `minAccountAgeDays`.
-- I filtri sui profili sono `verifiedOnly`, `verifiedType`, `bioContains`,
-  `locationContains`, `usernameContains`, `hasWebsite` & `hasLocation`.
+- I filtri sui profili sono `verifiedOnly`, `blueVerifiedOnly`, `verifiedType`,
+  `bioContains`, `locationContains`, `usernameContains`, `hasWebsite` &
+  `hasLocation`.
 - L'Actor rimuove i duplicati tra i target prima di scrivere. Imposta
   `dedupeAcrossTargets: false` per tenerli.
 - Xquik non fattura mai le righe che il dataset rifiuta.
@@ -463,6 +467,26 @@ Ogni voce elenca i campi che usi già, poi il campo a cui corrispondono:
 - `minTweets`: `minStatuses`
 - `includeRawUser`: `includeRaw`
 - `outputVariant`: `outputMode`
+- `requireEmail`: `hasEmail`
+- `requireWebsite`: `hasWebsite`. Tiene un profilo con qualsiasi link nel campo
+  del sito web, & lo stato dell'esecuzione lo dice.
+- `onlyVerified`, `blue_verified_only`: `blueVerifiedOnly`. In un input con
+  `source_mode`, `blue_verified_only` non ha effetto.
+- `verification`: `any_verified` imposta `verifiedOnly`, `blue_verified` imposta
+  `blueVerifiedOnly`, `business` & `government` impostano `verifiedType`.
+  `unverified` ferma l'esecuzione prima di leggere o addebitare qualcosa.
+- `bioKeywords`: `bioContains`. Basta che corrisponda 1 dei termini.
+- `locationKeywords` con 1 valore: `locationContains`. Con più valori
+  l'esecuzione si ferma prima di leggere o addebitare qualcosa.
+- `emailDomains` come elenco: `emailDomains`
+- `outputEmail`, `resolveShortLinks`: nessun campo necessario. Ogni riga
+  contiene le sue email & i link completi di X.
+- `findEmails`, `extractEmails`: nessun campo. Le righe contengono le email che
+  un profilo pubblica su X. Lo stato dell'esecuzione dice che l'Actor non legge
+  nessun sito collegato.
+- `validateEmails`: nessun campo. Lo stato dell'esecuzione dice che le email
+  arrivano così come sono pubblicate, perché l'Actor non verifica nessuna
+  casella.
 
 Come si comporta un input incollato:
 

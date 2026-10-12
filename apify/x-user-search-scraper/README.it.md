@@ -59,6 +59,32 @@ Apify fattura a parte l'uso della piattaforma.
 Le esecuzioni piccole senza problemi saltano `run-report` & risparmiano uso di
 Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
 
+### Migra da un altro Actor di ricerca utenti
+
+Incolla l'input che usi già. X User Search Scraper di Xquik legge questi nomi di
+campo di altri Actor. Ogni voce elenca i loro campi, poi il campo a cui
+corrispondono:
+
+- `requireEmail`, `requireWebsite`: `hasEmail`, `hasWebsite`
+- `verification`: `any_verified` imposta `verifiedOnly`, `blue_verified` imposta
+  `blueVerifiedOnly`, `business` & `government` impostano `verifiedType`.
+  `unverified` ferma l'esecuzione prima di leggere o addebitare qualcosa.
+- `bioKeywords`: `bioContains`. Basta che corrisponda 1 dei termini.
+- `locationKeywords` con 1 valore: `locationContains`. Con più valori
+  l'esecuzione si ferma prima di leggere o addebitare qualcosa.
+- `emailDomains` come elenco: `emailDomains`
+- `outputEmail`, `resolveShortLinks`: nessun campo necessario. Ogni riga
+  contiene le sue email & i link completi di X.
+- `findEmails`, `extractEmails`: nessun campo. Le righe contengono le email che
+  un profilo pubblica su X. Lo stato dell'esecuzione dice che l'Actor non legge
+  nessun sito collegato.
+- `validateEmails`: nessun campo. Lo stato dell'esecuzione dice che le email
+  arrivano così come sono pubblicate, perché l'Actor non verifica nessuna
+  casella.
+
+Quando imposti uno di questi nomi & il suo campo canonico, vince il valore
+canonico. Il log dell'esecuzione nomina il campo scartato.
+
 ## Completamento automatico della ricerca
 
 Imposta `mode` su `autocomplete` per leggere cosa suggerisce X mentre qualcuno

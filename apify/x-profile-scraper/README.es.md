@@ -329,6 +329,7 @@ opcionales.
 | `minReplies`, `minRetweets`    | Conserva los posts sobre un mínimo de respuestas o reposts       |
 | `nativeRetweets`               | Conserva solo los reposts nativos                                |
 | `verifiedOnly`                 | Conserva autores o perfiles verificados                          |
+| `blueVerifiedOnly`             | Conserva autores o perfiles que X marca como verificados Blue    |
 | `minFollowers`, `maxFollowers` | Conserva los perfiles dentro de un rango de audiencia            |
 | `minAccountAgeDays`            | Conserva los perfiles con al menos estos días de antigüedad      |
 | `hasWebsite`, `hasLocation` | Conserva los perfiles que indican un sitio web o una ubicación |
@@ -348,6 +349,22 @@ campo al que se asignan:
 - `maxProfiles`, `maxResults`: `maxItems`
 - `shouldScrapeFollowers`, `shouldScrapeFollowings`: `includeFollowers`,
   `includeFollowing`
+- `requireEmail`: `hasEmail`
+- `requireWebsite`: `hasWebsite`. Conserva un perfil con cualquier enlace en su
+  campo de sitio web, y el estado de la ejecución lo indica.
+- `filterByBlueVerified`: `blueVerifiedOnly`. `false` detiene la ejecución antes
+  de leer o cobrar.
+- `bioKeywords`: `bioContains`. Basta con que coincida 1 de sus términos.
+- `locationKeywords` con 1 valor: `locationContains`. Con más valores, la
+  ejecución se detiene antes de leer o cobrar.
+- `emailDomains` como lista: `emailDomains`
+- `outputEmail`, `resolveShortLinks`: no necesitan campo. Cada fila incluye sus
+  correos y los enlaces completos de X.
+- `findEmails`, `extractEmails`: sin campo. Las filas incluyen los correos que
+  un perfil publica en X. El estado de la ejecución indica que el Actor no lee
+  ningún sitio enlazado.
+- `validateEmails`: sin campo. El estado de la ejecución indica que los correos
+  llegan tal como se publican, porque el Actor no verifica ningún buzón.
 
 `category` en `user_info` no cambia nada. Una categoría que es tarea de otro
 Actor, como `tweets` o `followers`, detiene la ejecución. No lee ni cobra nada.

@@ -326,6 +326,7 @@ Der Input-Tab zeigt jede Option. Gib mindestens 1 von `twitterHandles`,
 | `minReplies`, `minRetweets`    | Behält Posts ab einer Zahl an Antworten oder Reposts            |
 | `nativeRetweets`               | Behält nur native Reposts                                       |
 | `verifiedOnly`                 | Behält verifizierte Autoren oder Profile                        |
+| `blueVerifiedOnly`             | Behält Autoren & Profile, die X als Blue-verifiziert markiert   |
 | `minFollowers`, `maxFollowers` | Behält Profile in einem Follower-Bereich                        |
 | `minAccountAgeDays`            | Behält Profile, die mindestens so viele Tage alt sind           |
 | `hasWebsite`, `hasLocation` | Behält Profile, die eine Website oder einen Ort angeben |
@@ -345,6 +346,22 @@ Feld, dem der Actor sie zuordnet:
 - `maxProfiles`, `maxResults`: `maxItems`
 - `shouldScrapeFollowers`, `shouldScrapeFollowings`: `includeFollowers`,
   `includeFollowing`
+- `requireEmail`: `hasEmail`
+- `requireWebsite`: `hasWebsite`. Der Filter behält ein Profil mit einem
+  beliebigen Link im Website-Feld, & der Run-Status sagt das.
+- `filterByBlueVerified`: `blueVerifiedOnly`. `false` stoppt den Run, bevor er
+  etwas liest oder berechnet.
+- `bioKeywords`: `bioContains`. Es genügt, wenn 1 der Begriffe passt.
+- `locationKeywords` mit 1 Wert: `locationContains`. Mehr Werte stoppen den Run,
+  bevor er etwas liest oder berechnet.
+- `emailDomains` als Liste: `emailDomains`
+- `outputEmail`, `resolveShortLinks`: kein Feld nötig. Jeder Datensatz enthält
+  seine E-Mails & die vollständigen Links von X.
+- `findEmails`, `extractEmails`: kein Feld. Datensätze enthalten die E-Mails,
+  die ein Profil auf X veröffentlicht. Der Run-Status sagt, dass der Actor keine
+  verlinkte Website liest.
+- `validateEmails`: kein Feld. Der Run-Status sagt, dass E-Mails so kommen, wie
+  sie veröffentlicht sind, weil der Actor kein Postfach prüft.
 
 `category` auf `user_info` ändert nichts. Eine Kategorie, die die Aufgabe eines
 anderen Actors ist, etwa `tweets` oder `followers`, stoppt den Run. Er liest &

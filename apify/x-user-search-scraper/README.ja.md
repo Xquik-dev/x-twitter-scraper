@@ -49,6 +49,21 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 
 問題なく終わった小規模な実行は`run-report`を書き込まず、Apifyの利用料を節約します。毎回書き込むには`alwaysSaveRunRecords`をオンにしてください。
 
+### 他のユーザー検索用Actorから移行する
+
+今使っている入力をそのまま貼り付けてください。XquikのX User Search Scraperは、他のActorの次のフィールド名を読み取ります。各項目は、そのActorのフィールドを挙げ、その後に対応付け先のフィールドを示します。
+
+- `requireEmail`、`requireWebsite`: `hasEmail`、`hasWebsite`
+- `verification`: `any_verified` は `verifiedOnly` を、`blue_verified` は `blueVerifiedOnly` を、`business` と `government` は `verifiedType` を設定します。`unverified` を指定すると、読み取りや課金の前に実行が止まります。
+- `bioKeywords`: `bioContains`。語句のうち1つが一致すれば十分です。
+- 値が1つの `locationKeywords`: `locationContains`。値が2つ以上あると、読み取りや課金の前に実行が止まります。
+- リストとしての `emailDomains`: `emailDomains`
+- `outputEmail`、`resolveShortLinks`: フィールドは不要です。すべての行に、その行のメールアドレスとXの完全なリンクが含まれます。
+- `findEmails`、`extractEmails`: 対応するフィールドはありません。行には、プロフィールがX上で公開しているメールアドレスが含まれます。実行ステータスには、このActorがリンク先のサイトを読み取らないことが示されます。
+- `validateEmails`: 対応するフィールドはありません。このActorはメールボックスを確認しないため、実行ステータスには、メールアドレスが公開されているとおりに届くことが示されます。
+
+これらの名前のどれかと正規のフィールドの両方を設定した場合は、正規の値が優先されます。実行ログには、採用されなかったフィールドが記録されます。
+
 ## 検索のオートコンプリート
 
 検索語の入力中にXが提案する内容を読み取るには、`mode`を`autocomplete`に設定します。各検索語は、提案されたアカウント、トピック、ハッシュタグ、キャッシュタグを返します。

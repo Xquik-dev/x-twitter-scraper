@@ -326,6 +326,7 @@ Input sekmesi her seçeneği listeler. `twitterHandles`, `startUrls` veya
 | `minReplies`, `minRetweets`    | Yanıt veya yeniden gönderi sayısı eşiği aşan gönderileri tutar      |
 | `nativeRetweets`               | Yalnızca doğrudan yeniden gönderileri tutar                         |
 | `verifiedOnly`                 | Onaylı yazarları veya profilleri tutar                              |
+| `blueVerifiedOnly`             | X'in Blue onaylı işaretlediği yazarları veya profilleri tutar       |
 | `minFollowers`, `maxFollowers` | Belirli bir kitle aralığındaki profilleri tutar                     |
 | `minAccountAgeDays`            | En az bu kadar gün önce açılmış profilleri tutar                    |
 | `hasWebsite`, `hasLocation` | Web sitesi veya konum belirten profilleri tutar |
@@ -345,6 +346,22 @@ eşlendikleri alanı yazar:
 - `maxProfiles`, `maxResults`: `maxItems`
 - `shouldScrapeFollowers`, `shouldScrapeFollowings`: `includeFollowers`,
   `includeFollowing`
+- `requireEmail`: `hasEmail`
+- `requireWebsite`: `hasWebsite`. Web sitesi alanında herhangi bir bağlantı olan
+  profili tutar ve çalıştırma durumu bunu söyler.
+- `filterByBlueVerified`: `blueVerifiedOnly`. `false` çalıştırmayı hiçbir okuma
+  veya ücret olmadan durdurur.
+- `bioKeywords`: `bioContains`. Terimlerinden 1 tanesinin eşleşmesi yeter.
+- 1 değerli `locationKeywords`: `locationContains`. Daha fazla değer
+  çalıştırmayı hiçbir okuma veya ücret olmadan durdurur.
+- liste olarak `emailDomains`: `emailDomains`
+- `outputEmail`, `resolveShortLinks`: alan gerekmez. Her satır kendi
+  e-postalarını ve X'in tam bağlantılarını taşır.
+- `findEmails`, `extractEmails`: alan yok. Satırlar, profilin X'te yayımladığı
+  e-postaları taşır. Çalıştırma durumu, Actor'ın bağlantılı siteleri okumadığını
+  söyler.
+- `validateEmails`: alan yok. Actor posta kutusu denetlemediği için çalıştırma
+  durumu, e-postaların yayımlandığı gibi geldiğini söyler.
 
 `user_info` olarak ayarlanmış `category` hiçbir şeyi değiştirmez. `tweets` veya
 `followers` gibi başka bir Actor'ın işi olan bir kategori çalıştırmayı durdurur.

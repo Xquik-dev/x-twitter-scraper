@@ -70,7 +70,7 @@ Xquik 的 X Follower Scraper 返回关注者、正在关注的账号、列表和
 
 设置 `outputMode: "full"`，让每行包含最多的数据。X 发送时，每行最多保留 13 个名单字段，例如 `listedCount`、`defaultProfileImage` 和 `advertiserAccountType`。完整行把它们放在末尾。精简行更小，存储成本更低。
 
-`verifiedOnly` 接受公开的 Blue 认证和旧版认证个人资料。来源标记互相冲突时，按已认证处理。
+`verifiedOnly` 接受公开的 Blue 认证和旧版认证个人资料。来源标记互相冲突时，按已认证处理。`blueVerifiedOnly` 只保留 X 标记为 Blue 认证的个人资料。X 也会这样标记许多企业和政府账号。要只保留 1 种徽章类型，请设置 `verifiedType`。
 
 数据行从不包含仅对查看者可见的状态。Xquik 会移除关注、屏蔽、隐藏、私信、通知等查看者标记。原始输出同样不含这些标记。
 
@@ -257,7 +257,7 @@ Xquik 的 X Follower Scraper 在所有 Apify 套餐上都按每条已交付个�
 
 - 过滤在个人资料进入数据集之前进行，所以被过滤的行不收费。
 - 数字过滤条件有 `minFollowers`、`maxFollowers`、`minFollowing`、`maxFollowing`、`minStatuses`、`maxStatuses` 和 `minAccountAgeDays`。
-- 个人资料过滤条件有 `verifiedOnly`、`verifiedType`、`bioContains`、`locationContains`、`usernameContains`、`hasWebsite` 和 `hasLocation`。
+- 个人资料过滤条件有 `verifiedOnly`、`blueVerifiedOnly`、`verifiedType`、`bioContains`、`locationContains`、`usernameContains`、`hasWebsite` 和 `hasLocation`。
 - 该 Actor 在写入前移除跨目标的重复项。设置 `dedupeAcrossTargets: false` 可以保留它们。
 - Xquik 从不对数据集拒收的行计费。
 - `diagnostics` 输出中的诊断信息免费。
@@ -331,6 +331,16 @@ Console 表单有以下控件：
 - `minTweets`：`minStatuses`
 - `includeRawUser`：`includeRaw`
 - `outputVariant`：`outputMode`
+- `requireEmail`：`hasEmail`
+- `requireWebsite`：`hasWebsite`。它会保留网站字段中有任意链接的个人资料，运行状态会说明这一点。
+- `onlyVerified`、`blue_verified_only`：`blueVerifiedOnly`。输入中带有 `source_mode` 时，`blue_verified_only` 不起作用。
+- `verification`：`any_verified` 设置 `verifiedOnly`，`blue_verified` 设置 `blueVerifiedOnly`，`business` 和 `government` 设置 `verifiedType`。`unverified` 会让运行在读取或计费前停止。
+- `bioKeywords`：`bioContains`。只要匹配其中 1 个词即可。
+- 只含 1 个值的 `locationKeywords`：`locationContains`。值更多时，运行会在读取或计费前停止。
+- 列表形式的 `emailDomains`：`emailDomains`
+- `outputEmail`、`resolveShortLinks`：不需要字段。每一行都包含它的邮箱和 X 的完整链接。
+- `findEmails`、`extractEmails`：没有对应字段。每一行包含个人资料在 X 上公开的邮箱。运行状态会说明该 Actor 不读取链接的网站。
+- `validateEmails`：没有对应字段。该 Actor 不验证邮箱，因此运行状态会说明邮箱按公开的原样提供。
 
 粘贴的输入会这样处理：
 

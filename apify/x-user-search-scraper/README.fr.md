@@ -60,6 +60,31 @@ livré**, et Apify facture l'usage de la plateforme à part.
 Les petits runs sans problème n'écrivent pas `run-report` et réduisent l'usage
 Apify. Activez `alwaysSaveRunRecords` pour l'écrire à chaque run.
 
+### Migrer depuis un autre Actor de recherche d'utilisateurs
+
+Collez l'entrée que vous utilisez déjà. X User Search Scraper de Xquik lit ces
+noms de champs d'autres Actors. Chaque ligne nomme leurs champs, puis le champ
+auquel ils correspondent :
+
+- `requireEmail`, `requireWebsite` : `hasEmail`, `hasWebsite`
+- `verification` : `any_verified` règle `verifiedOnly`, `blue_verified` règle
+  `blueVerifiedOnly`, `business` et `government` règlent `verifiedType`.
+  `unverified` arrête le run avant toute lecture ou facturation.
+- `bioKeywords` : `bioContains`. Il suffit que 1 de ses termes corresponde.
+- `locationKeywords` avec 1 valeur : `locationContains`. Avec plus de valeurs,
+  le run s'arrête avant toute lecture ou facturation.
+- `emailDomains` en liste : `emailDomains`
+- `outputEmail`, `resolveShortLinks` : aucun champ nécessaire. Chaque ligne
+  contient ses e-mails et les liens complets de X.
+- `findEmails`, `extractEmails` : aucun champ. Les lignes contiennent les
+  e-mails qu'un profil publie sur X. Le statut du run indique que l'Actor ne lit
+  aucun site lié.
+- `validateEmails` : aucun champ. Le statut du run indique que les e-mails
+  arrivent tels que publiés, car l'Actor ne vérifie aucune boîte mail.
+
+Si vous réglez l'un de ces noms et son champ canonique, la valeur canonique
+l'emporte. Le log du run nomme le champ écarté.
+
 ## Autocomplétion de recherche
 
 Réglez `mode` sur `autocomplete` pour lire ce que X suggère pendant la saisie.

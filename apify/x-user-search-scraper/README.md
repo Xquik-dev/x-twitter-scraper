@@ -63,6 +63,29 @@ usage separately.
 Small runs that go well skip `run-report` & save Apify usage. Turn on
 `alwaysSaveRunRecords` to write it on every run.
 
+### Migrate from another user search Actor
+
+Paste the input you already use. Xquik's X User Search Scraper reads these field
+names of other Actors. Each line names their fields, then the field they map to:
+
+- `requireEmail`, `requireWebsite`: `hasEmail`, `hasWebsite`
+- `verification`: `any_verified` sets `verifiedOnly`, `blue_verified` sets
+  `blueVerifiedOnly`, `business` & `government` set `verifiedType`. `unverified`
+  stops the run before any read or charge.
+- `bioKeywords`: `bioContains`. Any 1 of its terms may match.
+- `locationKeywords` with 1 value: `locationContains`. More values stop the run
+  before any read or charge.
+- `emailDomains` as a list: `emailDomains`
+- `outputEmail`, `resolveShortLinks`: no field needed. Every row carries its
+  emails & X's full links.
+- `findEmails`, `extractEmails`: no field. Rows carry the emails a profile
+  publishes on X. The run status says the Actor reads no linked site.
+- `validateEmails`: no field. The run status says emails come as published,
+  since the Actor checks no mailbox.
+
+When you set one of these names & its canonical field, the canonical value wins.
+The run log names the field that lost.
+
 ## Search autocomplete
 
 Set `mode` to `autocomplete` to read what X suggests while someone types. Each

@@ -270,6 +270,7 @@ Input 标签页列出了所有选项。`twitterHandles`、`startUrls` 和 `userI
 | `minReplies`, `minRetweets`    | 只保留回复数或转帖数高于设定值的帖子        |
 | `nativeRetweets`               | 只保留原生转帖                              |
 | `verifiedOnly`                 | 只保留已认证的作者或个人资料                |
+| `blueVerifiedOnly`             | 只保留 X 标记为 Blue 认证的作者或个人资料   |
 | `minFollowers`, `maxFollowers` | 只保留受众规模在范围内的个人资料            |
 | `minAccountAgeDays`            | 只保留账号年龄至少达到该天数的个人资料      |
 | `hasWebsite`, `hasLocation` | 只保留填写了网站或位置的个人资料 |
@@ -285,6 +286,15 @@ Input 标签页列出了所有选项。`twitterHandles`、`startUrls` 和 `userI
 - `urls`、`profileUrls`：`startUrls`
 - `maxProfiles`、`maxResults`：`maxItems`
 - `shouldScrapeFollowers`、`shouldScrapeFollowings`：`includeFollowers`、`includeFollowing`
+- `requireEmail`：`hasEmail`
+- `requireWebsite`：`hasWebsite`。它会保留网站字段中有任意链接的个人资料，运行状态会说明这一点。
+- `filterByBlueVerified`：`blueVerifiedOnly`。`false` 会让运行在读取或计费前停止。
+- `bioKeywords`：`bioContains`。只要匹配其中 1 个词即可。
+- 只含 1 个值的 `locationKeywords`：`locationContains`。值更多时，运行会在读取或计费前停止。
+- 列表形式的 `emailDomains`：`emailDomains`
+- `outputEmail`、`resolveShortLinks`：不需要字段。每一行都包含它的邮箱和 X 的完整链接。
+- `findEmails`、`extractEmails`：没有对应字段。每一行包含个人资料在 X 上公开的邮箱。运行状态会说明该 Actor 不读取链接的网站。
+- `validateEmails`：没有对应字段。该 Actor 不验证邮箱，因此运行状态会说明邮箱按公开的原样提供。
 
 设为 `user_info` 的 `category` 不会改变任何行为。属于其他 Actor 职责的类别，例如 `tweets` 或 `followers`，会让运行停止，不读取也不计费。提示信息会写明应使用的 Actor。同时设置别名和它的标准字段时，以标准字段的值为准。运行日志会写明被忽略的别名。
 

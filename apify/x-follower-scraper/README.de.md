@@ -100,7 +100,9 @@ Speicher.
 
 `verifiedOnly` akzeptiert öffentliche Profile mit Blue- oder
 Legacy-Verifizierung. Widersprechen sich Quell-Flags, gewinnt der echte
-Verifizierungsstatus.
+Verifizierungsstatus. `blueVerifiedOnly` behält die Profile, die X als
+Blue-verifiziert markiert. X markiert auch viele Unternehmens- & Behördenkonten
+so. Setze `verifiedType`, um 1 Badge-Typ zu behalten.
 
 Datensätze enthalten nie Angaben, die nur den Betrachter betreffen. Xquik
 entfernt Flags für Folgen, Blockieren, Stummschalten, Direktnachrichten,
@@ -330,8 +332,9 @@ alle Ziele exakt.
   kosten also nichts.
 - Zahlenfilter sind `minFollowers`, `maxFollowers`, `minFollowing`,
   `maxFollowing`, `minStatuses`, `maxStatuses` & `minAccountAgeDays`.
-- Profilfilter sind `verifiedOnly`, `verifiedType`, `bioContains`,
-  `locationContains`, `usernameContains`, `hasWebsite` & `hasLocation`.
+- Profilfilter sind `verifiedOnly`, `blueVerifiedOnly`, `verifiedType`,
+  `bioContains`, `locationContains`, `usernameContains`, `hasWebsite` &
+  `hasLocation`.
 - Der Actor entfernt Wiederholungen über Ziele hinweg vor dem Schreiben. Setze
   `dedupeAcrossTargets: false`, um sie zu behalten.
 - Xquik berechnet nie Datensätze, die das Dataset ablehnt.
@@ -473,6 +476,25 @@ sie zuordnet:
 - `minTweets`: `minStatuses`
 - `includeRawUser`: `includeRaw`
 - `outputVariant`: `outputMode`
+- `requireEmail`: `hasEmail`
+- `requireWebsite`: `hasWebsite`. Der Filter behält ein Profil mit einem
+  beliebigen Link im Website-Feld, & der Run-Status sagt das.
+- `onlyVerified`, `blue_verified_only`: `blueVerifiedOnly`. In einer Eingabe mit
+  `source_mode` bleibt `blue_verified_only` ohne Wirkung.
+- `verification`: `any_verified` setzt `verifiedOnly`, `blue_verified` setzt
+  `blueVerifiedOnly`, `business` & `government` setzen `verifiedType`.
+  `unverified` stoppt den Run, bevor er etwas liest oder berechnet.
+- `bioKeywords`: `bioContains`. Es genügt, wenn 1 der Begriffe passt.
+- `locationKeywords` mit 1 Wert: `locationContains`. Mehr Werte stoppen den Run,
+  bevor er etwas liest oder berechnet.
+- `emailDomains` als Liste: `emailDomains`
+- `outputEmail`, `resolveShortLinks`: kein Feld nötig. Jeder Datensatz enthält
+  seine E-Mails & die vollständigen Links von X.
+- `findEmails`, `extractEmails`: kein Feld. Datensätze enthalten die E-Mails,
+  die ein Profil auf X veröffentlicht. Der Run-Status sagt, dass der Actor keine
+  verlinkte Website liest.
+- `validateEmails`: kein Feld. Der Run-Status sagt, dass E-Mails so kommen, wie
+  sie veröffentlicht sind, weil der Actor kein Postfach prüft.
 
 So verhält sich eine eingefügte Eingabe:
 

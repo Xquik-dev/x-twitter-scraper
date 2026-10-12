@@ -95,7 +95,9 @@ list fields when X sends them, such as `listedCount`, `defaultProfileImage` &
 smaller & cost less to store.
 
 `verifiedOnly` accepts public Blue & legacy verified profiles. If source flags
-conflict, the true verification state wins.
+conflict, the true verification state wins. `blueVerifiedOnly` keeps the
+profiles X marks as blue verified. X marks many business & government accounts
+blue too. Set `verifiedType` to keep 1 badge type.
 
 Rows never include viewer-only state. Xquik removes follow, block, mute, DM,
 notification & similar viewer flags. Raw output drops them too.
@@ -312,8 +314,9 @@ them.
   nothing.
 - Number filters are `minFollowers`, `maxFollowers`, `minFollowing`,
   `maxFollowing`, `minStatuses`, `maxStatuses` & `minAccountAgeDays`.
-- Profile filters are `verifiedOnly`, `verifiedType`, `bioContains`,
-  `locationContains`, `usernameContains`, `hasWebsite` & `hasLocation`.
+- Profile filters are `verifiedOnly`, `blueVerifiedOnly`, `verifiedType`,
+  `bioContains`, `locationContains`, `usernameContains`, `hasWebsite` &
+  `hasLocation`.
 - The Actor removes repeats across targets before writing. Set
   `dedupeAcrossTargets: false` to keep them.
 - Xquik never bills rows the dataset rejects.
@@ -446,6 +449,24 @@ Each line names the fields you already use, then the field they map to:
 - `minTweets`: `minStatuses`
 - `includeRawUser`: `includeRaw`
 - `outputVariant`: `outputMode`
+- `requireEmail`: `hasEmail`
+- `requireWebsite`: `hasWebsite`. It keeps a profile with any link in its
+  website field, & the run status says so.
+- `onlyVerified`, `blue_verified_only`: `blueVerifiedOnly`. An input with
+  `source_mode` leaves `blue_verified_only` without effect.
+- `verification`: `any_verified` sets `verifiedOnly`, `blue_verified` sets
+  `blueVerifiedOnly`, `business` & `government` set `verifiedType`. `unverified`
+  stops the run before any read or charge.
+- `bioKeywords`: `bioContains`. Any 1 of its terms may match.
+- `locationKeywords` with 1 value: `locationContains`. More values stop the run
+  before any read or charge.
+- `emailDomains` as a list: `emailDomains`
+- `outputEmail`, `resolveShortLinks`: no field needed. Every row carries its
+  emails & X's full links.
+- `findEmails`, `extractEmails`: no field. Rows carry the emails a profile
+  publishes on X. The run status says the Actor reads no linked site.
+- `validateEmails`: no field. The run status says emails come as published,
+  since the Actor checks no mailbox.
 
 How a pasted input behaves:
 

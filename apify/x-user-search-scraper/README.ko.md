@@ -59,6 +59,30 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 문제없이 끝난 작은 실행은 `run-report`를 건너뛰어 Apify 사용량을 아낍니다. 모든
 실행에서 보고서를 기록하려면 `alwaysSaveRunRecords`를 켜세요.
 
+### 다른 사용자 검색 Actor에서 옮겨오기
+
+이미 쓰는 입력을 그대로 붙여넣으세요. Xquik의 X User Search Scraper는 다른
+Actor의 다음 필드 이름을 읽습니다. 각 줄은 그쪽 필드를 먼저 적고, 이어서
+연결되는 필드를 적습니다.
+
+- `requireEmail`, `requireWebsite`: `hasEmail`, `hasWebsite`
+- `verification`: `any_verified`는 `verifiedOnly`를, `blue_verified`는
+  `blueVerifiedOnly`를, `business` & `government`는 `verifiedType`을 설정합니다.
+  `unverified`는 읽기나 과금 전에 실행을 멈춥니다.
+- `bioKeywords`: `bioContains`. 용어 중 1개만 일치하면 됩니다.
+- 값이 1개인 `locationKeywords`: `locationContains`. 값이 더 많으면 읽기나 과금
+  전에 실행이 멈춥니다.
+- 목록으로 보낸 `emailDomains`: `emailDomains`
+- `outputEmail`, `resolveShortLinks`: 필드가 필요 없습니다. 모든 행에 해당
+  이메일 & X의 전체 링크가 들어 있습니다.
+- `findEmails`, `extractEmails`: 필드 없음. 행에는 프로필이 X에 공개한 이메일이
+  들어 있습니다. 실행 상태가 이 Actor는 연결된 사이트를 읽지 않는다고 알립니다.
+- `validateEmails`: 필드 없음. 이 Actor는 메일함을 확인하지 않으므로 실행 상태가
+  이메일이 공개된 그대로 나온다고 알립니다.
+
+이 이름 중 하나 & 표준 필드를 함께 설정하면 표준 필드 값을 씁니다. 실행 로그에
+무시된 필드가 나옵니다.
+
 ## 검색 자동 완성
 
 누군가 입력하는 동안 X가 추천하는 내용을 읽으려면 `mode`를 `autocomplete`로

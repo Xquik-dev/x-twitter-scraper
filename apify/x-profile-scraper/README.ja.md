@@ -271,6 +271,7 @@ Inputタブにすべてのオプションがあります。`twitterHandles`、`s
 | `minReplies`, `minRetweets`    | 返信数かリポスト数が一定以上のポストを残す    |
 | `nativeRetweets`               | 通常のリポストだけを残す                      |
 | `verifiedOnly`                 | 認証済みの著者やプロフィールだけを残す        |
+| `blueVerifiedOnly`             | XがBlue認証済みと示す著者やプロフィールを残す |
 | `minFollowers`, `maxFollowers` | フォロワー数が範囲内のプロフィールを残す      |
 | `minAccountAgeDays`            | 作成からこの日数以上たったプロフィールを残す  |
 | `hasWebsite`, `hasLocation` | ウェブサイトまたは所在地を記載したプロフィールを残す |
@@ -286,6 +287,15 @@ Inputタブにすべてのオプションがあります。`twitterHandles`、`s
 - `urls`、`profileUrls`: `startUrls`
 - `maxProfiles`、`maxResults`: `maxItems`
 - `shouldScrapeFollowers`、`shouldScrapeFollowings`: `includeFollowers`、`includeFollowing`
+- `requireEmail`: `hasEmail`
+- `requireWebsite`: `hasWebsite`。ウェブサイト欄にリンクが1つでもあるプロフィールを残し、実行ステータスにその旨が示されます。
+- `filterByBlueVerified`: `blueVerifiedOnly`。`false` を指定すると、読み取りや課金の前に実行が止まります。
+- `bioKeywords`: `bioContains`。語句のうち1つが一致すれば十分です。
+- 値が1つの `locationKeywords`: `locationContains`。値が2つ以上あると、読み取りや課金の前に実行が止まります。
+- リストとしての `emailDomains`: `emailDomains`
+- `outputEmail`、`resolveShortLinks`: フィールドは不要です。すべての行に、その行のメールアドレスとXの完全なリンクが含まれます。
+- `findEmails`、`extractEmails`: 対応するフィールドはありません。行には、プロフィールがX上で公開しているメールアドレスが含まれます。実行ステータスには、このActorがリンク先のサイトを読み取らないことが示されます。
+- `validateEmails`: 対応するフィールドはありません。このActorはメールボックスを確認しないため、実行ステータスには、メールアドレスが公開されているとおりに届くことが示されます。
 
 `user_info` に設定した `category` は、何も変えません。`tweets` や `followers` など、他のActorの役割にあたるカテゴリーは実行を止めます。何も読み取らず、課金もしません。メッセージには、使うべきActorが示されます。別名と正規のフィールドの両方を設定した場合は、正規の値が優先されます。実行ログには、採用されなかった別名が記録されます。
 

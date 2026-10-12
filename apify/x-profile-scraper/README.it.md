@@ -324,6 +324,7 @@ La scheda Input elenca ogni opzione. Indica almeno 1 tra `twitterHandles`,
 | `minReplies`, `minRetweets`    | Tiene i post sopra un numero di risposte o repost               |
 | `nativeRetweets`               | Tiene solo i repost nativi                                      |
 | `verifiedOnly`                 | Tiene autori o profili verificati                               |
+| `blueVerifiedOnly`             | Tiene autori o profili che X segna come verificati Blue         |
 | `minFollowers`, `maxFollowers` | Tiene i profili in una fascia di pubblico                       |
 | `minAccountAgeDays`            | Tiene i profili con almeno questa età in giorni                 |
 | `hasWebsite`, `hasLocation` | Tiene i profili che indicano un sito web o una località |
@@ -343,6 +344,23 @@ cui corrispondono:
 - `maxProfiles`, `maxResults`: `maxItems`
 - `shouldScrapeFollowers`, `shouldScrapeFollowings`: `includeFollowers`,
   `includeFollowing`
+- `requireEmail`: `hasEmail`
+- `requireWebsite`: `hasWebsite`. Tiene un profilo con qualsiasi link nel campo
+  del sito web, & lo stato dell'esecuzione lo dice.
+- `filterByBlueVerified`: `blueVerifiedOnly`. `false` ferma l'esecuzione prima
+  di leggere o addebitare qualcosa.
+- `bioKeywords`: `bioContains`. Basta che corrisponda 1 dei termini.
+- `locationKeywords` con 1 valore: `locationContains`. Con più valori
+  l'esecuzione si ferma prima di leggere o addebitare qualcosa.
+- `emailDomains` come elenco: `emailDomains`
+- `outputEmail`, `resolveShortLinks`: nessun campo necessario. Ogni riga
+  contiene le sue email & i link completi di X.
+- `findEmails`, `extractEmails`: nessun campo. Le righe contengono le email che
+  un profilo pubblica su X. Lo stato dell'esecuzione dice che l'Actor non legge
+  nessun sito collegato.
+- `validateEmails`: nessun campo. Lo stato dell'esecuzione dice che le email
+  arrivano così come sono pubblicate, perché l'Actor non verifica nessuna
+  casella.
 
 `category` impostato su `user_info` non cambia nulla. Una categoria che è
 compito di un altro Actor, come `tweets` o `followers`, ferma l'esecuzione. Non
