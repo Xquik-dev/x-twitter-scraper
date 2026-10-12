@@ -229,6 +229,10 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Antworten, Zitate, Reposter & Threads zu Post-URLs oder -IDs in großen Mengen.
   Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015 pro
   Datensatz.
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
+  Scrapt die Posts, die Posts zitieren, mit Text, Medien, Zahlen, Autoren & 11
+  Filtern. Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was gesagt
+  wurde. Ab $0.00015 pro Post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Scrapt
   Follower, gefolgte Accounts, Listenmitglieder, Abonnenten &
   Community-Mitglieder als Profil-Datensätze. Nutze ihn, wenn du Zielgruppen-

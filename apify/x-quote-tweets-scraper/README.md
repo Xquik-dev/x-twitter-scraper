@@ -221,6 +221,10 @@ diagnostics. Pick the one that matches the data you need.
   Searches users by handle, bio & location with follower, verification, age &
   location filters. Use it when you build account lists from search. From
   $0.00015 per profile.
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
+  Checks where accounts are based with X's Account based in label, connected via
+  & username changes. Use it when you vet where accounts are based. From
+  $0.00015 per account.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): Scrapes List posts,
   members & followers from List URLs or IDs. Use it when a curated List defines
   your sources. From $0.00015 per row.

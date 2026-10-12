@@ -231,6 +231,11 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay, hesap
   yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri oluşturduğunda
   kullan. Profil başına $0.00015'ten başlar.
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
+  X'in "Account based in" etiketi, X'e nasıl bağlandıkları ve kullanıcı adı
+  değişiklikleriyle hesapların nerede bulunduğunu kontrol eder. Hesapların
+  nerede bulunduğunu doğrulaman gerektiğinde kullan. Hesap başına $0.00015'ten
+  başlar.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): Liste URL'lerinden
   veya ID'lerinden Liste gönderilerini, üyelerini ve takipçilerini kazır.
   Kaynaklarını özenle seçilmiş bir Liste belirlediğinde kullan. Satır başına

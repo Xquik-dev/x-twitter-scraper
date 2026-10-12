@@ -234,6 +234,10 @@ données dont vous avez besoin.
   en masse les réponses, citations, comptes qui ont reposté et discussions de
   posts, à partir d'URL ou d'ID. Utilisez-le pour mesurer qui a interagi avec
   des posts. À partir de $0.00015 par ligne.
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper) :
+  scrape les posts qui citent des posts, avec le texte, les médias, les
+  compteurs, les auteurs et 11 filtres. Utilisez-le quand vous étudiez qui a
+  cité des posts et ce qu'ils ont dit. À partir de $0.00015 par post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) : scrape les
   abonnés, les abonnements, les membres et abonnés de Liste et les membres de
   Communauté sous forme de lignes de profil. Utilisez-le quand vous avez besoin

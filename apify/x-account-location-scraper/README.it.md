@@ -226,6 +226,10 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   risposte, citazioni, utenti che hanno fatto repost & thread da URL o ID di
   post in blocco. Usalo quando misuri chi ha interagito con i post. Da $0.00015
   per riga.
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
+  estrae i post che citano altri post, con testo, media, conteggi, autori & 11
+  filtri. Usalo quando studi chi ha citato dei post & cosa ha detto. Da $0.00015
+  per post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): estrae
   follower, following, membri & follower delle liste e membri delle community
   come righe di profilo. Usalo quando ti servono elenchi di pubblico o di

@@ -170,6 +170,10 @@ diagnostics. Pick the one that matches the data you need.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Scrapes
   replies, quotes, retweeters & threads for post URLs or IDs in bulk. Use it
   when you measure who engaged with posts. From $0.00015 per row.
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
+  Scrapes the quote tweets of posts with text, media, counts, authors & 11
+  filters. Use it when you study who quoted posts & what they said. From
+  $0.00015 per tweet.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Scrapes
   followers, following, List members, subscribers & Community members as profile
   rows. Use it when you need audience or member lists. From $0.00015 per
@@ -178,6 +182,10 @@ diagnostics. Pick the one that matches the data you need.
   Searches users by handle, bio & location with follower, verification, age &
   location filters. Use it when you build account lists from search. From
   $0.00015 per profile.
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
+  Checks where accounts are based with X's Account based in label, connected via
+  & username changes. Use it when you vet where accounts are based. From
+  $0.00015 per account.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): Scrapes List posts,
   members & followers from List URLs or IDs. Use it when a curated List defines
   your sources. From $0.00015 per row.

@@ -231,6 +231,11 @@ données dont vous avez besoin.
   filtres d'abonnés, de certification, d'ancienneté et de localisation.
   Utilisez-le pour créer des listes de comptes à partir d'une recherche. À
   partir de $0.00015 par profil.
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper) :
+  vérifie où sont basés les comptes avec le libellé "Account based in" de X, la
+  façon dont ils se sont connectés à X et leurs changements de nom
+  d'utilisateur. Utilisez-le quand vous vérifiez où sont basés des comptes. À
+  partir de $0.00015 par compte.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper) : scrape les posts,
   membres et abonnés d'une Liste à partir d'URL ou d'ID de Liste. Utilisez-le
   quand une Liste choisie définit vos sources. À partir de $0.00015 par ligne.
