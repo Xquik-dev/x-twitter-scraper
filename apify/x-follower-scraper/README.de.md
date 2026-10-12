@@ -459,14 +459,42 @@ sie zuordnet:
 - `profileUrl`, als einzelner String: `startUrls`
 - `getFollowers`, `getFollowing`: `relations`
 - `type` mit `followers` oder `following`: `relation`
-- `maxResults`, `max_results`, `resultsLimit`, `count`: `maxItems`
+- `relationship`, `relationshipType`, `listType`, `scrape_type`: `relation`
+- `relationships`: `relations`
+- `mode` mit `followers`, `following` oder `both`: `relation` oder `relations`
+- `category` mit `followers`, `following` oder `affiliates`: `relation`
+- `profile_urls`: `startUrls` für Links, `twitterHandles` für Nutzernamen
+- `maxResults`, `max_results`, `resultsLimit`, `count`, `max_items`: `maxItems`
+- `per_profile_limit`, `maxItemsPerUser`, `maxUsersPerAccount`,
+  `max_followers_per_user`, `max_following_per_user`, `follower_limit`:
+  `maxItemsPerTarget`. 0 setzt keine Obergrenze pro Account.
+  `max_following_per_user` setzt außerdem `relation` auf `following`.
 - `scrapeAllResults`: keine Obergrenze pro Ziel
+- `minTweets`: `minStatuses`
+- `includeRawUser`: `includeRaw`
+- `outputVariant`: `outputMode`
+
+So verhält sich eine eingefügte Eingabe:
+
+- Eine Liste, die mit anderen Worten benannt ist, liest der Actor als seinen
+  eigenen Namen dafür. `followings`, `Verified Followers` & `verifiedFollowers`
+  liest er als `following` & `verified_followers`, auch in `relation`.
+- Setzt du einen Alias & sein kanonisches Feld, gewinnt der kanonische Wert. Das
+  Run-Log nennt den Alias, der verloren hat.
+- Eine Liste, die der Actor nicht liest, etwa `mutuals`, stoppt den Run, bevor
+  er etwas liest oder berechnet.
+- Ein Modus, der die Aufgabe eines anderen Actors ist, stoppt den Run genauso.
+  Bei `source_mode` sind das `search` & `profiles`. Bei `mode` sind das
+  `profiles` & `all`. Bei `category` ist das eine Aufgabe wie `tweets`,
+  `user_info` oder `replies`. Die Meldung nennt den Actor, den du nutzen sollst.
 
 2 Namen bedeuten hier etwas anderes. In manchen Actors begrenzen `maxFollowers`
 & `maxFollowing`, wie viele Datensätze ein Run liefert. In X Follower Scraper
 von Xquik filtern sie Profile nach ihrer Zahl an Followern & gefolgten Accounts.
-Nutze `maxItems`, um Datensätze zu begrenzen. Der Actor hat keine Seiteneinheit.
-Ersetze also `maxPages` durch `maxItems`.
+Nutze `maxItems`, um Datensätze zu begrenzen. Ein Run, der `maxFollowers` &
+keine Obergrenze für Datensätze setzt, sagt in seinem Log & im letzten Status,
+dass er Accounts gefiltert hat. Der Actor hat keine Seiteneinheit. Ersetze also
+`maxPages` durch `maxItems`.
 
 ### Immer den neuesten Build verwenden
 

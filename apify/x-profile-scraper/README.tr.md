@@ -333,6 +333,25 @@ Input sekmesi her seçeneği listeler. `twitterHandles`, `startUrls` veya
 | `locationContains` | Konumunda bu metin geçen profilleri tutar |
 | `dedupeAcrossTargets`          | Profiller arasında tekrar eden satırları faturalamadan önce çıkarır |
 
+### Başka bir profil Actor'ından geçiş yap
+
+Zaten kullandığın girdiyi yapıştır. Xquik'in X Profile Scraper'ı, diğer profil
+Actor'larının şu alan adlarını okur. Her satır önce onların alanlarını, sonra
+eşlendikleri alanı yazar:
+
+- `profiles`, `userNames`, `usernames`, `handles`, `screenNames`:
+  `twitterHandles`
+- `urls`, `profileUrls`: `startUrls`
+- `maxProfiles`, `maxResults`: `maxItems`
+- `shouldScrapeFollowers`, `shouldScrapeFollowings`: `includeFollowers`,
+  `includeFollowing`
+
+`user_info` olarak ayarlanmış `category` hiçbir şeyi değiştirmez. `tweets` veya
+`followers` gibi başka bir Actor'ın işi olan bir kategori çalıştırmayı durdurur.
+Hiçbir şey okunmaz ve ücretlendirilmez. Mesaj, kullanman gereken Actor'ı yazar.
+Bir takma adı ve kanonik alanını birlikte ayarlarsan kanonik değer geçerli olur.
+Çalıştırma günlüğü geçersiz kalan takma adı yazar.
+
 ### Doğru girdileri seç
 
 - Yalnızca profil kartı için kullanıcı adlarını gir ve tüm `include`

@@ -258,6 +258,10 @@ Input 标签页列出了所有选项。请提供社群 URL 或 ID、关键词、
 | `minAccountAgeDays`            | 只保留账号年龄不少于指定天数的成员                           |
 | `dedupeAcrossTargets`          | 计费前去除跨社群重复的行                                     |
 
+### 从其他社群 Actor 迁移
+
+`ranking` 和 `sort` 这两个名称与 `postsOrder` 的作用相同。`Top` 或 `Relevance` 读取排名最高的帖子。同时设置其中一个和 `postsOrder` 时，以 `postsOrder` 的值为准。运行日志会写明被忽略的字段。
+
 ### 选择合适的输入
 
 - 想快速了解社群，保留默认的 `info` 和 `tweets` 资源。

@@ -289,16 +289,31 @@ match for 1 target."처럼 그 대상을 알려 줍니다. 다른 원인으로 �
 
 다음 별칭은 다른 스크레이퍼에서 흔히 쓰는 필드 이름을 받습니다.
 
-- URL 별칭: `urls`, `tweetUrls`, `postUrls`, `profileUrls`
+- URL 별칭: `urls`, `tweetUrls`, `postUrls`, `profileUrls` & 문자열 1개인
+  `twitterUrl`
 - ID 별칭: `conversationIds`, `postIds`, `ids`, `tweetId`, `id`
 - 사용자 아이디 별칭: `twitterHandles`, `screenname`
 - 전체 한도 별칭: `maxResults`, `max_results`, `resultsLimit`,
   `maxReplies`
-- 대상별 별칭: `maxRepliesPerTweet`, `maxCommentsPerPost`
+- 대상별 별칭: `maxRepliesPerTweet`, `maxCommentsPerPost`, `resultsPerCategory`
 - 검색 별칭: `useSearch`
 - 중첩 답글 별칭: `includeNestedReplies`, `includeRepliesOfReplies`
-- 원본 게시물 별칭: `includeOriginalTweet`
+- 깊이 별칭: `maxDepth`에 해당하는 `1`, `2` 또는 `3` 값의 `depth`. `full`은
+  한도를 두지 않습니다.
+- 범위 별칭: `scope: "direct"`에 해당하는 `onlyDirectReplies`
+- 원본 게시물 별칭: `includeOriginalTweet`, `includeSourceTweet`.
+  `includeSourceTweet`를 쓰면 `resultsPerCategory`는 답글 수의 상한이고 게시물은
+  행 1개가 더 붙습니다.
+- 작성자 별칭: `excludeOriginalAuthor`에 해당하는 `excludeOpSelfReplies`
+- 정렬 별칭: `sort`에 해당하는 `sortBy` & `queryType`. `top`, `newest` &
+  `mostLiked`는 `relevance`, `latest` & `likes`로 읽습니다.
 - 출력 별칭: `outputVariant`, `includeRaw`
+
+`replies`로 설정한 `category`는 아무것도 바꾸지 않습니다. `retweets`나
+`info`처럼 다른 Actor가 하는 일을 가리키는 카테고리는 실행을 멈춥니다. 아무것도
+읽거나 과금하지 않습니다. 메시지가 써야 할 Actor를 알려 줍니다. 이 별칭 중 하나
+& 표준 필드를 함께 설정하면 표준 필드 값을 씁니다. 실행 로그에 무시된 별칭이
+나옵니다.
 
 형식이 잘못됐거나 지원하지 않는 대상이 있어도 Actor는 실패하지 않습니다. 유효한
 대상이 하나도 남지 않으면 실행은 해결 방법이 담긴 진단을 기록합니다.

@@ -318,6 +318,13 @@ demás campos son opcionales.
 | `minAccountAgeDays`            | Conserva miembros con una antigüedad mínima en días                           |
 | `dedupeAcrossTargets`          | Quita las filas repetidas entre Comunidades antes de facturar                 |
 
+### Migra desde otro Actor de Comunidades
+
+Los nombres `ranking` y `sort` funcionan como `postsOrder`. `Top` o `Relevance`
+lee los posts que X mejor posiciona. Si defines uno de ellos y `postsOrder`,
+gana el valor de `postsOrder`. El registro de la ejecución nombra el campo que
+perdió.
+
 ### Elige las entradas correctas
 
 - Para un vistazo rápido, mantén los recursos predeterminados `info` y `tweets`.

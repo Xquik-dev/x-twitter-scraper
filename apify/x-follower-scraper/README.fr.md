@@ -465,14 +465,43 @@ correspondent :
 - `profileUrl`, en une seule chaîne : `startUrls`
 - `getFollowers`, `getFollowing` : `relations`
 - `type` avec `followers` ou `following` : `relation`
-- `maxResults`, `max_results`, `resultsLimit`, `count` : `maxItems`
+- `relationship`, `relationshipType`, `listType`, `scrape_type` : `relation`
+- `relationships` : `relations`
+- `mode` avec `followers`, `following` ou `both` : `relation` ou `relations`
+- `category` avec `followers`, `following` ou `affiliates` : `relation`
+- `profile_urls` : `startUrls` pour les liens, `twitterHandles` pour les noms
+  d'utilisateur
+- `maxResults`, `max_results`, `resultsLimit`, `count`, `max_items` : `maxItems`
+- `per_profile_limit`, `maxItemsPerUser`, `maxUsersPerAccount`,
+  `max_followers_per_user`, `max_following_per_user`, `follower_limit` :
+  `maxItemsPerTarget`. 0 ne met aucun plafond par compte.
+  `max_following_per_user` règle aussi `relation` sur `following`.
 - `scrapeAllResults` : aucun plafond par cible
+- `minTweets` : `minStatuses`
+- `includeRawUser` : `includeRaw`
+- `outputVariant` : `outputMode`
+
+Comportement d'une entrée collée :
+
+- Une liste nommée avec d'autres mots se lit comme le nom que cet Actor lui
+  donne. `followings`, `Verified Followers` et `verifiedFollowers` se lisent
+  comme `following` et `verified_followers`, y compris dans `relation`.
+- Si vous réglez un alias et son champ canonique, la valeur canonique l'emporte.
+  Le log du run nomme l'alias écarté.
+- Une liste que l'Actor ne lit pas, comme `mutuals`, arrête le run avant toute
+  lecture ou facturation.
+- Un mode qui relève d'un autre Actor arrête le run de la même façon. Pour
+  `source_mode`, ce sont `search` et `profiles`. Pour `mode`, ce sont `profiles`
+  et `all`. Pour `category`, c'est une tâche comme `tweets`, `user_info` ou
+  `replies`. Le message nomme l'Actor à utiliser.
 
 2 noms ont un autre sens ici. Dans certains Actors, `maxFollowers` et
 `maxFollowing` plafonnent le nombre de lignes d'un run. Dans X Follower Scraper
 de Xquik, ils filtrent les profils selon leur nombre d'abonnés et d'abonnements.
-Utilisez `maxItems` pour plafonner les lignes. L'Actor n'a pas d'unité de page,
-donc remplacez `maxPages` par `maxItems`.
+Utilisez `maxItems` pour plafonner les lignes. Un run qui règle `maxFollowers`
+sans plafond de lignes indique dans son log et son dernier statut qu'il a filtré
+des comptes. L'Actor n'a pas d'unité de page, donc remplacez `maxPages` par
+`maxItems`.
 
 ### Utilisez toujours la dernière build
 

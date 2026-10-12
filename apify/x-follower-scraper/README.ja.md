@@ -321,10 +321,26 @@ Consoleのフォームには次のコントロールがあります。
 - 1つの文字列としての `profileUrl`: `startUrls`
 - `getFollowers`、`getFollowing`: `relations`
 - `followers` か `following` を指定した `type`: `relation`
-- `maxResults`、`max_results`、`resultsLimit`、`count`: `maxItems`
+- `relationship`、`relationshipType`、`listType`、`scrape_type`: `relation`
+- `relationships`: `relations`
+- `followers`、`following`、または `both` を指定した `mode`: `relation` または `relations`
+- `followers`、`following`、または `affiliates` を指定した `category`: `relation`
+- `profile_urls`: リンクは `startUrls`、ユーザー名は `twitterHandles`
+- `maxResults`、`max_results`、`resultsLimit`、`count`、`max_items`: `maxItems`
+- `per_profile_limit`、`maxItemsPerUser`、`maxUsersPerAccount`、`max_followers_per_user`、`max_following_per_user`、`follower_limit`: `maxItemsPerTarget`。0 はアカウントごとの上限なしを意味します。`max_following_per_user` は `relation` も `following` に設定します。
 - `scrapeAllResults`: 対象ごとの上限なし
+- `minTweets`: `minStatuses`
+- `includeRawUser`: `includeRaw`
+- `outputVariant`: `outputMode`
 
-2つの名前は、ここでは意味が異なります。一部のActorでは、`maxFollowers` と `maxFollowing` は実行が返す行数の上限です。XquikのX Follower Scraperでは、フォロワー数とフォロー中の数でプロフィールを絞り込むフィルターです。行数の上限には `maxItems` を使ってください。このActorにはページという単位がないので、`maxPages` は `maxItems` に置き換えてください。
+貼り付けた入力は次のように動きます。
+
+- 別の言い方で書かれたリストは、このActorでの名前として読み取ります。`followings`、`Verified Followers`、`verifiedFollowers` は、`relation` の中でも `following` と `verified_followers` として読み取ります。
+- 別名と正規のフィールドの両方を設定した場合は、正規の値が優先されます。実行ログには、採用されなかった別名が記録されます。
+- `mutuals` など、このActorが読み取らないリストは、読み取りや課金の前に実行を止めます。
+- 他のActorの役割にあたるモードも、同じように実行を止めます。`source_mode` では `search` と `profiles` です。`mode` では `profiles` と `all` です。`category` では `tweets`、`user_info`、`replies` などの役割です。メッセージには、使うべきActorが示されます。
+
+2つの名前は、ここでは意味が異なります。一部のActorでは、`maxFollowers` と `maxFollowing` は実行が返す行数の上限です。XquikのX Follower Scraperでは、フォロワー数とフォロー中の数でプロフィールを絞り込むフィルターです。行数の上限には `maxItems` を使ってください。`maxFollowers` を設定し、行数の上限を設定していない実行は、アカウントを絞り込んだことをログと最後のステータスで知らせます。このActorにはページという単位がないので、`maxPages` は `maxItems` に置き換えてください。
 
 ### 常に最新のビルドを使う
 

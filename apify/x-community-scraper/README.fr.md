@@ -322,6 +322,13 @@ Communauté, des mots-clés ou des sujets, ou activez `includeSuggested` ou
 | `minAccountAgeDays`            | Garde les membres dont le compte a au moins ce nombre de jours         |
 | `dedupeAcrossTargets`          | Retire les lignes répétées entre Communautés avant facturation         |
 
+### Migrer depuis un autre Actor de Communautés
+
+Les noms `ranking` et `sort` fonctionnent comme `postsOrder`. `Top` ou
+`Relevance` lit les posts les mieux classés. Si vous réglez l'un d'eux et
+`postsOrder`, la valeur de `postsOrder` l'emporte. Le log du run nomme le champ
+écarté.
+
 ### Choisir les bonnes entrées
 
 - Pour un aperçu rapide, gardez les ressources par défaut `info` et `tweets`.

@@ -277,6 +277,17 @@ Input 标签页列出了所有选项。`twitterHandles`、`startUrls` 和 `userI
 | `locationContains` | 只保留位置包含该文字的个人资料 |
 | `dedupeAcrossTargets`          | 计费前删除在多个个人资料间重复的行          |
 
+### 从其他个人资料 Actor 迁移
+
+直接粘贴你现在用的输入。Xquik 的 X Profile Scraper 能读取其他个人资料 Actor 的这些字段名。每一项先列出它们的字段，再列出映射到的字段：
+
+- `profiles`、`userNames`、`usernames`、`handles`、`screenNames`：`twitterHandles`
+- `urls`、`profileUrls`：`startUrls`
+- `maxProfiles`、`maxResults`：`maxItems`
+- `shouldScrapeFollowers`、`shouldScrapeFollowings`：`includeFollowers`、`includeFollowing`
+
+设为 `user_info` 的 `category` 不会改变任何行为。属于其他 Actor 职责的类别，例如 `tweets` 或 `followers`，会让运行停止，不读取也不计费。提示信息会写明应使用的 Actor。同时设置别名和它的标准字段时，以标准字段的值为准。运行日志会写明被忽略的别名。
+
 ### 选择合适的输入
 
 - 只要个人资料卡片时，填写用户名，并关闭所有 `include` 选项。

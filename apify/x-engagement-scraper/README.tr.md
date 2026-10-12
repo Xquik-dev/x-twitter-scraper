@@ -85,6 +85,22 @@ tekrarları sayar.
 Sorunsuz biten küçük çalıştırmalar `run-report` yazmaz, böylece Apify kullanımı
 azalır. Raporu her çalıştırmada almak için `alwaysSaveRunRecords` seçeneğini aç.
 
+### Başka bir etkileşim Actor'ından geçiş yap
+
+Actor, diğer etkileşim Actor'larının şu alan adlarını okur:
+
+- `urls`: `startUrls`
+- `category`: `engagementTypes`. `replies`, `retweets`, `info` ve
+  `checkRetweet`, `replies`, `retweeters`, `tweet` ve `repostCheck` olarak
+  okunur.
+- `resultsPerCategory`: `maxItemsPerTarget`
+- `retweetCheckUsername`: `repostCheckUsers`
+
+`followers` veya `tweets` gibi başka bir Actor'ın işi olan bir `category`
+çalıştırmayı durdurur. Hiçbir şey okunmaz ve ücretlendirilmez. Mesaj, kullanman
+gereken Actor'ı yazar. Bu adlardan birini ve kanonik alanını birlikte ayarlarsan
+kanonik değer geçerli olur. Çalıştırma günlüğü geçersiz kalan alanı yazar.
+
 ## Çıktı
 
 Her satırın `resultType` değeri `tweet`, `replies`, `completeReplies`, `quotes`,

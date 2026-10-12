@@ -315,6 +315,12 @@ Feld ist optional.
 | `minAccountAgeDays`            | Behält Mitglieder, deren Account mindestens so viele Tage alt ist  |
 | `dedupeAcrossTargets`          | Entfernt Duplikate über Communities hinweg vor der Abrechnung      |
 
+### Von einem anderen Community-Actor wechseln
+
+Die Namen `ranking` & `sort` funktionieren wie `postsOrder`. `Top` oder
+`Relevance` liest die Top-Posts. Setzt du einen davon & `postsOrder`, gewinnt
+der Wert in `postsOrder`. Das Run-Log nennt das Feld, das verloren hat.
+
 ### Die richtigen Eingaben wählen
 
 - Für einen schnellen Überblick behalte die Standard-Ressourcen `info` &

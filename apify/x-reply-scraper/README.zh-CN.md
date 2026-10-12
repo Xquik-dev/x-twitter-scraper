@@ -234,15 +234,21 @@ Input 标签页列出了所有选项。至少提供 1 个帖子 URL、帖子 ID�
 
 这些别名接受其他抓取工具常用的字段名：
 
-- URL 别名：`urls`、`tweetUrls`、`postUrls`、`profileUrls`
+- URL 别名：`urls`、`tweetUrls`、`postUrls`、`profileUrls`，以及单个字符串形式的 `twitterUrl`
 - ID 别名：`conversationIds`、`postIds`、`ids`、`tweetId`、`id`
 - 用户名别名：`twitterHandles`、`screenname`
 - 全局上限别名：`maxResults`、`max_results`、`resultsLimit`、`maxReplies`
-- 单目标上限别名：`maxRepliesPerTweet`、`maxCommentsPerPost`
+- 单目标上限别名：`maxRepliesPerTweet`、`maxCommentsPerPost`、`resultsPerCategory`
 - 搜索别名：`useSearch`
 - 嵌套回复别名：`includeNestedReplies`、`includeRepliesOfReplies`
-- 原帖别名：`includeOriginalTweet`
+- 深度别名：值为 `1`、`2` 或 `3` 的 `depth`，对应 `maxDepth`。`full` 表示不设上限。
+- 范围别名：`onlyDirectReplies`，对应 `scope: "direct"`
+- 原帖别名：`includeOriginalTweet`、`includeSourceTweet`。使用 `includeSourceTweet` 时，`resultsPerCategory` 限制回复数，原帖会多占 1 行。
+- 作者别名：`excludeOpSelfReplies`，对应 `excludeOriginalAuthor`
+- 排序别名：`sortBy` 和 `queryType`，对应 `sort`。`top`、`newest` 和 `mostLiked` 会读取为 `relevance`、`latest` 和 `likes`。
 - 输出别名：`outputVariant`、`includeRaw`
+
+设为 `replies` 的 `category` 不会改变任何行为。属于其他 Actor 职责的类别，例如 `retweets` 或 `info`，会让运行停止，不读取也不计费。提示信息会写明应使用的 Actor。同时设置其中一个别名和它的标准字段时，以标准字段的值为准。运行日志会写明被忽略的别名。
 
 格式错误或不受支持的目标不会让 Actor 失败。没有剩余的有效目标时，运行会写入一条诊断，并附上修正方法。
 

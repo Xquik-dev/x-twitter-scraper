@@ -298,16 +298,32 @@ alanlarla takma adları birlikte kullanırsan mevcut öncelik sırası geçerli 
 
 Bu takma adlar diğer scraper'lardaki yaygın alan adlarını kabul eder:
 
-- URL takma adları: `urls`, `tweetUrls`, `postUrls`, `profileUrls`
+- URL takma adları: `urls`, `tweetUrls`, `postUrls`, `profileUrls` ve tek metin
+  olarak `twitterUrl`
 - ID takma adları: `conversationIds`, `postIds`, `ids`, `tweetId`, `id`
 - Kullanıcı adı takma adları: `twitterHandles`, `screenname`
 - Genel sınır takma adları: `maxResults`, `max_results`, `resultsLimit`,
   `maxReplies`
-- Hedef başına takma adlar: `maxRepliesPerTweet`, `maxCommentsPerPost`
+- Hedef başına takma adlar: `maxRepliesPerTweet`, `maxCommentsPerPost`,
+  `resultsPerCategory`
 - Arama takma adı: `useSearch`
 - İç içe yanıt takma adları: `includeNestedReplies`, `includeRepliesOfReplies`
-- Orijinal gönderi takma adı: `includeOriginalTweet`
+- Derinlik takma adı: `maxDepth` için `1`, `2` veya `3` değerli `depth`. `full`
+  sınır koymaz.
+- Kapsam takma adı: `scope: "direct"` için `onlyDirectReplies`
+- Orijinal gönderi takma adları: `includeOriginalTweet`, `includeSourceTweet`.
+  `includeSourceTweet` ile `resultsPerCategory` yanıtları sınırlar ve gönderi 1
+  satır daha ekler.
+- Yazar takma adı: `excludeOriginalAuthor` için `excludeOpSelfReplies`
+- Sıralama takma adları: `sort` için `sortBy` ve `queryType`. `top`, `newest` ve
+  `mostLiked`, `relevance`, `latest` ve `likes` olarak okunur.
 - Çıktı takma adları: `outputVariant`, `includeRaw`
+
+`replies` olarak ayarlanmış `category` hiçbir şeyi değiştirmez. `retweets` veya
+`info` gibi başka bir Actor'ın işi olan bir kategori çalıştırmayı durdurur.
+Hiçbir şey okunmaz ve ücretlendirilmez. Mesaj, kullanman gereken Actor'ı yazar.
+Bu takma adlardan birini ve kanonik alanını birlikte ayarlarsan kanonik değer
+geçerli olur. Çalıştırma günlüğü geçersiz kalan takma adı yazar.
 
 Bozuk veya desteklenmeyen hedefler Actor'ı başarısız kılmaz. Geçerli hedef
 kalmazsa çalıştırma düzeltmeyi söyleyen bir tanılama yazar.

@@ -432,13 +432,41 @@ Each line names the fields you already use, then the field they map to:
 - `profileUrl`, as one string: `startUrls`
 - `getFollowers`, `getFollowing`: `relations`
 - `type` with `followers` or `following`: `relation`
-- `maxResults`, `max_results`, `resultsLimit`, `count`: `maxItems`
+- `relationship`, `relationshipType`, `listType`, `scrape_type`: `relation`
+- `relationships`: `relations`
+- `mode` with `followers`, `following` or `both`: `relation` or `relations`
+- `category` with `followers`, `following` or `affiliates`: `relation`
+- `profile_urls`: `startUrls` for links, `twitterHandles` for handles
+- `maxResults`, `max_results`, `resultsLimit`, `count`, `max_items`: `maxItems`
+- `per_profile_limit`, `maxItemsPerUser`, `maxUsersPerAccount`,
+  `max_followers_per_user`, `max_following_per_user`, `follower_limit`:
+  `maxItemsPerTarget`. 0 sets no cap for each account. `max_following_per_user`
+  also sets `relation` to `following`.
 - `scrapeAllResults`: no per-target cap
+- `minTweets`: `minStatuses`
+- `includeRawUser`: `includeRaw`
+- `outputVariant`: `outputMode`
+
+How a pasted input behaves:
+
+- A list named in other words reads as this Actor's name for it. `followings`,
+  `Verified Followers` & `verifiedFollowers` read as `following` &
+  `verified_followers`, in `relation` too.
+- When you set an alias & its canonical field, the canonical value wins. The run
+  log names the alias that lost.
+- A list the Actor does not read, such as `mutuals`, stops the run before any
+  read or charge.
+- A mode that is another Actor's job stops the run the same way. `source_mode`
+  does for `search` & `profiles`. `mode` does for `profiles` & `all`. `category`
+  does for a job such as `tweets`, `user_info` or `replies`. The message names
+  the Actor to use.
 
 2 names mean something else here. In some Actors `maxFollowers` & `maxFollowing`
 cap how many rows a run returns. In Xquik's X Follower Scraper they filter
-profiles by their follower & following counts. Use `maxItems` to cap rows. The
-Actor has no page unit, so replace `maxPages` with `maxItems`.
+profiles by their follower & following counts. Use `maxItems` to cap rows. A run
+that sets `maxFollowers` & no row cap says in its log & last status that it
+filtered accounts. The Actor has no page unit, so replace `maxPages` with
+`maxItems`.
 
 ### Always use the latest build
 

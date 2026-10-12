@@ -333,6 +333,25 @@ Der Input-Tab zeigt jede Option. Gib mindestens 1 von `twitterHandles`,
 | `locationContains` | Behält Profile, deren Ort diesen Text enthält |
 | `dedupeAcrossTargets`          | Entfernt profilübergreifende Duplikate vor der Abrechnung       |
 
+### Von einem anderen Profil-Actor wechseln
+
+Füge die Eingabe ein, die du schon nutzt. X Profile Scraper von Xquik liest
+diese Feldnamen anderer Profil-Actors. Jede Zeile nennt ihre Felder, dann das
+Feld, dem der Actor sie zuordnet:
+
+- `profiles`, `userNames`, `usernames`, `handles`, `screenNames`:
+  `twitterHandles`
+- `urls`, `profileUrls`: `startUrls`
+- `maxProfiles`, `maxResults`: `maxItems`
+- `shouldScrapeFollowers`, `shouldScrapeFollowings`: `includeFollowers`,
+  `includeFollowing`
+
+`category` auf `user_info` ändert nichts. Eine Kategorie, die die Aufgabe eines
+anderen Actors ist, etwa `tweets` oder `followers`, stoppt den Run. Er liest &
+berechnet nichts. Die Meldung nennt den Actor, den du nutzen sollst. Setzt du
+einen Alias & sein kanonisches Feld, gewinnt der kanonische Wert. Das Run-Log
+nennt den Alias, der verloren hat.
+
 ### Die richtigen Eingaben wählen
 
 - Für reine Profilkarten gib Nutzernamen an & lass jede `include`-Option aus.

@@ -320,10 +320,26 @@ Console 表单有以下控件：
 - 单个字符串形式的 `profileUrl`：`startUrls`
 - `getFollowers`、`getFollowing`：`relations`
 - 值为 `followers` 或 `following` 的 `type`：`relation`
-- `maxResults`、`max_results`、`resultsLimit`、`count`：`maxItems`
+- `relationship`、`relationshipType`、`listType`、`scrape_type`：`relation`
+- `relationships`：`relations`
+- 值为 `followers`、`following` 或 `both` 的 `mode`：`relation` 或 `relations`
+- 值为 `followers`、`following` 或 `affiliates` 的 `category`：`relation`
+- `profile_urls`：链接映射到 `startUrls`，用户名映射到 `twitterHandles`
+- `maxResults`、`max_results`、`resultsLimit`、`count`、`max_items`：`maxItems`
+- `per_profile_limit`、`maxItemsPerUser`、`maxUsersPerAccount`、`max_followers_per_user`、`max_following_per_user`、`follower_limit`：`maxItemsPerTarget`。0 表示不设单账号上限。`max_following_per_user` 还会把 `relation` 设为 `following`。
 - `scrapeAllResults`：不设单目标上限
+- `minTweets`：`minStatuses`
+- `includeRawUser`：`includeRaw`
+- `outputVariant`：`outputMode`
 
-有 2 个字段名在这里含义不同。在一些 Actor 中，`maxFollowers` 和 `maxFollowing` 限制一次运行返回的行数。在 Xquik 的 X Follower Scraper 中，它们按关注者数和正在关注数过滤个人资料。要限制行数，请用 `maxItems`。该 Actor 没有“页”这个单位，所以请把 `maxPages` 换成 `maxItems`。
+粘贴的输入会这样处理：
+
+- 用其他写法命名的列表，按该 Actor 自己的名称读取。`followings`、`Verified Followers` 和 `verifiedFollowers` 会读取为 `following` 和 `verified_followers`，在 `relation` 中也一样。
+- 同时设置别名和它的标准字段时，以标准字段的值为准。运行日志会写明被忽略的别名。
+- 该 Actor 不读取的列表，例如 `mutuals`，会让运行在读取或计费前停止。
+- 属于其他 Actor 职责的模式也会以同样的方式让运行停止。对 `source_mode` 来说是 `search` 和 `profiles`。对 `mode` 来说是 `profiles` 和 `all`。对 `category` 来说是 `tweets`、`user_info` 或 `replies` 这类职责。提示信息会写明应使用的 Actor。
+
+有 2 个字段名在这里含义不同。在一些 Actor 中，`maxFollowers` 和 `maxFollowing` 限制一次运行返回的行数。在 Xquik 的 X Follower Scraper 中，它们按关注者数和正在关注数过滤个人资料。要限制行数，请用 `maxItems`。只设置了 `maxFollowers` 而没有设置行数上限的运行，会在日志和最后的状态中说明它过滤了账号。该 Actor 没有“页”这个单位，所以请把 `maxPages` 换成 `maxItems`。
 
 ### 始终使用最新构建
 

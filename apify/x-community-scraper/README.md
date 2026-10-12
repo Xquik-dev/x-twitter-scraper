@@ -302,6 +302,12 @@ or turn on `includeSuggested` or `listTopics`. Every other field is optional.
 | `minAccountAgeDays`            | Keep members at least this many days old                     |
 | `dedupeAcrossTargets`          | Drop rows repeated across Communities before billing         |
 
+### Migrate from another community Actor
+
+The names `ranking` & `sort` work as `postsOrder`. `Top` or `Relevance` reads
+the Top posts. When you set one of them & `postsOrder`, the value in
+`postsOrder` wins. The run log names the field that lost.
+
 ### Pick the right inputs
 
 - For a quick look, keep the default `info` & `tweets` resources.

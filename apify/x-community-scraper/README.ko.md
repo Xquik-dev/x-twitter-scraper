@@ -305,6 +305,12 @@ Input 탭에 모든 옵션이 나와 있습니다. 커뮤니티 URL이나 ID, �
 | `minAccountAgeDays`            | 계정 연령이 이 일수 이상인 멤버만 유지                       |
 | `dedupeAcrossTargets`          | 과금 전에 여러 커뮤니티에서 중복된 행 제거                   |
 
+### 다른 커뮤니티 Actor에서 옮겨오기
+
+`ranking` & `sort`라는 이름은 `postsOrder`처럼 작동합니다. `Top`이나
+`Relevance`는 상위 게시물을 읽습니다. 둘 중 하나 & `postsOrder`를 함께 설정하면
+`postsOrder` 값을 씁니다. 실행 로그에 무시된 필드가 나옵니다.
+
 ### 알맞은 입력 고르기
 
 - 빠르게 살펴보려면 기본 리소스인 `info` & `tweets`를 그대로 두세요.

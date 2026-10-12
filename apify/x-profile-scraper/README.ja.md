@@ -278,6 +278,17 @@ Inputタブにすべてのオプションがあります。`twitterHandles`、`s
 | `locationContains` | 所在地にこのテキストを含むプロフィールを残す |
 | `dedupeAcrossTargets`          | プロフィール間で重複する行を課金前に除く      |
 
+### 他のプロフィール用Actorから移行する
+
+今使っている入力をそのまま貼り付けてください。XquikのX Profile Scraperは、他のプロフィール用Actorの次のフィールド名を読み取ります。各項目は、そのActorのフィールドを挙げ、その後に対応付け先のフィールドを示します。
+
+- `profiles`、`userNames`、`usernames`、`handles`、`screenNames`: `twitterHandles`
+- `urls`、`profileUrls`: `startUrls`
+- `maxProfiles`、`maxResults`: `maxItems`
+- `shouldScrapeFollowers`、`shouldScrapeFollowings`: `includeFollowers`、`includeFollowing`
+
+`user_info` に設定した `category` は、何も変えません。`tweets` や `followers` など、他のActorの役割にあたるカテゴリーは実行を止めます。何も読み取らず、課金もしません。メッセージには、使うべきActorが示されます。別名と正規のフィールドの両方を設定した場合は、正規の値が優先されます。実行ログには、採用されなかった別名が記録されます。
+
 ### 適切な入力を選ぶ
 
 - プロフィールカードだけが必要なら、ユーザー名を指定し、`include` のオプションはすべてオフのままにします。

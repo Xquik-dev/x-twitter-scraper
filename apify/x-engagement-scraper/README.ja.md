@@ -71,6 +71,17 @@ Xは2024年、ポストにいいねしたユーザーの表示をやめました
 
 問題なく終わった小規模な実行は `run-report` を書き込まず、Apifyの利用料を節約します。毎回書き込むには `alwaysSaveRunRecords` をオンにしてください。
 
+### 他のエンゲージメント用Actorから移行する
+
+このActorは、他のエンゲージメント用Actorの次のフィールド名を読み取ります。
+
+- `urls`: `startUrls`
+- `category`: `engagementTypes`。`replies`、`retweets`、`info`、`checkRetweet` は、`replies`、`retweeters`、`tweet`、`repostCheck` として読み取ります。
+- `resultsPerCategory`: `maxItemsPerTarget`
+- `retweetCheckUsername`: `repostCheckUsers`
+
+`followers` や `tweets` など、他のActorの役割にあたる `category` は実行を止めます。何も読み取らず、課金もしません。メッセージには、使うべきActorが示されます。これらの名前のどれかと正規のフィールドの両方を設定した場合は、正規の値が優先されます。実行ログには、採用されなかったフィールドが記録されます。
+
 ## 出力
 
 各行の `resultType` は `tweet`、`replies`、`completeReplies`、`quotes`、`retweeters`、`favoriters`、`thread`、`repostCheck` のいずれかです。`sourceTarget` には元ポストのIDが入ります。ポストとプロフィールのフィールドは、安定したXquik RESTのレスポンス形式に従います。

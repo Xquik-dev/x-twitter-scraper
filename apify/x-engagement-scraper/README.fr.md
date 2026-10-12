@@ -86,6 +86,22 @@ par post source. Le statut du run compte les doublons ignorés, sans frais.
 Les petits runs sans problème n'écrivent pas `run-report` et réduisent l'usage
 Apify. Activez `alwaysSaveRunRecords` pour l'écrire à chaque run.
 
+### Migrer depuis un autre Actor d'engagement
+
+L'Actor lit ces noms de champs d'autres Actors d'engagement :
+
+- `urls` : `startUrls`
+- `category` : `engagementTypes`. `replies`, `retweets`, `info` et
+  `checkRetweet` se lisent comme `replies`, `retweeters`, `tweet` et
+  `repostCheck`.
+- `resultsPerCategory` : `maxItemsPerTarget`
+- `retweetCheckUsername` : `repostCheckUsers`
+
+Une `category` qui relève d'un autre Actor, comme `followers` ou `tweets`,
+arrête le run. Il ne lit et ne facture rien. Le message nomme l'Actor à
+utiliser. Si vous réglez l'un de ces noms et son champ canonique, la valeur
+canonique l'emporte. Le log du run nomme le champ écarté.
+
 ## Sortie
 
 Dans chaque ligne, `resultType` vaut `tweet`, `replies`, `completeReplies`,

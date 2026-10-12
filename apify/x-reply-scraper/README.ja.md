@@ -235,15 +235,21 @@ Inputタブには、すべてのオプションが表示されます。ポスト
 
 次の別名は、他のスクレイパーでよく使われるフィールド名を受け付けます。
 
-- URLの別名: `urls`、`tweetUrls`、`postUrls`、`profileUrls`
+- URLの別名: `urls`、`tweetUrls`、`postUrls`、`profileUrls`、1つの文字列としての `twitterUrl`
 - IDの別名: `conversationIds`、`postIds`、`ids`、`tweetId`、`id`
 - ユーザー名の別名: `twitterHandles`、`screenname`
 - 全体の上限の別名: `maxResults`、`max_results`、`resultsLimit`、`maxReplies`
-- 対象ごとの上限の別名: `maxRepliesPerTweet`、`maxCommentsPerPost`
+- 対象ごとの上限の別名: `maxRepliesPerTweet`、`maxCommentsPerPost`、`resultsPerCategory`
 - 検索の別名: `useSearch`
 - 入れ子の返信の別名: `includeNestedReplies`、`includeRepliesOfReplies`
-- 元のポストの別名: `includeOriginalTweet`
+- 深さの別名: `maxDepth` にあたる `1`、`2`、`3` の `depth`。`full` は上限なしを意味します。
+- 範囲の別名: `scope: "direct"` にあたる `onlyDirectReplies`
+- 元のポストの別名: `includeOriginalTweet`、`includeSourceTweet`。`includeSourceTweet` を使うと、`resultsPerCategory` は返信の上限になり、ポストの分が1行増えます。
+- 投稿者の別名: `excludeOriginalAuthor` にあたる `excludeOpSelfReplies`
+- 並び順の別名: `sort` にあたる `sortBy` と `queryType`。`top`、`newest`、`mostLiked` は `relevance`、`latest`、`likes` として読み取ります。
 - 出力の別名: `outputVariant`、`includeRaw`
+
+`replies` に設定した `category` は、何も変えません。`retweets` や `info` など、他のActorの役割にあたるカテゴリーは実行を止めます。何も読み取らず、課金もしません。メッセージには、使うべきActorが示されます。これらの別名のどれかと正規のフィールドの両方を設定した場合は、正規の値が優先されます。実行ログには、採用されなかった別名が記録されます。
 
 形式が正しくない対象や未対応の対象があっても、Actorは失敗しません。有効な対象が1つも残らない場合、実行は直し方を示す診断を書き込みます。
 

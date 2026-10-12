@@ -82,6 +82,21 @@ X는 2024년부터 게시물에 마음에 들어요를 누른 사람을 공개�
 문제없이 끝난 작은 실행은 `run-report`를 건너뛰어 Apify 사용량을 아낍니다. 모든
 실행에서 보고서를 기록하려면 `alwaysSaveRunRecords`를 켜세요.
 
+### 다른 참여 Actor에서 옮겨오기
+
+이 Actor는 다른 참여 Actor의 다음 필드 이름을 읽습니다.
+
+- `urls`: `startUrls`
+- `category`: `engagementTypes`. `replies`, `retweets`, `info` &
+  `checkRetweet`은 `replies`, `retweeters`, `tweet` & `repostCheck`로 읽습니다.
+- `resultsPerCategory`: `maxItemsPerTarget`
+- `retweetCheckUsername`: `repostCheckUsers`
+
+`followers`나 `tweets`처럼 다른 Actor가 하는 일을 가리키는 `category`는 실행을
+멈춥니다. 아무것도 읽거나 과금하지 않습니다. 메시지가 써야 할 Actor를 알려
+줍니다. 이 이름 중 하나 & 표준 필드를 함께 설정하면 표준 필드 값을 씁니다. 실행
+로그에 무시된 필드가 나옵니다.
+
 ## 출력
 
 각 행의 `resultType`은 `tweet`, `replies`, `completeReplies`, `quotes`,
