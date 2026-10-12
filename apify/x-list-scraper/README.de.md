@@ -235,6 +235,10 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Prüft mit der X-Angabe "Account based in", der Art, wie sich ein Account mit X
   verbunden hat, & Benutzernamen-Änderungen, wo Accounts ansässig sind. Nutze
   ihn, wenn du prüfst, wo Accounts ansässig sind. Ab $0.00015 pro Account.
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper): Holt die E-Mails,
+  Telefonnummern & Links, die Accounts in ihren Profilen veröffentlichen, anhand
+  von Nutzernamen, Followern oder Nutzersuchen. Nutze ihn, wenn du die E-Mails
+  brauchst, die Profile veröffentlichen. Ab $0.00015 pro Profil.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapt
   Community-Infos, Posts, Suchen, Mitglieder & Moderatoren. Nutze ihn, wenn
   deine Quellen X-Communities sind. Ab $0.00015 pro Datensatz.

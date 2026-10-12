@@ -225,6 +225,10 @@ diagnostics. Pick the one that matches the data you need.
   Checks where accounts are based with X's Account based in label, connected via
   & username changes. Use it when you vet where accounts are based. From
   $0.00015 per account.
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper): Gets the emails,
+  phones & links accounts publish on their profiles, from handles, followers or
+  user searches. Use it when you need the emails profiles publish. From $0.00015
+  per profile.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapes
   Community info, posts, searches, members & moderators. Use it when your
   sources are X Communities. From $0.00015 per row.

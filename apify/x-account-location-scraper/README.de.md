@@ -241,6 +241,10 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Nutzer nach Nutzername, Bio & Standort mit Filtern für Follower,
   Verifizierung, Account-Alter & Standort. Nutze ihn, wenn du Account-Listen aus
   einer Suche aufbaust. Ab $0.00015 pro Profil.
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper): Holt die E-Mails,
+  Telefonnummern & Links, die Accounts in ihren Profilen veröffentlichen, anhand
+  von Nutzernamen, Followern oder Nutzersuchen. Nutze ihn, wenn du die E-Mails
+  brauchst, die Profile veröffentlichen. Ab $0.00015 pro Profil.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): Scrapt Posts,
   Mitglieder & Follower von Listen aus Listen-URLs oder -IDs. Nutze ihn, wenn
   eine kuratierte Liste deine Quellen festlegt. Ab $0.00015 pro Datensatz.

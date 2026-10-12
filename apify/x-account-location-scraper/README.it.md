@@ -238,6 +238,10 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   utenti per nome utente, bio & posizione con filtri su follower, verifica, età
   & posizione. Usalo quando costruisci elenchi di account dalla ricerca. Da
   $0.00015 per profilo.
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper): ottiene le email,
+  i numeri di telefono & i link che gli account pubblicano sui propri profili,
+  da nomi utente, follower o ricerche di utenti. Usalo quando ti servono le
+  email che i profili pubblicano. Da $0.00015 per profilo.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): estrae post, membri
   & follower delle liste da URL o ID delle liste. Usalo quando una lista curata
   definisce le tue fonti. Da $0.00015 per riga.

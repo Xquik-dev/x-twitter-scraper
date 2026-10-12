@@ -246,6 +246,10 @@ necesitas.
   usuarios por nombre de usuario, biografía y ubicación con filtros de
   seguidores, verificación, antigüedad y ubicación. Úsalo cuando crees listas de
   cuentas a partir de búsquedas. Desde $0.00015 por perfil.
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper): obtiene los
+  correos, teléfonos y enlaces que las cuentas publican en sus perfiles, a
+  partir de nombres de usuario, seguidores o búsquedas de usuarios. Úsalo cuando
+  necesites los correos que publican los perfiles. Desde $0.00015 por perfil.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper): extrae posts,
   miembros y seguidores de Listas a partir de URLs o IDs de Listas. Úsalo cuando
   una Lista curada defina tus fuentes. Desde $0.00015 por fila.
