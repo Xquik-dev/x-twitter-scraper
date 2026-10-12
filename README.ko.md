@@ -348,7 +348,7 @@ curl --request POST 'https://xquik.com/api/v1/extractions/estimate' \
 ## 모니터, 이벤트, webhook
 
 계정과 키워드 monitor는 변화를 계속 확인합니다. 활성 monitor 1개는 시간당
-21크레딧을 사용합니다. 저장된 이벤트와 webhook 전달은 포함됩니다. 처리 전에
+30크레딧을 사용합니다. 저장된 이벤트와 webhook 전달은 포함됩니다. 처리 전에
 `X-Xquik-Timestamp`, `X-Xquik-Nonce`, `X-Xquik-Signature`를 검증하세요.
 
 범위를 제한한 검색어로 키워드 모니터를 만드세요.

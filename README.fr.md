@@ -353,7 +353,7 @@ curl --request POST 'https://xquik.com/api/v1/extractions/estimate' \
 ## Moniteurs, événements et webhooks
 
 Les moniteurs de comptes et mots-clés vérifient les changements en continu. Un
-moniteur actif coûte 21 crédits par heure. Les événements stockés et livraisons
+moniteur actif coûte 30 crédits par heure. Les événements stockés et livraisons
 webhook sont inclus. Vérifiez `X-Xquik-Timestamp`, `X-Xquik-Nonce` et
 `X-Xquik-Signature` avant tout traitement.
 

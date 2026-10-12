@@ -352,7 +352,7 @@ curl --request POST 'https://xquik.com/api/v1/extractions/estimate' \
 ## İzleyiciler, olaylar ve webhook'lar
 
 Hesap ve anahtar kelime izleyicileri değişiklikleri sürekli denetler. Etkin her
-izleyici saatte 21 kredi kullanır. Saklanan olaylar ve webhook teslimatları
+izleyici saatte 30 kredi kullanır. Saklanan olaylar ve webhook teslimatları
 dahildir. Olayı işlemeden önce `X-Xquik-Timestamp`, `X-Xquik-Nonce` ve
 `X-Xquik-Signature` başlıklarını doğrula.
 

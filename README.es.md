@@ -352,7 +352,7 @@ curl --request POST 'https://xquik.com/api/v1/extractions/estimate' \
 ## Monitores, eventos y webhooks
 
 Los monitores de cuentas y palabras clave revisan cambios de forma continua.
-Cada monitor activo consume 21 créditos por hora. Los eventos guardados y las
+Cada monitor activo consume 30 créditos por hora. Los eventos guardados y las
 entregas webhook están incluidos. Verifica `X-Xquik-Timestamp`,
 `X-Xquik-Nonce` y `X-Xquik-Signature` antes de procesar un evento.
 

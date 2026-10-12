@@ -5,12 +5,13 @@ Read events by polling, or receive them at an HTTPS webhook.
 
 ## Cost and consent
 
-Each active monitor costs 21 credits per hour, events and webhook deliveries
-included. Reading stored events with `GET /events` costs nothing. Creation
-needs 22 available credits, and an account monitor also bills 1 credit for
-the username lookup. Before the first create call, show the whole setup:
-target, event types, webhook URL if any, cost, and the stop calls. Get one
-yes for that setup, then create the monitor and the webhook.
+Each active monitor costs 30 credits per hour, events and webhook deliveries
+included. That is a monitor's only charge. Reading stored events with
+`GET /events` costs nothing. Creation needs 30 available credits and bills
+nothing itself: the username lookup is free. Before the first create call,
+show the whole setup: target, event types, webhook URL if any, cost, and the
+stop calls. Get one yes for that setup, then create the monitor and the
+webhook.
 
 ## Monitors
 

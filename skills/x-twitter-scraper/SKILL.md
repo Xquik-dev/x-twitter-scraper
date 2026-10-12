@@ -128,7 +128,7 @@ task needs.
   nothing.
 - Extractions bill 1 credit per returned tweet or profile, so $0.15 per 1,000.
   `POST /api/v1/extractions/estimate` prices a job for free.
-- An active monitor bills 21 credits per hour, so 504 a day. Pausing or
+- An active monitor bills 30 credits per hour, so 720 a day. Pausing or
   deleting it stops the billing.
 - A post costs 30 credits. A like, repost, follow, DM, or delete costs 10.
 - AI analysis bills 2 credits per analyzed post, so $0.0003. Posts without an
