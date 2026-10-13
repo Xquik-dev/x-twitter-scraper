@@ -17,7 +17,7 @@
 
 Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X Tweet Scraper 用 50 多个过滤条件收集帖子（即推文）、回复、个人资料、列表和搜索结果。公开基准测试证明，它是 12 个帖子抓取 Actor 中最便宜、最快的。它每行的字段数是各 Actor 中位数的 2 倍，详见[下方基准测试](#基准测试)。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付、不重复且符合过滤条件的结果收费。
 
-抓取公开的 X（Twitter）帖子，**所有 Apify 套餐均为每条已交付结果 $0.00015 起**。Apify 另行收取平台使用费。无需登录 X，也没有启动费或查询费。由 [Xquik](https://xquik.com) 打造。
+抓取 Twitter 推文，**所有 Apify 套餐均为每条已交付结果 $0.00015 起**，可替代 Twitter API。Apify 另行收取平台使用费。无需登录 X，也没有启动费或查询费。由 [Xquik](https://xquik.com) 打造。
 
 > Xquik 是独立的第三方服务，与 X Corp 无关联。“Twitter”和“X”是 X Corp 的商标。
 

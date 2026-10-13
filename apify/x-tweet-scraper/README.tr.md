@@ -25,10 +25,10 @@ satırları, medyan Actor'ın 2 katı alan taşır. Diğer Apify Actor'larının
 filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
 edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır.
 
-Herkese açık X (Twitter) gönderilerini **her Apify planında teslim edilen sonuç
-başına $0.00015'ten başlayan fiyatla** kazı. Apify, platform kullanımını ayrıca
-faturalandırır. X girişi gerekmez, başlatma veya sorgu ücreti de ödemezsin.
-Geliştiren: [Xquik](https://xquik.com).
+Twitter API alternatifi olarak Twitter gönderilerini **her Apify planında teslim
+edilen sonuç başına $0.00015'ten başlayan fiyatla** kazı. Apify, platform
+kullanımını ayrıca faturalandırır. X girişi gerekmez, başlatma veya sorgu ücreti
+de ödemezsin. Geliştiren: [Xquik](https://xquik.com).
 
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.

@@ -24,10 +24,10 @@ sue righe hanno 2x i campi dell'Actor mediano, come mostra il
 pagare prima di filtrare o deduplicare. Xquik fa pagare solo i risultati
 consegnati, unici e conformi ai filtri.
 
-Estrai i post pubblici di X (Twitter) **da $0.00015 per risultato consegnato su
-ogni piano Apify**. Apify fattura a parte l'uso della piattaforma. Non ti serve
-il login a X & non paghi costi di avvio o per query. Creato da
-[Xquik](https://xquik.com).
+Estrai i tweet di Twitter **da $0.00015 per risultato consegnato su ogni piano
+Apify**, un'alternativa all'API di Twitter. Apify fattura a parte l'uso della
+piattaforma. Non ti serve il login a X & non paghi costi di avvio o per query.
+Creato da [Xquik](https://xquik.com).
 
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.

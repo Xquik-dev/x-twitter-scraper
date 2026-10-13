@@ -24,11 +24,11 @@ most complete X data. Xquik's X Reply Scraper collects replies, comments & whole
 conversations. Most other Apify Actors charge before filtering or deduplicating.
 Xquik charges only for **delivered, unique, filter-matching results**.
 
-Scrape X (Twitter) replies for **$0.00015 per delivered row** on every Apify
-plan. Paste post URLs, Tweet IDs, profile URLs or usernames. Export replies,
-conversations, authors, engagement, entities & media URLs. Apify bills your
-platform usage separately. You need no X login. Filters run before dataset
-writes, so you pay only for delivered rows.
+Scrape Twitter replies & comments for **$0.00015 per delivered row** on every
+Apify plan, & read them without an X account. Paste post URLs, Tweet IDs,
+profile URLs or usernames. Export replies, conversations, authors, engagement,
+entities & media URLs. Apify bills your platform usage separately. You need no X
+login. Filters run before dataset writes, so you pay only for delivered rows.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.

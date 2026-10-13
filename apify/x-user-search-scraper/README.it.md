@@ -21,7 +21,7 @@ utente, bio & posizione. La maggior parte degli altri Actor Apify fa pagare
 prima di filtrare o deduplicare. Xquik fa pagare solo i risultati consegnati,
 unici e conformi ai filtri.
 
-Cerca account di X (Twitter) per nome, argomento, bio o posizione. Non ti
+Fai una ricerca di utenti Twitter per nome, argomento, bio o posizione. Non ti
 servono una chiave API X né il login. Paghi **$0.00015 per profilo consegnato**.
 Apify fattura a parte l'uso della piattaforma.
 

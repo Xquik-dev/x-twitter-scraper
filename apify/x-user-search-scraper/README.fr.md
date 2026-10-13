@@ -21,9 +21,9 @@ trouve des comptes par nom d'utilisateur, bio et localisation. La plupart des
 autres Actors Apify facturent avant de filtrer ou de dédupliquer. Xquik facture
 seulement les résultats livrés, uniques et conformes à vos filtres.
 
-Recherchez des comptes Twitter (X) par nom, sujet, bio ou localisation. Vous
-n'avez besoin ni de clé API X ni de connexion. Vous payez **$0.00015 par profil
-livré**, et Apify facture l'usage de la plateforme à part.
+Lancez une recherche d'utilisateurs Twitter par nom, sujet, bio ou localisation.
+Vous n'avez besoin ni de clé API X ni de connexion. Vous payez **$0.00015 par
+profil livré**, et Apify facture l'usage de la plateforme à part.
 
 > Xquik est un service tiers indépendant. Non affilié à X Corp.
 > "Twitter" et "X" sont des marques déposées de X Corp.

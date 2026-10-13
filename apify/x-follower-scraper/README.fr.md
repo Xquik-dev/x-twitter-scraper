@@ -25,12 +25,12 @@ portent 2,5x plus de champs que celles de l'Actor médian, comme le montre le
 avant de filtrer ou de dédupliquer. Xquik facture seulement les résultats
 livrés, uniques et conformes à vos filtres.
 
-Scrapez les abonnés, les abonnements, les abonnés certifiés, les membres de
-Liste, les abonnés de Liste et les membres de Communauté sur X (Twitter). X
-Follower Scraper de Xquik coûte **à partir de $0.00015 par profil livré sur
-chaque plan Apify**. Apify facture l'usage de la plateforme à part. Vous n'avez
-pas besoin de connexion X, et Xquik ne facture pas de frais de démarrage ni de
-requête.
+Exportez une liste d'abonnés Twitter avec les abonnements, les abonnés
+certifiés, les membres de Liste, les abonnés de Liste et les membres de
+Communauté. X Follower Scraper de Xquik coûte **à partir de $0.00015 par profil
+livré sur chaque plan Apify**. Apify facture l'usage de la plateforme à part.
+Vous n'avez pas besoin de connexion X, et Xquik ne facture pas de frais de
+démarrage ni de requête.
 
 > Xquik est un service tiers indépendant. Non affilié à X Corp.
 > "Twitter" et "X" sont des marques déposées de X Corp.

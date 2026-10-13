@@ -21,12 +21,12 @@ konuşmaların tamamını toplar. Diğer Apify Actor'larının çoğu, filtrelem
 veya tekilleştirmeden önce ücret alır. Xquik yalnızca **teslim edilen, benzersiz
 ve filtrene uyan sonuçlar** için ücret alır.
 
-X (Twitter) yanıtlarını her Apify planında **teslim edilen satır başına
-$0.00015** ile kazı. Gönderi URL'si, gönderi ID'si, profil URL'si veya
-kullanıcı adı yapıştır. Yanıtları, konuşmaları, yazarları, etkileşimi, entity
-verilerini ve medya URL'lerini dışa aktar. Apify, platform kullanımını ayrıca
-faturalandırır. X girişi gerekmez. Filtreler veri kümesine yazmadan önce
-çalışır, bu yüzden yalnızca teslim edilen satırlar için ödersin.
+Twitter yanıtlarını ve yorumlarını her Apify planında **teslim edilen satır
+başına $0.00015** ile kazı, X hesabı olmadan oku. Gönderi URL'si, gönderi ID'si,
+profil URL'si veya kullanıcı adı yapıştır. Yanıtları, konuşmaları, yazarları,
+etkileşimi, entity verilerini ve medya URL'lerini dışa aktar. Apify, platform
+kullanımını ayrıca faturalandırır. X girişi gerekmez. Filtreler veri kümesine
+yazmadan önce çalışır, bu yüzden yalnızca teslim edilen satırlar için ödersin.
 
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.

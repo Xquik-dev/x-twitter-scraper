@@ -25,7 +25,7 @@ most complete X data. Xquik's X User Search Scraper finds users by handle, bio &
 location. Most other Apify Actors charge before filtering or deduplicating.
 Xquik charges only for delivered, unique, filter-matching results.
 
-Search Twitter accounts by name, topic, bio or location. You need no X API key
+Run a Twitter user search by name, topic, bio or location. You need no X API key
 or login. You pay **$0.00015 per delivered profile**, & Apify bills platform
 usage separately.
 

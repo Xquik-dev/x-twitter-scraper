@@ -24,11 +24,11 @@ sue righe full hanno 2,5x i campi dell'Actor mediano, come mostra il
 pagare prima di filtrare o deduplicare. Xquik fa pagare solo i risultati
 consegnati, unici e conformi ai filtri.
 
-Estrai da X (Twitter) follower, following, follower verificati, membri delle
-liste, follower delle liste & membri delle community. X Follower Scraper di
-Xquik costa **da $0.00015 per profilo consegnato su ogni piano Apify**. Apify
-fattura a parte l'uso della piattaforma. Non ti serve il login a X & Xquik non
-aggiunge costi di avvio o per query.
+Esporta una lista di follower di Twitter con following, follower verificati,
+membri delle liste, follower delle liste & membri delle community. X Follower
+Scraper di Xquik costa **da $0.00015 per profilo consegnato su ogni piano
+Apify**. Apify fattura a parte l'uso della piattaforma. Non ti serve il login a
+X & Xquik non aggiunge costi di avvio o per query.
 
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.

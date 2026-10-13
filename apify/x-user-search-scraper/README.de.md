@@ -21,7 +21,7 @@ Nutzer nach Nutzername, Bio & Standort. Die meisten anderen Apify Actors rechnen
 ab, bevor sie filtern oder Duplikate entfernen. Xquik rechnet nur gelieferte,
 eindeutige Ergebnisse ab, die zu deinen Filtern passen.
 
-Suche Accounts auf X (Twitter) nach Name, Thema, Bio oder Standort. Du brauchst
+Starte eine Twitter-Nutzersuche nach Name, Thema, Bio oder Standort. Du brauchst
 keinen X-API-Schlüssel & keinen Login. Du zahlst **$0.00015 pro geliefertem
 Profil**, & Apify berechnet die Plattformnutzung separat.
 

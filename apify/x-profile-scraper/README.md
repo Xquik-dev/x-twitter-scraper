@@ -25,9 +25,10 @@ replies, media & followers for any handle. Most other Apify Actors charge before
 filtering or deduplicating. Xquik charges only for delivered, unique,
 filter-matching results.
 
-Scrape X profiles, posts, replies, media & followers from handles, IDs or URLs.
-You pay **$0.00015 per delivered row**, & Apify bills platform usage separately.
-You need no X API key or login.
+Look up Twitter accounts in bulk & read profiles without an X account. Scrape X
+profiles, posts, replies, media & followers from handles, IDs or URLs. You pay
+**$0.00015 per delivered row**, & Apify bills platform usage separately. You
+need no X API key or login.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.

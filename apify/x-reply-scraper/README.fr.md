@@ -21,12 +21,13 @@ les réponses, les commentaires et des conversations entières. La plupart des
 autres Actors Apify facturent avant de filtrer ou de dédupliquer. Xquik facture
 seulement les **résultats livrés, uniques et conformes à vos filtres**.
 
-Scrapez les réponses X (Twitter) pour **$0.00015 par ligne livrée** sur chaque
-plan Apify. Collez des URL de posts, des ID de post, des URL de profil ou des
-noms d'utilisateur. Exportez les réponses, les conversations, les auteurs,
-l'engagement, les entités et les URL des médias. Apify facture votre usage de la
-plateforme à part. Vous n'avez pas besoin de connexion X. Les filtres passent
-avant l'écriture dans le dataset, donc vous payez seulement les lignes livrées.
+Scrapez les réponses et commentaires Twitter pour **$0.00015 par ligne livrée**
+sur chaque plan Apify, et lisez-les sans compte X. Collez des URL de posts, des
+ID de post, des URL de profil ou des noms d'utilisateur. Exportez les réponses,
+les conversations, les auteurs, l'engagement, les entités et les URL des médias.
+Apify facture votre usage de la plateforme à part. Vous n'avez pas besoin de
+connexion X. Les filtres passent avant l'écriture dans le dataset, donc vous
+payez seulement les lignes livrées.
 
 > Xquik est un service tiers indépendant. Non affilié à X Corp.
 > "Twitter" et "X" sont des marques déposées de X Corp.

@@ -28,10 +28,11 @@ Actor's fields, as the [benchmark below](#benchmark) shows. Most other Apify
 Actors charge before filtering or deduplicating. Xquik charges only for
 delivered, unique, filter-matching results.
 
-Scrape X (Twitter) followers, following, verified followers, List members, List
-subscribers & Community members. Xquik's X Follower Scraper costs **from
-$0.00015 per delivered profile on every Apify plan**. Apify bills platform usage
-separately. You need no X login, & Xquik adds no start or query fee.
+Export a Twitter followers list with following, verified followers, List
+members, List subscribers & Community members. Xquik's X Follower Scraper costs
+**from $0.00015 per delivered profile on every Apify plan**. Apify bills
+platform usage separately. You need no X login, & Xquik adds no start or query
+fee.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.

@@ -25,8 +25,8 @@ satırları, medyan Actor'ın 2,5 katı alan taşır. Diğer Apify Actor'ların�
 filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
 edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır.
 
-X (Twitter) takipçilerini, takip edilenleri, onaylı takipçileri, Liste
-üyelerini, Liste abonelerini ve Topluluk üyelerini kazı. Xquik'in X Follower
+Twitter takipçi listesini takip edilenler, onaylı takipçiler, Liste üyeleri,
+Liste aboneleri ve Topluluk üyeleriyle birlikte dışa aktar. Xquik'in X Follower
 Scraper'ı **her Apify planında teslim edilen profil başına $0.00015'ten
 başlar**. Apify, platform kullanımını ayrıca faturalandırır. X girişi gerekmez,
 Xquik başlatma veya sorgu ücreti de eklemez.

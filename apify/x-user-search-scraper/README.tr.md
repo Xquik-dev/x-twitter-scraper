@@ -21,7 +21,7 @@ kullanıcı adı, biyografi ve konuma göre bulur. Diğer Apify Actor'larının 
 filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
 edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır.
 
-Twitter hesaplarını isme, konuya, biyografiye veya konuma göre ara. X API
+İsme, konuya, biyografiye veya konuma göre Twitter kullanıcı araması yap. X API
 anahtarı ya da giriş gerekmez. **Teslim edilen profil başına $0.00015** ödersin.
 Apify, platform kullanımını ayrıca faturalandırır.
 

@@ -21,9 +21,10 @@ risposte, media & follower di qualsiasi nome utente. La maggior parte degli
 altri Actor Apify fa pagare prima di filtrare o deduplicare. Xquik fa pagare
 solo i risultati consegnati, unici e conformi ai filtri.
 
-Estrai profili, post, risposte, media & follower di X da nomi utente, ID o URL.
-Paghi **$0.00015 per riga consegnata**. Apify fattura a parte l'uso della
-piattaforma. Non ti servono una chiave API X né il login.
+Consulta account Twitter in blocco & leggi i profili senza un account X. Estrai
+profili, post, risposte, media & follower di X da nomi utente, ID o URL. Paghi
+**$0.00015 per riga consegnata**. Apify fattura a parte l'uso della piattaforma.
+Non ti servono una chiave API X né il login.
 
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.

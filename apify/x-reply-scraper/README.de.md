@@ -21,12 +21,12 @@ Antworten, Kommentare & ganze Konversationen. Die meisten anderen Apify Actors
 rechnen ab, bevor sie filtern oder Duplikate entfernen. Xquik berechnet nur
 **gelieferte, eindeutige Ergebnisse, die zu deinen Filtern passen**.
 
-Scrape Antworten auf X (Twitter) für **$0.00015 pro geliefertem Datensatz**, auf
-jedem Apify-Plan. Füge Post-URLs, Post-IDs (Tweet-IDs), Profil-URLs oder
-Nutzernamen ein. Exportiere Antworten, Konversationen, Autoren, Interaktionen,
-Entitäten & Medien-URLs. Apify berechnet deine Plattformnutzung separat. Du
-brauchst keinen X-Login. Filter laufen, bevor der Actor ins Dataset schreibt. Du
-zahlst also nur für gelieferte Datensätze.
+Scrape Antworten & Kommentare auf Twitter für **$0.00015 pro geliefertem
+Datensatz**, auf jedem Apify-Plan, & lies sie ohne X-Account. Füge Post-URLs,
+Post-IDs (Tweet-IDs), Profil-URLs oder Nutzernamen ein. Exportiere Antworten,
+Konversationen, Autoren, Interaktionen, Entitäten & Medien-URLs. Apify berechnet
+deine Plattformnutzung separat. Du brauchst keinen X-Login. Filter laufen, bevor
+der Actor ins Dataset schreibt. Du zahlst also nur für gelieferte Datensätze.
 
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
