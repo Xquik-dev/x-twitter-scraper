@@ -667,7 +667,7 @@ Le finestre di date includono il limite inferiore & escludono quello superiore.
 L'Actor controlla entrambi i limiti prima di aggiungere o addebitare ogni post.
 
 Per l'elenco completo degli operatori, vedi
-[Twitter Advanced Search](https://github.com/igorbrigadir/twitter-advanced-search).
+[Twitter advanced search operators](https://github.com/Xquik-dev/x-twitter-advanced-search).
 
 ### Migra da un altro Actor di tweet
 

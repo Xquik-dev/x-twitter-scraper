@@ -682,7 +682,7 @@ Les fenêtres de dates incluent la borne basse et excluent la borne haute.
 L'Actor vérifie les 2 bornes avant d'ajouter ou de facturer chaque post.
 
 Pour la liste complète des opérateurs, voir
-[Twitter Advanced Search](https://github.com/igorbrigadir/twitter-advanced-search).
+[Twitter advanced search operators](https://github.com/Xquik-dev/x-twitter-advanced-search).
 
 ### Migrer depuis un autre Actor de posts
 

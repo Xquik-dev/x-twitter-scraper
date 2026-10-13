@@ -419,7 +419,7 @@ X 不再支持搜索 `filter:vine`、`filter:consumer_video`、`filter:pro_video
 
 日期窗口包含下限，不包含上限。该 Actor 在添加每条帖子并计费前，会检查这两个边界。
 
-完整的运算符列表见 [Twitter Advanced Search](https://github.com/igorbrigadir/twitter-advanced-search)。
+完整的运算符列表见 [Twitter advanced search operators](https://github.com/Xquik-dev/x-twitter-advanced-search)。
 
 ### 从其他帖子抓取 Actor 迁移
 

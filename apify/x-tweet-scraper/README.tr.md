@@ -668,7 +668,7 @@ Tarih aralıkları alt sınırı içerir, üst sınırı içermez. Actor her gö
 eklemeden veya ücretlendirmeden önce iki sınırı da kontrol eder.
 
 Operatörlerin tam listesi için
-[Twitter Advanced Search](https://github.com/igorbrigadir/twitter-advanced-search)
+[Twitter advanced search operators](https://github.com/Xquik-dev/x-twitter-advanced-search)
 sayfasına bak.
 
 ### Başka bir gönderi Actor'ından geçiş yap

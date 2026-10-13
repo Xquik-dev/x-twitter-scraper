@@ -670,7 +670,7 @@ Datumsfenster schließen die untere Grenze ein & die obere aus. Der Actor prüft
 beide Grenzen, bevor er einen Post hinzufügt oder abrechnet.
 
 Die vollständige Operatorliste findest du unter
-[Twitter Advanced Search](https://github.com/igorbrigadir/twitter-advanced-search).
+[Twitter advanced search operators](https://github.com/Xquik-dev/x-twitter-advanced-search).
 
 ### Von einem anderen Tweet-Actor wechseln
 

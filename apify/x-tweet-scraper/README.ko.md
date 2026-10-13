@@ -636,7 +636,7 @@ X는 그보다 긴 쿼리를 검색하지 않습니다.
 추가하거나 과금하기 전에 두 경계를 모두 확인합니다.
 
 전체 연산자 목록은
-[Twitter Advanced Search](https://github.com/igorbrigadir/twitter-advanced-search)를
+[Twitter advanced search operators](https://github.com/Xquik-dev/x-twitter-advanced-search)를
 보세요.
 
 ### 다른 게시물 Actor에서 옮겨오기

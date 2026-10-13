@@ -420,7 +420,7 @@ Xは、`filter:vine`、`filter:consumer_video`、`filter:pro_video`、`filter:ne
 
 日付の範囲は、下限を含み、上限を含みません。このActorは、各ポストを追加または課金する前に、両方の境界を確認します。
 
-演算子の全一覧は、[Twitter Advanced Search](https://github.com/igorbrigadir/twitter-advanced-search)を参照してください。
+演算子の全一覧は、[Twitter advanced search operators](https://github.com/Xquik-dev/x-twitter-advanced-search)を参照してください。
 
 ### 他のポスト用Actorから移行する
 
