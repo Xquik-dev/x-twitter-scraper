@@ -36,7 +36,7 @@ Identify likely bots or inactive followers. The API only reports candidates. The
 |---|---|---|
 | POST /extractions with toolType=follower_explorer | Full follower list | Per-row |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example requests
 
@@ -51,7 +51,7 @@ Poll `GET /extractions/{id}` until `status: "completed"`, then `GET /extractions
 ## Review the followers
 
 1. Get confirmation for the usage, then extract the full follower list.
-2. Flag likely ghosts:
+2. Flag likely ghosts.
    - Flag accounts that match the declared count and age thresholds.
    - Flag missing avatars and copied or empty bios for review.
 3. Show the user a flagged shortlist.

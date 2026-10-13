@@ -28,7 +28,7 @@ metadata:
 
 # X Communities
 
-Read X Communities: members, posts, and search across communities. Read-only.
+Read X Community members and posts, and search across communities. Read-only.
 
 ## Choose an endpoint
 
@@ -40,7 +40,7 @@ Read X Communities: members, posts, and search across communities. Read-only.
 | POST /extractions with toolType=community_moderator_explorer | Community moderators | Per-row |
 | POST /extractions/estimate | Preview usage before running | Included |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example requests
 

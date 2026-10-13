@@ -41,11 +41,11 @@ Search X tweets with live pagination or a bounded bulk extraction.
 | GET /extractions/{id} | Retrieve paginated results with `cursor` | Included |
 | GET /extractions/{id}/export | Export CSV/XLSX/MD | Included |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key` header.
 
 ## Query syntax
 
-The endpoint supports standard advanced Twitter search operators:
+The endpoint supports standard advanced Twitter search operators.
 
 | Operator | Example | Meaning |
 |---|---|---|
@@ -71,21 +71,21 @@ GET /x/tweets/search?q=<url-encoded query>&queryType=Latest&cursor=<optional>
 
 Send the URL-encoded query in `q`. Set `queryType` to `Latest` or `Top`. The endpoint also accepts `cursor`, `sinceTime`, `untilTime`, and `limit`.
 
-Response: `{ tweets: [...], has_next_page: true, next_cursor: "..." }`. Loop until `has_next_page` is false or you hit the number you need.
+The response is `{ tweets: [...], has_next_page: true, next_cursor: "..." }`. Loop until `has_next_page` is false or you hit the number you need.
 
 A fresh cursorless `queryType=Latest` sequence is newest-first across pages.
 Existing cursors retain their established ordering.
 
 ## Bulk search
 
-Always estimate first so the user sees the usage estimate before committing:
+Always estimate first so the user sees the usage estimate before committing.
 
 ```
 POST /extractions/estimate
 { "toolType": "tweet_search_extractor", "searchQuery": "<query>" }
 ```
 
-Show the user the estimated usage and result count. On confirmation:
+Show the user the estimated usage and result count. On confirmation, create the job.
 
 ```
 POST /extractions
@@ -118,7 +118,7 @@ Malformed cursors return `400 invalid_coverage_cursor`. Restart without them.
 | 402 | `insufficient_credits` | Explain the account state and direct the user to the dashboard |
 | 429 | `x_api_rate_limited` | Exponential backoff, respect `Retry-After` |
 
-Read tier rate limit: 300 requests per 1s.
+The Read tier rate limit is 300 requests per 1s.
 
 ## Tweet IDs are strings
 

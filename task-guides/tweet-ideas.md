@@ -38,7 +38,7 @@ Generate a batch of short topic prompts. The user or `write-tweets` turns each p
 | GET /x/trends | Seed ideas from current X trends | Read tier |
 | GET /radar | Seed ideas from current news and developer trends | Included |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example requests
 

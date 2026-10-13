@@ -37,7 +37,7 @@ List the host, co-hosts, speakers, and listeners in an X Space.
 | POST /extractions with toolType=space_explorer | Space participants and role | Per-row |
 | POST /extractions/estimate | Preview usage before running | Included |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example requests
 
@@ -50,7 +50,7 @@ POST /extractions
 -> 202 { "id": "<extractionId>", "toolType": "space_explorer", "status": "running" }
 ```
 
-Each row: `{ username, name, role: "host"|"cohost"|"speaker"|"listener", joined_at }`.
+Each row is `{ username, name, role: "host"|"cohost"|"speaker"|"listener", joined_at }`.
 
 ## Fetch the Space data
 

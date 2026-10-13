@@ -38,7 +38,7 @@ Send and read direct messages through a connected X account. Process 1 recipient
 | GET /x/dm/{userId}/history?account={username} | Read DM history with a user | Read tier |
 | GET /x/users/{id} | Resolve @handle to numeric user ID | Read tier |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 Every send also requires a unique `Idempotency-Key` header.
 Direct REST callers supply it. Hosted MCP injects it automatically.
 
@@ -74,12 +74,12 @@ The recipient must allow DMs from people they don't follow, or must follow the s
 
 ## Confirmation rules
 
-DMs are private messages sent as the user. Never send without explicit confirmation of:
+DMs are private messages sent as the user. Never send without explicit confirmation of each of these.
 - Recipient handle
 - Exact message text
 - Sending account
 
-Hard no:
+These are a hard no.
 - Bulk DMs across multiple recipients in one turn
 - Auto-replying to incoming DMs without per-message confirmation
 - Using DMs for any promotional content without user direction

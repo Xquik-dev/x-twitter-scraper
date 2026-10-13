@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 88cb2765f07671180d595ca58c3784378d3f218f86ca8ba51a04a92367c6c3d0. -->
+<!-- Translation source SHA-256: 40bd678d168ebb99f305120d03a7e1d7adcccee6a303c14b3af29b2b7c7f34db. -->
 
 # API de scraping de X (Twitter) y servidor MCP de Twitter
 
@@ -57,7 +57,7 @@ una cuenta de X conectada.
 ## Haz tu primera solicitud
 
 Crea una clave en el [panel de Xquik](https://dashboard.xquik.com/en/account?tab=api-keys).
-Guárdala como `XQUIK_API_KEY` y ejecuta una búsqueda limitada:
+Guárdala como `XQUIK_API_KEY` y ejecuta una búsqueda limitada.
 
 ```bash
 export XQUIK_API_KEY='xq_replace_me'
@@ -73,7 +73,7 @@ curl --get 'https://xquik.com/api/v1/x/tweets/search' \
   --data-urlencode 'limit=25'
 ```
 
-El contrato en vivo define esta forma de respuesta:
+El contrato en vivo define esta forma de respuesta.
 
 ```ts
 type SearchResponse = {
@@ -220,7 +220,7 @@ const page = await client.x.tweets.search({
 
 ### MCP
 
-Llama a `execute` con este código:
+Llama a `execute` con este código.
 
 ```js
 async () => xquik.request("/api/v1/x/tweets/search", {
@@ -332,7 +332,7 @@ extracción cuestan 1 crédito. Un artículo cuesta 5. Los documentos en vivo a�
 no prueban el cargo final de cada fila deduplicada. No uses la estimación como
 factura final.
 
-Estima el trabajo antes de crearlo. Esta llamada no consume créditos:
+Estima el trabajo antes de crearlo. Esta llamada no consume créditos.
 
 ```bash
 curl --request POST 'https://xquik.com/api/v1/extractions/estimate' \
@@ -358,7 +358,7 @@ Cada monitor activo consume 30 créditos por hora. Los eventos guardados y las
 entregas webhook están incluidos. Verifica `X-Xquik-Timestamp`,
 `X-Xquik-Nonce` y `X-Xquik-Signature` antes de procesar un evento.
 
-Crea un monitor de palabras clave con una consulta limitada:
+Crea un monitor de palabras clave con una consulta limitada.
 
 ```bash
 curl --request POST 'https://xquik.com/api/v1/monitors/keywords' \
@@ -412,20 +412,20 @@ Consulta a un profesional para trabajos regulados, sensibles o poco claros.
 
 ## Instala el Skill
 
-Instala el Skill principal:
+Instala el Skill principal.
 
 ```bash
 bunx skills@1.5.3 add Xquik-dev/x-twitter-scraper
 ```
 
-Revisa el elemento de shadcn antes de agregarlo:
+Revisa el elemento de shadcn antes de agregarlo.
 
 ```bash
 bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
 bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
 ```
 
-Para pasar el código de tu app de la API oficial de X a Xquik, agrega el [Skill de alternativa a la API de X](https://github.com/Xquik-dev/x-api):
+Para pasar el código de tu app de la API oficial de X a Xquik, agrega el [Skill de alternativa a la API de X](https://github.com/Xquik-dev/x-api).
 
 ```bash
 bunx skills@1.5.3 add Xquik-dev/x-api
@@ -433,7 +433,7 @@ bunx skills@1.5.3 add Xquik-dev/x-api
 
 ### LobeHub
 
-Inicia sesión en LobeHub, instala los Skills y confírmalos:
+Inicia sesión en LobeHub, instala los Skills y confírmalos.
 
 ```bash
 lh login
@@ -445,7 +445,7 @@ lh skill list --source market
 
 ### Codex
 
-Agrega el marketplace, instala el plugin y confírmalo:
+Agrega el marketplace, instala el plugin y confírmalo.
 
 ```bash
 codex plugin marketplace add Xquik-dev/x-twitter-scraper
@@ -455,7 +455,7 @@ codex plugin list
 
 ### Gemini CLI
 
-Revisa el repositorio. Después instala y confirma los Skills:
+Revisa el repositorio. Después instala y confirma los Skills.
 
 ```bash
 gemini skills install https://github.com/Xquik-dev/x-twitter-scraper.git \

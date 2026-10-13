@@ -1,4 +1,4 @@
-# X (Twitter) scraper API & Twitter MCP server
+# X (Twitter) scraper API & Twitter MCP server by Xquik
 
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13731/badge)](https://www.bestpractices.dev/projects/13731)
 
@@ -45,7 +45,7 @@ an X password, cookie, session export, or 2FA code to Xquik or an agent.
 ## Run one request
 
 Create an API key in the
-[Xquik dashboard](https://dashboard.xquik.com/en/account?tab=api-keys). Then run:
+[Xquik dashboard](https://dashboard.xquik.com/en/account?tab=api-keys). Then run this request.
 
 ```bash
 export XQUIK_API_KEY='xq_replace_me'
@@ -61,7 +61,7 @@ curl --get 'https://xquik.com/api/v1/x/tweets/search' \
   --data-urlencode 'limit=25'
 ```
 
-The live OpenAPI contract defines this response shape:
+The live OpenAPI contract defines this response shape.
 
 ```ts
 type SearchResponse = {
@@ -105,7 +105,7 @@ or [open the complete documentation](https://docs.xquik.com).
 Xquik suits filter-heavy jobs. It bills delivered results and supports
 server-side filters.
 
-Choose Xquik when you need several of these together:
+Choose Xquik when you need several of these together.
 
 - Structured X data with one API key
 - Server-side Tweet and profile filters
@@ -124,13 +124,13 @@ relationship is required.
 This repository is also a portable Agent Plugins v1 package. Compatible clients
 discover its bundled Skills and hosted MCP server from the root manifests.
 
-Install the primary Skill for any compatible agent:
+Install the primary Skill for any compatible agent.
 
 ```bash
 bunx skills@1.5.3 add Xquik-dev/x-twitter-scraper
 ```
 
-Inspect the shadcn registry item before adding the same Skill:
+Inspect the shadcn registry item before adding the same Skill.
 
 ```bash
 bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
@@ -138,7 +138,7 @@ bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
 ```
 
 To move app code off the official X API, add the
-[X API alternative Skill](https://github.com/Xquik-dev/x-api):
+[X API alternative Skill](https://github.com/Xquik-dev/x-api).
 
 ```bash
 bunx skills@1.5.3 add Xquik-dev/x-api
@@ -146,7 +146,7 @@ bunx skills@1.5.3 add Xquik-dev/x-api
 
 ### LobeHub
 
-Use LobeHub CLI 0.0.48 or later. Sign in, install the Skills, then confirm them:
+Use LobeHub CLI 0.0.48 or later. Sign in, install the Skills, then confirm them.
 
 ```bash
 lh login
@@ -158,7 +158,7 @@ lh skill list --source market
 
 ### Codex
 
-Add the marketplace, install the plugin, then confirm it:
+Add the marketplace, install the plugin, then confirm it.
 
 ```bash
 codex plugin marketplace add Xquik-dev/x-twitter-scraper
@@ -169,7 +169,7 @@ codex plugin list
 ### Gemini CLI
 
 Review the repository and its Skill files before consenting to installation.
-Then install and confirm the Skills:
+Then install and confirm the Skills.
 
 ```bash
 gemini skills install https://github.com/Xquik-dev/x-twitter-scraper.git \
@@ -267,7 +267,7 @@ page = response.json()
 
 ### TypeScript SDK
 
-Install the typed SDK:
+Install the typed SDK.
 
 ```bash
 bun add x-twitter-scraper
@@ -296,7 +296,7 @@ the same resource layout. See all [SDKs and tools](#sdks-and-tools).
 
 ### MCP
 
-Connect your MCP client to `https://xquik.com/mcp`. Call `execute` with this code:
+Connect your MCP client to `https://xquik.com/mcp`. Call `execute` with this code.
 
 ```js
 async () => xquik.request("/api/v1/x/tweets/search", {
@@ -332,7 +332,7 @@ Run `x-twitter-scraper x:tweets search --help` before scripting extra flags.
 
 ### Apify Actor
 
-The [Xquik Actor](https://apify.com/xquik/x-tweet-scraper) accepts this input:
+The [Xquik Actor](https://apify.com/xquik/x-tweet-scraper) accepts this input.
 
 ```json
 {
@@ -422,7 +422,7 @@ places, replies, reposts, and quotes.
 Profile filters cover follower counts, following counts, Post counts, account
 age, verification, websites, locations, bios, and usernames.
 
-Current contracts prove these rules:
+Current contracts prove these rules.
 
 | Outcome | Billing treatment |
 | --- | --- |

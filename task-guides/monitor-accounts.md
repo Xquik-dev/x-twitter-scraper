@@ -39,7 +39,7 @@ Watch specific accounts for new posts or profile changes. Create a monitor only 
 | DELETE /monitors/{id} | Stop a monitor | Included |
 | GET /events?monitorId=<id>&cursor=<cursor> | Poll new events | Included |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example requests
 

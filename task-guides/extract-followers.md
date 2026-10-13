@@ -38,18 +38,18 @@ Export followers from any visible X account. Filter verified profiles or set a m
 | POST /extractions with toolType=verified_follower_explorer | Verified followers only | Per-row |
 | POST /extractions/estimate | Preview usage before running | Included |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example requests
 
-Estimate usage first:
+Estimate usage first.
 
 ```
 POST /extractions/estimate
 { "toolType": "follower_explorer", "targetUsername": "handle" }
 ```
 
-Then create the extraction:
+Then create the extraction.
 
 ```
 POST /extractions
@@ -59,7 +59,7 @@ POST /extractions
 
 Send `toolType`, not `tool`. Send a bare handle without `@` in `targetUsername`. Use `verified_follower_explorer` for verified profiles only.
 
-Each result row: `{ username, name, bio, followers_count, following_count, verified, created_at }`.
+Each result row is `{ username, name, bio, followers_count, following_count, verified, created_at }`.
 
 ## Export the followers
 

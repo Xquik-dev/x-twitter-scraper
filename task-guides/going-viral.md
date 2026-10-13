@@ -41,7 +41,7 @@ Find recent reference posts, draft in the user's saved style, and score the resu
 | Score | POST /compose with step=score |
 | Refine | POST /compose with step=refine |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Draft and score the tweet
 

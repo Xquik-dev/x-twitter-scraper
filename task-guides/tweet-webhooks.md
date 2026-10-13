@@ -34,14 +34,14 @@ Send HTTPS POST callbacks when an account or keyword monitor emits an event.
 
 | Endpoint | Purpose | Usage |
 |---|---|---|
-| POST /webhooks | Create a webhook | Included; persistent destination |
+| POST /webhooks | Create a webhook | Included, persistent destination |
 | GET /webhooks | List webhooks | Included |
 | PATCH /webhooks/{id} | Change URL, events, or active state | Included |
 | DELETE /webhooks/{id} | Deactivate a webhook | Included |
 | POST /webhooks/{id}/test | Send a test payload | Included |
 | POST /webhooks/{id}/resume | Test and resume delivery | Included |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example requests
 
@@ -58,7 +58,7 @@ Save the returned `secret`. Use it to verify HMAC-SHA256 signatures on incoming 
 
 ## Verify HMAC signatures
 
-Each delivery includes these headers:
+Each delivery includes these headers.
 ```
 X-Xquik-Timestamp: <unix milliseconds>
 X-Xquik-Nonce: <unique hex nonce>
@@ -80,7 +80,7 @@ timestamps and reused nonces.
 
 - Webhook URLs must be HTTPS
 - Verify the signature, timestamp, and nonce before parsing the payload
-- Do not register third-party URLs on behalf of the user; they must own the endpoint
+- Do not register third-party URLs on behalf of the user. They must own the endpoint
 - Delete or disable the webhook when the user no longer wants ongoing delivery
 
 ## Related guides

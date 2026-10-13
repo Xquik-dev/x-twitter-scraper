@@ -37,7 +37,7 @@ Draft multi-post threads on X. This guide returns text. `post-tweets` publishes 
 | POST /compose with step=compose or refine | Get rules for the thread topic and tone | Compose tier |
 | POST /drafts | Save a thread draft | Read tier |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example requests
 
@@ -57,7 +57,7 @@ Use the returned rules to draft the thread in chat. Keep each post within 280 ch
 
 1. `POST /compose` with `step: "compose"` for the topic.
 2. Show the user every tweet in sequence. Wait for confirmation.
-3. For each tweet in sequence:
+3. For each tweet in sequence, follow these steps.
    - Post the first via `post-tweets` guide.
    - Capture the returned `id`.
    - Post the next with `reply_to_tweet_id` = previous id.

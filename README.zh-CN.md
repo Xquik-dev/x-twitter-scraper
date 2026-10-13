@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 88cb2765f07671180d595ca58c3784378d3f218f86ca8ba51a04a92367c6c3d0. -->
+<!-- Translation source SHA-256: 40bd678d168ebb99f305120d03a7e1d7adcccee6a303c14b3af29b2b7c7f34db. -->
 
 # X（Twitter）抓取 API 与 Twitter MCP 服务器
 
@@ -53,7 +53,7 @@ MCP 和 Apify 搜索帖子、导出数据并监控账号。Xquik 只对已交付
 ## 发送第一个请求
 
 在 [Xquik 控制台](https://dashboard.xquik.com/en/account?tab=api-keys)创建 API
-密钥。将密钥保存为 `XQUIK_API_KEY`，然后运行一个有结果上限的搜索：
+密钥。将密钥保存为 `XQUIK_API_KEY`，然后运行一个有结果上限的搜索。
 
 ```bash
 export XQUIK_API_KEY='xq_replace_me'
@@ -69,7 +69,7 @@ curl --get 'https://xquik.com/api/v1/x/tweets/search' \
   --data-urlencode 'limit=25'
 ```
 
-当前合同定义了以下响应结构：
+当前合同定义了以下响应结构。
 
 ```ts
 type SearchResponse = {
@@ -213,7 +213,7 @@ const page = await client.x.tweets.search({
 
 ### MCP
 
-使用以下代码调用 `execute`：
+使用以下代码调用 `execute`。
 
 ```js
 async () => xquik.request("/api/v1/x/tweets/search", {
@@ -319,7 +319,7 @@ Xquik 在交付前应用受支持的筛选条件。被排除的行不会产生�
 搜索按每个返回 Tweet 收取 1 个信用点。大多数提取结果为 1 个，文章为 5 个。
 实时文档尚未证明每个去重结果的最终扣费。不要把估算当作最终账单。
 
-创建任务前先估算。此调用不消耗点数：
+创建任务前先估算。此调用不消耗点数。
 
 ```bash
 curl --request POST 'https://xquik.com/api/v1/extractions/estimate' \
@@ -344,7 +344,7 @@ curl --request POST 'https://xquik.com/api/v1/extractions/estimate' \
 信用点。已保存事件和 webhook 交付已包含。处理事件前，请验证
 `X-Xquik-Timestamp`、`X-Xquik-Nonce` 和 `X-Xquik-Signature`。
 
-使用有限查询创建关键词监控：
+使用有限查询创建关键词监控。
 
 ```bash
 curl --request POST 'https://xquik.com/api/v1/monitors/keywords' \
@@ -392,20 +392,20 @@ Xquik 返回当前可用的数据。它不会编造缺失字段，也不会恢�
 
 ## 安装 Skill
 
-安装主要 Skill：
+安装主要 Skill。
 
 ```bash
 bunx skills@1.5.3 add Xquik-dev/x-twitter-scraper
 ```
 
-添加前先检查 shadcn 注册项：
+添加前先检查 shadcn 注册项。
 
 ```bash
 bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
 bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
 ```
 
-要把应用代码从官方 X API 迁移到 Xquik，请添加 [X API 替代 Skill](https://github.com/Xquik-dev/x-api)：
+要把应用代码从官方 X API 迁移到 Xquik，请添加 [X API 替代 Skill](https://github.com/Xquik-dev/x-api)。
 
 ```bash
 bunx skills@1.5.3 add Xquik-dev/x-api
@@ -413,7 +413,7 @@ bunx skills@1.5.3 add Xquik-dev/x-api
 
 ### LobeHub
 
-登录 LobeHub，安装两个 Skill，并确认结果：
+登录 LobeHub，安装两个 Skill，并确认结果。
 
 ```bash
 lh login
@@ -425,7 +425,7 @@ lh skill list --source market
 
 ### Codex
 
-添加市场，安装插件，并确认结果：
+添加市场，安装插件，并确认结果。
 
 ```bash
 codex plugin marketplace add Xquik-dev/x-twitter-scraper
@@ -435,7 +435,7 @@ codex plugin list
 
 ### Gemini CLI
 
-先检查仓库，再安装并确认 Skill：
+先检查仓库，再安装并确认 Skill。
 
 ```bash
 gemini skills install https://github.com/Xquik-dev/x-twitter-scraper.git \

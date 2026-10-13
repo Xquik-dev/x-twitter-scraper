@@ -37,7 +37,7 @@ Score drafts against engagement predictors and get targeted rewrite suggestions.
 | POST /compose with step=score | Score a tweet draft | Compose tier |
 | POST /compose with step=refine | Get rewrite rules for a topic, tone, and goal | Compose tier |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example requests
 
@@ -65,7 +65,7 @@ POST /compose
 ## Score and revise the tweet
 
 1. Take the user's draft.
-2. Call `step: "score"` first; show current score and signals.
+2. Call `step: "score"` first. Show the current score and signals.
 3. If the user wants a rewrite, call `step: "refine"` and draft 2-3 variants from the returned guidance.
 4. Score the user's preferred variant with `step: "score"`.
 5. The user selects the text. Pass it to `post-tweets` for publishing.
