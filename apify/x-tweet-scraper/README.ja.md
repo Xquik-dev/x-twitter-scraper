@@ -302,7 +302,7 @@ IDはすべて1回の実行にまとめてください。どの実行も、Apify
 - [RAG用のXデータセットを構築する](https://apify.com/xquik/x-tweet-scraper/examples/build-x-rag-dataset)
 - [RAG用にX記事を抽出する](https://apify.com/xquik/x-tweet-scraper/examples/extract-x-article-for-rag)
 - [X上のAI検索での露出を監視する](https://apify.com/xquik/x-tweet-scraper/examples/monitor-ai-search-visibility-on-x)
-- [AI SEOと生成エンジン最適化を追跡する](https://apify.com/xquik/x-tweet-scraper/examples/track-generative-engine-optimization-talk)
+- [日付でTwitterを検索する](https://apify.com/xquik/x-tweet-scraper/examples/search-twitter-by-date)
 - [X上でAIエージェントツールを発見する](https://apify.com/xquik/x-tweet-scraper/examples/discover-ai-agent-tools-on-x)
 - [AI製品へのフィードバックを収集する](https://apify.com/xquik/x-tweet-scraper/examples/collect-ai-product-feedback)
 - [X上でのブランド言及を監視する](https://apify.com/xquik/x-tweet-scraper/examples/monitor-brand-mentions-on-x)

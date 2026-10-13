@@ -301,7 +301,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 - [构建用于 RAG 的 X 数据集](https://apify.com/xquik/x-tweet-scraper/examples/build-x-rag-dataset)
 - [提取用于 RAG 的 X 文章](https://apify.com/xquik/x-tweet-scraper/examples/extract-x-article-for-rag)
 - [监测 X 上的 AI 搜索可见度](https://apify.com/xquik/x-tweet-scraper/examples/monitor-ai-search-visibility-on-x)
-- [追踪 AI SEO 与生成式引擎优化](https://apify.com/xquik/x-tweet-scraper/examples/track-generative-engine-optimization-talk)
+- [按日期搜索 Twitter](https://apify.com/xquik/x-tweet-scraper/examples/search-twitter-by-date)
 - [发现 X 上的 AI Agent 工具](https://apify.com/xquik/x-tweet-scraper/examples/discover-ai-agent-tools-on-x)
 - [收集 AI 产品反馈](https://apify.com/xquik/x-tweet-scraper/examples/collect-ai-product-feedback)
 - [监测 X 上的品牌提及](https://apify.com/xquik/x-tweet-scraper/examples/monitor-brand-mentions-on-x)

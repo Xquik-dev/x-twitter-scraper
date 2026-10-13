@@ -240,7 +240,7 @@ Xquik 的 X Follower Scraper 返回关注者、正在关注的账号、列表和
 - [为 AI Agent 构建 X 受众数据集](https://apify.com/xquik/x-follower-scraper/examples/build-agent-ready-x-audience-dataset)
 - [为 RAG 收集 X 受众数据](https://apify.com/xquik/x-follower-scraper/examples/collect-x-audience-data-for-rag)
 - [在 X 上寻找 AI SEO 从业者](https://apify.com/xquik/x-follower-scraper/examples/find-ai-seo-practitioners-on-x)
-- [比较 AI 品牌的关注者重叠](https://apify.com/xquik/x-follower-scraper/examples/compare-ai-brand-follower-overlap)
+- [查看 Twitter 上谁关注了谁](https://apify.com/xquik/x-follower-scraper/examples/check-who-follows-who-on-twitter)
 - [把 Twitter 关注者导出为 CSV](https://apify.com/xquik/x-follower-scraper/examples/export-twitter-followers-to-csv)
 - [分析竞争对手的关注者重叠](https://apify.com/xquik/x-follower-scraper/examples/analyze-competitor-follower-overlap)
 - [在 X 关注者中寻找微型网红](https://apify.com/xquik/x-follower-scraper/examples/find-micro-influencers-in-followers)
