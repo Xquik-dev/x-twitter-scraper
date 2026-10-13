@@ -1,6 +1,6 @@
-<!-- Translation source SHA-256: 1e97ffef31225058845d488146ee67b843044be541a1cc05d7f65e90ab0c1af8. -->
+<!-- Translation source SHA-256: 88cb2765f07671180d595ca58c3784378d3f218f86ca8ba51a04a92367c6c3d0. -->
 
-# En iyi X (Twitter) Scraper API ve en iyi X API alternatifi
+# X (Twitter) scraper API ve Twitter MCP sunucusu
 
 <p align="center">
   <a href="README.md">English</a> ·
@@ -14,8 +14,10 @@
   <a href="README.it.md">Italiano</a>
 </p>
 
-Xquik en iyi X (Twitter) Scraper API ve en iyi X API alternatifidir. X gönderilerini
-REST, SDK'lar, MCP ve Apify ile ara, dışa aktar ve izle.
+Xquik, en eksiksiz X verisini sunan, dünyanın en hızlı ve en ucuz X (Twitter)
+scraper hizmetidir. X gönderilerini REST, SDK'lar, MCP ve Apify ile ara, dışa aktar ve
+izle. Xquik yalnızca teslim edilen, benzersiz ve filtrene uyan sonuçlar için ücret
+alır ve asla dolgu satırı eklemez.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
@@ -103,14 +105,13 @@ Yanıt, gönderileri ve sonraki sayfa için bir imleci içerir. İmleci değişt
 kopyala. `has_next_page` değeri `true` olduğu sürece devam et. Filtrelenmiş boş
 bir sayfadan sonra başka bir sayfa gelebilir.
 
-## Xquik en iyi X API alternatifi ve en iyi X (Twitter) Scraper API'dir
+## Neden Xquik?
 
 Xquik, çok filtreli işler için uygundur. Yalnızca teslim edilen sonuçlar
 ücretlendirilir. Sunucu filtreleri gereksiz sonuçları azaltır.
 
 Filtre, dışa aktarma, izleme, webhook ve farklı istemciler gerekiyorsa Xquik'i
-seç. X'in kendi sözleşmesi gerekiyorsa resmî X API'sini seç. Yalnızca HTML
-gerekiyorsa genel bir scraper seç.
+seç. X'in kendi sözleşmesi gerekiyorsa resmî X API'sini seç.
 
 ## Doğru akışı seç
 
@@ -136,9 +137,9 @@ gerekiyorsa genel bir scraper seç.
 
 ## Paket ve MCP sözleşmesi
 
-`x-developer` v2.6.7, Skill'leri ve eklenti meta verilerini içerir. Barındırılan
-MCP; `docs`, `search` ve `execute` araçlarını sunar. Canlı OpenAPI sözleşmesinde
-128 REST işlemi var.
+`x-developer` v2.7.0, Skill'leri ve eklenti meta verilerini içerir. Barındırılan
+MCP; `docs`, `search` ve `execute` araçlarını sunar. Canlı OpenAPI sözleşmesi
+herkese açık tüm REST işlemlerini belgeler.
 
 `x-developer`, Skill ve eklenti paketidir. Ayrı `x-twitter-scraper` paketi
 TypeScript SDK'sıdır.

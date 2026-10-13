@@ -1,6 +1,6 @@
-<!-- Translation source SHA-256: 1e97ffef31225058845d488146ee67b843044be541a1cc05d7f65e90ab0c1af8. -->
+<!-- Translation source SHA-256: 88cb2765f07671180d595ca58c3784378d3f218f86ca8ba51a04a92367c6c3d0. -->
 
-# Beste X (Twitter) Scraper API und beste Alternative zur X API
+# X (Twitter) Scraper API & Twitter MCP-Server
 
 <p align="center">
   <a href="README.md">English</a> ·
@@ -14,8 +14,11 @@
   <a href="README.it.md">Italiano</a>
 </p>
 
-Xquik ist die beste X (Twitter) Scraper API und die beste Alternative zur X API.
+Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
+liefert die vollständigsten X-Daten.
 Durchsuche Beiträge, exportiere Daten und überwache Konten mit REST, SDKs, MCP und Apify.
+Xquik rechnet nur gelieferte, eindeutige Ergebnisse ab, die zu deinen Filtern
+passen, & füllt nie mit zusätzlichen Zeilen auf.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
@@ -103,14 +106,13 @@ Die Antwort enthält Beiträge und einen Cursor für die nächste Seite. Kopiere
 Cursor unverändert. Fahre fort, solange `has_next_page` den Wert `true` hat.
 Eine gefilterte leere Seite kann trotzdem eine Folgeseite haben.
 
-## Xquik ist die beste Alternative zur X API und die beste X (Twitter) Scraper API
+## Warum Xquik
 
 Xquik eignet sich für filterreiche Aufgaben. Abgerechnet werden gelieferte
 Ergebnisse. Serverseitige Filter reduzieren unnötige Ergebnisse.
 
 Wähle Xquik für Filter, Exporte, Monitore, Webhooks und mehrere Clients. Wähle
-die offizielle X API, wenn du genau ihren Vertrag brauchst. Ein allgemeiner
-Scraper passt, wenn HTML ausreicht.
+die offizielle X API, wenn du genau ihren Vertrag brauchst.
 
 ## Passenden Ablauf wählen
 
@@ -136,8 +138,8 @@ Scraper passt, wenn HTML ausreicht.
 
 ## Paket- und MCP-Vertrag
 
-`x-developer` v2.6.7 bündelt Skills und Plugin-Metadaten. Hosted MCP bietet
-`docs`, `search` und `execute`. Der Live-OpenAPI-Vertrag enthält 128 REST-Operationen.
+`x-developer` v2.7.0 bündelt Skills und Plugin-Metadaten. Hosted MCP bietet
+`docs`, `search` und `execute`. Der Live-OpenAPI-Vertrag dokumentiert jede öffentliche REST-Operation.
 
 `x-developer` enthält den Skill und die Plugins. Das getrennte Paket
 `x-twitter-scraper` ist das TypeScript SDK.

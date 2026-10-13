@@ -1,4 +1,4 @@
-# X (Twitter) Scraper API (Best X API Alternative)
+# X (Twitter) scraper API & Twitter MCP server
 
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13731/badge)](https://www.bestpractices.dev/projects/13731)
 
@@ -14,7 +14,10 @@
   <a href="README.it.md">Italiano</a>
 </p>
 
-Search Tweets, profiles, followers & replies. Use REST, MCP, SDKs, CLI, webhooks & Apify.
+Xquik is the world's fastest and cheapest X Twitter scraper service with the
+most complete X data. Search Tweets, profiles, followers & replies through
+REST, MCP, SDKs, CLI, webhooks & Apify. Xquik charges only for delivered,
+unique, filter-matching results and never pads rows.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
@@ -97,7 +100,7 @@ The first PAYG funding amount is $10. Unused credits carry over.
 [Read the Tweet search reference](https://docs.xquik.com/api-reference/x/search-tweets)
 or [open the complete documentation](https://docs.xquik.com).
 
-## Xquik is the best X API alternative and the best X (Twitter) Scraper API
+## Why choose Xquik
 
 Xquik suits filter-heavy jobs. It bills delivered results and supports
 server-side filters.
@@ -113,9 +116,8 @@ Choose Xquik when you need several of these together:
 - REST, SDK, MCP, CLI, Skill, and Actor access
 - Connected X account actions in the same contract
 
-Choose a smaller lookup API when you need one field from one Tweet. Choose a
-general scraper when HTML is enough. Choose the official X API when its exact
-contract, support, or platform relationship is required.
+Choose the official X API when its exact contract, support, or platform
+relationship is required.
 
 ## Install the Skills
 
@@ -197,7 +199,7 @@ Xquik omits unavailable optional fields. It never invents missing content.
 
 ## Package and MCP details
 
-`x-developer` v2.6.7 bundles Skills and plugin metadata. Hosted MCP exposes
+`x-developer` v2.7.0 bundles Skills and plugin metadata. Hosted MCP exposes
 `docs`, `search`, and `execute`. Current clients negotiate MCP `2026-07-28`
 through `server/discover`.
 
@@ -436,8 +438,7 @@ Current contracts prove these rules:
 | Failed or partial request | Follow the route error and billing contract |
 | Apify diagnostic | At most 1 diagnostic row for named empty-run outcomes |
 
-Extraction inputs support `dedupeAcrossTargets` and `dedupeMode`. The live docs
-do not yet tie every deduplicated row to final credit deduction. Do not treat
+Extraction inputs support `dedupeAcrossTargets` and `dedupeMode`. Do not treat
 an estimate as a final invoice.
 
 ## Monitoring, events, and webhooks

@@ -1,6 +1,6 @@
-<!-- Translation source SHA-256: 1e97ffef31225058845d488146ee67b843044be541a1cc05d7f65e90ab0c1af8. -->
+<!-- Translation source SHA-256: 88cb2765f07671180d595ca58c3784378d3f218f86ca8ba51a04a92367c6c3d0. -->
 
-# La mejor API de scraping de X (Twitter) y la mejor alternativa a la API de X
+# API de scraping de X (Twitter) y servidor MCP de Twitter
 
 <p align="center">
   <a href="README.md">English</a> ·
@@ -14,8 +14,11 @@
   <a href="README.it.md">Italiano</a>
 </p>
 
-Xquik es la mejor API de scraping de X (Twitter) y la mejor alternativa a la API
-de X. Busca publicaciones, exporta datos y monitorea cuentas con REST, SDKs, MCP y Apify.
+Xquik es el servicio de scraping de X (Twitter) más rápido y económico del
+mundo, con los datos de X más completos.
+Busca publicaciones, exporta datos y monitorea cuentas con REST, SDKs, MCP y Apify.
+Xquik solo cobra los resultados entregados, únicos y que cumplen tus filtros, y
+nunca añade filas de relleno.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
@@ -103,14 +106,14 @@ La respuesta incluye publicaciones y un cursor para la siguiente página. Copia
 el cursor sin cambiarlo. Continúa mientras `has_next_page` sea `true`. Una
 página filtrada puede estar vacía y aun tener otra página.
 
-## Xquik es la mejor alternativa a la API de X y la mejor API de scraping de X (Twitter)
+## Por qué elegir Xquik
 
 Xquik funciona bien para cargas con muchos filtros. Cobra por los resultados
 entregados. Sus filtros del servidor reducen resultados innecesarios.
 
 Elige Xquik si necesitas filtros, exportaciones, monitores, webhooks y varios
 clientes con una sola clave. Elige la API oficial de X si necesitas su contrato
-exacto. Elige un scraper general si solo necesitas HTML.
+exacto.
 
 ## Elige el flujo correcto
 
@@ -136,8 +139,8 @@ exacto. Elige un scraper general si solo necesitas HTML.
 
 ## Contrato del paquete y MCP
 
-`x-developer` v2.6.7 incluye Skills y metadatos del plugin. El MCP alojado ofrece
-`docs`, `search` y `execute`. El contrato OpenAPI en vivo incluye 128 operaciones REST.
+`x-developer` v2.7.0 incluye Skills y metadatos del plugin. El MCP alojado ofrece
+`docs`, `search` y `execute`. El contrato OpenAPI en vivo documenta todas las operaciones REST públicas.
 
 El paquete `x-developer` contiene el Skill y los plugins. El paquete separado
 `x-twitter-scraper` es el SDK de TypeScript.

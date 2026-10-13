@@ -234,7 +234,7 @@
         "Includes an Idempotency-Key header",
         "Asks for confirmation before running the draw because it uses credits and its result is final",
         "Explains how to read or export the result with GET /api/v1/draws/{id} or GET /api/v1/draws/{id}/export",
-        "The confirmation states the draw cost formula: 2 base credits, 1 per inspected reply, 1 per reposter read because a retweet is required, and 5 per follow check because following @acme is required"
+        "The confirmation states the draw cost formula: 2 base credits, 1 per inspected reply, 1 per reposter read because a retweet is required, and 1 per follow check because following @acme is required"
       ]
     },
     {
@@ -249,7 +249,7 @@
         "Sets count=10 on both requests",
         "Sends the key in the x-api-key header from the XQUIK_API_KEY environment variable",
         "Does not present invented trend names as current results",
-        "States the cost as 3 credits per region call, 6 credits in total, about $0.0009"
+        "States the cost as 1 credit per region call, 2 credits in total, about $0.0003"
       ]
     },
     {

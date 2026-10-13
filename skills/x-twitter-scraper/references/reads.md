@@ -28,6 +28,14 @@ page = get_json(
 | `GET /x/tweets/{id}/retweeters` | `pageSize` (1 to 200), profile filters, `cursor` |
 | `GET /x/tweets/{id}/favoriters` | `pageSize` (1 to 200), profile filters, `cursor` |
 | `GET /x/articles/{tweetId}` | Full X Article content |
+| `GET /x/tweets/top` | X's top tweets: `metric` (`likes` default, `replies`, `quotes`, `bookmarks`, `shares`, `views`), `window` (`day` default, `week`, `month`), `country` or `language`, `pageSize` (1 to 100), `cursor`. The list ends at 100 |
+| `GET /x/tweets/{id}/hidden-replies` | Replies the author hid, oldest first: `pageSize` (1 to 100), tweet filters, `cursor` |
+| `GET /x/tweets/{id}/retweeter-ids` | Reposter user IDs only: `pageSize` (1 to 200), `cursor` |
+| `GET /x/tweets/{id}/retweeters/check` | `user` (required): ID, username, or profile URL. Returns `isRetweeted`, `retweetedAt`, and `complete` |
+| `GET /x/tweets/{id}/insights` | Engagements per hour, per view, and per follower of the author |
+| `GET /x/tweets/{id}/translation` | `language` (required), such as `en` or `pt-br`. Returns X's own translation |
+| `GET /x/tweets/{id}/subtitles` | Caption tracks of the tweet's videos: language, timed cues, and full text |
+| `GET /x/tweets/{id}/embed` | Embed HTML: `theme` (`light` or `dark`), `hideMedia`, `hideThread`, `omitScript` |
 
 Search, replies, quotes, thread, and user timelines accept the same tweet
 filters as named query parameters. Send only the ones the user asked for:
@@ -67,6 +75,14 @@ username or numeric ID.
 | `GET /x/users/{id}/media` | `pageSize` (1 to 100), tweet filters, `cursor` |
 | `GET /x/users/{id}/mentions` | `pageSize` (1 to 100), `sinceTime`, `untilTime`, tweet filters, `cursor` |
 | `GET /x/users/{id}/likes` | `pageSize` (1 to 100), tweet filters, `cursor`. Needs a connected X account for the owner's likes |
+| `GET /x/users/batch/tweets` | Newest posts of up to 20 users: `ids` or `usernames` (comma-separated, send 1 of the 2), `pageSize` (1 to 20) |
+| `GET /x/users/{id}/articles` | Posts on the Articles tab, newest first: `pageSize` (1 to 100), tweet filters, `cursor`. Read the full text with `GET /x/articles/{tweetId}` |
+| `GET /x/users/{id}/highlights` | Posts on the Highlights tab: `pageSize` (1 to 100), tweet filters, `cursor` |
+| `GET /x/users/{id}/insights` | Engagement rate, averages per post, and posting rate, from the last 20 posts |
+| `GET /x/users/{id}/translation` | `language` (required). Returns X's own translation of the bio |
+| `GET /x/users/{id}/live` | Whether the user broadcasts live video now, with the latest broadcast |
+| `GET /x/users/{id}/lists` | Public Lists the user created: `pageSize` (1 to 100), `cursor` |
+| `GET /x/users/{id}/list-memberships` | Public Lists that include the user: `pageSize` (1 to 100), `cursor` |
 
 Verification: `isBlueVerified` means X shows the blue badge. `isVerified` and
 `verified` mean X marks the profile as verified. `verifiedType` names the kind,
@@ -80,6 +96,11 @@ such as `Business`. Report only the values the response returns.
 | `GET /x/users/{id}/following` | Same as followers |
 | `GET /x/users/{id}/verified-followers` | Same as followers |
 | `GET /x/followers/check` | `source` and `target` usernames. Returns `isFollowing` and `isFollowedBy` |
+| `GET /x/users/{id}/follower-ids` | Follower user IDs only, newest first: `pageSize` (1 to 5,000), `cursor` |
+| `GET /x/users/{id}/following-ids` | User IDs of the accounts the user follows: `pageSize` (1 to 5,000), `cursor` |
+| `GET /x/users/{id}/similar` | Accounts X lists as similar: `pageSize` (1 to 200), profile filters, `cursor` |
+| `GET /x/users/{id}/affiliates` | Accounts an organization lists as affiliates: `pageSize` (1 to 200), profile filters, `cursor` |
+| `GET /x/users/{id}/subscriptions` | Creators the user subscribes to: `pageSize` (1 to 200), profile filters, `cursor` |
 
 Profile filters, applied before billing: `minFollowers`, `maxFollowers`,
 `minFollowing`, `maxFollowing`, `minStatuses`, `maxStatuses`,
@@ -89,19 +110,51 @@ Profile filters, applied before billing: `minFollowers`, `maxFollowers`,
 `users`, `has_next_page`, and `next_cursor`. Use a `follower_explorer`
 extraction for a complete follower list.
 
-## Lists, communities, Spaces, and trends
+## Lists and communities
 
 | Route | Notes |
 | --- | --- |
+| `GET /x/lists/search` | Find public Lists: `q` (required), `pageSize` (1 to 100), `cursor` |
+| `GET /x/lists/{id}` | Name, description, counts, and owner. Takes a List ID or a URL-encoded List URL |
 | `GET /x/lists/{id}/members`, `/followers`, `/tweets` | List ID |
+| `GET /x/communities/find` | Find communities by keyword: `q` (required), `pageSize` (1 to 100), `cursor` |
+| `GET /x/communities/topics` | Topics and subtopics X groups communities under: `limit` |
+| `GET /x/communities/popular` | Top communities of a topic: `topicId` or `topic`, `pageSize` (1 to 100), `cursor` |
+| `GET /x/communities/suggested` | Communities X suggests to join: `limit` |
 | `GET /x/communities/{id}/info`, `/members`, `/moderators`, `/tweets` | Community ID |
+| `GET /x/communities/{id}/media` | Posts with photos or videos on the Media tab, newest first: `pageSize` (1 to 100), tweet filters, `cursor` |
+| `GET /x/communities/{id}/members/search` | Find members by name or username: `q` (required) |
 | `GET /x/communities/search` | Search posts inside a community |
-| `GET /x/trends` | `woeid`, a Yahoo WOEID (default 1, worldwide), and `count` (1 to 50, default 30) |
-| `GET /radar` | Trending topics from curated sources: `category`, `region`, `hours`, `limit` |
+| `GET /x/communities/tweets` | Search posts in 1 community with `communityId`, or in every community without it: `q` (required), `queryType`, `pageSize` (1 to 100), tweet filters, `cursor` |
 
-Xquik documents and tests trends for these 12 regions. `GET /x/trends` passes
-other WOEIDs to X, which may return no trends for them. The `GET /trends`
-alias accepts only these 12.
+## Spaces, broadcasts, and jobs
+
+| Route | Notes |
+| --- | --- |
+| `GET /x/spaces/search` | `q` (required): words, hashtags, or operators such as `from:solana`. `queryType`, `pageSize` (1 to 100), `cursor` |
+| `GET /x/spaces/{id}` | Title, state, times, audience, host, and speakers. Takes a Space ID or a URL-encoded Space URL |
+| `GET /x/spaces/{id}/replay` | HLS playback URL of an ended Space. A live or scheduled Space answers `409` |
+| `GET /x/broadcasts/{id}` | Title, state, times, watch counts, and host of a live video broadcast |
+| `GET /x/jobs/search` | `q` (required), `location` or `locationId`, `locationType`, `seniority`, `employmentType`, `company`, `pageSize` (1 to 100), `cursor` |
+| `GET /x/jobs/locations` | `q` (required). Returns the location IDs that job search takes |
+| `GET /x/jobs/{id}` | 1 job listing with its description, salary, company, and apply link |
+
+Use the `space_explorer` extraction for a Space's participants.
+
+## Trends and search helpers
+
+| Route | Notes |
+| --- | --- |
+| `GET /x/trends` | Pick the place by `woeid` (default 1, worldwide), `country`, or `location`. `count` (1 to 50, default 30) |
+| `GET /x/trends/locations` | Places X offers trends for: `country`, `placeType`, `q`, `limit`. Pass a location's `woeid` to `/x/trends` |
+| `GET /radar` | Trending topics from curated sources: `category`, `region`, `hours`, `limit` |
+| `GET /x/search/autocomplete` | Suggestions for a partial query: `q` (required), `types` (comma-separated `users`, `topics`, `hashtags`, `cashtags`), `limit` (1 to 100, default 20) |
+| `GET /x/places/search` | `q` (required), `limit`. Pass a place `id` as `place` to tweet search |
+| `GET /x/hashflags` | Custom emoji X shows after hashtags: `q`, `activeOnly` (default `true`), `limit` |
+| `GET /x/links/resolve` | `urls` (required): 1 to 100 `https://t.co/` links, comma-separated. Returns each `resolvedUrl` |
+
+A trends request bills 1 credit, however many trends it returns. `woeid` wins
+when a request also names a `country` or `location`. Common WOEIDs:
 
 | Region | WOEID | Region | WOEID |
 | --- | --- | --- | --- |
@@ -112,7 +165,13 @@ alias accepts only these 12.
 | Spain | 23424950 | Canada | 23424775 |
 | Germany | 23424829 | Mexico | 23424900 |
 
-Spaces use the `space_explorer` extraction.
+`GET /x/trends/locations` lists every other place.
+
+Lookups, checks, insights, translations, and embeds bill 1 credit per call.
+Lists of IDs, Lists, communities, topics, Spaces, jobs, places, locations,
+hashflags, suggestions, and resolved links bill 1 credit per returned item.
+Subtitles bill 1 credit only when a caption track returns.
+[Pricing](compare-faq.md#pricing-facts) lists every rate.
 
 ## Media
 
