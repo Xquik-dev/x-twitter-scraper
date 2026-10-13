@@ -26,9 +26,10 @@ location with rank, volume & query. Most other Apify Actors charge before
 filtering or deduplicating. Xquik charges only for delivered, unique,
 filter-matching results.
 
-Scrape current Twitter trends across many locations in 1 run. You pay **$0.00015
-per delivered row**, & Apify bills platform usage separately. You need no X API
-key or login.
+Scrape current Twitter trends across many locations in 1 run. Or read past
+trends from Xquik's Twitter trends archive, which starts 2026-10-13 02:20 UTC.
+You pay **$0.00015 per delivered row**, & Apify bills platform usage separately.
+You need no X API key or login.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
@@ -37,6 +38,7 @@ key or login.
 
 - Multiple countries, towns or WOEIDs, read concurrently.
 - Up to 50 current trends for each location.
+- Past trends from the Twitter trends archive, by date & time, since 2026-10-13.
 - A list of every place X offers trends for, with its WOEID, country & type.
 - X place search, with the place ID that X post search takes.
 - X hashflags: the custom emoji X shows after some hashtags.
@@ -115,6 +117,35 @@ shows after a hashtag for a set time:
 The run lists the hashflags X shows now. Turn off `activeOnly` to add ended &
 upcoming ones. `hashtagContains` keeps hashtags that hold your text.
 
+To see what was trending on Twitter yesterday or at any past time, fill `at`.
+The run then reads the stored list nearest that time for each location.
+
+```json
+{ "locations": ["Turkey"], "at": "2026-10-13T14:00:00Z" }
+```
+
+`at` takes a date such as 2026-10-13, a time such as 2026-10-13T14:00:00Z or
+Unix seconds. A time without a zone is UTC. Xquik stores 12 lists an hour for
+each location & keeps each for 25 months. The Twitter trends history starts
+2026-10-13 02:20 UTC. A time over 24 hours from every stored list returns no
+rows & costs nothing.
+
+For a range, fill `from` & `to`. The run returns 1 stored list per step of
+`every`, such as `15m`, `1h` or `1d`.
+
+```json
+{
+  "locations": ["Turkey"],
+  "from": "2026-10-13",
+  "to": "2026-10-14",
+  "every": "1h",
+  "maxItems": 1200
+}
+```
+
+Without `to`, the range ends now. Without `every`, the run returns 1 list an
+hour. A step with no stored list returns no rows. `at` wins over `from` & `to`.
+
 A run reads 1 kind of row. `listLocations` wins over `listHashflags`, which wins
 over `placeSearchTerms`. Without any of them, the run reads trends.
 
@@ -141,6 +172,10 @@ this:
   "sourceTarget": "Worldwide"
 }
 ```
+
+Rows of `at` or a range also carry `capturedAt`, the time Xquik read their list
+from X. Rows of `at` carry `requestedAt` too, the time you asked for. Xquik
+estimates neither.
 
 With `listLocations`, each place is 1 dataset row. Rows carry `woeid`, `name`,
 `country`, `countryCode`, `placeType`, `placeTypeCode`, `parentWoeid`, `url` &
@@ -328,6 +363,11 @@ Open the free `diagnostics` output first. An empty run's status says to check
 your targets & filters. `stopCauses` gives each cause a `nextAction` to follow.
 A location X offers no trends for returns no rows. Turn on `listLocations` to
 see the names X takes.
+
+### Can I scrape historical Twitter trends?
+
+Yes, since 2026-10-13 02:20 UTC. Fill `at` for 1 past time, or `from` & `to` for
+a range. Each row has `capturedAt`, the time of its stored list.
 
 ### Can I use the API, schedules & integrations?
 
