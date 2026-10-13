@@ -443,13 +443,20 @@ lh skill list --source market
 
 ### Codex
 
-Pazarı ekle, eklentiyi kur ve doğrula.
+Pazarı ekle, eklentiyi kur ve doğrula, sonra giriş yap.
 
 ```bash
 codex plugin marketplace add Xquik-dev/x-twitter-scraper
 codex plugin add x-twitter-scraper@x-twitter-scraper
 codex plugin list
+codex mcp login xquik
 ```
+
+Eklenti barındırılan MCP sunucusunu `xquik` adıyla ekler.
+`codex mcp login xquik` giriş için tarayıcını bir kez açar. Codex uygulamasında
+bunun yerine Authenticate'i seç. API anahtarı kullanmak için [Codex API anahtarı
+adımlarını](https://docs.xquik.com/mcp/overview#codex-api-key-authentication)
+izle.
 
 ### Gemini CLI
 

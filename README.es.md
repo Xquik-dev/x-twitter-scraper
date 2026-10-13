@@ -445,13 +445,19 @@ lh skill list --source market
 
 ### Codex
 
-Agrega el marketplace, instala el plugin y confírmalo.
+Agrega el marketplace, instala el plugin, confírmalo e inicia sesión.
 
 ```bash
 codex plugin marketplace add Xquik-dev/x-twitter-scraper
 codex plugin add x-twitter-scraper@x-twitter-scraper
 codex plugin list
+codex mcp login xquik
 ```
+
+El plugin agrega el servidor MCP alojado como `xquik`. `codex mcp login xquik`
+abre tu navegador una vez para iniciar sesión. En la app de Codex, elige
+Authenticate. Para usar una clave de API, sigue los [pasos de clave de API de
+Codex](https://docs.xquik.com/mcp/overview#codex-api-key-authentication).
 
 ### Gemini CLI
 
