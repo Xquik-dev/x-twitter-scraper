@@ -241,7 +241,7 @@ XquikのX Follower Scraperは、フォロワー、フォロー中、リスト、
 - [AIエージェント向けにXのオーディエンスデータセットを作る](https://apify.com/xquik/x-follower-scraper/examples/build-agent-ready-x-audience-dataset)
 - [RAG用にXのオーディエンスデータを集める](https://apify.com/xquik/x-follower-scraper/examples/collect-x-audience-data-for-rag)
 - [XでAI SEOの実践者を見つける](https://apify.com/xquik/x-follower-scraper/examples/find-ai-seo-practitioners-on-x)
-- [AIブランドのフォロワーの重なりを比べる](https://apify.com/xquik/x-follower-scraper/examples/compare-ai-brand-follower-overlap)
+- [Twitterで誰が誰をフォローしているか確認する](https://apify.com/xquik/x-follower-scraper/examples/check-who-follows-who-on-twitter)
 - [TwitterのフォロワーをCSVにエクスポートする](https://apify.com/xquik/x-follower-scraper/examples/export-twitter-followers-to-csv)
 - [競合のフォロワーの重なりを分析する](https://apify.com/xquik/x-follower-scraper/examples/analyze-competitor-follower-overlap)
 - [Xのフォロワーからマイクロインフルエンサーを見つける](https://apify.com/xquik/x-follower-scraper/examples/find-micro-influencers-in-followers)
