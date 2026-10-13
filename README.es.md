@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 40bd678d168ebb99f305120d03a7e1d7adcccee6a303c14b3af29b2b7c7f34db. -->
+<!-- Translation source SHA-256: 92a537c40afafe2cad1cb1e1e3bf7ffb25a866544248fe13e91d4a2cff0fbe00. -->
 
 # API de scraping de X (Twitter) y servidor MCP de Twitter
 
@@ -138,7 +138,7 @@ exacto.
 
 ## Contrato del paquete y MCP
 
-`x-developer` v2.7.0 incluye Skills y metadatos del plugin. El MCP alojado ofrece
+`x-developer` v2.7.1 incluye Skills y metadatos del plugin. El MCP alojado ofrece
 `docs`, `search` y `execute`. El contrato OpenAPI en vivo documenta todas las operaciones REST públicas.
 
 El paquete `x-developer` contiene el Skill y los plugins. El paquete separado

@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 40bd678d168ebb99f305120d03a7e1d7adcccee6a303c14b3af29b2b7c7f34db. -->
+<!-- Translation source SHA-256: 92a537c40afafe2cad1cb1e1e3bf7ffb25a866544248fe13e91d4a2cff0fbe00. -->
 
 # X（Twitter）Scraper API と Twitter MCP サーバー
 
@@ -134,7 +134,7 @@ X 固有の契約が必要なら公式 X API が向きます。
 
 ## パッケージと MCP の契約
 
-`x-developer` v2.7.0 には Skills とプラグインのメタデータが含まれます。
+`x-developer` v2.7.1 には Skills とプラグインのメタデータが含まれます。
 ホスト型 MCP は `docs`、`search`、`execute` を提供します。ライブ OpenAPI は
 公開されているすべての REST 操作を定義します。
 

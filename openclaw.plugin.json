@@ -2,7 +2,7 @@
   "id": "x-developer",
   "name": "X Developer API",
   "description": "Xquik is the world's fastest and cheapest X Twitter scraper service with the most complete X data. Use REST, MCP, SDKs, webhooks & exports. Not affiliated with X Corp.",
-  "version": "2.7.0",
+  "version": "2.7.1",
   "skills": ["./skills"],
   "providerAuthEnvVars": {
     "xquik": ["XQUIK_API_KEY"]

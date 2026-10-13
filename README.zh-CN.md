@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 40bd678d168ebb99f305120d03a7e1d7adcccee6a303c14b3af29b2b7c7f34db. -->
+<!-- Translation source SHA-256: 92a537c40afafe2cad1cb1e1e3bf7ffb25a866544248fe13e91d4a2cff0fbe00. -->
 
 # X（Twitter）抓取 API 与 Twitter MCP 服务器
 
@@ -131,7 +131,7 @@ Xquik 适合筛选条件较多的任务。它按交付结果计费。服务端�
 
 ## 软件包与 MCP 合同
 
-`x-developer` v2.7.0 包含 Skills 和插件元数据。托管 MCP 提供 `docs`、
+`x-developer` v2.7.1 包含 Skills 和插件元数据。托管 MCP 提供 `docs`、
 `search` 和 `execute`。实时 OpenAPI 合同记录了每个公开的 REST 操作。
 
 `x-developer` 包含 Skill 和插件。独立的 `x-twitter-scraper` 软件包是
