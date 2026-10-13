@@ -1,0 +1,249 @@
+<p align="center">
+  <a href="README.md">English</a> ·
+  <a href="README.es.md">Español</a> ·
+  <a href="README.tr.md">Türkçe</a> ·
+  <a href="README.zh-CN.md">简体中文</a> ·
+  <strong>日本語</strong> ·
+  <a href="README.ko.md">한국어</a> ·
+  <a href="README.de.md">Deutsch</a> ·
+  <a href="README.fr.md">Français</a> ·
+  <a href="README.it.md">Italiano</a>
+</p>
+
+<table align="center"><tr><td align="center">
+<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="FramerがXquik MCPをコーディングエージェントに接続する様子"></a><br>
+<a href="https://youtu.be/4UOSpoOoC3Y?t=367">FramerがXquikのスクレイパーをClaude Code、Codex、Cursorなどと一緒に使う様子を6:07から視聴できます。</a>
+</td></tr></table>
+
+Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX (Twitter) Monitorは、選んだキーワードとアカウントについてTwitterのアラートを送ります。毎秒チェックし、新しいポスト、返信、プロフィールの変更をそれぞれ数秒でDiscord、Telegram、Slack、またはWebhookに届けます。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した重複のない結果だけです。このActorでは、モニターが監視した時間だけに課金します。
+
+アカウントかキーワードを貼り付けて、Startをクリックします。監視はすぐに始まり、アラートは実行と実行の間に届きます。料金は**monitor-hourあたり$0.0045**です。イベントとアラートは無料で、Apifyのプラットフォーム利用料は別途かかります。
+
+> Xquikは独立したサードパーティサービスです。X Corpとは提携していません。
+> 「Twitter」および「X」はX Corpの商標です。
+
+## Twitterモニターが送る内容
+
+- 監視しているアカウントの新しいポスト、返信、引用ポスト、リポスト。
+- キーワード検索に一致するポスト。Xの検索演算子はどれでも使えます。
+- 削除されたポスト、アカウントが始めたライブ動画とスペース。
+- プロフィールの変更: 名前、ユーザー名、自己紹介、プロフィール画像、ヘッダー画像、所在地、リンク、認証、非公開設定、固定ポスト、表示の可否。
+- 監視している各アカウントがフォローまたはフォロー解除したアカウント。
+- イベントの全体: 著者、各種カウント、メディアを含むポスト、または変更の内容。
+- 現在のユーザー名に並ぶ、変わらないXのユーザーID。名前を変えたアカウントもモニターを保ちます。
+- SlackとDiscordにはそれぞれのメッセージ形式で、Telegramにも、任意のHTTPS Webhookには署名付きJSONで届くアラート。
+- 新しい送信先ごとのテストアラート。送信先の応答は実行ステータスに表示されます。
+- 実行のデータセットと、モニターごとに1つの履歴データセットに入るすべてのイベント。
+
+## Twitterのキーワードアラートを設定する方法
+
+1. Apify ConsoleでXquikのX (Twitter) Monitorを開きます。
+2. ユーザー名を `twitterHandles` に、またはXの検索を `searchTerms` に貼り付けます。
+3. アラートを送るイベントを選びます。`newPosts` はデフォルトでオンです。
+4. WebhookのURLを `webhookUrls` に貼り付けるか、`telegram` をオンにします。
+5. Startをクリックします。その実行で監視が始まります。
+6. 同じ入力でActorを1時間ごとに実行するスケジュールを追加します。
+
+以降の各実行は、前回の実行から監視した時間を課金します。新しいイベントをデータセットに保存し、すぐに終わります。24時間実行のないモニターは一時停止します。その4時間前に、アラートで警告が届きます。次の実行でモニターが再開し、未払いの時間を先に課金します。
+
+同じ入力は同じモニターを続けます。入力を変えると、モニターが更新されます。保存済みのタスク1つが1モニターです。タスクがない場合は `monitorName` がモニターに名前を付けるので、2つの名前で2つのモニターを分けられます。
+
+## Discord、Telegram、SlackでTwitterのアラートを受け取る
+
+- **Discord**: チャンネルのWebhook URLを `webhookUrls` に貼り付けます。各アラートはDiscordのメッセージとして届きます。ホストするボットは不要です。
+- **Telegram**: `telegram` をオンにします。実行ステータスに、XquikのTelegramボットへのリンクが表示されます。リンクを開いてStartを押すと、そのチャットにアラートが届きます。
+- **Slack**: Incoming WebhookのURLを貼り付けます。各アラートはSlackのメッセージとして届きます。
+- **任意のアプリ**: HTTPSのURLを貼り付けます。各アラートは署名付きJSONで届きます。データセットにあるものと同じイベントです。
+
+新しい送信先には、それを追加した実行でテストアラートが届きます。届いたかどうかはステータスページに表示されます。
+
+## 入力
+
+| フィールド                           | 内容                                                              |
+| ------------------------------------ | ----------------------------------------------------------------- |
+| `twitterHandles`                     | @の有無を問わないユーザー名、またはx.comのプロフィールURL。       |
+| `searchTerms`                        | `"x api" lang:en` のようなXの検索。検索1つが1モニターです。       |
+| `monitorName`                        | 保存済みのタスクがない実行で、モニターに名前を付けます。          |
+| `newPosts`                           | オリジナルのポスト。デフォルトでオンです。                        |
+| `replies`, `quotes`, `reposts`       | それぞれの種類のポスト。                                          |
+| `deletedPosts`, `liveVideos`         | アカウントの削除されたポスト、ライブ動画、スペース。              |
+| `profileChanges`, `followingChanges` | アカウントのプロフィールとフォローの変更。                        |
+| `eventTypes`                         | チェックボックスの代わりに使う、正確なイベントの種類。            |
+| `webhookUrls`                        | HTTPSのURLを1行に1つ。ActorがSlackとDiscordのURLを判別します。    |
+| `telegram`                           | 実行が示すリンクを通じて、Telegramにアラートを送ります。          |
+| `since`                              | 過去30日以内の日付から保管しているイベントを、1回だけ保存します。 |
+| `stop`                               | モニターを止め、アラートをオフにします。                          |
+
+アカウントとキーワードは、1モニターあたり合計100件までです。キーワードはポストのイベントだけを送ります。Telegramにはユーザー名もチャットIDも不要です。実行ステータスにリンクが表示されます。リンクを開いてStartを押すと、そのチャットにアラートが届きます。
+
+そのままコピーできる入力:
+
+```json
+{ "twitterHandles": ["NASA", "SpaceX"], "newPosts": true, "replies": true }
+```
+
+```json
+{
+  "searchTerms": ["\"your brand\" -from:yourbrand"],
+  "webhookUrls": "https://hooks.slack.com/services/T000/B000/XXXX",
+  "monitorName": "brand-mentions"
+}
+```
+
+```json
+{ "twitterHandles": ["elonmusk"], "profileChanges": true, "telegram": true }
+```
+
+## 出力
+
+各実行は4つの出力を返します。
+
+- **ステータスページ**、つまり `STATUS.html` レコード: モニターが監視している対象、各送信先、請求額、次の手順。Outputタブに表示されます。
+- **ステータスレコード**、つまり `STATUS` レコード: 同じステータスのJSON版。
+- **新しいイベント**: 実行のデータセット。新しいイベントが古い順に並び、最後に1行のステータス行が入ります。
+- **診断**: 対応が必要なことがあるときだけ書き込みます。
+
+イベント行は、XquikのREST APIが返すイベントそのもので、すべてのフィールドを含みます。
+
+```json
+{
+  "resultType": "event",
+  "id": "981",
+  "type": "tweet.new",
+  "occurredAt": "2026-10-13T09:00:01.000Z",
+  "monitorId": "2944",
+  "monitorType": "account",
+  "username": "NASA",
+  "xUserId": "11348282",
+  "data": { "tweetId": "1977000000000000000", "text": "Liftoff!" }
+}
+```
+
+サンプル値は形を示すものです。ライブデータは異なります。
+
+ステータスレコードには `state`、`targets`、`destinations`、`eventsSaved`、`pendingEvents`、`hoursCharged`、`chargedUsd`、`hoursOwed`、`paidThrough`、`pausesAt`、`historyDataset`、`notices`、`nextStep` が入ります。Xに存在しない対象は、その `message` でそう伝え、モニターは残りを監視します。新しい汎用Webhookは、署名シークレットを1回だけ、ステータスレコードにだけ表示します。
+
+アカウント内の履歴データセットは、モニターのすべてのイベントを1回ずつ保存します。名前は `x-monitor-` で始まります。
+
+## AIエージェント向け
+
+API全体が1回の呼び出しです。各呼び出しはモニターを開始または更新し、前回の呼び出しから監視した時間を課金し、新しいものだけを返します。同じ時間を2回課金する呼び出しはありません。呼び出しはすぐに終わり、ApifyのMCPが待つ時間内に収まります。
+
+モニターを開始または継続する入力:
+
+```json
+{
+  "twitterHandles": ["NASA"],
+  "searchTerms": ["\"x api\" lang:en"],
+  "replies": true,
+  "monitorName": "agent-demo"
+}
+```
+
+呼び出しが返すもの:
+
+- 実行のデータセットには、新しいイベントのあとに、`resultType` が `status` の行が1行入ります。その `state` はモニターが監視中かどうかを、`nextStep` は次にすることを示します。
+- `STATUS` レコードには同じステータスが入ります。呼び出しでWebhookを作成した場合は、署名シークレットも入ります。
+
+動かし続けるには、同じ入力でActorを1時間ごとに実行するApifyのスケジュールを作るよう、エージェントに頼んでください。少なくとも24時間に1回呼び出すタイマーなら、どれでも使えます。止めるには、同じ入力に `"stop": true` を付けて実行します。
+
+Actorは、`handles` や `usernames` のようにエージェントが推測しがちな名前も読み取ります。どう読み取ったかは実行ステータスに表示されます。
+
+## Twitterモニターの費用は？
+
+すべてのApify有料プランで、monitor-hourあたり$0.0045です。アカウントまたはキーワード1つが1モニターです。Apifyのプラットフォーム利用料は別途かかります。
+
+- 1アカウントを30日間監視すると、約$3.24です。
+- 10アカウントと2キーワードを30日間監視すると、約$38.88です。
+- イベントとアラートは、いくつ届いても無料です。
+- 開始料金はかかりません。実行が課金するのは、すでに監視した時間だけです。
+- Xに存在しない対象は何も監視せず、費用もかかりません。
+- 実行あたりの最大コストが、各課金に上限をかけます。上限を超えた時間は次の実行まで待ちます。
+
+1時間ごとのスケジュールなら、支払う監視時間に比べてApifyの利用料は小さく済みます。数分ごとの実行は利用料を増やすだけで、アラートには何の違いもありません。アラートはどのみち実行と実行の間に届きます。
+
+監視にはApifyの有料プランが必要です。無料プランでは、実行はモニターを開始せず、課金もしません。代わりに最初のアカウントの最新ポスト5件を表示するので、アラートに入る内容を確認できます。
+
+## 制限と復旧
+
+- アカウントとキーワードは、1モニターあたり合計100件までです。それ以上は2つのタスクを使ってください。
+- Webhook URLは1モニターあたり10件までで、ほかにTelegramも使えます。
+- イベントは30日間保管されるので、その期間内なら `since` で再び保存できます。
+- 早く止まった実行は、そのイベントを次の実行に残します。失われるイベントはありません。
+- 時間の予約から課金までの間に終わった実行は、何も課金しません。その時間は支払い済みとして扱われ、無料になります。
+- 各実行は無料のステータス行を1行書き込むので、データセットが空になることはありません。
+
+## 関連するXquik Actor
+
+すべてのXquik Actorは、同じ抽出エンジン、フィルター優先の課金、診断機能を共有しています。必要なデータに合うものを選んでください。
+
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): 検索、プロフィールのタイムライン、リスト、ポストIDから、50以上のフィルターでポストをスクレイピングし、フラットな形式で出力します。分析なしでポストデータが必要なときに使います。1行あたり$0.00015から。
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): ユーザー名、ID、URLから、プロフィールとそのポスト、返信、メディア、フォロワーをスクレイピングします。検索ではなくアカウントから始めるときに使います。1行あたり$0.00015から。
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25以上のフィルターで、ポストへの返信、コメント、会話全体をスクレイピングします。ポストの下の議論が必要なときに使います。1行あたり$0.00015から。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): ポストのURLまたはIDから、返信、引用ポスト、リポストしたユーザー、スレッドを一括でスクレイピングします。誰がポストに反応したかを測るときに使います。1行あたり$0.00015から。
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper): ポストを引用したポストを、テキスト、メディア、件数、著者とともに、11のフィルターでスクレイピングします。誰がポストを引用し、何と言ったかを調べたいときに使います。1ポストあたり$0.00015から。
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): フォロワー、フォロー中、リストのメンバー、購読者、コミュニティのメンバーをプロフィール行としてスクレイピングします。オーディエンスやメンバーの一覧が必要なときに使います。1プロフィールあたり$0.00015から。
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): ユーザー名、自己紹介、所在地でユーザーを検索し、フォロワー数、認証、アカウント年数、所在地で絞り込みます。検索からアカウントの一覧を作るときに使います。1プロフィールあたり$0.00015から。
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper): Xの「アカウントの所在地」ラベル、Xへの接続方法、ユーザー名の変更履歴から、アカウントの所在地を確認します。アカウントの所在地を確かめたいときに使います。1アカウントあたり$0.00015から。
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper): ユーザー名、フォロワー、ユーザー検索から、アカウントがプロフィールで公開しているメールアドレス、電話番号、リンクを取得します。プロフィールが公開しているメールアドレスが必要なときに使います。1プロフィールあたり$0.00015から。
+- [X List Scraper](https://apify.com/xquik/x-list-scraper): リストのURLまたはIDから、リストのポスト、メンバー、フォロワーをスクレイピングします。厳選したリストを情報源にするときに使います。1行あたり$0.00015から。
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper): コミュニティの情報、ポスト、検索結果、メンバー、モデレーターをスクレイピングします。Xのコミュニティを情報源にするときに使います。1行あたり$0.00015から。
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper): キーワードからスペースを見つけ、タイトル、状態、時刻、リスナー数、ホスト、スピーカーを読み取ります。URLまたはIDでブロードキャストも読み取ります。Xのライブ音声とライブ動画を追うときに使います。スペースまたはブロードキャスト1件あたり$0.00015から。
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): 地域別のリアルタイムトレンドを、順位、ボリューム、クエリ、WOEIDとともにスクレイピングします。どこで何がトレンドかを追うときに使います。1トレンドあたり$0.00015から。
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): キーワード、勤務地、勤務形態、職位レベル、企業からXの求人を、給与と応募リンクとともにスクレイピングします。Xに掲載された求人を集めるときに使います。1求人あたり$0.00015から。
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper): 長文のXの記事を、カバー画像、著者、日付、指標とともにMarkdownとテキストでスクレイピングします。ポストではなく記事の本文が必要なときに使います。1記事あたり$0.00015から。
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader): ポストやプロフィールから写真、動画、GIFを抽出または保存します。MP4とメタデータのオプションがあります。メディアファイルそのものが必要なときに使います。1メディア行あたり$0.00015から。
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring): ブランドへの言及を、AIによる関連性、感情、顧客体験の回答とともに追跡し、実行どうしを比較します。ブランドを継続して見守るときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis): すべてのポストに、AIで態度、強度、皮肉の確率のラベルを付けます。任意のトピックの全体的な感情を知りたいときに使います。分析済みポスト1件あたり$0.0003から。
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals): AIで、強気、弱気、中立、混在のスタンス、コンテンツの種類、確信度、資産との関連性のラベルを付けます。株、暗号資産、トレードの話題を追うときに使います。分析済みポスト1件あたり$0.0003から。
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor): AIで、ニュースのポストに形式、情報源の明示、トピックとの関連性のラベルを付けます。報道と論評を分けるときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier): すべてのポストについて、独自のカテゴリー、スコア、はい/いいえの質問にAIが答えます。既定の分析が自分のラベルに合わないときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer): AIによる8つの特性の回答から、すべてのポストについて0から100のViral Scoreと判定を推定します。ポストが広がる理由や伸びない理由を調べるときに使います。分析済みポスト1件あたり$0.0003から。
+
+## よくある質問
+
+よくある質問に答えたあと、サポートを受けられる場所を案内します。
+
+### XのCookie、APIキー、ログインは必要ですか？
+
+いいえ。XquikのX (Twitter) Monitorは、XのCookie、APIキー、ログイン、認証情報を必要としません。チェックはすべてXquikのインフラで実行します。
+
+### Twitterアカウントを監視するにはどうすればいいですか？
+
+ユーザー名を `twitterHandles` に貼り付け、必要なイベントを選んで、アラートの送信先を追加します。新しいポストは数秒で届き、すべてのイベントはデータセットに残ります。
+
+### 暗号資産のアカウントやコインへの言及も監視できますか？
+
+はい。フォローしているアカウントを追加するか、キャッシュタグやコントラクトアドレスなどのキーワード検索を追加します。一致したポストは数秒でDiscordやTelegramに届きます。
+
+### アラートはどのくらい速く届きますか？
+
+Xquikは毎秒チェックし、各イベントを数秒で送ります。アラートが実行を待つことはありません。
+
+### 監視に有料プランが必要だと実行に表示されるのはなぜですか？
+
+モニターは実行と実行の間も、1日中動きます。そのため、Apifyの有料プランが必要です。アップグレードしてから、同じ入力でもう一度実行してください。
+
+### モニターを止めるとどうなりますか？
+
+実行はすべての対象を止め、アラートをオフにします。それまでに監視した時間を課金します。すでに保管されたイベントは、30日間読み取れます。
+
+### Webhookの署名はどう確認しますか？
+
+新しい汎用Webhookには署名シークレットが発行され、`STATUS` レコードに1回だけ表示されます。Xquikはこのシークレットで各配信に署名します。XquikのREST Webhookと同じ方法です。
+
+### API、スケジュール、連携は使えますか？
+
+はい。Apify APIまたはXquik REST APIを使ってください。[APIタブ](https://apify.com/xquik/x-twitter-monitor/api)には、Python、JavaScript、cURLの例があります。Apifyの[スケジュール](https://docs.apify.com/platform/schedules)で、モニターを動かし続けられます。エージェントは[Apify MCP](https://docs.apify.com/platform/integrations/mcp)から呼び出せます。
+
+### Xアカウントを監視しても合法ですか？
+
+XquikのX (Twitter) Monitorは、Xの公開データを取得します。結果には個人データが含まれることがあります。目的が合法であることを確認し、自分に適用されるプライバシー規則に従ってください。判断に迷う場合は、資格のある弁護士に相談してください。
+
+### どこでサポートを受けられますか？
+
+Actorページでissueを開くか、実行IDを添えて<support@xquik.com>に連絡してください。ステータスページがすべての実行を説明し、対応が必要な実行は無料の診断情報がカバーします。
+
+### カスタムソリューションを依頼できますか？
+
+はい。[xquik.com](https://xquik.com)にアクセスするか、[APIドキュメント](https://docs.xquik.com/introduction)をお読みください。ダッシュボード、API、MCPサーバー、Webhookについて説明しています。
