@@ -801,8 +801,9 @@ So verhält sich eine eingefügte Eingabe:
   zählen im Kalender zurück. Fehlt h, d, w, m oder y, stoppt der Run, bevor er
   etwas liest oder berechnet.
 - Der Actor hat keine Seiteneinheit. Ersetze `maxPages` durch `maxItems`.
-- Der Actor hat kein Feld für Nutzer-IDs. Sende Nutzernamen oder Profil-URLs
-  statt `userId` oder `user_ids`.
+- Der Actor hat kein Feld `userId` oder `user_ids`. Setze die Nutzer-ID dort
+  ein, wo ein Nutzername steht. Das geht in `twitterHandles`, in Profil-URLs &
+  nach `from:`.
 - Suchoperator-Felder wie `from`, `min_faves`, `since_time` & `filter:images`
   nutzen schon die Namen von X. Sie brauchen keine Zuordnung.
 - Eine Liste, bei der ein anderer Actor nicht sagt, ob alle Werte oder nur einer

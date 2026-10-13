@@ -508,7 +508,7 @@ X 不再支持搜索 `filter:vine`、`filter:consumer_video`、`filter:pro_video
 - 行数上限必须是大于等于 1 的整数。`maxResults: 0` 会让运行在读取或计费前停止。
 - `quickDateRange: "m1"` 在所有读取方式下都读取过去 1 个月。月和年按日历往回计算。没有 h、d、w、m 或 y 时，运行会在读取或计费前停止。
 - 该 Actor 没有“页”这个单位。请把 `maxPages` 换成 `maxItems`。
-- 该 Actor 没有用户 ID 字段。请发送用户名或个人资料 URL，不要用 `userId` 或 `user_ids`。
+- 该 Actor 没有 `userId` 或 `user_ids` 字段。请把用户 ID 填在用户名的位置。`twitterHandles`、个人资料 URL 和 `from:` 后面都可以用。
 - `from`、`min_faves`、`since_time` 和 `filter:images` 等搜索运算符字段已经使用 X 的名称，不需要映射。
 - 其他 Actor 没有说明是“全部匹配”还是“任一匹配”的列表，只含 1 个值时才会运行：`contentKeywords`、`contentExactPhrases`、`contentHashtags`、`contentCashtags`、`usersMentionUsers`、`mediaTypes` 和 `tweetTypes`。值更多时，运行会在读取或计费前停止。提示信息会说明如何把它们写成 1 个搜索词。
 - 设为 `People` 或 `Lists` 的 `search_type`、设为 `followers` 的 `source_mode`、`engagementLevel` 预设以及 `Get Similar Tweets` 模式，都会让运行在读取或计费前停止。提示信息会写明应使用的 Actor 或字段。

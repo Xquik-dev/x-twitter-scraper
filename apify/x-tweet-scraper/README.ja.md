@@ -509,7 +509,7 @@ Xは、`filter:vine`、`filter:consumer_video`、`filter:pro_video`、`filter:ne
 - 行数の上限は1以上の整数にしてください。`maxResults: 0`は、何かを読み取ったり課金したりする前に実行を止めます。
 - `quickDateRange: "m1"`は、どのモードでも過去1か月を読み取ります。月と年はカレンダーどおりにさかのぼります。h、d、w、m、yのどれも含まない値では、読み取りや課金の前に実行が止まります。
 - このActorにはページという単位がありません。`maxPages`は`maxItems`に置き換えてください。
-- このActorにはユーザーIDのフィールドがありません。`userId`や`user_ids`の代わりに、ユーザー名かプロフィールのURLを送ってください。
+- このActorには`userId`や`user_ids`のフィールドはありません。ユーザーIDはユーザー名と同じ場所に入れてください。`twitterHandles`、プロフィールのURL、`from:`の後で使えます。
 - `from`、`min_faves`、`since_time`、`filter:images`などの検索演算子のフィールドは、すでにXと同じ名前です。対応付けは不要です。
 - 他のActorが「すべて一致」か「いずれか一致」かを示していないリストは、値が1つのときに実行されます: `contentKeywords`、`contentExactPhrases`、`contentHashtags`、`contentCashtags`、`usersMentionUsers`、`mediaTypes`、`tweetTypes`。値が2つ以上あると、読み取りや課金の前に実行が止まります。メッセージには、それらを1つの検索語として書く方法が示されます。
 - `People`または`Lists`に設定した`search_type`、`followers`に設定した`source_mode`、`engagementLevel`のプリセット、`Get Similar Tweets`モードは、読み取りや課金の前に実行を止めます。メッセージには、使うべきActorまたはフィールドが示されます。

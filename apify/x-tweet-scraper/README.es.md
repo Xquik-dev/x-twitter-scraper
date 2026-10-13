@@ -803,8 +803,9 @@ Cómo se comporta una entrada pegada:
   años se cuentan hacia atrás en el calendario. Sin h, d, w, m o y, la ejecución
   se detiene antes de leer o cobrar.
 - El Actor no tiene unidad de página. Reemplaza `maxPages` por `maxItems`.
-- El Actor no tiene campo de ID de usuario. Envía nombres de usuario o URLs de
-  perfil en lugar de `userId` o `user_ids`.
+- El Actor no tiene campo `userId` ni `user_ids`. Pon el ID de usuario donde
+  iría el nombre de usuario. Sirve en `twitterHandles`, en URLs de perfil y
+  después de `from:`.
 - Los campos de operadores de búsqueda como `from`, `min_faves`, `since_time` y
   `filter:images` ya usan los nombres de X. No necesitan conversión.
 - Una lista que otro Actor no define como todos los valores o cualquiera de

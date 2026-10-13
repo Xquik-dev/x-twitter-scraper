@@ -802,8 +802,9 @@ Yapıştırdığın girdi şöyle davranır:
   geriye sayılır. Değerde h, d, w, m veya y yoksa çalıştırma hiçbir okuma veya
   ücret olmadan durur.
 - Actor'da sayfa birimi yok. `maxPages` yerine `maxItems` kullan.
-- Actor'da kullanıcı ID alanı yok. `userId` veya `user_ids` yerine kullanıcı adı
-  ya da profil URL'si gönder.
+- Actor'da `userId` veya `user_ids` alanı yok. Kullanıcı ID'sini kullanıcı
+  adının yerine yaz. `twitterHandles` alanında, profil URL'sinde ve `from:`
+  sonrasında çalışır.
 - `from`, `min_faves`, `since_time` ve `filter:images` gibi arama operatörü
   alanları zaten X'in adlarını kullanır. Eşleme gerektirmez.
 - Başka bir Actor'ın "hepsi" ya da "herhangi biri" diye tanımlamadığı bir liste

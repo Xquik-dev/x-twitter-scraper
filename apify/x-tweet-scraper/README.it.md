@@ -799,8 +799,8 @@ Come si comporta un input incollato:
   contano a ritroso sul calendario. Senza h, d, w, m o y, l'esecuzione si ferma
   prima di leggere o addebitare qualcosa.
 - L'Actor non ha un'unità pagina. Sostituisci `maxPages` con `maxItems`.
-- L'Actor non ha un campo per l'ID utente. Invia nomi utente o URL di profili al
-  posto di `userId` o `user_ids`.
+- L'Actor non ha un campo `userId` o `user_ids`. Metti l'ID utente al posto del
+  nome utente. Funziona in `twitterHandles`, negli URL di profilo e dopo `from:`.
 - I campi degli operatori di ricerca come `from`, `min_faves`, `since_time` &
   `filter:images` usano già i nomi di X. Non serve convertirli.
 - Un elenco che un altro Actor non definisce come «tutti i valori» o «uno

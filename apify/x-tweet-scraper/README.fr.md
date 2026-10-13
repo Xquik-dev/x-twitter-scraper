@@ -817,8 +817,9 @@ Comportement d'une entrée collée :
   mois et les années se comptent à rebours sur le calendrier. Sans h, d, w, m ou
   y, le run s'arrête avant toute lecture ou facturation.
 - L'Actor n'a pas d'unité de page. Remplacez `maxPages` par `maxItems`.
-- L'Actor n'a pas de champ d'ID utilisateur. Envoyez des noms d'utilisateur ou
-  des URL de profil au lieu de `userId` ou `user_ids`.
+- L'Actor n'a pas de champ `userId` ou `user_ids`. Mettez l'ID utilisateur à la
+  place du nom d'utilisateur. Cela marche dans `twitterHandles`, dans les URL de
+  profil et après `from:`.
 - Les champs d'opérateurs de recherche comme `from`, `min_faves`, `since_time`
   et `filter:images` utilisent déjà les noms de X. Ils n'ont besoin d'aucune
   correspondance.
