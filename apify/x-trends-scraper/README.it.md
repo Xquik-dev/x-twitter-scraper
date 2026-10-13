@@ -136,6 +136,14 @@ ogni località & conserva ciascuno per 25 mesi. Lo storico delle tendenze di
 Twitter parte dal 2026-10-13 alle 02:20 UTC. Un momento a più di 24 ore da ogni
 elenco salvato non restituisce righe & non costa nulla.
 
+`at` accetta anche un intervallo prima dell'esecuzione, come un numero & `s`,
+`m`, `h` o `d`. Con `24h`, una pianificazione giornaliera legge le tendenze di
+ieri a ogni esecuzione.
+
+```json
+{ "locations": ["Turkey"], "at": "24h" }
+```
+
 Per un intervallo, compila `from` & `to`. L'esecuzione restituisce 1 elenco
 salvato per ogni passo di `every`, come `15m`, `1h` o `1d`.
 
@@ -150,8 +158,9 @@ salvato per ogni passo di `every`, come `15m`, `1h` o `1d`.
 ```
 
 Senza `to`, l'intervallo finisce adesso. Senza `every`, l'esecuzione restituisce
-1 elenco all'ora. Un passo senza elenco salvato non restituisce righe. `at`
-prevale su `from` & `to`.
+1 elenco all'ora. Un passo senza elenco salvato non restituisce righe. Anche
+`from` & `to` accettano intervalli, quindi `from` impostato a `24h` legge le
+ultime 24 ore. `at` prevale su `from` & `to`.
 
 Un'esecuzione legge 1 tipo di riga. `listLocations` prevale su `listHashflags`,
 che prevale su `placeSearchTerms`. Senza nessuno di questi, l'esecuzione legge
@@ -383,8 +392,8 @@ restituisce righe. Attiva `listLocations` per vedere i nomi che X accetta.
 ### Posso estrarre lo storico delle tendenze di Twitter?
 
 Sì, dal 2026-10-13 alle 02:20 UTC. Compila `at` per 1 momento passato, oppure
-`from` & `to` per un intervallo. Ogni riga riporta `capturedAt`, il momento del
-suo elenco salvato.
+`from` & `to` per un intervallo. In una pianificazione, usa un intervallo come
+`24h`. Ogni riga riporta `capturedAt`, il momento del suo elenco salvato.
 
 ### Posso usare l'API, le pianificazioni & le integrazioni?
 

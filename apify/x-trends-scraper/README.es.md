@@ -141,6 +141,14 @@ cada ubicación y conserva cada una 25 meses. El historial de tendencias de
 Twitter empieza el 2026-10-13 a las 02:20 UTC. Un momento a más de 24 horas de
 toda lista guardada no devuelve filas y no cuesta nada.
 
+`at` también acepta un lapso hacia atrás desde la ejecución, como un número y
+`s`, `m`, `h` o `d`. Con `24h`, una programación diaria lee las tendencias de
+ayer en cada ejecución.
+
+```json
+{ "locations": ["Turkey"], "at": "24h" }
+```
+
 Para un rango, completa `from` y `to`. La ejecución devuelve 1 lista guardada
 por cada paso de `every`, como `15m`, `1h` o `1d`.
 
@@ -155,8 +163,9 @@ por cada paso de `every`, como `15m`, `1h` o `1d`.
 ```
 
 Sin `to`, el rango termina ahora. Sin `every`, la ejecución devuelve 1 lista por
-hora. Un paso sin lista guardada no devuelve filas. `at` tiene prioridad sobre
-`from` y `to`.
+hora. Un paso sin lista guardada no devuelve filas. `from` y `to` también
+aceptan lapsos, así que `from` con `24h` lee las últimas 24 horas. `at` tiene
+prioridad sobre `from` y `to`.
 
 Una ejecución lee 1 tipo de fila. `listLocations` tiene prioridad sobre
 `listHashflags`, que tiene prioridad sobre `placeSearchTerms`. Sin ninguno de
@@ -392,8 +401,8 @@ no devuelve filas. Activa `listLocations` para ver los nombres que X acepta.
 ### ¿Puedo extraer tendencias históricas de Twitter?
 
 Sí, desde el 2026-10-13 a las 02:20 UTC. Completa `at` para 1 momento pasado, o
-`from` y `to` para un rango. Cada fila trae `capturedAt`, el momento de su lista
-guardada.
+`from` y `to` para un rango. En una programación, usa un lapso como `24h`. Cada
+fila trae `capturedAt`, el momento de su lista guardada.
 
 ### ¿Puedo usar la API, las programaciones y las integraciones?
 
