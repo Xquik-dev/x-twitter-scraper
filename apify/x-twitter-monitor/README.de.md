@@ -17,12 +17,15 @@
 
 Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
 liefert die vollständigsten X-Daten. X (Twitter) Monitor von Xquik sendet
-Twitter-Alerts für die Stichwörter & Accounts, die du auswählst. Er prüft jede
-Sekunde, & jeder neue Post, jede Antwort oder jede Profiländerung erreicht
-Discord, Telegram, Slack oder deinen Webhook in Sekunden. Die meisten anderen
-Apify Actors rechnen ab, bevor sie filtern oder Duplikate entfernen. Xquik
-rechnet nur gelieferte, eindeutige Ergebnisse ab, & hier nur die Stunden, in
-denen ein Monitor beobachtet.
+Twitter-Alerts für die Accounts & Stichwörter, die du auswählst. Er erfasst
+jeden neuen Tweet, jede Antwort, jedes Zitat, jeden Repost & jede Profiländerung
+eines beobachteten Accounts. Meist erfasst er jedes davon in weniger als einer
+Sekunde, nachdem X es zeigt. Für ein Stichwort erfasst er jeden neuen Tweet, den
+die X-Suche unter Neueste zeigt. Er erfasst auch Follows & Follower. Jedes Event
+erreicht Discord, Telegram, Slack oder deinen Webhook als Alert. Die meisten
+anderen Apify Actors rechnen ab, bevor sie filtern oder Duplikate entfernen.
+Xquik rechnet nur gelieferte, eindeutige Ergebnisse ab, & hier nur die Stunden,
+in denen ein Monitor beobachtet.
 
 Füge Accounts oder Stichwörter ein & klicke auf Start. Das Monitoring startet
 sofort, & Alerts kommen zwischen den Runs an. Du zahlst **$0.0045 pro
@@ -34,25 +37,37 @@ Plattformnutzung separat.
 
 ## Was der Twitter-Monitor sendet
 
-- Neue Posts, Antworten, Zitate & Reposts der Accounts, die du beobachtest.
-- Posts, die zu einer Stichwortsuche passen, mit jedem X-Suchoperator.
-- Gelöschte Posts, Live-Videos & Spaces, die ein Account startet.
-- Profiländerungen: Name, Nutzername, Bio, Profilbild, Bannerbild, Standort,
-  Link, Verifizierung, Schutzstatus, angehefteter Post & Verfügbarkeit.
+- Jeder neue Tweet, jede Antwort, jedes Zitat & jeder Repost der Accounts, die
+  du beobachtest, meist in weniger als einer Sekunde erfasst, nachdem X sie
+  zeigt.
+- Jeder neue Tweet, den die X-Suche unter Neueste für dein Stichwort zeigt, mit
+  jedem X-Suchoperator.
+- Gelöschte Tweets, Live-Videos & Spaces, die ein Account startet.
+- Profiländerungen wie Anzeigename, Nutzername, Bio, Profilbild, Bannerbild,
+  Standort, Website, Verifizierung, Schutzstatus, angehefteter Tweet &
+  Verfügbarkeit, ebenfalls meist in weniger als einer Sekunde erfasst, nachdem X
+  sie zeigt.
 - Accounts, denen jeder beobachtete Account folgt oder entfolgt.
-- Das vollständige Event: der Post mit Autor, Zahlen & Medien oder die Änderung.
+- Neue & verlorene Follower jedes beobachteten Accounts, in `eventTypes`.
+- Tweets mit Erwähnungen, Hashtags, Medien, Links oder Umfragen & lange Tweets,
+  in `eventTypes`.
+- Das vollständige Event, also der Tweet mit Autor, Zahlen & Medien oder die
+  Änderung.
 - Die dauerhafte X-Nutzer-ID neben dem aktuellen Nutzernamen, damit ein
   umbenannter Account seinen Monitor behält.
 - Alerts an Slack & Discord in deren eigenem Nachrichtenformat, an Telegram & an
   jeden HTTPS-Webhook als signiertes JSON.
-- Ein Test-Alert an jeden neuen Empfänger, mit dessen Antwort im Run-Status.
-- Jedes Event im Dataset des Runs & in 1 Verlaufs-Dataset pro Monitor.
+- Ein Test-Alert an jede neue Webhook-, Slack- oder Discord-URL, mit deren
+  Antwort im Run-Status. Telegram bestätigt im Chat, wenn du auf Start tippst.
+- Jedes Event im Dataset des Runs & in 1 Verlaufs-Dataset pro gespeichertem Task
+  oder Monitor-Namen.
 
 ## So richtest du Twitter-Alerts für Stichwörter ein
 
 1. Öffne X (Twitter) Monitor von Xquik in der Apify Console.
 2. Füge Nutzernamen in `twitterHandles` oder X-Suchen in `searchTerms` ein.
-3. Wähle die Events, die einen Alert senden. `newPosts` ist standardmäßig aktiv.
+3. Wähle die Events, die einen Alert senden. Neue Tweets, Antworten, Zitate &
+   Reposts sind standardmäßig aktiv.
 4. Füge Webhook-URLs in `webhookUrls` ein oder aktiviere `telegram`.
 5. Klicke auf Start. Das Monitoring beginnt in diesem Run.
 6. Füge einen Zeitplan hinzu, der den Actor jede Stunde mit derselben Eingabe
@@ -63,51 +78,56 @@ speichert die neuen Events in seinem Dataset & endet schnell. Ein Monitor ohne
 Run für 24 Stunden pausiert. Deine Alerts warnen dich 4 Stunden vorher. Der
 nächste Run setzt ihn fort & berechnet zuerst die offenen Stunden.
 
-Dieselbe Eingabe setzt denselben Monitor fort. Eine geänderte Eingabe
-aktualisiert ihn. Ein gespeicherter Task ist 1 Monitor. Ohne Task benennt
-`monitorName` den Monitor, also halten 2 Namen 2 Monitore auseinander.
+Dieselbe Eingabe setzt dieselben Monitore fort. Eine geänderte Eingabe
+aktualisiert sie. Ein gespeicherter Task hält 1 Gruppe von Monitoren. Ohne Task
+benennt `monitorName` die Gruppe, also halten 2 Namen 2 Gruppen auseinander.
 
 ## Twitter-Alerts in Discord, Telegram & Slack
 
-- **Discord**: Füge die Webhook-URL eines Kanals in `webhookUrls` ein. Jeder
+- **Discord.** Füge die Webhook-URL eines Kanals in `webhookUrls` ein. Jeder
   Alert kommt als Discord-Nachricht an, ohne Bot, den du hosten musst.
-- **Telegram**: Aktiviere `telegram`. Der Run-Status gibt dir einen Link zum
+- **Telegram.** Aktiviere `telegram`. Der Run-Status gibt dir einen Link zum
   Telegram-Bot von Xquik. Öffne ihn & tippe auf Start, dann kommen Alerts in
   diesem Chat an.
-- **Slack**: Füge eine Incoming-Webhook-URL ein. Jeder Alert kommt als
+- **Slack.** Füge eine Incoming-Webhook-URL ein. Jeder Alert kommt als
   Slack-Nachricht an.
-- **Jede App**: Füge eine HTTPS-URL ein. Jeder Alert kommt als signiertes JSON
+- **Jede App.** Füge eine HTTPS-URL ein. Jeder Alert kommt als signiertes JSON
   an, als dasselbe Event, das das Dataset enthält.
 
-Jeder neue Empfänger bekommt in dem Run, der ihn hinzufügt, einen Test-Alert.
-Die Statusseite zeigt, ob er angekommen ist.
+Jede neue Webhook-, Slack- oder Discord-URL bekommt in dem Run, der sie
+hinzufügt, einen Test-Alert, & die Statusseite zeigt, ob er angekommen ist.
+Telegram sendet keinen Test-Alert. Der Bot antwortet im Chat, wenn du auf Start
+tippst, & der nächste Run zeigt Telegram als verbunden.
 
 ## Eingabe
 
-| Feld                                 | Funktion                                                                      |
-| ------------------------------------ | ----------------------------------------------------------------------------- |
-| `twitterHandles`                     | Nutzernamen mit oder ohne @ oder Profil-URLs von x.com.                       |
-| `searchTerms`                        | X-Suchen wie `"x api" lang:en`. Jede Suche ist 1 Monitor.                     |
-| `monitorName`                        | Benennt den Monitor bei Runs ohne gespeicherten Task.                         |
-| `newPosts`                           | Originale Posts. Standardmäßig aktiv.                                         |
-| `replies`, `quotes`, `reposts`       | Diese Post-Typen.                                                             |
-| `deletedPosts`, `liveVideos`         | Gelöschte Posts, Live-Videos & Spaces von Accounts.                           |
-| `profileChanges`, `followingChanges` | Profil- & Following-Änderungen von Accounts.                                  |
-| `eventTypes`                         | Genaue Event-Typen, die die Checkboxen ersetzen.                              |
-| `webhookUrls`                        | HTTPS-URLs, 1 pro Zeile. Der Actor erkennt Slack- & Discord-URLs.             |
-| `telegram`                           | Sendet Alerts an Telegram über einen Link, den der Run dir gibt.              |
-| `since`                              | Speichert 1-mal die aufbewahrten Events seit einem Datum der letzten 30 Tage. |
-| `stop`                               | Stoppt den Monitor & schaltet Alerts ab.                                      |
+| Feld                                 | Funktion                                                                            |
+| ------------------------------------ | ----------------------------------------------------------------------------------- |
+| `twitterHandles`                     | Nutzernamen mit oder ohne @ oder Profil-URLs von x.com, 1 pro Zeile.                |
+| `searchTerms`                        | X-Suchen wie `"x api" lang:en`. Jede Suche ist 1 Monitor.                           |
+| `monitorName`                        | Benennt diese Gruppe von Accounts & Stichwörtern, für Runs ohne gespeicherten Task. |
+| `newPosts`                           | Jeder neue Tweet. Standardmäßig aktiv.                                              |
+| `replies`, `quotes`, `reposts`       | Antworten, zitierte Tweets & Reposts. Standardmäßig aktiv.                          |
+| `deletedPosts`, `liveVideos`         | Gelöschte Tweets, Live-Videos & Spaces von Accounts.                                |
+| `profileChanges`, `followingChanges` | Profiländerungen, Follows & Unfollows von Accounts.                                 |
+| `eventTypes`                         | Genaue Event-Typen, die die Checkboxen ersetzen, etwa Follower-Änderungen & Medien. |
+| `webhookUrls`                        | HTTPS-URLs, 1 pro Zeile. Der Actor erkennt Slack- & Discord-URLs.                   |
+| `telegram`                           | Sendet Alerts an Telegram über einen Link, den der Run dir gibt.                    |
+| `since`                              | Speichert 1-mal die aufbewahrten Events seit einem Datum der letzten 30 Tage.       |
+| `stop`                               | Stoppt den Monitor & schaltet Alerts ab.                                            |
 
-Accounts & Stichwörter ergeben zusammen bis zu 100 pro Monitor. Stichwörter
-senden nur Post-Events. Telegram braucht keinen Nutzernamen & keine Chat-ID. Der
+1 Eingabe nimmt bis zu 100 Accounts & Stichwörter auf. Stichwörter senden nur
+Tweet-Events. Setze eine Wortgruppe in Anführungszeichen, damit sie genau passt,
+wie bei `"x api"`. Ohne Anführungszeichen können die Wörter überall in einem
+Tweet stehen. Um Erwähnungen eines Accounts zu erfassen, füge das Stichwort
+`@username` hinzu. Telegram braucht keinen Nutzernamen & keine Chat-ID. Der
 Run-Status gibt dir einen Link. Öffne ihn & tippe auf Start, dann kommen Alerts
 in diesem Chat an.
 
-Kopierfertige Eingaben:
+Diese Eingaben sind kopierfertig.
 
 ```json
-{ "twitterHandles": ["NASA", "SpaceX"], "newPosts": true, "replies": true }
+{ "twitterHandles": ["NASA", "SpaceX"], "reposts": false }
 ```
 
 ```json
@@ -126,17 +146,19 @@ Kopierfertige Eingaben:
 
 Jeder Run liefert 4 Ausgaben.
 
-- **Statusseite**, der Eintrag `STATUS.html`: was der Monitor beobachtet, jeder
-  Alert-Empfänger, die Abrechnung & der nächste Schritt. Der Tab Output zeigt
-  sie.
-- **Status-Eintrag**, der Eintrag `STATUS`: derselbe Status als JSON.
-- **Neue Events**: das Dataset des Runs, mit jedem neuen Event, das älteste
-  zuerst, & 1 Status-Datensatz am Ende.
-- **Diagnosen**: Der Actor schreibt sie nur, wenn etwas deine Aufmerksamkeit
+- **Statusseite**, der Eintrag `STATUS.html`. Sie zeigt, ob der Monitor
+  beobachtet, den einzigen nächsten Schritt mit einem Button, was der Run
+  gespeichert & berechnet hat, die Ziele & jeden Alert-Empfänger. Der Tab Output
+  zeigt sie.
+- **Status-Eintrag**, der Eintrag `STATUS`. Er enthält denselben Status als
+  JSON.
+- **Neue Events**, das Dataset des Runs. Es enthält jedes neue Event, das
+  älteste zuerst, & 1 Status-Datensatz am Ende.
+- **Diagnosen**, die der Actor nur schreibt, wenn etwas deine Aufmerksamkeit
   braucht.
 
 Ein Event-Datensatz ist das Event genau so, wie die REST-API von Xquik es
-liefert, mit jedem Feld:
+liefert, mit jedem Feld.
 
 ```json
 {
@@ -155,11 +177,11 @@ liefert, mit jedem Feld:
 Die Beispielwerte zeigen die Struktur. Live-Daten weichen ab.
 
 Der Status-Eintrag enthält `state`, `targets`, `destinations`, `eventsSaved`,
-`pendingEvents`, `hoursCharged`, `chargedUsd`, `hoursOwed`, `paidThrough`,
-`pausesAt`, `historyDataset`, `notices` & `nextStep`. Ein Ziel, das es auf X
-nicht gibt, sagt das in seiner `message`, & der Monitor beobachtet den Rest. Ein
-neuer generischer Webhook zeigt sein Signatur-Secret 1-mal, nur im
-Status-Eintrag.
+`pendingEvents`, `hoursCharged`, `chargedUsd`, `chargeConfirmed`, `hoursOwed`,
+`paidThrough`, `pausesAt`, `historyDataset`, `notices`, `nextStep`,
+`nextStepAction` & `nextStepUrl`. Ein Ziel, das es auf X nicht gibt, sagt das in
+seiner `message`, & der Monitor beobachtet den Rest. Ein neuer generischer
+Webhook zeigt sein Signatur-Secret 1-mal, nur im Status-Eintrag.
 
 Das Verlaufs-Dataset in deinem Account enthält jedes Event des Monitors, jedes
 1-mal. Sein Name beginnt mit `x-monitor-`.
@@ -168,32 +190,41 @@ Das Verlaufs-Dataset in deinem Account enthält jedes Event des Monitors, jedes
 
 1 Aufruf ist die ganze API. Jeder Aufruf startet oder aktualisiert den Monitor,
 berechnet die beobachteten Stunden seit dem vorherigen Aufruf & gibt nur Neues
-zurück. Kein Aufruf berechnet eine Stunde 2-mal. Aufrufe enden schnell,
-innerhalb der Zeit, die Apifys MCP wartet.
+zurück. Kein Aufruf berechnet eine Stunde 2-mal. Ein Aufruf, der einen Monitor
+startet oder aktualisiert, endet schnell, innerhalb der Zeit, die Apifys MCP
+wartet. Ein Stopp dauert etwa eine halbe Minute, weil er zuerst die letzten
+Events sammelt. Lies sein Ergebnis aus dem Run, wenn dein Tool nicht mehr
+wartet.
 
-Einen Monitor starten oder fortsetzen:
+Diese Eingabe startet einen Monitor oder setzt ihn fort.
 
 ```json
 {
   "twitterHandles": ["NASA"],
   "searchTerms": ["\"x api\" lang:en"],
-  "replies": true,
   "monitorName": "agent-demo"
 }
 ```
 
-Was ein Aufruf zurückgibt:
+Ein Aufruf gibt 2 Dinge zurück.
 
 - Das Dataset des Runs enthält die neuen Events, dann 1 Datensatz mit
   `resultType` `status`. Sein `state` sagt, ob der Monitor beobachtet, &
-  `nextStep` sagt, was als Nächstes zu tun ist.
+  `nextStep` sagt, was als Nächstes zu tun ist. `nextStepAction` nennt die Art
+  des Schritts, etwa `add_schedule`, & `nextStepUrl` ist die Seite dafür.
 - Der Eintrag `STATUS` enthält denselben Status, mit einem Signatur-Secret, wenn
   der Aufruf einen Webhook erstellt hat.
 
-So läuft er weiter: Bitte deinen Agent, einen Apify-Zeitplan zu erstellen, der
-den Actor jede Stunde mit derselben Eingabe startet. Jeder Timer, der ihn
-mindestens 1-mal alle 24 Stunden aufruft, funktioniert auch. Stoppe ihn mit
-derselben Eingabe & `"stop": true`.
+Um einen Monitor zu prüfen, rufe den Actor erneut mit derselben Eingabe auf. Das
+ändert nichts & berechnet nur bereits beobachtete Stunden. Der Aufruf gibt den
+Status & die neuen Events zurück.
+
+Ein Monitor braucht mindestens 1-mal alle 24 Stunden einen Run, um weiter zu
+beobachten. Apifys MCP-Server hat kein Zeitplan-Tool, also kannst du keinen
+Zeitplan anlegen. Bitte den Nutzer, auf der Seite in `nextStepUrl` einen
+Apify-Zeitplan hinzuzufügen. Er startet den Actor jede Stunde mit derselben
+Eingabe. Oder rufe den Actor selbst von einem beliebigen Timer erneut auf.
+Stoppe ihn mit derselben Eingabe & `"stop": true`.
 
 Der Actor liest auch die Namen, die Agents raten, etwa `handles` & `usernames`,
 & der Run-Status sagt, wie er sie gelesen hat.
@@ -201,7 +232,8 @@ Der Actor liest auch die Namen, die Agents raten, etwa `handles` & `usernames`,
 ## Was kostet ein Twitter-Monitor?
 
 Auf jedem kostenpflichtigen Apify-Plan kostet eine monitor-hour $0.0045. 1
-Account oder Stichwort ist 1 Monitor. Apify berechnet deine Plattformnutzung
+Account oder Stichwort ist 1 Monitor. Eine Eingabe mit 2 Accounts & 1 Stichwort
+kostet 3 monitor-hours pro Stunde. Apify berechnet deine Plattformnutzung
 separat.
 
 - 1 Account, 30 Tage lang beobachtet, kostet etwa $3.24.
@@ -218,14 +250,13 @@ nichts an den Alerts, die ohnehin zwischen den Runs ankommen.
 
 Monitoring braucht einen kostenpflichtigen Apify-Plan. Auf dem kostenlosen Plan
 startet ein Run keinen Monitor & berechnet nichts. Stattdessen zeigt er die 5
-neuesten Posts deines ersten Accounts, damit du siehst, was Alerts enthalten
+neuesten Tweets deines ersten Accounts, damit du siehst, was Alerts enthalten
 würden.
 
 ## Limits & Wiederherstellung
 
-- Accounts & Stichwörter ergeben zusammen bis zu 100 pro Monitor. Nutze 2 Tasks
-  für mehr.
-- Bis zu 10 Webhook-URLs pro Monitor, plus Telegram.
+- 1 Eingabe nimmt bis zu 100 Accounts & Stichwörter auf. Nutze 2 Tasks für mehr.
+- Bis zu 10 Webhook-URLs pro Eingabe, plus Telegram.
 - Events bleiben 30 Tage gespeichert, also kann `since` sie in dieser Zeit
   erneut speichern.
 - Ein Run, der früh stoppt, lässt seine Events für den nächsten Run liegen.
@@ -240,89 +271,87 @@ würden.
 Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, rechnet erst nach dem
 Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): Scrapt Posts aus
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrapt Posts aus
   Suchen, Profil-Timelines, Listen & Post-IDs mit über 50 Filtern & flachen
-  Exporten. Nutze ihn, wenn du Post-Daten ohne Analyse brauchst. Ab $0.00015
-  pro Datensatz.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Scrapt
-  Profile samt Posts, Antworten, Medien & Followern anhand von Nutzernamen, IDs
-  oder URLs. Nutze ihn, wenn du von Accounts statt von Suchen ausgehst. Ab
-  $0.00015 pro Datensatz.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Scrapt
-  Antworten, Kommentare & ganze Konversationen unter Posts mit über 25 Filtern.
-  Nutze ihn, wenn du die Diskussion unter Posts brauchst. Ab $0.00015 pro
+  Exporten. Nutze ihn, wenn du Post-Daten ohne Analyse brauchst. Ab $0.00015 pro
   Datensatz.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Scrapt
-  Antworten, Zitate, Reposter & Threads zu Post-URLs oder -IDs in großen
-  Mengen. Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) scrapt Profile
+  samt Posts, Antworten, Medien & Followern anhand von Nutzernamen, IDs oder
+  URLs. Nutze ihn, wenn du von Accounts statt von Suchen ausgehst. Ab $0.00015
   pro Datensatz.
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
-  Scrapt die Posts, die Posts zitieren, mit Text, Medien, Zahlen, Autoren & 11
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) scrapt Antworten,
+  Kommentare & ganze Konversationen unter Posts mit über 25 Filtern. Nutze ihn,
+  wenn du die Diskussion unter Posts brauchst. Ab $0.00015 pro Datensatz.
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) scrapt
+  Antworten, Zitate, Reposter & Threads zu Post-URLs oder -IDs in großen Mengen.
+  Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015 pro
+  Datensatz.
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
+  scrapt die Posts, die Posts zitieren, mit Text, Medien, Zahlen, Autoren & 11
   Filtern. Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was gesagt
   wurde. Ab $0.00015 pro Post.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Scrapt
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrapt
   Follower, gefolgte Accounts, Listenmitglieder, Abonnenten &
   Community-Mitglieder als Profil-Datensätze. Nutze ihn, wenn du Zielgruppen-
   oder Mitgliederlisten brauchst. Ab $0.00015 pro Profil.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Sucht Nutzer nach Nutzername, Bio & Standort mit Filtern für Follower,
-  Verifizierung, Account-Alter & Standort. Nutze ihn, wenn du Account-Listen
-  aus einer Suche aufbaust. Ab $0.00015 pro Profil.
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
-  Prüft mit der X-Angabe "Account based in", der Art, wie sich ein Account mit X
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) sucht
+  Nutzer nach Nutzername, Bio & Standort mit Filtern für Follower,
+  Verifizierung, Account-Alter & Standort. Nutze ihn, wenn du Account-Listen aus
+  einer Suche aufbaust. Ab $0.00015 pro Profil.
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
+  prüft mit der X-Angabe "Account based in", der Art, wie sich ein Account mit X
   verbunden hat, & Benutzernamen-Änderungen, wo Accounts ansässig sind. Nutze
   ihn, wenn du prüfst, wo Accounts ansässig sind. Ab $0.00015 pro Account.
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): Holt die E-Mails,
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) holt die E-Mails,
   Telefonnummern & Links, die Accounts in ihren Profilen veröffentlichen, anhand
   von Nutzernamen, Followern oder Nutzersuchen. Nutze ihn, wenn du die E-Mails
   brauchst, die Profile veröffentlichen. Ab $0.00015 pro Profil.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): Scrapt Posts,
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) scrapt Posts,
   Mitglieder & Follower von Listen aus Listen-URLs oder -IDs. Nutze ihn, wenn
   eine kuratierte Liste deine Quellen festlegt. Ab $0.00015 pro Datensatz.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapt
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper) scrapt
   Community-Infos, Posts, Suchen, Mitglieder & Moderatoren. Nutze ihn, wenn
   deine Quellen X-Communities sind. Ab $0.00015 pro Datensatz.
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Findet Spaces nach
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) findet Spaces nach
   Stichwort & liest ihre Titel, Status, Zeiten, Zuhörerzahlen, Hosts & Sprecher.
-  Liest auch Broadcasts per URL oder ID. Nutze ihn, wenn du Live-Audio &
+  Er liest auch Broadcasts per URL oder ID. Nutze ihn, wenn du Live-Audio &
   Live-Video auf X verfolgst. Ab $0.00015 pro Space oder Broadcast.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapt
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) scrapt
   Echtzeit-Trends nach Standort mit Rang, Volumen, Suchbegriff & WOEID. Nutze
   ihn, wenn du verfolgst, was wo gerade angesagt ist. Ab $0.00015 pro Trend.
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapt
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) scrapt
   X-Stellenanzeigen nach Stichwort, Ort, Arbeitsmodell, Karrierestufe &
   Unternehmen, mit Gehältern & Bewerbungslinks. Nutze ihn, wenn du auf X
   veröffentlichte Stellen sammelst. Ab $0.00015 pro Job.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapt
-  lange X-Artikel als Markdown & Text mit Titelbildern, Autoren, Daten &
-  Kennzahlen. Nutze ihn, wenn du Artikeltexte statt Posts brauchst. Ab
-  $0.00015 pro Artikel.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader):
-  Extrahiert oder speichert Fotos, Videos & GIFs aus Posts oder Profilen mit
-  MP4- & Metadaten-Optionen. Nutze ihn, wenn du die Mediendateien selbst
-  brauchst. Ab $0.00015 pro Medien-Datensatz.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
-  Verfolgt Markenerwähnungen mit KI-Relevanz, Sentiment & Antworten zur
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) scrapt lange
+  X-Artikel als Markdown & Text mit Titelbildern, Autoren, Daten & Kennzahlen.
+  Nutze ihn, wenn du Artikeltexte statt Posts brauchst. Ab $0.00015 pro Artikel.
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) extrahiert
+  oder speichert Fotos, Videos & GIFs aus Posts oder Profilen mit MP4- &
+  Metadaten-Optionen. Nutze ihn, wenn du die Mediendateien selbst brauchst. Ab
+  $0.00015 pro Medien-Datensatz.
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
+  verfolgt Markenerwähnungen mit KI-Relevanz, Sentiment & Antworten zur
   Kundenerfahrung & vergleicht Runs. Nutze ihn, wenn du eine Marke über längere
   Zeit beobachtest. Ab $0.0003 pro analysiertem Post.
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
-  Kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden
-  Post mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema
-  brauchst. Ab $0.0003 pro analysiertem Post.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
-  Kennzeichnet bullische, bärische, neutrale oder gemischte Haltung,
-  Inhaltstyp, Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du
-  Aktien, Krypto oder Trading-Talk verfolgst. Ab $0.0003 pro analysiertem Post.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
-  Kennzeichnet News-Posts nach Format, Quellenangabe & Themenrelevanz mit KI.
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
+  kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden Post
+  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema brauchst. Ab
+  $0.0003 pro analysiertem Post.
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
+  kennzeichnet bullische, bärische, neutrale oder gemischte Haltung, Inhaltstyp,
+  Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du Aktien, Krypto
+  oder Trading-Talk verfolgst. Ab $0.0003 pro analysiertem Post.
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
+  kennzeichnet News-Posts nach Format, Quellenangabe & Themenrelevanz mit KI.
   Nutze ihn, wenn du Berichterstattung von Kommentaren trennst. Ab $0.0003 pro
   analysiertem Post.
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  Beantwortet deine eigenen Kategorie-, Score- & Ja/Nein-Fragen für jeden Post
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
+  beantwortet deine eigenen Kategorie-, Score- & Ja/Nein-Fragen für jeden Post
   mit KI. Nutze ihn, wenn die vorgefertigten Analysen nicht zu deinen Labels
   passen. Ab $0.0003 pro analysiertem Post.
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
-  Schätzt für jeden Post einen Viral Score von 0 bis 100 & ein Urteil aus 8
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
+  schätzt für jeden Post einen Viral Score von 0 bis 100 & ein Urteil aus 8
   KI-Antworten zu Merkmalen. Nutze ihn, wenn du untersuchst, warum Posts sich
   verbreiten oder floppen. Ab $0.0003 pro analysiertem Post.
 
@@ -339,18 +368,20 @@ Infrastruktur von Xquik.
 ### Wie überwache ich einen Twitter-Account?
 
 Füge seinen Nutzernamen in `twitterHandles` ein, wähle die gewünschten Events &
-füge einen Alert-Empfänger hinzu. Jeder neue Post erreicht dich in Sekunden, &
-jedes Event bleibt im Dataset.
+füge einen Alert-Empfänger hinzu. Xquik erfasst jeden neuen Tweet meist in
+weniger als einer Sekunde, nachdem X ihn zeigt, & jedes Event bleibt im Dataset.
 
 ### Kann er Krypto-Accounts & Coin-Erwähnungen überwachen?
 
 Ja. Füge die Accounts hinzu, denen du folgst, oder eine Stichwortsuche wie ein
-Cashtag oder eine Contract-Adresse. Passende Posts erreichen Discord oder
-Telegram in Sekunden.
+Cashtag oder eine Contract-Adresse. Neue Tweets dieser Accounts & passende
+Tweets erreichen Discord oder Telegram als Alerts.
 
 ### Wie schnell kommen Alerts an?
 
-Xquik prüft jede Sekunde & sendet jedes Event in Sekunden. Alerts warten nie auf
+Xquik erfasst einen neuen Tweet, eine Antwort, ein Zitat, einen Repost oder eine
+Profiländerung eines beobachteten Accounts meist in weniger als einer Sekunde,
+nachdem X sie zeigt. Alerts gehen raus, sobald Events ankommen, & warten nie auf
 einen Run.
 
 ### Warum sagt der Run, dass Monitoring einen kostenpflichtigen Plan braucht?
@@ -362,7 +393,9 @@ erneut mit derselben Eingabe.
 ### Was passiert, wenn ich den Monitor stoppe?
 
 Der Run stoppt jedes Ziel & schaltet Alerts ab. Er berechnet die bis dahin
-beobachteten Stunden. Bereits aufbewahrte Events bleiben 30 Tage lang lesbar.
+beobachteten Stunden. Dann wartet er etwa eine halbe Minute auf die neuesten
+Events & speichert sie, damit keins zurückbleibt. Bereits aufbewahrte Events
+bleiben 30 Tage lang lesbar.
 
 ### Wie prüfe ich eine Webhook-Signatur?
 
