@@ -22,9 +22,11 @@ anderen Apify Actors rechnen ab, bevor sie filtern oder Duplikate entfernen.
 Xquik rechnet nur gelieferte, eindeutige Ergebnisse ab, die zu deinen Filtern
 passen.
 
-Scrape aktuelle Trends auf X (Twitter) für viele Standorte in 1 Run. Du zahlst
-**$0.00015 pro geliefertem Datensatz**, & Apify berechnet die Plattformnutzung
-separat. Du brauchst keinen X-API-Schlüssel & keinen Login.
+Scrape aktuelle Trends auf X (Twitter) für viele Standorte in 1 Run. Oder lies
+vergangene Trends aus dem Twitter-Trends-Archiv von Xquik, das am 2026-10-13 um
+02:20 UTC beginnt. Du zahlst **$0.00015 pro geliefertem Datensatz**, & Apify
+berechnet die Plattformnutzung separat. Du brauchst keinen X-API-Schlüssel &
+keinen Login.
 
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
@@ -33,6 +35,8 @@ separat. Du brauchst keinen X-API-Schlüssel & keinen Login.
 
 - Mehrere Länder, Städte oder WOEIDs, parallel gelesen.
 - Bis zu 50 aktuelle Trends pro Standort.
+- Vergangene Trends aus dem Twitter-Trends-Archiv, nach Datum & Uhrzeit, seit
+  2026-10-13.
 - Eine Liste aller Orte, für die X Trends anbietet, mit WOEID, Land & Typ.
 - X-Ortssuche, mit der Orts-ID, die die X-Postsuche annimmt.
 - X-Hashflags: die benutzerdefinierten Emojis, die X nach manchen Hashtags
@@ -119,6 +123,38 @@ Der Run listet die Hashflags, die X gerade zeigt. Deaktiviere `activeOnly`, um
 beendete & kommende zu ergänzen. `hashtagContains` behält Hashtags, die deinen
 Text enthalten.
 
+Um zu sehen, was gestern oder zu einem früheren Zeitpunkt auf Twitter im Trend
+war, fülle `at` aus. Der Run liest dann für jeden Standort die gespeicherte
+Liste, die diesem Zeitpunkt am nächsten liegt.
+
+```json
+{ "locations": ["Turkey"], "at": "2026-10-13T14:00:00Z" }
+```
+
+`at` nimmt ein Datum wie 2026-10-13, eine Zeit wie 2026-10-13T14:00:00Z oder
+Unix-Sekunden an. Eine Zeit ohne Zone gilt als UTC. Xquik speichert 12 Listen
+pro Stunde für jeden Standort & behält jede 25 Monate. Der
+Twitter-Trends-Verlauf beginnt am 2026-10-13 um 02:20 UTC. Ein Zeitpunkt, der
+mehr als 24 Stunden von jeder gespeicherten Liste entfernt ist, liefert keine
+Datensätze & kostet nichts.
+
+Für einen Zeitraum fülle `from` & `to` aus. Der Run liefert 1 gespeicherte Liste
+pro Schritt von `every`, etwa `15m`, `1h` oder `1d`.
+
+```json
+{
+  "locations": ["Turkey"],
+  "from": "2026-10-13",
+  "to": "2026-10-14",
+  "every": "1h",
+  "maxItems": 1200
+}
+```
+
+Ohne `to` endet der Zeitraum jetzt. Ohne `every` liefert der Run 1 Liste pro
+Stunde. Ein Schritt ohne gespeicherte Liste liefert keine Datensätze. `at` hat
+Vorrang vor `from` & `to`.
+
 Ein Run liest 1 Art von Datensatz. `listLocations` hat Vorrang vor
 `listHashflags`, das Vorrang vor `placeSearchTerms` hat. Ohne eines davon liest
 der Run Trends.
@@ -146,6 +182,11 @@ Trend-Datensatz sieht so aus:
   "sourceTarget": "Worldwide"
 }
 ```
+
+Datensätze von `at` oder einem Zeitraum enthalten auch `capturedAt`, den
+Zeitpunkt, zu dem Xquik ihre Liste bei X gelesen hat. Datensätze von `at`
+enthalten zusätzlich `requestedAt`, den Zeitpunkt, den du angefragt hast. Xquik
+schätzt keinen der beiden Werte.
 
 Mit `listLocations` ist jeder Ort 1 Datensatz im Dataset. Datensätze enthalten
 `woeid`, `name`, `country`, `countryCode`, `placeType`, `placeTypeCode`,
@@ -345,6 +386,12 @@ rät dir, Ziele & Filter zu prüfen. `stopCauses` gibt jeder Ursache eine
 `nextAction`, der du folgen kannst. Ein Standort, für den X keine Trends
 anbietet, liefert keine Datensätze. Aktiviere `listLocations`, um die Namen zu
 sehen, die X annimmt.
+
+### Kann ich historische Twitter-Trends scrapen?
+
+Ja, seit 2026-10-13 02:20 UTC. Fülle `at` für 1 vergangenen Zeitpunkt aus oder
+`from` & `to` für einen Zeitraum. Jeder Datensatz enthält `capturedAt`, den
+Zeitpunkt seiner gespeicherten Liste.
 
 ### Kann ich API, Zeitpläne & Integrationen nutzen?
 

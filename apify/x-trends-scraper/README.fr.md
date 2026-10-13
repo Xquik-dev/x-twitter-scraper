@@ -22,9 +22,11 @@ plupart des autres Actors Apify facturent avant de filtrer ou de dédupliquer.
 Xquik facture seulement les résultats livrés, uniques et conformes à vos
 filtres.
 
-Scrapez les tendances Twitter (X) actuelles de nombreux lieux en 1 run. Vous
-payez **$0.00015 par ligne livrée**, et Apify facture l'usage de la plateforme à
-part. Vous n'avez besoin ni de clé API X ni de connexion.
+Scrapez les tendances Twitter (X) actuelles de nombreux lieux en 1 run. Ou lisez
+les tendances passées dans l'archive des tendances Twitter de Xquik, qui
+commence le 2026-10-13 à 02:20 UTC. Vous payez **$0.00015 par ligne livrée**, et
+Apify facture l'usage de la plateforme à part. Vous n'avez besoin ni de clé API
+X ni de connexion.
 
 > Xquik est un service tiers indépendant. Non affilié à X Corp.
 > "Twitter" et "X" sont des marques déposées de X Corp.
@@ -33,6 +35,8 @@ part. Vous n'avez besoin ni de clé API X ni de connexion.
 
 - Plusieurs pays, villes ou WOEID, lus en parallèle.
 - Jusqu'à 50 tendances actuelles par lieu.
+- Les tendances passées de l'archive des tendances Twitter, par date et heure,
+  depuis le 2026-10-13.
 - La liste de tous les lieux pour lesquels X propose des tendances, avec leur
   WOEID, leur pays et leur type.
 - La recherche de lieux X, avec l'ID de lieu que la recherche de posts X
@@ -121,6 +125,37 @@ Le run liste les hashflags que X affiche en ce moment. Désactivez `activeOnly`
 pour ajouter ceux qui sont terminés et ceux à venir. `hashtagContains` garde les
 hashtags qui contiennent votre texte.
 
+Pour voir ce qui était en tendance sur Twitter hier ou à tout moment passé,
+remplissez `at`. Le run lit alors, pour chaque lieu, la liste enregistrée la
+plus proche de ce moment.
+
+```json
+{ "locations": ["Turkey"], "at": "2026-10-13T14:00:00Z" }
+```
+
+`at` accepte une date comme 2026-10-13, une heure comme 2026-10-13T14:00:00Z ou
+des secondes Unix. Une heure sans fuseau est en UTC. Xquik enregistre 12 listes
+par heure pour chaque lieu et garde chacune 25 mois. L'historique des tendances
+Twitter commence le 2026-10-13 à 02:20 UTC. Un moment à plus de 24 heures de
+toute liste enregistrée ne renvoie aucune ligne et ne coûte rien.
+
+Pour une plage, remplissez `from` et `to`. Le run renvoie 1 liste enregistrée
+par pas de `every`, par exemple `15m`, `1h` ou `1d`.
+
+```json
+{
+  "locations": ["Turkey"],
+  "from": "2026-10-13",
+  "to": "2026-10-14",
+  "every": "1h",
+  "maxItems": 1200
+}
+```
+
+Sans `to`, la plage se termine maintenant. Sans `every`, le run renvoie 1 liste
+par heure. Un pas sans liste enregistrée ne renvoie aucune ligne. `at` l'emporte
+sur `from` et `to`.
+
 Un run lit 1 seul type de ligne. `listLocations` l'emporte sur `listHashflags`,
 qui l'emporte sur `placeSearchTerms`. Sans aucun d'eux, le run lit les
 tendances.
@@ -148,6 +183,10 @@ en direct. Une ligne de tendance ressemble à ceci :
   "sourceTarget": "Worldwide"
 }
 ```
+
+Les lignes de `at` ou d'une plage portent aussi `capturedAt`, le moment où Xquik
+a lu leur liste sur X. Les lignes de `at` portent en plus `requestedAt`, le
+moment que vous avez demandé. Xquik n'estime ni l'un ni l'autre.
 
 Avec `listLocations`, chaque lieu donne 1 ligne de dataset. Les lignes portent
 `woeid`, `name`, `country`, `countryCode`, `placeType`, `placeTypeCode`,
@@ -355,6 +394,12 @@ Ouvrez d'abord la sortie gratuite `diagnostics`. Le statut d'un run vide vous
 invite à vérifier vos cibles et vos filtres. `stopCauses` donne à chaque cause
 une `nextAction` à suivre. Un lieu pour lequel X ne propose pas de tendances ne
 renvoie aucune ligne. Activez `listLocations` pour voir les noms que X accepte.
+
+### Puis-je scraper l'historique des tendances Twitter ?
+
+Oui, depuis le 2026-10-13 à 02:20 UTC. Remplissez `at` pour 1 moment passé, ou
+`from` et `to` pour une plage. Chaque ligne porte `capturedAt`, le moment de sa
+liste enregistrée.
 
 ### Puis-je utiliser l'API, les planifications et les intégrations ?
 

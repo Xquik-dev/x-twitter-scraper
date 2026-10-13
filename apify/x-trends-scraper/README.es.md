@@ -23,8 +23,10 @@ duplicados. Xquik solo cobra los resultados entregados, únicos y que cumplen tu
 filtros.
 
 Extrae las tendencias actuales de X (antes Twitter) en muchas ubicaciones en 1
-ejecución. Pagas **$0.00015 por fila entregada**, y Apify factura aparte el uso
-de la plataforma. No necesitas clave de API de X ni iniciar sesión.
+ejecución. O lee tendencias pasadas del archivo de tendencias de Twitter de
+Xquik, que empieza el 2026-10-13 a las 02:20 UTC. Pagas **$0.00015 por fila
+entregada**, y Apify factura aparte el uso de la plataforma. No necesitas clave
+de API de X ni iniciar sesión.
 
 > Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 > "Twitter" y "X" son marcas registradas de X Corp.
@@ -33,6 +35,8 @@ de la plataforma. No necesitas clave de API de X ni iniciar sesión.
 
 - Varios países, ciudades o WOEIDs, leídos en paralelo.
 - Hasta 50 tendencias actuales por ubicación.
+- Tendencias pasadas del archivo de tendencias de Twitter, por fecha y hora,
+  desde el 2026-10-13.
 - Una lista de todos los lugares donde X ofrece tendencias, con su WOEID, país y
   tipo.
 - Búsqueda de lugares de X, con el ID de lugar que acepta la búsqueda de posts
@@ -123,6 +127,37 @@ La ejecución enumera los hashflags que X muestra ahora. Desactiva `activeOnly`
 para agregar los que ya terminaron y los próximos. `hashtagContains` conserva
 los hashtags que contienen tu texto.
 
+Para ver qué fue tendencia en Twitter ayer o en cualquier momento pasado,
+completa `at`. La ejecución lee entonces la lista guardada más cercana a ese
+momento para cada ubicación.
+
+```json
+{ "locations": ["Turkey"], "at": "2026-10-13T14:00:00Z" }
+```
+
+`at` acepta una fecha como 2026-10-13, una hora como 2026-10-13T14:00:00Z o
+segundos Unix. Una hora sin zona es UTC. Xquik guarda 12 listas por hora para
+cada ubicación y conserva cada una 25 meses. El historial de tendencias de
+Twitter empieza el 2026-10-13 a las 02:20 UTC. Un momento a más de 24 horas de
+toda lista guardada no devuelve filas y no cuesta nada.
+
+Para un rango, completa `from` y `to`. La ejecución devuelve 1 lista guardada
+por cada paso de `every`, como `15m`, `1h` o `1d`.
+
+```json
+{
+  "locations": ["Turkey"],
+  "from": "2026-10-13",
+  "to": "2026-10-14",
+  "every": "1h",
+  "maxItems": 1200
+}
+```
+
+Sin `to`, el rango termina ahora. Sin `every`, la ejecución devuelve 1 lista por
+hora. Un paso sin lista guardada no devuelve filas. `at` tiene prioridad sobre
+`from` y `to`.
+
 Una ejecución lee 1 tipo de fila. `listLocations` tiene prioridad sobre
 `listHashflags`, que tiene prioridad sobre `placeSearchTerms`. Sin ninguno de
 ellos, la ejecución lee tendencias.
@@ -150,6 +185,10 @@ fila de tendencia se ve así:
   "sourceTarget": "Worldwide"
 }
 ```
+
+Las filas de `at` o de un rango también traen `capturedAt`, el momento en que
+Xquik leyó su lista en X. Las filas de `at` traen además `requestedAt`, el
+momento que pediste. Xquik no estima ninguno de los 2.
 
 Con `listLocations`, cada lugar es 1 fila del dataset. Las filas traen `woeid`,
 `name`, `country`, `countryCode`, `placeType`, `placeTypeCode`, `parentWoeid`,
@@ -349,6 +388,12 @@ Abre primero la salida gratuita `diagnostics`. El estado de una ejecución vací
 te pide revisar tus objetivos y filtros. `stopCauses` da a cada causa un
 `nextAction` que puedes seguir. Una ubicación para la que X no ofrece tendencias
 no devuelve filas. Activa `listLocations` para ver los nombres que X acepta.
+
+### ¿Puedo extraer tendencias históricas de Twitter?
+
+Sí, desde el 2026-10-13 a las 02:20 UTC. Completa `at` para 1 momento pasado, o
+`from` y `to` para un rango. Cada fila trae `capturedAt`, el momento de su lista
+guardada.
 
 ### ¿Puedo usar la API, las programaciones y las integraciones?
 

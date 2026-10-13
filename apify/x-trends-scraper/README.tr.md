@@ -21,9 +21,10 @@ gündemi sıra, hacim ve sorguyla toplar. Diğer Apify Actor'larının çoğu,
 filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
 edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır.
 
-Güncel Twitter gündemini (trendleri) 1 çalıştırmada birçok konumdan kazı.
-**Teslim edilen satır başına $0.00015** ödersin. Apify, platform kullanımını
-ayrıca faturalandırır. X API anahtarı ya da giriş gerekmez.
+Güncel Twitter gündemini (trendleri) 1 çalıştırmada birçok konumdan kazı. Ya da
+geçmiş gündemi Xquik'in Twitter gündem arşivinden oku. Arşiv 2026-10-13 02:20
+UTC'de başlar. **Teslim edilen satır başına $0.00015** ödersin. Apify, platform
+kullanımını ayrıca faturalandırır. X API anahtarı ya da giriş gerekmez.
 
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
@@ -32,6 +33,8 @@ ayrıca faturalandırır. X API anahtarı ya da giriş gerekmez.
 
 - Aynı anda okunan birden çok ülke, şehir veya WOEID.
 - Her konum için en fazla 50 güncel gündem başlığı.
+- Twitter gündem arşivinden tarih ve saate göre geçmiş gündem, 2026-10-13'ten
+  itibaren.
 - X'in gündem sunduğu her yerin WOEID'si, ülkesi ve türüyle listesi.
 - X gönderi aramasının kabul ettiği yer ID'siyle X yer araması.
 - X hashflag'leri: X'in bazı hashtag'lerden sonra gösterdiği özel emojiler.
@@ -117,6 +120,37 @@ bir hashtag'den sonra belirli bir süre gösterdiği özel emojidir:
 hashflag'leri eklemek için `activeOnly` seçeneğini kapat. `hashtagContains`,
 senin metnini içeren hashtag'leri tutar.
 
+Twitter'da dün ya da geçmişteki herhangi bir anda neyin gündem olduğunu görmek
+için `at` alanını doldur. Çalıştırma, her konum için o ana en yakın kayıtlı
+listeyi okur.
+
+```json
+{ "locations": ["Turkey"], "at": "2026-10-13T14:00:00Z" }
+```
+
+`at` alanına 2026-10-13 gibi bir tarih, 2026-10-13T14:00:00Z gibi bir saat ya da
+Unix saniyesi yaz. Saat dilimi olmayan bir saat UTC sayılır. Xquik her konum
+için saatte 12 liste kaydeder ve her listeyi 25 ay saklar. Twitter gündem
+geçmişi 2026-10-13 02:20 UTC'de başlar. Kayıtlı her listeden 24 saatten uzak bir
+an satır döndürmez ve ücretsizdir.
+
+Bir aralık için `from` ve `to` alanlarını doldur. Çalıştırma, `every` alanındaki
+her adım için 1 kayıtlı liste döndürür. Adımı `15m`, `1h` veya `1d` gibi yaz.
+
+```json
+{
+  "locations": ["Turkey"],
+  "from": "2026-10-13",
+  "to": "2026-10-14",
+  "every": "1h",
+  "maxItems": 1200
+}
+```
+
+`to` yoksa aralık şimdi biter. `every` yoksa çalıştırma saatte 1 liste döndürür.
+Kayıtlı listesi olmayan adım satır döndürmez. `at`, `from` ve `to` alanlarından
+önce gelir.
+
 Bir çalıştırma 1 tür satır okur. `listLocations`, `listHashflags` seçeneğinden,
 o da `placeSearchTerms` alanından önce gelir. Hiçbiri yoksa çalıştırma gündemi
 okur.
@@ -144,6 +178,10 @@ gündem satırı şöyle görünür:
   "sourceTarget": "Worldwide"
 }
 ```
+
+`at` veya bir aralıkla gelen satırlarda `capturedAt` da bulunur. Bu, Xquik'in o
+listeyi X'ten okuduğu andır. `at` satırlarında, senin istediğin an olan
+`requestedAt` da bulunur. Xquik ikisini de tahmin etmez.
 
 `listLocations` ile her yer 1 veri kümesi satırıdır. Satırlarda `woeid`, `name`,
 `country`, `countryCode`, `placeType`, `placeTypeCode`, `parentWoeid`, `url` ve
@@ -345,6 +383,12 @@ uy. Emin değilsen yetkin bir hukukçuya danış.
 hedeflerini ve filtrelerini kontrol etmeni söyler. `stopCauses` her neden için
 izleyeceğin bir `nextAction` verir. X'in gündem sunmadığı bir konum satır
 döndürmez. X'in kabul ettiği adları görmek için `listLocations` seçeneğini aç.
+
+### Geçmiş Twitter gündemini kazıyabilir miyim?
+
+Evet, 2026-10-13 02:20 UTC'den itibaren. Geçmişteki 1 an için `at` alanını, bir
+aralık için `from` ve `to` alanlarını doldur. Her satırda, kayıtlı listesinin
+zamanı olan `capturedAt` bulunur.
 
 ### API'yi, zamanlamaları ve entegrasyonları kullanabilir miyim?
 

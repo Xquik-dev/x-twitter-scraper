@@ -17,7 +17,7 @@
 
 Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X Trends Scraper 按位置收集实时趋势，附带排名、帖子量和查询词。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付、不重复且符合过滤条件的结果收费。
 
-1 次运行即可抓取多个位置当前的 Twitter 趋势。费用为**每个已交付行 $0.00015**，Apify 另行收取平台使用费。无需 X API 密钥，也无需登录。
+1 次运行即可抓取多个位置当前的 Twitter 趋势。也可以从 Xquik 的 Twitter 趋势存档读取历史趋势，存档从 2026-10-13 02:20 UTC 开始。费用为**每个已交付行 $0.00015**，Apify 另行收取平台使用费。无需 X API 密钥，也无需登录。
 
 > Xquik 是独立的第三方服务，与 X Corp 无关联。“Twitter”和“X”是 X Corp 的商标。
 
@@ -25,6 +25,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 - 同时读取多个国家、城镇或 WOEID。
 - 每个位置最多 50 条当前趋势。
+- 来自 Twitter 趋势存档的历史趋势，按日期和时间读取，自 2026-10-13 起。
 - X 提供趋势的所有地点的列表，附带 WOEID、国家和类型。
 - X 地点搜索，附带 X 帖子搜索使用的地点 ID。
 - X hashflag：X 在某些话题标签后显示的自定义表情符号。
@@ -91,6 +92,28 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 运行会列出 X 当前显示的 hashflag。关闭 `activeOnly`，可加入已结束和即将开始的 hashflag。`hashtagContains` 保留包含你的文本的话题标签。
 
+想知道昨天或过去任意时刻 Twitter 上的趋势，请填写 `at`。运行会为每个位置读取离该时刻最近的已存列表。
+
+```json
+{ "locations": ["Turkey"], "at": "2026-10-13T14:00:00Z" }
+```
+
+`at` 接受 2026-10-13 这样的日期、2026-10-13T14:00:00Z 这样的时间或 Unix 秒。不带时区的时间按 UTC 处理。Xquik 为每个位置每小时保存 12 份列表，每份保留 25 个月。Twitter 趋势历史从 2026-10-13 02:20 UTC 开始。与所有已存列表都相差超过 24 小时的时刻不返回任何行，也不收费。
+
+要读取一个时间段，请填写 `from` 和 `to`。运行按 `every` 的每个步长返回 1 份已存列表，步长可以是 `15m`、`1h` 或 `1d`。
+
+```json
+{
+  "locations": ["Turkey"],
+  "from": "2026-10-13",
+  "to": "2026-10-14",
+  "every": "1h",
+  "maxItems": 1200
+}
+```
+
+没有 `to` 时，时间段到现在结束。没有 `every` 时，运行每小时返回 1 份列表。没有已存列表的步长不返回任何行。`at` 优先于 `from` 和 `to`。
+
 1 次运行只读取 1 种行。`listLocations` 优先于 `listHashflags`，后者又优先于 `placeSearchTerms`。这些都没有设置时，运行读取趋势。
 
 顺利完成的小型运行会跳过 `run-report`，节省 Apify 用量。开启 `alwaysSaveRunRecords` 后，每次运行都会写入报告。
@@ -111,6 +134,8 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
   "sourceTarget": "Worldwide"
 }
 ```
+
+用 `at` 或时间段读取的行还包含 `capturedAt`，即 Xquik 从 X 读取该列表的时间。用 `at` 读取的行另外包含 `requestedAt`，即你请求的时间。Xquik 不估算这 2 个值。
 
 使用 `listLocations` 时，每个地点是数据集中的 1 行。行中包含 `woeid`、`name`、`country`、`countryCode`、`placeType`、`placeTypeCode`、`parentWoeid`、`url` 和 `resultType`。`url` 是 X 为该地点保留的旧版引用，可能无法打开。一行趋势位置数据如下：
 
@@ -216,6 +241,10 @@ Xquik 的 X Trends Scraper 请求的是公开的 X 字段。结果可能包含�
 ### 为什么我的运行没有返回结果？
 
 先打开免费的 `diagnostics` 输出。空运行的状态会提示你检查目标和过滤条件。`stopCauses` 为每个原因给出下一步操作 `nextAction`。X 不提供趋势的位置不返回任何行。开启 `listLocations`，查看 X 接受的名称。
+
+### 可以抓取 Twitter 历史趋势吗？
+
+可以，自 2026-10-13 02:20 UTC 起。读取过去的 1 个时刻请填写 `at`，读取时间段请填写 `from` 和 `to`。每行都有 `capturedAt`，即其已存列表的时间。
 
 ### 可以使用 API、定时调度和集成吗？
 
