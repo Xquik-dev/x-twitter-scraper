@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "2.6.7"
+  version: "2.7.0"
   openclaw:
     requires:
       env:

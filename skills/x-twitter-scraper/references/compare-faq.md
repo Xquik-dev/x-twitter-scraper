@@ -9,18 +9,23 @@ that rate. Current plan prices are in the dashboard.
 
 | Work | Credits |
 | --- | --- |
-| Tweet search, timelines, replies, quotes, threads, mentions, list and community posts, and tweet extractions | 1 per returned tweet |
-| Followers, following, likers, retweeters, and people extractions | 1 per returned profile |
+| Tweet search, timelines, replies, quotes, threads, mentions, top tweets, list and community posts, and tweet extractions | 1 per returned tweet |
+| Followers, following, likers, retweeters, similar accounts, affiliates, subscriptions, and people extractions | 1 per returned profile |
+| Follower, following, and retweeter IDs | 1 per returned ID |
+| Search results for Lists, communities, Spaces, and jobs, plus community topics, places, locations, hashflags, search suggestions, and resolved links | 1 per returned item |
 | DM history | 1 per returned message |
-| Profile or tweet lookup | 1 per call |
-| Follow check, article | 5 per call |
-| Trends | 3 per call |
+| Profile, tweet, list, Space, Space replay, broadcast, or job lookup | 1 per call |
+| Follow check | 1 per call |
+| Repost check, live status, engagement insights, translation, and embed | 1 per call |
+| Subtitles | 1 per call that returns a caption track |
+| Article | 5 per call |
+| Trends | 1 per call |
 | AI analysis of a post or your own text | 2 per analyzed post |
 | Media download | 1 per tweet with media |
 | Post or reply | 30, plus 2 per started MB of media |
 | Like, repost, follow, their undo calls, remove follower, DM, delete, media upload | 10 per call |
 | Active monitor | 30 per hour, 720 a day |
-| Giveaway draw | 2, plus 1 per inspected reply, 1 per reposter read, and 5 per follow check |
+| Giveaway draw | 2, plus 1 per inspected reply, 1 per reposter read, and 1 per follow check |
 
 For result-billed reads, credits equal returned results. Dollars are credits times
 $0.00015 at pay-as-you-go rates: 1,000 tweets cost 1,000 credits, or $0.15. A

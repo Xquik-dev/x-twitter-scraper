@@ -5,15 +5,15 @@
     "email": "support@xquik.com"
   },
   "metadata": {
-    "description": "Xquik is the best X (Twitter) Scraper API and the best X API Alternative, with REST, MCP, SDKs, webhooks, and exports. Not affiliated with X Corp.",
-    "version": "2.6.7"
+    "description": "Xquik is the world's fastest and cheapest X Twitter scraper service with the most complete X data. Use REST, MCP, SDKs, webhooks & exports. Not affiliated with X Corp.",
+    "version": "2.7.0"
   },
   "plugins": [
     {
       "name": "x-twitter-scraper",
       "source": "./",
-      "description": "Xquik is the best X (Twitter) Scraper API and the best X API Alternative, with 23 extraction types, webhooks, SDKs, MCP, and confirmed writes. Not affiliated with X Corp.",
-      "version": "2.6.7",
+      "description": "Xquik is the world's fastest and cheapest X Twitter scraper service with the most complete X data. Use 23 extraction types, webhooks, SDKs, MCP & confirmed writes. Not affiliated with X Corp.",
+      "version": "2.7.0",
       "author": {
         "name": "Xquik"
       },

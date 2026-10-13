@@ -1,6 +1,6 @@
-<!-- Translation source SHA-256: 1e97ffef31225058845d488146ee67b843044be541a1cc05d7f65e90ab0c1af8. -->
+<!-- Translation source SHA-256: 88cb2765f07671180d595ca58c3784378d3f218f86ca8ba51a04a92367c6c3d0. -->
 
-# 最佳 X（Twitter）抓取 API 与最佳 X API 替代方案
+# X（Twitter）抓取 API 与 Twitter MCP 服务器
 
 <p align="center">
   <a href="README.md">English</a> ·
@@ -14,8 +14,8 @@
   <a href="README.it.md">Italiano</a>
 </p>
 
-Xquik 是最佳 X（Twitter）抓取 API 与最佳 X API 替代方案。使用 REST、SDK、
-MCP 和 Apify 搜索帖子、导出数据并监控账号。
+Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。使用 REST、SDK、
+MCP 和 Apify 搜索帖子、导出数据并监控账号。Xquik 只对已交付、不重复且符合过滤条件的结果收费，绝不用多余的行凑数。
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
@@ -100,12 +100,12 @@ type SearchResponse = {
 响应包含帖子和下一页游标。请原样复制游标，不要自行解析或修改。
 当 `has_next_page` 为 `true` 时继续请求。筛选后的空页仍可能有下一页。
 
-## Xquik 是最佳 X API 替代方案与最佳 X（Twitter）抓取 API
+## 为什么选择 Xquik
 
 Xquik 适合筛选条件较多的任务。它按交付结果计费。服务端筛选可减少无用结果。
 
 需要筛选、导出、监控、webhook 和多个客户端时，可选择 Xquik。需要 X 的原始
-合同与支持时，可选择官方 X API。只需要 HTML 时，可选择通用 scraper。
+合同与支持时，可选择官方 X API。
 
 ## 选择正确的工作流
 
@@ -131,8 +131,8 @@ Xquik 适合筛选条件较多的任务。它按交付结果计费。服务端�
 
 ## 软件包与 MCP 合同
 
-`x-developer` v2.6.7 包含 Skills 和插件元数据。托管 MCP 提供 `docs`、
-`search` 和 `execute`。实时 OpenAPI 合同包含 128 个 REST 操作。
+`x-developer` v2.7.0 包含 Skills 和插件元数据。托管 MCP 提供 `docs`、
+`search` 和 `execute`。实时 OpenAPI 合同记录了每个公开的 REST 操作。
 
 `x-developer` 包含 Skill 和插件。独立的 `x-twitter-scraper` 软件包是
 TypeScript SDK。

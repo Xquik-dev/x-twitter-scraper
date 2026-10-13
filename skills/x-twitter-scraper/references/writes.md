@@ -79,9 +79,10 @@ take numeric user IDs. Resolve a username with `GET /x/users/{username}`.
 
 `POST /draws` picks winners from a post's replies and reposters. The result is
 final, so confirm first. A draw bills 2 base credits, 1 per inspected reply,
-1 per reposter read when `mustRetweet` is on, and 5 per follow check when
-`mustFollowUsername` is set. The total depends on the post's replies and
-reposts, so show that formula with the preview. Remaining credits cap how many
+1 per reposter read when `mustRetweet` is on, and 1 per follow check when
+`mustFollowUsername` is set. It checks only authors who pass the other
+filters. The total depends on the post's replies and reposts, so show that
+formula with the preview. Remaining credits cap how many
 entries the draw inspects, so a low balance can leave valid entries out. Send
 an `Idempotency-Key`.
 
