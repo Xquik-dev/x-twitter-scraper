@@ -17,14 +17,14 @@
 
 Xquik, en eksiksiz X verisini sunan, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. Xquik'in X Trends Scraper'ı konuma göre gerçek zamanlı
-gündemi sıra, hacim ve sorguyla toplar. Diğer Apify Actor'larının çoğu,
-filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
+Twitter gündemini sıra, hacim ve sorguyla toplar. Diğer Apify Actor'larının
+çoğu, filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
 edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır.
 
-Güncel Twitter gündemini (trendleri) 1 çalıştırmada birçok konumdan kazı. Ya da
-geçmiş gündemi Xquik'in Twitter gündem arşivinden oku. Arşiv 2026-10-13 02:20
-UTC'de başlar. **Teslim edilen satır başına $0.00015** ödersin. Apify, platform
-kullanımını ayrıca faturalandırır. X API anahtarı ya da giriş gerekmez.
+Twitter gündemini, yani güncel X gündemini, 1 çalıştırmada birçok konumdan kazı.
+Ya da geçmiş gündemi Xquik'in Twitter gündem arşivinden oku. Arşiv 2026-10-13
+02:20 UTC'de başlar. **Teslim edilen satır başına $0.00015** ödersin. Apify,
+platform kullanımını ayrıca faturalandırır. X API anahtarı ya da giriş gerekmez.
 
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
@@ -70,8 +70,8 @@ Konum adlarını, sayısal WOEID'leri veya ikisini birden kullan:
 
 `locations`, X'in gündem sunduğu her ülkeyi veya şehri kabul eder, örneğin
 Worldwide, United States, Japan veya London. 2 harfli ülke kodları da çalışır.
-X'in gündem sunmadığı bir ad satır döndürmez ve ücretlendirilmez. `woeids`
-sayısal WOEID'leri kabul eder.
+Türkiye gündemi için `Turkey` ya da `TR` yaz. X'in gündem sunmadığı bir ad satır
+döndürmez ve ücretlendirilmez. `woeids` sayısal WOEID'leri kabul eder.
 
 Her adı ve WOEID'yi görmek için `listLocations` seçeneğini aç. Çalıştırma o
 zaman gündem yerine X'in gündem sunduğu yerleri listeler:
@@ -134,6 +134,14 @@ için saatte 12 liste kaydeder ve her listeyi 25 ay saklar. Twitter gündem
 geçmişi 2026-10-13 02:20 UTC'de başlar. Kayıtlı her listeden 24 saatten uzak bir
 an satır döndürmez ve ücretsizdir.
 
+`at`, çalıştırmadan geriye doğru bir süre de alır. Süreyi bir sayı ve `s`, `m`,
+`h` veya `d` ile yaz. `24h` ile günlük bir zamanlama, her çalıştırmada dünün
+Twitter gündemini okur.
+
+```json
+{ "locations": ["Turkey"], "at": "24h" }
+```
+
 Bir aralık için `from` ve `to` alanlarını doldur. Çalıştırma, `every` alanındaki
 her adım için 1 kayıtlı liste döndürür. Adımı `15m`, `1h` veya `1d` gibi yaz.
 
@@ -148,8 +156,9 @@ her adım için 1 kayıtlı liste döndürür. Adımı `15m`, `1h` veya `1d` gib
 ```
 
 `to` yoksa aralık şimdi biter. `every` yoksa çalıştırma saatte 1 liste döndürür.
-Kayıtlı listesi olmayan adım satır döndürmez. `at`, `from` ve `to` alanlarından
-önce gelir.
+Kayıtlı listesi olmayan adım satır döndürmez. `from` ve `to` da süre alır, bu
+yüzden `from` alanına `24h` yazarsan son 24 saatin Twitter gündemini okursun.
+`at`, `from` ve `to` alanlarından önce gelir.
 
 Bir çalıştırma 1 tür satır okur. `listLocations`, `listHashflags` seçeneğinden,
 o da `placeSearchTerms` alanından önce gelir. Hiçbiri yoksa çalıştırma gündemi
@@ -387,8 +396,8 @@ döndürmez. X'in kabul ettiği adları görmek için `listLocations` seçeneği
 ### Geçmiş Twitter gündemini kazıyabilir miyim?
 
 Evet, 2026-10-13 02:20 UTC'den itibaren. Geçmişteki 1 an için `at` alanını, bir
-aralık için `from` ve `to` alanlarını doldur. Her satırda, kayıtlı listesinin
-zamanı olan `capturedAt` bulunur.
+aralık için `from` ve `to` alanlarını doldur. Bir zamanlamada `24h` gibi bir
+süre yaz. Her satırda, kayıtlı listesinin zamanı olan `capturedAt` bulunur.
 
 ### API'yi, zamanlamaları ve entegrasyonları kullanabilir miyim?
 

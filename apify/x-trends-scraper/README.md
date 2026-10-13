@@ -130,6 +130,13 @@ each location & keeps each for 25 months. The Twitter trends history starts
 2026-10-13 02:20 UTC. A time over 24 hours from every stored list returns no
 rows & costs nothing.
 
+`at` also takes a span back from the run, as a number & `s`, `m`, `h` or `d`.
+With `24h`, a daily schedule reads yesterday's trends on every run.
+
+```json
+{ "locations": ["Turkey"], "at": "24h" }
+```
+
 For a range, fill `from` & `to`. The run returns 1 stored list per step of
 `every`, such as `15m`, `1h` or `1d`.
 
@@ -144,7 +151,8 @@ For a range, fill `from` & `to`. The run returns 1 stored list per step of
 ```
 
 Without `to`, the range ends now. Without `every`, the run returns 1 list an
-hour. A step with no stored list returns no rows. `at` wins over `from` & `to`.
+hour. A step with no stored list returns no rows. `from` & `to` take spans too,
+so `from` set to `24h` reads the last 24 hours. `at` wins over `from` & `to`.
 
 A run reads 1 kind of row. `listLocations` wins over `listHashflags`, which wins
 over `placeSearchTerms`. Without any of them, the run reads trends.
@@ -367,7 +375,8 @@ see the names X takes.
 ### Can I scrape historical Twitter trends?
 
 Yes, since 2026-10-13 02:20 UTC. Fill `at` for 1 past time, or `from` & `to` for
-a range. Each row has `capturedAt`, the time of its stored list.
+a range. On a schedule, fill a span such as `24h`. Each row has `capturedAt`,
+the time of its stored list.
 
 ### Can I use the API, schedules & integrations?
 

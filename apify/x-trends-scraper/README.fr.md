@@ -139,6 +139,14 @@ par heure pour chaque lieu et garde chacune 25 mois. L'historique des tendances
 Twitter commence le 2026-10-13 à 02:20 UTC. Un moment à plus de 24 heures de
 toute liste enregistrée ne renvoie aucune ligne et ne coûte rien.
 
+`at` accepte aussi une durée avant le run, sous forme d'un nombre et de `s`,
+`m`, `h` ou `d`. Avec `24h`, une planification quotidienne lit les tendances de
+la veille à chaque run.
+
+```json
+{ "locations": ["Turkey"], "at": "24h" }
+```
+
 Pour une plage, remplissez `from` et `to`. Le run renvoie 1 liste enregistrée
 par pas de `every`, par exemple `15m`, `1h` ou `1d`.
 
@@ -153,8 +161,9 @@ par pas de `every`, par exemple `15m`, `1h` ou `1d`.
 ```
 
 Sans `to`, la plage se termine maintenant. Sans `every`, le run renvoie 1 liste
-par heure. Un pas sans liste enregistrée ne renvoie aucune ligne. `at` l'emporte
-sur `from` et `to`.
+par heure. Un pas sans liste enregistrée ne renvoie aucune ligne. `from` et `to`
+acceptent aussi des durées, donc `from` à `24h` lit les dernières 24 heures.
+`at` l'emporte sur `from` et `to`.
 
 Un run lit 1 seul type de ligne. `listLocations` l'emporte sur `listHashflags`,
 qui l'emporte sur `placeSearchTerms`. Sans aucun d'eux, le run lit les
@@ -398,8 +407,8 @@ renvoie aucune ligne. Activez `listLocations` pour voir les noms que X accepte.
 ### Puis-je scraper l'historique des tendances Twitter ?
 
 Oui, depuis le 2026-10-13 à 02:20 UTC. Remplissez `at` pour 1 moment passé, ou
-`from` et `to` pour une plage. Chaque ligne porte `capturedAt`, le moment de sa
-liste enregistrée.
+`from` et `to` pour une plage. Pour une planification, indiquez une durée comme
+`24h`. Chaque ligne porte `capturedAt`, le moment de sa liste enregistrée.
 
 ### Puis-je utiliser l'API, les planifications et les intégrations ?
 

@@ -138,6 +138,14 @@ Twitter-Trends-Verlauf beginnt am 2026-10-13 um 02:20 UTC. Ein Zeitpunkt, der
 mehr als 24 Stunden von jeder gespeicherten Liste entfernt ist, liefert keine
 Datensätze & kostet nichts.
 
+`at` nimmt auch eine Zeitspanne vor dem Run an, als Zahl & `s`, `m`, `h` oder
+`d`. Mit `24h` liest ein täglicher Zeitplan bei jedem Run die Trends von
+gestern.
+
+```json
+{ "locations": ["Turkey"], "at": "24h" }
+```
+
 Für einen Zeitraum fülle `from` & `to` aus. Der Run liefert 1 gespeicherte Liste
 pro Schritt von `every`, etwa `15m`, `1h` oder `1d`.
 
@@ -152,8 +160,9 @@ pro Schritt von `every`, etwa `15m`, `1h` oder `1d`.
 ```
 
 Ohne `to` endet der Zeitraum jetzt. Ohne `every` liefert der Run 1 Liste pro
-Stunde. Ein Schritt ohne gespeicherte Liste liefert keine Datensätze. `at` hat
-Vorrang vor `from` & `to`.
+Stunde. Ein Schritt ohne gespeicherte Liste liefert keine Datensätze. `from` &
+`to` nehmen auch Zeitspannen an, also liest `from` mit `24h` die letzten 24
+Stunden. `at` hat Vorrang vor `from` & `to`.
 
 Ein Run liest 1 Art von Datensatz. `listLocations` hat Vorrang vor
 `listHashflags`, das Vorrang vor `placeSearchTerms` hat. Ohne eines davon liest
@@ -390,8 +399,9 @@ sehen, die X annimmt.
 ### Kann ich historische Twitter-Trends scrapen?
 
 Ja, seit 2026-10-13 02:20 UTC. Fülle `at` für 1 vergangenen Zeitpunkt aus oder
-`from` & `to` für einen Zeitraum. Jeder Datensatz enthält `capturedAt`, den
-Zeitpunkt seiner gespeicherten Liste.
+`from` & `to` für einen Zeitraum. Für einen Zeitplan trage eine Zeitspanne wie
+`24h` ein. Jeder Datensatz enthält `capturedAt`, den Zeitpunkt seiner
+gespeicherten Liste.
 
 ### Kann ich API, Zeitpläne & Integrationen nutzen?
 
