@@ -34,11 +34,11 @@ Get the highest-engagement replies under a specific tweet.
 
 | Endpoint | Purpose | Usage |
 |---|---|---|
-| GET /x/tweets/{id}/replies | Maximum-coverage replies; sort client-side | Read tier |
+| GET /x/tweets/{id}/replies | Maximum-coverage replies. Sort client-side | Read tier |
 | POST /extractions/estimate | Preview bulk reply usage | Included |
 | POST /extractions with toolType=reply_extractor | Bulk replies for offline sorting | Per-row |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example request
 
@@ -63,7 +63,7 @@ maximum-coverage collection. Sort direct replies locally by fields such as
 9. Sort direct replies by engagement. Keep the requested top results.
 10. Summarize or list them.
 
-Use the extraction path for threads with thousands of replies:
+Use the extraction path for threads with thousands of replies.
 
 ```json
 POST /extractions/estimate
@@ -71,7 +71,7 @@ POST /extractions/estimate
 ```
 
 Show the result estimate and usage. Ask for explicit confirmation.
-Only after confirmation, create the job with the same body:
+Only after confirmation, create the job with the same body.
 
 ```json
 POST /extractions

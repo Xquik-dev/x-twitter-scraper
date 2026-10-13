@@ -38,7 +38,7 @@ Change bio, display name, location, website, avatar, or banner on a connected X 
 | PATCH /x/profile/avatar | Upload a new avatar | Write tier |
 | PATCH /x/profile/banner | Upload a new banner | Write tier |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 Every profile write requires a unique `Idempotency-Key` header.
 Direct REST callers supply it. Hosted MCP injects it automatically.
 

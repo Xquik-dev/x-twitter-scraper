@@ -28,7 +28,7 @@ metadata:
 
 # X Lists
 
-Read X Lists: members, followers, and the timeline feed of any visible list.
+Read the members, followers, and timeline feed of any visible X List.
 
 ## Choose an endpoint
 
@@ -39,7 +39,7 @@ Read X Lists: members, followers, and the timeline feed of any visible list.
 | POST /extractions with toolType=list_post_extractor | Posts in a list's feed | Per-row |
 | POST /extractions/estimate | Preview usage before running | Included |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example requests
 

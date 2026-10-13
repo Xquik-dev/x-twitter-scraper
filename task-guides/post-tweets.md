@@ -38,7 +38,7 @@ Publish tweets, replies, and quote tweets through a connected X account. Send on
 | DELETE /x/tweets/{id} | Delete a tweet | Delete tier |
 | POST /x/media | Upload an image or video and get media IDs | Write tier |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 Every write also requires a unique `Idempotency-Key` header.
 Direct REST callers supply it. Hosted MCP injects it automatically.
 
@@ -56,13 +56,13 @@ POST /x/tweets
 }
 ```
 
-Rules for fields:
-- `text`: 280 chars by default, up to 25,000 if `is_note_tweet: true`
-- `media`: up to 4 image URLs, or exactly 1 MP4 URL
-- `account`: the connected X username or ID that will post; listed via `GET /x/accounts`
+The fields follow these rules.
+- `text` takes 280 chars by default, up to 25,000 if `is_note_tweet: true`
+- `media` takes up to 4 image URLs, or exactly 1 MP4 URL
+- `account` is the connected X username or ID that will post, listed via `GET /x/accounts`
 
-For a reply: set `reply_to_tweet_id` to the target tweet ID.
-For a quote tweet: include the quoted tweet URL in `text`.
+For a reply, set `reply_to_tweet_id` to the target tweet ID.
+For a quote tweet, include the quoted tweet URL in `text`.
 
 ## Publish the tweet
 
@@ -76,7 +76,7 @@ For a quote tweet: include the quoted tweet URL in `text`.
 
 ## Confirmation rules
 
-Never post without explicit user confirmation of the exact text. Show:
+Never post without explicit user confirmation of the exact text. Show these items.
 - The full tweet text as it will appear
 - The reply target, when present
 - Every attached media URL

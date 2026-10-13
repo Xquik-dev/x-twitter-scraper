@@ -39,7 +39,7 @@ Follow and unfollow accounts as a connected user, and check follow state.
 | GET /x/users/{id} | Resolve @handle to numeric user ID | Read tier |
 | GET /x/followers/check?source=<a>&target=<b> | Does A follow B? | Read tier |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 Every follow or unfollow needs a unique `Idempotency-Key` header.
 Direct REST callers supply it. Hosted MCP injects it automatically.
 
@@ -70,7 +70,7 @@ If the user asks to follow or unfollow more than 1 account, list every target
 first and require explicit confirmation for the full list. Process serially.
 Honor `Retry-After` when returned. Never silently batch.
 
-Reject these requests:
+Reject these requests.
 
 - Mass-following random accounts based on a scrape
 - "Follow everyone who liked my tweet" workflows without user review of the full list

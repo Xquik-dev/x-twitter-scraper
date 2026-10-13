@@ -41,7 +41,7 @@ Draft, revise, or score a tweet. Return text only. Use `post-tweets` after the u
 | GET /drafts | List saved drafts | Read tier |
 | DELETE /drafts/{id} | Delete a draft | Read tier |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example requests
 
@@ -56,9 +56,9 @@ POST /compose
 -> { contentRules, followUpQuestions, scorerWeights, topPenalties }
 ```
 
-- `topic`: what the tweet is about. Free text.
-- `goal`: one of `engagement`, `followers`, `authority`, or `conversation`.
-- `styleUsername`: optional cached style label from `POST /styles`.
+- `topic` is what the tweet is about. Free text.
+- `goal` is one of `engagement`, `followers`, `authority`, or `conversation`.
+- `styleUsername` is an optional cached style label from `POST /styles`.
 
 ## Draft and score the tweet
 

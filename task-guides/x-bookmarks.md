@@ -36,7 +36,7 @@ Access the bookmarks of a connected X account after user confirmation. Private t
 |---|---|---|
 | GET /x/bookmarks | Paginated bookmark list | Read tier |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example request
 

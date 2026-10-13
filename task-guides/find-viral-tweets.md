@@ -37,7 +37,7 @@ Show the highest-engagement tweets for a topic, user, or hashtag. Read-only.
 | GET /x/tweets/search | Search with engagement filters | Read tier |
 | POST /extractions with toolType=tweet_search_extractor | Bulk viral tweet extraction | Per-row |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example requests
 
@@ -48,7 +48,7 @@ GET /x/tweets/search?q=<q+min_faves:1000+min_retweets:100>&queryType=Top
 
 Send the URL-encoded query in `q`. Set `queryType` to `Latest` or `Top`. The route also accepts `cursor`, `sinceTime`, `untilTime`, and `limit`. Put engagement floors inside `q`.
 
-Useful operators inside `q`:
+These operators are useful inside `q`.
 - `min_faves:1000` sets the minimum for this search.
 - `min_retweets:100`
 - `-is:retweet` excludes reposts.
@@ -65,11 +65,11 @@ Useful operators inside `q`:
 
 ## What counts as viral
 
-A rough guide:
-- Niche topic: 500+ likes
-- Tech/business: 1k+ likes
-- Broad audience: 10k+ likes
-- Breakout: 100k+ likes
+Use this rough guide.
+- 500+ likes for a niche topic
+- 1k+ likes for tech/business
+- 10k+ likes for a broad audience
+- 100k+ likes for a breakout
 
 ## Protect tweet data
 

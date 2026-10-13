@@ -9,7 +9,7 @@ local package, build step, or API key file.
 1. In Cline, open **MCP Servers** and add a remote server named `xquik`.
 2. Use the Streamable HTTP endpoint `https://xquik.com/mcp`.
 
-The equivalent `cline_mcp_settings.json` entry is:
+This is the equivalent `cline_mcp_settings.json` entry.
 
 ```json
 {
@@ -42,7 +42,7 @@ file. If your Cline release cannot complete OAuth, follow the
 
 ## Check the connection
 
-Ask Cline: "Find the 5 latest posts about AI agents on X and summarize them."
+Ask Cline, "Find the 5 latest posts about AI agents on X and summarize them."
 Cline should call `search`, then `execute`.
 
 Read the [MCP setup guide](skills/xquik-mcp/references/mcp-setup.md) for other

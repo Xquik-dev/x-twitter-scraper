@@ -28,7 +28,7 @@ metadata:
 
 # Track hashtags on X
 
-Search and monitor hashtags. One-shot searches are read-only; monitor creation requires explicit confirmation.
+Search and monitor hashtags. One-shot searches are read-only. Monitor creation requires explicit confirmation.
 
 ## Choose an endpoint
 
@@ -38,7 +38,7 @@ Search and monitor hashtags. One-shot searches are read-only; monitor creation r
 | POST /extractions with toolType=tweet_search_extractor | Bulk hashtag tweets | Per-row |
 | POST /monitors/keywords | Continuous hashtag monitor | metered while active |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Run one search
 
@@ -47,9 +47,9 @@ GET /x/tweets/search?q=%23indiehacking&queryType=Latest&limit=100
 -> { tweets: Tweet[], has_next_page: boolean, next_cursor?: string }
 ```
 
-Supported query parameters: `q`, `queryType` (`Latest` or `Top`), `cursor`, `sinceTime`, `untilTime`, `limit`.
+The supported query parameters are `q`, `queryType` (`Latest` or `Top`), `cursor`, `sinceTime`, `untilTime`, and `limit`.
 
-Engagement floors and content filters go inside `q`: `#tag min_faves:10 lang:en -is:retweet`.
+Engagement floors and content filters go inside `q`, such as `#tag min_faves:10 lang:en -is:retweet`.
 
 ```
 POST /extractions
@@ -73,8 +73,8 @@ Poll `/events?keywordMonitorId=<id>` or use a separate webhook.
 ## Track the hashtag
 
 1. Ask the user for the hashtag and whether they want recent only, top, or live monitoring.
-2. One-shot read: `GET /x/tweets/search?q=%23<tag>&queryType=<Latest|Top>`.
-3. Live monitoring: show the target, filters, event delivery choice, and ongoing usage, then create a monitor only after explicit confirmation.
+2. For a one-shot read, call `GET /x/tweets/search?q=%23<tag>&queryType=<Latest|Top>`.
+3. For live monitoring, show the target, filters, event delivery choice, and ongoing usage, then create a monitor only after explicit confirmation.
 
 ## Protect search data
 

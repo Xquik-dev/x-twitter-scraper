@@ -39,7 +39,7 @@ user requests social context.
 | GET /radar?category=tech | Filter by a supported category | Included |
 | GET /x/tweets/search | Search X for reactions to selected story terms | Read tier |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example request
 

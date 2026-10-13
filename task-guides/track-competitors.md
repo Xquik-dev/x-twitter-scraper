@@ -39,21 +39,21 @@ Compare visible posts, follower growth, and engagement by account. Ongoing monit
 | POST /extractions with toolType=post_extractor | Bulk historical posts | Per-row |
 | POST /monitors | Continuous account monitor | metered while active |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Track the accounts
 
 1. Ask the user for 2-5 competitor handles.
-2. For each:
+2. For each one, make these calls.
    - `GET /x/users/{id}` for follower count, verified status, bio. The route accepts a username or numeric user ID.
    - `GET /x/users/{id}/tweets?cursor=<cursor>` for recent posts, then sort client-side by engagement.
    - Optionally use `GET /x/tweets/search?q=from:<handle> min_faves:<floor>&queryType=Top` to focus on high-engagement posts.
-3. Build a side-by-side table: handle, followers, avg engagement, top tweet.
+3. Build a side-by-side table with handle, followers, avg engagement, and top tweet.
 4. For ongoing tracking, show every target and the ongoing usage. Create monitors only after explicit confirmation. Follow `monitor-accounts`.
 
 ## Compare engagement
 
-For each competitor's recent tweets, compute:
+For each competitor's recent tweets, compute these metrics.
 - Average likes, retweets, replies per tweet
 - Engagement rate equals likes, reposts, and replies divided by followers.
 - Posts per day

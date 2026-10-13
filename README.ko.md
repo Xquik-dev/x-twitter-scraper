@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 88cb2765f07671180d595ca58c3784378d3f218f86ca8ba51a04a92367c6c3d0. -->
+<!-- Translation source SHA-256: 40bd678d168ebb99f305120d03a7e1d7adcccee6a303c14b3af29b2b7c7f34db. -->
 
 # X(Twitter) Scraper API 및 Twitter MCP 서버
 

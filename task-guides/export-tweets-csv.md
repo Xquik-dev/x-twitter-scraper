@@ -39,7 +39,7 @@ Download completed extractions or draw entrant lists in spreadsheet-friendly for
 | GET /extractions/{id}/export?format=xlsx | Excel workbook | Read tier |
 | GET /draws/{id}/export?format=csv | Giveaway entrants/winners | Read tier |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example requests
 
@@ -53,14 +53,14 @@ GET /extractions/{id}/export?format=csv
 1. Start with a completed extraction or draw. Use the matching guide to create one.
 2. Poll `/extractions/{id}` until `status: "completed"`.
 3. Hit the export endpoint with the desired format.
-4. Save the file; the response streams the raw bytes.
+4. Save the file. The response streams the raw bytes.
 
 ## Format choice
 
-- CSV: broad compatibility, Excel/Sheets open directly
-- XLSX: preserves types, multiple sheets per extraction
-- JSON: structured data for scripts or databases
-- Markdown, PDF, or TXT: human-readable reports
+- CSV has broad compatibility, and Excel/Sheets open it directly
+- XLSX preserves types, with multiple sheets per extraction
+- JSON gives structured data for scripts or databases
+- Markdown, PDF, or TXT give human-readable reports
 
 ## Export filters
 

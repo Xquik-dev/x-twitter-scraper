@@ -38,7 +38,7 @@ Find tweets that outperformed their author's usual engagement by a wide margin. 
 | GET /x/users/{id}/tweets | Paginated recent tweets for an author | Read tier |
 | GET /x/tweets/search?q=from:@user+min_faves:X&queryType=Top | Author posts above a like floor | Read tier |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Find the outliers
 

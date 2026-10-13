@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 88cb2765f07671180d595ca58c3784378d3f218f86ca8ba51a04a92367c6c3d0. -->
+<!-- Translation source SHA-256: 40bd678d168ebb99f305120d03a7e1d7adcccee6a303c14b3af29b2b7c7f34db. -->
 
 # X (Twitter) scraper API ve Twitter MCP sunucusu
 
@@ -57,7 +57,7 @@ için X hesabı bağlaman veya kullanman da gerekmez. Xquik API anahtarı yeterl
 
 [Xquik panelinden](https://dashboard.xquik.com/en/account?tab=api-keys) bir API
 anahtarı oluştur. Anahtarı `XQUIK_API_KEY` olarak sakla. Ardından sınırlı bir
-arama çalıştır:
+arama çalıştır.
 
 ```bash
 export XQUIK_API_KEY='xq_replace_me'
@@ -73,7 +73,7 @@ curl --get 'https://xquik.com/api/v1/x/tweets/search' \
   --data-urlencode 'limit=25'
 ```
 
-Canlı sözleşme şu yanıt biçimini tanımlar:
+Canlı sözleşme şu yanıt biçimini tanımlar.
 
 ```ts
 type SearchResponse = {
@@ -138,7 +138,7 @@ seç. X'in kendi sözleşmesi gerekiyorsa resmî X API'sini seç.
 ## Paket ve MCP sözleşmesi
 
 `x-developer` v2.7.0, Skill'leri ve eklenti meta verilerini içerir. Barındırılan
-MCP; `docs`, `search` ve `execute` araçlarını sunar. Canlı OpenAPI sözleşmesi
+MCP `docs`, `search` ve `execute` araçlarını sunar. Canlı OpenAPI sözleşmesi
 herkese açık tüm REST işlemlerini belgeler.
 
 `x-developer`, Skill ve eklenti paketidir. Ayrı `x-twitter-scraper` paketi
@@ -220,7 +220,7 @@ const page = await client.x.tweets.search({
 
 ### MCP
 
-`execute` aracını şu kodla çağır:
+`execute` aracını şu kodla çağır.
 
 ```js
 async () => xquik.request("/api/v1/x/tweets/search", {
@@ -314,7 +314,7 @@ veya MCP seç.
 
 ## Toplam maliyeti karşılaştır
 
-Aynı sorguyu, filtreleri ve satır sayısını karşılaştır. İstek fiyatı; gereksiz
+Aynı sorguyu, filtreleri ve satır sayısını karşılaştır. İstek fiyatı gereksiz
 satırları, yeniden denemeleri ve temizleme işini göstermez.
 
 Xquik, desteklenen filtreleri teslimattan önce uygular. Hariç tutulan satırlar
@@ -331,7 +331,7 @@ Arama, dönen Tweet başına 1 kredi kullanır. Çoğu toplu sonuç 1 kredi, mak
 sonucu 5 kredi kullanır. Canlı belgeler her tekilleştirilmiş satırın son ücretini
 henüz kanıtlamıyor. Tahmini son fatura sayma.
 
-İşi oluşturmadan önce tahmin et. Bu çağrı kredi harcamaz:
+İşi oluşturmadan önce tahmin et. Bu çağrı kredi harcamaz.
 
 ```bash
 curl --request POST 'https://xquik.com/api/v1/extractions/estimate' \
@@ -357,7 +357,7 @@ izleyici saatte 30 kredi kullanır. Saklanan olaylar ve webhook teslimatları
 dahildir. Olayı işlemeden önce `X-Xquik-Timestamp`, `X-Xquik-Nonce` ve
 `X-Xquik-Signature` başlıklarını doğrula.
 
-Sınırlı bir sorguyla anahtar kelime izleyicisi oluştur:
+Sınırlı bir sorguyla anahtar kelime izleyicisi oluştur.
 
 ```bash
 curl --request POST 'https://xquik.com/api/v1/monitors/keywords' \
@@ -410,20 +410,20 @@ Düzenlenen, hassas veya belirsiz işler için bir hukuk uzmanına danış.
 
 ## Skill'i kur
 
-Ana Skill'i kur:
+Ana Skill'i kur.
 
 ```bash
 bunx skills@1.5.3 add Xquik-dev/x-twitter-scraper
 ```
 
-Eklemeden önce shadcn kaydını incele:
+Eklemeden önce shadcn kaydını incele.
 
 ```bash
 bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
 bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
 ```
 
-Uygulama kodunu resmi X API'den taşımak için [X API alternatifi Skill'ini](https://github.com/Xquik-dev/x-api) ekle:
+Uygulama kodunu resmi X API'den taşımak için [X API alternatifi Skill'ini](https://github.com/Xquik-dev/x-api) ekle.
 
 ```bash
 bunx skills@1.5.3 add Xquik-dev/x-api
@@ -431,7 +431,7 @@ bunx skills@1.5.3 add Xquik-dev/x-api
 
 ### LobeHub
 
-LobeHub'a giriş yap, Skill'leri kur ve doğrula:
+LobeHub'a giriş yap, Skill'leri kur ve doğrula.
 
 ```bash
 lh login
@@ -443,7 +443,7 @@ lh skill list --source market
 
 ### Codex
 
-Pazarı ekle, eklentiyi kur ve doğrula:
+Pazarı ekle, eklentiyi kur ve doğrula.
 
 ```bash
 codex plugin marketplace add Xquik-dev/x-twitter-scraper
@@ -453,7 +453,7 @@ codex plugin list
 
 ### Gemini CLI
 
-Depoyu incele. Ardından Skill'leri kur ve doğrula:
+Depoyu incele. Ardından Skill'leri kur ve doğrula.
 
 ```bash
 gemini skills install https://github.com/Xquik-dev/x-twitter-scraper.git \

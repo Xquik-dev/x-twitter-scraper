@@ -38,7 +38,7 @@ Get trending hashtags and topics from X by country or globally. Read-only.
 | GET /x/trends?woeid=<woeid> | Region-scoped trends | Read tier |
 | GET /trends?woeid=<woeid> | Alias for `/x/trends` | Read tier |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example request
 
@@ -47,10 +47,10 @@ GET /x/trends?woeid=23424977&count=30
 -> { trends: [{ name, description, query, promotedContent, rank, tweetVolume, url }], total, woeid }
 ```
 
-- `woeid`: Yahoo WOEID (`1` worldwide, `23424977` US, `23424975` UK, `23424969` Turkey). Omit for worldwide.
-- `count`: number of trends to return, 1-50.
-- `tweetVolume`: approximate visible post volume when supplied, otherwise null
-- `description`: optional context for the trend
+- `woeid` is the Yahoo WOEID (`1` worldwide, `23424977` US, `23424975` UK, `23424969` Turkey). Omit for worldwide.
+- `count` is the number of trends to return, 1-50.
+- `tweetVolume` is the approximate visible post volume when supplied, otherwise null
+- `description` is optional context for the trend
 
 ## Fetch the trends
 

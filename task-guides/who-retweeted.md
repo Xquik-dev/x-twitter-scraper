@@ -37,7 +37,7 @@ List users who reposted a specific tweet.
 | POST /extractions with toolType=repost_extractor | Retweeters of a tweet | Per-row |
 | POST /extractions/estimate | Preview usage before running | Included |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example request
 
@@ -50,7 +50,7 @@ POST /extractions
 -> 202 { "id": "<extractionId>", "toolType": "repost_extractor", "status": "running" }
 ```
 
-Each row: `{ username, name, bio, followers_count, verified, retweeted_at }`.
+Each row is `{ username, name, bio, followers_count, verified, retweeted_at }`.
 
 ## Fetch the accounts
 

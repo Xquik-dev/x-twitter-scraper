@@ -39,7 +39,7 @@ Pull entrants from a seed tweet. Apply the declared follower, account-age, follo
 | GET /draws/{id}/export?format=csv&type=entries | Export entrants | Read tier |
 | GET /draws/{id}/export?format=csv&type=winners | Export winners | Read tier |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example requests
 
@@ -75,7 +75,7 @@ Every draw response includes IDs, entry counts, and winners. Put the draw ID in 
 
 ## Get confirmation
 
-Creating a draw is metered and irreversible. Require explicit user confirmation for:
+Creating a draw is metered and irreversible. Require explicit user confirmation for each of these.
 - Seed tweet URL
 - Entry source
 - Winner count

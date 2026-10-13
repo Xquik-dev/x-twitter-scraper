@@ -38,7 +38,7 @@ Compare the user's recent posts by format, topic, and posting time. Recommend ch
 | GET /x/users/{id}/tweets | Cursor-paginated posts for analysis | Read tier |
 | GET /styles/{id}/performance | Format-by-engagement breakdown | Read tier |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Build the growth plan
 
@@ -47,9 +47,9 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 3. Page `GET /x/users/{id}/tweets?pageSize=100&cursor=<>`. Use
    `includeReplies`, `includeRetweets`, or other documented filters as needed.
    Stop only when `has_next_page` is false or 100 rows are collected.
-4. Compute: average engagement rate, best-performing format, best day/time, ratio of replies-to-posts-to-threads.
+4. Compute the average engagement rate, best-performing format, best day/time, and ratio of replies-to-posts-to-threads.
 5. Call `/styles/{id}/performance` for a server-side breakdown.
-6. Give only recommendations tied to a measured result. Example: "Your threads get 4x the engagement of single tweets. Post 1-2 threads per week."
+6. Give only recommendations tied to a measured result. For example, "Your threads get 4x the engagement of single tweets. Post 1-2 threads per week."
 
 ## Actions this Skill will not take
 

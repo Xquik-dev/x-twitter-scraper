@@ -39,11 +39,11 @@ Get replies to any visible X post. Return direct replies, nested replies, and en
 | POST /extractions with toolType=reply_extractor | Bounded bulk replies | Per-row extraction usage |
 | GET /x/tweets/{id} | Get root tweet metadata for context | Read tier |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Automatic pagination
 
-Omit `mode` for automatic maximum coverage:
+Omit `mode` for automatic maximum coverage.
 
 ```http
 GET /x/tweets/{id}/replies?pageSize=300
@@ -91,7 +91,7 @@ Complete mode accepts only `limit` from 1 to 25,000. Remove cursors,
 5. Inspect `diagnostic.complete`, coverage, strategies, cursors, and richness.
 6. On 424, retain safe rows and follow `diagnostic.recommendedFallback`.
 7. Sort by available engagement fields such as `likeCount` client-side.
-8. For an extraction job, estimate with the exact body:
+8. For an extraction job, estimate with the exact body.
 
 ```json
 POST /extractions/estimate
@@ -99,7 +99,7 @@ POST /extractions/estimate
 ```
 
 9. Show the result estimate and usage. Ask for explicit confirmation.
-10. Only after confirmation, create the job with the same body:
+10. Only after confirmation, create the job with the same body.
 
 ```json
 POST /extractions

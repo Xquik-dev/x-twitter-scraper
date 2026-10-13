@@ -37,7 +37,7 @@ Find quote posts for a specific tweet. Return their text and engagement.
 | POST /extractions with toolType=quote_extractor | Quote tweets of a tweet | Per-row |
 | POST /extractions/estimate | Preview usage before running | Included |
 
-Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
+The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq_...` header.
 
 ## Example request
 
@@ -50,7 +50,7 @@ POST /extractions
 -> 202 { "id": "<extractionId>", "toolType": "quote_extractor", "status": "running" }
 ```
 
-Each row: `{ quote_tweet_id, author, text, metrics, quoted_at }`.
+Each row is `{ quote_tweet_id, author, text, metrics, quoted_at }`.
 
 ## Fetch the quote posts
 
