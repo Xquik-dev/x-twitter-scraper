@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 40bd678d168ebb99f305120d03a7e1d7adcccee6a303c14b3af29b2b7c7f34db. -->
+<!-- Translation source SHA-256: 92a537c40afafe2cad1cb1e1e3bf7ffb25a866544248fe13e91d4a2cff0fbe00. -->
 
 # X (Twitter) scraper API ve Twitter MCP sunucusu
 
@@ -137,7 +137,7 @@ seç. X'in kendi sözleşmesi gerekiyorsa resmî X API'sini seç.
 
 ## Paket ve MCP sözleşmesi
 
-`x-developer` v2.7.0, Skill'leri ve eklenti meta verilerini içerir. Barındırılan
+`x-developer` v2.7.1, Skill'leri ve eklenti meta verilerini içerir. Barındırılan
 MCP `docs`, `search` ve `execute` araçlarını sunar. Canlı OpenAPI sözleşmesi
 herkese açık tüm REST işlemlerini belgeler.
 

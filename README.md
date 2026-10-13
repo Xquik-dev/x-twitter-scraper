@@ -199,7 +199,7 @@ Xquik omits unavailable optional fields. It never invents missing content.
 
 ## Package and MCP details
 
-`x-developer` v2.7.0 bundles Skills and plugin metadata. Hosted MCP exposes
+`x-developer` v2.7.1 bundles Skills and plugin metadata. Hosted MCP exposes
 `docs`, `search`, and `execute`. Current clients negotiate MCP `2026-07-28`
 through `server/discover`.
 

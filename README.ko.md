@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 40bd678d168ebb99f305120d03a7e1d7adcccee6a303c14b3af29b2b7c7f34db. -->
+<!-- Translation source SHA-256: 92a537c40afafe2cad1cb1e1e3bf7ffb25a866544248fe13e91d4a2cff0fbe00. -->
 
 # X(Twitter) Scraper API 및 Twitter MCP 서버
 
@@ -135,7 +135,7 @@ X 고유 계약이 필요하면 공식 X API가 알맞습니다.
 
 ## 패키지와 MCP 계약
 
-`x-developer` v2.7.0에는 Skills와 플러그인 메타데이터가 포함됩니다. 호스팅
+`x-developer` v2.7.1에는 Skills와 플러그인 메타데이터가 포함됩니다. 호스팅
 MCP는 `docs`, `search`, `execute`를 제공합니다. 실시간 OpenAPI 계약에는
 공개된 모든 REST 작업이 있습니다.
 
