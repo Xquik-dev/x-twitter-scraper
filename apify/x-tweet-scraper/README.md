@@ -759,8 +759,8 @@ How a pasted input behaves:
   count back on the calendar. Without h, d, w, m or y, the run stops before any
   read or charge.
 - The Actor has no page unit. Replace `maxPages` with `maxItems`.
-- The Actor has no user ID field. Send handles or profile URLs instead of
-  `userId` or `user_ids`.
+- The Actor has no `userId` or `user_ids` field. Put a user ID where a handle
+  goes. It works in `twitterHandles`, profile URLs & after `from:`.
 - Search operator fields such as `from`, `min_faves`, `since_time` &
   `filter:images` already use X's names. They need no mapping.
 - A list that another Actor does not call all-of or any-of runs with 1 value:

@@ -765,8 +765,8 @@ Actor가 쓰는 필드 이름을 읽고 자체 필드로 연결합니다. 문서
   달력 기준으로 거꾸로 셉니다. h, d, w, m, y가 없으면 읽기나 과금 전에 실행이
   멈춥니다.
 - 이 Actor에는 페이지 단위가 없습니다. `maxPages` 대신 `maxItems`를 쓰세요.
-- 이 Actor에는 숫자 사용자 ID 필드가 없습니다. `userId`나 `user_ids` 대신 사용자
-  아이디나 프로필 URL을 보내세요.
+- 이 Actor에는 `userId`나 `user_ids` 필드가 없습니다. 사용자 ID를 사용자 아이디
+  자리에 넣으세요. `twitterHandles`, 프로필 URL, `from:` 뒤에서 모두 됩니다.
 - `from`, `min_faves`, `since_time` & `filter:images` 같은 검색 연산자 필드는
   이미 X의 이름을 씁니다. 따로 연결할 필요가 없습니다.
 - 다른 Actor가 '모두 일치'인지 '하나만 일치'인지 밝히지 않은 목록은 값 1개로
