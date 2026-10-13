@@ -425,13 +425,16 @@ lh skill list --source market
 
 ### Codex
 
-添加市场，安装插件，并确认结果。
+添加市场，安装并确认插件，然后登录。
 
 ```bash
 codex plugin marketplace add Xquik-dev/x-twitter-scraper
 codex plugin add x-twitter-scraper@x-twitter-scraper
 codex plugin list
+codex mcp login xquik
 ```
+
+插件会以 `xquik` 名称添加托管的 MCP 服务器。`codex mcp login xquik` 会打开一次浏览器完成登录。在 Codex 应用中，请改为选择 Authenticate。要使用 API 密钥，请按照 [Codex API 密钥步骤](https://docs.xquik.com/mcp/overview#codex-api-key-authentication)操作。
 
 ### Gemini CLI
 
