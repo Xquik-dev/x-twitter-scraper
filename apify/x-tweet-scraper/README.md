@@ -629,8 +629,8 @@ no more than that.
 Date windows include the lower bound & exclude the upper bound. The Actor checks
 both bounds before it adds or charges for each tweet.
 
-For the full operator list, see
-[Twitter Advanced Search](https://github.com/igorbrigadir/twitter-advanced-search).
+For the full operator list, see Xquik's
+[Twitter advanced search operators](https://github.com/Xquik-dev/x-twitter-advanced-search).
 
 ### Migrate from another tweet Actor
 

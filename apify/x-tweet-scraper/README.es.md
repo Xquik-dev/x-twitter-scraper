@@ -671,7 +671,7 @@ Las ventanas de fechas incluyen el límite inferior y excluyen el superior. El
 Actor revisa ambos límites antes de agregar o cobrar cada post.
 
 Para ver la lista completa de operadores, consulta
-[Twitter Advanced Search](https://github.com/igorbrigadir/twitter-advanced-search).
+[Twitter advanced search operators](https://github.com/Xquik-dev/x-twitter-advanced-search).
 
 ### Migra desde otro Actor de posts
 
