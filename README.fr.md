@@ -18,7 +18,7 @@ Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
 monde. Ses données X sont les plus complètes.
 Recherchez, exportez et surveillez avec REST, les SDKs, MCP et Apify.
 Xquik facture seulement les résultats livrés, uniques et conformes à vos
-filtres, et n'ajoute jamais de lignes de remplissage.
+filtres.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.

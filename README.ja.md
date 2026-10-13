@@ -16,7 +16,7 @@
 
 Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。
 REST、SDK、MCP、Apify で投稿の検索、データ出力、アカウント監視ができます。
-Xquikが課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。行の水増しは一切しません。
+Xquikが課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
