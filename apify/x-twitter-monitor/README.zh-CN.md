@@ -10,10 +10,9 @@
   <a href="README.it.md">Italiano</a>
 </p>
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer 将 Xquik MCP 连接到编程 Agent"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">从 6:07 开始，观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具。</a>
-</td></tr></table>
+https://www.youtube.com/watch?v=4UOSpoOoC3Y
+
+[从 6:07 开始，观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具。](https://youtu.be/4UOSpoOoC3Y?t=367)
 
 Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X (Twitter) Monitor 针对你选择的账号和关键词发送 Twitter 提醒。它会捕获被监控账号的每一条新推文、回复、引用、转帖和个人资料变更。在 X 显示之后，它通常不到一秒就能捕获每一项。对于关键词，它会捕获 X 最新搜索结果中出现的每一条新推文。它还会捕获关注动态和关注者。每个事件都会以提醒的形式送达 Discord、Telegram、Slack 或你的 webhook。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付且不重复的结果收费，在这里也只对监控运行的小时数收费。
 
@@ -28,7 +27,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 - 已删除的推文，以及账号开启的直播视频和空间。
 - 个人资料变更，例如显示名称、用户名、简介、头像、横幅、位置、网站、认证状态、保护状态、置顶推文和可用状态，同样通常在 X 显示后不到一秒就能捕获。
 - 每个被监控账号关注或取消关注的账号。
-- 每个被监控账号新增和失去的关注者，在 `eventTypes` 中选择。
+- 每个被监控账号新增和失去的关注者。
 - 包含提及、话题标签、媒体、链接或投票的推文，以及长推文，在 `eventTypes` 中选择。
 - 完整事件，也就是包含作者、计数和媒体的推文，或具体的变更。
 - 当前用户名旁附上永久不变的 X 用户 ID，所以账号改名后仍保留它的监控。
@@ -37,6 +36,8 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 - 每个事件都会写入本次运行的数据集，以及每个已保存任务或监控名称各自的 1 个历史数据集。
 
 ## 如何设置 Twitter 关键词提醒
+
+监控需要 Apify 付费套餐。[选择套餐](https://apify.com/pricing?fpr=xquik)，然后回到这里点击 Try for free。
 
 1. 在 Apify Console 中打开 Xquik 的 X (Twitter) Monitor。
 2. 把用户名粘贴到 `twitterHandles`，或把 X 搜索粘贴到 `searchTerms`。
@@ -62,13 +63,14 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 | 字段                                 | 作用                                                         |
 | ------------------------------------ | ------------------------------------------------------------ |
-| `twitterHandles`                     | 带或不带 @ 的用户名，或 x.com 个人资料 URL，每行 1 个。      |
+| `twitterHandles`                     | 带或不带 @ 的用户名，或 `x.com` 个人资料 URL，每行 1 个。    |
 | `searchTerms`                        | X 搜索，例如 `"x api" lang:en`。每个搜索是 1 个监控。        |
 | `monitorName`                        | 在没有已保存任务的运行中，为这组账号和关键词命名。           |
 | `newPosts`                           | 每一条新推文。默认开启。                                     |
 | `replies`, `quotes`, `reposts`       | 回复、引用推文和转帖。默认开启。                             |
 | `deletedPosts`, `liveVideos`         | 账号的已删除推文、直播视频和空间。                           |
 | `profileChanges`, `followingChanges` | 账号的个人资料变更、关注和取消关注。                         |
+| `followerChanges`                    | 账号新增和失去的关注者。                                     |
 | `eventTypes`                         | 精确的事件类型，会取代复选框，例如关注者变更和媒体。         |
 | `webhookUrls`                        | HTTPS URL，每行 1 个。Actor 会识别 Slack 和 Discord 的 URL。 |
 | `telegram`                           | 通过运行给出的链接，把提醒发送到 Telegram。                  |
@@ -164,7 +166,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 与它支付的监控小时数相比，每小时运行一次的定时调度产生的 Apify 用量很小。每隔几分钟运行一次会增加用量，但对提醒没有任何影响，因为提醒本来就在运行之间送达。
 
-监控需要 Apify 付费套餐。在免费套餐中，运行不会启动监控，也不收费。它会改为显示你第一个账号最新的 5 条推文，让你看到提醒会包含什么内容。
+监控需要 [Apify 付费套餐](https://apify.com/pricing?fpr=xquik)。在免费套餐中，运行不会启动监控，也不收费。它会改为显示你第一个账号最新的 5 条推文，让你看到提醒会包含什么内容。
 
 ## 限制与恢复
 
@@ -174,6 +176,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 - 提前停止的运行会把它的事件留给下一次运行，不会丢失任何事件。
 - 如果运行在预留小时数之后、收费之前结束，则不收费。这些小时数视为已付，而且免费。
 - 每次运行都会写入 1 行免费的状态行，所以它的数据集永远不会为空。
+- Xquik 的每个监控 Actor 都按相同的小时价格收费。一次运行会支付你所有监控中最早的未付小时数，无论是哪个 Actor 监控的。
 
 ## 相关 Xquik Actor
 
@@ -244,8 +247,8 @@ Xquik 的 X (Twitter) Monitor 请求的是公开的 X 数据。结果可能包�
 
 ### 在哪里获取帮助？
 
-在 Actor 页面提交 issue，或带上运行 ID 联系 <support@xquik.com>。状态页面会解释每次运行，免费诊断信息则覆盖需要注意的运行。
+在 [Issues 标签页](https://apify.com/xquik/x-twitter-monitor/issues) 提交 issue，并附上运行 ID。状态页面会解释每次运行，免费诊断信息则覆盖需要注意的运行。
 
 ### 可以获得定制方案吗？
 
-可以。访问 [xquik.com](https://xquik.com) 或阅读 [API 文档](https://docs.xquik.com/introduction)。这些资料介绍了仪表盘、API、MCP 服务器和 webhook。
+可以。请在 [Issues 标签页](https://apify.com/xquik/x-twitter-monitor/issues) 说明你的需求。Xquik 还提供仪表盘、REST API、MCP 服务器和 webhook。你可以在 Xquik 的 [Apify 资料页](https://apify.com/xquik) 找到它的网站。

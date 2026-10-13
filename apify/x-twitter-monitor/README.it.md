@@ -10,10 +10,9 @@
   <strong>Italiano</strong>
 </p>
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer collega Xquik MCP agli agenti di coding"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Guarda come Framer usa gli scraper Xquik con Claude Code, Codex, Cursor e altro, da 6:07.</a>
-</td></tr></table>
+https://www.youtube.com/watch?v=4UOSpoOoC3Y
+
+[Guarda come Framer usa gli scraper Xquik con Claude Code, Codex, Cursor & altro, da 6:07.](https://youtu.be/4UOSpoOoC3Y?t=367)
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo, con
 i dati X più completi. X (Twitter) Monitor di Xquik invia avvisi Twitter per gli
@@ -46,7 +45,7 @@ della piattaforma.
   tweet fissato & disponibilità, anche queste di solito rilevate in meno di un
   secondo da quando X le mostra.
 - Gli account che ogni account sorvegliato segue o smette di seguire.
-- Follower nuovi & persi di ogni account sorvegliato, in `eventTypes`.
+- Follower nuovi & persi di ogni account sorvegliato.
 - Tweet con menzioni, hashtag, media, link o sondaggi, & tweet lunghi, in
   `eventTypes`.
 - L'evento completo, cioè il tweet con autore, conteggi & media, oppure la
@@ -62,6 +61,10 @@ della piattaforma.
   salvato o nome del monitor.
 
 ## Come configurare gli avvisi Twitter per parole chiave
+
+Il monitoraggio richiede un piano Apify a pagamento.
+[Scegli un piano](https://apify.com/pricing?fpr=xquik), poi torna qui & premi
+Try for free.
 
 1. Apri X (Twitter) Monitor di Xquik in Apify Console.
 2. Incolla nomi utente in `twitterHandles`, o ricerche X in `searchTerms`.
@@ -100,13 +103,14 @@ Start, & l'esecuzione successiva mostra Telegram come collegato.
 
 | Campo                                | Cosa fa                                                                                         |
 | ------------------------------------ | ----------------------------------------------------------------------------------------------- |
-| `twitterHandles`                     | Nomi utente con o senza @, o URL di profili x.com, 1 per riga.                                  |
+| `twitterHandles`                     | Nomi utente con o senza @, o URL di profili `x.com`, 1 per riga.                                |
 | `searchTerms`                        | Ricerche X, come `"x api" lang:en`. Ogni ricerca è 1 monitor.                                   |
 | `monitorName`                        | Dà il nome a questo gruppo di account & parole chiave, per le esecuzioni senza task salvato.    |
 | `newPosts`                           | Ogni nuovo tweet. Attivo per impostazione predefinita.                                          |
 | `replies`, `quotes`, `reposts`       | Risposte, tweet di citazione & repost. Attivi per impostazione predefinita.                     |
 | `deletedPosts`, `liveVideos`         | Tweet eliminati, video in diretta & Spazi degli account.                                        |
 | `profileChanges`, `followingChanges` | Modifiche del profilo, follow & unfollow degli account.                                         |
+| `followerChanges`                    | Follower nuovi & persi degli account.                                                           |
 | `eventTypes`                         | Tipi di evento esatti, che sostituiscono le caselle, come le variazioni dei follower & i media. |
 | `webhookUrls`                        | URL HTTPS, 1 per riga. L'Actor riconosce gli URL di Slack & Discord.                            |
 | `telegram`                           | Invia gli avvisi su Telegram tramite un link che ti dà l'esecuzione.                            |
@@ -242,10 +246,11 @@ Una pianificazione oraria tiene basso l'uso di Apify rispetto alle ore che paga.
 Esecuzioni ogni pochi minuti aggiungono uso & non cambiano nulla per gli avvisi,
 che arrivano comunque tra un'esecuzione e l'altra.
 
-Il monitoraggio richiede un piano Apify a pagamento. Sul piano gratuito,
-un'esecuzione non avvia alcun monitor & non addebita nulla. Mostra invece i 5
-tweet più recenti del tuo primo account, così vedi cosa conterrebbero gli
-avvisi.
+Il monitoraggio richiede un
+[piano Apify a pagamento](https://apify.com/pricing?fpr=xquik). Sul piano
+gratuito, un'esecuzione non avvia alcun monitor & non addebita nulla. Mostra
+invece i 5 tweet più recenti del tuo primo account, così vedi cosa conterrebbero
+gli avvisi.
 
 ## Limiti & recupero
 
@@ -260,6 +265,9 @@ avvisi.
   addebita nulla. Quelle ore restano pagate & gratuite.
 - Ogni esecuzione scrive 1 riga di stato gratuita, quindi il suo dataset non è
   mai vuoto.
+- Ogni Actor di monitoraggio di Xquik addebita lo stesso prezzo orario.
+  Un'esecuzione paga le ore non pagate più vecchie di tutti i tuoi monitor,
+  qualunque Actor li abbia sorvegliati.
 
 ## Actor Xquik correlati
 
@@ -417,12 +425,14 @@ sulla privacy che valgono per te. Nel dubbio, chiedi a un legale qualificato.
 
 ### Dove trovo assistenza?
 
-Apri una issue nella pagina dell'Actor o scrivi a <support@xquik.com> con l'ID
+Apri una issue nella
+[scheda Issues](https://apify.com/xquik/x-twitter-monitor/issues) con l'ID
 dell'esecuzione. La pagina di stato spiega ogni esecuzione, & la diagnostica
 gratuita copre le esecuzioni che richiedono attenzione.
 
 ### Posso avere una soluzione personalizzata?
 
-Sì. Visita [xquik.com](https://xquik.com) o leggi la
-[documentazione API](https://docs.xquik.com/introduction). Copre dashboard, API,
-server MCP & webhook.
+Sì. Descrivi ciò che ti serve nella
+[scheda Issues](https://apify.com/xquik/x-twitter-monitor/issues). Xquik offre
+anche una dashboard, un'API REST, un server MCP & webhook. Trovi il sito web di
+Xquik sul suo [profilo Apify](https://apify.com/xquik).

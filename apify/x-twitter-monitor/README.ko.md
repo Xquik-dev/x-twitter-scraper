@@ -10,10 +10,9 @@
   <a href="README.it.md">Italiano</a>
 </p>
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer가 Xquik MCP를 코딩 에이전트에 연결하는 모습"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Framer가 Xquik 스크레이퍼를 Claude Code, Codex, Cursor 등과 함께 사용하는 방법을 6:07부터 보세요.</a>
-</td></tr></table>
+https://www.youtube.com/watch?v=4UOSpoOoC3Y
+
+[Framer가 Xquik 스크레이퍼를 Claude Code, Codex, Cursor 등과 함께 사용하는 방법을 6:07부터 보세요.](https://youtu.be/4UOSpoOoC3Y?t=367)
 
 Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서비스이며, 가장
 완전한 X 데이터를 제공합니다. Xquik의 X (Twitter) Monitor는 고른 계정 & 키워드에
@@ -43,7 +42,7 @@ Actor에서는 모니터가 감시한 시간에만 요금을 받습니다.
   인증, 보호 설정, 고정된 트윗 & 사용 가능 여부 같은 프로필 변경. 이것도 보통
   X에 표시된 뒤 일 초 안에 잡아냅니다.
 - 감시하는 각 계정이 팔로우하거나 언팔로우한 계정.
-- 감시하는 각 계정의 새 팔로워 & 잃은 팔로워. `eventTypes`에서 고릅니다.
+- 감시하는 각 계정의 새 팔로워 & 잃은 팔로워.
 - 멘션, 해시태그, 미디어, 링크 또는 투표가 있는 트윗 & 긴 트윗. `eventTypes`에서
   고릅니다.
 - 전체 이벤트, 즉 작성자, 수치 & 미디어가 포함된 트윗 또는 변경 내용.
@@ -57,6 +56,10 @@ Actor에서는 모니터가 감시한 시간에만 요금을 받습니다.
   남는 모든 이벤트.
 
 ## Twitter 키워드 알림 설정 방법
+
+모니터링에는 Apify 유료 요금제가 필요합니다.
+[요금제를 고른](https://apify.com/pricing?fpr=xquik) 뒤 여기로 돌아와 Try for
+free를 누르세요.
 
 1. Apify Console에서 Xquik의 X (Twitter) Monitor를 여세요.
 2. `twitterHandles`에 사용자 아이디를, 또는 `searchTerms`에 X 검색어를 붙여
@@ -97,13 +100,14 @@ Start를 누르면 봇이 채팅에서 답하고, 다음 실행에서 Telegram�
 
 | 필드                                 | 기능                                                                        |
 | ------------------------------------ | --------------------------------------------------------------------------- |
-| `twitterHandles`                     | @가 있거나 없는 사용자 아이디 또는 x.com 프로필 URL, 줄마다 1개.            |
+| `twitterHandles`                     | @가 있거나 없는 사용자 아이디 또는 `x.com` 프로필 URL, 줄마다 1개.          |
 | `searchTerms`                        | `"x api" lang:en` 같은 X 검색어. 검색어 1개가 모니터 1개입니다.             |
 | `monitorName`                        | 저장된 태스크가 없는 실행에서 이 계정 & 키워드 묶음의 이름을 정합니다.      |
 | `newPosts`                           | 모든 새 트윗. 기본으로 켜져 있습니다.                                       |
 | `replies`, `quotes`, `reposts`       | 답글, 인용한 트윗 & 재게시. 기본으로 켜져 있습니다.                         |
 | `deletedPosts`, `liveVideos`         | 계정의 삭제된 트윗, 라이브 동영상 & 스페이스.                               |
 | `profileChanges`, `followingChanges` | 계정의 프로필 변경, 팔로우 & 언팔로우.                                      |
+| `followerChanges`                    | 계정의 새 팔로워 & 잃은 팔로워.                                             |
 | `eventTypes`                         | 체크박스를 대신하는 정확한 이벤트 유형. 팔로워 변경 & 미디어 등이 있습니다. |
 | `webhookUrls`                        | HTTPS URL, 줄마다 1개. Actor가 Slack & Discord URL을 알아봅니다.            |
 | `telegram`                           | 실행이 알려 주는 링크로 Telegram에 알림을 보냅니다.                         |
@@ -232,9 +236,10 @@ Actor는 `handles` & `usernames`처럼 에이전트가 추측하는 이름도 �
 분마다 실행하면 사용량만 늘고 알림에는 아무 변화가 없습니다. 알림은 어차피 실행
 사이에 도착합니다.
 
-모니터링에는 Apify 유료 요금제가 필요합니다. 무료 요금제에서는 실행이 모니터를
-시작하지 않고 요금도 청구하지 않습니다. 대신 첫 번째 계정의 최신 트윗 5개를 보여
-주므로, 알림에 어떤 내용이 담길지 확인할 수 있습니다.
+모니터링에는 [Apify 유료 요금제](https://apify.com/pricing?fpr=xquik)가
+필요합니다. 무료 요금제에서는 실행이 모니터를 시작하지 않고 요금도 청구하지
+않습니다. 대신 첫 번째 계정의 최신 트윗 5개를 보여 주므로, 알림에 어떤 내용이
+담길지 확인할 수 있습니다.
 
 ## 제한 & 복구
 
@@ -247,6 +252,8 @@ Actor는 `handles` & `usernames`처럼 에이전트가 추측하는 이름도 �
 - 시간 예약과 청구 사이에 끝난 실행은 아무것도 청구하지 않습니다. 그 시간은
   결제된 것으로 처리되며 무료입니다.
 - 각 실행은 무료 상태 행 1개를 기록하므로, 데이터셋이 비는 일이 없습니다.
+- Xquik의 모든 모니터 Actor는 시간당 요금이 같습니다. 실행은 어떤 Actor가
+  감시했든 모든 모니터의 가장 오래된 미납 시간을 결제합니다.
 
 ## 관련 Xquik Actor
 
@@ -394,12 +401,13 @@ Xquik의 X (Twitter) Monitor는 공개 X 데이터를 요청합니다. 결과에
 
 ### 도움은 어디서 받을 수 있나요?
 
-Actor 페이지에서 이슈를 열거나 실행 ID와 함께 <support@xquik.com>으로
-문의하세요. 상태 페이지가 모든 실행을 설명하며, 무료 진단은 확인이 필요한 실행을
-다룹니다.
+[Issues 탭](https://apify.com/xquik/x-twitter-monitor/issues)에서 실행 ID와 함께
+이슈를 여세요. 상태 페이지가 모든 실행을 설명하며, 무료 진단은 확인이 필요한
+실행을 다룹니다.
 
 ### 맞춤 솔루션을 받을 수 있나요?
 
-네. [xquik.com](https://xquik.com)을 방문하거나
-[API 문서](https://docs.xquik.com/introduction)를 읽어 보세요. 대시보드, API,
-MCP 서버 & 웹훅 안내가 있습니다.
+네. 필요한 내용을
+[Issues 탭](https://apify.com/xquik/x-twitter-monitor/issues)에 적어 주세요.
+Xquik은 대시보드, REST API, MCP 서버 & 웹훅도 제공합니다. Xquik 웹사이트는
+[Apify 프로필](https://apify.com/xquik)에서 찾을 수 있습니다.

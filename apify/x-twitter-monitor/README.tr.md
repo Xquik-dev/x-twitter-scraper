@@ -10,10 +10,9 @@
   <a href="README.it.md">Italiano</a>
 </p>
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer, Xquik MCP'yi kodlama ajanlarına bağlıyor"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Framer'ın Xquik scraper'larını Claude Code, Codex, Cursor ve daha fazlasıyla nasıl kullandığını 6:07'den itibaren izle.</a>
-</td></tr></table>
+https://www.youtube.com/watch?v=4UOSpoOoC3Y
+
+[Framer'ın Xquik scraper'larını Claude Code, Codex, Cursor ve daha fazlasıyla nasıl kullandığını 6:07'den itibaren izle.](https://youtu.be/4UOSpoOoC3Y?t=367)
 
 Xquik, en eksiksiz X verisini sunan, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. Xquik'in X (Twitter) Monitor Actor'ı, seçtiğin hesaplar ve
@@ -47,7 +46,7 @@ kullanımını ayrıca faturalandırır.
   gibi profil değişiklikleri. Bunlar da X gösterdikten sonra genellikle bir
   saniyeden kısa sürede yakalanır.
 - İzlenen her hesabın takip ettiği veya takipten çıktığı hesaplar.
-- `eventTypes` içinde, izlenen her hesabın yeni ve kaybedilen takipçileri.
+- İzlenen her hesabın yeni ve kaybedilen takipçileri.
 - `eventTypes` içinde, bahsetme, hashtag, medya, bağlantı veya anket içeren
   tweet'ler ve uzun tweet'ler.
 - Olayın tamamı, yani yazarı, sayıları ve medyasıyla birlikte tweet ya da
@@ -63,6 +62,10 @@ kullanımını ayrıca faturalandırır.
   başına 1 geçmiş veri kümesinde.
 
 ## Twitter anahtar kelime bildirimleri nasıl kurulur
+
+İzleme için ücretli bir Apify planı gerekir.
+[Bir plan seç](https://apify.com/pricing?fpr=xquik), sonra buraya dön ve Try for
+free düğmesine bas.
 
 1. Apify Console'da Xquik'in X (Twitter) Monitor Actor'ını aç.
 2. Kullanıcı adlarını `twitterHandles` alanına ya da X aramalarını `searchTerms`
@@ -105,13 +108,14 @@ test bildirimi göndermez. Start'a bastığında bot sohbette cevap verir ve son
 
 | Alan                                 | Ne yapar                                                                                 |
 | ------------------------------------ | ---------------------------------------------------------------------------------------- |
-| `twitterHandles`                     | @ ile veya @ olmadan kullanıcı adları ya da x.com profil URL'leri, her satıra 1 tane.    |
+| `twitterHandles`                     | @ ile veya @ olmadan kullanıcı adları ya da `x.com` profil URL'leri, her satıra 1 tane.  |
 | `searchTerms`                        | `"x api" lang:en` gibi X aramaları. Her arama 1 izlemedir.                               |
 | `monitorName`                        | Kaydedilmiş görevi olmayan çalıştırmalarda bu hesap ve anahtar kelime grubuna ad verir.  |
 | `newPosts`                           | Her yeni tweet. Varsayılan olarak açık.                                                  |
 | `replies`, `quotes`, `reposts`       | Yanıtlar, alıntı tweet'ler ve yeniden gönderiler. Varsayılan olarak açık.                |
 | `deletedPosts`, `liveVideos`         | Hesapların silinen tweet'leri, canlı videoları ve Sohbet Odaları.                        |
 | `profileChanges`, `followingChanges` | Hesapların profil değişiklikleri, takipleri ve takipten çıkmaları.                       |
+| `followerChanges`                    | Hesapların yeni ve kaybedilen takipçileri.                                               |
 | `eventTypes`                         | Onay kutularının yerine geçen tam olay türleri, örneğin takipçi değişiklikleri ve medya. |
 | `webhookUrls`                        | HTTPS URL'leri, her satıra 1 tane. Actor, Slack ve Discord URL'lerini tanır.             |
 | `telegram`                           | Bildirimleri, çalıştırmanın verdiği bir bağlantıyla Telegram'a gönderir.                 |
@@ -248,9 +252,10 @@ Saatlik bir zamanlama, Apify kullanımını ödediği saatlere göre küçük tu
 Birkaç dakikada bir yapılan çalıştırmalar kullanımı artırır ve bildirimlerde
 hiçbir şeyi değiştirmez. Bildirimler zaten çalıştırmalar arasında gelir.
 
-İzleme için ücretli bir Apify planı gerekir. Ücretsiz planda bir çalıştırma
-izleme başlatmaz ve ücret almaz. Bunun yerine ilk hesabının en son 5 tweet'ini
-gösterir. Böylece bildirimlerin ne içereceğini görebilirsin.
+İzleme için [ücretli bir Apify planı](https://apify.com/pricing?fpr=xquik)
+gerekir. Ücretsiz planda bir çalıştırma izleme başlatmaz ve ücret almaz. Bunun
+yerine ilk hesabının en son 5 tweet'ini gösterir. Böylece bildirimlerin ne
+içereceğini görebilirsin.
 
 ## Sınırlar ve kurtarma
 
@@ -264,6 +269,9 @@ gösterir. Böylece bildirimlerin ne içereceğini görebilirsin.
   O saatler ödenmiş sayılır ve ücretsiz kalır.
 - Her çalıştırma 1 ücretsiz durum satırı yazar. Bu yüzden veri kümesi hiçbir
   zaman boş kalmaz.
+- Xquik'in tüm izleme Actor'ları aynı saat ücretini alır. Bir çalıştırma, hangi
+  Actor izlemiş olursa olsun tüm izlemelerinin en eski ödenmemiş saatlerini
+  öder.
 
 ## İlgili Xquik Actor'ları
 
@@ -427,12 +435,13 @@ gizlilik kurallarına uy. Emin değilsen yetkin bir hukukçuya danış.
 
 ### Nereden yardım alırım?
 
-Actor sayfasında bir issue aç ya da çalıştırma ID'siyle <support@xquik.com>
-adresine yaz. Durum sayfası her çalıştırmayı açıklar. Ücretsiz tanılamalar da
-ilgilenmen gereken çalıştırmaları kapsar.
+[Issues sekmesinde](https://apify.com/xquik/x-twitter-monitor/issues) çalıştırma
+ID'siyle bir issue aç. Durum sayfası her çalıştırmayı açıklar. Ücretsiz
+tanılamalar da ilgilenmen gereken çalıştırmaları kapsar.
 
 ### Bana özel bir çözüm alabilir miyim?
 
-Evet. [xquik.com](https://xquik.com) adresini ziyaret et ya da
-[API belgelerini](https://docs.xquik.com/introduction) oku. Bu kaynaklar paneli,
-API'yi, MCP sunucusunu ve webhook'ları anlatır.
+Evet. Neye ihtiyacın olduğunu
+[Issues sekmesinde](https://apify.com/xquik/x-twitter-monitor/issues) anlat.
+Xquik ayrıca bir panel, bir REST API, bir MCP sunucusu ve webhook'lar sunar.
+Xquik'in web sitesini [Apify profilinde](https://apify.com/xquik) bulabilirsin.

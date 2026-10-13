@@ -10,10 +10,9 @@
   <a href="README.it.md">Italiano</a>
 </p>
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer verbindet Xquik MCP mit Coding-Agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Sieh dir an, wie Framer Xquik-Scraper mit Claude Code, Codex, Cursor und mehr nutzt, ab Minute 6:07.</a>
-</td></tr></table>
+https://www.youtube.com/watch?v=4UOSpoOoC3Y
+
+[Sieh dir an, wie Framer Xquik-Scraper mit Claude Code, Codex, Cursor & mehr nutzt, ab Minute 6:07.](https://youtu.be/4UOSpoOoC3Y?t=367)
 
 Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
 liefert die vollständigsten X-Daten. X (Twitter) Monitor von Xquik sendet
@@ -48,7 +47,7 @@ Plattformnutzung separat.
   Verfügbarkeit, ebenfalls meist in weniger als einer Sekunde erfasst, nachdem X
   sie zeigt.
 - Accounts, denen jeder beobachtete Account folgt oder entfolgt.
-- Neue & verlorene Follower jedes beobachteten Accounts, in `eventTypes`.
+- Neue & verlorene Follower jedes beobachteten Accounts.
 - Tweets mit Erwähnungen, Hashtags, Medien, Links oder Umfragen & lange Tweets,
   in `eventTypes`.
 - Das vollständige Event, also der Tweet mit Autor, Zahlen & Medien oder die
@@ -63,6 +62,10 @@ Plattformnutzung separat.
   oder Monitor-Namen.
 
 ## So richtest du Twitter-Alerts für Stichwörter ein
+
+Monitoring braucht einen kostenpflichtigen Apify-Plan.
+[Wähle einen Plan](https://apify.com/pricing?fpr=xquik), komm dann hierher
+zurück & klicke auf Try for free.
 
 1. Öffne X (Twitter) Monitor von Xquik in der Apify Console.
 2. Füge Nutzernamen in `twitterHandles` oder X-Suchen in `searchTerms` ein.
@@ -103,13 +106,14 @@ tippst, & der nächste Run zeigt Telegram als verbunden.
 
 | Feld                                 | Funktion                                                                            |
 | ------------------------------------ | ----------------------------------------------------------------------------------- |
-| `twitterHandles`                     | Nutzernamen mit oder ohne @ oder Profil-URLs von x.com, 1 pro Zeile.                |
+| `twitterHandles`                     | Nutzernamen mit oder ohne @ oder Profil-URLs von `x.com`, 1 pro Zeile.              |
 | `searchTerms`                        | X-Suchen wie `"x api" lang:en`. Jede Suche ist 1 Monitor.                           |
 | `monitorName`                        | Benennt diese Gruppe von Accounts & Stichwörtern, für Runs ohne gespeicherten Task. |
 | `newPosts`                           | Jeder neue Tweet. Standardmäßig aktiv.                                              |
 | `replies`, `quotes`, `reposts`       | Antworten, zitierte Tweets & Reposts. Standardmäßig aktiv.                          |
 | `deletedPosts`, `liveVideos`         | Gelöschte Tweets, Live-Videos & Spaces von Accounts.                                |
 | `profileChanges`, `followingChanges` | Profiländerungen, Follows & Unfollows von Accounts.                                 |
+| `followerChanges`                    | Neue & verlorene Follower von Accounts.                                             |
 | `eventTypes`                         | Genaue Event-Typen, die die Checkboxen ersetzen, etwa Follower-Änderungen & Medien. |
 | `webhookUrls`                        | HTTPS-URLs, 1 pro Zeile. Der Actor erkennt Slack- & Discord-URLs.                   |
 | `telegram`                           | Sendet Alerts an Telegram über einen Link, den der Run dir gibt.                    |
@@ -248,10 +252,11 @@ Ein stündlicher Zeitplan hält die Apify-Nutzung klein im Vergleich zu den
 Stunden, die er bezahlt. Runs alle paar Minuten erhöhen die Nutzung & ändern
 nichts an den Alerts, die ohnehin zwischen den Runs ankommen.
 
-Monitoring braucht einen kostenpflichtigen Apify-Plan. Auf dem kostenlosen Plan
-startet ein Run keinen Monitor & berechnet nichts. Stattdessen zeigt er die 5
-neuesten Tweets deines ersten Accounts, damit du siehst, was Alerts enthalten
-würden.
+Monitoring braucht einen
+[kostenpflichtigen Apify-Plan](https://apify.com/pricing?fpr=xquik). Auf dem
+kostenlosen Plan startet ein Run keinen Monitor & berechnet nichts. Stattdessen
+zeigt er die 5 neuesten Tweets deines ersten Accounts, damit du siehst, was
+Alerts enthalten würden.
 
 ## Limits & Wiederherstellung
 
@@ -265,6 +270,9 @@ würden.
   berechnet nichts. Diese Stunden gelten als bezahlt & bleiben kostenlos.
 - Jeder Run schreibt 1 kostenlosen Status-Datensatz, also ist sein Dataset nie
   leer.
+- Jeder Monitor-Actor von Xquik berechnet denselben Stundenpreis. Ein Run
+  bezahlt die ältesten offenen Stunden all deiner Monitore, egal welcher Actor
+  sie beobachtet hat.
 
 ## Verwandte Xquik-Actors
 
@@ -421,12 +429,13 @@ qualifizierten Rechtsrat.
 
 ### Wo bekomme ich Hilfe?
 
-Öffne ein Issue auf der Actor-Seite oder schreib mit der Run-ID an
-<support@xquik.com>. Die Statusseite erklärt jeden Run, & kostenlose Diagnosen
+Öffne im [Issues-Tab](https://apify.com/xquik/x-twitter-monitor/issues) ein
+Issue mit der Run-ID. Die Statusseite erklärt jeden Run, & kostenlose Diagnosen
 decken Runs ab, die Aufmerksamkeit brauchen.
 
 ### Kann ich eine individuelle Lösung bekommen?
 
-Ja. Besuche [xquik.com](https://xquik.com) oder lies die
-[API-Dokumentation](https://docs.xquik.com/introduction). Sie deckt Dashboard,
-API, MCP-Server & Webhooks ab.
+Ja. Beschreibe im
+[Issues-Tab](https://apify.com/xquik/x-twitter-monitor/issues), was du brauchst.
+Xquik bietet auch ein Dashboard, eine REST-API, einen MCP-Server & Webhooks. Die
+Website von Xquik findest du auf seinem [Apify-Profil](https://apify.com/xquik).
