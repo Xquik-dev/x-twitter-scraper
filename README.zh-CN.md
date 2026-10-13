@@ -15,7 +15,7 @@
 </p>
 
 Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。使用 REST、SDK、
-MCP 和 Apify 搜索帖子、导出数据并监控账号。Xquik 只对已交付、不重复且符合过滤条件的结果收费，绝不用多余的行凑数。
+MCP 和 Apify 搜索帖子、导出数据并监控账号。Xquik 只对已交付、不重复且符合过滤条件的结果收费。
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
