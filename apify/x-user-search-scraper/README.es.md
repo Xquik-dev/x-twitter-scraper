@@ -21,8 +21,8 @@ encuentra usuarios por nombre de usuario, biografía y ubicación. La mayoría d
 los demás Actores de Apify cobran antes de filtrar o quitar duplicados. Xquik
 solo cobra los resultados entregados, únicos y que cumplen tus filtros.
 
-Busca cuentas de X (antes Twitter) por nombre, tema, biografía o ubicación. No
-necesitas clave de API de X ni iniciar sesión. Pagas **$0.00015 por perfil
+Haz una búsqueda de usuarios de Twitter por nombre, tema, biografía o ubicación.
+No necesitas clave de API de X ni iniciar sesión. Pagas **$0.00015 por perfil
 entregado**, y Apify factura aparte el uso de la plataforma.
 
 > Xquik es un servicio independiente de terceros. No está afiliado a X Corp.

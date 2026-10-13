@@ -24,10 +24,10 @@ muestra la [prueba comparativa de abajo](#prueba-comparativa). La mayoría de lo
 demás Actores de Apify cobran antes de filtrar o quitar duplicados. Xquik solo
 cobra los resultados entregados, únicos y que cumplen tus filtros.
 
-Extrae posts públicos de X (Twitter) **desde $0.00015 por resultado entregado en
-cualquier plan de Apify**. Apify factura aparte el uso de la plataforma. No
-necesitas iniciar sesión en X y no pagas tarifa de inicio ni de consulta. Creado
-por [Xquik](https://xquik.com).
+Extrae tweets de Twitter **desde $0.00015 por resultado entregado en cualquier
+plan de Apify**, una alternativa a la API de Twitter. Apify factura aparte el
+uso de la plataforma. No necesitas iniciar sesión en X y no pagas tarifa de
+inicio ni de consulta. Creado por [Xquik](https://xquik.com).
 
 > Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 > "Twitter" y "X" son marcas registradas de X Corp.

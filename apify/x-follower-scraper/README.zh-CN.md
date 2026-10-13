@@ -17,7 +17,7 @@
 
 Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X Follower Scraper 收集关注者、正在关注的账号、列表成员、订阅者和社群成员。公开基准测试证明，它是 10 个关注者 Actor 中最便宜、最快的。它的完整行字段数是各 Actor 中位数的 2.5 倍，详见[下方基准测试](#基准测试)。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付、不重复且符合过滤条件的结果收费。
 
-抓取 X（Twitter）的关注者、正在关注的账号、已认证关注者、列表成员、列表订阅者和社群成员。Xquik 的 X Follower Scraper **在所有 Apify 套餐上均为每条已交付个人资料 $0.00015 起**。Apify 另行收取平台使用费。无需登录 X，Xquik 也不收启动费或查询费。
+导出 Twitter 关注者列表，连同正在关注的账号、已认证关注者、列表成员、列表订阅者和社群成员。Xquik 的 X Follower Scraper **在所有 Apify 套餐上均为每条已交付个人资料 $0.00015 起**。Apify 另行收取平台使用费。无需登录 X，Xquik 也不收启动费或查询费。
 
 > Xquik 是独立的第三方服务，与 X Corp 无关联。“Twitter”和“X”是 X Corp 的商标。
 

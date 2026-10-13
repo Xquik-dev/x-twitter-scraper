@@ -22,10 +22,11 @@ nombre de usuario. La mayoría de los demás Actores de Apify cobran antes de
 filtrar o quitar duplicados. Xquik solo cobra los resultados entregados, únicos
 y que cumplen tus filtros.
 
-Extrae perfiles, posts, respuestas, contenido multimedia y seguidores de X a
-partir de nombres de usuario, IDs o URLs. Pagas **$0.00015 por fila entregada**,
-y Apify factura aparte el uso de la plataforma. No necesitas clave de API de X
-ni iniciar sesión.
+Consulta cuentas de Twitter en bloque y lee perfiles sin una cuenta de X. Extrae
+perfiles, posts, respuestas, contenido multimedia y seguidores de X a partir de
+nombres de usuario, IDs o URLs. Pagas **$0.00015 por fila entregada**, y Apify
+factura aparte el uso de la plataforma. No necesitas clave de API de X ni
+iniciar sesión.
 
 > Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 > "Twitter" y "X" son marcas registradas de X Corp.

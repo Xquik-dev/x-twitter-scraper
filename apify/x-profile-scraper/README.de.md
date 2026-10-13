@@ -22,6 +22,7 @@ anderen Apify Actors rechnen ab, bevor sie filtern oder Duplikate entfernen.
 Xquik rechnet nur gelieferte, eindeutige Ergebnisse ab, die zu deinen Filtern
 passen.
 
+Schlage Twitter-Accounts in großen Mengen nach & lies Profile ohne X-Account.
 Scrape Profile, Posts, Antworten, Medien & Follower auf X anhand von
 Nutzernamen, IDs oder URLs. Du zahlst **$0.00015 pro geliefertem Datensatz**, &
 Apify berechnet die Plattformnutzung separat. Du brauchst keinen X-API-Schlüssel

@@ -22,6 +22,7 @@ d'utilisateur. La plupart des autres Actors Apify facturent avant de filtrer ou
 de dédupliquer. Xquik facture seulement les résultats livrés, uniques et
 conformes à vos filtres.
 
+Consultez des comptes Twitter en masse et lisez les profils sans compte X.
 Scrapez les profils, posts, réponses, médias et abonnés X à partir de noms
 d'utilisateur, d'ID ou d'URL. Vous payez **$0.00015 par ligne livrée**, et Apify
 facture l'usage de la plateforme à part. Vous n'avez besoin ni de clé API X ni

@@ -28,9 +28,10 @@ fields, as the [benchmark below](#benchmark) shows. Most other Apify Actors
 charge before filtering or deduplicating. Xquik charges only for delivered,
 unique, filter-matching results.
 
-Scrape public X (Twitter) tweets **from $0.00015 per delivered result on every
-Apify plan**. Apify bills platform usage separately. You need no X login, & you
-pay no start or query fee. Built by [Xquik](https://xquik.com).
+Scrape Twitter tweets **from $0.00015 per delivered result on every Apify
+plan**, a Twitter API alternative. Apify bills platform usage separately. You
+need no X login, & you pay no start or query fee. Built by
+[Xquik](https://xquik.com).
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.

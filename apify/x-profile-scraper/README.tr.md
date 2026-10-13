@@ -21,6 +21,7 @@ profilleri, gönderileri, yanıtları, medyayı ve takipçileri toplar. Diğer A
 Actor'larının çoğu, filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik
 yalnızca teslim edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır.
 
+Twitter hesaplarını toplu olarak sorgula ve profilleri X hesabı olmadan oku.
 Kullanıcı adlarından, ID'lerden veya URL'lerden X profillerini, gönderilerini,
 yanıtlarını, medyasını ve takipçilerini kazı. **Teslim edilen satır başına
 $0.00015** ödersin. Apify, platform kullanımını ayrıca faturalandırır. X API

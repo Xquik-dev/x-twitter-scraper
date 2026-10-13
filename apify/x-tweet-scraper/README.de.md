@@ -25,10 +25,10 @@ anderen Apify Actors rechnen ab, bevor sie filtern oder Duplikate entfernen.
 Xquik rechnet nur gelieferte, eindeutige Ergebnisse ab, die zu deinen Filtern
 passen.
 
-Scrape öffentliche Posts auf X (Twitter) **ab $0.00015 pro geliefertem Ergebnis,
-auf jedem Apify-Plan**. Apify berechnet die Plattformnutzung separat. Du
-brauchst keinen X-Login & zahlst keine Start- oder Suchgebühr. Entwickelt von
-[Xquik](https://xquik.com).
+Scrape Tweets auf Twitter **ab $0.00015 pro geliefertem Ergebnis, auf jedem
+Apify-Plan**, als Alternative zur Twitter API. Apify berechnet die
+Plattformnutzung separat. Du brauchst keinen X-Login & zahlst keine Start- oder
+Suchgebühr. Entwickelt von [Xquik](https://xquik.com).
 
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
