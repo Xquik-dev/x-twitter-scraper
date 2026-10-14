@@ -37,7 +37,7 @@ usage separately.
   username & email.
 - `email` & `contactInfo` with the emails, phones & links each profile
   publishes.
-- Search Autocomplete mode, with the accounts, topics, hashtags & cashtags X
+- `mode: "autocomplete"`, with the accounts, topics, hashtags & cashtags X
   suggests for each search term.
 - Resume 1 query from a saved cursor in `startCursor`.
 - Runs keep delivered rows & progress when Apify restarts them.
@@ -111,7 +111,7 @@ search term returns suggested accounts, topics, hashtags & cashtags.
 - `suggestionTypes` keeps only the types you choose.
 - Each row names its `suggestionType` & the text to search in `suggestion`.
 - A cashtag row carries `price`, `marketCap` & `dailyChangePercent`.
-- Profile filters apply to Profile Search only.
+- Profile filters apply only to `mode: "search"`.
 
 A suggestion row looks like this.
 
@@ -170,7 +170,7 @@ price.
 
 ## How much does it cost to search X users?
 
-Every Apify plan costs $0.00015 per delivered profile. A Search Autocomplete
+Every Apify plan costs $0.00015 per delivered profile. An autocomplete
 suggestion costs the same per delivered row. Apify bills your platform usage
 separately.
 
@@ -222,8 +222,8 @@ diagnostics. Pick the one that matches the data you need.
   rows. Use it when you need audience or member lists. From $0.00015 per
   profile.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
-  checks where accounts are based with X's Account based in label, connected via
-  & username changes. Use it when you vet where accounts are based. From
+  checks where accounts are based with X's "Account based in" label, "connected
+  via" & username changes. Use it when you vet where accounts are based. From
   $0.00015 per account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) gets the emails,
   phones & links accounts publish on their profiles, from handles, followers or

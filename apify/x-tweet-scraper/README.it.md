@@ -85,13 +85,13 @@ post & query di ricerca con oltre 50 filtri.
 | `contentDisclosure`    | Metadati di disclosure, quando disponibili                     |
 | `conversationControl`  | Regole di risposta e proprietario della conversazione pubblica |
 | `reactionContext`      | Post pubblico e utente a cui si riferisce una reazione         |
-| `subscriberBadge`      | Creator di cui una risposta mostra il badge Subscriber         |
+| `subscriberBadge`      | Creator a cui è abbonato l'autore della risposta               |
 | `limitedActions`       | Limiti e avvisi pubblici sulle interazioni                     |
 | `isLimitedReply`       | Se le risposte sono limitate                                   |
 | `isNoteTweet`          | Se è un Note Tweet (post lungo)                                |
 | `isQuoteStatus`        | Se questo post cita un altro post                              |
 | `isRetweet`            | Se la riga è un repost, con l'originale allegato               |
-| `isPinned`             | Se l'autore ha fissato questo post, nelle righe piatte         |
+| `isPinned`             | Se l'autore ha fissato questo post. Solo nelle righe piatte    |
 | `isReply`              | Se questo post è una risposta                                  |
 | `quoted_tweet`         | Oggetto del post citato (se è una citazione)                   |
 | `conversationId`       | ID del thread o della conversazione                            |
@@ -352,9 +352,9 @@ contiene `url`, `authorName`, `authorUrl`, `html` & `width`. `embedHideMedia`,
 `embedHideThread` & `embedOmitScript` escludono i media, il post a cui risponde
 o lo script del widget.
 
-Entrambe le modalità leggono ID dei post & URL dei post in `startUrls`. Ogni
-post dà 1 riga al prezzo abituale per riga. Un post che X non ha non produce
-righe & non costa nulla.
+Entrambe le modalità accettano ID dei post o URL dei post in `tweetIds`. Anche
+`startUrls` accetta URL dei post. Ogni post dà 1 riga al prezzo abituale per
+riga. Un post che X non ha non produce righe & non costa nulla.
 
 ### Ottieni i migliori post su X
 
@@ -374,7 +374,7 @@ metrica, come li mostra la pagina Inspiration di X.
 `topMetric` vale `likes`, `replies`, `quotes`, `bookmarks`, `shares` o `views`.
 Il valore predefinito è `likes`. `topWindow` vale `day`, `week` o `month`, & il
 valore predefinito è `day`. X elenca fino a 100 post per ogni scelta. Lascia
-vuoto `topCountry` per tutto X, oppure imposta `lang` per 1 lingua. Con entrambi
+vuoto `topCountry` per tutto X. Imposta `lang` per tenere 1 lingua. Con entrambi
 impostati, X sceglie il paese & l'Actor tiene la lingua. Ogni riga ha
 `engagementMode: "topTweets"` & costa 1 risultato, come qualsiasi post.
 

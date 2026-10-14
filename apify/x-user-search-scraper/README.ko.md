@@ -24,7 +24,7 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 - 오디언스, 게시물, 계정 연령, 인증, 웹사이트, 위치, 자기소개, 사용자 아이디 &
   이메일 필터.
 - 각 프로필이 공개한 이메일, 전화번호 & 링크를 담은 `email` & `contactInfo`.
-- Search Autocomplete 모드. X가 검색어마다 추천하는 계정, 주제, 해시태그 &
+- `mode: "autocomplete"`. X가 검색어마다 추천하는 계정, 주제, 해시태그 &
   캐시태그를 돌려줍니다.
 - `startCursor`에 저장된 커서로 쿼리 1개를 이어서 실행.
 - Apify가 실행을 다시 시작해도 전달된 행 & 진행 상황 유지.
@@ -103,7 +103,7 @@ Actor의 다음 필드 이름을 읽습니다. 각 줄은 그쪽 필드를 먼�
 - 각 행에는 `suggestionType` & 검색할 텍스트를 담은 `suggestion`이 들어
   있습니다.
 - 캐시태그 행에는 `price`, `marketCap` & `dailyChangePercent`가 들어 있습니다.
-- 프로필 필터는 Profile Search에만 적용됩니다.
+- 프로필 필터는 `mode: "search"`에만 적용됩니다.
 
 추천 행은 다음과 같습니다.
 
@@ -164,9 +164,8 @@ Actor의 다음 필드 이름을 읽습니다. 각 줄은 그쪽 필드를 먼�
 
 ## X 사용자 검색 비용은 얼마인가요?
 
-모든 Apify 요금제에서 전달된 프로필 1개당 $0.00015입니다. Search Autocomplete
-추천도 전달된 행 1개당 같은 요금입니다. Apify 플랫폼 사용료는 Apify가 따로
-청구합니다.
+모든 Apify 요금제에서 전달된 프로필 1개당 $0.00015입니다. 자동 완성 추천도
+전달된 행 1개당 같은 요금입니다. Apify 플랫폼 사용료는 Apify가 따로 청구합니다.
 
 더 많이 수집하려면 선불 사용량이 더 많은
 [Apify 요금제를 고르세요](https://apify.com/pricing?fpr=xquik).

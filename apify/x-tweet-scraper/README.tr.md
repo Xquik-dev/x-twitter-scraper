@@ -57,52 +57,52 @@ kabul eder.
 
 ### X Tweet Scraper hangi verileri çıkarabilir?
 
-| Alan                   | Açıklama                                                      |
-| ---------------------- | ------------------------------------------------------------- |
-| `id`                   | Gönderi ID'si                                                 |
-| `text`                 | Tam metin, 25 bin karaktere kadar Note Tweet'ler dahil        |
-| `createdAt`            | X'in kendi zaman damgası metni                                |
-| `likeCount`            | Beğeni sayısı                                                 |
-| `retweetCount`         | Yeniden gönderi sayısı                                        |
-| `replyCount`           | Yanıt sayısı                                                  |
-| `quoteCount`           | Alıntı sayısı                                                 |
-| `viewCount`            | Görüntülenme sayısı                                           |
-| `bookmarkCount`        | Yer işareti sayısı                                            |
-| `lang`                 | Gönderi dili                                                  |
-| `url`                  | Gönderinin doğrudan bağlantısı                                |
-| `tweetUrl`             | Düz çıktıdaki gönderi URL'si takma adı                        |
-| `twitterUrl`           | Düz çıktıdaki `twitter.com` URL'si                            |
-| `author`               | Yazarın kullanıcı adı, biyografisi, web sitesi & sayıları     |
-| `authorUsername`       | Düz çıktıdaki yazar kullanıcı adı                             |
-| `authorFollowers`      | Düz çıktıdaki yazar takipçi sayısı                            |
-| `authorUrl`            | Varsa düz çıktıdaki yazar web sitesi                          |
-| `authorDescription`    | Düz çıktıdaki yazar biyografisi metni                         |
-| `authorCoverPicture`   | Düz çıktıdaki yazar kapak görseli URL'si                      |
-| `authorPinnedTweetIds` | Düz çıktıdaki yazarın sabitlenmiş gönderi ID'leri             |
-| `media`                | Ekli görseller, videolar, GIF'ler                             |
-| `mediaUrls`            | Düz çıktıdaki medya URL'leri                                  |
-| `imageUrls`            | Düz çıktıdaki görsel URL'leri                                 |
-| `videoUrls`            | Düz çıktıdaki video URL'leri                                  |
-| `entities`             | Hashtag'ler, URL'ler, bahsetmeler ve video zaman damgaları    |
-| `displayTextRange`     | Varsa X'in görünen metin aralığı                              |
-| `contentDisclosure`    | Varsa içerik beyanı metadata'sı                               |
-| `conversationControl`  | Yanıt kuralı ve herkese açık konuşma sahibi                   |
-| `reactionContext`      | Bir tepkinin işaret ettiği herkese açık gönderi ve kullanıcı  |
-| `subscriberBadge`      | Yanıttaki Abone rozetinin ait olduğu içerik üreticisi         |
-| `limitedActions`       | Herkese açık etkileşim kısıtlamaları ve uyarıları             |
-| `isLimitedReply`       | Yanıtların kısıtlı olup olmadığı                              |
-| `isNoteTweet`          | Bunun bir Note Tweet (uzun gönderi) olup olmadığı             |
-| `isQuoteStatus`        | Bu gönderinin başka bir gönderiyi alıntılayıp alıntılamadığı  |
-| `isRetweet`            | Bu satırın yeniden gönderi olup olmadığı, orijinali ekli      |
-| `isPinned`             | Yazarın bu gönderiyi sabitleyip sabitlemediği, düz satırlarda |
-| `isReply`              | Bu gönderinin bir yanıt olup olmadığı                         |
-| `quoted_tweet`         | Alıntılanan gönderi nesnesi (alıntıysa)                       |
-| `conversationId`       | Gönderi dizisi/konuşma ID'si                                  |
-| `resultType`           | Zengin, etkileşim & tanılama satırları için satır türü        |
-| `sourceTweetId`        | Makale ve etkileşim modları için kaynak gönderi ID'si         |
-| `article`              | `mode: "article"` içinde yapılandırılmış makale verisi        |
-| `translation`          | `mode: "translation"` içinde X'in çevirisi                    |
-| `embed`                | `mode: "embed"` içinde gömme HTML'i & bağlantı                |
+| Alan                   | Açıklama                                                               |
+| ---------------------- | ---------------------------------------------------------------------- |
+| `id`                   | Gönderi ID'si                                                          |
+| `text`                 | Tam metin, 25 bin karaktere kadar Note Tweet'ler dahil                 |
+| `createdAt`            | X'in kendi zaman damgası metni                                         |
+| `likeCount`            | Beğeni sayısı                                                          |
+| `retweetCount`         | Yeniden gönderi sayısı                                                 |
+| `replyCount`           | Yanıt sayısı                                                           |
+| `quoteCount`           | Alıntı sayısı                                                          |
+| `viewCount`            | Görüntülenme sayısı                                                    |
+| `bookmarkCount`        | Yer işareti sayısı                                                     |
+| `lang`                 | Gönderi dili                                                           |
+| `url`                  | Gönderinin doğrudan bağlantısı                                         |
+| `tweetUrl`             | Düz çıktıdaki gönderi URL'si takma adı                                 |
+| `twitterUrl`           | Düz çıktıdaki `twitter.com` URL'si                                     |
+| `author`               | Yazarın kullanıcı adı, biyografisi, web sitesi & sayıları              |
+| `authorUsername`       | Düz çıktıdaki yazar kullanıcı adı                                      |
+| `authorFollowers`      | Düz çıktıdaki yazar takipçi sayısı                                     |
+| `authorUrl`            | Varsa düz çıktıdaki yazar web sitesi                                   |
+| `authorDescription`    | Düz çıktıdaki yazar biyografisi metni                                  |
+| `authorCoverPicture`   | Düz çıktıdaki yazar kapak görseli URL'si                               |
+| `authorPinnedTweetIds` | Düz çıktıdaki yazarın sabitlenmiş gönderi ID'leri                      |
+| `media`                | Ekli görseller, videolar, GIF'ler                                      |
+| `mediaUrls`            | Düz çıktıdaki medya URL'leri                                           |
+| `imageUrls`            | Düz çıktıdaki görsel URL'leri                                          |
+| `videoUrls`            | Düz çıktıdaki video URL'leri                                           |
+| `entities`             | Hashtag'ler, URL'ler, bahsetmeler ve video zaman damgaları             |
+| `displayTextRange`     | Varsa X'in görünen metin aralığı                                       |
+| `contentDisclosure`    | Varsa içerik beyanı metadata'sı                                        |
+| `conversationControl`  | Yanıt kuralı ve herkese açık konuşma sahibi                            |
+| `reactionContext`      | Bir tepkinin işaret ettiği herkese açık gönderi ve kullanıcı           |
+| `subscriberBadge`      | Yanıtın yazarının abone olduğu içerik üreticisi                        |
+| `limitedActions`       | Herkese açık etkileşim kısıtlamaları ve uyarıları                      |
+| `isLimitedReply`       | Yanıtların kısıtlı olup olmadığı                                       |
+| `isNoteTweet`          | Bunun bir Note Tweet (uzun gönderi) olup olmadığı                      |
+| `isQuoteStatus`        | Bu gönderinin başka bir gönderiyi alıntılayıp alıntılamadığı           |
+| `isRetweet`            | Bu satırın yeniden gönderi olup olmadığı, orijinali ekli               |
+| `isPinned`             | Yazarın bu gönderiyi sabitleyip sabitlemediği. Yalnızca düz satırlarda |
+| `isReply`              | Bu gönderinin bir yanıt olup olmadığı                                  |
+| `quoted_tweet`         | Alıntılanan gönderi nesnesi (alıntıysa)                                |
+| `conversationId`       | Gönderi dizisi/konuşma ID'si                                           |
+| `resultType`           | Zengin, etkileşim & tanılama satırları için satır türü                 |
+| `sourceTweetId`        | Makale ve etkileşim modları için kaynak gönderi ID'si                  |
+| `article`              | `mode: "article"` içinde yapılandırılmış makale verisi                 |
+| `translation`          | `mode: "translation"` içinde X'in çevirisi                             |
+| `embed`                | `mode: "embed"` içinde gömme HTML'i & bağlantı                         |
 
 İsteğe bağlı gönderi metadata'sında `authorUnavailable`, `card`,
 `cashtagAttachments`, `communityId`, `communityName`, `communityNote`, `edit`,
@@ -353,9 +353,9 @@ Her satırda `resultType: "embed"`, `sourceTweetId` & `embed` bulunur. Bu nesne
 `embedHideThread` & `embedOmitScript` sırasıyla medyayı, üst gönderiyi veya
 widget betiğini dışarıda bırakır.
 
-İki mod da gönderi ID'lerini & `startUrls` içindeki gönderi URL'lerini okur. Her
-gönderi, normal satır fiyatıyla 1 satır verir. X'te olmayan bir gönderi satır
-vermez & ücretlendirilmez.
+İki mod da `tweetIds` içinde gönderi ID'lerini veya gönderi URL'lerini alır.
+`startUrls` da gönderi URL'lerini alır. Her gönderi, normal satır fiyatıyla 1
+satır verir. X'te olmayan bir gönderi satır vermez & ücretlendirilmez.
 
 ### X'teki en popüler gönderileri al
 
@@ -375,8 +375,8 @@ Inspiration sayfasında gösterdiği gibi döndürür.
 `topMetric` değeri `likes`, `replies`, `quotes`, `bookmarks`, `shares` veya
 `views` olur. Varsayılanı `likes`. `topWindow` değeri `day`, `week` veya `month`
 olur & varsayılanı `day`. X her seçim için en fazla 100 gönderi listeler. X'in
-tamamı için `topCountry` alanını boş bırak ya da 1 dil için `lang` ayarla. İkisi
-de ayarlıysa ülkeyi X seçer & dili Actor korur. Her satırda
+tamamı için `topCountry` alanını boş bırak. 1 dili tutmak için `lang` ayarla.
+İkisi de ayarlıysa ülkeyi X seçer & dili Actor korur. Her satırda
 `engagementMode: "topTweets"` bulunur & her gönderi gibi 1 sonuç ücreti tutar.
 
 ### Düz CSV satırları dışa aktar

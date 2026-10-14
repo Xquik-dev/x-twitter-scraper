@@ -736,10 +736,11 @@ la fois, comme les dates ou un seuil d'engagement. Notez le réglage que vous
 avez changé.
 
 Pour les analyses échouées, inspectez `analysis.reason` & relancez seulement les
-ID concernés. Pour des réponses incomplètes, inspectez le diagnostic gratuit
-avant de les considérer comme complètes. Les légendes de médias ne peuvent pas
-décrire tout ce que montre une image ou une vidéo. L'absence du contexte de
-citation ou de réponse peut rendre une réponse incertaine.
+ID concernés. Si les réponses d'un post semblent incomplètes, lisez la ligne de
+diagnostic gratuite. Elle indique quand X a montré moins de réponses qu'il n'en
+compte. Les légendes de médias ne peuvent pas décrire tout ce que montre une
+image ou une vidéo. L'absence du contexte de citation ou de réponse peut rendre
+une réponse incertaine.
 
 ## Actors Xquik associés
 

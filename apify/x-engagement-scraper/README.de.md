@@ -193,18 +193,18 @@ der du sie angegeben hast.
 ## Retweet-Zeitstempel
 
 Setze `includeRetweetTimestamp` auf `true` für Ergebnisse vom Typ `retweeters`.
-Die Spalte `retweetedAt` enthält den beobachteten Zeitpunkt des Reposts in UTC.
+Die Spalte `retweetedAt` enthält den beobachteten Zeitpunkt des Retweets in UTC.
 
-X Engagement Scraper von Xquik findet den Zeitpunkt des Reposts, solange X
-diesen Repost noch zeigt. Bei älteren, gelöschten oder nicht verfügbaren Reposts
-bleibt der Zeitstempel `null`. Das Profil bleibt in der Ausgabe. Ein `null`-Wert
-beweist nicht, dass ein Account einen Post nie repostet hat.
+X Engagement Scraper von Xquik findet den Zeitpunkt des Retweets, solange X
+diesen Retweet noch zeigt. Bei älteren, gelöschten oder nicht verfügbaren
+Retweets bleibt der Zeitstempel `null`. Das Profil bleibt in der Ausgabe. Ein
+`null`-Wert beweist nicht, dass ein Account einen Post nie retweetet hat.
 
 Diese Option macht Runs langsamer. Lass sie aus, wenn du nur Profile brauchst.
 `createdAt` im Profil bleibt das Erstellungsdatum des Accounts. Post-Datensätze
-enthalten `retweetedAt`, wenn sie ein Repost-Ereignis enthalten. Das
+enthalten `retweetedAt`, wenn sie ein Retweet-Ereignis enthalten. Das
 Originaldatum des Posts & die Scrape-Zeit ersetzen nie den Zeitpunkt des
-Reposts. Ergebnispreise & die Abrechnung pro geliefertem Datensatz bleiben
+Retweets. Ergebnispreise & die Abrechnung pro geliefertem Datensatz bleiben
 gleich.
 
 ## Was kostet es, Interaktionen mit X-Posts zu scrapen?

@@ -25,8 +25,8 @@ profil livré**, & Apify facture l'usage de la plateforme à part.
   de localisation, de bio, de nom d'utilisateur & d'e-mail.
 - `email` & `contactInfo`, avec les e-mails, téléphones & liens que chaque
   profil publie.
-- Le mode Search Autocomplete, avec les comptes, sujets, hashtags & cashtags que
-  X suggère pour chaque terme de recherche.
+- `mode: "autocomplete"`, avec les comptes, sujets, hashtags & cashtags que X
+  suggère pour chaque terme de recherche.
 - La reprise de 1 requête depuis un curseur enregistré dans `startCursor`.
 - Les runs gardent les lignes livrées & la progression quand Apify les
   redémarre.
@@ -106,7 +106,7 @@ hashtags & de cashtags.
 - Chaque ligne indique son `suggestionType` &, dans `suggestion`, le texte à
   rechercher.
 - Une ligne de cashtag porte `price`, `marketCap` & `dailyChangePercent`.
-- Les filtres de profil s'appliquent seulement à Profile Search.
+- Les filtres de profil s'appliquent seulement à `mode: "search"`.
 
 Une ligne de suggestion ressemble à ceci.
 
@@ -169,8 +169,8 @@ n'exécutent aucun code & ne changent pas le prix.
 ## Combien coûte la recherche de comptes X ?
 
 Sur chaque plan Apify, le prix est de $0.00015 par profil livré. Une suggestion
-Search Autocomplete coûte le même prix par ligne livrée. Apify facture votre
-usage de la plateforme à part.
+d'autocomplétion coûte le même prix par ligne livrée. Apify facture votre usage
+de la plateforme à part.
 
 Pour plus de volume,
 [choisissez un plan Apify](https://apify.com/pricing?fpr=xquik) avec plus

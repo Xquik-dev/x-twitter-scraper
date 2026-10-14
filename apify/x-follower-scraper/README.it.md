@@ -85,16 +85,17 @@ Imposta `outputMode: "raw"` o `includeRaw: true` per aggiungere un campo `raw`.
 Contiene una copia sicura del profilo di origine. La modalità compatta è quella
 predefinita.
 
-Imposta `outputMode: "full"` per avere il massimo dei dati per riga. Ogni riga
-conserva fino a 13 campi di elenco quando X li invia, come `listedCount`,
-`defaultProfileImage` & `advertiserAccountType`. Le righe full li mettono in
-fondo. Le righe compatte restano più piccole & costano meno da archiviare.
+Imposta `outputMode: "full"` per avere il massimo dei dati per riga. Le righe
+riportano anche fino a 13 campi di profilo extra che X invia negli elenchi di
+follower & following, come `listedCount`, `defaultProfileImage` &
+`advertiserAccountType`. Le righe full li mettono in fondo. Le righe compatte
+restano più piccole & costano meno da archiviare.
 
-`verifiedOnly` accetta i profili con verifica pubblica Blue & legacy. Se gli
-indicatori di origine sono in conflitto, vince lo stato di verifica vero.
-`blueVerifiedOnly` tiene i profili che X segna come verificati Blue. X segna
-come Blue anche molti account di aziende & enti pubblici. Imposta `verifiedType`
-per tenere 1 tipo di badge.
+`verifiedOnly` accetta i profili con verifica pubblica Blue & legacy. Un profilo
+conta come verificato quando uno qualsiasi degli indicatori di verifica di X lo
+dice. `blueVerifiedOnly` tiene i profili che X segna come verificati Blue. X
+segna come Blue anche molti account di aziende & enti pubblici. Imposta
+`verifiedType` per tenere 1 tipo di badge.
 
 Le righe non includono mai stati visibili solo a chi guarda. Xquik rimuove gli
 indicatori di chi guarda per follow, blocco, silenziamento, DM, notifiche &

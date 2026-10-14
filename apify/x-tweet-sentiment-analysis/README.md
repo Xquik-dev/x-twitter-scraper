@@ -573,7 +573,7 @@ other announcements.
 
 [A selected sneaker post](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-sneaker-drop-reactions)
 
-Analyze a known post without a broad keyword search. Observed 1 unique posts on
+Analyze a known post without a broad keyword search. Observed 1 unique post on
 2026-10-01. The cap was 1. This selected caption does not describe every detail
 of its image.
 
@@ -694,10 +694,11 @@ supply. If fewer posts qualify, check the run report before changing your
 filters. Widen 1 setting at a time, such as dates or an engagement floor. Keep a
 record of the setting you changed.
 
-For failed analyses, inspect `analysis.reason` & retry only the affected IDs.
-For incomplete replies, inspect the free diagnostic before calling them
-complete. Media captions cannot describe everything shown in an image or video.
-Missing quote or reply context can make an answer uncertain.
+For failed analyses, inspect `analysis.reason` & retry only the affected IDs. If
+a post's replies look incomplete, read the free diagnostic row. It says when X
+showed fewer replies than it counts. Media captions cannot describe everything
+shown in an image or video. Missing quote or reply context can make an answer
+uncertain.
 
 ## Related Xquik Actors
 
@@ -731,8 +732,8 @@ diagnostics. Pick the one that matches the data you need.
   location filters. Use it when you build account lists from search. From
   $0.00015 per profile.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
-  checks where accounts are based with X's Account based in label, connected via
-  & username changes. Use it when you vet where accounts are based. From
+  checks where accounts are based with X's "Account based in" label, "connected
+  via" & username changes. Use it when you vet where accounts are based. From
   $0.00015 per account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) gets the emails,
   phones & links accounts publish on their profiles, from handles, followers or

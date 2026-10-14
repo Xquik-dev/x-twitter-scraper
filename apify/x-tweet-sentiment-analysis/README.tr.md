@@ -707,9 +707,10 @@ Sonuçları incelerken `maxItems` değerini küçük tut. Sınır mevcut veriyi 
 seferinde 1 ayarı genişlet. Değiştirdiğin ayarın kaydını tut.
 
 Başarısız analizlerde `analysis.reason` alanını incele & yalnızca etkilenen
-ID'leri yeniden dene. Eksik yanıtlarda, onları tamam saymadan önce ücretsiz
-tanılamayı incele. Medya açıklamaları bir görselde veya videoda gösterilen her
-şeyi anlatamaz. Eksik alıntı veya yanıt bağlamı bir cevabı belirsiz yapabilir.
+ID'leri yeniden dene. Bir gönderinin yanıtları eksik görünüyorsa ücretsiz
+tanılama satırını oku. Bu satır, X'in saydığından az yanıt gösterdiği durumları
+söyler. Medya açıklamaları bir görselde veya videoda gösterilen her şeyi
+anlatamaz. Eksik alıntı veya yanıt bağlamı bir cevabı belirsiz yapabilir.
 
 ## İlgili Xquik Actor'ları
 

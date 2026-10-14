@@ -202,8 +202,8 @@ ist `null`, wenn ihr Divisor fehlt oder 0 ist.
 
 2 Grenzen kommen von X & X Quote Tweets Scraper von Xquik nennt sie offen.
 
-- Die X-Suche bestimmt, wie weit die Zitate eines sehr großen Posts
-  zurückreichen. Ein Run liest jedes Zitat, das X bereitstellt, & stoppt dort.
+- Bei einem Post mit vielen Zitaten kann die X-Suche vor den ältesten stoppen.
+  Ein Run liest jedes Zitat, das X bereitstellt, & stoppt dort.
 - `top` ist das Ranking von X, nicht das von Xquik. Es ist keine Reihenfolge
   nach Gefällt-mir-Angaben. Ein späterer Datensatz kann mehr Gefällt-mir-Angaben
   haben als ein früherer.
@@ -349,11 +349,11 @@ sagt in jedem Datensatz, welchen Post er zitiert.
 Ein Run kann 100.000 Datensätze & mehr liefern. Erhöhe `maxItems` für einen
 vollständigen Export über die 1.000, mit denen das Formular startet.
 
-### Warum liefert ein sehr großer Post weniger Zitate, als sein Zähler zeigt?
+### Warum liefert ein Post mit vielen Zitaten weniger, als sein Zähler zeigt?
 
-Die X-Suche bestimmt, wie weit die Zitate eines sehr großen Posts zurückreichen.
-Der Run liefert jedes Zitat, das X bereitstellt. Der Zähler enthält auch Zitate
-von privaten oder entfernten Accounts.
+Bei einem Post mit vielen Zitaten kann die X-Suche vor den ältesten stoppen. Der
+Run liefert jedes Zitat, das X bereitstellt. Der Zähler enthält auch Zitate von
+privaten oder entfernten Accounts.
 
 ### Wie bekomme ich 1 Datensatz pro Person, die einen Post zitiert hat?
 

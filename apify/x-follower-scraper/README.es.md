@@ -89,16 +89,18 @@ Este campo guarda una copia segura del perfil de origen. El modo compacto es el
 predeterminado.
 
 Define `outputMode: "full"` para obtener la mayor cantidad de datos por fila.
-Cada fila conserva hasta 13 campos de lista cuando X los envía, como
-`listedCount`, `defaultProfileImage` & `advertiserAccountType`. Las filas full
-los ponen al final. Las filas compactas siguen siendo más pequeñas & cuesta
-menos almacenarlas.
+Las filas también traen hasta 13 campos de perfil adicionales que X envía en las
+listas de seguidores & de cuentas seguidas, como `listedCount`,
+`defaultProfileImage` & `advertiserAccountType`. Las filas full los ponen al
+final. Las filas compactas siguen siendo más pequeñas & cuesta menos
+almacenarlas.
 
 `verifiedOnly` acepta perfiles públicos con verificación Blue & con verificación
-antigua. Si las marcas del origen se contradicen, gana el estado verificado.
-`blueVerifiedOnly` conserva los perfiles que X marca como verificados con Blue.
-X también marca con Blue muchas cuentas de empresas & de gobiernos. Define
-`verifiedType` para conservar 1 tipo de insignia.
+antigua. Un perfil cuenta como verificado cuando cualquiera de las marcas de
+verificación de X lo indica. `blueVerifiedOnly` conserva los perfiles que X
+marca como verificados con Blue. X también marca con Blue muchas cuentas de
+empresas & de gobiernos. Define `verifiedType` para conservar 1 tipo de
+insignia.
 
 Las filas nunca incluyen estados que solo ve el espectador. Xquik quita las
 marcas de seguimiento, bloqueo, silencio, mensajes directos, notificaciones &

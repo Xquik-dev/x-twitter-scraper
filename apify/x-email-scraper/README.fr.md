@@ -381,9 +381,9 @@ que l'adresse reçoit des messages.
 ### Pourquoi un scan d'abonnés a-t-il livré peu de lignes ?
 
 Environ 1 abonné sur 400 publie un e-mail. Le statut du run indique combien de
-lignes ont été lues pour une liste. Montez `maxScan` pour lire plus loin dans
-une liste, ou utilisez `searchTerms` avec des mots comme booking, qui gardent
-bien plus de lignes.
+lignes le run a lues. Montez `maxScan` pour lire plus loin dans une liste, ou
+utilisez `searchTerms` avec des mots comme booking, qui gardent bien plus de
+lignes.
 
 ### Combien de profils puis-je vérifier en 1 run ?
 

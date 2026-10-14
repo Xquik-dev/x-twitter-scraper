@@ -127,10 +127,10 @@ plateforme. Revenez ensuite ici & cliquez sur Try for free.
 2. Réglez `maxItems`, `scope` & les filtres utiles à votre besoin.
 3. Lancez X Reply Scraper de Xquik & ouvrez le dataset.
 
-Le formulaire prérempli cible une conversation publique vérifiée. Il renvoie
-jusqu'à 1 000 lignes complètes et plates. Le mode auto cherche dans toute la
-conversation par défaut. La déduplication & l'attribution de la source restent
-activées.
+Le formulaire est prérempli avec une conversation publique que nous avons
+testée. Il renvoie jusqu'à 1 000 lignes complètes et plates. Le mode auto
+cherche dans toute la conversation par défaut. La déduplication & l'attribution
+de la source restent activées.
 
 ### Scraper les réponses d'une URL de post
 

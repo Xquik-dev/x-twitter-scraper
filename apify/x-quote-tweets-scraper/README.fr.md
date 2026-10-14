@@ -198,8 +198,9 @@ Nommez une colonne calculée dans `fields` ou `renameFields` pour l'ajouter.
 2 limites viennent de X, & X Quote Tweets Scraper de Xquik les énonce
 clairement.
 
-- La recherche de X décide jusqu'où remontent les citations d'un très gros post.
-  Un run lit toutes les citations que X fournit & s'arrête là.
+- Sur un post avec beaucoup de citations, la recherche de X peut s'arrêter avant
+  les plus anciennes. Un run lit toutes les citations que X fournit & s'arrête
+  là.
 - `top` est le classement de X, pas celui de Xquik. Ce n'est pas un tri par
   nombre de J'aime. Une ligne suivante peut avoir plus de J'aime qu'une ligne
   précédente.
@@ -353,11 +354,11 @@ Oui. Collez autant d'URL de post ou d'ID de post que nécessaire. Le
 Un run peut renvoyer 100 000 lignes & plus. Pour un export complet, montez
 `maxItems` au-dessus des 1 000 que le formulaire propose au départ.
 
-### Pourquoi un très gros post renvoie-t-il moins de citations que son compteur n'en affiche ?
+### Pourquoi un post avec beaucoup de citations en renvoie-t-il moins que son compteur n'en affiche ?
 
-La recherche de X décide jusqu'où remontent les citations d'un très gros post.
-Le run livre toutes les citations que X fournit. Le compteur inclut aussi les
-citations de comptes privés ou supprimés.
+Sur un post avec beaucoup de citations, la recherche de X peut s'arrêter avant
+les plus anciennes. Le run livre toutes les citations que X fournit. Le compteur
+inclut aussi les citations de comptes privés ou supprimés.
 
 ### Comment obtenir 1 ligne par personne qui a cité un post ?
 

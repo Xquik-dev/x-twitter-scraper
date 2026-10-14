@@ -121,7 +121,7 @@ della piattaforma. Poi torna qui & premi Try for free.
 2. Imposta `maxItems`, `scope` & i filtri che servono al tuo lavoro.
 3. Avvia X Reply Scraper di Xquik & apri il dataset.
 
-Il modulo precompilato punta a una conversazione pubblica verificata.
+Il modulo arriva compilato con una conversazione pubblica che abbiamo testato.
 Restituisce fino a 1.000 righe complete e piatte. Di default, la modalità auto
 cerca nell'intera conversazione. Deduplicazione & attribuzione dell'origine
 restano attive.

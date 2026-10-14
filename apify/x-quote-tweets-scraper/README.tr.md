@@ -204,8 +204,8 @@ eksik veya 0 olan bir oran `null` olur.
 
 2 sınır X'ten gelir & Xquik'in X Quote Tweets Scraper'ı bunları açıkça söyler.
 
-- Çok büyük bir gönderinin alıntılarının ne kadar geriye gittiğini X araması
-  belirler. Çalıştırma, X'in sunduğu her alıntıyı okur & orada durur.
+- Çok alıntı alan bir gönderide X araması en eski alıntılardan önce durabilir.
+  Çalıştırma, X'in sunduğu her alıntıyı okur & orada durur.
 - `top`, Xquik'in değil X'in sıralamasıdır. Beğeni sayısına göre bir sıralama
   değildir. Sonraki bir satırın beğenisi önceki bir satırınkinden fazla
   olabilir.
@@ -356,11 +356,11 @@ Evet. İhtiyacın kadar gönderi URL'si veya gönderi ID'si yapıştır. Her sat
 Bir çalıştırma 100.000 satır & daha fazlasını döndürebilir. Tam bir dışa aktarım
 için `maxItems` değerini formun başladığı 1.000'in üzerine çıkar.
 
-### Dev bir gönderi neden sayacının gösterdiğinden az alıntı döndürür?
+### Çok alıntı alan bir gönderi neden sayacının gösterdiğinden az alıntı döndürür?
 
-Çok büyük bir gönderinin alıntılarının ne kadar geriye gittiğini X araması
-belirler. Çalıştırma, X'in sunduğu her alıntıyı teslim eder. Sayaç, gizli veya
-kaldırılmış hesapların alıntılarını da içerir.
+Çok alıntı alan bir gönderide X araması en eski alıntılardan önce durabilir.
+Çalıştırma, X'in sunduğu her alıntıyı teslim eder. Sayaç, gizli veya kaldırılmış
+hesapların alıntılarını da içerir.
 
 ### Bir gönderiyi alıntılayan her kişi için nasıl 1 satır alırım?
 

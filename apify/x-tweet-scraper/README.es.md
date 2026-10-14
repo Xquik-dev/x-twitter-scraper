@@ -86,13 +86,13 @@ IDs de Listas, IDs de posts & consultas de búsqueda con más de 50 filtros.
 | `contentDisclosure`    | Metadatos de divulgación, si existen                              |
 | `conversationControl`  | Política de respuestas y dueño público de la conversación         |
 | `reactionContext`      | Post y usuario públicos a los que hace referencia una reacción    |
-| `subscriberBadge`      | Creador cuya insignia de Suscriptor muestra una respuesta         |
+| `subscriberBadge`      | Creador al que está suscrito el autor de la respuesta             |
 | `limitedActions`       | Restricciones y avisos públicos de interacción                    |
 | `isLimitedReply`       | Si las respuestas están limitadas                                 |
 | `isNoteTweet`          | Si es un Note Tweet (post de formato largo)                       |
 | `isQuoteStatus`        | Si este post cita otro post                                       |
 | `isRetweet`            | Si esta fila es un repost, con el original adjunto                |
-| `isPinned`             | Si el autor fijó este post, en filas planas                       |
+| `isPinned`             | Si el autor fijó este post. Solo en filas planas                  |
 | `isReply`              | Si este post es una respuesta                                     |
 | `quoted_tweet`         | Objeto del post citado (si es una cita)                           |
 | `conversationId`       | ID del hilo o de la conversación                                  |
@@ -356,9 +356,9 @@ contiene `url`, `authorName`, `authorUrl`, `html` & `width`. `embedHideMedia`,
 `embedHideThread` & `embedOmitScript` dejan fuera el contenido multimedia, el
 post al que responde o el script del widget.
 
-Ambos modos leen IDs de posts & URLs de posts en `startUrls`. Cada post da 1
-fila al precio habitual por fila. Un post que X no tiene no da ninguna fila ni
-genera cobro.
+Ambos modos aceptan IDs de posts o URLs de posts en `tweetIds`. `startUrls`
+también acepta URLs de posts. Cada post da 1 fila al precio habitual por fila.
+Un post que X no tiene no da ninguna fila ni genera cobro.
 
 ### Obtén los posts más destacados de X
 
@@ -378,7 +378,7 @@ tal como los muestra la página Inspiration de X.
 `topMetric` es `likes`, `replies`, `quotes`, `bookmarks`, `shares` o `views`. El
 valor predeterminado es `likes`. `topWindow` es `day`, `week` o `month`, & su
 valor predeterminado es `day`. X enumera hasta 100 posts para cada opción. Deja
-`topCountry` vacío para todo X, o define `lang` para 1 idioma. Con ambos
+`topCountry` vacío para todo X. Define `lang` para conservar 1 idioma. Con ambos
 definidos, X elige el país & el Actor conserva el idioma. Cada fila tiene
 `engagementMode: "topTweets"` & cuesta 1 resultado, como cualquier post.
 

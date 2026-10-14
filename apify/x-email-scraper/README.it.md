@@ -373,7 +373,7 @@ verifica che l'indirizzo riceva posta.
 ### Perché una scansione dei follower ha consegnato poche righe?
 
 Circa 1 follower su 400 pubblica un'email. Lo stato dell'esecuzione dice quante
-righe ha letto di un elenco. Alza `maxScan` per leggere più a fondo un elenco,
+righe ha letto l'esecuzione. Alza `maxScan` per leggere più a fondo un elenco,
 oppure usa `searchTerms` con parole come booking, che tengono molte più righe.
 
 ### Quanti profili posso controllare in 1 esecuzione?

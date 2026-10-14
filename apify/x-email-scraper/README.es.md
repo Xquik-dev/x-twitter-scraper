@@ -381,9 +381,9 @@ dirección reciba correo.
 ### ¿Por qué un escaneo de seguidores entregó pocas filas?
 
 Cerca de 1 de cada 400 seguidores publica un correo. El estado de la ejecución
-dice cuántas filas se leyeron de una lista. Sube `maxScan` para leer más
-perfiles de una lista, o usa `searchTerms` con palabras como booking, que
-conservan muchas más filas.
+dice cuántas filas leyó la ejecución. Sube `maxScan` para leer más perfiles de
+una lista, o usa `searchTerms` con palabras como booking, que conservan muchas
+más filas.
 
 ### ¿Cuántos perfiles puedo consultar en 1 ejecución?
 

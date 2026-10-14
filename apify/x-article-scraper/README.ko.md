@@ -279,9 +279,8 @@ X가 공개한 아티클만 반환합니다.
 cURL 예시가 있습니다. Apify
 [스케줄](https://docs.apify.com/platform/schedules)로 Xquik의 X Article
 Scraper를 cron 일정에 맞춰 실행할 수 있습니다. 에이전트는
-[Apify MCP](https://docs.apify.com/platform/integrations/mcp)를 사용합니다.
-Xquik REST API로 아티클을 1개씩 읽을 수도 있습니다. 이전 빌드가 꼭 필요하지
-않다면 `latest`를 사용하세요.
+[Apify MCP](https://docs.apify.com/platform/integrations/mcp)를 사용합니다. 이전
+빌드가 꼭 필요하지 않다면 `latest`를 사용하세요.
 
 ### 도움은 어디서 받을 수 있나요?
 

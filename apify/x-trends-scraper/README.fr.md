@@ -37,7 +37,8 @@ de connexion.
 - Le rang, le sujet, la requête, le volume de posts, l'URL de recherche, le
   WOEID & le lieu source.
 - Le lieu indiqué sur chaque ligne.
-- Des libellés pour les lignes de hashtag & pour le volume de posts disponible.
+- Des indicateurs qui marquent les lignes de hashtag & les lignes qui ont un
+  volume de posts.
 - La suppression des doublons entre entrées équivalentes, avant la facturation.
 - Des exports JSON, CSV, Excel, XML & RSS via les datasets Apify.
 - Les runs reprennent depuis un état enregistré après une migration Apify.

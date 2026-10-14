@@ -63,52 +63,52 @@ with 50+ filters.
 
 ### What data can X Tweet Scraper extract?
 
-| Field                  | Description                                      |
-| ---------------------- | ------------------------------------------------ |
-| `id`                   | Tweet ID                                         |
-| `text`                 | Full text, including Note Tweets up to 25k chars |
-| `createdAt`            | X native timestamp string                        |
-| `likeCount`            | Number of likes                                  |
-| `retweetCount`         | Number of retweets                               |
-| `replyCount`           | Number of replies                                |
-| `quoteCount`           | Number of quote tweets                           |
-| `viewCount`            | Number of views                                  |
-| `bookmarkCount`        | Number of bookmarks                              |
-| `lang`                 | Tweet language                                   |
-| `url`                  | Direct link to tweet                             |
-| `tweetUrl`             | Flat output tweet URL alias                      |
-| `twitterUrl`           | Flat output `twitter.com` URL                    |
-| `author`               | Author username, bio, website & counts           |
-| `authorUsername`       | Flat output author handle                        |
-| `authorFollowers`      | Flat output author follower count                |
-| `authorUrl`            | Flat output author website when available        |
-| `authorDescription`    | Flat output author bio text                      |
-| `authorCoverPicture`   | Flat output author banner image URL              |
-| `authorPinnedTweetIds` | Flat output author pinned tweet IDs              |
-| `media`                | Attached images, videos, GIFs                    |
-| `mediaUrls`            | Flat output media URLs                           |
-| `imageUrls`            | Flat output image URLs                           |
-| `videoUrls`            | Flat output video URLs                           |
-| `entities`             | Hashtags, URLs, mentions, and video timestamps   |
-| `displayTextRange`     | X display text range when available              |
-| `contentDisclosure`    | Disclosure metadata when available               |
-| `conversationControl`  | Reply policy and public conversation owner       |
-| `reactionContext`      | Public post and user referenced by a reaction    |
-| `subscriberBadge`      | Creator whose Subscriber badge a reply shows     |
-| `limitedActions`       | Public interaction restrictions and prompts      |
-| `isLimitedReply`       | Whether replies are limited                      |
-| `isNoteTweet`          | Whether this is a Note Tweet (long-form post)    |
-| `isQuoteStatus`        | Whether this tweet quotes another tweet          |
-| `isRetweet`            | Whether this row is a retweet, original attached |
-| `isPinned`             | Whether the author pinned this post, flat rows   |
-| `isReply`              | Whether this tweet is a reply                    |
-| `quoted_tweet`         | Quoted tweet object (if quote tweet)             |
-| `conversationId`       | Thread/conversation ID                           |
-| `resultType`           | Row type for rich, engagement & diagnostic rows  |
-| `sourceTweetId`        | Source tweet ID for article and engagement modes |
-| `article`              | Structured article data in `mode: "article"`     |
-| `translation`          | X's translation in `mode: "translation"`         |
-| `embed`                | Embed HTML & link in `mode: "embed"`             |
+| Field                  | Description                                            |
+| ---------------------- | ------------------------------------------------------ |
+| `id`                   | Tweet ID                                               |
+| `text`                 | Full text, including Note Tweets up to 25k chars       |
+| `createdAt`            | X native timestamp string                              |
+| `likeCount`            | Number of likes                                        |
+| `retweetCount`         | Number of retweets                                     |
+| `replyCount`           | Number of replies                                      |
+| `quoteCount`           | Number of quote tweets                                 |
+| `viewCount`            | Number of views                                        |
+| `bookmarkCount`        | Number of bookmarks                                    |
+| `lang`                 | Tweet language                                         |
+| `url`                  | Direct link to tweet                                   |
+| `tweetUrl`             | Flat output tweet URL alias                            |
+| `twitterUrl`           | Flat output `twitter.com` URL                          |
+| `author`               | Author username, bio, website & counts                 |
+| `authorUsername`       | Flat output author handle                              |
+| `authorFollowers`      | Flat output author follower count                      |
+| `authorUrl`            | Flat output author website when available              |
+| `authorDescription`    | Flat output author bio text                            |
+| `authorCoverPicture`   | Flat output author banner image URL                    |
+| `authorPinnedTweetIds` | Flat output author pinned tweet IDs                    |
+| `media`                | Attached images, videos, GIFs                          |
+| `mediaUrls`            | Flat output media URLs                                 |
+| `imageUrls`            | Flat output image URLs                                 |
+| `videoUrls`            | Flat output video URLs                                 |
+| `entities`             | Hashtags, URLs, mentions, and video timestamps         |
+| `displayTextRange`     | X display text range when available                    |
+| `contentDisclosure`    | Disclosure metadata when available                     |
+| `conversationControl`  | Reply policy and public conversation owner             |
+| `reactionContext`      | Public post and user referenced by a reaction          |
+| `subscriberBadge`      | The creator the reply's author subscribes to           |
+| `limitedActions`       | Public interaction restrictions and prompts            |
+| `isLimitedReply`       | Whether replies are limited                            |
+| `isNoteTweet`          | Whether this is a Note Tweet (long-form post)          |
+| `isQuoteStatus`        | Whether this tweet quotes another tweet                |
+| `isRetweet`            | Whether this row is a retweet, original attached       |
+| `isPinned`             | Whether the author pinned this post. Only in flat rows |
+| `isReply`              | Whether this tweet is a reply                          |
+| `quoted_tweet`         | Quoted tweet object (if quote tweet)                   |
+| `conversationId`       | Thread/conversation ID                                 |
+| `resultType`           | Row type for rich, engagement & diagnostic rows        |
+| `sourceTweetId`        | Source tweet ID for article and engagement modes       |
+| `article`              | Structured article data in `mode: "article"`           |
+| `translation`          | X's translation in `mode: "translation"`               |
+| `embed`                | Embed HTML & link in `mode: "embed"`                   |
 
 Optional tweet metadata includes `authorUnavailable`, `card`,
 `cashtagAttachments`, `communityId`, `communityName`, `communityNote`, `edit`,
@@ -344,8 +344,9 @@ Each row has `resultType: "embed"`, `sourceTweetId` & `embed`. That object holds
 `embedHideThread` & `embedOmitScript` leave media, the parent tweet or the
 widget script out.
 
-Both modes read tweet IDs & tweet URLs in `startUrls`. Each tweet gives 1 row at
-the usual row price. A tweet X does not have gives no row & no charge.
+Both modes take tweet IDs or tweet URLs in `tweetIds`. `startUrls` takes tweet
+URLs too. Each tweet gives 1 row at the usual row price. A tweet X does not have
+gives no row & no charge.
 
 ### Get the top tweets on X
 
@@ -365,9 +366,9 @@ Inspiration page shows them.
 `topMetric` is `likes`, `replies`, `quotes`, `bookmarks`, `shares` or `views`.
 It defaults to `likes`. `topWindow` is `day`, `week` or `month`, & defaults to
 `day`. X lists up to 100 tweets for each choice. Leave `topCountry` empty for
-all of X, or set `lang` for 1 language. With both set, X picks the country & the
-Actor keeps the language. Each row has `engagementMode: "topTweets"` & costs 1
-result, like any tweet.
+all of X. Set `lang` to keep 1 language. With both set, X picks the country &
+the Actor keeps the language. Each row has `engagementMode: "topTweets"` & costs
+1 result, like any tweet.
 
 ### Export flat CSV rows
 
@@ -988,8 +989,8 @@ diagnostics. Pick the one that matches the data you need.
   location filters. Use it when you build account lists from search. From
   $0.00015 per profile.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
-  checks where accounts are based with X's Account based in label, connected via
-  & username changes. Use it when you vet where accounts are based. From
+  checks where accounts are based with X's "Account based in" label, "connected
+  via" & username changes. Use it when you vet where accounts are based. From
   $0.00015 per account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) gets the emails,
   phones & links accounts publish on their profiles, from handles, followers or

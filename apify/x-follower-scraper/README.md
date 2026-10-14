@@ -91,15 +91,15 @@ entities & pinned tweet IDs remain available. See OpenAPI for the exact fields.
 Set `outputMode: "raw"` or `includeRaw: true` to add a `raw` field. It holds a
 safe copy of the source profile. Compact mode is the default.
 
-Set `outputMode: "full"` for the most data per row. Every row keeps up to 13
-list fields when X sends them, such as `listedCount`, `defaultProfileImage` &
-`advertiserAccountType`. Full rows put them at the end. Compact rows stay
-smaller & cost less to store.
+Set `outputMode: "full"` for the most data per row. Rows also carry up to 13
+extra profile fields that X sends in follower & following lists, such as
+`listedCount`, `defaultProfileImage` & `advertiserAccountType`. Full rows put
+them at the end. Compact rows stay smaller & cost less to store.
 
-`verifiedOnly` accepts public Blue & legacy verified profiles. If source flags
-conflict, the true verification state wins. `blueVerifiedOnly` keeps the
-profiles X marks as blue verified. X marks many business & government accounts
-blue too. Set `verifiedType` to keep 1 badge type.
+`verifiedOnly` accepts public Blue & legacy verified profiles. A profile counts
+as verified when any of X's verification flags says so. `blueVerifiedOnly` keeps
+the profiles X marks as blue verified. X marks many business & government
+accounts blue too. Set `verifiedType` to keep 1 badge type.
 
 Rows never include viewer-only state. Xquik removes follow, block, mute, DM,
 notification & similar viewer flags. Raw output drops them too.
@@ -719,8 +719,8 @@ diagnostics. Pick the one that matches the data you need.
   location filters. Use it when you build account lists from search. From
   $0.00015 per profile.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
-  checks where accounts are based with X's Account based in label, connected via
-  & username changes. Use it when you vet where accounts are based. From
+  checks where accounts are based with X's "Account based in" label, "connected
+  via" & username changes. Use it when you vet where accounts are based. From
   $0.00015 per account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) gets the emails,
   phones & links accounts publish on their profiles, from handles, followers or

@@ -171,7 +171,7 @@ Xquik 的 X Article Scraper 请求的是公开的 X 字段。结果可能包含�
 
 ### 可以使用 API、定时调度&集成吗？
 
-可以。你可以从 50 个公开任务或 Xquik REST API 中选择。[API 标签页](https://apify.com/xquik/x-article-scraper/api) 提供 Python、JavaScript & cURL 示例。Apify [定时调度](https://docs.apify.com/platform/schedules) 可以按 cron 运行 Xquik 的 X Article Scraper。Agent 使用 [Apify MCP](https://docs.apify.com/platform/integrations/mcp)。Xquik 的 REST API 也能读取单篇文章。除非需要旧版构建，否则请使用 `latest`。
+可以。你可以从 50 个公开任务或 Xquik REST API 中选择。[API 标签页](https://apify.com/xquik/x-article-scraper/api) 提供 Python、JavaScript & cURL 示例。Apify [定时调度](https://docs.apify.com/platform/schedules) 可以按 cron 运行 Xquik 的 X Article Scraper。Agent 使用 [Apify MCP](https://docs.apify.com/platform/integrations/mcp)。除非需要旧版构建，否则请使用 `latest`。
 
 ### 在哪里获取帮助？
 

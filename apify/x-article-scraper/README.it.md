@@ -295,9 +295,8 @@ Sì. Scegli tra 50 task pubblici o l'API REST di Xquik. La
 JavaScript & cURL. Le
 [pianificazioni](https://docs.apify.com/platform/schedules) di Apify avviano X
 Article Scraper di Xquik con un cron. Gli agenti usano
-[Apify MCP](https://docs.apify.com/platform/integrations/mcp). L'API REST di
-Xquik legge anche i singoli articoli. Usa `latest`, a meno che non ti serva una
-build precedente.
+[Apify MCP](https://docs.apify.com/platform/integrations/mcp). Usa `latest`, a
+meno che non ti serva una build precedente.
 
 ### Dove trovo assistenza?
 

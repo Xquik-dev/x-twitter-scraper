@@ -25,7 +25,7 @@ servono una chiave API X né il login. Paghi **$0.00015 per profilo consegnato**
   & email.
 - `email` & `contactInfo` con le email, i telefoni & i link che ogni profilo
   pubblica.
-- Modalità Search Autocomplete, con gli account, gli argomenti, gli hashtag & i
+- `mode: "autocomplete"`, con gli account, gli argomenti, gli hashtag & i
   cashtag che X suggerisce per ogni termine di ricerca.
 - Riprendi 1 query da un cursore salvato in `startCursor`.
 - Le esecuzioni conservano le righe consegnate & i progressi quando Apify le
@@ -107,7 +107,7 @@ cashtag suggeriti.
 - Ogni riga indica il suo `suggestionType` & il testo da cercare in
   `suggestion`.
 - Una riga di cashtag riporta `price`, `marketCap` & `dailyChangePercent`.
-- I filtri sui profili valgono solo per Profile Search.
+- I filtri sui profili valgono solo per `mode: "search"`.
 
 Una riga di suggerimento ha questo aspetto.
 
@@ -171,8 +171,8 @@ codice & non cambiano il prezzo.
 ## Quanto costa cercare utenti su X?
 
 Su ogni piano Apify paghi $0.00015 per profilo consegnato. Un suggerimento di
-Search Autocomplete costa lo stesso per riga consegnata. Apify fattura a parte
-il tuo uso della piattaforma.
+completamento automatico costa lo stesso per riga consegnata. Apify fattura a
+parte il tuo uso della piattaforma.
 
 Per volumi maggiori,
 [scegli un piano Apify](https://apify.com/pricing?fpr=xquik) con più uso

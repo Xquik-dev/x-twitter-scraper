@@ -377,10 +377,10 @@ alıp almadığını kontrol etmez.
 
 ### Bir takipçi taraması neden az satır teslim etti?
 
-Yaklaşık her 400 takipçiden 1'i e-posta yayımlar. Çalıştırma durumu, bir listede
-kaç satır okunduğunu söyler. Bir listenin daha fazlasını okumak için `maxScan`
-değerini artır ya da `searchTerms` alanında booking gibi kelimeler kullan. Bu
-kelimeler çok daha fazla satır tutar.
+Yaklaşık her 400 takipçiden 1'i e-posta yayımlar. Çalıştırma durumu,
+çalıştırmanın kaç satır okuduğunu söyler. Bir listenin daha fazlasını okumak
+için `maxScan` değerini artır ya da `searchTerms` alanında booking gibi
+kelimeler kullan. Bu kelimeler çok daha fazla satır tutar.
 
 ### 1 çalıştırmada kaç profil kontrol edebilirim?
 

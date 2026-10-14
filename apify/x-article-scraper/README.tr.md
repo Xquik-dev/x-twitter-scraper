@@ -302,9 +302,8 @@ Evet. 50 herkese açık görevden birini veya Xquik REST API'yi seç.
 JavaScript & cURL örnekleri var. Apify
 [zamanlamaları](https://docs.apify.com/platform/schedules), Xquik'in X Article
 Scraper'ını bir cron takvimiyle çalıştırır. Ajanlar
-[Apify MCP](https://docs.apify.com/platform/integrations/mcp) kullanır. Xquik'in
-REST API'si tekil makaleleri de okur. Eski bir derlemeye ihtiyacın yoksa
-`latest` kullan.
+[Apify MCP](https://docs.apify.com/platform/integrations/mcp) kullanır. Eski bir
+derlemeye ihtiyacın yoksa `latest` kullan.
 
 ### Nereden yardım alırım?
 

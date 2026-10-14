@@ -288,8 +288,8 @@ diagnostics. Pick the one that matches the data you need.
   location filters. Use it when you build account lists from search. From
   $0.00015 per profile.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
-  checks where accounts are based with X's Account based in label, connected via
-  & username changes. Use it when you vet where accounts are based. From
+  checks where accounts are based with X's "Account based in" label, "connected
+  via" & username changes. Use it when you vet where accounts are based. From
   $0.00015 per account.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper) scrapes List posts,
   members & followers from List URLs or IDs. Use it when a curated List defines
@@ -362,9 +362,9 @@ address receives mail.
 
 ### Why did a followers scan deliver few rows?
 
-About 1 follower in 400 publishes an email. The run status says how many rows a
-list was read for. Raise `maxScan` to read further into a list, or use
-`searchTerms` with words such as booking, which keep far more rows.
+About 1 follower in 400 publishes an email. The run status says how many rows
+the run read. Raise `maxScan` to read further into a list, or use `searchTerms`
+with words such as booking, which keep far more rows.
 
 ### How many profiles can I check in 1 run?
 
