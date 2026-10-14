@@ -1,31 +1,22 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <strong>Italiano</strong>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · **Italiano**
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer collega Xquik MCP agli agenti di coding"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Guarda come Framer usa gli scraper Xquik con Claude Code, Codex, Cursor e altro, da 6:07.</a>
-</td></tr></table>
+[![Framer collega Xquik MCP agli agenti di coding](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Guarda come Framer usa gli scraper Xquik](https://youtu.be/4UOSpoOoC3Y?t=367)
+con Claude Code, Codex, Cursor & altro, da 6:07.
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo, con
 i dati X più completi. X (Twitter) Stock & Crypto AI Trading Signals di Xquik
-trasforma i post (tweet) in posizioni. Ogni posizione è rialzista, ribassista,
-neutra o mista, per ticker & moneta. La maggior parte degli altri Actor Apify fa
-pagare prima di filtrare o deduplicare. Xquik fa pagare solo i risultati
-consegnati, unici e conformi ai filtri. I costi AI sono inclusi nel prezzo per
-post. Non ti servono account AI, token o chiavi.
+trasforma i post in posizioni. Ogni posizione è rialzista, ribassista, neutra o
+mista, per ticker & moneta. La maggior parte degli altri Actor Apify fa pagare
+prima di filtrare o deduplicare. Xquik fa pagare solo i risultati consegnati,
+unici e conformi ai filtri. I costi AI sono inclusi nel prezzo per post. Non ti
+servono account AI, token o chiavi.
 
-Leggi la posizione dietro i post su azioni, crypto & trading su X (Twitter).
-**X (Twitter) Stock & Crypto AI Trading Signals** di Xquik raccoglie i post sui
-tuoi asset. A ogni post aggiunge con AI una posizione, un tipo di contenuto, un
+Leggi la posizione dietro i post su azioni, crypto & trading su X (Twitter). **X
+(Twitter) Stock & Crypto AI Trading Signals** di Xquik raccoglie i post sui tuoi
+asset. A ogni post aggiunge con AI una posizione, un tipo di contenuto, un
 livello di convinzione & la rilevanza per l'asset. Distingui le previsioni
 decise dalle osservazioni prudenti & l'analisi dalla promozione. Individua i
 post che usano il nome del tuo asset per altro.
@@ -45,6 +36,12 @@ post che usano il nome del tuo asset per altro.
 > "Twitter" e "X" sono marchi di X Corp.
 
 ## Come analizzare il sentiment di mercato su X
+
+Non usi ancora Apify?
+[Crea prima un account gratuito](https://console.apify.com/sign-up?fpr=xquik).
+Il piano gratuito non richiede carta di credito & offre $5 da spendere ogni
+mese. A $0.0003 per post analizzato, $5 coprono fino a 16.000 post analizzati,
+senza contare l'uso della piattaforma. Poi torna qui & premi Try for free.
 
 1. Aggiungi termini di ricerca come `$NVDA lang:en -filter:retweets`, query con
    cashtag, nomi utente dei profili o ID dei post.
@@ -78,8 +75,8 @@ La convinzione è 0 quando la posizione è neutra o poco chiara. Un post senza
 direzione non può esprimerne una con decisione. Quella risposta mette tutta la
 probabilità sul livello 0 & prende la confidenza della posizione.
 
-Le risposte descrivono ciò che esprimono gli autori. Non sono consulenza
-finanziaria & non verificano affermazioni, prezzi o documenti societari.
+Le risposte descrivono ciò che esprimono gli autori. Non sono consulenza sugli
+investimenti & non verificano affermazioni, prezzi o documenti societari.
 
 ## Analizza il tuo testo
 
@@ -96,7 +93,7 @@ Incolla in `texts` le tue bozze, risposte, recensioni o note. X (Twitter) Stock
 ```
 
 - Ogni testo diventa 1 riga con le stesse risposte `analysis` di un post.
-- `tweet.id` vale `text:1`, `text:2` e così via. `tweet.type` vale `text`.
+- `tweet.id` vale `text:1`, `text:2` & così via, & `tweet.type` vale `text`.
 - Ogni testo analizzato costa gli stessi $0.0003 di un post analizzato.
 - Con `texts` impostato, l'esecuzione analizza solo quei testi. Avvia a parte i
   target di X.
@@ -108,6 +105,10 @@ analizzato. Non c'è costo di avvio. Il prezzo include la raccolta & i costi AI.
 Non ti servono account AI, token o chiavi. Il prezzo copre fino a 8 domande &
 64.000 byte di contesto per post. Ogni definizione di domanda può usare fino a
 8.000 byte.
+
+Per volumi maggiori,
+[scegli un piano Apify](https://apify.com/pricing?fpr=xquik) con più uso
+prepagato.
 
 I filtri di estrazione & la deduplicazione agiscono prima dell'analisi. Non
 paghi mai le righe filtrate o duplicate. Le analisi fallite, le analisi saltate
@@ -161,19 +162,18 @@ analisi addebitate & addebiti in sospeso.
 
 ## Riepilogo dell'esecuzione & risposte piatte
 
-Un'esecuzione scrive un record `analysis-summary` nel suo key-value store in 4
+Un'esecuzione scrive un record `analysis-summary` nel suo key-value store in 3
 casi.
 
 - Incontra un problema o è grande.
-- Imposta `monitor` senza `baselineDatasetId`, come prima esecuzione di una
-  serie.
 - Il suo confronto trova un post cambiato, nuovo o non confrontabile.
 - Ha `alwaysSaveRunRecords` attivo.
 
-Le altre esecuzioni saltano il record. Il loro stato nomina la risposta
-principale, come `Top stance: bullish in 3 of 5 results.` Un confronto senza
-cambiamenti riporta `No change since the earlier run.` Anche le esecuzioni
-grandi o con un problema scrivono `run-report`, come quelle con
+Le altre esecuzioni saltano il record, compresa la prima esecuzione di una
+serie. Il loro stato nomina la risposta principale, come
+`Top stance is bullish in 3 of 5 results.` Un confronto senza cambiamenti
+riporta `No change since the earlier run.` Anche un'esecuzione che incontra un
+problema o è grande scrive `run-report`. Lo stesso vale per un'esecuzione con
 `alwaysSaveRunRecords` attivo. `run-report` ripete il riepilogo sotto
 `results.analysisSummary`.
 
@@ -228,21 +228,21 @@ diagnostica. `maxBaselineRows` vale 100.000 di default.
 ## Esempi di task
 
 Scegli tra 50 task pubblici. Ognuno parte da una ricerca reale in inglese & da
-un `maxItems` limitato. Include target & contesto già pronti, più la vista
-overview del dataset. Modifica la ricerca o i target prima di avviarlo.
+un `maxItems` limitato. Include target già pronti, contesto & la vista overview
+del dataset. Modifica la ricerca o i target prima di avviarlo.
 
-- [Nvidia (NVDA) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/nvda-market-sentiment-on-x)
-- [Tesla (TSLA) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/tsla-market-sentiment-on-x)
-- [Apple (AAPL) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/aapl-market-sentiment-on-x)
-- [Amazon (AMZN) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/amzn-market-sentiment-on-x)
-- [Microsoft (MSFT) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/msft-market-sentiment-on-x)
-- [Alphabet (GOOGL) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/googl-market-sentiment-on-x)
-- [Meta (META) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/meta-market-sentiment-on-x)
-- [AMD (AMD) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/amd-market-sentiment-on-x)
-- [Palantir (PLTR) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/pltr-market-sentiment-on-x)
-- [Coinbase (COIN) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/coin-market-sentiment-on-x)
-- [Strategy (MSTR) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/mstr-market-sentiment-on-x)
-- [Robinhood (HOOD) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/hood-market-sentiment-on-x)
+- [Sentiment di mercato di Nvidia (NVDA) su X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/nvda-market-sentiment-on-x)
+- [Sentiment di mercato di Tesla (TSLA) su X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/tsla-market-sentiment-on-x)
+- [Sentiment di mercato di Apple (AAPL) su X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/aapl-market-sentiment-on-x)
+- [Sentiment di mercato di Amazon (AMZN) su X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/amzn-market-sentiment-on-x)
+- [Sentiment di mercato di Microsoft (MSFT) su X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/msft-market-sentiment-on-x)
+- [Sentiment di mercato di Alphabet (GOOGL) su X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/googl-market-sentiment-on-x)
+- [Sentiment di mercato di Meta (META) su X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/meta-market-sentiment-on-x)
+- [Sentiment di mercato di AMD (AMD) su X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/amd-market-sentiment-on-x)
+- [Sentiment di mercato di Palantir (PLTR) su X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/pltr-market-sentiment-on-x)
+- [Sentiment di mercato di Coinbase (COIN) su X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/coin-market-sentiment-on-x)
+- [Sentiment di mercato di Strategy (MSTR) su X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/mstr-market-sentiment-on-x)
+- [Sentiment di mercato di Robinhood (HOOD) su X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/hood-market-sentiment-on-x)
 
 Gli altri task, nella pagina dell'Actor, coprono altri brand, argomenti &
 mercati.
@@ -272,7 +272,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   filtri. Usalo quando studi chi ha citato dei post & cosa ha detto. Da $0.00015
   per post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) estrae
-  follower, following, membri & follower delle liste e membri delle community
+  follower, following, membri delle liste, abbonati & membri delle community
   come righe di profilo. Usalo quando ti servono elenchi di pubblico o di
   membri. Da $0.00015 per profilo.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) cerca
@@ -281,8 +281,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   $0.00015 per profilo.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   verifica dove hanno sede gli account con l'etichetta "Posizione account" di X,
-  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando ti
-  serve verificare dove hanno sede gli account. Da $0.00015 per account.
+  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando
+  vuoi verificare dove hanno sede gli account. Da $0.00015 per account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) ottiene le email, i
   numeri di telefono & i link che gli account pubblicano sui propri profili, da
   nomi utente, follower o ricerche di utenti. Usalo quando ti servono le email
@@ -305,7 +305,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   lavoro di X per parola chiave, luogo, modalità di lavoro, livello di
   esperienza & azienda, con stipendi & link di candidatura. Usalo quando
   raccogli le offerte di lavoro pubblicate su X. Da $0.00015 per offerta.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper) raccoglie gli
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) estrae gli
   articoli lunghi di X come Markdown & testo, con copertine, autori, date &
   metriche. Usalo quando ti serve il corpo degli articoli, non i post. Da
   $0.00015 per articolo.
@@ -315,7 +315,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   media.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
   monitora le menzioni del brand con rilevanza, sentiment & risposte sulla
-  customer experience generate con AI, poi confronta le esecuzioni. Usalo quando
+  customer experience generate con AI & confronta le esecuzioni. Usalo quando
   osservi un brand nel tempo. Da $0.0003 per post analizzato.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   etichetta atteggiamento, intensità & probabilità di sarcasmo di ogni post con
@@ -344,7 +344,7 @@ No. X (Twitter) Stock & Crypto AI Trading Signals di Xquik include i costi AI
 nel prezzo. Non ti servono account AI, token o chiavi. Non ti servono nemmeno
 chiave API X, login o credenziali.
 
-### Posso seguire più ticker in 1 esecuzione?
+### Posso seguire più ticker in una sola esecuzione?
 
 Sì. Elenca in `analysis.targets` ogni asset con i suoi ticker & alias. Combina i
 loro termini di ricerca. Le risposte sulla rilevanza ti dicono quali post
@@ -354,14 +354,14 @@ trattano i tuoi target come asset.
 
 `analysis.status` vale `failed` o `skipped`. L'Actor ha raccolto & consegnato il
 post, ma l'analisi AI non si è completata. `analysis.reason` indica la causa.
-`context_limit` significa che contesto & target non lasciano spazio al post.
-`service_unavailable` significa che il servizio di analisi era momentaneamente
-non disponibile. Queste righe non hanno addebiti sul risultato. Accorcia
-`analysis.context` o riavvia gli ID interessati.
+`context_limit` significa che il tuo contesto & i tuoi target non lasciano
+spazio al post. `service_unavailable` significa che il servizio di analisi era
+momentaneamente non disponibile. Queste righe non hanno addebiti sul risultato.
+Accorcia `analysis.context` o esegui di nuovo gli ID interessati.
 
-L'Actor analizza comunque un post più lungo di `maxContextBytes`. Taglia prima
-i post citati & quelli a cui risponde, poi il post stesso.
-`analysis.contextAvailability.postText` diventa quindi `truncated`. Alza
+L'Actor analizza comunque un post più lungo di `maxContextBytes`. Taglia prima i
+post citati & quelli a cui risponde, poi il post stesso.
+`analysis.contextAvailability.postText` vale allora `truncated`. Alza
 `maxContextBytes` fino a 64.000 per conservare più testo.
 
 ### L'analisi verifica i fatti?
@@ -380,7 +380,7 @@ mostrano l'incertezza in ogni lingua.
 ### Come limito il costo?
 
 Filtri, deduplicazione & `maxItems` agiscono prima dell'analisi. Paghi solo i
-post unici & conformi ai filtri. Usa operatori di ricerca precisi, limiti di
+post unici e conformi ai filtri. Usa operatori di ricerca precisi, limiti di
 data & soglie di engagement. Parti con un `maxItems` piccolo per verificare la
 qualità delle risposte prima di un'esecuzione grande.
 
@@ -402,6 +402,8 @@ collegano le esecuzioni anche a webhook, Make, Zapier, n8n & Google Sheets.
 
 ### Dove trovo assistenza?
 
-Apri una issue nella pagina dell'Actor o scrivi a support@xquik.com con l'ID
-dell'esecuzione. La diagnostica gratuita nel key-value store spiega le
-esecuzioni vuote, parziali o interrotte.
+Apri una issue nella
+[scheda Issues](https://apify.com/xquik/x-twitter-stock-crypto-signals/issues)
+con l'ID dell'esecuzione. La diagnostica gratuita nel key-value store spiega le
+esecuzioni che richiedono attenzione. Un'esecuzione che non riceve nessuna riga
+ne spiega il motivo nel suo stato.

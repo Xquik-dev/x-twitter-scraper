@@ -1,19 +1,10 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <strong>한국어</strong> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · **한국어** ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer가 Xquik MCP를 코딩 에이전트에 연결하는 모습"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Framer가 Xquik 스크레이퍼를 Claude Code, Codex, Cursor 등과 함께 사용하는 방법을 6:07부터 보세요.</a>
-</td></tr></table>
+[![Framer가 Xquik MCP를 코딩 에이전트에 연결하는 모습](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Framer가 Xquik 스크레이퍼를 Claude Code, Codex, Cursor 등과 함께 사용하는 방법](https://youtu.be/4UOSpoOoC3Y?t=367)을
+6:07부터 보세요.
 
 Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서비스이며, 가장
 완전한 X 데이터를 제공합니다. Xquik의 X Reply Scraper는 답글, 댓글 & 대화 전체를
@@ -21,19 +12,19 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 부과합니다. Xquik은 **필터에 맞고 중복되지 않은 결과를 전달했을 때만** 요금을
 받습니다.
 
-모든 Apify 요금제에서 **전달된 행 1개당 $0.00015**로 Twitter 답글과 댓글을
-스크랩하고, X 계정 없이 읽으세요. 게시물(트윗) URL, 게시물 ID, 프로필 URL 또는
-사용자 아이디를 붙여넣으세요. 답글, 대화, 작성자, 참여 지표, 엔티티 & 미디어
-URL을 내보낼 수 있습니다. Apify 플랫폼 사용료는 Apify가 따로 청구합니다. X
-로그인은 필요 없습니다. 필터는 데이터셋에 기록하기 전에 실행되므로 전달된 행에만
-요금을 냅니다.
+모든 Apify 요금제에서 **전달된 행 1개당 $0.00015**로 Twitter 답글 & 댓글을
+스크랩하고, X 계정 없이 읽으세요. 게시물 URL, 게시물 ID, 프로필 URL 또는 사용자
+아이디를 붙여넣으세요. 답글, 대화, 작성자, 참여 지표, 엔티티 & 미디어 URL을
+내보낼 수 있습니다. Apify 플랫폼 사용료는 Apify가 따로 청구합니다. X 로그인은
+필요 없습니다. 필터는 데이터셋에 기록하기 전에 실행되므로 전달된 행에만 요금을
+냅니다.
 
 > Xquik은 독립적인 제3자 서비스입니다. X Corp와 제휴 관계가 없습니다.
 > "Twitter"와 "X"는 X Corp의 상표입니다.
 
 ## X Reply Scraper는 무엇을 하나요?
 
-Xquik의 X Reply Scraper는 공개 답글 & 답글 대화를 수집합니다. 게시물 1개, 대량
+Xquik의 X Reply Scraper는 공개 답글 & 댓글 대화를 수집합니다. 게시물 1개, 대량
 URL 목록, 게시물 ID & 사용자 답글 타임라인을 처리합니다.
 
 ### 주요 기능
@@ -46,15 +37,15 @@ URL 목록, 게시물 ID & 사용자 답글 타임라인을 처리합니다.
 - 출력은 정렬 모드 4가지, 상세 수준 3가지 & 필드 스타일 3가지를 지원합니다.
 - 모든 답글에 원본 대상, 부모 ID, 루트 ID & 깊이가 남습니다.
 - 이어받기 커서로 지난 데이터 수집 & 예약 실행을 할 수 있습니다.
-- 확인이 필요한 실행은 `diagnostics`에 무료 레코드 1개를 기록합니다. 모든
-  대상을 읽고도 답글을 찾지 못한 실행은 레코드를 기록하지 않습니다. 상태
-  메시지가 그 이유를 알려 줍니다.
+- 확인이 필요한 실행은 `diagnostics`에 무료 레코드 1개를 기록합니다. 모든 대상을
+  읽고도 답글을 찾지 못한 실행은 레코드를 기록하지 않습니다. 실행 상태가 그
+  이유를 알려 줍니다.
 - 실행 로그는 페이지 & 대상별 소요 시간을 `fetchDurationMs`,
   `processingDurationMs`, `pushDurationMs`, `statusDurationMs`,
   `fullPageDurationMs` & `fullTargetDurationMs`로 보여 줍니다.
 - Apify가 실행을 다시 시작해도 전달된 답글 & 진행 상황은 유지됩니다.
 
-### 활용 사례
+### 사용 사례
 
 - 브랜드 & 제품 게시물에 달린 답글로 감정 & 고객 피드백을 측정합니다.
 - 화제가 된 게시물에서 마음에 들어요를 가장 많이 받은 답글 & 댓글의 순위를
@@ -66,10 +57,10 @@ URL 목록, 게시물 ID & 사용자 답글 타임라인을 처리합니다.
 
 ### X Reply Scraper는 어떤 데이터를 추출할 수 있나요?
 
-데이터셋 & run-report 스키마는 반환되는 모든 필드를 설명합니다. 기본형 필드에는
-에이전트 & 자동 생성 연동을 위한 예시도 들어 있습니다.
+데이터셋 & run-report 스키마는 반환되는 모든 필드를 설명합니다. 텍스트, 숫자 &
+불리언 필드에는 에이전트 & 자동 생성 연동을 위한 예시도 들어 있습니다.
 
-full 답글 행에는 다음 핵심 필드가 들어갈 수 있습니다.
+모든 full 답글 행에는 다음 핵심 필드가 들어갈 수 있습니다.
 
 | 필드                | 설명                                              |
 | ------------------- | ------------------------------------------------- |
@@ -90,19 +81,20 @@ full 답글 행에는 다음 핵심 필드가 들어갈 수 있습니다.
 | `viewCount`         | 조회수                                            |
 | `bookmarkCount`     | 북마크 수                                         |
 | `author`            | 제공되는 공개 작성자 메타데이터                   |
-| `media`             | 이미지, 동영상, GIF & 변형                        |
+| `media`             | 이미지, 동영상, GIF와 변형                        |
 | `entities`          | 해시태그, 캐시태그, 멘션, URL & 동영상 타임스탬프 |
-| `quoted_tweet`      | 인용된 게시물(있는 경우)                          |
-| `retweeted_tweet`   | 재게시된 게시물(있는 경우)                        |
+| `quoted_tweet`      | 있는 경우 인용된 게시물                           |
+| `retweeted_tweet`   | 있는 경우 재게시된 게시물                         |
 
 full 행에는 제공되는 원본 메타데이터도 남습니다.
 
 - 게시물 유형 필드는 `type`, `isReply`, `isQuoteStatus`, `isNoteTweet`,
   `isLimitedReply` & `isTranslatable`입니다.
-- 텍스트 상세 필드는 `displayTextRange`, `noteTweet`, `article` & `card`입니다.
+- 텍스트 상세 필드는 `displayTextRange`, `noteTweet`, `article`, `card` &
+  `cashtagAttachments`입니다.
 - 라벨 & 안내 필드는 `contentDisclosure`, `communityNote`, `possiblySensitive`,
   `tombstone` & `exclusiveContent`입니다.
-- 대화 상세 필드는 `conversationControl`, `limitedActions` &
+- 대화 상세 필드는 `conversationControl`, `limitedActions`, `subscriberBadge` &
   `unmentionedUserIds`입니다.
 - 맥락 필드는 `source`, `place`, `communityId`, `communityName`,
   `reactionContext` & `postCta`입니다.
@@ -113,6 +105,12 @@ full 행에는 제공되는 원본 메타데이터도 남습니다.
 정확한 필드는 OpenAPI를 참고하세요.
 
 ## X Reply Scraper로 답글을 스크랩하려면 어떻게 하나요?
+
+Apify가 처음인가요? 먼저
+[무료 계정을 만드세요](https://console.apify.com/sign-up?fpr=xquik). 무료
+요금제는 신용카드가 필요 없고 매달 쓸 수 있는 $5를 줍니다. 행 1개당
+$0.00015이므로 $5면 플랫폼 사용료를 빼고 최대 33,000행을 받을 수 있습니다. 그런
+다음 여기로 돌아와 Try for free를 누르세요.
 
 1. 게시물 URL, 게시물 ID, 프로필 URL 또는 사용자 아이디를 붙여넣으세요.
 2. `maxItems`, `scope` & 작업에 필요한 필터를 설정하세요.
@@ -190,7 +188,7 @@ full 행에는 제공되는 원본 메타데이터도 남습니다.
 ## 태스크 예시
 
 공개 태스크 50개 중에서 고르세요. 태스크마다 범위가 정해진 입력 & 그에 맞는
-데이터셋 뷰가 있습니다. 실행하기 전에 원하는 대로 수정하세요.
+데이터셋 뷰가 있습니다. 실행하기 전에 원하는 태스크를 수정하세요.
 
 - [X 게시물 답글 & Twitter 댓글 스크랩](https://apify.com/xquik/x-reply-scraper/examples/scrape-post-replies)
 - [Twitter 답글 대량 스크랩](https://apify.com/xquik/x-reply-scraper/examples/scrape-bulk-post-replies)
@@ -212,16 +210,19 @@ full 행에는 제공되는 원본 메타데이터도 남습니다.
 Xquik의 X Reply Scraper는 모든 Apify 요금제에서 전달된 행 1개당 $0.00015입니다.
 Apify 플랫폼 사용료는 Apify가 따로 청구합니다.
 
+더 많이 수집하려면 선불 사용량이 더 많은
+[Apify 요금제를 고르세요](https://apify.com/pricing?fpr=xquik).
+
 Xquik은 전달된 데이터 행 1개마다 한 번 과금합니다. 필터나 중복 제거로 빠진
 답글에는 비용이 없습니다. `diagnostics`의 진단 레코드는 무료입니다. 시작, URL,
-쿼리, 페이지 넘김, 필터 요금이 없습니다.
+쿼리, 페이지 넘김 또는 필터 요금은 없습니다.
 
 ## 빈 실행, 부분 실행 & 중단된 실행
 
-Xquik의 X Reply Scraper는 빈 실행, 부분 실행 & 중단된 실행의 원인을 무료로
-알려 줍니다. 실행 상태는 실행이 멈춘 이유를 알려 줍니다. 과금된 결과 & 읽은
-대상 수도 셉니다. 모든 대상을 읽고도 답글을 찾지 못한 실행은 레코드를 기록하지
-않습니다. 상태 메시지가 그 이유 & 바꿔야 할 설정을 알려 줍니다.
+Xquik의 X Reply Scraper는 빈 실행, 부분 실행 & 중단된 실행의 원인을 무료로 알려
+줍니다. 실행 상태는 실행이 멈춘 이유를 알려 줍니다. 과금된 결과 & 읽은 대상 수도
+셉니다. 모든 대상을 읽고도 답글을 찾지 못한 실행은 레코드를 기록하지 않습니다.
+실행 상태가 그 이유 & 바꿔야 할 설정을 알려 줍니다.
 
 ### 추출 미완료
 
@@ -230,14 +231,14 @@ Xquik의 X Reply Scraper는 빈 실행, 부분 실행 & 중단된 실행의 원�
 `nextAction`을 확인하세요. Actor가 성공으로 종료되면 전달이 끝났다는 뜻입니다.
 추출이 모두 끝났다는 뜻은 아닙니다.
 
-상태 메시지는 실행이 일찍 멈춘 원인을 모두 알려 줍니다. `stopCauses`는 원인마다
+실행 상태는 실행이 일찍 멈춘 원인을 모두 알려 줍니다. `stopCauses`는 원인마다
 `message`, `retryable` & `nextAction`을 따로 담아 나열합니다. 원인은
 `target_not_found`, `target_failed`, `page_limit`, `reply_reach` &
 `deadline_reached`입니다. `reply_reach`는 X가 스레드의 일부만 제공했다는
 뜻입니다.
 
-찾을 수 없는 게시물이나 계정은 실패로 세지 않습니다. 상태 메시지는 "X has no
-match for 1 target."처럼 그 대상을 알려 줍니다. 다른 원인으로 실행이 멈췄을 때만
+찾을 수 없는 게시물이나 계정은 실패로 세지 않습니다. 실행 상태는 "X has no match
+for 1 target."처럼 그 대상을 알려 줍니다. 다른 원인으로 실행이 멈췄을 때만
 `stopCauses`에 들어갑니다. 원인 중 하나라도 재시도할 수 있으면 실행도
 `retryable`입니다.
 
@@ -246,8 +247,8 @@ match for 1 target."처럼 그 대상을 알려 줍니다. 다른 원인으로 �
 성공한 데이터 행은 `resultType: "reply"`를 씁니다. 확인이 필요한 실행은
 `diagnostics`에 무료 레코드를 정확히 1개 기록합니다. 잘못된 입력, 건너뛴 대상,
 조기 중단이 그 예입니다. 이 레코드는 문제를 해결하는 방법을 알려 줍니다. 모든
-대상을 읽고도 답글을 찾지 못한 실행은 레코드를 기록하지 않습니다. 상태 메시지가
-그 이유를 알려 줍니다.
+대상을 읽고도 답글을 찾지 못한 실행은 레코드를 기록하지 않습니다. 실행 상태가 그
+이유를 알려 줍니다.
 
 실행 상태는 실행이 멈춘 이유를 알려 줍니다. 과금된 결과 & 읽은 대상 수도 셉니다.
 문제가 생긴 실행은 입력이 없거나 잘못되어 종료된 경우를 포함해 항상
@@ -269,7 +270,7 @@ match for 1 target."처럼 그 대상을 알려 줍니다. 다른 원인으로 �
 
 ## 입력
 
-입력 탭에 모든 옵션이 나와 있습니다. 게시물 URL, 게시물 ID, 프로필 URL 또는
+Input 탭에 모든 옵션이 나와 있습니다. 게시물 URL, 게시물 ID, 프로필 URL 또는
 사용자 아이디를 1개 이상 넣으세요. 다른 필드는 모두 선택 사항입니다.
 
 ### 답글 대상 & 입력 별칭
@@ -278,7 +279,7 @@ match for 1 target."처럼 그 대상을 알려 줍니다. 다른 원인으로 �
 
 | 입력          | 용도                               |
 | ------------- | ---------------------------------- |
-| `startUrls`   | X 게시물 & 프로필 URL 혼합         |
+| `startUrls`   | X 게시물과 프로필 URL 혼합         |
 | `tweetIds`    | 숫자 게시물 ID                     |
 | `usernames`   | 프로필 답글 타임라인               |
 | `startCursor` | 저장된 커서로 대상 1개 이어서 실행 |
@@ -311,10 +312,10 @@ match for 1 target."처럼 그 대상을 알려 줍니다. 다른 원인으로 �
 - 출력 별칭은 `outputVariant`, `includeRaw`입니다.
 
 `replies`로 설정한 `category`는 아무것도 바꾸지 않습니다. `retweets`나
-`info`처럼 다른 Actor가 하는 일을 가리키는 카테고리는 실행을 멈춥니다. 아무것도
-읽거나 과금하지 않습니다. 메시지가 써야 할 Actor를 알려 줍니다. 이 별칭 중 하나
-& 표준 필드를 함께 설정하면 표준 필드 값을 씁니다. 실행 로그에 무시된 별칭이
-나옵니다.
+`info`처럼 다른 Actor가 하는 일을 가리키는 카테고리는 실행을 멈춥니다. 이때
+실행은 아무것도 읽지 않고 과금하지도 않습니다. 메시지가 써야 할 Actor를 알려
+줍니다. 이 별칭 중 하나 & 그 표준 필드를 함께 설정하면 표준 필드 값을 씁니다.
+실행 로그에 무시된 별칭이 나옵니다.
 
 형식이 잘못됐거나 지원하지 않는 대상이 있어도 Actor는 실패하지 않습니다. 유효한
 대상이 하나도 남지 않으면 실행은 해결 방법이 담긴 진단을 기록합니다.
@@ -328,11 +329,11 @@ Actor가 답글을 수집하는 방식을 고르세요. 대부분의 작업에�
 대부분의 작업에는 `collectionStrategy: "auto"`를 쓰세요. 설정한 범위에서 가져올
 수 있는 답글을 모두 수집합니다. 범위, 깊이, 정렬 & 작성자 설정은 한도보다 먼저
 적용됩니다. 루트가 아닌 대상 아래의 답글도 포함합니다. X가 스레드 일부를 숨기면
-상태 메시지가 숨겨진 답글 수를 알려 줍니다. 다른 `collectionStrategy` 값은
+실행 상태가 X가 숨긴 답글 수를 알려 줍니다. 다른 `collectionStrategy` 값은
 모드를 바꾸지 않습니다.
 
 진단의 수집 범위 수치가 X에 답글이 더 없다는 증거는 아닙니다. 한도, 누락된
-데이터, 오류 때문에 실행이 불완전하게 끝날 수 있습니다.
+데이터 또는 오류 때문에 실행이 불완전하게 끝날 수 있습니다.
 
 #### 직접 답글
 
@@ -352,9 +353,9 @@ X 자체 순서대로 직접 답글을 받으려면 `collectionStrategy: "replie
 
 기본 `auto` 전략은 게시물 작성자가 숨긴 답글을 추가합니다. 각 답글은
 `resultType: "hiddenReply"`가 들어 있는 행이 되며, 일반 행과 같은 가격으로
-과금되고 `maxItems`에 포함됩니다. 게시물의 답글 수가 X가 보여 주는 답글보다
-많을 때만 실행이 숨겨진 답글을 읽습니다. 그래서 숨겨진 답글이 없는 게시물에는
-추가 비용이 없습니다. 숨겨진 답글을 빼려면 `includeHiddenReplies: false`를
+과금되고 `maxItems`에 포함됩니다. 게시물의 답글 수가 X가 보여 주는 답글보다 많을
+때만 실행이 숨겨진 답글을 읽습니다. 그래서 숨겨진 답글이 없는 게시물에는 추가
+비용이 없습니다. 숨겨진 답글을 빼려면 `includeHiddenReplies: false`를
 설정하세요.
 
 숨겨진 답글만 받으려면 `collectionStrategy: "hiddenReplies"`를 쓰세요. X는
@@ -369,7 +370,7 @@ X 자체 순서대로 직접 답글을 받으려면 `collectionStrategy: "replie
 | -------- | ---------------------------------------- |
 | `direct` | 깊이 1 답글 유지                         |
 | `nested` | 깊이 2 이상인 답글의 답글 유지           |
-| `all`    | 제공되는 직접 답글 & 중첩 답글 모두 유지 |
+| `all`    | 제공되는 직접 답글과 중첩 답글 모두 유지 |
 
 중첩 깊이를 제한하려면 `maxDepth`를 쓰세요. X가 대화의 상위 게시물을 빼면 부모
 링크가 없을 수 있습니다. 이 Actor는 확인할 수 있는 가장 정확한 깊이를 남깁니다.
@@ -427,10 +428,10 @@ X 검색은 일부 오래된 답글의 마음에 들어요 수를 실제보다 �
 #### 미디어 & 시간 필터
 
 - 공개 미디어가 있는 답글만 받으려면 `hasMediaOnly: true`를 설정하세요.
-- `mediaType`은 `any`, `image`, `video`, `gif`, `link` 중 하나로 설정하세요.
+- `mediaType`은 `any`, `image`, `video`, `gif` 또는 `link`로 설정하세요.
 - 미디어나 링크가 없는 텍스트 답글만 원하면 `mediaType`을 `none`으로 설정하세요.
-- 시작 시각(포함)은 `since`로 설정하세요.
-- 종료 시각(미포함)은 `until`로 설정하세요.
+- 그 시각을 포함하는 시작 타임스탬프는 `since`로 설정하세요.
+- 그 시각을 포함하지 않는 종료 타임스탬프는 `until`로 설정하세요.
 - 호환용 별칭으로 `sinceTime` & `untilTime`을 쓸 수 있습니다.
 
 ## 출력
@@ -519,8 +520,45 @@ full 열을 모두 남기고 끝에 `hasCommunityNotes`, `quotedTweetPermalink`,
 
 #### 필드 이름 규칙
 
-`fieldStyle`은 `source`, `camelCase`, `snake_case` 중 하나로 설정하세요. 이
-Actor는 서로 충돌하는 원본 키를 덮어쓰지 않습니다.
+`fieldStyle`은 `source`, `camelCase` 또는 `snake_case`로 설정하세요. 이 Actor는
+서로 충돌하는 원본 키를 덮어쓰지 않습니다.
+
+## 출력 열
+
+입력 8개가 실행이 읽은 각 행의 모양을 정합니다. 이 입력은 코드를 실행하지 않으며
+가격도 바꾸지 않습니다.
+
+| 필드                | 하는 일                                                           |
+| ------------------- | ----------------------------------------------------------------- |
+| `fields`            | 입력한 순서 & 철자 그대로 이 필드만 남깁니다                      |
+| `omitFields`        | 이 필드를 빼고 나머지를 남깁니다                                  |
+| `renameFields`      | 필드를 새 이름의 열로 옮깁니다                                    |
+| `flatten`           | 중첩된 객체를 각각 최상위 열로 바꿉니다                           |
+| `fillMissingFields` | 남긴 필드가 행에 없으면 `null`로 채웁니다. 기본으로 켜져 있습니다 |
+| `joinFields`        | 이 목록을 각각 텍스트 값 1개로 바꿉니다                           |
+| `joinSeparator`     | 합친 항목 사이에 넣는 텍스트입니다. 기본값은 쉼표 & 공백입니다    |
+| `constantFields`    | 모든 행에 같은 텍스트가 들어간 열을 추가합니다                    |
+
+- 객체 안의 필드는 `author.id`처럼 점으로 구분해 적으세요. 대소문자 & 밑줄은
+  상관없습니다.
+- 모든 행에 `id`가 남습니다.
+- `fields`를 쓰면 행에 없는 필드는 `null`로 들어갑니다. 그래서 모든 행의 열이
+  같아집니다.
+- 필드 이름이 잘못되면 실행은 읽기 & 과금 전에 멈춥니다.
+- 이름을 확인할 수 없으면 실행은 계속 읽고, 보지 못한 이름을 마지막에
+  나열합니다.
+- 실행은 다른 Actor용으로 쓴 맵 함수나 jq 필터를 무시합니다.
+
+계산된 열을 추가하려면 그 이름을 `fields`나 `renameFields`에 적으세요.
+
+| 열                  | 계산식                                                                                 |
+| ------------------- | -------------------------------------------------------------------------------------- |
+| `totalEngagement`   | `likeCount` + `replyCount` + `retweetCount` + `quoteCount`. 없는 수치는 0으로 더합니다 |
+| `engagementRate`    | `totalEngagement` × 100 ÷ 작성자의 `followers`, 소수점 4자리까지                       |
+| `engagementPerView` | `totalEngagement` × 100 ÷ `viewCount`, 소수점 4자리까지                                |
+
+그 수치가 없는 행의 `totalEngagement`는 `null`입니다. 나누는 값이 없거나 0이면
+비율은 `null`입니다.
 
 ## 실행 옵션
 
@@ -657,7 +695,7 @@ Apify는 특정 빌드 번호를 `latest`로 바꿔 주지 않습니다. 고정�
   게시물에 반응했는지 측정할 때 사용하세요. 행당 $0.00015부터입니다.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)는
   게시물을 인용한 게시물을 텍스트, 미디어, 수치, 작성자 & 11개의 필터와 함께
-  스크랩합니다. 누가 게시물을 인용했고 무엇을 말했는지 살펴볼 때 사용하세요.
+  스크랩합니다. 게시물을 인용한 사람 & 그들이 한 말을 살펴볼 때 사용하세요.
   게시물당 $0.00015부터입니다.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)는 팔로워,
   팔로잉, 리스트 멤버, 구독자 & 커뮤니티 멤버를 프로필 행으로 스크랩합니다.
@@ -667,9 +705,9 @@ Apify는 특정 빌드 번호를 `latest`로 바꿔 주지 않습니다. 고정�
   위치 필터를 지원합니다. 검색으로 계정 목록을 만들 때 사용하세요. 프로필당
   $0.00015부터입니다.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)는
-  X의 "Account based in"(계정 기반 위치) 라벨, X에 연결된 방식 & 사용자 아이디
-  변경 내역으로 계정이 어디에 기반을 두고 있는지 확인합니다. 계정의 기반 위치를
-  검증할 때 사용하세요. 계정당 $0.00015부터입니다.
+  X의 "Account based in" 라벨, X에 연결된 방식 & 사용자 아이디 변경 내역으로
+  계정이 어디에 기반을 두고 있는지 확인합니다. 계정의 기반 위치를 검증할 때
+  사용하세요. 계정당 $0.00015부터입니다.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper)는 사용자 아이디,
   팔로워 또는 사용자 검색에서 계정이 프로필에 공개한 이메일, 전화번호 & 링크를
   가져옵니다. 프로필이 공개한 이메일이 필요할 때 사용하세요. 프로필당
@@ -706,9 +744,9 @@ Apify는 특정 빌드 번호를 `latest`로 바꿔 주지 않습니다. 고정�
   AI로 게시물마다 태도, 강도 & 비꼼 확률을 라벨링합니다. 어떤 주제든 전반적인
   감정을 알고 싶을 때 사용하세요. 분석한 게시물당 $0.0003부터입니다.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)는
-  AI로 강세, 약세, 중립, 혼조 입장과 콘텐츠 유형, 확신도 & 자산 관련성을
-  라벨링합니다. 주식, 암호화폐, 트레이딩 이야기를 지켜볼 때 사용하세요. 분석한
-  게시물당 $0.0003부터입니다.
+  AI로 강세, 약세, 중립 또는 혼조 입장과 콘텐츠 유형, 확신도 & 자산 관련성을
+  라벨링합니다. 주식, 암호화폐 또는 트레이딩 이야기를 지켜볼 때 사용하세요.
+  분석한 게시물당 $0.0003부터입니다.
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)는
   AI로 뉴스 게시물을 형식, 출처 표기 & 주제 관련성에 따라 라벨링합니다. 보도와
   논평을 구분할 때 사용하세요. 분석한 게시물당 $0.0003부터입니다.
@@ -717,9 +755,9 @@ Apify는 특정 빌드 번호를 `latest`로 바꿔 주지 않습니다. 고정�
   분석이 원하는 라벨과 맞지 않을 때 사용하세요. 분석한 게시물당
   $0.0003부터입니다.
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)는
-  AI의 특성 답변 8개로 게시물마다 0에서 100까지의 Viral Score & 판정을
-  추정합니다. 게시물이 왜 퍼지거나 묻히는지 분석할 때 사용하세요. 분석한
-  게시물당 $0.0003부터입니다.
+  AI 특성 답변 8개로 게시물마다 0에서 100까지의 Viral Score & 판정을 추정합니다.
+  게시물이 왜 퍼지거나 묻히는지 분석할 때 사용하세요. 분석한 게시물당
+  $0.0003부터입니다.
 
 ## 자주 묻는 질문
 
@@ -737,14 +775,14 @@ Apify는 특정 빌드 번호를 `latest`로 바꿔 주지 않습니다. 고정�
 
 ### 중첩 답글도 포함되나요?
 
-네. 기본 `scope`는 직접 답글 & 중첩 답글을 수집합니다. 게시물에 직접 달린
-답글만 받으려면 `scope`를 `direct`로 설정하세요. `maxDepth`는 실행이 내려가는
-깊이를 제한합니다.
+네. 기본 `scope`는 직접 답글 & 중첩 답글을 수집합니다. 게시물에 직접 달린 답글만
+받으려면 `scope`를 `direct`로 설정하세요. `maxDepth`는 실행이 내려가는 깊이를
+제한합니다.
 
 ### 작성자가 숨긴 답글도 가져오나요?
 
-네. 기본 `auto` 전략은 숨겨진 답글을 `hiddenReply` 행으로 추가합니다.
-건너뛰려면 `includeHiddenReplies: false`를 설정하세요.
+네. 기본 `auto` 전략은 숨겨진 답글을 `hiddenReply` 행으로 추가합니다. 건너뛰려면
+`includeHiddenReplies: false`를 설정하세요.
 
 ### 답글을 마음에 들어요 수나 날짜순으로 정렬할 수 있나요?
 
@@ -753,8 +791,8 @@ Apify는 특정 빌드 번호를 `latest`로 바꿔 주지 않습니다. 고정�
 
 ### 답글을 CSV나 Excel로 내보낼 수 있나요?
 
-네. 데이터셋을 CSV, Excel, JSON 또는 HTML로 내보내세요. 플랫 출력은 행마다
-답글 1개를 담고 그 옆에 작성자 필드를 둡니다.
+네. 데이터셋을 CSV, Excel, JSON 또는 HTML로 내보내세요. 플랫 출력은 행마다 답글
+1개를 담고 그 옆에 작성자 필드를 둡니다.
 
 ### 게시물 대신 사용자의 답글을 스크랩할 수 있나요?
 
@@ -764,7 +802,7 @@ Apify는 특정 빌드 번호를 `latest`로 바꿔 주지 않습니다. 고정�
 ### X API 키나 로그인이 필요한가요?
 
 아니요. X API 키, 로그인, 자격 증명이 모두 필요 없습니다. Xquik의 X Reply
-Scraper는 X 비밀번호, 쿠키, 토큰을 요구하지 않습니다.
+Scraper는 X 비밀번호, 쿠키나 토큰을 요구하지 않습니다.
 
 ### X 답글을 스크랩해도 합법인가요?
 
@@ -777,7 +815,7 @@ Xquik의 X Reply Scraper는 공개 답글을 수집하며 비공개 계정을 �
 
 ### 게시물에 표시된 것보다 답글이 적게 나오는 이유는 무엇인가요?
 
-X가 스레드 일부를 숨기면 상태 메시지가 숨겨진 답글 수를 알려 줍니다.
+X가 스레드 일부를 숨기면 실행 상태가 X가 숨긴 답글 수를 알려 줍니다.
 `stopCauses`의 `reply_reach`는 X가 스레드의 일부만 제공했다는 뜻입니다. 필터,
 중복 제거, `scope`, `maxDepth` & 설정한 한도도 개수를 줄입니다.
 
@@ -790,11 +828,11 @@ cron 일정에 맞춰 실행하세요. Make, Zapier, n8n & Google Sheets에도 �
 
 ### 도움은 어디서 받을 수 있나요?
 
-Actor 페이지에서 이슈를 열거나 실행 ID와 함께 <support@xquik.com>으로
-문의하세요.
+실행 ID와 함께 [Issues 탭](https://apify.com/xquik/x-reply-scraper/issues)에서
+이슈를 여세요.
 
 ### 맞춤 솔루션을 받을 수 있나요?
 
-네. [xquik.com](https://xquik.com)을 방문하거나
-[API 문서](https://docs.xquik.com/introduction)를 읽어 보세요. Xquik은 대시보드,
-REST API, MCP 서버 & 웹훅을 제공합니다.
+네. [Issues 탭](https://apify.com/xquik/x-reply-scraper/issues)에 필요한 내용을
+적어 주세요. Xquik은 대시보드, REST API, MCP 서버 & 웹훅도 제공합니다. Xquik
+웹사이트는 [Apify 프로필](https://apify.com/xquik)에서 찾을 수 있습니다.

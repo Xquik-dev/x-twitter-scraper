@@ -1,19 +1,10 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <strong>Italiano</strong>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · **Italiano**
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer collega Xquik MCP agli agenti di coding"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Guarda come Framer usa gli scraper Xquik con Claude Code, Codex, Cursor e altro, da 6:07.</a>
-</td></tr></table>
+[![Framer collega Xquik MCP agli agenti di coding](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Guarda come Framer usa gli scraper Xquik](https://youtu.be/4UOSpoOoC3Y?t=367)
+con Claude Code, Codex, Cursor & altro, da 6:07.
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo, con
 i dati X più completi. X Community Scraper di Xquik raccoglie informazioni,
@@ -23,9 +14,9 @@ pagare prima di filtrare o deduplicare. Xquik fa pagare solo i risultati
 consegnati, unici e conformi ai filtri.
 
 Raccogli informazioni, post, media, risultati per parola chiave, membri &
-moderatori delle community di X (Twitter) da URL o ID delle community. Trova le
+moderatori delle community di Twitter da URL o ID delle community. Trova le
 community per parola chiave o argomento, oppure elenca quelle che X suggerisce.
-Paghi **$0.00015 per riga consegnata**. Apify fattura a parte l'uso della
+Paghi **$0.00015 per riga consegnata** & Apify fattura a parte l'uso della
 piattaforma. Non ti servono una chiave API X né il login.
 
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
@@ -43,14 +34,16 @@ parola chiave o argomento, & elenca quelle che X suggerisce.
 - Leggi molte community & risorse in 1 esecuzione.
 - Ottieni le informazioni della community con regole, domanda di adesione,
   creatore, amministratore & argomento.
-- Raccogli i post dal più recente, oppure i post Top che X mette in cima.
-- Raccogli la scheda Media, o cerca per parola chiave nei post di una community.
+- Raccogli i post dal più recente, oppure i post Top che X classifica più in
+  alto.
+- Raccogli la scheda Media, oppure cerca per parola chiave nei post di una
+  community.
 - Esporta membri & moderatori, oppure trova membri per nome.
-- Trova community per parola chiave o argomento, con il loro record completo.
-- Filtra i post per data, lingua, media & interazioni.
+- Trova community per parola chiave o argomento, con i loro record completi.
+- Filtra i post per data, lingua, media & engagement.
 - Filtra i membri per dimensione del pubblico, età dell'account & verifica.
-- I filtri & la rimozione dei duplicati si applicano prima della fatturazione.
-- Le righe consegnate & i progressi restano quando Apify riavvia l'esecuzione.
+- Filtri & rimozione dei duplicati agiscono prima della fatturazione.
+- Le esecuzioni conservano righe consegnate & progressi quando Apify le riavvia.
 
 ### Casi d'uso
 
@@ -59,7 +52,7 @@ parola chiave o argomento, & elenca quelle che X suggerisce.
   utenti.
 - Trova lanci, post di assunzioni & notizie sui finanziamenti tra i fondatori.
 - Confronta le community per dimensione, argomento & attività.
-- Leggi le regole di una community prima di pubblicare al suo interno.
+- Leggi le regole di una community prima di pubblicarci.
 - Trova i moderatori & i membri più seguiti di una community.
 - Raccogli post con immagini o video per la ricerca creativa.
 
@@ -89,7 +82,7 @@ principali.
 
 Ogni risorsa aggiunge righe del proprio tipo.
 
-| `resultType`         | Risorsa o input                  | Una riga per          |
+| `resultType`         | Risorsa o input                  | 1 riga per            |
 | -------------------- | -------------------------------- | --------------------- |
 | `community`          | `info`, parole chiave, argomenti | Community             |
 | `communityTweet`     | `tweets`, `search`               | Post                  |
@@ -101,15 +94,22 @@ Ogni risorsa aggiunge righe del proprio tipo.
 Le righe dei post contengono `text`, `createdAt`, `likeCount`, `replyCount`,
 `retweetCount`, `viewCount`, `media` & il profilo `author`. Le righe di membri &
 moderatori contengono i campi del profilo, come `username`, `followers`,
-`verified` & `communityRole`.
+`verified` & `communityRole`. Contengono anche `email` & `contactInfo`, cioè le
+email, i numeri di telefono & i link che ogni profilo pubblica.
 
 ## Come uso X Community Scraper per estrarre i dati delle community?
+
+Non usi ancora Apify?
+[Crea prima un account gratuito](https://console.apify.com/sign-up?fpr=xquik).
+Il piano gratuito non richiede carta di credito & offre $5 da spendere ogni
+mese. A $0.00015 per riga, $5 coprono fino a 33.000 righe, senza contare l'uso
+della piattaforma. Poi torna qui & premi Try for free.
 
 Segui questi passaggi in Apify Console.
 
 1. Apri un [esempio di task](#esempi-di-task) o la scheda Input.
 2. Incolla gli URL delle community in `startUrls` o gli ID in `communityIds`.
-3. Scegli `resources` & aggiungi filtri come `sinceDate` o `minLikes`.
+3. Scegli `resources` & aggiungi filtri, come `sinceDate` o `minLikes`.
 4. Imposta `maxItems`, poi fai clic su Start.
 5. Esporta il dataset in JSON, CSV, Excel o HTML.
 
@@ -149,8 +149,8 @@ Ogni ricetta qui sotto è un input completo.
 }
 ```
 
-Imposta `postsOrder` su `Top` per i post che X mette in cima. Aggiungi `"media"`
-a `resources` per la scheda Media.
+Imposta `postsOrder` su `Top` per i post che X classifica più in alto. Aggiungi
+`"media"` a `resources` per la scheda Media.
 
 ### Cerca nei post di una community
 
@@ -189,7 +189,7 @@ filtrate non arrivano mai nel dataset, quindi non le paghi mai.
 ```
 
 X controlla fino a 10 account corrispondenti per nome, come fa la ricerca dei
-membri su x.com. Ogni membro trovato è 1 riga `communityMember` con il suo
+membri di X. Ogni membro trovato è 1 riga `communityMember` con il suo
 `communityRole`. Un'esecuzione con `memberNames` non legge altre risorse, a meno
 che `resources` non le indichi.
 
@@ -212,7 +212,7 @@ argomento & i suoi sottoargomenti.
 ## Esempi di task
 
 Scegli tra 50 task pubblici. Ognuno ha un input limitato & una vista del dataset
-corrispondente. Modifica un task prima di eseguirlo.
+adatta. Modifica un task prima di avviarlo.
 
 - [Ottieni una panoramica di una community di X](https://apify.com/xquik/x-community-scraper/examples/get-an-x-community-overview)
 - [Ottieni i dettagli di una community di X con i post recenti](https://apify.com/xquik/x-community-scraper/examples/get-community-details-with-recent-posts)
@@ -231,22 +231,26 @@ corrispondente. Modifica un task prima di eseguirlo.
 
 X Community Scraper di Xquik costa $0.00015 per riga consegnata su ogni piano
 Apify. Apify fattura a parte il tuo uso della piattaforma. Xquik applica un
-addebito per ogni riga di dati consegnata. La diagnostica nell'output
-`diagnostics` è gratuita.
+addebito per ogni riga di dati consegnata. La diagnostica è gratuita nell'output
+`diagnostics`.
+
+Per volumi maggiori,
+[scegli un piano Apify](https://apify.com/pricing?fpr=xquik) con più uso
+prepagato.
 
 - Non ti serve un abbonamento Xquik.
 - Non paghi costi separati di avvio, per community, per risorsa o per query.
 - Una community trovata costa 1 riga, con o senza il suo record completo.
-- I filtri & la deduplicazione avvengono prima della fatturazione. Non paghi mai
+- Filtri & deduplicazione agiscono prima della fatturazione. Non paghi mai le
   righe filtrate o duplicate.
 - Le impostazioni di addebito massimo totale di Apify limitano le righe
   consegnate.
 
-Un'esecuzione che incontra un problema, o un'esecuzione grande, scrive anche un
+Anche un'esecuzione che incontra un problema, o un'esecuzione grande, scrive un
 record `run-report`. Un'esecuzione piccola senza problemi lo salta & risparmia
 uso di Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
 
-Per limitare quanto può spendere un'esecuzione, vedi
+Per fissare un tetto alla spesa di un'esecuzione, vedi
 [Opzioni di esecuzione](#opzioni-di-esecuzione).
 
 ## Esecuzioni vuote, parziali & interrotte
@@ -259,9 +263,9 @@ risultati addebitati & i target letti.
 
 Lo stato di un'esecuzione vuota ti dice di controllare target & filtri. Le righe
 filtrate non consumano mai il tuo limite di risultati. Un'esecuzione che legge
-ogni target & non riceve nessuna riga non scrive alcun record. Il suo stato dice
+ogni target & non riceve nessuna riga non scrive record. Il suo stato dice
 perché & cosa cambiare. L'Actor restituisce solo le community pubbliche che X
-mostra. I campi disponibili variano da community a community.
+espone. I campi disponibili variano da community a community.
 
 ### Esecuzioni parziali
 
@@ -288,7 +292,7 @@ altri campi sono facoltativi.
 
 | Campo                          | Cosa fa                                                                         |
 | ------------------------------ | ------------------------------------------------------------------------------- |
-| `startUrls`                    | URL delle community su x.com                                                    |
+| `startUrls`                    | URL delle community su `x.com`                                                  |
 | `communityIds`                 | ID numerici delle community                                                     |
 | `resources`                    | `info`, `tweets`, `media`, `search`, `members`, `moderators`                    |
 | `query`                        | Parola chiave per la risorsa `search`                                           |
@@ -302,22 +306,33 @@ altri campi sono facoltativi.
 | `includeDetails`               | Aggiunge i record completi alle community trovate per parola chiave o argomento |
 | `maxItems`                     | Limite di righe consegnate sull'intera esecuzione                               |
 | `maxItemsPerTarget`            | Limite di righe per ogni risorsa della community                                |
-| `sinceDate`, `untilDate`       | Mantiene i post in un intervallo di date                                        |
-| `language`                     | Mantiene i post in 1 codice lingua                                              |
-| `mediaType`                    | Mantiene i post con immagini, video, GIF, link o nessuno                        |
-| `minViews`, `minLikes`         | Mantiene i post sopra un numero di visualizzazioni o Mi piace                   |
-| `minReplies`, `minRetweets`    | Mantiene i post sopra un numero di risposte o repost                            |
-| `nativeRetweets`               | Mantiene solo i repost nativi                                                   |
-| `verifiedOnly`                 | Mantiene autori, membri o moderatori verificati                                 |
-| `minFollowers`, `maxFollowers` | Mantiene i membri in un intervallo di pubblico                                  |
-| `minAccountAgeDays`            | Mantiene i membri con un account di almeno questo numero di giorni              |
+| `sinceDate`, `untilDate`       | Tiene i post dentro un intervallo di date                                       |
+| `language`                     | Tiene i post in 1 codice lingua                                                 |
+| `mediaType`                    | Tiene i post con immagini, video, GIF, link o nessuno di questi                 |
+| `minViews`, `minLikes`         | Tiene i post sopra un numero di visualizzazioni o di Mi piace                   |
+| `minReplies`, `minRetweets`    | Tiene i post sopra un numero di risposte o di repost                            |
+| `nativeRetweets`               | Tiene solo i repost nativi                                                      |
+| `verifiedOnly`                 | Tiene autori, membri o moderatori verificati                                    |
+| `minFollowers`, `maxFollowers` | Tiene i membri dentro un intervallo di pubblico                                 |
+| `minAccountAgeDays`            | Tiene i membri con un account di almeno questo numero di giorni                 |
+| `blueVerifiedOnly`             | Tiene autori o membri che X segna come verificati Blue                          |
+| `verifiedType`                 | Tiene i membri con 1 tipo di verifica                                           |
+| `minFollowing`, `maxFollowing` | Tiene i membri dentro un intervallo di following                                |
+| `minStatuses`, `maxStatuses`   | Tiene i membri dentro un intervallo di numero di post                           |
+| `hasWebsite`, `hasLocation`    | Tiene i membri che indicano un sito web o una posizione                         |
+| `hasEmail`                     | Tiene i membri che pubblicano un'email                                          |
+| `businessEmailOnly`            | Tiene i membri con un'email fuori dai servizi di posta gratuiti                 |
+| `emailDomains`                 | Tiene i membri con un'email su questi domini                                    |
+| `bioContains`                  | Tiene i membri la cui bio contiene 1 di queste parole                           |
+| `locationContains`             | Tiene i membri la cui posizione contiene questo testo                           |
+| `usernameContains`             | Tiene i membri il cui nome utente contiene questo testo                         |
 | `dedupeAcrossTargets`          | Elimina le righe ripetute tra community prima della fatturazione                |
 
 ### Migra da un altro Actor di community
 
 I nomi `ranking` & `sort` funzionano come `postsOrder`. `Top` o `Relevance`
-legge i post in cima. Quando imposti uno di questi & `postsOrder`, vince il
-valore di `postsOrder`. Il log dell'esecuzione nomina il campo scartato.
+legge i post Top. Quando imposti uno di questi & `postsOrder`, vince il valore
+di `postsOrder`. Il log dell'esecuzione nomina il campo scartato.
 
 ### Scegli gli input giusti
 
@@ -353,20 +368,61 @@ informazioni sulla community ha questo aspetto.
 
 Esporta il dataset in JSON, CSV, Excel o HTML.
 
+## Colonne di output
+
+8 input danno forma a ogni riga dopo che l'esecuzione la legge. Non eseguono
+codice & non cambiano il prezzo.
+
+| Campo               | Cosa fa                                                                        |
+| ------------------- | ------------------------------------------------------------------------------ |
+| `fields`            | Tiene solo questi campi, nell'ordine & con la grafia che scrivi                |
+| `omitFields`        | Scarta questi campi & tiene il resto                                           |
+| `renameFields`      | Sposta un campo in una colonna con un nuovo nome                               |
+| `flatten`           | Trasforma ogni oggetto annidato in colonne di primo livello                    |
+| `fillMissingFields` | Riempie con `null` un campo tenuto che manca in una riga. Attivo di default    |
+| `joinFields`        | Trasforma ognuno di questi elenchi in 1 valore di testo                        |
+| `joinSeparator`     | Testo tra gli elementi uniti. Il valore predefinito è una virgola & uno spazio |
+| `constantFields`    | Aggiunge una colonna con lo stesso testo su ogni riga                          |
+
+- Usa un punto per un campo dentro un oggetto. Maiuscole & trattini bassi non
+  contano.
+- Ogni riga conserva il suo `id`.
+- Con `fields`, un campo che manca in una riga arriva come `null`. Così ogni
+  riga ha le stesse colonne.
+- Un nome di campo sbagliato ferma l'esecuzione prima di leggere & non addebita
+  nulla.
+- Se i nomi non si possono controllare, l'esecuzione continua a leggere & elenca
+  per ultimi i nomi che non ha visto.
+- L'esecuzione ignora una funzione map o un filtro jq scritti per un altro
+  Actor.
+
+Per aggiungere una colonna calcolata, scrivine il nome in `fields` o
+`renameFields`.
+
+| Colonna             | Formula                                                                                  |
+| ------------------- | ---------------------------------------------------------------------------------------- |
+| `totalEngagement`   | `likeCount` + `replyCount` + `retweetCount` + `quoteCount`. Un conteggio mancante vale 0 |
+| `engagementRate`    | `totalEngagement` × 100 ÷ i `followers` dell'autore, a 4 decimali                        |
+| `engagementPerView` | `totalEngagement` × 100 ÷ `viewCount`, a 4 decimali                                      |
+
+`totalEngagement` è `null` per una riga senza questi conteggi. Un tasso è `null`
+quando il suo divisore manca o vale 0.
+
 ## Opzioni di esecuzione
 
 - Imposta l'addebito massimo totale di Apify per limitare il costo
-  dell'esecuzione. Lascia `maxItems` alto per ottenere tutte le righe che quel
-  budget consente.
-- Imposta `maxTotalChargeUsd` nell'API di Apify o Max cost per run in Console.
+  dell'esecuzione. Tieni `maxItems` alto per avere tutte le righe che il budget
+  consente.
+- Imposta `maxTotalChargeUsd` nell'API di Apify, oppure Max cost per run in
+  Console.
 - Metti tutte le tue community in 1 esecuzione. Ogni esecuzione paga ad Apify lo
   stesso costo di avvio.
 - `maxItemsPerTarget` limita le righe di ogni risorsa della community.
 - `maxConcurrency` imposta quante risorse delle community vengono eseguite
   insieme. Il valore predefinito è l'impostazione sicura più veloce.
 
-Seleziona `latest` per ogni esecuzione per ricevere ogni correzione pubblicata.
-I task salvati & le pianificazioni conservano la propria scelta di build, quindi
+Scegli `latest` per ogni esecuzione, così ricevi ogni correzione pubblicata. I
+task salvati & le pianificazioni conservano la propria scelta di build, quindi
 lasciala su `latest`.
 
 ## Actor Xquik correlati
@@ -394,7 +450,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   filtri. Usalo quando studi chi ha citato dei post & cosa ha detto. Da $0.00015
   per post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) estrae
-  follower, following, membri & follower delle liste e membri delle community
+  follower, following, membri delle liste, abbonati & membri delle community
   come righe di profilo. Usalo quando ti servono elenchi di pubblico o di
   membri. Da $0.00015 per profilo.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) cerca
@@ -403,8 +459,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   $0.00015 per profilo.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   verifica dove hanno sede gli account con l'etichetta "Posizione account" di X,
-  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando ti
-  serve verificare dove hanno sede gli account. Da $0.00015 per account.
+  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando
+  vuoi verificare dove hanno sede gli account. Da $0.00015 per account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) ottiene le email, i
   numeri di telefono & i link che gli account pubblicano sui propri profili, da
   nomi utente, follower o ricerche di utenti. Usalo quando ti servono le email
@@ -424,7 +480,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   lavoro di X per parola chiave, luogo, modalità di lavoro, livello di
   esperienza & azienda, con stipendi & link di candidatura. Usalo quando
   raccogli le offerte di lavoro pubblicate su X. Da $0.00015 per offerta.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper) raccoglie gli
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) estrae gli
   articoli lunghi di X come Markdown & testo, con copertine, autori, date &
   metriche. Usalo quando ti serve il corpo degli articoli, non i post. Da
   $0.00015 per articolo.
@@ -434,7 +490,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   media.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
   monitora le menzioni del brand con rilevanza, sentiment & risposte sulla
-  customer experience generate con AI, poi confronta le esecuzioni. Usalo quando
+  customer experience generate con AI & confronta le esecuzioni. Usalo quando
   osservi un brand nel tempo. Da $0.0003 per post analizzato.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   etichetta atteggiamento, intensità & probabilità di sarcasmo di ogni post con
@@ -467,8 +523,8 @@ No. X Community Scraper di Xquik non richiede chiave API X, login o credenziali.
 
 ### Come trovo l'ID di una community?
 
-Apri la community su x.com. L'ID è il numero dopo `/i/communities/` nell'URL.
-Puoi anche incollare l'URL completo in `startUrls`.
+Apri la community su X. L'ID è il numero dopo `/i/communities/` nell'URL. Puoi
+anche incollare l'URL completo in `startUrls`.
 
 ### Posso esportare i membri di una community di X in CSV o Excel?
 
@@ -487,19 +543,19 @@ solo i post più popolari.
 
 ### Quante community posso estrarre in 1 esecuzione?
 
-Tutte quelle che elenchi. `maxItems` & il tuo limite di spesa Apify limitano le
-righe.
+Tutte quelle che elenchi. `maxItems` & il tuo limite di spesa su Apify limitano
+le righe.
 
 ### Legge le community private?
 
 No. X Community Scraper di Xquik restituisce solo le community pubbliche che X
-mostra.
+espone.
 
 ### È legale estrarre le community di X?
 
 X Community Scraper di Xquik raccoglie campi pubblici di X. I risultati possono
-contenere dati personali. Verifica di avere uno scopo lecito & rispetta le
-norme sulla privacy applicabili. Nel dubbio, chiedi a un legale qualificato.
+contenere dati personali. Verifica di avere uno scopo lecito & rispetta le norme
+sulla privacy applicabili. Nel dubbio, chiedi a un legale qualificato.
 
 ### Perché la mia esecuzione non ha restituito risultati?
 
@@ -521,13 +577,15 @@ meno che non ti serva una build precedente.
 
 ### Posso avere una soluzione personalizzata?
 
-Sì. Visita [xquik.com](https://xquik.com) o leggi la
-[documentazione API](https://docs.xquik.com/introduction). Copre dashboard, API,
-server MCP & webhook.
+Sì. Descrivi ciò che ti serve nella
+[scheda Issues](https://apify.com/xquik/x-community-scraper/issues). Xquik offre
+anche una dashboard, un'API REST, un server MCP & webhook. Trovi il sito web di
+Xquik sul suo [profilo Apify](https://apify.com/xquik).
 
 ### Dove trovo assistenza?
 
-Apri una issue nella pagina dell'Actor o scrivi a <support@xquik.com> con l'ID
+Apri una issue nella
+[scheda Issues](https://apify.com/xquik/x-community-scraper/issues) con l'ID
 dell'esecuzione. La diagnostica gratuita nel key-value store spiega le
 esecuzioni che richiedono attenzione. Un'esecuzione che non riceve nessuna riga
-spiega il motivo nel suo stato.
+ne spiega il motivo nel suo stato.

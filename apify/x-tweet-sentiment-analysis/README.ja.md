@@ -1,37 +1,28 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <strong>日本語</strong> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) · [简体中文](README.zh-CN.md) · **日本語** · [한국어](README.ko.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="FramerがXquik MCPをコーディングエージェントに接続する様子"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">FramerがXquikのスクレイパーをClaude Code、Codex、Cursorなどと一緒に使う様子を6:07から視聴できます。</a>
-</td></tr></table>
+[![FramerがXquik MCPをコーディングエージェントに接続する様子](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[FramerがXquikのスクレイパーをClaude Code、Codex、Cursorなどと一緒に使う様子](https://youtu.be/4UOSpoOoC3Y?t=367)を6:07から視聴できます。
 
-Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX Tweet Sentiment Analysisは、すべてのポストに態度、強度、皮肉の判定を付けます。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。AIの費用はポスト1件あたりの料金に含まれます。AIのアカウント、トークン、キーは不要です。
+Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX Tweet Sentiment Analysisは、すべてのポストに態度、強度&皮肉の判定を付けます。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。AIの費用はポスト1件あたりの料金に含まれます。AIのアカウント、トークン、キーは不要です。
 
-X(Twitter)のポストに表れた態度を測り、元のポストデータもそのまま残します。Xquikの**X Tweet Sentiment Analysis with AI**は、条件に合うポストを収集します。そして、AIによる感情のカテゴリー、強度レベル、皮肉の確率をすべてのポストに付けます。製品の発売、キャンペーン、番組のエピソード、著名人への反応を追跡できます。強い反応と、ついでの言及を分けられます。
+X(Twitter)のポストに表れた態度を測り、元のポストデータもそのまま残せます。Xquikの**X Tweet Sentiment Analysis with AI**は、条件に合うポストを収集します。そして、AIによる感情のカテゴリー、強度レベル&皮肉の確率をすべてのポストに付けます。発売、キャンペーン、番組のエピソード、著名人への反応を追跡できます。強い反応と、ついでの言及を分けられます。
 
-- **ポストごとの感情。** ポストごとにカテゴリーが付くので、すべての回答を確認できます。
+- **ポストごとの感情。** 各ポストにそれぞれのカテゴリーが付くので、すべての回答を確認できます。
 - **強度。** 0から2のレベルで、強い調子のポストと穏やかなポストを分けます。
 - **皮肉の確率。** 文字どおりの言葉が態度と食い違うポストに印を付けます。
-- **完全な元レコード。** どの行も、ポストが持つすべてのフィールドを残します。
+- **完全な元レコード。** どの行も、ポストが公開するすべてのフィールドを残します。
 
-> Xquikは独立したサードパーティサービスです。X Corpとは提携していません。「Twitter」および「X」はX Corpの商標です。
+> Xquikは独立したサードパーティサービスです。X Corpとは提携していません。
+> 「Twitter」および「X」はX Corpの商標です。
 
 ## ポストの感情を分析する方法
 
-1. 検索語、プロフィールのユーザー名、ポストのURL、ポストIDを追加します。
-2. `maxItems`と、タスクに必要な抽出フィルターを設定します。
-3. 各ポストをそれぞれの主題で判定するなら、`analysis.targets`は空のままにします。ブランド、製品、人物に絞るなら、その名前と別名を追加します。
-4. 実行を開始し、データセットを開きます。
+Apifyを初めて使いますか？まず[無料アカウントを作成してください](https://console.apify.com/sign-up?fpr=xquik)。無料プランはクレジットカード不要&毎月$5分を使えます。分析済みポスト1件あたり$0.0003なので、プラットフォーム利用料を別にすると、$5で最大16,000件の分析済みポストをまかなえます。その後、このページに戻ってTry for freeを押してください。
+
+1. 検索語、プロフィールのユーザー名、ポストのURL、ポストIDのいずれかを追加します。
+2. `maxItems` & タスクに必要な抽出フィルターを設定します。
+3. 各ポストをそれぞれの主題で判定するなら、`analysis.targets` は空のままにします。ブランド、製品、人物に絞るなら、その名前&別名を追加します。
+4. 実行を開始&データセットを開きます。
 
 ```json
 {
@@ -43,17 +34,17 @@ X(Twitter)のポストに表れた態度を測り、元のポストデータも�
 
 ### Actorが回答する内容
 
-| 質問      | 回答                                                          |
-| --------- | ------------------------------------------------------------- |
-| 感情      | ポジティブ、ネガティブ、混在、中立、不明                      |
-| 強度      | 0はついでの言及、1ははっきりした態度、2は強い言葉づかい       |
-| 皮肉      | 文字どおりの言葉が態度と食い違う確率                          |
+| 質問 | 回答                                                    |
+| ---- | ------------------------------------------------------- |
+| 感情 | ポジティブ、ネガティブ、混在、中立、不明のいずれか      |
+| 強度 | 0はついでの言及、1ははっきりした態度、2は強い言葉づかい |
+| 皮肉 | 文字どおりの言葉が態度と食い違う確率                    |
 
 対象を指定すると、感情はその対象への態度を判定します。指定した引用や返信の文脈も使います。対象がなければ、ポストの主な主題を判定します。
 
 ## 自分のテキストを分析する
 
-自分の下書き、返信、レビュー、メモを`texts`に貼り付けてください。XquikのX Tweet Sentiment Analysisがそれを分析します。Xからは何も取得しません。
+自分の下書き、返信、レビュー、メモを `texts` に貼り付けてください。XquikのX Tweet Sentiment Analysisがそれを分析します。Xからは何も取得しません。
 
 ```json
 {
@@ -64,10 +55,10 @@ X(Twitter)のポストに表れた態度を測り、元のポストデータも�
 }
 ```
 
-- 各テキストは1行になり、ポストと同じ`analysis`の回答を持ちます。
-- `tweet.id`は`text:1`、`text:2`と続き、`tweet.type`は`text`です。
-- 分析するテキスト1件の料金は、分析済みポスト1件と同じ$0.0003です。
-- `texts`を設定した実行は、そのテキストだけを分析します。Xの対象は別の実行で扱ってください。
+- 各テキストは1行になり、ポストと同じ `analysis` の回答を持ちます。
+- `tweet.id` は `text:1`、`text:2` と続き、`tweet.type` は `text` です。
+- 分析したテキストは1件あたり、分析済みポスト1件と同じ$0.0003です。
+- `texts` を設定した実行は、そのテキストだけを分析します。Xの対象は別の実行で扱ってください。
 
 ## 他の感情分析Actorから移行する
 
@@ -85,7 +76,7 @@ X(Twitter)のポストに表れた態度を測り、元のポストデータも�
 | `tweetLanguage`, `language`                         | `lang`            |
 | `startDate`, `endDate`                              | `since`, `until`  |
 
-Actorは、これらのよく使われる名前をそのまま受け付けます。他のポスト用Actorのフィルター名も読み取ります。ここに対応するフィールドがないフィルターは、実行中のすべての検索でXの検索演算子になり、実行ログには、それらの演算子が最初に一覧で記録されます。`sort`には`Latest`か`Top`を使ってください。言語コードと日付の境界はそのまま残してください。上限は、すべての対象を合わせた数に適用されます。次の入力はそのまま実行できます。
+このActorは、これらのよく使われる名前をそのまま受け付けます。他のポスト用Actorのフィルター名も読み取ります。ここに対応するフィールドがないフィルターは、実行中のすべての検索でXの検索演算子になります。実行ログは、それらの演算子を最初に挙げます。`sort` には `Latest` か `Top` を使ってください。言語コード&日付の境界はそのまま残してください。上限は、すべての対象を合わせた数に適用されます。次の入力はそのまま実行できます。
 
 ```json
 { "searchTerms": ["from:NASA"], "sort": "Latest", "maxItems": 5 }
@@ -93,39 +84,41 @@ Actorは、これらのよく使われる名前をそのまま受け付けます
 
 ほかの入力は、実行前に変換が必要です。
 
-1つの`tweetUrl`は`startUrls`に入れます。
+1つの `tweetUrl` は `startUrls` に入れてください。
 
 ```json
 { "startUrls": ["https://x.com/NASA/status/2105727882588807607"] }
 ```
 
-`text`、`Texts`、データセットの文字列、ファイルの文字列は`texts`に入れます。
+`text`、`Texts`、データセットの文字列、ファイルの文字列は `texts` に入れてください。
 
 ```json
 { "texts": ["Support fixed my issue. Thank you."] }
 ```
 
-`hashtag`や`cashtag`は検索文字列に変えます。
+`hashtag` や `cashtag` は検索文字列に変えてください。
 
 ```json
 { "searchTerms": ["#Artemis lang:en", "$AAPL lang:en"], "maxItems": 5 }
 ```
 
-`minLikes`、`minReplies`、`minRetweets`は、次のフィールド名に置き換えます。
+`minLikes`、`minReplies` & `minRetweets` は、次のフィールド名に置き換えてください。
 
 ```json
 { "min_faves": 10, "min_replies": 2, "min_retweets": 3 }
 ```
 
-結果は、元のレコードを`tweet`に、回答を`analysis.answers`に残します。ポジティブ、ネガティブ、中立のラベルは、該当する感情カテゴリーに対応付けてください。`mixed`と`unclear`は別のカテゴリーとして残してください。ほかの感情スコアは、尺度や意味が異なる場合があります。Xquikの強度は0から2で、小数を含むことがあります。皮肉は確率です。確信度は、回答の確かさを表します。
+結果は、元のレコードを `tweet` に、回答を `analysis.answers` に残します。ポジティブ、ネガティブ&中立のラベルは、該当する感情カテゴリーに対応付けてください。`mixed` & `unclear` は別のカテゴリーとして残してください。ほかの感情スコアは、尺度&意味が異なる場合があります。Xquikの強度は0から2で、小数を含むことがあります。皮肉は確率です。確信度は、回答の確かさを表します。
 
-## ポストの感情分析にかかる費用は？
+## ポストの感情分析にはいくらかかりますか？
 
-XquikのX Tweet Sentiment Analysisは、分析済みポスト1件あたり$0.0003からです。開始料金はかかりません。料金には収集とAIの費用が含まれます。AIのアカウント、トークン、キーは不要です。この料金で、ポスト1件あたり最大8個の質問と64,000バイトのコンテキストを扱えます。質問の定義は1つあたり最大8,000バイトです。
+XquikのX Tweet Sentiment Analysisは、分析済みポスト1件あたり$0.0003からです。開始料金はかかりません。料金には収集&AIの費用が含まれます。AIのアカウント、トークン、キーは不要です。この料金で、ポスト1件あたり最大8個の質問&64,000バイトのコンテキストを扱えます。質問の定義は1つあたり最大8,000バイトです。
 
-抽出フィルターと重複排除は分析の前に行います。フィルターで除いた行や重複した行に支払うことはありません。失敗した分析、スキップした分析、診断情報の行には結果料金がかかりません。Apifyは、コンピュート、ストレージ、転送のプラットフォーム利用料を、プランの料金で別途請求します。Pricingタブで確認できます。
+より多くの量が必要なら、前払いの利用枠が多い[Apifyプランを選んでください](https://apify.com/pricing?fpr=xquik)。
 
-## 入力と出力の例
+抽出フィルター&重複排除は分析の前に行います。フィルターで除いた行や重複した行に支払うことはありません。失敗した分析、スキップした分析&診断情報の行には結果料金がかかりません。Apifyは、コンピュート、ストレージ&転送のプラットフォーム利用料を、プランの料金で別途請求します。Pricingタブで確認できます。
+
+## 入力&出力の例
 
 上の入力はそのままコピーして使えます。一部を省略した出力行は次のとおりです。
 
@@ -153,61 +146,60 @@ XquikのX Tweet Sentiment Analysisは、分析済みポスト1件あたり$0.000
 }
 ```
 
-各結果には`tweet`と`analysis`が入ります。回答には、種類、質問のバージョン、取得できる確率が含まれます。分析が失敗またはスキップされた行にも、収集したポストと`reason`が残ります。その行の回答リストは空です。
+各結果には `tweet` & `analysis` が入ります。回答には、種類、質問のバージョン&取得できる確率が含まれます。分析が失敗またはスキップされた行にも、収集したポスト & `reason` が残ります。その行の回答リストは空です。
 
-キーバリューストアにある無料の診断情報が、無効な入力、見つからない結果、中断された収集を説明します。実行レポートは、収集した行、課金済みの分析、保留中の課金を分けて示します。
+キーバリューストアにある無料の診断情報が、無効な入力、見つからない結果&中断された収集を説明します。実行レポートは、収集した行、課金済みの分析&保留中の課金を分けて示します。
 
-## 実行サマリーとフラットな回答
+## 実行サマリー&フラットな回答
 
-実行は、次の4つの場合に`analysis-summary`レコードをキーバリューストアに書き込みます。
+実行は、次の3つの場合に `analysis-summary` レコードをキーバリューストアに書き込みます。
 
 - 問題が起きた場合、または大規模な場合。
-- シリーズの最初の実行として、`baselineDatasetId`なしで`monitor`を設定した場合。
-- 比較で、変化したポスト、新しいポスト、比較できないポストが見つかった場合。
-- `alwaysSaveRunRecords`がオンの場合。
+- 比較で、変化したポスト、新しいポスト、比較できないポストのいずれかが見つかった場合。
+- `alwaysSaveRunRecords` がオンの場合。
 
-それ以外の実行は、このレコードを書き込みません。その場合は、`Top sentiment: positive in 3 of 5 results.`のように、最も多い回答をステータスに示します。変化のない比較では、`No change since the earlier run.`と示します。問題が起きた実行と大規模な実行は、`run-report`も書き込みます。`alwaysSaveRunRecords`がオンの実行も同じです。`run-report`は、`results.analysisSummary`の下にサマリーを繰り返します。
+それ以外の実行は、シリーズの最初の実行も含めて、このレコードを書き込みません。その場合は、`Top sentiment is positive in 3 of 5 results.` のように、最も多い回答をステータスに示します。変化のない比較では、`No change since the earlier run.` と示します。問題が起きた実行や大規模な実行は、`run-report` も書き込みます。`alwaysSaveRunRecords` がオンの実行も同じです。`run-report` は、`results.analysisSummary` の下にサマリーを繰り返します。
 
-サマリーは、分析済み、失敗、スキップの行数を数えます。エンゲージメントを合計し、すべての質問を要約します。
+サマリーは、分析済み、失敗&スキップの行数を数えます。エンゲージメントを合計し、すべての質問を要約します。
 
-- `sentiment`の内訳は、各態度に当てはまるポストの数を示します。
-- `engagementShares`は、同じ内訳をいいね、リポスト、返信、引用の数で重み付けします。
-- `top`は、態度ごとにエンゲージメントが最も高いポストを3件挙げます。
-- どの行も、リンク先のホスト名を`sourceDomains`に挙げます。
-- どの行も、テキスト内にある`$NVDA`のような`cashtags`を挙げます。
-- `monitor.baselineDatasetId`を設定すると、サマリーの`monitor`ブロックが比較ステータスを数えます。変化した行も最大50件挙げます。
+- `sentiment` の内訳は、各態度に当てはまるポストの数を示します。
+- `engagementShares` は、同じ内訳をいいね、リポスト、返信&引用の数で重み付けします。
+- `top` は、態度ごとにエンゲージメントが最も高いポストを3件挙げます。
+- どの行も、リンク先のホスト名である `sourceDomains` を挙げます。
+- どの行も、`$NVDA` のように、テキスト内にある `cashtags` を挙げます。
+- `monitor.baselineDatasetId` を設定すると、サマリーの `monitor` ブロックが比較ステータスを数えます。変化した行も最大50件挙げます。
 
-サマリーは数値を小数点以下4桁に丸めます。結果が空の実行は、件数を0、平均を`null`として報告します。
+サマリーは数値を小数点以下4桁に丸めます。結果が空の実行は、0の件数 & `null` の平均を報告します。
 
-どの結果行にも、質問IDをキーにしたフラットなマップ`answers`が入ります。各値は、選ばれたカテゴリー、スコア、確率です。`Flat answers`データセットビューと、CSVやExcelのエクスポートでは、質問ごとに1列が表示されます。列はポストの横に並ぶので、スプレッドシートでJSONを解析する必要はありません。失敗した行とスキップした行のマップは空です。
+どの結果行にも、質問IDをキーにしたフラットなマップ `answers` も入ります。各値は、選ばれたカテゴリー、スコア、確率のいずれかです。`Flat answers` データセットビュー & CSVやExcelのエクスポートでは、質問ごとに1列が表示されます。列はポストの横に並ぶので、スプレッドシートでJSONを解析する必要はありません。失敗した行&スキップした行のマップは空です。
 
 ## 以前の実行と比較する
 
-`monitor.baselineDatasetId`に、同じ分析設定で完了した以前の実行のデータセットIDを渡してください。比較ではその実行の行を読み取ります。その実行がサマリーを書き込んでいなくても機能します。ベースラインを指定すると、すべての行に`monitor`オブジェクトが付きます。ステータスは次のいずれかです。
+`monitor.baselineDatasetId` に、同じ分析設定で完了した以前の実行のデータセットIDを渡してください。比較ではその実行の行を読み取ります。その実行がサマリーを省いていても機能します。すると、すべての行に `monitor` オブジェクトが付きます。そのステータスは次の値をとります。
 
-- ベースラインがない場合は`first_run`。
-- 以前の実行になかったポストは`new_to_baseline`。
-- 以前の実行にあったポストは`unchanged`または`changed`。
+- ベースラインがない場合は `first_run`。
+- 以前の実行になかったポストは `new_to_baseline`。
+- 以前の実行にあったポストは `unchanged` または `changed`。
 
-`changes`は、`previous`から`current`へ変わった感情、強度レベル、皮肉の判定をそれぞれ挙げます。判定は、カテゴリー、丸めたスコアのレベル、0.5を境にしたはい/いいえで比較します。判定が変化として数えられるのは、はっきり変わった場合だけです。実行間でほぼ同点の判定は`unchanged`のままです。
+`changes` は、`previous` から `current` へ変わった感情、強度レベル、皮肉の判定をそれぞれ挙げます。判定は、カテゴリー、丸めたスコアのレベル、0.5を境にしたはい/いいえで比較します。判定が変化として数えられるのは、はっきり変わった場合だけです。実行間でほぼ同点の判定は `unchanged` のままです。
 
-ベースラインが`maxBaselineRows`を超える場合や、異なる設定の実行のものである場合、実行は収集の前に止まります。そのとき、実行は診断情報の行を書き込みます。`maxBaselineRows`のデフォルトは100,000です。
+ベースラインが `maxBaselineRows` を超える場合や、異なる設定の実行のものである場合、実行は収集の前に止まります。そのとき、実行は診断情報の行を書き込みます。`maxBaselineRows` のデフォルトは100,000です。
 
 ## タスクの例
 
-50個の公開タスクから選べます。知りたいことに合う例から始めてください。ほとんどのタスクは小さな上限を使います。日付を指定した2つの検索は、50件のポストを要求します。タスクを開くと、保存済みの入力を使えます。下にあるコピーして使える入力と観測した件数が、設定を選ぶ助けになります。
+50個の公開タスクから選べます。知りたいことに合う例から始めてください。ほとんどのタスクは小さな上限を使います。日付を指定した2つの検索は、50件のポストを要求します。タスクを開くと、保存済みの入力を使えます。下にあるコピーして使える入力&観測した件数が、設定を選ぶ助けになります。
 
-成功した行はどれも、感情、強度、皮肉の確率を返します。どの行も、回答の横に元のポストか入力したテキストを残します。これらの例は、英語の入力と言語フィルターを使います。それでも言語ラベルは、ポストや引用の中にある別の言語のテキストを見落とすことがあります。
+成功した行はどれも、感情、強度&皮肉の確率を返します。どの行も、回答の横に元のポストか入力したテキストを残します。これらの例は、英語の入力&言語フィルターを使います。それでも言語ラベルは、ポストや引用の中にある別の言語のテキストを見落とすことがあります。
 
 対象がなければ、回答はポストの主な主題を表します。キーワードに言及していても、別のものの話である場合があります。対象が複数あると、感情の回答はそれらをまとめて表します。対象ごとに別々の回答は返しません。
 
 プロフィールのいいねは非公開の場合があります。取得できない場合は、プロフィールの返信かポストを使ってください。
 
-検索結果には、告知、宣伝、冗談、繰り返しのテキストが含まれることがあります。ポストIDが別々でも、独立した反応や顧客本人であることの証明にはなりません。意見を表すフレーズとエンゲージメントのフィルターは、サンプルを選ぶだけです。フィードバックとして数える前に、ポストを確認してください。分析は、ポストの主張を検証しません。
+検索結果には、告知、宣伝、冗談&繰り返しのテキストが含まれることがあります。ポストIDが別々でも、独立した反応や顧客本人であることの証明にはなりません。意見を表すフレーズ&エンゲージメントのフィルターは、サンプルを選ぶだけです。フィードバックとして数える前に、ポストを確認してください。分析は、ポストの主張を検証しません。
 
 ### テスト済みのタスク入力
 
-タスクを開いてください。Inputタブには、ビジュアルなフィールドとJSONがあります。開始する前に、JSONをコピーするかフィールドを変更してください。[タスクの入力はApifyが説明しています](https://docs.apify.com/actors/running/tasks)。
+タスクを開いてください。Inputタブには、ビジュアルなフィールド&JSONがあります。開始する前に、JSONをコピーするかフィールドを変更してください。[タスクの入力はApifyが説明しています](https://docs.apify.com/actors/running/tasks)。
 
 テストの日付はUTCです。件数は記録した実行のもので、取得できる量を保証するものではありません。日付を指定した50件の例は、重複のないIDが独立した意見と異なる理由を示します。
 
@@ -237,19 +229,19 @@ XquikのX Tweet Sentiment Analysisは、分析済みポスト1件あたり$0.000
 
 #### 映画の議論
 
-[マーベル映画の議論のポスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-marvel-movie-audiences)
+[Marvel映画の議論のポスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-marvel-movie-audiences)
 
 観客のコメントを選ぶ前に、映画の議論を確認します。2026-10-01に重複のないポストを5件観測しました。上限は5件です。Marvelは、無関係な意味で使われた同じ語にも一致することがあります。
 
 #### アーティストのメディアキャプション
 
-[テイラー・スウィフトのメディアキャプションのトーン](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-taylor-swift-album-reactions)
+[Taylor Swiftのメディアキャプションのトーン](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-taylor-swift-album-reactions)
 
 最近のメディアに添えたアーティストの言葉を確認します。2026-10-01に重複のないポストを5件観測しました。上限は5件です。キャプションは、画像や動画に映るすべてを説明できるわけではありません。
 
 #### ゲーム発売のスレッド
 
-[ゲーム発売の最新情報スレッド](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-video-game-launch)
+[ゲーム発売のアップデートスレッド](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-video-game-launch)
 
 告知と、競合するゲームについての返信を並べて読みます。2026-10-01に重複のないポストを5件観測しました。上限は5件です。スレッドは複数のゲームに触れていて、最初のポストも含みます。
 
@@ -261,7 +253,7 @@ XquikのX Tweet Sentiment Analysisは、分析済みポスト1件あたり$0.000
 
 #### 航空会社のポスト
 
-[航空会社の議論のポスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airline-passengers)
+[航空会社についての議論のポスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airline-passengers)
 
 サービスへのフィードバックを選ぶ前に、航空会社への言及を確認します。2026-10-01に重複のないポストを5件観測しました。上限は5件です。言及があっても、投稿者が乗客である証明にはなりません。
 
@@ -279,7 +271,7 @@ XquikのX Tweet Sentiment Analysisは、分析済みポスト1件あたり$0.000
 
 #### スクーターの議論
 
-[電動キックスクーターの議論](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-toward-electric-scooters)
+[電動スクーターの議論](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-toward-electric-scooters)
 
 利用者のフィードバックを選ぶ前に、スクーターの議論を見つけます。2026-10-01に重複のないポストを5件観測しました。上限は5件です。個人の体験に加えて、広告、調査、冗談も一致することがあります。
 
@@ -297,7 +289,7 @@ XquikのX Tweet Sentiment Analysisは、分析済みポスト1件あたり$0.000
 
 #### デバイスのプロフィールの返信
 
-[Googleのデバイス用プロフィールの返信のトーン](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-smart-home-device-owners)
+[Googleデバイスのプロフィールの返信のトーン](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-smart-home-device-owners)
 
 デバイスのプロフィールの言葉を、返信も含めて確認します。2026-10-01に重複のないポストを5件観測しました。上限は5件です。返信先の文脈がないと、プロフィールの返信の意味が限られることがあります。
 
@@ -315,13 +307,13 @@ XquikのX Tweet Sentiment Analysisは、分析済みポスト1件あたり$0.000
 
 #### ストリーミング料金の議論
 
-[Netflixの料金の議論のポスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-streaming-price-increases)
+[Netflixの料金についての議論のポスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-streaming-price-increases)
 
 解約の理由を確認する前に、Netflixの料金への懸念を見つけます。2026-10-01に重複のないポストを5件観測しました。上限は5件です。料金のフレーズが選ぶのは懸念であり、視聴者を代表するサンプルではありません。
 
 #### 学用品の買い物
 
-[2026年8月の学用品に関するポスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-back-to-school-shoppers)
+[2026年8月の学用品のポスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-back-to-school-shoppers)
 
 8月の期間内で、学用品のポストを50件確認します。2026-10-01に重複のないポストを50件観測しました。上限は50件です。当社の確認では、50件のIDのうち明らかに関連する行は42件でした。
 
@@ -357,7 +349,7 @@ XquikのX Tweet Sentiment Analysisは、分析済みポスト1件あたり$0.000
 
 #### 大会の議論
 
-[League of Legendsの大会に関するポスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-esports-tournament-viewers)
+[League of Legendsの大会のポスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-esports-tournament-viewers)
 
 大会の議論と、チケットや試合の宣伝を分けます。2026-10-01に重複のないポストを5件観測しました。上限は5件です。チケットの広告と試合のレポートは、視聴者の意見ではありません。
 
@@ -369,7 +361,7 @@ XquikのX Tweet Sentiment Analysisは、分析済みポスト1件あたり$0.000
 
 #### ジムの比較
 
-[ジムを比較するレビューテキスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-gym-memberships)
+[ジムを比べるレビューテキスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-gym-memberships)
 
 自分のレビューで、2つのジムへの態度をまとめて確かめます。2026-10-01に、入力した重複のないテキストを3件観測しました。上限は3件です。2つの対象は、テキストごとに1つの感情の回答を共有します。
 
@@ -399,7 +391,7 @@ XquikのX Tweet Sentiment Analysisは、分析済みポスト1件あたり$0.000
 
 #### 税務申告の議論
 
-[2026年春のTurboTaxでの申告に関するポスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-tax-filing-software)
+[2026年春のTurboTaxでの申告のポスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-tax-filing-software)
 
 春の決まった期間内で、申告についての議論を確認します。2026-10-01に重複のないポストを5件観測しました。上限は5件です。ポストは、現在の料金や税のルールを裏付けるものではありません。
 
@@ -459,7 +451,7 @@ XquikのX Tweet Sentiment Analysisは、分析済みポスト1件あたり$0.000
 
 #### 本への反応
 
-[読書の反応に関するポスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-book-club-readers)
+[読書の感想のポスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-book-club-readers)
 
 読書会のメンバーだと決めつけずに、読書の反応を確認します。2026-10-01に重複のないポストを5件観測しました。上限は5件です。映画との比較と、個人の読書の感想のどちらも一致することがあります。
 
@@ -483,7 +475,7 @@ XquikのX Tweet Sentiment Analysisは、分析済みポスト1件あたり$0.000
 
 #### 空港の待ち時間のポスト
 
-[空港の待ち時間とラウンジに関するポスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airport-travelers)
+[空港の待ち時間とラウンジのポスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airport-travelers)
 
 空港の待ち時間へのコメントを、旅行のお知らせとあわせて確認します。2026-10-01に重複のないポストを5件観測しました。上限は5件です。個人の待ち時間の体験に加えて、公式のお知らせが含まれることがあります。
 
@@ -495,7 +487,7 @@ XquikのX Tweet Sentiment Analysisは、分析済みポスト1件あたり$0.000
 
 #### ビールのテイスティング
 
-[クラフトビールのテイスティングに関するポスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-craft-beer-drinkers)
+[クラフトビールのテイスティングのポスト](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-craft-beer-drinkers)
 
 レビューの例を選ぶ前に、ビールのテイスティングの感想を見つけます。2026-10-01に重複のないポストを5件観測しました。上限は5件です。リンクに添えた短いキャプションは、態度をはっきり読み取るだけの文脈を欠くことがあります。
 
@@ -511,37 +503,37 @@ XquikのX Tweet Sentiment Analysisは、分析済みポスト1件あたり$0.000
 
 1件の誕生日ポストへの直接の返信を確認します。2026-10-01に重複のないポストを5件観測しました。上限は5件です。元のポストの文脈がないと、返信の回答の意味が限られることがあります。
 
-結果を調べる間は、`maxItems`を小さく保ってください。上限が制限するのは出力であり、取得できる量ではありません。条件に合うポストが少ない場合は、フィルターを変える前に実行レポートを確認してください。日付やエンゲージメントの下限など、設定は1つずつ広げてください。変更した設定は記録しておいてください。
+結果を調べる間は、`maxItems` を小さく保ってください。上限が制限するのは出力であり、取得できる量ではありません。条件に合うポストが少ない場合は、フィルターを変える前に実行レポートを確認してください。日付やエンゲージメントの下限など、設定は1つずつ広げてください。変更した設定は記録しておいてください。
 
-分析が失敗した場合は、`analysis.reason`を確認し、該当するIDだけを再試行してください。返信が不完全な場合は、完全だと判断する前に無料の診断情報を確認してください。メディアのキャプションは、画像や動画に映るすべてを説明できるわけではありません。引用や返信の文脈がないと、回答が不確かになることがあります。
+分析が失敗した場合は、`analysis.reason` を確認し、該当するIDだけを再試行してください。返信が不完全な場合は、完全だと判断する前に無料の診断情報を確認してください。メディアのキャプションは、画像や動画に映るすべてを説明できるわけではありません。引用や返信の文脈がないと、回答が不確かになることがあります。
 
 ## 関連するXquik Actor
 
-すべてのXquik Actorは、同じ抽出エンジン、フィルター優先の課金、診断機能を共有しています。必要なデータに合うものを選んでください。
+すべてのXquik Actorは、同じ抽出エンジン、フィルター優先の課金&診断機能を共有しています。必要なデータに合うものを選んでください。
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper)は、検索、プロフィールのタイムライン、リスト、ポストIDから、50以上のフィルターでポストをスクレイピングし、フラットな形式で出力します。分析なしでポストデータが必要なときに使います。1行あたり$0.00015から。
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)は、ユーザー名、ID、URLから、プロフィールとそのポスト、返信、メディア、フォロワーをスクレイピングします。検索ではなくアカウントから始めるときに使います。1行あたり$0.00015から。
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)は、25以上のフィルターで、ポストへの返信、コメント、会話全体をスクレイピングします。ポストの下の議論が必要なときに使います。1行あたり$0.00015から。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)は、ポストのURLまたはIDから、返信、引用ポスト、リポストしたユーザー、スレッドを一括でスクレイピングします。誰がポストに反応したかを測るときに使います。1行あたり$0.00015から。
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)は、ポストを引用したポストを、テキスト、メディア、件数、著者とともに、11のフィルターでスクレイピングします。誰がポストを引用し、何と言ったかを調べたいときに使います。1ポストあたり$0.00015から。
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)は、フォロワー、フォロー中、リストのメンバー、購読者、コミュニティのメンバーをプロフィール行としてスクレイピングします。オーディエンスやメンバーの一覧が必要なときに使います。1プロフィールあたり$0.00015から。
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)は、ユーザー名、自己紹介、所在地でユーザーを検索し、フォロワー数、認証、アカウント年数、所在地で絞り込みます。検索からアカウントの一覧を作るときに使います。1プロフィールあたり$0.00015から。
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)は、Xの「アカウントの所在地」ラベル、Xへの接続方法、ユーザー名の変更履歴から、アカウントの所在地を確認します。アカウントの所在地を確かめたいときに使います。1アカウントあたり$0.00015から。
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper)は、ユーザー名、フォロワー、ユーザー検索から、アカウントがプロフィールで公開しているメールアドレス、電話番号、リンクを取得します。プロフィールが公開しているメールアドレスが必要なときに使います。1プロフィールあたり$0.00015から。
-- [X List Scraper](https://apify.com/xquik/x-list-scraper)は、リストのURLまたはIDから、リストのポスト、メンバー、フォロワーをスクレイピングします。厳選したリストを情報源にするときに使います。1行あたり$0.00015から。
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper)は、コミュニティの情報、ポスト、検索結果、メンバー、モデレーターをスクレイピングします。Xのコミュニティを情報源にするときに使います。1行あたり$0.00015から。
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper)は、キーワードからスペースを見つけ、タイトル、状態、時刻、リスナー数、ホスト、スピーカーを読み取ります。URLまたはIDでブロードキャストも読み取ります。Xのライブ音声とライブ動画を追うときに使います。スペースまたはブロードキャスト1件あたり$0.00015から。
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper)は、地域別のリアルタイムトレンドを、順位、ボリューム、クエリ、WOEIDとともにスクレイピングします。どこで何がトレンドかを追うときに使います。1トレンドあたり$0.00015から。
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper)は、キーワード、勤務地、勤務形態、職位レベル、企業からXの求人を、給与と応募リンクとともにスクレイピングします。Xに掲載された求人を集めるときに使います。1求人あたり$0.00015から。
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper)は、長文のXの記事を、カバー画像、著者、日付、指標とともにMarkdownとテキストでスクレイピングします。ポストではなく記事の本文が必要なときに使います。1記事あたり$0.00015から。
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader)は、ポストやプロフィールの写真、動画、GIFを、MP4とメタデータのオプション付きで抽出または保存します。メディアファイルそのものが必要なときに使います。1メディア行あたり$0.00015から。
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)は、ブランドへの言及を、AIによる関連性、感情、顧客体験の回答とともに追跡し、実行どうしを比較します。ブランドを継続して見守るときに使います。分析済みポスト1件あたり$0.0003から。
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)は、強気、弱気、中立、混在のスタンス、コンテンツの種類、確信度、資産との関連性のラベルをAIで付けます。株、暗号資産、トレードの話題を追うときに使います。分析済みポスト1件あたり$0.0003から。
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)は、ニュースのポストに、形式、情報源の明示、トピックとの関連性のラベルをAIで付けます。報道と論評を分けるときに使います。分析済みポスト1件あたり$0.0003から。
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)は、すべてのポストについて、独自のカテゴリー、スコア、はい/いいえの質問にAIで答えます。既定の分析が自分のラベルに合わないときに使います。分析済みポスト1件あたり$0.0003から。
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)は、AIによる8つの特性の回答から、すべてのポストについて0から100のViral Scoreと判定を推定します。ポストが広がる理由や伸びない理由を調べるときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper)は、検索、プロフィールのタイムライン、リスト&ポストIDから、50以上のフィルター&フラットなエクスポート付きでポストをスクレイピングします。分析なしでポストデータが必要なときに使います。1行あたり$0.00015から。
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)は、ユーザー名、ID、URLから、プロフィールとそのポスト、返信、メディア&フォロワーをスクレイピングします。検索ではなくアカウントから始めるときに使います。1行あたり$0.00015から。
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)は、25以上のフィルターで、ポストへの返信、コメント&会話全体をスクレイピングします。ポストの下の議論が必要なときに使います。1行あたり$0.00015から。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)は、ポストのURLやIDから、返信、引用ポスト、リポストしたユーザー&スレッドを一括でスクレイピングします。誰がポストに反応したかを測るときに使います。1行あたり$0.00015から。
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)は、11のフィルターを使い、ポストの引用ポストを、テキスト、メディア、件数&著者とともにスクレイピングします。ポストを引用した人&その発言を調べるときに使います。1ポストあたり$0.00015から。
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)は、フォロワー、フォロー中、リストのメンバー、購読者&コミュニティのメンバーをプロフィール行としてスクレイピングします。オーディエンスやメンバーの一覧が必要なときに使います。1プロフィールあたり$0.00015から。
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)は、ユーザー名、自己紹介&所在地でユーザーを検索し、フォロワー数、認証、アカウント年数&所在地で絞り込みます。検索からアカウントの一覧を作るときに使います。1プロフィールあたり$0.00015から。
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)は、Xの「アカウントの所在地」ラベル、Xへの接続方法&ユーザー名の変更履歴から、アカウントの所在地を確認します。アカウントの所在地を精査するときに使います。1アカウントあたり$0.00015から。
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper)は、ユーザー名、フォロワー、ユーザー検索から、アカウントがプロフィールで公開しているメールアドレス、電話番号&リンクを取得します。プロフィールが公開しているメールアドレスが必要なときに使います。1プロフィールあたり$0.00015から。
+- [X List Scraper](https://apify.com/xquik/x-list-scraper)は、リストのURLやIDから、リストのポスト、メンバー&フォロワーをスクレイピングします。厳選したリストを情報源にするときに使います。1行あたり$0.00015から。
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper)は、コミュニティの情報、ポスト、検索結果、メンバー&モデレーターをスクレイピングします。Xのコミュニティを情報源にするときに使います。1行あたり$0.00015から。
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper)は、キーワードでスペースを見つけ、タイトル、状態、時刻、リスナー数、ホスト&スピーカーを読み取ります。URLやIDでブロードキャストも読み取ります。Xのライブ音声&ライブ動画を追うときに使います。スペースまたはブロードキャスト1件あたり$0.00015から。
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper)は、地域別のリアルタイムトレンドを、順位、ボリューム、クエリ & WOEIDとともにスクレイピングします。どこで何がトレンドかを追うときに使います。1トレンドあたり$0.00015から。
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper)は、キーワード、勤務地、勤務形態、職位レベル&企業からXの求人を、給与&応募リンクとともにスクレイピングします。Xに掲載された求人を集めるときに使います。1求人あたり$0.00015から。
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper)は、長文のXの記事を、カバー画像、著者、日付&指標とともに、Markdown & テキストでスクレイピングします。ポストではなく記事の本文が必要なときに使います。1記事あたり$0.00015から。
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader)は、ポストやプロフィールの写真、動画 & GIFを、MP4 & メタデータのオプション付きで抽出または保存します。メディアファイルそのものが必要なときに使います。1メディア行あたり$0.00015から。
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)は、ブランドへの言及を、AIによる関連性、感情&顧客体験の回答とともに追跡し、実行どうしを比較します。ブランドを継続して見守るときに使います。分析済みポスト1件あたり$0.0003から。
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)は、強気、弱気、中立、混在のいずれかのスタンス、コンテンツの種類、確信度&資産との関連性のラベルをAIで付けます。株、暗号資産、トレードの話題を追うときに使います。分析済みポスト1件あたり$0.0003から。
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)は、ニュースのポストに、形式、情報源の明示&トピックとの関連性のラベルをAIで付けます。報道と論評を分けるときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)は、すべてのポストについて、独自のカテゴリー、スコア&はい/いいえの質問にAIで答えます。既定の分析が自分のラベルに合わないときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)は、AIによる8つの特性の回答から、すべてのポストについて0から100のViral Score & 判定を推定します。ポストが広がる理由や伸びない理由を調べるときに使います。分析済みポスト1件あたり$0.0003から。
 
-## よくある質問とサポート
+## よくある質問&サポート
 
 よくある質問に答えたあと、サポートを受けられる場所を案内します。
 
@@ -551,34 +543,34 @@ XquikのX Tweet Sentiment Analysisは、分析済みポスト1件あたり$0.000
 
 ### 自分の質問を使えますか？
 
-はい。カスタムの`analysis.questions`がデフォルトの質問に置き換わります。`choice`、`score`、`probability`の質問を1個から8個送ってください。choiceの質問には2個から255個のカテゴリーを指定できます。scoreの質問には、順序のあるレベルが2つ以上必要です。比較したい実行どうしでは、同じ質問を使ってください。
+はい。カスタムの `analysis.questions` がデフォルトの質問に置き換わります。`choice`、`score`、`probability` の質問を1個から8個送ってください。choiceの質問には2個から255個のカテゴリーを指定できます。scoreの質問には、順序のあるレベルが2つ以上必要です。比較したい実行どうしでは、同じ質問を使ってください。
 
 ### 分析が失敗またはスキップされた行が返るのはなぜですか？
 
-`analysis.status`は`failed`か`skipped`です。Actorはポストを収集して配信しましたが、AIの分析が完了しませんでした。`analysis.reason`が原因を示します。`context_limit`は、コンテキストと対象でいっぱいになり、ポストを入れる余地がないことを示します。`service_unavailable`は、分析サービスが一時的に使えなかったことを示します。これらの行に結果料金はかかりません。`analysis.context`を短くするか、該当するIDを再実行してください。
+`analysis.status` は `failed` か `skipped` です。このActorはポストを収集&配信しましたが、AIの分析が完了しませんでした。`analysis.reason` が原因を示します。`context_limit` は、指定したコンテキスト&対象でいっぱいになり、ポストを入れる余地がないことを示します。`service_unavailable` は、分析サービスが一時的に使えなかったことを示します。これらの行に結果料金はかかりません。`analysis.context` を短くするか、該当するIDを再実行してください。
 
-`maxContextBytes`より長いポストも、Actorは分析します。まず引用元と返信先のポストを削り、次にポスト本体を削ります。このとき`analysis.contextAvailability.postText`は`truncated`になります。より多くのテキストを残すには、`maxContextBytes`を最大64,000まで上げてください。
+`maxContextBytes` より長いポストも、このActorは分析します。まず引用元&返信先のポストを削り、次にポスト本体を削ります。このとき `analysis.contextAvailability.postText` は `truncated` になります。より多くのテキストを残すには、`maxContextBytes` を最大64,000まで上げてください。
 
 ### 分析は事実を検証しますか？
 
-いいえ。回答が示すのは、ポストが何を表現し、それをどう伝えているかです。確率はAIの確信度であり、真偽ではありません。重要な分類は、元のポストと照らし合わせて確認してください。元のポストはすべての行に残っています。
+いいえ。回答が示すのは、ポストが表現する内容&その伝え方です。確率はAIの確信度であり、真偽ではありません。重要な分類は、元のポストと照らし合わせて確認してください。元のポストはすべての行に残っています。
 
 ### どの言語に対応していますか？
 
-抽出は、Xが扱うすべての言語に対応します。分析は、まず英語の顧客シナリオで検証しています。ほかの対応言語でも、同じ構造の回答を返します。どの言語でも、`unclear`のカテゴリーと確率が不確かさを示します。
+抽出は、Xが扱うすべての言語に対応します。分析は、まず英語の顧客シナリオで検証しています。ほかの対応言語でも、同じ構造の回答を返します。どの言語でも、`unclear` のカテゴリー&確率が不確かさを示します。
 
 ### 費用を抑えるにはどうすればよいですか？
 
-フィルター、重複排除、`maxItems`は分析の前に適用されます。支払うのは、重複がなくフィルター条件に合うポストの分だけです。的確な検索演算子、日付の範囲、エンゲージメントの下限を使ってください。大規模な実行の前に、小さな`maxItems`で回答の質を確かめてください。
+フィルター、重複排除 & `maxItems` は分析の前に適用されます。支払うのは、重複がなくフィルター条件に合うポストの分だけです。的確な検索演算子、日付の範囲&エンゲージメントの下限を使ってください。大規模な実行の前に、小さな `maxItems` で回答の質を確かめてください。
 
 ### Xのデータを分析しても合法ですか？
 
 このActorは、Xの公開フィールドを取得します。結果には個人データが含まれることがあります。目的が合法であることを確認し、適用されるプライバシー規則に従ってください。判断に迷う場合は、資格のある弁護士に相談してください。
 
-### API、スケジュール、連携は使えますか？
+### API、スケジュール&連携は使えますか？
 
-はい。Python、JavaScript、cURLの例は[APIタブ](https://apify.com/xquik/x-tweet-sentiment-analysis/api)にあります。定期的な実行にはApifyの[スケジュール](https://docs.apify.com/platform/schedules)を使います。前回のデータセットIDを`monitor.baselineDatasetId`に渡すと、何が変わったかを確認できます。Apifyの連携機能で、実行をWebhook、Make、Zapier、n8n、Googleスプレッドシートにつなぐこともできます。
+はい。Python、JavaScript & cURLの例は[APIタブ](https://apify.com/xquik/x-tweet-sentiment-analysis/api)にあります。定期的な実行にはApifyの[スケジュール](https://docs.apify.com/platform/schedules)を使います。前回のデータセットIDを `monitor.baselineDatasetId` に渡すと、何が変わったかを確認できます。Apifyの連携機能で、実行をWebhook、Make、Zapier、n8n & Googleスプレッドシートにつなぐこともできます。
 
 ### どこでサポートを受けられますか？
 
-Actorページでissueを開くか、実行IDを添えてsupport@xquik.comに連絡してください。キーバリューストアにある無料の診断情報が、空の実行、部分的な実行、中断された実行の理由を説明します。
+実行IDを添えて、[Issuesタブ](https://apify.com/xquik/x-tweet-sentiment-analysis/issues)でissueを開いてください。キーバリューストアにある無料の診断情報が、対応が必要な実行について説明します。行が1件も返らなかった実行は、その理由をステータスで示します。

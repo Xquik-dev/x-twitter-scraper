@@ -15,10 +15,9 @@
 ·
 [Italiano](README.it.md)
 
-[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
-
-[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
-Claude Code, Codex, Cursor & more, from 6:07.
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
+with Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X Space Scraper finds Spaces by keyword, host or
@@ -96,6 +95,13 @@ X search takes.
 
 `queryType` picks which posts lead. `Latest` puts the newest first & `Top` the
 most engaging.
+
+`Live` lists Spaces on air now & `Upcoming` lists scheduled ones. Both read X's
+own Spaces search, which matches words in Space titles & takes no operators.
+
+```json
+{ "searchTerms": ["bitcoin"], "queryType": "Live" }
+```
 
 Read Spaces you already know by URL or ID.
 
@@ -339,8 +345,9 @@ No. Xquik's X Space Scraper needs no X API key, login or credentials.
 
 ### Can I find Spaces that are live now?
 
-Yes. Search with `queryType` set to `Latest`, then keep the rows whose `state`
-is `Running`. Rows with `NotStarted` are scheduled & carry `scheduledStart`.
+Yes. Set `queryType` to `Live` & add a search term, such as `bitcoin`. Each row
+is a Space on air now. `Upcoming` lists scheduled Spaces, which carry
+`scheduledStart`.
 
 ### Is it legal to scrape X Spaces?
 

@@ -1,19 +1,10 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <strong>Deutsch</strong> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+**Deutsch** · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer verbindet Xquik MCP mit Coding-Agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Sieh dir an, wie Framer Xquik-Scraper mit Claude Code, Codex, Cursor und mehr nutzt, ab Minute 6:07.</a>
-</td></tr></table>
+[![Framer verbindet Xquik MCP mit Coding-Agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Sieh dir an, wie Framer Xquik-Scraper nutzt](https://youtu.be/4UOSpoOoC3Y?t=367),
+mit Claude Code, Codex, Cursor & mehr, ab Minute 6:07.
 
 Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
 liefert die vollständigsten X-Daten. X Article Scraper von Xquik wandelt lange
@@ -22,9 +13,9 @@ Kennzahlen. Die meisten anderen Apify Actors rechnen ab, bevor sie filtern oder
 Duplikate entfernen. Xquik rechnet nur gelieferte, eindeutige Ergebnisse ab, die
 zu deinen Filtern passen.
 
-Extrahiere lange X-Artikel aus Post-URLs oder numerischen Post-IDs (Tweet-IDs).
-Du zahlst **$0.00015 pro geliefertem Artikel**, & Apify berechnet die
-Plattformnutzung separat. Du brauchst keinen X-API-Schlüssel & keinen Login.
+Extrahiere lange X-Artikel aus Post-URLs oder numerischen Post-IDs. Du zahlst
+**$0.00015 pro geliefertem Artikel** & Apify berechnet die Plattformnutzung
+separat. Du brauchst weder einen X-API-Schlüssel noch einen Login.
 
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
@@ -43,15 +34,21 @@ Text an.
 
 ## So scrapst du X-Artikel
 
+Neu bei Apify?
+[Erstelle zuerst einen kostenlosen Account](https://console.apify.com/sign-up?fpr=xquik).
+Der kostenlose Plan braucht keine Kreditkarte & gibt dir jeden Monat $5 zum
+Ausgeben. Bei $0.00015 pro Artikel reichen $5 für bis zu 33.000 Artikel, vor
+Abzug der Plattformnutzung. Komm dann hierher zurück & klicke auf Try for free.
+
 1. Öffne X Article Scraper von Xquik in der Apify Console.
 2. Füge URLs von Artikel-Posts in `startUrls` oder Post-IDs in `tweetIds` ein.
    Um die Artikel eines Accounts zu listen, trage seinen Nutzernamen in
    `twitterHandles` ein.
-3. Setze `maxItems`, um die gelieferten Artikel zu begrenzen. Klicke dann auf
+3. Setze `maxItems`, um die gelieferten Artikel zu begrenzen, & klicke dann auf
    Start.
 4. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
 
-`startUrls` nimmt jede URL als einfachen String oder als Objekt
+`startUrls` akzeptiert jede URL als einfachen String oder als Objekt
 `{ "url": "..." }`.
 
 ```json
@@ -69,7 +66,7 @@ Text an.
 | ---------------------- | ------------------------------------------------ | -------- |
 | `startUrls`            | Öffentliche URLs von Artikel-Posts oder Profilen | Keiner   |
 | `tweetIds`             | Numerische Post-IDs von Artikeln                 | Keiner   |
-| `twitterHandles`       | Accounts, deren Artikel der Actor listet         | Keiner   |
+| `twitterHandles`       | Accounts, deren Artikel der Run listet           | Keiner   |
 | `maxItems`             | Globale Obergrenze für gelieferte Artikel        | `100000` |
 | `dedupeAcrossTargets`  | Entfernt doppelte Artikel-IDs vor der Abrechnung | `true`   |
 | `maxConcurrency`       | Parallele, unabhängige Artikelabrufe             | `100`    |
@@ -83,7 +80,7 @@ mit einem Problem oder ein großer Run schreibt den Bericht. Ein kleiner Run ohn
 Probleme nennt seine Zählwerte stattdessen im Run-Status. Aktiviere
 `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 
-Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
+Die Beispiele nutzen Musterwerte. Die Ergebnisse spiegeln Live-Daten wider. Ein
 Artikel-Datensatz enthält diese Felder.
 
 ```json
@@ -102,22 +99,64 @@ Artikel-Datensatz enthält diese Felder.
 ```
 
 Datensätze ergänzen Autor, Quelle, Titelbild, Zeit & Kennzahlen. Exportiere als
-JSON oder Tabelle.
+JSON oder als Tabelle.
 
 Ein Nutzername in `twitterHandles` oder eine Profil-URL in `startUrls` listet
 die Artikel dieses Accounts, neueste zuerst. Jeder ist ein
 `articlePreview`-Datensatz mit `title`, `previewText`, `coverImageUrl`,
 `articleId`, Datumsangaben & Post-Kennzahlen des Artikels. X listet dort keinen
-Artikeltext, der Datensatz hat also kein `markdown` & keine `contents`. Starte
+Artikeltext, also hat der Datensatz kein `markdown` & keine `contents`. Starte
 einen Run mit seiner `tweetId`, um den vollständigen Artikel zu erhalten.
+
+## Ausgabespalten
+
+8 Eingaben formen jeden Datensatz, nachdem der Run ihn gelesen hat. Sie führen
+keinen Code aus & ändern den Preis nicht.
+
+| Feld                | Was es bewirkt                                                                        |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| `fields`            | Behält nur diese Felder, in der Reihenfolge & Schreibweise, die du angibst            |
+| `omitFields`        | Entfernt diese Felder & behält den Rest                                               |
+| `renameFields`      | Verschiebt ein Feld in eine Spalte mit neuem Namen                                    |
+| `flatten`           | Macht aus jedem verschachtelten Objekt Spalten auf oberster Ebene                     |
+| `fillMissingFields` | Füllt ein behaltenes Feld, das einem Datensatz fehlt, mit `null`. Standardmäßig aktiv |
+| `joinFields`        | Macht aus jeder dieser Listen 1 Textwert                                              |
+| `joinSeparator`     | Text zwischen verbundenen Einträgen. Standard ist ein Komma & ein Leerzeichen         |
+| `constantFields`    | Fügt eine Spalte mit demselben Text in jedem Datensatz hinzu                          |
+
+- Nutze einen Punkt für ein Feld innerhalb eines Objekts. Groß- und
+  Kleinschreibung & Unterstriche spielen keine Rolle.
+- Jeder Datensatz behält seine `id`.
+- Mit `fields` kommt ein Feld, das einem Datensatz fehlt, als `null` an. Jeder
+  Datensatz hat dann dieselben Spalten.
+- Ein falscher Feldname stoppt den Run vor dem Lesen & kostet nichts.
+- Lassen sich die Namen nicht prüfen, liest der Run weiter & listet nicht
+  gefundene Namen am Ende.
+- Der Run ignoriert eine Map-Funktion oder einen jq-Filter, die für einen
+  anderen Actor geschrieben sind.
+
+Nenne eine berechnete Spalte in `fields` oder `renameFields`, um sie
+hinzuzufügen.
+
+| Spalte              | Formel                                                                                     |
+| ------------------- | ------------------------------------------------------------------------------------------ |
+| `totalEngagement`   | `likeCount` + `replyCount` + `retweetCount` + `quoteCount`. Ein fehlender Zähler addiert 0 |
+| `engagementRate`    | `totalEngagement` × 100 ÷ die `followers` des Autors, auf 4 Nachkommastellen               |
+| `engagementPerView` | `totalEngagement` × 100 ÷ `viewCount`, auf 4 Nachkommastellen                              |
+
+`totalEngagement` ist `null` bei einem Datensatz ohne diese Zähler. Eine Rate
+ist `null`, wenn ihr Divisor fehlt oder 0 ist.
 
 ## Was kostet es, X-Artikel zu scrapen?
 
 Auf jedem Apify-Plan kostet ein gelieferter Artikel $0.00015. Apify berechnet
 deine Plattformnutzung separat.
 
-- Eine Gebühr pro geliefertem Datensatz. Diagnosen in `diagnostics` sind
-  kostenlos.
+Brauchst du mehr Volumen, dann
+[wähle einen Apify-Plan](https://apify.com/pricing?fpr=xquik) mit mehr
+vorausbezahlter Nutzung.
+
+- 1 Gebühr pro geliefertem Datensatz. Diagnosen in `diagnostics` sind kostenlos.
 - Keine Startgebühr.
 - Die Deduplizierung läuft vor der Abrechnung.
 
@@ -141,8 +180,9 @@ die Liste, wenn eine andere Ursache den Run gestoppt hat. Der Run ist
 
 ## Verwandte Xquik-Actors
 
-Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, rechnet erst nach dem
-Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
+Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, dieselbe Abrechnung erst
+nach dem Filtern & dieselben Diagnosen. Wähle den, der zu den Daten passt, die
+du brauchst.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrapt Posts aus
   Suchen, Profil-Timelines, Listen & Post-IDs mit über 50 Filtern & flachen
@@ -160,9 +200,9 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015 pro
   Datensatz.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
-  scrapt die Posts, die Posts zitieren, mit Text, Medien, Zahlen, Autoren & 11
-  Filtern. Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was gesagt
-  wurde. Ab $0.00015 pro Post.
+  scrapt die Zitate von Posts mit Text, Medien, Zählern, Autoren & 11 Filtern.
+  Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was diese Accounts
+  gesagt haben. Ab $0.00015 pro Post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrapt
   Follower, gefolgte Accounts, Listenmitglieder, Abonnenten &
   Community-Mitglieder als Profil-Datensätze. Nutze ihn, wenn du Zielgruppen-
@@ -173,8 +213,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   einer Suche aufbaust. Ab $0.00015 pro Profil.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   prüft, wo Accounts ansässig sind, mit der X-Angabe "Account based in", der
-  Verbindungsart zu X & Benutzernamen-Änderungen. Nutze ihn, wenn du prüfst, wo
-  Accounts ansässig sind. Ab $0.00015 pro Account.
+  Verbindungsart zu X & Änderungen des Nutzernamens. Nutze ihn, wenn du prüfst,
+  wo Accounts ansässig sind. Ab $0.00015 pro Account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) holt die E-Mails,
   Telefonnummern & Links, die Accounts in ihren Profilen veröffentlichen, anhand
   von Nutzernamen, Followern oder Nutzersuchen. Nutze ihn, wenn du die E-Mails
@@ -206,8 +246,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Zeit beobachtest. Ab $0.0003 pro analysiertem Post.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden Post
-  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema brauchst. Ab
-  $0.0003 pro analysiertem Post.
+  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem beliebigen Thema
+  brauchst. Ab $0.0003 pro analysiertem Post.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   kennzeichnet bullische, bärische, neutrale oder gemischte Haltung, Inhaltstyp,
   Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du Aktien, Krypto
@@ -229,44 +269,48 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
 Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
 
-### Brauche ich einen X-API-Schlüssel oder Login?
+### Brauche ich einen X-API-Schlüssel oder einen Login?
 
-Nein. X Article Scraper von Xquik braucht keinen X-API-Schlüssel, keinen Login &
-keine Zugangsdaten.
+Nein. X Article Scraper von Xquik braucht weder einen X-API-Schlüssel noch einen
+Login oder Zugangsdaten.
 
 ### Ist es legal, X-Artikel zu scrapen?
 
 X Article Scraper von Xquik fragt öffentliche X-Felder ab. Ergebnisse können
-personenbezogene Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist. Befolge
+personenbezogene Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist, & befolge
 geltende Datenschutzregeln. Hol dir bei Unsicherheit qualifizierten Rechtsrat.
 
 ### Warum hat mein Run keine Ergebnisse geliefert?
 
-Öffne zuerst die kostenlose Ausgabe `diagnostics`. Der Status eines leeren Runs
-rät dir, Ziele & Filter zu prüfen. `stopCauses` gibt jeder Ursache eine
+Lies zuerst den Run-Status. Der Status eines leeren Runs rät dir, Ziele & Filter
+zu prüfen. Die kostenlose Ausgabe `diagnostics` erscheint, wenn etwas deine
+Aufmerksamkeit braucht. Ihr Feld `stopCauses` gibt jeder Ursache eine
 `nextAction`, der du folgen kannst. Der Run warnt vor Links, die er nicht lesen
 kann, & sagt, wie du sie korrigierst. X Article Scraper von Xquik liefert nur
 öffentliche Artikel, die X zeigt.
 
-### Kann ich API, Zeitpläne & Integrationen nutzen?
+### Kann ich die API, Zeitpläne & Integrationen nutzen?
 
-Ja. Wähle aus 50 öffentlichen Tasks oder der REST-API von Xquik. Der
-[API-Tab](https://apify.com/xquik/x-article-scraper/api) enthält Beispiele für
-Python, JavaScript & cURL.
-Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) starten
-X Article Scraper von Xquik per Cron. Agents nutzen
-[Apify MCP](https://docs.apify.com/platform/integrations/mcp). Einzelabrufe
-nutzen [Xquik REST](https://docs.xquik.com/api-reference/x/get-article). Nutze
-`latest`, außer du brauchst einen älteren Build.
+Ja. Wähle aus 50 öffentlichen Tasks oder nutze die REST-API von Xquik. Im
+[API-Tab](https://apify.com/xquik/x-article-scraper/api) findest du Beispiele
+für Python, JavaScript & cURL.
+[Zeitpläne](https://docs.apify.com/platform/schedules) von Apify starten X
+Article Scraper von Xquik per Cron. Agents nutzen
+[Apify MCP](https://docs.apify.com/platform/integrations/mcp). Die REST-API von
+Xquik liest auch einzelne Artikel. Nutze `latest`, außer du brauchst einen
+älteren Build.
 
 ### Wo bekomme ich Hilfe?
 
-Öffne ein Issue auf der Actor-Seite oder schreib mit der Run-ID an
-support@xquik.com. Kostenlose Diagnosen im Key-Value-Store erklären leere,
-unvollständige oder unterbrochene Runs.
+Öffne im [Tab Issues](https://apify.com/xquik/x-article-scraper/issues) ein
+Issue mit der Run-ID. Kostenlose Diagnosen im Key-Value-Store erklären Runs, die
+Aufmerksamkeit brauchen. Ein Run, der keinen Datensatz zurückbekommt, sagt in
+seinem Status, warum.
 
 ### Kann ich eine individuelle Lösung bekommen?
 
-Ja. Besuche [xquik.com](https://xquik.com) oder lies die
-[API-Dokumentation](https://docs.xquik.com/introduction). Sie deckt Dashboard,
-API, MCP-Server & Webhooks ab.
+Ja. Beschreibe im
+[Tab Issues](https://apify.com/xquik/x-article-scraper/issues), was du brauchst.
+Xquik bietet außerdem ein Dashboard, eine REST-API, einen MCP-Server & Webhooks.
+Die Website von Xquik findest du in seinem
+[Apify-Profil](https://apify.com/xquik).

@@ -1,19 +1,10 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <strong>Italiano</strong>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · **Italiano**
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer collega Xquik MCP agli agenti di coding"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Guarda come Framer usa gli scraper Xquik con Claude Code, Codex, Cursor e altro, da 6:07.</a>
-</td></tr></table>
+[![Framer collega Xquik MCP agli agenti di coding](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Guarda come Framer usa gli scraper Xquik](https://youtu.be/4UOSpoOoC3Y?t=367)
+con Claude Code, Codex, Cursor & altro, da 6:07.
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo, con
 i dati X più completi. X Email Scraper di Xquik ottiene le email che gli account
@@ -21,10 +12,10 @@ pubblicano sui propri profili X, senza cookie di X né login. La maggior parte
 degli altri Actor Apify fa pagare prima di filtrare o deduplicare. Xquik fa
 pagare solo i risultati consegnati, unici e conformi ai filtri.
 
-Incolla nomi utente, scansiona i follower di un account o cerca utenti di X &
+Incolla nomi utente, scansiona i follower di un account o cerca utenti di X, &
 ottieni ogni profilo che pubblica un'email, con l'email per prima. Un profilo
 senza email non viene consegnato & non costa nulla. Paghi **$0.00015 per riga
-consegnata**. Apify fattura a parte l'uso della piattaforma.
+consegnata**, & Apify fattura a parte l'uso della piattaforma.
 
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.
@@ -45,12 +36,18 @@ consegnata**. Apify fattura a parte l'uso della piattaforma.
   di utenti.
 - Filtri per dominio email, email aziendale, follower, età dell'account, bio &
   posizione.
-- Nomi utente con o senza @, URL di x.com & twitter.com & ID utente numerici.
+- Nomi utente con o senza @, URL `x.com` & `twitter.com` & ID utente numerici.
 - Rimozione dei duplicati prima della fatturazione.
 - Export JSON, CSV, Excel, XML & RSS tramite i dataset di Apify.
 - Le esecuzioni riprendono dallo stato salvato dopo una migrazione di Apify.
 
 ## Come ottenere le email dai profili X
+
+Non usi ancora Apify?
+[Crea prima un account gratuito](https://console.apify.com/sign-up?fpr=xquik).
+Il piano gratuito non richiede carta di credito & offre $5 da spendere ogni
+mese. A $0.00015 per profilo, $5 coprono fino a 33.000 profili, senza contare
+l'uso della piattaforma. Poi torna qui & premi Try for free.
 
 1. Apri X Email Scraper di Xquik in Apify Console.
 2. Incolla nomi utente, URL di profilo o ID utente in `twitterHandles`, oppure
@@ -220,11 +217,15 @@ L'Actor non legge mai un anno, un conteggio o un prezzo come numero di telefono.
 Su ogni piano Apify paghi $0.00015 per riga consegnata. Apify fattura a parte il
 tuo uso della piattaforma.
 
+Per volumi maggiori,
+[scegli un piano Apify](https://apify.com/pricing?fpr=xquik) con più uso
+prepagato.
+
 - Un addebito per ogni riga di dati consegnata. La diagnostica in `diagnostics`
   è gratuita.
 - Nessun costo di avvio o per ricerca.
-- Un profilo senza email non aggiunge righe né addebiti.
-- Un account che X non ha non aggiunge righe né addebiti.
+- Un profilo senza email non aggiunge righe & non ha addebiti.
+- Un account che X non ha non aggiunge righe & non ha addebiti.
 - La deduplicazione avviene prima della fatturazione.
 - Le impostazioni di Apify sull'addebito massimo totale limitano le righe
   consegnate.
@@ -286,7 +287,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   filtri. Usalo quando studi chi ha citato dei post & cosa ha detto. Da $0.00015
   per post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) estrae
-  follower, following, membri & follower delle liste e membri delle community
+  follower, following, membri delle liste, abbonati & membri delle community
   come righe di profilo. Usalo quando ti servono elenchi di pubblico o di
   membri. Da $0.00015 per profilo.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) cerca
@@ -295,8 +296,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   $0.00015 per profilo.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   verifica dove hanno sede gli account con l'etichetta "Posizione account" di X,
-  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando ti
-  serve verificare dove hanno sede gli account. Da $0.00015 per account.
+  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando
+  vuoi verificare dove hanno sede gli account. Da $0.00015 per account.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper) estrae post, membri &
   follower delle liste da URL o ID delle liste. Usalo quando una lista curata
   definisce le tue fonti. Da $0.00015 per riga.
@@ -315,7 +316,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   lavoro di X per parola chiave, luogo, modalità di lavoro, livello di
   esperienza & azienda, con stipendi & link di candidatura. Usalo quando
   raccogli le offerte di lavoro pubblicate su X. Da $0.00015 per offerta.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper) raccoglie gli
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) estrae gli
   articoli lunghi di X come Markdown & testo, con copertine, autori, date &
   metriche. Usalo quando ti serve il corpo degli articoli, non i post. Da
   $0.00015 per articolo.
@@ -325,7 +326,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   media.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
   monitora le menzioni del brand con rilevanza, sentiment & risposte sulla
-  customer experience generate con AI, poi confronta le esecuzioni. Usalo quando
+  customer experience generate con AI & confronta le esecuzioni. Usalo quando
   osservi un brand nel tempo. Da $0.0003 per post analizzato.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   etichetta atteggiamento, intensità & probabilità di sarcasmo di ogni post con
@@ -360,9 +361,9 @@ credenziali. Ogni lettura avviene sull'infrastruttura di Xquik.
 ### Da dove vengono le email?
 
 Vengono dal profilo stesso, cioè dalla bio, dal nome & dalla posizione che
-l'account ha scritto. L'Actor non legge nessun post né nessun sito web
-collegato, quindi ogni email è un indirizzo che l'account ha pubblicato sul
-proprio profilo X.
+l'account ha scritto. L'Actor non legge nessun post & nessun sito web collegato,
+quindi ogni email è un indirizzo che l'account ha pubblicato sul proprio profilo
+X.
 
 ### L'Actor verifica che un'email funzioni?
 
@@ -408,13 +409,15 @@ meno che non ti serva una build precedente.
 
 ### Dove trovo assistenza?
 
-Apri una issue nella pagina dell'Actor o scrivi a <support@xquik.com> con l'ID
+Apri una issue nella
+[scheda Issues](https://apify.com/xquik/x-email-scraper/issues) con l'ID
 dell'esecuzione. La diagnostica gratuita nel key-value store spiega le
-esecuzioni che richiedono attenzione. Un'esecuzione che non riceve alcuna riga
-dice perché nel suo stato.
+esecuzioni che richiedono attenzione. Un'esecuzione che non riceve nessuna riga
+ne spiega il motivo nel suo stato.
 
 ### Posso avere una soluzione personalizzata?
 
-Sì. Visita [xquik.com](https://xquik.com) o leggi la
-[documentazione API](https://docs.xquik.com/introduction). Copre dashboard, API,
-server MCP & webhook.
+Sì. Descrivi ciò che ti serve nella
+[scheda Issues](https://apify.com/xquik/x-email-scraper/issues). Xquik offre
+anche una dashboard, un'API REST, un server MCP & webhook. Trovi il sito web di
+Xquik sul suo [profilo Apify](https://apify.com/xquik).

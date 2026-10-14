@@ -1,39 +1,30 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <strong>Deutsch</strong> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+**Deutsch** · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer verbindet Xquik MCP mit Coding-Agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Sieh dir an, wie Framer Xquik-Scraper mit Claude Code, Codex, Cursor und mehr nutzt, ab Minute 6:07.</a>
-</td></tr></table>
+[![Framer verbindet Xquik MCP mit Coding-Agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Sieh dir an, wie Framer Xquik-Scraper nutzt](https://youtu.be/4UOSpoOoC3Y?t=367),
+mit Claude Code, Codex, Cursor & mehr, ab Minute 6:07.
 
 Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
 liefert die vollständigsten X-Daten. X (Twitter) Stock & Crypto AI Trading
-Signals von Xquik macht aus Posts (Tweets) Haltungen. Jede Haltung ist bullisch,
-bärisch, neutral oder gemischt, pro Ticker & Coin. Die meisten anderen Apify
-Actors rechnen ab, bevor sie filtern oder Duplikate entfernen. Xquik rechnet nur
+Signals von Xquik macht aus Posts Haltungen. Jede Haltung ist bullisch, bärisch,
+neutral oder gemischt, pro Ticker & Coin. Die meisten anderen Apify Actors
+rechnen ab, bevor sie filtern oder Duplikate entfernen. Xquik rechnet nur
 gelieferte, eindeutige Ergebnisse ab, die zu deinen Filtern passen. Die
-KI-Kosten sind im Preis pro Post enthalten. Du brauchst keinen KI-Account, keine
-Tokens & keinen Schlüssel.
+KI-Kosten sind im Preis pro Post enthalten. Du brauchst weder einen KI-Account
+noch Tokens oder einen Schlüssel.
 
-Lies die Haltung hinter Posts zu Aktien, Krypto & Trading auf X (Twitter).
-**X (Twitter) Stock & Crypto AI Trading Signals** von Xquik sammelt Posts zu
-deinen Assets. Der Actor ergänzt jeden Post mit KI um Haltung, Inhaltstyp,
+Lies die Haltung hinter Posts zu Aktien, Krypto & Trading auf X (Twitter). **X
+(Twitter) Stock & Crypto AI Trading Signals** von Xquik sammelt Posts zu deinen
+Assets. Der Actor ergänzt jeden Post mit KI um Haltung, Inhaltstyp,
 Überzeugungsgrad & Asset-Relevanz. Trenne feste Ansagen von vorsichtigen
 Bemerkungen & Analysen von Werbung. Erkenne Posts, die den Namen deines Assets
 für etwas anderes nutzen.
 
 - **Haltung pro Post.** Jeder Post ist bullisch, bärisch, neutral, gemischt oder
   unklar.
-- **Inhaltstyp.** Er unterscheidet Analyse, News, Trade-Ideen, Werbung, Humor &
+- **Inhaltstyp.** Er unterscheidet Analysen, News, Trade-Ideen, Werbung, Humor &
   Fragen.
 - **Überzeugung.** Sie trennt feste Ansagen & Positionen von vorsichtigen
   Bemerkungen.
@@ -46,6 +37,13 @@ für etwas anderes nutzen.
 > "Twitter" und "X" sind Marken von X Corp.
 
 ## So analysierst du Marktsentiment auf X
+
+Neu bei Apify?
+[Erstelle zuerst einen kostenlosen Account](https://console.apify.com/sign-up?fpr=xquik).
+Der kostenlose Plan braucht keine Kreditkarte & gibt dir jeden Monat $5 zum
+Ausgeben. Bei $0.0003 pro analysiertem Post reichen $5 für bis zu 16.000
+analysierte Posts, vor Abzug der Plattformnutzung. Komm dann hierher zurück &
+klicke auf Try for free.
 
 1. Füge Suchbegriffe wie `$NVDA lang:en -filter:retweets`, Cashtag-Suchen,
    Nutzernamen von Profilen oder Post-IDs hinzu.
@@ -79,14 +77,14 @@ Die Überzeugung ist 0, sobald die Haltung neutral oder unklar ist. Ein Post ohn
 Richtung kann keine Richtung fest vertreten. Diese Antwort legt die ganze
 Wahrscheinlichkeit auf Stufe 0 & übernimmt die Sicherheit der Haltung.
 
-Die Antworten beschreiben, was Autoren ausdrücken. Sie sind keine
-Anlageberatung & prüfen keine Behauptungen, Kurse oder Unternehmensmeldungen.
+Die Antworten beschreiben, was Autoren ausdrücken. Sie sind keine Anlageberatung
+& prüfen keine Behauptungen, Kurse oder Pflichtmitteilungen.
 
 ## Eigenen Text analysieren
 
-Füge eigene Entwürfe, Antworten, Rezensionen oder Notizen in `texts` ein.
-X (Twitter) Stock & Crypto AI Trading Signals von Xquik analysiert sie. Der
-Actor ruft nichts von X ab.
+Füge eigene Entwürfe, Antworten, Rezensionen oder Notizen in `texts` ein. X
+(Twitter) Stock & Crypto AI Trading Signals von Xquik analysiert sie. Der Actor
+ruft nichts von X ab.
 
 ```json
 {
@@ -99,7 +97,7 @@ Actor ruft nichts von X ab.
 
 - Jeder Text wird zu 1 Datensatz mit denselben `analysis`-Antworten wie ein
   Post.
-- `tweet.id` ist `text:1`, `text:2` usw. `tweet.type` ist `text`.
+- `tweet.id` ist `text:1`, `text:2` & so weiter, & `tweet.type` ist `text`.
 - Jeder analysierte Text kostet dieselben $0.0003 wie ein analysierter Post.
 - Ist `texts` gesetzt, analysiert der Run nur diese Texte. Starte X-Ziele in
   einem eigenen Run.
@@ -108,9 +106,13 @@ Actor ruft nichts von X ab.
 
 X (Twitter) Stock & Crypto AI Trading Signals von Xquik kostet ab $0.0003 pro
 analysiertem Post. Der Actor verlangt keine Startgebühr. Der Preis enthält
-Erfassung & KI-Kosten. Du brauchst keinen KI-Account, keine Tokens & keinen
+Erfassung & KI-Kosten. Du brauchst weder einen KI-Account noch Tokens oder einen
 Schlüssel. Der Preis deckt bis zu 8 Fragen & 64.000 Byte Kontext pro Post ab.
 Jede Frage-Definition darf bis zu 8.000 Byte nutzen.
+
+Brauchst du mehr Volumen, dann
+[wähle einen Apify-Plan](https://apify.com/pricing?fpr=xquik) mit mehr
+vorausbezahlter Nutzung.
 
 Extraktionsfilter & Deduplizierung laufen vor der Analyse. Herausgefilterte oder
 doppelte Datensätze zahlst du nie. Fehlgeschlagene Analysen, übersprungene
@@ -164,18 +166,18 @@ Datensätze, abgerechnete Analysen & ausstehende Gebühren.
 
 ## Run-Zusammenfassung & flache Antworten
 
-Ein Run schreibt in 4 Fällen einen `analysis-summary`-Datensatz in seinen
+Ein Run schreibt in 3 Fällen einen `analysis-summary`-Datensatz in seinen
 Key-Value-Store.
 
 - Er hat ein Problem oder ist groß.
-- Er setzt `monitor` ohne `baselineDatasetId`, als erster Run einer Serie.
 - Sein Vergleich findet einen geänderten, neuen oder nicht vergleichbaren Post.
 - Er hat `alwaysSaveRunRecords` aktiviert.
 
-Andere Runs überspringen den Datensatz. Ihr Status nennt die wichtigste Antwort,
-etwa `Top stance: bullish in 3 of 5 results.` Ein Vergleich ohne Änderung meldet
+Andere Runs überspringen den Datensatz, auch der erste Run einer Serie. Ihr
+Status nennt die häufigste Antwort, etwa
+`Top stance is bullish in 3 of 5 results.` Ein Vergleich ohne Änderung meldet
 `No change since the earlier run.` Ein Run mit einem Problem oder ein großer Run
-schreibt zusätzlich `run-report`. Das gilt auch für einen Run mit aktiviertem
+schreibt außerdem `run-report`. Das gilt auch für einen Run mit aktiviertem
 `alwaysSaveRunRecords`. `run-report` wiederholt die Zusammenfassung unter
 `results.analysisSummary`.
 
@@ -236,25 +238,26 @@ Wähle aus 50 öffentlichen Tasks. Jeder startet mit einer echten englischen Suc
 & einem begrenzten `maxItems`. Er enthält fertige Ziele, Kontext & die
 Dataset-Ansicht Overview. Passe Suche oder Ziele an, bevor du startest.
 
-- [Nvidia (NVDA) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/nvda-market-sentiment-on-x)
-- [Tesla (TSLA) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/tsla-market-sentiment-on-x)
-- [Apple (AAPL) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/aapl-market-sentiment-on-x)
-- [Amazon (AMZN) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/amzn-market-sentiment-on-x)
-- [Microsoft (MSFT) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/msft-market-sentiment-on-x)
-- [Alphabet (GOOGL) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/googl-market-sentiment-on-x)
-- [Meta (META) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/meta-market-sentiment-on-x)
-- [AMD (AMD) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/amd-market-sentiment-on-x)
-- [Palantir (PLTR) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/pltr-market-sentiment-on-x)
-- [Coinbase (COIN) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/coin-market-sentiment-on-x)
-- [Strategy (MSTR) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/mstr-market-sentiment-on-x)
-- [Robinhood (HOOD) market sentiment on X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/hood-market-sentiment-on-x)
+- [Marktsentiment zu Nvidia (NVDA) auf X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/nvda-market-sentiment-on-x)
+- [Marktsentiment zu Tesla (TSLA) auf X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/tsla-market-sentiment-on-x)
+- [Marktsentiment zu Apple (AAPL) auf X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/aapl-market-sentiment-on-x)
+- [Marktsentiment zu Amazon (AMZN) auf X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/amzn-market-sentiment-on-x)
+- [Marktsentiment zu Microsoft (MSFT) auf X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/msft-market-sentiment-on-x)
+- [Marktsentiment zu Alphabet (GOOGL) auf X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/googl-market-sentiment-on-x)
+- [Marktsentiment zu Meta (META) auf X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/meta-market-sentiment-on-x)
+- [Marktsentiment zu AMD (AMD) auf X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/amd-market-sentiment-on-x)
+- [Marktsentiment zu Palantir (PLTR) auf X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/pltr-market-sentiment-on-x)
+- [Marktsentiment zu Coinbase (COIN) auf X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/coin-market-sentiment-on-x)
+- [Marktsentiment zu Strategy (MSTR) auf X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/mstr-market-sentiment-on-x)
+- [Marktsentiment zu Robinhood (HOOD) auf X](https://apify.com/xquik/x-twitter-stock-crypto-signals/examples/hood-market-sentiment-on-x)
 
 Die übrigen Tasks auf der Actor-Seite decken weitere Marken, Themen & Märkte ab.
 
 ## Verwandte Xquik-Actors
 
-Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, rechnet erst nach dem
-Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
+Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, dieselbe Abrechnung erst
+nach dem Filtern & dieselben Diagnosen. Wähle den, der zu den Daten passt, die
+du brauchst.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrapt Posts aus
   Suchen, Profil-Timelines, Listen & Post-IDs mit über 50 Filtern & flachen
@@ -272,9 +275,9 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015 pro
   Datensatz.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
-  scrapt die Posts, die Posts zitieren, mit Text, Medien, Zahlen, Autoren & 11
-  Filtern. Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was gesagt
-  wurde. Ab $0.00015 pro Post.
+  scrapt die Zitate von Posts mit Text, Medien, Zählern, Autoren & 11 Filtern.
+  Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was diese Accounts
+  gesagt haben. Ab $0.00015 pro Post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrapt
   Follower, gefolgte Accounts, Listenmitglieder, Abonnenten &
   Community-Mitglieder als Profil-Datensätze. Nutze ihn, wenn du Zielgruppen-
@@ -285,8 +288,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   einer Suche aufbaust. Ab $0.00015 pro Profil.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   prüft, wo Accounts ansässig sind, mit der X-Angabe "Account based in", der
-  Verbindungsart zu X & Benutzernamen-Änderungen. Nutze ihn, wenn du prüfst, wo
-  Accounts ansässig sind. Ab $0.00015 pro Account.
+  Verbindungsart zu X & Änderungen des Nutzernamens. Nutze ihn, wenn du prüfst,
+  wo Accounts ansässig sind. Ab $0.00015 pro Account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) holt die E-Mails,
   Telefonnummern & Links, die Accounts in ihren Profilen veröffentlichen, anhand
   von Nutzernamen, Followern oder Nutzersuchen. Nutze ihn, wenn du die E-Mails
@@ -321,8 +324,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Zeit beobachtest. Ab $0.0003 pro analysiertem Post.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden Post
-  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema brauchst. Ab
-  $0.0003 pro analysiertem Post.
+  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem beliebigen Thema
+  brauchst. Ab $0.0003 pro analysiertem Post.
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
   kennzeichnet News-Posts nach Format, Quellenangabe & Themenrelevanz mit KI.
   Nutze ihn, wenn du Berichterstattung von Kommentaren trennst. Ab $0.0003 pro
@@ -343,17 +346,17 @@ Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
 ### Brauche ich einen KI-Account, einen X-API-Schlüssel oder einen Login?
 
 Nein. X (Twitter) Stock & Crypto AI Trading Signals von Xquik enthält die
-KI-Kosten im Preis. Du brauchst keinen KI-Account, keine Tokens & keinen
-Schlüssel. Du brauchst auch keinen X-API-Schlüssel, keinen Login & keine
+KI-Kosten im Preis. Du brauchst weder einen KI-Account noch Tokens oder einen
+Schlüssel. Du brauchst auch weder einen X-API-Schlüssel noch einen Login oder
 Zugangsdaten.
 
-### Kann ich mehrere Ticker in einem Run verfolgen?
+### Kann ich mehrere Ticker in 1 Run verfolgen?
 
 Ja. Führe jedes Asset mit seinen Tickern & Aliassen unter `analysis.targets`
 auf. Kombiniere ihre Suchbegriffe. Die Relevanz-Antworten zeigen dir, welche
 Posts deine Ziele als Assets behandeln.
 
-### Warum hat ein Datensatz eine fehlgeschlagene oder übersprungene Analyse?
+### Warum kam ein Datensatz mit fehlgeschlagener oder übersprungener Analyse zurück?
 
 `analysis.status` ist `failed` oder `skipped`. Der Actor hat den Post gesammelt
 & geliefert, aber die KI-Analyse lief nicht zu Ende. `analysis.reason` nennt die
@@ -369,7 +372,7 @@ kürzt zuerst zitierte & beantwortete Posts, dann den Post selbst.
 
 ### Prüft die Analyse Fakten?
 
-Nein. Antworten beschreiben, was der Post ausdrückt & wie er es darstellt.
+Nein. Antworten beschreiben, was der Post ausdrückt & wie der Post es darstellt.
 Wahrscheinlichkeiten drücken die Sicherheit der KI aus, nicht die Wahrheit.
 Prüfe wichtige Einstufungen am Originalpost, den jeder Datensatz behält.
 
@@ -390,20 +393,23 @@ Datumsgrenzen & Mindestwerte für Interaktionen. Starte mit einem kleinen
 ### Ist es legal, X-Daten zu analysieren?
 
 Der Actor fragt öffentliche X-Felder ab. Ergebnisse können personenbezogene
-Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist. Befolge geltende
+Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist, & befolge geltende
 Datenschutzregeln. Hol dir bei Unsicherheit qualifizierten Rechtsrat.
 
-### Kann ich API, Zeitpläne & Integrationen nutzen?
+### Kann ich die API, Zeitpläne & Integrationen nutzen?
 
 Ja. Im [API-Tab](https://apify.com/xquik/x-twitter-stock-crypto-signals/api)
 findest du Beispiele für Python, JavaScript & cURL. Nutze
-Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) für wiederkehrende
-Runs. Übergib die vorherige Dataset-ID als `monitor.baselineDatasetId`, um
-Änderungen zu sehen. Apify-Integrationen verbinden Runs auch mit Webhooks, Make,
-Zapier, n8n & Google Sheets.
+[Zeitpläne](https://docs.apify.com/platform/schedules) von Apify für
+wiederkehrende Runs. Übergib die vorherige Dataset-ID als
+`monitor.baselineDatasetId`, um zu sehen, was sich geändert hat.
+Apify-Integrationen verbinden Runs auch mit Webhooks, Make, Zapier, n8n & Google
+Sheets.
 
 ### Wo bekomme ich Hilfe?
 
-Öffne ein Issue auf der Actor-Seite oder schreib mit der Run-ID an
-support@xquik.com. Kostenlose Diagnosen im Key-Value-Store erklären leere,
-unvollständige oder unterbrochene Runs.
+Öffne im
+[Tab Issues](https://apify.com/xquik/x-twitter-stock-crypto-signals/issues) ein
+Issue mit der Run-ID. Kostenlose Diagnosen im Key-Value-Store erklären Runs, die
+Aufmerksamkeit brauchen. Ein Run, der keinen Datensatz zurückbekommt, sagt in
+seinem Status, warum.

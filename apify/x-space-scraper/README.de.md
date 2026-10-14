@@ -1,19 +1,10 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <strong>Deutsch</strong> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+**Deutsch** · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer verbindet Xquik MCP mit Coding-Agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Sieh dir an, wie Framer Xquik-Scraper mit Claude Code, Codex, Cursor und mehr nutzt, ab Minute 6:07.</a>
-</td></tr></table>
+[![Framer verbindet Xquik MCP mit Coding-Agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Sieh dir an, wie Framer Xquik-Scraper nutzt](https://youtu.be/4UOSpoOoC3Y?t=367),
+mit Claude Code, Codex, Cursor & mehr, ab Minute 6:07.
 
 Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
 liefert die vollständigsten X-Daten. X Space Scraper von Xquik findet Spaces
@@ -22,8 +13,9 @@ Die meisten anderen Apify Actors rechnen ab, bevor sie filtern oder Duplikate
 entfernen. Xquik rechnet nur gelieferte, eindeutige Ergebnisse ab.
 
 Finde Twitter Spaces zu jedem Thema, live, geplant oder beendet. Du brauchst
-keinen X-API-Schlüssel & keinen Login. Du zahlst **$0.00015 pro geliefertem
-Space oder Broadcast**, & Apify berechnet die Plattformnutzung separat.
+weder einen X-API-Schlüssel noch einen Login. Du zahlst **$0.00015 pro
+geliefertem Space oder Broadcast** & Apify berechnet die Plattformnutzung
+separat.
 
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
@@ -36,7 +28,7 @@ Space oder Broadcast**, & Apify berechnet die Plattformnutzung separat.
 - Das öffentliche Profil des Hosts, Co-Hosts, Sprecher & die Zuhörer, die X
   auflistet.
 - Einstellungen für Aufzeichnung, Clips & Sperre sowie der Post, der den Space
-  ankündigt, mit Text, Zahlen & Autor.
+  ankündigt, mit Text, Zählern & Autor.
 - Posts, die Hosts & Sprecher im Space geteilt haben, mit Absender & Zeitpunkt.
 - Die Aufzeichnung eines beendeten Space als HLS-Playlist-URL, mit
   `includeReplay`.
@@ -46,16 +38,23 @@ Space oder Broadcast**, & Apify berechnet die Plattformnutzung separat.
 
 ## So findest du X Spaces
 
+Neu bei Apify?
+[Erstelle zuerst einen kostenlosen Account](https://console.apify.com/sign-up?fpr=xquik).
+Der kostenlose Plan braucht keine Kreditkarte & gibt dir jeden Monat $5 zum
+Ausgeben. Bei $0.00015 pro Space oder Broadcast reichen $5 für bis zu 33.000
+davon, vor Abzug der Plattformnutzung. Komm dann hierher zurück & klicke auf Try
+for free.
+
 1. Öffne X Space Scraper von Xquik in der Apify Console.
 2. Gib Wörter, Hashtags oder X-Suchoperatoren in `searchTerms` ein.
 3. Oder füge Space-URLs in `startUrls` oder Space-IDs in `spaceIds` ein.
 4. Für Broadcasts füge ihre URLs in `startUrls` oder ihre IDs in `broadcastIds`
    ein.
-5. Setze `maxItems`, um die gelieferten Datensätze zu begrenzen. Klicke dann auf
-   Start.
+5. Setze `maxItems`, um die gelieferten Datensätze zu begrenzen, & klicke dann
+   auf Start.
 6. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
 
-`startUrls` nimmt jede URL als einfachen String oder als Objekt
+`startUrls` akzeptiert jede URL als einfachen String oder als Objekt
 `{ "url": "..." }`.
 
 ```json
@@ -80,16 +79,24 @@ Space oder Broadcast**, & Apify berechnet die Plattformnutzung separat.
 Ein Suchbegriff findet die Spaces, die passende Posts teilen. Er akzeptiert die
 Operatoren der X-Suche.
 
-| Ziel                                      | Suchbegriff        |
-| ----------------------------------------- | ------------------ |
-| Spaces zu einem Thema                     | `bitcoin`          |
-| Spaces, die ein Account teilt             | `from:solana`      |
-| Spaces unter einem Hashtag                | `#AI`              |
-| Spaces in 1 Sprache                       | `startups lang:es` |
-| Spaces, die Posts mit vielen Likes teilen | `nba min_faves:50` |
+| Ziel                              | Suchbegriff        |
+| --------------------------------- | ------------------ |
+| Spaces zu einem Thema             | `bitcoin`          |
+| Spaces, die ein Account teilt     | `from:solana`      |
+| Spaces unter einem Hashtag        | `#AI`              |
+| Spaces in 1 Sprache               | `startups lang:es` |
+| Spaces, die beliebte Posts teilen | `nba min_faves:50` |
 
 `queryType` legt fest, welche Posts vorne stehen. `Latest` zeigt die neuesten
-zuerst & `Top` die mit dem meisten Engagement.
+zuerst & `Top` die mit den meisten Interaktionen.
+
+`Live` listet Spaces, die gerade auf Sendung sind, & `Upcoming` listet geplante.
+Beide lesen die eigene Spaces-Suche von X, die Wörter in Space-Titeln findet &
+keine Operatoren akzeptiert.
+
+```json
+{ "searchTerms": ["bitcoin"], "queryType": "Live" }
+```
 
 Lies Spaces, die du schon kennst, per URL oder ID.
 
@@ -111,8 +118,8 @@ Der Datensatz enthält dann `replay` mit `url`, einer HLS-Playlist, sowie
 `streamType` & `status`. Ein Space, der live, geplant oder ohne Aufzeichnung
 ist, hat kein `replay`. Die Aufzeichnung kostet nichts extra.
 
-Lies Broadcasts, die Live-Videos, die X unter `x.com/i/broadcasts` hostet, per
-URL oder ID.
+Lies Broadcasts, also die Live-Videos, die X unter `x.com/i/broadcasts` hostet,
+per URL oder ID.
 
 ```json
 {
@@ -129,7 +136,7 @@ Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 Jeder Datensatz enthält 1 Space oder Broadcast & dessen Suchbegriff, URL oder ID
 in `sourceTarget`. `resultType` ist `space` oder `broadcast`.
 
-Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
+Die Beispiele nutzen Musterwerte. Die Ergebnisse spiegeln Live-Daten wider. Ein
 Space-Datensatz sieht so aus.
 
 ```json
@@ -161,17 +168,17 @@ Space-Datensatz sieht so aus.
 
 `state` enthält 1 von 5 Werten, so wie X sie nennt.
 
-| `state`      | Der Space                                          |
-| ------------ | -------------------------------------------------- |
-| `NotStarted` | Ist geplant & enthält `scheduledStart`.            |
-| `Running`    | Ist gerade live.                                   |
-| `Ended`      | Ist vorbei. Der Host hat ihn beendet.              |
-| `TimedOut`   | Ist vorbei. X hat ihn geschlossen, nicht der Host. |
-| `Canceled`   | War geplant & hat nie begonnen.                    |
+| `state`      | Der Space                                           |
+| ------------ | --------------------------------------------------- |
+| `NotStarted` | Ist geplant & enthält `scheduledStart`.             |
+| `Running`    | Ist gerade live.                                    |
+| `Ended`      | Ist vorbei. Sein Host hat ihn beendet.              |
+| `TimedOut`   | Ist vorbei. X hat ihn geschlossen, nicht sein Host. |
+| `Canceled`   | War geplant & hat nie begonnen.                     |
 
-Spaces mit `Ended` & `TimedOut` enthalten `endedAt`, & beide können eine
+Spaces mit `Ended` & `TimedOut` enthalten `endedAt` & beide können eine
 Aufzeichnung behalten. X zeigt einen Space für Abonnenten oder eine Community
-nur dessen Publikum, deshalb liefern diese Spaces keinen Datensatz.
+nur dessen Publikum, also liefern diese Spaces keinen Datensatz.
 
 Ein Broadcast-Datensatz hat `resultType: "broadcast"` & sieht so aus.
 
@@ -192,14 +199,44 @@ Ein Broadcast-Datensatz hat `resultType: "broadcast"` & sieht so aus.
 }
 ```
 
+## Ausgabespalten
+
+8 Eingaben formen jeden Datensatz, nachdem der Run ihn gelesen hat. Sie führen
+keinen Code aus & ändern den Preis nicht.
+
+| Feld                | Was es bewirkt                                                                        |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| `fields`            | Behält nur diese Felder, in der Reihenfolge & Schreibweise, die du angibst            |
+| `omitFields`        | Entfernt diese Felder & behält den Rest                                               |
+| `renameFields`      | Verschiebt ein Feld in eine Spalte mit neuem Namen                                    |
+| `flatten`           | Macht aus jedem verschachtelten Objekt Spalten auf oberster Ebene                     |
+| `fillMissingFields` | Füllt ein behaltenes Feld, das einem Datensatz fehlt, mit `null`. Standardmäßig aktiv |
+| `joinFields`        | Macht aus jeder dieser Listen 1 Textwert                                              |
+| `joinSeparator`     | Text zwischen verbundenen Einträgen. Standard ist ein Komma & ein Leerzeichen         |
+| `constantFields`    | Fügt eine Spalte mit demselben Text in jedem Datensatz hinzu                          |
+
+- Nutze einen Punkt für ein Feld innerhalb eines Objekts. Groß- und
+  Kleinschreibung & Unterstriche spielen keine Rolle.
+- Jeder Datensatz behält seine `id`.
+- Mit `fields` kommt ein Feld, das einem Datensatz fehlt, als `null` an. Jeder
+  Datensatz hat dann dieselben Spalten.
+- Ein falscher Feldname stoppt den Run vor dem Lesen & kostet nichts.
+- Lassen sich die Namen nicht prüfen, liest der Run weiter & listet nicht
+  gefundene Namen am Ende.
+- Der Run ignoriert eine Map-Funktion oder einen jq-Filter, die für einen
+  anderen Actor geschrieben sind.
+
 ## Was kostet es, X Spaces zu scrapen?
 
 Auf jedem Apify-Plan kostet ein gelieferter Space oder Broadcast $0.00015. Apify
 berechnet deine Plattformnutzung separat.
 
-- Eine Gebühr pro geliefertem Datensatz. Diagnosen in `diagnostics` sind
-  kostenlos.
-- Keine Gebühr für Start, Suchen oder Seiten.
+Brauchst du mehr Volumen, dann
+[wähle einen Apify-Plan](https://apify.com/pricing?fpr=xquik) mit mehr
+vorausbezahlter Nutzung.
+
+- 1 Gebühr pro geliefertem Datensatz. Diagnosen in `diagnostics` sind kostenlos.
+- Keine Gebühr für Start, Suche oder Seite.
 - Die Deduplizierung läuft vor der Abrechnung.
 
 ## Limits & Wiederherstellung
@@ -219,8 +256,9 @@ Ursache es ist.
 
 ## Verwandte Xquik-Actors
 
-Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, rechnet erst nach dem
-Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
+Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, dieselbe Abrechnung erst
+nach dem Filtern & dieselben Diagnosen. Wähle den, der zu den Daten passt, die
+du brauchst.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrapt Posts aus
   Suchen, Profil-Timelines, Listen & Post-IDs mit über 50 Filtern & flachen
@@ -238,9 +276,9 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015 pro
   Datensatz.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
-  scrapt die Posts, die Posts zitieren, mit Text, Medien, Zahlen, Autoren & 11
-  Filtern. Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was gesagt
-  wurde. Ab $0.00015 pro Post.
+  scrapt die Zitate von Posts mit Text, Medien, Zählern, Autoren & 11 Filtern.
+  Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was diese Accounts
+  gesagt haben. Ab $0.00015 pro Post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrapt
   Follower, gefolgte Accounts, Listenmitglieder, Abonnenten &
   Community-Mitglieder als Profil-Datensätze. Nutze ihn, wenn du Zielgruppen-
@@ -251,8 +289,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   einer Suche aufbaust. Ab $0.00015 pro Profil.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   prüft, wo Accounts ansässig sind, mit der X-Angabe "Account based in", der
-  Verbindungsart zu X & Benutzernamen-Änderungen. Nutze ihn, wenn du prüfst, wo
-  Accounts ansässig sind. Ab $0.00015 pro Account.
+  Verbindungsart zu X & Änderungen des Nutzernamens. Nutze ihn, wenn du prüfst,
+  wo Accounts ansässig sind. Ab $0.00015 pro Account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) holt die E-Mails,
   Telefonnummern & Links, die Accounts in ihren Profilen veröffentlichen, anhand
   von Nutzernamen, Followern oder Nutzersuchen. Nutze ihn, wenn du die E-Mails
@@ -283,8 +321,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Zeit beobachtest. Ab $0.0003 pro analysiertem Post.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden Post
-  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema brauchst. Ab
-  $0.0003 pro analysiertem Post.
+  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem beliebigen Thema
+  brauchst. Ab $0.0003 pro analysiertem Post.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   kennzeichnet bullische, bärische, neutrale oder gemischte Haltung, Inhaltstyp,
   Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du Aktien, Krypto
@@ -306,47 +344,50 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
 Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
 
-### Brauche ich einen X-API-Schlüssel oder Login?
+### Brauche ich einen X-API-Schlüssel oder einen Login?
 
-Nein. X Space Scraper von Xquik braucht keinen X-API-Schlüssel, keinen Login &
-keine Zugangsdaten.
+Nein. X Space Scraper von Xquik braucht weder einen X-API-Schlüssel noch einen
+Login oder Zugangsdaten.
 
 ### Kann ich Spaces finden, die gerade live sind?
 
-Ja. Suche mit `queryType` auf `Latest` & behalte dann die Datensätze, deren
-`state` den Wert `Running` hat. Datensätze mit `NotStarted` sind geplant &
-enthalten `scheduledStart`.
+Ja. Setze `queryType` auf `Live` & ergänze einen Suchbegriff, etwa `bitcoin`.
+Jeder Datensatz ist ein Space, der gerade auf Sendung ist. `Upcoming` listet
+geplante Spaces, die `scheduledStart` enthalten.
 
 ### Ist es legal, X Spaces zu scrapen?
 
 X Space Scraper von Xquik fragt öffentliche X-Felder ab. Ergebnisse können
-personenbezogene Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist. Befolge
+personenbezogene Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist, & befolge
 geltende Datenschutzregeln. Hol dir bei Unsicherheit qualifizierten Rechtsrat.
 
 ### Warum hat mein Run keine Ergebnisse geliefert?
 
-Öffne zuerst die kostenlose Ausgabe `diagnostics`. Der Status eines leeren Runs
-rät dir, deine Ziele zu prüfen. `stopCauses` gibt jeder Ursache eine
+Lies zuerst den Run-Status. Der Status eines leeren Runs rät dir, deine Ziele zu
+prüfen. Die kostenlose Ausgabe `diagnostics` erscheint, wenn etwas deine
+Aufmerksamkeit braucht. Ihr Feld `stopCauses` gibt jeder Ursache eine
 `nextAction`, der du folgen kannst.
 
-### Kann ich API, Zeitpläne & Integrationen nutzen?
+### Kann ich die API, Zeitpläne & Integrationen nutzen?
 
-Ja. Nutze die Apify-API oder die REST-API von Xquik. Der
-[API-Tab](https://apify.com/xquik/x-space-scraper/api) enthält Beispiele für
+Ja. Nutze die Apify-API oder die REST-API von Xquik. Im
+[API-Tab](https://apify.com/xquik/x-space-scraper/api) findest du Beispiele für
 Python, JavaScript & cURL.
-Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) starten X Space
+[Zeitpläne](https://docs.apify.com/platform/schedules) von Apify starten X Space
 Scraper von Xquik per Cron. Agents nutzen
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp). Nutze `latest`,
 außer du brauchst einen älteren Build.
 
 ### Wo bekomme ich Hilfe?
 
-Öffne ein Issue auf der Actor-Seite oder schreib mit der Run-ID an
-support@xquik.com. Kostenlose Diagnosen im Key-Value-Store erklären leere,
-unvollständige oder unterbrochene Runs.
+Öffne im [Tab Issues](https://apify.com/xquik/x-space-scraper/issues) ein Issue
+mit der Run-ID. Kostenlose Diagnosen im Key-Value-Store erklären Runs, die
+Aufmerksamkeit brauchen. Ein Run, der keinen Datensatz zurückbekommt, sagt in
+seinem Status, warum.
 
 ### Kann ich eine individuelle Lösung bekommen?
 
-Ja. Besuche [xquik.com](https://xquik.com) oder lies die
-[API-Dokumentation](https://docs.xquik.com/introduction). Sie deckt Dashboard,
-API, MCP-Server & Webhooks ab.
+Ja. Beschreibe im [Tab Issues](https://apify.com/xquik/x-space-scraper/issues),
+was du brauchst. Xquik bietet außerdem ein Dashboard, eine REST-API, einen
+MCP-Server & Webhooks. Die Website von Xquik findest du in seinem
+[Apify-Profil](https://apify.com/xquik).

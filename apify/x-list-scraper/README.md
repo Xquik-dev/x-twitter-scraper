@@ -15,10 +15,9 @@
 ·
 [Italiano](README.it.md)
 
-[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
-
-[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
-Claude Code, Codex, Cursor & more, from 6:07.
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
+with Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X List Scraper collects List details, posts,
@@ -104,6 +103,9 @@ Each row sets `resultType` to `list`, `listTweet`, `listMember` or
 `listFollower`. `sourceTarget` keeps the input List ID, or the search term that
 found a `list` row. A `list` row holds a List's details, 1 per List. Other rows
 use the stable Xquik Tweet or profile response shape.
+
+Member & follower rows carry `email` & `contactInfo`. They hold the emails,
+phones & links each profile publishes.
 
 ### An account's Lists
 

@@ -1,32 +1,23 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <strong>Türkçe</strong> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · **Türkçe** ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer, Xquik MCP'yi kodlama ajanlarına bağlıyor"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Framer'ın Xquik scraper'larını Claude Code, Codex, Cursor ve daha fazlasıyla nasıl kullandığını 6:07'den itibaren izle.</a>
-</td></tr></table>
+[![Framer, Xquik MCP'yi kodlama ajanlarına bağlıyor](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Framer'ın Xquik scraper'larını Claude Code, Codex, Cursor & daha fazlasıyla nasıl kullandığını](https://youtu.be/4UOSpoOoC3Y?t=367)
+6:07'den itibaren izle.
 
 Xquik, en eksiksiz X verisini sunan, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. Xquik'in X Community Scraper'ı Topluluk bilgilerini,
-gönderilerini, medyasını, aramalarını, üyelerini ve moderatörlerini toplar,
-anahtar kelime veya konuyla da Topluluk bulur. Diğer Apify Actor'larının çoğu,
+gönderilerini, medyasını, aramalarını, üyelerini & moderatörlerini toplar &
+anahtar kelime veya konuyla Topluluk bulur. Diğer Apify Actor'larının çoğu,
 filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
 edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır.
 
 Twitter Topluluklarının bilgilerini, gönderilerini, medyasını, anahtar kelime
-eşleşmelerini, üyelerini ve moderatörlerini Topluluk URL'lerinden veya
+eşleşmelerini, üyelerini & moderatörlerini Topluluk URL'lerinden veya
 ID'lerinden topla. Toplulukları anahtar kelime veya konuyla bul ya da X'in
-önerdiklerini listele. **Teslim edilen satır başına $0.00015** ödersin. Apify,
-platform kullanımını ayrıca faturalandırır. X API anahtarı ya da giriş gerekmez.
+önerdiklerini listele. **Teslim edilen satır başına $0.00015** ödersin & Apify,
+platform kullanımını ayrıca faturalandırır. X API anahtarı veya giriş gerekmez.
 
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
@@ -35,37 +26,40 @@ platform kullanımını ayrıca faturalandırır. X API anahtarı ya da giriş g
 
 Xquik'in X Community Scraper'ı herkese açık X (Twitter) Topluluklarını
 URL'lerinden veya ID'lerinden okur. Her Topluluğun bilgilerini, gönderilerini,
-medyasını, anahtar kelime eşleşmelerini, üyelerini ve moderatörlerini döndürür.
-Toplulukları anahtar kelime veya konuyla da bulur ve X'in önerdiklerini listeler.
+medyasını, anahtar kelime eşleşmelerini, üyelerini & moderatörlerini döndürür.
+Toplulukları anahtar kelime veya konuyla da bulur & X'in önerdiklerini listeler.
 
 ### Temel özellikler
 
-- 1 çalıştırmada birçok Topluluğu ve veri türünü oku.
-- Topluluk bilgilerini kural, katılma sorusu, kurucu, yönetici ve konuyla al.
-- En yeni gönderileri ya da X'in en üste koyduğu popüler gönderileri topla.
-- Medya sekmesini topla ya da Topluluk gönderilerinde anahtar kelimeyle ara.
-- Üyeleri ve moderatörleri dışa aktar ya da üyeleri adıyla bul.
+- 1 çalıştırmada birçok Topluluğu & veri türünü oku.
+- Topluluk bilgilerini kurallar, katılma sorusu, kurucu, yönetici & konuyla al.
+- Gönderileri en yeniden başlayarak ya da X'in en üst sıraya koyduğu popüler
+  gönderileri topla.
+- Medya sekmesini topla ya da bir Topluluğun gönderilerinde anahtar kelimeyle
+  ara.
+- Üyeleri & moderatörleri dışa aktar ya da üyeleri adıyla bul.
 - Toplulukları anahtar kelime veya konuyla, tam kayıtlarıyla birlikte bul.
-- Gönderileri tarih, dil, medya ve etkileşime göre filtrele.
-- Üyeleri kitle büyüklüğü, hesap yaşı ve onay durumuna göre filtrele.
-- Filtreleme ve tekilleştirme faturalamadan önce çalışır.
-- Apify çalıştırmayı yeniden başlatsa da teslim edilen satırlar ve ilerleme
-  korunur.
+- Gönderileri tarih, dil, medya & etkileşime göre filtrele.
+- Üyeleri kitle büyüklüğü, hesap yaşı & onay durumuna göre filtrele.
+- Filtreler & tekilleştirme faturalamadan önce çalışır.
+- Apify bir çalıştırmayı yeniden başlatırsa çalıştırma teslim edilen satırları &
+  ilerlemeyi korur.
 
 ### Kullanım alanları
 
 - Niş bir Topluluğun üyelerinden potansiyel müşteri listeleri oluştur.
-- Bir kullanıcı Topluluğundaki ürün geri bildirimlerini ve özellik isteklerini
+- Bir kullanıcı Topluluğundaki ürün geri bildirimlerini & özellik isteklerini
   takip et.
-- Kurucuların lansman, işe alım ve yatırım haberlerini bul.
-- Toplulukları büyüklük, konu ve etkinliğe göre karşılaştır.
+- Kurucular arasında lansmanları, işe alım gönderilerini & yatırım haberlerini
+  bul.
+- Toplulukları büyüklük, konu & etkinliğe göre karşılaştır.
 - Bir Topluluğa gönderi paylaşmadan önce kurallarını oku.
-- Bir Topluluğun moderatörlerini ve en çok takip edilen üyelerini bul.
+- Bir Topluluğun moderatörlerini & en çok takip edilen üyelerini bul.
 - Yaratıcı araştırma için görselli veya videolu gönderileri topla.
 
 ### X Community Scraper hangi verileri çıkarabilir?
 
-Topluluk satırlarında `resultType: "community"` kullanılır. Başlıca alanlar
+Topluluk satırları `resultType: "community"` kullanır. Başlıca alanlar
 aşağıdakilerdir.
 
 | Alan              | Açıklama                                        |
@@ -84,7 +78,7 @@ aşağıdakilerdir.
 | `admin`           | Yöneticinin herkese açık profili                |
 | `membersFacepile` | X'in Topluluk sayfasında önizlediği üyeler      |
 | `is_nsfw`         | Topluluğun hassas olarak işaretli olup olmadığı |
-| `banner`          | Kapak görseli URL'si, boyutu ve ana renkleri    |
+| `banner`          | Kapak görseli URL'si, boyutu & ana renkleri     |
 | `sourceTarget`    | Girdiğin URL, ID, anahtar kelime veya konu      |
 
 Her veri türü kendi türünde satırlar ekler.
@@ -99,24 +93,31 @@ Her veri türü kendi türünde satırlar ekler.
 | `communityTopic`     | `listTopics`                       | Konu                            |
 
 Gönderi satırlarında `text`, `createdAt`, `likeCount`, `replyCount`,
-`retweetCount`, `viewCount`, `media` ve `author` profili bulunur. Üye ve
-moderatör satırlarında `username`, `followers`, `verified` ve `communityRole`
-gibi profil alanları bulunur.
+`retweetCount`, `viewCount`, `media` & `author` profili bulunur. Üye & moderatör
+satırlarında `username`, `followers`, `verified` & `communityRole` gibi profil
+alanları bulunur. Bu satırlar ayrıca her profilin yayımladığı e-postaları,
+telefonları & bağlantıları içeren `email` & `contactInfo` alanlarını taşır.
 
-## Topluluk verilerini kazımak için X Community Scraper'ı nasıl kullanırım?
+## X Community Scraper ile Topluluk verisini nasıl kazırım?
+
+Apify'da yeni misin? Önce
+[ücretsiz bir hesap oluştur](https://console.apify.com/sign-up?fpr=xquik).
+Ücretsiz plan kredi kartı istemez & her ay harcaman için $5 verir. Satır başına
+$0.00015 fiyatla $5, platform kullanımı hariç 33.000 satıra kadar yeter. Sonra
+buraya dön & Try for free düğmesine bas.
 
 Apify Console'da aşağıdaki adımları izle.
 
 1. Bir [görev örneğini](#görev-örnekleri) ya da Input sekmesini aç.
 2. Topluluk URL'lerini `startUrls` alanına ya da ID'leri `communityIds` alanına
    yapıştır.
-3. `resources` seç ve `sinceDate` veya `minLikes` gibi filtreler ekle.
+3. `resources` seç & `sinceDate` veya `minLikes` gibi filtreler ekle.
 4. `maxItems` değerini ayarla, sonra Start'a tıkla.
 5. Veri kümesini JSON, CSV, Excel veya HTML olarak dışa aktar.
 
-Aşağıdaki her örnek eksiksiz bir girdidir.
+Aşağıdaki her tarif eksiksiz bir girdidir.
 
-### Topluluk bilgilerini ve son gönderileri al
+### Topluluk bilgilerini & son gönderileri al
 
 ```json
 {
@@ -165,7 +166,7 @@ Medya sekmesi için `resources` listesine `"media"` ekle.
 }
 ```
 
-### Üyeleri ve moderatörleri dışa aktar
+### Üyeleri & moderatörleri dışa aktar
 
 ```json
 {
@@ -176,8 +177,8 @@ Medya sekmesi için `resources` listesine `"media"` ekle.
 }
 ```
 
-Üye filtreleri üye ve moderatör satırlarına uygulanır. Filtrelenen satırlar veri
-kümesine hiç ulaşmaz, bu yüzden onlar için asla ödeme yapmazsın.
+Üye filtreleri üye & moderatör satırlarına uygulanır. Filtrelenen satırlar asla
+veri kümesine ulaşmaz, bu yüzden onlar için asla ödemezsin.
 
 ### Üyeleri adıyla bul
 
@@ -189,10 +190,10 @@ kümesine hiç ulaşmaz, bu yüzden onlar için asla ödeme yapmazsın.
 }
 ```
 
-x.com'daki üye aramasında olduğu gibi X, her ad için en fazla 10 eşleşen hesabı
-kontrol eder. Bulunan her üye, `communityRole` değeriyle birlikte 1
-`communityMember` satırıdır. `memberNames` içeren bir çalıştırma, `resources`
-içinde belirtilmedikçe başka veri türü okumaz.
+X, kendi üye aramasında olduğu gibi her ad için en fazla 10 eşleşen hesabı
+kontrol eder. Bulunan her üye, `communityRole` değeriyle 1 `communityMember`
+satırı olur. `memberNames` içeren bir çalıştırma, `resources` içinde
+belirtilmedikçe başka bir veri türü okumaz.
 
 ### Toplulukları anahtar kelime veya konuyla bul
 
@@ -204,24 +205,24 @@ içinde belirtilmedikçe başka veri türü okumaz.
 }
 ```
 
-Bulunan her Topluluk kurallarını, kurucusunu, yönetici ve üye profillerini
+Bulunan her Topluluk kurallarını, kurucusunu, yöneticisini & üye profillerini
 taşır. Kısa kayıtla daha hızlı bir çalıştırma için `includeDetails` değerini
-`false` yap. X'in önerdiği Topluluklar için `includeSuggested` seçeneğini aç.
-Bunlar her çalıştırmada değişebilir. Her konu ve alt konuları için `listTopics`
-seçeneğini aç.
+`false` yap. X'in önerdiği Topluluklar için `includeSuggested` seçeneğini aç. Bu
+öneriler her çalıştırmada farklı olabilir. Her konu & alt konuları için ise
+`listTopics` seçeneğini aç.
 
 ## Görev örnekleri
 
-50 herkese açık görevden birini seç. Her görevin sınırlı bir girdisi ve buna
-uygun bir veri kümesi görünümü var. Bir görevi çalıştırmadan önce düzenle.
+50 herkese açık görevden birini seç. Her görevin sınırlı bir girdisi & uygun bir
+veri kümesi görünümü var. Bir görevi çalıştırmadan önce düzenle.
 
 - [Bir X Topluluğuna genel bakış al](https://apify.com/xquik/x-community-scraper/examples/get-an-x-community-overview)
 - [Bir X Topluluğunun ayrıntılarını son gönderileriyle al](https://apify.com/xquik/x-community-scraper/examples/get-community-details-with-recent-posts)
 - [Bir X Topluluğundaki popüler teknoloji gönderilerini bul](https://apify.com/xquik/x-community-scraper/examples/find-top-technology-posts-in-a-community)
 - [X Topluluğu üyelerini dışa aktar](https://apify.com/xquik/x-community-scraper/examples/export-x-community-members)
-- [Bir X Topluluğunun onaylanmış üyelerini dışa aktar](https://apify.com/xquik/x-community-scraper/examples/export-verified-community-members)
+- [Bir X Topluluğunun onaylı üyelerini dışa aktar](https://apify.com/xquik/x-community-scraper/examples/export-verified-community-members)
 - [Bir X Topluluğunun moderatörlerini listele](https://apify.com/xquik/x-community-scraper/examples/list-x-community-moderators)
-- [Geliştirici Topluluklarını büyüklük ve konuya göre karşılaştır](https://apify.com/xquik/x-community-scraper/examples/compare-developer-communities-by-size)
+- [Geliştirici Topluluklarını büyüklük & konuya göre karşılaştır](https://apify.com/xquik/x-community-scraper/examples/compare-developer-communities-by-size)
 - [Gönderi paylaşmadan önce bir X Topluluğunun kurallarını oku](https://apify.com/xquik/x-community-scraper/examples/read-community-rules-before-you-post)
 - [Bir girişim Topluluğundaki yatırım gönderilerini bul](https://apify.com/xquik/x-community-scraper/examples/find-funding-posts-in-a-startup-community)
 - [Bir yazılım mühendisliği Topluluğundaki işe alım gönderilerini bul](https://apify.com/xquik/x-community-scraper/examples/find-hiring-posts-in-a-software-community)
@@ -235,31 +236,35 @@ $0.00015 tutar. Apify, platform kullanımını ayrıca faturalandırır. Xquik, 
 edilen her veri satırı için 1 kez ücret alır. Tanılamalar `diagnostics`
 çıktısında ücretsizdir.
 
+Daha fazla hacim için daha çok ön ödemeli kullanım içeren bir
+[Apify planı seç](https://apify.com/pricing?fpr=xquik).
+
 - Xquik aboneliği gerekmez.
 - Ayrı bir başlatma, Topluluk, veri türü veya sorgu ücreti ödemezsin.
-- Bulunan bir Topluluk, tam kaydı olsun olmasın 1 satır tutar.
-- Filtreleme ve tekilleştirme faturalamadan önce çalışır. Filtrelenen veya
-  tekrar eden satırlar için asla ödeme yapmazsın.
-- Apify'daki maksimum toplam ücret ayarları teslim edilen satırları sınırlar.
+- Bulunan bir Topluluk, tam kaydıyla ya da tam kaydı olmadan 1 satır tutar.
+- Filtreler & tekilleştirme faturalamadan önce çalışır. Filtrelenen veya
+  tekrarlanan satırlar için asla ödemezsin.
+- Apify'ın maksimum toplam ücret ayarları teslim edilen satırları sınırlar.
 
-Sorun yaşayan ya da büyük bir çalıştırma ayrıca bir `run-report` kaydı yazar.
-Sorunsuz biten küçük bir çalıştırma bu kaydı yazmaz, böylece Apify kullanımı
-azalır. Kaydı her çalıştırmada yazmak için `alwaysSaveRunRecords` seçeneğini aç.
+Sorun yaşayan veya büyük bir çalıştırma ayrıca bir `run-report` kaydı yazar.
+Sorunsuz biten küçük bir çalıştırma bu kaydı atlar & Apify kullanımından
+tasarruf eder. Kaydı her çalıştırmada yazmak için `alwaysSaveRunRecords`
+seçeneğini aç.
 
 Bir çalıştırmanın harcamasını sınırlamak için
 [Çalıştırma seçenekleri](#çalıştırma-seçenekleri) bölümüne bak.
 
-## Boş, kısmi ve durdurulan çalıştırmalar
+## Boş, kısmi & durdurulan çalıştırmalar
 
-Xquik'in X Community Scraper'ı boş, kısmi ve durdurulan çalıştırmaları ücretsiz
-açıklar. Çalıştırma durumu, çalıştırmanın neden durduğunu söyler. Ücretlendirilen
-sonuçları ve okunan hedefleri de sayar.
+Xquik'in X Community Scraper'ı boş, kısmi & durdurulan çalıştırmaları ücretsiz
+açıklar. Çalıştırma durumu, çalıştırmanın neden durduğunu söyler.
+Ücretlendirilen sonuçları & okunan hedefleri de sayar.
 
 ### Boş sonuçlar
 
-Boş bir çalıştırmanın durumu, hedeflerini ve filtrelerini kontrol etmeni söyler.
-Filtrelenen satırlar sonuç sınırını asla tüketmez. Her hedefi okuyup hiç satır
-alamayan bir çalıştırma kayıt yazmaz. Durumu, nedenini ve neyi değiştirmen
+Boş bir çalıştırmanın durumu, hedeflerini & filtrelerini kontrol etmeni söyler.
+Filtrelenen satırlar asla sonuç sınırını tüketmez. Her hedefi okuyup hiç satır
+alamayan bir çalıştırma kayıt yazmaz. Durumu nedenini & neyi değiştirmen
 gerektiğini söyler. Actor yalnızca X'in gösterdiği herkese açık Toplulukları
 döndürür. Erişilebilen alanlar Topluluğa göre değişir.
 
@@ -267,78 +272,88 @@ döndürür. Erişilebilen alanlar Topluluğa göre değişir.
 
 Veri çekme yarıda kesilirse Actor ücretsiz bir `partial` tanılaması yazar.
 Teslim edilen satırlar veri kümesinde kalır. Yeniden denemeden önce
-`availableResults`, `failedTargets`, `retryable` ve `nextAction` alanlarını oku.
-Actor'ın başarıyla bitmesi teslimatı doğrular. Tüm verinin çekildiğini
-doğrulamaz.
+`availableResults`, `failedTargets`, `retryable` & `nextAction` alanlarını oku.
+Actor'ın başarıyla bitmesi teslimatı doğrular, tüm verinin çekildiğini değil.
 
 ### Durma nedenleri
 
 Çalıştırma durumu, erken durmanın her nedenini söyler. `stopCauses` her nedeni
-kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Nedenler
-`target_not_found`, `target_failed`, `pagination_safety_limit` ve
+kendi `message`, `retryable` & `nextAction` alanlarıyla listeler. Nedenler
+`target_not_found`, `target_failed`, `pagination_safety_limit` &
 `deadline_reached` olabilir. Bulunamayan bir hedef, listeye yalnızca
 çalıştırmayı başka bir neden durdurduysa girer. Nedenlerden biri yeniden
-denenebiliyorsa çalıştırma da `retryable` olur. Actor kendi başına süre sınırı
-eklemez.
+denenebiliyorsa çalıştırma da `retryable` olur. Actor kendi başına bir süre
+sınırı eklemez.
 
 ## Girdi
 
-Input sekmesi tüm seçenekleri listeler. Topluluk URL'leri, ID'leri, anahtar
-kelimeler veya konular gir ya da `includeSuggested` veya `listTopics` seçeneğini
+Input sekmesi tüm seçenekleri listeler. Topluluk URL'leri ya da ID'leri, anahtar
+kelimeler veya konular ver ya da `includeSuggested` veya `listTopics` seçeneğini
 aç. Diğer tüm alanlar isteğe bağlıdır.
 
-| Alan                           | Ne yapar                                                              |
-| ------------------------------ | --------------------------------------------------------------------- |
-| `startUrls`                    | x.com'daki Topluluk URL'leri                                          |
-| `communityIds`                 | Sayısal Topluluk ID'leri                                              |
-| `resources`                    | `info`, `tweets`, `media`, `search`, `members`, `moderators`          |
-| `query`                        | `search` veri türü için anahtar kelime                                |
-| `queryType`                    | Anahtar kelime araması için `Latest` veya `Top` sıralaması            |
-| `postsOrder`                   | Gönderiler için `Latest` veya `Top` sıralaması                        |
-| `memberNames`                  | Üyeler arasında aranacak adlar veya kullanıcı adları                  |
-| `searchTerms`                  | Topluluk bulmak için anahtar kelimeler                                |
-| `topics`                       | `Technology` gibi konu adları veya ID'leri                            |
-| `includeSuggested`             | X'in katılmanı önerdiği Toplulukları ekler                            |
-| `listTopics`                   | Her Topluluk konusunu ve alt konularını ekler                         |
-| `includeDetails`               | Anahtar kelime veya konuyla bulunan Topluluklara tam kayıt ekler      |
-| `maxItems`                     | Tüm çalıştırmada teslim edilecek satır sınırı                         |
-| `maxItemsPerTarget`            | Her Topluluk veri türü için satır sınırı                              |
-| `sinceDate`, `untilDate`       | Bir tarih aralığındaki gönderileri tutar                              |
-| `language`                     | 1 dil kodundaki gönderileri tutar                                     |
-| `mediaType`                    | Görsel, video, GIF, bağlantı içeren veya medyasız gönderileri tutar   |
-| `minViews`, `minLikes`         | Bir görüntülenme veya beğeni sayısının üstündeki gönderileri tutar    |
-| `minReplies`, `minRetweets`    | Bir yanıt veya yeniden gönderi sayısının üstündeki gönderileri tutar  |
-| `nativeRetweets`               | Yalnızca doğrudan yeniden gönderileri tutar                           |
-| `verifiedOnly`                 | Onaylanmış yazarları, üyeleri veya moderatörleri tutar                |
-| `minFollowers`, `maxFollowers` | Bir takipçi aralığındaki üyeleri tutar                                |
-| `minAccountAgeDays`            | Hesabı en az bu kadar günlük olan üyeleri tutar                       |
-| `dedupeAcrossTargets`          | Topluluklar arasında tekrar eden satırları faturalamadan önce çıkarır |
+| Alan                           | Ne yapar                                                                       |
+| ------------------------------ | ------------------------------------------------------------------------------ |
+| `startUrls`                    | `x.com` üzerindeki Topluluk URL'leri                                           |
+| `communityIds`                 | Sayısal Topluluk ID'leri                                                       |
+| `resources`                    | `info`, `tweets`, `media`, `search`, `members`, `moderators`                   |
+| `query`                        | `search` veri türü için anahtar kelime                                         |
+| `queryType`                    | Anahtar kelime araması için `Latest` veya `Top` sıralaması                     |
+| `postsOrder`                   | Gönderiler için `Latest` veya `Top` sıralaması                                 |
+| `memberNames`                  | Üyeler arasında aranacak adlar veya kullanıcı adları                           |
+| `searchTerms`                  | Topluluk bulmak için anahtar kelimeler                                         |
+| `topics`                       | `Technology` gibi konu adları veya ID'leri                                     |
+| `includeSuggested`             | X'in katılmanı önerdiği Toplulukları ekler                                     |
+| `listTopics`                   | Her Topluluk konusunu & alt konularını ekler                                   |
+| `includeDetails`               | Anahtar kelime veya konuyla bulunan Topluluklara tam kayıt ekler               |
+| `maxItems`                     | Tüm çalıştırmada teslim edilen satırların sınırı                               |
+| `maxItemsPerTarget`            | Her Topluluk veri türü için satır sınırı                                       |
+| `sinceDate`, `untilDate`       | Bir tarih aralığındaki gönderileri tutar                                       |
+| `language`                     | 1 dil kodundaki gönderileri tutar                                              |
+| `mediaType`                    | Görsel, video, GIF, bağlantı içeren veya hiçbirini içermeyen gönderileri tutar |
+| `minViews`, `minLikes`         | Bir görüntülenme veya beğeni sayısının üstündeki gönderileri tutar             |
+| `minReplies`, `minRetweets`    | Bir yanıt veya yeniden gönderi sayısının üstündeki gönderileri tutar           |
+| `nativeRetweets`               | Yalnızca yerel yeniden gönderileri tutar                                       |
+| `verifiedOnly`                 | Onaylı yazarları, üyeleri veya moderatörleri tutar                             |
+| `minFollowers`, `maxFollowers` | Bir kitle aralığındaki üyeleri tutar                                           |
+| `minAccountAgeDays`            | En az bu kadar günlük üyeleri tutar                                            |
+| `blueVerifiedOnly`             | X'in Blue onaylı olarak işaretlediği yazarları veya üyeleri tutar              |
+| `verifiedType`                 | 1 onay türüne sahip üyeleri tutar                                              |
+| `minFollowing`, `maxFollowing` | Bir takip edilen sayısı aralığındaki üyeleri tutar                             |
+| `minStatuses`, `maxStatuses`   | Bir gönderi sayısı aralığındaki üyeleri tutar                                  |
+| `hasWebsite`, `hasLocation`    | Web sitesi veya konum belirten üyeleri tutar                                   |
+| `hasEmail`                     | E-posta yayımlayan üyeleri tutar                                               |
+| `businessEmailOnly`            | Ücretsiz e-posta servisleri dışında e-postası olan üyeleri tutar               |
+| `emailDomains`                 | Bu alan adlarında e-postası olan üyeleri tutar                                 |
+| `bioContains`                  | Biyografisinde bu kelimelerden biri geçen üyeleri tutar                        |
+| `locationContains`             | Konumunda bu metin geçen üyeleri tutar                                         |
+| `usernameContains`             | Kullanıcı adında bu metin geçen üyeleri tutar                                  |
+| `dedupeAcrossTargets`          | Topluluklar arasında tekrarlanan satırları faturalamadan önce çıkarır          |
 
-### Başka bir Topluluk Actor'ından geçiş yap
+### Başka bir topluluk Actor'ından geçiş yap
 
-`ranking` ve `sort` adları `postsOrder` gibi çalışır. `Top` veya `Relevance`, en
-üst sıradaki gönderileri okur. Bunlardan birini ve `postsOrder` alanını birlikte
-ayarlarsan `postsOrder` değeri geçerli olur. Çalıştırma günlüğü geçersiz kalan
+`ranking` & `sort` adları `postsOrder` gibi çalışır. `Top` veya `Relevance`,
+popüler gönderileri okur. Bunlardan birini & `postsOrder` alanını birlikte
+ayarlarsan `postsOrder` içindeki değer kazanır. Çalıştırma günlüğü kaybeden
 alanı yazar.
 
 ### Doğru girdileri seç
 
-- Hızlı bir bakış için varsayılan `info` ve `tweets` veri türlerini koru.
-- Potansiyel müşteri listeleri için `minFollowers` ve `verifiedOnly` ile
+- Hızlı bir bakış için varsayılan `info` & `tweets` veri türlerini koru.
+- Potansiyel müşteri listeleri için `minFollowers` & `verifiedOnly` ile
   `members` seç.
 - Ürün araştırması için `bug` veya `pricing` gibi bir `query` ile `search` seç.
-- Yaratıcı araştırma için `media` seç ve `mediaType` ayarla.
+- Yaratıcı araştırma için `media` seç & `mediaType` ayarla.
 - Topluluk keşfetmek için ID vermeden `searchTerms` veya `topics` gönder.
 
 ## Çıktı
 
 Her satır bir JSON nesnesidir. Her satırda girdideki Topluluk, anahtar kelime
 veya konu için `sourceTarget` bulunur. Xquik'in X Community Scraper'ı kaynak
-alanlarını korur ve hiçbir değer uydurmaz. Veri kümesi şeması her alana bir
-başlık ve açıklama verir.
+alanlarını korur & hiçbir değer uydurmaz. Veri kümesi şeması her alana bir
+başlık & açıklama verir.
 
-Aşağıdaki değerler yalnızca örnektir. Gerçek sonuçlar canlı veriden gelir. Bir
-Topluluk bilgi satırı şöyle görünür.
+Örneklerdeki değerler temsilidir. Sonuçlar canlı veriyi yansıtır. Bir Topluluk
+bilgi satırı şöyle görünür.
 
 ```json
 {
@@ -355,116 +370,152 @@ Topluluk bilgi satırı şöyle görünür.
 
 Veri kümesini JSON, CSV, Excel veya HTML olarak dışa aktar.
 
+## Çıktı sütunları
+
+8 girdi, okunan her satırı biçimlendirir. Kod çalıştırmazlar & fiyatı
+değiştirmezler.
+
+| Alan                | Ne yapar                                                                        |
+| ------------------- | ------------------------------------------------------------------------------- |
+| `fields`            | Yalnızca bu alanları, yazdığın sıra & yazımla tut                               |
+| `omitFields`        | Bu alanları çıkar & gerisini tut                                                |
+| `renameFields`      | Bir alanı yeni adlı bir sütuna taşı                                             |
+| `flatten`           | Her iç içe nesneyi üst düzey sütunlara çevir                                    |
+| `fillMissingFields` | Tutulan bir alan satırda yoksa onu `null` ile doldur. Varsayılan olarak açık    |
+| `joinFields`        | Bu listelerin her birini 1 metin değerine çevir                                 |
+| `joinSeparator`     | Birleştirilen öğeler arasındaki metin. Varsayılan değer bir virgül & bir boşluk |
+| `constantFields`    | Her satırda aynı metni taşıyan bir sütun ekle                                   |
+
+- Bir nesnenin içindeki alan için nokta kullan. Harf büyüklüğü & alt çizgiler
+  fark etmez.
+- Her satır kendi `id` değerini tutar.
+- `fields` kullanırsan satırda olmayan bir alan `null` olarak gelir. Böylece her
+  satır aynı sütunlara sahip olur.
+- Yanlış bir alan adı, çalıştırmayı hiçbir şey okumadan & ücretlendirmeden
+  durdurur.
+- Adlar kontrol edilemezse çalıştırma okumaya devam eder & görmediği adları
+  sonunda listeler.
+- Çalıştırma, başka bir Actor için yazılmış map fonksiyonunu veya jq filtresini
+  yok sayar.
+
+Hesaplanan bir sütunu eklemek için adını `fields` veya `renameFields` içine yaz.
+
+| Sütun               | Formül                                                                             |
+| ------------------- | ---------------------------------------------------------------------------------- |
+| `totalEngagement`   | `likeCount` + `replyCount` + `retweetCount` + `quoteCount`. Eksik bir sayı 0 ekler |
+| `engagementRate`    | `totalEngagement` × 100 ÷ yazarın `followers` değeri, 4 ondalık basamakla          |
+| `engagementPerView` | `totalEngagement` × 100 ÷ `viewCount`, 4 ondalık basamakla                         |
+
+Bu sayıları olmayan bir satırda `totalEngagement` değeri `null` olur. Böleni
+eksik veya 0 olan bir oran `null` olur.
+
 ## Çalıştırma seçenekleri
 
-- Çalıştırma maliyetini sınırlamak için Apify'da maksimum toplam ücreti ayarla.
-  Bütçenin izin verdiği en fazla satırı almak için `maxItems` değerini yüksek
-  bırak.
-- Apify API'de `maxTotalChargeUsd` değerini, Console'da ise Max cost per run
-  ayarını kullan.
+- Çalıştırma maliyetini sınırlamak için Apify'ın maksimum toplam ücretini
+  ayarla. O bütçenin izin verdiği en çok satırı almak için `maxItems` değerini
+  yüksek bırak.
+- Apify API'de `maxTotalChargeUsd`, Console'da Max cost per run ayarla.
 - Tüm Topluluklarını 1 çalıştırmaya koy. Her çalıştırma Apify'a aynı başlatma
   maliyetini öder.
 - `maxItemsPerTarget` her Topluluk veri türünün satırlarını sınırlar.
 - `maxConcurrency` aynı anda kaç Topluluk veri türünün çalışacağını belirler.
   Varsayılan değer en hızlı güvenli ayardır.
 
-Yayımlanan her düzeltmeyi almak için her çalıştırmada `latest` derlemesini seç.
-Kayıtlı görevler ve zamanlamalar kendi derleme seçimini korur. Bu seçimi
-`latest` olarak bırak.
+Yayınlanan tüm düzeltmeleri almak için her çalıştırmada `latest` seç. Kayıtlı
+görevler & zamanlamalar kendi derleme seçimini korur, bu yüzden onu `latest`
+olarak tut.
 
 ## İlgili Xquik Actor'ları
 
-Her Xquik Actor'ı aynı veri çekme motorunu, önce filtreleyen faturalandırmayı ve
+Her Xquik Actor'ı aynı veri çekme motorunu, önce filtreleyen faturalandırmayı &
 tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) aramalardan, profil
-  zaman akışlarından, Listelerden ve gönderi ID'lerinden 50'den fazla filtre ve
-  düz dışa aktarımla gönderi kazır. Analiz değil, yalnızca gönderi verisi
-  gerektiğinde kullan. Satır başına $0.00015'ten başlar.
+  zaman akışlarından, Listelerden & gönderi ID'lerinden 50'den fazla filtre &
+  düz dışa aktarımla gönderi kazır. Analiz olmadan gönderi verisi gerektiğinde
+  kullan. Satır başına $0.00015'ten başlar.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) kullanıcı adı,
-  ID veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını ve
+  ID veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını &
   takipçilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
   başına $0.00015'ten başlar.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) 25'ten fazla
-  filtreyle gönderilerin altındaki yanıtları, yorumları ve tüm konuşmaları
-  kazır. Gönderilerin altındaki tartışmaya ihtiyacın olduğunda kullan. Satır
-  başına $0.00015'ten başlar.
+  filtreyle gönderilerin altındaki yanıtları, yorumları & tüm konuşmaları kazır.
+  Gönderilerin altındaki tartışmaya ihtiyacın olduğunda kullan. Satır başına
+  $0.00015'ten başlar.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) gönderi
   URL'leri veya ID'leri için toplu olarak yanıtları, alıntıları, yeniden
-  gönderenleri ve gönderi dizilerini kazır. Gönderilerle kimin etkileşime
+  gönderenleri & gönderi dizilerini kazır. Gönderilerle kimin etkileşime
   girdiğini ölçtüğünde kullan. Satır başına $0.00015'ten başlar.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
-  gönderileri alıntılayan gönderileri metin, medya, sayılar, yazarlar ve 11
-  filtreyle kazır. Gönderileri kimin alıntıladığını ve ne dediğini incelemek
-  istediğinde kullan. Gönderi başına $0.00015'ten başlar.
+  gönderileri alıntılayan gönderileri metin, medya, sayılar, yazarlar & 11
+  filtreyle kazır. Gönderileri kimin alıntıladığını & ne dediğini incelediğinde
+  kullan. Gönderi başına $0.00015'ten başlar.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) takipçileri,
-  takip edilenleri, Liste üyelerini, aboneleri ve Topluluk üyelerini profil
+  takip edilenleri, Liste üyelerini, aboneleri & Topluluk üyelerini profil
   satırları olarak kazır. Kitle veya üye listelerine ihtiyacın olduğunda kullan.
   Profil başına $0.00015'ten başlar.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)
-  kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay işareti,
-  hesap yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri
-  oluşturduğunda kullan. Profil başına $0.00015'ten başlar.
+  kullanıcı adı, biyografi & konuma göre kullanıcıları takipçi, onay işareti,
+  hesap yaşı & konum filtreleriyle arar. Aramadan hesap listeleri oluşturduğunda
+  kullan. Profil başına $0.00015'ten başlar.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
-  X'in "Account based in" etiketi, X'e nasıl bağlandıkları ve kullanıcı adı
+  X'in "Account based in" etiketi, X'e nasıl bağlandıkları & kullanıcı adı
   değişiklikleriyle hesapların nerede bulunduğunu kontrol eder. Hesapların
-  nerede bulunduğunu doğrulaman gerektiğinde kullan. Hesap başına $0.00015'ten
-  başlar.
+  nerede bulunduğunu doğruladığında kullan. Hesap başına $0.00015'ten başlar.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) kullanıcı
   adlarından, takipçilerden veya kullanıcı aramalarından, hesapların
-  profillerinde yayımladığı e-postaları, telefonları ve bağlantıları alır.
+  profillerinde yayımladığı e-postaları, telefonları & bağlantıları alır.
   Profillerin yayımladığı e-postalara ihtiyacın olduğunda kullan. Profil başına
   $0.00015'ten başlar.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper) Liste URL'lerinden
-  veya ID'lerinden Liste gönderilerini, üyelerini ve takipçilerini kazır.
+  veya ID'lerinden Liste gönderilerini, üyelerini & takipçilerini kazır.
   Kaynaklarını özenle seçilmiş bir Liste belirlediğinde kullan. Satır başına
   $0.00015'ten başlar.
 - [X Space Scraper](https://apify.com/xquik/x-space-scraper) Sohbet Odalarını
-  anahtar kelimeyle bulur ve başlıklarını, durumlarını, zamanlarını, dinleyici
-  sayılarını, sunucularını ve konuşmacılarını okur. Yayınları da URL veya ID ile
-  okur. X'teki canlı ses ve video yayınlarını takip ettiğinde kullan. Sohbet
+  anahtar kelimeyle bulur & başlıklarını, durumlarını, zamanlarını, dinleyici
+  sayılarını, sunucularını & konuşmacılarını okur. Yayınları da URL veya ID ile
+  okur. X'teki canlı ses & video yayınlarını takip ettiğinde kullan. Sohbet
   Odası veya yayın başına $0.00015'ten başlar.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) sıralama, hacim,
-  sorgu ve WOEID ile konuma göre gerçek zamanlı gündemi kazır. Nerede neyin
+  sorgu & WOEID ile konuma göre gerçek zamanlı gündemi kazır. Nerede neyin
   gündemde olduğunu takip ettiğinde kullan. Gündem başlığı başına $0.00015'ten
   başlar.
 - [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) X iş ilanlarını
-  anahtar kelime, yer, çalışma şekli, kıdem ve şirkete göre maaş ve başvuru
+  anahtar kelime, yer, çalışma şekli, kıdem & şirkete göre, maaş & başvuru
   bağlantılarıyla kazır. X'te yayımlanan iş ilanlarını topladığında kullan. İlan
   başına $0.00015'ten başlar.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper) uzun biçimli X
-  Makalelerini kapak, yazar, tarih ve metriklerle Markdown ve metin olarak
-  kazır. Gönderi değil, makale gövdesi gerektiğinde kullan. Makale başına
-  $0.00015'ten başlar.
+  Makalelerini kapak, yazar, tarih & metriklerle Markdown & metin olarak kazır.
+  Gönderi değil, makale gövdesi gerektiğinde kullan. Makale başına $0.00015'ten
+  başlar.
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader) gönderilerden
-  veya profillerden fotoğrafları, videoları ve GIF'leri MP4 ve metadata
+  veya profillerden fotoğrafları, videoları & GIF'leri MP4 & metadata
   seçenekleriyle çıkarır veya depolar. Medya dosyalarının kendisine ihtiyacın
   olduğunda kullan. Medya satırı başına $0.00015'ten başlar.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
-  markadan bahseden gönderileri yapay zeka destekli ilgi, duygu durumu ve
-  müşteri deneyimi cevaplarıyla izler ve çalıştırmaları karşılaştırır. Bir
-  markayı zaman içinde takip ettiğinde kullan. Analiz edilen gönderi başına
-  $0.0003'ten başlar.
+  marka bahsetmelerini yapay zeka destekli ilgi, duygu durumu & müşteri deneyimi
+  cevaplarıyla izler & çalıştırmaları karşılaştırır. Bir markayı zaman içinde
+  takip ettiğinde kullan. Analiz edilen gönderi başına $0.0003'ten başlar.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
-  yapay zeka ile her gönderi için tutum, yoğunluk ve alaycılık olasılığını
+  yapay zeka ile her gönderi için tutum, yoğunluk & alaycılık olasılığını
   etiketler. Herhangi bir konuda genel duygu durumuna ihtiyacın olduğunda
   kullan. Analiz edilen gönderi başına $0.0003'ten başlar.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   yapay zeka ile yükseliş, düşüş, nötr veya karışık duruşu, içerik türünü,
-  kesinliği ve varlık ilgisini etiketler. Hisse senedi, kripto veya alım satım
+  kesinliği & varlık ilgisini etiketler. Hisse senedi, kripto veya alım satım
   konuşmalarını takip ettiğinde kullan. Analiz edilen gönderi başına $0.0003'ten
   başlar.
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
-  haber gönderilerini yapay zeka ile biçim, kaynak atfı ve konu ilgisine göre
+  haber gönderilerini yapay zeka ile biçim, kaynak atfı & konu ilgisine göre
   etiketler. Haberi yorumdan ayırdığında kullan. Analiz edilen gönderi başına
   $0.0003'ten başlar.
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
-  yapay zeka ile her gönderi için kendi kategori, puan ve evet/hayır sorularını
+  yapay zeka ile her gönderi için kendi kategori, puan & evet/hayır sorularını
   cevaplar. Hazır analizler etiketlerine uymadığında kullan. Analiz edilen
   gönderi başına $0.0003'ten başlar.
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
   yapay zekanın 8 özellik cevabından her gönderi için 0 ile 100 arasında bir
-  Viral Score ve bir karar tahmin eder. Gönderilerin neden yayıldığını veya
+  Viral Score & bir karar tahmin eder. Gönderilerin neden yayıldığını veya
   tutmadığını incelediğinde kullan. Analiz edilen gönderi başına $0.0003'ten
   başlar.
 
@@ -474,12 +525,12 @@ Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
 
 ### X API anahtarı veya giriş gerekir mi?
 
-Hayır. Xquik'in X Community Scraper'ı X API anahtarı, giriş ya da kimlik
-bilgisi istemez.
+Hayır. Xquik'in X Community Scraper'ı X API anahtarı, giriş veya kimlik bilgisi
+istemez.
 
 ### Bir Topluluğun ID'sini nasıl bulurum?
 
-Topluluğu x.com'da aç. ID, URL'de `/i/communities/` kısmından sonraki sayıdır.
+Topluluğu X'te aç. ID, URL'de `/i/communities/` kısmından sonraki sayıdır.
 URL'nin tamamını `startUrls` alanına da yapıştırabilirsin.
 
 ### X Topluluğu üyelerini CSV veya Excel olarak dışa aktarabilir miyim?
@@ -499,7 +550,7 @@ için `minLikes` veya `minViews` ekle.
 
 ### 1 çalıştırmada kaç Topluluk kazıyabilirim?
 
-Listelediğin kadar. Satır sayısını `maxItems` ve Apify harcama sınırın belirler.
+Listelediğin kadar. `maxItems` & Apify harcama sınırın satırları sınırlar.
 
 ### Gizli Toplulukları okur mu?
 
@@ -509,36 +560,38 @@ Toplulukları döndürür.
 ### X Topluluklarını kazımak yasal mı?
 
 Xquik'in X Community Scraper'ı herkese açık X alanlarını çeker. Sonuçlarda
-kişisel veri olabilir. Amacının yasal olduğundan emin ol ve geçerli gizlilik
+kişisel veri olabilir. Amacının yasal olduğundan emin ol & geçerli gizlilik
 kurallarına uy. Emin değilsen yetkin bir hukukçuya danış.
 
 ### Çalıştırmam neden sonuç döndürmedi?
 
-Önce çalıştırma durumunu oku. Boş bir çalıştırmanın durumu, hedeflerini ve
-filtrelerini kontrol etmeni söyler. Ücretsiz `diagnostics` çıktısı, ilgilenmen
-gereken bir şey olduğunda görünür. Çıktıdaki `stopCauses` her neden için
+Önce çalıştırma durumunu oku. Boş bir çalıştırmanın durumu, hedeflerini &
+filtrelerini kontrol etmeni söyler. Ücretsiz `diagnostics` çıktısı, dikkat
+gerektiren bir şey olduğunda görünür. Bu çıktıdaki `stopCauses` her neden için
 izleyeceğin bir `nextAction` verir. Çalıştırma okuyamadığı her girdiyi listeler
-ve nasıl düzelteceğini söyler.
+& nasıl düzelteceğini söyler.
 
-### API'yi, zamanlamaları ve entegrasyonları kullanabilir miyim?
+### API'yi, zamanlamaları & entegrasyonları kullanabilir miyim?
 
 Evet. 50 herkese açık görevden birini veya Xquik REST API'yi seç.
 [API sekmesinde](https://apify.com/xquik/x-community-scraper/api) Python,
-JavaScript ve cURL örnekleri var. Apify
+JavaScript & cURL örnekleri var. Apify
 [zamanlamaları](https://docs.apify.com/platform/schedules), Xquik'in X Community
 Scraper'ını bir cron takvimiyle çalıştırır. Ajanlar
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) kullanır. Eski bir
-derlemeye ihtiyacın yoksa `latest` derlemesini kullan.
+derlemeye ihtiyacın yoksa `latest` kullan.
 
 ### Bana özel bir çözüm alabilir miyim?
 
-Evet. [xquik.com](https://xquik.com) adresini ziyaret et ya da
-[API belgelerini](https://docs.xquik.com/introduction) oku. Bu kaynaklar paneli,
-API'yi, MCP sunucusunu ve webhook'ları anlatır.
+Evet. İhtiyacını
+[Issues sekmesinde](https://apify.com/xquik/x-community-scraper/issues) anlat.
+Xquik ayrıca bir panel, bir REST API, bir MCP sunucusu & webhook'lar sunar.
+Xquik'in web sitesini [Apify profilinde](https://apify.com/xquik) bul.
 
 ### Nereden yardım alırım?
 
-Actor sayfasında bir issue aç ya da çalıştırma ID'siyle <support@xquik.com>
-adresine yaz. Anahtar-değer deposundaki ücretsiz tanılamalar, ilgilenmen gereken
-çalıştırmaları açıklar. Hiç satır almayan bir çalıştırma nedenini durumunda
-söyler.
+Çalıştırma ID'siyle
+[Issues sekmesinde](https://apify.com/xquik/x-community-scraper/issues) bir
+issue aç. Anahtar-değer deposundaki ücretsiz tanılamalar dikkat gerektiren
+çalıştırmaları açıklar. Hiç satır almayan bir çalıştırma, nedenini durum
+metninde söyler.

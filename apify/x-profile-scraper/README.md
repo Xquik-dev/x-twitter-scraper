@@ -15,10 +15,9 @@
 ·
 [Italiano](README.it.md)
 
-[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
-
-[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
-Claude Code, Codex, Cursor & more, from 6:07.
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
+with Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X Profile Scraper collects profiles, posts,
@@ -67,39 +66,40 @@ bios & checks who broadcasts live now.
 
 Profile rows use `resultType: "profile"`. These are the main fields.
 
-| Field              | Description                                     |
-| ------------------ | ----------------------------------------------- |
-| `id`               | Numeric user ID                                 |
-| `username`         | Handle without `@`                              |
-| `name`             | Display name                                    |
-| `description`      | Bio text                                        |
-| `url`              | Website on profile rows                         |
-| `location`         | Location the owner typed                        |
-| `email`            | First email the profile publishes               |
-| `contactInfo`      | Emails, phones & links the profile publishes    |
-| `followers`        | Follower count                                  |
-| `following`        | Following count                                 |
-| `statusesCount`    | Post count                                      |
-| `mediaCount`       | Media post count                                |
-| `favouritesCount`  | Likes the account gave                          |
-| `listedCount`      | Public Lists that include the account           |
-| `createdAt`        | Account creation time                           |
-| `verified`         | Whether X reports verification                  |
-| `isBlueVerified`   | Whether the account has X Blue verification     |
-| `verifiedType`     | Verification category, such as `Government`     |
-| `profilePicture`   | Profile image URL                               |
-| `coverPicture`     | Banner image URL                                |
-| `pinnedTweetIds`   | Pinned post IDs                                 |
-| `professional`     | Professional category & type                    |
-| `accountBasedIn`   | X's best-effort country or region label         |
-| `connectedVia`     | How the account first connected to X            |
-| `usernameChanges`  | How often the handle changed & when it last did |
-| `birthdate`        | Birthday parts the account made public          |
-| `subscribersCount` | Subscriber count, when X sends it               |
-| `tipJar`           | Public tipping links                            |
-| `protected`        | Whether the account protects its posts          |
-| `unavailable`      | Whether the account is unavailable              |
-| `sourceTarget`     | The handle, ID or URL you entered               |
+| Field                    | Description                                     |
+| ------------------------ | ----------------------------------------------- |
+| `id`                     | Numeric user ID                                 |
+| `username`               | Handle without `@`                              |
+| `name`                   | Display name                                    |
+| `description`            | Bio text                                        |
+| `url`                    | Website on profile rows                         |
+| `location`               | Location the owner typed                        |
+| `email`                  | First email the profile publishes               |
+| `contactInfo`            | Emails, phones & links the profile publishes    |
+| `followers`              | Follower count                                  |
+| `following`              | Following count                                 |
+| `statusesCount`          | Post count                                      |
+| `mediaCount`             | Media post count                                |
+| `favouritesCount`        | Likes the account gave                          |
+| `listedCount`            | Public Lists that include the account           |
+| `createdAt`              | Account creation time                           |
+| `verified`               | Whether X reports verification                  |
+| `isBlueVerified`         | Whether the account has X Blue verification     |
+| `verifiedType`           | Verification category, such as `Government`     |
+| `profilePicture`         | Profile image URL at 48 px                      |
+| `profilePictureOriginal` | The same image at full size, to download        |
+| `coverPicture`           | Banner image URL                                |
+| `pinnedTweetIds`         | Pinned post IDs                                 |
+| `professional`           | Professional category & type                    |
+| `accountBasedIn`         | X's best-effort country or region label         |
+| `connectedVia`           | How the account first connected to X            |
+| `usernameChanges`        | How often the handle changed & when it last did |
+| `birthdate`              | Birthday parts the account made public          |
+| `subscribersCount`       | Subscriber count, when X sends it               |
+| `tipJar`                 | Public tipping links                            |
+| `protected`              | Whether the account protects its posts          |
+| `unavailable`            | Whether the account is unavailable              |
+| `sourceTarget`           | The handle, ID or URL you entered               |
 
 The dataset schema documents every other field, such as `identityVerification`,
 `isAutomated`, `automatedBy`, `withheldInCountries` & `verificationReason`.
@@ -160,7 +160,7 @@ Each handle returns 1 profile row. Handles work with or without `@`.
 }
 ```
 
-A handle you name twice is read once.
+The run reads a repeated handle once.
 
 ### Add posts, replies & media
 

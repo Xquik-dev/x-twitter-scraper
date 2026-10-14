@@ -15,10 +15,9 @@
 ·
 [Italiano](README.it.md)
 
-[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
-
-[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
-Claude Code, Codex, Cursor & more, from 6:07.
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
+with Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X Engagement Scraper collects replies, quotes,
@@ -118,7 +117,8 @@ shapes.
 coverage in `incompleteTargets`. Filters run before billing.
 
 Reposters & likers take every profile filter, such as `minFollowers`, `hasEmail`
-& `bioContains`.
+& `bioContains`. Their rows carry `email` & `contactInfo`, the emails, phones &
+links each profile publishes.
 
 Examples use sample values. Results reflect live data. A reply row looks like
 this.

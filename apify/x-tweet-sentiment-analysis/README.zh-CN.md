@@ -1,37 +1,28 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <strong>简体中文</strong> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) · **简体中文** · [日本語](README.ja.md) · [한국어](README.ko.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer 将 Xquik MCP 连接到编程 Agent"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">从 6:07 开始，观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具。</a>
-</td></tr></table>
+[![Framer 将 Xquik MCP 连接到编程 Agent](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具](https://youtu.be/4UOSpoOoC3Y?t=367)，从 6:07 开始。
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X Tweet Sentiment Analysis 为每条帖子加上态度、强度和讽刺判断。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付、不重复且符合过滤条件的结果收费。AI 费用已包含在每条帖子的价格中。你不需要 AI 账号、token 或密钥。
+Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X Tweet Sentiment Analysis 为每条帖子加上态度、强度&讽刺判断。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付、不重复且符合过滤条件的结果收费。AI 费用已包含在每条帖子的价格中。你不需要 AI 账号、token 或密钥。
 
-衡量 X（Twitter）帖子背后的态度，同时保留原始帖子数据。Xquik 的 **X Tweet Sentiment Analysis with AI** 收集匹配的帖子（推文），并用 AI 为每条帖子加上情感类别、强度等级和讽刺概率。你可以追踪一次发布、一场营销活动、一集节目或一位公众人物引发的反应，把强烈反应和随口提及区分开。
+衡量 X（Twitter）帖子背后的态度&保留原始帖子数据。Xquik 的 **X Tweet Sentiment Analysis with AI** 收集匹配的帖子。它用 AI 为每条帖子加上情感类别、强度等级&讽刺概率。你可以追踪某次发布、某场营销活动、某集节目或某位公众人物引发的反应。把强烈反应和随口提及区分开。
 
 - **每条帖子单独判断情感。** 每条帖子都有自己的类别，你可以逐条核查答案。
 - **强度。** 0 到 2 的等级区分措辞强烈的帖子和语气温和的帖子。
-- **讽刺概率。** 标记字面措辞与实际态度相反的帖子。
+- **讽刺概率。** 它标记字面措辞与实际态度相反的帖子。
 - **完整的原始记录。** 每行都保留该帖子公开的所有字段。
 
-> Xquik 是独立的第三方服务，与 X Corp 无关联。“Twitter”和“X”是 X Corp 的商标。
+> Xquik 是独立的第三方服务，与 X Corp 无关联。
+> “Twitter”和“X”是 X Corp 的商标。
 
-## 如何分析帖子（推文）情感
+## 如何分析帖子情感
+
+刚接触 Apify？先[创建免费账号](https://console.apify.com/sign-up?fpr=xquik)。免费套餐不需要信用卡&每月提供 $5 可用额度。按每条已分析帖子 $0.0003 计算，不算平台用量，$5 最多可支付 16,000 条已分析帖子。然后回到这里&点击 Try for free。
 
 1. 添加搜索词、个人资料用户名、帖子 URL 或帖子 ID。
-2. 设置 `maxItems` 和任务需要的提取过滤条件。
-3. `analysis.targets` 留空时，按每条帖子自己的主题判断。要聚焦某个品牌、产品或人物，添加它的名称和别名。
-4. 开始运行，然后打开数据集。
+2. 设置 `maxItems` & 任务需要的提取过滤条件。
+3. `analysis.targets` 留空时，按每条帖子自己的主题判断。要聚焦某个品牌、产品或人物，添加它的名称&别名。
+4. 开始运行&打开数据集。
 
 ```json
 {
@@ -43,17 +34,17 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 ### 该 Actor 回答什么
 
-| 问题 | 答案 |
-| --- | --- |
-| 情感 | 积极、消极、混合、中性或不明确 |
+| 问题 | 答案                                     |
+| ---- | ---------------------------------------- |
+| 情感 | 积极、消极、混合、中性或不明确           |
 | 强度 | 0 为随口提及，1 为明确表态，2 为措辞强烈 |
-| 讽刺 | 字面措辞与实际态度相反的概率 |
+| 讽刺 | 字面措辞与实际态度相反的概率             |
 
-设置目标时，情感判断的是对这些目标的态度，并会使用你提供的引用或回复上下文。没有目标时，判断的是帖子的主要主题。
+设置目标时，情感判断的是对这些目标的态度。它还会使用你提供的引用或回复上下文。没有目标时，它判断帖子的主要主题。
 
 ## 分析你自己的文本
 
-把你自己的草稿、回复、评价或笔记粘贴到 `texts` 中。Xquik 的 X Tweet Sentiment Analysis 会分析这些文本，不会从 X 获取任何内容。
+把你自己的草稿、回复、评价或笔记粘贴到 `texts` 中。Xquik 的 X Tweet Sentiment Analysis 会分析这些文本。它不会从 X 获取任何内容。
 
 ```json
 {
@@ -65,27 +56,27 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 ```
 
 - 每段文本生成 1 行，`analysis` 答案与帖子相同。
-- `tweet.id` 依次为 `text:1`、`text:2` 等，`tweet.type` 为 `text`。
-- 每段已分析文本的费用与一条已分析帖子相同，都是 $0.0003。
+- `tweet.id` 依次为 `text:1`、`text:2` & 后续编号，`tweet.type` 则为 `text`。
+- 每段已分析文本的费用与每条已分析帖子相同，都是 $0.0003。
 - 设置 `texts` 后，运行只分析这些文本。X 目标请另外运行。
 
 ## 从其他情感分析 Actor 迁移
 
 改写已有输入时，每项设置只用 1 个名称。
 
-| 已有的输入名称 | Xquik 字段 |
-| --- | --- |
-| `query`、`searchQuery` | `twitterContent` |
-| `queries`、`searchQueries`、`search` | `searchTerms` |
+| 已有的输入名称                                      | Xquik 字段       |
+| --------------------------------------------------- | ---------------- |
+| `query`、`searchQuery`                              | `twitterContent` |
+| `queries`、`searchQueries`、`search`                | `searchTerms`    |
 | `handles`、`usernames`、`username`、`profileTweets` | `twitterHandles` |
-| `tweetUrls`、`postUrls`、`urls` | `startUrls` |
-| `tweetIDs`、`tweet_ids`、`postIds`、`tweetId` | `tweetIds` |
-| `maxTweets`、`maxResults`、`count`、`max_posts` | `maxItems` |
-| `sort` | `queryType` |
-| `tweetLanguage`、`language` | `lang` |
-| `startDate`、`endDate` | `since`、`until` |
+| `tweetUrls`、`postUrls`、`urls`                     | `startUrls`      |
+| `tweetIDs`、`tweet_ids`、`postIds`、`tweetId`       | `tweetIds`       |
+| `maxTweets`、`maxResults`、`count`、`max_posts`     | `maxItems`       |
+| `sort`                                              | `queryType`      |
+| `tweetLanguage`、`language`                         | `lang`           |
+| `startDate`、`endDate`                              | `since`、`until` |
 
-该 Actor 直接接受这些常见名称。它还能读取其他帖子抓取 Actor 的过滤字段名。在这里没有对应字段的过滤条件，会变成本次运行每一次搜索中的 X 搜索运算符，运行日志会在开头列出这些运算符。`sort` 请用 `Latest` 或 `Top`。语言代码和日期边界保持不变。上限作用于所有目标。下面的输入可以直接运行。
+该 Actor 直接接受这些常见名称。它还能读取其他帖子抓取 Actor 的过滤字段名。在这里没有对应字段的过滤条件，会成为本次运行每次搜索中的 X 搜索运算符，运行日志会在开头列出这些运算符。`sort` 请用 `Latest` 或 `Top`。语言代码&日期边界保持不变。上限作用于所有目标。下面的输入可以直接运行。
 
 ```json
 { "searchTerms": ["from:NASA"], "sort": "Latest", "maxItems": 5 }
@@ -111,23 +102,25 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 { "searchTerms": ["#Artemis lang:en", "$AAPL lang:en"], "maxItems": 5 }
 ```
 
-把 `minLikes`、`minReplies` 和 `minRetweets` 换成这些字段名。
+把 `minLikes`、`minReplies` & `minRetweets` 换成这些字段名。
 
 ```json
 { "min_faves": 10, "min_replies": 2, "min_retweets": 3 }
 ```
 
-结果把原始记录保存在 `tweet` 中，把答案保存在 `analysis.answers` 中。把积极、消极和中性标签对应到相同的情感类别。`mixed` 和 `unclear` 保留为单独的类别。其他情感分数的量表和含义可能不同。Xquik 的强度范围是 0 到 2，可能带小数。讽刺是一个概率。置信度描述答案的确定程度。
+结果把原始记录保存在 `tweet` 中&把答案保存在 `analysis.answers` 中。把积极、消极&中性标签对应到相应的情感类别。`mixed` & `unclear` 保留为单独的类别。其他情感分数可能使用不同的量表&含义。Xquik 的强度范围是 0 到 2，可能带小数。讽刺是概率。置信度描述答案的确定程度。
 
 ## 分析帖子情感要花多少钱？
 
-Xquik 的 X Tweet Sentiment Analysis 每条已分析帖子 $0.0003 起，不收启动费。价格包含收集和 AI 费用。你不需要 AI 账号、token 或密钥。这个价格涵盖每条帖子最多 8 个问题和 64,000 字节的上下文。每个问题定义最多可用 8,000 字节。
+Xquik 的 X Tweet Sentiment Analysis 每条已分析帖子 $0.0003 起。它不收启动费。价格包含收集 & AI 费用。你不需要 AI 账号、token 或密钥。这个价格涵盖每条帖子最多 8 个问题 & 64,000 字节的上下文。每个问题定义最多可用 8,000 字节。
 
-提取过滤和去重在分析之前进行。被过滤的行和重复行都不收费。失败的分析、跳过的分析和诊断行不产生结果费用。Apify 会按你套餐的费率，另行收取计算、存储和传输的平台使用费。Pricing 标签页会显示这部分费用。
+需要更大的数据量时，请[选择 Apify 套餐](https://apify.com/pricing?fpr=xquik)，获得更多预付用量。
 
-## 输入与输出示例
+提取过滤&去重在分析之前进行。你从不为被过滤掉的行或重复行付费。失败的分析、跳过的分析&诊断行不产生结果费用。Apify 会按你套餐的费率，另行收取计算、存储&传输的平台使用费。Pricing 标签页会显示这部分费用。
 
-上面的输入可以直接复制使用。一行省略后的输出如下。
+## 输入&输出示例
+
+上面的输入可以直接复制使用。省略部分内容的输出行如下所示。
 
 ```json
 {
@@ -153,61 +146,60 @@ Xquik 的 X Tweet Sentiment Analysis 每条已分析帖子 $0.0003 起，不收�
 }
 ```
 
-每条结果都包含 `tweet` 和 `analysis`。答案包括类型、问题版本和可用的概率。分析失败或被跳过的行会保留已收集的帖子和一个 `reason`，答案列表为空。
+每条结果都包含 `tweet` & `analysis`。答案包括类型、问题版本&可用的概率。分析失败或被跳过的行会保留已收集的帖子 & `reason`。它的答案列表为空。
 
-键值存储中的免费诊断信息会说明无效输入、缺失结果和中断的收集。运行报告把已收集的行、已收费的分析和待收取的费用分开列出。
+键值存储中的免费诊断信息会说明无效输入、缺失结果&中断的收集。运行报告把已收集的行、已收费的分析&待收取的费用分开列出。
 
-## 运行摘要与扁平答案
+## 运行摘要&扁平答案
 
-运行在以下 4 种情况下，会向键值存储写入一条 `analysis-summary` 记录。
+运行在以下 3 种情况下，会向它的键值存储写入 `analysis-summary` 记录。
 
 - 运行遇到问题或规模较大。
-- 设置了 `monitor` 但没有 `baselineDatasetId`，即系列中的第一次运行。
 - 比较发现了已变化、新增或无法比较的帖子。
 - 开启了 `alwaysSaveRunRecords`。
 
-其他运行会跳过这条记录。它们的状态会写明占比最高的答案，例如 `Top sentiment: positive in 3 of 5 results.`。没有变化的比较会显示 `No change since the earlier run.`。运行遇到问题或规模较大时，还会写入 `run-report`。开启 `alwaysSaveRunRecords` 的运行也会写入。`run-report` 会在 `results.analysisSummary` 下重复这份摘要。
+其他运行会跳过这条记录，包括系列中的首次运行。它们的状态会写明占比最高的答案，例如 `Top sentiment is positive in 3 of 5 results.`。没有变化的比较会显示 `No change since the earlier run.`。运行遇到问题或规模较大时，还会写入 `run-report`。开启 `alwaysSaveRunRecords` 的运行也会写入。`run-report` 会在 `results.analysisSummary` 下重复这份摘要。
 
-摘要统计已分析、失败和跳过的行，汇总互动数据，并总结每个问题。
+摘要统计已分析、失败&跳过的行。它汇总互动数据&总结每个问题。
 
 - `sentiment` 分布显示每种态度下各有多少条帖子。
-- `engagementShares` 按喜欢、转帖、回复和引用对同一分布加权。
+- `engagementShares` 按喜欢、转帖、回复&引用对同一分布加权。
 - `top` 列出每种态度下互动最多的 3 条帖子。
 - 每行都列出 `sourceDomains`，即它链接到的主机名。
 - 每行都列出文本中出现的 `cashtags`，例如 `$NVDA`。
-- 设置 `monitor.baselineDatasetId` 时，摘要的 `monitor` 块会统计比较状态，并列出最多 50 个已变化的行。
+- 设置 `monitor.baselineDatasetId` 时，摘要的 `monitor` 块会统计比较状态。它最多列出 50 个已变化的行。
 
-摘要把数字四舍五入到 4 位小数。空运行的计数为 0，平均值为 `null`。
+摘要把数字四舍五入到 4 位小数。空运行会报告为 0 的计数&为 `null` 的平均值。
 
-每个结果行还带有 `answers`，这是一个以问题 ID 为键的扁平映射。每个值是所选的类别、分数或概率。`Flat answers` 数据集视图以及 CSV 或 Excel 导出会为每个问题显示 1 列。这些列就在帖子旁边，所以电子表格不需要解析 JSON。失败和跳过的行带有空映射。
+每个结果行还带有 `answers`，即以问题 ID 为键的扁平映射。每个值是所选的类别、分数或概率。`Flat answers` 数据集视图 & CSV 或 Excel 导出会为每个问题显示 1 列。这些列就在帖子旁边，所以电子表格不需要解析 JSON。失败&跳过的行带有空映射。
 
 ## 与之前的运行比较
 
-传入 `monitor.baselineDatasetId`，即之前一次已完成、分析设置相同的运行的数据集 ID。比较会读取那次运行的行，所以即使那次运行跳过了摘要，也能正常比较。之后每行都会多一个 `monitor` 对象。它的状态可能是以下几种之一。
+传入 `monitor.baselineDatasetId`，即之前某次已完成、分析设置相同的运行的数据集 ID。比较会读取那次运行的行。即使那次运行跳过了摘要，比较也能进行。之后每行都会多出 `monitor` 对象。它的状态取以下值。
 
 - 没有基线时为 `first_run`。
 - 之前的运行中没有的帖子为 `new_to_baseline`。
 - 之前的运行中已有的帖子为 `unchanged` 或 `changed`。
 
-`changes` 列出从 `previous` 变为 `current` 的每个情感、强度等级或讽刺判断。判断按类别、四舍五入后的分数等级，或以 0.5 为界的“是/否”结论来比较。只有判断明显变化时，才算已变化。两次运行之间接近持平的结果仍为 `unchanged`。
+`changes` 列出从 `previous` 变为 `current` 的每个情感、强度等级或讽刺判断。判断按类别、四舍五入后的分数等级，或以 0.5 为界的是/否结论来比较。只有判断明显变化时，才算已变化。不同运行之间接近持平的结果仍为 `unchanged`。
 
-基线超过 `maxBaselineRows` 或来自不同设置时，运行会在收集前停止，并写入一条诊断行。`maxBaselineRows` 默认为 100,000。
+基线超过 `maxBaselineRows` 或来自不同设置时，运行会在收集前停止。运行随后写入诊断行。`maxBaselineRows` 默认为 100,000。
 
 ## 任务示例
 
-你可以从 50 个公开任务中选择。先从与你的问题相符的示例开始。大多数任务使用较小的上限。2 个带日期的搜索请求 50 条帖子。打开任务即可使用它保存的输入。下面可直接复制的输入和观察到的产出能帮你选择设置。
+你可以从 50 个公开任务中选择。先从与你的问题相符的示例开始。大多数任务使用较小的上限。2 个带日期的搜索请求 50 条帖子。打开任务即可使用它保存的输入。下面可直接复制的输入&观察到的产出能帮你选择设置。
 
-每个成功的行都返回情感、强度和讽刺概率。每行都在答案旁保留原始帖子或自备文本。这些示例使用英文输入和语言过滤条件。语言标签仍可能漏掉帖子或引用中的其他语言文本。
+每个成功的行都返回情感、强度&讽刺概率。每行都在答案旁保留原始帖子或自备文本。这些示例使用英文输入&语言过滤条件。语言标签仍可能漏掉帖子或引用中的其他语言文本。
 
-没有目标时，答案描述的是帖子的主要主题。提到关键词的帖子可能在谈别的事。有多个目标时，情感答案把它们放在一起描述，不会为每个目标单独返回答案。
+没有目标时，答案描述的是帖子的主要主题。提到关键词的帖子可能在谈别的事。有多个目标时，情感答案把它们放在一起描述。它不会为每个目标单独返回答案。
 
 个人资料的喜欢可能被隐藏。无法获取时，改用个人资料的回复或帖子。
 
-搜索结果可能包含公告、推广、玩笑和重复文本。帖子 ID 不同，不能证明反应相互独立，也不能证明客户身份。观点短语和互动过滤条件选出的只是一个样本。把帖子算作反馈前，请先查看它们。分析不核实帖子中的说法。
+搜索结果可能包含公告、推广、玩笑&重复文本。不同的帖子 ID 不能证明反应相互独立，也不能证明客户身份。观点短语&互动过滤条件选出的只是样本。把帖子算作反馈前，请先查看它们。分析不核实帖子中的说法。
 
 ### 测试过的任务输入
 
-打开一个任务。它的 Input 标签页有可视化字段和 JSON。开始前，可以复制它的 JSON 或修改字段。[Apify 讲解了任务输入](https://docs.apify.com/actors/running/tasks)。
+打开任务。它的 Input 标签页有可视化字段 & JSON。开始前，可以复制它的 JSON 或修改字段。[Apify 讲解了任务输入](https://docs.apify.com/actors/running/tasks)。
 
 测试日期采用 UTC。产出描述的是记录下来的那次运行，不是保证能获取的数量。带日期的 50 条帖子示例说明了为什么不重复的 ID 不等于独立的观点。
 
@@ -245,13 +237,13 @@ Xquik 的 X Tweet Sentiment Analysis 每条已分析帖子 $0.0003 起，不收�
 
 [Taylor Swift 媒体配文的语气](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-taylor-swift-album-reactions)
 
-查看这位艺人为近期媒体所配的文字。2026-10-01 观察到 5 条不重复的帖子。上限为 5。配文无法描述图片或视频中展示的全部内容。
+对照近期媒体查看这位艺人的措辞。2026-10-01 观察到 5 条不重复的帖子。上限为 5。配文无法描述图片或视频中展示的全部内容。
 
 #### 游戏发售帖子串
 
 [游戏发售更新帖子串](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-video-game-launch)
 
-对照关于竞品游戏的回应阅读一则公告。2026-10-01 观察到 5 条不重复的帖子。上限为 5。这个帖子串提到多款游戏，并包含它的首帖。
+对照关于竞品游戏的回应阅读公告。2026-10-01 观察到 5 条不重复的帖子。上限为 5。这个帖子串提到多款游戏，并包含它的首帖。
 
 #### 远程办公讨论
 
@@ -299,7 +291,7 @@ Xquik 的 X Tweet Sentiment Analysis 每条已分析帖子 $0.0003 起，不收�
 
 [Google 设备账号回复的语气](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-smart-home-device-owners)
 
-查看某个设备账号的措辞，包括回复。2026-10-01 观察到 5 条不重复的帖子。上限为 5。缺少上级帖子的上下文，可能让个人资料回复的含义不完整。
+查看某个设备账号的措辞，包括回复。2026-10-01 观察到 5 条不重复的帖子。上限为 5。缺少上级帖子的上下文，可能让人难以判断个人资料回复的含义。
 
 #### 马拉松训练
 
@@ -339,9 +331,9 @@ Xquik 的 X Tweet Sentiment Analysis 每条已分析帖子 $0.0003 起，不收�
 
 #### 选定的梦幻体育帖子
 
-[一批梦幻体育帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-fantasy-football-apps)
+[梦幻体育帖子批次](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-fantasy-football-apps)
 
-分析选定的一批梦幻体育帖子。2026-10-01 观察到 2 条不重复的帖子。上限为 2。标签针对每条帖子的主题，不一定是某个应用。
+分析选定的梦幻体育帖子批次。2026-10-01 观察到 2 条不重复的帖子。上限为 2。标签针对每条帖子的主题，不一定是某个应用。
 
 #### 咖啡店体验
 
@@ -423,9 +415,9 @@ Xquik 的 X Tweet Sentiment Analysis 每条已分析帖子 $0.0003 起，不收�
 
 #### 选定的运动鞋帖子
 
-[一条选定的运动鞋帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-sneaker-drop-reactions)
+[选定的运动鞋帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-sneaker-drop-reactions)
 
-分析一条已知的帖子，不做宽泛的关键词搜索。2026-10-01 观察到 1 条不重复的帖子。上限为 1。这条选定的配文没有描述图片的每个细节。
+分析已知的帖子，不做宽泛的关键词搜索。2026-10-01 观察到 1 条不重复的帖子。上限为 1。这条选定的配文没有描述图片的每个细节。
 
 #### 客服聊天机器人
 
@@ -503,51 +495,51 @@ Xquik 的 X Tweet Sentiment Analysis 每条已分析帖子 $0.0003 起，不收�
 
 [SpaceX 对接公告的引用](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-space-launches)
 
-查看某个固定时间之后对一则对接公告的引用。2026-10-01 观察到 5 条不重复的帖子。上限为 5。引用可能是邀请或中性描述，不只是反应。
+查看某个固定时间之后对 1 则对接公告的引用。2026-10-01 观察到 5 条不重复的帖子。上限为 5。引用可能是邀请或中性描述，不只是反应。
 
 #### 生日帖子的回复
 
 [NASA 生日帖子的回复](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-replies-to-a-news-post)
 
-查看对一条生日帖子的直接回复。2026-10-01 观察到 5 条不重复的帖子。上限为 5。缺少根帖子的上下文，可能让回复答案的含义不完整。
+查看对 1 条生日帖子的直接回复。2026-10-01 观察到 5 条不重复的帖子。上限为 5。缺少根帖子的上下文，可能让人难以判断回复答案的含义。
 
 检查结果时，把 `maxItems` 设得小一些。上限限制的是输出，不是可获取的数量。如果符合条件的帖子较少，修改过滤条件前先查看运行报告。每次只放宽 1 项设置，例如日期或互动下限。记下你改动的设置。
 
-分析失败时，查看 `analysis.reason`，只重试受影响的 ID。回复不完整时，先查看免费诊断，再判断它们是否完整。媒体配文无法描述图片或视频中展示的全部内容。缺少引用或回复的上下文，可能让答案不确定。
+分析失败时，查看 `analysis.reason` & 只重试受影响的 ID。回复不完整时，先查看免费诊断，再判断它们是否完整。媒体配文无法描述图片或视频中展示的全部内容。缺少引用或回复的上下文，可能让答案不确定。
 
 ## 相关 Xquik Actor
 
-所有 Xquik Actor 都使用同一套提取引擎、先过滤后计费的规则和诊断功能。按你需要的数据选择对应的 Actor。
+所有 Xquik Actor 都使用同一套提取引擎、先过滤后计费的规则&诊断功能。按你需要的数据选择对应的 Actor。
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) 可从搜索、个人资料时间线、列表和帖子 ID 抓取帖子，提供 50 多个过滤条件和扁平导出。适合只要帖子数据、不做分析的场景。每行 $0.00015 起。
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) 从用户名、ID 或 URL 抓取个人资料，以及这些账号的帖子、回复、媒体和关注者。适合从账号而不是搜索入手的场景。每行 $0.00015 起。
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) 抓取帖子下的回复、评论和完整对话，提供 25 多个过滤条件。适合需要帖子下方讨论的场景。每行 $0.00015 起。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) 按帖子 URL 或 ID 批量抓取回复、引用、转帖者和帖子串。适合衡量谁与帖子有过互动的场景。每行 $0.00015 起。
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper) 抓取引用帖子的帖子，包含文本、媒体、计数和作者，提供 11 个过滤条件。适合研究谁引用了帖子以及说了什么的场景。每条帖子 $0.00015 起。
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) 抓取关注者、正在关注的账号、列表成员、订阅者和社群成员，输出为个人资料行。适合需要受众或成员名单的场景。每条个人资料 $0.00015 起。
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) 按用户名、简介和位置搜索用户，可按关注者数、认证状态、账号年龄和位置过滤。适合通过搜索建立账号名单的场景。每条个人资料 $0.00015 起。
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper) 通过 X 的“账号所在地”标签、账号连接 X 的方式和用户名更改记录，查看账号所在的位置。适合核实账号所在地的场景。每个账号 $0.00015 起。
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper) 从用户名、关注者或用户搜索获取账号在个人资料上公开的邮箱、电话和链接。适合需要个人资料上公开的邮箱的场景。每条个人资料 $0.00015 起。
-- [X List Scraper](https://apify.com/xquik/x-list-scraper) 从列表 URL 或 ID 抓取列表帖子、成员和关注者。适合用精选列表确定来源的场景。每行 $0.00015 起。
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper) 抓取社群信息、帖子、搜索结果、成员和版主。适合来源是 X 社群的场景。每行 $0.00015 起。
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper) 按关键词查找空间，读取标题、状态、时间、听众数、主持人和发言人，也可按 URL 或 ID 读取直播。适合追踪 X 上实时音频和视频的场景。每个空间或直播 $0.00015 起。
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) 按位置抓取实时趋势，附带排名、帖子量、查询词和 WOEID。适合追踪各地热门话题的场景。每条趋势 $0.00015 起。
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) 按关键词、地点、办公方式、职级和公司抓取 X 职位，附带薪资和申请链接。适合收集发布在 X 上的职位空缺的场景。每个职位 $0.00015 起。
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper) 把长篇 X 文章抓取为 Markdown 和纯文本，附带封面、作者、日期和指标。适合需要文章正文而不是帖子的场景。每篇文章 $0.00015 起。
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader) 从帖子或个人资料提取或存储照片、视频和 GIF，可选 MP4 和元数据。适合需要媒体文件本身的场景。每条媒体行 $0.00015 起。
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring) 追踪品牌提及，用 AI 判断相关性和情感、回答客户体验问题，并比较各次运行。适合长期关注一个品牌的场景。每条已分析帖子 $0.0003 起。
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals) 用 AI 标注看涨、看跌、中性或混合立场，以及内容类型、信心程度和资产相关性。适合关注股票、加密货币或交易讨论的场景。每条已分析帖子 $0.0003 起。
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor) 用 AI 按形式、来源标注和话题相关性标注新闻帖子。适合区分新闻报道和评论的场景。每条已分析帖子 $0.0003 起。
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier) 用 AI 为每条帖子回答你自定义的分类、评分和是非问题。适合预设分析不符合你的标签的场景。每条已分析帖子 $0.0003 起。
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer) 根据 8 个 AI 特征答案，为每条帖子估算 0 到 100 的 Viral Score 和结论。适合研究帖子为何走红或遇冷的场景。每条已分析帖子 $0.0003 起。
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) 从搜索、个人资料时间线、列表&帖子 ID 抓取帖子，提供 50 多个过滤条件&扁平导出。适合需要帖子数据但不做分析的场景。每行 $0.00015 起。
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) 从用户名、ID 或 URL 抓取个人资料，以及这些账号的帖子、回复、媒体&关注者。适合从账号而不是搜索入手的场景。每行 $0.00015 起。
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) 抓取帖子下的回复、评论&完整对话，提供 25 多个过滤条件。适合需要帖子下方讨论的场景。每行 $0.00015 起。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) 按帖子 URL 或 ID 批量抓取回复、引用、转帖者&帖子串。适合衡量谁与帖子有过互动的场景。每行 $0.00015 起。
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper) 抓取帖子的引用帖子，包含文本、媒体、计数&作者，提供 11 个过滤条件。适合研究谁引用了帖子&说了什么的场景。每条帖子 $0.00015 起。
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) 抓取关注者、正在关注的账号、列表成员、订阅者&社群成员，输出为个人资料行。适合需要受众或成员名单的场景。每条个人资料 $0.00015 起。
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) 按用户名、简介&位置搜索用户，可按关注者数、认证状态、账号年龄&位置过滤。适合通过搜索建立账号名单的场景。每条个人资料 $0.00015 起。
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper) 通过 X 的“账号所在地”标签、账号连接 X 的方式&用户名更改记录，查看账号所在的位置。适合核实账号所在地的场景。每个账号 $0.00015 起。
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) 从用户名、关注者或用户搜索获取账号在个人资料上公开的邮箱、电话&链接。适合需要个人资料上公开的邮箱的场景。每条个人资料 $0.00015 起。
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) 从列表 URL 或 ID 抓取列表帖子、成员&关注者。适合用精选列表确定来源的场景。每行 $0.00015 起。
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper) 抓取社群信息、帖子、搜索结果、成员&版主。适合来源是 X 社群的场景。每行 $0.00015 起。
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) 按关键词查找空间&读取它们的标题、状态、时间、听众数、主持人&发言人。它还能按 URL 或 ID 读取直播。适合追踪 X 上实时音频&视频的场景。每个空间或直播 $0.00015 起。
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) 按位置抓取实时趋势，附带排名、帖子量、查询词 & WOEID。适合追踪各地热门话题的场景。每条趋势 $0.00015 起。
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) 按关键词、地点、办公方式、职级&公司抓取 X 职位，附带薪资&申请链接。适合收集发布在 X 上的职位空缺的场景。每个职位 $0.00015 起。
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) 把长篇 X 文章抓取为 Markdown & 纯文本，附带封面、作者、日期&指标。适合需要文章正文而不是帖子的场景。每篇文章 $0.00015 起。
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) 从帖子或个人资料提取或存储照片、视频 & GIF，可选 MP4 & 元数据。适合需要媒体文件本身的场景。每条媒体行 $0.00015 起。
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring) 追踪品牌提及，用 AI 给出相关性、情感&客户体验答案，并比较各次运行。适合长期关注某个品牌的场景。每条已分析帖子 $0.0003 起。
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals) 用 AI 标注看涨、看跌、中性或混合立场，以及内容类型、信心程度&资产相关性。适合关注股票、加密货币或交易讨论的场景。每条已分析帖子 $0.0003 起。
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor) 用 AI 按形式、来源标注&话题相关性标注新闻帖子。适合区分新闻报道和评论的场景。每条已分析帖子 $0.0003 起。
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier) 用 AI 为每条帖子回答你自定义的分类、评分&是非问题。适合预设分析不符合你的标签的场景。每条已分析帖子 $0.0003 起。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer) 根据 8 个 AI 特征答案，为每条帖子估算 0 到 100 的 Viral Score & 结论。适合研究帖子为何走红或遇冷的场景。每条已分析帖子 $0.0003 起。
 
-## 常见问题与支持
+## 常见问题&支持
 
 先解答常见问题，再说明在哪里获取帮助。
 
 ### 我需要 AI 账号、X API 密钥或登录吗？
 
-不需要。Xquik 的 X Tweet Sentiment Analysis 的价格已包含 AI 费用。你不需要 AI 账号、token 或密钥，也不需要 X API 密钥、登录或任何凭据。
+不需要。Xquik 的 X Tweet Sentiment Analysis 的价格已包含 AI 费用。你不需要 AI 账号、token 或密钥。你也不需要 X API 密钥、登录或凭据。
 
 ### 可以使用自己的问题吗？
 
@@ -555,30 +547,30 @@ Xquik 的 X Tweet Sentiment Analysis 每条已分析帖子 $0.0003 起，不收�
 
 ### 为什么某行返回时分析失败或被跳过？
 
-`analysis.status` 为 `failed` 或 `skipped`。该 Actor 已收集并交付这条帖子，但 AI 分析没有完成。`analysis.reason` 会写明原因。`context_limit` 表示你的上下文和目标没有给帖子留出空间。`service_unavailable` 表示分析服务曾短暂不可用。这些行不产生结果费用。请缩短 `analysis.context`，或重新运行受影响的 ID。
+`analysis.status` 为 `failed` 或 `skipped`。该 Actor 已收集&交付这条帖子，但 AI 分析没有完成。`analysis.reason` 会写明原因。`context_limit` 表示你的上下文&目标没有给帖子留出空间。`service_unavailable` 表示分析服务曾短暂不可用。这些行不产生结果费用。请缩短 `analysis.context`，或重新运行受影响的 ID。
 
-帖子超过 `maxContextBytes` 时，该 Actor 仍会分析它。它先截断被引用和被回复的帖子，再截断这条帖子本身。这时 `analysis.contextAvailability.postText` 为 `truncated`。要保留更多文本，可以把 `maxContextBytes` 提高到最多 64,000。
+帖子超过 `maxContextBytes` 时，该 Actor 仍会分析它。它先截断被引用&被回复的帖子，再截断这条帖子本身。这时 `analysis.contextAvailability.postText` 为 `truncated`。要保留更多文本，可以把 `maxContextBytes` 提高到最多 64,000。
 
 ### 分析会核实事实吗？
 
-不会。答案描述帖子表达了什么，以及帖子如何表述。概率表示 AI 的置信度，不代表事实。重要的分类结果请对照原始帖子核查，每行都保留了原帖。
+不会。答案描述帖子表达了什么&帖子如何表述。概率表示 AI 的置信度，不代表事实。重要的分类结果请对照原始帖子核查，每行都保留了原帖。
 
 ### 支持哪些语言？
 
-提取支持 X 提供的所有语言。我们先在英文客户场景中验证分析。其他支持的语言返回结构相同的答案。在每种语言中，`unclear` 类别和概率都会反映不确定性。
+提取支持 X 提供的所有语言。我们先在英文客户场景中验证分析。其他支持的语言返回结构相同的答案。在每种语言中，`unclear` 类别&概率都会反映不确定性。
 
 ### 如何控制成本？
 
-过滤、去重和 `maxItems` 都在分析之前生效。你只为不重复且符合过滤条件的帖子付费。使用精确的搜索运算符、日期范围和互动下限。大规模运行前，先用较小的 `maxItems` 检查答案质量。
+过滤、去重 & `maxItems` 都在分析之前生效。你只为不重复且符合过滤条件的帖子付费。使用精确的搜索运算符、日期范围&互动下限。大规模运行前，先用较小的 `maxItems` 检查答案质量。
 
 ### 分析 X 数据合法吗？
 
-该 Actor 请求的是公开的 X 字段。结果可能包含个人数据。请确认用途合法，并遵守适用的隐私规定。不确定时，请咨询专业律师。
+该 Actor 请求的是公开的 X 字段。结果可能包含个人数据。请确认用途合法&遵守适用的隐私规定。不确定时，请咨询专业律师。
 
-### 可以使用 API、定时调度和集成吗？
+### 可以使用 API、定时调度&集成吗？
 
-可以。[API 标签页](https://apify.com/xquik/x-tweet-sentiment-analysis/api) 提供 Python、JavaScript 和 cURL 示例。用 Apify [定时调度](https://docs.apify.com/platform/schedules) 定期运行。把上一次的数据集 ID 作为 `monitor.baselineDatasetId` 传入，就能看到变化。Apify 集成还能把运行连接到 webhook、Make、Zapier、n8n 和 Google Sheets。
+可以。[API 标签页](https://apify.com/xquik/x-tweet-sentiment-analysis/api) 提供 Python、JavaScript & cURL 示例。用 Apify [定时调度](https://docs.apify.com/platform/schedules) 定期运行。把上次的数据集 ID 作为 `monitor.baselineDatasetId` 传入，就能看到变化。Apify 集成还能把运行连接到 webhook、Make、Zapier、n8n & Google Sheets。
 
 ### 在哪里获取帮助？
 
-在 Actor 页面提交 issue，或带上运行 ID 联系 support@xquik.com。键值存储中的免费诊断信息会说明运行为何为空、不完整或被中断。
+在 [Issues 标签页](https://apify.com/xquik/x-tweet-sentiment-analysis/issues) 提交 issue，并附上运行 ID。键值存储中的免费诊断信息会说明需要注意的运行。没有返回任何行的运行，会在状态中说明原因。

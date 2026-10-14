@@ -1,132 +1,131 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <strong>Türkçe</strong> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · **Türkçe** ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer, Xquik MCP'yi kodlama ajanlarına bağlıyor"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Framer'ın Xquik scraper'larını Claude Code, Codex, Cursor ve daha fazlasıyla nasıl kullandığını 6:07'den itibaren izle.</a>
-</td></tr></table>
+[![Framer, Xquik MCP'yi kodlama ajanlarına bağlıyor](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Framer'ın Xquik scraper'larını Claude Code, Codex, Cursor & daha fazlasıyla nasıl kullandığını](https://youtu.be/4UOSpoOoC3Y?t=367)
+6:07'den itibaren izle.
 
 Xquik, en eksiksiz X verisini sunan, dünyanın en hızlı ve en ucuz X (Twitter)
-scraper hizmetidir. Xquik'in X Reply Scraper'ı yanıtları, yorumları ve
-konuşmaların tamamını toplar. Diğer Apify Actor'larının çoğu, filtrelemeden
-veya tekilleştirmeden önce ücret alır. Xquik yalnızca **teslim edilen, benzersiz
-ve filtrene uyan sonuçlar** için ücret alır.
+scraper hizmetidir. Xquik'in X Reply Scraper'ı yanıtları, yorumları &
+konuşmaların tamamını toplar. Diğer Apify Actor'larının çoğu, filtrelemeden veya
+tekilleştirmeden önce ücret alır. Xquik yalnızca **teslim edilen, benzersiz ve
+filtrene uyan sonuçlar** için ücret alır.
 
-Twitter yanıtlarını ve yorumlarını her Apify planında **teslim edilen satır
-başına $0.00015** ile kazı, X hesabı olmadan oku. Gönderi URL'si, gönderi ID'si,
-profil URL'si veya kullanıcı adı yapıştır. Yanıtları, konuşmaları, yazarları,
-etkileşimi, entity verilerini ve medya URL'lerini dışa aktar. Apify, platform
-kullanımını ayrıca faturalandırır. X girişi gerekmez. Filtreler veri kümesine
-yazmadan önce çalışır, bu yüzden yalnızca teslim edilen satırlar için ödersin.
+Twitter yanıtlarını & yorumlarını her Apify planında **teslim edilen satır
+başına $0.00015** fiyatla kazı & X hesabı olmadan oku. Gönderi URL'lerini,
+gönderi ID'lerini, profil URL'lerini veya kullanıcı adlarını yapıştır.
+Yanıtları, konuşmaları, yazarları, etkileşimi, entity verilerini & medya
+URL'lerini dışa aktar. Apify, platform kullanımını ayrıca faturalandırır. X
+girişine ihtiyacın yok. Filtreler veri kümesine yazmadan önce çalışır, bu yüzden
+yalnızca teslim edilen satırlar için ödersin.
 
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
 ## X Reply Scraper ne yapar?
 
-Xquik'in X Reply Scraper'ı herkese açık yanıtları ve yorum konuşmalarını
-toplar. Tekil gönderilerle, toplu URL listeleriyle, gönderi ID'leriyle ve
-kullanıcıların yanıt zaman akışlarıyla çalışır.
+Xquik'in X Reply Scraper'ı herkese açık yanıtları & yorum konuşmalarını toplar.
+Tekil gönderilerle, toplu URL listeleriyle, gönderi ID'leriyle & kullanıcıların
+yanıt zaman akışlarıyla çalışır.
 
 ### Temel özellikler
 
 - Auto modu, doğrudan sonuçlar eksik kaldığında toplamaya devam eder.
 - `collectionStrategy`, Actor'ın yanıtları nasıl toplayacağını belirler.
-- Toplu girdiler gönderi URL'si, gönderi ID'si, profil ve kullanıcı adı kabul
-  eder.
-- Filtreler ve tekilleştirme faturalamadan önce çalışır.
-- Çıktıda 4 sıralama modu, 3 ayrıntı düzeyi ve 3 alan stili var.
-- Her yanıt kaynak hedefini, üst gönderi ID'lerini, kök ID'sini ve derinliğini
-  korur.
-- Devam imleçleri geçmişe dönük toplamayı ve zamanlanmış çalıştırmaları
+- Toplu girdiler gönderi URL'lerini, gönderi ID'lerini, profilleri & kullanıcı
+  adlarını kabul eder.
+- Filtreler & tekilleştirme faturalamadan önce çalışır.
+- Çıktı 4 sıralama modunu, 3 ayrıntı düzeyini & 3 alan stilini destekler.
+- Her yanıt kaynak hedefini, üst ID'lerini, kök ID'sini & derinliğini korur.
+- Devam imleçleri geçmişe dönük toplamaları & zamanlanmış çalıştırmaları
   destekler.
 - Dikkat gerektiren çalıştırmalar `diagnostics` içine 1 ücretsiz kayıt yazar.
   Her hedefi okuyup hiç yanıt bulamayan bir çalıştırma kayıt yazmaz. Nedenini
   durum metni söyler.
-- Çalıştırma günlükleri sayfa ve hedef sürelerini `fetchDurationMs`,
+- Çalıştırma günlükleri sayfa & hedef sürelerini `fetchDurationMs`,
   `processingDurationMs`, `pushDurationMs`, `statusDurationMs`,
-  `fullPageDurationMs` ve `fullTargetDurationMs` alanlarında gösterir.
-- Apify çalıştırmayı yeniden başlatırsa teslim edilen yanıtlar ve ilerleme
+  `fullPageDurationMs` & `fullTargetDurationMs` alanlarında gösterir.
+- Apify çalıştırmaları yeniden başlattığında teslim edilen yanıtlar & ilerleme
   korunur.
 
 ### Kullanım alanları
 
-- Marka ve ürün gönderilerinin altındaki duygu durumunu ve müşteri geri
+- Marka & ürün gönderilerinin altındaki duygu durumunu & müşteri geri
   bildirimini ölç.
-- Viral bir gönderinin altındaki en çok beğenilen yanıtları ve yorumları sırala.
-- Herkese açık yanıtlarda soru soran veya bir ihtiyacını dile getiren
-  potansiyel müşterileri bul.
-- Yanıtları moderasyon, spam ve kötüye kullanım açısından incele.
-- Araştırma ve yapay zeka eğitim veri kümeleri için konuşmaların tamamını
-  yeniden oluştur.
+- Viral bir gönderinin altındaki en çok beğenilen yanıtları & yorumları sırala.
+- Herkese açık yanıtlarda soru soran veya bir ihtiyacını dile getiren potansiyel
+  müşterileri bul.
+- Yanıtları moderasyon, spam & kötüye kullanım açısından incele.
+- Araştırma & yapay zeka eğitim veri kümeleri için konuşmaların tamamını yeniden
+  oluştur.
 - Bir hesabın müşterilerine zaman içinde nasıl yanıt verdiğini takip et.
 
 ### X Reply Scraper hangi verileri çekebilir?
 
-Veri kümesi ve run-report şemaları dönen her alanı açıklar. Basit alanlarda
-ajanlar ve üretilen entegrasyonlar için örnekler de var.
+Veri kümesi & run-report şemaları dönen her alanı açıklar. Metin, sayı & boolean
+alanları ajanlar & üretilen entegrasyonlar için örnekler de taşır.
 
 Her tam yanıt satırında aşağıdaki temel alanlar olabilir.
 
-| Alan                | Açıklama                                                                |
-| ------------------- | ----------------------------------------------------------------------- |
-| `id`                | Yanıt ID'si                                                             |
-| `text`              | Yanıt metni                                                             |
-| `fullText`          | Uzun yanıt metni                                                        |
-| `createdAt`         | Yanıt zaman damgası                                                     |
-| `lang`              | X dil kodu                                                              |
-| `url`               | Yanıtın doğrudan URL'si                                                 |
-| `conversationId`    | X konuşma ID'si                                                         |
-| `inReplyToId`       | Doğrudan üst gönderinin ID'si                                           |
-| `inReplyToUserId`   | Üst gönderi yazarının ID'si                                             |
-| `inReplyToUsername` | Üst gönderi yazarının kullanıcı adı                                     |
-| `likeCount`         | Beğeniler                                                               |
-| `replyCount`        | Alt yanıtlar                                                            |
-| `retweetCount`      | Yeniden gönderiler                                                      |
-| `quoteCount`        | Alıntılar                                                               |
-| `viewCount`         | Görüntülenmeler                                                         |
-| `bookmarkCount`     | Yer işaretleri                                                          |
-| `author`            | Erişilebilen herkese açık yazar metadata'sı                             |
-| `media`             | Görseller, videolar, GIF'ler ve varyantlar                              |
-| `entities`          | Hashtag'ler, cashtag'ler, bahsetmeler, URL'ler ve video zaman damgaları |
-| `quoted_tweet`      | Varsa alıntılanan gönderi                                               |
-| `retweeted_tweet`   | Varsa yeniden gönderilen gönderi                                        |
+| Alan                | Açıklama                                                               |
+| ------------------- | ---------------------------------------------------------------------- |
+| `id`                | Yanıt ID'si                                                            |
+| `text`              | Yanıt metni                                                            |
+| `fullText`          | Uzun yanıt metni                                                       |
+| `createdAt`         | Yanıt zaman damgası                                                    |
+| `lang`              | X dil kodu                                                             |
+| `url`               | Yanıtın doğrudan URL'si                                                |
+| `conversationId`    | X konuşma ID'si                                                        |
+| `inReplyToId`       | Doğrudan üst gönderinin ID'si                                          |
+| `inReplyToUserId`   | Üst gönderi yazarının ID'si                                            |
+| `inReplyToUsername` | Üst gönderi yazarının kullanıcı adı                                    |
+| `likeCount`         | Beğeniler                                                              |
+| `replyCount`        | Alt yanıtlar                                                           |
+| `retweetCount`      | Yeniden gönderiler                                                     |
+| `quoteCount`        | Alıntılar                                                              |
+| `viewCount`         | Görüntülenmeler                                                        |
+| `bookmarkCount`     | Yer işaretleri                                                         |
+| `author`            | Erişilebilen herkese açık yazar metadata'sı                            |
+| `media`             | Görseller, videolar, GIF'ler ve varyantlar                             |
+| `entities`          | Hashtag'ler, cashtag'ler, bahsetmeler, URL'ler & video zaman damgaları |
+| `quoted_tweet`      | Varsa alıntılanan gönderi                                              |
+| `retweeted_tweet`   | Varsa yeniden gönderilen gönderi                                       |
 
 Tam satırlar erişilebilen kaynak metadata'sını da tutar.
 
 - Gönderi türü alanları `type`, `isReply`, `isQuoteStatus`, `isNoteTweet`,
-  `isLimitedReply` ve `isTranslatable`.
-- Metin ayrıntıları `displayTextRange`, `noteTweet`, `article` ve `card`.
-- Etiketler ve uyarılar `contentDisclosure`, `communityNote`,
-  `possiblySensitive`, `tombstone` ve `exclusiveContent`.
-- Konuşma ayrıntıları `conversationControl`, `limitedActions` ve
-  `unmentionedUserIds`.
+  `isLimitedReply` & `isTranslatable`.
+- Metin ayrıntıları `displayTextRange`, `noteTweet`, `article`, `card` &
+  `cashtagAttachments`.
+- Etiketler & uyarılar `contentDisclosure`, `communityNote`,
+  `possiblySensitive`, `tombstone` & `exclusiveContent`.
+- Konuşma ayrıntıları `conversationControl`, `limitedActions`, `subscriberBadge`
+  & `unmentionedUserIds`.
 - Bağlam alanları `source`, `place`, `communityId`, `communityName`,
-  `reactionContext` ve `postCta`.
-- Düzenleme ve kullanılabilirlik alanları `edit`, `previousCounts`, `viewState`
-  ve `authorUnavailable`.
+  `reactionContext` & `postCta`.
+- Düzenleme & kullanılabilirlik alanları `edit`, `previousCounts`, `viewState` &
+  `authorUnavailable`.
 
 Düz satırlar konuşmadaki üst gönderi zincirini, kaynak ayrıntılarını, sonuç
-türünü ve şema sürümünü tutar. Alanların tam listesi için OpenAPI'ye bak.
+türünü & şema sürümünü tutar. Alanların tam listesi için OpenAPI'ye bak.
 
 ## Yanıtları kazımak için X Reply Scraper'ı nasıl kullanırım?
 
-1. Gönderi URL'si, gönderi ID'si, profil URL'si veya kullanıcı adı yapıştır.
-2. `maxItems`, `scope` ve işinin gerektirdiği filtreleri ayarla.
-3. Xquik'in X Reply Scraper'ını çalıştır ve veri kümesini aç.
+Apify'da yeni misin? Önce
+[ücretsiz bir hesap oluştur](https://console.apify.com/sign-up?fpr=xquik).
+Ücretsiz plan kredi kartı istemez & her ay harcaman için $5 verir. Satır başına
+$0.00015 fiyatla $5, platform kullanımı hariç 33.000 satıra kadar yeter. Sonra
+buraya dön & Try for free düğmesine bas.
 
-Önceden doldurulmuş form, çalıştığı doğrulanmış herkese açık bir konuşmayı
-hedefler. En fazla 1.000 tam, düz satır döndürür. Auto modu varsayılan olarak
-konuşmanın tamamını arar. Tekilleştirme ve kaynak bilgisi açık kalır.
+1. Gönderi URL'lerini, gönderi ID'lerini, profil URL'lerini veya kullanıcı
+   adlarını yapıştır.
+2. `maxItems`, `scope` & işinin gerektirdiği filtreleri ayarla.
+3. Xquik'in X Reply Scraper'ını çalıştır & veri kümesini aç.
+
+Önceden doldurulmuş form, doğrulanmış herkese açık bir konuşmayı hedefler. En
+fazla 1.000 tam, düz satır döndürür. Auto modu varsayılan olarak konuşmanın
+tamamını arar. Tekilleştirme & kaynak bilgisi açık kalır.
 
 ### Gönderi URL'sinden yanıt kazı
 
@@ -166,7 +165,7 @@ konuşmanın tamamını arar. Tekilleştirme ve kaynak bilgisi açık kalır.
 { "usernames": ["OpenAI", "apify"], "maxItems": 10000 }
 ```
 
-### Yanıtları faturadan önce filtrele
+### Yanıtları faturalamadan önce filtrele
 
 ```json
 {
@@ -195,10 +194,10 @@ konuşmanın tamamını arar. Tekilleştirme ve kaynak bilgisi açık kalır.
 
 ## Görev örnekleri
 
-50 herkese açık görevden birini seç. Her görevin sınırlı bir girdisi ve uygun
-bir veri kümesi görünümü var. Çalıştırmadan önce istediğin görevi düzenle.
+50 herkese açık görevden birini seç. Her görevin sınırlı bir girdisi & uygun bir
+veri kümesi görünümü var. Çalıştırmadan önce istediğin görevi düzenle.
 
-- [X gönderi yanıtlarını ve Twitter yorumlarını kazı](https://apify.com/xquik/x-reply-scraper/examples/scrape-post-replies)
+- [X gönderi yanıtlarını & Twitter yorumlarını kazı](https://apify.com/xquik/x-reply-scraper/examples/scrape-post-replies)
 - [Twitter yanıtlarını toplu kazı](https://apify.com/xquik/x-reply-scraper/examples/scrape-bulk-post-replies)
 - [Bir Twitter yanıt konuşmasını yeniden oluştur](https://apify.com/xquik/x-reply-scraper/examples/rebuild-full-conversation)
 - [Twitter yanıtlarını beğeniye göre sırala](https://apify.com/xquik/x-reply-scraper/examples/rank-most-liked-replies)
@@ -218,29 +217,31 @@ bir veri kümesi görünümü var. Çalıştırmadan önce istediğin görevi d�
 Xquik'in X Reply Scraper'ı her Apify planında teslim edilen satır başına
 $0.00015 tutar. Apify, platform kullanımını ayrıca faturalandırır.
 
-Xquik, teslim edilen her veri satırı için 1 kez ücret alır. Filtrelerinin veya
-tekilleştirmenin çıkardığı yanıtlar ücretsizdir. `diagnostics` içindeki
-tanılama kayıtları ücretsizdir. Başlatma, URL, sorgu, sayfalama veya filtre
-ücreti yok.
+Daha fazla hacim için daha çok ön ödemeli kullanım içeren bir
+[Apify planı seç](https://apify.com/pricing?fpr=xquik).
 
-## Boş, kısmi ve durdurulan çalıştırmalar
+Xquik, teslim edilen her veri satırı için tek bir ücret alır. Filtrelerinin veya
+tekilleştirmenin çıkardığı yanıtlar ücretsizdir. `diagnostics` içindeki tanılama
+kayıtları ücretsizdir. Başlatma, URL, sorgu, sayfalama veya filtre ücreti yok.
 
-Xquik'in X Reply Scraper'ı boş, kısmi ve durdurulan çalıştırmaları ücretsiz
-açıklar. Çalıştırma durumu, çalıştırmanın neden durduğunu söyler. Ücretlendirilen
-sonuçları ve okunan hedefleri de sayar. Her hedefi okuyup hiç yanıt bulamayan
-bir çalıştırma kayıt yazmaz. Durum metni nedenini ve neyi değiştirmen
-gerektiğini söyler.
+## Boş, kısmi & durdurulan çalıştırmalar
+
+Xquik'in X Reply Scraper'ı boş, kısmi & durdurulan çalıştırmaları ücretsiz
+açıklar. Çalıştırma durumu, çalıştırmanın neden durduğunu söyler.
+Ücretlendirilen sonuçları & okunan hedefleri de sayar. Her hedefi okuyup hiç
+yanıt bulamayan bir çalıştırma kayıt yazmaz. Durum metni nedenini & neyi
+değiştirmen gerektiğini söyler.
 
 ### Eksik veri çekme
 
 Kesilen bir çalıştırma ücretsiz bir `partial` tanılaması yazar. Elde edilen
 sonuçlar olduğu gibi kalır. Yeniden denemeden önce `availableResults`,
-`failedTargets`, `retryable` ve `nextAction` alanlarını oku. Actor'ın başarıyla
-bitmesi teslimatı doğrular. Tüm verinin çekildiğini doğrulamaz.
+`failedTargets`, `retryable` & `nextAction` alanlarını oku. Actor'ın başarıyla
+bitmesi teslimatı doğrular, tüm verinin çekildiğini değil.
 
 Durum, erken durmanın her nedenini söyler. `stopCauses` her nedeni kendi
-`message`, `retryable` ve `nextAction` alanlarıyla listeler. Nedenler
-`target_not_found`, `target_failed`, `page_limit`, `reply_reach` ve
+`message`, `retryable` & `nextAction` alanlarıyla listeler. Nedenler
+`target_not_found`, `target_failed`, `page_limit`, `reply_reach` &
 `deadline_reached` olabilir. `reply_reach`, X'in konuşmanın yalnızca bir kısmını
 sunduğu anlamına gelir.
 
@@ -253,19 +254,19 @@ denenebiliyorsa çalıştırma da `retryable` olur.
 
 Başarılı veri satırları `resultType: "reply"` kullanır. Dikkat gerektiren bir
 çalıştırma `diagnostics` içine tam olarak 1 ücretsiz kayıt yazar. Geçersiz bir
-girdi, atlanan bir hedef veya erken durma buna örnektir. Kayıt, sorunu nasıl
+girdi, atlanan bir hedef veya erken bir durma buna örnektir. Kayıt, sorunu nasıl
 çözeceğini söyler. Her hedefi okuyup hiç yanıt bulamayan bir çalıştırma kayıt
 yazmaz. Nedenini durum metni söyler.
 
 Çalıştırma durumu, çalıştırmanın neden durduğunu söyler. Ücretlendirilen
-sonuçları ve okunan hedefleri de sayar. Sorunlu çalıştırmalar her zaman
-`run-report` yazar. Girdisiz ve geçersiz girdili çıkışlar da buna dahil. Büyük
-bir çalıştırma da bu kaydı yazar. Sorunsuz biten küçük bir çalıştırma kaydı
-atlar, böylece Apify kullanımı azalır. Kaydı her çalıştırmada almak için
+sonuçları & okunan hedefleri de sayar. Sorunlu çalıştırmalar, girdisiz ve
+geçersiz girdili çıkışlar dahil, her zaman `run-report` yazar. Büyük bir
+çalıştırma da bu kaydı yazar. Sorunsuz biten küçük bir çalıştırma kaydı atlar &
+Apify kullanımından tasarruf eder. Kaydı her çalıştırmada yazmak için
 `alwaysSaveRunRecords` seçeneğini aç.
 
-Rapor şeması tamamlanmayı, faturalamayı, hataları ve kayıtlı imleçleri
-belgeler. `version` alanı yayımlanan Actor kaynağının tam sürümünü bildirir.
+Rapor şeması tamamlanmayı, faturalamayı, hataları & kayıtlı imleçleri belgeler.
+`version` alanı, yayımlanan Actor kaynağının tam sürümünü bildirir.
 
 `status` alanı aşağıdaki değerleri kullanır.
 
@@ -281,51 +282,51 @@ belgeler. `version` alanı yayımlanan Actor kaynağının tam sürümünü bild
 Input sekmesi tüm seçenekleri listeler. En az 1 gönderi URL'si, gönderi ID'si,
 profil URL'si veya kullanıcı adı ver. Diğer tüm alanlar isteğe bağlıdır.
 
-### Yanıt hedefleri ve girdi takma adları
+### Yanıt hedefleri & girdi takma adları
 
-Şu ana alanları kullan.
+Aşağıdaki ana alanları kullan.
 
-| Girdi         | Amaç                                     |
-| ------------- | ---------------------------------------- |
-| `startUrls`   | Karışık X gönderi ve profil URL'leri     |
-| `tweetIds`    | Sayısal gönderi ID'leri                  |
-| `usernames`   | Profil yanıt zaman akışları              |
-| `startCursor` | Tek bir hedefe kayıtlı imleçten devam et |
+| Girdi         | Amaç                                         |
+| ------------- | -------------------------------------------- |
+| `startUrls`   | Karışık X gönderi ve profil URL'leri         |
+| `tweetIds`    | Sayısal gönderi ID'leri                      |
+| `usernames`   | Profil yanıt zaman akışları                  |
+| `startCursor` | Tek bir hedefe kayıtlı bir imleçten devam et |
 
 Girdi formu yalnızca kanonik kontrolleri gösterir. Uyumluluk takma adları JSON,
-API, SDK, otomasyon ve kayıtlı görev girdilerinde yine çalışır. Kanonik
-alanlarla takma adları birlikte kullanırsan mevcut öncelik sırası geçerli olur.
+API, SDK, otomasyon & kayıtlı görev girdilerinde yine çalışır. Kanonik & takma
+ad alanlarını birlikte kullanırsan mevcut çözümleme sırası geçerli olur.
 
 Bu takma adlar diğer scraper'lardaki yaygın alan adlarını kabul eder.
 
-- URL takma adları `urls`, `tweetUrls`, `postUrls`, `profileUrls` ve tek metin
-  olarak `twitterUrl` alanlarıdır.
-- ID takma adları `conversationIds`, `postIds`, `ids`, `tweetId` ve `id`
+- URL takma adları `urls`, `tweetUrls`, `postUrls`, `profileUrls` & tek bir
+  metin olarak `twitterUrl` alanlarıdır.
+- ID takma adları `conversationIds`, `postIds`, `ids`, `tweetId`, `id`
   alanlarıdır.
-- Kullanıcı adı takma adları `twitterHandles` ve `screenname` alanlarıdır.
-- Genel sınır takma adları `maxResults`, `max_results`, `resultsLimit` ve
+- Kullanıcı adı takma adları `twitterHandles`, `screenname` alanlarıdır.
+- Genel sınır takma adları `maxResults`, `max_results`, `resultsLimit`,
   `maxReplies` alanlarıdır.
-- Hedef başına takma adlar `maxRepliesPerTweet`, `maxCommentsPerPost` ve
+- Hedef başına takma adlar `maxRepliesPerTweet`, `maxCommentsPerPost`,
   `resultsPerCategory` alanlarıdır.
 - Arama takma adı `useSearch` alanıdır.
-- İç içe yanıt takma adları `includeNestedReplies` ve `includeRepliesOfReplies`
+- İç içe yanıt takma adları `includeNestedReplies`, `includeRepliesOfReplies`
   alanlarıdır.
-- Derinlik takma adı, `maxDepth` için `1`, `2` veya `3` değerli `depth`
+- Derinlik takma adı, `maxDepth` için `1`, `2` veya `3` değerini alan `depth`
   alanıdır. `full` sınır koymaz.
 - Kapsam takma adı, `scope: "direct"` için `onlyDirectReplies` alanıdır.
-- Orijinal gönderi takma adları `includeOriginalTweet` ve `includeSourceTweet`
+- Orijinal gönderi takma adları `includeOriginalTweet`, `includeSourceTweet`
   alanlarıdır. `includeSourceTweet` ile `resultsPerCategory` yanıtları sınırlar
-  ve gönderi 1 satır daha ekler.
+  & gönderi fazladan 1 satır olur.
 - Yazar takma adı, `excludeOriginalAuthor` için `excludeOpSelfReplies` alanıdır.
-- Sıralama takma adları, `sort` için `sortBy` ve `queryType` alanlarıdır. `top`,
-  `newest` ve `mostLiked`, `relevance`, `latest` ve `likes` olarak okunur.
-- Çıktı takma adları `outputVariant` ve `includeRaw` alanlarıdır.
+- Sıralama takma adları, `sort` için `sortBy` & `queryType` alanlarıdır. `top`,
+  `newest` & `mostLiked`, `relevance`, `latest` & `likes` olarak okunur.
+- Çıktı takma adları `outputVariant`, `includeRaw` alanlarıdır.
 
-`replies` olarak ayarlanmış `category` hiçbir şeyi değiştirmez. `retweets` veya
+`category` değerini `replies` yapmak hiçbir şeyi değiştirmez. `retweets` veya
 `info` gibi başka bir Actor'ın işi olan bir kategori çalıştırmayı durdurur.
-Hiçbir şey okunmaz ve ücretlendirilmez. Mesaj, kullanman gereken Actor'ı yazar.
-Bu takma adlardan birini ve kanonik alanını birlikte ayarlarsan kanonik değer
-geçerli olur. Çalıştırma günlüğü geçersiz kalan takma adı yazar.
+Çalıştırma hiçbir şey okumaz & ücretlendirmez. Mesaj, kullanman gereken Actor'ı
+söyler. Bu takma adlardan birini & kanonik alanını birlikte ayarlarsan kanonik
+değer kazanır. Çalıştırma günlüğü kaybeden takma adı söyler.
 
 Bozuk veya desteklenmeyen hedefler Actor'ı başarısız kılmaz. Geçerli hedef
 kalmazsa çalıştırma düzeltmeyi söyleyen bir tanılama yazar.
@@ -337,12 +338,12 @@ Actor'ın yanıtları nasıl toplayacağını seç. Auto çoğu işe uyar.
 #### Otomatik tam toplama
 
 Çoğu iş için `collectionStrategy: "auto"` kullan. Seçtiğin kapsamda ulaşabildiği
-her yanıtı toplar. Kapsam, derinlik, sıralama ve yazar kontrolleri sınırlarından
+her yanıtı toplar. Kapsam, derinlik, sıralama & yazar kontrolleri sınırlarından
 önce uygulanır. Kök olmayan hedeflerin altındaki yanıtları da içerir. X
-konuşmanın bir kısmını gizlerse durum metni, kaç yanıtın gizlendiğini söyler.
+konuşmanın bir kısmını gizlerse durum metni, X'in kaç yanıtı gizlediğini söyler.
 Diğer `collectionStrategy` değerleri asla mod değiştirmez.
 
-Tanılamalardaki kapsama oranı, X'te başka yanıt olmadığını kanıtlamaz.
+Tanılamalardaki bir kapsama değeri, X'te başka yanıt olmadığını kanıtlamaz.
 Sınırlar, eksik veri veya hatalar bir çalıştırmayı eksik bırakabilir.
 
 #### Doğrudan yanıtlar
@@ -361,10 +362,10 @@ Kök gönderiyi derinlik 0 olarak tutmak için `includeOriginalPost: true` ayarl
 
 #### Gizlenen yanıtlar
 
-Varsayılan `auto` stratejisi, gönderi yazarının gizlediği yanıtları da ekler.
-Her biri `resultType: "hiddenReply"` içeren bir satırdır, normal satır
-fiyatıyla ücretlenir ve `maxItems` sınırına sayılır. Çalıştırma bunları yalnızca
-gönderideki yanıt sayısı X'in gösterdiğinden fazlaysa okur. Bu yüzden gizlenen
+Varsayılan `auto` stratejisi, gönderi yazarının gizlediği yanıtları ekler. Her
+biri `resultType: "hiddenReply"` içeren bir satırdır, normal satır fiyatıyla
+ücretlenir & `maxItems` sınırına sayılır. Çalıştırma bunları yalnızca
+gönderideki yanıt sayısı X'in gösterdiğinden fazlaysa okur, bu yüzden gizlenen
 yanıtı olmayan bir gönderi ek ücret getirmez. Bunları dışarıda bırakmak için
 `includeHiddenReplies: false` ayarla.
 
@@ -372,13 +373,13 @@ Yalnızca gizlenen yanıtlar için `collectionStrategy: "hiddenReplies"` kullan.
 bunları, onlara verilen yanıtlarla birlikte en eskiden başlayarak listeler.
 Gizlenen yanıtı olmayan bir gönderi satır döndürmez.
 
-### Doğrudan ve iç içe yanıt kontrolleri
+### Doğrudan & iç içe yanıt kontrolleri
 
 Sonucun biçimini seçmek için `scope` kullan.
 
 | Değer    | Sonuç                                                      |
 | -------- | ---------------------------------------------------------- |
-| `direct` | Derinlik 1 yanıtları tutar                                 |
+| `direct` | Derinlik 1'deki yanıtları tutar                            |
 | `nested` | Derinlik 2 ve üstündeki, yanıtlara verilen yanıtları tutar |
 | `all`    | Erişilebilen tüm doğrudan ve iç içe yanıtları tutar        |
 
@@ -393,21 +394,21 @@ korur.
 - `relevance` X'in kaynak sırasını korur
 - `latest` en yeniyi öne alır
 - `oldest` en eskiyi öne alır
-- `likes` en çok beğeni alanı öne alır
+- `likes` en çok beğenileni öne alır
 
 X araması bazı eski yanıtlardaki beğenileri eksik sayar, bu yüzden `likes`
 çalıştırmaları onları kaçırabilir.
 
 Profil hedefleri istediğin sayıda benzersiz, filtrelenmiş sonucu toplar, sonra
-sıralar. Gönderi hedeflerinde genel sıralama korunur.
+onları sıralar. Gönderi hedefleri genel sıralamayı korur.
 
-`sortBy` ve `queryType` uyumluluk takma adları da çalışır.
+`sortBy` & `queryType` uyumluluk takma adları hâlâ çalışır.
 
 ### Yanıt filtreleri
 
 Desteklenen tüm filtreler veri kümesine yazmadan önce çalışır.
 
-#### Metin ve entity filtreleri
+#### Metin & entity filtreleri
 
 | Girdi            | Davranış                              |
 | ---------------- | ------------------------------------- |
@@ -420,7 +421,7 @@ Desteklenen tüm filtreler veri kümesine yazmadan önce çalışır.
 | `cashtags`       | En az 1 cashtag gerektirir            |
 | `mentioning`     | Bir @bahsetme gerektirir              |
 
-#### Yazar ve dil filtreleri
+#### Yazar & dil filtreleri
 
 | Girdi                   | Davranış                                          |
 | ----------------------- | ------------------------------------------------- |
@@ -433,39 +434,40 @@ Desteklenen tüm filtreler veri kümesine yazmadan önce çalışır.
 
 #### Etkileşim filtreleri
 
-`minLikes`, `minReplies`, `minRetweets`, `minQuotes`, `minViews` ve
+`minLikes`, `minReplies`, `minRetweets`, `minQuotes`, `minViews` &
 `minBookmarks` kullan. `minFaves` takma adı `minLikes` alanına eşlenir.
 
-#### Medya ve zaman filtreleri
+#### Medya & zaman filtreleri
 
 - Herkese açık medyası olan yanıtlar için `hasMediaOnly: true` ayarla.
 - `mediaType` değerini `any`, `image`, `video`, `gif` veya `link` yap.
-- Medya veya link içermeyen metin yanıtları için `mediaType` değerini `none` yap.
+- Medya veya bağlantı içermeyen metin yanıtları için `mediaType` değerini `none`
+  yap.
 - Dahil olan bir başlangıç zamanı için `since` ayarla.
 - Hariç tutulan bir bitiş zamanı için `until` ayarla.
-- `sinceTime` ve `untilTime` alanlarını uyumluluk takma adı olarak kullan.
+- `sinceTime` & `untilTime` alanlarını uyumluluk takma adı olarak kullan.
 
 ## Çıktı
 
-Her yanıt satırı bir JSON nesnesidir. Veri kümesi ve run-report şemaları her
+Her yanıt satırı bir JSON nesnesidir. Veri kümesi & run-report şemaları her
 alanı açıklar, böylece yapay zeka ajanları satırları tahmin yürütmeden okur.
 Veri kümesini JSON, CSV, Excel veya HTML olarak dışa aktar.
 
 ### Yazar metadata'sı
 
-İç içe yazarlar herkese açık profil sözleşmesine uyar. Bu sözleşme kimlik,
-sayılar, onay durumu, kullanılabilirlik, profesyonel veriler ve profil
-biyografisini kapsar.
+İç içe yazarlar herkese açık profil sözleşmesine uyar. Bu sözleşme kimliği,
+sayıları, onay durumunu, kullanılabilirliği, profesyonel verileri & profil
+biyografilerini kapsar.
 
 Düz çıktı `authorId`, `authorUsername`, `authorName`, `authorFollowers`,
-`authorFollowing` ve `authorVerified` ekler.
+`authorFollowing` & `authorVerified` alanlarını ekler.
 
 ### Medya metadata'sı
 
-Medya, kullanılabilirlik, geometri, etiket ve video varyantı bilgisini kapsar.
-`watchNowUrl` ve `visitSiteUrl` eylemleri de var.
+Medya bilgisi kullanılabilirliği, geometriyi, etiketleri & video varyantlarını
+kapsar. `watchNowUrl` & `visitSiteUrl` eylemlerini de içerir.
 
-Düz çıktı `mediaUrls` ekler.
+Düz çıktı `mediaUrls` alanını ekler.
 
 ### Çıktı örneği
 
@@ -500,7 +502,8 @@ Kısaltılmış bir yanıt satırı şöyle görünür.
 }
 ```
 
-Bu değerler yalnızca örnektir. Gerçek çalıştırmalar canlı veri döndürür.
+Örnek değerler yalnızca gösterim amaçlıdır. Gerçek çalıştırmalar canlı veri
+döndürür.
 
 ### Çıktı modları
 
@@ -508,8 +511,8 @@ Her veri kümesi satırının ne kadar geniş olacağını seç.
 
 #### Kompakt
 
-Daha dar bir veri kümesi için `outputMode: "compact"` ayarla. Metin, konuşma,
-yazar, etkileşim ve medya alanlarını tutar.
+Daha dar bir veri kümesi için `outputMode: "compact"` ayarla. Bu mod metin,
+konuşma, yazar, etkileşim & medya alanlarını tutar.
 
 #### Tam
 
@@ -518,8 +521,8 @@ Desteklenen tüm herkese açık alanları tutmak için `outputMode: "full"` ayar
 #### Zengin
 
 Satır başına en çok veri için `outputMode: "rich"` ayarla. Zengin satırlar tam
-moddaki her sütunu tutar ve sona `hasCommunityNotes`, `quotedTweetPermalink`,
-`unavailableAuthorId` ve medya `sourceUser` alanlarını ekler.
+moddaki her sütunu tutar & sona `hasCommunityNotes`, `quotedTweetPermalink`,
+`unavailableAuthorId` & medyanın `sourceUser` alanını ekler.
 
 #### Ham
 
@@ -528,27 +531,66 @@ moddaki her sütunu tutar ve sona `hasCommunityNotes`, `quotedTweetPermalink`,
 
 #### İç içe veya düz
 
-Varsayılan `flat` düzeni iç içe nesneleri korur ve tablolar için yazar alanları
+Varsayılan `flat` düzeni iç içe nesneleri korur & tablolar için yazar alanları
 ekler. Eklenen düz alanları çıkarmak için `outputPreset: "nested"` ayarla.
 
 #### Alan adlandırma
 
-`fieldStyle` değerini `source`, `camelCase` veya `snake_case` yap. Actor
+`fieldStyle` değerini `source`, `camelCase` veya `snake_case` yap. Actor,
 çakışan kaynak anahtarlarının üzerine yazmaktan kaçınır.
+
+## Çıktı sütunları
+
+8 girdi, okunan her satırı biçimlendirir. Kod çalıştırmazlar & fiyatı
+değiştirmezler.
+
+| Alan                | Ne yapar                                                                        |
+| ------------------- | ------------------------------------------------------------------------------- |
+| `fields`            | Yalnızca bu alanları, yazdığın sıra & yazımla tut                               |
+| `omitFields`        | Bu alanları çıkar & gerisini tut                                                |
+| `renameFields`      | Bir alanı yeni adlı bir sütuna taşı                                             |
+| `flatten`           | Her iç içe nesneyi üst düzey sütunlara çevir                                    |
+| `fillMissingFields` | Tutulan bir alan satırda yoksa onu `null` ile doldur. Varsayılan olarak açık    |
+| `joinFields`        | Bu listelerin her birini 1 metin değerine çevir                                 |
+| `joinSeparator`     | Birleştirilen öğeler arasındaki metin. Varsayılan değer bir virgül & bir boşluk |
+| `constantFields`    | Her satırda aynı metni taşıyan bir sütun ekle                                   |
+
+- Bir nesnenin içindeki alan için nokta kullan, örneğin `author.id`. Harf
+  büyüklüğü & alt çizgiler fark etmez.
+- Her satır kendi `id` değerini tutar.
+- `fields` kullanırsan satırda olmayan bir alan `null` olarak gelir. Böylece her
+  satır aynı sütunlara sahip olur.
+- Yanlış bir alan adı, çalıştırmayı hiçbir şey okumadan & ücretlendirmeden
+  durdurur.
+- Adlar kontrol edilemezse çalıştırma okumaya devam eder & görmediği adları
+  sonunda listeler.
+- Çalıştırma, başka bir Actor için yazılmış map fonksiyonunu veya jq filtresini
+  yok sayar.
+
+Hesaplanan bir sütunu eklemek için adını `fields` veya `renameFields` içine yaz.
+
+| Sütun               | Formül                                                                             |
+| ------------------- | ---------------------------------------------------------------------------------- |
+| `totalEngagement`   | `likeCount` + `replyCount` + `retweetCount` + `quoteCount`. Eksik bir sayı 0 ekler |
+| `engagementRate`    | `totalEngagement` × 100 ÷ yazarın `followers` değeri, 4 ondalık basamakla          |
+| `engagementPerView` | `totalEngagement` × 100 ÷ `viewCount`, 4 ondalık basamakla                         |
+
+Bu sayıları olmayan bir satırda `totalEngagement` değeri `null` olur. Böleni
+eksik veya 0 olan bir oran `null` olur.
 
 ## Çalıştırma seçenekleri
 
-### Sınırlar, faturalama ve devam
+### Sınırlar, faturalama & devam
 
 `maxItems` tüm çalıştırmadaki teslim edilen satırları sınırlar.
 `maxItemsPerTarget` her gönderiyi veya profili ayrı sınırlar.
 
 Tek bir çalıştırma birçok hedefi okuyabilir. Sınırlar, tekilleştirme, kaynak
-bilgisi ve faturalama tüm hedeflerde doğru kalır.
+bilgisi & faturalama tüm hedeflerde kesin kalır.
 
-Actor, tekrarlanan satırları çıktıdan ve faturadan önce kaldırır. Farklı
-hedeflerden gelen tekrarlanan satırları tutmak için
-`dedupeAcrossTargets: false` ayarla.
+Actor, tekrarlanan satırları çıktıdan & faturalamadan önce kaldırır. Farklı
+hedeflerden gelen tekrarlanan satırları tutmak için `dedupeAcrossTargets: false`
+ayarla.
 
 Sayfa sınırına takılan bir çalıştırmadan sonra varsayılan anahtar-değer
 deposundan `next-cursors` kaydını oku. O hedefe devam etmek için bir imleci
@@ -557,15 +599,15 @@ deposundan `next-cursors` kaydını oku. O hedefe devam etmek için bir imleci
 #### Apify zaman aşımı
 
 Varsayılan Apify zaman aşımı `0` olduğu için çalıştırmaların süre sınırı yoktur.
-Actor, üst sınıra ulaşana veya uygun veri bitene kadar devam eder. Yine de
-sonlu bir Apify zaman aşımı ayarlayabilirsin. O zaman
+Actor üst sınıra ulaşana veya uygun veri bitene kadar devam eder. Yine de sonlu
+bir Apify zaman aşımı ayarlayabilirsin. O zaman
 `completionReason: "deadline_reached"` bu sınırın yaklaştığını gösterir. Actor
-yanıtları ve raporu kaydeder, sonra sınırdan önce düzgünce çıkar. Teslim edilen
+yanıtları & raporu kaydeder, sonra sınırdan önce düzgünce çıkar. Teslim edilen
 yanıtlar 1 kez ücretlenir. Bitmemiş hedeflere sonra devam edebilirsin.
 
 ### API örnekleri
 
-Her örnek Xquik'in X Reply Scraper'ını çalıştırır ve veri kümesi öğelerini
+Her örnek Xquik'in X Reply Scraper'ını çalıştırır & veri kümesi öğelerini
 döndürür. `<APIFY_API_TOKEN>` yerine kendi Apify API token'ını yaz.
 
 #### JavaScript
@@ -615,21 +657,21 @@ curl "https://api.apify.com/v2/acts/$actor/run-sync-get-dataset-items" \
   -d '{"tweetIds":["2082577277246972300"],"maxItems":100}'
 ```
 
-### Otomasyon ve entegrasyonlar
+### Otomasyon & entegrasyonlar
 
 Xquik'in X Reply Scraper'ını Apify zamanlamaları, webhook'lar veya API
-istemcileri üzerinden çalıştır. Make, Zapier, n8n, Google Sheets veya bulut
+istemcileri üzerinden çalıştır. Onu Make, Zapier, n8n, Google Sheets veya bulut
 depolamaya bağla. Ajanlar onu
-[Apify MCP sunucusu](https://docs.apify.com/platform/integrations/mcp)
-üzerinden çağırabilir.
+[Apify MCP sunucusu](https://docs.apify.com/platform/integrations/mcp) üzerinden
+çağırabilir.
 
 Uygun ajan iş akışları [x402](https://docs.apify.com/integrations/x402) veya
 [Skyfire](https://docs.apify.com/integrations/skyfire) da kullanabilir.
 
-Xquik ayrıca 53 panel aracı, bir REST API, imzalı webhook'lar ve bir MCP
-sunucusu sunar.
+Xquik ayrıca 53 panel aracı, bir REST API, imzalı webhook'lar & bir MCP sunucusu
+sunar.
 
-### Yapay zeka ajanı ve MCP hazırlığı
+### Yapay zeka ajanı & MCP hazırlığı
 
 Xquik'in X Reply Scraper'ını Apify MCP, API istemcileri, x402 veya Skyfire
 üzerinden çalıştır.
@@ -637,120 +679,119 @@ Xquik'in X Reply Scraper'ını Apify MCP, API istemcileri, x402 veya Skyfire
 - Sınırlı izinler, ilgisiz Apify hesap verilerini korur.
 - Olay başına ödeme, maliyeti teslim edilen sonuçlara bağlar.
 - Ajan ödemeleriyle uyum için Standby modu kapalı kalır.
-- Tipli şemalar yanıtları, çalıştırma raporlarını ve devam imleçlerini tanımlar.
+- Tipli şemalar yanıtları, çalıştırma raporlarını & devam imleçlerini tanımlar.
 - Sınırlı varsayılanlar, ajanların yanlışlıkla sınırsız çalıştırma başlatmasını
   önler.
-- Sabit `camelCase` ve `snake_case` modları araç zincirlemeyi kolaylaştırır.
-- Tanılama satırlarında bir durum, bir mesaj ve bir kurtarma adımı bulunur.
-- Çalıştırma raporlarında kesin sonuçlar, durma nedenleri ve ücret tahminleri
+- Sabit `camelCase` & `snake_case` modları araç zincirlemeyi kolaylaştırır.
+- Tanılama satırlarında bir durum, bir mesaj & bir kurtarma adımı bulunur.
+- Çalıştırma raporlarında kesin sonuçlar, durma nedenleri & ücret tahminleri
   bulunur.
 
 ### Her zaman en güncel derlemeyi kullan
 
-Yayınlanan tüm düzeltmeleri almak için her çalıştırmada `latest` seç.
+Yayımlanan tüm düzeltmeleri almak için her çalıştırmada `latest` seç.
 
 Derleme belirtmezsen Apify bu Actor'ın varsayılan `latest` derlemesini kullanır.
-Console çalıştırmaları ve standart API örnekleri bu varsayılanı kullanır.
+Console çalıştırmaları & standart API örnekleri bu varsayılanı devralır.
 
-Kayıtlı görevler Actor varsayılanını geçersiz kılabilir. Zamanlamalar ve görev
-entegrasyonları bu seçimi kullanır. Her geçersiz kılmayı `latest` olarak tut.
+Kayıtlı görevler Actor varsayılanını geçersiz kılabilir. Zamanlamalar & görev
+entegrasyonları bu seçimi yeniden kullanır. Her geçersiz kılmayı `latest` olarak
+tut.
 
-Apify tam derleme numaralarını `latest` sürümüne yönlendirmez. Sabitlediğin
+Apify tam derleme numaralarını `latest` sürümüne yönlendirmez. Sabitlenmiş
 numaraları `latest` ile değiştir. Tam derlemeleri yalnızca geçici geri dönüşler
 için kullan.
 
 ## İlgili Xquik Actor'ları
 
-Her Xquik Actor'ı aynı veri çekme motorunu, önce filtreleyen faturalandırmayı ve
+Her Xquik Actor'ı aynı veri çekme motorunu, önce filtreleyen faturalandırmayı &
 tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) aramalardan, profil
-  zaman akışlarından, Listelerden ve gönderi ID'lerinden 50'den fazla filtre ve
-  düz dışa aktarımla gönderi kazır. Analiz değil, yalnızca gönderi verisi
-  gerektiğinde kullan. Satır başına $0.00015'ten başlar.
+  zaman akışlarından, Listelerden & gönderi ID'lerinden 50'den fazla filtre &
+  düz dışa aktarımla gönderi kazır. Analiz olmadan gönderi verisi gerektiğinde
+  kullan. Satır başına $0.00015'ten başlar.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) kullanıcı adı,
-  ID veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını ve
+  ID veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını &
   takipçilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
   başına $0.00015'ten başlar.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) gönderi
   URL'leri veya ID'leri için toplu olarak yanıtları, alıntıları, yeniden
-  gönderenleri ve gönderi dizilerini kazır. Gönderilerle kimin etkileşime
+  gönderenleri & gönderi dizilerini kazır. Gönderilerle kimin etkileşime
   girdiğini ölçtüğünde kullan. Satır başına $0.00015'ten başlar.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
-  gönderileri alıntılayan gönderileri metin, medya, sayılar, yazarlar ve 11
-  filtreyle kazır. Gönderileri kimin alıntıladığını ve ne dediğini incelemek
-  istediğinde kullan. Gönderi başına $0.00015'ten başlar.
+  gönderileri alıntılayan gönderileri metin, medya, sayılar, yazarlar & 11
+  filtreyle kazır. Gönderileri kimin alıntıladığını & ne dediğini incelediğinde
+  kullan. Gönderi başına $0.00015'ten başlar.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) takipçileri,
-  takip edilenleri, Liste üyelerini, aboneleri ve Topluluk üyelerini profil
+  takip edilenleri, Liste üyelerini, aboneleri & Topluluk üyelerini profil
   satırları olarak kazır. Kitle veya üye listelerine ihtiyacın olduğunda kullan.
   Profil başına $0.00015'ten başlar.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)
-  kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay işareti,
-  hesap yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri
-  oluşturduğunda kullan. Profil başına $0.00015'ten başlar.
+  kullanıcı adı, biyografi & konuma göre kullanıcıları takipçi, onay işareti,
+  hesap yaşı & konum filtreleriyle arar. Aramadan hesap listeleri oluşturduğunda
+  kullan. Profil başına $0.00015'ten başlar.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
-  X'in "Account based in" etiketi, X'e nasıl bağlandıkları ve kullanıcı adı
+  X'in "Account based in" etiketi, X'e nasıl bağlandıkları & kullanıcı adı
   değişiklikleriyle hesapların nerede bulunduğunu kontrol eder. Hesapların
-  nerede bulunduğunu doğrulaman gerektiğinde kullan. Hesap başına $0.00015'ten
-  başlar.
+  nerede bulunduğunu doğruladığında kullan. Hesap başına $0.00015'ten başlar.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) kullanıcı
   adlarından, takipçilerden veya kullanıcı aramalarından, hesapların
-  profillerinde yayımladığı e-postaları, telefonları ve bağlantıları alır.
+  profillerinde yayımladığı e-postaları, telefonları & bağlantıları alır.
   Profillerin yayımladığı e-postalara ihtiyacın olduğunda kullan. Profil başına
   $0.00015'ten başlar.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper) Liste URL'lerinden
-  veya ID'lerinden Liste gönderilerini, üyelerini ve takipçilerini kazır.
+  veya ID'lerinden Liste gönderilerini, üyelerini & takipçilerini kazır.
   Kaynaklarını özenle seçilmiş bir Liste belirlediğinde kullan. Satır başına
   $0.00015'ten başlar.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper) Topluluk
-  bilgilerini, gönderilerini, aramalarını, üyelerini ve moderatörlerini kazır.
+  bilgilerini, gönderilerini, aramalarını, üyelerini & moderatörlerini kazır.
   Kaynakların X Toplulukları olduğunda kullan. Satır başına $0.00015'ten başlar.
 - [X Space Scraper](https://apify.com/xquik/x-space-scraper) Sohbet Odalarını
-  anahtar kelimeyle bulur ve başlıklarını, durumlarını, zamanlarını, dinleyici
-  sayılarını, sunucularını ve konuşmacılarını okur. Yayınları da URL veya ID ile
-  okur. X'teki canlı ses ve video yayınlarını takip ettiğinde kullan. Sohbet
+  anahtar kelimeyle bulur & başlıklarını, durumlarını, zamanlarını, dinleyici
+  sayılarını, sunucularını & konuşmacılarını okur. Yayınları da URL veya ID ile
+  okur. X'teki canlı ses & video yayınlarını takip ettiğinde kullan. Sohbet
   Odası veya yayın başına $0.00015'ten başlar.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) sıralama, hacim,
-  sorgu ve WOEID ile konuma göre gerçek zamanlı gündemi kazır. Nerede neyin
+  sorgu & WOEID ile konuma göre gerçek zamanlı gündemi kazır. Nerede neyin
   gündemde olduğunu takip ettiğinde kullan. Gündem başlığı başına $0.00015'ten
   başlar.
 - [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) X iş ilanlarını
-  anahtar kelime, yer, çalışma şekli, kıdem ve şirkete göre maaş ve başvuru
+  anahtar kelime, yer, çalışma şekli, kıdem & şirkete göre, maaş & başvuru
   bağlantılarıyla kazır. X'te yayımlanan iş ilanlarını topladığında kullan. İlan
   başına $0.00015'ten başlar.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper) uzun biçimli X
-  Makalelerini kapak, yazar, tarih ve metriklerle Markdown ve metin olarak
-  kazır. Gönderi değil, makale gövdesi gerektiğinde kullan. Makale başına
-  $0.00015'ten başlar.
+  Makalelerini kapak, yazar, tarih & metriklerle Markdown & metin olarak kazır.
+  Gönderi değil, makale gövdesi gerektiğinde kullan. Makale başına $0.00015'ten
+  başlar.
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader) gönderilerden
-  veya profillerden fotoğrafları, videoları ve GIF'leri MP4 ve metadata
+  veya profillerden fotoğrafları, videoları & GIF'leri MP4 & metadata
   seçenekleriyle çıkarır veya depolar. Medya dosyalarının kendisine ihtiyacın
   olduğunda kullan. Medya satırı başına $0.00015'ten başlar.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
-  markadan bahseden gönderileri yapay zeka destekli ilgi, duygu durumu ve
-  müşteri deneyimi cevaplarıyla izler ve çalıştırmaları karşılaştırır. Bir
-  markayı zaman içinde takip ettiğinde kullan. Analiz edilen gönderi başına
-  $0.0003'ten başlar.
+  marka bahsetmelerini yapay zeka destekli ilgi, duygu durumu & müşteri deneyimi
+  cevaplarıyla izler & çalıştırmaları karşılaştırır. Bir markayı zaman içinde
+  takip ettiğinde kullan. Analiz edilen gönderi başına $0.0003'ten başlar.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
-  yapay zeka ile her gönderi için tutum, yoğunluk ve alaycılık olasılığını
+  yapay zeka ile her gönderi için tutum, yoğunluk & alaycılık olasılığını
   etiketler. Herhangi bir konuda genel duygu durumuna ihtiyacın olduğunda
   kullan. Analiz edilen gönderi başına $0.0003'ten başlar.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   yapay zeka ile yükseliş, düşüş, nötr veya karışık duruşu, içerik türünü,
-  kesinliği ve varlık ilgisini etiketler. Hisse senedi, kripto veya alım satım
+  kesinliği & varlık ilgisini etiketler. Hisse senedi, kripto veya alım satım
   konuşmalarını takip ettiğinde kullan. Analiz edilen gönderi başına $0.0003'ten
   başlar.
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
-  haber gönderilerini yapay zeka ile biçim, kaynak atfı ve konu ilgisine göre
+  haber gönderilerini yapay zeka ile biçim, kaynak atfı & konu ilgisine göre
   etiketler. Haberi yorumdan ayırdığında kullan. Analiz edilen gönderi başına
   $0.0003'ten başlar.
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
-  yapay zeka ile her gönderi için kendi kategori, puan ve evet/hayır sorularını
+  yapay zeka ile her gönderi için kendi kategori, puan & evet/hayır sorularını
   cevaplar. Hazır analizler etiketlerine uymadığında kullan. Analiz edilen
   gönderi başına $0.0003'ten başlar.
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
   yapay zekanın 8 özellik cevabından her gönderi için 0 ile 100 arasında bir
-  Viral Score ve bir karar tahmin eder. Gönderilerin neden yayıldığını veya
+  Viral Score & bir karar tahmin eder. Gönderilerin neden yayıldığını veya
   tutmadığını incelediğinde kullan. Analiz edilen gönderi başına $0.0003'ten
   başlar.
 
@@ -760,8 +801,8 @@ Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
 
 ### Bir gönderinin yorumlarını nasıl kazırım?
 
-Gönderi URL'sini `startUrls` alanına yapıştır ve Start'a tıkla. X yorumlara
-yanıt der, bu yüzden her yorum 1 yanıt satırıdır.
+Gönderi URL'sini `startUrls` alanına yapıştır & Start düğmesine tıkla. X
+yorumlara yanıt der, bu yüzden her yorum 1 yanıt satırıdır.
 
 ### Birçok gönderinin yanıtlarını tek seferde kazıyabilir miyim?
 
@@ -770,8 +811,8 @@ yanıt, kaynak gönderiyi `sourceTarget` alanında tutar.
 
 ### İç içe yanıtları da içerir mi?
 
-Evet. Varsayılan `scope` doğrudan ve iç içe yanıtları toplar. Yalnızca
-gönderiye verilen yanıtlar için `scope` değerini `direct` yap. `maxDepth`, bir
+Evet. Varsayılan `scope` doğrudan & iç içe yanıtları toplar. Yalnızca gönderiye
+verilen yanıtlar için `scope` değerini `direct` yap. `maxDepth`, bir
 çalıştırmanın ne kadar derine ineceğini sınırlar.
 
 ### Yazarın gizlediği yanıtları da alır mı?
@@ -796,41 +837,43 @@ yanıt zaman akışını okur.
 
 ### X API anahtarı veya giriş gerekir mi?
 
-Hayır. X API anahtarı, giriş veya kimlik bilgisi gerekmez. Xquik'in X Reply
-Scraper'ı X şifreni, çerezlerini veya token'larını asla istemez.
+Hayır. X API anahtarına, girişe veya kimlik bilgisine ihtiyacın yok. Xquik'in X
+Reply Scraper'ı X şifreni, çerezlerini veya token'larını asla istemez.
 
 ### X yanıtlarını kazımak yasal mı?
 
-Xquik'in X Reply Scraper'ı herkese açık yanıtları toplar ve korumalı hesapları
-aşmaz. Yalnızca herkese açık veri topla. Geçerli yasalara ve platform
-kurallarına uy.
+Xquik'in X Reply Scraper'ı herkese açık yanıtları toplar & korumalı hesapları
+aşmaz. Yalnızca herkese açık veri topla. Geçerli yasalara & platform kurallarına
+uy.
 
 Yanıt veri kümelerinde kişisel veri olabilir. Yasal bir amaç seç. Veriyi
-gereğinden uzun saklama. Dışa aktarımları koru. Gerektiğinde silme ve erişim
+gereğinden uzun saklama. Dışa aktarımları koru. Gerektiğinde silme & erişim
 taleplerini yerine getir. Emin değilsen yetkin bir hukukçuya danış.
 
 ### Çalıştırmam neden gönderide görünenden az yanıt döndürdü?
 
-X konuşmanın bir kısmını gizlerse durum metni, kaç yanıtın gizlendiğini söyler.
-`stopCauses` içindeki `reply_reach`, X'in konuşmanın yalnızca bir kısmını
-sunduğu anlamına gelir. Filtreler, tekilleştirme, `scope`, `maxDepth` ve
+X konuşmanın bir kısmını gizlerse durum metni, X'in kaç yanıtı gizlediğini
+söyler. `stopCauses` içindeki `reply_reach`, X'in konuşmanın yalnızca bir
+kısmını sunduğu anlamına gelir. Filtreler, tekilleştirme, `scope`, `maxDepth` &
 sınırların da sayıyı düşürür.
 
-### API'yi, zamanlamaları ve entegrasyonları kullanabilir miyim?
+### API'yi, zamanlamaları & entegrasyonları kullanabilir miyim?
 
 Evet. [API sekmesi](https://apify.com/xquik/x-reply-scraper/api) Python,
-JavaScript ve cURL örnekleri gösterir. Xquik'in X Reply Scraper'ını bir cron
+JavaScript & cURL örnekleri gösterir. Xquik'in X Reply Scraper'ını bir cron
 takvimiyle çalıştırmak için Apify
 [zamanlamalarını](https://docs.apify.com/platform/schedules) kullan. Make,
-Zapier, n8n ve Google Sheets'e de bağlanır.
+Zapier, n8n & Google Sheets'e de bağlanır.
 
 ### Nereden yardım alırım?
 
-Actor sayfasında bir issue aç ya da çalıştırma ID'siyle <support@xquik.com>
-adresine yaz.
+Çalıştırma ID'siyle
+[Issues sekmesinde](https://apify.com/xquik/x-reply-scraper/issues) bir issue
+aç.
 
 ### Bana özel bir çözüm alabilir miyim?
 
-Evet. [xquik.com](https://xquik.com) adresini ziyaret et ya da
-[API belgelerini](https://docs.xquik.com/introduction) oku. Xquik bir panel,
-bir REST API, bir MCP sunucusu ve webhook'lar sunar.
+Evet. İhtiyacını
+[Issues sekmesinde](https://apify.com/xquik/x-reply-scraper/issues) anlat. Xquik
+ayrıca bir panel, bir REST API, bir MCP sunucusu & webhook'lar sunar. Xquik'in
+web sitesini [Apify profilinde](https://apify.com/xquik) bul.

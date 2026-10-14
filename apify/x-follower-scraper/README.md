@@ -15,10 +15,9 @@
 ·
 [Italiano](README.it.md)
 
-[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
-
-[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
-Claude Code, Codex, Cursor & more, from 6:07.
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
+with Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X Follower Scraper collects followers, following,
@@ -46,7 +45,7 @@ following, Lists & Communities. Each row names its source target & relation.
 
 - Filters & duplicate removal run before billing.
 - By default, a profile shared by several targets appears & bills once.
-- One run accepts handles, numeric IDs, URLs & short paths.
+- 1 run accepts handles, numeric IDs, URLs & short paths.
 - Merge mode records shared profiles, sources, relations & `overlapCount`.
 - Run logs show page timing in `fetchDurationMs`, `processingDurationMs`,
   `pushDurationMs`, `statusDurationMs` & `fullPageDurationMs`.
@@ -54,40 +53,40 @@ following, Lists & Communities. Each row names its source target & relation.
 
 ### What data can X Follower Scraper extract?
 
-| Field             | Description                                             |
-| ----------------- | ------------------------------------------------------- |
-| `id`              | Numeric X user ID                                       |
-| `username`        | Handle (without `@`)                                    |
-| `name`            | Display name                                            |
-| `description`     | Bio text                                                |
-| `followers`       | Follower count                                          |
-| `following`       | Following count                                         |
-| `statusesCount`   | Total tweets posted                                     |
-| `mediaCount`      | Total media uploaded                                    |
-| `favouritesCount` | Total likes given                                       |
-| `verified`        | Combined public Blue or legacy verified flag            |
-| `verifiedType`    | `blue`, `business`, `government`, or `none`             |
-| `location`        | Self-reported location                                  |
-| `url`             | Website URL from profile                                |
-| `email`           | First email the profile publishes                       |
-| `contactInfo`     | Emails, phones & links the profile publishes            |
-| `profilePicture`  | Avatar URL (full-size)                                  |
-| `coverPicture`    | Banner URL                                              |
-| `createdAt`       | Account creation timestamp string from X                |
-| `sourceTarget`    | Handle / ID you scraped this profile from               |
-| `sourceRelation`  | Relation, such as `followers` or `list_members`         |
-| `sourceUrl`       | Exact URL the profile was discovered on                 |
-| `sourceTargets`   | All targets that matched this profile in merge mode     |
-| `sourceRelations` | All relations that matched this profile in merge mode   |
-| `sourceUrls`      | All source URLs that matched this profile in merge mode |
-| `overlapCount`    | Number of matching relation-target pairs in merge mode  |
-| `resultType`      | Row type in full and raw output modes                   |
-| `raw`             | Safe source profile before Actor-specific formatting    |
+| Field                    | Description                                             |
+| ------------------------ | ------------------------------------------------------- |
+| `id`                     | Numeric X user ID                                       |
+| `username`               | Handle (without `@`)                                    |
+| `name`                   | Display name                                            |
+| `description`            | Bio text                                                |
+| `followers`              | Follower count                                          |
+| `following`              | Following count                                         |
+| `statusesCount`          | Total tweets posted                                     |
+| `mediaCount`             | Total media uploaded                                    |
+| `favouritesCount`        | Total likes given                                       |
+| `verified`               | Combined public Blue or legacy verified flag            |
+| `verifiedType`           | `blue`, `business`, `government`, or `none`             |
+| `location`               | Self-reported location                                  |
+| `url`                    | Website URL from profile                                |
+| `email`                  | First email the profile publishes                       |
+| `contactInfo`            | Emails, phones & links the profile publishes            |
+| `profilePicture`         | Avatar URL at 48 px                                     |
+| `profilePictureOriginal` | The same avatar at full size, to download               |
+| `coverPicture`           | Banner URL                                              |
+| `createdAt`              | Account creation timestamp string from X                |
+| `sourceTarget`           | Handle / ID you scraped this profile from               |
+| `sourceRelation`         | Relation, such as `followers` or `list_members`         |
+| `sourceUrl`              | Exact URL the profile was discovered on                 |
+| `sourceTargets`          | All targets that matched this profile in merge mode     |
+| `sourceRelations`        | All relations that matched this profile in merge mode   |
+| `sourceUrls`             | All source URLs that matched this profile in merge mode |
+| `overlapCount`           | Number of matching relation-target pairs in merge mode  |
+| `resultType`             | Row type in full and raw output modes                   |
+| `raw`                    | Safe source profile before Actor-specific formatting    |
 
-Rows follow the public profile contract. It covers identity, counts,
-verification, availability, affiliates, professional data & biographies. Source
-attribution, entities & pinned tweet IDs remain available. See OpenAPI for the
-exact fields.
+Rows carry public profile fields for identity, counts, verification,
+availability, affiliates, professional data & biographies. Source attribution,
+entities & pinned tweet IDs remain available. See OpenAPI for the exact fields.
 
 Set `outputMode: "raw"` or `includeRaw: true` to add a `raw` field. It holds a
 safe copy of the source profile. Compact mode is the default.
@@ -125,8 +124,6 @@ free plan needs no credit card & gives $5 to spend each month. At $0.00015 per
 profile, $5 pays for up to 33,000 profiles before platform usage. Then come back
 here & press Try for free.
 
-Each example below is a complete input. Pick the one that fits your data.
-
 1. Open Xquik's X Follower Scraper in Apify Console.
 2. Add profile, List or Community URLs, X handles or numeric IDs.
 3. Pick a relation, such as `followers` or `verified_followers`.
@@ -134,7 +131,8 @@ Each example below is a complete input. Pick the one that fits your data.
 5. Start the run.
 6. Export the dataset as JSON, CSV, Excel or HTML.
 
-The inputs below cover common jobs.
+Each input below is complete & covers a common job. Pick the one that fits your
+data.
 
 ### Paste profile or list URLs
 
@@ -279,12 +277,12 @@ List source & target accounts to check follows between them.
 }
 ```
 
-Each source is checked against each target, so this run makes 4 checks. Each
-check is 1 row & 1 result, at the profile price. A row holds `isFollowing` (the
-source follows the target) & `isFollowedBy` (the target follows back), with both
-accounts' `sourceUsername`, `sourceId`, `targetUsername` & `targetId`. Accounts
-take user IDs, usernames with or without `@`, or profile URLs. A number is a
-user ID. The Follow checks view lists these rows.
+The run checks each source against each target, so this input makes 4 checks.
+Each check is 1 row & 1 result, at the profile price. A row holds `isFollowing`
+(the source follows the target) & `isFollowedBy` (the target follows back), with
+both accounts' `sourceUsername`, `sourceId`, `targetUsername` & `targetId`.
+Accounts take user IDs, usernames with or without `@`, or profile URLs. A number
+is a user ID. The Follow checks view lists these rows.
 
 ### Accepted URL shapes
 
@@ -563,7 +561,8 @@ compact row looks like this.
   "verifiedType": "blue",
   "location": "...",
   "url": "https://...",
-  "profilePicture": "https://...",
+  "profilePicture": "https://..._normal.jpg",
+  "profilePictureOriginal": "https://....jpg",
   "coverPicture": "https://...",
   "createdAt": "Tue Jun 02 20:12:29 +0000 2009",
   "sourceTarget": "nasa",

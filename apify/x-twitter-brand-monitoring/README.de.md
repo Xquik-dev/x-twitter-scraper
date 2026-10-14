@@ -1,19 +1,10 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <strong>Deutsch</strong> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+**Deutsch** · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer verbindet Xquik MCP mit Coding-Agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Sieh dir an, wie Framer Xquik-Scraper mit Claude Code, Codex, Cursor und mehr nutzt, ab Minute 6:07.</a>
-</td></tr></table>
+[![Framer verbindet Xquik MCP mit Coding-Agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Sieh dir an, wie Framer Xquik-Scraper nutzt](https://youtu.be/4UOSpoOoC3Y?t=367),
+mit Claude Code, Codex, Cursor & mehr, ab Minute 6:07.
 
 Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
 liefert die vollständigsten X-Daten. X (Twitter) Brand Monitoring von Xquik
@@ -21,15 +12,15 @@ verfolgt Erwähnungen deiner Marke mit Antworten zu Relevanz, Sentiment &
 Kundenerfahrung. Die meisten anderen Apify Actors rechnen ab, bevor sie filtern
 oder Duplikate entfernen. Xquik rechnet nur gelieferte, eindeutige Ergebnisse
 ab, die zu deinen Filtern passen. Die KI-Kosten sind im Preis pro Post
-enthalten. Du brauchst keinen KI-Account, keine Tokens & keinen Schlüssel.
+enthalten. Du brauchst weder einen KI-Account noch Tokens oder einen Schlüssel.
 
 Überwache Markenerwähnungen auf X (Twitter) & verfolge Änderungen im Sentiment
 zwischen Runs. **X (Twitter) Brand Monitoring with AI Analysis** von Xquik
-sammelt jeden passenden Post (Tweet). Es beantwortet mit KI für jeden Post
-Fragen zu Relevanz, Sentiment & Kundenerfahrung. Es vergleicht diese Antworten
-mit einem früheren Dataset. So siehst du, was sich geändert hat. Jeder
-Datensatz behält die Originaldaten des Posts. Exporte, Prüfungen &
-Folgeanalysen brauchen keinen zweiten Scrape.
+sammelt jeden passenden Post. Es beantwortet mit KI für jeden Post Fragen zu
+Relevanz, Sentiment & Kundenerfahrung. Es vergleicht diese Antworten mit einem
+früheren Dataset, damit du siehst, was sich geändert hat. Jeder Datensatz behält
+die Originaldaten des Posts. Exporte, Prüfungen & Folgeanalysen brauchen keinen
+zweiten Scrape.
 
 Beobachte eine Marke, eine Produktlinie oder eine Kampagne auf Beschwerden, Lob
 & Kauffragen. Informiere Support- & Marketing-Teams mit echten Posts. Halte
@@ -38,17 +29,24 @@ fest, wie Kunden von Run zu Run über dich sprechen.
 - **Jedes Feld des Quellposts.** Text, Autor, Zähler, Medien, Links, zitierte &
   beantwortete Posts bleiben neben den Antworten.
 - **Typisierte Antworten.** Jeder Datensatz hat eine
-  Relevanz-Wahrscheinlichkeit, eine Sentiment-Kategorie mit
-  Wahrscheinlichkeiten & eine Kategorie zur Kundenerfahrung.
-- **Änderungsverfolgung.** Der Vergleich zwischen Runs prüft Entscheidungen.
-  Kleine Verschiebungen der Wahrscheinlichkeit zählen also nicht als Änderung.
-- **Abrechnung nach dem Filtern.** Du zahlst nur für eindeutige Posts mit
+  Relevanz-Wahrscheinlichkeit, eine Sentiment-Kategorie mit Wahrscheinlichkeiten
+  & eine Kategorie zur Kundenerfahrung.
+- **Änderungsverfolgung.** Runs vergleichen nach Entscheidung, also zählen
+  kleine Verschiebungen der Wahrscheinlichkeit nicht als Änderungen.
+- **Abrechnung erst nach dem Filtern.** Du zahlst nur für eindeutige Posts mit
   erfolgreicher Analyse, die zu deinen Filtern passen.
 
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
 
 ## So überwachst du eine Marke auf X
+
+Neu bei Apify?
+[Erstelle zuerst einen kostenlosen Account](https://console.apify.com/sign-up?fpr=xquik).
+Der kostenlose Plan braucht keine Kreditkarte & gibt dir jeden Monat $5 zum
+Ausgeben. Bei $0.0003 pro analysiertem Post reichen $5 für bis zu 16.000
+analysierte Posts, vor Abzug der Plattformnutzung. Komm dann hierher zurück &
+klicke auf Try for free.
 
 1. Füge Suchbegriffe, Nutzernamen von Profilen, Post-URLs oder Post-IDs hinzu.
    Suche zum Beispiel `(Sony OR "WH-1000XM5") headphones lang:en`.
@@ -57,11 +55,11 @@ fest, wie Kunden von Run zu Run über dich sprechen.
    Ausschluss von Antworten.
 3. Trage deine Markennamen & Aliasse unter `analysis.targets` ein & beschreibe
    die Marke in `analysis.context`.
-4. Starte den Run & notiere dir die Dataset-ID für den nächsten Vergleich.
+4. Starte den Run & behalte dann die Dataset-ID für deinen nächsten Vergleich.
 5. Ergänze im nächsten Run `monitor.baselineDatasetId` mit dieser ID. Lass
    Fragen, Ziele, Kontext & Kontextgrenzen unverändert, damit die Antworten
-   vergleichbar bleiben. Der Vergleich liest dieses Dataset. Er funktioniert
-   also auch, wenn dieser Run seine Zusammenfassung übersprungen hat.
+   vergleichbar bleiben. Der Vergleich liest dieses Dataset, also funktioniert
+   er auch, wenn dieser Run seine Zusammenfassung übersprungen hat.
 
 ```json
 {
@@ -80,9 +78,9 @@ fest, wie Kunden von Run zu Run über dich sprechen.
 }
 ```
 
-Ziele steuern die Klassifizierung. Sie erstellen keine Suchanfragen & entfernen
-keine irrelevanten Posts. Wähle Suchbegriffe & Filter, die zu deiner Recherche
-passen.
+Ziele steuern die Klassifizierung. Sie erstellen weder Suchanfragen noch
+entfernen sie irrelevante Posts. Wähle Suchbegriffe & Filter, die zu deiner
+Recherche passen.
 
 ### Was der Monitor beantwortet
 
@@ -92,33 +90,32 @@ passen.
 | Sentiment       | Positiv, negativ, gemischt, neutral oder unklar       |
 | Kundenerfahrung | Kunde, Interessent, Beobachter oder unklar            |
 
-Nutze die Relevanz-Wahrscheinlichkeiten, um mehrdeutige Namensvettern zu
-prüfen. Sentiment beschreibt die Haltung, die der Autor gegenüber dem Ziel
-ausdrückt.
+Nutze die Relevanz-Wahrscheinlichkeiten, um mehrdeutige Namensvettern zu prüfen.
+Sentiment beschreibt die Haltung, die der Autor gegenüber dem Ziel ausdrückt.
 
 ### So funktionieren Vergleiche
 
-| Vergleichsstatus       | Bedeutung                                                |
-| ---------------------- | -------------------------------------------------------- |
-| `first_run`            | Es gab keine Baseline                                    |
-| `new_to_baseline`      | Diese Post-ID fehlte in der Baseline                     |
-| `unchanged`            | Jede vergleichbare Entscheidung stimmt überein           |
-| `changed`              | Mindestens 1 Entscheidung weicht ab                      |
-| `not_comparable`       | Nötige Metadaten, IDs oder passende Einstellungen fehlen |
-| `analysis_unavailable` | Dieser Post hat keine erfolgreiche Analyse               |
+| Vergleichsstatus       | Bedeutung                                         |
+| ---------------------- | ------------------------------------------------- |
+| `first_run`            | Keine Baseline übergeben                          |
+| `new_to_baseline`      | Diese Post-ID fehlte in der Baseline              |
+| `unchanged`            | Jede vergleichbare Entscheidung stimmt überein    |
+| `changed`              | Mindestens 1 Entscheidung weicht ab               |
+| `not_comparable`       | Metadaten, IDs oder passende Einstellungen fehlen |
+| `analysis_unavailable` | Dieser Post hat keine erfolgreiche Analyse        |
 
 Der Actor vergleicht Antworten nach Entscheidung. Eine `choice`-Antwort
 vergleicht er nach ihrer Kategorie. Eine `score`-Antwort vergleicht er nach
 ihrer nächstgelegenen Stufe. Eine `probability`-Antwort vergleicht er nach ihrer
-Ja/Nein-Entscheidung bei 0,5. Eine Entscheidung zählt nur als geändert, wenn
-sie sich deutlich bewegt. Knappe Fälle zwischen Runs bleiben `unchanged`. Das
-gilt auch für Verschiebungen, die dieselbe Entscheidung behalten. Kleine
-KI-Unterschiede zwischen Runs erscheinen also nicht als Änderungen.
+Ja/Nein-Entscheidung bei 0,5. Eine Entscheidung zählt nur als geändert, wenn sie
+sich deutlich bewegt. Knappe Fälle zwischen Runs bleiben `unchanged`, & ebenso
+Verschiebungen, die dieselbe Entscheidung behalten. Kleine KI-Unterschiede
+zwischen Runs erscheinen also nicht als Änderungen.
 
 `changes` listet jede geänderte Frage mit ihrer Entscheidung `previous` &
 `current`. Änderungen können von KI-Schwankungen, neuem Kontext oder
-bearbeiteten Quelldaten kommen. Sie beweisen keine geänderten Fakten. Ein
-fehlender Post beweist auch keine Löschung.
+bearbeiteten Quelldaten kommen. Sie beweisen keine geänderten Fakten & ein
+fehlender Post beweist keine Löschung.
 
 Das Baseline-Limit `maxBaselineRows` liegt standardmäßig bei 100.000
 Datensätzen. Doppelte Post-IDs, Ladefehler & sich ändernde Dataset-Größen
@@ -127,8 +124,8 @@ Baseline.
 
 ## Eigenen Text analysieren
 
-Füge eigene Entwürfe, Antworten, Rezensionen oder Notizen in `texts` ein.
-X (Twitter) Brand Monitoring von Xquik analysiert sie. Es ruft nichts von X ab.
+Füge eigene Entwürfe, Antworten, Rezensionen oder Notizen in `texts` ein. X
+(Twitter) Brand Monitoring von Xquik analysiert sie. Es ruft nichts von X ab.
 
 ```json
 {
@@ -141,7 +138,7 @@ X (Twitter) Brand Monitoring von Xquik analysiert sie. Es ruft nichts von X ab.
 
 - Jeder Text wird zu 1 Datensatz mit denselben `analysis`-Antworten wie ein
   Post.
-- `tweet.id` ist `text:1`, `text:2` usw. `tweet.type` ist `text`.
+- `tweet.id` ist `text:1`, `text:2` & so weiter, & `tweet.type` ist `text`.
 - Jeder analysierte Text kostet dieselben $0.0003 wie ein analysierter Post.
 - Ist `texts` gesetzt, analysiert der Run nur diese Texte. Starte X-Ziele in
   einem eigenen Run.
@@ -150,9 +147,13 @@ X (Twitter) Brand Monitoring von Xquik analysiert sie. Es ruft nichts von X ab.
 
 X (Twitter) Brand Monitoring von Xquik kostet ab $0.0003 pro analysiertem Post.
 Es verlangt keine Startgebühr. Der Preis enthält Erfassung & KI-Kosten. Du
-brauchst keinen KI-Account, keine Tokens & keinen Schlüssel. Der Preis deckt bis
-zu 8 Fragen & 64.000 Byte Kontext pro Post ab. Jede Frage-Definition darf bis zu
-8.000 Byte nutzen.
+brauchst weder einen KI-Account noch Tokens oder einen Schlüssel. Der Preis
+deckt bis zu 8 Fragen & 64.000 Byte Kontext pro Post ab. Jede Frage-Definition
+darf bis zu 8.000 Byte nutzen.
+
+Brauchst du mehr Volumen, dann
+[wähle einen Apify-Plan](https://apify.com/pricing?fpr=xquik) mit mehr
+vorausbezahlter Nutzung.
 
 Extraktionsfilter & Deduplizierung laufen vor der Analyse. Herausgefilterte oder
 doppelte Datensätze zahlst du nie. Fehlgeschlagene Analysen, übersprungene
@@ -202,18 +203,18 @@ Datensätze, abgerechnete Analysen & ausstehende Gebühren.
 
 ## Run-Zusammenfassung & flache Antworten
 
-Ein Run schreibt in 4 Fällen einen `analysis-summary`-Datensatz in seinen
+Ein Run schreibt in 3 Fällen einen `analysis-summary`-Datensatz in seinen
 Key-Value-Store.
 
 - Er hat ein Problem oder ist groß.
-- Er setzt `monitor` ohne `baselineDatasetId`, als erster Run einer Serie.
 - Sein Vergleich findet einen geänderten, neuen oder nicht vergleichbaren Post.
 - Er hat `alwaysSaveRunRecords` aktiviert.
 
-Andere Runs überspringen den Datensatz. Ihr Status nennt die wichtigste Antwort,
-etwa `Top sentiment: negative in 2 of 5 results.` Ein Vergleich ohne Änderung
+Andere Runs überspringen den Datensatz, auch der erste Run einer Serie. Ihr
+Status nennt die häufigste Antwort, etwa
+`Top sentiment is negative in 2 of 5 results.` Ein Vergleich ohne Änderung
 meldet `No change since the earlier run.` Ein Run mit einem Problem oder ein
-großer Run schreibt zusätzlich `run-report`. Das gilt auch für einen Run mit
+großer Run schreibt außerdem `run-report`. Das gilt auch für einen Run mit
 aktiviertem `alwaysSaveRunRecords`. `run-report` wiederholt die Zusammenfassung
 unter `results.analysisSummary`.
 
@@ -229,7 +230,7 @@ Datensätze. Sie summiert Interaktionen & fasst jede Frage zusammen.
   Posts, die diese Marke erwähnen.
 - Der Block `sentiment` listet unter `top` die 3 positiven & negativen
   Erwähnungen mit den meisten Interaktionen.
-- `relevance` zählt die Erwähnungen, die wirklich die Marke betreffen.
+- `relevance` zählt die Erwähnungen, die von der Marke handeln.
 - `monitor.changedRows` listet Posts, deren Entscheidungen sich seit der
   Baseline geändert haben. Sende sie an einen Webhook oder einen Alarm.
 - Ist `monitor.baselineDatasetId` gesetzt, zählt der Block `monitor` die
@@ -252,25 +253,26 @@ Wähle aus 50 öffentlichen Tasks. Jeder startet mit einer echten englischen Suc
 & einem begrenzten `maxItems`. Er enthält fertige Ziele, Kontext & die
 Dataset-Ansicht Overview. Passe Suche oder Ziele an, bevor du startest.
 
-- [Monitor Nike brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-nike-brand-mentions-on-x)
-- [Monitor Starbucks brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-starbucks-brand-mentions-on-x)
-- [Monitor Tesla brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-tesla-brand-mentions-on-x)
-- [Monitor Spotify brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-spotify-brand-mentions-on-x)
-- [Monitor Netflix brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-netflix-brand-mentions-on-x)
-- [Monitor Airbnb brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-airbnb-brand-mentions-on-x)
-- [Monitor Uber brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-uber-brand-mentions-on-x)
-- [Monitor Peloton brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-peloton-brand-mentions-on-x)
-- [Monitor Shopify brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-shopify-brand-mentions-on-x)
-- [Monitor Notion brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-notion-brand-mentions-on-x)
-- [Monitor Duolingo brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-duolingo-brand-mentions-on-x)
-- [Monitor Lululemon brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-lululemon-brand-mentions-on-x)
+- [Nike-Markenerwähnungen auf X überwachen](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-nike-brand-mentions-on-x)
+- [Starbucks-Markenerwähnungen auf X überwachen](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-starbucks-brand-mentions-on-x)
+- [Tesla-Markenerwähnungen auf X überwachen](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-tesla-brand-mentions-on-x)
+- [Spotify-Markenerwähnungen auf X überwachen](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-spotify-brand-mentions-on-x)
+- [Netflix-Markenerwähnungen auf X überwachen](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-netflix-brand-mentions-on-x)
+- [Airbnb-Markenerwähnungen auf X überwachen](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-airbnb-brand-mentions-on-x)
+- [Uber-Markenerwähnungen auf X überwachen](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-uber-brand-mentions-on-x)
+- [Peloton-Markenerwähnungen auf X überwachen](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-peloton-brand-mentions-on-x)
+- [Shopify-Markenerwähnungen auf X überwachen](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-shopify-brand-mentions-on-x)
+- [Notion-Markenerwähnungen auf X überwachen](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-notion-brand-mentions-on-x)
+- [Duolingo-Markenerwähnungen auf X überwachen](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-duolingo-brand-mentions-on-x)
+- [Lululemon-Markenerwähnungen auf X überwachen](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-lululemon-brand-mentions-on-x)
 
 Die übrigen Tasks auf der Actor-Seite decken weitere Marken, Themen & Märkte ab.
 
 ## Verwandte Xquik-Actors
 
-Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, rechnet erst nach dem
-Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
+Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, dieselbe Abrechnung erst
+nach dem Filtern & dieselben Diagnosen. Wähle den, der zu den Daten passt, die
+du brauchst.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrapt Posts aus
   Suchen, Profil-Timelines, Listen & Post-IDs mit über 50 Filtern & flachen
@@ -288,9 +290,9 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015 pro
   Datensatz.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
-  scrapt die Posts, die Posts zitieren, mit Text, Medien, Zahlen, Autoren & 11
-  Filtern. Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was gesagt
-  wurde. Ab $0.00015 pro Post.
+  scrapt die Zitate von Posts mit Text, Medien, Zählern, Autoren & 11 Filtern.
+  Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was diese Accounts
+  gesagt haben. Ab $0.00015 pro Post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrapt
   Follower, gefolgte Accounts, Listenmitglieder, Abonnenten &
   Community-Mitglieder als Profil-Datensätze. Nutze ihn, wenn du Zielgruppen-
@@ -301,8 +303,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   einer Suche aufbaust. Ab $0.00015 pro Profil.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   prüft, wo Accounts ansässig sind, mit der X-Angabe "Account based in", der
-  Verbindungsart zu X & Benutzernamen-Änderungen. Nutze ihn, wenn du prüfst, wo
-  Accounts ansässig sind. Ab $0.00015 pro Account.
+  Verbindungsart zu X & Änderungen des Nutzernamens. Nutze ihn, wenn du prüfst,
+  wo Accounts ansässig sind. Ab $0.00015 pro Account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) holt die E-Mails,
   Telefonnummern & Links, die Accounts in ihren Profilen veröffentlichen, anhand
   von Nutzernamen, Followern oder Nutzersuchen. Nutze ihn, wenn du die E-Mails
@@ -333,8 +335,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   $0.00015 pro Medien-Datensatz.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden Post
-  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema brauchst. Ab
-  $0.0003 pro analysiertem Post.
+  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem beliebigen Thema
+  brauchst. Ab $0.0003 pro analysiertem Post.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   kennzeichnet bullische, bärische, neutrale oder gemischte Haltung, Inhaltstyp,
   Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du Aktien, Krypto
@@ -359,17 +361,17 @@ Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
 ### Brauche ich einen KI-Account, einen X-API-Schlüssel oder einen Login?
 
 Nein. X (Twitter) Brand Monitoring von Xquik enthält die KI-Kosten im Preis. Du
-brauchst keinen KI-Account, keine Tokens & keinen Schlüssel. Du brauchst auch
-keinen X-API-Schlüssel, keinen Login & keine Zugangsdaten.
+brauchst weder einen KI-Account noch Tokens oder einen Schlüssel. Du brauchst
+auch weder einen X-API-Schlüssel noch einen Login oder Zugangsdaten.
 
 ### Kann ich eigene Fragen nutzen?
 
 Ja. Eigene `analysis.questions` ersetzen die Standardfragen. Sende 1 bis 8
 Fragen vom Typ `choice`, `score` oder `probability`. Choice-Fragen akzeptieren 2
-bis 255 Kategorien. Score-Fragen brauchen mindestens 2 geordnete Stufen.
-Behalte dieselben Fragen in allen Runs, die du vergleichen willst.
+bis 255 Kategorien. Score-Fragen brauchen mindestens 2 geordnete Stufen. Behalte
+dieselben Fragen in allen Runs, die du vergleichen willst.
 
-### Warum hat ein Datensatz eine fehlgeschlagene oder übersprungene Analyse?
+### Warum kam ein Datensatz mit fehlgeschlagener oder übersprungener Analyse zurück?
 
 `analysis.status` ist `failed` oder `skipped`. Der Actor hat den Post gesammelt
 & geliefert, aber die KI-Analyse lief nicht zu Ende. `analysis.reason` nennt die
@@ -385,7 +387,7 @@ kürzt zuerst zitierte & beantwortete Posts, dann den Post selbst.
 
 ### Prüft die Analyse Fakten?
 
-Nein. Antworten beschreiben, was der Post ausdrückt & wie er es darstellt.
+Nein. Antworten beschreiben, was der Post ausdrückt & wie der Post es darstellt.
 Wahrscheinlichkeiten drücken die Sicherheit der KI aus, nicht die Wahrheit.
 Prüfe wichtige Einstufungen am Originalpost, den jeder Datensatz behält.
 
@@ -406,20 +408,22 @@ Datumsgrenzen & Mindestwerte für Interaktionen. Starte mit einem kleinen
 ### Ist es legal, X-Daten zu analysieren?
 
 Der Actor fragt öffentliche X-Felder ab. Ergebnisse können personenbezogene
-Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist. Befolge geltende
+Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist, & befolge geltende
 Datenschutzregeln. Hol dir bei Unsicherheit qualifizierten Rechtsrat.
 
-### Kann ich API, Zeitpläne & Integrationen nutzen?
+### Kann ich die API, Zeitpläne & Integrationen nutzen?
 
-Ja. Im [API-Tab](https://apify.com/xquik/x-twitter-brand-monitoring/api)
-findest du Beispiele für Python, JavaScript & cURL. Nutze
-Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) für wiederkehrende
-Runs. Übergib die vorherige Dataset-ID als `monitor.baselineDatasetId`, um
-Änderungen zu sehen. Apify-Integrationen verbinden Runs auch mit Webhooks, Make,
-Zapier, n8n & Google Sheets.
+Ja. Im [API-Tab](https://apify.com/xquik/x-twitter-brand-monitoring/api) findest
+du Beispiele für Python, JavaScript & cURL. Nutze
+[Zeitpläne](https://docs.apify.com/platform/schedules) von Apify für
+wiederkehrende Runs. Übergib die vorherige Dataset-ID als
+`monitor.baselineDatasetId`, um zu sehen, was sich geändert hat.
+Apify-Integrationen verbinden Runs auch mit Webhooks, Make, Zapier, n8n & Google
+Sheets.
 
 ### Wo bekomme ich Hilfe?
 
-Öffne ein Issue auf der Actor-Seite oder schreib mit der Run-ID an
-support@xquik.com. Kostenlose Diagnosen im Key-Value-Store erklären leere,
-unvollständige oder unterbrochene Runs.
+Öffne im [Tab Issues](https://apify.com/xquik/x-twitter-brand-monitoring/issues)
+ein Issue mit der Run-ID. Kostenlose Diagnosen im Key-Value-Store erklären Runs,
+die Aufmerksamkeit brauchen. Ein Run, der keinen Datensatz zurückbekommt, sagt
+in seinem Status, warum.

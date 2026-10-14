@@ -15,10 +15,9 @@
 ·
 [Italiano](README.it.md)
 
-[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
-
-[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
-Claude Code, Codex, Cursor & more, from 6:07.
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
+with Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X Community Scraper collects Community info,
@@ -101,6 +100,8 @@ Each resource adds rows of its own type.
 Post rows carry `text`, `createdAt`, `likeCount`, `replyCount`, `retweetCount`,
 `viewCount`, `media` & the `author` profile. Member & moderator rows carry the
 profile fields, such as `username`, `followers`, `verified` & `communityRole`.
+They also carry `email` & `contactInfo`, the emails, phones & links each profile
+publishes.
 
 ## How do I use X Community Scraper to scrape Community data?
 

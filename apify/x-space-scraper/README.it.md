@@ -1,30 +1,21 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <strong>Italiano</strong>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · **Italiano**
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer collega Xquik MCP agli agenti di coding"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Guarda come Framer usa gli scraper Xquik con Claude Code, Codex, Cursor e altro, da 6:07.</a>
-</td></tr></table>
+[![Framer collega Xquik MCP agli agenti di coding](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Guarda come Framer usa gli scraper Xquik](https://youtu.be/4UOSpoOoC3Y?t=367)
+con Claude Code, Codex, Cursor & altro, da 6:07.
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo, con
 i dati X più completi. X Space Scraper di Xquik trova gli Spazi per parola
-chiave, host o hashtag & legge Spazi & trasmissioni (broadcast) tramite URL o
-ID. La maggior parte degli altri Actor Apify fa pagare prima di filtrare o
-deduplicare. Xquik fa pagare solo i risultati consegnati e unici.
+chiave, host o hashtag & legge Spazi & trasmissioni tramite URL o ID. La maggior
+parte degli altri Actor Apify fa pagare prima di filtrare o deduplicare. Xquik
+fa pagare solo i risultati consegnati e unici.
 
-Trova gli Spazi di Twitter (Spaces) su qualsiasi argomento, in diretta,
-programmati o terminati. Non ti servono una chiave API X né il login. Paghi
-**$0.00015 per Spazio o trasmissione consegnati**. Apify fattura a parte l'uso
-della piattaforma.
+Trova gli Spazi di Twitter su qualsiasi argomento, in diretta, programmati o
+terminati. Non ti servono una chiave API X né il login. Paghi **$0.00015 per
+Spazio o trasmissione consegnati**, & Apify fattura a parte l'uso della
+piattaforma.
 
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.
@@ -47,6 +38,12 @@ della piattaforma.
   termini di ricerca è 1 riga.
 
 ## Come trovare gli Spazi di X
+
+Non usi ancora Apify?
+[Crea prima un account gratuito](https://console.apify.com/sign-up?fpr=xquik).
+Il piano gratuito non richiede carta di credito & offre $5 da spendere ogni
+mese. A $0.00015 per Spazio o trasmissione, $5 ne coprono fino a 33.000, senza
+contare l'uso della piattaforma. Poi torna qui & premi Try for free.
 
 1. Apri X Space Scraper di Xquik in Apify Console.
 2. Inserisci parole, hashtag o operatori di ricerca di X in `searchTerms`.
@@ -93,6 +90,14 @@ gli stessi operatori della ricerca di X.
 `queryType` sceglie quali post vengono prima. `Latest` mette prima i più recenti
 & `Top` quelli con più interazioni.
 
+`Live` elenca gli Spazi in diretta ora & `Upcoming` quelli programmati. Entrambi
+leggono la ricerca Spazi di X, che cerca le parole nei titoli degli Spazi & non
+accetta operatori.
+
+```json
+{ "searchTerms": ["bitcoin"], "queryType": "Live" }
+```
+
 Leggi gli Spazi che conosci già tramite URL o ID.
 
 ```json
@@ -112,7 +117,7 @@ La riga riporta allora `replay` con `url`, una playlist HLS, più `streamType` &
 `status`. Uno Spazio in diretta, programmato o senza registrazione non ha
 `replay`. La registrazione non costa nulla in più.
 
-Leggi le trasmissioni, il video in diretta che X ospita su `x.com/i/broadcasts`,
+Leggi le trasmissioni, i video in diretta che X ospita su `x.com/i/broadcasts`,
 tramite URL o ID.
 
 ```json
@@ -174,7 +179,7 @@ Gli Spazi `Ended` & `TimedOut` riportano `endedAt`, & entrambi possono
 conservare una registrazione. X mostra uno Spazio per abbonati o per una
 community solo al suo pubblico, quindi quegli Spazi non restituiscono righe.
 
-Una riga di trasmissione ha `resultType: "broadcast"` & si presenta così.
+Una riga di trasmissione ha `resultType: "broadcast"` & ha questo aspetto.
 
 ```json
 {
@@ -193,10 +198,42 @@ Una riga di trasmissione ha `resultType: "broadcast"` & si presenta così.
 }
 ```
 
+## Colonne di output
+
+8 input danno forma a ogni riga dopo che l'esecuzione la legge. Non eseguono
+codice & non cambiano il prezzo.
+
+| Campo               | Cosa fa                                                                        |
+| ------------------- | ------------------------------------------------------------------------------ |
+| `fields`            | Tiene solo questi campi, nell'ordine & con la grafia che scrivi                |
+| `omitFields`        | Scarta questi campi & tiene il resto                                           |
+| `renameFields`      | Sposta un campo in una colonna con un nuovo nome                               |
+| `flatten`           | Trasforma ogni oggetto annidato in colonne di primo livello                    |
+| `fillMissingFields` | Riempie con `null` un campo tenuto che manca in una riga. Attivo di default    |
+| `joinFields`        | Trasforma ognuno di questi elenchi in 1 valore di testo                        |
+| `joinSeparator`     | Testo tra gli elementi uniti. Il valore predefinito è una virgola & uno spazio |
+| `constantFields`    | Aggiunge una colonna con lo stesso testo su ogni riga                          |
+
+- Usa un punto per un campo dentro un oggetto. Maiuscole & trattini bassi non
+  contano.
+- Ogni riga conserva il suo `id`.
+- Con `fields`, un campo che manca in una riga arriva come `null`. Così ogni
+  riga ha le stesse colonne.
+- Un nome di campo sbagliato ferma l'esecuzione prima di leggere & non addebita
+  nulla.
+- Se i nomi non si possono controllare, l'esecuzione continua a leggere & elenca
+  per ultimi i nomi che non ha visto.
+- L'esecuzione ignora una funzione map o un filtro jq scritti per un altro
+  Actor.
+
 ## Quanto costa estrarre gli Spazi di X?
 
 Su ogni piano Apify paghi $0.00015 per Spazio o trasmissione consegnati. Apify
 fattura a parte il tuo uso della piattaforma.
+
+Per volumi maggiori,
+[scegli un piano Apify](https://apify.com/pricing?fpr=xquik) con più uso
+prepagato.
 
 - Un addebito per ogni riga di dati consegnata. La diagnostica in `diagnostics`
   è gratuita.
@@ -242,7 +279,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   filtri. Usalo quando studi chi ha citato dei post & cosa ha detto. Da $0.00015
   per post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) estrae
-  follower, following, membri & follower delle liste e membri delle community
+  follower, following, membri delle liste, abbonati & membri delle community
   come righe di profilo. Usalo quando ti servono elenchi di pubblico o di
   membri. Da $0.00015 per profilo.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) cerca
@@ -251,8 +288,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   $0.00015 per profilo.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   verifica dove hanno sede gli account con l'etichetta "Posizione account" di X,
-  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando ti
-  serve verificare dove hanno sede gli account. Da $0.00015 per account.
+  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando
+  vuoi verificare dove hanno sede gli account. Da $0.00015 per account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) ottiene le email, i
   numeri di telefono & i link che gli account pubblicano sui propri profili, da
   nomi utente, follower o ricerche di utenti. Usalo quando ti servono le email
@@ -271,7 +308,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   lavoro di X per parola chiave, luogo, modalità di lavoro, livello di
   esperienza & azienda, con stipendi & link di candidatura. Usalo quando
   raccogli le offerte di lavoro pubblicate su X. Da $0.00015 per offerta.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper) raccoglie gli
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) estrae gli
   articoli lunghi di X come Markdown & testo, con copertine, autori, date &
   metriche. Usalo quando ti serve il corpo degli articoli, non i post. Da
   $0.00015 per articolo.
@@ -281,7 +318,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   media.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
   monitora le menzioni del brand con rilevanza, sentiment & risposte sulla
-  customer experience generate con AI, poi confronta le esecuzioni. Usalo quando
+  customer experience generate con AI & confronta le esecuzioni. Usalo quando
   osservi un brand nel tempo. Da $0.0003 per post analizzato.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   etichetta atteggiamento, intensità & probabilità di sarcasmo di ogni post con
@@ -314,9 +351,9 @@ No. X Space Scraper di Xquik non richiede chiave API X, login o credenziali.
 
 ### Posso trovare gli Spazi in diretta ora?
 
-Sì. Cerca con `queryType` impostato su `Latest`, poi tieni le righe con `state`
-uguale a `Running`. Le righe con `NotStarted` sono programmate & riportano
-`scheduledStart`.
+Sì. Imposta `queryType` su `Live` & aggiungi un termine di ricerca, come
+`bitcoin`. Ogni riga è uno Spazio in diretta ora. `Upcoming` elenca gli Spazi
+programmati, che riportano `scheduledStart`.
 
 ### È legale estrarre gli Spazi di X?
 
@@ -326,9 +363,10 @@ sulla privacy applicabili. Nel dubbio, chiedi a un legale qualificato.
 
 ### Perché la mia esecuzione non ha restituito risultati?
 
-Apri prima l'output gratuito `diagnostics`. Lo stato di un'esecuzione vuota ti
-dice di controllare i target. `stopCauses` assegna a ogni causa un `nextAction`
-da seguire.
+Leggi prima lo stato dell'esecuzione. Lo stato di un'esecuzione vuota ti dice di
+controllare i target. L'output gratuito `diagnostics` compare quando qualcosa
+richiede attenzione. Il suo `stopCauses` assegna a ogni causa un `nextAction` da
+seguire.
 
 ### Posso usare l'API, le pianificazioni & le integrazioni?
 
@@ -342,12 +380,15 @@ meno che non ti serva una build precedente.
 
 ### Dove trovo assistenza?
 
-Apri una issue nella pagina dell'Actor o scrivi a support@xquik.com con l'ID
+Apri una issue nella
+[scheda Issues](https://apify.com/xquik/x-space-scraper/issues) con l'ID
 dell'esecuzione. La diagnostica gratuita nel key-value store spiega le
-esecuzioni vuote, parziali o interrotte.
+esecuzioni che richiedono attenzione. Un'esecuzione che non riceve nessuna riga
+ne spiega il motivo nel suo stato.
 
 ### Posso avere una soluzione personalizzata?
 
-Sì. Visita [xquik.com](https://xquik.com) o leggi la
-[documentazione API](https://docs.xquik.com/introduction). Copre dashboard, API,
-server MCP & webhook.
+Sì. Descrivi ciò che ti serve nella
+[scheda Issues](https://apify.com/xquik/x-space-scraper/issues). Xquik offre
+anche una dashboard, un'API REST, un server MCP & webhook. Trovi il sito web di
+Xquik sul suo [profilo Apify](https://apify.com/xquik).

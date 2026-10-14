@@ -1,26 +1,17 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <strong>Italiano</strong>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · **Italiano**
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer collega Xquik MCP agli agenti di coding"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Guarda come Framer usa gli scraper Xquik con Claude Code, Codex, Cursor e altro, da 6:07.</a>
-</td></tr></table>
+[![Framer collega Xquik MCP agli agenti di coding](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Guarda come Framer usa gli scraper Xquik](https://youtu.be/4UOSpoOoC3Y?t=367)
+con Claude Code, Codex, Cursor & altro, da 6:07.
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo, con
 i dati X più completi. X (Twitter) Tweet Classifier di Xquik risponde alle tue
-domande su ogni post (tweet). Chiedi etichette, punteggi o risposte sì/no. La
-maggior parte degli altri Actor Apify fa pagare prima di filtrare o deduplicare.
-Xquik fa pagare solo i risultati consegnati, unici e conformi ai filtri. I costi
-AI sono inclusi nel prezzo per post. Non ti servono account AI, token o chiavi.
+domande su ogni post. Chiedi etichette, punteggi o risposte sì/no. La maggior
+parte degli altri Actor Apify fa pagare prima di filtrare o deduplicare. Xquik
+fa pagare solo i risultati consegnati, unici e conformi ai filtri. I costi AI
+sono inclusi nel prezzo per post. Non ti servono account AI, token o chiavi.
 
 Classifica i post di X (Twitter) con le tue domande & conserva i dati originali
 del post. **X Tweet Classifier with AI Analysis** di Xquik raccoglie i post
@@ -36,13 +27,19 @@ sentiment & sentiment di mercato. Le domande personalizzate li sostituiscono.
   categorie.
 - **Record di origine completi.** Ogni riga conserva tutti i campi che il post
   rende disponibili.
-- **Fatturazione dopo i filtri.** Paghi solo i post unici & conformi ai filtri
+- **Fatturazione dopo i filtri.** Paghi solo i post unici e conformi ai filtri
   con un'analisi riuscita.
 
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.
 
 ## Come classificare i tweet con domande personalizzate
+
+Non usi ancora Apify?
+[Crea prima un account gratuito](https://console.apify.com/sign-up?fpr=xquik).
+Il piano gratuito non richiede carta di credito & offre $5 da spendere ogni
+mese. A $0.0003 per post analizzato, $5 coprono fino a 16.000 post analizzati,
+senza contare l'uso della piattaforma. Poi torna qui & premi Try for free.
 
 1. Aggiungi URL dei post, termini di ricerca, nomi utente dei profili o ID dei
    post.
@@ -86,14 +83,15 @@ Fornisci da 1 a 8 domande, ognuna con ID univoco, istruzioni & versione.
 
 I preset sono `brand`, `complaints`, `competitors`, `purchase_intent`,
 `product_feedback`, `news`, `sentiment` & `market`. `maxContextBytes` vale
-64.000 byte di default. Un limite più basso taglia i post lunghi & li segna come
-`truncated`. `concurrency` vale 16 di default & accetta valori da 1 a 16. Ogni
-definizione di domanda può usare fino a 8.000 byte.
+64.000 byte di default. Un limite più basso taglia i post lunghi per farli
+rientrare & li segna come `truncated`. `concurrency` vale 16 di default &
+accetta valori da 1 a 16. Ogni definizione di domanda può usare fino a 8.000
+byte.
 
 ## Analizza il tuo testo
 
-Incolla in `texts` le tue bozze, risposte, recensioni o note. X Tweet
-Classifier di Xquik le analizza. Non recupera nulla da X.
+Incolla in `texts` le tue bozze, risposte, recensioni o note. X Tweet Classifier
+di Xquik le analizza. Non recupera nulla da X.
 
 ```json
 {
@@ -105,7 +103,7 @@ Classifier di Xquik le analizza. Non recupera nulla da X.
 ```
 
 - Ogni testo diventa 1 riga con le stesse risposte `analysis` di un post.
-- `tweet.id` vale `text:1`, `text:2` e così via. `tweet.type` vale `text`.
+- `tweet.id` vale `text:1`, `text:2` & così via, & `tweet.type` vale `text`.
 - Ogni testo analizzato costa gli stessi $0.0003 di un post analizzato.
 - Con `texts` impostato, l'esecuzione analizza solo quei testi. Avvia a parte i
   target di X.
@@ -116,6 +114,10 @@ X Tweet Classifier di Xquik costa da $0.0003 per post analizzato. Non c'è costo
 di avvio. Il prezzo include la raccolta & i costi AI. Non ti servono account AI,
 token o chiavi. Il prezzo copre fino a 8 domande & 64.000 byte di contesto per
 post. Ogni definizione di domanda può usare fino a 8.000 byte.
+
+Per volumi maggiori,
+[scegli un piano Apify](https://apify.com/pricing?fpr=xquik) con più uso
+prepagato.
 
 I filtri di estrazione & la deduplicazione agiscono prima dell'analisi. Non
 paghi mai le righe filtrate o duplicate. Le analisi fallite, le analisi saltate
@@ -167,19 +169,18 @@ analisi addebitate & addebiti in sospeso.
 
 ## Riepilogo dell'esecuzione & risposte piatte
 
-Un'esecuzione scrive un record `analysis-summary` nel suo key-value store in 4
+Un'esecuzione scrive un record `analysis-summary` nel suo key-value store in 3
 casi.
 
 - Incontra un problema o è grande.
-- Imposta `monitor` senza `baselineDatasetId`, come prima esecuzione di una
-  serie.
 - Il suo confronto trova un post cambiato, nuovo o non confrontabile.
 - Ha `alwaysSaveRunRecords` attivo.
 
-Le altre esecuzioni saltano il record. Il loro stato nomina la risposta
-principale, come `Top sentiment: positive in 3 of 5 results.` Un confronto senza
-cambiamenti riporta `No change since the earlier run.` Anche le esecuzioni
-grandi o con un problema scrivono `run-report`, come quelle con
+Le altre esecuzioni saltano il record, compresa la prima esecuzione di una
+serie. Il loro stato nomina la risposta principale, come
+`Top sentiment is positive in 3 of 5 results.` Un confronto senza cambiamenti
+riporta `No change since the earlier run.` Anche un'esecuzione che incontra un
+problema o è grande scrive `run-report`. Lo stesso vale per un'esecuzione con
 `alwaysSaveRunRecords` attivo. `run-report` ripete il riepilogo sotto
 `results.analysisSummary`.
 
@@ -236,18 +237,18 @@ Scegli tra 50 task pubblici. Ognuno parte da una ricerca reale in inglese & da
 un `maxItems` limitato. Include domande personalizzate già pronte & la vista
 overview del dataset. Modifica la ricerca o le domande prima di avviarlo.
 
-- [Triage customer support requests on X](https://apify.com/xquik/x-twitter-tweet-classifier/examples/triage-support-requests-on-x)
-- [Score sales leads from X posts](https://apify.com/xquik/x-twitter-tweet-classifier/examples/score-sales-leads-from-x-posts)
-- [Detect service outage reports on X](https://apify.com/xquik/x-twitter-tweet-classifier/examples/detect-outage-reports-on-x)
-- [Classify hiring signals on X](https://apify.com/xquik/x-twitter-tweet-classifier/examples/classify-hiring-signals-on-x)
-- [Tag product feature requests on X](https://apify.com/xquik/x-twitter-tweet-classifier/examples/tag-feature-requests-on-x)
-- [Classify app feedback like store reviews](https://apify.com/xquik/x-twitter-tweet-classifier/examples/classify-app-store-style-feedback)
-- [Detect scam and fraud warnings on X](https://apify.com/xquik/x-twitter-tweet-classifier/examples/detect-scam-warnings-on-x)
-- [Classify event attendance intent](https://apify.com/xquik/x-twitter-tweet-classifier/examples/classify-event-attendance-intent)
-- [Extract restaurant review signals](https://apify.com/xquik/x-twitter-tweet-classifier/examples/extract-restaurant-review-signals)
-- [Separate crypto promotion from analysis](https://apify.com/xquik/x-twitter-tweet-classifier/examples/classify-crypto-scam-vs-analysis)
-- [Classify persuasive political posts](https://apify.com/xquik/x-twitter-tweet-classifier/examples/classify-political-ad-style-posts)
-- [Detect subscription churn risk signals](https://apify.com/xquik/x-twitter-tweet-classifier/examples/detect-churn-risk-signals)
+- [Smista le richieste di assistenza clienti su X](https://apify.com/xquik/x-twitter-tweet-classifier/examples/triage-support-requests-on-x)
+- [Assegna un punteggio ai lead di vendita dai post di X](https://apify.com/xquik/x-twitter-tweet-classifier/examples/score-sales-leads-from-x-posts)
+- [Rileva le segnalazioni di disservizi su X](https://apify.com/xquik/x-twitter-tweet-classifier/examples/detect-outage-reports-on-x)
+- [Classifica i segnali di assunzione su X](https://apify.com/xquik/x-twitter-tweet-classifier/examples/classify-hiring-signals-on-x)
+- [Etichetta le richieste di funzionalità dei prodotti su X](https://apify.com/xquik/x-twitter-tweet-classifier/examples/tag-feature-requests-on-x)
+- [Classifica il feedback sulle app come le recensioni degli store](https://apify.com/xquik/x-twitter-tweet-classifier/examples/classify-app-store-style-feedback)
+- [Rileva gli avvisi di truffe e frodi su X](https://apify.com/xquik/x-twitter-tweet-classifier/examples/detect-scam-warnings-on-x)
+- [Classifica l'intenzione di partecipare agli eventi](https://apify.com/xquik/x-twitter-tweet-classifier/examples/classify-event-attendance-intent)
+- [Estrai i segnali dalle recensioni dei ristoranti](https://apify.com/xquik/x-twitter-tweet-classifier/examples/extract-restaurant-review-signals)
+- [Separa la promozione crypto dall'analisi](https://apify.com/xquik/x-twitter-tweet-classifier/examples/classify-crypto-scam-vs-analysis)
+- [Classifica i post politici persuasivi](https://apify.com/xquik/x-twitter-tweet-classifier/examples/classify-political-ad-style-posts)
+- [Rileva i segnali di rischio di abbandono degli abbonamenti](https://apify.com/xquik/x-twitter-tweet-classifier/examples/detect-churn-risk-signals)
 
 Gli altri task, nella pagina dell'Actor, coprono altri flussi di lavoro.
 
@@ -276,7 +277,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   filtri. Usalo quando studi chi ha citato dei post & cosa ha detto. Da $0.00015
   per post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) estrae
-  follower, following, membri & follower delle liste e membri delle community
+  follower, following, membri delle liste, abbonati & membri delle community
   come righe di profilo. Usalo quando ti servono elenchi di pubblico o di
   membri. Da $0.00015 per profilo.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) cerca
@@ -285,8 +286,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   $0.00015 per profilo.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   verifica dove hanno sede gli account con l'etichetta "Posizione account" di X,
-  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando ti
-  serve verificare dove hanno sede gli account. Da $0.00015 per account.
+  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando
+  vuoi verificare dove hanno sede gli account. Da $0.00015 per account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) ottiene le email, i
   numeri di telefono & i link che gli account pubblicano sui propri profili, da
   nomi utente, follower o ricerche di utenti. Usalo quando ti servono le email
@@ -309,7 +310,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   lavoro di X per parola chiave, luogo, modalità di lavoro, livello di
   esperienza & azienda, con stipendi & link di candidatura. Usalo quando
   raccogli le offerte di lavoro pubblicate su X. Da $0.00015 per offerta.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper) raccoglie gli
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) estrae gli
   articoli lunghi di X come Markdown & testo, con copertine, autori, date &
   metriche. Usalo quando ti serve il corpo degli articoli, non i post. Da
   $0.00015 per articolo.
@@ -319,7 +320,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   media.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
   monitora le menzioni del brand con rilevanza, sentiment & risposte sulla
-  customer experience generate con AI, poi confronta le esecuzioni. Usalo quando
+  customer experience generate con AI & confronta le esecuzioni. Usalo quando
   osservi un brand nel tempo. Da $0.0003 per post analizzato.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   etichetta atteggiamento, intensità & probabilità di sarcasmo di ogni post con
@@ -350,22 +351,21 @@ credenziali.
 
 ### Le versioni delle domande contano?
 
-Sì. Ogni risposta salva la `version` che assegni alla sua domanda. Quando
-affini le domande nel tempo, puoi capire quale formulazione ha prodotto un
-risultato.
+Sì. Ogni risposta salva la `version` che assegni alla sua domanda. Quando affini
+le domande nel tempo, puoi capire quale formulazione ha prodotto un risultato.
 
 ### Perché una riga è tornata con un'analisi fallita o saltata?
 
 `analysis.status` vale `failed` o `skipped`. L'Actor ha raccolto & consegnato il
 post, ma l'analisi AI non si è completata. `analysis.reason` indica la causa.
-`context_limit` significa che contesto & target non lasciano spazio al post.
-`service_unavailable` significa che il servizio di analisi era momentaneamente
-non disponibile. Queste righe non hanno addebiti sul risultato. Accorcia
-`analysis.context` o riavvia gli ID interessati.
+`context_limit` significa che il tuo contesto & i tuoi target non lasciano
+spazio al post. `service_unavailable` significa che il servizio di analisi era
+momentaneamente non disponibile. Queste righe non hanno addebiti sul risultato.
+Accorcia `analysis.context` o esegui di nuovo gli ID interessati.
 
-L'Actor analizza comunque un post più lungo di `maxContextBytes`. Taglia prima
-i post citati & quelli a cui risponde, poi il post stesso.
-`analysis.contextAvailability.postText` diventa quindi `truncated`. Alza
+L'Actor analizza comunque un post più lungo di `maxContextBytes`. Taglia prima i
+post citati & quelli a cui risponde, poi il post stesso.
+`analysis.contextAvailability.postText` vale allora `truncated`. Alza
 `maxContextBytes` fino a 64.000 per conservare più testo.
 
 ### L'analisi verifica i fatti?
@@ -384,7 +384,7 @@ mostrano l'incertezza in ogni lingua.
 ### Come limito il costo?
 
 Filtri, deduplicazione & `maxItems` agiscono prima dell'analisi. Paghi solo i
-post unici & conformi ai filtri. Usa operatori di ricerca precisi, limiti di
+post unici e conformi ai filtri. Usa operatori di ricerca precisi, limiti di
 data & soglie di engagement. Parti con un `maxItems` piccolo per verificare la
 qualità delle risposte prima di un'esecuzione grande.
 
@@ -406,6 +406,8 @@ collegano le esecuzioni anche a webhook, Make, Zapier, n8n & Google Sheets.
 
 ### Dove trovo assistenza?
 
-Apri una issue nella pagina dell'Actor o scrivi a support@xquik.com con l'ID
-dell'esecuzione. La diagnostica gratuita nel key-value store spiega le
-esecuzioni vuote, parziali o interrotte.
+Apri una issue nella
+[scheda Issues](https://apify.com/xquik/x-twitter-tweet-classifier/issues) con
+l'ID dell'esecuzione. La diagnostica gratuita nel key-value store spiega le
+esecuzioni che richiedono attenzione. Un'esecuzione che non riceve nessuna riga
+ne spiega il motivo nel suo stato.

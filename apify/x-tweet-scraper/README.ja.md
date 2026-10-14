@@ -1,127 +1,116 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <strong>日本語</strong> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) · [简体中文](README.zh-CN.md) · **日本語** · [한국어](README.ko.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="FramerがXquik MCPをコーディングエージェントに接続する様子"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">FramerがXquikのスクレイパーをClaude Code、Codex、Cursorなどと一緒に使う様子を6:07から視聴できます。</a>
-</td></tr></table>
+[![FramerがXquik MCPをコーディングエージェントに接続する様子](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[FramerがXquikのスクレイパーをClaude Code、Codex、Cursorなどと一緒に使う様子](https://youtu.be/4UOSpoOoC3Y?t=367)を6:07から視聴できます。
 
-Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX Tweet Scraperは、50以上のフィルターで、ポスト（旧ツイート）、返信、プロフィール、リスト、検索結果を収集します。公開ベンチマークで、12のポスト用Actorの中で最も安く、最も速いことが実証されています。[下のベンチマーク](#ベンチマーク)のとおり、1行あたりのフィールド数は他のActorの中央値の2倍です。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。
+Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX Tweet Scraperは、50以上のフィルターで、ポスト、返信、プロフィール、リスト&検索結果を収集します。12のポスト用Actorの中で最安&最速であることが、公開ベンチマークで実証されています。[下のベンチマーク](#ベンチマーク)のとおり、1行あたりのフィールド数はActorの中央値の2倍です。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。
 
-Twitter APIの代わりに、Twitterのツイートを**すべてのApifyプランで配信結果1件あたり$0.00015から**スクレイピングできます。Apifyのプラットフォーム利用料は別途かかります。Xへのログインは不要で、開始料金もクエリ料金もかかりません。[Xquik](https://xquik.com)が開発しています。
+Twitter APIの代わりに、Twitterのツイートを**すべてのApifyプランで配信結果1件あたり$0.00015から**スクレイピングできます。プラットフォームの利用料は、Apifyが別途請求します。Xへのログインは不要&開始料金やクエリ料金もかかりません。Xquikが開発しています。
 
 > Xquikは独立したサードパーティサービスです。X Corpとは提携していません。
 > 「Twitter」および「X」はX Corpの商標です。
 
 ## X Tweet Scraperでできること
 
-XquikのX Tweet Scraperは、ポスト、エンゲージメント指標、著者の公開プロフィール、メディアを返します。URL、ユーザー名、リストID、ポストID、検索クエリを受け付け、50以上のフィルターを使えます。
+XquikのX Tweet Scraperは、ポスト、エンゲージメント指標、著者の公開プロフィール&メディアを返します。URL、ユーザー名、リストID、ポストID&検索クエリを受け付け、50以上のフィルターを使えます。
 
 ### 主な機能
 
-- フィルターと重複排除は課金前に行います。
-- 1つの入力で、ID指定の取得、タイムライン、リスト、検索、エンゲージメントの各モードに対応します。
-- ポストIDの入力に決まった件数の上限はありません。Apifyの支出とタイムアウトの設定は適用されます。
-- 実行ログには、ページごとの所要時間が`fetchDurationMs`、`processingDurationMs`、`pushDurationMs`、`statusDurationMs`、`fullPageDurationMs`に表示されます。
-- Apifyが実行を再起動しても、配信済みの行と進捗は残ります。
+- フィルター&重複排除は課金前に行います。
+- 1つの入力で、ID指定の取得、タイムライン、リスト、検索&エンゲージメントの各モードに対応します。
+- ポストIDの入力に決まった件数の上限はありません。Apifyの支出&タイムアウトの設定は引き続き適用されます。
+- 実行ログには、ページごとの所要時間が `fetchDurationMs`、`processingDurationMs`、`pushDurationMs`、`statusDurationMs` & `fullPageDurationMs` に表示されます。
+- Apifyが実行を再起動しても、配信済みの行&進捗は残ります。
 
 ### ユースケース
 
-- ポストごとにより多くのフィールドを、調査、データ補完、分析、AI学習に活用できます。当社のリッチな行は、2026-09-29時点でフィールド数の中央値が63でした。これは他の11個のActorの中央値の2倍です。
-- ポストに表れるブランドへの感情を追跡できます。
-- 競合のポストや業界の用語を監視できます。
+- ポストごとにより多くのフィールドを、調査、データ補完、分析&AI学習に活用できます。当社のリッチな行は、2026-09-29時点でフィールド数の中央値が63でした。これは他の11個のActorの中央値の2倍です。
+- ポスト全体からブランドへの感情を追跡できます。
+- 競合のポスト&業界の用語を監視できます。
 - 公開の会話から見込み客を見つけられます。
 - 研究用に公開データセットを集められます。
 - 公開エンゲージメントの高いポストを見つけられます。
 
 ### X Tweet Scraperが抽出できるデータ
 
-| フィールド             | 説明                                                                 |
-| ---------------------- | -------------------------------------------------------------------- |
-| `id`                   | ポストID                                                             |
-| `text`                 | ポストの全文（最大25,000文字のNote Tweetを含む）                     |
-| `createdAt`            | Xの形式のタイムスタンプ文字列                                        |
-| `likeCount`            | いいね数                                                             |
-| `retweetCount`         | リポスト数                                                           |
-| `replyCount`           | 返信数                                                               |
-| `quoteCount`           | 引用ポスト数                                                         |
-| `viewCount`            | 表示回数                                                             |
-| `bookmarkCount`        | ブックマーク数                                                       |
-| `lang`                 | ポストの言語                                                         |
-| `url`                  | ポストへの直接リンク                                                 |
-| `tweetUrl`             | フラット出力でのポストURLの別名                                      |
-| `twitterUrl`           | フラット出力での`twitter.com`形式のURL                               |
-| `author`               | 著者のフィールド（ユーザー名、自己紹介、ウェブサイト、各種カウント） |
-| `authorUsername`       | フラット出力での著者のユーザー名                                     |
-| `authorFollowers`      | フラット出力での著者のフォロワー数                                   |
-| `authorUrl`            | フラット出力での著者のウェブサイト（取得できる場合）                 |
-| `authorDescription`    | フラット出力での著者の自己紹介                                       |
-| `authorCoverPicture`   | フラット出力での著者のヘッダー画像URL                                |
-| `authorPinnedTweetIds` | フラット出力での著者の固定ポストID                                   |
-| `media`                | 添付された画像、動画、GIF                                            |
-| `mediaUrls`            | フラット出力でのメディアURL                                          |
-| `imageUrls`            | フラット出力での画像URL                                              |
-| `videoUrls`            | フラット出力での動画URL                                              |
-| `entities`             | ハッシュタグ、URL、メンション、動画のタイムスタンプ                  |
-| `displayTextRange`     | Xの表示テキストの範囲（取得できる場合）                              |
-| `contentDisclosure`    | 開示のメタデータ（取得できる場合）                                   |
-| `conversationControl`  | 返信の制限設定と、公開の会話の所有者                                 |
-| `reactionContext`      | リアクションが参照する公開のポストとユーザー                         |
-| `limitedActions`       | 公開の操作制限と案内                                                 |
-| `isLimitedReply`       | 返信が制限されているかどうか                                         |
-| `isNoteTweet`          | Note Tweet（長文ポスト）かどうか                                     |
-| `isQuoteStatus`        | このポストが別のポストを引用しているかどうか                         |
-| `isRetweet`            | この行がリポストかどうか（元のポスト付き）                           |
-| `isPinned`             | 著者がこのポストを固定しているかどうか（フラット行）                 |
-| `isReply`              | このポストが返信かどうか                                             |
-| `quoted_tweet`         | 引用元ポストのオブジェクト（引用ポストの場合）                       |
-| `conversationId`       | スレッドまたは会話のID                                               |
-| `resultType`           | リッチな行、エンゲージメントの行、診断情報の行の種類                 |
-| `sourceTweetId`        | 記事モードとエンゲージメントモードでの元ポストID                     |
-| `article`              | `mode: "article"`での構造化された記事データ                          |
-| `translation`          | `mode: "translation"`でのXによる翻訳                                 |
-| `embed`                | `mode: "embed"`での埋め込みHTMLとリンク                              |
+| フィールド | 説明 |
+| --- | --- |
+| `id` | ポストID |
+| `text` | 最大25,000文字のNote Tweetを含む全文 |
+| `createdAt` | Xの形式のタイムスタンプ文字列 |
+| `likeCount` | いいね数 |
+| `retweetCount` | リポスト数 |
+| `replyCount` | 返信数 |
+| `quoteCount` | 引用ポスト数 |
+| `viewCount` | 表示回数 |
+| `bookmarkCount` | ブックマーク数 |
+| `lang` | ポストの言語 |
+| `url` | ポストへの直接リンク |
+| `tweetUrl` | フラット出力でのポストURLの別名 |
+| `twitterUrl` | フラット出力での `twitter.com` のURL |
+| `author` | 著者のユーザー名、自己紹介、ウェブサイト&各種カウント |
+| `authorUsername` | フラット出力での著者のユーザー名 |
+| `authorFollowers` | フラット出力での著者のフォロワー数 |
+| `authorUrl` | フラット出力での著者のウェブサイト。取得できる場合に入る |
+| `authorDescription` | フラット出力での著者の自己紹介文 |
+| `authorCoverPicture` | フラット出力での著者のヘッダー画像URL |
+| `authorPinnedTweetIds` | フラット出力での著者の固定ポストID |
+| `media` | 添付された画像、動画、GIF |
+| `mediaUrls` | フラット出力でのメディアURL |
+| `imageUrls` | フラット出力での画像URL |
+| `videoUrls` | フラット出力での動画URL |
+| `entities` | ハッシュタグ、URL、メンション、動画のタイムスタンプ |
+| `displayTextRange` | Xの表示テキストの範囲。取得できる場合に入る |
+| `contentDisclosure` | 開示のメタデータ。取得できる場合に入る |
+| `conversationControl` | 返信の制限設定と公開の会話の所有者 |
+| `reactionContext` | リアクションが参照する公開のポストとユーザー |
+| `subscriberBadge` | 返信に付いたサブスクライバーバッジのクリエイター |
+| `limitedActions` | 公開の操作制限と案内 |
+| `isLimitedReply` | 返信が制限されているかどうか |
+| `isNoteTweet` | Note Tweet（長文ポスト）かどうか |
+| `isQuoteStatus` | このポストが別のポストを引用しているかどうか |
+| `isRetweet` | この行がリポストかどうか。元のポストが付く |
+| `isPinned` | フラット行で、著者がこのポストを固定しているかどうか |
+| `isReply` | このポストが返信かどうか |
+| `quoted_tweet` | 引用元ポストのオブジェクト（引用ポストの場合） |
+| `conversationId` | スレッド/会話のID |
+| `resultType` | リッチな行、エンゲージメントの行&診断情報の行の種類 |
+| `sourceTweetId` | 記事モードとエンゲージメントモードでの元ポストID |
+| `article` | `mode: "article"` での構造化された記事データ |
+| `translation` | `mode: "translation"` でのXによる翻訳 |
+| `embed` | `mode: "embed"` での埋め込みHTML&リンク |
 
-任意のポストメタデータには、`authorUnavailable`、`card`、`communityId`、`communityNote`、`edit`、`exclusiveContent`、`noteTweet`、`postCta`があります。`isTranslatable`、`place`、`possiblySensitive`、`viewState`は、その他の公開の文脈を残します。`previousCounts`は編集前のエンゲージメントを残します。`tombstone`は表示に関する通知を残します。`unmentionedUserIds`は、会話から抜けたユーザーを挙げます。正確なフィールドはOpenAPIを参照してください。
+任意のポストメタデータには、`authorUnavailable`、`card`、`cashtagAttachments`、`communityId`、`communityName`、`communityNote`、`edit`、`exclusiveContent`、`noteTweet` & `postCta` があります。`isTranslatable`、`place`、`possiblySensitive` & `viewState` は、その他の公開の文脈を残します。`previousCounts` は編集前のエンゲージメントを残します。`tombstone` は表示に関する通知を残します。`unmentionedUserIds` は、会話から抜けたユーザーを挙げます。正確なフィールドはOpenAPIを参照してください。
 
-1行あたりのデータを最も多くするには、`outputVariant: "rich"`を設定します。リッチな行は、末尾に`hasCommunityNotes`、`quotedTweetPermalink`、`unavailableAuthorId`、メディアの`sourceUser`を加えます。従来の行は変わりません。
+1行あたりのデータを最も多くするには、`outputVariant: "rich"` を設定します。リッチな行は、末尾に `hasCommunityNotes`、`quotedTweetPermalink`、`unavailableAuthorId` & メディアの `sourceUser` を加えます。従来の行は変わりません。
 
-入れ子の`author`オブジェクトには、公開プロフィールのフィールドが入ります。本人を識別する情報、各種カウント、認証、表示可否、プロフェッショナル情報、プロフィールの自己紹介を含みます。
+入れ子の `author` オブジェクトには、公開プロフィールのフィールドが入ります。本人を識別する情報、各種カウント、認証、表示可否、プロフェッショナル情報&プロフィールの自己紹介を含みます。
 
-リポストの行では`isRetweet`が`true`になります。その`text`には元のポストの全文が入ります。`retweeted_tweet`には、元のポストとその著者、各種カウントが入ります。
+リポストの行では `isRetweet` が `true` になります。その `text` には元のポストの全文が入ります。`retweeted_tweet` には、元のポストが著者&各種カウントとともに入ります。
 
-ポストの行には、`type`、`source`、`inReplyToId`、`inReplyToUserId`、`inReplyToUsername`、`retweeted_tweet`も残ります。引用されたポストとリポストされたポストは、どの入れ子の階層でも同じフィールドを持ちます。
+ポストの行には、`type`、`source`、`inReplyToId`、`inReplyToUserId`、`inReplyToUsername` & `retweeted_tweet` も残ります。引用されたポスト&リポストされたポストは、どの入れ子の階層でも同じフィールドを持ちます。
 
-メディアには、表示可否、サイズ、タグ、動画のバリアントが入ります。`watchNowUrl`と`visitSiteUrl`のアクションも入ります。
+メディアには、表示可否、サイズ、タグ&動画のバリアントが入ります。`watchNowUrl` & `visitSiteUrl` のアクションも入ります。
 
-行には、閲覧者だけに見える状態は入りません。このActorは、フォロー、ブロック、ミュート、ブックマーク、いいね、リポスト、編集権限などの閲覧者のフラグを削除します。raw出力からも削除します。
+行には、閲覧者だけに見える状態は入りません。このActorは、フォロー、ブロック、ミュート、ブックマーク、いいね、リポスト、編集権限&同様の閲覧者のフラグを削除します。raw出力からも削除します。
 
 ## X Tweet Scraperでポストデータをスクレイピングする方法
 
-以下の例はどれも完全な入力です。自分のデータに合うものを選んでください。
+Apifyを初めて使いますか？まず[無料アカウントを作成してください](https://console.apify.com/sign-up?fpr=xquik)。無料プランはクレジットカード不要&毎月$5分を使えます。1行あたり$0.00015なので、プラットフォーム利用料を別にすると、$5で最大33,000行分をまかなえます。その後、このページに戻ってTry for freeを押してください。
 
 Apify Consoleで次の手順に従ってください。
 
 1. [タスクの例](#タスクの例)かInputタブを開きます。
-2. URL、ユーザー名、ポストID、検索語を追加します。
-3. `maxItems`と必要なフィルターを設定します。
-4. Startをクリックし、実行が終わるのを待ちます。
-5. データセットをJSON、CSV、Excel、HTMLでエクスポートします。
+2. URL、ユーザー名、ポストID、検索語のいずれかを追加します。
+3. `maxItems` & 必要なフィルターを設定します。
+4. Startをクリック&実行が終わるのを待ちます。
+5. データセットをJSON、CSV、Excel、HTMLのいずれかでエクスポートします。
 
-以下のレシピで、取得元ごとの入力を示します。
+以下の各レシピは、1つの取得元に対する完全な入力です。自分のデータに合うものを選んでください。
 
 ### URLを貼り付ける
 
-ポスト、プロフィール、検索、リストのURLを自由に組み合わせて貼り付けられます。
+ポスト、プロフィール、検索、リストのURLを自由に組み合わせて貼り付けてください。
 
 ```json
 {
@@ -135,21 +124,21 @@ Apify Consoleで次の手順に従ってください。
 }
 ```
 
-ポストのURLは、そのポストを重複なく入力順に返します。プロフィールのURLは、そのアカウントのポストを返します。検索のURLは、そのクエリを実行します。リストのURLは、そのリストのポストを返します。`maxItems`は、貼り付けたすべてのURLの結果の合計に上限をかけます。
+ポストのURLは、そのポストを重複なし&入力順で返します。プロフィールのURLは、そのアカウントのポストを返します。検索のURLは、そのクエリを実行します。リストのURLは、そのリストのポストを返します。`maxItems` は、貼り付けたすべてのURLの結果の合計に上限をかけます。
 
 ### 多数のユーザー名をスクレイピングする
 
-ユーザー名は、多数の`from:username`検索をまとめて書く方法として使えます。
+ユーザー名は、多数の `from:username` 検索の省略形として使えます。
 
 ```json
 { "twitterHandles": ["elonmusk", "nasa", "openai"], "maxItems": 100 }
 ```
 
-各ユーザー名は、そのアカウントのポストを返します。このActorは、出力と課金の前に重複した行を除きます。ユーザー名には`@`を付けても付けなくてもかまいません。ユーザー名とプロフィールのURLは、Xのポストタブと同じくリポストを残します。日付やフィルターを指定しても残ります。リポストを除くには`tweetTypes.excludeRetweets`を設定してください。
+各ユーザー名は、そのアカウントのポストを返します。このActorは、出力&課金の前に重複した行を除きます。ユーザー名には `@` を付けても付けなくてもかまいません。ユーザー名&プロフィールのURLは、Xのポストタブと同じくリポストを残します。日付やフィルターを指定しても残ります。リポストを除くには `tweetTypes.excludeRetweets` を設定してください。
 
 ### ポストを検索する
 
-Search termsフィールドに1つ以上のクエリを入れます。
+Search termsフィールドに1つ以上のクエリを入れてください。
 
 ```json
 {
@@ -159,11 +148,11 @@ Search termsフィールドに1つ以上のクエリを入れます。
 }
 ```
 
-`mode`が`tweet`か`tweets`で、ポストIDがない場合、クエリは検索として実行されます。そのため、有効な`searchTerms`が空のID取得の結果を返すことはありません。
+`mode` が `tweet` か `tweets` で、ポストIDがない場合、クエリは検索として実行されます。そのため、有効な `searchTerms` が空のID取得の結果を返すことはありません。
 
-`from:elonmusk since:2026-01-01 until:2026-01-02`のように、期間を指定してアカウントの過去のポストを取得することもできます。各検索語には、それぞれの`searchTerm`の帰属情報が残ります。`maxItems`は、すべての検索語の結果の合計に上限をかけます。このActorは、返されたすべてのポストを`since:`、`until:`、Unix時間の範囲と照合します。フィルター付きの検索は、一致する結果が見つかるか、Xに結果がなくなるまで読み取りを続けます。
+`from:elonmusk since:2026-01-01 until:2026-01-02` のように、期間を指定してアカウントの過去のポストを取得することもできます。各検索語には、それぞれの `searchTerm` の帰属情報が残ります。`maxItems` は、すべての検索語の結果の合計に上限をかけます。このActorは、返されたすべてのポストを `since:`、`until:` & Unix時間の範囲と照合します。フィルター付きの検索は、一致する結果が見つかるか、Xに結果がなくなるまで読み取りを続けます。
 
-`from:`の検索語はXの検索と同じ結果を返すので、リポストは含まれません。リポストを残すには`include:nativeretweets`を、リポストだけを取得するには`filter:nativeretweets`を追加してください。
+`from:` の検索語はXの検索と同じ結果を返すので、リポストは含まれません。リポストを残すには `include:nativeretweets` を、リポストだけを取得するには `filter:nativeretweets` を追加してください。
 
 ### IDでポストを取得する
 
@@ -171,27 +160,29 @@ Search termsフィールドに1つ以上のクエリを入れます。
 { "tweetIds": ["20", "2082577277246972300"], "maxItems": 100 }
 ```
 
-結果は入力順を保ち、重複を除き、指定したポストだけを含みます。このID取得は、`tweetId`、`tweetIDs`、`tweets`、`postIds`、`lookupPostIds`、`tweetUrls`、`postUrls`も受け付けます。
+結果は入力順を保ち、重複を除き、指定したポストだけを含みます。このID取得は、`tweetId`、`tweetIDs`、`tweets`、`postIds`、`lookupPostIds`、`tweetUrls` & `postUrls` も受け付けます。
 
-IDはすべて1回の実行にまとめてください。どの実行も、Apifyに同じ開始コストを支払います。1回の実行にIDが1件だと、Apifyの利用料でポスト1件あたり約$0.00008が加わります。1回の実行にIDが188件だと、約$0.000005が加わります。IDが5件未満の実行は、このヒントを示して終わります。
+各エントリは、ポストIDかポストのURLです。実行は、それ以外のエントリを課金せずに飛ばし、残りを読み取ります。スキップしたエントリは、ステータスがその数を示し、ログが一覧にします。
 
-### エンゲージメント、スレッド、記事のモード
+IDはすべて1回の実行にまとめてください。どの実行も、Apifyに同じ開始コストを支払います。1回の実行にIDが1件だと、Apifyの利用料でポスト1件あたり約$0.00008が加わります。1回の実行にIDが188件なら、加わるのは約$0.000005です。IDが5件未満の実行は、このヒントを示して終わります。
 
-入力にほかのフィールドがあっても1つのモードに固定するには、`mode`を設定します。
+### エンゲージメント、スレッド&記事のモード
+
+入力にほかのどんなフィールドがあっても、`mode` を設定すれば、実行が読み取る内容を選べます。
 
 ```json
 { "mode": "replies", "replyTweetIds": ["2082577277246972300"], "maxItems": 100 }
 ```
 
-ポストと検索のモードは`tweet`、`tweets`、`search`です。プロフィールのモードは`profileTweets`、`profileReplies`、`profileMedia`、`profileLikes`、`profileMentions`です。`listTweets`はリストのポストを読み取り、`article`はポスト内のXの記事を読み取ります。1件のポストに対するモードは`replies`、`quotes`、`thread`、`retweeters`、`favoriters`、`translation`、`embed`です。
+ポスト&検索のモードは `tweet`、`tweets` & `search` です。プロフィールのモードは `profileTweets`、`profileReplies`、`profileMedia`、`profileLikes` & `profileMentions` です。`listTweets` はリストのポストを、`article` はポスト内のXの記事を読み取ります。1件のポストに対するモードは `replies`、`quotes`、`thread`、`retweeters`、`favoriters`、`translation` & `embed` です。
 
-`profileMentions`は、各ユーザー名をメンションしたポストを新しい順に返します。
+`profileMentions` は、各ユーザー名をメンションしたポストを新しい順に返します。
 
 ```json
 { "mode": "profileMentions", "twitterHandles": ["nasa"], "maxItems": 100 }
 ```
 
-`profileTweets`は、Xのプロフィールの「ポスト」タブと同じ内容を返します。アカウントのポスト、リポスト、自分のポストへの返信です。行は日付順に並びます。このActorは、他のアカウントへの返信を課金前に除きます。他の著者による会話の文脈も除きます。
+`profileTweets` は、Xのプロフィールのポストタブに従います。アカウントのポスト、リポスト&自分のポストへの返信を返します。行は日付順に並びます。このActorは、他のアカウントへの返信を課金前に除きます。他の著者による会話の文脈も除きます。
 
 オリジナルのポストだけが必要なら、不要な種類を除外してください。
 
@@ -204,25 +195,25 @@ IDはすべて1回の実行にまとめてください。どの実行も、Apify
 }
 ```
 
-`tweetTypes.excludeReplies`、`excludeRetweets`、`excludeQuotes`は、すべての取得元で使えます。検索では、これらを`-filter:replies`、`-filter:nativeretweets`、`-filter:quote`としてXに送ります。プロフィールやリストでは、このActorがその行を自分で除きます。除外した行はデータセットに届かないので、料金はかかりません。`maxItems`の件数にも含まれません。
+`tweetTypes.excludeReplies`、`excludeRetweets` & `excludeQuotes` は、すべての取得元で使えます。検索では、これらを `-filter:replies`、`-filter:nativeretweets` & `-filter:quote` としてXに送ります。プロフィールやリストでは、このActorがその行を自分で除きます。除外した行はデータセットに届かないので、料金はかかりません。`maxItems` の件数にも含まれません。
 
-`profileReplies`は、Xの「返信」タブと同じく、アカウント自身のポストと返信を返します。このActorは、他の著者による会話の文脈を除きます。返信だけが必要なら、`filter:replies`か`to:`の検索を使ってください。
+`profileReplies` は、Xの返信タブに従います。アカウント自身のポスト&返信を返します。このActorは、他の著者による会話の文脈を除きます。返信だけが必要なら、`filter:replies` か `to:` の検索を使ってください。
 
-検索と、ページ送りのあるポストのモードは、`time.since`、`time.until`、Unixタイムスタンプ、`lang`に対応します。対象は、プロフィールのポストタブ、返信タブ、メディアタブ、いいねタブ、リスト、返信、引用、スレッドです。対応するフラットな日付演算子も使えます。このActorは課金前に各行を確認します。日付の下限は範囲に含みます。上限は含みません。日付フィルターは、使える日付のない行を除きます。言語フィルターは、言語がないか一致しない行を除きます。フィルターで除いた行が、結果の上限を使うことはありません。
+検索&ページ送りのあるポストのモードは、`time.since`、`time.until`、Unixタイムスタンプ & `lang` に対応します。対象は、プロフィールのポストタブ、返信タブ、メディアタブ、いいねタブ、リスト、返信、引用&スレッドです。対応するフラットな日付演算子も使えます。このActorは課金前に各行を確認します。日付の下限は範囲に含みます。上限は含みません。日付フィルターは、使える日付のない行を除きます。言語フィルターは、言語がないか一致しない行を除きます。フィルターで除いた行が、結果の上限を使うことはありません。
 
-`since`と`until`に同じ日付を指定すると、範囲は空になります。丸1日分を取得するには、`until`を翌日にしてください。期間を指定したリストの実行は、古い日付にすばやく到達します。下限を過ぎると終了します。リストのかなり古い期間では、一部の返信が欠けることがあります。ポストのフィルターは、ユーザーの一覧や、ポストと記事の直接取得には適用されません。
+`since` & `until` に同じ日付を指定すると、範囲は空になります。丸1日分を取得するには、`until` を翌日にしてください。期間を指定したリストの実行は、古い日付にすばやく到達します。下限を過ぎると終了します。リストのかなり古い期間では、一部の返信が欠けることがあります。ポストのフィルターは、ユーザーの一覧や、ポストと記事の直接取得には適用されません。
 
-`time.withinTime`と`within_time`も同じモードで使えます。`7d`を指定すると、実行が読み取りを始める時点から直近7日間を残します。2006年より前までさかのぼる期間では、すべてのポストを残します。
+`time.withinTime` & `within_time` も同じモードで使えます。`7d` を指定すると、実行が読み取りを始める時点から直近7日間を残します。2006年より前までさかのぼる期間では、すべてのポストを残します。
 
-`mode: "replies"`はより厳密です。どのポストの行も、`inReplyToId`が指定したポストIDと一致します。会話の入れ子の返信は、直接の返信として数えません。Xが表示する返信が報告された数より少ない場合、このActorは見つかった行を残します。上限に達していないときは、`diagnostics`に`replies-incomplete`レコードを1件加えます。実行は、上限に達するか、Xに返信がなくなるまで部分的な状態のままです。`replyCoverage`は、返信の件数とカバレッジの詳細を報告します。1つの返信対象で25,000件を超える場合も、`maxItems`には欲しい合計数を設定してください。
+`mode: "replies"` はより厳密です。どのポストの行も、`inReplyToId` が指定したポストIDと一致します。会話の入れ子の返信は、直接の返信として数えません。Xが表示する返信が報告された数より少ない場合、このActorは見つかった行を残します。上限に達していないときは、`diagnostics` に `replies-incomplete` レコードを1件加えます。実行は、上限に達するか、Xに返信がなくなるまで部分的な状態のままです。`replyCoverage` は、返信の件数&カバレッジの詳細を報告します。1つの返信対象で25,000件を超える場合も、`maxItems` には欲しい合計数を設定してください。
 
-記事の行には、`resultType: "article"`、`sourceTweetId`、`article`、任意の`author`が入ります。エンゲージメントのユーザー行には、`resultType: "user"`、`sourceTweetId`、`engagementMode`が入ります。
+記事の行には、`resultType: "article"`、`sourceTweetId`、`article` & 任意の `author` が入ります。エンゲージメントのユーザー行には、`resultType: "user"`、`sourceTweetId` & `engagementMode` が入ります。
 
-リポストしたユーザーの取得は、通常の公開エンゲージメントモードです。いいねしたユーザーの取得はベストエフォートです。Xは、条件を満たすポストや、所有者に見えるポストでしか、いいねしたユーザーを表示しないことがあります。プロフィールのいいねもベストエフォートです。多くの公開プロフィールには、読み取れるいいねタブがないためです。Xがユーザーやいいねしたポストを表示しない場合、このActorは無料の`diagnostics`レコードを書き込みます。ポストの行にはブックマーク数が入ることがあります。どのアカウントがポストをブックマークしたかは、Xが表示しません。
+リポストしたユーザーの取得は、通常の公開エンゲージメントモードとして動きます。いいねしたユーザーの取得はベストエフォートです。Xは、条件を満たすポストや所有者に見えるポストでしか、いいねしたユーザーを表示しないことがあります。プロフィールのいいねもベストエフォートです。多くの公開プロフィールには、読み取れるいいねタブがないためです。Xがユーザーやいいねしたポストを表示しない場合は、実行のステータスがそのことを示します。ポストの行にはブックマーク数が入ることがあります。どのアカウントがポストをブックマークしたかは、Xが表示しません。
 
-### ポストを翻訳し、埋め込みHTMLを取得する
+### ポストの翻訳&埋め込みHTMLの取得
 
-`mode: "translation"`は、各ポストのXによる翻訳を返します。`translateTo`に`en`、`es`、`pt-br`、`zh-tw`などの言語コードを指定します。デフォルトは`en`です。
+`mode: "translation"` は、各ポストのXによる翻訳を返します。`translateTo` には `en`、`es`、`pt-br`、`zh-tw` などの言語コードを指定します。デフォルトは `en` です。
 
 ```json
 {
@@ -232,29 +223,45 @@ IDはすべて1回の実行にまとめてください。どの実行も、Apify
 }
 ```
 
-各行には`resultType: "translation"`、`sourceTweetId`、`translation`が入ります。このオブジェクトには`language`、`sourceLanguage`、`text`、`entities`が入ります。
+各行には `resultType: "translation"`、`sourceTweetId` & `translation` が入ります。このオブジェクトには `language`、`sourceLanguage`、`text` & `entities` が入ります。
 
-`mode: "embed"`は、各ポストをウェブサイトに埋め込むHTMLを返します。
+`mode: "embed"` は、各ポストをウェブサイトに埋め込むHTMLを返します。
 
 ```json
 { "mode": "embed", "tweetIds": ["2082577277246972300"], "embedTheme": "dark" }
 ```
 
-各行には`resultType: "embed"`、`sourceTweetId`、`embed`が入ります。このオブジェクトには`url`、`authorName`、`authorUrl`、`html`、`width`が入ります。`embedHideMedia`、`embedHideThread`、`embedOmitScript`を使うと、メディア、返信先のポスト、ウィジェットのスクリプトを省けます。
+各行には `resultType: "embed"`、`sourceTweetId` & `embed` が入ります。このオブジェクトには `url`、`authorName`、`authorUrl`、`html` & `width` が入ります。`embedHideMedia`、`embedHideThread` & `embedOmitScript` を使うと、それぞれメディア、返信先のポスト、ウィジェットのスクリプトを省けます。
 
-どちらのモードも、ポストIDと`startUrls`のポストURLを読み取ります。ポスト1件につき1行で、料金は通常の1行分です。Xにないポストは行にならず、料金もかかりません。
+どちらのモードも、ポストID & `startUrls` 内のポストURLを読み取ります。ポスト1件につき1行で、料金は通常の1行分です。Xにないポストでは、行も課金も発生しません。
+
+### Xのトップポストを取得する
+
+`mode: "topTweets"` は、Xが1つの指標で最上位に順位付けしたポストを、XのInspirationページと同じように返します。
+
+```json
+{
+  "mode": "topTweets",
+  "topMetric": "views",
+  "topWindow": "week",
+  "topCountry": "US",
+  "maxItems": 100
+}
+```
+
+`topMetric` は `likes`、`replies`、`quotes`、`bookmarks`、`shares`、`views` のいずれかです。デフォルトは `likes` です。`topWindow` は `day`、`week`、`month` のいずれかで、デフォルトは `day` です。Xは、選択ごとに最大100件のポストを挙げます。X全体を対象にするには `topCountry` を空のままにし、1つの言語に絞るには `lang` を設定します。両方を設定すると、国はXが選び、言語はこのActorが絞り込みます。各行には `engagementMode: "topTweets"` が入り、他のポストと同じく1件の結果として課金されます。
 
 ### フラットなCSVの行をエクスポートする
 
-デフォルトの入れ子のJSONフィールドのままにするか、スプレッドシート向けの列を加えられます。
+デフォルトの入れ子のJSONフィールドのままにするか、スプレッドシート向けの列を加えてください。
 
 ```json
 { "searchTerms": ["from:nasa moon"], "maxItems": 100, "outputPreset": "flat" }
 ```
 
-フラット出力は、`author`と`media`をそのまま残します。そして、`authorUsername`、`authorName`、`authorFollowers`、`tweetUrl`、`twitterUrl`、`mediaUrls`、`imageUrls`、`videoUrls`などのトップレベルのフィールドを加えます。
+フラット出力は、`author` & `media` をそのまま残します。そして、`authorUsername`、`authorName`、`authorFollowers`、`tweetUrl`、`twitterUrl`、`mediaUrls`、`imageUrls` & `videoUrls` などのトップレベルのフィールドを加えます。
 
-フラットなポストの行には、すべて`media`があります。メディアのないポストでは、空のリストです。そのため、スプレッドシートでも型付きのパイプラインでも、どの行も同じキーを持ちます。
+フラットなポストの行には、すべて `media` があります。メディアのないポストでは、空のリストです。そのため、スプレッドシートでも型付きのパイプラインでも、どの行も同じキーを持ちます。
 
 ### フィールド名を選ぶ
 
@@ -269,13 +276,13 @@ IDはすべて1回の実行にまとめてください。どの実行も、Apify
 }
 ```
 
-トップレベルと入れ子の結果フィールドには、`camelCase`か`snake_case`を使えます。フラットなスネークケースの出力には、`author_username`や`media_urls`などのフィールドがあります。`raw`の下にある安全な元データのスナップショットは、元のキーを保ちます。データが失われないよう、衝突する元の名前も変えません。
+トップレベル&入れ子の結果フィールドには、`camelCase` か `snake_case` を使えます。フラットなスネークケースの出力には、`author_username` & `media_urls` などのフィールドがあります。`raw` の下にある安全な元データのスナップショットは、元のキーを保ちます。データが失われないよう、衝突する元の名前も変えません。
 
-従来の診断情報は`resultType`、`actorVersion`、`replyCoverage`を使います。richとrawの出力は、どの入れ子の階層にも`fieldStyle`を適用します。たとえばスネークケースでは、`result_type`、`actor_version`、`reply_coverage`を使います。Overviewのデータセットビューは、どちらのスタイルでも使えます。実行の`fieldStyle`に合うConsoleのビューを選んでください。`camelCase fields`は`camelCase`向けです。`snake_case fields`は`snake_case`向けです。ビューが選ぶのは列だけです。保存済みやエクスポート済みのデータの名前を変えることはありません。
+従来の診断情報は `resultType`、`actorVersion` & `replyCoverage` を使います。rich & rawの出力は、どの入れ子の階層にも `fieldStyle` を適用します。たとえばスネークケースでは、`result_type`、`actor_version` & `reply_coverage` を使います。Overviewのデータセットビューは、どちらのスタイルでも使えます。実行の `fieldStyle` に合うConsoleのビューを選んでください。`camelCase fields` は `camelCase` 向けです。`snake_case fields` は `snake_case` 向けです。ビューが選ぶのは列だけです。保存済みやエクスポート済みのデータの名前を変えることはありません。
 
 ### 高度なフィルターを組み合わせる
 
-ユーザー、日付、位置情報、メディア、エンゲージメントのフィルターを組み合わせられます。
+ユーザー、日付、位置情報、メディア&エンゲージメントのフィルターを組み合わせられます。
 
 ```json
 {
@@ -290,246 +297,254 @@ IDはすべて1回の実行にまとめてください。どの実行も、Apify
 }
 ```
 
-`queryType: "Latest + Top"`を設定すると、Xの2つの検索モードを1回の実行で使えます。このActorは課金前に重複を除き、どちらかのモードの結果で上限まで埋めます。`Top`は関連性の順に並べ、一致するすべてのポストは返しません。`includeSearchTerms: true`を設定すると、一致した各クエリが`searchTerm`フィールドとして付きます。
+`queryType: "Latest + Top"` を設定すると、Xの2つの検索モードを1回の実行で使えます。このActorは課金前に重複を除き、どちらかのモードの結果で上限まで埋めます。`Top` は関連性の順に並べ、一致するすべてのポストは返しません。`includeSearchTerms: true` を設定すると、一致した各クエリが `searchTerm` フィールドとして付きます。
 
-`lang`を設定すると、このActorは返された各ポストの言語を確認します。一致しないポストは飛ばし、一致するポストを探して読み取りを続けます。
+`lang` を設定すると、このActorは返された各ポストの言語を確認します。一致しないポストは飛ばし、一致するポストを探して読み取りを続けます。
 
 ## タスクの例
 
-50個の公開タスクから選べます。どのタスクにも、上限を決めた入力と、対応するデータセットビューがあります。どのタスクも、実際の検索や対象で始まります。実行前に編集してください。
+50個の公開タスクから選べます。どのタスクにも、上限を決めた入力&対応するデータセットビューがあります。どのタスクも、実際の検索や対象で始まります。実行前に編集してください。
 
 - [AIエージェント向けに最新のXポストを取得する](https://apify.com/xquik/x-tweet-scraper/examples/search-x-posts-for-ai-agents)
 - [RAG用のXデータセットを構築する](https://apify.com/xquik/x-tweet-scraper/examples/build-x-rag-dataset)
-- [RAG用にX記事を抽出する](https://apify.com/xquik/x-tweet-scraper/examples/extract-x-article-for-rag)
+- [RAG用にXの記事を抽出する](https://apify.com/xquik/x-tweet-scraper/examples/extract-x-article-for-rag)
 - [X上のAI検索での露出を監視する](https://apify.com/xquik/x-tweet-scraper/examples/monitor-ai-search-visibility-on-x)
 - [日付でTwitterを検索する](https://apify.com/xquik/x-tweet-scraper/examples/search-twitter-by-date)
-- [X上でAIエージェントツールを発見する](https://apify.com/xquik/x-tweet-scraper/examples/discover-ai-agent-tools-on-x)
+- [X上でAIエージェントツールを見つける](https://apify.com/xquik/x-tweet-scraper/examples/discover-ai-agent-tools-on-x)
 - [AI製品へのフィードバックを収集する](https://apify.com/xquik/x-tweet-scraper/examples/collect-ai-product-feedback)
-- [X上でのブランド言及を監視する](https://apify.com/xquik/x-tweet-scraper/examples/monitor-brand-mentions-on-x)
+- [X上のブランドへの言及を監視する](https://apify.com/xquik/x-tweet-scraper/examples/monitor-brand-mentions-on-x)
 - [TwitterデータをCSVにエクスポートする](https://apify.com/xquik/x-tweet-scraper/examples/export-twitter-data-to-csv)
-- [OpenAIのポストへのリプライを収集する](https://apify.com/xquik/x-tweet-scraper/examples/collect-replies-to-an-openai-post)
+- [OpenAIのポストへの返信を収集する](https://apify.com/xquik/x-tweet-scraper/examples/collect-replies-to-an-openai-post)
 - [Twitterのスレッド全体を抽出する](https://apify.com/xquik/x-tweet-scraper/examples/extract-complete-twitter-thread)
 - [電気自動車に関する会話を収集する](https://apify.com/xquik/x-tweet-scraper/examples/collect-electric-vehicle-conversations)
 
-## ポストのスクレイピングにかかる費用は？
+## ポストのスクレイピングにはいくらかかりますか？
 
-XquikのX Tweet Scraperは、すべてのApifyプランで配信された行1件につき$0.00015です。Apifyのプラットフォーム利用料は別途かかります。Xquikの課金は、配信したデータ行1件につき1回です。`diagnostics`出力の診断情報は無料です。
+XquikのX Tweet Scraperは、どのApifyプランでも、配信された行1件につき$0.00015です。プラットフォームの利用料は、Apifyが別途請求します。Xquikの課金は、配信したデータ行1件につき1回です。`diagnostics` 出力の診断情報は無料です。
+
+より多くの量が必要なら、前払いの利用枠が多い[Apifyプランを選んでください](https://apify.com/pricing?fpr=xquik)。
 
 - Xquikのサブスクリプションは不要です。
-- 開始料金やクエリ料金は別途かかりません。URLや1件のポストの取得にも料金はかかりません。
-- フィルターと重複排除は課金前に行います。除いた行や重複した行に支払うことはありません。
-- 入力なし、無効な入力、出力0件の実行は、無料の`diagnostics`出力に、次の行動を示すレコードを1件書き込みます。
+- 開始料金やクエリ料金は別途かかりません。URL&1件のポストの取得にも料金はかかりません。
+- フィルター&重複排除は課金前に行います。フィルターで除いた行や重複した行に支払うことはありません。
+- 入力なし&無効な入力の実行は、無料の `diagnostics` 出力に、次の行動を示すレコードを1件書き込みます。早く止まった実行や対象をスキップした実行も同じです。プロフィールの読み取りでの `lang` など、実行自身のフィルターがすべての行を除いた実行も同様です。
+- すべての対象を読み取っても行が返らない実行は、レコードを書き込みません。理由&変えるべき点はステータスが示します。`-is:retweet` など、検索演算子で除外した行についても、レコードは書き込みません。
 
-問題が起きた実行と大規模な実行は、`run-report`レコードも書き込みます。その`estimatedChargeUsd`には、Apifyの現在のイベント課金の価格を使います。問題が起きた実行は、入力なしや無効な入力での終了も含めて、必ず`run-report`を書き込みます。問題なく終わった小規模な実行は書き込まず、Apifyの利用料を節約します。毎回書き込むには`alwaysSaveRunRecords`をオンにしてください。実行レポートは、データ行を`realRows`に、診断情報を`diagnosticRows`に分けて記録します。
+問題が起きた実行や大規模な実行は、`run-report` レコードも書き込みます。その `estimatedChargeUsd` には、Apifyの現在のイベント課金の価格を使います。問題が起きた実行は、入力なしや無効な入力での終了も含めて、必ず `run-report` を書き込みます。問題なく終わった小規模な実行は、これを省いてApifyの利用料を節約します。毎回書き込むには `alwaysSaveRunRecords` をオンにしてください。実行レポートは、`realRows` のデータ行と `diagnosticRows` の診断情報を分けて記録します。
 
 実行の支出に上限をかける方法は、[実行オプション](#実行オプション)を参照してください。
 
 ## ベンチマーク
 
-XquikのX Tweet Scraperは、コストと速度で他の11のポスト用Actorを上回りました。1行あたりのフィールド数の中央値は63で、他のActorの中央値の2倍でした。
+XquikのX Tweet Scraperは、コスト&速度で他の11のポスト用Actorを上回りました。1行あたりのフィールド数の中央値は63で、他のActorの中央値の2倍でした。
 
-- `xquik/x-tweet-scraper`は、有効なポストを890件取得しました。有効なポスト1件あたり$0.000175、1秒あたり39.2件、1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
-- `xquik/x-tweet-scraper`は、有効なポストを883件取得しました。有効なポスト1件あたり$0.000176、1秒あたり25.2件、1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
-- `xquik/x-tweet-scraper`は、有効なポストを882件取得しました。有効なポスト1件あたり$0.000177、1秒あたり25.7件、1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
-- `xquik/x-tweet-scraper`は、有効なポストを877件取得しました。有効なポスト1件あたり$0.000178、1秒あたり26.9件、1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`は、有効なポストを813件取得しました。有効なポスト1件あたり$0.000185、1秒あたり10.5件、1行あたり36フィールドです。[実行を見る](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`は、有効なポストを805件取得しました。有効なポスト1件あたり$0.000187、1秒あたり10.6件、1行あたり36フィールドです。[実行を見る](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`は、有効なポストを805件取得しました。有効なポスト1件あたり$0.000187、1秒あたり10.7件、1行あたり36フィールドです。[実行を見る](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
-- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest`は、有効なポストを880件取得しました。有効なポスト1件あたり$0.000250、1秒あたり9.1件、1行あたり46フィールドです。[実行を見る](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
-- `scraper_one/x-posts-search`は、有効なポストを804件取得しました。有効なポスト1件あたり$0.000314、1秒あたり3.3件、1行あたり14フィールドです。[実行を見る](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
-- `danek/twitter-scraper`は、有効なポストを807件取得しました。有効なポスト1件あたり$0.000347、1秒あたり5.0件、1行あたり27フィールドです。[実行を見る](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
-- `tweetapi/twitter-x-search-scraper`は、有効なポストを337件取得しました。有効なポスト1件あたり$0.000374、1秒あたり2.6件、1行あたり28フィールドです。[実行を見る](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
-- `api-ninja/x-twitter-advanced-search`は、有効なポストを837件取得しました。有効なポスト1件あたり$0.000430、1秒あたり7.4件、1行あたり28フィールドです。[実行を見る](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
-- `apidojo/twitter-scraper-lite`は、有効なポストを251件取得しました。有効なポスト1件あたり$0.000494、1秒あたり12.9件、1行あたり54フィールドです。[実行を見る](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
-- `apidojo/tweet-scraper`は、有効なポストを481件取得しました。有効なポスト1件あたり$0.000832、1秒あたり7.8件、1行あたり55フィールドです。[実行を見る](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
-- `xtdata/twitter-x-scraper`は、有効なポストを1,378件取得しました。有効なポスト1件あたり$0.001168、1秒あたり11.9件、1行あたり67フィールドです。[実行を見る](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
-- `seemuapps/x-tweet-scraper`は、有効なポストを805件取得しました。有効なポスト1件あたり$0.001242、1秒あたり6.9件、1行あたり24フィールドです。[実行を見る](https://console.apify.com/view/runs/FstursEw43TbcipYU)
-- `maximedupre/twitter-scraper`は、有効なポストを46件取得しました。有効なポスト1件あたり$0.002846、1秒あたり0.3件、1行あたり31フィールドです。[実行を見る](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
+- `xquik/x-tweet-scraper` は、有効なポストを890件配信しました。有効なポスト1件あたり$0.000175、1秒あたり39.2件&1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
+- `xquik/x-tweet-scraper` は、有効なポストを883件配信しました。有効なポスト1件あたり$0.000176、1秒あたり25.2件&1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
+- `xquik/x-tweet-scraper` は、有効なポストを882件配信しました。有効なポスト1件あたり$0.000177、1秒あたり25.7件&1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
+- `xquik/x-tweet-scraper` は、有効なポストを877件配信しました。有効なポスト1件あたり$0.000178、1秒あたり26.9件&1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` は、有効なポストを813件配信しました。有効なポスト1件あたり$0.000185、1秒あたり10.5件&1行あたり36フィールドです。[実行を見る](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` は、有効なポストを805件配信しました。有効なポスト1件あたり$0.000187、1秒あたり10.6件&1行あたり36フィールドです。[実行を見る](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` は、有効なポストを805件配信しました。有効なポスト1件あたり$0.000187、1秒あたり10.7件&1行あたり36フィールドです。[実行を見る](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
+- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` は、有効なポストを880件配信しました。有効なポスト1件あたり$0.000250、1秒あたり9.1件&1行あたり46フィールドです。[実行を見る](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
+- `scraper_one/x-posts-search` は、有効なポストを804件配信しました。有効なポスト1件あたり$0.000314、1秒あたり3.3件&1行あたり14フィールドです。[実行を見る](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
+- `danek/twitter-scraper` は、有効なポストを807件配信しました。有効なポスト1件あたり$0.000347、1秒あたり5.0件&1行あたり27フィールドです。[実行を見る](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
+- `tweetapi/twitter-x-search-scraper` は、有効なポストを337件配信しました。有効なポスト1件あたり$0.000374、1秒あたり2.6件&1行あたり28フィールドです。[実行を見る](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
+- `api-ninja/x-twitter-advanced-search` は、有効なポストを837件配信しました。有効なポスト1件あたり$0.000430、1秒あたり7.4件&1行あたり28フィールドです。[実行を見る](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
+- `apidojo/twitter-scraper-lite` は、有効なポストを251件配信しました。有効なポスト1件あたり$0.000494、1秒あたり12.9件&1行あたり54フィールドです。[実行を見る](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
+- `apidojo/tweet-scraper` は、有効なポストを481件配信しました。有効なポスト1件あたり$0.000832、1秒あたり7.8件&1行あたり55フィールドです。[実行を見る](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
+- `xtdata/twitter-x-scraper` は、有効なポストを1,378件配信しました。有効なポスト1件あたり$0.001168、1秒あたり11.9件&1行あたり67フィールドです。[実行を見る](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
+- `seemuapps/x-tweet-scraper` は、有効なポストを805件配信しました。有効なポスト1件あたり$0.001242、1秒あたり6.9件&1行あたり24フィールドです。[実行を見る](https://console.apify.com/view/runs/FstursEw43TbcipYU)
+- `maximedupre/twitter-scraper` は、有効なポストを46件配信しました。有効なポスト1件あたり$0.002846、1秒あたり0.3件&1行あたり31フィールドです。[実行を見る](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
 
-各Actorは同じ検索と同じフィルターで実行しました。他のActorは2026-09-27に、Xquikの実行は2026-09-29に`outputVariant: "rich"`で実行しました。すべての実行でBronzeティアを使いました。有効なポストとは、10件以上のいいねがある、重複のない英語のオリジナルポストです。コストは、有効なポスト1件あたりの顧客の総支払額です。当社のコストには、顧客が支払うApifyの利用料を含みます。1行あたりのフィールド数は、空でないフィールド数の中央値で、入れ子のフィールドも含みます。リストは1フィールドとして数えます。実行を開くと、入力、ログ、データセットを確認できます。
+各Actorは同じ検索&フィルターで実行しました。他のActorは2026-09-27に実行しました。Xquikの実行は `outputVariant: "rich"` を設定し、2026-09-29に実行しました。すべての実行でBronzeティアを使いました。有効なポストとは、いいねが10件以上ある、重複のない英語のオリジナルポストです。コストは、有効なポスト1件あたりの顧客の総支払額です。当社のコストには、顧客が支払うApifyの利用料を含みます。1行あたりのフィールド数は、入れ子のフィールドも含めた、空でないフィールド数の中央値です。リストは1フィールドとして数えます。実行を開くと、入力、ログ&データセットを確認できます。
 
-## 空の実行、部分的な実行、停止した実行
+## 空の実行、部分的な実行&停止した実行
 
-XquikのX Tweet Scraperは、空の実行、部分的な実行、停止した実行の理由を無料で説明します。実行ステータスは、実行が止まった理由を示します。課金された結果と読み取った対象の数も数えます。
+XquikのX Tweet Scraperは、空の実行、部分的な実行&停止した実行を無料で説明します。実行ステータスは、実行が止まった理由を示します。課金された結果&読み取った対象の数も数えます。
 
 ### 空の結果
 
-次の実行に費用をかける前に、結果が空だった理由を確認してください。レポートと最終的な診断情報の`filtering`オブジェクトは、フィルターで除いた行を数えます。`serverFilteredRows`、`actorFilteredRows`、`pagesWithUnknownServerFiltering`を確認してください。フィルターで除いた行に結果料金はかかりません。
+次の実行に費用をかける前に、空の結果を確認してください。レポート&最終的な診断情報の `filtering` オブジェクトは、フィルターで除いた行を数えます。`serverFilteredRows`、`actorFilteredRows` & `pagesWithUnknownServerFiltering` を確認してください。フィルターで除いた行に結果料金はかかりません。このActor自身のフィルターが行を除いた場合（`actorFilteredRows`）、実行はこれらの件数を含む診断を1件書き込みます。検索演算子が除外した行（`serverFilteredRows`）、期間外のポスト&行が1件も得られなかった実行については、レコードを書き込みません。理由&変えるべき点はステータスが示します。たとえば、検索を広げるよう案内します。
 
-Xに結果がなくなると、上限に届かずに実行が終わることがあります。その場合、`outcome: "complete"`と`completionReason: "source_exhausted"`を報告します。中断された実行は、部分的な結果と再試行の案内を残します。
+Xに結果がなくなると、上限に届かずに実行が終わることがあります。その場合、`outcome: "complete"` と `completionReason: "source_exhausted"` を報告します。中断された実行の結果判定は部分的なままで、再試行の案内も残ります。
 
 ### 部分的な実行
 
-`failedSubtargets`は、エラーの後に止まったクエリとプロフィールの対象を数えます。配信済みの行はデータセットに残り、課金の対象になります。エラーは、対象が存在しないことを意味しません。こうした実行は`completionReason: "partial_failure"`を使います。
+`failedSubtargets` は、エラーの後に止まったクエリ&プロフィールの対象を数えます。配信済みの行はデータセットに残り、課金の対象になります。エラーは、対象が存在しないことを意味しません。こうした実行は `completionReason: "partial_failure"` を使います。
 
-中断された実行は、無料の`partial`診断も書き込みます。配信済みの結果はそのまま残ります。この診断は、`availableResults`、`failedTargets`、`retryable`、`nextAction`を報告します。Actorの正常終了が示すのは配信の完了です。抽出が最後まで終わったことは示しません。
+中断された実行は、無料の `partial` 診断も書き込みます。配信済みの結果はそのまま残ります。この診断は、`availableResults`、`failedTargets`、`retryable` & `nextAction` を報告します。Actorの正常終了が示すのは配信の完了です。抽出が最後まで終わったことは意味しません。
 
 ### 停止の原因
 
-ステータスのテキストは、停止の原因をすべて示します。存在しないアカウントと、進まなくなった検索がある実行では、両方を示します。`stopCauses`は各原因を挙げ、それぞれに`message`、`retryable`、`nextAction`を付けます。原因は`target_not_found`、`target_suspended`、`target_protected`、`search_unavailable`、`likes_hidden`、`target_failed`、`pagination_safety_limit`、`reply_reach`、`deadline_reached`です。いずれかの原因が再試行可能なら、実行も`retryable`になります。
+ステータスのテキストは、停止の原因をすべて示します。存在しないアカウント&進まなくなった検索がある実行では、両方を示します。`stopCauses` は各原因を挙げ、それぞれに `message`、`retryable` & `nextAction` を付けます。原因は `target_not_found`、`target_suspended`、`target_protected`、`search_unavailable`、`likes_hidden`、`target_failed`、`pagination_safety_limit`、`reply_reach` & `deadline_reached` です。いずれかの原因が再試行可能なら、実行も `retryable` になります。
 
-### 存在しない対象と表示できない対象
+### 存在しない対象&表示できない対象
 
-存在しない対象や非公開の対象は、失敗ではありません。Xにそこで読み取れるものがないだけです。実行は、ほかのすべての対象を最後まで読み取ります。そして、`outcome: "complete"`を報告します。完了の理由は、`source_exhausted`など、読み取った対象から決まります。`failedSubtargets`には、それらの対象を含めません。ステータスのテキストと無料の`complete`診断が、それらの対象を数えます。ほかに行がない実行は、代わりに`zero-output`診断を書き込みます。
+存在しない対象や非公開の対象は、失敗ではありません。Xにそこで読み取れるものがないだけです。実行は、ほかのすべての対象を最後まで読み取ります。そして、`outcome: "complete"` を報告します。完了の理由は、`source_exhausted` など、読み取った対象から決まります。`failedSubtargets` には、それらの対象を含めません。ステータスのテキスト&無料の `complete` 診断が、それらの対象を数えます。ほかに行がない実行は、代わりに `zero-output` 診断を書き込みます。
 
-Xが実行できない検索は、失敗として数えます。このような検索に対して、X.comは「Something went wrong」と表示します。実行は、その検索を再試行せずにすぐ止めます。Xが非表示にしているいいねも失敗として数え、すぐに止めます。Xは、ポストにいいねしたユーザーをそのポストの著者にだけ表示します。アカウントがいいねしたポストは、そのアカウント本人にだけ表示します。
+Xが実行できない検索は、失敗として数えます。このような検索に対して、Xは「Something went wrong」と表示します。実行は、その検索を再試行せずにすぐ止めます。Xが非表示にしているいいねも、失敗として数えてすぐに止めます。Xは、ポストにいいねしたユーザーをそのポストの著者にだけ表示します。アカウントがいいねしたポストは、そのアカウント本人にだけ表示します。
 
-すべての失敗が表示できない対象に関するものなら、診断情報は`retryable: false`を設定します。対象のURLやユーザー名を確認し、表示できる公開アカウントを選んでください。Xが実行できない検索は、範囲を絞るかフィルターを変えてください。非表示のいいねの代わりに、リポストしたユーザー、返信、ポストを読み取ってください。その他の失敗では、終わっていない対象の再試行の案内が残ります。
+すべての失敗が表示できない対象に関するものなら、診断情報は `retryable: false` を設定します。対象のURLやユーザー名を確認し、表示できる公開アカウントを選んでください。Xが実行できない検索は、範囲を絞るかフィルターを変えてください。非表示のいいねの代わりに、リポストしたユーザー、返信、ポストのいずれかを読み取ってください。その他の失敗では、終わっていない対象の再試行の案内が残ります。
 
-診断情報は、それらの対象を`unavailableTargets`に挙げます。各エントリには、入力したままの`target`、`reason`、`nextAction`が入ります。理由は`not_found`、`suspended`、`protected`、`search_unavailable`、`likes_hidden`のいずれかです。検索のエントリには、削除すべき演算子などを示す`fix`が入ることもあります。一覧には最大100件のエントリが入ります。それらの対象は入力から外してください。
+診断情報は、それらの対象を `unavailableTargets` に挙げます。各エントリには、入力したままの `target`、`reason` & `nextAction` が入ります。理由は `not_found`、`list_not_found`、`suspended`、`protected`、`search_unavailable`、`likes_hidden` のいずれかです。`list_not_found` は、Xが見つけられなかったリストを示します。そのリストは非公開の可能性があります。検索のエントリには、削除すべき演算子などを示す `fix` が入ることもあります。一覧には最大100件のエントリが入ります。それらの対象は入力から外してください。
 
-### 安全上の上限と時間の上限
+### 安全上の上限&時間の上限
 
-`completionReason: "pagination_safety_limit"`は、読み取りの失敗ではありません。実行は有効な行を残しました。その後、新しい結果を返さなくなった対象を終了しました。実行は、抽出が未完了であることを報告します。`failedSubtargets`は`0`のままです。支払うのは配信された行の分だけです。
+`completionReason: "pagination_safety_limit"` は、読み取りの失敗ではありません。実行は有効な行を残しました。その後、新しい結果を返さなくなった対象を終了しました。実行は、抽出が未完了であることを報告します。`failedSubtargets` は `0` のままです。支払うのは配信された行の分だけです。
 
-デフォルトのApifyタイムアウトは`0`なので、実行に時間制限はありません。このActorは、上限に達するか、対象のデータがなくなるまで続けます。有限のApifyタイムアウトを設定することもできます。その場合、`completionReason: "deadline_reached"`は、その上限が近いことを示します。このActorは上限の前に行とレポートを保存し、正常に終了します。配信された行の課金は1回だけです。
+デフォルトのApifyタイムアウトは `0` なので、実行に時間制限はありません。このActorは、上限に達するか、対象のデータがなくなるまで続けます。有限のApifyタイムアウトを設定することもできます。その場合、`completionReason: "deadline_reached"` は、その制限が近いことを示します。このActorは制限の前に行&レポートを保存し、正常に終了します。配信された行の課金は1件につき1回だけです。
 
 ## 入力
 
-Inputタブにすべてのオプションがあります。`startUrls`、`twitterHandles`、`listIds`、`tweetIds`、`searchTerms`、`twitterContent`のうち、少なくとも1つを指定してください。ドキュメントに記載された別名でもかまいません。ほかのフィールドはすべて任意です。
+Inputタブにすべてのオプションがあります。`startUrls`、`twitterHandles`、`listIds`、`tweetIds`、`searchTerms`、`twitterContent` のうち、少なくとも1つを指定してください。ドキュメントに記載された別名でもかまいません。ほかのフィールドはすべて任意です。
 
 次のどれか1つだけで実行できます。
 
 - ポストのURLをStart URLsに貼り付けます。
 - プロフィールのURLを貼り付けるか、ユーザー名をX handlesに追加します。
-- アカウントの過去のポストを取得するには、検索語として`from:user since:YYYY-MM-DD until:YYYY-MM-DD`を使います。
+- アカウントの過去のポストを取得するには、検索語として `from:user since:YYYY-MM-DD until:YYYY-MM-DD` を使います。
 - リストのURLをStart URLsに貼り付けます。
-- 高度な検索には、`twitterContent`と、`from:`、`since:`、`min_faves:`、`filter:media`などのフィルターを組み合わせます。
+- 高度な検索には、`twitterContent` と、`from:`、`since:`、`min_faves:` & `filter:media` などのフィルターを組み合わせます。
 
 ### 対応する主な検索演算子
 
-| 演算子                 | 例                     | 用途                               |
-| ---------------------- | ---------------------- | ---------------------------------- |
-| `from:`                | `from:elonmusk`        | このユーザーのポストだけ           |
-| `to:`                  | `to:OpenAI`            | このユーザーへの返信だけ           |
-| `@`                    | `@nasa`                | このユーザーをメンションしたポスト |
-| `list:`                | `list:123456`          | リストのメンバーのポスト           |
-| `lang:`                | `lang:en`              | 言語で絞り込み                     |
-| `since:` / `until:`    | `since:2026-01-01`     | 日付の範囲                         |
-| `min_faves:`           | `min_faves:100`        | エンゲージメントのしきい値         |
-| `min_retweets:`        | `min_retweets:50`      | リポスト数のしきい値               |
-| `filter:media`         | `filter:media`         | Xのメディア検索演算子              |
-| `filter:videos`        | `filter:videos`        | Xの動画検索演算子                  |
-| `filter:images`        | `filter:images`        | Xの画像検索演算子                  |
-| `filter:links`         | `filter:links`         | リンク付きのポストだけ             |
-| `filter:replies`       | `filter:replies`       | 返信のポストだけ                   |
-| `filter:quote`         | `filter:quote`         | 引用ポストだけ                     |
-| `filter:blue_verified` | `filter:blue_verified` | Premiumユーザーだけ                |
+| 演算子 | 例 | 用途 |
+| --- | --- | --- |
+| `from:` | `from:elonmusk` | このユーザーのポストだけ |
+| `to:` | `to:OpenAI` | このユーザーへの返信だけ |
+| `@` | `@nasa` | このユーザーへのメンション |
+| `list:` | `list:123456` | リストのメンバーのポスト |
+| `lang:` | `lang:en` | 言語で絞り込み |
+| `since:` / `until:` | `since:2026-01-01` | 日付の範囲 |
+| `min_faves:` | `min_faves:100` | エンゲージメントのしきい値 |
+| `min_retweets:` | `min_retweets:50` | リポスト数のしきい値 |
+| `filter:media` | `filter:media` | Xのメディア検索演算子 |
+| `filter:videos` | `filter:videos` | Xの動画検索演算子 |
+| `filter:images` | `filter:images` | Xの画像検索演算子 |
+| `filter:links` | `filter:links` | リンク付きのポストだけ |
+| `filter:replies` | `filter:replies` | 返信のポストだけ |
+| `filter:quote` | `filter:quote` | 引用ポストだけ |
+| `filter:blue_verified` | `filter:blue_verified` | Premiumユーザーだけ |
+| `-filter:replies` | `-filter:replies` | 返信のポストを除く |
+| `-filter:nativeretweets` | `-filter:nativeretweets` | リポストを除く |
+| `-filter:quote` | `-filter:quote` | 引用ポストを除く |
+| `OR` | `(from:nasa OR from:esa)` | どちらかの条件に一致するポスト |
+| `#` | `#bitcoin lang:en` | このハッシュタグを含むポスト |
 
-Xは、`filter:vine`、`filter:consumer_video`、`filter:pro_video`、`filter:news`、`retweets_of:`での検索に対応しなくなりました。これらを含む検索はすぐに終了します。無料の診断情報が直し方を示します。各クエリは512文字以内にしてください。Xはそれより長いクエリを検索しません。
+Xは、`filter:vine`、`filter:consumer_video`、`filter:pro_video`、`filter:news`、`retweets_of:` での検索に対応しなくなりました。これらを含む検索はすぐに終了します。無料の診断情報が直し方を示します。各クエリは512文字以内にしてください。Xはそれより長いクエリを検索しません。
 
 日付の範囲は、下限を含み、上限を含みません。このActorは、各ポストを追加または課金する前に、両方の境界を確認します。
 
-演算子の全一覧は、[Twitter advanced search operators](https://github.com/Xquik-dev/x-twitter-advanced-search)を参照してください。
+演算子の全一覧は、Xquikの[Twitter advanced search operators](https://github.com/Xquik-dev/x-twitter-advanced-search)を参照してください。
 
 ### 他のポスト用Actorから移行する
 
-今使っている入力をそのまま貼り付けてください。XquikのX Tweet Scraperは、他のポスト用Actorのフィールド名を読み取ります。そして、自身のフィールドに対応付けます。ドキュメント上のデフォルトは、引き続き正規の名前です。別名のせいでフィールドが失われたり、料金が変わったりすることはありません。入力フォームには正規のフィールドだけが並ぶので、短いままです。別名は、JSON、API、SDK、自動化、保存済みタスクの入力で使えます。
+今使っている入力をそのまま貼り付けてください。XquikのX Tweet Scraperは、他のポスト用Actorが使うフィールド名を読み取ります。そして、自身のフィールドに対応付けます。ドキュメント上のデフォルトは、引き続き正規の名前です。別名がフィールドを捨てることも、料金を変えることもありません。入力フォームには正規のフィールドだけが並ぶので、短いままです。別名は、JSON、API、SDK、自動化&保存済みタスクの入力で使えます。
 
-各項目は、すでに使っているフィールドを挙げ、その後に対応付け先のフィールドを示します。
+各行は、すでに使っているフィールドを挙げ、その後に対応付け先のフィールドを示します。
 
-- `startUrls`、`urls`、`tweetUrls`、`postUrls`、`profileUrls`、`accountUrls`は`startUrls`に対応します。
-- 1つの文字列としての`profileUrl`は`startUrls`に対応します。
-- `tweetIds`、`tweetIDs`、`tweets`、`postIds`、`lookupPostIds`、`tweet_ids`、または1つの文字列としての`tweetId`は`tweetIds`に対応します。
-- `twitterHandles`、`usernames`、`user_names`、`userNameList`、`handles`、`screenNames`、`profileTweets`は`twitterHandles`に対応します。
-- 1つの文字列としての`username`、`handle`、`screenName`は`twitterHandles`に対応します。
-- リスト、または1行に1つの検索としての`searchTerms`、`searchQueries`、`queries`、`search`は`searchTerms`に対応します。
-- `twitterContent`、`query`、`searchQuery`は`twitterContent`に対応します。
-- `maxItems`、`maxResults`、`max_results`、`resultsLimit`、`count`、`resultsCount`、`numberOfTweets`、`maxPosts`、`max_posts`、`max_items`、`maxTweets`、`tweetsDesired`、`maxTotalTweets`は`maxItems`に対応します。
-- `per_profile_limit`は`maxItemsPerTarget`に対応します。
-- `sort`は`queryType`に対応します。
-- `search_type`、`searchType`、`query_type`、`search_sort`は、`Top`と`Latest`なら大文字小文字を問わず`queryType`に対応します。`Media`、`Photos`、`Videos`は`filter:media`、`filter:images`、`filter:videos`をオンにします。
-- `tweetLanguage`、`language`、`contentLanguage`は`lang`に対応します。
-- `author`、`fromUser`は`from`に対応します。
-- `inReplyTo`、`toUser`は`to`に対応します。
-- `mentioning`は`@`に対応します。
-- `start`、`startDate`、`timeSince`は`since`に対応します。
-- `end`、`endDate`、`timeUntil`は`until`に対応します。
-- 秒単位の`timeSinceUnix`、`sinceTime`、`timeUntilUnix`、`untilTime`は`since_time`、`until_time`に対応します。
-- `timeWithinTime`、`withinTime`は`within_time`に対応します。
-- `timeWindowHours`、`timeWindow`は、それぞれ時間単位と日単位の`within_time`に対応します。
-- `timeSinceId`、`sinceId`、`timeMaxId`、`maxId`は`since_id`、`max_id`に対応します。
-- Google Search Scraperの`quickDateRange`は`since_time`に対応し、実行開始時点からさかのぼって計算します。値は`d7`、`w2`、`m1`、`y`などです。
-- `minimumFavorites`、`minLikes`、`min_likes`、`minFaves`、`engagementMinLikes`、`Minimum_likes`は`min_faves`に対応します。
-- `minimumRetweets`、`minRetweets`、`engagementMinRetweets`は`min_retweets`に対応します。
-- `minimumReplies`、`minReplies`、`engagementMinReplies`、`Minimum_replies`は`min_replies`に対応します。
-- `engagementMaxLikes`、`maxLikes`、`engagementMaxRetweets`、`maxRetweets`、`engagementMaxReplies`は`engagement.maxLikes`、`engagement.maxRetweets`、`engagement.maxReplies`に対応します。
-- `onlyImage`、`onlyImages`、`has_images`は`filter:images`に対応します。
-- `onlyVideo`、`onlyVideos`、`has_videos`は`filter:videos`に対応します。
-- `onlyWithMedia`、`mediaOnly`は`filter:media`に対応します。
-- `onlyQuote`、`onlyQuotes`は`filter:quote`に対応します。
-- `onlyTwitterBlue`、`usersBlueVerifiedOnly`、`blue_verified_only`、`onlyBlueVerified`は`filter:blue_verified`に対応します。
-- `engagementHasEngagement`、`hasEngagement`は`filter:has_engagement`に対応します。
-- `mediaHasLinks`、`has_links`、`requireLinks`は`filter:links`に対応します。
-- `mediaHasMentions`、`has_mentions`、`requireMentions`は`filter:mentions`に対応します。
-- `mediaHasHashtags`、`has_hashtags`、`requireHashtags`は`filter:hashtags`に対応します。
-- `mediaNewsOnly`、`mediaSafeContentOnly`は`filter:news`、`filter:safe`に対応します。
-- 種類が1つの`mediaTypes`は、その種類の`filter:`フィールドに対応します。
-- `mediaSubtype`は`filter:media`、`filter:images`、または`filter:videos`に対応します。
-- `includeNativeRetweets`、`includeRetweets`は`include:nativeretweets`に対応します。
-- `excludeReplies`、`excludeRetweets`、falseに設定した`includeRetweets`、`tweetTypesExclude`は`tweetTypes.excludeReplies`、`tweetTypes.excludeRetweets`、`tweetTypes.excludeQuotes`に対応します。
-- 種類が1つのリストとしての`tweetTypes`は`tweetTypes.replies`、`tweetTypes.quotes`、または`tweetTypes.nativeRetweets`に対応します。
-- `tweetSubtype`は`tweetTypes.replies`、または`tweetTypes.quotes`に対応します。`self_threads`は演算子`filter:self_threads`を追加します。
-- `geotaggedNear`、`geoNear`は`near`に対応します。
-- `withinRadius`、`geoWithinRadius`、`geoWithin`は`within`に対応します。
-- `geoGeocode`は`geocode`に対応します。
-- `tweetConversationId`、`tweetQuotedTweetId`、`tweetQuotedUserId`は`conversation_id`、`quoted_tweet_id`、`quoted_user_id`に対応します。
-- `cardName`、`tweetPollTypes`は`card_name`に対応します。
-- `search_query`は`twitterContent`に対応します。
-- `profile_urls`は、リンクなら`startUrls`に、ユーザー名なら`twitterHandles`に対応します。
-- `lookup_post_ids`、または1つの文字列としての`id`は`tweetIds`に対応します。
-- カンマ区切りの1つのリストとしての`tweets`は`tweetIds`に対応します。
+- `startUrls`、`urls`、`tweetUrls`、`postUrls`、`profileUrls`、`accountUrls` は `startUrls` に対応します。
+- 1つの文字列としての `profileUrl` は `startUrls` に対応します。
+- `tweetIds`、`tweetIDs`、`tweets`、`postIds`、`lookupPostIds`、`tweet_ids`、または1つの文字列としての `tweetId` は `tweetIds` に対応します。
+- `twitterHandles`、`usernames`、`user_names`、`userNameList`、`handles`、`screenNames`、`profileTweets` は `twitterHandles` に対応します。
+- 1つの文字列としての `username`、`handle`、`screenName` は `twitterHandles` に対応します。
+- リスト、または1行に1つの検索としての `searchTerms`、`searchQueries`、`queries`、`search` は `searchTerms` に対応します。
+- `twitterContent`、`query`、`searchQuery` は `twitterContent` に対応します。
+- `maxItems`、`maxResults`、`max_results`、`resultsLimit`、`count`、`resultsCount`、`numberOfTweets`、`maxPosts`、`max_posts`、`max_items`、`maxTweets`、`tweetsDesired`、`maxTotalTweets` は `maxItems` に対応します。
+- `per_profile_limit` は `maxItemsPerTarget` に対応します。
+- `sort` は `queryType` に対応します。
+- `search_type`、`searchType`、`query_type`、`search_sort` は、`Top` & `Latest` なら大文字小文字を問わず `queryType` に対応します。`Media`、`Photos` & `Videos` は `filter:media`、`filter:images` & `filter:videos` をオンにします。
+- `tweetLanguage`、`language`、`contentLanguage` は `lang` に対応します。
+- `author`、`fromUser` は `from` に対応します。
+- `inReplyTo`、`toUser` は `to` に対応します。
+- `mentioning` は `@` に対応します。
+- `start`、`startDate`、`timeSince` は `since` に対応します。
+- `end`、`endDate`、`timeUntil` は `until` に対応します。
+- 秒単位の `timeSinceUnix`、`sinceTime`、`timeUntilUnix`、`untilTime` は `since_time`、`until_time` に対応します。
+- `timeWithinTime`、`withinTime` は `within_time` に対応します。
+- `timeWindowHours`、`timeWindow` は、それぞれ時間単位&日単位の `within_time` に対応します。
+- `timeSinceId`、`sinceId`、`timeMaxId`、`maxId` は `since_id`、`max_id` に対応します。
+- Google Search Scraperの `quickDateRange` は、`d7`、`w2`、`m1`、`y` などの値で、実行開始時点からさかのぼって数える `since_time` に対応します。
+- `minimumFavorites`、`minLikes`、`min_likes`、`minFaves`、`engagementMinLikes`、`Minimum_likes` は `min_faves` に対応します。
+- `minimumRetweets`、`minRetweets`、`engagementMinRetweets` は `min_retweets` に対応します。
+- `minimumReplies`、`minReplies`、`engagementMinReplies`、`Minimum_replies` は `min_replies` に対応します。
+- `engagementMaxLikes`、`maxLikes`、`engagementMaxRetweets`、`maxRetweets`、`engagementMaxReplies` は `engagement.maxLikes`、`engagement.maxRetweets`、`engagement.maxReplies` に対応します。
+- `onlyImage`、`onlyImages`、`has_images` は `filter:images` に対応します。
+- `onlyVideo`、`onlyVideos`、`has_videos` は `filter:videos` に対応します。
+- `onlyWithMedia`、`mediaOnly` は `filter:media` に対応します。
+- `onlyQuote`、`onlyQuotes` は `filter:quote` に対応します。
+- `onlyTwitterBlue`、`usersBlueVerifiedOnly`、`blue_verified_only`、`onlyBlueVerified` は `filter:blue_verified` に対応します。
+- `engagementHasEngagement`、`hasEngagement` は `filter:has_engagement` に対応します。
+- `mediaHasLinks`、`has_links`、`requireLinks` は `filter:links` に対応します。
+- `mediaHasMentions`、`has_mentions`、`requireMentions` は `filter:mentions` に対応します。
+- `mediaHasHashtags`、`has_hashtags`、`requireHashtags` は `filter:hashtags` に対応します。
+- `mediaNewsOnly`、`mediaSafeContentOnly` は `filter:news`、`filter:safe` に対応します。
+- 種類が1つの `mediaTypes` は、その種類の `filter:` フィールドに対応します。
+- `mediaSubtype` は `filter:media`、`filter:images`、`filter:videos` のいずれかに対応します。
+- `includeNativeRetweets`、`includeRetweets` は `include:nativeretweets` に対応します。
+- `excludeReplies`、`excludeRetweets`、falseに設定した `includeRetweets`、`tweetTypesExclude` は `tweetTypes.excludeReplies`、`tweetTypes.excludeRetweets` & `tweetTypes.excludeQuotes` に対応します。
+- 種類が1つのリストとしての `tweetTypes` は `tweetTypes.replies`、`tweetTypes.quotes`、`tweetTypes.nativeRetweets` のいずれかに対応します。
+- `tweetSubtype` は `tweetTypes.replies` か `tweetTypes.quotes` に対応します。`self_threads` は演算子 `filter:self_threads` を追加します。
+- `geotaggedNear`、`geoNear` は `near` に対応します。
+- `withinRadius`、`geoWithinRadius`、`geoWithin` は `within` に対応します。
+- `geoGeocode` は `geocode` に対応します。
+- `tweetConversationId`、`tweetQuotedTweetId`、`tweetQuotedUserId` は `conversation_id`、`quoted_tweet_id`、`quoted_user_id` に対応します。
+- `cardName`、`tweetPollTypes` は `card_name` に対応します。
+- `search_query` は `twitterContent` に対応します。
+- `profile_urls` は、リンクなら `startUrls` に、ユーザー名なら `twitterHandles` に対応します。
+- `lookup_post_ids`、または1つの文字列としての `id` は `tweetIds` に対応します。
+- カンマ区切りの1つのリストとしての `tweets` は `tweetIds` に対応します。
 
-一部のフィールドには、ここに対応するフィールドがありません。それぞれが表すXの検索演算子を、実行中のすべての検索に追加します。実行ログには、追加した演算子が最初に一覧で記録されます。
+一部のフィールドには、ここに対応するフィールドがありません。それぞれが表すXの検索演算子を、実行中のすべての検索に追加します。実行ログは、追加した演算子を最初に挙げます。
 
-- `usersFromUsers`、`from_users`、`usersToUsers`、`to_users`、`usersListMembers`は、`from:`、`to:`、`list:`を追加します。値が複数ある場合は、`(from:a OR from:b)`のように「いずれか」として実行されます。
-- `usersMentionUsers`、`mentioning_users`は`@name`を追加します。
-- `usersExcludeFromUsers`は`-from:`を追加します。
-- `onlyVerifiedUsers`、`usersVerifiedOnly`、`verified_only`は`filter:verified`を追加します。
-- `placeObjectId`、`geoPlaceId`、`placeId`、`place`は`place:`を追加します。
-- `cardDomain`は`card_domain:`を追加します。
-- `appsSources`、`appsExcludeSources`は`source:`、`-source:`を追加します。
-- 値がそれぞれ1つの`contentKeywords`、`contentExactPhrases`、`contentHashtags`、`contentCashtags`は、単語、引用符で囲んだフレーズ、`#tag`、`$tag`を追加します。
-- `contentExcludeKeywords`、`contentExcludeHashtags`、`exclude_words`、`hashtags_exclude`は`-word`、`-#tag`を追加します。
-- `all_words`、`exact_phrases`では、すべての単語とフレーズが一致する必要があります。
-- `any_words`、`hashtags_any`は、`(#a OR #b)`のような「いずれか」の条件を追加します。
-- `contentQuestionMarks`は`?`を追加します。
-- `contentEmoticons`は、`positive`なら`:)`を、`negative`なら`:(`を追加します。
-- `tweet_type`は、`filter:replies`、`filter:retweets`、およびそれぞれの`-filter:`形式を追加します。
+- `usersFromUsers`、`from_users`、`usersToUsers`、`to_users`、`usersListMembers` は `from:`、`to:` & `list:` を追加します。値が複数ある場合は、`(from:a OR from:b)` のように「いずれか」の条件として実行されます。
+- `usersMentionUsers`、`mentioning_users` は `@name` を追加します。
+- `usersExcludeFromUsers` は `-from:` を追加します。
+- `onlyVerifiedUsers`、`usersVerifiedOnly`、`verified_only` は `filter:verified` を追加します。
+- `placeObjectId`、`geoPlaceId`、`placeId`、`place` は `place:` を追加します。
+- `cardDomain` は `card_domain:` を追加します。
+- `appsSources`、`appsExcludeSources` は `source:` & `-source:` を追加します。
+- 値がそれぞれ1つの `contentKeywords`、`contentExactPhrases`、`contentHashtags`、`contentCashtags` は、単語、引用符で囲んだフレーズ、`#tag` & `$tag` を追加します。
+- `contentExcludeKeywords`、`contentExcludeHashtags`、`exclude_words`、`hashtags_exclude` は `-word` & `-#tag` を追加します。
+- `all_words` & `exact_phrases` では、すべての単語&フレーズが一致する必要があります。
+- `any_words`、`hashtags_any` は、`(#a OR #b)` のような「いずれか」の条件を追加します。
+- `contentQuestionMarks` は `?` を追加します。
+- `contentEmoticons` は、`positive` なら `:)` を、`negative` なら `:(` を追加します。
+- `tweet_type` は、`filter:replies`、`filter:retweets` & それぞれの `-filter:` 形式を追加します。
 
-言葉で書かれたモードは`mode`に対応付けます。`Advanced Search`は`search`、`Get Tweet by ID`は`tweet`、`Get a Few Tweets`は`tweets`、`Get Replies`は`replies`、`Get Quotes`は`quotes`、`Get Retweeters`は`retweeters`、`Get Favoriters`は`favoriters`です。
+言葉で書かれたモードは `mode` に対応します。`Advanced Search` は `search`、`Get Tweet by ID` は `tweet`、`Get a Few Tweets` は `tweets`、`Get Replies` は `replies`、`Get Quotes` は `quotes`、`Get Retweeters` は `retweeters` & `Get Favoriters` は `favoriters` に対応します。
 
 貼り付けた入力は次のように動きます。
 
-- すべての取得元を実行します。URL、ユーザー名、検索語、リストID、ポストIDを含む入力は、そのすべてを実行します。`maxItems`は実行全体に適用されます。
-- `searchTerms`の横にある検索クエリは、検索語の1つとして追加で実行されます。
-- `x.com/@name`の形式のプロフィールURLは、`x.com/name`と同じように読み取ります。
-- 別名と正規のフィールドの両方を設定した場合は、正規の値が優先されます。実行ログには、採用されなかった別名が記録されます。
-- 実行ログには、`customMapFunction`など、このActorが無視するすべてのフィールドが記録されます。このActorが黙ってフィールドを捨てることはありません。
-- 行数の上限は1以上の整数にしてください。`maxResults: 0`は、何かを読み取ったり課金したりする前に実行を止めます。
-- `quickDateRange: "m1"`は、どのモードでも過去1か月を読み取ります。月と年はカレンダーどおりにさかのぼります。h、d、w、m、yのどれも含まない値では、読み取りや課金の前に実行が止まります。
-- このActorにはページという単位がありません。`maxPages`は`maxItems`に置き換えてください。
-- このActorには`userId`や`user_ids`のフィールドはありません。ユーザーIDはユーザー名と同じ場所に入れてください。`twitterHandles`、プロフィールのURL、`from:`の後で使えます。
-- `from`、`min_faves`、`since_time`、`filter:images`などの検索演算子のフィールドは、すでにXと同じ名前です。対応付けは不要です。
-- 他のActorが「すべて一致」か「いずれか一致」かを示していないリストは、値が1つのときに実行されます。対象は`contentKeywords`、`contentExactPhrases`、`contentHashtags`、`contentCashtags`、`usersMentionUsers`、`mediaTypes`、`tweetTypes`です。値が2つ以上あると、読み取りや課金の前に実行が止まります。メッセージには、それらを1つの検索語として書く方法が示されます。
-- `People`または`Lists`に設定した`search_type`、`followers`に設定した`source_mode`、`engagementLevel`のプリセット、`Get Similar Tweets`モードは、読み取りや課金の前に実行を止めます。メッセージには、使うべきActorまたはフィールドが示されます。
-- `tweets`または`info`に設定した`category`は、何も変えません。`followers`、`user_info`、`replies`など、他のActorの役割にあたる値は実行を止めます。何も読み取らず、課金もしません。メッセージには、そのActorが示されます。
+- すべての取得元を実行します。URL、ユーザー名、検索語、リストID&ポストIDを含む入力は、そのすべてを実行します。`maxItems` は実行全体に適用されます。
+- `searchTerms` と並べた検索クエリは、検索語の1つとして追加で実行されます。
+- `x.com/@name` の形式のプロフィールURLは、`x.com/name` と同じように読み取ります。
+- 別名&その正規のフィールドの両方を設定した場合は、正規の値が優先されます。実行ログには、採用されなかった別名が記録されます。
+- 実行ログには、`customMapFunction` など、このActorが無視するすべてのフィールドが記録されます。このActorが黙ってフィールドを捨てることはありません。
+- 行数の上限は1以上の整数にしてください。`maxResults: 0` は、何かを読み取ったり課金したりする前に実行を止めます。
+- `quickDateRange: "m1"` は、どの取得経路でも過去1か月を読み取ります。月&年はカレンダーどおりにさかのぼります。h、d、w、m、yのどれも含まない値では、読み取りや課金の前に実行が止まります。
+- このActorにはページという単位がありません。`maxPages` は `maxItems` に置き換えてください。
+- このActorには `userId` や `user_ids` のフィールドはありません。ユーザーIDはユーザー名と同じ場所に入れてください。`twitterHandles`、プロフィールのURL & `from:` の後で使えます。
+- `from`、`min_faves`、`since_time` & `filter:images` などの検索演算子のフィールドは、すでにXと同じ名前です。対応付けは不要です。
+- 他のActorが「すべて一致」か「いずれか一致」かを示していないリストは、値が1つなら実行されます。対象は `contentKeywords`、`contentExactPhrases`、`contentHashtags`、`contentCashtags`、`usersMentionUsers`、`mediaTypes` & `tweetTypes` です。値が2つ以上あると、読み取りや課金の前に実行が止まります。メッセージには、それらを1つの検索語として書く方法が示されます。
+- `People` か `Lists` に設定した `search_type`、`followers` に設定した `source_mode`、`engagementLevel` のプリセット & `Get Similar Tweets` モードは、読み取りや課金の前に実行を止めます。メッセージには、使うべきActorかフィールドが示されます。
+- `tweets` か `info` に設定した `category` は、何も変えません。`followers`、`user_info`、`replies` など、他のActorの役割にあたる値は実行を止めます。読み取り&課金はどちらも行いません。メッセージには、そのActorが示されます。
 
-### ConsoleとAPIの入力
+### Console & APIの入力
 
 Consoleのフォームには次のコントロールがあります。
 
-- Mode、Output Variant、Field Style、Output Preset、Sort Byは、入力値を検証するドロップダウンです。
-- Start URLsとProfile URLsは、文字列か`{ "url": "..." }`オブジェクトを受け付けます。それぞれのJSONエディターは、両方のAPI形式を保ちます。
+- Mode、Output Variant、Field Style、Output Preset & Sort Byは、入力値を検証するドロップダウンです。
+- Start URLs & Profile URLsは、文字列か `{ "url": "..." }` オブジェクトを受け付けます。それぞれのJSONエディターは、両方のAPI形式を保ちます。
 - 構造化フィルターはグループにまとめたコントロールなので、入れ子のJSONは不要です。
-- フォームは、フィルターのグループですでに扱えるフラットな演算子を表示しません。JSON、API、SDK、自動化、保存済みタスクの入力では、引き続き受け付けます。
-- Max ItemsとMax Items Per Targetには、1以上の整数を指定できます。エンゲージメントのしきい値には、0以上の整数を指定できます。
+- フォームは、フィルターのグループですでに扱えるフラットな演算子を表示しません。JSON、API、SDK、自動化&保存済みタスクの入力では、引き続き受け付けます。
+- Max Items & Max Items Per Targetには、1以上の整数を指定できます。エンゲージメントのしきい値には、0以上の整数を指定できます。
 
-新しい連携では正規のフィールドを使ってください。上の移行表にある別名は引き続き使えます。`includeRaw`は`outputVariant: "raw"`の別名です。`compact`や`full`などの古い`outputVariant`の値は、Legacy出力として引き続き使えます。フォームでは、それらをLegacyの別名として表示します。
+新しい連携では正規のフィールドを使ってください。上の移行表にある別名は引き続き使えます。`includeRaw` は `outputVariant: "raw"` の別名です。`compact` & `full` などの古い `outputVariant` の値は、Legacy出力として引き続き使えます。フォームでは、それらをLegacyの別名として表示します。
 
 ## 出力
 
-ポストの各行は、Xが提供するメタデータを持つJSONオブジェクトです。データセットと実行レポートのスキーマは、各フィールドにタイトル、説明、例を付けます。AIエージェントは、フィールドの意味を推測せずに読み取れます。
+ポストの各行は、Xが提供するメタデータを持つJSONオブジェクトです。データセット&実行レポートのスキーマは、各フィールドにタイトル、説明&例を付けます。AIエージェントは、フィールドの意味を推測せずに読み取れます。
 
 サンプル値は説明用です。実際の実行では、Xのライブデータが返ります。
 
@@ -566,54 +581,86 @@ Consoleのフォームには次のコントロールがあります。
 }
 ```
 
-データセットはJSON、CSV、Excel、HTMLでエクスポートできます。
+データセットは、JSON、CSV、Excel、HTMLのいずれかでエクスポートしてください。
+
+## 出力の列
+
+実行が各行を読み取った後、8つの入力でその形を整えます。コードの実行&料金の変更はありません。
+
+| フィールド | 動作 |
+| --- | --- |
+| `fields` | 書いたとおりの順序&表記で、指定したフィールドだけを残す |
+| `omitFields` | 指定したフィールドを除き、残りを保持する |
+| `renameFields` | フィールドを新しい名前の列に移す |
+| `flatten` | 入れ子の各オブジェクトをトップレベルの列にする |
+| `fillMissingFields` | 残すフィールドが行にない場合は `null` で埋める。デフォルトでオン |
+| `joinFields` | 指定した各リストを1つのテキスト値にする |
+| `joinSeparator` | 結合した項目の間に入るテキスト。デフォルトはカンマ&スペース |
+| `constantFields` | すべての行に同じテキストが入る列を加える |
+
+- オブジェクト内のフィールドは、`author.id` のようにドットでつないで指定します。大文字小文字&アンダースコアの違いは問いません。
+- どの行も `id` を残します。
+- `fields` を使うと、行にないフィールドは `null` として届きます。そのため、どの行も同じ列を持ちます。
+- フィールド名が間違っていると、読み取り&課金の前に実行が止まります。
+- 名前を確認できない場合、実行は読み取りを続け、見当たらなかった名前を最後に挙げます。
+- 他のActor向けに書いたマップ関数やjqフィルターは、実行が無視します。
+
+計算列を加えるには、その名前を `fields` か `renameFields` に書きます。
+
+| 列 | 計算式 |
+| --- | --- |
+| `totalEngagement` | `likeCount` + `replyCount` + `retweetCount` + `quoteCount`。欠けた件数は0として足す |
+| `engagementRate` | `totalEngagement` × 100 ÷ 著者の `followers`、小数点以下4桁まで |
+| `engagementPerView` | `totalEngagement` × 100 ÷ `viewCount`、小数点以下4桁まで |
+
+これらの件数がない行では、`totalEngagement` は `null` です。除数がないか0の場合、率は `null` です。
 
 ## 実行オプション
 
-- 実行のコストに上限をかけるには、Apifyの最大合計課金額を設定します。その予算で取得できるだけ多くの行を得るには、`maxItems`を空のままにします。ポストの数を減らしたいときは、`maxItems`を設定します。
-- Apify APIでは`maxTotalChargeUsd`を、ConsoleではMax cost per runを設定します。Apifyはその上限を`ACTOR_MAX_TOTAL_CHARGE_USD`としてこのActorに渡します。このActorは、それを課金できる最大の行数に変換します。
-- 多数のポストをまとめて取得するには、`tweetIds`を渡します。1つのアカウントのポストを読むには、プロフィールのURLを貼り付けます。
-- クエリが多い場合は、`includeSearchTerms: true`を設定して、各結果に検索語のタグを付けます。
-- `queryType: "Latest + Top"`を設定すると、Xの2つの検索モードを1回の実行で使えます。重複排除と結果の上限は、両方にまとめて適用されます。
-- 1秒ごとのチェックと署名付きWebhookには、Xquikのアカウントモニターかキーワードモニターを使います。有効なモニターは1秒ごとにチェックします。
+- 実行のコストに上限をかけるには、Apifyの最大合計課金額を設定します。その予算で取得できるだけ多くの行を得るには、`maxItems` を空のままにします。ポストの数を減らしたいときは、`maxItems` を設定します。
+- Apify APIでは `maxTotalChargeUsd` を、ConsoleではMax cost per runを設定します。Apifyはその上限を `ACTOR_MAX_TOTAL_CHARGE_USD` としてこのActorに渡します。このActorは、それを課金できる最大の行数に変換します。
+- 多数のポストをまとめて取得するには、`tweetIds` を渡します。1つのアカウントのポストを読み取るには、プロフィールのURLを貼り付けます。
+- クエリが多い場合は、`includeSearchTerms: true` を設定して、各結果に検索語のタグを付けます。
+- `queryType: "Latest + Top"` を設定すると、Xの2つの検索モードを1回の実行で使えます。重複排除&結果の上限は、両方にまとめて適用されます。
+- 1秒ごとのチェック&署名付きWebhookには、Xquikのアカウントモニターかキーワードモニターを使います。有効なモニターは1秒ごとにチェックします。
 
 ### 常に最新のビルドを使う
 
-すべての実行で`latest`を選ぶと、公開済みのすべての修正が適用されます。
+公開済みのすべての修正を受け取るには、すべての実行で `latest` を選んでください。
 
-ビルドを選ばない場合、ApifyはXquikのX Tweet Scraperをデフォルトの`latest`で実行します。Consoleでの実行と標準のAPIの例は、そのデフォルトを引き継ぎます。
+ビルドを選ばない場合、ApifyはXquikのX Tweet Scraperをデフォルトの `latest` で実行します。Consoleでの実行&標準のAPIの例は、そのデフォルトを引き継ぎます。
 
-保存済みのタスクは、Actorのデフォルトを上書きできます。スケジュールとタスクの連携は、その選択を再利用します。上書きはすべて`latest`にしておいてください。
+保存済みのタスクは、Actorのデフォルトを上書きできます。スケジュール&タスクの連携は、その選択を再利用します。上書きはすべて `latest` にしておいてください。
 
-Apifyは、特定のビルド番号を`latest`に転送しません。固定した番号は`latest`に置き換えてください。特定のビルドは、一時的なロールバックや実行の再現にだけ使ってください。
+Apifyは、特定のビルド番号を `latest` に転送しません。固定した番号は `latest` に置き換えてください。特定のビルドは、一時的なロールバックや実行の再現にだけ使ってください。
 
-Apifyの[ビルドタグ](https://docs.apify.com/platform/actors/development/builds-and-runs/builds)、[実行オプション](https://docs.apify.com/platform/actors/running/runs-and-builds)、[タスクのドキュメント](https://docs.apify.com/platform/actors/running/tasks)を参照してください。
+Apifyの[ビルドタグ](https://docs.apify.com/platform/actors/development/builds-and-runs/builds)、[実行オプション](https://docs.apify.com/platform/actors/running/runs-and-builds)&[タスクのドキュメント](https://docs.apify.com/platform/actors/running/tasks)を参照してください。
 
 ## 関連するXquik Actor
 
-すべてのXquik Actorは、同じ抽出エンジン、フィルター優先の課金、診断機能を共有しています。必要なデータに合うものを選んでください。
+すべてのXquik Actorは、同じ抽出エンジン、フィルター優先の課金&診断機能を共有しています。必要なデータに合うものを選んでください。
 
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)は、ユーザー名、ID、URLから、プロフィールとそのポスト、返信、メディア、フォロワーをスクレイピングします。検索ではなくアカウントから始めるときに使います。1行あたり$0.00015から。
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)は、25以上のフィルターで、ポストへの返信、コメント、会話全体をスクレイピングします。ポストの下の議論が必要なときに使います。1行あたり$0.00015から。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)は、ポストのURLまたはIDから、返信、引用ポスト、リポストしたユーザー、スレッドを一括でスクレイピングします。誰がポストに反応したかを測るときに使います。1行あたり$0.00015から。
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)は、ポストを引用したポストを、テキスト、メディア、件数、著者とともに、11のフィルターでスクレイピングします。誰がポストを引用し、何と言ったかを調べたいときに使います。1ポストあたり$0.00015から。
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)は、フォロワー、フォロー中、リストのメンバー、購読者、コミュニティのメンバーをプロフィール行としてスクレイピングします。オーディエンスやメンバーの一覧が必要なときに使います。1プロフィールあたり$0.00015から。
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)は、ユーザー名、自己紹介、所在地でユーザーを検索し、フォロワー数、認証、アカウント年数、所在地で絞り込みます。検索からアカウントの一覧を作るときに使います。1プロフィールあたり$0.00015から。
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)は、Xの「アカウントの所在地」ラベル、Xへの接続方法、ユーザー名の変更履歴から、アカウントの所在地を確認します。アカウントの所在地を確かめたいときに使います。1アカウントあたり$0.00015から。
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper)は、ユーザー名、フォロワー、ユーザー検索から、アカウントがプロフィールで公開しているメールアドレス、電話番号、リンクを取得します。プロフィールが公開しているメールアドレスが必要なときに使います。1プロフィールあたり$0.00015から。
-- [X List Scraper](https://apify.com/xquik/x-list-scraper)は、リストのURLまたはIDから、リストのポスト、メンバー、フォロワーをスクレイピングします。厳選したリストを情報源にするときに使います。1行あたり$0.00015から。
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper)は、コミュニティの情報、ポスト、検索結果、メンバー、モデレーターをスクレイピングします。Xのコミュニティを情報源にするときに使います。1行あたり$0.00015から。
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper)は、キーワードからスペースを見つけ、タイトル、状態、時刻、リスナー数、ホスト、スピーカーを読み取ります。URLまたはIDでブロードキャストも読み取ります。Xのライブ音声とライブ動画を追うときに使います。スペースまたはブロードキャスト1件あたり$0.00015から。
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper)は、地域別のリアルタイムトレンドを、順位、ボリューム、クエリ、WOEIDとともにスクレイピングします。どこで何がトレンドかを追うときに使います。1トレンドあたり$0.00015から。
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper)は、キーワード、勤務地、勤務形態、職位レベル、企業からXの求人を、給与と応募リンクとともにスクレイピングします。Xに掲載された求人を集めるときに使います。1求人あたり$0.00015から。
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper)は、長文のXの記事を、カバー画像、著者、日付、指標とともにMarkdownとテキストでスクレイピングします。ポストではなく記事の本文が必要なときに使います。1記事あたり$0.00015から。
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader)は、ポストやプロフィールの写真、動画、GIFを、MP4とメタデータのオプション付きで抽出または保存します。メディアファイルそのものが必要なときに使います。1メディア行あたり$0.00015から。
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)は、ブランドへの言及を、AIによる関連性、感情、顧客体験の回答とともに追跡し、実行どうしを比較します。ブランドを継続して見守るときに使います。分析済みポスト1件あたり$0.0003から。
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)は、すべてのポストに、態度、強度、皮肉の確率のラベルをAIで付けます。任意のトピックの全体的な感情を知りたいときに使います。分析済みポスト1件あたり$0.0003から。
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)は、強気、弱気、中立、混在のスタンス、コンテンツの種類、確信度、資産との関連性のラベルをAIで付けます。株、暗号資産、トレードの話題を追うときに使います。分析済みポスト1件あたり$0.0003から。
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)は、ニュースのポストに、形式、情報源の明示、トピックとの関連性のラベルをAIで付けます。報道と論評を分けるときに使います。分析済みポスト1件あたり$0.0003から。
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)は、すべてのポストについて、独自のカテゴリー、スコア、はい/いいえの質問にAIで答えます。既定の分析が自分のラベルに合わないときに使います。分析済みポスト1件あたり$0.0003から。
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)は、AIによる8つの特性の回答から、すべてのポストについて0から100のViral Scoreと判定を推定します。ポストが広がる理由や伸びない理由を調べるときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)は、ユーザー名、ID、URLから、プロフィールとそのポスト、返信、メディア&フォロワーをスクレイピングします。検索ではなくアカウントから始めるときに使います。1行あたり$0.00015から。
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)は、25以上のフィルターで、ポストへの返信、コメント&会話全体をスクレイピングします。ポストの下の議論が必要なときに使います。1行あたり$0.00015から。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)は、ポストのURLやIDから、返信、引用ポスト、リポストしたユーザー&スレッドを一括でスクレイピングします。誰がポストに反応したかを測るときに使います。1行あたり$0.00015から。
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)は、11のフィルターを使い、ポストの引用ポストを、テキスト、メディア、件数&著者とともにスクレイピングします。ポストを引用した人&その発言を調べるときに使います。1ポストあたり$0.00015から。
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)は、フォロワー、フォロー中、リストのメンバー、購読者&コミュニティのメンバーをプロフィール行としてスクレイピングします。オーディエンスやメンバーの一覧が必要なときに使います。1プロフィールあたり$0.00015から。
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)は、ユーザー名、自己紹介&所在地でユーザーを検索し、フォロワー数、認証、アカウント年数&所在地で絞り込みます。検索からアカウントの一覧を作るときに使います。1プロフィールあたり$0.00015から。
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)は、Xの「アカウントの所在地」ラベル、Xへの接続方法&ユーザー名の変更履歴から、アカウントの所在地を確認します。アカウントの所在地を精査するときに使います。1アカウントあたり$0.00015から。
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper)は、ユーザー名、フォロワー、ユーザー検索から、アカウントがプロフィールで公開しているメールアドレス、電話番号&リンクを取得します。プロフィールが公開しているメールアドレスが必要なときに使います。1プロフィールあたり$0.00015から。
+- [X List Scraper](https://apify.com/xquik/x-list-scraper)は、リストのURLやIDから、リストのポスト、メンバー&フォロワーをスクレイピングします。厳選したリストを情報源にするときに使います。1行あたり$0.00015から。
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper)は、コミュニティの情報、ポスト、検索結果、メンバー&モデレーターをスクレイピングします。Xのコミュニティを情報源にするときに使います。1行あたり$0.00015から。
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper)は、キーワードでスペースを見つけ、タイトル、状態、時刻、リスナー数、ホスト&スピーカーを読み取ります。URLやIDでブロードキャストも読み取ります。Xのライブ音声&ライブ動画を追うときに使います。スペースまたはブロードキャスト1件あたり$0.00015から。
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper)は、地域別のリアルタイムトレンドを、順位、ボリューム、クエリ & WOEIDとともにスクレイピングします。どこで何がトレンドかを追うときに使います。1トレンドあたり$0.00015から。
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper)は、キーワード、勤務地、勤務形態、職位レベル&企業からXの求人を、給与&応募リンクとともにスクレイピングします。Xに掲載された求人を集めるときに使います。1求人あたり$0.00015から。
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper)は、長文のXの記事を、カバー画像、著者、日付&指標とともに、Markdown & テキストでスクレイピングします。ポストではなく記事の本文が必要なときに使います。1記事あたり$0.00015から。
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader)は、ポストやプロフィールの写真、動画 & GIFを、MP4 & メタデータのオプション付きで抽出または保存します。メディアファイルそのものが必要なときに使います。1メディア行あたり$0.00015から。
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)は、ブランドへの言及を、AIによる関連性、感情&顧客体験の回答とともに追跡し、実行どうしを比較します。ブランドを継続して見守るときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)は、すべてのポストに、態度、強度&皮肉の確率のラベルをAIで付けます。任意のトピックの全体的な感情が必要なときに使います。分析済みポスト1件あたり$0.0003から。
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)は、強気、弱気、中立、混在のいずれかのスタンス、コンテンツの種類、確信度&資産との関連性のラベルをAIで付けます。株、暗号資産、トレードの話題を追うときに使います。分析済みポスト1件あたり$0.0003から。
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)は、ニュースのポストに、形式、情報源の明示&トピックとの関連性のラベルをAIで付けます。報道と論評を分けるときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)は、すべてのポストについて、独自のカテゴリー、スコア&はい/いいえの質問にAIで答えます。既定の分析が自分のラベルに合わないときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)は、AIによる8つの特性の回答から、すべてのポストについて0から100のViral Score & 判定を推定します。ポストが広がる理由や伸びない理由を調べるときに使います。分析済みポスト1件あたり$0.0003から。
 
 ## よくある質問
 
@@ -621,27 +668,27 @@ Apifyの[ビルドタグ](https://docs.apify.com/platform/actors/development/bui
 
 ### X APIキーは必要ですか？
 
-いいえ。X APIキー、ログイン、認証情報は不要です。
+いいえ。X APIキー、ログイン、認証情報のどれも不要です。
 
-### 実行を止める上限は何ですか？
+### 実行は何で制限されますか？
 
-指定した件数の上限とApifyの支出上限で、実行は止まります。Apifyのアカウントとプラットフォームの制限も適用されます。
+指定した件数の上限&Apifyの支出上限で、実行は止まります。Apifyのアカウント&プラットフォームの制限も適用されます。
 
 ### どのくらい速いですか？
 
-XquikのX Tweet Scraperは、[ベンチマーク](#ベンチマーク)で1秒あたり25.2件から39.2件の有効なポストを配信しました。実行時間は、入力、結果の件数、Xの可用性によって変わります。
+XquikのX Tweet Scraperは、[ベンチマーク](#ベンチマーク)で1秒あたり25.2件から39.2件の有効なポストを配信しました。実行時間は、入力、結果の件数 & Xの可用性によって変わります。
 
-### Latest検索で、Xの最新タブにないポストが返るのはなぜですか？
+### Xの検索タブにないポストが返るのはなぜですか？
 
 Xは、一致するポストの一部を最新タブに表示しません。XquikのX Tweet Scraperは、そうしたポストも返します。どのポストも、クエリに対するXの実際の検索結果です。各ポストの課金は1回だけです。
 
 ### どの検索演算子が使えますか？
 
-Xの高度な検索は、著者、宛先、メンション、日付、エンゲージメント、メディア、位置情報に対応しています。例は[対応する主な検索演算子](#対応する主な検索演算子)を参照してください。
+Xの高度な検索は、著者、宛先、メンション、日付、エンゲージメント、メディア&位置情報に対応しています。例は[対応する主な検索演算子](#対応する主な検索演算子)を参照してください。
 
 ### Apify APIでこのActorを実行できますか？
 
-はい。Python、JavaScript、cURLの例は[APIタブ](https://apify.com/xquik/x-tweet-scraper/api)にあります。
+はい。Python、JavaScript & cURLの例は[APIタブ](https://apify.com/xquik/x-tweet-scraper/api)にあります。
 
 ### 定期的なスクレイピングをスケジュールできますか？
 
@@ -649,12 +696,12 @@ Xの高度な検索は、著者、宛先、メンション、日付、エンゲ�
 
 ### カスタムソリューションを依頼できますか？
 
-はい。ダッシュボード、API、MCPサーバー、Webhookについては、[xquik.com](https://xquik.com)にアクセスするか、[APIドキュメント](https://docs.xquik.com/introduction)をお読みください。
+はい。必要な内容を[Issuesタブ](https://apify.com/xquik/x-tweet-scraper/issues)に書いてください。Xquikは、ダッシュボード、REST API、MCPサーバー & Webhookも提供しています。Xquikのウェブサイトは、Xquikの[Apifyプロフィール](https://apify.com/xquik)にあります。
 
 ### Xのデータをスクレイピングしても合法ですか？
 
-XquikのX Tweet Scraperは、Xの公開フィールドを取得します。結果には個人データが含まれることがあります。目的が合法であることを確認し、自分に適用されるプライバシー規則に従ってください。判断に迷う場合は、資格のある弁護士に相談してください。
+XquikのX Tweet Scraperは、Xの公開フィールドを取得します。結果には個人データが含まれることがあります。目的が合法であることを確認し、適用されるプライバシー規則に従ってください。判断に迷う場合は、資格のある弁護士に相談してください。
 
 ### どこでサポートを受けられますか？
 
-ActorページのIssuesタブか、[GitHub](https://github.com/Xquik-dev/x-twitter-scraper/issues)でissueを開いてください。実行IDを添えてsupport@xquik.comに連絡することもできます。
+実行IDを添えて、[Issuesタブ](https://apify.com/xquik/x-tweet-scraper/issues)でissueを開いてください。
