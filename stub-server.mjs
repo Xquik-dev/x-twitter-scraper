@@ -3,10 +3,6 @@
 // SPDX-FileCopyrightText: 2026 Xquik
 // SPDX-License-Identifier: MIT
 
-// Package-verification stub for the stdio MCP protocol.
-// Returns the published tool definitions used by registry checks.
-// Connect to https://xquik.com/mcp for live requests.
-
 import { createInterface } from "node:readline";
 import { pathToFileURL } from "node:url";
 
@@ -175,9 +171,7 @@ export function processLine(line, handleMessage) {
     if (isObject(msg)) {
       handleMessage(msg);
     }
-  } catch {
-    // Ignore malformed input.
-  }
+  } catch {}
 }
 
 export function startServer({
