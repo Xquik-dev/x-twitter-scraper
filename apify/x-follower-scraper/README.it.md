@@ -73,7 +73,7 @@ origine & la relazione.
 | `coverPicture`    | URL del banner                                                     |
 | `createdAt`       | Stringa di X con data & ora di creazione dell'account              |
 | `sourceTarget`    | Nome utente / ID da cui hai estratto questo profilo                |
-| `sourceRelation`  | Relazione: `followers`, `following`, `list_members`, ...           |
+| `sourceRelation`  | Relazione, ad esempio `followers`, `following` o `list_members`    |
 | `sourceUrl`       | URL esatto in cui è stato trovato il profilo                       |
 | `sourceTargets`   | Tutti i target che corrispondono al profilo in modalità merge      |
 | `sourceRelations` | Tutte le relazioni che corrispondono al profilo in modalità merge  |

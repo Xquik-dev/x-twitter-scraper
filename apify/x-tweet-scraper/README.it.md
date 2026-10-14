@@ -79,7 +79,7 @@ post & query di ricerca con oltre 50 filtri.
 | `url`                  | Link diretto al post                                                |
 | `tweetUrl`             | Alias dell'URL del post nell'output piatto                          |
 | `twitterUrl`           | URL `twitter.com` nell'output piatto                                |
-| `author`               | Campi dell'autore: nome utente, bio, sito, conteggi                 |
+| `author`               | Nome utente, bio, sito & conteggi dell'autore                       |
 | `authorUsername`       | Nome utente dell'autore nell'output piatto                          |
 | `authorFollowers`      | Numero di follower dell'autore nell'output piatto                   |
 | `authorUrl`            | Sito web dell'autore nell'output piatto, quando disponibile         |

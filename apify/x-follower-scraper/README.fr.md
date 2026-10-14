@@ -77,7 +77,7 @@ nomme sa cible source et sa relation.
 | `coverPicture`    | URL de la bannière                                            |
 | `createdAt`       | Date de création du compte, en texte, fournie par X           |
 | `sourceTarget`    | Nom d'utilisateur ou ID d'où vient ce profil                  |
-| `sourceRelation`  | Relation : `followers`, `following`, `list_members`, ...      |
+| `sourceRelation`  | Relation, comme `followers`, `following` ou `list_members`    |
 | `sourceUrl`       | URL exacte où l'Actor a trouvé le profil                      |
 | `sourceTargets`   | Toutes les cibles qui ont trouvé ce profil en mode fusion     |
 | `sourceRelations` | Toutes les relations qui ont trouvé ce profil en mode fusion  |

@@ -74,7 +74,7 @@ Quellziel & seine Beziehung.
 | `coverPicture`    | Banner-URL                                                        |
 | `createdAt`       | Zeitstempel der Account-Erstellung als String von X               |
 | `sourceTarget`    | Nutzername oder ID, von dem dieses Profil stammt                  |
-| `sourceRelation`  | Beziehung: `followers`, `following`, `list_members`, ...          |
+| `sourceRelation`  | Beziehung, etwa `followers`, `following` oder `list_members`      |
 | `sourceUrl`       | Genaue URL, auf der der Actor das Profil gefunden hat             |
 | `sourceTargets`   | Alle Ziele, die im Merge-Modus zu diesem Profil passen            |
 | `sourceRelations` | Alle Beziehungen, die im Merge-Modus zu diesem Profil passen      |

@@ -79,7 +79,7 @@ Suchanfragen mit über 50 Filtern.
 | `url`                  | Direkter Link zum Post                                          |
 | `tweetUrl`             | Alias der Post-URL in der flachen Ausgabe                       |
 | `twitterUrl`           | `twitter.com`-URL in der flachen Ausgabe                        |
-| `author`               | Autorenfelder: Nutzername, Bio, Website, Zähler                 |
+| `author`               | Nutzername, Bio, Website & Zähler des Autors                    |
 | `authorUsername`       | Nutzername des Autors in der flachen Ausgabe                    |
 | `authorFollowers`      | Follower-Anzahl des Autors in der flachen Ausgabe               |
 | `authorUrl`            | Website des Autors in der flachen Ausgabe, falls vorhanden      |

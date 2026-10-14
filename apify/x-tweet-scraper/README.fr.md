@@ -81,7 +81,7 @@ avec plus de 50 filtres.
 | `url`                  | Lien direct vers le post                                                 |
 | `tweetUrl`             | Alias de l'URL du post en sortie plate                                   |
 | `twitterUrl`           | URL `twitter.com` en sortie plate                                        |
-| `author`               | Champs d'auteur : nom d'utilisateur, bio, site web, compteurs            |
+| `author`               | Nom d'utilisateur, bio, site web et compteurs de l'auteur                |
 | `authorUsername`       | Nom d'utilisateur de l'auteur en sortie plate                            |
 | `authorFollowers`      | Nombre d'abonnés de l'auteur en sortie plate                             |
 | `authorUrl`            | Site web de l'auteur en sortie plate, quand il existe                    |

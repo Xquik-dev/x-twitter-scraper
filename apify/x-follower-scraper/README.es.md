@@ -76,7 +76,7 @@ de origen y su relación.
 | `coverPicture`    | URL de la imagen de encabezado                                          |
 | `createdAt`       | Cadena de fecha y hora de creación de la cuenta, según X                |
 | `sourceTarget`    | Nombre de usuario o ID del que extrajiste este perfil                   |
-| `sourceRelation`  | Relación: `followers`, `following`, `list_members`, ...                 |
+| `sourceRelation`  | Relación, como `followers`, `following` o `list_members`                |
 | `sourceUrl`       | URL exacta donde apareció el perfil                                     |
 | `sourceTargets`   | Todos los objetivos que coincidieron con este perfil en modo merge      |
 | `sourceRelations` | Todas las relaciones que coincidieron con este perfil en modo merge     |

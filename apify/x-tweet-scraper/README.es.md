@@ -79,7 +79,7 @@ IDs de Listas, IDs de posts y consultas de búsqueda con más de 50 filtros.
 | `url`                  | Enlace directo al post                                                |
 | `tweetUrl`             | Alias de la URL del post en la salida plana                           |
 | `twitterUrl`           | URL de `twitter.com` en la salida plana                               |
-| `author`               | Campos del autor: nombre de usuario, biografía, sitio web, conteos    |
+| `author`               | Nombre de usuario, biografía, sitio web y conteos del autor           |
 | `authorUsername`       | Nombre de usuario del autor en la salida plana                        |
 | `authorFollowers`      | Cantidad de seguidores del autor en la salida plana                   |
 | `authorUrl`            | Sitio web del autor en la salida plana, si existe                     |
