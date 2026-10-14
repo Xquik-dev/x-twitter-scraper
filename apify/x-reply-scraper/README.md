@@ -16,8 +16,9 @@
 [Italiano](README.it.md)
 
 [![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
+
 [Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
-Claude Code, Codex, Cursor, and more, from 6:07.
+Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X Reply Scraper collects replies, comments & whole
@@ -68,7 +69,7 @@ handles single posts, bulk URL lists, Tweet IDs & user reply timelines.
 The dataset & run-report schemas describe every returned field. Primitive fields
 also carry examples for agents & generated integrations.
 
-Every full reply row can include these core fields:
+Every full reply row can include these core fields.
 
 | Field               | Description                                           |
 | ------------------- | ----------------------------------------------------- |
@@ -94,15 +95,16 @@ Every full reply row can include these core fields:
 | `quoted_tweet`      | Quoted post when available                            |
 | `retweeted_tweet`   | Reposted post when available                          |
 
-Full rows also keep available source metadata:
+Full rows also keep available source metadata.
 
 - Post type fields are `type`, `isReply`, `isQuoteStatus`, `isNoteTweet`,
   `isLimitedReply` & `isTranslatable`.
-- Text details are `displayTextRange`, `noteTweet`, `article` & `card`.
+- Text details are `displayTextRange`, `noteTweet`, `article`, `card` &
+  `cashtagAttachments`.
 - Labels & notices are `contentDisclosure`, `communityNote`,
   `possiblySensitive`, `tombstone` & `exclusiveContent`.
-- Conversation details are `conversationControl`, `limitedActions` &
-  `unmentionedUserIds`.
+- Conversation details are `conversationControl`, `limitedActions`,
+  `subscriberBadge` & `unmentionedUserIds`.
 - Context fields are `source`, `place`, `communityId`, `communityName`,
   `reactionContext` & `postCta`.
 - Edit & availability fields are `edit`, `previousCounts`, `viewState` &
@@ -112,6 +114,12 @@ Flat rows keep conversation ancestry, source details, result type & schema
 version. See OpenAPI for the exact fields.
 
 ## How do I use X Reply Scraper to scrape replies?
+
+New to Apify?
+[Create a free account](https://console.apify.com/sign-up?fpr=xquik) first. The
+free plan needs no credit card & gives $5 to spend each month. At $0.00015 per
+row, $5 pays for up to 33,000 rows before platform usage. Then come back here &
+press Try for free.
 
 1. Paste post URLs, Tweet IDs, profile URLs or usernames.
 2. Set `maxItems`, `scope` & the filters your job needs.
@@ -211,6 +219,9 @@ Edit any task before you run it.
 Xquik's X Reply Scraper costs $0.00015 per delivered row on every Apify plan.
 Apify bills platform usage separately.
 
+For more volume, [pick an Apify plan](https://apify.com/pricing?fpr=xquik) with
+more prepaid usage.
+
 Xquik applies one charge per delivered data row. Replies that your filters or
 deduplication remove cost nothing. Diagnostic records in `diagnostics` are free.
 No start, URL, query, pagination or filter fee applies.
@@ -254,7 +265,7 @@ every run.
 The report schema documents completion, billing, failures & saved cursors. Its
 `version` field reports the exact published Actor source version.
 
-The `status` field uses these values:
+The `status` field uses these values.
 
 - `no-input`
 - `invalid-input`
@@ -283,27 +294,28 @@ The input form shows canonical controls only. Compatibility aliases still work
 in JSON, API, SDK, automation & saved task inputs. When you combine canonical &
 alias fields, their existing resolution order applies.
 
-These aliases accept common field names from other scrapers:
+These aliases accept common field names from other scrapers.
 
-- URL aliases: `urls`, `tweetUrls`, `postUrls`, `profileUrls`, & `twitterUrl` as
-  one string
-- ID aliases: `conversationIds`, `postIds`, `ids`, `tweetId`, `id`
-- Username aliases: `twitterHandles`, `screenname`
-- Global limit aliases: `maxResults`, `max_results`, `resultsLimit`,
-  `maxReplies`
-- Per-target aliases: `maxRepliesPerTweet`, `maxCommentsPerPost`,
-  `resultsPerCategory`
-- Search alias: `useSearch`
-- Nested reply aliases: `includeNestedReplies`, `includeRepliesOfReplies`
-- Depth alias: `depth` as `1`, `2` or `3` for `maxDepth`. `full` sets no limit.
-- Scope alias: `onlyDirectReplies` for `scope: "direct"`
-- Original post aliases: `includeOriginalTweet`, `includeSourceTweet`. With
+- URL aliases are `urls`, `tweetUrls`, `postUrls`, `profileUrls`, & `twitterUrl`
+  as one string.
+- ID aliases are `conversationIds`, `postIds`, `ids`, `tweetId`, `id`.
+- Username aliases are `twitterHandles`, `screenname`.
+- Global limit aliases are `maxResults`, `max_results`, `resultsLimit`,
+  `maxReplies`.
+- Per-target aliases are `maxRepliesPerTweet`, `maxCommentsPerPost`,
+  `resultsPerCategory`.
+- The search alias is `useSearch`.
+- Nested reply aliases are `includeNestedReplies`, `includeRepliesOfReplies`.
+- The depth alias is `depth` as `1`, `2` or `3` for `maxDepth`. `full` sets no
+  limit.
+- The scope alias is `onlyDirectReplies` for `scope: "direct"`.
+- Original post aliases are `includeOriginalTweet`, `includeSourceTweet`. With
   `includeSourceTweet`, `resultsPerCategory` caps the replies & the post is 1
   more row.
-- Author alias: `excludeOpSelfReplies` for `excludeOriginalAuthor`
-- Sort aliases: `sortBy` & `queryType` for `sort`. `top`, `newest` & `mostLiked`
-  read as `relevance`, `latest` & `likes`.
-- Output aliases: `outputVariant`, `includeRaw`
+- The author alias is `excludeOpSelfReplies` for `excludeOriginalAuthor`.
+- Sort aliases are `sortBy` & `queryType` for `sort`. `top`, `newest` &
+  `mostLiked` read as `relevance`, `latest` & `likes`.
+- Output aliases are `outputVariant`, `includeRaw`.
 
 `category` set to `replies` changes nothing. A category that is another Actor's
 job, such as `retweets` or `info`, stops the run. It reads & charges nothing.
@@ -370,7 +382,7 @@ parent link can be missing. The Actor preserves the best available depth.
 
 ### Sorting
 
-Use `sort` with these values:
+Use `sort` with these values.
 
 - `relevance` keeps X source order
 - `latest` sorts newest first
@@ -449,7 +461,7 @@ Flat output adds `mediaUrls`.
 
 ### Output example
 
-A trimmed reply row looks like this:
+A trimmed reply row looks like this.
 
 ```json
 {
@@ -514,6 +526,42 @@ Set `outputPreset: "nested"` to omit the added flat fields.
 
 Set `fieldStyle` to `source`, `camelCase` or `snake_case`. The Actor avoids
 overwriting colliding source keys.
+
+## Output columns
+
+8 inputs shape each row after the run reads it. They run no code & change no
+price.
+
+| Field               | What it does                                                |
+| ------------------- | ----------------------------------------------------------- |
+| `fields`            | Keep only these fields, in the order & spelling you write   |
+| `omitFields`        | Drop these fields & keep the rest                           |
+| `renameFields`      | Move a field to a column with a new name                    |
+| `flatten`           | Turn each nested object into top-level columns              |
+| `fillMissingFields` | Fill a kept field a row lacks with `null`. On by default    |
+| `joinFields`        | Turn each of these lists into 1 text value                  |
+| `joinSeparator`     | Text between joined items. The default is a comma & a space |
+| `constantFields`    | Add a column with the same text on every row                |
+
+- Use a dot for a field inside an object, such as `author.id`. Case &
+  underscores do not matter.
+- Every row keeps its `id`.
+- With `fields`, a field a row lacks arrives as `null`. Every row then has the
+  same columns.
+- A wrong field name stops the run before it reads & charges nothing.
+- If names cannot be checked, the run reads on & lists unseen names last.
+- The run ignores a map function or jq filter written for another Actor.
+
+Name a computed column in `fields` or `renameFields` to add it.
+
+| Column              | Formula                                                                            |
+| ------------------- | ---------------------------------------------------------------------------------- |
+| `totalEngagement`   | `likeCount` + `replyCount` + `retweetCount` + `quoteCount`. A missing count adds 0 |
+| `engagementRate`    | `totalEngagement` × 100 ÷ the author's `followers`, to 4 decimals                  |
+| `engagementPerView` | `totalEngagement` × 100 ÷ `viewCount`, to 4 decimals                               |
+
+`totalEngagement` is `null` for a row without those counts. A rate is `null`
+when its divisor is missing or 0.
 
 ## Run options
 
@@ -637,102 +685,85 @@ with `latest`. Use exact builds only for temporary rollbacks.
 Every Xquik Actor shares the same extraction engine, filter-first billing &
 diagnostics. Pick the one that matches the data you need.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): Scrapes tweets
-  from searches, profile timelines, Lists & tweet IDs with 50+ filters & flat
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrapes tweets from
+  searches, profile timelines, Lists & tweet IDs with 50+ filters & flat
   exports. Use it when you need tweet data without analysis. From $0.00015 per
   row.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Scrapes
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) scrapes
   profiles plus their posts, replies, media & followers from handles, IDs or
   URLs. Use it when you start from accounts rather than searches. From $0.00015
   per row.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Scrapes
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) scrapes
   replies, quotes, retweeters & threads for post URLs or IDs in bulk. Use it
   when you measure who engaged with posts. From $0.00015 per row.
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
-  Scrapes the quote tweets of posts with text, media, counts, authors & 11
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
+  scrapes the quote tweets of posts with text, media, counts, authors & 11
   filters. Use it when you study who quoted posts & what they said. From
   $0.00015 per tweet.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Scrapes
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrapes
   followers, following, List members, subscribers & Community members as profile
   rows. Use it when you need audience or member lists. From $0.00015 per
   profile.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Searches users by handle, bio & location with follower, verification, age &
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)
+  searches users by handle, bio & location with follower, verification, age &
   location filters. Use it when you build account lists from search. From
   $0.00015 per profile.
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
-  Checks where accounts are based with X's Account based in label, connected via
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
+  checks where accounts are based with X's Account based in label, connected via
   & username changes. Use it when you vet where accounts are based. From
   $0.00015 per account.
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): Gets the emails,
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) gets the emails,
   phones & links accounts publish on their profiles, from handles, followers or
   user searches. Use it when you need the emails profiles publish. From $0.00015
   per profile.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): Scrapes List posts,
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) scrapes List posts,
   members & followers from List URLs or IDs. Use it when a curated List defines
   your sources. From $0.00015 per row.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapes
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper) scrapes
   Community info, posts, searches, members & moderators. Use it when your
   sources are X Communities. From $0.00015 per row.
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Finds Spaces by
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) finds Spaces by
   keyword & reads their titles, states, times, listener counts, hosts &
-  speakers. Also reads broadcasts by URL or ID. Use it when you track live audio
-  & video on X. From $0.00015 per Space or broadcast.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapes
-  real-time trends by location with rank, volume, query & WOEID. Use it when you
-  track what is trending where. From $0.00015 per trend.
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapes X job
-  listings by keyword, place, workplace, seniority & company, with salaries &
-  apply links. Use it when you collect job openings posted on X. From $0.00015
-  per job.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapes
+  speakers. It also reads broadcasts by URL or ID. Use it when you track live
+  audio & video on X. From $0.00015 per Space or broadcast.
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) scrapes real-time
+  trends by location with rank, volume, query & WOEID. Use it when you track
+  what is trending where. From $0.00015 per trend.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) scrapes X job listings
+  by keyword, place, workplace, seniority & company, with salaries & apply
+  links. Use it when you collect job openings posted on X. From $0.00015 per
+  job.
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) scrapes
   long-form X Articles as Markdown & text with covers, authors, dates & metrics.
   Use it when you need article bodies, not tweets. From $0.00015 per article.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader): Extracts or
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) extracts or
   stores photos, videos & GIFs from posts or profiles with MP4 & metadata
   options. Use it when you need the media files themselves. From $0.00015 per
   media row.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
-  Tracks brand mentions with AI relevance, sentiment & customer-experience
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
+  tracks brand mentions with AI relevance, sentiment & customer-experience
   answers & compares runs. Use it when you watch a brand over time. From $0.0003
   per analyzed tweet.
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
-  Labels attitude, intensity & sarcasm probability for every tweet with AI. Use
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
+  labels attitude, intensity & sarcasm probability for every tweet with AI. Use
   it when you need general sentiment on any topic. From $0.0003 per analyzed
   tweet.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
-  Labels bullish, bearish, neutral or mixed stance, content type, conviction &
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
+  labels bullish, bearish, neutral or mixed stance, content type, conviction &
   asset relevance with AI. Use it when you follow stocks, crypto or trading
   talk. From $0.0003 per analyzed tweet.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
-  Labels news posts by format, source attribution & topic relevance with AI. Use
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
+  labels news posts by format, source attribution & topic relevance with AI. Use
   it when you separate reporting from commentary. From $0.0003 per analyzed
   tweet.
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  Answers your own category, score & yes/no questions for every tweet with AI.
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
+  answers your own category, score & yes/no questions for every tweet with AI.
   Use it when the preset analyses do not fit your labels. From $0.0003 per
   analyzed tweet.
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
-  Estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
+  estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
   trait answers. Use it when you study why tweets spread or flop. From $0.0003
   per analyzed tweet.
-
-## Need more than scraping?
-
-Xquik also offers 53 dashboard tools, a REST API, signed webhooks & an MCP
-server.
-
-- [API documentation](https://docs.xquik.com/introduction): REST API guides
-- [Tweet Replies API](https://docs.xquik.com/api-reference/x/tweet-replies): get
-  the replies to a post
-- [Hidden Replies API](https://docs.xquik.com/api-reference/x/tweet-hidden-replies):
-  get the replies an author hid
-- [Thread API](https://docs.xquik.com/api-reference/x/tweet-thread): get a whole
-  thread
-- [User Replies API](https://docs.xquik.com/api-reference/x/user-replies): get a
-  user's replies
-- [MCP server](https://docs.xquik.com/mcp/overview): discover supported tools
-- [Webhooks](https://docs.xquik.com/webhooks/overview): signed event delivery
 
 ## FAQ
 
@@ -801,10 +832,12 @@ Scraper on a cron. It also connects to Make, Zapier, n8n & Google Sheets.
 
 ### Where do I get help?
 
-Open an issue on the Actor page or contact <support@xquik.com> with the run ID.
+Open an issue in the
+[Issues tab](https://apify.com/xquik/x-reply-scraper/issues) with the run ID.
 
 ### Can I get a custom solution?
 
-Yes. Visit [xquik.com](https://xquik.com) or read the
-[API docs](https://docs.xquik.com/introduction). Xquik offers a dashboard, a
-REST API, an MCP server & webhooks.
+Yes. Describe what you need in the
+[Issues tab](https://apify.com/xquik/x-reply-scraper/issues). Xquik also offers
+a dashboard, a REST API, an MCP server & webhooks. Find Xquik's website on its
+[Apify profile](https://apify.com/xquik).

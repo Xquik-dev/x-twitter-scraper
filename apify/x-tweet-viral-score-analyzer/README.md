@@ -18,7 +18,7 @@
 [![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
 
 [Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
-Claude Code, Codex, Cursor, and more, from 6:07.
+Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X Tweet Viral Score Analyzer rates every tweet. It
@@ -47,6 +47,12 @@ or views. It does not reproduce how X ranks posts.
 > "Twitter" and "X" are trademarks of X Corp.
 
 ## How to check a tweet's viral score
+
+New to Apify?
+[Create a free account](https://console.apify.com/sign-up?fpr=xquik) first. The
+free plan needs no credit card & gives $5 to spend each month. At $0.0003 per
+analyzed tweet, $5 pays for up to 16,000 analyzed tweets before platform usage.
+Then come back here & press Try for free.
 
 1. Add search terms, profile handles, tweet URLs or tweet IDs.
 2. Set `maxItems` & the extraction filters your task needs.
@@ -100,7 +106,7 @@ Tweet Viral Score Analyzer never fills a missing score with a guess.
 
 X published its ranking weights in the repository `xai-org/x-algorithm`, file
 `home-mixer/params/param.rs`. Xquik's X Tweet Viral Score Analyzer applies 4 of
-them to each post's public counts:
+them to each post's public counts.
 
 | Count  | Weight |
 | ------ | ------ |
@@ -116,7 +122,7 @@ divisor, `views` or `followers`. Compare scores with the same basis only.
 `viral.weightsVersion` names the weights, such as
 `x_algorithm_params:2026-09-18`.
 
-The estimate has these limits:
+The estimate has these limits.
 
 - X multiplies each weight by a probability it predicts for one viewer. The
   Actor multiplies by observed counts. The result is an estimate, not the score
@@ -134,7 +140,7 @@ happened. `viral.actualEngagementRate` is
 `log10(1 + weighted sum per 1,000 followers)`. The log limits the effect of one
 very large post. The rate is `null` when the follower count is missing or 0.
 
-The run summary's `viral.calibration` block reports these fields:
+The run summary's `viral.calibration` block reports these fields.
 
 - `comparedPosts` counts posts with a Viral Score & an actual rate.
 - `rankCorrelation` is a Spearman rank correlation from -1 to 1. It shows
@@ -146,7 +152,7 @@ The run summary's `viral.calibration` block reports these fields:
 `gap` is the standardized actual rate minus the standardized Viral Score. A post
 enters a list when its gap reaches 1 standard deviation.
 
-The calibration has these limits:
+The calibration has these limits.
 
 - Fewer than 10 compared posts give a `null` calibration with the reason
   `too_few_posts`. Identical scores or rates give `no_variation`.
@@ -158,7 +164,7 @@ The calibration has these limits:
 
 ## Account report
 
-The run summary's `viral.accounts` block reports each author handle:
+The run summary's `viral.accounts` block reports each author handle.
 
 - Post count, average Viral Score & average actual engagement rate.
 - The best & worst post by Viral Score, with tweet ID & URL.
@@ -169,7 +175,7 @@ Text length bands are `short`, `medium`, `long` & `extended`. `short` ends at 80
 characters, `medium` at 200 & `long` at 280. `extended` covers longer text. A
 self-thread post replies to its own author.
 
-The report has these limits:
+The report has these limits.
 
 - The report lists the 50 handles with the most scored posts.
 - The report tracks the first 1,000 handles of a run. `untrackedPosts` counts
@@ -185,7 +191,7 @@ report. `byViralScore` ranks by average Viral Score. `byActualEngagementRate`
 ranks by average actual rate. Each list holds up to 20 handles with `rank`,
 `posts` & `average`.
 
-The leaderboard has these limits:
+The leaderboard has these limits.
 
 - A handle needs at least 3 scored posts to rank.
 - The rate list skips handles without a follower count.
@@ -221,6 +227,9 @@ You need no AI account, tokens or key. The price covers up to 8 questions &
 64,000 bytes of context per tweet. Each question definition may use up to 8,000
 bytes.
 
+For more volume, [pick an Apify plan](https://apify.com/pricing?fpr=xquik) with
+more prepaid usage.
+
 Extraction filters & deduplication run before analysis. You never pay for
 filtered-out or duplicate rows. Failed analyses, skipped analyses & diagnostic
 rows have no result charge. Apify bills platform usage for compute, storage &
@@ -228,7 +237,7 @@ transfer separately at your plan's rates. The Pricing tab shows it.
 
 ## Input & output examples
 
-The input above is copy-ready. An abbreviated output row looks like this:
+The input above is copy-ready. An abbreviated output row looks like this.
 
 ```json
 {
@@ -275,18 +284,17 @@ analyses & pending charges.
 
 ## Run summary & flat answers
 
-A run writes an `analysis-summary` record to its key-value store in 4 cases:
+A run writes an `analysis-summary` record to its key-value store in 3 cases.
 
 - It hits a problem or is large.
-- It sets `monitor` without `baselineDatasetId`, as the first run of a series.
 - Its comparison finds a changed, new or not comparable tweet.
 - It has `alwaysSaveRunRecords` on.
 
-Other runs skip the record. Their status names the top answer, like
-`Average Viral Score: 64.` A comparison without a change states
-`No change since the earlier run.` A run that hits a problem or is large also
-writes `run-report`. So does a run with `alwaysSaveRunRecords` on. `run-report`
-repeats the summary under `results.analysisSummary`.
+Other runs skip the record, including the first run of a series. Their status
+names the top answer, like `Average Viral Score is 64.` A comparison without a
+change states `No change since the earlier run.` A run that hits a problem or is
+large also writes `run-report`. So does a run with `alwaysSaveRunRecords` on.
+`run-report` repeats the summary under `results.analysisSummary`.
 
 The summary counts analyzed, failed & skipped rows. It sums engagement &
 summarizes every question.
@@ -317,7 +325,7 @@ columns. They sit beside the tweet, so spreadsheets need no JSON parsing. Failed
 Pass `monitor.baselineDatasetId`, the dataset ID of a completed earlier run with
 the same analysis settings. The comparison reads that run's rows. It works even
 when that run skipped its summary. Every row then gains a `monitor` object. Its
-status can be:
+status takes these values.
 
 - `first_run` without a baseline.
 - `new_to_baseline` for tweets the earlier run did not have.
@@ -425,90 +433,91 @@ Sheets.
 
 ### Where do I get help?
 
-Open an issue on the Actor page or contact <support@xquik.com> with the run ID.
-Free diagnostics in the key-value store explain empty, partial or interrupted
-runs.
+Open an issue in the
+[Issues tab](https://apify.com/xquik/x-tweet-viral-score-analyzer/issues) with
+the run ID. Free diagnostics in the key-value store explain runs that need
+attention. A run that gets no row back says why in its status.
 
 ## Related Xquik Actors
 
 Every Xquik Actor shares the same extraction engine, filter-first billing &
 diagnostics. Pick the one that matches the data you need.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): Scrapes tweets
-  from searches, profile timelines, Lists & tweet IDs with 50+ filters & flat
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrapes tweets from
+  searches, profile timelines, Lists & tweet IDs with 50+ filters & flat
   exports. Use it when you need tweet data without analysis. From $0.00015 per
   row.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Scrapes
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) scrapes
   profiles plus their posts, replies, media & followers from handles, IDs or
   URLs. Use it when you start from accounts rather than searches. From $0.00015
   per row.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Scrapes replies,
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) scrapes replies,
   comments & whole conversations under posts with 25+ filters. Use it when you
   need the discussion beneath tweets. From $0.00015 per row.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Scrapes
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) scrapes
   replies, quotes, retweeters & threads for post URLs or IDs in bulk. Use it
   when you measure who engaged with posts. From $0.00015 per row.
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
-  Scrapes the quote tweets of posts with text, media, counts, authors & 11
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
+  scrapes the quote tweets of posts with text, media, counts, authors & 11
   filters. Use it when you study who quoted posts & what they said. From
   $0.00015 per tweet.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Scrapes
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrapes
   followers, following, List members, subscribers & Community members as profile
   rows. Use it when you need audience or member lists. From $0.00015 per
   profile.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Searches users by handle, bio & location with follower, verification, age &
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)
+  searches users by handle, bio & location with follower, verification, age &
   location filters. Use it when you build account lists from search. From
   $0.00015 per profile.
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
-  Checks where accounts are based with X's Account based in label, connected via
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
+  checks where accounts are based with X's Account based in label, connected via
   & username changes. Use it when you vet where accounts are based. From
   $0.00015 per account.
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): Gets the emails,
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) gets the emails,
   phones & links accounts publish on their profiles, from handles, followers or
   user searches. Use it when you need the emails profiles publish. From $0.00015
   per profile.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): Scrapes List posts,
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) scrapes List posts,
   members & followers from List URLs or IDs. Use it when a curated List defines
   your sources. From $0.00015 per row.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapes
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper) scrapes
   Community info, posts, searches, members & moderators. Use it when your
   sources are X Communities. From $0.00015 per row.
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Finds Spaces by
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) finds Spaces by
   keyword & reads their titles, states, times, listener counts, hosts &
-  speakers. Also reads broadcasts by URL or ID. Use it when you track live audio
-  & video on X. From $0.00015 per Space or broadcast.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapes
-  real-time trends by location with rank, volume, query & WOEID. Use it when you
-  track what is trending where. From $0.00015 per trend.
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapes X job
-  listings by keyword, place, workplace, seniority & company, with salaries &
-  apply links. Use it when you collect job openings posted on X. From $0.00015
-  per job.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapes
+  speakers. It also reads broadcasts by URL or ID. Use it when you track live
+  audio & video on X. From $0.00015 per Space or broadcast.
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) scrapes real-time
+  trends by location with rank, volume, query & WOEID. Use it when you track
+  what is trending where. From $0.00015 per trend.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) scrapes X job listings
+  by keyword, place, workplace, seniority & company, with salaries & apply
+  links. Use it when you collect job openings posted on X. From $0.00015 per
+  job.
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) scrapes
   long-form X Articles as Markdown & text with covers, authors, dates & metrics.
   Use it when you need article bodies, not tweets. From $0.00015 per article.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader): Extracts or
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) extracts or
   stores photos, videos & GIFs from posts or profiles with MP4 & metadata
   options. Use it when you need the media files themselves. From $0.00015 per
   media row.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
-  Tracks brand mentions with AI relevance, sentiment & customer-experience
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
+  tracks brand mentions with AI relevance, sentiment & customer-experience
   answers & compares runs. Use it when you watch a brand over time. From $0.0003
   per analyzed tweet.
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
-  Labels attitude, intensity & sarcasm probability for every tweet with AI. Use
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
+  labels attitude, intensity & sarcasm probability for every tweet with AI. Use
   it when you need general sentiment on any topic. From $0.0003 per analyzed
   tweet.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
-  Labels bullish, bearish, neutral or mixed stance, content type, conviction &
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
+  labels bullish, bearish, neutral or mixed stance, content type, conviction &
   asset relevance with AI. Use it when you follow stocks, crypto or trading
   talk. From $0.0003 per analyzed tweet.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
-  Labels news posts by format, source attribution & topic relevance with AI. Use
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
+  labels news posts by format, source attribution & topic relevance with AI. Use
   it when you separate reporting from commentary. From $0.0003 per analyzed
   tweet.
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  Answers your own category, score & yes/no questions for every tweet with AI.
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
+  answers your own category, score & yes/no questions for every tweet with AI.
   Use it when the preset analyses do not fit your labels. From $0.0003 per
   analyzed tweet.
