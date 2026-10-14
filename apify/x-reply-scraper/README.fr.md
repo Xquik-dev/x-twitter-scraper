@@ -778,26 +778,6 @@ données dont vous avez besoin.
   critères notés par IA. Utilisez-le quand vous étudiez pourquoi des posts
   percent ou font un flop. À partir de $0.0003 par post analysé.
 
-## Besoin de plus que du scraping ?
-
-Xquik propose aussi 53 outils de tableau de bord, une API REST, des webhooks
-signés et un serveur MCP.
-
-- La [documentation de l'API](https://docs.xquik.com/introduction) réunit les
-  guides de l'API REST.
-- L'[API des réponses](https://docs.xquik.com/api-reference/x/tweet-replies)
-  renvoie les réponses à un post.
-- L'[API des réponses masquées](https://docs.xquik.com/api-reference/x/tweet-hidden-replies)
-  renvoie les réponses qu'un auteur a masquées.
-- L'[API des discussions](https://docs.xquik.com/api-reference/x/tweet-thread)
-  renvoie une discussion entière.
-- L'[API des réponses d'un utilisateur](https://docs.xquik.com/api-reference/x/user-replies)
-  renvoie les réponses d'un utilisateur.
-- Avec le [serveur MCP](https://docs.xquik.com/mcp/overview), découvrez les
-  outils pris en charge.
-- Les [webhooks](https://docs.xquik.com/webhooks/overview) livrent des
-  événements signés.
-
 ## FAQ
 
 Les réponses aux questions fréquentes, puis où trouver de l'aide.

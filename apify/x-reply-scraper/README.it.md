@@ -754,26 +754,6 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   sui suoi tratti. Usalo quando studi perché i post si diffondono o falliscono.
   Da $0.0003 per post analizzato.
 
-## Ti serve più dello scraping?
-
-Xquik offre anche 53 strumenti nella dashboard, un'API REST, webhook firmati &
-un server MCP.
-
-- La [documentazione API](https://docs.xquik.com/introduction) raccoglie le
-  guide all'API REST.
-- L'[API delle risposte ai post](https://docs.xquik.com/api-reference/x/tweet-replies)
-  restituisce le risposte a un post.
-- L'[API delle risposte nascoste](https://docs.xquik.com/api-reference/x/tweet-hidden-replies)
-  restituisce le risposte che un autore ha nascosto.
-- L'[API dei thread](https://docs.xquik.com/api-reference/x/tweet-thread)
-  restituisce un intero thread.
-- L'[API delle risposte degli utenti](https://docs.xquik.com/api-reference/x/user-replies)
-  restituisce le risposte di un utente.
-- Con il [server MCP](https://docs.xquik.com/mcp/overview) scopri gli strumenti
-  supportati.
-- I [webhook](https://docs.xquik.com/webhooks/overview) consegnano eventi
-  firmati.
-
 ## FAQ
 
 Le risposte alle domande più comuni, poi dove trovare assistenza.

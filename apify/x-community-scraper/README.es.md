@@ -467,26 +467,6 @@ necesitas.
   respuestas de IA sobre sus rasgos. Úsalo cuando estudies por qué un post se
   difunde o fracasa. Desde $0.0003 por post analizado.
 
-## ¿Necesitas más que scraping?
-
-Xquik también ofrece 53 herramientas en el panel, una API REST, webhooks
-firmados y un servidor MCP.
-
-- [Documentación de la API](https://docs.xquik.com/introduction) reúne las guías
-  de la API REST.
-- [API de información de Comunidad](https://docs.xquik.com/api-reference/x/community-info)
-  obtiene el registro de 1 Comunidad.
-- [API de posts de Comunidad](https://docs.xquik.com/api-reference/x/community-tweets)
-  obtiene los posts de una Comunidad.
-- [API de miembros de Comunidad](https://docs.xquik.com/api-reference/x/community-members)
-  exporta los miembros de una Comunidad.
-- [API para encontrar Comunidades](https://docs.xquik.com/api-reference/x/community-find)
-  encuentra Comunidades por palabra clave.
-- [Servidor MCP](https://docs.xquik.com/mcp/overview) muestra las herramientas
-  compatibles.
-- [Webhooks](https://docs.xquik.com/webhooks/overview) entregan eventos
-  firmados.
-
 ## Preguntas frecuentes
 
 Respuestas a preguntas comunes y, luego, dónde conseguir ayuda.

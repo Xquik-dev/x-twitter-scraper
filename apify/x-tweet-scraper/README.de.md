@@ -1027,26 +1027,6 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   KI-Antworten zu Merkmalen. Nutze ihn, wenn du untersuchst, warum Posts sich
   verbreiten oder floppen. Ab $0.0003 pro analysiertem Post.
 
-## Brauchst du mehr als Scraping?
-
-Xquik bietet außerdem 47 Dashboard-Tools, eine REST-API, signierte Webhooks &
-einen MCP-Server.
-
-- [API-Dokumentation](https://docs.xquik.com/introduction) enthält Anleitungen
-  zur REST-API.
-- [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets)
-  sucht Posts per REST.
-- [Batch Tweets API](https://docs.xquik.com/api-reference/x/batch-tweets) ruft
-  bis zu 100 Posts per ID ab.
-- [User Tweets API](https://docs.xquik.com/api-reference/x/user-tweets) ruft die
-  Timeline eines Nutzers ab.
-- [MCP-Server](https://docs.xquik.com/mcp/overview) zeigt die unterstützten
-  Tools.
-- [Webhooks](https://docs.xquik.com/webhooks/overview) bieten signierte
-  Zustellung von Ereignissen.
-- Auf [GitHub](https://github.com/Xquik-dev/x-twitter-scraper) findest du
-  Quellcode & Issue-Tracker.
-
 ## FAQ
 
 Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.

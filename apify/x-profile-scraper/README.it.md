@@ -522,28 +522,6 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   sui suoi tratti. Usalo quando studi perché i post si diffondono o falliscono.
   Da $0.0003 per post analizzato.
 
-## Ti serve più dello scraping?
-
-Xquik offre anche 53 strumenti nella dashboard, un'API REST, webhook firmati &
-un server MCP.
-
-- La [documentazione API](https://docs.xquik.com/introduction) raccoglie le
-  guide all'API REST.
-- [Profile Lookup API](https://docs.xquik.com/api-reference/x/twitter-profile-lookup)
-  restituisce 1 profilo pubblico.
-- [User Tweets API](https://docs.xquik.com/api-reference/x/user-tweets)
-  restituisce i post di un utente.
-- [Followers API](https://docs.xquik.com/api-reference/x/followers) restituisce
-  i follower di un account.
-- [Bio Translation API](https://docs.xquik.com/api-reference/x/user-bio-translation)
-  traduce la bio di un profilo.
-- [Live Status API](https://docs.xquik.com/api-reference/x/user-live-status)
-  verifica se un utente è in diretta.
-- Con il [server MCP](https://docs.xquik.com/mcp/overview) scopri gli strumenti
-  supportati.
-- I [webhook](https://docs.xquik.com/webhooks/overview) consegnano gli eventi
-  con firma.
-
 ## FAQ
 
 Le risposte alle domande più comuni, poi dove trovare assistenza.

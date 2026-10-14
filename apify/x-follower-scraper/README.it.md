@@ -734,24 +734,6 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   sui suoi tratti. Usalo quando studi perché i post si diffondono o falliscono.
   Da $0.0003 per post analizzato.
 
-## Ti serve più dello scraping?
-
-Xquik offre anche 47 strumenti nella dashboard, un'API REST, webhook firmati &
-un server MCP.
-
-- La [documentazione API](https://docs.xquik.com/introduction) raccoglie le
-  guide all'API REST.
-- [Followers API](https://docs.xquik.com/api-reference/x/followers) restituisce
-  i follower disponibili di un account.
-- [Following API](https://docs.xquik.com/api-reference/x/following) mostra chi
-  segue un utente.
-- [List Members API](https://docs.xquik.com/api-reference/x/list-members)
-  esporta i membri di una lista pubblica di X.
-- Il [server MCP](https://docs.xquik.com/mcp/overview) trova & avvia le
-  operazioni JSON o di testo supportate.
-- Con i [webhook](https://docs.xquik.com/webhooks/overview) ricevi gli eventi
-  supportati su post & profili.
-
 ## FAQ
 
 Le risposte alle domande più comuni, poi dove trovare assistenza.

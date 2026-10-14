@@ -1051,26 +1051,6 @@ données dont vous avez besoin.
   critères notés par IA. Utilisez-le quand vous étudiez pourquoi des posts
   percent ou font un flop. À partir de $0.0003 par post analysé.
 
-## Besoin de plus que du scraping ?
-
-Xquik propose aussi 47 outils de tableau de bord, une API REST, des webhooks
-signés et un serveur MCP.
-
-- La [documentation de l'API](https://docs.xquik.com/introduction) réunit les
-  guides de l'API REST.
-- [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets)
-  recherche des posts via REST.
-- [Batch Tweets API](https://docs.xquik.com/api-reference/x/batch-tweets)
-  récupère jusqu'à 100 posts par ID.
-- [User Tweets API](https://docs.xquik.com/api-reference/x/user-tweets) renvoie
-  le fil d'un utilisateur.
-- Avec le [serveur MCP](https://docs.xquik.com/mcp/overview), découvrez les
-  outils pris en charge.
-- Les [webhooks](https://docs.xquik.com/webhooks/overview) livrent des
-  événements signés.
-- [GitHub](https://github.com/Xquik-dev/x-twitter-scraper) héberge le code
-  source et le suivi des issues.
-
 ## FAQ
 
 Les réponses aux questions fréquentes, puis où trouver de l'aide.

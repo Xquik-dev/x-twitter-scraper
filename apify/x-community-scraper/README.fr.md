@@ -475,26 +475,6 @@ données dont vous avez besoin.
   critères notés par IA. Utilisez-le quand vous étudiez pourquoi des posts
   percent ou font un flop. À partir de $0.0003 par post analysé.
 
-## Besoin de plus que du scraping ?
-
-Xquik propose aussi 53 outils de tableau de bord, une API REST, des webhooks
-signés et un serveur MCP.
-
-- La [documentation de l'API](https://docs.xquik.com/introduction) réunit les
-  guides de l'API REST.
-- L'[API d'infos de Communauté](https://docs.xquik.com/api-reference/x/community-info)
-  renvoie la fiche d'une Communauté.
-- L'[API des posts de Communauté](https://docs.xquik.com/api-reference/x/community-tweets)
-  renvoie les posts d'une Communauté.
-- L'[API des membres de Communauté](https://docs.xquik.com/api-reference/x/community-members)
-  exporte les membres d'une Communauté.
-- L'[API de recherche de Communautés](https://docs.xquik.com/api-reference/x/community-find)
-  trouve des Communautés par mot-clé.
-- Avec le [serveur MCP](https://docs.xquik.com/mcp/overview), découvrez les
-  outils pris en charge.
-- Les [webhooks](https://docs.xquik.com/webhooks/overview) livrent des
-  événements signés.
-
 ## FAQ
 
 Les réponses aux questions fréquentes, puis où trouver de l'aide.

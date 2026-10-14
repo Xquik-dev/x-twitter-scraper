@@ -457,25 +457,6 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   sui suoi tratti. Usalo quando studi perché i post si diffondono o falliscono.
   Da $0.0003 per post analizzato.
 
-## Ti serve più dello scraping?
-
-Xquik offre anche 53 strumenti nella dashboard, un'API REST, webhook firmati &
-un server MCP.
-
-- La [documentazione API](https://docs.xquik.com/introduction) raccoglie le
-  guide all'API REST.
-- L'[API delle informazioni sulla community](https://docs.xquik.com/api-reference/x/community-info)
-  restituisce il record di 1 community.
-- L'[API dei post della community](https://docs.xquik.com/api-reference/x/community-tweets)
-  restituisce i post di una community.
-- L'[API dei membri della community](https://docs.xquik.com/api-reference/x/community-members)
-  esporta i membri di una community.
-- L'[API per trovare community](https://docs.xquik.com/api-reference/x/community-find)
-  trova le community per parola chiave.
-- Con il [server MCP](https://docs.xquik.com/mcp/overview) scopri gli strumenti
-  supportati.
-- I [webhook](https://docs.xquik.com/webhooks/overview) inviano eventi firmati.
-
 ## FAQ
 
 Le risposte alle domande più comuni, poi dove trovare assistenza.

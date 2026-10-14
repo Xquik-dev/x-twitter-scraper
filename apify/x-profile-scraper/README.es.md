@@ -530,28 +530,6 @@ necesitas.
   respuestas de IA sobre sus rasgos. Úsalo cuando estudies por qué un post se
   difunde o fracasa. Desde $0.0003 por post analizado.
 
-## ¿Necesitas más que scraping?
-
-Xquik también ofrece 53 herramientas en el panel, una API REST, webhooks firmados
-y un servidor MCP.
-
-- [Documentación de la API](https://docs.xquik.com/introduction) reúne las guías
-  de la API REST.
-- [API de consulta de perfiles](https://docs.xquik.com/api-reference/x/twitter-profile-lookup)
-  obtiene 1 perfil público.
-- [API de posts de usuarios](https://docs.xquik.com/api-reference/x/user-tweets)
-  obtiene los posts de un usuario.
-- [API de seguidores](https://docs.xquik.com/api-reference/x/followers) obtiene
-  los seguidores de una cuenta.
-- [API de traducción de biografías](https://docs.xquik.com/api-reference/x/user-bio-translation)
-  traduce la biografía de un perfil.
-- [API de estado en vivo](https://docs.xquik.com/api-reference/x/user-live-status)
-  comprueba si un usuario está en vivo.
-- [Servidor MCP](https://docs.xquik.com/mcp/overview) muestra las herramientas
-  compatibles.
-- [Webhooks](https://docs.xquik.com/webhooks/overview) entregan eventos
-  firmados.
-
 ## Preguntas frecuentes
 
 Respuestas a preguntas comunes y, luego, dónde conseguir ayuda.

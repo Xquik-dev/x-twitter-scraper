@@ -744,24 +744,6 @@ necesitas.
   respuestas de IA sobre sus rasgos. Úsalo cuando estudies por qué un post se
   difunde o fracasa. Desde $0.0003 por post analizado.
 
-## ¿Necesitas más que extracción?
-
-Xquik también ofrece 47 herramientas en el panel, una API REST, webhooks
-firmados y un servidor MCP.
-
-- [Documentación de la API](https://docs.xquik.com/introduction) reúne las guías
-  de la API REST.
-- [Followers API](https://docs.xquik.com/api-reference/x/followers) obtiene los
-  seguidores disponibles de una cuenta.
-- [Following API](https://docs.xquik.com/api-reference/x/following) obtiene las
-  cuentas que sigue un usuario.
-- [List Members API](https://docs.xquik.com/api-reference/x/list-members)
-  exporta los miembros de una Lista pública de X.
-- [Servidor MCP](https://docs.xquik.com/mcp/overview) permite descubrir y
-  ejecutar operaciones compatibles en JSON o texto.
-- [Webhooks](https://docs.xquik.com/webhooks/overview) te permiten recibir
-  eventos compatibles de posts y perfiles.
-
 ## Preguntas frecuentes
 
 Respuestas a preguntas comunes y, luego, dónde conseguir ayuda.

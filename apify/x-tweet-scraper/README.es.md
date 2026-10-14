@@ -1033,26 +1033,6 @@ necesitas.
   respuestas de IA sobre sus rasgos. Úsalo cuando estudies por qué un post se
   difunde o fracasa. Desde $0.0003 por post analizado.
 
-## ¿Necesitas más que extracción?
-
-Xquik también ofrece 47 herramientas en el panel, una API REST, webhooks
-firmados y un servidor MCP.
-
-- [Documentación de la API](https://docs.xquik.com/introduction) reúne las guías
-  de la API REST.
-- [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets)
-  busca posts por REST.
-- [Batch Tweets API](https://docs.xquik.com/api-reference/x/batch-tweets)
-  obtiene hasta 100 posts por ID.
-- [User Tweets API](https://docs.xquik.com/api-reference/x/user-tweets) obtiene
-  la cronología de un usuario.
-- [Servidor MCP](https://docs.xquik.com/mcp/overview) muestra las herramientas
-  compatibles.
-- [Webhooks](https://docs.xquik.com/webhooks/overview) entregan eventos
-  firmados.
-- [GitHub](https://github.com/Xquik-dev/x-twitter-scraper) aloja el código
-  fuente y el seguimiento de issues.
-
 ## Preguntas frecuentes
 
 Respuestas a preguntas comunes y, luego, dónde conseguir ayuda.

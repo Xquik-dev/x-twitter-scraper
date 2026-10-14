@@ -530,28 +530,6 @@ données dont vous avez besoin.
   critères notés par IA. Utilisez-le quand vous étudiez pourquoi des posts
   percent ou font un flop. À partir de $0.0003 par post analysé.
 
-## Besoin de plus que du scraping ?
-
-Xquik propose aussi 53 outils de tableau de bord, une API REST, des webhooks
-signés et un serveur MCP.
-
-- La [documentation de l'API](https://docs.xquik.com/introduction) réunit les
-  guides de l'API REST.
-- L'[API de consultation de profil](https://docs.xquik.com/api-reference/x/twitter-profile-lookup)
-  renvoie 1 profil public.
-- L'[API des posts d'un utilisateur](https://docs.xquik.com/api-reference/x/user-tweets)
-  renvoie les posts d'un utilisateur.
-- L'[API des abonnés](https://docs.xquik.com/api-reference/x/followers) renvoie
-  les abonnés d'un compte.
-- L'[API de traduction de bio](https://docs.xquik.com/api-reference/x/user-bio-translation)
-  traduit la bio d'un profil.
-- L'[API de statut en direct](https://docs.xquik.com/api-reference/x/user-live-status)
-  vérifie si un utilisateur est en direct.
-- Avec le [serveur MCP](https://docs.xquik.com/mcp/overview), découvrez les
-  outils pris en charge.
-- Les [webhooks](https://docs.xquik.com/webhooks/overview) livrent des
-  événements signés.
-
 ## FAQ
 
 Les réponses aux questions fréquentes, puis où trouver de l'aide.
