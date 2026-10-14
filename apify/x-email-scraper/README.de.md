@@ -1,23 +1,14 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <strong>Deutsch</strong> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+**Deutsch** · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer verbindet Xquik MCP mit Coding-Agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Sieh dir an, wie Framer Xquik-Scraper mit Claude Code, Codex, Cursor und mehr nutzt, ab Minute 6:07.</a>
-</td></tr></table>
+[![Framer verbindet Xquik MCP mit Coding-Agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Sieh dir an, wie Framer Xquik-Scraper nutzt](https://youtu.be/4UOSpoOoC3Y?t=367),
+mit Claude Code, Codex, Cursor & mehr, ab Minute 6:07.
 
 Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
 liefert die vollständigsten X-Daten. X Email Scraper von Xquik holt die E-Mails,
-die Accounts in ihren eigenen X-Profilen veröffentlichen, ohne X-Cookies & ohne
+die Accounts in ihren eigenen X-Profilen veröffentlichen, ohne X-Cookies oder
 Login. Die meisten anderen Apify Actors rechnen ab, bevor sie filtern oder
 Duplikate entfernen. Xquik rechnet nur gelieferte, eindeutige Ergebnisse ab, die
 zu deinen Filtern passen.
@@ -25,7 +16,7 @@ zu deinen Filtern passen.
 Füge Nutzernamen ein, scanne die Follower eines Accounts oder suche X-Nutzer &
 erhalte jedes Profil, das eine E-Mail veröffentlicht, mit der E-Mail an erster
 Stelle. Ein Profil ohne E-Mail wird nicht geliefert & kostet nichts. Du zahlst
-**$0.00015 pro geliefertem Datensatz**, & Apify berechnet die Plattformnutzung
+**$0.00015 pro geliefertem Datensatz** & Apify berechnet die Plattformnutzung
 separat.
 
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
@@ -41,13 +32,13 @@ separat.
 - Telefonnummern, die das Profil veröffentlicht, etwa als WhatsApp-Link.
 - Die Website & die Bio-Links des Profils, jeweils mit ihrem Netzwerk, etwa
   LinkedIn, GitHub oder Telegram.
-- Das vollständige öffentliche Profil mit Name, Bio, Zahlen, Verifizierung,
+- Das vollständige öffentliche Profil mit Name, Bio, Zählern, Verifizierung,
   Datumsangaben & Bildern.
 - 3 Quellen in 1 Run, nämlich Accounts, ihre Follower oder gefolgten Accounts &
   Nutzersuchen.
 - Filter nach E-Mail-Domain, geschäftlicher E-Mail, Followern, Account-Alter,
   Bio & Standort.
-- Nutzernamen mit oder ohne @, URLs von x.com & twitter.com sowie numerische
+- Nutzernamen mit oder ohne @, URLs von `x.com` & `twitter.com` & numerische
   Nutzer-IDs.
 - Duplikatentfernung vor der Abrechnung.
 - Exporte als JSON, CSV, Excel, XML & RSS über Apify-Datasets.
@@ -55,13 +46,19 @@ separat.
 
 ## So holst du E-Mails aus X-Profilen
 
+Neu bei Apify?
+[Erstelle zuerst einen kostenlosen Account](https://console.apify.com/sign-up?fpr=xquik).
+Der kostenlose Plan braucht keine Kreditkarte & gibt dir jeden Monat $5 zum
+Ausgeben. Bei $0.00015 pro Profil reichen $5 für bis zu 33.000 Profile, vor
+Abzug der Plattformnutzung. Komm dann hierher zurück & klicke auf Try for free.
+
 1. Öffne X Email Scraper von Xquik in der Apify Console.
 2. Füge Nutzernamen, Profil-URLs oder Nutzer-IDs in `twitterHandles` ein oder
    ergänze `searchTerms`.
 3. Aktiviere `expandFollowers`, um stattdessen die Follower jedes Accounts zu
    scannen.
-4. Setze `maxItems`, um die gelieferten Datensätze zu begrenzen. Klicke dann auf
-   Start.
+4. Setze `maxItems`, um die gelieferten Datensätze zu begrenzen, & klicke dann
+   auf Start.
 5. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
 
 Du gibst in keinem Schritt X-Cookies, einen Login oder einen API-Schlüssel ein.
@@ -69,7 +66,7 @@ Du gibst in keinem Schritt X-Cookies, einen Login oder einen API-Schlüssel ein.
 ## Eingabe
 
 `twitterHandles` nimmt jede Schreibweise eines Accounts an, auch gemischt. Der
-Run prüft jeden Account & liefert alle, die eine E-Mail veröffentlichen.
+Run prüft jeden Account & liefert die, die eine E-Mail veröffentlichen.
 
 ```json
 {
@@ -79,9 +76,8 @@ Run prüft jeden Account & liefert alle, die eine E-Mail veröffentlichen.
 ```
 
 `startUrls` & `userIds` nehmen dieselben Schreibweisen an. Mit `expandFollowers`
-liest der Run stattdessen die Follower jedes Accounts & behält alle, die eine
-E-Mail veröffentlichen. Mit `expansionRelation` wählst du `Followers` oder
-`Following`.
+liest der Run stattdessen die Follower jedes Accounts & behält die, die eine
+E-Mail veröffentlichen. `expansionRelation` wählt `Followers` oder `Following`.
 
 ```json
 {
@@ -104,40 +100,41 @@ Jeder Begriff ist 1 Suche.
 }
 ```
 
-Etwa 1 von 400 Followern veröffentlicht eine E-Mail. Ein Follower-Scan liest
-also weit mehr Profile, als er liefert. `maxScan` begrenzt die Profile, die der
-Run aus jeder Liste oder Suche liest. Der Wert startet bei 10.000. Stoppt der
-Run eine Liste dort, sagt der Run-Status, wie viele Datensätze er gelesen hat.
-Erhöhe `maxScan`, um weiterzulesen. Gescannte Profile sind kostenlos.
+Etwa 1 von 400 Followern veröffentlicht eine E-Mail, also liest ein
+Follower-Scan weit mehr Profile, als er liefert. `maxScan` begrenzt die Profile,
+die der Run aus jeder Liste oder Suche liest. Der Wert startet bei 10.000.
+Stoppt der Run eine Liste dort, sagt der Run-Status, wie viele Datensätze er
+gelesen hat, & du erhöhst `maxScan`, um weiterzulesen. Gescannte Profile sind
+kostenlos.
 
 `emailDomains` behält Profile mit einer E-Mail unter einer gelisteten Domain
 oder einer ihrer Subdomains. `businessEmailOnly` behält Profile mit einer E-Mail
 außerhalb kostenloser Webmail-Dienste wie Gmail. `minFollowers`, `maxFollowers`,
 `minAccountAgeDays`, `verifiedOnly`, `hasWebsite`, `hasLocation`, `bioContains`
-& `locationContains` grenzen die Profile weiter ein. Jeder Filter läuft vor der
+& `locationContains` grenzen die Profile weiter ein. Jeder Filter gilt vor der
 Abrechnung.
 
-`searchQueries` & `keyword` funktionieren als andere Namen für `searchTerms`, &
-`maxFollowersPerHandle` als anderer Name für `maxScan`. Ein Account, den die
-Eingabe 2-mal nennt, wird 1-mal geliefert & abgerechnet. Kleine Runs ohne
+`searchQueries` & `keyword` funktionieren als andere Namen für `searchTerms` &
+`maxFollowersPerHandle` als anderer Name für `maxScan`. Nennt die Eingabe einen
+Account doppelt, liefert & berechnet der Run ihn nur einmal. Kleine Runs ohne
 Probleme überspringen `run-report` & sparen Apify-Nutzung. Aktiviere
 `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 
 ### Von einem anderen E-Mail-Actor wechseln
 
 Füge die Eingabe ein, die du schon nutzt. X Email Scraper von Xquik liest diese
-Feldnamen anderer Actors. Jede Zeile nennt ihre Felder, dann das Feld, dem der
-Actor sie zuordnet.
+Feldnamen anderer Actors. Jede Zeile nennt ihre Felder, dann das Feld, dem sie
+entsprechen.
 
 - `requireEmail` braucht kein Feld. Jedes gelieferte Profil veröffentlicht eine
   E-Mail.
-- `requireWebsite` wird `hasWebsite` zugeordnet. Der Filter behält ein Profil
-  mit einem beliebigen Link im Website-Feld, & der Run-Status sagt das.
-- `bioKeywords` wird `bioContains` zugeordnet. Es genügt, wenn 1 der Begriffe
+- `requireWebsite` entspricht `hasWebsite`. Es behält ein Profil mit einem
+  beliebigen Link im Website-Feld & der Run-Status sagt das.
+- `bioKeywords` entspricht `bioContains`. Es genügt, wenn 1 seiner Begriffe
   passt.
-- `locationKeywords` mit 1 Wert wird `locationContains` zugeordnet. Mehr Werte
+- `locationKeywords` mit 1 Wert entspricht `locationContains`. Mehr Werte
   stoppen den Run, bevor er etwas liest oder berechnet.
-- `emailDomains` als Liste wird `emailDomains` zugeordnet.
+- `emailDomains` als Liste entspricht `emailDomains`.
 - `outputEmail`, `resolveShortLinks` brauchen kein Feld. Jeder Datensatz enthält
   seine E-Mails & die vollständigen Links von X.
 - `findEmails`, `extractEmails` brauchen kein Feld. Datensätze enthalten die
@@ -158,7 +155,7 @@ kommen die Kontaktdaten in `email`, `emailDomain`, `emailSource` &
 `verifiedType`, `createdAt`, `profilePicture` & mehr. Fehlende Quellfelder
 bleiben weg. X Email Scraper von Xquik erfindet keine Werte.
 
-Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
+Die Beispiele nutzen Musterwerte. Die Ergebnisse spiegeln Live-Daten wider. Ein
 Datensatz sieht so aus.
 
 ```json
@@ -204,15 +201,15 @@ Datensatz sieht so aus.
 ```
 
 `resultType` ist `profile` für einen Account oder ein Suchergebnis,
-`profileFollower` für einen Follower & `profileFollowing` für einen gefolgten
-Account. `sourceTarget` nennt den Account oder den Suchbegriff, von dem der
+`profileFollower` für einen Follower & `profileFollowing` für einen Account, dem
+jemand folgt. `sourceTarget` nennt den Account oder den Suchbegriff, von dem der
 Datensatz stammt.
 
 ## Was die E-Mail bedeutet
 
 Eine E-Mail ist eine Adresse, die der Account in sein eigenes Profil geschrieben
 hat, also in die Bio, den Namen oder den Standort. Der Actor liefert sie so, wie
-der Account sie veröffentlicht hat, in Kleinbuchstaben. Nichts prüft, ob die
+der Account sie veröffentlicht hat, & schreibt sie klein. Nichts prüft, ob die
 Adresse E-Mails empfängt, & nichts liest die Website, auf die ein Profil
 verlinkt. `writtenAs` enthält die eigene Schreibweise des Accounts, wenn sie
 abweicht, etwa "jane [at] example [dot] org".
@@ -227,14 +224,17 @@ Telefonnummer.
 Auf jedem Apify-Plan kostet ein gelieferter Datensatz $0.00015. Apify berechnet
 deine Plattformnutzung separat.
 
-- Eine Gebühr pro geliefertem Datensatz. Diagnosen in `diagnostics` sind
-  kostenlos.
-- Keine Gebühr für Start oder Abfragen.
-- Ein Profil ohne E-Mail bringt keinen Datensatz & keine Gebühr.
-- Ein Account, den es auf X nicht gibt, bringt keinen Datensatz & keine Gebühr.
+Brauchst du mehr Volumen, dann
+[wähle einen Apify-Plan](https://apify.com/pricing?fpr=xquik) mit mehr
+vorausbezahlter Nutzung.
+
+- 1 Gebühr pro geliefertem Datensatz. Diagnosen in `diagnostics` sind kostenlos.
+- Keine Gebühr für Start oder Abfrage.
+- Ein Profil ohne E-Mail erzeugt keinen Datensatz & keine Gebühr.
+- Ein Account, den es auf X nicht gibt, erzeugt keinen Datensatz & keine Gebühr.
 - Die Deduplizierung läuft vor der Abrechnung.
-- Die Apify-Einstellung für die maximale Gesamtgebühr begrenzt die gelieferten
-  Datensätze.
+- Die Apify-Einstellungen für die maximale Gesamtgebühr begrenzen die
+  gelieferten Datensätze.
 
 Ein Follower-Scan läuft eine Weile, um wenige Datensätze zu finden, weil er etwa
 350 Profile pro Sekunde liest & etwa 1 von 400 behält. `maxScan` begrenzt diese
@@ -262,15 +262,16 @@ Ursache den Run gestoppt hat. Der Run ist `retryable`, wenn mindestens 1 Ursache
 es ist.
 
 Eine Liste, die der Run bei `maxScan` stoppt, beendet keinen Run vorzeitig. Ein
-Run mit Datensätzen läuft zu Ende, & sein Status sagt, wie viele Datensätze er
-gelesen hat, & rät dir, `maxScan` zu erhöhen. Dafür schreibt er keine Diagnose.
-Das spart dir das Schreiben eines Eintrags. Ein Run-Report zählt solche Listen
+Run mit Datensätzen läuft zu Ende & sein Status sagt, wie viele Datensätze er
+gelesen hat & dass du `maxScan` erhöhen sollst. Dafür schreibt er keine
+Diagnose, was dir einen Schreibvorgang spart. Ein Run-Report zählt solche Listen
 in `scanLimitedTargets`.
 
 ## Verwandte Xquik-Actors
 
-Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, rechnet erst nach dem
-Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
+Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, dieselbe Abrechnung erst
+nach dem Filtern & dieselben Diagnosen. Wähle den, der zu den Daten passt, die
+du brauchst.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrapt Posts aus
   Suchen, Profil-Timelines, Listen & Post-IDs mit über 50 Filtern & flachen
@@ -288,9 +289,9 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015 pro
   Datensatz.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
-  scrapt die Posts, die Posts zitieren, mit Text, Medien, Zahlen, Autoren & 11
-  Filtern. Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was gesagt
-  wurde. Ab $0.00015 pro Post.
+  scrapt die Zitate von Posts mit Text, Medien, Zählern, Autoren & 11 Filtern.
+  Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was diese Accounts
+  gesagt haben. Ab $0.00015 pro Post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrapt
   Follower, gefolgte Accounts, Listenmitglieder, Abonnenten &
   Community-Mitglieder als Profil-Datensätze. Nutze ihn, wenn du Zielgruppen-
@@ -301,8 +302,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   einer Suche aufbaust. Ab $0.00015 pro Profil.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   prüft, wo Accounts ansässig sind, mit der X-Angabe "Account based in", der
-  Verbindungsart zu X & Benutzernamen-Änderungen. Nutze ihn, wenn du prüfst, wo
-  Accounts ansässig sind. Ab $0.00015 pro Account.
+  Verbindungsart zu X & Änderungen des Nutzernamens. Nutze ihn, wenn du prüfst,
+  wo Accounts ansässig sind. Ab $0.00015 pro Account.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper) scrapt Posts,
   Mitglieder & Follower von Listen aus Listen-URLs oder -IDs. Nutze ihn, wenn
   eine kuratierte Liste deine Quellen festlegt. Ab $0.00015 pro Datensatz.
@@ -333,8 +334,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Zeit beobachtest. Ab $0.0003 pro analysiertem Post.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden Post
-  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema brauchst. Ab
-  $0.0003 pro analysiertem Post.
+  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem beliebigen Thema
+  brauchst. Ab $0.0003 pro analysiertem Post.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   kennzeichnet bullische, bärische, neutrale oder gemischte Haltung, Inhaltstyp,
   Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du Aktien, Krypto
@@ -358,15 +359,15 @@ Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
 
 ### Brauche ich X-Cookies, einen API-Schlüssel oder einen Login?
 
-Nein. X Email Scraper von Xquik braucht keine X-Cookies, keinen API-Schlüssel,
-keinen Login & keine Zugangsdaten. Jeder Abruf läuft auf der Infrastruktur von
-Xquik.
+Nein. X Email Scraper von Xquik braucht weder X-Cookies noch einen
+API-Schlüssel, einen Login oder Zugangsdaten. Jeder Abruf läuft auf der
+Infrastruktur von Xquik.
 
 ### Woher kommen die E-Mails?
 
 Sie stammen aus dem Profil selbst, also aus der Bio, dem Namen & dem Standort,
 die der Account geschrieben hat. Der Actor liest keinen Post & keine verlinkte
-Website. Jede E-Mail hat der Account also in seinem eigenen X-Profil
+Website, also hat der Account jede E-Mail in seinem eigenen X-Profil
 veröffentlicht.
 
 ### Prüft der Actor, ob eine E-Mail funktioniert?
@@ -378,8 +379,8 @@ prüft, ob die Adresse E-Mails empfängt.
 
 Etwa 1 von 400 Followern veröffentlicht eine E-Mail. Der Run-Status sagt, wie
 viele Datensätze einer Liste der Run gelesen hat. Erhöhe `maxScan`, um eine
-Liste weiter zu lesen, oder nutze `searchTerms` mit Wörtern wie booking. Solche
-Suchen behalten weit mehr Datensätze.
+Liste weiter zu lesen, oder nutze `searchTerms` mit Wörtern wie booking, die
+weit mehr Datensätze behalten.
 
 ### Wie viele Profile kann ich in 1 Run prüfen?
 
@@ -390,7 +391,7 @@ startet.
 ### Ist es legal, E-Mails aus X-Profilen zu sammeln?
 
 X Email Scraper von Xquik fragt öffentliche X-Felder ab. Ergebnisse enthalten
-personenbezogene Daten. Prüfe, ob dein Zweck rechtmäßig ist. Befolge die
+personenbezogene Daten. Prüfe, ob dein Zweck rechtmäßig ist, befolge die
 Datenschutz- & E-Mail-Regeln, die für dich gelten, & respektiere Opt-outs. Hol
 dir bei Unsicherheit qualifizierten Rechtsrat.
 
@@ -398,29 +399,30 @@ dir bei Unsicherheit qualifizierten Rechtsrat.
 
 Lies zuerst den Run-Status. Der Status eines leeren Runs rät dir, Nutzername, ID
 oder URL jedes Accounts zu prüfen, für den X keinen Treffer hat. Ein Profil ohne
-E-Mail bringt keinen Datensatz. Die kostenlose Ausgabe `diagnostics` erscheint,
+E-Mail erzeugt keinen Datensatz. Die kostenlose Ausgabe `diagnostics` erscheint,
 wenn etwas deine Aufmerksamkeit braucht. Ihr Feld `stopCauses` gibt jeder
 Ursache eine `nextAction`, der du folgen kannst.
 
-### Kann ich API, Zeitpläne & Integrationen nutzen?
+### Kann ich die API, Zeitpläne & Integrationen nutzen?
 
-Ja. Nutze die Apify-API oder die REST-API von Xquik. Der
-[API-Tab](https://apify.com/xquik/x-email-scraper/api) enthält Beispiele für
+Ja. Nutze die Apify-API oder die REST-API von Xquik. Im
+[API-Tab](https://apify.com/xquik/x-email-scraper/api) findest du Beispiele für
 Python, JavaScript & cURL.
-Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) starten X Email
+[Zeitpläne](https://docs.apify.com/platform/schedules) von Apify starten X Email
 Scraper von Xquik per Cron. Agents nutzen
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp). Nutze `latest`,
 außer du brauchst einen älteren Build.
 
 ### Wo bekomme ich Hilfe?
 
-Öffne ein Issue auf der Actor-Seite oder schreib mit der Run-ID an
-<support@xquik.com>. Kostenlose Diagnosen im Key-Value-Store erklären Runs, die
+Öffne im [Tab Issues](https://apify.com/xquik/x-email-scraper/issues) ein Issue
+mit der Run-ID. Kostenlose Diagnosen im Key-Value-Store erklären Runs, die
 Aufmerksamkeit brauchen. Ein Run, der keinen Datensatz zurückbekommt, sagt in
 seinem Status, warum.
 
 ### Kann ich eine individuelle Lösung bekommen?
 
-Ja. Besuche [xquik.com](https://xquik.com) oder lies die
-[API-Dokumentation](https://docs.xquik.com/introduction). Sie deckt Dashboard,
-API, MCP-Server & Webhooks ab.
+Ja. Beschreibe im [Tab Issues](https://apify.com/xquik/x-email-scraper/issues),
+was du brauchst. Xquik bietet außerdem ein Dashboard, eine REST-API, einen
+MCP-Server & Webhooks. Die Website von Xquik findest du in seinem
+[Apify-Profil](https://apify.com/xquik).

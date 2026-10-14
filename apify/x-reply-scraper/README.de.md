@@ -1,19 +1,10 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <strong>Deutsch</strong> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+**Deutsch** · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer verbindet Xquik MCP mit Coding-Agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Sieh dir an, wie Framer Xquik-Scraper mit Claude Code, Codex, Cursor und mehr nutzt, ab Minute 6:07.</a>
-</td></tr></table>
+[![Framer verbindet Xquik MCP mit Coding-Agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Sieh dir an, wie Framer Xquik-Scraper nutzt](https://youtu.be/4UOSpoOoC3Y?t=367),
+mit Claude Code, Codex, Cursor & mehr, ab Minute 6:07.
 
 Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
 liefert die vollständigsten X-Daten. X Reply Scraper von Xquik sammelt
@@ -22,11 +13,11 @@ rechnen ab, bevor sie filtern oder Duplikate entfernen. Xquik berechnet nur
 **gelieferte, eindeutige Ergebnisse, die zu deinen Filtern passen**.
 
 Scrape Antworten & Kommentare auf Twitter für **$0.00015 pro geliefertem
-Datensatz**, auf jedem Apify-Plan, & lies sie ohne X-Account. Füge Post-URLs,
-Post-IDs (Tweet-IDs), Profil-URLs oder Nutzernamen ein. Exportiere Antworten,
+Datensatz** auf jedem Apify-Plan & lies sie ohne X-Account. Füge Post-URLs,
+Post-IDs, Profil-URLs oder Nutzernamen ein. Exportiere Antworten,
 Konversationen, Autoren, Interaktionen, Entitäten & Medien-URLs. Apify berechnet
 deine Plattformnutzung separat. Du brauchst keinen X-Login. Filter laufen, bevor
-der Actor ins Dataset schreibt. Du zahlst also nur für gelieferte Datensätze.
+der Actor ins Dataset schreibt, also zahlst du nur für gelieferte Datensätze.
 
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
@@ -41,22 +32,21 @@ Post-IDs & Antwort-Timelines von Nutzern.
 
 - Der Auto-Modus sammelt weiter, wenn direkte Ergebnisse unvollständig sind.
 - `collectionStrategy` legt fest, wie der Actor Antworten sammelt.
-- Du kannst viele Post-URLs, Post-IDs, Profile & Nutzernamen auf einmal
-  eingeben.
+- Eingaben in großen Mengen akzeptieren Post-URLs, Post-IDs, Profile &
+  Nutzernamen.
 - Filter & Duplikatentfernung laufen vor der Abrechnung.
-- Die Ausgabe bietet 4 Sortiermodi, 3 Detailstufen & 3 Feldstile.
+- Die Ausgabe unterstützt 4 Sortiermodi, 3 Detailstufen & 3 Feldstile.
 - Jede Antwort behält ihr Quellziel, die IDs der übergeordneten Posts, die ID
-  des Ausgangsposts & die Tiefe.
-- Fortsetzungs-Cursor helfen beim Nachholen älterer Antworten & bei geplanten
-  Runs.
+  des Ausgangsposts & ihre Tiefe.
+- Fortsetzungs-Cursor unterstützen das Nachholen älterer Daten & geplante Runs.
 - Runs, die Aufmerksamkeit brauchen, schreiben 1 kostenlosen Datensatz in
   `diagnostics`. Ein Run, der jedes Ziel liest & keine Antwort findet, schreibt
-  keinen. Sein Status nennt den Grund.
+  keinen. Sein Status sagt, warum.
 - Run-Logs zeigen Seiten- & Zielzeiten in `fetchDurationMs`,
   `processingDurationMs`, `pushDurationMs`, `statusDurationMs`,
   `fullPageDurationMs` & `fullTargetDurationMs`.
-- Startet Apify einen Run neu, bleiben gelieferte Antworten & der Fortschritt
-  erhalten.
+- Runs behalten gelieferte Antworten & ihren Fortschritt, wenn Apify sie neu
+  startet.
 
 ### Anwendungsfälle
 
@@ -71,8 +61,9 @@ Post-IDs & Antwort-Timelines von Nutzern.
 
 ### Welche Daten kann X Reply Scraper extrahieren?
 
-Die Schemas für Dataset & Run-Report beschreiben jedes gelieferte Feld.
-Primitive Felder enthalten auch Beispiele für Agents & generierte Integrationen.
+Die Schemas für Dataset & Run-Report beschreiben jedes gelieferte Feld. Text-,
+Zahlen- & Boolean-Felder enthalten auch Beispiele für Agents & generierte
+Integrationen.
 
 Jeder vollständige Antwort-Datensatz kann diese Kernfelder enthalten.
 
@@ -95,7 +86,7 @@ Jeder vollständige Antwort-Datensatz kann diese Kernfelder enthalten.
 | `viewCount`         | Aufrufe                                                  |
 | `bookmarkCount`     | Lesezeichen                                              |
 | `author`            | Verfügbare öffentliche Autorenmetadaten                  |
-| `media`             | Bilder, Videos, GIFs & Varianten                         |
+| `media`             | Bilder, Videos, GIFs und Varianten                       |
 | `entities`          | Hashtags, Cashtags, Erwähnungen, URLs & Video-Zeitmarken |
 | `quoted_tweet`      | Zitierter Post, falls vorhanden                          |
 | `retweeted_tweet`   | Reposteter Post, falls vorhanden                         |
@@ -104,11 +95,12 @@ Vollständige Datensätze behalten außerdem verfügbare Quellmetadaten.
 
 - Felder zum Post-Typ sind `type`, `isReply`, `isQuoteStatus`, `isNoteTweet`,
   `isLimitedReply` & `isTranslatable`.
-- Textdetails sind `displayTextRange`, `noteTweet`, `article` & `card`.
+- Textdetails sind `displayTextRange`, `noteTweet`, `article`, `card` &
+  `cashtagAttachments`.
 - Labels & Hinweise sind `contentDisclosure`, `communityNote`,
   `possiblySensitive`, `tombstone` & `exclusiveContent`.
-- Konversationsdetails sind `conversationControl`, `limitedActions` &
-  `unmentionedUserIds`.
+- Konversationsdetails sind `conversationControl`, `limitedActions`,
+  `subscriberBadge` & `unmentionedUserIds`.
 - Kontextfelder sind `source`, `place`, `communityId`, `communityName`,
   `reactionContext` & `postCta`.
 - Felder zu Bearbeitung & Verfügbarkeit sind `edit`, `previousCounts`,
@@ -118,6 +110,13 @@ Flache Datensätze behalten die Vorgänger in der Konversation, Quelldetails,
 Ergebnistyp & Schemaversion. Die genauen Felder stehen in OpenAPI.
 
 ## Wie nutze ich X Reply Scraper, um Antworten zu scrapen?
+
+Neu bei Apify?
+[Erstelle zuerst einen kostenlosen Account](https://console.apify.com/sign-up?fpr=xquik).
+Der kostenlose Plan braucht keine Kreditkarte & gibt dir jeden Monat $5 zum
+Ausgeben. Bei $0.00015 pro Datensatz reichen $5 für bis zu 33.000 Datensätze,
+vor Abzug der Plattformnutzung. Komm dann hierher zurück & klicke auf Try for
+free.
 
 1. Füge Post-URLs, Post-IDs, Profil-URLs oder Nutzernamen ein.
 2. Setze `maxItems`, `scope` & die Filter, die deine Aufgabe braucht.
@@ -201,7 +200,7 @@ passende Dataset-Ansicht. Passe jeden Task an, bevor du ihn startest.
 - [Antworten auf X-Posts & Twitter-Kommentare scrapen](https://apify.com/xquik/x-reply-scraper/examples/scrape-post-replies)
 - [Twitter-Antworten in großen Mengen scrapen](https://apify.com/xquik/x-reply-scraper/examples/scrape-bulk-post-replies)
 - [Eine Konversation aus Twitter-Antworten rekonstruieren](https://apify.com/xquik/x-reply-scraper/examples/rebuild-full-conversation)
-- [Twitter-Antworten nach Gefällt-mir-Angaben sortieren](https://apify.com/xquik/x-reply-scraper/examples/rank-most-liked-replies)
+- [Twitter-Antworten nach Gefällt-mir-Angaben ordnen](https://apify.com/xquik/x-reply-scraper/examples/rank-most-liked-replies)
 - [Die neuesten Antworten auf Posts scrapen](https://apify.com/xquik/x-reply-scraper/examples/collect-latest-replies)
 - [Spam aus Twitter-Antworten entfernen](https://apify.com/xquik/x-reply-scraper/examples/exclude-spam-keywords)
 - [Englische Twitter-Antworten scrapen](https://apify.com/xquik/x-reply-scraper/examples/collect-english-replies)
@@ -215,20 +214,24 @@ passende Dataset-Ansicht. Passe jeden Task an, bevor du ihn startest.
 
 ## Was kostet es, Antworten auf X zu scrapen?
 
-X Reply Scraper von Xquik kostet $0.00015 pro geliefertem Datensatz, auf jedem
+X Reply Scraper von Xquik kostet $0.00015 pro geliefertem Datensatz auf jedem
 Apify-Plan. Apify berechnet die Plattformnutzung separat.
+
+Brauchst du mehr Volumen, dann
+[wähle einen Apify-Plan](https://apify.com/pricing?fpr=xquik) mit mehr
+vorausbezahlter Nutzung.
 
 Xquik berechnet 1 Gebühr pro geliefertem Datensatz. Antworten, die deine Filter
 oder die Deduplizierung entfernen, kosten nichts. Diagnose-Datensätze in
-`diagnostics` sind kostenlos. Es fallen keine Gebühren für Start, URLs,
-Suchanfragen, Paginierung oder Filter an.
+`diagnostics` sind kostenlos. Es fällt keine Gebühr für Start, URL, Suchanfrage,
+Paginierung oder Filter an.
 
 ## Leere, unvollständige & gestoppte Runs
 
 X Reply Scraper von Xquik erklärt leere, unvollständige & gestoppte Runs
 kostenlos. Der Run-Status nennt den Grund für den Stopp. Er zählt auch
 berechnete Ergebnisse & gelesene Ziele. Ein Run, der jedes Ziel liest & keine
-Antwort findet, schreibt keinen Datensatz. Sein Status nennt den Grund & was du
+Antwort findet, schreibt keinen Datensatz. Sein Status sagt, warum & was du
 ändern solltest.
 
 ### Unvollständige Extraktion
@@ -252,15 +255,15 @@ Ursache es ist.
 ### Diagnosen
 
 Erfolgreiche Datensätze nutzen `resultType: "reply"`. Ein Run, der
-Aufmerksamkeit braucht, schreibt genau 1 kostenlosen Datensatz in
-`diagnostics`. Beispiele sind eine ungültige Eingabe, ein übersprungenes Ziel
-oder ein vorzeitiger Stopp. Der Datensatz sagt, wie du das Problem behebst. Ein
-Run, der jedes Ziel liest & keine Antwort findet, schreibt keinen. Sein Status
-nennt den Grund.
+Aufmerksamkeit braucht, schreibt genau 1 kostenlosen Datensatz in `diagnostics`.
+Beispiele sind eine ungültige Eingabe, ein übersprungenes Ziel oder ein
+vorzeitiger Stopp. Der Datensatz sagt, wie du das Problem behebst. Ein Run, der
+jedes Ziel liest & keine Antwort findet, schreibt keinen. Sein Status sagt,
+warum.
 
 Der Run-Status nennt den Grund für den Stopp. Er zählt auch berechnete
 Ergebnisse & gelesene Ziele. Runs mit einem Problem schreiben immer
-`run-report`, auch bei Abbrüchen ohne Eingabe oder mit ungültiger Eingabe. Ein
+`run-report`, auch bei Abbrüchen ohne Eingabe und mit ungültiger Eingabe. Ein
 großer Run schreibt ihn ebenfalls. Ein kleiner Run ohne Probleme überspringt ihn
 & spart Apify-Nutzung. Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu
 schreiben.
@@ -280,8 +283,8 @@ Das Feld `status` nutzt diese Werte.
 
 ## Eingabe
 
-Der Input-Tab listet jede Option auf. Gib mindestens 1 Post-URL, Post-ID,
-Profil-URL oder 1 Nutzernamen an. Jedes andere Feld ist optional.
+Der Tab Input listet jede Option. Gib mindestens 1 Post-URL, Post-ID, Profil-URL
+oder 1 Nutzernamen an. Jedes andere Feld ist optional.
 
 ### Antwortziele & Eingabe-Aliasse
 
@@ -289,7 +292,7 @@ Nutze diese Hauptfelder.
 
 | Eingabe       | Zweck                                           |
 | ------------- | ----------------------------------------------- |
-| `startUrls`   | Gemischte Post- & Profil-URLs von X             |
+| `startUrls`   | Gemischte Post- und Profil-URLs von X           |
 | `tweetIds`    | Numerische Post-IDs                             |
 | `usernames`   | Antwort-Timelines von Profilen                  |
 | `startCursor` | Setzt 1 Ziel ab einem gespeicherten Cursor fort |
@@ -320,15 +323,15 @@ Diese Aliasse akzeptieren gängige Feldnamen anderer Scraper.
   die Antworten & der Post ist 1 Datensatz mehr.
 - Der Alias für den Autor ist `excludeOpSelfReplies` für
   `excludeOriginalAuthor`.
-- Aliasse für die Sortierung sind `sortBy` & `queryType` für `sort`. `top`,
-  `newest` & `mostLiked` liest der Actor als `relevance`, `latest` & `likes`.
+- Aliasse für die Sortierung sind `sortBy` & `queryType` für `sort`. Der Actor
+  liest `top`, `newest` & `mostLiked` als `relevance`, `latest` & `likes`.
 - Ausgabe-Aliasse sind `outputVariant`, `includeRaw`.
 
-`category` auf `replies` ändert nichts. Eine Kategorie, die die Aufgabe eines
-anderen Actors ist, etwa `retweets` oder `info`, stoppt den Run. Er liest &
-berechnet nichts. Die Meldung nennt den Actor, den du nutzen sollst. Setzt du
-einen dieser Aliasse & sein kanonisches Feld, gewinnt der kanonische Wert. Das
-Run-Log nennt den Alias, der verloren hat.
+Steht `category` auf `replies`, ändert sich nichts. Eine Kategorie, die die
+Aufgabe eines anderen Actors ist, etwa `retweets` oder `info`, stoppt den Run.
+Er liest & berechnet nichts. Die Meldung nennt den Actor, den du nutzen sollst.
+Setzt du einen dieser Aliasse & sein kanonisches Feld, gewinnt der kanonische
+Wert. Das Run-Log nennt den Alias, der verloren hat.
 
 Fehlerhafte oder nicht unterstützte Ziele lassen den Actor nicht scheitern.
 Bleibt kein gültiges Ziel übrig, schreibt der Run eine Diagnose mit der Lösung.
@@ -339,12 +342,12 @@ Wähle, wie der Actor Antworten sammelt. Auto passt für die meisten Aufgaben.
 
 #### Automatisch vollständig
 
-Nutze `collectionStrategy: "auto"` für die meisten Aufgaben. Der Modus sammelt
-jede Antwort, die er für deinen Umfang erreicht. Umfang, Tiefe, Sortierung &
-Autorenfilter gelten vor deinen Limits. Er erfasst auch Antworten unter Zielen,
-die selbst Antworten sind. Verbirgt X einen Teil eines Threads, nennt der
-Status, wie viele Antworten X verbirgt. Die anderen Werte von
-`collectionStrategy` wechseln nie den Modus.
+Nutze `collectionStrategy: "auto"` für die meisten Aufgaben. Die Strategie
+sammelt jede Antwort, die sie für deinen Umfang erreicht. Steuerungen für
+Umfang, Tiefe, Sortierung & Autor gelten vor deinen Limits. Sie erfasst auch
+Antworten unter Zielen, die keine Ausgangsposts sind. Verbirgt X einen Teil
+eines Threads, nennt der Status, wie viele Antworten X verbirgt. Die anderen
+Werte von `collectionStrategy` wechseln nie den Modus.
 
 Ein Abdeckungswert in den Diagnosen beweist nicht, dass X keine weiteren
 Antworten hat. Limits, fehlende Daten oder Fehler können einen Run unvollständig
@@ -353,7 +356,7 @@ lassen.
 #### Direkte Antworten
 
 Nutze `collectionStrategy: "replies"` für direkte Antworten in der Reihenfolge
-von X. Der Modus unterstützt gespeicherte Cursor.
+von X. Die Strategie unterstützt gespeicherte Cursor.
 
 #### Konversationssuche
 
@@ -371,9 +374,9 @@ behalten.
 Die Standardstrategie `auto` ergänzt die Antworten, die der Autor des Posts
 ausgeblendet hat. Jede davon ist ein Datensatz mit `resultType: "hiddenReply"`
 zum üblichen Preis pro Datensatz & zählt zu `maxItems`. Der Run liest sie nur,
-wenn der Post mehr Antworten zählt, als X anzeigt. Ein Post ohne ausgeblendete
-Antworten kostet also nichts extra. Setze `includeHiddenReplies: false`, um sie
-wegzulassen.
+wenn der Post mehr Antworten zählt, als X anzeigt, also kostet ein Post ohne
+ausgeblendete Antworten nichts extra. Setze `includeHiddenReplies: false`, um
+sie wegzulassen.
 
 Nutze `collectionStrategy: "hiddenReplies"` nur für die ausgeblendeten
 Antworten. X listet die ältesten zuerst, zusammen mit den Antworten darauf. Ein
@@ -383,11 +386,11 @@ Post ohne ausgeblendete Antworten liefert keine Datensätze.
 
 Mit `scope` wählst du die Form des Ergebnisses.
 
-| Wert     | Ergebnis                                                |
-| -------- | ------------------------------------------------------- |
-| `direct` | Behält Antworten der Tiefe 1                            |
-| `nested` | Behält Antworten auf Antworten ab Tiefe 2               |
-| `all`    | Behält jede verfügbare direkte & verschachtelte Antwort |
+| Wert     | Ergebnis                                                  |
+| -------- | --------------------------------------------------------- |
+| `direct` | Behält Antworten der Tiefe 1                              |
+| `nested` | Behält Antworten auf Antworten ab Tiefe 2                 |
+| `all`    | Behält jede verfügbare direkte und verschachtelte Antwort |
 
 Mit `maxDepth` begrenzt du die Verschachtelung. Lässt X einen Vorgänger in der
 Konversation aus, kann der Link zum übergeordneten Post fehlen. Der Actor behält
@@ -397,16 +400,16 @@ die beste verfügbare Tiefe.
 
 Nutze `sort` mit diesen Werten.
 
-- `relevance` behält die Reihenfolge von X
-- `latest` zeigt die neuesten zuerst
-- `oldest` zeigt die ältesten zuerst
-- `likes` zeigt die meisten Gefällt-mir-Angaben zuerst
+- `relevance` behält die Quellreihenfolge von X
+- `latest` sortiert die neuesten zuerst
+- `oldest` sortiert die ältesten zuerst
+- `likes` sortiert die meisten Gefällt-mir-Angaben zuerst
 
-Die X-Suche zählt bei manchen älteren Antworten zu wenige Gefällt-mir-Angaben.
-Runs mit `likes` können diese Antworten also übersehen.
+Die X-Suche zählt bei manchen älteren Antworten zu wenige Gefällt-mir-Angaben,
+also können Runs mit `likes` diese Antworten übersehen.
 
-Profilziele sammeln erst die angefragte Zahl eindeutiger, gefilterter
-Ergebnisse & sortieren sie dann. Post-Ziele behalten die globale Sortierung.
+Profilziele sammeln die angefragte Zahl eindeutiger, gefilterter Ergebnisse &
+sortieren sie dann. Post-Ziele behalten die globale Sortierung.
 
 Die Kompatibilitätsaliasse `sortBy` & `queryType` funktionieren weiter.
 
@@ -455,8 +458,8 @@ Nutze `minLikes`, `minReplies`, `minRetweets`, `minQuotes`, `minViews` &
 ## Ausgabe
 
 Jeder Antwort-Datensatz ist ein JSON-Objekt. Die Schemas für Dataset &
-Run-Report beschreiben jedes Feld, damit KI-Agents Datensätze ohne Raten lesen
-können. Exportiere das Dataset als JSON, CSV, Excel oder HTML.
+Run-Report beschreiben jedes Feld, also können KI-Agents Datensätze ohne Raten
+lesen. Exportiere das Dataset als JSON, CSV, Excel oder HTML.
 
 ### Autorenmetadaten
 
@@ -468,7 +471,7 @@ Die flache Ausgabe ergänzt `authorId`, `authorUsername`, `authorName`,
 
 ### Medienmetadaten
 
-Medien enthalten Verfügbarkeit, Geometrie, Tags & Video-Varianten. Dazu kommen
+Medien decken Verfügbarkeit, Geometrie, Tags & Video-Varianten ab. Dazu kommen
 die Aktionen `watchNowUrl` & `visitSiteUrl`.
 
 Die flache Ausgabe ergänzt `mediaUrls`.
@@ -542,7 +545,46 @@ wegzulassen.
 #### Feldnamen
 
 Setze `fieldStyle` auf `source`, `camelCase` oder `snake_case`. Der Actor
-überschreibt keine kollidierenden Quellschlüssel.
+vermeidet es, kollidierende Quellschlüssel zu überschreiben.
+
+## Ausgabespalten
+
+8 Eingaben formen jeden Datensatz, nachdem der Run ihn gelesen hat. Sie führen
+keinen Code aus & ändern den Preis nicht.
+
+| Feld                | Was es bewirkt                                                                        |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| `fields`            | Behält nur diese Felder, in der Reihenfolge & Schreibweise, die du angibst            |
+| `omitFields`        | Entfernt diese Felder & behält den Rest                                               |
+| `renameFields`      | Verschiebt ein Feld in eine Spalte mit neuem Namen                                    |
+| `flatten`           | Macht aus jedem verschachtelten Objekt Spalten auf oberster Ebene                     |
+| `fillMissingFields` | Füllt ein behaltenes Feld, das einem Datensatz fehlt, mit `null`. Standardmäßig aktiv |
+| `joinFields`        | Macht aus jeder dieser Listen 1 Textwert                                              |
+| `joinSeparator`     | Text zwischen verbundenen Einträgen. Standard ist ein Komma & ein Leerzeichen         |
+| `constantFields`    | Fügt eine Spalte mit demselben Text in jedem Datensatz hinzu                          |
+
+- Nutze einen Punkt für ein Feld innerhalb eines Objekts, etwa `author.id`.
+  Groß- und Kleinschreibung & Unterstriche spielen keine Rolle.
+- Jeder Datensatz behält seine `id`.
+- Mit `fields` kommt ein Feld, das einem Datensatz fehlt, als `null` an. Jeder
+  Datensatz hat dann dieselben Spalten.
+- Ein falscher Feldname stoppt den Run vor dem Lesen & kostet nichts.
+- Lassen sich die Namen nicht prüfen, liest der Run weiter & listet nicht
+  gefundene Namen am Ende.
+- Der Run ignoriert eine Map-Funktion oder einen jq-Filter, die für einen
+  anderen Actor geschrieben sind.
+
+Nenne eine berechnete Spalte in `fields` oder `renameFields`, um sie
+hinzuzufügen.
+
+| Spalte              | Formel                                                                                     |
+| ------------------- | ------------------------------------------------------------------------------------------ |
+| `totalEngagement`   | `likeCount` + `replyCount` + `retweetCount` + `quoteCount`. Ein fehlender Zähler addiert 0 |
+| `engagementRate`    | `totalEngagement` × 100 ÷ die `followers` des Autors, auf 4 Nachkommastellen               |
+| `engagementPerView` | `totalEngagement` × 100 ÷ `viewCount`, auf 4 Nachkommastellen                              |
+
+`totalEngagement` ist `null` bei einem Datensatz ohne diese Zähler. Eine Rate
+ist `null`, wenn ihr Divisor fehlt oder 0 ist.
 
 ## Run-Optionen
 
@@ -551,7 +593,7 @@ Setze `fieldStyle` auf `source`, `camelCase` oder `snake_case`. Der Actor
 `maxItems` begrenzt die gelieferten Datensätze im ganzen Run.
 `maxItemsPerTarget` begrenzt jeden Post oder jedes Profil.
 
-Ein Run kann viele Ziele lesen. Limits, Deduplizierung, Zuordnung & Abrechnung
+1 Run kann viele Ziele lesen. Limits, Deduplizierung, Zuordnung & Abrechnung
 bleiben über alle Ziele exakt.
 
 Der Actor entfernt doppelte Datensätze vor Ausgabe & Abrechnung. Setze
@@ -559,18 +601,18 @@ Der Actor entfernt doppelte Datensätze vor Ausgabe & Abrechnung. Setze
 behalten.
 
 Lies nach einem Run, den ein Seitenlimit gestoppt hat, `next-cursors` aus dem
-Standard-Key-Value-Store. Übergib einen dieser Cursor über `startCursor`, um das
-zugehörige Ziel fortzusetzen.
+Standard-Key-Value-Store. Übergib 1 Cursor über `startCursor`, um dieses Ziel
+fortzusetzen.
 
 #### Apify-Timeout
 
-Das Standard-Timeout von Apify ist `0`, Runs haben also kein Zeitlimit. Der
-Actor läuft weiter, bis er das Limit erreicht oder keine passenden Daten mehr
-findet. Du kannst trotzdem ein festes Apify-Timeout setzen. Dann bedeutet
+Das Standard-Timeout von Apify ist `0`, also haben Runs kein Zeitlimit. Der
+Actor läuft weiter, bis er die Obergrenze erreicht oder keine passenden Daten
+mehr findet. Du kannst trotzdem ein festes Apify-Timeout setzen. Dann bedeutet
 `completionReason: "deadline_reached"`, dass dieses Limit nahe ist. Der Actor
-speichert Antworten & Bericht. Dann beendet er sich sauber vor dem Limit.
-Jede gelieferte Antwort kostet nur einmal. Nicht abgeschlossene Ziele lassen
-sich fortsetzen.
+speichert Antworten & den Bericht & beendet sich dann sauber vor dem Limit. Jede
+gelieferte Antwort kostet nur einmal. Nicht abgeschlossene Ziele lassen sich
+fortsetzen.
 
 ### API-Beispiele
 
@@ -668,8 +710,9 @@ Nummern durch `latest`. Nutze exakte Builds nur für vorübergehende Rollbacks.
 
 ## Verwandte Xquik-Actors
 
-Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, rechnet erst nach dem
-Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
+Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, dieselbe Abrechnung erst
+nach dem Filtern & dieselben Diagnosen. Wähle den, der zu den Daten passt, die
+du brauchst.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrapt Posts aus
   Suchen, Profil-Timelines, Listen & Post-IDs mit über 50 Filtern & flachen
@@ -684,9 +727,9 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015 pro
   Datensatz.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
-  scrapt die Posts, die Posts zitieren, mit Text, Medien, Zahlen, Autoren & 11
-  Filtern. Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was gesagt
-  wurde. Ab $0.00015 pro Post.
+  scrapt die Zitate von Posts mit Text, Medien, Zählern, Autoren & 11 Filtern.
+  Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was diese Accounts
+  gesagt haben. Ab $0.00015 pro Post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrapt
   Follower, gefolgte Accounts, Listenmitglieder, Abonnenten &
   Community-Mitglieder als Profil-Datensätze. Nutze ihn, wenn du Zielgruppen-
@@ -697,8 +740,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   einer Suche aufbaust. Ab $0.00015 pro Profil.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   prüft, wo Accounts ansässig sind, mit der X-Angabe "Account based in", der
-  Verbindungsart zu X & Benutzernamen-Änderungen. Nutze ihn, wenn du prüfst, wo
-  Accounts ansässig sind. Ab $0.00015 pro Account.
+  Verbindungsart zu X & Änderungen des Nutzernamens. Nutze ihn, wenn du prüfst,
+  wo Accounts ansässig sind. Ab $0.00015 pro Account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) holt die E-Mails,
   Telefonnummern & Links, die Accounts in ihren Profilen veröffentlichen, anhand
   von Nutzernamen, Followern oder Nutzersuchen. Nutze ihn, wenn du die E-Mails
@@ -733,8 +776,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Zeit beobachtest. Ab $0.0003 pro analysiertem Post.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden Post
-  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema brauchst. Ab
-  $0.0003 pro analysiertem Post.
+  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem beliebigen Thema
+  brauchst. Ab $0.0003 pro analysiertem Post.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   kennzeichnet bullische, bärische, neutrale oder gemischte Haltung, Inhaltstyp,
   Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du Aktien, Krypto
@@ -774,13 +817,13 @@ Setze `scope` auf `direct`, wenn du nur Antworten auf den Post willst.
 
 ### Liefert er Antworten, die der Autor ausgeblendet hat?
 
-Ja. Die Standardstrategie `auto` ergänzt sie als Datensätze mit `hiddenReply`.
-Setze `includeHiddenReplies: false`, um sie zu überspringen.
+Ja. Die Standardstrategie `auto` ergänzt sie als `hiddenReply`-Datensätze. Setze
+`includeHiddenReplies: false`, um sie zu überspringen.
 
 ### Kann ich Antworten nach Gefällt-mir-Angaben oder Datum sortieren?
 
-Ja. Mit `sort` ordnest du Antworten nach Gefällt-mir-Angaben oder listest die
-neuesten oder ältesten zuerst.
+Ja. Setze `sort`, um Antworten nach Gefällt-mir-Angaben zu ordnen oder die
+neuesten oder ältesten zuerst zu listen.
 
 ### Kann ich Antworten als CSV oder Excel exportieren?
 
@@ -792,11 +835,11 @@ enthält 1 Antwort pro Zeile mit den Autorenfeldern daneben.
 Ja. Füge eine Profil-URL oder einen Nutzernamen ein. Der Run liest die
 Antwort-Timeline dieses Nutzers.
 
-### Brauche ich einen X-API-Schlüssel oder Login?
+### Brauche ich einen X-API-Schlüssel oder einen Login?
 
-Nein. Du brauchst keinen X-API-Schlüssel, keinen Login & keine Zugangsdaten.
-X Reply Scraper von Xquik fragt nie nach deinem X-Passwort, deinen Cookies oder
-Tokens.
+Nein. Du brauchst weder einen X-API-Schlüssel noch einen Login oder
+Zugangsdaten. X Reply Scraper von Xquik fragt nie nach deinem X-Passwort, deinen
+Cookies oder Tokens.
 
 ### Ist es legal, Antworten auf X zu scrapen?
 
@@ -805,7 +848,7 @@ geschützten Accounts. Sammle nur öffentliche Daten. Befolge geltende Gesetze &
 Plattformregeln.
 
 Antwort-Datasets können personenbezogene Daten enthalten. Wähle einen
-rechtmäßigen Zweck. Speichere Daten nur so lange wie nötig. Schütze Exporte.
+rechtmäßigen Zweck. Speichere Daten so kurz wie möglich. Schütze Exporte.
 Bearbeite Lösch- & Auskunftsanfragen, wo es vorgeschrieben ist. Hol dir bei
 Unsicherheit qualifizierten Rechtsrat.
 
@@ -816,21 +859,22 @@ verbirgt. `reply_reach` in `stopCauses` bedeutet, dass X nur einen Teil eines
 Threads geliefert hat. Auch Filter, Deduplizierung, `scope`, `maxDepth` & deine
 Limits senken die Zahl.
 
-### Kann ich API, Zeitpläne & Integrationen nutzen?
+### Kann ich die API, Zeitpläne & Integrationen nutzen?
 
-Ja. Der [API-Tab](https://apify.com/xquik/x-reply-scraper/api) zeigt Beispiele
-für Python, JavaScript & cURL. Mit
-[Zeitplänen](https://docs.apify.com/platform/schedules) von Apify startest du
-X Reply Scraper von Xquik per Cron. Er lässt sich auch mit Make, Zapier, n8n &
-Google Sheets verbinden.
+Ja. Im [API-Tab](https://apify.com/xquik/x-reply-scraper/api) findest du
+Beispiele für Python, JavaScript & cURL. Nutze
+[Zeitpläne](https://docs.apify.com/platform/schedules) von Apify, um X Reply
+Scraper von Xquik per Cron zu starten. Er verbindet sich auch mit Make, Zapier,
+n8n & Google Sheets.
 
 ### Wo bekomme ich Hilfe?
 
-Öffne ein Issue auf der Actor-Seite oder schreib mit der Run-ID an
-<support@xquik.com>.
+Öffne im [Tab Issues](https://apify.com/xquik/x-reply-scraper/issues) ein Issue
+mit der Run-ID.
 
 ### Kann ich eine individuelle Lösung bekommen?
 
-Ja. Besuche [xquik.com](https://xquik.com) oder lies die
-[API-Dokumentation](https://docs.xquik.com/introduction). Xquik bietet ein
-Dashboard, eine REST-API, einen MCP-Server & Webhooks.
+Ja. Beschreibe im [Tab Issues](https://apify.com/xquik/x-reply-scraper/issues),
+was du brauchst. Xquik bietet außerdem ein Dashboard, eine REST-API, einen
+MCP-Server & Webhooks. Die Website von Xquik findest du in seinem
+[Apify-Profil](https://apify.com/xquik).

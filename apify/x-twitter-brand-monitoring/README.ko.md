@@ -1,26 +1,17 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <strong>한국어</strong> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · **한국어** ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer가 Xquik MCP를 코딩 에이전트에 연결하는 모습"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Framer가 Xquik 스크레이퍼를 Claude Code, Codex, Cursor 등과 함께 사용하는 방법을 6:07부터 보세요.</a>
-</td></tr></table>
+[![Framer가 Xquik MCP를 코딩 에이전트에 연결하는 모습](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Framer가 Xquik 스크레이퍼를 Claude Code, Codex, Cursor 등과 함께 사용하는 방법](https://youtu.be/4UOSpoOoC3Y?t=367)을
+6:07부터 보세요.
 
 Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서비스이며, 가장
 완전한 X 데이터를 제공합니다. Xquik의 X (Twitter) Brand Monitoring은 브랜드
 언급을 추적하고 관련성, 감정 & 고객 경험 질문에 답합니다. 다른 Apify Actor는
 대부분 필터링이나 중복 제거 전에 요금을 부과합니다. Xquik은 필터에 맞고 중복되지
-않은 결과를 전달했을 때만 요금을 받습니다. AI 비용은 게시물(트윗)당 가격에
-포함되어 있습니다. AI 계정, 토큰, 키가 필요 없습니다.
+않은 결과를 전달했을 때만 요금을 받습니다. AI 비용은 게시물당 가격에 포함되어
+있습니다. AI 계정, 토큰 또는 키가 필요 없습니다.
 
 X(Twitter)의 브랜드 언급을 모니터링하고 실행 사이의 감정 변화를 추적하세요.
 Xquik의 **X (Twitter) Brand Monitoring with AI Analysis**는 조건에 맞는 게시물을
@@ -29,9 +20,9 @@ Xquik의 **X (Twitter) Brand Monitoring with AI Analysis**는 조건에 맞는 �
 게시물 데이터가 남습니다. 내보내기, 검토 & 후속 분석을 위해 다시 스크랩할 필요가
 없습니다.
 
-브랜드, 제품군, 캠페인에 대한 불만, 칭찬 & 구매 문의를 지켜보세요. 실제 게시물을
-근거로 지원 & 마케팅 팀에 상황을 공유하세요. 고객이 브랜드를 어떻게 이야기하는지
-실행마다 기록으로 남기세요.
+브랜드, 제품군 또는 캠페인에 대한 불만, 칭찬 & 구매 문의를 지켜보세요. 실제
+게시물을 근거로 지원 & 마케팅 팀에 상황을 공유하세요. 고객이 브랜드를 어떻게
+이야기하는지 실행마다 기록으로 남기세요.
 
 - **원본 게시물의 모든 필드.** 텍스트, 작성자, 각종 수치, 미디어, 링크, 인용한
   게시물 & 답글 대상 게시물이 답변 옆에 남습니다.
@@ -46,6 +37,12 @@ Xquik의 **X (Twitter) Brand Monitoring with AI Analysis**는 조건에 맞는 �
 > "Twitter"와 "X"는 X Corp의 상표입니다.
 
 ## X에서 브랜드를 모니터링하는 방법
+
+Apify가 처음인가요? 먼저
+[무료 계정을 만드세요](https://console.apify.com/sign-up?fpr=xquik). 무료
+요금제는 신용카드가 필요 없고 매달 쓸 수 있는 $5를 줍니다. 분석한 게시물 1개당
+$0.0003이므로 $5면 플랫폼 사용료를 빼고 게시물을 최대 16,000개 분석할 수
+있습니다. 그런 다음 여기로 돌아와 Try for free를 누르세요.
 
 1. 검색어, 프로필 사용자 아이디, 게시물 URL 또는 게시물 ID를 추가하세요. 예를
    들어 `(Sony OR "WH-1000XM5") headphones lang:en`으로 검색합니다.
@@ -107,7 +104,7 @@ Xquik의 **X (Twitter) Brand Monitoring with AI Analysis**는 조건에 맞는 �
 실행마다 생기는 작은 AI 차이는 변경으로 나타나지 않습니다.
 
 `changes`는 바뀐 질문마다 `previous` & `current` 판정을 나열합니다. 변경은 AI의
-편차, 새로운 맥락, 수정된 원본 데이터 때문에 생길 수 있습니다. 변경이 사실이
+편차, 새로운 맥락 또는 수정된 원본 데이터 때문에 생길 수 있습니다. 변경이 사실이
 바뀌었다는 증거는 아니며, 게시물이 빠졌다고 해서 삭제되었다는 증거도 아닙니다.
 
 기준 데이터셋 한도인 `maxBaselineRows`의 기본값은 100,000행입니다. 게시물 ID
@@ -116,7 +113,7 @@ Xquik의 **X (Twitter) Brand Monitoring with AI Analysis**는 조건에 맞는 �
 
 ## 직접 쓴 텍스트 분석
 
-직접 쓴 초안, 답글, 리뷰, 메모를 `texts`에 붙여넣으세요. Xquik의 X (Twitter)
+직접 쓴 초안, 답글, 리뷰 또는 메모를 `texts`에 붙여넣으세요. Xquik의 X (Twitter)
 Brand Monitoring이 이를 분석합니다. X에서는 아무것도 가져오지 않습니다.
 
 ```json
@@ -136,11 +133,14 @@ Brand Monitoring이 이를 분석합니다. X에서는 아무것도 가져오지
 ## X 브랜드 모니터링 비용은 얼마인가요?
 
 Xquik의 X (Twitter) Brand Monitoring은 분석한 게시물 1개당 $0.0003부터입니다.
-시작 요금은 없습니다. 가격에는 수집 & AI 비용이 포함되어 있습니다. AI 계정,
-토큰, 키가 필요 없습니다. 이 가격으로 게시물당 질문 최대 8개 & 맥락 최대
+시작 요금은 없습니다. 가격에는 수집 & AI 비용이 포함되어 있습니다. AI 계정, 토큰
+또는 키가 필요 없습니다. 이 가격으로 게시물당 질문 최대 8개 & 맥락 최대
 64,000바이트를 처리합니다. 질문 정의 1개는 최대 8,000바이트까지 쓸 수 있습니다.
 
-추출 필터 & 중복 제거는 분석 전에 실행됩니다. 필터에서 걸러진 행이나 중복 행에는
+더 많이 수집하려면 선불 사용량이 더 많은
+[Apify 요금제를 고르세요](https://apify.com/pricing?fpr=xquik).
+
+추출 필터 & 중복 제거는 분석 전에 실행됩니다. 필터에서 빠진 행이나 중복 행에는
 요금을 내지 않습니다. 실패한 분석, 건너뛴 분석 & 진단 행에는 결과 요금이
 없습니다. 컴퓨팅, 저장소 & 전송에 드는 Apify 플랫폼 사용료는 요금제 단가에 따라
 Apify가 따로 청구합니다. Pricing 탭에서 확인할 수 있습니다.
@@ -184,25 +184,23 @@ Apify가 따로 청구합니다. Pricing 탭에서 확인할 수 있습니다.
 
 ## 실행 요약 & 플랫 답변
 
-실행은 다음 4가지 경우에 키-값 저장소에 `analysis-summary` 레코드를 기록합니다.
+실행은 다음 3가지 경우에 키-값 저장소에 `analysis-summary` 레코드를 기록합니다.
 
 - 문제가 생겼거나 규모가 큰 경우.
-- 시리즈의 첫 실행으로 `baselineDatasetId` 없이 `monitor`를 설정한 경우.
 - 비교에서 바뀌었거나, 새로 나왔거나, 비교할 수 없는 게시물을 찾은 경우.
 - `alwaysSaveRunRecords`가 켜져 있는 경우.
 
-나머지 실행은 이 레코드를 건너뜁니다. 대신 실행 상태에
-`Top sentiment: negative in 2 of 5 results.`처럼 가장 많은 답변을 표시합니다.
-바뀐 것이 없는 비교는 `No change since the earlier run.`을 표시합니다. 문제가
-생긴 실행이나 큰 실행은 `run-report`도 기록합니다. `alwaysSaveRunRecords`가 켜진
-실행도 마찬가지입니다. `run-report`는 `results.analysisSummary` 아래에 같은
-요약을 한 번 더 담습니다.
+나머지 실행은 시리즈의 첫 실행을 포함해 이 레코드를 건너뜁니다. 이런 실행의
+상태는 `Top sentiment is negative in 2 of 5 results.`처럼 가장 많이 나온 답변을
+알려 줍니다. 바뀐 것이 없는 비교는 `No change since the earlier run.`이라고 알려
+줍니다. 문제가 생긴 실행이나 큰 실행은 `run-report`도 기록합니다.
+`alwaysSaveRunRecords`가 켜진 실행도 마찬가지입니다. `run-report`는
+`results.analysisSummary` 아래에 같은 요약을 한 번 더 담습니다.
 
-요약은 분석한 행, 실패한 행 & 건너뛴 행을 셉니다. 참여 지표를 합산하고 모든
-질문을 요약합니다.
+요약은 분석한 행, 실패한 행 & 건너뛴 행을 셉니다. 참여 지표 합계 & 모든 질문의
+요약도 담습니다.
 
-- `targets`는 브랜드나 별칭별 언급 수, 언급 점유율(share of voice) & 참여를
-  보고합니다.
+- `targets`는 브랜드나 별칭별 언급 수, 언급 점유율 & 참여를 보고합니다.
 - 각 `targets` 항목에는 답변 카테고리별로 참여가 가장 많은 언급 3개를 담은
   `top`이 있습니다. 가장 강한 부정 & 긍정 언급을 알릴 때 쓰세요.
 - 각 `targets` 항목에는 그 브랜드를 언급한 게시물의 답변 분포인 `choices`가
@@ -222,27 +220,27 @@ Apify가 따로 청구합니다. Pricing 탭에서 확인할 수 있습니다.
 모든 결과 행에는 질문 ID를 키로 쓰는 플랫 맵 `answers`도 들어 있습니다. 각 값은
 선택된 카테고리, 점수 또는 확률입니다. `Flat answers` 데이터셋 뷰 & CSV나 Excel
 내보내기는 질문 1개당 열 1개를 보여 줍니다. 이 열은 게시물 옆에 붙어 있으므로
-스프레드시트에서 JSON을 파싱할 필요가 없습니다. 실패하거나 건너뛴 행에는 빈 맵이
-들어갑니다.
+스프레드시트에서 JSON을 파싱할 필요가 없습니다. 실패한 행 & 건너뛴 행에는 빈
+맵이 들어갑니다.
 
 ## 태스크 예시
 
 공개 태스크 50개 중에서 고르세요. 각 태스크는 실제 영어 검색 & 상한을 정한
-`maxItems`로 시작합니다. 미리 준비된 대상, 맥락 & Overview 데이터셋 뷰도 들어
+`maxItems`로 시작합니다. 미리 준비된 대상, 맥락 & 개요 데이터셋 뷰도 들어
 있습니다. 실행하기 전에 검색이나 대상을 수정하세요.
 
-- [Monitor Nike brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-nike-brand-mentions-on-x)
-- [Monitor Starbucks brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-starbucks-brand-mentions-on-x)
-- [Monitor Tesla brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-tesla-brand-mentions-on-x)
-- [Monitor Spotify brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-spotify-brand-mentions-on-x)
-- [Monitor Netflix brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-netflix-brand-mentions-on-x)
-- [Monitor Airbnb brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-airbnb-brand-mentions-on-x)
-- [Monitor Uber brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-uber-brand-mentions-on-x)
-- [Monitor Peloton brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-peloton-brand-mentions-on-x)
-- [Monitor Shopify brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-shopify-brand-mentions-on-x)
-- [Monitor Notion brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-notion-brand-mentions-on-x)
-- [Monitor Duolingo brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-duolingo-brand-mentions-on-x)
-- [Monitor Lululemon brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-lululemon-brand-mentions-on-x)
+- [X에서 Nike 브랜드 언급 모니터링](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-nike-brand-mentions-on-x)
+- [X에서 Starbucks 브랜드 언급 모니터링](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-starbucks-brand-mentions-on-x)
+- [X에서 Tesla 브랜드 언급 모니터링](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-tesla-brand-mentions-on-x)
+- [X에서 Spotify 브랜드 언급 모니터링](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-spotify-brand-mentions-on-x)
+- [X에서 Netflix 브랜드 언급 모니터링](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-netflix-brand-mentions-on-x)
+- [X에서 Airbnb 브랜드 언급 모니터링](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-airbnb-brand-mentions-on-x)
+- [X에서 Uber 브랜드 언급 모니터링](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-uber-brand-mentions-on-x)
+- [X에서 Peloton 브랜드 언급 모니터링](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-peloton-brand-mentions-on-x)
+- [X에서 Shopify 브랜드 언급 모니터링](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-shopify-brand-mentions-on-x)
+- [X에서 Notion 브랜드 언급 모니터링](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-notion-brand-mentions-on-x)
+- [X에서 Duolingo 브랜드 언급 모니터링](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-duolingo-brand-mentions-on-x)
+- [X에서 Lululemon 브랜드 언급 모니터링](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-lululemon-brand-mentions-on-x)
 
 나머지 태스크는 Actor 페이지에서 더 많은 브랜드, 주제 & 시장을 다룹니다.
 
@@ -259,15 +257,15 @@ Apify가 따로 청구합니다. Pricing 탭에서 확인할 수 있습니다.
   아이디, ID 또는 URL로 프로필과 그 계정의 게시물, 답글, 미디어 & 팔로워를
   스크랩합니다. 검색이 아니라 계정에서 시작할 때 사용하세요. 행당
   $0.00015부터입니다.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)는 게시물 아래의
-  답글(댓글) & 대화 전체를 25개 이상의 필터로 스크랩합니다. 게시물 아래의 토론이
-  필요할 때 사용하세요. 행당 $0.00015부터입니다.
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)는 25개 이상의
+  필터로 게시물 아래의 답글, 댓글 & 대화 전체를 스크랩합니다. 게시물 아래의
+  토론이 필요할 때 사용하세요. 행당 $0.00015부터입니다.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)는 게시물
   URL이나 ID로 답글, 인용, 재게시한 사람 & 스레드를 대량으로 스크랩합니다. 누가
   게시물에 반응했는지 측정할 때 사용하세요. 행당 $0.00015부터입니다.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)는
   게시물을 인용한 게시물을 텍스트, 미디어, 수치, 작성자 & 11개의 필터와 함께
-  스크랩합니다. 누가 게시물을 인용했고 무엇을 말했는지 살펴볼 때 사용하세요.
+  스크랩합니다. 게시물을 인용한 사람 & 그들이 한 말을 살펴볼 때 사용하세요.
   게시물당 $0.00015부터입니다.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)는 팔로워,
   팔로잉, 리스트 멤버, 구독자 & 커뮤니티 멤버를 프로필 행으로 스크랩합니다.
@@ -277,9 +275,9 @@ Apify가 따로 청구합니다. Pricing 탭에서 확인할 수 있습니다.
   위치 필터를 지원합니다. 검색으로 계정 목록을 만들 때 사용하세요. 프로필당
   $0.00015부터입니다.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)는
-  X의 "Account based in"(계정 기반 위치) 라벨, X에 연결된 방식 & 사용자 아이디
-  변경 내역으로 계정이 어디에 기반을 두고 있는지 확인합니다. 계정의 기반 위치를
-  검증할 때 사용하세요. 계정당 $0.00015부터입니다.
+  X의 "Account based in" 라벨, X에 연결된 방식 & 사용자 아이디 변경 내역으로
+  계정이 어디에 기반을 두고 있는지 확인합니다. 계정의 기반 위치를 검증할 때
+  사용하세요. 계정당 $0.00015부터입니다.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper)는 사용자 아이디,
   팔로워 또는 사용자 검색에서 계정이 프로필에 공개한 이메일, 전화번호 & 링크를
   가져옵니다. 프로필이 공개한 이메일이 필요할 때 사용하세요. 프로필당
@@ -312,9 +310,9 @@ Apify가 따로 청구합니다. Pricing 탭에서 확인할 수 있습니다.
   AI로 게시물마다 태도, 강도 & 비꼼 확률을 라벨링합니다. 어떤 주제든 전반적인
   감정을 알고 싶을 때 사용하세요. 분석한 게시물당 $0.0003부터입니다.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)는
-  AI로 강세, 약세, 중립, 혼조 입장과 콘텐츠 유형, 확신도 & 자산 관련성을
-  라벨링합니다. 주식, 암호화폐, 트레이딩 이야기를 지켜볼 때 사용하세요. 분석한
-  게시물당 $0.0003부터입니다.
+  AI로 강세, 약세, 중립 또는 혼조 입장과 콘텐츠 유형, 확신도 & 자산 관련성을
+  라벨링합니다. 주식, 암호화폐 또는 트레이딩 이야기를 지켜볼 때 사용하세요.
+  분석한 게시물당 $0.0003부터입니다.
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)는
   AI로 뉴스 게시물을 형식, 출처 표기 & 주제 관련성에 따라 라벨링합니다. 보도와
   논평을 구분할 때 사용하세요. 분석한 게시물당 $0.0003부터입니다.
@@ -323,9 +321,9 @@ Apify가 따로 청구합니다. Pricing 탭에서 확인할 수 있습니다.
   분석이 원하는 라벨과 맞지 않을 때 사용하세요. 분석한 게시물당
   $0.0003부터입니다.
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)는
-  AI의 특성 답변 8개로 게시물마다 0에서 100까지의 Viral Score & 판정을
-  추정합니다. 게시물이 왜 퍼지거나 묻히는지 분석할 때 사용하세요. 분석한
-  게시물당 $0.0003부터입니다.
+  AI 특성 답변 8개로 게시물마다 0에서 100까지의 Viral Score & 판정을 추정합니다.
+  게시물이 왜 퍼지거나 묻히는지 분석할 때 사용하세요. 분석한 게시물당
+  $0.0003부터입니다.
 
 ## 자주 묻는 질문 & 지원
 
@@ -334,13 +332,13 @@ Apify가 따로 청구합니다. Pricing 탭에서 확인할 수 있습니다.
 ### AI 계정, X API 키나 로그인이 필요한가요?
 
 아니요. Xquik의 X (Twitter) Brand Monitoring은 가격에 AI 비용이 포함되어
-있습니다. AI 계정, 토큰, 키가 필요 없습니다. X API 키, 로그인, 자격 증명도 필요
-없습니다.
+있습니다. AI 계정, 토큰 또는 키가 필요 없습니다. X API 키, 로그인, 자격 증명도
+필요 없습니다.
 
 ### 직접 만든 질문을 쓸 수 있나요?
 
-네. 직접 만든 `analysis.questions`가 기본 질문을 대신합니다. `choice`, `score`,
-`probability` 질문을 1개에서 8개까지 보내세요. choice 질문에는 카테고리를
+네. 직접 만든 `analysis.questions`가 기본 질문을 대신합니다. `choice`, `score`
+또는 `probability` 질문을 1개에서 8개까지 보내세요. choice 질문에는 카테고리를
 2개에서 255개까지 넣을 수 있습니다. score 질문에는 순서가 있는 단계가 2개 이상
 필요합니다. 비교하려는 실행끼리는 같은 질문을 유지하세요.
 
@@ -359,15 +357,15 @@ Apify가 따로 청구합니다. Pricing 탭에서 확인할 수 있습니다.
 
 ### 분석이 사실을 검증하나요?
 
-아니요. 답변은 게시물이 무엇을 표현하고 어떻게 제시하는지를 설명합니다. 확률은
-사실 여부가 아니라 AI의 확신 정도입니다. 중요한 분류는 원본 게시물과 대조해
-검토하세요. 모든 행에 원본 게시물이 남아 있습니다.
+아니요. 답변은 게시물이 표현하는 내용 & 그 내용을 제시하는 방식을 설명합니다.
+확률은 사실 여부가 아니라 AI의 확신 정도를 나타냅니다. 중요한 분류는 원본
+게시물과 대조해 검토하세요. 모든 행에 원본 게시물이 남아 있습니다.
 
 ### 어떤 언어를 지원하나요?
 
-추출은 X가 제공하는 모든 언어를 지원합니다. 분석은 영어 고객 시나리오에서 먼저
-검증합니다. 지원하는 다른 언어도 같은 구조로 답변을 반환합니다. 어느 언어에서든
-`unclear` 카테고리 & 확률로 불확실성을 드러냅니다.
+추출은 X가 제공하는 모든 언어를 지원합니다. 저희는 영어 고객 시나리오로 분석을
+먼저 검증합니다. 지원하는 다른 언어도 같은 구조로 답변을 반환합니다. `unclear`
+카테고리 & 확률은 모든 언어에서 불확실성을 보여 줍니다.
 
 ### 비용을 제한하려면 어떻게 하나요?
 
@@ -378,7 +376,7 @@ Apify가 따로 청구합니다. Pricing 탭에서 확인할 수 있습니다.
 ### X 데이터를 분석해도 합법인가요?
 
 이 Actor는 공개 X 필드를 요청합니다. 결과에는 개인정보가 들어 있을 수 있습니다.
-적법한 목적인지 확인하고 관련 개인정보 보호 규정을 따르세요. 확실하지 않으면
+적법한 목적인지 확인하고 적용되는 개인정보 보호 규정을 따르세요. 확실하지 않으면
 자격을 갖춘 법률 전문가에게 문의하세요.
 
 ### API, 스케줄 & 연동을 사용할 수 있나요?
@@ -392,6 +390,7 @@ Apify가 따로 청구합니다. Pricing 탭에서 확인할 수 있습니다.
 
 ### 도움은 어디서 받을 수 있나요?
 
-Actor 페이지에서 이슈를 열거나 실행 ID와 함께 support@xquik.com으로 문의하세요.
-키-값 저장소의 무료 진단이 결과가 없거나, 일부만 나왔거나, 중단된 실행의 원인을
-설명합니다.
+실행 ID와 함께
+[Issues 탭](https://apify.com/xquik/x-twitter-brand-monitoring/issues)에서
+이슈를 여세요. 키-값 저장소의 무료 진단이 확인이 필요한 실행의 원인을
+설명합니다. 행을 하나도 받지 못한 실행은 상태에서 이유를 알려 줍니다.

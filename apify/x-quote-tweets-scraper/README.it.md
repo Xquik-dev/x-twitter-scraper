@@ -1,19 +1,10 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <strong>Italiano</strong>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · **Italiano**
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer collega Xquik MCP agli agenti di coding"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Guarda come Framer usa gli scraper Xquik con Claude Code, Codex, Cursor e altro, da 6:07.</a>
-</td></tr></table>
+[![Framer collega Xquik MCP agli agenti di coding](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Guarda come Framer usa gli scraper Xquik](https://youtu.be/4UOSpoOoC3Y?t=367)
+con Claude Code, Codex, Cursor & altro, da 6:07.
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo, con
 i dati X più completi. X Quote Tweets Scraper di Xquik raccoglie i post che
@@ -24,7 +15,7 @@ solo i risultati consegnati, unici e conformi ai filtri.
 Incolla URL di post o ID di post & ottieni ogni citazione che X fornisce per
 ciascun post in 1 esecuzione. Ogni riga contiene la citazione, il profilo
 pubblico completo del suo autore & il post citato. Paghi **$0.00015 per riga
-consegnata**. Apify fattura a parte l'uso della piattaforma.
+consegnata**, & Apify fattura a parte l'uso della piattaforma.
 
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.
@@ -47,12 +38,18 @@ consegnata**. Apify fattura a parte l'uso della piattaforma.
 - 11 filtri per lingua, date, tipo di media, 6 conteggi minimi & autori
   verificati.
 - 1 riga per autore quando vuoi persone, non post.
-- URL di post di x.com & twitter.com, oppure ID di post numerici.
+- URL di post di `x.com` & `twitter.com`, oppure ID di post numerici.
 - Rimozione dei duplicati prima della fatturazione.
 - Export JSON, CSV, Excel, XML & RSS tramite i dataset di Apify.
 - Le esecuzioni riprendono dallo stato salvato dopo una migrazione di Apify.
 
 ## Come estrarre le citazioni dei post
+
+Non usi ancora Apify?
+[Crea prima un account gratuito](https://console.apify.com/sign-up?fpr=xquik).
+Il piano gratuito non richiede carta di credito & offre $5 da spendere ogni
+mese. A $0.00015 per post, $5 coprono fino a 33.000 post, senza contare l'uso
+della piattaforma. Poi torna qui & premi Try for free.
 
 1. Apri X Quote Tweets Scraper di Xquik in Apify Console.
 2. Incolla URL di post in `startUrls` o ID di post in `tweetIds`.
@@ -159,6 +156,46 @@ deduplicazione. Il dataset ha 2 viste a tabella. "Quote Tweets" mostra ogni
 citazione con i suoi conteggi. "Quote Authors" mostra chi ha citato ogni post,
 con i campi del profilo dell'autore come colonne.
 
+## Colonne di output
+
+8 input danno forma a ogni riga dopo che l'esecuzione la legge. Non eseguono
+codice & non cambiano il prezzo.
+
+| Campo               | Cosa fa                                                                        |
+| ------------------- | ------------------------------------------------------------------------------ |
+| `fields`            | Tiene solo questi campi, nell'ordine & con la grafia che scrivi                |
+| `omitFields`        | Scarta questi campi & tiene il resto                                           |
+| `renameFields`      | Sposta un campo in una colonna con un nuovo nome                               |
+| `flatten`           | Trasforma ogni oggetto annidato in colonne di primo livello                    |
+| `fillMissingFields` | Riempie con `null` un campo tenuto che manca in una riga. Attivo di default    |
+| `joinFields`        | Trasforma ognuno di questi elenchi in 1 valore di testo                        |
+| `joinSeparator`     | Testo tra gli elementi uniti. Il valore predefinito è una virgola & uno spazio |
+| `constantFields`    | Aggiunge una colonna con lo stesso testo su ogni riga                          |
+
+- Usa un punto per un campo dentro un oggetto. Maiuscole & trattini bassi non
+  contano.
+- Ogni riga conserva il suo `id`.
+- Con `fields`, un campo che manca in una riga arriva come `null`. Così ogni
+  riga ha le stesse colonne.
+- Un nome di campo sbagliato ferma l'esecuzione prima di leggere & non addebita
+  nulla.
+- Se i nomi non si possono controllare, l'esecuzione continua a leggere & elenca
+  per ultimi i nomi che non ha visto.
+- L'esecuzione ignora una funzione map o un filtro jq scritti per un altro
+  Actor.
+
+Per aggiungere una colonna calcolata, scrivine il nome in `fields` o
+`renameFields`.
+
+| Colonna             | Formula                                                                                  |
+| ------------------- | ---------------------------------------------------------------------------------------- |
+| `totalEngagement`   | `likeCount` + `replyCount` + `retweetCount` + `quoteCount`. Un conteggio mancante vale 0 |
+| `engagementRate`    | `totalEngagement` × 100 ÷ i `followers` dell'autore, a 4 decimali                        |
+| `engagementPerView` | `totalEngagement` × 100 ÷ `viewCount`, a 4 decimali                                      |
+
+`totalEngagement` è `null` per una riga senza questi conteggi. Un tasso è `null`
+quando il suo divisore manca o vale 0.
+
 ## Cosa fornisce X
 
 2 limiti vengono da X, & X Quote Tweets Scraper di Xquik li dichiara in modo
@@ -174,10 +211,14 @@ chiaro.
 Su ogni piano Apify paghi $0.00015 per riga consegnata. Apify fattura a parte il
 tuo uso della piattaforma.
 
+Per volumi maggiori,
+[scegli un piano Apify](https://apify.com/pricing?fpr=xquik) con più uso
+prepagato.
+
 - Un addebito per ogni riga di dati consegnata. La diagnostica in `diagnostics`
   è gratuita.
 - Nessun costo di avvio.
-- Un post che X non ha non aggiunge righe né addebiti.
+- Un post che X non ha non aggiunge righe & non ha addebiti.
 - I filtri & `uniqueAuthors` agiscono prima della fatturazione, quindi una
   citazione scartata non costa nulla.
 - La deduplicazione avviene prima della fatturazione.
@@ -222,7 +263,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   post in blocco. Usalo quando misuri chi ha interagito con i post. Da $0.00015
   per riga.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) estrae
-  follower, following, membri & follower delle liste e membri delle community
+  follower, following, membri delle liste, abbonati & membri delle community
   come righe di profilo. Usalo quando ti servono elenchi di pubblico o di
   membri. Da $0.00015 per profilo.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) cerca
@@ -231,8 +272,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   $0.00015 per profilo.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   verifica dove hanno sede gli account con l'etichetta "Posizione account" di X,
-  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando ti
-  serve verificare dove hanno sede gli account. Da $0.00015 per account.
+  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando
+  vuoi verificare dove hanno sede gli account. Da $0.00015 per account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) ottiene le email, i
   numeri di telefono & i link che gli account pubblicano sui propri profili, da
   nomi utente, follower o ricerche di utenti. Usalo quando ti servono le email
@@ -255,7 +296,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   lavoro di X per parola chiave, luogo, modalità di lavoro, livello di
   esperienza & azienda, con stipendi & link di candidatura. Usalo quando
   raccogli le offerte di lavoro pubblicate su X. Da $0.00015 per offerta.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper) raccoglie gli
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) estrae gli
   articoli lunghi di X come Markdown & testo, con copertine, autori, date &
   metriche. Usalo quando ti serve il corpo degli articoli, non i post. Da
   $0.00015 per articolo.
@@ -265,7 +306,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   media.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
   monitora le menzioni del brand con rilevanza, sentiment & risposte sulla
-  customer experience generate con AI, poi confronta le esecuzioni. Usalo quando
+  customer experience generate con AI & confronta le esecuzioni. Usalo quando
   osservi un brand nel tempo. Da $0.0003 per post analizzato.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   etichetta atteggiamento, intensità & probabilità di sarcasmo di ogni post con
@@ -343,13 +384,15 @@ meno che non ti serva una build precedente.
 
 ### Dove trovo assistenza?
 
-Apri una issue nella pagina dell'Actor o scrivi a <support@xquik.com> con l'ID
+Apri una issue nella
+[scheda Issues](https://apify.com/xquik/x-quote-tweets-scraper/issues) con l'ID
 dell'esecuzione. La diagnostica gratuita nel key-value store spiega le
-esecuzioni che richiedono attenzione. Un'esecuzione che non riceve alcuna riga
-dice perché nel suo stato.
+esecuzioni che richiedono attenzione. Un'esecuzione che non riceve nessuna riga
+ne spiega il motivo nel suo stato.
 
 ### Posso avere una soluzione personalizzata?
 
-Sì. Visita [xquik.com](https://xquik.com) o leggi la
-[documentazione API](https://docs.xquik.com/introduction). Copre dashboard, API,
-server MCP & webhook.
+Sì. Descrivi ciò che ti serve nella
+[scheda Issues](https://apify.com/xquik/x-quote-tweets-scraper/issues). Xquik
+offre anche una dashboard, un'API REST, un server MCP & webhook. Trovi il sito
+web di Xquik sul suo [profilo Apify](https://apify.com/xquik).

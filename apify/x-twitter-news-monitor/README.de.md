@@ -1,34 +1,25 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <strong>Deutsch</strong> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+**Deutsch** · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer verbindet Xquik MCP mit Coding-Agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Sieh dir an, wie Framer Xquik-Scraper mit Claude Code, Codex, Cursor und mehr nutzt, ab Minute 6:07.</a>
-</td></tr></table>
+[![Framer verbindet Xquik MCP mit Coding-Agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Sieh dir an, wie Framer Xquik-Scraper nutzt](https://youtu.be/4UOSpoOoC3Y?t=367),
+mit Claude Code, Codex, Cursor & mehr, ab Minute 6:07.
 
 Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
 liefert die vollständigsten X-Daten. X (Twitter) News Monitor von Xquik sortiert
 News-Posts nach Format, Quellenangabe & Relevanz. Die meisten anderen Apify
 Actors rechnen ab, bevor sie filtern oder Duplikate entfernen. Xquik rechnet nur
 gelieferte, eindeutige Ergebnisse ab, die zu deinen Filtern passen. Die
-KI-Kosten sind im Preis pro Post enthalten. Du brauchst keinen KI-Account, keine
-Tokens & keinen Schlüssel.
+KI-Kosten sind im Preis pro Post enthalten. Du brauchst weder einen KI-Account
+noch Tokens oder einen Schlüssel.
 
-Sortiere News-Posts (Tweets) auf X (Twitter) nach Art & behalte die
-Originaldaten jedes Posts. **X (Twitter) News Monitor with AI Analysis** von
-Xquik sammelt Posts zu deinen Themen. Er ergänzt jeden Post mit KI um Antworten
-zu Format, Quellenangabe & Relevanz. Trenne Berichterstattung von Kommentar &
-Spekulation. Sieh, ob ein Post eine Quelle nennt oder verlinkt. Behalte nur
-Posts über die Organisationen, Personen oder Themen, die du verfolgst.
+Sortiere News-Posts auf X (Twitter) nach Art & behalte die Originaldaten jedes
+Posts. **X (Twitter) News Monitor with AI Analysis** von Xquik sammelt Posts zu
+deinen Themen. Er ergänzt jeden Post mit KI um Antworten zu Format,
+Quellenangabe & Relevanz. Trenne Berichterstattung von Kommentar & Spekulation.
+Sieh, ob ein Post eine Quelle nennt oder verlinkt. Behalte nur Posts über die
+Organisationen, Personen oder Themen, die du verfolgst.
 
 - **Format.** Er unterscheidet Berichterstattung, Kommentar, Spekulation,
   Werbung & Satire.
@@ -43,13 +34,20 @@ Posts über die Organisationen, Personen oder Themen, die du verfolgst.
 
 ## So klassifizierst du News-Posts auf X
 
-1. Füge Suchbegriffe wie `Nvidia earnings lang:en -filter:retweets`,
-   Nutzernamen von News-Accounts oder Post-IDs hinzu.
+Neu bei Apify?
+[Erstelle zuerst einen kostenlosen Account](https://console.apify.com/sign-up?fpr=xquik).
+Der kostenlose Plan braucht keine Kreditkarte & gibt dir jeden Monat $5 zum
+Ausgeben. Bei $0.0003 pro analysiertem Post reichen $5 für bis zu 16.000
+analysierte Posts, vor Abzug der Plattformnutzung. Komm dann hierher zurück &
+klicke auf Try for free.
+
+1. Füge Suchbegriffe wie `Nvidia earnings lang:en -filter:retweets`, Nutzernamen
+   von News-Accounts oder Post-IDs hinzu.
 2. Setze `maxItems` & Extraktionsfilter wie Datumsgrenzen, `filter:links` oder
    eine Mindestzahl an Reposts.
 3. Trage die Organisationen, Personen oder Themen, die du verfolgst, mit ihren
-   Aliassen unter `analysis.targets` ein. Grenze das Thema in
-   `analysis.context` ein.
+   Aliassen unter `analysis.targets` ein. Grenze das Thema in `analysis.context`
+   ein.
 4. Starte den Run & öffne das Dataset.
 
 ```json
@@ -76,8 +74,8 @@ automatisch glaubwürdig. Die Quellenangabe beschreibt, was der Post darstellt.
 
 ## Eigenen Text analysieren
 
-Füge eigene Entwürfe, Antworten, Rezensionen oder Notizen in `texts` ein.
-X (Twitter) News Monitor von Xquik analysiert sie. Er ruft nichts von X ab.
+Füge eigene Entwürfe, Antworten, Rezensionen oder Notizen in `texts` ein. X
+(Twitter) News Monitor von Xquik analysiert sie. Er ruft nichts von X ab.
 
 ```json
 {
@@ -90,7 +88,7 @@ X (Twitter) News Monitor von Xquik analysiert sie. Er ruft nichts von X ab.
 
 - Jeder Text wird zu 1 Datensatz mit denselben `analysis`-Antworten wie ein
   Post.
-- `tweet.id` ist `text:1`, `text:2` usw. `tweet.type` ist `text`.
+- `tweet.id` ist `text:1`, `text:2` & so weiter, & `tweet.type` ist `text`.
 - Jeder analysierte Text kostet dieselben $0.0003 wie ein analysierter Post.
 - Ist `texts` gesetzt, analysiert der Run nur diese Texte. Starte X-Ziele in
   einem eigenen Run.
@@ -99,9 +97,13 @@ X (Twitter) News Monitor von Xquik analysiert sie. Er ruft nichts von X ab.
 
 X (Twitter) News Monitor von Xquik kostet ab $0.0003 pro analysiertem Post. Er
 verlangt keine Startgebühr. Der Preis enthält Erfassung & KI-Kosten. Du brauchst
-keinen KI-Account, keine Tokens & keinen Schlüssel. Der Preis deckt bis zu 8
-Fragen & 64.000 Byte Kontext pro Post ab. Jede Frage-Definition darf bis zu
+weder einen KI-Account noch Tokens oder einen Schlüssel. Der Preis deckt bis zu
+8 Fragen & 64.000 Byte Kontext pro Post ab. Jede Frage-Definition darf bis zu
 8.000 Byte nutzen.
+
+Brauchst du mehr Volumen, dann
+[wähle einen Apify-Plan](https://apify.com/pricing?fpr=xquik) mit mehr
+vorausbezahlter Nutzung.
 
 Extraktionsfilter & Deduplizierung laufen vor der Analyse. Herausgefilterte oder
 doppelte Datensätze zahlst du nie. Fehlgeschlagene Analysen, übersprungene
@@ -154,38 +156,38 @@ Datensätze, abgerechnete Analysen & ausstehende Gebühren.
 
 ## Run-Zusammenfassung & flache Antworten
 
-Ein Run schreibt in 4 Fällen einen `analysis-summary`-Datensatz in seinen
+Ein Run schreibt in 3 Fällen einen `analysis-summary`-Datensatz in seinen
 Key-Value-Store.
 
 - Er hat ein Problem oder ist groß.
-- Er setzt `monitor` ohne `baselineDatasetId`, als erster Run einer Serie.
 - Sein Vergleich findet einen geänderten, neuen oder nicht vergleichbaren Post.
 - Er hat `alwaysSaveRunRecords` aktiviert.
 
-Andere Runs überspringen den Datensatz. Ihr Status nennt die wichtigste Antwort,
-etwa `Top format: reporting in 4 of 5 results.` Ein Vergleich ohne Änderung
-meldet `No change since the earlier run.` Ein Run mit einem Problem oder ein
-großer Run schreibt zusätzlich `run-report`. Das gilt auch für einen Run mit
-aktiviertem `alwaysSaveRunRecords`. `run-report` wiederholt die Zusammenfassung
-unter `results.analysisSummary`.
+Andere Runs überspringen den Datensatz, auch der erste Run einer Serie. Ihr
+Status nennt die häufigste Antwort, etwa
+`Top format is reporting in 4 of 5 results.` Ein Vergleich ohne Änderung meldet
+`No change since the earlier run.` Ein Run mit einem Problem oder ein großer Run
+schreibt außerdem `run-report`. Das gilt auch für einen Run mit aktiviertem
+`alwaysSaveRunRecords`. `run-report` wiederholt die Zusammenfassung unter
+`results.analysisSummary`.
 
 Die Zusammenfassung zählt analysierte, fehlgeschlagene & übersprungene
 Datensätze. Sie summiert Interaktionen & fasst jede Frage zusammen.
 
 - Die Aufteilung `format` trennt Berichterstattung von Kommentar, Spekulation,
   Werbung & Satire.
-- `attribution` zählt genannte, verlinkte, fehlende Quellen & solche aus erster
-  Hand.
-- `relevance` zählt Posts zu jedem Ziel.
-- `targets` nennt die Erwähnungen pro Ziel. Das Feld `top` jedes Ziels listet
-  seine Posts mit den meisten Interaktionen pro Antwortkategorie.
-- Jeder Eintrag in `targets` hat `choices`, die Verteilung nach Format &
-  Quellenangabe für Posts zu diesem Ziel.
+- `attribution` zählt genannte & verlinkte Quellen, Quellen aus erster Hand &
+  fehlende Quellen.
+- `relevance` zählt Posts über jedes Ziel.
+- `targets` nennt die Erwähnungen pro Ziel. `top` listet für jedes Ziel die
+  Posts mit den meisten Interaktionen pro Antwortkategorie.
+- Jeder Eintrag in `targets` hat `choices`, die Verteilung von Format &
+  Quellenangabe bei Posts über dieses Ziel.
 - `sourceDomains` zählt die verlinkten Domains im ganzen Run.
 - `monitor.changedRows` listet Posts, deren Entscheidungen sich seit der
   Baseline geändert haben.
 - Jeder Datensatz listet `sourceDomains`, die Hostnamen, auf die er verlinkt.
-- Jeder Datensatz listet `cashtags` aus seinem Text, etwa `$NVDA`.
+- Jeder Datensatz listet die `cashtags` aus seinem Text, etwa `$NVDA`.
 - Ist `monitor.baselineDatasetId` gesetzt, zählt der Block `monitor` der
   Zusammenfassung die Vergleichsstatus. Er listet bis zu 50 geänderte
   Datensätze.
@@ -225,26 +227,27 @@ Wähle aus 50 öffentlichen Tasks. Jeder startet mit einer echten englischen Suc
 & einem begrenzten `maxItems`. Er enthält fertige Ziele, Kontext & die
 Dataset-Ansicht Overview. Passe Suche oder Ziele an, bevor du startest.
 
-- [Classify Nvidia news posts on X](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-nvidia-news-posts-on-x)
-- [Classify X Article news posts](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-x-article-news-posts)
-- [Classify OpenAI news posts on X](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-openai-news-posts-on-x)
-- [Classify Apple news posts on X](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-apple-news-posts-on-x)
-- [Classify Tesla news posts on X](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-tesla-news-posts-on-x)
-- [Classify SpaceX news posts on X](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-spacex-news-posts-on-x)
-- [Classify Boeing news posts on X](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-boeing-news-posts-on-x)
-- [Classify Pfizer news posts on X](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-pfizer-news-posts-on-x)
-- [Classify Moderna news posts on X](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-moderna-news-posts-on-x)
-- [Classify ExxonMobil news posts on X](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-exxon-news-posts-on-x)
-- [Classify Federal Reserve news posts on X](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-federal-reserve-news-posts-on-x)
-- [Classify European Central Bank news posts on X](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-european-central-bank-news-posts-on-x)
-- [Classify Bank of England news posts on X](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-bank-of-england-news-posts-on-x)
+- [News-Posts zu Nvidia auf X klassifizieren](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-nvidia-news-posts-on-x)
+- [News-Posts mit X-Artikeln klassifizieren](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-x-article-news-posts)
+- [News-Posts zu OpenAI auf X klassifizieren](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-openai-news-posts-on-x)
+- [News-Posts zu Apple auf X klassifizieren](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-apple-news-posts-on-x)
+- [News-Posts zu Tesla auf X klassifizieren](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-tesla-news-posts-on-x)
+- [News-Posts zu SpaceX auf X klassifizieren](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-spacex-news-posts-on-x)
+- [News-Posts zu Boeing auf X klassifizieren](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-boeing-news-posts-on-x)
+- [News-Posts zu Pfizer auf X klassifizieren](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-pfizer-news-posts-on-x)
+- [News-Posts zu Moderna auf X klassifizieren](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-moderna-news-posts-on-x)
+- [News-Posts zu ExxonMobil auf X klassifizieren](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-exxon-news-posts-on-x)
+- [News-Posts zur Federal Reserve auf X klassifizieren](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-federal-reserve-news-posts-on-x)
+- [News-Posts zur Europäischen Zentralbank auf X klassifizieren](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-european-central-bank-news-posts-on-x)
+- [News-Posts zur Bank of England auf X klassifizieren](https://apify.com/xquik/x-twitter-news-monitor/examples/classify-bank-of-england-news-posts-on-x)
 
 Die übrigen Tasks auf der Actor-Seite decken weitere Marken, Themen & Märkte ab.
 
 ## Verwandte Xquik-Actors
 
-Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, rechnet erst nach dem
-Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
+Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, dieselbe Abrechnung erst
+nach dem Filtern & dieselben Diagnosen. Wähle den, der zu den Daten passt, die
+du brauchst.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrapt Posts aus
   Suchen, Profil-Timelines, Listen & Post-IDs mit über 50 Filtern & flachen
@@ -262,9 +265,9 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015 pro
   Datensatz.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
-  scrapt die Posts, die Posts zitieren, mit Text, Medien, Zahlen, Autoren & 11
-  Filtern. Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was gesagt
-  wurde. Ab $0.00015 pro Post.
+  scrapt die Zitate von Posts mit Text, Medien, Zählern, Autoren & 11 Filtern.
+  Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was diese Accounts
+  gesagt haben. Ab $0.00015 pro Post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrapt
   Follower, gefolgte Accounts, Listenmitglieder, Abonnenten &
   Community-Mitglieder als Profil-Datensätze. Nutze ihn, wenn du Zielgruppen-
@@ -275,8 +278,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   einer Suche aufbaust. Ab $0.00015 pro Profil.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   prüft, wo Accounts ansässig sind, mit der X-Angabe "Account based in", der
-  Verbindungsart zu X & Benutzernamen-Änderungen. Nutze ihn, wenn du prüfst, wo
-  Accounts ansässig sind. Ab $0.00015 pro Account.
+  Verbindungsart zu X & Änderungen des Nutzernamens. Nutze ihn, wenn du prüfst,
+  wo Accounts ansässig sind. Ab $0.00015 pro Account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) holt die E-Mails,
   Telefonnummern & Links, die Accounts in ihren Profilen veröffentlichen, anhand
   von Nutzernamen, Followern oder Nutzersuchen. Nutze ihn, wenn du die E-Mails
@@ -311,8 +314,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Zeit beobachtest. Ab $0.0003 pro analysiertem Post.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden Post
-  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema brauchst. Ab
-  $0.0003 pro analysiertem Post.
+  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem beliebigen Thema
+  brauchst. Ab $0.0003 pro analysiertem Post.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   kennzeichnet bullische, bärische, neutrale oder gemischte Haltung, Inhaltstyp,
   Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du Aktien, Krypto
@@ -333,17 +336,17 @@ Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
 ### Brauche ich einen KI-Account, einen X-API-Schlüssel oder einen Login?
 
 Nein. X (Twitter) News Monitor von Xquik enthält die KI-Kosten im Preis. Du
-brauchst keinen KI-Account, keine Tokens & keinen Schlüssel. Du brauchst auch
-keinen X-API-Schlüssel, keinen Login & keine Zugangsdaten.
+brauchst weder einen KI-Account noch Tokens oder einen Schlüssel. Du brauchst
+auch weder einen X-API-Schlüssel noch einen Login oder Zugangsdaten.
 
 ### Kann ich eigene Fragen nutzen?
 
 Ja. Eigene `analysis.questions` ersetzen die Standardfragen. Sende 1 bis 8
 Fragen vom Typ `choice`, `score` oder `probability`. Choice-Fragen akzeptieren 2
-bis 255 Kategorien. Score-Fragen brauchen mindestens 2 geordnete Stufen.
-Behalte dieselben Fragen in allen Runs, die du vergleichen willst.
+bis 255 Kategorien. Score-Fragen brauchen mindestens 2 geordnete Stufen. Behalte
+dieselben Fragen in allen Runs, die du vergleichen willst.
 
-### Warum hat ein Datensatz eine fehlgeschlagene oder übersprungene Analyse?
+### Warum kam ein Datensatz mit fehlgeschlagener oder übersprungener Analyse zurück?
 
 `analysis.status` ist `failed` oder `skipped`. Der Actor hat den Post gesammelt
 & geliefert, aber die KI-Analyse lief nicht zu Ende. `analysis.reason` nennt die
@@ -359,7 +362,7 @@ kürzt zuerst zitierte & beantwortete Posts, dann den Post selbst.
 
 ### Prüft die Analyse Fakten?
 
-Nein. Antworten beschreiben, was der Post ausdrückt & wie er es darstellt.
+Nein. Antworten beschreiben, was der Post ausdrückt & wie der Post es darstellt.
 Wahrscheinlichkeiten drücken die Sicherheit der KI aus, nicht die Wahrheit.
 Prüfe wichtige Einstufungen am Originalpost, den jeder Datensatz behält.
 
@@ -380,20 +383,22 @@ Datumsgrenzen & Mindestwerte für Interaktionen. Starte mit einem kleinen
 ### Ist es legal, X-Daten zu analysieren?
 
 Der Actor fragt öffentliche X-Felder ab. Ergebnisse können personenbezogene
-Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist. Befolge geltende
+Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist, & befolge geltende
 Datenschutzregeln. Hol dir bei Unsicherheit qualifizierten Rechtsrat.
 
-### Kann ich API, Zeitpläne & Integrationen nutzen?
+### Kann ich die API, Zeitpläne & Integrationen nutzen?
 
 Ja. Im [API-Tab](https://apify.com/xquik/x-twitter-news-monitor/api) findest du
 Beispiele für Python, JavaScript & cURL. Nutze
-Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) für wiederkehrende
-Runs. Übergib die vorherige Dataset-ID als `monitor.baselineDatasetId`, um
-Änderungen zu sehen. Apify-Integrationen verbinden Runs auch mit Webhooks, Make,
-Zapier, n8n & Google Sheets.
+[Zeitpläne](https://docs.apify.com/platform/schedules) von Apify für
+wiederkehrende Runs. Übergib die vorherige Dataset-ID als
+`monitor.baselineDatasetId`, um zu sehen, was sich geändert hat.
+Apify-Integrationen verbinden Runs auch mit Webhooks, Make, Zapier, n8n & Google
+Sheets.
 
 ### Wo bekomme ich Hilfe?
 
-Öffne ein Issue auf der Actor-Seite oder schreib mit der Run-ID an
-support@xquik.com. Kostenlose Diagnosen im Key-Value-Store erklären leere,
-unvollständige oder unterbrochene Runs.
+Öffne im [Tab Issues](https://apify.com/xquik/x-twitter-news-monitor/issues) ein
+Issue mit der Run-ID. Kostenlose Diagnosen im Key-Value-Store erklären Runs, die
+Aufmerksamkeit brauchen. Ein Run, der keinen Datensatz zurückbekommt, sagt in
+seinem Status, warum.

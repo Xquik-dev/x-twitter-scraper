@@ -1,19 +1,10 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <strong>Deutsch</strong> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+**Deutsch** · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer verbindet Xquik MCP mit Coding-Agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Sieh dir an, wie Framer Xquik-Scraper mit Claude Code, Codex, Cursor und mehr nutzt, ab Minute 6:07.</a>
-</td></tr></table>
+[![Framer verbindet Xquik MCP mit Coding-Agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Sieh dir an, wie Framer Xquik-Scraper nutzt](https://youtu.be/4UOSpoOoC3Y?t=367),
+mit Claude Code, Codex, Cursor & mehr, ab Minute 6:07.
 
 Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
 liefert die vollständigsten X-Daten. X User Search Scraper von Xquik findet
@@ -22,28 +13,37 @@ ab, bevor sie filtern oder Duplikate entfernen. Xquik rechnet nur gelieferte,
 eindeutige Ergebnisse ab, die zu deinen Filtern passen.
 
 Starte eine Twitter-Nutzersuche nach Name, Thema, Bio oder Standort. Du brauchst
-keinen X-API-Schlüssel & keinen Login. Du zahlst **$0.00015 pro geliefertem
-Profil**, & Apify berechnet die Plattformnutzung separat.
+weder einen X-API-Schlüssel noch einen Login. Du zahlst **$0.00015 pro
+geliefertem Profil** & Apify berechnet die Plattformnutzung separat.
 
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
 
 ## Account-Daten & Filter
 
-- Filter für Zielgruppe, Posts, Alter, Verifizierung, Website, Standort, Bio &
-  Nutzername.
+- Filter für Zielgruppe, Posts, Alter, Verifizierung, Website, Standort, Bio,
+  Nutzername & E-Mail.
+- `email` & `contactInfo` mit den E-Mails, Telefonnummern & Links, die jedes
+  Profil veröffentlicht.
 - Modus Search Autocomplete mit den Accounts, Themen, Hashtags & Cashtags, die X
   für jeden Suchbegriff vorschlägt.
 - Setze 1 Suchanfrage ab einem gespeicherten Cursor in `startCursor` fort.
-- Bei einer Migration bleibt bereits erledigte Arbeit erhalten.
+- Runs behalten gelieferte Datensätze & ihren Fortschritt, wenn Apify sie neu
+  startet.
 - Filter & Duplikatentfernung vor der Abrechnung.
 
 ## So suchst du Nutzer auf X
 
+Neu bei Apify?
+[Erstelle zuerst einen kostenlosen Account](https://console.apify.com/sign-up?fpr=xquik).
+Der kostenlose Plan braucht keine Kreditkarte & gibt dir jeden Monat $5 zum
+Ausgeben. Bei $0.00015 pro Profil reichen $5 für bis zu 33.000 Profile, vor
+Abzug der Plattformnutzung. Komm dann hierher zurück & klicke auf Try for free.
+
 1. Öffne X User Search Scraper von Xquik in der Apify Console.
 2. Gib Namen, Themen, Bios oder Standorte in `searchTerms` ein.
 3. Ergänze Filter wie `minFollowers`, `verifiedOnly` oder `locationContains`.
-4. Setze `maxItems`, um die gelieferten Profile zu begrenzen. Klicke dann auf
+4. Setze `maxItems`, um die gelieferten Profile zu begrenzen, & klicke dann auf
    Start.
 5. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
 
@@ -64,18 +64,18 @@ Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 
 Füge die Eingabe ein, die du schon nutzt. X User Search Scraper von Xquik liest
 diese Feldnamen anderer Actors. Jede Zeile nennt ihre Felder, dann das Feld, dem
-der Actor sie zuordnet.
+sie entsprechen.
 
-- `requireEmail`, `requireWebsite` werden `hasEmail`, `hasWebsite` zugeordnet.
+- `requireEmail`, `requireWebsite` entsprechen `hasEmail`, `hasWebsite`.
 - Bei `verification` setzt `any_verified` das Feld `verifiedOnly`,
   `blue_verified` setzt `blueVerifiedOnly`, `business` & `government` setzen
   `verifiedType`. `unverified` stoppt den Run, bevor er etwas liest oder
   berechnet.
-- `bioKeywords` wird `bioContains` zugeordnet. Es genügt, wenn 1 der Begriffe
+- `bioKeywords` entspricht `bioContains`. Es genügt, wenn 1 seiner Begriffe
   passt.
-- `locationKeywords` mit 1 Wert wird `locationContains` zugeordnet. Mehr Werte
+- `locationKeywords` mit 1 Wert entspricht `locationContains`. Mehr Werte
   stoppen den Run, bevor er etwas liest oder berechnet.
-- `emailDomains` als Liste wird `emailDomains` zugeordnet.
+- `emailDomains` als Liste entspricht `emailDomains`.
 - `outputEmail`, `resolveShortLinks` brauchen kein Feld. Jeder Datensatz enthält
   seine E-Mails & die vollständigen Links von X.
 - `findEmails`, `extractEmails` brauchen kein Feld. Datensätze enthalten die
@@ -123,10 +123,10 @@ Ein Vorschlags-Datensatz sieht so aus.
 
 ## Ausgabe
 
-Jeder Datensatz enthält ein Profil & in `sourceTarget` die Suchanfrage, die es
-gefunden hat.
+Jeder Datensatz enthält ein Profil & in `sourceTarget` die Suchanfrage, aus der
+es stammt.
 
-Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
+Die Beispiele nutzen Musterwerte. Die Ergebnisse spiegeln Live-Daten wider. Ein
 Profil-Datensatz sieht so aus.
 
 ```json
@@ -140,15 +140,45 @@ Profil-Datensatz sieht so aus.
 }
 ```
 
+## Ausgabespalten
+
+8 Eingaben formen jeden Datensatz, nachdem der Run ihn gelesen hat. Sie führen
+keinen Code aus & ändern den Preis nicht.
+
+| Feld                | Was es bewirkt                                                                        |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| `fields`            | Behält nur diese Felder, in der Reihenfolge & Schreibweise, die du angibst            |
+| `omitFields`        | Entfernt diese Felder & behält den Rest                                               |
+| `renameFields`      | Verschiebt ein Feld in eine Spalte mit neuem Namen                                    |
+| `flatten`           | Macht aus jedem verschachtelten Objekt Spalten auf oberster Ebene                     |
+| `fillMissingFields` | Füllt ein behaltenes Feld, das einem Datensatz fehlt, mit `null`. Standardmäßig aktiv |
+| `joinFields`        | Macht aus jeder dieser Listen 1 Textwert                                              |
+| `joinSeparator`     | Text zwischen verbundenen Einträgen. Standard ist ein Komma & ein Leerzeichen         |
+| `constantFields`    | Fügt eine Spalte mit demselben Text in jedem Datensatz hinzu                          |
+
+- Nutze einen Punkt für ein Feld innerhalb eines Objekts. Groß- und
+  Kleinschreibung & Unterstriche spielen keine Rolle.
+- Jeder Datensatz behält seine `id`.
+- Mit `fields` kommt ein Feld, das einem Datensatz fehlt, als `null` an. Jeder
+  Datensatz hat dann dieselben Spalten.
+- Ein falscher Feldname stoppt den Run vor dem Lesen & kostet nichts.
+- Lassen sich die Namen nicht prüfen, liest der Run weiter & listet nicht
+  gefundene Namen am Ende.
+- Der Run ignoriert eine Map-Funktion oder einen jq-Filter, die für einen
+  anderen Actor geschrieben sind.
+
 ## Was kostet es, Nutzer auf X zu suchen?
 
 Auf jedem Apify-Plan kostet ein geliefertes Profil $0.00015. Ein Vorschlag aus
 Search Autocomplete kostet pro geliefertem Datensatz dasselbe. Apify berechnet
 deine Plattformnutzung separat.
 
-- Eine Gebühr pro geliefertem Datensatz. Diagnosen in `diagnostics` sind
-  kostenlos.
-- Keine Gebühr für Start, Suchanfragen oder Seiten.
+Brauchst du mehr Volumen, dann
+[wähle einen Apify-Plan](https://apify.com/pricing?fpr=xquik) mit mehr
+vorausbezahlter Nutzung.
+
+- 1 Gebühr pro geliefertem Datensatz. Diagnosen in `diagnostics` sind kostenlos.
+- Keine Gebühr für Start, Suchanfrage oder Seite.
 - Filter & Deduplizierung laufen vor der Abrechnung.
 
 ## Limits & Wiederherstellung
@@ -168,8 +198,9 @@ Ursache es ist.
 
 ## Verwandte Xquik-Actors
 
-Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, rechnet erst nach dem
-Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
+Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, dieselbe Abrechnung erst
+nach dem Filtern & dieselben Diagnosen. Wähle den, der zu den Daten passt, die
+du brauchst.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrapt Posts aus
   Suchen, Profil-Timelines, Listen & Post-IDs mit über 50 Filtern & flachen
@@ -187,17 +218,17 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015 pro
   Datensatz.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
-  scrapt die Posts, die Posts zitieren, mit Text, Medien, Zahlen, Autoren & 11
-  Filtern. Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was gesagt
-  wurde. Ab $0.00015 pro Post.
+  scrapt die Zitate von Posts mit Text, Medien, Zählern, Autoren & 11 Filtern.
+  Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was diese Accounts
+  gesagt haben. Ab $0.00015 pro Post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrapt
   Follower, gefolgte Accounts, Listenmitglieder, Abonnenten &
   Community-Mitglieder als Profil-Datensätze. Nutze ihn, wenn du Zielgruppen-
   oder Mitgliederlisten brauchst. Ab $0.00015 pro Profil.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   prüft, wo Accounts ansässig sind, mit der X-Angabe "Account based in", der
-  Verbindungsart zu X & Benutzernamen-Änderungen. Nutze ihn, wenn du prüfst, wo
-  Accounts ansässig sind. Ab $0.00015 pro Account.
+  Verbindungsart zu X & Änderungen des Nutzernamens. Nutze ihn, wenn du prüfst,
+  wo Accounts ansässig sind. Ab $0.00015 pro Account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) holt die E-Mails,
   Telefonnummern & Links, die Accounts in ihren Profilen veröffentlichen, anhand
   von Nutzernamen, Followern oder Nutzersuchen. Nutze ihn, wenn du die E-Mails
@@ -232,8 +263,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Zeit beobachtest. Ab $0.0003 pro analysiertem Post.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden Post
-  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema brauchst. Ab
-  $0.0003 pro analysiertem Post.
+  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem beliebigen Thema
+  brauchst. Ab $0.0003 pro analysiertem Post.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   kennzeichnet bullische, bärische, neutrale oder gemischte Haltung, Inhaltstyp,
   Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du Aktien, Krypto
@@ -255,41 +286,45 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
 Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
 
-### Brauche ich einen X-API-Schlüssel oder Login?
+### Brauche ich einen X-API-Schlüssel oder einen Login?
 
-Nein. X User Search Scraper von Xquik braucht keinen X-API-Schlüssel, keinen
-Login & keine Zugangsdaten.
+Nein. X User Search Scraper von Xquik braucht weder einen X-API-Schlüssel noch
+einen Login oder Zugangsdaten.
 
 ### Ist es legal, X-Accounts zu scrapen?
 
 X User Search Scraper von Xquik fragt öffentliche X-Felder ab. Ergebnisse können
-personenbezogene Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist. Befolge
+personenbezogene Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist, & befolge
 geltende Datenschutzregeln. Hol dir bei Unsicherheit qualifizierten Rechtsrat.
 
 ### Warum hat mein Run keine Ergebnisse geliefert?
 
-Öffne zuerst die kostenlose Ausgabe `diagnostics`. Der Status eines leeren Runs
-rät dir, Ziele & Filter zu prüfen. `stopCauses` gibt jeder Ursache eine
+Lies zuerst den Run-Status. Der Status eines leeren Runs rät dir, Ziele & Filter
+zu prüfen. Die kostenlose Ausgabe `diagnostics` erscheint, wenn etwas deine
+Aufmerksamkeit braucht. Ihr Feld `stopCauses` gibt jeder Ursache eine
 `nextAction`, der du folgen kannst.
 
-### Kann ich API, Zeitpläne & Integrationen nutzen?
+### Kann ich die API, Zeitpläne & Integrationen nutzen?
 
-Ja. Wähle aus 50 öffentlichen Tasks oder der REST-API von Xquik. Der
-[API-Tab](https://apify.com/xquik/x-user-search-scraper/api) enthält Beispiele
-für Python, JavaScript & cURL.
-Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) starten
-X User Search Scraper von Xquik per Cron. Agents nutzen
+Ja. Wähle aus 50 öffentlichen Tasks oder nutze die REST-API von Xquik. Im
+[API-Tab](https://apify.com/xquik/x-user-search-scraper/api) findest du
+Beispiele für Python, JavaScript & cURL.
+[Zeitpläne](https://docs.apify.com/platform/schedules) von Apify starten X User
+Search Scraper von Xquik per Cron. Agents nutzen
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp). Nutze `latest`,
 außer du brauchst einen älteren Build.
 
 ### Wo bekomme ich Hilfe?
 
-Öffne ein Issue auf der Actor-Seite oder schreib mit der Run-ID an
-support@xquik.com. Kostenlose Diagnosen im Key-Value-Store erklären leere,
-unvollständige oder unterbrochene Runs.
+Öffne im [Tab Issues](https://apify.com/xquik/x-user-search-scraper/issues) ein
+Issue mit der Run-ID. Kostenlose Diagnosen im Key-Value-Store erklären Runs, die
+Aufmerksamkeit brauchen. Ein Run, der keinen Datensatz zurückbekommt, sagt in
+seinem Status, warum.
 
 ### Kann ich eine individuelle Lösung bekommen?
 
-Ja. Besuche [xquik.com](https://xquik.com) oder lies die
-[API-Dokumentation](https://docs.xquik.com/introduction). Sie deckt Dashboard,
-API, MCP-Server & Webhooks ab.
+Ja. Beschreibe im
+[Tab Issues](https://apify.com/xquik/x-user-search-scraper/issues), was du
+brauchst. Xquik bietet außerdem ein Dashboard, eine REST-API, einen MCP-Server &
+Webhooks. Die Website von Xquik findest du in seinem
+[Apify-Profil](https://apify.com/xquik).

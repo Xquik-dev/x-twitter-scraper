@@ -1,59 +1,56 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <strong>Türkçe</strong> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · **Türkçe** ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer, Xquik MCP'yi kodlama ajanlarına bağlıyor"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Framer'ın Xquik scraper'larını Claude Code, Codex, Cursor ve daha fazlasıyla nasıl kullandığını 6:07'den itibaren izle.</a>
-</td></tr></table>
+[![Framer, Xquik MCP'yi kodlama ajanlarına bağlıyor](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Framer'ın Xquik scraper'larını Claude Code, Codex, Cursor & daha fazlasıyla nasıl kullandığını](https://youtu.be/4UOSpoOoC3Y?t=367)
+6:07'den itibaren izle.
 
 Xquik, en eksiksiz X verisini sunan, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. Xquik'in X Trends Scraper'ı konuma göre gerçek zamanlı
-Twitter gündemini sıra, hacim ve sorguyla toplar. Diğer Apify Actor'larının
-çoğu, filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
+gündemi sıra, hacim & sorguyla toplar. Diğer Apify Actor'larının çoğu,
+filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
 edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır.
 
-Twitter gündemini, yani güncel X gündemini, 1 çalıştırmada birçok konumdan kazı.
-Ya da geçmiş gündemi Xquik'in Twitter gündem arşivinden oku. Arşiv 2026-10-13
-02:20 UTC'de başlar. **Teslim edilen satır başına $0.00015** ödersin. Apify,
-platform kullanımını ayrıca faturalandırır. X API anahtarı ya da giriş gerekmez.
+Güncel Twitter gündemini 1 çalıştırmada birçok konumdan kazı. Ya da geçmiş
+gündemi Xquik'in 2026-10-13 02:20 UTC'de başlayan Twitter gündem arşivinden oku.
+**Teslim edilen satır başına $0.00015** ödersin & Apify platform kullanımını
+ayrıca faturalandırır. X API anahtarına veya girişe ihtiyacın yok.
 
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-## Konumlar ve gündem verisi
+## Konumlar & gündem verisi
 
 - Aynı anda okunan birden çok ülke, şehir veya WOEID.
 - Her konum için en fazla 50 güncel gündem başlığı.
-- Twitter gündem arşivinden tarih ve saate göre geçmiş gündem, 2026-10-13'ten
-  itibaren.
-- X'in gündem sunduğu her yerin WOEID'si, ülkesi ve türüyle listesi.
+- Twitter gündem arşivinden tarih & saate göre geçmiş gündem, 2026-10-13'ten
+  beri.
+- X'in gündem sunduğu her yerin WOEID'si, ülkesi & türüyle bir listesi.
 - X gönderi aramasının kabul ettiği yer ID'siyle X yer araması.
 - X hashflag'leri, yani X'in bazı hashtag'lerden sonra gösterdiği özel emojiler.
-- Sıra, konu, sorgu, gönderi hacmi, arama URL'si, WOEID ve kaynak konum.
+- Sıra, konu, sorgu, gönderi hacmi, arama URL'si, WOEID & kaynak konum.
 - Her satırda konum bilgisi.
-- Hashtag satırlarını ve gönderi hacmi olan satırları gösteren işaretler.
+- Hashtag satırları & mevcut gönderi hacmi için etiketler.
 - Eşdeğer girdiler için faturalamadan önce tekilleştirme.
-- Apify veri kümeleri üzerinden JSON, CSV, Excel, XML ve RSS dışa aktarımı.
-- Apify çalıştırmayı taşısa da çalıştırma kayıtlı durumdan devam eder.
+- Apify veri kümeleri üzerinden JSON, CSV, Excel, XML & RSS dışa aktarımları.
+- Apify çalıştırmayı taşıdığında çalıştırma kayıtlı durumdan devam eder.
 
 ## X gündemi nasıl kazınır
 
+Apify'da yeni misin? Önce
+[ücretsiz bir hesap oluştur](https://console.apify.com/sign-up?fpr=xquik).
+Ücretsiz plan kredi kartı istemez & her ay harcaman için $5 verir. Gündem
+başlığı başına $0.00015 fiyatla $5, platform kullanımı hariç 33.000 gündem
+başlığına kadar yeter. Sonra buraya dön & Try for free düğmesine bas.
+
 1. Apify Console'da Xquik'in X Trends Scraper'ını aç.
-2. Konum adlarını `locations` alanına ya da sayısal WOEID'leri `woeids` alanına
+2. Konum adlarını `locations` alanına veya sayısal WOEID'leri `woeids` alanına
    gir.
-3. `maxTrendsPerLocation` değerini ayarla. Her konum için en fazla 50 gündem
-   başlığı alabilirsin.
-4. Tüm çalıştırmada teslim edilecek satır sayısını `maxItems` ile sınırla, sonra
-   Start'a tıkla.
+3. `maxTrendsPerLocation` değerini her konum için en fazla 50 gündem başlığı
+   olacak şekilde ayarla.
+4. Tüm çalıştırmada teslim edilen satırları sınırlamak için `maxItems` ayarla,
+   sonra Start düğmesine tıkla.
 5. Veri kümesini JSON, CSV veya Excel olarak indir ya da Apify API'yi kullan.
 
 ## Girdi
@@ -70,19 +67,19 @@ Konum adlarını, sayısal WOEID'leri veya ikisini birden kullan.
 
 `locations`, X'in gündem sunduğu her ülkeyi veya şehri kabul eder, örneğin
 Worldwide, United States, Japan veya London. 2 harfli ülke kodları da çalışır.
-Türkiye gündemi için `Turkey` ya da `TR` yaz. X'in gündem sunmadığı bir ad satır
-döndürmez ve ücretlendirilmez. `woeids` sayısal WOEID'leri kabul eder.
+X'in gündem sunmadığı bir ad satır döndürmez & ücretlendirilmez. `woeids`
+sayısal WOEID'leri kabul eder.
 
-Her adı ve WOEID'yi görmek için `listLocations` seçeneğini aç. Çalıştırma o
-zaman gündem yerine X'in gündem sunduğu yerleri listeler.
+Her adı & WOEID'yi görmek için `listLocations` seçeneğini aç. Çalıştırma o zaman
+gündem yerine X'in gündem sunduğu yerleri listeler.
 
 ```json
 { "listLocations": true, "country": "TR", "maxItems": 100 }
 ```
 
-`country` bir ad veya 2 harfli kod kabul eder. `placeType` alanı `country`,
-`town`, `worldwide` veya `unknown` kabul eder. `nameContains`, adında senin
-metnin geçen yerleri tutar. Her yeri listelemek için 3'ünü de boş bırak.
+`country` bir ad veya 2 harfli kod kabul eder. `placeType`, `country`, `town`,
+`worldwide` veya `unknown` kabul eder. `nameContains`, adında senin metnin geçen
+yerleri tutar. Her yeri listelemek için 3'ünü de boş bırak.
 
 X yerlerini ada göre aramak için `placeSearchTerms` alanını doldur. Çalıştırma o
 zaman gündem yerine yerleri döndürür.
@@ -93,11 +90,11 @@ zaman gündem yerine yerleri döndürür.
 
 Her yer, X gönderi aramasının `place` olarak kabul ettiği `id` değerini taşır.
 Yerleri X sıralar, bu yüzden sıraları çalıştırmalar arasında değişebilir. X bir
-ad için en fazla 20 yer listeler. New York gibi birkaç ad için daha azını
-listeler. Çalıştırma yalnızca yazdığın adı taşıyan yerleri tutar. Bu yüzden New
-Delhi satır döndürmez ve ücretlendirilmez.
+ad için en fazla 20 yer listeler & New York gibi birkaç ad için daha azını
+listeler. Çalıştırma yalnızca yazdığın adı taşıyan yerleri tutar, bu yüzden New
+Delhi satır döndürmez & ücretlendirilmez.
 
-`maxItems` tüm çalıştırmayı sınırlar ve sınırı terim terim doldurur. Bu yüzden
+`maxItems` tüm çalıştırmayı sınırlar & sınırı terim terim doldurur, bu yüzden
 ilk terim hepsini kullanabilir. Her terime eşit pay vermek için
 `maxItemsPerTarget` ayarla.
 
@@ -116,34 +113,34 @@ bir hashtag'den sonra belirli bir süre gösterdiği özel emojidir.
 { "listHashflags": true, "hashtagContains": "football" }
 ```
 
-Çalıştırma, X'in şu anda gösterdiği hashflag'leri listeler. Bitmiş ve yaklaşan
+Çalıştırma, X'in şu anda gösterdiği hashflag'leri listeler. Bitmiş & yaklaşan
 hashflag'leri eklemek için `activeOnly` seçeneğini kapat. `hashtagContains`,
 senin metnini içeren hashtag'leri tutar.
 
-Twitter'da dün ya da geçmişteki herhangi bir anda neyin gündem olduğunu görmek
-için `at` alanını doldur. Çalıştırma, her konum için o ana en yakın kayıtlı
-listeyi okur.
+Twitter'da dün ya da geçmişteki herhangi bir anda neyin gündemde olduğunu görmek
+için `at` alanını doldur. Çalıştırma o zaman her konum için o ana en yakın
+kayıtlı listeyi okur.
 
 ```json
 { "locations": ["Turkey"], "at": "2026-10-13T14:00:00Z" }
 ```
 
-`at` alanına 2026-10-13 gibi bir tarih, 2026-10-13T14:00:00Z gibi bir saat ya da
-Unix saniyesi yaz. Saat dilimi olmayan bir saat UTC sayılır. Xquik her konum
-için saatte 12 liste kaydeder ve her listeyi 25 ay saklar. Twitter gündem
-geçmişi 2026-10-13 02:20 UTC'de başlar. Kayıtlı her listeden 24 saatten uzak bir
-an satır döndürmez ve ücretsizdir.
+`at`, 2026-10-13 gibi bir tarih, 2026-10-13T14:00:00Z gibi bir saat ya da Unix
+saniyesi alır. Saat dilimi olmayan bir saat UTC sayılır. Xquik her konum için
+saatte 12 liste kaydeder & her listeyi 25 ay saklar. Twitter gündem geçmişi
+2026-10-13 02:20 UTC'de başlar. Kayıtlı her listeden 24 saatten fazla uzak bir
+an satır döndürmez & ücretlendirilmez.
 
-`at`, çalıştırmadan geriye doğru bir süre de alır. Süreyi bir sayı ve `s`, `m`,
-`h` veya `d` ile yaz. `24h` ile günlük bir zamanlama, her çalıştırmada dünün
-Twitter gündemini okur.
+`at`, çalıştırmadan geriye doğru bir süreyi de bir sayı & `s`, `m`, `h` veya `d`
+olarak alır. `24h` ile günlük bir zamanlama her çalıştırmada dünün gündemini
+okur.
 
 ```json
 { "locations": ["Turkey"], "at": "24h" }
 ```
 
-Bir aralık için `from` ve `to` alanlarını doldur. Çalıştırma, `every` alanındaki
-her adım için 1 kayıtlı liste döndürür. Adımı `15m`, `1h` veya `1d` gibi yaz.
+Bir aralık için `from` & `to` alanlarını doldur. Çalıştırma, `15m`, `1h` veya
+`1d` gibi her `every` adımı için 1 kayıtlı liste döndürür.
 
 ```json
 {
@@ -156,26 +153,27 @@ her adım için 1 kayıtlı liste döndürür. Adımı `15m`, `1h` veya `1d` gib
 ```
 
 `to` yoksa aralık şimdi biter. `every` yoksa çalıştırma saatte 1 liste döndürür.
-Kayıtlı listesi olmayan adım satır döndürmez. `from` ve `to` da süre alır, bu
-yüzden `from` alanına `24h` yazarsan son 24 saatin Twitter gündemini okursun.
-`at`, `from` ve `to` alanlarından önce gelir.
+Kayıtlı listesi olmayan bir adım satır döndürmez. `from` & `to` da süre alır, bu
+yüzden `24h` olarak ayarlanan `from` son 24 saati okur. `at`, `from` & `to`
+alanlarından önce gelir.
 
-Bir çalıştırma 1 tür satır okur. `listLocations`, `listHashflags` seçeneğinden,
-o da `placeSearchTerms` alanından önce gelir. Hiçbiri yoksa çalıştırma gündemi
-okur.
+Bir çalıştırma 1 tür satır okur. `listLocations`, `listHashflags` seçeneğinden
+önce gelir, o da `placeSearchTerms` alanından önce gelir. Hiçbiri yoksa
+çalıştırma gündemi okur.
 
-Sorunsuz biten küçük çalıştırmalar `run-report` yazmaz, böylece Apify kullanımı
-azalır. Raporu her çalıştırmada almak için `alwaysSaveRunRecords` seçeneğini aç.
+Sorunsuz biten küçük çalıştırmalar `run-report` kaydını atlar & Apify
+kullanımından tasarruf eder. Raporu her çalıştırmada yazmak için
+`alwaysSaveRunRecords` seçeneğini aç.
 
 ## Çıktı
 
 Her gündem başlığı 1 veri kümesi satırıdır. Satırlarda `name`, `rank`,
-`tweetVolume`, `query`, `url`, `woeid`, `sourceTarget` ve `resultType` bulunur.
-`sourceTarget`, senin yazdığın haliyle konumdur. Eksik kaynak alanları satıra
-eklenmez. Xquik'in X Trends Scraper'ı hiçbir değer uydurmaz.
+`tweetVolume`, `query`, `url`, `woeid`, `sourceTarget` & `resultType` bulunur.
+`sourceTarget`, konumun senin yazdığın halidir. Eksik kaynak alanları satırda
+yer almaz. Xquik'in X Trends Scraper'ı hiçbir değer uydurmaz.
 
-Aşağıdaki değerler yalnızca örnektir. Gerçek sonuçlar canlı veriden gelir. Bir
-gündem satırı şöyle görünür.
+Örnekler örnek değerler kullanır. Sonuçlar canlı veriyi yansıtır. Bir gündem
+satırı şöyle görünür.
 
 ```json
 {
@@ -188,13 +186,13 @@ gündem satırı şöyle görünür.
 }
 ```
 
-`at` veya bir aralıkla gelen satırlarda `capturedAt` da bulunur. Bu, Xquik'in o
-listeyi X'ten okuduğu andır. `at` satırlarında, senin istediğin an olan
+`at` veya bir aralıkla gelen satırlarda, Xquik'in o listeyi X'ten okuduğu an
+olan `capturedAt` da bulunur. `at` satırlarında, senin istediğin an olan
 `requestedAt` da bulunur. Xquik ikisini de tahmin etmez.
 
 `listLocations` ile her yer 1 veri kümesi satırıdır. Satırlarda `woeid`, `name`,
-`country`, `countryCode`, `placeType`, `placeTypeCode`, `parentWoeid`, `url` ve
-`resultType` bulunur. `url`, X'in yer için eski referansıdır ve açılmayabilir.
+`country`, `countryCode`, `placeType`, `placeTypeCode`, `parentWoeid`, `url` &
+`resultType` bulunur. `url`, X'in yer için eski referansıdır & açılmayabilir.
 Bir gündem konumu satırı şöyle görünür.
 
 ```json
@@ -212,7 +210,7 @@ Bir gündem konumu satırı şöyle görünür.
 
 `placeSearchTerms` ile her yer 1 veri kümesi satırıdır. Satırlarda `id`, `name`,
 `fullName`, `country`, `countryCode`, `placeType`, `url`, `centroid`,
-`boundingBox`, `attributes`, `containedWithin`, `sourceTarget` ve `resultType`
+`boundingBox`, `attributes`, `containedWithin`, `sourceTarget` & `resultType`
 bulunur. `centroid` önce boylamı, sonra enlemi tutar. Bir yer satırı şöyle
 görünür.
 
@@ -231,7 +229,7 @@ görünür.
 ```
 
 `listHashflags` ile her hashflag 1 veri kümesi satırıdır. Satırlarda `hashtag`,
-`assetUrl`, `startsAt`, `endsAt`, `isHashfettiEnabled`, `animations` ve
+`assetUrl`, `startsAt`, `endsAt`, `isHashfettiEnabled`, `animations` &
 `resultType` bulunur. Bir hashflag satırı şöyle görünür.
 
 ```json
@@ -246,128 +244,157 @@ görünür.
 }
 ```
 
+## Çıktı sütunları
+
+8 girdi, okunan her satırı biçimlendirir. Kod çalıştırmazlar & fiyatı
+değiştirmezler.
+
+| Alan                | Ne yapar                                                                        |
+| ------------------- | ------------------------------------------------------------------------------- |
+| `fields`            | Yalnızca bu alanları, yazdığın sıra & yazımla tut                               |
+| `omitFields`        | Bu alanları çıkar & gerisini tut                                                |
+| `renameFields`      | Bir alanı yeni adlı bir sütuna taşı                                             |
+| `flatten`           | Her iç içe nesneyi üst düzey sütunlara çevir                                    |
+| `fillMissingFields` | Tutulan bir alan satırda yoksa onu `null` ile doldur. Varsayılan olarak açık    |
+| `joinFields`        | Bu listelerin her birini 1 metin değerine çevir                                 |
+| `joinSeparator`     | Birleştirilen öğeler arasındaki metin. Varsayılan değer bir virgül & bir boşluk |
+| `constantFields`    | Her satırda aynı metni taşıyan bir sütun ekle                                   |
+
+- Bir nesnenin içindeki alan için nokta kullan. Harf büyüklüğü & alt çizgiler
+  fark etmez.
+- Her satır kendi `id` değerini tutar.
+- `fields` kullanırsan satırda olmayan bir alan `null` olarak gelir. Böylece her
+  satır aynı sütunlara sahip olur.
+- Yanlış bir alan adı, çalıştırmayı hiçbir şey okumadan & ücretlendirmeden
+  durdurur.
+- Adlar kontrol edilemezse çalıştırma okumaya devam eder & görmediği adları
+  sonunda listeler.
+- Çalıştırma, başka bir Actor için yazılmış map fonksiyonunu veya jq filtresini
+  yok sayar.
+
 ## X gündemini kazımak ne kadar tutar?
 
 Her Apify planında teslim edilen satır başına $0.00015 ödersin. Apify, platform
 kullanımını ayrıca faturalandırır.
 
-- Teslim edilen her veri satırı için 1 kez ödersin. Tanılamalar `diagnostics`
+Daha fazla hacim için daha çok ön ödemeli kullanım içeren bir
+[Apify planı seç](https://apify.com/pricing?fpr=xquik).
+
+- Teslim edilen her veri satırı için tek bir ücret. Tanılamalar `diagnostics`
   içinde ücretsizdir.
 - Bir gündem konumu, yer veya hashflag satırı bir gündem satırıyla aynı tutar.
 - Başlatma, sorgu veya konum ücreti yok.
 - Tekilleştirme faturalamadan önce çalışır.
 - Apify'ın maksimum toplam ücret ayarları teslim edilen satırları sınırlar.
 
-## Sınırlar ve kurtarma
+## Sınırlar & kurtarma
 
-Xquik'in X Trends Scraper'ı 1 çalıştırmada birçok konumu okur. Apify
-çalıştırmayı yeniden başlatsa da teslim edilen satırlar ve ilerleme korunur.
-Actor kendi başına süre sınırı eklemez. Ayarladığın Apify zaman aşımına uyar.
+Xquik'in X Trends Scraper'ı 1 çalıştırmada birçok konumu okur. Teslim edilen
+satırlar & ilerleme bir Apify yeniden başlatmasından sonra korunur. Actor kendi
+başına süre sınırı eklemez. Ayarladığın her Apify zaman aşımına uyar.
 
-Çalıştırma yarıda kesilirse Actor ücretsiz bir `partial` tanılaması yazar. Elde
+Veri çekme yarıda kesilirse Actor ücretsiz bir `partial` tanılaması yazar. Elde
 edilen sonuçlar olduğu gibi kalır. Yeniden denemeden önce `availableResults`,
-`failedTargets`, `retryable` ve `nextAction` alanlarını oku. Actor'ın başarıyla
-bitmesi teslimatı doğrular. Tüm verinin çekildiğini doğrulamaz.
+`failedTargets`, `retryable` & `nextAction` alanlarını oku. Actor'ın başarıyla
+bitmesi teslimatı doğrular, tüm verinin çekildiğini değil.
 
 Çalıştırma durumu, erken durmanın her nedenini söyler. `stopCauses` her nedeni
-kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Nedenler
-`target_not_found`, `target_failed`, `pagination_safety_limit` ve
+kendi `message`, `retryable` & `nextAction` alanlarıyla listeler. Nedenler
+`target_not_found`, `target_failed`, `pagination_safety_limit` &
 `deadline_reached` olabilir. Bulunamayan bir hedef, listeye yalnızca
 çalıştırmayı başka bir neden durdurduysa girer. Nedenlerden biri yeniden
 denenebiliyorsa çalıştırma da `retryable` olur.
 
 ## İlgili Xquik Actor'ları
 
-Her Xquik Actor'ı aynı veri çekme motorunu, önce filtreleyen faturalandırmayı ve
+Her Xquik Actor'ı aynı veri çekme motorunu, önce filtreleyen faturalandırmayı &
 tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) aramalardan, profil
-  zaman akışlarından, Listelerden ve gönderi ID'lerinden 50'den fazla filtre ve
-  düz dışa aktarımla gönderi kazır. Analiz değil, yalnızca gönderi verisi
-  gerektiğinde kullan. Satır başına $0.00015'ten başlar.
+  zaman akışlarından, Listelerden & gönderi ID'lerinden 50'den fazla filtre &
+  düz dışa aktarımla gönderi kazır. Analiz olmadan gönderi verisi gerektiğinde
+  kullan. Satır başına $0.00015'ten başlar.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) kullanıcı adı,
-  ID veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını ve
+  ID veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını &
   takipçilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
   başına $0.00015'ten başlar.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) 25'ten fazla
-  filtreyle gönderilerin altındaki yanıtları, yorumları ve tüm konuşmaları
-  kazır. Gönderilerin altındaki tartışmaya ihtiyacın olduğunda kullan. Satır
-  başına $0.00015'ten başlar.
+  filtreyle gönderilerin altındaki yanıtları, yorumları & tüm konuşmaları kazır.
+  Gönderilerin altındaki tartışmaya ihtiyacın olduğunda kullan. Satır başına
+  $0.00015'ten başlar.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) gönderi
   URL'leri veya ID'leri için toplu olarak yanıtları, alıntıları, yeniden
-  gönderenleri ve gönderi dizilerini kazır. Gönderilerle kimin etkileşime
+  gönderenleri & gönderi dizilerini kazır. Gönderilerle kimin etkileşime
   girdiğini ölçtüğünde kullan. Satır başına $0.00015'ten başlar.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
-  gönderileri alıntılayan gönderileri metin, medya, sayılar, yazarlar ve 11
-  filtreyle kazır. Gönderileri kimin alıntıladığını ve ne dediğini incelemek
-  istediğinde kullan. Gönderi başına $0.00015'ten başlar.
+  gönderileri alıntılayan gönderileri metin, medya, sayılar, yazarlar & 11
+  filtreyle kazır. Gönderileri kimin alıntıladığını & ne dediğini incelediğinde
+  kullan. Gönderi başına $0.00015'ten başlar.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) takipçileri,
-  takip edilenleri, Liste üyelerini, aboneleri ve Topluluk üyelerini profil
+  takip edilenleri, Liste üyelerini, aboneleri & Topluluk üyelerini profil
   satırları olarak kazır. Kitle veya üye listelerine ihtiyacın olduğunda kullan.
   Profil başına $0.00015'ten başlar.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)
-  kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay işareti,
-  hesap yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri
-  oluşturduğunda kullan. Profil başına $0.00015'ten başlar.
+  kullanıcı adı, biyografi & konuma göre kullanıcıları takipçi, onay işareti,
+  hesap yaşı & konum filtreleriyle arar. Aramadan hesap listeleri oluşturduğunda
+  kullan. Profil başına $0.00015'ten başlar.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
-  X'in "Account based in" etiketi, X'e nasıl bağlandıkları ve kullanıcı adı
+  X'in "Account based in" etiketi, X'e nasıl bağlandıkları & kullanıcı adı
   değişiklikleriyle hesapların nerede bulunduğunu kontrol eder. Hesapların
-  nerede bulunduğunu doğrulaman gerektiğinde kullan. Hesap başına $0.00015'ten
-  başlar.
+  nerede bulunduğunu doğruladığında kullan. Hesap başına $0.00015'ten başlar.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) kullanıcı
   adlarından, takipçilerden veya kullanıcı aramalarından, hesapların
-  profillerinde yayımladığı e-postaları, telefonları ve bağlantıları alır.
+  profillerinde yayımladığı e-postaları, telefonları & bağlantıları alır.
   Profillerin yayımladığı e-postalara ihtiyacın olduğunda kullan. Profil başına
   $0.00015'ten başlar.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper) Liste URL'lerinden
-  veya ID'lerinden Liste gönderilerini, üyelerini ve takipçilerini kazır.
+  veya ID'lerinden Liste gönderilerini, üyelerini & takipçilerini kazır.
   Kaynaklarını özenle seçilmiş bir Liste belirlediğinde kullan. Satır başına
   $0.00015'ten başlar.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper) Topluluk
-  bilgilerini, gönderilerini, aramalarını, üyelerini ve moderatörlerini kazır.
+  bilgilerini, gönderilerini, aramalarını, üyelerini & moderatörlerini kazır.
   Kaynakların X Toplulukları olduğunda kullan. Satır başına $0.00015'ten başlar.
 - [X Space Scraper](https://apify.com/xquik/x-space-scraper) Sohbet Odalarını
-  anahtar kelimeyle bulur ve başlıklarını, durumlarını, zamanlarını, dinleyici
-  sayılarını, sunucularını ve konuşmacılarını okur. Yayınları da URL veya ID ile
-  okur. X'teki canlı ses ve video yayınlarını takip ettiğinde kullan. Sohbet
+  anahtar kelimeyle bulur & başlıklarını, durumlarını, zamanlarını, dinleyici
+  sayılarını, sunucularını & konuşmacılarını okur. Yayınları da URL veya ID ile
+  okur. X'teki canlı ses & video yayınlarını takip ettiğinde kullan. Sohbet
   Odası veya yayın başına $0.00015'ten başlar.
 - [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) X iş ilanlarını
-  anahtar kelime, yer, çalışma şekli, kıdem ve şirkete göre maaş ve başvuru
+  anahtar kelime, yer, çalışma şekli, kıdem & şirkete göre, maaş & başvuru
   bağlantılarıyla kazır. X'te yayımlanan iş ilanlarını topladığında kullan. İlan
   başına $0.00015'ten başlar.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper) uzun biçimli X
-  Makalelerini kapak, yazar, tarih ve metriklerle Markdown ve metin olarak
-  kazır. Gönderi değil, makale gövdesi gerektiğinde kullan. Makale başına
-  $0.00015'ten başlar.
+  Makalelerini kapak, yazar, tarih & metriklerle Markdown & metin olarak kazır.
+  Gönderi değil, makale gövdesi gerektiğinde kullan. Makale başına $0.00015'ten
+  başlar.
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader) gönderilerden
-  veya profillerden fotoğrafları, videoları ve GIF'leri MP4 ve metadata
+  veya profillerden fotoğrafları, videoları & GIF'leri MP4 & metadata
   seçenekleriyle çıkarır veya depolar. Medya dosyalarının kendisine ihtiyacın
   olduğunda kullan. Medya satırı başına $0.00015'ten başlar.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
-  markadan bahseden gönderileri yapay zeka destekli ilgi, duygu durumu ve
-  müşteri deneyimi cevaplarıyla izler ve çalıştırmaları karşılaştırır. Bir
-  markayı zaman içinde takip ettiğinde kullan. Analiz edilen gönderi başına
-  $0.0003'ten başlar.
+  marka bahsetmelerini yapay zeka destekli ilgi, duygu durumu & müşteri deneyimi
+  cevaplarıyla izler & çalıştırmaları karşılaştırır. Bir markayı zaman içinde
+  takip ettiğinde kullan. Analiz edilen gönderi başına $0.0003'ten başlar.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
-  yapay zeka ile her gönderi için tutum, yoğunluk ve alaycılık olasılığını
+  yapay zeka ile her gönderi için tutum, yoğunluk & alaycılık olasılığını
   etiketler. Herhangi bir konuda genel duygu durumuna ihtiyacın olduğunda
   kullan. Analiz edilen gönderi başına $0.0003'ten başlar.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   yapay zeka ile yükseliş, düşüş, nötr veya karışık duruşu, içerik türünü,
-  kesinliği ve varlık ilgisini etiketler. Hisse senedi, kripto veya alım satım
+  kesinliği & varlık ilgisini etiketler. Hisse senedi, kripto veya alım satım
   konuşmalarını takip ettiğinde kullan. Analiz edilen gönderi başına $0.0003'ten
   başlar.
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
-  haber gönderilerini yapay zeka ile biçim, kaynak atfı ve konu ilgisine göre
+  haber gönderilerini yapay zeka ile biçim, kaynak atfı & konu ilgisine göre
   etiketler. Haberi yorumdan ayırdığında kullan. Analiz edilen gönderi başına
   $0.0003'ten başlar.
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
-  yapay zeka ile her gönderi için kendi kategori, puan ve evet/hayır sorularını
+  yapay zeka ile her gönderi için kendi kategori, puan & evet/hayır sorularını
   cevaplar. Hazır analizler etiketlerine uymadığında kullan. Analiz edilen
   gönderi başına $0.0003'ten başlar.
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
   yapay zekanın 8 özellik cevabından her gönderi için 0 ile 100 arasında bir
-  Viral Score ve bir karar tahmin eder. Gönderilerin neden yayıldığını veya
+  Viral Score & bir karar tahmin eder. Gönderilerin neden yayıldığını veya
   tutmadığını incelediğinde kullan. Analiz edilen gönderi başına $0.0003'ten
   başlar.
 
@@ -377,46 +404,50 @@ Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
 
 ### X API anahtarı veya giriş gerekir mi?
 
-Hayır. Xquik'in X Trends Scraper'ı X API anahtarı, giriş ya da kimlik bilgisi
+Hayır. Xquik'in X Trends Scraper'ı X API anahtarı, giriş veya kimlik bilgisi
 istemez.
 
 ### X gündemini kazımak yasal mı?
 
 Xquik'in X Trends Scraper'ı herkese açık X alanlarını çeker. Sonuçlarda kişisel
-veri olabilir. Amacının yasal olduğundan emin ol ve geçerli gizlilik kurallarına
+veri olabilir. Amacının yasal olduğundan emin ol & geçerli gizlilik kurallarına
 uy. Emin değilsen yetkin bir hukukçuya danış.
 
 ### Çalıştırmam neden sonuç döndürmedi?
 
-Önce ücretsiz `diagnostics` çıktısını aç. Boş bir çalıştırmanın durumu,
-hedeflerini ve filtrelerini kontrol etmeni söyler. `stopCauses` her neden için
+Önce çalıştırma durumunu oku. Boş bir çalıştırmanın durumu, hedeflerini &
+filtrelerini kontrol etmeni söyler. Ücretsiz `diagnostics` çıktısı, dikkat
+gerektiren bir şey olduğunda görünür. Bu çıktıdaki `stopCauses` her neden için
 izleyeceğin bir `nextAction` verir. X'in gündem sunmadığı bir konum satır
 döndürmez. X'in kabul ettiği adları görmek için `listLocations` seçeneğini aç.
 
 ### Geçmiş Twitter gündemini kazıyabilir miyim?
 
-Evet, 2026-10-13 02:20 UTC'den itibaren. Geçmişteki 1 an için `at` alanını, bir
-aralık için `from` ve `to` alanlarını doldur. Bir zamanlamada `24h` gibi bir
-süre yaz. Her satırda, kayıtlı listesinin zamanı olan `capturedAt` bulunur.
+Evet, 2026-10-13 02:20 UTC'den beri. Geçmişteki 1 an için `at` alanını, bir
+aralık için `from` & `to` alanlarını doldur. Bir zamanlamada `24h` gibi bir süre
+yaz. Her satırda, kayıtlı listesinin zamanı olan `capturedAt` bulunur.
 
-### API'yi, zamanlamaları ve entegrasyonları kullanabilir miyim?
+### API'yi, zamanlamaları & entegrasyonları kullanabilir miyim?
 
 Evet. 50 herkese açık görevden birini veya Xquik REST API'yi seç.
 [API sekmesinde](https://apify.com/xquik/x-trends-scraper/api) Python,
-JavaScript ve cURL örnekleri var. Apify
+JavaScript & cURL örnekleri var. Apify
 [zamanlamaları](https://docs.apify.com/platform/schedules), Xquik'in X Trends
 Scraper'ını bir cron takvimiyle çalıştırır. Ajanlar
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp) kullanır. Eski bir
-derlemeye ihtiyacın yoksa `latest` derlemesini kullan.
+derlemeye ihtiyacın yoksa `latest` kullan.
 
 ### Nereden yardım alırım?
 
-Actor sayfasında bir issue aç ya da çalıştırma ID'siyle support@xquik.com
-adresine yaz. Anahtar-değer deposundaki ücretsiz tanılamalar boş, kısmi veya
-kesilen çalıştırmaları açıklar.
+Çalıştırma ID'siyle
+[Issues sekmesinde](https://apify.com/xquik/x-trends-scraper/issues) bir issue
+aç. Anahtar-değer deposundaki ücretsiz tanılamalar dikkat gerektiren
+çalıştırmaları açıklar. Hiç satır almayan bir çalıştırma, nedenini durum
+metninde söyler.
 
 ### Bana özel bir çözüm alabilir miyim?
 
-Evet. [xquik.com](https://xquik.com) adresini ziyaret et ya da
-[API belgelerini](https://docs.xquik.com/introduction) oku. Bu kaynaklar paneli,
-API'yi, MCP sunucusunu ve webhook'ları anlatır.
+Evet. İhtiyacını
+[Issues sekmesinde](https://apify.com/xquik/x-trends-scraper/issues) anlat.
+Xquik ayrıca bir panel, bir REST API, bir MCP sunucusu & webhook'lar sunar.
+Xquik'in web sitesini [Apify profilinde](https://apify.com/xquik) bul.

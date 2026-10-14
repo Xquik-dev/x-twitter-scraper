@@ -1,32 +1,23 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <strong>Deutsch</strong> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+**Deutsch** · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer verbindet Xquik MCP mit Coding-Agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Sieh dir an, wie Framer Xquik-Scraper mit Claude Code, Codex, Cursor und mehr nutzt, ab Minute 6:07.</a>
-</td></tr></table>
+[![Framer verbindet Xquik MCP mit Coding-Agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Sieh dir an, wie Framer Xquik-Scraper nutzt](https://youtu.be/4UOSpoOoC3Y?t=367),
+mit Claude Code, Codex, Cursor & mehr, ab Minute 6:07.
 
 Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
 liefert die vollständigsten X-Daten. X Community Scraper von Xquik sammelt
-Community-Infos, Posts, Medien, Suchergebnisse, Mitglieder & Moderatoren &
+Community-Infos, Posts, Medien, Suchergebnisse, Mitglieder & Moderatoren, &
 findet Communities per Stichwort oder Thema. Die meisten anderen Apify Actors
 rechnen ab, bevor sie filtern oder Duplikate entfernen. Xquik rechnet nur
 gelieferte, eindeutige Ergebnisse ab, die zu deinen Filtern passen.
 
-Sammle Infos, Posts (Tweets), Medien, Stichwort-Treffer, Mitglieder &
-Moderatoren von Communities auf X (Twitter) aus Community-URLs oder -IDs. Finde
-Communities per Stichwort oder Thema oder liste die, die X vorschlägt. Du zahlst
-**$0.00015 pro geliefertem Datensatz**, & Apify berechnet die Plattformnutzung
-separat. Du brauchst keinen X-API-Schlüssel & keinen Login.
+Sammle Infos, Posts, Medien, Stichwort-Treffer, Mitglieder & Moderatoren von
+Twitter-Communities aus Community-URLs oder -IDs. Finde Communities per
+Stichwort oder Thema, oder liste die, die X vorschlägt. Du zahlst **$0.00015 pro
+geliefertem Datensatz**, & Apify berechnet die Plattformnutzung separat. Du
+brauchst keinen X-API-Schlüssel oder Login.
 
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
@@ -36,20 +27,21 @@ separat. Du brauchst keinen X-API-Schlüssel & keinen Login.
 X Community Scraper von Xquik liest öffentliche Communities auf X (Twitter) aus
 ihren URLs oder IDs. Er liefert für jede Community Infos, Posts, Medien,
 Stichwort-Treffer, Mitglieder & Moderatoren. Er findet auch Communities per
-Stichwort oder Thema & listet die, die X vorschlägt.
+Stichwort oder Thema, & listet die, die X vorschlägt.
 
-### Wichtigste Funktionen
+### Wichtige Funktionen
 
 - Lies viele Communities & Ressourcen in 1 Run.
 - Hol dir Community-Infos mit Regeln, Beitrittsfrage, Ersteller, Admin & Thema.
 - Sammle Posts, neueste zuerst, oder die Top-Posts, die X am höchsten einstuft.
 - Sammle den Tab Medien oder durchsuche die Posts einer Community per Stichwort.
 - Exportiere Mitglieder & Moderatoren oder finde Mitglieder per Name.
-- Finde Communities per Stichwort oder Thema, mit vollständigen Datensätzen.
-- Filtere Posts nach Datum, Sprache, Medien & Interaktionen.
+- Finde Communities per Stichwort oder Thema, mit ihren vollständigen Angaben.
+- Filtere Posts nach Datum, Sprache, Medien & Interaktion.
 - Filtere Mitglieder nach Reichweite, Account-Alter & Verifizierung.
 - Filter & Duplikatentfernung laufen vor der Abrechnung.
-- Runs behalten gelieferte Datensätze & Fortschritt, wenn Apify sie neu startet.
+- Runs behalten gelieferte Datensätze & ihren Fortschritt, wenn Apify sie neu
+  startet.
 
 ### Anwendungsfälle
 
@@ -67,24 +59,24 @@ Stichwort oder Thema & listet die, die X vorschlägt.
 Community-Datensätze nutzen `resultType: "community"`. Das sind die wichtigsten
 Felder.
 
-| Feld              | Beschreibung                                     |
-| ----------------- | ------------------------------------------------ |
-| `id`              | Community-ID                                     |
-| `name`            | Name der Community                               |
-| `description`     | Beschreibung der Community                       |
-| `url`             | URL der Community                                |
-| `member_count`    | Anzahl der Mitglieder                            |
-| `moderator_count` | Anzahl der Moderatoren                           |
-| `rules`           | Regeln der Community                             |
-| `question`        | Was die Community beim Beitritt fragt            |
-| `primary_topic`   | Das Thema, dem X die Community zuordnet          |
-| `searchTags`      | Tags, über die X die Community findet            |
-| `creator`         | Das öffentliche Profil des Erstellers            |
-| `admin`           | Das öffentliche Profil des Admins                |
-| `membersFacepile` | Vorschau der Mitglieder auf der Community-Seite  |
-| `is_nsfw`         | Ob die Community als sensibel markiert ist       |
-| `banner`          | Banner-URL, Größe & Hauptfarben                  |
-| `sourceTarget`    | URL, ID, Stichwort oder Thema aus deiner Eingabe |
+| Feld              | Beschreibung                                                          |
+| ----------------- | --------------------------------------------------------------------- |
+| `id`              | Community-ID                                                          |
+| `name`            | Name der Community                                                    |
+| `description`     | Beschreibung der Community                                            |
+| `url`             | URL der Community                                                     |
+| `member_count`    | Anzahl der Mitglieder                                                 |
+| `moderator_count` | Anzahl der Moderatoren                                                |
+| `rules`           | Regeln der Community                                                  |
+| `question`        | Was die Community einen Nutzer beim Beitritt fragt                    |
+| `primary_topic`   | Das Thema, dem X die Community zuordnet                               |
+| `searchTags`      | Tags, über die X die Community findet                                 |
+| `creator`         | Das öffentliche Profil des Erstellers                                 |
+| `admin`           | Das öffentliche Profil des Admins                                     |
+| `membersFacepile` | Mitglieder, die X auf der Community-Seite als Vorschau zeigt          |
+| `is_nsfw`         | Ob die Community als sensibel markiert ist                            |
+| `banner`          | Banner-URL, Größe & Hauptfarben                                       |
+| `sourceTarget`    | Die URL, die ID, das Stichwort oder das Thema, das du eingegeben hast |
 
 Jede Ressource fügt Datensätze ihres eigenen Typs hinzu.
 
@@ -100,19 +92,28 @@ Jede Ressource fügt Datensätze ihres eigenen Typs hinzu.
 Post-Datensätze enthalten `text`, `createdAt`, `likeCount`, `replyCount`,
 `retweetCount`, `viewCount`, `media` & das Profil `author`. Datensätze von
 Mitgliedern & Moderatoren enthalten die Profilfelder, etwa `username`,
-`followers`, `verified` & `communityRole`.
+`followers`, `verified` & `communityRole`. Sie enthalten auch `email` &
+`contactInfo`, also die E-Mails, Telefonnummern & Links, die jedes Profil
+veröffentlicht.
 
-## Wie nutze ich X Community Scraper, um Community-Daten zu scrapen?
+## Wie scrape ich Community-Daten mit X Community Scraper?
+
+Neu bei Apify?
+[Erstelle zuerst einen kostenlosen Account](https://console.apify.com/sign-up?fpr=xquik).
+Der kostenlose Plan braucht keine Kreditkarte & gibt dir jeden Monat $5 zum
+Ausgeben. Bei $0.00015 pro Datensatz reichen $5 für bis zu 33.000 Datensätze,
+vor Abzug der Plattformnutzung. Komm dann hierher zurück & klicke auf Try for
+free.
 
 Folge diesen Schritten in der Apify Console.
 
-1. Öffne ein [Task-Beispiel](#task-beispiele) oder den Input-Tab.
+1. Öffne ein [Task-Beispiel](#task-beispiele) oder den Tab Input.
 2. Füge Community-URLs in `startUrls` oder IDs in `communityIds` ein.
 3. Wähle `resources` & ergänze Filter wie `sinceDate` oder `minLikes`.
 4. Setze `maxItems` & klicke dann auf Start.
 5. Exportiere das Dataset als JSON, CSV, Excel oder HTML.
 
-Jedes Rezept unten ist eine vollständige Eingabe.
+Jedes Beispiel unten ist eine vollständige Eingabe.
 
 ### Community-Infos & neueste Posts abrufen
 
@@ -124,7 +125,7 @@ Jedes Rezept unten ist eine vollständige Eingabe.
 }
 ```
 
-`startUrls` nimmt jede URL als einfachen String oder als Objekt
+`startUrls` akzeptiert jede URL als einfachen String oder als Objekt
 `{ "url": "..." }`.
 
 ```json
@@ -149,7 +150,7 @@ Jedes Rezept unten ist eine vollständige Eingabe.
 ```
 
 Setze `postsOrder` auf `Top` für die Posts, die X am höchsten einstuft. Füge
-`"media"` zu `resources` hinzu, um den Tab Medien zu lesen.
+`"media"` zu `resources` hinzu, um den Tab Medien zu erhalten.
 
 ### Posts einer Community durchsuchen
 
@@ -175,7 +176,7 @@ Setze `postsOrder` auf `Top` für die Posts, die X am höchsten einstuft. Füge
 ```
 
 Mitgliederfilter gelten für Datensätze von Mitgliedern & Moderatoren. Gefilterte
-Datensätze landen nie im Dataset, also zahlst du nie dafür.
+Datensätze erreichen nie das Dataset, du zahlst also nie für sie.
 
 ### Mitglieder per Name finden
 
@@ -187,8 +188,8 @@ Datensätze landen nie im Dataset, also zahlst du nie dafür.
 }
 ```
 
-X prüft bis zu 10 passende Accounts pro Name, wie die Mitgliedersuche auf x.com.
-Jedes gefundene Mitglied ist 1 Datensatz `communityMember` mit seiner
+X prüft bis zu 10 passende Accounts pro Name, wie die Mitgliedersuche von X.
+Jedes gefundene Mitglied ist 1 `communityMember`-Datensatz mit seiner
 `communityRole`. Ein Run mit `memberNames` liest keine andere Ressource, außer
 `resources` nennt sie.
 
@@ -204,66 +205,69 @@ Jedes gefundene Mitglied ist 1 Datensatz `communityMember` mit seiner
 
 Jede gefundene Community enthält ihre Regeln & die Profile von Ersteller, Admin
 & Mitgliedern. Setze `includeDetails` auf `false` für einen schnelleren Run mit
-dem kurzen Datensatz. Aktiviere `includeSuggested` für die Communities, die X
-vorschlägt. Sie können sich je Run unterscheiden. Oder aktiviere `listTopics`
-für jedes Thema & seine Unterthemen.
+den kurzen Angaben. Aktiviere `includeSuggested` für die Communities, die X
+vorschlägt und die je Run abweichen können, oder `listTopics` für jedes Thema &
+seine Unterthemen.
 
 ## Task-Beispiele
 
 Wähle aus 50 öffentlichen Tasks. Jeder hat eine begrenzte Eingabe & eine
-passende Dataset-Ansicht. Bearbeite einen Task, bevor du ihn startest.
+passende Dataset-Ansicht. Passe einen Task an, bevor du ihn startest.
 
-- [Überblick über eine X-Community abrufen](https://apify.com/xquik/x-community-scraper/examples/get-an-x-community-overview)
-- [Details einer X-Community mit neuesten Posts abrufen](https://apify.com/xquik/x-community-scraper/examples/get-community-details-with-recent-posts)
-- [Top-Posts zu Technologie in einer X-Community finden](https://apify.com/xquik/x-community-scraper/examples/find-top-technology-posts-in-a-community)
-- [Mitglieder einer X-Community exportieren](https://apify.com/xquik/x-community-scraper/examples/export-x-community-members)
-- [Verifizierte Mitglieder einer X-Community exportieren](https://apify.com/xquik/x-community-scraper/examples/export-verified-community-members)
-- [Moderatoren einer X-Community auflisten](https://apify.com/xquik/x-community-scraper/examples/list-x-community-moderators)
-- [Entwickler-Communities nach Größe & Thema vergleichen](https://apify.com/xquik/x-community-scraper/examples/compare-developer-communities-by-size)
-- [Regeln einer X-Community vor dem Posten lesen](https://apify.com/xquik/x-community-scraper/examples/read-community-rules-before-you-post)
-- [Finanzierungsposts in einer Startup-Community finden](https://apify.com/xquik/x-community-scraper/examples/find-funding-posts-in-a-startup-community)
-- [Stellenanzeigen in einer Software-Engineering-Community finden](https://apify.com/xquik/x-community-scraper/examples/find-hiring-posts-in-a-software-community)
-- [Mitglieder einer Startup-Community mit großer Reichweite finden](https://apify.com/xquik/x-community-scraper/examples/find-startup-community-members-with-big-audiences)
-- [Eine kleine X-Community komplett prüfen](https://apify.com/xquik/x-community-scraper/examples/audit-a-small-community-end-to-end)
+- [Hol dir einen Überblick über eine X-Community](https://apify.com/xquik/x-community-scraper/examples/get-an-x-community-overview)
+- [Hol dir Details einer X-Community mit neuesten Posts](https://apify.com/xquik/x-community-scraper/examples/get-community-details-with-recent-posts)
+- [Finde Top-Posts zu Technologie in einer X-Community](https://apify.com/xquik/x-community-scraper/examples/find-top-technology-posts-in-a-community)
+- [Exportiere Mitglieder einer X-Community](https://apify.com/xquik/x-community-scraper/examples/export-x-community-members)
+- [Exportiere verifizierte Mitglieder einer X-Community](https://apify.com/xquik/x-community-scraper/examples/export-verified-community-members)
+- [Liste die Moderatoren einer X-Community auf](https://apify.com/xquik/x-community-scraper/examples/list-x-community-moderators)
+- [Vergleiche Entwickler-Communities nach Größe & Thema](https://apify.com/xquik/x-community-scraper/examples/compare-developer-communities-by-size)
+- [Lies das Regelwerk einer X-Community, bevor du postest](https://apify.com/xquik/x-community-scraper/examples/read-community-rules-before-you-post)
+- [Finde Finanzierungsposts in einer Startup-Community](https://apify.com/xquik/x-community-scraper/examples/find-funding-posts-in-a-startup-community)
+- [Finde Stellenanzeigen in einer Software-Engineering-Community](https://apify.com/xquik/x-community-scraper/examples/find-hiring-posts-in-a-software-community)
+- [Finde Mitglieder einer Startup-Community mit großer Reichweite](https://apify.com/xquik/x-community-scraper/examples/find-startup-community-members-with-big-audiences)
+- [Prüfe eine kleine X-Community von Anfang bis Ende](https://apify.com/xquik/x-community-scraper/examples/audit-a-small-community-end-to-end)
 
 ## Was kostet es, X-Communities zu scrapen?
 
-X Community Scraper von Xquik kostet auf jedem Apify-Plan $0.00015 pro
-geliefertem Datensatz. Apify berechnet deine Plattformnutzung separat. Xquik
-erhebt 1 Gebühr pro geliefertem Datensatz. Diagnosen in der Ausgabe
+X Community Scraper von Xquik kostet $0.00015 pro geliefertem Datensatz auf
+jedem Apify-Plan. Apify berechnet deine Plattformnutzung separat. Xquik
+berechnet 1 Gebühr pro geliefertem Datensatz. Diagnosen in der Ausgabe
 `diagnostics` sind kostenlos.
 
-- Du brauchst kein Xquik-Abo.
-- Du zahlst keine separate Gebühr für Start, Communities, Ressourcen oder
-  Suchanfragen.
-- Eine gefundene Community kostet 1 Datensatz, mit oder ohne vollständige
-  Details.
-- Filter & Deduplizierung laufen vor der Abrechnung. Du zahlst nie für
-  gefilterte oder doppelte Datensätze.
-- Die Apify-Einstellung für maximale Gesamtkosten begrenzt die gelieferten
-  Datensätze.
+Brauchst du mehr Volumen, dann
+[wähle einen Apify-Plan](https://apify.com/pricing?fpr=xquik) mit mehr
+vorausbezahlter Nutzung.
 
-Ein Run mit Problemen oder ein großer Run schreibt zusätzlich einen Eintrag
-`run-report`. Ein kleiner Run ohne Probleme überspringt ihn & spart
+- Du brauchst kein Xquik-Abonnement.
+- Du zahlst keine separate Gebühr für Start, Community, Ressource oder Abfrage.
+- Eine gefundene Community kostet 1 Datensatz, mit oder ohne ihre vollständigen
+  Angaben.
+- Filter & Deduplizierung laufen vor der Abrechnung. Gefilterte oder doppelte
+  Datensätze zahlst du nie.
+- Die Apify-Einstellungen für die maximale Gesamtgebühr begrenzen die
+  gelieferten Datensätze.
+
+Ein Run mit einem Problem oder ein großer Run schreibt zusätzlich einen
+`run-report`-Eintrag. Ein kleiner Run ohne Probleme überspringt ihn & spart
 Apify-Nutzung. Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu
 schreiben.
 
-Unter [Run-Optionen](#run-optionen) steht, wie du die Kosten eines Runs
-begrenzt.
+Wie du die Ausgaben eines Runs begrenzt, steht unter
+[Run-Optionen](#run-optionen).
 
 ## Leere, unvollständige & gestoppte Runs
 
 X Community Scraper von Xquik erklärt leere, unvollständige & gestoppte Runs
-kostenlos. Der Run-Status nennt den Grund für den Stopp. Er zählt auch
-abgerechnete Ergebnisse & gelesene Ziele.
+kostenlos. Der Run-Status sagt, warum der Run gestoppt hat. Er zählt auch
+berechnete Ergebnisse & gelesene Ziele.
 
 ### Leere Ergebnisse
 
 Der Status eines leeren Runs rät dir, Ziele & Filter zu prüfen. Gefilterte
 Datensätze verbrauchen nie dein Ergebnislimit. Ein Run, der jedes Ziel liest &
-keinen Datensatz zurückbekommt, schreibt keinen Eintrag. Sein Status nennt den
-Grund & sagt, was du ändern solltest. Der Actor liefert nur öffentliche
-Communities, die X zeigt. Die verfügbaren Felder variieren je nach Community.
+keinen Datensatz zurückbekommt, schreibt keinen Eintrag. Sein Status sagt, warum
+& was du ändern solltest. Der Actor liefert nur öffentliche Communities, die X
+zeigt. Die verfügbaren Felder variieren je nach Community.
 
 ### Unvollständige Runs
 
@@ -284,40 +288,51 @@ Ursache es ist. Der Actor setzt kein eigenes Zeitlimit.
 
 ## Eingabe
 
-Der Input-Tab listet jede Option. Gib Community-URLs oder -IDs, Stichwörter
-oder Themen an oder aktiviere `includeSuggested` oder `listTopics`. Jedes andere
+Der Tab Input listet jede Option. Gib Community-URLs oder -IDs, Stichwörter oder
+Themen an, oder aktiviere `includeSuggested` oder `listTopics`. Jedes andere
 Feld ist optional.
 
-| Feld                           | Funktion                                                           |
-| ------------------------------ | ------------------------------------------------------------------ |
-| `startUrls`                    | Community-URLs auf x.com                                           |
-| `communityIds`                 | Numerische Community-IDs                                           |
-| `resources`                    | `info`, `tweets`, `media`, `search`, `members`, `moderators`       |
-| `query`                        | Stichwort für die Ressource `search`                               |
-| `queryType`                    | Reihenfolge `Latest` oder `Top` für die Stichwortsuche             |
-| `postsOrder`                   | Reihenfolge `Latest` oder `Top` für Posts                          |
-| `memberNames`                  | Namen oder Nutzernamen für die Mitgliedersuche                     |
-| `searchTerms`                  | Stichwörter, um Communities zu finden                              |
-| `topics`                       | Themennamen oder -IDs, etwa `Technology`                           |
-| `includeSuggested`             | Ergänzt die Communities, die X zum Beitreten vorschlägt            |
-| `listTopics`                   | Ergänzt jedes Community-Thema & seine Unterthemen                  |
-| `includeDetails`               | Ergänzt Details zu per Stichwort oder Thema gefundenen Communities |
-| `maxItems`                     | Obergrenze für gelieferte Datensätze im ganzen Run                 |
-| `maxItemsPerTarget`            | Obergrenze für Datensätze pro Community-Ressource                  |
-| `sinceDate`, `untilDate`       | Behält Posts in einem Zeitraum                                     |
-| `language`                     | Behält Posts mit 1 Sprachcode                                      |
-| `mediaType`                    | Behält Posts mit Bildern, Videos, GIFs, Links oder ohne Medien     |
-| `minViews`, `minLikes`         | Behält Posts über einer Zahl an Aufrufen oder Likes                |
-| `minReplies`, `minRetweets`    | Behält Posts über einer Zahl an Antworten oder Reposts             |
-| `nativeRetweets`               | Behält nur native Reposts                                          |
-| `verifiedOnly`                 | Behält verifizierte Autoren, Mitglieder oder Moderatoren           |
-| `minFollowers`, `maxFollowers` | Behält Mitglieder in einem Reichweitenbereich                      |
-| `minAccountAgeDays`            | Behält Mitglieder, deren Account mindestens so viele Tage alt ist  |
-| `dedupeAcrossTargets`          | Entfernt Duplikate über Communities hinweg vor der Abrechnung      |
+| Feld                           | Was es bewirkt                                                                            |
+| ------------------------------ | ----------------------------------------------------------------------------------------- |
+| `startUrls`                    | Community-URLs auf `x.com`                                                                |
+| `communityIds`                 | Numerische Community-IDs                                                                  |
+| `resources`                    | `info`, `tweets`, `media`, `search`, `members`, `moderators`                              |
+| `query`                        | Stichwort für die Ressource `search`                                                      |
+| `queryType`                    | Reihenfolge `Latest` oder `Top` für die Stichwortsuche                                    |
+| `postsOrder`                   | Reihenfolge `Latest` oder `Top` für Posts                                                 |
+| `memberNames`                  | Namen oder Nutzernamen, die du unter den Mitgliedern suchst                               |
+| `searchTerms`                  | Stichwörter, um Communities zu finden                                                     |
+| `topics`                       | Themennamen oder -IDs, etwa `Technology`                                                  |
+| `includeSuggested`             | Ergänzt die Communities, die X zum Beitreten vorschlägt                                   |
+| `listTopics`                   | Ergänzt jedes Community-Thema & seine Unterthemen                                         |
+| `includeDetails`               | Ergänzt vollständige Angaben zu Communities, die per Stichwort oder Thema gefunden wurden |
+| `maxItems`                     | Obergrenze für gelieferte Datensätze im ganzen Run                                        |
+| `maxItemsPerTarget`            | Obergrenze für Datensätze pro Community-Ressource                                         |
+| `sinceDate`, `untilDate`       | Behält Posts in einem Datumsfenster                                                       |
+| `language`                     | Behält Posts mit 1 Sprachcode                                                             |
+| `mediaType`                    | Behält Posts mit Bildern, Videos, GIFs, Links oder ohne Medien                            |
+| `minViews`, `minLikes`         | Behält Posts über einer Zahl an Aufrufen oder Likes                                       |
+| `minReplies`, `minRetweets`    | Behält Posts über einer Zahl an Antworten oder Reposts                                    |
+| `nativeRetweets`               | Behält nur native Reposts                                                                 |
+| `verifiedOnly`                 | Behält verifizierte Autoren, Mitglieder oder Moderatoren                                  |
+| `minFollowers`, `maxFollowers` | Behält Mitglieder in einem Reichweitenbereich                                             |
+| `minAccountAgeDays`            | Behält Mitglieder, deren Account mindestens so viele Tage alt ist                         |
+| `blueVerifiedOnly`             | Behält Autoren oder Mitglieder, die X als Blue-verifiziert markiert                       |
+| `verifiedType`                 | Behält Mitglieder mit 1 Verifizierungstyp                                                 |
+| `minFollowing`, `maxFollowing` | Behält Mitglieder in einem Bereich gefolgter Accounts                                     |
+| `minStatuses`, `maxStatuses`   | Behält Mitglieder in einem Bereich der Post-Anzahl                                        |
+| `hasWebsite`, `hasLocation`    | Behält Mitglieder, die eine Website oder einen Standort angeben                           |
+| `hasEmail`                     | Behält Mitglieder, die eine E-Mail veröffentlichen                                        |
+| `businessEmailOnly`            | Behält Mitglieder mit einer E-Mail außerhalb von Freemail-Diensten                        |
+| `emailDomains`                 | Behält Mitglieder mit einer E-Mail unter diesen Domains                                   |
+| `bioContains`                  | Behält Mitglieder, deren Bio 1 dieser Wörter enthält                                      |
+| `locationContains`             | Behält Mitglieder, deren Standort diesen Text enthält                                     |
+| `usernameContains`             | Behält Mitglieder, deren Nutzername diesen Text enthält                                   |
+| `dedupeAcrossTargets`          | Entfernt Datensätze, die sich über Communities wiederholen, vor der Abrechnung            |
 
 ### Von einem anderen Community-Actor wechseln
 
-Die Namen `ranking` & `sort` funktionieren wie `postsOrder`. `Top` oder
+Die Namen `ranking` & `sort` funktionieren als `postsOrder`. `Top` oder
 `Relevance` liest die Top-Posts. Setzt du einen davon & `postsOrder`, gewinnt
 der Wert in `postsOrder`. Das Run-Log nennt das Feld, das verloren hat.
 
@@ -326,7 +341,8 @@ der Wert in `postsOrder`. Das Run-Log nennt das Feld, das verloren hat.
 - Für einen schnellen Überblick behalte die Standard-Ressourcen `info` &
   `tweets`.
 - Für Lead-Listen wähle `members` mit `minFollowers` & `verifiedOnly`.
-- Für Produktrecherche wähle `search` mit einer `query` wie `bug` oder `pricing`.
+- Für Produktrecherche wähle `search` mit einer `query` wie `bug` oder
+  `pricing`.
 - Für kreative Recherche wähle `media` & setze `mediaType`.
 - Um Communities zu entdecken, sende `searchTerms` oder `topics` ohne IDs.
 
@@ -337,7 +353,7 @@ die eingegebene Community, das Stichwort oder das Thema. X Community Scraper von
 Xquik behält die Quellfelder & erfindet keine Werte. Das Dataset-Schema gibt
 jedem Feld einen Titel & eine Beschreibung.
 
-Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
+Die Beispiele nutzen Musterwerte. Die Ergebnisse spiegeln Live-Daten wider. Ein
 Datensatz mit Community-Infos sieht so aus.
 
 ```json
@@ -355,27 +371,67 @@ Datensatz mit Community-Infos sieht so aus.
 
 Exportiere das Dataset als JSON, CSV, Excel oder HTML.
 
+## Ausgabespalten
+
+8 Eingaben formen jeden Datensatz, nachdem der Run ihn gelesen hat. Sie führen
+keinen Code aus & ändern den Preis nicht.
+
+| Feld                | Was es bewirkt                                                                        |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| `fields`            | Behält nur diese Felder, in der Reihenfolge & Schreibweise, die du angibst            |
+| `omitFields`        | Entfernt diese Felder & behält den Rest                                               |
+| `renameFields`      | Verschiebt ein Feld in eine Spalte mit neuem Namen                                    |
+| `flatten`           | Macht aus jedem verschachtelten Objekt Spalten auf oberster Ebene                     |
+| `fillMissingFields` | Füllt ein behaltenes Feld, das einem Datensatz fehlt, mit `null`. Standardmäßig aktiv |
+| `joinFields`        | Macht aus jeder dieser Listen 1 Textwert                                              |
+| `joinSeparator`     | Text zwischen verbundenen Einträgen. Standard ist ein Komma & ein Leerzeichen         |
+| `constantFields`    | Fügt eine Spalte mit demselben Text in jedem Datensatz hinzu                          |
+
+- Nutze einen Punkt für ein Feld innerhalb eines Objekts. Groß- und
+  Kleinschreibung & Unterstriche spielen keine Rolle.
+- Jeder Datensatz behält seine `id`.
+- Mit `fields` kommt ein Feld, das einem Datensatz fehlt, als `null` an. Jeder
+  Datensatz hat dann dieselben Spalten.
+- Ein falscher Feldname stoppt den Run vor dem Lesen & kostet nichts.
+- Lassen sich die Namen nicht prüfen, liest der Run weiter & listet nicht
+  gefundene Namen am Ende.
+- Der Run ignoriert eine Map-Funktion oder einen jq-Filter, die für einen
+  anderen Actor geschrieben sind.
+
+Nenne eine berechnete Spalte in `fields` oder `renameFields`, um sie
+hinzuzufügen.
+
+| Spalte              | Formel                                                                                     |
+| ------------------- | ------------------------------------------------------------------------------------------ |
+| `totalEngagement`   | `likeCount` + `replyCount` + `retweetCount` + `quoteCount`. Ein fehlender Zähler addiert 0 |
+| `engagementRate`    | `totalEngagement` × 100 ÷ die `followers` des Autors, auf 4 Nachkommastellen               |
+| `engagementPerView` | `totalEngagement` × 100 ÷ `viewCount`, auf 4 Nachkommastellen                              |
+
+`totalEngagement` ist `null` bei einem Datensatz ohne diese Zähler. Eine Rate
+ist `null`, wenn ihr Divisor fehlt oder 0 ist.
+
 ## Run-Optionen
 
-- Setze die maximalen Gesamtkosten von Apify, um die Run-Kosten zu begrenzen.
-  Lass `maxItems` hoch, um so viele Datensätze zu erhalten, wie das Budget
+- Setze in Apify die maximale Gesamtgebühr, um die Run-Kosten zu begrenzen.
+  Halte `maxItems` hoch, um so viele Datensätze zu erhalten, wie das Budget
   erlaubt.
 - Setze `maxTotalChargeUsd` in der Apify-API oder Max cost per run in der
   Console.
-- Pack alle deine Communities in 1 Run. Jeder Run zahlt Apify dieselben
+- Packe alle deine Communities in 1 Run. Jeder Run zahlt Apify dieselben
   Startkosten.
 - `maxItemsPerTarget` begrenzt die Datensätze jeder Community-Ressource.
 - `maxConcurrency` legt fest, wie viele Community-Ressourcen gleichzeitig
-  laufen. Der Standardwert ist die schnellste sichere Einstellung.
+  laufen. Der Standard ist die schnellste sichere Einstellung.
 
 Wähle `latest` für jeden Run, um jeden veröffentlichten Fix zu erhalten.
-Gespeicherte Tasks & Zeitpläne behalten ihre eigene Build-Wahl, also lass sie
+Gespeicherte Tasks & Zeitpläne behalten ihre eigene Build-Wahl, lass sie also
 auf `latest`.
 
 ## Verwandte Xquik-Actors
 
-Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, rechnet erst nach dem
-Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
+Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, dieselbe Abrechnung erst
+nach dem Filtern & dieselben Diagnosen. Wähle den, der zu den Daten passt, die
+du brauchst.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrapt Posts aus
   Suchen, Profil-Timelines, Listen & Post-IDs mit über 50 Filtern & flachen
@@ -393,9 +449,9 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015 pro
   Datensatz.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
-  scrapt die Posts, die Posts zitieren, mit Text, Medien, Zahlen, Autoren & 11
-  Filtern. Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was gesagt
-  wurde. Ab $0.00015 pro Post.
+  scrapt die Zitate von Posts mit Text, Medien, Zählern, Autoren & 11 Filtern.
+  Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was diese Accounts
+  gesagt haben. Ab $0.00015 pro Post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrapt
   Follower, gefolgte Accounts, Listenmitglieder, Abonnenten &
   Community-Mitglieder als Profil-Datensätze. Nutze ihn, wenn du Zielgruppen-
@@ -406,8 +462,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   einer Suche aufbaust. Ab $0.00015 pro Profil.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   prüft, wo Accounts ansässig sind, mit der X-Angabe "Account based in", der
-  Verbindungsart zu X & Benutzernamen-Änderungen. Nutze ihn, wenn du prüfst, wo
-  Accounts ansässig sind. Ab $0.00015 pro Account.
+  Verbindungsart zu X & Änderungen des Nutzernamens. Nutze ihn, wenn du prüfst,
+  wo Accounts ansässig sind. Ab $0.00015 pro Account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) holt die E-Mails,
   Telefonnummern & Links, die Accounts in ihren Profilen veröffentlichen, anhand
   von Nutzernamen, Followern oder Nutzersuchen. Nutze ihn, wenn du die E-Mails
@@ -439,8 +495,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Zeit beobachtest. Ab $0.0003 pro analysiertem Post.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden Post
-  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema brauchst. Ab
-  $0.0003 pro analysiertem Post.
+  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem beliebigen Thema
+  brauchst. Ab $0.0003 pro analysiertem Post.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   kennzeichnet bullische, bärische, neutrale oder gemischte Haltung, Inhaltstyp,
   Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du Aktien, Krypto
@@ -462,15 +518,15 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
 Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
 
-### Brauche ich einen X-API-Schlüssel oder Login?
+### Brauche ich einen X-API-Schlüssel oder einen Login?
 
-Nein. X Community Scraper von Xquik braucht keinen X-API-Schlüssel, keinen
-Login & keine Zugangsdaten.
+Nein. X Community Scraper von Xquik braucht keinen X-API-Schlüssel, keinen Login
+oder Zugangsdaten.
 
 ### Wie finde ich die ID einer Community?
 
-Öffne die Community auf x.com. Die ID ist die Zahl nach `/i/communities/` in
-der URL. Du kannst auch die ganze URL in `startUrls` einfügen.
+Öffne die Community auf X. Die ID ist die Zahl nach `/i/communities/` in der
+URL. Du kannst auch die ganze URL in `startUrls` einfügen.
 
 ### Kann ich Mitglieder einer X-Community als CSV oder Excel exportieren?
 
@@ -480,12 +536,12 @@ JSON oder HTML.
 ### Kann ich eine Community ohne ihre ID finden?
 
 Ja. Sende Stichwörter in `searchTerms` oder Themen in `topics`. Jede gefundene
-Community ist 1 Datensatz mit vollständigen Details.
+Community ist 1 Datensatz mit ihren vollständigen Angaben.
 
 ### Kann ich die Top-Posts einer Community abrufen?
 
-Ja. Setze `postsOrder` auf `Top`. Ergänze `minLikes` oder `minViews`, um nur
-die beliebtesten Posts zu behalten.
+Ja. Setze `postsOrder` auf `Top`. Ergänze `minLikes` oder `minViews`, um nur die
+beliebtesten Posts zu behalten.
 
 ### Wie viele Communities kann ich in 1 Run scrapen?
 
@@ -500,7 +556,7 @@ zeigt.
 ### Ist es legal, X-Communities zu scrapen?
 
 X Community Scraper von Xquik fragt öffentliche X-Felder ab. Ergebnisse können
-personenbezogene Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist. Befolge
+personenbezogene Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist, & befolge
 geltende Datenschutzregeln. Hol dir bei Unsicherheit qualifizierten Rechtsrat.
 
 ### Warum hat mein Run keine Ergebnisse geliefert?
@@ -511,25 +567,27 @@ Aufmerksamkeit braucht. Ihr Feld `stopCauses` gibt jeder Ursache eine
 `nextAction`, der du folgen kannst. Der Run listet jede Eingabe, die er nicht
 lesen kann, & sagt, wie du sie korrigierst.
 
-### Kann ich API, Zeitpläne & Integrationen nutzen?
+### Kann ich die API, Zeitpläne & Integrationen nutzen?
 
-Ja. Wähle aus 50 öffentlichen Tasks oder der REST-API von Xquik. Der
-[API-Tab](https://apify.com/xquik/x-community-scraper/api) enthält Beispiele
-für Python, JavaScript & cURL.
-Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) starten
-X Community Scraper von Xquik per Cron. Agents nutzen
+Ja. Wähle aus 50 öffentlichen Tasks oder nutze die REST-API von Xquik. Der
+[API-Tab](https://apify.com/xquik/x-community-scraper/api) enthält Beispiele für
+Python, JavaScript & cURL.
+[Zeitpläne](https://docs.apify.com/platform/schedules) von Apify starten X
+Community Scraper von Xquik per Cron. Agents nutzen
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp). Nutze `latest`,
 außer du brauchst einen älteren Build.
 
 ### Kann ich eine individuelle Lösung bekommen?
 
-Ja. Besuche [xquik.com](https://xquik.com) oder lies die
-[API-Dokumentation](https://docs.xquik.com/introduction). Sie deckt Dashboard,
-API, MCP-Server & Webhooks ab.
+Ja. Beschreibe im
+[Tab Issues](https://apify.com/xquik/x-community-scraper/issues), was du
+brauchst. Xquik bietet außerdem ein Dashboard, eine REST-API, einen MCP-Server &
+Webhooks. Die Website von Xquik findest du in seinem
+[Apify-Profil](https://apify.com/xquik).
 
 ### Wo bekomme ich Hilfe?
 
-Öffne ein Issue auf der Actor-Seite oder schreib mit der Run-ID an
-<support@xquik.com>. Kostenlose Diagnosen im Key-Value-Store erklären Runs, die
-Aufmerksamkeit brauchen. Ein Run ohne Datensätze nennt den Grund in seinem
-Status.
+Öffne im [Tab Issues](https://apify.com/xquik/x-community-scraper/issues) ein
+Issue mit der Run-ID. Kostenlose Diagnosen im Key-Value-Store erklären Runs, die
+Aufmerksamkeit brauchen. Ein Run, der keinen Datensatz zurückbekommt, sagt in
+seinem Status, warum.

@@ -1,45 +1,36 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <strong>Türkçe</strong> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · **Türkçe** ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer, Xquik MCP'yi kodlama ajanlarına bağlıyor"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Framer'ın Xquik scraper'larını Claude Code, Codex, Cursor ve daha fazlasıyla nasıl kullandığını 6:07'den itibaren izle.</a>
-</td></tr></table>
+[![Framer, Xquik MCP'yi kodlama ajanlarına bağlıyor](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Framer'ın Xquik scraper'larını Claude Code, Codex, Cursor & daha fazlasıyla nasıl kullandığını](https://youtu.be/4UOSpoOoC3Y?t=367)
+6:07'den itibaren izle.
 
 Xquik, en eksiksiz X verisini sunan, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. Xquik'in X (Twitter) Brand Monitoring'i markandan bahseden
-gönderileri ilgi, duygu durumu ve müşteri deneyimi cevaplarıyla izler. Diğer
+gönderileri ilgi, duygu durumu & müşteri deneyimi cevaplarıyla izler. Diğer
 Apify Actor'larının çoğu, filtrelemeden veya tekilleştirmeden önce ücret alır.
 Xquik yalnızca teslim edilen, benzersiz ve filtrene uyan sonuçlar için ücret
-alır. Yapay zeka maliyetleri gönderi başına fiyata dahildir. Yapay zeka hesabı,
-token veya anahtar gerekmez.
+alır. Yapay zeka maliyetleri gönderi başına fiyata dahildir. Yapay zeka
+hesabına, token'a veya anahtara ihtiyacın yok.
 
-X (Twitter) üzerinde markandan bahseden gönderileri izle. Duygu durumundaki
+X (Twitter) üzerinde markandan bahseden gönderileri izle & duygu durumundaki
 değişimleri çalıştırmalar arasında takip et. Xquik'in **X (Twitter) Brand
 Monitoring with AI Analysis** Actor'ı eşleşen her gönderiyi toplar. Her gönderi
-için ilgi, duygu durumu ve müşteri deneyimi sorularını yapay zeka ile cevaplar.
+için ilgi, duygu durumu & müşteri deneyimi sorularını yapay zeka ile cevaplar.
 Bu cevapları önceki bir veri kümesiyle karşılaştırır, böylece neyin değiştiğini
-görürsün. Her satır orijinal gönderi verisini tutar. Dışa aktarma, inceleme ve
-sonraki analizler için ikinci bir kazıma gerekmez.
+görürsün. Her satır orijinal gönderi verisini tutar. Dışa aktarımlar,
+incelemeler & sonraki analizler için ikinci bir kazıma gerekmez.
 
-Bir markayı, ürün hattını veya kampanyayı şikayetler, övgüler ve satın alma
-soruları için izle. Destek ve pazarlama ekiplerini gerçek gönderilerle
-bilgilendir. Her çalıştırmayla müşterilerin senden nasıl söz ettiğinin geçmişini
+Bir markayı, bir ürün hattını veya bir kampanyayı şikayetler, övgüler & satın
+alma soruları için izle. Destek & pazarlama ekiplerini gerçek gönderilerle
+bilgilendir. Müşterilerin senden nasıl söz ettiğinin geçmişini her çalıştırmada
 biriktir.
 
 - **Kaynak gönderinin tüm alanları.** Metin, yazar, sayılar, medya, bağlantılar,
-  alıntılanan ve yanıtlanan gönderiler cevapların yanında kalır.
+  alıntılanan & yanıtlanan gönderiler cevapların yanında kalır.
 - **Tipli cevaplar.** Her satırda bir ilgi olasılığı, olasılıklarıyla bir duygu
-  durumu kategorisi ve bir müşteri deneyimi kategorisi bulunur.
+  durumu kategorisi & bir müşteri deneyimi kategorisi bulunur.
 - **Değişiklik takibi.** Çalıştırmalar karara göre karşılaştırılır, bu yüzden
   küçük olasılık kaymaları değişiklik sayılmaz.
 - **Önce filtreleyen faturalama.** Yalnızca analizi başarılı, benzersiz ve
@@ -50,17 +41,24 @@ biriktir.
 
 ## X'te bir marka nasıl izlenir
 
-1. Arama terimi, profil kullanıcı adı, gönderi URL'si veya gönderi ID'si ekle.
-   Örneğin `(Sony OR "WH-1000XM5") headphones lang:en` araması yap.
-2. `maxItems` değerini ve işinin gerektirdiği veri çekme filtrelerini ayarla.
-   Tarih sınırları, en az beğeni sayısı ve yanıtları hariç tutma bunlara
+Apify'da yeni misin? Önce
+[ücretsiz bir hesap oluştur](https://console.apify.com/sign-up?fpr=xquik).
+Ücretsiz plan kredi kartı istemez & her ay harcaman için $5 verir. Analiz edilen
+gönderi başına $0.0003 fiyatla $5, platform kullanımı hariç analiz edilen 16.000
+gönderiye kadar yeter. Sonra buraya dön & Try for free düğmesine bas.
+
+1. Arama terimleri, profil kullanıcı adları, gönderi URL'leri veya gönderi
+   ID'leri ekle. Örneğin `(Sony OR "WH-1000XM5") headphones lang:en` araması
+   yap.
+2. `maxItems` değerini & işinin gerektirdiği veri çekme filtrelerini ayarla.
+   Tarih sınırları, en az beğeni sayısı & yanıtları hariç tutma bunlara
    örnektir.
-3. Marka adlarını ve takma adlarını `analysis.targets` altına yaz, markayı
+3. Marka adlarını & takma adlarını `analysis.targets` altına yaz & markayı
    `analysis.context` içinde anlat.
-4. Çalıştırmayı başlat, sonra veri kümesi ID'sini bir sonraki karşılaştırma için
-   sakla.
+4. Çalıştırmayı başlat, sonra veri kümesi ID'sini bir sonraki karşılaştırman
+   için sakla.
 5. Bir sonraki çalıştırmada bu ID ile `monitor.baselineDatasetId` ekle. Cevaplar
-   karşılaştırılabilir kalsın diye soruları, hedefleri, bağlamı ve bağlam
+   karşılaştırılabilir kalsın diye soruları, hedefleri, bağlamı & bağlam
    sınırlarını değiştirme. Karşılaştırma o veri kümesini okur, bu yüzden o
    çalıştırma özetini atlamış olsa bile çalışır.
 
@@ -81,8 +79,8 @@ biriktir.
 }
 ```
 
-Hedefler sınıflandırmaya yön verir. Arama sorgusu oluşturmaz, ilgisiz
-gönderileri de çıkarmaz. Araştırmana uyan arama terimleri ve filtreler seç.
+Hedefler sınıflandırmaya yön verir. Arama sorgusu oluşturmaz veya ilgisiz
+gönderileri çıkarmazlar. Araştırmana uyan arama terimleri & filtreler seç.
 
 ### İzleme neyi cevaplar
 
@@ -92,33 +90,35 @@ gönderileri de çıkarmaz. Araştırmana uyan arama terimleri ve filtreler seç
 | Duygu durumu     | Olumlu, olumsuz, karışık, nötr veya belirsiz        |
 | Müşteri deneyimi | Müşteri, potansiyel müşteri, gözlemci veya belirsiz |
 
-Başka şeylerle karışabilecek adları incelemek için ilgi olasılıklarını kullan.
-Duygu durumu, yazarın hedefe karşı ifade ettiği tutumu anlatır.
+Markanla karışabilecek adaşları incelemek için ilgi olasılıklarını kullan. Duygu
+durumu, yazarın hedefe karşı ifade ettiği tutumu anlatır.
 
 ### Karşılaştırma nasıl çalışır
 
-| Karşılaştırma durumu   | Anlamı                                              |
-| ---------------------- | --------------------------------------------------- |
-| `first_run`            | Temel veri kümesi verilmedi                         |
-| `new_to_baseline`      | Bu gönderi ID'si temel veri kümesinde yoktu         |
-| `unchanged`            | Karşılaştırılabilen tüm kararlar aynı               |
-| `changed`              | En az 1 karar farklı                                |
-| `not_comparable`       | Gerekli metadata, ID'ler veya eşleşen ayarlar eksik |
-| `analysis_unavailable` | Bu gönderinin başarılı bir analizi yok              |
+| Karşılaştırma durumu   | Anlamı                                      |
+| ---------------------- | ------------------------------------------- |
+| `first_run`            | Temel veri kümesi verilmedi                 |
+| `new_to_baseline`      | Bu gönderi ID'si temel veri kümesinde yoktu |
+| `unchanged`            | Karşılaştırılabilen her karar aynı          |
+| `changed`              | En az 1 karar farklı                        |
+| `not_comparable`       | Metadata, ID'ler veya eşleşen ayarlar eksik |
+| `analysis_unavailable` | Bu gönderinin başarılı bir analizi yok      |
 
-Karşılaştırma karara bakar. `choice` cevabında kategoriye, `score` cevabında en
-yakın düzeye bakar. `probability` cevabında 0,5'teki evet/hayır kararına bakar.
-Bir karar yalnızca belirgin biçimde değiştiğinde değişmiş sayılır. Eşiğe çok
-yakın sonuçlar ve kararı değiştirmeyen kaymalar `unchanged` kalır. Böylece
-çalıştırmalar arasındaki küçük yapay zeka farkları değişiklik olarak görünmez.
+Cevaplar karara göre karşılaştırılır. `choice` cevabı kategorisine göre
+karşılaştırılır. `score` cevabı en yakın düzeyine göre karşılaştırılır.
+`probability` cevabı 0,5'teki evet/hayır kararına göre karşılaştırılır. Bir
+karar yalnızca belirgin biçimde değiştiğinde değişmiş sayılır. Çalıştırmalar
+arasında eşiğe çok yakın kalan sonuçlar `unchanged` kalır & kararı değiştirmeyen
+kaymalar da öyle. Böylece çalıştırmalar arasındaki küçük yapay zeka farkları
+değişiklik olarak görünmez.
 
-`changes`, değişen her soruyu `previous` ve `current` kararıyla listeler.
+`changes`, değişen her soruyu `previous` & `current` kararıyla listeler.
 Değişiklikler yapay zeka farklarından, yeni bağlamdan veya düzenlenmiş kaynak
-veriden gelebilir. Olguların değiştiğini kanıtlamaz. Eksik bir gönderi de
+veriden gelebilir. Olguların değiştiğini kanıtlamazlar & eksik bir gönderi de
 silindiğini kanıtlamaz.
 
 Temel veri kümesi sınırı olan `maxBaselineRows` varsayılan olarak 100.000
-satırdır. Tekrarlanan gönderi ID'leri, yükleme hataları ve değişen veri kümesi
+satırdır. Tekrarlanan gönderi ID'leri, yükleme hataları & değişen veri kümesi
 boyutları karşılaştırmayı toplamadan önce durdurur. Bunlar asla boş bir temel
 veri kümesine dönüşmez.
 
@@ -138,27 +138,30 @@ X'ten hiçbir şey çekmez.
 ```
 
 - Her metin, bir gönderiyle aynı `analysis` cevaplarını içeren 1 satır olur.
-- `tweet.id` değeri `text:1`, `text:2` diye devam eder. `tweet.type` değeri
-  `text` olur.
+- `tweet.id` değeri `text:1`, `text:2` diye sürer & `tweet.type` değeri `text`
+  olur.
 - Analiz edilen her metin, analiz edilen bir gönderiyle aynı $0.0003 tutar.
 - `texts` ayarlıysa çalıştırma yalnızca bu metinleri analiz eder. X hedeflerini
   ayrı çalıştır.
 
 ## X'te bir markayı izlemek ne kadar tutar?
 
-Xquik'in X (Twitter) Brand Monitoring'i analiz edilen gönderi başına
-$0.0003'ten başlar. Başlatma ücreti almaz. Fiyata toplama ve yapay zeka
-maliyetleri dahildir. Yapay zeka hesabı, token veya anahtar gerekmez. Fiyat
-gönderi başına en fazla 8 soruyu ve 64.000 bayt bağlamı kapsar. Her soru tanımı
-en fazla 8.000 bayt olabilir.
+Xquik'in X (Twitter) Brand Monitoring'i analiz edilen gönderi başına $0.0003'ten
+başlar. Başlatma ücreti almaz. Fiyata toplama & yapay zeka maliyetleri dahildir.
+Yapay zeka hesabına, token'a veya anahtara ihtiyacın yok. Fiyat gönderi başına
+en fazla 8 soruyu & 64.000 bayt bağlamı kapsar. Her soru tanımı en fazla 8.000
+bayt kullanabilir.
 
-Veri çekme filtreleri ve tekilleştirme analizden önce çalışır. Filtrelenen veya
+Daha fazla hacim için daha çok ön ödemeli kullanım içeren bir
+[Apify planı seç](https://apify.com/pricing?fpr=xquik).
+
+Veri çekme filtreleri & tekilleştirme analizden önce çalışır. Filtrelenen veya
 tekrarlanan satırlar için asla ödemezsin. Başarısız analizlerin, atlanan
-analizlerin ve tanılama satırlarının sonuç ücreti yok. Apify işlem, depolama ve
-aktarım kullanımını planının ücretleriyle ayrıca faturalandırır. Pricing
-sekmesi bunu gösterir.
+analizlerin & tanılama satırlarının sonuç ücreti yok. Apify işlem, depolama &
+aktarım için platform kullanımını planının ücretleriyle ayrıca faturalandırır.
+Pricing sekmesi bunu gösterir.
 
-## Girdi ve çıktı örnekleri
+## Girdi & çıktı örnekleri
 
 Yukarıdaki girdiyi olduğu gibi kopyalayabilirsin. Kısaltılmış bir çıktı satırı
 şöyle görünür.
@@ -188,45 +191,44 @@ Yukarıdaki girdiyi olduğu gibi kopyalayabilirsin. Kısaltılmış bir çıktı
 }
 ```
 
-Her sonuçta `tweet`, `analysis` ve `monitor` bulunur. Cevaplarda türler, soru
-sürümleri ve varsa olasılıklar yer alır. `analysis.contextAvailability`, eksik
-alıntı, yanıt, yazar ve medya bağlamını bildirir. Analizi başarısız olan veya
-atlanan bir satır, toplanan gönderiyi ve bir `reason` alanını tutar. Cevap
+Her sonuçta `tweet`, `analysis` & `monitor` bulunur. Cevaplarda türler, soru
+sürümleri & varsa olasılıklar yer alır. `analysis.contextAvailability`, eksik
+alıntı, yanıt, yazar & medya bağlamını bildirir. Analizi başarısız olan veya
+atlanan bir satır, toplanan gönderiyi & bir `reason` alanını tutar. Cevap
 listesi boştur.
 
 Anahtar-değer deposundaki ücretsiz tanılamalar geçersiz girdileri, eksik
-sonuçları ve kesilen toplamayı açıklar. Çalıştırma raporu toplanan satırları,
-ücretlendirilen analizleri ve bekleyen ücretleri ayrı tutar.
+sonuçları & kesilen toplamayı açıklar. Çalıştırma raporu toplanan satırları,
+ücretlendirilen analizleri & bekleyen ücretleri ayrı tutar.
 
-## Çalıştırma özeti ve düz cevaplar
+## Çalıştırma özeti & düz cevaplar
 
-Bir çalıştırma 4 durumda anahtar-değer deposuna bir `analysis-summary` kaydı
-yazar.
+Bir çalıştırma 3 durumda kendi anahtar-değer deposuna bir `analysis-summary`
+kaydı yazar.
 
 - Bir sorunla karşılaşırsa veya büyükse.
-- Bir serinin ilk çalıştırması olarak `monitor` alanını `baselineDatasetId`
-  olmadan ayarlarsa.
 - Karşılaştırması değişen, yeni veya karşılaştırılamayan bir gönderi bulursa.
 - `alwaysSaveRunRecords` açıksa.
 
-Diğer çalıştırmalar bu kaydı atlar. Durumları en önemli cevabı söyler, örneğin
-`Top sentiment: negative in 2 of 5 results.` Değişiklik bulmayan bir
+Bir serinin ilk çalıştırması dahil diğer çalıştırmalar bu kaydı atlar. Durumları
+en sık verilen cevabı söyler, örneğin
+`Top sentiment is negative in 2 of 5 results.` Değişiklik bulmayan bir
 karşılaştırma `No change since the earlier run.` yazar. Sorunla karşılaşan veya
-büyük bir çalıştırma `run-report` da yazar. `alwaysSaveRunRecords` açık olan
-bir çalıştırma da yazar. `run-report` özeti `results.analysisSummary` altında
+büyük bir çalıştırma `run-report` da yazar. `alwaysSaveRunRecords` açık olan bir
+çalıştırma da yazar. `run-report` özeti `results.analysisSummary` altında
 tekrarlar.
 
-Özet analiz edilen, başarısız ve atlanan satırları sayar. Etkileşimi toplar ve
-her soruyu özetler.
+Özet analiz edilen, başarısız & atlanan satırları sayar. Etkileşimi toplar & her
+soruyu özetler.
 
-- `targets`, marka veya takma ad başına bahsetmeleri, ses payını ve etkileşimi
+- `targets`, marka veya takma ad başına bahsetmeleri, ses payını & etkileşimi
   bildirir.
-- Her `targets` kaydında `top` bulunur. Bu alan her cevap kategorisi için en
-  çok etkileşim alan 3 bahsetmeyi tutar. En güçlü olumsuz ve olumlu bahsetmeler
-  için uyarı kurmakta kullan.
+- Her `targets` kaydında `top` bulunur. Bu alan her cevap kategorisi için en çok
+  etkileşim alan 3 bahsetmeyi tutar. En güçlü olumsuz & olumlu bahsetmeler için
+  uyarı kurmakta kullan.
 - Her `targets` kaydında `choices` bulunur. Bu alan, o markadan bahseden
   gönderiler arasındaki cevap dağılımını verir.
-- `sentiment` bloğu, `top` altında en çok etkileşim alan 3 olumlu ve olumsuz
+- `sentiment` bloğu, `top` altında en çok etkileşim alan 3 olumlu & olumsuz
   bahsetmeyi listeler.
 - `relevance`, markayı konu alan bahsetmeleri sayar.
 - `monitor.changedRows`, temel veri kümesinden bu yana kararları değişen
@@ -235,139 +237,138 @@ her soruyu özetler.
   durumlarını sayar. En fazla 50 değişen satırı listeler.
 - Her satır, bağlantı verdiği alan adlarını `sourceDomains` içinde listeler.
 
-Özet sayıları 4 ondalık basamağa yuvarlar. Boş bir çalıştırma 0 sayılar ve
-`null` ortalamalar bildirir.
+Özet sayıları 4 ondalık basamağa yuvarlar. Boş bir çalıştırma 0 değerli sayılar
+& `null` ortalamalar bildirir.
 
 Her sonuç satırı ayrıca soru ID'sine göre anahtarlanmış düz bir eşlem olan
 `answers` alanını taşır. Her değer seçilen kategori, puan veya olasılıktır.
-`Flat answers` veri kümesi görünümü ve CSV ya da Excel dışa aktarımları her soru
+`Flat answers` veri kümesi görünümü & CSV ya da Excel dışa aktarımları her soru
 için 1 sütun gösterir. Sütunlar gönderinin yanında durur, bu yüzden tablolarda
-JSON ayrıştırmaya gerek kalmaz. Başarısız ve atlanan satırlarda eşlem boştur.
+JSON ayrıştırmaya gerek kalmaz. Başarısız & atlanan satırlarda eşlem boştur.
 
 ## Görev örnekleri
 
-50 herkese açık görevden birini seç. Her görev gerçek bir İngilizce aramayla ve
-sınırlı bir `maxItems` ile başlar. Hazır hedefler, bağlam ve genel bakış veri
+50 herkese açık görevden birini seç. Her görev gerçek bir İngilizce aramayla &
+sınırlı bir `maxItems` ile başlar. Hazır hedefler, bağlam & genel bakış veri
 kümesi görünümü içerir. Çalıştırmadan önce aramayı veya hedefleri düzenle.
 
-- [Monitor Nike brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-nike-brand-mentions-on-x)
-- [Monitor Starbucks brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-starbucks-brand-mentions-on-x)
-- [Monitor Tesla brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-tesla-brand-mentions-on-x)
-- [Monitor Spotify brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-spotify-brand-mentions-on-x)
-- [Monitor Netflix brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-netflix-brand-mentions-on-x)
-- [Monitor Airbnb brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-airbnb-brand-mentions-on-x)
-- [Monitor Uber brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-uber-brand-mentions-on-x)
-- [Monitor Peloton brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-peloton-brand-mentions-on-x)
-- [Monitor Shopify brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-shopify-brand-mentions-on-x)
-- [Monitor Notion brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-notion-brand-mentions-on-x)
-- [Monitor Duolingo brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-duolingo-brand-mentions-on-x)
-- [Monitor Lululemon brand mentions on X](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-lululemon-brand-mentions-on-x)
+- [X'te Nike marka bahsetmelerini izle](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-nike-brand-mentions-on-x)
+- [X'te Starbucks marka bahsetmelerini izle](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-starbucks-brand-mentions-on-x)
+- [X'te Tesla marka bahsetmelerini izle](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-tesla-brand-mentions-on-x)
+- [X'te Spotify marka bahsetmelerini izle](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-spotify-brand-mentions-on-x)
+- [X'te Netflix marka bahsetmelerini izle](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-netflix-brand-mentions-on-x)
+- [X'te Airbnb marka bahsetmelerini izle](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-airbnb-brand-mentions-on-x)
+- [X'te Uber marka bahsetmelerini izle](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-uber-brand-mentions-on-x)
+- [X'te Peloton marka bahsetmelerini izle](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-peloton-brand-mentions-on-x)
+- [X'te Shopify marka bahsetmelerini izle](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-shopify-brand-mentions-on-x)
+- [X'te Notion marka bahsetmelerini izle](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-notion-brand-mentions-on-x)
+- [X'te Duolingo marka bahsetmelerini izle](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-duolingo-brand-mentions-on-x)
+- [X'te Lululemon marka bahsetmelerini izle](https://apify.com/xquik/x-twitter-brand-monitoring/examples/monitor-lululemon-brand-mentions-on-x)
 
-Kalan görevler Actor sayfasında daha çok markayı, konuyu ve pazarı kapsar.
+Kalan görevler Actor sayfasında daha çok markayı, konuyu & pazarı kapsar.
 
 ## İlgili Xquik Actor'ları
 
-Her Xquik Actor'ı aynı veri çekme motorunu, önce filtreleyen faturalandırmayı ve
+Her Xquik Actor'ı aynı veri çekme motorunu, önce filtreleyen faturalandırmayı &
 tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) aramalardan, profil
-  zaman akışlarından, Listelerden ve gönderi ID'lerinden 50'den fazla filtre ve
-  düz dışa aktarımla gönderi kazır. Analiz değil, yalnızca gönderi verisi
-  gerektiğinde kullan. Satır başına $0.00015'ten başlar.
+  zaman akışlarından, Listelerden & gönderi ID'lerinden 50'den fazla filtre &
+  düz dışa aktarımla gönderi kazır. Analiz olmadan gönderi verisi gerektiğinde
+  kullan. Satır başına $0.00015'ten başlar.
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) kullanıcı adı,
-  ID veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını ve
+  ID veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını &
   takipçilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
   başına $0.00015'ten başlar.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) 25'ten fazla
-  filtreyle gönderilerin altındaki yanıtları, yorumları ve tüm konuşmaları
-  kazır. Gönderilerin altındaki tartışmaya ihtiyacın olduğunda kullan. Satır
-  başına $0.00015'ten başlar.
+  filtreyle gönderilerin altındaki yanıtları, yorumları & tüm konuşmaları kazır.
+  Gönderilerin altındaki tartışmaya ihtiyacın olduğunda kullan. Satır başına
+  $0.00015'ten başlar.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) gönderi
   URL'leri veya ID'leri için toplu olarak yanıtları, alıntıları, yeniden
-  gönderenleri ve gönderi dizilerini kazır. Gönderilerle kimin etkileşime
+  gönderenleri & gönderi dizilerini kazır. Gönderilerle kimin etkileşime
   girdiğini ölçtüğünde kullan. Satır başına $0.00015'ten başlar.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
-  gönderileri alıntılayan gönderileri metin, medya, sayılar, yazarlar ve 11
-  filtreyle kazır. Gönderileri kimin alıntıladığını ve ne dediğini incelemek
-  istediğinde kullan. Gönderi başına $0.00015'ten başlar.
+  gönderileri alıntılayan gönderileri metin, medya, sayılar, yazarlar & 11
+  filtreyle kazır. Gönderileri kimin alıntıladığını & ne dediğini incelediğinde
+  kullan. Gönderi başına $0.00015'ten başlar.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) takipçileri,
-  takip edilenleri, Liste üyelerini, aboneleri ve Topluluk üyelerini profil
+  takip edilenleri, Liste üyelerini, aboneleri & Topluluk üyelerini profil
   satırları olarak kazır. Kitle veya üye listelerine ihtiyacın olduğunda kullan.
   Profil başına $0.00015'ten başlar.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)
-  kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay işareti,
-  hesap yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri
-  oluşturduğunda kullan. Profil başına $0.00015'ten başlar.
+  kullanıcı adı, biyografi & konuma göre kullanıcıları takipçi, onay işareti,
+  hesap yaşı & konum filtreleriyle arar. Aramadan hesap listeleri oluşturduğunda
+  kullan. Profil başına $0.00015'ten başlar.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
-  X'in "Account based in" etiketi, X'e nasıl bağlandıkları ve kullanıcı adı
+  X'in "Account based in" etiketi, X'e nasıl bağlandıkları & kullanıcı adı
   değişiklikleriyle hesapların nerede bulunduğunu kontrol eder. Hesapların
-  nerede bulunduğunu doğrulaman gerektiğinde kullan. Hesap başına $0.00015'ten
-  başlar.
+  nerede bulunduğunu doğruladığında kullan. Hesap başına $0.00015'ten başlar.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) kullanıcı
   adlarından, takipçilerden veya kullanıcı aramalarından, hesapların
-  profillerinde yayımladığı e-postaları, telefonları ve bağlantıları alır.
+  profillerinde yayımladığı e-postaları, telefonları & bağlantıları alır.
   Profillerin yayımladığı e-postalara ihtiyacın olduğunda kullan. Profil başına
   $0.00015'ten başlar.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper) Liste URL'lerinden
-  veya ID'lerinden Liste gönderilerini, üyelerini ve takipçilerini kazır.
+  veya ID'lerinden Liste gönderilerini, üyelerini & takipçilerini kazır.
   Kaynaklarını özenle seçilmiş bir Liste belirlediğinde kullan. Satır başına
   $0.00015'ten başlar.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper) Topluluk
-  bilgilerini, gönderilerini, aramalarını, üyelerini ve moderatörlerini kazır.
+  bilgilerini, gönderilerini, aramalarını, üyelerini & moderatörlerini kazır.
   Kaynakların X Toplulukları olduğunda kullan. Satır başına $0.00015'ten başlar.
 - [X Space Scraper](https://apify.com/xquik/x-space-scraper) Sohbet Odalarını
-  anahtar kelimeyle bulur ve başlıklarını, durumlarını, zamanlarını, dinleyici
-  sayılarını, sunucularını ve konuşmacılarını okur. Yayınları da URL veya ID ile
-  okur. X'teki canlı ses ve video yayınlarını takip ettiğinde kullan. Sohbet
+  anahtar kelimeyle bulur & başlıklarını, durumlarını, zamanlarını, dinleyici
+  sayılarını, sunucularını & konuşmacılarını okur. Yayınları da URL veya ID ile
+  okur. X'teki canlı ses & video yayınlarını takip ettiğinde kullan. Sohbet
   Odası veya yayın başına $0.00015'ten başlar.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) sıralama, hacim,
-  sorgu ve WOEID ile konuma göre gerçek zamanlı gündemi kazır. Nerede neyin
+  sorgu & WOEID ile konuma göre gerçek zamanlı gündemi kazır. Nerede neyin
   gündemde olduğunu takip ettiğinde kullan. Gündem başlığı başına $0.00015'ten
   başlar.
 - [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) X iş ilanlarını
-  anahtar kelime, yer, çalışma şekli, kıdem ve şirkete göre maaş ve başvuru
+  anahtar kelime, yer, çalışma şekli, kıdem & şirkete göre, maaş & başvuru
   bağlantılarıyla kazır. X'te yayımlanan iş ilanlarını topladığında kullan. İlan
   başına $0.00015'ten başlar.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper) uzun biçimli X
-  Makalelerini kapak, yazar, tarih ve metriklerle Markdown ve metin olarak
-  kazır. Gönderi değil, makale gövdesi gerektiğinde kullan. Makale başına
-  $0.00015'ten başlar.
+  Makalelerini kapak, yazar, tarih & metriklerle Markdown & metin olarak kazır.
+  Gönderi değil, makale gövdesi gerektiğinde kullan. Makale başına $0.00015'ten
+  başlar.
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader) gönderilerden
-  veya profillerden fotoğrafları, videoları ve GIF'leri MP4 ve metadata
+  veya profillerden fotoğrafları, videoları & GIF'leri MP4 & metadata
   seçenekleriyle çıkarır veya depolar. Medya dosyalarının kendisine ihtiyacın
   olduğunda kullan. Medya satırı başına $0.00015'ten başlar.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
-  yapay zeka ile her gönderi için tutum, yoğunluk ve alaycılık olasılığını
+  yapay zeka ile her gönderi için tutum, yoğunluk & alaycılık olasılığını
   etiketler. Herhangi bir konuda genel duygu durumuna ihtiyacın olduğunda
   kullan. Analiz edilen gönderi başına $0.0003'ten başlar.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   yapay zeka ile yükseliş, düşüş, nötr veya karışık duruşu, içerik türünü,
-  kesinliği ve varlık ilgisini etiketler. Hisse senedi, kripto veya alım satım
+  kesinliği & varlık ilgisini etiketler. Hisse senedi, kripto veya alım satım
   konuşmalarını takip ettiğinde kullan. Analiz edilen gönderi başına $0.0003'ten
   başlar.
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
-  haber gönderilerini yapay zeka ile biçim, kaynak atfı ve konu ilgisine göre
+  haber gönderilerini yapay zeka ile biçim, kaynak atfı & konu ilgisine göre
   etiketler. Haberi yorumdan ayırdığında kullan. Analiz edilen gönderi başına
   $0.0003'ten başlar.
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
-  yapay zeka ile her gönderi için kendi kategori, puan ve evet/hayır sorularını
+  yapay zeka ile her gönderi için kendi kategori, puan & evet/hayır sorularını
   cevaplar. Hazır analizler etiketlerine uymadığında kullan. Analiz edilen
   gönderi başına $0.0003'ten başlar.
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
   yapay zekanın 8 özellik cevabından her gönderi için 0 ile 100 arasında bir
-  Viral Score ve bir karar tahmin eder. Gönderilerin neden yayıldığını veya
+  Viral Score & bir karar tahmin eder. Gönderilerin neden yayıldığını veya
   tutmadığını incelediğinde kullan. Analiz edilen gönderi başına $0.0003'ten
   başlar.
 
-## SSS ve destek
+## SSS & destek
 
 Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
 
 ### Yapay zeka hesabı, X API anahtarı veya giriş gerekir mi?
 
-Hayır. Xquik'in X (Twitter) Brand Monitoring'i yapay zeka maliyetlerini
-fiyatına katar. Yapay zeka hesabı, token veya anahtar gerekmez. X API anahtarı,
-giriş veya kimlik bilgisi de gerekmez.
+Hayır. Xquik'in X (Twitter) Brand Monitoring'i yapay zeka maliyetlerini fiyatına
+dahil eder. Yapay zeka hesabına, token'a veya anahtara ihtiyacın yok. X API
+anahtarına, girişe veya kimlik bilgisine de ihtiyacın yok.
 
 ### Kendi sorularımı kullanabilir miyim?
 
@@ -378,55 +379,57 @@ olmalı. Karşılaştırmak istediğin çalıştırmalarda aynı soruları kulla
 
 ### Bir satır neden başarısız veya atlanan bir analizle döndü?
 
-`analysis.status` değeri `failed` veya `skipped` olur. Actor gönderiyi topladı
-ve teslim etti, ama yapay zeka analizi tamamlanmadı. `analysis.reason` nedeni
-belirtir. `context_limit`, bağlamının ve hedeflerinin gönderiye yer bırakmadığı
+`analysis.status` değeri `failed` veya `skipped` olur. Actor gönderiyi topladı &
+teslim etti, ama yapay zeka analizi tamamlanmadı. `analysis.reason` nedeni
+belirtir. `context_limit`, bağlamının & hedeflerinin gönderiye yer bırakmadığı
 anlamına gelir. `service_unavailable`, analiz hizmetine kısa bir süre
 erişilemediği anlamına gelir. Bu satırların sonuç ücreti yok. `analysis.context`
 alanını kısalt ya da etkilenen ID'leri yeniden çalıştır.
 
-Actor, `maxContextBytes` değerinden uzun bir gönderiyi de analiz eder. Önce
-alıntılanan ve yanıtlanan gönderileri, sonra gönderinin kendisini kısaltır. Bu
+Actor, `maxContextBytes` değerinden uzun bir gönderiyi yine de analiz eder. Önce
+alıntılanan & yanıtlanan gönderileri, sonra gönderinin kendisini kısaltır. Bu
 durumda `analysis.contextAvailability.postText` değeri `truncated` olur. Daha
 çok metin tutmak için `maxContextBytes` değerini 64.000'e kadar yükselt.
 
 ### Analiz doğruluk kontrolü yapar mı?
 
-Hayır. Cevaplar, gönderinin ne ifade ettiğini ve bunu nasıl çerçevelediğini
+Hayır. Cevaplar, gönderinin ne ifade ettiğini & bunu nasıl çerçevelediğini
 anlatır. Olasılıklar yapay zekanın güvenini gösterir, doğruluğu değil. Önemli
-sınıflandırmaları her satırda duran orijinal gönderiyle karşılaştır.
+sınıflandırmaları, her satırda duran orijinal gönderiyle karşılaştır.
 
 ### Hangi diller çalışır?
 
 Veri çekme, X'in sunduğu her dili destekler. Analizi önce İngilizce müşteri
 senaryolarında doğruluyoruz. Desteklenen diğer diller aynı yapıda cevap
-döndürür. `unclear` kategorileri ve olasılıklar her dilde belirsizliği gösterir.
+döndürür. `unclear` kategorileri & olasılıklar her dilde belirsizliği gösterir.
 
 ### Maliyeti nasıl sınırlarım?
 
-Filtreler, tekilleştirme ve `maxItems` analizden önce çalışır. Yalnızca
-benzersiz ve filtrene uyan gönderiler için ödersin. Kesin arama operatörleri,
-tarih sınırları ve etkileşim alt sınırları kullan. Büyük bir çalıştırmadan önce
-cevap kalitesini görmek için küçük bir `maxItems` ile başla.
+Filtreler, tekilleştirme & `maxItems` analizden önce çalışır. Yalnızca benzersiz
+ve filtrene uyan gönderiler için ödersin. Kesin arama operatörleri, tarih
+sınırları & etkileşim alt sınırları kullan. Büyük bir çalıştırmadan önce cevap
+kalitesini görmek için küçük bir `maxItems` ile başla.
 
 ### X verisini analiz etmek yasal mı?
 
 Actor herkese açık X alanlarını çeker. Sonuçlarda kişisel veri olabilir.
-Amacının yasal olduğundan emin ol ve geçerli gizlilik kurallarına uy. Emin
+Amacının yasal olduğundan emin ol & geçerli gizlilik kurallarına uy. Emin
 değilsen yetkin bir hukukçuya danış.
 
-### API'yi, zamanlamaları ve entegrasyonları kullanabilir miyim?
+### API'yi, zamanlamaları & entegrasyonları kullanabilir miyim?
 
-Evet. Python, JavaScript ve cURL örnekleri için
+Evet. Python, JavaScript & cURL örnekleri için
 [API sekmesine](https://apify.com/xquik/x-twitter-brand-monitoring/api) bak.
 Düzenli çalıştırmalar için Apify
 [zamanlamalarını](https://docs.apify.com/platform/schedules) kullan. Neyin
 değiştiğini görmek için önceki veri kümesi ID'sini `monitor.baselineDatasetId`
-olarak gönder. Apify entegrasyonları çalıştırmaları webhook'lara, Make, Zapier,
-n8n ve Google Sheets'e de bağlar.
+olarak gönder. Apify entegrasyonları da çalıştırmaları webhook'lara, Make,
+Zapier, n8n & Google Sheets'e bağlar.
 
 ### Nereden yardım alırım?
 
-Actor sayfasında bir issue aç ya da çalıştırma ID'siyle support@xquik.com
-adresine yaz. Anahtar-değer deposundaki ücretsiz tanılamalar boş, kısmi veya
-kesilen çalıştırmaları açıklar.
+Çalıştırma ID'siyle
+[Issues sekmesinde](https://apify.com/xquik/x-twitter-brand-monitoring/issues)
+bir issue aç. Anahtar-değer deposundaki ücretsiz tanılamalar dikkat gerektiren
+çalıştırmaları açıklar. Hiç satır almayan bir çalıştırma, nedenini durum
+metninde söyler.

@@ -15,10 +15,9 @@
 ·
 [Italiano](README.it.md)
 
-[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
-
-[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
-Claude Code, Codex, Cursor & more, from 6:07.
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
+with Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X Tweet Scraper collects tweets, replies,
@@ -44,7 +43,7 @@ with 50+ filters.
 ### Key features
 
 - Filters & duplicate removal run before billing.
-- One input supports lookups, timelines, Lists, search & engagement modes.
+- 1 input supports lookups, timelines, Lists, search & engagement modes.
 - Tweet ID inputs have no fixed count cap. Your Apify spend & timeout settings
   still apply.
 - Run logs show page timing in `fetchDurationMs`, `processingDurationMs`,
@@ -148,8 +147,6 @@ free plan needs no credit card & gives $5 to spend each month. At $0.00015 per
 row, $5 pays for up to 33,000 rows before platform usage. Then come back here &
 press Try for free.
 
-Each example below is a complete input. Pick the one that fits your data.
-
 Follow these steps in Apify Console.
 
 1. Open a [task example](#task-examples) or the Input tab.
@@ -158,7 +155,8 @@ Follow these steps in Apify Console.
 4. Click Start & wait for the run to finish.
 5. Export the dataset as JSON, CSV, Excel or HTML.
 
-The recipes below show the input for each source.
+Each recipe below is a complete input for 1 source. Pick the one that fits your
+data.
 
 ### Paste URLs
 
@@ -195,7 +193,7 @@ dates or filters. Set `tweetTypes.excludeRetweets` to drop them.
 
 ### Search tweets
 
-Put one or more queries in the Search terms field.
+Put 1 or more queries in the Search terms field.
 
 ```json
 {
@@ -239,7 +237,7 @@ it adds about $0.000005. A run of fewer than 5 IDs ends with this tip.
 
 ### Engagement, thread & article modes
 
-Set `mode` to force one route, whatever other fields the input holds.
+Set `mode` to pick what the run reads, whatever other fields the input holds.
 
 ```json
 { "mode": "replies", "replyTweetIds": ["2082577277246972300"], "maxItems": 100 }
@@ -307,7 +305,7 @@ If X shows fewer replies than it reports, the Actor keeps the rows it found. It
 adds 1 `replies-incomplete` record to `diagnostics` when your limit is not
 reached. The run stays partial until it reaches your limit or X has no more
 replies. `replyCoverage` reports reply counts & coverage details. Set `maxItems`
-to the total you want, even above 25,000 for one reply target.
+to the total you want, even above 25,000 for 1 reply target.
 
 Article rows include `resultType: "article"`, `sourceTweetId`, `article` &
 optional `author`. Engagement user rows include `resultType: "user"`,
@@ -429,7 +427,7 @@ Combine user, date, location, media & engagement filters.
 }
 ```
 
-Set `queryType: "Latest + Top"` to run both X search modes in one run. The Actor
+Set `queryType: "Latest + Top"` to run both X search modes in 1 run. The Actor
 removes duplicates before billing & fills your limit from either mode. `Top`
 sorts by relevance & does not return every match. Set `includeSearchTerms: true`
 to attach each matching query as a `searchTerm` field.

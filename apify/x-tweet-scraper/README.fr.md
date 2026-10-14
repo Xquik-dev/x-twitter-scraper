@@ -1,165 +1,161 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <strong>Français</strong> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+[Deutsch](README.de.md) · **Français** · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer connecte Xquik MCP aux agents de codage"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Découvrez comment Framer utilise les scrapers Xquik avec Claude Code, Codex, Cursor et d'autres outils, à partir de 6:07.</a>
-</td></tr></table>
+[![Framer connecte Xquik MCP aux agents de codage](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Découvrez comment Framer utilise les scrapers Xquik](https://youtu.be/4UOSpoOoC3Y?t=367)
+avec Claude Code, Codex, Cursor & d'autres outils, à partir de 6:07.
 
 Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
 monde. Ses données X sont les plus complètes. X Tweet Scraper de Xquik collecte
-les posts (tweets), les réponses, les profils, les Listes et les recherches avec
-plus de 50 filtres. Des benchmarks publics prouvent qu'il est le moins cher et
-le plus rapide de 12 Actors de posts. Ses lignes portent 2x plus de champs que
-celles de l'Actor médian, comme le montre le [benchmark ci-dessous](#benchmark).
-La plupart des autres Actors Apify facturent avant de filtrer ou de dédupliquer.
+les posts, les réponses, les profils, les Listes & les recherches avec plus de
+50 filtres. Des benchmarks publics prouvent qu'il est le moins cher & le plus
+rapide de 12 Actors de posts. Ses lignes portent 2x plus de champs que celles de
+l'Actor médian, comme le montre le [benchmark ci-dessous](#benchmark). La
+plupart des autres Actors Apify facturent avant de filtrer ou de dédupliquer.
 Xquik facture seulement les résultats livrés, uniques et conformes à vos
 filtres.
 
 Scrapez les tweets de Twitter **à partir de $0.00015 par résultat livré sur
 chaque plan Apify**, une alternative à l'API Twitter. Apify facture l'usage de
-la plateforme à part. Aucune connexion X n'est requise, et vous ne payez pas de
-frais de démarrage ni de requête. Conçu par [Xquik](https://xquik.com).
+la plateforme à part. Vous n'avez besoin d'aucune connexion X, & vous ne payez
+pas de frais de démarrage ni de requête. Conçu par Xquik.
 
-> Xquik est un service tiers indépendant. Non affilié à X Corp.
-> "Twitter" et "X" sont des marques déposées de X Corp.
+> Xquik est un service tiers indépendant. Non affilié à X Corp. "Twitter" et "X"
+> sont des marques déposées de X Corp.
 
 ## Que fait X Tweet Scraper ?
 
 X Tweet Scraper de Xquik renvoie les posts, les métriques d'engagement, les
-profils publics des auteurs et les médias. Il accepte des URL, des noms
-d'utilisateur, des ID de Liste, des ID de post et des requêtes de recherche,
-avec plus de 50 filtres.
+profils publics des auteurs & les médias. Il accepte des URL, des noms
+d'utilisateur, des ID de Liste, des ID de post & des requêtes de recherche, avec
+plus de 50 filtres.
 
 ### Fonctionnalités clés
 
-- Les filtres et la suppression des doublons passent avant la facturation.
-- Une seule entrée gère les consultations par ID, les fils, les Listes, la
-  recherche et les modes d'engagement.
-- Les entrées d'ID de post n'ont pas de plafond fixe. Vos réglages de dépense et
+- Les filtres & la suppression des doublons passent avant la facturation.
+- 1 seule entrée gère les consultations, les fils, les Listes, la recherche &
+  les modes d'engagement.
+- Les entrées d'ID de post n'ont pas de plafond fixe. Vos réglages de dépense &
   de timeout Apify s'appliquent toujours.
 - Les logs du run montrent la durée de chaque page dans `fetchDurationMs`,
-  `processingDurationMs`, `pushDurationMs`, `statusDurationMs` et
+  `processingDurationMs`, `pushDurationMs`, `statusDurationMs` &
   `fullPageDurationMs`.
-- Les runs gardent les lignes livrées et la progression quand Apify les
+- Les runs gardent les lignes livrées & la progression quand Apify les
   redémarre.
 
 ### Cas d'usage
 
-- Alimentez la recherche, l'enrichissement, l'analyse et l'entraînement d'IA
-  avec plus de champs par post. Le 2026-09-29, notre ligne riche médiane avait
-  63 champs. C'est 2x la médiane de 11 autres Actors.
+- Alimentez la recherche, l'enrichissement, l'analyse & l'entraînement d'IA avec
+  plus de champs par post. Notre ligne riche médiane avait 63 champs le
+  2026-09-29. C'est 2x la médiane de 11 autres Actors.
 - Suivez le sentiment envers une marque dans les posts.
-- Surveillez les posts des concurrents et les termes de votre secteur.
+- Surveillez les posts des concurrents & les termes de votre secteur.
 - Trouvez des prospects dans les conversations publiques.
 - Collectez des datasets publics pour la recherche.
 - Trouvez les posts à fort engagement public.
 
 ### Quelles données X Tweet Scraper peut-il extraire ?
 
-| Champ                  | Description                                                              |
-| ---------------------- | ------------------------------------------------------------------------ |
-| `id`                   | ID du post                                                               |
-| `text`                 | Texte complet du post (y compris les Note Tweets jusqu'à 25k caractères) |
-| `createdAt`            | Horodatage natif de X, en texte                                          |
-| `likeCount`            | Nombre de J'aime                                                         |
-| `retweetCount`         | Nombre de reposts                                                        |
-| `replyCount`           | Nombre de réponses                                                       |
-| `quoteCount`           | Nombre de citations                                                      |
-| `viewCount`            | Nombre de vues                                                           |
-| `bookmarkCount`        | Nombre de signets                                                        |
-| `lang`                 | Langue du post                                                           |
-| `url`                  | Lien direct vers le post                                                 |
-| `tweetUrl`             | Alias de l'URL du post en sortie plate                                   |
-| `twitterUrl`           | URL `twitter.com` en sortie plate                                        |
-| `author`               | Nom d'utilisateur, bio, site web et compteurs de l'auteur                |
-| `authorUsername`       | Nom d'utilisateur de l'auteur en sortie plate                            |
-| `authorFollowers`      | Nombre d'abonnés de l'auteur en sortie plate                             |
-| `authorUrl`            | Site web de l'auteur en sortie plate, quand il existe                    |
-| `authorDescription`    | Bio de l'auteur en sortie plate                                          |
-| `authorCoverPicture`   | URL de la bannière de l'auteur en sortie plate                           |
-| `authorPinnedTweetIds` | ID des posts épinglés de l'auteur en sortie plate                        |
-| `media`                | Images, vidéos et GIF joints                                             |
-| `mediaUrls`            | URL des médias en sortie plate                                           |
-| `imageUrls`            | URL des images en sortie plate                                           |
-| `videoUrls`            | URL des vidéos en sortie plate                                           |
-| `entities`             | Hashtags, URL, mentions et horodatages vidéo                             |
-| `displayTextRange`     | Plage de texte affichée par X, quand elle existe                         |
-| `contentDisclosure`    | Métadonnées de divulgation, quand elles existent                         |
-| `conversationControl`  | Règle de réponse et propriétaire public de la conversation               |
-| `reactionContext`      | Post et utilisateur publics visés par une réaction                       |
-| `limitedActions`       | Restrictions et invites d'interaction publiques                          |
-| `isLimitedReply`       | Indique si les réponses sont limitées                                    |
-| `isNoteTweet`          | Indique s'il s'agit d'un Note Tweet (post long)                          |
-| `isQuoteStatus`        | Indique si ce post en cite un autre                                      |
-| `isRetweet`            | Indique si cette ligne est un repost, avec l'original joint              |
-| `isPinned`             | Indique si l'auteur a épinglé ce post, en lignes plates                  |
-| `isReply`              | Indique si ce post est une réponse                                       |
-| `quoted_tweet`         | Objet du post cité (pour une citation)                                   |
-| `conversationId`       | ID de la discussion ou de la conversation                                |
-| `resultType`           | Type de ligne pour les lignes riches, d'engagement et de diagnostic      |
-| `sourceTweetId`        | ID du post source pour les modes Article et engagement                   |
-| `article`              | Données d'Article structurées en `mode: "article"`                       |
-| `translation`          | Traduction de X en `mode: "translation"`                                 |
-| `embed`                | HTML d'intégration et lien en `mode: "embed"`                            |
+| Champ                  | Description                                                        |
+| ---------------------- | ------------------------------------------------------------------ |
+| `id`                   | ID du post                                                         |
+| `text`                 | Texte complet, y compris les Note Tweets jusqu'à 25k caractères    |
+| `createdAt`            | Horodatage natif de X, en texte                                    |
+| `likeCount`            | Nombre de J'aime                                                   |
+| `retweetCount`         | Nombre de reposts                                                  |
+| `replyCount`           | Nombre de réponses                                                 |
+| `quoteCount`           | Nombre de citations                                                |
+| `viewCount`            | Nombre de vues                                                     |
+| `bookmarkCount`        | Nombre de signets                                                  |
+| `lang`                 | Langue du post                                                     |
+| `url`                  | Lien direct vers le post                                           |
+| `tweetUrl`             | Alias de l'URL du post en sortie plate                             |
+| `twitterUrl`           | URL `twitter.com` en sortie plate                                  |
+| `author`               | Nom d'utilisateur, bio, site web & compteurs de l'auteur           |
+| `authorUsername`       | Nom d'utilisateur de l'auteur en sortie plate                      |
+| `authorFollowers`      | Nombre d'abonnés de l'auteur en sortie plate                       |
+| `authorUrl`            | Site web de l'auteur en sortie plate, quand il existe              |
+| `authorDescription`    | Bio de l'auteur en sortie plate                                    |
+| `authorCoverPicture`   | URL de la bannière de l'auteur en sortie plate                     |
+| `authorPinnedTweetIds` | ID des posts épinglés de l'auteur en sortie plate                  |
+| `media`                | Images, vidéos, GIF joints                                         |
+| `mediaUrls`            | URL des médias en sortie plate                                     |
+| `imageUrls`            | URL des images en sortie plate                                     |
+| `videoUrls`            | URL des vidéos en sortie plate                                     |
+| `entities`             | Hashtags, URL, mentions et horodatages vidéo                       |
+| `displayTextRange`     | Plage de texte affichée par X, quand elle existe                   |
+| `contentDisclosure`    | Métadonnées de divulgation, quand elles existent                   |
+| `conversationControl`  | Règle de réponse et propriétaire public de la conversation         |
+| `reactionContext`      | Post et utilisateur publics visés par une réaction                 |
+| `subscriberBadge`      | Créateur dont une réponse affiche le badge Subscriber              |
+| `limitedActions`       | Restrictions et invites d'interaction publiques                    |
+| `isLimitedReply`       | Indique si les réponses sont limitées                              |
+| `isNoteTweet`          | Indique s'il s'agit d'un Note Tweet (post long)                    |
+| `isQuoteStatus`        | Indique si ce post en cite un autre                                |
+| `isRetweet`            | Indique si cette ligne est un repost, avec l'original joint        |
+| `isPinned`             | Indique si l'auteur a épinglé ce post, en lignes plates            |
+| `isReply`              | Indique si ce post est une réponse                                 |
+| `quoted_tweet`         | Objet du post cité (pour une citation)                             |
+| `conversationId`       | ID du fil ou de la conversation                                    |
+| `resultType`           | Type de ligne pour les lignes riches, d'engagement & de diagnostic |
+| `sourceTweetId`        | ID du post source pour les modes article et engagement             |
+| `article`              | Données d'article structurées en `mode: "article"`                 |
+| `translation`          | Traduction de X en `mode: "translation"`                           |
+| `embed`                | HTML d'intégration & lien en `mode: "embed"`                       |
 
 Les métadonnées de post optionnelles incluent `authorUnavailable`, `card`,
-`communityId`, `communityNote`, `edit`, `exclusiveContent`, `noteTweet` et
-`postCta`. `isTranslatable`, `place`, `possiblySensitive` et `viewState` gardent
-d'autres éléments de contexte public. `previousCounts` garde l'engagement
-d'avant la modification. `tombstone` garde les avis de visibilité.
-`unmentionedUserIds` liste les utilisateurs qui ont quitté la conversation.
-Consultez OpenAPI pour la liste exacte des champs.
+`cashtagAttachments`, `communityId`, `communityName`, `communityNote`, `edit`,
+`exclusiveContent`, `noteTweet` & `postCta`. `isTranslatable`, `place`,
+`possiblySensitive` & `viewState` gardent d'autres éléments de contexte public.
+`previousCounts` garde l'engagement d'avant la modification. `tombstone` garde
+les avis de visibilité. `unmentionedUserIds` liste les utilisateurs qui ont
+quitté la conversation. Consultez OpenAPI pour les champs exacts.
 
 Réglez `outputVariant: "rich"` pour obtenir le plus de données par ligne. Les
 lignes riches ajoutent à la fin `hasCommunityNotes`, `quotedTweetPermalink`,
-`unavailableAuthorId` et le `sourceUser` des médias. Les lignes Legacy restent
+`unavailableAuthorId` & le `sourceUser` des médias. Les lignes Legacy restent
 inchangées.
 
-Les objets `author` imbriqués portent les champs de profil publics. Ils couvrent
+Les objets `author` imbriqués portent des champs de profil publics. Ils couvrent
 l'identité, les compteurs, la certification, la disponibilité, les données
-professionnelles et les biographies de profil.
+professionnelles & les biographies de profil.
 
 Dans les lignes de repost, `isRetweet` vaut `true`. Leur `text` contient le post
 d'origine en entier. `retweeted_tweet` contient le post d'origine avec son
-auteur et ses compteurs.
+auteur & ses compteurs.
 
 Les lignes de post gardent aussi `type`, `source`, `inReplyToId`,
-`inReplyToUserId`, `inReplyToUsername` et `retweeted_tweet`. Les posts cités et
+`inReplyToUserId`, `inReplyToUsername` & `retweeted_tweet`. Les posts cités &
 repostés portent les mêmes champs à chaque niveau d'imbrication.
 
-Les médias portent la disponibilité, les dimensions, les tags et les variantes
-vidéo. Ils portent aussi les actions `watchNowUrl` et `visitSiteUrl`.
+Les médias portent la disponibilité, les dimensions, les tags & les variantes
+vidéo. Ils portent aussi les actions `watchNowUrl` & `visitSiteUrl`.
 
 Les lignes n'incluent jamais d'état propre au compte qui consulte. L'Actor
 retire les indicateurs d'abonnement, de blocage, de masquage, de signet, de
-J'aime, de repost, de droit de modification et autres indicateurs de ce type. La
+J'aime, de repost, de droit de modification & autres indicateurs de ce type. La
 sortie brute les retire aussi.
 
-## Comment utiliser X Tweet Scraper pour scraper des tweets ?
+## Comment utiliser X Tweet Scraper pour scraper des données de posts ?
 
-Chaque exemple ci-dessous est une entrée complète. Choisissez celui qui
-correspond à vos données.
+Vous débutez sur Apify ?
+[Créez d'abord un compte gratuit](https://console.apify.com/sign-up?fpr=xquik).
+Le plan gratuit ne demande aucune carte bancaire & donne $5 à dépenser chaque
+mois. À $0.00015 par ligne, $5 couvrent jusqu'à 33 000 lignes, hors usage de la
+plateforme. Revenez ensuite ici & cliquez sur Try for free.
 
 Suivez ces étapes dans Apify Console.
 
 1. Ouvrez un [exemple de tâche](#exemples-de-tâches) ou l'onglet Input.
 2. Ajoutez des URL, des noms d'utilisateur, des ID de post ou des termes de
    recherche.
-3. Réglez `maxItems` et les filtres utiles.
-4. Cliquez sur Start et attendez la fin du run.
+3. Réglez `maxItems` & les filtres utiles.
+4. Cliquez sur Start & attendez la fin du run.
 5. Exportez le dataset en JSON, CSV, Excel ou HTML.
 
-Les recettes ci-dessous montrent l'entrée de chaque source.
+Chaque recette ci-dessous est une entrée complète pour 1 source. Choisissez
+celle qui correspond à vos données.
 
 ### Coller des URL
 
@@ -178,7 +174,7 @@ Listes.
 }
 ```
 
-Les URL de posts renvoient ces posts, sans doublon et dans l'ordre de votre
+Les URL de posts renvoient ces posts, sans doublon & dans l'ordre de votre
 entrée. Les URL de profil renvoient les posts du compte. Les URL de recherche
 lancent leur requête. Les URL de Liste renvoient les posts de la Liste.
 `maxItems` plafonne les résultats sur toutes les URL collées.
@@ -193,12 +189,12 @@ Les noms d'utilisateur servent de raccourci pour de nombreuses recherches
 ```
 
 Chaque nom d'utilisateur renvoie les posts de ce compte. L'Actor retire les
-lignes en double avant la sortie et la facturation. Vous pouvez ajouter les noms
-d'utilisateur avec ou sans `@`. Les noms d'utilisateur et les URL de profil
+lignes en double avant la sortie & la facturation. Vous pouvez ajouter les noms
+d'utilisateur avec ou sans `@`. Les noms d'utilisateur & les URL de profil
 gardent les reposts, comme l'onglet Posts de X. Ils les gardent même avec des
 dates ou des filtres. Réglez `tweetTypes.excludeRetweets` pour les retirer.
 
-### Rechercher des tweets
+### Rechercher des posts
 
 Mettez 1 ou plusieurs requêtes dans le champ Search terms.
 
@@ -210,15 +206,15 @@ Mettez 1 ou plusieurs requêtes dans le champ Search terms.
 }
 ```
 
-Avec `mode` réglé sur `tweet` ou `tweets` et sans ID de post, les requêtes
+Avec `mode` réglé sur `tweet` ou `tweets` & sans ID de post, les requêtes
 passent en recherche. Des `searchTerms` valides ne renvoient alors jamais une
 consultation vide.
 
-Vous pouvez aussi récupérer l'historique d'un compte par plages de dates, par
+Vous pouvez aussi rattraper l'historique d'un compte par plages de dates, par
 exemple `from:elonmusk since:2026-01-01 until:2026-01-02`. Chaque terme garde sa
 propre attribution `searchTerm`. `maxItems` plafonne les résultats sur tous les
 termes de recherche. L'Actor vérifie chaque post renvoyé par rapport aux
-fenêtres `since:`, `until:` et en temps Unix. Les recherches filtrées continuent
+fenêtres `since:`, `until:` & en temps Unix. Les recherches filtrées continuent
 de lire jusqu'à trouver des résultats conformes ou jusqu'à ce que X n'ait plus
 de résultats.
 
@@ -232,29 +228,33 @@ laisse de côté les reposts. Ajoutez `include:nativeretweets` pour les garder, 
 { "tweetIds": ["20", "2082577277246972300"], "maxItems": 100 }
 ```
 
-Les résultats gardent l'ordre de votre entrée, retirent les doublons et
-incluent seulement les posts demandés. La consultation accepte aussi `tweetId`,
-`tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweetUrls` et `postUrls`.
+Les résultats gardent l'ordre de votre entrée, retirent les doublons & incluent
+seulement les posts demandés. La consultation accepte aussi `tweetId`,
+`tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweetUrls` & `postUrls`.
+
+Chaque entrée est un ID de post ou une URL de post. Le run ignore toute autre
+entrée sans frais & lit le reste. Son statut compte les entrées ignorées & son
+log les liste.
 
 Mettez tous vos ID dans 1 run. Chaque run paie à Apify le même coût de
 démarrage. Avec 1 ID par run, l'usage Apify ajoute environ $0.00008 à chaque
 post. Avec 188 ID dans 1 run, il ajoute environ $0.000005. Un run de moins de 5
 ID se termine par ce conseil.
 
-### Modes engagement, discussion et Article
+### Modes engagement, fil & article
 
-Réglez `mode` pour imposer un mode, quels que soient les autres champs de
-l'entrée.
+Réglez `mode` pour choisir ce que le run lit, quels que soient les autres champs
+de l'entrée.
 
 ```json
 { "mode": "replies", "replyTweetIds": ["2082577277246972300"], "maxItems": 100 }
 ```
 
-Les modes de post et de recherche sont `tweet`, `tweets` et `search`. Les modes
-de profil sont `profileTweets`, `profileReplies`, `profileMedia`, `profileLikes`
-et `profileMentions`. `listTweets` lit les posts d'une Liste, et `article` lit
-l'Article X contenu dans un post. Les modes pour un seul post sont `replies`,
-`quotes`, `thread`, `retweeters`, `favoriters`, `translation` et `embed`.
+Les modes de post & de recherche sont `tweet`, `tweets` & `search`. Les modes de
+profil sont `profileTweets`, `profileReplies`, `profileMedia`, `profileLikes` &
+`profileMentions`. `listTweets` lit les posts d'une Liste, & `article` lit
+l'article X contenu dans un post. Les modes pour un seul post sont `replies`,
+`quotes`, `thread`, `retweeters`, `favoriters`, `translation` & `embed`.
 
 `profileMentions` renvoie les posts qui mentionnent chaque nom d'utilisateur, du
 plus récent au plus ancien.
@@ -264,7 +264,7 @@ plus récent au plus ancien.
 ```
 
 `profileTweets` suit l'onglet Posts du profil sur X. Il renvoie les posts du
-compte, ses reposts et ses réponses à ses propres posts. Les lignes arrivent par
+compte, ses reposts & ses réponses à ses propres posts. Les lignes arrivent par
 ordre de date. L'Actor retire les réponses à d'autres comptes avant la
 facturation. Il retire aussi le contexte de conversation venant d'autres
 auteurs.
@@ -281,35 +281,35 @@ pas.
 }
 ```
 
-`tweetTypes.excludeReplies`, `excludeRetweets` et `excludeQuotes` fonctionnent
+`tweetTypes.excludeReplies`, `excludeRetweets` & `excludeQuotes` fonctionnent
 sur chaque source. Une recherche les envoie à X sous la forme `-filter:replies`,
-`-filter:nativeretweets` et `-filter:quote`. Sur un profil ou une Liste, l'Actor
+`-filter:nativeretweets` & `-filter:quote`. Sur un profil ou une Liste, l'Actor
 retire lui-même ces lignes. Les lignes exclues n'atteignent jamais le dataset,
 donc vous ne les payez jamais. Elles ne comptent jamais non plus dans
 `maxItems`.
 
-`profileReplies` suit l'onglet Réponses de X. Il renvoie les posts et les
+`profileReplies` suit l'onglet Réponses de X. Il renvoie les posts & les
 réponses du compte lui-même. L'Actor exclut le contexte de conversation venant
 d'autres auteurs. Utilisez `filter:replies` ou une recherche `to:` pour avoir
 seulement des réponses.
 
-La recherche et les modes de post paginés acceptent `time.since`, `time.until`,
-les horodatages Unix et `lang`. Ces modes incluent les onglets Posts, Réponses,
-Médias et J'aime du profil, les Listes, les réponses, les citations et les
-discussions. Les opérateurs de date plats équivalents fonctionnent aussi.
-L'Actor vérifie chaque ligne avant la facturation. La borne de date basse est
-incluse. La borne haute est exclue. Les filtres de date excluent les lignes sans
-date utilisable. Les filtres de langue excluent les langues absentes ou
-différentes. Les lignes filtrées n'entament jamais votre limite de résultats.
+La recherche & les modes de post paginés acceptent `time.since`, `time.until`,
+les horodatages Unix & `lang`. Ces modes couvrent les onglets Posts, Réponses,
+Médias et J'aime du profil, ainsi que les Listes, les réponses, les citations &
+les fils. Les opérateurs de date plats équivalents fonctionnent aussi. L'Actor
+vérifie chaque ligne avant la facturation. La borne de date basse est incluse.
+La borne haute est exclue. Les filtres de date excluent les lignes sans date
+utilisable. Les filtres de langue excluent les langues absentes ou différentes.
+Les lignes filtrées n'entament jamais votre limite de résultats.
 
-La même date pour `since` et `until` donne une fenêtre vide. Réglez `until` sur
+La même date pour `since` & `until` donne une fenêtre vide. Réglez `until` sur
 le jour suivant pour avoir 1 jour complet. Les runs de Liste avec une fenêtre de
 dates atteignent vite les jours plus anciens. Ils s'arrêtent dès qu'ils
 dépassent votre borne basse. Une fenêtre très ancienne dans une Liste peut
 manquer quelques réponses. Les filtres de post ne s'appliquent pas aux listes
-d'utilisateurs ni aux consultations directes de post ou d'Article.
+d'utilisateurs ni aux consultations directes de post ou d'article.
 
-`time.withinTime` et `within_time` fonctionnent dans les mêmes modes. La valeur
+`time.withinTime` & `within_time` fonctionnent dans les mêmes modes. La valeur
 `7d` garde les 7 derniers jours avant que le run commence à lire. Une fenêtre
 qui remonte avant 2006 garde tous les posts.
 
@@ -319,24 +319,23 @@ jamais comme des réponses directes. Si X affiche moins de réponses qu'il n'en
 annonce, l'Actor garde les lignes trouvées. Il ajoute 1 enregistrement
 `replies-incomplete` dans `diagnostics` quand votre limite n'est pas atteinte.
 Le run reste partiel jusqu'à atteindre votre limite ou jusqu'à ce que X n'ait
-plus de réponses. `replyCoverage` donne les compteurs de réponses et les détails
+plus de réponses. `replyCoverage` donne les compteurs de réponses & les détails
 de couverture. Réglez `maxItems` sur le total voulu, même au-delà de 25 000 pour
-une seule cible de réponses.
+1 cible de réponses.
 
-Les lignes d'Article incluent `resultType: "article"`, `sourceTweetId`,
-`article` et un `author` optionnel. Les lignes d'utilisateurs en mode engagement
-incluent `resultType: "user"`, `sourceTweetId` et `engagementMode`.
+Les lignes d'article incluent `resultType: "article"`, `sourceTweetId`,
+`article` & un `author` optionnel. Les lignes d'utilisateurs en mode engagement
+incluent `resultType: "user"`, `sourceTweetId` & `engagementMode`.
 
-Le mode `retweeters` fonctionne comme un mode d'engagement public normal. Le
-mode `favoriters` est fourni sans garantie. X peut montrer les comptes qui ont
-aimé seulement sur les posts éligibles ou visibles par leur auteur. Les J'aime
-d'un profil sont aussi fournis sans garantie, car beaucoup de profils publics
-n'ont pas d'onglet J'aime lisible. Si X ne montre ni utilisateurs ni posts
-aimés, l'Actor écrit un enregistrement `diagnostics` gratuit. Les lignes de post
-peuvent porter le nombre de signets. X ne montre pas quels comptes ont ajouté un
-post à leurs signets.
+Le mode retweeters fonctionne comme un mode d'engagement public normal. Le mode
+favoriters est fourni sans garantie. X peut montrer les comptes qui ont aimé
+seulement sur les posts éligibles ou visibles par leur auteur. Les J'aime d'un
+profil sont aussi fournis sans garantie, car beaucoup de profils publics n'ont
+pas d'onglet J'aime lisible. Si X ne montre ni utilisateurs ni posts aimés, le
+statut du run l'indique. Les lignes de post peuvent porter le nombre de signets.
+X ne montre pas quels comptes ont ajouté un post à leurs signets.
 
-### Traduire des posts et obtenir le HTML d'intégration
+### Traduire des posts & obtenir le HTML d'intégration
 
 `mode: "translation"` renvoie la traduction par X de chaque post. Réglez
 `translateTo` sur un code de langue comme `en`, `es`, `pt-br` ou `zh-tw`. La
@@ -350,8 +349,8 @@ valeur par défaut est `en`.
 }
 ```
 
-Chaque ligne a `resultType: "translation"`, `sourceTweetId` et `translation`.
-Cet objet contient `language`, `sourceLanguage`, `text` et `entities`.
+Chaque ligne a `resultType: "translation"`, `sourceTweetId` & `translation`. Cet
+objet contient `language`, `sourceLanguage`, `text` & `entities`.
 
 `mode: "embed"` renvoie le HTML qui intègre chaque post sur un site web.
 
@@ -359,14 +358,36 @@ Cet objet contient `language`, `sourceLanguage`, `text` et `entities`.
 { "mode": "embed", "tweetIds": ["2082577277246972300"], "embedTheme": "dark" }
 ```
 
-Chaque ligne a `resultType: "embed"`, `sourceTweetId` et `embed`. Cet objet
-contient `url`, `authorName`, `authorUrl`, `html` et `width`. `embedHideMedia`,
-`embedHideThread` et `embedOmitScript` retirent les médias, le post auquel il
-répond ou le script du widget.
+Chaque ligne a `resultType: "embed"`, `sourceTweetId` & `embed`. Cet objet
+contient `url`, `authorName`, `authorUrl`, `html` & `width`. `embedHideMedia`,
+`embedHideThread` & `embedOmitScript` retirent les médias, le post parent ou le
+script du widget.
 
-Les deux modes lisent les ID de post et les URL de post dans `startUrls`. Chaque
+Les 2 modes lisent les ID de post & les URL de post dans `startUrls`. Chaque
 post donne 1 ligne au prix habituel par ligne. Un post que X n'a pas ne donne
-aucune ligne et aucun frais.
+aucune ligne & ne coûte rien.
+
+### Obtenir les meilleurs posts de X
+
+`mode: "topTweets"` renvoie les posts que X classe le plus haut selon 1
+métrique, tels que la page Inspiration de X les montre.
+
+```json
+{
+  "mode": "topTweets",
+  "topMetric": "views",
+  "topWindow": "week",
+  "topCountry": "US",
+  "maxItems": 100
+}
+```
+
+`topMetric` vaut `likes`, `replies`, `quotes`, `bookmarks`, `shares` ou `views`.
+La valeur par défaut est `likes`. `topWindow` vaut `day`, `week` ou `month`, &
+vaut `day` par défaut. X liste jusqu'à 100 posts pour chaque choix. Laissez
+`topCountry` vide pour tout X, ou réglez `lang` pour 1 langue. Si les 2 sont
+réglés, X choisit le pays & l'Actor garde la langue. Chaque ligne a
+`engagementMode: "topTweets"` & coûte 1 résultat, comme tout post.
 
 ### Exporter des lignes CSV plates
 
@@ -377,17 +398,17 @@ aux tableurs.
 { "searchTerms": ["from:nasa moon"], "maxItems": 100, "outputPreset": "flat" }
 ```
 
-La sortie plate garde `author` et `media` intacts. Elle ajoute des champs de
+La sortie plate garde `author` & `media` intacts. Elle ajoute des champs de
 premier niveau comme `authorUsername`, `authorName`, `authorFollowers`,
-`tweetUrl`, `twitterUrl`, `mediaUrls`, `imageUrls` et `videoUrls`.
+`tweetUrl`, `twitterUrl`, `mediaUrls`, `imageUrls` & `videoUrls`.
 
 Chaque ligne de post plate porte `media`. Un post sans médias a une liste vide.
 Chaque ligne a donc les mêmes clés dans un tableur ou un pipeline typé.
 
 ### Choisir les noms de champs
 
-Les noms de champs historiques sont le défaut. Choisissez un style pour les
-résultats `rich` ou `raw`.
+Les noms de champs Legacy sont le défaut. Choisissez un style pour les résultats
+riches ou bruts.
 
 ```json
 {
@@ -398,24 +419,24 @@ résultats `rich` ou `raw`.
 }
 ```
 
-Utilisez `camelCase` ou `snake_case` pour les champs de premier niveau et les
-champs imbriqués. La sortie plate en snake case inclut des champs comme
-`author_username` et `media_urls`. Les instantanés sûrs de la source sous `raw`
-gardent leurs clés d'origine. Les noms source en conflit restent aussi inchangés
-pour éviter toute perte de données.
+Utilisez `camelCase` ou `snake_case` pour les champs de résultat de premier
+niveau & imbriqués. La sortie plate en snake case inclut des champs comme
+`author_username` & `media_urls`. Les instantanés sûrs de la source sous `raw`
+gardent leurs clés source d'origine. Les noms source en conflit restent aussi
+inchangés pour éviter toute perte de données.
 
-Les diagnostics historiques utilisent `resultType`, `actorVersion` et
-`replyCoverage`. Les sorties `rich` et `raw` appliquent `fieldStyle` à chaque
-niveau d'imbrication. Par exemple, le snake case utilise `result_type`,
-`actor_version` et `reply_coverage`. La vue de dataset Overview fonctionne avec
-les 2 styles. Choisissez la vue de la Console qui correspond au `fieldStyle` du
-run. `camelCase fields` attend `camelCase`. `snake_case fields` attend
-`snake_case`. Les vues choisissent seulement les colonnes. Elles ne renomment
-jamais les données stockées ou exportées.
+Les diagnostics Legacy utilisent `resultType`, `actorVersion` & `replyCoverage`.
+Les sorties riche & brute appliquent `fieldStyle` à chaque niveau d'imbrication.
+Par exemple, le snake case utilise `result_type`, `actor_version` &
+`reply_coverage`. La vue de dataset Overview fonctionne avec les 2 styles.
+Choisissez la vue de la Console qui correspond au `fieldStyle` du run.
+`camelCase fields` attend `camelCase`. `snake_case fields` attend `snake_case`.
+Les vues choisissent seulement les colonnes. Elles ne renomment jamais les
+données stockées ou exportées.
 
 ### Combiner des filtres avancés
 
-Combinez des filtres d'utilisateur, de date, de lieu, de médias et d'engagement.
+Combinez des filtres d'utilisateur, de date, de lieu, de médias & d'engagement.
 
 ```json
 {
@@ -431,33 +452,33 @@ Combinez des filtres d'utilisateur, de date, de lieu, de médias et d'engagement
 ```
 
 Réglez `queryType: "Latest + Top"` pour lancer les 2 modes de recherche X dans 1
-run. L'Actor retire les doublons avant la facturation et remplit votre limite à
-partir des 2 modes. `Top` trie par pertinence et ne renvoie pas tous les
+run. L'Actor retire les doublons avant la facturation & remplit votre limite à
+partir des 2 modes. `Top` trie par pertinence & ne renvoie pas tous les
 résultats. Réglez `includeSearchTerms: true` pour joindre chaque requête
 correspondante dans un champ `searchTerm`.
 
 Quand vous réglez `lang`, l'Actor vérifie la langue de chaque post renvoyé. Il
-ignore les posts dans une autre langue et continue de lire pour trouver des
-posts conformes.
+ignore les posts dans une autre langue & continue de lire pour trouver des posts
+conformes.
 
 ## Exemples de tâches
 
-Choisissez parmi 50 tâches publiques. Chacune a une entrée limitée et une vue de
+Choisissez parmi 50 tâches publiques. Chacune a une entrée limitée & une vue de
 dataset adaptée. Chaque tâche s'ouvre sur une vraie recherche ou une vraie
 cible. Modifiez-la avant de la lancer.
 
-- [Fetch fresh X posts for AI agents](https://apify.com/xquik/x-tweet-scraper/examples/search-x-posts-for-ai-agents)
-- [Build an X dataset for RAG](https://apify.com/xquik/x-tweet-scraper/examples/build-x-rag-dataset)
-- [Extract an X article for RAG](https://apify.com/xquik/x-tweet-scraper/examples/extract-x-article-for-rag)
-- [Monitor AI search visibility on X](https://apify.com/xquik/x-tweet-scraper/examples/monitor-ai-search-visibility-on-x)
-- [Search Twitter by date](https://apify.com/xquik/x-tweet-scraper/examples/search-twitter-by-date)
-- [Discover AI agent tools on X](https://apify.com/xquik/x-tweet-scraper/examples/discover-ai-agent-tools-on-x)
-- [Collect AI product feedback](https://apify.com/xquik/x-tweet-scraper/examples/collect-ai-product-feedback)
-- [Monitor brand mentions on X](https://apify.com/xquik/x-tweet-scraper/examples/monitor-brand-mentions-on-x)
-- [Export Twitter data to CSV](https://apify.com/xquik/x-tweet-scraper/examples/export-twitter-data-to-csv)
-- [Collect replies to an OpenAI post](https://apify.com/xquik/x-tweet-scraper/examples/collect-replies-to-an-openai-post)
-- [Extract a complete Twitter thread](https://apify.com/xquik/x-tweet-scraper/examples/extract-complete-twitter-thread)
-- [Collect electric vehicle conversations](https://apify.com/xquik/x-tweet-scraper/examples/collect-electric-vehicle-conversations)
+- [Obtenez des posts X récents pour des agents IA](https://apify.com/xquik/x-tweet-scraper/examples/search-x-posts-for-ai-agents)
+- [Créez un dataset X pour le RAG](https://apify.com/xquik/x-tweet-scraper/examples/build-x-rag-dataset)
+- [Extrayez un article X pour le RAG](https://apify.com/xquik/x-tweet-scraper/examples/extract-x-article-for-rag)
+- [Suivez votre visibilité dans la recherche IA sur X](https://apify.com/xquik/x-tweet-scraper/examples/monitor-ai-search-visibility-on-x)
+- [Recherchez sur Twitter par date](https://apify.com/xquik/x-tweet-scraper/examples/search-twitter-by-date)
+- [Découvrez des outils d'agents IA sur X](https://apify.com/xquik/x-tweet-scraper/examples/discover-ai-agent-tools-on-x)
+- [Collectez des retours sur des produits d'IA](https://apify.com/xquik/x-tweet-scraper/examples/collect-ai-product-feedback)
+- [Surveillez les mentions de marque sur X](https://apify.com/xquik/x-tweet-scraper/examples/monitor-brand-mentions-on-x)
+- [Exportez des données Twitter en CSV](https://apify.com/xquik/x-tweet-scraper/examples/export-twitter-data-to-csv)
+- [Collectez les réponses à un post d'OpenAI](https://apify.com/xquik/x-tweet-scraper/examples/collect-replies-to-an-openai-post)
+- [Extrayez un fil Twitter complet](https://apify.com/xquik/x-tweet-scraper/examples/extract-complete-twitter-thread)
+- [Collectez des conversations sur les véhicules électriques](https://apify.com/xquik/x-tweet-scraper/examples/collect-electric-vehicle-conversations)
 
 ## Combien coûte le scraping de tweets ?
 
@@ -466,162 +487,178 @@ Apify facture votre usage de la plateforme à part. Xquik facture une fois par
 ligne de données livrée. Les diagnostics sont gratuits dans la sortie
 `diagnostics`.
 
+Pour plus de volume,
+[choisissez un plan Apify](https://apify.com/pricing?fpr=xquik) avec plus
+d'usage prépayé.
+
 - Vous n'avez besoin d'aucun abonnement Xquik.
-- Vous ne payez pas de frais de démarrage ni de requête. Les URL et les
-  consultations d'un seul post ne coûtent rien de plus.
-- Les filtres et la déduplication passent avant la facturation. Vous ne payez
+- Vous ne payez pas de frais séparés de démarrage ni de requête. Les URL & les
+  consultations d'un seul post n'ajoutent pas de frais non plus.
+- Les filtres & la déduplication passent avant la facturation. Vous ne payez
   jamais les lignes filtrées ou en double.
-- Les runs sans entrée, avec une entrée invalide ou sans sortie écrivent 1
-  enregistrement exploitable dans la sortie gratuite `diagnostics`.
+- Les runs sans entrée & ceux avec une entrée invalide écrivent 1 enregistrement
+  exploitable dans la sortie gratuite `diagnostics`. C'est aussi le cas des runs
+  qui s'arrêtent tôt, qui ignorent une cible, ou dont les propres filtres
+  retirent toutes les lignes, comme `lang` sur la lecture d'un profil.
+- Un run qui lit chaque cible sans récupérer aucune ligne n'écrit aucun
+  enregistrement. Son statut indique pourquoi & ce qu'il faut changer. Les
+  lignes que vos opérateurs de recherche excluent, comme `-is:retweet`,
+  n'écrivent pas non plus d'enregistrement.
 
 Un run qui rencontre un problème, ou un gros run, écrit aussi un enregistrement
 `run-report`. Son `estimatedChargeUsd` utilise le prix pay-per-event en vigueur
 chez Apify. Les runs qui rencontrent un problème écrivent toujours `run-report`,
 y compris les sorties sans entrée ou avec une entrée invalide. Un petit run sans
-problème ne l'écrit pas et réduit l'usage Apify. Activez `alwaysSaveRunRecords`
+problème ne l'écrit pas & réduit l'usage Apify. Activez `alwaysSaveRunRecords`
 pour l'écrire à chaque run. Les rapports de run séparent les lignes de données
 dans `realRows` des diagnostics dans `diagnosticRows`.
 
-Pour plafonner ce qu'un run peut dépenser, voir les
+Pour plafonner ce qu'un run peut dépenser, consultez les
 [options de run](#options-de-run).
 
 ## Benchmark
 
-X Tweet Scraper de Xquik a battu 11 autres Actors de posts sur le coût et la
+X Tweet Scraper de Xquik a battu 11 autres Actors de posts sur le coût & la
 vitesse. Sa ligne médiane avait 63 champs, soit 2x la médiane des autres.
 
 - `xquik/x-tweet-scraper` a livré 890 tweets utiles à $0.000175 par tweet utile,
-  avec 39,2 par seconde et 63 champs par ligne.
+  avec 39,2 par seconde & 63 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
 - `xquik/x-tweet-scraper` a livré 883 tweets utiles à $0.000176 par tweet utile,
-  avec 25,2 par seconde et 63 champs par ligne.
+  avec 25,2 par seconde & 63 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
 - `xquik/x-tweet-scraper` a livré 882 tweets utiles à $0.000177 par tweet utile,
-  avec 25,7 par seconde et 63 champs par ligne.
+  avec 25,7 par seconde & 63 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
 - `xquik/x-tweet-scraper` a livré 877 tweets utiles à $0.000178 par tweet utile,
-  avec 26,9 par seconde et 63 champs par ligne.
+  avec 26,9 par seconde & 63 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` a livré 813 tweets
-  utiles à $0.000185 par tweet utile, avec 10,5 par seconde et 36 champs par
+  utiles à $0.000185 par tweet utile, avec 10,5 par seconde & 36 champs par
   ligne. [Voir le run](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` a livré 805 tweets
-  utiles à $0.000187 par tweet utile, avec 10,6 par seconde et 36 champs par
+  utiles à $0.000187 par tweet utile, avec 10,6 par seconde & 36 champs par
   ligne. [Voir le run](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` a livré 805 tweets
-  utiles à $0.000187 par tweet utile, avec 10,7 par seconde et 36 champs par
+  utiles à $0.000187 par tweet utile, avec 10,7 par seconde & 36 champs par
   ligne. [Voir le run](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
 - `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` a livré
-  880 tweets utiles à $0.000250 par tweet utile, avec 9,1 par seconde et 46
+  880 tweets utiles à $0.000250 par tweet utile, avec 9,1 par seconde & 46
   champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
 - `scraper_one/x-posts-search` a livré 804 tweets utiles à $0.000314 par tweet
-  utile, avec 3,3 par seconde et 14 champs par ligne.
+  utile, avec 3,3 par seconde & 14 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
 - `danek/twitter-scraper` a livré 807 tweets utiles à $0.000347 par tweet utile,
-  avec 5,0 par seconde et 27 champs par ligne.
+  avec 5,0 par seconde & 27 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
 - `tweetapi/twitter-x-search-scraper` a livré 337 tweets utiles à $0.000374 par
-  tweet utile, avec 2,6 par seconde et 28 champs par ligne.
+  tweet utile, avec 2,6 par seconde & 28 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
 - `api-ninja/x-twitter-advanced-search` a livré 837 tweets utiles à $0.000430
-  par tweet utile, avec 7,4 par seconde et 28 champs par ligne.
+  par tweet utile, avec 7,4 par seconde & 28 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
 - `apidojo/twitter-scraper-lite` a livré 251 tweets utiles à $0.000494 par tweet
-  utile, avec 12,9 par seconde et 54 champs par ligne.
+  utile, avec 12,9 par seconde & 54 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
 - `apidojo/tweet-scraper` a livré 481 tweets utiles à $0.000832 par tweet utile,
-  avec 7,8 par seconde et 55 champs par ligne.
+  avec 7,8 par seconde & 55 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
 - `xtdata/twitter-x-scraper` a livré 1 378 tweets utiles à $0.001168 par tweet
-  utile, avec 11,9 par seconde et 67 champs par ligne.
+  utile, avec 11,9 par seconde & 67 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
 - `seemuapps/x-tweet-scraper` a livré 805 tweets utiles à $0.001242 par tweet
-  utile, avec 6,9 par seconde et 24 champs par ligne.
+  utile, avec 6,9 par seconde & 24 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/FstursEw43TbcipYU)
 - `maximedupre/twitter-scraper` a livré 46 tweets utiles à $0.002846 par tweet
-  utile, avec 0,3 par seconde et 31 champs par ligne.
+  utile, avec 0,3 par seconde & 31 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
 
-Chaque Actor a lancé la même recherche avec les mêmes filtres. Les autres Actors
-ont tourné le 2026-09-27. Les runs de Xquik ont utilisé `outputVariant: "rich"`
-le 2026-09-29. Tous les runs ont utilisé le niveau Bronze. Un tweet utile est un
-post original unique en anglais avec au moins 10 J'aime. Le coût est la dépense
-totale du client par tweet utile. Le nôtre inclut l'usage Apify que payent nos
-clients. Champs par ligne est le nombre médian de champs non vides, champs
-imbriqués compris. Une liste compte comme 1 champ. Ouvrez un run pour voir son
-entrée, son log et son dataset.
+Chaque Actor a lancé la même recherche & les mêmes filtres. Les autres Actors
+ont tourné le 2026-09-27. Les runs de Xquik ont réglé `outputVariant: "rich"` &
+ont tourné le 2026-09-29. Tous les runs ont utilisé le niveau Bronze. Un tweet
+utile est un post original unique en anglais avec 10 J'aime ou plus. Le coût est
+la dépense totale du client par tweet utile. Le nôtre inclut l'usage Apify que
+payent nos clients. Champs par ligne est le nombre médian de champs non vides,
+champs imbriqués compris. Une liste compte comme 1 champ. Ouvrez un run pour
+voir son entrée, son log & son dataset.
 
-## Runs vides, partiels et arrêtés
+## Runs vides, partiels & arrêtés
 
-X Tweet Scraper de Xquik explique gratuitement les runs vides, partiels et
+X Tweet Scraper de Xquik explique gratuitement les runs vides, partiels &
 arrêtés. Le statut du run dit pourquoi il s'est arrêté. Il compte aussi les
-résultats facturés et les cibles lues.
+résultats facturés & les cibles lues.
 
 ### Résultats vides
 
 Vérifiez un résultat vide avant de payer un autre run. L'objet `filtering` des
-rapports et des diagnostics finaux compte les lignes retirées par vos filtres.
-Lisez `serverFilteredRows`, `actorFilteredRows` et
+rapports & des diagnostics finaux compte les lignes retirées par vos filtres.
+Lisez `serverFilteredRows`, `actorFilteredRows` &
 `pagesWithUnknownServerFiltering`. Vous ne payez jamais de frais de résultat
-pour les lignes filtrées.
+pour les lignes filtrées. Un run écrit 1 diagnostic avec ces compteurs quand les
+propres filtres de l'Actor ont retiré des lignes (`actorFilteredRows`). Les
+lignes que vos opérateurs de recherche excluent (`serverFilteredRows`), les
+posts hors de votre fenêtre de temps & un run sans aucune ligne n'écrivent aucun
+enregistrement. Le statut du run indique alors pourquoi & ce qu'il faut changer,
+par exemple élargir la recherche.
 
 Un run peut finir sous votre limite quand X n'a plus de résultats. Il indique
 `outcome: "complete"` avec `completionReason: "source_exhausted"`. Les runs
-interrompus gardent leur résultat partiel et leurs conseils de relance.
+interrompus gardent leur résultat partiel & leurs conseils de relance.
 
 ### Runs partiels
 
-`failedSubtargets` compte les requêtes et les cibles de profil arrêtées après
-une erreur. Les lignes livrées restent dans le dataset et comptent dans la
+`failedSubtargets` compte les requêtes & les cibles de profil arrêtées après une
+erreur. Les lignes livrées restent dans le dataset & comptent dans la
 facturation. Une erreur ne signifie jamais que la cible est introuvable. Ces
 runs utilisent `completionReason: "partial_failure"`.
 
 Un run interrompu écrit aussi un diagnostic `partial` gratuit. Les résultats
 déjà livrés restent intacts. Le diagnostic indique `availableResults`,
-`failedTargets`, `retryable` et `nextAction`. Une sortie réussie de l'Actor
+`failedTargets`, `retryable` & `nextAction`. Une sortie réussie de l'Actor
 confirme la livraison. Elle ne confirme pas une extraction complète.
 
 ### Causes d'arrêt
 
 Le texte de statut nomme chaque cause de l'arrêt. Un run avec un compte
-introuvable et une recherche bloquée cite les 2. `stopCauses` liste chaque cause
-avec ses propres `message`, `retryable` et `nextAction`. Les causes sont
+introuvable & une recherche bloquée cite les 2. `stopCauses` liste chaque cause
+avec ses propres `message`, `retryable` & `nextAction`. Les causes sont
 `target_not_found`, `target_suspended`, `target_protected`,
 `search_unavailable`, `likes_hidden`, `target_failed`,
-`pagination_safety_limit`, `reply_reach` et `deadline_reached`. Le run est
+`pagination_safety_limit`, `reply_reach` & `deadline_reached`. Le run est
 `retryable` dès qu'une cause l'est.
 
-### Cibles introuvables et indisponibles
+### Cibles introuvables & indisponibles
 
-Une cible introuvable ou protégée n'est pas un échec. X n'a rien à renvoyer pour
-elle. Le run lit toutes les autres cibles jusqu'au bout. Il indique
+Une cible introuvable ou protégée n'est pas un échec. X n'a rien à lire là. Le
+run lit toutes les autres cibles jusqu'au bout. Il indique
 `outcome: "complete"`. Sa raison d'achèvement vient des cibles lues, par exemple
 `source_exhausted`. `failedSubtargets` ne compte pas ces cibles. Le texte de
-statut et un diagnostic `complete` gratuit les comptent. Un run sans autre ligne
+statut & un diagnostic `complete` gratuit les comptent. Un run sans autre ligne
 écrit plutôt un diagnostic `zero-output`.
 
-Une recherche que X ne peut pas lancer compte comme un échec. X.com affiche
+Une recherche que X ne peut pas lancer compte comme un échec. X affiche
 "Something went wrong" pour une telle recherche. Le run l'arrête tout de suite,
-sans nouvel essai. Les J'aime que X masque comptent aussi comme des échecs et
+sans nouvel essai. Les J'aime que X masque comptent aussi comme des échecs &
 s'arrêtent tout de suite. X montre qui a aimé un post seulement à son auteur. Il
 montre les posts aimés d'un compte seulement à ce compte.
 
 Quand tous les échecs concernent des cibles indisponibles, les diagnostics
 indiquent `retryable: false`. Vérifiez les URL ou les noms d'utilisateur des
-cibles et choisissez des comptes publics disponibles. Resserrez une recherche
-que X ne peut pas lancer ou changez ses filtres. Lisez les comptes qui ont
-reposté, les réponses ou les posts au lieu des J'aime masqués. Les autres échecs
-gardent des conseils de relance pour les cibles inachevées.
+cibles & choisissez des comptes publics disponibles. Resserrez une recherche que
+X ne peut pas lancer ou changez ses filtres. Lisez les comptes qui ont reposté,
+les réponses ou les posts au lieu des J'aime masqués. Les autres échecs gardent
+des conseils de relance pour les cibles inachevées.
 
 Le diagnostic nomme ces cibles dans `unavailableTargets`. Chaque entrée a la
-`target` telle que vous l'avez saisie, une `reason` et une `nextAction`. La
-raison est `not_found`, `suspended`, `protected`, `search_unavailable` ou
-`likes_hidden`. Une entrée de recherche peut aussi avoir un `fix`, par exemple
-l'opérateur à retirer. La liste contient jusqu'à 100 entrées. Retirez ces cibles
-de votre entrée.
+`target` telle que vous l'avez saisie, une `reason` & une `nextAction`. La
+raison est `not_found`, `list_not_found`, `suspended`, `protected`,
+`search_unavailable` ou `likes_hidden`. `list_not_found` signale une Liste que X
+n'a pas trouvée. Elle est peut-être privée. Une entrée de recherche peut aussi
+avoir un `fix`, par exemple l'opérateur à retirer. La liste contient jusqu'à 100
+entrées. Retirez ces cibles de votre entrée.
 
-### Limites de sécurité et de temps
+### Limites de sécurité & de temps
 
 `completionReason: "pagination_safety_limit"` n'est pas un échec de lecture. Le
 run a gardé ses lignes valides. Il a ensuite arrêté une cible qui ne renvoyait
@@ -629,10 +666,10 @@ plus de nouveaux résultats. Le run signale une extraction incomplète.
 `failedSubtargets` reste à `0`. Vous payez seulement les lignes livrées.
 
 Le timeout Apify par défaut est `0`, donc les runs n'ont pas de limite de temps.
-L'Actor continue jusqu'à votre plafond ou jusqu'à la fin des données éligibles.
-Vous pouvez quand même régler un timeout Apify.
+L'Actor continue jusqu'à atteindre votre plafond ou jusqu'à la fin des données
+éligibles. Vous pouvez quand même régler un timeout Apify fini.
 `completionReason: "deadline_reached"` signifie alors que cette limite approche.
-L'Actor enregistre les lignes et le rapport, puis s'arrête proprement avant la
+L'Actor enregistre les lignes & le rapport, puis s'arrête proprement avant la
 limite. Vous payez une seule fois chaque ligne livrée.
 
 ## Entrée
@@ -650,63 +687,68 @@ Chacun de ces exemples suffit pour un run.
   recherche pour rattraper l'historique d'un compte.
 - Collez une URL de Liste dans Start URLs.
 - Combinez `twitterContent` avec des filtres comme `from:`, `since:`,
-  `min_faves:` et `filter:media` pour des recherches avancées.
+  `min_faves:` & `filter:media` pour des recherches avancées.
 
 ### Principaux opérateurs de recherche pris en charge
 
-| Opérateur              | Exemple                | Rôle                                     |
-| ---------------------- | ---------------------- | ---------------------------------------- |
-| `from:`                | `from:elonmusk`        | Seulement les posts de cet utilisateur   |
-| `to:`                  | `to:OpenAI`            | Seulement les réponses à cet utilisateur |
-| `@`                    | `@nasa`                | Posts qui mentionnent cet utilisateur    |
-| `list:`                | `list:123456`          | Posts des membres de la Liste            |
-| `lang:`                | `lang:en`              | Filtrer par langue                       |
-| `since:` / `until:`    | `since:2026-01-01`     | Plage de dates                           |
-| `min_faves:`           | `min_faves:100`        | Seuil d'engagement                       |
-| `min_retweets:`        | `min_retweets:50`      | Seuil de reposts                         |
-| `filter:media`         | `filter:media`         | Opérateur de recherche X pour les médias |
-| `filter:videos`        | `filter:videos`        | Opérateur de recherche X pour les vidéos |
-| `filter:images`        | `filter:images`        | Opérateur de recherche X pour les images |
-| `filter:links`         | `filter:links`         | Seulement les posts avec des liens       |
-| `filter:replies`       | `filter:replies`       | Seulement les réponses                   |
-| `filter:quote`         | `filter:quote`         | Seulement les citations                  |
-| `filter:blue_verified` | `filter:blue_verified` | Seulement les utilisateurs Premium       |
+| Opérateur                | Exemple                   | Rôle                                        |
+| ------------------------ | ------------------------- | ------------------------------------------- |
+| `from:`                  | `from:elonmusk`           | Seulement les posts de cet utilisateur      |
+| `to:`                    | `to:OpenAI`               | Seulement les réponses à cet utilisateur    |
+| `@`                      | `@nasa`                   | Mentions de cet utilisateur                 |
+| `list:`                  | `list:123456`             | Posts des membres de la liste               |
+| `lang:`                  | `lang:en`                 | Filtrer par langue                          |
+| `since:` / `until:`      | `since:2026-01-01`        | Plage de dates                              |
+| `min_faves:`             | `min_faves:100`           | Seuil d'engagement                          |
+| `min_retweets:`          | `min_retweets:50`         | Seuil de reposts                            |
+| `filter:media`           | `filter:media`            | Opérateur de recherche X pour les médias    |
+| `filter:videos`          | `filter:videos`           | Opérateur de recherche X pour les vidéos    |
+| `filter:images`          | `filter:images`           | Opérateur de recherche X pour les images    |
+| `filter:links`           | `filter:links`            | Seulement les posts avec des liens          |
+| `filter:replies`         | `filter:replies`          | Seulement les réponses                      |
+| `filter:quote`           | `filter:quote`            | Seulement les citations                     |
+| `filter:blue_verified`   | `filter:blue_verified`    | Seulement les utilisateurs Premium          |
+| `-filter:replies`        | `-filter:replies`         | Aucune réponse                              |
+| `-filter:nativeretweets` | `-filter:nativeretweets`  | Aucun repost                                |
+| `-filter:quote`          | `-filter:quote`           | Aucune citation                             |
+| `OR`                     | `(from:nasa OR from:esa)` | Posts qui correspondent à l'un des 2 termes |
+| `#`                      | `#bitcoin lang:en`        | Posts avec ce hashtag                       |
 
-X ne prend plus en charge `filter:vine`, `filter:consumer_video`,
-`filter:pro_video`, `filter:news` ni `retweets_of:` dans la recherche. Une
-recherche qui en contient un s'arrête tout de suite. Un diagnostic gratuit
-indique la correction. Limitez chaque requête à 512 caractères. X ne cherche pas
-au-delà.
+X ne cherche plus `filter:vine`, `filter:consumer_video`, `filter:pro_video`,
+`filter:news` ni `retweets_of:`. Une recherche qui en contient un s'arrête tout
+de suite. Un diagnostic gratuit indique la correction. Limitez chaque requête à
+512 caractères ou moins. X ne cherche pas au-delà.
 
-Les fenêtres de dates incluent la borne basse et excluent la borne haute.
-L'Actor vérifie les 2 bornes avant d'ajouter ou de facturer chaque post.
+Les fenêtres de dates incluent la borne basse & excluent la borne haute. L'Actor
+vérifie les 2 bornes avant d'ajouter ou de facturer chaque post.
 
-Pour la liste complète des opérateurs, voir
-[Twitter advanced search operators](https://github.com/Xquik-dev/x-twitter-advanced-search).
+Pour la liste complète des opérateurs, consultez les
+[Twitter advanced search operators](https://github.com/Xquik-dev/x-twitter-advanced-search)
+de Xquik.
 
 ### Migrer depuis un autre Actor de posts
 
 Collez l'entrée que vous utilisez déjà. X Tweet Scraper de Xquik lit les noms de
 champs des autres Actors de posts. Il les fait correspondre à ses propres
 champs. Les noms canoniques restent la norme documentée. Un alias ne supprime
-jamais un champ et ne change jamais ce que vous payez. Le formulaire d'entrée
+jamais un champ & ne change jamais ce que vous payez. Le formulaire d'entrée
 liste seulement les champs canoniques, pour rester court. Les alias fonctionnent
-dans les entrées JSON, API, SDK, d'automatisation et de tâches enregistrées.
+dans les entrées JSON, API, SDK, d'automatisation & de tâches enregistrées.
 
 Chaque ligne nomme les champs que vous utilisez déjà, puis le champ auquel ils
 correspondent.
 
 - `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`
   correspondent à `startUrls`.
-- `profileUrl` en une seule chaîne correspond à `startUrls`.
+- `profileUrl`, en une seule chaîne, correspond à `startUrls`.
 - `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids`, ou
   `tweetId` en une seule chaîne correspondent à `tweetIds`.
 - `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`,
   `screenNames`, `profileTweets` correspondent à `twitterHandles`.
-- `username`, `handle`, `screenName` en une seule chaîne correspondent à
+- `username`, `handle`, `screenName`, en une seule chaîne, correspondent à
   `twitterHandles`.
-- `searchTerms`, `searchQueries`, `queries`, `search`, en liste ou une recherche
-  par ligne, correspondent à `searchTerms`.
+- `searchTerms`, `searchQueries`, `queries`, `search`, en liste ou avec une
+  recherche par ligne, correspondent à `searchTerms`.
 - `twitterContent`, `query`, `searchQuery` correspondent à `twitterContent`.
 - `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`,
   `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`,
@@ -714,9 +756,8 @@ correspondent.
 - `per_profile_limit` correspond à `maxItemsPerTarget`.
 - `sort` correspond à `queryType`.
 - `search_type`, `searchType`, `query_type`, `search_sort` correspondent à
-  `queryType` pour `Top` et `Latest`, quelle que soit la casse. `Media`,
-  `Photos` et `Videos` activent `filter:media`, `filter:images` et
-  `filter:videos`.
+  `queryType` pour `Top` & `Latest`, quelle que soit la casse. `Media`, `Photos`
+  & `Videos` activent `filter:media`, `filter:images` & `filter:videos`.
 - `tweetLanguage`, `language`, `contentLanguage` correspondent à `lang`.
 - `author`, `fromUser` correspondent à `from`.
 - `inReplyTo`, `toUser` correspondent à `to`.
@@ -726,7 +767,7 @@ correspondent.
 - `timeSinceUnix`, `sinceTime`, `timeUntilUnix`, `untilTime`, en secondes,
   correspondent à `since_time`, `until_time`.
 - `timeWithinTime`, `withinTime` correspondent à `within_time`.
-- `timeWindowHours`, `timeWindow` correspondent à `within_time`, en heures et en
+- `timeWindowHours`, `timeWindow` correspondent à `within_time`, en heures & en
   jours.
 - `timeSinceId`, `sinceId`, `timeMaxId`, `maxId` correspondent à `since_id`,
   `max_id`.
@@ -763,7 +804,7 @@ correspondent.
   `include:nativeretweets`.
 - `excludeReplies`, `excludeRetweets`, `includeRetweets` réglé sur false,
   `tweetTypesExclude` correspondent à `tweetTypes.excludeReplies`,
-  `tweetTypes.excludeRetweets` et `tweetTypes.excludeQuotes`.
+  `tweetTypes.excludeRetweets` & `tweetTypes.excludeQuotes`.
 - `tweetTypes` en liste avec 1 type correspond à `tweetTypes.replies`,
   `tweetTypes.quotes` ou `tweetTypes.nativeRetweets`.
 - `tweetSubtype` correspond à `tweetTypes.replies` ou `tweetTypes.quotes`.
@@ -775,17 +816,17 @@ correspondent.
   à `conversation_id`, `quoted_tweet_id`, `quoted_user_id`.
 - `cardName`, `tweetPollTypes` correspondent à `card_name`.
 - `search_query` correspond à `twitterContent`.
-- `profile_urls` correspond à `startUrls` pour les liens et à `twitterHandles`
+- `profile_urls` correspond à `startUrls` pour les liens, à `twitterHandles`
   pour les noms d'utilisateur.
 - `lookup_post_ids`, ou `id` en une seule chaîne, correspondent à `tweetIds`.
 - `tweets` en 1 liste séparée par des virgules correspond à `tweetIds`.
 
-Certains champs n'ont pas de champ ici. Chacun ajoute l'opérateur de recherche X
-qu'il représente à chaque recherche du run. Le log du run liste au début les
+Certains champs n'ont pas de champ ici. Chacun ajoute à chaque recherche du run
+l'opérateur de recherche X qu'il représente. Le log du run liste au début les
 opérateurs ajoutés.
 
 - `usersFromUsers`, `from_users`, `usersToUsers`, `to_users`, `usersListMembers`
-  ajoutent `from:`, `to:` et `list:`. Plusieurs valeurs s'exécutent comme des
+  ajoutent `from:`, `to:` & `list:`. Plusieurs valeurs s'exécutent comme des
   alternatives, comme `(from:a OR from:b)`.
 - `usersMentionUsers`, `mentioning_users` ajoutent `@name`.
 - `usersExcludeFromUsers` ajoute `-from:`.
@@ -793,93 +834,94 @@ opérateurs ajoutés.
   `filter:verified`.
 - `placeObjectId`, `geoPlaceId`, `placeId`, `place` ajoutent `place:`.
 - `cardDomain` ajoute `card_domain:`.
-- `appsSources`, `appsExcludeSources` ajoutent `source:` et `-source:`.
+- `appsSources`, `appsExcludeSources` ajoutent `source:` & `-source:`.
 - `contentKeywords`, `contentExactPhrases`, `contentHashtags`,
   `contentCashtags`, chacun avec 1 valeur, ajoutent le mot, la phrase entre
-  guillemets, `#tag` et `$tag`.
+  guillemets, `#tag` & `$tag`.
 - `contentExcludeKeywords`, `contentExcludeHashtags`, `exclude_words`,
-  `hashtags_exclude` ajoutent `-word` et `-#tag`.
-- Avec `all_words` et `exact_phrases`, chaque mot et chaque phrase doivent
+  `hashtags_exclude` ajoutent `-word` & `-#tag`.
+- Avec `all_words` & `exact_phrases`, chaque mot & chaque phrase doivent
   correspondre.
 - `any_words`, `hashtags_any` ajoutent des alternatives, comme `(#a OR #b)`.
 - `contentQuestionMarks` ajoute `?`.
 - `contentEmoticons` ajoute `:)` pour `positive`, `:(` pour `negative`.
-- `tweet_type` ajoute `filter:replies`, `filter:retweets` et leurs formes
+- `tweet_type` ajoute `filter:replies`, `filter:retweets` & leurs formes
   `-filter:`.
 
 Les modes nommés en toutes lettres correspondent à `mode`. `Advanced Search`
 correspond à `search`, `Get Tweet by ID` à `tweet`, `Get a Few Tweets` à
 `tweets`, `Get Replies` à `replies`, `Get Quotes` à `quotes`, `Get Retweeters` à
-`retweeters` et `Get Favoriters` à `favoriters`.
+`retweeters` & `Get Favoriters` à `favoriters`.
 
-Voici comment se comporte une entrée collée.
+Une entrée collée se comporte ainsi.
 
 - Chaque source s'exécute. Une entrée avec des URL, des noms d'utilisateur, des
-  termes de recherche, des ID de Liste et des ID de post les lance toutes.
+  termes de recherche, des ID de Liste & des ID de post les lance toutes.
   `maxItems` s'applique sur tout le run.
 - Une requête de recherche à côté de `searchTerms` s'exécute comme 1 terme de
   plus.
 - Une URL de profil écrite `x.com/@name` se lit comme `x.com/name`.
-- Si vous réglez un alias et son champ canonique, la valeur canonique l'emporte.
+- Si vous réglez un alias & son champ canonique, la valeur canonique l'emporte.
   Le log du run nomme l'alias écarté.
 - Le log du run nomme chaque champ que l'Actor ignore, comme
   `customMapFunction`. L'Actor n'écarte jamais un champ en silence.
 - Un plafond de lignes doit être un nombre entier de 1 ou plus. `maxResults: 0`
   arrête le run avant toute lecture ou facturation.
-- `quickDateRange: "m1"` lit le dernier mois, quelle que soit la source. Les
-  mois et les années se comptent à rebours sur le calendrier. Sans h, d, w, m ou
-  y, le run s'arrête avant toute lecture ou facturation.
+- `quickDateRange: "m1"` lit le dernier mois, quel que soit le mode de lecture.
+  Les mois & les années se comptent à rebours sur le calendrier. Sans h, d, w, m
+  ou y, le run s'arrête avant toute lecture ou facturation.
 - L'Actor n'a pas d'unité de page. Remplacez `maxPages` par `maxItems`.
-- L'Actor n'a pas de champ `userId` ou `user_ids`. Mettez l'ID utilisateur à la
-  place du nom d'utilisateur. Cela marche dans `twitterHandles`, dans les URL de
-  profil et après `from:`.
-- Les champs d'opérateurs de recherche comme `from`, `min_faves`, `since_time`
-  et `filter:images` utilisent déjà les noms de X. Ils n'ont besoin d'aucune
+- L'Actor n'a pas de champ `userId` ou `user_ids`. Mettez un ID utilisateur à la
+  place d'un nom d'utilisateur. Cela marche dans `twitterHandles`, dans les URL
+  de profil & après `from:`.
+- Les champs d'opérateurs de recherche comme `from`, `min_faves`, `since_time` &
+  `filter:images` utilisent déjà les noms de X. Ils n'ont besoin d'aucune
   correspondance.
-- Une liste qu'un autre Actor ne décrit ni comme « toutes les valeurs » ni comme
-  « l'une d'elles » s'exécute avec 1 valeur. Ces listes sont `contentKeywords`,
-  `contentExactPhrases`, `contentHashtags`, `contentCashtags`,
-  `usersMentionUsers`, `mediaTypes` et `tweetTypes`. Avec plus de valeurs, le
-  run s'arrête avant toute lecture ou facturation. Le message indique comment
-  les écrire en 1 terme de recherche.
+- Une liste dont un autre Actor ne dit pas si toutes ses valeurs ou l'une
+  d'elles doivent correspondre s'exécute avec 1 valeur. Ces listes sont
+  `contentKeywords`, `contentExactPhrases`, `contentHashtags`,
+  `contentCashtags`, `usersMentionUsers`, `mediaTypes` & `tweetTypes`. Avec plus
+  de valeurs, le run s'arrête avant toute lecture ou facturation. Son message
+  indique comment les écrire en 1 terme de recherche.
 - `search_type` réglé sur `People` ou `Lists`, `source_mode` réglé sur
-  `followers`, un préréglage `engagementLevel` et le mode `Get Similar Tweets`
+  `followers`, un préréglage `engagementLevel` & le mode `Get Similar Tweets`
   arrêtent le run avant toute lecture ou facturation. Le message nomme l'Actor
   ou le champ à utiliser.
 - `category` réglé sur `tweets` ou `info` ne change rien. La tâche d'un autre
-  Actor, comme `followers`, `user_info` ou `replies`, arrête le run. Il ne lit
-  et ne facture rien. Le message nomme cet Actor.
+  Actor, comme `followers`, `user_info` ou `replies`, arrête le run. Il ne lit &
+  ne facture rien. Le message nomme cet Actor.
 
-### Saisie dans la Console et via l'API
+### Saisie dans la Console & via l'API
 
 Le formulaire de la Console a ces contrôles.
 
-- Mode, Output Variant, Field Style, Output Preset et Sort By sont des listes
+- Mode, Output Variant, Field Style, Output Preset & Sort By sont des listes
   déroulantes validées.
-- Start URLs et Profile URLs acceptent des chaînes ou des objets
+- Start URLs & Profile URLs acceptent des chaînes ou des objets
   `{ "url": "..." }`. Leurs éditeurs JSON gardent les 2 formats de l'API.
 - Les filtres structurés proposent des contrôles groupés, donc vous n'avez pas
   besoin de JSON imbriqué.
 - Le formulaire masque les opérateurs plats qu'un groupe de filtres couvre déjà.
-  Les entrées JSON, API, SDK, d'automatisation et de tâches enregistrées les
+  Les entrées JSON, API, SDK, d'automatisation & de tâches enregistrées les
   acceptent toujours.
-- Max Items et Max Items Per Target acceptent des nombres entiers de 1 ou plus.
+- Max Items & Max Items Per Target acceptent des nombres entiers de 1 ou plus.
   Les seuils d'engagement acceptent des nombres entiers de 0 ou plus.
 
 Utilisez les champs canoniques dans les nouvelles intégrations. Les alias du
 tableau de migration ci-dessus restent disponibles. `includeRaw` est un alias de
 `outputVariant: "raw"`. Les anciennes valeurs d'`outputVariant`, comme `compact`
-et `full`, fonctionnent toujours comme sortie Legacy. Le formulaire les marque
+& `full`, fonctionnent toujours comme sortie Legacy. Le formulaire les marque
 comme alias Legacy.
 
 ## Sortie
 
 Chaque ligne de post est un objet JSON avec les métadonnées que X rend
-disponibles. Les schémas du dataset et du run-report donnent à chaque champ un
-titre, une description et un exemple. Les agents IA peuvent les lire sans
-deviner le sens d'un champ.
+disponibles. Les schémas du dataset & du run-report donnent à chaque champ un
+titre, une description & un exemple. Les agents IA peuvent les lire sans deviner
+le sens d'un champ.
 
-Les valeurs sont des exemples. Vos runs renvoient les données en direct de X.
+Les valeurs d'exemple sont illustratives. Vos runs renvoient les données en
+direct de X.
 
 ```json
 {
@@ -916,6 +958,43 @@ Les valeurs sont des exemples. Vos runs renvoient les données en direct de X.
 
 Exportez le dataset en JSON, CSV, Excel ou HTML.
 
+## Colonnes de sortie
+
+8 champs d'entrée façonnent chaque ligne une fois que le run l'a lue. Ils
+n'exécutent aucun code & ne changent pas le prix.
+
+| Champ               | Rôle                                                                            |
+| ------------------- | ------------------------------------------------------------------------------- |
+| `fields`            | Garde seulement ces champs, dans l'ordre & avec l'orthographe que vous écrivez  |
+| `omitFields`        | Retire ces champs & garde le reste                                              |
+| `renameFields`      | Déplace un champ dans une colonne qui porte un nouveau nom                      |
+| `flatten`           | Transforme chaque objet imbriqué en colonnes de premier niveau                  |
+| `fillMissingFields` | Remplit avec `null` un champ gardé qui manque dans une ligne. Activé par défaut |
+| `joinFields`        | Transforme chacune de ces listes en 1 valeur texte                              |
+| `joinSeparator`     | Texte entre les éléments joints. Par défaut, une virgule & un espace            |
+| `constantFields`    | Ajoute une colonne avec le même texte sur chaque ligne                          |
+
+- Utilisez un point pour un champ placé dans un objet, comme `author.id`. La
+  casse & les tirets bas ne comptent pas.
+- Chaque ligne garde son `id`.
+- Avec `fields`, un champ absent d'une ligne arrive avec la valeur `null`.
+  Chaque ligne a alors les mêmes colonnes.
+- Un nom de champ erroné arrête le run avant toute lecture & ne facture rien.
+- Si le run ne peut pas vérifier les noms, il continue de lire & liste à la fin
+  les noms qu'il n'a pas vus.
+- Le run ignore une fonction map ou un filtre jq écrit pour un autre Actor.
+
+Nommez une colonne calculée dans `fields` ou `renameFields` pour l'ajouter.
+
+| Colonne             | Formule                                                                                 |
+| ------------------- | --------------------------------------------------------------------------------------- |
+| `totalEngagement`   | `likeCount` + `replyCount` + `retweetCount` + `quoteCount`. Un compteur absent ajoute 0 |
+| `engagementRate`    | `totalEngagement` × 100 ÷ les `followers` de l'auteur, à 4 décimales                    |
+| `engagementPerView` | `totalEngagement` × 100 ÷ `viewCount`, à 4 décimales                                    |
+
+`totalEngagement` vaut `null` pour une ligne sans ces compteurs. Un taux vaut
+`null` quand son diviseur manque ou vaut 0.
+
 ## Options de run
 
 - Réglez le coût total maximal d'Apify pour plafonner le coût du run. Laissez
@@ -930,22 +1009,22 @@ Exportez le dataset en JSON, CSV, Excel ou HTML.
 - Avec de nombreuses requêtes, réglez `includeSearchTerms: true` pour marquer
   chaque résultat avec son terme de recherche.
 - Réglez `queryType: "Latest + Top"` pour lancer les 2 modes de recherche X dans
-  1 run. La déduplication et les plafonds de résultats s'appliquent aux 2.
+  un seul run. La déduplication & les plafonds de résultats s'appliquent aux 2.
 - Utilisez les moniteurs de compte ou de mot-clé de Xquik pour des vérifications
-  à la seconde et des webhooks signés. Les moniteurs actifs vérifient toutes
-  les secondes.
+  chaque seconde & des webhooks signés. Les moniteurs actifs vérifient chaque
+  seconde.
 
 ### Utilisez toujours la dernière build
 
 Choisissez `latest` pour chaque run afin d'obtenir chaque correctif publié.
 
 Si vous ne choisissez aucune build, Apify lance X Tweet Scraper de Xquik sur sa
-build `latest` par défaut. Les runs de la Console et les exemples d'API standard
+build `latest` par défaut. Les runs de la Console & les exemples d'API standard
 héritent de ce défaut.
 
-Les tâches enregistrées peuvent remplacer ce défaut. Les planifications et les
-intégrations de tâches reprennent ce choix. Réglez chaque remplacement sur
-`latest`.
+Les tâches enregistrées peuvent remplacer le défaut de l'Actor. Les
+planifications & les intégrations de tâches reprennent ce choix. Gardez chaque
+remplacement réglé sur `latest`.
 
 Apify ne redirige pas les numéros de build exacts vers `latest`. Remplacez les
 numéros figés par `latest`. Utilisez une build exacte seulement pour un retour
@@ -955,101 +1034,102 @@ Lisez la documentation d'Apify sur les
 [tags de build](https://docs.apify.com/platform/actors/development/builds-and-runs/builds),
 les
 [options de run](https://docs.apify.com/platform/actors/running/runs-and-builds)
-et les [tâches](https://docs.apify.com/platform/actors/running/tasks).
+& les [tâches](https://docs.apify.com/platform/actors/running/tasks).
 
 ## Actors Xquik associés
 
 Tous les Actors Xquik partagent le même moteur d'extraction, la même facturation
-après filtrage et les mêmes diagnostics. Choisissez celui qui correspond aux
+après filtrage & les mêmes diagnostics. Choisissez celui qui correspond aux
 données dont vous avez besoin.
 
 - [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) scrape des
-  profils ainsi que leurs posts, réponses, médias et abonnés à partir de noms
+  profils ainsi que leurs posts, réponses, médias & abonnés à partir de noms
   d'utilisateur, d'ID ou d'URL. Utilisez-le quand vous partez de comptes plutôt
   que de recherches. À partir de $0.00015 par ligne.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) scrape des
-  réponses, des commentaires et des conversations entières sous les posts avec
+  réponses, des commentaires & des conversations entières sous les posts, avec
   plus de 25 filtres. Utilisez-le quand vous avez besoin des échanges sous les
   posts. À partir de $0.00015 par ligne.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) scrape en
-  masse les réponses, citations, comptes qui ont reposté et discussions de
-  posts, à partir d'URL ou d'ID. Utilisez-le pour mesurer qui a interagi avec
-  des posts. À partir de $0.00015 par ligne.
+  masse les réponses, citations, comptes qui ont reposté & fils de posts, à
+  partir d'URL ou d'ID. Utilisez-le quand vous mesurez qui a interagi avec des
+  posts. À partir de $0.00015 par ligne.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
   scrape les posts qui citent des posts, avec le texte, les médias, les
-  compteurs, les auteurs et 11 filtres. Utilisez-le quand vous étudiez qui a
-  cité des posts et ce qu'ils ont dit. À partir de $0.00015 par post.
+  compteurs, les auteurs & 11 filtres. Utilisez-le quand vous étudiez qui a cité
+  des posts & ce qu'ils ont dit. À partir de $0.00015 par post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrape les
-  abonnés, les abonnements, les membres et abonnés de Liste et les membres de
-  Communauté sous forme de lignes de profil. Utilisez-le quand vous avez besoin
-  de listes d'audience ou de membres. À partir de $0.00015 par profil.
+  abonnés, les abonnements, les membres de Liste, les abonnés de Liste & les
+  membres de Communauté sous forme de lignes de profil. Utilisez-le quand vous
+  avez besoin de listes d'audience ou de membres. À partir de $0.00015 par
+  profil.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)
-  recherche des comptes par nom d'utilisateur, bio et localisation, avec des
-  filtres d'abonnés, de certification, d'ancienneté et de localisation.
-  Utilisez-le pour créer des listes de comptes à partir d'une recherche. À
+  recherche des comptes par nom d'utilisateur, bio & localisation, avec des
+  filtres d'abonnés, de certification, d'ancienneté & de localisation.
+  Utilisez-le quand vous créez des listes de comptes à partir d'une recherche. À
   partir de $0.00015 par profil.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   vérifie où sont basés les comptes avec le libellé "Account based in" de X, la
-  façon dont ils se sont connectés à X et leurs changements de nom
-  d'utilisateur. Utilisez-le quand vous vérifiez où sont basés des comptes. À
-  partir de $0.00015 par compte.
+  mention "connected via" & les changements de nom d'utilisateur. Utilisez-le
+  quand vous contrôlez où sont basés des comptes. À partir de $0.00015 par
+  compte.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) récupère les
-  e-mails, téléphones et liens que les comptes publient sur leur profil, à
-  partir de noms d'utilisateur, d'abonnés ou de recherches d'utilisateurs.
-  Utilisez-le quand vous avez besoin des e-mails que les profils publient. À
-  partir de $0.00015 par profil.
+  e-mails, téléphones & liens que les comptes publient sur leur profil, à partir
+  de noms d'utilisateur, d'abonnés ou de recherches d'utilisateurs. Utilisez-le
+  quand vous avez besoin des e-mails que les profils publient. À partir de
+  $0.00015 par profil.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper) scrape les posts,
-  membres et abonnés d'une Liste à partir d'URL ou d'ID de Liste. Utilisez-le
+  membres & abonnés d'une Liste à partir d'URL ou d'ID de Liste. Utilisez-le
   quand une Liste choisie définit vos sources. À partir de $0.00015 par ligne.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper) scrape les
-  infos, posts, recherches, membres et modérateurs d'une Communauté. Utilisez-le
+  infos, posts, recherches, membres & modérateurs d'une Communauté. Utilisez-le
   quand vos sources sont des Communautés X. À partir de $0.00015 par ligne.
 - [X Space Scraper](https://apify.com/xquik/x-space-scraper) trouve des Spaces
-  par mot-clé et lit leurs titres, états, heures, nombres d'auditeurs, hôtes et
+  par mot-clé & lit leurs titres, états, heures, nombres d'auditeurs, hôtes &
   intervenants. Il lit aussi des diffusions par URL ou par ID. Utilisez-le quand
-  vous suivez l'audio et la vidéo en direct sur X. À partir de $0.00015 par
-  Space ou diffusion.
+  vous suivez l'audio & la vidéo en direct sur X. À partir de $0.00015 par Space
+  ou diffusion.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) scrape les
-  tendances en temps réel par lieu, avec rang, volume, requête et WOEID.
-  Utilisez-le pour suivre les tendances de chaque lieu. À partir de $0.00015 par
-  tendance.
+  tendances en temps réel par lieu, avec rang, volume, requête & WOEID.
+  Utilisez-le quand vous suivez les tendances de chaque lieu. À partir de
+  $0.00015 par tendance.
 - [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) scrape les offres
-  d'emploi X par mot-clé, lieu, mode de travail, niveau d'expérience et
-  entreprise, avec salaires et liens de candidature. Utilisez-le quand vous
+  d'emploi X par mot-clé, lieu, mode de travail, niveau d'expérience &
+  entreprise, avec salaires & liens de candidature. Utilisez-le quand vous
   collectez des offres d'emploi publiées sur X. À partir de $0.00015 par offre.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper) scrape les
-  Articles X longs en Markdown et en texte, avec couvertures, auteurs, dates et
-  métriques. Utilisez-le quand vous avez besoin du corps des Articles, pas des
+  Articles X longs en Markdown & en texte, avec couvertures, auteurs, dates &
+  métriques. Utilisez-le quand vous avez besoin du corps des articles, pas des
   posts. À partir de $0.00015 par article.
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader) extrait ou
-  stocke des photos, vidéos et GIF à partir de posts ou de profils, avec des
-  options MP4 et de métadonnées. Utilisez-le quand vous avez besoin des fichiers
+  stocke des photos, vidéos & GIF à partir de posts ou de profils, avec des
+  options MP4 & de métadonnées. Utilisez-le quand vous avez besoin des fichiers
   médias eux-mêmes. À partir de $0.00015 par ligne média.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
-  suit les mentions de marque avec pertinence, sentiment et réponses sur
-  l'expérience client par IA, et compare les runs. Utilisez-le pour surveiller
-  une marque dans le temps. À partir de $0.0003 par post analysé.
+  suit les mentions de marque avec des réponses IA de pertinence, de sentiment &
+  d'expérience client & compare les runs. Utilisez-le quand vous surveillez une
+  marque dans le temps. À partir de $0.0003 par post analysé.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
-  attribue une attitude, une intensité et une probabilité de sarcasme à chaque
-  post par IA. Utilisez-le pour un sentiment général sur n'importe quel sujet. À
-  partir de $0.0003 par post analysé.
+  attribue par IA une attitude, une intensité & une probabilité de sarcasme à
+  chaque post. Utilisez-le quand vous avez besoin du sentiment général sur
+  n'importe quel sujet. À partir de $0.0003 par post analysé.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
-  attribue une orientation haussière, baissière, neutre ou mixte, un type de
-  contenu, une conviction et une pertinence d'actif par IA. Utilisez-le pour
-  suivre les actions, la crypto ou les discussions de trading. À partir de
+  attribue par IA une orientation haussière, baissière, neutre ou mixte, un type
+  de contenu, une conviction & une pertinence d'actif. Utilisez-le quand vous
+  suivez les actions, la crypto ou les discussions de trading. À partir de
   $0.0003 par post analysé.
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
-  attribue un format, une attribution de source et une pertinence de sujet aux
-  posts d'actualité par IA. Utilisez-le pour séparer le reportage du
-  commentaire. À partir de $0.0003 par post analysé.
+  étiquette par IA les posts d'actualité selon leur format, leur attribution de
+  source & leur pertinence de sujet. Utilisez-le quand vous séparez le reportage
+  du commentaire. À partir de $0.0003 par post analysé.
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
-  répond à vos propres questions de catégorie, de score et de oui/non pour
-  chaque post par IA. Utilisez-le quand les analyses prédéfinies ne
-  correspondent pas à vos étiquettes. À partir de $0.0003 par post analysé.
+  répond par IA à vos propres questions de catégorie, de score & de oui/non pour
+  chaque post. Utilisez-le quand les analyses prédéfinies ne correspondent pas à
+  vos étiquettes. À partir de $0.0003 par post analysé.
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
-  estime un Viral Score de 0 à 100 et un verdict pour chaque post à partir de 8
-  critères notés par IA. Utilisez-le quand vous étudiez pourquoi des posts
-  percent ou font un flop. À partir de $0.0003 par post analysé.
+  estime un Viral Score de 0 à 100 & un verdict pour chaque post, à partir des
+  réponses de l'IA sur 8 traits. Utilisez-le quand vous étudiez pourquoi des
+  posts se propagent ou font un flop. À partir de $0.0003 par post analysé.
 
 ## FAQ
 
@@ -1061,14 +1141,14 @@ Non. Vous n'avez besoin ni de clé API X, ni de connexion, ni d'identifiants.
 
 ### Qu'est-ce qui limite un run ?
 
-Votre limite d'éléments et votre limite de dépense Apify arrêtent le run. Les
-limites de votre compte Apify et de la plateforme s'appliquent toujours.
+Votre limite d'éléments & votre limite de dépense Apify arrêtent le run. Les
+limites de votre compte Apify & de la plateforme s'appliquent toujours.
 
 ### Quelle est sa vitesse ?
 
 X Tweet Scraper de Xquik a livré de 25,2 à 39,2 tweets utiles par seconde dans
 le [benchmark](#benchmark). La durée dépend de votre entrée, du nombre de
-résultats et de la disponibilité de X.
+résultats & de la disponibilité de X.
 
 ### Pourquoi ai-je des posts que l'onglet de recherche de X laisse de côté ?
 
@@ -1079,14 +1159,14 @@ recherche X pour votre requête. Vous payez chaque post une seule fois.
 ### Quels opérateurs de recherche fonctionnent ?
 
 La recherche avancée de X prend en charge les auteurs, les destinataires, les
-mentions, les dates, l'engagement, les médias et le lieu. Voir les
-[opérateurs pris en charge](#principaux-opérateurs-de-recherche-pris-en-charge)
+mentions, les dates, l'engagement, les médias & le lieu. Consultez les
+[principaux opérateurs de recherche pris en charge](#principaux-opérateurs-de-recherche-pris-en-charge)
 pour des exemples.
 
 ### Puis-je utiliser l'API Apify pour lancer cet Actor ?
 
-Oui. L'[onglet API](https://apify.com/xquik/x-tweet-scraper/api) propose des
-exemples en Python, JavaScript et cURL.
+Oui. Consultez l'[onglet API](https://apify.com/xquik/x-tweet-scraper/api) pour
+des exemples en Python, JavaScript & cURL.
 
 ### Puis-je planifier des scrapings récurrents ?
 
@@ -1095,19 +1175,20 @@ intégrée d'Apify pour lancer X Tweet Scraper de Xquik selon un cron.
 
 ### Puis-je obtenir une solution sur mesure ?
 
-Oui. Rendez-vous sur [xquik.com](https://xquik.com) ou lisez la
-[documentation de l'API](https://docs.xquik.com/introduction) pour le tableau de
-bord, l'API, le serveur MCP et les webhooks.
+Oui. Décrivez votre besoin dans
+l'[onglet Issues](https://apify.com/xquik/x-tweet-scraper/issues). Xquik propose
+aussi un tableau de bord, une API REST, un serveur MCP & des webhooks. Trouvez
+le site web de Xquik sur son [profil Apify](https://apify.com/xquik).
 
 ### Est-il légal de scraper des données X ?
 
-X Tweet Scraper de Xquik collecte des champs publics de X. Les résultats peuvent
-contenir des données personnelles. Assurez-vous d'avoir une finalité licite et
+X Tweet Scraper de Xquik demande à X des champs publics. Les résultats peuvent
+contenir des données personnelles. Assurez-vous d'avoir une finalité licite &
 respectez les règles de protection des données qui s'appliquent à vous. En cas
 de doute, demandez conseil à un juriste qualifié.
 
 ### Où trouver de l'aide ?
 
-Ouvrez une issue dans l'onglet Issues de la page de l'Actor, ou sur
-[GitHub](https://github.com/Xquik-dev/x-twitter-scraper/issues). Vous pouvez
-aussi écrire à support@xquik.com avec l'ID du run.
+Ouvrez une issue dans
+l'[onglet Issues](https://apify.com/xquik/x-tweet-scraper/issues) avec l'ID du
+run.

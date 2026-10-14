@@ -1,19 +1,10 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <strong>한국어</strong> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · **한국어** ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer가 Xquik MCP를 코딩 에이전트에 연결하는 모습"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Framer가 Xquik 스크레이퍼를 Claude Code, Codex, Cursor 등과 함께 사용하는 방법을 6:07부터 보세요.</a>
-</td></tr></table>
+[![Framer가 Xquik MCP를 코딩 에이전트에 연결하는 모습](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Framer가 Xquik 스크레이퍼를 Claude Code, Codex, Cursor 등과 함께 사용하는 방법](https://youtu.be/4UOSpoOoC3Y?t=367)을
+6:07부터 보세요.
 
 Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서비스이며, 가장
 완전한 X 데이터를 제공합니다. Xquik의 X Account Location Scraper는 X 쿠키나
@@ -21,11 +12,10 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 대부분 필터링이나 중복 제거 전에 요금을 부과합니다. Xquik은 필터에 맞고 중복되지
 않은 결과를 전달했을 때만 요금을 받습니다.
 
-사용자 아이디, 프로필 URL 또는 사용자 ID를 붙여 넣으면 1회 실행으로 모든 계정의
-X "Account based in"(계정 기반 위치) 라벨을 받습니다. 이 라벨은 X가 최선을 다해
-추정한 계정의 국가 또는 지역입니다. 국적이나 거주지, 정확한 위치가 아닙니다.
-요금은 **전달된 행 1개당 $0.00015**이며, Apify 플랫폼 사용료는 Apify가 따로
-청구합니다.
+사용자 아이디, 프로필 URL 또는 사용자 ID를 붙여 넣고 1회 실행으로 모든 계정의 X
+"Account based in" 라벨을 받으세요. 이 라벨은 X가 최선을 다해 추정한 계정의 국가
+또는 지역입니다. 국적, 거주지 또는 정확한 위치가 아닙니다. 요금은 **전달된 행
+1개당 $0.00015**이며, Apify 플랫폼 사용료는 Apify가 따로 청구합니다.
 
 > Xquik은 독립적인 제3자 서비스입니다. X Corp와 제휴 관계가 없습니다.
 > "Twitter"와 "X"는 X Corp의 상표입니다.
@@ -43,19 +33,25 @@ X "Account based in"(계정 기반 위치) 라벨을 받습니다. 이 라벨은
 - 이름, 자기소개, 각종 수치, 인증, 날짜 & 이미지를 담은 전체 공개 프로필.
 - X가 라벨을 내주지 않은 계정을 추가 요금 없이 1번 더 읽기.
 - 1회 실행에서 여러 계정을 동시에 읽고 입력 순서대로 전달.
-- @가 있거나 없는 사용자 아이디, x.com & twitter.com URL, 숫자 사용자 ID.
+- @가 있거나 없는 사용자 아이디, `x.com` & `twitter.com` URL & 숫자 사용자 ID.
 - 과금 전 중복 제거.
-- Apify 데이터셋에서 JSON, CSV, Excel, XML & RSS로 내보내기.
-- Apify 마이그레이션 후 저장된 상태에서 이어서 진행.
+- Apify 데이터셋을 통한 JSON, CSV, Excel, XML & RSS 내보내기.
+- Apify 마이그레이션 후 저장된 상태에서 실행을 이어서 진행.
 
 ## X 계정의 기반 위치 확인 방법
+
+Apify가 처음인가요? 먼저
+[무료 계정을 만드세요](https://console.apify.com/sign-up?fpr=xquik). 무료
+요금제는 신용카드가 필요 없고 매달 쓸 수 있는 $5를 줍니다. 계정 1개당
+$0.00015이므로 $5면 플랫폼 사용료를 빼고 계정을 최대 33,000개 확인할 수
+있습니다. 그런 다음 여기로 돌아와 Try for free를 누르세요.
 
 1. Apify Console에서 Xquik의 X Account Location Scraper를 여세요.
 2. `twitterHandles`에 사용자 아이디, 프로필 URL 또는 사용자 ID를 붙여 넣으세요.
 3. `maxItems`로 전달할 행 수의 상한을 정하고 Start를 클릭하세요.
 4. 데이터셋을 JSON, CSV 또는 Excel로 내려받거나 Apify API를 사용하세요.
 
-어느 단계에서도 X 쿠키, 로그인, API 키를 입력하지 않습니다.
+어느 단계에서도 X 쿠키, 로그인 또는 API 키를 입력하지 않습니다.
 
 ## 입력
 
@@ -88,23 +84,25 @@ X "Account based in"(계정 기반 위치) 라벨을 받습니다. 이 라벨은
 `userIds`를 사용하세요. `userNames`는 `twitterHandles`의 다른 이름으로 쓸 수
 있습니다.
 
-입력에 2번 들어간 계정은 1번만 전달하고 과금합니다. 항목 1개가 사용자 아이디이고
-다른 항목이 사용자 ID여도 마찬가지입니다. `maxItems`는 입력의 앞쪽 계정부터
-남깁니다. 문제없이 끝난 작은 실행은 `run-report`를 건너뛰어 Apify 사용량을
-아낍니다. 모든 실행에서 보고서를 기록하려면 `alwaysSaveRunRecords`를 켜세요.
+입력에 2번 들어간 계정도 전달 & 과금은 1번만 합니다. 항목 1개가 그 계정의 사용자
+아이디이고 다른 항목이 사용자 ID여도 마찬가지입니다. `maxItems`는 입력의 앞쪽
+계정부터 남깁니다. 문제없이 끝난 작은 실행은 `run-report`를 건너뛰어 Apify
+사용량을 아낍니다. 모든 실행에서 이 레코드를 기록하려면 `alwaysSaveRunRecords`를
+켜세요.
 
 ## 출력
 
-계정 1개가 데이터셋 행 1개입니다. X의 계정 정보 페이지에 표시되는
-`accountBasedIn`, `accountBasedInUnavailable`, `accountBasedInAccurate`,
+계정 1개가 데이터셋 행 1개입니다. X의 계정 정보 페이지에 표시되는 내용이 먼저
+나오며, `accountBasedIn`, `accountBasedInUnavailable`, `accountBasedInAccurate`,
 `affiliateUsername`, `connectedVia`, `connectedViaAccurate` &
-`usernameChanges`가 먼저 나옵니다. 이어서 `id`, `username`, `name`,
-`description`, `followers`, `following`, `verified`, `verifiedType`,
-`createdAt`, `profilePicture` 등 전체 공개 프로필이 나옵니다. Actor가 프로필에서
-계산하는 필드 5개인 `accountBasedInCountryCode`, `connectedViaPlatform`,
-`connectedViaCountryCode`, `accountAgeDays` & `profileUrl`이 마지막에 나옵니다.
-원본에 없는 필드는 행에서 빠지고, Actor가 매칭하지 못한 코드도 넣지 않습니다.
-Xquik의 X Account Location Scraper는 값을 지어내지 않습니다.
+`usernameChanges`에 담깁니다. 이어서 `id`, `username`, `name`, `description`,
+`followers`, `following`, `verified`, `verifiedType`, `createdAt`,
+`profilePicture` 등을 담은 전체 공개 프로필이 나옵니다. Actor가 프로필에서
+계산하는 필드 5개가 마지막에 나옵니다. 이 필드는 `accountBasedInCountryCode`,
+`connectedViaPlatform`, `connectedViaCountryCode`, `accountAgeDays` &
+`profileUrl`입니다. 원본에 없는 필드는 행에서 빠지고, Actor가 매칭하지 못한
+코드도 넣지 않습니다. Xquik의 X Account Location Scraper는 값을 지어내지
+않습니다.
 
 예시는 샘플 값입니다. 실제 결과는 실시간 데이터를 따릅니다. 행은 다음과
 같습니다.
@@ -140,38 +138,68 @@ Xquik의 X Account Location Scraper는 값을 지어내지 않습니다.
 
 행은 다음 3가지 경우를 구분합니다.
 
-| 행에 들어 있는 값                 | 의미                                            | 할 일                                 |
-| --------------------------------- | ----------------------------------------------- | ------------------------------------- |
-| `value`가 있는 `accountBasedIn`   | X가 이 계정에 이 라벨을 표시합니다.             | 그대로 사용하세요.                    |
-| `accountBasedIn: null`            | X가 이 계정에 표시하는 라벨이 없습니다.         | 없습니다. X에 표시할 라벨이 없습니다. |
-| `accountBasedInUnavailable: true` | X가 읽기 2번 모두에서 라벨을 내주지 않았습니다. | 나중에 이 계정으로 다시 실행하세요.   |
+| 행에 들어 있는 값                 | 의미                                            | 할 일                                         |
+| --------------------------------- | ----------------------------------------------- | --------------------------------------------- |
+| `value`가 있는 `accountBasedIn`   | X가 이 계정에 이 라벨을 표시합니다.             | 그대로 사용하세요.                            |
+| `accountBasedIn: null`            | X가 이 계정에 표시하는 라벨이 없습니다.         | 할 일이 없습니다. X에 표시할 라벨이 없습니다. |
+| `accountBasedInUnavailable: true` | X가 읽기 2번 모두에서 라벨을 내주지 않았습니다. | 나중에 이 계정으로 다시 실행하세요.           |
 
 X가 라벨을 내주지 않으면 실행은 행을 전달하기 전에 그 계정을 1번 더 읽습니다.
 2번째 읽기는 무료입니다. 그래도 받지 못한 라벨은 없는 것이 아니라 알 수 없는
-것입니다. 이런 행에는 계정 정보 필드 없이 공개 프로필만 들어 있으며, 실행 상태에
-이런 계정의 수가 나옵니다. 3가지 경우 모두 전달된 행 1개입니다.
+것입니다. 이런 행에는 계정 정보 필드 없이 공개 프로필이 들어 있으며, 실행 상태에
+이런 계정의 수가 나옵니다. 3가지 경우는 각각 전달된 행 1개입니다.
+
+## 출력 열
+
+입력 8개가 실행이 읽은 각 행의 모양을 정합니다. 이 입력은 코드를 실행하지 않으며
+가격도 바꾸지 않습니다.
+
+| 필드                | 하는 일                                                           |
+| ------------------- | ----------------------------------------------------------------- |
+| `fields`            | 입력한 순서 & 철자 그대로 이 필드만 남깁니다                      |
+| `omitFields`        | 이 필드를 빼고 나머지를 남깁니다                                  |
+| `renameFields`      | 필드를 새 이름의 열로 옮깁니다                                    |
+| `flatten`           | 중첩된 객체를 각각 최상위 열로 바꿉니다                           |
+| `fillMissingFields` | 남긴 필드가 행에 없으면 `null`로 채웁니다. 기본으로 켜져 있습니다 |
+| `joinFields`        | 이 목록을 각각 텍스트 값 1개로 바꿉니다                           |
+| `joinSeparator`     | 합친 항목 사이에 넣는 텍스트입니다. 기본값은 쉼표 & 공백입니다    |
+| `constantFields`    | 모든 행에 같은 텍스트가 들어간 열을 추가합니다                    |
+
+- 객체 안의 필드는 `accountBasedIn.value`처럼 점으로 구분해 적으세요. 대소문자 &
+  밑줄은 상관없습니다.
+- 모든 행에 `id`가 남습니다.
+- `fields`를 쓰면 행에 없는 필드는 `null`로 들어갑니다. 그래서 모든 행의 열이
+  같아집니다.
+- 필드 이름이 잘못되면 실행은 읽기 & 과금 전에 멈춥니다.
+- 이름을 확인할 수 없으면 실행은 계속 읽고, 보지 못한 이름을 마지막에
+  나열합니다.
+- 실행은 다른 Actor용으로 쓴 맵 함수나 jq 필터를 무시합니다.
 
 ## 라벨의 의미
 
 X는 계정에 접속한 IP를 집계해 `accountBasedIn`을 추론합니다. 이 라벨은 국적,
-거주지, 신원, 가입 위치, 게시 위치, 정확한 위치를 나타내지 않습니다. `level`은
-X가 국가를 표시하는지 더 넓은 지역을 표시하는지 알려 줍니다. `observedAt`은
-가져온 시각을 기록합니다. X가 라벨이 부정확할 수 있다고 알리면
+거주지, 신원, 가입 위치, 게시 위치 또는 정확한 위치를 나타내지 않습니다.
+`level`은 X가 국가를 표시하는지 더 넓은 지역을 표시하는지 알려 줍니다.
+`observedAt`은 가져온 시각을 기록합니다. X가 라벨이 부정확할 수 있다고 알리면
 `accountBasedInAccurate` 값은 `false`입니다. `connectedVia`는 계정이 X에 처음
 연결된 방식을 알려 주며, X가 그 국가가 부정확할 수 있다고 알리면
 `connectedViaAccurate` 값은 `false`입니다. `connectedViaPlatform`은 `web`, `ios`
 또는 `android`입니다. 국가 코드 2개는 X가 적은 이름에서 나오므로 지역에는 코드가
-없습니다. `location`은 계정 주인이 프로필에 직접 쓴 텍스트이며, 별개의
-필드입니다.
+없습니다. X는 Türkiye & Turkey처럼 일부 국가를 2가지 이름으로 적으며, 어느
+이름이든 같은 코드가 됩니다. `location`은 계정 주인이 프로필에 직접 쓴
+텍스트이며, 별개의 필드입니다.
 
 ## X 계정 위치 확인 비용은 얼마인가요?
 
 모든 Apify 요금제에서 전달된 행 1개당 $0.00015입니다. Apify 플랫폼 사용료는
 Apify가 따로 청구합니다.
 
+더 많이 수집하려면 선불 사용량이 더 많은
+[Apify 요금제를 고르세요](https://apify.com/pricing?fpr=xquik).
+
 - 전달된 데이터 행 1개마다 한 번 과금합니다. 진단은 `diagnostics`에서 무료로
   제공합니다.
-- 시작, 조회 요금이 없습니다.
+- 시작 또는 조회 요금이 없습니다.
 - X에 없는 계정은 행도 요금도 추가하지 않습니다.
 - X가 내주지 않은 라벨을 다시 읽어도 추가 요금이 없습니다.
 - 과금 전에 중복을 제거합니다.
@@ -181,7 +209,7 @@ Apify가 따로 청구합니다.
 
 Xquik의 X Account Location Scraper는 1회 실행에서 여러 계정을 읽습니다. Apify가
 실행을 다시 시작해도 전달된 행 & 진행 상황은 유지됩니다. 이 Actor는 자체 시간
-제한을 두지 않습니다. 사용자가 설정한 Apify 제한 시간은 지킵니다.
+제한을 두지 않습니다. 직접 설정한 Apify 제한 시간은 모두 지킵니다.
 
 실행 상태는 X에서 찾을 수 없는 계정을 알려 주고 사용자 아이디, ID 또는 URL을
 확인하라고 안내합니다. 정지된 계정도 알려 줍니다. 추출이 중단되면 무료 `partial`
@@ -210,15 +238,15 @@ Actor가 성공으로 종료되면 전달이 끝났다는 뜻입니다. 추출�
   아이디, ID 또는 URL로 프로필과 그 계정의 게시물, 답글, 미디어 & 팔로워를
   스크랩합니다. 검색이 아니라 계정에서 시작할 때 사용하세요. 행당
   $0.00015부터입니다.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)는 게시물 아래의
-  답글(댓글) & 대화 전체를 25개 이상의 필터로 스크랩합니다. 게시물 아래의 토론이
-  필요할 때 사용하세요. 행당 $0.00015부터입니다.
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)는 25개 이상의
+  필터로 게시물 아래의 답글, 댓글 & 대화 전체를 스크랩합니다. 게시물 아래의
+  토론이 필요할 때 사용하세요. 행당 $0.00015부터입니다.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)는 게시물
   URL이나 ID로 답글, 인용, 재게시한 사람 & 스레드를 대량으로 스크랩합니다. 누가
   게시물에 반응했는지 측정할 때 사용하세요. 행당 $0.00015부터입니다.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)는
   게시물을 인용한 게시물을 텍스트, 미디어, 수치, 작성자 & 11개의 필터와 함께
-  스크랩합니다. 누가 게시물을 인용했고 무엇을 말했는지 살펴볼 때 사용하세요.
+  스크랩합니다. 게시물을 인용한 사람 & 그들이 한 말을 살펴볼 때 사용하세요.
   게시물당 $0.00015부터입니다.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)는 팔로워,
   팔로잉, 리스트 멤버, 구독자 & 커뮤니티 멤버를 프로필 행으로 스크랩합니다.
@@ -263,9 +291,9 @@ Actor가 성공으로 종료되면 전달이 끝났다는 뜻입니다. 추출�
   AI로 게시물마다 태도, 강도 & 비꼼 확률을 라벨링합니다. 어떤 주제든 전반적인
   감정을 알고 싶을 때 사용하세요. 분석한 게시물당 $0.0003부터입니다.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)는
-  AI로 강세, 약세, 중립, 혼조 입장과 콘텐츠 유형, 확신도 & 자산 관련성을
-  라벨링합니다. 주식, 암호화폐, 트레이딩 이야기를 지켜볼 때 사용하세요. 분석한
-  게시물당 $0.0003부터입니다.
+  AI로 강세, 약세, 중립 또는 혼조 입장과 콘텐츠 유형, 확신도 & 자산 관련성을
+  라벨링합니다. 주식, 암호화폐 또는 트레이딩 이야기를 지켜볼 때 사용하세요.
+  분석한 게시물당 $0.0003부터입니다.
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)는
   AI로 뉴스 게시물을 형식, 출처 표기 & 주제 관련성에 따라 라벨링합니다. 보도와
   논평을 구분할 때 사용하세요. 분석한 게시물당 $0.0003부터입니다.
@@ -274,9 +302,9 @@ Actor가 성공으로 종료되면 전달이 끝났다는 뜻입니다. 추출�
   분석이 원하는 라벨과 맞지 않을 때 사용하세요. 분석한 게시물당
   $0.0003부터입니다.
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)는
-  AI의 특성 답변 8개로 게시물마다 0에서 100까지의 Viral Score & 판정을
-  추정합니다. 게시물이 왜 퍼지거나 묻히는지 분석할 때 사용하세요. 분석한
-  게시물당 $0.0003부터입니다.
+  AI 특성 답변 8개로 게시물마다 0에서 100까지의 Viral Score & 판정을 추정합니다.
+  게시물이 왜 퍼지거나 묻히는지 분석할 때 사용하세요. 분석한 게시물당
+  $0.0003부터입니다.
 
 ## 자주 묻는 질문
 
@@ -289,10 +317,10 @@ Actor가 성공으로 종료되면 전달이 끝났다는 뜻입니다. 추출�
 
 ### 라벨이 계정 주인이 사는 곳을 알려 주나요?
 
-아니요. X가 최선을 다해 추정해 계정에 붙인 라벨입니다. 국적, 거주지, 정확한
-위치를 나타내지 않으며, X 스스로도 일부 라벨이 부정확할 수 있다고 표시합니다.
+아니요. X가 최선을 다해 추정해 계정에 붙인 라벨입니다. 국적, 거주지 또는 정확한
+위치를 나타내지 않으며, X 스스로도 일부 라벨에 부정확할 수 있다고 표시합니다.
 
-### 행에 `accountBasedInUnavailable`이 있는 이유는 무엇인가요?
+### 행에 `accountBasedInUnavailable`이 나오는 이유는 무엇인가요?
 
 X가 이 실행의 읽기 2번 모두에서 라벨을 내주지 않았습니다. 라벨은 없는 것이
 아니라 알 수 없는 것입니다. 라벨을 받으려면 나중에 이 계정으로 다시 실행하세요.
@@ -301,14 +329,14 @@ X가 이 실행의 읽기 2번 모두에서 라벨을 내주지 않았습니다.
 
 ### 1회 실행에서 계정을 몇 개까지 확인할 수 있나요?
 
-붙여 넣은 만큼 확인합니다. 1회 실행으로 100,000행 이상을 받을 수 있습니다.
-목록이 더 길면 `maxItems`를 양식의 기본값인 1,000보다 높이세요.
+붙여 넣은 만큼 확인할 수 있습니다. 1회 실행으로 100,000행 이상을 받을 수
+있습니다. 목록이 더 길면 `maxItems`를 양식의 시작값인 1,000보다 높이세요.
 
 ### X 계정의 기반 위치를 확인해도 합법인가요?
 
 Xquik의 X Account Location Scraper는 공개 X 필드를 요청합니다. 결과에는
-개인정보가 들어 있을 수 있습니다. 적법한 목적인지 확인하고 관련 개인정보 보호
-규정을 따르세요. 확실하지 않으면 자격을 갖춘 법률 전문가에게 문의하세요.
+개인정보가 들어 있을 수 있습니다. 적법한 목적인지 확인하고 적용되는 개인정보
+보호 규정을 따르세요. 확실하지 않으면 자격을 갖춘 법률 전문가에게 문의하세요.
 
 ### 실행 결과가 비어 있는 이유는 무엇인가요?
 
@@ -329,12 +357,14 @@ Scraper를 cron 일정에 맞춰 실행할 수 있습니다. 에이전트는
 
 ### 도움은 어디서 받을 수 있나요?
 
-Actor 페이지에서 이슈를 열거나 실행 ID와 함께 <support@xquik.com>으로
-문의하세요. 키-값 저장소의 무료 진단이 확인이 필요한 실행의 원인을 설명합니다.
-행을 하나도 받지 못한 실행은 상태에서 이유를 알려 줍니다.
+실행 ID와 함께
+[Issues 탭](https://apify.com/xquik/x-account-location-scraper/issues)에서
+이슈를 여세요. 키-값 저장소의 무료 진단이 확인이 필요한 실행의 원인을
+설명합니다. 행을 하나도 받지 못한 실행은 상태에서 이유를 알려 줍니다.
 
 ### 맞춤 솔루션을 받을 수 있나요?
 
-네. [xquik.com](https://xquik.com)을 방문하거나
-[API 문서](https://docs.xquik.com/introduction)를 읽어 보세요. 대시보드, API,
-MCP 서버 & 웹훅 안내가 있습니다.
+네. [Issues 탭](https://apify.com/xquik/x-account-location-scraper/issues)에
+필요한 내용을 적어 주세요. Xquik은 대시보드, REST API, MCP 서버 & 웹훅도
+제공합니다. Xquik 웹사이트는 [Apify 프로필](https://apify.com/xquik)에서 찾을 수
+있습니다.

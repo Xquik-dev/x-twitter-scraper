@@ -1,30 +1,21 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <strong>Español</strong> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · **Español** · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer conecta Xquik MCP con agentes de codificación"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Mira cómo Framer usa los extractores de Xquik con Claude Code, Codex, Cursor y más, desde el minuto 6:07.</a>
-</td></tr></table>
+[![Framer conecta Xquik MCP con agentes de codificación](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Mira cómo Framer usa los extractores de Xquik](https://youtu.be/4UOSpoOoC3Y?t=367)
+con Claude Code, Codex, Cursor & más, desde el minuto 6:07.
 
 Xquik es el servicio de scraping de X (Twitter) más rápido y económico del
 mundo, con los datos de X más completos. X Profile Scraper de Xquik recopila
-perfiles, posts, respuestas, contenido multimedia y seguidores de cualquier
+perfiles, posts, respuestas, contenido multimedia & seguidores de cualquier
 nombre de usuario. La mayoría de los demás Actores de Apify cobran antes de
 filtrar o quitar duplicados. Xquik solo cobra los resultados entregados, únicos
 y que cumplen tus filtros.
 
-Consulta cuentas de Twitter en bloque y lee perfiles sin una cuenta de X. Extrae
-perfiles, posts, respuestas, contenido multimedia y seguidores de X a partir de
-nombres de usuario, IDs o URLs. Pagas **$0.00015 por fila entregada**, y Apify
+Consulta cuentas de Twitter en bloque & lee perfiles sin una cuenta de X. Extrae
+perfiles, posts, respuestas, contenido multimedia & seguidores de X a partir de
+nombres de usuario, IDs o URLs. Pagas **$0.00015 por fila entregada**, & Apify
 factura aparte el uso de la plataforma. No necesitas clave de API de X ni
 iniciar sesión.
 
@@ -36,8 +27,8 @@ iniciar sesión.
 X Profile Scraper de Xquik devuelve perfiles públicos de X (Twitter) a partir de
 nombres de usuario, IDs numéricos de usuario o URLs de perfiles. Cada perfil
 puede agregar sus posts, respuestas, contenido multimedia, Destacados,
-seguidores, cuentas seguidas y seguidores verificados. También traduce
-biografías y comprueba quién transmite en vivo ahora.
+seguidores, cuentas seguidas & seguidores verificados. También traduce
+biografías & comprueba quién transmite en vivo ahora.
 
 ### Funciones principales
 
@@ -46,22 +37,22 @@ biografías y comprueba quién transmite en vivo ahora.
   cuentas seguidas o seguidores verificados como filas separadas.
 - Traduce cada biografía a un código de idioma con `translateBioTo`.
 - Comprueba si cada perfil transmite en vivo ahora con `checkLiveNow`.
-- Filtra posts por fecha, idioma, contenido multimedia e interacción.
-- Filtra perfiles por tamaño de audiencia, antigüedad de la cuenta y
+- Filtra posts por fecha, idioma, contenido multimedia & interacción.
+- Filtra perfiles por tamaño de audiencia, antigüedad de la cuenta &
   verificación.
-- Los filtros y la eliminación de duplicados se aplican antes de facturar.
-- Las ejecuciones conservan las filas entregadas y el progreso cuando Apify las
+- Los filtros & la eliminación de duplicados se aplican antes del cobro.
+- Las ejecuciones conservan las filas entregadas & el progreso cuando Apify las
   reinicia.
 
 ### Casos de uso
 
 - Enriquece listas de clientes potenciales con biografías, sitios web,
-  ubicaciones y tamaño de audiencia.
-- Compara cuentas de la competencia por seguidores, posts y verificación.
-- Evalúa creadores por audiencia, antigüedad de la cuenta e interacción.
-- Archiva los posts, el contenido multimedia y los Destacados de una cuenta.
-- Mapea la red de una cuenta a través de sus seguidores y cuentas seguidas.
-- Vigila creadores y marcas para detectar transmisiones en vivo.
+  ubicaciones & tamaño de audiencia.
+- Compara cuentas de la competencia por seguidores, posts & verificación.
+- Evalúa creadores por audiencia, antigüedad de la cuenta & interacción.
+- Archiva los posts, el contenido multimedia & los Destacados de una cuenta.
+- Mapea la red de una cuenta a través de sus seguidores & cuentas seguidas.
+- Vigila creadores & marcas para detectar transmisiones en vivo.
 - Lee biografías de otros mercados en tu propio idioma.
 
 ### ¿Qué datos puede extraer X Profile Scraper?
@@ -69,43 +60,46 @@ biografías y comprueba quién transmite en vivo ahora.
 Las filas de perfil usan `resultType: "profile"`. Estos son los campos
 principales.
 
-| Campo              | Descripción                                                      |
-| ------------------ | ---------------------------------------------------------------- |
-| `id`               | ID numérico del usuario                                          |
-| `username`         | Nombre de usuario sin `@`                                        |
-| `name`             | Nombre visible                                                   |
-| `description`      | Texto de la biografía                                            |
-| `url`              | Sitio web en las filas de perfil                                 |
-| `location`         | Ubicación que escribió el titular                                |
-| `followers`        | Cantidad de seguidores                                           |
-| `following`        | Cantidad de cuentas seguidas                                     |
-| `statusesCount`    | Cantidad de posts                                                |
-| `mediaCount`       | Cantidad de posts con contenido multimedia                       |
-| `favouritesCount`  | Me gusta que dio la cuenta                                       |
-| `listedCount`      | Listas públicas que incluyen la cuenta                           |
-| `createdAt`        | Fecha de creación de la cuenta                                   |
-| `verified`         | Si X indica que la cuenta está verificada                        |
-| `isBlueVerified`   | Si la cuenta tiene verificación de X Blue                        |
-| `verifiedType`     | Categoría de verificación, como `Government`                     |
-| `profilePicture`   | URL de la imagen de perfil                                       |
-| `coverPicture`     | URL de la imagen de encabezado                                   |
-| `pinnedTweetIds`   | IDs de los posts fijados                                         |
-| `professional`     | Categoría y tipo profesional                                     |
-| `accountBasedIn`   | Etiqueta aproximada de país o región según X                     |
-| `connectedVia`     | Cómo se conectó la cuenta a X por primera vez                    |
-| `usernameChanges`  | Cuántas veces cambió el nombre de usuario y cuándo fue la última |
-| `birthdate`        | Partes de la fecha de nacimiento que la cuenta hizo públicas     |
-| `subscribersCount` | Cantidad de suscriptores, cuando X la envía                      |
-| `tipJar`           | Enlaces públicos de propinas                                     |
-| `protected`        | Si la cuenta protege sus posts                                   |
-| `unavailable`      | Si la cuenta no está disponible                                  |
-| `sourceTarget`     | El nombre de usuario, ID o URL que ingresaste                    |
+| Campo                    | Descripción                                                      |
+| ------------------------ | ---------------------------------------------------------------- |
+| `id`                     | ID numérico del usuario                                          |
+| `username`               | Nombre de usuario sin `@`                                        |
+| `name`                   | Nombre visible                                                   |
+| `description`            | Texto de la biografía                                            |
+| `url`                    | Sitio web en las filas de perfil                                 |
+| `location`               | Ubicación que escribió el titular                                |
+| `email`                  | Primer correo que publica el perfil                              |
+| `contactInfo`            | Correos, teléfonos & enlaces que publica el perfil               |
+| `followers`              | Cantidad de seguidores                                           |
+| `following`              | Cantidad de cuentas seguidas                                     |
+| `statusesCount`          | Cantidad de posts                                                |
+| `mediaCount`             | Cantidad de posts con contenido multimedia                       |
+| `favouritesCount`        | Me gusta que dio la cuenta                                       |
+| `listedCount`            | Listas públicas que incluyen la cuenta                           |
+| `createdAt`              | Fecha de creación de la cuenta                                   |
+| `verified`               | Si X indica que la cuenta está verificada                        |
+| `isBlueVerified`         | Si la cuenta tiene verificación de X Blue                        |
+| `verifiedType`           | Categoría de verificación, como `Government`                     |
+| `profilePicture`         | URL de la imagen de perfil a 48 px                               |
+| `profilePictureOriginal` | La misma imagen en tamaño completo, para descargar               |
+| `coverPicture`           | URL de la imagen de encabezado                                   |
+| `pinnedTweetIds`         | IDs de los posts fijados                                         |
+| `professional`           | Categoría & tipo profesional                                     |
+| `accountBasedIn`         | Etiqueta aproximada de país o región según X                     |
+| `connectedVia`           | Cómo se conectó la cuenta a X por primera vez                    |
+| `usernameChanges`        | Cuántas veces cambió el nombre de usuario & cuándo fue la última |
+| `birthdate`              | Partes de la fecha de nacimiento que la cuenta hizo públicas     |
+| `subscribersCount`       | Cantidad de suscriptores, cuando X la envía                      |
+| `tipJar`                 | Enlaces públicos de propinas                                     |
+| `protected`              | Si la cuenta protege sus posts                                   |
+| `unavailable`            | Si la cuenta no está disponible                                  |
+| `sourceTarget`           | El nombre de usuario, ID o URL que ingresaste                    |
 
 El esquema del dataset documenta todos los demás campos, como
-`identityVerification`, `isAutomated`, `automatedBy`, `withheldInCountries` y
+`identityVerification`, `isAutomated`, `automatedBy`, `withheldInCountries` &
 `verificationReason`.
 
-Las filas opcionales mantienen la forma de respuesta de Xquik REST.
+Las filas opcionales mantienen la forma de respuesta de la API REST de Xquik.
 
 | `resultType`              | Se activa con              | Una fila por                  |
 | ------------------------- | -------------------------- | ----------------------------- |
@@ -124,13 +118,19 @@ bloqueas una cuenta.
 
 ## ¿Cómo uso X Profile Scraper para extraer datos de perfiles?
 
+¿Recién llegas a Apify? Primero
+[crea una cuenta gratis](https://console.apify.com/sign-up?fpr=xquik). El plan
+gratuito no pide tarjeta de crédito & te da $5 para gastar cada mes. A $0.00015
+por fila, $5 alcanzan para hasta 33,000 filas, sin contar el uso de la
+plataforma. Luego vuelve aquí & haz clic en Try for free.
+
 Sigue estos pasos en Apify Console.
 
 1. Abre un [ejemplo de tarea](#ejemplos-de-tareas) o la pestaña Input.
 2. Agrega nombres de usuario en `twitterHandles`, URLs en `startUrls` o IDs en
    `userIds`.
 3. Activa los recursos que necesites, como `includeTweets`.
-4. Define `maxItems` y los filtros que quieras, y luego haz clic en Start.
+4. Define `maxItems` & los filtros que quieras, y luego haz clic en Start.
 5. Exporta el dataset en JSON, CSV, Excel o HTML.
 
 Cada receta de abajo es una entrada completa.
@@ -157,9 +157,9 @@ funcionan con o sin `@`.
 }
 ```
 
-Si indicas un nombre de usuario 2 veces, se lee 1 sola vez.
+La ejecución lee una sola vez cada nombre de usuario repetido.
 
-### Agrega posts, respuestas y contenido multimedia
+### Agrega posts, respuestas & contenido multimedia
 
 ```json
 {
@@ -191,7 +191,7 @@ no agrega filas.
 Los filtros de posts se aplican a las filas opcionales de posts. Las filas
 filtradas nunca llegan al dataset, así que nunca pagas por ellas.
 
-### Exporta seguidores y cuentas seguidas
+### Exporta seguidores & cuentas seguidas
 
 ```json
 {
@@ -203,8 +203,8 @@ filtradas nunca llegan al dataset, así que nunca pagas por ellas.
 }
 ```
 
-`includeFollowers`, `includeFollowing` y `includeVerifiedFollowers` agregan 1
-fila de perfil por cuenta. Los filtros de perfil se aplican a estas filas y a
+`includeFollowers`, `includeFollowing` & `includeVerifiedFollowers` agregan 1
+fila de perfil por cuenta. Los filtros de perfil se aplican a estas filas & a
 los perfiles principales.
 
 ### Traduce biografías
@@ -213,8 +213,8 @@ los perfiles principales.
 { "twitterHandles": ["nasa", "SpaceX"], "translateBioTo": "es" }
 ```
 
-Cada traducción es 1 fila `profileBioTranslation` con `text`, `language` y
-`sourceLanguage`. Un perfil sin biografía no agrega filas ni cobros.
+Cada traducción es 1 fila `profileBioTranslation` con `text`, `language` &
+`sourceLanguage`. Un perfil sin biografía no agrega ninguna fila & ningún cobro.
 
 ### Comprueba quién está en vivo ahora
 
@@ -222,27 +222,27 @@ Cada traducción es 1 fila `profileBioTranslation` con `text`, `language` y
 { "twitterHandles": ["nasa", "SpaceX"], "checkLiveNow": true }
 ```
 
-Cada comprobación es 1 fila `profileLive` con `live`, `userId`, `userName` y
+Cada comprobación es 1 fila `profileLive` con `live`, `userId`, `userName` &
 `broadcast`. `broadcast` contiene la última transmisión del perfil, en vivo o
 finalizada, o null. Un perfil inexistente no agrega filas.
 
 ## Ejemplos de tareas
 
-Elige entre 50 tareas públicas. Cada una tiene una entrada acotada y una vista
-del dataset que le corresponde. Edita una tarea antes de ejecutarla.
+Elige entre 50 tareas públicas. Cada una tiene una entrada acotada & una vista
+de dataset que le corresponde. Edita una tarea antes de ejecutarla.
 
-- [Obtén la tarjeta de perfil de 1 cuenta de X](https://apify.com/xquik/x-profile-scraper/examples/get-an-x-profile-card)
+- [Obtén la tarjeta de perfil de una cuenta de X](https://apify.com/xquik/x-profile-scraper/examples/get-an-x-profile-card)
 - [Compara los perfiles de marcas competidoras](https://apify.com/xquik/x-profile-scraper/examples/compare-competitor-brand-profiles)
 - [Convierte IDs numéricos de usuarios en perfiles](https://apify.com/xquik/x-profile-scraper/examples/resolve-numeric-user-ids-to-profiles)
-- [Recopila los posts recientes de 1 cuenta](https://apify.com/xquik/x-profile-scraper/examples/collect-recent-posts-from-an-account)
+- [Recopila los posts recientes de una cuenta](https://apify.com/xquik/x-profile-scraper/examples/collect-recent-posts-from-an-account)
 - [Encuentra los posts con más Me gusta de una cuenta](https://apify.com/xquik/x-profile-scraper/examples/find-an-accounts-most-liked-posts)
 - [Recopila los videos que publica una cuenta](https://apify.com/xquik/x-profile-scraper/examples/collect-videos-from-an-account)
-- [Archiva 1 año calendario de una cuenta](https://apify.com/xquik/x-profile-scraper/examples/archive-one-year-of-posts)
+- [Archiva un año calendario de una cuenta](https://apify.com/xquik/x-profile-scraper/examples/archive-one-year-of-posts)
 - [Exporta los seguidores de una cuenta](https://apify.com/xquik/x-profile-scraper/examples/export-the-followers-of-an-account)
 - [Exporta los seguidores verificados de una empresa](https://apify.com/xquik/x-profile-scraper/examples/export-verified-followers)
 - [Encuentra seguidores con 10,000 seguidores o más](https://apify.com/xquik/x-profile-scraper/examples/find-influential-followers)
 - [Mide la coincidencia de audiencia entre 2 herramientas de diseño](https://apify.com/xquik/x-profile-scraper/examples/measure-audience-overlap)
-- [Haz una auditoría completa de 1 cuenta](https://apify.com/xquik/x-profile-scraper/examples/run-a-full-account-audit)
+- [Haz una auditoría completa de una cuenta](https://apify.com/xquik/x-profile-scraper/examples/run-a-full-account-audit)
 
 ## ¿Cuánto cuesta extraer perfiles de X?
 
@@ -251,51 +251,54 @@ planes de Apify. Apify factura aparte tu uso de la plataforma. Xquik aplica un
 cobro por cada fila de datos entregada. Los diagnósticos son gratis en la salida
 `diagnostics`.
 
+Para más volumen, [elige un plan de Apify](https://apify.com/pricing?fpr=xquik)
+con más uso prepagado.
+
 - No necesitas suscripción a Xquik.
 - No pagas tarifas aparte de inicio, por perfil ni por consulta.
-- Los filtros y la eliminación de duplicados se aplican antes de facturar. Nunca
-  pagas por filas filtradas o duplicadas.
+- Los filtros & la eliminación de duplicados se aplican antes del cobro. Nunca
+  pagas por filas filtradas ni duplicadas.
 - Un perfil sin biografía no agrega cobro de traducción.
 - Un perfil inexistente no agrega cobro de comprobación en vivo.
-- El cargo total máximo que definas en Apify limita las filas entregadas.
+- La configuración de cargo total máximo de Apify limita las filas entregadas.
 
 Una ejecución con algún problema, o una ejecución grande, también escribe un
-registro `run-report`. Una ejecución pequeña sin problemas lo omite y ahorra uso
+registro `run-report`. Una ejecución pequeña sin problemas lo omite & ahorra uso
 de Apify. Activa `alwaysSaveRunRecords` para escribirlo en todas las
 ejecuciones.
 
 Para limitar lo que puede gastar una ejecución, consulta
 [Opciones de ejecución](#opciones-de-ejecución).
 
-## Ejecuciones vacías, parciales y detenidas
+## Ejecuciones vacías, parciales & detenidas
 
-X Profile Scraper de Xquik explica gratis las ejecuciones vacías, parciales y
-detenidas. El estado de la ejecución indica por qué se detuvo. También cuenta
-los resultados cobrados y los objetivos leídos.
+X Profile Scraper de Xquik explica gratis las ejecuciones vacías, parciales &
+detenidas. El estado de la ejecución dice por qué se detuvo. También cuenta los
+resultados cobrados & los objetivos leídos.
 
 ### Resultados vacíos
 
-El estado de una ejecución vacía te pide revisar tus objetivos y filtros. Las
+El estado de una ejecución vacía te pide revisar tus objetivos & filtros. Las
 filas filtradas nunca consumen tu límite de resultados. Una ejecución que lee
-todos los objetivos y no obtiene ninguna fila no escribe ningún registro. Su
-estado explica por qué y qué cambiar.
+todos los objetivos & no obtiene ninguna fila no escribe ningún registro. Su
+estado explica por qué & qué cambiar.
 
-Desde 2024, X solo le muestra a cada cuenta los posts que esa cuenta marcó con
-Me gusta. `includeLikes` no devuelve filas `profileLike` de otras cuentas.
+Desde 2024, X muestra los posts que una cuenta marcó con Me gusta solo a esa
+misma cuenta. `includeLikes` no devuelve filas `profileLike` de otras cuentas.
 
 ### Ejecuciones parciales
 
 Una extracción interrumpida escribe un diagnóstico `partial` gratis. Las filas
 entregadas se conservan en el dataset. Lee `availableResults`, `failedTargets`,
-`retryable` y `nextAction` antes de reintentar. Una salida exitosa del Actor
+`retryable` & `nextAction` antes de reintentar. Una salida exitosa del Actor
 confirma la entrega, no una extracción completa.
 
 ### Causas de detención
 
 El estado de la ejecución nombra cada causa de una detención anticipada.
-`stopCauses` enumera cada causa con su propio `message`, `retryable` y
+`stopCauses` enumera cada causa con su propio `message`, `retryable` &
 `nextAction`. Las causas son `target_not_found`, `target_suspended`,
-`target_failed`, `pagination_safety_limit` y `deadline_reached`.
+`target_failed`, `pagination_safety_limit` & `deadline_reached`.
 `target_suspended` nombra las cuentas que X suspendió. Un objetivo inexistente o
 suspendido entra en la lista solo si otra causa detuvo la ejecución. La
 ejecución es `retryable` si alguna causa lo es.
@@ -306,37 +309,44 @@ La pestaña Input enumera todas las opciones. Indica al menos 1 de
 `twitterHandles`, `startUrls` o `userIds`. Todos los demás campos son
 opcionales.
 
-| Campo                          | Qué hace                                                         |
-| ------------------------------ | ---------------------------------------------------------------- |
-| `twitterHandles`               | Nombres de usuario, con o sin `@`                                |
-| `startUrls`                    | URLs de perfiles en x.com o twitter.com                          |
-| `userIds`                      | IDs numéricos de usuarios de X                                   |
-| `maxItems`                     | Límite de filas entregadas en toda la ejecución                  |
-| `maxItemsPerTarget`            | Límite de filas por cada perfil o recurso                        |
-| `includeTweets`                | Agrega la pestaña Posts                                          |
-| `includeReplies`               | Agrega la pestaña Respuestas                                     |
-| `includeMedia`                 | Agrega la pestaña Multimedia                                     |
-| `includeHighlights`            | Agrega la pestaña Destacados                                     |
-| `includeLikes`                 | Agrega los Me gusta, que X oculta a otras cuentas                |
-| `includeFollowers`             | Agrega seguidores                                                |
-| `includeFollowing`             | Agrega cuentas seguidas                                          |
-| `includeVerifiedFollowers`     | Agrega seguidores verificados                                    |
-| `translateBioTo`               | Traduce cada biografía a un código de idioma, como `es`          |
-| `checkLiveNow`                 | Comprueba si cada perfil transmite en vivo ahora                 |
-| `sinceDate`, `untilDate`       | Conserva los posts dentro de un rango de fechas                  |
-| `language`                     | Conserva los posts en 1 código de idioma                         |
-| `mediaType`                    | Conserva los posts con imágenes, videos, GIFs, enlaces o ninguno |
-| `minViews`, `minLikes`         | Conserva los posts sobre un mínimo de visualizaciones o Me gusta |
-| `minReplies`, `minRetweets`    | Conserva los posts sobre un mínimo de respuestas o reposts       |
-| `nativeRetweets`               | Conserva solo los reposts nativos                                |
-| `verifiedOnly`                 | Conserva autores o perfiles verificados                          |
-| `blueVerifiedOnly`             | Conserva autores o perfiles que X marca como verificados Blue    |
-| `minFollowers`, `maxFollowers` | Conserva los perfiles dentro de un rango de audiencia            |
-| `minAccountAgeDays`            | Conserva los perfiles con al menos estos días de antigüedad      |
-| `hasWebsite`, `hasLocation` | Conserva los perfiles que indican un sitio web o una ubicación |
-| `bioContains` | Conserva los perfiles cuya biografía tiene 1 de estas palabras |
-| `locationContains` | Conserva los perfiles cuya ubicación tiene este texto |
-| `dedupeAcrossTargets`          | Descarta filas repetidas entre perfiles antes de facturar        |
+| Campo                          | Qué hace                                                                       |
+| ------------------------------ | ------------------------------------------------------------------------------ |
+| `twitterHandles`               | Nombres de usuario, con o sin `@`                                              |
+| `startUrls`                    | URLs de perfiles en `x.com` o `twitter.com`                                    |
+| `userIds`                      | IDs numéricos de usuarios de X                                                 |
+| `maxItems`                     | Límite de filas entregadas en toda la ejecución                                |
+| `maxItemsPerTarget`            | Límite de filas por cada perfil o recurso                                      |
+| `includeTweets`                | Agrega la pestaña Posts                                                        |
+| `includeReplies`               | Agrega la pestaña Respuestas                                                   |
+| `includeMedia`                 | Agrega la pestaña Multimedia                                                   |
+| `includeHighlights`            | Agrega la pestaña Destacados                                                   |
+| `includeLikes`                 | Agrega los posts con Me gusta, que X oculta a otras cuentas                    |
+| `includeFollowers`             | Agrega seguidores                                                              |
+| `includeFollowing`             | Agrega cuentas seguidas                                                        |
+| `includeVerifiedFollowers`     | Agrega seguidores verificados                                                  |
+| `translateBioTo`               | Traduce cada biografía a un código de idioma, como `es`                        |
+| `checkLiveNow`                 | Comprueba si cada perfil transmite en vivo ahora                               |
+| `sinceDate`, `untilDate`       | Conserva los posts dentro de un rango de fechas                                |
+| `language`                     | Conserva los posts en 1 código de idioma                                       |
+| `mediaType`                    | Conserva los posts con imágenes, videos, GIFs, enlaces o ninguno               |
+| `minViews`, `minLikes`         | Conserva los posts que superan una cantidad de visualizaciones o Me gusta      |
+| `minReplies`, `minRetweets`    | Conserva los posts que superan una cantidad de respuestas o reposts            |
+| `nativeRetweets`               | Conserva solo los reposts nativos                                              |
+| `verifiedOnly`                 | Conserva autores o perfiles verificados                                        |
+| `blueVerifiedOnly`             | Conserva autores o perfiles que X marca como verificados Blue                  |
+| `verifiedType`                 | Conserva los perfiles con 1 tipo de verificación                               |
+| `minFollowers`, `maxFollowers` | Conserva los perfiles dentro de un rango de audiencia                          |
+| `minAccountAgeDays`            | Conserva los perfiles con al menos esta cantidad de días de antigüedad         |
+| `minFollowing`, `maxFollowing` | Conserva los perfiles dentro de un rango de cuentas seguidas                   |
+| `minStatuses`, `maxStatuses`   | Conserva los perfiles dentro de un rango de cantidad de posts                  |
+| `hasWebsite`, `hasLocation`    | Conserva los perfiles que indican un sitio web o una ubicación                 |
+| `hasEmail`                     | Conserva los perfiles que publican un correo                                   |
+| `businessEmailOnly`            | Conserva los perfiles con un correo fuera de los servicios de correo gratuitos |
+| `emailDomains`                 | Conserva los perfiles con un correo en estos dominios                          |
+| `bioContains`                  | Conserva los perfiles cuya biografía tiene 1 de estas palabras                 |
+| `locationContains`             | Conserva los perfiles cuya ubicación tiene este texto                          |
+| `usernameContains`             | Conserva los perfiles cuyo nombre de usuario tiene este texto                  |
+| `dedupeAcrossTargets`          | Descarta filas repetidas entre perfiles antes del cobro                        |
 
 ### Migra desde otro Actor de perfiles
 
@@ -352,16 +362,16 @@ campo al que se asignan.
   `includeFollowers`, `includeFollowing`.
 - `requireEmail` se asigna a `hasEmail`.
 - `requireWebsite` se asigna a `hasWebsite`. Conserva un perfil con cualquier
-  enlace en su campo de sitio web, y el estado de la ejecución lo indica.
+  enlace en su campo de sitio web, & el estado de la ejecución lo indica.
 - `filterByBlueVerified` se asigna a `blueVerifiedOnly`. `false` detiene la
-  ejecución antes de leer o cobrar.
-- `bioKeywords` se asigna a `bioContains`. Basta con que coincida 1 de sus
-  términos.
+  ejecución antes de cualquier lectura o cobro.
+- `bioKeywords` se asigna a `bioContains`. Basta con que coincida 1 cualquiera
+  de sus términos.
 - `locationKeywords` con 1 valor se asigna a `locationContains`. Con más
-  valores, la ejecución se detiene antes de leer o cobrar.
+  valores, la ejecución se detiene antes de cualquier lectura o cobro.
 - `emailDomains` como lista se asigna a `emailDomains`.
 - `outputEmail`, `resolveShortLinks` no necesitan campo. Cada fila incluye sus
-  correos y los enlaces completos de X.
+  correos & los enlaces completos de X.
 - `findEmails`, `extractEmails` no necesitan campo. Las filas incluyen los
   correos que un perfil publica en X. El estado de la ejecución indica que el
   Actor no lee ningún sitio enlazado.
@@ -369,29 +379,29 @@ campo al que se asignan.
   correos llegan tal como se publican, porque el Actor no verifica ningún buzón.
 
 `category` en `user_info` no cambia nada. Una categoría que es tarea de otro
-Actor, como `tweets` o `followers`, detiene la ejecución. No lee ni cobra nada.
-El mensaje nombra el Actor que debes usar. Si defines un alias y su campo
+Actor, como `tweets` o `followers`, detiene la ejecución. No lee nada & no cobra
+nada. El mensaje nombra el Actor que debes usar. Si defines un alias & su campo
 canónico, gana el valor canónico. El registro de la ejecución nombra el alias
 que perdió.
 
 ### Elige las entradas correctas
 
-- Para obtener solo la tarjeta de perfil, indica nombres de usuario y deja
+- Para obtener solo la tarjeta de perfil, indica nombres de usuario & deja
   desactivadas todas las opciones `include`.
-- Para archivar una cuenta, activa `includeTweets`, `includeMedia` y
-  `includeHighlights`, y define `sinceDate`.
+- Para archivar una cuenta, activa `includeTweets`, `includeMedia` &
+  `includeHighlights`, & define `sinceDate`.
 - Para el contenido más popular, agrega `minLikes` o `minViews` a
   `includeTweets`.
 - Para listas de clientes potenciales, activa `includeFollowers` con
-  `minFollowers` y `minAccountAgeDays`.
+  `minFollowers` & `minAccountAgeDays`.
 - Para la coincidencia de audiencia, indica 2 nombres de usuario, activa
-  `includeFollowers` y define `dedupeAcrossTargets: false`. Así, un seguidor
+  `includeFollowers` & define `dedupeAcrossTargets: false`. Así, un seguidor
   compartido aparece bajo cada nombre de usuario.
 
 ## Salida
 
 Cada fila es un objeto JSON. El esquema del dataset le da a cada campo un título
-y una descripción, así que los agentes de IA pueden leer las filas sin adivinar.
+& una descripción, así que los agentes de IA pueden leer las filas sin adivinar.
 
 Los ejemplos usan valores de muestra. Los resultados reflejan datos en vivo. Una
 fila de perfil se ve así.
@@ -416,12 +426,51 @@ fila de perfil se ve así.
 ```
 
 X deduce `accountBasedIn` a partir de IPs agregadas de acceso a la cuenta. La
-etiqueta no indica nacionalidad, residencia, identidad, registro, lugar de
-publicación ni ubicación exacta. `observedAt` registra la hora de la consulta.
-`accountBasedIn` es null cuando X no muestra la etiqueta. Cuando X la retiene,
-la fila trae `accountBasedInUnavailable: true` en su lugar.
+etiqueta no indica nacionalidad, residencia, identidad, lugar de registro, lugar
+de publicación ni ubicación exacta. `observedAt` registra la hora de la
+consulta. `accountBasedIn` es null cuando X no muestra la etiqueta. Cuando X la
+retiene, la fila trae `accountBasedInUnavailable: true` en su lugar.
 
 Exporta el dataset en JSON, CSV, Excel o HTML.
+
+## Columnas de salida
+
+8 campos de entrada dan forma a cada fila después de que la ejecución la lee. No
+ejecutan código & no cambian el precio.
+
+| Campo               | Qué hace                                                                                   |
+| ------------------- | ------------------------------------------------------------------------------------------ |
+| `fields`            | Conserva solo estos campos, en el orden & la forma en que los escribes                     |
+| `omitFields`        | Quita estos campos & conserva el resto                                                     |
+| `renameFields`      | Mueve un campo a una columna con un nombre nuevo                                           |
+| `flatten`           | Convierte cada objeto anidado en columnas de primer nivel                                  |
+| `fillMissingFields` | Llena con `null` un campo conservado que falta en una fila. Activo de forma predeterminada |
+| `joinFields`        | Convierte cada una de estas listas en 1 valor de texto                                     |
+| `joinSeparator`     | Texto entre los elementos unidos. El valor predeterminado es una coma & un espacio         |
+| `constantFields`    | Agrega una columna con el mismo texto en cada fila                                         |
+
+- Usa un punto para un campo dentro de un objeto, como `accountBasedIn.value`.
+  Las mayúsculas & los guiones bajos no importan.
+- Cada fila conserva su `id`.
+- Con `fields`, un campo que falta en una fila llega como `null`. Así, todas las
+  filas tienen las mismas columnas.
+- Un nombre de campo incorrecto detiene la ejecución antes de leer & no cobra
+  nada.
+- Si no se pueden comprobar los nombres, la ejecución sigue leyendo & al final
+  enumera los nombres que no encontró.
+- La ejecución ignora una función de mapeo o un filtro jq escrito para otro
+  Actor.
+
+Nombra una columna calculada en `fields` o `renameFields` para agregarla.
+
+| Columna             | Fórmula                                                                                |
+| ------------------- | -------------------------------------------------------------------------------------- |
+| `totalEngagement`   | `likeCount` + `replyCount` + `retweetCount` + `quoteCount`. Un conteo que falta suma 0 |
+| `engagementRate`    | `totalEngagement` × 100 ÷ los `followers` del autor, con 4 decimales                   |
+| `engagementPerView` | `totalEngagement` × 100 ÷ `viewCount`, con 4 decimales                                 |
+
+`totalEngagement` es `null` en una fila sin esos conteos. Una tasa es `null`
+cuando su divisor falta o es 0.
 
 ## Opciones de ejecución
 
@@ -432,103 +481,103 @@ Exporta el dataset en JSON, CSV, Excel o HTML.
 - Pon todos tus perfiles en 1 ejecución. Cada ejecución le paga a Apify el mismo
   costo de inicio.
 - `maxConcurrency` define cuántos perfiles se ejecutan a la vez. El valor
-  predeterminado es la opción segura más rápida.
-- Usa los monitores de cuentas de Xquik para comprobaciones de 1 segundo y
+  predeterminado es la configuración segura más rápida.
+- Usa los monitores de cuentas de Xquik para comprobaciones cada 1 segundo &
   webhooks firmados. Los monitores activos comprueban cada segundo.
 
 Selecciona `latest` en cada ejecución para recibir todas las correcciones
-publicadas. Las tareas y programaciones guardadas conservan su propia elección
-de compilación, así que mantenla en `latest`.
+publicadas. Las tareas guardadas & las programaciones conservan su propia
+elección de compilación, así que mantenla en `latest`.
 
 ## Actores de Xquik relacionados
 
 Todos los Actores de Xquik comparten el mismo motor de extracción, el cobro
-después de filtrar y los diagnósticos. Elige el que se ajuste a los datos que
+después de filtrar & los diagnósticos. Elige el que se ajuste a los datos que
 necesitas.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) extrae posts de
-  búsquedas, cronologías de perfiles, Listas e IDs de posts con más de 50
-  filtros y exportaciones planas. Úsalo cuando necesites datos de posts sin
+  búsquedas, cronologías de perfiles, Listas & IDs de posts con más de 50
+  filtros & exportaciones planas. Úsalo cuando necesites datos de posts sin
   análisis. Desde $0.00015 por fila.
 - [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) extrae respuestas,
-  comentarios y conversaciones completas debajo de posts con más de 25 filtros.
+  comentarios & conversaciones completas debajo de posts con más de 25 filtros.
   Úsalo cuando necesites la conversación debajo de los posts. Desde $0.00015 por
   fila.
 - [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) extrae
-  respuestas, citas, cuentas que hicieron repost e hilos de URLs o IDs de posts
+  respuestas, citas, cuentas que hicieron repost & hilos de URLs o IDs de posts
   en bloque. Úsalo cuando midas quién interactuó con los posts. Desde $0.00015
   por fila.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
-  extrae los posts que citan posts, con texto, multimedia, conteos, autores y 11
-  filtros. Úsalo cuando estudies quién citó posts y qué dijo. Desde $0.00015 por
-  post.
+  extrae los posts que citan otros posts, con texto, contenido multimedia,
+  conteos, autores & 11 filtros. Úsalo cuando estudies quién citó posts & qué
+  dijo. Desde $0.00015 por post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) extrae
-  seguidores, cuentas seguidas, miembros de Listas, suscriptores y miembros de
+  seguidores, cuentas seguidas, miembros de Listas, suscriptores & miembros de
   Comunidades como filas de perfil. Úsalo cuando necesites listas de audiencia o
   de miembros. Desde $0.00015 por perfil.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) busca
-  usuarios por nombre de usuario, biografía y ubicación con filtros de
-  seguidores, verificación, antigüedad y ubicación. Úsalo cuando crees listas de
+  usuarios por nombre de usuario, biografía & ubicación con filtros de
+  seguidores, verificación, antigüedad & ubicación. Úsalo cuando crees listas de
   cuentas a partir de búsquedas. Desde $0.00015 por perfil.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   consulta dónde tienen su sede las cuentas con la etiqueta "Cuenta con sede en"
-  de X, cómo se conectaron a X y sus cambios de nombre de usuario. Úsalo cuando
+  de X, cómo se conectaron a X & sus cambios de nombre de usuario. Úsalo cuando
   verifiques dónde tienen su sede las cuentas. Desde $0.00015 por cuenta.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) obtiene los
-  correos, teléfonos y enlaces que las cuentas publican en sus perfiles, a
+  correos, teléfonos & enlaces que las cuentas publican en sus perfiles, a
   partir de nombres de usuario, seguidores o búsquedas de usuarios. Úsalo cuando
   necesites los correos que publican los perfiles. Desde $0.00015 por perfil.
 - [X List Scraper](https://apify.com/xquik/x-list-scraper) extrae posts,
-  miembros y seguidores de Listas a partir de URLs o IDs de Listas. Úsalo cuando
+  miembros & seguidores de Listas a partir de URLs o IDs de Listas. Úsalo cuando
   una Lista curada defina tus fuentes. Desde $0.00015 por fila.
 - [X Community Scraper](https://apify.com/xquik/x-community-scraper) extrae
-  información, posts, búsquedas, miembros y moderadores de Comunidades. Úsalo
+  información, posts, búsquedas, miembros & moderadores de Comunidades. Úsalo
   cuando tus fuentes sean Comunidades de X. Desde $0.00015 por fila.
 - [X Space Scraper](https://apify.com/xquik/x-space-scraper) encuentra Espacios
-  por palabra clave y lee sus títulos, estados, horas, cantidad de oyentes,
-  anfitriones y oradores. También lee transmisiones por URL o ID. Úsalo cuando
-  sigas el audio y el video en vivo en X. Desde $0.00015 por Espacio o
+  por palabra clave & lee sus títulos, estados, horas, cantidad de oyentes,
+  anfitriones & oradores. También lee transmisiones por URL o ID. Úsalo cuando
+  sigas el audio & el video en vivo en X. Desde $0.00015 por Espacio o
   transmisión.
 - [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) extrae tendencias
-  en tiempo real por ubicación con posición, volumen, consulta y WOEID. Úsalo
+  en tiempo real por ubicación con posición, volumen, consulta & WOEID. Úsalo
   cuando sigas qué es tendencia y dónde. Desde $0.00015 por tendencia.
 - [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) extrae ofertas de
   empleo de X por palabra clave, lugar, modalidad de trabajo, nivel de
-  experiencia y empresa, con salarios y enlaces para postularse. Úsalo cuando
+  experiencia & empresa, con salarios & enlaces para postularse. Úsalo cuando
   recopiles vacantes publicadas en X. Desde $0.00015 por empleo.
 - [X Article Scraper](https://apify.com/xquik/x-article-scraper) extrae
-  Artículos de X de formato largo como Markdown y texto con portadas, autores,
-  fechas y métricas. Úsalo cuando necesites el cuerpo de los Artículos, no
+  Artículos de X de formato largo como Markdown & texto con portadas, autores,
+  fechas & métricas. Úsalo cuando necesites el cuerpo de los Artículos, no
   posts. Desde $0.00015 por artículo.
 - [X Media Downloader](https://apify.com/xquik/x-media-downloader) extrae o
-  guarda fotos, videos y GIFs de posts o perfiles con opciones de MP4 y
+  guarda fotos, videos & GIFs de posts o perfiles con opciones de MP4 &
   metadatos. Úsalo cuando necesites los archivos multimedia en sí. Desde
   $0.00015 por fila de contenido multimedia.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
-  sigue menciones de marca con relevancia, sentimiento y respuestas de
-  experiencia del cliente generadas con IA, y compara ejecuciones. Úsalo cuando
-  vigiles una marca a lo largo del tiempo. Desde $0.0003 por post analizado.
+  sigue menciones de marca con respuestas de IA sobre relevancia, sentimiento &
+  experiencia del cliente, & compara ejecuciones. Úsalo cuando vigiles una marca
+  a lo largo del tiempo. Desde $0.0003 por post analizado.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
-  etiqueta con IA la actitud, la intensidad y la probabilidad de sarcasmo de
+  etiqueta con IA la actitud, la intensidad & la probabilidad de sarcasmo de
   cada post. Úsalo cuando necesites el sentimiento general sobre cualquier tema.
   Desde $0.0003 por post analizado.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   etiqueta con IA la postura alcista, bajista, neutral o mixta, el tipo de
-  contenido, la convicción y la relevancia del activo. Úsalo cuando sigas
+  contenido, la convicción & la relevancia del activo. Úsalo cuando sigas
   acciones, cripto o conversaciones de trading. Desde $0.0003 por post
   analizado.
 - [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
-  etiqueta con IA los posts de noticias por formato, atribución de la fuente y
+  etiqueta con IA los posts de noticias por formato, atribución de la fuente &
   relevancia del tema. Úsalo cuando separes la información de la opinión. Desde
   $0.0003 por post analizado.
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
-  responde con IA tus propias preguntas de categoría, puntuación y sí o no para
+  responde con IA tus propias preguntas de categoría, puntaje & sí o no para
   cada post. Úsalo cuando los análisis predefinidos no se ajusten a tus
   etiquetas. Desde $0.0003 por post analizado.
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
-  estima un Viral Score de 0 a 100 y un veredicto para cada post a partir de 8
-  respuestas de IA sobre sus rasgos. Úsalo cuando estudies por qué un post se
-  difunde o fracasa. Desde $0.0003 por post analizado.
+  estima un Viral Score de 0 a 100 & un veredicto para cada post a partir de 8
+  respuestas de IA sobre sus rasgos. Úsalo cuando estudies por qué los posts se
+  difunden o fracasan. Desde $0.0003 por post analizado.
 
 ## Preguntas frecuentes
 
@@ -541,7 +590,7 @@ ni credenciales.
 
 ### ¿Cuántos perfiles puedo extraer en 1 ejecución?
 
-Todos los que indiques. `maxItems` y tu límite de gasto en Apify limitan las
+Todos los que indiques. `maxItems` & tu límite de gasto en Apify limitan las
 filas.
 
 ### ¿Puedo exportar perfiles de X a CSV o Excel?
@@ -553,21 +602,21 @@ Sí. Exporta el dataset en JSON, CSV, Excel o HTML desde la pestaña Storage.
 Sí. Activa `includeFollowers`, `includeFollowing` o `includeVerifiedFollowers`.
 Cada cuenta es 1 fila.
 
-### ¿Obtiene el sitio web y la ubicación de un perfil?
+### ¿Obtiene el sitio web & la ubicación de un perfil?
 
-Sí. `url` contiene el sitio web y `location` contiene el texto que escribió el
-titular.
-Define `hasWebsite` y `hasLocation` para conservar solo los perfiles que los indican.
+Sí. `url` contiene el sitio web & `location` contiene el texto que escribió el
+titular. Define `hasWebsite` & `hasLocation` para conservar solo los perfiles
+que los indican.
 
 ### ¿Puedo extraer cuentas protegidas?
 
 Obtienes la fila del perfil público, con `protected: true`. X solo muestra los
-posts y los seguidores de una cuenta protegida a sus seguidores aprobados.
+posts & los seguidores de una cuenta protegida a sus seguidores aprobados.
 
 ### ¿Cómo sé si una cuenta está en vivo ahora?
 
 Define `checkLiveNow: true`. Cada perfil recibe una fila `profileLive` con
-`live` y su última transmisión.
+`live` & su última transmisión.
 
 ### ¿Puede traducir biografías?
 
@@ -576,29 +625,29 @@ perfil sin biografía no agrega filas.
 
 ### ¿Por qué includeLikes no devuelve nada?
 
-Desde 2024, X solo le muestra a cada cuenta los posts que esa cuenta marcó con
-Me gusta. Otras cuentas, incluido este Actor, no pueden leerlos.
+Desde 2024, X muestra los posts que una cuenta marcó con Me gusta solo a esa
+misma cuenta. Otras cuentas, incluido este Actor, no pueden leerlos.
 
 ### ¿Es legal extraer perfiles de X?
 
 X Profile Scraper de Xquik solicita campos públicos de X. Los resultados pueden
-contener datos personales. Confirma que tu propósito es lícito y cumple las
+contener datos personales. Confirma que tu propósito es lícito & cumple las
 normas de privacidad aplicables. Si tienes dudas, consulta a un abogado
 calificado.
 
 ### ¿Por qué mi ejecución no devolvió resultados?
 
 Lee primero el estado de la ejecución. El estado de una ejecución vacía te pide
-revisar tus objetivos y filtros. La salida gratuita `diagnostics` aparece cuando
+revisar tus objetivos & filtros. La salida gratuita `diagnostics` aparece cuando
 algo requiere atención. Su `stopCauses` da a cada causa un `nextAction` que
-puedes seguir. La ejecución enumera cada entrada que no puede leer y explica
+puedes seguir. La ejecución enumera cada entrada que no puede leer & explica
 cómo corregirla.
 
-### ¿Puedo usar la API, las programaciones y las integraciones?
+### ¿Puedo usar la API, las programaciones & las integraciones?
 
 Sí. Elige entre 50 tareas públicas o la API REST de Xquik. La
 [pestaña API](https://apify.com/xquik/x-profile-scraper/api) tiene ejemplos en
-Python, JavaScript y cURL. Las
+Python, JavaScript & cURL. Las
 [programaciones](https://docs.apify.com/platform/schedules) de Apify ejecutan X
 Profile Scraper de Xquik con un cron. Los agentes usan
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp). Usa `latest`
@@ -606,13 +655,15 @@ salvo que necesites una compilación anterior.
 
 ### ¿Puedo obtener una solución a medida?
 
-Sí. Visita [xquik.com](https://xquik.com) o lee la
-[documentación de la API](https://docs.xquik.com/introduction). Ahí encontrarás
-el panel, la API, el servidor MCP y los webhooks.
+Sí. Describe lo que necesitas en la
+[pestaña Issues](https://apify.com/xquik/x-profile-scraper/issues). Xquik
+también ofrece un panel, una API REST, un servidor MCP & webhooks. Encuentra el
+sitio web de Xquik en su [perfil de Apify](https://apify.com/xquik).
 
 ### ¿Dónde consigo ayuda?
 
-Abre un issue en la página del Actor o escribe a <support@xquik.com> con el ID
-de la ejecución. Los diagnósticos gratuitos del almacén de clave-valor explican
-las ejecuciones que requieren atención. Una ejecución que no obtiene ninguna
-fila explica por qué en su estado.
+Abre un issue en la
+[pestaña Issues](https://apify.com/xquik/x-profile-scraper/issues) con el ID de
+la ejecución. Los diagnósticos gratuitos del almacén de clave-valor explican las
+ejecuciones que requieren atención. Una ejecución que no recibe ninguna fila
+explica el motivo en su estado.

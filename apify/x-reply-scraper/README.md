@@ -15,10 +15,9 @@
 ·
 [Italiano](README.it.md)
 
-[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
-
-[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
-Claude Code, Codex, Cursor & more, from 6:07.
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
+with Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X Reply Scraper collects replies, comments & whole
@@ -62,12 +61,12 @@ handles single posts, bulk URL lists, Tweet IDs & user reply timelines.
 - Find leads who ask questions or name a need in public replies.
 - Review replies for moderation, spam & abuse.
 - Rebuild whole conversations for research & AI training datasets.
-- Track how one account replies to its customers over time.
+- Track how an account replies to its customers over time.
 
 ### What data can X Reply Scraper extract?
 
-The dataset & run-report schemas describe every returned field. Primitive fields
-also carry examples for agents & generated integrations.
+The dataset & run-report schemas describe every returned field. Text, number &
+boolean fields also carry examples for agents & generated integrations.
 
 Every full reply row can include these core fields.
 

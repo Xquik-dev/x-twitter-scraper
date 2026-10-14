@@ -1,19 +1,10 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <strong>Italiano</strong>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · **Italiano**
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer collega Xquik MCP agli agenti di coding"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Guarda come Framer usa gli scraper Xquik con Claude Code, Codex, Cursor e altro, da 6:07.</a>
-</td></tr></table>
+[![Framer collega Xquik MCP agli agenti di coding](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Guarda come Framer usa gli scraper Xquik](https://youtu.be/4UOSpoOoC3Y?t=367)
+con Claude Code, Codex, Cursor & altro, da 6:07.
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo, con
 i dati X più completi. X Engagement Scraper di Xquik raccoglie risposte,
@@ -21,17 +12,17 @@ citazioni, utenti che hanno fatto repost & thread di qualsiasi post. La maggior
 parte degli altri Actor Apify fa pagare prima di filtrare o deduplicare. Xquik
 fa pagare solo i risultati consegnati, unici e conformi ai filtri.
 
-Raccogli risposte, citazioni, utenti che hanno fatto repost (retweet) & contesto
-del thread di 1 o più post di X. Paghi **$0.00015 per riga consegnata**. Apify
-fattura a parte l'uso della piattaforma. Non ti servono una chiave API X né il
-login.
+Raccogli risposte, citazioni, utenti che hanno fatto repost & contesto del
+thread di Twitter per 1 o più post di X. Paghi **$0.00015 per riga consegnata**,
+& Apify fattura a parte l'uso della piattaforma. Non ti servono una chiave API X
+né il login.
 
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.
 
 ## Risposte, citazioni & profili
 
-- URL di post & ID numerici dei post (Tweet ID).
+- URL di post & ID numerici dei post.
 - Risposte dirette su tutte le pagine di risultati disponibili.
 - Risposte dirette & annidate in 4 ordinamenti.
 - Dettagli del post di origine come riga selezionabile.
@@ -44,6 +35,12 @@ login.
 - Le esecuzioni riprendono dopo un riavvio di Apify.
 
 ## Come estrarre l'engagement dei post di X
+
+Non usi ancora Apify?
+[Crea prima un account gratuito](https://console.apify.com/sign-up?fpr=xquik).
+Il piano gratuito non richiede carta di credito & offre $5 da spendere ogni
+mese. A $0.00015 per riga, $5 coprono fino a 33.000 righe, senza contare l'uso
+della piattaforma. Poi torna qui & premi Try for free.
 
 1. Apri X Engagement Scraper di Xquik in Apify Console.
 2. Incolla gli URL dei post in `startUrls` o gli ID numerici in `tweetIds`.
@@ -112,6 +109,10 @@ stabile dell'API REST di Xquik.
 la copertura parziale in `incompleteTargets`. I filtri agiscono prima della
 fatturazione.
 
+Chi fa repost & chi mette Mi piace accettano ogni filtro sui profili, come
+`minFollowers`, `hasEmail` & `bioContains`. Le loro righe riportano `email` &
+`contactInfo`, cioè le email, i telefoni & i link che ogni profilo pubblica.
+
 Gli esempi usano valori fittizi. I risultati contengono dati live. Una riga di
 risposta ha questo aspetto.
 
@@ -125,6 +126,46 @@ risposta ha questo aspetto.
   "likeCount": 12
 }
 ```
+
+## Colonne di output
+
+8 input danno forma a ogni riga dopo che l'esecuzione la legge. Non eseguono
+codice & non cambiano il prezzo.
+
+| Campo               | Cosa fa                                                                        |
+| ------------------- | ------------------------------------------------------------------------------ |
+| `fields`            | Tiene solo questi campi, nell'ordine & con la grafia che scrivi                |
+| `omitFields`        | Scarta questi campi & tiene il resto                                           |
+| `renameFields`      | Sposta un campo in una colonna con un nuovo nome                               |
+| `flatten`           | Trasforma ogni oggetto annidato in colonne di primo livello                    |
+| `fillMissingFields` | Riempie con `null` un campo tenuto che manca in una riga. Attivo di default    |
+| `joinFields`        | Trasforma ognuno di questi elenchi in 1 valore di testo                        |
+| `joinSeparator`     | Testo tra gli elementi uniti. Il valore predefinito è una virgola & uno spazio |
+| `constantFields`    | Aggiunge una colonna con lo stesso testo su ogni riga                          |
+
+- Usa un punto per un campo dentro un oggetto. Maiuscole & trattini bassi non
+  contano.
+- Ogni riga conserva il suo `id`.
+- Con `fields`, un campo che manca in una riga arriva come `null`. Così ogni
+  riga ha le stesse colonne.
+- Un nome di campo sbagliato ferma l'esecuzione prima di leggere & non addebita
+  nulla.
+- Se i nomi non si possono controllare, l'esecuzione continua a leggere & elenca
+  per ultimi i nomi che non ha visto.
+- L'esecuzione ignora una funzione map o un filtro jq scritti per un altro
+  Actor.
+
+Per aggiungere una colonna calcolata, scrivine il nome in `fields` o
+`renameFields`.
+
+| Colonna             | Formula                                                                                  |
+| ------------------- | ---------------------------------------------------------------------------------------- |
+| `totalEngagement`   | `likeCount` + `replyCount` + `retweetCount` + `quoteCount`. Un conteggio mancante vale 0 |
+| `engagementRate`    | `totalEngagement` × 100 ÷ i `followers` dell'autore, a 4 decimali                        |
+| `engagementPerView` | `totalEngagement` × 100 ÷ `viewCount`, a 4 decimali                                      |
+
+`totalEngagement` è `null` per una riga senza questi conteggi. Un tasso è `null`
+quando il suo divisore manca o vale 0.
 
 ## Controllo dei repost
 
@@ -147,7 +188,7 @@ quei post risulta `false` con `complete: false`.
 Un'esecuzione con sole righe `repostCheck` & `tweet` mantiene l'ordine del tuo
 input. Ogni post è seguito dai suoi account, come li hai elencati.
 
-## Orario dei repost (retweet)
+## Orari dei repost
 
 Imposta `includeRetweetTimestamp` su `true` per i risultati `retweeters`. La
 colonna `retweetedAt` contiene l'orario osservato del repost in UTC.
@@ -168,6 +209,10 @@ cambiano.
 
 Su ogni piano Apify paghi $0.00015 per riga consegnata. Apify fattura a parte il
 tuo uso della piattaforma.
+
+Per volumi maggiori,
+[scegli un piano Apify](https://apify.com/pricing?fpr=xquik) con più uso
+prepagato.
 
 - Un addebito per ogni riga di dati consegnata. La diagnostica in `diagnostics`
   è gratuita.
@@ -214,7 +259,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   filtri. Usalo quando studi chi ha citato dei post & cosa ha detto. Da $0.00015
   per post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) estrae
-  follower, following, membri & follower delle liste e membri delle community
+  follower, following, membri delle liste, abbonati & membri delle community
   come righe di profilo. Usalo quando ti servono elenchi di pubblico o di
   membri. Da $0.00015 per profilo.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) cerca
@@ -223,8 +268,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   $0.00015 per profilo.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   verifica dove hanno sede gli account con l'etichetta "Posizione account" di X,
-  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando ti
-  serve verificare dove hanno sede gli account. Da $0.00015 per account.
+  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando
+  vuoi verificare dove hanno sede gli account. Da $0.00015 per account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) ottiene le email, i
   numeri di telefono & i link che gli account pubblicano sui propri profili, da
   nomi utente, follower o ricerche di utenti. Usalo quando ti servono le email
@@ -247,7 +292,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   lavoro di X per parola chiave, luogo, modalità di lavoro, livello di
   esperienza & azienda, con stipendi & link di candidatura. Usalo quando
   raccogli le offerte di lavoro pubblicate su X. Da $0.00015 per offerta.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper) raccoglie gli
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) estrae gli
   articoli lunghi di X come Markdown & testo, con copertine, autori, date &
   metriche. Usalo quando ti serve il corpo degli articoli, non i post. Da
   $0.00015 per articolo.
@@ -257,7 +302,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   media.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
   monitora le menzioni del brand con rilevanza, sentiment & risposte sulla
-  customer experience generate con AI, poi confronta le esecuzioni. Usalo quando
+  customer experience generate con AI & confronta le esecuzioni. Usalo quando
   osservi un brand nel tempo. Da $0.0003 per post analizzato.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   etichetta atteggiamento, intensità & probabilità di sarcasmo di ogni post con
@@ -292,13 +337,14 @@ credenziali.
 ### È legale estrarre i dati di engagement di X?
 
 X Engagement Scraper di Xquik raccoglie campi pubblici di X. I risultati possono
-contenere dati personali. Verifica di avere uno scopo lecito & rispetta le
-norme sulla privacy applicabili. Nel dubbio, chiedi a un legale qualificato.
+contenere dati personali. Verifica di avere uno scopo lecito & rispetta le norme
+sulla privacy applicabili. Nel dubbio, chiedi a un legale qualificato.
 
 ### Perché la mia esecuzione non ha restituito risultati?
 
-Apri prima l'output gratuito `diagnostics`. Lo stato di un'esecuzione vuota ti
-dice di controllare target & filtri. `stopCauses` assegna a ogni causa un
+Leggi prima lo stato dell'esecuzione. Lo stato di un'esecuzione vuota ti dice di
+controllare target & filtri. L'output gratuito `diagnostics` compare quando
+qualcosa richiede attenzione. Il suo `stopCauses` assegna a ogni causa un
 `nextAction` da seguire. L'esecuzione elenca ogni input che non riesce a leggere
 & spiega come correggerlo. Nel 2024 X ha smesso di mostrare chi mette Mi piace a
 un post, quindi `favoriters` non restituisce righe.
@@ -315,12 +361,15 @@ meno che non ti serva una build precedente.
 
 ### Dove trovo assistenza?
 
-Apri una issue nella pagina dell'Actor o scrivi a support@xquik.com con l'ID
+Apri una issue nella
+[scheda Issues](https://apify.com/xquik/x-engagement-scraper/issues) con l'ID
 dell'esecuzione. La diagnostica gratuita nel key-value store spiega le
-esecuzioni vuote, parziali o interrotte.
+esecuzioni che richiedono attenzione. Un'esecuzione che non riceve nessuna riga
+ne spiega il motivo nel suo stato.
 
 ### Posso avere una soluzione personalizzata?
 
-Sì. Visita [xquik.com](https://xquik.com) o leggi la
-[documentazione API](https://docs.xquik.com/introduction). Copre dashboard, API,
-server MCP & webhook.
+Sì. Descrivi ciò che ti serve nella
+[scheda Issues](https://apify.com/xquik/x-engagement-scraper/issues). Xquik
+offre anche una dashboard, un'API REST, un server MCP & webhook. Trovi il sito
+web di Xquik sul suo [profilo Apify](https://apify.com/xquik).

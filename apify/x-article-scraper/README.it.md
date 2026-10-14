@@ -1,19 +1,10 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <strong>Italiano</strong>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · **Italiano**
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer collega Xquik MCP agli agenti di coding"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Guarda come Framer usa gli scraper Xquik con Claude Code, Codex, Cursor e altro, da 6:07.</a>
-</td></tr></table>
+[![Framer collega Xquik MCP agli agenti di coding](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Guarda come Framer usa gli scraper Xquik](https://youtu.be/4UOSpoOoC3Y?t=367)
+con Claude Code, Codex, Cursor & altro, da 6:07.
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo, con
 i dati X più completi. X Article Scraper di Xquik trasforma gli articoli lunghi
@@ -21,9 +12,9 @@ di X in Markdown & testo. Aggiunge copertine, autori, date & metriche. La
 maggior parte degli altri Actor Apify fa pagare prima di filtrare o deduplicare.
 Xquik fa pagare solo i risultati consegnati, unici e conformi ai filtri.
 
-Estrai gli articoli lunghi di X da URL di post o da ID numerici dei post (Tweet
-ID). Paghi **$0.00015 per articolo consegnato**. Apify fattura a parte l'uso
-della piattaforma. Non ti servono una chiave API X né il login.
+Estrai gli articoli lunghi di X da URL di post o da ID numerici dei post. Paghi
+**$0.00015 per articolo consegnato**, & Apify fattura a parte l'uso della
+piattaforma. Non ti servono una chiave API X né il login.
 
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.
@@ -37,10 +28,16 @@ della piattaforma. Non ti servono una chiave API X né il login.
   profilo.
 - Rimozione dei duplicati prima della fatturazione.
 
-X Article Scraper di Xquik non inventa mai i metadati dei link. Apify mostra il
-Markdown come testo.
+X Article Scraper di Xquik non tira mai a indovinare i metadati dei link. Apify
+mostra il Markdown come testo.
 
 ## Come estrarre gli articoli di X
+
+Non usi ancora Apify?
+[Crea prima un account gratuito](https://console.apify.com/sign-up?fpr=xquik).
+Il piano gratuito non richiede carta di credito & offre $5 da spendere ogni
+mese. A $0.00015 per articolo, $5 coprono fino a 33.000 articoli, senza contare
+l'uso della piattaforma. Poi torna qui & premi Try for free.
 
 1. Apri X Article Scraper di Xquik in Apify Console.
 2. Incolla gli URL dei post degli articoli in `startUrls` o gli ID in
@@ -64,23 +61,23 @@ Markdown come testo.
 
 ## Input
 
-| Campo                  | Scopo                                            | Predefinito |
-| ---------------------- | ------------------------------------------------ | ----------- |
-| `startUrls`            | URL pubblici di post degli articoli o di profili | Nessuno     |
-| `tweetIds`             | ID numerici dei post degli articoli              | Nessuno     |
-| `twitterHandles`       | Account di cui elencare gli articoli             | Nessuno     |
-| `maxItems`             | Limite globale di articoli consegnati            | `100000`    |
-| `dedupeAcrossTargets`  | Rimuove gli ID ripetuti prima della fatturazione | `true`      |
-| `maxConcurrency`       | Letture di articoli indipendenti in parallelo    | `100`       |
-| `alwaysSaveRunRecords` | Salva `run-report` a ogni esecuzione             | `false`     |
+| Campo                  | Scopo                                                        | Predefinito |
+| ---------------------- | ------------------------------------------------------------ | ----------- |
+| `startUrls`            | URL pubblici di post degli articoli o di profili             | Nessuno     |
+| `tweetIds`             | ID numerici dei post degli articoli                          | Nessuno     |
+| `twitterHandles`       | Account di cui elencare gli articoli                         | Nessuno     |
+| `maxItems`             | Limite globale di articoli consegnati                        | `100000`    |
+| `dedupeAcrossTargets`  | Rimuove gli ID di articoli ripetuti prima della fatturazione | `true`      |
+| `maxConcurrency`       | Letture di articoli indipendenti in parallelo                | `100`       |
+| `alwaysSaveRunRecords` | Salva `run-report` a ogni esecuzione                         | `false`     |
 
 ## Output
 
 La scheda Output apre `Articles`. `Results` rimanda alle righe. `Run Report`
-rimanda a conteggi, completamento, durata & anomalie. Le esecuzioni grandi o con
-un problema scrivono il report. Un'esecuzione piccola senza problemi riporta
-invece i conteggi nel suo stato. Attiva `alwaysSaveRunRecords` per scriverlo a
-ogni esecuzione.
+rimanda a conteggi, completamento, durata & anomalie. Un'esecuzione che incontra
+un problema, o un'esecuzione grande, scrive il report. Un'esecuzione piccola
+senza problemi riporta invece i conteggi nel suo stato. Attiva
+`alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
 
 Gli esempi usano valori fittizi. I risultati contengono dati live. Una riga di
 articolo include questi campi.
@@ -105,15 +102,59 @@ o in tabelle.
 
 Un nome utente in `twitterHandles`, o un URL di profilo in `startUrls`, elenca
 gli articoli di quell'account dal più recente. Ognuno è una riga
-`articlePreview` con `title`, `previewText`, `coverImageUrl` & `articleId`
-dell'articolo, date & metriche del post. Lì X non mostra il corpo, quindi la
-riga non ha `markdown` né `contents`. Esegui il suo `tweetId` per ottenere
-l'articolo completo.
+`articlePreview` con `title`, `previewText`, `coverImageUrl`, `articleId`, date
+dell'articolo & metriche del post. Lì X non mostra il corpo, quindi la riga non
+ha `markdown` né `contents`. Esegui il suo `tweetId` per ottenere l'articolo
+completo.
+
+## Colonne di output
+
+8 input danno forma a ogni riga dopo che l'esecuzione la legge. Non eseguono
+codice & non cambiano il prezzo.
+
+| Campo               | Cosa fa                                                                        |
+| ------------------- | ------------------------------------------------------------------------------ |
+| `fields`            | Tiene solo questi campi, nell'ordine & con la grafia che scrivi                |
+| `omitFields`        | Scarta questi campi & tiene il resto                                           |
+| `renameFields`      | Sposta un campo in una colonna con un nuovo nome                               |
+| `flatten`           | Trasforma ogni oggetto annidato in colonne di primo livello                    |
+| `fillMissingFields` | Riempie con `null` un campo tenuto che manca in una riga. Attivo di default    |
+| `joinFields`        | Trasforma ognuno di questi elenchi in 1 valore di testo                        |
+| `joinSeparator`     | Testo tra gli elementi uniti. Il valore predefinito è una virgola & uno spazio |
+| `constantFields`    | Aggiunge una colonna con lo stesso testo su ogni riga                          |
+
+- Usa un punto per un campo dentro un oggetto. Maiuscole & trattini bassi non
+  contano.
+- Ogni riga conserva il suo `id`.
+- Con `fields`, un campo che manca in una riga arriva come `null`. Così ogni
+  riga ha le stesse colonne.
+- Un nome di campo sbagliato ferma l'esecuzione prima di leggere & non addebita
+  nulla.
+- Se i nomi non si possono controllare, l'esecuzione continua a leggere & elenca
+  per ultimi i nomi che non ha visto.
+- L'esecuzione ignora una funzione map o un filtro jq scritti per un altro
+  Actor.
+
+Per aggiungere una colonna calcolata, scrivine il nome in `fields` o
+`renameFields`.
+
+| Colonna             | Formula                                                                                  |
+| ------------------- | ---------------------------------------------------------------------------------------- |
+| `totalEngagement`   | `likeCount` + `replyCount` + `retweetCount` + `quoteCount`. Un conteggio mancante vale 0 |
+| `engagementRate`    | `totalEngagement` × 100 ÷ i `followers` dell'autore, a 4 decimali                        |
+| `engagementPerView` | `totalEngagement` × 100 ÷ `viewCount`, a 4 decimali                                      |
+
+`totalEngagement` è `null` per una riga senza questi conteggi. Un tasso è `null`
+quando il suo divisore manca o vale 0.
 
 ## Quanto costa estrarre gli articoli di X?
 
 Su ogni piano Apify paghi $0.00015 per articolo consegnato. Apify fattura a
 parte il tuo uso della piattaforma.
+
+Per volumi maggiori,
+[scegli un piano Apify](https://apify.com/pricing?fpr=xquik) con più uso
+prepagato.
 
 - Un addebito per ogni riga di dati consegnata. La diagnostica in `diagnostics`
   è gratuita.
@@ -162,7 +203,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   filtri. Usalo quando studi chi ha citato dei post & cosa ha detto. Da $0.00015
   per post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) estrae
-  follower, following, membri & follower delle liste e membri delle community
+  follower, following, membri delle liste, abbonati & membri delle community
   come righe di profilo. Usalo quando ti servono elenchi di pubblico o di
   membri. Da $0.00015 per profilo.
 - [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) cerca
@@ -171,8 +212,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   $0.00015 per profilo.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   verifica dove hanno sede gli account con l'etichetta "Posizione account" di X,
-  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando ti
-  serve verificare dove hanno sede gli account. Da $0.00015 per account.
+  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando
+  vuoi verificare dove hanno sede gli account. Da $0.00015 per account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) ottiene le email, i
   numeri di telefono & i link che gli account pubblicano sui propri profili, da
   nomi utente, follower o ricerche di utenti. Usalo quando ti servono le email
@@ -201,7 +242,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   media.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
   monitora le menzioni del brand con rilevanza, sentiment & risposte sulla
-  customer experience generate con AI, poi confronta le esecuzioni. Usalo quando
+  customer experience generate con AI & confronta le esecuzioni. Usalo quando
   osservi un brand nel tempo. Da $0.0003 per post analizzato.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   etichetta atteggiamento, intensità & probabilità di sarcasmo di ogni post con
@@ -235,13 +276,14 @@ No. X Article Scraper di Xquik non richiede chiave API X, login o credenziali.
 ### È legale estrarre gli articoli di X?
 
 X Article Scraper di Xquik raccoglie campi pubblici di X. I risultati possono
-contenere dati personali. Verifica di avere uno scopo lecito & rispetta le
-norme sulla privacy applicabili. Nel dubbio, chiedi a un legale qualificato.
+contenere dati personali. Verifica di avere uno scopo lecito & rispetta le norme
+sulla privacy applicabili. Nel dubbio, chiedi a un legale qualificato.
 
 ### Perché la mia esecuzione non ha restituito risultati?
 
-Apri prima l'output gratuito `diagnostics`. Lo stato di un'esecuzione vuota ti
-dice di controllare target & filtri. `stopCauses` assegna a ogni causa un
+Leggi prima lo stato dell'esecuzione. Lo stato di un'esecuzione vuota ti dice di
+controllare target & filtri. L'output gratuito `diagnostics` compare quando
+qualcosa richiede attenzione. Il suo `stopCauses` assegna a ogni causa un
 `nextAction` da seguire. L'esecuzione segnala i link che non riesce a leggere &
 spiega come correggerli. X Article Scraper di Xquik restituisce solo gli
 articoli pubblici che X mostra.
@@ -253,18 +295,21 @@ Sì. Scegli tra 50 task pubblici o l'API REST di Xquik. La
 JavaScript & cURL. Le
 [pianificazioni](https://docs.apify.com/platform/schedules) di Apify avviano X
 Article Scraper di Xquik con un cron. Gli agenti usano
-[Apify MCP](https://docs.apify.com/platform/integrations/mcp). Le letture
-singole usano [Xquik REST](https://docs.xquik.com/api-reference/x/get-article).
-Usa `latest`, a meno che non ti serva una build precedente.
+[Apify MCP](https://docs.apify.com/platform/integrations/mcp). L'API REST di
+Xquik legge anche i singoli articoli. Usa `latest`, a meno che non ti serva una
+build precedente.
 
 ### Dove trovo assistenza?
 
-Apri una issue nella pagina dell'Actor o scrivi a support@xquik.com con l'ID
+Apri una issue nella
+[scheda Issues](https://apify.com/xquik/x-article-scraper/issues) con l'ID
 dell'esecuzione. La diagnostica gratuita nel key-value store spiega le
-esecuzioni vuote, parziali o interrotte.
+esecuzioni che richiedono attenzione. Un'esecuzione che non riceve nessuna riga
+ne spiega il motivo nel suo stato.
 
 ### Posso avere una soluzione personalizzata?
 
-Sì. Visita [xquik.com](https://xquik.com) o leggi la
-[documentazione API](https://docs.xquik.com/introduction). Copre dashboard, API,
-server MCP & webhook.
+Sì. Descrivi ciò che ti serve nella
+[scheda Issues](https://apify.com/xquik/x-article-scraper/issues). Xquik offre
+anche una dashboard, un'API REST, un server MCP & webhook. Trovi il sito web di
+Xquik sul suo [profilo Apify](https://apify.com/xquik).

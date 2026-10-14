@@ -1,19 +1,10 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="README.fr.md">Français</a> ·
-  <strong>Italiano</strong>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · **Italiano**
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer collega Xquik MCP agli agenti di coding"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Guarda come Framer usa gli scraper Xquik con Claude Code, Codex, Cursor e altro, da 6:07.</a>
-</td></tr></table>
+[![Framer collega Xquik MCP agli agenti di coding](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Guarda come Framer usa gli scraper Xquik](https://youtu.be/4UOSpoOoC3Y?t=367)
+con Claude Code, Codex, Cursor & altro, da 6:07.
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo, con
 i dati X più completi. X Reply Scraper di Xquik raccoglie risposte, commenti &
@@ -22,11 +13,11 @@ di filtrare o deduplicare. Xquik fa pagare solo i **risultati consegnati, unici
 e conformi ai filtri**.
 
 Estrai risposte & commenti di Twitter a **$0.00015 per riga consegnata** su ogni
-piano Apify, & leggili senza un account X. Incolla URL di post, ID dei post
-(Tweet ID), URL di profili o nomi utente. Esporta risposte, conversazioni,
-autori, engagement, entità & URL dei media. Apify fattura a parte il tuo uso
-della piattaforma. Non ti serve il login a X. I filtri agiscono prima della
-scrittura nel dataset, quindi paghi solo le righe consegnate.
+piano Apify, & leggili senza un account X. Incolla URL di post, ID dei post, URL
+di profili o nomi utente. Esporta risposte, conversazioni, autori, engagement,
+entità & URL dei media. Apify fattura a parte il tuo uso della piattaforma. Non
+ti serve il login a X. I filtri agiscono prima della scrittura nel dataset,
+quindi paghi solo le righe consegnate.
 
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.
@@ -50,8 +41,8 @@ timeline delle risposte degli utenti.
 - I cursori di continuazione supportano recuperi di dati passati & esecuzioni
   pianificate.
 - Le esecuzioni che richiedono attenzione scrivono 1 record gratuito in
-  `diagnostics`. Un'esecuzione che legge ogni target & non trova risposte non
-  ne scrive nessuno. Il suo stato dice perché.
+  `diagnostics`. Un'esecuzione che legge ogni target & non trova risposte non ne
+  scrive nessuno. Il suo stato dice perché.
 - I log dell'esecuzione mostrano i tempi per pagina & per target in
   `fetchDurationMs`, `processingDurationMs`, `pushDurationMs`,
   `statusDurationMs`, `fullPageDurationMs` & `fullTargetDurationMs`.
@@ -70,7 +61,8 @@ timeline delle risposte degli utenti.
 ### Quali dati può estrarre X Reply Scraper?
 
 Gli schemi del dataset & del run-report descrivono ogni campo restituito. I
-campi primitivi riportano anche esempi per agenti & integrazioni generate.
+campi di testo, numerici & booleani riportano anche esempi per agenti &
+integrazioni generate.
 
 Ogni riga completa di risposta può includere questi campi principali.
 
@@ -93,7 +85,7 @@ Ogni riga completa di risposta può includere questi campi principali.
 | `viewCount`         | Visualizzazioni                                   |
 | `bookmarkCount`     | Segnalibri                                        |
 | `author`            | Metadati pubblici disponibili dell'autore         |
-| `media`             | Immagini, video, GIF & varianti                   |
+| `media`             | Immagini, video, GIF e varianti                   |
 | `entities`          | Hashtag, cashtag, menzioni, URL & timestamp video |
 | `quoted_tweet`      | Post citato, quando disponibile                   |
 | `retweeted_tweet`   | Post originale del repost, quando disponibile     |
@@ -102,11 +94,12 @@ Le righe complete conservano anche i metadati di origine disponibili.
 
 - I campi sul tipo di post sono `type`, `isReply`, `isQuoteStatus`,
   `isNoteTweet`, `isLimitedReply` & `isTranslatable`.
-- I dettagli del testo sono `displayTextRange`, `noteTweet`, `article` & `card`.
+- I dettagli del testo sono `displayTextRange`, `noteTweet`, `article`, `card` &
+  `cashtagAttachments`.
 - Etichette & avvisi sono `contentDisclosure`, `communityNote`,
   `possiblySensitive`, `tombstone` & `exclusiveContent`.
-- I dettagli della conversazione sono `conversationControl`, `limitedActions` &
-  `unmentionedUserIds`.
+- I dettagli della conversazione sono `conversationControl`, `limitedActions`,
+  `subscriberBadge` & `unmentionedUserIds`.
 - I campi di contesto sono `source`, `place`, `communityId`, `communityName`,
   `reactionContext` & `postCta`.
 - I campi su modifiche & disponibilità sono `edit`, `previousCounts`,
@@ -118,12 +111,18 @@ esatti.
 
 ## Come uso X Reply Scraper per estrarre le risposte?
 
+Non usi ancora Apify?
+[Crea prima un account gratuito](https://console.apify.com/sign-up?fpr=xquik).
+Il piano gratuito non richiede carta di credito & offre $5 da spendere ogni
+mese. A $0.00015 per riga, $5 coprono fino a 33.000 righe, senza contare l'uso
+della piattaforma. Poi torna qui & premi Try for free.
+
 1. Incolla URL di post, ID dei post, URL di profili o nomi utente.
 2. Imposta `maxItems`, `scope` & i filtri che servono al tuo lavoro.
 3. Avvia X Reply Scraper di Xquik & apri il dataset.
 
 Il modulo precompilato punta a una conversazione pubblica verificata.
-Restituisce fino a 1.000 righe complete & piatte. Di default, la modalità auto
+Restituisce fino a 1.000 righe complete e piatte. Di default, la modalità auto
 cerca nell'intera conversazione. Deduplicazione & attribuzione dell'origine
 restano attive.
 
@@ -217,6 +216,10 @@ adatta. Modifica qualsiasi task prima di avviarlo.
 X Reply Scraper di Xquik costa $0.00015 per riga consegnata su ogni piano Apify.
 Apify fattura a parte l'uso della piattaforma.
 
+Per volumi maggiori,
+[scegli un piano Apify](https://apify.com/pricing?fpr=xquik) con più uso
+prepagato.
+
 Xquik applica un addebito per ogni riga di dati consegnata. Le risposte rimosse
 da filtri o deduplicazione non costano nulla. I record di diagnostica in
 `diagnostics` sono gratuiti. Non ci sono costi di avvio, per URL, per query, per
@@ -226,8 +229,8 @@ paginazione o per filtro.
 
 X Reply Scraper di Xquik spiega gratis le esecuzioni vuote, parziali &
 interrotte. Lo stato dell'esecuzione dice perché si è fermata. Conta anche i
-risultati addebitati & i target letti. Un'esecuzione che legge ogni target &
-non trova risposte non scrive alcun record. Il suo stato dice perché & cosa
+risultati addebitati & i target letti. Un'esecuzione che legge ogni target & non
+trova risposte non scrive alcun record. Il suo stato dice perché & cosa
 cambiare.
 
 ### Estrazione incompleta
@@ -243,8 +246,8 @@ causa con i propri `message`, `retryable` & `nextAction`. Le cause sono
 `deadline_reached`. `reply_reach` significa che X ha fornito solo una parte di
 un thread.
 
-Un post o un account mancante non conta come errore. Lo stato lo nomina, come
-"X has no match for 1 target." Entra in `stopCauses` solo se un'altra causa ha
+Un post o un account mancante non conta come errore. Lo stato lo nomina, come "X
+has no match for 1 target." Entra in `stopCauses` solo se un'altra causa ha
 fermato l'esecuzione. L'esecuzione è `retryable` quando lo è almeno una causa.
 
 ### Diagnostica
@@ -286,7 +289,7 @@ Usa questi campi principali.
 
 | Input         | Scopo                                    |
 | ------------- | ---------------------------------------- |
-| `startUrls`   | URL misti di post & profili di X         |
+| `startUrls`   | URL misti di post e profili di X         |
 | `tweetIds`    | ID numerici dei post                     |
 | `usernames`   | Timeline delle risposte dei profili      |
 | `startCursor` | Riprende un target da un cursore salvato |
@@ -382,7 +385,7 @@ Usa `scope` per scegliere la forma del risultato.
 | -------- | -------------------------------------------------- |
 | `direct` | Tiene le risposte di profondità 1                  |
 | `nested` | Tiene le risposte alle risposte, da profondità 2   |
-| `all`    | Tiene ogni risposta diretta & annidata disponibile |
+| `all`    | Tiene ogni risposta diretta e annidata disponibile |
 
 Usa `maxDepth` per limitare l'annidamento. Quando X omette un antenato della
 conversazione, il link al genitore può mancare. L'Actor conserva la migliore
@@ -400,7 +403,7 @@ Usa `sort` con questi valori.
 La ricerca di X sottostima i Mi piace di alcune risposte più vecchie, quindi le
 esecuzioni `likes` possono perderle.
 
-I target di profilo raccolgono il numero richiesto di risultati unici &
+I target di profilo raccolgono il numero richiesto di risultati unici e
 filtrati, poi li ordinano. I target di post mantengono l'ordinamento globale.
 
 Gli alias di compatibilità `sortBy` & `queryType` funzionano ancora.
@@ -442,7 +445,8 @@ Usa `minLikes`, `minReplies`, `minRetweets`, `minQuotes`, `minViews` &
 
 - Imposta `hasMediaOnly: true` per le risposte con media pubblici.
 - Imposta `mediaType` su `any`, `image`, `video`, `gif` o `link`.
-- Imposta `mediaType` su `none` per le risposte di solo testo, senza media né link.
+- Imposta `mediaType` su `none` per le risposte di solo testo, senza media né
+  link.
 - Imposta `since` per un timestamp di inizio incluso.
 - Imposta `until` per un timestamp di fine escluso.
 - Usa `sinceTime` & `untilTime` come alias di compatibilità.
@@ -450,8 +454,8 @@ Usa `minLikes`, `minReplies`, `minRetweets`, `minQuotes`, `minViews` &
 ## Output
 
 Ogni riga di risposta è un oggetto JSON. Gli schemi del dataset & del run-report
-descrivono ogni campo, così gli agenti AI possono leggere le righe senza tirare a
-indovinare. Esporta il dataset in JSON, CSV, Excel o HTML.
+descrivono ogni campo, così gli agenti AI possono leggere le righe senza tirare
+a indovinare. Esporta il dataset in JSON, CSV, Excel o HTML.
 
 ### Metadati dell'autore
 
@@ -540,6 +544,46 @@ campi piatti aggiunti.
 
 Imposta `fieldStyle` su `source`, `camelCase` o `snake_case`. L'Actor evita di
 sovrascrivere le chiavi di origine in conflitto.
+
+## Colonne di output
+
+8 input danno forma a ogni riga dopo che l'esecuzione la legge. Non eseguono
+codice & non cambiano il prezzo.
+
+| Campo               | Cosa fa                                                                        |
+| ------------------- | ------------------------------------------------------------------------------ |
+| `fields`            | Tiene solo questi campi, nell'ordine & con la grafia che scrivi                |
+| `omitFields`        | Scarta questi campi & tiene il resto                                           |
+| `renameFields`      | Sposta un campo in una colonna con un nuovo nome                               |
+| `flatten`           | Trasforma ogni oggetto annidato in colonne di primo livello                    |
+| `fillMissingFields` | Riempie con `null` un campo tenuto che manca in una riga. Attivo di default    |
+| `joinFields`        | Trasforma ognuno di questi elenchi in 1 valore di testo                        |
+| `joinSeparator`     | Testo tra gli elementi uniti. Il valore predefinito è una virgola & uno spazio |
+| `constantFields`    | Aggiunge una colonna con lo stesso testo su ogni riga                          |
+
+- Usa un punto per un campo dentro un oggetto, come `author.id`. Maiuscole &
+  trattini bassi non contano.
+- Ogni riga conserva il suo `id`.
+- Con `fields`, un campo che manca in una riga arriva come `null`. Così ogni
+  riga ha le stesse colonne.
+- Un nome di campo sbagliato ferma l'esecuzione prima di leggere & non addebita
+  nulla.
+- Se i nomi non si possono controllare, l'esecuzione continua a leggere & elenca
+  per ultimi i nomi che non ha visto.
+- L'esecuzione ignora una funzione map o un filtro jq scritti per un altro
+  Actor.
+
+Per aggiungere una colonna calcolata, scrivine il nome in `fields` o
+`renameFields`.
+
+| Colonna             | Formula                                                                                  |
+| ------------------- | ---------------------------------------------------------------------------------------- |
+| `totalEngagement`   | `likeCount` + `replyCount` + `retweetCount` + `quoteCount`. Un conteggio mancante vale 0 |
+| `engagementRate`    | `totalEngagement` × 100 ÷ i `followers` dell'autore, a 4 decimali                        |
+| `engagementPerView` | `totalEngagement` × 100 ÷ `viewCount`, a 4 decimali                                      |
+
+`totalEngagement` è `null` per una riga senza questi conteggi. Un tasso è `null`
+quando il suo divisore manca o vale 0.
 
 ## Opzioni di esecuzione
 
@@ -697,8 +741,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   $0.00015 per profilo.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   verifica dove hanno sede gli account con l'etichetta "Posizione account" di X,
-  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando ti
-  serve verificare dove hanno sede gli account. Da $0.00015 per account.
+  il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando
+  vuoi verificare dove hanno sede gli account. Da $0.00015 per account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) ottiene le email, i
   numeri di telefono & i link che gli account pubblicano sui propri profili, da
   nomi utente, follower o ricerche di utenti. Usalo quando ti servono le email
@@ -721,7 +765,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   lavoro di X per parola chiave, luogo, modalità di lavoro, livello di
   esperienza & azienda, con stipendi & link di candidatura. Usalo quando
   raccogli le offerte di lavoro pubblicate su X. Da $0.00015 per offerta.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper) raccoglie gli
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) estrae gli
   articoli lunghi di X come Markdown & testo, con copertine, autori, date &
   metriche. Usalo quando ti serve il corpo degli articoli, non i post. Da
   $0.00015 per articolo.
@@ -731,7 +775,7 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   media.
 - [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
   monitora le menzioni del brand con rilevanza, sentiment & risposte sulla
-  customer experience generate con AI, poi confronta le esecuzioni. Usalo quando
+  customer experience generate con AI & confronta le esecuzioni. Usalo quando
   osservi un brand nel tempo. Da $0.0003 per post analizzato.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   etichetta atteggiamento, intensità & probabilità di sarcasmo di ogni post con
@@ -827,11 +871,13 @@ Google Sheets.
 
 ### Dove trovo assistenza?
 
-Apri una issue nella pagina dell'Actor o scrivi a <support@xquik.com> con l'ID
+Apri una issue nella
+[scheda Issues](https://apify.com/xquik/x-reply-scraper/issues) con l'ID
 dell'esecuzione.
 
 ### Posso avere una soluzione personalizzata?
 
-Sì. Visita [xquik.com](https://xquik.com) o leggi la
-[documentazione API](https://docs.xquik.com/introduction). Xquik offre una
-dashboard, un'API REST, un server MCP & webhook.
+Sì. Descrivi ciò che ti serve nella
+[scheda Issues](https://apify.com/xquik/x-reply-scraper/issues). Xquik offre
+anche una dashboard, un'API REST, un server MCP & webhook. Trovi il sito web di
+Xquik sul suo [profilo Apify](https://apify.com/xquik).

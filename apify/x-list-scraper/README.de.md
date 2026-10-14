@@ -1,19 +1,10 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <strong>Deutsch</strong> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+**Deutsch** · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer verbindet Xquik MCP mit Coding-Agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Sieh dir an, wie Framer Xquik-Scraper mit Claude Code, Codex, Cursor und mehr nutzt, ab Minute 6:07.</a>
-</td></tr></table>
+[![Framer verbindet Xquik MCP mit Coding-Agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Sieh dir an, wie Framer Xquik-Scraper nutzt](https://youtu.be/4UOSpoOoC3Y?t=367),
+mit Claude Code, Codex, Cursor & mehr, ab Minute 6:07.
 
 Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
 liefert die vollständigsten X-Daten. X List Scraper von Xquik sammelt Details,
@@ -22,10 +13,11 @@ meisten anderen Apify Actors rechnen ab, bevor sie filtern oder Duplikate
 entfernen. Xquik rechnet nur gelieferte, eindeutige Ergebnisse ab, die zu deinen
 Filtern passen.
 
-Scrape Details, Posts (Tweets), Mitglieder & Follower aus URLs von X-Listen oder
-aus numerischen Listen-IDs. Oder finde öffentliche Listen mit Suchbegriffen. Du
-zahlst **$0.00015 pro geliefertem Datensatz**, & Apify berechnet die
-Plattformnutzung separat. Du brauchst keinen X-API-Schlüssel & keinen Login.
+Scrape Details, Posts, Mitglieder & Follower aus URLs von X-Listen oder aus
+numerischen Listen-IDs oder finde öffentliche Listen mit Suchbegriffen. Du
+zahlst **$0.00015 pro geliefertem Datensatz** & Apify berechnet die
+Plattformnutzung separat. Du brauchst weder einen X-API-Schlüssel noch einen
+Login.
 
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
@@ -39,8 +31,10 @@ Plattformnutzung separat. Du brauchst keinen X-API-Schlüssel & keinen Login.
 - Listensuche per Stichwort. Jeder Datensatz ist 1 Liste mit Inhaber,
   Mitgliederzahl & Follower-Zahl.
 - Optional auch Antworten in den Posts der Liste.
-- Filter für Datum, Unix-Zeit, Sprache, Medien, Interaktion, Verifizierung &
+- Filter für Datum, Unix-Zeit, Sprache, Medien, Interaktionen, Verifizierung &
   Profile.
+- Profilfilter für Mitglieder & Follower, etwa `minFollowers`, `hasEmail` &
+  `bioContains`.
 - Die öffentlichen Listen, die ein Account erstellt hat oder auf denen er steht,
   anhand von Nutzername oder Profil-URL.
 - Viele Listen & Ressourcentypen in 1 Run.
@@ -51,15 +45,22 @@ Plattformnutzung separat. Du brauchst keinen X-API-Schlüssel & keinen Login.
 
 ## So scrapst du X-Listen
 
+Neu bei Apify?
+[Erstelle zuerst einen kostenlosen Account](https://console.apify.com/sign-up?fpr=xquik).
+Der kostenlose Plan braucht keine Kreditkarte & gibt dir jeden Monat $5 zum
+Ausgeben. Bei $0.00015 pro Datensatz reichen $5 für bis zu 33.000 Datensätze,
+vor Abzug der Plattformnutzung. Komm dann hierher zurück & klicke auf Try for
+free.
+
 1. Öffne X List Scraper von Xquik in der Apify Console.
 2. Füge Listen-URLs in `startUrls` oder numerische Listen-IDs in `listIds` ein.
    Um Listen zu finden, trage stattdessen Stichwörter in `searchTerms` ein.
 3. Wähle `resources` & ergänze Filter wie `sinceDate` oder `minLikes`.
-4. Setze `maxItems`, um die gelieferten Datensätze zu begrenzen. Klicke dann
+4. Setze `maxItems`, um die gelieferten Datensätze zu begrenzen, & klicke dann
    auf Start.
 5. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
 
-`startUrls` nimmt jede URL als einfachen String oder als Objekt
+`startUrls` akzeptiert jede URL als einfachen String oder als Objekt
 `{ "url": "..." }`.
 
 ```json
@@ -97,7 +98,11 @@ Jeder Datensatz setzt `resultType` auf `list`, `listTweet`, `listMember` oder
 `listFollower`. `sourceTarget` enthält die eingegebene Listen-ID oder den
 Suchbegriff, der einen `list`-Datensatz gefunden hat. Ein `list`-Datensatz
 enthält die Details einer Liste, 1 pro Liste. Andere Datensätze folgen dem
-stabilen Response-Format von Xquik für Posts oder Profile.
+stabilen Antwortformat von Xquik für Posts oder Profile.
+
+Datensätze von Mitgliedern & Followern enthalten `email` & `contactInfo`. Diese
+Felder enthalten die E-Mails, Telefonnummern & Links, die jedes Profil
+veröffentlicht.
 
 ### Listen eines Accounts
 
@@ -113,17 +118,17 @@ Listen, auf denen er steht. Jede Liste ist 1 Datensatz mit `resultType`
 `createdList` oder `listMembership`, dem Nutzernamen in `sourceTarget` & `id`,
 `name`, `description`, `memberCount`, `subscriberCount`, `createdAt`,
 `bannerUrl` & dem Profil `owner`. X zeigt eine private Liste nur ihrem Inhaber,
-private Listen fehlen also.
+also fehlen private Listen.
 
 Die erstellten Listen jedes Accounts kommen vor seinen Mitgliedschaften. Der
-Actor liest Accounts parallel. Datensätze verschiedener Accounts kommen also an,
+Actor liest Accounts parallel, also kommen Datensätze verschiedener Accounts an,
 wie er sie liest. Gruppiere sie nach `sourceTarget`.
 
 Ein Datensatz ist 1 Account & 1 Liste. Eine Liste, die 2 deiner Accounts
 gemeinsam haben, ergibt 2 Datensätze, 1 pro Account. Du zahlst für jeden
 Datensatz. `dedupeAcrossTargets` entfernt diese Datensätze nie.
 
-Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
+Die Beispiele nutzen Musterwerte. Die Ergebnisse spiegeln Live-Daten wider. Ein
 Datensatz mit Listendetails sieht so aus.
 
 ```json
@@ -169,14 +174,56 @@ Ein `list`-Datensatz aus einem Suchbegriff sieht so aus.
 }
 ```
 
+## Ausgabespalten
+
+8 Eingaben formen jeden Datensatz, nachdem der Run ihn gelesen hat. Sie führen
+keinen Code aus & ändern den Preis nicht.
+
+| Feld                | Was es bewirkt                                                                        |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| `fields`            | Behält nur diese Felder, in der Reihenfolge & Schreibweise, die du angibst            |
+| `omitFields`        | Entfernt diese Felder & behält den Rest                                               |
+| `renameFields`      | Verschiebt ein Feld in eine Spalte mit neuem Namen                                    |
+| `flatten`           | Macht aus jedem verschachtelten Objekt Spalten auf oberster Ebene                     |
+| `fillMissingFields` | Füllt ein behaltenes Feld, das einem Datensatz fehlt, mit `null`. Standardmäßig aktiv |
+| `joinFields`        | Macht aus jeder dieser Listen 1 Textwert                                              |
+| `joinSeparator`     | Text zwischen verbundenen Einträgen. Standard ist ein Komma & ein Leerzeichen         |
+| `constantFields`    | Fügt eine Spalte mit demselben Text in jedem Datensatz hinzu                          |
+
+- Nutze einen Punkt für ein Feld innerhalb eines Objekts. Groß- und
+  Kleinschreibung & Unterstriche spielen keine Rolle.
+- Jeder Datensatz behält seine `id`.
+- Mit `fields` kommt ein Feld, das einem Datensatz fehlt, als `null` an. Jeder
+  Datensatz hat dann dieselben Spalten.
+- Ein falscher Feldname stoppt den Run vor dem Lesen & kostet nichts.
+- Lassen sich die Namen nicht prüfen, liest der Run weiter & listet nicht
+  gefundene Namen am Ende.
+- Der Run ignoriert eine Map-Funktion oder einen jq-Filter, die für einen
+  anderen Actor geschrieben sind.
+
+Nenne eine berechnete Spalte in `fields` oder `renameFields`, um sie
+hinzuzufügen.
+
+| Spalte              | Formel                                                                                     |
+| ------------------- | ------------------------------------------------------------------------------------------ |
+| `totalEngagement`   | `likeCount` + `replyCount` + `retweetCount` + `quoteCount`. Ein fehlender Zähler addiert 0 |
+| `engagementRate`    | `totalEngagement` × 100 ÷ die `followers` des Autors, auf 4 Nachkommastellen               |
+| `engagementPerView` | `totalEngagement` × 100 ÷ `viewCount`, auf 4 Nachkommastellen                              |
+
+`totalEngagement` ist `null` bei einem Datensatz ohne diese Zähler. Eine Rate
+ist `null`, wenn ihr Divisor fehlt oder 0 ist.
+
 ## Was kostet es, X-Listen zu scrapen?
 
 Auf jedem Apify-Plan kostet ein gelieferter Datensatz $0.00015. Apify berechnet
 deine Plattformnutzung separat.
 
-- Eine Gebühr pro geliefertem Datensatz. Diagnosen in `diagnostics` sind
-  kostenlos.
-- Keine Gebühr für Start, Listen oder Ressourcen.
+Brauchst du mehr Volumen, dann
+[wähle einen Apify-Plan](https://apify.com/pricing?fpr=xquik) mit mehr
+vorausbezahlter Nutzung.
+
+- 1 Gebühr pro geliefertem Datensatz. Diagnosen in `diagnostics` sind kostenlos.
+- Keine Gebühr für Start, Liste oder Ressource.
 - Die Deduplizierung läuft vor der Abrechnung.
 
 ## Limits & Wiederherstellung
@@ -200,8 +247,9 @@ Ursache es ist.
 
 ## Verwandte Xquik-Actors
 
-Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, rechnet erst nach dem
-Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
+Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, dieselbe Abrechnung erst
+nach dem Filtern & dieselben Diagnosen. Wähle den, der zu den Daten passt, die
+du brauchst.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrapt Posts aus
   Suchen, Profil-Timelines, Listen & Post-IDs mit über 50 Filtern & flachen
@@ -219,9 +267,9 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015 pro
   Datensatz.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
-  scrapt die Posts, die Posts zitieren, mit Text, Medien, Zahlen, Autoren & 11
-  Filtern. Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was gesagt
-  wurde. Ab $0.00015 pro Post.
+  scrapt die Zitate von Posts mit Text, Medien, Zählern, Autoren & 11 Filtern.
+  Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was diese Accounts
+  gesagt haben. Ab $0.00015 pro Post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrapt
   Follower, gefolgte Accounts, Listenmitglieder, Abonnenten &
   Community-Mitglieder als Profil-Datensätze. Nutze ihn, wenn du Zielgruppen-
@@ -232,8 +280,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   einer Suche aufbaust. Ab $0.00015 pro Profil.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   prüft, wo Accounts ansässig sind, mit der X-Angabe "Account based in", der
-  Verbindungsart zu X & Benutzernamen-Änderungen. Nutze ihn, wenn du prüfst, wo
-  Accounts ansässig sind. Ab $0.00015 pro Account.
+  Verbindungsart zu X & Änderungen des Nutzernamens. Nutze ihn, wenn du prüfst,
+  wo Accounts ansässig sind. Ab $0.00015 pro Account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) holt die E-Mails,
   Telefonnummern & Links, die Accounts in ihren Profilen veröffentlichen, anhand
   von Nutzernamen, Followern oder Nutzersuchen. Nutze ihn, wenn du die E-Mails
@@ -265,8 +313,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Zeit beobachtest. Ab $0.0003 pro analysiertem Post.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden Post
-  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema brauchst. Ab
-  $0.0003 pro analysiertem Post.
+  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem beliebigen Thema
+  brauchst. Ab $0.0003 pro analysiertem Post.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   kennzeichnet bullische, bärische, neutrale oder gemischte Haltung, Inhaltstyp,
   Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du Aktien, Krypto
@@ -288,42 +336,45 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
 Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
 
-### Brauche ich einen X-API-Schlüssel oder Login?
+### Brauche ich einen X-API-Schlüssel oder einen Login?
 
-Nein. X List Scraper von Xquik braucht keinen X-API-Schlüssel, keinen Login &
-keine Zugangsdaten.
+Nein. X List Scraper von Xquik braucht weder einen X-API-Schlüssel noch einen
+Login oder Zugangsdaten.
 
 ### Ist es legal, X-Listen zu scrapen?
 
 X List Scraper von Xquik fragt öffentliche X-Felder ab. Ergebnisse können
-personenbezogene Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist. Befolge
+personenbezogene Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist, & befolge
 geltende Datenschutzregeln. Hol dir bei Unsicherheit qualifizierten Rechtsrat.
 
 ### Warum hat mein Run keine Ergebnisse geliefert?
 
-Öffne zuerst die kostenlose Ausgabe `diagnostics`. Der Status eines leeren Runs
-rät dir, Ziele & Filter zu prüfen. `stopCauses` gibt jeder Ursache eine
+Lies zuerst den Run-Status. Der Status eines leeren Runs rät dir, Ziele & Filter
+zu prüfen. Die kostenlose Ausgabe `diagnostics` erscheint, wenn etwas deine
+Aufmerksamkeit braucht. Ihr Feld `stopCauses` gibt jeder Ursache eine
 `nextAction`, der du folgen kannst. Der Run listet jede Eingabe, die er nicht
 lesen kann, & sagt, wie du sie korrigierst.
 
-### Kann ich API, Zeitpläne & Integrationen nutzen?
+### Kann ich die API, Zeitpläne & Integrationen nutzen?
 
-Ja. Wähle aus 50 öffentlichen Tasks oder der REST-API von Xquik. Der
-[API-Tab](https://apify.com/xquik/x-list-scraper/api) enthält Beispiele für
+Ja. Wähle aus 50 öffentlichen Tasks oder nutze die REST-API von Xquik. Im
+[API-Tab](https://apify.com/xquik/x-list-scraper/api) findest du Beispiele für
 Python, JavaScript & cURL.
-Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) starten
-X List Scraper von Xquik per Cron. Agents nutzen
+[Zeitpläne](https://docs.apify.com/platform/schedules) von Apify starten X List
+Scraper von Xquik per Cron. Agents nutzen
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp). Nutze `latest`,
 außer du brauchst einen älteren Build.
 
 ### Wo bekomme ich Hilfe?
 
-Öffne ein Issue auf der Actor-Seite oder schreib mit der Run-ID an
-support@xquik.com. Kostenlose Diagnosen im Key-Value-Store erklären leere,
-unvollständige oder unterbrochene Runs.
+Öffne im [Tab Issues](https://apify.com/xquik/x-list-scraper/issues) ein Issue
+mit der Run-ID. Kostenlose Diagnosen im Key-Value-Store erklären Runs, die
+Aufmerksamkeit brauchen. Ein Run, der keinen Datensatz zurückbekommt, sagt in
+seinem Status, warum.
 
 ### Kann ich eine individuelle Lösung bekommen?
 
-Ja. Besuche [xquik.com](https://xquik.com) oder lies die
-[API-Dokumentation](https://docs.xquik.com/introduction). Sie deckt Dashboard,
-API, MCP-Server & Webhooks ab.
+Ja. Beschreibe im [Tab Issues](https://apify.com/xquik/x-list-scraper/issues),
+was du brauchst. Xquik bietet außerdem ein Dashboard, eine REST-API, einen
+MCP-Server & Webhooks. Die Website von Xquik findest du in seinem
+[Apify-Profil](https://apify.com/xquik).

@@ -1,19 +1,10 @@
-<p align="center">
-  <a href="README.md">English</a> ·
-  <a href="README.es.md">Español</a> ·
-  <a href="README.tr.md">Türkçe</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a> ·
-  <strong>Deutsch</strong> ·
-  <a href="README.fr.md">Français</a> ·
-  <a href="README.it.md">Italiano</a>
-</p>
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+**Deutsch** · [Français](README.fr.md) · [Italiano](README.it.md)
 
-<table align="center"><tr><td align="center">
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367"><img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" width="720" alt="Framer verbindet Xquik MCP mit Coding-Agents"></a><br>
-<a href="https://youtu.be/4UOSpoOoC3Y?t=367">Sieh dir an, wie Framer Xquik-Scraper mit Claude Code, Codex, Cursor und mehr nutzt, ab Minute 6:07.</a>
-</td></tr></table>
+[![Framer verbindet Xquik MCP mit Coding-Agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Sieh dir an, wie Framer Xquik-Scraper nutzt](https://youtu.be/4UOSpoOoC3Y?t=367),
+mit Claude Code, Codex, Cursor & mehr, ab Minute 6:07.
 
 Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
 liefert die vollständigsten X-Daten. X Engagement Scraper von Xquik sammelt
@@ -21,10 +12,10 @@ Antworten, Zitate, Reposter & Threads zu jedem Post. Die meisten anderen Apify
 Actors rechnen ab, bevor sie filtern oder Duplikate entfernen. Xquik rechnet nur
 gelieferte, eindeutige Ergebnisse ab, die zu deinen Filtern passen.
 
-Sammle Antworten, Zitate, Reposter (Retweeter) & Thread-Kontext zu 1 oder
-mehreren Posts auf X (Twitter). Du zahlst **$0.00015 pro geliefertem
-Datensatz**, & Apify berechnet die Plattformnutzung separat. Du brauchst keinen
-X-API-Schlüssel & keinen Login.
+Sammle Twitter-Antworten, Zitate, Reposter & Thread-Kontext zu 1 oder mehreren
+X-Posts. Du zahlst **$0.00015 pro geliefertem Datensatz** & Apify berechnet die
+Plattformnutzung separat. Du brauchst weder einen X-API-Schlüssel noch einen
+Login.
 
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
@@ -32,27 +23,34 @@ X-API-Schlüssel & keinen Login.
 ## Antworten, Zitate & Profile
 
 - Post-URLs & numerische Post-IDs.
-- Direkte Antworten über alle verfügbaren Ergebnisseiten.
+- Direkte Antworten über die verfügbaren Ergebnisseiten.
 - Direkte & verschachtelte Antworten in 4 Sortierreihenfolgen.
 - Details zum Quellpost als wählbarer Datensatz.
 - Zitate mit Text, Autoren, Medien & Kennzahlen.
 - Profile der Reposter.
 - Konversationskontext rund um jeden Quellpost.
 - Viele Interaktionstypen & Posts in 1 Run.
-- Eine globale Obergrenze & eine Obergrenze pro Interaktionstyp.
+- Eine globale Obergrenze & eine Obergrenze pro Interaktionsressource.
 - Zuordnung zu Quellpost & Interaktionstyp.
 - Runs laufen nach einem Apify-Neustart weiter.
 
 ## So scrapst du Interaktionen mit X-Posts
 
+Neu bei Apify?
+[Erstelle zuerst einen kostenlosen Account](https://console.apify.com/sign-up?fpr=xquik).
+Der kostenlose Plan braucht keine Kreditkarte & gibt dir jeden Monat $5 zum
+Ausgeben. Bei $0.00015 pro Datensatz reichen $5 für bis zu 33.000 Datensätze,
+vor Abzug der Plattformnutzung. Komm dann hierher zurück & klicke auf Try for
+free.
+
 1. Öffne X Engagement Scraper von Xquik in der Apify Console.
 2. Füge Post-URLs in `startUrls` oder numerische Post-IDs in `tweetIds` ein.
 3. Wähle `engagementTypes` & ergänze Filter wie `minLikes` oder `language`.
-4. Setze `maxItems`, um die gelieferten Datensätze zu begrenzen. Klicke dann
+4. Setze `maxItems`, um die gelieferten Datensätze zu begrenzen, & klicke dann
    auf Start.
 5. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
 
-`startUrls` nimmt jede URL als einfachen String oder als Objekt
+`startUrls` akzeptiert jede URL als einfachen String oder als Objekt
 `{ "url": "..." }`.
 
 ```json
@@ -80,8 +78,8 @@ Grund in seiner Diagnose.
 
 Standardmäßig erscheint jeder Account oder Post einmal pro Interaktionstyp, mit
 1 Gebühr. Setze `dedupeAcrossTargets` auf `false`, um für jeden Quellpost einen
-Datensatz zu behalten. Der Run-Status zählt die übersprungenen Duplikate, die
-nichts kosten.
+Datensatz zu behalten. Der Run-Status zählt die Duplikate, die er kostenlos
+übersprungen hat.
 
 Kleine Runs ohne Probleme überspringen `run-report` & sparen Apify-Nutzung.
 Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
@@ -90,12 +88,12 @@ Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 
 Der Actor liest diese Feldnamen anderer Engagement-Actors.
 
-- `urls` wird `startUrls` zugeordnet.
-- `category` wird `engagementTypes` zugeordnet. `replies`, `retweets`, `info` &
-  `checkRetweet` liest der Actor als `replies`, `retweeters`, `tweet` &
+- `urls` entspricht `startUrls`.
+- `category` entspricht `engagementTypes`. Der Actor liest `replies`,
+  `retweets`, `info` & `checkRetweet` als `replies`, `retweeters`, `tweet` &
   `repostCheck`.
-- `resultsPerCategory` wird `maxItemsPerTarget` zugeordnet.
-- `retweetCheckUsername` wird `repostCheckUsers` zugeordnet.
+- `resultsPerCategory` entspricht `maxItemsPerTarget`.
+- `retweetCheckUsername` entspricht `repostCheckUsers`.
 
 Eine `category`, die die Aufgabe eines anderen Actors ist, etwa `followers` oder
 `tweets`, stoppt den Run. Er liest & berechnet nichts. Die Meldung nennt den
@@ -107,13 +105,17 @@ Feld, gewinnt der kanonische Wert. Das Run-Log nennt das Feld, das verloren hat.
 Jeder Datensatz setzt `resultType` auf `tweet`, `replies`, `completeReplies`,
 `quotes`, `retweeters`, `favoriters`, `thread` oder `repostCheck`.
 `sourceTarget` enthält die ID des Quellposts. Post- & Profilfelder folgen den
-stabilen Response-Formaten der Xquik-REST-API.
+stabilen Antwortformaten der Xquik-REST-API.
 
 `completeReplies` behält jeden gelieferten Datensatz. Der Run-Report zählt
 unvollständige Abdeckung in `incompleteTargets`. Filter laufen vor der
 Abrechnung.
 
-Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
+Für Reposter & Liker gilt jeder Profilfilter, etwa `minFollowers`, `hasEmail` &
+`bioContains`. Ihre Datensätze enthalten `email` & `contactInfo`, also die
+E-Mails, Telefonnummern & Links, die jedes Profil veröffentlicht.
+
+Die Beispiele nutzen Musterwerte. Die Ergebnisse spiegeln Live-Daten wider. Ein
 Antwort-Datensatz sieht so aus.
 
 ```json
@@ -127,10 +129,49 @@ Antwort-Datensatz sieht so aus.
 }
 ```
 
+## Ausgabespalten
+
+8 Eingaben formen jeden Datensatz, nachdem der Run ihn gelesen hat. Sie führen
+keinen Code aus & ändern den Preis nicht.
+
+| Feld                | Was es bewirkt                                                                        |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| `fields`            | Behält nur diese Felder, in der Reihenfolge & Schreibweise, die du angibst            |
+| `omitFields`        | Entfernt diese Felder & behält den Rest                                               |
+| `renameFields`      | Verschiebt ein Feld in eine Spalte mit neuem Namen                                    |
+| `flatten`           | Macht aus jedem verschachtelten Objekt Spalten auf oberster Ebene                     |
+| `fillMissingFields` | Füllt ein behaltenes Feld, das einem Datensatz fehlt, mit `null`. Standardmäßig aktiv |
+| `joinFields`        | Macht aus jeder dieser Listen 1 Textwert                                              |
+| `joinSeparator`     | Text zwischen verbundenen Einträgen. Standard ist ein Komma & ein Leerzeichen         |
+| `constantFields`    | Fügt eine Spalte mit demselben Text in jedem Datensatz hinzu                          |
+
+- Nutze einen Punkt für ein Feld innerhalb eines Objekts. Groß- und
+  Kleinschreibung & Unterstriche spielen keine Rolle.
+- Jeder Datensatz behält seine `id`.
+- Mit `fields` kommt ein Feld, das einem Datensatz fehlt, als `null` an. Jeder
+  Datensatz hat dann dieselben Spalten.
+- Ein falscher Feldname stoppt den Run vor dem Lesen & kostet nichts.
+- Lassen sich die Namen nicht prüfen, liest der Run weiter & listet nicht
+  gefundene Namen am Ende.
+- Der Run ignoriert eine Map-Funktion oder einen jq-Filter, die für einen
+  anderen Actor geschrieben sind.
+
+Nenne eine berechnete Spalte in `fields` oder `renameFields`, um sie
+hinzuzufügen.
+
+| Spalte              | Formel                                                                                     |
+| ------------------- | ------------------------------------------------------------------------------------------ |
+| `totalEngagement`   | `likeCount` + `replyCount` + `retweetCount` + `quoteCount`. Ein fehlender Zähler addiert 0 |
+| `engagementRate`    | `totalEngagement` × 100 ÷ die `followers` des Autors, auf 4 Nachkommastellen               |
+| `engagementPerView` | `totalEngagement` × 100 ÷ `viewCount`, auf 4 Nachkommastellen                              |
+
+`totalEngagement` ist `null` bei einem Datensatz ohne diese Zähler. Eine Rate
+ist `null`, wenn ihr Divisor fehlt oder 0 ist.
+
 ## Repost-Prüfung
 
 Füge `repostCheck` zu `engagementTypes` hinzu & liste Accounts in
-`repostCheckUsers`. So erfährst du, ob jeder Account jeden Post repostet hat.
+`repostCheckUsers`, um zu erfahren, ob jeder Account jeden Post repostet hat.
 
 ```json
 {
@@ -146,21 +187,22 @@ Die Prüfung liest die neuesten Posts jedes Accounts. Ein Repost, der älter ist
 als diese Posts, erscheint als `false` mit `complete: false`.
 
 Ein Run nur mit `repostCheck`- & `tweet`-Datensätzen behält deine
-Eingabereihenfolge. Auf jeden Post folgen seine Accounts in deiner Reihenfolge.
+Eingabereihenfolge. Auf jeden Post folgen seine Accounts in der Reihenfolge, in
+der du sie angegeben hast.
 
-## Zeitstempel von Reposts (Retweets)
+## Retweet-Zeitstempel
 
 Setze `includeRetweetTimestamp` auf `true` für Ergebnisse vom Typ `retweeters`.
 Die Spalte `retweetedAt` enthält den beobachteten Zeitpunkt des Reposts in UTC.
 
-X Engagement Scraper von Xquik findet diesen Zeitpunkt, solange X den Repost
-noch zeigt. Bei älteren, gelöschten oder nicht verfügbaren Reposts bleibt der
-Zeitstempel `null`. Das Profil bleibt in der Ausgabe. Ein `null`-Wert beweist
-nicht, dass ein Account einen Post nie repostet hat.
+X Engagement Scraper von Xquik findet den Zeitpunkt des Reposts, solange X
+diesen Repost noch zeigt. Bei älteren, gelöschten oder nicht verfügbaren Reposts
+bleibt der Zeitstempel `null`. Das Profil bleibt in der Ausgabe. Ein `null`-Wert
+beweist nicht, dass ein Account einen Post nie repostet hat.
 
 Diese Option macht Runs langsamer. Lass sie aus, wenn du nur Profile brauchst.
 `createdAt` im Profil bleibt das Erstellungsdatum des Accounts. Post-Datensätze
-haben `retweetedAt`, wenn sie ein Repost-Ereignis enthalten. Das
+enthalten `retweetedAt`, wenn sie ein Repost-Ereignis enthalten. Das
 Originaldatum des Posts & die Scrape-Zeit ersetzen nie den Zeitpunkt des
 Reposts. Ergebnispreise & die Abrechnung pro geliefertem Datensatz bleiben
 gleich.
@@ -170,9 +212,12 @@ gleich.
 Auf jedem Apify-Plan kostet ein gelieferter Datensatz $0.00015. Apify berechnet
 deine Plattformnutzung separat.
 
-- Eine Gebühr pro geliefertem Datensatz. Diagnosen in `diagnostics` sind
-  kostenlos.
-- Keine Gebühr für Start, Posts, Interaktionstypen oder Seiten.
+Brauchst du mehr Volumen, dann
+[wähle einen Apify-Plan](https://apify.com/pricing?fpr=xquik) mit mehr
+vorausbezahlter Nutzung.
+
+- 1 Gebühr pro geliefertem Datensatz. Diagnosen in `diagnostics` sind kostenlos.
+- Keine Gebühr für Start, Post, Interaktionstyp oder Seite.
 - Die Deduplizierung läuft vor der Abrechnung.
 
 ## Limits & Wiederherstellung
@@ -197,8 +242,9 @@ gestoppt hat. Der Run ist `retryable`, wenn mindestens 1 Ursache es ist.
 
 ## Verwandte Xquik-Actors
 
-Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, rechnet erst nach dem
-Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
+Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, dieselbe Abrechnung erst
+nach dem Filtern & dieselben Diagnosen. Wähle den, der zu den Daten passt, die
+du brauchst.
 
 - [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrapt Posts aus
   Suchen, Profil-Timelines, Listen & Post-IDs mit über 50 Filtern & flachen
@@ -212,9 +258,9 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Kommentare & ganze Konversationen unter Posts mit über 25 Filtern. Nutze ihn,
   wenn du die Diskussion unter Posts brauchst. Ab $0.00015 pro Datensatz.
 - [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
-  scrapt die Posts, die Posts zitieren, mit Text, Medien, Zahlen, Autoren & 11
-  Filtern. Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was gesagt
-  wurde. Ab $0.00015 pro Post.
+  scrapt die Zitate von Posts mit Text, Medien, Zählern, Autoren & 11 Filtern.
+  Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was diese Accounts
+  gesagt haben. Ab $0.00015 pro Post.
 - [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrapt
   Follower, gefolgte Accounts, Listenmitglieder, Abonnenten &
   Community-Mitglieder als Profil-Datensätze. Nutze ihn, wenn du Zielgruppen-
@@ -225,8 +271,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   einer Suche aufbaust. Ab $0.00015 pro Profil.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   prüft, wo Accounts ansässig sind, mit der X-Angabe "Account based in", der
-  Verbindungsart zu X & Benutzernamen-Änderungen. Nutze ihn, wenn du prüfst, wo
-  Accounts ansässig sind. Ab $0.00015 pro Account.
+  Verbindungsart zu X & Änderungen des Nutzernamens. Nutze ihn, wenn du prüfst,
+  wo Accounts ansässig sind. Ab $0.00015 pro Account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) holt die E-Mails,
   Telefonnummern & Links, die Accounts in ihren Profilen veröffentlichen, anhand
   von Nutzernamen, Followern oder Nutzersuchen. Nutze ihn, wenn du die E-Mails
@@ -261,8 +307,8 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
   Zeit beobachtest. Ab $0.0003 pro analysiertem Post.
 - [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden Post
-  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema brauchst. Ab
-  $0.0003 pro analysiertem Post.
+  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem beliebigen Thema
+  brauchst. Ab $0.0003 pro analysiertem Post.
 - [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   kennzeichnet bullische, bärische, neutrale oder gemischte Haltung, Inhaltstyp,
   Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du Aktien, Krypto
@@ -284,44 +330,48 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
 Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
 
-### Brauche ich einen X-API-Schlüssel oder Login?
+### Brauche ich einen X-API-Schlüssel oder einen Login?
 
-Nein. X Engagement Scraper von Xquik braucht keinen X-API-Schlüssel, keinen
-Login & keine Zugangsdaten.
+Nein. X Engagement Scraper von Xquik braucht weder einen X-API-Schlüssel noch
+einen Login oder Zugangsdaten.
 
 ### Ist es legal, Interaktionsdaten von X zu scrapen?
 
 X Engagement Scraper von Xquik fragt öffentliche X-Felder ab. Ergebnisse können
-personenbezogene Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist. Befolge
+personenbezogene Daten enthalten. Prüfe, ob dein Zweck rechtmäßig ist, & befolge
 geltende Datenschutzregeln. Hol dir bei Unsicherheit qualifizierten Rechtsrat.
 
 ### Warum hat mein Run keine Ergebnisse geliefert?
 
-Öffne zuerst die kostenlose Ausgabe `diagnostics`. Der Status eines leeren Runs
-rät dir, Ziele & Filter zu prüfen. `stopCauses` gibt jeder Ursache eine
+Lies zuerst den Run-Status. Der Status eines leeren Runs rät dir, Ziele & Filter
+zu prüfen. Die kostenlose Ausgabe `diagnostics` erscheint, wenn etwas deine
+Aufmerksamkeit braucht. Ihr Feld `stopCauses` gibt jeder Ursache eine
 `nextAction`, der du folgen kannst. Der Run listet jede Eingabe, die er nicht
 lesen kann, & sagt, wie du sie korrigierst. X zeigt seit 2024 nicht mehr, wer
-einen Post mit Gefällt mir markiert hat. Deshalb liefert `favoriters` keine
+einen Post mit Gefällt mir markiert hat, also liefert `favoriters` keine
 Datensätze.
 
-### Kann ich API, Zeitpläne & Integrationen nutzen?
+### Kann ich die API, Zeitpläne & Integrationen nutzen?
 
-Ja. Wähle aus 50 öffentlichen Tasks oder der REST-API von Xquik. Der
-[API-Tab](https://apify.com/xquik/x-engagement-scraper/api) enthält Beispiele
+Ja. Wähle aus 50 öffentlichen Tasks oder nutze die REST-API von Xquik. Im
+[API-Tab](https://apify.com/xquik/x-engagement-scraper/api) findest du Beispiele
 für Python, JavaScript & cURL.
-Apify-[Zeitpläne](https://docs.apify.com/platform/schedules) starten
-X Engagement Scraper von Xquik per Cron. Agents nutzen
+[Zeitpläne](https://docs.apify.com/platform/schedules) von Apify starten X
+Engagement Scraper von Xquik per Cron. Agents nutzen
 [Apify MCP](https://docs.apify.com/platform/integrations/mcp). Nutze `latest`,
 außer du brauchst einen älteren Build.
 
 ### Wo bekomme ich Hilfe?
 
-Öffne ein Issue auf der Actor-Seite oder schreib mit der Run-ID an
-support@xquik.com. Kostenlose Diagnosen im Key-Value-Store erklären leere,
-unvollständige oder unterbrochene Runs.
+Öffne im [Tab Issues](https://apify.com/xquik/x-engagement-scraper/issues) ein
+Issue mit der Run-ID. Kostenlose Diagnosen im Key-Value-Store erklären Runs, die
+Aufmerksamkeit brauchen. Ein Run, der keinen Datensatz zurückbekommt, sagt in
+seinem Status, warum.
 
 ### Kann ich eine individuelle Lösung bekommen?
 
-Ja. Besuche [xquik.com](https://xquik.com) oder lies die
-[API-Dokumentation](https://docs.xquik.com/introduction). Sie deckt Dashboard,
-API, MCP-Server & Webhooks ab.
+Ja. Beschreibe im
+[Tab Issues](https://apify.com/xquik/x-engagement-scraper/issues), was du
+brauchst. Xquik bietet außerdem ein Dashboard, eine REST-API, einen MCP-Server &
+Webhooks. Die Website von Xquik findest du in seinem
+[Apify-Profil](https://apify.com/xquik).
