@@ -105,7 +105,7 @@ X a publié ses poids de classement dans le dépôt `xai-org/x-algorithm`, fichi
 
 | Compteur | Poids |
 | -------- | ----- |
-| J'aime   | 0,5   |
+| J'aime   | 0,66  |
 | Réponse  | 5     |
 | Repost   | 1     |
 | Citation | 5     |
@@ -115,7 +115,7 @@ poids. `viral.algorithmScore` divise cette somme par les vues & la multiplie par
 1 000. Un post sans compteur de vues utilise les abonnés à la place.
 `viral.algorithmBasis` nomme le diviseur, `views` ou `followers`. Comparez
 seulement des scores qui ont la même base. `viral.weightsVersion` nomme les
-poids, par exemple `x_algorithm_params:2026-09-18`.
+poids, par exemple `x_algorithm_params:2026-10-14`.
 
 L'estimation a ces limites.
 
@@ -257,16 +257,16 @@ ceci.
     "verdict": "send_it",
     "weights": "viral_lite:1",
     "stops": [],
-    "algorithmScore": 8.5,
+    "algorithmScore": 9.46,
     "algorithmBasis": "views",
-    "algorithmWeightedSum": 17,
-    "actualEngagementRate": 0.7202,
-    "weightsVersion": "x_algorithm_params:2026-09-18"
+    "algorithmWeightedSum": 18.92,
+    "actualEngagementRate": 0.7582,
+    "weightsVersion": "x_algorithm_params:2026-10-14"
   },
   "viralScore": 74,
   "viralVerdict": "send_it",
-  "viralAlgorithmScore": 8.5,
-  "viralActualEngagementRate": 0.7202,
+  "viralAlgorithmScore": 9.46,
+  "viralActualEngagementRate": 0.7582,
   "analysis": {
     "status": "succeeded",
     "answers": [

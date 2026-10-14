@@ -69,12 +69,12 @@ X 在代码仓库 `xai-org/x-algorithm` 的 `home-mixer/params/param.rs` 文件�
 
 | 计数 | 权重 |
 | ---- | ---- |
-| 喜欢 | 0.5  |
+| 喜欢 | 0.66 |
 | 回复 | 5    |
 | 转帖 | 1    |
 | 引用 | 5    |
 
-`viral.algorithmWeightedSum` 是每项计数乘以权重后的总和。`viral.algorithmScore` 把这个总和除以查看次数，再乘以 1,000。没有查看次数的帖子改用关注者数。`viral.algorithmBasis` 标明除数是 `views` 还是 `followers`。只比较基准相同的分数。`viral.weightsVersion` 标明权重版本，例如 `x_algorithm_params:2026-09-18`。
+`viral.algorithmWeightedSum` 是每项计数乘以权重后的总和。`viral.algorithmScore` 把这个总和除以查看次数，再乘以 1,000。没有查看次数的帖子改用关注者数。`viral.algorithmBasis` 标明除数是 `views` 还是 `followers`。只比较基准相同的分数。`viral.weightsVersion` 标明权重版本，例如 `x_algorithm_params:2026-10-14`。
 
 这个估算有以下局限。
 
@@ -172,16 +172,16 @@ Xquik 的 X Tweet Viral Score Analyzer 每条已分析帖子 $0.0003 起。它�
     "verdict": "send_it",
     "weights": "viral_lite:1",
     "stops": [],
-    "algorithmScore": 8.5,
+    "algorithmScore": 9.46,
     "algorithmBasis": "views",
-    "algorithmWeightedSum": 17,
-    "actualEngagementRate": 0.7202,
-    "weightsVersion": "x_algorithm_params:2026-09-18"
+    "algorithmWeightedSum": 18.92,
+    "actualEngagementRate": 0.7582,
+    "weightsVersion": "x_algorithm_params:2026-10-14"
   },
   "viralScore": 74,
   "viralVerdict": "send_it",
-  "viralAlgorithmScore": 8.5,
-  "viralActualEngagementRate": 0.7202,
+  "viralAlgorithmScore": 9.46,
+  "viralActualEngagementRate": 0.7582,
   "analysis": {
     "status": "succeeded",
     "answers": [

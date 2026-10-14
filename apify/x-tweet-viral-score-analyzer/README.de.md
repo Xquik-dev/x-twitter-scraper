@@ -104,7 +104,7 @@ Xquik wendet 4 davon auf die öffentlichen Zähler jedes Posts an.
 
 | Zähler      | Gewicht |
 | ----------- | ------- |
-| Gefällt mir | 0,5     |
+| Gefällt mir | 0,66    |
 | Antwort     | 5       |
 | Repost      | 1       |
 | Zitat       | 5       |
@@ -114,7 +114,7 @@ Gewicht. `viral.algorithmScore` teilt diese Summe durch die Aufrufe &
 multipliziert sie mit 1.000. Ein Post ohne Aufrufzahl nutzt stattdessen die
 Follower. `viral.algorithmBasis` nennt den Divisor, `views` oder `followers`.
 Vergleiche nur Scores mit derselben Basis. `viral.weightsVersion` nennt die
-Gewichte, etwa `x_algorithm_params:2026-09-18`.
+Gewichte, etwa `x_algorithm_params:2026-10-14`.
 
 Die Schätzung hat diese Grenzen.
 
@@ -254,16 +254,16 @@ so aus.
     "verdict": "send_it",
     "weights": "viral_lite:1",
     "stops": [],
-    "algorithmScore": 8.5,
+    "algorithmScore": 9.46,
     "algorithmBasis": "views",
-    "algorithmWeightedSum": 17,
-    "actualEngagementRate": 0.7202,
-    "weightsVersion": "x_algorithm_params:2026-09-18"
+    "algorithmWeightedSum": 18.92,
+    "actualEngagementRate": 0.7582,
+    "weightsVersion": "x_algorithm_params:2026-10-14"
   },
   "viralScore": 74,
   "viralVerdict": "send_it",
-  "viralAlgorithmScore": 8.5,
-  "viralActualEngagementRate": 0.7202,
+  "viralAlgorithmScore": 9.46,
+  "viralActualEngagementRate": 0.7582,
   "analysis": {
     "status": "succeeded",
     "answers": [

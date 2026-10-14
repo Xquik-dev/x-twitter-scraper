@@ -102,7 +102,7 @@ aplica 4 de ellos a los conteos públicos de cada post.
 
 | Conteo    | Peso |
 | --------- | ---- |
-| Me gusta  | 0.5  |
+| Me gusta  | 0.66 |
 | Respuesta | 5    |
 | Repost    | 1    |
 | Cita      | 5    |
@@ -112,7 +112,7 @@ aplica 4 de ellos a los conteos públicos de cada post.
 por 1,000. Un post sin conteo de visualizaciones usa los seguidores en su lugar.
 `viral.algorithmBasis` indica el divisor, `views` o `followers`. Compara solo
 puntajes con la misma base. `viral.weightsVersion` indica los pesos, como
-`x_algorithm_params:2026-09-18`.
+`x_algorithm_params:2026-10-14`.
 
 La estimación tiene estos límites.
 
@@ -253,16 +253,16 @@ así.
     "verdict": "send_it",
     "weights": "viral_lite:1",
     "stops": [],
-    "algorithmScore": 8.5,
+    "algorithmScore": 9.46,
     "algorithmBasis": "views",
-    "algorithmWeightedSum": 17,
-    "actualEngagementRate": 0.7202,
-    "weightsVersion": "x_algorithm_params:2026-09-18"
+    "algorithmWeightedSum": 18.92,
+    "actualEngagementRate": 0.7582,
+    "weightsVersion": "x_algorithm_params:2026-10-14"
   },
   "viralScore": 74,
   "viralVerdict": "send_it",
-  "viralAlgorithmScore": 8.5,
-  "viralActualEngagementRate": 0.7202,
+  "viralAlgorithmScore": 9.46,
+  "viralActualEngagementRate": 0.7582,
   "analysis": {
     "status": "succeeded",
     "answers": [
