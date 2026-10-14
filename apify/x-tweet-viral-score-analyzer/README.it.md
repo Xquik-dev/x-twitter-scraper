@@ -100,7 +100,7 @@ applica 4 ai conteggi pubblici di ogni post.
 
 | Conteggio | Peso |
 | --------- | ---- |
-| Mi piace  | 0,5  |
+| Mi piace  | 0,66 |
 | Risposta  | 5    |
 | Repost    | 1    |
 | Citazione | 5    |
@@ -110,7 +110,7 @@ applica 4 ai conteggi pubblici di ogni post.
 moltiplica per 1.000. Un post senza conteggio delle visualizzazioni usa invece i
 follower. `viral.algorithmBasis` indica il divisore, `views` o `followers`.
 Confronta solo punteggi con la stessa base. `viral.weightsVersion` indica i
-pesi, come `x_algorithm_params:2026-09-18`.
+pesi, come `x_algorithm_params:2026-10-14`.
 
 La stima ha questi limiti.
 
@@ -251,16 +251,16 @@ aspetto.
     "verdict": "send_it",
     "weights": "viral_lite:1",
     "stops": [],
-    "algorithmScore": 8.5,
+    "algorithmScore": 9.46,
     "algorithmBasis": "views",
-    "algorithmWeightedSum": 17,
-    "actualEngagementRate": 0.7202,
-    "weightsVersion": "x_algorithm_params:2026-09-18"
+    "algorithmWeightedSum": 18.92,
+    "actualEngagementRate": 0.7582,
+    "weightsVersion": "x_algorithm_params:2026-10-14"
   },
   "viralScore": 74,
   "viralVerdict": "send_it",
-  "viralAlgorithmScore": 8.5,
-  "viralActualEngagementRate": 0.7202,
+  "viralAlgorithmScore": 9.46,
+  "viralActualEngagementRate": 0.7582,
   "analysis": {
     "status": "succeeded",
     "answers": [

@@ -109,7 +109,7 @@ them to each post's public counts.
 
 | Count  | Weight |
 | ------ | ------ |
-| Like   | 0.5    |
+| Like   | 0.66   |
 | Reply  | 5      |
 | Repost | 1      |
 | Quote  | 5      |
@@ -119,7 +119,7 @@ them to each post's public counts.
 without a view count uses followers instead. `viral.algorithmBasis` names the
 divisor, `views` or `followers`. Compare scores with the same basis only.
 `viral.weightsVersion` names the weights, such as
-`x_algorithm_params:2026-09-18`.
+`x_algorithm_params:2026-10-14`.
 
 The estimate has these limits.
 
@@ -246,16 +246,16 @@ The input above is copy-ready. An abbreviated output row looks like this.
     "verdict": "send_it",
     "weights": "viral_lite:1",
     "stops": [],
-    "algorithmScore": 8.5,
+    "algorithmScore": 9.46,
     "algorithmBasis": "views",
-    "algorithmWeightedSum": 17,
-    "actualEngagementRate": 0.7202,
-    "weightsVersion": "x_algorithm_params:2026-09-18"
+    "algorithmWeightedSum": 18.92,
+    "actualEngagementRate": 0.7582,
+    "weightsVersion": "x_algorithm_params:2026-10-14"
   },
   "viralScore": 74,
   "viralVerdict": "send_it",
-  "viralAlgorithmScore": 8.5,
-  "viralActualEngagementRate": 0.7202,
+  "viralAlgorithmScore": 9.46,
+  "viralActualEngagementRate": 0.7582,
   "analysis": {
     "status": "succeeded",
     "answers": [

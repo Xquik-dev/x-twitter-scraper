@@ -95,7 +95,7 @@ X는 `xai-org/x-algorithm` 저장소의 `home-mixer/params/param.rs` 파일에 �
 
 | 수치          | 가중치 |
 | ------------- | ------ |
-| 마음에 들어요 | 0.5    |
+| 마음에 들어요 | 0.66   |
 | 답글          | 5      |
 | 재게시        | 1      |
 | 인용          | 5      |
@@ -104,7 +104,7 @@ X는 `xai-org/x-algorithm` 저장소의 `home-mixer/params/param.rs` 파일에 �
 `viral.algorithmScore`는 그 합을 조회수로 나누고 1,000을 곱한 값입니다. 조회수가
 없는 게시물은 대신 팔로워 수를 씁니다. `viral.algorithmBasis`는 나누는 값인
 `views` 또는 `followers`를 알려 줍니다. 기준이 같은 점수끼리만 비교하세요.
-`viral.weightsVersion`은 `x_algorithm_params:2026-09-18`처럼 가중치 버전을
+`viral.weightsVersion`은 `x_algorithm_params:2026-10-14`처럼 가중치 버전을
 나타냅니다.
 
 이 추정치에는 다음과 같은 한계가 있습니다.
@@ -236,16 +236,16 @@ Apify가 따로 청구합니다. Pricing 탭에서 확인할 수 있습니다.
     "verdict": "send_it",
     "weights": "viral_lite:1",
     "stops": [],
-    "algorithmScore": 8.5,
+    "algorithmScore": 9.46,
     "algorithmBasis": "views",
-    "algorithmWeightedSum": 17,
-    "actualEngagementRate": 0.7202,
-    "weightsVersion": "x_algorithm_params:2026-09-18"
+    "algorithmWeightedSum": 18.92,
+    "actualEngagementRate": 0.7582,
+    "weightsVersion": "x_algorithm_params:2026-10-14"
   },
   "viralScore": 74,
   "viralVerdict": "send_it",
-  "viralAlgorithmScore": 8.5,
-  "viralActualEngagementRate": 0.7202,
+  "viralAlgorithmScore": 9.46,
+  "viralActualEngagementRate": 0.7582,
   "analysis": {
     "status": "succeeded",
     "answers": [

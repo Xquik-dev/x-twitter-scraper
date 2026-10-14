@@ -69,12 +69,12 @@ Xは、リポジトリ `xai-org/x-algorithm` のファイル `home-mixer/params/
 
 | カウント | 重み |
 | -------- | ---- |
-| いいね   | 0.5  |
+| いいね   | 0.66 |
 | 返信     | 5    |
 | リポスト | 1    |
 | 引用     | 5    |
 
-`viral.algorithmWeightedSum` は、各カウントに重みを掛けた値の合計です。`viral.algorithmScore` は、その合計を表示回数で割り、1,000を掛けた値です。表示回数のないポストでは、代わりにフォロワー数を使います。`viral.algorithmBasis` は、割る数が `views` か `followers` かを示します。スコアは、基準が同じもの同士でだけ比べてください。`viral.weightsVersion` は、`x_algorithm_params:2026-09-18` のように重みのバージョンを示します。
+`viral.algorithmWeightedSum` は、各カウントに重みを掛けた値の合計です。`viral.algorithmScore` は、その合計を表示回数で割り、1,000を掛けた値です。表示回数のないポストでは、代わりにフォロワー数を使います。`viral.algorithmBasis` は、割る数が `views` か `followers` かを示します。スコアは、基準が同じもの同士でだけ比べてください。`viral.weightsVersion` は、`x_algorithm_params:2026-10-14` のように重みのバージョンを示します。
 
 この推定値には次の制限があります。
 
@@ -172,16 +172,16 @@ XquikのX Tweet Viral Score Analyzerは、分析済みポスト1件あたり$0.0
     "verdict": "send_it",
     "weights": "viral_lite:1",
     "stops": [],
-    "algorithmScore": 8.5,
+    "algorithmScore": 9.46,
     "algorithmBasis": "views",
-    "algorithmWeightedSum": 17,
-    "actualEngagementRate": 0.7202,
-    "weightsVersion": "x_algorithm_params:2026-09-18"
+    "algorithmWeightedSum": 18.92,
+    "actualEngagementRate": 0.7582,
+    "weightsVersion": "x_algorithm_params:2026-10-14"
   },
   "viralScore": 74,
   "viralVerdict": "send_it",
-  "viralAlgorithmScore": 8.5,
-  "viralActualEngagementRate": 0.7202,
+  "viralAlgorithmScore": 9.46,
+  "viralActualEngagementRate": 0.7582,
   "analysis": {
     "status": "succeeded",
     "answers": [

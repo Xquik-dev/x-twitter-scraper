@@ -102,7 +102,7 @@ Analyzer'ı bunlardan 4'ünü her gönderinin herkese açık sayılarına uygula
 
 | Sayı            | Ağırlık |
 | --------------- | ------- |
-| Beğeni          | 0,5     |
+| Beğeni          | 0,66    |
 | Yanıt           | 5       |
 | Yeniden gönderi | 1       |
 | Alıntı          | 5       |
@@ -112,7 +112,7 @@ Analyzer'ı bunlardan 4'ünü her gönderinin herkese açık sayılarına uygula
 Görüntülenme sayısı olmayan bir gönderi bunun yerine takipçi sayısını kullanır.
 `viral.algorithmBasis` böleni `views` veya `followers` olarak belirtir. Puanları
 yalnızca aynı temelle karşılaştır. `viral.weightsVersion` ağırlıkları belirtir,
-örneğin `x_algorithm_params:2026-09-18`.
+örneğin `x_algorithm_params:2026-10-14`.
 
 Tahminin aşağıdaki sınırları var.
 
@@ -252,16 +252,16 @@ Yukarıdaki girdiyi olduğu gibi kopyalayabilirsin. Kısaltılmış bir çıktı
     "verdict": "send_it",
     "weights": "viral_lite:1",
     "stops": [],
-    "algorithmScore": 8.5,
+    "algorithmScore": 9.46,
     "algorithmBasis": "views",
-    "algorithmWeightedSum": 17,
-    "actualEngagementRate": 0.7202,
-    "weightsVersion": "x_algorithm_params:2026-09-18"
+    "algorithmWeightedSum": 18.92,
+    "actualEngagementRate": 0.7582,
+    "weightsVersion": "x_algorithm_params:2026-10-14"
   },
   "viralScore": 74,
   "viralVerdict": "send_it",
-  "viralAlgorithmScore": 8.5,
-  "viralActualEngagementRate": 0.7202,
+  "viralAlgorithmScore": 9.46,
+  "viralActualEngagementRate": 0.7582,
   "analysis": {
     "status": "succeeded",
     "answers": [
