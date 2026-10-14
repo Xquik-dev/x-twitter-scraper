@@ -33,16 +33,16 @@ premier. Un profil sans e-mail n'est pas livré et ne coûte rien. Vous payez
 ## Coordonnées sur chaque ligne
 
 - Le premier e-mail que le profil publie, en minuscules.
-- Le domaine de cet e-mail et le champ du profil qui le contient : bio, nom ou
-  localisation.
+- Le domaine de cet e-mail et le champ du profil qui le contient, soit la bio,
+  le nom ou la localisation.
 - Tous les e-mails du profil, même quand ils sont écrits "name [at] site [dot]
   com".
 - Les numéros de téléphone que le profil publie, comme un lien WhatsApp.
 - Le site web du profil et les liens de sa bio, chacun avec son réseau, comme
   LinkedIn, GitHub ou Telegram.
-- Le profil public complet : nom, bio, compteurs, certification, dates et
+- Le profil public complet, avec nom, bio, compteurs, certification, dates et
   images.
-- 3 sources en 1 run : des comptes, leurs abonnés ou abonnements, et des
+- 3 sources en 1 run, à savoir des comptes, leurs abonnés ou abonnements, et des
   recherches d'utilisateurs.
 - Des filtres par domaine d'e-mail, e-mail professionnel, abonnés, ancienneté du
   compte, bio et localisation.
@@ -68,7 +68,7 @@ aucune étape.
 ## Entrée
 
 `twitterHandles` accepte un compte sous toutes ses formes, que vous pouvez
-mélanger. Le run vérifie chaque compte et livre ceux qui publient un e-mail :
+mélanger. Le run vérifie chaque compte et livre ceux qui publient un e-mail.
 
 ```json
 {
@@ -79,7 +79,7 @@ mélanger. Le run vérifie chaque compte et livre ceux qui publient un e-mail :
 
 `startUrls` et `userIds` acceptent les mêmes formes. Avec `expandFollowers`, le
 run lit les abonnés de chaque compte à la place et garde ceux qui publient un
-e-mail. `expansionRelation` choisit `Followers` ou `Following` :
+e-mail. `expansionRelation` choisit `Followers` ou `Following`.
 
 ```json
 {
@@ -92,7 +92,7 @@ e-mail. `expansionRelation` choisit `Followers` ou `Following` :
 ```
 
 `searchTerms` recherche des utilisateurs X par nom, nom d'utilisateur ou mots de
-la bio. Chaque terme donne 1 recherche :
+la bio. Chaque terme donne 1 recherche.
 
 ```json
 {
@@ -125,22 +125,23 @@ problème n'écrivent pas `run-report` et réduisent l'usage Apify. Activez
 
 Collez l'entrée que vous utilisez déjà. X Email Scraper de Xquik lit ces noms de
 champs d'autres Actors. Chaque ligne nomme leurs champs, puis le champ auquel
-ils correspondent :
+ils correspondent.
 
-- `requireEmail` : aucun champ nécessaire. Chaque profil livré publie un e-mail.
-- `requireWebsite` : `hasWebsite`. Il garde un profil avec n'importe quel lien
-  dans son champ de site web, et le statut du run le dit.
-- `bioKeywords` : `bioContains`. Il suffit que 1 de ses termes corresponde.
-- `locationKeywords` avec 1 valeur : `locationContains`. Avec plus de valeurs,
-  le run s'arrête avant toute lecture ou facturation.
-- `emailDomains` en liste : `emailDomains`
-- `outputEmail`, `resolveShortLinks` : aucun champ nécessaire. Chaque ligne
+- `requireEmail` ne demande aucun champ. Chaque profil livré publie un e-mail.
+- `requireWebsite` correspond à `hasWebsite`. Il garde un profil avec n'importe
+  quel lien dans son champ de site web, et le statut du run le dit.
+- `bioKeywords` correspond à `bioContains`. Il suffit que 1 de ses termes
+  corresponde.
+- `locationKeywords` avec 1 valeur correspond à `locationContains`. Avec plus de
+  valeurs, le run s'arrête avant toute lecture ou facturation.
+- `emailDomains` en liste correspond à `emailDomains`.
+- `outputEmail`, `resolveShortLinks` ne demandent aucun champ. Chaque ligne
   contient ses e-mails et les liens complets de X.
-- `findEmails`, `extractEmails` : aucun champ. Les lignes contiennent les
-  e-mails qu'un profil publie sur X. Le statut du run indique que l'Actor ne lit
-  aucun site lié.
-- `validateEmails` : aucun champ. Le statut du run indique que les e-mails
-  arrivent tels que publiés, car l'Actor ne vérifie aucune boîte mail.
+- `findEmails`, `extractEmails` ne demandent aucun champ. Les lignes contiennent
+  les e-mails qu'un profil publie sur X. Le statut du run indique que l'Actor ne
+  lit aucun site lié.
+- `validateEmails` ne demande aucun champ. Le statut du run indique que les
+  e-mails arrivent tels que publiés, car l'Actor ne vérifie aucune boîte mail.
 
 Si vous réglez l'un de ces noms et son champ canonique, la valeur canonique
 l'emporte. Le log du run nomme le champ écarté.
@@ -148,14 +149,14 @@ l'emporte. Le log du run nomme le champ écarté.
 ## Sortie
 
 Chaque profil qui publie un e-mail donne 1 ligne de dataset. Les coordonnées
-viennent en premier : `email`, `emailDomain`, `emailSource` et `contactInfo`. Le
-profil public complet suit, avec `id`, `username`, `name`, `description`,
-`followers`, `following`, `verified`, `verifiedType`, `createdAt`,
-`profilePicture` et d'autres champs. Les champs absents de la source restent
-absents. X Email Scraper de Xquik n'invente aucune valeur.
+viennent en premier, dans `email`, `emailDomain`, `emailSource` et
+`contactInfo`. Le profil public complet suit, avec `id`, `username`, `name`,
+`description`, `followers`, `following`, `verified`, `verifiedType`,
+`createdAt`, `profilePicture` et d'autres champs. Les champs absents de la
+source restent absents. X Email Scraper de Xquik n'invente aucune valeur.
 
 Les exemples utilisent des valeurs fictives. Les résultats reflètent les données
-en direct. Une ligne ressemble à ceci :
+en direct. Une ligne ressemble à ceci.
 
 ```json
 {
@@ -205,7 +206,7 @@ en direct. Une ligne ressemble à ceci :
 
 ## Ce que signifie l'e-mail
 
-Un e-mail est une adresse que le compte a écrite sur son propre profil : dans sa
+Un e-mail est une adresse que le compte a écrite sur son propre profil, dans sa
 bio, son nom ou sa localisation. L'Actor la renvoie telle que le compte l'a
 publiée et la met en minuscules. Rien ne vérifie que l'adresse reçoit des
 messages, et rien ne lit le site web vers lequel un profil renvoie. `writtenAs`
@@ -267,90 +268,89 @@ Tous les Actors Xquik partagent le même moteur d'extraction, la même facturati
 après filtrage et les mêmes diagnostics. Choisissez celui qui correspond aux
 données dont vous avez besoin.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) : scrape des posts
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrape des posts
   (tweets) depuis des recherches, des fils de profil, des Listes et des ID de
   post, avec plus de 50 filtres et des exports plats. Utilisez-le quand vous
   avez besoin de données de posts sans analyse. À partir de $0.00015 par ligne.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) : scrape des
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) scrape des
   profils ainsi que leurs posts, réponses, médias et abonnés à partir de noms
   d'utilisateur, d'ID ou d'URL. Utilisez-le quand vous partez de comptes plutôt
   que de recherches. À partir de $0.00015 par ligne.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) : scrape des
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) scrape des
   réponses, des commentaires et des conversations entières sous les posts avec
   plus de 25 filtres. Utilisez-le quand vous avez besoin des échanges sous les
   posts. À partir de $0.00015 par ligne.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) : scrape
-  en masse les réponses, citations, comptes qui ont reposté et discussions de
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) scrape en
+  masse les réponses, citations, comptes qui ont reposté et discussions de
   posts, à partir d'URL ou d'ID. Utilisez-le pour mesurer qui a interagi avec
   des posts. À partir de $0.00015 par ligne.
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper) :
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
   scrape les posts qui citent des posts, avec le texte, les médias, les
   compteurs, les auteurs et 11 filtres. Utilisez-le quand vous étudiez qui a
   cité des posts et ce qu'ils ont dit. À partir de $0.00015 par post.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) : scrape les
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrape les
   abonnés, les abonnements, les membres et abonnés de Liste et les membres de
   Communauté sous forme de lignes de profil. Utilisez-le quand vous avez besoin
   de listes d'audience ou de membres. À partir de $0.00015 par profil.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) :
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)
   recherche des comptes par nom d'utilisateur, bio et localisation, avec des
   filtres d'abonnés, de certification, d'ancienneté et de localisation.
   Utilisez-le pour créer des listes de comptes à partir d'une recherche. À
   partir de $0.00015 par profil.
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper) :
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   vérifie où sont basés les comptes avec le libellé "Account based in" de X, la
   façon dont ils se sont connectés à X et leurs changements de nom
   d'utilisateur. Utilisez-le quand vous vérifiez où sont basés des comptes. À
   partir de $0.00015 par compte.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper) : scrape les posts,
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) scrape les posts,
   membres et abonnés d'une Liste à partir d'URL ou d'ID de Liste. Utilisez-le
   quand une Liste choisie définit vos sources. À partir de $0.00015 par ligne.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper) : scrape
-  les infos, posts, recherches, membres et modérateurs d'une Communauté.
-  Utilisez-le quand vos sources sont des Communautés X. À partir de $0.00015 par
-  ligne.
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper) : trouve des Spaces
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper) scrape les
+  infos, posts, recherches, membres et modérateurs d'une Communauté. Utilisez-le
+  quand vos sources sont des Communautés X. À partir de $0.00015 par ligne.
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) trouve des Spaces
   par mot-clé et lit leurs titres, états, heures, nombres d'auditeurs, hôtes et
-  intervenants. Lit aussi des diffusions par URL ou par ID. Utilisez-le quand
+  intervenants. Il lit aussi des diffusions par URL ou par ID. Utilisez-le quand
   vous suivez l'audio et la vidéo en direct sur X. À partir de $0.00015 par
   Space ou diffusion.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) : scrape les
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) scrape les
   tendances en temps réel par lieu, avec rang, volume, requête et WOEID.
   Utilisez-le pour suivre les tendances de chaque lieu. À partir de $0.00015 par
   tendance.
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) : scrape les offres
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) scrape les offres
   d'emploi X par mot-clé, lieu, mode de travail, niveau d'expérience et
   entreprise, avec salaires et liens de candidature. Utilisez-le quand vous
   collectez des offres d'emploi publiées sur X. À partir de $0.00015 par offre.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper) : scrape les
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) scrape les
   Articles X longs en Markdown et en texte, avec couvertures, auteurs, dates et
   métriques. Utilisez-le quand vous avez besoin du corps des Articles, pas des
   posts. À partir de $0.00015 par article.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader) : extrait ou
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) extrait ou
   stocke des photos, vidéos et GIF à partir de posts ou de profils, avec des
   options MP4 et de métadonnées. Utilisez-le quand vous avez besoin des fichiers
   médias eux-mêmes. À partir de $0.00015 par ligne média.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring) :
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
   suit les mentions de marque avec pertinence, sentiment et réponses sur
   l'expérience client par IA, et compare les runs. Utilisez-le pour surveiller
   une marque dans le temps. À partir de $0.0003 par post analysé.
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis) :
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   attribue une attitude, une intensité et une probabilité de sarcasme à chaque
   post par IA. Utilisez-le pour un sentiment général sur n'importe quel sujet. À
   partir de $0.0003 par post analysé.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals) :
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   attribue une orientation haussière, baissière, neutre ou mixte, un type de
   contenu, une conviction et une pertinence d'actif par IA. Utilisez-le pour
   suivre les actions, la crypto ou les discussions de trading. À partir de
   $0.0003 par post analysé.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor) :
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
   attribue un format, une attribution de source et une pertinence de sujet aux
   posts d'actualité par IA. Utilisez-le pour séparer le reportage du
   commentaire. À partir de $0.0003 par post analysé.
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier) :
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
   répond à vos propres questions de catégorie, de score et de oui/non pour
   chaque post par IA. Utilisez-le quand les analyses prédéfinies ne
   correspondent pas à vos étiquettes. À partir de $0.0003 par post analysé.
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer) :
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
   estime un Viral Score de 0 à 100 et un verdict pour chaque post à partir de 8
   critères notés par IA. Utilisez-le quand vous étudiez pourquoi des posts
   percent ou font un flop. À partir de $0.0003 par post analysé.
@@ -367,9 +367,9 @@ Xquik.
 
 ### D'où viennent les e-mails ?
 
-Du profil lui-même : la bio, le nom et la localisation que le compte a écrits.
-L'Actor ne lit aucun post ni aucun site web lié. Chaque e-mail est donc une
-adresse que le compte a publiée sur son propre profil X.
+Ils viennent du profil lui-même, soit la bio, le nom et la localisation que le
+compte a écrits. L'Actor ne lit aucun post ni aucun site web lié. Chaque e-mail
+est donc une adresse que le compte a publiée sur son propre profil X.
 
 ### L'Actor vérifie-t-il qu'un e-mail fonctionne ?
 

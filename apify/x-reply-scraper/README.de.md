@@ -74,7 +74,7 @@ Post-IDs & Antwort-Timelines von Nutzern.
 Die Schemas für Dataset & Run-Report beschreiben jedes gelieferte Feld.
 Primitive Felder enthalten auch Beispiele für Agents & generierte Integrationen.
 
-Jeder vollständige Antwort-Datensatz kann diese Kernfelder enthalten:
+Jeder vollständige Antwort-Datensatz kann diese Kernfelder enthalten.
 
 | Feld                | Beschreibung                                             |
 | ------------------- | -------------------------------------------------------- |
@@ -100,7 +100,7 @@ Jeder vollständige Antwort-Datensatz kann diese Kernfelder enthalten:
 | `quoted_tweet`      | Zitierter Post, falls vorhanden                          |
 | `retweeted_tweet`   | Reposteter Post, falls vorhanden                         |
 
-Vollständige Datensätze behalten außerdem verfügbare Quellmetadaten:
+Vollständige Datensätze behalten außerdem verfügbare Quellmetadaten.
 
 - Felder zum Post-Typ sind `type`, `isReply`, `isQuoteStatus`, `isNoteTweet`,
   `isLimitedReply` & `isTranslatable`.
@@ -269,7 +269,7 @@ Das Report-Schema dokumentiert Abschluss, Abrechnung, Fehler & gespeicherte
 Cursor. Sein Feld `version` nennt die exakte veröffentlichte Quellversion des
 Actors.
 
-Das Feld `status` nutzt diese Werte:
+Das Feld `status` nutzt diese Werte.
 
 - `no-input`
 - `invalid-input`
@@ -299,29 +299,30 @@ funktionieren weiter in JSON, API, SDK, Automatisierungen & gespeicherten
 Task-Eingaben. Kombinierst du kanonische Felder & Aliasse, gilt ihre bestehende
 Rangfolge.
 
-Diese Aliasse akzeptieren gängige Feldnamen anderer Scraper:
+Diese Aliasse akzeptieren gängige Feldnamen anderer Scraper.
 
-- URL-Aliasse: `urls`, `tweetUrls`, `postUrls`, `profileUrls` & `twitterUrl` als
-  einzelner String
-- ID-Aliasse: `conversationIds`, `postIds`, `ids`, `tweetId`, `id`
-- Nutzernamen-Aliasse: `twitterHandles`, `screenname`
-- Aliasse für das globale Limit: `maxResults`, `max_results`, `resultsLimit`,
-  `maxReplies`
-- Aliasse pro Ziel: `maxRepliesPerTweet`, `maxCommentsPerPost`,
-  `resultsPerCategory`
-- Such-Alias: `useSearch`
-- Aliasse für verschachtelte Antworten: `includeNestedReplies`,
-  `includeRepliesOfReplies`
-- Alias für die Tiefe: `depth` als `1`, `2` oder `3` für `maxDepth`. `full`
-  setzt kein Limit.
-- Alias für den Umfang: `onlyDirectReplies` für `scope: "direct"`
-- Aliasse für den Originalpost: `includeOriginalTweet`, `includeSourceTweet`.
-  Mit `includeSourceTweet` begrenzt `resultsPerCategory` die Antworten & der
-  Post ist 1 Datensatz mehr.
-- Alias für den Autor: `excludeOpSelfReplies` für `excludeOriginalAuthor`
-- Aliasse für die Sortierung: `sortBy` & `queryType` für `sort`. `top`, `newest`
-  & `mostLiked` liest der Actor als `relevance`, `latest` & `likes`.
-- Ausgabe-Aliasse: `outputVariant`, `includeRaw`
+- URL-Aliasse sind `urls`, `tweetUrls`, `postUrls`, `profileUrls` & `twitterUrl`
+  als einzelner String.
+- ID-Aliasse sind `conversationIds`, `postIds`, `ids`, `tweetId`, `id`.
+- Nutzernamen-Aliasse sind `twitterHandles`, `screenname`.
+- Aliasse für das globale Limit sind `maxResults`, `max_results`,
+  `resultsLimit`, `maxReplies`.
+- Aliasse pro Ziel sind `maxRepliesPerTweet`, `maxCommentsPerPost`,
+  `resultsPerCategory`.
+- Der Such-Alias ist `useSearch`.
+- Aliasse für verschachtelte Antworten sind `includeNestedReplies`,
+  `includeRepliesOfReplies`.
+- Der Alias für die Tiefe ist `depth` als `1`, `2` oder `3` für `maxDepth`.
+  `full` setzt kein Limit.
+- Der Alias für den Umfang ist `onlyDirectReplies` für `scope: "direct"`.
+- Aliasse für den Originalpost sind `includeOriginalTweet`,
+  `includeSourceTweet`. Mit `includeSourceTweet` begrenzt `resultsPerCategory`
+  die Antworten & der Post ist 1 Datensatz mehr.
+- Der Alias für den Autor ist `excludeOpSelfReplies` für
+  `excludeOriginalAuthor`.
+- Aliasse für die Sortierung sind `sortBy` & `queryType` für `sort`. `top`,
+  `newest` & `mostLiked` liest der Actor als `relevance`, `latest` & `likes`.
+- Ausgabe-Aliasse sind `outputVariant`, `includeRaw`.
 
 `category` auf `replies` ändert nichts. Eine Kategorie, die die Aufgabe eines
 anderen Actors ist, etwa `retweets` oder `info`, stoppt den Run. Er liest &
@@ -394,7 +395,7 @@ die beste verfügbare Tiefe.
 
 ### Sortierung
 
-Nutze `sort` mit diesen Werten:
+Nutze `sort` mit diesen Werten.
 
 - `relevance` behält die Reihenfolge von X
 - `latest` zeigt die neuesten zuerst
@@ -474,7 +475,7 @@ Die flache Ausgabe ergänzt `mediaUrls`.
 
 ### Beispielausgabe
 
-Ein gekürzter Antwort-Datensatz sieht so aus:
+Ein gekürzter Antwort-Datensatz sieht so aus.
 
 ```json
 {
@@ -670,107 +671,86 @@ Nummern durch `latest`. Nutze exakte Builds nur für vorübergehende Rollbacks.
 Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, rechnet erst nach dem
 Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): Scrapt Posts aus
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrapt Posts aus
   Suchen, Profil-Timelines, Listen & Post-IDs mit über 50 Filtern & flachen
-  Exporten. Nutze ihn, wenn du Post-Daten ohne Analyse brauchst. Ab $0.00015
+  Exporten. Nutze ihn, wenn du Post-Daten ohne Analyse brauchst. Ab $0.00015 pro
+  Datensatz.
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) scrapt Profile
+  samt Posts, Antworten, Medien & Followern anhand von Nutzernamen, IDs oder
+  URLs. Nutze ihn, wenn du von Accounts statt von Suchen ausgehst. Ab $0.00015
   pro Datensatz.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Scrapt
-  Profile samt Posts, Antworten, Medien & Followern anhand von Nutzernamen, IDs
-  oder URLs. Nutze ihn, wenn du von Accounts statt von Suchen ausgehst. Ab
-  $0.00015 pro Datensatz.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Scrapt
-  Antworten, Zitate, Reposter & Threads zu Post-URLs oder -IDs in großen
-  Mengen. Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015
-  pro Datensatz.
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
-  Scrapt die Posts, die Posts zitieren, mit Text, Medien, Zahlen, Autoren & 11
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) scrapt
+  Antworten, Zitate, Reposter & Threads zu Post-URLs oder -IDs in großen Mengen.
+  Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015 pro
+  Datensatz.
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
+  scrapt die Posts, die Posts zitieren, mit Text, Medien, Zahlen, Autoren & 11
   Filtern. Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was gesagt
   wurde. Ab $0.00015 pro Post.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Scrapt
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrapt
   Follower, gefolgte Accounts, Listenmitglieder, Abonnenten &
   Community-Mitglieder als Profil-Datensätze. Nutze ihn, wenn du Zielgruppen-
   oder Mitgliederlisten brauchst. Ab $0.00015 pro Profil.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Sucht Nutzer nach Nutzername, Bio & Standort mit Filtern für Follower,
-  Verifizierung, Account-Alter & Standort. Nutze ihn, wenn du Account-Listen
-  aus einer Suche aufbaust. Ab $0.00015 pro Profil.
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
-  Prüft mit der X-Angabe "Account based in", der Art, wie sich ein Account mit X
-  verbunden hat, & Benutzernamen-Änderungen, wo Accounts ansässig sind. Nutze
-  ihn, wenn du prüfst, wo Accounts ansässig sind. Ab $0.00015 pro Account.
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): Holt die E-Mails,
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) sucht
+  Nutzer nach Nutzername, Bio & Standort mit Filtern für Follower,
+  Verifizierung, Account-Alter & Standort. Nutze ihn, wenn du Account-Listen aus
+  einer Suche aufbaust. Ab $0.00015 pro Profil.
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
+  prüft, wo Accounts ansässig sind, mit der X-Angabe "Account based in", der
+  Verbindungsart zu X & Benutzernamen-Änderungen. Nutze ihn, wenn du prüfst, wo
+  Accounts ansässig sind. Ab $0.00015 pro Account.
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) holt die E-Mails,
   Telefonnummern & Links, die Accounts in ihren Profilen veröffentlichen, anhand
   von Nutzernamen, Followern oder Nutzersuchen. Nutze ihn, wenn du die E-Mails
   brauchst, die Profile veröffentlichen. Ab $0.00015 pro Profil.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): Scrapt Posts,
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) scrapt Posts,
   Mitglieder & Follower von Listen aus Listen-URLs oder -IDs. Nutze ihn, wenn
   eine kuratierte Liste deine Quellen festlegt. Ab $0.00015 pro Datensatz.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapt
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper) scrapt
   Community-Infos, Posts, Suchen, Mitglieder & Moderatoren. Nutze ihn, wenn
   deine Quellen X-Communities sind. Ab $0.00015 pro Datensatz.
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Findet Spaces nach
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) findet Spaces nach
   Stichwort & liest ihre Titel, Status, Zeiten, Zuhörerzahlen, Hosts & Sprecher.
-  Liest auch Broadcasts per URL oder ID. Nutze ihn, wenn du Live-Audio &
+  Er liest auch Broadcasts per URL oder ID. Nutze ihn, wenn du Live-Audio &
   Live-Video auf X verfolgst. Ab $0.00015 pro Space oder Broadcast.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapt
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) scrapt
   Echtzeit-Trends nach Standort mit Rang, Volumen, Suchbegriff & WOEID. Nutze
   ihn, wenn du verfolgst, was wo gerade angesagt ist. Ab $0.00015 pro Trend.
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapt
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) scrapt
   X-Stellenanzeigen nach Stichwort, Ort, Arbeitsmodell, Karrierestufe &
   Unternehmen, mit Gehältern & Bewerbungslinks. Nutze ihn, wenn du auf X
   veröffentlichte Stellen sammelst. Ab $0.00015 pro Job.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapt
-  lange X-Artikel als Markdown & Text mit Titelbildern, Autoren, Daten &
-  Kennzahlen. Nutze ihn, wenn du Artikeltexte statt Posts brauchst. Ab
-  $0.00015 pro Artikel.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader):
-  Extrahiert oder speichert Fotos, Videos & GIFs aus Posts oder Profilen mit
-  MP4- & Metadaten-Optionen. Nutze ihn, wenn du die Mediendateien selbst
-  brauchst. Ab $0.00015 pro Medien-Datensatz.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
-  Verfolgt Markenerwähnungen mit KI-Relevanz, Sentiment & Antworten zur
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) scrapt lange
+  X-Artikel als Markdown & Text mit Titelbildern, Autoren, Daten & Kennzahlen.
+  Nutze ihn, wenn du Artikeltexte statt Posts brauchst. Ab $0.00015 pro Artikel.
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) extrahiert
+  oder speichert Fotos, Videos & GIFs aus Posts oder Profilen mit MP4- &
+  Metadaten-Optionen. Nutze ihn, wenn du die Mediendateien selbst brauchst. Ab
+  $0.00015 pro Medien-Datensatz.
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
+  verfolgt Markenerwähnungen mit KI-Relevanz, Sentiment & Antworten zur
   Kundenerfahrung & vergleicht Runs. Nutze ihn, wenn du eine Marke über längere
   Zeit beobachtest. Ab $0.0003 pro analysiertem Post.
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
-  Kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden
-  Post mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema
-  brauchst. Ab $0.0003 pro analysiertem Post.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
-  Kennzeichnet bullische, bärische, neutrale oder gemischte Haltung,
-  Inhaltstyp, Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du
-  Aktien, Krypto oder Trading-Talk verfolgst. Ab $0.0003 pro analysiertem Post.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
-  Kennzeichnet News-Posts nach Format, Quellenangabe & Themenrelevanz mit KI.
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
+  kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden Post
+  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema brauchst. Ab
+  $0.0003 pro analysiertem Post.
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
+  kennzeichnet bullische, bärische, neutrale oder gemischte Haltung, Inhaltstyp,
+  Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du Aktien, Krypto
+  oder Trading-Talk verfolgst. Ab $0.0003 pro analysiertem Post.
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
+  kennzeichnet News-Posts nach Format, Quellenangabe & Themenrelevanz mit KI.
   Nutze ihn, wenn du Berichterstattung von Kommentaren trennst. Ab $0.0003 pro
   analysiertem Post.
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  Beantwortet deine eigenen Kategorie-, Score- & Ja/Nein-Fragen für jeden Post
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
+  beantwortet deine eigenen Kategorie-, Score- & Ja/Nein-Fragen für jeden Post
   mit KI. Nutze ihn, wenn die vorgefertigten Analysen nicht zu deinen Labels
   passen. Ab $0.0003 pro analysiertem Post.
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
-  Schätzt für jeden Post einen Viral Score von 0 bis 100 & ein Urteil aus 8
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
+  schätzt für jeden Post einen Viral Score von 0 bis 100 & ein Urteil aus 8
   KI-Antworten zu Merkmalen. Nutze ihn, wenn du untersuchst, warum Posts sich
   verbreiten oder floppen. Ab $0.0003 pro analysiertem Post.
-
-## Brauchst du mehr als Scraping?
-
-Xquik bietet außerdem 53 Dashboard-Tools, eine REST-API, signierte Webhooks &
-einen MCP-Server.
-
-- [API-Dokumentation](https://docs.xquik.com/introduction): Anleitungen zur
-  REST-API
-- [API für Post-Antworten](https://docs.xquik.com/api-reference/x/tweet-replies):
-  Antworten auf einen Post abrufen
-- [API für ausgeblendete Antworten](https://docs.xquik.com/api-reference/x/tweet-hidden-replies):
-  Antworten abrufen, die ein Autor ausgeblendet hat
-- [Thread-API](https://docs.xquik.com/api-reference/x/tweet-thread): einen
-  ganzen Thread abrufen
-- [API für Nutzerantworten](https://docs.xquik.com/api-reference/x/user-replies):
-  die Antworten eines Nutzers abrufen
-- [MCP-Server](https://docs.xquik.com/mcp/overview): unterstützte Tools
-  entdecken
-- [Webhooks](https://docs.xquik.com/webhooks/overview): signierte
-  Event-Zustellung
 
 ## FAQ
 

@@ -34,7 +34,7 @@ consegnata**. Apify fattura a parte l'uso della piattaforma.
 - Il testo completo, il link, la lingua & l'ora di pubblicazione della
   citazione.
 - Mi piace, risposte, repost, citazioni, visualizzazioni & segnalibri.
-- Il profilo pubblico completo dell'autore: nome, bio, follower, verifica &
+- Il profilo pubblico completo dell'autore, con nome, bio, follower, verifica &
   altro.
 - Foto, video & GIF con i relativi link.
 - Hashtag, menzioni & link presenti nel testo.
@@ -44,7 +44,8 @@ consegnata**. Apify fattura a parte l'uso della piattaforma.
   della sua consegna.
 - Molti post in 1 esecuzione, ognuno letto fino alla fine di ciò che X fornisce.
 - Prima le più recenti, oppure le citazioni che X classifica più in alto.
-- 11 filtri: lingua, date, tipo di media, 6 conteggi minimi & autori verificati.
+- 11 filtri per lingua, date, tipo di media, 6 conteggi minimi & autori
+  verificati.
 - 1 riga per autore quando vuoi persone, non post.
 - URL di post di x.com & twitter.com, oppure ID di post numerici.
 - Rimozione dei duplicati prima della fatturazione.
@@ -65,7 +66,7 @@ porti alcun cursore di pagina da un'esecuzione all'altra.
 
 `startUrls` accetta ogni URL di post come stringa semplice o come oggetto
 `{ "url": "..." }`. `tweetIds` accetta ID di post, & lì funziona anche un URL di
-post:
+post.
 
 ```json
 {
@@ -78,7 +79,7 @@ post:
 }
 ```
 
-Ordine, filtri & limiti vanno accanto ai post:
+Ordine, filtri & limiti vanno accanto ai post.
 
 ```json
 {
@@ -119,7 +120,7 @@ Ogni citazione è 1 riga del dataset con `id`, `url`, `text`, `createdAt`,
 Scraper di Xquik non inventa valori.
 
 Gli esempi usano valori fittizi. I risultati contengono dati live. Una riga ha
-questo aspetto:
+questo aspetto.
 
 ```json
 {
@@ -161,7 +162,7 @@ con i campi del profilo dell'autore come colonne.
 ## Cosa fornisce X
 
 2 limiti vengono da X, & X Quote Tweets Scraper di Xquik li dichiara in modo
-chiaro:
+chiaro.
 
 - La ricerca di X decide quanto indietro arrivano le citazioni di un post molto
   grande. Un'esecuzione legge ogni citazione che X fornisce & si ferma lì.
@@ -205,84 +206,84 @@ Lo stato dell'esecuzione nomina ogni causa di un arresto anticipato.
 Ogni Actor Xquik usa lo stesso motore di estrazione, fattura dopo i filtri &
 offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): estrae post da
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) estrae post da
   ricerche, timeline dei profili, liste & ID dei post con oltre 50 filtri &
   export piatti. Usalo quando ti servono dati sui post senza analisi. Da
   $0.00015 per riga.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): estrae profili
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) estrae profili
   con i relativi post, risposte, media & follower da nomi utente, ID o URL.
   Usalo quando parti dagli account invece che dalle ricerche. Da $0.00015 per
   riga.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): estrae risposte,
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) estrae risposte,
   commenti & intere conversazioni sotto i post con oltre 25 filtri. Usalo quando
   ti serve la discussione sotto i post. Da $0.00015 per riga.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): estrae
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) estrae
   risposte, citazioni, utenti che hanno fatto repost & thread da URL o ID di
   post in blocco. Usalo quando misuri chi ha interagito con i post. Da $0.00015
   per riga.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): estrae
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) estrae
   follower, following, membri & follower delle liste e membri delle community
   come righe di profilo. Usalo quando ti servono elenchi di pubblico o di
   membri. Da $0.00015 per profilo.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): cerca
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) cerca
   utenti per nome utente, bio & posizione con filtri su follower, verifica, età
   & posizione. Usalo quando costruisci elenchi di account dalla ricerca. Da
   $0.00015 per profilo.
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   verifica dove hanno sede gli account con l'etichetta "Posizione account" di X,
   il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando ti
   serve verificare dove hanno sede gli account. Da $0.00015 per account.
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): ottiene le email,
-  i numeri di telefono & i link che gli account pubblicano sui propri profili,
-  da nomi utente, follower o ricerche di utenti. Usalo quando ti servono le
-  email che i profili pubblicano. Da $0.00015 per profilo.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): estrae post, membri
-  & follower delle liste da URL o ID delle liste. Usalo quando una lista curata
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) ottiene le email, i
+  numeri di telefono & i link che gli account pubblicano sui propri profili, da
+  nomi utente, follower o ricerche di utenti. Usalo quando ti servono le email
+  che i profili pubblicano. Da $0.00015 per profilo.
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) estrae post, membri &
+  follower delle liste da URL o ID delle liste. Usalo quando una lista curata
   definisce le tue fonti. Da $0.00015 per riga.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): estrae
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper) estrae
   informazioni, post, ricerche, membri & moderatori delle community. Usalo
   quando le tue fonti sono community di X. Da $0.00015 per riga.
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper): trova gli Spazi
-  per parola chiave & ne legge titoli, stati, orari, numero di ascoltatori, host
-  & relatori. Legge anche le trasmissioni tramite URL o ID. Usalo quando segui
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) trova gli Spazi per
+  parola chiave & ne legge titoli, stati, orari, numero di ascoltatori, host &
+  relatori. Legge anche le trasmissioni tramite URL o ID. Usalo quando segui
   audio & video in diretta su X. Da $0.00015 per Spazio o trasmissione.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): estrae le
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) estrae le
   tendenze in tempo reale per località con posizione in classifica, volume,
   query & WOEID. Usalo quando segui cosa è di tendenza e dove. Da $0.00015 per
   tendenza.
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): estrae le offerte di
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) estrae le offerte di
   lavoro di X per parola chiave, luogo, modalità di lavoro, livello di
   esperienza & azienda, con stipendi & link di candidatura. Usalo quando
   raccogli le offerte di lavoro pubblicate su X. Da $0.00015 per offerta.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): raccoglie gli
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) raccoglie gli
   articoli lunghi di X come Markdown & testo, con copertine, autori, date &
   metriche. Usalo quando ti serve il corpo degli articoli, non i post. Da
   $0.00015 per articolo.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader): estrae o
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) estrae o
   archivia foto, video & GIF da post o profili con opzioni MP4 & metadati. Usalo
   quando ti servono i file multimediali veri e propri. Da $0.00015 per riga di
   media.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
   monitora le menzioni del brand con rilevanza, sentiment & risposte sulla
   customer experience generate con AI, poi confronta le esecuzioni. Usalo quando
   osservi un brand nel tempo. Da $0.0003 per post analizzato.
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   etichetta atteggiamento, intensità & probabilità di sarcasmo di ogni post con
   AI. Usalo quando ti serve il sentiment generale su qualsiasi argomento. Da
   $0.0003 per post analizzato.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   etichetta con AI la posizione rialzista, ribassista, neutra o mista, il tipo
   di contenuto, la convinzione & la rilevanza per l'asset. Usalo quando segui
   azioni, crypto o discussioni di trading. Da $0.0003 per post analizzato.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
   etichetta con AI i post di notizie per formato, attribuzione della fonte &
   rilevanza dell'argomento. Usalo quando separi le notizie dai commenti. Da
   $0.0003 per post analizzato.
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
   risponde con AI alle tue domande di categoria, punteggio & sì/no su ogni post.
   Usalo quando le analisi preimpostate non si adattano alle tue etichette. Da
   $0.0003 per post analizzato.
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
   stima un Viral Score da 0 a 100 & un verdetto per ogni post da 8 risposte AI
   sui suoi tratti. Usalo quando studi perché i post si diffondono o falliscono.
   Da $0.0003 per post analizzato.

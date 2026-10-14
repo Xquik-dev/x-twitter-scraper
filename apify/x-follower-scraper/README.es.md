@@ -76,7 +76,7 @@ de origen y su relación.
 | `coverPicture`    | URL de la imagen de encabezado                                          |
 | `createdAt`       | Cadena de fecha y hora de creación de la cuenta, según X                |
 | `sourceTarget`    | Nombre de usuario o ID del que extrajiste este perfil                   |
-| `sourceRelation`  | Relación: `followers`, `following`, `list_members`, ...                 |
+| `sourceRelation`  | Relación, como `followers`, `following` o `list_members`                |
 | `sourceUrl`       | URL exacta donde apareció el perfil                                     |
 | `sourceTargets`   | Todos los objetivos que coincidieron con este perfil en modo merge      |
 | `sourceRelations` | Todas las relaciones que coincidieron con este perfil en modo merge     |
@@ -142,7 +142,7 @@ Las entradas de abajo cubren los trabajos más comunes.
 ### Pega URLs de perfiles o Listas
 
 Pega URLs de perfiles, Listas o Comunidades. Cada URL define la relación que se
-extrae:
+extrae.
 
 ```json
 {
@@ -160,7 +160,7 @@ extrae:
 ### Nombres de usuario en bloque
 
 `twitterHandles` es un atajo para muchos objetivos `/<handle>/followers`. Los
-nombres de usuario funcionan con o sin `@`:
+nombres de usuario funcionan con o sin `@`.
 
 ```json
 {
@@ -194,7 +194,7 @@ alias.
 
 ### Ejecuciones con varias relaciones
 
-Define `relations` para leer varias relaciones de los mismos nombres de usuario:
+Define `relations` para leer varias relaciones de los mismos nombres de usuario.
 
 ```json
 {
@@ -230,7 +230,7 @@ miembros de forma predeterminada. Los IDs de Comunidades siempre usan miembros.
 
 ### Filtra antes de pagar
 
-Agrega filtros para que solo los perfiles que coinciden entren a tu dataset:
+Agrega filtros para que solo los perfiles que coinciden entren a tu dataset.
 
 ```json
 {
@@ -257,7 +257,7 @@ distingue mayúsculas de minúsculas.
 ### Encuentra audiencias en común
 
 Usa el modo merge para comparar competidores, Listas, Comunidades o tipos de
-relación:
+relación.
 
 ```json
 {
@@ -357,42 +357,42 @@ ejecuciones.
 X Follower Scraper de Xquik superó a otros 9 Actores de seguidores en costo y
 velocidad. Su fila full mediana tuvo 38 campos, 2.5x la mediana de los demás.
 
-- `xquik/x-follower-scraper`: 1,000 perfiles útiles, $0.000155 por perfil útil,
-  100.0 por segundo y 38 campos por fila.
+- `xquik/x-follower-scraper` entregó 1,000 perfiles útiles a $0.000155 por
+  perfil útil, 100.0 por segundo y 38 campos por fila.
   [Ver ejecución](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
-- `xquik/x-follower-scraper`: 1,000 perfiles útiles, $0.000155 por perfil útil,
-  77.9 por segundo y 38 campos por fila.
+- `xquik/x-follower-scraper` entregó 1,000 perfiles útiles a $0.000155 por
+  perfil útil, 77.9 por segundo y 38 campos por fila.
   [Ver ejecución](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
-- `b2b_leads/X-Real-Time-Data`: 286 perfiles útiles, $0.000388 por perfil útil,
-  3.1 por segundo y 21 campos por fila.
+- `b2b_leads/X-Real-Time-Data` entregó 286 perfiles útiles a $0.000388 por
+  perfil útil, 3.1 por segundo y 21 campos por fila.
   [Ver ejecución](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
-- `kaitoeasyapi/premium-x-follower-scraper-following-data`: 356 perfiles útiles,
-  $0.000506 por perfil útil, 21.9 por segundo y 50 campos por fila.
+- `kaitoeasyapi/premium-x-follower-scraper-following-data` entregó 356 perfiles
+  útiles a $0.000506 por perfil útil, 21.9 por segundo y 50 campos por fila.
   [Ver ejecución](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
-- `api-ninja/x-twitter-followers-scraper`: 350 perfiles útiles, $0.000809 por
-  perfil útil, 7.0 por segundo y 8 campos por fila.
+- `api-ninja/x-twitter-followers-scraper` entregó 350 perfiles útiles a
+  $0.000809 por perfil útil, 7.0 por segundo y 8 campos por fila.
   [Ver ejecución](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
-- `altimis/scweet`: 332 perfiles útiles, $0.000922 por perfil útil, 1.1 por
-  segundo y 21 campos por fila.
+- `altimis/scweet` entregó 332 perfiles útiles a $0.000922 por perfil útil, 1.1
+  por segundo y 21 campos por fila.
   [Ver ejecución](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
-- `apidojo/twitter-user-scraper`: 323 perfiles útiles, $0.001160 por perfil
-  útil, 7.3 por segundo y 25 campos por fila.
+- `apidojo/twitter-user-scraper` entregó 323 perfiles útiles a $0.001160 por
+  perfil útil, 7.3 por segundo y 25 campos por fila.
   [Ver ejecución](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
-- `atomus/twitter-scraper`: 323 perfiles útiles, $0.001272 por perfil útil, 6.2
-  por segundo y 13 campos por fila.
+- `atomus/twitter-scraper` entregó 323 perfiles útiles a $0.001272 por perfil
+  útil, 6.2 por segundo y 13 campos por fila.
   [Ver ejecución](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
-- `practicaltools/cheap-simple-twitter-api`: 283 perfiles útiles, $0.002036 por
-  perfil útil, 6.5 por segundo y 4 campos por fila.
+- `practicaltools/cheap-simple-twitter-api` entregó 283 perfiles útiles a
+  $0.002036 por perfil útil, 6.5 por segundo y 4 campos por fila.
   [Ejecución 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb),
   [Ejecución 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK),
   [Ejecución 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
-- `maximedupre/twitter-scraper`: 320 perfiles útiles, $0.002192 por perfil útil,
-  2.1 por segundo y 15 campos por fila.
+- `maximedupre/twitter-scraper` entregó 320 perfiles útiles a $0.002192 por
+  perfil útil, 2.1 por segundo y 15 campos por fila.
   [Ejecución 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs),
   [Ejecución 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39),
   [Ejecución 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
-- `seemuapps/x-followers-following-scraper`: 286 perfiles útiles, $0.003504 por
-  perfil útil, 3.9 por segundo y 9 campos por fila.
+- `seemuapps/x-followers-following-scraper` entregó 286 perfiles útiles a
+  $0.003504 por perfil útil, 3.9 por segundo y 9 campos por fila.
   [Ejecución 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj),
   [Ejecución 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ),
   [Ejecución 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
@@ -412,7 +412,7 @@ La pestaña Input enumera todas las opciones. Agrega al menos 1 de `startUrls`,
 `twitterHandles`, `userIds`, `listIds` o `communityIds`. Sus alias documentados
 también cuentan. Todos los demás campos son opcionales.
 
-Prueba estas entradas:
+Prueba estas entradas.
 
 - Agrega el nombre de usuario de un competidor a `twitterHandles` con
   `relation: "followers"`.
@@ -427,7 +427,7 @@ Prueba estas entradas:
 
 ### Entrada en Console y API
 
-El formulario de Console tiene estos controles:
+El formulario de Console tiene estos controles.
 
 - El campo Start URLs acepta cadenas de URL u objetos `{ "url": "..." }`. Su
   editor JSON conserva los 2 formatos de la API.
@@ -452,53 +452,59 @@ campo que usan otros Actores de seguidores de X. Los asigna a sus propios
 campos. Los nombres canónicos siguen siendo el valor documentado predeterminado.
 Un alias nunca descarta un campo ni cambia lo que pagas.
 
-Cada línea nombra los campos que ya usas y, luego, el campo al que se asignan:
+Cada línea nombra los campos que ya usas y, luego, el campo al que se asignan.
 
-- `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`,
-  `screenNames`: `twitterHandles`
-- `username`, `handle`, `screenName`, como una sola cadena: `twitterHandles`
-- `twitterUserIds`, `user_ids`, `userIdList`: `userIds`
-- `user_id`, `userId`, como una sola cadena: `userIds`
-- `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`: `startUrls`
-- `profileUrl`, como una sola cadena: `startUrls`
-- `getFollowers`, `getFollowing`: `relations`
-- `type` con `followers` o `following`: `relation`
-- `relationship`, `relationshipType`, `listType`, `scrape_type`: `relation`
-- `relationships`: `relations`
-- `mode` con `followers`, `following` o `both`: `relation` o `relations`
-- `category` con `followers`, `following` o `affiliates`: `relation`
-- `profile_urls`: `startUrls` para enlaces, `twitterHandles` para nombres de
-  usuario
-- `maxResults`, `max_results`, `resultsLimit`, `count`, `max_items`: `maxItems`
+- `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList` y
+  `screenNames` se asignan a `twitterHandles`.
+- `username`, `handle` y `screenName`, como una sola cadena, se asignan a
+  `twitterHandles`.
+- `twitterUserIds`, `user_ids` y `userIdList` se asignan a `userIds`.
+- `user_id` y `userId`, como una sola cadena, se asignan a `userIds`.
+- `startUrls`, `urls`, `targets`, `profileUrls` y `accountUrls` se asignan a
+  `startUrls`.
+- `profileUrl`, como una sola cadena, se asigna a `startUrls`.
+- `getFollowers` y `getFollowing` se asignan a `relations`.
+- `type` con `followers` o `following` se asigna a `relation`.
+- `relationship`, `relationshipType`, `listType` y `scrape_type` se asignan a
+  `relation`.
+- `relationships` se asigna a `relations`.
+- `mode` con `followers`, `following` o `both` se asigna a `relation` o
+  `relations`.
+- `category` con `followers`, `following` o `affiliates` se asigna a `relation`.
+- `profile_urls` se asigna a `startUrls` para enlaces y a `twitterHandles` para
+  nombres de usuario.
+- `maxResults`, `max_results`, `resultsLimit`, `count` y `max_items` se asignan
+  a `maxItems`.
 - `per_profile_limit`, `maxItemsPerUser`, `maxUsersPerAccount`,
-  `max_followers_per_user`, `max_following_per_user`, `follower_limit`:
-  `maxItemsPerTarget`. 0 no pone tope por cuenta. `max_following_per_user`
-  también pone `relation` en `following`.
-- `scrapeAllResults`: sin tope por objetivo
-- `minTweets`: `minStatuses`
-- `includeRawUser`: `includeRaw`
-- `outputVariant`: `outputMode`
-- `requireEmail`: `hasEmail`
-- `requireWebsite`: `hasWebsite`. Conserva un perfil con cualquier enlace en su
-  campo de sitio web, y el estado de la ejecución lo indica.
-- `onlyVerified`, `blue_verified_only`: `blueVerifiedOnly`. En una entrada con
-  `source_mode`, `blue_verified_only` no tiene efecto.
-- `verification`: `any_verified` define `verifiedOnly`, `blue_verified` define
-  `blueVerifiedOnly`, `business` y `government` definen `verifiedType`.
+  `max_followers_per_user`, `max_following_per_user` y `follower_limit` se
+  asignan a `maxItemsPerTarget`. 0 no pone tope por cuenta.
+  `max_following_per_user` también pone `relation` en `following`.
+- `scrapeAllResults` no pone tope por objetivo.
+- `minTweets` se asigna a `minStatuses`.
+- `includeRawUser` se asigna a `includeRaw`.
+- `outputVariant` se asigna a `outputMode`.
+- `requireEmail` se asigna a `hasEmail`.
+- `requireWebsite` se asigna a `hasWebsite`. Conserva un perfil con cualquier
+  enlace en su campo de sitio web, y el estado de la ejecución lo indica.
+- `onlyVerified` y `blue_verified_only` se asignan a `blueVerifiedOnly`. En una
+  entrada con `source_mode`, `blue_verified_only` no tiene efecto.
+- En `verification`, `any_verified` define `verifiedOnly`, `blue_verified`
+  define `blueVerifiedOnly`, `business` y `government` definen `verifiedType`.
   `unverified` detiene la ejecución antes de leer o cobrar.
-- `bioKeywords`: `bioContains`. Basta con que coincida 1 de sus términos.
-- `locationKeywords` con 1 valor: `locationContains`. Con más valores, la
-  ejecución se detiene antes de leer o cobrar.
-- `emailDomains` como lista: `emailDomains`
-- `outputEmail`, `resolveShortLinks`: no necesitan campo. Cada fila incluye sus
+- `bioKeywords` se asigna a `bioContains`. Basta con que coincida 1 de sus
+  términos.
+- `locationKeywords` con 1 valor se asigna a `locationContains`. Con más
+  valores, la ejecución se detiene antes de leer o cobrar.
+- `emailDomains` como lista se asigna a `emailDomains`.
+- `outputEmail` y `resolveShortLinks` no necesitan campo. Cada fila incluye sus
   correos y los enlaces completos de X.
-- `findEmails`, `extractEmails`: sin campo. Las filas incluyen los correos que
-  un perfil publica en X. El estado de la ejecución indica que el Actor no lee
-  ningún sitio enlazado.
-- `validateEmails`: sin campo. El estado de la ejecución indica que los correos
-  llegan tal como se publican, porque el Actor no verifica ningún buzón.
+- `findEmails` y `extractEmails` no necesitan campo. Las filas incluyen los
+  correos que un perfil publica en X. El estado de la ejecución indica que el
+  Actor no lee ningún sitio enlazado.
+- `validateEmails` no necesita campo. El estado de la ejecución indica que los
+  correos llegan tal como se publican, porque el Actor no verifica ningún buzón.
 
-Cómo se comporta una entrada pegada:
+Una entrada pegada se comporta así.
 
 - Una lista nombrada con otras palabras se lee como el nombre que este Actor le
   da. `followings`, `Verified Followers` y `verifiedFollowers` se leen como
@@ -536,7 +542,7 @@ Los esquemas del dataset y de run-report describen cada campo devuelto. Los
 campos primitivos también traen ejemplos para agentes e integraciones generadas.
 
 Los valores de muestra de abajo son ilustrativos. Tus filas traen datos en vivo
-al momento de la ejecución. Una fila compacta se ve así:
+al momento de la ejecución. Una fila compacta se ve así.
 
 ```json
 {
@@ -564,7 +570,7 @@ al momento de la ejecución. Una fila compacta se ve así:
 }
 ```
 
-El modo merge agrega campos de coincidencia:
+El modo merge agrega campos de coincidencia.
 
 ```json
 {
@@ -654,108 +660,89 @@ Todos los Actores de Xquik comparten el mismo motor de extracción, el cobro
 después de filtrar y los diagnósticos. Elige el que se ajuste a los datos que
 necesitas.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): extrae posts de
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) extrae posts de
   búsquedas, cronologías de perfiles, Listas e IDs de posts con más de 50
   filtros y exportaciones planas. Úsalo cuando necesites datos de posts sin
   análisis. Desde $0.00015 por fila.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): extrae
-  perfiles con sus posts, respuestas, contenido multimedia y seguidores a partir
-  de nombres de usuario, IDs o URLs. Úsalo cuando partas de cuentas en lugar de
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) extrae perfiles
+  con sus posts, respuestas, contenido multimedia y seguidores a partir de
+  nombres de usuario, IDs o URLs. Úsalo cuando partas de cuentas en lugar de
   búsquedas. Desde $0.00015 por fila.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): extrae respuestas,
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) extrae respuestas,
   comentarios y conversaciones completas debajo de posts con más de 25 filtros.
   Úsalo cuando necesites la conversación debajo de los posts. Desde $0.00015 por
   fila.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): extrae
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) extrae
   respuestas, citas, cuentas que hicieron repost e hilos de URLs o IDs de posts
   en bloque. Úsalo cuando midas quién interactuó con los posts. Desde $0.00015
   por fila.
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
   extrae los posts que citan posts, con texto, multimedia, conteos, autores y 11
   filtros. Úsalo cuando estudies quién citó posts y qué dijo. Desde $0.00015 por
   post.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): busca
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) busca
   usuarios por nombre de usuario, biografía y ubicación con filtros de
   seguidores, verificación, antigüedad y ubicación. Úsalo cuando crees listas de
   cuentas a partir de búsquedas. Desde $0.00015 por perfil.
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   consulta dónde tienen su sede las cuentas con la etiqueta "Cuenta con sede en"
   de X, cómo se conectaron a X y sus cambios de nombre de usuario. Úsalo cuando
   verifiques dónde tienen su sede las cuentas. Desde $0.00015 por cuenta.
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): obtiene los
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) obtiene los
   correos, teléfonos y enlaces que las cuentas publican en sus perfiles, a
   partir de nombres de usuario, seguidores o búsquedas de usuarios. Úsalo cuando
   necesites los correos que publican los perfiles. Desde $0.00015 por perfil.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): extrae posts,
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) extrae posts,
   miembros y seguidores de Listas a partir de URLs o IDs de Listas. Úsalo cuando
   una Lista curada defina tus fuentes. Desde $0.00015 por fila.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): extrae
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper) extrae
   información, posts, búsquedas, miembros y moderadores de Comunidades. Úsalo
   cuando tus fuentes sean Comunidades de X. Desde $0.00015 por fila.
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper): encuentra Espacios
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) encuentra Espacios
   por palabra clave y lee sus títulos, estados, horas, cantidad de oyentes,
   anfitriones y oradores. También lee transmisiones por URL o ID. Úsalo cuando
   sigas el audio y el video en vivo en X. Desde $0.00015 por Espacio o
   transmisión.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): extrae
-  tendencias en tiempo real por ubicación con posición, volumen, consulta y
-  WOEID. Úsalo cuando sigas qué es tendencia y dónde. Desde $0.00015 por
-  tendencia.
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): extrae ofertas de
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) extrae tendencias
+  en tiempo real por ubicación con posición, volumen, consulta y WOEID. Úsalo
+  cuando sigas qué es tendencia y dónde. Desde $0.00015 por tendencia.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) extrae ofertas de
   empleo de X por palabra clave, lugar, modalidad de trabajo, nivel de
   experiencia y empresa, con salarios y enlaces para postularse. Úsalo cuando
   recopiles vacantes publicadas en X. Desde $0.00015 por empleo.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): extrae
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) extrae
   Artículos de X de formato largo como Markdown y texto con portadas, autores,
   fechas y métricas. Úsalo cuando necesites el cuerpo de los Artículos, no
   posts. Desde $0.00015 por artículo.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader): extrae o
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) extrae o
   guarda fotos, videos y GIFs de posts o perfiles con opciones de MP4 y
   metadatos. Úsalo cuando necesites los archivos multimedia en sí. Desde
   $0.00015 por fila de contenido multimedia.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
   sigue menciones de marca con relevancia, sentimiento y respuestas de
   experiencia del cliente generadas con IA, y compara ejecuciones. Úsalo cuando
   vigiles una marca a lo largo del tiempo. Desde $0.0003 por post analizado.
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   etiqueta con IA la actitud, la intensidad y la probabilidad de sarcasmo de
   cada post. Úsalo cuando necesites el sentimiento general sobre cualquier tema.
   Desde $0.0003 por post analizado.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   etiqueta con IA la postura alcista, bajista, neutral o mixta, el tipo de
   contenido, la convicción y la relevancia del activo. Úsalo cuando sigas
   acciones, cripto o conversaciones de trading. Desde $0.0003 por post
   analizado.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
   etiqueta con IA los posts de noticias por formato, atribución de la fuente y
   relevancia del tema. Úsalo cuando separes la información de la opinión. Desde
   $0.0003 por post analizado.
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
   responde con IA tus propias preguntas de categoría, puntuación y sí o no para
   cada post. Úsalo cuando los análisis predefinidos no se ajusten a tus
   etiquetas. Desde $0.0003 por post analizado.
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
   estima un Viral Score de 0 a 100 y un veredicto para cada post a partir de 8
   respuestas de IA sobre sus rasgos. Úsalo cuando estudies por qué un post se
   difunde o fracasa. Desde $0.0003 por post analizado.
-
-## ¿Necesitas más que extracción?
-
-Xquik también ofrece 47 herramientas en el panel, una API REST, webhooks
-firmados y un servidor MCP.
-
-- [Documentación de la API](https://docs.xquik.com/introduction): guías de la
-  API REST
-- [Followers API](https://docs.xquik.com/api-reference/x/followers): obtiene los
-  seguidores disponibles de una cuenta
-- [Following API](https://docs.xquik.com/api-reference/x/following): obtiene las
-  cuentas que sigue un usuario
-- [List Members API](https://docs.xquik.com/api-reference/x/list-members):
-  exporta los miembros de una Lista pública de X
-- [Servidor MCP](https://docs.xquik.com/mcp/overview): descubre y ejecuta
-  operaciones compatibles en JSON o texto
-- [Webhooks](https://docs.xquik.com/webhooks/overview): recibe eventos
-  compatibles de posts y perfiles
 
 ## Preguntas frecuentes
 

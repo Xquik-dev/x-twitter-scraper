@@ -74,7 +74,7 @@ Quellziel & seine Beziehung.
 | `coverPicture`    | Banner-URL                                                        |
 | `createdAt`       | Zeitstempel der Account-Erstellung als String von X               |
 | `sourceTarget`    | Nutzername oder ID, von dem dieses Profil stammt                  |
-| `sourceRelation`  | Beziehung: `followers`, `following`, `list_members`, ...          |
+| `sourceRelation`  | Beziehung, etwa `followers`, `following` oder `list_members`      |
 | `sourceUrl`       | Genaue URL, auf der der Actor das Profil gefunden hat             |
 | `sourceTargets`   | Alle Ziele, die im Merge-Modus zu diesem Profil passen            |
 | `sourceRelations` | Alle Beziehungen, die im Merge-Modus zu diesem Profil passen      |
@@ -138,8 +138,8 @@ Die Eingaben unten decken häufige Aufgaben ab.
 
 ### Profil- oder Listen-URLs einfügen
 
-Füge Profil-, Listen- oder Community-URLs ein. Jede URL legt die Beziehung
-fest, die der Actor scrapt:
+Füge Profil-, Listen- oder Community-URLs ein. Jede URL legt die Beziehung fest,
+die der Actor scrapt.
 
 ```json
 {
@@ -157,7 +157,7 @@ fest, die der Actor scrapt:
 ### Viele Nutzernamen auf einmal
 
 `twitterHandles` ist eine Kurzform für viele `/<handle>/followers`-Ziele.
-Nutzernamen funktionieren mit oder ohne `@`:
+Nutzernamen funktionieren mit oder ohne `@`.
 
 ```json
 {
@@ -191,7 +191,7 @@ Aliasse.
 
 ### Runs mit mehreren Beziehungen
 
-Setze `relations`, um mehrere Beziehungen für dieselben Nutzernamen zu lesen:
+Setze `relations`, um mehrere Beziehungen für dieselben Nutzernamen zu lesen.
 
 ```json
 {
@@ -226,7 +226,7 @@ verhindert, dass das erste große Ziel `maxItems` aufbraucht.
 
 ### Filtern, bevor du zahlst
 
-Füge Filter hinzu, damit nur passende Profile in dein Dataset kommen:
+Füge Filter hinzu, damit nur passende Profile in dein Dataset kommen.
 
 ```json
 {
@@ -252,8 +252,8 @@ Kleinschreibung spielen keine Rolle.
 
 ### Zielgruppen-Überschneidungen finden
 
-Nutze den Merge-Modus, um Wettbewerber, Listen, Communities oder
-Beziehungstypen zu vergleichen:
+Nutze den Merge-Modus, um Wettbewerber, Listen, Communities oder Beziehungstypen
+zu vergleichen.
 
 ```json
 {
@@ -354,44 +354,45 @@ X Follower Scraper von Xquik schlug 9 andere Follower-Actors bei Kosten & Tempo.
 Sein Median-Datensatz im Modus full hatte 38 Felder, das 2,5-Fache des Medians
 der anderen.
 
-- `xquik/x-follower-scraper`: 1.000 nützliche Profile, $0.000155 pro nützlichem
-  Profil, 100,0 pro Sekunde & 38 Felder pro Datensatz.
+- `xquik/x-follower-scraper` lieferte 1.000 nützliche Profile zu $0.000155 pro
+  nützlichem Profil, mit 100,0 pro Sekunde & 38 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
-- `xquik/x-follower-scraper`: 1.000 nützliche Profile, $0.000155 pro nützlichem
-  Profil, 77,9 pro Sekunde & 38 Felder pro Datensatz.
+- `xquik/x-follower-scraper` lieferte 1.000 nützliche Profile zu $0.000155 pro
+  nützlichem Profil, mit 77,9 pro Sekunde & 38 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
-- `b2b_leads/X-Real-Time-Data`: 286 nützliche Profile, $0.000388 pro nützlichem
-  Profil, 3,1 pro Sekunde & 21 Felder pro Datensatz.
+- `b2b_leads/X-Real-Time-Data` lieferte 286 nützliche Profile zu $0.000388 pro
+  nützlichem Profil, mit 3,1 pro Sekunde & 21 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
-- `kaitoeasyapi/premium-x-follower-scraper-following-data`: 356 nützliche
-  Profile, $0.000506 pro nützlichem Profil, 21,9 pro Sekunde & 50 Felder pro
-  Datensatz.
+- `kaitoeasyapi/premium-x-follower-scraper-following-data` lieferte 356
+  nützliche Profile zu $0.000506 pro nützlichem Profil, mit 21,9 pro Sekunde &
+  50 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
-- `api-ninja/x-twitter-followers-scraper`: 350 nützliche Profile, $0.000809 pro
-  nützlichem Profil, 7,0 pro Sekunde & 8 Felder pro Datensatz.
+- `api-ninja/x-twitter-followers-scraper` lieferte 350 nützliche Profile zu
+  $0.000809 pro nützlichem Profil, mit 7,0 pro Sekunde & 8 Feldern pro
+  Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
-- `altimis/scweet`: 332 nützliche Profile, $0.000922 pro nützlichem Profil, 1,1
-  pro Sekunde & 21 Felder pro Datensatz.
+- `altimis/scweet` lieferte 332 nützliche Profile zu $0.000922 pro nützlichem
+  Profil, mit 1,1 pro Sekunde & 21 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
-- `apidojo/twitter-user-scraper`: 323 nützliche Profile, $0.001160 pro
-  nützlichem Profil, 7,3 pro Sekunde & 25 Felder pro Datensatz.
+- `apidojo/twitter-user-scraper` lieferte 323 nützliche Profile zu $0.001160 pro
+  nützlichem Profil, mit 7,3 pro Sekunde & 25 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
-- `atomus/twitter-scraper`: 323 nützliche Profile, $0.001272 pro nützlichem
-  Profil, 6,2 pro Sekunde & 13 Felder pro Datensatz.
+- `atomus/twitter-scraper` lieferte 323 nützliche Profile zu $0.001272 pro
+  nützlichem Profil, mit 6,2 pro Sekunde & 13 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
-- `practicaltools/cheap-simple-twitter-api`: 283 nützliche Profile, $0.002036
-  pro nützlichem Profil, 6,5 pro Sekunde & 4 Felder pro Datensatz.
-  [Run 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb),
+- `practicaltools/cheap-simple-twitter-api` lieferte 283 nützliche Profile zu
+  $0.002036 pro nützlichem Profil, mit 6,5 pro Sekunde & 4 Feldern pro
+  Datensatz. [Run 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb),
   [Run 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK),
   [Run 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
-- `maximedupre/twitter-scraper`: 320 nützliche Profile, $0.002192 pro nützlichem
-  Profil, 2,1 pro Sekunde & 15 Felder pro Datensatz.
+- `maximedupre/twitter-scraper` lieferte 320 nützliche Profile zu $0.002192 pro
+  nützlichem Profil, mit 2,1 pro Sekunde & 15 Feldern pro Datensatz.
   [Run 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs),
   [Run 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39),
   [Run 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
-- `seemuapps/x-followers-following-scraper`: 286 nützliche Profile, $0.003504
-  pro nützlichem Profil, 3,9 pro Sekunde & 9 Felder pro Datensatz.
-  [Run 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj),
+- `seemuapps/x-followers-following-scraper` lieferte 286 nützliche Profile zu
+  $0.003504 pro nützlichem Profil, mit 3,9 pro Sekunde & 9 Feldern pro
+  Datensatz. [Run 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj),
   [Run 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ),
   [Run 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
 
@@ -407,11 +408,11 @@ Eingabe, Run-Protokoll & Dataset.
 
 ## Eingabe
 
-Der Tab Input listet alle Optionen. Gib mindestens 1 dieser Felder an:
-`startUrls`, `twitterHandles`, `userIds`, `listIds` oder `communityIds`. Ihre
+Der Tab Input listet alle Optionen. Gib mindestens 1 der Felder `startUrls`,
+`twitterHandles`, `userIds`, `listIds` oder `communityIds` an. Ihre
 dokumentierten Aliasse zählen auch. Alle anderen Felder sind optional.
 
-Probiere diese Eingaben:
+Probiere diese Eingaben.
 
 - Füge einen Nutzernamen eines Wettbewerbers mit `relation: "followers"` zu
   `twitterHandles` hinzu.
@@ -425,7 +426,7 @@ Probiere diese Eingaben:
 
 ### Eingabe in Console & API
 
-Das Console-Formular hat diese Steuerelemente:
+Das Console-Formular hat diese Steuerelemente.
 
 - Das Feld Start URLs akzeptiert URL-Strings oder `{ "url": "..." }`-Objekte.
   Sein JSON-Editor unterstützt beide API-Formate.
@@ -451,52 +452,61 @@ zu. Kanonische Namen bleiben der dokumentierte Standard. Ein Alias verwirft nie
 ein Feld & ändert nie, was du zahlst.
 
 Jede Zeile nennt die Felder, die du schon nutzt, dann das Feld, dem der Actor
-sie zuordnet:
+sie zuordnet.
 
 - `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`,
-  `screenNames`: `twitterHandles`
-- `username`, `handle`, `screenName`, als einzelner String: `twitterHandles`
-- `twitterUserIds`, `user_ids`, `userIdList`: `userIds`
-- `user_id`, `userId`, als einzelner String: `userIds`
-- `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`: `startUrls`
-- `profileUrl`, als einzelner String: `startUrls`
-- `getFollowers`, `getFollowing`: `relations`
-- `type` mit `followers` oder `following`: `relation`
-- `relationship`, `relationshipType`, `listType`, `scrape_type`: `relation`
-- `relationships`: `relations`
-- `mode` mit `followers`, `following` oder `both`: `relation` oder `relations`
-- `category` mit `followers`, `following` oder `affiliates`: `relation`
-- `profile_urls`: `startUrls` für Links, `twitterHandles` für Nutzernamen
-- `maxResults`, `max_results`, `resultsLimit`, `count`, `max_items`: `maxItems`
+  `screenNames` werden `twitterHandles` zugeordnet.
+- `username`, `handle`, `screenName` als einzelner String werden
+  `twitterHandles` zugeordnet.
+- `twitterUserIds`, `user_ids`, `userIdList` werden `userIds` zugeordnet.
+- `user_id`, `userId` als einzelner String werden `userIds` zugeordnet.
+- `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls` werden
+  `startUrls` zugeordnet.
+- `profileUrl` als einzelner String wird `startUrls` zugeordnet.
+- `getFollowers`, `getFollowing` werden `relations` zugeordnet.
+- `type` mit `followers` oder `following` wird `relation` zugeordnet.
+- `relationship`, `relationshipType`, `listType`, `scrape_type` werden
+  `relation` zugeordnet.
+- `relationships` wird `relations` zugeordnet.
+- `mode` mit `followers`, `following` oder `both` wird `relation` oder
+  `relations` zugeordnet.
+- `category` mit `followers`, `following` oder `affiliates` wird `relation`
+  zugeordnet.
+- `profile_urls` wird `startUrls` für Links & `twitterHandles` für Nutzernamen
+  zugeordnet.
+- `maxResults`, `max_results`, `resultsLimit`, `count`, `max_items` werden
+  `maxItems` zugeordnet.
 - `per_profile_limit`, `maxItemsPerUser`, `maxUsersPerAccount`,
-  `max_followers_per_user`, `max_following_per_user`, `follower_limit`:
-  `maxItemsPerTarget`. 0 setzt keine Obergrenze pro Account.
+  `max_followers_per_user`, `max_following_per_user`, `follower_limit` werden
+  `maxItemsPerTarget` zugeordnet. 0 setzt keine Obergrenze pro Account.
   `max_following_per_user` setzt außerdem `relation` auf `following`.
-- `scrapeAllResults`: keine Obergrenze pro Ziel
-- `minTweets`: `minStatuses`
-- `includeRawUser`: `includeRaw`
-- `outputVariant`: `outputMode`
-- `requireEmail`: `hasEmail`
-- `requireWebsite`: `hasWebsite`. Der Filter behält ein Profil mit einem
-  beliebigen Link im Website-Feld, & der Run-Status sagt das.
-- `onlyVerified`, `blue_verified_only`: `blueVerifiedOnly`. In einer Eingabe mit
-  `source_mode` bleibt `blue_verified_only` ohne Wirkung.
-- `verification`: `any_verified` setzt `verifiedOnly`, `blue_verified` setzt
-  `blueVerifiedOnly`, `business` & `government` setzen `verifiedType`.
-  `unverified` stoppt den Run, bevor er etwas liest oder berechnet.
-- `bioKeywords`: `bioContains`. Es genügt, wenn 1 der Begriffe passt.
-- `locationKeywords` mit 1 Wert: `locationContains`. Mehr Werte stoppen den Run,
-  bevor er etwas liest oder berechnet.
-- `emailDomains` als Liste: `emailDomains`
-- `outputEmail`, `resolveShortLinks`: kein Feld nötig. Jeder Datensatz enthält
+- `scrapeAllResults` setzt keine Obergrenze pro Ziel.
+- `minTweets` wird `minStatuses` zugeordnet.
+- `includeRawUser` wird `includeRaw` zugeordnet.
+- `outputVariant` wird `outputMode` zugeordnet.
+- `requireEmail` wird `hasEmail` zugeordnet.
+- `requireWebsite` wird `hasWebsite` zugeordnet. Der Filter behält ein Profil
+  mit einem beliebigen Link im Website-Feld, & der Run-Status sagt das.
+- `onlyVerified`, `blue_verified_only` werden `blueVerifiedOnly` zugeordnet. In
+  einer Eingabe mit `source_mode` bleibt `blue_verified_only` ohne Wirkung.
+- In `verification` setzt `any_verified` das Feld `verifiedOnly`,
+  `blue_verified` setzt `blueVerifiedOnly`, `business` & `government` setzen
+  `verifiedType`. `unverified` stoppt den Run, bevor er etwas liest oder
+  berechnet.
+- `bioKeywords` wird `bioContains` zugeordnet. Es genügt, wenn 1 der Begriffe
+  passt.
+- `locationKeywords` mit 1 Wert wird `locationContains` zugeordnet. Mehr Werte
+  stoppen den Run, bevor er etwas liest oder berechnet.
+- `emailDomains` als Liste wird `emailDomains` zugeordnet.
+- `outputEmail`, `resolveShortLinks` brauchen kein Feld. Jeder Datensatz enthält
   seine E-Mails & die vollständigen Links von X.
-- `findEmails`, `extractEmails`: kein Feld. Datensätze enthalten die E-Mails,
-  die ein Profil auf X veröffentlicht. Der Run-Status sagt, dass der Actor keine
-  verlinkte Website liest.
-- `validateEmails`: kein Feld. Der Run-Status sagt, dass E-Mails so kommen, wie
-  sie veröffentlicht sind, weil der Actor kein Postfach prüft.
+- `findEmails`, `extractEmails` brauchen kein Feld. Datensätze enthalten die
+  E-Mails, die ein Profil auf X veröffentlicht. Der Run-Status sagt, dass der
+  Actor keine verlinkte Website liest.
+- `validateEmails` braucht kein Feld. Der Run-Status sagt, dass E-Mails so
+  kommen, wie sie veröffentlicht sind, weil der Actor kein Postfach prüft.
 
-So verhält sich eine eingefügte Eingabe:
+So verhält sich eine eingefügte Eingabe.
 
 - Eine Liste, die mit anderen Worten benannt ist, liest der Actor als seinen
   eigenen Namen dafür. `followings`, `Verified Followers` & `verifiedFollowers`
@@ -534,7 +544,7 @@ Die Schemas für Dataset & Run-Report beschreiben jedes gelieferte Feld.
 Primitive Felder enthalten auch Beispiele für Agents & generierte Integrationen.
 
 Die Beispielwerte unten dienen nur zur Veranschaulichung. Deine Datensätze
-enthalten Live-Daten zur Laufzeit. Ein kompakter Datensatz sieht so aus:
+enthalten Live-Daten zur Laufzeit. Ein kompakter Datensatz sieht so aus.
 
 ```json
 {
@@ -562,7 +572,7 @@ enthalten Live-Daten zur Laufzeit. Ein kompakter Datensatz sieht so aus:
 }
 ```
 
-Der Dedupe-Modus merge ergänzt Felder zur Überschneidung:
+Der Dedupe-Modus merge ergänzt Felder zur Überschneidung.
 
 ```json
 {
@@ -650,105 +660,85 @@ Eingabe oder mit ungültiger Eingabe. `run-report` hat außerdem ein Feld
 Jeder Xquik-Actor nutzt dieselbe Extraktions-Engine, rechnet erst nach dem
 Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): Scrapt Posts aus
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrapt Posts aus
   Suchen, Profil-Timelines, Listen & Post-IDs mit über 50 Filtern & flachen
-  Exporten. Nutze ihn, wenn du Post-Daten ohne Analyse brauchst. Ab $0.00015
-  pro Datensatz.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Scrapt
-  Profile samt Posts, Antworten, Medien & Followern anhand von Nutzernamen, IDs
-  oder URLs. Nutze ihn, wenn du von Accounts statt von Suchen ausgehst. Ab
-  $0.00015 pro Datensatz.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Scrapt
-  Antworten, Kommentare & ganze Konversationen unter Posts mit über 25 Filtern.
-  Nutze ihn, wenn du die Diskussion unter Posts brauchst. Ab $0.00015 pro
+  Exporten. Nutze ihn, wenn du Post-Daten ohne Analyse brauchst. Ab $0.00015 pro
   Datensatz.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Scrapt
-  Antworten, Zitate, Reposter & Threads zu Post-URLs oder -IDs in großen
-  Mengen. Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) scrapt Profile
+  samt Posts, Antworten, Medien & Followern anhand von Nutzernamen, IDs oder
+  URLs. Nutze ihn, wenn du von Accounts statt von Suchen ausgehst. Ab $0.00015
   pro Datensatz.
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
-  Scrapt die Posts, die Posts zitieren, mit Text, Medien, Zahlen, Autoren & 11
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) scrapt Antworten,
+  Kommentare & ganze Konversationen unter Posts mit über 25 Filtern. Nutze ihn,
+  wenn du die Diskussion unter Posts brauchst. Ab $0.00015 pro Datensatz.
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) scrapt
+  Antworten, Zitate, Reposter & Threads zu Post-URLs oder -IDs in großen Mengen.
+  Nutze ihn, wenn du misst, wer mit Posts interagiert hat. Ab $0.00015 pro
+  Datensatz.
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
+  scrapt die Posts, die Posts zitieren, mit Text, Medien, Zahlen, Autoren & 11
   Filtern. Nutze ihn, wenn du untersuchst, wer Posts zitiert hat & was gesagt
   wurde. Ab $0.00015 pro Post.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Sucht Nutzer nach Nutzername, Bio & Standort mit Filtern für Follower,
-  Verifizierung, Account-Alter & Standort. Nutze ihn, wenn du Account-Listen
-  aus einer Suche aufbaust. Ab $0.00015 pro Profil.
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
-  Prüft mit der X-Angabe "Account based in", der Art, wie sich ein Account mit X
-  verbunden hat, & Benutzernamen-Änderungen, wo Accounts ansässig sind. Nutze
-  ihn, wenn du prüfst, wo Accounts ansässig sind. Ab $0.00015 pro Account.
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): Holt die E-Mails,
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) sucht
+  Nutzer nach Nutzername, Bio & Standort mit Filtern für Follower,
+  Verifizierung, Account-Alter & Standort. Nutze ihn, wenn du Account-Listen aus
+  einer Suche aufbaust. Ab $0.00015 pro Profil.
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
+  prüft, wo Accounts ansässig sind, mit der X-Angabe "Account based in", der
+  Verbindungsart zu X & Benutzernamen-Änderungen. Nutze ihn, wenn du prüfst, wo
+  Accounts ansässig sind. Ab $0.00015 pro Account.
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) holt die E-Mails,
   Telefonnummern & Links, die Accounts in ihren Profilen veröffentlichen, anhand
   von Nutzernamen, Followern oder Nutzersuchen. Nutze ihn, wenn du die E-Mails
   brauchst, die Profile veröffentlichen. Ab $0.00015 pro Profil.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): Scrapt Posts,
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) scrapt Posts,
   Mitglieder & Follower von Listen aus Listen-URLs oder -IDs. Nutze ihn, wenn
   eine kuratierte Liste deine Quellen festlegt. Ab $0.00015 pro Datensatz.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapt
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper) scrapt
   Community-Infos, Posts, Suchen, Mitglieder & Moderatoren. Nutze ihn, wenn
   deine Quellen X-Communities sind. Ab $0.00015 pro Datensatz.
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Findet Spaces nach
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) findet Spaces nach
   Stichwort & liest ihre Titel, Status, Zeiten, Zuhörerzahlen, Hosts & Sprecher.
-  Liest auch Broadcasts per URL oder ID. Nutze ihn, wenn du Live-Audio &
+  Er liest auch Broadcasts per URL oder ID. Nutze ihn, wenn du Live-Audio &
   Live-Video auf X verfolgst. Ab $0.00015 pro Space oder Broadcast.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapt
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) scrapt
   Echtzeit-Trends nach Standort mit Rang, Volumen, Suchbegriff & WOEID. Nutze
   ihn, wenn du verfolgst, was wo gerade angesagt ist. Ab $0.00015 pro Trend.
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapt
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) scrapt
   X-Stellenanzeigen nach Stichwort, Ort, Arbeitsmodell, Karrierestufe &
   Unternehmen, mit Gehältern & Bewerbungslinks. Nutze ihn, wenn du auf X
   veröffentlichte Stellen sammelst. Ab $0.00015 pro Job.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapt
-  lange X-Artikel als Markdown & Text mit Titelbildern, Autoren, Daten &
-  Kennzahlen. Nutze ihn, wenn du Artikeltexte statt Posts brauchst. Ab
-  $0.00015 pro Artikel.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader):
-  Extrahiert oder speichert Fotos, Videos & GIFs aus Posts oder Profilen mit
-  MP4- & Metadaten-Optionen. Nutze ihn, wenn du die Mediendateien selbst
-  brauchst. Ab $0.00015 pro Medien-Datensatz.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
-  Verfolgt Markenerwähnungen mit KI-Relevanz, Sentiment & Antworten zur
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) scrapt lange
+  X-Artikel als Markdown & Text mit Titelbildern, Autoren, Daten & Kennzahlen.
+  Nutze ihn, wenn du Artikeltexte statt Posts brauchst. Ab $0.00015 pro Artikel.
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) extrahiert
+  oder speichert Fotos, Videos & GIFs aus Posts oder Profilen mit MP4- &
+  Metadaten-Optionen. Nutze ihn, wenn du die Mediendateien selbst brauchst. Ab
+  $0.00015 pro Medien-Datensatz.
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
+  verfolgt Markenerwähnungen mit KI-Relevanz, Sentiment & Antworten zur
   Kundenerfahrung & vergleicht Runs. Nutze ihn, wenn du eine Marke über längere
   Zeit beobachtest. Ab $0.0003 pro analysiertem Post.
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
-  Kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden
-  Post mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema
-  brauchst. Ab $0.0003 pro analysiertem Post.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
-  Kennzeichnet bullische, bärische, neutrale oder gemischte Haltung,
-  Inhaltstyp, Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du
-  Aktien, Krypto oder Trading-Talk verfolgst. Ab $0.0003 pro analysiertem Post.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
-  Kennzeichnet News-Posts nach Format, Quellenangabe & Themenrelevanz mit KI.
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
+  kennzeichnet Haltung, Intensität & Sarkasmus-Wahrscheinlichkeit für jeden Post
+  mit KI. Nutze ihn, wenn du allgemeines Sentiment zu einem Thema brauchst. Ab
+  $0.0003 pro analysiertem Post.
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
+  kennzeichnet bullische, bärische, neutrale oder gemischte Haltung, Inhaltstyp,
+  Überzeugungsgrad & Asset-Relevanz mit KI. Nutze ihn, wenn du Aktien, Krypto
+  oder Trading-Talk verfolgst. Ab $0.0003 pro analysiertem Post.
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
+  kennzeichnet News-Posts nach Format, Quellenangabe & Themenrelevanz mit KI.
   Nutze ihn, wenn du Berichterstattung von Kommentaren trennst. Ab $0.0003 pro
   analysiertem Post.
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  Beantwortet deine eigenen Kategorie-, Score- & Ja/Nein-Fragen für jeden Post
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
+  beantwortet deine eigenen Kategorie-, Score- & Ja/Nein-Fragen für jeden Post
   mit KI. Nutze ihn, wenn die vorgefertigten Analysen nicht zu deinen Labels
   passen. Ab $0.0003 pro analysiertem Post.
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
-  Schätzt für jeden Post einen Viral Score von 0 bis 100 & ein Urteil aus 8
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
+  schätzt für jeden Post einen Viral Score von 0 bis 100 & ein Urteil aus 8
   KI-Antworten zu Merkmalen. Nutze ihn, wenn du untersuchst, warum Posts sich
   verbreiten oder floppen. Ab $0.0003 pro analysiertem Post.
-
-## Brauchst du mehr als Scraping?
-
-Xquik bietet außerdem 47 Dashboard-Tools, eine REST-API, signierte Webhooks &
-einen MCP-Server.
-
-- [API-Dokumentation](https://docs.xquik.com/introduction): Anleitungen zur
-  REST-API
-- [Followers API](https://docs.xquik.com/api-reference/x/followers): ruft die
-  verfügbaren Follower eines Accounts ab
-- [Following API](https://docs.xquik.com/api-reference/x/following): zeigt, wem
-  ein Nutzer folgt
-- [List Members API](https://docs.xquik.com/api-reference/x/list-members):
-  exportiert Mitglieder einer öffentlichen X-Liste
-- [MCP-Server](https://docs.xquik.com/mcp/overview): findet & startet
-  unterstützte JSON- oder Text-Operationen
-- [Webhooks](https://docs.xquik.com/webhooks/overview): empfängt unterstützte
-  Post- & Profilereignisse
 
 ## FAQ
 

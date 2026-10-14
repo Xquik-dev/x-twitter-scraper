@@ -110,7 +110,7 @@ di altri Actor di tweet. Un filtro senza campo qui diventa un operatore di
 ricerca di X in ogni ricerca dell'esecuzione, & il log dell'esecuzione elenca
 questi operatori all'inizio. Usa `Latest` o `Top` per `sort`. Mantieni i codici
 lingua & i limiti di data. I limiti valgono per tutti i target insieme. Questo
-input è pronto da avviare:
+input è pronto da avviare.
 
 ```json
 { "searchTerms": ["from:NASA"], "sort": "Latest", "maxItems": 5 }
@@ -118,25 +118,25 @@ input è pronto da avviare:
 
 Gli altri input vanno convertiti prima dell'esecuzione.
 
-Inserisci un singolo `tweetUrl` in `startUrls`:
+Inserisci un singolo `tweetUrl` in `startUrls`.
 
 ```json
 { "startUrls": ["https://x.com/NASA/status/2105727882588807607"] }
 ```
 
-Metti `text`, `Texts`, stringhe di dataset o stringhe di file in `texts`:
+Metti `text`, `Texts`, stringhe di dataset o stringhe di file in `texts`.
 
 ```json
 { "texts": ["Support fixed my issue. Thank you."] }
 ```
 
-Trasforma `hashtag` o `cashtag` in stringhe di ricerca:
+Trasforma `hashtag` o `cashtag` in stringhe di ricerca.
 
 ```json
 { "searchTerms": ["#Artemis lang:en", "$AAPL lang:en"], "maxItems": 5 }
 ```
 
-Sostituisci `minLikes`, `minReplies` & `minRetweets` con questi nomi di campo:
+Sostituisci `minLikes`, `minReplies` & `minRetweets` con questi nomi di campo.
 
 ```json
 { "min_faves": 10, "min_replies": 2, "min_retweets": 3 }
@@ -165,7 +165,7 @@ del tuo piano. La scheda Pricing lo mostra.
 ## Esempi di input & output
 
 L'input qui sopra è pronto da copiare. Una riga di output abbreviata ha questo
-aspetto:
+aspetto.
 
 ```json
 {
@@ -203,7 +203,7 @@ analisi addebitate & addebiti in sospeso.
 ## Riepilogo dell'esecuzione & risposte piatte
 
 Un'esecuzione scrive un record `analysis-summary` nel suo key-value store in 4
-casi:
+casi.
 
 - Incontra un problema o è grande.
 - Imposta `monitor` senza `baselineDatasetId`, come prima esecuzione di una
@@ -246,7 +246,7 @@ vuota.
 Passa `monitor.baselineDatasetId`, l'ID del dataset di un'esecuzione precedente
 completata con le stesse impostazioni di analisi. Il confronto legge le righe di
 quell'esecuzione. Funziona anche se quell'esecuzione ha saltato il riepilogo.
-Ogni riga riceve poi un oggetto `monitor`. Il suo stato può essere:
+Ogni riga riceve poi un oggetto `monitor`. Il suo stato assume questi valori.
 
 - `first_run` senza baseline.
 - `new_to_baseline` per i post che l'esecuzione precedente non aveva.
@@ -305,15 +305,15 @@ unici non equivalgono a opinioni indipendenti.
 [Season finale review texts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-season-finale-reactions)
 
 Separa gli elogi dalle critiche nelle tue bozze di recensione del finale.
-Osservati 3 testi forniti unici il 2026-10-01. Limite: 3. Sono i tuoi testi
-illustrativi, non una ricerca sul pubblico.
+Osservati 3 testi forniti unici il 2026-10-01. Il limite era 3. Sono i tuoi
+testi illustrativi, non una ricerca sul pubblico.
 
 #### Discussione sul lancio di un telefono
 
 [September 2026 iPhone launch posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-iphone-launch-posts)
 
 Esamina la discussione sul lancio in una finestra di date fissa di settembre.
-Osservati 5 post unici il 2026-10-01. Limite: 5. Possono corrispondere sia
+Osservati 5 post unici il 2026-10-01. Il limite era 5. Possono corrispondere sia
 annunci sia opinioni personali.
 
 #### Recensioni dello show dell'intervallo
@@ -321,15 +321,15 @@ annunci sia opinioni personali.
 [Halftime show review texts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-super-bowl-halftime-show)
 
 Controlla giudizi misti e sarcasmo nelle tue recensioni dell'intervallo.
-Osservati 3 testi forniti unici il 2026-10-01. Limite: 3. Sono le tue recensioni
-illustrative, non reazioni dal vivo allo show.
+Osservati 3 testi forniti unici il 2026-10-01. Il limite era 3. Sono le tue
+recensioni illustrative, non reazioni dal vivo allo show.
 
 #### Esperienze con le auto elettriche
 
 [Electric car experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-toward-new-electric-car)
 
 Trova post sulla guida o sulla scelta di un'auto elettrica. Osservati 5 post
-unici il 2026-10-01. Limite: 5. Le frasi personali possono corrispondere a
+unici il 2026-10-01. Il limite era 5. Le frasi personali possono corrispondere a
 battute o racconti di seconda mano.
 
 #### Discussione sui film
@@ -337,119 +337,120 @@ battute o racconti di seconda mano.
 [Marvel movie discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-marvel-movie-audiences)
 
 Esamina la discussione sui film prima di selezionare i commenti del pubblico.
-Osservati 5 post unici il 2026-10-01. Limite: 5. Marvel può corrispondere a usi
-della parola non correlati.
+Osservati 5 post unici il 2026-10-01. Il limite era 5. Marvel può corrispondere
+a usi della parola non correlati.
 
 #### Didascalie dei media di un'artista
 
 [Taylor Swift media caption tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-taylor-swift-album-reactions)
 
 Esamina le parole dell'artista accanto ai media recenti. Osservati 5 post unici
-il 2026-10-01. Limite: 5. Le didascalie non possono descrivere tutto ciò che
-immagini o video mostrano.
+il 2026-10-01. Il limite era 5. Le didascalie non possono descrivere tutto ciò
+che immagini o video mostrano.
 
 #### Thread sull'uscita di un gioco
 
 [Game release update thread](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-video-game-launch)
 
 Leggi un annuncio accanto alle risposte sui giochi concorrenti. Osservati 5 post
-unici il 2026-10-01. Limite: 5. Il thread cita più giochi e include il suo post
-di apertura.
+unici il 2026-10-01. Il limite era 5. Il thread cita più giochi e include il suo
+post di apertura.
 
 #### Discussione sul lavoro da remoto
 
 [Remote work discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-remote-work)
 
 Confronta gli atteggiamenti espressi nella discussione sul lavoro da remoto.
-Osservati 5 post unici il 2026-10-01. Limite: 5. Possono comparire annunci di
-lavoro e opinioni ripetute.
+Osservati 5 post unici il 2026-10-01. Il limite era 5. Possono comparire annunci
+di lavoro e opinioni ripetute.
 
 #### Post sulle compagnie aeree
 
 [Airline discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airline-passengers)
 
 Esamina le menzioni delle compagnie aeree prima di scegliere il feedback sul
-servizio. Osservati 5 post unici il 2026-10-01. Limite: 5. Una menzione non
-prova che l'autore sia un passeggero.
+servizio. Osservati 5 post unici il 2026-10-01. Il limite era 5. Una menzione
+non prova che l'autore sia un passeggero.
 
 #### Discussione sul football universitario
 
 [College football discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-college-football-fans)
 
 Separa le opinioni dei tifosi dalla promozione del football universitario.
-Osservati 5 post unici il 2026-10-01. Limite: 5. Anteprime e promozioni possono
-corrispondere accanto alle opinioni dei tifosi.
+Osservati 5 post unici il 2026-10-01. Il limite era 5. Anteprime e promozioni
+possono corrispondere accanto alle opinioni dei tifosi.
 
 #### Discussione sui tassi di interesse
 
 [Interest rate discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-interest-rates)
 
 Esamina gli atteggiamenti su mercato e politiche intorno ai tassi di interesse.
-Osservati 5 post unici il 2026-10-01. Limite: 5. L'argomento principale può
-essere un politico o il mercato.
+Osservati 5 post unici il 2026-10-01. Il limite era 5. L'argomento principale
+può essere un politico o il mercato.
 
 #### Discussione sui monopattini
 
 [Electric scooter discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-toward-electric-scooters)
 
 Trova la discussione sui monopattini prima di scegliere il feedback di chi li
-usa. Osservati 5 post unici il 2026-10-01. Limite: 5. Pubblicità, ricerche e
-battute possono corrispondere accanto alle esperienze personali.
+usa. Osservati 5 post unici il 2026-10-01. Il limite era 5. Pubblicità, ricerche
+e battute possono corrispondere accanto alle esperienze personali.
 
 #### Esperienze al ristorante
 
 [New restaurant experiences](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-restaurant-openings)
 
 Esamina le formulazioni in prima persona sui nuovi ristoranti. Osservati 5 post
-unici il 2026-10-01. Limite: 5. Le formulazioni personali possono comparire
-anche in inviti o consigli.
+unici il 2026-10-01. Il limite era 5. Le formulazioni personali possono
+comparire anche in inviti o consigli.
 
 #### Tono del feed di una lista pubblica
 
 [Public list feed tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-ai-coding-assistants)
 
 Esamina il tono dei post in una lista pubblica. Osservati 5 post unici il
-2026-10-01. Limite: 5. I membri possono parlare di altri argomenti e fare repost
-delle parole di un'altra persona.
+2026-10-01. Il limite era 5. I membri possono parlare di altri argomenti e fare
+repost delle parole di un'altra persona.
 
 #### Risposte del profilo di un dispositivo
 
 [Google device profile reply tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-smart-home-device-owners)
 
 Esamina i testi del profilo di un dispositivo, risposte incluse. Osservati 5
-post unici il 2026-10-01. Limite: 5. Il contesto mancante del post padre può
-limitare il significato di una risposta del profilo.
+post unici il 2026-10-01. Il limite era 5. Il contesto mancante del post padre
+può limitare il significato di una risposta del profilo.
 
 #### Allenamento per la maratona
 
 [Marathon training discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-marathon-runners)
 
 Trova gli atteggiamenti negli aggiornamenti sull'allenamento e nei piani per la
-maratona. Osservati 5 post unici il 2026-10-01. Limite: 5. Piani e promozione
-possono comparire accanto agli aggiornamenti dei runner.
+maratona. Osservati 5 post unici il 2026-10-01. Il limite era 5. Piani e
+promozione possono comparire accanto agli aggiornamenti dei runner.
 
 #### Pianificazione di un viaggio
 
 [Personal Tokyo trip posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-tourist-destinations)
 
 Esamina piani di viaggio personali e racconti di viaggio. Osservati 5 post unici
-il 2026-10-01. Limite: 5. Eventi con Tokyo nel nome possono corrispondere senza
-descrivere un viaggio in Giappone.
+il 2026-10-01. Il limite era 5. Eventi con Tokyo nel nome possono corrispondere
+senza descrivere un viaggio in Giappone.
 
 #### Discussione sui prezzi dello streaming
 
 [Netflix price discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-streaming-price-increases)
 
 Trova le preoccupazioni sul prezzo di Netflix prima di esaminare i motivi di
-disdetta. Osservati 5 post unici il 2026-10-01. Limite: 5. Le frasi sul prezzo
-selezionano preoccupazioni, non un campione rappresentativo di spettatori.
+disdetta. Osservati 5 post unici il 2026-10-01. Il limite era 5. Le frasi sul
+prezzo selezionano preoccupazioni, non un campione rappresentativo di
+spettatori.
 
 #### Acquisti di materiale scolastico
 
 [August 2026 school supply posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-back-to-school-shoppers)
 
 Esamina 50 post sul materiale scolastico in una finestra di agosto. Osservati 50
-post unici il 2026-10-01. Limite: 50. Nella nostra revisione, i 50 ID
+post unici il 2026-10-01. Il limite era 50. Nella nostra revisione, i 50 ID
 includevano 42 righe chiaramente pertinenti.
 
 #### Ritardi dei treni
@@ -457,31 +458,31 @@ includevano 42 righe chiaramente pertinenti.
 [Train delay experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-public-transit)
 
 Trova lamentele ed esperienze legate ai treni in ritardo. Osservati 5 post unici
-il 2026-10-01. Limite: 5. Le frasi personali possono non cogliere gli avvisi
-ufficiali.
+il 2026-10-01. Il limite era 5. Le frasi personali possono non cogliere gli
+avvisi ufficiali.
 
 #### Discussione sul cibo per animali
 
 [Pet food experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-pet-food-brands)
 
 Esamina le menzioni del cibo per animali in una discussione più ampia sulla
-cura. Osservati 5 post unici il 2026-10-01. Limite: 5. Le discussioni sulla cura
-o veterinarie possono citare marche di cibo per inciso.
+cura. Osservati 5 post unici il 2026-10-01. Il limite era 5. Le discussioni
+sulla cura o veterinarie possono citare marche di cibo per inciso.
 
 #### Post selezionati sui fantasy sport
 
 [Fantasy sports post batch](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-fantasy-football-apps)
 
 Analizza un gruppo selezionato di post sui fantasy sport. Osservati 2 post unici
-il 2026-10-01. Limite: 2. Le etichette riguardano l'argomento di ogni post, non
-automaticamente un'app.
+il 2026-10-01. Il limite era 2. Le etichette riguardano l'argomento di ogni
+post, non automaticamente un'app.
 
 #### Esperienze in caffetteria
 
 [Coffee shop experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-coffee-shop-customers)
 
 Trova i commenti sulle caffetterie prima di selezionare il feedback dei clienti.
-Osservati 5 post unici il 2026-10-01. Limite: 5. Le lamentele degli autori
+Osservati 5 post unici il 2026-10-01. Il limite era 5. Le lamentele degli autori
 restano affermazioni non verificate.
 
 #### Mercato immobiliare
@@ -489,55 +490,55 @@ restano affermazioni non verificate.
 [Housing market discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-housing-market)
 
 Esamina opinioni e notizie sul mercato immobiliare. Osservati 5 post unici il
-2026-10-01. Limite: 5. Notizie e opinioni possono riguardare aspetti diversi del
-mercato.
+2026-10-01. Il limite era 5. Notizie e opinioni possono riguardare aspetti
+diversi del mercato.
 
 #### Discussione sui tornei
 
 [League of Legends tournament posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-esports-tournament-viewers)
 
 Separa la discussione sul torneo dalla promozione di biglietti o partite.
-Osservati 5 post unici il 2026-10-01. Limite: 5. Le pubblicità dei biglietti e
-le cronache delle partite non sono opinioni degli spettatori.
+Osservati 5 post unici il 2026-10-01. Il limite era 5. Le pubblicità dei
+biglietti e le cronache delle partite non sono opinioni degli spettatori.
 
 #### Post di un editore di podcast
 
 [Podcast publisher post tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-podcast-episodes)
 
 Esamina i messaggi dell'editore del podcast. Osservati 5 post unici il
-2026-10-01. Limite: 5. Il tono dell'editore non misura la soddisfazione degli
-ascoltatori.
+2026-10-01. Il limite era 5. Il tono dell'editore non misura la soddisfazione
+degli ascoltatori.
 
 #### Confronti tra palestre
 
 [Gym comparison review texts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-gym-memberships)
 
 Controlla l'atteggiamento complessivo verso 2 palestre nelle tue recensioni.
-Osservati 3 testi forniti unici il 2026-10-01. Limite: 3. Entrambi i target
-condividono 1 risposta di sentiment per testo.
+Osservati 3 testi forniti unici il 2026-10-01. Il limite era 3. Entrambi i
+target condividono 1 risposta di sentiment per testo.
 
 #### Noleggio auto
 
 [Car rental experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-car-rental-customers)
 
 Trova i commenti sul noleggio auto prima di esaminare i problemi del servizio.
-Osservati 5 post unici il 2026-10-01. Limite: 5. Richieste e promozioni possono
-corrispondere accanto ai racconti di chi noleggia.
+Osservati 5 post unici il 2026-10-01. Il limite era 5. Richieste e promozioni
+possono corrispondere accanto ai racconti di chi noleggia.
 
 #### Discussione sui campus
 
 [University cost and campus posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-university-life)
 
 Esamina la discussione sui campus prima di selezionare i post sui costi.
-Osservati 5 post unici il 2026-10-01. Limite: 5. Notizie e critiche sui campus
-non provano le esperienze degli studenti.
+Osservati 5 post unici il 2026-10-01. Il limite era 5. Notizie e critiche sui
+campus non provano le esperienze degli studenti.
 
 #### Organizzazione del matrimonio
 
 [Personal wedding planning posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-wedding-planning-posts)
 
 Trova le formulazioni in prima persona su piani e costi del matrimonio.
-Osservati 5 post unici il 2026-10-01. Limite: 5. Storie, battute e accenni
+Osservati 5 post unici il 2026-10-01. Il limite era 5. Storie, battute e accenni
 casuali possono corrispondere accanto alle esperienze di organizzazione.
 
 #### Esperienze di ricarica
@@ -545,7 +546,7 @@ casuali possono corrispondere accanto alle esperienze di organizzazione.
 [EV charging experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-ev-charging-experiences)
 
 Esamina le esperienze di ricarica nella discussione sui veicoli elettrici.
-Osservati 5 post unici il 2026-10-01. Limite: 5. La ricarica può essere
+Osservati 5 post unici il 2026-10-01. Il limite era 5. La ricarica può essere
 secondaria rispetto a un altro problema del veicolo.
 
 #### Discussione sulla dichiarazione dei redditi
@@ -553,7 +554,7 @@ secondaria rispetto a un altro problema del veicolo.
 [Spring 2026 TurboTax filing posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-tax-filing-software)
 
 Esamina la discussione sulla dichiarazione in una finestra di date fissa di
-primavera. Osservati 5 post unici il 2026-10-01. Limite: 5. I post non
+primavera. Osservati 5 post unici il 2026-10-01. Il limite era 5. I post non
 verificano le tariffe o le regole fiscali attuali.
 
 #### Visite ai parchi a tema
@@ -561,15 +562,15 @@ verificano le tariffe o le regole fiscali attuali.
 [Theme park visit discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-theme-park-visitors)
 
 Trova le menzioni dei parchi a tema prima di scegliere le reazioni alle visite.
-Osservati 5 post unici il 2026-10-01. Limite: 5. I riferimenti casuali possono
-corrispondere a post più lunghi su un altro argomento.
+Osservati 5 post unici il 2026-10-01. Il limite era 5. I riferimenti casuali
+possono corrispondere a post più lunghi su un altro argomento.
 
 #### Spesa alimentare
 
 [Grocery budget experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-grocery-prices)
 
 Trova i commenti in prima persona sulla spesa alimentare. Osservati 5 post unici
-il 2026-10-01. Limite: 5. Discussioni più ampie su politica, nutrizione o
+il 2026-10-01. Il limite era 5. Discussioni più ampie su politica, nutrizione o
 creator possono citare la spesa alimentare.
 
 #### Discussione sulle fotocamere
@@ -577,23 +578,23 @@ creator possono citare la spesa alimentare.
 [Phone camera discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-phone-camera-reviews)
 
 Esamina le menzioni della fotocamera accanto a foto, recensioni e annunci.
-Osservati 5 post unici il 2026-10-01. Limite: 5. Le menzioni della fotocamera
-possono essere casuali in altri annunci.
+Osservati 5 post unici il 2026-10-01. Il limite era 5. Le menzioni della
+fotocamera possono essere casuali in altri annunci.
 
 #### Post selezionato sulle sneaker
 
 [A selected sneaker post](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-sneaker-drop-reactions)
 
 Analizza un post noto senza una ricerca ampia per parola chiave. Osservato 1
-post unico il 2026-10-01. Limite: 1. Questa didascalia selezionata non descrive
-ogni dettaglio della sua immagine.
+post unico il 2026-10-01. Il limite era 1. Questa didascalia selezionata non
+descrive ogni dettaglio della sua immagine.
 
 #### Chatbot di assistenza
 
 [Support chatbot discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-customer-support-chatbots)
 
 Trova la discussione sui chatbot di assistenza prima di selezionare le lamentele
-sul servizio. Osservati 5 post unici il 2026-10-01. Limite: 5. Possono
+sul servizio. Osservati 5 post unici il 2026-10-01. Il limite era 5. Possono
 corrispondere anche bot di supporto emotivo e risposte delle aziende.
 
 #### Discussione sui festival
@@ -601,63 +602,63 @@ corrispondere anche bot di supporto emotivo e risposte delle aziende.
 [April 2026 Coachella discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-music-festival-attendees)
 
 Esamina 50 post sul festival in una finestra di aprile. Osservati 50 post unici
-il 2026-10-01. Limite: 50. I 50 ID includevano 47 righe pertinenti e testi di
-notizie ripetuti.
+il 2026-10-01. Il limite era 50. I 50 ID includevano 47 righe pertinenti e testi
+di notizie ripetuti.
 
 #### Bollette dell'elettricità
 
 [Electricity bill discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-electric-bills)
 
 Esamina i costi personali dell'elettricità accanto alla discussione sulle
-politiche. Osservati 5 post unici il 2026-10-01. Limite: 5. Le affermazioni
-sulle politiche e le previsioni sui prezzi restano non verificate.
+politiche. Osservati 5 post unici il 2026-10-01. Il limite era 5. Le
+affermazioni sulle politiche e le previsioni sui prezzi restano non verificate.
 
 #### Cambi di roster nel basket
 
 [NBA trade and signing discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-nba-trade-reactions)
 
 Trova la discussione su scambi e ingaggi prima di scegliere le reazioni dei
-tifosi. Osservati 5 post unici il 2026-10-01. Limite: 5. Altre notizie possono
-citare giocatori o squadre per inciso.
+tifosi. Osservati 5 post unici il 2026-10-01. Il limite era 5. Altre notizie
+possono citare giocatori o squadre per inciso.
 
 #### Discussione sui soggiorni
 
 [Airbnb stay discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-airbnb-stays)
 
 Metti a fuoco gli atteggiamenti verso Airbnb nella discussione sui soggiorni.
-Osservati 5 post unici il 2026-10-01. Limite: 5. Promozioni degli host e post
-sull'app possono comparire accanto ai racconti degli ospiti.
+Osservati 5 post unici il 2026-10-01. Il limite era 5. Promozioni degli host e
+post sull'app possono comparire accanto ai racconti degli ospiti.
 
 #### Reazioni ai libri
 
 [Book reading reaction posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-book-club-readers)
 
 Esamina le reazioni alla lettura senza presumere l'appartenenza a un club del
-libro. Osservati 5 post unici il 2026-10-01. Limite: 5. Possono corrispondere
-sia confronti con i film sia opinioni personali di lettura.
+libro. Osservati 5 post unici il 2026-10-01. Il limite era 5. Possono
+corrispondere sia confronti con i film sia opinioni personali di lettura.
 
 #### Esperienze con i meal kit
 
 [HelloFresh experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-meal-kit-services)
 
 Trova i commenti sui meal kit prima di esaminare le esperienze con il prodotto.
-Osservati 5 post unici il 2026-10-01. Limite: 5. Piani, pubblicità e racconti
-personali più ampi possono citare il brand.
+Osservati 5 post unici il 2026-10-01. Il limite era 5. Piani, pubblicità e
+racconti personali più ampi possono citare il brand.
 
 #### Discussione sulle gare
 
 [Formula 1 race discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-formula-one-race-weekends)
 
 Esamina la discussione sulla gara accanto alle dichiarazioni di team e piloti.
-Osservati 5 post unici il 2026-10-01. Limite: 5. Le dichiarazioni dei piloti
-citate possono ripetersi in ID diversi.
+Osservati 5 post unici il 2026-10-01. Il limite era 5. Le dichiarazioni dei
+piloti citate possono ripetersi in ID diversi.
 
 #### Esperienze con le app di incontri
 
 [Dating app experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-dating-app-experiences)
 
 Trova esperienze con le app di incontri, commenti sui match e battute. Osservati
-5 post unici il 2026-10-01. Limite: 5. Commenti sui match e battute non
+5 post unici il 2026-10-01. Il limite era 5. Commenti sui match e battute non
 verificano l'identità dei clienti.
 
 #### Post sulle attese in aeroporto
@@ -665,40 +666,41 @@ verificano l'identità dei clienti.
 [Airport wait and lounge posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airport-travelers)
 
 Esamina i commenti sulle attese in aeroporto accanto agli avvisi di viaggio.
-Osservati 5 post unici il 2026-10-01. Limite: 5. Gli avvisi ufficiali possono
-comparire accanto alle esperienze personali di attesa.
+Osservati 5 post unici il 2026-10-01. Il limite era 5. Gli avvisi ufficiali
+possono comparire accanto alle esperienze personali di attesa.
 
 #### Discussione sulle mense scolastiche
 
 [School lunch discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-school-lunch-programs)
 
 Esamina post personali e dibattito sulle politiche per le mense scolastiche.
-Osservati 5 post unici il 2026-10-01. Limite: 5. Tra gli autori possono esserci
-istituzioni, non solo genitori.
+Osservati 5 post unici il 2026-10-01. Il limite era 5. Tra gli autori possono
+esserci istituzioni, non solo genitori.
 
 #### Degustazione di birra
 
 [Craft beer tasting posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-craft-beer-drinkers)
 
 Trova le opinioni sulle degustazioni di birra prima di scegliere gli esempi di
-recensione. Osservati 5 post unici il 2026-10-01. Limite: 5. Didascalie brevi
-con link possono non avere contesto sufficiente per un atteggiamento chiaro.
+recensione. Osservati 5 post unici il 2026-10-01. Il limite era 5. Didascalie
+brevi con link possono non avere contesto sufficiente per un atteggiamento
+chiaro.
 
 #### Citazioni dell'annuncio di un attracco
 
 [SpaceX docking announcement quotes](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-space-launches)
 
 Esamina le citazioni di un annuncio di attracco dopo un orario fisso. Osservati
-5 post unici il 2026-10-01. Limite: 5. Le citazioni possono essere inviti o
-descrizioni neutre, non solo reazioni.
+5 post unici il 2026-10-01. Il limite era 5. Le citazioni possono essere inviti
+o descrizioni neutre, non solo reazioni.
 
 #### Risposte di compleanno
 
 [NASA birthday replies](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-replies-to-a-news-post)
 
 Esamina le risposte dirette a un post di compleanno. Osservati 5 post unici il
-2026-10-01. Limite: 5. Il contesto mancante del post radice può limitare il
-significato dell'analisi di una risposta.
+2026-10-01. Il limite era 5. Il contesto mancante del post radice può limitare
+il significato dell'analisi di una risposta.
 
 Tieni `maxItems` basso mentre controlli i risultati. Un limite riduce l'output,
 non la disponibilità. Se meno post soddisfano i criteri, controlla il report
@@ -716,84 +718,84 @@ risposta può rendere incerta una risposta.
 Ogni Actor Xquik usa lo stesso motore di estrazione, fattura dopo i filtri &
 offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): estrae post da
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) estrae post da
   ricerche, timeline dei profili, liste & ID dei post con oltre 50 filtri &
   export piatti. Usalo quando ti servono dati sui post senza analisi. Da
   $0.00015 per riga.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): estrae
-  profili con i relativi post, risposte, media & follower da nomi utente, ID o
-  URL. Usalo quando parti dagli account invece che dalle ricerche. Da $0.00015
-  per riga.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): estrae risposte,
-  commenti & intere conversazioni sotto i post con oltre 25 filtri. Usalo
-  quando ti serve la discussione sotto i post. Da $0.00015 per riga.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): estrae
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) estrae profili
+  con i relativi post, risposte, media & follower da nomi utente, ID o URL.
+  Usalo quando parti dagli account invece che dalle ricerche. Da $0.00015 per
+  riga.
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) estrae risposte,
+  commenti & intere conversazioni sotto i post con oltre 25 filtri. Usalo quando
+  ti serve la discussione sotto i post. Da $0.00015 per riga.
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) estrae
   risposte, citazioni, utenti che hanno fatto repost & thread da URL o ID di
   post in blocco. Usalo quando misuri chi ha interagito con i post. Da $0.00015
   per riga.
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
   estrae i post che citano altri post, con testo, media, conteggi, autori & 11
   filtri. Usalo quando studi chi ha citato dei post & cosa ha detto. Da $0.00015
   per post.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): estrae
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) estrae
   follower, following, membri & follower delle liste e membri delle community
   come righe di profilo. Usalo quando ti servono elenchi di pubblico o di
   membri. Da $0.00015 per profilo.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  cerca utenti per nome utente, bio & posizione con filtri su follower,
-  verifica, età & posizione. Usalo quando costruisci elenchi di account dalla
-  ricerca. Da $0.00015 per profilo.
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) cerca
+  utenti per nome utente, bio & posizione con filtri su follower, verifica, età
+  & posizione. Usalo quando costruisci elenchi di account dalla ricerca. Da
+  $0.00015 per profilo.
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   verifica dove hanno sede gli account con l'etichetta "Posizione account" di X,
   il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando ti
   serve verificare dove hanno sede gli account. Da $0.00015 per account.
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): ottiene le email,
-  i numeri di telefono & i link che gli account pubblicano sui propri profili,
-  da nomi utente, follower o ricerche di utenti. Usalo quando ti servono le
-  email che i profili pubblicano. Da $0.00015 per profilo.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): estrae post,
-  membri & follower delle liste da URL o ID delle liste. Usalo quando una lista
-  curata definisce le tue fonti. Da $0.00015 per riga.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): estrae
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) ottiene le email, i
+  numeri di telefono & i link che gli account pubblicano sui propri profili, da
+  nomi utente, follower o ricerche di utenti. Usalo quando ti servono le email
+  che i profili pubblicano. Da $0.00015 per profilo.
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) estrae post, membri &
+  follower delle liste da URL o ID delle liste. Usalo quando una lista curata
+  definisce le tue fonti. Da $0.00015 per riga.
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper) estrae
   informazioni, post, ricerche, membri & moderatori delle community. Usalo
   quando le tue fonti sono community di X. Da $0.00015 per riga.
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper): trova gli Spazi
-  per parola chiave & ne legge titoli, stati, orari, numero di ascoltatori, host
-  & relatori. Legge anche le trasmissioni tramite URL o ID. Usalo quando segui
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) trova gli Spazi per
+  parola chiave & ne legge titoli, stati, orari, numero di ascoltatori, host &
+  relatori. Legge anche le trasmissioni tramite URL o ID. Usalo quando segui
   audio & video in diretta su X. Da $0.00015 per Spazio o trasmissione.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): estrae le
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) estrae le
   tendenze in tempo reale per località con posizione in classifica, volume,
   query & WOEID. Usalo quando segui cosa è di tendenza e dove. Da $0.00015 per
   tendenza.
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): estrae le offerte di
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) estrae le offerte di
   lavoro di X per parola chiave, luogo, modalità di lavoro, livello di
   esperienza & azienda, con stipendi & link di candidatura. Usalo quando
   raccogli le offerte di lavoro pubblicate su X. Da $0.00015 per offerta.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): raccoglie
-  gli articoli lunghi di X come Markdown & testo, con copertine, autori, date &
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) raccoglie gli
+  articoli lunghi di X come Markdown & testo, con copertine, autori, date &
   metriche. Usalo quando ti serve il corpo degli articoli, non i post. Da
   $0.00015 per articolo.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader): estrae o
-  archivia foto, video & GIF da post o profili con opzioni MP4 & metadati.
-  Usalo quando ti servono i file multimediali veri e propri. Da $0.00015 per
-  riga di media.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) estrae o
+  archivia foto, video & GIF da post o profili con opzioni MP4 & metadati. Usalo
+  quando ti servono i file multimediali veri e propri. Da $0.00015 per riga di
+  media.
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
   monitora le menzioni del brand con rilevanza, sentiment & risposte sulla
-  customer experience generate con AI, poi confronta le esecuzioni. Usalo
-  quando osservi un brand nel tempo. Da $0.0003 per post analizzato.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
+  customer experience generate con AI, poi confronta le esecuzioni. Usalo quando
+  osservi un brand nel tempo. Da $0.0003 per post analizzato.
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   etichetta con AI la posizione rialzista, ribassista, neutra o mista, il tipo
   di contenuto, la convinzione & la rilevanza per l'asset. Usalo quando segui
   azioni, crypto o discussioni di trading. Da $0.0003 per post analizzato.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
   etichetta con AI i post di notizie per formato, attribuzione della fonte &
   rilevanza dell'argomento. Usalo quando separi le notizie dai commenti. Da
   $0.0003 per post analizzato.
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  risponde con AI alle tue domande di categoria, punteggio & sì/no su ogni
-  post. Usalo quando le analisi preimpostate non si adattano alle tue
-  etichette. Da $0.0003 per post analizzato.
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
+  risponde con AI alle tue domande di categoria, punteggio & sì/no su ogni post.
+  Usalo quando le analisi preimpostate non si adattano alle tue etichette. Da
+  $0.0003 per post analizzato.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
   stima un Viral Score da 0 a 100 & un verdetto per ogni post da 8 risposte AI
   sui suoi tratti. Usalo quando studi perché i post si diffondono o falliscono.
   Da $0.0003 per post analizzato.

@@ -79,7 +79,7 @@ post & query di ricerca con oltre 50 filtri.
 | `url`                  | Link diretto al post                                                |
 | `tweetUrl`             | Alias dell'URL del post nell'output piatto                          |
 | `twitterUrl`           | URL `twitter.com` nell'output piatto                                |
-| `author`               | Campi dell'autore: nome utente, bio, sito, conteggi                 |
+| `author`               | Nome utente, bio, sito & conteggi dell'autore                       |
 | `authorUsername`       | Nome utente dell'autore nell'output piatto                          |
 | `authorFollowers`      | Numero di follower dell'autore nell'output piatto                   |
 | `authorUrl`            | Sito web dell'autore nell'output piatto, quando disponibile         |
@@ -146,7 +146,7 @@ permesso di modifica & simili. Anche l'output raw li elimina.
 
 Ogni esempio qui sotto è un input completo. Scegli quello adatto ai tuoi dati.
 
-Segui questi passaggi in Apify Console:
+Segui questi passaggi in Apify Console.
 
 1. Apri un [esempio di task](#esempi-di-task) o la scheda Input.
 2. Aggiungi URL, nomi utente, ID dei post o termini di ricerca.
@@ -158,7 +158,7 @@ Le ricette qui sotto mostrano l'input per ogni fonte.
 
 ### Incolla gli URL
 
-Incolla un mix qualsiasi di URL di post, profili, ricerche o liste:
+Incolla un mix qualsiasi di URL di post, profili, ricerche o liste.
 
 ```json
 {
@@ -179,7 +179,7 @@ eseguono la loro query. Gli URL delle liste restituiscono i post della lista.
 
 ### Estrai molti nomi utente
 
-I nomi utente fanno da scorciatoia per molte ricerche `from:username`:
+I nomi utente fanno da scorciatoia per molte ricerche `from:username`.
 
 ```json
 { "twitterHandles": ["elonmusk", "nasa", "openai"], "maxItems": 100 }
@@ -193,7 +193,7 @@ scheda Post su X. Li conservano anche con date o filtri. Imposta
 
 ### Cerca i post
 
-Inserisci una o più query nel campo Search terms:
+Inserisci una o più query nel campo Search terms.
 
 ```json
 {
@@ -235,7 +235,7 @@ con meno di 5 ID termina con questo consiglio.
 
 ### Modalità engagement, thread & articolo
 
-Imposta `mode` per forzare un percorso, qualunque altro campo contenga l'input:
+Imposta `mode` per forzare un percorso, qualunque altro campo contenga l'input.
 
 ```json
 { "mode": "replies", "replyTweetIds": ["2082577277246972300"], "maxItems": 100 }
@@ -249,7 +249,7 @@ singolo post sono `replies`, `quotes`, `thread`, `retweeters`, `favoriters`,
 `translation` & `embed`.
 
 `profileMentions` restituisce i post che menzionano ogni nome utente, dal più
-recente:
+recente.
 
 ```json
 { "mode": "profileMentions", "twitterHandles": ["nasa"], "maxItems": 100 }
@@ -260,7 +260,7 @@ dell'account, i suoi repost & le sue risposte ai propri post. Le righe arrivano
 in ordine di data. L'Actor scarta le risposte ad altri account prima della
 fatturazione. Scarta anche il contesto di conversazione di altri autori.
 
-Per avere solo i post originali, escludi i tipi che non vuoi:
+Per avere solo i post originali, escludi i tipi che non vuoi.
 
 ```json
 {
@@ -327,7 +327,7 @@ hanno salvato un post nei segnalibri.
 
 `mode: "translation"` restituisce la traduzione di X di ogni post. Imposta
 `translateTo` su un codice lingua come `en`, `es`, `pt-br` o `zh-tw`. Il valore
-predefinito è `en`:
+predefinito è `en`.
 
 ```json
 {
@@ -340,7 +340,7 @@ predefinito è `en`:
 Ogni riga ha `resultType: "translation"`, `sourceTweetId` & `translation`.
 Questo oggetto contiene `language`, `sourceLanguage`, `text` & `entities`.
 
-`mode: "embed"` restituisce l'HTML che incorpora ogni post in un sito web:
+`mode: "embed"` restituisce l'HTML che incorpora ogni post in un sito web.
 
 ```json
 { "mode": "embed", "tweetIds": ["2082577277246972300"], "embedTheme": "dark" }
@@ -358,7 +358,7 @@ riga né alcun addebito.
 ### Esporta righe CSV piatte
 
 Tieni i campi JSON annidati predefiniti, oppure aggiungi colonne adatte ai fogli
-di calcolo:
+di calcolo.
 
 ```json
 { "searchTerms": ["from:nasa moon"], "maxItems": 100, "outputPreset": "flat" }
@@ -375,7 +375,7 @@ pipeline tipizzata.
 ### Scegli i nomi dei campi
 
 I nomi dei campi legacy sono quelli predefiniti. Scegli uno stile per i
-risultati rich o raw:
+risultati rich o raw.
 
 ```json
 {
@@ -403,7 +403,7 @@ salvati o esportati.
 
 ### Combina filtri avanzati
 
-Combina filtri su utente, data, posizione, media & engagement:
+Combina filtri su utente, data, posizione, media & engagement.
 
 ```json
 {
@@ -477,56 +477,57 @@ Per fissare un tetto alla spesa di un'esecuzione, vedi
 Su costo & velocità, X Tweet Scraper di Xquik ha battuto altri 11 Actor che
 estraggono post. La sua riga mediana aveva 63 campi, 2x la mediana degli altri.
 
-- `xquik/x-tweet-scraper`: 890 tweet utili, $0.000175 per tweet utile, 39,2 al
-  secondo & 63 campi per riga.
+- `xquik/x-tweet-scraper` ha consegnato 890 tweet utili a $0.000175 per tweet
+  utile, con 39,2 al secondo & 63 campi per riga.
   [Vedi esecuzione](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
-- `xquik/x-tweet-scraper`: 883 tweet utili, $0.000176 per tweet utile, 25,2 al
-  secondo & 63 campi per riga.
+- `xquik/x-tweet-scraper` ha consegnato 883 tweet utili a $0.000176 per tweet
+  utile, con 25,2 al secondo & 63 campi per riga.
   [Vedi esecuzione](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
-- `xquik/x-tweet-scraper`: 882 tweet utili, $0.000177 per tweet utile, 25,7 al
-  secondo & 63 campi per riga.
+- `xquik/x-tweet-scraper` ha consegnato 882 tweet utili a $0.000177 per tweet
+  utile, con 25,7 al secondo & 63 campi per riga.
   [Vedi esecuzione](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
-- `xquik/x-tweet-scraper`: 877 tweet utili, $0.000178 per tweet utile, 26,9 al
-  secondo & 63 campi per riga.
+- `xquik/x-tweet-scraper` ha consegnato 877 tweet utili a $0.000178 per tweet
+  utile, con 26,9 al secondo & 63 campi per riga.
   [Vedi esecuzione](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 813 tweet utili,
-  $0.000185 per tweet utile, 10,5 al secondo & 36 campi per riga.
-  [Vedi esecuzione](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 805 tweet utili,
-  $0.000187 per tweet utile, 10,6 al secondo & 36 campi per riga.
-  [Vedi esecuzione](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 805 tweet utili,
-  $0.000187 per tweet utile, 10,7 al secondo & 36 campi per riga.
-  [Vedi esecuzione](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
-- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest`: 880 tweet
-  utili, $0.000250 per tweet utile, 9,1 al secondo & 46 campi per riga.
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` ha consegnato 813
+  tweet utili a $0.000185 per tweet utile, con 10,5 al secondo & 36 campi per
+  riga. [Vedi esecuzione](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` ha consegnato 805
+  tweet utili a $0.000187 per tweet utile, con 10,6 al secondo & 36 campi per
+  riga. [Vedi esecuzione](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` ha consegnato 805
+  tweet utili a $0.000187 per tweet utile, con 10,7 al secondo & 36 campi per
+  riga. [Vedi esecuzione](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
+- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` ha
+  consegnato 880 tweet utili a $0.000250 per tweet utile, con 9,1 al secondo &
+  46 campi per riga.
   [Vedi esecuzione](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
-- `scraper_one/x-posts-search`: 804 tweet utili, $0.000314 per tweet utile, 3,3
-  al secondo & 14 campi per riga.
+- `scraper_one/x-posts-search` ha consegnato 804 tweet utili a $0.000314 per
+  tweet utile, con 3,3 al secondo & 14 campi per riga.
   [Vedi esecuzione](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
-- `danek/twitter-scraper`: 807 tweet utili, $0.000347 per tweet utile, 5,0 al
-  secondo & 27 campi per riga.
+- `danek/twitter-scraper` ha consegnato 807 tweet utili a $0.000347 per tweet
+  utile, con 5,0 al secondo & 27 campi per riga.
   [Vedi esecuzione](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
-- `tweetapi/twitter-x-search-scraper`: 337 tweet utili, $0.000374 per tweet
-  utile, 2,6 al secondo & 28 campi per riga.
+- `tweetapi/twitter-x-search-scraper` ha consegnato 337 tweet utili a $0.000374
+  per tweet utile, con 2,6 al secondo & 28 campi per riga.
   [Vedi esecuzione](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
-- `api-ninja/x-twitter-advanced-search`: 837 tweet utili, $0.000430 per tweet
-  utile, 7,4 al secondo & 28 campi per riga.
+- `api-ninja/x-twitter-advanced-search` ha consegnato 837 tweet utili a
+  $0.000430 per tweet utile, con 7,4 al secondo & 28 campi per riga.
   [Vedi esecuzione](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
-- `apidojo/twitter-scraper-lite`: 251 tweet utili, $0.000494 per tweet utile,
-  12,9 al secondo & 54 campi per riga.
+- `apidojo/twitter-scraper-lite` ha consegnato 251 tweet utili a $0.000494 per
+  tweet utile, con 12,9 al secondo & 54 campi per riga.
   [Vedi esecuzione](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
-- `apidojo/tweet-scraper`: 481 tweet utili, $0.000832 per tweet utile, 7,8 al
-  secondo & 55 campi per riga.
+- `apidojo/tweet-scraper` ha consegnato 481 tweet utili a $0.000832 per tweet
+  utile, con 7,8 al secondo & 55 campi per riga.
   [Vedi esecuzione](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
-- `xtdata/twitter-x-scraper`: 1.378 tweet utili, $0.001168 per tweet utile, 11,9
-  al secondo & 67 campi per riga.
+- `xtdata/twitter-x-scraper` ha consegnato 1.378 tweet utili a $0.001168 per
+  tweet utile, con 11,9 al secondo & 67 campi per riga.
   [Vedi esecuzione](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
-- `seemuapps/x-tweet-scraper`: 805 tweet utili, $0.001242 per tweet utile, 6,9
-  al secondo & 24 campi per riga.
+- `seemuapps/x-tweet-scraper` ha consegnato 805 tweet utili a $0.001242 per
+  tweet utile, con 6,9 al secondo & 24 campi per riga.
   [Vedi esecuzione](https://console.apify.com/view/runs/FstursEw43TbcipYU)
-- `maximedupre/twitter-scraper`: 46 tweet utili, $0.002846 per tweet utile, 0,3
-  al secondo & 31 campi per riga.
+- `maximedupre/twitter-scraper` ha consegnato 46 tweet utili a $0.002846 per
+  tweet utile, con 0,3 al secondo & 31 campi per riga.
   [Vedi esecuzione](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
 
 Ogni Actor ha eseguito la stessa ricerca con gli stessi filtri. Gli altri Actor
@@ -628,7 +629,7 @@ La scheda Input elenca ogni opzione. Indica almeno uno tra `startUrls`,
 Funzionano anche i loro alias documentati. Tutti gli altri campi sono
 facoltativi.
 
-Esempi:
+Ognuna di queste opzioni basta per un'esecuzione.
 
 - Incolla l'URL di un post in Start URLs.
 - Incolla l'URL di un profilo o aggiungi il nome utente in X handles.
@@ -678,110 +679,123 @@ canonici restano quelli documentati di default. Un alias non scarta mai un campo
 così resta breve. Gli alias funzionano negli input JSON, API, SDK, di
 automazione & dei task salvati.
 
-Ogni voce elenca i campi che usi già, poi il campo a cui corrispondono:
+Ogni voce elenca i campi che usi già, poi il campo a cui corrispondono.
 
-- `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`:
-  `startUrls`
-- `profileUrl`, come stringa singola: `startUrls`
+- `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`
+  corrispondono a `startUrls`.
+- `profileUrl`, come stringa singola, corrisponde a `startUrls`.
 - `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids`, o
-  `tweetId` come stringa singola: `tweetIds`
+  `tweetId` come stringa singola corrispondono a `tweetIds`.
 - `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`,
-  `screenNames`, `profileTweets`: `twitterHandles`
-- `username`, `handle`, `screenName`, come stringa singola: `twitterHandles`
+  `screenNames`, `profileTweets` corrispondono a `twitterHandles`.
+- `username`, `handle`, `screenName`, come stringa singola, corrispondono a
+  `twitterHandles`.
 - `searchTerms`, `searchQueries`, `queries`, `search`, come elenco o 1 ricerca
-  per riga: `searchTerms`
-- `twitterContent`, `query`, `searchQuery`: `twitterContent`
+  per riga, corrispondono a `searchTerms`.
+- `twitterContent`, `query`, `searchQuery` corrispondono a `twitterContent`.
 - `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`,
   `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`,
-  `maxTweets`, `tweetsDesired`, `maxTotalTweets`: `maxItems`
-- `per_profile_limit`: `maxItemsPerTarget`
-- `sort`: `queryType`
-- `search_type`, `searchType`, `query_type`, `search_sort`: `queryType` per
-  `Top` & `Latest`, con maiuscole o minuscole. `Media`, `Photos` & `Videos`
-  attivano `filter:media`, `filter:images` & `filter:videos`.
-- `tweetLanguage`, `language`, `contentLanguage`: `lang`
-- `author`, `fromUser`: `from`
-- `inReplyTo`, `toUser`: `to`
-- `mentioning`: `@`
-- `start`, `startDate`, `timeSince`: `since`
-- `end`, `endDate`, `timeUntil`: `until`
-- `timeSinceUnix`, `sinceTime`, `timeUntilUnix`, `untilTime`, in secondi:
-  `since_time`, `until_time`
-- `timeWithinTime`, `withinTime`: `within_time`
-- `timeWindowHours`, `timeWindow`: `within_time`, in ore & in giorni
-- `timeSinceId`, `sinceId`, `timeMaxId`, `maxId`: `since_id`, `max_id`
-- `quickDateRange` del Google Search Scraper, come `d7`, `w2`, `m1` o `y`:
-  `since_time`, contato a ritroso dall'avvio dell'esecuzione
+  `maxTweets`, `tweetsDesired`, `maxTotalTweets` corrispondono a `maxItems`.
+- `per_profile_limit` corrisponde a `maxItemsPerTarget`.
+- `sort` corrisponde a `queryType`.
+- `search_type`, `searchType`, `query_type`, `search_sort` corrispondono a
+  `queryType` per `Top` & `Latest`, con maiuscole o minuscole. `Media`, `Photos`
+  & `Videos` attivano `filter:media`, `filter:images` & `filter:videos`.
+- `tweetLanguage`, `language`, `contentLanguage` corrispondono a `lang`.
+- `author`, `fromUser` corrispondono a `from`.
+- `inReplyTo`, `toUser` corrispondono a `to`.
+- `mentioning` corrisponde a `@`.
+- `start`, `startDate`, `timeSince` corrispondono a `since`.
+- `end`, `endDate`, `timeUntil` corrispondono a `until`.
+- `timeSinceUnix`, `sinceTime`, `timeUntilUnix`, `untilTime`, in secondi,
+  corrispondono a `since_time`, `until_time`.
+- `timeWithinTime`, `withinTime` corrispondono a `within_time`.
+- `timeWindowHours`, `timeWindow` corrispondono a `within_time`, in ore & in
+  giorni.
+- `timeSinceId`, `sinceId`, `timeMaxId`, `maxId` corrispondono a `since_id`,
+  `max_id`.
+- `quickDateRange` del Google Search Scraper, come `d7`, `w2`, `m1` o `y`,
+  corrisponde a `since_time`, contato a ritroso dall'avvio dell'esecuzione.
 - `minimumFavorites`, `minLikes`, `min_likes`, `minFaves`, `engagementMinLikes`,
-  `Minimum_likes`: `min_faves`
-- `minimumRetweets`, `minRetweets`, `engagementMinRetweets`: `min_retweets`
-- `minimumReplies`, `minReplies`, `engagementMinReplies`, `Minimum_replies`:
-  `min_replies`
+  `Minimum_likes` corrispondono a `min_faves`.
+- `minimumRetweets`, `minRetweets`, `engagementMinRetweets` corrispondono a
+  `min_retweets`.
+- `minimumReplies`, `minReplies`, `engagementMinReplies`, `Minimum_replies`
+  corrispondono a `min_replies`.
 - `engagementMaxLikes`, `maxLikes`, `engagementMaxRetweets`, `maxRetweets`,
-  `engagementMaxReplies`: `engagement.maxLikes`, `engagement.maxRetweets`,
-  `engagement.maxReplies`
-- `onlyImage`, `onlyImages`, `has_images`: `filter:images`
-- `onlyVideo`, `onlyVideos`, `has_videos`: `filter:videos`
-- `onlyWithMedia`, `mediaOnly`: `filter:media`
-- `onlyQuote`, `onlyQuotes`: `filter:quote`
+  `engagementMaxReplies` corrispondono a `engagement.maxLikes`,
+  `engagement.maxRetweets`, `engagement.maxReplies`.
+- `onlyImage`, `onlyImages`, `has_images` corrispondono a `filter:images`.
+- `onlyVideo`, `onlyVideos`, `has_videos` corrispondono a `filter:videos`.
+- `onlyWithMedia`, `mediaOnly` corrispondono a `filter:media`.
+- `onlyQuote`, `onlyQuotes` corrispondono a `filter:quote`.
 - `onlyTwitterBlue`, `usersBlueVerifiedOnly`, `blue_verified_only`,
-  `onlyBlueVerified`: `filter:blue_verified`
-- `engagementHasEngagement`, `hasEngagement`: `filter:has_engagement`
-- `mediaHasLinks`, `has_links`, `requireLinks`: `filter:links`
-- `mediaHasMentions`, `has_mentions`, `requireMentions`: `filter:mentions`
-- `mediaHasHashtags`, `has_hashtags`, `requireHashtags`: `filter:hashtags`
-- `mediaNewsOnly`, `mediaSafeContentOnly`: `filter:news`, `filter:safe`
-- `mediaTypes`, con 1 tipo: il campo `filter:` di quel tipo
-- `mediaSubtype`: `filter:media`, `filter:images` o `filter:videos`
-- `includeNativeRetweets`, `includeRetweets`: `include:nativeretweets`
+  `onlyBlueVerified` corrispondono a `filter:blue_verified`.
+- `engagementHasEngagement`, `hasEngagement` corrispondono a
+  `filter:has_engagement`.
+- `mediaHasLinks`, `has_links`, `requireLinks` corrispondono a `filter:links`.
+- `mediaHasMentions`, `has_mentions`, `requireMentions` corrispondono a
+  `filter:mentions`.
+- `mediaHasHashtags`, `has_hashtags`, `requireHashtags` corrispondono a
+  `filter:hashtags`.
+- `mediaNewsOnly`, `mediaSafeContentOnly` corrispondono a `filter:news`,
+  `filter:safe`.
+- `mediaTypes`, con 1 tipo, corrisponde al campo `filter:` di quel tipo.
+- `mediaSubtype` corrisponde a `filter:media`, `filter:images` o
+  `filter:videos`.
+- `includeNativeRetweets`, `includeRetweets` corrispondono a
+  `include:nativeretweets`.
 - `excludeReplies`, `excludeRetweets`, `includeRetweets` impostato su false,
-  `tweetTypesExclude`: `tweetTypes.excludeReplies`, `tweetTypes.excludeRetweets`
-  & `tweetTypes.excludeQuotes`
-- `tweetTypes` come elenco con 1 tipo: `tweetTypes.replies`, `tweetTypes.quotes`
-  o `tweetTypes.nativeRetweets`
-- `tweetSubtype`: `tweetTypes.replies` o `tweetTypes.quotes`. `self_threads`
-  aggiunge l'operatore `filter:self_threads`.
-- `geotaggedNear`, `geoNear`: `near`
-- `withinRadius`, `geoWithinRadius`, `geoWithin`: `within`
-- `geoGeocode`: `geocode`
-- `tweetConversationId`, `tweetQuotedTweetId`, `tweetQuotedUserId`:
-  `conversation_id`, `quoted_tweet_id`, `quoted_user_id`
-- `cardName`, `tweetPollTypes`: `card_name`
-- `search_query`: `twitterContent`
-- `profile_urls`: `startUrls` per i link, `twitterHandles` per i nomi utente
-- `lookup_post_ids`, o `id` come stringa singola: `tweetIds`
-- `tweets` come 1 elenco separato da virgole: `tweetIds`
+  `tweetTypesExclude` corrispondono a `tweetTypes.excludeReplies`,
+  `tweetTypes.excludeRetweets` & `tweetTypes.excludeQuotes`.
+- `tweetTypes` come elenco con 1 tipo corrisponde a `tweetTypes.replies`,
+  `tweetTypes.quotes` o `tweetTypes.nativeRetweets`.
+- `tweetSubtype` corrisponde a `tweetTypes.replies` o `tweetTypes.quotes`.
+  `self_threads` aggiunge l'operatore `filter:self_threads`.
+- `geotaggedNear`, `geoNear` corrispondono a `near`.
+- `withinRadius`, `geoWithinRadius`, `geoWithin` corrispondono a `within`.
+- `geoGeocode` corrisponde a `geocode`.
+- `tweetConversationId`, `tweetQuotedTweetId`, `tweetQuotedUserId` corrispondono
+  a `conversation_id`, `quoted_tweet_id`, `quoted_user_id`.
+- `cardName`, `tweetPollTypes` corrispondono a `card_name`.
+- `search_query` corrisponde a `twitterContent`.
+- `profile_urls` corrisponde a `startUrls` per i link, a `twitterHandles` per i
+  nomi utente.
+- `lookup_post_ids`, o `id` come stringa singola, corrispondono a `tweetIds`.
+- `tweets` come 1 elenco separato da virgole corrisponde a `tweetIds`.
 
 Alcuni campi qui non hanno un campo. Ognuno aggiunge l'operatore di ricerca di X
 che rappresenta a ogni ricerca dell'esecuzione. Il log dell'esecuzione elenca
-all'inizio gli operatori aggiunti:
+all'inizio gli operatori aggiunti.
 
-- `usersFromUsers`, `from_users`, `usersToUsers`, `to_users`,
-  `usersListMembers`: `from:`, `to:` & `list:`. Più valori vengono eseguiti come
+- `usersFromUsers`, `from_users`, `usersToUsers`, `to_users`, `usersListMembers`
+  aggiungono `from:`, `to:` & `list:`. Più valori vengono eseguiti come
   alternative, come `(from:a OR from:b)`.
-- `usersMentionUsers`, `mentioning_users`: `@name`
-- `usersExcludeFromUsers`: `-from:`
-- `onlyVerifiedUsers`, `usersVerifiedOnly`, `verified_only`: `filter:verified`
-- `placeObjectId`, `geoPlaceId`, `placeId`, `place`: `place:`
-- `cardDomain`: `card_domain:`
-- `appsSources`, `appsExcludeSources`: `source:` & `-source:`
+- `usersMentionUsers`, `mentioning_users` aggiungono `@name`.
+- `usersExcludeFromUsers` aggiunge `-from:`.
+- `onlyVerifiedUsers`, `usersVerifiedOnly`, `verified_only` aggiungono
+  `filter:verified`.
+- `placeObjectId`, `geoPlaceId`, `placeId`, `place` aggiungono `place:`.
+- `cardDomain` aggiunge `card_domain:`.
+- `appsSources`, `appsExcludeSources` aggiungono `source:` & `-source:`.
 - `contentKeywords`, `contentExactPhrases`, `contentHashtags`,
-  `contentCashtags`, ciascuno con 1 valore: la parola, la frase tra virgolette,
-  `#tag` & `$tag`
+  `contentCashtags`, ciascuno con 1 valore, aggiungono la parola, la frase tra
+  virgolette, `#tag` & `$tag`.
 - `contentExcludeKeywords`, `contentExcludeHashtags`, `exclude_words`,
-  `hashtags_exclude`: `-word` & `-#tag`
-- `all_words`, `exact_phrases`: ogni parola & ogni frase deve comparire
-- `any_words`, `hashtags_any`: alternative, come `(#a OR #b)`
-- `contentQuestionMarks`: `?`
-- `contentEmoticons`: `:)` per `positive`, `:(` per `negative`
-- `tweet_type`: `filter:replies`, `filter:retweets` & le loro forme `-filter:`
+  `hashtags_exclude` aggiungono `-word` & `-#tag`.
+- Con `all_words` & `exact_phrases`, ogni parola & ogni frase deve comparire.
+- `any_words`, `hashtags_any` aggiungono alternative, come `(#a OR #b)`.
+- `contentQuestionMarks` aggiunge `?`.
+- `contentEmoticons` aggiunge `:)` per `positive`, `:(` per `negative`.
+- `tweet_type` aggiunge `filter:replies`, `filter:retweets` & le loro forme
+  `-filter:`.
 
-Le modalità scritte a parole corrispondono a `mode`: `Advanced Search` a
-`search`, `Get Tweet by ID` a `tweet`, `Get a Few Tweets` a `tweets`,
-`Get Replies` a `replies`, `Get Quotes` a `quotes`, `Get Retweeters` a
+Le modalità scritte a parole corrispondono a `mode`. `Advanced Search`
+corrisponde a `search`, `Get Tweet by ID` a `tweet`, `Get a Few Tweets` a
+`tweets`, `Get Replies` a `replies`, `Get Quotes` a `quotes`, `Get Retweeters` a
 `retweeters` & `Get Favoriters` a `favoriters`.
 
-Come si comporta un input incollato:
+Un input incollato si comporta così.
 
 - Ogni fonte viene eseguita. Un input con URL, nomi utente, termini di ricerca,
   ID delle liste & ID dei post li esegue tutti. `maxItems` vale per l'intera
@@ -804,7 +818,7 @@ Come si comporta un input incollato:
 - I campi degli operatori di ricerca come `from`, `min_faves`, `since_time` &
   `filter:images` usano già i nomi di X. Non serve convertirli.
 - Un elenco che un altro Actor non definisce come «tutti i valori» o «uno
-  qualsiasi» viene eseguito con 1 valore: `contentKeywords`,
+  qualsiasi» viene eseguito con 1 valore. Questi elenchi sono `contentKeywords`,
   `contentExactPhrases`, `contentHashtags`, `contentCashtags`,
   `usersMentionUsers`, `mediaTypes` & `tweetTypes`. Con più valori l'esecuzione
   si ferma prima di leggere o addebitare qualcosa. Il messaggio spiega come
@@ -819,7 +833,7 @@ Come si comporta un input incollato:
 
 ### Input da Console & API
 
-Il modulo della Console ha questi controlli:
+Il modulo della Console ha questi controlli.
 
 - Mode, Output Variant, Field Style, Output Preset & Sort By sono menu a tendina
   validati.
@@ -927,106 +941,87 @@ le [opzioni di esecuzione](https://docs.apify.com/platform/actors/running/runs-a
 Ogni Actor Xquik usa lo stesso motore di estrazione, fattura dopo i filtri &
 offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): estrae
-  profili con i relativi post, risposte, media & follower da nomi utente, ID o
-  URL. Usalo quando parti dagli account invece che dalle ricerche. Da $0.00015
-  per riga.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): estrae risposte,
-  commenti & intere conversazioni sotto i post con oltre 25 filtri. Usalo
-  quando ti serve la discussione sotto i post. Da $0.00015 per riga.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): estrae
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) estrae profili
+  con i relativi post, risposte, media & follower da nomi utente, ID o URL.
+  Usalo quando parti dagli account invece che dalle ricerche. Da $0.00015 per
+  riga.
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) estrae risposte,
+  commenti & intere conversazioni sotto i post con oltre 25 filtri. Usalo quando
+  ti serve la discussione sotto i post. Da $0.00015 per riga.
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) estrae
   risposte, citazioni, utenti che hanno fatto repost & thread da URL o ID di
   post in blocco. Usalo quando misuri chi ha interagito con i post. Da $0.00015
   per riga.
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
   estrae i post che citano altri post, con testo, media, conteggi, autori & 11
   filtri. Usalo quando studi chi ha citato dei post & cosa ha detto. Da $0.00015
   per post.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): estrae
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) estrae
   follower, following, membri & follower delle liste e membri delle community
   come righe di profilo. Usalo quando ti servono elenchi di pubblico o di
   membri. Da $0.00015 per profilo.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  cerca utenti per nome utente, bio & posizione con filtri su follower,
-  verifica, età & posizione. Usalo quando costruisci elenchi di account dalla
-  ricerca. Da $0.00015 per profilo.
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) cerca
+  utenti per nome utente, bio & posizione con filtri su follower, verifica, età
+  & posizione. Usalo quando costruisci elenchi di account dalla ricerca. Da
+  $0.00015 per profilo.
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   verifica dove hanno sede gli account con l'etichetta "Posizione account" di X,
   il modo in cui si sono collegati a X & i cambi di nome utente. Usalo quando ti
   serve verificare dove hanno sede gli account. Da $0.00015 per account.
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): ottiene le email,
-  i numeri di telefono & i link che gli account pubblicano sui propri profili,
-  da nomi utente, follower o ricerche di utenti. Usalo quando ti servono le
-  email che i profili pubblicano. Da $0.00015 per profilo.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): estrae post,
-  membri & follower delle liste da URL o ID delle liste. Usalo quando una lista
-  curata definisce le tue fonti. Da $0.00015 per riga.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): estrae
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) ottiene le email, i
+  numeri di telefono & i link che gli account pubblicano sui propri profili, da
+  nomi utente, follower o ricerche di utenti. Usalo quando ti servono le email
+  che i profili pubblicano. Da $0.00015 per profilo.
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) estrae post, membri &
+  follower delle liste da URL o ID delle liste. Usalo quando una lista curata
+  definisce le tue fonti. Da $0.00015 per riga.
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper) estrae
   informazioni, post, ricerche, membri & moderatori delle community. Usalo
   quando le tue fonti sono community di X. Da $0.00015 per riga.
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper): trova gli Spazi
-  per parola chiave & ne legge titoli, stati, orari, numero di ascoltatori, host
-  & relatori. Legge anche le trasmissioni tramite URL o ID. Usalo quando segui
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) trova gli Spazi per
+  parola chiave & ne legge titoli, stati, orari, numero di ascoltatori, host &
+  relatori. Legge anche le trasmissioni tramite URL o ID. Usalo quando segui
   audio & video in diretta su X. Da $0.00015 per Spazio o trasmissione.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): estrae le
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) estrae le
   tendenze in tempo reale per località con posizione in classifica, volume,
   query & WOEID. Usalo quando segui cosa è di tendenza e dove. Da $0.00015 per
   tendenza.
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): estrae le offerte di
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) estrae le offerte di
   lavoro di X per parola chiave, luogo, modalità di lavoro, livello di
   esperienza & azienda, con stipendi & link di candidatura. Usalo quando
   raccogli le offerte di lavoro pubblicate su X. Da $0.00015 per offerta.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): raccoglie
-  gli articoli lunghi di X come Markdown & testo, con copertine, autori, date &
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) raccoglie gli
+  articoli lunghi di X come Markdown & testo, con copertine, autori, date &
   metriche. Usalo quando ti serve il corpo degli articoli, non i post. Da
   $0.00015 per articolo.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader): estrae o
-  archivia foto, video & GIF da post o profili con opzioni MP4 & metadati.
-  Usalo quando ti servono i file multimediali veri e propri. Da $0.00015 per
-  riga di media.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) estrae o
+  archivia foto, video & GIF da post o profili con opzioni MP4 & metadati. Usalo
+  quando ti servono i file multimediali veri e propri. Da $0.00015 per riga di
+  media.
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
   monitora le menzioni del brand con rilevanza, sentiment & risposte sulla
-  customer experience generate con AI, poi confronta le esecuzioni. Usalo
-  quando osservi un brand nel tempo. Da $0.0003 per post analizzato.
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
+  customer experience generate con AI, poi confronta le esecuzioni. Usalo quando
+  osservi un brand nel tempo. Da $0.0003 per post analizzato.
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
   etichetta atteggiamento, intensità & probabilità di sarcasmo di ogni post con
   AI. Usalo quando ti serve il sentiment generale su qualsiasi argomento. Da
   $0.0003 per post analizzato.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
   etichetta con AI la posizione rialzista, ribassista, neutra o mista, il tipo
   di contenuto, la convinzione & la rilevanza per l'asset. Usalo quando segui
   azioni, crypto o discussioni di trading. Da $0.0003 per post analizzato.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
   etichetta con AI i post di notizie per formato, attribuzione della fonte &
   rilevanza dell'argomento. Usalo quando separi le notizie dai commenti. Da
   $0.0003 per post analizzato.
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  risponde con AI alle tue domande di categoria, punteggio & sì/no su ogni
-  post. Usalo quando le analisi preimpostate non si adattano alle tue
-  etichette. Da $0.0003 per post analizzato.
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
+  risponde con AI alle tue domande di categoria, punteggio & sì/no su ogni post.
+  Usalo quando le analisi preimpostate non si adattano alle tue etichette. Da
+  $0.0003 per post analizzato.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
   stima un Viral Score da 0 a 100 & un verdetto per ogni post da 8 risposte AI
   sui suoi tratti. Usalo quando studi perché i post si diffondono o falliscono.
   Da $0.0003 per post analizzato.
-
-## Ti serve più dello scraping?
-
-Xquik offre anche 47 strumenti nella dashboard, un'API REST, webhook firmati &
-un server MCP.
-
-- [Documentazione API](https://docs.xquik.com/introduction): guide all'API REST
-- [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets):
-  cerca post via REST
-- [Batch Tweets API](https://docs.xquik.com/api-reference/x/batch-tweets):
-  recupera fino a 100 post per ID
-- [User Tweets API](https://docs.xquik.com/api-reference/x/user-tweets): ottieni
-  la timeline di un utente
-- [Server MCP](https://docs.xquik.com/mcp/overview): scopri gli strumenti
-  supportati
-- [Webhook](https://docs.xquik.com/webhooks/overview): consegna firmata degli
-  eventi
-- [GitHub](https://github.com/Xquik-dev/x-twitter-scraper): codice sorgente &
-  segnalazione dei problemi
 
 ## FAQ
 
