@@ -41,9 +41,9 @@ della piattaforma.
   ciascuno & quando.
 - La registrazione di uno Spazio terminato, come URL di playlist HLS, con
   `includeReplay`.
-- Trasmissioni tramite URL o ID: titolo, stato, orari, numero di spettatori &
-  host.
-- Rimozione dei duplicati prima della fatturazione: uno Spazio trovato da 2
+- Trasmissioni tramite URL o ID, con titolo, stato, orari, numero di spettatori
+  & host.
+- Rimozione dei duplicati prima della fatturazione. Uno Spazio trovato da 2
   termini di ricerca è 1 riga.
 
 ## Come trovare gli Spazi di X
@@ -58,7 +58,7 @@ della piattaforma.
 6. Scarica il dataset in JSON, CSV o Excel, oppure usa l'API di Apify.
 
 `startUrls` accetta ogni URL come stringa semplice o come oggetto
-`{ "url": "..." }`:
+`{ "url": "..." }`.
 
 ```json
 {
@@ -80,7 +80,7 @@ della piattaforma.
 ```
 
 Un termine di ricerca trova gli Spazi condivisi dai post corrispondenti. Accetta
-gli stessi operatori della ricerca di X:
+gli stessi operatori della ricerca di X.
 
 | Obiettivo                                  | Termine di ricerca |
 | ------------------------------------------ | ------------------ |
@@ -90,10 +90,10 @@ gli stessi operatori della ricerca di X:
 | Spazi in 1 lingua                          | `startups lang:es` |
 | Spazi condivisi da post con molti Mi piace | `nba min_faves:50` |
 
-`queryType` sceglie quali post vengono prima: `Latest` per i più recenti, `Top`
-per quelli con più interazioni.
+`queryType` sceglie quali post vengono prima. `Latest` mette prima i più recenti
+& `Top` quelli con più interazioni.
 
-Leggi gli Spazi che conosci già tramite URL o ID:
+Leggi gli Spazi che conosci già tramite URL o ID.
 
 ```json
 {
@@ -102,7 +102,7 @@ Leggi gli Spazi che conosci già tramite URL o ID:
 }
 ```
 
-Attiva `includeReplay` per ottenere la registrazione di ogni Spazio terminato:
+Attiva `includeReplay` per ottenere la registrazione di ogni Spazio terminato.
 
 ```json
 { "spaceIds": ["1OGwblLjnQMKB"], "includeReplay": true }
@@ -112,8 +112,8 @@ La riga riporta allora `replay` con `url`, una playlist HLS, più `streamType` &
 `status`. Uno Spazio in diretta, programmato o senza registrazione non ha
 `replay`. La registrazione non costa nulla in più.
 
-Leggi le trasmissioni, il video in diretta che X ospita su
-`x.com/i/broadcasts`, tramite URL o ID:
+Leggi le trasmissioni, il video in diretta che X ospita su `x.com/i/broadcasts`,
+tramite URL o ID.
 
 ```json
 {
@@ -131,7 +131,7 @@ Ogni riga contiene 1 Spazio o 1 trasmissione & il suo termine di ricerca, URL o
 ID in `sourceTarget`. `resultType` è `space` o `broadcast`.
 
 Gli esempi usano valori fittizi. I risultati contengono dati live. Una riga di
-Spazio ha questo aspetto:
+Spazio ha questo aspetto.
 
 ```json
 {
@@ -160,7 +160,7 @@ Spazio ha questo aspetto:
 }
 ```
 
-`state` contiene 1 di 5 valori, come li chiama X:
+`state` contiene 1 di 5 valori, come li chiama X.
 
 | `state`      | Lo Spazio                                 |
 | ------------ | ----------------------------------------- |
@@ -174,7 +174,7 @@ Gli Spazi `Ended` & `TimedOut` riportano `endedAt`, & entrambi possono
 conservare una registrazione. X mostra uno Spazio per abbonati o per una
 community solo al suo pubblico, quindi quegli Spazi non restituiscono righe.
 
-Una riga di trasmissione ha `resultType: "broadcast"` & si presenta così:
+Una riga di trasmissione ha `resultType: "broadcast"` & si presenta così.
 
 ```json
 {

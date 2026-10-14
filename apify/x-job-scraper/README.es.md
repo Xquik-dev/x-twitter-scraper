@@ -55,7 +55,7 @@ iniciar sesión.
 4. Define `maxItems` para limitar las filas entregadas y haz clic en Start.
 5. Descarga el dataset en JSON, CSV o Excel, o usa la API de Apify.
 
-`startUrls` acepta cada URL como texto simple o como objeto `{ "url": "..." }`:
+`startUrls` acepta cada URL como texto simple o como objeto `{ "url": "..." }`.
 
 ```json
 {
@@ -68,7 +68,7 @@ iniciar sesión.
 
 ## Entrada
 
-Busca por palabra clave con filtros:
+Busca por palabra clave con filtros.
 
 ```json
 {
@@ -86,7 +86,7 @@ Busca por palabra clave con filtros:
 `part_time` y `contract_to_hire`. Cada filtro conserva los empleos que coinciden
 con cualquiera de los valores que elijas.
 
-Lee empleos conocidos por URL o ID:
+Lee empleos conocidos por URL o ID.
 
 ```json
 {
@@ -99,7 +99,7 @@ Lee empleos conocidos por URL o ID:
 exacto, como New York City en vez de West New York.
 
 Encuentra los IDs de lugares por nombre. Una ejecución con `locationSearchTerms`
-lista lugares en vez de empleos:
+lista lugares en vez de empleos.
 
 ```json
 { "locationSearchTerms": ["New York"], "maxItems": 20 }
@@ -120,7 +120,7 @@ campos que faltan en el origen quedan ausentes. X Jobs Scraper de Xquik no
 inventa valores.
 
 Los ejemplos usan valores de muestra. Los resultados reflejan datos en vivo. Una
-fila de empleo se ve así:
+fila de empleo se ve así.
 
 ```json
 {
@@ -142,7 +142,7 @@ fila de empleo se ve así:
 }
 ```
 
-Cada ubicación de empleo es 1 fila con el `id` que acepta `locationId`:
+Cada ubicación de empleo es 1 fila con el `id` que acepta `locationId`.
 
 ```json
 {

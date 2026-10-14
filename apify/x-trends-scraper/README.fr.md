@@ -41,7 +41,7 @@ X ni de connexion.
   WOEID, leur pays et leur type.
 - La recherche de lieux X, avec l'ID de lieu que la recherche de posts X
   accepte.
-- Les hashflags X : les emojis personnalisés que X affiche après certains
+- Les hashflags X, ces emojis personnalisés que X affiche après certains
   hashtags.
 - Le rang, le sujet, la requête, le volume de posts, l'URL de recherche, le
   WOEID et le lieu source.
@@ -63,7 +63,7 @@ X ni de connexion.
 
 ## Entrée
 
-Utilisez des noms de lieux, des WOEID numériques ou les deux :
+Utilisez des noms de lieux, des WOEID numériques ou les deux.
 
 ```json
 {
@@ -79,7 +79,7 @@ lettres fonctionnent aussi. Un nom pour lequel X ne propose pas de tendances ne
 renvoie aucune ligne et ne coûte rien. `woeids` accepte des WOEID numériques.
 
 Pour voir tous les noms et WOEID, activez `listLocations`. Le run liste alors
-les lieux pour lesquels X propose des tendances, à la place des tendances :
+les lieux pour lesquels X propose des tendances, à la place des tendances.
 
 ```json
 { "listLocations": true, "country": "TR", "maxItems": 100 }
@@ -90,7 +90,7 @@ les lieux pour lesquels X propose des tendances, à la place des tendances :
 contient votre texte. Laissez les 3 vides pour lister tous les lieux.
 
 Pour chercher des lieux X par nom, remplissez `placeSearchTerms`. Le run renvoie
-alors des lieux à la place des tendances :
+alors des lieux à la place des tendances.
 
 ```json
 { "placeSearchTerms": ["New York"], "maxItems": 20 }
@@ -104,7 +104,7 @@ ligne et ne coûte rien.
 
 `maxItems` plafonne tout le run et le remplit terme par terme, donc le premier
 terme peut tout utiliser. Réglez `maxItemsPerTarget` pour donner à chaque terme
-une part égale :
+une part égale.
 
 ```json
 {
@@ -115,7 +115,7 @@ une part égale :
 ```
 
 Pour lister les hashflags X, activez `listHashflags`. Un hashflag est l'emoji
-personnalisé que X affiche après un hashtag pendant une durée définie :
+personnalisé que X affiche après un hashtag pendant une durée définie.
 
 ```json
 { "listHashflags": true, "hashtagContains": "football" }
@@ -180,7 +180,7 @@ Chaque tendance donne 1 ligne de dataset. Les lignes portent `name`, `rank`,
 source restent absents. X Trends Scraper de Xquik n'invente aucune valeur.
 
 Les exemples utilisent des valeurs fictives. Les résultats reflètent les données
-en direct. Une ligne de tendance ressemble à ceci :
+en direct. Une ligne de tendance ressemble à ceci.
 
 ```json
 {
@@ -201,7 +201,7 @@ Avec `listLocations`, chaque lieu donne 1 ligne de dataset. Les lignes portent
 `woeid`, `name`, `country`, `countryCode`, `placeType`, `placeTypeCode`,
 `parentWoeid`, `url` et `resultType`. `url` est l'ancienne référence de X pour
 le lieu et peut ne pas s'ouvrir. Une ligne de lieu de tendances ressemble à
-ceci :
+ceci.
 
 ```json
 {
@@ -220,7 +220,7 @@ Avec `placeSearchTerms`, chaque lieu donne 1 ligne de dataset. Les lignes
 portent `id`, `name`, `fullName`, `country`, `countryCode`, `placeType`, `url`,
 `centroid`, `boundingBox`, `attributes`, `containedWithin`, `sourceTarget` et
 `resultType`. `centroid` contient la longitude, puis la latitude. Une ligne de
-lieu ressemble à ceci :
+lieu ressemble à ceci.
 
 ```json
 {
@@ -238,7 +238,7 @@ lieu ressemble à ceci :
 
 Avec `listHashflags`, chaque hashflag donne 1 ligne de dataset. Les lignes
 portent `hashtag`, `assetUrl`, `startsAt`, `endsAt`, `isHashfettiEnabled`,
-`animations` et `resultType`. Une ligne de hashflag ressemble à ceci :
+`animations` et `resultType`. Une ligne de hashflag ressemble à ceci.
 
 ```json
 {

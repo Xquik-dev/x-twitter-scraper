@@ -48,7 +48,7 @@ brauchst keinen X-API-Schlüssel & keinen Login.
 5. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
 
 `startUrls` & `profileUrls` nehmen jede URL als einfachen String oder als Objekt
-`{ "url": "..." }`:
+`{ "url": "..." }`.
 
 ```json
 { "profileUrls": ["https://x.com/nasa", { "url": "https://x.com/OpenAI" }] }
@@ -89,7 +89,7 @@ Datensätze ergänzen `storedMediaUrl` & `downloadStatus: "stored"`. **Stored
 Media Files** öffnet die gespeicherten Einträge.
 
 Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
-Foto-Datensatz sieht so aus:
+Foto-Datensatz sieht so aus.
 
 ```json
 {
@@ -102,7 +102,7 @@ Foto-Datensatz sieht so aus:
 ```
 
 Ein Untertitel-Datensatz hat `resultType: "subtitles"` & seine Untertitelspuren
-in `tracks`:
+in `tracks`.
 
 ```json
 {

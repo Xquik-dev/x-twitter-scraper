@@ -53,7 +53,7 @@ X-API-Schlüssel & keinen Login.
 5. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
 
 `startUrls` nimmt jede URL als einfachen String oder als Objekt
-`{ "url": "..." }`:
+`{ "url": "..." }`.
 
 ```json
 {
@@ -88,13 +88,14 @@ Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 
 ### Von einem anderen Engagement-Actor wechseln
 
-Der Actor liest diese Feldnamen anderer Engagement-Actors:
+Der Actor liest diese Feldnamen anderer Engagement-Actors.
 
-- `urls`: `startUrls`
-- `category`: `engagementTypes`. `replies`, `retweets`, `info` & `checkRetweet`
-  liest der Actor als `replies`, `retweeters`, `tweet` & `repostCheck`.
-- `resultsPerCategory`: `maxItemsPerTarget`
-- `retweetCheckUsername`: `repostCheckUsers`
+- `urls` wird `startUrls` zugeordnet.
+- `category` wird `engagementTypes` zugeordnet. `replies`, `retweets`, `info` &
+  `checkRetweet` liest der Actor als `replies`, `retweeters`, `tweet` &
+  `repostCheck`.
+- `resultsPerCategory` wird `maxItemsPerTarget` zugeordnet.
+- `retweetCheckUsername` wird `repostCheckUsers` zugeordnet.
 
 Eine `category`, die die Aufgabe eines anderen Actors ist, etwa `followers` oder
 `tweets`, stoppt den Run. Er liest & berechnet nichts. Die Meldung nennt den
@@ -113,7 +114,7 @@ unvollständige Abdeckung in `incompleteTargets`. Filter laufen vor der
 Abrechnung.
 
 Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
-Antwort-Datensatz sieht so aus:
+Antwort-Datensatz sieht so aus.
 
 ```json
 {
@@ -129,7 +130,7 @@ Antwort-Datensatz sieht so aus:
 ## Repost-Prüfung
 
 Füge `repostCheck` zu `engagementTypes` hinzu & liste Accounts in
-`repostCheckUsers`. So erfährst du, ob jeder Account jeden Post repostet hat:
+`repostCheckUsers`. So erfährst du, ob jeder Account jeden Post repostet hat.
 
 ```json
 {
@@ -145,7 +146,7 @@ Die Prüfung liest die neuesten Posts jedes Accounts. Ein Repost, der älter ist
 als diese Posts, erscheint als `false` mit `complete: false`.
 
 Ein Run nur mit `repostCheck`- & `tweet`-Datensätzen behält deine
-Eingabereihenfolge: jeder Post, dann seine Accounts in deiner Reihenfolge.
+Eingabereihenfolge. Auf jeden Post folgen seine Accounts in deiner Reihenfolge.
 
 ## Zeitstempel von Reposts (Retweets)
 

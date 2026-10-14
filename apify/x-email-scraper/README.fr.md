@@ -33,16 +33,16 @@ premier. Un profil sans e-mail n'est pas livré et ne coûte rien. Vous payez
 ## Coordonnées sur chaque ligne
 
 - Le premier e-mail que le profil publie, en minuscules.
-- Le domaine de cet e-mail et le champ du profil qui le contient : bio, nom ou
-  localisation.
+- Le domaine de cet e-mail et le champ du profil qui le contient, soit la bio,
+  le nom ou la localisation.
 - Tous les e-mails du profil, même quand ils sont écrits "name [at] site [dot]
   com".
 - Les numéros de téléphone que le profil publie, comme un lien WhatsApp.
 - Le site web du profil et les liens de sa bio, chacun avec son réseau, comme
   LinkedIn, GitHub ou Telegram.
-- Le profil public complet : nom, bio, compteurs, certification, dates et
+- Le profil public complet, avec nom, bio, compteurs, certification, dates et
   images.
-- 3 sources en 1 run : des comptes, leurs abonnés ou abonnements, et des
+- 3 sources en 1 run, à savoir des comptes, leurs abonnés ou abonnements, et des
   recherches d'utilisateurs.
 - Des filtres par domaine d'e-mail, e-mail professionnel, abonnés, ancienneté du
   compte, bio et localisation.
@@ -68,7 +68,7 @@ aucune étape.
 ## Entrée
 
 `twitterHandles` accepte un compte sous toutes ses formes, que vous pouvez
-mélanger. Le run vérifie chaque compte et livre ceux qui publient un e-mail :
+mélanger. Le run vérifie chaque compte et livre ceux qui publient un e-mail.
 
 ```json
 {
@@ -79,7 +79,7 @@ mélanger. Le run vérifie chaque compte et livre ceux qui publient un e-mail :
 
 `startUrls` et `userIds` acceptent les mêmes formes. Avec `expandFollowers`, le
 run lit les abonnés de chaque compte à la place et garde ceux qui publient un
-e-mail. `expansionRelation` choisit `Followers` ou `Following` :
+e-mail. `expansionRelation` choisit `Followers` ou `Following`.
 
 ```json
 {
@@ -92,7 +92,7 @@ e-mail. `expansionRelation` choisit `Followers` ou `Following` :
 ```
 
 `searchTerms` recherche des utilisateurs X par nom, nom d'utilisateur ou mots de
-la bio. Chaque terme donne 1 recherche :
+la bio. Chaque terme donne 1 recherche.
 
 ```json
 {
@@ -125,22 +125,23 @@ problème n'écrivent pas `run-report` et réduisent l'usage Apify. Activez
 
 Collez l'entrée que vous utilisez déjà. X Email Scraper de Xquik lit ces noms de
 champs d'autres Actors. Chaque ligne nomme leurs champs, puis le champ auquel
-ils correspondent :
+ils correspondent.
 
-- `requireEmail` : aucun champ nécessaire. Chaque profil livré publie un e-mail.
-- `requireWebsite` : `hasWebsite`. Il garde un profil avec n'importe quel lien
-  dans son champ de site web, et le statut du run le dit.
-- `bioKeywords` : `bioContains`. Il suffit que 1 de ses termes corresponde.
-- `locationKeywords` avec 1 valeur : `locationContains`. Avec plus de valeurs,
-  le run s'arrête avant toute lecture ou facturation.
-- `emailDomains` en liste : `emailDomains`
-- `outputEmail`, `resolveShortLinks` : aucun champ nécessaire. Chaque ligne
+- `requireEmail` ne demande aucun champ. Chaque profil livré publie un e-mail.
+- `requireWebsite` correspond à `hasWebsite`. Il garde un profil avec n'importe
+  quel lien dans son champ de site web, et le statut du run le dit.
+- `bioKeywords` correspond à `bioContains`. Il suffit que 1 de ses termes
+  corresponde.
+- `locationKeywords` avec 1 valeur correspond à `locationContains`. Avec plus de
+  valeurs, le run s'arrête avant toute lecture ou facturation.
+- `emailDomains` en liste correspond à `emailDomains`.
+- `outputEmail`, `resolveShortLinks` ne demandent aucun champ. Chaque ligne
   contient ses e-mails et les liens complets de X.
-- `findEmails`, `extractEmails` : aucun champ. Les lignes contiennent les
-  e-mails qu'un profil publie sur X. Le statut du run indique que l'Actor ne lit
-  aucun site lié.
-- `validateEmails` : aucun champ. Le statut du run indique que les e-mails
-  arrivent tels que publiés, car l'Actor ne vérifie aucune boîte mail.
+- `findEmails`, `extractEmails` ne demandent aucun champ. Les lignes contiennent
+  les e-mails qu'un profil publie sur X. Le statut du run indique que l'Actor ne
+  lit aucun site lié.
+- `validateEmails` ne demande aucun champ. Le statut du run indique que les
+  e-mails arrivent tels que publiés, car l'Actor ne vérifie aucune boîte mail.
 
 Si vous réglez l'un de ces noms et son champ canonique, la valeur canonique
 l'emporte. Le log du run nomme le champ écarté.
@@ -148,14 +149,14 @@ l'emporte. Le log du run nomme le champ écarté.
 ## Sortie
 
 Chaque profil qui publie un e-mail donne 1 ligne de dataset. Les coordonnées
-viennent en premier : `email`, `emailDomain`, `emailSource` et `contactInfo`. Le
-profil public complet suit, avec `id`, `username`, `name`, `description`,
-`followers`, `following`, `verified`, `verifiedType`, `createdAt`,
-`profilePicture` et d'autres champs. Les champs absents de la source restent
-absents. X Email Scraper de Xquik n'invente aucune valeur.
+viennent en premier, dans `email`, `emailDomain`, `emailSource` et
+`contactInfo`. Le profil public complet suit, avec `id`, `username`, `name`,
+`description`, `followers`, `following`, `verified`, `verifiedType`,
+`createdAt`, `profilePicture` et d'autres champs. Les champs absents de la
+source restent absents. X Email Scraper de Xquik n'invente aucune valeur.
 
 Les exemples utilisent des valeurs fictives. Les résultats reflètent les données
-en direct. Une ligne ressemble à ceci :
+en direct. Une ligne ressemble à ceci.
 
 ```json
 {
@@ -205,7 +206,7 @@ en direct. Une ligne ressemble à ceci :
 
 ## Ce que signifie l'e-mail
 
-Un e-mail est une adresse que le compte a écrite sur son propre profil : dans sa
+Un e-mail est une adresse que le compte a écrite sur son propre profil, dans sa
 bio, son nom ou sa localisation. L'Actor la renvoie telle que le compte l'a
 publiée et la met en minuscules. Rien ne vérifie que l'adresse reçoit des
 messages, et rien ne lit le site web vers lequel un profil renvoie. `writtenAs`
@@ -366,9 +367,9 @@ Xquik.
 
 ### D'où viennent les e-mails ?
 
-Du profil lui-même : la bio, le nom et la localisation que le compte a écrits.
-L'Actor ne lit aucun post ni aucun site web lié. Chaque e-mail est donc une
-adresse que le compte a publiée sur son propre profil X.
+Ils viennent du profil lui-même, soit la bio, le nom et la localisation que le
+compte a écrits. L'Actor ne lit aucun post ni aucun site web lié. Chaque e-mail
+est donc une adresse que le compte a publiée sur son propre profil X.
 
 ### L'Actor vérifie-t-il qu'un e-mail fonctionne ?
 

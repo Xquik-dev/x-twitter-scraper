@@ -68,10 +68,10 @@ suivez.
 
 ### Les questions auxquelles l'Actor répond
 
-- Format : reportage, commentaire, spéculation, promotion, satire, hors sujet ou
-  incertain
-- Attribution : nommée, liée, directe, absente ou incertaine
-- Pertinence : probabilité que l'événement rapporté concerne vos cibles
+- Le format est reportage, commentaire, spéculation, promotion, satire, hors
+  sujet ou incertain.
+- L'attribution est nommée, liée, directe, absente ou incertaine.
+- La pertinence est la probabilité que l'événement rapporté concerne vos cibles.
 
 Le classement ne vérifie pas les faits. Nommer une source ne la rend pas
 crédible. L'attribution décrit ce que le post présente.
@@ -113,7 +113,7 @@ tarifs de votre plan. L'onglet Pricing l'indique.
 
 ## Exemples d'entrée et de sortie
 
-L'entrée ci-dessus est prête à copier. Voici une ligne de sortie abrégée :
+L'entrée ci-dessus est prête à copier. Voici une ligne de sortie abrégée.
 
 ```json
 {
@@ -156,7 +156,7 @@ les lignes collectées, les analyses facturées et les frais en attente.
 ## Résumé du run et réponses à plat
 
 Un run écrit un enregistrement `analysis-summary` dans son key-value store dans
-4 cas :
+4 cas.
 
 - Il rencontre un problème ou il est volumineux.
 - Il règle `monitor` sans `baselineDatasetId`, comme premier run d'une série.
@@ -200,7 +200,7 @@ JSON à analyser. Les lignes échouées et ignorées portent une table vide.
 Passez `monitor.baselineDatasetId`, l'ID du dataset d'un run antérieur terminé
 avec les mêmes réglages d'analyse. La comparaison lit les lignes de ce run. Elle
 fonctionne même si ce run n'a pas écrit son résumé. Chaque ligne gagne alors un
-objet `monitor`. Son statut peut être :
+objet `monitor`. Son statut prend ces valeurs.
 
 - `first_run` sans référence.
 - `new_to_baseline` pour les posts absents du run antérieur.

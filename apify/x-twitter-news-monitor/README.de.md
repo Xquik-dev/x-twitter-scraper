@@ -65,11 +65,11 @@ Posts über die Organisationen, Personen oder Themen, die du verfolgst.
 
 ### Was der Actor beantwortet
 
-- Format: Berichterstattung, Kommentar, Spekulation, Werbung, Satire, ohne Bezug
-  oder unklar
-- Quellenangabe: Genannt, verlinkt, aus erster Hand, fehlend oder unklar
-- Relevanz: Wahrscheinlichkeit, dass das berichtete Ereignis deine Ziele
-  betrifft
+- Das Format ist Berichterstattung, Kommentar, Spekulation, Werbung, Satire,
+  ohne Bezug oder unklar.
+- Die Quellenangabe ist genannt, verlinkt, aus erster Hand, fehlend oder unklar.
+- Die Relevanz ist die Wahrscheinlichkeit, dass das berichtete Ereignis deine
+  Ziele betrifft.
 
 Die Klassifizierung prüft keine Fakten. Eine genannte Quelle ist nicht
 automatisch glaubwürdig. Die Quellenangabe beschreibt, was der Post darstellt.
@@ -112,7 +112,7 @@ Preisen deines Plans. Der Tab Pricing zeigt sie.
 ## Eingabe- & Ausgabebeispiele
 
 Die Eingabe oben kannst du direkt kopieren. Ein gekürzter Ausgabedatensatz sieht
-so aus:
+so aus.
 
 ```json
 {
@@ -155,7 +155,7 @@ Datensätze, abgerechnete Analysen & ausstehende Gebühren.
 ## Run-Zusammenfassung & flache Antworten
 
 Ein Run schreibt in 4 Fällen einen `analysis-summary`-Datensatz in seinen
-Key-Value-Store:
+Key-Value-Store.
 
 - Er hat ein Problem oder ist groß.
 - Er setzt `monitor` ohne `baselineDatasetId`, als erster Run einer Serie.
@@ -203,7 +203,7 @@ Datensätze enthalten eine leere Zuordnung.
 früheren Runs mit denselben Analyseeinstellungen. Der Vergleich liest die
 Datensätze dieses Runs. Er funktioniert auch, wenn dieser Run seine
 Zusammenfassung übersprungen hat. Jeder Datensatz erhält dann ein
-`monitor`-Objekt. Sein Status kann so lauten:
+`monitor`-Objekt. Sein Status nimmt diese Werte an.
 
 - `first_run` ohne Baseline.
 - `new_to_baseline` für Posts, die der frühere Run nicht hatte.

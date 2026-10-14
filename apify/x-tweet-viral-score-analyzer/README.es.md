@@ -101,7 +101,7 @@ faltante con una suposición.
 
 X publicó sus pesos de clasificación en el repositorio `xai-org/x-algorithm`,
 archivo `home-mixer/params/param.rs`. X Tweet Viral Score Analyzer de Xquik
-aplica 4 de ellos a los conteos públicos de cada post:
+aplica 4 de ellos a los conteos públicos de cada post.
 
 | Conteo    | Peso |
 | --------- | ---- |
@@ -117,7 +117,7 @@ por 1,000. Un post sin conteo de visualizaciones usa los seguidores en su lugar.
 puntajes con la misma base. `viral.weightsVersion` indica los pesos, como
 `x_algorithm_params:2026-09-18`.
 
-La estimación tiene estos límites:
+La estimación tiene estos límites.
 
 - X multiplica cada peso por una probabilidad que predice para un espectador. El
   Actor multiplica por los conteos observados. El resultado es una estimación,
@@ -137,7 +137,7 @@ X Tweet Viral Score Analyzer de Xquik compara cada Viral Score con lo que pasó.
 El logaritmo limita el efecto de un solo post muy grande. La tasa es `null`
 cuando el conteo de seguidores falta o es 0.
 
-El bloque `viral.calibration` del resumen de la ejecución informa estos campos:
+El bloque `viral.calibration` del resumen de la ejecución informa estos campos.
 
 - `comparedPosts` cuenta los posts con un Viral Score y una tasa real.
 - `rankCorrelation` es una correlación de rangos de Spearman de -1 a 1. Muestra
@@ -149,7 +149,7 @@ El bloque `viral.calibration` del resumen de la ejecución informa estos campos:
 `gap` es la tasa real estandarizada menos el Viral Score estandarizado. Un post
 entra en una lista cuando su gap llega a 1 desviación estándar.
 
-La calibración tiene estos límites:
+La calibración tiene estos límites.
 
 - Con menos de 10 posts comparados, la calibración es `null` con el motivo
   `too_few_posts`. Los puntajes o tasas idénticos dan `no_variation`.
@@ -163,7 +163,7 @@ La calibración tiene estos límites:
 ## Informe de cuentas
 
 El bloque `viral.accounts` del resumen de la ejecución informa sobre cada nombre
-de usuario de autor:
+de usuario de autor.
 
 - Cantidad de posts, Viral Score promedio y tasa de interacción real promedio.
 - El mejor y el peor post por Viral Score, con su ID y su URL.
@@ -176,7 +176,7 @@ Los rangos de longitud del texto son `short`, `medium`, `long` y `extended`.
 `extended` cubre los textos más largos. Un post de hilo propio responde a su
 propio autor.
 
-El informe tiene estos límites:
+El informe tiene estos límites.
 
 - El informe enumera los 50 nombres de usuario con más posts puntuados.
 - El informe sigue los primeros 1,000 nombres de usuario de una ejecución.
@@ -193,7 +193,7 @@ de usuario del informe de cuentas. `byViralScore` clasifica por Viral Score
 promedio. `byActualEngagementRate` clasifica por tasa real promedio. Cada lista
 guarda hasta 20 nombres de usuario con `rank`, `posts` y `average`.
 
-La tabla de clasificación tiene estos límites:
+La tabla de clasificación tiene estos límites.
 
 - Un nombre de usuario necesita al menos 3 posts puntuados para entrar.
 - La lista de tasas omite los nombres de usuario sin conteo de seguidores.
@@ -243,7 +243,7 @@ transferencia, según las tarifas de tu plan. La pestaña Pricing lo muestra.
 ## Ejemplos de entrada y salida
 
 La entrada de arriba está lista para copiar. Una fila de salida abreviada se ve
-así:
+así.
 
 ```json
 {
@@ -293,7 +293,7 @@ los cargos pendientes.
 ## Resumen de ejecución y respuestas planas
 
 Una ejecución escribe un registro `analysis-summary` en su almacén de
-clave-valor en 4 casos:
+clave-valor en 4 casos.
 
 - Tiene un problema o es grande.
 - Define `monitor` sin `baselineDatasetId`, como primera ejecución de una serie.
@@ -338,7 +338,7 @@ omitidas traen un mapa vacío.
 Pasa `monitor.baselineDatasetId`, el ID del dataset de una ejecución anterior
 completada con la misma configuración de análisis. La comparación lee las filas
 de esa ejecución. Funciona aunque esa ejecución haya omitido su resumen. Luego,
-cada fila recibe un objeto `monitor`. Su estado puede ser:
+cada fila recibe un objeto `monitor`. Su estado toma estos valores.
 
 - `first_run` sin línea base.
 - `new_to_baseline` para posts que la ejecución anterior no tenía.

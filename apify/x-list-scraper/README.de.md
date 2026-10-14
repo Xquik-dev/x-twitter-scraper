@@ -32,8 +32,8 @@ Plattformnutzung separat. Du brauchst keinen X-API-Schlüssel & keinen Login.
 
 ## Listendaten & Filter
 
-- Listendetails: Name, Beschreibung, Mitglieder- & Follower-Zahl,
-  Erstellungszeit, Banner & das öffentliche Profil des Inhabers.
+- Listendetails mit Name, Beschreibung, Mitglieder- & Follower-Zahl,
+  Erstellungszeit, Banner & dem öffentlichen Profil des Inhabers.
 - Posts der Liste mit Text, Autor, Kennzahlen, Medien & Zeitstempeln.
 - Mitglieder & Follower der Liste.
 - Listensuche per Stichwort. Jeder Datensatz ist 1 Liste mit Inhaber,
@@ -60,7 +60,7 @@ Plattformnutzung separat. Du brauchst keinen X-API-Schlüssel & keinen Login.
 5. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
 
 `startUrls` nimmt jede URL als einfachen String oder als Objekt
-`{ "url": "..." }`:
+`{ "url": "..." }`.
 
 ```json
 {
@@ -82,7 +82,7 @@ Plattformnutzung separat. Du brauchst keinen X-API-Schlüssel & keinen Login.
 }
 ```
 
-Sende Suchbegriffe, um Listen per Stichwort zu finden:
+Sende Suchbegriffe, um Listen per Stichwort zu finden.
 
 ```json
 { "searchTerms": ["space news", "climate science"], "maxItemsPerTarget": 50 }
@@ -102,7 +102,7 @@ stabilen Response-Format von Xquik für Posts oder Profile.
 ### Listen eines Accounts
 
 Trage Nutzernamen in `twitterHandles` oder Profil-URLs in `startUrls` ein, um
-die öffentlichen Listen jedes Accounts zu listen:
+die öffentlichen Listen jedes Accounts zu listen.
 
 ```json
 { "twitterHandles": ["verge"], "accountLists": ["created", "memberships"] }
@@ -124,7 +124,7 @@ gemeinsam haben, ergibt 2 Datensätze, 1 pro Account. Du zahlst für jeden
 Datensatz. `dedupeAcrossTargets` entfernt diese Datensätze nie.
 
 Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
-Datensatz mit Listendetails sieht so aus:
+Datensatz mit Listendetails sieht so aus.
 
 ```json
 {
@@ -140,7 +140,7 @@ Datensatz mit Listendetails sieht so aus:
 }
 ```
 
-Ein Datensatz für ein Listenmitglied sieht so aus:
+Ein Datensatz für ein Listenmitglied sieht so aus.
 
 ```json
 {
@@ -153,7 +153,7 @@ Ein Datensatz für ein Listenmitglied sieht so aus:
 }
 ```
 
-Ein `list`-Datensatz aus einem Suchbegriff sieht so aus:
+Ein `list`-Datensatz aus einem Suchbegriff sieht so aus.
 
 ```json
 {

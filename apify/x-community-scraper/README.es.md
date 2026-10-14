@@ -73,7 +73,7 @@ que X sugiere.
 ### ¿Qué datos puede extraer X Community Scraper?
 
 Las filas de Comunidad usan `resultType: "community"`. Estos son los campos
-principales:
+principales.
 
 | Campo             | Descripción                                              |
 | ----------------- | -------------------------------------------------------- |
@@ -94,7 +94,7 @@ principales:
 | `banner`          | URL, tamaño y colores principales del banner             |
 | `sourceTarget`    | La URL, el ID, la palabra clave o el tema que ingresaste |
 
-Cada recurso agrega filas de su propio tipo:
+Cada recurso agrega filas de su propio tipo.
 
 | `resultType`         | Recurso o entrada             | Una fila por          |
 | -------------------- | ----------------------------- | --------------------- |
@@ -112,7 +112,7 @@ y moderadores incluyen los campos del perfil, como `username`, `followers`,
 
 ## ¿Cómo uso X Community Scraper para extraer datos de Comunidades?
 
-Sigue estos pasos en Apify Console:
+Sigue estos pasos en Apify Console.
 
 1. Abre un [ejemplo de tarea](#ejemplos-de-tareas) o la pestaña Input.
 2. Pega URLs de Comunidades en `startUrls` o IDs en `communityIds`.
@@ -132,7 +132,7 @@ Cada receta de abajo es una entrada completa.
 }
 ```
 
-`startUrls` acepta cada URL como texto simple o como objeto `{ "url": "..." }`:
+`startUrls` acepta cada URL como texto simple o como objeto `{ "url": "..." }`.
 
 ```json
 {
@@ -343,7 +343,7 @@ conserva los campos de origen y no inventa valores. El esquema del dataset da a
 cada campo un título y una descripción.
 
 Los ejemplos usan valores de muestra. Los resultados reflejan datos en vivo. Una
-fila de información de Comunidad se ve así:
+fila de información de Comunidad se ve así.
 
 ```json
 {
@@ -472,20 +472,20 @@ necesitas.
 Xquik también ofrece 53 herramientas en el panel, una API REST, webhooks
 firmados y un servidor MCP.
 
-- [Documentación de la API](https://docs.xquik.com/introduction): guías de la
-  API REST
-- [API de información de Comunidad](https://docs.xquik.com/api-reference/x/community-info):
-  obtén el registro de 1 Comunidad
-- [API de posts de Comunidad](https://docs.xquik.com/api-reference/x/community-tweets):
-  obtén los posts de una Comunidad
-- [API de miembros de Comunidad](https://docs.xquik.com/api-reference/x/community-members):
-  exporta los miembros de una Comunidad
-- [API para encontrar Comunidades](https://docs.xquik.com/api-reference/x/community-find):
-  encuentra Comunidades por palabra clave
-- [Servidor MCP](https://docs.xquik.com/mcp/overview): descubre las herramientas
-  compatibles
-- [Webhooks](https://docs.xquik.com/webhooks/overview): entrega de eventos
-  firmados
+- [Documentación de la API](https://docs.xquik.com/introduction) reúne las guías
+  de la API REST.
+- [API de información de Comunidad](https://docs.xquik.com/api-reference/x/community-info)
+  obtiene el registro de 1 Comunidad.
+- [API de posts de Comunidad](https://docs.xquik.com/api-reference/x/community-tweets)
+  obtiene los posts de una Comunidad.
+- [API de miembros de Comunidad](https://docs.xquik.com/api-reference/x/community-members)
+  exporta los miembros de una Comunidad.
+- [API para encontrar Comunidades](https://docs.xquik.com/api-reference/x/community-find)
+  encuentra Comunidades por palabra clave.
+- [Servidor MCP](https://docs.xquik.com/mcp/overview) muestra las herramientas
+  compatibles.
+- [Webhooks](https://docs.xquik.com/webhooks/overview) entregan eventos
+  firmados.
 
 ## Preguntas frecuentes
 

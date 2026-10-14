@@ -159,7 +159,7 @@ del tuo piano. La scheda Pricing lo mostra.
 ## Esempi di input & output
 
 L'input qui sopra è pronto da copiare. Una riga di output abbreviata ha questo
-aspetto:
+aspetto.
 
 ```json
 {
@@ -199,7 +199,7 @@ analisi addebitate & addebiti in sospeso.
 ## Riepilogo dell'esecuzione & risposte piatte
 
 Un'esecuzione scrive un record `analysis-summary` nel suo key-value store in 4
-casi:
+casi.
 
 - Incontra un problema o è grande.
 - Imposta `monitor` senza `baselineDatasetId`, come prima esecuzione di una

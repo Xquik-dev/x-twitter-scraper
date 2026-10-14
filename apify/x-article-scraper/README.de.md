@@ -52,7 +52,7 @@ Text an.
 4. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
 
 `startUrls` nimmt jede URL als einfachen String oder als Objekt
-`{ "url": "..." }`:
+`{ "url": "..." }`.
 
 ```json
 {
@@ -84,7 +84,7 @@ Probleme nennt seine Zählwerte stattdessen im Run-Status. Aktiviere
 `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 
 Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
-Artikel-Datensatz enthält diese Felder:
+Artikel-Datensatz enthält diese Felder.
 
 ```json
 {

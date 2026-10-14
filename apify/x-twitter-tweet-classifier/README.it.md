@@ -126,7 +126,7 @@ del tuo piano. La scheda Pricing lo mostra.
 ## Esempi di input & output
 
 L'input qui sopra è pronto da copiare. Una riga di output abbreviata ha questo
-aspetto:
+aspetto.
 
 ```json
 {
@@ -168,7 +168,7 @@ analisi addebitate & addebiti in sospeso.
 ## Riepilogo dell'esecuzione & risposte piatte
 
 Un'esecuzione scrive un record `analysis-summary` nel suo key-value store in 4
-casi:
+casi.
 
 - Incontra un problema o è grande.
 - Imposta `monitor` senza `baselineDatasetId`, come prima esecuzione di una
@@ -214,7 +214,7 @@ vuota.
 Passa `monitor.baselineDatasetId`, l'ID del dataset di un'esecuzione precedente
 completata con le stesse impostazioni di analisi. Il confronto legge le righe di
 quell'esecuzione. Funziona anche se quell'esecuzione ha saltato il riepilogo.
-Ogni riga riceve poi un oggetto `monitor`. Il suo stato può essere:
+Ogni riga riceve poi un oggetto `monitor`. Il suo stato assume questi valori.
 
 - `first_run` senza baseline.
 - `new_to_baseline` per i post che l'esecuzione precedente non aveva.

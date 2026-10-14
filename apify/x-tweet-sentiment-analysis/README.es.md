@@ -114,7 +114,7 @@ operador de búsqueda de X en todas las búsquedas de la ejecución, y el regist
 de la ejecución enumera esos operadores al inicio. Usa `Latest` o `Top` en
 `sort`. Conserva los códigos de idioma y los límites de fecha. Los topes se
 aplican a todos los objetivos en conjunto. Esta entrada está lista para
-ejecutar:
+ejecutar.
 
 ```json
 { "searchTerms": ["from:NASA"], "sort": "Latest", "maxItems": 5 }
@@ -122,25 +122,25 @@ ejecutar:
 
 Las demás entradas necesitan conversión antes de la ejecución.
 
-Pon un solo `tweetUrl` dentro de `startUrls`:
+Pon un solo `tweetUrl` dentro de `startUrls`.
 
 ```json
 { "startUrls": ["https://x.com/NASA/status/2105727882588807607"] }
 ```
 
-Pon `text`, `Texts`, cadenas de un dataset o cadenas de un archivo en `texts`:
+Pon `text`, `Texts`, cadenas de un dataset o cadenas de un archivo en `texts`.
 
 ```json
 { "texts": ["Support fixed my issue. Thank you."] }
 ```
 
-Convierte `hashtag` o `cashtag` en cadenas de búsqueda:
+Convierte `hashtag` o `cashtag` en cadenas de búsqueda.
 
 ```json
 { "searchTerms": ["#Artemis lang:en", "$AAPL lang:en"], "maxItems": 5 }
 ```
 
-Reemplaza `minLikes`, `minReplies` y `minRetweets` por estos nombres de campo:
+Reemplaza `minLikes`, `minReplies` y `minRetweets` por estos nombres de campo.
 
 ```json
 { "min_faves": 10, "min_replies": 2, "min_retweets": 3 }
@@ -171,7 +171,7 @@ transferencia, según las tarifas de tu plan. La pestaña Pricing lo muestra.
 ## Ejemplos de entrada y salida
 
 La entrada de arriba está lista para copiar. Una fila de salida abreviada se ve
-así:
+así.
 
 ```json
 {
@@ -210,7 +210,7 @@ los cargos pendientes.
 ## Resumen de ejecución y respuestas planas
 
 Una ejecución escribe un registro `analysis-summary` en su almacén de
-clave-valor en 4 casos:
+clave-valor en 4 casos.
 
 - Tiene un problema o es grande.
 - Define `monitor` sin `baselineDatasetId`, como primera ejecución de una serie.
@@ -251,7 +251,7 @@ un mapa vacío.
 Pasa `monitor.baselineDatasetId`, el ID del dataset de una ejecución anterior
 completada con la misma configuración de análisis. La comparación lee las filas
 de esa ejecución. Funciona aunque esa ejecución haya omitido su resumen. Luego,
-cada fila recibe un objeto `monitor`. Su estado puede ser:
+cada fila recibe un objeto `monitor`. Su estado toma estos valores.
 
 - `first_run` sin línea base.
 - `new_to_baseline` para posts que la ejecución anterior no tenía.
@@ -310,15 +310,15 @@ por qué los IDs únicos difieren de las opiniones independientes.
 [Season finale review texts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-season-finale-reactions)
 
 Separa los elogios de las críticas en tus borradores de reseñas del final de
-temporada. El 2026-10-01 se observaron 3 textos únicos aportados. Tope: 3. Son
-tus propios textos ilustrativos, no una investigación de audiencia.
+temporada. El 2026-10-01 se observaron 3 textos únicos aportados. El tope fue 3.
+Son tus propios textos ilustrativos, no una investigación de audiencia.
 
 #### Conversación sobre el lanzamiento de un teléfono
 
 [September 2026 iPhone launch posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-iphone-launch-posts)
 
 Revisa la conversación sobre el lanzamiento dentro de una ventana fija de fechas
-de septiembre. Se observaron 5 posts únicos el 2026-10-01. Tope: 5. Pueden
+de septiembre. Se observaron 5 posts únicos el 2026-10-01. El tope fue 5. Pueden
 coincidir tanto anuncios como opiniones personales.
 
 #### Reseñas del espectáculo de medio tiempo
@@ -326,23 +326,23 @@ coincidir tanto anuncios como opiniones personales.
 [Halftime show review texts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-super-bowl-halftime-show)
 
 Comprueba los juicios mixtos y el sarcasmo en tus reseñas del medio tiempo. El
-2026-10-01 se observaron 3 textos únicos aportados. Tope: 3. Son tus propias
-reseñas ilustrativas, no reacciones en vivo al espectáculo.
+2026-10-01 se observaron 3 textos únicos aportados. El tope fue 3. Son tus
+propias reseñas ilustrativas, no reacciones en vivo al espectáculo.
 
 #### Experiencias con autos eléctricos
 
 [Electric car experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-toward-new-electric-car)
 
 Encuentra posts sobre manejar o elegir un auto eléctrico. Se observaron 5 posts
-únicos el 2026-10-01. Tope: 5. Las frases personales pueden coincidir con bromas
-o relatos de segunda mano.
+únicos el 2026-10-01. El tope fue 5. Las frases personales pueden coincidir con
+bromas o relatos de segunda mano.
 
 #### Conversación sobre películas
 
 [Marvel movie discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-marvel-movie-audiences)
 
 Revisa la conversación sobre películas antes de seleccionar comentarios del
-público. Se observaron 5 posts únicos el 2026-10-01. Tope: 5. Marvel puede
+público. Se observaron 5 posts únicos el 2026-10-01. El tope fue 5. Marvel puede
 coincidir con usos no relacionados de la palabra.
 
 #### Descripciones del contenido multimedia de una artista
@@ -350,63 +350,63 @@ coincidir con usos no relacionados de la palabra.
 [Taylor Swift media caption tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-taylor-swift-album-reactions)
 
 Revisa la redacción de la artista junto a su contenido multimedia reciente. Se
-observaron 5 posts únicos el 2026-10-01. Tope: 5. Las descripciones no pueden
-detallar todo lo que muestran las imágenes o los videos.
+observaron 5 posts únicos el 2026-10-01. El tope fue 5. Las descripciones no
+pueden detallar todo lo que muestran las imágenes o los videos.
 
 #### Hilo del lanzamiento de un juego
 
 [Game release update thread](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-video-game-launch)
 
 Lee un anuncio junto a respuestas sobre juegos de la competencia. Se observaron
-5 posts únicos el 2026-10-01. Tope: 5. El hilo menciona varios juegos e incluye
-su post inicial.
+5 posts únicos el 2026-10-01. El tope fue 5. El hilo menciona varios juegos e
+incluye su post inicial.
 
 #### Conversación sobre trabajo remoto
 
 [Remote work discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-remote-work)
 
 Compara las actitudes expresadas en la conversación sobre trabajo remoto. Se
-observaron 5 posts únicos el 2026-10-01. Tope: 5. Pueden aparecer ofertas de
-empleo y opiniones repetidas.
+observaron 5 posts únicos el 2026-10-01. El tope fue 5. Pueden aparecer ofertas
+de empleo y opiniones repetidas.
 
 #### Posts sobre aerolíneas
 
 [Airline discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airline-passengers)
 
 Revisa las menciones de aerolíneas antes de elegir opiniones sobre el servicio.
-Se observaron 5 posts únicos el 2026-10-01. Tope: 5. Una mención no prueba que
-el autor sea pasajero.
+Se observaron 5 posts únicos el 2026-10-01. El tope fue 5. Una mención no prueba
+que el autor sea pasajero.
 
 #### Conversación sobre fútbol americano universitario
 
 [College football discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-college-football-fans)
 
 Separa las opiniones de aficionados de la promoción del fútbol americano
-universitario. Se observaron 5 posts únicos el 2026-10-01. Tope: 5. Las previas
-y las promociones pueden coincidir junto a las opiniones de aficionados.
+universitario. Se observaron 5 posts únicos el 2026-10-01. El tope fue 5. Las
+previas y las promociones pueden coincidir junto a las opiniones de aficionados.
 
 #### Conversación sobre tasas de interés
 
 [Interest rate discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-interest-rates)
 
 Revisa las actitudes sobre el mercado y las políticas en torno a las tasas de
-interés. Se observaron 5 posts únicos el 2026-10-01. Tope: 5. El tema principal
-puede ser un político o el mercado.
+interés. Se observaron 5 posts únicos el 2026-10-01. El tope fue 5. El tema
+principal puede ser un político o el mercado.
 
 #### Conversación sobre scooters
 
 [Electric scooter discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-toward-electric-scooters)
 
 Encuentra la conversación sobre scooters antes de elegir opiniones de usuarios.
-Se observaron 5 posts únicos el 2026-10-01. Tope: 5. La publicidad, los estudios
-y las bromas pueden coincidir junto a las experiencias personales.
+Se observaron 5 posts únicos el 2026-10-01. El tope fue 5. La publicidad, los
+estudios y las bromas pueden coincidir junto a las experiencias personales.
 
 #### Experiencias en restaurantes
 
 [New restaurant experiences](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-restaurant-openings)
 
 Revisa la redacción en primera persona sobre restaurantes nuevos. Se observaron
-5 posts únicos el 2026-10-01. Tope: 5. La redacción personal también puede
+5 posts únicos el 2026-10-01. El tope fue 5. La redacción personal también puede
 aparecer en invitaciones o recomendaciones.
 
 #### Tono de la cronología de una Lista pública
@@ -414,31 +414,31 @@ aparecer en invitaciones o recomendaciones.
 [Public list feed tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-ai-coding-assistants)
 
 Revisa el tono de los posts de una Lista pública. Se observaron 5 posts únicos
-el 2026-10-01. Tope: 5. Los miembros pueden hablar de otros temas y hacer repost
-del texto de otra persona.
+el 2026-10-01. El tope fue 5. Los miembros pueden hablar de otros temas y hacer
+repost del texto de otra persona.
 
 #### Respuestas del perfil de un dispositivo
 
 [Google device profile reply tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-smart-home-device-owners)
 
 Revisa la redacción del perfil de un dispositivo, incluidas las respuestas. Se
-observaron 5 posts únicos el 2026-10-01. Tope: 5. La falta de contexto del post
-padre puede limitar lo que significa una respuesta del perfil.
+observaron 5 posts únicos el 2026-10-01. El tope fue 5. La falta de contexto del
+post padre puede limitar lo que significa una respuesta del perfil.
 
 #### Entrenamiento para maratones
 
 [Marathon training discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-marathon-runners)
 
 Encuentra actitudes en novedades de entrenamiento y planes de maratón. Se
-observaron 5 posts únicos el 2026-10-01. Tope: 5. Los planes y la promoción
-pueden aparecer junto a las novedades de corredores.
+observaron 5 posts únicos el 2026-10-01. El tope fue 5. Los planes y la
+promoción pueden aparecer junto a las novedades de corredores.
 
 #### Planificación de viajes
 
 [Personal Tokyo trip posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-tourist-destinations)
 
 Revisa planes personales de viaje e historias de viaje. Se observaron 5 posts
-únicos el 2026-10-01. Tope: 5. Los eventos con Tokyo en el nombre pueden
+únicos el 2026-10-01. El tope fue 5. Los eventos con Tokyo en el nombre pueden
 coincidir sin describir un viaje a Japón.
 
 #### Conversación sobre precios de streaming
@@ -446,8 +446,8 @@ coincidir sin describir un viaje a Japón.
 [Netflix price discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-streaming-price-increases)
 
 Encuentra inquietudes sobre el precio de Netflix antes de revisar motivos de
-cancelación. Se observaron 5 posts únicos el 2026-10-01. Tope: 5. Las frases
-sobre precios seleccionan inquietudes, no una muestra representativa de
+cancelación. Se observaron 5 posts únicos el 2026-10-01. El tope fue 5. Las
+frases sobre precios seleccionan inquietudes, no una muestra representativa de
 espectadores.
 
 #### Compras de útiles escolares
@@ -455,24 +455,24 @@ espectadores.
 [August 2026 school supply posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-back-to-school-shoppers)
 
 Revisa 50 posts sobre útiles escolares dentro de una ventana de agosto. Se
-observaron 50 posts únicos el 2026-10-01. Tope: 50. Los 50 IDs incluyeron 42
-filas claramente relacionadas en nuestra revisión.
+observaron 50 posts únicos el 2026-10-01. El tope fue 50. Los 50 IDs incluyeron
+42 filas claramente relacionadas en nuestra revisión.
 
 #### Retrasos de trenes
 
 [Train delay experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-public-transit)
 
 Encuentra quejas y experiencias con trenes retrasados. Se observaron 5 posts
-únicos el 2026-10-01. Tope: 5. Las frases personales pueden dejar fuera los
-avisos oficiales.
+únicos el 2026-10-01. El tope fue 5. Las frases personales pueden dejar fuera
+los avisos oficiales.
 
 #### Conversación sobre alimento para mascotas
 
 [Pet food experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-pet-food-brands)
 
 Revisa las menciones de alimento para mascotas dentro de una conversación más
-amplia sobre su cuidado. Se observaron 5 posts únicos el 2026-10-01. Tope: 5.
-Las conversaciones sobre cuidado o veterinaria pueden mencionar marcas de
+amplia sobre su cuidado. Se observaron 5 posts únicos el 2026-10-01. El tope
+fue 5. Las conversaciones sobre cuidado o veterinaria pueden mencionar marcas de
 alimento de pasada.
 
 #### Posts seleccionados sobre deportes de fantasía
@@ -480,111 +480,114 @@ alimento de pasada.
 [Fantasy sports post batch](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-fantasy-football-apps)
 
 Analiza un lote seleccionado de posts sobre deportes de fantasía. Se observaron
-2 posts únicos el 2026-10-01. Tope: 2. Las etiquetas se refieren al tema de cada
-post, no automáticamente a una app.
+2 posts únicos el 2026-10-01. El tope fue 2. Las etiquetas se refieren al tema
+de cada post, no automáticamente a una app.
 
 #### Experiencias en cafeterías
 
 [Coffee shop experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-coffee-shop-customers)
 
 Encuentra comentarios sobre cafeterías antes de seleccionar opiniones de
-clientes. Se observaron 5 posts únicos el 2026-10-01. Tope: 5. Las quejas de los
-autores siguen siendo afirmaciones sin verificar.
+clientes. Se observaron 5 posts únicos el 2026-10-01. El tope fue 5. Las quejas
+de los autores siguen siendo afirmaciones sin verificar.
 
 #### Mercado de la vivienda
 
 [Housing market discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-housing-market)
 
 Revisa opiniones y noticias sobre el mercado de la vivienda. Se observaron 5
-posts únicos el 2026-10-01. Tope: 5. Las noticias y las opiniones pueden tratar
-temas distintos del mercado.
+posts únicos el 2026-10-01. El tope fue 5. Las noticias y las opiniones pueden
+tratar temas distintos del mercado.
 
 #### Conversación sobre torneos
 
 [League of Legends tournament posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-esports-tournament-viewers)
 
 Separa la conversación sobre el torneo de la promoción de boletos o partidos. Se
-observaron 5 posts únicos el 2026-10-01. Tope: 5. La publicidad de boletos y las
-crónicas de partidos no son opiniones de espectadores.
+observaron 5 posts únicos el 2026-10-01. El tope fue 5. La publicidad de boletos
+y las crónicas de partidos no son opiniones de espectadores.
 
 #### Posts de un medio de podcasts
 
 [Podcast publisher post tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-podcast-episodes)
 
 Revisa los mensajes propios del medio que publica el podcast. Se observaron 5
-posts únicos el 2026-10-01. Tope: 5. El tono del medio no mide la satisfacción
-de los oyentes.
+posts únicos el 2026-10-01. El tope fue 5. El tono del medio no mide la
+satisfacción de los oyentes.
 
 #### Comparaciones de gimnasios
 
 [Gym comparison review texts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-gym-memberships)
 
 Comprueba la actitud combinada hacia 2 gimnasios en tus reseñas. El 2026-10-01
-se observaron 3 textos únicos aportados. Tope: 3. Ambos objetivos comparten 1
-respuesta de sentimiento por texto.
+se observaron 3 textos únicos aportados. El tope fue 3. Ambos objetivos
+comparten 1 respuesta de sentimiento por texto.
 
 #### Alquiler de autos
 
 [Car rental experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-car-rental-customers)
 
 Encuentra comentarios sobre alquiler de autos antes de revisar inquietudes sobre
-el servicio. Se observaron 5 posts únicos el 2026-10-01. Tope: 5. Las consultas
-y las promociones pueden coincidir junto a los relatos de quienes alquilan.
+el servicio. Se observaron 5 posts únicos el 2026-10-01. El tope fue 5. Las
+consultas y las promociones pueden coincidir junto a los relatos de quienes
+alquilan.
 
 #### Conversación sobre el campus
 
 [University cost and campus posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-university-life)
 
 Revisa la conversación sobre el campus antes de seleccionar posts relacionados
-con costos. Se observaron 5 posts únicos el 2026-10-01. Tope: 5. Las noticias y
-las críticas sobre el campus no prueban experiencias de estudiantes.
+con costos. Se observaron 5 posts únicos el 2026-10-01. El tope fue 5. Las
+noticias y las críticas sobre el campus no prueban experiencias de estudiantes.
 
 #### Planificación de bodas
 
 [Personal wedding planning posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-wedding-planning-posts)
 
 Encuentra redacción en primera persona sobre planes y costos de boda. Se
-observaron 5 posts únicos el 2026-10-01. Tope: 5. Las historias, las bromas y el
-texto incidental pueden coincidir junto a las experiencias de planificación.
+observaron 5 posts únicos el 2026-10-01. El tope fue 5. Las historias, las
+bromas y el texto incidental pueden coincidir junto a las experiencias de
+planificación.
 
 #### Experiencias de carga
 
 [EV charging experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-ev-charging-experiences)
 
 Revisa experiencias de carga dentro de la conversación sobre vehículos
-eléctricos. Se observaron 5 posts únicos el 2026-10-01. Tope: 5. La carga puede
-ser secundaria frente a otra inquietud sobre el vehículo.
+eléctricos. Se observaron 5 posts únicos el 2026-10-01. El tope fue 5. La carga
+puede ser secundaria frente a otra inquietud sobre el vehículo.
 
 #### Conversación sobre declaración de impuestos
 
 [Spring 2026 TurboTax filing posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-tax-filing-software)
 
 Revisa la conversación sobre declaraciones dentro de una ventana fija de fechas
-de primavera. Se observaron 5 posts únicos el 2026-10-01. Tope: 5. Los posts no
-verifican las tarifas ni las normas fiscales vigentes.
+de primavera. Se observaron 5 posts únicos el 2026-10-01. El tope fue 5. Los
+posts no verifican las tarifas ni las normas fiscales vigentes.
 
 #### Visitas a parques temáticos
 
 [Theme park visit discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-theme-park-visitors)
 
 Encuentra menciones de parques temáticos antes de elegir reacciones a visitas.
-Se observaron 5 posts únicos el 2026-10-01. Tope: 5. Las referencias de pasada
-pueden coincidir con posts más largos sobre otro tema.
+Se observaron 5 posts únicos el 2026-10-01. El tope fue 5. Las referencias de
+pasada pueden coincidir con posts más largos sobre otro tema.
 
 #### Gasto en supermercado
 
 [Grocery budget experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-grocery-prices)
 
 Encuentra comentarios en primera persona sobre el gasto en supermercado. Se
-observaron 5 posts únicos el 2026-10-01. Tope: 5. Las conversaciones más amplias
-sobre política, nutrición o creadores pueden mencionar el gasto en supermercado.
+observaron 5 posts únicos el 2026-10-01. El tope fue 5. Las conversaciones más
+amplias sobre política, nutrición o creadores pueden mencionar el gasto en
+supermercado.
 
 #### Conversación sobre cámaras
 
 [Phone camera discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-phone-camera-reviews)
 
 Revisa las menciones de cámaras junto a fotos, reseñas y anuncios. Se observaron
-5 posts únicos el 2026-10-01. Tope: 5. Las menciones de cámaras pueden ser
+5 posts únicos el 2026-10-01. El tope fue 5. Las menciones de cámaras pueden ser
 incidentales en otros anuncios.
 
 #### Post seleccionado sobre zapatillas
@@ -592,23 +595,23 @@ incidentales en otros anuncios.
 [A selected sneaker post](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-sneaker-drop-reactions)
 
 Analiza un post conocido sin una búsqueda amplia por palabra clave. Se observó 1
-post único el 2026-10-01. Tope: 1. Esta descripción seleccionada no detalla todo
-lo que muestra su imagen.
+post único el 2026-10-01. El tope fue 1. Esta descripción seleccionada no
+detalla todo lo que muestra su imagen.
 
 #### Chatbots de soporte
 
 [Support chatbot discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-customer-support-chatbots)
 
 Encuentra la conversación sobre chatbots de soporte antes de seleccionar quejas
-sobre el servicio. Se observaron 5 posts únicos el 2026-10-01. Tope: 5. También
-pueden coincidir bots de apoyo emocional y respuestas de empresas.
+sobre el servicio. Se observaron 5 posts únicos el 2026-10-01. El tope fue 5.
+También pueden coincidir bots de apoyo emocional y respuestas de empresas.
 
 #### Conversación sobre festivales
 
 [April 2026 Coachella discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-music-festival-attendees)
 
 Revisa 50 posts sobre el festival dentro de una ventana de abril. Se observaron
-50 posts únicos el 2026-10-01. Tope: 50. Los 50 IDs incluyeron 47 filas
+50 posts únicos el 2026-10-01. El tope fue 50. Los 50 IDs incluyeron 47 filas
 relacionadas y texto de noticias repetido.
 
 #### Facturas de electricidad
@@ -616,15 +619,15 @@ relacionadas y texto de noticias repetido.
 [Electricity bill discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-electric-bills)
 
 Revisa los costos personales de electricidad junto a la conversación sobre
-políticas. Se observaron 5 posts únicos el 2026-10-01. Tope: 5. Las afirmaciones
-sobre políticas y las predicciones de precios siguen sin verificar.
+políticas. Se observaron 5 posts únicos el 2026-10-01. El tope fue 5. Las
+afirmaciones sobre políticas y las predicciones de precios siguen sin verificar.
 
 #### Cambios de plantel en el básquetbol
 
 [NBA trade and signing discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-nba-trade-reactions)
 
 Encuentra la conversación sobre traspasos y fichajes antes de elegir reacciones
-de aficionados. Se observaron 5 posts únicos el 2026-10-01. Tope: 5. Otras
+de aficionados. Se observaron 5 posts únicos el 2026-10-01. El tope fue 5. Otras
 noticias pueden mencionar jugadores o equipos de pasada.
 
 #### Conversación sobre estadías
@@ -632,15 +635,16 @@ noticias pueden mencionar jugadores o equipos de pasada.
 [Airbnb stay discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-airbnb-stays)
 
 Enfócate en las actitudes hacia Airbnb dentro de la conversación sobre estadías.
-Se observaron 5 posts únicos el 2026-10-01. Tope: 5. La promoción de anfitriones
-y los posts sobre la app pueden aparecer junto a las historias de huéspedes.
+Se observaron 5 posts únicos el 2026-10-01. El tope fue 5. La promoción de
+anfitriones y los posts sobre la app pueden aparecer junto a las historias de
+huéspedes.
 
 #### Reacciones a libros
 
 [Book reading reaction posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-book-club-readers)
 
 Revisa reacciones de lectura sin suponer la pertenencia a un club de lectura. Se
-observaron 5 posts únicos el 2026-10-01. Tope: 5. Pueden coincidir tanto
+observaron 5 posts únicos el 2026-10-01. El tope fue 5. Pueden coincidir tanto
 comparaciones con películas como opiniones personales de lectura.
 
 #### Experiencias con kits de comida
@@ -648,55 +652,55 @@ comparaciones con películas como opiniones personales de lectura.
 [HelloFresh experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-meal-kit-services)
 
 Encuentra comentarios sobre kits de comida antes de revisar experiencias con el
-producto. Se observaron 5 posts únicos el 2026-10-01. Tope: 5. Los planes, la
-publicidad y las historias personales más amplias pueden mencionar la marca.
+producto. Se observaron 5 posts únicos el 2026-10-01. El tope fue 5. Los planes,
+la publicidad y las historias personales más amplias pueden mencionar la marca.
 
 #### Conversación sobre carreras
 
 [Formula 1 race discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-formula-one-race-weekends)
 
 Revisa la conversación sobre la carrera junto a declaraciones de equipos y
-pilotos. Se observaron 5 posts únicos el 2026-10-01. Tope: 5. Las declaraciones
-citadas de pilotos pueden repetirse en distintos IDs.
+pilotos. Se observaron 5 posts únicos el 2026-10-01. El tope fue 5. Las
+declaraciones citadas de pilotos pueden repetirse en distintos IDs.
 
 #### Experiencias con apps de citas
 
 [Dating app experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-dating-app-experiences)
 
 Encuentra experiencias con apps de citas, comentarios sobre matches y bromas. Se
-observaron 5 posts únicos el 2026-10-01. Tope: 5. Los comentarios sobre matches
-y las bromas no verifican identidades de clientes.
+observaron 5 posts únicos el 2026-10-01. El tope fue 5. Los comentarios sobre
+matches y las bromas no verifican identidades de clientes.
 
 #### Posts sobre esperas en aeropuertos
 
 [Airport wait and lounge posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airport-travelers)
 
 Revisa comentarios sobre esperas en aeropuertos junto a avisos de viaje. Se
-observaron 5 posts únicos el 2026-10-01. Tope: 5. Los avisos oficiales pueden
-aparecer junto a las experiencias personales de espera.
+observaron 5 posts únicos el 2026-10-01. El tope fue 5. Los avisos oficiales
+pueden aparecer junto a las experiencias personales de espera.
 
 #### Conversación sobre almuerzos escolares
 
 [School lunch discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-school-lunch-programs)
 
 Revisa posts personales y el debate de políticas sobre almuerzos escolares. Se
-observaron 5 posts únicos el 2026-10-01. Tope: 5. Entre los autores puede haber
-instituciones, no solo padres.
+observaron 5 posts únicos el 2026-10-01. El tope fue 5. Entre los autores puede
+haber instituciones, no solo padres.
 
 #### Cata de cerveza
 
 [Craft beer tasting posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-craft-beer-drinkers)
 
 Encuentra opiniones de catas de cerveza antes de elegir ejemplos de reseñas. Se
-observaron 5 posts únicos el 2026-10-01. Tope: 5. Las descripciones breves con
-enlace pueden no tener contexto suficiente para una actitud clara.
+observaron 5 posts únicos el 2026-10-01. El tope fue 5. Las descripciones breves
+con enlace pueden no tener contexto suficiente para una actitud clara.
 
 #### Citas del anuncio de un acoplamiento
 
 [SpaceX docking announcement quotes](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-space-launches)
 
 Revisa las citas de un anuncio de acoplamiento después de una hora fija. Se
-observaron 5 posts únicos el 2026-10-01. Tope: 5. Las citas pueden ser
+observaron 5 posts únicos el 2026-10-01. El tope fue 5. Las citas pueden ser
 invitaciones o descripciones neutrales, no solo reacciones.
 
 #### Respuestas de cumpleaños
@@ -704,8 +708,8 @@ invitaciones o descripciones neutrales, no solo reacciones.
 [NASA birthday replies](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-replies-to-a-news-post)
 
 Revisa las respuestas directas a un post de cumpleaños. Se observaron 5 posts
-únicos el 2026-10-01. Tope: 5. La falta de contexto del post raíz puede limitar
-lo que significa el análisis de una respuesta.
+únicos el 2026-10-01. El tope fue 5. La falta de contexto del post raíz puede
+limitar lo que significa el análisis de una respuesta.
 
 Mantén `maxItems` pequeño mientras inspeccionas los resultados. Un tope limita
 la salida, no la disponibilidad. Si califican menos posts, revisa el informe de

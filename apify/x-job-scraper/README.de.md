@@ -55,7 +55,7 @@ keinen Login.
 5. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
 
 `startUrls` nimmt jede URL als einfachen String oder als Objekt
-`{ "url": "..." }`:
+`{ "url": "..." }`.
 
 ```json
 {
@@ -68,7 +68,7 @@ keinen Login.
 
 ## Eingabe
 
-Suche per Stichwort mit Filtern:
+Suche per Stichwort mit Filtern.
 
 ```json
 {
@@ -86,7 +86,7 @@ Suche per Stichwort mit Filtern:
 `part_time` & `contract_to_hire`. Jeder Filter behält Jobs, die zu einem der
 gewählten Werte passen.
 
-Lies bekannte Jobs per URL oder ID:
+Lies bekannte Jobs per URL oder ID.
 
 ```json
 {
@@ -99,7 +99,7 @@ Lies bekannte Jobs per URL oder ID:
 Ort fest, etwa New York City statt West New York.
 
 Finde Orts-IDs nach Name. Ein Run mit `locationSearchTerms` listet Orte statt
-Jobs auf:
+Jobs auf.
 
 ```json
 { "locationSearchTerms": ["New York"], "maxItems": 20 }
@@ -119,7 +119,7 @@ Listenfeldern. Datensätze aus Job-URLs enthalten immer die vollständige Anzeig
 Fehlende Quellfelder bleiben weg. X Jobs Scraper von Xquik erfindet keine Werte.
 
 Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
-Job-Datensatz sieht so aus:
+Job-Datensatz sieht so aus.
 
 ```json
 {
@@ -141,7 +141,7 @@ Job-Datensatz sieht so aus:
 }
 ```
 
-Jeder Job-Standort ist 1 Datensatz mit der `id`, die `locationId` annimmt:
+Jeder Job-Standort ist 1 Datensatz mit der `id`, die `locationId` annimmt.
 
 ```json
 {

@@ -77,7 +77,7 @@ posts y cronologías de respuestas de usuarios.
 Los esquemas del dataset y de run-report describen cada campo devuelto. Los
 campos primitivos también traen ejemplos para agentes e integraciones generadas.
 
-Cada fila completa de respuesta puede incluir estos campos principales:
+Cada fila completa de respuesta puede incluir estos campos principales.
 
 | Campo               | Descripción                                                     |
 | ------------------- | --------------------------------------------------------------- |
@@ -103,7 +103,7 @@ Cada fila completa de respuesta puede incluir estos campos principales:
 | `quoted_tweet`      | Post citado, si existe                                          |
 | `retweeted_tweet`   | Post original del repost, si existe                             |
 
-Las filas completas también conservan los metadatos de origen disponibles:
+Las filas completas también conservan los metadatos de origen disponibles.
 
 - Los campos de tipo de post son `type`, `isReply`, `isQuoteStatus`,
   `isNoteTweet`, `isLimitedReply` e `isTranslatable`.
@@ -273,7 +273,7 @@ El esquema del informe documenta la finalización, el cobro, los fallos y los
 cursores guardados. Su campo `version` indica la versión exacta publicada del
 código del Actor.
 
-El campo `status` usa estos valores:
+El campo `status` usa estos valores.
 
 - `no-input`
 - `invalid-input`
@@ -304,29 +304,29 @@ compatibilidad siguen funcionando en entradas JSON, API, SDK, automatizaciones y
 tareas guardadas. Si combinas campos canónicos y alias, se aplica su orden de
 resolución actual.
 
-Estos alias aceptan nombres de campo comunes de otros scrapers:
+Estos alias aceptan nombres de campo comunes de otros scrapers.
 
-- Alias de URL: `urls`, `tweetUrls`, `postUrls`, `profileUrls` y `twitterUrl`
-  como una sola cadena
-- Alias de ID: `conversationIds`, `postIds`, `ids`, `tweetId`, `id`
-- Alias de nombre de usuario: `twitterHandles`, `screenname`
-- Alias de límite global: `maxResults`, `max_results`, `resultsLimit`,
-  `maxReplies`
-- Alias por objetivo: `maxRepliesPerTweet`, `maxCommentsPerPost`,
-  `resultsPerCategory`
-- Alias de búsqueda: `useSearch`
-- Alias de respuestas anidadas: `includeNestedReplies`,
-  `includeRepliesOfReplies`
-- Alias de profundidad: `depth` como `1`, `2` o `3` para `maxDepth`. `full` no
-  pone límite.
-- Alias de alcance: `onlyDirectReplies` para `scope: "direct"`
-- Alias del post original: `includeOriginalTweet`, `includeSourceTweet`. Con
-  `includeSourceTweet`, `resultsPerCategory` limita las respuestas y el post es
-  1 fila más.
-- Alias de autor: `excludeOpSelfReplies` para `excludeOriginalAuthor`
-- Alias de orden: `sortBy` y `queryType` para `sort`. `top`, `newest` y
+- Los alias de URL son `urls`, `tweetUrls`, `postUrls`, `profileUrls` y
+  `twitterUrl` como una sola cadena.
+- Los alias de ID son `conversationIds`, `postIds`, `ids`, `tweetId`, `id`.
+- Los alias de nombre de usuario son `twitterHandles`, `screenname`.
+- Los alias de límite global son `maxResults`, `max_results`, `resultsLimit`,
+  `maxReplies`.
+- Los alias por objetivo son `maxRepliesPerTweet`, `maxCommentsPerPost`,
+  `resultsPerCategory`.
+- El alias de búsqueda es `useSearch`.
+- Los alias de respuestas anidadas son `includeNestedReplies`,
+  `includeRepliesOfReplies`.
+- El alias de profundidad es `depth` como `1`, `2` o `3` para `maxDepth`. `full`
+  no pone límite.
+- El alias de alcance es `onlyDirectReplies` para `scope: "direct"`.
+- Los alias del post original son `includeOriginalTweet`, `includeSourceTweet`.
+  Con `includeSourceTweet`, `resultsPerCategory` limita las respuestas y el post
+  es 1 fila más.
+- El alias de autor es `excludeOpSelfReplies` para `excludeOriginalAuthor`.
+- Los alias de orden son `sortBy` y `queryType` para `sort`. `top`, `newest` y
   `mostLiked` se leen como `relevance`, `latest` y `likes`.
-- Alias de salida: `outputVariant`, `includeRaw`
+- Los alias de salida son `outputVariant`, `includeRaw`.
 
 `category` en `replies` no cambia nada. Una categoría que es tarea de otro
 Actor, como `retweets` o `info`, detiene la ejecución. No lee ni cobra nada. El
@@ -401,7 +401,7 @@ profundidad disponible.
 
 ### Orden
 
-Usa `sort` con estos valores:
+Usa `sort` con estos valores.
 
 - `relevance` conserva el orden de origen de X
 - `latest` ordena de más nuevo a más antiguo
@@ -483,7 +483,7 @@ La salida plana agrega `mediaUrls`.
 
 ### Ejemplo de salida
 
-Una fila de respuesta recortada se ve así:
+Una fila de respuesta recortada se ve así.
 
 ```json
 {
@@ -780,20 +780,20 @@ necesitas.
 Xquik también ofrece 53 herramientas en el panel, una API REST, webhooks
 firmados y un servidor MCP.
 
-- [Documentación de la API](https://docs.xquik.com/introduction): guías de la
-  API REST
-- [API de respuestas a posts](https://docs.xquik.com/api-reference/x/tweet-replies):
-  obtén las respuestas a un post
-- [API de respuestas ocultas](https://docs.xquik.com/api-reference/x/tweet-hidden-replies):
-  obtén las respuestas que ocultó un autor
-- [API de hilos](https://docs.xquik.com/api-reference/x/tweet-thread): obtén un
-  hilo completo
-- [API de respuestas de usuarios](https://docs.xquik.com/api-reference/x/user-replies):
-  obtén las respuestas de un usuario
-- [Servidor MCP](https://docs.xquik.com/mcp/overview): descubre las herramientas
-  compatibles
-- [Webhooks](https://docs.xquik.com/webhooks/overview): entrega firmada de
-  eventos
+- [Documentación de la API](https://docs.xquik.com/introduction) reúne las guías
+  de la API REST.
+- [API de respuestas a posts](https://docs.xquik.com/api-reference/x/tweet-replies)
+  obtiene las respuestas a un post.
+- [API de respuestas ocultas](https://docs.xquik.com/api-reference/x/tweet-hidden-replies)
+  obtiene las respuestas que ocultó un autor.
+- [API de hilos](https://docs.xquik.com/api-reference/x/tweet-thread) obtiene un
+  hilo completo.
+- [API de respuestas de usuarios](https://docs.xquik.com/api-reference/x/user-replies)
+  obtiene las respuestas de un usuario.
+- [Servidor MCP](https://docs.xquik.com/mcp/overview) muestra las herramientas
+  compatibles.
+- [Webhooks](https://docs.xquik.com/webhooks/overview) entregan eventos
+  firmados.
 
 ## Preguntas frecuentes
 

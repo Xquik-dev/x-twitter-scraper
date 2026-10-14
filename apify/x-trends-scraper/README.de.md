@@ -39,7 +39,7 @@ keinen Login.
   2026-10-13.
 - Eine Liste aller Orte, für die X Trends anbietet, mit WOEID, Land & Typ.
 - X-Ortssuche, mit der Orts-ID, die die X-Postsuche annimmt.
-- X-Hashflags: die benutzerdefinierten Emojis, die X nach manchen Hashtags
+- X-Hashflags, also die benutzerdefinierten Emojis, die X nach manchen Hashtags
   zeigt.
 - Rang, Thema, Suchbegriff, Post-Volumen (Tweet-Volumen), Such-URL, WOEID &
   Quellstandort.
@@ -60,7 +60,7 @@ keinen Login.
 
 ## Eingabe
 
-Nutze Standortnamen, numerische WOEIDs oder beides:
+Nutze Standortnamen, numerische WOEIDs oder beides.
 
 ```json
 {
@@ -76,7 +76,7 @@ funktionieren auch. Ein Name, für den X keine Trends anbietet, liefert keine
 Datensätze & kostet nichts. `woeids` nimmt numerische WOEIDs an.
 
 Aktiviere `listLocations`, um jeden Namen & jede WOEID zu sehen. Der Run listet
-dann statt Trends die Orte, für die X Trends anbietet:
+dann statt Trends die Orte, für die X Trends anbietet.
 
 ```json
 { "listLocations": true, "country": "TR", "maxItems": 100 }
@@ -87,7 +87,7 @@ nimmt `country`, `town`, `worldwide` oder `unknown` an. `nameContains` behält
 Orte, deren Name deinen Text enthält. Lass alle 3 leer, um jeden Ort zu listen.
 
 Fülle `placeSearchTerms` aus, um X-Orte nach Namen zu suchen. Der Run liefert
-dann Orte statt Trends:
+dann Orte statt Trends.
 
 ```json
 { "placeSearchTerms": ["New York"], "maxItems": 20 }
@@ -101,7 +101,7 @@ also keine Datensätze & kostet nichts.
 
 `maxItems` begrenzt den gesamten Run & füllt ihn Begriff für Begriff. Der erste
 Begriff kann also alles verbrauchen. Setze `maxItemsPerTarget`, um jedem Begriff
-einen gleichen Anteil zu geben:
+einen gleichen Anteil zu geben.
 
 ```json
 {
@@ -113,7 +113,7 @@ einen gleichen Anteil zu geben:
 
 Aktiviere `listHashflags`, um X-Hashflags zu listen. Ein Hashflag ist das
 benutzerdefinierte Emoji, das X für eine festgelegte Zeit nach einem Hashtag
-zeigt:
+zeigt.
 
 ```json
 { "listHashflags": true, "hashtagContains": "football" }
@@ -179,7 +179,7 @@ Jeder Trend ist 1 Datensatz im Dataset. Datensätze enthalten `name`, `rank`,
 Quellfelder bleiben weg. X Trends Scraper von Xquik erfindet keine Werte.
 
 Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
-Trend-Datensatz sieht so aus:
+Trend-Datensatz sieht so aus.
 
 ```json
 {
@@ -201,7 +201,7 @@ Mit `listLocations` ist jeder Ort 1 Datensatz im Dataset. Datensätze enthalten
 `woeid`, `name`, `country`, `countryCode`, `placeType`, `placeTypeCode`,
 `parentWoeid`, `url` & `resultType`. `url` ist der alte Verweis von X auf den
 Ort & öffnet sich eventuell nicht. Ein Datensatz für einen Trend-Standort sieht
-so aus:
+so aus.
 
 ```json
 {
@@ -220,7 +220,7 @@ Mit `placeSearchTerms` ist jeder Ort 1 Datensatz im Dataset. Datensätze
 enthalten `id`, `name`, `fullName`, `country`, `countryCode`, `placeType`,
 `url`, `centroid`, `boundingBox`, `attributes`, `containedWithin`,
 `sourceTarget` & `resultType`. `centroid` enthält erst den Längengrad, dann den
-Breitengrad. Ein Orts-Datensatz sieht so aus:
+Breitengrad. Ein Orts-Datensatz sieht so aus.
 
 ```json
 {
@@ -238,7 +238,7 @@ Breitengrad. Ein Orts-Datensatz sieht so aus:
 
 Mit `listHashflags` ist jedes Hashflag 1 Datensatz im Dataset. Datensätze
 enthalten `hashtag`, `assetUrl`, `startsAt`, `endsAt`, `isHashfettiEnabled`,
-`animations` & `resultType`. Ein Hashflag-Datensatz sieht so aus:
+`animations` & `resultType`. Ein Hashflag-Datensatz sieht so aus.
 
 ```json
 {

@@ -145,7 +145,7 @@ Les entrées ci-dessous couvrent les cas courants.
 ### Coller des URL de profil ou de Liste
 
 Collez des URL de profil, de Liste ou de Communauté. Chaque URL fixe la relation
-à scraper :
+à scraper.
 
 ```json
 {
@@ -163,7 +163,7 @@ Collez des URL de profil, de Liste ou de Communauté. Chaque URL fixe la relatio
 ### Noms d'utilisateur en masse
 
 `twitterHandles` est un raccourci pour de nombreuses cibles
-`/<handle>/followers`. Les noms d'utilisateur fonctionnent avec ou sans `@` :
+`/<handle>/followers`. Les noms d'utilisateur fonctionnent avec ou sans `@`.
 
 ```json
 {
@@ -196,7 +196,7 @@ La même entrée accepte aussi les alias `username`, `usernames` et `user_names`
 
 ### Runs multi-relations
 
-Réglez `relations` pour lire plusieurs relations des mêmes noms d'utilisateur :
+Réglez `relations` pour lire plusieurs relations des mêmes noms d'utilisateur.
 
 ```json
 {
@@ -233,7 +233,7 @@ les membres par défaut. Les ID de Communauté lisent toujours les membres.
 ### Filtrer avant de payer
 
 Ajoutez des filtres pour que seuls les profils conformes entrent dans votre
-dataset :
+dataset.
 
 ```json
 {
@@ -260,7 +260,7 @@ ignore la casse.
 ### Trouver les audiences communes
 
 Utilisez le mode fusion pour comparer des concurrents, des Listes, des
-Communautés ou des types de relation :
+Communautés ou des types de relation.
 
 ```json
 {
@@ -360,42 +360,42 @@ X Follower Scraper de Xquik a battu 9 autres Actors d'abonnés sur le coût et l
 vitesse. Sa ligne complète médiane avait 38 champs, soit 2,5x la médiane des
 autres.
 
-- `xquik/x-follower-scraper` : 1 000 profils utiles, $0.000155 par profil utile,
-  100,0 par seconde et 38 champs par ligne.
+- `xquik/x-follower-scraper` a livré 1 000 profils utiles à $0.000155 par profil
+  utile, avec 100,0 par seconde et 38 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
-- `xquik/x-follower-scraper` : 1 000 profils utiles, $0.000155 par profil utile,
-  77,9 par seconde et 38 champs par ligne.
+- `xquik/x-follower-scraper` a livré 1 000 profils utiles à $0.000155 par profil
+  utile, avec 77,9 par seconde et 38 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
-- `b2b_leads/X-Real-Time-Data` : 286 profils utiles, $0.000388 par profil utile,
-  3,1 par seconde et 21 champs par ligne.
+- `b2b_leads/X-Real-Time-Data` a livré 286 profils utiles à $0.000388 par profil
+  utile, avec 3,1 par seconde et 21 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
-- `kaitoeasyapi/premium-x-follower-scraper-following-data` : 356 profils utiles,
-  $0.000506 par profil utile, 21,9 par seconde et 50 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
-- `api-ninja/x-twitter-followers-scraper` : 350 profils utiles, $0.000809 par
-  profil utile, 7,0 par seconde et 8 champs par ligne.
+- `kaitoeasyapi/premium-x-follower-scraper-following-data` a livré 356 profils
+  utiles à $0.000506 par profil utile, avec 21,9 par seconde et 50 champs par
+  ligne. [Voir le run](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
+- `api-ninja/x-twitter-followers-scraper` a livré 350 profils utiles à $0.000809
+  par profil utile, avec 7,0 par seconde et 8 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
-- `altimis/scweet` : 332 profils utiles, $0.000922 par profil utile, 1,1 par
-  seconde et 21 champs par ligne.
+- `altimis/scweet` a livré 332 profils utiles à $0.000922 par profil utile, avec
+  1,1 par seconde et 21 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
-- `apidojo/twitter-user-scraper` : 323 profils utiles, $0.001160 par profil
-  utile, 7,3 par seconde et 25 champs par ligne.
+- `apidojo/twitter-user-scraper` a livré 323 profils utiles à $0.001160 par
+  profil utile, avec 7,3 par seconde et 25 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
-- `atomus/twitter-scraper` : 323 profils utiles, $0.001272 par profil utile, 6,2
-  par seconde et 13 champs par ligne.
+- `atomus/twitter-scraper` a livré 323 profils utiles à $0.001272 par profil
+  utile, avec 6,2 par seconde et 13 champs par ligne.
   [Voir le run](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
-- `practicaltools/cheap-simple-twitter-api` : 283 profils utiles, $0.002036 par
-  profil utile, 6,5 par seconde et 4 champs par ligne.
+- `practicaltools/cheap-simple-twitter-api` a livré 283 profils utiles à
+  $0.002036 par profil utile, avec 6,5 par seconde et 4 champs par ligne.
   [Run 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb),
   [Run 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK),
   [Run 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
-- `maximedupre/twitter-scraper` : 320 profils utiles, $0.002192 par profil
-  utile, 2,1 par seconde et 15 champs par ligne.
+- `maximedupre/twitter-scraper` a livré 320 profils utiles à $0.002192 par
+  profil utile, avec 2,1 par seconde et 15 champs par ligne.
   [Run 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs),
   [Run 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39),
   [Run 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
-- `seemuapps/x-followers-following-scraper` : 286 profils utiles, $0.003504 par
-  profil utile, 3,9 par seconde et 9 champs par ligne.
+- `seemuapps/x-followers-following-scraper` a livré 286 profils utiles à
+  $0.003504 par profil utile, avec 3,9 par seconde et 9 champs par ligne.
   [Run 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj),
   [Run 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ),
   [Run 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
@@ -415,7 +415,7 @@ L'onglet Input liste chaque option. Ajoutez au moins 1 champ parmi `startUrls`,
 `twitterHandles`, `userIds`, `listIds` ou `communityIds`. Leurs alias documentés
 comptent aussi. Tous les autres champs sont facultatifs.
 
-Essayez ces entrées :
+Essayez ces entrées.
 
 - Ajoutez le nom d'utilisateur d'un concurrent à `twitterHandles` avec
   `relation: "followers"`.
@@ -430,7 +430,7 @@ Essayez ces entrées :
 
 ### Saisie dans la Console et via l'API
 
-Le formulaire de la Console a ces contrôles :
+Le formulaire de la Console a ces contrôles.
 
 - Le champ Start URLs accepte des chaînes d'URL ou des objets
   `{ "url": "..." }`. Son éditeur JSON garde les 2 formats de l'API.
@@ -457,53 +457,60 @@ champs. Les noms canoniques restent la norme documentée. Un alias ne supprime
 jamais un champ et ne change jamais ce que vous payez.
 
 Chaque ligne nomme les champs que vous utilisez déjà, puis le champ auquel ils
-correspondent :
+correspondent.
 
 - `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`,
-  `screenNames` : `twitterHandles`
-- `username`, `handle`, `screenName`, en une seule chaîne : `twitterHandles`
-- `twitterUserIds`, `user_ids`, `userIdList` : `userIds`
-- `user_id`, `userId`, en une seule chaîne : `userIds`
-- `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls` : `startUrls`
-- `profileUrl`, en une seule chaîne : `startUrls`
-- `getFollowers`, `getFollowing` : `relations`
-- `type` avec `followers` ou `following` : `relation`
-- `relationship`, `relationshipType`, `listType`, `scrape_type` : `relation`
-- `relationships` : `relations`
-- `mode` avec `followers`, `following` ou `both` : `relation` ou `relations`
-- `category` avec `followers`, `following` ou `affiliates` : `relation`
-- `profile_urls` : `startUrls` pour les liens, `twitterHandles` pour les noms
-  d'utilisateur
-- `maxResults`, `max_results`, `resultsLimit`, `count`, `max_items` : `maxItems`
+  `screenNames` correspondent à `twitterHandles`.
+- `username`, `handle`, `screenName` en une seule chaîne correspondent à
+  `twitterHandles`.
+- `twitterUserIds`, `user_ids`, `userIdList` correspondent à `userIds`.
+- `user_id`, `userId` en une seule chaîne correspondent à `userIds`.
+- `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls` correspondent à
+  `startUrls`.
+- `profileUrl` en une seule chaîne correspond à `startUrls`.
+- `getFollowers`, `getFollowing` correspondent à `relations`.
+- `type` avec `followers` ou `following` correspond à `relation`.
+- `relationship`, `relationshipType`, `listType`, `scrape_type` correspondent à
+  `relation`.
+- `relationships` correspond à `relations`.
+- `mode` avec `followers`, `following` ou `both` correspond à `relation` ou
+  `relations`.
+- `category` avec `followers`, `following` ou `affiliates` correspond à
+  `relation`.
+- `profile_urls` correspond à `startUrls` pour les liens et à `twitterHandles`
+  pour les noms d'utilisateur.
+- `maxResults`, `max_results`, `resultsLimit`, `count`, `max_items`
+  correspondent à `maxItems`.
 - `per_profile_limit`, `maxItemsPerUser`, `maxUsersPerAccount`,
-  `max_followers_per_user`, `max_following_per_user`, `follower_limit` :
-  `maxItemsPerTarget`. 0 ne met aucun plafond par compte.
+  `max_followers_per_user`, `max_following_per_user`, `follower_limit`
+  correspondent à `maxItemsPerTarget`. 0 ne met aucun plafond par compte.
   `max_following_per_user` règle aussi `relation` sur `following`.
-- `scrapeAllResults` : aucun plafond par cible
-- `minTweets` : `minStatuses`
-- `includeRawUser` : `includeRaw`
-- `outputVariant` : `outputMode`
-- `requireEmail` : `hasEmail`
-- `requireWebsite` : `hasWebsite`. Il garde un profil avec n'importe quel lien
-  dans son champ de site web, et le statut du run le dit.
-- `onlyVerified`, `blue_verified_only` : `blueVerifiedOnly`. Dans une entrée
-  avec `source_mode`, `blue_verified_only` reste sans effet.
-- `verification` : `any_verified` règle `verifiedOnly`, `blue_verified` règle
-  `blueVerifiedOnly`, `business` et `government` règlent `verifiedType`.
+- `scrapeAllResults` ne met aucun plafond par cible.
+- `minTweets` correspond à `minStatuses`.
+- `includeRawUser` correspond à `includeRaw`.
+- `outputVariant` correspond à `outputMode`.
+- `requireEmail` correspond à `hasEmail`.
+- `requireWebsite` correspond à `hasWebsite`. Il garde un profil avec n'importe
+  quel lien dans son champ de site web, et le statut du run le dit.
+- `onlyVerified`, `blue_verified_only` correspondent à `blueVerifiedOnly`. Dans
+  une entrée avec `source_mode`, `blue_verified_only` reste sans effet.
+- Dans `verification`, `any_verified` règle `verifiedOnly`, `blue_verified`
+  règle `blueVerifiedOnly`, `business` et `government` règlent `verifiedType`.
   `unverified` arrête le run avant toute lecture ou facturation.
-- `bioKeywords` : `bioContains`. Il suffit que 1 de ses termes corresponde.
-- `locationKeywords` avec 1 valeur : `locationContains`. Avec plus de valeurs,
-  le run s'arrête avant toute lecture ou facturation.
-- `emailDomains` en liste : `emailDomains`
-- `outputEmail`, `resolveShortLinks` : aucun champ nécessaire. Chaque ligne
+- `bioKeywords` correspond à `bioContains`. Il suffit que 1 de ses termes
+  corresponde.
+- `locationKeywords` avec 1 valeur correspond à `locationContains`. Avec plus de
+  valeurs, le run s'arrête avant toute lecture ou facturation.
+- `emailDomains` en liste correspond à `emailDomains`.
+- `outputEmail`, `resolveShortLinks` ne demandent aucun champ. Chaque ligne
   contient ses e-mails et les liens complets de X.
-- `findEmails`, `extractEmails` : aucun champ. Les lignes contiennent les
-  e-mails qu'un profil publie sur X. Le statut du run indique que l'Actor ne lit
-  aucun site lié.
-- `validateEmails` : aucun champ. Le statut du run indique que les e-mails
-  arrivent tels que publiés, car l'Actor ne vérifie aucune boîte mail.
+- `findEmails`, `extractEmails` ne demandent aucun champ. Les lignes contiennent
+  les e-mails qu'un profil publie sur X. Le statut du run indique que l'Actor ne
+  lit aucun site lié.
+- `validateEmails` ne demande aucun champ. Le statut du run indique que les
+  e-mails arrivent tels que publiés, car l'Actor ne vérifie aucune boîte mail.
 
-Comportement d'une entrée collée :
+Voici comment se comporte une entrée collée.
 
 - Une liste nommée avec d'autres mots se lit comme le nom que cet Actor lui
   donne. `followings`, `Verified Followers` et `verifiedFollowers` se lisent
@@ -543,7 +550,7 @@ champs primitifs portent aussi des exemples pour les agents et les intégrations
 générées.
 
 Les valeurs ci-dessous sont des exemples. Vos lignes portent les données en
-direct au moment du run. Une ligne compacte ressemble à ceci :
+direct au moment du run. Une ligne compacte ressemble à ceci.
 
 ```json
 {
@@ -571,7 +578,7 @@ direct au moment du run. Une ligne compacte ressemble à ceci :
 }
 ```
 
-Le mode de dédoublonnage fusion ajoute des champs de recoupement :
+Le mode de dédoublonnage fusion ajoute des champs de recoupement.
 
 ```json
 {
@@ -753,18 +760,18 @@ données dont vous avez besoin.
 Xquik propose aussi 47 outils de tableau de bord, une API REST, des webhooks
 signés et un serveur MCP.
 
-- [Documentation de l'API](https://docs.xquik.com/introduction) : guides de
-  l'API REST
-- [Followers API](https://docs.xquik.com/api-reference/x/followers) : obtenez
-  les abonnés disponibles d'un compte
-- [Following API](https://docs.xquik.com/api-reference/x/following) : obtenez
-  les comptes qu'un utilisateur suit
-- [List Members API](https://docs.xquik.com/api-reference/x/list-members) :
-  exportez les membres d'une Liste X publique
-- [Serveur MCP](https://docs.xquik.com/mcp/overview) : découvrez et lancez les
-  opérations JSON ou texte prises en charge
-- [Webhooks](https://docs.xquik.com/webhooks/overview) : recevez les événements
-  de post et de profil pris en charge
+- La [documentation de l'API](https://docs.xquik.com/introduction) réunit les
+  guides de l'API REST.
+- [Followers API](https://docs.xquik.com/api-reference/x/followers) renvoie les
+  abonnés disponibles d'un compte.
+- [Following API](https://docs.xquik.com/api-reference/x/following) renvoie les
+  comptes qu'un utilisateur suit.
+- [List Members API](https://docs.xquik.com/api-reference/x/list-members)
+  exporte les membres d'une Liste X publique.
+- Le [serveur MCP](https://docs.xquik.com/mcp/overview) découvre et lance les
+  opérations JSON ou texte prises en charge.
+- Les [webhooks](https://docs.xquik.com/webhooks/overview) vous envoient les
+  événements de post et de profil pris en charge.
 
 ## FAQ
 

@@ -163,7 +163,7 @@ Preisen deines Plans. Der Tab Pricing zeigt sie.
 ## Eingabe- & Ausgabebeispiele
 
 Die Eingabe oben kannst du direkt kopieren. Ein gekürzter Ausgabedatensatz sieht
-so aus:
+so aus.
 
 ```json
 {
@@ -203,7 +203,7 @@ Datensätze, abgerechnete Analysen & ausstehende Gebühren.
 ## Run-Zusammenfassung & flache Antworten
 
 Ein Run schreibt in 4 Fällen einen `analysis-summary`-Datensatz in seinen
-Key-Value-Store:
+Key-Value-Store.
 
 - Er hat ein Problem oder ist groß.
 - Er setzt `monitor` ohne `baselineDatasetId`, als erster Run einer Serie.

@@ -164,7 +164,7 @@ tarifs de votre plan. L'onglet Pricing l'indique.
 
 ## Exemples d'entrée et de sortie
 
-L'entrée ci-dessus est prête à copier. Voici une ligne de sortie abrégée :
+L'entrée ci-dessus est prête à copier. Voici une ligne de sortie abrégée.
 
 ```json
 {
@@ -193,9 +193,9 @@ L'entrée ci-dessus est prête à copier. Voici une ligne de sortie abrégée :
 
 Chaque résultat contient `tweet`, `analysis` et `monitor`. Les réponses incluent
 les types, les versions de question et les probabilités disponibles.
-`analysis.contextAvailability` signale le contexte manquant : citation, réponse,
-auteur et médias. Une ligne dont l'analyse a échoué ou a été ignorée garde le
-post collecté et une `reason`. Sa liste de réponses est vide.
+`analysis.contextAvailability` signale le contexte manquant de citation, de
+réponse, d'auteur et de médias. Une ligne dont l'analyse a échoué ou a été
+ignorée garde le post collecté et une `reason`. Sa liste de réponses est vide.
 
 Les diagnostics gratuits du key-value store expliquent les entrées invalides,
 les résultats manquants et les collectes interrompues. Le rapport du run sépare
@@ -204,7 +204,7 @@ les lignes collectées, les analyses facturées et les frais en attente.
 ## Résumé du run et réponses à plat
 
 Un run écrit un enregistrement `analysis-summary` dans son key-value store dans
-4 cas :
+4 cas.
 
 - Il rencontre un problème ou il est volumineux.
 - Il règle `monitor` sans `baselineDatasetId`, comme premier run d'une série.

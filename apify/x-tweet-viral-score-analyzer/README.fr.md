@@ -104,7 +104,7 @@ manquant par une supposition.
 
 X a publié ses poids de classement dans le dépôt `xai-org/x-algorithm`, fichier
 `home-mixer/params/param.rs`. X Tweet Viral Score Analyzer de Xquik en applique
-4 aux compteurs publics de chaque post :
+4 aux compteurs publics de chaque post.
 
 | Compteur | Poids |
 | -------- | ----- |
@@ -120,7 +120,7 @@ par 1 000. Un post sans compteur de vues utilise les abonnés à la place.
 seulement des scores qui ont la même base. `viral.weightsVersion` nomme les
 poids, par exemple `x_algorithm_params:2026-09-18`.
 
-L'estimation a ces limites :
+L'estimation a ces limites.
 
 - X multiplie chaque poids par une probabilité qu'il prédit pour un lecteur.
   L'Actor multiplie par les compteurs observés. Le résultat est une estimation,
@@ -140,7 +140,7 @@ s'est passé. `viral.actualEngagementRate` vaut
 seul post très populaire. Le taux vaut `null` quand le nombre d'abonnés manque
 ou vaut 0.
 
-Le bloc `viral.calibration` du résumé du run donne ces champs :
+Le bloc `viral.calibration` du résumé du run donne ces champs.
 
 - `comparedPosts` compte les posts qui ont un Viral Score et un taux réel.
 - `rankCorrelation` est une corrélation de rang de Spearman, de -1 à 1. Elle
@@ -152,7 +152,7 @@ Le bloc `viral.calibration` du résumé du run donne ces champs :
 `gap` est le taux réel standardisé moins le Viral Score standardisé. Un post
 entre dans une liste quand son écart atteint 1 écart type.
 
-La calibration a ces limites :
+La calibration a ces limites.
 
 - Moins de 10 posts comparés donnent une calibration `null` avec la raison
   `too_few_posts`. Des scores ou des taux identiques donnent `no_variation`.
@@ -166,7 +166,7 @@ La calibration a ces limites :
 ## Rapport par compte
 
 Le bloc `viral.accounts` du résumé du run décrit chaque nom d'utilisateur
-d'auteur :
+d'auteur.
 
 - Le nombre de posts, le Viral Score moyen et le taux d'engagement réel moyen.
 - Le meilleur et le pire post selon le Viral Score, avec l'ID du post et l'URL.
@@ -178,7 +178,7 @@ Les tranches de longueur sont `short`, `medium`, `long` et `extended`. `short`
 s'arrête à 80 caractères, `medium` à 200 et `long` à 280. `extended` couvre les
 textes plus longs. Un post en auto-réponse répond à son propre auteur.
 
-Le rapport a ces limites :
+Le rapport a ces limites.
 
 - Le rapport liste les 50 noms d'utilisateur qui ont le plus de posts notés.
 - Le rapport suit les 1 000 premiers noms d'utilisateur d'un run.
@@ -195,7 +195,7 @@ rapport par compte. `byViralScore` classe par Viral Score moyen.
 `byActualEngagementRate` classe par taux réel moyen. Chaque liste contient
 jusqu'à 20 noms d'utilisateur avec `rank`, `posts` et `average`.
 
-Le classement a ces limites :
+Le classement a ces limites.
 
 - Un nom d'utilisateur a besoin d'au moins 3 posts notés pour être classé.
 - La liste des taux ignore les noms d'utilisateur sans nombre d'abonnés.
@@ -244,7 +244,7 @@ tarifs de votre plan. L'onglet Pricing l'indique.
 
 ## Exemples d'entrée et de sortie
 
-L'entrée ci-dessus est prête à copier. Voici une ligne de sortie abrégée :
+L'entrée ci-dessus est prête à copier. Voici une ligne de sortie abrégée.
 
 ```json
 {
@@ -293,7 +293,7 @@ les lignes collectées, les analyses facturées et les frais en attente.
 ## Résumé du run et réponses à plat
 
 Un run écrit un enregistrement `analysis-summary` dans son key-value store dans
-4 cas :
+4 cas.
 
 - Il rencontre un problème ou il est volumineux.
 - Il règle `monitor` sans `baselineDatasetId`, comme premier run d'une série.
@@ -339,7 +339,7 @@ portent une table vide.
 Passez `monitor.baselineDatasetId`, l'ID du dataset d'un run antérieur terminé
 avec les mêmes réglages d'analyse. La comparaison lit les lignes de ce run. Elle
 fonctionne même si ce run n'a pas écrit son résumé. Chaque ligne gagne alors un
-objet `monitor`. Son statut peut être :
+objet `monitor`. Son statut prend ces valeurs.
 
 - `first_run` sans référence.
 - `new_to_baseline` pour les posts absents du run antérieur.

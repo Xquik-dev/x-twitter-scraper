@@ -48,7 +48,7 @@ API X ni de connexion.
 5. Téléchargez le dataset en JSON, CSV ou Excel, ou passez par l'API Apify.
 
 `startUrls` et `profileUrls` acceptent chaque URL comme simple chaîne ou comme
-objet `{ "url": "..." }` :
+objet `{ "url": "..." }`.
 
 ```json
 { "profileUrls": ["https://x.com/nasa", { "url": "https://x.com/OpenAI" }] }
@@ -89,7 +89,7 @@ lignes stockées ajoutent `storedMediaUrl` et `downloadStatus: "stored"`.
 **Stored Media Files** ouvre les enregistrements stockés.
 
 Les exemples utilisent des valeurs fictives. Les résultats reflètent les données
-en direct. Une ligne de photo ressemble à ceci :
+en direct. Une ligne de photo ressemble à ceci.
 
 ```json
 {
@@ -102,7 +102,7 @@ en direct. Une ligne de photo ressemble à ceci :
 ```
 
 Une ligne de sous-titres a `resultType: "subtitles"` et ses pistes de
-sous-titres dans `tracks` :
+sous-titres dans `tracks`.
 
 ```json
 {

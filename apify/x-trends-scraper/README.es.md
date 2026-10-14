@@ -41,7 +41,7 @@ de API de X ni iniciar sesión.
   tipo.
 - Búsqueda de lugares de X, con el ID de lugar que acepta la búsqueda de posts
   de X.
-- Hashflags de X: el emoji personalizado que X muestra después de algunos
+- Hashflags de X, el emoji personalizado que X muestra después de algunos
   hashtags.
 - Posición, tema, consulta, volumen de posts, URL de búsqueda, WOEID y ubicación
   de origen.
@@ -63,7 +63,7 @@ de API de X ni iniciar sesión.
 
 ## Entrada
 
-Usa nombres de ubicación, WOEIDs numéricos o ambos:
+Usa nombres de ubicación, WOEIDs numéricos o ambos.
 
 ```json
 {
@@ -79,7 +79,7 @@ también funcionan. Un nombre para el que X no ofrece tendencias no devuelve
 filas y no cuesta nada. `woeids` acepta WOEIDs numéricos.
 
 Para ver todos los nombres y WOEIDs, activa `listLocations`. La ejecución
-enumera entonces los lugares donde X ofrece tendencias, en lugar de tendencias:
+enumera entonces los lugares donde X ofrece tendencias, en lugar de tendencias.
 
 ```json
 { "listLocations": true, "country": "TR", "maxItems": 100 }
@@ -91,7 +91,7 @@ cuyo nombre contiene tu texto. Deja los 3 vacíos para enumerar todos los
 lugares.
 
 Para buscar lugares de X por nombre, completa `placeSearchTerms`. La ejecución
-devuelve entonces lugares en lugar de tendencias:
+devuelve entonces lugares en lugar de tendencias.
 
 ```json
 { "placeSearchTerms": ["New York"], "maxItems": 20 }
@@ -105,7 +105,7 @@ Delhi no devuelve filas y no cuesta nada.
 
 `maxItems` limita toda la ejecución y se llena término por término, así que el
 primer término puede usarlo todo. Define `maxItemsPerTarget` para dar a cada
-término una parte igual:
+término una parte igual.
 
 ```json
 {
@@ -117,7 +117,7 @@ término una parte igual:
 
 Para enumerar los hashflags de X, activa `listHashflags`. Un hashflag es el
 emoji personalizado que X muestra después de un hashtag durante un tiempo
-definido:
+definido.
 
 ```json
 { "listHashflags": true, "hashtagContains": "football" }
@@ -182,7 +182,7 @@ Cada tendencia es 1 fila del dataset. Las filas traen `name`, `rank`,
 el origen quedan ausentes. X Trends Scraper de Xquik no inventa valores.
 
 Los ejemplos usan valores de muestra. Los resultados reflejan datos en vivo. Una
-fila de tendencia se ve así:
+fila de tendencia se ve así.
 
 ```json
 {
@@ -202,7 +202,7 @@ momento que pediste. Xquik no estima ninguno de los 2.
 Con `listLocations`, cada lugar es 1 fila del dataset. Las filas traen `woeid`,
 `name`, `country`, `countryCode`, `placeType`, `placeTypeCode`, `parentWoeid`,
 `url` y `resultType`. `url` es la referencia antigua de X para el lugar y puede
-no abrirse. Una fila de ubicación de tendencias se ve así:
+no abrirse. Una fila de ubicación de tendencias se ve así.
 
 ```json
 {
@@ -220,7 +220,7 @@ no abrirse. Una fila de ubicación de tendencias se ve así:
 Con `placeSearchTerms`, cada lugar es 1 fila del dataset. Las filas traen `id`,
 `name`, `fullName`, `country`, `countryCode`, `placeType`, `url`, `centroid`,
 `boundingBox`, `attributes`, `containedWithin`, `sourceTarget` y `resultType`.
-`centroid` guarda la longitud y, luego, la latitud. Una fila de lugar se ve así:
+`centroid` guarda la longitud y, luego, la latitud. Una fila de lugar se ve así.
 
 ```json
 {
@@ -238,7 +238,7 @@ Con `placeSearchTerms`, cada lugar es 1 fila del dataset. Las filas traen `id`,
 
 Con `listHashflags`, cada hashflag es 1 fila del dataset. Las filas traen
 `hashtag`, `assetUrl`, `startsAt`, `endsAt`, `isHashfettiEnabled`, `animations`
-y `resultType`. Una fila de hashflag se ve así:
+y `resultType`. Una fila de hashflag se ve así.
 
 ```json
 {

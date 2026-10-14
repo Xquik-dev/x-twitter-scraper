@@ -32,8 +32,8 @@ entregado**, y Apify factura aparte el uso de la plataforma.
 
 - Filtros de audiencia, posts, antigüedad, verificación, sitio web, ubicación,
   biografía y nombre de usuario.
-- Modo Search Autocomplete: las cuentas, los temas, los hashtags y los cashtags
-  que X sugiere para cada término de búsqueda.
+- Modo Search Autocomplete, con las cuentas, los temas, los hashtags y los
+  cashtags que X sugiere para cada término de búsqueda.
 - Reanuda 1 consulta desde un cursor guardado en `startCursor`.
 - Las migraciones conservan el trabajo ya aceptado.
 - Filtros y eliminación de duplicados antes de facturar.
@@ -63,23 +63,24 @@ Apify. Activa `alwaysSaveRunRecords` para escribirlo en todas las ejecuciones.
 
 Pega la entrada que ya usas. X User Search Scraper de Xquik lee estos nombres de
 campo de otros Actores. Cada línea nombra sus campos y, luego, el campo al que
-se asignan:
+se asignan.
 
-- `requireEmail`, `requireWebsite`: `hasEmail`, `hasWebsite`
-- `verification`: `any_verified` define `verifiedOnly`, `blue_verified` define
-  `blueVerifiedOnly`, `business` y `government` definen `verifiedType`.
+- `requireEmail`, `requireWebsite` se asignan a `hasEmail`, `hasWebsite`.
+- En `verification`, `any_verified` define `verifiedOnly`, `blue_verified`
+  define `blueVerifiedOnly`, `business` y `government` definen `verifiedType`.
   `unverified` detiene la ejecución antes de leer o cobrar.
-- `bioKeywords`: `bioContains`. Basta con que coincida 1 de sus términos.
-- `locationKeywords` con 1 valor: `locationContains`. Con más valores, la
-  ejecución se detiene antes de leer o cobrar.
-- `emailDomains` como lista: `emailDomains`
-- `outputEmail`, `resolveShortLinks`: no necesitan campo. Cada fila incluye sus
+- `bioKeywords` se asigna a `bioContains`. Basta con que coincida 1 de sus
+  términos.
+- `locationKeywords` con 1 valor se asigna a `locationContains`. Con más
+  valores, la ejecución se detiene antes de leer o cobrar.
+- `emailDomains` como lista se asigna a `emailDomains`.
+- `outputEmail`, `resolveShortLinks` no necesitan campo. Cada fila incluye sus
   correos y los enlaces completos de X.
-- `findEmails`, `extractEmails`: sin campo. Las filas incluyen los correos que
-  un perfil publica en X. El estado de la ejecución indica que el Actor no lee
-  ningún sitio enlazado.
-- `validateEmails`: sin campo. El estado de la ejecución indica que los correos
-  llegan tal como se publican, porque el Actor no verifica ningún buzón.
+- `findEmails`, `extractEmails` no necesitan campo. Las filas incluyen los
+  correos que un perfil publica en X. El estado de la ejecución indica que el
+  Actor no lee ningún sitio enlazado.
+- `validateEmails` no necesita campo. El estado de la ejecución indica que los
+  correos llegan tal como se publican, porque el Actor no verifica ningún buzón.
 
 Si defines uno de estos nombres y su campo canónico, gana el valor canónico. El
 registro de la ejecución nombra el campo que perdió.
@@ -106,7 +107,7 @@ sugeridos.
 - Una fila de cashtag trae `price`, `marketCap` y `dailyChangePercent`.
 - Los filtros de perfil solo se aplican a Profile Search.
 
-Una fila de sugerencia se ve así:
+Una fila de sugerencia se ve así.
 
 ```json
 {
@@ -124,7 +125,7 @@ Una fila de sugerencia se ve así:
 Cada fila contiene un perfil y, en `sourceTarget`, la consulta que lo encontró.
 
 Los ejemplos usan valores de muestra. Los resultados reflejan datos en vivo. Una
-fila de perfil se ve así:
+fila de perfil se ve así.
 
 ```json
 {

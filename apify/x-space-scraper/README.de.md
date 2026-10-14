@@ -40,8 +40,8 @@ Space oder Broadcast**, & Apify berechnet die Plattformnutzung separat.
 - Posts, die Hosts & Sprecher im Space geteilt haben, mit Absender & Zeitpunkt.
 - Die Aufzeichnung eines beendeten Space als HLS-Playlist-URL, mit
   `includeReplay`.
-- Broadcasts per URL oder ID: Titel, Status, Zeiten, Zuschauerzahlen & Host.
-- Duplikatentfernung vor der Abrechnung: Ein Space, den 2 Suchbegriffe finden,
+- Broadcasts per URL oder ID, mit Titel, Status, Zeiten, Zuschauerzahlen & Host.
+- Duplikatentfernung vor der Abrechnung. Ein Space, den 2 Suchbegriffe finden,
   ist 1 Datensatz.
 
 ## So findest du X Spaces
@@ -56,7 +56,7 @@ Space oder Broadcast**, & Apify berechnet die Plattformnutzung separat.
 6. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
 
 `startUrls` nimmt jede URL als einfachen String oder als Objekt
-`{ "url": "..." }`:
+`{ "url": "..." }`.
 
 ```json
 {
@@ -78,7 +78,7 @@ Space oder Broadcast**, & Apify berechnet die Plattformnutzung separat.
 ```
 
 Ein Suchbegriff findet die Spaces, die passende Posts teilen. Er akzeptiert die
-Operatoren der X-Suche:
+Operatoren der X-Suche.
 
 | Ziel                                      | Suchbegriff        |
 | ----------------------------------------- | ------------------ |
@@ -88,10 +88,10 @@ Operatoren der X-Suche:
 | Spaces in 1 Sprache                       | `startups lang:es` |
 | Spaces, die Posts mit vielen Likes teilen | `nba min_faves:50` |
 
-`queryType` legt fest, welche Posts vorne stehen: `Latest` für die neuesten,
-`Top` für die mit dem meisten Engagement.
+`queryType` legt fest, welche Posts vorne stehen. `Latest` zeigt die neuesten
+zuerst & `Top` die mit dem meisten Engagement.
 
-Lies Spaces, die du schon kennst, per URL oder ID:
+Lies Spaces, die du schon kennst, per URL oder ID.
 
 ```json
 {
@@ -101,7 +101,7 @@ Lies Spaces, die du schon kennst, per URL oder ID:
 ```
 
 Aktiviere `includeReplay`, um die Aufzeichnung jedes beendeten Space zu
-erhalten:
+erhalten.
 
 ```json
 { "spaceIds": ["1OGwblLjnQMKB"], "includeReplay": true }
@@ -112,7 +112,7 @@ Der Datensatz enthält dann `replay` mit `url`, einer HLS-Playlist, sowie
 ist, hat kein `replay`. Die Aufzeichnung kostet nichts extra.
 
 Lies Broadcasts, die Live-Videos, die X unter `x.com/i/broadcasts` hostet, per
-URL oder ID:
+URL oder ID.
 
 ```json
 {
@@ -130,7 +130,7 @@ Jeder Datensatz enthält 1 Space oder Broadcast & dessen Suchbegriff, URL oder I
 in `sourceTarget`. `resultType` ist `space` oder `broadcast`.
 
 Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
-Space-Datensatz sieht so aus:
+Space-Datensatz sieht so aus.
 
 ```json
 {
@@ -159,7 +159,7 @@ Space-Datensatz sieht so aus:
 }
 ```
 
-`state` enthält 1 von 5 Werten, so wie X sie nennt:
+`state` enthält 1 von 5 Werten, so wie X sie nennt.
 
 | `state`      | Der Space                                          |
 | ------------ | -------------------------------------------------- |
@@ -173,7 +173,7 @@ Spaces mit `Ended` & `TimedOut` enthalten `endedAt`, & beide können eine
 Aufzeichnung behalten. X zeigt einen Space für Abonnenten oder eine Community
 nur dessen Publikum, deshalb liefern diese Spaces keinen Datensatz.
 
-Ein Broadcast-Datensatz hat `resultType: "broadcast"` & sieht so aus:
+Ein Broadcast-Datensatz hat `resultType: "broadcast"` & sieht so aus.
 
 ```json
 {

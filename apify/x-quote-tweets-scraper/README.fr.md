@@ -34,7 +34,7 @@ livrée**, et Apify facture l'usage de la plateforme à part.
 
 - Le texte complet, le lien, la langue et l'heure de publication de la citation.
 - Les J'aime, réponses, reposts, citations, vues et signets.
-- Le profil public complet de l'auteur : nom, bio, abonnés, certification et
+- Le profil public complet de l'auteur, avec nom, bio, abonnés, certification et
   plus encore.
 - Les photos, vidéos et GIF avec leurs liens.
 - Les hashtags, mentions et liens présents dans le texte.
@@ -44,8 +44,8 @@ livrée**, et Apify facture l'usage de la plateforme à part.
   livraison.
 - De nombreux posts en 1 run, chacun lu jusqu'au bout de ce que X fournit.
 - Les plus récentes d'abord, ou les citations que X classe le plus haut.
-- 11 filtres : langue, dates, type de média, 6 compteurs minimaux et auteurs
-  certifiés.
+- 11 filtres pour la langue, les dates, le type de média, 6 compteurs minimaux
+  et les auteurs certifiés.
 - 1 ligne par auteur quand vous voulez des personnes, pas des posts.
 - Des URL de post x.com et twitter.com, ou des ID de post numériques.
 - La suppression des doublons avant la facturation.
@@ -66,7 +66,7 @@ aucune étape. Vous ne transmettez aucun curseur de page d'un run à l'autre.
 
 `startUrls` accepte chaque URL de post comme simple chaîne ou comme objet
 `{ "url": "..." }`. `tweetIds` accepte des ID de post, et une URL de post y
-fonctionne aussi :
+fonctionne aussi.
 
 ```json
 {
@@ -79,7 +79,7 @@ fonctionne aussi :
 }
 ```
 
-L'ordre, les filtres et les plafonds se placent à côté des posts :
+L'ordre, les filtres et les plafonds se placent à côté des posts.
 
 ```json
 {
@@ -120,7 +120,7 @@ Chaque citation donne 1 ligne de dataset avec `id`, `url`, `text`, `createdAt`,
 Scraper de Xquik n'invente aucune valeur.
 
 Les exemples utilisent des valeurs fictives. Les résultats reflètent les données
-en direct. Une ligne ressemble à ceci :
+en direct. Une ligne ressemble à ceci.
 
 ```json
 {
@@ -162,7 +162,7 @@ les champs de profil de l'auteur en colonnes.
 ## Ce que X fournit
 
 2 limites viennent de X, et X Quote Tweets Scraper de Xquik les énonce
-clairement :
+clairement.
 
 - La recherche de X décide jusqu'où remontent les citations d'un très gros post.
   Un run lit toutes les citations que X fournit et s'arrête là.

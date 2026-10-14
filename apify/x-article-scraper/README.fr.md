@@ -51,7 +51,7 @@ affiche le Markdown sous forme de texte.
 4. Téléchargez le dataset en JSON, CSV ou Excel, ou passez par l'API Apify.
 
 `startUrls` accepte chaque URL comme simple chaîne ou comme objet
-`{ "url": "..." }` :
+`{ "url": "..." }`.
 
 ```json
 {
@@ -83,7 +83,7 @@ plutôt ses compteurs dans son statut. Activez `alwaysSaveRunRecords` pour
 l'écrire à chaque run.
 
 Les exemples utilisent des valeurs fictives. Les résultats reflètent les données
-en direct. Une ligne d'Article contient ces champs :
+en direct. Une ligne d'Article contient ces champs.
 
 ```json
 {

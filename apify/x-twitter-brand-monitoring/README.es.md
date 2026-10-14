@@ -122,9 +122,9 @@ de origen editados. No prueban que los hechos hayan cambiado, y un post ausente
 no prueba que se haya eliminado.
 
 El límite de la línea base, `maxBaselineRows`, es 100,000 filas de forma
-predeterminada. Estos casos detienen la comparación antes de la recopilación:
-IDs de posts duplicados, fallos de carga y datasets que cambian de tamaño. Nunca
-se convierten en una línea base vacía.
+predeterminada. Los IDs de posts duplicados, los fallos de carga y los datasets
+que cambian de tamaño detienen la comparación antes de la recopilación. Nunca se
+convierten en una línea base vacía.
 
 ## Analiza tu propio texto
 
@@ -165,7 +165,7 @@ transferencia, según las tarifas de tu plan. La pestaña Pricing lo muestra.
 ## Ejemplos de entrada y salida
 
 La entrada de arriba está lista para copiar. Una fila de salida abreviada se ve
-así:
+así.
 
 ```json
 {
@@ -206,7 +206,7 @@ los cargos pendientes.
 ## Resumen de ejecución y respuestas planas
 
 Una ejecución escribe un registro `analysis-summary` en su almacén de
-clave-valor en 4 casos:
+clave-valor en 4 casos.
 
 - Tiene un problema o es grande.
 - Define `monitor` sin `baselineDatasetId`, como primera ejecución de una serie.

@@ -31,8 +31,8 @@ Non ti servono una chiave API X né il login.
 
 ## Dati & filtri delle liste
 
-- Dettagli della lista: nome, descrizione, numero di membri & di follower, data
-  di creazione, banner & profilo pubblico del proprietario.
+- Dettagli della lista, con nome, descrizione, numero di membri & di follower,
+  data di creazione, banner & profilo pubblico del proprietario.
 - Post delle liste con testo, autore, metriche, media & timestamp.
 - Membri & follower delle liste.
 - Ricerca di liste per parola chiave. Ogni riga è 1 lista con proprietario,
@@ -57,7 +57,7 @@ Non ti servono una chiave API X né il login.
 5. Scarica il dataset in JSON, CSV o Excel, oppure usa l'API di Apify.
 
 `startUrls` accetta ogni URL come stringa semplice o come oggetto
-`{ "url": "..." }`:
+`{ "url": "..." }`.
 
 ```json
 {
@@ -79,7 +79,7 @@ Non ti servono una chiave API X né il login.
 }
 ```
 
-Per trovare liste per parola chiave, invia termini di ricerca:
+Per trovare liste per parola chiave, invia termini di ricerca.
 
 ```json
 { "searchTerms": ["space news", "climate science"], "maxItemsPerTarget": 50 }
@@ -99,7 +99,7 @@ Xquik per post o profili.
 ### Le liste di un account
 
 Aggiungi nomi utente a `twitterHandles`, o URL di profili a `startUrls`, per
-elencare le liste pubbliche di ogni account:
+elencare le liste pubbliche di ogni account.
 
 ```json
 { "twitterHandles": ["verge"], "accountLists": ["created", "memberships"] }
@@ -121,7 +121,7 @@ righe, 1 sotto ciascuno. Paghi ogni riga. `dedupeAcrossTargets` non rimuove mai
 queste righe.
 
 Gli esempi usano valori fittizi. I risultati contengono dati live. Una riga con
-i dettagli di una lista ha questo aspetto:
+i dettagli di una lista ha questo aspetto.
 
 ```json
 {
@@ -137,7 +137,7 @@ i dettagli di una lista ha questo aspetto:
 }
 ```
 
-Una riga di membro della lista ha questo aspetto:
+Una riga di membro della lista ha questo aspetto.
 
 ```json
 {
@@ -150,7 +150,7 @@ Una riga di membro della lista ha questo aspetto:
 }
 ```
 
-Una riga `list` da un termine di ricerca ha questo aspetto:
+Una riga `list` da un termine di ricerca ha questo aspetto.
 
 ```json
 {

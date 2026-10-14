@@ -44,10 +44,10 @@ plateforme à part.
   qui a partagé chacun et quand.
 - L'enregistrement d'un Space terminé, sous forme d'URL de playlist HLS, avec
   `includeReplay`.
-- Les diffusions par URL ou par ID : titre, état, heures, nombre de spectateurs
-  et hôte.
-- La suppression des doublons avant la facturation : un Space trouvé par 2
-  termes de recherche donne 1 ligne.
+- Les diffusions par URL ou par ID, avec titre, état, heures, nombre de
+  spectateurs et hôte.
+- La suppression des doublons avant la facturation. Un Space trouvé par 2 termes
+  de recherche donne 1 ligne.
 
 ## Comment trouver des Spaces X
 
@@ -62,7 +62,7 @@ plateforme à part.
 6. Téléchargez le dataset en JSON, CSV ou Excel, ou passez par l'API Apify.
 
 `startUrls` accepte chaque URL comme simple chaîne ou comme objet
-`{ "url": "..." }` :
+`{ "url": "..." }`.
 
 ```json
 {
@@ -84,7 +84,7 @@ plateforme à part.
 ```
 
 Un terme de recherche trouve les Spaces que partagent les posts correspondants.
-Il accepte les opérateurs de la recherche X :
+Il accepte les opérateurs de la recherche X.
 
 | Objectif                                     | Terme de recherche |
 | -------------------------------------------- | ------------------ |
@@ -94,10 +94,10 @@ Il accepte les opérateurs de la recherche X :
 | Des Spaces dans 1 langue                     | `startups lang:es` |
 | Des Spaces partagés par des posts très aimés | `nba min_faves:50` |
 
-`queryType` choisit quels posts passent en premier : `Latest` pour les plus
-récents, `Top` pour les plus engageants.
+`queryType` choisit quels posts passent en premier. `Latest` place les plus
+récents en tête, et `Top` les plus engageants.
 
-Lisez des Spaces que vous connaissez déjà par URL ou par ID :
+Lisez des Spaces que vous connaissez déjà par URL ou par ID.
 
 ```json
 {
@@ -106,7 +106,7 @@ Lisez des Spaces que vous connaissez déjà par URL ou par ID :
 }
 ```
 
-Activez `includeReplay` pour obtenir l'enregistrement de chaque Space terminé :
+Activez `includeReplay` pour obtenir l'enregistrement de chaque Space terminé.
 
 ```json
 { "spaceIds": ["1OGwblLjnQMKB"], "includeReplay": true }
@@ -117,7 +117,7 @@ La ligne porte alors `replay` avec `url`, une playlist HLS, ainsi que
 n'a pas de `replay`. L'enregistrement ne coûte rien de plus.
 
 Lisez des diffusions, la vidéo en direct que X héberge sur `x.com/i/broadcasts`,
-par URL ou par ID :
+par URL ou par ID.
 
 ```json
 {
@@ -135,7 +135,7 @@ Chaque ligne contient 1 Space ou 1 diffusion et son terme de recherche, son URL
 ou son ID dans `sourceTarget`. `resultType` vaut `space` ou `broadcast`.
 
 Les exemples utilisent des valeurs fictives. Les résultats reflètent les données
-en direct. Une ligne de Space ressemble à ceci :
+en direct. Une ligne de Space ressemble à ceci.
 
 ```json
 {
@@ -164,7 +164,7 @@ en direct. Une ligne de Space ressemble à ceci :
 }
 ```
 
-`state` contient 1 valeur parmi 5, telles que X les nomme :
+`state` contient 1 valeur parmi 5, telles que X les nomme.
 
 | `state`      | Le Space                                 |
 | ------------ | ---------------------------------------- |
@@ -178,7 +178,7 @@ Les Spaces `Ended` et `TimedOut` portent `endedAt`, et les deux peuvent garder
 un enregistrement. X montre un Space réservé aux abonnés ou à une Communauté
 seulement à son public, donc ces Spaces ne renvoient aucune ligne.
 
-Une ligne de diffusion a `resultType: "broadcast"` et ressemble à ceci :
+Une ligne de diffusion a `resultType: "broadcast"` et ressemble à ceci.
 
 ```json
 {

@@ -36,7 +36,7 @@ separat.
 - Der vollständige Text des Zitats, sein Link, seine Sprache & seine
   Veröffentlichungszeit.
 - Gefällt-mir-Angaben, Antworten, Reposts, Zitate, Aufrufe & Lesezeichen.
-- Das vollständige öffentliche Profil des Autors: Name, Bio, Follower,
+- Das vollständige öffentliche Profil des Autors mit Name, Bio, Follower,
   Verifizierung & mehr.
 - Fotos, Videos & GIFs mit ihren Links.
 - Hashtags, Erwähnungen & Links aus dem Text.
@@ -46,7 +46,7 @@ separat.
   Lieferzeitpunkt.
 - Viele Posts in 1 Run, jeder gelesen bis zum Ende dessen, was X bereitstellt.
 - Die neuesten zuerst oder die Zitate, die X am höchsten rankt.
-- 11 Filter: Sprache, Datumsangaben, Medientyp, 6 Mindestwerte & verifizierte
+- 11 Filter für Sprache, Datumsangaben, Medientyp, 6 Mindestwerte & verifizierte
   Autoren.
 - 1 Datensatz pro Autor, wenn du Personen statt Posts brauchst.
 - Post-URLs von x.com & twitter.com oder numerische Post-IDs.
@@ -69,7 +69,7 @@ Du nimmst keinen Seiten-Cursor von einem Run in den nächsten mit.
 
 `startUrls` nimmt jede Post-URL als einfachen String oder als Objekt
 `{ "url": "..." }`. `tweetIds` nimmt Post-IDs, & eine Post-URL funktioniert dort
-auch:
+auch.
 
 ```json
 {
@@ -82,7 +82,7 @@ auch:
 }
 ```
 
-Sortierung, Filter & Obergrenzen stehen neben den Posts:
+Sortierung, Filter & Obergrenzen stehen neben den Posts.
 
 ```json
 {
@@ -124,7 +124,7 @@ Jedes Zitat ist 1 Datensatz im Dataset mit `id`, `url`, `text`, `createdAt`,
 erfindet keine Werte.
 
 Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
-Datensatz sieht so aus:
+Datensatz sieht so aus.
 
 ```json
 {
@@ -165,7 +165,7 @@ des Autors als Spalten.
 
 ## Was X bereitstellt
 
-2 Grenzen kommen von X, & X Quote Tweets Scraper von Xquik nennt sie klar:
+2 Grenzen kommen von X, & X Quote Tweets Scraper von Xquik nennt sie klar.
 
 - Die X-Suche bestimmt, wie weit die Zitate eines Posts mit sehr vielen Zitaten
   zurückreichen. Ein Run liest jedes Zitat, das X bereitstellt, & stoppt dort.

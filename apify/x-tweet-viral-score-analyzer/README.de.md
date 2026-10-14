@@ -102,7 +102,7 @@ einen fehlenden Score nie mit einer Schätzung.
 
 X hat seine Ranking-Gewichte im Repository `xai-org/x-algorithm` veröffentlicht,
 in der Datei `home-mixer/params/param.rs`. X Tweet Viral Score Analyzer von
-Xquik wendet 4 davon auf die öffentlichen Zähler jedes Posts an:
+Xquik wendet 4 davon auf die öffentlichen Zähler jedes Posts an.
 
 | Zähler      | Gewicht |
 | ----------- | ------- |
@@ -118,7 +118,7 @@ Follower-Zahl als Basis. `viral.algorithmBasis` nennt den Divisor, `views` oder
 `followers`. Vergleiche nur Scores mit derselben Basis. `viral.weightsVersion`
 nennt die Gewichte, etwa `x_algorithm_params:2026-09-18`.
 
-Die Schätzung hat diese Grenzen:
+Die Schätzung hat diese Grenzen.
 
 - X multipliziert jedes Gewicht mit einer Wahrscheinlichkeit, die es für einen
   einzelnen Betrachter vorhersagt. Der Actor multipliziert mit beobachteten
@@ -138,7 +138,7 @@ passiert ist. `viral.actualEngagementRate` ist
 Wirkung eines einzelnen sehr großen Posts. Die Rate ist `null`, wenn die
 Follower-Zahl fehlt oder 0 ist.
 
-Der Block `viral.calibration` der Run-Zusammenfassung meldet diese Felder:
+Der Block `viral.calibration` der Run-Zusammenfassung meldet diese Felder.
 
 - `comparedPosts` zählt Posts mit einem Viral Score & einer tatsächlichen Rate.
 - `rankCorrelation` ist eine Spearman-Rangkorrelation von -1 bis 1. Sie zeigt,
@@ -151,7 +151,7 @@ Der Block `viral.calibration` der Run-Zusammenfassung meldet diese Felder:
 standardisiertem Viral Score. Ein Post kommt in eine Liste, wenn sein Gap 1
 Standardabweichung erreicht.
 
-Die Kalibrierung hat diese Grenzen:
+Die Kalibrierung hat diese Grenzen.
 
 - Weniger als 10 verglichene Posts ergeben eine `null`-Kalibrierung mit dem
   Grund `too_few_posts`. Identische Scores oder Raten ergeben `no_variation`.
@@ -164,8 +164,8 @@ Die Kalibrierung hat diese Grenzen:
 
 ## Account-Report
 
-Der Block `viral.accounts` der Run-Zusammenfassung meldet für jeden
-Autor-Nutzernamen:
+Der Block `viral.accounts` der Run-Zusammenfassung meldet diese Werte für jeden
+Autor-Nutzernamen.
 
 - Anzahl der Posts, durchschnittlicher Viral Score & durchschnittliche
   tatsächliche Interaktionsrate.
@@ -177,7 +177,7 @@ Textlängen-Bänder sind `short`, `medium`, `long` & `extended`. `short` endet
 bei 80 Zeichen, `medium` bei 200 & `long` bei 280. `extended` deckt längere
 Texte ab. Ein Selbst-Thread-Post antwortet auf einen Post desselben Autors.
 
-Der Report hat diese Grenzen:
+Der Report hat diese Grenzen.
 
 - Der Report listet die 50 Nutzernamen mit den meisten bewerteten Posts.
 - Der Report verfolgt die ersten 1.000 Nutzernamen eines Runs. `untrackedPosts`
@@ -193,7 +193,7 @@ Account-Reports. `byViralScore` ordnet nach durchschnittlichem Viral Score.
 `byActualEngagementRate` ordnet nach durchschnittlicher tatsächlicher Rate.
 Jede Liste enthält bis zu 20 Nutzernamen mit `rank`, `posts` & `average`.
 
-Die Rangliste hat diese Grenzen:
+Die Rangliste hat diese Grenzen.
 
 - Ein Nutzername braucht mindestens 3 bewertete Posts für einen Rang.
 - Die Liste nach Rate überspringt Nutzernamen ohne Follower-Zahl.
@@ -242,7 +242,7 @@ Preisen deines Plans. Der Tab Pricing zeigt sie.
 ## Eingabe- & Ausgabebeispiele
 
 Die Eingabe oben kannst du direkt kopieren. Ein gekürzter Ausgabedatensatz sieht
-so aus:
+so aus.
 
 ```json
 {
@@ -291,7 +291,7 @@ Datensätze, abgerechnete Analysen & ausstehende Gebühren.
 ## Run-Zusammenfassung & flache Antworten
 
 Ein Run schreibt in 4 Fällen einen `analysis-summary`-Datensatz in seinen
-Key-Value-Store:
+Key-Value-Store.
 
 - Er hat ein Problem oder ist groß.
 - Er setzt `monitor` ohne `baselineDatasetId`, als erster Run einer Serie.
@@ -338,7 +338,7 @@ dem Post, Tabellen brauchen also kein JSON-Parsing. Fehlgeschlagene &
 früheren Runs mit denselben Analyseeinstellungen. Der Vergleich liest die
 Datensätze dieses Runs. Er funktioniert auch, wenn dieser Run seine
 Zusammenfassung übersprungen hat. Jeder Datensatz erhält dann ein
-`monitor`-Objekt. Sein Status kann so lauten:
+`monitor`-Objekt. Sein Status nimmt diese Werte an.
 
 - `first_run` ohne Baseline.
 - `new_to_baseline` für Posts, die der frühere Run nicht hatte.

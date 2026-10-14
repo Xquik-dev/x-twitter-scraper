@@ -51,7 +51,7 @@ muestra el Markdown como texto.
 3. Define `maxItems` para limitar los Artículos entregados y haz clic en Start.
 4. Descarga el dataset en JSON, CSV o Excel, o usa la API de Apify.
 
-`startUrls` acepta cada URL como texto simple o como objeto `{ "url": "..." }`:
+`startUrls` acepta cada URL como texto simple o como objeto `{ "url": "..." }`.
 
 ```json
 {
@@ -83,7 +83,7 @@ pequeña sin problemas muestra sus conteos en el estado de la ejecución. Activa
 `alwaysSaveRunRecords` para escribirlo en todas las ejecuciones.
 
 Los ejemplos usan valores de muestra. Los resultados reflejan datos en vivo. Una
-fila de Artículo incluye estos campos:
+fila de Artículo incluye estos campos.
 
 ```json
 {

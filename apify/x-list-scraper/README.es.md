@@ -32,8 +32,9 @@ plataforma. No necesitas clave de API de X ni iniciar sesión.
 
 ## Datos y filtros de Listas
 
-- Detalles de Listas: nombre, descripción, cantidad de miembros y de seguidores,
-  fecha de creación, imagen de encabezado y el perfil público del dueño.
+- Detalles de Listas con nombre, descripción, cantidad de miembros y de
+  seguidores, fecha de creación, imagen de encabezado y el perfil público del
+  dueño.
 - Posts de Listas con texto, autor, métricas, contenido multimedia y marcas de
   tiempo.
 - Miembros y seguidores de Listas.
@@ -58,7 +59,7 @@ plataforma. No necesitas clave de API de X ni iniciar sesión.
 4. Define `maxItems` para limitar las filas entregadas y haz clic en Start.
 5. Descarga el dataset en JSON, CSV o Excel, o usa la API de Apify.
 
-`startUrls` acepta cada URL como texto simple o como objeto `{ "url": "..." }`:
+`startUrls` acepta cada URL como texto simple o como objeto `{ "url": "..." }`.
 
 ```json
 {
@@ -80,7 +81,7 @@ plataforma. No necesitas clave de API de X ni iniciar sesión.
 }
 ```
 
-Para encontrar Listas por palabra clave, envía términos de búsqueda:
+Para encontrar Listas por palabra clave, envía términos de búsqueda.
 
 ```json
 { "searchTerms": ["space news", "climate science"], "maxItemsPerTarget": 50 }
@@ -100,7 +101,7 @@ post o de perfil de Xquik.
 ### Las Listas de una cuenta
 
 Agrega nombres de usuario en `twitterHandles`, o URLs de perfil en `startUrls`,
-para enumerar las Listas públicas de cada cuenta:
+para enumerar las Listas públicas de cada cuenta.
 
 ```json
 { "twitterHandles": ["verge"], "accountLists": ["created", "memberships"] }
@@ -122,7 +123,7 @@ filas, 1 bajo cada una. Xquik cobra cada fila. `dedupeAcrossTargets` nunca quita
 estas filas.
 
 Los ejemplos usan valores de muestra. Los resultados reflejan datos en vivo. Una
-fila de detalles de Lista se ve así:
+fila de detalles de Lista se ve así.
 
 ```json
 {
@@ -138,7 +139,7 @@ fila de detalles de Lista se ve así:
 }
 ```
 
-Una fila de miembro de Lista se ve así:
+Una fila de miembro de Lista se ve así.
 
 ```json
 {
@@ -151,7 +152,7 @@ Una fila de miembro de Lista se ve así:
 }
 ```
 
-Una fila `list` de un término de búsqueda se ve así:
+Una fila `list` de un término de búsqueda se ve así.
 
 ```json
 {

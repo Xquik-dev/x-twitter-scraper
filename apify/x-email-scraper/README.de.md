@@ -34,16 +34,16 @@ separat.
 ## Kontaktdaten in jedem Datensatz
 
 - Die erste E-Mail, die das Profil veröffentlicht, in Kleinbuchstaben.
-- Die Domain dieser E-Mail & das Profilfeld, in dem sie steht: Bio, Name oder
-  Standort.
+- Die Domain dieser E-Mail & das Profilfeld, in dem sie steht, also Bio, Name
+  oder Standort.
 - Jede E-Mail des Profils, auch wenn sie als "name [at] site [dot] com"
   geschrieben ist.
 - Telefonnummern, die das Profil veröffentlicht, etwa als WhatsApp-Link.
 - Die Website & die Bio-Links des Profils, jeweils mit ihrem Netzwerk, etwa
   LinkedIn, GitHub oder Telegram.
-- Das vollständige öffentliche Profil: Name, Bio, Zahlen, Verifizierung,
-  Datumsangaben & Bilder.
-- 3 Quellen in 1 Run: Accounts, ihre Follower oder gefolgten Accounts &
+- Das vollständige öffentliche Profil mit Name, Bio, Zahlen, Verifizierung,
+  Datumsangaben & Bildern.
+- 3 Quellen in 1 Run, nämlich Accounts, ihre Follower oder gefolgten Accounts &
   Nutzersuchen.
 - Filter nach E-Mail-Domain, geschäftlicher E-Mail, Followern, Account-Alter,
   Bio & Standort.
@@ -69,7 +69,7 @@ Du gibst in keinem Schritt X-Cookies, einen Login oder einen API-Schlüssel ein.
 ## Eingabe
 
 `twitterHandles` nimmt jede Schreibweise eines Accounts an, auch gemischt. Der
-Run prüft jeden Account & liefert alle, die eine E-Mail veröffentlichen:
+Run prüft jeden Account & liefert alle, die eine E-Mail veröffentlichen.
 
 ```json
 {
@@ -81,7 +81,7 @@ Run prüft jeden Account & liefert alle, die eine E-Mail veröffentlichen:
 `startUrls` & `userIds` nehmen dieselben Schreibweisen an. Mit `expandFollowers`
 liest der Run stattdessen die Follower jedes Accounts & behält alle, die eine
 E-Mail veröffentlichen. Mit `expansionRelation` wählst du `Followers` oder
-`Following`:
+`Following`.
 
 ```json
 {
@@ -94,7 +94,7 @@ E-Mail veröffentlichen. Mit `expansionRelation` wählst du `Followers` oder
 ```
 
 `searchTerms` sucht X-Nutzer nach Name, Nutzername oder Wörtern in der Bio.
-Jeder Begriff ist 1 Suche:
+Jeder Begriff ist 1 Suche.
 
 ```json
 {
@@ -127,23 +127,24 @@ Probleme überspringen `run-report` & sparen Apify-Nutzung. Aktiviere
 
 Füge die Eingabe ein, die du schon nutzt. X Email Scraper von Xquik liest diese
 Feldnamen anderer Actors. Jede Zeile nennt ihre Felder, dann das Feld, dem der
-Actor sie zuordnet:
+Actor sie zuordnet.
 
-- `requireEmail`: kein Feld nötig. Jedes gelieferte Profil veröffentlicht eine
+- `requireEmail` braucht kein Feld. Jedes gelieferte Profil veröffentlicht eine
   E-Mail.
-- `requireWebsite`: `hasWebsite`. Der Filter behält ein Profil mit einem
-  beliebigen Link im Website-Feld, & der Run-Status sagt das.
-- `bioKeywords`: `bioContains`. Es genügt, wenn 1 der Begriffe passt.
-- `locationKeywords` mit 1 Wert: `locationContains`. Mehr Werte stoppen den Run,
-  bevor er etwas liest oder berechnet.
-- `emailDomains` als Liste: `emailDomains`
-- `outputEmail`, `resolveShortLinks`: kein Feld nötig. Jeder Datensatz enthält
+- `requireWebsite` wird `hasWebsite` zugeordnet. Der Filter behält ein Profil
+  mit einem beliebigen Link im Website-Feld, & der Run-Status sagt das.
+- `bioKeywords` wird `bioContains` zugeordnet. Es genügt, wenn 1 der Begriffe
+  passt.
+- `locationKeywords` mit 1 Wert wird `locationContains` zugeordnet. Mehr Werte
+  stoppen den Run, bevor er etwas liest oder berechnet.
+- `emailDomains` als Liste wird `emailDomains` zugeordnet.
+- `outputEmail`, `resolveShortLinks` brauchen kein Feld. Jeder Datensatz enthält
   seine E-Mails & die vollständigen Links von X.
-- `findEmails`, `extractEmails`: kein Feld. Datensätze enthalten die E-Mails,
-  die ein Profil auf X veröffentlicht. Der Run-Status sagt, dass der Actor keine
-  verlinkte Website liest.
-- `validateEmails`: kein Feld. Der Run-Status sagt, dass E-Mails so kommen, wie
-  sie veröffentlicht sind, weil der Actor kein Postfach prüft.
+- `findEmails`, `extractEmails` brauchen kein Feld. Datensätze enthalten die
+  E-Mails, die ein Profil auf X veröffentlicht. Der Run-Status sagt, dass der
+  Actor keine verlinkte Website liest.
+- `validateEmails` braucht kein Feld. Der Run-Status sagt, dass E-Mails so
+  kommen, wie sie veröffentlicht sind, weil der Actor kein Postfach prüft.
 
 Setzt du einen dieser Namen & sein kanonisches Feld, gewinnt der kanonische
 Wert. Das Run-Log nennt das Feld, das verloren hat.
@@ -151,14 +152,14 @@ Wert. Das Run-Log nennt das Feld, das verloren hat.
 ## Ausgabe
 
 Jedes Profil, das eine E-Mail veröffentlicht, ist 1 Datensatz im Dataset. Zuerst
-kommen die Kontaktdaten: `email`, `emailDomain`, `emailSource` & `contactInfo`.
-Danach folgt das vollständige öffentliche Profil mit `id`, `username`, `name`,
-`description`, `followers`, `following`, `verified`, `verifiedType`,
-`createdAt`, `profilePicture` & mehr. Fehlende Quellfelder bleiben weg. X Email
-Scraper von Xquik erfindet keine Werte.
+kommen die Kontaktdaten in `email`, `emailDomain`, `emailSource` &
+`contactInfo`. Danach folgt das vollständige öffentliche Profil mit `id`,
+`username`, `name`, `description`, `followers`, `following`, `verified`,
+`verifiedType`, `createdAt`, `profilePicture` & mehr. Fehlende Quellfelder
+bleiben weg. X Email Scraper von Xquik erfindet keine Werte.
 
 Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
-Datensatz sieht so aus:
+Datensatz sieht so aus.
 
 ```json
 {
@@ -210,11 +211,11 @@ Datensatz stammt.
 ## Was die E-Mail bedeutet
 
 Eine E-Mail ist eine Adresse, die der Account in sein eigenes Profil geschrieben
-hat: in die Bio, den Namen oder den Standort. Der Actor liefert sie so, wie der
-Account sie veröffentlicht hat, in Kleinbuchstaben. Nichts prüft, ob die Adresse
-E-Mails empfängt, & nichts liest die Website, auf die ein Profil verlinkt.
-`writtenAs` enthält die eigene Schreibweise des Accounts, wenn sie abweicht,
-etwa "jane [at] example [dot] org".
+hat, also in die Bio, den Namen oder den Standort. Der Actor liefert sie so, wie
+der Account sie veröffentlicht hat, in Kleinbuchstaben. Nichts prüft, ob die
+Adresse E-Mails empfängt, & nichts liest die Website, auf die ein Profil
+verlinkt. `writtenAs` enthält die eigene Schreibweise des Accounts, wenn sie
+abweicht, etwa "jane [at] example [dot] org".
 
 Eine Telefonnummer erscheint nur, wenn das Profil sie in einer Form schreibt,
 die nichts anderes sein kann, etwa als WhatsApp-Link oder als Nummer, die mit +
@@ -363,9 +364,10 @@ Xquik.
 
 ### Woher kommen die E-Mails?
 
-Aus dem Profil selbst: aus der Bio, dem Namen & dem Standort, die der Account
-geschrieben hat. Der Actor liest keinen Post & keine verlinkte Website. Jede
-E-Mail hat der Account also in seinem eigenen X-Profil veröffentlicht.
+Sie stammen aus dem Profil selbst, also aus der Bio, dem Namen & dem Standort,
+die der Account geschrieben hat. Der Actor liest keinen Post & keine verlinkte
+Website. Jede E-Mail hat der Account also in seinem eigenen X-Profil
+veröffentlicht.
 
 ### Prüft der Actor, ob eine E-Mail funktioniert?
 

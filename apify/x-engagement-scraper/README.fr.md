@@ -55,7 +55,7 @@ Vous n'avez besoin ni de clé API X ni de connexion.
 5. Téléchargez le dataset en JSON, CSV ou Excel, ou passez par l'API Apify.
 
 `startUrls` accepte chaque URL comme simple chaîne ou comme objet
-`{ "url": "..." }` :
+`{ "url": "..." }`.
 
 ```json
 {
@@ -88,14 +88,14 @@ Apify. Activez `alwaysSaveRunRecords` pour l'écrire à chaque run.
 
 ### Migrer depuis un autre Actor d'engagement
 
-L'Actor lit ces noms de champs d'autres Actors d'engagement :
+L'Actor lit ces noms de champs d'autres Actors d'engagement.
 
-- `urls` : `startUrls`
-- `category` : `engagementTypes`. `replies`, `retweets`, `info` et
+- `urls` correspond à `startUrls`.
+- `category` correspond à `engagementTypes`. `replies`, `retweets`, `info` et
   `checkRetweet` se lisent comme `replies`, `retweeters`, `tweet` et
   `repostCheck`.
-- `resultsPerCategory` : `maxItemsPerTarget`
-- `retweetCheckUsername` : `repostCheckUsers`
+- `resultsPerCategory` correspond à `maxItemsPerTarget`.
+- `retweetCheckUsername` correspond à `repostCheckUsers`.
 
 Une `category` qui relève d'un autre Actor, comme `followers` ou `tweets`,
 arrête le run. Il ne lit et ne facture rien. Le message nomme l'Actor à
@@ -114,7 +114,7 @@ couverture partielle dans `incompleteTargets`. Les filtres s'appliquent avant la
 facturation.
 
 Les exemples utilisent des valeurs fictives. Les résultats reflètent les données
-en direct. Une ligne de réponse ressemble à ceci :
+en direct. Une ligne de réponse ressemble à ceci.
 
 ```json
 {
@@ -130,7 +130,7 @@ en direct. Une ligne de réponse ressemble à ceci :
 ## Vérification de repost
 
 Ajoutez `repostCheck` à `engagementTypes` et listez des comptes dans
-`repostCheckUsers` pour savoir si chaque compte a reposté chaque post :
+`repostCheckUsers` pour savoir si chaque compte a reposté chaque post.
 
 ```json
 {
@@ -147,8 +147,8 @@ récents de chaque compte. Un repost plus ancien que ces posts apparaît comme
 `false` avec `complete: false`.
 
 Un run qui contient seulement des lignes `repostCheck` et `tweet` garde l'ordre
-de votre entrée : chaque post, puis ses comptes dans l'ordre où vous les avez
-listés.
+de votre entrée. Chaque post est suivi de ses comptes, dans l'ordre où vous les
+avez listés.
 
 ## Horodatage des reposts (retweets)
 

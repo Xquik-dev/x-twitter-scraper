@@ -65,7 +65,7 @@ Stichwort oder Thema & listet die, die X vorschlägt.
 ### Welche Daten kann X Community Scraper extrahieren?
 
 Community-Datensätze nutzen `resultType: "community"`. Das sind die wichtigsten
-Felder:
+Felder.
 
 | Feld              | Beschreibung                                     |
 | ----------------- | ------------------------------------------------ |
@@ -86,7 +86,7 @@ Felder:
 | `banner`          | Banner-URL, Größe & Hauptfarben                  |
 | `sourceTarget`    | URL, ID, Stichwort oder Thema aus deiner Eingabe |
 
-Jede Ressource fügt Datensätze ihres eigenen Typs hinzu:
+Jede Ressource fügt Datensätze ihres eigenen Typs hinzu.
 
 | `resultType`         | Ressource oder Eingabe      | 1 Datensatz pro          |
 | -------------------- | --------------------------- | ------------------------ |
@@ -104,7 +104,7 @@ Mitgliedern & Moderatoren enthalten die Profilfelder, etwa `username`,
 
 ## Wie nutze ich X Community Scraper, um Community-Daten zu scrapen?
 
-Folge diesen Schritten in der Apify Console:
+Folge diesen Schritten in der Apify Console.
 
 1. Öffne ein [Task-Beispiel](#task-beispiele) oder den Input-Tab.
 2. Füge Community-URLs in `startUrls` oder IDs in `communityIds` ein.
@@ -125,7 +125,7 @@ Jedes Rezept unten ist eine vollständige Eingabe.
 ```
 
 `startUrls` nimmt jede URL als einfachen String oder als Objekt
-`{ "url": "..." }`:
+`{ "url": "..." }`.
 
 ```json
 {
@@ -338,7 +338,7 @@ Xquik behält die Quellfelder & erfindet keine Werte. Das Dataset-Schema gibt
 jedem Feld einen Titel & eine Beschreibung.
 
 Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
-Datensatz mit Community-Infos sieht so aus:
+Datensatz mit Community-Infos sieht so aus.
 
 ```json
 {
@@ -463,19 +463,20 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 Xquik bietet außerdem 53 Dashboard-Tools, eine REST-API, signierte Webhooks &
 einen MCP-Server.
 
-- [API-Dokumentation](https://docs.xquik.com/introduction): Anleitungen zur
-  REST-API
-- [API für Community-Infos](https://docs.xquik.com/api-reference/x/community-info):
-  Datensatz von 1 Community abrufen
-- [API für Community-Posts](https://docs.xquik.com/api-reference/x/community-tweets):
-  Posts einer Community abrufen
-- [API für Community-Mitglieder](https://docs.xquik.com/api-reference/x/community-members):
-  Mitglieder einer Community exportieren
-- [API zum Finden von Communities](https://docs.xquik.com/api-reference/x/community-find):
-  Communities per Stichwort finden
-- [MCP-Server](https://docs.xquik.com/mcp/overview): unterstützte Tools entdecken
-- [Webhooks](https://docs.xquik.com/webhooks/overview): signierte
-  Event-Zustellung
+- [API-Dokumentation](https://docs.xquik.com/introduction) enthält Anleitungen
+  zur REST-API.
+- [API für Community-Infos](https://docs.xquik.com/api-reference/x/community-info)
+  ruft den Datensatz von 1 Community ab.
+- [API für Community-Posts](https://docs.xquik.com/api-reference/x/community-tweets)
+  ruft Posts einer Community ab.
+- [API für Community-Mitglieder](https://docs.xquik.com/api-reference/x/community-members)
+  exportiert Mitglieder einer Community.
+- [API zum Finden von Communities](https://docs.xquik.com/api-reference/x/community-find)
+  findet Communities per Stichwort.
+- Über den [MCP-Server](https://docs.xquik.com/mcp/overview) entdeckst du
+  unterstützte Tools.
+- [Webhooks](https://docs.xquik.com/webhooks/overview) bieten signierte
+  Event-Zustellung.
 
 ## FAQ
 

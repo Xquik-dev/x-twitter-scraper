@@ -52,7 +52,7 @@ No necesitas clave de API de X ni iniciar sesión.
 4. Define `maxItems` para limitar las filas entregadas y haz clic en Start.
 5. Descarga el dataset en JSON, CSV o Excel, o usa la API de Apify.
 
-`startUrls` acepta cada URL como texto simple o como objeto `{ "url": "..." }`:
+`startUrls` acepta cada URL como texto simple o como objeto `{ "url": "..." }`.
 
 ```json
 {
@@ -87,13 +87,13 @@ Apify. Activa `alwaysSaveRunRecords` para escribirlo en todas las ejecuciones.
 
 ### Migra desde otro Actor de interacciones
 
-El Actor lee estos nombres de campo de otros Actores de interacciones:
+El Actor lee estos nombres de campo de otros Actores de interacciones.
 
-- `urls`: `startUrls`
-- `category`: `engagementTypes`. `replies`, `retweets`, `info` y `checkRetweet`
-  se leen como `replies`, `retweeters`, `tweet` y `repostCheck`.
-- `resultsPerCategory`: `maxItemsPerTarget`
-- `retweetCheckUsername`: `repostCheckUsers`
+- `urls` se asigna a `startUrls`.
+- `category` se asigna a `engagementTypes`. `replies`, `retweets`, `info` y
+  `checkRetweet` se leen como `replies`, `retweeters`, `tweet` y `repostCheck`.
+- `resultsPerCategory` se asigna a `maxItemsPerTarget`.
+- `retweetCheckUsername` se asigna a `repostCheckUsers`.
 
 Una `category` que es tarea de otro Actor, como `followers` o `tweets`, detiene
 la ejecución. No lee ni cobra nada. El mensaje nombra el Actor que debes usar.
@@ -112,7 +112,7 @@ cuenta la cobertura parcial en `incompleteTargets`. Los filtros se aplican antes
 de facturar.
 
 Los ejemplos usan valores de muestra. Los resultados reflejan datos en vivo. Una
-fila de respuesta se ve así:
+fila de respuesta se ve así.
 
 ```json
 {
@@ -128,7 +128,7 @@ fila de respuesta se ve así:
 ## Verificación de reposts
 
 Agrega `repostCheck` a `engagementTypes` y enumera cuentas en `repostCheckUsers`
-para saber si cada cuenta hizo repost de cada post:
+para saber si cada cuenta hizo repost de cada post.
 
 ```json
 {
@@ -144,7 +144,7 @@ verificación lee los posts más recientes de cada cuenta. Un repost anterior a
 esos posts aparece como `false` con `complete: false`.
 
 Una ejecución con solo filas `repostCheck` y `tweet` conserva el orden de tu
-entrada: cada post y, luego, sus cuentas tal como las enumeraste.
+entrada. Cada post va seguido de sus cuentas, tal como las enumeraste.
 
 ## Marcas de tiempo de los reposts
 

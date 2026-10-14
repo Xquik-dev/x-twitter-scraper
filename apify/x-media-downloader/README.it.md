@@ -47,7 +47,7 @@ della piattaforma. Non ti servono una chiave API X né il login.
 5. Scarica il dataset in JSON, CSV o Excel, oppure usa l'API di Apify.
 
 `startUrls` & `profileUrls` accettano ogni URL come stringa semplice o come
-oggetto `{ "url": "..." }`:
+oggetto `{ "url": "..." }`.
 
 ```json
 { "profileUrls": ["https://x.com/nasa", { "url": "https://x.com/OpenAI" }] }
@@ -87,7 +87,7 @@ aggiungono `storedMediaUrl` & `downloadStatus: "stored"`. **Stored Media Files**
 apre i record archiviati.
 
 Gli esempi usano valori fittizi. I risultati contengono dati live. Una riga di
-foto ha questo aspetto:
+foto ha questo aspetto.
 
 ```json
 {
@@ -100,7 +100,7 @@ foto ha questo aspetto:
 ```
 
 Una riga di sottotitoli ha `resultType: "subtitles"` & le sue tracce in
-`tracks`:
+`tracks`.
 
 ```json
 {

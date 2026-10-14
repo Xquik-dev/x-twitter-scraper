@@ -39,7 +39,8 @@ chiave API X né il login.
 - Un elenco di tutti i luoghi per cui X offre tendenze, con WOEID, paese & tipo.
 - La ricerca di luoghi di X, con l'ID del luogo che la ricerca di post di X
   accetta.
-- Gli hashflag di X: le emoji personalizzate che X mostra dopo alcuni hashtag.
+- Gli hashflag di X, cioè le emoji personalizzate che X mostra dopo alcuni
+  hashtag.
 - Posizione in classifica, argomento, query, volume di post, URL di ricerca,
   WOEID & località di origine.
 - Attribuzione della località su ogni riga.
@@ -60,7 +61,7 @@ chiave API X né il login.
 
 ## Input
 
-Usa nomi di località, WOEID numerici o entrambi:
+Usa nomi di località, WOEID numerici o entrambi.
 
 ```json
 {
@@ -76,7 +77,7 @@ lettere. Un nome per cui X non offre tendenze non restituisce righe & non costa
 nulla. `woeids` accetta WOEID numerici.
 
 Per vedere ogni nome & WOEID, attiva `listLocations`. L'esecuzione elenca allora
-i luoghi per cui X offre tendenze, al posto delle tendenze:
+i luoghi per cui X offre tendenze, al posto delle tendenze.
 
 ```json
 { "listLocations": true, "country": "TR", "maxItems": 100 }
@@ -87,7 +88,7 @@ i luoghi per cui X offre tendenze, al posto delle tendenze:
 nome contiene il tuo testo. Lascia vuoti tutti e 3 per elencare ogni luogo.
 
 Per cercare i luoghi di X per nome, compila `placeSearchTerms`. L'esecuzione
-restituisce allora luoghi al posto delle tendenze:
+restituisce allora luoghi al posto delle tendenze.
 
 ```json
 { "placeSearchTerms": ["New York"], "maxItems": 20 }
@@ -101,7 +102,7 @@ non restituisce righe & non costa nulla.
 
 `maxItems` limita l'intera esecuzione & la riempie un termine alla volta, quindi
 il primo termine può usarlo tutto. Imposta `maxItemsPerTarget` per dare a ogni
-termine una quota uguale:
+termine una quota uguale.
 
 ```json
 {
@@ -112,7 +113,7 @@ termine una quota uguale:
 ```
 
 Per elencare gli hashflag di X, attiva `listHashflags`. Un hashflag è l'emoji
-personalizzata che X mostra dopo un hashtag per un periodo stabilito:
+personalizzata che X mostra dopo un hashtag per un periodo stabilito.
 
 ```json
 { "listHashflags": true, "hashtagContains": "football" }
@@ -177,7 +178,7 @@ Ogni tendenza è 1 riga del dataset. Le righe riportano `name`, `rank`,
 restano assenti. X Trends Scraper di Xquik non inventa valori.
 
 Gli esempi usano valori fittizi. I risultati contengono dati live. Una riga di
-tendenza ha questo aspetto:
+tendenza ha questo aspetto.
 
 ```json
 {
@@ -198,7 +199,7 @@ Con `listLocations`, ogni luogo è 1 riga del dataset. Le righe riportano
 `woeid`, `name`, `country`, `countryCode`, `placeType`, `placeTypeCode`,
 `parentWoeid`, `url` & `resultType`. `url` è il riferimento legacy di X per il
 luogo & potrebbe non aprirsi. Una riga di località di tendenza ha questo
-aspetto:
+aspetto.
 
 ```json
 {
@@ -217,7 +218,7 @@ Con `placeSearchTerms`, ogni luogo è 1 riga del dataset. Le righe riportano
 `id`, `name`, `fullName`, `country`, `countryCode`, `placeType`, `url`,
 `centroid`, `boundingBox`, `attributes`, `containedWithin`, `sourceTarget` &
 `resultType`. `centroid` contiene la longitudine, poi la latitudine. Una riga di
-luogo ha questo aspetto:
+luogo ha questo aspetto.
 
 ```json
 {
@@ -235,7 +236,7 @@ luogo ha questo aspetto:
 
 Con `listHashflags`, ogni hashflag è 1 riga del dataset. Le righe riportano
 `hashtag`, `assetUrl`, `startsAt`, `endsAt`, `isHashfettiEnabled`, `animations`
-& `resultType`. Una riga di hashflag ha questo aspetto:
+& `resultType`. Una riga di hashflag ha questo aspetto.
 
 ```json
 {

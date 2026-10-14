@@ -63,10 +63,10 @@ sulle organizzazioni, le persone o gli argomenti che segui.
 
 ### Cosa risponde l'Actor
 
-- Formato: Cronaca, commento, speculazione, promozione, satira, non pertinente o
-  poco chiaro
-- Attribuzione: Nominata, linkata, di prima mano, assente o poco chiara
-- Rilevanza: Probabilità che l'evento riportato riguardi i tuoi target
+- Il formato è cronaca, commento, speculazione, promozione, satira, non
+  pertinente o poco chiaro.
+- L'attribuzione è nominata, linkata, di prima mano, assente o poco chiara.
+- La rilevanza è la probabilità che l'evento riportato riguardi i tuoi target.
 
 La classificazione non verifica i fatti. Nominare una fonte non la rende
 credibile. L'attribuzione descrive ciò che il post presenta.
@@ -107,7 +107,7 @@ del tuo piano. La scheda Pricing lo mostra.
 ## Esempi di input & output
 
 L'input qui sopra è pronto da copiare. Una riga di output abbreviata ha questo
-aspetto:
+aspetto.
 
 ```json
 {
@@ -150,7 +150,7 @@ analisi addebitate & addebiti in sospeso.
 ## Riepilogo dell'esecuzione & risposte piatte
 
 Un'esecuzione scrive un record `analysis-summary` nel suo key-value store in 4
-casi:
+casi.
 
 - Incontra un problema o è grande.
 - Imposta `monitor` senza `baselineDatasetId`, come prima esecuzione di una
@@ -196,7 +196,7 @@ vuota.
 Passa `monitor.baselineDatasetId`, l'ID del dataset di un'esecuzione precedente
 completata con le stesse impostazioni di analisi. Il confronto legge le righe di
 quell'esecuzione. Funziona anche se quell'esecuzione ha saltato il riepilogo.
-Ogni riga riceve poi un oggetto `monitor`. Il suo stato può essere:
+Ogni riga riceve poi un oggetto `monitor`. Il suo stato assume questi valori.
 
 - `first_run` senza baseline.
 - `new_to_baseline` per i post che l'esecuzione precedente non aveva.

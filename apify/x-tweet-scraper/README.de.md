@@ -147,7 +147,7 @@ Repost, Bearbeitungsrechte & Ähnliches. Auch die Raw-Ausgabe enthält sie nicht
 Jedes Beispiel unten ist eine vollständige Eingabe. Wähle das, das zu deinen
 Daten passt.
 
-So gehst du in der Apify Console vor:
+So gehst du in der Apify Console vor.
 
 1. Öffne ein [Task-Beispiel](#task-beispiele) oder den Tab Input.
 2. Füge URLs, Nutzernamen, Post-IDs oder Suchbegriffe hinzu.
@@ -159,7 +159,7 @@ Die Beispiele unten zeigen die Eingabe für jede Quelle.
 
 ### URLs einfügen
 
-Füge eine beliebige Mischung aus Post-, Profil-, Such- oder Listen-URLs ein:
+Füge eine beliebige Mischung aus Post-, Profil-, Such- oder Listen-URLs ein.
 
 ```json
 {
@@ -180,7 +180,7 @@ begrenzt die Ergebnisse über alle eingefügten URLs.
 
 ### Viele Nutzernamen scrapen
 
-Nutzernamen sind eine Kurzform für viele `from:username`-Suchen:
+Nutzernamen sind eine Kurzform für viele `from:username`-Suchen.
 
 ```json
 { "twitterHandles": ["elonmusk", "nasa", "openai"], "maxItems": 100 }
@@ -194,7 +194,7 @@ zu entfernen.
 
 ### Posts suchen
 
-Trage 1 oder mehrere Suchanfragen in das Feld Search terms ein:
+Trage 1 oder mehrere Suchanfragen in das Feld Search terms ein.
 
 ```json
 {
@@ -235,8 +235,8 @@ Run sind es etwa $0.000005. Ein Run mit weniger als 5 IDs endet mit diesem Tipp.
 
 ### Interaktions-, Thread- & Artikelmodi
 
-Setze `mode`, um eine feste Route zu erzwingen. Andere Felder der Eingabe
-ändern daran nichts:
+Setze `mode`, um eine feste Route zu erzwingen. Andere Felder der Eingabe ändern
+daran nichts.
 
 ```json
 { "mode": "replies", "replyTweetIds": ["2082577277246972300"], "maxItems": 100 }
@@ -249,7 +249,7 @@ den X-Artikel in einem Post. Modi für einen einzelnen Post sind `replies`,
 `quotes`, `thread`, `retweeters`, `favoriters`, `translation` & `embed`.
 
 `profileMentions` liefert die Posts, die jeden Nutzernamen erwähnen, neueste
-zuerst:
+zuerst.
 
 ```json
 { "mode": "profileMentions", "twitterHandles": ["nasa"], "maxItems": 100 }
@@ -260,7 +260,7 @@ Accounts, seine Reposts & seine Antworten auf eigene Posts. Die Datensätze
 kommen nach Datum sortiert. Der Actor verwirft Antworten an andere Accounts vor
 der Abrechnung. Er verwirft auch Konversationskontext anderer Autoren.
 
-Willst du nur Originalposts, schließe die anderen Typen aus:
+Willst du nur Originalposts, schließe die anderen Typen aus.
 
 ```json
 {
@@ -328,7 +328,7 @@ zeigt aber nicht, welche Accounts einen Post als Lesezeichen gespeichert haben.
 
 `mode: "translation"` liefert die Übersetzung von X für jeden Post. Setze
 `translateTo` auf einen Sprachcode wie `en`, `es`, `pt-br` oder `zh-tw`. Der
-Standard ist `en`:
+Standard ist `en`.
 
 ```json
 {
@@ -342,7 +342,7 @@ Jeder Datensatz hat `resultType: "translation"`, `sourceTweetId` &
 `translation`. Dieses Objekt enthält `language`, `sourceLanguage`, `text` &
 `entities`.
 
-`mode: "embed"` liefert das HTML, das jeden Post auf einer Website einbettet:
+`mode: "embed"` liefert das HTML, das jeden Post auf einer Website einbettet.
 
 ```json
 { "mode": "embed", "tweetIds": ["2082577277246972300"], "embedTheme": "dark" }
@@ -360,7 +360,7 @@ keinen Datensatz & keine Gebühr.
 ### Flache CSV-Datensätze exportieren
 
 Behalte die verschachtelten JSON-Standardfelder oder ergänze tabellenfreundliche
-Spalten:
+Spalten.
 
 ```json
 { "searchTerms": ["from:nasa moon"], "maxItems": 100, "outputPreset": "flat" }
@@ -377,7 +377,7 @@ typisierten Pipeline.
 ### Feldnamen wählen
 
 Standard sind die Legacy-Feldnamen. Wähle einen Stil für Rich- oder
-Raw-Ergebnisse:
+Raw-Ergebnisse.
 
 ```json
 {
@@ -404,7 +404,7 @@ wählen nur Spalten aus. Sie benennen gespeicherte oder exportierte Daten nie um
 
 ### Erweiterte Filter kombinieren
 
-Kombiniere Filter für Nutzer, Datum, Standort, Medien & Interaktion:
+Kombiniere Filter für Nutzer, Datum, Standort, Medien & Interaktion.
 
 ```json
 {
@@ -478,57 +478,61 @@ Wie du die Ausgaben eines Runs begrenzt, steht unter
 X Tweet Scraper von Xquik schlug 11 andere Actors für Posts bei Kosten & Tempo.
 Sein Median-Datensatz hatte 63 Felder, das 2-Fache des Medians der anderen.
 
-- `xquik/x-tweet-scraper`: 890 nützliche Tweets, $0.000175 pro nützlichem Tweet,
-  39,2 pro Sekunde & 63 Felder pro Datensatz.
+- `xquik/x-tweet-scraper` lieferte 890 nützliche Tweets zu $0.000175 pro
+  nützlichem Tweet, mit 39,2 pro Sekunde & 63 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
-- `xquik/x-tweet-scraper`: 883 nützliche Tweets, $0.000176 pro nützlichem Tweet,
-  25,2 pro Sekunde & 63 Felder pro Datensatz.
+- `xquik/x-tweet-scraper` lieferte 883 nützliche Tweets zu $0.000176 pro
+  nützlichem Tweet, mit 25,2 pro Sekunde & 63 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
-- `xquik/x-tweet-scraper`: 882 nützliche Tweets, $0.000177 pro nützlichem Tweet,
-  25,7 pro Sekunde & 63 Felder pro Datensatz.
+- `xquik/x-tweet-scraper` lieferte 882 nützliche Tweets zu $0.000177 pro
+  nützlichem Tweet, mit 25,7 pro Sekunde & 63 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
-- `xquik/x-tweet-scraper`: 877 nützliche Tweets, $0.000178 pro nützlichem Tweet,
-  26,9 pro Sekunde & 63 Felder pro Datensatz.
+- `xquik/x-tweet-scraper` lieferte 877 nützliche Tweets zu $0.000178 pro
+  nützlichem Tweet, mit 26,9 pro Sekunde & 63 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 813 nützliche Tweets,
-  $0.000185 pro nützlichem Tweet, 10,5 pro Sekunde & 36 Felder pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 805 nützliche Tweets,
-  $0.000187 pro nützlichem Tweet, 10,6 pro Sekunde & 36 Felder pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 805 nützliche Tweets,
-  $0.000187 pro nützlichem Tweet, 10,7 pro Sekunde & 36 Felder pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
-- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest`: 880
-  nützliche Tweets, $0.000250 pro nützlichem Tweet, 9,1 pro Sekunde & 46 Felder
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` lieferte 813 nützliche
+  Tweets zu $0.000185 pro nützlichem Tweet, mit 10,5 pro Sekunde & 36 Feldern
   pro Datensatz.
+  [Run ansehen](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` lieferte 805 nützliche
+  Tweets zu $0.000187 pro nützlichem Tweet, mit 10,6 pro Sekunde & 36 Feldern
+  pro Datensatz.
+  [Run ansehen](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` lieferte 805 nützliche
+  Tweets zu $0.000187 pro nützlichem Tweet, mit 10,7 pro Sekunde & 36 Feldern
+  pro Datensatz.
+  [Run ansehen](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
+- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` lieferte
+  880 nützliche Tweets zu $0.000250 pro nützlichem Tweet, mit 9,1 pro Sekunde &
+  46 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
-- `scraper_one/x-posts-search`: 804 nützliche Tweets, $0.000314 pro nützlichem
-  Tweet, 3,3 pro Sekunde & 14 Felder pro Datensatz.
+- `scraper_one/x-posts-search` lieferte 804 nützliche Tweets zu $0.000314 pro
+  nützlichem Tweet, mit 3,3 pro Sekunde & 14 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
-- `danek/twitter-scraper`: 807 nützliche Tweets, $0.000347 pro nützlichem Tweet,
-  5,0 pro Sekunde & 27 Felder pro Datensatz.
+- `danek/twitter-scraper` lieferte 807 nützliche Tweets zu $0.000347 pro
+  nützlichem Tweet, mit 5,0 pro Sekunde & 27 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
-- `tweetapi/twitter-x-search-scraper`: 337 nützliche Tweets, $0.000374 pro
-  nützlichem Tweet, 2,6 pro Sekunde & 28 Felder pro Datensatz.
+- `tweetapi/twitter-x-search-scraper` lieferte 337 nützliche Tweets zu $0.000374
+  pro nützlichem Tweet, mit 2,6 pro Sekunde & 28 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
-- `api-ninja/x-twitter-advanced-search`: 837 nützliche Tweets, $0.000430 pro
-  nützlichem Tweet, 7,4 pro Sekunde & 28 Felder pro Datensatz.
+- `api-ninja/x-twitter-advanced-search` lieferte 837 nützliche Tweets zu
+  $0.000430 pro nützlichem Tweet, mit 7,4 pro Sekunde & 28 Feldern pro
+  Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
-- `apidojo/twitter-scraper-lite`: 251 nützliche Tweets, $0.000494 pro nützlichem
-  Tweet, 12,9 pro Sekunde & 54 Felder pro Datensatz.
+- `apidojo/twitter-scraper-lite` lieferte 251 nützliche Tweets zu $0.000494 pro
+  nützlichem Tweet, mit 12,9 pro Sekunde & 54 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
-- `apidojo/tweet-scraper`: 481 nützliche Tweets, $0.000832 pro nützlichem Tweet,
-  7,8 pro Sekunde & 55 Felder pro Datensatz.
+- `apidojo/tweet-scraper` lieferte 481 nützliche Tweets zu $0.000832 pro
+  nützlichem Tweet, mit 7,8 pro Sekunde & 55 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
-- `xtdata/twitter-x-scraper`: 1.378 nützliche Tweets, $0.001168 pro nützlichem
-  Tweet, 11,9 pro Sekunde & 67 Felder pro Datensatz.
+- `xtdata/twitter-x-scraper` lieferte 1.378 nützliche Tweets zu $0.001168 pro
+  nützlichem Tweet, mit 11,9 pro Sekunde & 67 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
-- `seemuapps/x-tweet-scraper`: 805 nützliche Tweets, $0.001242 pro nützlichem
-  Tweet, 6,9 pro Sekunde & 24 Felder pro Datensatz.
+- `seemuapps/x-tweet-scraper` lieferte 805 nützliche Tweets zu $0.001242 pro
+  nützlichem Tweet, mit 6,9 pro Sekunde & 24 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/FstursEw43TbcipYU)
-- `maximedupre/twitter-scraper`: 46 nützliche Tweets, $0.002846 pro nützlichem
-  Tweet, 0,3 pro Sekunde & 31 Felder pro Datensatz.
+- `maximedupre/twitter-scraper` lieferte 46 nützliche Tweets zu $0.002846 pro
+  nützlichem Tweet, mit 0,3 pro Sekunde & 31 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
 
 Jeder Actor lief mit derselben Suche & denselben Filtern. Die anderen Actors
@@ -626,12 +630,12 @@ zahlst jeden gelieferten Datensatz einmal.
 
 ## Eingabe
 
-Der Tab Input listet alle Optionen. Gib mindestens eines dieser Felder an:
-`startUrls`, `twitterHandles`, `listIds`, `tweetIds`, `searchTerms` oder
-`twitterContent`. Ihre dokumentierten Aliasse funktionieren auch. Alle anderen
-Felder sind optional.
+Der Tab Input listet alle Optionen. Gib mindestens eines der Felder `startUrls`,
+`twitterHandles`, `listIds`, `tweetIds`, `searchTerms` oder `twitterContent` an.
+Ihre dokumentierten Aliasse funktionieren auch. Alle anderen Felder sind
+optional.
 
-Beispiele:
+Jede dieser Eingaben reicht für einen Run.
 
 - Füge eine Post-URL unter Start URLs ein.
 - Füge eine Profil-URL ein oder trage den Nutzernamen unter X handles ein.
@@ -682,110 +686,124 @@ nur kanonische Felder, damit es kurz bleibt. Aliasse funktionieren in JSON, API,
 SDK, Automatisierungen & gespeicherten Task-Eingaben.
 
 Jede Zeile nennt die Felder, die du schon nutzt, dann das Feld, dem der Actor
-sie zuordnet:
+sie zuordnet.
 
-- `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`:
-  `startUrls`
-- `profileUrl`, als einzelner String: `startUrls`
+- `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`
+  werden `startUrls` zugeordnet.
+- `profileUrl` als einzelner String wird `startUrls` zugeordnet.
 - `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids` oder
-  `tweetId` als einzelner String: `tweetIds`
+  `tweetId` als einzelner String werden `tweetIds` zugeordnet.
 - `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`,
-  `screenNames`, `profileTweets`: `twitterHandles`
-- `username`, `handle`, `screenName`, als einzelner String: `twitterHandles`
-- `searchTerms`, `searchQueries`, `queries`, `search`, als Liste oder 1 Suche
-  pro Zeile: `searchTerms`
-- `twitterContent`, `query`, `searchQuery`: `twitterContent`
+  `screenNames`, `profileTweets` werden `twitterHandles` zugeordnet.
+- `username`, `handle`, `screenName` als einzelner String werden
+  `twitterHandles` zugeordnet.
+- `searchTerms`, `searchQueries`, `queries`, `search` als Liste oder mit 1 Suche
+  pro Zeile werden `searchTerms` zugeordnet.
+- `twitterContent`, `query`, `searchQuery` werden `twitterContent` zugeordnet.
 - `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`,
   `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`,
-  `maxTweets`, `tweetsDesired`, `maxTotalTweets`: `maxItems`
-- `per_profile_limit`: `maxItemsPerTarget`
-- `sort`: `queryType`
-- `search_type`, `searchType`, `query_type`, `search_sort`: `queryType` für
-  `Top` & `Latest`, egal in welcher Schreibweise. `Media`, `Photos` & `Videos`
-  schalten `filter:media`, `filter:images` & `filter:videos` ein.
-- `tweetLanguage`, `language`, `contentLanguage`: `lang`
-- `author`, `fromUser`: `from`
-- `inReplyTo`, `toUser`: `to`
-- `mentioning`: `@`
-- `start`, `startDate`, `timeSince`: `since`
-- `end`, `endDate`, `timeUntil`: `until`
-- `timeSinceUnix`, `sinceTime`, `timeUntilUnix`, `untilTime`, in Sekunden:
-  `since_time`, `until_time`
-- `timeWithinTime`, `withinTime`: `within_time`
-- `timeWindowHours`, `timeWindow`: `within_time`, als Stunden & als Tage
-- `timeSinceId`, `sinceId`, `timeMaxId`, `maxId`: `since_id`, `max_id`
+  `maxTweets`, `tweetsDesired`, `maxTotalTweets` werden `maxItems` zugeordnet.
+- `per_profile_limit` wird `maxItemsPerTarget` zugeordnet.
+- `sort` wird `queryType` zugeordnet.
+- `search_type`, `searchType`, `query_type`, `search_sort` werden für `Top` &
+  `Latest` dem Feld `queryType` zugeordnet, egal in welcher Schreibweise.
+  `Media`, `Photos` & `Videos` schalten `filter:media`, `filter:images` &
+  `filter:videos` ein.
+- `tweetLanguage`, `language`, `contentLanguage` werden `lang` zugeordnet.
+- `author`, `fromUser` werden `from` zugeordnet.
+- `inReplyTo`, `toUser` werden `to` zugeordnet.
+- `mentioning` wird `@` zugeordnet.
+- `start`, `startDate`, `timeSince` werden `since` zugeordnet.
+- `end`, `endDate`, `timeUntil` werden `until` zugeordnet.
+- `timeSinceUnix`, `sinceTime`, `timeUntilUnix`, `untilTime` in Sekunden werden
+  `since_time`, `until_time` zugeordnet.
+- `timeWithinTime`, `withinTime` werden `within_time` zugeordnet.
+- `timeWindowHours`, `timeWindow` werden `within_time` zugeordnet, als Stunden &
+  als Tage.
+- `timeSinceId`, `sinceId`, `timeMaxId`, `maxId` werden `since_id`, `max_id`
+  zugeordnet.
 - `quickDateRange` aus dem Google Search Scraper, etwa `d7`, `w2`, `m1` oder
-  `y`: `since_time`, ab dem Run-Start zurückgerechnet
+  `y`, wird `since_time` zugeordnet, ab dem Run-Start zurückgerechnet.
 - `minimumFavorites`, `minLikes`, `min_likes`, `minFaves`, `engagementMinLikes`,
-  `Minimum_likes`: `min_faves`
-- `minimumRetweets`, `minRetweets`, `engagementMinRetweets`: `min_retweets`
-- `minimumReplies`, `minReplies`, `engagementMinReplies`, `Minimum_replies`:
-  `min_replies`
+  `Minimum_likes` werden `min_faves` zugeordnet.
+- `minimumRetweets`, `minRetweets`, `engagementMinRetweets` werden
+  `min_retweets` zugeordnet.
+- `minimumReplies`, `minReplies`, `engagementMinReplies`, `Minimum_replies`
+  werden `min_replies` zugeordnet.
 - `engagementMaxLikes`, `maxLikes`, `engagementMaxRetweets`, `maxRetweets`,
-  `engagementMaxReplies`: `engagement.maxLikes`, `engagement.maxRetweets`,
-  `engagement.maxReplies`
-- `onlyImage`, `onlyImages`, `has_images`: `filter:images`
-- `onlyVideo`, `onlyVideos`, `has_videos`: `filter:videos`
-- `onlyWithMedia`, `mediaOnly`: `filter:media`
-- `onlyQuote`, `onlyQuotes`: `filter:quote`
+  `engagementMaxReplies` werden `engagement.maxLikes`, `engagement.maxRetweets`,
+  `engagement.maxReplies` zugeordnet.
+- `onlyImage`, `onlyImages`, `has_images` werden `filter:images` zugeordnet.
+- `onlyVideo`, `onlyVideos`, `has_videos` werden `filter:videos` zugeordnet.
+- `onlyWithMedia`, `mediaOnly` werden `filter:media` zugeordnet.
+- `onlyQuote`, `onlyQuotes` werden `filter:quote` zugeordnet.
 - `onlyTwitterBlue`, `usersBlueVerifiedOnly`, `blue_verified_only`,
-  `onlyBlueVerified`: `filter:blue_verified`
-- `engagementHasEngagement`, `hasEngagement`: `filter:has_engagement`
-- `mediaHasLinks`, `has_links`, `requireLinks`: `filter:links`
-- `mediaHasMentions`, `has_mentions`, `requireMentions`: `filter:mentions`
-- `mediaHasHashtags`, `has_hashtags`, `requireHashtags`: `filter:hashtags`
-- `mediaNewsOnly`, `mediaSafeContentOnly`: `filter:news`, `filter:safe`
-- `mediaTypes`, mit 1 Typ: das `filter:`-Feld dieses Typs
-- `mediaSubtype`: `filter:media`, `filter:images` oder `filter:videos`
-- `includeNativeRetweets`, `includeRetweets`: `include:nativeretweets`
+  `onlyBlueVerified` werden `filter:blue_verified` zugeordnet.
+- `engagementHasEngagement`, `hasEngagement` werden `filter:has_engagement`
+  zugeordnet.
+- `mediaHasLinks`, `has_links`, `requireLinks` werden `filter:links` zugeordnet.
+- `mediaHasMentions`, `has_mentions`, `requireMentions` werden `filter:mentions`
+  zugeordnet.
+- `mediaHasHashtags`, `has_hashtags`, `requireHashtags` werden `filter:hashtags`
+  zugeordnet.
+- `mediaNewsOnly`, `mediaSafeContentOnly` werden `filter:news`, `filter:safe`
+  zugeordnet.
+- `mediaTypes` mit 1 Typ wird dem `filter:`-Feld dieses Typs zugeordnet.
+- `mediaSubtype` wird `filter:media`, `filter:images` oder `filter:videos`
+  zugeordnet.
+- `includeNativeRetweets`, `includeRetweets` werden `include:nativeretweets`
+  zugeordnet.
 - `excludeReplies`, `excludeRetweets`, `includeRetweets` auf false,
-  `tweetTypesExclude`: `tweetTypes.excludeReplies`, `tweetTypes.excludeRetweets`
-  & `tweetTypes.excludeQuotes`
-- `tweetTypes` als Liste mit 1 Typ: `tweetTypes.replies`, `tweetTypes.quotes`
-  oder `tweetTypes.nativeRetweets`
-- `tweetSubtype`: `tweetTypes.replies` oder `tweetTypes.quotes`. `self_threads`
-  fügt den Operator `filter:self_threads` hinzu.
-- `geotaggedNear`, `geoNear`: `near`
-- `withinRadius`, `geoWithinRadius`, `geoWithin`: `within`
-- `geoGeocode`: `geocode`
-- `tweetConversationId`, `tweetQuotedTweetId`, `tweetQuotedUserId`:
-  `conversation_id`, `quoted_tweet_id`, `quoted_user_id`
-- `cardName`, `tweetPollTypes`: `card_name`
-- `search_query`: `twitterContent`
-- `profile_urls`: `startUrls` für Links, `twitterHandles` für Nutzernamen
-- `lookup_post_ids` oder `id` als einzelner String: `tweetIds`
-- `tweets` als 1 kommagetrennte Liste: `tweetIds`
+  `tweetTypesExclude` werden `tweetTypes.excludeReplies`,
+  `tweetTypes.excludeRetweets` & `tweetTypes.excludeQuotes` zugeordnet.
+- `tweetTypes` als Liste mit 1 Typ wird `tweetTypes.replies`,
+  `tweetTypes.quotes` oder `tweetTypes.nativeRetweets` zugeordnet.
+- `tweetSubtype` wird `tweetTypes.replies` oder `tweetTypes.quotes` zugeordnet.
+  `self_threads` fügt den Operator `filter:self_threads` hinzu.
+- `geotaggedNear`, `geoNear` werden `near` zugeordnet.
+- `withinRadius`, `geoWithinRadius`, `geoWithin` werden `within` zugeordnet.
+- `geoGeocode` wird `geocode` zugeordnet.
+- `tweetConversationId`, `tweetQuotedTweetId`, `tweetQuotedUserId` werden
+  `conversation_id`, `quoted_tweet_id`, `quoted_user_id` zugeordnet.
+- `cardName`, `tweetPollTypes` werden `card_name` zugeordnet.
+- `search_query` wird `twitterContent` zugeordnet.
+- `profile_urls` wird bei Links `startUrls` zugeordnet, bei Nutzernamen
+  `twitterHandles`.
+- `lookup_post_ids` oder `id` als einzelner String wird `tweetIds` zugeordnet.
+- `tweets` als 1 kommagetrennte Liste wird `tweetIds` zugeordnet.
 
 Manche Felder haben hier kein eigenes Feld. Jedes fügt den X-Suchoperator, für
 den es steht, jeder Suche des Runs hinzu. Das Run-Log listet die hinzugefügten
-Operatoren am Anfang:
+Operatoren am Anfang.
 
-- `usersFromUsers`, `from_users`, `usersToUsers`, `to_users`,
-  `usersListMembers`: `from:`, `to:` & `list:`. Mehrere Werte laufen als
-  Alternativen, etwa `(from:a OR from:b)`.
-- `usersMentionUsers`, `mentioning_users`: `@name`
-- `usersExcludeFromUsers`: `-from:`
-- `onlyVerifiedUsers`, `usersVerifiedOnly`, `verified_only`: `filter:verified`
-- `placeObjectId`, `geoPlaceId`, `placeId`, `place`: `place:`
-- `cardDomain`: `card_domain:`
-- `appsSources`, `appsExcludeSources`: `source:` & `-source:`
-- `contentKeywords`, `contentExactPhrases`, `contentHashtags`,
-  `contentCashtags`, jeweils mit 1 Wert: das Wort, die Phrase in
-  Anführungszeichen, `#tag` & `$tag`
+- `usersFromUsers`, `from_users`, `usersToUsers`, `to_users`, `usersListMembers`
+  fügen `from:`, `to:` & `list:` hinzu. Mehrere Werte laufen als Alternativen,
+  etwa `(from:a OR from:b)`.
+- `usersMentionUsers`, `mentioning_users` fügen `@name` hinzu.
+- `usersExcludeFromUsers` fügt `-from:` hinzu.
+- `onlyVerifiedUsers`, `usersVerifiedOnly`, `verified_only` fügen
+  `filter:verified` hinzu.
+- `placeObjectId`, `geoPlaceId`, `placeId`, `place` fügen `place:` hinzu.
+- `cardDomain` fügt `card_domain:` hinzu.
+- `appsSources`, `appsExcludeSources` fügen `source:` & `-source:` hinzu.
+- `contentKeywords`, `contentExactPhrases`, `contentHashtags`, `contentCashtags`
+  fügen jeweils mit 1 Wert das Wort, die Phrase in Anführungszeichen, `#tag` &
+  `$tag` hinzu.
 - `contentExcludeKeywords`, `contentExcludeHashtags`, `exclude_words`,
-  `hashtags_exclude`: `-word` & `-#tag`
-- `all_words`, `exact_phrases`: jedes Wort & jede Phrase muss vorkommen
-- `any_words`, `hashtags_any`: Alternativen, etwa `(#a OR #b)`
-- `contentQuestionMarks`: `?`
-- `contentEmoticons`: `:)` für `positive`, `:(` für `negative`
-- `tweet_type`: `filter:replies`, `filter:retweets` & ihre `-filter:`-Formen
+  `hashtags_exclude` fügen `-word` & `-#tag` hinzu.
+- Mit `all_words` & `exact_phrases` muss jedes Wort & jede Phrase vorkommen.
+- `any_words`, `hashtags_any` fügen Alternativen hinzu, etwa `(#a OR #b)`.
+- `contentQuestionMarks` fügt `?` hinzu.
+- `contentEmoticons` fügt `:)` für `positive` & `:(` für `negative` hinzu.
+- `tweet_type` fügt `filter:replies`, `filter:retweets` & ihre `-filter:`-Formen
+  hinzu.
 
-In Worten benannte Modi ordnet der Actor `mode` zu: `Advanced Search` zu
-`search`, `Get Tweet by ID` zu `tweet`, `Get a Few Tweets` zu `tweets`,
+In Worten benannte Modi ordnet der Actor `mode` zu. Dabei wird `Advanced Search`
+zu `search`, `Get Tweet by ID` zu `tweet`, `Get a Few Tweets` zu `tweets`,
 `Get Replies` zu `replies`, `Get Quotes` zu `quotes`, `Get Retweeters` zu
 `retweeters` & `Get Favoriters` zu `favoriters`.
 
-So verhält sich eine eingefügte Eingabe:
+So verhält sich eine eingefügte Eingabe.
 
 - Jede Quelle läuft. Eine Eingabe mit URLs, Nutzernamen, Suchbegriffen,
   Listen-IDs & Post-IDs führt alle aus. `maxItems` gilt für den gesamten Run.
@@ -807,10 +825,11 @@ So verhält sich eine eingefügte Eingabe:
 - Suchoperator-Felder wie `from`, `min_faves`, `since_time` & `filter:images`
   nutzen schon die Namen von X. Sie brauchen keine Zuordnung.
 - Eine Liste, bei der ein anderer Actor nicht sagt, ob alle Werte oder nur einer
-  passen müssen, läuft mit 1 Wert: `contentKeywords`, `contentExactPhrases`,
-  `contentHashtags`, `contentCashtags`, `usersMentionUsers`, `mediaTypes` &
-  `tweetTypes`. Bei mehr Werten stoppt der Run, bevor er etwas liest oder
-  berechnet. Die Meldung sagt, wie du sie als 1 Suchbegriff schreibst.
+  passen müssen, läuft mit 1 Wert. Diese Listen sind `contentKeywords`,
+  `contentExactPhrases`, `contentHashtags`, `contentCashtags`,
+  `usersMentionUsers`, `mediaTypes` & `tweetTypes`. Bei mehr Werten stoppt der
+  Run, bevor er etwas liest oder berechnet. Die Meldung sagt, wie du sie als 1
+  Suchbegriff schreibst.
 - `search_type` auf `People` oder `Lists`, `source_mode` auf `followers`, ein
   `engagementLevel`-Preset & der Modus `Get Similar Tweets` stoppen den Run,
   bevor er etwas liest oder berechnet. Die Meldung nennt den Actor oder das
@@ -821,7 +840,7 @@ So verhält sich eine eingefügte Eingabe:
 
 ### Eingabe in Console & API
 
-Das Console-Formular hat diese Steuerelemente:
+Das Console-Formular hat diese Steuerelemente.
 
 - Mode, Output Variant, Field Style, Output Preset & Sort By sind validierte
   Auswahllisten.
@@ -1013,20 +1032,20 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 Xquik bietet außerdem 47 Dashboard-Tools, eine REST-API, signierte Webhooks &
 einen MCP-Server.
 
-- [API-Dokumentation](https://docs.xquik.com/introduction): Anleitungen zur
-  REST-API
-- [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets):
-  sucht Posts per REST
-- [Batch Tweets API](https://docs.xquik.com/api-reference/x/batch-tweets): ruft
-  bis zu 100 Posts per ID ab
-- [User Tweets API](https://docs.xquik.com/api-reference/x/user-tweets): ruft
-  die Timeline eines Nutzers ab
-- [MCP-Server](https://docs.xquik.com/mcp/overview): zeigt die unterstützten
-  Tools
-- [Webhooks](https://docs.xquik.com/webhooks/overview): signierte Zustellung von
-  Ereignissen
-- [GitHub](https://github.com/Xquik-dev/x-twitter-scraper): Quellcode &
-  Issue-Tracker
+- [API-Dokumentation](https://docs.xquik.com/introduction) enthält Anleitungen
+  zur REST-API.
+- [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets)
+  sucht Posts per REST.
+- [Batch Tweets API](https://docs.xquik.com/api-reference/x/batch-tweets) ruft
+  bis zu 100 Posts per ID ab.
+- [User Tweets API](https://docs.xquik.com/api-reference/x/user-tweets) ruft die
+  Timeline eines Nutzers ab.
+- [MCP-Server](https://docs.xquik.com/mcp/overview) zeigt die unterstützten
+  Tools.
+- [Webhooks](https://docs.xquik.com/webhooks/overview) bieten signierte
+  Zustellung von Ereignissen.
+- Auf [GitHub](https://github.com/Xquik-dev/x-twitter-scraper) findest du
+  Quellcode & Issue-Tracker.
 
 ## FAQ
 

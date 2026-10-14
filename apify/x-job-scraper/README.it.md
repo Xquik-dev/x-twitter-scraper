@@ -54,7 +54,7 @@ chiave API X né il login.
 5. Scarica il dataset in JSON, CSV o Excel, oppure usa l'API di Apify.
 
 `startUrls` accetta ogni URL come stringa semplice o come oggetto
-`{ "url": "..." }`:
+`{ "url": "..." }`.
 
 ```json
 {
@@ -67,7 +67,7 @@ chiave API X né il login.
 
 ## Input
 
-Cerca per parola chiave con i filtri:
+Cerca per parola chiave con i filtri.
 
 ```json
 {
@@ -85,7 +85,7 @@ Cerca per parola chiave con i filtri:
 `part_time` & `contract_to_hire`. Ogni filtro mantiene le offerte che
 corrispondono a uno qualsiasi dei valori scelti.
 
-Leggi offerte note tramite URL o ID:
+Leggi offerte note tramite URL o ID.
 
 ```json
 {
@@ -98,7 +98,7 @@ Leggi offerte note tramite URL o ID:
 esatto, come New York City anziché West New York.
 
 Trova gli ID dei luoghi per nome. Un'esecuzione con `locationSearchTerms` elenca
-i luoghi invece delle offerte:
+i luoghi invece delle offerte.
 
 ```json
 { "locationSearchTerms": ["New York"], "maxItems": 20 }
@@ -119,7 +119,7 @@ l'annuncio completo. I campi di origine mancanti restano assenti. X Jobs Scraper
 di Xquik non inventa valori.
 
 Gli esempi usano valori fittizi. I risultati contengono dati live. Una riga di
-offerta ha questo aspetto:
+offerta ha questo aspetto.
 
 ```json
 {
@@ -141,7 +141,7 @@ offerta ha questo aspetto:
 }
 ```
 
-Ogni località di lavoro è 1 riga con l'`id` che `locationId` accetta:
+Ogni località di lavoro è 1 riga con l'`id` che `locationId` accetta.
 
 ```json
 {

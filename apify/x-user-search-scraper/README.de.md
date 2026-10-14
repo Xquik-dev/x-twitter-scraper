@@ -32,7 +32,7 @@ Profil**, & Apify berechnet die Plattformnutzung separat.
 
 - Filter für Zielgruppe, Posts, Alter, Verifizierung, Website, Standort, Bio &
   Nutzername.
-- Modus Search Autocomplete: die Accounts, Themen, Hashtags & Cashtags, die X
+- Modus Search Autocomplete mit den Accounts, Themen, Hashtags & Cashtags, die X
   für jeden Suchbegriff vorschlägt.
 - Setze 1 Suchanfrage ab einem gespeicherten Cursor in `startCursor` fort.
 - Bei einer Migration bleibt bereits erledigte Arbeit erhalten.
@@ -64,23 +64,25 @@ Aktiviere `alwaysSaveRunRecords`, um ihn bei jedem Run zu schreiben.
 
 Füge die Eingabe ein, die du schon nutzt. X User Search Scraper von Xquik liest
 diese Feldnamen anderer Actors. Jede Zeile nennt ihre Felder, dann das Feld, dem
-der Actor sie zuordnet:
+der Actor sie zuordnet.
 
-- `requireEmail`, `requireWebsite`: `hasEmail`, `hasWebsite`
-- `verification`: `any_verified` setzt `verifiedOnly`, `blue_verified` setzt
-  `blueVerifiedOnly`, `business` & `government` setzen `verifiedType`.
-  `unverified` stoppt den Run, bevor er etwas liest oder berechnet.
-- `bioKeywords`: `bioContains`. Es genügt, wenn 1 der Begriffe passt.
-- `locationKeywords` mit 1 Wert: `locationContains`. Mehr Werte stoppen den Run,
-  bevor er etwas liest oder berechnet.
-- `emailDomains` als Liste: `emailDomains`
-- `outputEmail`, `resolveShortLinks`: kein Feld nötig. Jeder Datensatz enthält
+- `requireEmail`, `requireWebsite` werden `hasEmail`, `hasWebsite` zugeordnet.
+- Bei `verification` setzt `any_verified` das Feld `verifiedOnly`,
+  `blue_verified` setzt `blueVerifiedOnly`, `business` & `government` setzen
+  `verifiedType`. `unverified` stoppt den Run, bevor er etwas liest oder
+  berechnet.
+- `bioKeywords` wird `bioContains` zugeordnet. Es genügt, wenn 1 der Begriffe
+  passt.
+- `locationKeywords` mit 1 Wert wird `locationContains` zugeordnet. Mehr Werte
+  stoppen den Run, bevor er etwas liest oder berechnet.
+- `emailDomains` als Liste wird `emailDomains` zugeordnet.
+- `outputEmail`, `resolveShortLinks` brauchen kein Feld. Jeder Datensatz enthält
   seine E-Mails & die vollständigen Links von X.
-- `findEmails`, `extractEmails`: kein Feld. Datensätze enthalten die E-Mails,
-  die ein Profil auf X veröffentlicht. Der Run-Status sagt, dass der Actor keine
-  verlinkte Website liest.
-- `validateEmails`: kein Feld. Der Run-Status sagt, dass E-Mails so kommen, wie
-  sie veröffentlicht sind, weil der Actor kein Postfach prüft.
+- `findEmails`, `extractEmails` brauchen kein Feld. Datensätze enthalten die
+  E-Mails, die ein Profil auf X veröffentlicht. Der Run-Status sagt, dass der
+  Actor keine verlinkte Website liest.
+- `validateEmails` braucht kein Feld. Der Run-Status sagt, dass E-Mails so
+  kommen, wie sie veröffentlicht sind, weil der Actor kein Postfach prüft.
 
 Setzt du einen dieser Namen & sein kanonisches Feld, gewinnt der kanonische
 Wert. Das Run-Log nennt das Feld, das verloren hat.
@@ -106,7 +108,7 @@ Jeder Suchbegriff liefert vorgeschlagene Accounts, Themen, Hashtags & Cashtags.
 - Ein Cashtag-Datensatz enthält `price`, `marketCap` & `dailyChangePercent`.
 - Profilfilter gelten nur für Profile Search.
 
-Ein Vorschlags-Datensatz sieht so aus:
+Ein Vorschlags-Datensatz sieht so aus.
 
 ```json
 {
@@ -125,7 +127,7 @@ Jeder Datensatz enthält ein Profil & in `sourceTarget` die Suchanfrage, die es
 gefunden hat.
 
 Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
-Profil-Datensatz sieht so aus:
+Profil-Datensatz sieht so aus.
 
 ```json
 {

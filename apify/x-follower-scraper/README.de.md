@@ -138,8 +138,8 @@ Die Eingaben unten decken häufige Aufgaben ab.
 
 ### Profil- oder Listen-URLs einfügen
 
-Füge Profil-, Listen- oder Community-URLs ein. Jede URL legt die Beziehung
-fest, die der Actor scrapt:
+Füge Profil-, Listen- oder Community-URLs ein. Jede URL legt die Beziehung fest,
+die der Actor scrapt.
 
 ```json
 {
@@ -157,7 +157,7 @@ fest, die der Actor scrapt:
 ### Viele Nutzernamen auf einmal
 
 `twitterHandles` ist eine Kurzform für viele `/<handle>/followers`-Ziele.
-Nutzernamen funktionieren mit oder ohne `@`:
+Nutzernamen funktionieren mit oder ohne `@`.
 
 ```json
 {
@@ -191,7 +191,7 @@ Aliasse.
 
 ### Runs mit mehreren Beziehungen
 
-Setze `relations`, um mehrere Beziehungen für dieselben Nutzernamen zu lesen:
+Setze `relations`, um mehrere Beziehungen für dieselben Nutzernamen zu lesen.
 
 ```json
 {
@@ -226,7 +226,7 @@ verhindert, dass das erste große Ziel `maxItems` aufbraucht.
 
 ### Filtern, bevor du zahlst
 
-Füge Filter hinzu, damit nur passende Profile in dein Dataset kommen:
+Füge Filter hinzu, damit nur passende Profile in dein Dataset kommen.
 
 ```json
 {
@@ -252,8 +252,8 @@ Kleinschreibung spielen keine Rolle.
 
 ### Zielgruppen-Überschneidungen finden
 
-Nutze den Merge-Modus, um Wettbewerber, Listen, Communities oder
-Beziehungstypen zu vergleichen:
+Nutze den Merge-Modus, um Wettbewerber, Listen, Communities oder Beziehungstypen
+zu vergleichen.
 
 ```json
 {
@@ -354,44 +354,45 @@ X Follower Scraper von Xquik schlug 9 andere Follower-Actors bei Kosten & Tempo.
 Sein Median-Datensatz im Modus full hatte 38 Felder, das 2,5-Fache des Medians
 der anderen.
 
-- `xquik/x-follower-scraper`: 1.000 nützliche Profile, $0.000155 pro nützlichem
-  Profil, 100,0 pro Sekunde & 38 Felder pro Datensatz.
+- `xquik/x-follower-scraper` lieferte 1.000 nützliche Profile zu $0.000155 pro
+  nützlichem Profil, mit 100,0 pro Sekunde & 38 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
-- `xquik/x-follower-scraper`: 1.000 nützliche Profile, $0.000155 pro nützlichem
-  Profil, 77,9 pro Sekunde & 38 Felder pro Datensatz.
+- `xquik/x-follower-scraper` lieferte 1.000 nützliche Profile zu $0.000155 pro
+  nützlichem Profil, mit 77,9 pro Sekunde & 38 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
-- `b2b_leads/X-Real-Time-Data`: 286 nützliche Profile, $0.000388 pro nützlichem
-  Profil, 3,1 pro Sekunde & 21 Felder pro Datensatz.
+- `b2b_leads/X-Real-Time-Data` lieferte 286 nützliche Profile zu $0.000388 pro
+  nützlichem Profil, mit 3,1 pro Sekunde & 21 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
-- `kaitoeasyapi/premium-x-follower-scraper-following-data`: 356 nützliche
-  Profile, $0.000506 pro nützlichem Profil, 21,9 pro Sekunde & 50 Felder pro
-  Datensatz.
+- `kaitoeasyapi/premium-x-follower-scraper-following-data` lieferte 356
+  nützliche Profile zu $0.000506 pro nützlichem Profil, mit 21,9 pro Sekunde &
+  50 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
-- `api-ninja/x-twitter-followers-scraper`: 350 nützliche Profile, $0.000809 pro
-  nützlichem Profil, 7,0 pro Sekunde & 8 Felder pro Datensatz.
+- `api-ninja/x-twitter-followers-scraper` lieferte 350 nützliche Profile zu
+  $0.000809 pro nützlichem Profil, mit 7,0 pro Sekunde & 8 Feldern pro
+  Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
-- `altimis/scweet`: 332 nützliche Profile, $0.000922 pro nützlichem Profil, 1,1
-  pro Sekunde & 21 Felder pro Datensatz.
+- `altimis/scweet` lieferte 332 nützliche Profile zu $0.000922 pro nützlichem
+  Profil, mit 1,1 pro Sekunde & 21 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
-- `apidojo/twitter-user-scraper`: 323 nützliche Profile, $0.001160 pro
-  nützlichem Profil, 7,3 pro Sekunde & 25 Felder pro Datensatz.
+- `apidojo/twitter-user-scraper` lieferte 323 nützliche Profile zu $0.001160 pro
+  nützlichem Profil, mit 7,3 pro Sekunde & 25 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
-- `atomus/twitter-scraper`: 323 nützliche Profile, $0.001272 pro nützlichem
-  Profil, 6,2 pro Sekunde & 13 Felder pro Datensatz.
+- `atomus/twitter-scraper` lieferte 323 nützliche Profile zu $0.001272 pro
+  nützlichem Profil, mit 6,2 pro Sekunde & 13 Feldern pro Datensatz.
   [Run ansehen](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
-- `practicaltools/cheap-simple-twitter-api`: 283 nützliche Profile, $0.002036
-  pro nützlichem Profil, 6,5 pro Sekunde & 4 Felder pro Datensatz.
-  [Run 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb),
+- `practicaltools/cheap-simple-twitter-api` lieferte 283 nützliche Profile zu
+  $0.002036 pro nützlichem Profil, mit 6,5 pro Sekunde & 4 Feldern pro
+  Datensatz. [Run 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb),
   [Run 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK),
   [Run 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
-- `maximedupre/twitter-scraper`: 320 nützliche Profile, $0.002192 pro nützlichem
-  Profil, 2,1 pro Sekunde & 15 Felder pro Datensatz.
+- `maximedupre/twitter-scraper` lieferte 320 nützliche Profile zu $0.002192 pro
+  nützlichem Profil, mit 2,1 pro Sekunde & 15 Feldern pro Datensatz.
   [Run 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs),
   [Run 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39),
   [Run 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
-- `seemuapps/x-followers-following-scraper`: 286 nützliche Profile, $0.003504
-  pro nützlichem Profil, 3,9 pro Sekunde & 9 Felder pro Datensatz.
-  [Run 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj),
+- `seemuapps/x-followers-following-scraper` lieferte 286 nützliche Profile zu
+  $0.003504 pro nützlichem Profil, mit 3,9 pro Sekunde & 9 Feldern pro
+  Datensatz. [Run 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj),
   [Run 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ),
   [Run 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
 
@@ -407,11 +408,11 @@ Eingabe, Run-Protokoll & Dataset.
 
 ## Eingabe
 
-Der Tab Input listet alle Optionen. Gib mindestens 1 dieser Felder an:
-`startUrls`, `twitterHandles`, `userIds`, `listIds` oder `communityIds`. Ihre
+Der Tab Input listet alle Optionen. Gib mindestens 1 der Felder `startUrls`,
+`twitterHandles`, `userIds`, `listIds` oder `communityIds` an. Ihre
 dokumentierten Aliasse zählen auch. Alle anderen Felder sind optional.
 
-Probiere diese Eingaben:
+Probiere diese Eingaben.
 
 - Füge einen Nutzernamen eines Wettbewerbers mit `relation: "followers"` zu
   `twitterHandles` hinzu.
@@ -425,7 +426,7 @@ Probiere diese Eingaben:
 
 ### Eingabe in Console & API
 
-Das Console-Formular hat diese Steuerelemente:
+Das Console-Formular hat diese Steuerelemente.
 
 - Das Feld Start URLs akzeptiert URL-Strings oder `{ "url": "..." }`-Objekte.
   Sein JSON-Editor unterstützt beide API-Formate.
@@ -451,52 +452,61 @@ zu. Kanonische Namen bleiben der dokumentierte Standard. Ein Alias verwirft nie
 ein Feld & ändert nie, was du zahlst.
 
 Jede Zeile nennt die Felder, die du schon nutzt, dann das Feld, dem der Actor
-sie zuordnet:
+sie zuordnet.
 
 - `twitterHandles`, `usernames`, `user_names`, `handles`, `userNameList`,
-  `screenNames`: `twitterHandles`
-- `username`, `handle`, `screenName`, als einzelner String: `twitterHandles`
-- `twitterUserIds`, `user_ids`, `userIdList`: `userIds`
-- `user_id`, `userId`, als einzelner String: `userIds`
-- `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls`: `startUrls`
-- `profileUrl`, als einzelner String: `startUrls`
-- `getFollowers`, `getFollowing`: `relations`
-- `type` mit `followers` oder `following`: `relation`
-- `relationship`, `relationshipType`, `listType`, `scrape_type`: `relation`
-- `relationships`: `relations`
-- `mode` mit `followers`, `following` oder `both`: `relation` oder `relations`
-- `category` mit `followers`, `following` oder `affiliates`: `relation`
-- `profile_urls`: `startUrls` für Links, `twitterHandles` für Nutzernamen
-- `maxResults`, `max_results`, `resultsLimit`, `count`, `max_items`: `maxItems`
+  `screenNames` werden `twitterHandles` zugeordnet.
+- `username`, `handle`, `screenName` als einzelner String werden
+  `twitterHandles` zugeordnet.
+- `twitterUserIds`, `user_ids`, `userIdList` werden `userIds` zugeordnet.
+- `user_id`, `userId` als einzelner String werden `userIds` zugeordnet.
+- `startUrls`, `urls`, `targets`, `profileUrls`, `accountUrls` werden
+  `startUrls` zugeordnet.
+- `profileUrl` als einzelner String wird `startUrls` zugeordnet.
+- `getFollowers`, `getFollowing` werden `relations` zugeordnet.
+- `type` mit `followers` oder `following` wird `relation` zugeordnet.
+- `relationship`, `relationshipType`, `listType`, `scrape_type` werden
+  `relation` zugeordnet.
+- `relationships` wird `relations` zugeordnet.
+- `mode` mit `followers`, `following` oder `both` wird `relation` oder
+  `relations` zugeordnet.
+- `category` mit `followers`, `following` oder `affiliates` wird `relation`
+  zugeordnet.
+- `profile_urls` wird `startUrls` für Links & `twitterHandles` für Nutzernamen
+  zugeordnet.
+- `maxResults`, `max_results`, `resultsLimit`, `count`, `max_items` werden
+  `maxItems` zugeordnet.
 - `per_profile_limit`, `maxItemsPerUser`, `maxUsersPerAccount`,
-  `max_followers_per_user`, `max_following_per_user`, `follower_limit`:
-  `maxItemsPerTarget`. 0 setzt keine Obergrenze pro Account.
+  `max_followers_per_user`, `max_following_per_user`, `follower_limit` werden
+  `maxItemsPerTarget` zugeordnet. 0 setzt keine Obergrenze pro Account.
   `max_following_per_user` setzt außerdem `relation` auf `following`.
-- `scrapeAllResults`: keine Obergrenze pro Ziel
-- `minTweets`: `minStatuses`
-- `includeRawUser`: `includeRaw`
-- `outputVariant`: `outputMode`
-- `requireEmail`: `hasEmail`
-- `requireWebsite`: `hasWebsite`. Der Filter behält ein Profil mit einem
-  beliebigen Link im Website-Feld, & der Run-Status sagt das.
-- `onlyVerified`, `blue_verified_only`: `blueVerifiedOnly`. In einer Eingabe mit
-  `source_mode` bleibt `blue_verified_only` ohne Wirkung.
-- `verification`: `any_verified` setzt `verifiedOnly`, `blue_verified` setzt
-  `blueVerifiedOnly`, `business` & `government` setzen `verifiedType`.
-  `unverified` stoppt den Run, bevor er etwas liest oder berechnet.
-- `bioKeywords`: `bioContains`. Es genügt, wenn 1 der Begriffe passt.
-- `locationKeywords` mit 1 Wert: `locationContains`. Mehr Werte stoppen den Run,
-  bevor er etwas liest oder berechnet.
-- `emailDomains` als Liste: `emailDomains`
-- `outputEmail`, `resolveShortLinks`: kein Feld nötig. Jeder Datensatz enthält
+- `scrapeAllResults` setzt keine Obergrenze pro Ziel.
+- `minTweets` wird `minStatuses` zugeordnet.
+- `includeRawUser` wird `includeRaw` zugeordnet.
+- `outputVariant` wird `outputMode` zugeordnet.
+- `requireEmail` wird `hasEmail` zugeordnet.
+- `requireWebsite` wird `hasWebsite` zugeordnet. Der Filter behält ein Profil
+  mit einem beliebigen Link im Website-Feld, & der Run-Status sagt das.
+- `onlyVerified`, `blue_verified_only` werden `blueVerifiedOnly` zugeordnet. In
+  einer Eingabe mit `source_mode` bleibt `blue_verified_only` ohne Wirkung.
+- In `verification` setzt `any_verified` das Feld `verifiedOnly`,
+  `blue_verified` setzt `blueVerifiedOnly`, `business` & `government` setzen
+  `verifiedType`. `unverified` stoppt den Run, bevor er etwas liest oder
+  berechnet.
+- `bioKeywords` wird `bioContains` zugeordnet. Es genügt, wenn 1 der Begriffe
+  passt.
+- `locationKeywords` mit 1 Wert wird `locationContains` zugeordnet. Mehr Werte
+  stoppen den Run, bevor er etwas liest oder berechnet.
+- `emailDomains` als Liste wird `emailDomains` zugeordnet.
+- `outputEmail`, `resolveShortLinks` brauchen kein Feld. Jeder Datensatz enthält
   seine E-Mails & die vollständigen Links von X.
-- `findEmails`, `extractEmails`: kein Feld. Datensätze enthalten die E-Mails,
-  die ein Profil auf X veröffentlicht. Der Run-Status sagt, dass der Actor keine
-  verlinkte Website liest.
-- `validateEmails`: kein Feld. Der Run-Status sagt, dass E-Mails so kommen, wie
-  sie veröffentlicht sind, weil der Actor kein Postfach prüft.
+- `findEmails`, `extractEmails` brauchen kein Feld. Datensätze enthalten die
+  E-Mails, die ein Profil auf X veröffentlicht. Der Run-Status sagt, dass der
+  Actor keine verlinkte Website liest.
+- `validateEmails` braucht kein Feld. Der Run-Status sagt, dass E-Mails so
+  kommen, wie sie veröffentlicht sind, weil der Actor kein Postfach prüft.
 
-So verhält sich eine eingefügte Eingabe:
+So verhält sich eine eingefügte Eingabe.
 
 - Eine Liste, die mit anderen Worten benannt ist, liest der Actor als seinen
   eigenen Namen dafür. `followings`, `Verified Followers` & `verifiedFollowers`
@@ -534,7 +544,7 @@ Die Schemas für Dataset & Run-Report beschreiben jedes gelieferte Feld.
 Primitive Felder enthalten auch Beispiele für Agents & generierte Integrationen.
 
 Die Beispielwerte unten dienen nur zur Veranschaulichung. Deine Datensätze
-enthalten Live-Daten zur Laufzeit. Ein kompakter Datensatz sieht so aus:
+enthalten Live-Daten zur Laufzeit. Ein kompakter Datensatz sieht so aus.
 
 ```json
 {
@@ -562,7 +572,7 @@ enthalten Live-Daten zur Laufzeit. Ein kompakter Datensatz sieht so aus:
 }
 ```
 
-Der Dedupe-Modus merge ergänzt Felder zur Überschneidung:
+Der Dedupe-Modus merge ergänzt Felder zur Überschneidung.
 
 ```json
 {
@@ -735,18 +745,18 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 Xquik bietet außerdem 47 Dashboard-Tools, eine REST-API, signierte Webhooks &
 einen MCP-Server.
 
-- [API-Dokumentation](https://docs.xquik.com/introduction): Anleitungen zur
-  REST-API
-- [Followers API](https://docs.xquik.com/api-reference/x/followers): ruft die
-  verfügbaren Follower eines Accounts ab
-- [Following API](https://docs.xquik.com/api-reference/x/following): zeigt, wem
-  ein Nutzer folgt
-- [List Members API](https://docs.xquik.com/api-reference/x/list-members):
-  exportiert Mitglieder einer öffentlichen X-Liste
-- [MCP-Server](https://docs.xquik.com/mcp/overview): findet & startet
-  unterstützte JSON- oder Text-Operationen
-- [Webhooks](https://docs.xquik.com/webhooks/overview): empfängt unterstützte
-  Post- & Profilereignisse
+- [API-Dokumentation](https://docs.xquik.com/introduction) bietet Anleitungen
+  zur REST-API.
+- [Followers API](https://docs.xquik.com/api-reference/x/followers) ruft die
+  verfügbaren Follower eines Accounts ab.
+- [Following API](https://docs.xquik.com/api-reference/x/following) zeigt, wem
+  ein Nutzer folgt.
+- [List Members API](https://docs.xquik.com/api-reference/x/list-members)
+  exportiert Mitglieder einer öffentlichen X-Liste.
+- [MCP-Server](https://docs.xquik.com/mcp/overview) findet & startet
+  unterstützte JSON- oder Text-Operationen.
+- Mit [Webhooks](https://docs.xquik.com/webhooks/overview) empfängst du
+  unterstützte Post- & Profilereignisse.
 
 ## FAQ
 

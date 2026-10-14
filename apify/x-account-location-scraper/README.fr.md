@@ -44,7 +44,7 @@ l'usage de la plateforme à part.
   dernier.
 - L'organisation à laquelle X indique que le compte est affilié.
 - L'âge du compte en jours et un lien vers son profil.
-- Le profil public complet : nom, bio, compteurs, certification, dates et
+- Le profil public complet, avec nom, bio, compteurs, certification, dates et
   images.
 - Une seconde lecture de tout compte dont X ne communique pas le libellé, sans
   frais supplémentaires.
@@ -70,7 +70,7 @@ aucune étape.
 ## Entrée
 
 `twitterHandles` accepte un compte sous toutes ses formes, que vous pouvez
-mélanger :
+mélanger.
 
 ```json
 {
@@ -86,7 +86,7 @@ mélanger :
 ```
 
 `startUrls` et `userIds` acceptent les mêmes formes. `startUrls` accepte chaque
-URL comme simple chaîne ou comme objet `{ "url": "..." }` :
+URL comme simple chaîne ou comme objet `{ "url": "..." }`.
 
 ```json
 {
@@ -108,19 +108,19 @@ l'écrire à chaque run.
 ## Sortie
 
 Chaque compte donne 1 ligne de dataset. Ce que X affiche sur la page À propos du
-compte vient en premier : `accountBasedIn`, `accountBasedInUnavailable`,
+compte vient en premier, dans `accountBasedIn`, `accountBasedInUnavailable`,
 `accountBasedInAccurate`, `affiliateUsername`, `connectedVia`,
 `connectedViaAccurate` et `usernameChanges`. Le profil public complet suit, avec
 `id`, `username`, `name`, `description`, `followers`, `following`, `verified`,
 `verifiedType`, `createdAt`, `profilePicture` et d'autres champs. Les 5 champs
-que l'Actor déduit du profil viennent en dernier : `accountBasedInCountryCode`,
-`connectedViaPlatform`, `connectedViaCountryCode`, `accountAgeDays` et
-`profileUrl`. Les champs absents de la source restent absents, et l'Actor omet
-tout code qu'il ne peut pas associer. X Account Location Scraper de Xquik
-n'invente aucune valeur.
+que l'Actor déduit du profil viennent en dernier. Ce sont
+`accountBasedInCountryCode`, `connectedViaPlatform`, `connectedViaCountryCode`,
+`accountAgeDays` et `profileUrl`. Les champs absents de la source restent
+absents, et l'Actor omet tout code qu'il ne peut pas associer. X Account
+Location Scraper de Xquik n'invente aucune valeur.
 
 Les exemples utilisent des valeurs fictives. Les résultats reflètent les données
-en direct. Une ligne ressemble à ceci :
+en direct. Une ligne ressemble à ceci.
 
 ```json
 {
@@ -151,7 +151,7 @@ en direct. Une ligne ressemble à ceci :
 }
 ```
 
-Une ligne distingue 3 cas :
+Une ligne distingue 3 cas.
 
 | La ligne contient                 | Cela signifie                                        | Que faire                        |
 | --------------------------------- | ---------------------------------------------------- | -------------------------------- |
@@ -325,7 +325,7 @@ lui-même que certains libellés peuvent être inexacts.
 
 X n'a pas communiqué le libellé lors des 2 lectures du run. Le libellé est
 inconnu, pas absent. Relancez le compte plus tard pour l'obtenir.
-`accountBasedIn: null` est différent : X n'affiche aucun libellé pour ce compte.
+`accountBasedIn: null` est différent. X n'affiche aucun libellé pour ce compte.
 
 ### Combien de comptes puis-je vérifier en 1 run ?
 

@@ -52,7 +52,7 @@ login.
 5. Scarica il dataset in JSON, CSV o Excel, oppure usa l'API di Apify.
 
 `startUrls` accetta ogni URL come stringa semplice o come oggetto
-`{ "url": "..." }`:
+`{ "url": "..." }`.
 
 ```json
 {
@@ -87,13 +87,14 @@ Apify. Attiva `alwaysSaveRunRecords` per scriverlo a ogni esecuzione.
 
 ### Migra da un altro Actor di engagement
 
-L'Actor legge questi nomi di campo di altri Actor di engagement:
+L'Actor legge questi nomi di campo di altri Actor di engagement.
 
-- `urls`: `startUrls`
-- `category`: `engagementTypes`. `replies`, `retweets`, `info` & `checkRetweet`
-  vengono letti come `replies`, `retweeters`, `tweet` & `repostCheck`.
-- `resultsPerCategory`: `maxItemsPerTarget`
-- `retweetCheckUsername`: `repostCheckUsers`
+- `urls` corrisponde a `startUrls`.
+- `category` corrisponde a `engagementTypes`. `replies`, `retweets`, `info` &
+  `checkRetweet` vengono letti come `replies`, `retweeters`, `tweet` &
+  `repostCheck`.
+- `resultsPerCategory` corrisponde a `maxItemsPerTarget`.
+- `retweetCheckUsername` corrisponde a `repostCheckUsers`.
 
 Una `category` che è compito di un altro Actor, come `followers` o `tweets`,
 ferma l'esecuzione. Non legge & non addebita nulla. Il messaggio nomina l'Actor
@@ -112,7 +113,7 @@ la copertura parziale in `incompleteTargets`. I filtri agiscono prima della
 fatturazione.
 
 Gli esempi usano valori fittizi. I risultati contengono dati live. Una riga di
-risposta ha questo aspetto:
+risposta ha questo aspetto.
 
 ```json
 {
@@ -128,7 +129,7 @@ risposta ha questo aspetto:
 ## Controllo dei repost
 
 Aggiungi `repostCheck` a `engagementTypes` & elenca gli account in
-`repostCheckUsers` per sapere se ogni account ha fatto repost di ogni post:
+`repostCheckUsers` per sapere se ogni account ha fatto repost di ogni post.
 
 ```json
 {
@@ -144,7 +145,7 @@ controllo legge i post più recenti di ogni account. Un repost più vecchio di
 quei post risulta `false` con `complete: false`.
 
 Un'esecuzione con sole righe `repostCheck` & `tweet` mantiene l'ordine del tuo
-input: ogni post, poi i suoi account come li hai elencati.
+input. Ogni post è seguito dai suoi account, come li hai elencati.
 
 ## Orario dei repost (retweet)
 

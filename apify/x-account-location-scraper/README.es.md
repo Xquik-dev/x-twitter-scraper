@@ -42,8 +42,8 @@ entregada**, y Apify factura aparte el uso de la plataforma.
 - Cuántas veces cambió la cuenta su nombre de usuario y cuándo fue la última.
 - La organización con la que X muestra que la cuenta está afiliada.
 - La antigüedad de la cuenta en días y un enlace a su perfil.
-- El perfil público completo: nombre, biografía, conteos, verificación, fechas e
-  imágenes.
+- El perfil público completo, con nombre, biografía, conteos, verificación,
+  fechas e imágenes.
 - Una segunda lectura de cada cuenta cuya etiqueta X retiene, sin costo
   adicional.
 - Muchas cuentas en 1 ejecución, leídas en paralelo y entregadas en el orden de
@@ -68,7 +68,7 @@ API.
 ## Entrada
 
 `twitterHandles` acepta todas las formas de una cuenta, en cualquier
-combinación:
+combinación.
 
 ```json
 {
@@ -84,7 +84,7 @@ combinación:
 ```
 
 `startUrls` y `userIds` aceptan las mismas formas. `startUrls` acepta cada URL
-como texto simple o como objeto `{ "url": "..." }`:
+como texto simple o como objeto `{ "url": "..." }`.
 
 ```json
 {
@@ -106,19 +106,19 @@ sin problemas omiten `run-report` y ahorran uso de Apify. Activa
 ## Salida
 
 Cada cuenta es 1 fila del dataset. Primero va lo que muestra la página "Acerca
-de esta cuenta" de X: `accountBasedIn`, `accountBasedInUnavailable`,
+de esta cuenta" de X, en `accountBasedIn`, `accountBasedInUnavailable`,
 `accountBasedInAccurate`, `affiliateUsername`, `connectedVia`,
 `connectedViaAccurate` y `usernameChanges`. Sigue el perfil público completo,
 con `id`, `username`, `name`, `description`, `followers`, `following`,
 `verified`, `verifiedType`, `createdAt`, `profilePicture` y más. Al final van 5
-campos que el Actor calcula a partir del perfil: `accountBasedInCountryCode`,
-`connectedViaPlatform`, `connectedViaCountryCode`, `accountAgeDays` y
-`profileUrl`. Los campos que faltan en el origen quedan ausentes, y un código
-que el Actor no puede identificar queda fuera. X Account Location Scraper de
-Xquik no inventa valores.
+campos que el Actor calcula a partir del perfil. Son
+`accountBasedInCountryCode`, `connectedViaPlatform`, `connectedViaCountryCode`,
+`accountAgeDays` y `profileUrl`. Los campos que faltan en el origen quedan
+ausentes, y un código que el Actor no puede identificar queda fuera. X Account
+Location Scraper de Xquik no inventa valores.
 
 Los ejemplos usan valores de muestra. Los resultados reflejan datos en vivo. Una
-fila se ve así:
+fila se ve así.
 
 ```json
 {
@@ -149,7 +149,7 @@ fila se ve así:
 }
 ```
 
-Una fila distingue 3 casos:
+Una fila distingue 3 casos.
 
 | La fila trae                      | Qué significa                                   | Qué hacer                              |
 | --------------------------------- | ----------------------------------------------- | -------------------------------------- |
@@ -322,7 +322,7 @@ posiblemente inexactas.
 
 X retuvo la etiqueta en las 2 lecturas de la ejecución. La etiqueta es
 desconocida, no ausente. Vuelve a ejecutar la cuenta más tarde para obtenerla.
-`accountBasedIn: null` es distinto: X no muestra ninguna etiqueta para esa
+`accountBasedIn: null` es distinto. X no muestra ninguna etiqueta para esa
 cuenta.
 
 ### ¿Cuántas cuentas puedo consultar en 1 ejecución?

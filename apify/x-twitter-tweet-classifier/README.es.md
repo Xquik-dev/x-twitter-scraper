@@ -132,7 +132,7 @@ transferencia, según las tarifas de tu plan. La pestaña Pricing lo muestra.
 ## Ejemplos de entrada y salida
 
 La entrada de arriba está lista para copiar. Una fila de salida abreviada se ve
-así:
+así.
 
 ```json
 {
@@ -175,7 +175,7 @@ los cargos pendientes.
 ## Resumen de ejecución y respuestas planas
 
 Una ejecución escribe un registro `analysis-summary` en su almacén de
-clave-valor en 4 casos:
+clave-valor en 4 casos.
 
 - Tiene un problema o es grande.
 - Define `monitor` sin `baselineDatasetId`, como primera ejecución de una serie.
@@ -220,7 +220,7 @@ un mapa vacío.
 Pasa `monitor.baselineDatasetId`, el ID del dataset de una ejecución anterior
 completada con la misma configuración de análisis. La comparación lee las filas
 de esa ejecución. Funciona aunque esa ejecución haya omitido su resumen. Luego,
-cada fila recibe un objeto `monitor`. Su estado puede ser:
+cada fila recibe un objeto `monitor`. Su estado toma estos valores.
 
 - `first_run` sin línea base.
 - `new_to_baseline` para posts que la ejecución anterior no tenía.

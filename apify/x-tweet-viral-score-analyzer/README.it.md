@@ -99,7 +99,7 @@ una stima.
 
 X ha pubblicato i suoi pesi di ranking nel repository `xai-org/x-algorithm`,
 file `home-mixer/params/param.rs`. X Tweet Viral Score Analyzer di Xquik ne
-applica 4 ai conteggi pubblici di ogni post:
+applica 4 ai conteggi pubblici di ogni post.
 
 | Conteggio | Peso |
 | --------- | ---- |
@@ -115,7 +115,7 @@ follower. `viral.algorithmBasis` indica il divisore, `views` o `followers`.
 Confronta solo punteggi con la stessa base. `viral.weightsVersion` indica i
 pesi, come `x_algorithm_params:2026-09-18`.
 
-La stima ha questi limiti:
+La stima ha questi limiti.
 
 - X moltiplica ogni peso per una probabilità che prevede per un singolo
   utente. L'Actor moltiplica per i conteggi osservati. Il risultato è una
@@ -137,7 +137,7 @@ un singolo post molto grande. Il tasso è `null` quando il conteggio dei followe
 manca o è 0.
 
 Il blocco `viral.calibration` del riepilogo dell'esecuzione riporta questi
-campi:
+campi.
 
 - `comparedPosts` conta i post con un Viral Score & un tasso reale.
 - `rankCorrelation` è una correlazione per ranghi di Spearman da -1 a 1. Mostra
@@ -149,7 +149,7 @@ campi:
 `gap` è il tasso reale standardizzato meno il Viral Score standardizzato. Un
 post entra in un elenco quando il suo gap raggiunge 1 deviazione standard.
 
-La calibrazione ha questi limiti:
+La calibrazione ha questi limiti.
 
 - Con meno di 10 post confrontati la calibrazione è `null`, con il motivo
   `too_few_posts`. Punteggi o tassi identici danno `no_variation`.
@@ -162,8 +162,8 @@ La calibrazione ha questi limiti:
 
 ## Report degli account
 
-Il blocco `viral.accounts` del riepilogo dell'esecuzione riporta ogni nome
-utente degli autori:
+Il blocco `viral.accounts` del riepilogo dell'esecuzione riporta questi dati per
+ogni nome utente degli autori.
 
 - Numero di post, Viral Score medio & tasso medio di engagement reale.
 - Il post migliore & il peggiore per Viral Score, con ID del post & URL.
@@ -174,7 +174,7 @@ Le fasce di lunghezza del testo sono `short`, `medium`, `long` & `extended`.
 `short` arriva a 80 caratteri, `medium` a 200 & `long` a 280. `extended` copre
 i testi più lunghi. Un post self-thread risponde al proprio autore.
 
-Il report ha questi limiti:
+Il report ha questi limiti.
 
 - Il report elenca i 50 nomi utente con più post valutati.
 - Il report segue i primi 1.000 nomi utente di un'esecuzione. `untrackedPosts`
@@ -191,7 +191,7 @@ i nomi utente del report degli account. `byViralScore` ordina per Viral Score
 medio. `byActualEngagementRate` ordina per tasso reale medio. Ogni elenco
 contiene fino a 20 nomi utente con `rank`, `posts` & `average`.
 
-La classifica ha questi limiti:
+La classifica ha questi limiti.
 
 - Un nome utente entra in classifica solo con almeno 3 post valutati.
 - L'elenco dei tassi salta i nomi utente senza conteggio dei follower.
@@ -239,7 +239,7 @@ del tuo piano. La scheda Pricing lo mostra.
 ## Esempi di input & output
 
 L'input qui sopra è pronto da copiare. Una riga di output abbreviata ha questo
-aspetto:
+aspetto.
 
 ```json
 {
@@ -288,7 +288,7 @@ analisi addebitate & addebiti in sospeso.
 ## Riepilogo dell'esecuzione & risposte piatte
 
 Un'esecuzione scrive un record `analysis-summary` nel suo key-value store in 4
-casi:
+casi.
 
 - Incontra un problema o è grande.
 - Imposta `monitor` senza `baselineDatasetId`, come prima esecuzione di una
@@ -333,7 +333,7 @@ una mappa vuota.
 Passa `monitor.baselineDatasetId`, l'ID del dataset di un'esecuzione precedente
 completata con le stesse impostazioni di analisi. Il confronto legge le righe di
 quell'esecuzione. Funziona anche se quell'esecuzione ha saltato il riepilogo.
-Ogni riga riceve poi un oggetto `monitor`. Il suo stato può essere:
+Ogni riga riceve poi un oggetto `monitor`. Il suo stato assume questi valori.
 
 - `first_run` senza baseline.
 - `new_to_baseline` per i post che l'esecuzione precedente non aveva.

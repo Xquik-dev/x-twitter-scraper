@@ -32,16 +32,17 @@ consegnata**. Apify fattura a parte l'uso della piattaforma.
 ## Dati di contatto su ogni riga
 
 - La prima email che il profilo pubblica, in minuscolo.
-- Il dominio di quell'email & il campo del profilo che la contiene: bio, nome o
-  posizione.
+- Il dominio di quell'email & il campo del profilo che la contiene, cioè bio,
+  nome o posizione.
 - Ogni email del profilo, anche quando è scritta come "name [at] site [dot]
   com".
 - I numeri di telefono che il profilo pubblica, ad esempio un link WhatsApp.
 - Il sito web & i link della bio del profilo, ognuno con la sua rete, ad esempio
   LinkedIn, GitHub o Telegram.
-- Il profilo pubblico completo: nome, bio, conteggi, verifica, date & immagini.
-- 3 fonti in 1 esecuzione: account, i loro follower o following, & ricerche di
-  utenti.
+- Il profilo pubblico completo, con nome, bio, conteggi, verifica, date &
+  immagini.
+- 3 fonti in 1 esecuzione, cioè account, i loro follower o following, & ricerche
+  di utenti.
 - Filtri per dominio email, email aziendale, follower, età dell'account, bio &
   posizione.
 - Nomi utente con o senza @, URL di x.com & twitter.com & ID utente numerici.
@@ -63,7 +64,7 @@ In nessun passaggio inserisci cookie di X, dati di login o una chiave API.
 ## Input
 
 `twitterHandles` accetta ogni forma di un account, in qualsiasi combinazione.
-L'esecuzione controlla ogni account & consegna quelli che pubblicano un'email:
+L'esecuzione controlla ogni account & consegna quelli che pubblicano un'email.
 
 ```json
 {
@@ -74,7 +75,7 @@ L'esecuzione controlla ogni account & consegna quelli che pubblicano un'email:
 
 `startUrls` & `userIds` accettano le stesse forme. Con `expandFollowers`,
 l'esecuzione legge invece i follower di ogni account & tiene quelli che
-pubblicano un'email. `expansionRelation` sceglie `Followers` o `Following`:
+pubblicano un'email. `expansionRelation` sceglie `Followers` o `Following`.
 
 ```json
 {
@@ -87,7 +88,7 @@ pubblicano un'email. `expansionRelation` sceglie `Followers` o `Following`:
 ```
 
 `searchTerms` cerca utenti di X per nome, nome utente o parole della bio. Ogni
-termine è 1 ricerca:
+termine è 1 ricerca.
 
 ```json
 {
@@ -119,24 +120,25 @@ senza problemi saltano `run-report` & risparmiano uso di Apify. Attiva
 ### Migra da un altro Actor di email
 
 Incolla l'input che usi già. X Email Scraper di Xquik legge questi nomi di campo
-di altri Actor. Ogni voce elenca i loro campi, poi il campo a cui corrispondono:
+di altri Actor. Ogni voce elenca i loro campi, poi il campo a cui corrispondono.
 
-- `requireEmail`: nessun campo necessario. Ogni profilo consegnato pubblica
+- `requireEmail` non richiede alcun campo. Ogni profilo consegnato pubblica
   un'email.
-- `requireWebsite`: `hasWebsite`. Tiene un profilo con qualsiasi link nel campo
-  del sito web, & lo stato dell'esecuzione lo dice.
-- `bioKeywords`: `bioContains`. Basta che corrisponda 1 dei termini.
-- `locationKeywords` con 1 valore: `locationContains`. Con più valori
-  l'esecuzione si ferma prima di leggere o addebitare qualcosa.
-- `emailDomains` come elenco: `emailDomains`
-- `outputEmail`, `resolveShortLinks`: nessun campo necessario. Ogni riga
+- `requireWebsite` corrisponde a `hasWebsite`. Tiene un profilo con qualsiasi
+  link nel campo del sito web, & lo stato dell'esecuzione lo dice.
+- `bioKeywords` corrisponde a `bioContains`. Basta che corrisponda 1 dei
+  termini.
+- `locationKeywords` con 1 valore corrisponde a `locationContains`. Con più
+  valori l'esecuzione si ferma prima di leggere o addebitare qualcosa.
+- `emailDomains` come elenco corrisponde a `emailDomains`.
+- `outputEmail`, `resolveShortLinks` non richiedono alcun campo. Ogni riga
   contiene le sue email & i link completi di X.
-- `findEmails`, `extractEmails`: nessun campo. Le righe contengono le email che
-  un profilo pubblica su X. Lo stato dell'esecuzione dice che l'Actor non legge
-  nessun sito collegato.
-- `validateEmails`: nessun campo. Lo stato dell'esecuzione dice che le email
-  arrivano così come sono pubblicate, perché l'Actor non verifica nessuna
-  casella.
+- `findEmails`, `extractEmails` non richiedono alcun campo. Le righe contengono
+  le email che un profilo pubblica su X. Lo stato dell'esecuzione dice che
+  l'Actor non legge nessun sito collegato.
+- `validateEmails` non richiede alcun campo. Lo stato dell'esecuzione dice che
+  le email arrivano così come sono pubblicate, perché l'Actor non verifica
+  nessuna casella.
 
 Quando imposti uno di questi nomi & il suo campo canonico, vince il valore
 canonico. Il log dell'esecuzione nomina il campo scartato.
@@ -144,14 +146,14 @@ canonico. Il log dell'esecuzione nomina il campo scartato.
 ## Output
 
 Ogni profilo che pubblica un'email è 1 riga del dataset. Per primi vengono i
-dati di contatto: `email`, `emailDomain`, `emailSource` & `contactInfo`. Segue
-il profilo pubblico completo, con `id`, `username`, `name`, `description`,
+dati di contatto, in `email`, `emailDomain`, `emailSource` & `contactInfo`.
+Segue il profilo pubblico completo, con `id`, `username`, `name`, `description`,
 `followers`, `following`, `verified`, `verifiedType`, `createdAt`,
 `profilePicture` & altro. I campi di origine mancanti restano assenti. X Email
 Scraper di Xquik non inventa valori.
 
 Gli esempi usano valori fittizi. I risultati contengono dati live. Una riga ha
-questo aspetto:
+questo aspetto.
 
 ```json
 {
@@ -202,7 +204,7 @@ proviene la riga.
 
 ## Cosa significa l'email
 
-Un'email è un indirizzo che l'account ha scritto sul proprio profilo: nella bio,
+Un'email è un indirizzo che l'account ha scritto sul proprio profilo, nella bio,
 nel nome o nella posizione. L'Actor lo restituisce così come l'account lo ha
 pubblicato & lo mette in minuscolo. Nulla verifica che l'indirizzo riceva posta,
 & nulla legge il sito web a cui un profilo rimanda. `writtenAs` contiene la
@@ -357,9 +359,10 @@ credenziali. Ogni lettura avviene sull'infrastruttura di Xquik.
 
 ### Da dove vengono le email?
 
-Dal profilo stesso: la bio, il nome & la posizione che l'account ha scritto.
-L'Actor non legge nessun post né nessun sito web collegato, quindi ogni email è
-un indirizzo che l'account ha pubblicato sul proprio profilo X.
+Vengono dal profilo stesso, cioè dalla bio, dal nome & dalla posizione che
+l'account ha scritto. L'Actor non legge nessun post né nessun sito web
+collegato, quindi ogni email è un indirizzo che l'account ha pubblicato sul
+proprio profilo X.
 
 ### L'Actor verifica che un'email funzioni?
 

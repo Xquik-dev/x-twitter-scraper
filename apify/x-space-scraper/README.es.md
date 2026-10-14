@@ -43,9 +43,9 @@ el uso de la plataforma.
   compartió cada uno y cuándo.
 - La grabación de un Espacio finalizado, como URL de lista HLS, con
   `includeReplay`.
-- Transmisiones por URL o ID: título, estado, horas, cantidad de espectadores y
-  anfitrión.
-- Eliminación de duplicados antes de facturar: un Espacio que encuentran 2
+- Transmisiones por URL o ID, con título, estado, horas, cantidad de
+  espectadores y anfitrión.
+- Eliminación de duplicados antes de facturar. Un Espacio que encuentran 2
   términos de búsqueda es 1 fila.
 
 ## Cómo encontrar Espacios de X
@@ -58,7 +58,7 @@ el uso de la plataforma.
 5. Define `maxItems` para limitar las filas entregadas y haz clic en Start.
 6. Descarga el dataset en JSON, CSV o Excel, o usa la API de Apify.
 
-`startUrls` acepta cada URL como texto simple o como objeto `{ "url": "..." }`:
+`startUrls` acepta cada URL como texto simple o como objeto `{ "url": "..." }`.
 
 ```json
 {
@@ -80,7 +80,7 @@ el uso de la plataforma.
 ```
 
 Un término de búsqueda encuentra los Espacios que comparten los posts que
-coinciden. Acepta los mismos operadores que la búsqueda de X:
+coinciden. Acepta los mismos operadores que la búsqueda de X.
 
 | Objetivo                                         | Término de búsqueda |
 | ------------------------------------------------ | ------------------- |
@@ -90,10 +90,10 @@ coinciden. Acepta los mismos operadores que la búsqueda de X:
 | Espacios en 1 idioma                             | `startups lang:es`  |
 | Espacios que comparten posts con muchos Me gusta | `nba min_faves:50`  |
 
-`queryType` elige qué posts van primero: `Latest` para los más recientes, `Top`
-para los de mayor interacción.
+`queryType` elige qué posts van primero. `Latest` prioriza los más recientes y
+`Top`, los de mayor interacción.
 
-Lee Espacios que ya conoces por URL o ID:
+Lee Espacios que ya conoces por URL o ID.
 
 ```json
 {
@@ -102,7 +102,7 @@ Lee Espacios que ya conoces por URL o ID:
 }
 ```
 
-Activa `includeReplay` para obtener la grabación de cada Espacio finalizado:
+Activa `includeReplay` para obtener la grabación de cada Espacio finalizado.
 
 ```json
 { "spaceIds": ["1OGwblLjnQMKB"], "includeReplay": true }
@@ -113,7 +113,7 @@ y `status`. Un Espacio en vivo, programado o sin grabación no trae `replay`. La
 grabación no tiene costo adicional.
 
 Lee transmisiones, el video en vivo que X aloja en `x.com/i/broadcasts`, por URL
-o ID:
+o ID.
 
 ```json
 {
@@ -131,7 +131,7 @@ Cada fila contiene 1 Espacio o transmisión y su término de búsqueda, URL o ID
 `sourceTarget`. `resultType` es `space` o `broadcast`.
 
 Los ejemplos usan valores de muestra. Los resultados reflejan datos en vivo. Una
-fila de Espacio se ve así:
+fila de Espacio se ve así.
 
 ```json
 {
@@ -160,7 +160,7 @@ fila de Espacio se ve así:
 }
 ```
 
-`state` contiene 1 de 5 valores, tal como X los nombra:
+`state` contiene 1 de 5 valores, tal como X los nombra.
 
 | `state`      | El Espacio                               |
 | ------------ | ---------------------------------------- |
@@ -174,7 +174,7 @@ Los Espacios `Ended` y `TimedOut` traen `endedAt`, y ambos pueden conservar una
 grabación. X muestra un Espacio para suscriptores o de una Comunidad solo a su
 audiencia, así que esos Espacios no devuelven ninguna fila.
 
-Una fila de transmisión tiene `resultType: "broadcast"` y se ve así:
+Una fila de transmisión tiene `resultType: "broadcast"` y se ve así.
 
 ```json
 {

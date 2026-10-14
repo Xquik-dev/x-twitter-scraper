@@ -65,7 +65,7 @@ diffuse en direct en ce moment.
 ### Quelles données X Profile Scraper peut-il extraire ?
 
 Les lignes de profil utilisent `resultType: "profile"`. Voici les champs
-principaux :
+principaux.
 
 | Champ              | Description                                      |
 | ------------------ | ------------------------------------------------ |
@@ -103,7 +103,7 @@ Le schéma du dataset documente tous les autres champs, comme
 `identityVerification`, `isAutomated`, `automatedBy`, `withheldInCountries` et
 `verificationReason`.
 
-Les lignes optionnelles gardent le format des réponses de l'API REST de Xquik :
+Les lignes optionnelles gardent le format des réponses de l'API REST de Xquik.
 
 | `resultType`              | Activé par                 | Une ligne par        |
 | ------------------------- | -------------------------- | -------------------- |
@@ -122,7 +122,7 @@ suivez ou bloquez un compte.
 
 ## Comment utiliser X Profile Scraper pour scraper des données de profil ?
 
-Suivez ces étapes dans Apify Console :
+Suivez ces étapes dans Apify Console.
 
 1. Ouvrez un [exemple de tâche](#exemples-de-tâches) ou l'onglet Input.
 2. Ajoutez des noms d'utilisateur à `twitterHandles`, des URL à `startUrls` ou
@@ -145,7 +145,7 @@ fonctionnent avec ou sans `@`.
 ### Coller des URL ou des ID de profil
 
 `startUrls` accepte chaque URL comme simple chaîne ou comme objet
-`{ "url": "..." }`. `userIds` accepte des ID utilisateur X numériques :
+`{ "url": "..." }`. `userIds` accepte des ID utilisateur X numériques.
 
 ```json
 {
@@ -339,30 +339,31 @@ optionnels.
 
 Collez l'entrée que vous utilisez déjà. X Profile Scraper de Xquik lit ces noms
 de champs d'autres Actors de profils. Chaque ligne nomme leurs champs, puis le
-champ auquel ils correspondent :
+champ auquel ils correspondent.
 
-- `profiles`, `userNames`, `usernames`, `handles`, `screenNames` :
-  `twitterHandles`
-- `urls`, `profileUrls` : `startUrls`
-- `maxProfiles`, `maxResults` : `maxItems`
-- `shouldScrapeFollowers`, `shouldScrapeFollowings` : `includeFollowers`,
-  `includeFollowing`
-- `requireEmail` : `hasEmail`
-- `requireWebsite` : `hasWebsite`. Il garde un profil avec n'importe quel lien
-  dans son champ de site web, et le statut du run le dit.
-- `filterByBlueVerified` : `blueVerifiedOnly`. `false` arrête le run avant toute
-  lecture ou facturation.
-- `bioKeywords` : `bioContains`. Il suffit que 1 de ses termes corresponde.
-- `locationKeywords` avec 1 valeur : `locationContains`. Avec plus de valeurs,
-  le run s'arrête avant toute lecture ou facturation.
-- `emailDomains` en liste : `emailDomains`
-- `outputEmail`, `resolveShortLinks` : aucun champ nécessaire. Chaque ligne
+- `profiles`, `userNames`, `usernames`, `handles`, `screenNames` correspondent à
+  `twitterHandles`.
+- `urls`, `profileUrls` correspondent à `startUrls`.
+- `maxProfiles`, `maxResults` correspondent à `maxItems`.
+- `shouldScrapeFollowers`, `shouldScrapeFollowings` correspondent à
+  `includeFollowers`, `includeFollowing`.
+- `requireEmail` correspond à `hasEmail`.
+- `requireWebsite` correspond à `hasWebsite`. Il garde un profil avec n'importe
+  quel lien dans son champ de site web, et le statut du run le dit.
+- `filterByBlueVerified` correspond à `blueVerifiedOnly`. `false` arrête le run
+  avant toute lecture ou facturation.
+- `bioKeywords` correspond à `bioContains`. Il suffit que 1 de ses termes
+  corresponde.
+- `locationKeywords` avec 1 valeur correspond à `locationContains`. Avec plus de
+  valeurs, le run s'arrête avant toute lecture ou facturation.
+- `emailDomains` en liste correspond à `emailDomains`.
+- `outputEmail`, `resolveShortLinks` ne demandent aucun champ. Chaque ligne
   contient ses e-mails et les liens complets de X.
-- `findEmails`, `extractEmails` : aucun champ. Les lignes contiennent les
-  e-mails qu'un profil publie sur X. Le statut du run indique que l'Actor ne lit
-  aucun site lié.
-- `validateEmails` : aucun champ. Le statut du run indique que les e-mails
-  arrivent tels que publiés, car l'Actor ne vérifie aucune boîte mail.
+- `findEmails`, `extractEmails` ne demandent aucun champ. Les lignes contiennent
+  les e-mails qu'un profil publie sur X. Le statut du run indique que l'Actor ne
+  lit aucun site lié.
+- `validateEmails` ne demande aucun champ. Le statut du run indique que les
+  e-mails arrivent tels que publiés, car l'Actor ne vérifie aucune boîte mail.
 
 `category` réglé sur `user_info` ne change rien. Une catégorie qui relève d'un
 autre Actor, comme `tweets` ou `followers`, arrête le run. Il ne lit et ne
@@ -389,7 +390,7 @@ Chaque ligne est un objet JSON. Le schéma du dataset donne à chaque champ un
 titre et une description, pour que les agents IA lisent les lignes sans deviner.
 
 Les exemples utilisent des valeurs fictives. Les résultats reflètent les données
-en direct. Une ligne de profil ressemble à ceci :
+en direct. Une ligne de profil ressemble à ceci.
 
 ```json
 {
@@ -534,22 +535,22 @@ données dont vous avez besoin.
 Xquik propose aussi 53 outils de tableau de bord, une API REST, des webhooks
 signés et un serveur MCP.
 
-- [Documentation de l'API](https://docs.xquik.com/introduction) : guides de
-  l'API REST
-- [API de consultation de profil](https://docs.xquik.com/api-reference/x/twitter-profile-lookup) :
-  obtenir 1 profil public
-- [API des posts d'un utilisateur](https://docs.xquik.com/api-reference/x/user-tweets) :
-  obtenir les posts d'un utilisateur
-- [API des abonnés](https://docs.xquik.com/api-reference/x/followers) : obtenir
-  les abonnés d'un compte
-- [API de traduction de bio](https://docs.xquik.com/api-reference/x/user-bio-translation) :
-  traduire la bio d'un profil
-- [API de statut en direct](https://docs.xquik.com/api-reference/x/user-live-status) :
-  vérifier si un utilisateur est en direct
-- [Serveur MCP](https://docs.xquik.com/mcp/overview) : découvrir les outils pris
-  en charge
-- [Webhooks](https://docs.xquik.com/webhooks/overview) : livraison d'événements
-  signés
+- La [documentation de l'API](https://docs.xquik.com/introduction) réunit les
+  guides de l'API REST.
+- L'[API de consultation de profil](https://docs.xquik.com/api-reference/x/twitter-profile-lookup)
+  renvoie 1 profil public.
+- L'[API des posts d'un utilisateur](https://docs.xquik.com/api-reference/x/user-tweets)
+  renvoie les posts d'un utilisateur.
+- L'[API des abonnés](https://docs.xquik.com/api-reference/x/followers) renvoie
+  les abonnés d'un compte.
+- L'[API de traduction de bio](https://docs.xquik.com/api-reference/x/user-bio-translation)
+  traduit la bio d'un profil.
+- L'[API de statut en direct](https://docs.xquik.com/api-reference/x/user-live-status)
+  vérifie si un utilisateur est en direct.
+- Avec le [serveur MCP](https://docs.xquik.com/mcp/overview), découvrez les
+  outils pris en charge.
+- Les [webhooks](https://docs.xquik.com/webhooks/overview) livrent des
+  événements signés.
 
 ## FAQ
 

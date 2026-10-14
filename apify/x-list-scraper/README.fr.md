@@ -33,8 +33,8 @@ connexion.
 
 ## Données de Liste et filtres
 
-- Les détails de la Liste : nom, description, nombres de membres et d'abonnés,
-  date de création, bannière et profil public du propriétaire.
+- Les détails de la Liste, avec nom, description, nombres de membres et
+  d'abonnés, date de création, bannière et profil public du propriétaire.
 - Les posts de la Liste avec texte, auteur, métriques, médias et horodatages.
 - Les membres et les abonnés de la Liste.
 - La recherche de Listes par mot-clé. Chaque ligne est 1 Liste avec son
@@ -62,7 +62,7 @@ connexion.
 5. Téléchargez le dataset en JSON, CSV ou Excel, ou passez par l'API Apify.
 
 `startUrls` accepte chaque URL comme simple chaîne ou comme objet
-`{ "url": "..." }` :
+`{ "url": "..." }`.
 
 ```json
 {
@@ -84,7 +84,7 @@ connexion.
 }
 ```
 
-Pour trouver des Listes par mot-clé, envoyez des termes de recherche :
+Pour trouver des Listes par mot-clé, envoyez des termes de recherche.
 
 ```json
 { "searchTerms": ["space news", "climate science"], "maxItemsPerTarget": 50 }
@@ -104,7 +104,7 @@ réponses de Xquik pour un post ou un profil.
 ### Les Listes d'un compte
 
 Ajoutez des noms d'utilisateur dans `twitterHandles`, ou des URL de profil dans
-`startUrls`, pour lister les Listes publiques de chaque compte :
+`startUrls`, pour lister les Listes publiques de chaque compte.
 
 ```json
 { "twitterHandles": ["verge"], "accountLists": ["created", "memberships"] }
@@ -127,7 +127,7 @@ donne 2 lignes, 1 sous chacun. Xquik facture chaque ligne. `dedupeAcrossTargets`
 ne retire jamais ces lignes.
 
 Les exemples utilisent des valeurs fictives. Les résultats reflètent les données
-en direct. Une ligne de détails de Liste ressemble à ceci :
+en direct. Une ligne de détails de Liste ressemble à ceci.
 
 ```json
 {
@@ -143,7 +143,7 @@ en direct. Une ligne de détails de Liste ressemble à ceci :
 }
 ```
 
-Une ligne de membre de Liste ressemble à ceci :
+Une ligne de membre de Liste ressemble à ceci.
 
 ```json
 {
@@ -156,7 +156,7 @@ Une ligne de membre de Liste ressemble à ceci :
 }
 ```
 
-Une ligne `list` issue d'un terme de recherche ressemble à ceci :
+Une ligne `list` issue d'un terme de recherche ressemble à ceci.
 
 ```json
 {

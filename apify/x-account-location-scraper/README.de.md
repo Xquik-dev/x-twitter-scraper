@@ -42,8 +42,8 @@ die Plattformnutzung separat.
 - Wie oft der Account seinen Nutzernamen geändert hat & wann zuletzt.
 - Die Organisation, zu der der Account laut X gehört.
 - Das Account-Alter in Tagen & ein Link zum Profil.
-- Das vollständige öffentliche Profil: Name, Bio, Zahlen, Verifizierung,
-  Datumsangaben & Bilder.
+- Das vollständige öffentliche Profil mit Name, Bio, Zahlen, Verifizierung,
+  Datumsangaben & Bildern.
 - Ein zweiter Abruf für jeden Account, dessen Angabe X zurückhält, ohne
   Aufpreis.
 - Viele Accounts in 1 Run, parallel gelesen & in Eingabereihenfolge geliefert.
@@ -65,7 +65,7 @@ Du gibst in keinem Schritt X-Cookies, einen Login oder einen API-Schlüssel ein.
 
 ## Eingabe
 
-`twitterHandles` nimmt jede Schreibweise eines Accounts an, auch gemischt:
+`twitterHandles` nimmt jede Schreibweise eines Accounts an, auch gemischt.
 
 ```json
 {
@@ -81,7 +81,7 @@ Du gibst in keinem Schritt X-Cookies, einen Login oder einen API-Schlüssel ein.
 ```
 
 `startUrls` & `userIds` nehmen dieselben Schreibweisen an. `startUrls` nimmt
-jede URL als einfachen String oder als Objekt `{ "url": "..." }`:
+jede URL als einfachen String oder als Objekt `{ "url": "..." }`.
 
 ```json
 {
@@ -103,19 +103,19 @@ Das gilt auch, wenn 1 Eintrag sein Nutzername & der andere seine Nutzer-ID ist.
 ## Ausgabe
 
 Jeder Account ist 1 Datensatz im Dataset. Zuerst kommt, was die X-Seite "Über
-diesen Account" zeigt: `accountBasedIn`, `accountBasedInUnavailable`,
+diesen Account" zeigt, in `accountBasedIn`, `accountBasedInUnavailable`,
 `accountBasedInAccurate`, `affiliateUsername`, `connectedVia`,
 `connectedViaAccurate` & `usernameChanges`. Danach folgt das vollständige
 öffentliche Profil mit `id`, `username`, `name`, `description`, `followers`,
 `following`, `verified`, `verifiedType`, `createdAt`, `profilePicture` & mehr.
-Zuletzt kommen 5 Felder, die der Actor aus dem Profil ableitet:
+Zuletzt kommen 5 Felder, die der Actor aus dem Profil ableitet. Es sind
 `accountBasedInCountryCode`, `connectedViaPlatform`, `connectedViaCountryCode`,
 `accountAgeDays` & `profileUrl`. Fehlende Quellfelder bleiben weg, & ein Code,
 den der Actor nicht zuordnen kann, bleibt ebenfalls weg. X Account Location
 Scraper von Xquik erfindet keine Werte.
 
 Die Beispiele zeigen Musterwerte. Echte Ergebnisse enthalten Live-Daten. Ein
-Datensatz sieht so aus:
+Datensatz sieht so aus.
 
 ```json
 {
@@ -146,7 +146,7 @@ Datensatz sieht so aus:
 }
 ```
 
-Ein Datensatz unterscheidet 3 Fälle:
+Ein Datensatz unterscheidet 3 Fälle.
 
 | Der Datensatz enthält              | Das bedeutet                                        | Was du tust                                     |
 | ---------------------------------- | --------------------------------------------------- | ----------------------------------------------- |

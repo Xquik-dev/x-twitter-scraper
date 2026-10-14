@@ -32,8 +32,8 @@ profil livré**, et Apify facture l'usage de la plateforme à part.
 
 - Des filtres d'audience, de posts, d'ancienneté, de certification, de site web,
   de localisation, de bio et de nom d'utilisateur.
-- Le mode Search Autocomplete : les comptes, sujets, hashtags et cashtags que X
-  suggère pour chaque terme de recherche.
+- Le mode Search Autocomplete, avec les comptes, sujets, hashtags et cashtags
+  que X suggère pour chaque terme de recherche.
 - La reprise de 1 requête depuis un curseur enregistré dans `startCursor`.
 - Les migrations conservent le travail déjà accepté.
 - Les filtres et la suppression des doublons avant la facturation.
@@ -64,23 +64,24 @@ Apify. Activez `alwaysSaveRunRecords` pour l'écrire à chaque run.
 
 Collez l'entrée que vous utilisez déjà. X User Search Scraper de Xquik lit ces
 noms de champs d'autres Actors. Chaque ligne nomme leurs champs, puis le champ
-auquel ils correspondent :
+auquel ils correspondent.
 
-- `requireEmail`, `requireWebsite` : `hasEmail`, `hasWebsite`
-- `verification` : `any_verified` règle `verifiedOnly`, `blue_verified` règle
-  `blueVerifiedOnly`, `business` et `government` règlent `verifiedType`.
+- `requireEmail`, `requireWebsite` correspondent à `hasEmail`, `hasWebsite`.
+- Dans `verification`, `any_verified` règle `verifiedOnly`, `blue_verified`
+  règle `blueVerifiedOnly`, `business` et `government` règlent `verifiedType`.
   `unverified` arrête le run avant toute lecture ou facturation.
-- `bioKeywords` : `bioContains`. Il suffit que 1 de ses termes corresponde.
-- `locationKeywords` avec 1 valeur : `locationContains`. Avec plus de valeurs,
-  le run s'arrête avant toute lecture ou facturation.
-- `emailDomains` en liste : `emailDomains`
-- `outputEmail`, `resolveShortLinks` : aucun champ nécessaire. Chaque ligne
+- `bioKeywords` correspond à `bioContains`. Il suffit que 1 de ses termes
+  corresponde.
+- `locationKeywords` avec 1 valeur correspond à `locationContains`. Avec plus de
+  valeurs, le run s'arrête avant toute lecture ou facturation.
+- `emailDomains` en liste correspond à `emailDomains`.
+- `outputEmail`, `resolveShortLinks` ne demandent aucun champ. Chaque ligne
   contient ses e-mails et les liens complets de X.
-- `findEmails`, `extractEmails` : aucun champ. Les lignes contiennent les
-  e-mails qu'un profil publie sur X. Le statut du run indique que l'Actor ne lit
-  aucun site lié.
-- `validateEmails` : aucun champ. Le statut du run indique que les e-mails
-  arrivent tels que publiés, car l'Actor ne vérifie aucune boîte mail.
+- `findEmails`, `extractEmails` ne demandent aucun champ. Les lignes contiennent
+  les e-mails qu'un profil publie sur X. Le statut du run indique que l'Actor ne
+  lit aucun site lié.
+- `validateEmails` ne demande aucun champ. Le statut du run indique que les
+  e-mails arrivent tels que publiés, car l'Actor ne vérifie aucune boîte mail.
 
 Si vous réglez l'un de ces noms et son champ canonique, la valeur canonique
 l'emporte. Le log du run nomme le champ écarté.
@@ -107,7 +108,7 @@ hashtags et de cashtags.
 - Une ligne de cashtag porte `price`, `marketCap` et `dailyChangePercent`.
 - Les filtres de profil s'appliquent seulement à Profile Search.
 
-Une ligne de suggestion ressemble à ceci :
+Une ligne de suggestion ressemble à ceci.
 
 ```json
 {
@@ -126,7 +127,7 @@ Chaque ligne contient un profil et, dans `sourceTarget`, la requête qui l'a
 trouvé.
 
 Les exemples utilisent des valeurs fictives. Les résultats reflètent les données
-en direct. Une ligne de profil ressemble à ceci :
+en direct. Une ligne de profil ressemble à ceci.
 
 ```json
 {

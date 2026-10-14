@@ -121,7 +121,7 @@ tarifs de votre plan. L'onglet Pricing l'indique.
 
 ## Exemples d'entrée et de sortie
 
-L'entrée ci-dessus est prête à copier. Voici une ligne de sortie abrégée :
+L'entrée ci-dessus est prête à copier. Voici une ligne de sortie abrégée.
 
 ```json
 {
@@ -165,7 +165,7 @@ les lignes collectées, les analyses facturées et les frais en attente.
 ## Résumé du run et réponses à plat
 
 Un run écrit un enregistrement `analysis-summary` dans son key-value store dans
-4 cas :
+4 cas.
 
 - Il rencontre un problème ou il est volumineux.
 - Il règle `monitor` sans `baselineDatasetId`, comme premier run d'une série.
@@ -185,8 +185,8 @@ l'engagement et résume chaque question.
 - `cashtags` compte les orientations par cashtag, comme `$NVDA`. Le ratio
   haussier de chaque actif vient de `choices.stance`.
 - Chaque entrée de `cashtags` ajoute `signal`, avec le nombre de lignes
-  haussières et baissières. Son score va de -1 à 1. Il se calcule ainsi : lignes
-  haussières moins lignes baissières, divisé par le nombre de lignes.
+  haussières et baissières. Son score va de -1 à 1. Il vaut les lignes
+  haussières moins les lignes baissières, divisé par le nombre de lignes.
 - Le bloc `stance` ajoute la répartition pondérée par l'engagement, ainsi que
   les posts haussiers et baissiers qui ont le plus d'engagement.
 - `conviction` donne la moyenne et la moyenne pondérée par l'engagement.
@@ -210,7 +210,7 @@ JSON à analyser. Les lignes échouées et ignorées portent une table vide.
 Passez `monitor.baselineDatasetId`, l'ID du dataset d'un run antérieur terminé
 avec les mêmes réglages d'analyse. La comparaison lit les lignes de ce run. Elle
 fonctionne même si ce run n'a pas écrit son résumé. Chaque ligne gagne alors un
-objet `monitor`. Son statut peut être :
+objet `monitor`. Son statut prend ces valeurs.
 
 - `first_run` sans référence.
 - `new_to_baseline` pour les posts absents du run antérieur.

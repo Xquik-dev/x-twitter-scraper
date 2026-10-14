@@ -34,7 +34,7 @@ consegnata**. Apify fattura a parte l'uso della piattaforma.
 - Il testo completo, il link, la lingua & l'ora di pubblicazione della
   citazione.
 - Mi piace, risposte, repost, citazioni, visualizzazioni & segnalibri.
-- Il profilo pubblico completo dell'autore: nome, bio, follower, verifica &
+- Il profilo pubblico completo dell'autore, con nome, bio, follower, verifica &
   altro.
 - Foto, video & GIF con i relativi link.
 - Hashtag, menzioni & link presenti nel testo.
@@ -44,7 +44,8 @@ consegnata**. Apify fattura a parte l'uso della piattaforma.
   della sua consegna.
 - Molti post in 1 esecuzione, ognuno letto fino alla fine di ciò che X fornisce.
 - Prima le più recenti, oppure le citazioni che X classifica più in alto.
-- 11 filtri: lingua, date, tipo di media, 6 conteggi minimi & autori verificati.
+- 11 filtri per lingua, date, tipo di media, 6 conteggi minimi & autori
+  verificati.
 - 1 riga per autore quando vuoi persone, non post.
 - URL di post di x.com & twitter.com, oppure ID di post numerici.
 - Rimozione dei duplicati prima della fatturazione.
@@ -65,7 +66,7 @@ porti alcun cursore di pagina da un'esecuzione all'altra.
 
 `startUrls` accetta ogni URL di post come stringa semplice o come oggetto
 `{ "url": "..." }`. `tweetIds` accetta ID di post, & lì funziona anche un URL di
-post:
+post.
 
 ```json
 {
@@ -78,7 +79,7 @@ post:
 }
 ```
 
-Ordine, filtri & limiti vanno accanto ai post:
+Ordine, filtri & limiti vanno accanto ai post.
 
 ```json
 {
@@ -119,7 +120,7 @@ Ogni citazione è 1 riga del dataset con `id`, `url`, `text`, `createdAt`,
 Scraper di Xquik non inventa valori.
 
 Gli esempi usano valori fittizi. I risultati contengono dati live. Una riga ha
-questo aspetto:
+questo aspetto.
 
 ```json
 {
@@ -161,7 +162,7 @@ con i campi del profilo dell'autore come colonne.
 ## Cosa fornisce X
 
 2 limiti vengono da X, & X Quote Tweets Scraper di Xquik li dichiara in modo
-chiaro:
+chiaro.
 
 - La ricerca di X decide quanto indietro arrivano le citazioni di un post molto
   grande. Un'esecuzione legge ogni citazione che X fornisce & si ferma lì.

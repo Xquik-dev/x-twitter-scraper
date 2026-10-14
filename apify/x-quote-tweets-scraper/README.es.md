@@ -34,7 +34,7 @@ uso de la plataforma.
 
 - El texto completo, el enlace, el idioma y la hora de publicación de la cita.
 - Me gusta, respuestas, reposts, citas, visualizaciones y elementos guardados.
-- El perfil público completo del autor: nombre, biografía, seguidores,
+- El perfil público completo del autor, con nombre, biografía, seguidores,
   verificación y más.
 - Fotos, videos y GIFs con sus enlaces.
 - Hashtags, menciones y enlaces que aparecen en el texto.
@@ -45,8 +45,8 @@ uso de la plataforma.
 - Muchos posts en 1 ejecución, cada uno leído hasta el final de lo que X
   entrega.
 - Primero las más recientes, o las citas que X clasifica más alto.
-- 11 filtros: idioma, fechas, tipo de contenido multimedia, 6 conteos mínimos y
-  autores verificados.
+- 11 filtros por idioma, fechas, tipo de contenido multimedia, 6 conteos mínimos
+  y autores verificados.
 - 1 fila por autor cuando quieres personas, no posts.
 - URLs de posts de x.com y twitter.com, o IDs numéricos de posts.
 - Eliminación de duplicados antes de facturar.
@@ -68,7 +68,7 @@ API. No llevas ningún cursor de página entre ejecuciones.
 
 `startUrls` acepta cada URL de post como texto simple o como objeto
 `{ "url": "..." }`. `tweetIds` acepta IDs de posts, y una URL de post también
-funciona ahí:
+funciona ahí.
 
 ```json
 {
@@ -81,7 +81,7 @@ funciona ahí:
 }
 ```
 
-El orden, los filtros y los límites van junto a los posts:
+El orden, los filtros y los límites van junto a los posts.
 
 ```json
 {
@@ -121,7 +121,7 @@ Cada cita es 1 fila del dataset con `id`, `url`, `text`, `createdAt`, `lang`,
 Scraper de Xquik no inventa valores.
 
 Los ejemplos usan valores de muestra. Los resultados reflejan datos en vivo. Una
-fila se ve así:
+fila se ve así.
 
 ```json
 {
@@ -163,7 +163,7 @@ con los campos del perfil del autor como columnas.
 ## Qué entrega X
 
 2 límites vienen de X, y X Quote Tweets Scraper de Xquik los indica con
-claridad:
+claridad.
 
 - La búsqueda de X decide qué tan atrás llegan las citas de un post muy grande.
   Una ejecución lee todas las citas que X entrega y se detiene ahí.

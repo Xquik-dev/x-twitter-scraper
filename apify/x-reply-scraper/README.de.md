@@ -74,7 +74,7 @@ Post-IDs & Antwort-Timelines von Nutzern.
 Die Schemas für Dataset & Run-Report beschreiben jedes gelieferte Feld.
 Primitive Felder enthalten auch Beispiele für Agents & generierte Integrationen.
 
-Jeder vollständige Antwort-Datensatz kann diese Kernfelder enthalten:
+Jeder vollständige Antwort-Datensatz kann diese Kernfelder enthalten.
 
 | Feld                | Beschreibung                                             |
 | ------------------- | -------------------------------------------------------- |
@@ -100,7 +100,7 @@ Jeder vollständige Antwort-Datensatz kann diese Kernfelder enthalten:
 | `quoted_tweet`      | Zitierter Post, falls vorhanden                          |
 | `retweeted_tweet`   | Reposteter Post, falls vorhanden                         |
 
-Vollständige Datensätze behalten außerdem verfügbare Quellmetadaten:
+Vollständige Datensätze behalten außerdem verfügbare Quellmetadaten.
 
 - Felder zum Post-Typ sind `type`, `isReply`, `isQuoteStatus`, `isNoteTweet`,
   `isLimitedReply` & `isTranslatable`.
@@ -269,7 +269,7 @@ Das Report-Schema dokumentiert Abschluss, Abrechnung, Fehler & gespeicherte
 Cursor. Sein Feld `version` nennt die exakte veröffentlichte Quellversion des
 Actors.
 
-Das Feld `status` nutzt diese Werte:
+Das Feld `status` nutzt diese Werte.
 
 - `no-input`
 - `invalid-input`
@@ -299,29 +299,30 @@ funktionieren weiter in JSON, API, SDK, Automatisierungen & gespeicherten
 Task-Eingaben. Kombinierst du kanonische Felder & Aliasse, gilt ihre bestehende
 Rangfolge.
 
-Diese Aliasse akzeptieren gängige Feldnamen anderer Scraper:
+Diese Aliasse akzeptieren gängige Feldnamen anderer Scraper.
 
-- URL-Aliasse: `urls`, `tweetUrls`, `postUrls`, `profileUrls` & `twitterUrl` als
-  einzelner String
-- ID-Aliasse: `conversationIds`, `postIds`, `ids`, `tweetId`, `id`
-- Nutzernamen-Aliasse: `twitterHandles`, `screenname`
-- Aliasse für das globale Limit: `maxResults`, `max_results`, `resultsLimit`,
-  `maxReplies`
-- Aliasse pro Ziel: `maxRepliesPerTweet`, `maxCommentsPerPost`,
-  `resultsPerCategory`
-- Such-Alias: `useSearch`
-- Aliasse für verschachtelte Antworten: `includeNestedReplies`,
-  `includeRepliesOfReplies`
-- Alias für die Tiefe: `depth` als `1`, `2` oder `3` für `maxDepth`. `full`
-  setzt kein Limit.
-- Alias für den Umfang: `onlyDirectReplies` für `scope: "direct"`
-- Aliasse für den Originalpost: `includeOriginalTweet`, `includeSourceTweet`.
-  Mit `includeSourceTweet` begrenzt `resultsPerCategory` die Antworten & der
-  Post ist 1 Datensatz mehr.
-- Alias für den Autor: `excludeOpSelfReplies` für `excludeOriginalAuthor`
-- Aliasse für die Sortierung: `sortBy` & `queryType` für `sort`. `top`, `newest`
-  & `mostLiked` liest der Actor als `relevance`, `latest` & `likes`.
-- Ausgabe-Aliasse: `outputVariant`, `includeRaw`
+- URL-Aliasse sind `urls`, `tweetUrls`, `postUrls`, `profileUrls` & `twitterUrl`
+  als einzelner String.
+- ID-Aliasse sind `conversationIds`, `postIds`, `ids`, `tweetId`, `id`.
+- Nutzernamen-Aliasse sind `twitterHandles`, `screenname`.
+- Aliasse für das globale Limit sind `maxResults`, `max_results`,
+  `resultsLimit`, `maxReplies`.
+- Aliasse pro Ziel sind `maxRepliesPerTweet`, `maxCommentsPerPost`,
+  `resultsPerCategory`.
+- Der Such-Alias ist `useSearch`.
+- Aliasse für verschachtelte Antworten sind `includeNestedReplies`,
+  `includeRepliesOfReplies`.
+- Der Alias für die Tiefe ist `depth` als `1`, `2` oder `3` für `maxDepth`.
+  `full` setzt kein Limit.
+- Der Alias für den Umfang ist `onlyDirectReplies` für `scope: "direct"`.
+- Aliasse für den Originalpost sind `includeOriginalTweet`,
+  `includeSourceTweet`. Mit `includeSourceTweet` begrenzt `resultsPerCategory`
+  die Antworten & der Post ist 1 Datensatz mehr.
+- Der Alias für den Autor ist `excludeOpSelfReplies` für
+  `excludeOriginalAuthor`.
+- Aliasse für die Sortierung sind `sortBy` & `queryType` für `sort`. `top`,
+  `newest` & `mostLiked` liest der Actor als `relevance`, `latest` & `likes`.
+- Ausgabe-Aliasse sind `outputVariant`, `includeRaw`.
 
 `category` auf `replies` ändert nichts. Eine Kategorie, die die Aufgabe eines
 anderen Actors ist, etwa `retweets` oder `info`, stoppt den Run. Er liest &
@@ -394,7 +395,7 @@ die beste verfügbare Tiefe.
 
 ### Sortierung
 
-Nutze `sort` mit diesen Werten:
+Nutze `sort` mit diesen Werten.
 
 - `relevance` behält die Reihenfolge von X
 - `latest` zeigt die neuesten zuerst
@@ -474,7 +475,7 @@ Die flache Ausgabe ergänzt `mediaUrls`.
 
 ### Beispielausgabe
 
-Ein gekürzter Antwort-Datensatz sieht so aus:
+Ein gekürzter Antwort-Datensatz sieht so aus.
 
 ```json
 {
@@ -756,20 +757,20 @@ Filtern ab & liefert dieselben Diagnosen. Wähle den, der zu deinen Daten passt.
 Xquik bietet außerdem 53 Dashboard-Tools, eine REST-API, signierte Webhooks &
 einen MCP-Server.
 
-- [API-Dokumentation](https://docs.xquik.com/introduction): Anleitungen zur
-  REST-API
-- [API für Post-Antworten](https://docs.xquik.com/api-reference/x/tweet-replies):
-  Antworten auf einen Post abrufen
-- [API für ausgeblendete Antworten](https://docs.xquik.com/api-reference/x/tweet-hidden-replies):
-  Antworten abrufen, die ein Autor ausgeblendet hat
-- [Thread-API](https://docs.xquik.com/api-reference/x/tweet-thread): einen
-  ganzen Thread abrufen
-- [API für Nutzerantworten](https://docs.xquik.com/api-reference/x/user-replies):
-  die Antworten eines Nutzers abrufen
-- [MCP-Server](https://docs.xquik.com/mcp/overview): unterstützte Tools
-  entdecken
-- [Webhooks](https://docs.xquik.com/webhooks/overview): signierte
-  Event-Zustellung
+- [API-Dokumentation](https://docs.xquik.com/introduction) enthält Anleitungen
+  zur REST-API.
+- [API für Post-Antworten](https://docs.xquik.com/api-reference/x/tweet-replies)
+  ruft Antworten auf einen Post ab.
+- [API für ausgeblendete Antworten](https://docs.xquik.com/api-reference/x/tweet-hidden-replies)
+  ruft Antworten ab, die ein Autor ausgeblendet hat.
+- [Thread-API](https://docs.xquik.com/api-reference/x/tweet-thread) ruft einen
+  ganzen Thread ab.
+- [API für Nutzerantworten](https://docs.xquik.com/api-reference/x/user-replies)
+  ruft die Antworten eines Nutzers ab.
+- Über den [MCP-Server](https://docs.xquik.com/mcp/overview) entdeckst du
+  unterstützte Tools.
+- [Webhooks](https://docs.xquik.com/webhooks/overview) bieten signierte
+  Event-Zustellung.
 
 ## FAQ
 
