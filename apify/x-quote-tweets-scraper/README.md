@@ -202,7 +202,7 @@ when its divisor is missing or 0.
 
 2 limits come from X, & Xquik's X Quote Tweets Scraper states them plainly.
 
-- X's search decides how far back the quotes of a very large post go. A run
+- On a post with many quotes, X's search may stop before the oldest ones. A run
   reads every quote X serves & stops there.
 - `top` is X's ranking, not Xquik's. It is not a like count order. A later row
   can have more likes than an earlier one.
@@ -267,8 +267,8 @@ diagnostics. Pick the one that matches the data you need.
   location filters. Use it when you build account lists from search. From
   $0.00015 per profile.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
-  checks where accounts are based with X's Account based in label, connected via
-  & username changes. Use it when you vet where accounts are based. From
+  checks where accounts are based with X's "Account based in" label, "connected
+  via" & username changes. Use it when you vet where accounts are based. From
   $0.00015 per account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) gets the emails,
   phones & links accounts publish on their profiles, from handles, followers or
@@ -342,9 +342,9 @@ says which post it quotes.
 A run can return 100,000 rows & more. Raise `maxItems` above the 1,000 the form
 starts with for a full export.
 
-### Why does a huge post return fewer quotes than its counter shows?
+### Why does a post with many quotes return fewer than its counter shows?
 
-X's search decides how far back the quotes of a very large post go. The run
+On a post with many quotes, X's search may stop before the oldest ones. The run
 delivers every quote X serves. The counter also includes quotes from private or
 removed accounts.
 

@@ -124,7 +124,7 @@ press Try for free.
 2. Set `maxItems`, `scope` & the filters your job needs.
 3. Run Xquik's X Reply Scraper & open the dataset.
 
-The prefilled form targets a verified public conversation. It returns up to
+The form comes filled with a public conversation we tested. It returns up to
 1,000 full, flat rows. Auto mode searches the full conversation by default.
 Deduplication & source attribution stay on.
 
@@ -708,8 +708,8 @@ diagnostics. Pick the one that matches the data you need.
   location filters. Use it when you build account lists from search. From
   $0.00015 per profile.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
-  checks where accounts are based with X's Account based in label, connected via
-  & username changes. Use it when you vet where accounts are based. From
+  checks where accounts are based with X's "Account based in" label, "connected
+  via" & username changes. Use it when you vet where accounts are based. From
   $0.00015 per account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) gets the emails,
   phones & links accounts publish on their profiles, from handles, followers or

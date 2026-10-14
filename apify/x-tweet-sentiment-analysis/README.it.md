@@ -709,10 +709,11 @@ dell'esecuzione prima di cambiare i filtri. Allarga 1 impostazione alla volta,
 come le date o una soglia di engagement. Annota l'impostazione che hai cambiato.
 
 Per le analisi fallite, controlla `analysis.reason` & riprova solo gli ID
-interessati. Se le risposte a un post risultano incomplete, controlla la
-diagnostica gratuita prima di considerarle complete. Le didascalie dei media non
-possono descrivere tutto ciò che un'immagine o un video mostra. La mancanza del
-contesto di citazione o risposta può rendere incerta una risposta.
+interessati. Se le risposte a un post sembrano incomplete, leggi la riga di
+diagnostica gratuita. Indica quando X ha mostrato meno risposte di quante ne
+conta. Le didascalie dei media non possono descrivere tutto ciò che un'immagine
+o un video mostra. La mancanza del contesto di citazione o risposta può rendere
+incerta una risposta.
 
 ## Actor Xquik correlati
 

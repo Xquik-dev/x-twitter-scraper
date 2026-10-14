@@ -718,10 +718,11 @@ ejecución antes de cambiar tus filtros. Amplía 1 ajuste a la vez, como las
 fechas o un mínimo de interacción. Lleva un registro del ajuste que cambiaste.
 
 Para los análisis fallidos, revisa `analysis.reason` & reintenta solo los IDs
-afectados. Para las respuestas incompletas, revisa el diagnóstico gratuito antes
-de darlas por completas. Las descripciones del contenido multimedia no pueden
-detallar todo lo que muestra una imagen o un video. La falta de contexto de cita
-o respuesta puede volver incierto el análisis.
+afectados. Si las respuestas de un post parecen incompletas, lee la fila de
+diagnóstico gratuita. Indica cuándo X mostró menos respuestas de las que cuenta.
+Las descripciones del contenido multimedia no pueden detallar todo lo que
+muestra una imagen o un video. La falta de contexto de cita o respuesta puede
+volver incierto el análisis.
 
 ## Actores de Xquik relacionados
 

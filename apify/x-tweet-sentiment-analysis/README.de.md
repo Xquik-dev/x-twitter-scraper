@@ -721,10 +721,11 @@ anderen, etwa Datumsangaben oder einen Mindestwert für Interaktionen. Notiere,
 welche Einstellung du geändert hast.
 
 Prüfe bei fehlgeschlagenen Analysen `analysis.reason` & wiederhole nur die
-betroffenen IDs. Prüfe bei unvollständigen Antworten auf Posts die kostenlose
-Diagnose, bevor du sie als vollständig wertest. Begleittexte zu Medien können
-nicht alles beschreiben, was ein Bild oder Video zeigt. Fehlender Zitat- oder
-Antwortkontext kann ein Analyseergebnis unsicher machen.
+betroffenen IDs. Wenn die Antworten auf einen Post unvollständig wirken, lies
+den kostenlosen Diagnose-Datensatz. Er sagt, wann X weniger Antworten gezeigt
+hat, als es zählt. Begleittexte zu Medien können nicht alles beschreiben, was
+ein Bild oder Video zeigt. Fehlender Zitat- oder Antwortkontext kann ein
+Analyseergebnis unsicher machen.
 
 ## Verwandte Xquik-Actors
 

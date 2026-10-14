@@ -86,17 +86,17 @@ Setze `outputMode: "raw"` oder `includeRaw: true`, um ein Feld `raw`
 hinzuzufügen. Es enthält eine sichere Kopie des Quellprofils. Standard ist der
 kompakte Modus.
 
-Setze `outputMode: "full"` für die meisten Daten pro Datensatz. Jeder Datensatz
-behält bis zu 13 Listenfelder, wenn X sie sendet, etwa `listedCount`,
-`defaultProfileImage` & `advertiserAccountType`. Datensätze im Modus full
-stellen sie ans Ende. Kompakte Datensätze bleiben kleiner & kosten weniger
-Speicher.
+Setze `outputMode: "full"` für die meisten Daten pro Datensatz. Datensätze
+enthalten außerdem bis zu 13 zusätzliche Profilfelder, die X in Listen von
+Followern & gefolgten Accounts sendet, etwa `listedCount`, `defaultProfileImage`
+& `advertiserAccountType`. Datensätze im Modus full stellen sie ans Ende.
+Kompakte Datensätze bleiben kleiner & kosten weniger Speicher.
 
 `verifiedOnly` akzeptiert öffentliche Profile mit Blue- & Legacy-Verifizierung.
-Widersprechen sich Quell-Flags, gewinnt der verifizierte Status.
-`blueVerifiedOnly` behält die Profile, die X als Blue-verifiziert markiert. X
-markiert auch viele Unternehmens- & Behördenkonten blau. Setze `verifiedType`,
-um 1 Badge-Typ zu behalten.
+Ein Profil gilt als verifiziert, wenn eines der Verifizierungs-Flags von X das
+sagt. `blueVerifiedOnly` behält die Profile, die X als Blue-verifiziert
+markiert. X markiert auch viele Unternehmens- & Behördenkonten blau. Setze
+`verifiedType`, um 1 Badge-Typ zu behalten.
 
 Datensätze enthalten nie Angaben, die nur den Betrachter betreffen. Xquik
 entfernt Betrachter-Flags wie Folgen, Blockieren, Stummschalten,

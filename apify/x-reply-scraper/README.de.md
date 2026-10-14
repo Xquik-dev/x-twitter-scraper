@@ -122,8 +122,8 @@ free.
 2. Setze `maxItems`, `scope` & die Filter, die deine Aufgabe braucht.
 3. Starte X Reply Scraper von Xquik & öffne das Dataset.
 
-Das vorausgefüllte Formular zielt auf eine verifizierte öffentliche
-Konversation. Es liefert bis zu 1.000 vollständige, flache Datensätze. Der
+Das Formular ist mit einer öffentlichen Konversation vorausgefüllt, die wir
+getestet haben. Es liefert bis zu 1.000 vollständige, flache Datensätze. Der
 Auto-Modus durchsucht standardmäßig die ganze Konversation. Deduplizierung &
 Quellzuordnung bleiben aktiv.
 

@@ -33,7 +33,7 @@ noch einen Login.
 - X-Hashflags, also die eigenen Emojis, die X nach manchen Hashtags zeigt.
 - Rang, Thema, Suchbegriff, Post-Volumen, Such-URL, WOEID & Quellstandort.
 - Standortzuordnung in jedem Datensatz.
-- Kennzeichnung für Hashtag-Datensätze & für verfügbares Post-Volumen.
+- Flags, die Hashtag-Datensätze & Datensätze mit Post-Volumen markieren.
 - Duplikatentfernung für gleichwertige Eingaben vor der Abrechnung.
 - Exporte als JSON, CSV, Excel, XML & RSS über Apify-Datasets.
 - Runs laufen nach einer Apify-Migration mit gespeichertem Zustand weiter.

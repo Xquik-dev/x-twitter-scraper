@@ -89,17 +89,18 @@ Réglez `outputMode: "raw"` ou `includeRaw: true` pour ajouter un champ `raw`. I
 contient une copie sûre du profil source. Le mode compact est le mode par
 défaut.
 
-Réglez `outputMode: "full"` pour obtenir le plus de données par ligne. Chaque
-ligne garde jusqu'à 13 champs de liste quand X les envoie, comme `listedCount`,
+Réglez `outputMode: "full"` pour obtenir le plus de données par ligne. Les
+lignes portent aussi jusqu'à 13 champs de profil supplémentaires que X envoie
+dans les listes d'abonnés & d'abonnements, comme `listedCount`,
 `defaultProfileImage` & `advertiserAccountType`. Les lignes complètes les
 placent à la fin. Les lignes compactes restent plus petites & coûtent moins cher
 à stocker.
 
 `verifiedOnly` accepte les profils publics certifiés Blue & ceux de l'ancienne
-certification. Si les indicateurs de la source se contredisent, l'état certifié
-l'emporte. `blueVerifiedOnly` garde les profils que X marque comme certifiés
-Blue. X marque aussi en bleu de nombreux comptes d'entreprises & de
-gouvernements. Réglez `verifiedType` pour garder 1 type de badge.
+certification. Un profil compte comme certifié dès qu'un des indicateurs de
+certification de X l'indique. `blueVerifiedOnly` garde les profils que X marque
+comme certifiés Blue. X marque aussi en bleu de nombreux comptes d'entreprises &
+de gouvernements. Réglez `verifiedType` pour garder 1 type de badge.
 
 Les lignes n'incluent jamais d'état propre au compte qui consulte. Xquik retire
 les indicateurs d'abonnement, de blocage, de masquage, de MP, de notification &

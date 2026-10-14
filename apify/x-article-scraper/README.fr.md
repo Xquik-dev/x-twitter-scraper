@@ -303,9 +303,8 @@ L'[onglet API](https://apify.com/xquik/x-article-scraper/api) contient des
 exemples en Python, JavaScript & cURL. Les
 [planifications](https://docs.apify.com/platform/schedules) Apify lancent X
 Article Scraper de Xquik selon un cron. Les agents utilisent
-[Apify MCP](https://docs.apify.com/platform/integrations/mcp). L'API REST de
-Xquik lit aussi des articles un par un. Utilisez `latest` sauf si vous avez
-besoin d'une build plus ancienne.
+[Apify MCP](https://docs.apify.com/platform/integrations/mcp). Utilisez `latest`
+sauf si vous avez besoin d'une build plus ancienne.
 
 ### Où trouver de l'aide ?
 

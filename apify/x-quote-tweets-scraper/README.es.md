@@ -202,8 +202,8 @@ cuando su divisor falta o es 0.
 2 límites vienen de X, & X Quote Tweets Scraper de Xquik los indica con
 claridad.
 
-- La búsqueda de X decide qué tan atrás llegan las citas de un post muy grande.
-  Una ejecución lee todas las citas que X entrega & se detiene ahí.
+- En un post con muchas citas, la búsqueda de X puede detenerse antes de las más
+  antiguas. Una ejecución lee todas las citas que X entrega & se detiene ahí.
 - `top` es la clasificación de X, no la de Xquik. No es un orden por cantidad de
   Me gusta. Una fila posterior puede tener más Me gusta que una anterior.
 
@@ -352,11 +352,11 @@ de cada fila indica qué post cita.
 Una ejecución puede devolver 100,000 filas & más. Para una exportación completa,
 sube `maxItems` por encima de las 1,000 con las que empieza el formulario.
 
-### ¿Por qué un post enorme devuelve menos citas de las que muestra su contador?
+### ¿Por qué un post con muchas citas devuelve menos de las que muestra su contador?
 
-La búsqueda de X decide qué tan atrás llegan las citas de un post muy grande. La
-ejecución entrega todas las citas que X entrega. El contador también incluye
-citas de cuentas privadas o eliminadas.
+En un post con muchas citas, la búsqueda de X puede detenerse antes de las más
+antiguas. La ejecución entrega todas las citas que X entrega. El contador
+también incluye citas de cuentas privadas o eliminadas.
 
 ### ¿Cómo obtengo 1 fila por cada persona que citó un post?
 

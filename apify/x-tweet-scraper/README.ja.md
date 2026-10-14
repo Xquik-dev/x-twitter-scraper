@@ -64,13 +64,13 @@ XquikのX Tweet Scraperは、ポスト、エンゲージメント指標、著者
 | `contentDisclosure` | 開示のメタデータ。取得できる場合に入る |
 | `conversationControl` | 返信の制限設定と公開の会話の所有者 |
 | `reactionContext` | リアクションが参照する公開のポストとユーザー |
-| `subscriberBadge` | 返信に付いたサブスクライバーバッジのクリエイター |
+| `subscriberBadge` | 返信の著者がサブスクライブしているクリエイター |
 | `limitedActions` | 公開の操作制限と案内 |
 | `isLimitedReply` | 返信が制限されているかどうか |
 | `isNoteTweet` | Note Tweet（長文ポスト）かどうか |
 | `isQuoteStatus` | このポストが別のポストを引用しているかどうか |
 | `isRetweet` | この行がリポストかどうか。元のポストが付く |
-| `isPinned` | フラット行で、著者がこのポストを固定しているかどうか |
+| `isPinned` | 著者がこのポストを固定しているかどうか。フラット行のみ |
 | `isReply` | このポストが返信かどうか |
 | `quoted_tweet` | 引用元ポストのオブジェクト（引用ポストの場合） |
 | `conversationId` | スレッド/会話のID |
@@ -233,7 +233,7 @@ IDはすべて1回の実行にまとめてください。どの実行も、Apify
 
 各行には `resultType: "embed"`、`sourceTweetId` & `embed` が入ります。このオブジェクトには `url`、`authorName`、`authorUrl`、`html` & `width` が入ります。`embedHideMedia`、`embedHideThread` & `embedOmitScript` を使うと、それぞれメディア、返信先のポスト、ウィジェットのスクリプトを省けます。
 
-どちらのモードも、ポストID & `startUrls` 内のポストURLを読み取ります。ポスト1件につき1行で、料金は通常の1行分です。Xにないポストでは、行も課金も発生しません。
+どちらのモードも、`tweetIds` でポストIDまたはポストURLを受け付けます。`startUrls` もポストURLを受け付けます。ポスト1件につき1行で、料金は通常の1行分です。Xにないポストでは、行も課金も発生しません。
 
 ### Xのトップポストを取得する
 
@@ -249,7 +249,7 @@ IDはすべて1回の実行にまとめてください。どの実行も、Apify
 }
 ```
 
-`topMetric` は `likes`、`replies`、`quotes`、`bookmarks`、`shares`、`views` のいずれかです。デフォルトは `likes` です。`topWindow` は `day`、`week`、`month` のいずれかで、デフォルトは `day` です。Xは、選択ごとに最大100件のポストを挙げます。X全体を対象にするには `topCountry` を空のままにし、1つの言語に絞るには `lang` を設定します。両方を設定すると、国はXが選び、言語はこのActorが絞り込みます。各行には `engagementMode: "topTweets"` が入り、他のポストと同じく1件の結果として課金されます。
+`topMetric` は `likes`、`replies`、`quotes`、`bookmarks`、`shares`、`views` のいずれかです。デフォルトは `likes` です。`topWindow` は `day`、`week`、`month` のいずれかで、デフォルトは `day` です。Xは、選択ごとに最大100件のポストを挙げます。X全体を対象にするには `topCountry` を空のままにします。1つの言語だけを残すには `lang` を設定します。両方を設定すると、国はXが選び、言語はこのActorが絞り込みます。各行には `engagementMode: "topTweets"` が入り、他のポストと同じく1件の結果として課金されます。
 
 ### フラットなCSVの行をエクスポートする
 

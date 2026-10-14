@@ -50,52 +50,52 @@ Xquik의 X Tweet Scraper는 게시물, 참여 지표, 공개 작성자 프로필
 
 ### X Tweet Scraper로 어떤 데이터를 추출할 수 있나요?
 
-| 필드                   | 설명                                            |
-| ---------------------- | ----------------------------------------------- |
-| `id`                   | 게시물 ID                                       |
-| `text`                 | 최대 25k자인 장문 게시물을 포함한 전체 텍스트   |
-| `createdAt`            | X 원본 타임스탬프 문자열                        |
-| `likeCount`            | 마음에 들어요 수                                |
-| `retweetCount`         | 재게시 수                                       |
-| `replyCount`           | 답글 수                                         |
-| `quoteCount`           | 인용 게시물 수                                  |
-| `viewCount`            | 조회수                                          |
-| `bookmarkCount`        | 북마크 수                                       |
-| `lang`                 | 게시물 언어                                     |
-| `url`                  | 게시물 바로가기 링크                            |
-| `tweetUrl`             | 플랫 출력의 게시물 URL 별칭                     |
-| `twitterUrl`           | 플랫 출력의 `twitter.com` URL                   |
-| `author`               | 작성자 사용자 아이디, 자기소개, 웹사이트 & 수치 |
-| `authorUsername`       | 플랫 출력의 작성자 사용자 아이디                |
-| `authorFollowers`      | 플랫 출력의 작성자 팔로워 수                    |
-| `authorUrl`            | 있으면 제공되는 플랫 출력의 작성자 웹사이트     |
-| `authorDescription`    | 플랫 출력의 작성자 자기소개 텍스트              |
-| `authorCoverPicture`   | 플랫 출력의 작성자 배너 이미지 URL              |
-| `authorPinnedTweetIds` | 플랫 출력의 작성자 고정 게시물 ID               |
-| `media`                | 첨부된 이미지, 동영상, GIF                      |
-| `mediaUrls`            | 플랫 출력의 미디어 URL                          |
-| `imageUrls`            | 플랫 출력의 이미지 URL                          |
-| `videoUrls`            | 플랫 출력의 동영상 URL                          |
-| `entities`             | 해시태그, URL, 멘션과 동영상 타임스탬프         |
-| `displayTextRange`     | 있으면 제공되는 X 표시 텍스트 범위              |
-| `contentDisclosure`    | 있으면 제공되는 고지 메타데이터                 |
-| `conversationControl`  | 답글 정책과 공개 대화 소유자                    |
-| `reactionContext`      | 반응이 가리키는 공개 게시물과 사용자            |
-| `subscriberBadge`      | 답글에 표시된 구독자 배지의 크리에이터          |
-| `limitedActions`       | 공개 상호작용 제한과 안내                       |
-| `isLimitedReply`       | 답글 제한 여부                                  |
-| `isNoteTweet`          | Note Tweet(장문 게시물)인지 여부                |
-| `isQuoteStatus`        | 이 게시물이 다른 게시물을 인용하는지 여부       |
-| `isRetweet`            | 이 행이 재게시인지 여부, 원본 첨부              |
-| `isPinned`             | 작성자가 이 게시물을 고정했는지 여부, 플랫 행   |
-| `isReply`              | 이 게시물이 답글인지 여부                       |
-| `quoted_tweet`         | 인용된 게시물 객체(인용 게시물인 경우)          |
-| `conversationId`       | 스레드/대화 ID                                  |
-| `resultType`           | 리치 행, 참여 행 & 진단 행의 유형               |
-| `sourceTweetId`        | 아티클과 참여 모드의 원본 게시물 ID             |
-| `article`              | `mode: "article"`의 구조화된 아티클 데이터      |
-| `translation`          | `mode: "translation"`의 X 번역                  |
-| `embed`                | `mode: "embed"`의 임베드 HTML & 링크            |
+| 필드                   | 설명                                                   |
+| ---------------------- | ------------------------------------------------------ |
+| `id`                   | 게시물 ID                                              |
+| `text`                 | 최대 25k자인 장문 게시물을 포함한 전체 텍스트          |
+| `createdAt`            | X 원본 타임스탬프 문자열                               |
+| `likeCount`            | 마음에 들어요 수                                       |
+| `retweetCount`         | 재게시 수                                              |
+| `replyCount`           | 답글 수                                                |
+| `quoteCount`           | 인용 게시물 수                                         |
+| `viewCount`            | 조회수                                                 |
+| `bookmarkCount`        | 북마크 수                                              |
+| `lang`                 | 게시물 언어                                            |
+| `url`                  | 게시물 바로가기 링크                                   |
+| `tweetUrl`             | 플랫 출력의 게시물 URL 별칭                            |
+| `twitterUrl`           | 플랫 출력의 `twitter.com` URL                          |
+| `author`               | 작성자 사용자 아이디, 자기소개, 웹사이트 & 수치        |
+| `authorUsername`       | 플랫 출력의 작성자 사용자 아이디                       |
+| `authorFollowers`      | 플랫 출력의 작성자 팔로워 수                           |
+| `authorUrl`            | 있으면 제공되는 플랫 출력의 작성자 웹사이트            |
+| `authorDescription`    | 플랫 출력의 작성자 자기소개 텍스트                     |
+| `authorCoverPicture`   | 플랫 출력의 작성자 배너 이미지 URL                     |
+| `authorPinnedTweetIds` | 플랫 출력의 작성자 고정 게시물 ID                      |
+| `media`                | 첨부된 이미지, 동영상, GIF                             |
+| `mediaUrls`            | 플랫 출력의 미디어 URL                                 |
+| `imageUrls`            | 플랫 출력의 이미지 URL                                 |
+| `videoUrls`            | 플랫 출력의 동영상 URL                                 |
+| `entities`             | 해시태그, URL, 멘션과 동영상 타임스탬프                |
+| `displayTextRange`     | 있으면 제공되는 X 표시 텍스트 범위                     |
+| `contentDisclosure`    | 있으면 제공되는 고지 메타데이터                        |
+| `conversationControl`  | 답글 정책과 공개 대화 소유자                           |
+| `reactionContext`      | 반응이 가리키는 공개 게시물과 사용자                   |
+| `subscriberBadge`      | 답글 작성자가 구독하는 크리에이터                      |
+| `limitedActions`       | 공개 상호작용 제한과 안내                              |
+| `isLimitedReply`       | 답글 제한 여부                                         |
+| `isNoteTweet`          | Note Tweet(장문 게시물)인지 여부                       |
+| `isQuoteStatus`        | 이 게시물이 다른 게시물을 인용하는지 여부              |
+| `isRetweet`            | 이 행이 재게시인지 여부, 원본 첨부                     |
+| `isPinned`             | 작성자가 이 게시물을 고정했는지 여부. 플랫 행에만 있음 |
+| `isReply`              | 이 게시물이 답글인지 여부                              |
+| `quoted_tweet`         | 인용된 게시물 객체(인용 게시물인 경우)                 |
+| `conversationId`       | 스레드/대화 ID                                         |
+| `resultType`           | 리치 행, 참여 행 & 진단 행의 유형                      |
+| `sourceTweetId`        | 아티클과 참여 모드의 원본 게시물 ID                    |
+| `article`              | `mode: "article"`의 구조화된 아티클 데이터             |
+| `translation`          | `mode: "translation"`의 X 번역                         |
+| `embed`                | `mode: "embed"`의 임베드 HTML & 링크                   |
 
 선택적 게시물 메타데이터에는 `authorUnavailable`, `card`, `cashtagAttachments`,
 `communityId`, `communityName`, `communityNote`, `edit`, `exclusiveContent`,
@@ -335,8 +335,9 @@ ID가 1개면 Apify 사용료가 게시물마다 약 $0.00008씩 더 붙습니�
 `embedHideMedia`, `embedHideThread` & `embedOmitScript`는 미디어, 상위 게시물
 또는 위젯 스크립트를 뺍니다.
 
-두 모드 모두 게시물 ID & `startUrls`의 게시물 URL을 읽습니다. 게시물 1개는 일반
-행 요금으로 행 1개가 됩니다. X에 없는 게시물은 행도 요금도 없습니다.
+두 모드 모두 `tweetIds`에서 게시물 ID 또는 게시물 URL을 받습니다. `startUrls`도
+게시물 URL을 받습니다. 게시물 1개는 일반 행 요금으로 행 1개가 됩니다. X에 없는
+게시물은 행도 요금도 없습니다.
 
 ### X의 인기 게시물 받기
 
@@ -356,9 +357,9 @@ Inspiration 페이지와 같은 방식으로 반환합니다.
 `topMetric`은 `likes`, `replies`, `quotes`, `bookmarks`, `shares` 또는
 `views`입니다. 기본값은 `likes`입니다. `topWindow`는 `day`, `week` 또는
 `month`이며, 기본값은 `day`입니다. X는 선택마다 게시물을 최대 100개 보여 줍니다.
-X 전체를 보려면 `topCountry`를 비워 두고, 언어 1개만 보려면 `lang`을 설정하세요.
-둘 다 설정하면 X가 국가를 고르고 이 Actor가 그 언어만 남깁니다. 각 행에는
-`engagementMode: "topTweets"`가 들어 있고, 다른 게시물처럼 결과 1개로
+X 전체를 보려면 `topCountry`를 비워 두세요. 언어 1개만 남기려면 `lang`을
+설정하세요. 둘 다 설정하면 X가 국가를 고르고 이 Actor가 그 언어만 남깁니다. 각
+행에는 `engagementMode: "topTweets"`가 들어 있고, 다른 게시물처럼 결과 1개로
 과금됩니다.
 
 ### 플랫 CSV 행 내보내기

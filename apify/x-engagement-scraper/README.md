@@ -193,17 +193,17 @@ post followed by its accounts as you listed them.
 ## Retweet timestamps
 
 Set `includeRetweetTimestamp` to `true` for `retweeters` results. The
-`retweetedAt` column holds the observed repost time in UTC.
+`retweetedAt` column holds the observed retweet time in UTC.
 
-Xquik's X Engagement Scraper finds the repost time when X still shows that
-repost. Older, deleted or unavailable reposts leave the timestamp `null`. The
+Xquik's X Engagement Scraper finds the retweet time when X still shows that
+retweet. Older, deleted or unavailable retweets leave the timestamp `null`. The
 profile stays in the output. A `null` value does not prove that an account never
-reposted a post.
+retweeted a post.
 
 This option makes runs slower. Leave it off for profile-only results. Profile
 `createdAt` stays the account creation date. Tweet rows carry `retweetedAt` when
-they contain a repost event. Original post dates & scrape times never replace
-repost times. Result prices & delivered-row billing stay the same.
+they contain a retweet event. Original post dates & scrape times never replace
+retweet times. Result prices & delivered-row billing stay the same.
 
 ## How much does it cost to scrape X post engagement?
 
@@ -264,8 +264,8 @@ diagnostics. Pick the one that matches the data you need.
   location filters. Use it when you build account lists from search. From
   $0.00015 per profile.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
-  checks where accounts are based with X's Account based in label, connected via
-  & username changes. Use it when you vet where accounts are based. From
+  checks where accounts are based with X's "Account based in" label, "connected
+  via" & username changes. Use it when you vet where accounts are based. From
   $0.00015 per account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) gets the emails,
   phones & links accounts publish on their profiles, from handles, followers or

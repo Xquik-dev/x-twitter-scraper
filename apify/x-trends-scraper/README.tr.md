@@ -31,7 +31,7 @@ ayrıca faturalandırır. X API anahtarına veya girişe ihtiyacın yok.
 - X hashflag'leri, yani X'in bazı hashtag'lerden sonra gösterdiği özel emojiler.
 - Sıra, konu, sorgu, gönderi hacmi, arama URL'si, WOEID & kaynak konum.
 - Her satırda konum bilgisi.
-- Hashtag satırları & mevcut gönderi hacmi için etiketler.
+- Hashtag satırlarını & gönderi hacmi olan satırları işaretleyen bayraklar.
 - Eşdeğer girdiler için faturalamadan önce tekilleştirme.
 - Apify veri kümeleri üzerinden JSON, CSV, Excel, XML & RSS dışa aktarımları.
 - Apify çalıştırmayı taşıdığında çalıştırma kayıtlı durumdan devam eder.

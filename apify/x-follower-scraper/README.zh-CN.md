@@ -60,9 +60,9 @@ Xquik 的 X Follower Scraper 返回关注者、正在关注的账号、列表&�
 
 设置 `outputMode: "raw"` 或 `includeRaw: true` 可以添加 `raw` 字段。它保存源个人资料的安全副本。默认为精简模式。
 
-设置 `outputMode: "full"`，让每行包含最多的数据。X 发送时，每行最多保留 13 个列表字段，例如 `listedCount`、`defaultProfileImage` & `advertiserAccountType`。完整行把它们放在末尾。精简行更小&存储成本更低。
+设置 `outputMode: "full"`，让每行包含最多的数据。每行还会带上 X 在关注者&正在关注列表中发送的最多 13 个额外个人资料字段，例如 `listedCount`、`defaultProfileImage` & `advertiserAccountType`。完整行把它们放在末尾。精简行更小&存储成本更低。
 
-`verifiedOnly` 接受公开的 Blue 认证&旧版认证个人资料。来源标记互相冲突时，按已认证处理。`blueVerifiedOnly` 保留 X 标记为 Blue 认证的个人资料。X 也会把许多企业&政府账号标记为 Blue 认证。要只保留 1 种徽章类型，请设置 `verifiedType`。
+`verifiedOnly` 接受公开的 Blue 认证&旧版认证个人资料。只要 X 的任一认证标记显示已认证，个人资料就算作已认证。`blueVerifiedOnly` 保留 X 标记为 Blue 认证的个人资料。X 也会把许多企业&政府账号标记为 Blue 认证。要只保留 1 种徽章类型，请设置 `verifiedType`。
 
 数据行从不包含仅对查看者可见的状态。Xquik 会移除关注、屏蔽、隐藏、私信、通知&类似的查看者标记。原始输出同样不含这些标记。
 

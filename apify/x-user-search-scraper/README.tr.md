@@ -26,7 +26,7 @@ anahtarına veya girişe ihtiyacın yok. **Teslim edilen profil başına $0.0001
 - Her profilin yayımladığı e-postaları, telefonları & bağlantıları içeren
   `email` & `contactInfo`.
 - X'in her arama terimi için önerdiği hesaplar, konular, hashtag'ler &
-  cashtag'lerle Search Autocomplete modu.
+  cashtag'lerle `mode: "autocomplete"`.
 - 1 sorguyu `startCursor` içindeki kayıtlı bir imleçten sürdür.
 - Apify çalıştırmaları yeniden başlattığında teslim edilen satırlar & ilerleme
   korunur.
@@ -109,7 +109,7 @@ döndürür.
 - Her satır kendi `suggestionType` değerini & aranacak metni `suggestion` içinde
   verir.
 - Bir cashtag satırı `price`, `marketCap` & `dailyChangePercent` taşır.
-- Profil filtreleri yalnızca Profile Search modunda uygulanır.
+- Profil filtreleri yalnızca `mode: "search"` ile uygulanır.
 
 Bir öneri satırı şöyle görünür.
 
@@ -172,8 +172,8 @@ değiştirmezler.
 
 ## X kullanıcılarını aramak ne kadar tutar?
 
-Her Apify planında teslim edilen profil başına $0.00015 ödersin. Bir Search
-Autocomplete önerisi de teslim edilen satır başına aynı tutar. Apify, platform
+Her Apify planında teslim edilen profil başına $0.00015 ödersin. Bir otomatik
+tamamlama önerisi de teslim edilen satır başına aynı tutar. Apify, platform
 kullanımını ayrıca faturalandırır.
 
 Daha fazla hacim için daha çok ön ödemeli kullanım içeren bir

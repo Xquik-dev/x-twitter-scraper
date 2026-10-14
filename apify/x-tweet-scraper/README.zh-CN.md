@@ -64,13 +64,13 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 | `contentDisclosure`    | 披露元数据，可用时提供                   |
 | `conversationControl`  | 回复权限和公开对话所有者                 |
 | `reactionContext`      | 反应所引用的公开帖子和用户               |
-| `subscriberBadge`      | 回复上显示的订阅者徽章所属的创作者       |
+| `subscriberBadge`      | 回复作者订阅的创作者                     |
 | `limitedActions`       | 公开的互动限制和提示                     |
 | `isLimitedReply`       | 回复是否受限                             |
 | `isNoteTweet`          | 是否为 Note Tweet（长帖）                |
 | `isQuoteStatus`        | 这条帖子是否引用了另一条帖子             |
 | `isRetweet`            | 这一行是否为转帖，附带原帖               |
-| `isPinned`             | 扁平行中作者是否置顶了这条帖子           |
+| `isPinned`             | 作者是否置顶了这条帖子。仅限扁平行       |
 | `isReply`              | 这条帖子是否为回复                       |
 | `quoted_tweet`         | 被引用的帖子对象（如为引用帖子）         |
 | `conversationId`       | 帖子串或对话 ID                          |
@@ -233,7 +233,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 
 每行包含 `resultType: "embed"`、`sourceTweetId` & `embed`。该对象包含 `url`、`authorName`、`authorUrl`、`html` & `width`。`embedHideMedia`、`embedHideThread` & `embedOmitScript` 可以去掉媒体、被回复的帖子或小组件脚本。
 
-这 2 种模式都读取帖子 ID & `startUrls` 中的帖子 URL。每条帖子按常规的每行价格产生 1 行。X 上不存在的帖子不产生行&不收费。
+这 2 种模式都在 `tweetIds` 中接受帖子 ID 或帖子 URL。`startUrls` 也接受帖子 URL。每条帖子按常规的每行价格产生 1 行。X 上不存在的帖子不产生行&不收费。
 
 ### 获取 X 上的热门帖子
 
@@ -249,7 +249,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 }
 ```
 
-`topMetric` 可以是 `likes`、`replies`、`quotes`、`bookmarks`、`shares` 或 `views`。默认值为 `likes`。`topWindow` 可以是 `day`、`week` 或 `month`，默认值为 `day`。每种选择 X 最多列出 100 条帖子。`topCountry` 留空表示整个 X，或设置 `lang` 只看 1 种语言。两者都设置时，X 按国家挑选&该 Actor 按语言保留。每行带有 `engagementMode: "topTweets"`，和其他帖子一样按 1 个结果计费。
+`topMetric` 可以是 `likes`、`replies`、`quotes`、`bookmarks`、`shares` 或 `views`。默认值为 `likes`。`topWindow` 可以是 `day`、`week` 或 `month`，默认值为 `day`。每种选择 X 最多列出 100 条帖子。`topCountry` 留空表示整个 X。设置 `lang` 可只保留 1 种语言。两者都设置时，X 按国家挑选&该 Actor 按语言保留。每行带有 `engagementMode: "topTweets"`，和其他帖子一样按 1 个结果计费。
 
 ### 导出扁平 CSV 行
 

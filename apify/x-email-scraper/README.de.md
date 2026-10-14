@@ -378,9 +378,9 @@ prüft, ob die Adresse E-Mails empfängt.
 ### Warum hat ein Follower-Scan nur wenige Datensätze geliefert?
 
 Etwa 1 von 400 Followern veröffentlicht eine E-Mail. Der Run-Status sagt, wie
-viele Datensätze einer Liste der Run gelesen hat. Erhöhe `maxScan`, um eine
-Liste weiter zu lesen, oder nutze `searchTerms` mit Wörtern wie booking, die
-weit mehr Datensätze behalten.
+viele Datensätze der Run gelesen hat. Erhöhe `maxScan`, um eine Liste weiter zu
+lesen, oder nutze `searchTerms` mit Wörtern wie booking, die weit mehr
+Datensätze behalten.
 
 ### Wie viele Profile kann ich in 1 Run prüfen?
 

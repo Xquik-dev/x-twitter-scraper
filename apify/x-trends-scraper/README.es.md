@@ -37,7 +37,8 @@ iniciar sesión.
 - Posición, tema, consulta, volumen de posts, URL de búsqueda, WOEID & ubicación
   de origen.
 - La ubicación de origen en cada fila.
-- Etiquetas para las filas de hashtags & para el volumen de posts disponible.
+- Indicadores que marcan las filas de hashtags & las filas que tienen volumen de
+  posts.
 - Eliminación de duplicados de entradas equivalentes antes del cobro.
 - Exportación en JSON, CSV, Excel, XML & RSS con los datasets de Apify.
 - Las ejecuciones se reanudan desde el estado guardado tras una migración de

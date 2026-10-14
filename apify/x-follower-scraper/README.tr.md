@@ -86,13 +86,14 @@ eder. Alanların tam listesi için OpenAPI'ye bak.
 `raw` alanı eklemek için `outputMode: "raw"` veya `includeRaw: true` ayarla. Bu
 alan kaynak profilin güvenli bir kopyasını tutar. Varsayılan mod kompakt moddur.
 
-Satır başına en çok veri için `outputMode: "full"` ayarla. X gönderdiğinde her
-satır `listedCount`, `defaultProfileImage` & `advertiserAccountType` gibi en
-fazla 13 liste alanını tutar. Tam satırlar bunları sona koyar. Kompakt satırlar
-daha küçük kalır & depolaması daha ucuzdur.
+Satır başına en çok veri için `outputMode: "full"` ayarla. Satırlar, X'in
+takipçi & takip edilen listelerinde gönderdiği `listedCount`,
+`defaultProfileImage` & `advertiserAccountType` gibi en fazla 13 ek profil
+alanını da taşır. Tam satırlar bunları sona koyar. Kompakt satırlar daha küçük
+kalır & depolaması daha ucuzdur.
 
-`verifiedOnly`, herkese açık Blue & eski onaylı profilleri kabul eder. Kaynak
-bayrakları çelişirse onaylı olduğunu gösteren değer kazanır. `blueVerifiedOnly`,
+`verifiedOnly`, herkese açık Blue & eski onaylı profilleri kabul eder. X'in onay
+bayraklarından biri bile öyle diyorsa profil onaylı sayılır. `blueVerifiedOnly`,
 X'in Blue onaylı olarak işaretlediği profilleri tutar. X birçok şirket & devlet
 hesabını da Blue olarak işaretler. 1 rozet türünü tutmak için `verifiedType`
 ayarla.

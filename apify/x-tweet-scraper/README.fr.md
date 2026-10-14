@@ -57,52 +57,52 @@ plus de 50 filtres.
 
 ### Quelles données X Tweet Scraper peut-il extraire ?
 
-| Champ                  | Description                                                        |
-| ---------------------- | ------------------------------------------------------------------ |
-| `id`                   | ID du post                                                         |
-| `text`                 | Texte complet, y compris les Note Tweets jusqu'à 25k caractères    |
-| `createdAt`            | Horodatage natif de X, en texte                                    |
-| `likeCount`            | Nombre de J'aime                                                   |
-| `retweetCount`         | Nombre de reposts                                                  |
-| `replyCount`           | Nombre de réponses                                                 |
-| `quoteCount`           | Nombre de citations                                                |
-| `viewCount`            | Nombre de vues                                                     |
-| `bookmarkCount`        | Nombre de signets                                                  |
-| `lang`                 | Langue du post                                                     |
-| `url`                  | Lien direct vers le post                                           |
-| `tweetUrl`             | Alias de l'URL du post en sortie plate                             |
-| `twitterUrl`           | URL `twitter.com` en sortie plate                                  |
-| `author`               | Nom d'utilisateur, bio, site web & compteurs de l'auteur           |
-| `authorUsername`       | Nom d'utilisateur de l'auteur en sortie plate                      |
-| `authorFollowers`      | Nombre d'abonnés de l'auteur en sortie plate                       |
-| `authorUrl`            | Site web de l'auteur en sortie plate, quand il existe              |
-| `authorDescription`    | Bio de l'auteur en sortie plate                                    |
-| `authorCoverPicture`   | URL de la bannière de l'auteur en sortie plate                     |
-| `authorPinnedTweetIds` | ID des posts épinglés de l'auteur en sortie plate                  |
-| `media`                | Images, vidéos, GIF joints                                         |
-| `mediaUrls`            | URL des médias en sortie plate                                     |
-| `imageUrls`            | URL des images en sortie plate                                     |
-| `videoUrls`            | URL des vidéos en sortie plate                                     |
-| `entities`             | Hashtags, URL, mentions et horodatages vidéo                       |
-| `displayTextRange`     | Plage de texte affichée par X, quand elle existe                   |
-| `contentDisclosure`    | Métadonnées de divulgation, quand elles existent                   |
-| `conversationControl`  | Règle de réponse et propriétaire public de la conversation         |
-| `reactionContext`      | Post et utilisateur publics visés par une réaction                 |
-| `subscriberBadge`      | Créateur dont une réponse affiche le badge Subscriber              |
-| `limitedActions`       | Restrictions et invites d'interaction publiques                    |
-| `isLimitedReply`       | Indique si les réponses sont limitées                              |
-| `isNoteTweet`          | Indique s'il s'agit d'un Note Tweet (post long)                    |
-| `isQuoteStatus`        | Indique si ce post en cite un autre                                |
-| `isRetweet`            | Indique si cette ligne est un repost, avec l'original joint        |
-| `isPinned`             | Indique si l'auteur a épinglé ce post, en lignes plates            |
-| `isReply`              | Indique si ce post est une réponse                                 |
-| `quoted_tweet`         | Objet du post cité (pour une citation)                             |
-| `conversationId`       | ID du fil ou de la conversation                                    |
-| `resultType`           | Type de ligne pour les lignes riches, d'engagement & de diagnostic |
-| `sourceTweetId`        | ID du post source pour les modes article et engagement             |
-| `article`              | Données d'article structurées en `mode: "article"`                 |
-| `translation`          | Traduction de X en `mode: "translation"`                           |
-| `embed`                | HTML d'intégration & lien en `mode: "embed"`                       |
+| Champ                  | Description                                                             |
+| ---------------------- | ----------------------------------------------------------------------- |
+| `id`                   | ID du post                                                              |
+| `text`                 | Texte complet, y compris les Note Tweets jusqu'à 25k caractères         |
+| `createdAt`            | Horodatage natif de X, en texte                                         |
+| `likeCount`            | Nombre de J'aime                                                        |
+| `retweetCount`         | Nombre de reposts                                                       |
+| `replyCount`           | Nombre de réponses                                                      |
+| `quoteCount`           | Nombre de citations                                                     |
+| `viewCount`            | Nombre de vues                                                          |
+| `bookmarkCount`        | Nombre de signets                                                       |
+| `lang`                 | Langue du post                                                          |
+| `url`                  | Lien direct vers le post                                                |
+| `tweetUrl`             | Alias de l'URL du post en sortie plate                                  |
+| `twitterUrl`           | URL `twitter.com` en sortie plate                                       |
+| `author`               | Nom d'utilisateur, bio, site web & compteurs de l'auteur                |
+| `authorUsername`       | Nom d'utilisateur de l'auteur en sortie plate                           |
+| `authorFollowers`      | Nombre d'abonnés de l'auteur en sortie plate                            |
+| `authorUrl`            | Site web de l'auteur en sortie plate, quand il existe                   |
+| `authorDescription`    | Bio de l'auteur en sortie plate                                         |
+| `authorCoverPicture`   | URL de la bannière de l'auteur en sortie plate                          |
+| `authorPinnedTweetIds` | ID des posts épinglés de l'auteur en sortie plate                       |
+| `media`                | Images, vidéos, GIF joints                                              |
+| `mediaUrls`            | URL des médias en sortie plate                                          |
+| `imageUrls`            | URL des images en sortie plate                                          |
+| `videoUrls`            | URL des vidéos en sortie plate                                          |
+| `entities`             | Hashtags, URL, mentions et horodatages vidéo                            |
+| `displayTextRange`     | Plage de texte affichée par X, quand elle existe                        |
+| `contentDisclosure`    | Métadonnées de divulgation, quand elles existent                        |
+| `conversationControl`  | Règle de réponse et propriétaire public de la conversation              |
+| `reactionContext`      | Post et utilisateur publics visés par une réaction                      |
+| `subscriberBadge`      | Créateur auquel l'auteur de la réponse est abonné                       |
+| `limitedActions`       | Restrictions et invites d'interaction publiques                         |
+| `isLimitedReply`       | Indique si les réponses sont limitées                                   |
+| `isNoteTweet`          | Indique s'il s'agit d'un Note Tweet (post long)                         |
+| `isQuoteStatus`        | Indique si ce post en cite un autre                                     |
+| `isRetweet`            | Indique si cette ligne est un repost, avec l'original joint             |
+| `isPinned`             | Indique si l'auteur a épinglé ce post. Seulement dans les lignes plates |
+| `isReply`              | Indique si ce post est une réponse                                      |
+| `quoted_tweet`         | Objet du post cité (pour une citation)                                  |
+| `conversationId`       | ID du fil ou de la conversation                                         |
+| `resultType`           | Type de ligne pour les lignes riches, d'engagement & de diagnostic      |
+| `sourceTweetId`        | ID du post source pour les modes article et engagement                  |
+| `article`              | Données d'article structurées en `mode: "article"`                      |
+| `translation`          | Traduction de X en `mode: "translation"`                                |
+| `embed`                | HTML d'intégration & lien en `mode: "embed"`                            |
 
 Les métadonnées de post optionnelles incluent `authorUnavailable`, `card`,
 `cashtagAttachments`, `communityId`, `communityName`, `communityNote`, `edit`,
@@ -363,9 +363,9 @@ contient `url`, `authorName`, `authorUrl`, `html` & `width`. `embedHideMedia`,
 `embedHideThread` & `embedOmitScript` retirent les médias, le post parent ou le
 script du widget.
 
-Les 2 modes lisent les ID de post & les URL de post dans `startUrls`. Chaque
-post donne 1 ligne au prix habituel par ligne. Un post que X n'a pas ne donne
-aucune ligne & ne coûte rien.
+Les 2 modes acceptent des ID de post ou des URL de post dans `tweetIds`.
+`startUrls` accepte aussi des URL de post. Chaque post donne 1 ligne au prix
+habituel par ligne. Un post que X n'a pas ne donne aucune ligne & ne coûte rien.
 
 ### Obtenir les meilleurs posts de X
 
@@ -385,7 +385,7 @@ métrique, tels que la page Inspiration de X les montre.
 `topMetric` vaut `likes`, `replies`, `quotes`, `bookmarks`, `shares` ou `views`.
 La valeur par défaut est `likes`. `topWindow` vaut `day`, `week` ou `month`, &
 vaut `day` par défaut. X liste jusqu'à 100 posts pour chaque choix. Laissez
-`topCountry` vide pour tout X, ou réglez `lang` pour 1 langue. Si les 2 sont
+`topCountry` vide pour tout X. Réglez `lang` pour garder 1 langue. Si les 2 sont
 réglés, X choisit le pays & l'Actor garde la langue. Chaque ligne a
 `engagementMode: "topTweets"` & coûte 1 résultat, comme tout post.
 

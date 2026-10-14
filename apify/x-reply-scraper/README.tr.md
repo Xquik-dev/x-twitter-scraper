@@ -123,9 +123,9 @@ buraya dön & Try for free düğmesine bas.
 2. `maxItems`, `scope` & işinin gerektirdiği filtreleri ayarla.
 3. Xquik'in X Reply Scraper'ını çalıştır & veri kümesini aç.
 
-Önceden doldurulmuş form, doğrulanmış herkese açık bir konuşmayı hedefler. En
-fazla 1.000 tam, düz satır döndürür. Auto modu varsayılan olarak konuşmanın
-tamamını arar. Tekilleştirme & kaynak bilgisi açık kalır.
+Form, test ettiğimiz herkese açık bir konuşmayla dolu gelir. En fazla 1.000 tam,
+düz satır döndürür. Auto modu varsayılan olarak konuşmanın tamamını arar.
+Tekilleştirme & kaynak bilgisi açık kalır.
 
 ### Gönderi URL'sinden yanıt kazı
 

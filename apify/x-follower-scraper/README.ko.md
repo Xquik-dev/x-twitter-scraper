@@ -79,15 +79,16 @@ Xquik의 X Follower Scraper는 팔로워, 팔로잉, 리스트 & 커뮤니티의
 이 필드에는 원본 프로필의 안전한 사본이 들어 있습니다. 기본값은 compact
 모드입니다.
 
-행당 데이터를 가장 많이 받으려면 `outputMode: "full"`을 설정하세요. 모든 행은
-X가 보내는 경우 `listedCount`, `defaultProfileImage` & `advertiserAccountType`
-같은 목록 필드를 최대 13개까지 남깁니다. full 행은 이 필드를 끝에 둡니다.
-compact 행은 더 작고 저장 비용이 적게 듭니다.
+행당 데이터를 가장 많이 받으려면 `outputMode: "full"`을 설정하세요. 행에는 X가
+팔로워 & 팔로잉 목록에서 보내는 `listedCount`, `defaultProfileImage` &
+`advertiserAccountType` 같은 추가 프로필 필드도 최대 13개까지 들어갑니다. full
+행은 이 필드를 끝에 둡니다. compact 행은 더 작고 저장 비용이 적게 듭니다.
 
-`verifiedOnly`는 공개 Blue 인증 & 기존 인증 프로필을 받습니다. 원본 플래그가
-서로 다르면 인증된 쪽을 따릅니다. `blueVerifiedOnly`는 X가 Blue 인증으로 표시한
-프로필을 남깁니다. X는 많은 기업 & 정부 계정도 Blue로 표시합니다. 배지 유형
-1개만 남기려면 `verifiedType`을 설정하세요.
+`verifiedOnly`는 공개 Blue 인증 & 기존 인증 프로필을 받습니다. X의 인증 플래그
+중 하나라도 인증으로 표시하면 그 프로필은 인증된 것으로 봅니다.
+`blueVerifiedOnly`는 X가 Blue 인증으로 표시한 프로필을 남깁니다. X는 많은 기업 &
+정부 계정도 Blue로 표시합니다. 배지 유형 1개만 남기려면 `verifiedType`을
+설정하세요.
 
 행에는 보는 사람에게만 해당하는 상태가 들어가지 않습니다. Xquik은 팔로우, 차단,
 뮤트, DM, 알림 & 비슷한 뷰어 플래그를 제거합니다. raw 출력에서도 제거합니다.

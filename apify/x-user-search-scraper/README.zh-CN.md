@@ -14,7 +14,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 - 可按受众、帖子、账号年龄、认证状态、网站、位置、简介、用户名&邮箱过滤。
 - `email` & `contactInfo`，包含每个个人资料公开的邮箱、电话&链接。
-- 搜索自动补全模式，返回 X 为每个搜索词建议的账号、话题、话题标签 & cashtag。
+- `mode: "autocomplete"`，返回 X 为每个搜索词建议的账号、话题、话题标签 & cashtag。
 - 用 `startCursor` 中保存的游标继续 1 个查询。
 - Apify 重启运行时，已交付的行&进度都会保留。
 - 计费前完成过滤&去重。
@@ -73,7 +73,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 - `suggestionTypes` 只保留你选择的类型。
 - 每行写明它的 `suggestionType` & 在 `suggestion` 中给出要搜索的文本。
 - cashtag 行带有 `price`、`marketCap` & `dailyChangePercent`。
-- 个人资料过滤条件只作用于个人资料搜索。
+- 个人资料过滤条件只作用于 `mode: "search"`。
 
 建议行如下所示。
 
@@ -129,7 +129,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 ## 搜索 X 用户要花多少钱？
 
-所有 Apify 套餐的价格都是每条已交付个人资料 $0.00015。搜索自动补全的建议按每个已交付行收取同样的价格。Apify 另行收取你的平台使用费。
+所有 Apify 套餐的价格都是每条已交付个人资料 $0.00015。自动补全的建议按每个已交付行收取同样的价格。Apify 另行收取你的平台使用费。
 
 需要更大的数据量时，请[选择 Apify 套餐](https://apify.com/pricing?fpr=xquik)，获得更多预付用量。
 

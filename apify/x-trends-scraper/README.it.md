@@ -35,7 +35,7 @@ né il login.
 - Posizione in classifica, argomento, query, volume di post, URL di ricerca,
   WOEID & località di origine.
 - Attribuzione della località su ogni riga.
-- Etichette per le righe con hashtag & per il volume di post disponibile.
+- Flag che segnano le righe con hashtag & le righe che hanno un volume di post.
 - Rimozione dei duplicati tra input equivalenti prima della fatturazione.
 - Export JSON, CSV, Excel, XML & RSS tramite i dataset di Apify.
 - Le esecuzioni riprendono dallo stato salvato dopo una migrazione di Apify.

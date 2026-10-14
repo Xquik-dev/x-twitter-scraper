@@ -25,7 +25,7 @@ geliefertem Profil** & Apify berechnet die Plattformnutzung separat.
   Nutzername & E-Mail.
 - `email` & `contactInfo` mit den E-Mails, Telefonnummern & Links, die jedes
   Profil veröffentlicht.
-- Modus Search Autocomplete mit den Accounts, Themen, Hashtags & Cashtags, die X
+- `mode: "autocomplete"` mit den Accounts, Themen, Hashtags & Cashtags, die X
   für jeden Suchbegriff vorschlägt.
 - Setze 1 Suchanfrage ab einem gespeicherten Cursor in `startCursor` fort.
 - Runs behalten gelieferte Datensätze & ihren Fortschritt, wenn Apify sie neu
@@ -106,7 +106,7 @@ Jeder Suchbegriff liefert vorgeschlagene Accounts, Themen, Hashtags & Cashtags.
 - Jeder Datensatz nennt seinen `suggestionType` & in `suggestion` den Text für
   die Suche.
 - Ein Cashtag-Datensatz enthält `price`, `marketCap` & `dailyChangePercent`.
-- Profilfilter gelten nur für Profile Search.
+- Profilfilter gelten nur für `mode: "search"`.
 
 Ein Vorschlags-Datensatz sieht so aus.
 
@@ -170,8 +170,8 @@ keinen Code aus & ändern den Preis nicht.
 ## Was kostet es, Nutzer auf X zu suchen?
 
 Auf jedem Apify-Plan kostet ein geliefertes Profil $0.00015. Ein Vorschlag aus
-Search Autocomplete kostet pro geliefertem Datensatz dasselbe. Apify berechnet
-deine Plattformnutzung separat.
+der Autovervollständigung kostet pro geliefertem Datensatz dasselbe. Apify
+berechnet deine Plattformnutzung separat.
 
 Brauchst du mehr Volumen, dann
 [wähle einen Apify-Plan](https://apify.com/pricing?fpr=xquik) mit mehr

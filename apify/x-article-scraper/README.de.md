@@ -296,9 +296,8 @@ Ja. Wähle aus 50 öffentlichen Tasks oder nutze die REST-API von Xquik. Im
 für Python, JavaScript & cURL.
 [Zeitpläne](https://docs.apify.com/platform/schedules) von Apify starten X
 Article Scraper von Xquik per Cron. Agents nutzen
-[Apify MCP](https://docs.apify.com/platform/integrations/mcp). Die REST-API von
-Xquik liest auch einzelne Artikel. Nutze `latest`, außer du brauchst einen
-älteren Build.
+[Apify MCP](https://docs.apify.com/platform/integrations/mcp). Nutze `latest`,
+außer du brauchst einen älteren Build.
 
 ### Wo bekomme ich Hilfe?
 

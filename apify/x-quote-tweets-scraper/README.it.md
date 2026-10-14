@@ -201,8 +201,8 @@ quando il suo divisore manca o vale 0.
 2 limiti vengono da X, & X Quote Tweets Scraper di Xquik li dichiara in modo
 chiaro.
 
-- La ricerca di X decide quanto indietro arrivano le citazioni di un post molto
-  grande. Un'esecuzione legge ogni citazione che X fornisce & si ferma lì.
+- Su un post con molte citazioni, la ricerca di X può fermarsi prima delle più
+  vecchie. Un'esecuzione legge ogni citazione che X fornisce & si ferma lì.
 - `top` è la classifica di X, non di Xquik. Non è un ordine per numero di Mi
   piace. Una riga successiva può avere più Mi piace di una precedente.
 
@@ -348,10 +348,10 @@ Sì. Incolla tutti gli URL di post o gli ID di post che ti servono. Il
 Un'esecuzione può restituire 100.000 righe & oltre. Per un export completo,
 porta `maxItems` sopra le 1.000 con cui parte il modulo.
 
-### Perché un post enorme restituisce meno citazioni di quante ne mostra il suo contatore?
+### Perché un post con molte citazioni ne restituisce meno di quante ne mostra il suo contatore?
 
-La ricerca di X decide quanto indietro arrivano le citazioni di un post molto
-grande. L'esecuzione consegna ogni citazione che X fornisce. Il contatore
+Su un post con molte citazioni, la ricerca di X può fermarsi prima delle più
+vecchie. L'esecuzione consegna ogni citazione che X fornisce. Il contatore
 include anche le citazioni di account privati o rimossi.
 
 ### Come ottengo 1 riga per ogni persona che ha citato un post?

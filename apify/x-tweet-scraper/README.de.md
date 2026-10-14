@@ -54,52 +54,52 @@ Suchanfragen mit über 50 Filtern.
 
 ### Welche Daten kann X Tweet Scraper extrahieren?
 
-| Feld                   | Beschreibung                                                    |
-| ---------------------- | --------------------------------------------------------------- |
-| `id`                   | Post-ID                                                         |
-| `text`                 | Vollständiger Text, inklusive Note Tweets bis 25.000 Zeichen    |
-| `createdAt`            | Nativer X-Zeitstempel als String                                |
-| `likeCount`            | Anzahl der Gefällt-mir-Angaben                                  |
-| `retweetCount`         | Anzahl der Reposts                                              |
-| `replyCount`           | Anzahl der Antworten                                            |
-| `quoteCount`           | Anzahl der Zitate                                               |
-| `viewCount`            | Anzahl der Aufrufe                                              |
-| `bookmarkCount`        | Anzahl der Lesezeichen                                          |
-| `lang`                 | Sprache des Posts                                               |
-| `url`                  | Direkter Link zum Post                                          |
-| `tweetUrl`             | Alias der Post-URL in der flachen Ausgabe                       |
-| `twitterUrl`           | `twitter.com`-URL in der flachen Ausgabe                        |
-| `author`               | Nutzername, Bio, Website & Zähler des Autors                    |
-| `authorUsername`       | Nutzername des Autors in der flachen Ausgabe                    |
-| `authorFollowers`      | Follower-Anzahl des Autors in der flachen Ausgabe               |
-| `authorUrl`            | Website des Autors in der flachen Ausgabe, falls vorhanden      |
-| `authorDescription`    | Bio-Text des Autors in der flachen Ausgabe                      |
-| `authorCoverPicture`   | URL des Bannerbilds des Autors in der flachen Ausgabe           |
-| `authorPinnedTweetIds` | IDs der angehefteten Posts des Autors in der flachen Ausgabe    |
-| `media`                | Angehängte Bilder, Videos, GIFs                                 |
-| `mediaUrls`            | Medien-URLs in der flachen Ausgabe                              |
-| `imageUrls`            | Bild-URLs in der flachen Ausgabe                                |
-| `videoUrls`            | Video-URLs in der flachen Ausgabe                               |
-| `entities`             | Hashtags, URLs, Erwähnungen und Video-Zeitmarken                |
-| `displayTextRange`     | Anzeigetextbereich von X, falls vorhanden                       |
-| `contentDisclosure`    | Offenlegungsmetadaten, falls vorhanden                          |
-| `conversationControl`  | Antworteinstellung und öffentlicher Inhaber der Konversation    |
-| `reactionContext`      | Öffentlicher Post und Nutzer, auf die eine Reaktion verweist    |
-| `subscriberBadge`      | Creator, dessen Abonnenten-Badge eine Antwort zeigt             |
-| `limitedActions`       | Öffentliche Interaktionsbeschränkungen und Hinweise             |
-| `isLimitedReply`       | Ob Antworten eingeschränkt sind                                 |
-| `isNoteTweet`          | Ob es ein Note Tweet ist (langer Post)                          |
-| `isQuoteStatus`        | Ob dieser Post einen anderen Post zitiert                       |
-| `isRetweet`            | Ob dieser Datensatz ein Repost ist, mit angehängtem Original    |
-| `isPinned`             | Ob der Autor diesen Post angeheftet hat, in flachen Datensätzen |
-| `isReply`              | Ob dieser Post eine Antwort ist                                 |
-| `quoted_tweet`         | Objekt des zitierten Posts (bei einem Zitat)                    |
-| `conversationId`       | Thread- oder Konversations-ID                                   |
-| `resultType`           | Datensatztyp für Rich-, Interaktions- & Diagnose-Datensätze     |
-| `sourceTweetId`        | ID des Quellposts für Artikel- und Interaktionsmodi             |
-| `article`              | Strukturierte Artikeldaten in `mode: "article"`                 |
-| `translation`          | Übersetzung von X in `mode: "translation"`                      |
-| `embed`                | Einbettungs-HTML & Link in `mode: "embed"`                      |
+| Feld                   | Beschreibung                                                        |
+| ---------------------- | ------------------------------------------------------------------- |
+| `id`                   | Post-ID                                                             |
+| `text`                 | Vollständiger Text, inklusive Note Tweets bis 25.000 Zeichen        |
+| `createdAt`            | Nativer X-Zeitstempel als String                                    |
+| `likeCount`            | Anzahl der Gefällt-mir-Angaben                                      |
+| `retweetCount`         | Anzahl der Reposts                                                  |
+| `replyCount`           | Anzahl der Antworten                                                |
+| `quoteCount`           | Anzahl der Zitate                                                   |
+| `viewCount`            | Anzahl der Aufrufe                                                  |
+| `bookmarkCount`        | Anzahl der Lesezeichen                                              |
+| `lang`                 | Sprache des Posts                                                   |
+| `url`                  | Direkter Link zum Post                                              |
+| `tweetUrl`             | Alias der Post-URL in der flachen Ausgabe                           |
+| `twitterUrl`           | `twitter.com`-URL in der flachen Ausgabe                            |
+| `author`               | Nutzername, Bio, Website & Zähler des Autors                        |
+| `authorUsername`       | Nutzername des Autors in der flachen Ausgabe                        |
+| `authorFollowers`      | Follower-Anzahl des Autors in der flachen Ausgabe                   |
+| `authorUrl`            | Website des Autors in der flachen Ausgabe, falls vorhanden          |
+| `authorDescription`    | Bio-Text des Autors in der flachen Ausgabe                          |
+| `authorCoverPicture`   | URL des Bannerbilds des Autors in der flachen Ausgabe               |
+| `authorPinnedTweetIds` | IDs der angehefteten Posts des Autors in der flachen Ausgabe        |
+| `media`                | Angehängte Bilder, Videos, GIFs                                     |
+| `mediaUrls`            | Medien-URLs in der flachen Ausgabe                                  |
+| `imageUrls`            | Bild-URLs in der flachen Ausgabe                                    |
+| `videoUrls`            | Video-URLs in der flachen Ausgabe                                   |
+| `entities`             | Hashtags, URLs, Erwähnungen und Video-Zeitmarken                    |
+| `displayTextRange`     | Anzeigetextbereich von X, falls vorhanden                           |
+| `contentDisclosure`    | Offenlegungsmetadaten, falls vorhanden                              |
+| `conversationControl`  | Antworteinstellung und öffentlicher Inhaber der Konversation        |
+| `reactionContext`      | Öffentlicher Post und Nutzer, auf die eine Reaktion verweist        |
+| `subscriberBadge`      | Creator, den der Autor der Antwort abonniert hat                    |
+| `limitedActions`       | Öffentliche Interaktionsbeschränkungen und Hinweise                 |
+| `isLimitedReply`       | Ob Antworten eingeschränkt sind                                     |
+| `isNoteTweet`          | Ob es ein Note Tweet ist (langer Post)                              |
+| `isQuoteStatus`        | Ob dieser Post einen anderen Post zitiert                           |
+| `isRetweet`            | Ob dieser Datensatz ein Repost ist, mit angehängtem Original        |
+| `isPinned`             | Ob der Autor diesen Post angeheftet hat. Nur in flachen Datensätzen |
+| `isReply`              | Ob dieser Post eine Antwort ist                                     |
+| `quoted_tweet`         | Objekt des zitierten Posts (bei einem Zitat)                        |
+| `conversationId`       | Thread- oder Konversations-ID                                       |
+| `resultType`           | Datensatztyp für Rich-, Interaktions- & Diagnose-Datensätze         |
+| `sourceTweetId`        | ID des Quellposts für Artikel- und Interaktionsmodi                 |
+| `article`              | Strukturierte Artikeldaten in `mode: "article"`                     |
+| `translation`          | Übersetzung von X in `mode: "translation"`                          |
+| `embed`                | Einbettungs-HTML & Link in `mode: "embed"`                          |
 
 Optionale Post-Metadaten umfassen `authorUnavailable`, `card`,
 `cashtagAttachments`, `communityId`, `communityName`, `communityNote`, `edit`,
@@ -356,9 +356,9 @@ Objekt enthält `url`, `authorName`, `authorUrl`, `html` & `width`.
 `embedHideMedia`, `embedHideThread` & `embedOmitScript` lassen Medien, den
 übergeordneten Post oder das Widget-Skript weg.
 
-Beide Modi lesen Post-IDs & Post-URLs in `startUrls`. Jeder Post ergibt 1
-Datensatz zum üblichen Preis pro Datensatz. Ein Post, den X nicht hat, ergibt
-keinen Datensatz & keine Gebühr.
+Beide Modi nehmen Post-IDs oder Post-URLs in `tweetIds`. `startUrls` nimmt
+ebenfalls Post-URLs. Jeder Post ergibt 1 Datensatz zum üblichen Preis pro
+Datensatz. Ein Post, den X nicht hat, ergibt keinen Datensatz & keine Gebühr.
 
 ### Die Top-Posts auf X abrufen
 
@@ -378,8 +378,8 @@ einstuft, so wie die Inspiration-Seite von X sie zeigt.
 `topMetric` ist `likes`, `replies`, `quotes`, `bookmarks`, `shares` oder
 `views`. Der Standard ist `likes`. `topWindow` ist `day`, `week` oder `month`, &
 der Standard ist `day`. X listet bis zu 100 Posts pro Auswahl. Lass `topCountry`
-leer für ganz X, oder setze `lang` für 1 Sprache. Sind beide gesetzt, wählt X
-das Land & der Actor behält die Sprache. Jeder Datensatz hat
+leer für ganz X. Setze `lang`, um 1 Sprache zu behalten. Sind beide gesetzt,
+wählt X das Land & der Actor behält die Sprache. Jeder Datensatz hat
 `engagementMode: "topTweets"` & kostet 1 Ergebnis, wie jeder Post.
 
 ### Flache CSV-Datensätze exportieren
