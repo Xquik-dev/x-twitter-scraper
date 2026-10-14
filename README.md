@@ -15,9 +15,10 @@
 </p>
 
 Xquik is the world's fastest and cheapest X Twitter scraper service with the
-most complete X data. Scrape Twitter search results, Tweets, profiles,
-followers & replies through REST, MCP, SDKs, CLI, webhooks & Apify. Xquik
-charges only for delivered, unique, filter-matching results and never pads rows.
+most complete X data. Use it as a tweet scraper and Twitter API alternative.
+Scrape Twitter search results, Tweets, profiles, followers & replies through
+REST, MCP, SDKs, CLI, webhooks & Apify. Xquik charges only for delivered,
+unique, filter-matching results and never pads rows.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
@@ -545,18 +546,27 @@ Get qualified advice for regulated, sensitive, or unclear work.
 
 ## SDKs and tools
 
-| Tool | Install or source |
+| Tool | Install |
 | --- | --- |
-| TypeScript | [`bun add x-twitter-scraper`](https://github.com/Xquik-dev/x-twitter-scraper-typescript) |
-| Python | [`pip install x_twitter_scraper`](https://github.com/Xquik-dev/x-twitter-scraper-python) |
-| Go | [x-twitter-scraper-go](https://github.com/Xquik-dev/x-twitter-scraper-go) |
-| Ruby | [x-twitter-scraper-ruby](https://github.com/Xquik-dev/x-twitter-scraper-ruby) |
-| Java | [x-twitter-scraper-java](https://github.com/Xquik-dev/x-twitter-scraper-java) |
-| Kotlin | [x-twitter-scraper-kotlin](https://github.com/Xquik-dev/x-twitter-scraper-kotlin) |
-| C# and .NET | [XTwitterScraper](https://github.com/Xquik-dev/x-twitter-scraper-csharp) |
-| PHP | [xquik/x-twitter-scraper](https://github.com/Xquik-dev/x-twitter-scraper-php) |
-| CLI | [x-twitter-scraper-cli](https://github.com/Xquik-dev/x-twitter-scraper-cli) |
-| Terraform | [Xquik provider](https://registry.terraform.io/providers/Xquik-dev/x-twitter-scraper/latest) |
+| [Twitter API TypeScript SDK](https://github.com/Xquik-dev/x-twitter-scraper-typescript) | `bun add x-twitter-scraper` |
+| [Twitter API Python SDK](https://github.com/Xquik-dev/x-twitter-scraper-python) | `pip install x_twitter_scraper` |
+| [Twitter API Go SDK](https://github.com/Xquik-dev/x-twitter-scraper-go) | `go get github.com/Xquik-dev/x-twitter-scraper-go` |
+| [Twitter API Ruby SDK](https://github.com/Xquik-dev/x-twitter-scraper-ruby) | `gem "x-twitter-scraper"` |
+| [Twitter API Java SDK](https://github.com/Xquik-dev/x-twitter-scraper-java) | `com.xquik.api:x-twitter-scraper-java` |
+| [Twitter API Kotlin SDK](https://github.com/Xquik-dev/x-twitter-scraper-kotlin) | `com.xquik.api:x-twitter-scraper-kotlin` |
+| [Twitter API C# SDK for .NET](https://github.com/Xquik-dev/x-twitter-scraper-csharp) | `dotnet add package XTwitterScraper` |
+| [Twitter API PHP SDK](https://github.com/Xquik-dev/x-twitter-scraper-php) | `composer require xquik/x-twitter-scraper` |
+| [Twitter CLI & X CLI](https://github.com/Xquik-dev/x-twitter-scraper-cli) | `go install github.com/Xquik-dev/x-twitter-scraper-cli/cmd/x-twitter-scraper@latest` |
+| [Terraform provider for X API monitors](https://github.com/Xquik-dev/terraform-provider-x-twitter-scraper) | [Terraform Registry](https://registry.terraform.io/providers/Xquik-dev/x-twitter-scraper/latest) |
+| [TweetClaw, the OpenClaw Twitter plugin](https://github.com/Xquik-dev/tweetclaw) | `openclaw plugins install clawhub:@xquik/tweetclaw` |
+| [Hermes Agent Twitter plugin](https://github.com/Xquik-dev/hermes-tweet) | `hermes plugins install Xquik-dev/hermes-tweet --enable` |
+| [n8n community node for Twitter](https://github.com/Xquik-dev/n8n-nodes-xquik) | `npm install n8n-nodes-xquik` |
+| [Paperclip AI plugin for Twitter](https://github.com/Xquik-dev/paperclip-plugin-xquik) | `paperclipai plugin install @xquik/paperclip-plugin-xquik` |
+| [Haystack Twitter search components](https://github.com/Xquik-dev/xquik-haystack) | `pip install xquik-haystack` |
+| [Prefect Twitter search tasks](https://github.com/Xquik-dev/prefect-xquik) | `pip install prefect-xquik` |
+| [X API migration Skill](https://github.com/Xquik-dev/x-api) | `npx skills@1.7.0 add Xquik-dev/x-api` |
+| [Twitter advanced search operators](https://github.com/Xquik-dev/x-twitter-advanced-search) | Reference with tested examples |
+| [Twitter API documentation source](https://github.com/Xquik-dev/xquik-docs) | Published at [docs.xquik.com](https://docs.xquik.com) |
 
 ## Documentation and support
 
