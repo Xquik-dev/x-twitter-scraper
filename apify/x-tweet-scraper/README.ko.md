@@ -453,56 +453,57 @@ Apify 플랫폼 사용료는 Apify가 따로 청구합니다. Xquik은 전달된
 Xquik의 X Tweet Scraper는 비용 & 속도에서 다른 게시물 Actor 11개를 앞섰습니다.
 이 Actor의 중앙값 행에는 필드가 63개 있었고, 다른 Actor 중앙값의 2배였습니다.
 
-- `xquik/x-tweet-scraper`: 유용한 트윗 890개, 유용한 트윗당 $0.000175, 초당
-  39.2개 & 행당 필드 63개.
+- `xquik/x-tweet-scraper` 실행은 유용한 트윗 890개를 전달했습니다. 유용한 트윗당
+  $0.000175, 초당 39.2개 & 행당 필드 63개입니다.
   [실행 보기](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
-- `xquik/x-tweet-scraper`: 유용한 트윗 883개, 유용한 트윗당 $0.000176, 초당
-  25.2개 & 행당 필드 63개.
+- `xquik/x-tweet-scraper` 실행은 유용한 트윗 883개를 전달했습니다. 유용한 트윗당
+  $0.000176, 초당 25.2개 & 행당 필드 63개입니다.
   [실행 보기](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
-- `xquik/x-tweet-scraper`: 유용한 트윗 882개, 유용한 트윗당 $0.000177, 초당
-  25.7개 & 행당 필드 63개.
+- `xquik/x-tweet-scraper` 실행은 유용한 트윗 882개를 전달했습니다. 유용한 트윗당
+  $0.000177, 초당 25.7개 & 행당 필드 63개입니다.
   [실행 보기](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
-- `xquik/x-tweet-scraper`: 유용한 트윗 877개, 유용한 트윗당 $0.000178, 초당
-  26.9개 & 행당 필드 63개.
+- `xquik/x-tweet-scraper` 실행은 유용한 트윗 877개를 전달했습니다. 유용한 트윗당
+  $0.000178, 초당 26.9개 & 행당 필드 63개입니다.
   [실행 보기](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 유용한 트윗 813개,
-  유용한 트윗당 $0.000185, 초당 10.5개 & 행당 필드 36개.
-  [실행 보기](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 유용한 트윗 805개,
-  유용한 트윗당 $0.000187, 초당 10.6개 & 행당 필드 36개.
-  [실행 보기](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 유용한 트윗 805개,
-  유용한 트윗당 $0.000187, 초당 10.7개 & 행당 필드 36개.
-  [실행 보기](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
-- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest`: 유용한
-  트윗 880개, 유용한 트윗당 $0.000250, 초당 9.1개 & 행당 필드 46개.
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` 실행은 유용한 트윗
+  813개를 전달했습니다. 유용한 트윗당 $0.000185, 초당 10.5개 & 행당 필드
+  36개입니다. [실행 보기](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` 실행은 유용한 트윗
+  805개를 전달했습니다. 유용한 트윗당 $0.000187, 초당 10.6개 & 행당 필드
+  36개입니다. [실행 보기](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` 실행은 유용한 트윗
+  805개를 전달했습니다. 유용한 트윗당 $0.000187, 초당 10.7개 & 행당 필드
+  36개입니다. [실행 보기](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
+- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` 실행은
+  유용한 트윗 880개를 전달했습니다. 유용한 트윗당 $0.000250, 초당 9.1개 & 행당
+  필드 46개입니다.
   [실행 보기](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
-- `scraper_one/x-posts-search`: 유용한 트윗 804개, 유용한 트윗당 $0.000314, 초당
-  3.3개 & 행당 필드 14개.
+- `scraper_one/x-posts-search` 실행은 유용한 트윗 804개를 전달했습니다. 유용한
+  트윗당 $0.000314, 초당 3.3개 & 행당 필드 14개입니다.
   [실행 보기](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
-- `danek/twitter-scraper`: 유용한 트윗 807개, 유용한 트윗당 $0.000347, 초당
-  5.0개 & 행당 필드 27개.
+- `danek/twitter-scraper` 실행은 유용한 트윗 807개를 전달했습니다. 유용한 트윗당
+  $0.000347, 초당 5.0개 & 행당 필드 27개입니다.
   [실행 보기](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
-- `tweetapi/twitter-x-search-scraper`: 유용한 트윗 337개, 유용한 트윗당
-  $0.000374, 초당 2.6개 & 행당 필드 28개.
+- `tweetapi/twitter-x-search-scraper` 실행은 유용한 트윗 337개를 전달했습니다.
+  유용한 트윗당 $0.000374, 초당 2.6개 & 행당 필드 28개입니다.
   [실행 보기](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
-- `api-ninja/x-twitter-advanced-search`: 유용한 트윗 837개, 유용한 트윗당
-  $0.000430, 초당 7.4개 & 행당 필드 28개.
+- `api-ninja/x-twitter-advanced-search` 실행은 유용한 트윗 837개를 전달했습니다.
+  유용한 트윗당 $0.000430, 초당 7.4개 & 행당 필드 28개입니다.
   [실행 보기](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
-- `apidojo/twitter-scraper-lite`: 유용한 트윗 251개, 유용한 트윗당 $0.000494,
-  초당 12.9개 & 행당 필드 54개.
+- `apidojo/twitter-scraper-lite` 실행은 유용한 트윗 251개를 전달했습니다. 유용한
+  트윗당 $0.000494, 초당 12.9개 & 행당 필드 54개입니다.
   [실행 보기](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
-- `apidojo/tweet-scraper`: 유용한 트윗 481개, 유용한 트윗당 $0.000832, 초당
-  7.8개 & 행당 필드 55개.
+- `apidojo/tweet-scraper` 실행은 유용한 트윗 481개를 전달했습니다. 유용한 트윗당
+  $0.000832, 초당 7.8개 & 행당 필드 55개입니다.
   [실행 보기](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
-- `xtdata/twitter-x-scraper`: 유용한 트윗 1,378개, 유용한 트윗당 $0.001168, 초당
-  11.9개 & 행당 필드 67개.
+- `xtdata/twitter-x-scraper` 실행은 유용한 트윗 1,378개를 전달했습니다. 유용한
+  트윗당 $0.001168, 초당 11.9개 & 행당 필드 67개입니다.
   [실행 보기](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
-- `seemuapps/x-tweet-scraper`: 유용한 트윗 805개, 유용한 트윗당 $0.001242, 초당
-  6.9개 & 행당 필드 24개.
+- `seemuapps/x-tweet-scraper` 실행은 유용한 트윗 805개를 전달했습니다. 유용한
+  트윗당 $0.001242, 초당 6.9개 & 행당 필드 24개입니다.
   [실행 보기](https://console.apify.com/view/runs/FstursEw43TbcipYU)
-- `maximedupre/twitter-scraper`: 유용한 트윗 46개, 유용한 트윗당 $0.002846, 초당
-  0.3개 & 행당 필드 31개.
+- `maximedupre/twitter-scraper` 실행은 유용한 트윗 46개를 전달했습니다. 유용한
+  트윗당 $0.002846, 초당 0.3개 & 행당 필드 31개입니다.
   [실행 보기](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
 
 모든 Actor는 같은 검색 & 필터로 실행했습니다. 다른 Actor는 2026-09-27에, Xquik
@@ -649,100 +650,117 @@ Actor가 쓰는 필드 이름을 읽고 자체 필드로 연결합니다. 문서
 
 각 줄은 이미 쓰는 필드를 먼저 적고, 이어서 연결되는 필드를 적습니다.
 
-- `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`:
-  `startUrls`
-- 문자열 1개인 `profileUrl`: `startUrls`
+- `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`
+  필드는 `startUrls`에 매핑됩니다.
+- 문자열 1개인 `profileUrl` 필드는 `startUrls`에 매핑됩니다.
 - `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids` 또는
-  문자열 1개인 `tweetId`: `tweetIds`
+  문자열 1개인 `tweetId` 필드는 `tweetIds`에 매핑됩니다.
 - `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`,
-  `screenNames`, `profileTweets`: `twitterHandles`
-- 문자열 1개인 `username`, `handle`, `screenName`: `twitterHandles`
+  `screenNames`, `profileTweets` 필드는 `twitterHandles`에 매핑됩니다.
+- 문자열 1개인 `username`, `handle`, `screenName` 필드는 `twitterHandles`에
+  매핑됩니다.
 - 목록이나 한 줄에 검색 1개씩 쓴 `searchTerms`, `searchQueries`, `queries`,
-  `search`: `searchTerms`
-- `twitterContent`, `query`, `searchQuery`: `twitterContent`
+  `search` 필드는 `searchTerms`에 매핑됩니다.
+- `twitterContent`, `query`, `searchQuery` 필드는 `twitterContent`에 매핑됩니다.
 - `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`,
   `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`,
-  `maxTweets`, `tweetsDesired`, `maxTotalTweets`: `maxItems`
-- `per_profile_limit`: `maxItemsPerTarget`
-- `sort`: `queryType`
-- `search_type`, `searchType`, `query_type`, `search_sort`: `Top` & `Latest`는
-  대소문자와 상관없이 `queryType`. `Media`, `Photos` & `Videos`는
-  `filter:media`, `filter:images` & `filter:videos`를 켭니다.
-- `tweetLanguage`, `language`, `contentLanguage`: `lang`
-- `author`, `fromUser`: `from`
-- `inReplyTo`, `toUser`: `to`
-- `mentioning`: `@`
-- `start`, `startDate`, `timeSince`: `since`
-- `end`, `endDate`, `timeUntil`: `until`
-- 초 단위인 `timeSinceUnix`, `sinceTime`, `timeUntilUnix`, `untilTime`:
-  `since_time`, `until_time`
-- `timeWithinTime`, `withinTime`: `within_time`
-- `timeWindowHours`, `timeWindow`: 각각 시간 & 일 단위의 `within_time`
-- `timeSinceId`, `sinceId`, `timeMaxId`, `maxId`: `since_id`, `max_id`
-- Google Search Scraper의 `quickDateRange`(예: `d7`, `w2`, `m1`, `y`): 실행 시작
-  시점부터 거꾸로 센 `since_time`
+  `maxTweets`, `tweetsDesired`, `maxTotalTweets` 필드는 `maxItems`에 매핑됩니다.
+- `per_profile_limit` 필드는 `maxItemsPerTarget`에 매핑됩니다.
+- `sort` 필드는 `queryType`에 매핑됩니다.
+- `search_type`, `searchType`, `query_type`, `search_sort` 필드는 `Top` &
+  `Latest`일 때 대소문자와 상관없이 `queryType`에 매핑됩니다. `Media`, `Photos`
+  & `Videos`는 `filter:media`, `filter:images` & `filter:videos`를 켭니다.
+- `tweetLanguage`, `language`, `contentLanguage` 필드는 `lang`에 매핑됩니다.
+- `author`, `fromUser` 필드는 `from`에 매핑됩니다.
+- `inReplyTo`, `toUser` 필드는 `to`에 매핑됩니다.
+- `mentioning` 필드는 `@`에 매핑됩니다.
+- `start`, `startDate`, `timeSince` 필드는 `since`에 매핑됩니다.
+- `end`, `endDate`, `timeUntil` 필드는 `until`에 매핑됩니다.
+- 초 단위인 `timeSinceUnix`, `sinceTime`, `timeUntilUnix`, `untilTime` 필드는
+  `since_time`, `until_time`에 매핑됩니다.
+- `timeWithinTime`, `withinTime` 필드는 `within_time`에 매핑됩니다.
+- `timeWindowHours`, `timeWindow` 필드는 각각 시간 & 일 단위의 `within_time`에
+  매핑됩니다.
+- `timeSinceId`, `sinceId`, `timeMaxId`, `maxId` 필드는 `since_id`, `max_id`에
+  매핑됩니다.
+- Google Search Scraper의 `quickDateRange` 필드는 실행 시작 시점부터 거꾸로 센
+  `since_time`에 매핑됩니다. 값은 `d7`, `w2`, `m1`, `y` 등입니다.
 - `minimumFavorites`, `minLikes`, `min_likes`, `minFaves`, `engagementMinLikes`,
-  `Minimum_likes`: `min_faves`
-- `minimumRetweets`, `minRetweets`, `engagementMinRetweets`: `min_retweets`
-- `minimumReplies`, `minReplies`, `engagementMinReplies`, `Minimum_replies`:
-  `min_replies`
+  `Minimum_likes` 필드는 `min_faves`에 매핑됩니다.
+- `minimumRetweets`, `minRetweets`, `engagementMinRetweets` 필드는
+  `min_retweets`에 매핑됩니다.
+- `minimumReplies`, `minReplies`, `engagementMinReplies`, `Minimum_replies`
+  필드는 `min_replies`에 매핑됩니다.
 - `engagementMaxLikes`, `maxLikes`, `engagementMaxRetweets`, `maxRetweets`,
-  `engagementMaxReplies`: `engagement.maxLikes`, `engagement.maxRetweets`,
-  `engagement.maxReplies`
-- `onlyImage`, `onlyImages`, `has_images`: `filter:images`
-- `onlyVideo`, `onlyVideos`, `has_videos`: `filter:videos`
-- `onlyWithMedia`, `mediaOnly`: `filter:media`
-- `onlyQuote`, `onlyQuotes`: `filter:quote`
+  `engagementMaxReplies` 필드는 `engagement.maxLikes`, `engagement.maxRetweets`,
+  `engagement.maxReplies`에 매핑됩니다.
+- `onlyImage`, `onlyImages`, `has_images` 필드는 `filter:images`에 매핑됩니다.
+- `onlyVideo`, `onlyVideos`, `has_videos` 필드는 `filter:videos`에 매핑됩니다.
+- `onlyWithMedia`, `mediaOnly` 필드는 `filter:media`에 매핑됩니다.
+- `onlyQuote`, `onlyQuotes` 필드는 `filter:quote`에 매핑됩니다.
 - `onlyTwitterBlue`, `usersBlueVerifiedOnly`, `blue_verified_only`,
-  `onlyBlueVerified`: `filter:blue_verified`
-- `engagementHasEngagement`, `hasEngagement`: `filter:has_engagement`
-- `mediaHasLinks`, `has_links`, `requireLinks`: `filter:links`
-- `mediaHasMentions`, `has_mentions`, `requireMentions`: `filter:mentions`
-- `mediaHasHashtags`, `has_hashtags`, `requireHashtags`: `filter:hashtags`
-- `mediaNewsOnly`, `mediaSafeContentOnly`: `filter:news`, `filter:safe`
-- 유형 1개가 든 `mediaTypes`: 그 유형의 `filter:` 필드
-- `mediaSubtype`: `filter:media`, `filter:images` 또는 `filter:videos`
-- `includeNativeRetweets`, `includeRetweets`: `include:nativeretweets`
+  `onlyBlueVerified` 필드는 `filter:blue_verified`에 매핑됩니다.
+- `engagementHasEngagement`, `hasEngagement` 필드는 `filter:has_engagement`에
+  매핑됩니다.
+- `mediaHasLinks`, `has_links`, `requireLinks` 필드는 `filter:links`에
+  매핑됩니다.
+- `mediaHasMentions`, `has_mentions`, `requireMentions` 필드는
+  `filter:mentions`에 매핑됩니다.
+- `mediaHasHashtags`, `has_hashtags`, `requireHashtags` 필드는
+  `filter:hashtags`에 매핑됩니다.
+- `mediaNewsOnly`, `mediaSafeContentOnly` 필드는 `filter:news`, `filter:safe`에
+  매핑됩니다.
+- 유형 1개가 든 `mediaTypes` 필드는 그 유형의 `filter:` 필드에 매핑됩니다.
+- `mediaSubtype` 필드는 `filter:media`, `filter:images` 또는 `filter:videos`에
+  매핑됩니다.
+- `includeNativeRetweets`, `includeRetweets` 필드는 `include:nativeretweets`에
+  매핑됩니다.
 - `excludeReplies`, `excludeRetweets`, false로 설정한 `includeRetweets`,
-  `tweetTypesExclude`: `tweetTypes.excludeReplies`, `tweetTypes.excludeRetweets`
-  & `tweetTypes.excludeQuotes`
-- 유형 1개가 든 목록인 `tweetTypes`: `tweetTypes.replies`, `tweetTypes.quotes`
-  또는 `tweetTypes.nativeRetweets`
-- `tweetSubtype`: `tweetTypes.replies` 또는 `tweetTypes.quotes`.
-  `self_threads`는 `filter:self_threads` 연산자를 추가합니다.
-- `geotaggedNear`, `geoNear`: `near`
-- `withinRadius`, `geoWithinRadius`, `geoWithin`: `within`
-- `geoGeocode`: `geocode`
-- `tweetConversationId`, `tweetQuotedTweetId`, `tweetQuotedUserId`:
-  `conversation_id`, `quoted_tweet_id`, `quoted_user_id`
-- `cardName`, `tweetPollTypes`: `card_name`
-- `search_query`: `twitterContent`
-- `profile_urls`: 링크는 `startUrls`, 사용자 아이디는 `twitterHandles`
-- `lookup_post_ids` 또는 문자열 1개인 `id`: `tweetIds`
-- 쉼표로 구분한 목록 1개인 `tweets`: `tweetIds`
+  `tweetTypesExclude` 필드는 `tweetTypes.excludeReplies`,
+  `tweetTypes.excludeRetweets` & `tweetTypes.excludeQuotes`에 매핑됩니다.
+- 유형 1개가 든 목록인 `tweetTypes` 필드는 `tweetTypes.replies`,
+  `tweetTypes.quotes` 또는 `tweetTypes.nativeRetweets`에 매핑됩니다.
+- `tweetSubtype` 필드는 `tweetTypes.replies` 또는 `tweetTypes.quotes`에
+  매핑됩니다. `self_threads`는 `filter:self_threads` 연산자를 추가합니다.
+- `geotaggedNear`, `geoNear` 필드는 `near`에 매핑됩니다.
+- `withinRadius`, `geoWithinRadius`, `geoWithin` 필드는 `within`에 매핑됩니다.
+- `geoGeocode` 필드는 `geocode`에 매핑됩니다.
+- `tweetConversationId`, `tweetQuotedTweetId`, `tweetQuotedUserId` 필드는
+  `conversation_id`, `quoted_tweet_id`, `quoted_user_id`에 매핑됩니다.
+- `cardName`, `tweetPollTypes` 필드는 `card_name`에 매핑됩니다.
+- `search_query` 필드는 `twitterContent`에 매핑됩니다.
+- `profile_urls` 필드는 링크면 `startUrls`에, 사용자 아이디면 `twitterHandles`에
+  매핑됩니다.
+- `lookup_post_ids` 또는 문자열 1개인 `id` 필드는 `tweetIds`에 매핑됩니다.
+- 쉼표로 구분한 목록 1개인 `tweets` 필드는 `tweetIds`에 매핑됩니다.
 
 일부 필드는 여기에 대응하는 필드가 없습니다. 각 필드는 자신이 뜻하는 X 검색
 연산자를 실행의 모든 검색에 추가합니다. 실행 로그는 시작할 때 추가한 연산자를
 나열합니다.
 
-- `usersFromUsers`, `from_users`, `usersToUsers`, `to_users`,
-  `usersListMembers`: `from:`, `to:` & `list:`. 값이 여러 개면
+- `usersFromUsers`, `from_users`, `usersToUsers`, `to_users`, `usersListMembers`
+  필드는 `from:`, `to:` & `list:`를 추가합니다. 값이 여러 개면
   `(from:a OR from:b)`처럼 대안으로 실행됩니다.
-- `usersMentionUsers`, `mentioning_users`: `@name`
-- `usersExcludeFromUsers`: `-from:`
-- `onlyVerifiedUsers`, `usersVerifiedOnly`, `verified_only`: `filter:verified`
-- `placeObjectId`, `geoPlaceId`, `placeId`, `place`: `place:`
-- `cardDomain`: `card_domain:`
-- `appsSources`, `appsExcludeSources`: `source:` & `-source:`
+- `usersMentionUsers`, `mentioning_users` 필드는 `@name`을 추가합니다.
+- `usersExcludeFromUsers` 필드는 `-from:`을 추가합니다.
+- `onlyVerifiedUsers`, `usersVerifiedOnly`, `verified_only` 필드는
+  `filter:verified`를 추가합니다.
+- `placeObjectId`, `geoPlaceId`, `placeId`, `place` 필드는 `place:`를
+  추가합니다.
+- `cardDomain` 필드는 `card_domain:`을 추가합니다.
+- `appsSources`, `appsExcludeSources` 필드는 `source:` & `-source:`를
+  추가합니다.
 - 값이 각각 1개인 `contentKeywords`, `contentExactPhrases`, `contentHashtags`,
-  `contentCashtags`: 단어, 따옴표로 묶은 구문, `#tag` & `$tag`
+  `contentCashtags` 필드는 단어, 따옴표로 묶은 구문, `#tag` & `$tag`를
+  추가합니다.
 - `contentExcludeKeywords`, `contentExcludeHashtags`, `exclude_words`,
-  `hashtags_exclude`: `-word` & `-#tag`
-- `all_words`, `exact_phrases`: 모든 단어 & 구문이 일치해야 합니다
-- `any_words`, `hashtags_any`: `(#a OR #b)` 같은 대안
-- `contentQuestionMarks`: `?`
-- `contentEmoticons`: `positive`는 `:)`, `negative`는 `:(`
-- `tweet_type`: `filter:replies`, `filter:retweets` & 각각의 `-filter:` 형태
+  `hashtags_exclude` 필드는 `-word` & `-#tag`를 추가합니다.
+- `all_words`, `exact_phrases`를 쓰면 모든 단어 & 구문이 일치해야 합니다.
+- `any_words`, `hashtags_any` 필드는 `(#a OR #b)` 같은 대안을 추가합니다.
+- `contentQuestionMarks` 필드는 `?`를 추가합니다.
+- `contentEmoticons` 필드는 `positive`면 `:)`를, `negative`면 `:(`를 추가합니다.
+- `tweet_type` 필드는 `filter:replies`, `filter:retweets` & 각각의 `-filter:`
+  형태를 추가합니다.
 
 단어로 적은 모드는 `mode`로 연결됩니다. `Advanced Search`는 `search`,
 `Get Tweet by ID`는 `tweet`, `Get a Few Tweets`는 `tweets`, `Get Replies`는
@@ -770,10 +788,10 @@ Actor가 쓰는 필드 이름을 읽고 자체 필드로 연결합니다. 문서
 - `from`, `min_faves`, `since_time` & `filter:images` 같은 검색 연산자 필드는
   이미 X의 이름을 씁니다. 따로 연결할 필요가 없습니다.
 - 다른 Actor가 '모두 일치'인지 '하나만 일치'인지 밝히지 않은 목록은 값 1개로
-  실행됩니다: `contentKeywords`, `contentExactPhrases`, `contentHashtags`,
-  `contentCashtags`, `usersMentionUsers`, `mediaTypes` & `tweetTypes`. 값이 더
-  많으면 읽기나 과금 전에 실행이 멈춥니다. 메시지가 검색어 1개로 쓰는 방법을
-  알려 줍니다.
+  실행됩니다. 이런 목록은 `contentKeywords`, `contentExactPhrases`,
+  `contentHashtags`, `contentCashtags`, `usersMentionUsers`, `mediaTypes` &
+  `tweetTypes`입니다. 값이 더 많으면 읽기나 과금 전에 실행이 멈춥니다. 메시지가
+  검색어 1개로 쓰는 방법을 알려 줍니다.
 - `People`나 `Lists`로 설정한 `search_type`, `followers`로 설정한 `source_mode`,
   `engagementLevel` 프리셋 & `Get Similar Tweets` 모드는 읽기나 과금 전에 실행을
   멈춥니다. 메시지가 써야 할 Actor나 필드를 알려 줍니다.
@@ -883,96 +901,81 @@ Apify의
 모든 Xquik Actor는 같은 추출 엔진, 필터 우선 과금 & 진단을 공유합니다. 필요한
 데이터에 맞는 Actor를 고르세요.
 
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): 사용자 아이디,
-  ID 또는 URL로 프로필과 그 계정의 게시물, 답글, 미디어 & 팔로워를 스크랩합니다.
-  검색이 아니라 계정에서 시작할 때 사용하세요. 행당 $0.00015부터입니다.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 게시물 아래의
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)는 사용자
+  아이디, ID 또는 URL로 프로필과 그 계정의 게시물, 답글, 미디어 & 팔로워를
+  스크랩합니다. 검색이 아니라 계정에서 시작할 때 사용하세요. 행당
+  $0.00015부터입니다.
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)는 게시물 아래의
   답글(댓글) & 대화 전체를 25개 이상의 필터로 스크랩합니다. 게시물 아래의 토론이
   필요할 때 사용하세요. 행당 $0.00015부터입니다.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): 게시물
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)는 게시물
   URL이나 ID로 답글, 인용, 재게시한 사람 & 스레드를 대량으로 스크랩합니다. 누가
   게시물에 반응했는지 측정할 때 사용하세요. 행당 $0.00015부터입니다.
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)는
   게시물을 인용한 게시물을 텍스트, 미디어, 수치, 작성자 & 11개의 필터와 함께
   스크랩합니다. 누가 게시물을 인용했고 무엇을 말했는지 살펴볼 때 사용하세요.
   게시물당 $0.00015부터입니다.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): 팔로워,
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)는 팔로워,
   팔로잉, 리스트 멤버, 구독자 & 커뮤니티 멤버를 프로필 행으로 스크랩합니다.
   오디언스나 멤버 목록이 필요할 때 사용하세요. 프로필당 $0.00015부터입니다.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): 사용자
-  아이디, 자기소개 & 위치로 사용자를 검색합니다. 팔로워, 인증, 계정 연령 & 위치
-  필터를 지원합니다. 검색으로 계정 목록을 만들 때 사용하세요. 프로필당
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)는
+  사용자 아이디, 자기소개 & 위치로 사용자를 검색하며 팔로워, 인증, 계정 연령 &
+  위치 필터를 지원합니다. 검색으로 계정 목록을 만들 때 사용하세요. 프로필당
   $0.00015부터입니다.
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)는
   X의 "Account based in"(계정 기반 위치) 라벨, X에 연결된 방식 & 사용자 아이디
   변경 내역으로 계정이 어디에 기반을 두고 있는지 확인합니다. 계정의 기반 위치를
   검증할 때 사용하세요. 계정당 $0.00015부터입니다.
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): 사용자 아이디,
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper)는 사용자 아이디,
   팔로워 또는 사용자 검색에서 계정이 프로필에 공개한 이메일, 전화번호 & 링크를
   가져옵니다. 프로필이 공개한 이메일이 필요할 때 사용하세요. 프로필당
   $0.00015부터입니다.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): 리스트 URL이나 ID로
+- [X List Scraper](https://apify.com/xquik/x-list-scraper)는 리스트 URL이나 ID로
   리스트 게시물, 멤버 & 팔로워를 스크랩합니다. 직접 고른 리스트로 수집 대상을
   정할 때 사용하세요. 행당 $0.00015부터입니다.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): 커뮤니티
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper)는 커뮤니티
   정보, 게시물, 검색 결과, 멤버 & 모더레이터를 스크랩합니다. X 커뮤니티에서
   데이터를 모을 때 사용하세요. 행당 $0.00015부터입니다.
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper): 키워드로
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper)는 키워드로
   스페이스를 찾고 제목, 상태, 시간, 청취자 수, 호스트 & 스피커를 읽습니다.
   URL이나 ID로 방송도 읽습니다. X의 라이브 오디오 & 동영상을 추적할 때
   사용하세요. 스페이스 또는 방송당 $0.00015부터입니다.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): 위치별 실시간
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper)는 위치별 실시간
   트렌드를 순위, 볼륨, 쿼리 & WOEID와 함께 스크랩합니다. 어디에서 무엇이
   트렌드인지 추적할 때 사용하세요. 트렌드당 $0.00015부터입니다.
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): 키워드, 지역, 근무
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper)는 키워드, 지역, 근무
   형태, 직급 & 회사별로 X 채용 공고를 급여 & 지원 링크와 함께 스크랩합니다. X에
   올라온 채용 공고를 모을 때 사용하세요. 공고당 $0.00015부터입니다.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): 장문의 X
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper)는 장문의 X
   아티클을 커버, 작성자, 날짜 & 지표와 함께 마크다운 & 텍스트로 스크랩합니다.
   게시물이 아니라 아티클 본문이 필요할 때 사용하세요. 아티클당
   $0.00015부터입니다.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader): 게시물이나
-  프로필의 사진, 동영상 & GIF를 추출하거나 저장합니다. MP4 & 메타데이터 옵션을
-  지원합니다. 미디어 파일 자체가 필요할 때 사용하세요. 미디어 행당
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader)는 게시물이나
+  프로필의 사진, 동영상 & GIF를 MP4 & 메타데이터 옵션과 함께 추출하거나
+  저장합니다. 미디어 파일 자체가 필요할 때 사용하세요. 미디어 행당
   $0.00015부터입니다.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
-  브랜드 언급을 추적하고 AI로 관련성, 감정 & 고객 경험 질문에 답합니다. 실행
-  결과끼리 비교도 합니다. 브랜드를 꾸준히 지켜볼 때 사용하세요. 분석한 게시물당
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)는
+  브랜드 언급을 추적하고, AI로 관련성, 감정 & 고객 경험 질문에 답하며, 실행
+  결과끼리 비교합니다. 브랜드를 꾸준히 지켜볼 때 사용하세요. 분석한 게시물당
   $0.0003부터입니다.
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)는
   AI로 게시물마다 태도, 강도 & 비꼼 확률을 라벨링합니다. 어떤 주제든 전반적인
   감정을 알고 싶을 때 사용하세요. 분석한 게시물당 $0.0003부터입니다.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)는
   AI로 강세, 약세, 중립, 혼조 입장과 콘텐츠 유형, 확신도 & 자산 관련성을
   라벨링합니다. 주식, 암호화폐, 트레이딩 이야기를 지켜볼 때 사용하세요. 분석한
   게시물당 $0.0003부터입니다.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)는
   AI로 뉴스 게시물을 형식, 출처 표기 & 주제 관련성에 따라 라벨링합니다. 보도와
   논평을 구분할 때 사용하세요. 분석한 게시물당 $0.0003부터입니다.
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  직접 만든 카테고리, 점수 & 예/아니오 질문에 AI가 게시물마다 답합니다. 기본
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)는
+  직접 만든 카테고리, 점수 & 예/아니오 질문에 AI로 게시물마다 답합니다. 기본
   분석이 원하는 라벨과 맞지 않을 때 사용하세요. 분석한 게시물당
   $0.0003부터입니다.
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)는
   AI의 특성 답변 8개로 게시물마다 0에서 100까지의 Viral Score & 판정을
   추정합니다. 게시물이 왜 퍼지거나 묻히는지 분석할 때 사용하세요. 분석한
   게시물당 $0.0003부터입니다.
-
-## 스크랩 이상이 필요하신가요?
-
-Xquik은 대시보드 도구 47개, REST API, 서명된 웹훅 & MCP 서버도 제공합니다.
-
-- [API 문서](https://docs.xquik.com/introduction): REST API 가이드
-- [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets):
-  REST로 게시물 검색
-- [Batch Tweets API](https://docs.xquik.com/api-reference/x/batch-tweets): ID로
-  게시물 최대 100개 가져오기
-- [User Tweets API](https://docs.xquik.com/api-reference/x/user-tweets): 사용자
-  타임라인 가져오기
-- [MCP 서버](https://docs.xquik.com/mcp/overview): 지원 도구 살펴보기
-- [웹훅](https://docs.xquik.com/webhooks/overview): 서명된 이벤트 전달
-- [GitHub](https://github.com/Xquik-dev/x-twitter-scraper): 소스 코드 & 이슈
-  트래커
 
 ## 자주 묻는 질문
 

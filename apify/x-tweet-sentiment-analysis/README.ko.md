@@ -285,385 +285,399 @@ Apify가 따로 청구합니다. Pricing 탭에서 확인할 수 있습니다.
 [Season finale review texts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-season-finale-reactions)
 
 피날레 리뷰 초안에서 칭찬과 비판을 구분하세요. 2026-10-01에 직접 넣은 고유
-텍스트 3개를 확인했습니다. 상한: 3. 이 텍스트는 직접 쓴 예시이며, 시청자 조사가
-아닙니다.
+텍스트 3개를 확인했습니다. 상한은 3개였습니다. 이 텍스트는 직접 쓴 예시이며,
+시청자 조사가 아닙니다.
 
 #### 휴대폰 출시 논의
 
 [September 2026 iPhone launch posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-iphone-launch-posts)
 
 9월의 고정된 날짜 범위 안에서 출시 논의를 검토하세요. 2026-10-01에 고유 게시물
-5개를 확인했습니다. 상한: 5. 발표와 개인 의견이 모두 검색될 수 있습니다.
+5개를 확인했습니다. 상한은 5개였습니다. 발표와 개인 의견이 모두 검색될 수
+있습니다.
 
 #### 하프타임 쇼 리뷰
 
 [Halftime show review texts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-super-bowl-halftime-show)
 
 하프타임 리뷰에서 엇갈린 평가와 비꼼을 확인하세요. 2026-10-01에 직접 넣은 고유
-텍스트 3개를 확인했습니다. 상한: 3. 이 리뷰는 직접 쓴 예시이며, 실시간 공연
-반응이 아닙니다.
+텍스트 3개를 확인했습니다. 상한은 3개였습니다. 이 리뷰는 직접 쓴 예시이며,
+실시간 공연 반응이 아닙니다.
 
 #### 전기차 경험
 
 [Electric car experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-toward-new-electric-car)
 
 전기차를 운전하거나 고르는 일에 관한 게시물을 찾으세요. 2026-10-01에 고유 게시물
-5개를 확인했습니다. 상한: 5. 개인적인 표현으로 농담이나 전해 들은 이야기가
-검색될 수 있습니다.
+5개를 확인했습니다. 상한은 5개였습니다. 개인적인 표현으로 농담이나 전해 들은
+이야기가 검색될 수 있습니다.
 
 #### 영화 논의
 
 [Marvel movie discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-marvel-movie-audiences)
 
 관객 의견을 고르기 전에 영화 논의를 검토하세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. Marvel은 관련 없는 뜻으로 쓰인 경우에도 검색될 수
-있습니다.
+확인했습니다. 상한은 5개였습니다. Marvel은 관련 없는 뜻으로 쓰인 경우에도 검색될
+수 있습니다.
 
 #### 아티스트 미디어 캡션
 
 [Taylor Swift media caption tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-taylor-swift-album-reactions)
 
 최근 미디어와 함께 아티스트의 표현을 검토하세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 캡션은 이미지나 동영상에 보이는 모든 것을 설명하지
-못합니다.
+확인했습니다. 상한은 5개였습니다. 캡션은 이미지나 동영상에 보이는 모든 것을
+설명하지 못합니다.
 
 #### 게임 출시 스레드
 
 [Game release update thread](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-video-game-launch)
 
 발표와 경쟁 게임에 대한 반응을 함께 읽으세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 이 스레드는 여러 게임을 언급하며 첫 게시물을 포함합니다.
+확인했습니다. 상한은 5개였습니다. 이 스레드는 여러 게임을 언급하며 첫 게시물을
+포함합니다.
 
 #### 원격 근무 논의
 
 [Remote work discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-remote-work)
 
 원격 근무 논의에 드러난 태도를 비교하세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 채용 광고와 반복되는 의견이 나올 수 있습니다.
+확인했습니다. 상한은 5개였습니다. 채용 광고와 반복되는 의견이 나올 수 있습니다.
 
 #### 항공사 게시물
 
 [Airline discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airline-passengers)
 
 서비스 피드백을 고르기 전에 항공사 언급을 검토하세요. 2026-10-01에 고유 게시물
-5개를 확인했습니다. 상한: 5. 언급만으로는 작성자가 승객이라는 증거가 되지
-않습니다.
+5개를 확인했습니다. 상한은 5개였습니다. 언급만으로는 작성자가 승객이라는 증거가
+되지 않습니다.
 
 #### 대학 풋볼 논의
 
 [College football discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-college-football-fans)
 
 팬 의견과 대학 풋볼 홍보를 구분하세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 팬 의견과 함께 프리뷰와 홍보가 검색될 수 있습니다.
+확인했습니다. 상한은 5개였습니다. 팬 의견과 함께 프리뷰와 홍보가 검색될 수
+있습니다.
 
 #### 금리 논의
 
 [Interest rate discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-interest-rates)
 
 금리를 둘러싼 시장과 정책에 대한 태도를 검토하세요. 2026-10-01에 고유 게시물
-5개를 확인했습니다. 상한: 5. 주된 주제는 정치인일 수도, 시장일 수도 있습니다.
+5개를 확인했습니다. 상한은 5개였습니다. 주된 주제는 정치인일 수도, 시장일 수도
+있습니다.
 
 #### 스쿠터 논의
 
 [Electric scooter discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-toward-electric-scooters)
 
 이용자 피드백을 고르기 전에 스쿠터 논의를 찾으세요. 2026-10-01에 고유 게시물
-5개를 확인했습니다. 상한: 5. 개인 경험과 함께 광고, 연구, 농담이 검색될 수
-있습니다.
+5개를 확인했습니다. 상한은 5개였습니다. 개인 경험과 함께 광고, 연구, 농담이
+검색될 수 있습니다.
 
 #### 식당 경험
 
 [New restaurant experiences](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-restaurant-openings)
 
 새 식당에 대한 1인칭 표현을 검토하세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 개인적인 표현은 초대나 추천에도 나올 수 있습니다.
+확인했습니다. 상한은 5개였습니다. 개인적인 표현은 초대나 추천에도 나올 수
+있습니다.
 
 #### 공개 리스트 피드 어조
 
 [Public list feed tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-ai-coding-assistants)
 
 공개 리스트에 있는 게시물의 어조를 검토하세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 멤버는 다른 주제를 이야기하거나 다른 사람의 글을 재게시할
-수 있습니다.
+확인했습니다. 상한은 5개였습니다. 멤버는 다른 주제를 이야기하거나 다른 사람의
+글을 재게시할 수 있습니다.
 
 #### 기기 프로필 답글
 
 [Google device profile reply tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-smart-home-device-owners)
 
 답글을 포함해 기기 프로필의 표현을 검토하세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 부모 게시물의 맥락이 없으면 프로필 답글의 의미를 알기
-어려울 수 있습니다.
+확인했습니다. 상한은 5개였습니다. 부모 게시물의 맥락이 없으면 프로필 답글의
+의미를 알기 어려울 수 있습니다.
 
 #### 마라톤 훈련
 
 [Marathon training discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-marathon-runners)
 
 훈련 소식과 마라톤 계획에 담긴 태도를 찾으세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 러너의 소식과 함께 계획과 홍보가 나올 수 있습니다.
+확인했습니다. 상한은 5개였습니다. 러너의 소식과 함께 계획과 홍보가 나올 수
+있습니다.
 
 #### 여행 계획
 
 [Personal Tokyo trip posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-tourist-destinations)
 
 개인 여행 계획과 여행 이야기를 검토하세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 이름에 Tokyo가 들어간 행사는 일본 여행 이야기가 아니어도
-검색될 수 있습니다.
+확인했습니다. 상한은 5개였습니다. 이름에 Tokyo가 들어간 행사는 일본 여행
+이야기가 아니어도 검색될 수 있습니다.
 
 #### 스트리밍 가격 논의
 
 [Netflix price discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-streaming-price-increases)
 
 해지 사유를 검토하기 전에 Netflix 가격에 대한 우려를 찾으세요. 2026-10-01에 고유
-게시물 5개를 확인했습니다. 상한: 5. 가격 표현은 우려를 골라낼 뿐, 시청자를
-대표하는 표본이 아닙니다.
+게시물 5개를 확인했습니다. 상한은 5개였습니다. 가격 표현은 우려를 골라낼 뿐,
+시청자를 대표하는 표본이 아닙니다.
 
 #### 학용품 쇼핑
 
 [August 2026 school supply posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-back-to-school-shoppers)
 
 8월 기간의 학용품 게시물 50개를 검토하세요. 2026-10-01에 고유 게시물 50개를
-확인했습니다. 상한: 50. 저희가 검토한 결과 ID 50개 중 분명히 관련된 행은
-42개였습니다.
+확인했습니다. 상한은 50개였습니다. 저희가 검토한 결과 ID 50개 중 분명히 관련된
+행은 42개였습니다.
 
 #### 열차 지연
 
 [Train delay experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-public-transit)
 
 지연된 열차와 관련된 불만과 경험을 찾으세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 개인적인 표현으로는 공식 안내를 놓칠 수 있습니다.
+확인했습니다. 상한은 5개였습니다. 개인적인 표현으로는 공식 안내를 놓칠 수
+있습니다.
 
 #### 반려동물 사료 논의
 
 [Pet food experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-pet-food-brands)
 
 더 넓은 돌봄 논의 안에서 반려동물 사료 언급을 검토하세요. 2026-10-01에 고유
-게시물 5개를 확인했습니다. 상한: 5. 돌봄이나 수의 관련 논의에서 사료 브랜드가
-지나가듯 언급될 수 있습니다.
+게시물 5개를 확인했습니다. 상한은 5개였습니다. 돌봄이나 수의 관련 논의에서 사료
+브랜드가 지나가듯 언급될 수 있습니다.
 
 #### 선택한 판타지 스포츠 게시물
 
 [Fantasy sports post batch](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-fantasy-football-apps)
 
 선택한 판타지 스포츠 게시물 묶음을 분석하세요. 2026-10-01에 고유 게시물 2개를
-확인했습니다. 상한: 2. 라벨은 각 게시물의 주제에 관한 것이며, 반드시 앱에 관한
-것은 아닙니다.
+확인했습니다. 상한은 2개였습니다. 라벨은 각 게시물의 주제에 관한 것이며, 반드시
+앱에 관한 것은 아닙니다.
 
 #### 카페 경험
 
 [Coffee shop experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-coffee-shop-customers)
 
 고객 피드백을 고르기 전에 카페에 대한 의견을 찾으세요. 2026-10-01에 고유 게시물
-5개를 확인했습니다. 상한: 5. 작성자의 불만은 검증되지 않은 주장으로 남습니다.
+5개를 확인했습니다. 상한은 5개였습니다. 작성자의 불만은 검증되지 않은 주장으로
+남습니다.
 
 #### 주택 시장
 
 [Housing market discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-housing-market)
 
 주택 시장에 대한 의견과 뉴스를 검토하세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 뉴스와 의견은 서로 다른 시장 문제를 다룰 수 있습니다.
+확인했습니다. 상한은 5개였습니다. 뉴스와 의견은 서로 다른 시장 문제를 다룰 수
+있습니다.
 
 #### 대회 논의
 
 [League of Legends tournament posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-esports-tournament-viewers)
 
 대회 논의와 티켓 또는 경기 홍보를 구분하세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 티켓 광고와 경기 보도는 시청자 의견이 아닙니다.
+확인했습니다. 상한은 5개였습니다. 티켓 광고와 경기 보도는 시청자 의견이
+아닙니다.
 
 #### 팟캐스트 제작사 게시물
 
 [Podcast publisher post tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-podcast-episodes)
 
 팟캐스트 제작사가 직접 내보내는 메시지를 검토하세요. 2026-10-01에 고유 게시물
-5개를 확인했습니다. 상한: 5. 제작사의 어조는 청취자 만족도를 측정하지 않습니다.
+5개를 확인했습니다. 상한은 5개였습니다. 제작사의 어조는 청취자 만족도를 측정하지
+않습니다.
 
 #### 헬스장 비교
 
 [Gym comparison review texts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-gym-memberships)
 
 리뷰에서 헬스장 2곳에 대한 종합적인 태도를 확인하세요. 2026-10-01에 직접 넣은
-고유 텍스트 3개를 확인했습니다. 상한: 3. 두 대상은 텍스트마다 감정 답변 1개를
-공유합니다.
+고유 텍스트 3개를 확인했습니다. 상한은 3개였습니다. 두 대상은 텍스트마다 감정
+답변 1개를 공유합니다.
 
 #### 렌터카
 
 [Car rental experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-car-rental-customers)
 
 서비스 문제를 검토하기 전에 렌터카에 대한 의견을 찾으세요. 2026-10-01에 고유
-게시물 5개를 확인했습니다. 상한: 5. 이용자 경험담과 함께 문의와 홍보가 검색될 수
-있습니다.
+게시물 5개를 확인했습니다. 상한은 5개였습니다. 이용자 경험담과 함께 문의와
+홍보가 검색될 수 있습니다.
 
 #### 캠퍼스 논의
 
 [University cost and campus posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-university-life)
 
 비용 관련 게시물을 고르기 전에 캠퍼스 논의를 검토하세요. 2026-10-01에 고유
-게시물 5개를 확인했습니다. 상한: 5. 캠퍼스 뉴스와 비판은 학생의 경험을 증명하지
-않습니다.
+게시물 5개를 확인했습니다. 상한은 5개였습니다. 캠퍼스 뉴스와 비판은 학생의
+경험을 증명하지 않습니다.
 
 #### 결혼 준비
 
 [Personal wedding planning posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-wedding-planning-posts)
 
 결혼 계획과 비용에 대한 1인칭 표현을 찾으세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 준비 경험과 함께 이야기, 농담, 지나가는 표현이 검색될 수
-있습니다.
+확인했습니다. 상한은 5개였습니다. 준비 경험과 함께 이야기, 농담, 지나가는 표현이
+검색될 수 있습니다.
 
 #### 충전 경험
 
 [EV charging experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-ev-charging-experiences)
 
 전기차 논의 안에서 충전 경험을 검토하세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 충전은 차량의 다른 문제에 딸린 부차적인 내용일 수
-있습니다.
+확인했습니다. 상한은 5개였습니다. 충전은 차량의 다른 문제에 딸린 부차적인 내용일
+수 있습니다.
 
 #### 세금 신고 논의
 
 [Spring 2026 TurboTax filing posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-tax-filing-software)
 
 봄의 고정된 날짜 범위 안에서 신고 논의를 검토하세요. 2026-10-01에 고유 게시물
-5개를 확인했습니다. 상한: 5. 게시물은 현재 수수료나 세금 규정을 검증하지
-않습니다.
+5개를 확인했습니다. 상한은 5개였습니다. 게시물은 현재 수수료나 세금 규정을
+검증하지 않습니다.
 
 #### 테마파크 방문
 
 [Theme park visit discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-theme-park-visitors)
 
 방문 반응을 고르기 전에 테마파크 언급을 찾으세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 지나가는 언급 때문에 다른 주제를 다룬 긴 게시물이 검색될
-수 있습니다.
+확인했습니다. 상한은 5개였습니다. 지나가는 언급 때문에 다른 주제를 다룬 긴
+게시물이 검색될 수 있습니다.
 
 #### 식료품 지출
 
 [Grocery budget experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-grocery-prices)
 
 식료품 지출에 대한 1인칭 의견을 찾으세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 더 넓은 정치, 영양, 크리에이터 논의에서 식료품 지출이
-언급될 수 있습니다.
+확인했습니다. 상한은 5개였습니다. 더 넓은 정치, 영양, 크리에이터 논의에서 식료품
+지출이 언급될 수 있습니다.
 
 #### 카메라 논의
 
 [Phone camera discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-phone-camera-reviews)
 
 사진, 리뷰, 발표와 함께 카메라 언급을 검토하세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 카메라는 다른 발표에서 지나가듯 언급될 수 있습니다.
+확인했습니다. 상한은 5개였습니다. 카메라는 다른 발표에서 지나가듯 언급될 수
+있습니다.
 
 #### 선택한 스니커즈 게시물
 
 [A selected sneaker post](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-sneaker-drop-reactions)
 
 넓은 키워드 검색 없이 이미 아는 게시물을 분석하세요. 2026-10-01에 고유 게시물
-1개를 확인했습니다. 상한: 1. 선택한 이 캡션은 이미지의 모든 세부 사항을 설명하지
-않습니다.
+1개를 확인했습니다. 상한은 1개였습니다. 선택한 이 캡션은 이미지의 모든 세부
+사항을 설명하지 않습니다.
 
 #### 고객 지원 챗봇
 
 [Support chatbot discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-customer-support-chatbots)
 
 서비스 불만을 고르기 전에 고객 지원 챗봇 논의를 찾으세요. 2026-10-01에 고유
-게시물 5개를 확인했습니다. 상한: 5. 정서 지원 봇과 기업의 답변도 검색될 수
-있습니다.
+게시물 5개를 확인했습니다. 상한은 5개였습니다. 정서 지원 봇과 기업의 답변도
+검색될 수 있습니다.
 
 #### 페스티벌 논의
 
 [April 2026 Coachella discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-music-festival-attendees)
 
 4월 기간의 페스티벌 게시물 50개를 검토하세요. 2026-10-01에 고유 게시물 50개를
-확인했습니다. 상한: 50. ID 50개에는 관련된 행 47개와 반복된 뉴스 문구가 들어
-있었습니다.
+확인했습니다. 상한은 50개였습니다. ID 50개에는 관련된 행 47개와 반복된 뉴스
+문구가 들어 있었습니다.
 
 #### 전기 요금
 
 [Electricity bill discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-electric-bills)
 
 정책 논의와 함께 개인의 전기 요금을 검토하세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 정책 관련 주장과 가격 전망은 검증되지 않은 상태로
-남습니다.
+확인했습니다. 상한은 5개였습니다. 정책 관련 주장과 가격 전망은 검증되지 않은
+상태로 남습니다.
 
 #### 농구 선수단 변동
 
 [NBA trade and signing discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-nba-trade-reactions)
 
 팬 반응을 고르기 전에 트레이드와 계약 논의를 찾으세요. 2026-10-01에 고유 게시물
-5개를 확인했습니다. 상한: 5. 다른 소식에서 선수나 팀이 지나가듯 언급될 수
-있습니다.
+5개를 확인했습니다. 상한은 5개였습니다. 다른 소식에서 선수나 팀이 지나가듯
+언급될 수 있습니다.
 
 #### 숙박 논의
 
 [Airbnb stay discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-airbnb-stays)
 
 숙박 논의 안에서 Airbnb에 대한 태도에 초점을 맞추세요. 2026-10-01에 고유 게시물
-5개를 확인했습니다. 상한: 5. 게스트의 이야기와 함께 호스트 홍보와 앱 게시물이
-나올 수 있습니다.
+5개를 확인했습니다. 상한은 5개였습니다. 게스트의 이야기와 함께 호스트 홍보와 앱
+게시물이 나올 수 있습니다.
 
 #### 책 반응
 
 [Book reading reaction posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-book-club-readers)
 
 독서 모임 회원이라고 가정하지 말고 독서 반응을 검토하세요. 2026-10-01에 고유
-게시물 5개를 확인했습니다. 상한: 5. 영화와의 비교와 개인적인 독서 의견이 모두
-검색될 수 있습니다.
+게시물 5개를 확인했습니다. 상한은 5개였습니다. 영화와의 비교와 개인적인 독서
+의견이 모두 검색될 수 있습니다.
 
 #### 밀키트 경험
 
 [HelloFresh experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-meal-kit-services)
 
 제품 경험을 검토하기 전에 밀키트에 대한 의견을 찾으세요. 2026-10-01에 고유
-게시물 5개를 확인했습니다. 상한: 5. 계획, 광고, 더 넓은 개인적인 이야기에서
-브랜드가 언급될 수 있습니다.
+게시물 5개를 확인했습니다. 상한은 5개였습니다. 계획, 광고, 더 넓은 개인적인
+이야기에서 브랜드가 언급될 수 있습니다.
 
 #### 레이스 논의
 
 [Formula 1 race discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-formula-one-race-weekends)
 
 팀과 드라이버의 발언과 함께 레이스 논의를 검토하세요. 2026-10-01에 고유 게시물
-5개를 확인했습니다. 상한: 5. 인용된 드라이버 발언은 서로 다른 ID에서 반복될 수
-있습니다.
+5개를 확인했습니다. 상한은 5개였습니다. 인용된 드라이버 발언은 서로 다른 ID에서
+반복될 수 있습니다.
 
 #### 데이팅 앱 경험
 
 [Dating app experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-dating-app-experiences)
 
 데이팅 앱 경험, 매칭에 대한 말, 농담을 찾으세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 매칭에 대한 말과 농담은 고객 신원을 검증하지 않습니다.
+확인했습니다. 상한은 5개였습니다. 매칭에 대한 말과 농담은 고객 신원을 검증하지
+않습니다.
 
 #### 공항 대기 게시물
 
 [Airport wait and lounge posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airport-travelers)
 
 여행 안내와 함께 공항 대기에 대한 의견을 검토하세요. 2026-10-01에 고유 게시물
-5개를 확인했습니다. 상한: 5. 개인의 대기 경험과 함께 공식 안내가 나올 수
-있습니다.
+5개를 확인했습니다. 상한은 5개였습니다. 개인의 대기 경험과 함께 공식 안내가 나올
+수 있습니다.
 
 #### 학교 급식 논의
 
 [School lunch discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-school-lunch-programs)
 
 학교 급식에 대한 개인 게시물과 정책 논쟁을 검토하세요. 2026-10-01에 고유 게시물
-5개를 확인했습니다. 상한: 5. 작성자에는 학부모뿐 아니라 기관도 있을 수 있습니다.
+5개를 확인했습니다. 상한은 5개였습니다. 작성자에는 학부모뿐 아니라 기관도 있을
+수 있습니다.
 
 #### 맥주 시음
 
 [Craft beer tasting posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-craft-beer-drinkers)
 
 리뷰 예시를 고르기 전에 맥주 시음 의견을 찾으세요. 2026-10-01에 고유 게시물
-5개를 확인했습니다. 상한: 5. 링크가 붙은 짧은 캡션은 태도를 분명히 알 만큼
-맥락이 충분하지 않을 수 있습니다.
+5개를 확인했습니다. 상한은 5개였습니다. 링크가 붙은 짧은 캡션은 태도를 분명히 알
+만큼 맥락이 충분하지 않을 수 있습니다.
 
 #### 도킹 발표 인용
 
 [SpaceX docking announcement quotes](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-space-launches)
 
 정해진 시각 이후에 도킹 발표 1개를 인용한 게시물을 검토하세요. 2026-10-01에 고유
-게시물 5개를 확인했습니다. 상한: 5. 인용은 반응뿐 아니라 초대나 중립적인 설명일
-수도 있습니다.
+게시물 5개를 확인했습니다. 상한은 5개였습니다. 인용은 반응뿐 아니라 초대나
+중립적인 설명일 수도 있습니다.
 
 #### 생일 답글
 
 [NASA birthday replies](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-replies-to-a-news-post)
 
 생일 게시물 1개에 직접 달린 답글을 검토하세요. 2026-10-01에 고유 게시물 5개를
-확인했습니다. 상한: 5. 루트 게시물의 맥락이 없으면 답글에 대한 답변의 의미를
-알기 어려울 수 있습니다.
+확인했습니다. 상한은 5개였습니다. 루트 게시물의 맥락이 없으면 답글에 대한 답변의
+의미를 알기 어려울 수 있습니다.
 
 결과를 살펴보는 동안에는 `maxItems`를 작게 유지하세요. 상한은 출력을 제한할 뿐
 공급량을 제한하지 않습니다. 조건에 맞는 게시물이 더 적으면 필터를 바꾸기 전에
@@ -680,78 +694,79 @@ Apify가 따로 청구합니다. Pricing 탭에서 확인할 수 있습니다.
 모든 Xquik Actor는 같은 추출 엔진, 필터 우선 과금 & 진단을 공유합니다. 필요한
 데이터에 맞는 Actor를 고르세요.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): 검색, 프로필
-  타임라인, 리스트 & 게시물 ID에서 게시물을 스크랩합니다. 50개 이상의 필터 &
-  플랫 내보내기를 지원합니다. 분석 없이 게시물 데이터만 필요할 때 사용하세요.
-  행당 $0.00015부터입니다.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): 사용자 아이디,
-  ID 또는 URL로 프로필과 그 계정의 게시물, 답글, 미디어 & 팔로워를 스크랩합니다.
-  검색이 아니라 계정에서 시작할 때 사용하세요. 행당 $0.00015부터입니다.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 게시물 아래의
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper)는 50개 이상의 필터
+  & 플랫 내보내기로 검색, 프로필 타임라인, 리스트 & 게시물 ID에서 게시물을
+  스크랩합니다. 분석 없이 게시물 데이터만 필요할 때 사용하세요. 행당
+  $0.00015부터입니다.
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)는 사용자
+  아이디, ID 또는 URL로 프로필과 그 계정의 게시물, 답글, 미디어 & 팔로워를
+  스크랩합니다. 검색이 아니라 계정에서 시작할 때 사용하세요. 행당
+  $0.00015부터입니다.
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)는 게시물 아래의
   답글(댓글) & 대화 전체를 25개 이상의 필터로 스크랩합니다. 게시물 아래의 토론이
   필요할 때 사용하세요. 행당 $0.00015부터입니다.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): 게시물
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)는 게시물
   URL이나 ID로 답글, 인용, 재게시한 사람 & 스레드를 대량으로 스크랩합니다. 누가
   게시물에 반응했는지 측정할 때 사용하세요. 행당 $0.00015부터입니다.
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)는
   게시물을 인용한 게시물을 텍스트, 미디어, 수치, 작성자 & 11개의 필터와 함께
   스크랩합니다. 누가 게시물을 인용했고 무엇을 말했는지 살펴볼 때 사용하세요.
   게시물당 $0.00015부터입니다.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): 팔로워,
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)는 팔로워,
   팔로잉, 리스트 멤버, 구독자 & 커뮤니티 멤버를 프로필 행으로 스크랩합니다.
   오디언스나 멤버 목록이 필요할 때 사용하세요. 프로필당 $0.00015부터입니다.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): 사용자
-  아이디, 자기소개 & 위치로 사용자를 검색합니다. 팔로워, 인증, 계정 연령 & 위치
-  필터를 지원합니다. 검색으로 계정 목록을 만들 때 사용하세요. 프로필당
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)는
+  사용자 아이디, 자기소개 & 위치로 사용자를 검색하며 팔로워, 인증, 계정 연령 &
+  위치 필터를 지원합니다. 검색으로 계정 목록을 만들 때 사용하세요. 프로필당
   $0.00015부터입니다.
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)는
   X의 "Account based in"(계정 기반 위치) 라벨, X에 연결된 방식 & 사용자 아이디
   변경 내역으로 계정이 어디에 기반을 두고 있는지 확인합니다. 계정의 기반 위치를
   검증할 때 사용하세요. 계정당 $0.00015부터입니다.
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): 사용자 아이디,
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper)는 사용자 아이디,
   팔로워 또는 사용자 검색에서 계정이 프로필에 공개한 이메일, 전화번호 & 링크를
   가져옵니다. 프로필이 공개한 이메일이 필요할 때 사용하세요. 프로필당
   $0.00015부터입니다.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): 리스트 URL이나 ID로
+- [X List Scraper](https://apify.com/xquik/x-list-scraper)는 리스트 URL이나 ID로
   리스트 게시물, 멤버 & 팔로워를 스크랩합니다. 직접 고른 리스트로 수집 대상을
   정할 때 사용하세요. 행당 $0.00015부터입니다.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): 커뮤니티
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper)는 커뮤니티
   정보, 게시물, 검색 결과, 멤버 & 모더레이터를 스크랩합니다. X 커뮤니티에서
   데이터를 모을 때 사용하세요. 행당 $0.00015부터입니다.
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper): 키워드로
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper)는 키워드로
   스페이스를 찾고 제목, 상태, 시간, 청취자 수, 호스트 & 스피커를 읽습니다.
   URL이나 ID로 방송도 읽습니다. X의 라이브 오디오 & 동영상을 추적할 때
   사용하세요. 스페이스 또는 방송당 $0.00015부터입니다.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): 위치별 실시간
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper)는 위치별 실시간
   트렌드를 순위, 볼륨, 쿼리 & WOEID와 함께 스크랩합니다. 어디에서 무엇이
   트렌드인지 추적할 때 사용하세요. 트렌드당 $0.00015부터입니다.
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): 키워드, 지역, 근무
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper)는 키워드, 지역, 근무
   형태, 직급 & 회사별로 X 채용 공고를 급여 & 지원 링크와 함께 스크랩합니다. X에
   올라온 채용 공고를 모을 때 사용하세요. 공고당 $0.00015부터입니다.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): 장문의 X
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper)는 장문의 X
   아티클을 커버, 작성자, 날짜 & 지표와 함께 마크다운 & 텍스트로 스크랩합니다.
   게시물이 아니라 아티클 본문이 필요할 때 사용하세요. 아티클당
   $0.00015부터입니다.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader): 게시물이나
-  프로필의 사진, 동영상 & GIF를 추출하거나 저장합니다. MP4 & 메타데이터 옵션을
-  지원합니다. 미디어 파일 자체가 필요할 때 사용하세요. 미디어 행당
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader)는 게시물이나
+  프로필의 사진, 동영상 & GIF를 MP4 & 메타데이터 옵션과 함께 추출하거나
+  저장합니다. 미디어 파일 자체가 필요할 때 사용하세요. 미디어 행당
   $0.00015부터입니다.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
-  브랜드 언급을 추적하고 AI로 관련성, 감정 & 고객 경험 질문에 답합니다. 실행
-  결과끼리 비교도 합니다. 브랜드를 꾸준히 지켜볼 때 사용하세요. 분석한 게시물당
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)는
+  브랜드 언급을 추적하고, AI로 관련성, 감정 & 고객 경험 질문에 답하며, 실행
+  결과끼리 비교합니다. 브랜드를 꾸준히 지켜볼 때 사용하세요. 분석한 게시물당
   $0.0003부터입니다.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)는
   AI로 강세, 약세, 중립, 혼조 입장과 콘텐츠 유형, 확신도 & 자산 관련성을
   라벨링합니다. 주식, 암호화폐, 트레이딩 이야기를 지켜볼 때 사용하세요. 분석한
   게시물당 $0.0003부터입니다.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)는
   AI로 뉴스 게시물을 형식, 출처 표기 & 주제 관련성에 따라 라벨링합니다. 보도와
   논평을 구분할 때 사용하세요. 분석한 게시물당 $0.0003부터입니다.
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  직접 만든 카테고리, 점수 & 예/아니오 질문에 AI가 게시물마다 답합니다. 기본
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)는
+  직접 만든 카테고리, 점수 & 예/아니오 질문에 AI로 게시물마다 답합니다. 기본
   분석이 원하는 라벨과 맞지 않을 때 사용하세요. 분석한 게시물당
   $0.0003부터입니다.
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)는
   AI의 특성 답변 8개로 게시물마다 0에서 100까지의 Viral Score & 판정을
   추정합니다. 게시물이 왜 퍼지거나 묻히는지 분석할 때 사용하세요. 분석한
   게시물당 $0.0003부터입니다.

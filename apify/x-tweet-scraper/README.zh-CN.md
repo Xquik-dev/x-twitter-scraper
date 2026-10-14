@@ -59,7 +59,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 | `url` | 帖子的直接链接 |
 | `tweetUrl` | 扁平输出中的帖子 URL 别名 |
 | `twitterUrl` | 扁平输出中 `twitter.com` 格式的 URL |
-| `author` | 作者字段：用户名、简介、网站、计数 |
+| `author` | 作者字段，包括用户名、简介、网站、计数 |
 | `authorUsername` | 扁平输出中的作者用户名 |
 | `authorFollowers` | 扁平输出中的作者关注者数 |
 | `authorUrl` | 扁平输出中的作者网站（如有） |
@@ -108,7 +108,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 
 下面的每个示例都是一份完整的输入。选择适合你数据的那个。
 
-在 Apify Console 中按以下步骤操作：
+在 Apify Console 中按以下步骤操作。
 
 1. 打开一个[任务示例](#任务示例)，或打开 Input 标签页。
 2. 添加 URL、用户名、帖子 ID 或搜索词。
@@ -120,7 +120,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 
 ### 粘贴 URL
 
-可以混合粘贴帖子、个人资料、搜索或列表 URL：
+可以混合粘贴帖子、个人资料、搜索或列表 URL。
 
 ```json
 {
@@ -138,7 +138,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 
 ### 抓取多个用户名
 
-用户名相当于多个 `from:username` 搜索的简写：
+用户名相当于多个 `from:username` 搜索的简写。
 
 ```json
 { "twitterHandles": ["elonmusk", "nasa", "openai"], "maxItems": 100 }
@@ -148,7 +148,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 
 ### 搜索帖子
 
-在 Search terms 字段中填写一个或多个查询：
+在 Search terms 字段中填写一个或多个查询。
 
 ```json
 {
@@ -176,7 +176,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 
 ### 互动、帖子串和文章模式
 
-设置 `mode` 可以强制使用一种读取方式，不管输入中还有哪些字段：
+设置 `mode` 可以强制使用一种读取方式，不管输入中还有哪些字段。
 
 ```json
 { "mode": "replies", "replyTweetIds": ["2082577277246972300"], "maxItems": 100 }
@@ -184,7 +184,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 
 帖子和搜索模式有 `tweet`、`tweets` 和 `search`。个人资料模式有 `profileTweets`、`profileReplies`、`profileMedia`、`profileLikes` 和 `profileMentions`。`listTweets` 读取列表帖子，`article` 读取帖子中的 X 文章。针对单条帖子的模式有 `replies`、`quotes`、`thread`、`retweeters`、`favoriters`、`translation` 和 `embed`。
 
-`profileMentions` 返回提及每个用户名的帖子，最新的排在前面：
+`profileMentions` 返回提及每个用户名的帖子，最新的排在前面。
 
 ```json
 { "mode": "profileMentions", "twitterHandles": ["nasa"], "maxItems": 100 }
@@ -192,7 +192,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 
 `profileTweets` 对应 X 个人资料的“帖子”标签页。它返回该账号的帖子、转帖和对自己帖子的回复。行按日期排序。该 Actor 在计费前去掉回复其他账号的帖子，也去掉其他作者的对话上下文。
 
-只要原创帖子时，排除不需要的类型：
+只要原创帖子时，排除不需要的类型。
 
 ```json
 {
@@ -221,7 +221,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 
 ### 翻译帖子并获取嵌入 HTML
 
-`mode: "translation"` 返回 X 对每条帖子的翻译。把 `translateTo` 设为语言代码，例如 `en`、`es`、`pt-br` 或 `zh-tw`。默认值为 `en`：
+`mode: "translation"` 返回 X 对每条帖子的翻译。把 `translateTo` 设为语言代码，例如 `en`、`es`、`pt-br` 或 `zh-tw`。默认值为 `en`。
 
 ```json
 {
@@ -233,7 +233,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 
 每行包含 `resultType: "translation"`、`sourceTweetId` 和 `translation`。该对象包含 `language`、`sourceLanguage`、`text` 和 `entities`。
 
-`mode: "embed"` 返回把每条帖子嵌入网站的 HTML：
+`mode: "embed"` 返回把每条帖子嵌入网站的 HTML。
 
 ```json
 { "mode": "embed", "tweetIds": ["2082577277246972300"], "embedTheme": "dark" }
@@ -245,7 +245,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 
 ### 导出扁平 CSV 行
 
-保留默认的嵌套 JSON 字段，或添加适合电子表格的列：
+保留默认的嵌套 JSON 字段，或添加适合电子表格的列。
 
 ```json
 { "searchTerms": ["from:nasa moon"], "maxItems": 100, "outputPreset": "flat" }
@@ -257,7 +257,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 
 ### 选择字段命名
 
-默认使用旧版字段名。可以为丰富结果或原始结果选择一种风格：
+默认使用旧版字段名。可以为丰富结果或原始结果选择一种风格。
 
 ```json
 {
@@ -274,7 +274,7 @@ Xquik 的 X Tweet Scraper 返回帖子、互动指标、公开的作者个人资
 
 ### 组合高级过滤条件
 
-组合用户、日期、位置、媒体和互动过滤条件：
+组合用户、日期、位置、媒体和互动过滤条件。
 
 ```json
 {
@@ -327,23 +327,23 @@ Xquik 的 X Tweet Scraper 在所有 Apify 套餐上都按每个已交付行 $0.0
 
 Xquik 的 X Tweet Scraper 在成本和速度上胜过其他 11 个帖子抓取 Actor。它的中位数行有 63 个字段，是其他 Actor 中位数的 2 倍。
 
-- `xquik/x-tweet-scraper`：890 条有用帖子，每条有用帖子 $0.000175，每秒 39.2 条，每行 63 个字段。[查看运行](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
-- `xquik/x-tweet-scraper`：883 条有用帖子，每条有用帖子 $0.000176，每秒 25.2 条，每行 63 个字段。[查看运行](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
-- `xquik/x-tweet-scraper`：882 条有用帖子，每条有用帖子 $0.000177，每秒 25.7 条，每行 63 个字段。[查看运行](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
-- `xquik/x-tweet-scraper`：877 条有用帖子，每条有用帖子 $0.000178，每秒 26.9 条，每行 63 个字段。[查看运行](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`：813 条有用帖子，每条有用帖子 $0.000185，每秒 10.5 条，每行 36 个字段。[查看运行](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`：805 条有用帖子，每条有用帖子 $0.000187，每秒 10.6 条，每行 36 个字段。[查看运行](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`：805 条有用帖子，每条有用帖子 $0.000187，每秒 10.7 条，每行 36 个字段。[查看运行](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
-- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest`：880 条有用帖子，每条有用帖子 $0.000250，每秒 9.1 条，每行 46 个字段。[查看运行](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
-- `scraper_one/x-posts-search`：804 条有用帖子，每条有用帖子 $0.000314，每秒 3.3 条，每行 14 个字段。[查看运行](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
-- `danek/twitter-scraper`：807 条有用帖子，每条有用帖子 $0.000347，每秒 5.0 条，每行 27 个字段。[查看运行](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
-- `tweetapi/twitter-x-search-scraper`：337 条有用帖子，每条有用帖子 $0.000374，每秒 2.6 条，每行 28 个字段。[查看运行](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
-- `api-ninja/x-twitter-advanced-search`：837 条有用帖子，每条有用帖子 $0.000430，每秒 7.4 条，每行 28 个字段。[查看运行](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
-- `apidojo/twitter-scraper-lite`：251 条有用帖子，每条有用帖子 $0.000494，每秒 12.9 条，每行 54 个字段。[查看运行](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
-- `apidojo/tweet-scraper`：481 条有用帖子，每条有用帖子 $0.000832，每秒 7.8 条，每行 55 个字段。[查看运行](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
-- `xtdata/twitter-x-scraper`：1,378 条有用帖子，每条有用帖子 $0.001168，每秒 11.9 条，每行 67 个字段。[查看运行](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
-- `seemuapps/x-tweet-scraper`：805 条有用帖子，每条有用帖子 $0.001242，每秒 6.9 条，每行 24 个字段。[查看运行](https://console.apify.com/view/runs/FstursEw43TbcipYU)
-- `maximedupre/twitter-scraper`：46 条有用帖子，每条有用帖子 $0.002846，每秒 0.3 条，每行 31 个字段。[查看运行](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
+- `xquik/x-tweet-scraper` 交付了 890 条有用帖子，每条有用帖子 $0.000175，每秒 39.2 条，每行 63 个字段。[查看运行](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
+- `xquik/x-tweet-scraper` 交付了 883 条有用帖子，每条有用帖子 $0.000176，每秒 25.2 条，每行 63 个字段。[查看运行](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
+- `xquik/x-tweet-scraper` 交付了 882 条有用帖子，每条有用帖子 $0.000177，每秒 25.7 条，每行 63 个字段。[查看运行](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
+- `xquik/x-tweet-scraper` 交付了 877 条有用帖子，每条有用帖子 $0.000178，每秒 26.9 条，每行 63 个字段。[查看运行](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` 交付了 813 条有用帖子，每条有用帖子 $0.000185，每秒 10.5 条，每行 36 个字段。[查看运行](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` 交付了 805 条有用帖子，每条有用帖子 $0.000187，每秒 10.6 条，每行 36 个字段。[查看运行](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` 交付了 805 条有用帖子，每条有用帖子 $0.000187，每秒 10.7 条，每行 36 个字段。[查看运行](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
+- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` 交付了 880 条有用帖子，每条有用帖子 $0.000250，每秒 9.1 条，每行 46 个字段。[查看运行](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
+- `scraper_one/x-posts-search` 交付了 804 条有用帖子，每条有用帖子 $0.000314，每秒 3.3 条，每行 14 个字段。[查看运行](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
+- `danek/twitter-scraper` 交付了 807 条有用帖子，每条有用帖子 $0.000347，每秒 5.0 条，每行 27 个字段。[查看运行](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
+- `tweetapi/twitter-x-search-scraper` 交付了 337 条有用帖子，每条有用帖子 $0.000374，每秒 2.6 条，每行 28 个字段。[查看运行](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
+- `api-ninja/x-twitter-advanced-search` 交付了 837 条有用帖子，每条有用帖子 $0.000430，每秒 7.4 条，每行 28 个字段。[查看运行](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
+- `apidojo/twitter-scraper-lite` 交付了 251 条有用帖子，每条有用帖子 $0.000494，每秒 12.9 条，每行 54 个字段。[查看运行](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
+- `apidojo/tweet-scraper` 交付了 481 条有用帖子，每条有用帖子 $0.000832，每秒 7.8 条，每行 55 个字段。[查看运行](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
+- `xtdata/twitter-x-scraper` 交付了 1,378 条有用帖子，每条有用帖子 $0.001168，每秒 11.9 条，每行 67 个字段。[查看运行](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
+- `seemuapps/x-tweet-scraper` 交付了 805 条有用帖子，每条有用帖子 $0.001242，每秒 6.9 条，每行 24 个字段。[查看运行](https://console.apify.com/view/runs/FstursEw43TbcipYU)
+- `maximedupre/twitter-scraper` 交付了 46 条有用帖子，每条有用帖子 $0.002846，每秒 0.3 条，每行 31 个字段。[查看运行](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
 
 每个 Actor 都运行了同一个搜索和相同的过滤条件。其他 Actor 在 2026-09-27 运行，Xquik 的运行在 2026-09-29 使用了 `outputVariant: "rich"`。所有运行都使用 Bronze 等级。有用帖子指不重复的英文原创帖子，且喜欢数至少为 10。成本是客户为每条有用帖子支付的总费用。我们的成本包含客户支付的 Apify 平台使用费。每行字段数是非空字段数的中位数，包括嵌套字段。一个列表计为 1 个字段。打开一次运行，即可查看其输入、日志和数据集。
 
@@ -387,7 +387,7 @@ Apify 默认超时为 `0`，所以运行没有时间限制。该 Actor 会一直
 
 Input 标签页列出了所有选项。至少提供 `startUrls`、`twitterHandles`、`listIds`、`tweetIds`、`searchTerms` 或 `twitterContent` 中的一个。文档中列出的别名也可以用。其他字段都是可选的。
 
-示例：
+以下任一输入都足以运行。
 
 - 把帖子 URL 粘贴到 Start URLs。
 - 粘贴个人资料 URL，或把用户名添加到 X handles。
@@ -425,80 +425,80 @@ X 不再支持搜索 `filter:vine`、`filter:consumer_video`、`filter:pro_video
 
 直接粘贴你现在用的输入。Xquik 的 X Tweet Scraper 能读取其他帖子抓取 Actor 使用的字段名，并映射到自己的字段。标准名称仍是文档中的默认写法。别名从不丢弃字段，也不改变你的费用。输入表单只列出标准字段，因此很简短。别名在 JSON、API、SDK、自动化和已保存的任务输入中都有效。
 
-每一项先列出你现在用的字段，再列出它们映射到的字段：
+每一项先列出你现在用的字段，再列出它们映射到的字段。
 
-- `startUrls`、`urls`、`tweetUrls`、`postUrls`、`profileUrls`、`accountUrls`：`startUrls`
-- 单个字符串形式的 `profileUrl`：`startUrls`
-- `tweetIds`、`tweetIDs`、`tweets`、`postIds`、`lookupPostIds`、`tweet_ids`，或单个字符串形式的 `tweetId`：`tweetIds`
-- `twitterHandles`、`usernames`、`user_names`、`userNameList`、`handles`、`screenNames`、`profileTweets`：`twitterHandles`
-- 单个字符串形式的 `username`、`handle`、`screenName`：`twitterHandles`
-- `searchTerms`、`searchQueries`、`queries`、`search`，列表形式或每行一个搜索：`searchTerms`
-- `twitterContent`、`query`、`searchQuery`：`twitterContent`
-- `maxItems`、`maxResults`、`max_results`、`resultsLimit`、`count`、`resultsCount`、`numberOfTweets`、`maxPosts`、`max_posts`、`max_items`、`maxTweets`、`tweetsDesired`、`maxTotalTweets`：`maxItems`
-- `per_profile_limit`：`maxItemsPerTarget`
-- `sort`：`queryType`
-- `search_type`、`searchType`、`query_type`、`search_sort`：`Top` 和 `Latest` 不分大小写，映射到 `queryType`。`Media`、`Photos` 和 `Videos` 会打开 `filter:media`、`filter:images` 和 `filter:videos`。
-- `tweetLanguage`、`language`、`contentLanguage`：`lang`
-- `author`、`fromUser`：`from`
-- `inReplyTo`、`toUser`：`to`
-- `mentioning`：`@`
-- `start`、`startDate`、`timeSince`：`since`
-- `end`、`endDate`、`timeUntil`：`until`
-- 以秒为单位的 `timeSinceUnix`、`sinceTime`、`timeUntilUnix`、`untilTime`：`since_time`、`until_time`
-- `timeWithinTime`、`withinTime`：`within_time`
-- `timeWindowHours`、`timeWindow`：`within_time`，分别按小时和按天
-- `timeSinceId`、`sinceId`、`timeMaxId`、`maxId`：`since_id`、`max_id`
-- Google Search Scraper 的 `quickDateRange`，例如 `d7`、`w2`、`m1` 或 `y`：`since_time`，从运行开始时往回计算
-- `minimumFavorites`、`minLikes`、`min_likes`、`minFaves`、`engagementMinLikes`、`Minimum_likes`：`min_faves`
-- `minimumRetweets`、`minRetweets`、`engagementMinRetweets`：`min_retweets`
-- `minimumReplies`、`minReplies`、`engagementMinReplies`、`Minimum_replies`：`min_replies`
-- `engagementMaxLikes`、`maxLikes`、`engagementMaxRetweets`、`maxRetweets`、`engagementMaxReplies`：`engagement.maxLikes`、`engagement.maxRetweets`、`engagement.maxReplies`
-- `onlyImage`、`onlyImages`、`has_images`：`filter:images`
-- `onlyVideo`、`onlyVideos`、`has_videos`：`filter:videos`
-- `onlyWithMedia`、`mediaOnly`：`filter:media`
-- `onlyQuote`、`onlyQuotes`：`filter:quote`
-- `onlyTwitterBlue`、`usersBlueVerifiedOnly`、`blue_verified_only`、`onlyBlueVerified`：`filter:blue_verified`
-- `engagementHasEngagement`、`hasEngagement`：`filter:has_engagement`
-- `mediaHasLinks`、`has_links`、`requireLinks`：`filter:links`
-- `mediaHasMentions`、`has_mentions`、`requireMentions`：`filter:mentions`
-- `mediaHasHashtags`、`has_hashtags`、`requireHashtags`：`filter:hashtags`
-- `mediaNewsOnly`、`mediaSafeContentOnly`：`filter:news`、`filter:safe`
-- 只含 1 种类型的 `mediaTypes`：该类型对应的 `filter:` 字段
-- `mediaSubtype`：`filter:media`、`filter:images` 或 `filter:videos`
-- `includeNativeRetweets`、`includeRetweets`：`include:nativeretweets`
-- `excludeReplies`、`excludeRetweets`、设为 false 的 `includeRetweets`、`tweetTypesExclude`：`tweetTypes.excludeReplies`、`tweetTypes.excludeRetweets` 和 `tweetTypes.excludeQuotes`
-- 只含 1 种类型的列表形式的 `tweetTypes`：`tweetTypes.replies`、`tweetTypes.quotes` 或 `tweetTypes.nativeRetweets`
-- `tweetSubtype`：`tweetTypes.replies` 或 `tweetTypes.quotes`。`self_threads` 会添加运算符 `filter:self_threads`。
-- `geotaggedNear`、`geoNear`：`near`
-- `withinRadius`、`geoWithinRadius`、`geoWithin`：`within`
-- `geoGeocode`：`geocode`
-- `tweetConversationId`、`tweetQuotedTweetId`、`tweetQuotedUserId`：`conversation_id`、`quoted_tweet_id`、`quoted_user_id`
-- `cardName`、`tweetPollTypes`：`card_name`
-- `search_query`：`twitterContent`
-- `profile_urls`：链接映射到 `startUrls`，用户名映射到 `twitterHandles`
-- `lookup_post_ids`，或单个字符串形式的 `id`：`tweetIds`
-- 用逗号分隔的 1 个列表形式的 `tweets`：`tweetIds`
+- `startUrls`、`urls`、`tweetUrls`、`postUrls`、`profileUrls`、`accountUrls` 对应 `startUrls`。
+- 单个字符串形式的 `profileUrl` 对应 `startUrls`。
+- `tweetIds`、`tweetIDs`、`tweets`、`postIds`、`lookupPostIds`、`tweet_ids`，或单个字符串形式的 `tweetId` 对应 `tweetIds`。
+- `twitterHandles`、`usernames`、`user_names`、`userNameList`、`handles`、`screenNames`、`profileTweets` 对应 `twitterHandles`。
+- 单个字符串形式的 `username`、`handle`、`screenName` 对应 `twitterHandles`。
+- 列表形式或每行一个搜索的 `searchTerms`、`searchQueries`、`queries`、`search` 对应 `searchTerms`。
+- `twitterContent`、`query`、`searchQuery` 对应 `twitterContent`。
+- `maxItems`、`maxResults`、`max_results`、`resultsLimit`、`count`、`resultsCount`、`numberOfTweets`、`maxPosts`、`max_posts`、`max_items`、`maxTweets`、`tweetsDesired`、`maxTotalTweets` 对应 `maxItems`。
+- `per_profile_limit` 对应 `maxItemsPerTarget`。
+- `sort` 对应 `queryType`。
+- `search_type`、`searchType`、`query_type`、`search_sort` 的值为 `Top` 或 `Latest` 时，不分大小写，映射到 `queryType`。`Media`、`Photos` 和 `Videos` 会打开 `filter:media`、`filter:images` 和 `filter:videos`。
+- `tweetLanguage`、`language`、`contentLanguage` 对应 `lang`。
+- `author`、`fromUser` 对应 `from`。
+- `inReplyTo`、`toUser` 对应 `to`。
+- `mentioning` 对应 `@`。
+- `start`、`startDate`、`timeSince` 对应 `since`。
+- `end`、`endDate`、`timeUntil` 对应 `until`。
+- 以秒为单位的 `timeSinceUnix`、`sinceTime`、`timeUntilUnix`、`untilTime` 对应 `since_time`、`until_time`。
+- `timeWithinTime`、`withinTime` 对应 `within_time`。
+- `timeWindowHours`、`timeWindow` 对应 `within_time`，分别按小时和按天计算。
+- `timeSinceId`、`sinceId`、`timeMaxId`、`maxId` 对应 `since_id`、`max_id`。
+- Google Search Scraper 的 `quickDateRange` 对应 `since_time`，从运行开始时往回计算。它的值例如 `d7`、`w2`、`m1` 或 `y`。
+- `minimumFavorites`、`minLikes`、`min_likes`、`minFaves`、`engagementMinLikes`、`Minimum_likes` 对应 `min_faves`。
+- `minimumRetweets`、`minRetweets`、`engagementMinRetweets` 对应 `min_retweets`。
+- `minimumReplies`、`minReplies`、`engagementMinReplies`、`Minimum_replies` 对应 `min_replies`。
+- `engagementMaxLikes`、`maxLikes`、`engagementMaxRetweets`、`maxRetweets`、`engagementMaxReplies` 对应 `engagement.maxLikes`、`engagement.maxRetweets`、`engagement.maxReplies`。
+- `onlyImage`、`onlyImages`、`has_images` 对应 `filter:images`。
+- `onlyVideo`、`onlyVideos`、`has_videos` 对应 `filter:videos`。
+- `onlyWithMedia`、`mediaOnly` 对应 `filter:media`。
+- `onlyQuote`、`onlyQuotes` 对应 `filter:quote`。
+- `onlyTwitterBlue`、`usersBlueVerifiedOnly`、`blue_verified_only`、`onlyBlueVerified` 对应 `filter:blue_verified`。
+- `engagementHasEngagement`、`hasEngagement` 对应 `filter:has_engagement`。
+- `mediaHasLinks`、`has_links`、`requireLinks` 对应 `filter:links`。
+- `mediaHasMentions`、`has_mentions`、`requireMentions` 对应 `filter:mentions`。
+- `mediaHasHashtags`、`has_hashtags`、`requireHashtags` 对应 `filter:hashtags`。
+- `mediaNewsOnly`、`mediaSafeContentOnly` 对应 `filter:news`、`filter:safe`。
+- 只含 1 种类型的 `mediaTypes` 对应该类型的 `filter:` 字段。
+- `mediaSubtype` 对应 `filter:media`、`filter:images` 或 `filter:videos`。
+- `includeNativeRetweets`、`includeRetweets` 对应 `include:nativeretweets`。
+- `excludeReplies`、`excludeRetweets`、设为 false 的 `includeRetweets`、`tweetTypesExclude` 对应 `tweetTypes.excludeReplies`、`tweetTypes.excludeRetweets` 和 `tweetTypes.excludeQuotes`。
+- 只含 1 种类型的列表形式的 `tweetTypes` 对应 `tweetTypes.replies`、`tweetTypes.quotes` 或 `tweetTypes.nativeRetweets`。
+- `tweetSubtype` 对应 `tweetTypes.replies` 或 `tweetTypes.quotes`。`self_threads` 会添加运算符 `filter:self_threads`。
+- `geotaggedNear`、`geoNear` 对应 `near`。
+- `withinRadius`、`geoWithinRadius`、`geoWithin` 对应 `within`。
+- `geoGeocode` 对应 `geocode`。
+- `tweetConversationId`、`tweetQuotedTweetId`、`tweetQuotedUserId` 对应 `conversation_id`、`quoted_tweet_id`、`quoted_user_id`。
+- `cardName`、`tweetPollTypes` 对应 `card_name`。
+- `search_query` 对应 `twitterContent`。
+- `profile_urls` 中的链接映射到 `startUrls`，用户名映射到 `twitterHandles`。
+- `lookup_post_ids`，或单个字符串形式的 `id` 对应 `tweetIds`。
+- 用逗号分隔的 1 个列表形式的 `tweets` 对应 `tweetIds`。
 
-有些字段在这里没有对应的字段。它们各自代表的 X 搜索运算符会加到本次运行的每一次搜索中。运行日志会在开头列出添加的运算符：
+有些字段在这里没有对应的字段。它们各自代表的 X 搜索运算符会加到本次运行的每一次搜索中。运行日志会在开头列出添加的运算符。
 
-- `usersFromUsers`、`from_users`、`usersToUsers`、`to_users`、`usersListMembers`：`from:`、`to:` 和 `list:`。多个值按“任一匹配”运行，例如 `(from:a OR from:b)`。
-- `usersMentionUsers`、`mentioning_users`：`@name`
-- `usersExcludeFromUsers`：`-from:`
-- `onlyVerifiedUsers`、`usersVerifiedOnly`、`verified_only`：`filter:verified`
-- `placeObjectId`、`geoPlaceId`、`placeId`、`place`：`place:`
-- `cardDomain`：`card_domain:`
-- `appsSources`、`appsExcludeSources`：`source:` 和 `-source:`
-- 各含 1 个值的 `contentKeywords`、`contentExactPhrases`、`contentHashtags`、`contentCashtags`：该词、带引号的短语、`#tag` 和 `$tag`
-- `contentExcludeKeywords`、`contentExcludeHashtags`、`exclude_words`、`hashtags_exclude`：`-word` 和 `-#tag`
-- `all_words`、`exact_phrases`：每个词和每个短语都必须匹配
-- `any_words`、`hashtags_any`：任一匹配，例如 `(#a OR #b)`
-- `contentQuestionMarks`：`?`
-- `contentEmoticons`：`positive` 对应 `:)`，`negative` 对应 `:(`
-- `tweet_type`：`filter:replies`、`filter:retweets` 以及它们的 `-filter:` 形式
+- `usersFromUsers`、`from_users`、`usersToUsers`、`to_users`、`usersListMembers` 会添加 `from:`、`to:` 和 `list:`。多个值按“任一匹配”运行，例如 `(from:a OR from:b)`。
+- `usersMentionUsers`、`mentioning_users` 会添加 `@name`。
+- `usersExcludeFromUsers` 会添加 `-from:`。
+- `onlyVerifiedUsers`、`usersVerifiedOnly`、`verified_only` 会添加 `filter:verified`。
+- `placeObjectId`、`geoPlaceId`、`placeId`、`place` 会添加 `place:`。
+- `cardDomain` 会添加 `card_domain:`。
+- `appsSources`、`appsExcludeSources` 会添加 `source:` 和 `-source:`。
+- 各含 1 个值的 `contentKeywords`、`contentExactPhrases`、`contentHashtags`、`contentCashtags` 会添加该词、带引号的短语、`#tag` 和 `$tag`。
+- `contentExcludeKeywords`、`contentExcludeHashtags`、`exclude_words`、`hashtags_exclude` 会添加 `-word` 和 `-#tag`。
+- 使用 `all_words`、`exact_phrases` 时，每个词和每个短语都必须匹配。
+- `any_words`、`hashtags_any` 会添加任一匹配条件，例如 `(#a OR #b)`。
+- `contentQuestionMarks` 会添加 `?`。
+- `contentEmoticons` 的 `positive` 会添加 `:)`，`negative` 会添加 `:(`。
+- `tweet_type` 会添加 `filter:replies`、`filter:retweets` 以及它们的 `-filter:` 形式。
 
-用文字写的模式会映射到 `mode`：`Advanced Search` 对应 `search`，`Get Tweet by ID` 对应 `tweet`，`Get a Few Tweets` 对应 `tweets`，`Get Replies` 对应 `replies`，`Get Quotes` 对应 `quotes`，`Get Retweeters` 对应 `retweeters`，`Get Favoriters` 对应 `favoriters`。
+用文字写的模式会映射到 `mode`。`Advanced Search` 对应 `search`，`Get Tweet by ID` 对应 `tweet`，`Get a Few Tweets` 对应 `tweets`，`Get Replies` 对应 `replies`，`Get Quotes` 对应 `quotes`，`Get Retweeters` 对应 `retweeters`，`Get Favoriters` 对应 `favoriters`。
 
-粘贴的输入会这样处理：
+粘贴的输入会这样处理。
 
 - 每种来源都会运行。同时包含 URL、用户名、搜索词、列表 ID 和帖子 ID 的输入会全部运行。`maxItems` 作用于整次运行。
 - 与 `searchTerms` 一起出现的搜索查询，会作为多出的 1 个搜索词运行。
@@ -510,13 +510,13 @@ X 不再支持搜索 `filter:vine`、`filter:consumer_video`、`filter:pro_video
 - 该 Actor 没有“页”这个单位。请把 `maxPages` 换成 `maxItems`。
 - 该 Actor 没有 `userId` 或 `user_ids` 字段。请把用户 ID 填在用户名的位置。`twitterHandles`、个人资料 URL 和 `from:` 后面都可以用。
 - `from`、`min_faves`、`since_time` 和 `filter:images` 等搜索运算符字段已经使用 X 的名称，不需要映射。
-- 其他 Actor 没有说明是“全部匹配”还是“任一匹配”的列表，只含 1 个值时才会运行：`contentKeywords`、`contentExactPhrases`、`contentHashtags`、`contentCashtags`、`usersMentionUsers`、`mediaTypes` 和 `tweetTypes`。值更多时，运行会在读取或计费前停止。提示信息会说明如何把它们写成 1 个搜索词。
+- 其他 Actor 没有说明是“全部匹配”还是“任一匹配”的列表，只含 1 个值时才会运行。这些列表是 `contentKeywords`、`contentExactPhrases`、`contentHashtags`、`contentCashtags`、`usersMentionUsers`、`mediaTypes` 和 `tweetTypes`。值更多时，运行会在读取或计费前停止。提示信息会说明如何把它们写成 1 个搜索词。
 - 设为 `People` 或 `Lists` 的 `search_type`、设为 `followers` 的 `source_mode`、`engagementLevel` 预设以及 `Get Similar Tweets` 模式，都会让运行在读取或计费前停止。提示信息会写明应使用的 Actor 或字段。
 - 设为 `tweets` 或 `info` 的 `category` 不会改变任何行为。属于其他 Actor 职责的值，例如 `followers`、`user_info` 或 `replies`，会让运行停止，不读取也不计费。提示信息会写明该 Actor。
 
 ### Console 与 API 输入
 
-Console 表单有以下控件：
+Console 表单有以下控件。
 
 - Mode、Output Variant、Field Style、Output Preset 和 Sort By 是经过校验的下拉菜单。
 - Start URLs 和 Profile URLs 接受字符串或 `{ "url": "..." }` 对象。它们的 JSON 编辑器保留两种 API 格式。
@@ -592,39 +592,27 @@ Apify 不会把固定的构建编号重定向到 `latest`。请把固定编号�
 
 所有 Xquik Actor 都使用同一套提取引擎、先过滤后计费的规则和诊断功能。按你需要的数据选择对应的 Actor。
 
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从用户名、ID 或 URL 抓取个人资料，以及这些账号的帖子、回复、媒体和关注者。适合从账号而不是搜索入手的场景。每行 $0.00015 起。
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)：抓取帖子下的回复、评论和完整对话，提供 25 多个过滤条件。适合需要帖子下方讨论的场景。每行 $0.00015 起。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)：按帖子 URL 或 ID 批量抓取回复、引用、转帖者和帖子串。适合衡量谁与帖子有过互动的场景。每行 $0.00015 起。
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)：抓取引用帖子的帖子，包含文本、媒体、计数和作者，提供 11 个过滤条件。适合研究谁引用了帖子以及说了什么的场景。每条帖子 $0.00015 起。
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)：抓取关注者、正在关注的账号、列表成员、订阅者和社群成员，输出为个人资料行。适合需要受众或成员名单的场景。每条个人资料 $0.00015 起。
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)：按用户名、简介和位置搜索用户，可按关注者数、认证状态、账号年龄和位置过滤。适合通过搜索建立账号名单的场景。每条个人资料 $0.00015 起。
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)：通过 X 的“账号所在地”标签、账号连接 X 的方式和用户名更改记录，查看账号所在的位置。适合核实账号所在地的场景。每个账号 $0.00015 起。
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper)：从用户名、关注者或用户搜索获取账号在个人资料上公开的邮箱、电话和链接。适合需要个人资料上公开的邮箱的场景。每条个人资料 $0.00015 起。
-- [X List Scraper](https://apify.com/xquik/x-list-scraper)：从列表 URL 或 ID 抓取列表帖子、成员和关注者。适合用精选列表确定来源的场景。每行 $0.00015 起。
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper)：抓取社群信息、帖子、搜索结果、成员和版主。适合来源是 X 社群的场景。每行 $0.00015 起。
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper)：按关键词查找空间，读取标题、状态、时间、听众数、主持人和发言人，也可按 URL 或 ID 读取直播。适合追踪 X 上实时音频和视频的场景。每个空间或直播 $0.00015 起。
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper)：按位置抓取实时趋势，附带排名、帖子量、查询词和 WOEID。适合追踪各地热门话题的场景。每条趋势 $0.00015 起。
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper)：按关键词、地点、办公方式、职级和公司抓取 X 职位，附带薪资和申请链接。适合收集发布在 X 上的职位空缺的场景。每个职位 $0.00015 起。
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper)：把长篇 X 文章抓取为 Markdown 和纯文本，附带封面、作者、日期和指标。适合需要文章正文而不是帖子的场景。每篇文章 $0.00015 起。
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader)：从帖子或个人资料提取或存储照片、视频和 GIF，可选 MP4 和元数据。适合需要媒体文件本身的场景。每条媒体行 $0.00015 起。
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)：追踪品牌提及，用 AI 判断相关性和情感、回答客户体验问题，并比较各次运行。适合长期关注一个品牌的场景。每条已分析帖子 $0.0003 起。
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)：用 AI 为每条帖子标注态度、强度和讽刺概率。适合了解任意话题整体情感的场景。每条已分析帖子 $0.0003 起。
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)：用 AI 标注看涨、看跌、中性或混合立场，以及内容类型、信心程度和资产相关性。适合关注股票、加密货币或交易讨论的场景。每条已分析帖子 $0.0003 起。
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)：用 AI 按形式、来源标注和话题相关性标注新闻帖子。适合区分新闻报道和评论的场景。每条已分析帖子 $0.0003 起。
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)：用 AI 为每条帖子回答你自定义的分类、评分和是非问题。适合预设分析不符合你的标签的场景。每条已分析帖子 $0.0003 起。
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)：根据 8 个 AI 特征答案，为每条帖子估算 0 到 100 的 Viral Score 和结论。适合研究帖子为何走红或遇冷的场景。每条已分析帖子 $0.0003 起。
-
-## 不只需要抓取？
-
-Xquik 还提供 47 个仪表盘工具、一个 REST API、签名 webhook 和一个 MCP 服务器。
-
-- [API 文档](https://docs.xquik.com/introduction)：REST API 指南
-- [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets)：通过 REST 搜索帖子
-- [Batch Tweets API](https://docs.xquik.com/api-reference/x/batch-tweets)：按 ID 获取最多 100 条帖子
-- [User Tweets API](https://docs.xquik.com/api-reference/x/user-tweets)：获取用户的时间线
-- [MCP 服务器](https://docs.xquik.com/mcp/overview)：查看支持的工具
-- [Webhooks](https://docs.xquik.com/webhooks/overview)：签名事件推送
-- [GitHub](https://github.com/Xquik-dev/x-twitter-scraper)：源代码和问题追踪
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) 从用户名、ID 或 URL 抓取个人资料，以及这些账号的帖子、回复、媒体和关注者。适合从账号而不是搜索入手的场景。每行 $0.00015 起。
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) 抓取帖子下的回复、评论和完整对话，提供 25 多个过滤条件。适合需要帖子下方讨论的场景。每行 $0.00015 起。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) 按帖子 URL 或 ID 批量抓取回复、引用、转帖者和帖子串。适合衡量谁与帖子有过互动的场景。每行 $0.00015 起。
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper) 抓取引用帖子的帖子，包含文本、媒体、计数和作者，提供 11 个过滤条件。适合研究谁引用了帖子以及说了什么的场景。每条帖子 $0.00015 起。
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) 抓取关注者、正在关注的账号、列表成员、订阅者和社群成员，输出为个人资料行。适合需要受众或成员名单的场景。每条个人资料 $0.00015 起。
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) 按用户名、简介和位置搜索用户，可按关注者数、认证状态、账号年龄和位置过滤。适合通过搜索建立账号名单的场景。每条个人资料 $0.00015 起。
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper) 通过 X 的“账号所在地”标签、账号连接 X 的方式和用户名更改记录，查看账号所在的位置。适合核实账号所在地的场景。每个账号 $0.00015 起。
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) 从用户名、关注者或用户搜索获取账号在个人资料上公开的邮箱、电话和链接。适合需要个人资料上公开的邮箱的场景。每条个人资料 $0.00015 起。
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) 从列表 URL 或 ID 抓取列表帖子、成员和关注者。适合用精选列表确定来源的场景。每行 $0.00015 起。
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper) 抓取社群信息、帖子、搜索结果、成员和版主。适合来源是 X 社群的场景。每行 $0.00015 起。
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) 按关键词查找空间，读取标题、状态、时间、听众数、主持人和发言人，也可按 URL 或 ID 读取直播。适合追踪 X 上实时音频和视频的场景。每个空间或直播 $0.00015 起。
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) 按位置抓取实时趋势，附带排名、帖子量、查询词和 WOEID。适合追踪各地热门话题的场景。每条趋势 $0.00015 起。
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) 按关键词、地点、办公方式、职级和公司抓取 X 职位，附带薪资和申请链接。适合收集发布在 X 上的职位空缺的场景。每个职位 $0.00015 起。
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) 把长篇 X 文章抓取为 Markdown 和纯文本，附带封面、作者、日期和指标。适合需要文章正文而不是帖子的场景。每篇文章 $0.00015 起。
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) 从帖子或个人资料提取或存储照片、视频和 GIF，可选 MP4 和元数据。适合需要媒体文件本身的场景。每条媒体行 $0.00015 起。
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring) 追踪品牌提及，用 AI 判断相关性和情感、回答客户体验问题，并比较各次运行。适合长期关注一个品牌的场景。每条已分析帖子 $0.0003 起。
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis) 用 AI 为每条帖子标注态度、强度和讽刺概率。适合了解任意话题整体情感的场景。每条已分析帖子 $0.0003 起。
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals) 用 AI 标注看涨、看跌、中性或混合立场，以及内容类型、信心程度和资产相关性。适合关注股票、加密货币或交易讨论的场景。每条已分析帖子 $0.0003 起。
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor) 用 AI 按形式、来源标注和话题相关性标注新闻帖子。适合区分新闻报道和评论的场景。每条已分析帖子 $0.0003 起。
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier) 用 AI 为每条帖子回答你自定义的分类、评分和是非问题。适合预设分析不符合你的标签的场景。每条已分析帖子 $0.0003 起。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer) 根据 8 个 AI 特征答案，为每条帖子估算 0 到 100 的 Viral Score 和结论。适合研究帖子为何走红或遇冷的场景。每条已分析帖子 $0.0003 起。
 
 ## 常见问题
 

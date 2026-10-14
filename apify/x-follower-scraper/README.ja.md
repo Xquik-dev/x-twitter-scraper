@@ -270,17 +270,17 @@ XquikのX Follower Scraperは、すべてのApifyプランで配信されたプ�
 
 XquikのX Follower Scraperは、コストと速度で他の9つのフォロワー用Actorを上回りました。フル出力の行のフィールド数の中央値は38で、他のActorの中央値の2.5倍でした。
 
-- `xquik/x-follower-scraper`: 有効なプロフィールは1,000件、有効なプロフィール1件あたり$0.000155、1秒あたり100.0件、1行あたり38フィールドです。[実行を見る](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
-- `xquik/x-follower-scraper`: 有効なプロフィールは1,000件、有効なプロフィール1件あたり$0.000155、1秒あたり77.9件、1行あたり38フィールドです。[実行を見る](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
-- `b2b_leads/X-Real-Time-Data`: 有効なプロフィールは286件、有効なプロフィール1件あたり$0.000388、1秒あたり3.1件、1行あたり21フィールドです。[実行を見る](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
-- `kaitoeasyapi/premium-x-follower-scraper-following-data`: 有効なプロフィールは356件、有効なプロフィール1件あたり$0.000506、1秒あたり21.9件、1行あたり50フィールドです。[実行を見る](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
-- `api-ninja/x-twitter-followers-scraper`: 有効なプロフィールは350件、有効なプロフィール1件あたり$0.000809、1秒あたり7.0件、1行あたり8フィールドです。[実行を見る](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
-- `altimis/scweet`: 有効なプロフィールは332件、有効なプロフィール1件あたり$0.000922、1秒あたり1.1件、1行あたり21フィールドです。[実行を見る](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
-- `apidojo/twitter-user-scraper`: 有効なプロフィールは323件、有効なプロフィール1件あたり$0.001160、1秒あたり7.3件、1行あたり25フィールドです。[実行を見る](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
-- `atomus/twitter-scraper`: 有効なプロフィールは323件、有効なプロフィール1件あたり$0.001272、1秒あたり6.2件、1行あたり13フィールドです。[実行を見る](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
-- `practicaltools/cheap-simple-twitter-api`: 有効なプロフィールは283件、有効なプロフィール1件あたり$0.002036、1秒あたり6.5件、1行あたり4フィールドです。[実行1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb)、[実行2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK)、[実行3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
-- `maximedupre/twitter-scraper`: 有効なプロフィールは320件、有効なプロフィール1件あたり$0.002192、1秒あたり2.1件、1行あたり15フィールドです。[実行1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs)、[実行2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39)、[実行3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
-- `seemuapps/x-followers-following-scraper`: 有効なプロフィールは286件、有効なプロフィール1件あたり$0.003504、1秒あたり3.9件、1行あたり9フィールドです。[実行1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj)、[実行2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ)、[実行3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
+- `xquik/x-follower-scraper`は、有効なプロフィールを1,000件取得しました。有効なプロフィール1件あたり$0.000155、1秒あたり100.0件、1行あたり38フィールドです。[実行を見る](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
+- `xquik/x-follower-scraper`は、有効なプロフィールを1,000件取得しました。有効なプロフィール1件あたり$0.000155、1秒あたり77.9件、1行あたり38フィールドです。[実行を見る](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
+- `b2b_leads/X-Real-Time-Data`は、有効なプロフィールを286件取得しました。有効なプロフィール1件あたり$0.000388、1秒あたり3.1件、1行あたり21フィールドです。[実行を見る](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
+- `kaitoeasyapi/premium-x-follower-scraper-following-data`は、有効なプロフィールを356件取得しました。有効なプロフィール1件あたり$0.000506、1秒あたり21.9件、1行あたり50フィールドです。[実行を見る](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
+- `api-ninja/x-twitter-followers-scraper`は、有効なプロフィールを350件取得しました。有効なプロフィール1件あたり$0.000809、1秒あたり7.0件、1行あたり8フィールドです。[実行を見る](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
+- `altimis/scweet`は、有効なプロフィールを332件取得しました。有効なプロフィール1件あたり$0.000922、1秒あたり1.1件、1行あたり21フィールドです。[実行を見る](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
+- `apidojo/twitter-user-scraper`は、有効なプロフィールを323件取得しました。有効なプロフィール1件あたり$0.001160、1秒あたり7.3件、1行あたり25フィールドです。[実行を見る](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
+- `atomus/twitter-scraper`は、有効なプロフィールを323件取得しました。有効なプロフィール1件あたり$0.001272、1秒あたり6.2件、1行あたり13フィールドです。[実行を見る](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
+- `practicaltools/cheap-simple-twitter-api`は、有効なプロフィールを283件取得しました。有効なプロフィール1件あたり$0.002036、1秒あたり6.5件、1行あたり4フィールドです。[実行1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb)、[実行2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK)、[実行3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
+- `maximedupre/twitter-scraper`は、有効なプロフィールを320件取得しました。有効なプロフィール1件あたり$0.002192、1秒あたり2.1件、1行あたり15フィールドです。[実行1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs)、[実行2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39)、[実行3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
+- `seemuapps/x-followers-following-scraper`は、有効なプロフィールを286件取得しました。有効なプロフィール1件あたり$0.003504、1秒あたり3.9件、1行あたり9フィールドです。[実行1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj)、[実行2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ)、[実行3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
 
 各Actorは、NASA、SpaceX、esaのフォロワーを読み取りました。他のActorは2026-09-28に、Xquikの実行は2026-09-29に `outputMode: "full"` で実行しました。すべての実行でBronzeティアを使いました。有効なプロフィールとは、作成から30日以上で、フォロワーとポストが1件以上ある重複のないプロフィールです。コストは、有効なプロフィール1件あたりの顧客の総支払額です。当社のコストには、顧客が支払うApifyの利用料を含みます。3回の実行がある行は、それらを合計しています。1行あたりのフィールド数は、空でないフィールド数の中央値で、入れ子のフィールドも含みます。リストは1フィールドとして数えます。実行を開くと、入力、ログ、データセットを確認できます。
 
@@ -313,35 +313,35 @@ Consoleのフォームには次のコントロールがあります。
 
 各項目は、すでに使っているフィールドを挙げ、その後に対応付け先のフィールドを示します。
 
-- `twitterHandles`、`usernames`、`user_names`、`handles`、`userNameList`、`screenNames`: `twitterHandles`
-- 1つの文字列としての `username`、`handle`、`screenName`: `twitterHandles`
-- `twitterUserIds`、`user_ids`、`userIdList`: `userIds`
-- 1つの文字列としての `user_id`、`userId`: `userIds`
-- `startUrls`、`urls`、`targets`、`profileUrls`、`accountUrls`: `startUrls`
-- 1つの文字列としての `profileUrl`: `startUrls`
-- `getFollowers`、`getFollowing`: `relations`
-- `followers` か `following` を指定した `type`: `relation`
-- `relationship`、`relationshipType`、`listType`、`scrape_type`: `relation`
-- `relationships`: `relations`
-- `followers`、`following`、または `both` を指定した `mode`: `relation` または `relations`
-- `followers`、`following`、または `affiliates` を指定した `category`: `relation`
-- `profile_urls`: リンクは `startUrls`、ユーザー名は `twitterHandles`
-- `maxResults`、`max_results`、`resultsLimit`、`count`、`max_items`: `maxItems`
-- `per_profile_limit`、`maxItemsPerUser`、`maxUsersPerAccount`、`max_followers_per_user`、`max_following_per_user`、`follower_limit`: `maxItemsPerTarget`。0 はアカウントごとの上限なしを意味します。`max_following_per_user` は `relation` も `following` に設定します。
-- `scrapeAllResults`: 対象ごとの上限なし
-- `minTweets`: `minStatuses`
-- `includeRawUser`: `includeRaw`
-- `outputVariant`: `outputMode`
-- `requireEmail`: `hasEmail`
-- `requireWebsite`: `hasWebsite`。ウェブサイト欄にリンクが1つでもあるプロフィールを残し、実行ステータスにその旨が示されます。
-- `onlyVerified`、`blue_verified_only`: `blueVerifiedOnly`。`source_mode` を含む入力では、`blue_verified_only` は効果を持ちません。
-- `verification`: `any_verified` は `verifiedOnly` を、`blue_verified` は `blueVerifiedOnly` を、`business` と `government` は `verifiedType` を設定します。`unverified` を指定すると、読み取りや課金の前に実行が止まります。
-- `bioKeywords`: `bioContains`。語句のうち1つが一致すれば十分です。
-- 値が1つの `locationKeywords`: `locationContains`。値が2つ以上あると、読み取りや課金の前に実行が止まります。
-- リストとしての `emailDomains`: `emailDomains`
-- `outputEmail`、`resolveShortLinks`: フィールドは不要です。すべての行に、その行のメールアドレスとXの完全なリンクが含まれます。
-- `findEmails`、`extractEmails`: 対応するフィールドはありません。行には、プロフィールがX上で公開しているメールアドレスが含まれます。実行ステータスには、このActorがリンク先のサイトを読み取らないことが示されます。
-- `validateEmails`: 対応するフィールドはありません。このActorはメールボックスを確認しないため、実行ステータスには、メールアドレスが公開されているとおりに届くことが示されます。
+- `twitterHandles`、`usernames`、`user_names`、`handles`、`userNameList`、`screenNames` は `twitterHandles` に対応します。
+- 1つの文字列としての `username`、`handle`、`screenName` は `twitterHandles` に対応します。
+- `twitterUserIds`、`user_ids`、`userIdList` は `userIds` に対応します。
+- 1つの文字列としての `user_id`、`userId` は `userIds` に対応します。
+- `startUrls`、`urls`、`targets`、`profileUrls`、`accountUrls` は `startUrls` に対応します。
+- 1つの文字列としての `profileUrl` は `startUrls` に対応します。
+- `getFollowers`、`getFollowing` は `relations` に対応します。
+- `followers` か `following` を指定した `type` は `relation` に対応します。
+- `relationship`、`relationshipType`、`listType`、`scrape_type` は `relation` に対応します。
+- `relationships` は `relations` に対応します。
+- `followers`、`following`、または `both` を指定した `mode` は `relation` または `relations` に対応します。
+- `followers`、`following`、または `affiliates` を指定した `category` は `relation` に対応します。
+- `profile_urls` は、リンクなら `startUrls` に、ユーザー名なら `twitterHandles` に対応します。
+- `maxResults`、`max_results`、`resultsLimit`、`count`、`max_items` は `maxItems` に対応します。
+- `per_profile_limit`、`maxItemsPerUser`、`maxUsersPerAccount`、`max_followers_per_user`、`max_following_per_user`、`follower_limit` は `maxItemsPerTarget` に対応します。0 はアカウントごとの上限なしを意味します。`max_following_per_user` は `relation` も `following` に設定します。
+- `scrapeAllResults` は、対象ごとの上限なしに対応します。
+- `minTweets` は `minStatuses` に対応します。
+- `includeRawUser` は `includeRaw` に対応します。
+- `outputVariant` は `outputMode` に対応します。
+- `requireEmail` は `hasEmail` に対応します。
+- `requireWebsite` は `hasWebsite` に対応します。ウェブサイト欄にリンクが1つでもあるプロフィールを残し、実行ステータスにその旨が示されます。
+- `onlyVerified`、`blue_verified_only` は `blueVerifiedOnly` に対応します。`source_mode` を含む入力では、`blue_verified_only` は効果を持ちません。
+- `verification` では、`any_verified` は `verifiedOnly` を、`blue_verified` は `blueVerifiedOnly` を、`business` と `government` は `verifiedType` を設定します。`unverified` を指定すると、読み取りや課金の前に実行が止まります。
+- `bioKeywords` は `bioContains` に対応します。語句のうち1つが一致すれば十分です。
+- 値が1つの `locationKeywords` は `locationContains` に対応します。値が2つ以上あると、読み取りや課金の前に実行が止まります。
+- リストとしての `emailDomains` は `emailDomains` に対応します。
+- `outputEmail`、`resolveShortLinks` に対応するフィールドは不要です。すべての行に、その行のメールアドレスとXの完全なリンクが含まれます。
+- `findEmails`、`extractEmails` に対応するフィールドはありません。行には、プロフィールがX上で公開しているメールアドレスが含まれます。実行ステータスには、このActorがリンク先のサイトを読み取らないことが示されます。
+- `validateEmails` に対応するフィールドはありません。このActorはメールボックスを確認しないため、実行ステータスには、メールアドレスが公開されているとおりに届くことが示されます。
 
 貼り付けた入力は次のように動きます。
 
@@ -442,38 +442,27 @@ Xは、非公開アカウントのフォロワーやフォロー中の一覧を�
 
 すべてのXquik Actorは、同じ抽出エンジン、フィルター優先の課金、診断機能を共有しています。必要なデータに合うものを選んでください。
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): 検索、プロフィールのタイムライン、リスト、ポストIDから、50以上のフィルターでポストをスクレイピングし、フラットな形式で出力します。分析なしでポストデータが必要なときに使います。1行あたり$0.00015から。
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): ユーザー名、ID、URLから、プロフィールとそのポスト、返信、メディア、フォロワーをスクレイピングします。検索ではなくアカウントから始めるときに使います。1行あたり$0.00015から。
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25以上のフィルターで、ポストへの返信、コメント、会話全体をスクレイピングします。ポストの下の議論が必要なときに使います。1行あたり$0.00015から。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): ポストのURLまたはIDから、返信、引用ポスト、リポストしたユーザー、スレッドを一括でスクレイピングします。誰がポストに反応したかを測るときに使います。1行あたり$0.00015から。
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper): ポストを引用したポストを、テキスト、メディア、件数、著者とともに、11のフィルターでスクレイピングします。誰がポストを引用し、何と言ったかを調べたいときに使います。1ポストあたり$0.00015から。
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): ユーザー名、自己紹介、所在地でユーザーを検索し、フォロワー数、認証、アカウント年数、所在地で絞り込みます。検索からアカウントの一覧を作るときに使います。1プロフィールあたり$0.00015から。
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper): Xの「アカウントの所在地」ラベル、Xへの接続方法、ユーザー名の変更履歴から、アカウントの所在地を確認します。アカウントの所在地を確かめたいときに使います。1アカウントあたり$0.00015から。
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): ユーザー名、フォロワー、ユーザー検索から、アカウントがプロフィールで公開しているメールアドレス、電話番号、リンクを取得します。プロフィールが公開しているメールアドレスが必要なときに使います。1プロフィールあたり$0.00015から。
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): リストのURLまたはIDから、リストのポスト、メンバー、フォロワーをスクレイピングします。厳選したリストを情報源にするときに使います。1行あたり$0.00015から。
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): コミュニティの情報、ポスト、検索結果、メンバー、モデレーターをスクレイピングします。Xのコミュニティを情報源にするときに使います。1行あたり$0.00015から。
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper): キーワードからスペースを見つけ、タイトル、状態、時刻、リスナー数、ホスト、スピーカーを読み取ります。URLまたはIDでブロードキャストも読み取ります。Xのライブ音声とライブ動画を追うときに使います。スペースまたはブロードキャスト1件あたり$0.00015から。
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): 地域別のリアルタイムトレンドを、順位、ボリューム、クエリ、WOEIDとともにスクレイピングします。どこで何がトレンドかを追うときに使います。1トレンドあたり$0.00015から。
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): キーワード、勤務地、勤務形態、職位レベル、企業からXの求人を、給与と応募リンクとともにスクレイピングします。Xに掲載された求人を集めるときに使います。1求人あたり$0.00015から。
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): 長文のXの記事を、カバー画像、著者、日付、指標とともにMarkdownとテキストでスクレイピングします。ポストではなく記事の本文が必要なときに使います。1記事あたり$0.00015から。
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader): ポストやプロフィールから写真、動画、GIFを抽出または保存します。MP4とメタデータのオプションがあります。メディアファイルそのものが必要なときに使います。1メディア行あたり$0.00015から。
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring): ブランドへの言及を、AIによる関連性、感情、顧客体験の回答とともに追跡し、実行どうしを比較します。ブランドを継続して見守るときに使います。分析済みポスト1件あたり$0.0003から。
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis): すべてのポストに、AIで態度、強度、皮肉の確率のラベルを付けます。任意のトピックの全体的な感情を知りたいときに使います。分析済みポスト1件あたり$0.0003から。
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals): AIで、強気、弱気、中立、混在のスタンス、コンテンツの種類、確信度、資産との関連性のラベルを付けます。株、暗号資産、トレードの話題を追うときに使います。分析済みポスト1件あたり$0.0003から。
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor): AIで、ニュースのポストに形式、情報源の明示、トピックとの関連性のラベルを付けます。報道と論評を分けるときに使います。分析済みポスト1件あたり$0.0003から。
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier): すべてのポストについて、独自のカテゴリー、スコア、はい/いいえの質問にAIが答えます。既定の分析が自分のラベルに合わないときに使います。分析済みポスト1件あたり$0.0003から。
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer): AIによる8つの特性の回答から、すべてのポストについて0から100のViral Scoreと判定を推定します。ポストが広がる理由や伸びない理由を調べるときに使います。分析済みポスト1件あたり$0.0003から。
-
-## スクレイピング以外も必要ですか？
-
-Xquikは、47個のダッシュボードツール、REST API、署名付きWebhook、MCPサーバーも提供しています。
-
-- [APIドキュメント](https://docs.xquik.com/introduction): REST APIのガイド
-- [Followers API](https://docs.xquik.com/api-reference/x/followers): アカウントの取得できるフォロワーを取得
-- [Following API](https://docs.xquik.com/api-reference/x/following): ユーザーがフォローしているアカウントを取得
-- [List Members API](https://docs.xquik.com/api-reference/x/list-members): Xの公開リストのメンバーをエクスポート
-- [MCPサーバー](https://docs.xquik.com/mcp/overview): 対応するJSONやテキストの操作を探して実行
-- [Webhooks](https://docs.xquik.com/webhooks/overview): 対応するポストとプロフィールのイベントを受信
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper)は、検索、プロフィールのタイムライン、リスト、ポストIDから、50以上のフィルターでポストをスクレイピングし、フラットな形式で出力します。分析なしでポストデータが必要なときに使います。1行あたり$0.00015から。
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)は、ユーザー名、ID、URLから、プロフィールとそのポスト、返信、メディア、フォロワーをスクレイピングします。検索ではなくアカウントから始めるときに使います。1行あたり$0.00015から。
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)は、25以上のフィルターで、ポストへの返信、コメント、会話全体をスクレイピングします。ポストの下の議論が必要なときに使います。1行あたり$0.00015から。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)は、ポストのURLまたはIDから、返信、引用ポスト、リポストしたユーザー、スレッドを一括でスクレイピングします。誰がポストに反応したかを測るときに使います。1行あたり$0.00015から。
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)は、ポストを引用したポストを、テキスト、メディア、件数、著者とともに、11のフィルターでスクレイピングします。誰がポストを引用し、何と言ったかを調べたいときに使います。1ポストあたり$0.00015から。
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)は、ユーザー名、自己紹介、所在地でユーザーを検索し、フォロワー数、認証、アカウント年数、所在地で絞り込みます。検索からアカウントの一覧を作るときに使います。1プロフィールあたり$0.00015から。
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)は、Xの「アカウントの所在地」ラベル、Xへの接続方法、ユーザー名の変更履歴から、アカウントの所在地を確認します。アカウントの所在地を確かめたいときに使います。1アカウントあたり$0.00015から。
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper)は、ユーザー名、フォロワー、ユーザー検索から、アカウントがプロフィールで公開しているメールアドレス、電話番号、リンクを取得します。プロフィールが公開しているメールアドレスが必要なときに使います。1プロフィールあたり$0.00015から。
+- [X List Scraper](https://apify.com/xquik/x-list-scraper)は、リストのURLまたはIDから、リストのポスト、メンバー、フォロワーをスクレイピングします。厳選したリストを情報源にするときに使います。1行あたり$0.00015から。
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper)は、コミュニティの情報、ポスト、検索結果、メンバー、モデレーターをスクレイピングします。Xのコミュニティを情報源にするときに使います。1行あたり$0.00015から。
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper)は、キーワードからスペースを見つけ、タイトル、状態、時刻、リスナー数、ホスト、スピーカーを読み取ります。URLまたはIDでブロードキャストも読み取ります。Xのライブ音声とライブ動画を追うときに使います。スペースまたはブロードキャスト1件あたり$0.00015から。
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper)は、地域別のリアルタイムトレンドを、順位、ボリューム、クエリ、WOEIDとともにスクレイピングします。どこで何がトレンドかを追うときに使います。1トレンドあたり$0.00015から。
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper)は、キーワード、勤務地、勤務形態、職位レベル、企業からXの求人を、給与と応募リンクとともにスクレイピングします。Xに掲載された求人を集めるときに使います。1求人あたり$0.00015から。
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper)は、長文のXの記事を、カバー画像、著者、日付、指標とともにMarkdownとテキストでスクレイピングします。ポストではなく記事の本文が必要なときに使います。1記事あたり$0.00015から。
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader)は、ポストやプロフィールの写真、動画、GIFを、MP4とメタデータのオプション付きで抽出または保存します。メディアファイルそのものが必要なときに使います。1メディア行あたり$0.00015から。
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)は、ブランドへの言及を、AIによる関連性、感情、顧客体験の回答とともに追跡し、実行どうしを比較します。ブランドを継続して見守るときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)は、すべてのポストに、態度、強度、皮肉の確率のラベルをAIで付けます。任意のトピックの全体的な感情を知りたいときに使います。分析済みポスト1件あたり$0.0003から。
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)は、強気、弱気、中立、混在のスタンス、コンテンツの種類、確信度、資産との関連性のラベルをAIで付けます。株、暗号資産、トレードの話題を追うときに使います。分析済みポスト1件あたり$0.0003から。
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)は、ニュースのポストに、形式、情報源の明示、トピックとの関連性のラベルをAIで付けます。報道と論評を分けるときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)は、すべてのポストについて、独自のカテゴリー、スコア、はい/いいえの質問にAIで答えます。既定の分析が自分のラベルに合わないときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)は、AIによる8つの特性の回答から、すべてのポストについて0から100のViral Scoreと判定を推定します。ポストが広がる理由や伸びない理由を調べるときに使います。分析済みポスト1件あたり$0.0003から。
 
 ## よくある質問
 
