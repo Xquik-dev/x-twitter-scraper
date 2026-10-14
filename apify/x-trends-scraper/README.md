@@ -18,7 +18,7 @@
 [![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
 
 [Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
-Claude Code, Codex, Cursor, and more, from 6:07.
+Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X Trends Scraper collects real-time trends by
@@ -41,7 +41,7 @@ You need no X API key or login.
 - Past trends from the Twitter trends archive, by date & time, since 2026-10-13.
 - A list of every place X offers trends for, with its WOEID, country & type.
 - X place search, with the place ID that X post search takes.
-- X hashflags: the custom emoji X shows after some hashtags.
+- X hashflags, the custom emoji X shows after some hashtags.
 - Rank, topic, query, Tweet volume, search URL, WOEID & source location.
 - Location attribution on every row.
 - Labels for hashtag rows & for available Tweet volume.
@@ -51,6 +51,12 @@ You need no X API key or login.
 
 ## How to scrape X trends
 
+New to Apify?
+[Create a free account](https://console.apify.com/sign-up?fpr=xquik) first. The
+free plan needs no credit card & gives $5 to spend each month. At $0.00015 per
+trend, $5 pays for up to 33,000 trends before platform usage. Then come back
+here & press Try for free.
+
 1. Open Xquik's X Trends Scraper in Apify Console.
 2. Enter location names in `locations` or numeric WOEIDs in `woeids`.
 3. Set `maxTrendsPerLocation`, up to 50 trends for each location.
@@ -59,7 +65,7 @@ You need no X API key or login.
 
 ## Input
 
-Use location names, numeric WOEIDs or both:
+Use location names, numeric WOEIDs or both.
 
 ```json
 {
@@ -74,7 +80,7 @@ United States, Japan or London. 2-letter country codes work too. A name X offers
 no trends for returns no rows & costs nothing. `woeids` takes numeric WOEIDs.
 
 To see every name & WOEID, turn on `listLocations`. The run then lists the
-places X offers trends for instead of trends:
+places X offers trends for instead of trends.
 
 ```json
 { "listLocations": true, "country": "TR", "maxItems": 100 }
@@ -85,7 +91,7 @@ places X offers trends for instead of trends:
 text. Leave all 3 empty to list every place.
 
 To search X places by name, fill `placeSearchTerms`. The run then returns places
-instead of trends:
+instead of trends.
 
 ```json
 { "placeSearchTerms": ["New York"], "maxItems": 20 }
@@ -97,7 +103,7 @@ fewer for a few names, such as New York. The run keeps only places with the name
 you typed, so New Delhi returns no rows & costs nothing.
 
 `maxItems` caps the whole run & fills it term by term, so the first term can use
-it all. Set `maxItemsPerTarget` to give each term an even share:
+it all. Set `maxItemsPerTarget` to give each term an even share.
 
 ```json
 {
@@ -108,7 +114,7 @@ it all. Set `maxItemsPerTarget` to give each term an even share:
 ```
 
 To list X hashflags, turn on `listHashflags`. A hashflag is the custom emoji X
-shows after a hashtag for a set time:
+shows after a hashtag for a set time.
 
 ```json
 { "listHashflags": true, "hashtagContains": "football" }
@@ -168,7 +174,7 @@ you wrote it. Missing source fields stay absent. Xquik's X Trends Scraper
 invents no values.
 
 Examples use sample values. Results reflect live data. A trend row looks like
-this:
+this.
 
 ```json
 {
@@ -188,7 +194,7 @@ estimates neither.
 With `listLocations`, each place is 1 dataset row. Rows carry `woeid`, `name`,
 `country`, `countryCode`, `placeType`, `placeTypeCode`, `parentWoeid`, `url` &
 `resultType`. `url` is X's legacy reference for the place & may not open. A
-trend location row looks like this:
+trend location row looks like this.
 
 ```json
 {
@@ -206,7 +212,7 @@ trend location row looks like this:
 With `placeSearchTerms`, each place is 1 dataset row. Rows carry `id`, `name`,
 `fullName`, `country`, `countryCode`, `placeType`, `url`, `centroid`,
 `boundingBox`, `attributes`, `containedWithin`, `sourceTarget` & `resultType`.
-`centroid` holds longitude, then latitude. A place row looks like this:
+`centroid` holds longitude, then latitude. A place row looks like this.
 
 ```json
 {
@@ -224,7 +230,7 @@ With `placeSearchTerms`, each place is 1 dataset row. Rows carry `id`, `name`,
 
 With `listHashflags`, each hashflag is 1 dataset row. Rows carry `hashtag`,
 `assetUrl`, `startsAt`, `endsAt`, `isHashfettiEnabled`, `animations` &
-`resultType`. A hashflag row looks like this:
+`resultType`. A hashflag row looks like this.
 
 ```json
 {
@@ -238,10 +244,37 @@ With `listHashflags`, each hashflag is 1 dataset row. Rows carry `hashtag`,
 }
 ```
 
+## Output columns
+
+8 inputs shape each row after the run reads it. They run no code & change no
+price.
+
+| Field               | What it does                                                |
+| ------------------- | ----------------------------------------------------------- |
+| `fields`            | Keep only these fields, in the order & spelling you write   |
+| `omitFields`        | Drop these fields & keep the rest                           |
+| `renameFields`      | Move a field to a column with a new name                    |
+| `flatten`           | Turn each nested object into top-level columns              |
+| `fillMissingFields` | Fill a kept field a row lacks with `null`. On by default    |
+| `joinFields`        | Turn each of these lists into 1 text value                  |
+| `joinSeparator`     | Text between joined items. The default is a comma & a space |
+| `constantFields`    | Add a column with the same text on every row                |
+
+- Use a dot for a field inside an object. Case & underscores do not matter.
+- Every row keeps its `id`.
+- With `fields`, a field a row lacks arrives as `null`. Every row then has the
+  same columns.
+- A wrong field name stops the run before it reads & charges nothing.
+- If names cannot be checked, the run reads on & lists unseen names last.
+- The run ignores a map function or jq filter written for another Actor.
+
 ## How much does it cost to scrape X trends?
 
 Every Apify plan costs $0.00015 per delivered row. Apify bills your platform
 usage separately.
+
+For more volume, [pick an Apify plan](https://apify.com/pricing?fpr=xquik) with
+more prepaid usage.
 
 - One charge per delivered data row. Diagnostics are free in `diagnostics`.
 - A trend location, place or hashflag row costs the same as a trend row.
@@ -271,83 +304,83 @@ stopped the run. The run is `retryable` when any cause is.
 Every Xquik Actor shares the same extraction engine, filter-first billing &
 diagnostics. Pick the one that matches the data you need.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): Scrapes tweets
-  from searches, profile timelines, Lists & tweet IDs with 50+ filters & flat
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrapes tweets from
+  searches, profile timelines, Lists & tweet IDs with 50+ filters & flat
   exports. Use it when you need tweet data without analysis. From $0.00015 per
   row.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Scrapes
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) scrapes
   profiles plus their posts, replies, media & followers from handles, IDs or
   URLs. Use it when you start from accounts rather than searches. From $0.00015
   per row.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Scrapes replies,
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) scrapes replies,
   comments & whole conversations under posts with 25+ filters. Use it when you
   need the discussion beneath tweets. From $0.00015 per row.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Scrapes
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) scrapes
   replies, quotes, retweeters & threads for post URLs or IDs in bulk. Use it
   when you measure who engaged with posts. From $0.00015 per row.
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
-  Scrapes the quote tweets of posts with text, media, counts, authors & 11
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
+  scrapes the quote tweets of posts with text, media, counts, authors & 11
   filters. Use it when you study who quoted posts & what they said. From
   $0.00015 per tweet.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Scrapes
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrapes
   followers, following, List members, subscribers & Community members as profile
   rows. Use it when you need audience or member lists. From $0.00015 per
   profile.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Searches users by handle, bio & location with follower, verification, age &
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)
+  searches users by handle, bio & location with follower, verification, age &
   location filters. Use it when you build account lists from search. From
   $0.00015 per profile.
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
-  Checks where accounts are based with X's Account based in label, connected via
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
+  checks where accounts are based with X's Account based in label, connected via
   & username changes. Use it when you vet where accounts are based. From
   $0.00015 per account.
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): Gets the emails,
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) gets the emails,
   phones & links accounts publish on their profiles, from handles, followers or
   user searches. Use it when you need the emails profiles publish. From $0.00015
   per profile.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): Scrapes List posts,
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) scrapes List posts,
   members & followers from List URLs or IDs. Use it when a curated List defines
   your sources. From $0.00015 per row.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapes
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper) scrapes
   Community info, posts, searches, members & moderators. Use it when your
   sources are X Communities. From $0.00015 per row.
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Finds Spaces by
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) finds Spaces by
   keyword & reads their titles, states, times, listener counts, hosts &
-  speakers. Also reads broadcasts by URL or ID. Use it when you track live audio
-  & video on X. From $0.00015 per Space or broadcast.
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapes X job
-  listings by keyword, place, workplace, seniority & company, with salaries &
-  apply links. Use it when you collect job openings posted on X. From $0.00015
-  per job.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapes
+  speakers. It also reads broadcasts by URL or ID. Use it when you track live
+  audio & video on X. From $0.00015 per Space or broadcast.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) scrapes X job listings
+  by keyword, place, workplace, seniority & company, with salaries & apply
+  links. Use it when you collect job openings posted on X. From $0.00015 per
+  job.
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) scrapes
   long-form X Articles as Markdown & text with covers, authors, dates & metrics.
   Use it when you need article bodies, not tweets. From $0.00015 per article.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader): Extracts or
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) extracts or
   stores photos, videos & GIFs from posts or profiles with MP4 & metadata
   options. Use it when you need the media files themselves. From $0.00015 per
   media row.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
-  Tracks brand mentions with AI relevance, sentiment & customer-experience
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
+  tracks brand mentions with AI relevance, sentiment & customer-experience
   answers & compares runs. Use it when you watch a brand over time. From $0.0003
   per analyzed tweet.
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
-  Labels attitude, intensity & sarcasm probability for every tweet with AI. Use
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
+  labels attitude, intensity & sarcasm probability for every tweet with AI. Use
   it when you need general sentiment on any topic. From $0.0003 per analyzed
   tweet.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
-  Labels bullish, bearish, neutral or mixed stance, content type, conviction &
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
+  labels bullish, bearish, neutral or mixed stance, content type, conviction &
   asset relevance with AI. Use it when you follow stocks, crypto or trading
   talk. From $0.0003 per analyzed tweet.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
-  Labels news posts by format, source attribution & topic relevance with AI. Use
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
+  labels news posts by format, source attribution & topic relevance with AI. Use
   it when you separate reporting from commentary. From $0.0003 per analyzed
   tweet.
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  Answers your own category, score & yes/no questions for every tweet with AI.
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
+  answers your own category, score & yes/no questions for every tweet with AI.
   Use it when the preset analyses do not fit your labels. From $0.0003 per
   analyzed tweet.
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
-  Estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
+  estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
   trait answers. Use it when you study why tweets spread or flop. From $0.0003
   per analyzed tweet.
 
@@ -367,10 +400,10 @@ counsel when uncertain.
 
 ### Why did my run return no results?
 
-Open the free `diagnostics` output first. An empty run's status says to check
-your targets & filters. `stopCauses` gives each cause a `nextAction` to follow.
-A location X offers no trends for returns no rows. Turn on `listLocations` to
-see the names X takes.
+Read the run status first. An empty run's status says to check your targets &
+filters. The free `diagnostics` output appears when something needs attention.
+Its `stopCauses` gives each cause a `nextAction` to follow. A location X offers
+no trends for returns no rows. Turn on `listLocations` to see the names X takes.
 
 ### Can I scrape historical Twitter trends?
 
@@ -389,12 +422,14 @@ unless you need an older build.
 
 ### Where do I get help?
 
-Open an issue on the Actor page or contact <support@xquik.com> with the run ID.
-Free diagnostics in the key-value store explain empty, partial or interrupted
-runs.
+Open an issue in the
+[Issues tab](https://apify.com/xquik/x-trends-scraper/issues) with the run ID.
+Free diagnostics in the key-value store explain runs that need attention. A run
+that gets no row back says why in its status.
 
 ### Can I get a custom solution?
 
-Yes. Visit [xquik.com](https://xquik.com) or read the
-[API docs](https://docs.xquik.com/introduction). They cover the dashboard, API,
-MCP server & webhooks.
+Yes. Describe what you need in the
+[Issues tab](https://apify.com/xquik/x-trends-scraper/issues). Xquik also offers
+a dashboard, a REST API, an MCP server & webhooks. Find Xquik's website on its
+[Apify profile](https://apify.com/xquik).

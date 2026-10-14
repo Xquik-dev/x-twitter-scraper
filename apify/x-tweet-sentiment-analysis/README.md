@@ -18,7 +18,7 @@
 [![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)
 
 [Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
-Claude Code, Codex, Cursor, and more, from 6:07.
+Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X Tweet Sentiment Analysis adds attitude,
@@ -44,6 +44,12 @@ Separate loud reactions from passing mentions.
 > "Twitter" and "X" are trademarks of X Corp.
 
 ## How to analyze tweet sentiment
+
+New to Apify?
+[Create a free account](https://console.apify.com/sign-up?fpr=xquik) first. The
+free plan needs no credit card & gives $5 to spend each month. At $0.0003 per
+analyzed tweet, $5 pays for up to 16,000 analyzed tweets before platform usage.
+Then come back here & press Try for free.
 
 1. Add search terms, profile handles, tweet URLs or tweet IDs.
 2. Set `maxItems` & the extraction filters your task needs.
@@ -110,7 +116,7 @@ The Actor accepts these common names directly. It also reads the filter names of
 other tweet Actors. A filter with no field here becomes an X search operator on
 every search of the run, & the run log lists those operators at the start. Use
 `Latest` or `Top` for `sort`. Keep language codes & date boundaries. Limits
-apply across all targets. This input is ready to run:
+apply across all targets. This input is ready to run.
 
 ```json
 { "searchTerms": ["from:NASA"], "sort": "Latest", "maxItems": 5 }
@@ -118,25 +124,25 @@ apply across all targets. This input is ready to run:
 
 Other inputs need conversion before the run.
 
-Wrap a single `tweetUrl` in `startUrls`:
+Wrap a single `tweetUrl` in `startUrls`.
 
 ```json
 { "startUrls": ["https://x.com/NASA/status/2105727882588807607"] }
 ```
 
-Put `text`, `Texts`, dataset strings or file strings in `texts`:
+Put `text`, `Texts`, dataset strings or file strings in `texts`.
 
 ```json
 { "texts": ["Support fixed my issue. Thank you."] }
 ```
 
-Turn `hashtag` or `cashtag` into search strings:
+Turn `hashtag` or `cashtag` into search strings.
 
 ```json
 { "searchTerms": ["#Artemis lang:en", "$AAPL lang:en"], "maxItems": 5 }
 ```
 
-Replace `minLikes`, `minReplies` & `minRetweets` with these field names:
+Replace `minLikes`, `minReplies` & `minRetweets` with these field names.
 
 ```json
 { "min_faves": 10, "min_replies": 2, "min_retweets": 3 }
@@ -155,6 +161,9 @@ charges no start fee. The price includes collection & AI costs. You need no AI
 account, tokens or key. The price covers up to 8 questions & 64,000 bytes of
 context per tweet. Each question definition may use up to 8,000 bytes.
 
+For more volume, [pick an Apify plan](https://apify.com/pricing?fpr=xquik) with
+more prepaid usage.
+
 Extraction filters & deduplication run before analysis. You never pay for
 filtered-out or duplicate rows. Failed analyses, skipped analyses & diagnostic
 rows have no result charge. Apify bills platform usage for compute, storage &
@@ -162,7 +171,7 @@ transfer separately at your plan's rates. The Pricing tab shows it.
 
 ## Input & output examples
 
-The input above is copy-ready. An abbreviated output row looks like this:
+The input above is copy-ready. An abbreviated output row looks like this.
 
 ```json
 {
@@ -198,18 +207,18 @@ analyses & pending charges.
 
 ## Run summary & flat answers
 
-A run writes an `analysis-summary` record to its key-value store in 4 cases:
+A run writes an `analysis-summary` record to its key-value store in 3 cases.
 
 - It hits a problem or is large.
-- It sets `monitor` without `baselineDatasetId`, as the first run of a series.
 - Its comparison finds a changed, new or not comparable tweet.
 - It has `alwaysSaveRunRecords` on.
 
-Other runs skip the record. Their status names the top answer, like
-`Top sentiment: positive in 3 of 5 results.` A comparison without a change
-states `No change since the earlier run.` A run that hits a problem or is large
-also writes `run-report`. So does a run with `alwaysSaveRunRecords` on.
-`run-report` repeats the summary under `results.analysisSummary`.
+Other runs skip the record, including the first run of a series. Their status
+names the top answer, like `Top sentiment is positive in 3 of 5 results.` A
+comparison without a change states `No change since the earlier run.` A run that
+hits a problem or is large also writes `run-report`. So does a run with
+`alwaysSaveRunRecords` on. `run-report` repeats the summary under
+`results.analysisSummary`.
 
 The summary counts analyzed, failed & skipped rows. It sums engagement &
 summarizes every question.
@@ -237,7 +246,7 @@ empty map.
 Pass `monitor.baselineDatasetId`, the dataset ID of a completed earlier run with
 the same analysis settings. The comparison reads that run's rows. It works even
 when that run skipped its summary. Every row then gains a `monitor` object. Its
-status can be:
+status takes these values.
 
 - `first_run` without a baseline.
 - `new_to_baseline` for tweets the earlier run did not have.
@@ -289,88 +298,93 @@ The dated 50-post examples show why unique IDs differ from independent opinions.
 [Season finale review texts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-season-finale-reactions)
 
 Separate praise from criticism in your finale review drafts. Observed 3 unique
-supplied texts on 2026-10-01. Cap: 3. These are your own illustrative texts, not
-audience research.
+supplied texts on 2026-10-01. The cap was 3. These are your own illustrative
+texts, not audience research.
 
 #### Phone launch discussion
 
 [September 2026 iPhone launch posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-iphone-launch-posts)
 
 Review launch discussion within a fixed September date window. Observed 5 unique
-posts on 2026-10-01. Cap: 5. Announcements and personal opinions can both match.
+posts on 2026-10-01. The cap was 5. Announcements and personal opinions can both
+match.
 
 #### Halftime show reviews
 
 [Halftime show review texts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-super-bowl-halftime-show)
 
 Check mixed judgments and sarcasm in your halftime reviews. Observed 3 unique
-supplied texts on 2026-10-01. Cap: 3. These are your own illustrative reviews,
-not live show reactions.
+supplied texts on 2026-10-01. The cap was 3. These are your own illustrative
+reviews, not live show reactions.
 
 #### Electric car experiences
 
 [Electric car experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-toward-new-electric-car)
 
 Find posts about driving or choosing an electric car. Observed 5 unique posts on
-2026-10-01. Cap: 5. Personal phrases can match jokes or secondhand accounts.
+2026-10-01. The cap was 5. Personal phrases can match jokes or secondhand
+accounts.
 
 #### Movie discussion
 
 [Marvel movie discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-marvel-movie-audiences)
 
 Review movie discussion before selecting audience comments. Observed 5 unique
-posts on 2026-10-01. Cap: 5. Marvel can match unrelated uses of the word.
+posts on 2026-10-01. The cap was 5. Marvel can match unrelated uses of the word.
 
 #### Artist media captions
 
 [Taylor Swift media caption tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-taylor-swift-album-reactions)
 
 Review the artist's wording beside recent media. Observed 5 unique posts on
-2026-10-01. Cap: 5. Captions cannot describe everything shown in images or
-videos.
+2026-10-01. The cap was 5. Captions cannot describe everything shown in images
+or videos.
 
 #### Game release thread
 
 [Game release update thread](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-video-game-launch)
 
 Read an announcement beside responses about competing games. Observed 5 unique
-posts on 2026-10-01. Cap: 5. The thread mentions several games and includes its
-opening post.
+posts on 2026-10-01. The cap was 5. The thread mentions several games and
+includes its opening post.
 
 #### Remote work discussion
 
 [Remote work discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-remote-work)
 
 Compare attitudes expressed in remote work discussion. Observed 5 unique posts
-on 2026-10-01. Cap: 5. Job ads and repeated opinions can appear.
+on 2026-10-01. The cap was 5. Job ads and repeated opinions can appear.
 
 #### Airline posts
 
 [Airline discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airline-passengers)
 
 Review airline mentions before choosing service feedback. Observed 5 unique
-posts on 2026-10-01. Cap: 5. A mention does not prove the author is a passenger.
+posts on 2026-10-01. The cap was 5. A mention does not prove the author is a
+passenger.
 
 #### College football discussion
 
 [College football discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-college-football-fans)
 
 Separate fan opinions from college football promotion. Observed 5 unique posts
-on 2026-10-01. Cap: 5. Previews and promotions can match beside fan opinions.
+on 2026-10-01. The cap was 5. Previews and promotions can match beside fan
+opinions.
 
 #### Interest rate discussion
 
 [Interest rate discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-interest-rates)
 
 Review market and policy attitudes around interest rates. Observed 5 unique
-posts on 2026-10-01. Cap: 5. The main subject can be a politician or the market.
+posts on 2026-10-01. The cap was 5. The main subject can be a politician or the
+market.
 
 #### Scooter discussion
 
 [Electric scooter discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-toward-electric-scooters)
 
 Find scooter discussion before choosing rider feedback. Observed 5 unique posts
-on 2026-10-01. Cap: 5. Ads, research and jokes can match beside personal
+on 2026-10-01. The cap was 5. Ads, research and jokes can match beside personal
 experiences.
 
 #### Restaurant experiences
@@ -378,7 +392,7 @@ experiences.
 [New restaurant experiences](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-restaurant-openings)
 
 Review first-person wording about new restaurants. Observed 5 unique posts on
-2026-10-01. Cap: 5. Personal wording can also appear in invitations or
+2026-10-01. The cap was 5. Personal wording can also appear in invitations or
 recommendations.
 
 #### Public list feed tone
@@ -386,7 +400,7 @@ recommendations.
 [Public list feed tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-ai-coding-assistants)
 
 Review the tone of posts in a public List. Observed 5 unique posts on
-2026-10-01. Cap: 5. Members can discuss other subjects and repost another
+2026-10-01. The cap was 5. Members can discuss other subjects and repost another
 person's wording.
 
 #### Device profile replies
@@ -394,30 +408,31 @@ person's wording.
 [Google device profile reply tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-smart-home-device-owners)
 
 Review wording from a device profile, including replies. Observed 5 unique posts
-on 2026-10-01. Cap: 5. Missing parent context can limit what a profile reply
-means.
+on 2026-10-01. The cap was 5. Missing parent context can limit what a profile
+reply means.
 
 #### Marathon training
 
 [Marathon training discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-marathon-runners)
 
 Find attitudes in training updates and marathon plans. Observed 5 unique posts
-on 2026-10-01. Cap: 5. Plans and promotion can appear beside runner updates.
+on 2026-10-01. The cap was 5. Plans and promotion can appear beside runner
+updates.
 
 #### Trip planning
 
 [Personal Tokyo trip posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-tourist-destinations)
 
 Review personal trip plans and travel stories. Observed 5 unique posts on
-2026-10-01. Cap: 5. Tokyo-named events can match without describing a Japan
-trip.
+2026-10-01. The cap was 5. Tokyo-named events can match without describing a
+Japan trip.
 
 #### Streaming price discussion
 
 [Netflix price discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-streaming-price-increases)
 
 Find Netflix price concerns before reviewing cancellation reasons. Observed 5
-unique posts on 2026-10-01. Cap: 5. Price phrases select concerns, not a
+unique posts on 2026-10-01. The cap was 5. Price phrases select concerns, not a
 representative viewer sample.
 
 #### School supply shopping
@@ -425,52 +440,54 @@ representative viewer sample.
 [August 2026 school supply posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-back-to-school-shoppers)
 
 Review 50 school supply posts within an August window. Observed 50 unique posts
-on 2026-10-01. Cap: 50. The 50 IDs included 42 clearly related rows in our
-review.
+on 2026-10-01. The cap was 50. The 50 IDs included 42 clearly related rows in
+our review.
 
 #### Train delays
 
 [Train delay experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-public-transit)
 
 Find complaints and experiences involving delayed trains. Observed 5 unique
-posts on 2026-10-01. Cap: 5. Personal phrases can miss official notices.
+posts on 2026-10-01. The cap was 5. Personal phrases can miss official notices.
 
 #### Pet food discussion
 
 [Pet food experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-pet-food-brands)
 
 Review pet food mentions within wider care discussion. Observed 5 unique posts
-on 2026-10-01. Cap: 5. Care or veterinary discussions can mention food brands
-incidentally.
+on 2026-10-01. The cap was 5. Care or veterinary discussions can mention food
+brands incidentally.
 
 #### Selected fantasy sports posts
 
 [Fantasy sports post batch](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-fantasy-football-apps)
 
 Analyze a selected batch of fantasy sports posts. Observed 2 unique posts on
-2026-10-01. Cap: 2. Labels concern each post's subject, not automatically an
-app.
+2026-10-01. The cap was 2. Labels concern each post's subject, not automatically
+an app.
 
 #### Coffee shop experiences
 
 [Coffee shop experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-coffee-shop-customers)
 
 Find coffee shop comments before selecting customer feedback. Observed 5 unique
-posts on 2026-10-01. Cap: 5. Author complaints remain unverified statements.
+posts on 2026-10-01. The cap was 5. Author complaints remain unverified
+statements.
 
 #### Housing market
 
 [Housing market discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-housing-market)
 
 Review opinions and news about the housing market. Observed 5 unique posts on
-2026-10-01. Cap: 5. News and opinions can concern different market issues.
+2026-10-01. The cap was 5. News and opinions can concern different market
+issues.
 
 #### Tournament discussion
 
 [League of Legends tournament posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-esports-tournament-viewers)
 
 Separate tournament discussion from ticket or match promotion. Observed 5 unique
-posts on 2026-10-01. Cap: 5. Ticket ads and match reports are not viewer
+posts on 2026-10-01. The cap was 5. Ticket ads and match reports are not viewer
 opinions.
 
 #### Podcast publisher posts
@@ -478,69 +495,71 @@ opinions.
 [Podcast publisher post tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-podcast-episodes)
 
 Review the podcast publisher's own messaging. Observed 5 unique posts on
-2026-10-01. Cap: 5. Publisher tone does not measure listener satisfaction.
+2026-10-01. The cap was 5. Publisher tone does not measure listener
+satisfaction.
 
 #### Gym comparisons
 
 [Gym comparison review texts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-gym-memberships)
 
 Check combined attitude toward 2 gyms in your reviews. Observed 3 unique
-supplied texts on 2026-10-01. Cap: 3. Both targets share 1 sentiment answer per
-text.
+supplied texts on 2026-10-01. The cap was 3. Both targets share 1 sentiment
+answer per text.
 
 #### Car rentals
 
 [Car rental experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-car-rental-customers)
 
 Find car rental comments before reviewing service concerns. Observed 5 unique
-posts on 2026-10-01. Cap: 5. Inquiries and promotions can match beside renter
-accounts.
+posts on 2026-10-01. The cap was 5. Inquiries and promotions can match beside
+renter accounts.
 
 #### Campus discussion
 
 [University cost and campus posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-university-life)
 
 Review campus discussion before selecting cost-related posts. Observed 5 unique
-posts on 2026-10-01. Cap: 5. Campus news and criticism do not prove student
-experiences.
+posts on 2026-10-01. The cap was 5. Campus news and criticism do not prove
+student experiences.
 
 #### Wedding planning
 
 [Personal wedding planning posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-wedding-planning-posts)
 
 Find first-person wording about wedding plans and costs. Observed 5 unique posts
-on 2026-10-01. Cap: 5. Stories, jokes and incidental wording can match beside
-planning experiences.
+on 2026-10-01. The cap was 5. Stories, jokes and incidental wording can match
+beside planning experiences.
 
 #### Charging experiences
 
 [EV charging experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-ev-charging-experiences)
 
 Review charging experiences within electric vehicle discussion. Observed 5
-unique posts on 2026-10-01. Cap: 5. Charging can be secondary to another vehicle
-concern.
+unique posts on 2026-10-01. The cap was 5. Charging can be secondary to another
+vehicle concern.
 
 #### Tax filing discussion
 
 [Spring 2026 TurboTax filing posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-tax-filing-software)
 
 Review filing discussion within a fixed spring date window. Observed 5 unique
-posts on 2026-10-01. Cap: 5. Posts do not verify current fees or tax rules.
+posts on 2026-10-01. The cap was 5. Posts do not verify current fees or tax
+rules.
 
 #### Theme park visits
 
 [Theme park visit discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-theme-park-visitors)
 
 Find theme park mentions before choosing visit reactions. Observed 5 unique
-posts on 2026-10-01. Cap: 5. Incidental references can match longer posts about
-another subject.
+posts on 2026-10-01. The cap was 5. Incidental references can match longer posts
+about another subject.
 
 #### Grocery spending
 
 [Grocery budget experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-grocery-prices)
 
 Find first-person comments about grocery spending. Observed 5 unique posts on
-2026-10-01. Cap: 5. Wider political, nutrition or creator discussions can
+2026-10-01. The cap was 5. Wider political, nutrition or creator discussions can
 mention grocery spending.
 
 #### Camera discussion
@@ -548,23 +567,23 @@ mention grocery spending.
 [Phone camera discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-phone-camera-reviews)
 
 Review camera mentions beside photos, reviews and announcements. Observed 5
-unique posts on 2026-10-01. Cap: 5. Camera mentions can be incidental in other
-announcements.
+unique posts on 2026-10-01. The cap was 5. Camera mentions can be incidental in
+other announcements.
 
 #### Selected sneaker post
 
 [A selected sneaker post](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-sneaker-drop-reactions)
 
 Analyze a known post without a broad keyword search. Observed 1 unique posts on
-2026-10-01. Cap: 1. This selected caption does not describe every detail of its
-image.
+2026-10-01. The cap was 1. This selected caption does not describe every detail
+of its image.
 
 #### Support chatbots
 
 [Support chatbot discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-customer-support-chatbots)
 
 Find support chatbot discussion before selecting service complaints. Observed 5
-unique posts on 2026-10-01. Cap: 5. Emotional support bots and business
+unique posts on 2026-10-01. The cap was 5. Emotional support bots and business
 responses can also match.
 
 #### Festival discussion
@@ -572,14 +591,15 @@ responses can also match.
 [April 2026 Coachella discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-music-festival-attendees)
 
 Review 50 festival posts within an April window. Observed 50 unique posts on
-2026-10-01. Cap: 50. The 50 IDs included 47 related rows and repeated news copy.
+2026-10-01. The cap was 50. The 50 IDs included 47 related rows and repeated
+news copy.
 
 #### Electricity bills
 
 [Electricity bill discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-electric-bills)
 
 Review personal electricity costs beside policy discussion. Observed 5 unique
-posts on 2026-10-01. Cap: 5. Policy claims and price predictions remain
+posts on 2026-10-01. The cap was 5. Policy claims and price predictions remain
 unverified.
 
 #### Basketball roster changes
@@ -587,15 +607,15 @@ unverified.
 [NBA trade and signing discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-nba-trade-reactions)
 
 Find trade and signing discussion before choosing fan reactions. Observed 5
-unique posts on 2026-10-01. Cap: 5. Other stories can mention players or teams
-incidentally.
+unique posts on 2026-10-01. The cap was 5. Other stories can mention players or
+teams incidentally.
 
 #### Stay discussion
 
 [Airbnb stay discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-airbnb-stays)
 
 Focus attitudes toward Airbnb within stay discussion. Observed 5 unique posts on
-2026-10-01. Cap: 5. Host promotion and app posts can appear beside guest
+2026-10-01. The cap was 5. Host promotion and app posts can appear beside guest
 stories.
 
 #### Book reactions
@@ -603,7 +623,7 @@ stories.
 [Book reading reaction posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-book-club-readers)
 
 Review reading reactions without assuming book club membership. Observed 5
-unique posts on 2026-10-01. Cap: 5. Film comparisons and personal reading
+unique posts on 2026-10-01. The cap was 5. Film comparisons and personal reading
 opinions can both match.
 
 #### Meal kit experiences
@@ -611,15 +631,15 @@ opinions can both match.
 [HelloFresh experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-meal-kit-services)
 
 Find meal kit comments before reviewing product experiences. Observed 5 unique
-posts on 2026-10-01. Cap: 5. Plans, ads and wider personal stories can mention
-the brand.
+posts on 2026-10-01. The cap was 5. Plans, ads and wider personal stories can
+mention the brand.
 
 #### Race discussion
 
 [Formula 1 race discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-formula-one-race-weekends)
 
 Review race discussion beside team and driver statements. Observed 5 unique
-posts on 2026-10-01. Cap: 5. Quoted driver statements can repeat across
+posts on 2026-10-01. The cap was 5. Quoted driver statements can repeat across
 different IDs.
 
 #### Dating app experiences
@@ -627,14 +647,15 @@ different IDs.
 [Dating app experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-dating-app-experiences)
 
 Find dating app experiences, match remarks and jokes. Observed 5 unique posts on
-2026-10-01. Cap: 5. Match remarks and jokes do not verify customer identities.
+2026-10-01. The cap was 5. Match remarks and jokes do not verify customer
+identities.
 
 #### Airport wait posts
 
 [Airport wait and lounge posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airport-travelers)
 
 Review airport wait comments beside travel notices. Observed 5 unique posts on
-2026-10-01. Cap: 5. Official notices can appear beside personal wait
+2026-10-01. The cap was 5. Official notices can appear beside personal wait
 experiences.
 
 #### School lunch discussion
@@ -642,30 +663,32 @@ experiences.
 [School lunch discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-school-lunch-programs)
 
 Review personal posts and policy debate about school lunches. Observed 5 unique
-posts on 2026-10-01. Cap: 5. Authors can include institutions, not only parents.
+posts on 2026-10-01. The cap was 5. Authors can include institutions, not only
+parents.
 
 #### Beer tasting
 
 [Craft beer tasting posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-craft-beer-drinkers)
 
 Find beer tasting opinions before choosing review examples. Observed 5 unique
-posts on 2026-10-01. Cap: 5. Thin linked captions can lack enough context for a
-clear attitude.
+posts on 2026-10-01. The cap was 5. Thin linked captions can lack enough context
+for a clear attitude.
 
 #### Docking announcement quotes
 
 [SpaceX docking announcement quotes](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-space-launches)
 
 Review quotes of one docking announcement after a fixed time. Observed 5 unique
-posts on 2026-10-01. Cap: 5. Quotes can be invitations or neutral descriptions,
-not only reactions.
+posts on 2026-10-01. The cap was 5. Quotes can be invitations or neutral
+descriptions, not only reactions.
 
 #### Birthday replies
 
 [NASA birthday replies](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-replies-to-a-news-post)
 
 Review direct replies to one birthday post. Observed 5 unique posts on
-2026-10-01. Cap: 5. Missing root context can limit what a reply's answer means.
+2026-10-01. The cap was 5. Missing root context can limit what a reply's answer
+means.
 
 Keep `maxItems` small while you inspect results. A cap limits output, not
 supply. If fewer posts qualify, check the run report before changing your
@@ -682,82 +705,82 @@ Missing quote or reply context can make an answer uncertain.
 Every Xquik Actor shares the same extraction engine, filter-first billing &
 diagnostics. Pick the one that matches the data you need.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): Scrapes tweets
-  from searches, profile timelines, Lists & tweet IDs with 50+ filters & flat
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) scrapes tweets from
+  searches, profile timelines, Lists & tweet IDs with 50+ filters & flat
   exports. Use it when you need tweet data without analysis. From $0.00015 per
   row.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Scrapes
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) scrapes
   profiles plus their posts, replies, media & followers from handles, IDs or
   URLs. Use it when you start from accounts rather than searches. From $0.00015
   per row.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): Scrapes replies,
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) scrapes replies,
   comments & whole conversations under posts with 25+ filters. Use it when you
   need the discussion beneath tweets. From $0.00015 per row.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Scrapes
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) scrapes
   replies, quotes, retweeters & threads for post URLs or IDs in bulk. Use it
   when you measure who engaged with posts. From $0.00015 per row.
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
-  Scrapes the quote tweets of posts with text, media, counts, authors & 11
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
+  scrapes the quote tweets of posts with text, media, counts, authors & 11
   filters. Use it when you study who quoted posts & what they said. From
   $0.00015 per tweet.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Scrapes
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) scrapes
   followers, following, List members, subscribers & Community members as profile
   rows. Use it when you need audience or member lists. From $0.00015 per
   profile.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Searches users by handle, bio & location with follower, verification, age &
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)
+  searches users by handle, bio & location with follower, verification, age &
   location filters. Use it when you build account lists from search. From
   $0.00015 per profile.
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
-  Checks where accounts are based with X's Account based in label, connected via
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
+  checks where accounts are based with X's Account based in label, connected via
   & username changes. Use it when you vet where accounts are based. From
   $0.00015 per account.
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): Gets the emails,
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) gets the emails,
   phones & links accounts publish on their profiles, from handles, followers or
   user searches. Use it when you need the emails profiles publish. From $0.00015
   per profile.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): Scrapes List posts,
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) scrapes List posts,
   members & followers from List URLs or IDs. Use it when a curated List defines
   your sources. From $0.00015 per row.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): Scrapes
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper) scrapes
   Community info, posts, searches, members & moderators. Use it when your
   sources are X Communities. From $0.00015 per row.
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Finds Spaces by
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) finds Spaces by
   keyword & reads their titles, states, times, listener counts, hosts &
-  speakers. Also reads broadcasts by URL or ID. Use it when you track live audio
-  & video on X. From $0.00015 per Space or broadcast.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Scrapes
-  real-time trends by location with rank, volume, query & WOEID. Use it when you
-  track what is trending where. From $0.00015 per trend.
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): Scrapes X job
-  listings by keyword, place, workplace, seniority & company, with salaries &
-  apply links. Use it when you collect job openings posted on X. From $0.00015
-  per job.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): Scrapes
+  speakers. It also reads broadcasts by URL or ID. Use it when you track live
+  audio & video on X. From $0.00015 per Space or broadcast.
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) scrapes real-time
+  trends by location with rank, volume, query & WOEID. Use it when you track
+  what is trending where. From $0.00015 per trend.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) scrapes X job listings
+  by keyword, place, workplace, seniority & company, with salaries & apply
+  links. Use it when you collect job openings posted on X. From $0.00015 per
+  job.
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) scrapes
   long-form X Articles as Markdown & text with covers, authors, dates & metrics.
   Use it when you need article bodies, not tweets. From $0.00015 per article.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader): Extracts or
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) extracts or
   stores photos, videos & GIFs from posts or profiles with MP4 & metadata
   options. Use it when you need the media files themselves. From $0.00015 per
   media row.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
-  Tracks brand mentions with AI relevance, sentiment & customer-experience
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
+  tracks brand mentions with AI relevance, sentiment & customer-experience
   answers & compares runs. Use it when you watch a brand over time. From $0.0003
   per analyzed tweet.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
-  Labels bullish, bearish, neutral or mixed stance, content type, conviction &
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
+  labels bullish, bearish, neutral or mixed stance, content type, conviction &
   asset relevance with AI. Use it when you follow stocks, crypto or trading
   talk. From $0.0003 per analyzed tweet.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
-  Labels news posts by format, source attribution & topic relevance with AI. Use
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
+  labels news posts by format, source attribution & topic relevance with AI. Use
   it when you separate reporting from commentary. From $0.0003 per analyzed
   tweet.
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  Answers your own category, score & yes/no questions for every tweet with AI.
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
+  answers your own category, score & yes/no questions for every tweet with AI.
   Use it when the preset analyses do not fit your labels. From $0.0003 per
   analyzed tweet.
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
-  Estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
+  estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
   trait answers. Use it when you study why tweets spread or flop. From $0.0003
   per analyzed tweet.
 
@@ -827,6 +850,7 @@ Sheets.
 
 ### Where do I get help?
 
-Open an issue on the Actor page or contact <support@xquik.com> with the run ID.
-Free diagnostics in the key-value store explain empty, partial or interrupted
-runs.
+Open an issue in the
+[Issues tab](https://apify.com/xquik/x-tweet-sentiment-analysis/issues) with the
+run ID. Free diagnostics in the key-value store explain runs that need
+attention. A run that gets no row back says why in its status.
