@@ -50,7 +50,7 @@ Xquik 的 X Community Scraper 通过 URL 或 ID 读取公开的 X（Twitter）�
 
 ### X Community Scraper 能提取哪些数据？
 
-社群行使用 `resultType: "community"`。主要字段如下：
+社群行使用 `resultType: "community"`。主要字段如下。
 
 | 字段              | 说明                           |
 | ----------------- | ------------------------------ |
@@ -71,7 +71,7 @@ Xquik 的 X Community Scraper 通过 URL 或 ID 读取公开的 X（Twitter）�
 | `banner`          | 横幅 URL、尺寸和主色           |
 | `sourceTarget`    | 你输入的 URL、ID、关键词或话题 |
 
-每种资源会添加各自类型的行：
+每种资源会添加各自类型的行。
 
 | `resultType`         | 资源或输入               | 每行对应           |
 | -------------------- | ------------------------ | ------------------ |
@@ -86,7 +86,7 @@ Xquik 的 X Community Scraper 通过 URL 或 ID 读取公开的 X（Twitter）�
 
 ## 如何使用 X Community Scraper 抓取社群数据？
 
-在 Apify Console 中按以下步骤操作：
+在 Apify Console 中按以下步骤操作。
 
 1. 打开一个[任务示例](#任务示例)或 Input 标签页。
 2. 把社群 URL 粘贴到 `startUrls`，或把 ID 粘贴到 `communityIds`。
@@ -106,7 +106,7 @@ Xquik 的 X Community Scraper 通过 URL 或 ID 读取公开的 X（Twitter）�
 }
 ```
 
-`startUrls` 中的每个 URL 可以写成普通字符串，也可以写成 `{ "url": "..." }` 对象：
+`startUrls` 中的每个 URL 可以写成普通字符串，也可以写成 `{ "url": "..." }` 对象。
 
 ```json
 {
@@ -237,8 +237,8 @@ Input 标签页列出了所有选项。请提供社群 URL 或 ID、关键词、
 | `communityIds`                 | 数字社群 ID                                                  |
 | `resources`                    | `info`、`tweets`、`media`、`search`、`members`、`moderators` |
 | `query`                        | `search` 资源使用的关键词                                    |
-| `queryType`                    | 关键词搜索的排序：`Latest` 或 `Top`                          |
-| `postsOrder`                   | 帖子的排序：`Latest` 或 `Top`                                |
+| `queryType`                    | 关键词搜索按 `Latest` 或 `Top` 排序                          |
+| `postsOrder`                   | 帖子按 `Latest` 或 `Top` 排序                                |
 | `memberNames`                  | 要在成员中查找的名称或用户名                                 |
 | `searchTerms`                  | 用于查找社群的关键词                                         |
 | `topics`                       | 话题名称或 ID，例如 `Technology`                             |
@@ -274,7 +274,7 @@ Input 标签页列出了所有选项。请提供社群 URL 或 ID、关键词、
 
 每行都是一个 JSON 对象。每行都有 `sourceTarget`，指向输入的社群、关键词或话题。Xquik 的 X Community Scraper 保留原始字段，不编造任何值。数据集 schema 为每个字段提供标题和说明。
 
-示例使用样例值，实际结果来自实时数据。一行社群信息如下：
+示例使用样例值，实际结果来自实时数据。一行社群信息如下。
 
 ```json
 {
@@ -305,39 +305,27 @@ Input 标签页列出了所有选项。请提供社群 URL 或 ID、关键词、
 
 所有 Xquik Actor 都使用同一套提取引擎、先过滤后计费的规则和诊断功能。按你需要的数据选择对应的 Actor。
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper)：从搜索、个人资料时间线、列表和帖子 ID 抓取帖子，提供 50 多个过滤条件和扁平导出。适合只要帖子数据、不做分析的场景。每行 $0.00015 起。
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从用户名、ID 或 URL 抓取个人资料，以及这些账号的帖子、回复、媒体和关注者。适合从账号而不是搜索入手的场景。每行 $0.00015 起。
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)：抓取帖子下的回复、评论和完整对话，提供 25 多个过滤条件。适合需要帖子下方讨论的场景。每行 $0.00015 起。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)：按帖子 URL 或 ID 批量抓取回复、引用、转帖者和帖子串。适合衡量谁与帖子有过互动的场景。每行 $0.00015 起。
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)：抓取引用帖子的帖子，包含文本、媒体、计数和作者，提供 11 个过滤条件。适合研究谁引用了帖子以及说了什么的场景。每条帖子 $0.00015 起。
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)：抓取关注者、正在关注的账号、列表成员、订阅者和社群成员，输出为个人资料行。适合需要受众或成员名单的场景。每条个人资料 $0.00015 起。
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)：按用户名、简介和位置搜索用户，可按关注者数、认证状态、账号年龄和位置过滤。适合通过搜索建立账号名单的场景。每条个人资料 $0.00015 起。
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)：通过 X 的“账号所在地”标签、账号连接 X 的方式和用户名更改记录，查看账号所在的位置。适合核实账号所在地的场景。每个账号 $0.00015 起。
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper)：从用户名、关注者或用户搜索获取账号在个人资料上公开的邮箱、电话和链接。适合需要个人资料上公开的邮箱的场景。每条个人资料 $0.00015 起。
-- [X List Scraper](https://apify.com/xquik/x-list-scraper)：从列表 URL 或 ID 抓取列表帖子、成员和关注者。适合用精选列表确定来源的场景。每行 $0.00015 起。
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper)：按关键词查找空间，读取标题、状态、时间、听众数、主持人和发言人，也可按 URL 或 ID 读取直播。适合追踪 X 上实时音频和视频的场景。每个空间或直播 $0.00015 起。
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper)：按位置抓取实时趋势，附带排名、帖子量、查询词和 WOEID。适合追踪各地热门话题的场景。每条趋势 $0.00015 起。
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper)：按关键词、地点、办公方式、职级和公司抓取 X 职位，附带薪资和申请链接。适合收集发布在 X 上的职位空缺的场景。每个职位 $0.00015 起。
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper)：把长篇 X 文章抓取为 Markdown 和纯文本，附带封面、作者、日期和指标。适合需要文章正文而不是帖子的场景。每篇文章 $0.00015 起。
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader)：从帖子或个人资料提取或存储照片、视频和 GIF，可选 MP4 和元数据。适合需要媒体文件本身的场景。每条媒体行 $0.00015 起。
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)：追踪品牌提及，用 AI 判断相关性和情感、回答客户体验问题，并比较各次运行。适合长期关注一个品牌的场景。每条已分析帖子 $0.0003 起。
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)：用 AI 为每条帖子标注态度、强度和讽刺概率。适合了解任意话题整体情感的场景。每条已分析帖子 $0.0003 起。
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)：用 AI 标注看涨、看跌、中性或混合立场，以及内容类型、信心程度和资产相关性。适合关注股票、加密货币或交易讨论的场景。每条已分析帖子 $0.0003 起。
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)：用 AI 按形式、来源标注和话题相关性标注新闻帖子。适合区分新闻报道和评论的场景。每条已分析帖子 $0.0003 起。
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)：用 AI 为每条帖子回答你自定义的分类、评分和是非问题。适合预设分析不符合你的标签的场景。每条已分析帖子 $0.0003 起。
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)：根据 8 个 AI 特征答案，为每条帖子估算 0 到 100 的 Viral Score 和结论。适合研究帖子为何走红或遇冷的场景。每条已分析帖子 $0.0003 起。
-
-## 需要抓取之外的功能？
-
-Xquik 还提供 53 个仪表盘工具、REST API、签名 webhook 和 MCP 服务器。
-
-- [API 文档](https://docs.xquik.com/introduction)：REST API 指南
-- [社群信息 API](https://docs.xquik.com/api-reference/x/community-info)：获取 1 个社群的记录
-- [社群帖子 API](https://docs.xquik.com/api-reference/x/community-tweets)：获取社群的帖子
-- [社群成员 API](https://docs.xquik.com/api-reference/x/community-members)：导出社群的成员
-- [查找社群 API](https://docs.xquik.com/api-reference/x/community-find)：按关键词查找社群
-- [MCP 服务器](https://docs.xquik.com/mcp/overview)：了解支持的工具
-- [Webhook](https://docs.xquik.com/webhooks/overview)：签名事件推送
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) 可从搜索、个人资料时间线、列表和帖子 ID 抓取帖子，提供 50 多个过滤条件和扁平导出。适合只要帖子数据、不做分析的场景。每行 $0.00015 起。
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) 从用户名、ID 或 URL 抓取个人资料，以及这些账号的帖子、回复、媒体和关注者。适合从账号而不是搜索入手的场景。每行 $0.00015 起。
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) 抓取帖子下的回复、评论和完整对话，提供 25 多个过滤条件。适合需要帖子下方讨论的场景。每行 $0.00015 起。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) 按帖子 URL 或 ID 批量抓取回复、引用、转帖者和帖子串。适合衡量谁与帖子有过互动的场景。每行 $0.00015 起。
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper) 抓取引用帖子的帖子，包含文本、媒体、计数和作者，提供 11 个过滤条件。适合研究谁引用了帖子以及说了什么的场景。每条帖子 $0.00015 起。
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) 抓取关注者、正在关注的账号、列表成员、订阅者和社群成员，输出为个人资料行。适合需要受众或成员名单的场景。每条个人资料 $0.00015 起。
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) 按用户名、简介和位置搜索用户，可按关注者数、认证状态、账号年龄和位置过滤。适合通过搜索建立账号名单的场景。每条个人资料 $0.00015 起。
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper) 通过 X 的“账号所在地”标签、账号连接 X 的方式和用户名更改记录，查看账号所在的位置。适合核实账号所在地的场景。每个账号 $0.00015 起。
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) 从用户名、关注者或用户搜索获取账号在个人资料上公开的邮箱、电话和链接。适合需要个人资料上公开的邮箱的场景。每条个人资料 $0.00015 起。
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) 从列表 URL 或 ID 抓取列表帖子、成员和关注者。适合用精选列表确定来源的场景。每行 $0.00015 起。
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) 按关键词查找空间，读取标题、状态、时间、听众数、主持人和发言人，也可按 URL 或 ID 读取直播。适合追踪 X 上实时音频和视频的场景。每个空间或直播 $0.00015 起。
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) 按位置抓取实时趋势，附带排名、帖子量、查询词和 WOEID。适合追踪各地热门话题的场景。每条趋势 $0.00015 起。
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) 按关键词、地点、办公方式、职级和公司抓取 X 职位，附带薪资和申请链接。适合收集发布在 X 上的职位空缺的场景。每个职位 $0.00015 起。
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) 把长篇 X 文章抓取为 Markdown 和纯文本，附带封面、作者、日期和指标。适合需要文章正文而不是帖子的场景。每篇文章 $0.00015 起。
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) 从帖子或个人资料提取或存储照片、视频和 GIF，可选 MP4 和元数据。适合需要媒体文件本身的场景。每条媒体行 $0.00015 起。
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring) 追踪品牌提及，用 AI 判断相关性和情感、回答客户体验问题，并比较各次运行。适合长期关注一个品牌的场景。每条已分析帖子 $0.0003 起。
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis) 用 AI 为每条帖子标注态度、强度和讽刺概率。适合了解任意话题整体情感的场景。每条已分析帖子 $0.0003 起。
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals) 用 AI 标注看涨、看跌、中性或混合立场，以及内容类型、信心程度和资产相关性。适合关注股票、加密货币或交易讨论的场景。每条已分析帖子 $0.0003 起。
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor) 用 AI 按形式、来源标注和话题相关性标注新闻帖子。适合区分新闻报道和评论的场景。每条已分析帖子 $0.0003 起。
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier) 用 AI 为每条帖子回答你自定义的分类、评分和是非问题。适合预设分析不符合你的标签的场景。每条已分析帖子 $0.0003 起。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer) 根据 8 个 AI 特征答案，为每条帖子估算 0 到 100 的 Viral Score 和结论。适合研究帖子为何走红或遇冷的场景。每条已分析帖子 $0.0003 起。
 
 ## 常见问题
 

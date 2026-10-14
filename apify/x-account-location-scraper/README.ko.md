@@ -40,7 +40,7 @@ X "Account based in"(계정 기반 위치) 라벨을 받습니다. 이 라벨은
 - 계정이 사용자 아이디를 바꾼 횟수 & 마지막으로 바꾼 시점.
 - X가 계정의 소속으로 표시하는 조직.
 - 일 단위 계정 연령 & 프로필 링크.
-- 전체 공개 프로필: 이름, 자기소개, 각종 수치, 인증, 날짜 & 이미지.
+- 이름, 자기소개, 각종 수치, 인증, 날짜 & 이미지를 담은 전체 공개 프로필.
 - X가 라벨을 내주지 않은 계정을 추가 요금 없이 1번 더 읽기.
 - 1회 실행에서 여러 계정을 동시에 읽고 입력 순서대로 전달.
 - @가 있거나 없는 사용자 아이디, x.com & twitter.com URL, 숫자 사용자 ID.
@@ -202,77 +202,78 @@ Actor가 성공으로 종료되면 전달이 끝났다는 뜻입니다. 추출�
 모든 Xquik Actor는 같은 추출 엔진, 필터 우선 과금 & 진단을 공유합니다. 필요한
 데이터에 맞는 Actor를 고르세요.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): 검색, 프로필
-  타임라인, 리스트 & 게시물 ID에서 게시물을 스크랩합니다. 50개 이상의 필터 &
-  플랫 내보내기를 지원합니다. 분석 없이 게시물 데이터만 필요할 때 사용하세요.
-  행당 $0.00015부터입니다.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): 사용자 아이디,
-  ID 또는 URL로 프로필과 그 계정의 게시물, 답글, 미디어 & 팔로워를 스크랩합니다.
-  검색이 아니라 계정에서 시작할 때 사용하세요. 행당 $0.00015부터입니다.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 게시물 아래의
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper)는 50개 이상의 필터
+  & 플랫 내보내기로 검색, 프로필 타임라인, 리스트 & 게시물 ID에서 게시물을
+  스크랩합니다. 분석 없이 게시물 데이터만 필요할 때 사용하세요. 행당
+  $0.00015부터입니다.
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)는 사용자
+  아이디, ID 또는 URL로 프로필과 그 계정의 게시물, 답글, 미디어 & 팔로워를
+  스크랩합니다. 검색이 아니라 계정에서 시작할 때 사용하세요. 행당
+  $0.00015부터입니다.
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)는 게시물 아래의
   답글(댓글) & 대화 전체를 25개 이상의 필터로 스크랩합니다. 게시물 아래의 토론이
   필요할 때 사용하세요. 행당 $0.00015부터입니다.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): 게시물
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)는 게시물
   URL이나 ID로 답글, 인용, 재게시한 사람 & 스레드를 대량으로 스크랩합니다. 누가
   게시물에 반응했는지 측정할 때 사용하세요. 행당 $0.00015부터입니다.
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)는
   게시물을 인용한 게시물을 텍스트, 미디어, 수치, 작성자 & 11개의 필터와 함께
   스크랩합니다. 누가 게시물을 인용했고 무엇을 말했는지 살펴볼 때 사용하세요.
   게시물당 $0.00015부터입니다.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): 팔로워,
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)는 팔로워,
   팔로잉, 리스트 멤버, 구독자 & 커뮤니티 멤버를 프로필 행으로 스크랩합니다.
   오디언스나 멤버 목록이 필요할 때 사용하세요. 프로필당 $0.00015부터입니다.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): 사용자
-  아이디, 자기소개 & 위치로 사용자를 검색합니다. 팔로워, 인증, 계정 연령 & 위치
-  필터를 지원합니다. 검색으로 계정 목록을 만들 때 사용하세요. 프로필당
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)는
+  사용자 아이디, 자기소개 & 위치로 사용자를 검색하며 팔로워, 인증, 계정 연령 &
+  위치 필터를 지원합니다. 검색으로 계정 목록을 만들 때 사용하세요. 프로필당
   $0.00015부터입니다.
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): 사용자 아이디,
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper)는 사용자 아이디,
   팔로워 또는 사용자 검색에서 계정이 프로필에 공개한 이메일, 전화번호 & 링크를
   가져옵니다. 프로필이 공개한 이메일이 필요할 때 사용하세요. 프로필당
   $0.00015부터입니다.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): 리스트 URL이나 ID로
+- [X List Scraper](https://apify.com/xquik/x-list-scraper)는 리스트 URL이나 ID로
   리스트 게시물, 멤버 & 팔로워를 스크랩합니다. 직접 고른 리스트로 수집 대상을
   정할 때 사용하세요. 행당 $0.00015부터입니다.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): 커뮤니티
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper)는 커뮤니티
   정보, 게시물, 검색 결과, 멤버 & 모더레이터를 스크랩합니다. X 커뮤니티에서
   데이터를 모을 때 사용하세요. 행당 $0.00015부터입니다.
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper): 키워드로
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper)는 키워드로
   스페이스를 찾고 제목, 상태, 시간, 청취자 수, 호스트 & 스피커를 읽습니다.
   URL이나 ID로 방송도 읽습니다. X의 라이브 오디오 & 동영상을 추적할 때
   사용하세요. 스페이스 또는 방송당 $0.00015부터입니다.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): 위치별 실시간
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper)는 위치별 실시간
   트렌드를 순위, 볼륨, 쿼리 & WOEID와 함께 스크랩합니다. 어디에서 무엇이
   트렌드인지 추적할 때 사용하세요. 트렌드당 $0.00015부터입니다.
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): 키워드, 지역, 근무
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper)는 키워드, 지역, 근무
   형태, 직급 & 회사별로 X 채용 공고를 급여 & 지원 링크와 함께 스크랩합니다. X에
   올라온 채용 공고를 모을 때 사용하세요. 공고당 $0.00015부터입니다.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): 장문의 X
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper)는 장문의 X
   아티클을 커버, 작성자, 날짜 & 지표와 함께 마크다운 & 텍스트로 스크랩합니다.
   게시물이 아니라 아티클 본문이 필요할 때 사용하세요. 아티클당
   $0.00015부터입니다.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader): 게시물이나
-  프로필의 사진, 동영상 & GIF를 추출하거나 저장합니다. MP4 & 메타데이터 옵션을
-  지원합니다. 미디어 파일 자체가 필요할 때 사용하세요. 미디어 행당
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader)는 게시물이나
+  프로필의 사진, 동영상 & GIF를 MP4 & 메타데이터 옵션과 함께 추출하거나
+  저장합니다. 미디어 파일 자체가 필요할 때 사용하세요. 미디어 행당
   $0.00015부터입니다.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
-  브랜드 언급을 추적하고 AI로 관련성, 감정 & 고객 경험 질문에 답합니다. 실행
-  결과끼리 비교도 합니다. 브랜드를 꾸준히 지켜볼 때 사용하세요. 분석한 게시물당
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)는
+  브랜드 언급을 추적하고, AI로 관련성, 감정 & 고객 경험 질문에 답하며, 실행
+  결과끼리 비교합니다. 브랜드를 꾸준히 지켜볼 때 사용하세요. 분석한 게시물당
   $0.0003부터입니다.
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)는
   AI로 게시물마다 태도, 강도 & 비꼼 확률을 라벨링합니다. 어떤 주제든 전반적인
   감정을 알고 싶을 때 사용하세요. 분석한 게시물당 $0.0003부터입니다.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)는
   AI로 강세, 약세, 중립, 혼조 입장과 콘텐츠 유형, 확신도 & 자산 관련성을
   라벨링합니다. 주식, 암호화폐, 트레이딩 이야기를 지켜볼 때 사용하세요. 분석한
   게시물당 $0.0003부터입니다.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)는
   AI로 뉴스 게시물을 형식, 출처 표기 & 주제 관련성에 따라 라벨링합니다. 보도와
   논평을 구분할 때 사용하세요. 분석한 게시물당 $0.0003부터입니다.
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  직접 만든 카테고리, 점수 & 예/아니오 질문에 AI가 게시물마다 답합니다. 기본
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)는
+  직접 만든 카테고리, 점수 & 예/아니오 질문에 AI로 게시물마다 답합니다. 기본
   분석이 원하는 라벨과 맞지 않을 때 사용하세요. 분석한 게시물당
   $0.0003부터입니다.
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)는
   AI의 특성 답변 8개로 게시물마다 0에서 100까지의 Viral Score & 판정을
   추정합니다. 게시물이 왜 퍼지거나 묻히는지 분석할 때 사용하세요. 분석한
   게시물당 $0.0003부터입니다.

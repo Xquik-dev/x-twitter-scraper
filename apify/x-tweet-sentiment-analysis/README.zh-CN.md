@@ -85,7 +85,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 | `tweetLanguage`、`language` | `lang` |
 | `startDate`、`endDate` | `since`、`until` |
 
-该 Actor 直接接受这些常见名称。它还能读取其他帖子抓取 Actor 的过滤字段名。在这里没有对应字段的过滤条件，会变成本次运行每一次搜索中的 X 搜索运算符，运行日志会在开头列出这些运算符。`sort` 请用 `Latest` 或 `Top`。语言代码和日期边界保持不变。上限作用于所有目标。下面的输入可以直接运行：
+该 Actor 直接接受这些常见名称。它还能读取其他帖子抓取 Actor 的过滤字段名。在这里没有对应字段的过滤条件，会变成本次运行每一次搜索中的 X 搜索运算符，运行日志会在开头列出这些运算符。`sort` 请用 `Latest` 或 `Top`。语言代码和日期边界保持不变。上限作用于所有目标。下面的输入可以直接运行。
 
 ```json
 { "searchTerms": ["from:NASA"], "sort": "Latest", "maxItems": 5 }
@@ -93,25 +93,25 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 其他输入需要在运行前转换。
 
-把单个 `tweetUrl` 放进 `startUrls`：
+把单个 `tweetUrl` 放进 `startUrls`。
 
 ```json
 { "startUrls": ["https://x.com/NASA/status/2105727882588807607"] }
 ```
 
-把 `text`、`Texts`、数据集字符串或文件字符串放进 `texts`：
+把 `text`、`Texts`、数据集字符串或文件字符串放进 `texts`。
 
 ```json
 { "texts": ["Support fixed my issue. Thank you."] }
 ```
 
-把 `hashtag` 或 `cashtag` 改成搜索字符串：
+把 `hashtag` 或 `cashtag` 改成搜索字符串。
 
 ```json
 { "searchTerms": ["#Artemis lang:en", "$AAPL lang:en"], "maxItems": 5 }
 ```
 
-把 `minLikes`、`minReplies` 和 `minRetweets` 换成这些字段名：
+把 `minLikes`、`minReplies` 和 `minRetweets` 换成这些字段名。
 
 ```json
 { "min_faves": 10, "min_replies": 2, "min_retweets": 3 }
@@ -127,7 +127,7 @@ Xquik 的 X Tweet Sentiment Analysis 每条已分析帖子 $0.0003 起，不收�
 
 ## 输入与输出示例
 
-上面的输入可以直接复制使用。一行省略后的输出如下：
+上面的输入可以直接复制使用。一行省略后的输出如下。
 
 ```json
 {
@@ -159,7 +159,7 @@ Xquik 的 X Tweet Sentiment Analysis 每条已分析帖子 $0.0003 起，不收�
 
 ## 运行摘要与扁平答案
 
-运行在以下 4 种情况下，会向键值存储写入一条 `analysis-summary` 记录：
+运行在以下 4 种情况下，会向键值存储写入一条 `analysis-summary` 记录。
 
 - 运行遇到问题或规模较大。
 - 设置了 `monitor` 但没有 `baselineDatasetId`，即系列中的第一次运行。
@@ -183,7 +183,7 @@ Xquik 的 X Tweet Sentiment Analysis 每条已分析帖子 $0.0003 起，不收�
 
 ## 与之前的运行比较
 
-传入 `monitor.baselineDatasetId`，即之前一次已完成、分析设置相同的运行的数据集 ID。比较会读取那次运行的行，所以即使那次运行跳过了摘要，也能正常比较。之后每行都会多一个 `monitor` 对象。它的状态可能是：
+传入 `monitor.baselineDatasetId`，即之前一次已完成、分析设置相同的运行的数据集 ID。比较会读取那次运行的行，所以即使那次运行跳过了摘要，也能正常比较。之后每行都会多一个 `monitor` 对象。它的状态可能是以下几种之一。
 
 - 没有基线时为 `first_run`。
 - 之前的运行中没有的帖子为 `new_to_baseline`。
@@ -215,301 +215,301 @@ Xquik 的 X Tweet Sentiment Analysis 每条已分析帖子 $0.0003 起，不收�
 
 [季终集评价文本](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-season-finale-reactions)
 
-在你的季终集评价草稿中区分赞扬和批评。2026-10-01 观察到 3 段不重复的自备文本。上限：3。这些是你自己的示例文本，不是受众调研。
+在你的季终集评价草稿中区分赞扬和批评。2026-10-01 观察到 3 段不重复的自备文本。上限为 3。这些是你自己的示例文本，不是受众调研。
 
 #### 手机发布讨论
 
 [2026 年 9 月 iPhone 发布帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-iphone-launch-posts)
 
-查看 9 月固定日期窗口内的发布讨论。2026-10-01 观察到 5 条不重复的帖子。上限：5。公告和个人观点都可能匹配。
+查看 9 月固定日期窗口内的发布讨论。2026-10-01 观察到 5 条不重复的帖子。上限为 5。公告和个人观点都可能匹配。
 
 #### 中场秀评价
 
 [中场秀评价文本](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-super-bowl-halftime-show)
 
-检查你的中场秀评价中褒贬混合的判断和讽刺。2026-10-01 观察到 3 段不重复的自备文本。上限：3。这些是你自己的示例评价，不是演出现场的反应。
+检查你的中场秀评价中褒贬混合的判断和讽刺。2026-10-01 观察到 3 段不重复的自备文本。上限为 3。这些是你自己的示例评价，不是演出现场的反应。
 
 #### 电动车体验
 
 [电动车体验帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-toward-new-electric-car)
 
-查找关于驾驶或选购电动车的帖子。2026-10-01 观察到 5 条不重复的帖子。上限：5。个人化短语可能匹配到玩笑或转述的经历。
+查找关于驾驶或选购电动车的帖子。2026-10-01 观察到 5 条不重复的帖子。上限为 5。个人化短语可能匹配到玩笑或转述的经历。
 
 #### 电影讨论
 
 [漫威电影讨论帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-marvel-movie-audiences)
 
-挑选观众评论前，先查看电影讨论。2026-10-01 观察到 5 条不重复的帖子。上限：5。Marvel 这个词可能匹配到无关的用法。
+挑选观众评论前，先查看电影讨论。2026-10-01 观察到 5 条不重复的帖子。上限为 5。Marvel 这个词可能匹配到无关的用法。
 
 #### 艺人媒体配文
 
 [Taylor Swift 媒体配文的语气](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-taylor-swift-album-reactions)
 
-查看这位艺人为近期媒体所配的文字。2026-10-01 观察到 5 条不重复的帖子。上限：5。配文无法描述图片或视频中展示的全部内容。
+查看这位艺人为近期媒体所配的文字。2026-10-01 观察到 5 条不重复的帖子。上限为 5。配文无法描述图片或视频中展示的全部内容。
 
 #### 游戏发售帖子串
 
 [游戏发售更新帖子串](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-video-game-launch)
 
-对照关于竞品游戏的回应阅读一则公告。2026-10-01 观察到 5 条不重复的帖子。上限：5。这个帖子串提到多款游戏，并包含它的首帖。
+对照关于竞品游戏的回应阅读一则公告。2026-10-01 观察到 5 条不重复的帖子。上限为 5。这个帖子串提到多款游戏，并包含它的首帖。
 
 #### 远程办公讨论
 
 [远程办公讨论](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-remote-work)
 
-比较远程办公讨论中表达的态度。2026-10-01 观察到 5 条不重复的帖子。上限：5。可能出现招聘广告和重复的观点。
+比较远程办公讨论中表达的态度。2026-10-01 观察到 5 条不重复的帖子。上限为 5。可能出现招聘广告和重复的观点。
 
 #### 航空公司帖子
 
 [航空公司讨论帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airline-passengers)
 
-挑选服务反馈前，先查看提到航空公司的帖子。2026-10-01 观察到 5 条不重复的帖子。上限：5。提到航空公司不能证明作者是乘客。
+挑选服务反馈前，先查看提到航空公司的帖子。2026-10-01 观察到 5 条不重复的帖子。上限为 5。提到航空公司不能证明作者是乘客。
 
 #### 大学橄榄球讨论
 
 [大学橄榄球讨论](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-college-football-fans)
 
-把球迷观点和大学橄榄球推广区分开。2026-10-01 观察到 5 条不重复的帖子。上限：5。除球迷观点外，赛事预告和推广也可能匹配。
+把球迷观点和大学橄榄球推广区分开。2026-10-01 观察到 5 条不重复的帖子。上限为 5。除球迷观点外，赛事预告和推广也可能匹配。
 
 #### 利率讨论
 
 [利率讨论](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-interest-rates)
 
-查看围绕利率的市场态度和政策态度。2026-10-01 观察到 5 条不重复的帖子。上限：5。主要主题可能是某位政治人物，也可能是市场。
+查看围绕利率的市场态度和政策态度。2026-10-01 观察到 5 条不重复的帖子。上限为 5。主要主题可能是某位政治人物，也可能是市场。
 
 #### 滑板车讨论
 
 [电动滑板车讨论](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-toward-electric-scooters)
 
-挑选骑行者反馈前，先查找滑板车讨论。2026-10-01 观察到 5 条不重复的帖子。上限：5。除个人体验外，广告、研究和玩笑也可能匹配。
+挑选骑行者反馈前，先查找滑板车讨论。2026-10-01 观察到 5 条不重复的帖子。上限为 5。除个人体验外，广告、研究和玩笑也可能匹配。
 
 #### 餐厅体验
 
 [新餐厅体验](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-restaurant-openings)
 
-查看关于新餐厅的第一人称措辞。2026-10-01 观察到 5 条不重复的帖子。上限：5。个人措辞也可能出现在邀请或推荐中。
+查看关于新餐厅的第一人称措辞。2026-10-01 观察到 5 条不重复的帖子。上限为 5。个人措辞也可能出现在邀请或推荐中。
 
 #### 公开列表信息流的语气
 
 [公开列表信息流的语气](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-ai-coding-assistants)
 
-查看某个公开列表中帖子的语气。2026-10-01 观察到 5 条不重复的帖子。上限：5。成员可能讨论其他主题，也可能转帖别人的文字。
+查看某个公开列表中帖子的语气。2026-10-01 观察到 5 条不重复的帖子。上限为 5。成员可能讨论其他主题，也可能转帖别人的文字。
 
 #### 设备账号的回复
 
 [Google 设备账号回复的语气](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-smart-home-device-owners)
 
-查看某个设备账号的措辞，包括回复。2026-10-01 观察到 5 条不重复的帖子。上限：5。缺少上级帖子的上下文，可能让个人资料回复的含义不完整。
+查看某个设备账号的措辞，包括回复。2026-10-01 观察到 5 条不重复的帖子。上限为 5。缺少上级帖子的上下文，可能让个人资料回复的含义不完整。
 
 #### 马拉松训练
 
 [马拉松训练讨论](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-marathon-runners)
 
-从训练动态和马拉松计划中找出态度。2026-10-01 观察到 5 条不重复的帖子。上限：5。除跑者动态外，还可能出现计划和推广。
+从训练动态和马拉松计划中找出态度。2026-10-01 观察到 5 条不重复的帖子。上限为 5。除跑者动态外，还可能出现计划和推广。
 
 #### 行程规划
 
 [个人东京旅行帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-tourist-destinations)
 
-查看个人行程计划和旅行故事。2026-10-01 观察到 5 条不重复的帖子。上限：5。名称带 Tokyo 的活动可能匹配，但并不描述日本之旅。
+查看个人行程计划和旅行故事。2026-10-01 观察到 5 条不重复的帖子。上限为 5。名称带 Tokyo 的活动可能匹配，但并不描述日本之旅。
 
 #### 流媒体价格讨论
 
 [Netflix 价格讨论帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-streaming-price-increases)
 
-查看退订原因前，先查找对 Netflix 价格的担忧。2026-10-01 观察到 5 条不重复的帖子。上限：5。价格短语选出的是担忧，不是有代表性的观众样本。
+查看退订原因前，先查找对 Netflix 价格的担忧。2026-10-01 观察到 5 条不重复的帖子。上限为 5。价格短语选出的是担忧，不是有代表性的观众样本。
 
 #### 学习用品采购
 
 [2026 年 8 月学习用品帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-back-to-school-shoppers)
 
-查看 8 月窗口内的 50 条学习用品帖子。2026-10-01 观察到 50 条不重复的帖子。上限：50。经我们查看，这 50 个 ID 中有 42 行明显相关。
+查看 8 月窗口内的 50 条学习用品帖子。2026-10-01 观察到 50 条不重复的帖子。上限为 50。经我们查看，这 50 个 ID 中有 42 行明显相关。
 
 #### 火车晚点
 
 [火车晚点经历帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-public-transit)
 
-查找与火车晚点有关的抱怨和经历。2026-10-01 观察到 5 条不重复的帖子。上限：5。个人化短语可能漏掉官方通知。
+查找与火车晚点有关的抱怨和经历。2026-10-01 观察到 5 条不重复的帖子。上限为 5。个人化短语可能漏掉官方通知。
 
 #### 宠物食品讨论
 
 [宠物食品体验帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-pet-food-brands)
 
-在更广泛的宠物护理讨论中查看提到宠物食品的帖子。2026-10-01 观察到 5 条不重复的帖子。上限：5。护理或兽医讨论可能顺带提到食品品牌。
+在更广泛的宠物护理讨论中查看提到宠物食品的帖子。2026-10-01 观察到 5 条不重复的帖子。上限为 5。护理或兽医讨论可能顺带提到食品品牌。
 
 #### 选定的梦幻体育帖子
 
 [一批梦幻体育帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-fantasy-football-apps)
 
-分析选定的一批梦幻体育帖子。2026-10-01 观察到 2 条不重复的帖子。上限：2。标签针对每条帖子的主题，不一定是某个应用。
+分析选定的一批梦幻体育帖子。2026-10-01 观察到 2 条不重复的帖子。上限为 2。标签针对每条帖子的主题，不一定是某个应用。
 
 #### 咖啡店体验
 
 [咖啡店体验帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-coffee-shop-customers)
 
-挑选顾客反馈前，先查找关于咖啡店的评论。2026-10-01 观察到 5 条不重复的帖子。上限：5。作者的抱怨仍是未经核实的说法。
+挑选顾客反馈前，先查找关于咖啡店的评论。2026-10-01 观察到 5 条不重复的帖子。上限为 5。作者的抱怨仍是未经核实的说法。
 
 #### 住房市场
 
 [住房市场讨论](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-housing-market)
 
-查看关于住房市场的观点和新闻。2026-10-01 观察到 5 条不重复的帖子。上限：5。新闻和观点可能涉及不同的市场问题。
+查看关于住房市场的观点和新闻。2026-10-01 观察到 5 条不重复的帖子。上限为 5。新闻和观点可能涉及不同的市场问题。
 
 #### 赛事讨论
 
 [League of Legends 赛事帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-esports-tournament-viewers)
 
-把赛事讨论和门票或比赛推广区分开。2026-10-01 观察到 5 条不重复的帖子。上限：5。门票广告和比赛报道不是观众观点。
+把赛事讨论和门票或比赛推广区分开。2026-10-01 观察到 5 条不重复的帖子。上限为 5。门票广告和比赛报道不是观众观点。
 
 #### 播客发布方帖子
 
 [播客发布方帖子的语气](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-podcast-episodes)
 
-查看播客发布方自己的宣传内容。2026-10-01 观察到 5 条不重复的帖子。上限：5。发布方的语气不能衡量听众满意度。
+查看播客发布方自己的宣传内容。2026-10-01 观察到 5 条不重复的帖子。上限为 5。发布方的语气不能衡量听众满意度。
 
 #### 健身房对比
 
 [健身房对比评价文本](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-gym-memberships)
 
-检查你的评价中对 2 家健身房的综合态度。2026-10-01 观察到 3 段不重复的自备文本。上限：3。每段文本中，2 个目标共用 1 个情感答案。
+检查你的评价中对 2 家健身房的综合态度。2026-10-01 观察到 3 段不重复的自备文本。上限为 3。每段文本中，2 个目标共用 1 个情感答案。
 
 #### 租车
 
 [租车体验帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-car-rental-customers)
 
-查看服务问题前，先查找关于租车的评论。2026-10-01 观察到 5 条不重复的帖子。上限：5。除租车者的讲述外，咨询和推广也可能匹配。
+查看服务问题前，先查找关于租车的评论。2026-10-01 观察到 5 条不重复的帖子。上限为 5。除租车者的讲述外，咨询和推广也可能匹配。
 
 #### 校园讨论
 
 [大学费用和校园帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-university-life)
 
-挑选与费用有关的帖子前，先查看校园讨论。2026-10-01 观察到 5 条不重复的帖子。上限：5。校园新闻和批评不能证明学生的亲身经历。
+挑选与费用有关的帖子前，先查看校园讨论。2026-10-01 观察到 5 条不重复的帖子。上限为 5。校园新闻和批评不能证明学生的亲身经历。
 
 #### 婚礼筹备
 
 [个人婚礼筹备帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-wedding-planning-posts)
 
-查找关于婚礼计划和费用的第一人称措辞。2026-10-01 观察到 5 条不重复的帖子。上限：5。除筹备经历外，故事、玩笑和顺带提及的措辞也可能匹配。
+查找关于婚礼计划和费用的第一人称措辞。2026-10-01 观察到 5 条不重复的帖子。上限为 5。除筹备经历外，故事、玩笑和顺带提及的措辞也可能匹配。
 
 #### 充电体验
 
 [电动车充电体验帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-ev-charging-experiences)
 
-在电动车讨论中查看充电体验。2026-10-01 观察到 5 条不重复的帖子。上限：5。充电可能只是另一个车辆问题的次要话题。
+在电动车讨论中查看充电体验。2026-10-01 观察到 5 条不重复的帖子。上限为 5。充电可能只是另一个车辆问题的次要话题。
 
 #### 报税讨论
 
 [2026 年春季 TurboTax 报税帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-tax-filing-software)
 
-查看春季固定日期窗口内的报税讨论。2026-10-01 观察到 5 条不重复的帖子。上限：5。帖子不能核实当前的费用或税务规定。
+查看春季固定日期窗口内的报税讨论。2026-10-01 观察到 5 条不重复的帖子。上限为 5。帖子不能核实当前的费用或税务规定。
 
 #### 主题公园游玩
 
 [主题公园游玩讨论](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-theme-park-visitors)
 
-挑选游玩反应前，先查找提到主题公园的帖子。2026-10-01 观察到 5 条不重复的帖子。上限：5。顺带的提及可能匹配到谈论其他主题的较长帖子。
+挑选游玩反应前，先查找提到主题公园的帖子。2026-10-01 观察到 5 条不重复的帖子。上限为 5。顺带的提及可能匹配到谈论其他主题的较长帖子。
 
 #### 食品杂货支出
 
 [食品杂货预算经历帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-grocery-prices)
 
-查找关于食品杂货支出的第一人称评论。2026-10-01 观察到 5 条不重复的帖子。上限：5。更广泛的政治、营养或创作者讨论也可能提到食品杂货支出。
+查找关于食品杂货支出的第一人称评论。2026-10-01 观察到 5 条不重复的帖子。上限为 5。更广泛的政治、营养或创作者讨论也可能提到食品杂货支出。
 
 #### 相机讨论
 
 [手机相机讨论](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-phone-camera-reviews)
 
-对照照片、评测和公告查看提到相机的帖子。2026-10-01 观察到 5 条不重复的帖子。上限：5。在其他公告中，相机可能只是顺带提及。
+对照照片、评测和公告查看提到相机的帖子。2026-10-01 观察到 5 条不重复的帖子。上限为 5。在其他公告中，相机可能只是顺带提及。
 
 #### 选定的运动鞋帖子
 
 [一条选定的运动鞋帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-sneaker-drop-reactions)
 
-分析一条已知的帖子，不做宽泛的关键词搜索。2026-10-01 观察到 1 条不重复的帖子。上限：1。这条选定的配文没有描述图片的每个细节。
+分析一条已知的帖子，不做宽泛的关键词搜索。2026-10-01 观察到 1 条不重复的帖子。上限为 1。这条选定的配文没有描述图片的每个细节。
 
 #### 客服聊天机器人
 
 [客服聊天机器人讨论帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-customer-support-chatbots)
 
-挑选服务投诉前，先查找关于客服聊天机器人的讨论。2026-10-01 观察到 5 条不重复的帖子。上限：5。情感支持机器人和企业回应也可能匹配。
+挑选服务投诉前，先查找关于客服聊天机器人的讨论。2026-10-01 观察到 5 条不重复的帖子。上限为 5。情感支持机器人和企业回应也可能匹配。
 
 #### 音乐节讨论
 
 [2026 年 4 月 Coachella 讨论](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-music-festival-attendees)
 
-查看 4 月窗口内的 50 条音乐节帖子。2026-10-01 观察到 50 条不重复的帖子。上限：50。这 50 个 ID 中有 47 行相关，还有重复的新闻稿。
+查看 4 月窗口内的 50 条音乐节帖子。2026-10-01 观察到 50 条不重复的帖子。上限为 50。这 50 个 ID 中有 47 行相关，还有重复的新闻稿。
 
 #### 电费账单
 
 [电费账单讨论](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-electric-bills)
 
-对照政策讨论查看个人电费支出。2026-10-01 观察到 5 条不重复的帖子。上限：5。政策说法和价格预测仍未经核实。
+对照政策讨论查看个人电费支出。2026-10-01 观察到 5 条不重复的帖子。上限为 5。政策说法和价格预测仍未经核实。
 
 #### 篮球阵容变动
 
 [NBA 交易和签约讨论](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-nba-trade-reactions)
 
-挑选球迷反应前，先查找交易和签约讨论。2026-10-01 观察到 5 条不重复的帖子。上限：5。其他报道可能顺带提到球员或球队。
+挑选球迷反应前，先查找交易和签约讨论。2026-10-01 观察到 5 条不重复的帖子。上限为 5。其他报道可能顺带提到球员或球队。
 
 #### 住宿讨论
 
 [Airbnb 住宿讨论](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-airbnb-stays)
 
-在住宿讨论中聚焦对 Airbnb 的态度。2026-10-01 观察到 5 条不重复的帖子。上限：5。除房客故事外，还可能出现房东推广和应用相关的帖子。
+在住宿讨论中聚焦对 Airbnb 的态度。2026-10-01 观察到 5 条不重复的帖子。上限为 5。除房客故事外，还可能出现房东推广和应用相关的帖子。
 
 #### 读书反应
 
 [读书反应帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-book-club-readers)
 
-查看读书反应，不预设作者是读书会成员。2026-10-01 观察到 5 条不重复的帖子。上限：5。与电影的比较和个人阅读观点都可能匹配。
+查看读书反应，不预设作者是读书会成员。2026-10-01 观察到 5 条不重复的帖子。上限为 5。与电影的比较和个人阅读观点都可能匹配。
 
 #### 食材包体验
 
 [HelloFresh 体验帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-meal-kit-services)
 
-查看产品体验前，先查找关于食材包的评论。2026-10-01 观察到 5 条不重复的帖子。上限：5。计划、广告和更广泛的个人故事都可能提到这个品牌。
+查看产品体验前，先查找关于食材包的评论。2026-10-01 观察到 5 条不重复的帖子。上限为 5。计划、广告和更广泛的个人故事都可能提到这个品牌。
 
 #### 比赛讨论
 
 [Formula 1 比赛讨论帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-formula-one-race-weekends)
 
-对照车队和车手的声明查看比赛讨论。2026-10-01 观察到 5 条不重复的帖子。上限：5。被引用的车手声明可能在不同 ID 中重复出现。
+对照车队和车手的声明查看比赛讨论。2026-10-01 观察到 5 条不重复的帖子。上限为 5。被引用的车手声明可能在不同 ID 中重复出现。
 
 #### 约会应用体验
 
 [约会应用体验帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-dating-app-experiences)
 
-查找约会应用的体验、关于配对的言论和玩笑。2026-10-01 观察到 5 条不重复的帖子。上限：5。关于配对的言论和玩笑不能核实客户身份。
+查找约会应用的体验、关于配对的言论和玩笑。2026-10-01 观察到 5 条不重复的帖子。上限为 5。关于配对的言论和玩笑不能核实客户身份。
 
 #### 机场等候帖子
 
 [机场等候和休息室帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airport-travelers)
 
-对照出行通知查看关于机场等候的评论。2026-10-01 观察到 5 条不重复的帖子。上限：5。除个人等候经历外，还可能出现官方通知。
+对照出行通知查看关于机场等候的评论。2026-10-01 观察到 5 条不重复的帖子。上限为 5。除个人等候经历外，还可能出现官方通知。
 
 #### 学校午餐讨论
 
 [学校午餐讨论](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-school-lunch-programs)
 
-查看关于学校午餐的个人帖子和政策辩论。2026-10-01 观察到 5 条不重复的帖子。上限：5。作者可能包括机构，不只是家长。
+查看关于学校午餐的个人帖子和政策辩论。2026-10-01 观察到 5 条不重复的帖子。上限为 5。作者可能包括机构，不只是家长。
 
 #### 啤酒品鉴
 
 [精酿啤酒品鉴帖子](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-craft-beer-drinkers)
 
-挑选评价示例前，先查找啤酒品鉴观点。2026-10-01 观察到 5 条不重复的帖子。上限：5。只带链接的简短配文可能缺少足够的上下文，无法判断明确的态度。
+挑选评价示例前，先查找啤酒品鉴观点。2026-10-01 观察到 5 条不重复的帖子。上限为 5。只带链接的简短配文可能缺少足够的上下文，无法判断明确的态度。
 
 #### 对接公告的引用
 
 [SpaceX 对接公告的引用](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-space-launches)
 
-查看某个固定时间之后对一则对接公告的引用。2026-10-01 观察到 5 条不重复的帖子。上限：5。引用可能是邀请或中性描述，不只是反应。
+查看某个固定时间之后对一则对接公告的引用。2026-10-01 观察到 5 条不重复的帖子。上限为 5。引用可能是邀请或中性描述，不只是反应。
 
 #### 生日帖子的回复
 
 [NASA 生日帖子的回复](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-replies-to-a-news-post)
 
-查看对一条生日帖子的直接回复。2026-10-01 观察到 5 条不重复的帖子。上限：5。缺少根帖子的上下文，可能让回复答案的含义不完整。
+查看对一条生日帖子的直接回复。2026-10-01 观察到 5 条不重复的帖子。上限为 5。缺少根帖子的上下文，可能让回复答案的含义不完整。
 
 检查结果时，把 `maxItems` 设得小一些。上限限制的是输出，不是可获取的数量。如果符合条件的帖子较少，修改过滤条件前先查看运行报告。每次只放宽 1 项设置，例如日期或互动下限。记下你改动的设置。
 
@@ -519,27 +519,27 @@ Xquik 的 X Tweet Sentiment Analysis 每条已分析帖子 $0.0003 起，不收�
 
 所有 Xquik Actor 都使用同一套提取引擎、先过滤后计费的规则和诊断功能。按你需要的数据选择对应的 Actor。
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper)：从搜索、个人资料时间线、列表和帖子 ID 抓取帖子，提供 50 多个过滤条件和扁平导出。适合只要帖子数据、不做分析的场景。每行 $0.00015 起。
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)：从用户名、ID 或 URL 抓取个人资料，以及这些账号的帖子、回复、媒体和关注者。适合从账号而不是搜索入手的场景。每行 $0.00015 起。
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)：抓取帖子下的回复、评论和完整对话，提供 25 多个过滤条件。适合需要帖子下方讨论的场景。每行 $0.00015 起。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)：按帖子 URL 或 ID 批量抓取回复、引用、转帖者和帖子串。适合衡量谁与帖子有过互动的场景。每行 $0.00015 起。
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)：抓取引用帖子的帖子，包含文本、媒体、计数和作者，提供 11 个过滤条件。适合研究谁引用了帖子以及说了什么的场景。每条帖子 $0.00015 起。
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)：抓取关注者、正在关注的账号、列表成员、订阅者和社群成员，输出为个人资料行。适合需要受众或成员名单的场景。每条个人资料 $0.00015 起。
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)：按用户名、简介和位置搜索用户，可按关注者数、认证状态、账号年龄和位置过滤。适合通过搜索建立账号名单的场景。每条个人资料 $0.00015 起。
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)：通过 X 的“账号所在地”标签、账号连接 X 的方式和用户名更改记录，查看账号所在的位置。适合核实账号所在地的场景。每个账号 $0.00015 起。
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper)：从用户名、关注者或用户搜索获取账号在个人资料上公开的邮箱、电话和链接。适合需要个人资料上公开的邮箱的场景。每条个人资料 $0.00015 起。
-- [X List Scraper](https://apify.com/xquik/x-list-scraper)：从列表 URL 或 ID 抓取列表帖子、成员和关注者。适合用精选列表确定来源的场景。每行 $0.00015 起。
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper)：抓取社群信息、帖子、搜索结果、成员和版主。适合来源是 X 社群的场景。每行 $0.00015 起。
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper)：按关键词查找空间，读取标题、状态、时间、听众数、主持人和发言人，也可按 URL 或 ID 读取直播。适合追踪 X 上实时音频和视频的场景。每个空间或直播 $0.00015 起。
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper)：按位置抓取实时趋势，附带排名、帖子量、查询词和 WOEID。适合追踪各地热门话题的场景。每条趋势 $0.00015 起。
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper)：按关键词、地点、办公方式、职级和公司抓取 X 职位，附带薪资和申请链接。适合收集发布在 X 上的职位空缺的场景。每个职位 $0.00015 起。
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper)：把长篇 X 文章抓取为 Markdown 和纯文本，附带封面、作者、日期和指标。适合需要文章正文而不是帖子的场景。每篇文章 $0.00015 起。
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader)：从帖子或个人资料提取或存储照片、视频和 GIF，可选 MP4 和元数据。适合需要媒体文件本身的场景。每条媒体行 $0.00015 起。
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)：追踪品牌提及，用 AI 判断相关性和情感、回答客户体验问题，并比较各次运行。适合长期关注一个品牌的场景。每条已分析帖子 $0.0003 起。
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)：用 AI 标注看涨、看跌、中性或混合立场，以及内容类型、信心程度和资产相关性。适合关注股票、加密货币或交易讨论的场景。每条已分析帖子 $0.0003 起。
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)：用 AI 按形式、来源标注和话题相关性标注新闻帖子。适合区分新闻报道和评论的场景。每条已分析帖子 $0.0003 起。
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)：用 AI 为每条帖子回答你自定义的分类、评分和是非问题。适合预设分析不符合你的标签的场景。每条已分析帖子 $0.0003 起。
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)：根据 8 个 AI 特征答案，为每条帖子估算 0 到 100 的 Viral Score 和结论。适合研究帖子为何走红或遇冷的场景。每条已分析帖子 $0.0003 起。
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) 可从搜索、个人资料时间线、列表和帖子 ID 抓取帖子，提供 50 多个过滤条件和扁平导出。适合只要帖子数据、不做分析的场景。每行 $0.00015 起。
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) 从用户名、ID 或 URL 抓取个人资料，以及这些账号的帖子、回复、媒体和关注者。适合从账号而不是搜索入手的场景。每行 $0.00015 起。
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) 抓取帖子下的回复、评论和完整对话，提供 25 多个过滤条件。适合需要帖子下方讨论的场景。每行 $0.00015 起。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) 按帖子 URL 或 ID 批量抓取回复、引用、转帖者和帖子串。适合衡量谁与帖子有过互动的场景。每行 $0.00015 起。
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper) 抓取引用帖子的帖子，包含文本、媒体、计数和作者，提供 11 个过滤条件。适合研究谁引用了帖子以及说了什么的场景。每条帖子 $0.00015 起。
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) 抓取关注者、正在关注的账号、列表成员、订阅者和社群成员，输出为个人资料行。适合需要受众或成员名单的场景。每条个人资料 $0.00015 起。
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper) 按用户名、简介和位置搜索用户，可按关注者数、认证状态、账号年龄和位置过滤。适合通过搜索建立账号名单的场景。每条个人资料 $0.00015 起。
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper) 通过 X 的“账号所在地”标签、账号连接 X 的方式和用户名更改记录，查看账号所在的位置。适合核实账号所在地的场景。每个账号 $0.00015 起。
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) 从用户名、关注者或用户搜索获取账号在个人资料上公开的邮箱、电话和链接。适合需要个人资料上公开的邮箱的场景。每条个人资料 $0.00015 起。
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) 从列表 URL 或 ID 抓取列表帖子、成员和关注者。适合用精选列表确定来源的场景。每行 $0.00015 起。
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper) 抓取社群信息、帖子、搜索结果、成员和版主。适合来源是 X 社群的场景。每行 $0.00015 起。
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) 按关键词查找空间，读取标题、状态、时间、听众数、主持人和发言人，也可按 URL 或 ID 读取直播。适合追踪 X 上实时音频和视频的场景。每个空间或直播 $0.00015 起。
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) 按位置抓取实时趋势，附带排名、帖子量、查询词和 WOEID。适合追踪各地热门话题的场景。每条趋势 $0.00015 起。
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) 按关键词、地点、办公方式、职级和公司抓取 X 职位，附带薪资和申请链接。适合收集发布在 X 上的职位空缺的场景。每个职位 $0.00015 起。
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) 把长篇 X 文章抓取为 Markdown 和纯文本，附带封面、作者、日期和指标。适合需要文章正文而不是帖子的场景。每篇文章 $0.00015 起。
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) 从帖子或个人资料提取或存储照片、视频和 GIF，可选 MP4 和元数据。适合需要媒体文件本身的场景。每条媒体行 $0.00015 起。
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring) 追踪品牌提及，用 AI 判断相关性和情感、回答客户体验问题，并比较各次运行。适合长期关注一个品牌的场景。每条已分析帖子 $0.0003 起。
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals) 用 AI 标注看涨、看跌、中性或混合立场，以及内容类型、信心程度和资产相关性。适合关注股票、加密货币或交易讨论的场景。每条已分析帖子 $0.0003 起。
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor) 用 AI 按形式、来源标注和话题相关性标注新闻帖子。适合区分新闻报道和评论的场景。每条已分析帖子 $0.0003 起。
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier) 用 AI 为每条帖子回答你自定义的分类、评分和是非问题。适合预设分析不符合你的标签的场景。每条已分析帖子 $0.0003 起。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer) 根据 8 个 AI 特征答案，为每条帖子估算 0 到 100 的 Viral Score 和结论。适合研究帖子为何走红或遇冷的场景。每条已分析帖子 $0.0003 起。
 
 ## 常见问题与支持
 

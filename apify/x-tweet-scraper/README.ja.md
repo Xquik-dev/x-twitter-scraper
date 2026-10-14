@@ -328,23 +328,23 @@ XquikのX Tweet Scraperは、すべてのApifyプランで配信された行1件
 
 XquikのX Tweet Scraperは、コストと速度で他の11のポスト用Actorを上回りました。1行あたりのフィールド数の中央値は63で、他のActorの中央値の2倍でした。
 
-- `xquik/x-tweet-scraper`: 有効なポストは890件、有効なポスト1件あたり$0.000175、1秒あたり39.2件、1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
-- `xquik/x-tweet-scraper`: 有効なポストは883件、有効なポスト1件あたり$0.000176、1秒あたり25.2件、1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
-- `xquik/x-tweet-scraper`: 有効なポストは882件、有効なポスト1件あたり$0.000177、1秒あたり25.7件、1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
-- `xquik/x-tweet-scraper`: 有効なポストは877件、有効なポスト1件あたり$0.000178、1秒あたり26.9件、1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 有効なポストは813件、有効なポスト1件あたり$0.000185、1秒あたり10.5件、1行あたり36フィールドです。[実行を見る](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 有効なポストは805件、有効なポスト1件あたり$0.000187、1秒あたり10.6件、1行あたり36フィールドです。[実行を見る](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 有効なポストは805件、有効なポスト1件あたり$0.000187、1秒あたり10.7件、1行あたり36フィールドです。[実行を見る](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
-- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest`: 有効なポストは880件、有効なポスト1件あたり$0.000250、1秒あたり9.1件、1行あたり46フィールドです。[実行を見る](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
-- `scraper_one/x-posts-search`: 有効なポストは804件、有効なポスト1件あたり$0.000314、1秒あたり3.3件、1行あたり14フィールドです。[実行を見る](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
-- `danek/twitter-scraper`: 有効なポストは807件、有効なポスト1件あたり$0.000347、1秒あたり5.0件、1行あたり27フィールドです。[実行を見る](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
-- `tweetapi/twitter-x-search-scraper`: 有効なポストは337件、有効なポスト1件あたり$0.000374、1秒あたり2.6件、1行あたり28フィールドです。[実行を見る](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
-- `api-ninja/x-twitter-advanced-search`: 有効なポストは837件、有効なポスト1件あたり$0.000430、1秒あたり7.4件、1行あたり28フィールドです。[実行を見る](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
-- `apidojo/twitter-scraper-lite`: 有効なポストは251件、有効なポスト1件あたり$0.000494、1秒あたり12.9件、1行あたり54フィールドです。[実行を見る](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
-- `apidojo/tweet-scraper`: 有効なポストは481件、有効なポスト1件あたり$0.000832、1秒あたり7.8件、1行あたり55フィールドです。[実行を見る](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
-- `xtdata/twitter-x-scraper`: 有効なポストは1,378件、有効なポスト1件あたり$0.001168、1秒あたり11.9件、1行あたり67フィールドです。[実行を見る](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
-- `seemuapps/x-tweet-scraper`: 有効なポストは805件、有効なポスト1件あたり$0.001242、1秒あたり6.9件、1行あたり24フィールドです。[実行を見る](https://console.apify.com/view/runs/FstursEw43TbcipYU)
-- `maximedupre/twitter-scraper`: 有効なポストは46件、有効なポスト1件あたり$0.002846、1秒あたり0.3件、1行あたり31フィールドです。[実行を見る](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
+- `xquik/x-tweet-scraper`は、有効なポストを890件取得しました。有効なポスト1件あたり$0.000175、1秒あたり39.2件、1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
+- `xquik/x-tweet-scraper`は、有効なポストを883件取得しました。有効なポスト1件あたり$0.000176、1秒あたり25.2件、1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
+- `xquik/x-tweet-scraper`は、有効なポストを882件取得しました。有効なポスト1件あたり$0.000177、1秒あたり25.7件、1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
+- `xquik/x-tweet-scraper`は、有効なポストを877件取得しました。有効なポスト1件あたり$0.000178、1秒あたり26.9件、1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`は、有効なポストを813件取得しました。有効なポスト1件あたり$0.000185、1秒あたり10.5件、1行あたり36フィールドです。[実行を見る](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`は、有効なポストを805件取得しました。有効なポスト1件あたり$0.000187、1秒あたり10.6件、1行あたり36フィールドです。[実行を見る](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`は、有効なポストを805件取得しました。有効なポスト1件あたり$0.000187、1秒あたり10.7件、1行あたり36フィールドです。[実行を見る](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
+- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest`は、有効なポストを880件取得しました。有効なポスト1件あたり$0.000250、1秒あたり9.1件、1行あたり46フィールドです。[実行を見る](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
+- `scraper_one/x-posts-search`は、有効なポストを804件取得しました。有効なポスト1件あたり$0.000314、1秒あたり3.3件、1行あたり14フィールドです。[実行を見る](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
+- `danek/twitter-scraper`は、有効なポストを807件取得しました。有効なポスト1件あたり$0.000347、1秒あたり5.0件、1行あたり27フィールドです。[実行を見る](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
+- `tweetapi/twitter-x-search-scraper`は、有効なポストを337件取得しました。有効なポスト1件あたり$0.000374、1秒あたり2.6件、1行あたり28フィールドです。[実行を見る](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
+- `api-ninja/x-twitter-advanced-search`は、有効なポストを837件取得しました。有効なポスト1件あたり$0.000430、1秒あたり7.4件、1行あたり28フィールドです。[実行を見る](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
+- `apidojo/twitter-scraper-lite`は、有効なポストを251件取得しました。有効なポスト1件あたり$0.000494、1秒あたり12.9件、1行あたり54フィールドです。[実行を見る](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
+- `apidojo/tweet-scraper`は、有効なポストを481件取得しました。有効なポスト1件あたり$0.000832、1秒あたり7.8件、1行あたり55フィールドです。[実行を見る](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
+- `xtdata/twitter-x-scraper`は、有効なポストを1,378件取得しました。有効なポスト1件あたり$0.001168、1秒あたり11.9件、1行あたり67フィールドです。[実行を見る](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
+- `seemuapps/x-tweet-scraper`は、有効なポストを805件取得しました。有効なポスト1件あたり$0.001242、1秒あたり6.9件、1行あたり24フィールドです。[実行を見る](https://console.apify.com/view/runs/FstursEw43TbcipYU)
+- `maximedupre/twitter-scraper`は、有効なポストを46件取得しました。有効なポスト1件あたり$0.002846、1秒あたり0.3件、1行あたり31フィールドです。[実行を見る](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
 
 各Actorは同じ検索と同じフィルターで実行しました。他のActorは2026-09-27に、Xquikの実行は2026-09-29に`outputVariant: "rich"`で実行しました。すべての実行でBronzeティアを使いました。有効なポストとは、10件以上のいいねがある、重複のない英語のオリジナルポストです。コストは、有効なポスト1件あたりの顧客の総支払額です。当社のコストには、顧客が支払うApifyの利用料を含みます。1行あたりのフィールド数は、空でないフィールド数の中央値で、入れ子のフィールドも含みます。リストは1フィールドとして数えます。実行を開くと、入力、ログ、データセットを確認できます。
 
@@ -388,7 +388,7 @@ Xが実行できない検索は、失敗として数えます。このような�
 
 Inputタブにすべてのオプションがあります。`startUrls`、`twitterHandles`、`listIds`、`tweetIds`、`searchTerms`、`twitterContent`のうち、少なくとも1つを指定してください。ドキュメントに記載された別名でもかまいません。ほかのフィールドはすべて任意です。
 
-例:
+次のどれか1つだけで実行できます。
 
 - ポストのURLをStart URLsに貼り付けます。
 - プロフィールのURLを貼り付けるか、ユーザー名をX handlesに追加します。
@@ -428,74 +428,74 @@ Xは、`filter:vine`、`filter:consumer_video`、`filter:pro_video`、`filter:ne
 
 各項目は、すでに使っているフィールドを挙げ、その後に対応付け先のフィールドを示します。
 
-- `startUrls`、`urls`、`tweetUrls`、`postUrls`、`profileUrls`、`accountUrls`: `startUrls`
-- 1つの文字列としての`profileUrl`: `startUrls`
-- `tweetIds`、`tweetIDs`、`tweets`、`postIds`、`lookupPostIds`、`tweet_ids`、または1つの文字列としての`tweetId`: `tweetIds`
-- `twitterHandles`、`usernames`、`user_names`、`userNameList`、`handles`、`screenNames`、`profileTweets`: `twitterHandles`
-- 1つの文字列としての`username`、`handle`、`screenName`: `twitterHandles`
-- `searchTerms`、`searchQueries`、`queries`、`search`（リスト、または1行に1つの検索）: `searchTerms`
-- `twitterContent`、`query`、`searchQuery`: `twitterContent`
-- `maxItems`、`maxResults`、`max_results`、`resultsLimit`、`count`、`resultsCount`、`numberOfTweets`、`maxPosts`、`max_posts`、`max_items`、`maxTweets`、`tweetsDesired`、`maxTotalTweets`: `maxItems`
-- `per_profile_limit`: `maxItemsPerTarget`
-- `sort`: `queryType`
-- `search_type`、`searchType`、`query_type`、`search_sort`: `Top`と`Latest`は大文字小文字を問わず`queryType`。`Media`、`Photos`、`Videos`は`filter:media`、`filter:images`、`filter:videos`をオンにします。
-- `tweetLanguage`、`language`、`contentLanguage`: `lang`
-- `author`、`fromUser`: `from`
-- `inReplyTo`、`toUser`: `to`
-- `mentioning`: `@`
-- `start`、`startDate`、`timeSince`: `since`
-- `end`、`endDate`、`timeUntil`: `until`
-- 秒単位の`timeSinceUnix`、`sinceTime`、`timeUntilUnix`、`untilTime`: `since_time`、`until_time`
-- `timeWithinTime`、`withinTime`: `within_time`
-- `timeWindowHours`、`timeWindow`: それぞれ時間単位と日単位の`within_time`
-- `timeSinceId`、`sinceId`、`timeMaxId`、`maxId`: `since_id`、`max_id`
-- Google Search Scraperの`quickDateRange`（`d7`、`w2`、`m1`、`y`など）: `since_time`（実行開始時点からさかのぼって計算）
-- `minimumFavorites`、`minLikes`、`min_likes`、`minFaves`、`engagementMinLikes`、`Minimum_likes`: `min_faves`
-- `minimumRetweets`、`minRetweets`、`engagementMinRetweets`: `min_retweets`
-- `minimumReplies`、`minReplies`、`engagementMinReplies`、`Minimum_replies`: `min_replies`
-- `engagementMaxLikes`、`maxLikes`、`engagementMaxRetweets`、`maxRetweets`、`engagementMaxReplies`: `engagement.maxLikes`、`engagement.maxRetweets`、`engagement.maxReplies`
-- `onlyImage`、`onlyImages`、`has_images`: `filter:images`
-- `onlyVideo`、`onlyVideos`、`has_videos`: `filter:videos`
-- `onlyWithMedia`、`mediaOnly`: `filter:media`
-- `onlyQuote`、`onlyQuotes`: `filter:quote`
-- `onlyTwitterBlue`、`usersBlueVerifiedOnly`、`blue_verified_only`、`onlyBlueVerified`: `filter:blue_verified`
-- `engagementHasEngagement`、`hasEngagement`: `filter:has_engagement`
-- `mediaHasLinks`、`has_links`、`requireLinks`: `filter:links`
-- `mediaHasMentions`、`has_mentions`、`requireMentions`: `filter:mentions`
-- `mediaHasHashtags`、`has_hashtags`、`requireHashtags`: `filter:hashtags`
-- `mediaNewsOnly`、`mediaSafeContentOnly`: `filter:news`、`filter:safe`
-- 種類が1つの`mediaTypes`: その種類の`filter:`フィールド
-- `mediaSubtype`: `filter:media`、`filter:images`、または`filter:videos`
-- `includeNativeRetweets`、`includeRetweets`: `include:nativeretweets`
-- `excludeReplies`、`excludeRetweets`、falseに設定した`includeRetweets`、`tweetTypesExclude`: `tweetTypes.excludeReplies`、`tweetTypes.excludeRetweets`、`tweetTypes.excludeQuotes`
-- 種類が1つのリストとしての`tweetTypes`: `tweetTypes.replies`、`tweetTypes.quotes`、または`tweetTypes.nativeRetweets`
-- `tweetSubtype`: `tweetTypes.replies`、または`tweetTypes.quotes`。`self_threads`は演算子`filter:self_threads`を追加します。
-- `geotaggedNear`、`geoNear`: `near`
-- `withinRadius`、`geoWithinRadius`、`geoWithin`: `within`
-- `geoGeocode`: `geocode`
-- `tweetConversationId`、`tweetQuotedTweetId`、`tweetQuotedUserId`: `conversation_id`、`quoted_tweet_id`、`quoted_user_id`
-- `cardName`、`tweetPollTypes`: `card_name`
-- `search_query`: `twitterContent`
-- `profile_urls`: リンクは`startUrls`、ユーザー名は`twitterHandles`
-- `lookup_post_ids`、または1つの文字列としての`id`: `tweetIds`
-- カンマ区切りの1つのリストとしての`tweets`: `tweetIds`
+- `startUrls`、`urls`、`tweetUrls`、`postUrls`、`profileUrls`、`accountUrls`は`startUrls`に対応します。
+- 1つの文字列としての`profileUrl`は`startUrls`に対応します。
+- `tweetIds`、`tweetIDs`、`tweets`、`postIds`、`lookupPostIds`、`tweet_ids`、または1つの文字列としての`tweetId`は`tweetIds`に対応します。
+- `twitterHandles`、`usernames`、`user_names`、`userNameList`、`handles`、`screenNames`、`profileTweets`は`twitterHandles`に対応します。
+- 1つの文字列としての`username`、`handle`、`screenName`は`twitterHandles`に対応します。
+- リスト、または1行に1つの検索としての`searchTerms`、`searchQueries`、`queries`、`search`は`searchTerms`に対応します。
+- `twitterContent`、`query`、`searchQuery`は`twitterContent`に対応します。
+- `maxItems`、`maxResults`、`max_results`、`resultsLimit`、`count`、`resultsCount`、`numberOfTweets`、`maxPosts`、`max_posts`、`max_items`、`maxTweets`、`tweetsDesired`、`maxTotalTweets`は`maxItems`に対応します。
+- `per_profile_limit`は`maxItemsPerTarget`に対応します。
+- `sort`は`queryType`に対応します。
+- `search_type`、`searchType`、`query_type`、`search_sort`は、`Top`と`Latest`なら大文字小文字を問わず`queryType`に対応します。`Media`、`Photos`、`Videos`は`filter:media`、`filter:images`、`filter:videos`をオンにします。
+- `tweetLanguage`、`language`、`contentLanguage`は`lang`に対応します。
+- `author`、`fromUser`は`from`に対応します。
+- `inReplyTo`、`toUser`は`to`に対応します。
+- `mentioning`は`@`に対応します。
+- `start`、`startDate`、`timeSince`は`since`に対応します。
+- `end`、`endDate`、`timeUntil`は`until`に対応します。
+- 秒単位の`timeSinceUnix`、`sinceTime`、`timeUntilUnix`、`untilTime`は`since_time`、`until_time`に対応します。
+- `timeWithinTime`、`withinTime`は`within_time`に対応します。
+- `timeWindowHours`、`timeWindow`は、それぞれ時間単位と日単位の`within_time`に対応します。
+- `timeSinceId`、`sinceId`、`timeMaxId`、`maxId`は`since_id`、`max_id`に対応します。
+- Google Search Scraperの`quickDateRange`は`since_time`に対応し、実行開始時点からさかのぼって計算します。値は`d7`、`w2`、`m1`、`y`などです。
+- `minimumFavorites`、`minLikes`、`min_likes`、`minFaves`、`engagementMinLikes`、`Minimum_likes`は`min_faves`に対応します。
+- `minimumRetweets`、`minRetweets`、`engagementMinRetweets`は`min_retweets`に対応します。
+- `minimumReplies`、`minReplies`、`engagementMinReplies`、`Minimum_replies`は`min_replies`に対応します。
+- `engagementMaxLikes`、`maxLikes`、`engagementMaxRetweets`、`maxRetweets`、`engagementMaxReplies`は`engagement.maxLikes`、`engagement.maxRetweets`、`engagement.maxReplies`に対応します。
+- `onlyImage`、`onlyImages`、`has_images`は`filter:images`に対応します。
+- `onlyVideo`、`onlyVideos`、`has_videos`は`filter:videos`に対応します。
+- `onlyWithMedia`、`mediaOnly`は`filter:media`に対応します。
+- `onlyQuote`、`onlyQuotes`は`filter:quote`に対応します。
+- `onlyTwitterBlue`、`usersBlueVerifiedOnly`、`blue_verified_only`、`onlyBlueVerified`は`filter:blue_verified`に対応します。
+- `engagementHasEngagement`、`hasEngagement`は`filter:has_engagement`に対応します。
+- `mediaHasLinks`、`has_links`、`requireLinks`は`filter:links`に対応します。
+- `mediaHasMentions`、`has_mentions`、`requireMentions`は`filter:mentions`に対応します。
+- `mediaHasHashtags`、`has_hashtags`、`requireHashtags`は`filter:hashtags`に対応します。
+- `mediaNewsOnly`、`mediaSafeContentOnly`は`filter:news`、`filter:safe`に対応します。
+- 種類が1つの`mediaTypes`は、その種類の`filter:`フィールドに対応します。
+- `mediaSubtype`は`filter:media`、`filter:images`、または`filter:videos`に対応します。
+- `includeNativeRetweets`、`includeRetweets`は`include:nativeretweets`に対応します。
+- `excludeReplies`、`excludeRetweets`、falseに設定した`includeRetweets`、`tweetTypesExclude`は`tweetTypes.excludeReplies`、`tweetTypes.excludeRetweets`、`tweetTypes.excludeQuotes`に対応します。
+- 種類が1つのリストとしての`tweetTypes`は`tweetTypes.replies`、`tweetTypes.quotes`、または`tweetTypes.nativeRetweets`に対応します。
+- `tweetSubtype`は`tweetTypes.replies`、または`tweetTypes.quotes`に対応します。`self_threads`は演算子`filter:self_threads`を追加します。
+- `geotaggedNear`、`geoNear`は`near`に対応します。
+- `withinRadius`、`geoWithinRadius`、`geoWithin`は`within`に対応します。
+- `geoGeocode`は`geocode`に対応します。
+- `tweetConversationId`、`tweetQuotedTweetId`、`tweetQuotedUserId`は`conversation_id`、`quoted_tweet_id`、`quoted_user_id`に対応します。
+- `cardName`、`tweetPollTypes`は`card_name`に対応します。
+- `search_query`は`twitterContent`に対応します。
+- `profile_urls`は、リンクなら`startUrls`に、ユーザー名なら`twitterHandles`に対応します。
+- `lookup_post_ids`、または1つの文字列としての`id`は`tweetIds`に対応します。
+- カンマ区切りの1つのリストとしての`tweets`は`tweetIds`に対応します。
 
 一部のフィールドには、ここに対応するフィールドがありません。それぞれが表すXの検索演算子を、実行中のすべての検索に追加します。実行ログには、追加した演算子が最初に一覧で記録されます。
 
-- `usersFromUsers`、`from_users`、`usersToUsers`、`to_users`、`usersListMembers`: `from:`、`to:`、`list:`。値が複数ある場合は、`(from:a OR from:b)`のように「いずれか」として実行されます。
-- `usersMentionUsers`、`mentioning_users`: `@name`
-- `usersExcludeFromUsers`: `-from:`
-- `onlyVerifiedUsers`、`usersVerifiedOnly`、`verified_only`: `filter:verified`
-- `placeObjectId`、`geoPlaceId`、`placeId`、`place`: `place:`
-- `cardDomain`: `card_domain:`
-- `appsSources`、`appsExcludeSources`: `source:`、`-source:`
-- 値がそれぞれ1つの`contentKeywords`、`contentExactPhrases`、`contentHashtags`、`contentCashtags`: 単語、引用符で囲んだフレーズ、`#tag`、`$tag`
-- `contentExcludeKeywords`、`contentExcludeHashtags`、`exclude_words`、`hashtags_exclude`: `-word`、`-#tag`
-- `all_words`、`exact_phrases`: すべての単語とフレーズが一致する必要があります
-- `any_words`、`hashtags_any`: `(#a OR #b)`のような「いずれか」の条件
-- `contentQuestionMarks`: `?`
-- `contentEmoticons`: `positive`は`:)`、`negative`は`:(`
-- `tweet_type`: `filter:replies`、`filter:retweets`、およびそれぞれの`-filter:`形式
+- `usersFromUsers`、`from_users`、`usersToUsers`、`to_users`、`usersListMembers`は、`from:`、`to:`、`list:`を追加します。値が複数ある場合は、`(from:a OR from:b)`のように「いずれか」として実行されます。
+- `usersMentionUsers`、`mentioning_users`は`@name`を追加します。
+- `usersExcludeFromUsers`は`-from:`を追加します。
+- `onlyVerifiedUsers`、`usersVerifiedOnly`、`verified_only`は`filter:verified`を追加します。
+- `placeObjectId`、`geoPlaceId`、`placeId`、`place`は`place:`を追加します。
+- `cardDomain`は`card_domain:`を追加します。
+- `appsSources`、`appsExcludeSources`は`source:`、`-source:`を追加します。
+- 値がそれぞれ1つの`contentKeywords`、`contentExactPhrases`、`contentHashtags`、`contentCashtags`は、単語、引用符で囲んだフレーズ、`#tag`、`$tag`を追加します。
+- `contentExcludeKeywords`、`contentExcludeHashtags`、`exclude_words`、`hashtags_exclude`は`-word`、`-#tag`を追加します。
+- `all_words`、`exact_phrases`では、すべての単語とフレーズが一致する必要があります。
+- `any_words`、`hashtags_any`は、`(#a OR #b)`のような「いずれか」の条件を追加します。
+- `contentQuestionMarks`は`?`を追加します。
+- `contentEmoticons`は、`positive`なら`:)`を、`negative`なら`:(`を追加します。
+- `tweet_type`は、`filter:replies`、`filter:retweets`、およびそれぞれの`-filter:`形式を追加します。
 
 言葉で書かれたモードは`mode`に対応付けます。`Advanced Search`は`search`、`Get Tweet by ID`は`tweet`、`Get a Few Tweets`は`tweets`、`Get Replies`は`replies`、`Get Quotes`は`quotes`、`Get Retweeters`は`retweeters`、`Get Favoriters`は`favoriters`です。
 
@@ -511,7 +511,7 @@ Xは、`filter:vine`、`filter:consumer_video`、`filter:pro_video`、`filter:ne
 - このActorにはページという単位がありません。`maxPages`は`maxItems`に置き換えてください。
 - このActorには`userId`や`user_ids`のフィールドはありません。ユーザーIDはユーザー名と同じ場所に入れてください。`twitterHandles`、プロフィールのURL、`from:`の後で使えます。
 - `from`、`min_faves`、`since_time`、`filter:images`などの検索演算子のフィールドは、すでにXと同じ名前です。対応付けは不要です。
-- 他のActorが「すべて一致」か「いずれか一致」かを示していないリストは、値が1つのときに実行されます: `contentKeywords`、`contentExactPhrases`、`contentHashtags`、`contentCashtags`、`usersMentionUsers`、`mediaTypes`、`tweetTypes`。値が2つ以上あると、読み取りや課金の前に実行が止まります。メッセージには、それらを1つの検索語として書く方法が示されます。
+- 他のActorが「すべて一致」か「いずれか一致」かを示していないリストは、値が1つのときに実行されます。対象は`contentKeywords`、`contentExactPhrases`、`contentHashtags`、`contentCashtags`、`usersMentionUsers`、`mediaTypes`、`tweetTypes`です。値が2つ以上あると、読み取りや課金の前に実行が止まります。メッセージには、それらを1つの検索語として書く方法が示されます。
 - `People`または`Lists`に設定した`search_type`、`followers`に設定した`source_mode`、`engagementLevel`のプリセット、`Get Similar Tweets`モードは、読み取りや課金の前に実行を止めます。メッセージには、使うべきActorまたはフィールドが示されます。
 - `tweets`または`info`に設定した`category`は、何も変えません。`followers`、`user_info`、`replies`など、他のActorの役割にあたる値は実行を止めます。何も読み取らず、課金もしません。メッセージには、そのActorが示されます。
 
@@ -593,39 +593,27 @@ Apifyの[ビルドタグ](https://docs.apify.com/platform/actors/development/bui
 
 すべてのXquik Actorは、同じ抽出エンジン、フィルター優先の課金、診断機能を共有しています。必要なデータに合うものを選んでください。
 
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): ユーザー名、ID、URLから、プロフィールとそのポスト、返信、メディア、フォロワーをスクレイピングします。検索ではなくアカウントから始めるときに使います。1行あたり$0.00015から。
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25以上のフィルターで、ポストへの返信、コメント、会話全体をスクレイピングします。ポストの下の議論が必要なときに使います。1行あたり$0.00015から。
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): ポストのURLまたはIDから、返信、引用ポスト、リポストしたユーザー、スレッドを一括でスクレイピングします。誰がポストに反応したかを測るときに使います。1行あたり$0.00015から。
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper): ポストを引用したポストを、テキスト、メディア、件数、著者とともに、11のフィルターでスクレイピングします。誰がポストを引用し、何と言ったかを調べたいときに使います。1ポストあたり$0.00015から。
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): フォロワー、フォロー中、リストのメンバー、購読者、コミュニティのメンバーをプロフィール行としてスクレイピングします。オーディエンスやメンバーの一覧が必要なときに使います。1プロフィールあたり$0.00015から。
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper): ユーザー名、自己紹介、所在地でユーザーを検索し、フォロワー数、認証、アカウント年数、所在地で絞り込みます。検索からアカウントの一覧を作るときに使います。1プロフィールあたり$0.00015から。
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper): Xの「アカウントの所在地」ラベル、Xへの接続方法、ユーザー名の変更履歴から、アカウントの所在地を確認します。アカウントの所在地を確かめたいときに使います。1アカウントあたり$0.00015から。
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): ユーザー名、フォロワー、ユーザー検索から、アカウントがプロフィールで公開しているメールアドレス、電話番号、リンクを取得します。プロフィールが公開しているメールアドレスが必要なときに使います。1プロフィールあたり$0.00015から。
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): リストのURLまたはIDから、リストのポスト、メンバー、フォロワーをスクレイピングします。厳選したリストを情報源にするときに使います。1行あたり$0.00015から。
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): コミュニティの情報、ポスト、検索結果、メンバー、モデレーターをスクレイピングします。Xのコミュニティを情報源にするときに使います。1行あたり$0.00015から。
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper): キーワードからスペースを見つけ、タイトル、状態、時刻、リスナー数、ホスト、スピーカーを読み取ります。URLまたはIDでブロードキャストも読み取ります。Xのライブ音声とライブ動画を追うときに使います。スペースまたはブロードキャスト1件あたり$0.00015から。
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): 地域別のリアルタイムトレンドを、順位、ボリューム、クエリ、WOEIDとともにスクレイピングします。どこで何がトレンドかを追うときに使います。1トレンドあたり$0.00015から。
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): キーワード、勤務地、勤務形態、職位レベル、企業からXの求人を、給与と応募リンクとともにスクレイピングします。Xに掲載された求人を集めるときに使います。1求人あたり$0.00015から。
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): 長文のXの記事を、カバー画像、著者、日付、指標とともにMarkdownとテキストでスクレイピングします。ポストではなく記事の本文が必要なときに使います。1記事あたり$0.00015から。
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader): ポストやプロフィールから写真、動画、GIFを抽出または保存します。MP4とメタデータのオプションがあります。メディアファイルそのものが必要なときに使います。1メディア行あたり$0.00015から。
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring): ブランドへの言及を、AIによる関連性、感情、顧客体験の回答とともに追跡し、実行どうしを比較します。ブランドを継続して見守るときに使います。分析済みポスト1件あたり$0.0003から。
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis): すべてのポストに、AIで態度、強度、皮肉の確率のラベルを付けます。任意のトピックの全体的な感情を知りたいときに使います。分析済みポスト1件あたり$0.0003から。
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals): AIで、強気、弱気、中立、混在のスタンス、コンテンツの種類、確信度、資産との関連性のラベルを付けます。株、暗号資産、トレードの話題を追うときに使います。分析済みポスト1件あたり$0.0003から。
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor): AIで、ニュースのポストに形式、情報源の明示、トピックとの関連性のラベルを付けます。報道と論評を分けるときに使います。分析済みポスト1件あたり$0.0003から。
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier): すべてのポストについて、独自のカテゴリー、スコア、はい/いいえの質問にAIが答えます。既定の分析が自分のラベルに合わないときに使います。分析済みポスト1件あたり$0.0003から。
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer): AIによる8つの特性の回答から、すべてのポストについて0から100のViral Scoreと判定を推定します。ポストが広がる理由や伸びない理由を調べるときに使います。分析済みポスト1件あたり$0.0003から。
-
-## スクレイピング以外も必要ですか？
-
-Xquikは、47個のダッシュボードツール、REST API、署名付きWebhook、MCPサーバーも提供しています。
-
-- [APIドキュメント](https://docs.xquik.com/introduction): REST APIのガイド
-- [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets): RESTでポストを検索
-- [Batch Tweets API](https://docs.xquik.com/api-reference/x/batch-tweets): IDで最大100件のポストを取得
-- [User Tweets API](https://docs.xquik.com/api-reference/x/user-tweets): ユーザーのタイムラインを取得
-- [MCPサーバー](https://docs.xquik.com/mcp/overview): 対応するツールを確認
-- [Webhooks](https://docs.xquik.com/webhooks/overview): 署名付きのイベント配信
-- [GitHub](https://github.com/Xquik-dev/x-twitter-scraper): ソースコードとissueトラッカー
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper)は、ユーザー名、ID、URLから、プロフィールとそのポスト、返信、メディア、フォロワーをスクレイピングします。検索ではなくアカウントから始めるときに使います。1行あたり$0.00015から。
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper)は、25以上のフィルターで、ポストへの返信、コメント、会話全体をスクレイピングします。ポストの下の議論が必要なときに使います。1行あたり$0.00015から。
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper)は、ポストのURLまたはIDから、返信、引用ポスト、リポストしたユーザー、スレッドを一括でスクレイピングします。誰がポストに反応したかを測るときに使います。1行あたり$0.00015から。
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)は、ポストを引用したポストを、テキスト、メディア、件数、著者とともに、11のフィルターでスクレイピングします。誰がポストを引用し、何と言ったかを調べたいときに使います。1ポストあたり$0.00015から。
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper)は、フォロワー、フォロー中、リストのメンバー、購読者、コミュニティのメンバーをプロフィール行としてスクレイピングします。オーディエンスやメンバーの一覧が必要なときに使います。1プロフィールあたり$0.00015から。
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)は、ユーザー名、自己紹介、所在地でユーザーを検索し、フォロワー数、認証、アカウント年数、所在地で絞り込みます。検索からアカウントの一覧を作るときに使います。1プロフィールあたり$0.00015から。
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)は、Xの「アカウントの所在地」ラベル、Xへの接続方法、ユーザー名の変更履歴から、アカウントの所在地を確認します。アカウントの所在地を確かめたいときに使います。1アカウントあたり$0.00015から。
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper)は、ユーザー名、フォロワー、ユーザー検索から、アカウントがプロフィールで公開しているメールアドレス、電話番号、リンクを取得します。プロフィールが公開しているメールアドレスが必要なときに使います。1プロフィールあたり$0.00015から。
+- [X List Scraper](https://apify.com/xquik/x-list-scraper)は、リストのURLまたはIDから、リストのポスト、メンバー、フォロワーをスクレイピングします。厳選したリストを情報源にするときに使います。1行あたり$0.00015から。
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper)は、コミュニティの情報、ポスト、検索結果、メンバー、モデレーターをスクレイピングします。Xのコミュニティを情報源にするときに使います。1行あたり$0.00015から。
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper)は、キーワードからスペースを見つけ、タイトル、状態、時刻、リスナー数、ホスト、スピーカーを読み取ります。URLまたはIDでブロードキャストも読み取ります。Xのライブ音声とライブ動画を追うときに使います。スペースまたはブロードキャスト1件あたり$0.00015から。
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper)は、地域別のリアルタイムトレンドを、順位、ボリューム、クエリ、WOEIDとともにスクレイピングします。どこで何がトレンドかを追うときに使います。1トレンドあたり$0.00015から。
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper)は、キーワード、勤務地、勤務形態、職位レベル、企業からXの求人を、給与と応募リンクとともにスクレイピングします。Xに掲載された求人を集めるときに使います。1求人あたり$0.00015から。
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper)は、長文のXの記事を、カバー画像、著者、日付、指標とともにMarkdownとテキストでスクレイピングします。ポストではなく記事の本文が必要なときに使います。1記事あたり$0.00015から。
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader)は、ポストやプロフィールの写真、動画、GIFを、MP4とメタデータのオプション付きで抽出または保存します。メディアファイルそのものが必要なときに使います。1メディア行あたり$0.00015から。
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)は、ブランドへの言及を、AIによる関連性、感情、顧客体験の回答とともに追跡し、実行どうしを比較します。ブランドを継続して見守るときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)は、すべてのポストに、態度、強度、皮肉の確率のラベルをAIで付けます。任意のトピックの全体的な感情を知りたいときに使います。分析済みポスト1件あたり$0.0003から。
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)は、強気、弱気、中立、混在のスタンス、コンテンツの種類、確信度、資産との関連性のラベルをAIで付けます。株、暗号資産、トレードの話題を追うときに使います。分析済みポスト1件あたり$0.0003から。
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)は、ニュースのポストに、形式、情報源の明示、トピックとの関連性のラベルをAIで付けます。報道と論評を分けるときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)は、すべてのポストについて、独自のカテゴリー、スコア、はい/いいえの質問にAIで答えます。既定の分析が自分のラベルに合わないときに使います。分析済みポスト1件あたり$0.0003から。
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)は、AIによる8つの特性の回答から、すべてのポストについて0から100のViral Scoreと判定を推定します。ポストが広がる理由や伸びない理由を調べるときに使います。分析済みポスト1件あたり$0.0003から。
 
 ## よくある質問
 

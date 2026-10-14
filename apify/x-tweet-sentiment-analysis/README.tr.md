@@ -113,7 +113,7 @@ adlarını da okur. Burada alanı olmayan bir filtre, çalıştırmanın her ara
 bir X arama operatörüne dönüşür ve çalıştırma günlüğü bu operatörleri en başta
 listeler. `sort` için `Latest` veya `Top` kullan. Dil kodlarını ve tarih
 sınırlarını koru. Sınırlar tüm hedeflerin toplamı için geçerlidir. Bu girdi
-çalıştırmaya hazır:
+çalıştırmaya hazır.
 
 ```json
 { "searchTerms": ["from:NASA"], "sort": "Latest", "maxItems": 5 }
@@ -121,26 +121,26 @@ sınırlarını koru. Sınırlar tüm hedeflerin toplamı için geçerlidir. Bu 
 
 Diğer girdileri çalıştırmadan önce dönüştürmen gerekir.
 
-Tek bir `tweetUrl` değerini `startUrls` içine sar:
+Tek bir `tweetUrl` değerini `startUrls` içine sar.
 
 ```json
 { "startUrls": ["https://x.com/NASA/status/2105727882588807607"] }
 ```
 
 `text`, `Texts`, veri kümesi metinlerini veya dosya metinlerini `texts` içine
-koy:
+koy.
 
 ```json
 { "texts": ["Support fixed my issue. Thank you."] }
 ```
 
-`hashtag` veya `cashtag` değerini arama metnine çevir:
+`hashtag` veya `cashtag` değerini arama metnine çevir.
 
 ```json
 { "searchTerms": ["#Artemis lang:en", "$AAPL lang:en"], "maxItems": 5 }
 ```
 
-`minLikes`, `minReplies` ve `minRetweets` yerine şu alan adlarını kullan:
+`minLikes`, `minReplies` ve `minRetweets` yerine aşağıdaki alan adlarını kullan.
 
 ```json
 { "min_faves": 10, "min_replies": 2, "min_retweets": 3 }
@@ -170,7 +170,7 @@ sekmesi bunu gösterir.
 ## Girdi ve çıktı örnekleri
 
 Yukarıdaki girdiyi olduğu gibi kopyalayabilirsin. Kısaltılmış bir çıktı satırı
-şöyle görünür:
+şöyle görünür.
 
 ```json
 {
@@ -207,7 +207,7 @@ sonuçları ve kesilen toplamayı açıklar. Çalıştırma raporu toplanan sat�
 ## Çalıştırma özeti ve düz cevaplar
 
 Bir çalıştırma 4 durumda anahtar-değer deposuna bir `analysis-summary` kaydı
-yazar:
+yazar.
 
 - Bir sorunla karşılaşırsa veya büyükse.
 - Bir serinin ilk çalıştırması olarak `monitor` alanını `baselineDatasetId`
@@ -248,7 +248,7 @@ JSON ayrıştırmaya gerek kalmaz. Başarısız ve atlanan satırlarda eşlem bo
 Aynı analiz ayarlarıyla tamamlanmış önceki bir çalıştırmanın veri kümesi ID'sini
 `monitor.baselineDatasetId` olarak gönder. Karşılaştırma o çalıştırmanın
 satırlarını okur. O çalıştırma özetini atlamış olsa bile çalışır. Ardından her
-satıra bir `monitor` nesnesi eklenir. Durumu şunlardan biri olabilir:
+satıra bir `monitor` nesnesi eklenir. Durumu aşağıdakilerden biri olabilir.
 
 - Temel çalıştırma yoksa `first_run`.
 - Önceki çalıştırmada olmayan gönderiler için `new_to_baseline`.
@@ -304,399 +304,401 @@ neden bağımsız görüşlerle aynı olmadığını gösterir.
 [Season finale review texts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-season-finale-reactions)
 
 Sezon finali değerlendirme taslaklarında övgüyü eleştiriden ayır. Verdiğin 3
-benzersiz metni 2026-10-01 tarihinde gözlemledik. Sınır: 3. Bunlar kendi örnek
-metinlerin, izleyici araştırması değil.
+benzersiz metni 2026-10-01 tarihinde gözlemledik. Sınır 3 olarak ayarlandı.
+Bunlar kendi örnek metinlerin, izleyici araştırması değil.
 
 #### Telefon lansmanı tartışması
 
 [September 2026 iPhone launch posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-iphone-launch-posts)
 
 Lansman tartışmasını sabit bir eylül tarih aralığında incele. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Hem duyurular hem kişisel
-görüşler eşleşebilir.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Hem
+duyurular hem kişisel görüşler eşleşebilir.
 
 #### Devre arası gösterisi değerlendirmeleri
 
 [Halftime show review texts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-super-bowl-halftime-show)
 
 Devre arası değerlendirmelerinde karışık yargıları ve alaycılığı kontrol et.
-Verdiğin 3 benzersiz metni 2026-10-01 tarihinde gözlemledik. Sınır: 3. Bunlar
-kendi örnek değerlendirmelerin, canlı gösteri tepkileri değil.
+Verdiğin 3 benzersiz metni 2026-10-01 tarihinde gözlemledik. Sınır 3 olarak
+ayarlandı. Bunlar kendi örnek değerlendirmelerin, canlı gösteri tepkileri değil.
 
 #### Elektrikli araba deneyimleri
 
 [Electric car experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-toward-new-electric-car)
 
 Elektrikli araba kullanmak veya seçmekle ilgili gönderileri bul. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Kişisel ifadeler şakalarla
-veya ikinci elden anlatımlarla eşleşebilir.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Kişisel
+ifadeler şakalarla veya ikinci elden anlatımlarla eşleşebilir.
 
 #### Film tartışması
 
 [Marvel movie discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-marvel-movie-audiences)
 
 İzleyici yorumlarını seçmeden önce film tartışmasını incele. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Marvel, kelimenin ilgisiz
-kullanımlarıyla eşleşebilir.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Marvel,
+kelimenin ilgisiz kullanımlarıyla eşleşebilir.
 
 #### Sanatçının medya açıklamaları
 
 [Taylor Swift media caption tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-taylor-swift-album-reactions)
 
 Sanatçının son medyaların yanındaki ifadelerini incele. 2026-10-01 tarihinde 5
-benzersiz gönderi gözlemledik. Sınır: 5. Açıklamalar görsellerde veya videolarda
-gösterilen her şeyi anlatamaz.
+benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Açıklamalar görsellerde
+veya videolarda gösterilen her şeyi anlatamaz.
 
 #### Oyun çıkışı gönderi dizisi
 
 [Game release update thread](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-video-game-launch)
 
 Bir duyuruyu rakip oyunlarla ilgili yanıtların yanında oku. 2026-10-01 tarihinde
-5 benzersiz gönderi gözlemledik. Sınır: 5. Gönderi dizisi birkaç oyundan
-bahseder ve açılış gönderisini içerir.
+5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Gönderi dizisi birkaç
+oyundan bahseder ve açılış gönderisini içerir.
 
 #### Uzaktan çalışma tartışması
 
 [Remote work discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-remote-work)
 
 Uzaktan çalışma tartışmasında ifade edilen tutumları karşılaştır. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. İş ilanları ve tekrarlanan
-görüşler çıkabilir.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. İş ilanları
+ve tekrarlanan görüşler çıkabilir.
 
 #### Havayolu gönderileri
 
 [Airline discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airline-passengers)
 
 Hizmet geri bildirimi seçmeden önce havayolu bahsetmelerini incele. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Bir bahsetme, yazarın yolcu
-olduğunu kanıtlamaz.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Bir
+bahsetme, yazarın yolcu olduğunu kanıtlamaz.
 
 #### Kolej futbolu tartışması
 
 [College football discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-college-football-fans)
 
 Taraftar görüşlerini kolej futbolu tanıtımından ayır. 2026-10-01 tarihinde 5
-benzersiz gönderi gözlemledik. Sınır: 5. Taraftar görüşlerinin yanında ön
-incelemeler ve tanıtımlar da eşleşebilir.
+benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Taraftar görüşlerinin
+yanında ön incelemeler ve tanıtımlar da eşleşebilir.
 
 #### Faiz oranı tartışması
 
 [Interest rate discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-interest-rates)
 
 Faiz oranlarıyla ilgili piyasa ve politika tutumlarını incele. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Ana konu bir siyasetçi veya
-piyasa olabilir.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Ana konu
+bir siyasetçi veya piyasa olabilir.
 
 #### Scooter tartışması
 
 [Electric scooter discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-toward-electric-scooters)
 
 Sürücü geri bildirimi seçmeden önce scooter tartışmasını bul. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Kişisel deneyimlerin
-yanında reklamlar, araştırmalar ve şakalar da eşleşebilir.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Kişisel
+deneyimlerin yanında reklamlar, araştırmalar ve şakalar da eşleşebilir.
 
 #### Restoran deneyimleri
 
 [New restaurant experiences](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-restaurant-openings)
 
 Yeni restoranlarla ilgili birinci ağızdan ifadeleri incele. 2026-10-01 tarihinde
-5 benzersiz gönderi gözlemledik. Sınır: 5. Kişisel ifadeler davetlerde veya
-önerilerde de geçebilir.
+5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Kişisel ifadeler
+davetlerde veya önerilerde de geçebilir.
 
 #### Herkese açık Liste akışının tonu
 
 [Public list feed tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-ai-coding-assistants)
 
 Herkese açık bir Listedeki gönderilerin tonunu incele. 2026-10-01 tarihinde 5
-benzersiz gönderi gözlemledik. Sınır: 5. Üyeler başka konuları tartışabilir ve
-başkasının ifadelerini yeniden gönderebilir.
+benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Üyeler başka konuları
+tartışabilir ve başkasının ifadelerini yeniden gönderebilir.
 
 #### Cihaz profili yanıtları
 
 [Google device profile reply tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-smart-home-device-owners)
 
 Yanıtlar dahil, bir cihaz profilinin ifadelerini incele. 2026-10-01 tarihinde 5
-benzersiz gönderi gözlemledik. Sınır: 5. Eksik üst gönderi bağlamı bir profil
-yanıtının anlamını sınırlayabilir.
+benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Eksik üst gönderi
+bağlamı bir profil yanıtının anlamını sınırlayabilir.
 
 #### Maraton antrenmanı
 
 [Marathon training discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-marathon-runners)
 
 Antrenman güncellemelerindeki ve maraton planlarındaki tutumları bul. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Koşucu güncellemelerinin
-yanında planlar ve tanıtımlar çıkabilir.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Koşucu
+güncellemelerinin yanında planlar ve tanıtımlar çıkabilir.
 
 #### Gezi planlama
 
 [Personal Tokyo trip posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-tourist-destinations)
 
 Kişisel gezi planlarını ve seyahat hikayelerini incele. 2026-10-01 tarihinde 5
-benzersiz gönderi gözlemledik. Sınır: 5. Adında Tokyo geçen etkinlikler bir
-Japonya gezisini anlatmadan eşleşebilir.
+benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Adında Tokyo geçen
+etkinlikler bir Japonya gezisini anlatmadan eşleşebilir.
 
 #### Yayın platformu fiyat tartışması
 
 [Netflix price discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-streaming-price-increases)
 
 İptal nedenlerini incelemeden önce Netflix fiyat kaygılarını bul. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Fiyat ifadeleri kaygıları
-seçer, temsili bir izleyici örneklemini değil.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Fiyat
+ifadeleri kaygıları seçer, temsili bir izleyici örneklemini değil.
 
 #### Okul malzemesi alışverişi
 
 [August 2026 school supply posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-back-to-school-shoppers)
 
 Bir ağustos aralığındaki 50 okul malzemesi gönderisini incele. 2026-10-01
-tarihinde 50 benzersiz gönderi gözlemledik. Sınır: 50. İncelememizde 50 ID'nin
-42'si açıkça ilgili satırdı.
+tarihinde 50 benzersiz gönderi gözlemledik. Sınır 50 olarak ayarlandı.
+İncelememizde 50 ID'nin 42'si açıkça ilgili satırdı.
 
 #### Tren gecikmeleri
 
 [Train delay experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-public-transit)
 
 Geciken trenlerle ilgili şikayetleri ve deneyimleri bul. 2026-10-01 tarihinde 5
-benzersiz gönderi gözlemledik. Sınır: 5. Kişisel ifadeler resmi duyuruları
-kaçırabilir.
+benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Kişisel ifadeler resmi
+duyuruları kaçırabilir.
 
 #### Evcil hayvan maması tartışması
 
 [Pet food experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-pet-food-brands)
 
 Daha geniş bakım tartışması içindeki evcil hayvan maması bahsetmelerini incele.
-2026-10-01 tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Bakım veya
-veteriner tartışmaları mama markalarından tesadüfen bahsedebilir.
+2026-10-01 tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı.
+Bakım veya veteriner tartışmaları mama markalarından tesadüfen bahsedebilir.
 
 #### Seçilmiş fantezi spor gönderileri
 
 [Fantasy sports post batch](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-fantasy-football-apps)
 
 Seçilmiş bir grup fantezi spor gönderisini analiz et. 2026-10-01 tarihinde 2
-benzersiz gönderi gözlemledik. Sınır: 2. Etiketler her gönderinin konusuyla
-ilgilidir, otomatik olarak bir uygulamayla değil.
+benzersiz gönderi gözlemledik. Sınır 2 olarak ayarlandı. Etiketler her
+gönderinin konusuyla ilgilidir, otomatik olarak bir uygulamayla değil.
 
 #### Kahve dükkanı deneyimleri
 
 [Coffee shop experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-coffee-shop-customers)
 
 Müşteri geri bildirimi seçmeden önce kahve dükkanı yorumlarını bul. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Yazar şikayetleri
-doğrulanmamış beyanlar olarak kalır.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Yazar
+şikayetleri doğrulanmamış beyanlar olarak kalır.
 
 #### Konut piyasası
 
 [Housing market discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-housing-market)
 
 Konut piyasasıyla ilgili görüşleri ve haberleri incele. 2026-10-01 tarihinde 5
-benzersiz gönderi gözlemledik. Sınır: 5. Haberler ve görüşler farklı piyasa
-konularıyla ilgili olabilir.
+benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Haberler ve görüşler
+farklı piyasa konularıyla ilgili olabilir.
 
 #### Turnuva tartışması
 
 [League of Legends tournament posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-esports-tournament-viewers)
 
 Turnuva tartışmasını bilet veya maç tanıtımından ayır. 2026-10-01 tarihinde 5
-benzersiz gönderi gözlemledik. Sınır: 5. Bilet reklamları ve maç raporları
-izleyici görüşü değildir.
+benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Bilet reklamları ve maç
+raporları izleyici görüşü değildir.
 
 #### Podcast yayıncısı gönderileri
 
 [Podcast publisher post tone](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-podcast-episodes)
 
 Podcast yayıncısının kendi mesajlarını incele. 2026-10-01 tarihinde 5 benzersiz
-gönderi gözlemledik. Sınır: 5. Yayıncının tonu dinleyici memnuniyetini ölçmez.
+gönderi gözlemledik. Sınır 5 olarak ayarlandı. Yayıncının tonu dinleyici
+memnuniyetini ölçmez.
 
 #### Spor salonu karşılaştırmaları
 
 [Gym comparison review texts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-gym-memberships)
 
 Değerlendirmelerinde 2 spor salonuna karşı ortak tutumu kontrol et. Verdiğin 3
-benzersiz metni 2026-10-01 tarihinde gözlemledik. Sınır: 3. İki hedef her
-metinde 1 duygu durumu cevabını paylaşır.
+benzersiz metni 2026-10-01 tarihinde gözlemledik. Sınır 3 olarak ayarlandı. İki
+hedef her metinde 1 duygu durumu cevabını paylaşır.
 
 #### Araç kiralama
 
 [Car rental experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-car-rental-customers)
 
 Hizmet kaygılarını incelemeden önce araç kiralama yorumlarını bul. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Kiralayanların
-anlatımlarının yanında sorular ve tanıtımlar da eşleşebilir.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı.
+Kiralayanların anlatımlarının yanında sorular ve tanıtımlar da eşleşebilir.
 
 #### Kampüs tartışması
 
 [University cost and campus posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-university-life)
 
 Maliyetle ilgili gönderileri seçmeden önce kampüs tartışmasını incele.
-2026-10-01 tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Kampüs haberleri
-ve eleştiriler öğrenci deneyimlerini kanıtlamaz.
+2026-10-01 tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı.
+Kampüs haberleri ve eleştiriler öğrenci deneyimlerini kanıtlamaz.
 
 #### Düğün planlama
 
 [Personal wedding planning posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-wedding-planning-posts)
 
 Düğün planları ve maliyetleriyle ilgili birinci ağızdan ifadeleri bul.
-2026-10-01 tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Planlama
-deneyimlerinin yanında hikayeler, şakalar ve tesadüfi ifadeler de eşleşebilir.
+2026-10-01 tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı.
+Planlama deneyimlerinin yanında hikayeler, şakalar ve tesadüfi ifadeler de
+eşleşebilir.
 
 #### Şarj deneyimleri
 
 [EV charging experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-ev-charging-experiences)
 
 Elektrikli araç tartışması içindeki şarj deneyimlerini incele. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Şarj, araçla ilgili başka
-bir kaygının yanında ikincil kalabilir.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Şarj,
+araçla ilgili başka bir kaygının yanında ikincil kalabilir.
 
 #### Vergi beyannamesi tartışması
 
 [Spring 2026 TurboTax filing posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-tax-filing-software)
 
 Beyanname tartışmasını sabit bir ilkbahar tarih aralığında incele. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Gönderiler güncel ücretleri
-veya vergi kurallarını doğrulamaz.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Gönderiler
+güncel ücretleri veya vergi kurallarını doğrulamaz.
 
 #### Tema parkı ziyaretleri
 
 [Theme park visit discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-theme-park-visitors)
 
 Ziyaret tepkilerini seçmeden önce tema parkı bahsetmelerini bul. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Tesadüfi göndermeler başka
-bir konudaki uzun gönderilerle eşleşebilir.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Tesadüfi
+göndermeler başka bir konudaki uzun gönderilerle eşleşebilir.
 
 #### Market harcamaları
 
 [Grocery budget experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-grocery-prices)
 
 Market harcamalarıyla ilgili birinci ağızdan yorumları bul. 2026-10-01 tarihinde
-5 benzersiz gönderi gözlemledik. Sınır: 5. Daha geniş siyaset, beslenme veya
-içerik üreticisi tartışmaları market harcamalarından bahsedebilir.
+5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Daha geniş siyaset,
+beslenme veya içerik üreticisi tartışmaları market harcamalarından bahsedebilir.
 
 #### Kamera tartışması
 
 [Phone camera discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-new-phone-camera-reviews)
 
 Kamera bahsetmelerini fotoğrafların, değerlendirmelerin ve duyuruların yanında
-incele. 2026-10-01 tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Kamera
-bahsetmeleri başka duyurularda tesadüfi olabilir.
+incele. 2026-10-01 tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak
+ayarlandı. Kamera bahsetmeleri başka duyurularda tesadüfi olabilir.
 
 #### Seçilmiş spor ayakkabı gönderisi
 
 [A selected sneaker post](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-sneaker-drop-reactions)
 
 Geniş bir anahtar kelime araması yapmadan bilinen bir gönderiyi analiz et.
-2026-10-01 tarihinde 1 benzersiz gönderi gözlemledik. Sınır: 1. Seçilen bu
-açıklama görselinin her ayrıntısını anlatmaz.
+2026-10-01 tarihinde 1 benzersiz gönderi gözlemledik. Sınır 1 olarak ayarlandı.
+Seçilen bu açıklama görselinin her ayrıntısını anlatmaz.
 
 #### Destek sohbet botları
 
 [Support chatbot discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-customer-support-chatbots)
 
 Hizmet şikayetlerini seçmeden önce destek sohbet botu tartışmasını bul.
-2026-10-01 tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Duygusal destek
-botları ve işletme yanıtları da eşleşebilir.
+2026-10-01 tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı.
+Duygusal destek botları ve işletme yanıtları da eşleşebilir.
 
 #### Festival tartışması
 
 [April 2026 Coachella discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-music-festival-attendees)
 
 Bir nisan aralığındaki 50 festival gönderisini incele. 2026-10-01 tarihinde 50
-benzersiz gönderi gözlemledik. Sınır: 50. 50 ID'de 47 ilgili satır ve
-tekrarlanan haber metni vardı.
+benzersiz gönderi gözlemledik. Sınır 50 olarak ayarlandı. 50 ID'de 47 ilgili
+satır ve tekrarlanan haber metni vardı.
 
 #### Elektrik faturaları
 
 [Electricity bill discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-electric-bills)
 
 Kişisel elektrik maliyetlerini politika tartışmasının yanında incele. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Politika iddiaları ve fiyat
-tahminleri doğrulanmamış kalır.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Politika
+iddiaları ve fiyat tahminleri doğrulanmamış kalır.
 
 #### Basketbol kadro değişiklikleri
 
 [NBA trade and signing discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-nba-trade-reactions)
 
 Taraftar tepkilerini seçmeden önce takas ve imza tartışmasını bul. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Başka haberler oyunculardan
-veya takımlardan tesadüfen bahsedebilir.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Başka
+haberler oyunculardan veya takımlardan tesadüfen bahsedebilir.
 
 #### Konaklama tartışması
 
 [Airbnb stay discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-airbnb-stays)
 
 Konaklama tartışması içinde Airbnb'ye karşı tutumlara odaklan. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Misafir hikayelerinin
-yanında ev sahibi tanıtımları ve uygulama gönderileri çıkabilir.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Misafir
+hikayelerinin yanında ev sahibi tanıtımları ve uygulama gönderileri çıkabilir.
 
 #### Kitap tepkileri
 
 [Book reading reaction posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-book-club-readers)
 
 Kitap kulübü üyeliği varsaymadan okuma tepkilerini incele. 2026-10-01 tarihinde
-5 benzersiz gönderi gözlemledik. Sınır: 5. Hem film karşılaştırmaları hem
-kişisel okuma görüşleri eşleşebilir.
+5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Hem film
+karşılaştırmaları hem kişisel okuma görüşleri eşleşebilir.
 
 #### Yemek kiti deneyimleri
 
 [HelloFresh experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-meal-kit-services)
 
 Ürün deneyimlerini incelemeden önce yemek kiti yorumlarını bul. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Planlar, reklamlar ve daha
-geniş kişisel hikayeler markadan bahsedebilir.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Planlar,
+reklamlar ve daha geniş kişisel hikayeler markadan bahsedebilir.
 
 #### Yarış tartışması
 
 [Formula 1 race discussion posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-formula-one-race-weekends)
 
 Yarış tartışmasını takım ve pilot açıklamalarının yanında incele. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Alıntılanan pilot
-açıklamaları farklı ID'lerde tekrarlanabilir.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Alıntılanan
+pilot açıklamaları farklı ID'lerde tekrarlanabilir.
 
 #### Flört uygulaması deneyimleri
 
 [Dating app experience posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-dating-app-experiences)
 
 Flört uygulaması deneyimlerini, eşleşme yorumlarını ve şakaları bul. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Eşleşme yorumları ve
-şakalar müşteri kimliklerini doğrulamaz.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Eşleşme
+yorumları ve şakalar müşteri kimliklerini doğrulamaz.
 
 #### Havalimanı bekleme gönderileri
 
 [Airport wait and lounge posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-airport-travelers)
 
 Havalimanı bekleme yorumlarını seyahat duyurularının yanında incele. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Kişisel bekleme
-deneyimlerinin yanında resmi duyurular çıkabilir.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Kişisel
+bekleme deneyimlerinin yanında resmi duyurular çıkabilir.
 
 #### Okul yemeği tartışması
 
 [School lunch discussion](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-school-lunch-programs)
 
 Okul yemekleriyle ilgili kişisel gönderileri ve politika tartışmasını incele.
-2026-10-01 tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Yazarlar
-arasında yalnızca veliler değil, kurumlar da olabilir.
+2026-10-01 tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı.
+Yazarlar arasında yalnızca veliler değil, kurumlar da olabilir.
 
 #### Bira tadımı
 
 [Craft beer tasting posts](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-craft-beer-drinkers)
 
 Değerlendirme örnekleri seçmeden önce bira tadımı görüşlerini bul. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Bağlantılı kısa
-açıklamalarda net bir tutum için yeterli bağlam olmayabilir.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Bağlantılı
+kısa açıklamalarda net bir tutum için yeterli bağlam olmayabilir.
 
 #### Kenetlenme duyurusu alıntıları
 
 [SpaceX docking announcement quotes](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-about-space-launches)
 
 Tek bir kenetlenme duyurusunun sabit bir zamandan sonraki alıntılarını incele.
-2026-10-01 tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Alıntılar
-yalnızca tepki değil, davet veya nötr betimleme de olabilir.
+2026-10-01 tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı.
+Alıntılar yalnızca tepki değil, davet veya nötr betimleme de olabilir.
 
 #### Doğum günü yanıtları
 
 [NASA birthday replies](https://apify.com/xquik/x-tweet-sentiment-analysis/examples/sentiment-of-replies-to-a-news-post)
 
 Tek bir doğum günü gönderisine gelen doğrudan yanıtları incele. 2026-10-01
-tarihinde 5 benzersiz gönderi gözlemledik. Sınır: 5. Eksik kök gönderi bağlamı
-bir yanıtın cevabının anlamını sınırlayabilir.
+tarihinde 5 benzersiz gönderi gözlemledik. Sınır 5 olarak ayarlandı. Eksik kök
+gönderi bağlamı bir yanıtın cevabının anlamını sınırlayabilir.
 
 Sonuçları incelerken `maxItems` değerini küçük tut. Bir sınır çıktıyı kısıtlar,
 mevcut miktarı değil. Daha az gönderi uygunsa filtrelerini değiştirmeden önce
@@ -713,92 +715,92 @@ Eksik alıntı veya yanıt bağlamı bir cevabı belirsiz kılabilir.
 Her Xquik Actor'ı aynı veri çekme motorunu, önce filtreleyen faturalandırmayı ve
 tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): Aramalardan,
-  profil zaman akışlarından, Listelerden ve gönderi ID'lerinden 50'den fazla
-  filtre ve düz dışa aktarımla gönderi kazır. Analiz değil, yalnızca gönderi
-  verisi gerektiğinde kullan. Satır başına $0.00015'ten başlar.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Kullanıcı adı,
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) aramalardan, profil
+  zaman akışlarından, Listelerden ve gönderi ID'lerinden 50'den fazla filtre ve
+  düz dışa aktarımla gönderi kazır. Analiz değil, yalnızca gönderi verisi
+  gerektiğinde kullan. Satır başına $0.00015'ten başlar.
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) kullanıcı adı,
   ID veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını ve
   takipçilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
   başına $0.00015'ten başlar.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25'ten fazla
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) 25'ten fazla
   filtreyle gönderilerin altındaki yanıtları, yorumları ve tüm konuşmaları
   kazır. Gönderilerin altındaki tartışmaya ihtiyacın olduğunda kullan. Satır
   başına $0.00015'ten başlar.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Gönderi
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) gönderi
   URL'leri veya ID'leri için toplu olarak yanıtları, alıntıları, yeniden
   gönderenleri ve gönderi dizilerini kazır. Gönderilerle kimin etkileşime
   girdiğini ölçtüğünde kullan. Satır başına $0.00015'ten başlar.
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
-  Gönderileri alıntılayan gönderileri metin, medya, sayılar, yazarlar ve 11
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
+  gönderileri alıntılayan gönderileri metin, medya, sayılar, yazarlar ve 11
   filtreyle kazır. Gönderileri kimin alıntıladığını ve ne dediğini incelemek
   istediğinde kullan. Gönderi başına $0.00015'ten başlar.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Takipçileri,
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) takipçileri,
   takip edilenleri, Liste üyelerini, aboneleri ve Topluluk üyelerini profil
   satırları olarak kazır. Kitle veya üye listelerine ihtiyacın olduğunda kullan.
   Profil başına $0.00015'ten başlar.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay işareti,
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)
+  kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay işareti,
   hesap yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri
   oluşturduğunda kullan. Profil başına $0.00015'ten başlar.
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   X'in "Account based in" etiketi, X'e nasıl bağlandıkları ve kullanıcı adı
   değişiklikleriyle hesapların nerede bulunduğunu kontrol eder. Hesapların
   nerede bulunduğunu doğrulaman gerektiğinde kullan. Hesap başına $0.00015'ten
   başlar.
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): Kullanıcı
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) kullanıcı
   adlarından, takipçilerden veya kullanıcı aramalarından, hesapların
   profillerinde yayımladığı e-postaları, telefonları ve bağlantıları alır.
   Profillerin yayımladığı e-postalara ihtiyacın olduğunda kullan. Profil başına
   $0.00015'ten başlar.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): Liste URL'lerinden
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) Liste URL'lerinden
   veya ID'lerinden Liste gönderilerini, üyelerini ve takipçilerini kazır.
   Kaynaklarını özenle seçilmiş bir Liste belirlediğinde kullan. Satır başına
   $0.00015'ten başlar.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): Topluluk
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper) Topluluk
   bilgilerini, gönderilerini, aramalarını, üyelerini ve moderatörlerini kazır.
   Kaynakların X Toplulukları olduğunda kullan. Satır başına $0.00015'ten başlar.
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Sohbet Odalarını
-  anahtar kelimeyle bulur; başlıklarını, durumlarını, zamanlarını, dinleyici
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) Sohbet Odalarını
+  anahtar kelimeyle bulur ve başlıklarını, durumlarını, zamanlarını, dinleyici
   sayılarını, sunucularını ve konuşmacılarını okur. Yayınları da URL veya ID ile
   okur. X'teki canlı ses ve video yayınlarını takip ettiğinde kullan. Sohbet
   Odası veya yayın başına $0.00015'ten başlar.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Sıralama,
-  hacim, sorgu ve WOEID ile konuma göre gerçek zamanlı gündemi kazır. Nerede
-  neyin gündemde olduğunu takip ettiğinde kullan. Gündem başlığı başına
-  $0.00015'ten başlar.
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): X iş ilanlarını
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) sıralama, hacim,
+  sorgu ve WOEID ile konuma göre gerçek zamanlı gündemi kazır. Nerede neyin
+  gündemde olduğunu takip ettiğinde kullan. Gündem başlığı başına $0.00015'ten
+  başlar.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) X iş ilanlarını
   anahtar kelime, yer, çalışma şekli, kıdem ve şirkete göre maaş ve başvuru
   bağlantılarıyla kazır. X'te yayımlanan iş ilanlarını topladığında kullan. İlan
   başına $0.00015'ten başlar.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): Uzun biçimli
-  X Makalelerini kapak, yazar, tarih ve metriklerle Markdown ve metin olarak
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) uzun biçimli X
+  Makalelerini kapak, yazar, tarih ve metriklerle Markdown ve metin olarak
   kazır. Gönderi değil, makale gövdesi gerektiğinde kullan. Makale başına
   $0.00015'ten başlar.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader): Gönderilerden
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) gönderilerden
   veya profillerden fotoğrafları, videoları ve GIF'leri MP4 ve metadata
   seçenekleriyle çıkarır veya depolar. Medya dosyalarının kendisine ihtiyacın
   olduğunda kullan. Medya satırı başına $0.00015'ten başlar.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
-  Markadan bahseden gönderileri yapay zeka destekli ilgi, duygu durumu ve
-  müşteri deneyimi cevaplarıyla izler. Çalıştırmaları da karşılaştırır. Bir
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
+  markadan bahseden gönderileri yapay zeka destekli ilgi, duygu durumu ve
+  müşteri deneyimi cevaplarıyla izler ve çalıştırmaları karşılaştırır. Bir
   markayı zaman içinde takip ettiğinde kullan. Analiz edilen gönderi başına
   $0.0003'ten başlar.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
-  Yapay zeka ile yükseliş, düşüş, nötr veya karışık duruşu, içerik türünü,
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
+  yapay zeka ile yükseliş, düşüş, nötr veya karışık duruşu, içerik türünü,
   kesinliği ve varlık ilgisini etiketler. Hisse senedi, kripto veya alım satım
-  konuşmalarını takip ettiğinde kullan. Analiz edilen gönderi başına
-  $0.0003'ten başlar.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
-  Yapay zeka ile haber gönderilerini biçim, kaynak atfı ve konu ilgisine göre
+  konuşmalarını takip ettiğinde kullan. Analiz edilen gönderi başına $0.0003'ten
+  başlar.
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
+  haber gönderilerini yapay zeka ile biçim, kaynak atfı ve konu ilgisine göre
   etiketler. Haberi yorumdan ayırdığında kullan. Analiz edilen gönderi başına
   $0.0003'ten başlar.
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  Yapay zeka ile her gönderi için kendi kategori, puan ve evet/hayır
-  sorularını cevaplar. Hazır analizler etiketlerine uymadığında kullan. Analiz
-  edilen gönderi başına $0.0003'ten başlar.
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
-  Yapay zekanın 8 özellik cevabından her gönderi için 0 ile 100 arasında bir
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
+  yapay zeka ile her gönderi için kendi kategori, puan ve evet/hayır sorularını
+  cevaplar. Hazır analizler etiketlerine uymadığında kullan. Analiz edilen
+  gönderi başına $0.0003'ten başlar.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
+  yapay zekanın 8 özellik cevabından her gönderi için 0 ile 100 arasında bir
   Viral Score ve bir karar tahmin eder. Gönderilerin neden yayıldığını veya
   tutmadığını incelediğinde kullan. Analiz edilen gönderi başına $0.0003'ten
   başlar.

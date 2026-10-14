@@ -37,15 +37,15 @@ başına $0.00015** ödersin. Apify, platform kullanımını ayrıca faturaland�
   hesaplar.
 - Sunucunun herkese açık profili, yardımcı sunucular, konuşmacılar ve X'in
   listelediği dinleyiciler.
-- Kayıt, klip ve kilit ayarları ile Sohbet Odasını duyuran gönderi; metni,
-  sayıları ve yazarıyla.
-- Sunucuların ve konuşmacıların Sohbet Odasında paylaştığı gönderiler; kimin, ne
-  zaman paylaştığıyla.
+- Kayıt, klip ve kilit ayarları ile Sohbet Odasını duyuran gönderi. Gönderi
+  metni, sayıları ve yazarıyla gelir.
+- Sunucuların ve konuşmacıların Sohbet Odasında paylaştığı gönderiler. Her biri
+  kimin, ne zaman paylaştığını da gösterir.
 - Bitmiş bir Sohbet Odasının kaydı, `includeReplay` ile HLS oynatma listesi
   URL'si olarak.
-- URL veya ID ile yayınlar: başlık, durum, zamanlar, izleyici sayıları ve
-  sunucu.
-- Faturalamadan önce tekilleştirme: 2 arama teriminin bulduğu bir Sohbet Odası 1
+- URL veya ID ile okunan yayınlar. Başlık, durum, zamanlar, izleyici sayıları ve
+  sunucu gelir.
+- Faturalamadan önce tekilleştirme. 2 arama teriminin bulduğu bir Sohbet Odası 1
   satırdır.
 
 ## X Sohbet Odaları nasıl bulunur
@@ -61,7 +61,7 @@ başına $0.00015** ödersin. Apify, platform kullanımını ayrıca faturaland�
 6. Veri kümesini JSON, CSV veya Excel olarak indir ya da Apify API'yi kullan.
 
 `startUrls` her URL'yi düz metin olarak ya da `{ "url": "..." }` nesnesi olarak
-alır:
+alır.
 
 ```json
 {
@@ -83,7 +83,7 @@ alır:
 ```
 
 Bir arama terimi, eşleşen gönderilerin paylaştığı Sohbet Odalarını bulur. X
-aramasının aldığı operatörleri alır:
+aramasının aldığı operatörleri alır.
 
 | Amaç                                                 | Arama terimi       |
 | ---------------------------------------------------- | ------------------ |
@@ -93,10 +93,10 @@ aramasının aldığı operatörleri alır:
 | 1 dildeki Sohbet Odaları                             | `startups lang:es` |
 | Çok beğenilen gönderilerin paylaştığı Sohbet Odaları | `nba min_faves:50` |
 
-`queryType` hangi gönderilerin öne çıkacağını seçer: en yeniler için `Latest`,
-en çok etkileşim alanlar için `Top`.
+`queryType` hangi gönderilerin öne çıkacağını seçer. En yeniler için `Latest`,
+en çok etkileşim alanlar için `Top` kullan.
 
-Zaten bildiğin Sohbet Odalarını URL veya ID ile oku:
+Zaten bildiğin Sohbet Odalarını URL veya ID ile oku.
 
 ```json
 {
@@ -105,18 +105,18 @@ Zaten bildiğin Sohbet Odalarını URL veya ID ile oku:
 }
 ```
 
-Bitmiş her Sohbet Odasının kaydını almak için `includeReplay` seçeneğini aç:
+Bitmiş her Sohbet Odasının kaydını almak için `includeReplay` seçeneğini aç.
 
 ```json
 { "spaceIds": ["1OGwblLjnQMKB"], "includeReplay": true }
 ```
 
-Satır o zaman `replay` taşır: `url` (HLS oynatma listesi), `streamType` ve
-`status`. Canlı, planlanmış veya kaydı olmayan bir Sohbet Odasında `replay`
-olmaz. Kayıt için ek ücret ödemezsin.
+Satır o zaman `url` (HLS oynatma listesi), `streamType` ve `status` içeren bir
+`replay` taşır. Canlı, planlanmış veya kaydı olmayan bir Sohbet Odasında
+`replay` olmaz. Kayıt için ek ücret ödemezsin.
 
 X'in `x.com/i/broadcasts` adresinde barındırdığı canlı videoları, yani
-yayınları, URL veya ID ile oku:
+yayınları, URL veya ID ile oku.
 
 ```json
 {
@@ -134,7 +134,7 @@ Her satırda 1 Sohbet Odası veya yayın ve `sourceTarget` içinde arama terimi,
 URL'si veya ID'si bulunur. `resultType`, `space` veya `broadcast` olur.
 
 Aşağıdaki değerler yalnızca örnektir. Gerçek sonuçlar canlı veriden gelir. Bir
-Sohbet Odası satırı şöyle görünür:
+Sohbet Odası satırı şöyle görünür.
 
 ```json
 {
@@ -163,7 +163,7 @@ Sohbet Odası satırı şöyle görünür:
 }
 ```
 
-`state`, X'in adlandırdığı şekliyle 5 değerden 1'ini taşır:
+`state`, X'in adlandırdığı şekliyle 5 değerden 1'ini taşır.
 
 | `state`      | Sohbet Odası                         |
 | ------------ | ------------------------------------ |
@@ -177,7 +177,7 @@ Sohbet Odası satırı şöyle görünür:
 tutabilir. X, abonelere veya bir Topluluğa özel Sohbet Odasını yalnızca o
 kitleye gösterir, bu yüzden bu Sohbet Odaları satır döndürmez.
 
-Bir yayın satırında `resultType: "broadcast"` bulunur ve satır şöyle görünür:
+Bir yayın satırında `resultType: "broadcast"` bulunur ve satır şöyle görünür.
 
 ```json
 {
@@ -215,101 +215,101 @@ bitmesi teslimatı doğrular. Tüm verinin çekildiğini doğrulamaz.
 
 Çalıştırma durumu, erken durmanın her nedenini söyler. `stopCauses` her nedeni
 kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Nedenler
-şunlardır: `target_not_found`, `target_failed`, `pagination_safety_limit` ve
-`deadline_reached`. Bulunamayan bir hedef, listeye yalnızca çalıştırmayı başka
-bir neden durdurduysa girer. Nedenlerden biri yeniden denenebiliyorsa çalıştırma
-da `retryable` olur.
+`target_not_found`, `target_failed`, `pagination_safety_limit` ve
+`deadline_reached` olabilir. Bulunamayan bir hedef, listeye yalnızca
+çalıştırmayı başka bir neden durdurduysa girer. Nedenlerden biri yeniden
+denenebiliyorsa çalıştırma da `retryable` olur.
 
 ## İlgili Xquik Actor'ları
 
 Her Xquik Actor'ı aynı veri çekme motorunu, önce filtreleyen faturalandırmayı ve
 tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
-- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper): Aramalardan,
-  profil zaman akışlarından, Listelerden ve gönderi ID'lerinden 50'den fazla
-  filtre ve düz dışa aktarımla gönderi kazır. Analiz değil, yalnızca gönderi
-  verisi gerektiğinde kullan. Satır başına $0.00015'ten başlar.
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Kullanıcı adı,
+- [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper) aramalardan, profil
+  zaman akışlarından, Listelerden ve gönderi ID'lerinden 50'den fazla filtre ve
+  düz dışa aktarımla gönderi kazır. Analiz değil, yalnızca gönderi verisi
+  gerektiğinde kullan. Satır başına $0.00015'ten başlar.
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) kullanıcı adı,
   ID veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını ve
   takipçilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
   başına $0.00015'ten başlar.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25'ten fazla
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) 25'ten fazla
   filtreyle gönderilerin altındaki yanıtları, yorumları ve tüm konuşmaları
   kazır. Gönderilerin altındaki tartışmaya ihtiyacın olduğunda kullan. Satır
   başına $0.00015'ten başlar.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Gönderi
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) gönderi
   URL'leri veya ID'leri için toplu olarak yanıtları, alıntıları, yeniden
   gönderenleri ve gönderi dizilerini kazır. Gönderilerle kimin etkileşime
   girdiğini ölçtüğünde kullan. Satır başına $0.00015'ten başlar.
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
-  Gönderileri alıntılayan gönderileri metin, medya, sayılar, yazarlar ve 11
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
+  gönderileri alıntılayan gönderileri metin, medya, sayılar, yazarlar ve 11
   filtreyle kazır. Gönderileri kimin alıntıladığını ve ne dediğini incelemek
   istediğinde kullan. Gönderi başına $0.00015'ten başlar.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Takipçileri,
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) takipçileri,
   takip edilenleri, Liste üyelerini, aboneleri ve Topluluk üyelerini profil
   satırları olarak kazır. Kitle veya üye listelerine ihtiyacın olduğunda kullan.
   Profil başına $0.00015'ten başlar.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay işareti,
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)
+  kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay işareti,
   hesap yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri
   oluşturduğunda kullan. Profil başına $0.00015'ten başlar.
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   X'in "Account based in" etiketi, X'e nasıl bağlandıkları ve kullanıcı adı
   değişiklikleriyle hesapların nerede bulunduğunu kontrol eder. Hesapların
   nerede bulunduğunu doğrulaman gerektiğinde kullan. Hesap başına $0.00015'ten
   başlar.
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): Kullanıcı
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) kullanıcı
   adlarından, takipçilerden veya kullanıcı aramalarından, hesapların
   profillerinde yayımladığı e-postaları, telefonları ve bağlantıları alır.
   Profillerin yayımladığı e-postalara ihtiyacın olduğunda kullan. Profil başına
   $0.00015'ten başlar.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): Liste URL'lerinden
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) Liste URL'lerinden
   veya ID'lerinden Liste gönderilerini, üyelerini ve takipçilerini kazır.
   Kaynaklarını özenle seçilmiş bir Liste belirlediğinde kullan. Satır başına
   $0.00015'ten başlar.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): Topluluk
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper) Topluluk
   bilgilerini, gönderilerini, aramalarını, üyelerini ve moderatörlerini kazır.
   Kaynakların X Toplulukları olduğunda kullan. Satır başına $0.00015'ten başlar.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Sıralama, hacim,
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) sıralama, hacim,
   sorgu ve WOEID ile konuma göre gerçek zamanlı gündemi kazır. Nerede neyin
   gündemde olduğunu takip ettiğinde kullan. Gündem başlığı başına $0.00015'ten
   başlar.
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): X iş ilanlarını
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) X iş ilanlarını
   anahtar kelime, yer, çalışma şekli, kıdem ve şirkete göre maaş ve başvuru
   bağlantılarıyla kazır. X'te yayımlanan iş ilanlarını topladığında kullan. İlan
   başına $0.00015'ten başlar.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): Uzun biçimli X
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) uzun biçimli X
   Makalelerini kapak, yazar, tarih ve metriklerle Markdown ve metin olarak
   kazır. Gönderi değil, makale gövdesi gerektiğinde kullan. Makale başına
   $0.00015'ten başlar.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader):
-  Gönderilerden veya profillerden fotoğrafları, videoları ve GIF'leri MP4 ve
-  metadata seçenekleriyle çıkarır veya depolar. Medya dosyalarının kendisine
-  ihtiyacın olduğunda kullan. Medya satırı başına $0.00015'ten başlar.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
-  Markadan bahseden gönderileri yapay zeka destekli ilgi, duygu durumu ve
-  müşteri deneyimi cevaplarıyla izler. Çalıştırmaları da karşılaştırır. Bir
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) gönderilerden
+  veya profillerden fotoğrafları, videoları ve GIF'leri MP4 ve metadata
+  seçenekleriyle çıkarır veya depolar. Medya dosyalarının kendisine ihtiyacın
+  olduğunda kullan. Medya satırı başına $0.00015'ten başlar.
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
+  markadan bahseden gönderileri yapay zeka destekli ilgi, duygu durumu ve
+  müşteri deneyimi cevaplarıyla izler ve çalıştırmaları karşılaştırır. Bir
   markayı zaman içinde takip ettiğinde kullan. Analiz edilen gönderi başına
   $0.0003'ten başlar.
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
-  Yapay zeka ile her gönderi için tutum, yoğunluk ve alaycılık olasılığını
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
+  yapay zeka ile her gönderi için tutum, yoğunluk ve alaycılık olasılığını
   etiketler. Herhangi bir konuda genel duygu durumuna ihtiyacın olduğunda
   kullan. Analiz edilen gönderi başına $0.0003'ten başlar.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
-  Yapay zeka ile yükseliş, düşüş, nötr veya karışık duruşu, içerik türünü,
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
+  yapay zeka ile yükseliş, düşüş, nötr veya karışık duruşu, içerik türünü,
   kesinliği ve varlık ilgisini etiketler. Hisse senedi, kripto veya alım satım
   konuşmalarını takip ettiğinde kullan. Analiz edilen gönderi başına $0.0003'ten
   başlar.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
-  Yapay zeka ile haber gönderilerini biçim, kaynak atfı ve konu ilgisine göre
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
+  haber gönderilerini yapay zeka ile biçim, kaynak atfı ve konu ilgisine göre
   etiketler. Haberi yorumdan ayırdığında kullan. Analiz edilen gönderi başına
   $0.0003'ten başlar.
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  Yapay zeka ile her gönderi için kendi kategori, puan ve evet/hayır sorularını
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
+  yapay zeka ile her gönderi için kendi kategori, puan ve evet/hayır sorularını
   cevaplar. Hazır analizler etiketlerine uymadığında kullan. Analiz edilen
   gönderi başına $0.0003'ten başlar.
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
-  Yapay zekanın 8 özellik cevabından her gönderi için 0 ile 100 arasında bir
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
+  yapay zekanın 8 özellik cevabından her gönderi için 0 ile 100 arasında bir
   Viral Score ve bir karar tahmin eder. Gönderilerin neden yayıldığını veya
   tutmadığını incelediğinde kullan. Analiz edilen gönderi başına $0.0003'ten
   başlar.

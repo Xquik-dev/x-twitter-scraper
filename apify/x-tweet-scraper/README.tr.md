@@ -28,7 +28,7 @@ edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır.
 Twitter API alternatifi olarak Twitter gönderilerini **her Apify planında teslim
 edilen sonuç başına $0.00015'ten başlayan fiyatla** kazı. Apify, platform
 kullanımını ayrıca faturalandırır. X girişi gerekmez, başlatma veya sorgu ücreti
-de ödemezsin. Geliştiren: [Xquik](https://xquik.com).
+de ödemezsin. [Xquik](https://xquik.com) tarafından geliştirildi.
 
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
@@ -80,7 +80,7 @@ gönderi ID'si ve arama sorgusu kabul eder. 50'den fazla filtre sunar.
 | `url`                  | Gönderinin doğrudan bağlantısı                                      |
 | `tweetUrl`             | Düz çıktıdaki gönderi URL'si takma adı                              |
 | `twitterUrl`           | Düz çıktıdaki `twitter.com` URL'si                                  |
-| `author`               | Yazar alanları: kullanıcı adı, biyografi, web sitesi, sayılar       |
+| `author`               | Kullanıcı adı, biyografi, web sitesi ve sayılar gibi yazar alanları |
 | `authorUsername`       | Düz çıktıdaki yazar kullanıcı adı                                   |
 | `authorFollowers`      | Düz çıktıdaki yazar takipçi sayısı                                  |
 | `authorUrl`            | Varsa düz çıktıdaki yazar web sitesi                                |
@@ -134,7 +134,7 @@ Gönderi satırları ayrıca `type`, `source`, `inReplyToId`, `inReplyToUserId`,
 `inReplyToUsername` ve `retweeted_tweet` alanlarını tutar. Alıntılanan ve
 yeniden gönderilen gönderiler her iç içe seviyede aynı alanları taşır.
 
-Medya; kullanılabilirlik, geometri, etiket ve video varyantı bilgisini taşır.
+Medya, kullanılabilirlik, geometri, etiket ve video varyantı bilgisini taşır.
 `watchNowUrl` ve `visitSiteUrl` eylemlerini de taşır.
 
 Satırlar yalnızca görüntüleyene ait durumu asla içermez. Actor takip, engelleme,
@@ -145,7 +145,7 @@ görüntüleyen bayraklarını kaldırır. Ham çıktı da bunları atar.
 
 Aşağıdaki her örnek eksiksiz bir girdidir. Verine uyanı seç.
 
-Apify Console'da şu adımları izle:
+Apify Console'da aşağıdaki adımları izle.
 
 1. Bir [görev örneği](#görev-örnekleri) ya da Input sekmesini aç.
 2. URL, kullanıcı adı, gönderi ID'si veya arama terimi ekle.
@@ -157,7 +157,7 @@ Aşağıdaki tarifler her kaynağın girdisini gösterir.
 
 ### URL yapıştır
 
-Gönderi, profil, arama veya Liste URL'lerini karışık yapıştırabilirsin:
+Gönderi, profil, arama veya Liste URL'lerini karışık yapıştırabilirsin.
 
 ```json
 {
@@ -178,7 +178,7 @@ yapıştırdığın tüm URL'lerin toplam sonucunu sınırlar.
 
 ### Birden çok kullanıcı adı kazı
 
-Kullanıcı adları, birçok `from:username` aramasının kısa yoludur:
+Kullanıcı adları, birçok `from:username` aramasının kısa yoludur.
 
 ```json
 { "twitterHandles": ["elonmusk", "nasa", "openai"], "maxItems": 100 }
@@ -192,7 +192,7 @@ tutar. Onları çıkarmak için `tweetTypes.excludeRetweets` ayarını aç.
 
 ### Gönderi ara
 
-Search terms alanına 1 veya daha fazla sorgu yaz:
+Search terms alanına 1 veya daha fazla sorgu yaz.
 
 ```json
 {
@@ -236,7 +236,7 @@ yaklaşık $0.00008 ekler. 1 çalıştırmada 188 ID ile yaklaşık $0.000005 ek
 ### Etkileşim, gönderi dizisi ve makale modları
 
 Girdideki diğer alanlardan bağımsız olarak tek bir modu seçmek için `mode`
-ayarla:
+ayarla.
 
 ```json
 { "mode": "replies", "replyTweetIds": ["2082577277246972300"], "maxItems": 100 }
@@ -249,7 +249,7 @@ gönderideki X makalesini okur. Tek bir gönderi için modlar `replies`, `quotes
 `thread`, `retweeters`, `favoriters`, `translation` ve `embed`.
 
 `profileMentions`, her kullanıcı adından bahseden gönderileri en yeniden
-başlayarak döndürür:
+başlayarak döndürür.
 
 ```json
 { "mode": "profileMentions", "twitterHandles": ["nasa"], "maxItems": 100 }
@@ -261,7 +261,7 @@ döndürür. Satırlar tarih sırasıyla gelir. Actor, başka hesaplara verilen
 yanıtları faturalamadan önce atar. Diğer yazarlardan gelen konuşma bağlamını da
 atar.
 
-Yalnızca orijinal gönderiler için istemediğin türleri hariç tut:
+Yalnızca orijinal gönderiler için istemediğin türleri hariç tut.
 
 ```json
 {
@@ -327,7 +327,7 @@ hangi hesapların yer işaretlerine eklediğini göstermez.
 
 `mode: "translation"` her gönderinin X çevirisini döndürür. `translateTo`
 alanına `en`, `es`, `pt-br` veya `zh-tw` gibi bir dil kodu yaz. Varsayılan değer
-`en`:
+`en`.
 
 ```json
 {
@@ -340,7 +340,7 @@ alanına `en`, `es`, `pt-br` veya `zh-tw` gibi bir dil kodu yaz. Varsayılan de�
 Her satırda `resultType: "translation"`, `sourceTweetId` ve `translation`
 bulunur. Bu nesne `language`, `sourceLanguage`, `text` ve `entities` taşır.
 
-`mode: "embed"` her gönderiyi bir web sitesine gömen HTML'i döndürür:
+`mode: "embed"` her gönderiyi bir web sitesine gömen HTML'i döndürür.
 
 ```json
 { "mode": "embed", "tweetIds": ["2082577277246972300"], "embedTheme": "dark" }
@@ -348,8 +348,8 @@ bulunur. Bu nesne `language`, `sourceLanguage`, `text` ve `entities` taşır.
 
 Her satırda `resultType: "embed"`, `sourceTweetId` ve `embed` bulunur. Bu nesne
 `url`, `authorName`, `authorUrl`, `html` ve `width` taşır. `embedHideMedia`,
-`embedHideThread` ve `embedOmitScript`; medyayı, yanıtlanan gönderiyi veya
-widget betiğini dışarıda bırakır.
+`embedHideThread` ve `embedOmitScript` sırasıyla medyayı, yanıtlanan gönderiyi
+veya widget betiğini dışarıda bırakır.
 
 İki mod da gönderi ID'lerini ve `startUrls` içindeki gönderi URL'lerini okur.
 Her gönderi, normal satır fiyatıyla 1 satır verir. X'te olmayan bir gönderi
@@ -357,7 +357,7 @@ satır vermez ve ücretlendirilmez.
 
 ### Düz CSV satırları dışa aktar
 
-Varsayılan iç içe JSON alanlarını koru ya da tabloya uygun sütunlar ekle:
+Varsayılan iç içe JSON alanlarını koru ya da tabloya uygun sütunlar ekle.
 
 ```json
 { "searchTerms": ["from:nasa moon"], "maxItems": 100, "outputPreset": "flat" }
@@ -374,7 +374,7 @@ anahtarlara sahip olur.
 ### Alan adlarını seç
 
 Varsayılan olarak eski alan adları kullanılır. Zengin veya ham sonuçlar için bir
-stil seç:
+stil seç.
 
 ```json
 {
@@ -400,7 +400,7 @@ Depolanan veya dışa aktarılan veriyi asla yeniden adlandırmaz.
 
 ### Gelişmiş filtreleri birleştir
 
-Kullanıcı, tarih, konum, medya ve etkileşim filtrelerini birleştir:
+Kullanıcı, tarih, konum, medya ve etkileşim filtrelerini birleştir.
 
 ```json
 {
@@ -475,60 +475,73 @@ Xquik'in X Tweet Scraper'ı, gönderi kazıyan diğer 11 Actor'ı maliyette ve h
 geride bıraktı. Medyan satırında 63 alan vardı. Bu, diğerlerinin medyanının 2
 katı.
 
-- `xquik/x-tweet-scraper`: 890 işe yarar gönderi, işe yarar gönderi başına
-  $0.000175, saniyede 39,2 ve satır başına 63 alan.
+- `xquik/x-tweet-scraper`, işe yarar gönderi başına $0.000175 ile 890 işe yarar
+  gönderi teslim etti. Saniyede 39,2 gönderi işledi ve satır başına 63 alan
+  verdi.
   [Çalıştırmayı gör](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
-- `xquik/x-tweet-scraper`: 883 işe yarar gönderi, işe yarar gönderi başına
-  $0.000176, saniyede 25,2 ve satır başına 63 alan.
+- `xquik/x-tweet-scraper`, işe yarar gönderi başına $0.000176 ile 883 işe yarar
+  gönderi teslim etti. Saniyede 25,2 gönderi işledi ve satır başına 63 alan
+  verdi.
   [Çalıştırmayı gör](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
-- `xquik/x-tweet-scraper`: 882 işe yarar gönderi, işe yarar gönderi başına
-  $0.000177, saniyede 25,7 ve satır başına 63 alan.
+- `xquik/x-tweet-scraper`, işe yarar gönderi başına $0.000177 ile 882 işe yarar
+  gönderi teslim etti. Saniyede 25,7 gönderi işledi ve satır başına 63 alan
+  verdi.
   [Çalıştırmayı gör](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
-- `xquik/x-tweet-scraper`: 877 işe yarar gönderi, işe yarar gönderi başına
-  $0.000178, saniyede 26,9 ve satır başına 63 alan.
+- `xquik/x-tweet-scraper`, işe yarar gönderi başına $0.000178 ile 877 işe yarar
+  gönderi teslim etti. Saniyede 26,9 gönderi işledi ve satır başına 63 alan
+  verdi.
   [Çalıştırmayı gör](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 813 işe yarar
-  gönderi, işe yarar gönderi başına $0.000185, saniyede 10,5 ve satır başına 36
-  alan.
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`, işe yarar gönderi
+  başına $0.000185 ile 813 işe yarar gönderi teslim etti. Saniyede 10,5 gönderi
+  işledi ve satır başına 36 alan verdi.
   [Çalıştırmayı gör](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 805 işe yarar
-  gönderi, işe yarar gönderi başına $0.000187, saniyede 10,6 ve satır başına 36
-  alan.
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`, işe yarar gönderi
+  başına $0.000187 ile 805 işe yarar gönderi teslim etti. Saniyede 10,6 gönderi
+  işledi ve satır başına 36 alan verdi.
   [Çalıştırmayı gör](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`: 805 işe yarar
-  gönderi, işe yarar gönderi başına $0.000187, saniyede 10,7 ve satır başına 36
-  alan.
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies`, işe yarar gönderi
+  başına $0.000187 ile 805 işe yarar gönderi teslim etti. Saniyede 10,7 gönderi
+  işledi ve satır başına 36 alan verdi.
   [Çalıştırmayı gör](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
-- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest`: 880 işe
-  yarar gönderi, işe yarar gönderi başına $0.000250, saniyede 9,1 ve satır
-  başına 46 alan.
+- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest`, işe yarar
+  gönderi başına $0.000250 ile 880 işe yarar gönderi teslim etti. Saniyede 9,1
+  gönderi işledi ve satır başına 46 alan verdi.
   [Çalıştırmayı gör](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
-- `scraper_one/x-posts-search`: 804 işe yarar gönderi, işe yarar gönderi başına
-  $0.000314, saniyede 3,3 ve satır başına 14 alan.
+- `scraper_one/x-posts-search`, işe yarar gönderi başına $0.000314 ile 804 işe
+  yarar gönderi teslim etti. Saniyede 3,3 gönderi işledi ve satır başına 14 alan
+  verdi.
   [Çalıştırmayı gör](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
-- `danek/twitter-scraper`: 807 işe yarar gönderi, işe yarar gönderi başına
-  $0.000347, saniyede 5,0 ve satır başına 27 alan.
+- `danek/twitter-scraper`, işe yarar gönderi başına $0.000347 ile 807 işe yarar
+  gönderi teslim etti. Saniyede 5,0 gönderi işledi ve satır başına 27 alan
+  verdi.
   [Çalıştırmayı gör](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
-- `tweetapi/twitter-x-search-scraper`: 337 işe yarar gönderi, işe yarar gönderi
-  başına $0.000374, saniyede 2,6 ve satır başına 28 alan.
+- `tweetapi/twitter-x-search-scraper`, işe yarar gönderi başına $0.000374 ile
+  337 işe yarar gönderi teslim etti. Saniyede 2,6 gönderi işledi ve satır başına
+  28 alan verdi.
   [Çalıştırmayı gör](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
-- `api-ninja/x-twitter-advanced-search`: 837 işe yarar gönderi, işe yarar
-  gönderi başına $0.000430, saniyede 7,4 ve satır başına 28 alan.
+- `api-ninja/x-twitter-advanced-search`, işe yarar gönderi başına $0.000430 ile
+  837 işe yarar gönderi teslim etti. Saniyede 7,4 gönderi işledi ve satır başına
+  28 alan verdi.
   [Çalıştırmayı gör](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
-- `apidojo/twitter-scraper-lite`: 251 işe yarar gönderi, işe yarar gönderi
-  başına $0.000494, saniyede 12,9 ve satır başına 54 alan.
+- `apidojo/twitter-scraper-lite`, işe yarar gönderi başına $0.000494 ile 251 işe
+  yarar gönderi teslim etti. Saniyede 12,9 gönderi işledi ve satır başına 54
+  alan verdi.
   [Çalıştırmayı gör](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
-- `apidojo/tweet-scraper`: 481 işe yarar gönderi, işe yarar gönderi başına
-  $0.000832, saniyede 7,8 ve satır başına 55 alan.
+- `apidojo/tweet-scraper`, işe yarar gönderi başına $0.000832 ile 481 işe yarar
+  gönderi teslim etti. Saniyede 7,8 gönderi işledi ve satır başına 55 alan
+  verdi.
   [Çalıştırmayı gör](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
-- `xtdata/twitter-x-scraper`: 1.378 işe yarar gönderi, işe yarar gönderi başına
-  $0.001168, saniyede 11,9 ve satır başına 67 alan.
+- `xtdata/twitter-x-scraper`, işe yarar gönderi başına $0.001168 ile 1.378 işe
+  yarar gönderi teslim etti. Saniyede 11,9 gönderi işledi ve satır başına 67
+  alan verdi.
   [Çalıştırmayı gör](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
-- `seemuapps/x-tweet-scraper`: 805 işe yarar gönderi, işe yarar gönderi başına
-  $0.001242, saniyede 6,9 ve satır başına 24 alan.
+- `seemuapps/x-tweet-scraper`, işe yarar gönderi başına $0.001242 ile 805 işe
+  yarar gönderi teslim etti. Saniyede 6,9 gönderi işledi ve satır başına 24 alan
+  verdi.
   [Çalıştırmayı gör](https://console.apify.com/view/runs/FstursEw43TbcipYU)
-- `maximedupre/twitter-scraper`: 46 işe yarar gönderi, işe yarar gönderi başına
-  $0.002846, saniyede 0,3 ve satır başına 31 alan.
+- `maximedupre/twitter-scraper`, işe yarar gönderi başına $0.002846 ile 46 işe
+  yarar gönderi teslim etti. Saniyede 0,3 gönderi işledi ve satır başına 31 alan
+  verdi.
   [Çalıştırmayı gör](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
 
 Her Actor aynı aramayı aynı filtrelerle yaptı. Diğer Actor'lar 2026-09-27'de
@@ -574,11 +587,11 @@ başarıyla bitmesi teslimatı doğrular. Tüm verinin çekildiğini doğrulamaz
 
 Durum metni, durmanın her nedenini söyler. Hem bulunamayan bir hesap hem takılan
 bir arama varsa ikisini de yazar. `stopCauses` her nedeni kendi `message`,
-`retryable` ve `nextAction` alanlarıyla listeler. Nedenler şunlardır:
-`target_not_found`, `target_suspended`, `target_protected`,
-`search_unavailable`, `likes_hidden`, `target_failed`,
-`pagination_safety_limit`, `reply_reach` ve `deadline_reached`. Nedenlerden biri
-yeniden denenebiliyorsa çalıştırma da `retryable` olur.
+`retryable` ve `nextAction` alanlarıyla listeler. Nedenler `target_not_found`,
+`target_suspended`, `target_protected`, `search_unavailable`, `likes_hidden`,
+`target_failed`, `pagination_safety_limit`, `reply_reach` ve `deadline_reached`
+olabilir. Nedenlerden biri yeniden denenebiliyorsa çalıştırma da `retryable`
+olur.
 
 ### Bulunamayan ve erişilemeyen hedefler
 
@@ -629,7 +642,7 @@ Input sekmesi tüm seçenekleri listeler. `startUrls`, `twitterHandles`,
 birini doldur. Belgelenmiş takma adları da çalışır. Diğer tüm alanlar isteğe
 bağlıdır.
 
-Örnekler:
+Bunlardan her biri tek başına bir çalıştırma için yeterli.
 
 - Start URLs alanına bir gönderi URL'si yapıştır.
 - Bir profil URL'si yapıştır ya da kullanıcı adını X handles alanına ekle.
@@ -680,112 +693,134 @@ düşürmez ve ödediğin tutarı değiştirmez. Girdi formu yalnızca kanonik a
 listeler, böylece kısa kalır. Takma adlar JSON, API, SDK, otomasyon ve kayıtlı
 görev girdilerinde çalışır.
 
-Her satır önce zaten kullandığın alanları, sonra eşlendikleri alanı yazar:
+Her satır önce zaten kullandığın alanları, sonra eşlendikleri alanı yazar.
 
-- `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls`, `accountUrls`:
-  `startUrls`
-- tek metin olarak `profileUrl`: `startUrls`
+- `startUrls`, `urls`, `tweetUrls`, `postUrls`, `profileUrls` ve `accountUrls`
+  alanları `startUrls` alanına eşlenir.
+- Tek metin olarak verilen `profileUrl` alanı `startUrls` alanına eşlenir.
 - `tweetIds`, `tweetIDs`, `tweets`, `postIds`, `lookupPostIds`, `tweet_ids` veya
-  tek metin olarak `tweetId`: `tweetIds`
+  tek metin olarak verilen `tweetId` alanları `tweetIds` alanına eşlenir.
 - `twitterHandles`, `usernames`, `user_names`, `userNameList`, `handles`,
-  `screenNames`, `profileTweets`: `twitterHandles`
-- tek metin olarak `username`, `handle`, `screenName`: `twitterHandles`
-- `searchTerms`, `searchQueries`, `queries`, `search`, liste olarak veya her
-  satırda 1 arama: `searchTerms`
-- `twitterContent`, `query`, `searchQuery`: `twitterContent`
+  `screenNames` ve `profileTweets` alanları `twitterHandles` alanına eşlenir.
+- Tek metin olarak verilen `username`, `handle` ve `screenName` alanları
+  `twitterHandles` alanına eşlenir.
+- Liste olarak veya her satırda 1 arama olarak verilen `searchTerms`,
+  `searchQueries`, `queries` ve `search` alanları `searchTerms` alanına eşlenir.
+- `twitterContent`, `query` ve `searchQuery` alanları `twitterContent` alanına
+  eşlenir.
 - `maxItems`, `maxResults`, `max_results`, `resultsLimit`, `count`,
   `resultsCount`, `numberOfTweets`, `maxPosts`, `max_posts`, `max_items`,
-  `maxTweets`, `tweetsDesired`, `maxTotalTweets`: `maxItems`
-- `per_profile_limit`: `maxItemsPerTarget`
-- `sort`: `queryType`
-- `search_type`, `searchType`, `query_type`, `search_sort`: `Top` ve `Latest`
-  için `queryType`, büyük veya küçük harfle. `Media`, `Photos` ve `Videos`,
-  `filter:media`, `filter:images` ve `filter:videos` alanlarını açar.
-- `tweetLanguage`, `language`, `contentLanguage`: `lang`
-- `author`, `fromUser`: `from`
-- `inReplyTo`, `toUser`: `to`
-- `mentioning`: `@`
-- `start`, `startDate`, `timeSince`: `since`
-- `end`, `endDate`, `timeUntil`: `until`
-- saniye olarak `timeSinceUnix`, `sinceTime`, `timeUntilUnix`, `untilTime`:
-  `since_time`, `until_time`
-- `timeWithinTime`, `withinTime`: `within_time`
-- `timeWindowHours`, `timeWindow`: saat ve gün olarak `within_time`
-- `timeSinceId`, `sinceId`, `timeMaxId`, `maxId`: `since_id`, `max_id`
-- Google Search Scraper'daki `quickDateRange`, örneğin `d7`, `w2`, `m1` veya
-  `y`: `since_time`, çalıştırmanın başlangıcından geriye sayılır
-- `minimumFavorites`, `minLikes`, `min_likes`, `minFaves`, `engagementMinLikes`,
-  `Minimum_likes`: `min_faves`
-- `minimumRetweets`, `minRetweets`, `engagementMinRetweets`: `min_retweets`
-- `minimumReplies`, `minReplies`, `engagementMinReplies`, `Minimum_replies`:
-  `min_replies`
-- `engagementMaxLikes`, `maxLikes`, `engagementMaxRetweets`, `maxRetweets`,
-  `engagementMaxReplies`: `engagement.maxLikes`, `engagement.maxRetweets`,
-  `engagement.maxReplies`
-- `onlyImage`, `onlyImages`, `has_images`: `filter:images`
-- `onlyVideo`, `onlyVideos`, `has_videos`: `filter:videos`
-- `onlyWithMedia`, `mediaOnly`: `filter:media`
-- `onlyQuote`, `onlyQuotes`: `filter:quote`
-- `onlyTwitterBlue`, `usersBlueVerifiedOnly`, `blue_verified_only`,
-  `onlyBlueVerified`: `filter:blue_verified`
-- `engagementHasEngagement`, `hasEngagement`: `filter:has_engagement`
-- `mediaHasLinks`, `has_links`, `requireLinks`: `filter:links`
-- `mediaHasMentions`, `has_mentions`, `requireMentions`: `filter:mentions`
-- `mediaHasHashtags`, `has_hashtags`, `requireHashtags`: `filter:hashtags`
-- `mediaNewsOnly`, `mediaSafeContentOnly`: `filter:news`, `filter:safe`
-- 1 tür içeren `mediaTypes`: o türün `filter:` alanı
-- `mediaSubtype`: `filter:media`, `filter:images` veya `filter:videos`
-- `includeNativeRetweets`, `includeRetweets`: `include:nativeretweets`
-- `excludeReplies`, `excludeRetweets`, false olarak ayarlanmış
-  `includeRetweets`, `tweetTypesExclude`: `tweetTypes.excludeReplies`,
-  `tweetTypes.excludeRetweets` ve `tweetTypes.excludeQuotes`
-- 1 tür içeren liste olarak `tweetTypes`: `tweetTypes.replies`,
-  `tweetTypes.quotes` veya `tweetTypes.nativeRetweets`
-- `tweetSubtype`: `tweetTypes.replies` veya `tweetTypes.quotes`. `self_threads`,
-  `filter:self_threads` operatörünü ekler.
-- `geotaggedNear`, `geoNear`: `near`
-- `withinRadius`, `geoWithinRadius`, `geoWithin`: `within`
-- `geoGeocode`: `geocode`
-- `tweetConversationId`, `tweetQuotedTweetId`, `tweetQuotedUserId`:
-  `conversation_id`, `quoted_tweet_id`, `quoted_user_id`
-- `cardName`, `tweetPollTypes`: `card_name`
-- `search_query`: `twitterContent`
-- `profile_urls`: bağlantılar için `startUrls`, kullanıcı adları için
-  `twitterHandles`
-- `lookup_post_ids` veya tek metin olarak `id`: `tweetIds`
-- virgülle ayrılmış 1 liste olarak `tweets`: `tweetIds`
+  `maxTweets`, `tweetsDesired` ve `maxTotalTweets` alanları `maxItems` alanına
+  eşlenir.
+- `per_profile_limit` alanı `maxItemsPerTarget` alanına eşlenir.
+- `sort` alanı `queryType` alanına eşlenir.
+- `search_type`, `searchType`, `query_type` ve `search_sort` alanları, büyük
+  veya küçük harfle yazılmış `Top` ve `Latest` için `queryType` alanına eşlenir.
+  `Media`, `Photos` ve `Videos`, `filter:media`, `filter:images` ve
+  `filter:videos` alanlarını açar.
+- `tweetLanguage`, `language` ve `contentLanguage` alanları `lang` alanına
+  eşlenir.
+- `author` ve `fromUser` alanları `from` alanına eşlenir.
+- `inReplyTo` ve `toUser` alanları `to` alanına eşlenir.
+- `mentioning` alanı `@` alanına eşlenir.
+- `start`, `startDate` ve `timeSince` alanları `since` alanına eşlenir.
+- `end`, `endDate` ve `timeUntil` alanları `until` alanına eşlenir.
+- Saniye olarak verilen `timeSinceUnix`, `sinceTime`, `timeUntilUnix` ve
+  `untilTime` alanları `since_time` ve `until_time` alanlarına eşlenir.
+- `timeWithinTime` ve `withinTime` alanları `within_time` alanına eşlenir.
+- `timeWindowHours` ve `timeWindow` alanları saat ve gün olarak `within_time`
+  alanına eşlenir.
+- `timeSinceId`, `sinceId`, `timeMaxId` ve `maxId` alanları `since_id` ve
+  `max_id` alanlarına eşlenir.
+- Google Search Scraper'daki `quickDateRange` alanı, çalıştırmanın
+  başlangıcından geriye sayılan `since_time` alanına eşlenir. Değeri örneğin
+  `d7`, `w2`, `m1` veya `y` olabilir.
+- `minimumFavorites`, `minLikes`, `min_likes`, `minFaves`, `engagementMinLikes`
+  ve `Minimum_likes` alanları `min_faves` alanına eşlenir.
+- `minimumRetweets`, `minRetweets` ve `engagementMinRetweets` alanları
+  `min_retweets` alanına eşlenir.
+- `minimumReplies`, `minReplies`, `engagementMinReplies` ve `Minimum_replies`
+  alanları `min_replies` alanına eşlenir.
+- `engagementMaxLikes`, `maxLikes`, `engagementMaxRetweets`, `maxRetweets` ve
+  `engagementMaxReplies` alanları `engagement.maxLikes`,
+  `engagement.maxRetweets` ve `engagement.maxReplies` alanlarına eşlenir.
+- `onlyImage`, `onlyImages` ve `has_images` alanları `filter:images` alanına
+  eşlenir.
+- `onlyVideo`, `onlyVideos` ve `has_videos` alanları `filter:videos` alanına
+  eşlenir.
+- `onlyWithMedia` ve `mediaOnly` alanları `filter:media` alanına eşlenir.
+- `onlyQuote` ve `onlyQuotes` alanları `filter:quote` alanına eşlenir.
+- `onlyTwitterBlue`, `usersBlueVerifiedOnly`, `blue_verified_only` ve
+  `onlyBlueVerified` alanları `filter:blue_verified` alanına eşlenir.
+- `engagementHasEngagement` ve `hasEngagement` alanları `filter:has_engagement`
+  alanına eşlenir.
+- `mediaHasLinks`, `has_links` ve `requireLinks` alanları `filter:links` alanına
+  eşlenir.
+- `mediaHasMentions`, `has_mentions` ve `requireMentions` alanları
+  `filter:mentions` alanına eşlenir.
+- `mediaHasHashtags`, `has_hashtags` ve `requireHashtags` alanları
+  `filter:hashtags` alanına eşlenir.
+- `mediaNewsOnly` ve `mediaSafeContentOnly` alanları `filter:news` ve
+  `filter:safe` alanlarına eşlenir.
+- 1 tür içeren `mediaTypes` alanı o türün `filter:` alanına eşlenir.
+- `mediaSubtype` alanı `filter:media`, `filter:images` veya `filter:videos`
+  alanına eşlenir.
+- `includeNativeRetweets` ve `includeRetweets` alanları `include:nativeretweets`
+  alanına eşlenir.
+- `excludeReplies`, `excludeRetweets`, false olarak ayarlanmış `includeRetweets`
+  ve `tweetTypesExclude` alanları `tweetTypes.excludeReplies`,
+  `tweetTypes.excludeRetweets` ve `tweetTypes.excludeQuotes` alanlarına eşlenir.
+- 1 tür içeren liste olarak verilen `tweetTypes` alanı `tweetTypes.replies`,
+  `tweetTypes.quotes` veya `tweetTypes.nativeRetweets` alanına eşlenir.
+- `tweetSubtype` alanı `tweetTypes.replies` veya `tweetTypes.quotes` alanına
+  eşlenir. `self_threads`, `filter:self_threads` operatörünü ekler.
+- `geotaggedNear` ve `geoNear` alanları `near` alanına eşlenir.
+- `withinRadius`, `geoWithinRadius` ve `geoWithin` alanları `within` alanına
+  eşlenir.
+- `geoGeocode` alanı `geocode` alanına eşlenir.
+- `tweetConversationId`, `tweetQuotedTweetId` ve `tweetQuotedUserId` alanları
+  `conversation_id`, `quoted_tweet_id` ve `quoted_user_id` alanlarına eşlenir.
+- `cardName` ve `tweetPollTypes` alanları `card_name` alanına eşlenir.
+- `search_query` alanı `twitterContent` alanına eşlenir.
+- `profile_urls` alanı bağlantılar için `startUrls`, kullanıcı adları için
+  `twitterHandles` alanına eşlenir.
+- `lookup_post_ids` veya tek metin olarak verilen `id` alanı `tweetIds` alanına
+  eşlenir.
+- Virgülle ayrılmış 1 liste olarak verilen `tweets` alanı `tweetIds` alanına
+  eşlenir.
 
 Bazı alanların burada karşılığı yok. Her biri, temsil ettiği X arama operatörünü
 çalıştırmanın her aramasına ekler. Çalıştırma günlüğü, eklediği operatörleri en
-başta listeler:
+başta listeler.
 
-- `usersFromUsers`, `from_users`, `usersToUsers`, `to_users`,
-  `usersListMembers`: `from:`, `to:` ve `list:`. Birden çok değer alternatif
-  olarak çalışır, örneğin `(from:a OR from:b)`.
-- `usersMentionUsers`, `mentioning_users`: `@name`
-- `usersExcludeFromUsers`: `-from:`
-- `onlyVerifiedUsers`, `usersVerifiedOnly`, `verified_only`: `filter:verified`
-- `placeObjectId`, `geoPlaceId`, `placeId`, `place`: `place:`
-- `cardDomain`: `card_domain:`
-- `appsSources`, `appsExcludeSources`: `source:` ve `-source:`
-- her biri 1 değer içeren `contentKeywords`, `contentExactPhrases`,
-  `contentHashtags`, `contentCashtags`: kelime, tırnak içindeki ifade, `#tag` ve
-  `$tag`
-- `contentExcludeKeywords`, `contentExcludeHashtags`, `exclude_words`,
-  `hashtags_exclude`: `-word` ve `-#tag`
-- `all_words`, `exact_phrases`: her kelime ve her ifade eşleşmeli
-- `any_words`, `hashtags_any`: alternatifler, örneğin `(#a OR #b)`
-- `contentQuestionMarks`: `?`
-- `contentEmoticons`: `positive` için `:)`, `negative` için `:(`
-- `tweet_type`: `filter:replies`, `filter:retweets` ve bunların `-filter:`
-  biçimleri
+- `usersFromUsers`, `from_users`, `usersToUsers`, `to_users` ve
+  `usersListMembers` alanları `from:`, `to:` ve `list:` ekler. Birden çok değer
+  alternatif olarak çalışır, örneğin `(from:a OR from:b)`.
+- `usersMentionUsers` ve `mentioning_users` alanları `@name` ekler.
+- `usersExcludeFromUsers` alanı `-from:` ekler.
+- `onlyVerifiedUsers`, `usersVerifiedOnly` ve `verified_only` alanları
+  `filter:verified` ekler.
+- `placeObjectId`, `geoPlaceId`, `placeId` ve `place` alanları `place:` ekler.
+- `cardDomain` alanı `card_domain:` ekler.
+- `appsSources` ve `appsExcludeSources` alanları `source:` ve `-source:` ekler.
+- Her biri 1 değer içeren `contentKeywords`, `contentExactPhrases`,
+  `contentHashtags` ve `contentCashtags` alanları kelimeyi, tırnak içindeki
+  ifadeyi, `#tag` ve `$tag` değerlerini ekler.
+- `contentExcludeKeywords`, `contentExcludeHashtags`, `exclude_words` ve
+  `hashtags_exclude` alanları `-word` ve `-#tag` ekler.
+- `all_words` ve `exact_phrases` ile her kelime ve her ifade eşleşmeli.
+- `any_words` ve `hashtags_any` alanları `(#a OR #b)` gibi alternatifler ekler.
+- `contentQuestionMarks` alanı `?` ekler.
+- `contentEmoticons` alanı `positive` için `:)`, `negative` için `:(` ekler.
+- `tweet_type` alanı `filter:replies`, `filter:retweets` ve bunların `-filter:`
+  biçimlerini ekler.
 
 Kelimelerle yazılan modlar `mode` alanına eşlenir. `Advanced Search`, `search`
 olur. `Get Tweet by ID`, `tweet` olur. `Get a Few Tweets`, `tweets` olur.
 `Get Replies`, `replies` olur. `Get Quotes`, `quotes` olur. `Get Retweeters`,
 `retweeters` olur. `Get Favoriters`, `favoriters` olur.
 
-Yapıştırdığın girdi şöyle davranır:
+Yapıştırdığın girdi şöyle davranır.
 
 - Her kaynak çalışır. URL, kullanıcı adı, arama terimi, Liste ID'si ve gönderi
   ID'si içeren bir girdi hepsini çalıştırır. `maxItems` tüm çalıştırma için
@@ -808,10 +843,11 @@ Yapıştırdığın girdi şöyle davranır:
 - `from`, `min_faves`, `since_time` ve `filter:images` gibi arama operatörü
   alanları zaten X'in adlarını kullanır. Eşleme gerektirmez.
 - Başka bir Actor'ın "hepsi" ya da "herhangi biri" diye tanımlamadığı bir liste
-  1 değerle çalışır: `contentKeywords`, `contentExactPhrases`,
+  1 değerle çalışır. Bu listeler `contentKeywords`, `contentExactPhrases`,
   `contentHashtags`, `contentCashtags`, `usersMentionUsers`, `mediaTypes` ve
-  `tweetTypes`. Daha fazla değerde çalıştırma hiçbir okuma veya ücret olmadan
-  durur. Mesaj, bunları 1 arama terimi olarak nasıl yazacağını söyler.
+  `tweetTypes` alanlarıdır. Daha fazla değerde çalıştırma hiçbir okuma veya
+  ücret olmadan durur. Mesaj, bunları 1 arama terimi olarak nasıl yazacağını
+  söyler.
 - `People` veya `Lists` olarak ayarlanmış `search_type`, `followers` olarak
   ayarlanmış `source_mode`, bir `engagementLevel` ön ayarı ve
   `Get Similar Tweets` modu, çalıştırmayı hiçbir okuma veya ücret olmadan
@@ -823,7 +859,7 @@ Yapıştırdığın girdi şöyle davranır:
 
 ### Console ve API girdisi
 
-Console formunda şu kontroller var:
+Console formunda aşağıdaki kontroller var.
 
 - Mode, Output Variant, Field Style, Output Preset ve Sort By doğrulamalı açılır
   menülerdir.
@@ -929,113 +965,95 @@ sayfalarını oku.
 Her Xquik Actor'ı aynı veri çekme motorunu, önce filtreleyen faturalandırmayı ve
 tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
-- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper): Kullanıcı adı,
+- [X Profile Scraper](https://apify.com/xquik/x-profile-scraper) kullanıcı adı,
   ID veya URL'den profilleri, gönderilerini, yanıtlarını, medyasını ve
   takipçilerini kazır. Aramalar yerine hesaplardan başladığında kullan. Satır
   başına $0.00015'ten başlar.
-- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper): 25'ten fazla
+- [X Reply Scraper](https://apify.com/xquik/x-reply-scraper) 25'ten fazla
   filtreyle gönderilerin altındaki yanıtları, yorumları ve tüm konuşmaları
   kazır. Gönderilerin altındaki tartışmaya ihtiyacın olduğunda kullan. Satır
   başına $0.00015'ten başlar.
-- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper): Gönderi
+- [X Engagement Scraper](https://apify.com/xquik/x-engagement-scraper) gönderi
   URL'leri veya ID'leri için toplu olarak yanıtları, alıntıları, yeniden
   gönderenleri ve gönderi dizilerini kazır. Gönderilerle kimin etkileşime
   girdiğini ölçtüğünde kullan. Satır başına $0.00015'ten başlar.
-- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper):
-  Gönderileri alıntılayan gönderileri metin, medya, sayılar, yazarlar ve 11
+- [X Quote Tweets Scraper](https://apify.com/xquik/x-quote-tweets-scraper)
+  gönderileri alıntılayan gönderileri metin, medya, sayılar, yazarlar ve 11
   filtreyle kazır. Gönderileri kimin alıntıladığını ve ne dediğini incelemek
   istediğinde kullan. Gönderi başına $0.00015'ten başlar.
-- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper): Takipçileri,
+- [X Follower Scraper](https://apify.com/xquik/x-follower-scraper) takipçileri,
   takip edilenleri, Liste üyelerini, aboneleri ve Topluluk üyelerini profil
   satırları olarak kazır. Kitle veya üye listelerine ihtiyacın olduğunda kullan.
   Profil başına $0.00015'ten başlar.
-- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper):
-  Kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay işareti,
+- [X User Search Scraper](https://apify.com/xquik/x-user-search-scraper)
+  kullanıcı adı, biyografi ve konuma göre kullanıcıları takipçi, onay işareti,
   hesap yaşı ve konum filtreleriyle arar. Aramadan hesap listeleri
   oluşturduğunda kullan. Profil başına $0.00015'ten başlar.
-- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper):
+- [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
   X'in "Account based in" etiketi, X'e nasıl bağlandıkları ve kullanıcı adı
   değişiklikleriyle hesapların nerede bulunduğunu kontrol eder. Hesapların
   nerede bulunduğunu doğrulaman gerektiğinde kullan. Hesap başına $0.00015'ten
   başlar.
-- [X Email Scraper](https://apify.com/xquik/x-email-scraper): Kullanıcı
+- [X Email Scraper](https://apify.com/xquik/x-email-scraper) kullanıcı
   adlarından, takipçilerden veya kullanıcı aramalarından, hesapların
   profillerinde yayımladığı e-postaları, telefonları ve bağlantıları alır.
   Profillerin yayımladığı e-postalara ihtiyacın olduğunda kullan. Profil başına
   $0.00015'ten başlar.
-- [X List Scraper](https://apify.com/xquik/x-list-scraper): Liste URL'lerinden
+- [X List Scraper](https://apify.com/xquik/x-list-scraper) Liste URL'lerinden
   veya ID'lerinden Liste gönderilerini, üyelerini ve takipçilerini kazır.
   Kaynaklarını özenle seçilmiş bir Liste belirlediğinde kullan. Satır başına
   $0.00015'ten başlar.
-- [X Community Scraper](https://apify.com/xquik/x-community-scraper): Topluluk
+- [X Community Scraper](https://apify.com/xquik/x-community-scraper) Topluluk
   bilgilerini, gönderilerini, aramalarını, üyelerini ve moderatörlerini kazır.
   Kaynakların X Toplulukları olduğunda kullan. Satır başına $0.00015'ten başlar.
-- [X Space Scraper](https://apify.com/xquik/x-space-scraper): Sohbet Odalarını
-  anahtar kelimeyle bulur; başlıklarını, durumlarını, zamanlarını, dinleyici
+- [X Space Scraper](https://apify.com/xquik/x-space-scraper) Sohbet Odalarını
+  anahtar kelimeyle bulur ve başlıklarını, durumlarını, zamanlarını, dinleyici
   sayılarını, sunucularını ve konuşmacılarını okur. Yayınları da URL veya ID ile
   okur. X'teki canlı ses ve video yayınlarını takip ettiğinde kullan. Sohbet
   Odası veya yayın başına $0.00015'ten başlar.
-- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper): Sıralama,
-  hacim, sorgu ve WOEID ile konuma göre gerçek zamanlı gündemi kazır. Nerede
-  neyin gündemde olduğunu takip ettiğinde kullan. Gündem başlığı başına
-  $0.00015'ten başlar.
-- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper): X iş ilanlarını
+- [X Trends Scraper](https://apify.com/xquik/x-trends-scraper) sıralama, hacim,
+  sorgu ve WOEID ile konuma göre gerçek zamanlı gündemi kazır. Nerede neyin
+  gündemde olduğunu takip ettiğinde kullan. Gündem başlığı başına $0.00015'ten
+  başlar.
+- [X Jobs Scraper](https://apify.com/xquik/x-job-scraper) X iş ilanlarını
   anahtar kelime, yer, çalışma şekli, kıdem ve şirkete göre maaş ve başvuru
   bağlantılarıyla kazır. X'te yayımlanan iş ilanlarını topladığında kullan. İlan
   başına $0.00015'ten başlar.
-- [X Article Scraper](https://apify.com/xquik/x-article-scraper): Uzun biçimli
-  X Makalelerini kapak, yazar, tarih ve metriklerle Markdown ve metin olarak
+- [X Article Scraper](https://apify.com/xquik/x-article-scraper) uzun biçimli X
+  Makalelerini kapak, yazar, tarih ve metriklerle Markdown ve metin olarak
   kazır. Gönderi değil, makale gövdesi gerektiğinde kullan. Makale başına
   $0.00015'ten başlar.
-- [X Media Downloader](https://apify.com/xquik/x-media-downloader): Gönderilerden
+- [X Media Downloader](https://apify.com/xquik/x-media-downloader) gönderilerden
   veya profillerden fotoğrafları, videoları ve GIF'leri MP4 ve metadata
   seçenekleriyle çıkarır veya depolar. Medya dosyalarının kendisine ihtiyacın
   olduğunda kullan. Medya satırı başına $0.00015'ten başlar.
-- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring):
-  Markadan bahseden gönderileri yapay zeka destekli ilgi, duygu durumu ve
-  müşteri deneyimi cevaplarıyla izler. Çalıştırmaları da karşılaştırır. Bir
+- [X (Twitter) Brand Monitoring with AI Analysis](https://apify.com/xquik/x-twitter-brand-monitoring)
+  markadan bahseden gönderileri yapay zeka destekli ilgi, duygu durumu ve
+  müşteri deneyimi cevaplarıyla izler ve çalıştırmaları karşılaştırır. Bir
   markayı zaman içinde takip ettiğinde kullan. Analiz edilen gönderi başına
   $0.0003'ten başlar.
-- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis):
-  Yapay zeka ile her gönderi için tutum, yoğunluk ve alaycılık olasılığını
+- [X Tweet Sentiment Analysis with AI](https://apify.com/xquik/x-tweet-sentiment-analysis)
+  yapay zeka ile her gönderi için tutum, yoğunluk ve alaycılık olasılığını
   etiketler. Herhangi bir konuda genel duygu durumuna ihtiyacın olduğunda
   kullan. Analiz edilen gönderi başına $0.0003'ten başlar.
-- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals):
-  Yapay zeka ile yükseliş, düşüş, nötr veya karışık duruşu, içerik türünü,
+- [X (Twitter) Stock & Crypto AI Trading Signals](https://apify.com/xquik/x-twitter-stock-crypto-signals)
+  yapay zeka ile yükseliş, düşüş, nötr veya karışık duruşu, içerik türünü,
   kesinliği ve varlık ilgisini etiketler. Hisse senedi, kripto veya alım satım
-  konuşmalarını takip ettiğinde kullan. Analiz edilen gönderi başına
-  $0.0003'ten başlar.
-- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor):
-  Yapay zeka ile haber gönderilerini biçim, kaynak atfı ve konu ilgisine göre
+  konuşmalarını takip ettiğinde kullan. Analiz edilen gönderi başına $0.0003'ten
+  başlar.
+- [X (Twitter) News Monitor with AI Analysis](https://apify.com/xquik/x-twitter-news-monitor)
+  haber gönderilerini yapay zeka ile biçim, kaynak atfı ve konu ilgisine göre
   etiketler. Haberi yorumdan ayırdığında kullan. Analiz edilen gönderi başına
   $0.0003'ten başlar.
-- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier):
-  Yapay zeka ile her gönderi için kendi kategori, puan ve evet/hayır
-  sorularını cevaplar. Hazır analizler etiketlerine uymadığında kullan. Analiz
-  edilen gönderi başına $0.0003'ten başlar.
-- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer):
-  Yapay zekanın 8 özellik cevabından her gönderi için 0 ile 100 arasında bir
+- [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)
+  yapay zeka ile her gönderi için kendi kategori, puan ve evet/hayır sorularını
+  cevaplar. Hazır analizler etiketlerine uymadığında kullan. Analiz edilen
+  gönderi başına $0.0003'ten başlar.
+- [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)
+  yapay zekanın 8 özellik cevabından her gönderi için 0 ile 100 arasında bir
   Viral Score ve bir karar tahmin eder. Gönderilerin neden yayıldığını veya
   tutmadığını incelediğinde kullan. Analiz edilen gönderi başına $0.0003'ten
   başlar.
-
-## Kazımadan fazlası mı lazım?
-
-Xquik ayrıca 47 panel aracı, bir REST API, imzalı webhook'lar ve bir MCP
-sunucusu sunar.
-
-- [API belgeleri](https://docs.xquik.com/introduction): REST API kılavuzları
-- [Search Tweets API](https://docs.xquik.com/api-reference/x/search-tweets):
-  REST ile gönderi ara
-- [Batch Tweets API](https://docs.xquik.com/api-reference/x/batch-tweets): ID
-  ile 100'e kadar gönderi getir
-- [User Tweets API](https://docs.xquik.com/api-reference/x/user-tweets): bir
-  kullanıcının zaman akışını al
-- [MCP sunucusu](https://docs.xquik.com/mcp/overview): desteklenen araçları
-  keşfet
-- [Webhooks](https://docs.xquik.com/webhooks/overview): imzalı olay teslimatı
-- [GitHub](https://github.com/Xquik-dev/x-twitter-scraper): kaynak kod ve sorun
-  takibi
 
 ## SSS
 
