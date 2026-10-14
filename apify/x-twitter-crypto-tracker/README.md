@@ -15,10 +15,9 @@
 ·
 [Italiano](README.it.md)
 
-https://www.youtube.com/watch?v=4UOSpoOoC3Y
-
-[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367) with
-Claude Code, Codex, Cursor & more, from 6:07.
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
+with Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X (Twitter) Crypto Tracker catches every new tweet
@@ -215,8 +214,8 @@ diagnostics. Pick the one that matches the data you need.
   location filters. Use it when you build account lists from search. From
   $0.00015 per profile.
 - [X Account Location Scraper](https://apify.com/xquik/x-account-location-scraper)
-  checks where accounts are based with X's Account based in label, connected via
-  & username changes. Use it when you vet where accounts are based. From
+  checks where accounts are based with X's "Account based in" label, "connected
+  via" & username changes. Use it when you vet where accounts are based. From
   $0.00015 per account.
 - [X Email Scraper](https://apify.com/xquik/x-email-scraper) gets the emails,
   phones & links accounts publish on their profiles, from handles, followers or
