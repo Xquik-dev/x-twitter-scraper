@@ -40,6 +40,42 @@ Resmî bir X geliştirici hesabına ihtiyacın yok. Desteklenen veri çekme yoll
 için X hesabı bağlaman veya kullanman da gerekmez. Xquik API anahtarı yeterlidir.
 Özel okumalar ve X işlemleri için bağlı bir X hesabı gerekir.
 
+<!-- trust:start -->
+
+## Güven ve kullanım
+
+[![Twitter API package downloads](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fdownloads.json)](https://xquik.com/trust#downloads)
+[![Twitter scraper users on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-users.json)](https://apify.com/xquik)
+[![Twitter scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
+[![Tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
+[![Xquik Twitter API accounts](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Faccounts.json)](https://xquik.com/trust#accounts)
+[![Twitter Skill installs](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskill-installs.json)](https://xquik.com/trust#skill-installs)
+[![Xquik verified revenue on TrustMRR](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frevenue.json)](https://trustmrr.com/startup/xquik)
+[![Twitter API median response time](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frest-p50.json)](https://xquik.com/trust#speed)
+[![Xquik GitHub stars](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fgithub-stars.json)](https://github.com/Xquik-dev)
+[![x-developer downloads on npm](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fnpm-x-developer.json)](https://www.npmjs.com/package/x-developer)
+[![x-twitter-scraper Skill installs on skills.sh](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskills-x-twitter-scraper.json)](https://skills.sh/xquik-dev/x-twitter-scraper)
+[![x-scraper downloads on ClawHub](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fclawhub-x-scraper.json)](https://clawhub.ai/xquik/skills/x-scraper)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13731/badge)](https://www.bestpractices.dev/projects/13731)
+
+- Xquik'in Twitter API paketleri npm, PyPI, RubyGems, NuGet, Packagist ve Terraform'da 51.000+ kez indirildi ([kaynak](https://xquik.com/trust#downloads)) <!-- trust:downloads 51020 -->
+- Xquik'in Apify'daki Twitter scraper Actor'larını 7.800+ kişi kullandı ([kaynak](https://apify.com/xquik)) <!-- trust:apify-users 7800 -->
+- Xquik'in Apify'daki Twitter scraper Actor'ları 5.700.000+ kez çalıştı ([kaynak](https://apify.com/xquik)) <!-- trust:apify-runs 5704701 -->
+- 4,66/5 puan, X Tweet Scraper için 16 Apify yorumundan ([kaynak](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
+- xquik.com'da 3.900+ hesap ([kaynak](https://xquik.com/trust#accounts)) <!-- trust:accounts 3924 -->
+- Xquik'in Twitter Skill'leri skills.sh'te 1.600+ kez kuruldu ([kaynak](https://xquik.com/trust#skill-installs)) <!-- trust:skill-installs 1612 -->
+- TrustMRR'ın doğruladığı $38.000+ gelir ([kaynak](https://trustmrr.com/startup/xquik)) <!-- trust:revenue 38115 -->
+- Son 7 günde REST API medyan okuma süresi 501 ms ([kaynak](https://xquik.com/trust#speed)) <!-- trust:rest-p50 501 -->
+- Xquik depolarında 370+ GitHub yıldızı ([kaynak](https://github.com/Xquik-dev)) <!-- trust:github-stars 374 -->
+- npm üzerinde x-developer için 9.500+ indirme ([kaynak](https://www.npmjs.com/package/x-developer)) <!-- trust:npm-x-developer 9500 -->
+- Bu deponun Skill'leri skills.sh'te 1.500+ kez kuruldu ([kaynak](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1525 -->
+- ClawHub üzerinde x-scraper için 1.600+ indirme ([kaynak](https://clawhub.ai/xquik/skills/x-scraper)) <!-- trust:clawhub-x-scraper 1619 -->
+- Bu depo OpenSSF Best Practices geçme ölçütlerini karşılıyor ([kaynak](https://www.bestpractices.dev/projects/13731)) <!-- trust:openssf-x-twitter-scraper 1 -->
+
+2026-10-15 tarihinde kontrol edildi. Her sayıyı tarihi ve kaynağıyla [xquik.com/trust](https://xquik.com/trust) sayfasında ya da [JSON](https://xquik.com/trust.json) olarak gör.
+
+<!-- trust:end -->
+
 ## Xquik neler sunar?
 
 | İhtiyaç | Çözüm |
@@ -299,6 +335,8 @@ Herkes için aynı sonucu garanti etmez.
 | X Reply Scraper | "I ve been using many of the scrapers, I got better results with this one." | darthraper, 2026-07-31. [Kaynak](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 | X Reply Scraper | "Recommended. Thank you for the free usage, working." | furkkann1, 2026-07-31. [Kaynak](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 | X Reply Scraper | "We are able to get much more replies comparing the other scrapers, thank you!" | Tovuk (Tovuk), 2026-07-31. [Kaynak](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
+
+Apify, düşük puanlılar dahil tüm yorumları gösterir. [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper/reviews), [X Follower Scraper](https://apify.com/xquik/x-follower-scraper/reviews) ve [X Reply Scraper](https://apify.com/xquik/x-reply-scraper/reviews) için tüm yorumları oku.
 
 <!-- END APIFY TESTIMONIALS -->
 

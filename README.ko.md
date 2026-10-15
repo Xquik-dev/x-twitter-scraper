@@ -39,6 +39,42 @@ Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서�
 사용할 필요도 없습니다. Xquik API 키만 사용합니다. 비공개 읽기와 X 작업에는 연결된
 X 계정이 필요합니다.
 
+<!-- trust:start -->
+
+## 신뢰와 사용 현황
+
+[![Twitter API package downloads](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fdownloads.json)](https://xquik.com/trust#downloads)
+[![Twitter scraper users on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-users.json)](https://apify.com/xquik)
+[![Twitter scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
+[![Tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
+[![Xquik Twitter API accounts](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Faccounts.json)](https://xquik.com/trust#accounts)
+[![Twitter Skill installs](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskill-installs.json)](https://xquik.com/trust#skill-installs)
+[![Xquik verified revenue on TrustMRR](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frevenue.json)](https://trustmrr.com/startup/xquik)
+[![Twitter API median response time](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frest-p50.json)](https://xquik.com/trust#speed)
+[![Xquik GitHub stars](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fgithub-stars.json)](https://github.com/Xquik-dev)
+[![x-developer downloads on npm](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fnpm-x-developer.json)](https://www.npmjs.com/package/x-developer)
+[![x-twitter-scraper Skill installs on skills.sh](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskills-x-twitter-scraper.json)](https://skills.sh/xquik-dev/x-twitter-scraper)
+[![x-scraper downloads on ClawHub](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fclawhub-x-scraper.json)](https://clawhub.ai/xquik/skills/x-scraper)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13731/badge)](https://www.bestpractices.dev/projects/13731)
+
+- Xquik의 Twitter API 패키지는 npm, PyPI, RubyGems, NuGet, Packagist, Terraform에서 51,000회 이상 다운로드되었습니다 ([출처](https://xquik.com/trust#downloads)) <!-- trust:downloads 51020 -->
+- Apify에 있는 Xquik의 Twitter 스크레이퍼 Actor 사용자는 7,800명 이상입니다 ([출처](https://apify.com/xquik)) <!-- trust:apify-users 7800 -->
+- Apify에 있는 Xquik의 Twitter 스크레이퍼 Actor는 5,700,000회 이상 실행되었습니다 ([출처](https://apify.com/xquik)) <!-- trust:apify-runs 5704701 -->
+- X Tweet Scraper는 Apify 리뷰 16개에서 5점 만점에 4.66점입니다 ([출처](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
+- xquik.com 계정은 3,900개 이상입니다 ([출처](https://xquik.com/trust#accounts)) <!-- trust:accounts 3924 -->
+- Xquik의 Twitter Skill은 skills.sh에서 1,600회 이상 설치되었습니다 ([출처](https://xquik.com/trust#skill-installs)) <!-- trust:skill-installs 1612 -->
+- TrustMRR가 확인한 매출은 $38,000+입니다 ([출처](https://trustmrr.com/startup/xquik)) <!-- trust:revenue 38115 -->
+- 최근 7일 REST API 읽기 시간의 중앙값은 501 ms입니다 ([출처](https://xquik.com/trust#speed)) <!-- trust:rest-p50 501 -->
+- Xquik 저장소 전체의 GitHub 스타는 370개 이상입니다 ([출처](https://github.com/Xquik-dev)) <!-- trust:github-stars 374 -->
+- x-developer는 npm에서 9,500회 이상 다운로드되었습니다 ([출처](https://www.npmjs.com/package/x-developer)) <!-- trust:npm-x-developer 9500 -->
+- 이 저장소의 Skill은 skills.sh에서 1,500회 이상 설치되었습니다 ([출처](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1525 -->
+- x-scraper는 ClawHub에서 1,600회 이상 다운로드되었습니다 ([출처](https://clawhub.ai/xquik/skills/x-scraper)) <!-- trust:clawhub-x-scraper 1619 -->
+- 이 저장소는 OpenSSF Best Practices passing 기준을 충족합니다 ([출처](https://www.bestpractices.dev/projects/13731)) <!-- trust:openssf-x-twitter-scraper 1 -->
+
+2026-10-15에 확인했습니다. 각 숫자의 날짜와 출처는 [xquik.com/trust](https://xquik.com/trust) 또는 [JSON](https://xquik.com/trust.json)에서 볼 수 있습니다.
+
+<!-- trust:end -->
+
 ## Xquik이 제공하는 기능
 
 | 필요한 작업 | Xquik 사용 방법 |
@@ -297,6 +333,8 @@ $0.00015입니다. 이후에는 모든 요금제가 $0.00015입니다. 플랫폼
 | X Reply Scraper | "I ve been using many of the scrapers, I got better results with this one." | darthraper, 2026-07-31. [출처](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 | X Reply Scraper | "Recommended. Thank you for the free usage, working." | furkkann1, 2026-07-31. [출처](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 | X Reply Scraper | "We are able to get much more replies comparing the other scrapers, thank you!" | Tovuk (Tovuk), 2026-07-31. [출처](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
+
+Apify에서는 낮은 평점을 포함한 모든 후기를 볼 수 있습니다. [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper/reviews), [X Follower Scraper](https://apify.com/xquik/x-follower-scraper/reviews), [X Reply Scraper](https://apify.com/xquik/x-reply-scraper/reviews)의 전체 후기를 확인하세요.
 
 <!-- END APIFY TESTIMONIALS -->
 

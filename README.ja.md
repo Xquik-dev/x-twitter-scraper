@@ -39,6 +39,42 @@ Xquikが課金するのは、配信した結果のうち、重複がなくフィ
 使用する必要もありません。Xquik API キーだけを使います。非表示データの読み取りと
 X 上の操作には、接続済みの X アカウントが必要です。
 
+<!-- trust:start -->
+
+## 信頼と利用状況
+
+[![Twitter API package downloads](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fdownloads.json)](https://xquik.com/trust#downloads)
+[![Twitter scraper users on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-users.json)](https://apify.com/xquik)
+[![Twitter scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
+[![Tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
+[![Xquik Twitter API accounts](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Faccounts.json)](https://xquik.com/trust#accounts)
+[![Twitter Skill installs](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskill-installs.json)](https://xquik.com/trust#skill-installs)
+[![Xquik verified revenue on TrustMRR](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frevenue.json)](https://trustmrr.com/startup/xquik)
+[![Twitter API median response time](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frest-p50.json)](https://xquik.com/trust#speed)
+[![Xquik GitHub stars](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fgithub-stars.json)](https://github.com/Xquik-dev)
+[![x-developer downloads on npm](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fnpm-x-developer.json)](https://www.npmjs.com/package/x-developer)
+[![x-twitter-scraper Skill installs on skills.sh](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskills-x-twitter-scraper.json)](https://skills.sh/xquik-dev/x-twitter-scraper)
+[![x-scraper downloads on ClawHub](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fclawhub-x-scraper.json)](https://clawhub.ai/xquik/skills/x-scraper)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13731/badge)](https://www.bestpractices.dev/projects/13731)
+
+- Xquik の Twitter API パッケージは npm、PyPI、RubyGems、NuGet、Packagist、Terraform で 51,000 回以上ダウンロードされています ([出典](https://xquik.com/trust#downloads)) <!-- trust:downloads 51020 -->
+- Apify にある Xquik の Twitter スクレイパー Actor の利用者は 7,800 人以上です ([出典](https://apify.com/xquik)) <!-- trust:apify-users 7800 -->
+- Apify にある Xquik の Twitter スクレイパー Actor は 5,700,000 回以上実行されています ([出典](https://apify.com/xquik)) <!-- trust:apify-runs 5704701 -->
+- X Tweet Scraper は Apify で 16 件のレビューから 5 点中 4.66 点です ([出典](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
+- xquik.com のアカウント数は 3,900 以上です ([出典](https://xquik.com/trust#accounts)) <!-- trust:accounts 3924 -->
+- Xquik の Twitter 向け Skill は skills.sh で 1,600 回以上インストールされています ([出典](https://xquik.com/trust#skill-installs)) <!-- trust:skill-installs 1612 -->
+- TrustMRR が確認した収益は $38,000+ です ([出典](https://trustmrr.com/startup/xquik)) <!-- trust:revenue 38115 -->
+- 直近 7 日間の REST API 読み取り時間の中央値は 501 ms です ([出典](https://xquik.com/trust#speed)) <!-- trust:rest-p50 501 -->
+- Xquik のリポジトリ全体で GitHub スターは 370 個以上です ([出典](https://github.com/Xquik-dev)) <!-- trust:github-stars 374 -->
+- x-developer は npm で 9,500 回以上ダウンロードされています ([出典](https://www.npmjs.com/package/x-developer)) <!-- trust:npm-x-developer 9500 -->
+- このリポジトリの Skill は skills.sh で 1,500 回以上インストールされています ([出典](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1525 -->
+- x-scraper は ClawHub で 1,600 回以上ダウンロードされています ([出典](https://clawhub.ai/xquik/skills/x-scraper)) <!-- trust:clawhub-x-scraper 1619 -->
+- このリポジトリは OpenSSF Best Practices の passing 基準を満たしています ([出典](https://www.bestpractices.dev/projects/13731)) <!-- trust:openssf-x-twitter-scraper 1 -->
+
+2026-10-15 に確認しました。各数値の日付と出典は [xquik.com/trust](https://xquik.com/trust) か [JSON](https://xquik.com/trust.json) で確認できます。
+
+<!-- trust:end -->
+
 ## Xquik でできること
 
 | 目的 | Xquik の方法 |
@@ -296,6 +332,8 @@ Apify のアカウントと token を使い、Apify Console または API から
 | X Reply Scraper | "I ve been using many of the scrapers, I got better results with this one." | darthraper, 2026-07-31. [出典](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 | X Reply Scraper | "Recommended. Thank you for the free usage, working." | furkkann1, 2026-07-31. [出典](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 | X Reply Scraper | "We are able to get much more replies comparing the other scrapers, thank you!" | Tovuk (Tovuk), 2026-07-31. [出典](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
+
+Apify では低い評価を含むすべてのレビューを読めます。[X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper/reviews)、[X Follower Scraper](https://apify.com/xquik/x-follower-scraper/reviews)、[X Reply Scraper](https://apify.com/xquik/x-reply-scraper/reviews) のレビュー一覧をご覧ください。
 
 <!-- END APIFY TESTIMONIALS -->
 
