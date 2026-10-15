@@ -41,6 +41,42 @@ Du brauchst kein offizielles X-Entwicklerkonto. Für unterstützte Abrufe musst 
 auch kein X-Konto verbinden oder verwenden. Ein Xquik-API-Schlüssel reicht aus.
 Private Lesezugriffe und X-Aktionen benötigen ein verbundenes X-Konto.
 
+<!-- trust:start -->
+
+## Vertrauen & Nutzung
+
+[![Twitter API package downloads](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fdownloads.json)](https://xquik.com/trust#downloads)
+[![Twitter scraper users on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-users.json)](https://apify.com/xquik)
+[![Twitter scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
+[![Tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
+[![Xquik Twitter API accounts](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Faccounts.json)](https://xquik.com/trust#accounts)
+[![Twitter Skill installs](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskill-installs.json)](https://xquik.com/trust#skill-installs)
+[![Xquik verified revenue on TrustMRR](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frevenue.json)](https://trustmrr.com/startup/xquik)
+[![Twitter API median response time](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frest-p50.json)](https://xquik.com/trust#speed)
+[![Xquik GitHub stars](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fgithub-stars.json)](https://github.com/Xquik-dev)
+[![x-developer downloads on npm](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fnpm-x-developer.json)](https://www.npmjs.com/package/x-developer)
+[![x-twitter-scraper Skill installs on skills.sh](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskills-x-twitter-scraper.json)](https://skills.sh/xquik-dev/x-twitter-scraper)
+[![x-scraper downloads on ClawHub](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fclawhub-x-scraper.json)](https://clawhub.ai/xquik/skills/x-scraper)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13731/badge)](https://www.bestpractices.dev/projects/13731)
+
+- 51.000+ Downloads der Twitter-API-Pakete von Xquik auf npm, PyPI, RubyGems, NuGet, Packagist & Terraform ([Quelle](https://xquik.com/trust#downloads)) <!-- trust:downloads 51020 -->
+- 7.800+ Nutzer der Twitter-Scraper-Actors von Xquik auf Apify ([Quelle](https://apify.com/xquik)) <!-- trust:apify-users 7800 -->
+- 5.700.000+ Läufe der Twitter-Scraper-Actors von Xquik auf Apify ([Quelle](https://apify.com/xquik)) <!-- trust:apify-runs 5704701 -->
+- 4,66 von 5 für X Tweet Scraper aus 16 Apify-Bewertungen ([Quelle](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
+- 3.900+ Konten auf xquik.com ([Quelle](https://xquik.com/trust#accounts)) <!-- trust:accounts 3924 -->
+- 1.600+ Installationen der Twitter-Skills von Xquik auf skills.sh ([Quelle](https://xquik.com/trust#skill-installs)) <!-- trust:skill-installs 1612 -->
+- $38.000+ Umsatz, von TrustMRR verifiziert ([Quelle](https://trustmrr.com/startup/xquik)) <!-- trust:revenue 38115 -->
+- 501 ms mediane Lesezeit der REST API in den letzten 7 Tagen ([Quelle](https://xquik.com/trust#speed)) <!-- trust:rest-p50 501 -->
+- 370+ GitHub-Sterne über alle Xquik-Repos ([Quelle](https://github.com/Xquik-dev)) <!-- trust:github-stars 374 -->
+- 9.500+ Downloads von x-developer auf npm ([Quelle](https://www.npmjs.com/package/x-developer)) <!-- trust:npm-x-developer 9500 -->
+- 1.500+ Installationen der Skills dieses Repos auf skills.sh ([Quelle](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1525 -->
+- 1.600+ Downloads von x-scraper auf ClawHub ([Quelle](https://clawhub.ai/xquik/skills/x-scraper)) <!-- trust:clawhub-x-scraper 1619 -->
+- Dieses Repo erfüllt die Passing-Kriterien von OpenSSF Best Practices ([Quelle](https://www.bestpractices.dev/projects/13731)) <!-- trust:openssf-x-twitter-scraper 1 -->
+
+Geprüft am 2026-10-15. Jede Zahl mit Datum & Quelle steht auf [xquik.com/trust](https://xquik.com/trust) oder als [JSON](https://xquik.com/trust.json).
+
+<!-- trust:end -->
+
 ## Was Xquik abdeckt
 
 | Bedarf | Xquik-Lösung |
@@ -299,6 +335,8 @@ Sie garantiert nicht dasselbe Ergebnis für alle.
 | X Reply Scraper | "I ve been using many of the scrapers, I got better results with this one." | darthraper, 2026-07-31. [Quelle](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 | X Reply Scraper | "Recommended. Thank you for the free usage, working." | furkkann1, 2026-07-31. [Quelle](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 | X Reply Scraper | "We are able to get much more replies comparing the other scrapers, thank you!" | Tovuk (Tovuk), 2026-07-31. [Quelle](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
+
+Apify zeigt jede Bewertung, auch niedrigere. Alle Bewertungen gibt es für [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper/reviews), [X Follower Scraper](https://apify.com/xquik/x-follower-scraper/reviews) & [X Reply Scraper](https://apify.com/xquik/x-reply-scraper/reviews).
 
 <!-- END APIFY TESTIMONIALS -->
 

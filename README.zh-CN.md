@@ -37,6 +37,42 @@ MCP 和 Apify 搜索帖子、导出数据并监控账号。Xquik 只对已交付
 无需官方 X 开发者账号。使用受支持的抓取接口时，也无需连接或使用 X 账号。
 只需 Xquik API 密钥。读取私有内容和执行 X 操作时，才需要已连接的 X 账号。
 
+<!-- trust:start -->
+
+## 信任与使用情况
+
+[![Twitter API package downloads](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fdownloads.json)](https://xquik.com/trust#downloads)
+[![Twitter scraper users on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-users.json)](https://apify.com/xquik)
+[![Twitter scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
+[![Tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
+[![Xquik Twitter API accounts](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Faccounts.json)](https://xquik.com/trust#accounts)
+[![Twitter Skill installs](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskill-installs.json)](https://xquik.com/trust#skill-installs)
+[![Xquik verified revenue on TrustMRR](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frevenue.json)](https://trustmrr.com/startup/xquik)
+[![Twitter API median response time](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frest-p50.json)](https://xquik.com/trust#speed)
+[![Xquik GitHub stars](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fgithub-stars.json)](https://github.com/Xquik-dev)
+[![x-developer downloads on npm](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fnpm-x-developer.json)](https://www.npmjs.com/package/x-developer)
+[![x-twitter-scraper Skill installs on skills.sh](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskills-x-twitter-scraper.json)](https://skills.sh/xquik-dev/x-twitter-scraper)
+[![x-scraper downloads on ClawHub](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fclawhub-x-scraper.json)](https://clawhub.ai/xquik/skills/x-scraper)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13731/badge)](https://www.bestpractices.dev/projects/13731)
+
+- Xquik 的 Twitter API 软件包在 npm、PyPI、RubyGems、NuGet、Packagist 和 Terraform 上至少下载了 51,000 次 ([来源](https://xquik.com/trust#downloads)) <!-- trust:downloads 51020 -->
+- Xquik 在 Apify 上的 Twitter 抓取 Actor 至少有 7,800 位用户 ([来源](https://apify.com/xquik)) <!-- trust:apify-users 7800 -->
+- Xquik 在 Apify 上的 Twitter 抓取 Actor 至少运行了 5,700,000 次 ([来源](https://apify.com/xquik)) <!-- trust:apify-runs 5704701 -->
+- X Tweet Scraper 在 Apify 上获得 4.66 分（满分 5 分），共 16 条评价 ([来源](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
+- xquik.com 上至少有 3,900 个账户 ([来源](https://xquik.com/trust#accounts)) <!-- trust:accounts 3924 -->
+- Xquik 的 Twitter Skill 在 skills.sh 上至少安装了 1,600 次 ([来源](https://xquik.com/trust#skill-installs)) <!-- trust:skill-installs 1612 -->
+- TrustMRR 验证的收入为 $38,000+ ([来源](https://trustmrr.com/startup/xquik)) <!-- trust:revenue 38115 -->
+- 过去 7 天 REST API 读取耗时的中位数为 501 ms ([来源](https://xquik.com/trust#speed)) <!-- trust:rest-p50 501 -->
+- Xquik 各仓库至少获得 370 个 GitHub 星标 ([来源](https://github.com/Xquik-dev)) <!-- trust:github-stars 374 -->
+- x-developer 在 npm 上至少下载了 9,500 次 ([来源](https://www.npmjs.com/package/x-developer)) <!-- trust:npm-x-developer 9500 -->
+- 本仓库的 Skill 在 skills.sh 上至少安装了 1,500 次 ([来源](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1525 -->
+- x-scraper 在 ClawHub 上至少下载了 1,600 次 ([来源](https://clawhub.ai/xquik/skills/x-scraper)) <!-- trust:clawhub-x-scraper 1619 -->
+- 本仓库符合 OpenSSF Best Practices 的 passing 标准 ([来源](https://www.bestpractices.dev/projects/13731)) <!-- trust:openssf-x-twitter-scraper 1 -->
+
+检查日期为 2026-10-15。可在 [xquik.com/trust](https://xquik.com/trust) 查看每个数字的日期和来源，也可获取 [JSON](https://xquik.com/trust.json)。
+
+<!-- trust:end -->
+
 ## Xquik 能做什么
 
 | 需求 | Xquik 的处理方式 |
@@ -291,6 +327,8 @@ $0.00015。之后所有方案均为 $0.00015。平台使用费另计。请用
 | X Reply Scraper | "I ve been using many of the scrapers, I got better results with this one." | darthraper, 2026-07-31. [来源](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 | X Reply Scraper | "Recommended. Thank you for the free usage, working." | furkkann1, 2026-07-31. [来源](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 | X Reply Scraper | "We are able to get much more replies comparing the other scrapers, thank you!" | Tovuk (Tovuk), 2026-07-31. [来源](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
+
+Apify 展示全部评论，包括较低评分。查看 [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper/reviews)、[X Follower Scraper](https://apify.com/xquik/x-follower-scraper/reviews) 和 [X Reply Scraper](https://apify.com/xquik/x-reply-scraper/reviews) 的全部评论。
 
 <!-- END APIFY TESTIMONIALS -->
 
