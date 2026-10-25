@@ -52,28 +52,28 @@ una cuenta de X conectada.
 [![Xquik Twitter API accounts](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Faccounts.json)](https://xquik.com/trust#accounts)
 [![Twitter Skill installs](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskill-installs.json)](https://xquik.com/trust#skill-installs)
 [![Xquik verified revenue on TrustMRR](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frevenue.json)](https://trustmrr.com/startup/xquik)
-[![Twitter API median response time](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frest-p50.json)](https://xquik.com/trust#speed)
+[![Twitter API p99 server read time](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frest-p99.json)](https://xquik.com/trust#speed)
 [![Xquik GitHub stars](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fgithub-stars.json)](https://github.com/Xquik-dev)
 [![x-developer downloads on npm](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fnpm-x-developer.json)](https://www.npmjs.com/package/x-developer)
 [![x-twitter-scraper Skill installs on skills.sh](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskills-x-twitter-scraper.json)](https://skills.sh/xquik-dev/x-twitter-scraper)
 [![x-scraper downloads on ClawHub](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fclawhub-x-scraper.json)](https://clawhub.ai/xquik/skills/x-scraper)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13731/badge)](https://www.bestpractices.dev/projects/13731)
 
-- 51,000+ descargas de los paquetes de la API de Twitter de Xquik en npm, PyPI, RubyGems, NuGet, Packagist y Terraform ([fuente](https://xquik.com/trust#downloads)) <!-- trust:downloads 51020 -->
-- 7,800+ usuarios de los Actors de Xquik para scraping de Twitter en Apify ([fuente](https://apify.com/xquik)) <!-- trust:apify-users 7800 -->
-- 5,700,000+ ejecuciones de los Actors de Xquik para scraping de Twitter en Apify ([fuente](https://apify.com/xquik)) <!-- trust:apify-runs 5704701 -->
+- 53,000+ descargas de los paquetes de la API de Twitter de Xquik en npm, PyPI, RubyGems, NuGet, Packagist y Terraform ([fuente](https://xquik.com/trust#downloads)) <!-- trust:downloads 53547 -->
+- 9,500+ usuarios de los Actors de Xquik para scraping de Twitter en Apify ([fuente](https://apify.com/xquik)) <!-- trust:apify-users 9595 -->
+- 6,700,000+ ejecuciones de los Actors de Xquik para scraping de Twitter en Apify ([fuente](https://apify.com/xquik)) <!-- trust:apify-runs 6765249 -->
 - 4.66 de 5 para X Tweet Scraper con 16 reseñas en Apify ([fuente](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
-- 3,900+ cuentas en xquik.com ([fuente](https://xquik.com/trust#accounts)) <!-- trust:accounts 3924 -->
-- 1,600+ instalaciones de los Skills de Twitter de Xquik en skills.sh ([fuente](https://xquik.com/trust#skill-installs)) <!-- trust:skill-installs 1612 -->
-- $38,000+ en ingresos verificados por TrustMRR ([fuente](https://trustmrr.com/startup/xquik)) <!-- trust:revenue 38115 -->
-- 501 ms de lectura mediana en la API REST en los últimos 7 días ([fuente](https://xquik.com/trust#speed)) <!-- trust:rest-p50 501 -->
-- 370+ estrellas en GitHub en los repositorios de Xquik ([fuente](https://github.com/Xquik-dev)) <!-- trust:github-stars 374 -->
-- 9,500+ descargas de x-developer en npm ([fuente](https://www.npmjs.com/package/x-developer)) <!-- trust:npm-x-developer 9500 -->
-- 1,500+ instalaciones de los Skills de este repositorio en skills.sh ([fuente](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1525 -->
-- 1,600+ descargas de x-scraper en ClawHub ([fuente](https://clawhub.ai/xquik/skills/x-scraper)) <!-- trust:clawhub-x-scraper 1619 -->
+- 4,000+ cuentas en xquik.com ([fuente](https://xquik.com/trust#accounts)) <!-- trust:accounts 4073 -->
+- 1,600+ instalaciones de los Skills de Twitter de Xquik en skills.sh ([fuente](https://xquik.com/trust#skill-installs)) <!-- trust:skill-installs 1617 -->
+- $39,000+ en ingresos verificados por TrustMRR ([fuente](https://trustmrr.com/startup/xquik)) <!-- trust:revenue 39784 -->
+- 13.2 s de lectura p99 en servidor de la API REST, 7 días, fallos incluidos ([fuente](https://xquik.com/trust#speed)) <!-- trust:rest-p99 13194 -->
+- 380+ estrellas en GitHub en los repositorios de Xquik ([fuente](https://github.com/Xquik-dev)) <!-- trust:github-stars 383 -->
+- 9,900+ descargas de x-developer en npm ([fuente](https://www.npmjs.com/package/x-developer)) <!-- trust:npm-x-developer 9947 -->
+- 1,500+ instalaciones de los Skills de este repositorio en skills.sh ([fuente](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1530 -->
+- 1,700+ descargas de x-scraper en ClawHub ([fuente](https://clawhub.ai/xquik/skills/x-scraper)) <!-- trust:clawhub-x-scraper 1706 -->
 - Este repositorio cumple los criterios básicos de OpenSSF Best Practices ([fuente](https://www.bestpractices.dev/projects/13731)) <!-- trust:openssf-x-twitter-scraper 1 -->
 
-Revisado el 2026-10-15. Mira cada número con su fecha y fuente en [xquik.com/trust](https://xquik.com/trust) o en [JSON](https://xquik.com/trust.json).
+Revisado el 2026-10-25. Mira cada número con su fecha y fuente en [xquik.com/trust](https://xquik.com/trust) o en [JSON](https://xquik.com/trust.json).
 
 <!-- trust:end -->
 
