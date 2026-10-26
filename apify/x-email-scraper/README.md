@@ -1,19 +1,19 @@
 **English** ·
-[Español](README.es.md)
+[Español](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-email-scraper/README.es.md)
 ·
-[Türkçe](README.tr.md)
+[Türkçe](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-email-scraper/README.tr.md)
 ·
-[简体中文](README.zh-CN.md)
+[简体中文](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-email-scraper/README.zh-CN.md)
 ·
-[日本語](README.ja.md)
+[日本語](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-email-scraper/README.ja.md)
 ·
-[한국어](README.ko.md)
+[한국어](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-email-scraper/README.ko.md)
 ·
-[Deutsch](README.de.md)
+[Deutsch](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-email-scraper/README.de.md)
 ·
-[Français](README.fr.md)
+[Français](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-email-scraper/README.fr.md)
 ·
-[Italiano](README.it.md)
+[Italiano](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-email-scraper/README.it.md)
 
 [![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
@@ -52,6 +52,66 @@ email is not delivered & costs nothing. You pay **$0.00015 per delivered row**,
 - Duplicate removal before billing.
 - JSON, CSV, Excel, XML & RSS exports through Apify datasets.
 - Runs resume from saved state after an Apify migration.
+
+## What you get
+
+### Complete results
+
+- Each answer holds the fullest data X has for it.
+
+### Accurate rows
+
+- Every ID in a row stays exact.
+- Verified badges match what `x.com` shows.
+- Rows hold public data only.
+- Ads & promoted entries never reach your rows.
+
+### Fresh data
+
+- Reads keep working when X ships changes.
+
+### Speed
+
+- A slow X answer doesn't hold up your request.
+- Actors read many handles, posts & queries at once.
+- Reads finish the moment their rows arrive.
+- Stalled Actor calls recover on their own.
+
+### Fair billing
+
+- Bad input costs nothing, since it's refused before any read.
+- Actors charge only for delivered, unique, matching rows.
+- A profile shared by several targets is billed once.
+- A restarted run never charges twice.
+- A spend cap becomes a row cap, & diagnostics still get written.
+- Small runs end with a tip that cuts cost.
+
+### Reliability
+
+- A one-off X failure doesn't fail your request.
+- A deadline returns the rows already found, with diagnostics.
+- Actors ride out short Xquik outages.
+- Actor runs survive restarts without repeats.
+- One bad row doesn't sink a batch.
+- Stopped runs keep their rows & their report.
+- A run that can't start still explains itself.
+- Problems on X's side are fixed before they reach your reads.
+- Support can see exactly what a request or run returned.
+
+### Built for agents
+
+- Actors accept input written for other Actors.
+- Every run says why it ended & whether to retry.
+
+### Rich data
+
+- Short links resolve, & list rows can carry full profiles.
+- Profiles yield emails, phones & links tagged by network.
+
+### Quality checks
+
+- Every field X shows is served, left out on purpose or proven absent.
+- Every read is checked live each hour.
 
 ## How to get emails from X profiles
 
@@ -212,8 +272,8 @@ the website a profile links to. `writtenAs` holds the account's own spelling
 when it differs, as in "jane [at] example [dot] org".
 
 A phone number appears only when the profile writes it in a form that can be
-nothing else, such as a WhatsApp link or a number that starts with +. A year, a
-count or a price is never read as a phone number.
+nothing else. A WhatsApp link or a number that starts with + qualifies. A year,
+a count or a price is never read as a phone number.
 
 ## How much does it cost to get emails from X profiles?
 
@@ -230,8 +290,8 @@ more prepaid usage.
 - Deduplication runs before billing.
 - Apify maximum-total-charge settings cap delivered rows.
 
-A followers scan runs for a while to find few rows, since it reads about 350
-profiles a second & keeps about 1 in 400. `maxScan` bounds that time.
+A followers scan takes a while, since few profiles publish an email. `maxScan`
+bounds that time.
 
 ## Limits & recovery
 

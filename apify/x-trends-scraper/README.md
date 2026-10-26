@@ -1,19 +1,19 @@
 **English** ·
-[Español](README.es.md)
+[Español](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-trends-scraper/README.es.md)
 ·
-[Türkçe](README.tr.md)
+[Türkçe](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-trends-scraper/README.tr.md)
 ·
-[简体中文](README.zh-CN.md)
+[简体中文](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-trends-scraper/README.zh-CN.md)
 ·
-[日本語](README.ja.md)
+[日本語](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-trends-scraper/README.ja.md)
 ·
-[한국어](README.ko.md)
+[한국어](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-trends-scraper/README.ko.md)
 ·
-[Deutsch](README.de.md)
+[Deutsch](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-trends-scraper/README.de.md)
 ·
-[Français](README.fr.md)
+[Français](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-trends-scraper/README.fr.md)
 ·
-[Italiano](README.it.md)
+[Italiano](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-trends-scraper/README.it.md)
 
 [![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
@@ -35,7 +35,7 @@ You need no X API key or login.
 
 ## Locations & trend data
 
-- Multiple countries, towns or WOEIDs, read concurrently.
+- Multiple countries, towns or WOEIDs, read at once.
 - Up to 50 current trends for each location.
 - Past trends from the Twitter trends archive, by date & time, since 2026-10-13.
 - A list of every place X offers trends for, with its WOEID, country & type.
@@ -47,6 +47,61 @@ You need no X API key or login.
 - Duplicate removal for equivalent inputs before billing.
 - JSON, CSV, Excel, XML & RSS exports through Apify datasets.
 - Runs resume from saved state after an Apify migration.
+
+## What you get
+
+### Complete results
+
+- Each answer holds the fullest data X has for it.
+
+### Accurate rows
+
+- Rows hold public data only.
+
+### Fresh data
+
+- Trends can be read for any past moment since the archive began.
+- Reads keep working when X ships changes.
+
+### Speed
+
+- A slow X answer doesn't hold up your request.
+- Actors read many handles, posts & queries at once.
+- Reads finish the moment their rows arrive.
+- Stalled Actor calls recover on their own.
+
+### Fair billing
+
+- Bad input costs nothing, since it's refused before any read.
+- Actors charge only for delivered, unique, matching rows.
+- A restarted run never charges twice.
+- A spend cap becomes a row cap, & diagnostics still get written.
+
+### Reliability
+
+- A one-off X failure doesn't fail your request.
+- A deadline returns the rows already found, with diagnostics.
+- Actors ride out short Xquik outages.
+- Actor runs survive restarts without repeats.
+- One bad row doesn't sink a batch.
+- Stopped runs keep their rows & their report.
+- A run that can't start still explains itself.
+- Problems on X's side are fixed before they reach your reads.
+- Support can see exactly what a request or run returned.
+
+### Built for agents
+
+- Actors accept input written for other Actors.
+- Every run says why it ended & whether to retry.
+
+### Rich data
+
+- Trends by place name, country or region ID, promoted trends marked.
+
+### Quality checks
+
+- Every field X shows is served, left out on purpose or proven absent.
+- Every read is checked live each hour.
 
 ## How to scrape X trends
 
@@ -97,9 +152,8 @@ instead of trends.
 ```
 
 Each place has the `id` that X post search takes as `place`. X ranks the places,
-so their order can differ between runs. X lists up to 20 places for a name, &
-fewer for a few names, such as New York. The run keeps only places with the name
-you typed, so New Delhi returns no rows & costs nothing.
+so their order can differ between runs. A name returns up to 20 places with that
+name. A name with no such place returns no rows & costs nothing.
 
 `maxItems` caps the whole run & fills it term by term, so the first term can use
 it all. Set `maxItemsPerTarget` to give each term an even share.

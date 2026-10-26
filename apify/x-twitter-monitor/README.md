@@ -1,19 +1,19 @@
 **English** ·
-[Español](README.es.md)
+[Español](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-twitter-monitor/README.es.md)
 ·
-[Türkçe](README.tr.md)
+[Türkçe](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-twitter-monitor/README.tr.md)
 ·
-[简体中文](README.zh-CN.md)
+[简体中文](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-twitter-monitor/README.zh-CN.md)
 ·
-[日本語](README.ja.md)
+[日本語](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-twitter-monitor/README.ja.md)
 ·
-[한국어](README.ko.md)
+[한국어](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-twitter-monitor/README.ko.md)
 ·
-[Deutsch](README.de.md)
+[Deutsch](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-twitter-monitor/README.de.md)
 ·
-[Français](README.fr.md)
+[Français](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-twitter-monitor/README.fr.md)
 ·
-[Italiano](README.it.md)
+[Italiano](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-twitter-monitor/README.it.md)
 
 [![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
@@ -23,11 +23,11 @@ Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X (Twitter) Monitor sends Twitter alerts for the
 accounts & keywords you pick. It catches every new tweet, reply, quote, repost &
 profile change of a watched account. It usually catches each one in under a
-second after X shows it. For a keyword, it catches every new tweet X's latest
-search shows. It also catches follows & followers. Each event reaches Discord,
-Telegram, Slack or your webhook as an alert. Most other Apify Actors charge
-before filtering or deduplicating. Xquik charges only for delivered, unique
-results, & here only for the hours a monitor watches.
+second after X shows it. For a keyword, it catches every new matching tweet. It
+also catches follows & followers. Each event reaches Discord, Telegram, Slack or
+your webhook as an alert. Most other Apify Actors charge before filtering or
+deduplicating. Xquik charges only for delivered, unique results, & here only for
+the hours a monitor watches.
 
 Paste accounts or keywords & click Start. Monitoring starts at once, & alerts
 arrive between runs. You pay **$0.0045 per monitor-hour**. Events & alerts are
@@ -40,12 +40,11 @@ free, & Apify bills platform usage separately.
 
 - Every new tweet, reply, quote & repost of the accounts you watch, usually
   caught in under a second after X shows it.
-- Every new tweet X's latest search shows for your keyword, with any X search
-  operator.
+- Every new tweet that matches your keyword, with any X search operator.
 - Deleted tweets, live videos & Spaces an account starts.
-- Profile changes, such as display name, username, bio, profile photo, banner,
-  location, website, verification, protection, pinned tweet & availability, also
-  usually caught in under a second after X shows them.
+- Profile changes, also usually caught in under a second after X shows them.
+  They cover display name, username, bio, profile photo, banner, location,
+  website, verification, protection, pinned tweet & availability.
 - New follows & unfollows of each watched account.
 - New & lost followers of each watched account.
 - Tweets with mentions, hashtags, media, links or polls, & long tweets, in
@@ -60,6 +59,72 @@ free, & Apify bills platform usage separately.
   run status. Telegram confirms in the chat when you press Start.
 - Every event in the run's dataset & in 1 history dataset per saved task or
   monitor name.
+
+## What you get
+
+### Accurate rows
+
+- Reposts carry the full original text.
+- Every ID in a row stays exact.
+- Mentions, links, hashtags & highlights line up with the text.
+- Verified badges match what `x.com` shows.
+- Rows hold public data only.
+- Ads & promoted entries never reach your rows.
+- Monitors report only real deletions & unfollows.
+- Profile change alerts don't flap.
+
+### Fresh data
+
+- Account monitors see changes within about a second.
+- Keyword monitors catch every matching post.
+- Monitors don't miss posts between checks.
+- A monitor that falls behind catches up on what it missed.
+- Live videos & Spaces raise an event when they start.
+- Reads keep working when X ships changes.
+
+### Speed
+
+- A slow X answer doesn't hold up your request.
+- Stalled Actor calls recover on their own.
+- Webhooks arrive without connection setup delay.
+
+### Fair billing
+
+- Monitors have 1 flat hourly price, events & webhooks included.
+- Monitor Actors bill only the hours a monitor watched.
+
+### Reliability
+
+- A one-off X failure doesn't fail your request.
+- Actors ride out short Xquik outages.
+- Actor runs survive restarts without repeats.
+- Stopped runs keep their rows & their report.
+- A run that can't start still explains itself.
+- Webhooks are signed & replay-safe.
+- Webhook deliveries retry until they land, for up to 7 days.
+- New events don't queue behind old retries.
+- Webhooks never go to private or local hosts.
+- Chat alerts arrive in order without hitting rate limits.
+- Problems on X's side are fixed before they reach your reads.
+- Support can see exactly what a request or run returned.
+
+### Built for agents
+
+- Actors accept input written for other Actors.
+- Every run says why it ended & whether to retry.
+
+### Rich data
+
+- Post rows carry note text, edits, Community Notes, reach labels & reply
+  controls.
+- Rows carry source apps, media counts & professional account data.
+- Media comes with variants, alt text, sizes & availability reasons.
+
+### Quality checks
+
+- Every field X shows is served, left out on purpose or proven absent.
+- Every read is checked live each hour.
+- Actor READMEs, schemas & real output name the same fields.
 
 ## How to set up Twitter keyword alerts
 
@@ -188,8 +253,8 @@ Its name starts with `x-monitor-`.
 1 call is the whole API. Each call starts or updates the monitor, charges the
 hours watched since the call before, & returns only what is new. No call charges
 an hour twice. A call that starts or updates a monitor ends fast, inside what
-Apify's MCP waits for. A stop takes about half a minute, because it collects the
-last events first. Read its result from the run when your tool stops waiting.
+Apify's MCP waits for. A stop takes about half a minute & saves the last events.
+Read its result from the run when your tool stops waiting.
 
 This input starts or continues a monitor.
 
@@ -251,8 +316,7 @@ tweets of your first account instead, so you can see what alerts would hold.
 - Up to 10 webhook URLs per input, plus Telegram.
 - Events stay 30 days, so `since` can save them again within that time.
 - A run that stops early leaves its events for the next run. None is lost.
-- A run that ends between its hour reservation & its charge charges nothing.
-  Those hours stay paid & free.
+- A run cut off before its charge pays nothing. Those hours are never billed.
 - Each run writes 1 free status row, so its dataset is never empty.
 - Every monitor Actor of Xquik charges the same hour price. A run pays the
   oldest unpaid hours of all your monitors, whichever Actor watched them.
@@ -380,8 +444,8 @@ then run again with the same input.
 ### What happens when I stop the monitor?
 
 The run stops every target & turns alerts off. It charges the hours watched
-until then. Then it waits about half a minute for the newest events & saves
-them, so none is left behind. Events already kept stay readable for 30 days.
+until then. It saves the newest events within about half a minute, so none is
+lost. Events already kept stay readable for 30 days.
 
 ### How do I check a webhook signature?
 

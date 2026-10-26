@@ -1,19 +1,19 @@
 **English** ·
-[Español](README.es.md)
+[Español](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-community-scraper/README.es.md)
 ·
-[Türkçe](README.tr.md)
+[Türkçe](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-community-scraper/README.tr.md)
 ·
-[简体中文](README.zh-CN.md)
+[简体中文](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-community-scraper/README.zh-CN.md)
 ·
-[日本語](README.ja.md)
+[日本語](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-community-scraper/README.ja.md)
 ·
-[한국어](README.ko.md)
+[한국어](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-community-scraper/README.ko.md)
 ·
-[Deutsch](README.de.md)
+[Deutsch](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-community-scraper/README.de.md)
 ·
-[Français](README.fr.md)
+[Français](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-community-scraper/README.fr.md)
 ·
-[Italiano](README.it.md)
+[Italiano](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-community-scraper/README.it.md)
 
 [![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
@@ -45,7 +45,7 @@ suggests.
 - Read many Communities & resources in 1 run.
 - Get Community info with rules, join question, creator, admin & topic.
 - Collect posts newest first, or the Top posts X ranks highest.
-- Collect the Media tab, or search a Community's posts by keyword.
+- Collect media posts, or search a Community's posts by keyword.
 - Export members & moderators, or find members by name.
 - Find Communities by keyword or topic, with their full records.
 - Filter posts by date, language, media & engagement.
@@ -103,6 +103,71 @@ profile fields, such as `username`, `followers`, `verified` & `communityRole`.
 They also carry `email` & `contactInfo`, the emails, phones & links each profile
 publishes.
 
+## What you get
+
+### Complete results
+
+- Each answer holds the fullest data X has for it.
+
+### Accurate rows
+
+- Reposts carry the full original text.
+- Every ID in a row stays exact.
+- Mentions, links, hashtags & highlights line up with the text.
+- Verified badges match what `x.com` shows.
+- Rows hold public data only.
+- Ads & promoted entries never reach your rows.
+
+### Fresh data
+
+- Reads keep working when X ships changes.
+
+### Speed
+
+- A slow X answer doesn't hold up your request.
+- Actors read many handles, posts & queries at once.
+- Reads finish the moment their rows arrive.
+- Stalled Actor calls recover on their own.
+
+### Fair billing
+
+- Bad input costs nothing, since it's refused before any read.
+- Actors charge only for delivered, unique, matching rows.
+- A profile shared by several targets is billed once.
+- A restarted run never charges twice.
+- A spend cap becomes a row cap, & diagnostics still get written.
+- Small runs end with a tip that cuts cost.
+
+### Reliability
+
+- A one-off X failure doesn't fail your request.
+- A deadline returns the rows already found, with diagnostics.
+- Actors ride out short Xquik outages.
+- Actor runs survive restarts without repeats.
+- One bad row doesn't sink a batch.
+- Stopped runs keep their rows & their report.
+- A run that can't start still explains itself.
+- Problems on X's side are fixed before they reach your reads.
+- Support can see exactly what a request or run returned.
+
+### Built for agents
+
+- Actors accept input written for other Actors.
+- Output is ready for spreadsheets, with flat columns & engagement totals.
+- Every run says why it ended & whether to retry.
+
+### Rich data
+
+- Post rows carry note text, edits, Community Notes, reach labels & reply
+  controls.
+- Rows carry source apps, media counts & professional account data.
+- Media comes with variants, alt text, sizes & availability reasons.
+
+### Quality checks
+
+- Every field X shows is served, left out on purpose or proven absent.
+- Every read is checked live each hour.
+
 ## How do I use X Community Scraper to scrape Community data?
 
 New to Apify?
@@ -155,7 +220,7 @@ Each recipe below is a complete input.
 ```
 
 Set `postsOrder` to `Top` for the posts X ranks highest. Add `"media"` to
-`resources` for the Media tab.
+`resources` for media posts.
 
 ### Search a Community's posts
 
@@ -193,9 +258,9 @@ dataset, so you never pay for them.
 }
 ```
 
-X checks up to 10 matching accounts per name, as X's member search does. Each
-member found is 1 `communityMember` row with its `communityRole`. A run with
-`memberNames` reads no other resource unless `resources` names it.
+X checks up to 10 matching accounts per name. Each member found is 1
+`communityMember` row with its `communityRole`. A run with `memberNames` reads
+no other resource unless `resources` names it.
 
 ### Find Communities by keyword or topic
 

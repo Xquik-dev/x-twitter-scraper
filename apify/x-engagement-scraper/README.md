@@ -1,19 +1,19 @@
 **English** ·
-[Español](README.es.md)
+[Español](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-engagement-scraper/README.es.md)
 ·
-[Türkçe](README.tr.md)
+[Türkçe](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-engagement-scraper/README.tr.md)
 ·
-[简体中文](README.zh-CN.md)
+[简体中文](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-engagement-scraper/README.zh-CN.md)
 ·
-[日本語](README.ja.md)
+[日本語](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-engagement-scraper/README.ja.md)
 ·
-[한국어](README.ko.md)
+[한국어](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-engagement-scraper/README.ko.md)
 ·
-[Deutsch](README.de.md)
+[Deutsch](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-engagement-scraper/README.de.md)
 ·
-[Français](README.fr.md)
+[Français](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-engagement-scraper/README.fr.md)
 ·
-[Italiano](README.it.md)
+[Italiano](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-engagement-scraper/README.it.md)
 
 [![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
@@ -45,6 +45,75 @@ separately. You need no X API key or login.
 - A global cap & a cap for each engagement resource.
 - Source post & engagement-type attribution.
 - Runs resume after an Apify restart.
+
+## What you get
+
+### Complete results
+
+- Reply exports include replies that X's post page leaves out.
+- Each answer holds the fullest data X has for it.
+
+### Accurate rows
+
+- Reposts carry the full original text.
+- Every ID in a row stays exact.
+- Mentions, links, hashtags & highlights line up with the text.
+- Counts X didn't send are listed in `unknownCounts`, never shown as 0.
+- Verified badges match what `x.com` shows.
+- Rows hold public data only.
+- Quote searches return every real quote & nothing else.
+- Ads & promoted entries never reach your rows.
+
+### Fresh data
+
+- Reads keep working when X ships changes.
+
+### Speed
+
+- A slow X answer doesn't hold up your request.
+- Actors read many handles, posts & queries at once.
+- Reads finish the moment their rows arrive.
+- Stalled Actor calls recover on their own.
+
+### Fair billing
+
+- Bad input costs nothing, since it's refused before any read.
+- Actors charge only for delivered, unique, matching rows.
+- A profile shared by several targets is billed once.
+- A restarted run never charges twice.
+- A spend cap becomes a row cap, & diagnostics still get written.
+- Small runs end with a tip that cuts cost.
+
+### Reliability
+
+- A one-off X failure doesn't fail your request.
+- A deadline returns the rows already found, with diagnostics.
+- Actors ride out short Xquik outages.
+- Actor runs survive restarts without repeats.
+- One bad row doesn't sink a batch.
+- Stopped runs keep their rows & their report.
+- A run that can't start still explains itself.
+- Problems on X's side are fixed before they reach your reads.
+- Support can see exactly what a request or run returned.
+
+### Built for agents
+
+- Actors accept input written for other Actors.
+- Output is ready for spreadsheets, with flat columns & engagement totals.
+- Every run says why it ended & whether to retry.
+
+### Rich data
+
+- Post rows carry note text, edits, Community Notes, reach labels & reply
+  controls.
+- Rows carry source apps, media counts & professional account data.
+- Media comes with variants, alt text, sizes & availability reasons.
+- You see when each account reposted a post.
+
+### Quality checks
+
+- Every field X shows is served, left out on purpose or proven absent.
+- Every read is checked live each hour.
 
 ## How to scrape X post engagement
 
@@ -183,9 +252,8 @@ learn whether each account reposted each post.
 ```
 
 Each check is 1 row with `isRetweeted`, `retweetedAt`, `retweetId`,
-`checkedPosts` & `complete`. Its `id` is `repostCheck:<post ID>:<account>`. The
-check reads each account's newest posts. A repost older than those posts reads
-as `false` with `complete: false`.
+`checkedPosts` & `complete`. Its `id` is `repostCheck:<post ID>:<account>`. A
+repost the check can't confirm reads as `false` with `complete: false`.
 
 A run of only `repostCheck` & `tweet` rows keeps your input order, with each
 post followed by its accounts as you listed them.

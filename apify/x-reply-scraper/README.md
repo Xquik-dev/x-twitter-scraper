@@ -1,19 +1,19 @@
 **English** ·
-[Español](README.es.md)
+[Español](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-reply-scraper/README.es.md)
 ·
-[Türkçe](README.tr.md)
+[Türkçe](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-reply-scraper/README.tr.md)
 ·
-[简体中文](README.zh-CN.md)
+[简体中文](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-reply-scraper/README.zh-CN.md)
 ·
-[日本語](README.ja.md)
+[日本語](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-reply-scraper/README.ja.md)
 ·
-[한국어](README.ko.md)
+[한국어](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-reply-scraper/README.ko.md)
 ·
-[Deutsch](README.de.md)
+[Deutsch](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-reply-scraper/README.de.md)
 ·
-[Français](README.fr.md)
+[Français](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-reply-scraper/README.fr.md)
 ·
-[Italiano](README.it.md)
+[Italiano](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-reply-scraper/README.it.md)
 
 [![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
@@ -21,8 +21,11 @@ with Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X Reply Scraper collects replies, comments & whole
-conversations. Most other Apify Actors charge before filtering or deduplicating.
-Xquik charges only for **delivered, unique, filter-matching results**.
+conversations. In public benchmarks, it reads replies 1.7x faster than 4 other
+Actors. It also costs the least per useful reply, as the
+[benchmark below](#benchmark) shows. Most other Apify Actors charge before
+filtering or deduplicating. Xquik charges only for **delivered, unique,
+filter-matching results**.
 
 Scrape Twitter replies & comments for **$0.00015 per delivered row** on every
 Apify plan, & read them without an X account. Paste post URLs, Tweet IDs,
@@ -40,7 +43,7 @@ handles single posts, bulk URL lists, Tweet IDs & user reply timelines.
 
 ### Key features
 
-- Auto mode keeps collecting when direct results are incomplete.
+- Auto mode includes replies that X's post page leaves out.
 - `collectionStrategy` sets how the Actor collects replies.
 - Bulk inputs accept post URLs, Tweet IDs, profiles & usernames.
 - Filters & duplicate removal run before billing.
@@ -101,7 +104,7 @@ Full rows also keep available source metadata.
 - Text details are `displayTextRange`, `noteTweet`, `article`, `card` &
   `cashtagAttachments`.
 - Labels & notices are `contentDisclosure`, `communityNote`,
-  `possiblySensitive`, `tombstone` & `exclusiveContent`.
+  `possiblySensitive`, `softIntervention`, `tombstone` & `exclusiveContent`.
 - Conversation details are `conversationControl`, `limitedActions`,
   `subscriberBadge` & `unmentionedUserIds`.
 - Context fields are `source`, `place`, `communityId`, `communityName`,
@@ -111,6 +114,74 @@ Full rows also keep available source metadata.
 
 Flat rows keep conversation ancestry, source details, result type & schema
 version. See OpenAPI for the exact fields.
+
+## What you get
+
+### Complete results
+
+- Reply exports include replies that X's post page leaves out.
+- Complete mode adds replies the author hid & explains empty threads.
+- Each answer holds the fullest data X has for it.
+
+### Accurate rows
+
+- A post is called missing only when it's gone.
+- Reposts carry the full original text.
+- Every ID in a row stays exact.
+- Mentions, links, hashtags & highlights line up with the text.
+- Counts X didn't send are listed in `unknownCounts`, never shown as 0.
+- Verified badges match what `x.com` shows.
+- Rows hold public data only.
+- Ads & promoted entries never reach your rows.
+
+### Fresh data
+
+- Reads keep working when X ships changes.
+
+### Speed
+
+- A slow X answer doesn't hold up your request.
+- Actors read many handles, posts & queries at once.
+- Reads finish the moment their rows arrive.
+- Stalled Actor calls recover on their own.
+
+### Fair billing
+
+- Bad input costs nothing, since it's refused before any read.
+- Actors charge only for delivered, unique, matching rows.
+- A restarted run never charges twice.
+- A spend cap becomes a row cap, & diagnostics still get written.
+- Small runs end with a tip that cuts cost.
+
+### Reliability
+
+- A one-off X failure doesn't fail your request.
+- A deadline returns the rows already found, with diagnostics.
+- Actors ride out short Xquik outages.
+- Actor runs survive restarts without repeats.
+- One bad row doesn't sink a batch.
+- Stopped runs keep their rows & their report.
+- A run that can't start still explains itself.
+- Problems on X's side are fixed before they reach your reads.
+- Support can see exactly what a request or run returned.
+
+### Built for agents
+
+- Actors accept input written for other Actors.
+- Output is ready for spreadsheets, with flat columns & engagement totals.
+- Every run says why it ended & whether to retry.
+
+### Rich data
+
+- Post rows carry note text, edits, Community Notes, reach labels & reply
+  controls.
+- Rows carry source apps, media counts & professional account data.
+- Media comes with variants, alt text, sizes & availability reasons.
+
+### Quality checks
+
+- Every field X shows is served, left out on purpose or proven absent.
+- Every read is checked live each hour.
 
 ## How do I use X Reply Scraper to scrape replies?
 
@@ -125,7 +196,7 @@ press Try for free.
 3. Run Xquik's X Reply Scraper & open the dataset.
 
 The form comes filled with a public conversation we tested. It returns up to
-1,000 full, flat rows. Auto mode searches the full conversation by default.
+1,000 full, flat rows. Auto mode collects the full conversation by default.
 Deduplication & source attribution stay on.
 
 ### Scrape replies from a post URL
@@ -224,6 +295,59 @@ more prepaid usage.
 Xquik applies one charge per delivered data row. Replies that your filters or
 deduplication remove cost nothing. Diagnostic records in `diagnostics` are free.
 No start, URL, query, pagination or filter fee applies.
+
+## Benchmark
+
+Xquik's X Reply Scraper & 4 other Actors read 200 replies to 1 post. That post
+is public & has 2,800+ replies. Xquik's median run was 1.7x faster than the
+fastest other Actor. It also cost the least per useful reply. Its median row had
+100 fields, 2x the median of the others. A useful reply is unique & sits in that
+post's thread.
+
+- `xquik/x-reply-scraper` delivered 200 useful replies at $0.000156 per useful
+  reply, 19.7 per second & 100 fields per row.
+  [View run](https://console.apify.com/view/runs/nhLt4g4YMjck0a3EJ)
+- `xquik/x-reply-scraper` delivered 200 useful replies at $0.000156 per useful
+  reply, 16.5 per second & 101 fields per row.
+  [View run](https://console.apify.com/view/runs/d89hq348wWv3uXKbF)
+- `xquik/x-reply-scraper` delivered 200 useful replies at $0.000157 per useful
+  reply, 14.4 per second & 101 fields per row.
+  [View run](https://console.apify.com/view/runs/EviOWh0mfuQCmg5Qb)
+- `xquik/x-reply-scraper` delivered 200 useful replies at $0.000157 per useful
+  reply, 13.6 per second & 101 fields per row.
+  [View run](https://console.apify.com/view/runs/fcaxea2NSgv1bYBz5)
+- `xquik/x-reply-scraper` delivered 200 useful replies at $0.000156 per useful
+  reply, 16.5 per second & 100 fields per row.
+  [View run](https://console.apify.com/view/runs/ZPA7cXLo2Cjp5w1K4)
+- `xquik/x-reply-scraper` delivered 200 useful replies at $0.000157 per useful
+  reply, 11.3 per second & 100 fields per row.
+  [View run](https://console.apify.com/view/runs/W1WJthlB7HlUlsdn2)
+- `xquik/x-reply-scraper` delivered 200 useful replies at $0.000156 per useful
+  reply, 20.1 per second & 100 fields per row.
+  [View run](https://console.apify.com/view/runs/cjEy8ukBzYaMNPLEP)
+- `xquik/x-reply-scraper` delivered 200 useful replies at $0.000156 per useful
+  reply, 20.6 per second & 100 fields per row.
+  [View run](https://console.apify.com/view/runs/7KovOrh4gHEhmypa3)
+- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` delivered
+  200 useful replies at $0.000220 per useful reply, 9.6 per second & 50 fields
+  per row. [View run](https://console.apify.com/view/runs/ayhXrguBqIitOaHiQ)
+- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` delivered
+  200 useful replies at $0.000220 per useful reply, 8.1 per second & 50 fields
+  per row. [View run](https://console.apify.com/view/runs/dzdRog1lxaEysgPIO)
+- `scraper_one/x-post-replies-scraper` delivered 200 useful replies at $0.000263
+  per useful reply, 6.6 per second & 15 fields per row.
+  [View run](https://console.apify.com/view/runs/sQOzCIlLD9zZxhOXi)
+- `api-ninja/x-twitter-replies-retweets-scraper` delivered 200 useful replies at
+  $0.000400 per useful reply, 5.0 per second & 33 fields per row.
+  [View run](https://console.apify.com/view/runs/Ld8JStCa5Nnhn6jAH)
+- `apidojo/tweet-scraper` delivered 199 useful replies at $0.000402 per useful
+  reply, 6.7 per second & 51 fields per row.
+  [View run](https://console.apify.com/view/runs/iwVzxxn5QL5hBsswR)
+
+All runs took place on 2026-10-15 on the Bronze tier. Cost is the customer's
+total spend per useful result. Ours includes the Apify usage our customers pay.
+Fields per row is the median count of non-empty fields. That count includes
+nested fields, & a list counts as 1. Open a run for its input, log & dataset.
 
 ## Empty, partial & stopped runs
 
@@ -358,8 +482,7 @@ Use `collectionStrategy: "thread"` to read the source conversation context. Set
 
 The default `auto` strategy adds the replies the post's author hid. Each one is
 a row with `resultType: "hiddenReply"`, at the usual row price, & counts toward
-`maxItems`. The run reads them only when the post counts more replies than X
-shows, so a post without hidden replies costs nothing extra. Set
+`maxItems`. A post without hidden replies costs nothing extra. Set
 `includeHiddenReplies: false` to leave them out.
 
 Use `collectionStrategy: "hiddenReplies"` for the hidden replies alone. X lists
@@ -388,7 +511,7 @@ Use `sort` with these values.
 - `oldest` sorts oldest first
 - `likes` sorts highest like count first
 
-X search undercounts likes on some older replies, so `likes` runs can miss them.
+`likes` runs can miss some replies.
 
 Profile targets collect your requested count of unique, filtered results, then
 sort them. Tweet targets keep global sorting.
