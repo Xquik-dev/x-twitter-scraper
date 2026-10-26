@@ -15,7 +15,7 @@
     "package.json",
     "server.json",
     "start.sh",
-    "stub-server.mjs"
+    "stub-server.ts"
   ],
   "rules": [
     "Use README.md for installation, provider comparisons, SDK links, API coverage, and MCP setup.",
