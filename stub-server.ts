@@ -101,14 +101,8 @@ const TOOL_LIST_RESULT = {
   ttlMs: CACHE_TTL_MS,
 };
 
-type Message = Readonly<Record<string, unknown>>;
-
-function isObject(value: unknown): value is Message {
-  return value !== null && typeof value === "object" && !Array.isArray(value);
-}
-
-export function createMessageHandler(writeLine: (line: string) => void): (msg: Message) => void {
-  function send(msg: Message): void {
+export function createMessageHandler(writeLine: (line: string) => void): (msg: object) => void {
+  function send(msg: Readonly<Record<string, unknown>>): void {
     writeLine(`${JSON.stringify(msg)}\n`);
   }
 
@@ -126,8 +120,10 @@ export function createMessageHandler(writeLine: (line: string) => void): (msg: M
     });
   }
 
-  return function handleMessage(msg: Message): void {
-    const { id, method, params } = msg;
+  return function handleMessage(msg: object): void {
+    const id = "id" in msg ? msg.id : undefined;
+    const method = "method" in msg ? msg.method : undefined;
+    const params = "params" in msg ? msg.params : undefined;
     if (id === undefined) {
       return;
     }
@@ -147,7 +143,8 @@ export function createMessageHandler(writeLine: (line: string) => void): (msg: M
         return sendResult(id, TOOL_LIST_RESULT);
 
       case "tools/call": {
-        const toolName = isObject(params) ? params["name"] : undefined;
+        const toolName =
+          typeof params === "object" && params !== null && "name" in params ? params.name : undefined;
         if (TOOLS.some((tool) => tool.name === toolName)) {
           return sendStubToolResult(id);
         }
@@ -163,14 +160,14 @@ export function createMessageHandler(writeLine: (line: string) => void): (msg: M
   };
 }
 
-export function processLine(line: string, handleMessage: (msg: Message) => void): void {
+export function processLine(line: string, handleMessage: (msg: object) => void): void {
   if (line.length > MAX_LINE_LENGTH) {
     return;
   }
 
   try {
     const msg: unknown = JSON.parse(line);
-    if (isObject(msg)) {
+    if (typeof msg === "object" && msg !== null && !Array.isArray(msg)) {
       handleMessage(msg);
     }
   } catch {}
