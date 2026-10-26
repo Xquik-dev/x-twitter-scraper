@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: 2026 Xquik
 // SPDX-License-Identifier: MIT
 
-import { createInterface } from "node:readline";
+import { createInterface, type Interface } from "node:readline";
 import { pathToFileURL } from "node:url";
 
 const SERVER_INFO = {
@@ -23,7 +23,7 @@ const JSONRPC = "2.0";
 const LIVE_SERVER_MESSAGE =
   "This package is a verification stub. Add https://xquik.com/mcp to your MCP client and complete OAuth 2.1 for live API access. Use a bearer API key only when OAuth is unavailable.";
 
-function inputSchema(name, description, maxLength, minLength) {
+function inputSchema(name: string, description: string, maxLength: number, minLength?: number) {
   return {
     type: "object",
     properties: {
@@ -101,30 +101,32 @@ const TOOL_LIST_RESULT = {
   ttlMs: CACHE_TTL_MS,
 };
 
-function isObject(value) {
+type Message = Readonly<Record<string, unknown>>;
+
+function isObject(value: unknown): value is Message {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
-export function createMessageHandler(writeLine) {
-  function send(msg) {
+export function createMessageHandler(writeLine: (line: string) => void): (msg: Message) => void {
+  function send(msg: Message): void {
     writeLine(`${JSON.stringify(msg)}\n`);
   }
 
-  function sendResult(id, result) {
+  function sendResult(id: unknown, result: unknown): void {
     send({ jsonrpc: JSONRPC, id, result });
   }
 
-  function sendError(id, code, message) {
+  function sendError(id: unknown, code: number, message: string): void {
     send({ jsonrpc: JSONRPC, id, error: { code, message } });
   }
 
-  function sendStubToolResult(id) {
+  function sendStubToolResult(id: unknown): void {
     sendResult(id, {
       content: [{ type: "text", text: LIVE_SERVER_MESSAGE }],
     });
   }
 
-  return function handleMessage(msg) {
+  return function handleMessage(msg: Message): void {
     const { id, method, params } = msg;
     if (id === undefined) {
       return;
@@ -145,39 +147,41 @@ export function createMessageHandler(writeLine) {
         return sendResult(id, TOOL_LIST_RESULT);
 
       case "tools/call": {
-        const toolName = params?.name;
+        const toolName = isObject(params) ? params["name"] : undefined;
         if (TOOLS.some((tool) => tool.name === toolName)) {
           return sendStubToolResult(id);
         }
-        return sendError(id, -32601, `Unknown tool: ${toolName}`);
+        return sendError(id, -32601, `Unknown tool: ${String(toolName)}`);
       }
 
       case "ping":
         return sendResult(id, {});
 
       default:
-        return sendError(id, -32601, `Method not found: ${method}`);
+        return sendError(id, -32601, `Method not found: ${String(method)}`);
     }
   };
 }
 
-export function processLine(line, handleMessage) {
+export function processLine(line: string, handleMessage: (msg: Message) => void): void {
   if (line.length > MAX_LINE_LENGTH) {
     return;
   }
 
   try {
-    const msg = JSON.parse(line);
+    const msg: unknown = JSON.parse(line);
     if (isObject(msg)) {
       handleMessage(msg);
     }
   } catch {}
 }
 
-export function startServer({
-  input = process.stdin,
-  output = process.stdout,
-} = {}) {
+type ServerStreams = {
+  readonly input?: NodeJS.ReadableStream;
+  readonly output?: { write(line: string): unknown };
+};
+
+export function startServer({ input = process.stdin, output = process.stdout }: ServerStreams = {}): Interface {
   const rl = createInterface({ input, terminal: false });
   const handleMessage = createMessageHandler((line) => output.write(line));
   rl.on("line", (line) => processLine(line, handleMessage));
