@@ -12,7 +12,12 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
-    "types": ["node"]
+    "types": [
+      "node"
+    ],
+    "moduleDetection": "force"
   },
-  "include": ["**/*"]
+  "include": [
+    "**/*"
+  ]
 }
