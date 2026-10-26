@@ -175,7 +175,7 @@ export function processLine(line: string, handleMessage: (msg: object) => void):
 
 type ServerStreams = {
   readonly input?: NodeJS.ReadableStream;
-  readonly output?: { write(line: string): unknown };
+  readonly output?: { write: (line: string) => unknown };
 };
 
 export function startServer({ input = process.stdin, output = process.stdout }: ServerStreams = {}): Interface {

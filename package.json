@@ -17,7 +17,7 @@
   },
   "packageManager": "bun@1.4.3",
   "scripts": {
-    "check": "tsc --noEmit && type-coverage -p tsconfig.json --strict --at-least 100 && eslint --flag unstable_native_nodejs_ts_config --max-warnings 0 ."
+    "check": "tsc --noEmit && type-coverage -p tsconfig.json --strict --at-least 100 && eslint --config eslint.config.mts --flag unstable_native_nodejs_ts_config --max-warnings 0 ."
   },
   "engines": {
     "bun": ">=1.4.0"
