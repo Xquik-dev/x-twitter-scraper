@@ -21,7 +21,89 @@ de la plataforma. No necesitas clave de API de X ni iniciar sesión.
 > Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 > "Twitter" y "X" son marcas registradas de X Corp.
 
-## Datos & filtros de Listas
+## ¿Por qué usar X List Scraper?
+
+- **Clientes potenciales entre los miembros de Listas.** Filtra miembros &
+  seguidores por `minFollowers`, `hasEmail` o `bioContains`. Las filas traen los
+  correos, teléfonos & enlaces que publica cada perfil.
+- **Solo los posts que quieres.** Filtra los posts de Listas por fecha o tiempo
+  Unix, idioma, contenido multimedia, interacción & verificación. Incluye las
+  respuestas o déjalas fuera.
+- **Muchas Listas en 1 ejecución.** Combina detalles, posts, miembros &
+  seguidores de muchas Listas.
+- **Define tus límites de filas.** Limita toda la ejecución, o cada recurso de
+  Lista & término de búsqueda.
+
+### Resultados completos
+
+- Cada resultado trae los datos más completos que X tiene sobre él.
+
+### Filas precisas
+
+- Las cuentas protegidas & las Listas privadas reciben una respuesta clara, no
+  una página vacía.
+- Los reposts traen el texto original completo.
+- Cada ID de una fila se mantiene exacto.
+- Las menciones, los enlaces, los hashtags & los resaltados quedan alineados con
+  el texto.
+- Las insignias de verificación coinciden con lo que muestra `x.com`.
+- Las filas solo contienen datos públicos.
+- Los anuncios & las entradas promocionadas nunca llegan a tus filas.
+
+### Datos actualizados
+
+- Las lecturas siguen funcionando cuando X lanza cambios.
+
+### Velocidad
+
+- Una página lenta no frena tu ejecución.
+- Las lecturas terminan en cuanto llegan sus filas.
+- Las llamadas a Actores que se atascan se recuperan solas.
+
+### Cobro justo
+
+- Una entrada inválida no cuesta nada & te dice qué corregir.
+- Los Actores solo cobran las filas entregadas, únicas & que cumplen tus
+  filtros.
+- Una ejecución reiniciada nunca cobra 2 veces.
+- Las ejecuciones respetan tu límite de gasto & aun así escriben sus
+  diagnósticos.
+- Las ejecuciones pequeñas terminan con un consejo para gastar menos.
+
+### Confiabilidad
+
+- Un error aislado no hace fallar tu ejecución.
+- Si se acaba el tiempo, recibes las filas ya encontradas, con diagnósticos.
+- Los Actores resisten las caídas breves de Xquik.
+- Las ejecuciones de los Actores siguen tras un reinicio sin repetir nada.
+- Una fila defectuosa no arruina un lote.
+- Las ejecuciones detenidas conservan sus filas & su informe.
+- Una ejecución que no puede iniciar igual explica por qué.
+- Soporte puede ver exactamente qué devolvió una solicitud o una ejecución.
+
+### Hecho para agentes
+
+- Los Actores aceptan entradas escritas para otros Actores.
+- La salida está lista para hojas de cálculo, con columnas planas & totales de
+  interacción.
+- Cada ejecución dice por qué terminó & si conviene reintentar.
+
+### Datos detallados
+
+- Las filas de posts traen el texto de los Note Tweets, las ediciones, las Notas
+  de la Comunidad, las etiquetas de alcance & los controles de respuesta.
+- Las filas traen la app de origen, los conteos de contenido multimedia & los
+  datos de cuentas profesionales.
+- El contenido multimedia trae variantes, texto alternativo, tamaños & motivos
+  de disponibilidad.
+
+### Controles de calidad
+
+- Cada campo que muestra X se entrega, se omite a propósito o se comprueba que
+  no existe.
+- Xquik prueba cada lectura en vivo contra X.
+
+## ¿Qué datos puede extraer X List Scraper?
 
 - Detalles de Listas con nombre, descripción, cantidad de miembros & de
   seguidores, fecha de creación, imagen de encabezado & el perfil público del
@@ -31,17 +113,8 @@ de la plataforma. No necesitas clave de API de X ni iniciar sesión.
 - Miembros de Listas & seguidores de Listas.
 - Búsqueda de Listas por palabra clave. Cada fila es 1 Lista con su dueño, su
   cantidad de miembros & su cantidad de seguidores.
-- Respuestas opcionales en los posts de Listas.
-- Filtros de fechas, tiempo Unix, idioma, contenido multimedia, interacción,
-  verificación & perfiles.
-- Filtros de perfil para miembros & seguidores, como `minFollowers`, `hasEmail`
-  & `bioContains`.
 - Las Listas públicas que una cuenta creó o en las que está, a partir de su
   nombre de usuario o de la URL de su perfil.
-- Muchas Listas & tipos de recurso en 1 ejecución.
-- Un límite global & un límite para cada recurso de Lista o término de búsqueda.
-- Las ejecuciones se reanudan tras una migración de Apify.
-- Eliminación de duplicados antes del cobro.
 
 ## Cómo extraer Listas de X
 

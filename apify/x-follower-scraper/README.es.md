@@ -32,21 +32,106 @@ X Follower Scraper de Xquik devuelve los datos públicos de perfil disponibles d
 seguidores, cuentas seguidas, Listas & Comunidades. Cada fila indica su objetivo
 de origen & su relación.
 
-### Comportamiento principal
+### Casos de uso
 
-- Los filtros & la eliminación de duplicados se aplican antes de facturar.
-- De forma predeterminada, un perfil que comparten varios objetivos aparece & se
-  cobra 1 sola vez.
-- 1 ejecución acepta nombres de usuario, IDs numéricos, URLs & rutas cortas.
-- El modo merge registra los perfiles compartidos, los orígenes, las relaciones
-  & `overlapCount`.
-- Los registros de la ejecución muestran los tiempos de cada página en
-  `fetchDurationMs`, `processingDurationMs`, `pushDurationMs`,
-  `statusDurationMs` & `fullPageDurationMs`.
-- Las ejecuciones conservan las filas entregadas & el progreso cuando Apify las
-  reinicia.
+- Enriquece clientes potenciales & crea datasets de investigación a partir de
+  perfiles de seguidores.
+- Exporta los seguidores de la competencia para buscar clientes potenciales.
+- Compara audiencias entre tu cuenta, la competencia & figuras públicas.
+- Filtra por cantidad de seguidores & verificación para encontrar perfiles que
+  encajen.
+- Exporta los miembros de Comunidades de X.
+- Crea datasets públicos de redes sociales para investigación.
+- Segmenta bases de seguidores por palabra clave de la biografía, ubicación o
+  tipo de perfil.
 
-### ¿Qué datos puede extraer X Follower Scraper?
+## ¿Por qué usar X Follower Scraper?
+
+- **Las listas filtradas de seguidores más económicas.** La [prueba
+  comparativa](README.md#benchmark) del 2026-10-15 conservó los seguidores de
+  NASA con más de 1,000 seguidores. Los otros 4 Actores cobraron cada perfil que
+  leyeron. Costaron de 39 a 273 veces más por perfil útil.
+- **Exportaciones de seguidores 2.6x más rápidas.** En la [prueba
+  comparativa](README.md#benchmark), leyó 1,000 seguidores 2.6x más rápido que
+  otros 4 Actores.
+- **1.6x los campos por perfil.** Su fila full mediana tuvo 39 campos en la
+  [prueba comparativa](README.md#benchmark). Es 1.6x la mediana de los otros
+  Actores.
+- **Ve la superposición de audiencias.** El modo merge da 1 fila por perfil, con
+  cada origen con el que coincidió. Ordena por `overlapCount` para encontrar
+  seguidores en común.
+- **Comprueba quién sigue a quién.** Enumera cuentas en `followCheckSources` &
+  `followCheckTargets`. Cada fila trae `isFollowing` & `isFollowedBy` para 1
+  par.
+- **Todas las audiencias en 1 ejecución.** Indica nombres de usuario, IDs, URLs
+  o rutas cortas. Lee seguidores, cuentas seguidas, miembros de Listas, miembros
+  de Comunidades, afiliados o suscripciones.
+- **Encuentra los perfiles indicados.** Filtra por seguidores, posts, antigüedad
+  de la cuenta, verificación, biografía, ubicación & correo publicado.
+
+### Resultados completos
+
+- Las exportaciones de seguidores & cuentas seguidas devuelven listas completas.
+- Las exportaciones de seguidores verificados también devuelven listas
+  completas.
+- Cada resultado trae los datos más completos que X tiene sobre él.
+
+### Filas precisas
+
+- Cada ID de una fila se mantiene exacto.
+- Las insignias de verificación coinciden con lo que muestra `x.com`.
+- Las filas solo contienen datos públicos.
+- Los anuncios & las entradas promocionadas nunca llegan a tus filas.
+
+### Datos actualizados
+
+- Las lecturas siguen funcionando cuando X lanza cambios.
+
+### Velocidad
+
+- Una página lenta no frena tu ejecución.
+- Las lecturas terminan en cuanto llegan sus filas.
+- Las llamadas a Actores que se atascan se recuperan solas.
+
+### Cobro justo
+
+- Una entrada inválida no cuesta nada & te dice qué corregir.
+- Los Actores solo cobran las filas entregadas, únicas & que cumplen tus
+  filtros.
+- Un perfil que comparten varios objetivos se cobra 1 sola vez.
+- Una ejecución reiniciada nunca cobra 2 veces.
+- Las ejecuciones respetan tu límite de gasto & aun así escriben sus
+  diagnósticos.
+- Las ejecuciones pequeñas terminan con un consejo para gastar menos.
+
+### Confiabilidad
+
+- Un error aislado no hace fallar tu ejecución.
+- Si se acaba el tiempo, recibes las filas ya encontradas, con diagnósticos.
+- Los Actores resisten las caídas breves de Xquik.
+- Las ejecuciones de los Actores siguen tras un reinicio sin repetir nada.
+- Una fila defectuosa no arruina un lote.
+- Las ejecuciones detenidas conservan sus filas & su informe.
+- Una ejecución que no puede iniciar igual explica por qué.
+- Soporte puede ver exactamente qué devolvió una solicitud o una ejecución.
+
+### Hecho para agentes
+
+- Los Actores aceptan entradas escritas para otros Actores.
+- Cada ejecución dice por qué terminó & si conviene reintentar.
+
+### Datos detallados
+
+- Los enlaces cortos se resuelven, & las filas de listas pueden traer perfiles
+  completos.
+
+### Controles de calidad
+
+- Cada campo que muestra X se entrega, se omite a propósito o se comprueba que
+  no existe.
+- Xquik prueba cada lectura en vivo contra X.
+
+## ¿Qué datos puede extraer X Follower Scraper?
 
 | Campo                    | Descripción                                                             |
 | ------------------------ | ----------------------------------------------------------------------- |
@@ -105,20 +190,6 @@ insignia.
 Las filas nunca incluyen estados que solo ve el espectador. Xquik quita las
 marcas de seguimiento, bloqueo, silencio, mensajes directos, notificaciones &
 otras similares del espectador. La salida raw también las quita.
-
-## Casos de uso
-
-- Enriquece clientes potenciales & crea datasets de investigación con más campos
-  por perfil. Nuestra fila full mediana tuvo 38 campos el 2026-09-29. Es 2.5x la
-  mediana de otros 9 Actores.
-- Exporta los seguidores de la competencia para buscar clientes potenciales.
-- Compara audiencias entre tu cuenta, la competencia & figuras públicas.
-- Filtra por cantidad de seguidores & verificación para encontrar perfiles que
-  encajen.
-- Exporta los miembros de Comunidades de X.
-- Crea datasets públicos de redes sociales para investigación.
-- Segmenta bases de seguidores por palabra clave de la biografía, ubicación o
-  tipo de perfil.
 
 ## ¿Cómo uso X Follower Scraper para extraer datos de seguidores?
 
@@ -356,8 +427,9 @@ seguimiento es 1 fila al mismo precio.
 Para más volumen, [elige un plan de Apify](https://apify.com/pricing?fpr=xquik)
 con más uso prepagado.
 
-Una sola ejecución puede leer muchos objetivos. Los topes, la eliminación de
-duplicados & el cobro se mantienen exactos en todos ellos.
+Una sola ejecución puede leer muchos objetivos. Los filtros & la eliminación de
+duplicados se aplican antes de facturar. Los topes, la eliminación de duplicados
+& el cobro se mantienen exactos en todos ellos.
 
 - Los filtros se aplican antes de que un perfil entre a tu dataset, así que las
   filas filtradas no cuestan nada.

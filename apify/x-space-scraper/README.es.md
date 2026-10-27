@@ -20,7 +20,70 @@ plataforma.
 > Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 > "Twitter" y "X" son marcas registradas de X Corp.
 
-## Datos de los Espacios
+## ¿Por qué usar X Space Scraper?
+
+- **Espacios al aire ahora.** Define `queryType` como `Live` para Espacios en
+  vivo o `Upcoming` para los programados.
+- **Repeticiones sin costo adicional.** Activa `includeReplay` para obtener la
+  grabación de cada Espacio finalizado.
+- **También transmisiones de video en vivo.** Lee transmisiones de X por URL o
+  ID en la misma ejecución que los Espacios.
+- **Busca con operadores de X.** Encuentra Espacios por tema, anfitrión,
+  hashtag, idioma o popularidad.
+- **Exportaciones listas para usar.** Conserva, renombra, aplana o une campos, &
+  luego exporta en JSON, CSV, Excel, XML o RSS.
+
+### Resultados completos
+
+- Cada resultado trae los datos más completos que X tiene sobre él.
+
+### Filas precisas
+
+- Las filas solo contienen datos públicos.
+
+### Datos actualizados
+
+- Las lecturas siguen funcionando cuando X lanza cambios.
+
+### Velocidad
+
+- Una página lenta no frena tu ejecución.
+- Las lecturas terminan en cuanto llegan sus filas.
+- Las llamadas a Actores que se atascan se recuperan solas.
+
+### Cobro justo
+
+- Una entrada inválida no cuesta nada & te dice qué corregir.
+- Los Actores solo cobran las filas entregadas, únicas & que cumplen tus
+  filtros.
+- Una ejecución reiniciada nunca cobra 2 veces.
+- Las ejecuciones respetan tu límite de gasto & aun así escriben sus
+  diagnósticos.
+- Las ejecuciones pequeñas terminan con un consejo para gastar menos.
+
+### Confiabilidad
+
+- Un error aislado no hace fallar tu ejecución.
+- Si se acaba el tiempo, recibes las filas ya encontradas, con diagnósticos.
+- Los Actores resisten las caídas breves de Xquik.
+- Las ejecuciones de los Actores siguen tras un reinicio sin repetir nada.
+- Una fila defectuosa no arruina un lote.
+- Las ejecuciones detenidas conservan sus filas & su informe.
+- Una ejecución que no puede iniciar igual explica por qué.
+- Soporte puede ver exactamente qué devolvió una solicitud o una ejecución.
+
+### Hecho para agentes
+
+- Los Actores aceptan entradas escritas para otros Actores.
+- Cada ejecución dice por qué terminó & si conviene reintentar.
+
+### Controles de calidad
+
+- Cada campo que muestra X se entrega, se omite a propósito o se comprueba que
+  no existe.
+- Xquik prueba cada lectura en vivo contra X.
+
+## ¿Qué datos puede extraer X Space Scraper?
 
 - Título, estado & las horas programada, de inicio & de fin de cada Espacio.
 - Cantidad de oyentes en vivo, reproducciones de la repetición & las cuentas que
@@ -35,8 +98,6 @@ plataforma.
   `includeReplay`.
 - Transmisiones por URL o ID, con título, estado, horas, cantidad de
   espectadores & anfitrión.
-- Eliminación de duplicados antes del cobro. Un Espacio que encuentran 2
-  términos de búsqueda es 1 fila.
 
 ## Cómo encontrar Espacios de X
 

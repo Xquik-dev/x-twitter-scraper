@@ -20,16 +20,81 @@ ihtiyacın yok.
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-## Medya dosyaları & metadata
+## Neden X Media Downloader kullanmalısın?
 
-- Gönderilerden, profillerden, yanıtlardan, alıntılardan & gönderi dizilerinden
-  toplu medya.
+- **Her kaynaktan medya.** `sources` içinde gönderileri, profil Medya
+  sekmelerini, yanıtları, alıntıları & gönderi dizilerini seç.
+- **Dosyalar senin için saklanır.** Dosyaları kaydetmek & `storedMediaUrl`
+  bağlantılarını almak için `downloadMedia` seçeneğini aç.
+- **Yalnızca istediğin medya.** Profil medyasını türe, tarihe, dile,
+  görüntülenmeye, beğeniye, yanıta veya yeniden gönderiye göre filtrele.
+- **Tüm altyazılar 1 satırda.** Videolu bir gönderinin bütün altyazı izlerini
+  almak için `includeSubtitles` seçeneğini aç.
+- **Kullanıma hazır dışa aktarımlar.** Alanları tut, yeniden adlandır, düzleştir
+  veya birleştir. Sonra JSON, CSV, Excel, XML veya RSS olarak dışa aktar.
+
+### Eksiksiz sonuçlar
+
+- Her cevap, X'te bulunan en eksiksiz veriyi tutar.
+
+### Doğru satırlar
+
+- Satırlar yalnızca herkese açık veri tutar.
+
+### Güncel veri
+
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Okumalar, satırları geldiği anda biter.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- Hatalı girdi ücretsizdir & neyi düzelteceğini söyler.
+- Actor'lar yalnızca teslim edilen, benzersiz & eşleşen satırlar için ücret
+  alır.
+- Yeniden başlatılan bir çalıştırma asla 2 kez ücret almaz.
+- Çalıştırmalar harcama sınırının içinde kalır & tanılamalarını yine yazar.
+- Küçük çalıştırmalar, maliyeti düşüren bir ipucuyla biter.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Süre dolduğunda o ana kadar bulunan satırlar tanılamalarla birlikte döner.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Tek bir hatalı satır bütün grubu bozmaz.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Zengin veri
+
+- Medya varyantlar, alternatif metin, boyutlar & kullanılabilirlik nedenleriyle
+  gelir.
+- Video altyazıları zaman damgalı satırlarla gelir.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+
+## X Media Downloader hangi verileri çıkarabilir?
+
 - Fotoğraflar, GIF'ler, MP4 kaliteleri & HLS oynatma listeleri.
 - Videolu gönderilerin altyazıları, zaman damgalı satırlar & tam metinle
   birlikte.
-- Metadata, doğrudan URL'ler & kullanılabilir filtreler.
-- Çalıştırma sınırları içinde dosya depolama & çıktı bağlantıları.
-- Faturalamadan önce tekilleştirme.
+- Metadata & doğrudan URL'ler.
 
 ## X medyası nasıl indirilir
 

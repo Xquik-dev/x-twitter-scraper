@@ -29,27 +29,6 @@ X Reply Scraper de Xquik collecte les réponses publiques & les conversations de
 commentaires. Il traite les posts seuls, les listes d'URL en masse, les ID de
 post & les fils de réponses des comptes.
 
-### Fonctionnalités clés
-
-- Le mode auto continue la collecte quand les résultats directs sont incomplets.
-- `collectionStrategy` règle la façon dont l'Actor collecte les réponses.
-- Les entrées en masse acceptent des URL de posts, des ID de post, des profils &
-  des noms d'utilisateur.
-- Les filtres & la suppression des doublons passent avant la facturation.
-- La sortie propose 4 modes de tri, 3 niveaux de détail & 3 styles de champs.
-- Chaque réponse garde sa cible source, les ID de ses parents, l'ID racine & sa
-  profondeur.
-- Les curseurs de reprise prennent en charge le rattrapage d'historique & les
-  runs planifiés.
-- Les runs qui demandent votre attention écrivent 1 enregistrement gratuit dans
-  `diagnostics`. Un run qui lit chaque cible & ne trouve aucune réponse n'en
-  écrit aucun. Son statut explique pourquoi.
-- Les logs du run montrent la durée par page & par cible dans `fetchDurationMs`,
-  `processingDurationMs`, `pushDurationMs`, `statusDurationMs`,
-  `fullPageDurationMs` & `fullTargetDurationMs`.
-- Les runs gardent les réponses livrées & la progression quand Apify les
-  redémarre.
-
 ### Cas d'usage
 
 - Mesurez le sentiment & les retours clients sous les posts de marques & de
@@ -63,7 +42,104 @@ post & les fils de réponses des comptes.
   d'entraînement d'IA.
 - Suivez dans le temps la façon dont un compte répond à ses clients.
 
-### Quelles données X Reply Scraper peut-il extraire ?
+## Pourquoi utiliser X Reply Scraper ?
+
+- **Des exports de réponses 1,7x plus rapides.** Son run médian a été 1,7x plus
+  rapide que le plus rapide de 4 autres Actors. Le [benchmark](README.md#benchmark) a eu
+  lieu le 2026-10-15.
+- **Le coût le plus bas par réponse utile.** Il a coûté le moins par réponse
+  utile dans le [benchmark](README.md#benchmark).
+- **2x plus de champs par réponse.** Sa ligne médiane avait 100 champs dans le
+  [benchmark](README.md#benchmark). C'est 2x la médiane des autres Actors.
+- **Choisissez la forme de la conversation.** Gardez les réponses directes, les
+  réponses imbriquées ou les deux, jusqu'à la profondeur que vous fixez.
+  `collectionStrategy` peut aussi renvoyer le fil ou seulement les réponses
+  masquées.
+- **Reconstruisez chaque fil.** Chaque réponse porte son parent dans
+  `inReplyToId`, sa racine dans `rootTweetId` & sa `depth`.
+- **De nombreux posts en 1 run.** Collez ensemble des URL de posts, des ID de
+  post, des profils & des noms d'utilisateur. Un nom d'utilisateur renvoie les
+  réponses de ce compte.
+- **Seulement les réponses que vous voulez.** Filtrez par mots, hashtags,
+  auteur, langue, certification, engagement, médias & date.
+- **Triez par J'aime ou par date.** Classez les réponses par J'aime, ou listez
+  d'abord les plus récentes ou les plus anciennes. Les lignes sont compactes,
+  complètes ou riches, en `camelCase` ou `snake_case`.
+- **Continuez les gros fils plus tard.** Un run qui s'arrête tôt enregistre la
+  position de chaque cible dans `next-cursors`. Passez-en 1 dans `startCursor`
+  pour continuer.
+
+### Résultats complets
+
+- Le mode complet ajoute les réponses que l'auteur a masquées & explique les
+  fils vides.
+- Chaque résultat contient les données les plus complètes dont X dispose.
+
+### Lignes exactes
+
+- Un post compte comme manquant seulement quand il a disparu.
+- Les reposts portent le texte d'origine en entier.
+- Chaque ID d'une ligne reste exact.
+- Les mentions, liens, hashtags & passages mis en avant pointent vers le bon
+  endroit du texte.
+- Un compteur inconnu apparaît dans `unknownCounts` & jamais comme 0.
+- Les badges de certification correspondent à ce qu'affiche `x.com`.
+- Les lignes ne contiennent que des données publiques.
+- Les publicités & les contenus sponsorisés n'arrivent jamais dans vos lignes.
+
+### Données à jour
+
+- Les lectures continuent de fonctionner quand X déploie des changements.
+
+### Vitesse
+
+- Une page lente ne bloque pas votre run.
+- Les lectures se terminent dès que leurs lignes arrivent.
+- Les appels d'Actor bloqués repartent d'eux-mêmes.
+
+### Facturation juste
+
+- Une entrée invalide ne coûte rien & vous dit quoi corriger.
+- Les Actors facturent seulement les lignes livrées, uniques & conformes à vos
+  filtres.
+- Un run redémarré ne facture jamais deux fois.
+- Les runs restent dans votre limite de dépense & écrivent quand même leurs
+  diagnostics.
+- Les petits runs se terminent par un conseil qui réduit le coût.
+
+### Fiabilité
+
+- Une erreur ponctuelle ne fait pas échouer votre run.
+- Un délai dépassé renvoie les lignes déjà trouvées, avec des diagnostics.
+- Les Actors résistent aux courtes pannes de Xquik.
+- Les runs d'Actor survivent aux redémarrages sans doublons.
+- Une mauvaise ligne ne fait pas échouer tout un lot.
+- Les runs arrêtés gardent leurs lignes & leur rapport.
+- Un run qui ne peut pas démarrer explique quand même pourquoi.
+- Le support peut voir exactement ce qu'une requête ou un run a renvoyé.
+
+### Conçu pour les agents
+
+- Les Actors acceptent une entrée écrite pour d'autres Actors.
+- La sortie est prête pour les tableurs, avec des colonnes plates & des totaux
+  d'engagement.
+- Chaque run indique pourquoi il s'est terminé & s'il faut réessayer.
+
+### Données riches
+
+- Les lignes de post portent le texte des Note Tweets, les modifications, les
+  Notes de la Communauté, les libellés de portée & les contrôles de réponse.
+- Les lignes portent les apps sources, le nombre de médias & les données de
+  compte professionnel.
+- Les médias arrivent avec leurs variantes, leur texte alternatif, leurs tailles
+  & les motifs de disponibilité.
+
+### Contrôles qualité
+
+- Chaque champ que X affiche est fourni, omis exprès ou prouvé absent.
+- Xquik teste chaque lecture en direct sur X.
+
+## Quelles données X Reply Scraper peut-il extraire ?
 
 Les schémas du dataset & du run-report décrivent chaque champ renvoyé. Les
 champs texte, numériques & booléens portent aussi des exemples pour les agents &

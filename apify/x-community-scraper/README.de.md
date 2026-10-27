@@ -29,20 +29,6 @@ ihren URLs oder IDs. Er liefert für jede Community Infos, Posts, Medien,
 Stichwort-Treffer, Mitglieder & Moderatoren. Er findet auch Communities per
 Stichwort oder Thema, & listet die, die X vorschlägt.
 
-### Wichtige Funktionen
-
-- Lies viele Communities & Ressourcen in 1 Run.
-- Hol dir Community-Infos mit Regeln, Beitrittsfrage, Ersteller, Admin & Thema.
-- Sammle Posts, neueste zuerst, oder die Top-Posts, die X am höchsten einstuft.
-- Sammle den Tab Medien oder durchsuche die Posts einer Community per Stichwort.
-- Exportiere Mitglieder & Moderatoren oder finde Mitglieder per Name.
-- Finde Communities per Stichwort oder Thema, mit ihren vollständigen Angaben.
-- Filtere Posts nach Datum, Sprache, Medien & Interaktion.
-- Filtere Mitglieder nach Reichweite, Account-Alter & Verifizierung.
-- Filter & Duplikatentfernung laufen vor der Abrechnung.
-- Runs behalten gelieferte Datensätze & ihren Fortschritt, wenn Apify sie neu
-  startet.
-
 ### Anwendungsfälle
 
 - Erstelle Lead-Listen aus den Mitgliedern einer Nischen-Community.
@@ -54,7 +40,89 @@ Stichwort oder Thema, & listet die, die X vorschlägt.
   Followern.
 - Sammle Posts mit Bildern oder Videos für kreative Recherche.
 
-### Welche Daten kann X Community Scraper extrahieren?
+## Warum X Community Scraper nutzen?
+
+- **Finde Communities ohne IDs.** Suche per Stichwort oder Thema, oder liste die
+  Communities auf, die X vorschlägt. Jeder Treffer kommt mit seinen
+  vollständigen Angaben.
+- **Vollständige Community-Angaben.** Info-Datensätze enthalten Regeln, die
+  Beitrittsfrage, Ersteller, Admin & Thema.
+- **Neueste oder Top-Posts.** Sammle Posts, die neuesten zuerst, oder die
+  Top-Posts, die X am höchsten einstuft. Ergänze Posts mit Medien oder
+  durchsuche die Posts einer Community per Stichwort.
+- **Mitglieder & Moderatoren.** Exportiere beide mit ihrer `communityRole` oder
+  finde Mitglieder per Name. Datensätze enthalten die E-Mails, Telefonnummern &
+  Links, die jedes Profil veröffentlicht.
+- **Filter für Posts & Mitglieder.** Filtere Posts nach Datum, Sprache, Medien &
+  Interaktion. Filtere Mitglieder nach Reichweite, Account-Alter &
+  Verifizierung.
+
+### Vollständige Ergebnisse
+
+- Jedes Ergebnis enthält die vollständigsten Daten, die X dafür hat.
+
+### Genaue Datensätze
+
+- Reposts enthalten den vollständigen Originaltext.
+- Jede ID in einem Datensatz bleibt exakt.
+- Erwähnungen, Links, Hashtags & Hervorhebungen sitzen an der richtigen Stelle
+  im Text.
+- Verifizierungs-Badges stimmen mit dem überein, was `x.com` zeigt.
+- Datensätze enthalten nur öffentliche Daten.
+- Werbung & gesponserte Einträge landen nie in deinen Datensätzen.
+
+### Aktuelle Daten
+
+- Abrufe funktionieren weiter, wenn X Änderungen ausrollt.
+
+### Tempo
+
+- Eine langsame Seite hält deinen Run nicht auf.
+- Abrufe enden, sobald ihre Datensätze ankommen.
+- Hängende Actor-Aufrufe laufen von selbst wieder an.
+
+### Faire Abrechnung
+
+- Eine fehlerhafte Eingabe kostet nichts & sagt dir, was du korrigieren musst.
+- Actors rechnen nur gelieferte, eindeutige, passende Datensätze ab.
+- Ein Profil, das mehrere Ziele teilen, wird nur einmal berechnet.
+- Ein neu gestarteter Run berechnet nie doppelt.
+- Runs bleiben innerhalb deines Ausgabenlimits & schreiben trotzdem ihre
+  Diagnosen.
+- Kleine Runs enden mit einem Tipp, der Kosten senkt.
+
+### Zuverlässigkeit
+
+- Ein einzelner Fehler lässt deinen Run nicht scheitern.
+- Ein Zeitlimit liefert die bereits gefundenen Datensätze samt Diagnosen.
+- Actors überstehen kurze Xquik-Ausfälle.
+- Actor-Runs überstehen Neustarts ohne Dopplungen.
+- Ein fehlerhafter Datensatz lässt keinen Batch scheitern.
+- Gestoppte Runs behalten ihre Datensätze & ihren Report.
+- Ein Run, der nicht starten kann, erklärt trotzdem, warum.
+- Der Support sieht genau, was eine Anfrage oder ein Run geliefert hat.
+
+### Für Agents gebaut
+
+- Actors akzeptieren Eingaben, die für andere Actors geschrieben sind.
+- Die Ausgabe ist bereit für Tabellen, mit flachen Spalten & Interaktionssummen.
+- Jeder Run sagt, warum er endete & ob du es erneut versuchen solltest.
+
+### Umfangreiche Daten
+
+- Post-Datensätze enthalten den Text von Note Tweets, Bearbeitungen, Community
+  Notes, Reichweiten-Labels & Antworteinstellungen.
+- Datensätze enthalten Quell-Apps, Medienzahlen & Daten professioneller
+  Accounts.
+- Medien kommen mit Varianten, Alt-Text, Größen & Gründen zur Verfügbarkeit.
+
+### Qualitätsprüfungen
+
+- Jedes Feld, das X zeigt, wird geliefert, bewusst weggelassen oder ist
+  nachweislich nicht vorhanden.
+- Xquik testet jeden Abruf live gegen X.
+
+## Welche Daten kann X Community Scraper extrahieren?
 
 Community-Datensätze nutzen `resultType: "community"`. Das sind die wichtigsten
 Felder.

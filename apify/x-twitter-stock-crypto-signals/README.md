@@ -33,21 +33,29 @@ It adds an AI-powered stance, content type, conviction level & asset relevance
 to every post. Separate firm calls from hedged remarks & analysis from
 promotion. Spot posts that use your asset's name for something else.
 
-- **Stance per post.** Each post is bullish, bearish, neutral, mixed or unclear.
-- **Content type.** It tells analysis, news, trade ideas, promotion, humor &
-  questions apart.
-- **Conviction.** It separates firm calls & positions from hedged remarks.
-- **Relevance.** It helps you drop unrelated uses of a ticker or company name.
-- **Complete source records.** Every row keeps every field the tweet exposes.
-
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## What you get
+## Why use X (Twitter) Stock & Crypto AI Trading Signals?
+
+- **A signal score per cashtag.** Each cashtag gets bullish & bearish counts & a
+  score from -1 to 1.
+- **Weigh stance by engagement.** The summary also weights the stance split by
+  engagement. It names the most engaged bullish & bearish posts.
+- **Many tickers in 1 run.** List each asset with its tickers & aliases in
+  `analysis.targets`.
+- **See which stances moved.** Add an earlier run's dataset ID to
+  `monitor.baselineDatasetId`. `monitor.changedRows` lists posts whose stance
+  moved.
+- **Check your own text.** Paste notes or drafts in `texts` for the same
+  answers. The run fetches nothing from X.
+- **Spreadsheet-ready answers.** The `Flat answers` view & CSV or Excel exports
+  show 1 column per question.
+- **No accounts or keys.** The price includes AI-powered analysis. You need no
+  AI key, X API key or login.
 
 ### Complete results
 
-- Searches return posts that X's own search tab leaves out.
 - Large date ranges come back whole & fast.
 - Searches return every match, whatever operators you combine.
 - Filtered pages come back full until the results run out.
@@ -58,7 +66,6 @@ promotion. Spot posts that use your asset's name for something else.
 - Search results hold every post that matches your query & nothing else.
 - Word & phrase matching works in every language & script.
 - Language filters work for every language X tags.
-- "X can't run this search" appears only when it's true.
 - Protected accounts & private Lists get a clear answer, not an empty page.
 - Reposts carry the full original text.
 - Every ID in a row stays exact.
@@ -66,9 +73,9 @@ promotion. Spot posts that use your asset's name for something else.
 - Verified badges match what `x.com` shows.
 - Rows hold public data only.
 - Newest-first results stay in true date order across pages.
-- Messy queries still run instead of failing.
+- Searches accept queries as you'd type them on X.
 - Place searches work with names in 6 languages.
-- Searches X can't run fail at once, with the fix.
+- A search that can't run fails at once & says how to fix it.
 - A date means one thing in any common form.
 - Searches accept `since_id` & `max_id` bounds.
 - Ads & promoted entries never reach your rows.
@@ -79,27 +86,24 @@ promotion. Spot posts that use your asset's name for something else.
 
 ### Speed
 
-- A slow X answer doesn't hold up your request.
-- Repeated lookups answer at once.
+- One slow page doesn't hold up your run.
 - Searches stay fast on busy topics.
 - Each next page arrives fast.
-- Actors read many handles, posts & queries at once.
 - Reads finish the moment their rows arrive.
 - Stalled Actor calls recover on their own.
 
 ### Fair billing
 
-- A retried page is free.
-- Bad input costs nothing, since it's refused before any read.
+- Bad input costs nothing & tells you what to fix.
 - AI analysis bills only the posts it analyzed.
 - Actors charge only for delivered, unique, matching rows.
 - A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
+- Runs stay within your spend cap & still write their diagnostics.
 - AI Actors don't bill failed or skipped analyses.
 
 ### Reliability
 
-- A one-off X failure doesn't fail your request.
+- A one-off error doesn't fail your run.
 - Paging stays consistent from one page to the next.
 - Paging never loops forever.
 - A deadline returns the rows already found, with diagnostics.
@@ -108,7 +112,6 @@ promotion. Spot posts that use your asset's name for something else.
 - One bad row doesn't sink a batch.
 - Stopped runs keep their rows & their report.
 - A run that can't start still explains itself.
-- Problems on X's side are fixed before they reach your reads.
 - Support can see exactly what a request or run returned.
 
 ### Built for agents
@@ -128,7 +131,16 @@ promotion. Spot posts that use your asset's name for something else.
 ### Quality checks
 
 - Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
+- Xquik tests every read live against X.
+
+## What data does X (Twitter) Stock & Crypto AI Trading Signals return?
+
+- **Stance per post.** Each post is bullish, bearish, neutral, mixed or unclear.
+- **Content type.** It tells analysis, news, trade ideas, promotion, humor &
+  questions apart.
+- **Conviction.** It separates firm calls & positions from hedged remarks.
+- **Relevance.** It helps you drop unrelated uses of a ticker or company name.
+- **Complete source records.** Every row keeps every field the tweet exposes.
 
 ## How to analyze market sentiment on X
 

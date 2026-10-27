@@ -33,29 +33,20 @@ per delivered row**, & Apify bills platform usage separately.
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## Account details in every row
+## Why use X Account Location Scraper?
 
-- X's "Account based in" label, as a country or a region.
-- The 2-letter ISO code of that country.
-- Whether X notes that the label may be inaccurate.
-- How the account first connected to X, such as Web or an app store country.
-- The platform & the country code in that connection.
-- How often the account changed its username, & when it last did.
-- The organization X shows the account is affiliated with.
-- The account's age in days & a link to its profile.
-- The full public profile, with name, bio, counts, verification, dates & images.
-- Account location labels fill in on more rows, at no extra charge.
-- Many accounts in 1 run, read at once & delivered in input order.
-- Usernames with or without @, `x.com` & `twitter.com` URLs & numeric user IDs.
-- Duplicate removal before billing.
-- JSON, CSV, Excel, XML & RSS exports through Apify datasets.
-- Runs resume from saved state after an Apify migration.
-
-## What you get
+- **A clear answer for every account.** Each row says if X shows a label, has
+  none or held it back.
+- **Rows in your input order.** Many accounts come back in the order you listed
+  them.
+- **Paste any account form.** Mix usernames, @handles, profile URLs & user IDs
+  in 1 list. Use `userIds` for lists you keep, since a user ID survives a
+  username change.
+- **Spreadsheet-ready exports.** Shape columns with `fields` & `flatten`. Export
+  JSON, CSV, Excel, XML or RSS.
 
 ### Complete results
 
-- Account location labels fill in on more rows, at no extra charge.
 - Each answer holds the fullest data X has for it.
 
 ### Accurate rows
@@ -71,30 +62,28 @@ per delivered row**, & Apify bills platform usage separately.
 
 ### Speed
 
-- A slow X answer doesn't hold up your request.
-- Actors read many handles, posts & queries at once.
+- One slow page doesn't hold up your run.
 - Reads finish the moment their rows arrive.
 - Stalled Actor calls recover on their own.
 
 ### Fair billing
 
-- Bad input costs nothing, since it's refused before any read.
+- Bad input costs nothing & tells you what to fix.
 - Actors charge only for delivered, unique, matching rows.
 - A profile shared by several targets is billed once.
 - A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
+- Runs stay within your spend cap & still write their diagnostics.
 - Small runs end with a tip that cuts cost.
 
 ### Reliability
 
-- A one-off X failure doesn't fail your request.
+- A one-off error doesn't fail your run.
 - A deadline returns the rows already found, with diagnostics.
 - Actors ride out short Xquik outages.
 - Actor runs survive restarts without repeats.
 - One bad row doesn't sink a batch.
 - Stopped runs keep their rows & their report.
 - A run that can't start still explains itself.
-- Problems on X's side are fixed before they reach your reads.
 - Support can see exactly what a request or run returned.
 
 ### Built for agents
@@ -109,7 +98,19 @@ per delivered row**, & Apify bills platform usage separately.
 ### Quality checks
 
 - Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
+- Xquik tests every read live against X.
+
+## What data can X Account Location Scraper extract?
+
+- X's "Account based in" label, as a country or a region.
+- The 2-letter ISO code of that country.
+- Whether X notes that the label may be inaccurate.
+- How the account first connected to X, such as Web or an app store country.
+- The platform & the country code in that connection.
+- How often the account changed its username, & when it last did.
+- The organization X shows the account is affiliated with.
+- The account's age in days & a link to its profile.
+- The full public profile, with name, bio, counts, verification, dates & images.
 
 ## How to check where X accounts are based
 

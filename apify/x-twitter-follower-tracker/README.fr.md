@@ -22,7 +22,80 @@ sont gratuits, et Apify facture l'usage de la plateforme à part.
 > Xquik est un service tiers indépendant. Non affilié à X Corp. "Twitter" et "X"
 > sont des marques déposées de X Corp.
 
-## Ce qu'envoie le tracker d'abonnés Twitter
+## Pourquoi utiliser X (Twitter) Follower Tracker ?
+
+- **Voyez qui s'est désabonné.** Chaque alerte d'abonné perdu nomme le compte,
+  même un compte suspendu par X.
+- **Suivez n'importe quel compte public.** Surveillez votre propre compte, celui
+  d'un concurrent ou celui d'un client.
+- **Aucune alerte pour les anciens abonnés.** Le premier run prend chaque liste
+  telle quelle. Seuls les changements suivants vous alertent.
+- **Des alertes dans votre messagerie.** Envoyez-les vers Telegram, Discord ou
+  Slack. Telegram n'a besoin d'aucun ID de chat. Tout webhook HTTPS reçoit aussi
+  l'événement complet.
+- **Sachez que vos alertes fonctionnent.** Chaque nouvelle URL de webhook, Slack
+  ou Discord reçoit une alerte de test. Le statut du run indique si elle est
+  arrivée.
+- **Sachez que le moniteur surveille.** La page de statut de chaque run le
+  confirme & montre 1 étape suivante avec un bouton.
+- **Aucune pause silencieuse.** Vos alertes vous préviennent 4 heures avant
+  qu'un moniteur sans run ne se mette en pause. Le run suivant le relance.
+- **Aucun compte X nécessaire.** Vous ne partagez jamais vos identifiants X ni
+  une clé API.
+
+### Lignes exactes
+
+- Chaque ID d'une ligne reste exact.
+- Les badges de certification correspondent à ce qu'affiche `x.com`.
+- Les lignes ne contiennent que des données publiques.
+- Les publicités & les contenus sponsorisés n'arrivent jamais dans vos lignes.
+- Les moniteurs signalent seulement les vraies suppressions & les vrais
+  désabonnements.
+
+### Données à jour
+
+- Les lectures continuent de fonctionner quand X déploie des changements.
+
+### Vitesse
+
+- Une page lente ne bloque pas votre run.
+- Les appels d'Actor bloqués repartent d'eux-mêmes.
+
+### Facturation juste
+
+- Les moniteurs ont 1 prix horaire fixe, événements & webhooks compris.
+- Les Actors de surveillance facturent seulement les heures pendant lesquelles
+  un moniteur a surveillé.
+
+### Fiabilité
+
+- Une erreur ponctuelle ne fait pas échouer votre run.
+- Les Actors résistent aux courtes pannes de Xquik.
+- Les runs d'Actor survivent aux redémarrages sans doublons.
+- Les runs arrêtés gardent leurs lignes & leur rapport.
+- Un run qui ne peut pas démarrer explique quand même pourquoi.
+- Les webhooks sont signés & protégés contre le rejeu.
+- Un webhook qui était en panne reçoit quand même ses événements, pendant 7
+  jours au plus.
+- Les nouveaux événements arrivent à l'heure, même après une panne de votre
+  webhook.
+- Les webhooks ne partent jamais vers des hôtes privés ou locaux.
+- Les alertes de chat arrivent dans l'ordre sans atteindre les limites de débit.
+- Le support peut voir exactement ce qu'une requête ou un run a renvoyé.
+
+### Conçu pour les agents
+
+- Les Actors acceptent une entrée écrite pour d'autres Actors.
+- Chaque run indique pourquoi il s'est terminé & s'il faut réessayer.
+
+### Contrôles qualité
+
+- Chaque champ que X affiche est fourni, omis exprès ou prouvé absent.
+- Xquik teste chaque lecture en direct sur X.
+- Les README des Actors, les schémas & la sortie réelle nomment les mêmes
+  champs.
+
+## Quelles données X (Twitter) Follower Tracker envoie-t-il ?
 
 - Les nouveaux abonnés, c'est-à-dire les comptes qui commencent à suivre chaque
   compte que vous surveillez.
@@ -31,8 +104,7 @@ sont gratuits, et Apify facture l'usage de la plateforme à part.
   commence ou cesse de suivre.
 - Chaque alerte avec le profil complet de l'autre compte, comme son nom, sa bio
   et son nombre d'abonnés.
-- Des alertes sur Telegram, Discord, Slack ou tout webhook HTTPS, et chaque
-  événement dans le dataset du run et dans 1 dataset d'historique.
+- Chaque événement dans le dataset du run et dans 1 dataset d'historique.
 
 ## Comment suivre les abonnés Twitter
 

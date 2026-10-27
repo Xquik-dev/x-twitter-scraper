@@ -20,18 +20,75 @@ ihtiyacın yok.
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-## Aramalar & iş ilanı verisi
+## Neden X Jobs Scraper kullanmalısın?
 
-- 1 çalıştırmada aynı anda okunan birçok arama terimi.
-- Yer, çalışma şekli, kıdem, istihdam türü & şirket filtreleri.
-- Tam ilan olarak okunan iş ilanı URL'leri & ID'leri.
+- **Yalnızca istediğin iş ilanları.** Yer, çalışma şekli, kıdem, istihdam türü &
+  şirkete göre filtrele.
+- **Tam olarak kastettiğin yer.** `locationId` 1 yeri sabitler, örneğin West New
+  York yerine New York City.
+- **Bildiğin ilanlar bağlantıyla.** Her ilanın tamamını almak için iş ilanı
+  URL'lerini veya ID'lerini yapıştır.
+- **Ek ücret olmadan açıklamalar.** Tam açıklamalı bir satır, yalın bir ilanla
+  aynı fiyattadır.
+- **Kullanıma hazır dışa aktarımlar.** Alanları tut, yeniden adlandır, düzleştir
+  veya birleştir. Sonra JSON, CSV, Excel, XML veya RSS olarak dışa aktar.
+
+### Eksiksiz sonuçlar
+
+- Her cevap, X'te bulunan en eksiksiz veriyi tutar.
+
+### Doğru satırlar
+
+- Satırlar yalnızca herkese açık veri tutar.
+
+### Güncel veri
+
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Okumalar, satırları geldiği anda biter.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- Hatalı girdi ücretsizdir & neyi düzelteceğini söyler.
+- Actor'lar yalnızca teslim edilen, benzersiz & eşleşen satırlar için ücret
+  alır.
+- Yeniden başlatılan bir çalıştırma asla 2 kez ücret almaz.
+- Çalıştırmalar harcama sınırının içinde kalır & tanılamalarını yine yazar.
+- Küçük çalıştırmalar, maliyeti düşüren bir ipucuyla biter.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Süre dolduğunda o ana kadar bulunan satırlar tanılamalarla birlikte döner.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Tek bir hatalı satır bütün grubu bozmaz.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+
+## X Jobs Scraper hangi verileri çıkarabilir?
+
 - Ada göre iş konumları, her biri `locationId` alanının kabul ettiği ID ile.
 - Başlık, maaş aralığı, para birimi, başvuru bağlantısı, konum & işe alan hesap.
 - Her satırda düz metin & Markdown olarak tam açıklama.
 - Her satırda arama bilgisi.
-- Aramalar arasında faturalamadan önce tekilleştirme.
-- Apify veri kümeleri üzerinden JSON, CSV, Excel, XML & RSS dışa aktarımları.
-- Apify çalıştırmayı taşıdığında çalıştırma kayıtlı durumdan devam eder.
 
 ## X iş ilanları nasıl kazınır
 

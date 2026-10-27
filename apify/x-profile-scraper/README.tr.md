@@ -29,20 +29,6 @@ profil kendi gönderilerini, yanıtlarını, medyasını, Öne Çıkanlarını,
 takipçilerini, takip edilenlerini & onaylı takipçilerini ekleyebilir. Ayrıca
 biyografileri çevirir & kimin şu an canlı yayında olduğunu kontrol eder.
 
-### Temel özellikler
-
-- Kullanıcı adı, ID veya URL ile 1 çalıştırmada birçok profil oku.
-- Gönderileri, yanıtları, medyayı, Öne Çıkanları, takipçileri, takip edilenleri
-  veya onaylı takipçileri ayrı satırlar olarak ekle.
-- `translateBioTo` ile her biyografiyi kodunu verdiğin dile çevir.
-- `checkLiveNow` ile her profilin şu an canlı yayında olup olmadığını kontrol
-  et.
-- Gönderileri tarih, dil, medya & etkileşime göre filtrele.
-- Profilleri kitle büyüklüğü, hesap yaşı & onay durumuna göre filtrele.
-- Filtreler & tekilleştirme faturalamadan önce çalışır.
-- Apify çalıştırmaları yeniden başlattığında teslim edilen satırlar & ilerleme
-  korunur.
-
 ### Kullanım alanları
 
 - Potansiyel müşteri listelerini biyografi, web sitesi, konum & kitle
@@ -54,7 +40,96 @@ biyografileri çevirir & kimin şu an canlı yayında olduğunu kontrol eder.
 - İçerik üreticilerinin & markaların canlı yayınlarını takip et.
 - Başka pazarlardaki biyografileri kendi dilinde oku.
 
-### X Profile Scraper hangi verileri çekebilir?
+## Neden X Profile Scraper kullanmalısın?
+
+- **1 çalıştırmada hesabın tamamı.** Kullanıcı adı, ID veya URL ver.
+  Gönderileri, yanıtları, medyayı, Öne Çıkanları, takipçileri, takip edilenleri
+  veya onaylı takipçileri satır olarak ekle.
+- **Canlı yayın kontrolü.** `checkLiveNow`, kimin şu an canlı yayında olduğunu
+  son yayınıyla birlikte söyler.
+- **Her satırda yayımlanan iletişim bilgileri.** `email` & `contactInfo`, bir
+  profilin yayımladığı e-postaları, telefonları & bağlantıları tutar. Yalnızca
+  iş e-postalarını veya seçtiğin alan adlarını tut.
+- **Hesabın kökeni & geçmişi.** `accountBasedIn`, X'in ülke veya bölge etiketini
+  tutar. `usernameChanges`, bir kullanıcı adının kaç kez değiştiğini gösterir.
+- **Profil & gönderi filtreleri.** Profilleri kitle büyüklüğü, hesap yaşı & onay
+  durumuna göre tut. Gönderileri tarih, dil, medya & etkileşime göre tut.
+
+### Eksiksiz sonuçlar
+
+- Hesap geçmişi eski gönderiler dahil eksiksiz gelir.
+- Yanıtları içermeyen profil gönderileri, yazarın kendi gönderi dizilerini yine
+  de korur.
+- Profil okumaları sabitlenmiş gönderiyi de içerir & onu sabitlenmiş olarak
+  işaretler.
+- Takipçi & takip edilen dışa aktarımları tam listeler döndürür.
+- Onaylı takipçi dışa aktarımları da tam listeler döndürür.
+- Her cevap, X'te bulunan en eksiksiz veriyi tutar.
+
+### Doğru satırlar
+
+- Yeniden gönderiler orijinal metnin tamamını taşır.
+- Satırdaki her ID birebir doğru kalır.
+- Bahsetmeler, bağlantılar, hashtag'ler & vurgular metindeki yerleriyle eşleşir.
+- Onay rozetleri `x.com` üzerinde görünenle aynıdır.
+- Satırlar yalnızca herkese açık veri tutar.
+- Reklamlar & tanıtılan içerikler satırlarına asla girmez.
+
+### Güncel veri
+
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Okumalar, satırları geldiği anda biter.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- Hatalı girdi ücretsizdir & neyi düzelteceğini söyler.
+- Actor'lar yalnızca teslim edilen, benzersiz & eşleşen satırlar için ücret
+  alır.
+- Birden çok hedefin paylaştığı bir profil 1 kez faturalanır.
+- Yeniden başlatılan bir çalıştırma asla 2 kez ücret almaz.
+- Çalıştırmalar harcama sınırının içinde kalır & tanılamalarını yine yazar.
+- Küçük çalıştırmalar, maliyeti düşüren bir ipucuyla biter.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Süre dolduğunda o ana kadar bulunan satırlar tanılamalarla birlikte döner.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Tek bir hatalı satır bütün grubu bozmaz.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Çıktı düz sütunlar & etkileşim toplamlarıyla tablolara hazırdır.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Zengin veri
+
+- Gönderi satırları Note Tweet metnini, düzenlemeleri, Topluluk Notlarını,
+  erişim etiketlerini & yanıt kontrollerini taşır.
+- Satırlar kaynak uygulamaları, medya sayılarını & profesyonel hesap verilerini
+  taşır.
+- Medya varyantlar, alternatif metin, boyutlar & kullanılabilirlik nedenleriyle
+  gelir.
+- Gönderileri & biyografileri kendi diline çevirebilirsin.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+
+## X Profile Scraper hangi verileri çıkarabilir?
 
 Profil satırları `resultType: "profile"` kullanır. Başlıca alanlar
 aşağıdakilerdir.

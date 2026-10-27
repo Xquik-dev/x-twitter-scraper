@@ -20,14 +20,78 @@ X-API-Schlüssel noch einen Login.
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
 
-## Mediendateien & Metadaten
+## Warum X Media Downloader nutzen?
 
-- Medien aus Posts, Profilen, Antworten, Zitaten & Threads in großen Mengen.
+- **Medien aus jeder Quelle.** Wähle in `sources` Posts, den Tab Medien von
+  Profilen, Antworten, Zitate & Threads.
+- **Dateien, für dich gespeichert.** Aktiviere `downloadMedia`, um Dateien zu
+  speichern & `storedMediaUrl`-Links zu erhalten.
+- **Nur die Medien, die du willst.** Filtere Profilmedien nach Typ, Datum,
+  Sprache, Aufrufen, Gefällt-mir-Angaben, Antworten oder Reposts.
+- **Alle Untertitel in 1 Datensatz.** Aktiviere `includeSubtitles`, um jede
+  Untertitelspur eines Video-Posts zu erhalten.
+- **Sofort nutzbare Exporte.** Behalte Felder, benenne sie um, mache sie flach
+  oder füge sie zusammen. Exportiere dann JSON, CSV, Excel, XML oder RSS.
+
+### Vollständige Ergebnisse
+
+- Jedes Ergebnis enthält die vollständigsten Daten, die X dafür hat.
+
+### Genaue Datensätze
+
+- Datensätze enthalten nur öffentliche Daten.
+
+### Aktuelle Daten
+
+- Abrufe funktionieren weiter, wenn X Änderungen ausrollt.
+
+### Tempo
+
+- Eine langsame Seite hält deinen Run nicht auf.
+- Abrufe enden, sobald ihre Datensätze ankommen.
+- Hängende Actor-Aufrufe laufen von selbst wieder an.
+
+### Faire Abrechnung
+
+- Eine fehlerhafte Eingabe kostet nichts & sagt dir, was du korrigieren musst.
+- Actors rechnen nur gelieferte, eindeutige, passende Datensätze ab.
+- Ein neu gestarteter Run berechnet nie doppelt.
+- Runs bleiben innerhalb deines Ausgabenlimits & schreiben trotzdem ihre
+  Diagnosen.
+- Kleine Runs enden mit einem Tipp, der Kosten senkt.
+
+### Zuverlässigkeit
+
+- Ein einzelner Fehler lässt deinen Run nicht scheitern.
+- Ein Zeitlimit liefert die bereits gefundenen Datensätze samt Diagnosen.
+- Actors überstehen kurze Xquik-Ausfälle.
+- Actor-Runs überstehen Neustarts ohne Dopplungen.
+- Ein fehlerhafter Datensatz lässt keinen Batch scheitern.
+- Gestoppte Runs behalten ihre Datensätze & ihren Report.
+- Ein Run, der nicht starten kann, erklärt trotzdem, warum.
+- Der Support sieht genau, was eine Anfrage oder ein Run geliefert hat.
+
+### Für Agents gebaut
+
+- Actors akzeptieren Eingaben, die für andere Actors geschrieben sind.
+- Jeder Run sagt, warum er endete & ob du es erneut versuchen solltest.
+
+### Umfangreiche Daten
+
+- Medien kommen mit Varianten, Alt-Text, Größen & Gründen zur Verfügbarkeit.
+- Video-Untertitel kommen mit Zeitmarken.
+
+### Qualitätsprüfungen
+
+- Jedes Feld, das X zeigt, wird geliefert, bewusst weggelassen oder ist
+  nachweislich nicht vorhanden.
+- Xquik testet jeden Abruf live gegen X.
+
+## Welche Daten kann X Media Downloader extrahieren?
+
 - Fotos, GIFs, MP4-Qualitätsstufen & HLS-Playlists.
 - Untertitel von Video-Posts, mit Zeitmarken & vollständigem Text.
-- Metadaten, direkte URLs & verfügbare Filter.
-- Dateispeicherung innerhalb der Run-Limits, mit Links in der Ausgabe.
-- Duplikatentfernung vor der Abrechnung.
+- Metadaten & direkte URLs.
 
 ## So lädst du Medien von X herunter
 

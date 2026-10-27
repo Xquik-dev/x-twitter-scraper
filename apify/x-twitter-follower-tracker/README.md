@@ -33,17 +33,23 @@ usage separately.
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## What the Twitter follower tracker sends
+## Why use X (Twitter) Follower Tracker?
 
-- New followers, the accounts that start following each account you watch.
-- Lost followers, the accounts that leave its followers.
-- New follows & unfollows, the accounts it starts or stops following.
-- Each alert with the other account's full profile, such as its name, bio &
-  follower count.
-- Alerts in Telegram, Discord, Slack or any HTTPS webhook, & every event in the
-  run's dataset & 1 history dataset.
-
-## What you get
+- **See who unfollowed you.** Each lost follower alert names the account, even
+  one X suspended.
+- **Track any public account.** Watch your own account, a competitor's or a
+  client's.
+- **No alerts for old followers.** The first run takes each list as it is. Only
+  later changes alert you.
+- **Alerts in your chat app.** Send them to Telegram, Discord or Slack. Telegram
+  needs no chat ID. Any HTTPS webhook gets the full event too.
+- **Know your alerts work.** Each new webhook, Slack or Discord URL gets a test
+  alert. The run status says if it arrived.
+- **Know the monitor is watching.** Each run's status page says so & shows 1
+  next step with a button.
+- **No silent pauses.** Your alerts warn you 4 hours before a monitor with no
+  runs pauses. The next run resumes it.
+- **No X account needed.** You never share your X login or an API key.
 
 ### Accurate rows
 
@@ -59,9 +65,8 @@ usage separately.
 
 ### Speed
 
-- A slow X answer doesn't hold up your request.
+- One slow page doesn't hold up your run.
 - Stalled Actor calls recover on their own.
-- Webhooks arrive without connection setup delay.
 
 ### Fair billing
 
@@ -70,17 +75,16 @@ usage separately.
 
 ### Reliability
 
-- A one-off X failure doesn't fail your request.
+- A one-off error doesn't fail your run.
 - Actors ride out short Xquik outages.
 - Actor runs survive restarts without repeats.
 - Stopped runs keep their rows & their report.
 - A run that can't start still explains itself.
 - Webhooks are signed & replay-safe.
-- Webhook deliveries retry until they land, for up to 7 days.
-- New events don't queue behind old retries.
+- A webhook that was down still gets its events, for up to 7 days.
+- New events arrive on time, even after your webhook was down.
 - Webhooks never go to private or local hosts.
 - Chat alerts arrive in order without hitting rate limits.
-- Problems on X's side are fixed before they reach your reads.
 - Support can see exactly what a request or run returned.
 
 ### Built for agents
@@ -91,8 +95,17 @@ usage separately.
 ### Quality checks
 
 - Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
+- Xquik tests every read live against X.
 - Actor READMEs, schemas & real output name the same fields.
+
+## What data does X (Twitter) Follower Tracker send?
+
+- New followers, the accounts that start following each account you watch.
+- Lost followers, the accounts that leave its followers.
+- New follows & unfollows, the accounts it starts or stops following.
+- Each alert with the other account's full profile, such as its name, bio &
+  follower count.
+- Every event in the run's dataset & in 1 history dataset.
 
 ## How to track Twitter followers
 

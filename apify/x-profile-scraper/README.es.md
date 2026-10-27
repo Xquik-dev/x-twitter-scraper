@@ -30,20 +30,6 @@ puede agregar sus posts, respuestas, contenido multimedia, Destacados,
 seguidores, cuentas seguidas & seguidores verificados. También traduce
 biografías & comprueba quién transmite en vivo ahora.
 
-### Funciones principales
-
-- Lee muchos perfiles en 1 ejecución a partir de nombres de usuario, IDs o URLs.
-- Agrega posts, respuestas, contenido multimedia, Destacados, seguidores,
-  cuentas seguidas o seguidores verificados como filas separadas.
-- Traduce cada biografía a un código de idioma con `translateBioTo`.
-- Comprueba si cada perfil transmite en vivo ahora con `checkLiveNow`.
-- Filtra posts por fecha, idioma, contenido multimedia & interacción.
-- Filtra perfiles por tamaño de audiencia, antigüedad de la cuenta &
-  verificación.
-- Los filtros & la eliminación de duplicados se aplican antes del cobro.
-- Las ejecuciones conservan las filas entregadas & el progreso cuando Apify las
-  reinicia.
-
 ### Casos de uso
 
 - Enriquece listas de clientes potenciales con biografías, sitios web,
@@ -55,7 +41,100 @@ biografías & comprueba quién transmite en vivo ahora.
 - Vigila creadores & marcas para detectar transmisiones en vivo.
 - Lee biografías de otros mercados en tu propio idioma.
 
-### ¿Qué datos puede extraer X Profile Scraper?
+## ¿Por qué usar X Profile Scraper?
+
+- **Toda la cuenta en 1 ejecución.** Indica nombres de usuario, IDs o URLs.
+  Agrega posts, respuestas, contenido multimedia, Destacados, seguidores,
+  cuentas seguidas o seguidores verificados como filas.
+- **Comprobación de transmisiones en vivo.** `checkLiveNow` indica quién está en
+  vivo ahora, con su transmisión más reciente.
+- **Contactos publicados en cada fila.** `email` & `contactInfo` traen los
+  correos, teléfonos & enlaces que publica un perfil. Conserva solo correos de
+  empresa o los dominios que elijas.
+- **Origen & historial de la cuenta.** `accountBasedIn` trae la etiqueta de país
+  o región de X. `usernameChanges` muestra cuántas veces cambió un nombre de
+  usuario.
+- **Filtros para perfiles & posts.** Conserva perfiles por tamaño de audiencia,
+  antigüedad de la cuenta & verificación. Conserva posts por fecha, idioma,
+  contenido multimedia & interacción.
+
+### Resultados completos
+
+- El historial de la cuenta vuelve completo, incluidos los posts antiguos.
+- Al excluir las respuestas de los posts de un perfil, igual se conservan los
+  hilos del propio autor.
+- Las lecturas de perfiles incluyen el post fijado, marcado como fijado.
+- Las exportaciones de seguidores & cuentas seguidas devuelven listas completas.
+- Las exportaciones de seguidores verificados también devuelven listas
+  completas.
+- Cada resultado trae los datos más completos que X tiene sobre él.
+
+### Filas precisas
+
+- Los reposts traen el texto original completo.
+- Cada ID de una fila se mantiene exacto.
+- Las menciones, los enlaces, los hashtags & los resaltados quedan alineados con
+  el texto.
+- Las insignias de verificación coinciden con lo que muestra `x.com`.
+- Las filas solo contienen datos públicos.
+- Los anuncios & las entradas promocionadas nunca llegan a tus filas.
+
+### Datos actualizados
+
+- Las lecturas siguen funcionando cuando X lanza cambios.
+
+### Velocidad
+
+- Una página lenta no frena tu ejecución.
+- Las lecturas terminan en cuanto llegan sus filas.
+- Las llamadas a Actores que se atascan se recuperan solas.
+
+### Cobro justo
+
+- Una entrada inválida no cuesta nada & te dice qué corregir.
+- Los Actores solo cobran las filas entregadas, únicas & que cumplen tus
+  filtros.
+- Un perfil que comparten varios objetivos se cobra 1 sola vez.
+- Una ejecución reiniciada nunca cobra 2 veces.
+- Las ejecuciones respetan tu límite de gasto & aun así escriben sus
+  diagnósticos.
+- Las ejecuciones pequeñas terminan con un consejo para gastar menos.
+
+### Confiabilidad
+
+- Un error aislado no hace fallar tu ejecución.
+- Si se acaba el tiempo, recibes las filas ya encontradas, con diagnósticos.
+- Los Actores resisten las caídas breves de Xquik.
+- Las ejecuciones de los Actores siguen tras un reinicio sin repetir nada.
+- Una fila defectuosa no arruina un lote.
+- Las ejecuciones detenidas conservan sus filas & su informe.
+- Una ejecución que no puede iniciar igual explica por qué.
+- Soporte puede ver exactamente qué devolvió una solicitud o una ejecución.
+
+### Hecho para agentes
+
+- Los Actores aceptan entradas escritas para otros Actores.
+- La salida está lista para hojas de cálculo, con columnas planas & totales de
+  interacción.
+- Cada ejecución dice por qué terminó & si conviene reintentar.
+
+### Datos detallados
+
+- Las filas de posts traen el texto de los Note Tweets, las ediciones, las Notas
+  de la Comunidad, las etiquetas de alcance & los controles de respuesta.
+- Las filas traen la app de origen, los conteos de contenido multimedia & los
+  datos de cuentas profesionales.
+- El contenido multimedia trae variantes, texto alternativo, tamaños & motivos
+  de disponibilidad.
+- Los posts & las biografías se pueden traducir a tu idioma.
+
+### Controles de calidad
+
+- Cada campo que muestra X se entrega, se omite a propósito o se comprueba que
+  no existe.
+- Xquik prueba cada lectura en vivo contra X.
+
+## ¿Qué datos puede extraer X Profile Scraper?
 
 Las filas de perfil usan `resultType: "profile"`. Estos son los campos
 principales.

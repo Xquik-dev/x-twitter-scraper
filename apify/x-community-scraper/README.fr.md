@@ -30,24 +30,6 @@ résultats par mot-clé, les membres & les modérateurs de chaque Communauté. I
 trouve aussi des Communautés par mot-clé ou par sujet, & liste celles que X
 suggère.
 
-### Fonctionnalités clés
-
-- Lisez de nombreuses Communautés & ressources en 1 run.
-- Obtenez les infos d'une Communauté avec ses règles, sa question d'adhésion,
-  son créateur, son admin & son sujet.
-- Collectez les posts du plus récent au plus ancien, ou les posts Top que X
-  classe le plus haut.
-- Collectez l'onglet Médias, ou cherchez dans les posts d'une Communauté par
-  mot-clé.
-- Exportez les membres & les modérateurs, ou trouvez des membres par nom.
-- Trouvez des Communautés par mot-clé ou par sujet, avec leur fiche complète.
-- Filtrez les posts par date, langue, média & engagement.
-- Filtrez les membres par taille d'audience, ancienneté du compte &
-  certification.
-- Les filtres & la suppression des doublons passent avant la facturation.
-- Les runs gardent les lignes livrées & leur progression quand Apify les
-  redémarre.
-
 ### Cas d'usage
 
 - Créez des listes de prospects à partir des membres d'une Communauté de niche.
@@ -60,7 +42,91 @@ suggère.
 - Trouvez les modérateurs & les membres les plus suivis d'une Communauté.
 - Collectez des posts avec images ou vidéos pour vos recherches créatives.
 
-### Quelles données X Community Scraper peut-il extraire ?
+## Pourquoi utiliser X Community Scraper ?
+
+- **Trouvez des Communautés sans ID.** Cherchez par mot-clé ou par sujet, ou
+  listez les Communautés que X suggère. Chaque résultat arrive avec sa fiche
+  complète.
+- **Des fiches de Communauté complètes.** Les lignes d'infos portent les règles,
+  la question d'adhésion, le créateur, l'admin & le sujet.
+- **Posts récents ou Top.** Collectez les posts du plus récent au plus ancien,
+  ou les posts Top que X classe le plus haut. Ajoutez les posts avec médias, ou
+  cherchez par mot-clé dans les posts d'une Communauté.
+- **Membres & modérateurs.** Exportez les deux avec leur `communityRole`, ou
+  trouvez des membres par nom. Les lignes portent les e-mails, téléphones &
+  liens que publie chaque profil.
+- **Des filtres pour les posts & les membres.** Gardez les posts selon la date,
+  la langue, les médias & l'engagement. Gardez les membres selon la taille de
+  l'audience, l'âge du compte & la certification.
+
+### Résultats complets
+
+- Chaque résultat contient les données les plus complètes dont X dispose.
+
+### Lignes exactes
+
+- Les reposts portent le texte d'origine en entier.
+- Chaque ID d'une ligne reste exact.
+- Les mentions, liens, hashtags & passages mis en avant pointent vers le bon
+  endroit du texte.
+- Les badges de certification correspondent à ce qu'affiche `x.com`.
+- Les lignes ne contiennent que des données publiques.
+- Les publicités & les contenus sponsorisés n'arrivent jamais dans vos lignes.
+
+### Données à jour
+
+- Les lectures continuent de fonctionner quand X déploie des changements.
+
+### Vitesse
+
+- Une page lente ne bloque pas votre run.
+- Les lectures se terminent dès que leurs lignes arrivent.
+- Les appels d'Actor bloqués repartent d'eux-mêmes.
+
+### Facturation juste
+
+- Une entrée invalide ne coûte rien & vous dit quoi corriger.
+- Les Actors facturent seulement les lignes livrées, uniques & conformes à vos
+  filtres.
+- Un profil commun à plusieurs cibles se facture une seule fois.
+- Un run redémarré ne facture jamais deux fois.
+- Les runs restent dans votre limite de dépense & écrivent quand même leurs
+  diagnostics.
+- Les petits runs se terminent par un conseil qui réduit le coût.
+
+### Fiabilité
+
+- Une erreur ponctuelle ne fait pas échouer votre run.
+- Un délai dépassé renvoie les lignes déjà trouvées, avec des diagnostics.
+- Les Actors résistent aux courtes pannes de Xquik.
+- Les runs d'Actor survivent aux redémarrages sans doublons.
+- Une mauvaise ligne ne fait pas échouer tout un lot.
+- Les runs arrêtés gardent leurs lignes & leur rapport.
+- Un run qui ne peut pas démarrer explique quand même pourquoi.
+- Le support peut voir exactement ce qu'une requête ou un run a renvoyé.
+
+### Conçu pour les agents
+
+- Les Actors acceptent une entrée écrite pour d'autres Actors.
+- La sortie est prête pour les tableurs, avec des colonnes plates & des totaux
+  d'engagement.
+- Chaque run indique pourquoi il s'est terminé & s'il faut réessayer.
+
+### Données riches
+
+- Les lignes de post portent le texte des Note Tweets, les modifications, les
+  Notes de la Communauté, les libellés de portée & les contrôles de réponse.
+- Les lignes portent les apps sources, le nombre de médias & les données de
+  compte professionnel.
+- Les médias arrivent avec leurs variantes, leur texte alternatif, leurs tailles
+  & les motifs de disponibilité.
+
+### Contrôles qualité
+
+- Chaque champ que X affiche est fourni, omis exprès ou prouvé absent.
+- Xquik teste chaque lecture en direct sur X.
+
+## Quelles données X Community Scraper peut-il extraire ?
 
 Les lignes de Communauté utilisent `resultType: "community"`. Voici les
 principaux champs.

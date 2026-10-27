@@ -22,7 +22,81 @@ separat.
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
 
-## Kontaktdaten in jedem Datensatz
+## Warum X Email Scraper nutzen?
+
+- **E-Mails aus ganzen Zielgruppen.** Durchsuche die Follower oder gefolgten
+  Accounts eines Accounts & behalte Profile mit E-Mail. `maxScan` legt fest, wie
+  viele Profile jeder Scan liest.
+- **Zahle nur für gefundene E-Mails.** Ein Profil ohne E-Mail kostet nichts.
+  Auch durchsuchte Profile sind kostenlos.
+- **Nur die Leads, die du willst.** Behalte E-Mails deiner Domains oder
+  überspringe kostenlose Webmail-Adressen. Filtere nach Followern,
+  Account-Alter, Bio & Standort.
+- **3 Quellen in 1 Run.** Mische Nutzernamen, Profil-URLs, Nutzer-IDs,
+  Follower-Scans & Nutzersuchen.
+- **Lead-Listen, bereit zum Export.** Exportiere Datensätze als JSON, CSV,
+  Excel, XML oder RSS.
+
+### Vollständige Ergebnisse
+
+- Jedes Ergebnis enthält die vollständigsten Daten, die X dafür hat.
+
+### Genaue Datensätze
+
+- Jede ID in einem Datensatz bleibt exakt.
+- Verifizierungs-Badges stimmen mit dem überein, was `x.com` zeigt.
+- Datensätze enthalten nur öffentliche Daten.
+- Werbung & gesponserte Einträge landen nie in deinen Datensätzen.
+
+### Aktuelle Daten
+
+- Abrufe funktionieren weiter, wenn X Änderungen ausrollt.
+
+### Tempo
+
+- Eine langsame Seite hält deinen Run nicht auf.
+- Abrufe enden, sobald ihre Datensätze ankommen.
+- Hängende Actor-Aufrufe laufen von selbst wieder an.
+
+### Faire Abrechnung
+
+- Eine fehlerhafte Eingabe kostet nichts & sagt dir, was du korrigieren musst.
+- Actors rechnen nur gelieferte, eindeutige, passende Datensätze ab.
+- Ein Profil, das mehrere Ziele teilen, wird nur einmal berechnet.
+- Ein neu gestarteter Run berechnet nie doppelt.
+- Runs bleiben innerhalb deines Ausgabenlimits & schreiben trotzdem ihre
+  Diagnosen.
+- Kleine Runs enden mit einem Tipp, der Kosten senkt.
+
+### Zuverlässigkeit
+
+- Ein einzelner Fehler lässt deinen Run nicht scheitern.
+- Ein Zeitlimit liefert die bereits gefundenen Datensätze samt Diagnosen.
+- Actors überstehen kurze Xquik-Ausfälle.
+- Actor-Runs überstehen Neustarts ohne Dopplungen.
+- Ein fehlerhafter Datensatz lässt keinen Batch scheitern.
+- Gestoppte Runs behalten ihre Datensätze & ihren Report.
+- Ein Run, der nicht starten kann, erklärt trotzdem, warum.
+- Der Support sieht genau, was eine Anfrage oder ein Run geliefert hat.
+
+### Für Agents gebaut
+
+- Actors akzeptieren Eingaben, die für andere Actors geschrieben sind.
+- Jeder Run sagt, warum er endete & ob du es erneut versuchen solltest.
+
+### Umfangreiche Daten
+
+- Kurzlinks werden aufgelöst, & Listen-Datensätze können vollständige Profile
+  enthalten.
+- Profile liefern E-Mails, Telefonnummern & Links, nach Netzwerk markiert.
+
+### Qualitätsprüfungen
+
+- Jedes Feld, das X zeigt, wird geliefert, bewusst weggelassen oder ist
+  nachweislich nicht vorhanden.
+- Xquik testet jeden Abruf live gegen X.
+
+## Welche Daten kann X Email Scraper extrahieren?
 
 - Die erste E-Mail, die das Profil veröffentlicht, in Kleinbuchstaben.
 - Die Domain dieser E-Mail & das Profilfeld, in dem sie steht, also Bio, Name
@@ -34,15 +108,6 @@ separat.
   LinkedIn, GitHub oder Telegram.
 - Das vollständige öffentliche Profil mit Name, Bio, Zählern, Verifizierung,
   Datumsangaben & Bildern.
-- 3 Quellen in 1 Run, nämlich Accounts, ihre Follower oder gefolgten Accounts &
-  Nutzersuchen.
-- Filter nach E-Mail-Domain, geschäftlicher E-Mail, Followern, Account-Alter,
-  Bio & Standort.
-- Nutzernamen mit oder ohne @, URLs von `x.com` & `twitter.com` & numerische
-  Nutzer-IDs.
-- Duplikatentfernung vor der Abrechnung.
-- Exporte als JSON, CSV, Excel, XML & RSS über Apify-Datasets.
-- Runs laufen nach einer Apify-Migration mit gespeichertem Zustand weiter.
 
 ## So holst du E-Mails aus X-Profilen
 

@@ -32,20 +32,18 @@ bills platform usage separately.
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## Space data
+## Why use X Space Scraper?
 
-- Title, state & the scheduled, start & end times of each Space.
-- Live listener count, replay plays & the accounts in the Space now.
-- The host's public profile, co-hosts, speakers & listeners X lists.
-- Replay, clipping & lock settings, plus the post that announces the Space, with
-  its text, counts & author.
-- Posts the hosts & speakers shared in the Space, with who shared each & when.
-- The recording of a Space that is over, as an HLS playlist URL, with
-  `includeReplay`.
-- Broadcasts by URL or ID, with title, state, times, watch counts & host.
-- Duplicate removal before billing. A Space that 2 search terms find is 1 row.
-
-## What you get
+- **Spaces on air now.** Set `queryType` to `Live` for live Spaces or `Upcoming`
+  for scheduled ones.
+- **Replays at no extra cost.** Turn on `includeReplay` to get the recording of
+  each ended Space.
+- **Live video broadcasts too.** Read X broadcasts by URL or ID in the same run
+  as Spaces.
+- **Search with X operators.** Find Spaces by topic, host, hashtag, language or
+  popularity.
+- **Ready-to-use exports.** Keep, rename, flatten or join fields, then export
+  JSON, CSV, Excel, XML or RSS.
 
 ### Complete results
 
@@ -61,29 +59,27 @@ bills platform usage separately.
 
 ### Speed
 
-- A slow X answer doesn't hold up your request.
-- Actors read many handles, posts & queries at once.
+- One slow page doesn't hold up your run.
 - Reads finish the moment their rows arrive.
 - Stalled Actor calls recover on their own.
 
 ### Fair billing
 
-- Bad input costs nothing, since it's refused before any read.
+- Bad input costs nothing & tells you what to fix.
 - Actors charge only for delivered, unique, matching rows.
 - A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
+- Runs stay within your spend cap & still write their diagnostics.
 - Small runs end with a tip that cuts cost.
 
 ### Reliability
 
-- A one-off X failure doesn't fail your request.
+- A one-off error doesn't fail your run.
 - A deadline returns the rows already found, with diagnostics.
 - Actors ride out short Xquik outages.
 - Actor runs survive restarts without repeats.
 - One bad row doesn't sink a batch.
 - Stopped runs keep their rows & their report.
 - A run that can't start still explains itself.
-- Problems on X's side are fixed before they reach your reads.
 - Support can see exactly what a request or run returned.
 
 ### Built for agents
@@ -94,7 +90,19 @@ bills platform usage separately.
 ### Quality checks
 
 - Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
+- Xquik tests every read live against X.
+
+## What data can X Space Scraper extract?
+
+- Title, state & the scheduled, start & end times of each Space.
+- Live listener count, replay plays & the accounts in the Space now.
+- The host's public profile, co-hosts, speakers & listeners X lists.
+- Replay, clipping & lock settings, plus the post that announces the Space, with
+  its text, counts & author.
+- Posts the hosts & speakers shared in the Space, with who shared each & when.
+- The recording of a Space that is over, as an HLS playlist URL, with
+  `includeReplay`.
+- Broadcasts by URL or ID, with title, state, times, watch counts & host.
 
 ## How to find X Spaces
 

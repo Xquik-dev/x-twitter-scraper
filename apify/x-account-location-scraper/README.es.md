@@ -22,7 +22,79 @@ entregada** & Apify factura aparte el uso de la plataforma.
 > Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 > "Twitter" y "X" son marcas registradas de X Corp.
 
-## Datos de la cuenta en cada fila
+## ¿Por qué usar X Account Location Scraper?
+
+- **Una respuesta clara para cada cuenta.** Cada fila indica si X muestra una
+  etiqueta, si no tiene ninguna o si la retuvo.
+- **Filas en el orden de tu entrada.** Muchas cuentas vuelven en el orden en que
+  las enumeraste.
+- **Pega cualquier forma de cuenta.** Combina nombres de usuario con o sin @,
+  URLs de perfiles & IDs de usuario en 1 lista. Usa `userIds` para las listas
+  que conservas, porque el ID de usuario no cambia cuando cambia el nombre de
+  usuario.
+- **Exportaciones listas para hojas de cálculo.** Ajusta las columnas con
+  `fields` & `flatten`. Exporta en JSON, CSV, Excel, XML o RSS.
+
+### Resultados completos
+
+- Cada resultado trae los datos más completos que X tiene sobre él.
+
+### Filas precisas
+
+- Cada ID de una fila se mantiene exacto.
+- Las insignias de verificación coinciden con lo que muestra `x.com`.
+- Las filas solo contienen datos públicos.
+- Los anuncios & las entradas promocionadas nunca llegan a tus filas.
+
+### Datos actualizados
+
+- Las lecturas siguen funcionando cuando X lanza cambios.
+
+### Velocidad
+
+- Una página lenta no frena tu ejecución.
+- Las lecturas terminan en cuanto llegan sus filas.
+- Las llamadas a Actores que se atascan se recuperan solas.
+
+### Cobro justo
+
+- Una entrada inválida no cuesta nada & te dice qué corregir.
+- Los Actores solo cobran las filas entregadas, únicas & que cumplen tus
+  filtros.
+- Un perfil que comparten varios objetivos se cobra 1 sola vez.
+- Una ejecución reiniciada nunca cobra 2 veces.
+- Las ejecuciones respetan tu límite de gasto & aun así escriben sus
+  diagnósticos.
+- Las ejecuciones pequeñas terminan con un consejo para gastar menos.
+
+### Confiabilidad
+
+- Un error aislado no hace fallar tu ejecución.
+- Si se acaba el tiempo, recibes las filas ya encontradas, con diagnósticos.
+- Los Actores resisten las caídas breves de Xquik.
+- Las ejecuciones de los Actores siguen tras un reinicio sin repetir nada.
+- Una fila defectuosa no arruina un lote.
+- Las ejecuciones detenidas conservan sus filas & su informe.
+- Una ejecución que no puede iniciar igual explica por qué.
+- Soporte puede ver exactamente qué devolvió una solicitud o una ejecución.
+
+### Hecho para agentes
+
+- Los Actores aceptan entradas escritas para otros Actores.
+- Cada ejecución dice por qué terminó & si conviene reintentar.
+
+### Datos detallados
+
+- La ubicación de la cuenta trae el código de país, una nota de precisión & el
+  historial de nombres de usuario.
+
+### Controles de calidad
+
+- Cada campo que muestra X se entrega, se omite a propósito o se comprueba que
+  no existe.
+- Xquik prueba cada lectura en vivo contra X.
+
+## ¿Qué datos puede extraer X Account Location Scraper?
 
 - La etiqueta "Cuenta con sede en" de X, como país o región.
 - El código ISO de 2 letras de ese país.
@@ -36,16 +108,6 @@ entregada** & Apify factura aparte el uso de la plataforma.
 - La antigüedad de la cuenta en días & un enlace a su perfil.
 - El perfil público completo, con nombre, biografía, conteos, verificación,
   fechas & imágenes.
-- Una segunda lectura de cada cuenta cuya etiqueta X retiene, sin costo
-  adicional.
-- Muchas cuentas en 1 ejecución, leídas en paralelo & entregadas en el orden de
-  la entrada.
-- Nombres de usuario con o sin @, URLs de `x.com` & `twitter.com` & IDs
-  numéricos de usuario.
-- Eliminación de duplicados antes de facturar.
-- Exportación en JSON, CSV, Excel, XML & RSS con los datasets de Apify.
-- Las ejecuciones se reanudan desde el estado guardado tras una migración de
-  Apify.
 
 ## Cómo consultar dónde tienen su sede las cuentas de X
 

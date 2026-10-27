@@ -31,21 +31,101 @@ Xquik'in X Follower Scraper'ı takipçiler, takip edilenler, Listeler &
 Topluluklar için erişilebilen herkese açık profil verisini döndürür. Her satır
 kaynak hedefini & ilişkisini belirtir.
 
-### Temel davranış
+### Kullanım alanları
 
-- Filtreler & tekilleştirme faturalamadan önce çalışır.
-- Varsayılan olarak birden çok hedefin paylaştığı bir profil 1 kez görünür & 1
-  kez ücretlenir.
-- 1 çalıştırma kullanıcı adı, sayısal ID, URL & kısa yol kabul eder.
-- Birleştirme modu ortak profilleri, kaynakları, ilişkileri & `overlapCount`
-  değerini kaydeder.
-- Çalıştırma günlükleri sayfa sürelerini `fetchDurationMs`,
-  `processingDurationMs`, `pushDurationMs`, `statusDurationMs` &
-  `fullPageDurationMs` alanlarında gösterir.
-- Apify bir çalıştırmayı yeniden başlatırsa çalıştırma teslim edilen satırları &
-  ilerlemeyi korur.
+- Takipçi profillerinden potansiyel müşteri verisini zenginleştir & araştırma
+  veri kümeleri oluştur.
+- Potansiyel müşteri araştırması için rakiplerin takipçilerini dışa aktar.
+- Kendi hesabının, rakiplerinin & tanınmış kişilerin kitlelerini karşılaştır.
+- Uygun profilleri bulmak için takipçi sayısına & onay durumuna göre filtrele.
+- X Topluluk üyelerini dışa aktar.
+- Araştırma için herkese açık sosyal ağ veri kümeleri oluştur.
+- Takipçi kitlelerini biyografi kelimesine, konuma veya profil türüne göre ayır.
 
-### X Follower Scraper hangi verileri çıkarabilir?
+## Neden X Follower Scraper kullanmalısın?
+
+- **En ucuz filtrelenmiş takipçi listeleri.** 2026-10-15 tarihli [karşılaştırma
+  testi](README.md#benchmark) NASA takipçilerinden 1.000'den fazla takipçisi
+  olanları tuttu. Diğer 4 Actor okudukları her profil için ücret aldı. İşe yarar
+  profil başına 39 ile 273 kat daha pahalıya geldiler.
+- **2,6 kat daha hızlı takipçi dışa aktarımı.** [Karşılaştırma
+  testinde](README.md#benchmark) 1.000 takipçiyi diğer 4 Actor'dan 2,6 kat daha
+  hızlı okudu.
+- **Profil başına 1,6 kat alan.** [Karşılaştırma testinde](README.md#benchmark)
+  medyan tam satırında 39 alan vardı. Bu, diğer Actor'ların medyanının 1,6 katı.
+- **Kitle örtüşmesini gör.** Birleştirme modu her profil için, eşleştiği her
+  kaynakla birlikte 1 satır verir. Ortak takipçileri bulmak için `overlapCount`
+  ile sırala.
+- **Kimin kimi takip ettiğini kontrol et.** Hesapları `followCheckSources` &
+  `followCheckTargets` içinde listele. Her satır 1 hesap çifti için
+  `isFollowing` & `isFollowedBy` tutar.
+- **1 çalıştırmada her kitle.** Kullanıcı adı, ID, URL veya kısa yol ver.
+  Takipçileri, takip edilenleri, Liste üyelerini, Topluluk üyelerini, bağlı
+  hesapları veya abonelikleri oku.
+- **Doğru profilleri bul.** Takipçi, gönderi, hesap yaşı, onay durumu,
+  biyografi, konum & yayımlanan e-postaya göre filtrele.
+
+### Eksiksiz sonuçlar
+
+- Takipçi & takip edilen dışa aktarımları tam listeler döndürür.
+- Onaylı takipçi dışa aktarımları da tam listeler döndürür.
+- Her cevap, X'te bulunan en eksiksiz veriyi tutar.
+
+### Doğru satırlar
+
+- Satırdaki her ID birebir doğru kalır.
+- Onay rozetleri `x.com` üzerinde görünenle aynıdır.
+- Satırlar yalnızca herkese açık veri tutar.
+- Reklamlar & tanıtılan içerikler satırlarına asla girmez.
+
+### Güncel veri
+
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Okumalar, satırları geldiği anda biter.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- Hatalı girdi ücretsizdir & neyi düzelteceğini söyler.
+- Actor'lar yalnızca teslim edilen, benzersiz & eşleşen satırlar için ücret
+  alır.
+- Birden çok hedefin paylaştığı bir profil 1 kez faturalanır.
+- Yeniden başlatılan bir çalıştırma asla 2 kez ücret almaz.
+- Çalıştırmalar harcama sınırının içinde kalır & tanılamalarını yine yazar.
+- Küçük çalıştırmalar, maliyeti düşüren bir ipucuyla biter.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Süre dolduğunda o ana kadar bulunan satırlar tanılamalarla birlikte döner.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Tek bir hatalı satır bütün grubu bozmaz.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Zengin veri
+
+- Kısa bağlantılar çözülür & liste satırları tam profilleri taşıyabilir.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+
+## X Follower Scraper hangi verileri çıkarabilir?
 
 | Alan                     | Açıklama                                                    |
 | ------------------------ | ----------------------------------------------------------- |
@@ -101,18 +181,6 @@ ayarla.
 Satırlar asla yalnızca görüntüleyene ait durumu içermez. Xquik takip, engelleme,
 sessize alma, DM, bildirim & benzeri görüntüleyen bayraklarını kaldırır. Ham
 çıktı da bunları atar.
-
-## Kullanım alanları
-
-- Potansiyel müşteri verisini zenginleştir & profil başına daha çok alanla
-  araştırma veri kümeleri oluştur. Medyan tam satırımızda 2026-09-29'da 38 alan
-  vardı. Bu, diğer 9 Actor'ın medyanının 2,5 katı.
-- Potansiyel müşteri araştırması için rakiplerin takipçilerini dışa aktar.
-- Kendi hesabının, rakiplerinin & tanınmış kişilerin kitlelerini karşılaştır.
-- Uygun profilleri bulmak için takipçi sayısına & onay durumuna göre filtrele.
-- X Topluluk üyelerini dışa aktar.
-- Araştırma için herkese açık sosyal ağ veri kümeleri oluştur.
-- Takipçi kitlelerini biyografi kelimesine, konuma veya profil türüne göre ayır.
 
 ## X Follower Scraper ile takipçi verisini nasıl kazırım?
 
@@ -346,8 +414,9 @@ sorgu ücreti eklemez. Bir takip kontrolü aynı fiyatla 1 satırdır.
 Daha fazla hacim için daha çok ön ödemeli kullanım içeren bir
 [Apify planı seç](https://apify.com/pricing?fpr=xquik).
 
-Tek bir çalıştırma birçok hedefi okuyabilir. Sınırlar, tekilleştirme &
-faturalama tüm hedeflerde doğru kalır.
+Tek bir çalıştırma birçok hedefi okuyabilir. Filtreler & tekilleştirme
+faturalamadan önce çalışır. Sınırlar, tekilleştirme & faturalama tüm hedeflerde
+doğru kalır.
 
 - Filtreler bir profil veri kümene girmeden önce çalışır, bu yüzden filtrelenen
   satırlar ücretsizdir.

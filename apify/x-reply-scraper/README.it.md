@@ -28,27 +28,6 @@ X Reply Scraper di Xquik raccoglie risposte pubbliche & conversazioni nei
 commenti. Gestisce singoli post, elenchi di URL in blocco, ID dei post &
 timeline delle risposte degli utenti.
 
-### Funzionalità principali
-
-- La modalità auto continua a raccogliere quando i risultati diretti sono
-  incompleti.
-- `collectionStrategy` definisce come l'Actor raccoglie le risposte.
-- Gli input in blocco accettano URL di post, ID dei post, profili & nomi utente.
-- Filtri & rimozione dei duplicati agiscono prima della fatturazione.
-- L'output supporta 4 ordinamenti, 3 livelli di dettaglio & 3 stili di campo.
-- Ogni risposta conserva target di origine, ID dei genitori, ID radice &
-  profondità.
-- I cursori di continuazione supportano recuperi di dati passati & esecuzioni
-  pianificate.
-- Le esecuzioni che richiedono attenzione scrivono 1 record gratuito in
-  `diagnostics`. Un'esecuzione che legge ogni target & non trova risposte non ne
-  scrive nessuno. Il suo stato dice perché.
-- I log dell'esecuzione mostrano i tempi per pagina & per target in
-  `fetchDurationMs`, `processingDurationMs`, `pushDurationMs`,
-  `statusDurationMs`, `fullPageDurationMs` & `fullTargetDurationMs`.
-- Le esecuzioni conservano risposte consegnate & progressi quando Apify le
-  riavvia.
-
 ### Casi d'uso
 
 - Misura sentiment & feedback dei clienti sotto i post di brand & prodotti.
@@ -58,7 +37,102 @@ timeline delle risposte degli utenti.
 - Ricostruisci intere conversazioni per ricerca & dataset di addestramento AI.
 - Segui nel tempo come un account risponde ai suoi clienti.
 
-### Quali dati può estrarre X Reply Scraper?
+## Perché usare X Reply Scraper?
+
+- **Export delle risposte 1,7x più veloci.** La sua esecuzione mediana è stata
+  1,7x più veloce del più veloce tra altri 4 Actor. Il [benchmark](README.md#benchmark)
+  si è svolto il 2026-10-15.
+- **Il costo più basso per risposta utile.** Nel [benchmark](README.md#benchmark) ha
+  avuto il costo più basso per risposta utile.
+- **2x i campi per risposta.** Nel [benchmark](README.md#benchmark) la sua riga mediana
+  aveva 100 campi. È 2x la mediana degli altri Actor.
+- **Scegli la forma della conversazione.** Tieni le risposte dirette, quelle
+  annidate o entrambe, fino alla profondità che imposti. `collectionStrategy`
+  può anche restituire il thread o solo le risposte nascoste.
+- **Ricostruisci ogni thread.** Ogni risposta riporta il post genitore in
+  `inReplyToId`, il post radice in `rootTweetId` & la sua `depth`.
+- **Molti post in 1 esecuzione.** Incolla insieme URL di post, ID dei post,
+  profili & nomi utente. Un nome utente restituisce le risposte di
+  quell'account.
+- **Solo le risposte che vuoi.** Filtra per parole, hashtag, autore, lingua,
+  verifica, engagement, media & data.
+- **Ordina per Mi piace o data.** Ordina le risposte per Mi piace, oppure elenca
+  prima le più recenti o le più vecchie. Le righe arrivano compact, full o rich,
+  in `camelCase` o `snake_case`.
+- **Continua più tardi i thread lunghi.** Un'esecuzione che si ferma prima salva
+  il punto di ogni target in `next-cursors`. Passane 1 come `startCursor` per
+  continuare.
+
+### Risultati completi
+
+- La modalità completa aggiunge le risposte nascoste dall'autore & spiega i
+  thread vuoti.
+- Ogni risultato riporta i dati più completi che X ha a disposizione.
+
+### Righe accurate
+
+- Un post risulta mancante solo quando non esiste più.
+- I repost riportano il testo originale completo.
+- Ogni ID in una riga resta esatto.
+- Menzioni, link, hashtag & evidenziazioni restano allineati al testo.
+- Un conteggio non noto compare in `unknownCounts`, mai come 0.
+- I badge di verifica corrispondono a quelli che mostra `x.com`.
+- Le righe contengono solo dati pubblici.
+- Annunci & contenuti sponsorizzati non arrivano mai nelle tue righe.
+
+### Dati aggiornati
+
+- Le letture continuano a funzionare quando X rilascia modifiche.
+
+### Velocità
+
+- Una pagina lenta non blocca la tua esecuzione.
+- Le letture finiscono appena arrivano le loro righe.
+- Le chiamate agli Actor che si bloccano riprendono da sole.
+
+### Fatturazione equa
+
+- Un input errato non costa nulla & ti dice cosa correggere.
+- Gli Actor fanno pagare solo le righe consegnate, uniche & conformi ai filtri.
+- Un'esecuzione riavviata non addebita mai due volte.
+- Le esecuzioni restano entro il tuo limite di spesa & scrivono comunque la loro
+  diagnostica.
+- Le esecuzioni piccole finiscono con un consiglio per spendere meno.
+
+### Affidabilità
+
+- Un errore isolato non fa fallire la tua esecuzione.
+- Quando scade il tempo, ricevi le righe già trovate con la diagnostica.
+- Gli Actor resistono ai brevi disservizi di Xquik.
+- Le esecuzioni degli Actor superano i riavvii senza ripetere nulla.
+- Una riga errata non fa fallire il lotto.
+- Le esecuzioni interrotte conservano le loro righe & il loro report.
+- Un'esecuzione che non riesce a partire spiega comunque perché.
+- Il supporto può vedere esattamente cosa ha restituito una richiesta o
+  un'esecuzione.
+
+### Pensato per gli agenti
+
+- Gli Actor accettano input scritti per altri Actor.
+- L'output è pronto per i fogli di calcolo, con colonne piatte & totali di
+  engagement.
+- Ogni esecuzione dice perché è finita & se conviene riprovare.
+
+### Dati ricchi
+
+- Le righe dei post riportano il testo dei Note Tweet, modifiche, Note della
+  community, etichette di visibilità & regole di risposta.
+- Le righe riportano app di origine, conteggi dei media & dati degli account
+  professionali.
+- I media arrivano con varianti, testo alternativo, dimensioni & motivi di
+  disponibilità.
+
+### Controlli di qualità
+
+- Ogni campo che X mostra è fornito, escluso di proposito o dimostrato assente.
+- Xquik testa ogni lettura dal vivo su X.
+
+## Quali dati può estrarre X Reply Scraper?
 
 Gli schemi del dataset & del run-report descrivono ogni campo restituito. I
 campi di testo, numerici & booleani riportano anche esempi per agenti &

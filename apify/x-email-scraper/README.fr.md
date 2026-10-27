@@ -21,7 +21,82 @@ premier. Un profil sans e-mail n'est pas livré & ne coûte rien. Vous payez
 > Xquik est un service tiers indépendant. Non affilié à X Corp. "Twitter" et "X"
 > sont des marques déposées de X Corp.
 
-## Coordonnées sur chaque ligne
+## Pourquoi utiliser X Email Scraper ?
+
+- **Des e-mails d'audiences entières.** Scannez les abonnés ou les abonnements
+  d'un compte & gardez les profils avec un e-mail. `maxScan` fixe le nombre de
+  profils que lit chaque scan.
+- **Payez seulement les e-mails trouvés.** Un profil sans e-mail ne coûte rien.
+  Les profils scannés sont gratuits aussi.
+- **Seulement les prospects que vous voulez.** Gardez les e-mails de vos
+  domaines ou écartez les webmails gratuits. Filtrez par abonnés, âge du compte,
+  bio & localisation.
+- **3 sources en 1 run.** Mélangez noms d'utilisateur, URL de profil, ID
+  d'utilisateur, scans d'abonnés & recherches d'utilisateurs.
+- **Des listes de prospects prêtes à exporter.** Exportez les lignes en JSON,
+  CSV, Excel, XML ou RSS.
+
+### Résultats complets
+
+- Chaque résultat contient les données les plus complètes dont X dispose.
+
+### Lignes exactes
+
+- Chaque ID d'une ligne reste exact.
+- Les badges de certification correspondent à ce qu'affiche `x.com`.
+- Les lignes ne contiennent que des données publiques.
+- Les publicités & les contenus sponsorisés n'arrivent jamais dans vos lignes.
+
+### Données à jour
+
+- Les lectures continuent de fonctionner quand X déploie des changements.
+
+### Vitesse
+
+- Une page lente ne bloque pas votre run.
+- Les lectures se terminent dès que leurs lignes arrivent.
+- Les appels d'Actor bloqués repartent d'eux-mêmes.
+
+### Facturation juste
+
+- Une entrée invalide ne coûte rien & vous dit quoi corriger.
+- Les Actors facturent seulement les lignes livrées, uniques & conformes à vos
+  filtres.
+- Un profil commun à plusieurs cibles se facture une seule fois.
+- Un run redémarré ne facture jamais deux fois.
+- Les runs restent dans votre limite de dépense & écrivent quand même leurs
+  diagnostics.
+- Les petits runs se terminent par un conseil qui réduit le coût.
+
+### Fiabilité
+
+- Une erreur ponctuelle ne fait pas échouer votre run.
+- Un délai dépassé renvoie les lignes déjà trouvées, avec des diagnostics.
+- Les Actors résistent aux courtes pannes de Xquik.
+- Les runs d'Actor survivent aux redémarrages sans doublons.
+- Une mauvaise ligne ne fait pas échouer tout un lot.
+- Les runs arrêtés gardent leurs lignes & leur rapport.
+- Un run qui ne peut pas démarrer explique quand même pourquoi.
+- Le support peut voir exactement ce qu'une requête ou un run a renvoyé.
+
+### Conçu pour les agents
+
+- Les Actors acceptent une entrée écrite pour d'autres Actors.
+- Chaque run indique pourquoi il s'est terminé & s'il faut réessayer.
+
+### Données riches
+
+- Les liens courts arrivent sous leur URL finale, & les lignes de liste peuvent
+  porter des profils complets.
+- Les profils donnent des e-mails, des téléphones & des liens étiquetés par
+  réseau.
+
+### Contrôles qualité
+
+- Chaque champ que X affiche est fourni, omis exprès ou prouvé absent.
+- Xquik teste chaque lecture en direct sur X.
+
+## Quelles données X Email Scraper peut-il extraire ?
 
 - Le premier e-mail que le profil publie, en minuscules.
 - Le domaine de cet e-mail & le champ du profil qui le contient, soit la bio, le
@@ -33,15 +108,6 @@ premier. Un profil sans e-mail n'est pas livré & ne coûte rien. Vous payez
   LinkedIn, GitHub ou Telegram.
 - Le profil public complet, avec nom, bio, compteurs, certification, dates &
   images.
-- 3 sources en 1 run, à savoir des comptes, leurs abonnés ou abonnements, & des
-  recherches d'utilisateurs.
-- Des filtres par domaine d'e-mail, e-mail professionnel, abonnés, ancienneté du
-  compte, bio & localisation.
-- Des noms d'utilisateur avec ou sans @, des URL `x.com` & `twitter.com` & des
-  ID utilisateur numériques.
-- La suppression des doublons avant la facturation.
-- Des exports JSON, CSV, Excel, XML & RSS via les datasets Apify.
-- Les runs reprennent depuis un état enregistré après une migration Apify.
 
 ## Comment récupérer les e-mails de profils X
 

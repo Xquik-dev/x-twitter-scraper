@@ -26,17 +26,121 @@ apprezzamenti & domande d'acquisto. Aggiorna i team di supporto & marketing con
 post reali. Conserva uno storico di come i clienti parlano di te, esecuzione
 dopo esecuzione.
 
+> Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
+> "Twitter" e "X" sono marchi di X Corp.
+
+## Perché usare X (Twitter) Brand Monitoring with AI Analysis?
+
+- **Share of voice per brand.** Il riepilogo indica menzioni, share of voice &
+  engagement per brand & alias.
+- **Avvisi su ciò che è cambiato.** Aggiungi a `monitor.baselineDatasetId` l'ID
+  del dataset di un'esecuzione precedente. `monitor.changedRows` elenca le
+  menzioni con decisioni cambiate, pronte per un webhook.
+- **Le menzioni migliori per brand.** Ogni brand elenca le sue 3 menzioni con
+  più engagement per ogni categoria di risposta.
+- **Riconosci gli omonimi.** Una probabilità di rilevanza segnala le menzioni
+  che non riguardano il tuo brand.
+- **Analizza il tuo testo.** Incolla recensioni, risposte o bozze in `texts` per
+  avere le stesse risposte dell'AI. L'esecuzione non recupera nulla da X.
+- **Risposte pronte per i fogli di calcolo.** La vista `Flat answers` & gli
+  export CSV o Excel mostrano 1 colonna per domanda.
+- **Fai le tue domande.** Sostituisci quelle predefinite con fino a 8 domande in
+  `analysis.questions`.
+- **Nessun account né chiave.** Il prezzo include l'analisi con AI. Non ti serve
+  una chiave AI, una chiave API X o il login.
+
+### Risultati completi
+
+- I grandi intervalli di date tornano completi & in fretta.
+- Le ricerche restituiscono ogni risultato, qualunque operatore combini.
+- Le pagine filtrate tornano piene finché i risultati non finiscono.
+- Ogni risultato riporta i dati più completi che X ha a disposizione.
+
+### Righe accurate
+
+- I risultati di ricerca contengono ogni post che corrisponde alla tua query &
+  nient'altro.
+- La ricerca di parole & frasi funziona in ogni lingua & alfabeto.
+- I filtri di lingua funzionano con ogni lingua che X assegna ai post.
+- Account protetti & liste private ricevono un esito chiaro, non una pagina
+  vuota.
+- I repost riportano il testo originale completo.
+- Ogni ID in una riga resta esatto.
+- Menzioni, link, hashtag & evidenziazioni restano allineati al testo.
+- I badge di verifica corrispondono a quelli che mostra `x.com`.
+- Le righe contengono solo dati pubblici.
+- I risultati dal più recente restano in ordine cronologico corretto da una
+  pagina all'altra.
+- Le ricerche accettano le query come le scriveresti su X.
+- Le ricerche di luoghi funzionano con nomi in 6 lingue.
+- Una ricerca che non può partire fallisce subito & dice come correggerla.
+- Una data ha un solo significato in qualsiasi formato comune.
+- Le ricerche accettano i limiti `since_id` & `max_id`.
+- Annunci & contenuti sponsorizzati non arrivano mai nelle tue righe.
+
+### Dati aggiornati
+
+- Le letture continuano a funzionare quando X rilascia modifiche.
+
+### Velocità
+
+- Una pagina lenta non blocca la tua esecuzione.
+- Le ricerche restano veloci sugli argomenti molto attivi.
+- Ogni pagina successiva arriva in fretta.
+- Le letture finiscono appena arrivano le loro righe.
+- Le chiamate agli Actor che si bloccano riprendono da sole.
+
+### Fatturazione equa
+
+- Un input errato non costa nulla & ti dice cosa correggere.
+- L'analisi AI fa pagare solo i post che ha analizzato.
+- Gli Actor fanno pagare solo le righe consegnate, uniche & conformi ai filtri.
+- Un'esecuzione riavviata non addebita mai due volte.
+- Le esecuzioni restano entro il tuo limite di spesa & scrivono comunque la loro
+  diagnostica.
+- Gli Actor AI non fanno pagare le analisi fallite o saltate.
+
+### Affidabilità
+
+- Un errore isolato non fa fallire la tua esecuzione.
+- La paginazione resta coerente da una pagina all'altra.
+- La paginazione non va mai in loop infinito.
+- Quando scade il tempo, ricevi le righe già trovate con la diagnostica.
+- Gli Actor resistono ai brevi disservizi di Xquik.
+- Le esecuzioni degli Actor superano i riavvii senza ripetere nulla.
+- Una riga errata non fa fallire il lotto.
+- Le esecuzioni interrotte conservano le loro righe & il loro report.
+- Un'esecuzione che non riesce a partire spiega comunque perché.
+- Il supporto può vedere esattamente cosa ha restituito una richiesta o
+  un'esecuzione.
+
+### Pensato per gli agenti
+
+- Gli Actor accettano input scritti per altri Actor.
+- Ogni esecuzione dice perché è finita & se conviene riprovare.
+
+### Dati ricchi
+
+- Le righe dei post riportano il testo dei Note Tweet, modifiche, Note della
+  community, etichette di visibilità & regole di risposta.
+- Le righe riportano app di origine, conteggi dei media & dati degli account
+  professionali.
+- I media arrivano con varianti, testo alternativo, dimensioni & motivi di
+  disponibilità.
+- Le risposte AI riportano probabilità, confidenza & una versione della domanda.
+- Il rumore non fa scattare modifiche tra un'esecuzione di analisi e l'altra.
+
+### Controlli di qualità
+
+- Ogni campo che X mostra è fornito, escluso di proposito o dimostrato assente.
+- Xquik testa ogni lettura dal vivo su X.
+
+## Quali dati restituisce X (Twitter) Brand Monitoring with AI Analysis?
+
 - **Ogni campo del post di origine.** Testo, autore, conteggi, media, link, post
   citati & post a cui risponde restano accanto alle risposte.
 - **Risposte tipizzate.** Ogni riga ha una probabilità di rilevanza, una
   categoria di sentiment con probabilità & una categoria di customer experience.
-- **Tracciamento dei cambiamenti.** Le esecuzioni si confrontano per decisione,
-  quindi i piccoli scostamenti di probabilità non contano come cambiamenti.
-- **Fatturazione dopo i filtri.** Paghi solo i post unici e conformi ai filtri
-  con un'analisi riuscita.
-
-> Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
-> "Twitter" e "X" sono marchi di X Corp.
 
 ## Come monitorare un brand su X
 

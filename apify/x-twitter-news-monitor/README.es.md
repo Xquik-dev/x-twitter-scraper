@@ -21,6 +21,122 @@ formato, atribución de la fuente & relevancia. Separa la información de la
 opinión & la especulación. Ve si un post nombra una fuente o enlaza a ella.
 Conserva solo los posts sobre las organizaciones, personas o temas que sigues.
 
+> Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
+> "Twitter" y "X" son marcas registradas de X Corp.
+
+## ¿Por qué usar X (Twitter) News Monitor with AI Analysis?
+
+- **La información aparte de la especulación.** Filtra por la respuesta `format`
+  para conservar la información & descartar la especulación o la promoción.
+- **Ve qué fuentes se citan.** `sourceDomains` cuenta los dominios enlazados en
+  toda la ejecución.
+- **Los Artículos enlazados cuentan.** Un post que enlaza un Artículo de X
+  también recibe respuestas sobre el Artículo.
+- **Cobertura por objetivo.** Cada objetivo recibe su propia distribución de
+  formato & atribución, & sus posts principales.
+- **Ve qué cambió.** Agrega el ID del dataset de una ejecución anterior a
+  `monitor.baselineDatasetId`. Así cada fila muestra qué decisiones cambiaron.
+- **Revisa tu propio texto.** Pega titulares o borradores en `texts` para
+  recibir las mismas respuestas de IA. La ejecución no obtiene nada de X.
+- **Respuestas listas para hojas de cálculo.** La vista `Flat answers` & las
+  exportaciones CSV o Excel muestran 1 columna por pregunta.
+- **Sin cuentas ni claves.** El precio incluye el análisis con IA. No necesitas
+  clave de IA, clave de API de X ni inicio de sesión.
+
+### Resultados completos
+
+- Los rangos de fechas grandes vuelven completos & rápido.
+- Las búsquedas devuelven todas las coincidencias, sin importar qué operadores
+  combines.
+- Las páginas filtradas vuelven llenas hasta que se acaban los resultados.
+- Cada resultado trae los datos más completos que X tiene sobre él.
+
+### Filas precisas
+
+- Los resultados de búsqueda traen todos los posts que coinciden con tu consulta
+  & nada más.
+- La coincidencia de palabras & frases funciona en todos los idiomas & sistemas
+  de escritura.
+- Los filtros de idioma funcionan con todos los idiomas que X etiqueta.
+- Las cuentas protegidas & las Listas privadas reciben una respuesta clara, no
+  una página vacía.
+- Los reposts traen el texto original completo.
+- Cada ID de una fila se mantiene exacto.
+- Las menciones, los enlaces, los hashtags & los resaltados quedan alineados con
+  el texto.
+- Las insignias de verificación coinciden con lo que muestra `x.com`.
+- Las filas solo contienen datos públicos.
+- Los resultados con los más recientes primero mantienen el orden real por fecha
+  entre páginas.
+- Las búsquedas aceptan consultas tal como las escribirías en X.
+- Las búsquedas de lugares funcionan con nombres en 6 idiomas.
+- Una búsqueda que no puede ejecutarse falla de inmediato & dice cómo
+  corregirla.
+- Una fecha significa lo mismo en cualquier formato común.
+- Las búsquedas aceptan los límites `since_id` & `max_id`.
+- Los anuncios & las entradas promocionadas nunca llegan a tus filas.
+
+### Datos actualizados
+
+- Las lecturas siguen funcionando cuando X lanza cambios.
+
+### Velocidad
+
+- Una página lenta no frena tu ejecución.
+- Las búsquedas siguen siendo rápidas en temas con mucha actividad.
+- Cada página siguiente llega rápido.
+- Las lecturas terminan en cuanto llegan sus filas.
+- Las llamadas a Actores que se atascan se recuperan solas.
+
+### Cobro justo
+
+- Una entrada inválida no cuesta nada & te dice qué corregir.
+- El análisis con IA solo cobra los posts que analizó.
+- Los Actores solo cobran las filas entregadas, únicas & que cumplen tus
+  filtros.
+- Una ejecución reiniciada nunca cobra 2 veces.
+- Las ejecuciones respetan tu límite de gasto & aun así escriben sus
+  diagnósticos.
+- Los Actores de IA no cobran los análisis fallidos u omitidos.
+
+### Confiabilidad
+
+- Un error aislado no hace fallar tu ejecución.
+- La paginación se mantiene coherente de una página a la siguiente.
+- La paginación nunca entra en un bucle infinito.
+- Si se acaba el tiempo, recibes las filas ya encontradas, con diagnósticos.
+- Los Actores resisten las caídas breves de Xquik.
+- Las ejecuciones de los Actores siguen tras un reinicio sin repetir nada.
+- Una fila defectuosa no arruina un lote.
+- Las ejecuciones detenidas conservan sus filas & su informe.
+- Una ejecución que no puede iniciar igual explica por qué.
+- Soporte puede ver exactamente qué devolvió una solicitud o una ejecución.
+
+### Hecho para agentes
+
+- Los Actores aceptan entradas escritas para otros Actores.
+- Cada ejecución dice por qué terminó & si conviene reintentar.
+
+### Datos detallados
+
+- Las filas de posts traen el texto de los Note Tweets, las ediciones, las Notas
+  de la Comunidad, las etiquetas de alcance & los controles de respuesta.
+- Las filas traen la app de origen, los conteos de contenido multimedia & los
+  datos de cuentas profesionales.
+- El contenido multimedia trae variantes, texto alternativo, tamaños & motivos
+  de disponibilidad.
+- Las respuestas de IA traen probabilidades, confianza & una versión de
+  pregunta.
+- El ruido no genera cambios falsos entre ejecuciones de análisis.
+
+### Controles de calidad
+
+- Cada campo que muestra X se entrega, se omite a propósito o se comprueba que
+  no existe.
+- Xquik prueba cada lectura en vivo contra X.
+
+## ¿Qué datos devuelve X (Twitter) News Monitor with AI Analysis?
+
 - **Formato.** Distingue información, opinión, especulación, promoción & sátira.
 - **Atribución.** Muestra si una afirmación nombra una fuente, la enlaza, es de
   primera mano o no tiene fuente.
@@ -28,9 +144,6 @@ Conserva solo los posts sobre las organizaciones, personas o temas que sigues.
   comparten el nombre.
 - **Registros de origen completos.** Cada fila conserva todos los campos que
   muestra el post, incluidos los artículos enlazados cuando existen.
-
-> Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
-> "Twitter" y "X" son marcas registradas de X Corp.
 
 ## Cómo clasificar posts de noticias en X
 

@@ -23,16 +23,125 @@ monitoreo de marca, quejas, competidores, intención de compra, opiniones de
 producto, noticias, sentimiento & sentimiento del mercado. Las preguntas
 personalizadas los reemplazan.
 
-- **Respuestas tipadas.** Las respuestas traen probabilidades, confianza &
-  versiones de pregunta.
-- **Tus preguntas, tus categorías.** Cada pregunta admite hasta 255 categorías.
-- **Registros de origen completos.** Cada fila conserva todos los campos que
-  muestra el post.
-- **Cobro después de filtrar.** Solo pagas los posts únicos que cumplen tus
-  filtros & tienen un análisis exitoso.
-
 > Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 > "Twitter" y "X" son marcas registradas de X Corp.
+
+## ¿Por qué usar X Tweet Classifier with AI Analysis?
+
+- **Tus preguntas, tus etiquetas.** Haz de 1 a 8 preguntas de categoría, de
+  puntaje o de sí o no por post. Una pregunta de categoría admite hasta 255
+  etiquetas.
+- **Ajustes predefinidos para tareas comunes.** Define `analysis.preset` para
+  quejas, intención de compra, competidores & 5 más.
+- **Un resumen por pregunta.** El resumen de la ejecución da a cada pregunta sus
+  propios conteos, proporciones o promedio.
+- **Ve qué cambió.** Agrega el ID del dataset de una ejecución anterior a
+  `monitor.baselineDatasetId`. Así cada fila muestra qué respuestas cambiaron.
+- **Clasifica tu propio texto.** Pega reseñas, respuestas o notas en `texts`
+  para recibir las mismas respuestas de IA. La ejecución no obtiene nada de X.
+- **Respuestas listas para hojas de cálculo.** La vista `Flat answers` & las
+  exportaciones CSV o Excel muestran 1 columna por pregunta.
+- **Sin cuentas ni claves.** El precio incluye el análisis con IA. No necesitas
+  clave de IA, clave de API de X ni inicio de sesión.
+
+### Resultados completos
+
+- Los rangos de fechas grandes vuelven completos & rápido.
+- Las búsquedas devuelven todas las coincidencias, sin importar qué operadores
+  combines.
+- Las páginas filtradas vuelven llenas hasta que se acaban los resultados.
+- Cada resultado trae los datos más completos que X tiene sobre él.
+
+### Filas precisas
+
+- Los resultados de búsqueda traen todos los posts que coinciden con tu consulta
+  & nada más.
+- La coincidencia de palabras & frases funciona en todos los idiomas & sistemas
+  de escritura.
+- Los filtros de idioma funcionan con todos los idiomas que X etiqueta.
+- Las cuentas protegidas & las Listas privadas reciben una respuesta clara, no
+  una página vacía.
+- Los reposts traen el texto original completo.
+- Cada ID de una fila se mantiene exacto.
+- Las menciones, los enlaces, los hashtags & los resaltados quedan alineados con
+  el texto.
+- Las insignias de verificación coinciden con lo que muestra `x.com`.
+- Las filas solo contienen datos públicos.
+- Los resultados con los más recientes primero mantienen el orden real por fecha
+  entre páginas.
+- Las búsquedas aceptan consultas tal como las escribirías en X.
+- Las búsquedas de lugares funcionan con nombres en 6 idiomas.
+- Una búsqueda que no puede ejecutarse falla de inmediato & dice cómo
+  corregirla.
+- Una fecha significa lo mismo en cualquier formato común.
+- Las búsquedas aceptan los límites `since_id` & `max_id`.
+- Los anuncios & las entradas promocionadas nunca llegan a tus filas.
+
+### Datos actualizados
+
+- Las lecturas siguen funcionando cuando X lanza cambios.
+
+### Velocidad
+
+- Una página lenta no frena tu ejecución.
+- Las búsquedas siguen siendo rápidas en temas con mucha actividad.
+- Cada página siguiente llega rápido.
+- Las lecturas terminan en cuanto llegan sus filas.
+- Las llamadas a Actores que se atascan se recuperan solas.
+
+### Cobro justo
+
+- Una entrada inválida no cuesta nada & te dice qué corregir.
+- El análisis con IA solo cobra los posts que analizó.
+- Los Actores solo cobran las filas entregadas, únicas & que cumplen tus
+  filtros.
+- Una ejecución reiniciada nunca cobra 2 veces.
+- Las ejecuciones respetan tu límite de gasto & aun así escriben sus
+  diagnósticos.
+- Los Actores de IA no cobran los análisis fallidos u omitidos.
+
+### Confiabilidad
+
+- Un error aislado no hace fallar tu ejecución.
+- La paginación se mantiene coherente de una página a la siguiente.
+- La paginación nunca entra en un bucle infinito.
+- Si se acaba el tiempo, recibes las filas ya encontradas, con diagnósticos.
+- Los Actores resisten las caídas breves de Xquik.
+- Las ejecuciones de los Actores siguen tras un reinicio sin repetir nada.
+- Una fila defectuosa no arruina un lote.
+- Las ejecuciones detenidas conservan sus filas & su informe.
+- Una ejecución que no puede iniciar igual explica por qué.
+- Soporte puede ver exactamente qué devolvió una solicitud o una ejecución.
+
+### Hecho para agentes
+
+- Los Actores aceptan entradas escritas para otros Actores.
+- Cada ejecución dice por qué terminó & si conviene reintentar.
+
+### Datos detallados
+
+- Las filas de posts traen el texto de los Note Tweets, las ediciones, las Notas
+  de la Comunidad, las etiquetas de alcance & los controles de respuesta.
+- Las filas traen la app de origen, los conteos de contenido multimedia & los
+  datos de cuentas profesionales.
+- El contenido multimedia trae variantes, texto alternativo, tamaños & motivos
+  de disponibilidad.
+- Las respuestas de IA traen probabilidades, confianza & una versión de
+  pregunta.
+- El ruido no genera cambios falsos entre ejecuciones de análisis.
+
+### Controles de calidad
+
+- Cada campo que muestra X se entrega, se omite a propósito o se comprueba que
+  no existe.
+- Xquik prueba cada lectura en vivo contra X.
+
+## ¿Qué datos devuelve X Tweet Classifier with AI Analysis?
+
+- **Respuestas tipadas.** Cada respuesta es una categoría, un nivel de puntaje o
+  una probabilidad, según lo que pida tu pregunta.
+- **Registros de origen completos.** Cada fila conserva todos los campos que
+  muestra el post.
 
 ## Cómo clasificar tuits con preguntas personalizadas
 

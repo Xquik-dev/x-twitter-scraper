@@ -19,18 +19,79 @@ anahtarına veya girişe ihtiyacın yok. **Teslim edilen profil başına $0.0001
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-## Hesap verileri & filtreler
+## Neden X User Search Scraper kullanmalısın?
 
-- Kitle, gönderi, hesap yaşı, onay durumu, web sitesi, konum, biyografi,
-  kullanıcı adı & e-posta filtreleri.
+- **Cashtag önerilerinde fiyatlar.** `autocomplete` modunda cashtag satırları
+  `price`, `marketCap` & `dailyChangePercent` taşır.
+- **Yalnızca ulaşılabilir hesaplar.** E-posta, iş e-postası veya web sitesi
+  yayımlayan profilleri tut. `emailDomains`, listelediğin alan adlarındaki
+  e-postaları tutar.
+- **Kitlene göre daralt.** Takipçi, gönderi, hesap yaşı, onay durumu, konum,
+  biyografi & kullanıcı adına göre filtrele.
+- **Kaldığın yerden devam et.** 1 sorguya devam etmek için kayıtlı bir imleci
+  `startCursor` içinde ver.
+
+### Eksiksiz sonuçlar
+
+- Her cevap, X'te bulunan en eksiksiz veriyi tutar.
+
+### Doğru satırlar
+
+- Satırdaki her ID birebir doğru kalır.
+- Onay rozetleri `x.com` üzerinde görünenle aynıdır.
+- Satırlar yalnızca herkese açık veri tutar.
+- Reklamlar & tanıtılan içerikler satırlarına asla girmez.
+
+### Güncel veri
+
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Okumalar, satırları geldiği anda biter.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- Hatalı girdi ücretsizdir & neyi düzelteceğini söyler.
+- Actor'lar yalnızca teslim edilen, benzersiz & eşleşen satırlar için ücret
+  alır.
+- Yeniden başlatılan bir çalıştırma asla 2 kez ücret almaz.
+- Çalıştırmalar harcama sınırının içinde kalır & tanılamalarını yine yazar.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Süre dolduğunda o ana kadar bulunan satırlar tanılamalarla birlikte döner.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Tek bir hatalı satır bütün grubu bozmaz.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+
+## X User Search Scraper hangi verileri çıkarabilir?
+
+- Eşleşen her hesabın ad, biyografi, sayılar & onay durumuyla herkese açık
+  profili.
+- `sourceTarget`, profili bulan arama terimi.
 - Her profilin yayımladığı e-postaları, telefonları & bağlantıları içeren
   `email` & `contactInfo`.
 - X'in her arama terimi için önerdiği hesaplar, konular, hashtag'ler &
   cashtag'lerle `mode: "autocomplete"`.
-- 1 sorguyu `startCursor` içindeki kayıtlı bir imleçten sürdür.
-- Apify çalıştırmaları yeniden başlattığında teslim edilen satırlar & ilerleme
-  korunur.
-- Faturalamadan önce filtreler & tekilleştirme.
 
 ## X kullanıcıları nasıl aranır
 

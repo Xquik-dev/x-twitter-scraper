@@ -20,21 +20,83 @@ ayrıca faturalandırır. X API anahtarına veya girişe ihtiyacın yok.
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-## Konumlar & gündem verisi
+## Neden X Trends Scraper kullanmalısın?
 
-- Aynı anda okunan birden çok ülke, şehir veya WOEID.
+- **Aralığa göre gündem geçmişi.** Her adım için 1 gündem listesi almak üzere
+  `from`, `to` & `every` alanlarını ayarla.
+- **Her gün dünün gündemi.** `at` alanı `24h` olduğunda günlük bir zamanlama
+  dünün gündemini okur.
+- **WOEID'ler, yer ID'leri & hashflag'ler.** `listLocations` veya
+  `listHashflags` seçeneğini aç ya da `placeSearchTerms` alanını doldur.
+- **Kesin kayıt zamanları.** Geçmiş satırlar, X'in listeyi gösterdiği anı
+  `capturedAt` içinde taşır.
+- **Kullanıma hazır dışa aktarımlar.** Alanları tut, yeniden adlandır, düzleştir
+  veya birleştir. Sonra JSON, CSV, Excel, XML veya RSS olarak dışa aktar.
+
+### Eksiksiz sonuçlar
+
+- Her cevap, X'te bulunan en eksiksiz veriyi tutar.
+
+### Doğru satırlar
+
+- Satırlar yalnızca herkese açık veri tutar.
+
+### Güncel veri
+
+- 2026-10-13'ten beri geçmişteki herhangi bir anın gündemini oku.
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Okumalar, satırları geldiği anda biter.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- Hatalı girdi ücretsizdir & neyi düzelteceğini söyler.
+- Actor'lar yalnızca teslim edilen, benzersiz & eşleşen satırlar için ücret
+  alır.
+- Yeniden başlatılan bir çalıştırma asla 2 kez ücret almaz.
+- Çalıştırmalar harcama sınırının içinde kalır & tanılamalarını yine yazar.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Süre dolduğunda o ana kadar bulunan satırlar tanılamalarla birlikte döner.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Tek bir hatalı satır bütün grubu bozmaz.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Zengin veri
+
+- Yer adına, ülkeye veya bölge ID'sine göre gündem. Tanıtılan gündem başlıkları
+  işaretlidir.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+
+## X Trends Scraper hangi verileri çıkarabilir?
+
 - Her konum için en fazla 50 güncel gündem başlığı.
-- Twitter gündem arşivinden tarih & saate göre geçmiş gündem, 2026-10-13'ten
-  beri.
 - X'in gündem sunduğu her yerin WOEID'si, ülkesi & türüyle bir listesi.
 - X gönderi aramasının kabul ettiği yer ID'siyle X yer araması.
 - X hashflag'leri, yani X'in bazı hashtag'lerden sonra gösterdiği özel emojiler.
 - Sıra, konu, sorgu, gönderi hacmi, arama URL'si, WOEID & kaynak konum.
 - Her satırda konum bilgisi.
 - Hashtag satırlarını & gönderi hacmi olan satırları işaretleyen bayraklar.
-- Eşdeğer girdiler için faturalamadan önce tekilleştirme.
-- Apify veri kümeleri üzerinden JSON, CSV, Excel, XML & RSS dışa aktarımları.
-- Apify çalıştırmayı taşıdığında çalıştırma kayıtlı durumdan devam eder.
 
 ## X gündemi nasıl kazınır
 

@@ -21,7 +21,94 @@ aparte el uso de la plataforma.
 > Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 > "Twitter" y "X" son marcas registradas de X Corp.
 
-## Datos de la cita en cada fila
+## ¿Por qué usar X Quote Tweets Scraper?
+
+- **1 fila por persona.** Activa `uniqueAuthors` para ver quién citó un post, 1
+  vez cada uno. Las citas posteriores del mismo autor no cuestan nada.
+- **Citas más recientes o destacadas.** Define `sort` como `latest` para las
+  citas nuevas, o `top` para las que X clasifica más alto.
+- **11 filtros de citas.** Filtra por idioma, fechas, tipo de contenido
+  multimedia, autores verificados & 6 conteos mínimos.
+- **Muchos posts en 1 ejecución.** Pega URLs de posts de `x.com` o
+  `twitter.com`, o IDs de posts. Limita la ejecución con `maxItems` & cada post
+  con `maxItemsPerTarget`.
+- **Tablas listas para exportar.** "Quote Tweets" enumera cada cita con sus
+  conteos. "Quote Authors" enumera quién citó cada post. Exporta en JSON, CSV,
+  Excel, XML o RSS.
+
+### Resultados completos
+
+- Cada resultado trae los datos más completos que X tiene sobre él.
+
+### Filas precisas
+
+- Los filtros de idioma funcionan con todos los idiomas que X etiqueta.
+- Los filtros de idioma, fecha & interacción se cumplen en cada fila que
+  recibes.
+- Los reposts traen el texto original completo.
+- Cada ID de una fila se mantiene exacto.
+- Las menciones, los enlaces, los hashtags & los resaltados quedan alineados con
+  el texto.
+- Un conteo desconocido aparece en `unknownCounts`, nunca como 0.
+- Las insignias de verificación coinciden con lo que muestra `x.com`.
+- Las filas solo contienen datos públicos.
+- Las búsquedas de citas devuelven todas las citas reales & nada más.
+- Los anuncios & las entradas promocionadas nunca llegan a tus filas.
+
+### Datos actualizados
+
+- Las lecturas siguen funcionando cuando X lanza cambios.
+
+### Velocidad
+
+- Una página lenta no frena tu ejecución.
+- Las lecturas terminan en cuanto llegan sus filas.
+- Las llamadas a Actores que se atascan se recuperan solas.
+
+### Cobro justo
+
+- Una entrada inválida no cuesta nada & te dice qué corregir.
+- Los Actores solo cobran las filas entregadas, únicas & que cumplen tus
+  filtros.
+- Una ejecución reiniciada nunca cobra 2 veces.
+- Las ejecuciones respetan tu límite de gasto & aun así escriben sus
+  diagnósticos.
+- Las ejecuciones pequeñas terminan con un consejo para gastar menos.
+
+### Confiabilidad
+
+- Un error aislado no hace fallar tu ejecución.
+- Si se acaba el tiempo, recibes las filas ya encontradas, con diagnósticos.
+- Los Actores resisten las caídas breves de Xquik.
+- Las ejecuciones de los Actores siguen tras un reinicio sin repetir nada.
+- Una fila defectuosa no arruina un lote.
+- Las ejecuciones detenidas conservan sus filas & su informe.
+- Una ejecución que no puede iniciar igual explica por qué.
+- Soporte puede ver exactamente qué devolvió una solicitud o una ejecución.
+
+### Hecho para agentes
+
+- Los Actores aceptan entradas escritas para otros Actores.
+- La salida está lista para hojas de cálculo, con columnas planas & totales de
+  interacción.
+- Cada ejecución dice por qué terminó & si conviene reintentar.
+
+### Datos detallados
+
+- Las filas de posts traen el texto de los Note Tweets, las ediciones, las Notas
+  de la Comunidad, las etiquetas de alcance & los controles de respuesta.
+- Las filas traen la app de origen, los conteos de contenido multimedia & los
+  datos de cuentas profesionales.
+- El contenido multimedia trae variantes, texto alternativo, tamaños & motivos
+  de disponibilidad.
+
+### Controles de calidad
+
+- Cada campo que muestra X se entrega, se omite a propósito o se comprueba que
+  no existe.
+- Xquik prueba cada lectura en vivo contra X.
+
+## ¿Qué datos puede extraer X Quote Tweets Scraper?
 
 - El texto completo, el enlace, el idioma & la hora de publicación de la cita.
 - Me gusta, respuestas, reposts, citas, visualizaciones & elementos guardados.
@@ -33,17 +120,6 @@ aparte el uso de la plataforma.
 - `sourceTarget`, el post de la entrada que la fila cita.
 - `position`, el lugar de la fila en la ejecución, & `scrapedAt`, su hora de
   entrega.
-- Muchos posts en 1 ejecución, cada uno leído hasta el final de lo que X
-  entrega.
-- Primero las más recientes, o las citas que X clasifica más alto.
-- 11 filtros por idioma, fechas, tipo de contenido multimedia, 6 conteos mínimos
-  & autores verificados.
-- 1 fila por autor cuando quieres personas, no posts.
-- URLs de posts de `x.com` & `twitter.com`, o IDs numéricos de posts.
-- Eliminación de duplicados antes del cobro.
-- Exportación en JSON, CSV, Excel, XML & RSS con los datasets de Apify.
-- Las ejecuciones se reanudan desde el estado guardado tras una migración de
-  Apify.
 
 ## Cómo extraer citas de tuits
 

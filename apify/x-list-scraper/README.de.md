@@ -22,7 +22,86 @@ Login.
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
 
-## Listendaten & Filter
+## Warum X List Scraper nutzen?
+
+- **Leads aus Listenmitgliedern.** Filtere Mitglieder & Follower nach
+  `minFollowers`, `hasEmail` oder `bioContains`. Datensätze enthalten die
+  E-Mails, Telefonnummern & Links, die jedes Profil veröffentlicht.
+- **Nur die Posts, die du willst.** Filtere Posts einer Liste nach Datum oder
+  Unix-Zeit, Sprache, Medien, Interaktionen & Verifizierung. Nimm Antworten auf
+  oder lass sie weg.
+- **Viele Listen in 1 Run.** Mische Listendetails, Posts, Mitglieder & Follower
+  über viele Listen hinweg.
+- **Lege deine Datensatz-Limits fest.** Begrenze den ganzen Run oder jede
+  Listen-Ressource & jeden Suchbegriff.
+
+### Vollständige Ergebnisse
+
+- Jedes Ergebnis enthält die vollständigsten Daten, die X dafür hat.
+
+### Genaue Datensätze
+
+- Geschützte Accounts & private Listen bekommen eine klare Antwort statt einer
+  leeren Seite.
+- Reposts enthalten den vollständigen Originaltext.
+- Jede ID in einem Datensatz bleibt exakt.
+- Erwähnungen, Links, Hashtags & Hervorhebungen sitzen an der richtigen Stelle
+  im Text.
+- Verifizierungs-Badges stimmen mit dem überein, was `x.com` zeigt.
+- Datensätze enthalten nur öffentliche Daten.
+- Werbung & gesponserte Einträge landen nie in deinen Datensätzen.
+
+### Aktuelle Daten
+
+- Abrufe funktionieren weiter, wenn X Änderungen ausrollt.
+
+### Tempo
+
+- Eine langsame Seite hält deinen Run nicht auf.
+- Abrufe enden, sobald ihre Datensätze ankommen.
+- Hängende Actor-Aufrufe laufen von selbst wieder an.
+
+### Faire Abrechnung
+
+- Eine fehlerhafte Eingabe kostet nichts & sagt dir, was du korrigieren musst.
+- Actors rechnen nur gelieferte, eindeutige, passende Datensätze ab.
+- Ein neu gestarteter Run berechnet nie doppelt.
+- Runs bleiben innerhalb deines Ausgabenlimits & schreiben trotzdem ihre
+  Diagnosen.
+- Kleine Runs enden mit einem Tipp, der Kosten senkt.
+
+### Zuverlässigkeit
+
+- Ein einzelner Fehler lässt deinen Run nicht scheitern.
+- Ein Zeitlimit liefert die bereits gefundenen Datensätze samt Diagnosen.
+- Actors überstehen kurze Xquik-Ausfälle.
+- Actor-Runs überstehen Neustarts ohne Dopplungen.
+- Ein fehlerhafter Datensatz lässt keinen Batch scheitern.
+- Gestoppte Runs behalten ihre Datensätze & ihren Report.
+- Ein Run, der nicht starten kann, erklärt trotzdem, warum.
+- Der Support sieht genau, was eine Anfrage oder ein Run geliefert hat.
+
+### Für Agents gebaut
+
+- Actors akzeptieren Eingaben, die für andere Actors geschrieben sind.
+- Die Ausgabe ist bereit für Tabellen, mit flachen Spalten & Interaktionssummen.
+- Jeder Run sagt, warum er endete & ob du es erneut versuchen solltest.
+
+### Umfangreiche Daten
+
+- Post-Datensätze enthalten den Text von Note Tweets, Bearbeitungen, Community
+  Notes, Reichweiten-Labels & Antworteinstellungen.
+- Datensätze enthalten Quell-Apps, Medienzahlen & Daten professioneller
+  Accounts.
+- Medien kommen mit Varianten, Alt-Text, Größen & Gründen zur Verfügbarkeit.
+
+### Qualitätsprüfungen
+
+- Jedes Feld, das X zeigt, wird geliefert, bewusst weggelassen oder ist
+  nachweislich nicht vorhanden.
+- Xquik testet jeden Abruf live gegen X.
+
+## Welche Daten kann X List Scraper extrahieren?
 
 - Listendetails mit Name, Beschreibung, Mitglieder- & Follower-Zahl,
   Erstellungszeit, Banner & dem öffentlichen Profil des Inhabers.
@@ -30,18 +109,8 @@ Login.
 - Mitglieder & Follower der Liste.
 - Listensuche per Stichwort. Jeder Datensatz ist 1 Liste mit Inhaber,
   Mitgliederzahl & Follower-Zahl.
-- Optional auch Antworten in den Posts der Liste.
-- Filter für Datum, Unix-Zeit, Sprache, Medien, Interaktionen, Verifizierung &
-  Profile.
-- Profilfilter für Mitglieder & Follower, etwa `minFollowers`, `hasEmail` &
-  `bioContains`.
 - Die öffentlichen Listen, die ein Account erstellt hat oder auf denen er steht,
   anhand von Nutzername oder Profil-URL.
-- Viele Listen & Ressourcentypen in 1 Run.
-- Eine globale Obergrenze & eine Obergrenze pro Listen-Ressource oder
-  Suchbegriff.
-- Runs laufen nach einer Apify-Migration weiter.
-- Duplikatentfernung vor der Abrechnung.
 
 ## So scrapst du X-Listen
 

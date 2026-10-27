@@ -33,27 +33,17 @@ email is not delivered & costs nothing. You pay **$0.00015 per delivered row**,
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## Contact details in every row
+## Why use X Email Scraper?
 
-- The first email the profile publishes, lowercased.
-- That email's domain & the profile field that holds it, which is the bio, name
-  or location.
-- Every email of the profile, also when it is spelled "name [at] site [dot]
-  com".
-- Phone numbers the profile publishes, such as a WhatsApp link.
-- The profile's website & bio links, each with its network, such as LinkedIn,
-  GitHub or Telegram.
-- The full public profile, with name, bio, counts, verification, dates & images.
-- 3 sources in 1 run, which are accounts, their followers or following, & user
-  searches.
-- Filters by email domain, business email, followers, account age, bio &
-  location.
-- Usernames with or without @, `x.com` & `twitter.com` URLs & numeric user IDs.
-- Duplicate removal before billing.
-- JSON, CSV, Excel, XML & RSS exports through Apify datasets.
-- Runs resume from saved state after an Apify migration.
-
-## What you get
+- **Emails from whole audiences.** Scan an account's followers or following &
+  keep profiles with an email. `maxScan` sets how many profiles each scan reads.
+- **Pay only for emails found.** A profile without an email costs nothing.
+  Scanned profiles are free too.
+- **Only the leads you want.** Keep emails at your domains or skip free webmail.
+  Filter by followers, account age, bio & location.
+- **3 sources in 1 run.** Mix usernames, profile URLs, user IDs, follower scans
+  & user searches.
+- **Lead lists ready to export.** Export rows as JSON, CSV, Excel, XML or RSS.
 
 ### Complete results
 
@@ -72,30 +62,28 @@ email is not delivered & costs nothing. You pay **$0.00015 per delivered row**,
 
 ### Speed
 
-- A slow X answer doesn't hold up your request.
-- Actors read many handles, posts & queries at once.
+- One slow page doesn't hold up your run.
 - Reads finish the moment their rows arrive.
 - Stalled Actor calls recover on their own.
 
 ### Fair billing
 
-- Bad input costs nothing, since it's refused before any read.
+- Bad input costs nothing & tells you what to fix.
 - Actors charge only for delivered, unique, matching rows.
 - A profile shared by several targets is billed once.
 - A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
+- Runs stay within your spend cap & still write their diagnostics.
 - Small runs end with a tip that cuts cost.
 
 ### Reliability
 
-- A one-off X failure doesn't fail your request.
+- A one-off error doesn't fail your run.
 - A deadline returns the rows already found, with diagnostics.
 - Actors ride out short Xquik outages.
 - Actor runs survive restarts without repeats.
 - One bad row doesn't sink a batch.
 - Stopped runs keep their rows & their report.
 - A run that can't start still explains itself.
-- Problems on X's side are fixed before they reach your reads.
 - Support can see exactly what a request or run returned.
 
 ### Built for agents
@@ -111,7 +99,19 @@ email is not delivered & costs nothing. You pay **$0.00015 per delivered row**,
 ### Quality checks
 
 - Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
+- Xquik tests every read live against X.
+
+## What data can X Email Scraper extract?
+
+- The first email the profile publishes, lowercased.
+- That email's domain & the profile field that holds it, which is the bio, name
+  or location.
+- Every email of the profile, also when it is spelled "name [at] site [dot]
+  com".
+- Phone numbers the profile publishes, such as a WhatsApp link.
+- The profile's website & bio links, each with its network, such as LinkedIn,
+  GitHub or Telegram.
+- The full public profile, with name, bio, counts, verification, dates & images.
 
 ## How to get emails from X profiles
 

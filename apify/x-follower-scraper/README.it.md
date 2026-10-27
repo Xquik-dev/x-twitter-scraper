@@ -30,20 +30,100 @@ X Follower Scraper di Xquik restituisce i dati pubblici disponibili dei profili
 per follower, following, liste & community. Ogni riga indica il suo target di
 origine & la relazione.
 
-### Comportamento principale
+### Casi d'uso
 
-- Filtri & rimozione dei duplicati agiscono prima della fatturazione.
-- Di default, un profilo condiviso da più target compare & si paga una volta
-  sola.
-- 1 esecuzione accetta nomi utente, ID numerici, URL & percorsi brevi.
-- La modalità merge registra profili condivisi, origini, relazioni &
-  `overlapCount`.
-- I log dell'esecuzione mostrano i tempi delle pagine in `fetchDurationMs`,
-  `processingDurationMs`, `pushDurationMs`, `statusDurationMs` &
-  `fullPageDurationMs`.
-- Le esecuzioni conservano righe consegnate & progressi quando Apify le riavvia.
+- Arricchisci i lead & crea dataset di ricerca dai profili dei follower.
+- Esporta i follower dei concorrenti per cercare lead.
+- Confronta il pubblico del tuo account, dei concorrenti & di personaggi
+  pubblici.
+- Filtra per numero di follower & verifica per trovare i profili giusti.
+- Esporta i membri delle community di X.
+- Crea dataset pubblici di reti sociali per la ricerca.
+- Segmenta i follower per parola chiave nella bio, posizione o tipo di profilo.
 
-### Quali dati può estrarre X Follower Scraper?
+## Perché usare X Follower Scraper?
+
+- **Gli elenchi di follower filtrati più economici.** Il [benchmark](README.md#benchmark)
+  del 2026-10-15 ha tenuto i follower di NASA con oltre 1.000 follower. Gli
+  altri 4 Actor hanno fatto pagare ogni profilo letto. Sono costati da 39 a 273
+  volte di più per profilo utile.
+- **Export dei follower 2,6x più veloci.** Nel [benchmark](README.md#benchmark) ha letto
+  1.000 follower 2,6x più velocemente di altri 4 Actor.
+- **1,6x i campi per profilo.** Nel [benchmark](README.md#benchmark) la sua riga full
+  mediana aveva 39 campi. È 1,6x la mediana degli altri Actor.
+- **Vedi la sovrapposizione del pubblico.** La modalità merge dà 1 riga per
+  profilo, con ogni fonte in cui compare. Ordina per `overlapCount` per trovare
+  i follower in comune.
+- **Controlla chi segue chi.** Elenca gli account in `followCheckSources` &
+  `followCheckTargets`. Ogni riga contiene `isFollowing` & `isFollowedBy` per 1
+  coppia.
+- **Ogni pubblico in 1 esecuzione.** Indica nomi utente, ID, URL o percorsi
+  brevi. Leggi follower, following, membri di liste, membri di community,
+  affiliati o abbonamenti.
+- **Trova i profili giusti.** Filtra per follower, post, età dell'account,
+  verifica, bio, posizione & email pubblicata.
+
+### Risultati completi
+
+- Gli export di follower & following restituiscono elenchi completi.
+- Anche gli export dei follower verificati restituiscono elenchi completi.
+- Ogni risultato riporta i dati più completi che X ha a disposizione.
+
+### Righe accurate
+
+- Ogni ID in una riga resta esatto.
+- I badge di verifica corrispondono a quelli che mostra `x.com`.
+- Le righe contengono solo dati pubblici.
+- Annunci & contenuti sponsorizzati non arrivano mai nelle tue righe.
+
+### Dati aggiornati
+
+- Le letture continuano a funzionare quando X rilascia modifiche.
+
+### Velocità
+
+- Una pagina lenta non blocca la tua esecuzione.
+- Le letture finiscono appena arrivano le loro righe.
+- Le chiamate agli Actor che si bloccano riprendono da sole.
+
+### Fatturazione equa
+
+- Un input errato non costa nulla & ti dice cosa correggere.
+- Gli Actor fanno pagare solo le righe consegnate, uniche & conformi ai filtri.
+- Un profilo condiviso da più target si paga una sola volta.
+- Un'esecuzione riavviata non addebita mai due volte.
+- Le esecuzioni restano entro il tuo limite di spesa & scrivono comunque la loro
+  diagnostica.
+- Le esecuzioni piccole finiscono con un consiglio per spendere meno.
+
+### Affidabilità
+
+- Un errore isolato non fa fallire la tua esecuzione.
+- Quando scade il tempo, ricevi le righe già trovate con la diagnostica.
+- Gli Actor resistono ai brevi disservizi di Xquik.
+- Le esecuzioni degli Actor superano i riavvii senza ripetere nulla.
+- Una riga errata non fa fallire il lotto.
+- Le esecuzioni interrotte conservano le loro righe & il loro report.
+- Un'esecuzione che non riesce a partire spiega comunque perché.
+- Il supporto può vedere esattamente cosa ha restituito una richiesta o
+  un'esecuzione.
+
+### Pensato per gli agenti
+
+- Gli Actor accettano input scritti per altri Actor.
+- Ogni esecuzione dice perché è finita & se conviene riprovare.
+
+### Dati ricchi
+
+- I link brevi vengono espansi, & le righe degli elenchi possono riportare
+  profili completi.
+
+### Controlli di qualità
+
+- Ogni campo che X mostra è fornito, escluso di proposito o dimostrato assente.
+- Xquik testa ogni lettura dal vivo su X.
+
+## Quali dati può estrarre X Follower Scraper?
 
 | Campo                    | Descrizione                                                               |
 | ------------------------ | ------------------------------------------------------------------------- |
@@ -100,19 +180,6 @@ segna come Blue anche molti account di aziende & enti pubblici. Imposta
 Le righe non includono mai stati visibili solo a chi guarda. Xquik rimuove gli
 indicatori di chi guarda per follow, blocco, silenziamento, DM, notifiche &
 simili. Anche l'output raw li elimina.
-
-## Casi d'uso
-
-- Arricchisci i lead & crea dataset di ricerca con più campi per profilo. Il
-  2026-09-29 la nostra riga full mediana aveva 38 campi. È 2,5x la mediana di
-  altri 9 Actor.
-- Esporta i follower dei concorrenti per cercare lead.
-- Confronta il pubblico del tuo account, dei concorrenti & di personaggi
-  pubblici.
-- Filtra per numero di follower & verifica per trovare i profili giusti.
-- Esporta i membri delle community di X.
-- Crea dataset pubblici di reti sociali per la ricerca.
-- Segmenta i follower per parola chiave nella bio, posizione o tipo di profilo.
 
 ## Come uso X Follower Scraper per estrarre i dati dei follower?
 
@@ -349,8 +416,9 @@ Per volumi maggiori,
 [scegli un piano Apify](https://apify.com/pricing?fpr=xquik) con più uso
 prepagato.
 
-Un'esecuzione può leggere molti target. Limiti, deduplicazione & fatturazione
-restano esatti su tutti.
+Un'esecuzione può leggere molti target. Filtri & rimozione dei duplicati
+agiscono prima della fatturazione. Limiti, deduplicazione & fatturazione restano
+esatti su tutti.
 
 - I filtri agiscono prima che un profilo entri nel tuo dataset, quindi le righe
   filtrate non costano nulla.

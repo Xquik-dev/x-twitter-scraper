@@ -33,21 +33,28 @@ scores for prioritization & probabilities for relevance. Presets cover brand
 monitoring, complaints, competitors, purchase intent, product feedback, news,
 sentiment & market sentiment. Custom questions replace them.
 
-- **Typed answers.** Answers carry probabilities, confidence & question
-  versions.
-- **Your questions, your categories.** Each question takes up to 255 categories.
-- **Complete source records.** Every row keeps every field the tweet exposes.
-- **Filter-first billing.** You pay only for unique, filter-matching tweets with
-  a successful analysis.
-
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## What you get
+## Why use X Tweet Classifier with AI Analysis?
+
+- **Your questions, your labels.** Ask 1 to 8 category, score or yes/no
+  questions per post. A category question takes up to 255 labels.
+- **Presets for common jobs.** Set `analysis.preset` for complaints, purchase
+  intent, competitors & 5 more.
+- **A summary per question.** The run summary gives each question its own
+  counts, shares or mean.
+- **See what changed.** Add an earlier run's dataset ID to
+  `monitor.baselineDatasetId`. Each row then shows which answers moved.
+- **Classify your own text.** Paste reviews, replies or notes in `texts` for the
+  same answers. The run fetches nothing from X.
+- **Spreadsheet-ready answers.** The `Flat answers` view & CSV or Excel exports
+  show 1 column per question.
+- **No accounts or keys.** The price includes AI-powered analysis. You need no
+  AI key, X API key or login.
 
 ### Complete results
 
-- Searches return posts that X's own search tab leaves out.
 - Large date ranges come back whole & fast.
 - Searches return every match, whatever operators you combine.
 - Filtered pages come back full until the results run out.
@@ -58,7 +65,6 @@ sentiment & market sentiment. Custom questions replace them.
 - Search results hold every post that matches your query & nothing else.
 - Word & phrase matching works in every language & script.
 - Language filters work for every language X tags.
-- "X can't run this search" appears only when it's true.
 - Protected accounts & private Lists get a clear answer, not an empty page.
 - Reposts carry the full original text.
 - Every ID in a row stays exact.
@@ -66,9 +72,9 @@ sentiment & market sentiment. Custom questions replace them.
 - Verified badges match what `x.com` shows.
 - Rows hold public data only.
 - Newest-first results stay in true date order across pages.
-- Messy queries still run instead of failing.
+- Searches accept queries as you'd type them on X.
 - Place searches work with names in 6 languages.
-- Searches X can't run fail at once, with the fix.
+- A search that can't run fails at once & says how to fix it.
 - A date means one thing in any common form.
 - Searches accept `since_id` & `max_id` bounds.
 - Ads & promoted entries never reach your rows.
@@ -79,27 +85,24 @@ sentiment & market sentiment. Custom questions replace them.
 
 ### Speed
 
-- A slow X answer doesn't hold up your request.
-- Repeated lookups answer at once.
+- One slow page doesn't hold up your run.
 - Searches stay fast on busy topics.
 - Each next page arrives fast.
-- Actors read many handles, posts & queries at once.
 - Reads finish the moment their rows arrive.
 - Stalled Actor calls recover on their own.
 
 ### Fair billing
 
-- A retried page is free.
-- Bad input costs nothing, since it's refused before any read.
+- Bad input costs nothing & tells you what to fix.
 - AI analysis bills only the posts it analyzed.
 - Actors charge only for delivered, unique, matching rows.
 - A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
+- Runs stay within your spend cap & still write their diagnostics.
 - AI Actors don't bill failed or skipped analyses.
 
 ### Reliability
 
-- A one-off X failure doesn't fail your request.
+- A one-off error doesn't fail your run.
 - Paging stays consistent from one page to the next.
 - Paging never loops forever.
 - A deadline returns the rows already found, with diagnostics.
@@ -108,7 +111,6 @@ sentiment & market sentiment. Custom questions replace them.
 - One bad row doesn't sink a batch.
 - Stopped runs keep their rows & their report.
 - A run that can't start still explains itself.
-- Problems on X's side are fixed before they reach your reads.
 - Support can see exactly what a request or run returned.
 
 ### Built for agents
@@ -128,7 +130,13 @@ sentiment & market sentiment. Custom questions replace them.
 ### Quality checks
 
 - Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
+- Xquik tests every read live against X.
+
+## What data does X Tweet Classifier with AI Analysis return?
+
+- **Typed answers.** Each answer is a category, a score level or a probability,
+  as your question asks.
+- **Complete source records.** Every row keeps every field the tweet exposes.
 
 ## How to classify tweets with custom questions
 

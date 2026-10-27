@@ -27,19 +27,129 @@ elogios & preguntas de compra. Informa a los equipos de soporte & marketing con
 posts reales. Guarda un historial de cómo hablan de ti los clientes, de una
 ejecución a otra.
 
+> Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
+> "Twitter" y "X" son marcas registradas de X Corp.
+
+## ¿Por qué usar X (Twitter) Brand Monitoring with AI Analysis?
+
+- **Cuota de voz por marca.** El resumen da las menciones, la cuota de voz & la
+  interacción por marca & alias.
+- **Alertas sobre lo que cambió.** Agrega el ID del dataset de una ejecución
+  anterior a `monitor.baselineDatasetId`. `monitor.changedRows` enumera las
+  menciones cuyas decisiones cambiaron, listas para un webhook.
+- **Menciones principales por marca.** Cada marca enumera sus 3 menciones con
+  más interacción por categoría de respuesta.
+- **Detecta homónimos.** Una probabilidad de relevancia marca las menciones que
+  no hablan de tu marca.
+- **Analiza tu propio texto.** Pega reseñas, respuestas o borradores en `texts`
+  para recibir las mismas respuestas de IA. La ejecución no obtiene nada de X.
+- **Respuestas listas para hojas de cálculo.** La vista `Flat answers` & las
+  exportaciones CSV o Excel muestran 1 columna por pregunta.
+- **Haz tus propias preguntas.** Reemplaza las predeterminadas con hasta 8
+  preguntas en `analysis.questions`.
+- **Sin cuentas ni claves.** El precio incluye el análisis con IA. No necesitas
+  clave de IA, clave de API de X ni inicio de sesión.
+
+### Resultados completos
+
+- Los rangos de fechas grandes vuelven completos & rápido.
+- Las búsquedas devuelven todas las coincidencias, sin importar qué operadores
+  combines.
+- Las páginas filtradas vuelven llenas hasta que se acaban los resultados.
+- Cada resultado trae los datos más completos que X tiene sobre él.
+
+### Filas precisas
+
+- Los resultados de búsqueda traen todos los posts que coinciden con tu consulta
+  & nada más.
+- La coincidencia de palabras & frases funciona en todos los idiomas & sistemas
+  de escritura.
+- Los filtros de idioma funcionan con todos los idiomas que X etiqueta.
+- Las cuentas protegidas & las Listas privadas reciben una respuesta clara, no
+  una página vacía.
+- Los reposts traen el texto original completo.
+- Cada ID de una fila se mantiene exacto.
+- Las menciones, los enlaces, los hashtags & los resaltados quedan alineados con
+  el texto.
+- Las insignias de verificación coinciden con lo que muestra `x.com`.
+- Las filas solo contienen datos públicos.
+- Los resultados con los más recientes primero mantienen el orden real por fecha
+  entre páginas.
+- Las búsquedas aceptan consultas tal como las escribirías en X.
+- Las búsquedas de lugares funcionan con nombres en 6 idiomas.
+- Una búsqueda que no puede ejecutarse falla de inmediato & dice cómo
+  corregirla.
+- Una fecha significa lo mismo en cualquier formato común.
+- Las búsquedas aceptan los límites `since_id` & `max_id`.
+- Los anuncios & las entradas promocionadas nunca llegan a tus filas.
+
+### Datos actualizados
+
+- Las lecturas siguen funcionando cuando X lanza cambios.
+
+### Velocidad
+
+- Una página lenta no frena tu ejecución.
+- Las búsquedas siguen siendo rápidas en temas con mucha actividad.
+- Cada página siguiente llega rápido.
+- Las lecturas terminan en cuanto llegan sus filas.
+- Las llamadas a Actores que se atascan se recuperan solas.
+
+### Cobro justo
+
+- Una entrada inválida no cuesta nada & te dice qué corregir.
+- El análisis con IA solo cobra los posts que analizó.
+- Los Actores solo cobran las filas entregadas, únicas & que cumplen tus
+  filtros.
+- Una ejecución reiniciada nunca cobra 2 veces.
+- Las ejecuciones respetan tu límite de gasto & aun así escriben sus
+  diagnósticos.
+- Los Actores de IA no cobran los análisis fallidos u omitidos.
+
+### Confiabilidad
+
+- Un error aislado no hace fallar tu ejecución.
+- La paginación se mantiene coherente de una página a la siguiente.
+- La paginación nunca entra en un bucle infinito.
+- Si se acaba el tiempo, recibes las filas ya encontradas, con diagnósticos.
+- Los Actores resisten las caídas breves de Xquik.
+- Las ejecuciones de los Actores siguen tras un reinicio sin repetir nada.
+- Una fila defectuosa no arruina un lote.
+- Las ejecuciones detenidas conservan sus filas & su informe.
+- Una ejecución que no puede iniciar igual explica por qué.
+- Soporte puede ver exactamente qué devolvió una solicitud o una ejecución.
+
+### Hecho para agentes
+
+- Los Actores aceptan entradas escritas para otros Actores.
+- Cada ejecución dice por qué terminó & si conviene reintentar.
+
+### Datos detallados
+
+- Las filas de posts traen el texto de los Note Tweets, las ediciones, las Notas
+  de la Comunidad, las etiquetas de alcance & los controles de respuesta.
+- Las filas traen la app de origen, los conteos de contenido multimedia & los
+  datos de cuentas profesionales.
+- El contenido multimedia trae variantes, texto alternativo, tamaños & motivos
+  de disponibilidad.
+- Las respuestas de IA traen probabilidades, confianza & una versión de
+  pregunta.
+- El ruido no genera cambios falsos entre ejecuciones de análisis.
+
+### Controles de calidad
+
+- Cada campo que muestra X se entrega, se omite a propósito o se comprueba que
+  no existe.
+- Xquik prueba cada lectura en vivo contra X.
+
+## ¿Qué datos devuelve X (Twitter) Brand Monitoring with AI Analysis?
+
 - **Todos los campos del post de origen.** El texto, el autor, los conteos, el
   contenido multimedia, los enlaces & los posts citados y respondidos quedan
   junto a las respuestas.
 - **Respuestas tipadas.** Cada fila tiene una probabilidad de relevancia, una
   categoría de sentimiento con probabilidades & una categoría de experiencia del
   cliente.
-- **Seguimiento de cambios.** Las ejecuciones se comparan por decisión, así que
-  los pequeños cambios de probabilidad no cuentan como cambios.
-- **Cobro después de filtrar.** Solo pagas los posts únicos que cumplen tus
-  filtros & tienen un análisis exitoso.
-
-> Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
-> "Twitter" y "X" son marcas registradas de X Corp.
 
 ## Cómo monitorear una marca en X
 

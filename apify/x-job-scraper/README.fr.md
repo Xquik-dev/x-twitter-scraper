@@ -21,20 +21,75 @@ X ni de connexion.
 > Xquik est un service tiers indépendant. Non affilié à X Corp. "Twitter" et "X"
 > sont des marques déposées de X Corp.
 
-## Recherches & données d'offres d'emploi
+## Pourquoi utiliser X Jobs Scraper ?
 
-- De nombreux termes de recherche en 1 run, lus en parallèle.
-- Des filtres de lieu, de mode de travail, de niveau d'expérience, de type de
-  contrat & d'entreprise.
-- Des URL & des ID d'offre lus comme des annonces complètes.
+- **Seulement les offres que vous voulez.** Filtrez par lieu, mode de travail,
+  niveau d'expérience, type de contrat & entreprise.
+- **Le lieu exact que vous visez.** `locationId` fixe 1 lieu, comme New York
+  City plutôt que West New York.
+- **Des offres connues par lien.** Collez des URL ou des ID d'offre pour obtenir
+  chaque annonce complète.
+- **Les descriptions sans frais en plus.** Une ligne avec la description
+  complète coûte autant qu'une annonce seule.
+- **Des exports prêts à l'emploi.** Gardez, renommez, aplatissez ou combinez des
+  champs, puis exportez en JSON, CSV, Excel, XML ou RSS.
+
+### Résultats complets
+
+- Chaque résultat contient les données les plus complètes dont X dispose.
+
+### Lignes exactes
+
+- Les lignes ne contiennent que des données publiques.
+
+### Données à jour
+
+- Les lectures continuent de fonctionner quand X déploie des changements.
+
+### Vitesse
+
+- Une page lente ne bloque pas votre run.
+- Les lectures se terminent dès que leurs lignes arrivent.
+- Les appels d'Actor bloqués repartent d'eux-mêmes.
+
+### Facturation juste
+
+- Une entrée invalide ne coûte rien & vous dit quoi corriger.
+- Les Actors facturent seulement les lignes livrées, uniques & conformes à vos
+  filtres.
+- Un run redémarré ne facture jamais deux fois.
+- Les runs restent dans votre limite de dépense & écrivent quand même leurs
+  diagnostics.
+- Les petits runs se terminent par un conseil qui réduit le coût.
+
+### Fiabilité
+
+- Une erreur ponctuelle ne fait pas échouer votre run.
+- Un délai dépassé renvoie les lignes déjà trouvées, avec des diagnostics.
+- Les Actors résistent aux courtes pannes de Xquik.
+- Les runs d'Actor survivent aux redémarrages sans doublons.
+- Une mauvaise ligne ne fait pas échouer tout un lot.
+- Les runs arrêtés gardent leurs lignes & leur rapport.
+- Un run qui ne peut pas démarrer explique quand même pourquoi.
+- Le support peut voir exactement ce qu'une requête ou un run a renvoyé.
+
+### Conçu pour les agents
+
+- Les Actors acceptent une entrée écrite pour d'autres Actors.
+- Chaque run indique pourquoi il s'est terminé & s'il faut réessayer.
+
+### Contrôles qualité
+
+- Chaque champ que X affiche est fourni, omis exprès ou prouvé absent.
+- Xquik teste chaque lecture en direct sur X.
+
+## Quelles données X Jobs Scraper peut-il extraire ?
+
 - Des lieux d'emploi par nom, chacun avec l'ID que `locationId` accepte.
 - Le titre, la fourchette de salaire, la devise, le lien de candidature, le lieu
   & le compte qui recrute.
 - Les descriptions complètes en texte brut & en Markdown sur chaque ligne.
 - La recherche indiquée sur chaque ligne.
-- La suppression des doublons entre recherches, avant la facturation.
-- Des exports JSON, CSV, Excel, XML & RSS via les datasets Apify.
-- Les runs reprennent depuis un état enregistré après une migration Apify.
 
 ## Comment scraper des offres d'emploi X
 

@@ -22,7 +22,94 @@ gratuiti, & Apify fattura a parte l'uso della piattaforma.
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.
 
-## Cosa invia il bot da Twitter a Discord
+## Perché usare X (Twitter) to Discord Bot?
+
+- **Nessun bot da ospitare.** Gli avvisi arrivano tramite il webhook del tuo
+  canale. Dal tuo lato non gira nulla, & nessuno invita un bot.
+- **Nessuna notifica a sorpresa.** Una menzione dentro un tweet non notifica mai
+  nessuno nel tuo server.
+- **Verifica che il canale sia collegato.** Ogni nuovo URL Discord riceve un
+  messaggio di prova. Lo stato dell'esecuzione mostra la risposta di Discord.
+- **Molti canali da 1 input.** Invia gli stessi avvisi ad altri canali Discord,
+  a Slack, a Telegram o a qualsiasi webhook.
+- **Recupera gli eventi persi.** `since` salva di nuovo gli eventi da qualsiasi
+  data degli ultimi 30 giorni.
+- **Controlla che il monitor sia attivo.** La pagina di stato di ogni esecuzione
+  lo conferma & mostra 1 passo successivo con un pulsante.
+- **Nessuna pausa silenziosa.** Il tuo canale riceve un avviso 4 ore prima che
+  un monitor senza esecuzioni vada in pausa. L'esecuzione successiva lo
+  riprende.
+- **Nessun account X necessario.** Non condividi mai il tuo login X né una
+  chiave API.
+
+### Righe accurate
+
+- I repost riportano il testo originale completo.
+- Ogni ID in una riga resta esatto.
+- Menzioni, link, hashtag & evidenziazioni restano allineati al testo.
+- I badge di verifica corrispondono a quelli che mostra `x.com`.
+- Le righe contengono solo dati pubblici.
+- Annunci & contenuti sponsorizzati non arrivano mai nelle tue righe.
+- I monitor segnalano solo eliminazioni & unfollow reali.
+- Gli avvisi sulle modifiche del profilo non oscillano avanti e indietro.
+
+### Dati aggiornati
+
+- I monitor degli account vedono le modifiche entro circa un secondo.
+- I monitor delle parole chiave rilevano ogni post corrispondente.
+- I monitor non perdono post.
+- Un monitor rimasto indietro recupera ciò che ha perso.
+- Video in diretta & Spazi generano un evento quando iniziano.
+- Le letture continuano a funzionare quando X rilascia modifiche.
+
+### Velocità
+
+- Una pagina lenta non blocca la tua esecuzione.
+- Le chiamate agli Actor che si bloccano riprendono da sole.
+
+### Fatturazione equa
+
+- I monitor hanno 1 prezzo orario fisso, eventi & webhook inclusi.
+- Gli Actor di monitoraggio fanno pagare solo le ore in cui un monitor ha
+  sorvegliato.
+
+### Affidabilità
+
+- Un errore isolato non fa fallire la tua esecuzione.
+- Gli Actor resistono ai brevi disservizi di Xquik.
+- Le esecuzioni degli Actor superano i riavvii senza ripetere nulla.
+- Le esecuzioni interrotte conservano le loro righe & il loro report.
+- Un'esecuzione che non riesce a partire spiega comunque perché.
+- I webhook sono firmati & protetti dai replay.
+- Un webhook rimasto offline riceve comunque i suoi eventi, fino a 7 giorni.
+- I nuovi eventi arrivano puntuali, anche dopo che il tuo webhook è stato
+  offline.
+- I webhook non partono mai verso host privati o locali.
+- Gli avvisi in chat arrivano in ordine senza superare i limiti di frequenza.
+- Il supporto può vedere esattamente cosa ha restituito una richiesta o
+  un'esecuzione.
+
+### Pensato per gli agenti
+
+- Gli Actor accettano input scritti per altri Actor.
+- Ogni esecuzione dice perché è finita & se conviene riprovare.
+
+### Dati ricchi
+
+- Le righe dei post riportano il testo dei Note Tweet, modifiche, Note della
+  community, etichette di visibilità & regole di risposta.
+- Le righe riportano app di origine, conteggi dei media & dati degli account
+  professionali.
+- I media arrivano con varianti, testo alternativo, dimensioni & motivi di
+  disponibilità.
+
+### Controlli di qualità
+
+- Ogni campo che X mostra è fornito, escluso di proposito o dimostrato assente.
+- Xquik testa ogni lettura dal vivo su X.
+- README, schemi & output reali degli Actor usano gli stessi nomi dei campi.
+
+## Quali dati invia X (Twitter) to Discord Bot?
 
 - Ogni nuovo tweet, risposta, citazione & repost degli account che sorvegli, di
   solito rilevato in meno di un secondo da quando X lo mostra.
@@ -31,10 +118,7 @@ gratuiti, & Apify fattura a parte l'uso della piattaforma.
 - Video in diretta, Spazi, tweet eliminati, modifiche del profilo, follow &
   follower, quando li attivi.
 - Ogni avviso come messaggio Discord che nomina l'account & l'evento, contiene
-  il testo del tweet & rimanda al tweet su X. Nessuna menzione in un tweet
-  notifica qualcuno.
-- Un messaggio di prova a ogni nuovo URL Discord, con la sua risposta nello
-  stato dell'esecuzione.
+  il testo del tweet & rimanda al tweet su X.
 - Ogni evento nel dataset dell'esecuzione & in 1 dataset di cronologia per task
   salvato o nome del monitor.
 

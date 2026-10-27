@@ -21,7 +21,77 @@ parte l'uso della piattaforma.
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.
 
-## Dati dell'account su ogni riga
+## Perché usare X Account Location Scraper?
+
+- **Una risposta chiara per ogni account.** Ogni riga dice se X mostra
+  un'etichetta, se non ne ha o se l'ha trattenuta.
+- **Righe nell'ordine del tuo input.** Con molti account, le righe tornano
+  nell'ordine in cui li hai elencati.
+- **Incolla account in qualsiasi forma.** Combina nomi utente, @handle, URL di
+  profilo & ID utente in 1 elenco. Usa `userIds` per gli elenchi che conservi,
+  perché un ID utente resta lo stesso quando cambia il nome utente.
+- **Export pronti per i fogli di calcolo.** Scegli le colonne con `fields` &
+  `flatten`. Esporta in JSON, CSV, Excel, XML o RSS.
+
+### Risultati completi
+
+- Ogni risultato riporta i dati più completi che X ha a disposizione.
+
+### Righe accurate
+
+- Ogni ID in una riga resta esatto.
+- I badge di verifica corrispondono a quelli che mostra `x.com`.
+- Le righe contengono solo dati pubblici.
+- Annunci & contenuti sponsorizzati non arrivano mai nelle tue righe.
+
+### Dati aggiornati
+
+- Le letture continuano a funzionare quando X rilascia modifiche.
+
+### Velocità
+
+- Una pagina lenta non blocca la tua esecuzione.
+- Le letture finiscono appena arrivano le loro righe.
+- Le chiamate agli Actor che si bloccano riprendono da sole.
+
+### Fatturazione equa
+
+- Un input errato non costa nulla & ti dice cosa correggere.
+- Gli Actor fanno pagare solo le righe consegnate, uniche & conformi ai filtri.
+- Un profilo condiviso da più target si paga una sola volta.
+- Un'esecuzione riavviata non addebita mai due volte.
+- Le esecuzioni restano entro il tuo limite di spesa & scrivono comunque la loro
+  diagnostica.
+- Le esecuzioni piccole finiscono con un consiglio per spendere meno.
+
+### Affidabilità
+
+- Un errore isolato non fa fallire la tua esecuzione.
+- Quando scade il tempo, ricevi le righe già trovate con la diagnostica.
+- Gli Actor resistono ai brevi disservizi di Xquik.
+- Le esecuzioni degli Actor superano i riavvii senza ripetere nulla.
+- Una riga errata non fa fallire il lotto.
+- Le esecuzioni interrotte conservano le loro righe & il loro report.
+- Un'esecuzione che non riesce a partire spiega comunque perché.
+- Il supporto può vedere esattamente cosa ha restituito una richiesta o
+  un'esecuzione.
+
+### Pensato per gli agenti
+
+- Gli Actor accettano input scritti per altri Actor.
+- Ogni esecuzione dice perché è finita & se conviene riprovare.
+
+### Dati ricchi
+
+- La posizione dell'account arriva con codice paese, nota sull'accuratezza &
+  cronologia dei nomi utente.
+
+### Controlli di qualità
+
+- Ogni campo che X mostra è fornito, escluso di proposito o dimostrato assente.
+- Xquik testa ogni lettura dal vivo su X.
+
+## Quali dati può estrarre X Account Location Scraper?
 
 - L'etichetta "Posizione account" di X, come paese o come regione.
 - Il codice ISO di 2 lettere di quel paese.
@@ -35,14 +105,6 @@ parte l'uso della piattaforma.
 - L'età dell'account in giorni & un link al suo profilo.
 - Il profilo pubblico completo, con nome, bio, conteggi, verifica, date &
   immagini.
-- Una seconda lettura di ogni account di cui X trattiene l'etichetta, senza
-  costi aggiuntivi.
-- Molti account in 1 esecuzione, letti in parallelo & consegnati nell'ordine
-  dell'input.
-- Nomi utente con o senza @, URL `x.com` & `twitter.com` & ID utente numerici.
-- Rimozione dei duplicati prima della fatturazione.
-- Export JSON, CSV, Excel, XML & RSS tramite i dataset di Apify.
-- Le esecuzioni riprendono dallo stato salvato dopo una migrazione di Apify.
 
 ## Come controllare dove hanno sede gli account X
 

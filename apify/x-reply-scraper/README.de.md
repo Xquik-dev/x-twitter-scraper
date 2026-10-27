@@ -28,26 +28,6 @@ X Reply Scraper von Xquik sammelt öffentliche Antworten &
 Kommentar-Konversationen. Er verarbeitet einzelne Posts, lange URL-Listen,
 Post-IDs & Antwort-Timelines von Nutzern.
 
-### Wichtige Funktionen
-
-- Der Auto-Modus sammelt weiter, wenn direkte Ergebnisse unvollständig sind.
-- `collectionStrategy` legt fest, wie der Actor Antworten sammelt.
-- Eingaben in großen Mengen akzeptieren Post-URLs, Post-IDs, Profile &
-  Nutzernamen.
-- Filter & Duplikatentfernung laufen vor der Abrechnung.
-- Die Ausgabe unterstützt 4 Sortiermodi, 3 Detailstufen & 3 Feldstile.
-- Jede Antwort behält ihr Quellziel, die IDs der übergeordneten Posts, die ID
-  des Ausgangsposts & ihre Tiefe.
-- Fortsetzungs-Cursor unterstützen das Nachholen älterer Daten & geplante Runs.
-- Runs, die Aufmerksamkeit brauchen, schreiben 1 kostenlosen Datensatz in
-  `diagnostics`. Ein Run, der jedes Ziel liest & keine Antwort findet, schreibt
-  keinen. Sein Status sagt, warum.
-- Run-Logs zeigen Seiten- & Zielzeiten in `fetchDurationMs`,
-  `processingDurationMs`, `pushDurationMs`, `statusDurationMs`,
-  `fullPageDurationMs` & `fullTargetDurationMs`.
-- Runs behalten gelieferte Antworten & ihren Fortschritt, wenn Apify sie neu
-  startet.
-
 ### Anwendungsfälle
 
 - Miss Sentiment & Kundenfeedback unter Posts zu Marken & Produkten.
@@ -59,7 +39,101 @@ Post-IDs & Antwort-Timelines von Nutzern.
 - Rekonstruiere ganze Konversationen für Forschung & KI-Trainings-Datasets.
 - Verfolge, wie ein Account seinen Kunden über längere Zeit antwortet.
 
-### Welche Daten kann X Reply Scraper extrahieren?
+## Warum X Reply Scraper nutzen?
+
+- **1,7-mal schnellere Antwort-Exporte.** Sein Median-Run war 1,7-mal schneller
+  als der schnellste von 4 anderen Actors. Der [Benchmark](README.md#benchmark) lief am
+  2026-10-15.
+- **Die niedrigsten Kosten pro nützlicher Antwort.** Er kostete im
+  [Benchmark](README.md#benchmark) am wenigsten pro nützlicher Antwort.
+- **2-mal so viele Felder pro Antwort.** Sein Median-Datensatz hatte im
+  [Benchmark](README.md#benchmark) 100 Felder. Das ist das 2-Fache des Medians der
+  anderen Actors.
+- **Wähle die Form der Konversation.** Behalte direkte Antworten, verschachtelte
+  Antworten oder beide, bis zur Tiefe, die du festlegst. `collectionStrategy`
+  kann auch den Thread oder nur ausgeblendete Antworten liefern.
+- **Rekonstruiere jeden Thread.** Jede Antwort enthält ihren übergeordneten Post
+  in `inReplyToId`, ihren Ausgangspost in `rootTweetId` & ihre `depth`.
+- **Viele Posts in 1 Run.** Füge Post-URLs, Post-IDs, Profile & Nutzernamen
+  zusammen ein. Ein Nutzername liefert die Antworten dieses Accounts.
+- **Nur die Antworten, die du willst.** Filtere nach Wörtern, Hashtags, Autor,
+  Sprache, Verifizierung, Interaktion, Medien & Datum.
+- **Sortiere nach Gefällt-mir-Angaben oder Datum.** Ordne Antworten nach
+  Gefällt-mir-Angaben oder liste die neuesten oder ältesten zuerst. Datensätze
+  kommen kompakt, vollständig oder rich, in `camelCase` oder `snake_case`.
+- **Setze große Threads später fort.** Ein Run, der früh stoppt, speichert die
+  Position jedes Ziels in `next-cursors`. Übergib 1 davon als `startCursor`, um
+  fortzufahren.
+
+### Vollständige Ergebnisse
+
+- Der Modus Complete ergänzt Antworten, die der Autor ausgeblendet hat, &
+  erklärt leere Threads.
+- Jedes Ergebnis enthält die vollständigsten Daten, die X dafür hat.
+
+### Genaue Datensätze
+
+- Ein Post gilt nur dann als fehlend, wenn er weg ist.
+- Reposts enthalten den vollständigen Originaltext.
+- Jede ID in einem Datensatz bleibt exakt.
+- Erwähnungen, Links, Hashtags & Hervorhebungen sitzen an der richtigen Stelle
+  im Text.
+- Ein unbekannter Zähler steht in `unknownCounts` & erscheint nie als 0.
+- Verifizierungs-Badges stimmen mit dem überein, was `x.com` zeigt.
+- Datensätze enthalten nur öffentliche Daten.
+- Werbung & gesponserte Einträge landen nie in deinen Datensätzen.
+
+### Aktuelle Daten
+
+- Abrufe funktionieren weiter, wenn X Änderungen ausrollt.
+
+### Tempo
+
+- Eine langsame Seite hält deinen Run nicht auf.
+- Abrufe enden, sobald ihre Datensätze ankommen.
+- Hängende Actor-Aufrufe laufen von selbst wieder an.
+
+### Faire Abrechnung
+
+- Eine fehlerhafte Eingabe kostet nichts & sagt dir, was du korrigieren musst.
+- Actors rechnen nur gelieferte, eindeutige, passende Datensätze ab.
+- Ein neu gestarteter Run berechnet nie doppelt.
+- Runs bleiben innerhalb deines Ausgabenlimits & schreiben trotzdem ihre
+  Diagnosen.
+- Kleine Runs enden mit einem Tipp, der Kosten senkt.
+
+### Zuverlässigkeit
+
+- Ein einzelner Fehler lässt deinen Run nicht scheitern.
+- Ein Zeitlimit liefert die bereits gefundenen Datensätze samt Diagnosen.
+- Actors überstehen kurze Xquik-Ausfälle.
+- Actor-Runs überstehen Neustarts ohne Dopplungen.
+- Ein fehlerhafter Datensatz lässt keinen Batch scheitern.
+- Gestoppte Runs behalten ihre Datensätze & ihren Report.
+- Ein Run, der nicht starten kann, erklärt trotzdem, warum.
+- Der Support sieht genau, was eine Anfrage oder ein Run geliefert hat.
+
+### Für Agents gebaut
+
+- Actors akzeptieren Eingaben, die für andere Actors geschrieben sind.
+- Die Ausgabe ist bereit für Tabellen, mit flachen Spalten & Interaktionssummen.
+- Jeder Run sagt, warum er endete & ob du es erneut versuchen solltest.
+
+### Umfangreiche Daten
+
+- Post-Datensätze enthalten den Text von Note Tweets, Bearbeitungen, Community
+  Notes, Reichweiten-Labels & Antworteinstellungen.
+- Datensätze enthalten Quell-Apps, Medienzahlen & Daten professioneller
+  Accounts.
+- Medien kommen mit Varianten, Alt-Text, Größen & Gründen zur Verfügbarkeit.
+
+### Qualitätsprüfungen
+
+- Jedes Feld, das X zeigt, wird geliefert, bewusst weggelassen oder ist
+  nachweislich nicht vorhanden.
+- Xquik testet jeden Abruf live gegen X.
+
+## Welche Daten kann X Reply Scraper extrahieren?
 
 Die Schemas für Dataset & Run-Report beschreiben jedes gelieferte Feld. Text-,
 Zahlen- & Boolean-Felder enthalten auch Beispiele für Agents & generierte

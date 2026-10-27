@@ -42,17 +42,94 @@ fee.
 Xquik's X Follower Scraper returns available public profile data for followers,
 following, Lists & Communities. Each row names its source target & relation.
 
-### Core behavior
+### Use cases
 
-- Filters & duplicate removal run before billing.
-- By default, a profile shared by several targets appears & bills once.
-- 1 run accepts handles, numeric IDs, URLs & short paths.
-- Merge mode records shared profiles, sources, relations & `overlapCount`.
-- Run logs show page timing in `fetchDurationMs`, `processingDurationMs`,
-  `pushDurationMs`, `statusDurationMs` & `fullPageDurationMs`.
-- Runs keep delivered rows & progress when Apify restarts them.
+- Enrich leads & build research datasets from follower profiles.
+- Export competitor followers for lead research.
+- Compare audiences across your account, competitors & public figures.
+- Filter by follower count & verification to find matching profiles.
+- Export X Community members.
+- Build public social-network datasets for research.
+- Segment follower bases by bio keyword, location, or profile type.
 
-### What data can X Follower Scraper extract?
+## Why use X Follower Scraper?
+
+- **Cheapest filtered follower lists.** The 2026-10-15 [benchmark](#benchmark)
+  kept NASA followers with 1,000+ followers. The 4 other Actors billed every
+  profile they read. They cost 39 to 273 times more per useful profile.
+- **2.6x faster follower exports.** In the [benchmark](#benchmark), it read
+  1,000 followers 2.6x faster than 4 other Actors.
+- **1.6x the fields per profile.** Its median full row had 39 fields in the
+  [benchmark](#benchmark). That is 1.6x the median of the other Actors.
+- **See audience overlap.** Merge mode gives 1 row per profile, with each source
+  it matched. Sort by `overlapCount` to find shared followers.
+- **Check who follows whom.** List accounts in `followCheckSources` &
+  `followCheckTargets`. Each row holds `isFollowing` & `isFollowedBy` for 1
+  pair.
+- **Every audience in 1 run.** Give handles, IDs, URLs or short paths. Read
+  followers, following, List members, Community members, affiliates or
+  subscriptions.
+- **Find the right profiles.** Filter by followers, posts, account age,
+  verification, bio, location & published email.
+
+### Complete results
+
+- Follower & following exports return full lists.
+- Verified follower exports return full lists too.
+- Each answer holds the fullest data X has for it.
+
+### Accurate rows
+
+- Every ID in a row stays exact.
+- Verified badges match what `x.com` shows.
+- Rows hold public data only.
+- Ads & promoted entries never reach your rows.
+
+### Fresh data
+
+- Reads keep working when X ships changes.
+
+### Speed
+
+- One slow page doesn't hold up your run.
+- Reads finish the moment their rows arrive.
+- Stalled Actor calls recover on their own.
+
+### Fair billing
+
+- Bad input costs nothing & tells you what to fix.
+- Actors charge only for delivered, unique, matching rows.
+- A profile shared by several targets is billed once.
+- A restarted run never charges twice.
+- Runs stay within your spend cap & still write their diagnostics.
+- Small runs end with a tip that cuts cost.
+
+### Reliability
+
+- A one-off error doesn't fail your run.
+- A deadline returns the rows already found, with diagnostics.
+- Actors ride out short Xquik outages.
+- Actor runs survive restarts without repeats.
+- One bad row doesn't sink a batch.
+- Stopped runs keep their rows & their report.
+- A run that can't start still explains itself.
+- Support can see exactly what a request or run returned.
+
+### Built for agents
+
+- Actors accept input written for other Actors.
+- Every run says why it ended & whether to retry.
+
+### Rich data
+
+- Short links resolve, & list rows can carry full profiles.
+
+### Quality checks
+
+- Every field X shows is served, left out on purpose or proven absent.
+- Xquik tests every read live against X.
+
+## What data can X Follower Scraper extract?
 
 | Field                    | Description                                             |
 | ------------------------ | ------------------------------------------------------- |
@@ -104,80 +181,6 @@ accounts blue too. Set `verifiedType` to keep 1 badge type.
 
 Rows never include viewer-only state. Xquik removes follow, block, mute, DM,
 notification & similar viewer flags. Raw output drops them too.
-
-## Use cases
-
-- Enrich leads & build research datasets with more fields per profile. Our
-  median full row had 38 fields on 2026-09-29. That is 2.5x the median of 9
-  other Actors.
-- Export competitor followers for lead research.
-- Compare audiences across your account, competitors & public figures.
-- Filter by follower count & verification to find matching profiles.
-- Export X Community members.
-- Build public social-network datasets for research.
-- Segment follower bases by bio keyword, location, or profile type.
-
-## What you get
-
-### Complete results
-
-- Follower & following exports return full lists.
-- Verified follower exports return full lists too.
-- Similar-account lists come back fuller.
-- Each answer holds the fullest data X has for it.
-
-### Accurate rows
-
-- Every ID in a row stays exact.
-- Verified badges match what `x.com` shows.
-- Rows hold public data only.
-- Ads & promoted entries never reach your rows.
-
-### Fresh data
-
-- Reads keep working when X ships changes.
-
-### Speed
-
-- A slow X answer doesn't hold up your request.
-- Actors read many handles, posts & queries at once.
-- Reads finish the moment their rows arrive.
-- Stalled Actor calls recover on their own.
-
-### Fair billing
-
-- Bad input costs nothing, since it's refused before any read.
-- Actors charge only for delivered, unique, matching rows.
-- A profile shared by several targets is billed once.
-- A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
-- Small runs end with a tip that cuts cost.
-
-### Reliability
-
-- A one-off X failure doesn't fail your request.
-- A deadline returns the rows already found, with diagnostics.
-- Actors ride out short Xquik outages.
-- Actor runs survive restarts without repeats.
-- One bad row doesn't sink a batch.
-- Stopped runs keep their rows & their report.
-- A run that can't start still explains itself.
-- Problems on X's side are fixed before they reach your reads.
-- Support can see exactly what a request or run returned.
-
-### Built for agents
-
-- Actors accept input written for other Actors.
-- Every run says why it ended & whether to retry.
-
-### Rich data
-
-- Short links resolve, & list rows can carry full profiles.
-
-### Quality checks
-
-- Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
 
 ## How do I use X Follower Scraper to scrape follower data?
 
@@ -400,8 +403,8 @@ follow check is 1 row at the same price.
 For more volume, [pick an Apify plan](https://apify.com/pricing?fpr=xquik) with
 more prepaid usage.
 
-One run can read many targets. Caps, deduplication & billing stay exact across
-them.
+One run can read many targets. Filters & duplicate removal run before billing.
+Caps, deduplication & billing stay exact across them.
 
 - Filters run before a profile enters your dataset, so filtered rows cost
   nothing.

@@ -27,7 +27,97 @@ facture l'usage de la plateforme à part.
 > Xquik est un service tiers indépendant. Non affilié à X Corp. "Twitter" et "X"
 > sont des marques déposées de X Corp.
 
-## Ce qu'envoie le moniteur Twitter
+## Pourquoi utiliser X (Twitter) Monitor ?
+
+- **Des alertes là où votre équipe travaille.** Discord & Slack reçoivent leur
+  propre format de message, sans bot à héberger. Telegram n'a besoin d'aucun ID
+  de chat, & tout webhook HTTPS reçoit l'événement complet.
+- **Sachez que vos alertes fonctionnent.** Chaque nouvelle URL de webhook, Slack
+  ou Discord reçoit une alerte de test. Le statut du run indique si elle est
+  arrivée. Telegram confirme dans le chat quand vous appuyez sur Start.
+- **Surveillez comptes & sujets ensemble.** 1 entrée accepte jusqu'à 100 comptes
+  & recherches X. Une recherche sur un @nom d'utilisateur capte les mentions de
+  ce compte.
+- **Récupérez les événements manqués.** `since` enregistre à nouveau les
+  événements depuis n'importe quelle date des 30 derniers jours.
+- **Sachez que le moniteur surveille.** La page de statut de chaque run le
+  confirme & montre 1 étape suivante avec un bouton.
+- **Aucune pause silencieuse.** Vos alertes vous préviennent 4 heures avant
+  qu'un moniteur sans run ne se mette en pause. Le run suivant le relance.
+- **Aucun compte X nécessaire.** Vous ne partagez jamais vos identifiants X ni
+  une clé API.
+
+### Lignes exactes
+
+- Les reposts portent le texte d'origine en entier.
+- Chaque ID d'une ligne reste exact.
+- Les mentions, liens, hashtags & passages mis en avant pointent vers le bon
+  endroit du texte.
+- Les badges de certification correspondent à ce qu'affiche `x.com`.
+- Les lignes ne contiennent que des données publiques.
+- Les publicités & les contenus sponsorisés n'arrivent jamais dans vos lignes.
+- Les moniteurs signalent seulement les vraies suppressions & les vrais
+  désabonnements.
+- Les alertes de changement de profil ne font pas d'allers-retours.
+
+### Données à jour
+
+- Les moniteurs de compte voient les changements en une seconde environ.
+- Les moniteurs de mots-clés captent chaque post correspondant.
+- Les moniteurs ne manquent aucun post.
+- Un moniteur en retard rattrape ce qu'il a manqué.
+- Les vidéos en direct & les Spaces déclenchent un événement à leur début.
+- Les lectures continuent de fonctionner quand X déploie des changements.
+
+### Vitesse
+
+- Une page lente ne bloque pas votre run.
+- Les appels d'Actor bloqués repartent d'eux-mêmes.
+
+### Facturation juste
+
+- Les moniteurs ont 1 prix horaire fixe, événements & webhooks compris.
+- Les Actors de surveillance facturent seulement les heures pendant lesquelles
+  un moniteur a surveillé.
+
+### Fiabilité
+
+- Une erreur ponctuelle ne fait pas échouer votre run.
+- Les Actors résistent aux courtes pannes de Xquik.
+- Les runs d'Actor survivent aux redémarrages sans doublons.
+- Les runs arrêtés gardent leurs lignes & leur rapport.
+- Un run qui ne peut pas démarrer explique quand même pourquoi.
+- Les webhooks sont signés & protégés contre le rejeu.
+- Un webhook qui était en panne reçoit quand même ses événements, pendant 7
+  jours au plus.
+- Les nouveaux événements arrivent à l'heure, même après une panne de votre
+  webhook.
+- Les webhooks ne partent jamais vers des hôtes privés ou locaux.
+- Les alertes de chat arrivent dans l'ordre sans atteindre les limites de débit.
+- Le support peut voir exactement ce qu'une requête ou un run a renvoyé.
+
+### Conçu pour les agents
+
+- Les Actors acceptent une entrée écrite pour d'autres Actors.
+- Chaque run indique pourquoi il s'est terminé & s'il faut réessayer.
+
+### Données riches
+
+- Les lignes de post portent le texte des Note Tweets, les modifications, les
+  Notes de la Communauté, les libellés de portée & les contrôles de réponse.
+- Les lignes portent les apps sources, le nombre de médias & les données de
+  compte professionnel.
+- Les médias arrivent avec leurs variantes, leur texte alternatif, leurs tailles
+  & les motifs de disponibilité.
+
+### Contrôles qualité
+
+- Chaque champ que X affiche est fourni, omis exprès ou prouvé absent.
+- Xquik teste chaque lecture en direct sur X.
+- Les README des Actors, les schémas & la sortie réelle nomment les mêmes
+  champs.
+
+## Quelles données X (Twitter) Monitor envoie-t-il ?
 
 - Chaque nouveau tweet, réponse, citation et repost des comptes que vous
   surveillez, généralement capté en moins d'une seconde après son affichage sur
@@ -48,11 +138,6 @@ facture l'usage de la plateforme à part.
   ses médias, ou le changement.
 - L'ID d'utilisateur X permanent à côté du nom d'utilisateur actuel, pour qu'un
   compte renommé garde son moniteur.
-- Des alertes vers Slack et Discord dans leur propre format de message, vers
-  Telegram et vers tout webhook HTTPS en JSON signé.
-- Une alerte de test vers chaque nouvelle URL de webhook, Slack ou Discord, avec
-  sa réponse dans le statut du run. Telegram confirme dans le chat quand vous
-  appuyez sur Start.
 - Chaque événement dans le dataset du run et dans 1 dataset d'historique par
   tâche enregistrée ou nom de moniteur.
 

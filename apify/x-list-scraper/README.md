@@ -32,30 +32,20 @@ or find public Lists with search terms. You pay **$0.00015 per delivered row**,
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## List data & filters
+## Why use X List Scraper?
 
-- List details with name, description, member & follower counts, creation time,
-  banner & the owner's public profile.
-- List posts with text, author, metrics, media & timestamps.
-- List members & List followers.
-- List search by keyword. Each row is 1 List with its owner, member count &
-  follower count.
-- Optional replies in List posts.
-- Filters for dates, Unix time, language, media, engagement, verification &
-  profiles.
-- Profile filters for members & followers, such as `minFollowers`, `hasEmail` &
-  `bioContains`.
-- The public Lists an account created or is on, from its handle or profile URL.
-- Many Lists & resource types in 1 run.
-- A global cap & a cap for each List resource or search term.
-- Runs resume after an Apify migration.
-- Duplicate removal before billing.
-
-## What you get
+- **Leads from List members.** Filter members & followers by `minFollowers`,
+  `hasEmail` or `bioContains`. Rows carry the emails, phones & links each
+  profile publishes.
+- **Only the posts you want.** Filter List posts by date or Unix time, language,
+  media, engagement & verification. Include replies or leave them out.
+- **Many Lists in 1 run.** Mix List details, posts, members & followers across
+  many Lists.
+- **Set your row limits.** Cap the whole run, or each List resource & search
+  term.
 
 ### Complete results
 
-- List timelines include posts that X's List page leaves out.
 - Each answer holds the fullest data X has for it.
 
 ### Accurate rows
@@ -74,29 +64,27 @@ or find public Lists with search terms. You pay **$0.00015 per delivered row**,
 
 ### Speed
 
-- A slow X answer doesn't hold up your request.
-- Actors read many handles, posts & queries at once.
+- One slow page doesn't hold up your run.
 - Reads finish the moment their rows arrive.
 - Stalled Actor calls recover on their own.
 
 ### Fair billing
 
-- Bad input costs nothing, since it's refused before any read.
+- Bad input costs nothing & tells you what to fix.
 - Actors charge only for delivered, unique, matching rows.
 - A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
+- Runs stay within your spend cap & still write their diagnostics.
 - Small runs end with a tip that cuts cost.
 
 ### Reliability
 
-- A one-off X failure doesn't fail your request.
+- A one-off error doesn't fail your run.
 - A deadline returns the rows already found, with diagnostics.
 - Actors ride out short Xquik outages.
 - Actor runs survive restarts without repeats.
 - One bad row doesn't sink a batch.
 - Stopped runs keep their rows & their report.
 - A run that can't start still explains itself.
-- Problems on X's side are fixed before they reach your reads.
 - Support can see exactly what a request or run returned.
 
 ### Built for agents
@@ -115,7 +103,17 @@ or find public Lists with search terms. You pay **$0.00015 per delivered row**,
 ### Quality checks
 
 - Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
+- Xquik tests every read live against X.
+
+## What data can X List Scraper extract?
+
+- List details with name, description, member & follower counts, creation time,
+  banner & the owner's public profile.
+- List posts with text, author, metrics, media & timestamps.
+- List members & List followers.
+- List search by keyword. Each row is 1 List with its owner, member count &
+  follower count.
+- The public Lists an account created or is on, from its handle or profile URL.
 
 ## How to scrape X lists
 

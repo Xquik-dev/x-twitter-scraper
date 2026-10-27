@@ -27,17 +27,121 @@ alma soruları için izle. Destek & pazarlama ekiplerini gerçek gönderilerle
 bilgilendir. Müşterilerin senden nasıl söz ettiğinin geçmişini her çalıştırmada
 biriktir.
 
+> Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
+> "Twitter" ve "X", X Corp'un ticari markalarıdır.
+
+## Neden X (Twitter) Brand Monitoring with AI Analysis kullanmalısın?
+
+- **Marka başına ses payı.** Özet her marka & takma ad için bahsetmeleri, ses
+  payını & etkileşimi verir.
+- **Değişikliklerde bildirim.** Önceki bir çalıştırmanın veri kümesi ID'sini
+  `monitor.baselineDatasetId` içine ekle. `monitor.changedRows`, kararı değişen
+  bahsetmeleri webhook'a hazır şekilde listeler.
+- **Marka başına en iyi bahsetmeler.** Her marka, her cevap kategorisi için en
+  çok etkileşim alan 3 bahsetmesini listeler.
+- **Adaşları ayıkla.** Bir ilgi olasılığı, markanla ilgili olmayan bahsetmeleri
+  işaretler.
+- **Kendi metnini analiz et.** Aynı cevapları almak için değerlendirmeleri,
+  yanıtları veya taslakları `texts` içine yapıştır. Çalıştırma X'ten hiçbir şey
+  çekmez.
+- **Tabloya hazır cevaplar.** `Flat answers` görünümü & CSV veya Excel dışa
+  aktarımları her soru için 1 sütun gösterir.
+- **Kendi sorularını sor.** Varsayılanların yerine `analysis.questions` içinde
+  en fazla 8 soru yaz.
+- **Hesap veya anahtar gerekmez.** Yapay zeka destekli analiz fiyata dahildir.
+  Yapay zeka anahtarına, X API anahtarına veya girişe ihtiyacın yok.
+
+### Eksiksiz sonuçlar
+
+- Geniş tarih aralıkları eksiksiz & hızlı gelir.
+- Hangi operatörleri birleştirirsen birleştir, aramalar her eşleşmeyi döndürür.
+- Filtreli sayfalar sonuçlar bitene kadar dolu gelir.
+- Her cevap, X'te bulunan en eksiksiz veriyi tutar.
+
+### Doğru satırlar
+
+- Arama sonuçları sorguna uyan her gönderiyi tutar, başka hiçbir şeyi tutmaz.
+- Kelime & ifade eşleştirme her dilde & alfabede çalışır.
+- Dil filtreleri X'in etiketlediği her dilde çalışır.
+- Korumalı hesaplar & gizli Listeler boş bir sayfa değil, net bir cevap alır.
+- Yeniden gönderiler orijinal metnin tamamını taşır.
+- Satırdaki her ID birebir doğru kalır.
+- Bahsetmeler, bağlantılar, hashtag'ler & vurgular metindeki yerleriyle eşleşir.
+- Onay rozetleri `x.com` üzerinde görünenle aynıdır.
+- Satırlar yalnızca herkese açık veri tutar.
+- En yeniden başlayan sonuçlar sayfalar boyunca gerçek tarih sırasında kalır.
+- Aramalar sorguları X'te yazdığın gibi kabul eder.
+- Yer aramaları 6 dildeki adlarla çalışır.
+- Çalışamayan bir arama hemen hata verir & nasıl düzelteceğini söyler.
+- Bir tarih, hangi yaygın biçimde yazılırsa yazılsın tek bir anlama gelir.
+- Aramalar `since_id` & `max_id` sınırlarını kabul eder.
+- Reklamlar & tanıtılan içerikler satırlarına asla girmez.
+
+### Güncel veri
+
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Aramalar yoğun konularda da hızlı kalır.
+- Her sonraki sayfa hızlı gelir.
+- Okumalar, satırları geldiği anda biter.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- Hatalı girdi ücretsizdir & neyi düzelteceğini söyler.
+- Yapay zeka analizi yalnızca analiz ettiği gönderiler için ücret alır.
+- Actor'lar yalnızca teslim edilen, benzersiz & eşleşen satırlar için ücret
+  alır.
+- Yeniden başlatılan bir çalıştırma asla 2 kez ücret almaz.
+- Çalıştırmalar harcama sınırının içinde kalır & tanılamalarını yine yazar.
+- Yapay zeka Actor'ları başarısız veya atlanan analizler için ücret almaz.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Sayfalama bir sayfadan diğerine tutarlı kalır.
+- Sayfalama asla sonsuz döngüye girmez.
+- Süre dolduğunda o ana kadar bulunan satırlar tanılamalarla birlikte döner.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Tek bir hatalı satır bütün grubu bozmaz.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Zengin veri
+
+- Gönderi satırları Note Tweet metnini, düzenlemeleri, Topluluk Notlarını,
+  erişim etiketlerini & yanıt kontrollerini taşır.
+- Satırlar kaynak uygulamaları, medya sayılarını & profesyonel hesap verilerini
+  taşır.
+- Medya varyantlar, alternatif metin, boyutlar & kullanılabilirlik nedenleriyle
+  gelir.
+- Yapay zeka cevapları olasılıklar, güven değeri & bir soru sürümü taşır.
+- Analiz çalıştırmaları arasındaki değişiklikler küçük dalgalanmalarla tersine
+  dönmez.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+
+## X (Twitter) Brand Monitoring with AI Analysis hangi verileri döndürür?
+
 - **Kaynak gönderinin tüm alanları.** Metin, yazar, sayılar, medya, bağlantılar,
   alıntılanan & yanıtlanan gönderiler cevapların yanında kalır.
 - **Tipli cevaplar.** Her satırda bir ilgi olasılığı, olasılıklarıyla bir duygu
   durumu kategorisi & bir müşteri deneyimi kategorisi bulunur.
-- **Değişiklik takibi.** Çalıştırmalar karara göre karşılaştırılır, bu yüzden
-  küçük olasılık kaymaları değişiklik sayılmaz.
-- **Önce filtreleyen faturalama.** Yalnızca analizi başarılı, benzersiz ve
-  filtrene uyan gönderiler için ödersin.
-
-> Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
-> "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
 ## X'te bir marka nasıl izlenir
 

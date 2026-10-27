@@ -27,19 +27,6 @@ utente, ID utente numerici o URL di profilo. Ogni profilo può aggiungere i suoi
 post, risposte, media, post In evidenza, follower, following & follower
 verificati. Traduce anche le bio & verifica chi è in diretta ora.
 
-### Funzionalità principali
-
-- Leggi molti profili in 1 esecuzione da nomi utente, ID o URL.
-- Aggiungi post, risposte, media, post In evidenza, follower, following o
-  follower verificati come righe separate.
-- Traduci ogni bio con `translateBioTo`, indicando un codice lingua.
-- Verifica se ogni profilo è in diretta ora con `checkLiveNow`.
-- Filtra i post per data, lingua, media & interazioni.
-- Filtra i profili per dimensione del pubblico, età dell'account & verifica.
-- I filtri & la rimozione dei duplicati avvengono prima della fatturazione.
-- Le esecuzioni conservano le righe consegnate & i progressi quando Apify le
-  riavvia.
-
 ### Casi d'uso
 
 - Arricchisci liste di lead con bio, siti web, posizioni & dimensione del
@@ -51,7 +38,96 @@ verificati. Traduce anche le bio & verifica chi è in diretta ora.
 - Tieni d'occhio creator & brand per non perdere le loro dirette.
 - Leggi nella tua lingua le bio di altri mercati.
 
-### Quali dati può estrarre X Profile Scraper?
+## Perché usare X Profile Scraper?
+
+- **Un intero account in 1 esecuzione.** Indica nomi utente, ID o URL. Aggiungi
+  come righe post, risposte, media, post In evidenza, follower, following o
+  follower verificati.
+- **Controllo delle dirette.** `checkLiveNow` dice chi è in diretta ora, con la
+  sua ultima trasmissione.
+- **Contatti pubblicati in ogni riga.** `email` & `contactInfo` contengono le
+  email, i telefoni & i link che un profilo pubblica. Tieni solo le email
+  aziendali o i domini che scegli.
+- **Origine & cronologia dell'account.** `accountBasedIn` contiene l'etichetta
+  di paese o regione di X. `usernameChanges` mostra quante volte è cambiato il
+  nome utente.
+- **Filtri per profili & post.** Tieni i profili per dimensione del pubblico,
+  età dell'account & verifica. Tieni i post per data, lingua, media &
+  engagement.
+
+### Risultati completi
+
+- La cronologia dell'account torna completa, compresi i post vecchi.
+- I post del profilo senza risposte conservano comunque i thread dell'autore.
+- Le letture dei profili includono il post fissato, segnato come fissato.
+- Gli export di follower & following restituiscono elenchi completi.
+- Anche gli export dei follower verificati restituiscono elenchi completi.
+- Ogni risultato riporta i dati più completi che X ha a disposizione.
+
+### Righe accurate
+
+- I repost riportano il testo originale completo.
+- Ogni ID in una riga resta esatto.
+- Menzioni, link, hashtag & evidenziazioni restano allineati al testo.
+- I badge di verifica corrispondono a quelli che mostra `x.com`.
+- Le righe contengono solo dati pubblici.
+- Annunci & contenuti sponsorizzati non arrivano mai nelle tue righe.
+
+### Dati aggiornati
+
+- Le letture continuano a funzionare quando X rilascia modifiche.
+
+### Velocità
+
+- Una pagina lenta non blocca la tua esecuzione.
+- Le letture finiscono appena arrivano le loro righe.
+- Le chiamate agli Actor che si bloccano riprendono da sole.
+
+### Fatturazione equa
+
+- Un input errato non costa nulla & ti dice cosa correggere.
+- Gli Actor fanno pagare solo le righe consegnate, uniche & conformi ai filtri.
+- Un profilo condiviso da più target si paga una sola volta.
+- Un'esecuzione riavviata non addebita mai due volte.
+- Le esecuzioni restano entro il tuo limite di spesa & scrivono comunque la loro
+  diagnostica.
+- Le esecuzioni piccole finiscono con un consiglio per spendere meno.
+
+### Affidabilità
+
+- Un errore isolato non fa fallire la tua esecuzione.
+- Quando scade il tempo, ricevi le righe già trovate con la diagnostica.
+- Gli Actor resistono ai brevi disservizi di Xquik.
+- Le esecuzioni degli Actor superano i riavvii senza ripetere nulla.
+- Una riga errata non fa fallire il lotto.
+- Le esecuzioni interrotte conservano le loro righe & il loro report.
+- Un'esecuzione che non riesce a partire spiega comunque perché.
+- Il supporto può vedere esattamente cosa ha restituito una richiesta o
+  un'esecuzione.
+
+### Pensato per gli agenti
+
+- Gli Actor accettano input scritti per altri Actor.
+- L'output è pronto per i fogli di calcolo, con colonne piatte & totali di
+  engagement.
+- Ogni esecuzione dice perché è finita & se conviene riprovare.
+
+### Dati ricchi
+
+- Le righe dei post riportano il testo dei Note Tweet, modifiche, Note della
+  community, etichette di visibilità & regole di risposta.
+- Le righe riportano app di origine, conteggi dei media & dati degli account
+  professionali.
+- I media arrivano con varianti, testo alternativo, dimensioni & motivi di
+  disponibilità.
+- Post & bio si possono tradurre nella tua lingua.
+
+### Controlli di qualità
+
+- Ogni campo che X mostra è fornito, escluso di proposito o dimostrato assente.
+- Xquik testa ogni lettura dal vivo su X.
+
+## Quali dati può estrarre X Profile Scraper?
 
 Le righe di profilo usano `resultType: "profile"`. Questi sono i campi
 principali.

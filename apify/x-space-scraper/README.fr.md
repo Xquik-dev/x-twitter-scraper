@@ -20,7 +20,69 @@ plateforme à part.
 > Xquik est un service tiers indépendant. Non affilié à X Corp. "Twitter" et "X"
 > sont des marques déposées de X Corp.
 
-## Données des Spaces
+## Pourquoi utiliser X Space Scraper ?
+
+- **Les Spaces en cours.** Réglez `queryType` sur `Live` pour les Spaces en
+  direct ou sur `Upcoming` pour ceux qui sont programmés.
+- **Les rediffusions sans frais en plus.** Activez `includeReplay` pour obtenir
+  l'enregistrement de chaque Space terminé.
+- **Les diffusions vidéo en direct aussi.** Lisez les diffusions X par URL ou
+  par ID dans le même run que les Spaces.
+- **Cherchez avec les opérateurs X.** Trouvez des Spaces par sujet, hôte,
+  hashtag, langue ou popularité.
+- **Des exports prêts à l'emploi.** Gardez, renommez, aplatissez ou combinez des
+  champs, puis exportez en JSON, CSV, Excel, XML ou RSS.
+
+### Résultats complets
+
+- Chaque résultat contient les données les plus complètes dont X dispose.
+
+### Lignes exactes
+
+- Les lignes ne contiennent que des données publiques.
+
+### Données à jour
+
+- Les lectures continuent de fonctionner quand X déploie des changements.
+
+### Vitesse
+
+- Une page lente ne bloque pas votre run.
+- Les lectures se terminent dès que leurs lignes arrivent.
+- Les appels d'Actor bloqués repartent d'eux-mêmes.
+
+### Facturation juste
+
+- Une entrée invalide ne coûte rien & vous dit quoi corriger.
+- Les Actors facturent seulement les lignes livrées, uniques & conformes à vos
+  filtres.
+- Un run redémarré ne facture jamais deux fois.
+- Les runs restent dans votre limite de dépense & écrivent quand même leurs
+  diagnostics.
+- Les petits runs se terminent par un conseil qui réduit le coût.
+
+### Fiabilité
+
+- Une erreur ponctuelle ne fait pas échouer votre run.
+- Un délai dépassé renvoie les lignes déjà trouvées, avec des diagnostics.
+- Les Actors résistent aux courtes pannes de Xquik.
+- Les runs d'Actor survivent aux redémarrages sans doublons.
+- Une mauvaise ligne ne fait pas échouer tout un lot.
+- Les runs arrêtés gardent leurs lignes & leur rapport.
+- Un run qui ne peut pas démarrer explique quand même pourquoi.
+- Le support peut voir exactement ce qu'une requête ou un run a renvoyé.
+
+### Conçu pour les agents
+
+- Les Actors acceptent une entrée écrite pour d'autres Actors.
+- Chaque run indique pourquoi il s'est terminé & s'il faut réessayer.
+
+### Contrôles qualité
+
+- Chaque champ que X affiche est fourni, omis exprès ou prouvé absent.
+- Xquik teste chaque lecture en direct sur X.
+
+## Quelles données X Space Scraper peut-il extraire ?
 
 - Le titre, l'état & les heures de programmation, de début & de fin de chaque
   Space.
@@ -36,8 +98,6 @@ plateforme à part.
   `includeReplay`.
 - Les diffusions par URL ou par ID, avec titre, état, heures, nombre de vues &
   hôte.
-- La suppression des doublons avant la facturation. Un Space trouvé par 2 termes
-  de recherche donne 1 ligne.
 
 ## Comment trouver des Spaces X
 

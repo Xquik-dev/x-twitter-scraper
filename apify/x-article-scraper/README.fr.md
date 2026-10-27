@@ -20,14 +20,72 @@ de la plateforme à part. Vous n'avez besoin ni de clé API X ni de connexion.
 > Xquik est un service tiers indépendant. Non affilié à X Corp. "Twitter" et "X"
 > sont des marques déposées de X Corp.
 
-## Données & format des Articles
+## Pourquoi utiliser X Article Scraper ?
+
+- **Aucun HTML à nettoyer.** Obtenez chaque Article en Markdown & en texte brut
+  à partir de l'URL ou de l'ID de son post.
+- **Tous les Articles d'un compte.** Ajoutez un nom d'utilisateur ou une URL de
+  profil pour lister ses Articles, du plus récent au plus ancien. Mélangez noms
+  d'utilisateur, URL de posts & ID de post dans 1 run.
+- **Taux d'engagement intégrés.** Indiquez `totalEngagement`, `engagementRate`
+  ou `engagementPerView` dans `fields` pour ajouter la colonne.
+- **Des exports prêts à l'emploi.** Gardez, renommez, aplatissez ou combinez des
+  champs, puis exportez en JSON, CSV, Excel, XML ou RSS.
+
+### Résultats complets
+
+- Chaque résultat contient les données les plus complètes dont X dispose.
+
+### Lignes exactes
+
+- Chaque ID d'une ligne reste exact.
+- Les lignes ne contiennent que des données publiques.
+
+### Données à jour
+
+- Les lectures continuent de fonctionner quand X déploie des changements.
+
+### Vitesse
+
+- Une page lente ne bloque pas votre run.
+- Les lectures se terminent dès que leurs lignes arrivent.
+- Les appels d'Actor bloqués repartent d'eux-mêmes.
+
+### Facturation juste
+
+- Une entrée invalide ne coûte rien & vous dit quoi corriger.
+- Les Actors facturent seulement les lignes livrées, uniques & conformes à vos
+  filtres.
+- Un run redémarré ne facture jamais deux fois.
+- Les runs restent dans votre limite de dépense & écrivent quand même leurs
+  diagnostics.
+- Les petits runs se terminent par un conseil qui réduit le coût.
+
+### Fiabilité
+
+- Une erreur ponctuelle ne fait pas échouer votre run.
+- Un délai dépassé renvoie les lignes déjà trouvées, avec des diagnostics.
+- Les Actors résistent aux courtes pannes de Xquik.
+- Les runs d'Actor survivent aux redémarrages sans doublons.
+- Une mauvaise ligne ne fait pas échouer tout un lot.
+- Les runs arrêtés gardent leurs lignes & leur rapport.
+- Un run qui ne peut pas démarrer explique quand même pourquoi.
+- Le support peut voir exactement ce qu'une requête ou un run a renvoyé.
+
+### Conçu pour les agents
+
+- Les Actors acceptent une entrée écrite pour d'autres Actors.
+- Chaque run indique pourquoi il s'est terminé & s'il faut réessayer.
+
+### Contrôles qualité
+
+- Chaque champ que X affiche est fourni, omis exprès ou prouvé absent.
+- Xquik teste chaque lecture en direct sur X.
+
+## Quelles données X Article Scraper peut-il extraire ?
 
 - Du Markdown avec titres, listes, gras, italique, liens & images, sans HTML.
 - Des blocs `contents` qui gardent la mise en forme d'origine.
-- Des URL de posts & des ID de post numériques dans le même run.
-- Tous les Articles publiés par un compte, à partir de son nom d'utilisateur ou
-  de l'URL de son profil.
-- La suppression des doublons avant la facturation.
 
 X Article Scraper de Xquik ne devine jamais les métadonnées des liens. Apify
 affiche le Markdown sous forme de texte.

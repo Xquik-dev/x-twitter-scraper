@@ -20,7 +20,80 @@ consegnata**, & Apify fattura a parte l'uso della piattaforma.
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.
 
-## Dati di contatto su ogni riga
+## Perché usare X Email Scraper?
+
+- **Email da interi pubblici.** Scansiona i follower o i following di un account
+  & tieni i profili con un'email. `maxScan` imposta quanti profili legge ogni
+  scansione.
+- **Paghi solo le email trovate.** Un profilo senza email non costa nulla. Anche
+  i profili scansionati sono gratuiti.
+- **Solo i lead che vuoi.** Tieni le email dei tuoi domini o escludi le webmail
+  gratuite. Filtra per follower, età dell'account, bio & posizione.
+- **3 fonti in 1 esecuzione.** Combina nomi utente, URL di profilo, ID utente,
+  scansioni dei follower & ricerche di utenti.
+- **Elenchi di lead pronti da esportare.** Esporta le righe in JSON, CSV, Excel,
+  XML o RSS.
+
+### Risultati completi
+
+- Ogni risultato riporta i dati più completi che X ha a disposizione.
+
+### Righe accurate
+
+- Ogni ID in una riga resta esatto.
+- I badge di verifica corrispondono a quelli che mostra `x.com`.
+- Le righe contengono solo dati pubblici.
+- Annunci & contenuti sponsorizzati non arrivano mai nelle tue righe.
+
+### Dati aggiornati
+
+- Le letture continuano a funzionare quando X rilascia modifiche.
+
+### Velocità
+
+- Una pagina lenta non blocca la tua esecuzione.
+- Le letture finiscono appena arrivano le loro righe.
+- Le chiamate agli Actor che si bloccano riprendono da sole.
+
+### Fatturazione equa
+
+- Un input errato non costa nulla & ti dice cosa correggere.
+- Gli Actor fanno pagare solo le righe consegnate, uniche & conformi ai filtri.
+- Un profilo condiviso da più target si paga una sola volta.
+- Un'esecuzione riavviata non addebita mai due volte.
+- Le esecuzioni restano entro il tuo limite di spesa & scrivono comunque la loro
+  diagnostica.
+- Le esecuzioni piccole finiscono con un consiglio per spendere meno.
+
+### Affidabilità
+
+- Un errore isolato non fa fallire la tua esecuzione.
+- Quando scade il tempo, ricevi le righe già trovate con la diagnostica.
+- Gli Actor resistono ai brevi disservizi di Xquik.
+- Le esecuzioni degli Actor superano i riavvii senza ripetere nulla.
+- Una riga errata non fa fallire il lotto.
+- Le esecuzioni interrotte conservano le loro righe & il loro report.
+- Un'esecuzione che non riesce a partire spiega comunque perché.
+- Il supporto può vedere esattamente cosa ha restituito una richiesta o
+  un'esecuzione.
+
+### Pensato per gli agenti
+
+- Gli Actor accettano input scritti per altri Actor.
+- Ogni esecuzione dice perché è finita & se conviene riprovare.
+
+### Dati ricchi
+
+- I link brevi vengono espansi, & le righe degli elenchi possono riportare
+  profili completi.
+- I profili forniscono email, telefoni & link etichettati per rete.
+
+### Controlli di qualità
+
+- Ogni campo che X mostra è fornito, escluso di proposito o dimostrato assente.
+- Xquik testa ogni lettura dal vivo su X.
+
+## Quali dati può estrarre X Email Scraper?
 
 - La prima email che il profilo pubblica, in minuscolo.
 - Il dominio di quell'email & il campo del profilo che la contiene, cioè bio,
@@ -32,14 +105,6 @@ consegnata**, & Apify fattura a parte l'uso della piattaforma.
   LinkedIn, GitHub o Telegram.
 - Il profilo pubblico completo, con nome, bio, conteggi, verifica, date &
   immagini.
-- 3 fonti in 1 esecuzione, cioè account, i loro follower o following, & ricerche
-  di utenti.
-- Filtri per dominio email, email aziendale, follower, età dell'account, bio &
-  posizione.
-- Nomi utente con o senza @, URL `x.com` & `twitter.com` & ID utente numerici.
-- Rimozione dei duplicati prima della fatturazione.
-- Export JSON, CSV, Excel, XML & RSS tramite i dataset di Apify.
-- Le esecuzioni riprendono dallo stato salvato dopo una migrazione di Apify.
 
 ## Come ottenere le email dai profili X
 

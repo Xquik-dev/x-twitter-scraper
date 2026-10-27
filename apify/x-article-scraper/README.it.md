@@ -19,14 +19,72 @@ piattaforma. Non ti servono una chiave API X né il login.
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.
 
-## Dati & formato degli articoli
+## Perché usare X Article Scraper?
+
+- **Nessun HTML da ripulire.** Ottieni ogni articolo in Markdown & testo
+  semplice dall'URL o dall'ID del suo post.
+- **Tutti gli articoli di un account.** Aggiungi un nome utente o un URL di
+  profilo per elencarne gli articoli, dal più recente. Combina nomi utente, URL
+  di post & ID dei post in 1 esecuzione.
+- **Tassi di engagement inclusi.** Indica `totalEngagement`, `engagementRate` o
+  `engagementPerView` in `fields` per aggiungere la colonna.
+- **Export pronti all'uso.** Tieni, rinomina, appiattisci o unisci i campi, poi
+  esporta in JSON, CSV, Excel, XML o RSS.
+
+### Risultati completi
+
+- Ogni risultato riporta i dati più completi che X ha a disposizione.
+
+### Righe accurate
+
+- Ogni ID in una riga resta esatto.
+- Le righe contengono solo dati pubblici.
+
+### Dati aggiornati
+
+- Le letture continuano a funzionare quando X rilascia modifiche.
+
+### Velocità
+
+- Una pagina lenta non blocca la tua esecuzione.
+- Le letture finiscono appena arrivano le loro righe.
+- Le chiamate agli Actor che si bloccano riprendono da sole.
+
+### Fatturazione equa
+
+- Un input errato non costa nulla & ti dice cosa correggere.
+- Gli Actor fanno pagare solo le righe consegnate, uniche & conformi ai filtri.
+- Un'esecuzione riavviata non addebita mai due volte.
+- Le esecuzioni restano entro il tuo limite di spesa & scrivono comunque la loro
+  diagnostica.
+- Le esecuzioni piccole finiscono con un consiglio per spendere meno.
+
+### Affidabilità
+
+- Un errore isolato non fa fallire la tua esecuzione.
+- Quando scade il tempo, ricevi le righe già trovate con la diagnostica.
+- Gli Actor resistono ai brevi disservizi di Xquik.
+- Le esecuzioni degli Actor superano i riavvii senza ripetere nulla.
+- Una riga errata non fa fallire il lotto.
+- Le esecuzioni interrotte conservano le loro righe & il loro report.
+- Un'esecuzione che non riesce a partire spiega comunque perché.
+- Il supporto può vedere esattamente cosa ha restituito una richiesta o
+  un'esecuzione.
+
+### Pensato per gli agenti
+
+- Gli Actor accettano input scritti per altri Actor.
+- Ogni esecuzione dice perché è finita & se conviene riprovare.
+
+### Controlli di qualità
+
+- Ogni campo che X mostra è fornito, escluso di proposito o dimostrato assente.
+- Xquik testa ogni lettura dal vivo su X.
+
+## Quali dati può estrarre X Article Scraper?
 
 - Markdown con titoli, elenchi, grassetto, corsivo, link & immagini, senza HTML.
 - Blocchi `contents` che mantengono la formattazione originale.
-- URL di post & ID numerici dei post nella stessa esecuzione.
-- Ogni articolo pubblicato da un account, dal suo nome utente o dall'URL del
-  profilo.
-- Rimozione dei duplicati prima della fatturazione.
 
 X Article Scraper di Xquik non tira mai a indovinare i metadati dei link. Apify
 mostra il Markdown come testo.

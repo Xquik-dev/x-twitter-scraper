@@ -20,7 +20,86 @@ piattaforma. Non ti servono una chiave API X né il login.
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.
 
-## Dati & filtri delle liste
+## Perché usare X List Scraper?
+
+- **Lead dai membri delle liste.** Filtra membri & follower per `minFollowers`,
+  `hasEmail` o `bioContains`. Le righe riportano le email, i telefoni & i link
+  che ogni profilo pubblica.
+- **Solo i post che vuoi.** Filtra i post delle liste per data o tempo Unix,
+  lingua, media, engagement & verifica. Includi le risposte o escludile.
+- **Molte liste in 1 esecuzione.** Combina dettagli, post, membri & follower di
+  molte liste.
+- **Imposta i tuoi limiti di righe.** Limita l'intera esecuzione, oppure ogni
+  risorsa di lista & ogni termine di ricerca.
+
+### Risultati completi
+
+- Ogni risultato riporta i dati più completi che X ha a disposizione.
+
+### Righe accurate
+
+- Account protetti & liste private ricevono un esito chiaro, non una pagina
+  vuota.
+- I repost riportano il testo originale completo.
+- Ogni ID in una riga resta esatto.
+- Menzioni, link, hashtag & evidenziazioni restano allineati al testo.
+- I badge di verifica corrispondono a quelli che mostra `x.com`.
+- Le righe contengono solo dati pubblici.
+- Annunci & contenuti sponsorizzati non arrivano mai nelle tue righe.
+
+### Dati aggiornati
+
+- Le letture continuano a funzionare quando X rilascia modifiche.
+
+### Velocità
+
+- Una pagina lenta non blocca la tua esecuzione.
+- Le letture finiscono appena arrivano le loro righe.
+- Le chiamate agli Actor che si bloccano riprendono da sole.
+
+### Fatturazione equa
+
+- Un input errato non costa nulla & ti dice cosa correggere.
+- Gli Actor fanno pagare solo le righe consegnate, uniche & conformi ai filtri.
+- Un'esecuzione riavviata non addebita mai due volte.
+- Le esecuzioni restano entro il tuo limite di spesa & scrivono comunque la loro
+  diagnostica.
+- Le esecuzioni piccole finiscono con un consiglio per spendere meno.
+
+### Affidabilità
+
+- Un errore isolato non fa fallire la tua esecuzione.
+- Quando scade il tempo, ricevi le righe già trovate con la diagnostica.
+- Gli Actor resistono ai brevi disservizi di Xquik.
+- Le esecuzioni degli Actor superano i riavvii senza ripetere nulla.
+- Una riga errata non fa fallire il lotto.
+- Le esecuzioni interrotte conservano le loro righe & il loro report.
+- Un'esecuzione che non riesce a partire spiega comunque perché.
+- Il supporto può vedere esattamente cosa ha restituito una richiesta o
+  un'esecuzione.
+
+### Pensato per gli agenti
+
+- Gli Actor accettano input scritti per altri Actor.
+- L'output è pronto per i fogli di calcolo, con colonne piatte & totali di
+  engagement.
+- Ogni esecuzione dice perché è finita & se conviene riprovare.
+
+### Dati ricchi
+
+- Le righe dei post riportano il testo dei Note Tweet, modifiche, Note della
+  community, etichette di visibilità & regole di risposta.
+- Le righe riportano app di origine, conteggi dei media & dati degli account
+  professionali.
+- I media arrivano con varianti, testo alternativo, dimensioni & motivi di
+  disponibilità.
+
+### Controlli di qualità
+
+- Ogni campo che X mostra è fornito, escluso di proposito o dimostrato assente.
+- Xquik testa ogni lettura dal vivo su X.
+
+## Quali dati può estrarre X List Scraper?
 
 - Dettagli della lista, con nome, descrizione, numero di membri & di follower,
   data di creazione, banner & profilo pubblico del proprietario.
@@ -28,17 +107,8 @@ piattaforma. Non ti servono una chiave API X né il login.
 - Membri & follower delle liste.
 - Ricerca di liste per parola chiave. Ogni riga è 1 lista con proprietario,
   numero di membri & numero di follower.
-- Risposte opzionali nei post delle liste.
-- Filtri su date, orario Unix, lingua, media, engagement, verifica & profili.
-- Filtri sui profili per membri & follower, come `minFollowers`, `hasEmail` &
-  `bioContains`.
 - Le liste pubbliche che un account ha creato o in cui compare, dal suo nome
   utente o dall'URL del profilo.
-- Più liste & tipi di risorsa in 1 esecuzione.
-- Un limite globale & un limite per ogni risorsa della lista o termine di
-  ricerca.
-- Le esecuzioni riprendono dopo una migrazione di Apify.
-- Rimozione dei duplicati prima della fatturazione.
 
 ## Come estrarre le liste di X
 

@@ -29,28 +29,6 @@ X Reply Scraper de Xquik recopila respuestas públicas & conversaciones de
 comentarios. Trabaja con posts individuales, listas de URLs en bloque, IDs de
 posts & cronologías de respuestas de usuarios.
 
-### Funciones principales
-
-- El modo auto sigue recopilando cuando los resultados directos están
-  incompletos.
-- `collectionStrategy` define cómo recopila el Actor las respuestas.
-- Las entradas en bloque aceptan URLs de posts, IDs de posts, perfiles & nombres
-  de usuario.
-- Los filtros & la eliminación de duplicados se aplican antes del cobro.
-- La salida admite 4 modos de orden, 3 niveles de detalle & 3 estilos de campo.
-- Cada respuesta conserva su objetivo de origen, los IDs de sus padres, el ID
-  raíz & la profundidad.
-- Los cursores de continuación sirven para recuperar historial & para
-  ejecuciones programadas.
-- Las ejecuciones que requieren atención escriben 1 registro gratuito en
-  `diagnostics`. Una ejecución que lee todos los objetivos & no encuentra
-  ninguna respuesta no escribe ninguno. Su estado explica por qué.
-- Los registros de la ejecución muestran los tiempos por página & por objetivo
-  en `fetchDurationMs`, `processingDurationMs`, `pushDurationMs`,
-  `statusDurationMs`, `fullPageDurationMs` & `fullTargetDurationMs`.
-- Las ejecuciones conservan las respuestas entregadas & el progreso cuando Apify
-  las reinicia.
-
 ### Casos de uso
 
 - Mide el sentimiento & las opiniones de clientes en las respuestas a posts de
@@ -63,7 +41,104 @@ posts & cronologías de respuestas de usuarios.
   entrenamiento de IA.
 - Sigue cómo responde una cuenta a sus clientes a lo largo del tiempo.
 
-### ¿Qué datos puede extraer X Reply Scraper?
+## ¿Por qué usar X Reply Scraper?
+
+- **Exportaciones de respuestas 1.7x más rápidas.** Su ejecución mediana fue
+  1.7x más rápida que la más rápida de otros 4 Actores. La [prueba
+  comparativa](README.md#benchmark) se hizo el 2026-10-15.
+- **El menor costo por respuesta útil.** Tuvo el menor costo por respuesta útil
+  en la [prueba comparativa](README.md#benchmark).
+- **2x los campos por respuesta.** Su fila mediana tuvo 100 campos en la [prueba
+  comparativa](README.md#benchmark). Es 2x la mediana de los otros Actores.
+- **Elige la forma de la conversación.** Conserva respuestas directas, anidadas
+  o ambas, hasta la profundidad que definas. `collectionStrategy` también puede
+  devolver el hilo o solo las respuestas ocultas.
+- **Reconstruye cada hilo.** Cada respuesta trae su padre en `inReplyToId`, su
+  raíz en `rootTweetId` & su `depth`.
+- **Muchos posts en 1 ejecución.** Pega juntos URLs de posts, IDs de posts,
+  perfiles & nombres de usuario. Un nombre de usuario devuelve las respuestas de
+  esa cuenta.
+- **Solo las respuestas que quieres.** Filtra por palabras, hashtags, autor,
+  idioma, verificación, interacción, contenido multimedia & fecha.
+- **Ordena por Me gusta o fecha.** Clasifica las respuestas por Me gusta, o
+  lista primero las más nuevas o las más antiguas. Las filas llegan en formato
+  compact, full o rich, en `camelCase` o `snake_case`.
+- **Continúa hilos grandes después.** Una ejecución que se detiene antes de
+  tiempo guarda la posición de cada objetivo en `next-cursors`. Pasa 1 de esos
+  cursores en `startCursor` para continuar.
+
+### Resultados completos
+
+- El modo completo agrega las respuestas que ocultó el autor & explica los hilos
+  vacíos.
+- Cada resultado trae los datos más completos que X tiene sobre él.
+
+### Filas precisas
+
+- Un post se marca como inexistente solo cuando ya no existe.
+- Los reposts traen el texto original completo.
+- Cada ID de una fila se mantiene exacto.
+- Las menciones, los enlaces, los hashtags & los resaltados quedan alineados con
+  el texto.
+- Un conteo desconocido aparece en `unknownCounts`, nunca como 0.
+- Las insignias de verificación coinciden con lo que muestra `x.com`.
+- Las filas solo contienen datos públicos.
+- Los anuncios & las entradas promocionadas nunca llegan a tus filas.
+
+### Datos actualizados
+
+- Las lecturas siguen funcionando cuando X lanza cambios.
+
+### Velocidad
+
+- Una página lenta no frena tu ejecución.
+- Las lecturas terminan en cuanto llegan sus filas.
+- Las llamadas a Actores que se atascan se recuperan solas.
+
+### Cobro justo
+
+- Una entrada inválida no cuesta nada & te dice qué corregir.
+- Los Actores solo cobran las filas entregadas, únicas & que cumplen tus
+  filtros.
+- Una ejecución reiniciada nunca cobra 2 veces.
+- Las ejecuciones respetan tu límite de gasto & aun así escriben sus
+  diagnósticos.
+- Las ejecuciones pequeñas terminan con un consejo para gastar menos.
+
+### Confiabilidad
+
+- Un error aislado no hace fallar tu ejecución.
+- Si se acaba el tiempo, recibes las filas ya encontradas, con diagnósticos.
+- Los Actores resisten las caídas breves de Xquik.
+- Las ejecuciones de los Actores siguen tras un reinicio sin repetir nada.
+- Una fila defectuosa no arruina un lote.
+- Las ejecuciones detenidas conservan sus filas & su informe.
+- Una ejecución que no puede iniciar igual explica por qué.
+- Soporte puede ver exactamente qué devolvió una solicitud o una ejecución.
+
+### Hecho para agentes
+
+- Los Actores aceptan entradas escritas para otros Actores.
+- La salida está lista para hojas de cálculo, con columnas planas & totales de
+  interacción.
+- Cada ejecución dice por qué terminó & si conviene reintentar.
+
+### Datos detallados
+
+- Las filas de posts traen el texto de los Note Tweets, las ediciones, las Notas
+  de la Comunidad, las etiquetas de alcance & los controles de respuesta.
+- Las filas traen la app de origen, los conteos de contenido multimedia & los
+  datos de cuentas profesionales.
+- El contenido multimedia trae variantes, texto alternativo, tamaños & motivos
+  de disponibilidad.
+
+### Controles de calidad
+
+- Cada campo que muestra X se entrega, se omite a propósito o se comprueba que
+  no existe.
+- Xquik prueba cada lectura en vivo contra X.
+
+## ¿Qué datos puede extraer X Reply Scraper?
 
 Los esquemas del dataset & de run-report describen cada campo devuelto. Los
 campos de texto, numéricos & booleanos también traen ejemplos para agentes &

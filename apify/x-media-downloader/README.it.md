@@ -19,14 +19,79 @@ della piattaforma. Non ti servono una chiave API X né il login.
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.
 
-## File media & metadati
+## Perché usare X Media Downloader?
 
-- Media da post, profili, risposte, citazioni & thread in blocco.
+- **Media da ogni fonte.** Scegli in `sources` post, schede Media dei profili,
+  risposte, citazioni & thread.
+- **File salvati per te.** Attiva `downloadMedia` per salvare i file & ottenere
+  i link `storedMediaUrl`.
+- **Solo i media che vuoi.** Filtra i media dei profili per tipo, data, lingua,
+  visualizzazioni, Mi piace, risposte o repost.
+- **Tutti i sottotitoli in 1 riga.** Attiva `includeSubtitles` per ottenere ogni
+  traccia di sottotitoli di un post con video.
+- **Export pronti all'uso.** Tieni, rinomina, appiattisci o unisci i campi, poi
+  esporta in JSON, CSV, Excel, XML o RSS.
+
+### Risultati completi
+
+- Ogni risultato riporta i dati più completi che X ha a disposizione.
+
+### Righe accurate
+
+- Le righe contengono solo dati pubblici.
+
+### Dati aggiornati
+
+- Le letture continuano a funzionare quando X rilascia modifiche.
+
+### Velocità
+
+- Una pagina lenta non blocca la tua esecuzione.
+- Le letture finiscono appena arrivano le loro righe.
+- Le chiamate agli Actor che si bloccano riprendono da sole.
+
+### Fatturazione equa
+
+- Un input errato non costa nulla & ti dice cosa correggere.
+- Gli Actor fanno pagare solo le righe consegnate, uniche & conformi ai filtri.
+- Un'esecuzione riavviata non addebita mai due volte.
+- Le esecuzioni restano entro il tuo limite di spesa & scrivono comunque la loro
+  diagnostica.
+- Le esecuzioni piccole finiscono con un consiglio per spendere meno.
+
+### Affidabilità
+
+- Un errore isolato non fa fallire la tua esecuzione.
+- Quando scade il tempo, ricevi le righe già trovate con la diagnostica.
+- Gli Actor resistono ai brevi disservizi di Xquik.
+- Le esecuzioni degli Actor superano i riavvii senza ripetere nulla.
+- Una riga errata non fa fallire il lotto.
+- Le esecuzioni interrotte conservano le loro righe & il loro report.
+- Un'esecuzione che non riesce a partire spiega comunque perché.
+- Il supporto può vedere esattamente cosa ha restituito una richiesta o
+  un'esecuzione.
+
+### Pensato per gli agenti
+
+- Gli Actor accettano input scritti per altri Actor.
+- Ogni esecuzione dice perché è finita & se conviene riprovare.
+
+### Dati ricchi
+
+- I media arrivano con varianti, testo alternativo, dimensioni & motivi di
+  disponibilità.
+- I sottotitoli dei video arrivano con segmenti temporizzati.
+
+### Controlli di qualità
+
+- Ogni campo che X mostra è fornito, escluso di proposito o dimostrato assente.
+- Xquik testa ogni lettura dal vivo su X.
+
+## Quali dati può estrarre X Media Downloader?
+
 - Foto, GIF, qualità MP4 & playlist HLS.
 - Sottotitoli dei post con video, con segmenti temporizzati & testo completo.
-- Metadati, URL diretti & filtri disponibili.
-- Archiviazione dei file entro i limiti dell'esecuzione, con link nell'output.
-- Rimozione dei duplicati prima della fatturazione.
+- Metadati & URL diretti.
 
 ## Come scaricare i media di X
 

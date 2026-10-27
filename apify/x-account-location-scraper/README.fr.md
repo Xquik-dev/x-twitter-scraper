@@ -23,7 +23,78 @@ plateforme à part.
 > Xquik est un service tiers indépendant. Non affilié à X Corp. "Twitter" et "X"
 > sont des marques déposées de X Corp.
 
-## Détails du compte sur chaque ligne
+## Pourquoi utiliser X Account Location Scraper ?
+
+- **Une réponse claire pour chaque compte.** Chaque ligne indique si X affiche
+  un libellé, n'en a aucun ou le retient.
+- **Des lignes dans l'ordre de votre entrée.** Même nombreux, les comptes
+  reviennent dans l'ordre où vous les avez listés.
+- **Collez un compte sous toute forme.** Mélangez noms d'utilisateur avec ou
+  sans @, URL de profil & ID d'utilisateur dans 1 liste. Utilisez `userIds` pour
+  les listes que vous gardez, car un ID d'utilisateur reste valable après un
+  changement de nom d'utilisateur.
+- **Des exports prêts pour les tableurs.** Réglez les colonnes avec `fields` &
+  `flatten`. Exportez en JSON, CSV, Excel, XML ou RSS.
+
+### Résultats complets
+
+- Chaque résultat contient les données les plus complètes dont X dispose.
+
+### Lignes exactes
+
+- Chaque ID d'une ligne reste exact.
+- Les badges de certification correspondent à ce qu'affiche `x.com`.
+- Les lignes ne contiennent que des données publiques.
+- Les publicités & les contenus sponsorisés n'arrivent jamais dans vos lignes.
+
+### Données à jour
+
+- Les lectures continuent de fonctionner quand X déploie des changements.
+
+### Vitesse
+
+- Une page lente ne bloque pas votre run.
+- Les lectures se terminent dès que leurs lignes arrivent.
+- Les appels d'Actor bloqués repartent d'eux-mêmes.
+
+### Facturation juste
+
+- Une entrée invalide ne coûte rien & vous dit quoi corriger.
+- Les Actors facturent seulement les lignes livrées, uniques & conformes à vos
+  filtres.
+- Un profil commun à plusieurs cibles se facture une seule fois.
+- Un run redémarré ne facture jamais deux fois.
+- Les runs restent dans votre limite de dépense & écrivent quand même leurs
+  diagnostics.
+- Les petits runs se terminent par un conseil qui réduit le coût.
+
+### Fiabilité
+
+- Une erreur ponctuelle ne fait pas échouer votre run.
+- Un délai dépassé renvoie les lignes déjà trouvées, avec des diagnostics.
+- Les Actors résistent aux courtes pannes de Xquik.
+- Les runs d'Actor survivent aux redémarrages sans doublons.
+- Une mauvaise ligne ne fait pas échouer tout un lot.
+- Les runs arrêtés gardent leurs lignes & leur rapport.
+- Un run qui ne peut pas démarrer explique quand même pourquoi.
+- Le support peut voir exactement ce qu'une requête ou un run a renvoyé.
+
+### Conçu pour les agents
+
+- Les Actors acceptent une entrée écrite pour d'autres Actors.
+- Chaque run indique pourquoi il s'est terminé & s'il faut réessayer.
+
+### Données riches
+
+- La localisation du compte arrive avec le code pays, une note de précision &
+  l'historique des noms d'utilisateur.
+
+### Contrôles qualité
+
+- Chaque champ que X affiche est fourni, omis exprès ou prouvé absent.
+- Xquik teste chaque lecture en direct sur X.
+
+## Quelles données X Account Location Scraper peut-il extraire ?
 
 - Le libellé "Account based in" de X, sous forme de pays ou de région.
 - Le code ISO à 2 lettres de ce pays.
@@ -36,15 +107,6 @@ plateforme à part.
 - L'âge du compte en jours & un lien vers son profil.
 - Le profil public complet, avec nom, bio, compteurs, certification, dates &
   images.
-- Une seconde lecture de tout compte dont X ne communique pas le libellé, sans
-  frais supplémentaires.
-- De nombreux comptes en 1 run, lus en parallèle & livrés dans l'ordre de
-  l'entrée.
-- Des noms d'utilisateur avec ou sans @, des URL `x.com` & `twitter.com` & des
-  ID d'utilisateur numériques.
-- La suppression des doublons avant la facturation.
-- Des exports JSON, CSV, Excel, XML & RSS via les datasets Apify.
-- Les runs reprennent depuis un état enregistré après une migration Apify.
 
 ## Comment vérifier où sont basés des comptes X
 

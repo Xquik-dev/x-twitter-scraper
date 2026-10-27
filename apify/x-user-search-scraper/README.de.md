@@ -19,18 +19,78 @@ geliefertem Profil** & Apify berechnet die Plattformnutzung separat.
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
 
-## Account-Daten & Filter
+## Warum X User Search Scraper nutzen?
 
-- Filter für Zielgruppe, Posts, Alter, Verifizierung, Website, Standort, Bio,
-  Nutzername & E-Mail.
+- **Preise in Cashtag-Vorschlägen.** Im Modus `autocomplete` enthalten
+  Cashtag-Datensätze `price`, `marketCap` & `dailyChangePercent`.
+- **Nur erreichbare Accounts.** Behalte Profile, die eine E-Mail, eine
+  geschäftliche E-Mail oder eine Website veröffentlichen. `emailDomains` behält
+  E-Mails der Domains, die du angibst.
+- **Grenze auf deine Zielgruppe ein.** Filtere nach Followern, Posts,
+  Account-Alter, Verifizierung, Standort, Bio & Nutzername.
+- **Mach dort weiter, wo du aufgehört hast.** Übergib einen gespeicherten Cursor
+  in `startCursor`, um 1 Suchanfrage fortzusetzen.
+
+### Vollständige Ergebnisse
+
+- Jedes Ergebnis enthält die vollständigsten Daten, die X dafür hat.
+
+### Genaue Datensätze
+
+- Jede ID in einem Datensatz bleibt exakt.
+- Verifizierungs-Badges stimmen mit dem überein, was `x.com` zeigt.
+- Datensätze enthalten nur öffentliche Daten.
+- Werbung & gesponserte Einträge landen nie in deinen Datensätzen.
+
+### Aktuelle Daten
+
+- Abrufe funktionieren weiter, wenn X Änderungen ausrollt.
+
+### Tempo
+
+- Eine langsame Seite hält deinen Run nicht auf.
+- Abrufe enden, sobald ihre Datensätze ankommen.
+- Hängende Actor-Aufrufe laufen von selbst wieder an.
+
+### Faire Abrechnung
+
+- Eine fehlerhafte Eingabe kostet nichts & sagt dir, was du korrigieren musst.
+- Actors rechnen nur gelieferte, eindeutige, passende Datensätze ab.
+- Ein neu gestarteter Run berechnet nie doppelt.
+- Runs bleiben innerhalb deines Ausgabenlimits & schreiben trotzdem ihre
+  Diagnosen.
+
+### Zuverlässigkeit
+
+- Ein einzelner Fehler lässt deinen Run nicht scheitern.
+- Ein Zeitlimit liefert die bereits gefundenen Datensätze samt Diagnosen.
+- Actors überstehen kurze Xquik-Ausfälle.
+- Actor-Runs überstehen Neustarts ohne Dopplungen.
+- Ein fehlerhafter Datensatz lässt keinen Batch scheitern.
+- Gestoppte Runs behalten ihre Datensätze & ihren Report.
+- Ein Run, der nicht starten kann, erklärt trotzdem, warum.
+- Der Support sieht genau, was eine Anfrage oder ein Run geliefert hat.
+
+### Für Agents gebaut
+
+- Actors akzeptieren Eingaben, die für andere Actors geschrieben sind.
+- Jeder Run sagt, warum er endete & ob du es erneut versuchen solltest.
+
+### Qualitätsprüfungen
+
+- Jedes Feld, das X zeigt, wird geliefert, bewusst weggelassen oder ist
+  nachweislich nicht vorhanden.
+- Xquik testet jeden Abruf live gegen X.
+
+## Welche Daten kann X User Search Scraper extrahieren?
+
+- Das öffentliche Profil jedes passenden Accounts mit Name, Bio, Zählern &
+  Verifizierung.
+- `sourceTarget`, der Suchbegriff, der das Profil gefunden hat.
 - `email` & `contactInfo` mit den E-Mails, Telefonnummern & Links, die jedes
   Profil veröffentlicht.
 - `mode: "autocomplete"` mit den Accounts, Themen, Hashtags & Cashtags, die X
   für jeden Suchbegriff vorschlägt.
-- Setze 1 Suchanfrage ab einem gespeicherten Cursor in `startCursor` fort.
-- Runs behalten gelieferte Datensätze & ihren Fortschritt, wenn Apify sie neu
-  startet.
-- Filter & Duplikatentfernung vor der Abrechnung.
 
 ## So suchst du Nutzer auf X
 

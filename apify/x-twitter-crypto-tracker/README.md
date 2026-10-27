@@ -34,20 +34,23 @@ separately.
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## What the crypto Twitter tracker sends
+## Why use X (Twitter) Crypto Tracker?
 
-- Every new tweet, reply, quote & repost of the crypto accounts & KOLs you
-  watch, usually caught in under a second after X shows it.
-- Deleted tweets, so you see what an account took down.
-- Profile changes, such as display name, username, bio, profile photo, website &
-  pinned tweet, also usually caught in under a second after X shows them.
-- New follows & unfollows of each account, with the followed account's full
-  profile, when you turn on `followingChanges`.
-- Every new tweet that matches a cashtag, a coin name or a contract address.
-- Alerts in Telegram, Discord, Slack or any HTTPS webhook, & every event in the
-  run's dataset & 1 history dataset.
-
-## What you get
+- **See deletions without setup.** Deleted tweets & profile changes send alerts
+  by default.
+- **Alerts in your chat app.** Send them to Telegram, Discord or Slack. Telegram
+  needs no chat ID. Any HTTPS webhook gets the full event too.
+- **Less noise on coin searches.** Add any X search operator to a cashtag, such
+  as a language filter.
+- **Know your alerts work.** Each new webhook, Slack or Discord URL gets a test
+  alert. The run status says if it arrived.
+- **Recover missed events.** `since` saves events again from any date in the
+  last 30 days.
+- **Know the monitor is watching.** Each run's status page says so & shows 1
+  next step with a button.
+- **No silent pauses.** Your alerts warn you 4 hours before a monitor with no
+  runs pauses. The next run resumes it.
+- **No X account needed.** You never share your X login or an API key.
 
 ### Accurate rows
 
@@ -64,16 +67,15 @@ separately.
 
 - Account monitors see changes within about a second.
 - Keyword monitors catch every matching post.
-- Monitors don't miss posts between checks.
+- Monitors don't miss posts.
 - A monitor that falls behind catches up on what it missed.
 - Live videos & Spaces raise an event when they start.
 - Reads keep working when X ships changes.
 
 ### Speed
 
-- A slow X answer doesn't hold up your request.
+- One slow page doesn't hold up your run.
 - Stalled Actor calls recover on their own.
-- Webhooks arrive without connection setup delay.
 
 ### Fair billing
 
@@ -82,17 +84,16 @@ separately.
 
 ### Reliability
 
-- A one-off X failure doesn't fail your request.
+- A one-off error doesn't fail your run.
 - Actors ride out short Xquik outages.
 - Actor runs survive restarts without repeats.
 - Stopped runs keep their rows & their report.
 - A run that can't start still explains itself.
 - Webhooks are signed & replay-safe.
-- Webhook deliveries retry until they land, for up to 7 days.
-- New events don't queue behind old retries.
+- A webhook that was down still gets its events, for up to 7 days.
+- New events arrive on time, even after your webhook was down.
 - Webhooks never go to private or local hosts.
 - Chat alerts arrive in order without hitting rate limits.
-- Problems on X's side are fixed before they reach your reads.
 - Support can see exactly what a request or run returned.
 
 ### Built for agents
@@ -110,8 +111,20 @@ separately.
 ### Quality checks
 
 - Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
+- Xquik tests every read live against X.
 - Actor READMEs, schemas & real output name the same fields.
+
+## What data does X (Twitter) Crypto Tracker send?
+
+- Every new tweet, reply, quote & repost of the crypto accounts & KOLs you
+  watch, usually caught in under a second after X shows it.
+- Deleted tweets, so you see what an account took down.
+- Profile changes, such as display name, username, bio, profile photo, website &
+  pinned tweet, also usually caught in under a second after X shows them.
+- New follows & unfollows of each account, with the followed account's full
+  profile, when you turn on `followingChanges`.
+- Every new tweet that matches a cashtag, a coin name or a contract address.
+- Every event in the run's dataset & in 1 history dataset.
 
 ## How to track crypto Twitter accounts
 

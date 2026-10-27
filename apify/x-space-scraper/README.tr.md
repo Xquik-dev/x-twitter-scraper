@@ -19,7 +19,70 @@ başına $0.00015** ödersin & Apify platform kullanımını ayrıca faturaland�
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-## Sohbet Odası verisi
+## Neden X Space Scraper kullanmalısın?
+
+- **Şu an yayında olan Sohbet Odaları.** Canlı Sohbet Odaları için `queryType`
+  alanını `Live`, planlananlar için `Upcoming` yap.
+- **Ek ücret olmadan kayıtlar.** Biten her Sohbet Odasının kaydını almak için
+  `includeReplay` seçeneğini aç.
+- **Canlı video yayınları da var.** X yayınlarını Sohbet Odalarıyla aynı
+  çalıştırmada URL veya ID ile oku.
+- **X operatörleriyle ara.** Sohbet Odalarını konuya, sunucuya, hashtag'e, dile
+  veya popülerliğe göre bul.
+- **Kullanıma hazır dışa aktarımlar.** Alanları tut, yeniden adlandır, düzleştir
+  veya birleştir. Sonra JSON, CSV, Excel, XML veya RSS olarak dışa aktar.
+
+### Eksiksiz sonuçlar
+
+- Her cevap, X'te bulunan en eksiksiz veriyi tutar.
+
+### Doğru satırlar
+
+- Satırlar yalnızca herkese açık veri tutar.
+
+### Güncel veri
+
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Okumalar, satırları geldiği anda biter.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- Hatalı girdi ücretsizdir & neyi düzelteceğini söyler.
+- Actor'lar yalnızca teslim edilen, benzersiz & eşleşen satırlar için ücret
+  alır.
+- Yeniden başlatılan bir çalıştırma asla 2 kez ücret almaz.
+- Çalıştırmalar harcama sınırının içinde kalır & tanılamalarını yine yazar.
+- Küçük çalıştırmalar, maliyeti düşüren bir ipucuyla biter.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Süre dolduğunda o ana kadar bulunan satırlar tanılamalarla birlikte döner.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Tek bir hatalı satır bütün grubu bozmaz.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+
+## X Space Scraper hangi verileri çıkarabilir?
 
 - Her Sohbet Odasının başlığı, durumu & planlanan, başlangıç ve bitiş zamanları.
 - Canlı dinleyici sayısı, kayıt dinlenme sayısı & şu anda Sohbet Odasında olan
@@ -34,8 +97,6 @@ başına $0.00015** ödersin & Apify platform kullanımını ayrıca faturaland�
   URL'si olarak.
 - URL veya ID ile okunan yayınlar, başlık, durum, zamanlar, izlenme sayıları &
   sunucuyla birlikte.
-- Faturalamadan önce tekilleştirme. 2 arama teriminin bulduğu bir Sohbet Odası 1
-  satırdır.
 
 ## X Sohbet Odaları nasıl bulunur
 

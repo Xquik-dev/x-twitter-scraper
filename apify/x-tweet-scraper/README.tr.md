@@ -31,31 +31,142 @@ herkese açık profillerini & medyayı döndürür. URL'leri, kullanıcı adlar�
 Liste ID'lerini, gönderi ID'lerini & arama sorgularını 50'den fazla filtreyle
 kabul eder.
 
-### Temel özellikler
-
-- Filtreler & tekilleştirme faturalamadan önce çalışır.
-- Getirme, zaman akışı, Liste, arama & etkileşim modlarının hepsi 1 girdiyle
-  çalışır.
-- Gönderi ID girdilerinde sabit bir adet sınırı yok. Apify harcama & zaman aşımı
-  ayarların yine geçerli.
-- Çalıştırma günlükleri sayfa sürelerini `fetchDurationMs`,
-  `processingDurationMs`, `pushDurationMs`, `statusDurationMs` &
-  `fullPageDurationMs` alanlarında gösterir.
-- Apify bir çalıştırmayı yeniden başlatırsa çalıştırma teslim edilen satırları &
-  ilerlemeyi korur.
-
 ### Kullanım alanları
 
-- Araştırmayı, zenginleştirmeyi, analizi & yapay zeka eğitimini gönderi başına
-  daha çok alanla besle. Medyan zengin satırımızda 2026-09-29'da 63 alan vardı.
-  Bu, diğer 11 Actor'ın medyanının 2 katı.
+- Araştırmayı, zenginleştirmeyi, analizi & yapay zeka eğitimini gönderi metni,
+  yazarlar, medya & metriklerle besle.
 - Gönderilerdeki marka duygu durumunu takip et.
 - Rakip gönderilerini & sektör terimlerini izle.
 - Herkese açık konuşmalarda potansiyel müşteri bul.
 - Araştırma için herkese açık veri kümeleri topla.
 - Herkese açık etkileşimi yüksek gönderileri bul.
 
-### X Tweet Scraper hangi verileri çıkarabilir?
+## Neden X Tweet Scraper kullanmalısın?
+
+- **13,6 kat daha hızlı arama.** Anahtar kelime araması, gönderi kazıyan diğer 4
+  Actor'ın en hızlısından 13,6 kat daha hızlı çalıştı. Filtreli arama 4,3 kat,
+  kullanıcı zaman akışı yaklaşık 3 kat daha hızlıydı. [Karşılaştırma
+  testi](README.md#benchmark) 2026-10-15 & 2026-10-16'da yapıldı.
+- **İşe yarar gönderi başına en düşük maliyet.** 3 [karşılaştırma
+  testinin](README.md#benchmark) hepsinde işe yarar gönderi başına en ucuz
+  Actor buydu.
+- **Gönderi başına daha çok alan.** Medyan anahtar kelime araması satırında 67
+  alan vardı. Bu, [karşılaştırma testindeki](README.md#benchmark) diğer
+  Actor'ların medyanının 1,3 katı.
+- **1 çalıştırmada her kaynak.** 1 girdide gönderi ID'lerini, kullanıcı
+  adlarını, Listeleri, aramaları & URL'leri karıştır. Yanıtlar, alıntılar,
+  gönderi dizileri, bahsetmeler, yeniden gönderenler veya makaleler için `mode`
+  ayarla.
+- **X'teki en popüler gönderileri bul.** `mode: "topTweets"`, X'in görüntülenme
+  gibi 1 metrikte en üst sıraya koyduğu gönderileri döndürür. Bunları bir güne,
+  haftaya veya aya & bir ülkeye daralt.
+- **Her gönderi için gömme kodu.** `mode: "embed"`, bir gönderiyi sitende
+  gösteren HTML'i döndürür.
+- **Gönderi ID'lerinde sınır yok.** 1 çalıştırmada istediğin kadar gönderi ID'si
+  sorgula. Satırlar girdi sıranla döner. Harcama sınırın & zaman aşımın yine
+  geçerli.
+- **1 çalıştırmada en yeni & popüler sonuçlar.** İki arama sıralaması için
+  `queryType` alanını `Latest + Top` yap. Her gönderi için 1 kez ödersin.
+
+### Eksiksiz sonuçlar
+
+- Geniş tarih aralıkları eksiksiz & hızlı gelir.
+- Hangi operatörleri birleştirirsen birleştir, aramalar her eşleşmeyi döndürür.
+- Hesap geçmişi eski gönderiler dahil eksiksiz gelir.
+- Yanıtları içermeyen profil gönderileri, yazarın kendi gönderi dizilerini yine
+  de korur.
+- Profil okumaları sabitlenmiş gönderiyi de içerir & onu sabitlenmiş olarak
+  işaretler.
+- En popüler gönderi listeleri güvenilir şekilde gelir.
+- Filtreli sayfalar sonuçlar bitene kadar dolu gelir.
+- Her cevap, X'te bulunan en eksiksiz veriyi tutar.
+
+### Doğru satırlar
+
+- Arama sonuçları sorguna uyan her gönderiyi tutar, başka hiçbir şeyi tutmaz.
+- Kelime & ifade eşleştirme her dilde & alfabede çalışır.
+- Dil filtreleri X'in etiketlediği her dilde çalışır.
+- Bir gönderi ancak gerçekten yok olduğunda eksik sayılır.
+- Korumalı hesaplar & gizli Listeler boş bir sayfa değil, net bir cevap alır.
+- Yeniden gönderiler orijinal metnin tamamını taşır.
+- Satırdaki her ID birebir doğru kalır.
+- Bahsetmeler, bağlantılar, hashtag'ler & vurgular metindeki yerleriyle eşleşir.
+- Bilinmeyen bir sayı `unknownCounts` içinde listelenir, asla 0 gösterilmez.
+- Onay rozetleri `x.com` üzerinde görünenle aynıdır.
+- Satırlar yalnızca herkese açık veri tutar.
+- Alıntı aramaları her gerçek alıntıyı döndürür, başka bir şey döndürmez.
+- Yanıt dışa aktarımları, kanıtlanmış bir sırayla yalnızca doğrudan yanıtları
+  tutar.
+- En yeniden başlayan sonuçlar sayfalar boyunca gerçek tarih sırasında kalır.
+- Aramalar sorguları X'te yazdığın gibi kabul eder.
+- Yer aramaları 6 dildeki adlarla çalışır.
+- Çalışamayan bir arama hemen hata verir & nasıl düzelteceğini söyler.
+- Bir tarih, hangi yaygın biçimde yazılırsa yazılsın tek bir anlama gelir.
+- Aramalar `since_id` & `max_id` sınırlarını kabul eder.
+- Reklamlar & tanıtılan içerikler satırlarına asla girmez.
+
+### Güncel veri
+
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Aramalar yoğun konularda da hızlı kalır.
+- Her sonraki sayfa hızlı gelir.
+- Okumalar, satırları geldiği anda biter.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- Hatalı girdi ücretsizdir & neyi düzelteceğini söyler.
+- Bir grupta 2 kez listelenen gönderi ID'si 1 kez faturalanır.
+- Actor'lar yalnızca teslim edilen, benzersiz & eşleşen satırlar için ücret
+  alır.
+- Yeniden başlatılan bir çalıştırma asla 2 kez ücret almaz.
+- Çalıştırmalar harcama sınırının içinde kalır & tanılamalarını yine yazar.
+- Küçük çalıştırmalar, maliyeti düşüren bir ipucuyla biter.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Sayfalama bir sayfadan diğerine tutarlı kalır.
+- Sayfalama asla sonsuz döngüye girmez.
+- Süre dolduğunda o ana kadar bulunan satırlar tanılamalarla birlikte döner.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Tek bir hatalı satır bütün grubu bozmaz.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- `stopCauses`, `failedSubtargets` & `unavailableTargets` kısmi hataları tek tek
+  açıklar.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Çıktı düz sütunlar & etkileşim toplamlarıyla tablolara hazırdır.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Zengin veri
+
+- Gönderi satırları Note Tweet metnini, düzenlemeleri, Topluluk Notlarını,
+  erişim etiketlerini & yanıt kontrollerini taşır.
+- Satırlar kaynak uygulamaları, medya sayılarını & profesyonel hesap verilerini
+  taşır.
+- Medya varyantlar, alternatif metin, boyutlar & kullanılabilirlik nedenleriyle
+  gelir.
+- Her hesabın bir gönderiyi ne zaman yeniden gönderdiğini görürsün.
+- Gönderileri & biyografileri kendi diline çevirebilirsin.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+
+## X Tweet Scraper hangi verileri çıkarabilir?
 
 | Alan                   | Açıklama                                                               |
 | ---------------------- | ---------------------------------------------------------------------- |
@@ -1147,11 +1258,10 @@ Xquik'in X Tweet Scraper'ı [karşılaştırma testinde](#karşılaştırma-test
 saniyede 25,2 ile 39,2 arası işe yarar gönderi teslim etti. Çalışma süresi
 girdine, sonuç sayısına & X'in erişilebilirliğine bağlıdır.
 
-### X'in arama sekmesinin dışarıda bıraktığı gönderileri neden alıyorum?
+### Aramalar eşleşen her gönderiyi döndürür mü?
 
-X, eşleşen bazı gönderileri En Yeni sekmesinin dışında bırakır. Xquik'in X Tweet
-Scraper'ı bu gönderileri de döndürür. Her gönderi, sorgun için gerçek bir X
-arama sonucudur. Her gönderi için 1 kez ödersin.
+Evet, eşleşmeler bitene ya da `maxItems` sınırına ulaşana kadar. Sonuçlar
+yalnızca sorguna uyan gönderileri tutar. Her gönderi için 1 kez ödersin.
 
 ### Hangi arama operatörleri çalışır?
 

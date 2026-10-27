@@ -19,18 +19,79 @@ entregado**, & Apify factura aparte el uso de la plataforma.
 > Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 > "Twitter" y "X" son marcas registradas de X Corp.
 
-## Datos & filtros de cuentas
+## ¿Por qué usar X User Search Scraper?
 
-- Filtros de audiencia, posts, antigüedad, verificación, sitio web, ubicación,
-  biografía, nombre de usuario & correo.
+- **Precios en las sugerencias de cashtags.** En el modo `autocomplete`, las
+  filas de cashtags traen `price`, `marketCap` & `dailyChangePercent`.
+- **Solo cuentas contactables.** Conserva los perfiles que publican un correo,
+  un correo de empresa o un sitio web. `emailDomains` conserva los correos de
+  los dominios que indiques.
+- **Acota a tu audiencia.** Filtra por seguidores, posts, antigüedad de la
+  cuenta, verificación, ubicación, biografía & nombre de usuario.
+- **Retoma donde te detuviste.** Pasa un cursor guardado en `startCursor` para
+  continuar 1 consulta.
+
+### Resultados completos
+
+- Cada resultado trae los datos más completos que X tiene sobre él.
+
+### Filas precisas
+
+- Cada ID de una fila se mantiene exacto.
+- Las insignias de verificación coinciden con lo que muestra `x.com`.
+- Las filas solo contienen datos públicos.
+- Los anuncios & las entradas promocionadas nunca llegan a tus filas.
+
+### Datos actualizados
+
+- Las lecturas siguen funcionando cuando X lanza cambios.
+
+### Velocidad
+
+- Una página lenta no frena tu ejecución.
+- Las lecturas terminan en cuanto llegan sus filas.
+- Las llamadas a Actores que se atascan se recuperan solas.
+
+### Cobro justo
+
+- Una entrada inválida no cuesta nada & te dice qué corregir.
+- Los Actores solo cobran las filas entregadas, únicas & que cumplen tus
+  filtros.
+- Una ejecución reiniciada nunca cobra 2 veces.
+- Las ejecuciones respetan tu límite de gasto & aun así escriben sus
+  diagnósticos.
+
+### Confiabilidad
+
+- Un error aislado no hace fallar tu ejecución.
+- Si se acaba el tiempo, recibes las filas ya encontradas, con diagnósticos.
+- Los Actores resisten las caídas breves de Xquik.
+- Las ejecuciones de los Actores siguen tras un reinicio sin repetir nada.
+- Una fila defectuosa no arruina un lote.
+- Las ejecuciones detenidas conservan sus filas & su informe.
+- Una ejecución que no puede iniciar igual explica por qué.
+- Soporte puede ver exactamente qué devolvió una solicitud o una ejecución.
+
+### Hecho para agentes
+
+- Los Actores aceptan entradas escritas para otros Actores.
+- Cada ejecución dice por qué terminó & si conviene reintentar.
+
+### Controles de calidad
+
+- Cada campo que muestra X se entrega, se omite a propósito o se comprueba que
+  no existe.
+- Xquik prueba cada lectura en vivo contra X.
+
+## ¿Qué datos puede extraer X User Search Scraper?
+
+- El perfil público de cada cuenta que coincide, con nombre, biografía, conteos
+  & verificación.
+- `sourceTarget`, el término de búsqueda que encontró el perfil.
 - `email` & `contactInfo` con los correos, teléfonos & enlaces que publica cada
   perfil.
 - `mode: "autocomplete"`, con las cuentas, los temas, los hashtags & los
   cashtags que X sugiere para cada término de búsqueda.
-- Reanuda 1 consulta desde un cursor guardado en `startCursor`.
-- Las ejecuciones conservan las filas entregadas & el progreso cuando Apify las
-  reinicia.
-- Filtros & eliminación de duplicados antes del cobro.
 
 ## Cómo buscar usuarios de X
 
