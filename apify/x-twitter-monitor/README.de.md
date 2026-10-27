@@ -382,8 +382,8 @@ Tweets erreichen Discord oder Telegram als Alerts.
 
 Xquik erfasst einen neuen Tweet, eine Antwort, ein Zitat, einen Repost oder eine
 Profiländerung eines beobachteten Accounts meist in weniger als einer Sekunde,
-nachdem X sie zeigt. Alerts gehen raus, sobald Events ankommen, & warten nie auf
-einen Run.
+nachdem X sie zeigt. Der Alert zu einem Tweet erreicht dich meist etwa eine
+Sekunde, nachdem X ihn zeigt. Alerts warten nie auf einen Run.
 
 ### Warum sagt der Run, dass Monitoring einen kostenpflichtigen Plan braucht?
 
