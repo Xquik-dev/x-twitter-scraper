@@ -540,3 +540,8 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
   risponde con AI alle tue domande di categoria, punteggio & sì/no su ogni post.
   Usalo quando le analisi preimpostate non si adattano alle tue etichette. Da
   $0.0003 per post analizzato.
+- [X (Twitter) Monitor](https://apify.com/xquik/x-twitter-monitor) rileva ogni
+  nuovo tweet, risposta, citazione, repost & cambio di profilo degli account, di
+  solito in meno di un secondo da quando X lo mostra, più i tweet per parola
+  chiave & i follow. Usalo quando ti servono avvisi appena X mostra un tweet. Da
+  $0.0045 per monitor-hour.

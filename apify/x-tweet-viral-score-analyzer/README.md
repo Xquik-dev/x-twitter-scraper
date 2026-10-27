@@ -607,3 +607,7 @@ diagnostics. Pick the one that matches the data you need.
   answers your own category, score & yes/no questions for every tweet with AI.
   Use it when the preset analyses do not fit your labels. From $0.0003 per
   analyzed tweet.
+- [X (Twitter) Monitor](https://apify.com/xquik/x-twitter-monitor) catches every
+  new tweet, reply, quote, repost & profile change of accounts, usually in under
+  a second after X shows it, plus keyword tweets & follows. Use it when you need
+  alerts as soon as X shows a tweet. From $0.0045 per monitor-hour.

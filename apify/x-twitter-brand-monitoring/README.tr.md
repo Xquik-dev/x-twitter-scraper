@@ -359,6 +359,11 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   Viral Score & bir karar tahmin eder. Gönderilerin neden yayıldığını veya
   tutmadığını incelediğinde kullan. Analiz edilen gönderi başına $0.0003'ten
   başlar.
+- [X (Twitter) Monitor](https://apify.com/xquik/x-twitter-monitor) hesapların
+  her yeni tweet'ini, yanıtını, alıntısını, yeniden gönderisini & profil
+  değişikliğini genelde X gösterdikten sonra 1 saniyeden kısa sürede yakalar.
+  Anahtar kelime tweet'lerini & takipleri de yakalar. X bir tweet'i gösterir
+  göstermez bildirim istediğinde kullan. monitor-hour başına $0.0045'ten başlar.
 
 ## SSS & destek
 

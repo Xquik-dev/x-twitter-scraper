@@ -352,6 +352,11 @@ du brauchst.
   schätzt für jeden Post einen Viral Score von 0 bis 100 & ein Urteil aus 8
   KI-Antworten zu Merkmalen. Nutze ihn, wenn du untersuchst, warum Posts sich
   verbreiten oder floppen. Ab $0.0003 pro analysiertem Post.
+- [X (Twitter) Monitor](https://apify.com/xquik/x-twitter-monitor) erfasst jeden
+  neuen Tweet, jede Antwort, jedes Zitat, jeden Repost & jede Profiländerung von
+  Accounts, meist in weniger als einer Sekunde, nachdem X sie zeigt, dazu
+  Stichwort-Tweets & Follows. Nutze ihn, wenn du Alerts brauchst, sobald X einen
+  Tweet zeigt. Ab $0.0045 pro monitor-hour.
 
 ## FAQ
 
