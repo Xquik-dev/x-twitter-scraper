@@ -545,3 +545,8 @@ du brauchst.
   beantwortet deine eigenen Kategorie-, Score- & Ja/Nein-Fragen für jeden Post
   mit KI. Nutze ihn, wenn die vorgefertigten Analysen nicht zu deinen Labels
   passen. Ab $0.0003 pro analysiertem Post.
+- [X (Twitter) Monitor](https://apify.com/xquik/x-twitter-monitor) erfasst jeden
+  neuen Tweet, jede Antwort, jedes Zitat, jeden Repost & jede Profiländerung von
+  Accounts, meist in weniger als einer Sekunde, nachdem X sie zeigt, dazu
+  Stichwort-Tweets & Follows. Nutze ihn, wenn du Alerts brauchst, sobald X einen
+  Tweet zeigt. Ab $0.0045 pro monitor-hour.

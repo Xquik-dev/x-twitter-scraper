@@ -547,3 +547,8 @@ necesitas.
   responde con IA tus propias preguntas de categoría, puntaje & sí o no para
   cada post. Úsalo cuando los análisis predefinidos no se ajusten a tus
   etiquetas. Desde $0.0003 por post analizado.
+- [X (Twitter) Monitor](https://apify.com/xquik/x-twitter-monitor) detecta cada
+  tweet, respuesta, cita, repost y cambio de perfil nuevos de las cuentas,
+  normalmente en menos de un segundo después de que X lo muestra, además de los
+  tweets de palabras clave y los seguimientos. Úsalo cuando necesites alertas en
+  cuanto X muestre un tweet. Desde $0.0045 por monitor-hour.
