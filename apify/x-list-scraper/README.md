@@ -1,19 +1,19 @@
 **English** ·
-[Español](README.es.md)
+[Español](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-list-scraper/README.es.md)
 ·
-[Türkçe](README.tr.md)
+[Türkçe](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-list-scraper/README.tr.md)
 ·
-[简体中文](README.zh-CN.md)
+[简体中文](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-list-scraper/README.zh-CN.md)
 ·
-[日本語](README.ja.md)
+[日本語](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-list-scraper/README.ja.md)
 ·
-[한국어](README.ko.md)
+[한국어](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-list-scraper/README.ko.md)
 ·
-[Deutsch](README.de.md)
+[Deutsch](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-list-scraper/README.de.md)
 ·
-[Français](README.fr.md)
+[Français](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-list-scraper/README.fr.md)
 ·
-[Italiano](README.it.md)
+[Italiano](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-list-scraper/README.it.md)
 
 [![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
@@ -50,6 +50,72 @@ or find public Lists with search terms. You pay **$0.00015 per delivered row**,
 - A global cap & a cap for each List resource or search term.
 - Runs resume after an Apify migration.
 - Duplicate removal before billing.
+
+## What you get
+
+### Complete results
+
+- List timelines include posts that X's List page leaves out.
+- Each answer holds the fullest data X has for it.
+
+### Accurate rows
+
+- Protected accounts & private Lists get a clear answer, not an empty page.
+- Reposts carry the full original text.
+- Every ID in a row stays exact.
+- Mentions, links, hashtags & highlights line up with the text.
+- Verified badges match what `x.com` shows.
+- Rows hold public data only.
+- Ads & promoted entries never reach your rows.
+
+### Fresh data
+
+- Reads keep working when X ships changes.
+
+### Speed
+
+- A slow X answer doesn't hold up your request.
+- Actors read many handles, posts & queries at once.
+- Reads finish the moment their rows arrive.
+- Stalled Actor calls recover on their own.
+
+### Fair billing
+
+- Bad input costs nothing, since it's refused before any read.
+- Actors charge only for delivered, unique, matching rows.
+- A restarted run never charges twice.
+- A spend cap becomes a row cap, & diagnostics still get written.
+- Small runs end with a tip that cuts cost.
+
+### Reliability
+
+- A one-off X failure doesn't fail your request.
+- A deadline returns the rows already found, with diagnostics.
+- Actors ride out short Xquik outages.
+- Actor runs survive restarts without repeats.
+- One bad row doesn't sink a batch.
+- Stopped runs keep their rows & their report.
+- A run that can't start still explains itself.
+- Problems on X's side are fixed before they reach your reads.
+- Support can see exactly what a request or run returned.
+
+### Built for agents
+
+- Actors accept input written for other Actors.
+- Output is ready for spreadsheets, with flat columns & engagement totals.
+- Every run says why it ended & whether to retry.
+
+### Rich data
+
+- Post rows carry note text, edits, Community Notes, reach labels & reply
+  controls.
+- Rows carry source apps, media counts & professional account data.
+- Media comes with variants, alt text, sizes & availability reasons.
+
+### Quality checks
+
+- Every field X shows is served, left out on purpose or proven absent.
+- Every read is checked live each hour.
 
 ## How to scrape X lists
 
@@ -117,14 +183,14 @@ account's public Lists.
 ```
 
 `created` lists the Lists the account made & `memberships` the Lists that hold
-it. Each List is 1 row with `resultType` `createdList` or `listMembership`,
-`sourceTarget` set to the handle, & `id`, `name`, `description`, `memberCount`,
-`subscriberCount`, `createdAt`, `bannerUrl` & the `owner` profile. X shows a
-private List only to its owner, so private Lists stay out.
+it. Each List is 1 row with `resultType` `createdList` or `listMembership` &
+`sourceTarget` set to the handle. The row also holds `id`, `name`,
+`description`, `memberCount`, `subscriberCount`, `createdAt`, `bannerUrl` & the
+`owner` profile. X shows a private List only to its owner, so private Lists stay
+out.
 
-Each account's created Lists come before its memberships. The Actor reads
-accounts side by side, so rows of different accounts arrive as they are read.
-Group them by `sourceTarget`.
+Each account's created Lists come before its memberships. Rows of different
+accounts can arrive mixed, so group them by `sourceTarget`.
 
 A row is 1 account & 1 List. A List that 2 of your accounts share is 2 rows, 1
 under each. Each row is charged. `dedupeAcrossTargets` never removes these rows.

@@ -1,19 +1,19 @@
 **English** ·
-[Español](README.es.md)
+[Español](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-follower-scraper/README.es.md)
 ·
-[Türkçe](README.tr.md)
+[Türkçe](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-follower-scraper/README.tr.md)
 ·
-[简体中文](README.zh-CN.md)
+[简体中文](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-follower-scraper/README.zh-CN.md)
 ·
-[日本語](README.ja.md)
+[日本語](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-follower-scraper/README.ja.md)
 ·
-[한국어](README.ko.md)
+[한국어](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-follower-scraper/README.ko.md)
 ·
-[Deutsch](README.de.md)
+[Deutsch](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-follower-scraper/README.de.md)
 ·
-[Français](README.fr.md)
+[Français](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-follower-scraper/README.fr.md)
 ·
-[Italiano](README.it.md)
+[Italiano](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-follower-scraper/README.it.md)
 
 [![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
@@ -21,8 +21,9 @@ with Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X Follower Scraper collects followers, following,
-list members, subscribers & community members. Public benchmarks prove it is the
-cheapest & fastest of 10 follower Actors. Its full rows carry 2.5x the median
+list members, subscribers & community members. Public benchmarks show it is the
+cheapest & fastest of 5 follower Actors. Filtered by follower count, it's 39 to
+273 times cheaper per useful profile. Its full rows carry 1.6x the median
 Actor's fields, as the [benchmark below](#benchmark) shows. Most other Apify
 Actors charge before filtering or deduplicating. Xquik charges only for
 delivered, unique, filter-matching results.
@@ -116,6 +117,68 @@ notification & similar viewer flags. Raw output drops them too.
 - Build public social-network datasets for research.
 - Segment follower bases by bio keyword, location, or profile type.
 
+## What you get
+
+### Complete results
+
+- Follower & following exports return full lists.
+- Verified follower exports return full lists too.
+- Similar-account lists come back fuller.
+- Each answer holds the fullest data X has for it.
+
+### Accurate rows
+
+- Every ID in a row stays exact.
+- Verified badges match what `x.com` shows.
+- Rows hold public data only.
+- Ads & promoted entries never reach your rows.
+
+### Fresh data
+
+- Reads keep working when X ships changes.
+
+### Speed
+
+- A slow X answer doesn't hold up your request.
+- Actors read many handles, posts & queries at once.
+- Reads finish the moment their rows arrive.
+- Stalled Actor calls recover on their own.
+
+### Fair billing
+
+- Bad input costs nothing, since it's refused before any read.
+- Actors charge only for delivered, unique, matching rows.
+- A profile shared by several targets is billed once.
+- A restarted run never charges twice.
+- A spend cap becomes a row cap, & diagnostics still get written.
+- Small runs end with a tip that cuts cost.
+
+### Reliability
+
+- A one-off X failure doesn't fail your request.
+- A deadline returns the rows already found, with diagnostics.
+- Actors ride out short Xquik outages.
+- Actor runs survive restarts without repeats.
+- One bad row doesn't sink a batch.
+- Stopped runs keep their rows & their report.
+- A run that can't start still explains itself.
+- Problems on X's side are fixed before they reach your reads.
+- Support can see exactly what a request or run returned.
+
+### Built for agents
+
+- Actors accept input written for other Actors.
+- Every run says why it ended & whether to retry.
+
+### Rich data
+
+- Short links resolve, & list rows can carry full profiles.
+
+### Quality checks
+
+- Every field X shows is served, left out on purpose or proven absent.
+- Every read is checked live each hour.
+
 ## How do I use X Follower Scraper to scrape follower data?
 
 New to Apify?
@@ -168,9 +231,8 @@ work with or without `@`.
 `verified_followers`.
 
 Use `follower_ids` or `following_ids` when you need user IDs only. Each row
-holds 1 user ID, its source target & its relation, & a page holds up to 5,000
-IDs. Profile filters need profile fields, so leave them empty for these 2
-relations.
+holds 1 user ID, its source target & its relation. Profile filters need profile
+fields, so leave them empty for these 2 relations.
 
 Use `affiliates` for the accounts an organization lists as its affiliates, such
 as a company's staff & products. Each row is a full profile. An account without
@@ -364,56 +426,94 @@ Actor. A small run that goes well skips it & saves Apify usage. Turn on
 
 ## Benchmark
 
-Xquik's X Follower Scraper beat 9 other follower Actors on cost & speed. Its
-median full row had 38 fields, 2.5x the median of the others.
+Xquik's X Follower Scraper beat 4 other follower Actors on cost & speed. With a
+follower count filter, the others billed every profile they read. They cost 39
+to 273 times more per useful profile.
+
+### Followers with a follower count filter
+
+Every Actor read followers of NASA with 1,000+ followers each. Xquik's runs
+asked for 100. The other Actors can't filter by follower count, so they read 500
+followers. Their cost counts every row they billed. Xquik was 2.1x faster. A
+useful profile is unique with 1,000+ followers.
+
+- `xquik/x-follower-scraper` delivered 100 useful profiles at $0.000164 per
+  useful profile, 1.8 per second & 42 fields per row.
+  [View run](https://console.apify.com/view/runs/1fwV7snd3rgaoCZHk)
+- `xquik/x-follower-scraper` delivered 100 useful profiles at $0.000163 per
+  useful profile, 2.0 per second & 42 fields per row.
+  [View run](https://console.apify.com/view/runs/XkqZiTmkhgkPH6327)
+- `xquik/x-follower-scraper` delivered 100 useful profiles at $0.000165 per
+  useful profile, 1.6 per second & 42 fields per row.
+  [View run](https://console.apify.com/view/runs/ixl6hzcwfVxPM3sRu)
+- `xquik/x-follower-scraper` delivered 100 useful profiles at $0.000163 per
+  useful profile, 1.9 per second & 42 fields per row.
+  [View run](https://console.apify.com/view/runs/5QFbBNlUpUP2pemWh)
+- `api-ninja/x-twitter-followers-scraper` delivered 22 useful profiles at
+  $0.006364 per useful profile, 0.3 per second & 8 fields per row.
+  [View run](https://console.apify.com/view/runs/aes6bNAOWXiofbNSd)
+- `altimis/scweet` delivered 22 useful profiles at $0.007091 per useful profile,
+  0.1 per second & 21 fields per row.
+  [View run](https://console.apify.com/view/runs/5OGUfY0cyLetRcTDC)
+- `apidojo/twitter-user-scraper` delivered 23 useful profiles at $0.008330 per
+  useful profile, 0.9 per second & 25 fields per row.
+  [View run](https://console.apify.com/view/runs/IXmW8b1si3G31HOF6)
+- `kaitoeasyapi/premium-x-follower-scraper-following-data` delivered 2 useful
+  profiles at $0.045000 per useful profile, 0.2 per second & 48 fields per row.
+  [View run](https://console.apify.com/view/runs/5PVHCt3uaoFfMY2KU)
+
+### Followers of NASA, SpaceX & esa
+
+Every Actor read 1,000 followers of NASA, SpaceX & esa. Xquik was 2.6x faster at
+the lowest cost per useful profile. Its median full row had 39 fields, 1.6x the
+median of the others. Runs at 18:17 & 20:20 UTC delivered 51.4 to 76.5 useful
+profiles per second. Its September runs reached 77.9 & 100.0. A useful profile
+is unique & 30+ days old. It has 1+ follower & 1+ post.
 
 - `xquik/x-follower-scraper` delivered 1,000 useful profiles at $0.000155 per
-  useful profile, 100.0 per second & 38 fields per row.
-  [View run](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
+  useful profile, 72.9 per second & 39 fields per row.
+  [View run](https://console.apify.com/view/runs/tmCrNYIOtaFcP1QGw)
 - `xquik/x-follower-scraper` delivered 1,000 useful profiles at $0.000155 per
-  useful profile, 77.9 per second & 38 fields per row.
-  [View run](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
-- `b2b_leads/X-Real-Time-Data` delivered 286 useful profiles at $0.000388 per
-  useful profile, 3.1 per second & 21 fields per row.
-  [View run](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
-- `kaitoeasyapi/premium-x-follower-scraper-following-data` delivered 356 useful
-  profiles at $0.000506 per useful profile, 21.9 per second & 50 fields per row.
-  [View run](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
-- `api-ninja/x-twitter-followers-scraper` delivered 350 useful profiles at
-  $0.000809 per useful profile, 7.0 per second & 8 fields per row.
-  [View run](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
-- `altimis/scweet` delivered 332 useful profiles at $0.000922 per useful
-  profile, 1.1 per second & 21 fields per row.
-  [View run](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
-- `apidojo/twitter-user-scraper` delivered 323 useful profiles at $0.001160 per
-  useful profile, 7.3 per second & 25 fields per row.
-  [View run](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
-- `atomus/twitter-scraper` delivered 323 useful profiles at $0.001272 per useful
-  profile, 6.2 per second & 13 fields per row.
-  [View run](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
-- `practicaltools/cheap-simple-twitter-api` delivered 283 useful profiles at
-  $0.002036 per useful profile, 6.5 per second & 4 fields per row.
-  [Run 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb),
-  [Run 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK),
-  [Run 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
-- `maximedupre/twitter-scraper` delivered 320 useful profiles at $0.002192 per
-  useful profile, 2.1 per second & 15 fields per row.
-  [Run 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs),
-  [Run 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39),
-  [Run 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
-- `seemuapps/x-followers-following-scraper` delivered 286 useful profiles at
-  $0.003504 per useful profile, 3.9 per second & 9 fields per row.
-  [Run 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj),
-  [Run 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ),
-  [Run 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
+  useful profile, 58.9 per second & 39 fields per row.
+  [View run](https://console.apify.com/view/runs/ge6n1Bc3uDNITzTkL)
+- `xquik/x-follower-scraper` delivered 1,000 useful profiles at $0.000155 per
+  useful profile, 76.5 per second & 39 fields per row.
+  [View run](https://console.apify.com/view/runs/MxjD0zdsTQm6FiBDR)
+- `xquik/x-follower-scraper` delivered 1,000 useful profiles at $0.000155 per
+  useful profile, 72.6 per second & 39 fields per row.
+  [View run](https://console.apify.com/view/runs/3NTZsXGl5T8IVQz71)
+- `xquik/x-follower-scraper` delivered 1,000 useful profiles at $0.000155 per
+  useful profile, 73.1 per second & 39 fields per row.
+  [View run](https://console.apify.com/view/runs/jQjw6MB3jAD9pMBh8)
+- `xquik/x-follower-scraper` delivered 1,000 useful profiles at $0.000155 per
+  useful profile, 62.8 per second & 39 fields per row.
+  [View run](https://console.apify.com/view/runs/g1Z6Pm64Hra4Se7Ch)
+- `xquik/x-follower-scraper` delivered 1,000 useful profiles at $0.000155 per
+  useful profile, 51.4 per second & 39 fields per row.
+  [View run](https://console.apify.com/view/runs/fBGDfoZAm1CamIY49)
+- `xquik/x-follower-scraper` delivered 1,000 useful profiles at $0.000155 per
+  useful profile, 57.0 per second & 39 fields per row.
+  [View run](https://console.apify.com/view/runs/MQWzQabAX1dy6jYYr)
+- `kaitoeasyapi/premium-x-follower-scraper-following-data` delivered 347 useful
+  profiles at $0.000519 per useful profile, 25.6 per second & 48 fields per row.
+  [View run](https://console.apify.com/view/runs/FAVT3YDzrb1ARJnKC)
+- `kaitoeasyapi/premium-x-follower-scraper-following-data` delivered 337 useful
+  profiles at $0.000534 per useful profile, 25.2 per second & 48 fields per row.
+  [View run](https://console.apify.com/view/runs/N12VE79E0KPndwaX4)
+- `api-ninja/x-twitter-followers-scraper` delivered 418 useful profiles at
+  $0.000687 per useful profile, 5.5 per second & 8 fields per row.
+  [View run](https://console.apify.com/view/runs/VubKrZpDJ7vTtaggf)
+- `altimis/scweet` delivered 306 useful profiles at $0.001000 per useful
+  profile, 15.9 per second & 21 fields per row.
+  [View run](https://console.apify.com/view/runs/X5t2sCi6GOyKePkEG)
+- `apidojo/twitter-user-scraper` delivered 314 useful profiles at $0.001194 per
+  useful profile, 16.6 per second & 25 fields per row.
+  [View run](https://console.apify.com/view/runs/tZaM1KGNutasbPJNE)
 
-Every Actor read the followers of NASA, SpaceX & esa. The other Actors ran on
-2026-09-28. Xquik's runs set `outputMode: "full"` & ran on 2026-09-29. All runs
-used the Bronze tier. A useful profile is unique, 30+ days old, with 1+ follower
-& 1+ post. Cost is the customer's total spend per useful profile. Ours includes
-the Apify usage our customers pay. A row with 3 runs adds them up. Fields per
-row is the median count of non-empty fields, nested ones included. A list counts
-as 1 field. Open a run for its input, log & dataset.
+All runs took place on 2026-10-15 on the Bronze tier. Cost is the customer's
+total spend per useful result. Ours includes the Apify usage our customers pay.
+Fields per row is the median count of non-empty fields. That count includes
+nested fields, & a list counts as 1. Open a run for its input, log & dataset.
 
 ## Input
 
@@ -791,7 +891,7 @@ limits still apply.
 ### How fast is it?
 
 The speed of Xquik's X Follower Scraper depends on target size, filters & X
-availability. Its 2 [benchmark](#benchmark) runs reached 77.9 & 100.0 useful
+availability. Its 8 [benchmark](#benchmark) runs delivered 51.4 to 76.5 useful
 profiles per second.
 
 ### Why does my run return fewer rows than my limit?

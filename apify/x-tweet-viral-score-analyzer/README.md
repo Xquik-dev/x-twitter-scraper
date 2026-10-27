@@ -1,19 +1,19 @@
 **English** ·
-[Español](README.es.md)
+[Español](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-tweet-viral-score-analyzer/README.es.md)
 ·
-[Türkçe](README.tr.md)
+[Türkçe](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-tweet-viral-score-analyzer/README.tr.md)
 ·
-[简体中文](README.zh-CN.md)
+[简体中文](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-tweet-viral-score-analyzer/README.zh-CN.md)
 ·
-[日本語](README.ja.md)
+[日本語](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-tweet-viral-score-analyzer/README.ja.md)
 ·
-[한국어](README.ko.md)
+[한국어](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-tweet-viral-score-analyzer/README.ko.md)
 ·
-[Deutsch](README.de.md)
+[Deutsch](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-tweet-viral-score-analyzer/README.de.md)
 ·
-[Français](README.fr.md)
+[Français](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-tweet-viral-score-analyzer/README.fr.md)
 ·
-[Italiano](README.it.md)
+[Italiano](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-tweet-viral-score-analyzer/README.it.md)
 
 [![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
@@ -44,6 +44,94 @@ or views. It does not reproduce how X ranks posts.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
+
+## What you get
+
+### Complete results
+
+- Searches return posts that X's own search tab leaves out.
+- Large date ranges come back whole & fast.
+- Searches return every match, whatever operators you combine.
+- Filtered pages come back full until the results run out.
+- Each answer holds the fullest data X has for it.
+
+### Accurate rows
+
+- Search results hold every post that matches your query & nothing else.
+- Word & phrase matching works in every language & script.
+- Language filters work for every language X tags.
+- "X can't run this search" appears only when it's true.
+- Protected accounts & private Lists get a clear answer, not an empty page.
+- Reposts carry the full original text.
+- Every ID in a row stays exact.
+- Mentions, links, hashtags & highlights line up with the text.
+- Verified badges match what `x.com` shows.
+- Rows hold public data only.
+- Newest-first results stay in true date order across pages.
+- Messy queries still run instead of failing.
+- Place searches work with names in 6 languages.
+- Searches X can't run fail at once, with the fix.
+- A date means one thing in any common form.
+- Searches accept `since_id` & `max_id` bounds.
+- Ads & promoted entries never reach your rows.
+
+### Fresh data
+
+- Reads keep working when X ships changes.
+
+### Speed
+
+- A slow X answer doesn't hold up your request.
+- Repeated lookups answer at once.
+- Searches stay fast on busy topics.
+- Each next page arrives fast.
+- Actors read many handles, posts & queries at once.
+- Reads finish the moment their rows arrive.
+- Stalled Actor calls recover on their own.
+
+### Fair billing
+
+- A retried page is free.
+- Bad input costs nothing, since it's refused before any read.
+- AI analysis bills only the posts it analyzed.
+- Actors charge only for delivered, unique, matching rows.
+- A restarted run never charges twice.
+- A spend cap becomes a row cap, & diagnostics still get written.
+- AI Actors don't bill failed or skipped analyses.
+
+### Reliability
+
+- A one-off X failure doesn't fail your request.
+- Paging stays consistent from one page to the next.
+- Paging never loops forever.
+- A deadline returns the rows already found, with diagnostics.
+- Actors ride out short Xquik outages.
+- Actor runs survive restarts without repeats.
+- One bad row doesn't sink a batch.
+- Stopped runs keep their rows & their report.
+- A run that can't start still explains itself.
+- Problems on X's side are fixed before they reach your reads.
+- Support can see exactly what a request or run returned.
+
+### Built for agents
+
+- Actors accept input written for other Actors.
+- Every run says why it ended & whether to retry.
+
+### Rich data
+
+- Post rows carry note text, edits, Community Notes, reach labels & reply
+  controls.
+- Rows carry source apps, media counts & professional account data.
+- Media comes with variants, alt text, sizes & availability reasons.
+- AI answers carry probabilities, confidence & a question version.
+- Changes across analysis runs don't flip on noise.
+- `viralAlgorithmScore` turns a post's public counts into 1 comparable number.
+
+### Quality checks
+
+- Every field X shows is served, left out on purpose or proven absent.
+- Every read is checked live each hour.
 
 ## How to check a tweet's viral score
 
@@ -137,7 +225,7 @@ The estimate has these limits.
 Xquik's X Tweet Viral Score Analyzer compares each Viral Score with what
 happened. `viral.actualEngagementRate` is
 `log10(1 + weighted sum per 1,000 followers)`. The log limits the effect of one
-very large post. The rate is `null` when the follower count is missing or 0.
+huge post. The rate is `null` when the follower count is missing or 0.
 
 The run summary's `viral.calibration` block reports these fields.
 
@@ -290,8 +378,8 @@ A run writes an `analysis-summary` record to its key-value store in 3 cases.
 - It has `alwaysSaveRunRecords` on.
 
 Other runs skip the record, including the first run of a series. Their status
-names the top answer, like `Average Viral Score is 64.` A comparison without a
-change states `No change since the earlier run.` A run that hits a problem or is
+names the top answer, like `Average Viral Score is 64`. A comparison without a
+change states `No change since the earlier run`. A run that hits a problem or is
 large also writes `run-report`. So does a run with `alwaysSaveRunRecords` on.
 `run-report` repeats the summary under `results.analysisSummary`.
 
@@ -331,9 +419,8 @@ status takes these values.
 - `unchanged` or `changed` for tweets it had.
 
 `changes` lists each trait decision that moved from `previous` to `current`.
-Decisions compare by category, rounded score level or yes/no at 0.5. A decision
-counts as changed only when it moves clearly. Near ties between runs stay
-`unchanged`.
+Decisions compare by category, rounded score level or yes/no at 0.5. Small AI
+differences between runs stay `unchanged`.
 
 A baseline above `maxBaselineRows`, or from different settings, stops the run
 before collection. The run then writes a diagnostic row. `maxBaselineRows`

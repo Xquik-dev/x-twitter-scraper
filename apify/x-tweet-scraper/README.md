@@ -1,19 +1,19 @@
 **English** ·
-[Español](README.es.md)
+[Español](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-tweet-scraper/README.es.md)
 ·
-[Türkçe](README.tr.md)
+[Türkçe](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-tweet-scraper/README.tr.md)
 ·
-[简体中文](README.zh-CN.md)
+[简体中文](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-tweet-scraper/README.zh-CN.md)
 ·
-[日本語](README.ja.md)
+[日本語](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-tweet-scraper/README.ja.md)
 ·
-[한국어](README.ko.md)
+[한국어](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-tweet-scraper/README.ko.md)
 ·
-[Deutsch](README.de.md)
+[Deutsch](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-tweet-scraper/README.de.md)
 ·
-[Français](README.fr.md)
+[Français](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-tweet-scraper/README.fr.md)
 ·
-[Italiano](README.it.md)
+[Italiano](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-tweet-scraper/README.it.md)
 
 [![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
@@ -21,11 +21,12 @@ with Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X Tweet Scraper collects tweets, replies,
-profiles, lists & searches with 50+ filters. Public benchmarks prove it is the
-cheapest & fastest of 12 tweet Actors. Its rows carry 2x the median Actor's
-fields, as the [benchmark below](#benchmark) shows. Most other Apify Actors
-charge before filtering or deduplicating. Xquik charges only for delivered,
-unique, filter-matching results.
+profiles, lists & searches with 50+ filters. In public benchmarks, it searches
+13.6x faster than 4 other tweet Actors. It also costs the least per useful
+tweet. Its rows carry 1.3x the median Actor's fields, as the
+[benchmark below](#benchmark) shows. Most other Apify Actors charge before
+filtering or deduplicating. Xquik charges only for delivered, unique,
+filter-matching results.
 
 Scrape Twitter tweets **from $0.00015 per delivered result on every Apify
 plan**, a Twitter API alternative. Apify bills platform usage separately. You
@@ -115,6 +116,7 @@ Optional tweet metadata includes `authorUnavailable`, `card`,
 `exclusiveContent`, `noteTweet` & `postCta`. `isTranslatable`, `place`,
 `possiblySensitive` & `viewState` keep other public context. `previousCounts`
 keeps pre-edit engagement. `tombstone` keeps visibility notices.
+`softIntervention` keeps the label X shows on a tweet whose reach it limits.
 `unmentionedUserIds` lists users who left the conversation. See OpenAPI for the
 exact fields.
 
@@ -138,6 +140,108 @@ Media carries availability, geometry, tags & video variants. It also carries the
 Rows never include viewer-only state. The Actor removes follow, block, mute,
 bookmark, like, repost, edit-permission & similar viewer flags. Raw output drops
 them too.
+
+## What you get
+
+### Complete results
+
+- Searches return posts that X's own search tab leaves out.
+- Large date ranges come back whole & fast.
+- Searches return every match, whatever operators you combine.
+- Account history comes back complete, old posts included.
+- Profile posts without replies still keep the author's own threads.
+- Profile reads include the pinned post, flagged as pinned.
+- List timelines include posts that X's List page leaves out.
+- Reply exports include replies that X's post page leaves out.
+- Top tweet lists come back reliably.
+- Filtered pages come back full until the results run out.
+- Timelines page all the way to the last post.
+- Batch post lookups miss fewer posts.
+- Each answer holds the fullest data X has for it.
+
+### Accurate rows
+
+- Search results hold every post that matches your query & nothing else.
+- Word & phrase matching works in every language & script.
+- Language filters work for every language X tags.
+- A post is called missing only when it's gone.
+- "X can't run this search" appears only when it's true.
+- Protected accounts & private Lists get a clear answer, not an empty page.
+- Reposts carry the full original text.
+- Every ID in a row stays exact.
+- Mentions, links, hashtags & highlights line up with the text.
+- Counts X didn't send are listed in `unknownCounts`, never shown as 0.
+- Verified badges match what `x.com` shows.
+- Rows hold public data only.
+- Quote searches return every real quote & nothing else.
+- Reply exports hold only direct replies, in a proven order.
+- Newest-first results stay in true date order across pages.
+- Messy queries still run instead of failing.
+- Place searches work with names in 6 languages.
+- Searches X can't run fail at once, with the fix.
+- A date means one thing in any common form.
+- Searches accept `since_id` & `max_id` bounds.
+- Ads & promoted entries never reach your rows.
+
+### Fresh data
+
+- Reads keep working when X ships changes.
+
+### Speed
+
+- A slow X answer doesn't hold up your request.
+- Repeated lookups answer at once.
+- Searches stay fast on busy topics.
+- Each next page arrives fast.
+- Actors read many handles, posts & queries at once.
+- Reads finish the moment their rows arrive.
+- Stalled Actor calls recover on their own.
+
+### Fair billing
+
+- A retried page is free.
+- Bad input costs nothing, since it's refused before any read.
+- A post ID listed twice in a batch is billed once.
+- Actors charge only for delivered, unique, matching rows.
+- A restarted run never charges twice.
+- A spend cap becomes a row cap, & diagnostics still get written.
+- Small runs end with a tip that cuts cost.
+
+### Reliability
+
+- A one-off X failure doesn't fail your request.
+- Paging stays consistent from one page to the next.
+- Paging never loops forever.
+- A deadline returns the rows already found, with diagnostics.
+- Actors ride out short Xquik outages.
+- Actor runs survive restarts without repeats.
+- One bad row doesn't sink a batch.
+- Stopped runs keep their rows & their report.
+- A run that can't start still explains itself.
+- `stopCauses`, `failedSubtargets` & `unavailableTargets` spell out partial
+  failures.
+- Problems on X's side are fixed before they reach your reads.
+- Support can see exactly what a request or run returned.
+
+### Built for agents
+
+- Actors accept input written for other Actors.
+- Output is ready for spreadsheets, with flat columns & engagement totals.
+- Every run says why it ended & whether to retry.
+
+### Rich data
+
+- Post rows carry note text, edits, Community Notes, reach labels & reply
+  controls.
+- Rows carry source apps, media counts & professional account data.
+- Media comes with variants, alt text, sizes & availability reasons.
+- You see when each account reposted a post.
+- Posts & bios can be translated into your language.
+
+### Quality checks
+
+- Every field X shows is served, left out on purpose or proven absent.
+- Every read is checked live each hour.
 
 ## How do I use X Tweet Scraper to scrape tweet data?
 
@@ -180,7 +284,7 @@ List's posts. `maxItems` caps results across all pasted URLs.
 
 ### Scrape many handles
 
-Handles work as shorthand for many `from:username` searches.
+Handles return the posts of many accounts in 1 run.
 
 ```json
 { "twitterHandles": ["elonmusk", "nasa", "openai"], "maxItems": 100 }
@@ -188,8 +292,8 @@ Handles work as shorthand for many `from:username` searches.
 
 Each handle returns that account's posts. The Actor removes duplicate rows
 before output & billing. You can add usernames with or without `@`. Handles &
-profile URLs keep reposts, as the Posts tab on X does. They keep them even with
-dates or filters. Set `tweetTypes.excludeRetweets` to drop them.
+profile URLs keep reposts, even with dates or filters. Set
+`tweetTypes.excludeRetweets` to drop them.
 
 ### Search tweets
 
@@ -255,10 +359,9 @@ article in a post. Modes for a single post are `replies`, `quotes`, `thread`,
 { "mode": "profileMentions", "twitterHandles": ["nasa"], "maxItems": 100 }
 ```
 
-`profileTweets` follows the profile Posts tab on X. It returns the account's
-posts, reposts & replies to its own posts. Rows come in date order. The Actor
-drops replies to other accounts before billing. It also drops conversation
-context from other authors.
+`profileTweets` returns the account's posts, reposts & replies to its own posts.
+Rows come in date order. The Actor drops replies to other accounts before
+billing. It also drops conversation context from other authors.
 
 For original posts only, exclude the types you do not want.
 
@@ -272,14 +375,12 @@ For original posts only, exclude the types you do not want.
 ```
 
 `tweetTypes.excludeReplies`, `excludeRetweets` & `excludeQuotes` work on every
-source. A search sends them to X as `-filter:replies`, `-filter:nativeretweets`
-& `-filter:quote`. On a profile or a List, the Actor drops those rows itself.
-Excluded rows never reach the dataset, so you never pay for them. They never
-count toward `maxItems` either.
+source. Excluded rows never reach the dataset, so you never pay for them. They
+never count toward `maxItems` either.
 
-`profileReplies` follows X's With Replies tab. It returns the account's own
-posts & replies. The Actor excludes conversation context from other authors. Use
-`filter:replies` or a `to:` search for reply-only results.
+`profileReplies` returns the account's own posts & replies. The Actor excludes
+conversation context from other authors. Use `filter:replies` or a `to:` search
+for reply-only results.
 
 Search & paginated Tweet modes support `time.since`, `time.until`, Unix
 timestamps & `lang`. These include profile Posts, With Replies, Media, Likes,
@@ -313,9 +414,9 @@ optional `author`. Engagement user rows include `resultType: "user"`,
 
 Retweeters work as a normal public engagement mode. Favoriters are best effort.
 X may show likers only on eligible or owner-visible posts. Profile likes are
-best effort too, since many public profiles have no readable Likes tab. If X
-shows no users or liked tweets, the run's status says so. Tweet rows can carry
-bookmark counts. X does not show which accounts bookmarked a post.
+best effort too, since X shows them only to their owner. If X shows no users or
+liked tweets, the run's status says so. Tweet rows can carry bookmark counts. X
+does not show which accounts bookmarked a post.
 
 ### Translate tweets & get embed HTML
 
@@ -350,8 +451,7 @@ gives no row & no charge.
 
 ### Get the top tweets on X
 
-`mode: "topTweets"` returns the tweets X ranks highest by 1 metric, as X's
-Inspiration page shows them.
+`mode: "topTweets"` returns the tweets X ranks highest by 1 metric.
 
 ```json
 {
@@ -366,9 +466,9 @@ Inspiration page shows them.
 `topMetric` is `likes`, `replies`, `quotes`, `bookmarks`, `shares` or `views`.
 It defaults to `likes`. `topWindow` is `day`, `week` or `month`, & defaults to
 `day`. X lists up to 100 tweets for each choice. Leave `topCountry` empty for
-all of X. Set `lang` to keep 1 language. With both set, X picks the country &
-the Actor keeps the language. Each row has `engagementMode: "topTweets"` & costs
-1 result, like any tweet.
+all of X. Set `lang` to keep 1 language. With both set, you get that country's
+tweets in that language. Each row has `engagementMode: "topTweets"` & costs 1
+result, like any tweet.
 
 ### Export flat CSV rows
 
@@ -486,68 +586,113 @@ To cap what a run can spend, see [Run options](#run-options).
 
 ## Benchmark
 
-Xquik's X Tweet Scraper beat 11 other tweet Actors on cost & speed. Its median
-row had 63 fields, 2x the median of the others.
+Xquik's X Tweet Scraper ran 3 benchmarks against 4 other tweet Actors. It was
+the fastest in all 3. It also cost the least per useful tweet in all 3.
 
-- `xquik/x-tweet-scraper` delivered 890 useful tweets at $0.000175 per useful
-  tweet, 39.2 per second & 63 fields per row.
-  [View run](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
-- `xquik/x-tweet-scraper` delivered 883 useful tweets at $0.000176 per useful
-  tweet, 25.2 per second & 63 fields per row.
-  [View run](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
-- `xquik/x-tweet-scraper` delivered 882 useful tweets at $0.000177 per useful
-  tweet, 25.7 per second & 63 fields per row.
-  [View run](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
-- `xquik/x-tweet-scraper` delivered 877 useful tweets at $0.000178 per useful
-  tweet, 26.9 per second & 63 fields per row.
-  [View run](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` delivered 813 useful
-  tweets at $0.000185 per useful tweet, 10.5 per second & 36 fields per row.
-  [View run](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` delivered 805 useful
-  tweets at $0.000187 per useful tweet, 10.6 per second & 36 fields per row.
-  [View run](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` delivered 805 useful
-  tweets at $0.000187 per useful tweet, 10.7 per second & 36 fields per row.
-  [View run](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
+### Keyword search
+
+Every Actor ran the same search & filters for 1,000 results. Xquik was 13.6x
+faster than the fastest other Actor. It also cost the least per useful tweet.
+Its median row had 67 fields, 1.3x the median of the others. A useful tweet is a
+unique English original post with 10+ likes. It falls in the date range.
+
+- `xquik/x-tweet-scraper` delivered 1,000 useful tweets at $0.000155 per useful
+  tweet, 150.5 per second & 67 fields per row.
+  [View run](https://console.apify.com/view/runs/km8s0cIJjtggX86Um)
+- `xquik/x-tweet-scraper` delivered 1,000 useful tweets at $0.000155 per useful
+  tweet, 171.1 per second & 67 fields per row.
+  [View run](https://console.apify.com/view/runs/blvgyrkWnFcPVMBRe)
+- `xquik/x-tweet-scraper` delivered 1,000 useful tweets at $0.000155 per useful
+  tweet, 172.4 per second & 67 fields per row.
+  [View run](https://console.apify.com/view/runs/LZJylnFyBIP2E9tPc)
+- `xquik/x-tweet-scraper` delivered 1,000 useful tweets at $0.000155 per useful
+  tweet, 169.3 per second & 67 fields per row.
+  [View run](https://console.apify.com/view/runs/X0uaFNfgQZlr6FTTU)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` delivered 871 useful
+  tweets at $0.000173 per useful tweet, 10.7 per second & 35 fields per row.
+  [View run](https://console.apify.com/view/runs/BBDAikcjXaGHb6hTC)
 - `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` delivered
-  880 useful tweets at $0.000250 per useful tweet, 9.1 per second & 46 fields
-  per row. [View run](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
-- `scraper_one/x-posts-search` delivered 804 useful tweets at $0.000314 per
-  useful tweet, 3.3 per second & 14 fields per row.
-  [View run](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
-- `danek/twitter-scraper` delivered 807 useful tweets at $0.000347 per useful
-  tweet, 5.0 per second & 27 fields per row.
-  [View run](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
-- `tweetapi/twitter-x-search-scraper` delivered 337 useful tweets at $0.000374
-  per useful tweet, 2.6 per second & 28 fields per row.
-  [View run](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
-- `api-ninja/x-twitter-advanced-search` delivered 837 useful tweets at $0.000430
-  per useful tweet, 7.4 per second & 28 fields per row.
-  [View run](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
-- `apidojo/twitter-scraper-lite` delivered 251 useful tweets at $0.000494 per
-  useful tweet, 12.9 per second & 54 fields per row.
-  [View run](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
-- `apidojo/tweet-scraper` delivered 481 useful tweets at $0.000832 per useful
-  tweet, 7.8 per second & 55 fields per row.
-  [View run](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
-- `xtdata/twitter-x-scraper` delivered 1,378 useful tweets at $0.001168 per
-  useful tweet, 11.9 per second & 67 fields per row.
-  [View run](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
-- `seemuapps/x-tweet-scraper` delivered 805 useful tweets at $0.001242 per
-  useful tweet, 6.9 per second & 24 fields per row.
-  [View run](https://console.apify.com/view/runs/FstursEw43TbcipYU)
-- `maximedupre/twitter-scraper` delivered 46 useful tweets at $0.002846 per
-  useful tweet, 0.3 per second & 31 fields per row.
-  [View run](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
+  436 useful tweets at $0.000222 per useful tweet, 8.1 per second & 46 fields
+  per row. [View run](https://console.apify.com/view/runs/rINRh514vU77bjCRV)
+- `apidojo/twitter-scraper-lite` delivered 326 useful tweets at $0.000434 per
+  useful tweet, 9.3 per second & 54 fields per row.
+  [View run](https://console.apify.com/view/runs/giM6ORTDaqcuTiWXd)
+- `apidojo/tweet-scraper` delivered 642 useful tweets at $0.000623 per useful
+  tweet, 12.5 per second & 55 fields per row.
+  [View run](https://console.apify.com/view/runs/mPhpJSQHvEcC8HdoK)
 
-Every Actor ran the same search & filters. The other Actors ran on 2026-09-27.
-Xquik's runs set `outputVariant: "rich"` & ran on 2026-09-29. All runs used the
-Bronze tier. A useful tweet is a unique English original post with 10+ likes.
-Cost is the customer's total spend per useful tweet. Ours includes the Apify
-usage our customers pay. Fields per row is the median count of non-empty fields,
-nested ones included. A list counts as 1 field. Open a run for its input, log &
-dataset.
+### Filtered search
+
+Every Actor searched "AI agent" with the same filters. A useful tweet is a
+unique English original post by a verified author. It has 50+ likes & 10+
+reposts. It dates from Oct 1 to 14, 2026. Xquik's runs asked for 200 results &
+the others for 300. Xquik was 4.3x faster. It also cost the least per useful
+tweet.
+
+- `xquik/x-tweet-scraper` delivered 200 useful tweets at $0.000156 per useful
+  tweet, 32.2 per second & 69 fields per row.
+  [View run](https://console.apify.com/view/runs/YZ2xe6LhChMhTUau4)
+- `xquik/x-tweet-scraper` delivered 200 useful tweets at $0.000156 per useful
+  tweet, 29.8 per second & 69 fields per row.
+  [View run](https://console.apify.com/view/runs/sBufY1TuZlKX7iZwo)
+- `xquik/x-tweet-scraper` delivered 200 useful tweets at $0.000156 per useful
+  tweet, 34.3 per second & 69 fields per row.
+  [View run](https://console.apify.com/view/runs/xbcx6NaungO9hiuEw)
+- `xquik/x-tweet-scraper` delivered 200 useful tweets at $0.000156 per useful
+  tweet, 29.7 per second & 69 fields per row.
+  [View run](https://console.apify.com/view/runs/QIc03AZAo6Ru34MiB)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` delivered 238 useful
+  tweets at $0.000191 per useful tweet, 7.2 per second & 35 fields per row.
+  [View run](https://console.apify.com/view/runs/0zgJlgm6gzp5xmfcr)
+- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` delivered
+  282 useful tweets at $0.000234 per useful tweet, 6.7 per second & 47 fields
+  per row. [View run](https://console.apify.com/view/runs/JHsz1lGXBrYDxDGhj)
+- `apidojo/twitter-scraper-lite` delivered 295 useful tweets at $0.000391 per
+  useful tweet, 2.7 per second & 56 fields per row.
+  [View run](https://console.apify.com/view/runs/Rpq8QDcXtZbbRtSWp)
+- `apidojo/tweet-scraper` delivered 295 useful tweets at $0.000407 per useful
+  tweet, 6.2 per second & 55 fields per row.
+  [View run](https://console.apify.com/view/runs/72HVaNMQDhLebsyJY)
+
+### User timeline
+
+Every Actor read NASA's latest 100 posts without reposts. Xquik was about 3x
+faster. It also cost the least per useful tweet. A useful tweet is a unique NASA
+post that isn't a repost.
+
+- `xquik/x-tweet-scraper` delivered 100 useful tweets at $0.000157 per useful
+  tweet, 22.7 per second & 62 fields per row.
+  [View run](https://console.apify.com/view/runs/5eqwTtfMKcfM9nQDA)
+- `xquik/x-tweet-scraper` delivered 100 useful tweets at $0.000157 per useful
+  tweet, 23.5 per second & 62 fields per row.
+  [View run](https://console.apify.com/view/runs/ecDG3raO9YU4CDyQs)
+- `xquik/x-tweet-scraper` delivered 100 useful tweets at $0.000157 per useful
+  tweet, 23.1 per second & 62 fields per row.
+  [View run](https://console.apify.com/view/runs/mwnvFfqrJNOydoOME)
+- `xquik/x-tweet-scraper` delivered 100 useful tweets at $0.000157 per useful
+  tweet, 25.6 per second & 62 fields per row.
+  [View run](https://console.apify.com/view/runs/6wo6rjnJEDhkg7Uik)
+- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` delivered
+  100 useful tweets at $0.000220 per useful tweet, 5.1 per second & 52 fields
+  per row. [View run](https://console.apify.com/view/runs/p03W0TlijlZJeolJI)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` delivered 65 useful
+  tweets at $0.000238 per useful tweet, 7.9 per second & 37 fields per row.
+  [View run](https://console.apify.com/view/runs/2Xct7qrufMKQO1xiX)
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` delivered 65 useful
+  tweets at $0.000238 per useful tweet, 7.3 per second & 37 fields per row.
+  [View run](https://console.apify.com/view/runs/tGAhPPAiVGhx2faJ8)
+- `apidojo/tweet-scraper` delivered 63 useful tweets at $0.000635 per useful
+  tweet, 3.9 per second & 57 fields per row.
+  [View run](https://console.apify.com/view/runs/w7RLe7k1Ye2rKEzOu)
+- `apidojo/twitter-scraper-lite` delivered 63 useful tweets at $0.000737 per
+  useful tweet, 2.6 per second & 57 fields per row.
+  [View run](https://console.apify.com/view/runs/HFrwZGnr1V0AHgye3)
+
+All runs took place on 2026-10-15 & 2026-10-16 on the Bronze tier. Cost is the
+customer's total spend per useful result. Ours includes the Apify usage our
+customers pay. Fields per row is the median count of non-empty fields. That
+count includes nested fields, & a list counts as 1. Open a run for its input,
+log & dataset.
 
 ## Empty, partial & stopped runs
 
@@ -716,8 +861,9 @@ Each line names the fields you already use, then the field they map to.
 - `mentioning` maps to `@`.
 - `start`, `startDate`, `timeSince` map to `since`.
 - `end`, `endDate`, `timeUntil` map to `until`.
-- `timeSinceUnix`, `sinceTime`, `timeUntilUnix`, `untilTime`, in seconds, map to
-  `since_time`, `until_time`.
+- `timeSinceUnix`, `sinceTime`, `timeUntilUnix`, `untilTime` map to
+  `since_time`, `until_time`. They take Unix seconds, an ISO 8601 time or a
+  date. A time without a zone reads as UTC.
 - `timeWithinTime`, `withinTime` map to `within_time`.
 - `timeWindowHours`, `timeWindow` map to `within_time`, as hours & as days.
 - `timeSinceId`, `sinceId`, `timeMaxId`, `maxId` map to `since_id`, `max_id`.
@@ -808,7 +954,7 @@ A pasted input behaves like this.
   The Actor never drops a field silently.
 - A row cap must be a whole number of 1 or more. `maxResults: 0` stops the run
   before it reads or charges anything.
-- `quickDateRange: "m1"` reads the past month on every route. Months & years
+- `quickDateRange: "m1"` reads the past month in every mode. Months & years
   count back on the calendar. Without h, d, w, m or y, the run stops before any
   read or charge.
 - The Actor has no page unit. Replace `maxPages` with `maxItems`.
@@ -1060,15 +1206,14 @@ limits still apply.
 
 ### How fast is it?
 
-Xquik's X Tweet Scraper delivered 25.2 to 39.2 useful tweets per second in the
-[benchmark](#benchmark). Runtime depends on your input, the result count & X
-availability.
+Xquik's X Tweet Scraper delivered 150.5 to 172.4 useful tweets per second. That
+was in the keyword search [benchmark](#benchmark). Runtime depends on your
+input, the result count & X availability.
 
 ### Why do I get posts that X's search tab leaves out?
 
-X leaves some matching posts out of its Latest tab. Xquik's X Tweet Scraper
-returns those posts too. Every post is a real X search result for your query.
-You pay for each post once.
+Searches return posts that X's own search tab leaves out. Search results hold
+every post that matches your query & nothing else. You pay for each post once.
 
 ### Which search operators work?
 

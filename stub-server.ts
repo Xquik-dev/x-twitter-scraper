@@ -1,8 +1,5 @@
 #!/usr/bin/env bun
 
-// SPDX-FileCopyrightText: 2026 Xquik
-// SPDX-License-Identifier: MIT
-
 import { createInterface, type Interface } from "node:readline";
 import { pathToFileURL } from "node:url";
 

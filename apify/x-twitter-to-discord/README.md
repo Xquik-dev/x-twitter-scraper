@@ -1,19 +1,19 @@
 **English** ·
-[Español](README.es.md)
+[Español](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-twitter-to-discord/README.es.md)
 ·
-[Türkçe](README.tr.md)
+[Türkçe](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-twitter-to-discord/README.tr.md)
 ·
-[简体中文](README.zh-CN.md)
+[简体中文](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-twitter-to-discord/README.zh-CN.md)
 ·
-[日本語](README.ja.md)
+[日本語](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-twitter-to-discord/README.ja.md)
 ·
-[한국어](README.ko.md)
+[한국어](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-twitter-to-discord/README.ko.md)
 ·
-[Deutsch](README.de.md)
+[Deutsch](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-twitter-to-discord/README.de.md)
 ·
-[Français](README.fr.md)
+[Français](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-twitter-to-discord/README.fr.md)
 ·
-[Italiano](README.it.md)
+[Italiano](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-twitter-to-discord/README.it.md)
 
 [![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
@@ -38,8 +38,7 @@ usage separately.
 
 - Every new tweet, reply, quote & repost of the accounts you watch, usually
   caught in under a second after X shows it.
-- Every new tweet X's latest search shows for your keyword, with any X search
-  operator.
+- Every new tweet that matches your keyword, with any X search operator.
 - Live videos, Spaces, deleted tweets, profile changes, follows & followers,
   when you turn them on.
 - Each alert as a Discord message that names the account & the event, holds the
@@ -47,6 +46,72 @@ usage separately.
 - A test message to each new Discord URL, with its answer in the run status.
 - Every event in the run's dataset & in 1 history dataset per saved task or
   monitor name.
+
+## What you get
+
+### Accurate rows
+
+- Reposts carry the full original text.
+- Every ID in a row stays exact.
+- Mentions, links, hashtags & highlights line up with the text.
+- Verified badges match what `x.com` shows.
+- Rows hold public data only.
+- Ads & promoted entries never reach your rows.
+- Monitors report only real deletions & unfollows.
+- Profile change alerts don't flap.
+
+### Fresh data
+
+- Account monitors see changes within about a second.
+- Keyword monitors catch every matching post.
+- Monitors don't miss posts between checks.
+- A monitor that falls behind catches up on what it missed.
+- Live videos & Spaces raise an event when they start.
+- Reads keep working when X ships changes.
+
+### Speed
+
+- A slow X answer doesn't hold up your request.
+- Stalled Actor calls recover on their own.
+- Webhooks arrive without connection setup delay.
+
+### Fair billing
+
+- Monitors have 1 flat hourly price, events & webhooks included.
+- Monitor Actors bill only the hours a monitor watched.
+
+### Reliability
+
+- A one-off X failure doesn't fail your request.
+- Actors ride out short Xquik outages.
+- Actor runs survive restarts without repeats.
+- Stopped runs keep their rows & their report.
+- A run that can't start still explains itself.
+- Webhooks are signed & replay-safe.
+- Webhook deliveries retry until they land, for up to 7 days.
+- New events don't queue behind old retries.
+- Webhooks never go to private or local hosts.
+- Chat alerts arrive in order without hitting rate limits.
+- Problems on X's side are fixed before they reach your reads.
+- Support can see exactly what a request or run returned.
+
+### Built for agents
+
+- Actors accept input written for other Actors.
+- Every run says why it ended & whether to retry.
+
+### Rich data
+
+- Post rows carry note text, edits, Community Notes, reach labels & reply
+  controls.
+- Rows carry source apps, media counts & professional account data.
+- Media comes with variants, alt text, sizes & availability reasons.
+
+### Quality checks
+
+- Every field X shows is served, left out on purpose or proven absent.
+- Every read is checked live each hour.
+- Actor READMEs, schemas & real output name the same fields.
 
 ## How to send tweets to Discord
 
@@ -130,8 +195,7 @@ Its name starts with `x-monitor-`.
 1 call is the whole API. Each call starts or updates the monitor, charges the
 hours watched since the call before, & returns only what is new. No call charges
 an hour twice. A call that starts or updates a monitor ends fast, inside what
-Apify's MCP waits for. A stop takes about half a minute, because it collects the
-last events first.
+Apify's MCP waits for. A stop takes about half a minute & saves the last events.
 
 This input starts or continues a monitor.
 
@@ -294,8 +358,8 @@ for a run.
 
 ### Can I send keyword tweets to Discord?
 
-Yes. Add X searches to `searchTerms`. Each new tweet X's latest search shows for
-them reaches the channel.
+Yes. Add X searches to `searchTerms`. Each new tweet that matches them reaches
+the channel.
 
 ### Can I post to more than 1 channel?
 
@@ -310,8 +374,8 @@ then run again with the same input.
 ### What happens when I stop the monitor?
 
 The run stops every target & turns alerts off. It charges the hours watched
-until then. Then it waits about half a minute for the newest events & saves
-them, so none is left behind. Events already kept stay readable for 30 days.
+until then. It saves the newest events within about half a minute, so none is
+lost. Events already kept stay readable for 30 days.
 
 ### Can I use the API, schedules & integrations?
 

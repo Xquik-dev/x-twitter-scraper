@@ -1,19 +1,19 @@
 **English** ·
-[Español](README.es.md)
+[Español](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-quote-tweets-scraper/README.es.md)
 ·
-[Türkçe](README.tr.md)
+[Türkçe](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-quote-tweets-scraper/README.tr.md)
 ·
-[简体中文](README.zh-CN.md)
+[简体中文](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-quote-tweets-scraper/README.zh-CN.md)
 ·
-[日本語](README.ja.md)
+[日本語](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-quote-tweets-scraper/README.ja.md)
 ·
-[한국어](README.ko.md)
+[한국어](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-quote-tweets-scraper/README.ko.md)
 ·
-[Deutsch](README.de.md)
+[Deutsch](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-quote-tweets-scraper/README.de.md)
 ·
-[Français](README.fr.md)
+[Français](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-quote-tweets-scraper/README.fr.md)
 ·
-[Italiano](README.it.md)
+[Italiano](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-quote-tweets-scraper/README.it.md)
 
 [![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
@@ -52,6 +52,74 @@ You pay **$0.00015 per delivered row**, & Apify bills platform usage separately.
 - Duplicate removal before billing.
 - JSON, CSV, Excel, XML & RSS exports through Apify datasets.
 - Runs resume from saved state after an Apify migration.
+
+## What you get
+
+### Complete results
+
+- Each answer holds the fullest data X has for it.
+
+### Accurate rows
+
+- Language filters work for every language X tags.
+- Language, date & engagement filters hold on every row you get.
+- Reposts carry the full original text.
+- Every ID in a row stays exact.
+- Mentions, links, hashtags & highlights line up with the text.
+- Counts X didn't send are listed in `unknownCounts`, never shown as 0.
+- Verified badges match what `x.com` shows.
+- Rows hold public data only.
+- Quote searches return every real quote & nothing else.
+- Ads & promoted entries never reach your rows.
+
+### Fresh data
+
+- Reads keep working when X ships changes.
+
+### Speed
+
+- A slow X answer doesn't hold up your request.
+- Actors read many handles, posts & queries at once.
+- Reads finish the moment their rows arrive.
+- Stalled Actor calls recover on their own.
+
+### Fair billing
+
+- Bad input costs nothing, since it's refused before any read.
+- Actors charge only for delivered, unique, matching rows.
+- A restarted run never charges twice.
+- A spend cap becomes a row cap, & diagnostics still get written.
+- Small runs end with a tip that cuts cost.
+
+### Reliability
+
+- A one-off X failure doesn't fail your request.
+- A deadline returns the rows already found, with diagnostics.
+- Actors ride out short Xquik outages.
+- Actor runs survive restarts without repeats.
+- One bad row doesn't sink a batch.
+- Stopped runs keep their rows & their report.
+- A run that can't start still explains itself.
+- Problems on X's side are fixed before they reach your reads.
+- Support can see exactly what a request or run returned.
+
+### Built for agents
+
+- Actors accept input written for other Actors.
+- Output is ready for spreadsheets, with flat columns & engagement totals.
+- Every run says why it ended & whether to retry.
+
+### Rich data
+
+- Post rows carry note text, edits, Community Notes, reach labels & reply
+  controls.
+- Rows carry source apps, media counts & professional account data.
+- Media comes with variants, alt text, sizes & availability reasons.
+
+### Quality checks
+
+- Every field X shows is served, left out on purpose or proven absent.
+- Every read is checked live each hour.
 
 ## How to scrape quote tweets
 
@@ -101,8 +169,8 @@ Order, filters & caps go beside the posts.
 
 - `sort` is `latest` for the newest quotes first, or `top` for the quotes X
   ranks highest.
-- `includeReplies` keeps replies that quote the post, as X's Quotes view lists
-  them. It is on unless you turn it off.
+- `includeReplies` keeps replies that quote the post. It is on unless you turn
+  it off.
 - `uniqueAuthors` keeps each author's first quote of the run. The dataset then
   holds 1 row per author, not per quote. You pay for the rows delivered.
 - `maxItems` caps the whole run & `maxItemsPerTarget` caps each post.
@@ -202,8 +270,8 @@ when its divisor is missing or 0.
 
 2 limits come from X, & Xquik's X Quote Tweets Scraper states them plainly.
 
-- On a post with many quotes, X's search may stop before the oldest ones. A run
-  reads every quote X serves & stops there.
+- X may not serve every quote of a post. A run reads every quote X serves &
+  stops there.
 - `top` is X's ranking, not Xquik's. It is not a like count order. A later row
   can have more likes than an earlier one.
 
@@ -344,9 +412,8 @@ starts with for a full export.
 
 ### Why does a post with many quotes return fewer than its counter shows?
 
-On a post with many quotes, X's search may stop before the oldest ones. The run
-delivers every quote X serves. The counter also includes quotes from private or
-removed accounts.
+X may not serve every quote of a post. The run delivers every quote X serves.
+The counter also includes quotes from private or removed accounts.
 
 ### How do I get 1 row per person who quoted a post?
 

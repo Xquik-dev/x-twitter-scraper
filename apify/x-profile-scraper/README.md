@@ -1,19 +1,19 @@
 **English** ·
-[Español](README.es.md)
+[Español](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-profile-scraper/README.es.md)
 ·
-[Türkçe](README.tr.md)
+[Türkçe](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-profile-scraper/README.tr.md)
 ·
-[简体中文](README.zh-CN.md)
+[简体中文](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-profile-scraper/README.zh-CN.md)
 ·
-[日本語](README.ja.md)
+[日本語](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-profile-scraper/README.ja.md)
 ·
-[한국어](README.ko.md)
+[한국어](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-profile-scraper/README.ko.md)
 ·
-[Deutsch](README.de.md)
+[Deutsch](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-profile-scraper/README.de.md)
 ·
-[Français](README.fr.md)
+[Français](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-profile-scraper/README.fr.md)
 ·
-[Italiano](README.it.md)
+[Italiano](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-profile-scraper/README.it.md)
 
 [![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
@@ -98,6 +98,7 @@ Profile rows use `resultType: "profile"`. These are the main fields.
 | `subscribersCount`       | Subscriber count, when X sends it               |
 | `tipJar`                 | Public tipping links                            |
 | `protected`              | Whether the account protects its posts          |
+| `redirectsToUsername`    | Handle X redirects the profile to               |
 | `unavailable`            | Whether the account is unavailable              |
 | `sourceTarget`           | The handle, ID or URL you entered               |
 
@@ -120,6 +121,78 @@ Optional rows keep the Xquik REST response shape.
 
 Rows never include viewer-only state, such as whether you follow or block an
 account.
+
+## What you get
+
+### Complete results
+
+- Account history comes back complete, old posts included.
+- Profile posts without replies still keep the author's own threads.
+- Profile reads include the pinned post, flagged as pinned.
+- Follower & following exports return full lists.
+- Verified follower exports return full lists too.
+- Timelines page all the way to the last post.
+- Each answer holds the fullest data X has for it.
+
+### Accurate rows
+
+- Reposts carry the full original text.
+- Every ID in a row stays exact.
+- Mentions, links, hashtags & highlights line up with the text.
+- Verified badges match what `x.com` shows.
+- Rows hold public data only.
+- Ads & promoted entries never reach your rows.
+
+### Fresh data
+
+- Reads keep working when X ships changes.
+
+### Speed
+
+- A slow X answer doesn't hold up your request.
+- Actors read many handles, posts & queries at once.
+- Reads finish the moment their rows arrive.
+- Stalled Actor calls recover on their own.
+
+### Fair billing
+
+- Bad input costs nothing, since it's refused before any read.
+- Actors charge only for delivered, unique, matching rows.
+- A profile shared by several targets is billed once.
+- A restarted run never charges twice.
+- A spend cap becomes a row cap, & diagnostics still get written.
+- Small runs end with a tip that cuts cost.
+
+### Reliability
+
+- A one-off X failure doesn't fail your request.
+- A deadline returns the rows already found, with diagnostics.
+- Actors ride out short Xquik outages.
+- Actor runs survive restarts without repeats.
+- One bad row doesn't sink a batch.
+- Stopped runs keep their rows & their report.
+- A run that can't start still explains itself.
+- Problems on X's side are fixed before they reach your reads.
+- Support can see exactly what a request or run returned.
+
+### Built for agents
+
+- Actors accept input written for other Actors.
+- Output is ready for spreadsheets, with flat columns & engagement totals.
+- Every run says why it ended & whether to retry.
+
+### Rich data
+
+- Post rows carry note text, edits, Community Notes, reach labels & reply
+  controls.
+- Rows carry source apps, media counts & professional account data.
+- Media comes with variants, alt text, sizes & availability reasons.
+- Posts & bios can be translated into your language.
+
+### Quality checks
+
+- Every field X shows is served, left out on purpose or proven absent.
+- Every read is checked live each hour.
 
 ## How do I use X Profile Scraper to scrape profile data?
 
@@ -174,10 +247,9 @@ The run reads a repeated handle once.
 }
 ```
 
-`includeTweets` follows the profile's Posts tab. `includeReplies` follows its
-With Replies tab. `includeMedia` follows its Media tab. `includeHighlights` adds
-the posts on its Highlights tab, in X's order. A profile without highlights adds
-no rows.
+`includeTweets` adds the profile's posts. `includeReplies` adds its posts &
+replies. `includeMedia` adds its media posts. `includeHighlights` adds its
+highlighted posts, in X's order. A profile without highlights adds no rows.
 
 ### Keep only popular posts
 
@@ -313,10 +385,10 @@ The Input tab lists every option. Give at least 1 of `twitterHandles`,
 | `userIds`                      | Numeric X user IDs                                    |
 | `maxItems`                     | Cap on delivered rows across the whole run            |
 | `maxItemsPerTarget`            | Cap on rows for each profile or resource              |
-| `includeTweets`                | Add the Posts tab                                     |
-| `includeReplies`               | Add the With Replies tab                              |
-| `includeMedia`                 | Add the Media tab                                     |
-| `includeHighlights`            | Add the Highlights tab                                |
+| `includeTweets`                | Add the profile's posts                               |
+| `includeReplies`               | Add its posts & replies                               |
+| `includeMedia`                 | Add its media posts                                   |
+| `includeHighlights`            | Add its highlighted posts                             |
 | `includeLikes`                 | Add liked posts, which X hides from other accounts    |
 | `includeFollowers`             | Add followers                                         |
 | `includeFollowing`             | Add followed accounts                                 |

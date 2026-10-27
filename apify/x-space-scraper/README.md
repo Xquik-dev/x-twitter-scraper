@@ -1,19 +1,19 @@
 **English** ·
-[Español](README.es.md)
+[Español](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-space-scraper/README.es.md)
 ·
-[Türkçe](README.tr.md)
+[Türkçe](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-space-scraper/README.tr.md)
 ·
-[简体中文](README.zh-CN.md)
+[简体中文](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-space-scraper/README.zh-CN.md)
 ·
-[日本語](README.ja.md)
+[日本語](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-space-scraper/README.ja.md)
 ·
-[한국어](README.ko.md)
+[한국어](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-space-scraper/README.ko.md)
 ·
-[Deutsch](README.de.md)
+[Deutsch](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-space-scraper/README.de.md)
 ·
-[Français](README.fr.md)
+[Français](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-space-scraper/README.fr.md)
 ·
-[Italiano](README.it.md)
+[Italiano](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-space-scraper/README.it.md)
 
 [![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
@@ -44,6 +44,57 @@ bills platform usage separately.
   `includeReplay`.
 - Broadcasts by URL or ID, with title, state, times, watch counts & host.
 - Duplicate removal before billing. A Space that 2 search terms find is 1 row.
+
+## What you get
+
+### Complete results
+
+- Each answer holds the fullest data X has for it.
+
+### Accurate rows
+
+- Rows hold public data only.
+
+### Fresh data
+
+- Reads keep working when X ships changes.
+
+### Speed
+
+- A slow X answer doesn't hold up your request.
+- Actors read many handles, posts & queries at once.
+- Reads finish the moment their rows arrive.
+- Stalled Actor calls recover on their own.
+
+### Fair billing
+
+- Bad input costs nothing, since it's refused before any read.
+- Actors charge only for delivered, unique, matching rows.
+- A restarted run never charges twice.
+- A spend cap becomes a row cap, & diagnostics still get written.
+- Small runs end with a tip that cuts cost.
+
+### Reliability
+
+- A one-off X failure doesn't fail your request.
+- A deadline returns the rows already found, with diagnostics.
+- Actors ride out short Xquik outages.
+- Actor runs survive restarts without repeats.
+- One bad row doesn't sink a batch.
+- Stopped runs keep their rows & their report.
+- A run that can't start still explains itself.
+- Problems on X's side are fixed before they reach your reads.
+- Support can see exactly what a request or run returned.
+
+### Built for agents
+
+- Actors accept input written for other Actors.
+- Every run says why it ended & whether to retry.
+
+### Quality checks
+
+- Every field X shows is served, left out on purpose or proven absent.
+- Every read is checked live each hour.
 
 ## How to find X Spaces
 
@@ -82,22 +133,22 @@ come back here & press Try for free.
 }
 ```
 
-A search term finds the Spaces that matching posts share. It takes the operators
-X search takes.
+A search term finds the Spaces that match it. It takes the operators X search
+takes.
 
-| Goal                               | Search term        |
-| ---------------------------------- | ------------------ |
-| Spaces about a topic               | `bitcoin`          |
-| Spaces an account shares           | `from:solana`      |
-| Spaces under a hashtag             | `#AI`              |
-| Spaces in 1 language               | `startups lang:es` |
-| Spaces that well-liked posts share | `nba min_faves:50` |
+| Goal                      | Search term        |
+| ------------------------- | ------------------ |
+| Spaces about a topic      | `bitcoin`          |
+| Spaces an account shares  | `from:solana`      |
+| Spaces under a hashtag    | `#AI`              |
+| Spaces in 1 language      | `startups lang:es` |
+| Popular Spaces on a topic | `nba min_faves:50` |
 
-`queryType` picks which posts lead. `Latest` puts the newest first & `Top` the
+`queryType` picks the order. `Latest` puts the newest matches first & `Top` the
 most engaging.
 
-`Live` lists Spaces on air now & `Upcoming` lists scheduled ones. Both read X's
-own Spaces search, which matches words in Space titles & takes no operators.
+`Live` lists Spaces on air now & `Upcoming` lists scheduled ones. Both match
+words in Space titles & take no operators.
 
 ```json
 { "searchTerms": ["bitcoin"], "queryType": "Live" }
