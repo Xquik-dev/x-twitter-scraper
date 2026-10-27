@@ -305,7 +305,8 @@ Seite läuft nichts, & niemand muss etwas auf den Server einladen.
 
 Xquik erfasst einen neuen Tweet, eine Antwort, ein Zitat oder einen Repost eines
 beobachteten Accounts meist in weniger als einer Sekunde, nachdem X sie zeigt.
-Alerts gehen raus, sobald Events ankommen, & warten nie auf einen Run.
+Der Tweet erreicht Discord meist etwa eine Sekunde, nachdem X ihn zeigt. Alerts
+warten nie auf einen Run.
 
 ### Kann ich Tweets zu Stichwörtern an Discord senden?
 

@@ -387,8 +387,9 @@ Discord'a veya Telegram'a bildirim olarak ulaşır.
 
 Xquik, izlenen bir hesabın yeni tweet'ini, yanıtını, alıntısını, yeniden
 gönderisini veya profil değişikliğini, X gösterdikten sonra genellikle bir
-saniyeden kısa sürede yakalar. Bildirimler olaylar geldikçe gider ve hiçbir
-zaman bir çalıştırmayı beklemez.
+saniyeden kısa sürede yakalar. Bir tweet'in bildirimi genellikle X gösterdikten
+yaklaşık bir saniye sonra sana ulaşır. Bildirimler hiçbir zaman bir çalıştırmayı
+beklemez.
 
 ### Çalıştırma neden izleme için ücretli plan gerektiğini söylüyor?
 

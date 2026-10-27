@@ -299,9 +299,9 @@ parte non gira nulla, & nessuno deve invitare niente nel server.
 ### Quanto velocemente arrivano i tweet su Discord?
 
 Di solito Xquik rileva un nuovo tweet, una risposta, una citazione o un repost
-di un account sorvegliato in meno di un secondo da quando X lo mostra. Gli
-avvisi partono man mano che arrivano gli eventi & non aspettano mai
-un'esecuzione.
+di un account sorvegliato in meno di un secondo da quando X lo mostra. Di solito
+il tweet arriva su Discord circa un secondo dopo che X lo mostra. Gli avvisi non
+aspettano mai un'esecuzione.
 
 ### Posso inviare su Discord i tweet per parola chiave?
 
