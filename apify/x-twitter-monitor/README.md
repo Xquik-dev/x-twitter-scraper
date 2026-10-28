@@ -443,8 +443,8 @@ as alerts.
 ### How fast do alerts arrive?
 
 Xquik usually catches a new tweet, reply, quote, repost or profile change of a
-watched account in under a second after X shows it. Alerts go out as events
-arrive & never wait for a run.
+watched account in under a second after X shows it. A tweet's alert usually
+reaches you about a second after X shows it. Alerts never wait for a run.
 
 ### Why does the run say monitoring needs a paid plan?
 

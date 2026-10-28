@@ -485,8 +485,8 @@ correspondants arrivent sur Discord ou Telegram sous forme d'alertes.
 
 Xquik capte généralement un nouveau tweet, une réponse, une citation, un repost
 ou un changement de profil d'un compte surveillé en moins d'une seconde après
-son affichage sur X. Les alertes partent à mesure que les événements arrivent et
-n'attendent jamais un run.
+son affichage sur X. L'alerte d'un tweet vous parvient généralement environ une
+seconde après son affichage sur X. Les alertes n'attendent jamais un run.
 
 ### Pourquoi le run indique-t-il que la surveillance nécessite un plan payant ?
 

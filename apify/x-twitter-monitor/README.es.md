@@ -469,8 +469,8 @@ coinciden llegan a Discord o Telegram como alertas.
 
 Xquik normalmente detecta un tweet, una respuesta, una cita, un repost o un
 cambio de perfil nuevo de una cuenta vigilada en menos de un segundo después de
-que X lo muestra. Las alertas salen a medida que llegan los eventos y nunca
-esperan a una ejecución.
+que X lo muestra. La alerta de un tweet normalmente te llega cerca de un segundo
+después de que X lo muestra. Las alertas nunca esperan a una ejecución.
 
 ### ¿Por qué la ejecución dice que el monitoreo necesita un plan de pago?
 

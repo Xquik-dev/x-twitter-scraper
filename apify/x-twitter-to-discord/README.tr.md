@@ -390,7 +390,8 @@ gerekmez.
 
 Xquik, izlenen bir hesabın yeni tweet'ini, yanıtını, alıntısını veya yeniden
 gönderisini, X gösterdikten sonra genellikle bir saniyeden kısa sürede yakalar.
-Bildirimler olaylar geldikçe gider ve hiçbir zaman bir çalıştırmayı beklemez.
+Tweet genellikle X gösterdikten yaklaşık bir saniye sonra Discord'a ulaşır.
+Bildirimler hiçbir zaman bir çalıştırmayı beklemez.
 
 ### Anahtar kelime tweet'lerini Discord'a gönderebilir miyim?
 

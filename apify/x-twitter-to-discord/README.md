@@ -370,8 +370,8 @@ your side, & nobody needs to invite anything to the server.
 ### How fast do tweets reach Discord?
 
 Xquik usually catches a new tweet, reply, quote or repost of a watched account
-in under a second after X shows it. Alerts go out as events arrive & never wait
-for a run.
+in under a second after X shows it. The tweet usually reaches Discord about a
+second after X shows it. Alerts never wait for a run.
 
 ### Can I send keyword tweets to Discord?
 

@@ -406,8 +406,8 @@ de votre côté, et personne n'a besoin d'inviter quoi que ce soit sur le serveu
 
 Xquik capte généralement un nouveau tweet, une réponse, une citation ou un
 repost d'un compte surveillé en moins d'une seconde après son affichage sur X.
-Les alertes partent à mesure que les événements arrivent et n'attendent jamais
-un run.
+Le tweet arrive généralement sur Discord environ une seconde après son affichage
+sur X. Les alertes n'attendent jamais un run.
 
 ### Puis-je envoyer sur Discord des tweets par mot-clé ?
 

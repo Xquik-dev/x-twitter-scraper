@@ -460,8 +460,8 @@ arrivano su Discord o Telegram come avvisi.
 
 Di solito Xquik rileva un nuovo tweet, una risposta, una citazione, un repost o
 una modifica del profilo di un account sorvegliato in meno di un secondo da
-quando X lo mostra. Gli avvisi partono man mano che arrivano gli eventi & non
-aspettano mai un'esecuzione.
+quando X lo mostra. L'avviso di un tweet di solito ti arriva circa un secondo
+dopo che X lo mostra. Gli avvisi non aspettano mai un'esecuzione.
 
 ### Perché l'esecuzione dice che il monitoraggio richiede un piano a pagamento?
 
