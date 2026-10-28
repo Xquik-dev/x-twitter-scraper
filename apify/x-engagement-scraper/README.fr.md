@@ -23,8 +23,6 @@ de clé API X ni de connexion.
 
 ## Pourquoi utiliser X Engagement Scraper ?
 
-- **Vérifiez qui a reposté.** Sachez si chaque compte de `repostCheckUsers` a
-  reposté chaque post.
 - **Seulement les réponses utiles.** Choisissez les réponses directes ou
   imbriquées, une profondeur de réponse & une période.
 - **Des prospects parmi ceux qui repostent.** Filtrez-les par `minFollowers`,
@@ -101,6 +99,8 @@ de clé API X ni de connexion.
 - Les médias arrivent avec leurs variantes, leur texte alternatif, leurs tailles
   & les motifs de disponibilité.
 - Vous voyez quand chaque compte a reposté un post.
+- Vous voyez si chaque compte a répondu à un post, l'a reposté ou cité. Vous
+  voyez aussi s'il suit l'auteur ou fait partie d'une Communauté.
 
 ### Contrôles qualité
 

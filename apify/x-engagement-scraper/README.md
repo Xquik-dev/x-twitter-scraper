@@ -34,8 +34,6 @@ separately. You need no X API key or login.
 
 ## Why use X Engagement Scraper?
 
-- **Check who reposted.** Learn if each account in `repostCheckUsers` reposted
-  each post.
 - **Only the replies you need.** Choose direct or nested replies, a reply depth
   & a time window.
 - **Leads from reposters.** Filter reposters by `minFollowers`, `hasEmail` or
@@ -105,6 +103,8 @@ separately. You need no X API key or login.
 - Rows carry source apps, media counts & professional account data.
 - Media comes with variants, alt text, sizes & availability reasons.
 - You see when each account reposted a post.
+- You see if each account replied to, reposted or quoted a post. You also see if
+  it follows the author or is in a Community.
 
 ### Quality checks
 
@@ -119,6 +119,8 @@ separately. You need no X API key or login.
 - Quote posts with text, authors, media & metrics.
 - Retweeter profiles.
 - Conversation context around each source post.
+- Engagement checks that say whether named accounts replied, reposted, quoted or
+  follow the author.
 - Source post & engagement-type attribution.
 
 ## How to scrape X post engagement
@@ -174,7 +176,8 @@ The Actor reads these field names of other engagement Actors.
 - `category` maps to `engagementTypes`. `replies`, `retweets`, `info` &
   `checkRetweet` read as `replies`, `retweeters`, `tweet` & `repostCheck`.
 - `resultsPerCategory` maps to `maxItemsPerTarget`.
-- `retweetCheckUsername` maps to `repostCheckUsers`.
+- `retweetCheckUsername` maps to `repostCheckUsers`, the old name of
+  `checkAccounts`.
 
 A `category` that is another Actor's job, such as `followers` or `tweets`, stops
 the run. It reads & charges nothing. The message names the Actor to use. When
@@ -184,9 +187,9 @@ run log names the field that lost.
 ## Output
 
 Each row sets `resultType` to `tweet`, `replies`, `completeReplies`, `quotes`,
-`retweeters`, `favoriters`, `thread` or `repostCheck`. `sourceTarget` holds the
-source Tweet ID. Tweet & profile fields follow stable Xquik REST response
-shapes.
+`retweeters`, `favoriters`, `thread`, `engagementCheck` or `repostCheck`.
+`sourceTarget` holds the source Tweet ID. Tweet & profile fields follow stable
+Xquik REST response shapes.
 
 `completeReplies` keeps every returned row. The run report counts partial
 coverage in `incompleteTargets`. Filters run before billing.
@@ -244,25 +247,67 @@ Name a computed column in `fields` or `renameFields` to add it.
 `totalEngagement` is `null` for a row without those counts. A rate is `null`
 when its divisor is missing or 0.
 
-## Repost check
+## Engagement check
 
-Add `repostCheck` to `engagementTypes` & list accounts in `repostCheckUsers` to
-learn whether each account reposted each post.
+Add `engagementCheck` to `engagementTypes` & list accounts in `checkAccounts` to
+learn how each account engaged with each post.
 
 ```json
 {
   "tweetIds": ["2098439298617856319"],
-  "engagementTypes": ["repostCheck"],
-  "repostCheckUsers": ["discord", "nasa"]
+  "engagementTypes": ["engagementCheck"],
+  "checkAccounts": ["discord", "nasa"],
+  "engagementChecks": ["replied", "reposted", "quoted", "followsAuthor"],
+  "communityIds": ["1472105760389668865"]
 }
 ```
 
-Each check is 1 row with `isRetweeted`, `retweetedAt`, `retweetId`,
-`checkedPosts` & `complete`. Its `id` is `repostCheck:<post ID>:<account>`. A
-repost the check can't confirm reads as `false` with `complete: false`.
+Each account & post is 1 row. Its `id` is `engagementCheck:<post ID>:<account>`.
+`username` & `userId` name the account, & `tweetId` names the post. A row looks
+like this.
 
-A run of only `repostCheck` & `tweet` rows keeps your input order, with each
-post followed by its accounts as you listed them.
+```json
+{
+  "id": "engagementCheck:2098439298617856319:discord",
+  "resultType": "engagementCheck",
+  "sourceTarget": "2098439298617856319",
+  "tweetId": "2098439298617856319",
+  "userId": "3065618342",
+  "username": "discord",
+  "hasReplied": true,
+  "replyId": "2098441736214187523",
+  "isRetweeted": true,
+  "retweetId": "2098456494362460375",
+  "retweetedAt": "2026-09-11T16:59:50.000Z",
+  "complete": false,
+  "hasQuoted": false,
+  "quoteId": null,
+  "isFollowingAuthor": true,
+  "authorUsername": "OpenAI",
+  "communityMembership": { "1472105760389668865": false }
+}
+```
+
+- `hasReplied` says whether the account replied, & `replyId` names its reply.
+  `hasReplied` is `null` when X did not show every reply to that post.
+- `isRetweeted`, `retweetId` & `retweetedAt` say whether & when the account
+  reposted. `complete` says whether the repost answer is final. A repost the
+  check can't confirm reads as `false` with `complete: false`.
+- `hasQuoted` says whether the account quoted the post, & `quoteId` names its
+  quote.
+- `isFollowingAuthor` says whether the account follows `authorUsername`, the
+  author of the post.
+- `communityMembership` gives each ID in `communityIds` `true` or `false`, or
+  `null` when X has no such Community. Rows carry it only when you list IDs.
+
+Pick answers in `engagementChecks`. Each row holds only the fields of the
+answers you pick. A row costs $0.00015 whatever the number of checks in it. An
+account X can't find gets no row & no charge, & the run status counts it.
+
+`repostCheck` & `repostCheckUsers` still work. `repostCheck` gives the same row
+with only the repost fields, now with `username`. `repostCheckUsers` is the old
+name of `checkAccounts`. A run of only checks & `tweet` rows keeps your input
+order, with each post followed by its accounts as you listed them.
 
 ## Retweet timestamps
 

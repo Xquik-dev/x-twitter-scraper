@@ -61,8 +61,8 @@ biografías & comprueba quién transmite en vivo ahora.
 ### Resultados completos
 
 - El historial de la cuenta vuelve completo, incluidos los posts antiguos.
-- Al excluir las respuestas de los posts de un perfil, igual se conservan los
-  hilos del propio autor.
+- Las exportaciones de perfiles conservan cada post de los hilos del propio
+  autor.
 - Las lecturas de perfiles incluyen el post fijado, marcado como fijado.
 - Las exportaciones de seguidores & cuentas seguidas devuelven listas completas.
 - Las exportaciones de seguidores verificados también devuelven listas

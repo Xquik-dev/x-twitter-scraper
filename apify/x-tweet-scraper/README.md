@@ -78,7 +78,7 @@ with 50+ filters.
 - Large date ranges come back whole & fast.
 - Searches return every match, whatever operators you combine.
 - Account history comes back complete, old posts included.
-- Profile posts without replies still keep the author's own threads.
+- Profile exports keep every post of the author's own threads.
 - Profile reads include the pinned post, flagged as pinned.
 - Top tweet lists come back reliably.
 - Filtered pages come back full until the results run out.
@@ -99,7 +99,7 @@ with 50+ filters.
 - Rows hold public data only.
 - Quote searches return every real quote & nothing else.
 - Reply exports hold only direct replies, in a proven order.
-- Newest-first results stay in true date order across pages.
+- Newest-first results come back in date order.
 - Searches accept queries as you'd type them on X.
 - Place searches work with names in 6 languages.
 - A search that can't run fails at once & says how to fix it.

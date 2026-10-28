@@ -254,9 +254,9 @@ dataset, so you never pay for them.
 }
 ```
 
-X checks up to 10 matching accounts per name. Each member found is 1
-`communityMember` row with its `communityRole`. A run with `memberNames` reads
-no other resource unless `resources` names it.
+Each name you send finds up to 10 members whose name or username starts with it.
+Each member found is 1 `communityMember` row with its `communityRole`. A run
+with `memberNames` reads no other resource unless `resources` names it.
 
 ### Find Communities by keyword or topic
 

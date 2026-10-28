@@ -60,7 +60,7 @@ live sendet.
 ### Vollständige Ergebnisse
 
 - Der Account-Verlauf kommt vollständig zurück, alte Posts inklusive.
-- Profil-Posts ohne Antworten behalten trotzdem die eigenen Threads des Autors.
+- Profil-Exporte behalten jeden Post der eigenen Threads des Autors.
 - Profilabrufe enthalten den angehefteten Post, als angeheftet markiert.
 - Exporte von Followern & gefolgten Accounts liefern vollständige Listen.
 - Auch Exporte verifizierter Follower liefern vollständige Listen.

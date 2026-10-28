@@ -69,7 +69,7 @@ post & query di ricerca con oltre 50 filtri.
 - I grandi intervalli di date tornano completi & in fretta.
 - Le ricerche restituiscono ogni risultato, qualunque operatore combini.
 - La cronologia dell'account torna completa, compresi i post vecchi.
-- I post del profilo senza risposte conservano comunque i thread dell'autore.
+- Le esportazioni del profilo conservano ogni post dei thread dell'autore.
 - Le letture dei profili includono il post fissato, segnato come fissato.
 - Gli elenchi dei migliori tweet tornano in modo affidabile.
 - Le pagine filtrate tornano piene finché i risultati non finiscono.
@@ -93,8 +93,7 @@ post & query di ricerca con oltre 50 filtri.
 - Le ricerche di citazioni restituiscono ogni citazione reale & nient'altro.
 - Gli export delle risposte contengono solo risposte dirette, in un ordine
   verificato.
-- I risultati dal più recente restano in ordine cronologico corretto da una
-  pagina all'altra.
+- I risultati dal più recente arrivano in ordine cronologico.
 - Le ricerche accettano le query come le scriveresti su X.
 - Le ricerche di luoghi funzionano con nomi in 6 lingue.
 - Una ricerca che non può partire fallisce subito & dice come correggerla.

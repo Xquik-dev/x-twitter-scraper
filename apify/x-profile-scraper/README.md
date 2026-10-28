@@ -67,7 +67,7 @@ bios & checks who broadcasts live now.
 ### Complete results
 
 - Account history comes back complete, old posts included.
-- Profile posts without replies still keep the author's own threads.
+- Profile exports keep every post of the author's own threads.
 - Profile reads include the pinned post, flagged as pinned.
 - Follower & following exports return full lists.
 - Verified follower exports return full lists too.
@@ -125,6 +125,7 @@ bios & checks who broadcasts live now.
 - Rows carry source apps, media counts & professional account data.
 - Media comes with variants, alt text, sizes & availability reasons.
 - Posts & bios can be translated into your language.
+- Account checks say if each account is active, protected, suspended or missing.
 
 ### Quality checks
 
@@ -187,6 +188,7 @@ Optional rows keep the Xquik REST response shape.
 | `profileVerifiedFollower` | `includeVerifiedFollowers` | Verified follower |
 | `profileBioTranslation`   | `translateBioTo`           | Translated bio    |
 | `profileLive`             | `checkLiveNow`             | Checked profile   |
+| `accountStatus`           | `mode: "accountStatus"`    | Named account     |
 
 Rows never include viewer-only state, such as whether you follow or block an
 account.
@@ -298,6 +300,18 @@ Each check is 1 `profileLive` row with `live`, `userId`, `userName` &
 `broadcast`. `broadcast` holds the profile's latest broadcast, live or ended, or
 null. A missing profile adds no row.
 
+### Check if accounts are suspended
+
+```json
+{ "twitterHandles": ["nike", "adidas", "puma"], "mode": "accountStatus" }
+```
+
+Each account is 1 `accountStatus` row at $0.00015, even when X shows no profile.
+`accountStatus` is `active`, `suspended` or `not_found`. An active row holds the
+full profile & `protected`. A suspended or missing row holds only
+`accountStatus`, `resultType` & `sourceTarget`. This mode adds no posts,
+followers or other rows.
+
 ## Task examples
 
 Choose from 50 public tasks. Each has a bounded input & a matching dataset view.
@@ -380,6 +394,7 @@ The Input tab lists every option. Give at least 1 of `twitterHandles`,
 | `twitterHandles`               | Handles, with or without `@`                          |
 | `startUrls`                    | Profile URLs on `x.com` or `twitter.com`              |
 | `userIds`                      | Numeric X user IDs                                    |
+| `mode`                         | `profiles`, or `accountStatus` for 1 status row each  |
 | `maxItems`                     | Cap on delivered rows across the whole run            |
 | `maxItemsPerTarget`            | Cap on rows for each profile or resource              |
 | `includeTweets`                | Add the profile's posts                               |

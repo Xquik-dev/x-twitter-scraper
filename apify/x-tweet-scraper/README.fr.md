@@ -71,7 +71,7 @@ plus de 50 filtres.
 - Les recherches renvoient chaque résultat, quels que soient les opérateurs que
   vous combinez.
 - L'historique d'un compte revient complet, anciens posts compris.
-- Les posts de profil sans réponses gardent quand même les fils de l'auteur.
+- Les exports de profil gardent chaque post des fils de l'auteur.
 - Les lectures de profil incluent le post épinglé, marqué comme épinglé.
 - Les listes de meilleurs tweets reviennent de façon fiable.
 - Les pages filtrées reviennent pleines jusqu'à épuisement des résultats.
@@ -97,8 +97,7 @@ plus de 50 filtres.
 - Les recherches de citations renvoient chaque vraie citation & rien d'autre.
 - Les exports de réponses contiennent seulement les réponses directes, dans un
   ordre vérifié.
-- Les résultats du plus récent au plus ancien gardent le vrai ordre des dates
-  d'une page à l'autre.
+- Les résultats du plus récent au plus ancien arrivent dans l'ordre des dates.
 - Les recherches acceptent les requêtes telles que vous les taperiez sur X.
 - Les recherches de lieux fonctionnent avec des noms en 6 langues.
 - Une recherche impossible à lancer échoue aussitôt & dit comment la corriger.

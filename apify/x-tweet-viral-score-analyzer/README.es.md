@@ -70,8 +70,7 @@ visualizaciones. No reproduce la forma en que X ordena los posts.
   el texto.
 - Las insignias de verificación coinciden con lo que muestra `x.com`.
 - Las filas solo contienen datos públicos.
-- Los resultados con los más recientes primero mantienen el orden real por fecha
-  entre páginas.
+- Los resultados con los más recientes primero llegan en orden por fecha.
 - Las búsquedas aceptan consultas tal como las escribirías en X.
 - Las búsquedas de lugares funcionan con nombres en 6 idiomas.
 - Una búsqueda que no puede ejecutarse falla de inmediato & dice cómo

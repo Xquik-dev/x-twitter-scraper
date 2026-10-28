@@ -58,8 +58,8 @@ biyografileri çevirir & kimin şu an canlı yayında olduğunu kontrol eder.
 ### Eksiksiz sonuçlar
 
 - Hesap geçmişi eski gönderiler dahil eksiksiz gelir.
-- Yanıtları içermeyen profil gönderileri, yazarın kendi gönderi dizilerini yine
-  de korur.
+- Profil dışa aktarımları, yazarın kendi gönderi dizilerindeki her gönderiyi
+  korur.
 - Profil okumaları sabitlenmiş gönderiyi de içerir & onu sabitlenmiş olarak
   işaretler.
 - Takipçi & takip edilen dışa aktarımları tam listeler döndürür.

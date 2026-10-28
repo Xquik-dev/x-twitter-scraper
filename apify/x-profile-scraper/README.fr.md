@@ -61,7 +61,7 @@ en direct en ce moment.
 ### Résultats complets
 
 - L'historique d'un compte revient complet, anciens posts compris.
-- Les posts de profil sans réponses gardent quand même les fils de l'auteur.
+- Les exports de profil gardent chaque post des fils de l'auteur.
 - Les lectures de profil incluent le post épinglé, marqué comme épinglé.
 - Les exports d'abonnés & d'abonnements renvoient des listes complètes.
 - Les exports d'abonnés certifiés renvoient aussi des listes complètes.

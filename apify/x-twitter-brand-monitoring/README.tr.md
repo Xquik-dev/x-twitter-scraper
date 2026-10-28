@@ -69,7 +69,7 @@ biriktir.
 - Bahsetmeler, bağlantılar, hashtag'ler & vurgular metindeki yerleriyle eşleşir.
 - Onay rozetleri `x.com` üzerinde görünenle aynıdır.
 - Satırlar yalnızca herkese açık veri tutar.
-- En yeniden başlayan sonuçlar sayfalar boyunca gerçek tarih sırasında kalır.
+- En yeniden başlayan sonuçlar tarih sırasıyla gelir.
 - Aramalar sorguları X'te yazdığın gibi kabul eder.
 - Yer aramaları 6 dildeki adlarla çalışır.
 - Çalışamayan bir arama hemen hata verir & nasıl düzelteceğini söyler.

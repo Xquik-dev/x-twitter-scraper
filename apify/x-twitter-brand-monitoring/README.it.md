@@ -69,8 +69,7 @@ dopo esecuzione.
 - Menzioni, link, hashtag & evidenziazioni restano allineati al testo.
 - I badge di verifica corrispondono a quelli che mostra `x.com`.
 - Le righe contengono solo dati pubblici.
-- I risultati dal più recente restano in ordine cronologico corretto da una
-  pagina all'altra.
+- I risultati dal più recente arrivano in ordine cronologico.
 - Le ricerche accettano le query come le scriveresti su X.
 - Le ricerche di luoghi funzionano con nomi in 6 lingue.
 - Una ricerca che non può partire fallisce subito & dice come correggerla.

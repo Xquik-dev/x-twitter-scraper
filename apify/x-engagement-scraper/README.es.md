@@ -23,8 +23,6 @@ iniciar sesión.
 
 ## ¿Por qué usar X Engagement Scraper?
 
-- **Comprueba quién hizo repost.** Descubre si cada cuenta de `repostCheckUsers`
-  hizo repost de cada post.
 - **Solo las respuestas que necesitas.** Elige respuestas directas o anidadas,
   una profundidad de respuesta & un rango de tiempo.
 - **Clientes potenciales entre quienes hicieron repost.** Filtra a esas cuentas
@@ -102,6 +100,8 @@ iniciar sesión.
 - El contenido multimedia trae variantes, texto alternativo, tamaños & motivos
   de disponibilidad.
 - Ves cuándo cada cuenta hizo repost de un post.
+- Ves si cada cuenta respondió, hizo repost o citó un post. También ves si sigue
+  al autor o está en una Comunidad.
 
 ### Controles de calidad
 

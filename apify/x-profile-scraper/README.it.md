@@ -58,7 +58,7 @@ verificati. Traduce anche le bio & verifica chi è in diretta ora.
 ### Risultati completi
 
 - La cronologia dell'account torna completa, compresi i post vecchi.
-- I post del profilo senza risposte conservano comunque i thread dell'autore.
+- Le esportazioni del profilo conservano ogni post dei thread dell'autore.
 - Le letture dei profili includono il post fissato, segnato come fissato.
 - Gli export di follower & following restituiscono elenchi completi.
 - Anche gli export dei follower verificati restituiscono elenchi completi.

@@ -22,8 +22,6 @@ né il login.
 
 ## Perché usare X Engagement Scraper?
 
-- **Controlla chi ha fatto repost.** Scopri se ogni account in
-  `repostCheckUsers` ha fatto repost di ogni post.
 - **Solo le risposte che ti servono.** Scegli risposte dirette o annidate, una
   profondità delle risposte & una finestra temporale.
 - **Lead da chi fa repost.** Filtra chi fa repost per `minFollowers`, `hasEmail`
@@ -99,6 +97,8 @@ né il login.
 - I media arrivano con varianti, testo alternativo, dimensioni & motivi di
   disponibilità.
 - Vedi quando ogni account ha fatto repost di un post.
+- Vedi se ogni account ha risposto a un post, ne ha fatto repost o l'ha citato.
+  Vedi anche se segue l'autore o fa parte di una Community.
 
 ### Controlli di qualità
 

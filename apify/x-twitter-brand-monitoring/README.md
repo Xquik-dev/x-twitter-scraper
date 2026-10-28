@@ -78,7 +78,7 @@ how customers talk about you from run to run.
 - Mentions, links, hashtags & highlights line up with the text.
 - Verified badges match what `x.com` shows.
 - Rows hold public data only.
-- Newest-first results stay in true date order across pages.
+- Newest-first results come back in date order.
 - Searches accept queries as you'd type them on X.
 - Place searches work with names in 6 languages.
 - A search that can't run fails at once & says how to fix it.

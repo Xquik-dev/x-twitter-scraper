@@ -73,8 +73,8 @@ kabul eder.
 - Geniş tarih aralıkları eksiksiz & hızlı gelir.
 - Hangi operatörleri birleştirirsen birleştir, aramalar her eşleşmeyi döndürür.
 - Hesap geçmişi eski gönderiler dahil eksiksiz gelir.
-- Yanıtları içermeyen profil gönderileri, yazarın kendi gönderi dizilerini yine
-  de korur.
+- Profil dışa aktarımları, yazarın kendi gönderi dizilerindeki her gönderiyi
+  korur.
 - Profil okumaları sabitlenmiş gönderiyi de içerir & onu sabitlenmiş olarak
   işaretler.
 - En popüler gönderi listeleri güvenilir şekilde gelir.
@@ -97,7 +97,7 @@ kabul eder.
 - Alıntı aramaları her gerçek alıntıyı döndürür, başka bir şey döndürmez.
 - Yanıt dışa aktarımları, kanıtlanmış bir sırayla yalnızca doğrudan yanıtları
   tutar.
-- En yeniden başlayan sonuçlar sayfalar boyunca gerçek tarih sırasında kalır.
+- En yeniden başlayan sonuçlar tarih sırasıyla gelir.
 - Aramalar sorguları X'te yazdığın gibi kabul eder.
 - Yer aramaları 6 dildeki adlarla çalışır.
 - Çalışamayan bir arama hemen hata verir & nasıl düzelteceğini söyler.

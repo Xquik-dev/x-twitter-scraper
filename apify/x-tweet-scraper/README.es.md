@@ -70,8 +70,8 @@ IDs de Listas, IDs de posts & consultas de búsqueda con más de 50 filtros.
 - Las búsquedas devuelven todas las coincidencias, sin importar qué operadores
   combines.
 - El historial de la cuenta vuelve completo, incluidos los posts antiguos.
-- Al excluir las respuestas de los posts de un perfil, igual se conservan los
-  hilos del propio autor.
+- Las exportaciones de perfiles conservan cada post de los hilos del propio
+  autor.
 - Las lecturas de perfiles incluyen el post fijado, marcado como fijado.
 - Las listas de posts más destacados vuelven de forma confiable.
 - Las páginas filtradas vuelven llenas hasta que se acaban los resultados.
@@ -97,8 +97,7 @@ IDs de Listas, IDs de posts & consultas de búsqueda con más de 50 filtros.
 - Las búsquedas de citas devuelven todas las citas reales & nada más.
 - Las exportaciones de respuestas solo traen respuestas directas, en un orden
   comprobado.
-- Los resultados con los más recientes primero mantienen el orden real por fecha
-  entre páginas.
+- Los resultados con los más recientes primero llegan en orden por fecha.
 - Las búsquedas aceptan consultas tal como las escribirías en X.
 - Las búsquedas de lugares funcionan con nombres en 6 idiomas.
 - Una búsqueda que no puede ejecutarse falla de inmediato & dice cómo

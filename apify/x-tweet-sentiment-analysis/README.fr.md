@@ -68,8 +68,7 @@ Séparez les réactions fortes des mentions en passant.
   endroit du texte.
 - Les badges de certification correspondent à ce qu'affiche `x.com`.
 - Les lignes ne contiennent que des données publiques.
-- Les résultats du plus récent au plus ancien gardent le vrai ordre des dates
-  d'une page à l'autre.
+- Les résultats du plus récent au plus ancien arrivent dans l'ordre des dates.
 - Les recherches acceptent les requêtes telles que vous les taperiez sur X.
 - Les recherches de lieux fonctionnent avec des noms en 6 langues.
 - Une recherche impossible à lancer échoue aussitôt & dit comment la corriger.

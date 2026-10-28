@@ -22,8 +22,6 @@ anahtarına veya girişe ihtiyacın yok.
 
 ## Neden X Engagement Scraper kullanmalısın?
 
-- **Kimin yeniden gönderdiğini kontrol et.** `repostCheckUsers` içindeki her
-  hesabın her gönderiyi yeniden gönderip göndermediğini öğren.
 - **Yalnızca ihtiyacın olan yanıtlar.** Doğrudan veya iç içe yanıtları, bir
   yanıt derinliğini & bir zaman aralığını seç.
 - **Yeniden gönderenlerden potansiyel müşteriler.** Yeniden gönderenleri
@@ -99,6 +97,9 @@ anahtarına veya girişe ihtiyacın yok.
 - Medya varyantlar, alternatif metin, boyutlar & kullanılabilirlik nedenleriyle
   gelir.
 - Her hesabın bir gönderiyi ne zaman yeniden gönderdiğini görürsün.
+- Her hesabın bir gönderiyi yanıtlayıp yanıtlamadığını, yeniden gönderip
+  göndermediğini veya alıntılayıp alıntılamadığını görürsün. Yazarı takip edip
+  etmediğini veya bir Toplulukta olup olmadığını da görürsün.
 
 ### Kalite kontrolleri
 

@@ -69,7 +69,7 @@ Suchanfragen mit über 50 Filtern.
 - Große Datumsbereiche kommen vollständig & schnell zurück.
 - Suchen liefern jeden Treffer, egal welche Operatoren du kombinierst.
 - Der Account-Verlauf kommt vollständig zurück, alte Posts inklusive.
-- Profil-Posts ohne Antworten behalten trotzdem die eigenen Threads des Autors.
+- Profil-Exporte behalten jeden Post der eigenen Threads des Autors.
 - Profilabrufe enthalten den angehefteten Post, als angeheftet markiert.
 - Listen der Top-Tweets kommen zuverlässig zurück.
 - Gefilterte Seiten kommen voll zurück, bis die Ergebnisse ausgehen.
@@ -94,8 +94,7 @@ Suchanfragen mit über 50 Filtern.
 - Zitat-Suchen liefern jedes echte Zitat & sonst nichts.
 - Antwort-Exporte enthalten nur direkte Antworten, in einer geprüften
   Reihenfolge.
-- Ergebnisse mit den neuesten zuerst bleiben über alle Seiten hinweg in echter
-  Datumsreihenfolge.
+- Ergebnisse mit den neuesten zuerst kommen in Datumsreihenfolge zurück.
 - Suchen akzeptieren Anfragen so, wie du sie auf X eintippen würdest.
 - Ortssuchen funktionieren mit Namen in 6 Sprachen.
 - Eine Suche, die nicht laufen kann, schlägt sofort fehl & sagt, wie du sie

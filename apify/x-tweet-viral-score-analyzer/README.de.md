@@ -70,8 +70,7 @@ rankt.
   im Text.
 - Verifizierungs-Badges stimmen mit dem überein, was `x.com` zeigt.
 - Datensätze enthalten nur öffentliche Daten.
-- Ergebnisse mit den neuesten zuerst bleiben über alle Seiten hinweg in echter
-  Datumsreihenfolge.
+- Ergebnisse mit den neuesten zuerst kommen in Datumsreihenfolge zurück.
 - Suchen akzeptieren Anfragen so, wie du sie auf X eintippen würdest.
 - Ortssuchen funktionieren mit Namen in 6 Sprachen.
 - Eine Suche, die nicht laufen kann, schlägt sofort fehl & sagt, wie du sie
