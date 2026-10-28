@@ -85,7 +85,7 @@ entregada**, y Apify factura aparte el uso de la plataforma.
 
 ### Datos detallados
 
-- Los posts rastreados muestran el cambio de cada conteo desde una ejecución anterior.
+- Cada fila de captura incluye el cambio de cada conteo desde una ejecución anterior.
 
 ### Controles de calidad
 
@@ -174,6 +174,8 @@ Apify. Pasa el `defaultDatasetId` de la última ejecución como
 `previousDatasetId`. La primera captura se sigue arrastrando, así que
 `changeSinceFirst` sigue contando desde el día 1. Un post que faltó en la última
 ejecución empieza un nuevo `firstSnapshot` en la siguiente.
+
+Si una ejecución no guarda capturas, pasa el dataset de la ejecución anterior.
 
 ## Salida
 

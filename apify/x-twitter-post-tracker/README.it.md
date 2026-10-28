@@ -87,7 +87,7 @@ consegnata**, & Apify fattura a parte l'uso della piattaforma.
 
 ### Dati dettagliati
 
-- I post monitorati mostrano la variazione di ogni conteggio rispetto a un'esecuzione precedente.
+- Ogni riga di rilevazione contiene la variazione di ogni conteggio rispetto a un'esecuzione precedente.
 
 ### Controlli di qualità
 
@@ -176,6 +176,8 @@ Apify. Passa il `defaultDatasetId` dell'ultima esecuzione come
 `previousDatasetId`. La prima rilevazione continua a passare avanti, quindi
 `changeSinceFirst` continua a contare dal giorno 1. Un post assente dall'ultima
 esecuzione avvia un nuovo `firstSnapshot` in quella successiva.
+
+Se un'esecuzione non salva rilevazioni, passa il dataset dell'esecuzione precedente.
 
 ## Output
 

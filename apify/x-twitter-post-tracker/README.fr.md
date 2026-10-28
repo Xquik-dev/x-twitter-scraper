@@ -86,7 +86,7 @@ l'évolution depuis le relevé précédent et depuis le premier. Vous payez
 
 ### Données détaillées
 
-- Les posts suivis affichent l'évolution de chaque compteur depuis une exécution précédente.
+- Chaque ligne de relevé contient l'évolution de chaque compteur depuis un run précédent.
 
 ### Contrôles qualité
 
@@ -174,6 +174,8 @@ chaque run au précédent, démarrez les runs avec l'API Apify. Passez le
 est toujours reporté, donc `changeSinceFirst` continue de compter depuis le
 jour 1. Un post absent du dernier run démarre un nouveau `firstSnapshot` au run
 suivant.
+
+Si un run n'enregistre aucun relevé, passez le dataset du run précédent.
 
 ## Sortie
 

@@ -93,7 +93,7 @@ holds the change since the previous snapshot & since the first one. You pay
 
 ### Rich data
 
-- Tracked posts show each count's change since an earlier run.
+- Each snapshot row holds every count's change since an earlier run.
 
 ### Quality checks
 
@@ -176,6 +176,8 @@ run with the one before, start runs with the Apify API. Pass the last run's
 `defaultDatasetId` as `previousDatasetId`. The first snapshot still carries
 forward, so `changeSinceFirst` keeps counting from day 1. A post missing from
 the last run starts a new `firstSnapshot` in the next one.
+
+If a run saves no snapshots, pass the dataset of the run before it.
 
 ## Output
 

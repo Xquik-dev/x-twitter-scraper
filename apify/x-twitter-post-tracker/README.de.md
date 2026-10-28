@@ -84,7 +84,7 @@ Snapshot**, & Apify berechnet die Plattformnutzung separat.
 
 ### Umfangreiche Daten
 
-- Verfolgte Posts zeigen die Änderung jeder Zahl seit einem früheren Lauf.
+- Jede Snapshot-Zeile enthält die Änderung jeder Zahl seit einem früheren Run.
 
 ### Qualitätsprüfungen
 
@@ -169,6 +169,8 @@ mit dem vorherigen zu vergleichen, starte Runs über die Apify-API. Übergib die
 `defaultDatasetId` des letzten Runs als `previousDatasetId`. Der erste Snapshot
 wird weiter mitgeführt, also zählt `changeSinceFirst` weiter ab Tag 1. Ein Post,
 der im letzten Run fehlte, beginnt im nächsten einen neuen `firstSnapshot`.
+
+Speichert ein Run keine Snapshots, übergib das Dataset des Runs davor.
 
 ## Ausgabe
 

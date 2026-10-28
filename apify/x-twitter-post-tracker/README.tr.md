@@ -88,7 +88,7 @@ ayrıca faturalandırır.
 
 ### Zengin veri
 
-- Takip edilen gönderiler, her sayının önceki bir çalıştırmadan bu yana değişimini gösterir.
+- Her anlık görüntü satırı, her sayının önceki bir çalıştırmadan bu yana değişimini içerir.
 
 ### Kalite kontrolleri
 
@@ -176,6 +176,8 @@ karşılaştırır. Her çalıştırmayı bir öncekiyle karşılaştırmak iste
 değerini `previousDatasetId` olarak ver. İlk anlık görüntü yine taşınır, bu
 yüzden `changeSinceFirst` 1. günden saymaya devam eder. Son çalıştırmada olmayan
 bir gönderi, sonrakinde yeni bir `firstSnapshot` başlatır.
+
+Bir çalıştırma hiç anlık görüntü kaydetmezse, ondan önceki çalıştırmanın veri kümesini ver.
 
 ## Çıktı
 

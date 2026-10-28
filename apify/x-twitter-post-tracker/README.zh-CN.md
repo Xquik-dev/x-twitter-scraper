@@ -67,7 +67,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 ### 丰富数据
 
-- 跟踪的帖子会显示每项计数相比上一次运行的变化。
+- 每行快照都包含每项计数相比上一次运行的变化。
 
 ### 质量检查
 
@@ -136,6 +136,8 @@ Apify [定时调度](https://docs.apify.com/platform/schedules)按 cron 启动 A
 4. 把 `previousDatasetId` 设为第一次运行的数据集。
 
 之后每次定时运行都会把计数与该数据集比较。要让每次运行与上一次比较，请通过 Apify API 启动运行。把上一次运行的 `defaultDatasetId` 作为 `previousDatasetId` 传入。第一次快照仍会延续，所以 `changeSinceFirst` 会从第 1 天起持续累计。上一次运行中缺失的帖子会在下一次运行中开始新的 `firstSnapshot`。
+
+如果某次运行没有保存任何快照，请传入它之前那次运行的数据集。
 
 ## 输出
 
