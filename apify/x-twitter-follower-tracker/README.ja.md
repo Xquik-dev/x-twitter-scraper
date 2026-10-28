@@ -57,7 +57,7 @@ Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービス�
 次の入力はそのままコピーできます。
 
 ```json
-{ "twitterHandles": ["xquikcom"], "telegram": true }
+{ "twitterHandles": ["NASA"], "telegram": true }
 ```
 
 ```json
@@ -88,7 +88,7 @@ API全体が1回の呼び出しです。各呼び出しはモニターを開始�
 次の入力でモニターを開始または継続します。
 
 ```json
-{ "twitterHandles": ["xquikcom"], "monitorName": "agent-demo" }
+{ "twitterHandles": ["NASA"], "monitorName": "agent-demo" }
 ```
 
 実行のデータセットには、新しいイベントのあとに、`resultType` が `status` の行が1行入ります。その `state` はモニターが監視中かどうかを、`nextStep` は次にすることを示します。モニターを確認するには、同じ入力でActorをもう一度呼び出します。何も変わらず、課金はすでに監視した時間だけです。

@@ -86,7 +86,7 @@ las alertas llegan a ese chat. El formulario oculta los eventos de tweets de X
 Estas entradas están listas para copiar.
 
 ```json
-{ "twitterHandles": ["xquikcom"], "telegram": true }
+{ "twitterHandles": ["NASA"], "telegram": true }
 ```
 
 ```json
@@ -131,7 +131,7 @@ eventos.
 Esta entrada inicia o continúa un monitor.
 
 ```json
-{ "twitterHandles": ["xquikcom"], "monitorName": "agent-demo" }
+{ "twitterHandles": ["NASA"], "monitorName": "agent-demo" }
 ```
 
 El dataset de la ejecución contiene los eventos nuevos y luego 1 fila con

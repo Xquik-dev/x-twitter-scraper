@@ -57,7 +57,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 以下输入可直接复制。
 
 ```json
-{ "twitterHandles": ["xquikcom"], "telegram": true }
+{ "twitterHandles": ["NASA"], "telegram": true }
 ```
 
 ```json
@@ -88,7 +88,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 以下输入会启动或继续一个监控。
 
 ```json
-{ "twitterHandles": ["xquikcom"], "monitorName": "agent-demo" }
+{ "twitterHandles": ["NASA"], "monitorName": "agent-demo" }
 ```
 
 本次运行的数据集先列出新事件，再列出 1 行 `resultType` 为 `status` 的数据。其中 `state` 说明监控是否在运行，`nextStep` 说明下一步该做什么。要检查监控，用相同的输入再次调用该 Actor。这不会改变任何设置，只对已经监控的小时数收费。

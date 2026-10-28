@@ -143,7 +143,7 @@ works.
 These inputs are ready to copy.
 
 ```json
-{ "twitterHandles": ["xquikcom"], "telegram": true }
+{ "twitterHandles": ["NASA"], "telegram": true }
 ```
 
 ```json
@@ -184,7 +184,7 @@ Apify's MCP waits for. A stop takes about half a minute & saves the last events.
 This input starts or continues a monitor.
 
 ```json
-{ "twitterHandles": ["xquikcom"], "monitorName": "agent-demo" }
+{ "twitterHandles": ["NASA"], "monitorName": "agent-demo" }
 ```
 
 The run's dataset holds the new events, then 1 row with `resultType` `status`.
