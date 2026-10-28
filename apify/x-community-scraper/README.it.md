@@ -29,22 +29,6 @@ loro URL o ID. Restituisce informazioni, post, media, risultati per parola
 chiave, membri & moderatori di ogni community. Trova anche le community per
 parola chiave o argomento, & elenca quelle che X suggerisce.
 
-### Funzionalità principali
-
-- Leggi molte community & risorse in 1 esecuzione.
-- Ottieni le informazioni della community con regole, domanda di adesione,
-  creatore, amministratore & argomento.
-- Raccogli i post dal più recente, oppure i post Top che X classifica più in
-  alto.
-- Raccogli la scheda Media, oppure cerca per parola chiave nei post di una
-  community.
-- Esporta membri & moderatori, oppure trova membri per nome.
-- Trova community per parola chiave o argomento, con i loro record completi.
-- Filtra i post per data, lingua, media & engagement.
-- Filtra i membri per dimensione del pubblico, età dell'account & verifica.
-- Filtri & rimozione dei duplicati agiscono prima della fatturazione.
-- Le esecuzioni conservano righe consegnate & progressi quando Apify le riavvia.
-
 ### Casi d'uso
 
 - Crea elenchi di lead dai membri di una community di nicchia.
@@ -56,7 +40,90 @@ parola chiave o argomento, & elenca quelle che X suggerisce.
 - Trova i moderatori & i membri più seguiti di una community.
 - Raccogli post con immagini o video per la ricerca creativa.
 
-### Quali dati può estrarre X Community Scraper?
+## Perché usare X Community Scraper?
+
+- **Trova community senza ID.** Cerca per parola chiave o argomento, oppure
+  elenca le community che X suggerisce. Ogni risultato arriva con i suoi dati
+  completi.
+- **Dati completi delle community.** Le righe di informazioni riportano regole,
+  domanda di adesione, creatore, amministratore & argomento.
+- **Post recenti o Top.** Raccogli i post dal più recente, oppure i post Top che
+  X classifica più in alto. Aggiungi i post con media, oppure cerca nei post di
+  una community per parola chiave.
+- **Membri & moderatori.** Esporta entrambi con il loro `communityRole`, oppure
+  trova membri per nome. Le righe riportano le email, i telefoni & i link
+  pubblicati da ogni profilo.
+- **Filtri per post & membri.** Tieni i post per data, lingua, media &
+  engagement. Tieni i membri per dimensione del pubblico, età dell'account &
+  verifica.
+
+### Risultati completi
+
+- Ogni risultato riporta i dati più completi che X ha a disposizione.
+
+### Righe accurate
+
+- I repost riportano il testo originale completo.
+- Ogni ID in una riga resta esatto.
+- Menzioni, link, hashtag & evidenziazioni restano allineati al testo.
+- I badge di verifica corrispondono a quelli che mostra `x.com`.
+- Le righe contengono solo dati pubblici.
+- Annunci & contenuti sponsorizzati non arrivano mai nelle tue righe.
+
+### Dati aggiornati
+
+- Le letture continuano a funzionare quando X rilascia modifiche.
+
+### Velocità
+
+- Una pagina lenta non blocca la tua esecuzione.
+- Le letture finiscono appena arrivano le loro righe.
+- Le chiamate agli Actor che si bloccano riprendono da sole.
+
+### Fatturazione equa
+
+- Un input errato non costa nulla & ti dice cosa correggere.
+- Gli Actor fanno pagare solo le righe consegnate, uniche & conformi ai filtri.
+- Un profilo condiviso da più target si paga una sola volta.
+- Un'esecuzione riavviata non addebita mai due volte.
+- Le esecuzioni restano entro il tuo limite di spesa & scrivono comunque la loro
+  diagnostica.
+- Le esecuzioni piccole finiscono con un consiglio per spendere meno.
+
+### Affidabilità
+
+- Un errore isolato non fa fallire la tua esecuzione.
+- Quando scade il tempo, ricevi le righe già trovate con la diagnostica.
+- Gli Actor resistono ai brevi disservizi di Xquik.
+- Le esecuzioni degli Actor superano i riavvii senza ripetere nulla.
+- Una riga errata non fa fallire il lotto.
+- Le esecuzioni interrotte conservano le loro righe & il loro report.
+- Un'esecuzione che non riesce a partire spiega comunque perché.
+- Il supporto può vedere esattamente cosa ha restituito una richiesta o
+  un'esecuzione.
+
+### Pensato per gli agenti
+
+- Gli Actor accettano input scritti per altri Actor.
+- L'output è pronto per i fogli di calcolo, con colonne piatte & totali di
+  engagement.
+- Ogni esecuzione dice perché è finita & se conviene riprovare.
+
+### Dati ricchi
+
+- Le righe dei post riportano il testo dei Note Tweet, modifiche, Note della
+  community, etichette di visibilità & regole di risposta.
+- Le righe riportano app di origine, conteggi dei media & dati degli account
+  professionali.
+- I media arrivano con varianti, testo alternativo, dimensioni & motivi di
+  disponibilità.
+
+### Controlli di qualità
+
+- Ogni campo che X mostra è fornito, escluso di proposito o dimostrato assente.
+- Xquik testa ogni lettura dal vivo su X.
+
+## Quali dati può estrarre X Community Scraper?
 
 Le righe delle community usano `resultType: "community"`. Questi sono i campi
 principali.

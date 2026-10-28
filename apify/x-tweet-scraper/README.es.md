@@ -29,31 +29,146 @@ X Tweet Scraper de Xquik devuelve posts, métricas de interacción, perfiles
 públicos de los autores & contenido multimedia. Acepta URLs, nombres de usuario,
 IDs de Listas, IDs de posts & consultas de búsqueda con más de 50 filtros.
 
-### Funciones principales
-
-- Los filtros & la eliminación de duplicados se aplican antes de facturar.
-- 1 sola entrada admite consultas por ID, cronologías, Listas, búsquedas & modos
-  de interacción.
-- Las entradas de IDs de posts no tienen un límite fijo de cantidad. Tus ajustes
-  de gasto & de tiempo límite en Apify siguen vigentes.
-- Los registros de la ejecución muestran los tiempos de cada página en
-  `fetchDurationMs`, `processingDurationMs`, `pushDurationMs`,
-  `statusDurationMs` & `fullPageDurationMs`.
-- Las ejecuciones conservan las filas entregadas & el progreso cuando Apify las
-  reinicia.
-
 ### Casos de uso
 
 - Alimenta investigación, enriquecimiento, analítica & entrenamiento de IA con
-  más campos por post. Nuestra fila rich mediana tuvo 63 campos el 2026-09-29.
-  Es 2x la mediana de otros 11 Actores.
+  el texto, los autores, el contenido multimedia & las métricas de los posts.
 - Sigue el sentimiento de marca en los posts.
 - Vigila los posts de la competencia & los términos de tu sector.
 - Encuentra clientes potenciales en conversaciones públicas.
 - Recopila datasets públicos para investigación.
 - Encuentra posts con mucha interacción pública.
 
-### ¿Qué datos puede extraer X Tweet Scraper?
+## ¿Por qué usar X Tweet Scraper?
+
+- **Búsqueda 13.6x más rápida.** La búsqueda por palabra clave fue 13.6x más
+  rápida que la más rápida de otros 4 Actores de posts. La búsqueda filtrada fue
+  4.3x más rápida, & la cronología de un usuario, unas 3x. La [prueba
+  comparativa](README.md#benchmark) se hizo el 2026-10-15 & el 2026-10-16.
+- **El menor costo por post útil.** Tuvo el menor costo por post útil en los 3
+  casos de la [prueba comparativa](README.md#benchmark).
+- **Más campos por post.** Su fila mediana de búsqueda por palabra clave tuvo 67
+  campos. Es 1.3x la mediana de los otros Actores en la [prueba
+  comparativa](README.md#benchmark).
+- **Todas las fuentes en 1 ejecución.** Combina IDs de posts, nombres de
+  usuario, Listas, búsquedas & URLs en 1 entrada. Define `mode` para respuestas,
+  citas, hilos, menciones, cuentas que hicieron repost o artículos.
+- **Encuentra los posts más destacados de X.** `mode: "topTweets"` devuelve los
+  posts que X clasifica más alto en 1 métrica, como las visualizaciones.
+  Limítalos a un día, una semana o un mes & a un país.
+- **Código para insertar cada post.** `mode: "embed"` devuelve el HTML que
+  muestra un post en tu sitio.
+- **Sin límite de IDs de posts.** Consulta cualquier cantidad de IDs de posts en
+  1 ejecución. Las filas vuelven en el orden de tu entrada. Tu límite de gasto &
+  tu tiempo límite siguen vigentes.
+- **Más recientes & Destacados en 1 ejecución.** Para ambos órdenes de búsqueda,
+  define `queryType` como `Latest + Top`. Pagas cada post 1 sola vez.
+
+### Resultados completos
+
+- Los rangos de fechas grandes vuelven completos & rápido.
+- Las búsquedas devuelven todas las coincidencias, sin importar qué operadores
+  combines.
+- El historial de la cuenta vuelve completo, incluidos los posts antiguos.
+- Las exportaciones de perfiles conservan cada post de los hilos del propio
+  autor.
+- Las lecturas de perfiles incluyen el post fijado, marcado como fijado.
+- Las listas de posts más destacados vuelven de forma confiable.
+- Las páginas filtradas vuelven llenas hasta que se acaban los resultados.
+- Cada resultado trae los datos más completos que X tiene sobre él.
+
+### Filas precisas
+
+- Los resultados de búsqueda traen todos los posts que coinciden con tu consulta
+  & nada más.
+- La coincidencia de palabras & frases funciona en todos los idiomas & sistemas
+  de escritura.
+- Los filtros de idioma funcionan con todos los idiomas que X etiqueta.
+- Un post se marca como inexistente solo cuando ya no existe.
+- Las cuentas protegidas & las Listas privadas reciben una respuesta clara, no
+  una página vacía.
+- Los reposts traen el texto original completo.
+- Cada ID de una fila se mantiene exacto.
+- Las menciones, los enlaces, los hashtags & los resaltados quedan alineados con
+  el texto.
+- Un conteo desconocido aparece en `unknownCounts`, nunca como 0.
+- Las insignias de verificación coinciden con lo que muestra `x.com`.
+- Las filas solo contienen datos públicos.
+- Las búsquedas de citas devuelven todas las citas reales & nada más.
+- Las exportaciones de respuestas solo traen respuestas directas, en un orden
+  comprobado.
+- Los resultados con los más recientes primero llegan en orden por fecha.
+- Las búsquedas aceptan consultas tal como las escribirías en X.
+- Las búsquedas de lugares funcionan con nombres en 6 idiomas.
+- Una búsqueda que no puede ejecutarse falla de inmediato & dice cómo
+  corregirla.
+- Una fecha significa lo mismo en cualquier formato común.
+- Las búsquedas aceptan los límites `since_id` & `max_id`.
+- Los anuncios & las entradas promocionadas nunca llegan a tus filas.
+
+### Datos actualizados
+
+- Las lecturas siguen funcionando cuando X lanza cambios.
+
+### Velocidad
+
+- Una página lenta no frena tu ejecución.
+- Las búsquedas siguen siendo rápidas en temas con mucha actividad.
+- Cada página siguiente llega rápido.
+- Las lecturas terminan en cuanto llegan sus filas.
+- Las llamadas a Actores que se atascan se recuperan solas.
+
+### Cobro justo
+
+- Una entrada inválida no cuesta nada & te dice qué corregir.
+- Un ID de post que aparece 2 veces en un lote se cobra 1 sola vez.
+- Los Actores solo cobran las filas entregadas, únicas & que cumplen tus
+  filtros.
+- Una ejecución reiniciada nunca cobra 2 veces.
+- Las ejecuciones respetan tu límite de gasto & aun así escriben sus
+  diagnósticos.
+- Las ejecuciones pequeñas terminan con un consejo para gastar menos.
+
+### Confiabilidad
+
+- Un error aislado no hace fallar tu ejecución.
+- La paginación se mantiene coherente de una página a la siguiente.
+- La paginación nunca entra en un bucle infinito.
+- Si se acaba el tiempo, recibes las filas ya encontradas, con diagnósticos.
+- Los Actores resisten las caídas breves de Xquik.
+- Las ejecuciones de los Actores siguen tras un reinicio sin repetir nada.
+- Una fila defectuosa no arruina un lote.
+- Las ejecuciones detenidas conservan sus filas & su informe.
+- Una ejecución que no puede iniciar igual explica por qué.
+- `stopCauses`, `failedSubtargets` & `unavailableTargets` detallan las fallas
+  parciales.
+- Soporte puede ver exactamente qué devolvió una solicitud o una ejecución.
+
+### Hecho para agentes
+
+- Los Actores aceptan entradas escritas para otros Actores.
+- La salida está lista para hojas de cálculo, con columnas planas & totales de
+  interacción.
+- Cada ejecución dice por qué terminó & si conviene reintentar.
+
+### Datos detallados
+
+- Las filas de posts traen el texto de los Note Tweets, las ediciones, las Notas
+  de la Comunidad, las etiquetas de alcance & los controles de respuesta.
+- Las filas traen la app de origen, los conteos de contenido multimedia & los
+  datos de cuentas profesionales.
+- El contenido multimedia trae variantes, texto alternativo, tamaños & motivos
+  de disponibilidad.
+- Ves cuándo cada cuenta hizo repost de un post.
+- Los posts & las biografías se pueden traducir a tu idioma.
+
+### Controles de calidad
+
+- Cada campo que muestra X se entrega, se omite a propósito o se comprueba que
+  no existe.
+- Xquik prueba cada lectura en vivo contra X.
+
+## ¿Qué datos puede extraer X Tweet Scraper?
 
 | Campo                  | Descripción                                                       |
 | ---------------------- | ----------------------------------------------------------------- |
@@ -1141,11 +1256,10 @@ X Tweet Scraper de Xquik entregó de 25.2 a 39.2 posts útiles por segundo en la
 [prueba comparativa](#prueba-comparativa). El tiempo de ejecución depende de tu
 entrada, la cantidad de resultados & la disponibilidad de X.
 
-### ¿Por qué recibo posts que la pestaña de búsqueda de X deja fuera?
+### ¿Las búsquedas devuelven todos los posts que coinciden?
 
-X deja algunos posts coincidentes fuera de su pestaña Más recientes. X Tweet
-Scraper de Xquik también devuelve esos posts. Cada post es un resultado real de
-la búsqueda de X para tu consulta. Pagas cada post 1 sola vez.
+Sí, hasta que se acaban las coincidencias o llegas a `maxItems`. Los resultados
+solo traen posts que coinciden con tu consulta. Pagas cada post 1 sola vez.
 
 ### ¿Qué operadores de búsqueda funcionan?
 

@@ -21,7 +21,78 @@ pro geliefertem Datensatz**, & Apify berechnet die Plattformnutzung separat.
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
 
-## Account-Details in jedem Datensatz
+## Warum X Account Location Scraper nutzen?
+
+- **Eine klare Antwort für jeden Account.** Jeder Datensatz sagt, ob X eine
+  Angabe zeigt, keine hat oder sie zurückgehalten hat.
+- **Datensätze in deiner Eingabereihenfolge.** Viele Accounts kommen in der
+  Reihenfolge zurück, in der du sie aufgelistet hast.
+- **Füge Accounts in jeder Form ein.** Mische Nutzernamen mit oder ohne @,
+  Profil-URLs & Nutzer-IDs in 1 Liste. Nutze `userIds` für Listen, die du
+  aufbewahrst, denn eine Nutzer-ID bleibt gleich, wenn sich der Nutzername
+  ändert.
+- **Tabellentaugliche Exporte.** Bestimme die Spalten mit `fields` & `flatten`.
+  Exportiere JSON, CSV, Excel, XML oder RSS.
+
+### Vollständige Ergebnisse
+
+- Jedes Ergebnis enthält die vollständigsten Daten, die X dafür hat.
+
+### Genaue Datensätze
+
+- Jede ID in einem Datensatz bleibt exakt.
+- Verifizierungs-Badges stimmen mit dem überein, was `x.com` zeigt.
+- Datensätze enthalten nur öffentliche Daten.
+- Werbung & gesponserte Einträge landen nie in deinen Datensätzen.
+
+### Aktuelle Daten
+
+- Abrufe funktionieren weiter, wenn X Änderungen ausrollt.
+
+### Tempo
+
+- Eine langsame Seite hält deinen Run nicht auf.
+- Abrufe enden, sobald ihre Datensätze ankommen.
+- Hängende Actor-Aufrufe laufen von selbst wieder an.
+
+### Faire Abrechnung
+
+- Eine fehlerhafte Eingabe kostet nichts & sagt dir, was du korrigieren musst.
+- Actors rechnen nur gelieferte, eindeutige, passende Datensätze ab.
+- Ein Profil, das mehrere Ziele teilen, wird nur einmal berechnet.
+- Ein neu gestarteter Run berechnet nie doppelt.
+- Runs bleiben innerhalb deines Ausgabenlimits & schreiben trotzdem ihre
+  Diagnosen.
+- Kleine Runs enden mit einem Tipp, der Kosten senkt.
+
+### Zuverlässigkeit
+
+- Ein einzelner Fehler lässt deinen Run nicht scheitern.
+- Ein Zeitlimit liefert die bereits gefundenen Datensätze samt Diagnosen.
+- Actors überstehen kurze Xquik-Ausfälle.
+- Actor-Runs überstehen Neustarts ohne Dopplungen.
+- Ein fehlerhafter Datensatz lässt keinen Batch scheitern.
+- Gestoppte Runs behalten ihre Datensätze & ihren Report.
+- Ein Run, der nicht starten kann, erklärt trotzdem, warum.
+- Der Support sieht genau, was eine Anfrage oder ein Run geliefert hat.
+
+### Für Agents gebaut
+
+- Actors akzeptieren Eingaben, die für andere Actors geschrieben sind.
+- Jeder Run sagt, warum er endete & ob du es erneut versuchen solltest.
+
+### Umfangreiche Daten
+
+- Der Account-Standort kommt mit Ländercode, Genauigkeitshinweis & Verlauf der
+  Nutzernamen.
+
+### Qualitätsprüfungen
+
+- Jedes Feld, das X zeigt, wird geliefert, bewusst weggelassen oder ist
+  nachweislich nicht vorhanden.
+- Xquik testet jeden Abruf live gegen X.
+
+## Welche Daten kann X Account Location Scraper extrahieren?
 
 - Die X-Angabe "Account based in", als Land oder Region.
 - Der ISO-Code dieses Landes mit 2 Buchstaben.
@@ -34,13 +105,6 @@ pro geliefertem Datensatz**, & Apify berechnet die Plattformnutzung separat.
 - Das Alter des Accounts in Tagen & ein Link zu seinem Profil.
 - Das vollständige öffentliche Profil mit Name, Bio, Zählern, Verifizierung,
   Daten & Bildern.
-- Ein zweiter Abruf jedes Accounts, dessen Angabe X zurückhält, ohne Aufpreis.
-- Viele Accounts in 1 Run, parallel gelesen & in Eingabereihenfolge geliefert.
-- Nutzernamen mit oder ohne @, URLs von `x.com` & `twitter.com` & numerische
-  Nutzer-IDs.
-- Duplikatentfernung vor der Abrechnung.
-- Exporte als JSON, CSV, Excel, XML & RSS über Apify-Datasets.
-- Runs laufen nach einer Apify-Migration aus dem gespeicherten Zustand weiter.
 
 ## So prüfst du, wo X-Accounts ansässig sind
 

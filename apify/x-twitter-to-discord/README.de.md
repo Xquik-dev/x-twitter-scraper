@@ -23,7 +23,93 @@ Alerts sind kostenlos, & Apify berechnet die Plattformnutzung separat.
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
 
-## Was der Twitter-zu-Discord-Bot sendet
+## Warum X (Twitter) to Discord Bot nutzen?
+
+- **Kein Bot zum Hosten.** Alerts kommen über den Webhook deines Kanals. Auf
+  deiner Seite läuft nichts, & niemand lädt einen Bot ein.
+- **Keine unerwarteten Benachrichtigungen.** Eine Erwähnung in einem Tweet
+  benachrichtigt nie jemanden auf deinem Server.
+- **Du weißt, dass dein Kanal verbunden ist.** Jede neue Discord-URL bekommt
+  eine Testnachricht. Der Run-Status zeigt die Antwort von Discord.
+- **Viele Kanäle aus 1 Eingabe.** Sende dieselben Alerts an weitere
+  Discord-Kanäle, Slack, Telegram oder jeden Webhook.
+- **Hol verpasste Events nach.** `since` speichert Events ab jedem Datum der
+  letzten 30 Tage erneut.
+- **Du weißt, dass der Monitor beobachtet.** Die Statusseite jedes Runs sagt es
+  & zeigt 1 nächsten Schritt mit einem Button.
+- **Keine stillen Pausen.** Dein Kanal bekommt eine Warnung 4 Stunden, bevor ein
+  Monitor ohne Runs pausiert. Der nächste Run setzt ihn fort.
+- **Kein X-Account nötig.** Du teilst nie deinen X-Login oder einen
+  API-Schlüssel.
+
+### Genaue Datensätze
+
+- Reposts enthalten den vollständigen Originaltext.
+- Jede ID in einem Datensatz bleibt exakt.
+- Erwähnungen, Links, Hashtags & Hervorhebungen sitzen an der richtigen Stelle
+  im Text.
+- Verifizierungs-Badges stimmen mit dem überein, was `x.com` zeigt.
+- Datensätze enthalten nur öffentliche Daten.
+- Werbung & gesponserte Einträge landen nie in deinen Datensätzen.
+- Monitore melden nur echte Löschungen & Unfollows.
+- Alerts zu Profiländerungen springen nicht hin & her.
+
+### Aktuelle Daten
+
+- Account-Monitore sehen Änderungen innerhalb von etwa einer Sekunde.
+- Stichwort-Monitore erfassen jeden passenden Post.
+- Monitore verpassen keine Posts.
+- Ein Monitor, der in Rückstand gerät, holt nach, was er verpasst hat.
+- Live-Videos & Spaces lösen ein Event aus, wenn sie starten.
+- Abrufe funktionieren weiter, wenn X Änderungen ausrollt.
+
+### Tempo
+
+- Eine langsame Seite hält deinen Run nicht auf.
+- Hängende Actor-Aufrufe laufen von selbst wieder an.
+
+### Faire Abrechnung
+
+- Monitore haben 1 festen Stundenpreis, Events & Webhooks inklusive.
+- Monitor-Actors berechnen nur die Stunden, in denen ein Monitor beobachtet hat.
+
+### Zuverlässigkeit
+
+- Ein einzelner Fehler lässt deinen Run nicht scheitern.
+- Actors überstehen kurze Xquik-Ausfälle.
+- Actor-Runs überstehen Neustarts ohne Dopplungen.
+- Gestoppte Runs behalten ihre Datensätze & ihren Report.
+- Ein Run, der nicht starten kann, erklärt trotzdem, warum.
+- Webhooks sind signiert & gegen Replays geschützt.
+- Ein Webhook, der ausgefallen war, bekommt seine Events trotzdem, bis zu 7 Tage
+  lang.
+- Neue Events kommen pünktlich an, auch nachdem dein Webhook ausgefallen war.
+- Webhooks gehen nie an private oder lokale Hosts.
+- Chat-Alerts kommen in der richtigen Reihenfolge an, ohne an Rate-Limits zu
+  stoßen.
+- Der Support sieht genau, was eine Anfrage oder ein Run geliefert hat.
+
+### Für Agents gebaut
+
+- Actors akzeptieren Eingaben, die für andere Actors geschrieben sind.
+- Jeder Run sagt, warum er endete & ob du es erneut versuchen solltest.
+
+### Umfangreiche Daten
+
+- Post-Datensätze enthalten den Text von Note Tweets, Bearbeitungen, Community
+  Notes, Reichweiten-Labels & Antworteinstellungen.
+- Datensätze enthalten Quell-Apps, Medienzahlen & Daten professioneller
+  Accounts.
+- Medien kommen mit Varianten, Alt-Text, Größen & Gründen zur Verfügbarkeit.
+
+### Qualitätsprüfungen
+
+- Jedes Feld, das X zeigt, wird geliefert, bewusst weggelassen oder ist
+  nachweislich nicht vorhanden.
+- Xquik testet jeden Abruf live gegen X.
+- Actor-READMEs, Schemas & echte Ausgaben nennen dieselben Felder.
+
+## Welche Daten sendet X (Twitter) to Discord Bot?
 
 - Jeder neue Tweet, jede Antwort, jedes Zitat & jeder Repost der Accounts, die
   du beobachtest, meist in weniger als einer Sekunde erfasst, nachdem X sie
@@ -33,9 +119,7 @@ Alerts sind kostenlos, & Apify berechnet die Plattformnutzung separat.
 - Live-Videos, Spaces, gelöschte Tweets, Profiländerungen, Follows & Follower,
   wenn du sie aktivierst.
 - Jeder Alert als Discord-Nachricht, die den Account & das Event nennt, den Text
-  des Tweets enthält & auf den Tweet auf X verlinkt. Keine Erwähnung in einem
-  Tweet benachrichtigt jemanden.
-- Eine Testnachricht an jede neue Discord-URL, mit deren Antwort im Run-Status.
+  des Tweets enthält & auf den Tweet auf X verlinkt.
 - Jedes Event im Dataset des Runs & in 1 Verlaufs-Dataset pro gespeichertem Task
   oder Monitor-Namen.
 

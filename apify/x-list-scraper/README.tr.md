@@ -21,7 +21,86 @@ faturalandırır. X API anahtarına veya girişe ihtiyacın yok.
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-## Liste verileri & filtreler
+## Neden X List Scraper kullanmalısın?
+
+- **Liste üyelerinden potansiyel müşteriler.** Üyeleri & takipçileri
+  `minFollowers`, `hasEmail` veya `bioContains` ile filtrele. Satırlar her
+  profilin yayımladığı e-postaları, telefonları & bağlantıları taşır.
+- **Yalnızca istediğin gönderiler.** Liste gönderilerini tarih veya Unix zamanı,
+  dil, medya, etkileşim & onay durumuna göre filtrele. Yanıtları dahil et ya da
+  dışarıda bırak.
+- **1 çalıştırmada birçok Liste.** Birçok Listenin ayrıntılarını, gönderilerini,
+  üyelerini & takipçilerini karıştır.
+- **Satır sınırlarını sen belirle.** Bütün çalıştırmayı ya da her Liste veri
+  türünü & arama terimini sınırla.
+
+### Eksiksiz sonuçlar
+
+- Her cevap, X'te bulunan en eksiksiz veriyi tutar.
+
+### Doğru satırlar
+
+- Korumalı hesaplar & gizli Listeler boş bir sayfa değil, net bir cevap alır.
+- Yeniden gönderiler orijinal metnin tamamını taşır.
+- Satırdaki her ID birebir doğru kalır.
+- Bahsetmeler, bağlantılar, hashtag'ler & vurgular metindeki yerleriyle eşleşir.
+- Onay rozetleri `x.com` üzerinde görünenle aynıdır.
+- Satırlar yalnızca herkese açık veri tutar.
+- Reklamlar & tanıtılan içerikler satırlarına asla girmez.
+
+### Güncel veri
+
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Okumalar, satırları geldiği anda biter.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- Hatalı girdi ücretsizdir & neyi düzelteceğini söyler.
+- Actor'lar yalnızca teslim edilen, benzersiz & eşleşen satırlar için ücret
+  alır.
+- Yeniden başlatılan bir çalıştırma asla 2 kez ücret almaz.
+- Çalıştırmalar harcama sınırının içinde kalır & tanılamalarını yine yazar.
+- Küçük çalıştırmalar, maliyeti düşüren bir ipucuyla biter.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Süre dolduğunda o ana kadar bulunan satırlar tanılamalarla birlikte döner.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Tek bir hatalı satır bütün grubu bozmaz.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Çıktı düz sütunlar & etkileşim toplamlarıyla tablolara hazırdır.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Zengin veri
+
+- Gönderi satırları Note Tweet metnini, düzenlemeleri, Topluluk Notlarını,
+  erişim etiketlerini & yanıt kontrollerini taşır.
+- Satırlar kaynak uygulamaları, medya sayılarını & profesyonel hesap verilerini
+  taşır.
+- Medya varyantlar, alternatif metin, boyutlar & kullanılabilirlik nedenleriyle
+  gelir.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+
+## X List Scraper hangi verileri çıkarabilir?
 
 - Ad, açıklama, üye & takipçi sayıları, oluşturulma zamanı, kapak görseli &
   sahibinin herkese açık profiliyle Liste ayrıntıları.
@@ -29,16 +108,8 @@ faturalandırır. X API anahtarına veya girişe ihtiyacın yok.
 - Liste üyeleri & Liste takipçileri.
 - Anahtar kelimeyle Liste araması. Her satır, sahibi, üye sayısı & takipçi
   sayısıyla 1 Listedir.
-- Liste gönderilerinde isteğe bağlı yanıtlar.
-- Tarih, Unix zamanı, dil, medya, etkileşim, onay durumu & profil filtreleri.
-- Üyeler & takipçiler için `minFollowers`, `hasEmail` & `bioContains` gibi
-  profil filtreleri.
 - Bir hesabın oluşturduğu veya içinde yer aldığı herkese açık Listeler,
   kullanıcı adından veya profil URL'sinden.
-- 1 çalıştırmada birçok Liste & veri türü.
-- Genel bir sınır & her Liste veri türü veya arama terimi için ayrı bir sınır.
-- Apify çalıştırmayı taşıdığında çalıştırmalar kaldığı yerden devam eder.
-- Faturalamadan önce tekilleştirme.
 
 ## X Listeleri nasıl kazınır
 

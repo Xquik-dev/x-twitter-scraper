@@ -29,22 +29,6 @@ URL'lerinden veya ID'lerinden okur. Her Topluluğun bilgilerini, gönderilerini,
 medyasını, anahtar kelime eşleşmelerini, üyelerini & moderatörlerini döndürür.
 Toplulukları anahtar kelime veya konuyla da bulur & X'in önerdiklerini listeler.
 
-### Temel özellikler
-
-- 1 çalıştırmada birçok Topluluğu & veri türünü oku.
-- Topluluk bilgilerini kurallar, katılma sorusu, kurucu, yönetici & konuyla al.
-- Gönderileri en yeniden başlayarak ya da X'in en üst sıraya koyduğu popüler
-  gönderileri topla.
-- Medya sekmesini topla ya da bir Topluluğun gönderilerinde anahtar kelimeyle
-  ara.
-- Üyeleri & moderatörleri dışa aktar ya da üyeleri adıyla bul.
-- Toplulukları anahtar kelime veya konuyla, tam kayıtlarıyla birlikte bul.
-- Gönderileri tarih, dil, medya & etkileşime göre filtrele.
-- Üyeleri kitle büyüklüğü, hesap yaşı & onay durumuna göre filtrele.
-- Filtreler & tekilleştirme faturalamadan önce çalışır.
-- Apify bir çalıştırmayı yeniden başlatırsa çalıştırma teslim edilen satırları &
-  ilerlemeyi korur.
-
 ### Kullanım alanları
 
 - Niş bir Topluluğun üyelerinden potansiyel müşteri listeleri oluştur.
@@ -57,7 +41,88 @@ Toplulukları anahtar kelime veya konuyla da bulur & X'in önerdiklerini listele
 - Bir Topluluğun moderatörlerini & en çok takip edilen üyelerini bul.
 - Yaratıcı araştırma için görselli veya videolu gönderileri topla.
 
-### X Community Scraper hangi verileri çıkarabilir?
+## Neden X Community Scraper kullanmalısın?
+
+- **ID olmadan Topluluk bul.** Anahtar kelime veya konuyla ara ya da X'in
+  önerdiği Toplulukları listele. Her eşleşme tam kaydıyla gelir.
+- **Tam Topluluk kayıtları.** Bilgi satırları kuralları, katılma sorusunu,
+  kurucuyu, yöneticiyi & konuyu taşır.
+- **En yeni veya popüler gönderiler.** Gönderileri en yeniden başlayarak ya da
+  X'in en üst sıraya koyduğu popüler gönderileri topla. Medyalı gönderileri ekle
+  ya da bir Topluluğun gönderilerinde anahtar kelimeyle ara.
+- **Üyeler & moderatörler.** İkisini de `communityRole` değerleriyle dışa aktar
+  ya da üyeleri adıyla bul. Satırlar her profilin yayımladığı e-postaları,
+  telefonları & bağlantıları taşır.
+- **Gönderi & üye filtreleri.** Gönderileri tarih, dil, medya & etkileşime göre
+  tut. Üyeleri kitle büyüklüğü, hesap yaşı & onay durumuna göre tut.
+
+### Eksiksiz sonuçlar
+
+- Her cevap, X'te bulunan en eksiksiz veriyi tutar.
+
+### Doğru satırlar
+
+- Yeniden gönderiler orijinal metnin tamamını taşır.
+- Satırdaki her ID birebir doğru kalır.
+- Bahsetmeler, bağlantılar, hashtag'ler & vurgular metindeki yerleriyle eşleşir.
+- Onay rozetleri `x.com` üzerinde görünenle aynıdır.
+- Satırlar yalnızca herkese açık veri tutar.
+- Reklamlar & tanıtılan içerikler satırlarına asla girmez.
+
+### Güncel veri
+
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Okumalar, satırları geldiği anda biter.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- Hatalı girdi ücretsizdir & neyi düzelteceğini söyler.
+- Actor'lar yalnızca teslim edilen, benzersiz & eşleşen satırlar için ücret
+  alır.
+- Birden çok hedefin paylaştığı bir profil 1 kez faturalanır.
+- Yeniden başlatılan bir çalıştırma asla 2 kez ücret almaz.
+- Çalıştırmalar harcama sınırının içinde kalır & tanılamalarını yine yazar.
+- Küçük çalıştırmalar, maliyeti düşüren bir ipucuyla biter.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Süre dolduğunda o ana kadar bulunan satırlar tanılamalarla birlikte döner.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Tek bir hatalı satır bütün grubu bozmaz.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Çıktı düz sütunlar & etkileşim toplamlarıyla tablolara hazırdır.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Zengin veri
+
+- Gönderi satırları Note Tweet metnini, düzenlemeleri, Topluluk Notlarını,
+  erişim etiketlerini & yanıt kontrollerini taşır.
+- Satırlar kaynak uygulamaları, medya sayılarını & profesyonel hesap verilerini
+  taşır.
+- Medya varyantlar, alternatif metin, boyutlar & kullanılabilirlik nedenleriyle
+  gelir.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+
+## X Community Scraper hangi verileri çıkarabilir?
 
 Topluluk satırları `resultType: "community"` kullanır. Başlıca alanlar
 aşağıdakilerdir.

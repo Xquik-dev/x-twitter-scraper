@@ -19,6 +19,122 @@ pertinenti. L'AI valuta 8 tratti di ogni post. L'Actor trasforma quelle risposte
 in una stima del Viral Score & in un verdetto. Ogni riga conserva Mi piace,
 repost, risposte & citazioni reali. Confronta ogni stima con ciò che è successo.
 
+Il Viral Score stima quanto funziona la formulazione. Non prevede Mi piace o
+visualizzazioni. Non riproduce il modo in cui X classifica i post.
+
+> Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
+> "Twitter" e "X" sono marchi di X Corp.
+
+## Perché usare X Tweet Viral Score Analyzer with AI?
+
+- **Scopri quali post pubblicare.** Ogni post riceve un verdetto `send_it`,
+  `edit_first` o `sleep_on_it`.
+- **Prova le bozze prima di pubblicarle.** Incolla il testo in `texts` per avere
+  lo stesso punteggio & verdetto. L'esecuzione non recupera nulla da X.
+- **Previsto contro reale.** Il riepilogo elenca i post il cui engagement reale
+  è andato sopra o sotto il loro punteggio.
+- **Scopri cosa funziona per ogni account.** Ogni nome utente riceve il suo post
+  migliore & peggiore. Il report divide il suo punteggio medio per ora di
+  pubblicazione, lunghezza, media & link.
+- **Metti a confronto gli account.** Una classifica ordina i nomi utente per
+  Viral Score medio & tasso di engagement reale.
+- **Vedi cosa è cambiato.** Aggiungi a `monitor.baselineDatasetId` l'ID del
+  dataset di un'esecuzione precedente. Ogni riga mostra poi quali tratti sono
+  cambiati.
+- **Punteggi pronti per i fogli di calcolo.** La vista `Viral Score` & gli
+  export mettono in colonne punteggio, verdetto & risposte.
+- **Nessun account né chiave.** Il prezzo include l'analisi con AI. Non ti serve
+  una chiave AI, una chiave API X o il login.
+
+### Risultati completi
+
+- I grandi intervalli di date tornano completi & in fretta.
+- Le ricerche restituiscono ogni risultato, qualunque operatore combini.
+- Le pagine filtrate tornano piene finché i risultati non finiscono.
+- Ogni risultato riporta i dati più completi che X ha a disposizione.
+
+### Righe accurate
+
+- I risultati di ricerca contengono ogni post che corrisponde alla tua query &
+  nient'altro.
+- La ricerca di parole & frasi funziona in ogni lingua & alfabeto.
+- I filtri di lingua funzionano con ogni lingua che X assegna ai post.
+- Account protetti & liste private ricevono un esito chiaro, non una pagina
+  vuota.
+- I repost riportano il testo originale completo.
+- Ogni ID in una riga resta esatto.
+- Menzioni, link, hashtag & evidenziazioni restano allineati al testo.
+- I badge di verifica corrispondono a quelli che mostra `x.com`.
+- Le righe contengono solo dati pubblici.
+- I risultati dal più recente arrivano in ordine cronologico.
+- Le ricerche accettano le query come le scriveresti su X.
+- Le ricerche di luoghi funzionano con nomi in 6 lingue.
+- Una ricerca che non può partire fallisce subito & dice come correggerla.
+- Una data ha un solo significato in qualsiasi formato comune.
+- Le ricerche accettano i limiti `since_id` & `max_id`.
+- Annunci & contenuti sponsorizzati non arrivano mai nelle tue righe.
+
+### Dati aggiornati
+
+- Le letture continuano a funzionare quando X rilascia modifiche.
+
+### Velocità
+
+- Una pagina lenta non blocca la tua esecuzione.
+- Le ricerche restano veloci sugli argomenti molto attivi.
+- Ogni pagina successiva arriva in fretta.
+- Le letture finiscono appena arrivano le loro righe.
+- Le chiamate agli Actor che si bloccano riprendono da sole.
+
+### Fatturazione equa
+
+- Un input errato non costa nulla & ti dice cosa correggere.
+- L'analisi AI fa pagare solo i post che ha analizzato.
+- Gli Actor fanno pagare solo le righe consegnate, uniche & conformi ai filtri.
+- Un'esecuzione riavviata non addebita mai due volte.
+- Le esecuzioni restano entro il tuo limite di spesa & scrivono comunque la loro
+  diagnostica.
+- Gli Actor AI non fanno pagare le analisi fallite o saltate.
+
+### Affidabilità
+
+- Un errore isolato non fa fallire la tua esecuzione.
+- La paginazione resta coerente da una pagina all'altra.
+- La paginazione non va mai in loop infinito.
+- Quando scade il tempo, ricevi le righe già trovate con la diagnostica.
+- Gli Actor resistono ai brevi disservizi di Xquik.
+- Le esecuzioni degli Actor superano i riavvii senza ripetere nulla.
+- Una riga errata non fa fallire il lotto.
+- Le esecuzioni interrotte conservano le loro righe & il loro report.
+- Un'esecuzione che non riesce a partire spiega comunque perché.
+- Il supporto può vedere esattamente cosa ha restituito una richiesta o
+  un'esecuzione.
+
+### Pensato per gli agenti
+
+- Gli Actor accettano input scritti per altri Actor.
+- Ogni esecuzione dice perché è finita & se conviene riprovare.
+
+### Dati ricchi
+
+- Le righe dei post riportano il testo dei Note Tweet, modifiche, Note della
+  community, etichette di visibilità & regole di risposta.
+- Le righe riportano app di origine, conteggi dei media & dati degli account
+  professionali.
+- I media arrivano con varianti, testo alternativo, dimensioni & motivi di
+  disponibilità.
+- Le risposte AI riportano probabilità, confidenza & una versione della domanda.
+- Il rumore non fa scattare modifiche tra un'esecuzione di analisi e l'altra.
+- `viralAlgorithmScore` trasforma i conteggi pubblici di un post in 1 numero
+  confrontabile.
+
+### Controlli di qualità
+
+- Ogni campo che X mostra è fornito, escluso di proposito o dimostrato assente.
+- Xquik testa ogni lettura dal vivo su X.
+
+## Quali dati restituisce X Tweet Viral Score Analyzer with AI?
+
 - **Viral Score per post.** Regole fisse e versionate calcolano ogni punteggio
   da 0 a 100.
 - **8 risposte sui tratti.** Mostrano perché un post ha un punteggio alto o
@@ -27,12 +143,6 @@ repost, risposte & citazioni reali. Confronta ogni stima con ciò che è success
   generico scritto da una macchina.
 - **Record di origine completi.** Ogni riga conserva tutti i campi che il post
   espone.
-
-Il Viral Score stima quanto funziona la formulazione. Non prevede Mi piace o
-visualizzazioni. Non riproduce il modo in cui X classifica i post.
-
-> Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
-> "Twitter" e "X" sono marchi di X Corp.
 
 ## Come controllare il viral score di un tweet
 

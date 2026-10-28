@@ -20,19 +20,100 @@ né il login.
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.
 
-## Risposte, citazioni & profili
+## Perché usare X Engagement Scraper?
 
-- URL di post & ID numerici dei post.
+- **Solo le risposte che ti servono.** Scegli risposte dirette o annidate, una
+  profondità delle risposte & una finestra temporale.
+- **Lead da chi fa repost.** Filtra chi fa repost per `minFollowers`, `hasEmail`
+  o `bioContains`. Le righe riportano le email, i telefoni & i link che ogni
+  profilo pubblica.
+- **Ogni tipo di engagement in 1 esecuzione.** Incolla URL di post o ID dei
+  post. Combina risposte, citazioni, retweeter & contesto del thread.
+- **Imposta i tuoi limiti di righe.** Limita l'esecuzione con `maxItems` & ogni
+  tipo di engagement di un post con `maxItemsPerTarget`.
+- **Tassi di engagement inclusi.** Indica `engagementRate` o `engagementPerView`
+  in `fields` per aggiungere la colonna.
+
+### Risultati completi
+
+- Ogni risultato riporta i dati più completi che X ha a disposizione.
+
+### Righe accurate
+
+- I repost riportano il testo originale completo.
+- Ogni ID in una riga resta esatto.
+- Menzioni, link, hashtag & evidenziazioni restano allineati al testo.
+- Un conteggio non noto compare in `unknownCounts`, mai come 0.
+- I badge di verifica corrispondono a quelli che mostra `x.com`.
+- Le righe contengono solo dati pubblici.
+- Le ricerche di citazioni restituiscono ogni citazione reale & nient'altro.
+- Annunci & contenuti sponsorizzati non arrivano mai nelle tue righe.
+
+### Dati aggiornati
+
+- Le letture continuano a funzionare quando X rilascia modifiche.
+
+### Velocità
+
+- Una pagina lenta non blocca la tua esecuzione.
+- Le letture finiscono appena arrivano le loro righe.
+- Le chiamate agli Actor che si bloccano riprendono da sole.
+
+### Fatturazione equa
+
+- Un input errato non costa nulla & ti dice cosa correggere.
+- Gli Actor fanno pagare solo le righe consegnate, uniche & conformi ai filtri.
+- Un profilo condiviso da più target si paga una sola volta.
+- Un'esecuzione riavviata non addebita mai due volte.
+- Le esecuzioni restano entro il tuo limite di spesa & scrivono comunque la loro
+  diagnostica.
+- Le esecuzioni piccole finiscono con un consiglio per spendere meno.
+
+### Affidabilità
+
+- Un errore isolato non fa fallire la tua esecuzione.
+- Quando scade il tempo, ricevi le righe già trovate con la diagnostica.
+- Gli Actor resistono ai brevi disservizi di Xquik.
+- Le esecuzioni degli Actor superano i riavvii senza ripetere nulla.
+- Una riga errata non fa fallire il lotto.
+- Le esecuzioni interrotte conservano le loro righe & il loro report.
+- Un'esecuzione che non riesce a partire spiega comunque perché.
+- Il supporto può vedere esattamente cosa ha restituito una richiesta o
+  un'esecuzione.
+
+### Pensato per gli agenti
+
+- Gli Actor accettano input scritti per altri Actor.
+- L'output è pronto per i fogli di calcolo, con colonne piatte & totali di
+  engagement.
+- Ogni esecuzione dice perché è finita & se conviene riprovare.
+
+### Dati ricchi
+
+- Le righe dei post riportano il testo dei Note Tweet, modifiche, Note della
+  community, etichette di visibilità & regole di risposta.
+- Le righe riportano app di origine, conteggi dei media & dati degli account
+  professionali.
+- I media arrivano con varianti, testo alternativo, dimensioni & motivi di
+  disponibilità.
+- Vedi quando ogni account ha fatto repost di un post.
+- Vedi se ogni account ha risposto a un post, ne ha fatto repost o l'ha citato.
+  Vedi anche se segue l'autore o fa parte di una Community.
+
+### Controlli di qualità
+
+- Ogni campo che X mostra è fornito, escluso di proposito o dimostrato assente.
+- Xquik testa ogni lettura dal vivo su X.
+
+## Quali dati può estrarre X Engagement Scraper?
+
 - Risposte dirette su tutte le pagine di risultati disponibili.
 - Risposte dirette & annidate in 4 ordinamenti.
 - Dettagli del post di origine come riga selezionabile.
 - Post di citazione con testo, autori, media & metriche.
 - Profili degli utenti che hanno fatto repost.
 - Contesto della conversazione attorno a ogni post di origine.
-- Più tipi di engagement & più post in 1 esecuzione.
-- Un limite globale & un limite per ogni risorsa di engagement.
 - Attribuzione del post di origine & del tipo di engagement.
-- Le esecuzioni riprendono dopo un riavvio di Apify.
 
 ## Come estrarre l'engagement dei post di X
 

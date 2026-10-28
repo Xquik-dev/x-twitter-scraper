@@ -33,22 +33,30 @@ post. Separate reporting from commentary & speculation. See whether a post names
 or links a source. Keep only posts about the organizations, people or topics you
 track.
 
-- **Format.** It tells reporting, commentary, speculation, promotion & satire
-  apart.
-- **Attribution.** It shows whether a claim names a source, links one, is
-  firsthand or has none.
-- **Relevance.** It tells posts about your targets apart from namesakes.
-- **Complete source records.** Every row keeps every field the tweet exposes,
-  including linked articles when available.
-
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## What you get
+## Why use X (Twitter) News Monitor with AI Analysis?
+
+- **Reporting apart from speculation.** Filter on the `format` answer to keep
+  reporting & drop speculation or promotion.
+- **See which sources get cited.** `sourceDomains` counts the linked domains
+  across the run.
+- **Linked Articles count.** A post that links an X Article gets answers about
+  the Article too.
+- **Coverage per target.** Each target gets its own format & attribution split &
+  top posts.
+- **See what changed.** Add an earlier run's dataset ID to
+  `monitor.baselineDatasetId`. Each row then shows which decisions moved.
+- **Check your own text.** Paste headlines or drafts in `texts` for the same
+  answers. The run fetches nothing from X.
+- **Spreadsheet-ready answers.** The `Flat answers` view & CSV or Excel exports
+  show 1 column per question.
+- **No accounts or keys.** The price includes AI-powered analysis. You need no
+  AI key, X API key or login.
 
 ### Complete results
 
-- Searches return posts that X's own search tab leaves out.
 - Large date ranges come back whole & fast.
 - Searches return every match, whatever operators you combine.
 - Filtered pages come back full until the results run out.
@@ -59,17 +67,16 @@ track.
 - Search results hold every post that matches your query & nothing else.
 - Word & phrase matching works in every language & script.
 - Language filters work for every language X tags.
-- "X can't run this search" appears only when it's true.
 - Protected accounts & private Lists get a clear answer, not an empty page.
 - Reposts carry the full original text.
 - Every ID in a row stays exact.
 - Mentions, links, hashtags & highlights line up with the text.
 - Verified badges match what `x.com` shows.
 - Rows hold public data only.
-- Newest-first results stay in true date order across pages.
-- Messy queries still run instead of failing.
+- Newest-first results come back in date order.
+- Searches accept queries as you'd type them on X.
 - Place searches work with names in 6 languages.
-- Searches X can't run fail at once, with the fix.
+- A search that can't run fails at once & says how to fix it.
 - A date means one thing in any common form.
 - Searches accept `since_id` & `max_id` bounds.
 - Ads & promoted entries never reach your rows.
@@ -80,27 +87,24 @@ track.
 
 ### Speed
 
-- A slow X answer doesn't hold up your request.
-- Repeated lookups answer at once.
+- One slow page doesn't hold up your run.
 - Searches stay fast on busy topics.
 - Each next page arrives fast.
-- Actors read many handles, posts & queries at once.
 - Reads finish the moment their rows arrive.
 - Stalled Actor calls recover on their own.
 
 ### Fair billing
 
-- A retried page is free.
-- Bad input costs nothing, since it's refused before any read.
+- Bad input costs nothing & tells you what to fix.
 - AI analysis bills only the posts it analyzed.
 - Actors charge only for delivered, unique, matching rows.
 - A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
+- Runs stay within your spend cap & still write their diagnostics.
 - AI Actors don't bill failed or skipped analyses.
 
 ### Reliability
 
-- A one-off X failure doesn't fail your request.
+- A one-off error doesn't fail your run.
 - Paging stays consistent from one page to the next.
 - Paging never loops forever.
 - A deadline returns the rows already found, with diagnostics.
@@ -109,7 +113,6 @@ track.
 - One bad row doesn't sink a batch.
 - Stopped runs keep their rows & their report.
 - A run that can't start still explains itself.
-- Problems on X's side are fixed before they reach your reads.
 - Support can see exactly what a request or run returned.
 
 ### Built for agents
@@ -129,7 +132,17 @@ track.
 ### Quality checks
 
 - Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
+- Xquik tests every read live against X.
+
+## What data does X (Twitter) News Monitor with AI Analysis return?
+
+- **Format.** It tells reporting, commentary, speculation, promotion & satire
+  apart.
+- **Attribution.** It shows whether a claim names a source, links one, is
+  firsthand or has none.
+- **Relevance.** It tells posts about your targets apart from namesakes.
+- **Complete source records.** Every row keeps every field the tweet exposes,
+  including linked articles when available.
 
 ## How to classify news posts on X
 

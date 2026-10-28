@@ -32,20 +32,17 @@ You need no X API key or login.
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## Searches & job data
+## Why use X Jobs Scraper?
 
-- Many search terms in 1 run, read at once.
-- Filters for place, workplace type, seniority, employment type & company.
-- Job URLs & job IDs read as full listings.
-- Job locations by name, each with the ID that `locationId` takes.
-- Title, salary range, currency, apply link, location & hiring account.
-- Full descriptions as plain text & Markdown on every row.
-- Search attribution on every row.
-- Duplicate removal across searches before billing.
-- JSON, CSV, Excel, XML & RSS exports through Apify datasets.
-- Runs resume from saved state after an Apify migration.
-
-## What you get
+- **Only the jobs you want.** Filter by place, workplace type, seniority,
+  employment type & company.
+- **The exact place you mean.** `locationId` pins 1 place, such as New York City
+  rather than West New York.
+- **Known jobs by link.** Paste job URLs or IDs to get each full listing.
+- **Descriptions at no extra cost.** A row with the full description costs the
+  same as a bare listing.
+- **Ready-to-use exports.** Keep, rename, flatten or join fields, then export
+  JSON, CSV, Excel, XML or RSS.
 
 ### Complete results
 
@@ -61,29 +58,27 @@ You need no X API key or login.
 
 ### Speed
 
-- A slow X answer doesn't hold up your request.
-- Actors read many handles, posts & queries at once.
+- One slow page doesn't hold up your run.
 - Reads finish the moment their rows arrive.
 - Stalled Actor calls recover on their own.
 
 ### Fair billing
 
-- Bad input costs nothing, since it's refused before any read.
+- Bad input costs nothing & tells you what to fix.
 - Actors charge only for delivered, unique, matching rows.
 - A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
+- Runs stay within your spend cap & still write their diagnostics.
 - Small runs end with a tip that cuts cost.
 
 ### Reliability
 
-- A one-off X failure doesn't fail your request.
+- A one-off error doesn't fail your run.
 - A deadline returns the rows already found, with diagnostics.
 - Actors ride out short Xquik outages.
 - Actor runs survive restarts without repeats.
 - One bad row doesn't sink a batch.
 - Stopped runs keep their rows & their report.
 - A run that can't start still explains itself.
-- Problems on X's side are fixed before they reach your reads.
 - Support can see exactly what a request or run returned.
 
 ### Built for agents
@@ -94,7 +89,14 @@ You need no X API key or login.
 ### Quality checks
 
 - Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
+- Xquik tests every read live against X.
+
+## What data can X Jobs Scraper extract?
+
+- Job locations by name, each with the ID that `locationId` takes.
+- Title, salary range, currency, apply link, location & hiring account.
+- Full descriptions as plain text & Markdown on every row.
+- Search attribution on every row.
 
 ## How to scrape X jobs
 

@@ -31,20 +31,101 @@ X Follower Scraper von Xquik liefert verfügbare öffentliche Profildaten zu
 Followern, gefolgten Accounts, Listen & Communities. Jeder Datensatz nennt sein
 Quellziel & seine Beziehung.
 
-### Grundlegendes Verhalten
+### Anwendungsfälle
 
-- Filter & Duplikatentfernung laufen vor der Abrechnung.
-- Standardmäßig erscheint ein Profil, das mehrere Ziele teilen, nur einmal &
-  wird nur einmal berechnet.
-- 1 Run akzeptiert Nutzernamen, numerische IDs, URLs & Kurzpfade.
-- Der Merge-Modus erfasst gemeinsame Profile, Quellen, Beziehungen &
-  `overlapCount`.
-- Run-Logs zeigen die Seitenzeiten in `fetchDurationMs`, `processingDurationMs`,
-  `pushDurationMs`, `statusDurationMs` & `fullPageDurationMs`.
-- Runs behalten gelieferte Datensätze & ihren Fortschritt, wenn Apify sie neu
-  startet.
+- Reichere Leads an & baue Forschungsdatasets aus Follower-Profilen.
+- Exportiere Follower von Wettbewerbern für die Lead-Recherche.
+- Vergleiche die Zielgruppen deines Accounts, deiner Wettbewerber & öffentlicher
+  Personen.
+- Filtere nach Follower-Zahl & Verifizierung, um passende Profile zu finden.
+- Exportiere Mitglieder von X-Communities.
+- Baue öffentliche Datasets sozialer Netzwerke für die Forschung.
+- Segmentiere Follower nach Stichwort in der Bio, Standort oder Profiltyp.
 
-### Welche Daten kann X Follower Scraper extrahieren?
+## Warum X Follower Scraper nutzen?
+
+- **Die günstigsten gefilterten Follower-Listen.** Der [Benchmark](README.md#benchmark)
+  vom 2026-10-15 behielt NASA-Follower mit 1.000+ Followern. Die 4 anderen
+  Actors berechneten jedes Profil, das sie lasen. Sie kosteten pro nützlichem
+  Profil 39- bis 273-mal so viel.
+- **2,6-mal schnellere Follower-Exporte.** Im [Benchmark](README.md#benchmark) las er
+  1.000 Follower 2,6-mal schneller als 4 andere Actors.
+- **1,6-mal so viele Felder pro Profil.** Sein Median-Datensatz im Modus full
+  hatte im [Benchmark](README.md#benchmark) 39 Felder. Das ist das 1,6-Fache des Medians
+  der anderen Actors.
+- **Sieh Zielgruppen-Überschneidungen.** Der Merge-Modus liefert 1 Datensatz pro
+  Profil, mit jeder Quelle, zu der es passte. Sortiere nach `overlapCount`, um
+  gemeinsame Follower zu finden.
+- **Prüfe, wer wem folgt.** Trage Accounts in `followCheckSources` &
+  `followCheckTargets` ein. Jeder Datensatz enthält `isFollowing` &
+  `isFollowedBy` für 1 Paar.
+- **Jede Zielgruppe in 1 Run.** Gib Nutzernamen, IDs, URLs oder Kurzpfade an.
+  Lies Follower, gefolgte Accounts, Listenmitglieder, Community-Mitglieder,
+  Affiliates oder Abonnements.
+- **Finde die passenden Profile.** Filtere nach Followern, Posts, Account-Alter,
+  Verifizierung, Bio, Standort & veröffentlichter E-Mail.
+
+### Vollständige Ergebnisse
+
+- Exporte von Followern & gefolgten Accounts liefern vollständige Listen.
+- Auch Exporte verifizierter Follower liefern vollständige Listen.
+- Jedes Ergebnis enthält die vollständigsten Daten, die X dafür hat.
+
+### Genaue Datensätze
+
+- Jede ID in einem Datensatz bleibt exakt.
+- Verifizierungs-Badges stimmen mit dem überein, was `x.com` zeigt.
+- Datensätze enthalten nur öffentliche Daten.
+- Werbung & gesponserte Einträge landen nie in deinen Datensätzen.
+
+### Aktuelle Daten
+
+- Abrufe funktionieren weiter, wenn X Änderungen ausrollt.
+
+### Tempo
+
+- Eine langsame Seite hält deinen Run nicht auf.
+- Abrufe enden, sobald ihre Datensätze ankommen.
+- Hängende Actor-Aufrufe laufen von selbst wieder an.
+
+### Faire Abrechnung
+
+- Eine fehlerhafte Eingabe kostet nichts & sagt dir, was du korrigieren musst.
+- Actors rechnen nur gelieferte, eindeutige, passende Datensätze ab.
+- Ein Profil, das mehrere Ziele teilen, wird nur einmal berechnet.
+- Ein neu gestarteter Run berechnet nie doppelt.
+- Runs bleiben innerhalb deines Ausgabenlimits & schreiben trotzdem ihre
+  Diagnosen.
+- Kleine Runs enden mit einem Tipp, der Kosten senkt.
+
+### Zuverlässigkeit
+
+- Ein einzelner Fehler lässt deinen Run nicht scheitern.
+- Ein Zeitlimit liefert die bereits gefundenen Datensätze samt Diagnosen.
+- Actors überstehen kurze Xquik-Ausfälle.
+- Actor-Runs überstehen Neustarts ohne Dopplungen.
+- Ein fehlerhafter Datensatz lässt keinen Batch scheitern.
+- Gestoppte Runs behalten ihre Datensätze & ihren Report.
+- Ein Run, der nicht starten kann, erklärt trotzdem, warum.
+- Der Support sieht genau, was eine Anfrage oder ein Run geliefert hat.
+
+### Für Agents gebaut
+
+- Actors akzeptieren Eingaben, die für andere Actors geschrieben sind.
+- Jeder Run sagt, warum er endete & ob du es erneut versuchen solltest.
+
+### Umfangreiche Daten
+
+- Kurzlinks werden aufgelöst, & Listen-Datensätze können vollständige Profile
+  enthalten.
+
+### Qualitätsprüfungen
+
+- Jedes Feld, das X zeigt, wird geliefert, bewusst weggelassen oder ist
+  nachweislich nicht vorhanden.
+- Xquik testet jeden Abruf live gegen X.
+
+## Welche Daten kann X Follower Scraper extrahieren?
 
 | Feld                     | Beschreibung                                                      |
 | ------------------------ | ----------------------------------------------------------------- |
@@ -101,19 +182,6 @@ markiert. X markiert auch viele Unternehmens- & Behördenkonten blau. Setze
 Datensätze enthalten nie Angaben, die nur den Betrachter betreffen. Xquik
 entfernt Betrachter-Flags wie Folgen, Blockieren, Stummschalten,
 Direktnachrichten, Mitteilungen & Ähnliches. Auch die Raw-Ausgabe verwirft sie.
-
-## Anwendungsfälle
-
-- Reichere Leads an & baue Forschungsdatasets mit mehr Feldern pro Profil. Am
-  2026-09-29 hatte unser Median-Datensatz im Modus full 38 Felder. Das ist das
-  2,5-Fache des Medians von 9 anderen Actors.
-- Exportiere Follower von Wettbewerbern für die Lead-Recherche.
-- Vergleiche die Zielgruppen deines Accounts, deiner Wettbewerber & öffentlicher
-  Personen.
-- Filtere nach Follower-Zahl & Verifizierung, um passende Profile zu finden.
-- Exportiere Mitglieder von X-Communities.
-- Baue öffentliche Datasets sozialer Netzwerke für die Forschung.
-- Segmentiere Follower nach Stichwort in der Bio, Standort oder Profiltyp.
 
 ## Wie scrape ich Follower-Daten mit X Follower Scraper?
 
@@ -350,8 +418,8 @@ Brauchst du mehr Volumen, dann
 [wähle einen Apify-Plan](https://apify.com/pricing?fpr=xquik) mit mehr
 vorausbezahlter Nutzung.
 
-1 Run kann viele Ziele lesen. Limits, Deduplizierung & Abrechnung bleiben über
-alle Ziele exakt.
+1 Run kann viele Ziele lesen. Filter & Duplikatentfernung laufen vor der
+Abrechnung. Limits, Deduplizierung & Abrechnung bleiben über alle Ziele exakt.
 
 - Filter laufen, bevor ein Profil in dein Dataset kommt, gefilterte Datensätze
   kosten also nichts.

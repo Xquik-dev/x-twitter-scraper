@@ -22,21 +22,82 @@ noch einen Login.
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
 
-## Standorte & Trenddaten
+## Warum X Trends Scraper nutzen?
 
-- Mehrere Länder, Städte oder WOEIDs, parallel gelesen.
+- **Trendverlauf nach Zeitraum.** Setze `from`, `to` & `every`, um 1 Trendliste
+  pro Schritt zu erhalten.
+- **Die Trends von gestern, jeden Tag.** Mit `at` auf `24h` liest ein täglicher
+  Zeitplan die Trends von gestern.
+- **WOEIDs, Orts-IDs & Hashflags.** Aktiviere `listLocations` oder
+  `listHashflags`, oder fülle `placeSearchTerms` aus.
+- **Genaue Erfassungszeiten.** Vergangene Datensätze enthalten `capturedAt`,
+  also wann X die Liste zeigte.
+- **Sofort nutzbare Exporte.** Behalte Felder, benenne sie um, mache sie flach
+  oder füge sie zusammen. Exportiere dann JSON, CSV, Excel, XML oder RSS.
+
+### Vollständige Ergebnisse
+
+- Jedes Ergebnis enthält die vollständigsten Daten, die X dafür hat.
+
+### Genaue Datensätze
+
+- Datensätze enthalten nur öffentliche Daten.
+
+### Aktuelle Daten
+
+- Lies Trends für jeden vergangenen Zeitpunkt seit 2026-10-13.
+- Abrufe funktionieren weiter, wenn X Änderungen ausrollt.
+
+### Tempo
+
+- Eine langsame Seite hält deinen Run nicht auf.
+- Abrufe enden, sobald ihre Datensätze ankommen.
+- Hängende Actor-Aufrufe laufen von selbst wieder an.
+
+### Faire Abrechnung
+
+- Eine fehlerhafte Eingabe kostet nichts & sagt dir, was du korrigieren musst.
+- Actors rechnen nur gelieferte, eindeutige, passende Datensätze ab.
+- Ein neu gestarteter Run berechnet nie doppelt.
+- Runs bleiben innerhalb deines Ausgabenlimits & schreiben trotzdem ihre
+  Diagnosen.
+
+### Zuverlässigkeit
+
+- Ein einzelner Fehler lässt deinen Run nicht scheitern.
+- Ein Zeitlimit liefert die bereits gefundenen Datensätze samt Diagnosen.
+- Actors überstehen kurze Xquik-Ausfälle.
+- Actor-Runs überstehen Neustarts ohne Dopplungen.
+- Ein fehlerhafter Datensatz lässt keinen Batch scheitern.
+- Gestoppte Runs behalten ihre Datensätze & ihren Report.
+- Ein Run, der nicht starten kann, erklärt trotzdem, warum.
+- Der Support sieht genau, was eine Anfrage oder ein Run geliefert hat.
+
+### Für Agents gebaut
+
+- Actors akzeptieren Eingaben, die für andere Actors geschrieben sind.
+- Jeder Run sagt, warum er endete & ob du es erneut versuchen solltest.
+
+### Umfangreiche Daten
+
+- Trends nach Ortsname, Land oder Regions-ID, mit markierten gesponserten
+  Trends.
+
+### Qualitätsprüfungen
+
+- Jedes Feld, das X zeigt, wird geliefert, bewusst weggelassen oder ist
+  nachweislich nicht vorhanden.
+- Xquik testet jeden Abruf live gegen X.
+
+## Welche Daten kann X Trends Scraper extrahieren?
+
 - Bis zu 50 aktuelle Trends pro Standort.
-- Vergangene Trends aus dem Twitter-Trends-Archiv, nach Datum & Uhrzeit, seit
-  2026-10-13.
 - Eine Liste aller Orte, für die X Trends anbietet, mit WOEID, Land & Typ.
 - X-Ortssuche, mit der Orts-ID, die die X-Postsuche annimmt.
 - X-Hashflags, also die eigenen Emojis, die X nach manchen Hashtags zeigt.
 - Rang, Thema, Suchbegriff, Post-Volumen, Such-URL, WOEID & Quellstandort.
 - Standortzuordnung in jedem Datensatz.
 - Flags, die Hashtag-Datensätze & Datensätze mit Post-Volumen markieren.
-- Duplikatentfernung für gleichwertige Eingaben vor der Abrechnung.
-- Exporte als JSON, CSV, Excel, XML & RSS über Apify-Datasets.
-- Runs laufen nach einer Apify-Migration mit gespeichertem Zustand weiter.
 
 ## So scrapst du X-Trends
 

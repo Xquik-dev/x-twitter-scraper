@@ -33,22 +33,17 @@ You need no X API key or login.
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## Locations & trend data
+## Why use X Trends Scraper?
 
-- Multiple countries, towns or WOEIDs, read at once.
-- Up to 50 current trends for each location.
-- Past trends from the Twitter trends archive, by date & time, since 2026-10-13.
-- A list of every place X offers trends for, with its WOEID, country & type.
-- X place search, with the place ID that X post search takes.
-- X hashflags, the custom emoji X shows after some hashtags.
-- Rank, topic, query, Tweet volume, search URL, WOEID & source location.
-- Location attribution on every row.
-- Flags that mark hashtag rows & rows that have a Tweet volume.
-- Duplicate removal for equivalent inputs before billing.
-- JSON, CSV, Excel, XML & RSS exports through Apify datasets.
-- Runs resume from saved state after an Apify migration.
-
-## What you get
+- **Trend history by range.** Set `from`, `to` & `every` to get 1 trend list per
+  step.
+- **Yesterday's trends, every day.** With `at` set to `24h`, a daily schedule
+  reads yesterday's trends.
+- **WOEIDs, place IDs & hashflags.** Turn on `listLocations` or `listHashflags`,
+  or fill `placeSearchTerms`.
+- **Exact capture times.** Past rows carry `capturedAt`, when X showed the list.
+- **Ready-to-use exports.** Keep, rename, flatten or join fields, then export
+  JSON, CSV, Excel, XML or RSS.
 
 ### Complete results
 
@@ -60,33 +55,31 @@ You need no X API key or login.
 
 ### Fresh data
 
-- Trends can be read for any past moment since the archive began.
+- Read trends for any past moment since 2026-10-13.
 - Reads keep working when X ships changes.
 
 ### Speed
 
-- A slow X answer doesn't hold up your request.
-- Actors read many handles, posts & queries at once.
+- One slow page doesn't hold up your run.
 - Reads finish the moment their rows arrive.
 - Stalled Actor calls recover on their own.
 
 ### Fair billing
 
-- Bad input costs nothing, since it's refused before any read.
+- Bad input costs nothing & tells you what to fix.
 - Actors charge only for delivered, unique, matching rows.
 - A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
+- Runs stay within your spend cap & still write their diagnostics.
 
 ### Reliability
 
-- A one-off X failure doesn't fail your request.
+- A one-off error doesn't fail your run.
 - A deadline returns the rows already found, with diagnostics.
 - Actors ride out short Xquik outages.
 - Actor runs survive restarts without repeats.
 - One bad row doesn't sink a batch.
 - Stopped runs keep their rows & their report.
 - A run that can't start still explains itself.
-- Problems on X's side are fixed before they reach your reads.
 - Support can see exactly what a request or run returned.
 
 ### Built for agents
@@ -101,7 +94,17 @@ You need no X API key or login.
 ### Quality checks
 
 - Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
+- Xquik tests every read live against X.
+
+## What data can X Trends Scraper extract?
+
+- Up to 50 current trends for each location.
+- A list of every place X offers trends for, with its WOEID, country & type.
+- X place search, with the place ID that X post search takes.
+- X hashflags, the custom emoji X shows after some hashtags.
+- Rank, topic, query, Tweet volume, search URL, WOEID & source location.
+- Location attribution on every row.
+- Flags that mark hashtag rows & rows that have a Tweet volume.
 
 ## How to scrape X trends
 

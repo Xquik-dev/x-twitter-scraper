@@ -32,28 +32,19 @@ You pay **$0.00015 per delivered row**, & Apify bills platform usage separately.
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## Quote data in every row
+## Why use X Quote Tweets Scraper?
 
-- The quote's full text, link, language & post time.
-- Likes, replies, reposts, quotes, views & bookmarks.
-- The author's full public profile, with name, bio, followers, verification &
-  more.
-- Photos, videos & GIFs with their links.
-- Hashtags, mentions & links found in the text.
-- The quoted post itself, in the same shape.
-- `sourceTarget`, the input post the row quotes.
-- `position`, the row's place in the run, & `scrapedAt`, its delivery time.
-- Many posts in 1 run, each read to the end of what X serves.
-- Newest first, or the quotes X ranks highest.
-- 11 filters for language, dates, media type, 6 minimum counts & verified
-  authors.
-- 1 row per author when you want people, not posts.
-- Post URLs from `x.com` & `twitter.com`, or numeric Tweet IDs.
-- Duplicate removal before billing.
-- JSON, CSV, Excel, XML & RSS exports through Apify datasets.
-- Runs resume from saved state after an Apify migration.
-
-## What you get
+- **1 row per person.** Turn on `uniqueAuthors` to see who quoted a post, once
+  each. Later quotes by the same author cost nothing.
+- **Newest or top quotes.** Set `sort` to `latest` for new quotes, or `top` for
+  the ones X ranks highest.
+- **11 quote filters.** Filter by language, dates, media type, verified authors
+  & 6 minimum counts.
+- **Many posts in 1 run.** Paste `x.com` or `twitter.com` post URLs, or Tweet
+  IDs. Cap the run with `maxItems` & each post with `maxItemsPerTarget`.
+- **Tables ready to export.** "Quote Tweets" lists each quote with its counts.
+  "Quote Authors" lists who quoted each post. Export JSON, CSV, Excel, XML or
+  RSS.
 
 ### Complete results
 
@@ -66,7 +57,7 @@ You pay **$0.00015 per delivered row**, & Apify bills platform usage separately.
 - Reposts carry the full original text.
 - Every ID in a row stays exact.
 - Mentions, links, hashtags & highlights line up with the text.
-- Counts X didn't send are listed in `unknownCounts`, never shown as 0.
+- A count that isn't known is listed in `unknownCounts`, never shown as 0.
 - Verified badges match what `x.com` shows.
 - Rows hold public data only.
 - Quote searches return every real quote & nothing else.
@@ -78,29 +69,27 @@ You pay **$0.00015 per delivered row**, & Apify bills platform usage separately.
 
 ### Speed
 
-- A slow X answer doesn't hold up your request.
-- Actors read many handles, posts & queries at once.
+- One slow page doesn't hold up your run.
 - Reads finish the moment their rows arrive.
 - Stalled Actor calls recover on their own.
 
 ### Fair billing
 
-- Bad input costs nothing, since it's refused before any read.
+- Bad input costs nothing & tells you what to fix.
 - Actors charge only for delivered, unique, matching rows.
 - A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
+- Runs stay within your spend cap & still write their diagnostics.
 - Small runs end with a tip that cuts cost.
 
 ### Reliability
 
-- A one-off X failure doesn't fail your request.
+- A one-off error doesn't fail your run.
 - A deadline returns the rows already found, with diagnostics.
 - Actors ride out short Xquik outages.
 - Actor runs survive restarts without repeats.
 - One bad row doesn't sink a batch.
 - Stopped runs keep their rows & their report.
 - A run that can't start still explains itself.
-- Problems on X's side are fixed before they reach your reads.
 - Support can see exactly what a request or run returned.
 
 ### Built for agents
@@ -119,7 +108,19 @@ You pay **$0.00015 per delivered row**, & Apify bills platform usage separately.
 ### Quality checks
 
 - Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
+- Xquik tests every read live against X.
+
+## What data can X Quote Tweets Scraper extract?
+
+- The quote's full text, link, language & post time.
+- Likes, replies, reposts, quotes, views & bookmarks.
+- The author's full public profile, with name, bio, followers, verification &
+  more.
+- Photos, videos & GIFs with their links.
+- Hashtags, mentions & links found in the text.
+- The quoted post itself, in the same shape.
+- `sourceTarget`, the input post the row quotes.
+- `position`, the row's place in the run, & `scrapedAt`, its delivery time.
 
 ## How to scrape quote tweets
 

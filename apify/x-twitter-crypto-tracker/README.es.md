@@ -22,7 +22,96 @@ Apify factura aparte el uso de la plataforma.
 > Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 > "Twitter" y "X" son marcas registradas de X Corp.
 
-## Qué envía el rastreador de Twitter cripto
+## ¿Por qué usar X (Twitter) Crypto Tracker?
+
+- **Ve las eliminaciones sin configurar nada.** Los tweets eliminados & los
+  cambios de perfil envían alertas de forma predeterminada.
+- **Alertas en tu app de chat.** Envíalas a Telegram, Discord o Slack. Telegram
+  no necesita ID de chat. Cualquier webhook HTTPS también recibe el evento
+  completo.
+- **Menos ruido en las búsquedas de monedas.** Agrega cualquier operador de
+  búsqueda de X a un cashtag, como un filtro de idioma.
+- **Comprueba que tus alertas funcionan.** Cada URL nueva de webhook, Slack o
+  Discord recibe una alerta de prueba. El estado de la ejecución dice si llegó.
+- **Recupera eventos perdidos.** `since` vuelve a guardar los eventos desde
+  cualquier fecha de los últimos 30 días.
+- **Comprueba que el monitor está vigilando.** La página de estado de cada
+  ejecución lo indica & muestra 1 siguiente paso con un botón.
+- **Sin pausas silenciosas.** Tus alertas te avisan 4 horas antes de que se
+  pause un monitor sin ejecuciones. La siguiente ejecución lo reanuda.
+- **No necesitas cuenta de X.** Nunca compartes tu inicio de sesión de X ni una
+  clave de API.
+
+### Filas precisas
+
+- Los reposts traen el texto original completo.
+- Cada ID de una fila se mantiene exacto.
+- Las menciones, los enlaces, los hashtags & los resaltados quedan alineados con
+  el texto.
+- Las insignias de verificación coinciden con lo que muestra `x.com`.
+- Las filas solo contienen datos públicos.
+- Los anuncios & las entradas promocionadas nunca llegan a tus filas.
+- Los monitores solo informan eliminaciones & dejados de seguir reales.
+- Las alertas de cambios de perfil no saltan por valores que van & vienen.
+
+### Datos actualizados
+
+- Los monitores de cuentas detectan los cambios en cerca de un segundo.
+- Los monitores de palabras clave detectan todos los tweets que coinciden.
+- Los monitores no se pierden ningún tweet.
+- Un monitor que se atrasa recupera lo que se perdió.
+- Los videos en vivo & los Espacios generan un evento cuando empiezan.
+- Las lecturas siguen funcionando cuando X lanza cambios.
+
+### Velocidad
+
+- Una página lenta no frena tu ejecución.
+- Las llamadas a Actores que se atascan se recuperan solas.
+
+### Cobro justo
+
+- Los monitores tienen 1 precio fijo por hora, con eventos & webhooks incluidos.
+- Los Actores de monitoreo solo cobran las horas que un monitor estuvo
+  vigilando.
+
+### Confiabilidad
+
+- Un error aislado no hace fallar tu ejecución.
+- Los Actores resisten las caídas breves de Xquik.
+- Las ejecuciones de los Actores siguen tras un reinicio sin repetir nada.
+- Las ejecuciones detenidas conservan sus filas & su informe.
+- Una ejecución que no puede iniciar igual explica por qué.
+- Los webhooks van firmados & protegidos contra ataques de repetición.
+- Un webhook que estuvo caído igual recibe sus eventos, hasta por 7 días.
+- Los eventos nuevos llegan a tiempo, incluso después de que tu webhook estuvo
+  caído.
+- Los webhooks nunca van a hosts privados o locales.
+- Las alertas de chat llegan en orden sin alcanzar los límites de frecuencia.
+- Soporte puede ver exactamente qué devolvió una solicitud o una ejecución.
+
+### Hecho para agentes
+
+- Los Actores aceptan entradas escritas para otros Actores.
+- Cada ejecución dice por qué terminó & si conviene reintentar.
+
+### Datos detallados
+
+- Las filas de posts traen el texto de los Note Tweets, las ediciones, las Notas
+  de la Comunidad, las etiquetas de alcance & los controles de respuesta.
+- Las filas traen la app de origen, los conteos de contenido multimedia & los
+  datos de cuentas profesionales.
+- El contenido multimedia trae variantes, texto alternativo, tamaños & motivos
+  de disponibilidad.
+
+### Controles de calidad
+
+- Cada campo que muestra X se entrega, se omite a propósito o se comprueba que
+  no existe.
+- Xquik prueba cada lectura en vivo contra X.
+- Los README de los Actores, los esquemas & la salida real nombran los mismos
+  campos.
+
+## ¿Qué datos envía X (Twitter) Crypto Tracker?
 
 - Todos los tweets, respuestas, citas y reposts nuevos de las cuentas cripto y
   los KOL que vigilas, normalmente detectados en menos de un segundo después de
@@ -35,8 +124,7 @@ Apify factura aparte el uso de la plataforma.
   completo de la cuenta seguida, cuando activas `followingChanges`.
 - Todos los tweets nuevos que X muestra en la búsqueda Más reciente para un
   cashtag, el nombre de una moneda o una dirección de contrato.
-- Alertas en Telegram, Discord, Slack o cualquier webhook HTTPS, y cada evento
-  en el dataset de la ejecución y en 1 dataset de historial.
+- Cada evento en el dataset de la ejecución y en 1 dataset de historial.
 
 ## Cómo rastrear cuentas cripto de Twitter
 

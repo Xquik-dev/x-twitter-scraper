@@ -21,19 +21,101 @@ de clé API X ni de connexion.
 > Xquik est un service tiers indépendant. Non affilié à X Corp. "Twitter" et "X"
 > sont des marques déposées de X Corp.
 
-## Réponses, citations & profils
+## Pourquoi utiliser X Engagement Scraper ?
 
-- Des URL de posts & des ID de post numériques.
+- **Seulement les réponses utiles.** Choisissez les réponses directes ou
+  imbriquées, une profondeur de réponse & une période.
+- **Des prospects parmi ceux qui repostent.** Filtrez-les par `minFollowers`,
+  `hasEmail` ou `bioContains`. Les lignes portent les e-mails, téléphones &
+  liens que publie chaque profil.
+- **Tous les types d'engagement en 1 run.** Collez des URL de posts ou des ID de
+  post. Mélangez réponses, citations, retweeters & contexte du fil.
+- **Fixez vos limites de lignes.** Plafonnez le run avec `maxItems` & chaque
+  type d'engagement d'un post avec `maxItemsPerTarget`.
+- **Taux d'engagement intégrés.** Indiquez `engagementRate` ou
+  `engagementPerView` dans `fields` pour ajouter la colonne.
+
+### Résultats complets
+
+- Chaque résultat contient les données les plus complètes dont X dispose.
+
+### Lignes exactes
+
+- Les reposts portent le texte d'origine en entier.
+- Chaque ID d'une ligne reste exact.
+- Les mentions, liens, hashtags & passages mis en avant pointent vers le bon
+  endroit du texte.
+- Un compteur inconnu apparaît dans `unknownCounts` & jamais comme 0.
+- Les badges de certification correspondent à ce qu'affiche `x.com`.
+- Les lignes ne contiennent que des données publiques.
+- Les recherches de citations renvoient chaque vraie citation & rien d'autre.
+- Les publicités & les contenus sponsorisés n'arrivent jamais dans vos lignes.
+
+### Données à jour
+
+- Les lectures continuent de fonctionner quand X déploie des changements.
+
+### Vitesse
+
+- Une page lente ne bloque pas votre run.
+- Les lectures se terminent dès que leurs lignes arrivent.
+- Les appels d'Actor bloqués repartent d'eux-mêmes.
+
+### Facturation juste
+
+- Une entrée invalide ne coûte rien & vous dit quoi corriger.
+- Les Actors facturent seulement les lignes livrées, uniques & conformes à vos
+  filtres.
+- Un profil commun à plusieurs cibles se facture une seule fois.
+- Un run redémarré ne facture jamais deux fois.
+- Les runs restent dans votre limite de dépense & écrivent quand même leurs
+  diagnostics.
+- Les petits runs se terminent par un conseil qui réduit le coût.
+
+### Fiabilité
+
+- Une erreur ponctuelle ne fait pas échouer votre run.
+- Un délai dépassé renvoie les lignes déjà trouvées, avec des diagnostics.
+- Les Actors résistent aux courtes pannes de Xquik.
+- Les runs d'Actor survivent aux redémarrages sans doublons.
+- Une mauvaise ligne ne fait pas échouer tout un lot.
+- Les runs arrêtés gardent leurs lignes & leur rapport.
+- Un run qui ne peut pas démarrer explique quand même pourquoi.
+- Le support peut voir exactement ce qu'une requête ou un run a renvoyé.
+
+### Conçu pour les agents
+
+- Les Actors acceptent une entrée écrite pour d'autres Actors.
+- La sortie est prête pour les tableurs, avec des colonnes plates & des totaux
+  d'engagement.
+- Chaque run indique pourquoi il s'est terminé & s'il faut réessayer.
+
+### Données riches
+
+- Les lignes de post portent le texte des Note Tweets, les modifications, les
+  Notes de la Communauté, les libellés de portée & les contrôles de réponse.
+- Les lignes portent les apps sources, le nombre de médias & les données de
+  compte professionnel.
+- Les médias arrivent avec leurs variantes, leur texte alternatif, leurs tailles
+  & les motifs de disponibilité.
+- Vous voyez quand chaque compte a reposté un post.
+- Vous voyez si chaque compte a répondu à un post, l'a reposté ou cité. Vous
+  voyez aussi s'il suit l'auteur ou fait partie d'une Communauté.
+
+### Contrôles qualité
+
+- Chaque champ que X affiche est fourni, omis exprès ou prouvé absent.
+- Xquik teste chaque lecture en direct sur X.
+
+## Quelles données X Engagement Scraper peut-il extraire ?
+
 - Les réponses directes, sur les pages de résultats disponibles.
 - Les réponses directes & imbriquées, en 4 ordres de tri.
 - Les détails du post source, en ligne optionnelle.
 - Les citations avec texte, auteurs, médias & métriques.
 - Les profils des comptes qui ont reposté.
 - Le contexte de conversation autour de chaque post source.
-- Plusieurs types d'engagement & plusieurs posts en 1 run.
-- Un plafond global & un plafond par ressource d'engagement.
 - L'attribution de chaque ligne à son post source & à son type d'engagement.
-- Les runs reprennent après un redémarrage d'Apify.
 
 ## Comment scraper l'engagement de posts X
 

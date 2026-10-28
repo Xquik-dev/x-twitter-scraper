@@ -21,21 +21,76 @@ iniciar sesión.
 > Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 > "Twitter" y "X" son marcas registradas de X Corp.
 
-## Búsquedas & datos de empleos
+## ¿Por qué usar X Jobs Scraper?
 
-- Muchos términos de búsqueda en 1 ejecución, leídos en paralelo.
-- Filtros de lugar, modalidad de trabajo, nivel de experiencia, tipo de empleo &
-  empresa.
-- URLs & IDs de empleos leídos como ofertas completas.
+- **Solo los empleos que quieres.** Filtra por lugar, modalidad de trabajo,
+  nivel de experiencia, tipo de empleo & empresa.
+- **El lugar exacto que buscas.** `locationId` fija 1 lugar, como New York City
+  en vez de West New York.
+- **Empleos conocidos por enlace.** Pega URLs o IDs de empleos para obtener cada
+  oferta completa.
+- **Descripciones sin costo adicional.** Una fila con la descripción completa
+  cuesta lo mismo que una oferta sin descripción.
+- **Exportaciones listas para usar.** Conserva, renombra, aplana o une campos, &
+  luego exporta en JSON, CSV, Excel, XML o RSS.
+
+### Resultados completos
+
+- Cada resultado trae los datos más completos que X tiene sobre él.
+
+### Filas precisas
+
+- Las filas solo contienen datos públicos.
+
+### Datos actualizados
+
+- Las lecturas siguen funcionando cuando X lanza cambios.
+
+### Velocidad
+
+- Una página lenta no frena tu ejecución.
+- Las lecturas terminan en cuanto llegan sus filas.
+- Las llamadas a Actores que se atascan se recuperan solas.
+
+### Cobro justo
+
+- Una entrada inválida no cuesta nada & te dice qué corregir.
+- Los Actores solo cobran las filas entregadas, únicas & que cumplen tus
+  filtros.
+- Una ejecución reiniciada nunca cobra 2 veces.
+- Las ejecuciones respetan tu límite de gasto & aun así escriben sus
+  diagnósticos.
+- Las ejecuciones pequeñas terminan con un consejo para gastar menos.
+
+### Confiabilidad
+
+- Un error aislado no hace fallar tu ejecución.
+- Si se acaba el tiempo, recibes las filas ya encontradas, con diagnósticos.
+- Los Actores resisten las caídas breves de Xquik.
+- Las ejecuciones de los Actores siguen tras un reinicio sin repetir nada.
+- Una fila defectuosa no arruina un lote.
+- Las ejecuciones detenidas conservan sus filas & su informe.
+- Una ejecución que no puede iniciar igual explica por qué.
+- Soporte puede ver exactamente qué devolvió una solicitud o una ejecución.
+
+### Hecho para agentes
+
+- Los Actores aceptan entradas escritas para otros Actores.
+- Cada ejecución dice por qué terminó & si conviene reintentar.
+
+### Controles de calidad
+
+- Cada campo que muestra X se entrega, se omite a propósito o se comprueba que
+  no existe.
+- Xquik prueba cada lectura en vivo contra X.
+
+## ¿Qué datos puede extraer X Jobs Scraper?
+
 - Ubicaciones de empleo por nombre, cada una con el ID que acepta `locationId`.
 - Título, rango salarial, moneda, enlace para postularse, ubicación & cuenta que
   contrata.
 - Descripciones completas en texto plano & Markdown en cada fila.
 - La búsqueda de origen en cada fila.
-- Eliminación de duplicados entre búsquedas antes del cobro.
-- Exportación en JSON, CSV, Excel, XML & RSS con los datasets de Apify.
-- Las ejecuciones se reanudan desde el estado guardado tras una migración de
-  Apify.
 
 ## Cómo extraer empleos de X
 

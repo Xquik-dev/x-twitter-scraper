@@ -37,23 +37,31 @@ Watch a brand, a product line or a campaign for complaints, praise & purchase
 questions. Brief support & marketing teams from real posts. Keep a history of
 how customers talk about you from run to run.
 
-- **Every field of the source tweet.** Text, author, counts, media, links,
-  quoted & replied posts stay beside the answers.
-- **Typed answers.** Each row has a relevance probability, a sentiment category
-  with probabilities & a customer-experience category.
-- **Change tracking.** Runs compare by decision, so small probability shifts do
-  not count as changes.
-- **Filter-first billing.** You pay only for unique, filter-matching tweets with
-  a successful analysis.
-
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## What you get
+## Why use X (Twitter) Brand Monitoring with AI Analysis?
+
+- **Share of voice per brand.** The summary gives mentions, share of voice &
+  engagement per brand & alias.
+- **Alerts on what changed.** Add an earlier run's dataset ID to
+  `monitor.baselineDatasetId`. `monitor.changedRows` lists mentions whose
+  decisions moved, ready for a webhook.
+- **Top mentions per brand.** Each brand lists its 3 most engaged mentions per
+  answer category.
+- **Spot namesakes.** A relevance probability flags mentions that aren't about
+  your brand.
+- **Analyze your own text.** Paste reviews, replies or drafts in `texts` for the
+  same answers. The run fetches nothing from X.
+- **Spreadsheet-ready answers.** The `Flat answers` view & CSV or Excel exports
+  show 1 column per question.
+- **Ask your own questions.** Replace the defaults with up to 8 questions in
+  `analysis.questions`.
+- **No accounts or keys.** The price includes AI-powered analysis. You need no
+  AI key, X API key or login.
 
 ### Complete results
 
-- Searches return posts that X's own search tab leaves out.
 - Large date ranges come back whole & fast.
 - Searches return every match, whatever operators you combine.
 - Filtered pages come back full until the results run out.
@@ -64,17 +72,16 @@ how customers talk about you from run to run.
 - Search results hold every post that matches your query & nothing else.
 - Word & phrase matching works in every language & script.
 - Language filters work for every language X tags.
-- "X can't run this search" appears only when it's true.
 - Protected accounts & private Lists get a clear answer, not an empty page.
 - Reposts carry the full original text.
 - Every ID in a row stays exact.
 - Mentions, links, hashtags & highlights line up with the text.
 - Verified badges match what `x.com` shows.
 - Rows hold public data only.
-- Newest-first results stay in true date order across pages.
-- Messy queries still run instead of failing.
+- Newest-first results come back in date order.
+- Searches accept queries as you'd type them on X.
 - Place searches work with names in 6 languages.
-- Searches X can't run fail at once, with the fix.
+- A search that can't run fails at once & says how to fix it.
 - A date means one thing in any common form.
 - Searches accept `since_id` & `max_id` bounds.
 - Ads & promoted entries never reach your rows.
@@ -85,27 +92,24 @@ how customers talk about you from run to run.
 
 ### Speed
 
-- A slow X answer doesn't hold up your request.
-- Repeated lookups answer at once.
+- One slow page doesn't hold up your run.
 - Searches stay fast on busy topics.
 - Each next page arrives fast.
-- Actors read many handles, posts & queries at once.
 - Reads finish the moment their rows arrive.
 - Stalled Actor calls recover on their own.
 
 ### Fair billing
 
-- A retried page is free.
-- Bad input costs nothing, since it's refused before any read.
+- Bad input costs nothing & tells you what to fix.
 - AI analysis bills only the posts it analyzed.
 - Actors charge only for delivered, unique, matching rows.
 - A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
+- Runs stay within your spend cap & still write their diagnostics.
 - AI Actors don't bill failed or skipped analyses.
 
 ### Reliability
 
-- A one-off X failure doesn't fail your request.
+- A one-off error doesn't fail your run.
 - Paging stays consistent from one page to the next.
 - Paging never loops forever.
 - A deadline returns the rows already found, with diagnostics.
@@ -114,7 +118,6 @@ how customers talk about you from run to run.
 - One bad row doesn't sink a batch.
 - Stopped runs keep their rows & their report.
 - A run that can't start still explains itself.
-- Problems on X's side are fixed before they reach your reads.
 - Support can see exactly what a request or run returned.
 
 ### Built for agents
@@ -134,7 +137,14 @@ how customers talk about you from run to run.
 ### Quality checks
 
 - Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
+- Xquik tests every read live against X.
+
+## What data does X (Twitter) Brand Monitoring with AI Analysis return?
+
+- **Every field of the source tweet.** Text, author, counts, media, links,
+  quoted & replied posts stay beside the answers.
+- **Typed answers.** Each row has a relevance probability, a sentiment category
+  with probabilities & a customer-experience category.
 
 ## How to monitor a brand on X
 

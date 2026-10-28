@@ -32,18 +32,16 @@ need no X API key or login.
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## Article data & format
+## Why use X Article Scraper?
 
-- Markdown with headings, lists, bold, italic, links & images, without HTML.
-- `contents` blocks that keep the source formatting.
-- Post URLs & numeric Tweet IDs in the same run.
-- Every Article an account published, from its handle or profile URL.
-- Duplicate removal before billing.
-
-Xquik's X Article Scraper never guesses link metadata. Apify shows Markdown as
-text.
-
-## What you get
+- **No HTML to clean up.** Get each Article as Markdown & plain text from its
+  post URL or ID.
+- **Every Article by an account.** Add a handle or profile URL to list its
+  Articles, newest first. Mix handles, post URLs & Tweet IDs in 1 run.
+- **Engagement rates built in.** Name `totalEngagement`, `engagementRate` or
+  `engagementPerView` in `fields` to add the column.
+- **Ready-to-use exports.** Keep, rename, flatten or join fields, then export
+  JSON, CSV, Excel, XML or RSS.
 
 ### Complete results
 
@@ -60,29 +58,27 @@ text.
 
 ### Speed
 
-- A slow X answer doesn't hold up your request.
-- Actors read many handles, posts & queries at once.
+- One slow page doesn't hold up your run.
 - Reads finish the moment their rows arrive.
 - Stalled Actor calls recover on their own.
 
 ### Fair billing
 
-- Bad input costs nothing, since it's refused before any read.
+- Bad input costs nothing & tells you what to fix.
 - Actors charge only for delivered, unique, matching rows.
 - A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
+- Runs stay within your spend cap & still write their diagnostics.
 - Small runs end with a tip that cuts cost.
 
 ### Reliability
 
-- A one-off X failure doesn't fail your request.
+- A one-off error doesn't fail your run.
 - A deadline returns the rows already found, with diagnostics.
 - Actors ride out short Xquik outages.
 - Actor runs survive restarts without repeats.
 - One bad row doesn't sink a batch.
 - Stopped runs keep their rows & their report.
 - A run that can't start still explains itself.
-- Problems on X's side are fixed before they reach your reads.
 - Support can see exactly what a request or run returned.
 
 ### Built for agents
@@ -93,7 +89,15 @@ text.
 ### Quality checks
 
 - Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
+- Xquik tests every read live against X.
+
+## What data can X Article Scraper extract?
+
+- Markdown with headings, lists, bold, italic, links & images, without HTML.
+- `contents` blocks that keep the source formatting.
+
+Xquik's X Article Scraper never guesses link metadata. Apify shows Markdown as
+text.
 
 ## How to scrape X articles
 

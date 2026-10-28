@@ -20,19 +20,102 @@ anahtarına veya girişe ihtiyacın yok.
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-## Yanıtlar, alıntılar & profiller
+## Neden X Engagement Scraper kullanmalısın?
 
-- Gönderi URL'leri & sayısal gönderi ID'leri.
+- **Yalnızca ihtiyacın olan yanıtlar.** Doğrudan veya iç içe yanıtları, bir
+  yanıt derinliğini & bir zaman aralığını seç.
+- **Yeniden gönderenlerden potansiyel müşteriler.** Yeniden gönderenleri
+  `minFollowers`, `hasEmail` veya `bioContains` ile filtrele. Satırlar her
+  profilin yayımladığı e-postaları, telefonları & bağlantıları taşır.
+- **1 çalıştırmada her etkileşim türü.** Gönderi URL'lerini veya gönderi
+  ID'lerini yapıştır. Yanıtları, alıntıları, yeniden gönderenleri & gönderi
+  dizisi bağlamını karıştır.
+- **Satır sınırlarını sen belirle.** Çalıştırmayı `maxItems` ile, her gönderinin
+  etkileşim türünü `maxItemsPerTarget` ile sınırla.
+- **Hazır etkileşim oranları.** Sütunu eklemek için `fields` içine
+  `engagementRate` veya `engagementPerView` yaz.
+
+### Eksiksiz sonuçlar
+
+- Her cevap, X'te bulunan en eksiksiz veriyi tutar.
+
+### Doğru satırlar
+
+- Yeniden gönderiler orijinal metnin tamamını taşır.
+- Satırdaki her ID birebir doğru kalır.
+- Bahsetmeler, bağlantılar, hashtag'ler & vurgular metindeki yerleriyle eşleşir.
+- Bilinmeyen bir sayı `unknownCounts` içinde listelenir, asla 0 gösterilmez.
+- Onay rozetleri `x.com` üzerinde görünenle aynıdır.
+- Satırlar yalnızca herkese açık veri tutar.
+- Alıntı aramaları her gerçek alıntıyı döndürür, başka bir şey döndürmez.
+- Reklamlar & tanıtılan içerikler satırlarına asla girmez.
+
+### Güncel veri
+
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Okumalar, satırları geldiği anda biter.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- Hatalı girdi ücretsizdir & neyi düzelteceğini söyler.
+- Actor'lar yalnızca teslim edilen, benzersiz & eşleşen satırlar için ücret
+  alır.
+- Birden çok hedefin paylaştığı bir profil 1 kez faturalanır.
+- Yeniden başlatılan bir çalıştırma asla 2 kez ücret almaz.
+- Çalıştırmalar harcama sınırının içinde kalır & tanılamalarını yine yazar.
+- Küçük çalıştırmalar, maliyeti düşüren bir ipucuyla biter.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Süre dolduğunda o ana kadar bulunan satırlar tanılamalarla birlikte döner.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Tek bir hatalı satır bütün grubu bozmaz.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Çıktı düz sütunlar & etkileşim toplamlarıyla tablolara hazırdır.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Zengin veri
+
+- Gönderi satırları Note Tweet metnini, düzenlemeleri, Topluluk Notlarını,
+  erişim etiketlerini & yanıt kontrollerini taşır.
+- Satırlar kaynak uygulamaları, medya sayılarını & profesyonel hesap verilerini
+  taşır.
+- Medya varyantlar, alternatif metin, boyutlar & kullanılabilirlik nedenleriyle
+  gelir.
+- Her hesabın bir gönderiyi ne zaman yeniden gönderdiğini görürsün.
+- Her hesabın bir gönderiyi yanıtlayıp yanıtlamadığını, yeniden gönderip
+  göndermediğini veya alıntılayıp alıntılamadığını görürsün. Yazarı takip edip
+  etmediğini veya bir Toplulukta olup olmadığını da görürsün.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+
+## X Engagement Scraper hangi verileri çıkarabilir?
+
 - Erişilebilen tüm sonuç sayfalarındaki doğrudan yanıtlar.
 - 4 sıralama seçeneğiyle doğrudan & iç içe yanıtlar.
 - Seçilebilir bir satır olarak kaynak gönderi ayrıntıları.
 - Metin, yazar, medya & metriklerle alıntı gönderiler.
 - Yeniden gönderen profilleri.
 - Her kaynak gönderinin çevresindeki konuşma bağlamı.
-- 1 çalıştırmada birçok etkileşim türü & gönderi.
-- Genel bir sınır & her etkileşim türü için ayrı bir sınır.
 - Kaynak gönderi & etkileşim türü bilgisi.
-- Apify yeniden başlattığında çalıştırmalar kaldığı yerden devam eder.
 
 ## X gönderi etkileşimi nasıl kazınır
 

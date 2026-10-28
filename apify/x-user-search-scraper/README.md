@@ -31,19 +31,16 @@ usage separately.
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## Account data & filters
+## Why use X User Search Scraper?
 
-- Filters for audience, posts, age, verification, website, location, bio,
-  username & email.
-- `email` & `contactInfo` with the emails, phones & links each profile
-  publishes.
-- `mode: "autocomplete"`, with the accounts, topics, hashtags & cashtags X
-  suggests for each search term.
-- Resume 1 query from a saved cursor in `startCursor`.
-- Runs keep delivered rows & progress when Apify restarts them.
-- Filters & duplicate removal before billing.
-
-## What you get
+- **Prices in cashtag suggestions.** In `autocomplete` mode, cashtag rows carry
+  `price`, `marketCap` & `dailyChangePercent`.
+- **Only reachable accounts.** Keep profiles that publish an email, a business
+  email or a website. `emailDomains` keeps emails at the domains you list.
+- **Narrow to your audience.** Filter by followers, posts, account age,
+  verification, location, bio & username.
+- **Pick up where you stopped.** Pass a saved cursor in `startCursor` to
+  continue 1 query.
 
 ### Complete results
 
@@ -62,28 +59,26 @@ usage separately.
 
 ### Speed
 
-- A slow X answer doesn't hold up your request.
-- Actors read many handles, posts & queries at once.
+- One slow page doesn't hold up your run.
 - Reads finish the moment their rows arrive.
 - Stalled Actor calls recover on their own.
 
 ### Fair billing
 
-- Bad input costs nothing, since it's refused before any read.
+- Bad input costs nothing & tells you what to fix.
 - Actors charge only for delivered, unique, matching rows.
 - A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
+- Runs stay within your spend cap & still write their diagnostics.
 
 ### Reliability
 
-- A one-off X failure doesn't fail your request.
+- A one-off error doesn't fail your run.
 - A deadline returns the rows already found, with diagnostics.
 - Actors ride out short Xquik outages.
 - Actor runs survive restarts without repeats.
 - One bad row doesn't sink a batch.
 - Stopped runs keep their rows & their report.
 - A run that can't start still explains itself.
-- Problems on X's side are fixed before they reach your reads.
 - Support can see exactly what a request or run returned.
 
 ### Built for agents
@@ -94,7 +89,16 @@ usage separately.
 ### Quality checks
 
 - Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
+- Xquik tests every read live against X.
+
+## What data can X User Search Scraper extract?
+
+- Each matching account's public profile, with name, bio, counts & verification.
+- `sourceTarget`, the search term that found the profile.
+- `email` & `contactInfo` with the emails, phones & links each profile
+  publishes.
+- `mode: "autocomplete"`, with the accounts, topics, hashtags & cashtags X
+  suggests for each search term.
 
 ## How to search X users
 

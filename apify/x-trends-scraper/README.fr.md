@@ -22,12 +22,76 @@ de connexion.
 > Xquik est un service tiers indépendant. Non affilié à X Corp. "Twitter" et "X"
 > sont des marques déposées de X Corp.
 
-## Lieux & données de tendances
+## Pourquoi utiliser X Trends Scraper ?
 
-- Plusieurs pays, villes ou WOEID, lus en parallèle.
+- **L'historique des tendances par période.** Réglez `from`, `to` & `every` pour
+  obtenir 1 liste de tendances par intervalle.
+- **Les tendances de la veille, chaque jour.** Avec `at` réglé sur `24h`, une
+  planification quotidienne lit les tendances de la veille.
+- **WOEID, ID de lieu & hashflags.** Activez `listLocations` ou `listHashflags`,
+  ou remplissez `placeSearchTerms`.
+- **Des heures de capture exactes.** Les lignes passées portent `capturedAt`, le
+  moment où X a affiché la liste.
+- **Des exports prêts à l'emploi.** Gardez, renommez, aplatissez ou combinez des
+  champs, puis exportez en JSON, CSV, Excel, XML ou RSS.
+
+### Résultats complets
+
+- Chaque résultat contient les données les plus complètes dont X dispose.
+
+### Lignes exactes
+
+- Les lignes ne contiennent que des données publiques.
+
+### Données à jour
+
+- Lisez les tendances de n'importe quel moment passé depuis le 2026-10-13.
+- Les lectures continuent de fonctionner quand X déploie des changements.
+
+### Vitesse
+
+- Une page lente ne bloque pas votre run.
+- Les lectures se terminent dès que leurs lignes arrivent.
+- Les appels d'Actor bloqués repartent d'eux-mêmes.
+
+### Facturation juste
+
+- Une entrée invalide ne coûte rien & vous dit quoi corriger.
+- Les Actors facturent seulement les lignes livrées, uniques & conformes à vos
+  filtres.
+- Un run redémarré ne facture jamais deux fois.
+- Les runs restent dans votre limite de dépense & écrivent quand même leurs
+  diagnostics.
+
+### Fiabilité
+
+- Une erreur ponctuelle ne fait pas échouer votre run.
+- Un délai dépassé renvoie les lignes déjà trouvées, avec des diagnostics.
+- Les Actors résistent aux courtes pannes de Xquik.
+- Les runs d'Actor survivent aux redémarrages sans doublons.
+- Une mauvaise ligne ne fait pas échouer tout un lot.
+- Les runs arrêtés gardent leurs lignes & leur rapport.
+- Un run qui ne peut pas démarrer explique quand même pourquoi.
+- Le support peut voir exactement ce qu'une requête ou un run a renvoyé.
+
+### Conçu pour les agents
+
+- Les Actors acceptent une entrée écrite pour d'autres Actors.
+- Chaque run indique pourquoi il s'est terminé & s'il faut réessayer.
+
+### Données riches
+
+- Des tendances par nom de lieu, pays ou ID de région, avec les tendances
+  sponsorisées signalées.
+
+### Contrôles qualité
+
+- Chaque champ que X affiche est fourni, omis exprès ou prouvé absent.
+- Xquik teste chaque lecture en direct sur X.
+
+## Quelles données X Trends Scraper peut-il extraire ?
+
 - Jusqu'à 50 tendances actuelles par lieu.
-- Les tendances passées de l'archive des tendances Twitter, par date & heure,
-  depuis le 2026-10-13.
 - La liste de tous les lieux pour lesquels X propose des tendances, avec leur
   WOEID, leur pays & leur type.
 - La recherche de lieux X, avec l'ID de lieu que la recherche de posts X
@@ -39,9 +103,6 @@ de connexion.
 - Le lieu indiqué sur chaque ligne.
 - Des indicateurs qui marquent les lignes de hashtag & les lignes qui ont un
   volume de posts.
-- La suppression des doublons entre entrées équivalentes, avant la facturation.
-- Des exports JSON, CSV, Excel, XML & RSS via les datasets Apify.
-- Les runs reprennent depuis un état enregistré après une migration Apify.
 
 ## Comment scraper les tendances X
 

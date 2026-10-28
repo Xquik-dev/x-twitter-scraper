@@ -21,7 +21,82 @@ entregada**, & Apify factura aparte el uso de la plataforma.
 > Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 > "Twitter" y "X" son marcas registradas de X Corp.
 
-## Datos de contacto en cada fila
+## ¿Por qué usar X Email Scraper?
+
+- **Correos de audiencias completas.** Escanea los seguidores o las cuentas
+  seguidas de una cuenta & conserva los perfiles con correo. `maxScan` define
+  cuántos perfiles lee cada escaneo.
+- **Paga solo los correos encontrados.** Un perfil sin correo no cuesta nada.
+  Los perfiles escaneados también son gratis.
+- **Solo los clientes potenciales que quieres.** Conserva los correos de tus
+  dominios u omite el webmail gratuito. Filtra por seguidores, antigüedad de la
+  cuenta, biografía & ubicación.
+- **3 fuentes en 1 ejecución.** Combina nombres de usuario, URLs de perfiles,
+  IDs de usuario, escaneos de seguidores & búsquedas de usuarios.
+- **Clientes potenciales listos para exportar.** Exporta las filas en JSON, CSV,
+  Excel, XML o RSS.
+
+### Resultados completos
+
+- Cada resultado trae los datos más completos que X tiene sobre él.
+
+### Filas precisas
+
+- Cada ID de una fila se mantiene exacto.
+- Las insignias de verificación coinciden con lo que muestra `x.com`.
+- Las filas solo contienen datos públicos.
+- Los anuncios & las entradas promocionadas nunca llegan a tus filas.
+
+### Datos actualizados
+
+- Las lecturas siguen funcionando cuando X lanza cambios.
+
+### Velocidad
+
+- Una página lenta no frena tu ejecución.
+- Las lecturas terminan en cuanto llegan sus filas.
+- Las llamadas a Actores que se atascan se recuperan solas.
+
+### Cobro justo
+
+- Una entrada inválida no cuesta nada & te dice qué corregir.
+- Los Actores solo cobran las filas entregadas, únicas & que cumplen tus
+  filtros.
+- Un perfil que comparten varios objetivos se cobra 1 sola vez.
+- Una ejecución reiniciada nunca cobra 2 veces.
+- Las ejecuciones respetan tu límite de gasto & aun así escriben sus
+  diagnósticos.
+- Las ejecuciones pequeñas terminan con un consejo para gastar menos.
+
+### Confiabilidad
+
+- Un error aislado no hace fallar tu ejecución.
+- Si se acaba el tiempo, recibes las filas ya encontradas, con diagnósticos.
+- Los Actores resisten las caídas breves de Xquik.
+- Las ejecuciones de los Actores siguen tras un reinicio sin repetir nada.
+- Una fila defectuosa no arruina un lote.
+- Las ejecuciones detenidas conservan sus filas & su informe.
+- Una ejecución que no puede iniciar igual explica por qué.
+- Soporte puede ver exactamente qué devolvió una solicitud o una ejecución.
+
+### Hecho para agentes
+
+- Los Actores aceptan entradas escritas para otros Actores.
+- Cada ejecución dice por qué terminó & si conviene reintentar.
+
+### Datos detallados
+
+- Los enlaces cortos se resuelven, & las filas de listas pueden traer perfiles
+  completos.
+- Los perfiles entregan correos, teléfonos & enlaces etiquetados por red.
+
+### Controles de calidad
+
+- Cada campo que muestra X se entrega, se omite a propósito o se comprueba que
+  no existe.
+- Xquik prueba cada lectura en vivo contra X.
+
+## ¿Qué datos puede extraer X Email Scraper?
 
 - El primer correo que publica el perfil, en minúsculas.
 - El dominio de ese correo & el campo del perfil que lo contiene, ya sea la
@@ -33,16 +108,6 @@ entregada**, & Apify factura aparte el uso de la plataforma.
   como LinkedIn, GitHub o Telegram.
 - El perfil público completo, con nombre, biografía, conteos, verificación,
   fechas & imágenes.
-- 3 fuentes en 1 ejecución, que son las cuentas, sus seguidores o cuentas
-  seguidas, & las búsquedas de usuarios.
-- Filtros por dominio de correo, correo de empresa, seguidores, antigüedad de la
-  cuenta, biografía & ubicación.
-- Nombres de usuario con o sin @, URLs de `x.com` & `twitter.com` & IDs
-  numéricos de usuario.
-- Eliminación de duplicados antes del cobro.
-- Exportación en JSON, CSV, Excel, XML & RSS con los datasets de Apify.
-- Las ejecuciones se reanudan desde el estado guardado tras una migración de
-  Apify.
 
 ## Cómo obtener correos de perfiles de X
 

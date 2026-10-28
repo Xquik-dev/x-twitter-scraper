@@ -21,6 +21,124 @@ aus diesen Antworten eine Viral-Score-Schätzung & ein Urteil. Jeder Datensatz
 behält die echten Gefällt-mir-Angaben, Reposts, Antworten & Zitate. Vergleiche
 jede Schätzung mit dem, was tatsächlich passiert ist.
 
+Der Viral Score schätzt, wie gut die Formulierung funktioniert. Er sagt keine
+Gefällt-mir-Angaben oder Aufrufe voraus. Er bildet nicht nach, wie X Posts
+rankt.
+
+> Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
+> "Twitter" und "X" sind Marken von X Corp.
+
+## Warum X Tweet Viral Score Analyzer with AI nutzen?
+
+- **Du weißt, welche Posts du posten solltest.** Jeder Post bekommt das Urteil
+  `send_it`, `edit_first` oder `sleep_on_it`.
+- **Teste Entwürfe vor dem Posten.** Füge Text in `texts` ein, um denselben
+  Score & dasselbe Urteil zu erhalten. Der Run ruft nichts von X ab.
+- **Vorhersage im Vergleich zum Ergebnis.** Die Zusammenfassung listet Posts,
+  deren echte Interaktion ihren Score übertroffen oder verfehlt hat.
+- **Erfahre, was pro Account funktioniert.** Jeder Nutzername bekommt seinen
+  besten & schlechtesten Post. Der Report schlüsselt den Durchschnittsscore nach
+  Uhrzeit des Posts, Länge, Medien & Links auf.
+- **Stelle Accounts nebeneinander.** Eine Rangliste ordnet Nutzernamen nach
+  durchschnittlichem Viral Score & tatsächlicher Interaktionsrate.
+- **Sieh, was sich geändert hat.** Trage die Dataset-ID eines früheren Runs in
+  `monitor.baselineDatasetId` ein. Jeder Datensatz zeigt dann, welche Merkmale
+  sich geändert haben.
+- **Tabellentaugliche Scores.** Die Ansicht `Viral Score` & die Exporte zeigen
+  Score, Urteil & Antworten in Spalten.
+- **Keine Accounts oder Schlüssel.** Der Preis enthält die KI-gestützte Analyse.
+  Du brauchst keinen KI-Schlüssel, keinen X-API-Schlüssel & keinen Login.
+
+### Vollständige Ergebnisse
+
+- Große Datumsbereiche kommen vollständig & schnell zurück.
+- Suchen liefern jeden Treffer, egal welche Operatoren du kombinierst.
+- Gefilterte Seiten kommen voll zurück, bis die Ergebnisse ausgehen.
+- Jedes Ergebnis enthält die vollständigsten Daten, die X dafür hat.
+
+### Genaue Datensätze
+
+- Suchergebnisse enthalten jeden Post, der zu deiner Suchanfrage passt, & sonst
+  nichts.
+- Die Suche nach Wörtern & Phrasen funktioniert in jeder Sprache & Schrift.
+- Sprachfilter funktionieren für jede Sprache, die X zuordnet.
+- Geschützte Accounts & private Listen bekommen eine klare Antwort statt einer
+  leeren Seite.
+- Reposts enthalten den vollständigen Originaltext.
+- Jede ID in einem Datensatz bleibt exakt.
+- Erwähnungen, Links, Hashtags & Hervorhebungen sitzen an der richtigen Stelle
+  im Text.
+- Verifizierungs-Badges stimmen mit dem überein, was `x.com` zeigt.
+- Datensätze enthalten nur öffentliche Daten.
+- Ergebnisse mit den neuesten zuerst kommen in Datumsreihenfolge zurück.
+- Suchen akzeptieren Anfragen so, wie du sie auf X eintippen würdest.
+- Ortssuchen funktionieren mit Namen in 6 Sprachen.
+- Eine Suche, die nicht laufen kann, schlägt sofort fehl & sagt, wie du sie
+  korrigierst.
+- Ein Datum bedeutet in jeder gängigen Schreibweise dasselbe.
+- Suchen akzeptieren die Grenzen `since_id` & `max_id`.
+- Werbung & gesponserte Einträge landen nie in deinen Datensätzen.
+
+### Aktuelle Daten
+
+- Abrufe funktionieren weiter, wenn X Änderungen ausrollt.
+
+### Tempo
+
+- Eine langsame Seite hält deinen Run nicht auf.
+- Suchen bleiben bei stark diskutierten Themen schnell.
+- Jede nächste Seite kommt schnell an.
+- Abrufe enden, sobald ihre Datensätze ankommen.
+- Hängende Actor-Aufrufe laufen von selbst wieder an.
+
+### Faire Abrechnung
+
+- Eine fehlerhafte Eingabe kostet nichts & sagt dir, was du korrigieren musst.
+- Die KI-Analyse berechnet nur die Posts, die sie analysiert hat.
+- Actors rechnen nur gelieferte, eindeutige, passende Datensätze ab.
+- Ein neu gestarteter Run berechnet nie doppelt.
+- Runs bleiben innerhalb deines Ausgabenlimits & schreiben trotzdem ihre
+  Diagnosen.
+- KI-Actors berechnen keine fehlgeschlagenen oder übersprungenen Analysen.
+
+### Zuverlässigkeit
+
+- Ein einzelner Fehler lässt deinen Run nicht scheitern.
+- Die Paginierung bleibt von Seite zu Seite konsistent.
+- Die Paginierung läuft nie in eine Endlosschleife.
+- Ein Zeitlimit liefert die bereits gefundenen Datensätze samt Diagnosen.
+- Actors überstehen kurze Xquik-Ausfälle.
+- Actor-Runs überstehen Neustarts ohne Dopplungen.
+- Ein fehlerhafter Datensatz lässt keinen Batch scheitern.
+- Gestoppte Runs behalten ihre Datensätze & ihren Report.
+- Ein Run, der nicht starten kann, erklärt trotzdem, warum.
+- Der Support sieht genau, was eine Anfrage oder ein Run geliefert hat.
+
+### Für Agents gebaut
+
+- Actors akzeptieren Eingaben, die für andere Actors geschrieben sind.
+- Jeder Run sagt, warum er endete & ob du es erneut versuchen solltest.
+
+### Umfangreiche Daten
+
+- Post-Datensätze enthalten den Text von Note Tweets, Bearbeitungen, Community
+  Notes, Reichweiten-Labels & Antworteinstellungen.
+- Datensätze enthalten Quell-Apps, Medienzahlen & Daten professioneller
+  Accounts.
+- Medien kommen mit Varianten, Alt-Text, Größen & Gründen zur Verfügbarkeit.
+- KI-Antworten enthalten Wahrscheinlichkeiten, Konfidenz & eine Fragenversion.
+- Bloßes Rauschen gilt zwischen Analyse-Runs nicht als Änderung.
+- `viralAlgorithmScore` macht aus den öffentlichen Zählern eines Posts 1
+  vergleichbare Zahl.
+
+### Qualitätsprüfungen
+
+- Jedes Feld, das X zeigt, wird geliefert, bewusst weggelassen oder ist
+  nachweislich nicht vorhanden.
+- Xquik testet jeden Abruf live gegen X.
+
+## Welche Daten liefert X Tweet Viral Score Analyzer with AI?
+
 - **Viral Score pro Post.** Feste, versionierte Regeln berechnen jeden Score von
   0 bis 100.
 - **8 Antworten zu Merkmalen.** Sie zeigen, warum ein Post hoch oder niedrig
@@ -29,13 +147,6 @@ jede Schätzung mit dem, was tatsächlich passiert ist.
   Maschinentext wirken.
 - **Vollständige Quelldatensätze.** Jeder Datensatz behält jedes Feld, das der
   Post liefert.
-
-Der Viral Score schätzt, wie gut die Formulierung funktioniert. Er sagt keine
-Gefällt-mir-Angaben oder Aufrufe voraus. Er bildet nicht nach, wie X Posts
-rankt.
-
-> Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
-> "Twitter" und "X" sind Marken von X Corp.
 
 ## So prüfst du den Viral Score eines Tweets
 

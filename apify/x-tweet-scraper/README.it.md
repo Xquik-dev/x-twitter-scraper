@@ -29,30 +29,140 @@ X Tweet Scraper di Xquik restituisce post, metriche di engagement, profili
 pubblici degli autori & media. Accetta URL, nomi utente, ID delle liste, ID dei
 post & query di ricerca con oltre 50 filtri.
 
-### Funzionalità principali
-
-- Filtri & rimozione dei duplicati agiscono prima della fatturazione.
-- 1 input supporta ricerche per ID, timeline, liste, ricerca & modalità di
-  engagement.
-- Gli input con ID dei post non hanno un limite fisso di quantità. Valgono
-  comunque le tue impostazioni di spesa & timeout su Apify.
-- I log dell'esecuzione mostrano i tempi delle pagine in `fetchDurationMs`,
-  `processingDurationMs`, `pushDurationMs`, `statusDurationMs` &
-  `fullPageDurationMs`.
-- Le esecuzioni conservano righe consegnate & progressi quando Apify le riavvia.
-
 ### Casi d'uso
 
-- Alimenta ricerca, arricchimento, analisi & addestramento AI con più campi per
-  post. Il 2026-09-29 la nostra riga rich mediana aveva 63 campi. È 2x la
-  mediana di altri 11 Actor.
+- Alimenta ricerca, arricchimento, analisi & addestramento AI con testo, autori,
+  media & metriche dei post.
 - Segui il sentiment del brand nei post.
 - Monitora i post dei concorrenti & i termini del settore.
 - Trova potenziali clienti nelle conversazioni pubbliche.
 - Raccogli dataset pubblici per la ricerca.
 - Trova post con un alto engagement pubblico.
 
-### Quali dati può estrarre X Tweet Scraper?
+## Perché usare X Tweet Scraper?
+
+- **Ricerca 13,6x più veloce.** La ricerca per parola chiave è stata 13,6x più
+  veloce del più veloce tra altri 4 Actor di tweet. La ricerca filtrata è stata
+  4,3x più veloce, & la timeline di un utente circa 3x. Il
+  [benchmark](README.md#benchmark) si è svolto il 2026-10-15 & il 2026-10-16.
+- **Il costo più basso per tweet utile.** Ha avuto il costo più basso per tweet
+  utile in tutti e 3 i test del [benchmark](README.md#benchmark).
+- **Più campi per tweet.** La sua riga mediana nella ricerca per parola chiave
+  aveva 67 campi. È 1,3x la mediana degli altri Actor nel
+  [benchmark](README.md#benchmark).
+- **Ogni fonte in 1 esecuzione.** Combina ID dei post, nomi utente, liste,
+  ricerche & URL in 1 input. Imposta `mode` per risposte, citazioni, thread,
+  menzioni, retweeter o articoli.
+- **Trova i migliori tweet di X.** `mode: "topTweets"` restituisce i tweet che X
+  classifica più in alto per 1 metrica, come le visualizzazioni. Restringili a
+  un giorno, una settimana o un mese & a un paese.
+- **Codice di incorporamento per ogni tweet.** `mode: "embed"` restituisce
+  l'HTML che mostra un tweet sul tuo sito.
+- **Nessun limite agli ID dei post.** Cerca qualsiasi numero di ID dei post in 1
+  esecuzione. Le righe tornano nell'ordine del tuo input. Valgono comunque il
+  tuo limite di spesa & il timeout.
+- **Latest & Top in 1 esecuzione.** Imposta `queryType` su `Latest + Top` per
+  avere entrambi gli ordinamenti di ricerca. Paghi ogni tweet una sola volta.
+
+### Risultati completi
+
+- I grandi intervalli di date tornano completi & in fretta.
+- Le ricerche restituiscono ogni risultato, qualunque operatore combini.
+- La cronologia dell'account torna completa, compresi i post vecchi.
+- Le esportazioni del profilo conservano ogni post dei thread dell'autore.
+- Le letture dei profili includono il post fissato, segnato come fissato.
+- Gli elenchi dei migliori tweet tornano in modo affidabile.
+- Le pagine filtrate tornano piene finché i risultati non finiscono.
+- Ogni risultato riporta i dati più completi che X ha a disposizione.
+
+### Righe accurate
+
+- I risultati di ricerca contengono ogni post che corrisponde alla tua query &
+  nient'altro.
+- La ricerca di parole & frasi funziona in ogni lingua & alfabeto.
+- I filtri di lingua funzionano con ogni lingua che X assegna ai post.
+- Un post risulta mancante solo quando non esiste più.
+- Account protetti & liste private ricevono un esito chiaro, non una pagina
+  vuota.
+- I repost riportano il testo originale completo.
+- Ogni ID in una riga resta esatto.
+- Menzioni, link, hashtag & evidenziazioni restano allineati al testo.
+- Un conteggio non noto compare in `unknownCounts`, mai come 0.
+- I badge di verifica corrispondono a quelli che mostra `x.com`.
+- Le righe contengono solo dati pubblici.
+- Le ricerche di citazioni restituiscono ogni citazione reale & nient'altro.
+- Gli export delle risposte contengono solo risposte dirette, in un ordine
+  verificato.
+- I risultati dal più recente arrivano in ordine cronologico.
+- Le ricerche accettano le query come le scriveresti su X.
+- Le ricerche di luoghi funzionano con nomi in 6 lingue.
+- Una ricerca che non può partire fallisce subito & dice come correggerla.
+- Una data ha un solo significato in qualsiasi formato comune.
+- Le ricerche accettano i limiti `since_id` & `max_id`.
+- Annunci & contenuti sponsorizzati non arrivano mai nelle tue righe.
+
+### Dati aggiornati
+
+- Le letture continuano a funzionare quando X rilascia modifiche.
+
+### Velocità
+
+- Una pagina lenta non blocca la tua esecuzione.
+- Le ricerche restano veloci sugli argomenti molto attivi.
+- Ogni pagina successiva arriva in fretta.
+- Le letture finiscono appena arrivano le loro righe.
+- Le chiamate agli Actor che si bloccano riprendono da sole.
+
+### Fatturazione equa
+
+- Un input errato non costa nulla & ti dice cosa correggere.
+- Un ID di post elencato due volte in un lotto si paga una sola volta.
+- Gli Actor fanno pagare solo le righe consegnate, uniche & conformi ai filtri.
+- Un'esecuzione riavviata non addebita mai due volte.
+- Le esecuzioni restano entro il tuo limite di spesa & scrivono comunque la loro
+  diagnostica.
+- Le esecuzioni piccole finiscono con un consiglio per spendere meno.
+
+### Affidabilità
+
+- Un errore isolato non fa fallire la tua esecuzione.
+- La paginazione resta coerente da una pagina all'altra.
+- La paginazione non va mai in loop infinito.
+- Quando scade il tempo, ricevi le righe già trovate con la diagnostica.
+- Gli Actor resistono ai brevi disservizi di Xquik.
+- Le esecuzioni degli Actor superano i riavvii senza ripetere nulla.
+- Una riga errata non fa fallire il lotto.
+- Le esecuzioni interrotte conservano le loro righe & il loro report.
+- Un'esecuzione che non riesce a partire spiega comunque perché.
+- `stopCauses`, `failedSubtargets` & `unavailableTargets` spiegano nel dettaglio
+  gli errori parziali.
+- Il supporto può vedere esattamente cosa ha restituito una richiesta o
+  un'esecuzione.
+
+### Pensato per gli agenti
+
+- Gli Actor accettano input scritti per altri Actor.
+- L'output è pronto per i fogli di calcolo, con colonne piatte & totali di
+  engagement.
+- Ogni esecuzione dice perché è finita & se conviene riprovare.
+
+### Dati ricchi
+
+- Le righe dei post riportano il testo dei Note Tweet, modifiche, Note della
+  community, etichette di visibilità & regole di risposta.
+- Le righe riportano app di origine, conteggi dei media & dati degli account
+  professionali.
+- I media arrivano con varianti, testo alternativo, dimensioni & motivi di
+  disponibilità.
+- Vedi quando ogni account ha fatto repost di un post.
+- Post & bio si possono tradurre nella tua lingua.
+
+### Controlli di qualità
+
+- Ogni campo che X mostra è fornito, escluso di proposito o dimostrato assente.
+- Xquik testa ogni lettura dal vivo su X.
+
+## Quali dati può estrarre X Tweet Scraper?
 
 | Campo                  | Descrizione                                                    |
 | ---------------------- | -------------------------------------------------------------- |
@@ -1136,11 +1246,11 @@ Nel [benchmark](#benchmark), X Tweet Scraper di Xquik ha consegnato da 25,2 a
 39,2 tweet utili al secondo. Il tempo di esecuzione dipende dal tuo input, dal
 numero di risultati & dalla disponibilità di X.
 
-### Perché ricevo post che la scheda di ricerca di X non mostra?
+### Le ricerche restituiscono ogni post corrispondente?
 
-X lascia fuori dalla scheda Più recenti alcuni post che corrispondono. X Tweet
-Scraper di Xquik restituisce anche quei post. Ogni post è un vero risultato
-della ricerca di X per la tua query. Paghi ogni post una sola volta.
+Sì, finché i risultati non finiscono o raggiungi `maxItems`. I risultati
+contengono solo post che corrispondono alla tua query. Paghi ogni post una sola
+volta.
 
 ### Quali operatori di ricerca funzionano?
 

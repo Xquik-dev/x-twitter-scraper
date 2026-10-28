@@ -41,28 +41,129 @@ Xquik's X Tweet Scraper returns tweets, engagement metrics, public author
 profiles & media. It accepts URLs, handles, List IDs, Tweet IDs & search queries
 with 50+ filters.
 
-### Key features
-
-- Filters & duplicate removal run before billing.
-- 1 input supports lookups, timelines, Lists, search & engagement modes.
-- Tweet ID inputs have no fixed count cap. Your Apify spend & timeout settings
-  still apply.
-- Run logs show page timing in `fetchDurationMs`, `processingDurationMs`,
-  `pushDurationMs`, `statusDurationMs` & `fullPageDurationMs`.
-- Runs keep delivered rows & progress when Apify restarts them.
-
 ### Use cases
 
-- Feed research, enrichment, analytics & AI training with more fields per tweet.
-  Our median rich row had 63 fields on 2026-09-29. That is 2x the median of 11
-  other Actors.
+- Feed tweet text, authors, media & metrics into research, enrichment, analytics
+  & AI training.
 - Track brand sentiment across tweets.
 - Monitor competitor posts & industry terms.
 - Find prospects in public conversations.
 - Collect public datasets for research.
 - Find posts with high public engagement.
 
-### What data can X Tweet Scraper extract?
+## Why use X Tweet Scraper?
+
+- **13.6x faster search.** Keyword search ran 13.6x faster than the fastest of 4
+  other tweet Actors. Filtered search ran 4.3x faster, & a user timeline about
+  3x. The [benchmark](#benchmark) ran on 2026-10-15 & 2026-10-16.
+- **Lowest cost per useful tweet.** It cost the least per useful tweet in all 3
+  [benchmark](#benchmark) tests.
+- **More fields per tweet.** Its median keyword search row had 67 fields. That
+  is 1.3x the median of the other Actors in the [benchmark](#benchmark).
+- **Every source in 1 run.** Mix Tweet IDs, handles, Lists, searches & URLs in 1
+  input. Set `mode` for replies, quotes, threads, mentions, retweeters or
+  articles.
+- **Find X's top tweets.** `mode: "topTweets"` returns the tweets X ranks
+  highest for 1 metric, such as views. Narrow them to a day, week or month & a
+  country.
+- **Embed code for each tweet.** `mode: "embed"` returns the HTML that shows a
+  tweet on your site.
+- **No cap on Tweet IDs.** Look up any number of Tweet IDs in 1 run. Rows come
+  back in your input order. Your spend limit & timeout still apply.
+- **Latest & Top in 1 run.** Set `queryType` to `Latest + Top` for both search
+  orders. You pay for each tweet once.
+
+### Complete results
+
+- Large date ranges come back whole & fast.
+- Searches return every match, whatever operators you combine.
+- Account history comes back complete, old posts included.
+- Profile exports keep every post of the author's own threads.
+- Profile reads include the pinned post, flagged as pinned.
+- Top tweet lists come back reliably.
+- Filtered pages come back full until the results run out.
+- Each answer holds the fullest data X has for it.
+
+### Accurate rows
+
+- Search results hold every post that matches your query & nothing else.
+- Word & phrase matching works in every language & script.
+- Language filters work for every language X tags.
+- A post is called missing only when it's gone.
+- Protected accounts & private Lists get a clear answer, not an empty page.
+- Reposts carry the full original text.
+- Every ID in a row stays exact.
+- Mentions, links, hashtags & highlights line up with the text.
+- A count that isn't known is listed in `unknownCounts`, never shown as 0.
+- Verified badges match what `x.com` shows.
+- Rows hold public data only.
+- Quote searches return every real quote & nothing else.
+- Reply exports hold only direct replies, in a proven order.
+- Newest-first results come back in date order.
+- Searches accept queries as you'd type them on X.
+- Place searches work with names in 6 languages.
+- A search that can't run fails at once & says how to fix it.
+- A date means one thing in any common form.
+- Searches accept `since_id` & `max_id` bounds.
+- Ads & promoted entries never reach your rows.
+
+### Fresh data
+
+- Reads keep working when X ships changes.
+
+### Speed
+
+- One slow page doesn't hold up your run.
+- Searches stay fast on busy topics.
+- Each next page arrives fast.
+- Reads finish the moment their rows arrive.
+- Stalled Actor calls recover on their own.
+
+### Fair billing
+
+- Bad input costs nothing & tells you what to fix.
+- A post ID listed twice in a batch is billed once.
+- Actors charge only for delivered, unique, matching rows.
+- A restarted run never charges twice.
+- Runs stay within your spend cap & still write their diagnostics.
+- Small runs end with a tip that cuts cost.
+
+### Reliability
+
+- A one-off error doesn't fail your run.
+- Paging stays consistent from one page to the next.
+- Paging never loops forever.
+- A deadline returns the rows already found, with diagnostics.
+- Actors ride out short Xquik outages.
+- Actor runs survive restarts without repeats.
+- One bad row doesn't sink a batch.
+- Stopped runs keep their rows & their report.
+- A run that can't start still explains itself.
+- `stopCauses`, `failedSubtargets` & `unavailableTargets` spell out partial
+  failures.
+- Support can see exactly what a request or run returned.
+
+### Built for agents
+
+- Actors accept input written for other Actors.
+- Output is ready for spreadsheets, with flat columns & engagement totals.
+- Every run says why it ended & whether to retry.
+
+### Rich data
+
+- Post rows carry note text, edits, Community Notes, reach labels & reply
+  controls.
+- Rows carry source apps, media counts & professional account data.
+- Media comes with variants, alt text, sizes & availability reasons.
+- You see when each account reposted a post.
+- Posts & bios can be translated into your language.
+
+### Quality checks
+
+- Every field X shows is served, left out on purpose or proven absent.
+- Xquik tests every read live against X.
+
+## What data can X Tweet Scraper extract?
 
 | Field                  | Description                                            |
 | ---------------------- | ------------------------------------------------------ |
@@ -140,108 +241,6 @@ Media carries availability, geometry, tags & video variants. It also carries the
 Rows never include viewer-only state. The Actor removes follow, block, mute,
 bookmark, like, repost, edit-permission & similar viewer flags. Raw output drops
 them too.
-
-## What you get
-
-### Complete results
-
-- Searches return posts that X's own search tab leaves out.
-- Large date ranges come back whole & fast.
-- Searches return every match, whatever operators you combine.
-- Account history comes back complete, old posts included.
-- Profile posts without replies still keep the author's own threads.
-- Profile reads include the pinned post, flagged as pinned.
-- List timelines include posts that X's List page leaves out.
-- Reply exports include replies that X's post page leaves out.
-- Top tweet lists come back reliably.
-- Filtered pages come back full until the results run out.
-- Timelines page all the way to the last post.
-- Batch post lookups miss fewer posts.
-- Each answer holds the fullest data X has for it.
-
-### Accurate rows
-
-- Search results hold every post that matches your query & nothing else.
-- Word & phrase matching works in every language & script.
-- Language filters work for every language X tags.
-- A post is called missing only when it's gone.
-- "X can't run this search" appears only when it's true.
-- Protected accounts & private Lists get a clear answer, not an empty page.
-- Reposts carry the full original text.
-- Every ID in a row stays exact.
-- Mentions, links, hashtags & highlights line up with the text.
-- Counts X didn't send are listed in `unknownCounts`, never shown as 0.
-- Verified badges match what `x.com` shows.
-- Rows hold public data only.
-- Quote searches return every real quote & nothing else.
-- Reply exports hold only direct replies, in a proven order.
-- Newest-first results stay in true date order across pages.
-- Messy queries still run instead of failing.
-- Place searches work with names in 6 languages.
-- Searches X can't run fail at once, with the fix.
-- A date means one thing in any common form.
-- Searches accept `since_id` & `max_id` bounds.
-- Ads & promoted entries never reach your rows.
-
-### Fresh data
-
-- Reads keep working when X ships changes.
-
-### Speed
-
-- A slow X answer doesn't hold up your request.
-- Repeated lookups answer at once.
-- Searches stay fast on busy topics.
-- Each next page arrives fast.
-- Actors read many handles, posts & queries at once.
-- Reads finish the moment their rows arrive.
-- Stalled Actor calls recover on their own.
-
-### Fair billing
-
-- A retried page is free.
-- Bad input costs nothing, since it's refused before any read.
-- A post ID listed twice in a batch is billed once.
-- Actors charge only for delivered, unique, matching rows.
-- A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
-- Small runs end with a tip that cuts cost.
-
-### Reliability
-
-- A one-off X failure doesn't fail your request.
-- Paging stays consistent from one page to the next.
-- Paging never loops forever.
-- A deadline returns the rows already found, with diagnostics.
-- Actors ride out short Xquik outages.
-- Actor runs survive restarts without repeats.
-- One bad row doesn't sink a batch.
-- Stopped runs keep their rows & their report.
-- A run that can't start still explains itself.
-- `stopCauses`, `failedSubtargets` & `unavailableTargets` spell out partial
-  failures.
-- Problems on X's side are fixed before they reach your reads.
-- Support can see exactly what a request or run returned.
-
-### Built for agents
-
-- Actors accept input written for other Actors.
-- Output is ready for spreadsheets, with flat columns & engagement totals.
-- Every run says why it ended & whether to retry.
-
-### Rich data
-
-- Post rows carry note text, edits, Community Notes, reach labels & reply
-  controls.
-- Rows carry source apps, media counts & professional account data.
-- Media comes with variants, alt text, sizes & availability reasons.
-- You see when each account reposted a post.
-- Posts & bios can be translated into your language.
-
-### Quality checks
-
-- Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
 
 ## How do I use X Tweet Scraper to scrape tweet data?
 
@@ -1214,10 +1213,10 @@ Xquik's X Tweet Scraper delivered 150.5 to 172.4 useful tweets per second. That
 was in the keyword search [benchmark](#benchmark). Runtime depends on your
 input, the result count & X availability.
 
-### Why do I get posts that X's search tab leaves out?
+### Do searches return every matching post?
 
-Searches return posts that X's own search tab leaves out. Search results hold
-every post that matches your query & nothing else. You pay for each post once.
+Yes, until the matches run out or you reach `maxItems`. Results hold only posts
+that match your query. You pay for each post once.
 
 ### Which search operators work?
 

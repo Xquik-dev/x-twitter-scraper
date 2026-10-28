@@ -22,12 +22,77 @@ iniciar sesión.
 > Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 > "Twitter" y "X" son marcas registradas de X Corp.
 
-## Ubicaciones & datos de tendencias
+## ¿Por qué usar X Trends Scraper?
 
-- Varios países, ciudades o WOEIDs, leídos en paralelo.
+- **Historial de tendencias por rango.** Define `from`, `to` & `every` para
+  obtener 1 lista de tendencias por intervalo.
+- **Las tendencias de ayer, cada día.** Con `at` en `24h`, una programación
+  diaria lee las tendencias de ayer.
+- **WOEIDs, IDs de lugar & hashflags.** Activa `listLocations` o
+  `listHashflags`, o completa `placeSearchTerms`.
+- **Horas exactas de captura.** Las filas pasadas traen `capturedAt`, el momento
+  en que X mostró la lista.
+- **Exportaciones listas para usar.** Conserva, renombra, aplana o une campos, &
+  luego exporta en JSON, CSV, Excel, XML o RSS.
+
+### Resultados completos
+
+- Cada resultado trae los datos más completos que X tiene sobre él.
+
+### Filas precisas
+
+- Las filas solo contienen datos públicos.
+
+### Datos actualizados
+
+- Lee las tendencias de cualquier momento pasado desde el 2026-10-13.
+- Las lecturas siguen funcionando cuando X lanza cambios.
+
+### Velocidad
+
+- Una página lenta no frena tu ejecución.
+- Las lecturas terminan en cuanto llegan sus filas.
+- Las llamadas a Actores que se atascan se recuperan solas.
+
+### Cobro justo
+
+- Una entrada inválida no cuesta nada & te dice qué corregir.
+- Los Actores solo cobran las filas entregadas, únicas & que cumplen tus
+  filtros.
+- Una ejecución reiniciada nunca cobra 2 veces.
+- Las ejecuciones respetan tu límite de gasto & aun así escriben sus
+  diagnósticos.
+
+### Confiabilidad
+
+- Un error aislado no hace fallar tu ejecución.
+- Si se acaba el tiempo, recibes las filas ya encontradas, con diagnósticos.
+- Los Actores resisten las caídas breves de Xquik.
+- Las ejecuciones de los Actores siguen tras un reinicio sin repetir nada.
+- Una fila defectuosa no arruina un lote.
+- Las ejecuciones detenidas conservan sus filas & su informe.
+- Una ejecución que no puede iniciar igual explica por qué.
+- Soporte puede ver exactamente qué devolvió una solicitud o una ejecución.
+
+### Hecho para agentes
+
+- Los Actores aceptan entradas escritas para otros Actores.
+- Cada ejecución dice por qué terminó & si conviene reintentar.
+
+### Datos detallados
+
+- Tendencias por nombre de lugar, país o ID de región, con las tendencias
+  promocionadas marcadas.
+
+### Controles de calidad
+
+- Cada campo que muestra X se entrega, se omite a propósito o se comprueba que
+  no existe.
+- Xquik prueba cada lectura en vivo contra X.
+
+## ¿Qué datos puede extraer X Trends Scraper?
+
 - Hasta 50 tendencias actuales por ubicación.
-- Tendencias pasadas del archivo de tendencias de Twitter, por fecha & hora,
-  desde el 2026-10-13.
 - Una lista de todos los lugares donde X ofrece tendencias, con su WOEID, país &
   tipo.
 - Búsqueda de lugares de X, con el ID de lugar que acepta la búsqueda de posts
@@ -39,10 +104,6 @@ iniciar sesión.
 - La ubicación de origen en cada fila.
 - Indicadores que marcan las filas de hashtags & las filas que tienen volumen de
   posts.
-- Eliminación de duplicados de entradas equivalentes antes del cobro.
-- Exportación en JSON, CSV, Excel, XML & RSS con los datasets de Apify.
-- Las ejecuciones se reanudan desde el estado guardado tras una migración de
-  Apify.
 
 ## Cómo extraer tendencias de X
 

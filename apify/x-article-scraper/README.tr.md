@@ -20,13 +20,73 @@ ihtiyacın yok.
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-## Makale verisi & biçimi
+## Neden X Article Scraper kullanmalısın?
+
+- **Temizlenecek HTML yok.** Her Makaleyi gönderi URL'sinden veya ID'sinden
+  Markdown & düz metin olarak al.
+- **Bir hesabın tüm Makaleleri.** Makalelerini en yeniden başlayarak listelemek
+  için bir kullanıcı adı veya profil URL'si ekle. 1 çalıştırmada kullanıcı
+  adlarını, gönderi URL'lerini & gönderi ID'lerini karıştır.
+- **Hazır etkileşim oranları.** Sütunu eklemek için `fields` içine
+  `totalEngagement`, `engagementRate` veya `engagementPerView` yaz.
+- **Kullanıma hazır dışa aktarımlar.** Alanları tut, yeniden adlandır, düzleştir
+  veya birleştir. Sonra JSON, CSV, Excel, XML veya RSS olarak dışa aktar.
+
+### Eksiksiz sonuçlar
+
+- Her cevap, X'te bulunan en eksiksiz veriyi tutar.
+
+### Doğru satırlar
+
+- Satırdaki her ID birebir doğru kalır.
+- Satırlar yalnızca herkese açık veri tutar.
+
+### Güncel veri
+
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Okumalar, satırları geldiği anda biter.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- Hatalı girdi ücretsizdir & neyi düzelteceğini söyler.
+- Actor'lar yalnızca teslim edilen, benzersiz & eşleşen satırlar için ücret
+  alır.
+- Yeniden başlatılan bir çalıştırma asla 2 kez ücret almaz.
+- Çalıştırmalar harcama sınırının içinde kalır & tanılamalarını yine yazar.
+- Küçük çalıştırmalar, maliyeti düşüren bir ipucuyla biter.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Süre dolduğunda o ana kadar bulunan satırlar tanılamalarla birlikte döner.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Tek bir hatalı satır bütün grubu bozmaz.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+
+## X Article Scraper hangi verileri çıkarabilir?
 
 - Başlık, liste, kalın, italik, bağlantı & görsel içeren, HTML'siz Markdown.
 - Kaynak biçimlendirmeyi koruyan `contents` blokları.
-- Aynı çalıştırmada gönderi URL'leri & sayısal gönderi ID'leri.
-- Bir hesabın yayımladığı her Makale, kullanıcı adından veya profil URL'sinden.
-- Faturalamadan önce tekilleştirme.
 
 Xquik'in X Article Scraper'ı bağlantı metadata'sını asla tahmin etmez. Apify,
 Markdown'ı metin olarak gösterir.

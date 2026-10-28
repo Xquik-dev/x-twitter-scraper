@@ -30,24 +30,6 @@ coincidencias de palabras clave, los miembros & los moderadores de cada
 Comunidad. También encuentra Comunidades por palabra clave o tema, & enumera las
 que X sugiere.
 
-### Funciones principales
-
-- Lee muchas Comunidades & recursos en 1 ejecución.
-- Obtén información de la Comunidad con reglas, pregunta de ingreso, creador,
-  administrador & tema.
-- Recopila posts, primero los más recientes, o los posts Destacados que X mejor
-  posiciona.
-- Recopila la pestaña Multimedia, o busca en los posts de una Comunidad por
-  palabra clave.
-- Exporta miembros & moderadores, o encuentra miembros por nombre.
-- Encuentra Comunidades por palabra clave o tema, con sus registros completos.
-- Filtra posts por fecha, idioma, contenido multimedia & interacción.
-- Filtra miembros por tamaño de audiencia, antigüedad de la cuenta &
-  verificación.
-- Los filtros & la eliminación de duplicados se aplican antes de facturar.
-- Las ejecuciones conservan las filas entregadas & el progreso cuando Apify las
-  reinicia.
-
 ### Casos de uso
 
 - Crea listas de clientes potenciales con los miembros de una Comunidad de
@@ -62,7 +44,91 @@ que X sugiere.
   Comunidad.
 - Recopila posts con imágenes o videos para investigación creativa.
 
-### ¿Qué datos puede extraer X Community Scraper?
+## ¿Por qué usar X Community Scraper?
+
+- **Encuentra Comunidades sin IDs.** Busca por palabra clave o tema, o enumera
+  las Comunidades que X sugiere. Cada coincidencia trae su registro completo.
+- **Registros completos de Comunidades.** Las filas de información traen las
+  reglas, la pregunta de ingreso, el creador, el administrador & el tema.
+- **Posts recientes o Destacados.** Recopila posts, primero los más recientes, o
+  los posts Destacados que X mejor posiciona. Agrega posts con contenido
+  multimedia, o busca en los posts de una Comunidad por palabra clave.
+- **Miembros & moderadores.** Exporta ambos con su `communityRole`, o encuentra
+  miembros por nombre. Las filas traen los correos, teléfonos & enlaces que
+  publica cada perfil.
+- **Filtros para posts & miembros.** Conserva posts por fecha, idioma, contenido
+  multimedia & interacción. Conserva miembros por tamaño de audiencia,
+  antigüedad de la cuenta & verificación.
+
+### Resultados completos
+
+- Cada resultado trae los datos más completos que X tiene sobre él.
+
+### Filas precisas
+
+- Los reposts traen el texto original completo.
+- Cada ID de una fila se mantiene exacto.
+- Las menciones, los enlaces, los hashtags & los resaltados quedan alineados con
+  el texto.
+- Las insignias de verificación coinciden con lo que muestra `x.com`.
+- Las filas solo contienen datos públicos.
+- Los anuncios & las entradas promocionadas nunca llegan a tus filas.
+
+### Datos actualizados
+
+- Las lecturas siguen funcionando cuando X lanza cambios.
+
+### Velocidad
+
+- Una página lenta no frena tu ejecución.
+- Las lecturas terminan en cuanto llegan sus filas.
+- Las llamadas a Actores que se atascan se recuperan solas.
+
+### Cobro justo
+
+- Una entrada inválida no cuesta nada & te dice qué corregir.
+- Los Actores solo cobran las filas entregadas, únicas & que cumplen tus
+  filtros.
+- Un perfil que comparten varios objetivos se cobra 1 sola vez.
+- Una ejecución reiniciada nunca cobra 2 veces.
+- Las ejecuciones respetan tu límite de gasto & aun así escriben sus
+  diagnósticos.
+- Las ejecuciones pequeñas terminan con un consejo para gastar menos.
+
+### Confiabilidad
+
+- Un error aislado no hace fallar tu ejecución.
+- Si se acaba el tiempo, recibes las filas ya encontradas, con diagnósticos.
+- Los Actores resisten las caídas breves de Xquik.
+- Las ejecuciones de los Actores siguen tras un reinicio sin repetir nada.
+- Una fila defectuosa no arruina un lote.
+- Las ejecuciones detenidas conservan sus filas & su informe.
+- Una ejecución que no puede iniciar igual explica por qué.
+- Soporte puede ver exactamente qué devolvió una solicitud o una ejecución.
+
+### Hecho para agentes
+
+- Los Actores aceptan entradas escritas para otros Actores.
+- La salida está lista para hojas de cálculo, con columnas planas & totales de
+  interacción.
+- Cada ejecución dice por qué terminó & si conviene reintentar.
+
+### Datos detallados
+
+- Las filas de posts traen el texto de los Note Tweets, las ediciones, las Notas
+  de la Comunidad, las etiquetas de alcance & los controles de respuesta.
+- Las filas traen la app de origen, los conteos de contenido multimedia & los
+  datos de cuentas profesionales.
+- El contenido multimedia trae variantes, texto alternativo, tamaños & motivos
+  de disponibilidad.
+
+### Controles de calidad
+
+- Cada campo que muestra X se entrega, se omite a propósito o se comprueba que
+  no existe.
+- Xquik prueba cada lectura en vivo contra X.
+
+## ¿Qué datos puede extraer X Community Scraper?
 
 Las filas de Comunidad usan `resultType: "community"`. Estos son los campos
 principales.

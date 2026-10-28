@@ -32,20 +32,21 @@ You need no X API key or login.
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## Media files & metadata
+## Why use X Media Downloader?
 
-- Media from posts, profiles, replies, quotes & threads in bulk.
-- Photos, GIFs, MP4 qualities & HLS playlists.
-- Subtitles of video posts, with timed cues & full text.
-- Metadata, direct URLs & available filters.
-- File storage within run limits, with output links.
-- Duplicate removal before billing.
-
-## What you get
+- **Media from every source.** Pick posts, profile Media tabs, replies, quotes &
+  threads in `sources`.
+- **Files stored for you.** Turn on `downloadMedia` to save files & get
+  `storedMediaUrl` links.
+- **Only the media you want.** Filter profile media by type, date, language,
+  views, likes, replies or reposts.
+- **All captions in 1 row.** Turn on `includeSubtitles` to get every caption
+  track of a video post.
+- **Ready-to-use exports.** Keep, rename, flatten or join fields, then export
+  JSON, CSV, Excel, XML or RSS.
 
 ### Complete results
 
-- Timelines page all the way to the last post.
 - Each answer holds the fullest data X has for it.
 
 ### Accurate rows
@@ -58,29 +59,27 @@ You need no X API key or login.
 
 ### Speed
 
-- A slow X answer doesn't hold up your request.
-- Actors read many handles, posts & queries at once.
+- One slow page doesn't hold up your run.
 - Reads finish the moment their rows arrive.
 - Stalled Actor calls recover on their own.
 
 ### Fair billing
 
-- Bad input costs nothing, since it's refused before any read.
+- Bad input costs nothing & tells you what to fix.
 - Actors charge only for delivered, unique, matching rows.
 - A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
+- Runs stay within your spend cap & still write their diagnostics.
 - Small runs end with a tip that cuts cost.
 
 ### Reliability
 
-- A one-off X failure doesn't fail your request.
+- A one-off error doesn't fail your run.
 - A deadline returns the rows already found, with diagnostics.
 - Actors ride out short Xquik outages.
 - Actor runs survive restarts without repeats.
 - One bad row doesn't sink a batch.
 - Stopped runs keep their rows & their report.
 - A run that can't start still explains itself.
-- Problems on X's side are fixed before they reach your reads.
 - Support can see exactly what a request or run returned.
 
 ### Built for agents
@@ -96,7 +95,13 @@ You need no X API key or login.
 ### Quality checks
 
 - Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
+- Xquik tests every read live against X.
+
+## What data can X Media Downloader extract?
+
+- Photos, GIFs, MP4 qualities & HLS playlists.
+- Subtitles of video posts, with timed cues & full text.
+- Metadata & direct URLs.
 
 ## How to download X media
 

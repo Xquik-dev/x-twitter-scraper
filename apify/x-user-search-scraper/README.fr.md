@@ -19,18 +19,78 @@ profil livré**, & Apify facture l'usage de la plateforme à part.
 > Xquik est un service tiers indépendant. Non affilié à X Corp. "Twitter" et "X"
 > sont des marques déposées de X Corp.
 
-## Données de compte & filtres
+## Pourquoi utiliser X User Search Scraper ?
 
-- Des filtres d'audience, de posts, d'ancienneté, de certification, de site web,
-  de localisation, de bio, de nom d'utilisateur & d'e-mail.
+- **Des prix dans les suggestions de cashtags.** En mode `autocomplete`, les
+  lignes de cashtag portent `price`, `marketCap` & `dailyChangePercent`.
+- **Seulement des comptes joignables.** Gardez les profils qui publient un
+  e-mail, un e-mail professionnel ou un site web. `emailDomains` garde les
+  e-mails des domaines que vous listez.
+- **Visez votre audience.** Filtrez par abonnés, posts, âge du compte,
+  certification, localisation, bio & nom d'utilisateur.
+- **Reprenez là où vous vous êtes arrêté.** Passez un curseur enregistré dans
+  `startCursor` pour continuer 1 requête.
+
+### Résultats complets
+
+- Chaque résultat contient les données les plus complètes dont X dispose.
+
+### Lignes exactes
+
+- Chaque ID d'une ligne reste exact.
+- Les badges de certification correspondent à ce qu'affiche `x.com`.
+- Les lignes ne contiennent que des données publiques.
+- Les publicités & les contenus sponsorisés n'arrivent jamais dans vos lignes.
+
+### Données à jour
+
+- Les lectures continuent de fonctionner quand X déploie des changements.
+
+### Vitesse
+
+- Une page lente ne bloque pas votre run.
+- Les lectures se terminent dès que leurs lignes arrivent.
+- Les appels d'Actor bloqués repartent d'eux-mêmes.
+
+### Facturation juste
+
+- Une entrée invalide ne coûte rien & vous dit quoi corriger.
+- Les Actors facturent seulement les lignes livrées, uniques & conformes à vos
+  filtres.
+- Un run redémarré ne facture jamais deux fois.
+- Les runs restent dans votre limite de dépense & écrivent quand même leurs
+  diagnostics.
+
+### Fiabilité
+
+- Une erreur ponctuelle ne fait pas échouer votre run.
+- Un délai dépassé renvoie les lignes déjà trouvées, avec des diagnostics.
+- Les Actors résistent aux courtes pannes de Xquik.
+- Les runs d'Actor survivent aux redémarrages sans doublons.
+- Une mauvaise ligne ne fait pas échouer tout un lot.
+- Les runs arrêtés gardent leurs lignes & leur rapport.
+- Un run qui ne peut pas démarrer explique quand même pourquoi.
+- Le support peut voir exactement ce qu'une requête ou un run a renvoyé.
+
+### Conçu pour les agents
+
+- Les Actors acceptent une entrée écrite pour d'autres Actors.
+- Chaque run indique pourquoi il s'est terminé & s'il faut réessayer.
+
+### Contrôles qualité
+
+- Chaque champ que X affiche est fourni, omis exprès ou prouvé absent.
+- Xquik teste chaque lecture en direct sur X.
+
+## Quelles données X User Search Scraper peut-il extraire ?
+
+- Le profil public de chaque compte correspondant, avec nom, bio, compteurs &
+  certification.
+- `sourceTarget`, le terme de recherche qui a trouvé le profil.
 - `email` & `contactInfo`, avec les e-mails, téléphones & liens que chaque
   profil publie.
 - `mode: "autocomplete"`, avec les comptes, sujets, hashtags & cashtags que X
   suggère pour chaque terme de recherche.
-- La reprise de 1 requête depuis un curseur enregistré dans `startCursor`.
-- Les runs gardent les lignes livrées & la progression quand Apify les
-  redémarre.
-- Les filtres & la suppression des doublons avant la facturation.
 
 ## Comment rechercher des comptes X
 

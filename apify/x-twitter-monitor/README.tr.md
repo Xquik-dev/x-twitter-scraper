@@ -26,7 +26,92 @@ kullanımını ayrıca faturalandırır.
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-## Twitter izleme neler gönderir
+## Neden X (Twitter) Monitor kullanmalısın?
+
+- **Bildirimler ekibinin çalıştığı yerde.** Discord & Slack kendi mesaj
+  biçimlerini alır & barındırman gereken bir bot yoktur. Telegram sohbet ID'si
+  istemez & her HTTPS webhook olayın tamamını alır.
+- **Bildirimlerinin çalıştığını bil.** Her yeni webhook, Slack veya Discord
+  URL'sine bir test bildirimi gider. Çalıştırma durumu ulaşıp ulaşmadığını
+  söyler. Telegram, Start'a bastığında sohbette onay verir.
+- **Hesapları & konuları birlikte izle.** 1 girdi en fazla 100 hesap & X araması
+  alır. Bir @kullanıcıadı araması o hesaptan bahseden gönderileri yakalar.
+- **Kaçırılan olayları geri al.** `since`, son 30 gün içindeki herhangi bir
+  tarihten itibaren olayları yeniden kaydeder.
+- **İzlemenin çalıştığını bil.** Her çalıştırmanın durum sayfası bunu söyler &
+  bir düğmeyle 1 sonraki adımı gösterir.
+- **Sessiz duraklama yok.** Çalıştırması olmayan bir izleme duraklamadan 4 saat
+  önce bildirimlerin seni uyarır. Sonraki çalıştırma izlemeyi sürdürür.
+- **X hesabı gerekmez.** X giriş bilgilerini veya bir API anahtarını asla
+  paylaşmazsın.
+
+### Doğru satırlar
+
+- Yeniden gönderiler orijinal metnin tamamını taşır.
+- Satırdaki her ID birebir doğru kalır.
+- Bahsetmeler, bağlantılar, hashtag'ler & vurgular metindeki yerleriyle eşleşir.
+- Onay rozetleri `x.com` üzerinde görünenle aynıdır.
+- Satırlar yalnızca herkese açık veri tutar.
+- Reklamlar & tanıtılan içerikler satırlarına asla girmez.
+- İzlemeler yalnızca gerçek silmeleri & takipten çıkmaları bildirir.
+- Profil değişikliği bildirimleri gidip gelmez.
+
+### Güncel veri
+
+- Hesap izlemeleri değişiklikleri yaklaşık bir saniye içinde görür.
+- Anahtar kelime izlemeleri eşleşen her gönderiyi yakalar.
+- İzlemeler gönderi kaçırmaz.
+- Geride kalan bir izleme kaçırdıklarını telafi eder.
+- Canlı videolar & Sohbet Odaları başladığında bir olay oluşur.
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- İzlemelerin olaylar & webhook'lar dahil 1 sabit saatlik fiyatı vardır.
+- İzleme Actor'ları yalnızca bir izlemenin çalıştığı saatler için ücret alır.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Webhook'lar imzalıdır & tekrar oynatmaya karşı güvenlidir.
+- Kapalı kalan bir webhook, olaylarını 7 güne kadar sonradan yine alır.
+- Webhook'un kapalı kaldıktan sonra bile yeni olaylar zamanında gelir.
+- Webhook'lar asla özel veya yerel sunuculara gitmez.
+- Sohbet bildirimleri hız sınırlarına takılmadan sırayla gelir.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Zengin veri
+
+- Gönderi satırları Note Tweet metnini, düzenlemeleri, Topluluk Notlarını,
+  erişim etiketlerini & yanıt kontrollerini taşır.
+- Satırlar kaynak uygulamaları, medya sayılarını & profesyonel hesap verilerini
+  taşır.
+- Medya varyantlar, alternatif metin, boyutlar & kullanılabilirlik nedenleriyle
+  gelir.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+- Actor README'leri, şemalar & gerçek çıktı aynı alan adlarını kullanır.
+
+## X (Twitter) Monitor hangi verileri gönderir?
 
 - İzlediğin hesapların, X gösterdikten sonra genellikle bir saniyeden kısa
   sürede yakalanan her yeni tweet'i, yanıtı, alıntısı ve yeniden gönderisi.
@@ -45,11 +130,6 @@ kullanımını ayrıca faturalandırır.
   değişiklik.
 - Güncel kullanıcı adının yanında kalıcı X kullanıcı ID'si. Böylece adını
   değiştiren bir hesap izlemesini korur.
-- Slack ve Discord'a kendi mesaj biçimlerinde, Telegram'a ve herhangi bir HTTPS
-  webhook'una imzalı JSON olarak bildirimler.
-- Her yeni webhook, Slack veya Discord URL'sine bir test bildirimi. Cevabı
-  çalıştırma durumunda görünür. Telegram, Start'a bastığında sohbette onay
-  verir.
 - Her olay, çalıştırmanın veri kümesinde ve kaydedilmiş görev ya da izleme adı
   başına 1 geçmiş veri kümesinde.
 

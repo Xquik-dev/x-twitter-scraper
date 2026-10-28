@@ -32,24 +32,33 @@ traits of each post. The Actor turns those answers into a Viral Score estimate &
 a verdict. Every row keeps real likes, reposts, replies & quotes. Compare each
 estimate with what happened.
 
-- **Viral Score per post.** Fixed, versioned rules compute each score from 0
-  to 100.
-- **8 trait answers.** They show why a post scored high or low.
-- **Hard stops.** They cap posts that read as spam, ragebait or generic machine
-  copy.
-- **Complete source records.** Every row keeps every field the tweet exposes.
-
 The Viral Score estimates how well the wording works. It does not predict likes
 or views. It does not reproduce how X ranks posts.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
 
-## What you get
+## Why use X Tweet Viral Score Analyzer with AI?
+
+- **Know which posts to send.** Each post gets a `send_it`, `edit_first` or
+  `sleep_on_it` verdict.
+- **Test drafts before posting.** Paste text in `texts` for the same score &
+  verdict. The run fetches nothing from X.
+- **Predicted against actual.** The summary lists posts whose real engagement
+  beat or missed their score.
+- **Learn what works per account.** Each handle gets its best & worst post. The
+  report splits its average score by posting hour, length, media & links.
+- **Rank accounts side by side.** A leaderboard ranks handles by average Viral
+  Score & actual engagement rate.
+- **See what changed.** Add an earlier run's dataset ID to
+  `monitor.baselineDatasetId`. Each row then shows which traits moved.
+- **Spreadsheet-ready scores.** The `Viral Score` view & exports put score,
+  verdict & answers in columns.
+- **No accounts or keys.** The price includes AI-powered analysis. You need no
+  AI key, X API key or login.
 
 ### Complete results
 
-- Searches return posts that X's own search tab leaves out.
 - Large date ranges come back whole & fast.
 - Searches return every match, whatever operators you combine.
 - Filtered pages come back full until the results run out.
@@ -60,17 +69,16 @@ or views. It does not reproduce how X ranks posts.
 - Search results hold every post that matches your query & nothing else.
 - Word & phrase matching works in every language & script.
 - Language filters work for every language X tags.
-- "X can't run this search" appears only when it's true.
 - Protected accounts & private Lists get a clear answer, not an empty page.
 - Reposts carry the full original text.
 - Every ID in a row stays exact.
 - Mentions, links, hashtags & highlights line up with the text.
 - Verified badges match what `x.com` shows.
 - Rows hold public data only.
-- Newest-first results stay in true date order across pages.
-- Messy queries still run instead of failing.
+- Newest-first results come back in date order.
+- Searches accept queries as you'd type them on X.
 - Place searches work with names in 6 languages.
-- Searches X can't run fail at once, with the fix.
+- A search that can't run fails at once & says how to fix it.
 - A date means one thing in any common form.
 - Searches accept `since_id` & `max_id` bounds.
 - Ads & promoted entries never reach your rows.
@@ -81,27 +89,24 @@ or views. It does not reproduce how X ranks posts.
 
 ### Speed
 
-- A slow X answer doesn't hold up your request.
-- Repeated lookups answer at once.
+- One slow page doesn't hold up your run.
 - Searches stay fast on busy topics.
 - Each next page arrives fast.
-- Actors read many handles, posts & queries at once.
 - Reads finish the moment their rows arrive.
 - Stalled Actor calls recover on their own.
 
 ### Fair billing
 
-- A retried page is free.
-- Bad input costs nothing, since it's refused before any read.
+- Bad input costs nothing & tells you what to fix.
 - AI analysis bills only the posts it analyzed.
 - Actors charge only for delivered, unique, matching rows.
 - A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
+- Runs stay within your spend cap & still write their diagnostics.
 - AI Actors don't bill failed or skipped analyses.
 
 ### Reliability
 
-- A one-off X failure doesn't fail your request.
+- A one-off error doesn't fail your run.
 - Paging stays consistent from one page to the next.
 - Paging never loops forever.
 - A deadline returns the rows already found, with diagnostics.
@@ -110,7 +115,6 @@ or views. It does not reproduce how X ranks posts.
 - One bad row doesn't sink a batch.
 - Stopped runs keep their rows & their report.
 - A run that can't start still explains itself.
-- Problems on X's side are fixed before they reach your reads.
 - Support can see exactly what a request or run returned.
 
 ### Built for agents
@@ -131,7 +135,16 @@ or views. It does not reproduce how X ranks posts.
 ### Quality checks
 
 - Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
+- Xquik tests every read live against X.
+
+## What data does X Tweet Viral Score Analyzer with AI return?
+
+- **Viral Score per post.** Fixed, versioned rules compute each score from 0
+  to 100.
+- **8 trait answers.** They show why a post scored high or low.
+- **Hard stops.** They cap posts that read as spam, ragebait or generic machine
+  copy.
+- **Complete source records.** Every row keeps every field the tweet exposes.
 
 ## How to check a tweet's viral score
 

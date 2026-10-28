@@ -23,7 +23,92 @@ ve bildirimler ücretsizdir. Apify, platform kullanımını ayrıca faturalandı
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-## Twitter'dan Discord'a bot neler gönderir
+## Neden X (Twitter) to Discord Bot kullanmalısın?
+
+- **Barındırılacak bot yok.** Bildirimler kanalının webhook'u üzerinden
+  paylaşılır. Senin tarafında hiçbir şey çalışmaz & kimse bot davet etmez.
+- **Sürpriz etiketleme yok.** Bir tweet'teki bahsetme sunucundaki hiç kimseye
+  bildirim göndermez.
+- **Kanalının bağlı olduğunu bil.** Her yeni Discord URL'sine bir test mesajı
+  gider. Çalıştırma durumu Discord'un cevabını gösterir.
+- **1 girdiden birçok kanal.** Aynı bildirimleri başka Discord kanallarına,
+  Slack'e, Telegram'a veya herhangi bir webhook'a gönder.
+- **Kaçırılan olayları geri al.** `since`, son 30 gün içindeki herhangi bir
+  tarihten itibaren olayları yeniden kaydeder.
+- **İzlemenin çalıştığını bil.** Her çalıştırmanın durum sayfası bunu söyler &
+  bir düğmeyle 1 sonraki adımı gösterir.
+- **Sessiz duraklama yok.** Çalıştırması olmayan bir izleme duraklamadan 4 saat
+  önce kanalına bir uyarı gelir. Sonraki çalıştırma izlemeyi sürdürür.
+- **X hesabı gerekmez.** X giriş bilgilerini veya bir API anahtarını asla
+  paylaşmazsın.
+
+### Doğru satırlar
+
+- Yeniden gönderiler orijinal metnin tamamını taşır.
+- Satırdaki her ID birebir doğru kalır.
+- Bahsetmeler, bağlantılar, hashtag'ler & vurgular metindeki yerleriyle eşleşir.
+- Onay rozetleri `x.com` üzerinde görünenle aynıdır.
+- Satırlar yalnızca herkese açık veri tutar.
+- Reklamlar & tanıtılan içerikler satırlarına asla girmez.
+- İzlemeler yalnızca gerçek silmeleri & takipten çıkmaları bildirir.
+- Profil değişikliği bildirimleri gidip gelmez.
+
+### Güncel veri
+
+- Hesap izlemeleri değişiklikleri yaklaşık bir saniye içinde görür.
+- Anahtar kelime izlemeleri eşleşen her gönderiyi yakalar.
+- İzlemeler gönderi kaçırmaz.
+- Geride kalan bir izleme kaçırdıklarını telafi eder.
+- Canlı videolar & Sohbet Odaları başladığında bir olay oluşur.
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- İzlemelerin olaylar & webhook'lar dahil 1 sabit saatlik fiyatı vardır.
+- İzleme Actor'ları yalnızca bir izlemenin çalıştığı saatler için ücret alır.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Webhook'lar imzalıdır & tekrar oynatmaya karşı güvenlidir.
+- Kapalı kalan bir webhook, olaylarını 7 güne kadar sonradan yine alır.
+- Webhook'un kapalı kaldıktan sonra bile yeni olaylar zamanında gelir.
+- Webhook'lar asla özel veya yerel sunuculara gitmez.
+- Sohbet bildirimleri hız sınırlarına takılmadan sırayla gelir.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Zengin veri
+
+- Gönderi satırları Note Tweet metnini, düzenlemeleri, Topluluk Notlarını,
+  erişim etiketlerini & yanıt kontrollerini taşır.
+- Satırlar kaynak uygulamaları, medya sayılarını & profesyonel hesap verilerini
+  taşır.
+- Medya varyantlar, alternatif metin, boyutlar & kullanılabilirlik nedenleriyle
+  gelir.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+- Actor README'leri, şemalar & gerçek çıktı aynı alan adlarını kullanır.
+
+## X (Twitter) to Discord Bot hangi verileri gönderir?
 
 - İzlediğin hesapların, X gösterdikten sonra genellikle bir saniyeden kısa
   sürede yakalanan her yeni tweet'i, yanıtı, alıntısı ve yeniden gönderisi.
@@ -32,10 +117,7 @@ ve bildirimler ücretsizdir. Apify, platform kullanımını ayrıca faturalandı
 - Açtığında canlı videolar, Sohbet Odaları, silinen tweet'ler, profil
   değişiklikleri, takipler ve takipçiler.
 - Her bildirim bir Discord mesajı olarak gelir. Mesaj hesabı ve olayı belirtir,
-  tweet'in metnini içerir ve X'teki tweet'e bağlantı verir. Tweet'teki hiçbir
-  bahsetme kimseye bildirim göndermez.
-- Her yeni Discord URL'sine bir test mesajı. Cevabı çalıştırma durumunda
-  görünür.
+  tweet'in metnini içerir ve X'teki tweet'e bağlantı verir.
 - Her olay, çalıştırmanın veri kümesinde ve kaydedilmiş görev ya da izleme adı
   başına 1 geçmiş veri kümesinde.
 

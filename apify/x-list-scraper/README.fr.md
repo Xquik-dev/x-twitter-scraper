@@ -22,7 +22,88 @@ connexion.
 > Xquik est un service tiers indépendant. Non affilié à X Corp. "Twitter" et "X"
 > sont des marques déposées de X Corp.
 
-## Données de Liste & filtres
+## Pourquoi utiliser X List Scraper ?
+
+- **Des prospects parmi les membres de Liste.** Filtrez les membres & les
+  abonnés par `minFollowers`, `hasEmail` ou `bioContains`. Les lignes portent
+  les e-mails, téléphones & liens que publie chaque profil.
+- **Seulement les posts que vous voulez.** Filtrez les posts de Liste par date
+  ou heure Unix, langue, médias, engagement & certification. Incluez les
+  réponses ou laissez-les de côté.
+- **De nombreuses Listes en 1 run.** Mélangez détails, posts, membres & abonnés
+  de nombreuses Listes.
+- **Fixez vos limites de lignes.** Plafonnez tout le run, ou chaque ressource de
+  Liste & chaque terme de recherche.
+
+### Résultats complets
+
+- Chaque résultat contient les données les plus complètes dont X dispose.
+
+### Lignes exactes
+
+- Les comptes protégés & les Listes privées reçoivent une réponse claire, pas
+  une page vide.
+- Les reposts portent le texte d'origine en entier.
+- Chaque ID d'une ligne reste exact.
+- Les mentions, liens, hashtags & passages mis en avant pointent vers le bon
+  endroit du texte.
+- Les badges de certification correspondent à ce qu'affiche `x.com`.
+- Les lignes ne contiennent que des données publiques.
+- Les publicités & les contenus sponsorisés n'arrivent jamais dans vos lignes.
+
+### Données à jour
+
+- Les lectures continuent de fonctionner quand X déploie des changements.
+
+### Vitesse
+
+- Une page lente ne bloque pas votre run.
+- Les lectures se terminent dès que leurs lignes arrivent.
+- Les appels d'Actor bloqués repartent d'eux-mêmes.
+
+### Facturation juste
+
+- Une entrée invalide ne coûte rien & vous dit quoi corriger.
+- Les Actors facturent seulement les lignes livrées, uniques & conformes à vos
+  filtres.
+- Un run redémarré ne facture jamais deux fois.
+- Les runs restent dans votre limite de dépense & écrivent quand même leurs
+  diagnostics.
+- Les petits runs se terminent par un conseil qui réduit le coût.
+
+### Fiabilité
+
+- Une erreur ponctuelle ne fait pas échouer votre run.
+- Un délai dépassé renvoie les lignes déjà trouvées, avec des diagnostics.
+- Les Actors résistent aux courtes pannes de Xquik.
+- Les runs d'Actor survivent aux redémarrages sans doublons.
+- Une mauvaise ligne ne fait pas échouer tout un lot.
+- Les runs arrêtés gardent leurs lignes & leur rapport.
+- Un run qui ne peut pas démarrer explique quand même pourquoi.
+- Le support peut voir exactement ce qu'une requête ou un run a renvoyé.
+
+### Conçu pour les agents
+
+- Les Actors acceptent une entrée écrite pour d'autres Actors.
+- La sortie est prête pour les tableurs, avec des colonnes plates & des totaux
+  d'engagement.
+- Chaque run indique pourquoi il s'est terminé & s'il faut réessayer.
+
+### Données riches
+
+- Les lignes de post portent le texte des Note Tweets, les modifications, les
+  Notes de la Communauté, les libellés de portée & les contrôles de réponse.
+- Les lignes portent les apps sources, le nombre de médias & les données de
+  compte professionnel.
+- Les médias arrivent avec leurs variantes, leur texte alternatif, leurs tailles
+  & les motifs de disponibilité.
+
+### Contrôles qualité
+
+- Chaque champ que X affiche est fourni, omis exprès ou prouvé absent.
+- Xquik teste chaque lecture en direct sur X.
+
+## Quelles données X List Scraper peut-il extraire ?
 
 - Les détails de la Liste, avec nom, description, nombres de membres &
   d'abonnés, date de création, bannière & profil public du propriétaire.
@@ -30,18 +111,8 @@ connexion.
 - Les membres de la Liste & les abonnés de la Liste.
 - La recherche de Listes par mot-clé. Chaque ligne est 1 Liste avec son
   propriétaire, son nombre de membres & son nombre d'abonnés.
-- Les réponses dans les posts de la Liste, en option.
-- Des filtres de date, d'horodatage Unix, de langue, de médias, d'engagement, de
-  certification & de profil.
-- Des filtres de profil pour les membres & les abonnés, comme `minFollowers`,
-  `hasEmail` & `bioContains`.
 - Les Listes publiques qu'un compte a créées ou dont il est membre, à partir de
   son nom d'utilisateur ou de l'URL de son profil.
-- Plusieurs Listes & types de ressources en 1 run.
-- Un plafond global & un plafond par ressource de Liste ou par terme de
-  recherche.
-- Les runs reprennent après une migration Apify.
-- La suppression des doublons avant la facturation.
 
 ## Comment scraper des Listes X
 

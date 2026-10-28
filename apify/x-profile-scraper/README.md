@@ -40,18 +40,6 @@ numeric user IDs or profile URLs. Each profile can add its posts, replies,
 media, Highlights, followers, following & verified followers. It also translates
 bios & checks who broadcasts live now.
 
-### Key features
-
-- Read many profiles in 1 run from handles, IDs or URLs.
-- Add posts, replies, media, Highlights, followers, following or verified
-  followers as separate rows.
-- Translate each bio into a language code with `translateBioTo`.
-- Check whether each profile broadcasts live now with `checkLiveNow`.
-- Filter posts by date, language, media & engagement.
-- Filter profiles by audience size, account age & verification.
-- Filters & duplicate removal run before billing.
-- Runs keep delivered rows & progress when Apify restarts them.
-
 ### Use cases
 
 - Enrich lead lists with bios, websites, locations & audience size.
@@ -62,7 +50,89 @@ bios & checks who broadcasts live now.
 - Watch creators & brands for live broadcasts.
 - Read bios from other markets in your own language.
 
-### What data can X Profile Scraper extract?
+## Why use X Profile Scraper?
+
+- **Whole account in 1 run.** Give handles, IDs or URLs. Add posts, replies,
+  media, Highlights, followers, following or verified followers as rows.
+- **Live broadcast check.** `checkLiveNow` says who is live now, with their
+  latest broadcast.
+- **Published contacts in each row.** `email` & `contactInfo` hold the emails,
+  phones & links a profile publishes. Keep only business emails or domains you
+  pick.
+- **Account origin & history.** `accountBasedIn` holds X's country or region
+  label. `usernameChanges` shows how often a handle changed.
+- **Filters for profiles & posts.** Keep profiles by audience size, account age
+  & verification. Keep posts by date, language, media & engagement.
+
+### Complete results
+
+- Account history comes back complete, old posts included.
+- Profile exports keep every post of the author's own threads.
+- Profile reads include the pinned post, flagged as pinned.
+- Follower & following exports return full lists.
+- Verified follower exports return full lists too.
+- Each answer holds the fullest data X has for it.
+
+### Accurate rows
+
+- Reposts carry the full original text.
+- Every ID in a row stays exact.
+- Mentions, links, hashtags & highlights line up with the text.
+- Verified badges match what `x.com` shows.
+- Rows hold public data only.
+- Ads & promoted entries never reach your rows.
+
+### Fresh data
+
+- Reads keep working when X ships changes.
+
+### Speed
+
+- One slow page doesn't hold up your run.
+- Reads finish the moment their rows arrive.
+- Stalled Actor calls recover on their own.
+
+### Fair billing
+
+- Bad input costs nothing & tells you what to fix.
+- Actors charge only for delivered, unique, matching rows.
+- A profile shared by several targets is billed once.
+- A restarted run never charges twice.
+- Runs stay within your spend cap & still write their diagnostics.
+- Small runs end with a tip that cuts cost.
+
+### Reliability
+
+- A one-off error doesn't fail your run.
+- A deadline returns the rows already found, with diagnostics.
+- Actors ride out short Xquik outages.
+- Actor runs survive restarts without repeats.
+- One bad row doesn't sink a batch.
+- Stopped runs keep their rows & their report.
+- A run that can't start still explains itself.
+- Support can see exactly what a request or run returned.
+
+### Built for agents
+
+- Actors accept input written for other Actors.
+- Output is ready for spreadsheets, with flat columns & engagement totals.
+- Every run says why it ended & whether to retry.
+
+### Rich data
+
+- Post rows carry note text, edits, Community Notes, reach labels & reply
+  controls.
+- Rows carry source apps, media counts & professional account data.
+- Media comes with variants, alt text, sizes & availability reasons.
+- Posts & bios can be translated into your language.
+- Account checks say if each account is active, protected, suspended or missing.
+
+### Quality checks
+
+- Every field X shows is served, left out on purpose or proven absent.
+- Xquik tests every read live against X.
+
+## What data can X Profile Scraper extract?
 
 Profile rows use `resultType: "profile"`. These are the main fields.
 
@@ -118,81 +188,10 @@ Optional rows keep the Xquik REST response shape.
 | `profileVerifiedFollower` | `includeVerifiedFollowers` | Verified follower |
 | `profileBioTranslation`   | `translateBioTo`           | Translated bio    |
 | `profileLive`             | `checkLiveNow`             | Checked profile   |
+| `accountStatus`           | `mode: "accountStatus"`    | Named account     |
 
 Rows never include viewer-only state, such as whether you follow or block an
 account.
-
-## What you get
-
-### Complete results
-
-- Account history comes back complete, old posts included.
-- Profile posts without replies still keep the author's own threads.
-- Profile reads include the pinned post, flagged as pinned.
-- Follower & following exports return full lists.
-- Verified follower exports return full lists too.
-- Timelines page all the way to the last post.
-- Each answer holds the fullest data X has for it.
-
-### Accurate rows
-
-- Reposts carry the full original text.
-- Every ID in a row stays exact.
-- Mentions, links, hashtags & highlights line up with the text.
-- Verified badges match what `x.com` shows.
-- Rows hold public data only.
-- Ads & promoted entries never reach your rows.
-
-### Fresh data
-
-- Reads keep working when X ships changes.
-
-### Speed
-
-- A slow X answer doesn't hold up your request.
-- Actors read many handles, posts & queries at once.
-- Reads finish the moment their rows arrive.
-- Stalled Actor calls recover on their own.
-
-### Fair billing
-
-- Bad input costs nothing, since it's refused before any read.
-- Actors charge only for delivered, unique, matching rows.
-- A profile shared by several targets is billed once.
-- A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
-- Small runs end with a tip that cuts cost.
-
-### Reliability
-
-- A one-off X failure doesn't fail your request.
-- A deadline returns the rows already found, with diagnostics.
-- Actors ride out short Xquik outages.
-- Actor runs survive restarts without repeats.
-- One bad row doesn't sink a batch.
-- Stopped runs keep their rows & their report.
-- A run that can't start still explains itself.
-- Problems on X's side are fixed before they reach your reads.
-- Support can see exactly what a request or run returned.
-
-### Built for agents
-
-- Actors accept input written for other Actors.
-- Output is ready for spreadsheets, with flat columns & engagement totals.
-- Every run says why it ended & whether to retry.
-
-### Rich data
-
-- Post rows carry note text, edits, Community Notes, reach labels & reply
-  controls.
-- Rows carry source apps, media counts & professional account data.
-- Media comes with variants, alt text, sizes & availability reasons.
-- Posts & bios can be translated into your language.
-
-### Quality checks
-
-- Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
 
 ## How do I use X Profile Scraper to scrape profile data?
 
@@ -301,6 +300,18 @@ Each check is 1 `profileLive` row with `live`, `userId`, `userName` &
 `broadcast`. `broadcast` holds the profile's latest broadcast, live or ended, or
 null. A missing profile adds no row.
 
+### Check if accounts are suspended
+
+```json
+{ "twitterHandles": ["nike", "adidas", "puma"], "mode": "accountStatus" }
+```
+
+Each account is 1 `accountStatus` row at $0.00015, even when X shows no profile.
+`accountStatus` is `active`, `suspended` or `not_found`. An active row holds the
+full profile & `protected`. A suspended or missing row holds only
+`accountStatus`, `resultType` & `sourceTarget`. This mode adds no posts,
+followers or other rows.
+
 ## Task examples
 
 Choose from 50 public tasks. Each has a bounded input & a matching dataset view.
@@ -383,6 +394,7 @@ The Input tab lists every option. Give at least 1 of `twitterHandles`,
 | `twitterHandles`               | Handles, with or without `@`                          |
 | `startUrls`                    | Profile URLs on `x.com` or `twitter.com`              |
 | `userIds`                      | Numeric X user IDs                                    |
+| `mode`                         | `profiles`, or `accountStatus` for 1 status row each  |
 | `maxItems`                     | Cap on delivered rows across the whole run            |
 | `maxItemsPerTarget`            | Cap on rows for each profile or resource              |
 | `includeTweets`                | Add the profile's posts                               |

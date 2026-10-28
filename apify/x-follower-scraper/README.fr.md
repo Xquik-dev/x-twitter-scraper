@@ -32,22 +32,89 @@ X Follower Scraper de Xquik renvoie les données de profil publiques disponibles
 pour les abonnés, les abonnements, les Listes & les Communautés. Chaque ligne
 nomme sa cible source & sa relation.
 
-### Comportement de base
+## Pourquoi utiliser X Follower Scraper ?
 
-- Les filtres & la suppression des doublons passent avant la facturation.
-- Par défaut, un profil commun à plusieurs cibles apparaît & se facture une
-  seule fois.
-- 1 run accepte des noms d'utilisateur, des ID numériques, des URL & des chemins
-  courts.
-- Le mode fusion enregistre les profils communs, les sources, les relations &
-  `overlapCount`.
-- Les logs du run montrent la durée de chaque page dans `fetchDurationMs`,
-  `processingDurationMs`, `pushDurationMs`, `statusDurationMs` &
-  `fullPageDurationMs`.
-- Les runs gardent les lignes livrées & la progression quand Apify les
-  redémarre.
+- **Les listes d'abonnés filtrées les moins chères.** Le [benchmark](README.md#benchmark)
+  du 2026-10-15 a gardé les abonnés de NASA qui ont au moins 1 000 abonnés. Les
+  4 autres Actors ont facturé chaque profil lu. Ils coûtaient 39 à 273 fois plus
+  par profil utile.
+- **Des exports d'abonnés 2,6x plus rapides.** Dans le [benchmark](README.md#benchmark),
+  il a lu 1 000 abonnés 2,6x plus vite que 4 autres Actors.
+- **1,6x plus de champs par profil.** Sa ligne complète médiane avait 39 champs
+  dans le [benchmark](README.md#benchmark). C'est 1,6x la médiane des autres Actors.
+- **Voyez le recoupement des audiences.** Le mode fusion donne 1 ligne par
+  profil, avec chaque source où il apparaît. Triez par `overlapCount` pour
+  trouver les abonnés communs.
+- **Vérifiez qui suit qui.** Listez des comptes dans `followCheckSources` &
+  `followCheckTargets`. Chaque ligne contient `isFollowing` & `isFollowedBy`
+  pour 1 paire.
+- **Toutes les audiences en 1 run.** Donnez des noms d'utilisateur, des ID, des
+  URL ou des chemins courts. Lisez les abonnés, les abonnements, les membres de
+  Liste, les membres de Communauté, les affiliés ou les souscriptions.
+- **Trouvez les bons profils.** Filtrez par abonnés, posts, âge du compte,
+  certification, bio, localisation & e-mail publié.
 
-### Quelles données X Follower Scraper peut-il extraire ?
+### Résultats complets
+
+- Les exports d'abonnés & d'abonnements renvoient des listes complètes.
+- Les exports d'abonnés certifiés renvoient aussi des listes complètes.
+- Chaque résultat contient les données les plus complètes dont X dispose.
+
+### Lignes exactes
+
+- Chaque ID d'une ligne reste exact.
+- Les badges de certification correspondent à ce qu'affiche `x.com`.
+- Les lignes ne contiennent que des données publiques.
+- Les publicités & les contenus sponsorisés n'arrivent jamais dans vos lignes.
+
+### Données à jour
+
+- Les lectures continuent de fonctionner quand X déploie des changements.
+
+### Vitesse
+
+- Une page lente ne bloque pas votre run.
+- Les lectures se terminent dès que leurs lignes arrivent.
+- Les appels d'Actor bloqués repartent d'eux-mêmes.
+
+### Facturation juste
+
+- Une entrée invalide ne coûte rien & vous dit quoi corriger.
+- Les Actors facturent seulement les lignes livrées, uniques & conformes à vos
+  filtres.
+- Un profil commun à plusieurs cibles se facture une seule fois.
+- Un run redémarré ne facture jamais deux fois.
+- Les runs restent dans votre limite de dépense & écrivent quand même leurs
+  diagnostics.
+- Les petits runs se terminent par un conseil qui réduit le coût.
+
+### Fiabilité
+
+- Une erreur ponctuelle ne fait pas échouer votre run.
+- Un délai dépassé renvoie les lignes déjà trouvées, avec des diagnostics.
+- Les Actors résistent aux courtes pannes de Xquik.
+- Les runs d'Actor survivent aux redémarrages sans doublons.
+- Une mauvaise ligne ne fait pas échouer tout un lot.
+- Les runs arrêtés gardent leurs lignes & leur rapport.
+- Un run qui ne peut pas démarrer explique quand même pourquoi.
+- Le support peut voir exactement ce qu'une requête ou un run a renvoyé.
+
+### Conçu pour les agents
+
+- Les Actors acceptent une entrée écrite pour d'autres Actors.
+- Chaque run indique pourquoi il s'est terminé & s'il faut réessayer.
+
+### Données riches
+
+- Les liens courts arrivent sous leur URL finale, & les lignes de liste peuvent
+  porter des profils complets.
+
+### Contrôles qualité
+
+- Chaque champ que X affiche est fourni, omis exprès ou prouvé absent.
+- Xquik teste chaque lecture en direct sur X.
+
+## Quelles données X Follower Scraper peut-il extraire ?
 
 | Champ                    | Description                                                   |
 | ------------------------ | ------------------------------------------------------------- |
@@ -105,21 +172,6 @@ de gouvernements. Réglez `verifiedType` pour garder 1 type de badge.
 Les lignes n'incluent jamais d'état propre au compte qui consulte. Xquik retire
 les indicateurs d'abonnement, de blocage, de masquage, de MP, de notification &
 autres indicateurs de ce type. La sortie brute les retire aussi.
-
-## Cas d'usage
-
-- Enrichissez des prospects & créez des datasets de recherche avec plus de
-  champs par profil. Notre ligne complète médiane avait 38 champs le 2026-09-29.
-  C'est 2,5x la médiane de 9 autres Actors.
-- Exportez les abonnés de concurrents pour la prospection.
-- Comparez les audiences de votre compte, de vos concurrents & de personnalités
-  publiques.
-- Filtrez par nombre d'abonnés & par certification pour trouver les profils qui
-  conviennent.
-- Exportez les membres d'une Communauté X.
-- Créez des datasets publics de réseaux sociaux pour la recherche.
-- Segmentez des bases d'abonnés par mot-clé de bio, localisation ou type de
-  profil.
 
 ## Comment utiliser X Follower Scraper pour scraper des données d'abonnés ?
 
@@ -356,8 +408,9 @@ Pour plus de volume,
 [choisissez un plan Apify](https://apify.com/pricing?fpr=xquik) avec plus
 d'usage prépayé.
 
-Un run peut lire de nombreuses cibles. Les plafonds, la déduplication & la
-facturation restent exacts sur toutes les cibles.
+Un run peut lire de nombreuses cibles. Les filtres & la suppression des doublons
+passent avant la facturation. Les plafonds, la déduplication & la facturation
+restent exacts sur toutes les cibles.
 
 - Les filtres passent avant qu'un profil entre dans votre dataset, donc les
   lignes filtrées ne coûtent rien.

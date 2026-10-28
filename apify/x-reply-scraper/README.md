@@ -41,22 +41,6 @@ login. Filters run before dataset writes, so you pay only for delivered rows.
 Xquik's X Reply Scraper collects public replies & comment conversations. It
 handles single posts, bulk URL lists, Tweet IDs & user reply timelines.
 
-### Key features
-
-- Auto mode includes replies that X's post page leaves out.
-- `collectionStrategy` sets how the Actor collects replies.
-- Bulk inputs accept post URLs, Tweet IDs, profiles & usernames.
-- Filters & duplicate removal run before billing.
-- Output supports 4 sort modes, 3 detail levels & 3 field styles.
-- Every reply keeps its source target, parent IDs, root ID & depth.
-- Continuation cursors support backfills & scheduled runs.
-- Runs that need attention write 1 free record to `diagnostics`. A run that
-  reads every target & finds no reply writes none. Its status says why.
-- Run logs show page & target timing in `fetchDurationMs`,
-  `processingDurationMs`, `pushDurationMs`, `statusDurationMs`,
-  `fullPageDurationMs` & `fullTargetDurationMs`.
-- Runs keep delivered replies & progress when Apify restarts them.
-
 ### Use cases
 
 - Measure sentiment & customer feedback under brand & product posts.
@@ -66,7 +50,92 @@ handles single posts, bulk URL lists, Tweet IDs & user reply timelines.
 - Rebuild whole conversations for research & AI training datasets.
 - Track how an account replies to its customers over time.
 
-### What data can X Reply Scraper extract?
+## Why use X Reply Scraper?
+
+- **1.7x faster reply exports.** Its median run was 1.7x faster than the fastest
+  of 4 other Actors. The [benchmark](#benchmark) ran on 2026-10-15.
+- **Lowest cost per useful reply.** It cost the least per useful reply in the
+  [benchmark](#benchmark).
+- **2x the fields per reply.** Its median row had 100 fields in the
+  [benchmark](#benchmark). That is 2x the median of the other Actors.
+- **Pick the conversation shape.** Keep direct replies, nested replies or both,
+  down to the depth you set. `collectionStrategy` can also return the thread or
+  only hidden replies.
+- **Rebuild every thread.** Each reply carries its parent in `inReplyToId`, its
+  root in `rootTweetId` & its `depth`.
+- **Many posts in 1 run.** Paste post URLs, Tweet IDs, profiles & usernames
+  together. A username returns that account's replies.
+- **Only the replies you want.** Filter by words, hashtags, author, language,
+  verification, engagement, media & date.
+- **Sort by likes or date.** Rank replies by likes, or list the newest or oldest
+  first. Rows come compact, full or rich, in `camelCase` or `snake_case`.
+- **Continue big threads later.** A run that stops early saves each target's
+  place in `next-cursors`. Pass 1 as `startCursor` to continue.
+
+### Complete results
+
+- Complete mode adds replies the author hid & explains empty threads.
+- Each answer holds the fullest data X has for it.
+
+### Accurate rows
+
+- A post is called missing only when it's gone.
+- Reposts carry the full original text.
+- Every ID in a row stays exact.
+- Mentions, links, hashtags & highlights line up with the text.
+- A count that isn't known is listed in `unknownCounts`, never shown as 0.
+- Verified badges match what `x.com` shows.
+- Rows hold public data only.
+- Ads & promoted entries never reach your rows.
+
+### Fresh data
+
+- Reads keep working when X ships changes.
+
+### Speed
+
+- One slow page doesn't hold up your run.
+- Reads finish the moment their rows arrive.
+- Stalled Actor calls recover on their own.
+
+### Fair billing
+
+- Bad input costs nothing & tells you what to fix.
+- Actors charge only for delivered, unique, matching rows.
+- A restarted run never charges twice.
+- Runs stay within your spend cap & still write their diagnostics.
+- Small runs end with a tip that cuts cost.
+
+### Reliability
+
+- A one-off error doesn't fail your run.
+- A deadline returns the rows already found, with diagnostics.
+- Actors ride out short Xquik outages.
+- Actor runs survive restarts without repeats.
+- One bad row doesn't sink a batch.
+- Stopped runs keep their rows & their report.
+- A run that can't start still explains itself.
+- Support can see exactly what a request or run returned.
+
+### Built for agents
+
+- Actors accept input written for other Actors.
+- Output is ready for spreadsheets, with flat columns & engagement totals.
+- Every run says why it ended & whether to retry.
+
+### Rich data
+
+- Post rows carry note text, edits, Community Notes, reach labels & reply
+  controls.
+- Rows carry source apps, media counts & professional account data.
+- Media comes with variants, alt text, sizes & availability reasons.
+
+### Quality checks
+
+- Every field X shows is served, left out on purpose or proven absent.
+- Xquik tests every read live against X.
+
+## What data can X Reply Scraper extract?
 
 The dataset & run-report schemas describe every returned field. Text, number &
 boolean fields also carry examples for agents & generated integrations.
@@ -114,74 +183,6 @@ Full rows also keep available source metadata.
 
 Flat rows keep conversation ancestry, source details, result type & schema
 version. See OpenAPI for the exact fields.
-
-## What you get
-
-### Complete results
-
-- Reply exports include replies that X's post page leaves out.
-- Complete mode adds replies the author hid & explains empty threads.
-- Each answer holds the fullest data X has for it.
-
-### Accurate rows
-
-- A post is called missing only when it's gone.
-- Reposts carry the full original text.
-- Every ID in a row stays exact.
-- Mentions, links, hashtags & highlights line up with the text.
-- Counts X didn't send are listed in `unknownCounts`, never shown as 0.
-- Verified badges match what `x.com` shows.
-- Rows hold public data only.
-- Ads & promoted entries never reach your rows.
-
-### Fresh data
-
-- Reads keep working when X ships changes.
-
-### Speed
-
-- A slow X answer doesn't hold up your request.
-- Actors read many handles, posts & queries at once.
-- Reads finish the moment their rows arrive.
-- Stalled Actor calls recover on their own.
-
-### Fair billing
-
-- Bad input costs nothing, since it's refused before any read.
-- Actors charge only for delivered, unique, matching rows.
-- A restarted run never charges twice.
-- A spend cap becomes a row cap, & diagnostics still get written.
-- Small runs end with a tip that cuts cost.
-
-### Reliability
-
-- A one-off X failure doesn't fail your request.
-- A deadline returns the rows already found, with diagnostics.
-- Actors ride out short Xquik outages.
-- Actor runs survive restarts without repeats.
-- One bad row doesn't sink a batch.
-- Stopped runs keep their rows & their report.
-- A run that can't start still explains itself.
-- Problems on X's side are fixed before they reach your reads.
-- Support can see exactly what a request or run returned.
-
-### Built for agents
-
-- Actors accept input written for other Actors.
-- Output is ready for spreadsheets, with flat columns & engagement totals.
-- Every run says why it ended & whether to retry.
-
-### Rich data
-
-- Post rows carry note text, edits, Community Notes, reach labels & reply
-  controls.
-- Rows carry source apps, media counts & professional account data.
-- Media comes with variants, alt text, sizes & availability reasons.
-
-### Quality checks
-
-- Every field X shows is served, left out on purpose or proven absent.
-- Every read is checked live each hour.
 
 ## How do I use X Reply Scraper to scrape replies?
 

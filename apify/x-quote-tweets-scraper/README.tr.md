@@ -21,7 +21,91 @@ başına $0.00015** ödersin & Apify platform kullanımını ayrıca faturaland�
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-## Her satırdaki alıntı verileri
+## Neden X Quote Tweets Scraper kullanmalısın?
+
+- **Kişi başına 1 satır.** `uniqueAuthors` seçeneğini aç & bir gönderiyi
+  alıntılayan her kişiyi 1 kez gör. Aynı yazarın sonraki alıntıları ücretsizdir.
+- **En yeni veya en popüler alıntılar.** Yeni alıntılar için `sort` alanını
+  `latest`, X'in en üst sıraya koyduğu alıntılar için `top` yap.
+- **11 alıntı filtresi.** Dile, tarihlere, medya türüne, onaylı yazarlara & 6
+  minimum sayıya göre filtrele.
+- **1 çalıştırmada birçok gönderi.** `x.com` veya `twitter.com` gönderi
+  URL'lerini ya da gönderi ID'lerini yapıştır. Çalıştırmayı `maxItems` ile, her
+  gönderiyi `maxItemsPerTarget` ile sınırla.
+- **Dışa aktarıma hazır tablolar.** "Quote Tweets" her alıntıyı sayılarıyla
+  listeler. "Quote Authors" her gönderiyi kimin alıntıladığını listeler. JSON,
+  CSV, Excel, XML veya RSS olarak dışa aktar.
+
+### Eksiksiz sonuçlar
+
+- Her cevap, X'te bulunan en eksiksiz veriyi tutar.
+
+### Doğru satırlar
+
+- Dil filtreleri X'in etiketlediği her dilde çalışır.
+- Dil, tarih & etkileşim filtreleri aldığın her satırda geçerlidir.
+- Yeniden gönderiler orijinal metnin tamamını taşır.
+- Satırdaki her ID birebir doğru kalır.
+- Bahsetmeler, bağlantılar, hashtag'ler & vurgular metindeki yerleriyle eşleşir.
+- Bilinmeyen bir sayı `unknownCounts` içinde listelenir, asla 0 gösterilmez.
+- Onay rozetleri `x.com` üzerinde görünenle aynıdır.
+- Satırlar yalnızca herkese açık veri tutar.
+- Alıntı aramaları her gerçek alıntıyı döndürür, başka bir şey döndürmez.
+- Reklamlar & tanıtılan içerikler satırlarına asla girmez.
+
+### Güncel veri
+
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Okumalar, satırları geldiği anda biter.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- Hatalı girdi ücretsizdir & neyi düzelteceğini söyler.
+- Actor'lar yalnızca teslim edilen, benzersiz & eşleşen satırlar için ücret
+  alır.
+- Yeniden başlatılan bir çalıştırma asla 2 kez ücret almaz.
+- Çalıştırmalar harcama sınırının içinde kalır & tanılamalarını yine yazar.
+- Küçük çalıştırmalar, maliyeti düşüren bir ipucuyla biter.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Süre dolduğunda o ana kadar bulunan satırlar tanılamalarla birlikte döner.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Tek bir hatalı satır bütün grubu bozmaz.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Çıktı düz sütunlar & etkileşim toplamlarıyla tablolara hazırdır.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Zengin veri
+
+- Gönderi satırları Note Tweet metnini, düzenlemeleri, Topluluk Notlarını,
+  erişim etiketlerini & yanıt kontrollerini taşır.
+- Satırlar kaynak uygulamaları, medya sayılarını & profesyonel hesap verilerini
+  taşır.
+- Medya varyantlar, alternatif metin, boyutlar & kullanılabilirlik nedenleriyle
+  gelir.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+
+## X Quote Tweets Scraper hangi verileri çıkarabilir?
 
 - Alıntının tam metni, bağlantısı, dili & paylaşılma zamanı.
 - Beğeniler, yanıtlar, yeniden gönderiler, alıntılar, görüntülenmeler & yer
@@ -34,15 +118,6 @@ başına $0.00015** ödersin & Apify platform kullanımını ayrıca faturaland�
 - `sourceTarget`, satırın alıntıladığı girdi gönderisi.
 - `position`, satırın çalıştırmadaki sırası & `scrapedAt`, satırın teslim
   zamanı.
-- 1 çalıştırmada, her biri X'in sunduklarının sonuna kadar okunan birçok
-  gönderi.
-- Önce en yeniler ya da X'in en üst sıraya koyduğu alıntılar.
-- Dil, tarihler, medya türü, 6 minimum sayı & onaylı yazarlar için 11 filtre.
-- Gönderi değil kişi istediğinde yazar başına 1 satır.
-- `x.com` & `twitter.com` gönderi URL'leri ya da sayısal gönderi ID'leri.
-- Faturalamadan önce tekilleştirme.
-- Apify veri kümeleri üzerinden JSON, CSV, Excel, XML & RSS dışa aktarımları.
-- Apify çalıştırmayı taşıdığında çalıştırma kayıtlı durumdan devam eder.
 
 ## Alıntı tweet nasıl kazınır
 

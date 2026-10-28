@@ -30,20 +30,6 @@ du seine Posts, Antworten, Medien, Highlights, Follower, gefolgten Accounts &
 verifizierten Follower ergänzen. Er übersetzt außerdem Bios & prüft, wer gerade
 live sendet.
 
-### Wichtige Funktionen
-
-- Lies viele Profile in 1 Run aus Nutzernamen, IDs oder URLs.
-- Ergänze Posts, Antworten, Medien, Highlights, Follower, gefolgte Accounts oder
-  verifizierte Follower als eigene Datensätze.
-- Übersetze jede Bio mit `translateBioTo` in eine Sprache, die du per Sprachcode
-  angibst.
-- Prüfe mit `checkLiveNow`, ob jedes Profil gerade live sendet.
-- Filtere Posts nach Datum, Sprache, Medien & Interaktionen.
-- Filtere Profile nach Zielgruppengröße, Account-Alter & Verifizierung.
-- Filter & Duplikatentfernung laufen vor der Abrechnung.
-- Runs behalten gelieferte Datensätze & ihren Fortschritt, wenn Apify sie neu
-  startet.
-
 ### Anwendungsfälle
 
 - Reichere Lead-Listen mit Bios, Websites, Standorten & Zielgruppengröße an.
@@ -54,7 +40,95 @@ live sendet.
 - Beobachte, ob Creator & Marken live senden.
 - Lies Bios aus anderen Märkten in deiner eigenen Sprache.
 
-### Welche Daten kann X Profile Scraper extrahieren?
+## Warum X Profile Scraper nutzen?
+
+- **Der ganze Account in 1 Run.** Gib Nutzernamen, IDs oder URLs an. Ergänze
+  Posts, Antworten, Medien, Highlights, Follower, gefolgte Accounts oder
+  verifizierte Follower als Datensätze.
+- **Prüfung auf Live-Broadcasts.** `checkLiveNow` sagt, wer gerade live ist, mit
+  seinem neuesten Broadcast.
+- **Veröffentlichte Kontakte in jedem Datensatz.** `email` & `contactInfo`
+  enthalten die E-Mails, Telefonnummern & Links, die ein Profil veröffentlicht.
+  Behalte nur geschäftliche E-Mails oder Domains, die du auswählst.
+- **Herkunft & Verlauf des Accounts.** `accountBasedIn` enthält die Länder- oder
+  Regionsangabe von X. `usernameChanges` zeigt, wie oft sich ein Nutzername
+  geändert hat.
+- **Filter für Profile & Posts.** Filtere Profile nach Zielgruppengröße,
+  Account-Alter & Verifizierung. Filtere Posts nach Datum, Sprache, Medien &
+  Interaktionen.
+
+### Vollständige Ergebnisse
+
+- Der Account-Verlauf kommt vollständig zurück, alte Posts inklusive.
+- Profil-Exporte behalten jeden Post der eigenen Threads des Autors.
+- Profilabrufe enthalten den angehefteten Post, als angeheftet markiert.
+- Exporte von Followern & gefolgten Accounts liefern vollständige Listen.
+- Auch Exporte verifizierter Follower liefern vollständige Listen.
+- Jedes Ergebnis enthält die vollständigsten Daten, die X dafür hat.
+
+### Genaue Datensätze
+
+- Reposts enthalten den vollständigen Originaltext.
+- Jede ID in einem Datensatz bleibt exakt.
+- Erwähnungen, Links, Hashtags & Hervorhebungen sitzen an der richtigen Stelle
+  im Text.
+- Verifizierungs-Badges stimmen mit dem überein, was `x.com` zeigt.
+- Datensätze enthalten nur öffentliche Daten.
+- Werbung & gesponserte Einträge landen nie in deinen Datensätzen.
+
+### Aktuelle Daten
+
+- Abrufe funktionieren weiter, wenn X Änderungen ausrollt.
+
+### Tempo
+
+- Eine langsame Seite hält deinen Run nicht auf.
+- Abrufe enden, sobald ihre Datensätze ankommen.
+- Hängende Actor-Aufrufe laufen von selbst wieder an.
+
+### Faire Abrechnung
+
+- Eine fehlerhafte Eingabe kostet nichts & sagt dir, was du korrigieren musst.
+- Actors rechnen nur gelieferte, eindeutige, passende Datensätze ab.
+- Ein Profil, das mehrere Ziele teilen, wird nur einmal berechnet.
+- Ein neu gestarteter Run berechnet nie doppelt.
+- Runs bleiben innerhalb deines Ausgabenlimits & schreiben trotzdem ihre
+  Diagnosen.
+- Kleine Runs enden mit einem Tipp, der Kosten senkt.
+
+### Zuverlässigkeit
+
+- Ein einzelner Fehler lässt deinen Run nicht scheitern.
+- Ein Zeitlimit liefert die bereits gefundenen Datensätze samt Diagnosen.
+- Actors überstehen kurze Xquik-Ausfälle.
+- Actor-Runs überstehen Neustarts ohne Dopplungen.
+- Ein fehlerhafter Datensatz lässt keinen Batch scheitern.
+- Gestoppte Runs behalten ihre Datensätze & ihren Report.
+- Ein Run, der nicht starten kann, erklärt trotzdem, warum.
+- Der Support sieht genau, was eine Anfrage oder ein Run geliefert hat.
+
+### Für Agents gebaut
+
+- Actors akzeptieren Eingaben, die für andere Actors geschrieben sind.
+- Die Ausgabe ist bereit für Tabellen, mit flachen Spalten & Interaktionssummen.
+- Jeder Run sagt, warum er endete & ob du es erneut versuchen solltest.
+
+### Umfangreiche Daten
+
+- Post-Datensätze enthalten den Text von Note Tweets, Bearbeitungen, Community
+  Notes, Reichweiten-Labels & Antworteinstellungen.
+- Datensätze enthalten Quell-Apps, Medienzahlen & Daten professioneller
+  Accounts.
+- Medien kommen mit Varianten, Alt-Text, Größen & Gründen zur Verfügbarkeit.
+- Posts & Bios lassen sich in deine Sprache übersetzen.
+
+### Qualitätsprüfungen
+
+- Jedes Feld, das X zeigt, wird geliefert, bewusst weggelassen oder ist
+  nachweislich nicht vorhanden.
+- Xquik testet jeden Abruf live gegen X.
+
+## Welche Daten kann X Profile Scraper extrahieren?
 
 Profil-Datensätze nutzen `resultType: "profile"`. Das sind die wichtigsten
 Felder.

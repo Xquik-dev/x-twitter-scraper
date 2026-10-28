@@ -22,7 +22,95 @@ son gratis, y Apify factura aparte el uso de la plataforma.
 > Xquik es un servicio independiente de terceros. No está afiliado a X Corp.
 > "Twitter" y "X" son marcas registradas de X Corp.
 
-## Qué envía el bot de Twitter a Discord
+## ¿Por qué usar X (Twitter) to Discord Bot?
+
+- **Sin bot que alojar.** Las alertas se publican con el webhook de tu canal.
+  Nada se ejecuta de tu lado, & nadie invita a un bot.
+- **Sin notificaciones sorpresa.** Una mención dentro de un tweet nunca notifica
+  a nadie en tu servidor.
+- **Comprueba que tu canal está conectado.** Cada URL nueva de Discord recibe un
+  mensaje de prueba. El estado de la ejecución muestra la respuesta de Discord.
+- **Muchos canales desde 1 entrada.** Envía las mismas alertas a más canales de
+  Discord, a Slack, a Telegram o a cualquier webhook.
+- **Recupera eventos perdidos.** `since` vuelve a guardar los eventos desde
+  cualquier fecha de los últimos 30 días.
+- **Comprueba que el monitor está vigilando.** La página de estado de cada
+  ejecución lo indica & muestra 1 siguiente paso con un botón.
+- **Sin pausas silenciosas.** Tu canal recibe un aviso 4 horas antes de que se
+  pause un monitor sin ejecuciones. La siguiente ejecución lo reanuda.
+- **No necesitas cuenta de X.** Nunca compartes tu inicio de sesión de X ni una
+  clave de API.
+
+### Filas precisas
+
+- Los reposts traen el texto original completo.
+- Cada ID de una fila se mantiene exacto.
+- Las menciones, los enlaces, los hashtags & los resaltados quedan alineados con
+  el texto.
+- Las insignias de verificación coinciden con lo que muestra `x.com`.
+- Las filas solo contienen datos públicos.
+- Los anuncios & las entradas promocionadas nunca llegan a tus filas.
+- Los monitores solo informan eliminaciones & dejados de seguir reales.
+- Las alertas de cambios de perfil no saltan por valores que van & vienen.
+
+### Datos actualizados
+
+- Los monitores de cuentas detectan los cambios en cerca de un segundo.
+- Los monitores de palabras clave detectan todos los tweets que coinciden.
+- Los monitores no se pierden ningún tweet.
+- Un monitor que se atrasa recupera lo que se perdió.
+- Los videos en vivo & los Espacios generan un evento cuando empiezan.
+- Las lecturas siguen funcionando cuando X lanza cambios.
+
+### Velocidad
+
+- Una página lenta no frena tu ejecución.
+- Las llamadas a Actores que se atascan se recuperan solas.
+
+### Cobro justo
+
+- Los monitores tienen 1 precio fijo por hora, con eventos & webhooks incluidos.
+- Los Actores de monitoreo solo cobran las horas que un monitor estuvo
+  vigilando.
+
+### Confiabilidad
+
+- Un error aislado no hace fallar tu ejecución.
+- Los Actores resisten las caídas breves de Xquik.
+- Las ejecuciones de los Actores siguen tras un reinicio sin repetir nada.
+- Las ejecuciones detenidas conservan sus filas & su informe.
+- Una ejecución que no puede iniciar igual explica por qué.
+- Los webhooks van firmados & protegidos contra ataques de repetición.
+- Un webhook que estuvo caído igual recibe sus eventos, hasta por 7 días.
+- Los eventos nuevos llegan a tiempo, incluso después de que tu webhook estuvo
+  caído.
+- Los webhooks nunca van a hosts privados o locales.
+- Las alertas de chat llegan en orden sin alcanzar los límites de frecuencia.
+- Soporte puede ver exactamente qué devolvió una solicitud o una ejecución.
+
+### Hecho para agentes
+
+- Los Actores aceptan entradas escritas para otros Actores.
+- Cada ejecución dice por qué terminó & si conviene reintentar.
+
+### Datos detallados
+
+- Las filas de posts traen el texto de los Note Tweets, las ediciones, las Notas
+  de la Comunidad, las etiquetas de alcance & los controles de respuesta.
+- Las filas traen la app de origen, los conteos de contenido multimedia & los
+  datos de cuentas profesionales.
+- El contenido multimedia trae variantes, texto alternativo, tamaños & motivos
+  de disponibilidad.
+
+### Controles de calidad
+
+- Cada campo que muestra X se entrega, se omite a propósito o se comprueba que
+  no existe.
+- Xquik prueba cada lectura en vivo contra X.
+- Los README de los Actores, los esquemas & la salida real nombran los mismos
+  campos.
+
+## ¿Qué datos envía X (Twitter) to Discord Bot?
 
 - Todos los tweets, respuestas, citas y reposts nuevos de las cuentas que
   vigilas, normalmente detectados en menos de un segundo después de que X los
@@ -32,10 +120,7 @@ son gratis, y Apify factura aparte el uso de la plataforma.
 - Videos en vivo, Espacios, tweets eliminados, cambios de perfil, seguimientos y
   seguidores, cuando los activas.
 - Cada alerta como un mensaje de Discord que nombra la cuenta y el evento,
-  contiene el texto del tweet y enlaza al tweet en X. Ninguna mención en un
-  tweet notifica a nadie.
-- Un mensaje de prueba a cada URL nueva de Discord, con su respuesta en el
-  estado de la ejecución.
+  contiene el texto del tweet y enlaza al tweet en X.
 - Cada evento en el dataset de la ejecución y en 1 dataset de historial por
   tarea guardada o por nombre de monitor.
 

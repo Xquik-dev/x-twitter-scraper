@@ -29,30 +29,140 @@ X Tweet Scraper von Xquik liefert Posts, Interaktionskennzahlen, öffentliche
 Autorenprofile & Medien. Er akzeptiert URLs, Nutzernamen, Listen-IDs, Post-IDs &
 Suchanfragen mit über 50 Filtern.
 
-### Wichtige Funktionen
-
-- Filter & Duplikatentfernung laufen vor der Abrechnung.
-- 1 Eingabe unterstützt Einzelabrufe, Timelines, Listen, Suche &
-  Interaktionsmodi.
-- Eingaben mit Post-IDs haben keine feste Obergrenze für die Anzahl. Deine
-  Einstellungen für Apify-Ausgaben & Timeout gelten weiterhin.
-- Run-Logs zeigen die Seitenzeiten in `fetchDurationMs`, `processingDurationMs`,
-  `pushDurationMs`, `statusDurationMs` & `fullPageDurationMs`.
-- Runs behalten gelieferte Datensätze & ihren Fortschritt, wenn Apify sie neu
-  startet.
-
 ### Anwendungsfälle
 
-- Versorge Forschung, Anreicherung, Analysen & KI-Training mit mehr Feldern pro
-  Post. Am 2026-09-29 hatte unser Median-Datensatz der Rich-Ausgabe 63 Felder.
-  Das ist das 2-Fache des Medians von 11 anderen Actors.
+- Versorge Forschung, Anreicherung, Analysen & KI-Training mit Post-Texten,
+  Autoren, Medien & Kennzahlen.
 - Verfolge die Stimmung zu Marken über viele Posts.
 - Beobachte Posts von Wettbewerbern & Begriffe deiner Branche.
 - Finde potenzielle Kunden in öffentlichen Konversationen.
 - Sammle öffentliche Datasets für die Forschung.
 - Finde Posts mit hoher öffentlicher Interaktion.
 
-### Welche Daten kann X Tweet Scraper extrahieren?
+## Warum X Tweet Scraper nutzen?
+
+- **13,6-mal schnellere Suche.** Die Stichwortsuche lief 13,6-mal schneller als
+  der schnellste von 4 anderen Tweet-Actors. Die gefilterte Suche lief 4,3-mal
+  schneller, & eine Nutzer-Timeline etwa 3-mal. Der [Benchmark](README.md#benchmark) lief
+  am 2026-10-15 & 2026-10-16.
+- **Die niedrigsten Kosten pro nützlichem Tweet.** Er kostete in allen 3 Tests
+  des [Benchmarks](README.md#benchmark) am wenigsten pro nützlichem Tweet.
+- **Mehr Felder pro Tweet.** Sein Median-Datensatz der Stichwortsuche hatte 67
+  Felder. Das ist das 1,3-Fache des Medians der anderen Actors im
+  [Benchmark](README.md#benchmark).
+- **Alle Quellen in 1 Run.** Mische Post-IDs, Nutzernamen, Listen, Suchen & URLs
+  in 1 Eingabe. Setze `mode` für Antworten, Zitate, Threads, Erwähnungen,
+  Reposter oder Artikel.
+- **Finde die Top-Tweets auf X.** `mode: "topTweets"` liefert die Tweets, die X
+  für 1 Kennzahl am höchsten einstuft, etwa Aufrufe. Grenze sie auf einen Tag,
+  eine Woche oder einen Monat & ein Land ein.
+- **Einbettungscode für jeden Tweet.** `mode: "embed"` liefert das HTML, das
+  einen Tweet auf deiner Website zeigt.
+- **Keine Obergrenze für Post-IDs.** Ruf beliebig viele Post-IDs in 1 Run ab.
+  Datensätze kommen in deiner Eingabereihenfolge zurück. Dein Ausgabenlimit &
+  dein Timeout gelten weiterhin.
+- **Latest & Top in 1 Run.** Setze `queryType` auf `Latest + Top` für beide
+  Suchreihenfolgen. Du zahlst für jeden Tweet nur einmal.
+
+### Vollständige Ergebnisse
+
+- Große Datumsbereiche kommen vollständig & schnell zurück.
+- Suchen liefern jeden Treffer, egal welche Operatoren du kombinierst.
+- Der Account-Verlauf kommt vollständig zurück, alte Posts inklusive.
+- Profil-Exporte behalten jeden Post der eigenen Threads des Autors.
+- Profilabrufe enthalten den angehefteten Post, als angeheftet markiert.
+- Listen der Top-Tweets kommen zuverlässig zurück.
+- Gefilterte Seiten kommen voll zurück, bis die Ergebnisse ausgehen.
+- Jedes Ergebnis enthält die vollständigsten Daten, die X dafür hat.
+
+### Genaue Datensätze
+
+- Suchergebnisse enthalten jeden Post, der zu deiner Suchanfrage passt, & sonst
+  nichts.
+- Die Suche nach Wörtern & Phrasen funktioniert in jeder Sprache & Schrift.
+- Sprachfilter funktionieren für jede Sprache, die X zuordnet.
+- Ein Post gilt nur dann als fehlend, wenn er weg ist.
+- Geschützte Accounts & private Listen bekommen eine klare Antwort statt einer
+  leeren Seite.
+- Reposts enthalten den vollständigen Originaltext.
+- Jede ID in einem Datensatz bleibt exakt.
+- Erwähnungen, Links, Hashtags & Hervorhebungen sitzen an der richtigen Stelle
+  im Text.
+- Ein unbekannter Zähler steht in `unknownCounts` & erscheint nie als 0.
+- Verifizierungs-Badges stimmen mit dem überein, was `x.com` zeigt.
+- Datensätze enthalten nur öffentliche Daten.
+- Zitat-Suchen liefern jedes echte Zitat & sonst nichts.
+- Antwort-Exporte enthalten nur direkte Antworten, in einer geprüften
+  Reihenfolge.
+- Ergebnisse mit den neuesten zuerst kommen in Datumsreihenfolge zurück.
+- Suchen akzeptieren Anfragen so, wie du sie auf X eintippen würdest.
+- Ortssuchen funktionieren mit Namen in 6 Sprachen.
+- Eine Suche, die nicht laufen kann, schlägt sofort fehl & sagt, wie du sie
+  korrigierst.
+- Ein Datum bedeutet in jeder gängigen Schreibweise dasselbe.
+- Suchen akzeptieren die Grenzen `since_id` & `max_id`.
+- Werbung & gesponserte Einträge landen nie in deinen Datensätzen.
+
+### Aktuelle Daten
+
+- Abrufe funktionieren weiter, wenn X Änderungen ausrollt.
+
+### Tempo
+
+- Eine langsame Seite hält deinen Run nicht auf.
+- Suchen bleiben bei stark diskutierten Themen schnell.
+- Jede nächste Seite kommt schnell an.
+- Abrufe enden, sobald ihre Datensätze ankommen.
+- Hängende Actor-Aufrufe laufen von selbst wieder an.
+
+### Faire Abrechnung
+
+- Eine fehlerhafte Eingabe kostet nichts & sagt dir, was du korrigieren musst.
+- Eine Post-ID, die in einem Batch doppelt steht, wird nur einmal berechnet.
+- Actors rechnen nur gelieferte, eindeutige, passende Datensätze ab.
+- Ein neu gestarteter Run berechnet nie doppelt.
+- Runs bleiben innerhalb deines Ausgabenlimits & schreiben trotzdem ihre
+  Diagnosen.
+- Kleine Runs enden mit einem Tipp, der Kosten senkt.
+
+### Zuverlässigkeit
+
+- Ein einzelner Fehler lässt deinen Run nicht scheitern.
+- Die Paginierung bleibt von Seite zu Seite konsistent.
+- Die Paginierung läuft nie in eine Endlosschleife.
+- Ein Zeitlimit liefert die bereits gefundenen Datensätze samt Diagnosen.
+- Actors überstehen kurze Xquik-Ausfälle.
+- Actor-Runs überstehen Neustarts ohne Dopplungen.
+- Ein fehlerhafter Datensatz lässt keinen Batch scheitern.
+- Gestoppte Runs behalten ihre Datensätze & ihren Report.
+- Ein Run, der nicht starten kann, erklärt trotzdem, warum.
+- `stopCauses`, `failedSubtargets` & `unavailableTargets` beschreiben Teilfehler
+  genau.
+- Der Support sieht genau, was eine Anfrage oder ein Run geliefert hat.
+
+### Für Agents gebaut
+
+- Actors akzeptieren Eingaben, die für andere Actors geschrieben sind.
+- Die Ausgabe ist bereit für Tabellen, mit flachen Spalten & Interaktionssummen.
+- Jeder Run sagt, warum er endete & ob du es erneut versuchen solltest.
+
+### Umfangreiche Daten
+
+- Post-Datensätze enthalten den Text von Note Tweets, Bearbeitungen, Community
+  Notes, Reichweiten-Labels & Antworteinstellungen.
+- Datensätze enthalten Quell-Apps, Medienzahlen & Daten professioneller
+  Accounts.
+- Medien kommen mit Varianten, Alt-Text, Größen & Gründen zur Verfügbarkeit.
+- Du siehst, wann jeder Account einen Post repostet hat.
+- Posts & Bios lassen sich in deine Sprache übersetzen.
+
+### Qualitätsprüfungen
+
+- Jedes Feld, das X zeigt, wird geliefert, bewusst weggelassen oder ist
+  nachweislich nicht vorhanden.
+- Xquik testet jeden Abruf live gegen X.
+
+## Welche Daten kann X Tweet Scraper extrahieren?
 
 | Feld                   | Beschreibung                                                        |
 | ---------------------- | ------------------------------------------------------------------- |
@@ -1135,11 +1245,11 @@ X Tweet Scraper von Xquik lieferte im [Benchmark](#benchmark) 25,2 bis 39,2
 nützliche Posts pro Sekunde. Die Laufzeit hängt von deiner Eingabe, der
 Ergebniszahl & der Verfügbarkeit von X ab.
 
-### Warum erhalte ich Posts, die der Such-Tab von X weglässt?
+### Liefern Suchen jeden passenden Post?
 
-X lässt einige passende Posts aus seinem Tab Neueste weg. X Tweet Scraper von
-Xquik liefert auch diese Posts. Jeder Post ist ein echtes X-Suchergebnis für
-deine Suchanfrage. Du zahlst jeden Post nur einmal.
+Ja, bis die Treffer ausgehen oder du `maxItems` erreichst. Die Ergebnisse
+enthalten nur Posts, die zu deiner Suchanfrage passen. Du zahlst jeden Post nur
+einmal.
 
 ### Welche Suchoperatoren funktionieren?
 

@@ -21,7 +21,82 @@ ayrıca faturalandırır.
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-## Her satırdaki iletişim bilgileri
+## Neden X Email Scraper kullanmalısın?
+
+- **Bütün kitlelerden e-postalar.** Bir hesabın takipçilerini veya takip
+  edilenlerini tara & e-postası olan profilleri tut. `maxScan`, her taramanın
+  kaç profil okuyacağını belirler.
+- **Yalnızca bulunan e-postalar için öde.** E-postası olmayan bir profil
+  ücretsizdir. Taranan profiller de ücretsizdir.
+- **Yalnızca istediğin potansiyel müşteriler.** Seçtiğin alan adlarındaki
+  e-postaları tut ya da ücretsiz web postalarını atla. Takipçi, hesap yaşı,
+  biyografi & konuma göre filtrele.
+- **1 çalıştırmada 3 kaynak.** Kullanıcı adlarını, profil URL'lerini, kullanıcı
+  ID'lerini, takipçi taramalarını & kullanıcı aramalarını karıştır.
+- **Dışa aktarıma hazır potansiyel müşteri listeleri.** Satırları JSON, CSV,
+  Excel, XML veya RSS olarak dışa aktar.
+
+### Eksiksiz sonuçlar
+
+- Her cevap, X'te bulunan en eksiksiz veriyi tutar.
+
+### Doğru satırlar
+
+- Satırdaki her ID birebir doğru kalır.
+- Onay rozetleri `x.com` üzerinde görünenle aynıdır.
+- Satırlar yalnızca herkese açık veri tutar.
+- Reklamlar & tanıtılan içerikler satırlarına asla girmez.
+
+### Güncel veri
+
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Okumalar, satırları geldiği anda biter.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- Hatalı girdi ücretsizdir & neyi düzelteceğini söyler.
+- Actor'lar yalnızca teslim edilen, benzersiz & eşleşen satırlar için ücret
+  alır.
+- Birden çok hedefin paylaştığı bir profil 1 kez faturalanır.
+- Yeniden başlatılan bir çalıştırma asla 2 kez ücret almaz.
+- Çalıştırmalar harcama sınırının içinde kalır & tanılamalarını yine yazar.
+- Küçük çalıştırmalar, maliyeti düşüren bir ipucuyla biter.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Süre dolduğunda o ana kadar bulunan satırlar tanılamalarla birlikte döner.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Tek bir hatalı satır bütün grubu bozmaz.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Zengin veri
+
+- Kısa bağlantılar çözülür & liste satırları tam profilleri taşıyabilir.
+- Profillerden e-postalar, telefonlar & ağına göre etiketlenmiş bağlantılar
+  çıkar.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+
+## X Email Scraper hangi verileri çıkarabilir?
 
 - Profilin yayımladığı ilk e-posta, küçük harfle.
 - O e-postanın alan adı & e-postayı tutan profil alanı, yani biyografi, ad veya
@@ -32,15 +107,6 @@ ayrıca faturalandırır.
   Telegram gibi ağıyla birlikte.
 - Ad, biyografi, sayılar, onay durumu, tarihler & görsellerle herkese açık
   profilin tamamı.
-- 1 çalıştırmada 3 kaynak, yani hesaplar, onların takipçileri veya takip
-  ettikleri & kullanıcı aramaları.
-- E-posta alan adı, iş e-postası, takipçi, hesap yaşı, biyografi & konuma göre
-  filtreler.
-- @ ile veya @ olmadan kullanıcı adları, `x.com` & `twitter.com` URL'leri &
-  sayısal kullanıcı ID'leri.
-- Faturalamadan önce tekilleştirme.
-- Apify veri kümeleri üzerinden JSON, CSV, Excel, XML & RSS dışa aktarımları.
-- Apify çalıştırmayı taşıdığında çalıştırma kayıtlı durumdan devam eder.
 
 ## X profillerinden e-postalar nasıl alınır
 

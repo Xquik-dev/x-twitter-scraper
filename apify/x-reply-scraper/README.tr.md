@@ -29,26 +29,6 @@ Xquik'in X Reply Scraper'ı herkese açık yanıtları & yorum konuşmalarını 
 Tekil gönderilerle, toplu URL listeleriyle, gönderi ID'leriyle & kullanıcıların
 yanıt zaman akışlarıyla çalışır.
 
-### Temel özellikler
-
-- Auto modu, doğrudan sonuçlar eksik kaldığında toplamaya devam eder.
-- `collectionStrategy`, Actor'ın yanıtları nasıl toplayacağını belirler.
-- Toplu girdiler gönderi URL'lerini, gönderi ID'lerini, profilleri & kullanıcı
-  adlarını kabul eder.
-- Filtreler & tekilleştirme faturalamadan önce çalışır.
-- Çıktı 4 sıralama modunu, 3 ayrıntı düzeyini & 3 alan stilini destekler.
-- Her yanıt kaynak hedefini, üst ID'lerini, kök ID'sini & derinliğini korur.
-- Devam imleçleri geçmişe dönük toplamaları & zamanlanmış çalıştırmaları
-  destekler.
-- Dikkat gerektiren çalıştırmalar `diagnostics` içine 1 ücretsiz kayıt yazar.
-  Her hedefi okuyup hiç yanıt bulamayan bir çalıştırma kayıt yazmaz. Nedenini
-  durum metni söyler.
-- Çalıştırma günlükleri sayfa & hedef sürelerini `fetchDurationMs`,
-  `processingDurationMs`, `pushDurationMs`, `statusDurationMs`,
-  `fullPageDurationMs` & `fullTargetDurationMs` alanlarında gösterir.
-- Apify çalıştırmaları yeniden başlattığında teslim edilen yanıtlar & ilerleme
-  korunur.
-
 ### Kullanım alanları
 
 - Marka & ürün gönderilerinin altındaki duygu durumunu & müşteri geri
@@ -61,7 +41,101 @@ yanıt zaman akışlarıyla çalışır.
   oluştur.
 - Bir hesabın müşterilerine zaman içinde nasıl yanıt verdiğini takip et.
 
-### X Reply Scraper hangi verileri çekebilir?
+## Neden X Reply Scraper kullanmalısın?
+
+- **1,7 kat daha hızlı yanıt dışa aktarımı.** Medyan çalıştırması, diğer 4
+  Actor'ın en hızlısından 1,7 kat daha hızlıydı. [Karşılaştırma
+  testi](README.md#benchmark) 2026-10-15'te yapıldı.
+- **İşe yarar yanıt başına en düşük maliyet.** [Karşılaştırma
+  testinde](README.md#benchmark) işe yarar yanıt başına en ucuz Actor buydu.
+- **Yanıt başına 2 kat alan.** [Karşılaştırma testinde](README.md#benchmark)
+  medyan satırında 100 alan vardı. Bu, diğer Actor'ların medyanının 2 katı.
+- **Konuşmanın biçimini seç.** Belirlediğin derinliğe kadar doğrudan yanıtları,
+  iç içe yanıtları veya ikisini birden tut. `collectionStrategy` gönderi
+  dizisini ya da yalnızca gizlenen yanıtları da döndürebilir.
+- **Her konuşmayı yeniden oluştur.** Her yanıt üst gönderisini `inReplyToId`
+  içinde, kökünü `rootTweetId` içinde & derinliğini `depth` içinde taşır.
+- **1 çalıştırmada birçok gönderi.** Gönderi URL'lerini, gönderi ID'lerini,
+  profilleri & kullanıcı adlarını birlikte yapıştır. Bir kullanıcı adı o hesabın
+  yanıtlarını döndürür.
+- **Yalnızca istediğin yanıtlar.** Kelimelere, hashtag'lere, yazara, dile, onay
+  durumuna, etkileşime, medyaya & tarihe göre filtrele.
+- **Beğeniye veya tarihe göre sırala.** Yanıtları beğeniye göre sırala ya da
+  önce en yenileri veya en eskileri listele. Satırlar kompakt, tam veya zengin,
+  `camelCase` veya `snake_case` biçiminde gelir.
+- **Büyük konuşmalara sonra devam et.** Erken duran bir çalıştırma her hedefin
+  kaldığı yeri `next-cursors` içine kaydeder. Devam etmek için birini
+  `startCursor` olarak ver.
+
+### Eksiksiz sonuçlar
+
+- Tam mod, yazarın gizlediği yanıtları ekler & boş konuşmaları açıklar.
+- Her cevap, X'te bulunan en eksiksiz veriyi tutar.
+
+### Doğru satırlar
+
+- Bir gönderi ancak gerçekten yok olduğunda eksik sayılır.
+- Yeniden gönderiler orijinal metnin tamamını taşır.
+- Satırdaki her ID birebir doğru kalır.
+- Bahsetmeler, bağlantılar, hashtag'ler & vurgular metindeki yerleriyle eşleşir.
+- Bilinmeyen bir sayı `unknownCounts` içinde listelenir, asla 0 gösterilmez.
+- Onay rozetleri `x.com` üzerinde görünenle aynıdır.
+- Satırlar yalnızca herkese açık veri tutar.
+- Reklamlar & tanıtılan içerikler satırlarına asla girmez.
+
+### Güncel veri
+
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Okumalar, satırları geldiği anda biter.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- Hatalı girdi ücretsizdir & neyi düzelteceğini söyler.
+- Actor'lar yalnızca teslim edilen, benzersiz & eşleşen satırlar için ücret
+  alır.
+- Yeniden başlatılan bir çalıştırma asla 2 kez ücret almaz.
+- Çalıştırmalar harcama sınırının içinde kalır & tanılamalarını yine yazar.
+- Küçük çalıştırmalar, maliyeti düşüren bir ipucuyla biter.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Süre dolduğunda o ana kadar bulunan satırlar tanılamalarla birlikte döner.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Tek bir hatalı satır bütün grubu bozmaz.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Çıktı düz sütunlar & etkileşim toplamlarıyla tablolara hazırdır.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Zengin veri
+
+- Gönderi satırları Note Tweet metnini, düzenlemeleri, Topluluk Notlarını,
+  erişim etiketlerini & yanıt kontrollerini taşır.
+- Satırlar kaynak uygulamaları, medya sayılarını & profesyonel hesap verilerini
+  taşır.
+- Medya varyantlar, alternatif metin, boyutlar & kullanılabilirlik nedenleriyle
+  gelir.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+
+## X Reply Scraper hangi verileri çıkarabilir?
 
 Veri kümesi & run-report şemaları dönen her alanı açıklar. Metin, sayı & boolean
 alanları ajanlar & üretilen entegrasyonlar için örnekler de taşır.

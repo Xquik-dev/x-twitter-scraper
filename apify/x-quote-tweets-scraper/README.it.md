@@ -20,7 +20,92 @@ consegnata**, & Apify fattura a parte l'uso della piattaforma.
 > Xquik è un servizio di terze parti indipendente. Non è affiliato a X Corp.
 > "Twitter" e "X" sono marchi di X Corp.
 
-## Dati della citazione su ogni riga
+## Perché usare X Quote Tweets Scraper?
+
+- **1 riga per persona.** Attiva `uniqueAuthors` per vedere chi ha citato un
+  post, 1 volta per persona. Le citazioni successive dello stesso autore non
+  costano nulla.
+- **Citazioni recenti o top.** Imposta `sort` su `latest` per le citazioni
+  nuove, oppure su `top` per quelle che X classifica più in alto.
+- **11 filtri per le citazioni.** Filtra per lingua, date, tipo di media, autori
+  verificati & 6 conteggi minimi.
+- **Molti post in 1 esecuzione.** Incolla URL di post `x.com` o `twitter.com`,
+  oppure ID dei post. Limita l'esecuzione con `maxItems` & ogni post con
+  `maxItemsPerTarget`.
+- **Tabelle pronte da esportare.** "Quote Tweets" elenca ogni citazione con i
+  suoi conteggi. "Quote Authors" elenca chi ha citato ogni post. Esporta in
+  JSON, CSV, Excel, XML o RSS.
+
+### Risultati completi
+
+- Ogni risultato riporta i dati più completi che X ha a disposizione.
+
+### Righe accurate
+
+- I filtri di lingua funzionano con ogni lingua che X assegna ai post.
+- I filtri di lingua, data & engagement valgono per ogni riga che ricevi.
+- I repost riportano il testo originale completo.
+- Ogni ID in una riga resta esatto.
+- Menzioni, link, hashtag & evidenziazioni restano allineati al testo.
+- Un conteggio non noto compare in `unknownCounts`, mai come 0.
+- I badge di verifica corrispondono a quelli che mostra `x.com`.
+- Le righe contengono solo dati pubblici.
+- Le ricerche di citazioni restituiscono ogni citazione reale & nient'altro.
+- Annunci & contenuti sponsorizzati non arrivano mai nelle tue righe.
+
+### Dati aggiornati
+
+- Le letture continuano a funzionare quando X rilascia modifiche.
+
+### Velocità
+
+- Una pagina lenta non blocca la tua esecuzione.
+- Le letture finiscono appena arrivano le loro righe.
+- Le chiamate agli Actor che si bloccano riprendono da sole.
+
+### Fatturazione equa
+
+- Un input errato non costa nulla & ti dice cosa correggere.
+- Gli Actor fanno pagare solo le righe consegnate, uniche & conformi ai filtri.
+- Un'esecuzione riavviata non addebita mai due volte.
+- Le esecuzioni restano entro il tuo limite di spesa & scrivono comunque la loro
+  diagnostica.
+- Le esecuzioni piccole finiscono con un consiglio per spendere meno.
+
+### Affidabilità
+
+- Un errore isolato non fa fallire la tua esecuzione.
+- Quando scade il tempo, ricevi le righe già trovate con la diagnostica.
+- Gli Actor resistono ai brevi disservizi di Xquik.
+- Le esecuzioni degli Actor superano i riavvii senza ripetere nulla.
+- Una riga errata non fa fallire il lotto.
+- Le esecuzioni interrotte conservano le loro righe & il loro report.
+- Un'esecuzione che non riesce a partire spiega comunque perché.
+- Il supporto può vedere esattamente cosa ha restituito una richiesta o
+  un'esecuzione.
+
+### Pensato per gli agenti
+
+- Gli Actor accettano input scritti per altri Actor.
+- L'output è pronto per i fogli di calcolo, con colonne piatte & totali di
+  engagement.
+- Ogni esecuzione dice perché è finita & se conviene riprovare.
+
+### Dati ricchi
+
+- Le righe dei post riportano il testo dei Note Tweet, modifiche, Note della
+  community, etichette di visibilità & regole di risposta.
+- Le righe riportano app di origine, conteggi dei media & dati degli account
+  professionali.
+- I media arrivano con varianti, testo alternativo, dimensioni & motivi di
+  disponibilità.
+
+### Controlli di qualità
+
+- Ogni campo che X mostra è fornito, escluso di proposito o dimostrato assente.
+- Xquik testa ogni lettura dal vivo su X.
+
+## Quali dati può estrarre X Quote Tweets Scraper?
 
 - Il testo completo, il link, la lingua & l'ora di pubblicazione della
   citazione.
@@ -33,15 +118,6 @@ consegnata**, & Apify fattura a parte l'uso della piattaforma.
 - `sourceTarget`, il post dell'input che la riga cita.
 - `position`, il posto della riga nell'esecuzione, & `scrapedAt`, il momento
   della sua consegna.
-- Molti post in 1 esecuzione, ognuno letto fino alla fine di ciò che X fornisce.
-- Prima le più recenti, oppure le citazioni che X classifica più in alto.
-- 11 filtri per lingua, date, tipo di media, 6 conteggi minimi & autori
-  verificati.
-- 1 riga per autore quando vuoi persone, non post.
-- URL di post di `x.com` & `twitter.com`, oppure ID di post numerici.
-- Rimozione dei duplicati prima della fatturazione.
-- Export JSON, CSV, Excel, XML & RSS tramite i dataset di Apify.
-- Le esecuzioni riprendono dallo stato salvato dopo una migrazione di Apify.
 
 ## Come estrarre le citazioni dei post
 

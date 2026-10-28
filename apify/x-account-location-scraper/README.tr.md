@@ -21,7 +21,78 @@ platform kullanımını ayrıca faturalandırır.
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-## Her satırdaki hesap bilgileri
+## Neden X Account Location Scraper kullanmalısın?
+
+- **Her hesap için net bir cevap.** Her satır, X'in bir etiket gösterdiğini,
+  etiket olmadığını ya da etiketi gizlediğini söyler.
+- **Satırlar girdi sıranla gelir.** Birçok hesap, listelediğin sırayla geri
+  döner.
+- **Hesabı istediğin biçimde yapıştır.** Kullanıcı adlarını, @ ile başlayan
+  adları, profil URL'lerini & kullanıcı ID'lerini 1 listede karıştır. Sakladığın
+  listeler için `userIds` kullan, çünkü kullanıcı ID'si kullanıcı adı değişince
+  de aynı kalır.
+- **Tabloya hazır dışa aktarımlar.** Sütunları `fields` & `flatten` ile
+  biçimlendir. JSON, CSV, Excel, XML veya RSS olarak dışa aktar.
+
+### Eksiksiz sonuçlar
+
+- Her cevap, X'te bulunan en eksiksiz veriyi tutar.
+
+### Doğru satırlar
+
+- Satırdaki her ID birebir doğru kalır.
+- Onay rozetleri `x.com` üzerinde görünenle aynıdır.
+- Satırlar yalnızca herkese açık veri tutar.
+- Reklamlar & tanıtılan içerikler satırlarına asla girmez.
+
+### Güncel veri
+
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Okumalar, satırları geldiği anda biter.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- Hatalı girdi ücretsizdir & neyi düzelteceğini söyler.
+- Actor'lar yalnızca teslim edilen, benzersiz & eşleşen satırlar için ücret
+  alır.
+- Birden çok hedefin paylaştığı bir profil 1 kez faturalanır.
+- Yeniden başlatılan bir çalıştırma asla 2 kez ücret almaz.
+- Çalıştırmalar harcama sınırının içinde kalır & tanılamalarını yine yazar.
+- Küçük çalıştırmalar, maliyeti düşüren bir ipucuyla biter.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Süre dolduğunda o ana kadar bulunan satırlar tanılamalarla birlikte döner.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Tek bir hatalı satır bütün grubu bozmaz.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Zengin veri
+
+- Hesap konumu ülke kodu, doğruluk notu & kullanıcı adı geçmişiyle gelir.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+
+## X Account Location Scraper hangi verileri çıkarabilir?
 
 - X'in "Account based in" etiketi, ülke veya bölge olarak.
 - O ülkenin 2 harfli ISO kodu.
@@ -34,13 +105,6 @@ platform kullanımını ayrıca faturalandırır.
 - Gün cinsinden hesap yaşı & profil bağlantısı.
 - Ad, biyografi, sayılar, onay durumu, tarihler & görsellerle herkese açık
   profilin tamamı.
-- X'in etiketini vermediği her hesap için ek ücret olmadan ikinci bir okuma.
-- 1 çalıştırmada aynı anda okunan & girdi sırasıyla teslim edilen birçok hesap.
-- @ ile veya @ olmadan kullanıcı adları, `x.com` & `twitter.com` URL'leri &
-  sayısal kullanıcı ID'leri.
-- Faturalamadan önce tekilleştirme.
-- Apify veri kümeleri üzerinden JSON, CSV, Excel, XML & RSS dışa aktarımı.
-- Apify bir çalıştırmayı taşıdığında çalıştırma kayıtlı durumdan devam eder.
 
 ## X hesaplarının nerede bulunduğu nasıl kontrol edilir
 

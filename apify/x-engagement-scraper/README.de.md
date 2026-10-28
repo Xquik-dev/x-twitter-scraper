@@ -20,19 +20,100 @@ Login.
 > Xquik ist ein unabhängiger Drittanbieter-Dienst. Nicht verbunden mit X Corp.
 > "Twitter" und "X" sind Marken von X Corp.
 
-## Antworten, Zitate & Profile
+## Warum X Engagement Scraper nutzen?
 
-- Post-URLs & numerische Post-IDs.
+- **Nur die Antworten, die du brauchst.** Wähle direkte oder verschachtelte
+  Antworten, eine Antworttiefe & ein Zeitfenster.
+- **Leads aus Repostern.** Filtere Reposter nach `minFollowers`, `hasEmail` oder
+  `bioContains`. Datensätze enthalten die E-Mails, Telefonnummern & Links, die
+  jedes Profil veröffentlicht.
+- **Alle Interaktionstypen in 1 Run.** Füge Post-URLs oder Post-IDs ein. Mische
+  Antworten, Zitate, Reposter & Thread-Kontext.
+- **Lege deine Datensatz-Limits fest.** Begrenze den Run mit `maxItems` & jeden
+  Interaktionstyp eines Posts mit `maxItemsPerTarget`.
+- **Interaktionsraten inklusive.** Nenne `engagementRate` oder
+  `engagementPerView` in `fields`, um die Spalte hinzuzufügen.
+
+### Vollständige Ergebnisse
+
+- Jedes Ergebnis enthält die vollständigsten Daten, die X dafür hat.
+
+### Genaue Datensätze
+
+- Reposts enthalten den vollständigen Originaltext.
+- Jede ID in einem Datensatz bleibt exakt.
+- Erwähnungen, Links, Hashtags & Hervorhebungen sitzen an der richtigen Stelle
+  im Text.
+- Ein unbekannter Zähler steht in `unknownCounts` & erscheint nie als 0.
+- Verifizierungs-Badges stimmen mit dem überein, was `x.com` zeigt.
+- Datensätze enthalten nur öffentliche Daten.
+- Zitat-Suchen liefern jedes echte Zitat & sonst nichts.
+- Werbung & gesponserte Einträge landen nie in deinen Datensätzen.
+
+### Aktuelle Daten
+
+- Abrufe funktionieren weiter, wenn X Änderungen ausrollt.
+
+### Tempo
+
+- Eine langsame Seite hält deinen Run nicht auf.
+- Abrufe enden, sobald ihre Datensätze ankommen.
+- Hängende Actor-Aufrufe laufen von selbst wieder an.
+
+### Faire Abrechnung
+
+- Eine fehlerhafte Eingabe kostet nichts & sagt dir, was du korrigieren musst.
+- Actors rechnen nur gelieferte, eindeutige, passende Datensätze ab.
+- Ein Profil, das mehrere Ziele teilen, wird nur einmal berechnet.
+- Ein neu gestarteter Run berechnet nie doppelt.
+- Runs bleiben innerhalb deines Ausgabenlimits & schreiben trotzdem ihre
+  Diagnosen.
+- Kleine Runs enden mit einem Tipp, der Kosten senkt.
+
+### Zuverlässigkeit
+
+- Ein einzelner Fehler lässt deinen Run nicht scheitern.
+- Ein Zeitlimit liefert die bereits gefundenen Datensätze samt Diagnosen.
+- Actors überstehen kurze Xquik-Ausfälle.
+- Actor-Runs überstehen Neustarts ohne Dopplungen.
+- Ein fehlerhafter Datensatz lässt keinen Batch scheitern.
+- Gestoppte Runs behalten ihre Datensätze & ihren Report.
+- Ein Run, der nicht starten kann, erklärt trotzdem, warum.
+- Der Support sieht genau, was eine Anfrage oder ein Run geliefert hat.
+
+### Für Agents gebaut
+
+- Actors akzeptieren Eingaben, die für andere Actors geschrieben sind.
+- Die Ausgabe ist bereit für Tabellen, mit flachen Spalten & Interaktionssummen.
+- Jeder Run sagt, warum er endete & ob du es erneut versuchen solltest.
+
+### Umfangreiche Daten
+
+- Post-Datensätze enthalten den Text von Note Tweets, Bearbeitungen, Community
+  Notes, Reichweiten-Labels & Antworteinstellungen.
+- Datensätze enthalten Quell-Apps, Medienzahlen & Daten professioneller
+  Accounts.
+- Medien kommen mit Varianten, Alt-Text, Größen & Gründen zur Verfügbarkeit.
+- Du siehst, wann jeder Account einen Post repostet hat.
+- Du siehst, ob jeder Account auf einen Post geantwortet, ihn repostet oder
+  zitiert hat. Du siehst auch, ob er dem Autor folgt oder in einer Community
+  ist.
+
+### Qualitätsprüfungen
+
+- Jedes Feld, das X zeigt, wird geliefert, bewusst weggelassen oder ist
+  nachweislich nicht vorhanden.
+- Xquik testet jeden Abruf live gegen X.
+
+## Welche Daten kann X Engagement Scraper extrahieren?
+
 - Direkte Antworten über die verfügbaren Ergebnisseiten.
 - Direkte & verschachtelte Antworten in 4 Sortierreihenfolgen.
 - Details zum Quellpost als wählbarer Datensatz.
 - Zitate mit Text, Autoren, Medien & Kennzahlen.
 - Profile der Reposter.
 - Konversationskontext rund um jeden Quellpost.
-- Viele Interaktionstypen & Posts in 1 Run.
-- Eine globale Obergrenze & eine Obergrenze pro Interaktionsressource.
 - Zuordnung zu Quellpost & Interaktionstyp.
-- Runs laufen nach einem Apify-Neustart weiter.
 
 ## So scrapst du Interaktionen mit X-Posts
 

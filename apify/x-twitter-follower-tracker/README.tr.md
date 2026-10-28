@@ -21,7 +21,77 @@ bildirimler ücretsizdir. Apify, platform kullanımını ayrıca faturalandırı
 > Xquik bağımsız bir üçüncü taraf hizmetidir. X Corp ile bağlantılı değildir.
 > "Twitter" ve "X", X Corp'un ticari markalarıdır.
 
-## Twitter takipçi izleme neler gönderir
+## Neden X (Twitter) Follower Tracker kullanmalısın?
+
+- **Seni kimin takipten çıktığını gör.** Her kaybedilen takipçi bildirimi, X'in
+  askıya aldığı bir hesap bile olsa hesabın adını verir.
+- **Herkese açık her hesabı izle.** Kendi hesabını, bir rakibinkini veya bir
+  müşterininkini izle.
+- **Eski takipçiler için bildirim yok.** İlk çalıştırma her listeyi olduğu gibi
+  alır. Yalnızca sonraki değişiklikler için bildirim gelir.
+- **Bildirimler sohbet uygulamanda.** Bildirimleri Telegram, Discord veya
+  Slack'e gönder. Telegram sohbet ID'si istemez. Her HTTPS webhook da olayın
+  tamamını alır.
+- **Bildirimlerinin çalıştığını bil.** Her yeni webhook, Slack veya Discord
+  URL'sine bir test bildirimi gider. Çalıştırma durumu ulaşıp ulaşmadığını
+  söyler.
+- **İzlemenin çalıştığını bil.** Her çalıştırmanın durum sayfası bunu söyler &
+  bir düğmeyle 1 sonraki adımı gösterir.
+- **Sessiz duraklama yok.** Çalıştırması olmayan bir izleme duraklamadan 4 saat
+  önce bildirimlerin seni uyarır. Sonraki çalıştırma izlemeyi sürdürür.
+- **X hesabı gerekmez.** X giriş bilgilerini veya bir API anahtarını asla
+  paylaşmazsın.
+
+### Doğru satırlar
+
+- Satırdaki her ID birebir doğru kalır.
+- Onay rozetleri `x.com` üzerinde görünenle aynıdır.
+- Satırlar yalnızca herkese açık veri tutar.
+- Reklamlar & tanıtılan içerikler satırlarına asla girmez.
+- İzlemeler yalnızca gerçek silmeleri & takipten çıkmaları bildirir.
+
+### Güncel veri
+
+- X değişiklik yayınladığında da okumalar çalışmaya devam eder.
+
+### Hız
+
+- Yavaş bir sayfa çalıştırmanı bekletmez.
+- Takılan Actor çağrıları kendi kendine toparlanır.
+
+### Adil faturalama
+
+- İzlemelerin olaylar & webhook'lar dahil 1 sabit saatlik fiyatı vardır.
+- İzleme Actor'ları yalnızca bir izlemenin çalıştığı saatler için ücret alır.
+
+### Güvenilirlik
+
+- Tek seferlik bir hata çalıştırmanı başarısız yapmaz.
+- Actor'lar kısa Xquik kesintilerini atlatır.
+- Actor çalıştırmaları yeniden başlatılınca satırları tekrarlamadan devam eder.
+- Durdurulan çalıştırmalar satırlarını & raporlarını korur.
+- Başlayamayan bir çalıştırma bile nedenini açıklar.
+- Webhook'lar imzalıdır & tekrar oynatmaya karşı güvenlidir.
+- Kapalı kalan bir webhook, olaylarını 7 güne kadar sonradan yine alır.
+- Webhook'un kapalı kaldıktan sonra bile yeni olaylar zamanında gelir.
+- Webhook'lar asla özel veya yerel sunuculara gitmez.
+- Sohbet bildirimleri hız sınırlarına takılmadan sırayla gelir.
+- Destek ekibi bir isteğin veya çalıştırmanın tam olarak ne döndürdüğünü
+  görebilir.
+
+### Ajanlar için tasarlandı
+
+- Actor'lar başka Actor'lar için yazılmış girdileri kabul eder.
+- Her çalıştırma neden bittiğini & yeniden denemen gerekip gerekmediğini söyler.
+
+### Kalite kontrolleri
+
+- X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da
+  olmadığı kanıtlanır.
+- Xquik her okumayı X üzerinde canlı test eder.
+- Actor README'leri, şemalar & gerçek çıktı aynı alan adlarını kullanır.
+
+## X (Twitter) Follower Tracker hangi verileri gönderir?
 
 - Yeni takipçiler, yani izlediğin her hesabı takip etmeye başlayan hesaplar.
 - Kaybedilen takipçiler, yani hesabın takipçilerinden ayrılan hesaplar.
@@ -29,8 +99,7 @@ bildirimler ücretsizdir. Apify, platform kullanımını ayrıca faturalandırı
   takibi bıraktığı hesaplar.
 - Her bildirim, diğer hesabın adı, biyografisi ve takipçi sayısı gibi tam
   profiliyle birlikte gelir.
-- Telegram, Discord, Slack veya herhangi bir HTTPS webhook'unda bildirimler. Her
-  olay da çalıştırmanın veri kümesinde ve 1 geçmiş veri kümesinde.
+- Her olay, çalıştırmanın veri kümesinde ve 1 geçmiş veri kümesinde.
 
 ## Twitter takipçileri nasıl izlenir
 
