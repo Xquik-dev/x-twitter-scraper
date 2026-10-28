@@ -44,7 +44,7 @@ The base URL is `https://xquik.com/api/v1`. Authenticate with the `x-api-key: xq
 ## Run one search
 
 ```
-GET /x/tweets/search?q=%40xquik&queryType=Latest&limit=50
+GET /x/tweets/search?q=%40NASA&queryType=Latest&limit=50
 -> { tweets: Tweet[], has_next_page: boolean, next_cursor?: string }
 ```
 
@@ -54,7 +54,7 @@ X search operators go inside `q`, such as `@handle`, `"phrase"`, `from:user`, `-
 
 ```
 POST /extractions
-{ "toolType": "mention_extractor", "targetUsername": "xquik" }
+{ "toolType": "mention_extractor", "targetUsername": "NASA" }
 -> 202 { "id": "<extractionId>", "toolType": "mention_extractor", "status": "running" }
 ```
 
@@ -63,7 +63,7 @@ POST /extractions
 ```
 POST /monitors/keywords
 {
-  "query": "@xquik lang:en",
+  "query": "@NASA lang:en",
   "eventTypes": ["tweet.new"]
 }
 -> { id, query, eventTypes, isActive, createdAt, nextBillingAt }

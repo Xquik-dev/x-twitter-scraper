@@ -81,7 +81,7 @@ free를 누르세요.
 아래 입력은 바로 복사해 쓸 수 있습니다.
 
 ```json
-{ "twitterHandles": ["xquikcom"], "telegram": true }
+{ "twitterHandles": ["NASA"], "telegram": true }
 ```
 
 ```json
@@ -123,7 +123,7 @@ free를 누르세요.
 이 입력은 모니터를 시작하거나 이어 갑니다.
 
 ```json
-{ "twitterHandles": ["xquikcom"], "monitorName": "agent-demo" }
+{ "twitterHandles": ["NASA"], "monitorName": "agent-demo" }
 ```
 
 실행의 데이터셋에는 새 이벤트가 들어 있고, 그다음에 `resultType`이 `status`인 행

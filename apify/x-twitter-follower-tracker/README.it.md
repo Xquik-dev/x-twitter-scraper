@@ -85,7 +85,7 @@ avvisi arrivano in quella chat. Il modulo nasconde gli eventi di tweet di X
 Questi input sono pronti da copiare.
 
 ```json
-{ "twitterHandles": ["xquikcom"], "telegram": true }
+{ "twitterHandles": ["NASA"], "telegram": true }
 ```
 
 ```json
@@ -128,7 +128,7 @@ richiede circa mezzo minuto, perché prima raccoglie gli ultimi eventi.
 Questo input avvia o continua un monitor.
 
 ```json
-{ "twitterHandles": ["xquikcom"], "monitorName": "agent-demo" }
+{ "twitterHandles": ["NASA"], "monitorName": "agent-demo" }
 ```
 
 Il dataset dell'esecuzione contiene i nuovi eventi, poi 1 riga con `resultType`

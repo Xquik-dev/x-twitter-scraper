@@ -89,7 +89,7 @@ fonctionne quand même.
 Ces entrées sont prêtes à copier.
 
 ```json
-{ "twitterHandles": ["xquikcom"], "telegram": true }
+{ "twitterHandles": ["NASA"], "telegram": true }
 ```
 
 ```json
@@ -136,7 +136,7 @@ derniers événements.
 Cette entrée démarre ou poursuit un moniteur.
 
 ```json
-{ "twitterHandles": ["xquikcom"], "monitorName": "agent-demo" }
+{ "twitterHandles": ["NASA"], "monitorName": "agent-demo" }
 ```
 
 Le dataset du run contient les nouveaux événements, puis 1 ligne dont le

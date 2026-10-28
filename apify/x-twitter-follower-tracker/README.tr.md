@@ -87,7 +87,7 @@ olaylarını gizler. Bunları gönderen bir girdi yine de çalışır.
 Bu girdiler kopyalamaya hazır.
 
 ```json
-{ "twitterHandles": ["xquikcom"], "telegram": true }
+{ "twitterHandles": ["NASA"], "telegram": true }
 ```
 
 ```json
@@ -132,7 +132,7 @@ Durdurma yarım dakika kadar sürer, çünkü önce son olayları toplar.
 Bu girdi bir izlemeyi başlatır veya sürdürür.
 
 ```json
-{ "twitterHandles": ["xquikcom"], "monitorName": "agent-demo" }
+{ "twitterHandles": ["NASA"], "monitorName": "agent-demo" }
 ```
 
 Çalıştırmanın veri kümesi önce yeni olayları, sonra `resultType` değeri `status`

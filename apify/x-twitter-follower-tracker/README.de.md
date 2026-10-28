@@ -87,7 +87,7 @@ X (Twitter) Monitor aus, & eine Eingabe, die sie sendet, funktioniert trotzdem.
 Diese Eingaben sind kopierfertig.
 
 ```json
-{ "twitterHandles": ["xquikcom"], "telegram": true }
+{ "twitterHandles": ["NASA"], "telegram": true }
 ```
 
 ```json
@@ -134,7 +134,7 @@ Events sammelt.
 Diese Eingabe startet einen Monitor oder setzt ihn fort.
 
 ```json
-{ "twitterHandles": ["xquikcom"], "monitorName": "agent-demo" }
+{ "twitterHandles": ["NASA"], "monitorName": "agent-demo" }
 ```
 
 Das Dataset des Runs enthält die neuen Events, dann 1 Datensatz mit `resultType`
