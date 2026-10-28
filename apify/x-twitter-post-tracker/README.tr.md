@@ -86,6 +86,10 @@ ayrıca faturalandırır.
 - Her çalıştırma neden bittiğini ve yeniden denemen gerekip gerekmediğini
   söyler.
 
+### Zengin veri
+
+- Takip edilen gönderiler, her sayının önceki bir çalıştırmadan bu yana değişimini gösterir.
+
 ### Kalite kontrolleri
 
 - X'in gösterdiği her alan ya sunulur, ya bilerek dışarıda bırakılır ya da

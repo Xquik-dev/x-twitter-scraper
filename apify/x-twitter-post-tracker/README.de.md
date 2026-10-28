@@ -82,6 +82,10 @@ Snapshot**, & Apify berechnet die Plattformnutzung separat.
 - Actors akzeptieren Eingaben, die für andere Actors geschrieben sind.
 - Jeder Run sagt, warum er endete & ob sich ein neuer Versuch lohnt.
 
+### Umfangreiche Daten
+
+- Verfolgte Posts zeigen die Änderung jeder Zahl seit einem früheren Lauf.
+
 ### Qualitätsprüfungen
 
 - Jedes Feld, das X zeigt, wird geliefert, bewusst weggelassen oder als nicht

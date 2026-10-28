@@ -83,6 +83,10 @@ entregada**, y Apify factura aparte el uso de la plataforma.
 - Los Actores aceptan entradas escritas para otros Actores.
 - Cada ejecución dice por qué terminó y si conviene reintentar.
 
+### Datos detallados
+
+- Los posts rastreados muestran el cambio de cada conteo desde una ejecución anterior.
+
 ### Controles de calidad
 
 - Cada campo que muestra X se entrega, se omite a propósito o se comprueba que

@@ -85,6 +85,10 @@ consegnata**, & Apify fattura a parte l'uso della piattaforma.
 - Gli Actor accettano input scritti per altri Actor.
 - Ogni esecuzione dice perché è terminata & se conviene riprovare.
 
+### Dati dettagliati
+
+- I post monitorati mostrano la variazione di ogni conteggio rispetto a un'esecuzione precedente.
+
 ### Controlli di qualità
 
 - Ogni campo che X mostra viene fornito, escluso di proposito o dimostrato

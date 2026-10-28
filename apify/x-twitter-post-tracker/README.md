@@ -91,6 +91,10 @@ holds the change since the previous snapshot & since the first one. You pay
 - Actors accept input written for other Actors.
 - Every run says why it ended & whether to retry.
 
+### Rich data
+
+- Tracked posts show each count's change since an earlier run.
+
 ### Quality checks
 
 - Every field X shows is served, left out on purpose or proven absent.

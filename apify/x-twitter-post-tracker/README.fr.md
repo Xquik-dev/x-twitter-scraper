@@ -84,6 +84,10 @@ l'évolution depuis le relevé précédent et depuis le premier. Vous payez
 - Les Actors acceptent les entrées écrites pour d'autres Actors.
 - Chaque run indique pourquoi il s'est terminé et s'il faut réessayer.
 
+### Données détaillées
+
+- Les posts suivis affichent l'évolution de chaque compteur depuis une exécution précédente.
+
 ### Contrôles qualité
 
 - Chaque champ affiché par X est fourni, omis volontairement ou prouvé absent.
