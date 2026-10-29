@@ -72,6 +72,28 @@ const TOOL_OUTPUT_SCHEMA = {
   additionalProperties: false,
 };
 
+const DOCS_OUTPUT_SCHEMA = {
+  type: "object",
+  properties: {
+    results: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          id: { type: "string", description: "Documentation page path" },
+          text: { type: "string", description: "Matching documentation text" },
+          title: { type: "string", description: "Documentation page title" },
+          url: { type: "string", description: "Documentation URL" },
+        },
+        required: ["id", "text", "title", "url"],
+        additionalProperties: false,
+      },
+    },
+  },
+  required: ["results"],
+  additionalProperties: false,
+};
+
 const TOOL_DEFINITIONS = [
   {
     name: "docs",
@@ -90,7 +112,7 @@ const TOOL_DEFINITIONS = [
       },
       required: ["query"],
     },
-    outputSchema: TOOL_OUTPUT_SCHEMA,
+    outputSchema: DOCS_OUTPUT_SCHEMA,
     hints: { openWorld: true, readOnly: true },
   },
   {

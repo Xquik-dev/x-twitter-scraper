@@ -172,7 +172,7 @@ X 고유 계약이 필요하면 공식 X API가 알맞습니다.
 ## 패키지와 MCP 계약
 
 `x-developer` v2.7.1에는 Skills와 플러그인 메타데이터가 포함됩니다. 호스팅
-MCP는 `docs`, `search`, `execute`를 제공합니다. 실시간 OpenAPI 계약에는
+MCP는 `docs`, `search`, `execute`, `whoami`를 제공합니다. 실시간 OpenAPI 계약에는
 공개된 모든 REST 작업이 있습니다.
 
 `x-developer`에는 Skill과 플러그인이 들어 있습니다. 별도

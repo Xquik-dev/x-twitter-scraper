@@ -174,7 +174,7 @@ seç. X'in kendi sözleşmesi gerekiyorsa resmî X API'sini seç.
 ## Paket ve MCP sözleşmesi
 
 `x-developer` v2.7.1, Skill'leri ve eklenti meta verilerini içerir. Barındırılan
-MCP `docs`, `search` ve `execute` araçlarını sunar. Canlı OpenAPI sözleşmesi
+MCP `docs`, `search`, `execute` ve `whoami` araçlarını sunar. Canlı OpenAPI sözleşmesi
 herkese açık tüm REST işlemlerini belgeler.
 
 `x-developer`, Skill ve eklenti paketidir. Ayrı `x-twitter-scraper` paketi
