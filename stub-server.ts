@@ -25,7 +25,9 @@ const REQUEST_SECONDS = 54;
 const executeDescription = (opening: string, methods: string): string =>
   `${opening} search returns endpoints, parameters, and response schemas. The sandbox declares \`interface XquikRequest { path: string; ${methods}; query?: Record<string, string | number | boolean | undefined>; body?: unknown } interface XquikResponse<T> { success: true; status: number; result: T; errors: []; messages: [] } declare const xquik: { result: unknown; request<T = unknown>(options: XquikRequest): Promise<XquikResponse<T>> }\`. code is an async arrow function. Canonical result fields use snake_case. camelCase reads resolve to the same value. Missing field reads return undefined and produce warnings listing available keys. Optional fields may require explicit request parameters. An absent field does not prove the data is unavailable. Output holds up to 24,000 characters, so large arrays fit after projection. A longer answer returns its first page. A call may send requests for ${String(REQUEST_SECONDS)} seconds. Paged reads return a cursor, so a few pages fit 1 call. Independent reads can run together with Promise.all. An answer with a result_id lets a later call project its data through xquik.result. result_id comes only from an earlier answer. It reuses saved data without repeating requests. Authentication and idempotency headers are injected, so code holds no credentials. The sandbox has no filesystem or general network access.`;
 
-function annotations(title: string, readOnly: boolean, openWorld: boolean) {
+type ToolHints = { readonly openWorld: boolean; readonly readOnly: boolean };
+
+function annotations(title: string, { openWorld, readOnly }: ToolHints) {
   return {
     destructiveHint: !readOnly,
     idempotentHint: readOnly,
@@ -53,7 +55,6 @@ const EXECUTE_INPUT_SCHEMA = {
     },
   },
   required: ["code"],
-  additionalProperties: false,
 };
 
 const TOOL_OUTPUT_SCHEMA = {
@@ -71,7 +72,7 @@ const TOOL_OUTPUT_SCHEMA = {
   additionalProperties: false,
 };
 
-const TOOLS = [
+const TOOL_DEFINITIONS = [
   {
     name: "docs",
     title: "Search Xquik documentation",
@@ -88,10 +89,9 @@ const TOOLS = [
         },
       },
       required: ["query"],
-      additionalProperties: false,
     },
     outputSchema: TOOL_OUTPUT_SCHEMA,
-    annotations: annotations("Search Xquik documentation", true, true),
+    hints: { openWorld: true, readOnly: true },
   },
   {
     name: "search",
@@ -102,10 +102,9 @@ const TOOLS = [
       type: "object",
       properties: { code: CODE_PROPERTY },
       required: ["code"],
-      additionalProperties: false,
     },
     outputSchema: TOOL_OUTPUT_SCHEMA,
-    annotations: annotations("Search Xquik API specification", true, false),
+    hints: { openWorld: false, readOnly: true },
   },
   {
     name: "execute",
@@ -116,7 +115,7 @@ const TOOLS = [
     ),
     inputSchema: EXECUTE_INPUT_SCHEMA,
     outputSchema: TOOL_OUTPUT_SCHEMA,
-    annotations: annotations("Read Xquik API data", true, true),
+    hints: { openWorld: true, readOnly: true },
   },
   {
     name: "executeWrite",
@@ -127,7 +126,7 @@ const TOOLS = [
     ),
     inputSchema: EXECUTE_INPUT_SCHEMA,
     outputSchema: TOOL_OUTPUT_SCHEMA,
-    annotations: annotations("Change data through the Xquik API", false, true),
+    hints: { openWorld: true, readOnly: false },
   },
   {
     name: "whoami",
@@ -157,9 +156,14 @@ const TOOLS = [
       required: ["id"],
       additionalProperties: false,
     },
-    annotations: annotations("Current Xquik account", true, false),
+    hints: { openWorld: false, readOnly: true },
   },
 ];
+
+const TOOLS = TOOL_DEFINITIONS.map(({ hints, ...tool }) => ({
+  ...tool,
+  annotations: annotations(tool.title, hints),
+}));
 
 const DISCOVERY_RESULT = {
   _meta: {
