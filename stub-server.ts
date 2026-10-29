@@ -22,8 +22,18 @@ const LIVE_SERVER_MESSAGE =
 
 const REQUEST_SECONDS = 54;
 
-const executeDescription = (opening: string, methods: string): string =>
-  `${opening} search returns endpoints, parameters, and response schemas. The sandbox declares \`interface XquikRequest { path: string; ${methods}; query?: Record<string, string | number | boolean | undefined>; body?: unknown } interface XquikResponse<T> { success: true; status: number; result: T; errors: []; messages: [] } declare const xquik: { result: unknown; request<T = unknown>(options: XquikRequest): Promise<XquikResponse<T>> }\`. code is an async arrow function. Canonical result fields use snake_case. camelCase reads resolve to the same value. Missing field reads return undefined and produce warnings listing available keys. Optional fields may require explicit request parameters. An absent field does not prove the data is unavailable. Output holds up to 24,000 characters, so large arrays fit after projection. A longer answer returns its first page. A call may send requests for ${String(REQUEST_SECONDS)} seconds. Paged reads return a cursor, so a few pages fit 1 call. Independent reads can run together with Promise.all. An answer with a result_id lets a later call project its data through xquik.result. result_id comes only from an earlier answer. It reuses saved data without repeating requests. Authentication and idempotency headers are injected, so code holds no credentials. The sandbox has no filesystem or general network access.`;
+const READ_EXAMPLE =
+  'async () => (await xquik.request({ path: "<path from search>" })).result';
+const WRITE_EXAMPLE =
+  'async () => (await xquik.request({ method: "POST", path: "<path from search>", body: { "<field>": "<value>" } })).result';
+
+const executeDescription = (opening: string, methods: string, example: string): string =>
+  `${opening} search returns endpoints, parameters, and response schemas. The sandbox declares \`interface XquikRequest { path: string; ${methods}; query?: Record<string, string | number | boolean | undefined>; body?: unknown } interface XquikResponse<T> { success: true; status: number; result: T; errors: []; messages: [] } declare const xquik: { result: unknown; request<T = unknown>(options: XquikRequest): Promise<XquikResponse<T>> }\`. code is an async arrow function. Canonical result fields use snake_case. camelCase reads resolve to the same value. Missing field reads return undefined and produce warnings listing available keys. Optional fields may require explicit request parameters. An absent field does not prove the data is unavailable. Output holds up to 24,000 characters, so large arrays fit after projection. A longer answer returns its first page. A call may send requests for ${String(REQUEST_SECONDS)} seconds. Paged reads return a cursor, so a few pages fit 1 call. Independent reads can run together with Promise.all. An answer with a result_id lets a later call project its data through xquik.result. result_id comes only from an earlier answer. It reuses saved data without repeating requests. Authentication and idempotency headers are injected, so code holds no credentials. The sandbox has no filesystem or general network access. A failed request throws an Error naming its method, path, HTTP status and the API's error.
+
+Example
+\`\`\`js
+${example}
+\`\`\``;
 
 type ToolHints = { readonly openWorld: boolean; readonly readOnly: boolean };
 
@@ -37,16 +47,16 @@ function annotations(title: string, { openWorld, readOnly }: ToolHints) {
   };
 }
 
-const CODE_PROPERTY = {
+const codeProperty = (description: string) => ({
   type: "string",
   maxLength: 10_000,
-  description: "JavaScript async arrow function.",
-};
+  description,
+});
 
 const EXECUTE_INPUT_SCHEMA = {
   type: "object",
   properties: {
-    code: CODE_PROPERTY,
+    code: codeProperty("JavaScript async arrow function that calls xquik.request()."),
     result_id: {
       type: "string",
       pattern: "^[a-f0-9]{64}\\.[1-9]\\d{0,6}$",
@@ -99,7 +109,7 @@ const TOOL_DEFINITIONS = [
     name: "docs",
     title: "Search Xquik documentation",
     description:
-      "Search Xquik's public X (Twitter) API docs. Queries reach only the read-only docs server.",
+      "Search Xquik's public docs to answer questions about its X (Twitter) API, MCP setup, SDKs, errors and limits. Queries reach only the read-only docs server.",
     inputSchema: {
       type: "object",
       properties: {
@@ -119,10 +129,10 @@ const TOOL_DEFINITIONS = [
     name: "search",
     title: "Search Xquik API specification",
     description:
-      "Search the current credential's Xquik OpenAPI catalog for X (Twitter) operations. The sandbox has no network access. spec is global and the async function's first argument. spec.paths maps paths to HTTP methods and operation objects. Fields include operationId, summary, description, readOnly, tags, parameters, requestBody, and responses. The catalog resolves inputs inline. Response $refs point to reusable schemas in spec.components.schemas. An answer can hold operation descriptions, parameters, and response schemas with their paths. Fields remain queryable independently. Paths may contain placeholders. Answers hold up to 24,000 characters of JSON.",
+      "Search the current credential's Xquik OpenAPI catalog for X (Twitter) operations. The sandbox has no network access. spec is global and the async function's first argument. spec.paths maps paths to HTTP methods and operation objects. Fields include operationId, summary, description, readOnly, tags, parameters, requestBody, and responses. The catalog resolves inputs inline. Response $refs point to reusable schemas in spec.components.schemas. An answer can hold operation descriptions, parameters, and response schemas with their paths. Fields remain queryable independently. Paths may contain placeholders. Answers hold up to 24,000 characters of JSON.\n\nExamples\n```js\n// Every tag\nasync (spec) => [...new Set(Object.values(spec.paths).flatMap(Object.values).flatMap((op) => op.tags ?? []))]\n// Operations tagged Users\nasync (spec) => Object.entries(spec.paths).flatMap(([path, methods]) => Object.entries(methods).filter(([, op]) => op.tags?.includes(\"Users\")).map(([method, op]) => ({ method, path, summary: op.summary })))\n// 1 operation's parameters\nasync (spec) => Object.values(spec.paths).flatMap(Object.values).find((op) => op.operationId === \"searchTweets\")?.parameters\n```",
     inputSchema: {
       type: "object",
-      properties: { code: CODE_PROPERTY },
+      properties: { code: codeProperty("JavaScript async arrow function that searches spec.") },
       required: ["code"],
     },
     outputSchema: TOOL_OUTPUT_SCHEMA,
@@ -134,6 +144,7 @@ const TOOL_DEFINITIONS = [
     description: executeDescription(
       "Execute JavaScript that reads Xquik's X (Twitter) API at https://xquik.com/docs. It runs each operation whose search spec says `readOnly: true`.",
       'method?: "GET" | "POST"',
+      READ_EXAMPLE,
     ),
     inputSchema: EXECUTE_INPUT_SCHEMA,
     outputSchema: TOOL_OUTPUT_SCHEMA,
@@ -145,6 +156,7 @@ const TOOL_DEFINITIONS = [
     description: executeDescription(
       "Execute JavaScript that changes data through Xquik's X (Twitter) API at https://xquik.com/docs, such as posts, follows, monitors, webhooks & drafts. It runs each operation whose search spec says `readOnly: false`.",
       'method: "POST" | "PUT" | "PATCH" | "DELETE"',
+      WRITE_EXAMPLE,
     ),
     inputSchema: EXECUTE_INPUT_SCHEMA,
     outputSchema: TOOL_OUTPUT_SCHEMA,
