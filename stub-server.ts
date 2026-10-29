@@ -20,67 +20,150 @@ const JSONRPC = "2.0";
 const LIVE_SERVER_MESSAGE =
   "This package is a verification stub. Add https://xquik.com/mcp to your MCP client and complete OAuth 2.1 for live API access. Use a bearer API key only when OAuth is unavailable.";
 
-function inputSchema(name: string, description: string, maxLength: number, minLength?: number) {
+const REQUEST_SECONDS = 54;
+
+const executeDescription = (opening: string, methods: string): string =>
+  `${opening} search returns endpoints, parameters, and response schemas. The sandbox declares \`interface XquikRequest { path: string; ${methods}; query?: Record<string, string | number | boolean | undefined>; body?: unknown } interface XquikResponse<T> { success: true; status: number; result: T; errors: []; messages: [] } declare const xquik: { result: unknown; request<T = unknown>(options: XquikRequest): Promise<XquikResponse<T>> }\`. code is an async arrow function. Canonical result fields use snake_case. camelCase reads resolve to the same value. Missing field reads return undefined and produce warnings listing available keys. Optional fields may require explicit request parameters. An absent field does not prove the data is unavailable. Output holds up to 24,000 characters, so large arrays fit after projection. A longer answer returns its first page. A call may send requests for ${String(REQUEST_SECONDS)} seconds. Paged reads return a cursor, so a few pages fit 1 call. Independent reads can run together with Promise.all. An answer with a result_id lets a later call project its data through xquik.result. result_id comes only from an earlier answer. It reuses saved data without repeating requests. Authentication and idempotency headers are injected, so code holds no credentials. The sandbox has no filesystem or general network access.`;
+
+type ToolHints = { readonly openWorld: boolean; readonly readOnly: boolean };
+
+function annotations(title: string, { openWorld, readOnly }: ToolHints) {
   return {
-    type: "object",
-    properties: {
-      [name]: {
-        type: "string",
-        ...(minLength ? { minLength } : {}),
-        maxLength,
-        description,
-      },
-    },
-    required: [name],
+    destructiveHint: !readOnly,
+    idempotentHint: readOnly,
+    openWorldHint: openWorld,
+    readOnlyHint: readOnly,
+    title,
   };
 }
 
-const TOOLS = [
+const CODE_PROPERTY = {
+  type: "string",
+  maxLength: 10_000,
+  description: "JavaScript async arrow function.",
+};
+
+const EXECUTE_INPUT_SCHEMA = {
+  type: "object",
+  properties: {
+    code: CODE_PROPERTY,
+    result_id: {
+      type: "string",
+      pattern: "^[a-f0-9]{64}\\.[1-9]\\d{0,6}$",
+      description:
+        "Saved result ID from an earlier answer. Leave it out unless an answer gave you one. Read its data through xquik.result.",
+    },
+  },
+  required: ["code"],
+};
+
+const TOOL_OUTPUT_SCHEMA = {
+  type: "object",
+  properties: {
+    result: { description: "JSON returned by the executed async function." },
+    warnings: {
+      type: "object",
+      additionalProperties: { type: "array", items: { type: "string" } },
+      description:
+        "Missing field names mapped to available keys. Optional fields may require explicit request parameters. Absence does not prove the data is unavailable.",
+    },
+  },
+  required: ["result"],
+  additionalProperties: false,
+};
+
+const TOOL_DEFINITIONS = [
   {
     name: "docs",
+    title: "Search Xquik documentation",
     description:
-      "Search Xquik scraper and API documentation. The stub returns setup guidance.",
-    inputSchema: inputSchema("query", "Documentation search query.", 500, 1),
-    annotations: {
-      destructiveHint: false,
-      idempotentHint: true,
-      openWorldHint: true,
-      readOnlyHint: true,
+      "Search Xquik's public X (Twitter) API docs. Queries reach only the read-only docs server.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        query: {
+          type: "string",
+          minLength: 1,
+          maxLength: 500,
+          description: "Documentation search query.",
+        },
+      },
+      required: ["query"],
     },
+    outputSchema: TOOL_OUTPUT_SCHEMA,
+    hints: { openWorld: true, readOnly: true },
   },
   {
     name: "search",
+    title: "Search Xquik API specification",
     description:
-      "Search the credential-scoped OpenAPI catalog. The stub makes no API request.",
-    inputSchema: inputSchema(
-      "code",
-      "Async arrow function that reads spec.endpoints.",
-      10_000,
-    ),
-    annotations: {
-      destructiveHint: false,
-      idempotentHint: true,
-      openWorldHint: false,
-      readOnlyHint: true,
+      "Search the current credential's Xquik OpenAPI catalog for X (Twitter) operations. The sandbox has no network access. spec is global and the async function's first argument. spec.paths maps paths to HTTP methods and operation objects. Fields include operationId, summary, description, readOnly, tags, parameters, requestBody, and responses. The catalog resolves inputs inline. Response $refs point to reusable schemas in spec.components.schemas. An answer can hold operation descriptions, parameters, and response schemas with their paths. Fields remain queryable independently. Paths may contain placeholders. Answers hold up to 24,000 characters of JSON.",
+    inputSchema: {
+      type: "object",
+      properties: { code: CODE_PROPERTY },
+      required: ["code"],
     },
+    outputSchema: TOOL_OUTPUT_SCHEMA,
+    hints: { openWorld: false, readOnly: true },
   },
   {
     name: "execute",
-    description:
-      "Send confirmed Xquik API requests. The stub returns setup guidance.",
-    inputSchema: inputSchema(
-      "code",
-      "Async arrow function that calls xquik.request(path, options?).",
-      10_000,
+    title: "Read Xquik API data",
+    description: executeDescription(
+      "Execute JavaScript that reads Xquik's X (Twitter) API at https://xquik.com/docs. It runs each operation whose search spec says `readOnly: true`.",
+      'method?: "GET" | "POST"',
     ),
-    annotations: {
-      destructiveHint: true,
-      idempotentHint: false,
-      openWorldHint: true,
-      readOnlyHint: false,
+    inputSchema: EXECUTE_INPUT_SCHEMA,
+    outputSchema: TOOL_OUTPUT_SCHEMA,
+    hints: { openWorld: true, readOnly: true },
+  },
+  {
+    name: "executeWrite",
+    title: "Change data through the Xquik API",
+    description: executeDescription(
+      "Execute JavaScript that changes data through Xquik's X (Twitter) API at https://xquik.com/docs, such as posts, follows, monitors, webhooks & drafts. It runs each operation whose search spec says `readOnly: false`.",
+      'method: "POST" | "PUT" | "PATCH" | "DELETE"',
+    ),
+    inputSchema: EXECUTE_INPUT_SCHEMA,
+    outputSchema: TOOL_OUTPUT_SCHEMA,
+    hints: { openWorld: true, readOnly: false },
+  },
+  {
+    name: "whoami",
+    title: "Current Xquik account",
+    description:
+      "Return the Xquik account this connection is authenticated as. Takes no arguments. The id stays the same across token refresh, reconnection & permission changes.",
+    inputSchema: { type: "object", properties: {}, additionalProperties: false },
+    outputSchema: {
+      type: "object",
+      properties: {
+        email: {
+          type: "string",
+          description: "Email address for display, never the profile identity.",
+        },
+        id: {
+          type: "string",
+          minLength: 1,
+          pattern: "\\S",
+          description:
+            "Opaque profile identifier. Unique within Xquik, unchanged across token refresh & reconnection, & never reassigned to another account.",
+        },
+        name: {
+          type: "string",
+          description: "Display name for the authenticated account.",
+        },
+      },
+      required: ["id"],
+      additionalProperties: false,
     },
+    hints: { openWorld: false, readOnly: true },
   },
 ];
+
+const TOOLS = TOOL_DEFINITIONS.map(({ hints, ...tool }) => ({
+  ...tool,
+  annotations: annotations(tool.title, hints),
+}));
 
 const DISCOVERY_RESULT = {
   _meta: {
@@ -114,6 +197,7 @@ export function createMessageHandler(writeLine: (line: string) => void): (msg: o
   function sendStubToolResult(id: unknown): void {
     sendResult(id, {
       content: [{ type: "text", text: LIVE_SERVER_MESSAGE }],
+      isError: true,
     });
   }
 
