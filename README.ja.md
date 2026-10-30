@@ -171,7 +171,7 @@ X 固有の契約が必要なら公式 X API が向きます。
 ## パッケージと MCP の契約
 
 `x-developer` v2.7.1 には Skills とプラグインのメタデータが含まれます。
-ホスト型 MCP は `docs`、`search`、`execute` を提供します。ライブ OpenAPI は
+ホスト型 MCP は `docs`、`search`、`execute`、`whoami` を提供します。ライブ OpenAPI は
 公開されているすべての REST 操作を定義します。
 
 `x-developer` は Skill とプラグインのバンドルです。別の

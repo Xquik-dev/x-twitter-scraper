@@ -168,7 +168,7 @@ Xquik 适合筛选条件较多的任务。它按交付结果计费。服务端�
 ## 软件包与 MCP 合同
 
 `x-developer` v2.7.1 包含 Skills 和插件元数据。托管 MCP 提供 `docs`、
-`search` 和 `execute`。实时 OpenAPI 合同记录了每个公开的 REST 操作。
+`search`、`execute` 和 `whoami`。实时 OpenAPI 合同记录了每个公开的 REST 操作。
 
 `x-developer` 包含 Skill 和插件。独立的 `x-twitter-scraper` 软件包是
 TypeScript SDK。
