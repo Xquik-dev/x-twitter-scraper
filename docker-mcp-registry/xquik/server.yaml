@@ -12,7 +12,7 @@ meta:
     - remote
 about:
   title: Xquik
-  description: The world's fastest and cheapest X Twitter scraper service with the most complete X data. Search tweets, replies, followers, profiles, lists, communities and trends, monitor accounts, publish posts and manage X accounts. Not affiliated with X Corp.
+  description: The world's fastest and cheapest X Twitter data API with the most complete X data. Search tweets, replies, followers, profiles, lists, communities and trends, monitor accounts, publish posts and manage X accounts. Not affiliated with X Corp.
   icon: https://xquik.com/logo-square.png
 remote:
   transport_type: streamable-http
