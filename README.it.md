@@ -2,6 +2,8 @@
 
 # API di scraping X (Twitter) e server MCP per Twitter
 
+[![Convex Component](https://www.convex.dev/components/badge/convex-xquik)](https://www.convex.dev/components/convex-xquik)
+
 <p align="center">
   <a href="README.md">English</a> ·
   <a href="README.es.md">Español</a> ·
