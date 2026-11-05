@@ -244,7 +244,7 @@ Xquik omits unavailable optional fields. It never invents missing content.
 
 ## Package and MCP details
 
-`x-developer` v2.8.0 bundles Skills and plugin metadata. The hosted MCP server
+`x-developer` v2.8.1 bundles Skills and plugin metadata. The hosted MCP server
 exposes `docs`, `search`, `execute`, and `whoami`. `whoami` returns the connected
 Xquik account's `id`, which never changes. Current clients negotiate MCP
 protocol version `2026-07-28` through `server/discover`.

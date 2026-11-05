@@ -176,7 +176,7 @@ die offizielle X API, wenn du genau ihren Vertrag brauchst.
 
 ## Paket- und MCP-Vertrag
 
-`x-developer` v2.8.0 bündelt Skills und Plugin-Metadaten. Hosted MCP bietet
+`x-developer` v2.8.1 bündelt Skills und Plugin-Metadaten. Hosted MCP bietet
 `docs`, `search`, `execute` und `whoami`. Der Live-OpenAPI-Vertrag dokumentiert jede öffentliche REST-Operation.
 
 `x-developer` enthält den Skill und die Plugins. Das getrennte Paket
