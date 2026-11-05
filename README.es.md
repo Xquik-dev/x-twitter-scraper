@@ -176,7 +176,7 @@ exacto.
 
 ## Contrato del paquete y MCP
 
-`x-developer` v2.8.0 incluye Skills y metadatos del plugin. El MCP alojado ofrece
+`x-developer` v2.8.1 incluye Skills y metadatos del plugin. El MCP alojado ofrece
 `docs`, `search`, `execute` y `whoami`. El contrato OpenAPI en vivo documenta todas las operaciones REST públicas.
 
 El paquete `x-developer` contiene el Skill y los plugins. El paquete separado
