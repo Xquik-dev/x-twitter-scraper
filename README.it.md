@@ -174,7 +174,7 @@ l'API X ufficiale se ti serve il suo contratto esatto.
 
 ## Contratto del pacchetto e di MCP
 
-`x-developer` v2.7.1 include Skills e metadati del plugin. MCP ospitato offre
+`x-developer` v2.8.0 include Skills e metadati del plugin. MCP ospitato offre
 `docs`, `search`, `execute` e `whoami`. Il contratto OpenAPI dal vivo documenta ogni operazione REST pubblica.
 
 `x-developer` contiene lo Skill e i plugin. Il pacchetto separato

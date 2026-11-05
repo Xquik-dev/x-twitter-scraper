@@ -177,7 +177,7 @@ clients. Choisissez l'API X officielle si son contrat exact est requis.
 
 ## Contrat du paquet et de MCP
 
-`x-developer` v2.7.1 regroupe les Skills et les métadonnées du plugin. MCP
+`x-developer` v2.8.0 regroupe les Skills et les métadonnées du plugin. MCP
 hébergé propose `docs`, `search`, `execute` et `whoami`. Le contrat OpenAPI en direct
 documente chaque opération REST publique.
 
