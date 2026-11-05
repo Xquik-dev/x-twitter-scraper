@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: If you use Xquik X (Twitter) scraper API & Twitter MCP server, cite it using this metadata.
+title: Xquik X (Twitter) scraper API & Twitter MCP server
+type: software
+abstract: >-
+  Twitter scraper API, Twitter MCP server & agent Skills for Xquik. Scrape
+  tweets, profiles, followers & replies through REST, MCP, SDKs, CLI, webhooks
+  & Apify.
+authors:
+  - name: Xquik
+    website: https://xquik.com
+url: https://github.com/Xquik-dev/x-twitter-scraper
+repository-code: https://github.com/Xquik-dev/x-twitter-scraper
+license: MIT
+keywords:
+  - Xquik
+  - Twitter scraper
+  - scrape tweets
+  - Twitter MCP
+  - Claude Code Twitter
+  - X API
+  - tweet scraper
+  - Twitter scraping
