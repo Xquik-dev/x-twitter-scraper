@@ -113,7 +113,7 @@ curl --get 'https://xquik.com/api/v1/x/tweets/search' \
   --data-urlencode 'limit=25'
 ```
 
-Canlı OpenAPI sözleşmesine göre yanıtın biçimi şöyledir.
+Güncel OpenAPI spesifikasyonuna göre yanıtın biçimi şöyledir.
 
 ```ts
 type SearchResponse = {
@@ -141,9 +141,10 @@ type SearchResponse = {
 };
 ```
 
-Yanıtta gönderiler ve sonraki sayfa için bir cursor değeri bulunur. Bu değeri
-değiştirmeden kopyalayın. `has_next_page` değeri `true` olduğu sürece devam edin.
-Filtreler yüzünden boş dönen bir sayfadan sonra da başka bir sayfa gelebilir.
+Yanıtta gönderiler ve sonraki sayfa için bir `next_cursor` değeri bulunur. Bu
+değeri değiştirmeden kopyalayın. `has_next_page` değeri `true` olduğu sürece
+devam edin. Filtreler yüzünden boş dönen bir sayfadan sonra da başka bir sayfa
+gelebilir.
 
 ## Neden Xquik?
 
@@ -160,7 +161,7 @@ tercih edin. X'in kendi API sözleşmesi gerekiyorsa resmî X API'yi tercih edin
 | Bilinen bir gönderiyi oku | `GET /x/tweets/{id}` |
 | En yeni veya öne çıkan gönderileri ara | `GET /x/tweets/search` |
 | Profil veya zaman akışı oku | `GET /x/users/{id}` ya da `/x/users/{id}/tweets` |
-| Takipçi listesini, gönderi veya topluluk verisini dışa aktar | Tahmin alın, onaylayın, sonra veri çekme işini oluşturun. |
+| Takipçi listesini, gönderi veya topluluk verisini dışa aktar | Tahmini maliyeti görün, onaylayın, sonra veri çekme işini oluşturun. |
 | Hesap veya anahtar kelime izle | İzleyici oluşturun. Gerekirse webhook ekleyin. |
 | Yapay zekâ ajanı kullan | `https://xquik.com/mcp` adresine bağlanın. |
 
@@ -175,12 +176,12 @@ tercih edin. X'in kendi API sözleşmesi gerekiyorsa resmî X API'yi tercih edin
 | Skill | Güvenli talimatlar ve rehberli akışlar |
 | Apify | Kodsuz çalıştırma, zamanlama, veri kümesi ve dışa aktarma |
 
-## Paket ve MCP sözleşmesi
+## Paket ve MCP ayrıntıları
 
 `x-developer` v2.8.0 paketinde Skill'ler ve eklenti meta verileri bulunur.
 Xquik'in barındırdığı MCP sunucusunda `docs`, `search`, `execute` ve `whoami`
-araçları vardır. Herkese açık tüm REST işlemleri canlı OpenAPI sözleşmesinde yer
-alır.
+araçları vardır. Herkese açık tüm REST işlemleri güncel OpenAPI
+spesifikasyonunda yer alır.
 
 `x-developer`, Skill ve eklenti paketidir. TypeScript SDK'sı için ayrı
 `x-twitter-scraper` paketi vardır.
@@ -379,7 +380,7 @@ Aramada dönen her Tweet 1 kredi kullanır. Toplu sonuçların çoğu 1 kredi, m
 sonuçları 5 kredi kullanır. Canlı belgeler, tekilleştirilen her satırın son
 ücretini henüz doğrulamıyor. Tahmin, kesin fatura değildir.
 
-İşi oluşturmadan önce tahmin alın. Bu çağrı kredi harcamaz.
+İşi oluşturmadan önce tahmini maliyeti görün. Bu çağrı kredi harcamaz.
 
 ```bash
 curl --request POST 'https://xquik.com/api/v1/extractions/estimate' \
@@ -433,7 +434,7 @@ misafir token'ı, sayfa seçicisi, X çerezi veya oturum yönetmeniz gerekmez.
 
 ### Sayfalama nasıl çalışır?
 
-Dönen cursor değerini aynen kopyalayın. Bu değeri çözümlemeyin, kendiniz de
+Dönen cursor'ı aynen kopyalayın. Bu değeri çözümlemeyin, kendiniz de
 oluşturmayın. Yanıt başka bir sayfa olduğunu belirttiği sürece devam edin. Yeniden
 denemelerde aynı ID'leri tekilleştirin.
 
@@ -492,7 +493,7 @@ lh skill list --source market
 
 ### Codex
 
-Pazaryerini ekleyin, eklentiyi kurup doğrulayın, sonra giriş yapın.
+Marketplace'i ekleyin, eklentiyi kurup doğrulayın, sonra giriş yapın.
 
 ```bash
 codex plugin marketplace add Xquik-dev/x-twitter-scraper
@@ -549,7 +550,7 @@ Projenize uyan SDK'yı veya aracı kullanın.
 
 ## Son kontrol tarihi
 
-Bu README'yi 2026-08-22 tarihinde canlı OpenAPI ve belgelerle kontrol ettik.
+Bu README'yi 2026-08-22 tarihinde güncel OpenAPI ve belgelerle kontrol ettik.
 Buradaki fiyatları, sınırları, sürümleri ve sayıları kullanmadan önce yeniden
 kontrol edin.
 
