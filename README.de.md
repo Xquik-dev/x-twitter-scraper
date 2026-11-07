@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 01bff04e84ebffb5d629d18da74ca22e8e4e9ad5309bfbe5146cbb5947c004af. -->
+<!-- Translation source SHA-256: 494a5ed7eac26a6f562572445839e7ed59dd62cbb154ccf418e86522d6a463a4. -->
 
 # X (Twitter) Scraper API & Twitter MCP-Server von Xquik
 
@@ -190,7 +190,7 @@ Geprüft am 2026-11-07. Jede Zahl mit Datum & Quelle steht auf [xquik.com/benchm
 | KI-Agenten | Nutze den gehosteten MCP-Server und den installierbaren Skill. |
 | X-Aktionen | Verbinde ein X-Konto. Bestätige Beiträge, DMs und Profiländerungen. |
 
-## Warum Xquik
+## Wofür du zahlst
 
 Xquik rechnet nur gelieferte, eindeutige Ergebnisse ab, die zu deinen Filtern passen.
 Serverseitige Filter entfernen unerwünschte Tweets vor der Abrechnung.

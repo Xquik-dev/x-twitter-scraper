@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 01bff04e84ebffb5d629d18da74ca22e8e4e9ad5309bfbe5146cbb5947c004af. -->
+<!-- Translation source SHA-256: 494a5ed7eac26a6f562572445839e7ed59dd62cbb154ccf418e86522d6a463a4. -->
 
 # Xquik X（Twitter）抓取 API 与 Twitter MCP 服务器
 
@@ -178,7 +178,7 @@ type SearchResponse = {
 | AI 智能体 | 使用托管 MCP 服务和可安装的 Skill。 |
 | X 操作 | 连接 X 账号，再确认发帖、私信和资料修改。 |
 
-## 为什么选择 Xquik
+## 计费内容
 
 Xquik 只对已交付、不重复且符合过滤条件的结果收费。服务端筛选在计费前去除无用推文。批量任务运行前，估算会显示预计用量。
 

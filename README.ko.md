@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 01bff04e84ebffb5d629d18da74ca22e8e4e9ad5309bfbe5146cbb5947c004af. -->
+<!-- Translation source SHA-256: 494a5ed7eac26a6f562572445839e7ed59dd62cbb154ccf418e86522d6a463a4. -->
 
 # Xquik X(Twitter) Scraper API 및 Twitter MCP 서버
 
@@ -185,7 +185,7 @@ type SearchResponse = {
 | AI 에이전트 | 호스팅 MCP 서버와 설치형 Skill을 사용합니다. |
 | X 작업 | X 계정을 연결하고 게시물, DM, 프로필 변경을 확인합니다. |
 
-## Xquik을 선택하는 이유
+## 요금이 부과되는 대상
 
 Xquik은 필터에 맞고 중복되지 않은 결과를 전달했을 때만 요금을 받습니다.
 서버 필터가 과금 전에 불필요한 트윗을 제거합니다.

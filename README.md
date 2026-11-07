@@ -190,7 +190,7 @@ Checked on 2026-11-07. See each number with its date & source on [xquik.com/benc
 
 <!-- trust:end -->
 
-## Why choose Xquik
+## What you pay for
 
 Xquik bills only delivered, unique, filter-matching results.
 Server-side filters remove unwanted tweets before billing.

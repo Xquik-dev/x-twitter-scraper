@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 01bff04e84ebffb5d629d18da74ca22e8e4e9ad5309bfbe5146cbb5947c004af. -->
+<!-- Translation source SHA-256: 494a5ed7eac26a6f562572445839e7ed59dd62cbb154ccf418e86522d6a463a4. -->
 
 # Xquik の X（Twitter）Scraper API と Twitter MCP サーバー
 
@@ -179,7 +179,7 @@ type SearchResponse = {
 | AI エージェント | ホスト型 MCP サーバーとインストール可能な Skill を使います。 |
 | X 上の操作 | X アカウントを接続し、投稿、DM、プロフィール変更を確認します。 |
 
-## Xquik を選ぶ理由
+## 課金の対象
 
 Xquik が課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。サーバー側のフィルターが、課金前に不要なツイートを除きます。大量取得の前に、見積もりで使用量を確認できます。
 

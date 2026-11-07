@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 01bff04e84ebffb5d629d18da74ca22e8e4e9ad5309bfbe5146cbb5947c004af. -->
+<!-- Translation source SHA-256: 494a5ed7eac26a6f562572445839e7ed59dd62cbb154ccf418e86522d6a463a4. -->
 
 # API di scraping X (Twitter) e server MCP per Twitter di Xquik
 
@@ -188,7 +188,7 @@ Verificato il 2026-11-07. Ogni numero con data e fonte è su [xquik.com/benchmar
 | Agenti IA | Usa il server MCP ospitato e lo Skill installabile. |
 | Azioni su X | Collega un account X. Conferma post, DMs e modifiche al profilo. |
 
-## Perché scegliere Xquik
+## Cosa paghi
 
 Xquik fa pagare solo i risultati consegnati, unici e conformi ai filtri.
 I filtri lato server rimuovono i tweet indesiderati prima dell'addebito.

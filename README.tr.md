@@ -1,4 +1,4 @@
-<!-- Translation source SHA-256: 01bff04e84ebffb5d629d18da74ca22e8e4e9ad5309bfbe5146cbb5947c004af. -->
+<!-- Translation source SHA-256: 494a5ed7eac26a6f562572445839e7ed59dd62cbb154ccf418e86522d6a463a4. -->
 
 # Xquik X (Twitter) scraper, Twitter API alternatifi ve MCP sunucusu
 
@@ -192,7 +192,7 @@ Filtreler yüzünden boş dönen bir sayfadan sonra da başka bir sayfa gelebili
 | Yapay zekâ ajanları | Xquik'in barındırdığı MCP sunucusuna bağlanabilir, Skill'i kurabilirsiniz. |
 | X işlemleri | X hesabınızı bağlayın. Gönderi, DM ve profil değişikliklerini onaylayın. |
 
-## Neden Xquik?
+## Neye ücret ödersiniz?
 
 Xquik yalnızca teslim edilen, benzersiz ve filtrenize uyan sonuçlar için ücret alır.
 Sunucu tarafındaki filtreler istemediğiniz tweet'leri ücretlendirmeden önce eler.
