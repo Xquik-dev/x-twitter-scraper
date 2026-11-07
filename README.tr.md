@@ -1,8 +1,15 @@
-<!-- Translation source SHA-256: 92a537c40afafe2cad1cb1e1e3bf7ffb25a866544248fe13e91d4a2cff0fbe00. -->
+<!-- Translation source SHA-256: 01bff04e84ebffb5d629d18da74ca22e8e4e9ad5309bfbe5146cbb5947c004af. -->
 
-# X (Twitter) scraper, Twitter API alternatifi ve MCP sunucusu
+# Xquik X (Twitter) scraper, Twitter API alternatifi ve MCP sunucusu
 
-[![Convex Component](https://www.convex.dev/components/badge/convex-xquik)](https://www.convex.dev/components/convex-xquik)
+Xquik'in X (Twitter) scraper hizmetiyle tweet ve gönderi arayabilirsiniz.
+Profilleri, takipçileri ve yanıtları REST, MCP, SDK, CLI, webhook ve Apify ile dışa aktarabilirsiniz.
+Twitter API alternatifi olarak kullanabilirsiniz. Herkese açık veriler için X geliştirici hesabı gerekmez.
+
+Xquik, dünyanın en hızlı ve en ucuz X (Twitter) scraper hizmetidir. En eksiksiz X (Twitter) verisini sunar.
+Diğer Apify Actor'larının çoğu filtreleme veya tekilleştirme yapılmadan ücret alır.
+Xquik yalnızca teslim edilen, benzersiz ve filtrenize uyan sonuçlar için ücret alır. Satır sayısını asla şişirmez.
+Xquik bağımsızdır ve X Corp. ile bağlantılı değildir.
 
 <p align="center">
   <a href="README.md">English</a> ·
@@ -16,84 +23,79 @@
   <a href="README.it.md">Italiano</a>
 </p>
 
-Xquik, dünyanın en hızlı ve en ucuz X (Twitter) scraper hizmetidir. En eksiksiz
-X verisini sunar. Tweet scraper ve Twitter API alternatifi olarak
-kullanabilirsiniz. X gönderilerini REST, SDK, MCP ve Apify ile arayabilir, dışa
-aktarabilir ve izleyebilirsiniz. Xquik yalnızca teslim edilen, benzersiz ve
-filtrenize uyan sonuçlar için ücret alır. Satır sayısını asla şişirmez.
+<!-- trust:win:start -->
 
-> Xquik is an independent third-party service. Not affiliated with X Corp.
-> "Twitter" and "X" are trademarks of X Corp.
+2026-10-15 tarihinde Xquik X Tweet Scraper saniyede 170 tweet okudu, 1.000 sonuç $0,155 tuttu. 4 rakip Actor içinde en hızlısı saniyede 12,5 okudu. En ucuzu 1.000 sonuç için $0,173 tuttu. [Her çalıştırmayı karşılaştırın](https://xquik.com/benchmarks#benchmark-x-tweet-scraper).
 
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://youtu.be/4UOSpoOoC3Y?t=367">
-        <img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" alt="Framer connects Xquik MCP to coding agents" width="720">
-      </a>
-      <br>
-      <strong>Framer demosu</strong>
-      <br>
-      <sub>Xquik MCP bağlantısını <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Connect Framer to Claude Code, Codex, Cursor, and more</a> videosunda 6:07'den itibaren izleyebilirsiniz.</sub>
-    </td>
-  </tr>
-</table>
+<!-- trust:win:end -->
+
+## Skill'i kur
+
+Ana Skill'i kurun.
+
+```bash
+bunx skills@1.5.3 add Xquik-dev/x-twitter-scraper
+```
+
+Eklemeden önce shadcn kaydını inceleyin.
+
+```bash
+bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
+bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
+```
+
+Uygulama kodunuzu resmî X API'den taşımak için [X API alternatifi Skill'ini](https://github.com/Xquik-dev/x-api) ekleyin.
+
+```bash
+bunx skills@1.5.3 add Xquik-dev/x-api
+```
+
+### LobeHub
+
+LobeHub'a giriş yapın, Skill'leri kurup doğrulayın.
+
+```bash
+lh login
+lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/x-twitter-scraper
+lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-mcp
+lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-social-research
+lh skill list --source market
+```
+
+### Codex
+
+Pazaryerini ekleyin, eklentiyi kurup doğrulayın, sonra giriş yapın.
+
+```bash
+codex plugin marketplace add Xquik-dev/x-twitter-scraper
+codex plugin add x-twitter-scraper@x-twitter-scraper
+codex plugin list
+codex mcp login xquik
+```
+
+Eklenti, Xquik'in barındırdığı MCP sunucusunu `xquik` adıyla ekler.
+`codex mcp login xquik` komutu giriş için tarayıcınızı bir kez açar. Codex
+uygulamasında bunun yerine Authenticate'i seçin. API anahtarı kullanmak için
+[Codex API anahtarı
+adımlarını](https://docs.xquik.com/mcp/overview#codex-api-key-authentication)
+izleyin.
+
+### Gemini CLI
+
+Önce depoyu inceleyin. Ardından Skill'leri kurup doğrulayın.
+
+```bash
+gemini skills install https://github.com/Xquik-dev/x-twitter-scraper.git \
+  --path skills
+gemini skills list
+```
+
+## İlk tweet aramasını yap
 
 Resmî bir X geliştirici hesabına ihtiyacınız yok. Desteklenen veri çekme
 işlemlerinde X hesabı bağlamanız veya kullanmanız da gerekmez. Xquik API anahtarı
 yeterlidir. Özel verileri okumak ve X'te işlem yapmak için bağlı bir X hesabı
 gerekir.
-
-<!-- trust:start -->
-
-## Güven ve kullanım
-
-[![Twitter API package downloads](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fdownloads.json)](https://xquik.com/trust#downloads)
-[![Twitter scraper users on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-users.json)](https://apify.com/xquik)
-[![Twitter scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
-[![Tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
-[![Xquik Twitter API accounts](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Faccounts.json)](https://xquik.com/trust#accounts)
-[![Twitter Skill installs](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskill-installs.json)](https://xquik.com/trust#skill-installs)
-[![Xquik verified revenue on TrustMRR](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frevenue.json)](https://trustmrr.com/startup/xquik)
-[![Twitter API p99 server read time](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frest-p99.json)](https://xquik.com/trust#speed)
-[![Xquik GitHub stars](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fgithub-stars.json)](https://github.com/Xquik-dev)
-[![x-developer downloads on npm](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fnpm-x-developer.json)](https://www.npmjs.com/package/x-developer)
-[![x-twitter-scraper Skill installs on skills.sh](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskills-x-twitter-scraper.json)](https://skills.sh/xquik-dev/x-twitter-scraper)
-[![x-scraper downloads on ClawHub](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fclawhub-x-scraper.json)](https://clawhub.ai/xquik/skills/x-scraper)
-[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13731/badge)](https://www.bestpractices.dev/projects/13731)
-
-- Xquik'in Twitter API paketleri npm, PyPI, RubyGems, NuGet, Packagist ve Terraform'da 53.000+ kez indirildi ([kaynak](https://xquik.com/trust#downloads)) <!-- trust:downloads 53547 -->
-- Xquik'in Apify'daki Twitter scraper Actor'larını 9.500+ kişi kullandı ([kaynak](https://apify.com/xquik)) <!-- trust:apify-users 9595 -->
-- Xquik'in Apify'daki Twitter scraper Actor'ları 6.700.000+ kez çalıştı ([kaynak](https://apify.com/xquik)) <!-- trust:apify-runs 6765249 -->
-- 4,66/5 puan, X Tweet Scraper için 16 Apify yorumundan ([kaynak](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
-- xquik.com'da 4.000+ hesap ([kaynak](https://xquik.com/trust#accounts)) <!-- trust:accounts 4073 -->
-- Xquik'in Twitter Skill'leri skills.sh'te 1.600+ kez kuruldu ([kaynak](https://xquik.com/trust#skill-installs)) <!-- trust:skill-installs 1617 -->
-- TrustMRR'ın doğruladığı $39.000+ gelir ([kaynak](https://trustmrr.com/startup/xquik)) <!-- trust:revenue 39784 -->
-- Başarısız okumalar dahil, son 7 günde REST API p99 sunucu okuma süresi 13,2 s ([kaynak](https://xquik.com/trust#speed)) <!-- trust:rest-p99 13194 -->
-- Xquik depolarında 380+ GitHub yıldızı ([kaynak](https://github.com/Xquik-dev)) <!-- trust:github-stars 383 -->
-- npm üzerinde x-developer için 9.900+ indirme ([kaynak](https://www.npmjs.com/package/x-developer)) <!-- trust:npm-x-developer 9947 -->
-- Bu deponun Skill'leri skills.sh'te 1.500+ kez kuruldu ([kaynak](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1530 -->
-- ClawHub üzerinde x-scraper için 1.700+ indirme ([kaynak](https://clawhub.ai/xquik/skills/x-scraper)) <!-- trust:clawhub-x-scraper 1706 -->
-- Bu depo OpenSSF Best Practices geçme ölçütlerini karşılıyor ([kaynak](https://www.bestpractices.dev/projects/13731)) <!-- trust:openssf-x-twitter-scraper 1 -->
-
-2026-10-25 tarihinde kontrol edildi. Her sayıyı tarihi ve kaynağıyla [xquik.com/trust](https://xquik.com/trust) sayfasında ya da [JSON](https://xquik.com/trust.json) olarak görebilirsiniz.
-
-<!-- trust:end -->
-
-## Xquik neler sunar?
-
-| İhtiyaç | Çözüm |
-| --- | --- |
-| Doğrudan okuma | Gönderi ID'si, bağlantı, kullanıcı adı veya sorgu gönderin. Yanıt yapılandırılmış JSON olarak gelir. |
-| Toplu veri | Desteklenen 23 veri kümesi türünde sonuç sayısı sınırlı işler çalıştırabilirsiniz. |
-| Filtreler | Sonuçları size gelmeden önce tarih, dil, yazar, medya veya etkileşime göre filtreleyebilirsiniz. |
-| İş tahmini | İşi oluşturmadan önce tahmini kullanımı görebilirsiniz. |
-| Dosya çıktısı | Twitter verilerini CSV, JSON, Markdown, PDF, TXT veya XLSX olarak indirebilirsiniz. |
-| İzleme | Hesap ve anahtar kelime olaylarını yakalayıp imzalı webhook'larla iletebilirsiniz. |
-| Yapay zekâ ajanları | Xquik'in barındırdığı MCP sunucusuna bağlanabilir, Skill'i kurabilirsiniz. |
-| X işlemleri | X hesabınızı bağlayın. Gönderi, DM ve profil değişikliklerini onaylayın. |
-
-## İlk tweet aramasını yap
 
 [Xquik panelinden](https://dashboard.xquik.com/en/account?tab=api-keys) bir API
 anahtarı oluşturun. Anahtarı `XQUIK_API_KEY` olarak saklayın. Ardından sonuç
@@ -145,13 +147,58 @@ Yanıtta gönderiler ve sonraki sayfa için bir cursor değeri bulunur. Bu değe
 değiştirmeden kopyalayın. `has_next_page` değeri `true` olduğu sürece devam edin.
 Filtreler yüzünden boş dönen bir sayfadan sonra da başka bir sayfa gelebilir.
 
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://youtu.be/4UOSpoOoC3Y?t=367">
+        <img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" alt="Framer connects Xquik MCP to coding agents" width="720">
+      </a>
+      <br>
+      <strong>Framer demosu</strong>
+      <br>
+      <sub>Xquik MCP bağlantısını <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Connect Framer to Claude Code, Codex, Cursor, and more</a> videosunda 6:07'den itibaren izleyebilirsiniz.</sub>
+    </td>
+  </tr>
+</table>
+
+<!-- trust:start -->
+
+## Karşılaştırmalar ve kullanım
+
+[![x-twitter-scraper Skill installs on skills.sh](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskills-x-twitter-scraper.json)](https://skills.sh/xquik-dev/x-twitter-scraper)
+[![X (Twitter) scraper users on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-users.json)](https://apify.com/xquik)
+[![X (Twitter) scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
+[![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
+
+- Bu deponun Skill'leri skills.sh'te 1.500+ kez kuruldu ([kaynak](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1543 -->
+- Xquik'in Apify'daki X (Twitter) scraper Actor'larını 11.000+ kişi kullandı ([kaynak](https://apify.com/xquik)) <!-- trust:apify-users 11550 -->
+- Xquik'in Apify'daki X (Twitter) scraper Actor'ları 8.200.000+ kez çalıştı ([kaynak](https://apify.com/xquik)) <!-- trust:apify-runs 8292191 -->
+- 4,66/5 puan, X Tweet Scraper için 16 Apify yorumundan ([kaynak](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
+
+2026-11-07 tarihinde kontrol edildi. Her sayıyı tarihi ve kaynağıyla [xquik.com/benchmarks](https://xquik.com/benchmarks) sayfasında ya da [JSON](https://xquik.com/trust.json) olarak gör.
+
+<!-- trust:end -->
+
+## Xquik neler sunar?
+
+| İhtiyaç | Çözüm |
+| --- | --- |
+| Doğrudan okuma | Gönderi ID'si, bağlantı, kullanıcı adı veya sorgu gönderin. Yanıt yapılandırılmış JSON olarak gelir. |
+| Toplu veri | Desteklenen 23 veri kümesi türünde sonuç sayısı sınırlı işler çalıştırabilirsiniz. |
+| Filtreler | Sonuçları size gelmeden önce tarih, dil, yazar, medya veya etkileşime göre filtreleyebilirsiniz. |
+| İş tahmini | İşi oluşturmadan önce tahmini kullanımı görebilirsiniz. |
+| Dosya çıktısı | Twitter verilerini CSV, JSON, Markdown, PDF, TXT veya XLSX olarak indirebilirsiniz. |
+| İzleme | Hesap ve anahtar kelime olaylarını yakalayıp imzalı webhook'larla iletebilirsiniz. |
+| Yapay zekâ ajanları | Xquik'in barındırdığı MCP sunucusuna bağlanabilir, Skill'i kurabilirsiniz. |
+| X işlemleri | X hesabınızı bağlayın. Gönderi, DM ve profil değişikliklerini onaylayın. |
+
 ## Neden Xquik?
 
-Xquik, çok filtre gerektiren işlere uygundur. Yalnızca teslim edilen sonuçlar
-için ücret alır. Sunucu tarafındaki filtreler gereksiz sonuçları azaltır.
+Xquik yalnızca teslim edilen, benzersiz ve filtrenize uyan sonuçlar için ücret alır.
+Sunucu tarafındaki filtreler istemediğiniz tweet'leri ücretlendirmeden önce eler.
+Toplu işlerde tahmini kullanımı iş başlamadan görebilirsiniz.
 
-Filtre, dışa aktarma, izleme, webhook ve farklı istemciler gerekiyorsa Xquik'i
-tercih edin. X'in kendi API sözleşmesi gerekiyorsa resmî X API'yi tercih edin.
+Filtre, dışa aktarma, izleme, webhook ve istemciler tek hizmette çalışır.
 
 ## Doğru akışı seç
 
@@ -457,67 +504,6 @@ toplayın ve zamanında silin.
 
 Düzenlemeye tabi, hassas veya belirsiz işler için bir hukuk uzmanına danışın.
 
-## Skill'i kur
-
-Ana Skill'i kurun.
-
-```bash
-bunx skills@1.5.3 add Xquik-dev/x-twitter-scraper
-```
-
-Eklemeden önce shadcn kaydını inceleyin.
-
-```bash
-bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
-bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
-```
-
-Uygulama kodunuzu resmî X API'den taşımak için [X API alternatifi Skill'ini](https://github.com/Xquik-dev/x-api) ekleyin.
-
-```bash
-bunx skills@1.5.3 add Xquik-dev/x-api
-```
-
-### LobeHub
-
-LobeHub'a giriş yapın, Skill'leri kurup doğrulayın.
-
-```bash
-lh login
-lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/x-twitter-scraper
-lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-mcp
-lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-social-research
-lh skill list --source market
-```
-
-### Codex
-
-Pazaryerini ekleyin, eklentiyi kurup doğrulayın, sonra giriş yapın.
-
-```bash
-codex plugin marketplace add Xquik-dev/x-twitter-scraper
-codex plugin add x-twitter-scraper@x-twitter-scraper
-codex plugin list
-codex mcp login xquik
-```
-
-Eklenti, Xquik'in barındırdığı MCP sunucusunu `xquik` adıyla ekler.
-`codex mcp login xquik` komutu giriş için tarayıcınızı bir kez açar. Codex
-uygulamasında bunun yerine Authenticate'i seçin. API anahtarı kullanmak için
-[Codex API anahtarı
-adımlarını](https://docs.xquik.com/mcp/overview#codex-api-key-authentication)
-izleyin.
-
-### Gemini CLI
-
-Önce depoyu inceleyin. Ardından Skill'leri kurup doğrulayın.
-
-```bash
-gemini skills install https://github.com/Xquik-dev/x-twitter-scraper.git \
-  --path skills
-gemini skills list
-```
-
 ## SDK'lar ve araçlar
 
 Projenize uyan SDK'yı veya aracı kullanın.
@@ -546,12 +532,6 @@ Projenize uyan SDK'yı veya aracı kullanın.
 - [Güvenlik kılavuzu](skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
 - [API karşılaştırması](skills/x-twitter-scraper/references/compare-faq.md)
 - [İngilizce README](README.md)
-
-## Son kontrol tarihi
-
-Bu README'yi 2026-08-22 tarihinde canlı OpenAPI ve belgelerle kontrol ettik.
-Buradaki fiyatları, sınırları, sürümleri ve sayıları kullanmadan önce yeniden
-kontrol edin.
 
 ## Lisans
 
