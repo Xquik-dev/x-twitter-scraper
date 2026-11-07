@@ -1,16 +1,13 @@
-# X (Twitter) scraper API & Twitter MCP server by Xquik
+# X (Twitter) Scraper API & Twitter MCP Server by Xquik
 
-[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13731/badge)](https://www.bestpractices.dev/projects/13731)
-[![Convex Component](https://www.convex.dev/components/badge/convex-xquik)](https://www.convex.dev/components/convex-xquik)
+Use this X (Twitter) scraper by Xquik to search tweets & posts.
+Export profiles, followers & replies through REST, MCP, SDKs, CLI, webhooks & Apify.
+It's a Twitter API alternative. Public reads need no X developer account.
 
-Xquik is the world's fastest and cheapest X Twitter scraper service with the
-most complete X data. Use it as a tweet scraper and Twitter API alternative.
-Scrape Twitter search results, Tweets, profiles, followers & replies through
-REST, MCP, SDKs, CLI, webhooks & Apify. Xquik charges only for delivered,
-unique, filter-matching results and never pads rows.
-
-> Xquik is an independent third-party service. Not affiliated with X Corp.
-> "Twitter" and "X" are trademarks of X Corp.
+Xquik is the world's fastest and cheapest X (Twitter) scraper service with the most complete X (Twitter) data.
+Most other Apify Actors charge before filtering or deduplication.
+Xquik charges only for delivered, unique, filter-matching results and never pads rows.
+Xquik is independent and not affiliated with X Corp.
 
 <p align="center">
   <strong>English</strong> ·
@@ -23,6 +20,12 @@ unique, filter-matching results and never pads rows.
   <a href="README.fr.md">Français</a> ·
   <a href="README.it.md">Italiano</a>
 </p>
+
+<!-- trust:win:start -->
+
+The Xquik X Tweet Scraper read 170 tweets per second on 2026-10-15. That cost $0.155 per 1,000. The fastest of 4 rival Actors read 12.5 per second. The cheapest cost $0.173 per 1,000. [Compare each run](https://xquik.com/benchmarks#benchmark-x-tweet-scraper).
+
+<!-- trust:win:end -->
 
 ## Install the Twitter skill for Claude Code, Codex & Cursor
 
@@ -171,58 +174,38 @@ or [open the complete documentation](https://docs.xquik.com).
 
 <!-- trust:start -->
 
-## Trust & usage
+## Benchmarks & usage
 
-[![Twitter API package downloads](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fdownloads.json)](https://xquik.com/trust#downloads)
-[![Twitter scraper users on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-users.json)](https://apify.com/xquik)
-[![Twitter scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
-[![Tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
-[![Xquik Twitter API accounts](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Faccounts.json)](https://xquik.com/trust#accounts)
-[![Twitter Skill installs](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskill-installs.json)](https://xquik.com/trust#skill-installs)
-[![Xquik verified revenue on TrustMRR](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frevenue.json)](https://trustmrr.com/startup/xquik)
-[![Twitter API p99 server read time](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frest-p99.json)](https://xquik.com/trust#speed)
-[![Xquik GitHub stars](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fgithub-stars.json)](https://github.com/Xquik-dev)
-[![x-developer downloads on npm](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fnpm-x-developer.json)](https://www.npmjs.com/package/x-developer)
 [![x-twitter-scraper Skill installs on skills.sh](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskills-x-twitter-scraper.json)](https://skills.sh/xquik-dev/x-twitter-scraper)
-[![x-scraper downloads on ClawHub](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fclawhub-x-scraper.json)](https://clawhub.ai/xquik/skills/x-scraper)
-[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13731/badge)](https://www.bestpractices.dev/projects/13731)
+[![X (Twitter) scraper users on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-users.json)](https://apify.com/xquik)
+[![X (Twitter) scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
+[![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
 
-- 53,000+ downloads of Xquik's Twitter API packages on npm, PyPI, RubyGems, NuGet, Packagist & Terraform ([source](https://xquik.com/trust#downloads)) <!-- trust:downloads 53547 -->
-- 9,500+ users of Xquik's Twitter scraper Actors on Apify ([source](https://apify.com/xquik)) <!-- trust:apify-users 9595 -->
-- 6,700,000+ runs of Xquik's Twitter scraper Actors on Apify ([source](https://apify.com/xquik)) <!-- trust:apify-runs 6765249 -->
+- 1,500+ installs of this repo's Skills on skills.sh ([source](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1543 -->
+- 11,000+ users of Xquik's X (Twitter) scraper Actors on Apify ([source](https://apify.com/xquik)) <!-- trust:apify-users 11550 -->
+- 8,200,000+ runs of Xquik's X (Twitter) scraper Actors on Apify ([source](https://apify.com/xquik)) <!-- trust:apify-runs 8292191 -->
 - 4.66 of 5 for the X Tweet Scraper from 16 Apify reviews ([source](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
-- 4,000+ accounts on xquik.com ([source](https://xquik.com/trust#accounts)) <!-- trust:accounts 4073 -->
-- 1,600+ installs of Xquik's Twitter Skills on skills.sh ([source](https://xquik.com/trust#skill-installs)) <!-- trust:skill-installs 1617 -->
-- $39,000+ in revenue verified by TrustMRR ([source](https://trustmrr.com/startup/xquik)) <!-- trust:revenue 39784 -->
-- 13.2 s p99 REST API server read time over 7 days, failed reads included ([source](https://xquik.com/trust#speed)) <!-- trust:rest-p99 13194 -->
-- 380+ GitHub stars across Xquik's repos ([source](https://github.com/Xquik-dev)) <!-- trust:github-stars 383 -->
-- 9,900+ downloads of x-developer on npm ([source](https://www.npmjs.com/package/x-developer)) <!-- trust:npm-x-developer 9947 -->
-- 1,500+ installs of this repo's Skills on skills.sh ([source](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1530 -->
-- 1,700+ downloads of x-scraper on ClawHub ([source](https://clawhub.ai/xquik/skills/x-scraper)) <!-- trust:clawhub-x-scraper 1706 -->
-- This repo meets the OpenSSF Best Practices passing criteria ([source](https://www.bestpractices.dev/projects/13731)) <!-- trust:openssf-x-twitter-scraper 1 -->
 
-Checked on 2026-10-25. See each number with its date & source on [xquik.com/trust](https://xquik.com/trust) or as [JSON](https://xquik.com/trust.json).
+Checked on 2026-11-07. See each number with its date & source on [xquik.com/benchmarks](https://xquik.com/benchmarks) or as [JSON](https://xquik.com/trust.json).
 
 <!-- trust:end -->
 
-## Why choose Xquik
+## What you pay for
 
-Xquik suits filter-heavy jobs. It bills delivered results and supports
-server-side filters.
+Xquik bills only delivered, unique, filter-matching results.
+Server-side filters remove unwanted tweets before billing.
+An estimate shows usage before each bulk job.
 
-Choose Xquik when you need several of these together.
+1 service covers all of this.
 
-- Structured X data with 1 API key
-- Server-side Tweet and profile filters
+- Structured X (Twitter) data with 1 API key
+- Server-side tweet and profile filters
 - Per-result billing and pre-run estimates
 - Bulk jobs, cursors, result caps, and file exports
 - Account and keyword monitors
 - Signed webhooks and replayable events
 - REST, SDK, MCP, CLI, Skill, and Actor access
 - Connected X account actions in the same contract
-
-Choose the official X API when you need its exact contract, support, or
-platform relationship.
 
 ## Xquik API resource coverage
 
@@ -549,8 +532,8 @@ stable IDs. Have a lawful purpose and a deletion plan for collected data.
 | General scraper | Flexible HTML or browser retrieval | You own parsing, pagination, schema drift, and cleanup |
 | Do it yourself | Full control over code and storage | You own browser state, pacing, proxies, breakage, and maintenance |
 
-Compare providers with the same query, filters, result limit, and delivery
-format. Keep provider claims separate from your own test results.
+Compare providers with the same query, filters, result limit & delivery format.
+[Compare each measured run](https://xquik.com/benchmarks).
 
 ## Common questions
 
