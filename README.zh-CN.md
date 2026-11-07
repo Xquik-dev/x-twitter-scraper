@@ -2,14 +2,9 @@
 
 # Xquik X（Twitter）抓取 API 与 Twitter MCP 服务器
 
-使用 Xquik 的 X（Twitter）抓取工具搜索推文和帖子。
-通过 REST、MCP、SDK、CLI、webhook 和 Apify 导出资料、关注者和回复。
-它是 Twitter API 的替代方案。读取公开数据无需 X 开发者账号。
+使用 Xquik 的 X（Twitter）抓取工具搜索推文和帖子。通过 REST、MCP、SDK、CLI、webhook 和 Apify 导出资料、关注者和回复。它是 Twitter API 的替代方案。读取公开数据无需 X 开发者账号。
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X（Twitter）数据也最完整。
-其他大多数 Apify Actor 在过滤或去重之前就已计费。
-Xquik 只对已交付、不重复且符合过滤条件的结果收费，绝不虚增行数。
-Xquik 是独立服务，与 X Corp. 无关联。
+Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X（Twitter）数据也最完整。其他大多数 Apify Actor 在过滤或去重之前就已计费。Xquik 只对已交付、不重复且符合过滤条件的结果收费，绝不虚增行数。Xquik 是独立服务，与 X Corp. 无关联。
 
 <p align="center">
   <a href="README.md">English</a> ·
@@ -185,9 +180,7 @@ type SearchResponse = {
 
 ## 为什么选择 Xquik
 
-Xquik 只对已交付、不重复且符合过滤条件的结果收费。
-服务端筛选在计费前去除无用推文。
-批量任务运行前，估算会显示预计用量。
+Xquik 只对已交付、不重复且符合过滤条件的结果收费。服务端筛选在计费前去除无用推文。批量任务运行前，估算会显示预计用量。
 
 筛选、导出、监控、webhook 和客户端都在 1 个服务中。
 
