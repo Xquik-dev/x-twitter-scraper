@@ -1,6 +1,6 @@
 <!-- Translation source SHA-256: 92a537c40afafe2cad1cb1e1e3bf7ffb25a866544248fe13e91d4a2cff0fbe00. -->
 
-# X (Twitter) scraper API ve Twitter MCP sunucusu
+# X (Twitter) scraper, Twitter API alternatifi ve MCP sunucusu
 
 [![Convex Component](https://www.convex.dev/components/badge/convex-xquik)](https://www.convex.dev/components/convex-xquik)
 
@@ -17,7 +17,8 @@
 </p>
 
 Xquik, dünyanın en hızlı ve en ucuz X (Twitter) scraper hizmetidir. En eksiksiz
-X verisini sunar. X gönderilerini REST, SDK, MCP ve Apify ile arayabilir, dışa
+X verisini sunar. Tweet scraper ve Twitter API alternatifi olarak
+kullanabilirsiniz. X gönderilerini REST, SDK, MCP ve Apify ile arayabilir, dışa
 aktarabilir ve izleyebilirsiniz. Xquik yalnızca teslim edilen, benzersiz ve
 filtrenize uyan sonuçlar için ücret alır.
 
@@ -87,16 +88,16 @@ gerekir.
 | Toplu veri | Desteklenen 23 veri kümesi türünde sonuç sayısı sınırlı işler çalıştırabilirsiniz. |
 | Filtreler | Sonuçları size gelmeden önce tarih, dil, yazar, medya veya etkileşime göre filtreleyebilirsiniz. |
 | İş tahmini | İşi oluşturmadan önce tahmini kullanımı görebilirsiniz. |
-| Dosya çıktısı | Sonuçları CSV, JSON, Markdown, PDF, TXT veya XLSX olarak indirebilirsiniz. |
+| Dosya çıktısı | Twitter verilerini CSV, JSON, Markdown, PDF, TXT veya XLSX olarak indirebilirsiniz. |
 | İzleme | Hesap ve anahtar kelime olaylarını yakalayıp imzalı webhook'larla iletebilirsiniz. |
 | Yapay zekâ ajanları | Xquik'in barındırdığı MCP sunucusuna bağlanabilir, Skill'i kurabilirsiniz. |
 | X işlemleri | X hesabınızı bağlayın. Gönderi, DM ve profil değişikliklerini onaylayın. |
 
-## İlk isteği gönder
+## İlk tweet aramasını yap
 
 [Xquik panelinden](https://dashboard.xquik.com/en/account?tab=api-keys) bir API
 anahtarı oluşturun. Anahtarı `XQUIK_API_KEY` olarak saklayın. Ardından sonuç
-sayısı sınırlı bir arama yapın.
+sayısı sınırlı bir tweet araması yapın.
 
 ```bash
 export XQUIK_API_KEY='xq_replace_me'
@@ -159,7 +160,7 @@ tercih edin. X'in kendi API sözleşmesi gerekiyorsa resmî X API'yi tercih edin
 | Bilinen bir gönderiyi oku | `GET /x/tweets/{id}` |
 | En yeni veya öne çıkan gönderileri ara | `GET /x/tweets/search` |
 | Profil veya zaman akışı oku | `GET /x/users/{id}` ya da `/x/users/{id}/tweets` |
-| Takipçi, gönderi veya topluluk verisini dışa aktar | Tahmin alın, onaylayın, sonra veri çekme işini oluşturun. |
+| Takipçi listesini, gönderi veya topluluk verisini dışa aktar | Tahmin alın, onaylayın, sonra veri çekme işini oluşturun. |
 | Hesap veya anahtar kelime izle | İzleyici oluşturun. Gerekirse webhook ekleyin. |
 | Yapay zekâ ajanı kullan | `https://xquik.com/mcp` adresine bağlanın. |
 
@@ -186,7 +187,7 @@ alır.
 
 ## Kod örnekleri
 
-Bu örneklerin hepsi aynı sınırlı aramayı yapar.
+Bu örneklerin hepsi aynı sınırlı tweet aramasını yapar.
 
 ### fetch ile TypeScript
 
@@ -308,7 +309,7 @@ Actor'ı Apify hesabınız ve token'ınızla Apify Console veya API üzerinden �
 
 29 Ağustos 2026'ya kadar Free planında satır başına $0.015 ödersiniz. Ücretli
 planlarda bu tutar $0.00015 olur. Bu tarihten sonra tüm planlarda tutar $0.00015
-olur. Platform kullanımı ayrıca ücretlendirilir. Tanılama satırlarını
+olur. Platform kullanımının ücreti ayrıdır. Tanılama satırlarını
 `resultType !== "diagnostic"` ile ayıklayın.
 
 <!-- BEGIN APIFY TESTIMONIALS -->
@@ -345,15 +346,18 @@ Apify, düşük puanlılar dahil tüm yorumları gösterir. [X Tweet Scraper](ht
 
 <!-- END APIFY TESTIMONIALS -->
 
-## Filtreler ve kullanım alanları
+## Twitter gelişmiş arama filtreleri ve kullanım alanları
 
 Sonuçları yazar, bahsetme, dil, tarih, medya veya etkileşime göre
 filtreleyebilirsiniz. Tam ifadeleri, hashtag'leri ve cashtag'leri dahil edin.
-Kelimeleri, yanıtları, yeniden gönderileri ve alıntıları hariç tutun.
+Kelimeleri, yanıtları, yeniden gönderileri ve alıntıları hariç tutun. Operatör
+listesi için
+[Twitter gelişmiş arama kılavuzuna](https://github.com/Xquik-dev/x-twitter-advanced-search)
+bakın.
 
 Xquik'i akademik araştırma, marka takibi ve rakip analizi için
-kullanabilirsiniz. Kitle araştırması, konuşma analizi ve veri hatları için de
-uygundur. Uygulamanıza göre REST, SDK veya MCP'yi seçin.
+kullanabilirsiniz. Kitle araştırması, Twitter konuşma analizi ve veri hatları
+için de uygundur. Uygulamanıza göre REST, SDK veya MCP'yi seçin.
 
 ## Toplam maliyeti karşılaştır
 
@@ -394,7 +398,7 @@ curl --request POST 'https://xquik.com/api/v1/extractions/estimate' \
   }'
 ```
 
-## İzleyiciler, olaylar ve webhook'lar
+## Twitter izleme, olaylar ve webhook'lar
 
 Hesap ve anahtar kelime izleyicileri değişiklikleri sürekli denetler. Her aktif
 izleyici saatte 30 kredi kullanır. Saklanan olaylar ve webhook teslimatları buna
