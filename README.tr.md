@@ -20,7 +20,7 @@ Xquik, dünyanın en hızlı ve en ucuz X (Twitter) scraper hizmetidir. En eksik
 X verisini sunar. Tweet scraper ve Twitter API alternatifi olarak
 kullanabilirsiniz. X gönderilerini REST, SDK, MCP ve Apify ile arayabilir, dışa
 aktarabilir ve izleyebilirsiniz. Xquik yalnızca teslim edilen, benzersiz ve
-filtrenize uyan sonuçlar için ücret alır.
+filtrenize uyan sonuçlar için ücret alır. Satır sayısını asla şişirmez.
 
 > Xquik is an independent third-party service. Not affiliated with X Corp.
 > "Twitter" and "X" are trademarks of X Corp.
