@@ -335,6 +335,26 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
   değişikliğini genelde X gösterdikten sonra 1 saniyeden kısa sürede yakalar.
   Anahtar kelime tweet'lerini & takipleri de yakalar. X bir tweet'i gösterir
   göstermez bildirim istediğinde kullan. monitor-hour başına $0.0045'ten başlar.
+- [X (Twitter) to Discord Bot](https://apify.com/xquik/x-twitter-to-discord)
+  hesapların her yeni tweet'ini, yanıtını, alıntısını & yeniden gönderisini
+  webhook üzerinden bir Discord kanalına gönderir. Barındırılacak bot yoktur.
+  Bir hesabın tweet'lerini Discord kanalında görmek istediğinde kullan.
+  monitor-hour başına $0.0045'ten başlar.
+- [X (Twitter) Crypto Tracker](https://apify.com/xquik/x-twitter-crypto-tracker)
+  kripto hesaplarının & KOL'lerin tweet'lerini, silinen tweet'lerini, profil
+  değişikliklerini & takiplerini, ayrıca cashtag tweet'lerini izler. Kripto
+  hesaplarının paylaşımlarına veya takiplerine göre hareket ettiğinde kullan.
+  monitor-hour başına $0.0045'ten başlar.
+- [X (Twitter) Follower Tracker](https://apify.com/xquik/x-twitter-follower-tracker)
+  bir hesabın yeni & kaybedilen takipçilerini, kimi takip edip takipten
+  çıktığını her hesabın tam profiliyle izler. Bir hesabın takipçilerini veya
+  takiplerini sinyal olarak okuduğunda kullan. monitor-hour başına $0.0045'ten
+  başlar.
+- [X (Twitter) Post Tracker](https://apify.com/xquik/x-twitter-post-tracker)
+  seçtiğin gönderilerin görüntülenme, beğeni, yeniden gönderi, yanıt, alıntı &
+  yer işareti sayılarını her çalıştırmada, son çalıştırmadan bu yana değişimle
+  kaydeder. Gönderilerin zaman içindeki performansını izlediğinde kullan. Anlık
+  görüntü başına $0.00015'ten başlar.
 
 ## SSS
 

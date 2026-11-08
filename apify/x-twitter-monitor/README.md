@@ -418,6 +418,22 @@ diagnostics. Pick the one that matches the data you need.
   estimates a Viral Score from 0 to 100 & a verdict for every tweet from 8 AI
   trait answers. Use it when you study why tweets spread or flop. From $0.0003
   per analyzed tweet.
+- [X (Twitter) to Discord Bot](https://apify.com/xquik/x-twitter-to-discord)
+  sends every new tweet, reply, quote & repost of accounts to a Discord channel
+  through its webhook, with no bot to host. Use it when you want an account's
+  tweets in a Discord channel. From $0.0045 per monitor-hour.
+- [X (Twitter) Crypto Tracker](https://apify.com/xquik/x-twitter-crypto-tracker)
+  tracks the tweets, deleted tweets, profile changes & follows of crypto
+  accounts & KOLs, plus cashtag tweets. Use it when you act on what crypto
+  accounts post or follow. From $0.0045 per monitor-hour.
+- [X (Twitter) Follower Tracker](https://apify.com/xquik/x-twitter-follower-tracker)
+  tracks the new & lost followers of an account, & whom it follows or unfollows,
+  with each account's full profile. Use it when you read an account's followers
+  or follows as a signal. From $0.0045 per monitor-hour.
+- [X (Twitter) Post Tracker](https://apify.com/xquik/x-twitter-post-tracker)
+  records the views, likes, reposts, replies, quotes & bookmarks of chosen posts
+  on each run, with the change since the last run. Use it when you track how
+  posts perform over time. From $0.00015 per snapshot.
 
 ## FAQ
 

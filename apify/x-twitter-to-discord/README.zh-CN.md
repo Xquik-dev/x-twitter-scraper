@@ -220,6 +220,9 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier) 用 AI 为每条帖子回答你自定义的分类、评分&是非问题。适合预设分析不符合你的标签的场景。每条已分析帖子 $0.0003 起。
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer) 根据 8 个 AI 特征答案，为每条帖子估算 0 到 100 的 Viral Score & 结论。适合研究帖子为何走红或遇冷的场景。每条已分析帖子 $0.0003 起。
 - [X (Twitter) Monitor](https://apify.com/xquik/x-twitter-monitor) 捕获账号的每一条新推文、回复、引用、转帖和个人资料变更，通常在 X 显示后不到一秒，还会捕获关键词推文和关注动态。适合需要在 X 显示推文后立即收到提醒的场景。每个 monitor-hour $0.0045 起。
+- [X (Twitter) Crypto Tracker](https://apify.com/xquik/x-twitter-crypto-tracker) 跟踪加密货币账号和 KOL 的推文、已删除推文、个人资料变更和关注动态，以及 cashtag 推文。适合根据加密货币账号的发帖或关注采取行动的场景。每个 monitor-hour $0.0045 起。
+- [X (Twitter) Follower Tracker](https://apify.com/xquik/x-twitter-follower-tracker) 跟踪账号新增和失去的关注者，以及它关注或取消关注了谁，并附上每个账号的完整资料。适合把账号的关注者或关注动态当作信号的场景。每个 monitor-hour $0.0045 起。
+- [X (Twitter) Post Tracker](https://apify.com/xquik/x-twitter-post-tracker) 每次运行时记录所选帖子的浏览量、点赞、转帖、回复、引用和书签数，以及自上次运行以来的变化。适合跟踪帖子长期表现的场景。每个快照 $0.00015 起。
 
 ## 常见问题
 

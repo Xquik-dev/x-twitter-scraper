@@ -261,6 +261,10 @@ XquikのX Engagement Scraperは、1回の実行で多数のポスト&エンゲ�
 - [X Tweet Classifier with AI Analysis](https://apify.com/xquik/x-twitter-tweet-classifier)は、すべてのポストについて、独自のカテゴリー、スコア&はい/いいえの質問にAIで答えます。既定の分析が自分のラベルに合わないときに使います。分析済みポスト1件あたり$0.0003から。
 - [X Tweet Viral Score Analyzer with AI](https://apify.com/xquik/x-tweet-viral-score-analyzer)は、AIによる8つの特性の回答から、すべてのポストについて0から100のViral Score & 判定を推定します。ポストが広がる理由や伸びない理由を調べるときに使います。分析済みポスト1件あたり$0.0003から。
 - [X (Twitter) Monitor](https://apify.com/xquik/x-twitter-monitor)は、アカウントの新しいツイート、返信、引用、リポスト、プロフィールの変更を、通常はXに表示されてから一秒もかからずにすべて捕捉し、キーワードのツイートとフォローも捕捉します。Xにツイートが表示されたらすぐにアラートが必要なときに使います。monitor-hourあたり$0.0045から。
+- [X (Twitter) to Discord Bot](https://apify.com/xquik/x-twitter-to-discord)は、アカウントの新しいツイート、返信、引用、リポストをすべて、Webhook経由でDiscordチャンネルに送ります。ホストするボットは不要です。アカウントのツイートをDiscordチャンネルで受け取りたいときに使います。monitor-hourあたり$0.0045から。
+- [X (Twitter) Crypto Tracker](https://apify.com/xquik/x-twitter-crypto-tracker)は、暗号資産のアカウントとKOLのツイート、削除されたツイート、プロフィールの変更、フォローに加え、キャッシュタグのツイートも追跡します。暗号資産アカウントのポストやフォローをもとに動くときに使います。monitor-hourあたり$0.0045から。
+- [X (Twitter) Follower Tracker](https://apify.com/xquik/x-twitter-follower-tracker)は、アカウントの新しいフォロワーと失ったフォロワー、フォローまたはフォロー解除した相手を、各アカウントの完全なプロフィール付きで追跡します。アカウントのフォロワーやフォローをシグナルとして読むときに使います。monitor-hourあたり$0.0045から。
+- [X (Twitter) Post Tracker](https://apify.com/xquik/x-twitter-post-tracker)は、選んだポストの表示回数、いいね、リポスト、返信、引用、ブックマークを実行ごとに記録し、前回の実行からの変化も示します。ポストの成果を時系列で追跡するときに使います。スナップショットあたり$0.00015から。
 
 ## よくある質問
 
