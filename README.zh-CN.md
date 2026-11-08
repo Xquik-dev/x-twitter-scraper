@@ -1,8 +1,10 @@
-<!-- Translation source SHA-256: 92a537c40afafe2cad1cb1e1e3bf7ffb25a866544248fe13e91d4a2cff0fbe00. -->
+<!-- Translation source SHA-256: 8a18a1bafa893f34cb2c3a498b4d2e4213ae57e1980090512f4686b7d8d49b2a. -->
 
-# X（Twitter）抓取 API 与 Twitter MCP 服务器
+# Xquik X（Twitter）抓取 API 与 Twitter MCP 服务器
 
-[![Convex Component](https://www.convex.dev/components/badge/convex-xquik)](https://www.convex.dev/components/convex-xquik)
+使用 Xquik 的 X（Twitter）抓取工具搜索推文和帖子。通过 REST、MCP、SDK、CLI、webhook 和 Apify 导出资料、关注者和回复。它是 Twitter API 的替代方案。读取公开数据无需 X 开发者账号。
+
+Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X（Twitter）数据也最完整。其他大多数 Apify Actor 在过滤或去重之前就已计费。Xquik 只对已交付、不重复且符合过滤条件的结果收费，绝不虚增行数。Xquik 是独立服务，与 X Corp. 无关联。
 
 <p align="center">
   <a href="README.md">English</a> ·
@@ -16,79 +18,72 @@
   <a href="README.it.md">Italiano</a>
 </p>
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。使用 REST、SDK、
-MCP 和 Apify 搜索帖子、导出数据并监控账号。Xquik 只对已交付、不重复且符合过滤条件的结果收费。
+<!-- trust:win:start -->
 
-> Xquik is an independent third-party service. Not affiliated with X Corp.
-> "Twitter" and "X" are trademarks of X Corp.
+2026-10-15 的测试中，Xquik X Tweet Scraper 每秒读取 170 条推文，每 1,000 条 $0.155。4 个竞品 Actor 中最快的每秒读取 12.5 条，最便宜的每 1,000 条 $0.173。[比较每次运行](https://xquik.com/benchmarks#benchmark-x-tweet-scraper)。
 
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://youtu.be/4UOSpoOoC3Y?t=367">
-        <img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" alt="Framer connects Xquik MCP to coding agents" width="720">
-      </a>
-      <br>
-      <strong>Framer demo</strong>
-      <br>
-      <sub>Watch <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Connect Framer to Claude Code, Codex, Cursor, and more</a> at 6:07 for the Xquik MCP connection.</sub>
-    </td>
-  </tr>
-</table>
+<!-- trust:win:end -->
+
+## 安装 Skill
+
+安装主要 Skill。
+
+```bash
+bunx skills@1.5.3 add Xquik-dev/x-twitter-scraper
+```
+
+添加前先检查 shadcn 注册项。
+
+```bash
+bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
+bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
+```
+
+要把应用代码从官方 X API 迁移到 Xquik，请添加 [X API 替代 Skill](https://github.com/Xquik-dev/x-api)。
+
+```bash
+bunx skills@1.5.3 add Xquik-dev/x-api
+```
+
+### LobeHub
+
+登录 LobeHub，安装两个 Skill，并确认结果。
+
+```bash
+lh login
+lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/x-twitter-scraper
+lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-mcp
+lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-social-research
+lh skill list --source market
+```
+
+### Codex
+
+添加市场，安装并确认插件，然后登录。
+
+```bash
+codex plugin marketplace add Xquik-dev/x-twitter-scraper
+codex plugin add x-twitter-scraper@x-twitter-scraper
+codex plugin list
+codex mcp login xquik
+```
+
+插件会以 `xquik` 名称添加托管的 MCP 服务器。`codex mcp login xquik` 会打开一次浏览器完成登录。在 Codex 应用中，请改为选择 Authenticate。要使用 API 密钥，请按照 [Codex API 密钥步骤](https://docs.xquik.com/mcp/overview#codex-api-key-authentication)操作。
+
+### Gemini CLI
+
+先检查仓库，再安装并确认 Skill。
+
+```bash
+gemini skills install https://github.com/Xquik-dev/x-twitter-scraper.git \
+  --path skills
+gemini skills list
+```
+
+## 发送第一个请求
 
 无需官方 X 开发者账号。使用受支持的抓取接口时，也无需连接或使用 X 账号。
 只需 Xquik API 密钥。读取私有内容和执行 X 操作时，才需要已连接的 X 账号。
-
-<!-- trust:start -->
-
-## 信任与使用情况
-
-[![Twitter API package downloads](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fdownloads.json)](https://xquik.com/trust#downloads)
-[![Twitter scraper users on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-users.json)](https://apify.com/xquik)
-[![Twitter scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
-[![Tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
-[![Xquik Twitter API accounts](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Faccounts.json)](https://xquik.com/trust#accounts)
-[![Twitter Skill installs](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskill-installs.json)](https://xquik.com/trust#skill-installs)
-[![Xquik verified revenue on TrustMRR](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frevenue.json)](https://trustmrr.com/startup/xquik)
-[![Twitter API p99 server read time](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frest-p99.json)](https://xquik.com/trust#speed)
-[![Xquik GitHub stars](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fgithub-stars.json)](https://github.com/Xquik-dev)
-[![x-developer downloads on npm](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fnpm-x-developer.json)](https://www.npmjs.com/package/x-developer)
-[![x-twitter-scraper Skill installs on skills.sh](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskills-x-twitter-scraper.json)](https://skills.sh/xquik-dev/x-twitter-scraper)
-[![x-scraper downloads on ClawHub](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fclawhub-x-scraper.json)](https://clawhub.ai/xquik/skills/x-scraper)
-[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13731/badge)](https://www.bestpractices.dev/projects/13731)
-
-- Xquik 的 Twitter API 软件包在 npm、PyPI、RubyGems、NuGet、Packagist 和 Terraform 上至少下载了 53,000 次 ([来源](https://xquik.com/trust#downloads)) <!-- trust:downloads 53547 -->
-- Xquik 在 Apify 上的 Twitter 抓取 Actor 至少有 9,500 位用户 ([来源](https://apify.com/xquik)) <!-- trust:apify-users 9595 -->
-- Xquik 在 Apify 上的 Twitter 抓取 Actor 至少运行了 6,700,000 次 ([来源](https://apify.com/xquik)) <!-- trust:apify-runs 6765249 -->
-- X Tweet Scraper 在 Apify 上获得 4.66 分（满分 5 分），共 16 条评价 ([来源](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
-- xquik.com 上至少有 4,000 个账户 ([来源](https://xquik.com/trust#accounts)) <!-- trust:accounts 4073 -->
-- Xquik 的 Twitter Skill 在 skills.sh 上至少安装了 1,600 次 ([来源](https://xquik.com/trust#skill-installs)) <!-- trust:skill-installs 1617 -->
-- TrustMRR 验证的收入为 $39,000+ ([来源](https://trustmrr.com/startup/xquik)) <!-- trust:revenue 39784 -->
-- 含失败读取，过去 7 天 REST API 服务器读取耗时的 p99 为 13.2 s ([来源](https://xquik.com/trust#speed)) <!-- trust:rest-p99 13194 -->
-- Xquik 各仓库至少获得 380 个 GitHub 星标 ([来源](https://github.com/Xquik-dev)) <!-- trust:github-stars 383 -->
-- x-developer 在 npm 上至少下载了 9,900 次 ([来源](https://www.npmjs.com/package/x-developer)) <!-- trust:npm-x-developer 9947 -->
-- 本仓库的 Skill 在 skills.sh 上至少安装了 1,500 次 ([来源](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1530 -->
-- x-scraper 在 ClawHub 上至少下载了 1,700 次 ([来源](https://clawhub.ai/xquik/skills/x-scraper)) <!-- trust:clawhub-x-scraper 1706 -->
-- 本仓库符合 OpenSSF Best Practices 的 passing 标准 ([来源](https://www.bestpractices.dev/projects/13731)) <!-- trust:openssf-x-twitter-scraper 1 -->
-
-检查日期为 2026-10-25。可在 [xquik.com/trust](https://xquik.com/trust) 查看每个数字的日期和来源，也可获取 [JSON](https://xquik.com/trust.json)。
-
-<!-- trust:end -->
-
-## Xquik 能做什么
-
-| 需求 | Xquik 的处理方式 |
-| --- | --- |
-| 直接读取 | 提交帖子 ID、链接、用户名或查询，获取结构化 JSON。 |
-| 批量数据 | 对 23 种受支持的数据集运行有明确上限的任务。 |
-| 筛选 | 在交付前按日期、语言、作者、媒体或互动量筛选。 |
-| 任务估算 | 创建任务前先查看预计用量。 |
-| 文件导出 | 下载 CSV、JSON、Markdown、PDF、TXT 或 XLSX。 |
-| 持续监控 | 监控账号或关键词，并通过签名 webhook 发送事件。 |
-| AI 智能体 | 使用托管 MCP 服务和可安装的 Skill。 |
-| X 操作 | 连接 X 账号，再确认发帖、私信和资料修改。 |
-
-## 发送第一个请求
 
 在 [Xquik 控制台](https://dashboard.xquik.com/en/account?tab=api-keys)创建 API
 密钥。将密钥保存为 `XQUIK_API_KEY`，然后运行一个有结果上限的搜索。
@@ -138,12 +133,56 @@ type SearchResponse = {
 响应包含帖子和下一页游标。请原样复制游标，不要自行解析或修改。
 当 `has_next_page` 为 `true` 时继续请求。筛选后的空页仍可能有下一页。
 
-## 为什么选择 Xquik
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://youtu.be/4UOSpoOoC3Y?t=367">
+        <img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" alt="Framer connects Xquik MCP to coding agents" width="720">
+      </a>
+      <br>
+      <strong>Framer demo</strong>
+      <br>
+      <sub>Watch <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Connect Framer to Claude Code, Codex, Cursor, and more</a> at 6:07 for the Xquik MCP connection.</sub>
+    </td>
+  </tr>
+</table>
 
-Xquik 适合筛选条件较多的任务。它按交付结果计费。服务端筛选可减少无用结果。
+<!-- trust:start -->
 
-需要筛选、导出、监控、webhook 和多个客户端时，可选择 Xquik。需要 X 的原始
-合同与支持时，可选择官方 X API。
+## 基准测试与使用情况
+
+[![x-twitter-scraper Skill installs on skills.sh](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskills-x-twitter-scraper.json)](https://skills.sh/xquik-dev/x-twitter-scraper)
+[![X (Twitter) scraper users on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-users.json)](https://apify.com/xquik)
+[![X (Twitter) scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
+[![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
+
+- 本仓库的 Skill 在 skills.sh 上至少安装了 1,500 次 ([来源](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1544 -->
+- Xquik 在 Apify 上的 X（Twitter）抓取 Actor 至少有 11,000 位用户 ([来源](https://apify.com/xquik)) <!-- trust:apify-users 11846 -->
+- Xquik 在 Apify 上的 X（Twitter）抓取 Actor 至少运行了 8,400,000 次 ([来源](https://apify.com/xquik)) <!-- trust:apify-runs 8467303 -->
+- X Tweet Scraper 在 Apify 上获得 4.66 分（满分 5 分），共 16 条评价 ([来源](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
+
+检查日期为 2026-11-08。可在 [xquik.com/benchmarks](https://xquik.com/benchmarks) 查看每个数字的日期和来源，也可获取 [JSON](https://xquik.com/trust.json)。
+
+<!-- trust:end -->
+
+## Xquik 能做什么
+
+| 需求 | Xquik 的处理方式 |
+| --- | --- |
+| 直接读取 | 提交帖子 ID、链接、用户名或查询，获取结构化 JSON。 |
+| 批量数据 | 对 23 种受支持的数据集运行有明确上限的任务。 |
+| 筛选 | 在交付前按日期、语言、作者、媒体或互动量筛选。 |
+| 任务估算 | 创建任务前先查看预计用量。 |
+| 文件导出 | 下载 CSV、JSON、Markdown、PDF、TXT 或 XLSX。 |
+| 持续监控 | 监控账号或关键词，并通过签名 webhook 发送事件。 |
+| AI 智能体 | 使用托管 MCP 服务和可安装的 Skill。 |
+| X 操作 | 连接 X 账号，再确认发帖、私信和资料修改。 |
+
+## 计费内容
+
+Xquik 只对已交付、不重复且符合过滤条件的结果收费。服务端筛选在计费前去除无用推文。批量任务运行前，估算会显示预计用量。
+
+筛选、导出、监控、webhook 和客户端都在 1 个服务中。
 
 ## 选择正确的工作流
 
@@ -430,62 +469,6 @@ Xquik 返回当前可用的数据。它不会编造缺失字段，也不会恢�
 
 对于受监管、敏感或法律边界不清楚的项目，请咨询法律专业人士。
 
-## 安装 Skill
-
-安装主要 Skill。
-
-```bash
-bunx skills@1.5.3 add Xquik-dev/x-twitter-scraper
-```
-
-添加前先检查 shadcn 注册项。
-
-```bash
-bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
-bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
-```
-
-要把应用代码从官方 X API 迁移到 Xquik，请添加 [X API 替代 Skill](https://github.com/Xquik-dev/x-api)。
-
-```bash
-bunx skills@1.5.3 add Xquik-dev/x-api
-```
-
-### LobeHub
-
-登录 LobeHub，安装两个 Skill，并确认结果。
-
-```bash
-lh login
-lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/x-twitter-scraper
-lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-mcp
-lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-social-research
-lh skill list --source market
-```
-
-### Codex
-
-添加市场，安装并确认插件，然后登录。
-
-```bash
-codex plugin marketplace add Xquik-dev/x-twitter-scraper
-codex plugin add x-twitter-scraper@x-twitter-scraper
-codex plugin list
-codex mcp login xquik
-```
-
-插件会以 `xquik` 名称添加托管的 MCP 服务器。`codex mcp login xquik` 会打开一次浏览器完成登录。在 Codex 应用中，请改为选择 Authenticate。要使用 API 密钥，请按照 [Codex API 密钥步骤](https://docs.xquik.com/mcp/overview#codex-api-key-authentication)操作。
-
-### Gemini CLI
-
-先检查仓库，再安装并确认 Skill。
-
-```bash
-gemini skills install https://github.com/Xquik-dev/x-twitter-scraper.git \
-  --path skills
-gemini skills list
-```
-
 ## SDK 与工具
 
 选择适合项目的 SDK 或工具。
@@ -514,11 +497,6 @@ gemini skills list
 - [安全指南](skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
 - [API 对比](skills/x-twitter-scraper/references/compare-faq.md)
 - [英文完整版 README](README.md)
-
-## 合同日期
-
-此 README 已于 2026-08-22 对照实时 OpenAPI 和文档检查。使用价格、限制、版本
-或数量前，请再次核对。
 
 ## 许可证
 

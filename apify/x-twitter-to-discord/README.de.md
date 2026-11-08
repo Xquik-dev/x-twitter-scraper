@@ -369,6 +369,18 @@ du brauchst.
   Accounts, meist in weniger als einer Sekunde, nachdem X sie zeigt, dazu
   Stichwort-Tweets & Follows. Nutze ihn, wenn du Alerts brauchst, sobald X einen
   Tweet zeigt. Ab $0.0045 pro monitor-hour.
+- [X (Twitter) Crypto Tracker](https://apify.com/xquik/x-twitter-crypto-tracker)
+  verfolgt die Tweets, gelöschten Tweets, Profiländerungen & Follows von
+  Krypto-Accounts & KOLs, dazu Cashtag-Tweets. Nutze ihn, wenn du auf Posts oder
+  Follows von Krypto-Accounts reagierst. Ab $0.0045 pro monitor-hour.
+- [X (Twitter) Follower Tracker](https://apify.com/xquik/x-twitter-follower-tracker)
+  verfolgt neue & verlorene Follower eines Accounts & wem er folgt oder nicht
+  mehr folgt, jeweils mit dem vollständigen Profil. Nutze ihn, wenn du Follower
+  oder Follows eines Accounts als Signal liest. Ab $0.0045 pro monitor-hour.
+- [X (Twitter) Post Tracker](https://apify.com/xquik/x-twitter-post-tracker)
+  erfasst bei jedem Lauf Views, Likes, Reposts, Antworten, Zitate & Lesezeichen
+  ausgewählter Posts, mit der Änderung seit dem letzten Lauf. Nutze ihn, wenn du
+  die Performance von Posts über die Zeit verfolgst. Ab $0.00015 pro Snapshot.
 
 ## FAQ
 

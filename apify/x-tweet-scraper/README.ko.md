@@ -1146,6 +1146,22 @@ Apify의
   트윗, 답글, 인용, 리포스트 & 프로필 변경을 보통 X에 표시된 뒤 1초 안에 모두
   잡아내고, 키워드 트윗 & 팔로우도 잡아냅니다. X에 트윗이 표시되는 즉시 알림이
   필요할 때 사용하세요. monitor-hour당 $0.0045부터입니다.
+- [X (Twitter) to Discord Bot](https://apify.com/xquik/x-twitter-to-discord)은
+  계정의 새 트윗, 답글, 인용 & 리포스트를 모두 웹훅으로 Discord 채널에 보내며,
+  호스팅할 봇이 필요 없습니다. 계정의 트윗을 Discord 채널에서 받고 싶을 때
+  사용하세요. monitor-hour당 $0.0045부터입니다.
+- [X (Twitter) Crypto Tracker](https://apify.com/xquik/x-twitter-crypto-tracker)는
+  암호화폐 계정과 KOL의 트윗, 삭제된 트윗, 프로필 변경 & 팔로우와 캐시태그
+  트윗까지 추적합니다. 암호화폐 계정의 게시물이나 팔로우를 보고 움직일 때
+  사용하세요. monitor-hour당 $0.0045부터입니다.
+- [X (Twitter) Follower Tracker](https://apify.com/xquik/x-twitter-follower-tracker)는
+  계정의 새 팔로워와 잃은 팔로워, 팔로우하거나 언팔로우한 계정을 각 계정의 전체
+  프로필과 함께 추적합니다. 계정의 팔로워나 팔로우를 신호로 읽을 때 사용하세요.
+  monitor-hour당 $0.0045부터입니다.
+- [X (Twitter) Post Tracker](https://apify.com/xquik/x-twitter-post-tracker)는
+  고른 게시물의 조회수, 좋아요, 리포스트, 답글, 인용 & 북마크를 실행할 때마다
+  기록하고, 지난 실행 이후의 변화도 보여 줍니다. 게시물 성과를 시간에 따라
+  추적할 때 사용하세요. 스냅샷당 $0.00015부터입니다.
 
 ## 자주 묻는 질문
 

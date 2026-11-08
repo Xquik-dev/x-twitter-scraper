@@ -1,8 +1,15 @@
-<!-- Translation source SHA-256: 92a537c40afafe2cad1cb1e1e3bf7ffb25a866544248fe13e91d4a2cff0fbe00. -->
+<!-- Translation source SHA-256: 8a18a1bafa893f34cb2c3a498b4d2e4213ae57e1980090512f4686b7d8d49b2a. -->
 
-# API de scraping X (Twitter) et serveur MCP Twitter
+# API de scraping X (Twitter) et serveur MCP Twitter de Xquik
 
-[![Convex Component](https://www.convex.dev/components/badge/convex-xquik)](https://www.convex.dev/components/convex-xquik)
+Utilisez ce scraper X (Twitter) de Xquik pour rechercher des tweets et des posts.
+Exportez profils, abonnés et réponses avec REST, MCP, les SDKs, la CLI, les webhooks et Apify.
+C'est une alternative à l'API Twitter. Les lectures publiques ne demandent aucun compte développeur X.
+
+Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au monde. Ses données X (Twitter) sont les plus complètes.
+La plupart des autres Actors Apify facturent avant le filtrage ou la déduplication.
+Xquik facture seulement les résultats livrés, uniques et conformes à vos filtres. Il n'ajoute jamais de lignes de remplissage.
+Xquik est indépendant et n'est pas affilié à X Corp.
 
 <p align="center">
   <a href="README.md">English</a> ·
@@ -16,84 +23,78 @@
   <a href="README.it.md">Italiano</a>
 </p>
 
-Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
-monde. Ses données X sont les plus complètes.
-Recherchez, exportez et surveillez avec REST, les SDKs, MCP et Apify.
-Xquik facture seulement les résultats livrés, uniques et conformes à vos
-filtres.
+<!-- trust:win:start -->
 
-> Xquik is an independent third-party service. Not affiliated with X Corp.
-> "Twitter" and "X" are trademarks of X Corp.
+Le 2026-10-15, Xquik X Tweet Scraper a lu 170 tweets par seconde à 0,155 $ les 1 000. Le plus rapide des 4 Actors concurrents a lu 12,5 par seconde. Le moins cher coûtait 0,173 $ les 1 000. [Comparer chaque exécution](https://xquik.com/benchmarks#benchmark-x-tweet-scraper).
 
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://youtu.be/4UOSpoOoC3Y?t=367">
-        <img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" alt="Framer connects Xquik MCP to coding agents" width="720">
-      </a>
-      <br>
-      <strong>Framer demo</strong>
-      <br>
-      <sub>Watch <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Connect Framer to Claude Code, Codex, Cursor, and more</a> at 6:07 for the Xquik MCP connection.</sub>
-    </td>
-  </tr>
-</table>
+<!-- trust:win:end -->
+
+## Installer le Skill
+
+Installez le Skill principal.
+
+```bash
+bunx skills@1.5.3 add Xquik-dev/x-twitter-scraper
+```
+
+Vérifiez l'élément shadcn avant de l'ajouter.
+
+```bash
+bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
+bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
+```
+
+Pour migrer le code de votre app depuis l'API X officielle, ajoutez le [Skill alternative à l'API X](https://github.com/Xquik-dev/x-api).
+
+```bash
+bunx skills@1.5.3 add Xquik-dev/x-api
+```
+
+### LobeHub
+
+Connectez-vous à LobeHub. Installez et vérifiez les Skills.
+
+```bash
+lh login
+lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/x-twitter-scraper
+lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-mcp
+lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-social-research
+lh skill list --source market
+```
+
+### Codex
+
+Ajoutez le marketplace. Installez et vérifiez le plugin, puis connectez-vous.
+
+```bash
+codex plugin marketplace add Xquik-dev/x-twitter-scraper
+codex plugin add x-twitter-scraper@x-twitter-scraper
+codex plugin list
+codex mcp login xquik
+```
+
+Le plugin ajoute le serveur MCP hébergé sous le nom `xquik`.
+`codex mcp login xquik` ouvre votre navigateur une fois pour la connexion. Dans
+l'app Codex, choisissez plutôt Authenticate. Pour une clé API, suivez les
+[étapes de clé API pour
+Codex](https://docs.xquik.com/mcp/overview#codex-api-key-authentication).
+
+### Gemini CLI
+
+Vérifiez le dépôt. Installez et vérifiez ensuite les Skills.
+
+```bash
+gemini skills install https://github.com/Xquik-dev/x-twitter-scraper.git \
+  --path skills
+gemini skills list
+```
+
+## Envoyer votre première requête
 
 Vous n'avez pas besoin d'un compte développeur X officiel. Vous n'avez pas
 besoin de connecter ni d'utiliser un compte X pour l'extraction prise en charge.
 Une clé API Xquik suffit. Les lectures privées et les actions X nécessitent un
 compte X connecté.
-
-<!-- trust:start -->
-
-## Confiance et utilisation
-
-[![Twitter API package downloads](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fdownloads.json)](https://xquik.com/trust#downloads)
-[![Twitter scraper users on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-users.json)](https://apify.com/xquik)
-[![Twitter scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
-[![Tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
-[![Xquik Twitter API accounts](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Faccounts.json)](https://xquik.com/trust#accounts)
-[![Twitter Skill installs](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskill-installs.json)](https://xquik.com/trust#skill-installs)
-[![Xquik verified revenue on TrustMRR](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frevenue.json)](https://trustmrr.com/startup/xquik)
-[![Twitter API p99 server read time](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frest-p99.json)](https://xquik.com/trust#speed)
-[![Xquik GitHub stars](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fgithub-stars.json)](https://github.com/Xquik-dev)
-[![x-developer downloads on npm](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fnpm-x-developer.json)](https://www.npmjs.com/package/x-developer)
-[![x-twitter-scraper Skill installs on skills.sh](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskills-x-twitter-scraper.json)](https://skills.sh/xquik-dev/x-twitter-scraper)
-[![x-scraper downloads on ClawHub](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fclawhub-x-scraper.json)](https://clawhub.ai/xquik/skills/x-scraper)
-[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13731/badge)](https://www.bestpractices.dev/projects/13731)
-
-- 53 000+ téléchargements des paquets d'API Twitter de Xquik sur npm, PyPI, RubyGems, NuGet, Packagist et Terraform ([source](https://xquik.com/trust#downloads)) <!-- trust:downloads 53547 -->
-- 9 500+ utilisateurs des Actors de scraping Twitter de Xquik sur Apify ([source](https://apify.com/xquik)) <!-- trust:apify-users 9595 -->
-- 6 700 000+ exécutions des Actors de scraping Twitter de Xquik sur Apify ([source](https://apify.com/xquik)) <!-- trust:apify-runs 6765249 -->
-- 4,66 sur 5 pour X Tweet Scraper d'après 16 avis Apify ([source](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
-- 4 000+ comptes sur xquik.com ([source](https://xquik.com/trust#accounts)) <!-- trust:accounts 4073 -->
-- 1 600+ installations des Skills Twitter de Xquik sur skills.sh ([source](https://xquik.com/trust#skill-installs)) <!-- trust:skill-installs 1617 -->
-- $39 000+ de revenus vérifiés par TrustMRR ([source](https://trustmrr.com/startup/xquik)) <!-- trust:revenue 39784 -->
-- 13,2 s de lecture p99 côté serveur de l'API REST sur 7 jours, échecs compris ([source](https://xquik.com/trust#speed)) <!-- trust:rest-p99 13194 -->
-- 380+ étoiles GitHub sur les dépôts de Xquik ([source](https://github.com/Xquik-dev)) <!-- trust:github-stars 383 -->
-- 9 900+ téléchargements de x-developer sur npm ([source](https://www.npmjs.com/package/x-developer)) <!-- trust:npm-x-developer 9947 -->
-- 1 500+ installations des Skills de ce dépôt sur skills.sh ([source](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1530 -->
-- 1 700+ téléchargements de x-scraper sur ClawHub ([source](https://clawhub.ai/xquik/skills/x-scraper)) <!-- trust:clawhub-x-scraper 1706 -->
-- Ce dépôt respecte les critères passing d'OpenSSF Best Practices ([source](https://www.bestpractices.dev/projects/13731)) <!-- trust:openssf-x-twitter-scraper 1 -->
-
-Vérifié le 2026-10-25. Chaque nombre, sa date et sa source sont sur [xquik.com/trust](https://xquik.com/trust) ou en [JSON](https://xquik.com/trust.json).
-
-<!-- trust:end -->
-
-## Ce que couvre Xquik
-
-| Besoin | Solution Xquik |
-| --- | --- |
-| Lecture directe | Envoyez un ID, une URL, un nom d'utilisateur ou une recherche. Recevez du JSON structuré. |
-| Grands jeux de données | Lancez des tâches limitées pour 23 types de jeux de données. |
-| Filtres | Filtrez avant la livraison par date, langue, auteur, média ou engagement. |
-| Estimation | Vérifiez l'utilisation avant de créer une tâche. |
-| Export de fichiers | Téléchargez des fichiers CSV, JSON, Markdown, PDF, TXT ou XLSX. |
-| Surveillance | Détectez les événements de comptes ou de mots-clés. Envoyez-les par webhooks signés. |
-| Agents IA | Utilisez le serveur MCP hébergé et le Skill installable. |
-| Actions X | Connectez un compte X. Confirmez les posts, DMs et changements de profil. |
-
-## Envoyer votre première requête
 
 Créez une clé API dans le [tableau de bord Xquik](https://dashboard.xquik.com/en/account?tab=api-keys).
 Enregistrez-la sous `XQUIK_API_KEY`. Lancez ensuite une recherche limitée.
@@ -144,14 +145,58 @@ La réponse contient des posts et un curseur pour la page suivante. Copiez le
 curseur sans le modifier. Continuez tant que `has_next_page` vaut `true`. Une
 page filtrée vide peut encore avoir une page suivante.
 
-## Pourquoi choisir Xquik
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://youtu.be/4UOSpoOoC3Y?t=367">
+        <img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" alt="Framer connects Xquik MCP to coding agents" width="720">
+      </a>
+      <br>
+      <strong>Framer demo</strong>
+      <br>
+      <sub>Watch <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Connect Framer to Claude Code, Codex, Cursor, and more</a> at 6:07 for the Xquik MCP connection.</sub>
+    </td>
+  </tr>
+</table>
 
-Xquik convient aux tâches qui utilisent beaucoup de filtres. La facturation
-porte sur les résultats livrés. Les filtres côté serveur réduisent les résultats
-inutiles.
+<!-- trust:start -->
 
-Choisissez Xquik pour les filtres, exports, moniteurs, webhooks et plusieurs
-clients. Choisissez l'API X officielle si son contrat exact est requis.
+## Benchmarks et utilisation
+
+[![x-twitter-scraper Skill installs on skills.sh](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskills-x-twitter-scraper.json)](https://skills.sh/xquik-dev/x-twitter-scraper)
+[![X (Twitter) scraper users on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-users.json)](https://apify.com/xquik)
+[![X (Twitter) scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
+[![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
+
+- 1 500+ installations des Skills de ce dépôt sur skills.sh ([source](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1544 -->
+- 11 000+ utilisateurs des Actors de scraping X (Twitter) de Xquik sur Apify ([source](https://apify.com/xquik)) <!-- trust:apify-users 11846 -->
+- 8 400 000+ exécutions des Actors de scraping X (Twitter) de Xquik sur Apify ([source](https://apify.com/xquik)) <!-- trust:apify-runs 8467303 -->
+- 4,66 sur 5 pour X Tweet Scraper d'après 16 avis Apify ([source](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
+
+Vérifié le 2026-11-08. Chaque nombre, sa date et sa source sont sur [xquik.com/benchmarks](https://xquik.com/benchmarks) ou en [JSON](https://xquik.com/trust.json).
+
+<!-- trust:end -->
+
+## Ce que couvre Xquik
+
+| Besoin | Solution Xquik |
+| --- | --- |
+| Lecture directe | Envoyez un ID, une URL, un nom d'utilisateur ou une recherche. Recevez du JSON structuré. |
+| Grands jeux de données | Lancez des tâches limitées pour 23 types de jeux de données. |
+| Filtres | Filtrez avant la livraison par date, langue, auteur, média ou engagement. |
+| Estimation | Vérifiez l'utilisation avant de créer une tâche. |
+| Export de fichiers | Téléchargez des fichiers CSV, JSON, Markdown, PDF, TXT ou XLSX. |
+| Surveillance | Détectez les événements de comptes ou de mots-clés. Envoyez-les par webhooks signés. |
+| Agents IA | Utilisez le serveur MCP hébergé et le Skill installable. |
+| Actions X | Connectez un compte X. Confirmez les posts, DMs et changements de profil. |
+
+## Ce que vous payez
+
+Xquik facture seulement les résultats livrés, uniques et conformes à vos filtres.
+Les filtres côté serveur retirent les tweets indésirables avant la facturation.
+Une estimation montre l'utilisation avant chaque tâche en masse.
+
+Filtres, exports, moniteurs, webhooks et clients passent par 1 service.
 
 ## Choisir le bon parcours
 
@@ -453,66 +498,6 @@ nécessaires et supprimez-les à la date prévue.
 
 Demandez un avis qualifié pour tout usage réglementé, sensible ou incertain.
 
-## Installer le Skill
-
-Installez le Skill principal.
-
-```bash
-bunx skills@1.5.3 add Xquik-dev/x-twitter-scraper
-```
-
-Vérifiez l'élément shadcn avant de l'ajouter.
-
-```bash
-bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
-bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
-```
-
-Pour migrer le code de votre app depuis l'API X officielle, ajoutez le [Skill alternative à l'API X](https://github.com/Xquik-dev/x-api).
-
-```bash
-bunx skills@1.5.3 add Xquik-dev/x-api
-```
-
-### LobeHub
-
-Connectez-vous à LobeHub. Installez et vérifiez les Skills.
-
-```bash
-lh login
-lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/x-twitter-scraper
-lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-mcp
-lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-social-research
-lh skill list --source market
-```
-
-### Codex
-
-Ajoutez le marketplace. Installez et vérifiez le plugin, puis connectez-vous.
-
-```bash
-codex plugin marketplace add Xquik-dev/x-twitter-scraper
-codex plugin add x-twitter-scraper@x-twitter-scraper
-codex plugin list
-codex mcp login xquik
-```
-
-Le plugin ajoute le serveur MCP hébergé sous le nom `xquik`.
-`codex mcp login xquik` ouvre votre navigateur une fois pour la connexion. Dans
-l'app Codex, choisissez plutôt Authenticate. Pour une clé API, suivez les
-[étapes de clé API pour
-Codex](https://docs.xquik.com/mcp/overview#codex-api-key-authentication).
-
-### Gemini CLI
-
-Vérifiez le dépôt. Installez et vérifiez ensuite les Skills.
-
-```bash
-gemini skills install https://github.com/Xquik-dev/x-twitter-scraper.git \
-  --path skills
-gemini skills list
-```
-
 ## SDKs et outils
 
 Utilisez le SDK ou l'outil adapté à votre projet.
@@ -541,11 +526,6 @@ Utilisez le SDK ou l'outil adapté à votre projet.
 - [Guide de sécurité](skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
 - [Comparatif des APIs](skills/x-twitter-scraper/references/compare-faq.md)
 - [README anglais complet](README.md)
-
-## Date du contrat
-
-Ce README a été vérifié avec OpenAPI et la documentation en direct le
-2026-08-22. Revérifiez les prix, limites, versions et nombres avant usage.
 
 ## Licence
 

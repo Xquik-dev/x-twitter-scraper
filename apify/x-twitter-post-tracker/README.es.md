@@ -403,6 +403,20 @@ necesitas.
   normalmente en menos de un segundo después de que X lo muestra, además de los
   tweets de palabras clave y los seguimientos. Úsalo cuando necesites alertas en
   cuanto X muestre un tweet. Desde $0.0045 por monitor-hour.
+- [X (Twitter) to Discord Bot](https://apify.com/xquik/x-twitter-to-discord)
+  envía cada nuevo tweet, respuesta, cita & repost de las cuentas a un canal de
+  Discord con su webhook, sin bot que alojar. Úsalo cuando quieras los tweets de
+  una cuenta en un canal de Discord. Desde $0.0045 por monitor-hour.
+- [X (Twitter) Crypto Tracker](https://apify.com/xquik/x-twitter-crypto-tracker)
+  sigue los tweets, los tweets eliminados, los cambios de perfil & los
+  seguimientos de cuentas cripto & KOLs, además de los tweets con cashtags.
+  Úsalo cuando actúes según lo que publican o siguen las cuentas cripto. Desde
+  $0.0045 por monitor-hour.
+- [X (Twitter) Follower Tracker](https://apify.com/xquik/x-twitter-follower-tracker)
+  sigue los seguidores nuevos & perdidos de una cuenta, & a quién sigue o deja
+  de seguir, con el perfil completo de cada cuenta. Úsalo cuando leas los
+  seguidores o seguimientos de una cuenta como una señal. Desde $0.0045 por
+  monitor-hour.
 
 ## Preguntas frecuentes
 

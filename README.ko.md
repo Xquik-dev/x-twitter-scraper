@@ -1,8 +1,15 @@
-<!-- Translation source SHA-256: 92a537c40afafe2cad1cb1e1e3bf7ffb25a866544248fe13e91d4a2cff0fbe00. -->
+<!-- Translation source SHA-256: 8a18a1bafa893f34cb2c3a498b4d2e4213ae57e1980090512f4686b7d8d49b2a. -->
 
-# X(Twitter) Scraper API 및 Twitter MCP 서버
+# Xquik X(Twitter) Scraper API 및 Twitter MCP 서버
 
-[![Convex Component](https://www.convex.dev/components/badge/convex-xquik)](https://www.convex.dev/components/convex-xquik)
+Xquik의 X(Twitter) 스크레이퍼로 트윗과 게시물을 검색하세요.
+프로필, 팔로워, 답글은 REST, MCP, SDK, CLI, webhook, Apify로 내보낼 수 있습니다.
+Twitter API 대안으로 쓸 수 있습니다. 공개 데이터 읽기에는 X 개발자 계정이 필요 없습니다.
+
+Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서비스이며, 가장 완전한 X(Twitter) 데이터를 제공합니다.
+다른 대부분의 Apify Actor는 필터링이나 중복 제거 전에 요금을 청구합니다.
+Xquik은 필터에 맞고 중복되지 않은 결과를 전달했을 때만 요금을 받습니다. 행을 부풀리지 않습니다.
+Xquik은 독립 서비스이며 X Corp.과 제휴 관계가 없습니다.
 
 <p align="center">
   <a href="README.md">English</a> ·
@@ -16,81 +23,73 @@
   <a href="README.it.md">Italiano</a>
 </p>
 
-Xquik은 세계에서 가장 빠르고 저렴한 X(Twitter) 스크레이퍼 서비스이며, 가장
-완전한 X 데이터를 제공합니다. REST, SDK, MCP, Apify로 게시물을 검색하고
-데이터를 내보내며 계정을 모니터링하세요. Xquik은 필터에 맞고 중복되지 않은 결과를 전달했을 때만 요금을 받습니다.
+<!-- trust:win:start -->
 
-> Xquik is an independent third-party service. Not affiliated with X Corp.
-> "Twitter" and "X" are trademarks of X Corp.
+2026-10-15 측정에서 Xquik X Tweet Scraper는 초당 트윗 170개를 읽었고 1,000개당 $0.155였습니다. 경쟁 Actor 4개 중 가장 빠른 것은 초당 12.5개, 가장 저렴한 것은 1,000개당 $0.173였습니다. [각 실행 비교하기](https://xquik.com/benchmarks#benchmark-x-tweet-scraper).
 
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://youtu.be/4UOSpoOoC3Y?t=367">
-        <img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" alt="Framer connects Xquik MCP to coding agents" width="720">
-      </a>
-      <br>
-      <strong>Framer demo</strong>
-      <br>
-      <sub>Watch <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Connect Framer to Claude Code, Codex, Cursor, and more</a> at 6:07 for the Xquik MCP connection.</sub>
-    </td>
-  </tr>
-</table>
+<!-- trust:win:end -->
+
+## Skill 설치하기
+
+기본 Skill을 설치하세요.
+
+```bash
+bunx skills@1.5.3 add Xquik-dev/x-twitter-scraper
+```
+
+추가하기 전에 shadcn 등록 항목을 확인하세요.
+
+```bash
+bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
+bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
+```
+
+앱 코드를 공식 X API에서 옮기려면 [X API 대안 Skill](https://github.com/Xquik-dev/x-api)을 추가하세요.
+
+```bash
+bunx skills@1.5.3 add Xquik-dev/x-api
+```
+
+### LobeHub
+
+LobeHub에 로그인하고 두 Skill을 설치한 뒤 확인하세요.
+
+```bash
+lh login
+lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/x-twitter-scraper
+lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-mcp
+lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-social-research
+lh skill list --source market
+```
+
+### Codex
+
+마켓플레이스를 추가하고 플러그인을 설치해 확인한 뒤 로그인하세요.
+
+```bash
+codex plugin marketplace add Xquik-dev/x-twitter-scraper
+codex plugin add x-twitter-scraper@x-twitter-scraper
+codex plugin list
+codex mcp login xquik
+```
+
+플러그인은 호스팅 MCP 서버를 `xquik`라는 이름으로 추가합니다. `codex mcp login xquik`는 브라우저를 한 번 열어 로그인합니다. Codex 앱에서는 대신 Authenticate를 선택하세요. API 키를 쓰려면 [Codex API 키 단계](https://docs.xquik.com/mcp/overview#codex-api-key-authentication)를 따르세요.
+
+### Gemini CLI
+
+저장소를 확인한 뒤 Skill을 설치하고 확인하세요.
+
+```bash
+gemini skills install https://github.com/Xquik-dev/x-twitter-scraper.git \
+  --path skills
+gemini skills list
+```
+
+## 첫 요청 보내기
 
 공식 X 개발자 계정은 필요하지 않습니다. 지원되는 수집 경로에는 X 계정을 연결하거나
 사용할 필요도 없습니다. Xquik API 키만 사용합니다. 비공개 읽기와 X 작업에는 연결된
 X 계정이 필요합니다.
-
-<!-- trust:start -->
-
-## 신뢰와 사용 현황
-
-[![Twitter API package downloads](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fdownloads.json)](https://xquik.com/trust#downloads)
-[![Twitter scraper users on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-users.json)](https://apify.com/xquik)
-[![Twitter scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
-[![Tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
-[![Xquik Twitter API accounts](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Faccounts.json)](https://xquik.com/trust#accounts)
-[![Twitter Skill installs](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskill-installs.json)](https://xquik.com/trust#skill-installs)
-[![Xquik verified revenue on TrustMRR](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frevenue.json)](https://trustmrr.com/startup/xquik)
-[![Twitter API p99 server read time](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Frest-p99.json)](https://xquik.com/trust#speed)
-[![Xquik GitHub stars](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fgithub-stars.json)](https://github.com/Xquik-dev)
-[![x-developer downloads on npm](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fnpm-x-developer.json)](https://www.npmjs.com/package/x-developer)
-[![x-twitter-scraper Skill installs on skills.sh](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskills-x-twitter-scraper.json)](https://skills.sh/xquik-dev/x-twitter-scraper)
-[![x-scraper downloads on ClawHub](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fclawhub-x-scraper.json)](https://clawhub.ai/xquik/skills/x-scraper)
-[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13731/badge)](https://www.bestpractices.dev/projects/13731)
-
-- Xquik의 Twitter API 패키지는 npm, PyPI, RubyGems, NuGet, Packagist, Terraform에서 53,000회 이상 다운로드되었습니다 ([출처](https://xquik.com/trust#downloads)) <!-- trust:downloads 53547 -->
-- Apify에 있는 Xquik의 Twitter 스크레이퍼 Actor 사용자는 9,500명 이상입니다 ([출처](https://apify.com/xquik)) <!-- trust:apify-users 9595 -->
-- Apify에 있는 Xquik의 Twitter 스크레이퍼 Actor는 6,700,000회 이상 실행되었습니다 ([출처](https://apify.com/xquik)) <!-- trust:apify-runs 6765249 -->
-- X Tweet Scraper는 Apify 리뷰 16개에서 5점 만점에 4.66점입니다 ([출처](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
-- xquik.com 계정은 4,000개 이상입니다 ([출처](https://xquik.com/trust#accounts)) <!-- trust:accounts 4073 -->
-- Xquik의 Twitter Skill은 skills.sh에서 1,600회 이상 설치되었습니다 ([출처](https://xquik.com/trust#skill-installs)) <!-- trust:skill-installs 1617 -->
-- TrustMRR가 확인한 매출은 $39,000+입니다 ([출처](https://trustmrr.com/startup/xquik)) <!-- trust:revenue 39784 -->
-- 실패한 읽기를 포함한 최근 7일 REST API 서버 읽기 시간의 p99는 13.2 s입니다 ([출처](https://xquik.com/trust#speed)) <!-- trust:rest-p99 13194 -->
-- Xquik 저장소 전체의 GitHub 스타는 380개 이상입니다 ([출처](https://github.com/Xquik-dev)) <!-- trust:github-stars 383 -->
-- x-developer는 npm에서 9,900회 이상 다운로드되었습니다 ([출처](https://www.npmjs.com/package/x-developer)) <!-- trust:npm-x-developer 9947 -->
-- 이 저장소의 Skill은 skills.sh에서 1,500회 이상 설치되었습니다 ([출처](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1530 -->
-- x-scraper는 ClawHub에서 1,700회 이상 다운로드되었습니다 ([출처](https://clawhub.ai/xquik/skills/x-scraper)) <!-- trust:clawhub-x-scraper 1706 -->
-- 이 저장소는 OpenSSF Best Practices passing 기준을 충족합니다 ([출처](https://www.bestpractices.dev/projects/13731)) <!-- trust:openssf-x-twitter-scraper 1 -->
-
-2026-10-25에 확인했습니다. 각 숫자의 날짜와 출처는 [xquik.com/trust](https://xquik.com/trust) 또는 [JSON](https://xquik.com/trust.json)에서 볼 수 있습니다.
-
-<!-- trust:end -->
-
-## Xquik이 제공하는 기능
-
-| 필요한 작업 | Xquik 사용 방법 |
-| --- | --- |
-| 직접 읽기 | 게시물 ID, URL, 사용자 이름, 검색어를 보내고 구조화된 JSON을 받습니다. |
-| 대량 데이터 | 지원되는 23개 데이터 세트 유형을 제한된 작업으로 실행합니다. |
-| 필터 | 날짜, 언어, 작성자, 미디어, 반응 수로 전달 전에 필터링합니다. |
-| 작업 예상치 | 작업을 만들기 전에 예상 사용량을 확인합니다. |
-| 파일 내보내기 | CSV, JSON, Markdown, PDF, TXT, XLSX를 다운로드합니다. |
-| 모니터링 | 계정과 키워드 이벤트를 감지하고 서명된 webhook으로 보냅니다. |
-| AI 에이전트 | 호스팅 MCP 서버와 설치형 Skill을 사용합니다. |
-| X 작업 | X 계정을 연결하고 게시물, DM, 프로필 변경을 확인합니다. |
-
-## 첫 요청 보내기
 
 [Xquik 대시보드](https://dashboard.xquik.com/en/account?tab=api-keys)에서 API
 키를 만드세요. 키를 `XQUIK_API_KEY`로 저장한 뒤 결과 수를 제한한 검색을 실행합니다.
@@ -141,13 +140,58 @@ type SearchResponse = {
 `has_next_page`가 `true`인 동안 계속 요청하세요. 필터 결과가 빈 페이지에도 다음
 페이지가 있을 수 있습니다.
 
-## Xquik을 선택하는 이유
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://youtu.be/4UOSpoOoC3Y?t=367">
+        <img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" alt="Framer connects Xquik MCP to coding agents" width="720">
+      </a>
+      <br>
+      <strong>Framer demo</strong>
+      <br>
+      <sub>Watch <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Connect Framer to Claude Code, Codex, Cursor, and more</a> at 6:07 for the Xquik MCP connection.</sub>
+    </td>
+  </tr>
+</table>
 
-Xquik은 필터가 많은 작업에 적합합니다. 전달된 결과를 기준으로 요금이 부과됩니다.
-서버 필터로 불필요한 결과를 줄일 수 있습니다.
+<!-- trust:start -->
 
-필터, 내보내기, 모니터, webhook, 여러 클라이언트가 필요하면 Xquik이 알맞습니다.
-X 고유 계약이 필요하면 공식 X API가 알맞습니다.
+## 벤치마크와 사용 현황
+
+[![x-twitter-scraper Skill installs on skills.sh](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fskills-x-twitter-scraper.json)](https://skills.sh/xquik-dev/x-twitter-scraper)
+[![X (Twitter) scraper users on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-users.json)](https://apify.com/xquik)
+[![X (Twitter) scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
+[![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
+
+- 이 저장소의 Skill은 skills.sh에서 1,500회 이상 설치되었습니다 ([출처](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1544 -->
+- Apify에 있는 Xquik의 X(Twitter) 스크레이퍼 Actor 사용자는 11,000명 이상입니다 ([출처](https://apify.com/xquik)) <!-- trust:apify-users 11846 -->
+- Apify에 있는 Xquik의 X(Twitter) 스크레이퍼 Actor는 8,400,000회 이상 실행되었습니다 ([출처](https://apify.com/xquik)) <!-- trust:apify-runs 8467303 -->
+- X Tweet Scraper는 Apify 리뷰 16개에서 5점 만점에 4.66점입니다 ([출처](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
+
+2026-11-08에 확인했습니다. 각 숫자의 날짜와 출처는 [xquik.com/benchmarks](https://xquik.com/benchmarks) 또는 [JSON](https://xquik.com/trust.json)에서 볼 수 있습니다.
+
+<!-- trust:end -->
+
+## Xquik이 제공하는 기능
+
+| 필요한 작업 | Xquik 사용 방법 |
+| --- | --- |
+| 직접 읽기 | 게시물 ID, URL, 사용자 이름, 검색어를 보내고 구조화된 JSON을 받습니다. |
+| 대량 데이터 | 지원되는 23개 데이터 세트 유형을 제한된 작업으로 실행합니다. |
+| 필터 | 날짜, 언어, 작성자, 미디어, 반응 수로 전달 전에 필터링합니다. |
+| 작업 예상치 | 작업을 만들기 전에 예상 사용량을 확인합니다. |
+| 파일 내보내기 | CSV, JSON, Markdown, PDF, TXT, XLSX를 다운로드합니다. |
+| 모니터링 | 계정과 키워드 이벤트를 감지하고 서명된 webhook으로 보냅니다. |
+| AI 에이전트 | 호스팅 MCP 서버와 설치형 Skill을 사용합니다. |
+| X 작업 | X 계정을 연결하고 게시물, DM, 프로필 변경을 확인합니다. |
+
+## 요금이 부과되는 대상
+
+Xquik은 필터에 맞고 중복되지 않은 결과를 전달했을 때만 요금을 받습니다.
+서버 필터가 과금 전에 불필요한 트윗을 제거합니다.
+대량 작업 전에 예상 사용량을 확인할 수 있습니다.
+
+필터, 내보내기, 모니터, webhook, 클라이언트를 1개 서비스로 사용합니다.
 
 ## 알맞은 흐름 선택하기
 
@@ -440,62 +484,6 @@ Xquik은 사용할 수 있는 데이터만 반환합니다. 누락된 필드를 
 
 규제 대상이거나 민감하거나 판단이 어려운 작업은 법률 전문가에게 문의하세요.
 
-## Skill 설치하기
-
-기본 Skill을 설치하세요.
-
-```bash
-bunx skills@1.5.3 add Xquik-dev/x-twitter-scraper
-```
-
-추가하기 전에 shadcn 등록 항목을 확인하세요.
-
-```bash
-bunx shadcn@4.18.0 view Xquik-dev/x-twitter-scraper/x-twitter-scraper
-bunx shadcn@4.18.0 add Xquik-dev/x-twitter-scraper/x-twitter-scraper
-```
-
-앱 코드를 공식 X API에서 옮기려면 [X API 대안 Skill](https://github.com/Xquik-dev/x-api)을 추가하세요.
-
-```bash
-bunx skills@1.5.3 add Xquik-dev/x-api
-```
-
-### LobeHub
-
-LobeHub에 로그인하고 두 Skill을 설치한 뒤 확인하세요.
-
-```bash
-lh login
-lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/x-twitter-scraper
-lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-mcp
-lh skill install https://github.com/Xquik-dev/x-twitter-scraper/tree/master/skills/xquik-social-research
-lh skill list --source market
-```
-
-### Codex
-
-마켓플레이스를 추가하고 플러그인을 설치해 확인한 뒤 로그인하세요.
-
-```bash
-codex plugin marketplace add Xquik-dev/x-twitter-scraper
-codex plugin add x-twitter-scraper@x-twitter-scraper
-codex plugin list
-codex mcp login xquik
-```
-
-플러그인은 호스팅 MCP 서버를 `xquik`라는 이름으로 추가합니다. `codex mcp login xquik`는 브라우저를 한 번 열어 로그인합니다. Codex 앱에서는 대신 Authenticate를 선택하세요. API 키를 쓰려면 [Codex API 키 단계](https://docs.xquik.com/mcp/overview#codex-api-key-authentication)를 따르세요.
-
-### Gemini CLI
-
-저장소를 확인한 뒤 Skill을 설치하고 확인하세요.
-
-```bash
-gemini skills install https://github.com/Xquik-dev/x-twitter-scraper.git \
-  --path skills
-gemini skills list
-```
-
 ## SDK와 도구
 
 프로젝트에 맞는 SDK나 도구를 사용하세요.
@@ -524,11 +512,6 @@ gemini skills list
 - [보안 가이드](skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
 - [API 비교](skills/x-twitter-scraper/references/compare-faq.md)
 - [영문 전체 README](README.md)
-
-## 계약 확인일
-
-이 README는 2026-08-22에 실시간 OpenAPI 및 문서와 대조했습니다. 가격, 제한,
-버전, 개수는 사용 전에 다시 확인하세요.
 
 ## 라이선스
 
