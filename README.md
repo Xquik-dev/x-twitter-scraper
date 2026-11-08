@@ -190,6 +190,8 @@ Checked on 2026-11-08. See each number with its date & source on [xquik.com/benc
 
 <!-- trust:end -->
 
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13731/badge)](https://www.bestpractices.dev/projects/13731)
+
 ## What you pay for
 
 Xquik bills only delivered, unique, filter-matching results.
