@@ -25,7 +25,7 @@ Xquik è indipendente e non è affiliato a X Corp.
 
 <!-- trust:win:start -->
 
-Il 2026-10-15, Xquik X Tweet Scraper ha letto 170 tweet al secondo a $0,155 per 1.000. Il più veloce di 4 Actor rivali ha letto 12,5 al secondo. Il più economico costava $0,173 per 1.000. [Confronta ogni esecuzione](https://xquik.com/benchmarks#benchmark-x-tweet-scraper).
+Il 2026-10-15, Xquik X Tweet Scraper ha letto 170 tweet al secondo a 0,155 $ per 1.000. Il più veloce di 4 Actor rivali ha letto 12,5 al secondo. Il più economico costava 0,173 $ per 1.000. [Confronta ogni esecuzione](https://xquik.com/benchmarks#benchmark-x-tweet-scraper).
 
 <!-- trust:win:end -->
 
@@ -166,12 +166,12 @@ filtrata vuota può avere una pagina successiva.
 [![X (Twitter) scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
 [![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
 
-- 1500+ installazioni degli Skill di questo repository su skills.sh ([fonte](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1543 -->
-- 11.000+ utenti degli Actor di scraping X (Twitter) di Xquik su Apify ([fonte](https://apify.com/xquik)) <!-- trust:apify-users 11550 -->
-- 8.200.000+ esecuzioni degli Actor di scraping X (Twitter) di Xquik su Apify ([fonte](https://apify.com/xquik)) <!-- trust:apify-runs 8292191 -->
+- 1500+ installazioni degli Skill di questo repository su skills.sh ([fonte](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1544 -->
+- 11.000+ utenti degli Actor di scraping X (Twitter) di Xquik su Apify ([fonte](https://apify.com/xquik)) <!-- trust:apify-users 11846 -->
+- 8.400.000+ esecuzioni degli Actor di scraping X (Twitter) di Xquik su Apify ([fonte](https://apify.com/xquik)) <!-- trust:apify-runs 8467303 -->
 - 4,66 su 5 per X Tweet Scraper da 16 recensioni su Apify ([fonte](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
 
-Verificato il 2026-11-07. Ogni numero con data e fonte è su [xquik.com/benchmarks](https://xquik.com/benchmarks) o in [JSON](https://xquik.com/trust.json).
+Verificato il 2026-11-08. Ogni numero con data e fonte è su [xquik.com/benchmarks](https://xquik.com/benchmarks) o in [JSON](https://xquik.com/trust.json).
 
 <!-- trust:end -->
 

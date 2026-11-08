@@ -157,12 +157,12 @@ type SearchResponse = {
 [![X (Twitter) scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
 [![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
 
-- このリポジトリの Skill は skills.sh で 1,500 回以上インストールされています ([出典](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1543 -->
-- Apify にある Xquik の X（Twitter）スクレイパー Actor の利用者は 11,000 人以上です ([出典](https://apify.com/xquik)) <!-- trust:apify-users 11550 -->
-- Apify にある Xquik の X（Twitter）スクレイパー Actor は 8,200,000 回以上実行されています ([出典](https://apify.com/xquik)) <!-- trust:apify-runs 8292191 -->
+- このリポジトリの Skill は skills.sh で 1,500 回以上インストールされています ([出典](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1544 -->
+- Apify にある Xquik の X（Twitter）スクレイパー Actor の利用者は 11,000 人以上です ([出典](https://apify.com/xquik)) <!-- trust:apify-users 11846 -->
+- Apify にある Xquik の X（Twitter）スクレイパー Actor は 8,400,000 回以上実行されています ([出典](https://apify.com/xquik)) <!-- trust:apify-runs 8467303 -->
 - X Tweet Scraper は Apify で 16 件のレビューから 5 点中 4.66 点です ([出典](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
 
-2026-11-07 に確認しました。各数値の日付と出典は [xquik.com/benchmarks](https://xquik.com/benchmarks) か [JSON](https://xquik.com/trust.json) で確認できます。
+2026-11-08 に確認しました。各数値の日付と出典は [xquik.com/benchmarks](https://xquik.com/benchmarks) か [JSON](https://xquik.com/trust.json) で確認できます。
 
 <!-- trust:end -->
 

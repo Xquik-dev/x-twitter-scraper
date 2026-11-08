@@ -1,8 +1,8 @@
-# X (Twitter) Scraper API & Twitter MCP Server by Xquik
+# X (Twitter) Scraper API & MCP Server by Xquik
 
 Use this X (Twitter) scraper by Xquik to search tweets & posts.
 Export profiles, followers & replies through REST, MCP, SDKs, CLI, webhooks & Apify.
-It's a Twitter API alternative. Public reads need no X developer account.
+It's an X (Twitter) API alternative. Public reads need no X (Twitter) developer account.
 
 Xquik is the world's fastest and cheapest X (Twitter) scraper service with the most complete X (Twitter) data.
 Most other Apify Actors charge before filtering or deduplication.
@@ -96,7 +96,7 @@ The command discovers `x-twitter-scraper`, `xquik-mcp`, and `xquik-social-resear
 ## Scrape tweets with the Twitter scraper API
 
 You need an `XQUIK_API_KEY` for the request below. Public reads need no official
-X developer account or connected X account.
+X (Twitter) developer account or connected X account.
 
 Private reads and X account actions require a connected X account. Never send
 an X password, cookie, session export, or 2FA code to Xquik or an agent.
@@ -181,12 +181,12 @@ or [open the complete documentation](https://docs.xquik.com).
 [![X (Twitter) scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
 [![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
 
-- 1,500+ installs of this repo's Skills on skills.sh ([source](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1543 -->
-- 11,000+ users of Xquik's X (Twitter) scraper Actors on Apify ([source](https://apify.com/xquik)) <!-- trust:apify-users 11550 -->
-- 8,200,000+ runs of Xquik's X (Twitter) scraper Actors on Apify ([source](https://apify.com/xquik)) <!-- trust:apify-runs 8292191 -->
+- 1,500+ installs of this repo's Skills on skills.sh ([source](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1544 -->
+- 11,000+ users of Xquik's X (Twitter) scraper Actors on Apify ([source](https://apify.com/xquik)) <!-- trust:apify-users 11846 -->
+- 8,400,000+ runs of Xquik's X (Twitter) scraper Actors on Apify ([source](https://apify.com/xquik)) <!-- trust:apify-runs 8467303 -->
 - 4.66 of 5 for the X Tweet Scraper from 16 Apify reviews ([source](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
 
-Checked on 2026-11-07. See each number with its date & source on [xquik.com/benchmarks](https://xquik.com/benchmarks) or as [JSON](https://xquik.com/trust.json).
+Checked on 2026-11-08. See each number with its date & source on [xquik.com/benchmarks](https://xquik.com/benchmarks) or as [JSON](https://xquik.com/trust.json).
 
 <!-- trust:end -->
 
@@ -213,13 +213,13 @@ An estimate shows usage before each bulk job.
 | --- | --- |
 | Tweets | Lookup, batch lookup, search, timelines, replies, quotes, threads, likes, reposts, and media |
 | Profiles | Lookup, batch lookup, search, followers, following, relationships, account details, and availability |
-| Other X data | Lists, communities, trends, Spaces, articles, bookmarks, notifications, and supported feeds |
+| Other X (Twitter) data | Lists, communities, trends, Spaces, articles, bookmarks, notifications, and supported feeds |
 | AI analysis | Sentiment, brand mentions, news classification, market signals, viral score, and your own labels, at 2 credits per analyzed post |
 | Bulk work | 23 extraction types, estimates, result caps, multi-target jobs, cursor pages, and exports |
 | Monitoring | Account monitors, keyword monitors, stored events, and signed webhooks |
 | Delivery | JSON, CSV, Markdown, PDF, TXT, XLSX, API pages, and webhook events |
 | Integrations | REST, MCP, Skills, typed SDKs, CLI, Apify Actors, n8n, Zapier, Make, and Pipedream |
-| X actions | Posts, replies, deletes, likes, reposts, follows, DMs, media, profiles, and communities |
+| X (Twitter) actions | Posts, replies, deletes, likes, reposts, follows, DMs, media, profiles, and communities |
 | Support | Create tickets, send messages, upload and download attachments, and poll processing status |
 
 Deleted, protected, restricted, or unavailable content may stay inaccessible.
@@ -323,7 +323,7 @@ const page = await client.x.tweets.search({
 The [Python SDK](https://github.com/Xquik-dev/x-twitter-scraper-python) exposes
 the same resource layout. See all [SDKs and tools](#sdks-and-tools).
 
-### Twitter MCP server
+### X (Twitter) MCP server
 
 Connect your MCP client to `https://xquik.com/mcp`. Call `execute` with this code.
 
@@ -391,26 +391,26 @@ reports 1 user's experience. It does not prove the same result for everyone.
 
 | Actor | Exact review | Reviewer and review date | Rating |
 | --- | --- | --- | ---: |
-| X Tweet Scraper | "When you use the filters properly, this is the best tweet scraper api, thank you" | Tovuk (Tovuk), 2026-08-01. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
-| X Tweet Scraper | "okeee" | offbeat_yautia, 2026-06-29. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
-| X Tweet Scraper | "great. pretty good price tho" | chestnut_trademark, 2026-06-23. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
-| X Tweet Scraper | "amazing tool" | baba_web, 2026-06-23. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
-| X Tweet Scraper | "good price, speed, and given data. The best i used yet tbh scraping by single link this is amazing!" | dimakuncik, 2026-06-15. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
-| X Tweet Scraper | "good" | rural_washer, 2026-04-13. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
-| X Tweet Scraper | "Worked very well for me. used all the balance already :)" | personable_detail, 2026-04-11. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
-| X Tweet Scraper | "Good one. thank you" | intense_broker, 2026-04-11. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
-| X Tweet Scraper | "Seems its the cheapest one and still better than all I used before" | furkkann1, 2026-04-11. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
-| X Tweet Scraper | "Amazing tools and pretty cheap" | citrine_owl, 2026-04-11. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
-| X Follower Scraper | "thanks. Surely I ll subscribe when free usage is ended" | personable_detail, 2026-04-23. [Source](https://apify.com/xquik/x-follower-scraper/reviews) | 5/5 |
-| X Follower Scraper | "thank you" | intense_broker, 2026-04-23. [Source](https://apify.com/xquik/x-follower-scraper/reviews) | 5/5 |
-| X Follower Scraper | "using for my job. recommended" | furkkann1, 2026-04-23. [Source](https://apify.com/xquik/x-follower-scraper/reviews) | 5/5 |
-| X Follower Scraper | "works well" | rural_washer, 2026-04-23. [Source](https://apify.com/xquik/x-follower-scraper/reviews) | 5/5 |
-| X Reply Scraper | "thank you. I got even more than I need :)" | Twittermartyr, 2026-07-31. [Source](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
-| X Reply Scraper | "I ve been using many of the scrapers, I got better results with this one." | darthraper, 2026-07-31. [Source](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
-| X Reply Scraper | "Recommended. Thank you for the free usage, working." | furkkann1, 2026-07-31. [Source](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
-| X Reply Scraper | "We are able to get much more replies comparing the other scrapers, thank you!" | Tovuk (Tovuk), 2026-07-31. [Source](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
+| X (Twitter) Tweet Scraper | "When you use the filters properly, this is the best tweet scraper api, thank you" | Tovuk (Tovuk), 2026-08-01. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
+| X (Twitter) Tweet Scraper | "okeee" | offbeat_yautia, 2026-06-29. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
+| X (Twitter) Tweet Scraper | "great. pretty good price tho" | chestnut_trademark, 2026-06-23. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
+| X (Twitter) Tweet Scraper | "amazing tool" | baba_web, 2026-06-23. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
+| X (Twitter) Tweet Scraper | "good price, speed, and given data. The best i used yet tbh scraping by single link this is amazing!" | dimakuncik, 2026-06-15. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
+| X (Twitter) Tweet Scraper | "good" | rural_washer, 2026-04-13. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
+| X (Twitter) Tweet Scraper | "Worked very well for me. used all the balance already :)" | personable_detail, 2026-04-11. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
+| X (Twitter) Tweet Scraper | "Good one. thank you" | intense_broker, 2026-04-11. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
+| X (Twitter) Tweet Scraper | "Seems its the cheapest one and still better than all I used before" | furkkann1, 2026-04-11. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
+| X (Twitter) Tweet Scraper | "Amazing tools and pretty cheap" | citrine_owl, 2026-04-11. [Source](https://apify.com/xquik/x-tweet-scraper/reviews) | 5/5 |
+| X (Twitter) Followers Scraper | "thanks. Surely I ll subscribe when free usage is ended" | personable_detail, 2026-04-23. [Source](https://apify.com/xquik/x-follower-scraper/reviews) | 5/5 |
+| X (Twitter) Followers Scraper | "thank you" | intense_broker, 2026-04-23. [Source](https://apify.com/xquik/x-follower-scraper/reviews) | 5/5 |
+| X (Twitter) Followers Scraper | "using for my job. recommended" | furkkann1, 2026-04-23. [Source](https://apify.com/xquik/x-follower-scraper/reviews) | 5/5 |
+| X (Twitter) Followers Scraper | "works well" | rural_washer, 2026-04-23. [Source](https://apify.com/xquik/x-follower-scraper/reviews) | 5/5 |
+| X (Twitter) Replies Scraper | "thank you. I got even more than I need :)" | Twittermartyr, 2026-07-31. [Source](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
+| X (Twitter) Replies Scraper | "I ve been using many of the scrapers, I got better results with this one." | darthraper, 2026-07-31. [Source](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
+| X (Twitter) Replies Scraper | "Recommended. Thank you for the free usage, working." | furkkann1, 2026-07-31. [Source](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
+| X (Twitter) Replies Scraper | "We are able to get much more replies comparing the other scrapers, thank you!" | Tovuk (Tovuk), 2026-07-31. [Source](https://apify.com/xquik/x-reply-scraper/reviews) | 5/5 |
 
-Apify lists every review, including lower ratings. Read all reviews for [X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper/reviews), [X Follower Scraper](https://apify.com/xquik/x-follower-scraper/reviews) & [X Reply Scraper](https://apify.com/xquik/x-reply-scraper/reviews).
+Apify lists every review, including lower ratings. Read all reviews of the X (Twitter) [Tweet](https://apify.com/xquik/x-tweet-scraper/reviews), [Followers](https://apify.com/xquik/x-follower-scraper/reviews) & [Replies](https://apify.com/xquik/x-reply-scraper/reviews) Scrapers.
 
 <!-- END APIFY TESTIMONIALS -->
 
@@ -525,9 +525,9 @@ stable IDs. Have a lawful purpose and a deletion plan for collected data.
 
 | Option | Strong fit | Main tradeoff |
 | --- | --- | --- |
-| Xquik | Filtered X data, exports, monitors, webhooks, agents, and X actions | Uses Xquik credits and documented limits |
+| Xquik | Filtered X (Twitter) data, exports, monitors, webhooks, agents, and X (Twitter) actions | Uses Xquik credits and documented limits |
 | Official X API | Official platform contract and first-party support | Requires an official developer account and resource billing |
-| Maintained X data API | Focused lookups through a vendor key | Coverage, schemas, filters, and billing vary |
+| Maintained X (Twitter) data API | Focused lookups through a vendor key | Coverage, schemas, filters, and billing vary |
 | Apify Actor | Console runs, schedules, datasets, and many integrations | Actor and platform charges can both apply |
 | General scraper | Flexible HTML or browser retrieval | You own parsing, pagination, schema drift, and cleanup |
 | Do it yourself | Full control over code and storage | You own browser state, pacing, proxies, breakage, and maintenance |
@@ -539,7 +539,7 @@ Compare providers with the same query, filters, result limit & delivery format.
 
 ### Do I need proxies, cookies, or browser automation?
 
-No. Your client calls Xquik. Never send X cookies, passwords, or 2FA codes.
+No. Your client calls Xquik. Never send X (Twitter) cookies, passwords, or 2FA codes.
 
 ### How does pagination work?
 
@@ -557,9 +557,9 @@ follow the suggested fallback. Retry only documented transient failures.
 Yes. Connect an X account first. Confirm the account, target, payload, and cost.
 Use idempotency keys. Poll ambiguous writes before retrying.
 
-### Is scraping X data legal?
+### Is scraping X (Twitter) data legal?
 
-Web scraping is legal as a technology. Collecting openly accessible X data is
+Web scraping is legal as a technology. Collecting openly accessible X (Twitter) data is
 generally legal when the method and later use follow applicable law. Check
 personal data rules, copyright, binding terms, access controls, and local law.
 Do not bypass login controls. Collect only what you need and delete it on
@@ -571,14 +571,14 @@ Get qualified advice for regulated, sensitive, or unclear work.
 
 | Tool | Install |
 | --- | --- |
-| [Twitter API TypeScript SDK](https://github.com/Xquik-dev/x-twitter-scraper-typescript) | `bun add x-twitter-scraper` |
-| [Twitter API Python SDK](https://github.com/Xquik-dev/x-twitter-scraper-python) | `pip install x_twitter_scraper` |
-| [Twitter API Go SDK](https://github.com/Xquik-dev/x-twitter-scraper-go) | `go get github.com/Xquik-dev/x-twitter-scraper-go` |
-| [Twitter API Ruby SDK](https://github.com/Xquik-dev/x-twitter-scraper-ruby) | `gem "x-twitter-scraper"` |
-| [Twitter API Java SDK](https://github.com/Xquik-dev/x-twitter-scraper-java) | `com.xquik.api:x-twitter-scraper-java` |
-| [Twitter API Kotlin SDK](https://github.com/Xquik-dev/x-twitter-scraper-kotlin) | `com.xquik.api:x-twitter-scraper-kotlin` |
-| [Twitter API C# SDK for .NET](https://github.com/Xquik-dev/x-twitter-scraper-csharp) | `dotnet add package XTwitterScraper` |
-| [Twitter API PHP SDK](https://github.com/Xquik-dev/x-twitter-scraper-php) | `composer require xquik/x-twitter-scraper` |
+| [X (Twitter) API TypeScript SDK](https://github.com/Xquik-dev/x-twitter-scraper-typescript) | `bun add x-twitter-scraper` |
+| [X (Twitter) API Python SDK](https://github.com/Xquik-dev/x-twitter-scraper-python) | `pip install x_twitter_scraper` |
+| [X (Twitter) API Go SDK](https://github.com/Xquik-dev/x-twitter-scraper-go) | `go get github.com/Xquik-dev/x-twitter-scraper-go` |
+| [X (Twitter) API Ruby SDK](https://github.com/Xquik-dev/x-twitter-scraper-ruby) | `gem "x-twitter-scraper"` |
+| [X (Twitter) API Java SDK](https://github.com/Xquik-dev/x-twitter-scraper-java) | `com.xquik.api:x-twitter-scraper-java` |
+| [X (Twitter) API Kotlin SDK](https://github.com/Xquik-dev/x-twitter-scraper-kotlin) | `com.xquik.api:x-twitter-scraper-kotlin` |
+| [X (Twitter) API C# SDK for .NET](https://github.com/Xquik-dev/x-twitter-scraper-csharp) | `dotnet add package XTwitterScraper` |
+| [X (Twitter) API PHP SDK](https://github.com/Xquik-dev/x-twitter-scraper-php) | `composer require xquik/x-twitter-scraper` |
 | [Twitter CLI & X CLI](https://github.com/Xquik-dev/x-twitter-scraper-cli) | `go install github.com/Xquik-dev/x-twitter-scraper-cli/cmd/x-twitter-scraper@latest` |
 | [Terraform provider for X API monitors](https://github.com/Xquik-dev/terraform-provider-x-twitter-scraper) | [Terraform Registry](https://registry.terraform.io/providers/Xquik-dev/x-twitter-scraper/latest) |
 | [TweetClaw, the OpenClaw Twitter plugin](https://github.com/Xquik-dev/tweetclaw) | `openclaw plugins install clawhub:@xquik/tweetclaw` |
@@ -589,7 +589,7 @@ Get qualified advice for regulated, sensitive, or unclear work.
 | [Prefect Twitter search tasks](https://github.com/Xquik-dev/prefect-xquik) | `pip install prefect-xquik` |
 | [X API migration Skill](https://github.com/Xquik-dev/x-api) | `npx skills@1.7.0 add Xquik-dev/x-api` |
 | [Twitter advanced search operators](https://github.com/Xquik-dev/x-twitter-advanced-search) | Reference with tested examples |
-| [Twitter API documentation source](https://github.com/Xquik-dev/xquik-docs) | Published at [docs.xquik.com](https://docs.xquik.com) |
+| [X (Twitter) API documentation source](https://github.com/Xquik-dev/xquik-docs) | Published at [docs.xquik.com](https://docs.xquik.com) |
 
 ## Documentation and support
 
