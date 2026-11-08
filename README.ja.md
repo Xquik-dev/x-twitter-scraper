@@ -209,7 +209,7 @@ Xquik が課金するのは、配信した結果のうち、重複がなくフ�
 
 ## パッケージと MCP の契約
 
-`x-developer` v2.8.0 には Skills とプラグインのメタデータが含まれます。
+`x-developer` v2.8.1 には Skills とプラグインのメタデータが含まれます。
 ホスト型 MCP は `docs`、`search`、`execute`、`whoami` を提供します。ライブ OpenAPI は
 公開されているすべての REST 操作を定義します。
 

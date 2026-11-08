@@ -208,7 +208,7 @@ Xquik 只对已交付、不重复且符合过滤条件的结果收费。服务�
 
 ## 软件包与 MCP 合同
 
-`x-developer` v2.8.0 包含 Skills 和插件元数据。托管 MCP 提供 `docs`、
+`x-developer` v2.8.1 包含 Skills 和插件元数据。托管 MCP 提供 `docs`、
 `search`、`execute` 和 `whoami`。实时 OpenAPI 合同记录了每个公开的 REST 操作。
 
 `x-developer` 包含 Skill 和插件。独立的 `x-twitter-scraper` 软件包是

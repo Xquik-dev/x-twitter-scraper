@@ -217,7 +217,7 @@ Xquik은 필터에 맞고 중복되지 않은 결과를 전달했을 때만 요�
 
 ## 패키지와 MCP 계약
 
-`x-developer` v2.8.0에는 Skills와 플러그인 메타데이터가 포함됩니다. 호스팅
+`x-developer` v2.8.1에는 Skills와 플러그인 메타데이터가 포함됩니다. 호스팅
 MCP는 `docs`, `search`, `execute`, `whoami`를 제공합니다. 실시간 OpenAPI 계약에는
 공개된 모든 REST 작업이 있습니다.
 

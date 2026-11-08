@@ -225,7 +225,7 @@ Filtre, dışa aktarma, izleme, webhook ve istemciler tek hizmette çalışır.
 
 ## Paket ve MCP ayrıntıları
 
-`x-developer` v2.8.0 paketinde Skill'ler ve eklenti meta verileri bulunur.
+`x-developer` v2.8.1 paketinde Skill'ler ve eklenti meta verileri bulunur.
 Xquik'in barındırdığı MCP sunucusunda `docs`, `search`, `execute` ve `whoami`
 araçları vardır. Herkese açık tüm REST işlemleri güncel OpenAPI
 spesifikasyonunda yer alır.
