@@ -8,10 +8,9 @@ avec Claude Code, Codex, Cursor & d'autres outils, à partir de 6:07.
 
 Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
 monde. Ses données X sont les plus complètes. X Quote Tweets Scraper de Xquik
-collecte les posts qui citent des posts X publics, sans cookies X ni connexion.
-La plupart des autres Actors Apify facturent avant de filtrer ou de dédupliquer.
-Xquik facture seulement les résultats livrés, uniques et conformes à vos
-filtres.
+collecte les posts qui citent des posts X publics, sans connexion X. La plupart
+des autres Actors Apify facturent avant de filtrer ou de dédupliquer. Xquik
+facture seulement les résultats livrés, uniques et conformes à vos filtres.
 
 Collez des URL de post ou des ID de post & obtenez toutes les citations que X
 fournit pour chaque post en 1 run. Chaque ligne contient la citation, le profil
@@ -133,8 +132,8 @@ plateforme. Revenez ensuite ici & cliquez sur Try for free.
 3. Réglez `maxItems` pour plafonner les lignes livrées, puis cliquez sur Start.
 4. Téléchargez le dataset en JSON, CSV ou Excel, ou utilisez l'API Apify.
 
-Vous ne saisissez ni cookies X, ni identifiants de connexion, ni clé API, à
-aucune étape. Vous ne transmettez aucun curseur de page d'un run à l'autre.
+Vous ne saisissez ni identifiants de connexion X, ni clé API, à aucune étape.
+Vous ne transmettez aucun curseur de page d'un run à l'autre.
 
 ## Entrée
 
@@ -440,11 +439,10 @@ données dont vous avez besoin.
 
 Les réponses aux questions fréquentes, puis où trouver de l'aide.
 
-### Ai-je besoin de cookies X, d'une clé API ou d'une connexion ?
+### Ai-je besoin d'une connexion X ou d'une clé API ?
 
-Non. X Quote Tweets Scraper de Xquik n'a besoin d'aucun cookie X, d'aucune clé
-API, d'aucune connexion ni d'aucun identifiant. Chaque lecture passe par
-l'infrastructure de Xquik.
+Non. X Quote Tweets Scraper de Xquik n'a besoin ni de connexion X, ni de clé
+API, ni d'identifiants. Chaque lecture passe par l'infrastructure de Xquik.
 
 ### Puis-je scraper les citations de nombreux posts en 1 run ?
 

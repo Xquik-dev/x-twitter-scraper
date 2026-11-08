@@ -959,7 +959,7 @@ cronología de respuestas de ese usuario.
 ### ¿Necesito una clave de API de X o iniciar sesión?
 
 No. No necesitas clave de API de X, inicio de sesión ni credenciales. X Reply
-Scraper de Xquik nunca te pide tu contraseña, tus cookies ni tus tokens de X.
+Scraper de Xquik nunca te pide iniciar sesión en X.
 
 ### ¿Es legal extraer respuestas de X?
 

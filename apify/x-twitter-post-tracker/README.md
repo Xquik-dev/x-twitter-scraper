@@ -21,9 +21,9 @@ with Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X (Twitter) Post Tracker records the public counts
-of posts you pick. It needs no X cookies or login. Run it again later, & each
-row shows what changed. Most other Apify Actors charge before filtering or
-deduplicating. Xquik charges only for delivered, unique results.
+of posts you pick. It needs no X login. Run it again later, & each row shows
+what changed. Most other Apify Actors charge before filtering or deduplicating.
+Xquik charges only for delivered, unique results.
 
 Paste post URLs or Tweet IDs. Each run saves 1 snapshot row per post. A row
 holds views, likes, reposts, replies, quotes & bookmarks at that moment. It also
@@ -126,7 +126,7 @@ back here & press Try for free.
 4. On the next run, pick the first run's dataset in `previousDatasetId`.
 5. Download the dataset as JSON, CSV or Excel, or use the Apify API.
 
-You enter no X cookies, login or API key at any step.
+You enter no X login or API key at any step.
 
 ## Input
 
@@ -409,10 +409,9 @@ diagnostics. Pick the one that matches the data you need.
 
 Answers to common questions, then where to get help.
 
-### Do I need X cookies, an API key or a login?
+### Do I need an X login or an API key?
 
-No. Xquik's X (Twitter) Post Tracker needs no X cookies, API key, login or
-credentials.
+No. Xquik's X (Twitter) Post Tracker needs no X login, API key or credentials.
 
 ### Which dataset do I pick in `previousDatasetId`?
 

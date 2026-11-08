@@ -8,10 +8,10 @@ avec Claude Code, Codex, Cursor & d'autres outils, à partir de 6:07.
 
 Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
 monde. Ses données X sont les plus complètes. X Email Scraper de Xquik récupère
-les e-mails que les comptes publient sur leur propre profil X, sans cookies X ni
-connexion. La plupart des autres Actors Apify facturent avant de filtrer ou de
-dédupliquer. Xquik facture seulement les résultats livrés, uniques et conformes
-à vos filtres.
+les e-mails que les comptes publient sur leur propre profil X, sans connexion X.
+La plupart des autres Actors Apify facturent avant de filtrer ou de dédupliquer.
+Xquik facture seulement les résultats livrés, uniques et conformes à vos
+filtres.
 
 Collez des noms d'utilisateur, scannez les abonnés d'un compte ou recherchez des
 utilisateurs X, & obtenez chaque profil qui publie un e-mail, avec l'e-mail en
@@ -124,8 +124,7 @@ la plateforme. Revenez ensuite ici & cliquez sur Try for free.
 4. Réglez `maxItems` pour plafonner les lignes livrées, puis cliquez sur Start.
 5. Téléchargez le dataset en JSON, CSV ou Excel, ou utilisez l'API Apify.
 
-Vous ne saisissez ni cookies X, ni identifiants de connexion, ni clé API, à
-aucune étape.
+Vous ne saisissez ni identifiants de connexion X, ni clé API, à aucune étape.
 
 ## Entrée
 
@@ -452,11 +451,10 @@ données dont vous avez besoin.
 
 Les réponses aux questions fréquentes, puis où trouver de l'aide.
 
-### Ai-je besoin de cookies X, d'une clé API ou d'une connexion ?
+### Ai-je besoin d'une connexion X ou d'une clé API ?
 
-Non. X Email Scraper de Xquik n'a besoin d'aucun cookie X, d'aucune clé API,
-d'aucune connexion ni d'aucun identifiant. Chaque lecture passe par
-l'infrastructure de Xquik.
+Non. X Email Scraper de Xquik n'a besoin ni de connexion X, ni de clé API, ni
+d'identifiants. Chaque lecture passe par l'infrastructure de Xquik.
 
 ### D'où viennent les e-mails ?
 

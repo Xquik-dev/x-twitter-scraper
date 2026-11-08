@@ -419,10 +419,9 @@ Actor는 `handles` & `usernames`처럼 에이전트가 추측하는 이름도 �
 
 자주 묻는 질문에 먼저 답하고, 이어서 도움받을 곳을 안내합니다.
 
-### X 쿠키, API 키 또는 로그인이 필요한가요?
+### X 로그인이나 API 키가 필요한가요?
 
-아니요. Xquik의 X (Twitter) Monitor는 X 쿠키, API 키, 로그인, 자격 증명이 모두
-필요 없습니다. 모든 확인은 Xquik 인프라에서 실행됩니다.
+아니요. Xquik의 X (Twitter) Monitor는 X 로그인, API 키, 자격 증명이 모두 필요 없습니다. 모든 확인은 Xquik 인프라에서 실행됩니다.
 
 ### Twitter 계정은 어떻게 추적하나요?
 

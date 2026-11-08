@@ -21,8 +21,8 @@ with Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X Quote Tweets Scraper collects the posts that
-quote public X posts, with no X cookies or login. Most other Apify Actors charge
-before filtering or deduplicating. Xquik charges only for delivered, unique,
+quote public X posts, with no X login. Most other Apify Actors charge before
+filtering or deduplicating. Xquik charges only for delivered, unique,
 filter-matching results.
 
 Paste post URLs or Tweet IDs & get every quote X serves for each post in 1 run.
@@ -135,8 +135,8 @@ here & press Try for free.
 3. Set `maxItems` to cap delivered rows, then click Start.
 4. Download the dataset as JSON, CSV or Excel, or use the Apify API.
 
-You enter no X cookies, login or API key at any step. You carry no page cursor
-between runs.
+You enter no X login or API key at any step. You carry no page cursor between
+runs.
 
 ## Input
 
@@ -416,10 +416,10 @@ diagnostics. Pick the one that matches the data you need.
 
 Answers to common questions, then where to get help.
 
-### Do I need X cookies, an API key or a login?
+### Do I need an X login or an API key?
 
-No. Xquik's X Quote Tweets Scraper needs no X cookies, API key, login or
-credentials. Every read runs on Xquik's infrastructure.
+No. Xquik's X Quote Tweets Scraper needs no X login, API key or credentials.
+Every read runs on Xquik's infrastructure.
 
 ### Can I scrape the quotes of many posts in 1 run?
 

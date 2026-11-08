@@ -8,9 +8,9 @@
 
 Xquik, en eksiksiz X verisini sunan, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. Xquik'in X Email Scraper'ı, hesapların kendi X profillerinde
-yayımladığı e-postaları X çerezi veya giriş olmadan alır. Diğer Apify
-Actor'larının çoğu, filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik
-yalnızca teslim edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır.
+yayımladığı e-postaları X girişi olmadan alır. Diğer Apify Actor'larının çoğu,
+filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
+edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır.
 
 Kullanıcı adlarını yapıştır, bir hesabın takipçilerini tara ya da X
 kullanıcılarını ara & e-posta yayımlayan her profili e-posta en başta olacak
@@ -125,7 +125,7 @@ buraya dön & Try for free düğmesine bas.
    düğmesine tıkla.
 5. Veri kümesini JSON, CSV veya Excel olarak indir ya da Apify API'yi kullan.
 
-Hiçbir adımda X çerezi, giriş bilgisi veya API anahtarı girmezsin.
+Hiçbir adımda X giriş bilgisi veya API anahtarı girmezsin.
 
 ## Girdi
 
@@ -450,10 +450,10 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
 
-### X çerezi, API anahtarı veya giriş gerekir mi?
+### X girişi veya API anahtarı gerekir mi?
 
-Hayır. Xquik'in X Email Scraper'ı X çerezi, API anahtarı, giriş veya kimlik
-bilgisi istemez. Her okuma Xquik'in altyapısında çalışır.
+Hayır. Xquik'in X Email Scraper'ı X girişi, API anahtarı veya kimlik bilgisi
+istemez. Her okuma Xquik'in altyapısında çalışır.
 
 ### E-postalar nereden gelir?
 

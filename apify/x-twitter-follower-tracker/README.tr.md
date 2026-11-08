@@ -371,10 +371,10 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
 
-### X çerezi, API anahtarı veya giriş gerekir mi?
+### X girişi veya API anahtarı gerekir mi?
 
-Hayır. Xquik'in X (Twitter) Follower Tracker Actor'ı X çerezi, API anahtarı,
-giriş ya da kimlik bilgisi istemez. Her kontrol Xquik'in altyapısında çalışır.
+Hayır. Xquik'in X (Twitter) Follower Tracker Actor'ı X girişi, API anahtarı ya
+da kimlik bilgisi istemez. Her kontrol Xquik'in altyapısında çalışır.
 
 ### X'te takipçilerimden kimin ayrıldığını görebilir miyim?
 

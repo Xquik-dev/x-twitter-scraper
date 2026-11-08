@@ -936,7 +936,7 @@ delle risposte di quell'utente.
 ### Serve una chiave API X o il login?
 
 No. Non ti servono chiave API X, login o credenziali. X Reply Scraper di Xquik
-non chiede mai la tua password di X, i cookie o i token.
+non chiede mai il tuo login di X.
 
 ### È legale estrarre le risposte di X?
 

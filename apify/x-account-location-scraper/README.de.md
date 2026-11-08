@@ -8,9 +8,9 @@ mit Claude Code, Codex, Cursor & mehr, ab Minute 6:07.
 
 Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
 liefert die vollständigsten X-Daten. X Account Location Scraper von Xquik prüft,
-wo X-Accounts ansässig sind, ohne X-Cookies oder Login. Die meisten anderen
-Apify Actors rechnen ab, bevor sie filtern oder Duplikate entfernen. Xquik
-rechnet nur gelieferte, eindeutige Ergebnisse ab, die zu deinen Filtern passen.
+wo X-Accounts ansässig sind, ohne X-Login. Die meisten anderen Apify Actors
+rechnen ab, bevor sie filtern oder Duplikate entfernen. Xquik rechnet nur
+gelieferte, eindeutige Ergebnisse ab, die zu deinen Filtern passen.
 
 Füge Nutzernamen, Profil-URLs oder Nutzer-IDs ein & erhalte in 1 Run für jeden
 Account die X-Angabe "Account based in". Die Angabe ist die bestmögliche
@@ -120,7 +120,7 @@ Abzug der Plattformnutzung. Komm dann hierher zurück & klicke auf Try for free.
    auf Start.
 4. Lade das Dataset als JSON, CSV oder Excel herunter, oder nutze die Apify-API.
 
-Du gibst in keinem Schritt X-Cookies, einen Login oder einen API-Schlüssel ein.
+Du gibst in keinem Schritt einen X-Login oder einen API-Schlüssel ein.
 
 ## Eingabe
 
@@ -412,11 +412,11 @@ du brauchst.
 
 Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
 
-### Brauche ich X-Cookies, einen API-Schlüssel oder einen Login?
+### Brauche ich einen X-Login oder einen API-Schlüssel?
 
-Nein. X Account Location Scraper von Xquik braucht keine X-Cookies, keinen
-API-Schlüssel, keinen Login oder Zugangsdaten. Jeder Abruf läuft auf der
-Infrastruktur von Xquik.
+Nein. X Account Location Scraper von Xquik braucht keinen X-Login, keinen
+API-Schlüssel & keine Zugangsdaten. Jeder Abruf läuft auf der Infrastruktur von
+Xquik.
 
 ### Zeigt die Angabe, wo der Account-Inhaber wohnt?
 

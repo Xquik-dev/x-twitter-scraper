@@ -8,9 +8,9 @@ con Claude Code, Codex, Cursor & altro, da 6:07.
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo, con
 i dati X più completi. X Account Location Scraper di Xquik controlla dove hanno
-sede gli account X, senza cookie di X né login. La maggior parte degli altri
-Actor Apify fa pagare prima di filtrare o deduplicare. Xquik fa pagare solo i
-risultati consegnati, unici e conformi ai filtri.
+sede gli account X, senza login di X. La maggior parte degli altri Actor Apify
+fa pagare prima di filtrare o deduplicare. Xquik fa pagare solo i risultati
+consegnati, unici e conformi ai filtri.
 
 Incolla nomi utente, URL di profilo o ID utente & ottieni l'etichetta "Posizione
 account" di X per ogni account in 1 esecuzione. L'etichetta è la migliore stima
@@ -119,7 +119,7 @@ l'uso della piattaforma. Poi torna qui & premi Try for free.
 3. Imposta `maxItems` per limitare le righe consegnate, poi fai clic su Start.
 4. Scarica il dataset in JSON, CSV o Excel, oppure usa l'API di Apify.
 
-In nessun passaggio inserisci cookie di X, dati di login o una chiave API.
+In nessun passaggio inserisci dati di login di X o una chiave API.
 
 ## Input
 
@@ -411,10 +411,10 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
 Le risposte alle domande più comuni, poi dove trovare assistenza.
 
-### Servono cookie di X, una chiave API o il login?
+### Servono il login di X o una chiave API?
 
-No. X Account Location Scraper di Xquik non richiede cookie di X, chiave API,
-login o credenziali. Ogni lettura avviene sull'infrastruttura di Xquik.
+No. X Account Location Scraper di Xquik non richiede login di X, chiave API o
+credenziali. Ogni lettura avviene sull'infrastruttura di Xquik.
 
 ### L'etichetta mostra dove vive il proprietario dell'account?
 

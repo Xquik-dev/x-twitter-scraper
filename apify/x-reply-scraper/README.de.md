@@ -934,8 +934,7 @@ Antwort-Timeline dieses Nutzers.
 ### Brauche ich einen X-API-Schlüssel oder einen Login?
 
 Nein. Du brauchst weder einen X-API-Schlüssel noch einen Login oder
-Zugangsdaten. X Reply Scraper von Xquik fragt nie nach deinem X-Passwort, deinen
-Cookies oder Tokens.
+Zugangsdaten. X Reply Scraper von Xquik fragt nie nach deinem X-Login.
 
 ### Ist es legal, Antworten auf X zu scrapen?
 

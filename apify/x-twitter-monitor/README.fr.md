@@ -482,11 +482,10 @@ données dont vous avez besoin.
 
 Les réponses aux questions fréquentes, puis où trouver de l'aide.
 
-### Ai-je besoin de cookies X, d'une clé API ou d'une connexion ?
+### Ai-je besoin d'une connexion X ou d'une clé API ?
 
-Non. X (Twitter) Monitor de Xquik n'a besoin ni de cookies X, ni de clé API, ni
-de connexion, ni d'identifiants. Chaque vérification s'exécute sur
-l'infrastructure de Xquik.
+Non. X (Twitter) Monitor de Xquik n'a besoin ni de connexion X, ni de clé API,
+ni d'identifiants. Chaque vérification s'exécute sur l'infrastructure de Xquik.
 
 ### Comment surveiller un compte Twitter ?
 

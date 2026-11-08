@@ -8,9 +8,9 @@ con Claude Code, Codex, Cursor & altro, da 6:07.
 
 Xquik è il servizio di scraping X (Twitter) più veloce & economico al mondo, con
 i dati X più completi. X Quote Tweets Scraper di Xquik raccoglie i post che
-citano post pubblici di X, senza cookie di X né login. La maggior parte degli
-altri Actor Apify fa pagare prima di filtrare o deduplicare. Xquik fa pagare
-solo i risultati consegnati, unici e conformi ai filtri.
+citano post pubblici di X, senza login di X. La maggior parte degli altri Actor
+Apify fa pagare prima di filtrare o deduplicare. Xquik fa pagare solo i
+risultati consegnati, unici e conformi ai filtri.
 
 Incolla URL di post o ID di post & ottieni ogni citazione che X fornisce per
 ciascun post in 1 esecuzione. Ogni riga contiene la citazione, il profilo
@@ -132,8 +132,8 @@ della piattaforma. Poi torna qui & premi Try for free.
 3. Imposta `maxItems` per limitare le righe consegnate, poi fai clic su Start.
 4. Scarica il dataset in JSON, CSV o Excel, oppure usa l'API di Apify.
 
-In nessun passaggio inserisci cookie di X, dati di login o una chiave API. Non
-porti alcun cursore di pagina da un'esecuzione all'altra.
+In nessun passaggio inserisci dati di login di X o una chiave API. Non porti
+alcun cursore di pagina da un'esecuzione all'altra.
 
 ## Input
 
@@ -430,10 +430,10 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
 Le risposte alle domande più comuni, poi dove trovare assistenza.
 
-### Servono cookie di X, una chiave API o il login?
+### Servono il login di X o una chiave API?
 
-No. X Quote Tweets Scraper di Xquik non richiede cookie di X, chiave API, login
-o credenziali. Ogni lettura avviene sull'infrastruttura di Xquik.
+No. X Quote Tweets Scraper di Xquik non richiede login di X, chiave API o
+credenziali. Ogni lettura avviene sull'infrastruttura di Xquik.
 
 ### Posso estrarre le citazioni di molti post in 1 esecuzione?
 

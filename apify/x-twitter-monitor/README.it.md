@@ -454,9 +454,9 @@ offre la stessa diagnostica. Scegli quello adatto ai dati che ti servono.
 
 Le risposte alle domande più comuni, poi dove trovare assistenza.
 
-### Servono cookie di X, una chiave API o il login?
+### Servono il login di X o una chiave API?
 
-No. X (Twitter) Monitor di Xquik non richiede cookie di X, chiave API, login o
+No. X (Twitter) Monitor di Xquik non richiede login di X, chiave API o
 credenziali. Ogni controllo avviene sull'infrastruttura di Xquik.
 
 ### Come monitoro un account Twitter?

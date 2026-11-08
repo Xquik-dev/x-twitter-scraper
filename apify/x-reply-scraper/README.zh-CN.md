@@ -676,7 +676,7 @@ Apify 不会把确切的构建编号重定向到 `latest`。请把固定的编�
 
 ### 我需要 X API 密钥或登录吗？
 
-不需要。你不需要 X API 密钥、登录或任何凭据。Xquik 的 X Reply Scraper 从不索要你的 X 密码、Cookie 或 token。
+不需要。你不需要 X API 密钥、登录或任何凭据。Xquik 的 X Reply Scraper 从不索要你的 X 登录信息。
 
 ### 抓取 X 回复合法吗？
 

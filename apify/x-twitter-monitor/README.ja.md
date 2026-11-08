@@ -272,9 +272,9 @@ Actorは、`handles` や `usernames` のようにエージェントが推測し�
 
 よくある質問に答えたあと、サポートを受けられる場所を案内します。
 
-### XのCookie、APIキー、ログインは必要ですか？
+### XのログインやAPIキーは必要ですか？
 
-いいえ。XquikのX (Twitter) Monitorは、XのCookie、APIキー、ログイン、認証情報を必要としません。チェックはすべてXquikのインフラで実行します。
+いいえ。XquikのX (Twitter) Monitorは、Xのログイン、APIキー、認証情報を必要としません。チェックはすべてXquikのインフラで実行します。
 
 ### Twitterアカウントを監視するにはどうすればいいですか？
 

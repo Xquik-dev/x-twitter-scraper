@@ -8,10 +8,10 @@ con Claude Code, Codex, Cursor & más, desde el minuto 6:07.
 
 Xquik es el servicio de scraping de X (Twitter) más rápido y económico del
 mundo, con los datos de X más completos. X Email Scraper de Xquik obtiene los
-correos que las cuentas publican en sus propios perfiles de X, sin cookies de X
-ni inicio de sesión. La mayoría de los demás Actores de Apify cobran antes de
-filtrar o quitar duplicados. Xquik solo cobra los resultados entregados, únicos
-y que cumplen tus filtros.
+correos que las cuentas publican en sus propios perfiles de X, sin iniciar
+sesión en X. La mayoría de los demás Actores de Apify cobran antes de filtrar o
+quitar duplicados. Xquik solo cobra los resultados entregados, únicos y que
+cumplen tus filtros.
 
 Pega nombres de usuario, escanea los seguidores de una cuenta o busca usuarios
 de X, & obtén cada perfil que publica un correo, con el correo primero. Un
@@ -126,8 +126,7 @@ plataforma. Luego vuelve aquí & haz clic en Try for free.
    Start.
 5. Descarga el dataset en JSON, CSV o Excel, o usa la API de Apify.
 
-En ningún paso ingresas cookies de X, datos de inicio de sesión ni una clave de
-API.
+En ningún paso ingresas datos de inicio de sesión de X ni una clave de API.
 
 ## Entrada
 
@@ -450,11 +449,10 @@ necesitas.
 
 Respuestas a preguntas comunes y, luego, dónde conseguir ayuda.
 
-### ¿Necesito cookies de X, una clave de API o iniciar sesión?
+### ¿Necesito iniciar sesión en X o una clave de API?
 
-No. X Email Scraper de Xquik no necesita cookies de X, clave de API, inicio de
-sesión ni credenciales. Todas las lecturas se ejecutan en la infraestructura de
-Xquik.
+No. X Email Scraper de Xquik no necesita inicio de sesión en X, clave de API ni
+credenciales. Todas las lecturas se ejecutan en la infraestructura de Xquik.
 
 ### ¿De dónde salen los correos?
 

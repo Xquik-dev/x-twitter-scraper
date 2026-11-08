@@ -465,11 +465,11 @@ necesitas.
 
 Respuestas a preguntas comunes y, luego, dónde conseguir ayuda.
 
-### ¿Necesito cookies de X, una clave de API o iniciar sesión?
+### ¿Necesito iniciar sesión en X o una clave de API?
 
-No. X (Twitter) Monitor de Xquik no necesita cookies de X, clave de API, inicio
-de sesión ni credenciales. Todas las revisiones se ejecutan en la
-infraestructura de Xquik.
+No. X (Twitter) Monitor de Xquik no necesita inicio de sesión en X, clave de API
+ni credenciales. Todas las revisiones se ejecutan en la infraestructura de
+Xquik.
 
 ### ¿Cómo monitoreo una cuenta de Twitter?
 

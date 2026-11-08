@@ -386,11 +386,11 @@ du brauchst.
 
 Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
 
-### Brauche ich X-Cookies, einen API-Schlüssel oder einen Login?
+### Brauche ich einen X-Login oder einen API-Schlüssel?
 
-Nein. X (Twitter) to Discord Bot von Xquik braucht keine X-Cookies, keinen
-API-Schlüssel, keinen Login & keine Zugangsdaten. Jede Prüfung läuft auf der
-Infrastruktur von Xquik.
+Nein. X (Twitter) to Discord Bot von Xquik braucht keinen X-Login, keinen
+API-Schlüssel & keine Zugangsdaten. Jede Prüfung läuft auf der Infrastruktur von
+Xquik.
 
 ### Muss ich einen Bot hosten oder einladen?
 

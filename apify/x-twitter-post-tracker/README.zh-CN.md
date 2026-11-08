@@ -3,7 +3,7 @@
 [![Framer 将 Xquik MCP 连接到编程 Agent](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具](https://youtu.be/4UOSpoOoC3Y?t=367)，从 6:07 开始。
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X (Twitter) Post Tracker 会记录你所选帖子的公开计数。它不需要 X Cookie 或登录。之后再运行一次，每一行都会显示变化。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付且不重复的结果收费。
+Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X (Twitter) Post Tracker 会记录你所选帖子的公开计数。它不需要 X 登录。之后再运行一次，每一行都会显示变化。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付且不重复的结果收费。
 
 粘贴帖子 URL 或推文 ID。每次运行为每条帖子保存 1 行快照。一行包含当时的浏览量、点赞、转帖、回复、引用和书签数。它还包含自上一次快照以来和自第一次快照以来的变化。费用为**每个已交付快照 $0.00015**，Apify 另行收取平台使用费。
 
@@ -96,7 +96,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 4. 下一次运行时，在 `previousDatasetId` 中选择第一次运行的数据集。
 5. 以 JSON、CSV 或 Excel 格式下载数据集，或使用 Apify API。
 
-任何步骤都不需要输入 X Cookie、登录信息或 API 密钥。
+任何步骤都不需要输入 X 登录信息或 API 密钥。
 
 ## 输入
 
@@ -282,9 +282,9 @@ Xquik 的 X (Twitter) Post Tracker 在 1 次运行中读取多条帖子。Apify 
 
 先解答常见问题，再说明在哪里获取帮助。
 
-### 我需要 X Cookie、API 密钥或登录吗？
+### 我需要 X 登录或 API 密钥吗？
 
-不需要。Xquik 的 X (Twitter) Post Tracker 不需要 X Cookie、API 密钥、登录或任何凭据。
+不需要。Xquik 的 X (Twitter) Post Tracker 不需要 X 登录、API 密钥或任何凭据。
 
 ### `previousDatasetId` 应该选哪个数据集？
 
