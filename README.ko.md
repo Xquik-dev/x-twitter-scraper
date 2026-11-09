@@ -2,6 +2,10 @@
 
 # Xquik X(Twitter) Scraper API 및 Twitter MCP 서버
 
+[![Framer가 Xquik MCP를 코딩 에이전트에 연결하는 모습](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Framer가 Xquik 스크레이퍼를 Claude Code, Codex, Cursor 등과 함께 사용하는 방법](https://youtu.be/4UOSpoOoC3Y?t=367)을
+6:07부터 보세요.
+
 Xquik의 X(Twitter) 스크레이퍼로 트윗과 게시물을 검색하세요.
 프로필, 팔로워, 답글은 REST, MCP, SDK, CLI, webhook, Apify로 내보낼 수 있습니다.
 Twitter API 대안으로 쓸 수 있습니다. 공개 데이터 읽기에는 X 개발자 계정이 필요 없습니다.
@@ -139,20 +143,6 @@ type SearchResponse = {
 응답에는 게시물과 다음 페이지용 커서가 포함됩니다. 커서를 바꾸지 말고 그대로 복사하세요.
 `has_next_page`가 `true`인 동안 계속 요청하세요. 필터 결과가 빈 페이지에도 다음
 페이지가 있을 수 있습니다.
-
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://youtu.be/4UOSpoOoC3Y?t=367">
-        <img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" alt="Framer connects Xquik MCP to coding agents" width="720">
-      </a>
-      <br>
-      <strong>Framer demo</strong>
-      <br>
-      <sub>Watch <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Connect Framer to Claude Code, Codex, Cursor, and more</a> at 6:07 for the Xquik MCP connection.</sub>
-    </td>
-  </tr>
-</table>
 
 <!-- trust:start -->
 

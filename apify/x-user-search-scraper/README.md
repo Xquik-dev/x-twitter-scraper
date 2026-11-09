@@ -1,3 +1,7 @@
+[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
+with Claude Code, Codex, Cursor & more, from 6:07.
+
 **English** ·
 [Español](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-user-search-scraper/README.es.md)
 ·
@@ -14,10 +18,6 @@
 [Français](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-user-search-scraper/README.fr.md)
 ·
 [Italiano](https://github.com/Xquik-dev/x-twitter-scraper/blob/master/apify/x-user-search-scraper/README.it.md)
-
-[![Framer connects Xquik MCP to coding agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
-[Watch how Framer uses Xquik scrapers](https://youtu.be/4UOSpoOoC3Y?t=367)
-with Claude Code, Codex, Cursor & more, from 6:07.
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. Xquik's X User Search Scraper finds users by handle, bio &

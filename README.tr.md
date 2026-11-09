@@ -2,6 +2,10 @@
 
 # Xquik X (Twitter) scraper, Twitter API alternatifi ve MCP sunucusu
 
+[![Framer, Xquik MCP'yi kodlama ajanlarına bağlıyor](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Framer'ın Xquik scraper'larını Claude Code, Codex, Cursor & daha fazlasıyla nasıl kullandığını](https://youtu.be/4UOSpoOoC3Y?t=367)
+6:07'den itibaren izle.
+
 Xquik'in X (Twitter) scraper hizmetiyle tweet ve gönderi arayabilirsiniz.
 Profilleri, takipçileri ve yanıtları REST, MCP, SDK, CLI, webhook ve Apify ile dışa aktarabilirsiniz.
 Twitter API alternatifi olarak kullanabilirsiniz. Herkese açık veriler için X geliştirici hesabı gerekmez.
@@ -147,20 +151,6 @@ Yanıtta gönderiler ve sonraki sayfa için bir `next_cursor` değeri bulunur. B
 değeri değiştirmeden kopyalayın. `has_next_page` değeri `true` olduğu sürece
 devam edin. Filtreler yüzünden boş dönen bir sayfadan sonra da başka bir sayfa
 gelebilir.
-
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://youtu.be/4UOSpoOoC3Y?t=367">
-        <img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" alt="Framer connects Xquik MCP to coding agents" width="720">
-      </a>
-      <br>
-      <strong>Framer demosu</strong>
-      <br>
-      <sub>Xquik MCP bağlantısını <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Connect Framer to Claude Code, Codex, Cursor, and more</a> videosunda 6:07'den itibaren izleyebilirsiniz.</sub>
-    </td>
-  </tr>
-</table>
 
 <!-- trust:start -->
 

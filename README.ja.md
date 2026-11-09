@@ -2,6 +2,9 @@
 
 # Xquik の X（Twitter）Scraper API と Twitter MCP サーバー
 
+[![FramerがXquik MCPをコーディングエージェントに接続する様子](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[FramerがXquikのスクレイパーをClaude Code、Codex、Cursorなどと一緒に使う様子](https://youtu.be/4UOSpoOoC3Y?t=367)を6:07から視聴できます。
+
 Xquik の X（Twitter）スクレイパーで、ツイートと投稿を検索できます。プロフィール、フォロワー、返信は REST、MCP、SDK、CLI、webhook、Apify で出力できます。Twitter API の代替として使えます。公開データの読み取りに X 開発者アカウントは不要です。
 
 Xquik は世界最速かつ最安値の X（Twitter）スクレイパーサービスで、最も網羅的な X（Twitter）データを提供します。他の多くの Apify Actor は、フィルターや重複排除の前に課金します。Xquik が課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。行を水増しすることもありません。Xquik は独立したサービスで、X Corp. とは提携していません。
@@ -133,20 +136,6 @@ type SearchResponse = {
 
 レスポンスには投稿と次ページ用のカーソルが含まれます。カーソルは変更せずにコピーします。
 `has_next_page` が `true` の間は続けます。空のフィルター結果にも次ページがあり得ます。
-
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://youtu.be/4UOSpoOoC3Y?t=367">
-        <img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" alt="Framer connects Xquik MCP to coding agents" width="720">
-      </a>
-      <br>
-      <strong>Framer demo</strong>
-      <br>
-      <sub>Watch <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Connect Framer to Claude Code, Codex, Cursor, and more</a> at 6:07 for the Xquik MCP connection.</sub>
-    </td>
-  </tr>
-</table>
 
 <!-- trust:start -->
 

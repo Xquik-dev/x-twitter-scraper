@@ -1,10 +1,10 @@
-[English](README.md) · **Español** · [Türkçe](README.tr.md) ·
-[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
-[Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md)
-
 [![Framer conecta Xquik MCP con agentes de codificación](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [Mira cómo Framer usa los extractores de Xquik](https://youtu.be/4UOSpoOoC3Y?t=367)
 con Claude Code, Codex, Cursor & más, desde el minuto 6:07.
+
+[English](README.md) · **Español** · [Türkçe](README.tr.md) ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md)
 
 Xquik es el servicio de scraping de X (Twitter) más rápido y económico del
 mundo, con los datos de X más completos. X Follower Scraper de Xquik recopila
