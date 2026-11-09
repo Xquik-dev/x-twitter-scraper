@@ -168,11 +168,11 @@ página filtrada puede estar vacía y aun tener otra página.
 [![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
 
 - 1,500+ instalaciones de los Skills de este repositorio en skills.sh ([fuente](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1544 -->
-- 11,000+ usuarios de los Actors de Xquik para scraping de X (Twitter) en Apify ([fuente](https://apify.com/xquik)) <!-- trust:apify-users 11846 -->
-- 8,400,000+ ejecuciones de los Actors de Xquik para scraping de X (Twitter) en Apify ([fuente](https://apify.com/xquik)) <!-- trust:apify-runs 8467303 -->
+- 11,000+ usuarios de los Actors de Xquik para scraping de X (Twitter) en Apify ([fuente](https://apify.com/xquik)) <!-- trust:apify-users 11962 -->
+- 8,500,000+ ejecuciones de los Actors de Xquik para scraping de X (Twitter) en Apify ([fuente](https://apify.com/xquik)) <!-- trust:apify-runs 8597435 -->
 - 4.66 de 5 para X Tweet Scraper con 16 reseñas en Apify ([fuente](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
 
-Revisado el 2026-11-08. Mira cada número con su fecha y fuente en [xquik.com/benchmarks](https://xquik.com/benchmarks) o en [JSON](https://xquik.com/trust.json).
+Revisado el 2026-11-09. Mira cada número con su fecha y fuente en [xquik.com/benchmarks](https://xquik.com/benchmarks) o en [JSON](https://xquik.com/trust.json).
 
 <!-- trust:end -->
 

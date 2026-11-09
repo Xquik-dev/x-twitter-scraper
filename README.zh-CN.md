@@ -157,11 +157,11 @@ type SearchResponse = {
 [![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
 
 - 本仓库的 Skill 在 skills.sh 上至少安装了 1,500 次 ([来源](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1544 -->
-- Xquik 在 Apify 上的 X（Twitter）抓取 Actor 至少有 11,000 位用户 ([来源](https://apify.com/xquik)) <!-- trust:apify-users 11846 -->
-- Xquik 在 Apify 上的 X（Twitter）抓取 Actor 至少运行了 8,400,000 次 ([来源](https://apify.com/xquik)) <!-- trust:apify-runs 8467303 -->
+- Xquik 在 Apify 上的 X（Twitter）抓取 Actor 至少有 11,000 位用户 ([来源](https://apify.com/xquik)) <!-- trust:apify-users 11962 -->
+- Xquik 在 Apify 上的 X（Twitter）抓取 Actor 至少运行了 8,500,000 次 ([来源](https://apify.com/xquik)) <!-- trust:apify-runs 8597435 -->
 - X Tweet Scraper 在 Apify 上获得 4.66 分（满分 5 分），共 16 条评价 ([来源](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
 
-检查日期为 2026-11-08。可在 [xquik.com/benchmarks](https://xquik.com/benchmarks) 查看每个数字的日期和来源，也可获取 [JSON](https://xquik.com/trust.json)。
+检查日期为 2026-11-09。可在 [xquik.com/benchmarks](https://xquik.com/benchmarks) 查看每个数字的日期和来源，也可获取 [JSON](https://xquik.com/trust.json)。
 
 <!-- trust:end -->
 

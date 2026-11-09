@@ -164,11 +164,11 @@ type SearchResponse = {
 [![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
 
 - 이 저장소의 Skill은 skills.sh에서 1,500회 이상 설치되었습니다 ([출처](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1544 -->
-- Apify에 있는 Xquik의 X(Twitter) 스크레이퍼 Actor 사용자는 11,000명 이상입니다 ([출처](https://apify.com/xquik)) <!-- trust:apify-users 11846 -->
-- Apify에 있는 Xquik의 X(Twitter) 스크레이퍼 Actor는 8,400,000회 이상 실행되었습니다 ([출처](https://apify.com/xquik)) <!-- trust:apify-runs 8467303 -->
+- Apify에 있는 Xquik의 X(Twitter) 스크레이퍼 Actor 사용자는 11,000명 이상입니다 ([출처](https://apify.com/xquik)) <!-- trust:apify-users 11962 -->
+- Apify에 있는 Xquik의 X(Twitter) 스크레이퍼 Actor는 8,500,000회 이상 실행되었습니다 ([출처](https://apify.com/xquik)) <!-- trust:apify-runs 8597435 -->
 - X Tweet Scraper는 Apify 리뷰 16개에서 5점 만점에 4.66점입니다 ([출처](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
 
-2026-11-08에 확인했습니다. 각 숫자의 날짜와 출처는 [xquik.com/benchmarks](https://xquik.com/benchmarks) 또는 [JSON](https://xquik.com/trust.json)에서 볼 수 있습니다.
+2026-11-09에 확인했습니다. 각 숫자의 날짜와 출처는 [xquik.com/benchmarks](https://xquik.com/benchmarks) 또는 [JSON](https://xquik.com/trust.json)에서 볼 수 있습니다.
 
 <!-- trust:end -->
 
