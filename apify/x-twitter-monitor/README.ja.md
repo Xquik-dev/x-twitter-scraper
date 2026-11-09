@@ -1,7 +1,7 @@
-[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) · [简体中文](README.zh-CN.md) · **日本語** · [한국어](README.ko.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md)
-
 [![FramerがXquik MCPをコーディングエージェントに接続する様子](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [FramerがXquikのスクレイパーをClaude Code、Codex、Cursorなどと一緒に使う様子](https://youtu.be/4UOSpoOoC3Y?t=367)を6:07から視聴できます。
+
+[English](README.md) · [Español](README.es.md) · [Türkçe](README.tr.md) · [简体中文](README.zh-CN.md) · **日本語** · [한국어](README.ko.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md)
 
 Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX (Twitter) Monitorは、選んだアカウントとキーワードについてTwitterのアラートを送ります。監視しているアカウントの新しいツイート、返信、引用、リポスト、プロフィールの変更をすべて捕捉します。通常、Xに表示されてから一秒もかからずに、それぞれを捕捉します。キーワードについては、Xの最新の検索結果に表示される新しいツイートをすべて捕捉します。フォローとフォロワーも捕捉します。各イベントは、アラートとしてDiscord、Telegram、Slack、またはWebhookに届きます。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した重複のない結果だけです。このActorでは、モニターが監視した時間だけに課金します。
 

@@ -1,10 +1,10 @@
-[English](README.md) · [Español](README.es.md) · **Türkçe** ·
-[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
-[Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md)
-
 [![Framer, Xquik MCP'yi kodlama ajanlarına bağlıyor](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [Framer'ın Xquik scraper'larını Claude Code, Codex, Cursor & daha fazlasıyla nasıl kullandığını](https://youtu.be/4UOSpoOoC3Y?t=367)
 6:07'den itibaren izle.
+
+[English](README.md) · [Español](README.es.md) · **Türkçe** ·
+[简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) ·
+[Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md)
 
 Xquik, en eksiksiz X verisini sunan, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. Xquik'in X Space Scraper'ı Sohbet Odalarını anahtar kelime,
