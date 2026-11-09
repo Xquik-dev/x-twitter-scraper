@@ -2,6 +2,9 @@
 
 # Xquik X（Twitter）抓取 API 与 Twitter MCP 服务器
 
+[![Framer 将 Xquik MCP 连接到编程 Agent](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具](https://youtu.be/4UOSpoOoC3Y?t=367)，从 6:07 开始。
+
 使用 Xquik 的 X（Twitter）抓取工具搜索推文和帖子。通过 REST、MCP、SDK、CLI、webhook 和 Apify 导出资料、关注者和回复。它是 Twitter API 的替代方案。读取公开数据无需 X 开发者账号。
 
 Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X（Twitter）数据也最完整。其他大多数 Apify Actor 在过滤或去重之前就已计费。Xquik 只对已交付、不重复且符合过滤条件的结果收费，绝不虚增行数。Xquik 是独立服务，与 X Corp. 无关联。
@@ -132,20 +135,6 @@ type SearchResponse = {
 
 响应包含帖子和下一页游标。请原样复制游标，不要自行解析或修改。
 当 `has_next_page` 为 `true` 时继续请求。筛选后的空页仍可能有下一页。
-
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://youtu.be/4UOSpoOoC3Y?t=367">
-        <img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" alt="Framer connects Xquik MCP to coding agents" width="720">
-      </a>
-      <br>
-      <strong>Framer demo</strong>
-      <br>
-      <sub>Watch <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Connect Framer to Claude Code, Codex, Cursor, and more</a> at 6:07 for the Xquik MCP connection.</sub>
-    </td>
-  </tr>
-</table>
 
 <!-- trust:start -->
 

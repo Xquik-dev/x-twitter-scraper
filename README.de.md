@@ -2,6 +2,10 @@
 
 # X (Twitter) Scraper API & Twitter MCP-Server von Xquik
 
+[![Framer verbindet Xquik MCP mit Coding-Agents](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[Sieh dir an, wie Framer Xquik-Scraper nutzt](https://youtu.be/4UOSpoOoC3Y?t=367),
+mit Claude Code, Codex, Cursor & mehr, ab Minute 6:07.
+
 Nutze diesen X (Twitter) Scraper von Xquik, um Tweets & Beiträge zu durchsuchen.
 Exportiere Profile, Follower & Antworten über REST, MCP, SDKs, CLI, Webhooks & Apify.
 Er ist eine Twitter-API-Alternative. Öffentliche Abrufe brauchen kein X-Entwicklerkonto.
@@ -144,20 +148,6 @@ type SearchResponse = {
 Die Antwort enthält Beiträge und einen Cursor für die nächste Seite. Kopiere den
 Cursor unverändert. Fahre fort, solange `has_next_page` den Wert `true` hat.
 Eine gefilterte leere Seite kann trotzdem eine Folgeseite haben.
-
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://youtu.be/4UOSpoOoC3Y?t=367">
-        <img src="https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg" alt="Framer connects Xquik MCP to coding agents" width="720">
-      </a>
-      <br>
-      <strong>Framer demo</strong>
-      <br>
-      <sub>Watch <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Connect Framer to Claude Code, Codex, Cursor, and more</a> at 6:07 for the Xquik MCP connection.</sub>
-    </td>
-  </tr>
-</table>
 
 <!-- trust:start -->
 
