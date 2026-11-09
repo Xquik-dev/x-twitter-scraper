@@ -949,7 +949,7 @@ timeline.
 ### Do I need an X API key or login?
 
 No. You need no X API key, login or credentials. Xquik's X Reply Scraper never
-asks for your X password, cookies or tokens.
+asks for your X login.
 
 ### Is it legal to scrape X replies?
 

@@ -272,9 +272,9 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 
 先解答常见问题，再说明在哪里获取帮助。
 
-### 我需要 X Cookie、API 密钥或登录吗？
+### 我需要 X 登录或 API 密钥吗？
 
-不需要。Xquik 的 X (Twitter) Monitor 不需要 X Cookie、API 密钥、登录或任何凭据。每次检查都在 Xquik 的基础设施上运行。
+不需要。Xquik 的 X (Twitter) Monitor 不需要 X 登录、API 密钥或任何凭据。每次检查都在 Xquik 的基础设施上运行。
 
 ### 如何监控一个 Twitter 账号？
 

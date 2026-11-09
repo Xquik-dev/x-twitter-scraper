@@ -3,7 +3,7 @@
 [![Framer 将 Xquik MCP 连接到编程 Agent](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具](https://youtu.be/4UOSpoOoC3Y?t=367)，从 6:07 开始。
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X Account Location Scraper 查询 X 账号的所在地，不需要 X Cookie 或登录。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付、不重复且符合过滤条件的结果收费。
+Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X Account Location Scraper 查询 X 账号的所在地，不需要 X 登录。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付、不重复且符合过滤条件的结果收费。
 
 粘贴用户名、个人资料 URL 或用户 ID，1 次运行即可拿到每个账号在 X 上的“账号所在地”标签。这个标签是 X 尽力为账号给出的国家或地区。它不是国籍、居住地或确切位置。你需支付**每个已交付行 $0.00015**，Apify 另行收取平台使用费。
 
@@ -93,7 +93,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 3. 用 `maxItems` 设置交付行数的上限，然后点击 Start。
 4. 以 JSON、CSV 或 Excel 格式下载数据集，或使用 Apify API。
 
-整个过程中，你都不需要输入 X Cookie、登录信息或 API 密钥。
+整个过程中，你都不需要输入 X 登录信息或 API 密钥。
 
 ## 输入
 
@@ -252,9 +252,9 @@ Xquik 的 X Account Location Scraper 在 1 次运行中读取多个账号。已�
 
 先解答常见问题，再说明在哪里获取帮助。
 
-### 我需要 X Cookie、API 密钥或登录吗？
+### 我需要 X 登录或 API 密钥吗？
 
-不需要。Xquik 的 X Account Location Scraper 不需要 X Cookie、API 密钥、登录或凭据。每次读取都在 Xquik 的基础设施上运行。
+不需要。Xquik 的 X Account Location Scraper 不需要 X 登录、API 密钥或凭据。每次读取都在 Xquik 的基础设施上运行。
 
 ### 这个标签能说明账号主人住在哪里吗？
 

@@ -3,7 +3,7 @@
 [![Framer 将 Xquik MCP 连接到编程 Agent](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具](https://youtu.be/4UOSpoOoC3Y?t=367)，从 6:07 开始。
 
-Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X Quote Tweets Scraper 收集引用了公开 X 帖子的帖子，无需 X Cookie 或登录。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付、不重复且符合过滤条件的结果收费。
+Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最完整。Xquik 的 X Quote Tweets Scraper 收集引用了公开 X 帖子的帖子，无需 X 登录。其他大多数 Apify Actor 在过滤或去重之前就开始收费。Xquik 只对已交付、不重复且符合过滤条件的结果收费。
 
 粘贴帖子 URL 或帖子 ID & 在 1 次运行中拿到 X 为每条帖子提供的全部引用帖子。每行包含引用帖子、它的作者的完整公开个人资料&被引用的帖子。费用为**每个已交付行 $0.00015** & Apify 另行收取平台使用费。
 
@@ -101,7 +101,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X 数据也最
 3. 设置 `maxItems` 限制交付的行数，然后点击 Start。
 4. 以 JSON、CSV 或 Excel 格式下载数据集，或使用 Apify API。
 
-整个过程中，你都不需要输入 X Cookie、登录信息或 API 密钥。各次运行之间，你也不用传递翻页游标。
+整个过程中，你都不需要输入 X 登录信息或 API 密钥。各次运行之间，你也不用传递翻页游标。
 
 ## 输入
 
@@ -275,9 +275,9 @@ Xquik 的 X Quote Tweets Scraper 在 1 次运行中读取多条帖子。已交�
 
 先解答常见问题，再说明在哪里获取帮助。
 
-### 我需要 X Cookie、API 密钥或登录吗？
+### 我需要 X 登录或 API 密钥吗？
 
-不需要。Xquik 的 X Quote Tweets Scraper 不需要 X Cookie、API 密钥、登录或任何凭据。每次读取都在 Xquik 的基础设施上运行。
+不需要。Xquik 的 X Quote Tweets Scraper 不需要 X 登录、API 密钥或任何凭据。每次读取都在 Xquik 的基础设施上运行。
 
 ### 1 次运行可以抓取多条帖子的引用帖子吗？
 

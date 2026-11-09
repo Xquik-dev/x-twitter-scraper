@@ -937,7 +937,7 @@ yanıt zaman akışını okur.
 ### X API anahtarı veya giriş gerekir mi?
 
 Hayır. X API anahtarına, girişe veya kimlik bilgisine ihtiyacın yok. Xquik'in X
-Reply Scraper'ı X şifreni, çerezlerini veya token'larını asla istemez.
+Reply Scraper'ı X girişini asla istemez.
 
 ### X yanıtlarını kazımak yasal mı?
 

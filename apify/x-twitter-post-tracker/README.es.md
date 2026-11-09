@@ -8,10 +8,10 @@ con Claude Code, Codex, Cursor & más, desde el minuto 6:07.
 
 Xquik es el servicio de scraping de X (Twitter) más rápido y económico del
 mundo, con los datos de X más completos. X (Twitter) Post Tracker de Xquik
-registra los conteos públicos de los posts que elijas. No necesita cookies de X
-ni inicio de sesión. Vuelve a ejecutarlo más tarde y cada fila muestra qué
-cambió. La mayoría de los demás Actores de Apify cobran antes de filtrar o
-quitar duplicados. Xquik solo cobra los resultados entregados y únicos.
+registra los conteos públicos de los posts que elijas. No necesita inicio de
+sesión en X. Vuelve a ejecutarlo más tarde y cada fila muestra qué cambió. La
+mayoría de los demás Actores de Apify cobran antes de filtrar o quitar
+duplicados. Xquik solo cobra los resultados entregados y únicos.
 
 Pega URLs de posts o IDs de tweets. Cada ejecución guarda 1 fila de captura por
 post. Una fila trae las visualizaciones, los Me gusta, los reposts, las
@@ -121,8 +121,7 @@ plataforma. Luego vuelve aquí y presiona Try for free.
    `previousDatasetId`.
 5. Descarga el dataset en JSON, CSV o Excel, o usa la API de Apify.
 
-En ningún paso ingresas cookies de X, datos de inicio de sesión ni una clave de
-API.
+En ningún paso ingresas datos de inicio de sesión de X ni una clave de API.
 
 ## Entrada
 
@@ -422,10 +421,10 @@ necesitas.
 
 Respuestas a preguntas comunes y, luego, dónde conseguir ayuda.
 
-### ¿Necesito cookies de X, una clave de API o iniciar sesión?
+### ¿Necesito iniciar sesión en X o una clave de API?
 
-No. X (Twitter) Post Tracker de Xquik no necesita cookies de X, clave de API,
-inicio de sesión ni credenciales.
+No. X (Twitter) Post Tracker de Xquik no necesita inicio de sesión en X, clave
+de API ni credenciales.
 
 ### ¿Qué dataset elijo en `previousDatasetId`?
 

@@ -8,10 +8,10 @@
 
 Xquik, en eksiksiz X verisini sunan, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. Xquik'in X (Twitter) Post Tracker Actor'ı, seçtiğin
-gönderilerin herkese açık sayılarını kaydeder. X çerezi veya giriş istemez.
-Sonra yeniden çalıştır, her satır neyin değiştiğini gösterir. Diğer Apify
-Actor'larının çoğu, filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik
-yalnızca teslim edilen ve benzersiz sonuçlar için ücret alır.
+gönderilerin herkese açık sayılarını kaydeder. X girişi istemez. Sonra yeniden
+çalıştır, her satır neyin değiştiğini gösterir. Diğer Apify Actor'larının çoğu,
+filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
+edilen ve benzersiz sonuçlar için ücret alır.
 
 Gönderi URL'lerini veya Tweet ID'lerini yapıştır. Her çalıştırma, gönderi başına
 1 anlık görüntü satırı kaydeder. Bir satırda o anki görüntülenme, beğeni,
@@ -124,7 +124,7 @@ görüntüye kadar yeter. Sonra buraya dön ve Try for free'ye bas.
    kümesini seç.
 5. Veri kümesini JSON, CSV veya Excel olarak indir ya da Apify API'yi kullan.
 
-Hiçbir adımda X çerezi, giriş bilgisi veya API anahtarı girmezsin.
+Hiçbir adımda X giriş bilgisi veya API anahtarı girmezsin.
 
 ## Girdi
 
@@ -429,10 +429,10 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
 
-### X çerezi, API anahtarı veya giriş gerekir mi?
+### X girişi veya API anahtarı gerekir mi?
 
-Hayır. Xquik'in X (Twitter) Post Tracker Actor'ı X çerezi, API anahtarı, giriş
-ya da kimlik bilgisi istemez.
+Hayır. Xquik'in X (Twitter) Post Tracker Actor'ı X girişi, API anahtarı ya da
+kimlik bilgisi istemez.
 
 ### `previousDatasetId` alanında hangi veri kümesini seçeyim?
 

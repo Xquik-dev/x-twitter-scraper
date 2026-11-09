@@ -3,7 +3,7 @@
 [![FramerがXquik MCPをコーディングエージェントに接続する様子](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [FramerがXquikのスクレイパーをClaude Code、Codex、Cursorなどと一緒に使う様子](https://youtu.be/4UOSpoOoC3Y?t=367)を6:07から視聴できます。
 
-Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX Account Location Scraperは、XのCookieやログインなしで、Xアカウントの所在地を確認します。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。
+Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX Account Location Scraperは、Xのログインなしで、Xアカウントの所在地を確認します。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。
 
 ユーザー名、プロフィールURL、ユーザーIDのいずれかを貼り付けると、1回の実行で、すべてのアカウントについてXの「アカウントの所在地」ラベルを取得できます。このラベルは、Xがベストエフォートで示す、アカウントの国か地域です。国籍、居住地、正確な位置ではありません。料金は**配信された行1件につき$0.00015**です。プラットフォームの利用料は、Apifyが別途請求します。
 
@@ -93,7 +93,7 @@ Apifyを初めて使いますか？まず[無料アカウントを作成して�
 3. `maxItems` で配信する行数の上限を決め、Startをクリックします。
 4. データセットをJSON、CSV、Excelのいずれかでダウンロードするか、Apify APIを使います。
 
-どの手順でも、XのCookie、ログイン情報、APIキーを入力することはありません。
+どの手順でも、Xのログイン情報やAPIキーを入力することはありません。
 
 ## 入力
 
@@ -252,9 +252,9 @@ XquikのX Account Location Scraperは、1回の実行で多数のアカウント
 
 よくある質問に答えたあと、サポートを受けられる場所を案内します。
 
-### XのCookie、APIキー、ログインは必要ですか？
+### XのログインやAPIキーは必要ですか？
 
-いいえ。XquikのX Account Location Scraperは、XのCookie、APIキー、ログイン、認証情報のどれも必要としません。読み取りはすべてXquikのインフラで実行します。
+いいえ。XquikのX Account Location Scraperは、Xのログイン、APIキー、認証情報のどれも必要としません。読み取りはすべてXquikのインフラで実行します。
 
 ### ラベルは、アカウントの持ち主が住んでいる場所を示しますか？
 

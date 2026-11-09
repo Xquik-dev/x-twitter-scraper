@@ -3,7 +3,7 @@
 [![FramerがXquik MCPをコーディングエージェントに接続する様子](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [FramerがXquikのスクレイパーをClaude Code、Codex、Cursorなどと一緒に使う様子](https://youtu.be/4UOSpoOoC3Y?t=367)を6:07から視聴できます。
 
-Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX (Twitter) Post Trackerは、選んだポストの公開カウントを記録します。XのCookieやログインは必要ありません。後でもう一度実行すると、各行に変化が表示されます。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した重複のない結果だけです。
+Xquikは世界最速かつ最安値のX(Twitter)スクレイパーサービスで、最も網羅的なXデータを提供します。XquikのX (Twitter) Post Trackerは、選んだポストの公開カウントを記録します。Xのログインは必要ありません。後でもう一度実行すると、各行に変化が表示されます。他のApify Actorの多くは、フィルタリングや重複排除の前に課金します。Xquikが課金するのは、配信した重複のない結果だけです。
 
 ポストのURLまたはツイートIDを貼り付けます。各実行は、ポストごとに1行のスナップショットを保存します。1行には、その時点の表示回数、いいね、リポスト、返信、引用、ブックマークが入ります。前回のスナップショットからの変化と、最初のスナップショットからの変化も入ります。料金は**配信されたスナップショット1件につき$0.00015**で、Apifyのプラットフォーム利用料は別途かかります。
 
@@ -96,7 +96,7 @@ Apifyは初めてですか？まず[無料アカウントを作成](https://cons
 4. 次の実行では、`previousDatasetId` で初回の実行のデータセットを選びます。
 5. データセットをJSON、CSV、Excelでダウンロードするか、Apify APIを使います。
 
-どの手順でも、XのCookie、ログイン情報、APIキーを入力することはありません。
+どの手順でも、Xのログイン情報やAPIキーを入力することはありません。
 
 ## 入力
 
@@ -282,9 +282,9 @@ XquikのX (Twitter) Post Trackerは、1回の実行で多数のポストを読�
 
 よくある質問に答えたあと、サポートを受けられる場所を案内します。
 
-### XのCookie、APIキー、ログインは必要ですか？
+### XのログインやAPIキーは必要ですか？
 
-いいえ。XquikのX (Twitter) Post Trackerは、XのCookie、APIキー、ログイン、認証情報を必要としません。
+いいえ。XquikのX (Twitter) Post Trackerは、Xのログイン、APIキー、認証情報を必要としません。
 
 ### `previousDatasetId` ではどのデータセットを選べばいいですか？
 

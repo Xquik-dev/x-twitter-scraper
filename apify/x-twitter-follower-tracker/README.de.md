@@ -367,11 +367,11 @@ du brauchst.
 
 Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
 
-### Brauche ich X-Cookies, einen API-Schlüssel oder einen Login?
+### Brauche ich einen X-Login oder einen API-Schlüssel?
 
-Nein. X (Twitter) Follower Tracker von Xquik braucht keine X-Cookies, keinen
-API-Schlüssel, keinen Login & keine Zugangsdaten. Jede Prüfung läuft auf der
-Infrastruktur von Xquik.
+Nein. X (Twitter) Follower Tracker von Xquik braucht keinen X-Login, keinen
+API-Schlüssel & keine Zugangsdaten. Jede Prüfung läuft auf der Infrastruktur von
+Xquik.
 
 ### Kann ich sehen, wer meine Follower auf X verlassen hat?
 

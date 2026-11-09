@@ -8,10 +8,9 @@ avec Claude Code, Codex, Cursor & d'autres outils, à partir de 6:07.
 
 Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
 monde. Ses données X sont les plus complètes. X Account Location Scraper de
-Xquik vérifie où sont basés les comptes X, sans cookies X ni connexion. La
-plupart des autres Actors Apify facturent avant de filtrer ou de dédupliquer.
-Xquik facture seulement les résultats livrés, uniques et conformes à vos
-filtres.
+Xquik vérifie où sont basés les comptes X, sans connexion X. La plupart des
+autres Actors Apify facturent avant de filtrer ou de dédupliquer. Xquik facture
+seulement les résultats livrés, uniques et conformes à vos filtres.
 
 Collez des noms d'utilisateur, des URL de profil ou des ID d'utilisateur &
 obtenez le libellé "Account based in" de X pour chaque compte en 1 run. Ce
@@ -122,8 +121,7 @@ la plateforme. Revenez ensuite ici & cliquez sur Try for free.
 3. Réglez `maxItems` pour plafonner les lignes livrées, puis cliquez sur Start.
 4. Téléchargez le dataset en JSON, CSV ou Excel, ou passez par l'API Apify.
 
-Vous ne saisissez ni cookies X, ni identifiants de connexion, ni clé API, à
-aucune étape.
+Vous ne saisissez ni identifiants de connexion X, ni clé API, à aucune étape.
 
 ## Entrée
 
@@ -423,11 +421,10 @@ données dont vous avez besoin.
 
 Les réponses aux questions fréquentes, puis où trouver de l'aide.
 
-### Ai-je besoin de cookies X, d'une clé API ou d'une connexion ?
+### Ai-je besoin d'une connexion X ou d'une clé API ?
 
-Non. X Account Location Scraper de Xquik n'a besoin ni de cookies X, ni de clé
-API, ni de connexion, ni d'identifiants. Chaque lecture s'exécute sur
-l'infrastructure de Xquik.
+Non. X Account Location Scraper de Xquik n'a besoin ni de connexion X, ni de clé
+API, ni d'identifiants. Chaque lecture s'exécute sur l'infrastructure de Xquik.
 
 ### Le libellé indique-t-il où vit le titulaire du compte ?
 

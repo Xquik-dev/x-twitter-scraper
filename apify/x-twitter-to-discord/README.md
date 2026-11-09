@@ -369,10 +369,10 @@ diagnostics. Pick the one that matches the data you need.
 
 Answers to common questions, then where to get help.
 
-### Do I need X cookies, an API key or a login?
+### Do I need an X login or an API key?
 
-No. Xquik's X (Twitter) to Discord Bot needs no X cookies, API key, login or
-credentials. Every check runs on Xquik's infrastructure.
+No. Xquik's X (Twitter) to Discord Bot needs no X login, API key or credentials.
+Every check runs on Xquik's infrastructure.
 
 ### Do I need to host or invite a bot?
 

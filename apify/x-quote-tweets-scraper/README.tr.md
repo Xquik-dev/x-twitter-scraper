@@ -8,10 +8,9 @@
 
 Xquik, en eksiksiz X verisini sunan, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. Xquik'in X Quote Tweets Scraper'ı, herkese açık X
-gönderilerini alıntılayan gönderileri X çerezi veya giriş olmadan toplar. Diğer
-Apify Actor'larının çoğu, filtrelemeden veya tekilleştirmeden önce ücret alır.
-Xquik yalnızca teslim edilen, benzersiz ve filtrene uyan sonuçlar için ücret
-alır.
+gönderilerini alıntılayan gönderileri X girişi olmadan toplar. Diğer Apify
+Actor'larının çoğu, filtrelemeden veya tekilleştirmeden önce ücret alır. Xquik
+yalnızca teslim edilen, benzersiz ve filtrene uyan sonuçlar için ücret alır.
 
 Gönderi URL'lerini veya gönderi ID'lerini yapıştır & 1 çalıştırmada X'in her
 gönderi için sunduğu tüm alıntıları al. Her satırda alıntı, yazarının herkese
@@ -134,7 +133,7 @@ yeter. Sonra buraya dön & Try for free düğmesine bas.
    düğmesine tıkla.
 4. Veri kümesini JSON, CSV veya Excel olarak indir ya da Apify API'yi kullan.
 
-Hiçbir adımda X çerezi, giriş bilgisi veya API anahtarı girmezsin. Çalıştırmalar
+Hiçbir adımda X giriş bilgisi veya API anahtarı girmezsin. Çalıştırmalar
 arasında sayfa imleci taşımazsın.
 
 ## Girdi
@@ -441,10 +440,10 @@ tanılamaları paylaşır. İhtiyacın olan veriye uyanı seç.
 
 Sık sorulan soruların cevapları, sonra da nereden yardım alacağın.
 
-### X çerezi, API anahtarı veya giriş gerekir mi?
+### X girişi veya API anahtarı gerekir mi?
 
-Hayır. Xquik'in X Quote Tweets Scraper'ı X çerezi, API anahtarı, giriş veya
-kimlik bilgisi istemez. Her okuma Xquik'in altyapısında çalışır.
+Hayır. Xquik'in X Quote Tweets Scraper'ı X girişi, API anahtarı veya kimlik
+bilgisi istemez. Her okuma Xquik'in altyapısında çalışır.
 
 ### 1 çalıştırmada birçok gönderinin alıntılarını kazıyabilir miyim?
 

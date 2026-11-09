@@ -960,8 +960,7 @@ réponses de ce compte.
 ### Ai-je besoin d'une clé API X ou d'une connexion ?
 
 Non. Vous n'avez besoin d'aucune clé API X, d'aucune connexion ni d'aucun
-identifiant. X Reply Scraper de Xquik ne demande jamais votre mot de passe X,
-vos cookies ou vos jetons.
+identifiant. X Reply Scraper de Xquik ne vous demande jamais de connexion X.
 
 ### Est-il légal de scraper des réponses X ?
 

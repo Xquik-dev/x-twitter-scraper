@@ -8,10 +8,9 @@ mit Claude Code, Codex, Cursor & mehr, ab Minute 6:07.
 
 Xquik ist weltweit der schnellste & günstigste Scraper-Dienst für X (Twitter) &
 liefert die vollständigsten X-Daten. X Quote Tweets Scraper von Xquik sammelt
-die Posts, die öffentliche X-Posts zitieren, ohne X-Cookies oder Login. Die
-meisten anderen Apify Actors rechnen ab, bevor sie filtern oder Duplikate
-entfernen. Xquik rechnet nur gelieferte, eindeutige Ergebnisse ab, die zu deinen
-Filtern passen.
+die Posts, die öffentliche X-Posts zitieren, ohne X-Login. Die meisten anderen
+Apify Actors rechnen ab, bevor sie filtern oder Duplikate entfernen. Xquik
+rechnet nur gelieferte, eindeutige Ergebnisse ab, die zu deinen Filtern passen.
 
 Füge Post-URLs oder Post-IDs ein & erhalte in 1 Run für jeden Post jedes Zitat,
 das X bereitstellt. Jeder Datensatz enthält das Zitat, das vollständige
@@ -134,8 +133,8 @@ der Plattformnutzung. Komm dann hierher zurück & klicke auf Try for free.
    auf Start.
 4. Lade das Dataset als JSON, CSV oder Excel herunter oder nutze die Apify-API.
 
-Du gibst in keinem Schritt X-Cookies, einen Login oder einen API-Schlüssel ein.
-Du nimmst keinen Seiten-Cursor von einem Run in den nächsten mit.
+Du gibst in keinem Schritt einen X-Login oder einen API-Schlüssel ein. Du nimmst
+keinen Seiten-Cursor von einem Run in den nächsten mit.
 
 ## Eingabe
 
@@ -431,11 +430,11 @@ du brauchst.
 
 Antworten auf häufige Fragen, danach, wo du Hilfe bekommst.
 
-### Brauche ich X-Cookies, einen API-Schlüssel oder einen Login?
+### Brauche ich einen X-Login oder einen API-Schlüssel?
 
-Nein. X Quote Tweets Scraper von Xquik braucht weder X-Cookies noch einen
-API-Schlüssel, einen Login oder Zugangsdaten. Jeder Abruf läuft auf der
-Infrastruktur von Xquik.
+Nein. X Quote Tweets Scraper von Xquik braucht keinen X-Login, keinen
+API-Schlüssel & keine Zugangsdaten. Jeder Abruf läuft auf der Infrastruktur von
+Xquik.
 
 ### Kann ich die Zitate vieler Posts in 1 Run scrapen?
 
