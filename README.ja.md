@@ -2,7 +2,7 @@
 
 # Xquik の X（Twitter）Scraper API と Twitter MCP サーバー
 
-[![FramerがXquik MCPをコーディングエージェントに接続する様子](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[![FramerがXquikでツイートのティッカーを作る様子](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [FramerがXquikのスクレイパーをClaude Code、Codex、Cursorなどと一緒に使う様子](https://youtu.be/4UOSpoOoC3Y?t=367)を6:07から視聴できます。
 
 Xquik の X（Twitter）スクレイパーで、ツイートと投稿を検索できます。プロフィール、フォロワー、返信は REST、MCP、SDK、CLI、webhook、Apify で出力できます。Twitter API の代替として使えます。公開データの読み取りに X 開発者アカウントは不要です。

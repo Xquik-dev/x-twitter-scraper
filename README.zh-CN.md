@@ -2,7 +2,7 @@
 
 # Xquik X（Twitter）抓取 API 与 Twitter MCP 服务器
 
-[![Framer 将 Xquik MCP 连接到编程 Agent](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[![Framer 用 Xquik 制作推文滚动条](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具](https://youtu.be/4UOSpoOoC3Y?t=367)，从 6:07 开始。
 
 使用 Xquik 的 X（Twitter）抓取工具搜索推文和帖子。通过 REST、MCP、SDK、CLI、webhook 和 Apify 导出资料、关注者和回复。它是 Twitter API 的替代方案。读取公开数据无需 X 开发者账号。
