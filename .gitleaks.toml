@@ -1,0 +1,20 @@
+# gitleaks runs every default rule. Each allowlist below is a verified false
+# positive. Fix or rotate a new finding instead.
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "The xq_YOUR_KEY_HERE placeholder and a sample Idempotency-Key UUID from the write docs. Neither grants access."
+targetRules = ["curl-auth-header", "generic-api-key"]
+regexTarget = "secret"
+regexes = [
+  '''^5b0f7c2e-8d1a-4f3b-9e6c-2a7d4b8f1c90$''',
+  '''^xq_YOUR_KEY_HERE$''',
+]
+
+[[allowlists]]
+description = "normalizedKey in a deleted data file holds a lowercase word, not a key."
+condition = "AND"
+paths = ['''^docs/research/seo/keyword-map-2026-08-22\.json$''']
+regexTarget = "match"
+regexes = ['''^normalizedKey": "[a-z0-9]+"$''']
