@@ -2,7 +2,7 @@
 
 # API de scraping de X (Twitter) y servidor MCP de Twitter de Xquik
 
-[![Framer conecta Xquik MCP con agentes de codificación](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
+[![Framer crea un ticker de tweets con Xquik](https://img.youtube.com/vi/4UOSpoOoC3Y/maxresdefault.jpg)](https://youtu.be/4UOSpoOoC3Y?t=367)\
 [Mira cómo Framer usa los extractores de Xquik](https://youtu.be/4UOSpoOoC3Y?t=367)
 con Claude Code, Codex, Cursor & más, desde el minuto 6:07.
 
