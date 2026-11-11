@@ -340,8 +340,7 @@ x-twitter-scraper x:tweets search \
 
 Starte den Actor mit Apify-Konto und Token in Apify Console oder über die API.
 
-Bis zum 29. August 2026 kostet der Free-Tarif $0.015 pro gelieferter Zeile.
-Bezahlte Tarife kosten $0.00015. Danach kosten alle $0.00015. Die Plattformnutzung
+Jeder Apify-Tarif kostet $0.00015 pro gelieferter Zeile. Die Plattformnutzung
 wird getrennt berechnet. Filtere Diagnosezeilen mit `resultType !== "diagnostic"`.
 
 <!-- BEGIN APIFY TESTIMONIALS -->

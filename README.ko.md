@@ -336,8 +336,7 @@ x-twitter-scraper x:tweets search \
 
 Apify 계정과 token으로 Apify Console 또는 API에서 Actor를 실행하세요.
 
-2026년 8월 29일까지 Free 요금제는 전달 행당 $0.015, 유료 요금제는
-$0.00015입니다. 이후에는 모든 요금제가 $0.00015입니다. 플랫폼 사용료는 별도입니다.
+모든 Apify 요금제에서 전달 행당 $0.00015입니다. 플랫폼 사용료는 별도입니다.
 진단 행은 `resultType !== "diagnostic"`으로 제외하세요.
 
 <!-- BEGIN APIFY TESTIMONIALS -->

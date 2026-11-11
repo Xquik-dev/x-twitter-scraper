@@ -325,8 +325,7 @@ x-twitter-scraper x:tweets search \
 
 可在 Apify Console 或 Apify API 中运行 Actor。需要 Apify 账号和 token。
 
-2026 年 8 月 29 日前，Free 方案每交付一行收费 $0.015，付费方案收费
-$0.00015。之后所有方案均为 $0.00015。平台使用费另计。请用
+所有 Apify 方案均为每交付一行收费 $0.00015。平台使用费另计。请用
 `resultType !== "diagnostic"` 排除诊断行。
 
 <!-- BEGIN APIFY TESTIMONIALS -->
