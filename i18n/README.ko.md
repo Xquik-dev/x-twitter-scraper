@@ -16,7 +16,7 @@ Xquik은 필터에 맞고 중복되지 않은 결과를 전달했을 때만 요�
 Xquik은 독립 서비스이며 X Corp.과 제휴 관계가 없습니다.
 
 <p align="center">
-  <a href="README.md">English</a> ·
+  <a href="../README.md">English</a> ·
   <a href="README.es.md">Español</a> ·
   <a href="README.tr.md">Türkçe</a> ·
   <a href="README.zh-CN.md">简体中文</a> ·
@@ -497,10 +497,10 @@ Xquik은 사용할 수 있는 데이터만 반환합니다. 누락된 필드를 
 - [요금 안내](https://docs.xquik.com/guides/billing)
 - [대량 추출 흐름](https://docs.xquik.com/guides/extraction-workflow)
 - [MCP 가이드](https://docs.xquik.com/mcp/overview)
-- [X API 요청 가이드](skills/x-twitter-scraper/references/reads.md)
-- [보안 가이드](skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
-- [API 비교](skills/x-twitter-scraper/references/compare-faq.md)
-- [영문 전체 README](README.md)
+- [X API 요청 가이드](../skills/x-twitter-scraper/references/reads.md)
+- [보안 가이드](../skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
+- [API 비교](../skills/x-twitter-scraper/references/compare-faq.md)
+- [영문 전체 README](../README.md)
 
 ## 라이선스
 

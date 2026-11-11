@@ -16,7 +16,7 @@ Xquik yalnızca teslim edilen, benzersiz ve filtrenize uyan sonuçlar için ücr
 Xquik bağımsızdır ve X Corp. ile bağlantılı değildir.
 
 <p align="center">
-  <a href="README.md">English</a> ·
+  <a href="../README.md">English</a> ·
   <a href="README.es.md">Español</a> ·
   <strong>Türkçe</strong> ·
   <a href="README.zh-CN.md">简体中文</a> ·
@@ -518,10 +518,10 @@ Projenize uyan SDK'yı veya aracı kullanın.
 - [Ücretlendirme](https://docs.xquik.com/guides/billing)
 - [Toplu iş akışı](https://docs.xquik.com/guides/extraction-workflow)
 - [MCP kılavuzu](https://docs.xquik.com/mcp/overview)
-- [X API istek kılavuzu](skills/x-twitter-scraper/references/reads.md)
-- [Güvenlik kılavuzu](skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
-- [API karşılaştırması](skills/x-twitter-scraper/references/compare-faq.md)
-- [İngilizce README](README.md)
+- [X API istek kılavuzu](../skills/x-twitter-scraper/references/reads.md)
+- [Güvenlik kılavuzu](../skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
+- [API karşılaştırması](../skills/x-twitter-scraper/references/compare-faq.md)
+- [İngilizce README](../README.md)
 
 ## Lisans
 
