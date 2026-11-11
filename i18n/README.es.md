@@ -16,7 +16,7 @@ Xquik solo cobra los resultados entregados, únicos y que cumplen tus filtros. N
 Xquik es independiente y no está afiliado a X Corp.
 
 <p align="center">
-  <a href="README.md">English</a> ·
+  <a href="../README.md">English</a> ·
   <strong>Español</strong> ·
   <a href="README.tr.md">Türkçe</a> ·
   <a href="README.zh-CN.md">简体中文</a> ·
@@ -508,10 +508,10 @@ Usa el SDK o la herramienta que encaje con tu proyecto.
 - [Facturación](https://docs.xquik.com/guides/billing)
 - [Flujo de extracción](https://docs.xquik.com/guides/extraction-workflow)
 - [Guía de MCP](https://docs.xquik.com/mcp/overview)
-- [Guía de solicitudes a la API de X](skills/x-twitter-scraper/references/reads.md)
-- [Guía de seguridad](skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
-- [Comparación de APIs](skills/x-twitter-scraper/references/compare-faq.md)
-- [README completo en inglés](README.md)
+- [Guía de solicitudes a la API de X](../skills/x-twitter-scraper/references/reads.md)
+- [Guía de seguridad](../skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
+- [Comparación de APIs](../skills/x-twitter-scraper/references/compare-faq.md)
+- [README completo en inglés](../README.md)
 
 ## Licencia
 

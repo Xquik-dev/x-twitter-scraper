@@ -10,7 +10,7 @@
 Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X（Twitter）数据也最完整。其他大多数 Apify Actor 在过滤或去重之前就已计费。Xquik 只对已交付、不重复且符合过滤条件的结果收费，绝不虚增行数。Xquik 是独立服务，与 X Corp. 无关联。
 
 <p align="center">
-  <a href="README.md">English</a> ·
+  <a href="../README.md">English</a> ·
   <a href="README.es.md">Español</a> ·
   <a href="README.tr.md">Türkçe</a> ·
   <strong>简体中文</strong> ·
@@ -481,10 +481,10 @@ Xquik 返回当前可用的数据。它不会编造缺失字段，也不会恢�
 - [计费](https://docs.xquik.com/guides/billing)
 - [批量提取流程](https://docs.xquik.com/guides/extraction-workflow)
 - [MCP 指南](https://docs.xquik.com/mcp/overview)
-- [X API 请求指南](skills/x-twitter-scraper/references/reads.md)
-- [安全指南](skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
-- [API 对比](skills/x-twitter-scraper/references/compare-faq.md)
-- [英文完整版 README](README.md)
+- [X API 请求指南](../skills/x-twitter-scraper/references/reads.md)
+- [安全指南](../skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
+- [API 对比](../skills/x-twitter-scraper/references/compare-faq.md)
+- [英文完整版 README](../README.md)
 
 ## 许可证
 

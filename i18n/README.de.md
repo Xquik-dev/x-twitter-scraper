@@ -16,7 +16,7 @@ Xquik rechnet nur gelieferte, eindeutige Ergebnisse ab, die zu deinen Filtern pa
 Xquik ist unabhängig und nicht mit X Corp. verbunden.
 
 <p align="center">
-  <a href="README.md">English</a> ·
+  <a href="../README.md">English</a> ·
   <a href="README.es.md">Español</a> ·
   <a href="README.tr.md">Türkçe</a> ·
   <a href="README.zh-CN.md">简体中文</a> ·
@@ -510,10 +510,10 @@ Nutze das passende SDK oder Werkzeug für dein Projekt.
 - [Abrechnung](https://docs.xquik.com/guides/billing)
 - [Ablauf für Massenextraktionen](https://docs.xquik.com/guides/extraction-workflow)
 - [MCP-Anleitung](https://docs.xquik.com/mcp/overview)
-- [X-API-Anfrageleitfaden](skills/x-twitter-scraper/references/reads.md)
-- [Sicherheitsleitfaden](skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
-- [API-Vergleich](skills/x-twitter-scraper/references/compare-faq.md)
-- [Vollständige englische README](README.md)
+- [X-API-Anfrageleitfaden](../skills/x-twitter-scraper/references/reads.md)
+- [Sicherheitsleitfaden](../skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
+- [API-Vergleich](../skills/x-twitter-scraper/references/compare-faq.md)
+- [Vollständige englische README](../README.md)
 
 ## Lizenz
 

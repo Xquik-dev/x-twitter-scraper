@@ -10,7 +10,7 @@ Xquik の X（Twitter）スクレイパーで、ツイートと投稿を検索�
 Xquik は世界最速かつ最安値の X（Twitter）スクレイパーサービスで、最も網羅的な X（Twitter）データを提供します。他の多くの Apify Actor は、フィルターや重複排除の前に課金します。Xquik が課金するのは、配信した結果のうち、重複がなくフィルター条件に合うものだけです。行を水増しすることもありません。Xquik は独立したサービスで、X Corp. とは提携していません。
 
 <p align="center">
-  <a href="README.md">English</a> ·
+  <a href="../README.md">English</a> ·
   <a href="README.es.md">Español</a> ·
   <a href="README.tr.md">Türkçe</a> ·
   <a href="README.zh-CN.md">简体中文</a> ·
@@ -488,10 +488,10 @@ X データの収集も、その方法と利用が適用法に従う限り、一
 - [課金](https://docs.xquik.com/guides/billing)
 - [一括取得フロー](https://docs.xquik.com/guides/extraction-workflow)
 - [MCP ガイド](https://docs.xquik.com/mcp/overview)
-- [X API リクエストガイド](skills/x-twitter-scraper/references/reads.md)
-- [セキュリティガイド](skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
-- [API 比較](skills/x-twitter-scraper/references/compare-faq.md)
-- [英語版 README](README.md)
+- [X API リクエストガイド](../skills/x-twitter-scraper/references/reads.md)
+- [セキュリティガイド](../skills/x-twitter-scraper/SKILL.md#keep-accounts-and-money-safe)
+- [API 比較](../skills/x-twitter-scraper/references/compare-faq.md)
+- [英語版 README](../README.md)
 
 ## ライセンス
 
