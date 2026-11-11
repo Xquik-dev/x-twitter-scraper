@@ -341,8 +341,7 @@ x-twitter-scraper x:tweets search \
 
 Lancez l'Actor dans Apify Console ou son API avec un compte et un token Apify.
 
-Jusqu'au 29 août 2026, l'offre Free coûte $0.015 par ligne livrée. Les offres
-payantes coûtent $0.00015. Ensuite, toutes coûteront $0.00015. L'utilisation de
+Toutes les offres Apify coûtent $0.00015 par ligne livrée. L'utilisation de
 la plateforme est facturée à part. Excluez les diagnostics avec `resultType !== "diagnostic"`.
 
 <!-- BEGIN APIFY TESTIMONIALS -->

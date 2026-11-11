@@ -338,8 +338,7 @@ x-twitter-scraper x:tweets search \
 
 Esegui l'Actor in Apify Console o dalla sua API con account e token Apify.
 
-Fino al 29 agosto 2026, il piano Free costa $0.015 per riga consegnata. I piani
-a pagamento costano $0.00015. Poi tutti costeranno $0.00015. L'uso della
+Ogni piano Apify costa $0.00015 per riga consegnata. L'uso della
 piattaforma è separato. Escludi le righe diagnostiche con `resultType !== "diagnostic"`.
 
 <!-- BEGIN APIFY TESTIMONIALS -->

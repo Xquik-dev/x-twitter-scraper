@@ -345,9 +345,8 @@ x-twitter-scraper x:tweets search \
 
 Actor'ı Apify hesabınız ve token'ınızla Apify Console veya API üzerinden çalıştırın.
 
-29 Ağustos 2026'ya kadar Free planında satır başına $0.015 ödersiniz. Ücretli
-planlarda bu tutar $0.00015 olur. Bu tarihten sonra tüm planlarda tutar $0.00015
-olur. Platform kullanımının ücreti ayrıdır. Tanılama satırlarını
+Tüm Apify planlarında teslim edilen satır başına $0.00015 ödersiniz. Platform
+kullanımının ücreti ayrıdır. Tanılama satırlarını
 `resultType !== "diagnostic"` ile ayıklayın.
 
 <!-- BEGIN APIFY TESTIMONIALS -->

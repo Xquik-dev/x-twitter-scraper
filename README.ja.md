@@ -327,8 +327,7 @@ x-twitter-scraper x:tweets search \
 
 Apify のアカウントと token を使い、Apify Console または API から Actor を実行します。
 
-2026 年 8 月 29 日までは、Free プランが配信行ごとに $0.015、
-有料プランが $0.00015 です。以降は全プランが $0.00015 になります。
+すべての Apify プランで、配信行ごとに $0.00015 です。
 プラットフォーム利用料は別です。診断行は `resultType !== "diagnostic"` で除外します。
 
 <!-- BEGIN APIFY TESTIMONIALS -->

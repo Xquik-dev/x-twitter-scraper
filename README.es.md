@@ -339,8 +339,7 @@ x-twitter-scraper x:tweets search \
 
 Ejecuta el Actor en Apify Console o su API con una cuenta y un token de Apify.
 
-Hasta el 29 de agosto de 2026, el plan Free cuesta $0.015 por fila entregada.
-Los planes de pago cuestan $0.00015. Después, todos costarán $0.00015. El uso de
+Todos los planes de Apify cuestan $0.00015 por fila entregada. El uso de
 la plataforma se cobra aparte. Excluye diagnósticos con `resultType !== "diagnostic"`.
 
 <!-- BEGIN APIFY TESTIMONIALS -->
