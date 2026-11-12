@@ -1,37 +1,33 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.xquik/mcp",
-  "title": "Xquik MCP Server",
-  "description": "The world's fastest and cheapest X Twitter scraper service with the most complete X data.",
-  "repository": {
-    "url": "https://github.com/Xquik-dev/x-twitter-scraper",
-    "source": "github"
-  },
+  "version": "2.6.67",
+  "title": "X (Twitter) MCP Server by Xquik",
+  "description": "Xquik is the world's fastest and cheapest X (Twitter) data API with the most complete X data.",
   "websiteUrl": "https://docs.xquik.com/mcp/overview",
-  "version": "2.6.52",
   "icons": [
-    {
-      "src": "https://xquik.com/icons/mcp/xquik.png",
-      "mimeType": "image/png",
-      "sizes": ["48x48", "96x96"],
-      "theme": "light"
-    },
     {
       "src": "https://xquik.com/logo-square.png",
       "mimeType": "image/png",
-      "sizes": ["48x48", "96x96"],
+      "sizes": ["512x512"],
       "theme": "light"
+    },
+    {
+      "src": "https://xquik.com/logo-dark-square-flat.png",
+      "mimeType": "image/png",
+      "sizes": ["512x512"],
+      "theme": "dark"
     },
     {
       "src": "https://xquik.com/logo-dark-square-flat.svg",
       "mimeType": "image/svg+xml",
+      "sizes": ["any"],
       "theme": "dark"
     }
   ],
-  "remotes": [
-    {
-      "type": "streamable-http",
-      "url": "https://xquik.com/mcp"
-    }
-  ]
+  "repository": {
+    "url": "https://github.com/Xquik-dev/x-twitter-scraper",
+    "source": "github"
+  },
+  "remotes": [{ "type": "streamable-http", "url": "https://xquik.com/mcp" }]
 }
