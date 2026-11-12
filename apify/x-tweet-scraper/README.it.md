@@ -621,56 +621,56 @@ X Tweet Scraper di Xquik ha battuto altri 11 Actor che estraggono post su costo
 
 - `xquik/x-tweet-scraper` ha consegnato 890 tweet utili a $0.000175 per tweet
   utile, con 39,2 al secondo & 63 campi per riga.
-  [Vedi esecuzione](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
+  `fflWVxHwYvtyHpAQX`
 - `xquik/x-tweet-scraper` ha consegnato 883 tweet utili a $0.000176 per tweet
   utile, con 25,2 al secondo & 63 campi per riga.
-  [Vedi esecuzione](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
+  `EtSdBgkUcH4M1uicf`
 - `xquik/x-tweet-scraper` ha consegnato 882 tweet utili a $0.000177 per tweet
   utile, con 25,7 al secondo & 63 campi per riga.
-  [Vedi esecuzione](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
+  `SK3ZWhPwzGJYoYQba`
 - `xquik/x-tweet-scraper` ha consegnato 877 tweet utili a $0.000178 per tweet
   utile, con 26,9 al secondo & 63 campi per riga.
-  [Vedi esecuzione](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
+  `JRdbcigkBMCaFuH1W`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` ha consegnato 813
   tweet utili a $0.000185 per tweet utile, con 10,5 al secondo & 36 campi per
-  riga. [Vedi esecuzione](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
+  riga. `mIT1zf0xccCsYWO1E`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` ha consegnato 805
   tweet utili a $0.000187 per tweet utile, con 10,6 al secondo & 36 campi per
-  riga. [Vedi esecuzione](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
+  riga. `p1MUeElsamZUepTpm`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` ha consegnato 805
   tweet utili a $0.000187 per tweet utile, con 10,7 al secondo & 36 campi per
-  riga. [Vedi esecuzione](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
+  riga. `pQlQa0GMm7BWTUUOB`
 - `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` ha
   consegnato 880 tweet utili a $0.000250 per tweet utile, con 9,1 al secondo &
   46 campi per riga.
-  [Vedi esecuzione](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
+  `3Fn8yvqncsWdcw1I2`
 - `scraper_one/x-posts-search` ha consegnato 804 tweet utili a $0.000314 per
   tweet utile, con 3,3 al secondo & 14 campi per riga.
-  [Vedi esecuzione](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
+  `M9TgeCLLKZlNTOrj0`
 - `danek/twitter-scraper` ha consegnato 807 tweet utili a $0.000347 per tweet
   utile, con 5,0 al secondo & 27 campi per riga.
-  [Vedi esecuzione](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
+  `kyeJqCeaARxQPGM5W`
 - `tweetapi/twitter-x-search-scraper` ha consegnato 337 tweet utili a $0.000374
   per tweet utile, con 2,6 al secondo & 28 campi per riga.
-  [Vedi esecuzione](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
+  `mxkP8EDAUVtCZdobb`
 - `api-ninja/x-twitter-advanced-search` ha consegnato 837 tweet utili a
   $0.000430 per tweet utile, con 7,4 al secondo & 28 campi per riga.
-  [Vedi esecuzione](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
+  `XAWKinvZyPNjCwrib`
 - `apidojo/twitter-scraper-lite` ha consegnato 251 tweet utili a $0.000494 per
   tweet utile, con 12,9 al secondo & 54 campi per riga.
-  [Vedi esecuzione](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
+  `1t4XwmbQNTtwMJ0Ta`
 - `apidojo/tweet-scraper` ha consegnato 481 tweet utili a $0.000832 per tweet
   utile, con 7,8 al secondo & 55 campi per riga.
-  [Vedi esecuzione](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
+  `PydoBgS1YRblg29bB`
 - `xtdata/twitter-x-scraper` ha consegnato 1.378 tweet utili a $0.001168 per
   tweet utile, con 11,9 al secondo & 67 campi per riga.
-  [Vedi esecuzione](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
+  `U91dRXEvKvqu41aop`
 - `seemuapps/x-tweet-scraper` ha consegnato 805 tweet utili a $0.001242 per
   tweet utile, con 6,9 al secondo & 24 campi per riga.
-  [Vedi esecuzione](https://console.apify.com/view/runs/FstursEw43TbcipYU)
+  `FstursEw43TbcipYU`
 - `maximedupre/twitter-scraper` ha consegnato 46 tweet utili a $0.002846 per
   tweet utile, con 0,3 al secondo & 31 campi per riga.
-  [Vedi esecuzione](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
+  `Hs8irhEcAfWcQNc4w`
 
 Ogni Actor ha eseguito la stessa ricerca & gli stessi filtri. Gli altri Actor
 sono stati eseguiti il 2026-09-27. Le esecuzioni di Xquik hanno impostato

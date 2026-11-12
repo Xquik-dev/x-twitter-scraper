@@ -335,17 +335,17 @@ Xquik 的 X Follower Scraper 在所有 Apify 套餐上都按每条已交付个�
 
 Xquik 的 X Follower Scraper 在成本&速度上胜过其他 9 个关注者 Actor。它的完整行中位数是 38 个字段，是其他 Actor 中位数的 2.5 倍。
 
-- `xquik/x-follower-scraper` 交付了 1,000 条有用个人资料，每条有用个人资料 $0.000155，每秒 100.0 条&每行 38 个字段。[查看运行](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
-- `xquik/x-follower-scraper` 交付了 1,000 条有用个人资料，每条有用个人资料 $0.000155，每秒 77.9 条&每行 38 个字段。[查看运行](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
-- `b2b_leads/X-Real-Time-Data` 交付了 286 条有用个人资料，每条有用个人资料 $0.000388，每秒 3.1 条&每行 21 个字段。[查看运行](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
-- `kaitoeasyapi/premium-x-follower-scraper-following-data` 交付了 356 条有用个人资料，每条有用个人资料 $0.000506，每秒 21.9 条&每行 50 个字段。[查看运行](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
-- `api-ninja/x-twitter-followers-scraper` 交付了 350 条有用个人资料，每条有用个人资料 $0.000809，每秒 7.0 条&每行 8 个字段。[查看运行](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
-- `altimis/scweet` 交付了 332 条有用个人资料，每条有用个人资料 $0.000922，每秒 1.1 条&每行 21 个字段。[查看运行](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
-- `apidojo/twitter-user-scraper` 交付了 323 条有用个人资料，每条有用个人资料 $0.001160，每秒 7.3 条&每行 25 个字段。[查看运行](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
-- `atomus/twitter-scraper` 交付了 323 条有用个人资料，每条有用个人资料 $0.001272，每秒 6.2 条&每行 13 个字段。[查看运行](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
-- `practicaltools/cheap-simple-twitter-api` 交付了 283 条有用个人资料，每条有用个人资料 $0.002036，每秒 6.5 条&每行 4 个字段。[运行 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb)、[运行 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK)、[运行 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
-- `maximedupre/twitter-scraper` 交付了 320 条有用个人资料，每条有用个人资料 $0.002192，每秒 2.1 条&每行 15 个字段。[运行 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs)、[运行 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39)、[运行 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
-- `seemuapps/x-followers-following-scraper` 交付了 286 条有用个人资料，每条有用个人资料 $0.003504，每秒 3.9 条&每行 9 个字段。[运行 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj)、[运行 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ)、[运行 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
+- `xquik/x-follower-scraper` 交付了 1,000 条有用个人资料，每条有用个人资料 $0.000155，每秒 100.0 条&每行 38 个字段。`z5ELS2u5sgjuhAFHN`
+- `xquik/x-follower-scraper` 交付了 1,000 条有用个人资料，每条有用个人资料 $0.000155，每秒 77.9 条&每行 38 个字段。`Htim4jqodU6ZPjQiQ`
+- `b2b_leads/X-Real-Time-Data` 交付了 286 条有用个人资料，每条有用个人资料 $0.000388，每秒 3.1 条&每行 21 个字段。`IkQButA6cVz4ys4GM`
+- `kaitoeasyapi/premium-x-follower-scraper-following-data` 交付了 356 条有用个人资料，每条有用个人资料 $0.000506，每秒 21.9 条&每行 50 个字段。`cJgj15HLBA50LEUf0`
+- `api-ninja/x-twitter-followers-scraper` 交付了 350 条有用个人资料，每条有用个人资料 $0.000809，每秒 7.0 条&每行 8 个字段。`XjJ4UPKAILSz0Droz`
+- `altimis/scweet` 交付了 332 条有用个人资料，每条有用个人资料 $0.000922，每秒 1.1 条&每行 21 个字段。`qVGvT7TPAJEHCuR42`
+- `apidojo/twitter-user-scraper` 交付了 323 条有用个人资料，每条有用个人资料 $0.001160，每秒 7.3 条&每行 25 个字段。`Xnf7rh8jK6764gP1f`
+- `atomus/twitter-scraper` 交付了 323 条有用个人资料，每条有用个人资料 $0.001272，每秒 6.2 条&每行 13 个字段。`MWz1l0cTcfPcEnaiH`
+- `practicaltools/cheap-simple-twitter-api` 交付了 283 条有用个人资料，每条有用个人资料 $0.002036，每秒 6.5 条&每行 4 个字段。`Zhvi7LsfpHdQNKcGb`、`IsJj4fa8pFUG7uhlK`、`2W7n8fpEqoxiXq6oX`
+- `maximedupre/twitter-scraper` 交付了 320 条有用个人资料，每条有用个人资料 $0.002192，每秒 2.1 条&每行 15 个字段。`HblUkhgI2svp1LBGs`、`37yQFzgydzJoWfa39`、`mtBoKcocaM4BUzZmm`
+- `seemuapps/x-followers-following-scraper` 交付了 286 条有用个人资料，每条有用个人资料 $0.003504，每秒 3.9 条&每行 9 个字段。`1r3je034X2qhFGgLj`、`dc4ztVP3n2eemgiNQ`、`gWPiBT00G7D9IJ0Cj`
 
 每个 Actor 都读取了 NASA、SpaceX & esa 的关注者。其他 Actor 在 2026-09-28 运行。Xquik 的运行设置了 `outputMode: "full"` & 在 2026-09-29 运行。所有运行都使用 Bronze 等级。有用个人资料指不重复、账号创建至少 30 天、至少有 1 个关注者&1 条帖子的个人资料。成本是客户为每条有用个人资料支付的总费用。我们的成本包含客户支付的 Apify 用量。含 3 次运行的行会把这些运行加总计算。每行字段数是非空字段数的中位数，包括嵌套字段。1 个列表计为 1 个字段。打开某次运行，即可查看它的输入、日志&数据集。
 

@@ -335,17 +335,17 @@ XquikのX Follower Scraperは、どのApifyプランでも、配信されたプ�
 
 XquikのX Follower Scraperは、コスト&速度で他の9つのフォロワー用Actorを上回りました。フル出力の行のフィールド数の中央値は38で、他のActorの中央値の2.5倍でした。
 
-- `xquik/x-follower-scraper` は、有効なプロフィールを1,000件配信しました。有効なプロフィール1件あたり$0.000155、1秒あたり100.0件&1行あたり38フィールドです。[実行を見る](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
-- `xquik/x-follower-scraper` は、有効なプロフィールを1,000件配信しました。有効なプロフィール1件あたり$0.000155、1秒あたり77.9件&1行あたり38フィールドです。[実行を見る](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
-- `b2b_leads/X-Real-Time-Data` は、有効なプロフィールを286件配信しました。有効なプロフィール1件あたり$0.000388、1秒あたり3.1件&1行あたり21フィールドです。[実行を見る](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
-- `kaitoeasyapi/premium-x-follower-scraper-following-data` は、有効なプロフィールを356件配信しました。有効なプロフィール1件あたり$0.000506、1秒あたり21.9件&1行あたり50フィールドです。[実行を見る](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
-- `api-ninja/x-twitter-followers-scraper` は、有効なプロフィールを350件配信しました。有効なプロフィール1件あたり$0.000809、1秒あたり7.0件&1行あたり8フィールドです。[実行を見る](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
-- `altimis/scweet` は、有効なプロフィールを332件配信しました。有効なプロフィール1件あたり$0.000922、1秒あたり1.1件&1行あたり21フィールドです。[実行を見る](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
-- `apidojo/twitter-user-scraper` は、有効なプロフィールを323件配信しました。有効なプロフィール1件あたり$0.001160、1秒あたり7.3件&1行あたり25フィールドです。[実行を見る](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
-- `atomus/twitter-scraper` は、有効なプロフィールを323件配信しました。有効なプロフィール1件あたり$0.001272、1秒あたり6.2件&1行あたり13フィールドです。[実行を見る](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
-- `practicaltools/cheap-simple-twitter-api` は、有効なプロフィールを283件配信しました。有効なプロフィール1件あたり$0.002036、1秒あたり6.5件&1行あたり4フィールドです。[実行1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb)、[実行2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK)、[実行3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
-- `maximedupre/twitter-scraper` は、有効なプロフィールを320件配信しました。有効なプロフィール1件あたり$0.002192、1秒あたり2.1件&1行あたり15フィールドです。[実行1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs)、[実行2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39)、[実行3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
-- `seemuapps/x-followers-following-scraper` は、有効なプロフィールを286件配信しました。有効なプロフィール1件あたり$0.003504、1秒あたり3.9件&1行あたり9フィールドです。[実行1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj)、[実行2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ)、[実行3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
+- `xquik/x-follower-scraper` は、有効なプロフィールを1,000件配信しました。有効なプロフィール1件あたり$0.000155、1秒あたり100.0件&1行あたり38フィールドです。`z5ELS2u5sgjuhAFHN`
+- `xquik/x-follower-scraper` は、有効なプロフィールを1,000件配信しました。有効なプロフィール1件あたり$0.000155、1秒あたり77.9件&1行あたり38フィールドです。`Htim4jqodU6ZPjQiQ`
+- `b2b_leads/X-Real-Time-Data` は、有効なプロフィールを286件配信しました。有効なプロフィール1件あたり$0.000388、1秒あたり3.1件&1行あたり21フィールドです。`IkQButA6cVz4ys4GM`
+- `kaitoeasyapi/premium-x-follower-scraper-following-data` は、有効なプロフィールを356件配信しました。有効なプロフィール1件あたり$0.000506、1秒あたり21.9件&1行あたり50フィールドです。`cJgj15HLBA50LEUf0`
+- `api-ninja/x-twitter-followers-scraper` は、有効なプロフィールを350件配信しました。有効なプロフィール1件あたり$0.000809、1秒あたり7.0件&1行あたり8フィールドです。`XjJ4UPKAILSz0Droz`
+- `altimis/scweet` は、有効なプロフィールを332件配信しました。有効なプロフィール1件あたり$0.000922、1秒あたり1.1件&1行あたり21フィールドです。`qVGvT7TPAJEHCuR42`
+- `apidojo/twitter-user-scraper` は、有効なプロフィールを323件配信しました。有効なプロフィール1件あたり$0.001160、1秒あたり7.3件&1行あたり25フィールドです。`Xnf7rh8jK6764gP1f`
+- `atomus/twitter-scraper` は、有効なプロフィールを323件配信しました。有効なプロフィール1件あたり$0.001272、1秒あたり6.2件&1行あたり13フィールドです。`MWz1l0cTcfPcEnaiH`
+- `practicaltools/cheap-simple-twitter-api` は、有効なプロフィールを283件配信しました。有効なプロフィール1件あたり$0.002036、1秒あたり6.5件&1行あたり4フィールドです。`Zhvi7LsfpHdQNKcGb`、`IsJj4fa8pFUG7uhlK`、`2W7n8fpEqoxiXq6oX`
+- `maximedupre/twitter-scraper` は、有効なプロフィールを320件配信しました。有効なプロフィール1件あたり$0.002192、1秒あたり2.1件&1行あたり15フィールドです。`HblUkhgI2svp1LBGs`、`37yQFzgydzJoWfa39`、`mtBoKcocaM4BUzZmm`
+- `seemuapps/x-followers-following-scraper` は、有効なプロフィールを286件配信しました。有効なプロフィール1件あたり$0.003504、1秒あたり3.9件&1行あたり9フィールドです。`1r3je034X2qhFGgLj`、`dc4ztVP3n2eemgiNQ`、`gWPiBT00G7D9IJ0Cj`
 
 各Actorは、NASA、SpaceX & esaのフォロワーを読み取りました。他のActorは2026-09-28に実行しました。Xquikの実行は `outputMode: "full"` を設定し、2026-09-29に実行しました。すべての実行でBronzeティアを使いました。有効なプロフィールとは、作成から30日以上で、フォロワー1人以上&ポスト1件以上を持つ、重複のないプロフィールです。コストは、有効なプロフィール1件あたりの顧客の総支払額です。当社のコストには、顧客が支払うApifyの利用料を含みます。3回の実行がある行は、それらを合計しています。1行あたりのフィールド数は、入れ子のフィールドも含めた、空でないフィールド数の中央値です。リストは1フィールドとして数えます。実行を開くと、入力、ログ&データセットを確認できます。
 

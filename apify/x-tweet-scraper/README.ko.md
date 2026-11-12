@@ -574,56 +574,56 @@ Xquik의 X Tweet Scraper는 비용 & 속도에서 다른 게시물 Actor 11개�
 
 - `xquik/x-tweet-scraper` 실행은 유용한 트윗 890개를 전달했습니다. 유용한 트윗당
   $0.000175, 초당 39.2개 & 행당 필드 63개입니다.
-  [실행 보기](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
+  `fflWVxHwYvtyHpAQX`
 - `xquik/x-tweet-scraper` 실행은 유용한 트윗 883개를 전달했습니다. 유용한 트윗당
   $0.000176, 초당 25.2개 & 행당 필드 63개입니다.
-  [실행 보기](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
+  `EtSdBgkUcH4M1uicf`
 - `xquik/x-tweet-scraper` 실행은 유용한 트윗 882개를 전달했습니다. 유용한 트윗당
   $0.000177, 초당 25.7개 & 행당 필드 63개입니다.
-  [실행 보기](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
+  `SK3ZWhPwzGJYoYQba`
 - `xquik/x-tweet-scraper` 실행은 유용한 트윗 877개를 전달했습니다. 유용한 트윗당
   $0.000178, 초당 26.9개 & 행당 필드 63개입니다.
-  [실행 보기](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
+  `JRdbcigkBMCaFuH1W`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` 실행은 유용한 트윗
   813개를 전달했습니다. 유용한 트윗당 $0.000185, 초당 10.5개 & 행당 필드
-  36개입니다. [실행 보기](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
+  36개입니다. `mIT1zf0xccCsYWO1E`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` 실행은 유용한 트윗
   805개를 전달했습니다. 유용한 트윗당 $0.000187, 초당 10.6개 & 행당 필드
-  36개입니다. [실행 보기](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
+  36개입니다. `p1MUeElsamZUepTpm`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` 실행은 유용한 트윗
   805개를 전달했습니다. 유용한 트윗당 $0.000187, 초당 10.7개 & 행당 필드
-  36개입니다. [실행 보기](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
+  36개입니다. `pQlQa0GMm7BWTUUOB`
 - `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` 실행은
   유용한 트윗 880개를 전달했습니다. 유용한 트윗당 $0.000250, 초당 9.1개 & 행당
   필드 46개입니다.
-  [실행 보기](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
+  `3Fn8yvqncsWdcw1I2`
 - `scraper_one/x-posts-search` 실행은 유용한 트윗 804개를 전달했습니다. 유용한
   트윗당 $0.000314, 초당 3.3개 & 행당 필드 14개입니다.
-  [실행 보기](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
+  `M9TgeCLLKZlNTOrj0`
 - `danek/twitter-scraper` 실행은 유용한 트윗 807개를 전달했습니다. 유용한 트윗당
   $0.000347, 초당 5.0개 & 행당 필드 27개입니다.
-  [실행 보기](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
+  `kyeJqCeaARxQPGM5W`
 - `tweetapi/twitter-x-search-scraper` 실행은 유용한 트윗 337개를 전달했습니다.
   유용한 트윗당 $0.000374, 초당 2.6개 & 행당 필드 28개입니다.
-  [실행 보기](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
+  `mxkP8EDAUVtCZdobb`
 - `api-ninja/x-twitter-advanced-search` 실행은 유용한 트윗 837개를 전달했습니다.
   유용한 트윗당 $0.000430, 초당 7.4개 & 행당 필드 28개입니다.
-  [실행 보기](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
+  `XAWKinvZyPNjCwrib`
 - `apidojo/twitter-scraper-lite` 실행은 유용한 트윗 251개를 전달했습니다. 유용한
   트윗당 $0.000494, 초당 12.9개 & 행당 필드 54개입니다.
-  [실행 보기](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
+  `1t4XwmbQNTtwMJ0Ta`
 - `apidojo/tweet-scraper` 실행은 유용한 트윗 481개를 전달했습니다. 유용한 트윗당
   $0.000832, 초당 7.8개 & 행당 필드 55개입니다.
-  [실행 보기](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
+  `PydoBgS1YRblg29bB`
 - `xtdata/twitter-x-scraper` 실행은 유용한 트윗 1,378개를 전달했습니다. 유용한
   트윗당 $0.001168, 초당 11.9개 & 행당 필드 67개입니다.
-  [실행 보기](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
+  `U91dRXEvKvqu41aop`
 - `seemuapps/x-tweet-scraper` 실행은 유용한 트윗 805개를 전달했습니다. 유용한
   트윗당 $0.001242, 초당 6.9개 & 행당 필드 24개입니다.
-  [실행 보기](https://console.apify.com/view/runs/FstursEw43TbcipYU)
+  `FstursEw43TbcipYU`
 - `maximedupre/twitter-scraper` 실행은 유용한 트윗 46개를 전달했습니다. 유용한
   트윗당 $0.002846, 초당 0.3개 & 행당 필드 31개입니다.
-  [실행 보기](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
+  `Hs8irhEcAfWcQNc4w`
 
 모든 Actor는 같은 검색 & 필터로 실행했습니다. 다른 Actor는 2026-09-27에
 실행했습니다. Xquik 실행은 `outputVariant: "rich"`를 설정하고 2026-09-29에

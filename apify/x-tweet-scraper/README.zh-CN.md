@@ -429,23 +429,23 @@ Xquik 的 X Tweet Scraper 在所有 Apify 套餐上都按每个已交付行 $0.0
 
 Xquik 的 X Tweet Scraper 在成本&速度上胜过其他 11 个帖子抓取 Actor。它的中位数行有 63 个字段，是其他 Actor 中位数的 2 倍。
 
-- `xquik/x-tweet-scraper` 交付了 890 条有用帖子，每条有用帖子 $0.000175，每秒 39.2 条&每行 63 个字段。[查看运行](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
-- `xquik/x-tweet-scraper` 交付了 883 条有用帖子，每条有用帖子 $0.000176，每秒 25.2 条&每行 63 个字段。[查看运行](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
-- `xquik/x-tweet-scraper` 交付了 882 条有用帖子，每条有用帖子 $0.000177，每秒 25.7 条&每行 63 个字段。[查看运行](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
-- `xquik/x-tweet-scraper` 交付了 877 条有用帖子，每条有用帖子 $0.000178，每秒 26.9 条&每行 63 个字段。[查看运行](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` 交付了 813 条有用帖子，每条有用帖子 $0.000185，每秒 10.5 条&每行 36 个字段。[查看运行](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` 交付了 805 条有用帖子，每条有用帖子 $0.000187，每秒 10.6 条&每行 36 个字段。[查看运行](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` 交付了 805 条有用帖子，每条有用帖子 $0.000187，每秒 10.7 条&每行 36 个字段。[查看运行](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
-- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` 交付了 880 条有用帖子，每条有用帖子 $0.000250，每秒 9.1 条&每行 46 个字段。[查看运行](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
-- `scraper_one/x-posts-search` 交付了 804 条有用帖子，每条有用帖子 $0.000314，每秒 3.3 条&每行 14 个字段。[查看运行](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
-- `danek/twitter-scraper` 交付了 807 条有用帖子，每条有用帖子 $0.000347，每秒 5.0 条&每行 27 个字段。[查看运行](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
-- `tweetapi/twitter-x-search-scraper` 交付了 337 条有用帖子，每条有用帖子 $0.000374，每秒 2.6 条&每行 28 个字段。[查看运行](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
-- `api-ninja/x-twitter-advanced-search` 交付了 837 条有用帖子，每条有用帖子 $0.000430，每秒 7.4 条&每行 28 个字段。[查看运行](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
-- `apidojo/twitter-scraper-lite` 交付了 251 条有用帖子，每条有用帖子 $0.000494，每秒 12.9 条&每行 54 个字段。[查看运行](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
-- `apidojo/tweet-scraper` 交付了 481 条有用帖子，每条有用帖子 $0.000832，每秒 7.8 条&每行 55 个字段。[查看运行](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
-- `xtdata/twitter-x-scraper` 交付了 1,378 条有用帖子，每条有用帖子 $0.001168，每秒 11.9 条&每行 67 个字段。[查看运行](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
-- `seemuapps/x-tweet-scraper` 交付了 805 条有用帖子，每条有用帖子 $0.001242，每秒 6.9 条&每行 24 个字段。[查看运行](https://console.apify.com/view/runs/FstursEw43TbcipYU)
-- `maximedupre/twitter-scraper` 交付了 46 条有用帖子，每条有用帖子 $0.002846，每秒 0.3 条&每行 31 个字段。[查看运行](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
+- `xquik/x-tweet-scraper` 交付了 890 条有用帖子，每条有用帖子 $0.000175，每秒 39.2 条&每行 63 个字段。`fflWVxHwYvtyHpAQX`
+- `xquik/x-tweet-scraper` 交付了 883 条有用帖子，每条有用帖子 $0.000176，每秒 25.2 条&每行 63 个字段。`EtSdBgkUcH4M1uicf`
+- `xquik/x-tweet-scraper` 交付了 882 条有用帖子，每条有用帖子 $0.000177，每秒 25.7 条&每行 63 个字段。`SK3ZWhPwzGJYoYQba`
+- `xquik/x-tweet-scraper` 交付了 877 条有用帖子，每条有用帖子 $0.000178，每秒 26.9 条&每行 63 个字段。`JRdbcigkBMCaFuH1W`
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` 交付了 813 条有用帖子，每条有用帖子 $0.000185，每秒 10.5 条&每行 36 个字段。`mIT1zf0xccCsYWO1E`
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` 交付了 805 条有用帖子，每条有用帖子 $0.000187，每秒 10.6 条&每行 36 个字段。`p1MUeElsamZUepTpm`
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` 交付了 805 条有用帖子，每条有用帖子 $0.000187，每秒 10.7 条&每行 36 个字段。`pQlQa0GMm7BWTUUOB`
+- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` 交付了 880 条有用帖子，每条有用帖子 $0.000250，每秒 9.1 条&每行 46 个字段。`3Fn8yvqncsWdcw1I2`
+- `scraper_one/x-posts-search` 交付了 804 条有用帖子，每条有用帖子 $0.000314，每秒 3.3 条&每行 14 个字段。`M9TgeCLLKZlNTOrj0`
+- `danek/twitter-scraper` 交付了 807 条有用帖子，每条有用帖子 $0.000347，每秒 5.0 条&每行 27 个字段。`kyeJqCeaARxQPGM5W`
+- `tweetapi/twitter-x-search-scraper` 交付了 337 条有用帖子，每条有用帖子 $0.000374，每秒 2.6 条&每行 28 个字段。`mxkP8EDAUVtCZdobb`
+- `api-ninja/x-twitter-advanced-search` 交付了 837 条有用帖子，每条有用帖子 $0.000430，每秒 7.4 条&每行 28 个字段。`XAWKinvZyPNjCwrib`
+- `apidojo/twitter-scraper-lite` 交付了 251 条有用帖子，每条有用帖子 $0.000494，每秒 12.9 条&每行 54 个字段。`1t4XwmbQNTtwMJ0Ta`
+- `apidojo/tweet-scraper` 交付了 481 条有用帖子，每条有用帖子 $0.000832，每秒 7.8 条&每行 55 个字段。`PydoBgS1YRblg29bB`
+- `xtdata/twitter-x-scraper` 交付了 1,378 条有用帖子，每条有用帖子 $0.001168，每秒 11.9 条&每行 67 个字段。`U91dRXEvKvqu41aop`
+- `seemuapps/x-tweet-scraper` 交付了 805 条有用帖子，每条有用帖子 $0.001242，每秒 6.9 条&每行 24 个字段。`FstursEw43TbcipYU`
+- `maximedupre/twitter-scraper` 交付了 46 条有用帖子，每条有用帖子 $0.002846，每秒 0.3 条&每行 31 个字段。`Hs8irhEcAfWcQNc4w`
 
 每个 Actor 都运行了相同的搜索&过滤条件。其他 Actor 在 2026-09-27 运行。Xquik 的运行设置了 `outputVariant: "rich"` & 在 2026-09-29 运行。所有运行都使用 Bronze 等级。有用帖子指不重复的英文原创帖子，且喜欢数至少为 10。成本是客户为每条有用帖子支付的总费用。我们的成本包含客户支付的 Apify 用量。每行字段数是非空字段数的中位数，包括嵌套字段。1 个列表计为 1 个字段。打开某次运行，即可查看它的输入、日志&数据集。
 

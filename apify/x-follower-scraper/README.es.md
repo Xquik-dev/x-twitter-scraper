@@ -460,43 +460,43 @@ velocidad. Su fila full mediana tuvo 38 campos, 2.5x la mediana de los demás.
 
 - `xquik/x-follower-scraper` entregó 1,000 perfiles útiles a $0.000155 por
   perfil útil, 100.0 por segundo & 38 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
+  `z5ELS2u5sgjuhAFHN`
 - `xquik/x-follower-scraper` entregó 1,000 perfiles útiles a $0.000155 por
   perfil útil, 77.9 por segundo & 38 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
+  `Htim4jqodU6ZPjQiQ`
 - `b2b_leads/X-Real-Time-Data` entregó 286 perfiles útiles a $0.000388 por
   perfil útil, 3.1 por segundo & 21 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
+  `IkQButA6cVz4ys4GM`
 - `kaitoeasyapi/premium-x-follower-scraper-following-data` entregó 356 perfiles
   útiles a $0.000506 por perfil útil, 21.9 por segundo & 50 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
+  `cJgj15HLBA50LEUf0`
 - `api-ninja/x-twitter-followers-scraper` entregó 350 perfiles útiles a
   $0.000809 por perfil útil, 7.0 por segundo & 8 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
+  `XjJ4UPKAILSz0Droz`
 - `altimis/scweet` entregó 332 perfiles útiles a $0.000922 por perfil útil, 1.1
   por segundo & 21 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
+  `qVGvT7TPAJEHCuR42`
 - `apidojo/twitter-user-scraper` entregó 323 perfiles útiles a $0.001160 por
   perfil útil, 7.3 por segundo & 25 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
+  `Xnf7rh8jK6764gP1f`
 - `atomus/twitter-scraper` entregó 323 perfiles útiles a $0.001272 por perfil
   útil, 6.2 por segundo & 13 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
+  `MWz1l0cTcfPcEnaiH`
 - `practicaltools/cheap-simple-twitter-api` entregó 283 perfiles útiles a
   $0.002036 por perfil útil, 6.5 por segundo & 4 campos por fila.
-  [Ejecución 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb),
-  [Ejecución 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK),
-  [Ejecución 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
+  `Zhvi7LsfpHdQNKcGb`,
+  `IsJj4fa8pFUG7uhlK`,
+  `2W7n8fpEqoxiXq6oX`
 - `maximedupre/twitter-scraper` entregó 320 perfiles útiles a $0.002192 por
   perfil útil, 2.1 por segundo & 15 campos por fila.
-  [Ejecución 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs),
-  [Ejecución 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39),
-  [Ejecución 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
+  `HblUkhgI2svp1LBGs`,
+  `37yQFzgydzJoWfa39`,
+  `mtBoKcocaM4BUzZmm`
 - `seemuapps/x-followers-following-scraper` entregó 286 perfiles útiles a
   $0.003504 por perfil útil, 3.9 por segundo & 9 campos por fila.
-  [Ejecución 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj),
-  [Ejecución 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ),
-  [Ejecución 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
+  `1r3je034X2qhFGgLj`,
+  `dc4ztVP3n2eemgiNQ`,
+  `gWPiBT00G7D9IJ0Cj`
 
 Cada Actor leyó los seguidores de NASA, SpaceX & ESA. Los demás Actores se
 ejecutaron el 2026-09-28. Las ejecuciones de Xquik usaron `outputMode: "full"` &

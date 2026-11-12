@@ -597,28 +597,28 @@ unique English original post with 10+ likes. It falls in the date range.
 
 - `xquik/x-tweet-scraper` delivered 1,000 useful tweets at $0.000155 per useful
   tweet, 150.5 per second & 67 fields per row.
-  [View run](https://console.apify.com/view/runs/km8s0cIJjtggX86Um)
+  `km8s0cIJjtggX86Um`
 - `xquik/x-tweet-scraper` delivered 1,000 useful tweets at $0.000155 per useful
   tweet, 171.1 per second & 67 fields per row.
-  [View run](https://console.apify.com/view/runs/blvgyrkWnFcPVMBRe)
+  `blvgyrkWnFcPVMBRe`
 - `xquik/x-tweet-scraper` delivered 1,000 useful tweets at $0.000155 per useful
   tweet, 172.4 per second & 67 fields per row.
-  [View run](https://console.apify.com/view/runs/LZJylnFyBIP2E9tPc)
+  `LZJylnFyBIP2E9tPc`
 - `xquik/x-tweet-scraper` delivered 1,000 useful tweets at $0.000155 per useful
   tweet, 169.3 per second & 67 fields per row.
-  [View run](https://console.apify.com/view/runs/X0uaFNfgQZlr6FTTU)
+  `X0uaFNfgQZlr6FTTU`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` delivered 871 useful
   tweets at $0.000173 per useful tweet, 10.7 per second & 35 fields per row.
-  [View run](https://console.apify.com/view/runs/BBDAikcjXaGHb6hTC)
+  `BBDAikcjXaGHb6hTC`
 - `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` delivered
   436 useful tweets at $0.000222 per useful tweet, 8.1 per second & 46 fields
-  per row. [View run](https://console.apify.com/view/runs/rINRh514vU77bjCRV)
+  per row. `rINRh514vU77bjCRV`
 - `apidojo/twitter-scraper-lite` delivered 326 useful tweets at $0.000434 per
   useful tweet, 9.3 per second & 54 fields per row.
-  [View run](https://console.apify.com/view/runs/giM6ORTDaqcuTiWXd)
+  `giM6ORTDaqcuTiWXd`
 - `apidojo/tweet-scraper` delivered 642 useful tweets at $0.000623 per useful
   tweet, 12.5 per second & 55 fields per row.
-  [View run](https://console.apify.com/view/runs/mPhpJSQHvEcC8HdoK)
+  `mPhpJSQHvEcC8HdoK`
 
 ### Filtered search
 
@@ -630,28 +630,28 @@ tweet.
 
 - `xquik/x-tweet-scraper` delivered 200 useful tweets at $0.000156 per useful
   tweet, 32.2 per second & 69 fields per row.
-  [View run](https://console.apify.com/view/runs/YZ2xe6LhChMhTUau4)
+  `YZ2xe6LhChMhTUau4`
 - `xquik/x-tweet-scraper` delivered 200 useful tweets at $0.000156 per useful
   tweet, 29.8 per second & 69 fields per row.
-  [View run](https://console.apify.com/view/runs/sBufY1TuZlKX7iZwo)
+  `sBufY1TuZlKX7iZwo`
 - `xquik/x-tweet-scraper` delivered 200 useful tweets at $0.000156 per useful
   tweet, 34.3 per second & 69 fields per row.
-  [View run](https://console.apify.com/view/runs/xbcx6NaungO9hiuEw)
+  `xbcx6NaungO9hiuEw`
 - `xquik/x-tweet-scraper` delivered 200 useful tweets at $0.000156 per useful
   tweet, 29.7 per second & 69 fields per row.
-  [View run](https://console.apify.com/view/runs/QIc03AZAo6Ru34MiB)
+  `QIc03AZAo6Ru34MiB`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` delivered 238 useful
   tweets at $0.000191 per useful tweet, 7.2 per second & 35 fields per row.
-  [View run](https://console.apify.com/view/runs/0zgJlgm6gzp5xmfcr)
+  `0zgJlgm6gzp5xmfcr`
 - `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` delivered
   282 useful tweets at $0.000234 per useful tweet, 6.7 per second & 47 fields
-  per row. [View run](https://console.apify.com/view/runs/JHsz1lGXBrYDxDGhj)
+  per row. `JHsz1lGXBrYDxDGhj`
 - `apidojo/twitter-scraper-lite` delivered 295 useful tweets at $0.000391 per
   useful tweet, 2.7 per second & 56 fields per row.
-  [View run](https://console.apify.com/view/runs/Rpq8QDcXtZbbRtSWp)
+  `Rpq8QDcXtZbbRtSWp`
 - `apidojo/tweet-scraper` delivered 295 useful tweets at $0.000407 per useful
   tweet, 6.2 per second & 55 fields per row.
-  [View run](https://console.apify.com/view/runs/72HVaNMQDhLebsyJY)
+  `72HVaNMQDhLebsyJY`
 
 ### User timeline
 
@@ -661,37 +661,36 @@ post that isn't a repost.
 
 - `xquik/x-tweet-scraper` delivered 100 useful tweets at $0.000157 per useful
   tweet, 22.7 per second & 62 fields per row.
-  [View run](https://console.apify.com/view/runs/5eqwTtfMKcfM9nQDA)
+  `5eqwTtfMKcfM9nQDA`
 - `xquik/x-tweet-scraper` delivered 100 useful tweets at $0.000157 per useful
   tweet, 23.5 per second & 62 fields per row.
-  [View run](https://console.apify.com/view/runs/ecDG3raO9YU4CDyQs)
+  `ecDG3raO9YU4CDyQs`
 - `xquik/x-tweet-scraper` delivered 100 useful tweets at $0.000157 per useful
   tweet, 23.1 per second & 62 fields per row.
-  [View run](https://console.apify.com/view/runs/mwnvFfqrJNOydoOME)
+  `mwnvFfqrJNOydoOME`
 - `xquik/x-tweet-scraper` delivered 100 useful tweets at $0.000157 per useful
   tweet, 25.6 per second & 62 fields per row.
-  [View run](https://console.apify.com/view/runs/6wo6rjnJEDhkg7Uik)
+  `6wo6rjnJEDhkg7Uik`
 - `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` delivered
   100 useful tweets at $0.000220 per useful tweet, 5.1 per second & 52 fields
-  per row. [View run](https://console.apify.com/view/runs/p03W0TlijlZJeolJI)
+  per row. `p03W0TlijlZJeolJI`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` delivered 65 useful
   tweets at $0.000238 per useful tweet, 7.9 per second & 37 fields per row.
-  [View run](https://console.apify.com/view/runs/2Xct7qrufMKQO1xiX)
+  `2Xct7qrufMKQO1xiX`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` delivered 65 useful
   tweets at $0.000238 per useful tweet, 7.3 per second & 37 fields per row.
-  [View run](https://console.apify.com/view/runs/tGAhPPAiVGhx2faJ8)
+  `tGAhPPAiVGhx2faJ8`
 - `apidojo/tweet-scraper` delivered 63 useful tweets at $0.000635 per useful
   tweet, 3.9 per second & 57 fields per row.
-  [View run](https://console.apify.com/view/runs/w7RLe7k1Ye2rKEzOu)
+  `w7RLe7k1Ye2rKEzOu`
 - `apidojo/twitter-scraper-lite` delivered 63 useful tweets at $0.000737 per
   useful tweet, 2.6 per second & 57 fields per row.
-  [View run](https://console.apify.com/view/runs/HFrwZGnr1V0AHgye3)
+  `HFrwZGnr1V0AHgye3`
 
 All runs took place on 2026-10-15 & 2026-10-16 on the Bronze tier. Cost is the
 customer's total spend per useful result. Ours includes the Apify usage our
 customers pay. Fields per row is the median count of non-empty fields. That
-count includes nested fields, & a list counts as 1. Open a run for its input,
-log & dataset.
+count includes nested fields, & a list counts as 1. Each run ID names a public record under xquik.com/benchmarks/runs/.
 
 ## Empty, partial & stopped runs
 

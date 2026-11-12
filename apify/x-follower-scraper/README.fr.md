@@ -441,43 +441,43 @@ autres.
 
 - `xquik/x-follower-scraper` a livré 1 000 profils utiles à $0.000155 par profil
   utile, avec 100,0 par seconde & 38 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
+  `z5ELS2u5sgjuhAFHN`
 - `xquik/x-follower-scraper` a livré 1 000 profils utiles à $0.000155 par profil
   utile, avec 77,9 par seconde & 38 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
+  `Htim4jqodU6ZPjQiQ`
 - `b2b_leads/X-Real-Time-Data` a livré 286 profils utiles à $0.000388 par profil
   utile, avec 3,1 par seconde & 21 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
+  `IkQButA6cVz4ys4GM`
 - `kaitoeasyapi/premium-x-follower-scraper-following-data` a livré 356 profils
   utiles à $0.000506 par profil utile, avec 21,9 par seconde & 50 champs par
-  ligne. [Voir le run](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
+  ligne. `cJgj15HLBA50LEUf0`
 - `api-ninja/x-twitter-followers-scraper` a livré 350 profils utiles à $0.000809
   par profil utile, avec 7,0 par seconde & 8 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
+  `XjJ4UPKAILSz0Droz`
 - `altimis/scweet` a livré 332 profils utiles à $0.000922 par profil utile, avec
   1,1 par seconde & 21 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
+  `qVGvT7TPAJEHCuR42`
 - `apidojo/twitter-user-scraper` a livré 323 profils utiles à $0.001160 par
   profil utile, avec 7,3 par seconde & 25 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
+  `Xnf7rh8jK6764gP1f`
 - `atomus/twitter-scraper` a livré 323 profils utiles à $0.001272 par profil
   utile, avec 6,2 par seconde & 13 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
+  `MWz1l0cTcfPcEnaiH`
 - `practicaltools/cheap-simple-twitter-api` a livré 283 profils utiles à
   $0.002036 par profil utile, avec 6,5 par seconde & 4 champs par ligne.
-  [Run 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb),
-  [Run 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK),
-  [Run 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
+  `Zhvi7LsfpHdQNKcGb`,
+  `IsJj4fa8pFUG7uhlK`,
+  `2W7n8fpEqoxiXq6oX`
 - `maximedupre/twitter-scraper` a livré 320 profils utiles à $0.002192 par
   profil utile, avec 2,1 par seconde & 15 champs par ligne.
-  [Run 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs),
-  [Run 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39),
-  [Run 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
+  `HblUkhgI2svp1LBGs`,
+  `37yQFzgydzJoWfa39`,
+  `mtBoKcocaM4BUzZmm`
 - `seemuapps/x-followers-following-scraper` a livré 286 profils utiles à
   $0.003504 par profil utile, avec 3,9 par seconde & 9 champs par ligne.
-  [Run 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj),
-  [Run 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ),
-  [Run 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
+  `1r3je034X2qhFGgLj`,
+  `dc4ztVP3n2eemgiNQ`,
+  `gWPiBT00G7D9IJ0Cj`
 
 Chaque Actor a lu les abonnés de NASA, SpaceX & esa. Les autres Actors ont
 tourné le 2026-09-28. Les runs de Xquik ont réglé `outputMode: "full"` & ont

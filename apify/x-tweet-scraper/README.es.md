@@ -631,55 +631,55 @@ velocidad. Su fila mediana tuvo 63 campos, 2x la mediana de los demás.
 
 - `xquik/x-tweet-scraper` entregó 890 posts útiles a $0.000175 por post útil,
   39.2 por segundo & 63 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
+  `fflWVxHwYvtyHpAQX`
 - `xquik/x-tweet-scraper` entregó 883 posts útiles a $0.000176 por post útil,
   25.2 por segundo & 63 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
+  `EtSdBgkUcH4M1uicf`
 - `xquik/x-tweet-scraper` entregó 882 posts útiles a $0.000177 por post útil,
   25.7 por segundo & 63 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
+  `SK3ZWhPwzGJYoYQba`
 - `xquik/x-tweet-scraper` entregó 877 posts útiles a $0.000178 por post útil,
   26.9 por segundo & 63 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
+  `JRdbcigkBMCaFuH1W`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` entregó 813 posts
   útiles a $0.000185 por post útil, 10.5 por segundo & 36 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
+  `mIT1zf0xccCsYWO1E`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` entregó 805 posts
   útiles a $0.000187 por post útil, 10.6 por segundo & 36 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
+  `p1MUeElsamZUepTpm`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` entregó 805 posts
   útiles a $0.000187 por post útil, 10.7 por segundo & 36 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
+  `pQlQa0GMm7BWTUUOB`
 - `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` entregó
   880 posts útiles a $0.000250 por post útil, 9.1 por segundo & 46 campos por
-  fila. [Ver ejecución](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
+  fila. `3Fn8yvqncsWdcw1I2`
 - `scraper_one/x-posts-search` entregó 804 posts útiles a $0.000314 por post
   útil, 3.3 por segundo & 14 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
+  `M9TgeCLLKZlNTOrj0`
 - `danek/twitter-scraper` entregó 807 posts útiles a $0.000347 por post útil,
   5.0 por segundo & 27 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
+  `kyeJqCeaARxQPGM5W`
 - `tweetapi/twitter-x-search-scraper` entregó 337 posts útiles a $0.000374 por
   post útil, 2.6 por segundo & 28 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
+  `mxkP8EDAUVtCZdobb`
 - `api-ninja/x-twitter-advanced-search` entregó 837 posts útiles a $0.000430 por
   post útil, 7.4 por segundo & 28 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
+  `XAWKinvZyPNjCwrib`
 - `apidojo/twitter-scraper-lite` entregó 251 posts útiles a $0.000494 por post
   útil, 12.9 por segundo & 54 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
+  `1t4XwmbQNTtwMJ0Ta`
 - `apidojo/tweet-scraper` entregó 481 posts útiles a $0.000832 por post útil,
   7.8 por segundo & 55 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
+  `PydoBgS1YRblg29bB`
 - `xtdata/twitter-x-scraper` entregó 1,378 posts útiles a $0.001168 por post
   útil, 11.9 por segundo & 67 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
+  `U91dRXEvKvqu41aop`
 - `seemuapps/x-tweet-scraper` entregó 805 posts útiles a $0.001242 por post
   útil, 6.9 por segundo & 24 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/FstursEw43TbcipYU)
+  `FstursEw43TbcipYU`
 - `maximedupre/twitter-scraper` entregó 46 posts útiles a $0.002846 por post
   útil, 0.3 por segundo & 31 campos por fila.
-  [Ver ejecución](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
+  `Hs8irhEcAfWcQNc4w`
 
 Cada Actor ejecutó la misma búsqueda & los mismos filtros. Los demás Actores se
 ejecutaron el 2026-09-27. Las ejecuciones de Xquik usaron

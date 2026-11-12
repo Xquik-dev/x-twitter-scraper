@@ -429,23 +429,23 @@ XquikのX Tweet Scraperは、どのApifyプランでも、配信された行1件
 
 XquikのX Tweet Scraperは、コスト&速度で他の11のポスト用Actorを上回りました。1行あたりのフィールド数の中央値は63で、他のActorの中央値の2倍でした。
 
-- `xquik/x-tweet-scraper` は、有効なポストを890件配信しました。有効なポスト1件あたり$0.000175、1秒あたり39.2件&1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
-- `xquik/x-tweet-scraper` は、有効なポストを883件配信しました。有効なポスト1件あたり$0.000176、1秒あたり25.2件&1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
-- `xquik/x-tweet-scraper` は、有効なポストを882件配信しました。有効なポスト1件あたり$0.000177、1秒あたり25.7件&1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
-- `xquik/x-tweet-scraper` は、有効なポストを877件配信しました。有効なポスト1件あたり$0.000178、1秒あたり26.9件&1行あたり63フィールドです。[実行を見る](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` は、有効なポストを813件配信しました。有効なポスト1件あたり$0.000185、1秒あたり10.5件&1行あたり36フィールドです。[実行を見る](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` は、有効なポストを805件配信しました。有効なポスト1件あたり$0.000187、1秒あたり10.6件&1行あたり36フィールドです。[実行を見る](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
-- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` は、有効なポストを805件配信しました。有効なポスト1件あたり$0.000187、1秒あたり10.7件&1行あたり36フィールドです。[実行を見る](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
-- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` は、有効なポストを880件配信しました。有効なポスト1件あたり$0.000250、1秒あたり9.1件&1行あたり46フィールドです。[実行を見る](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
-- `scraper_one/x-posts-search` は、有効なポストを804件配信しました。有効なポスト1件あたり$0.000314、1秒あたり3.3件&1行あたり14フィールドです。[実行を見る](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
-- `danek/twitter-scraper` は、有効なポストを807件配信しました。有効なポスト1件あたり$0.000347、1秒あたり5.0件&1行あたり27フィールドです。[実行を見る](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
-- `tweetapi/twitter-x-search-scraper` は、有効なポストを337件配信しました。有効なポスト1件あたり$0.000374、1秒あたり2.6件&1行あたり28フィールドです。[実行を見る](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
-- `api-ninja/x-twitter-advanced-search` は、有効なポストを837件配信しました。有効なポスト1件あたり$0.000430、1秒あたり7.4件&1行あたり28フィールドです。[実行を見る](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
-- `apidojo/twitter-scraper-lite` は、有効なポストを251件配信しました。有効なポスト1件あたり$0.000494、1秒あたり12.9件&1行あたり54フィールドです。[実行を見る](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
-- `apidojo/tweet-scraper` は、有効なポストを481件配信しました。有効なポスト1件あたり$0.000832、1秒あたり7.8件&1行あたり55フィールドです。[実行を見る](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
-- `xtdata/twitter-x-scraper` は、有効なポストを1,378件配信しました。有効なポスト1件あたり$0.001168、1秒あたり11.9件&1行あたり67フィールドです。[実行を見る](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
-- `seemuapps/x-tweet-scraper` は、有効なポストを805件配信しました。有効なポスト1件あたり$0.001242、1秒あたり6.9件&1行あたり24フィールドです。[実行を見る](https://console.apify.com/view/runs/FstursEw43TbcipYU)
-- `maximedupre/twitter-scraper` は、有効なポストを46件配信しました。有効なポスト1件あたり$0.002846、1秒あたり0.3件&1行あたり31フィールドです。[実行を見る](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
+- `xquik/x-tweet-scraper` は、有効なポストを890件配信しました。有効なポスト1件あたり$0.000175、1秒あたり39.2件&1行あたり63フィールドです。`fflWVxHwYvtyHpAQX`
+- `xquik/x-tweet-scraper` は、有効なポストを883件配信しました。有効なポスト1件あたり$0.000176、1秒あたり25.2件&1行あたり63フィールドです。`EtSdBgkUcH4M1uicf`
+- `xquik/x-tweet-scraper` は、有効なポストを882件配信しました。有効なポスト1件あたり$0.000177、1秒あたり25.7件&1行あたり63フィールドです。`SK3ZWhPwzGJYoYQba`
+- `xquik/x-tweet-scraper` は、有効なポストを877件配信しました。有効なポスト1件あたり$0.000178、1秒あたり26.9件&1行あたり63フィールドです。`JRdbcigkBMCaFuH1W`
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` は、有効なポストを813件配信しました。有効なポスト1件あたり$0.000185、1秒あたり10.5件&1行あたり36フィールドです。`mIT1zf0xccCsYWO1E`
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` は、有効なポストを805件配信しました。有効なポスト1件あたり$0.000187、1秒あたり10.6件&1行あたり36フィールドです。`p1MUeElsamZUepTpm`
+- `scrapesmith/twitter-x-scraper-tweets-profiles-replies` は、有効なポストを805件配信しました。有効なポスト1件あたり$0.000187、1秒あたり10.7件&1行あたり36フィールドです。`pQlQa0GMm7BWTUUOB`
+- `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` は、有効なポストを880件配信しました。有効なポスト1件あたり$0.000250、1秒あたり9.1件&1行あたり46フィールドです。`3Fn8yvqncsWdcw1I2`
+- `scraper_one/x-posts-search` は、有効なポストを804件配信しました。有効なポスト1件あたり$0.000314、1秒あたり3.3件&1行あたり14フィールドです。`M9TgeCLLKZlNTOrj0`
+- `danek/twitter-scraper` は、有効なポストを807件配信しました。有効なポスト1件あたり$0.000347、1秒あたり5.0件&1行あたり27フィールドです。`kyeJqCeaARxQPGM5W`
+- `tweetapi/twitter-x-search-scraper` は、有効なポストを337件配信しました。有効なポスト1件あたり$0.000374、1秒あたり2.6件&1行あたり28フィールドです。`mxkP8EDAUVtCZdobb`
+- `api-ninja/x-twitter-advanced-search` は、有効なポストを837件配信しました。有効なポスト1件あたり$0.000430、1秒あたり7.4件&1行あたり28フィールドです。`XAWKinvZyPNjCwrib`
+- `apidojo/twitter-scraper-lite` は、有効なポストを251件配信しました。有効なポスト1件あたり$0.000494、1秒あたり12.9件&1行あたり54フィールドです。`1t4XwmbQNTtwMJ0Ta`
+- `apidojo/tweet-scraper` は、有効なポストを481件配信しました。有効なポスト1件あたり$0.000832、1秒あたり7.8件&1行あたり55フィールドです。`PydoBgS1YRblg29bB`
+- `xtdata/twitter-x-scraper` は、有効なポストを1,378件配信しました。有効なポスト1件あたり$0.001168、1秒あたり11.9件&1行あたり67フィールドです。`U91dRXEvKvqu41aop`
+- `seemuapps/x-tweet-scraper` は、有効なポストを805件配信しました。有効なポスト1件あたり$0.001242、1秒あたり6.9件&1行あたり24フィールドです。`FstursEw43TbcipYU`
+- `maximedupre/twitter-scraper` は、有効なポストを46件配信しました。有効なポスト1件あたり$0.002846、1秒あたり0.3件&1行あたり31フィールドです。`Hs8irhEcAfWcQNc4w`
 
 各Actorは同じ検索&フィルターで実行しました。他のActorは2026-09-27に実行しました。Xquikの実行は `outputVariant: "rich"` を設定し、2026-09-29に実行しました。すべての実行でBronzeティアを使いました。有効なポストとは、いいねが10件以上ある、重複のない英語のオリジナルポストです。コストは、有効なポスト1件あたりの顧客の総支払額です。当社のコストには、顧客が支払うApifyの利用料を含みます。1行あたりのフィールド数は、入れ子のフィールドも含めた、空でないフィールド数の中央値です。リストは1フィールドとして数えます。実行を開くと、入力、ログ&データセットを確認できます。
 

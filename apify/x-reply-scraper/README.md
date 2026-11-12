@@ -307,48 +307,48 @@ post's thread.
 
 - `xquik/x-reply-scraper` delivered 200 useful replies at $0.000156 per useful
   reply, 19.7 per second & 100 fields per row.
-  [View run](https://console.apify.com/view/runs/nhLt4g4YMjck0a3EJ)
+  `nhLt4g4YMjck0a3EJ`
 - `xquik/x-reply-scraper` delivered 200 useful replies at $0.000156 per useful
   reply, 16.5 per second & 101 fields per row.
-  [View run](https://console.apify.com/view/runs/d89hq348wWv3uXKbF)
+  `d89hq348wWv3uXKbF`
 - `xquik/x-reply-scraper` delivered 200 useful replies at $0.000157 per useful
   reply, 14.4 per second & 101 fields per row.
-  [View run](https://console.apify.com/view/runs/EviOWh0mfuQCmg5Qb)
+  `EviOWh0mfuQCmg5Qb`
 - `xquik/x-reply-scraper` delivered 200 useful replies at $0.000157 per useful
   reply, 13.6 per second & 101 fields per row.
-  [View run](https://console.apify.com/view/runs/fcaxea2NSgv1bYBz5)
+  `fcaxea2NSgv1bYBz5`
 - `xquik/x-reply-scraper` delivered 200 useful replies at $0.000156 per useful
   reply, 16.5 per second & 100 fields per row.
-  [View run](https://console.apify.com/view/runs/ZPA7cXLo2Cjp5w1K4)
+  `ZPA7cXLo2Cjp5w1K4`
 - `xquik/x-reply-scraper` delivered 200 useful replies at $0.000157 per useful
   reply, 11.3 per second & 100 fields per row.
-  [View run](https://console.apify.com/view/runs/W1WJthlB7HlUlsdn2)
+  `W1WJthlB7HlUlsdn2`
 - `xquik/x-reply-scraper` delivered 200 useful replies at $0.000156 per useful
   reply, 20.1 per second & 100 fields per row.
-  [View run](https://console.apify.com/view/runs/cjEy8ukBzYaMNPLEP)
+  `cjEy8ukBzYaMNPLEP`
 - `xquik/x-reply-scraper` delivered 200 useful replies at $0.000156 per useful
   reply, 20.6 per second & 100 fields per row.
-  [View run](https://console.apify.com/view/runs/7KovOrh4gHEhmypa3)
+  `7KovOrh4gHEhmypa3`
 - `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` delivered
   200 useful replies at $0.000220 per useful reply, 9.6 per second & 50 fields
-  per row. [View run](https://console.apify.com/view/runs/ayhXrguBqIitOaHiQ)
+  per row. `ayhXrguBqIitOaHiQ`
 - `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` delivered
   200 useful replies at $0.000220 per useful reply, 8.1 per second & 50 fields
-  per row. [View run](https://console.apify.com/view/runs/dzdRog1lxaEysgPIO)
+  per row. `dzdRog1lxaEysgPIO`
 - `scraper_one/x-post-replies-scraper` delivered 200 useful replies at $0.000263
   per useful reply, 6.6 per second & 15 fields per row.
-  [View run](https://console.apify.com/view/runs/sQOzCIlLD9zZxhOXi)
+  `sQOzCIlLD9zZxhOXi`
 - `api-ninja/x-twitter-replies-retweets-scraper` delivered 200 useful replies at
   $0.000400 per useful reply, 5.0 per second & 33 fields per row.
-  [View run](https://console.apify.com/view/runs/Ld8JStCa5Nnhn6jAH)
+  `Ld8JStCa5Nnhn6jAH`
 - `apidojo/tweet-scraper` delivered 199 useful replies at $0.000402 per useful
   reply, 6.7 per second & 51 fields per row.
-  [View run](https://console.apify.com/view/runs/iwVzxxn5QL5hBsswR)
+  `iwVzxxn5QL5hBsswR`
 
 All runs took place on 2026-10-15 on the Bronze tier. Cost is the customer's
 total spend per useful result. Ours includes the Apify usage our customers pay.
 Fields per row is the median count of non-empty fields. That count includes
-nested fields, & a list counts as 1. Open a run for its input, log & dataset.
+nested fields, & a list counts as 1. Each run ID names a public record under xquik.com/benchmarks/runs/.
 
 ## Empty, partial & stopped runs
 
