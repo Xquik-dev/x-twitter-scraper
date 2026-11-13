@@ -442,28 +442,28 @@ useful profile is unique with 1,000+ followers.
 
 - `xquik/x-follower-scraper` delivered 100 useful profiles at $0.000164 per
   useful profile, 1.8 per second & 42 fields per row.
-  [View run](https://console.apify.com/view/runs/1fwV7snd3rgaoCZHk)
+  `1fwV7snd3rgaoCZHk`
 - `xquik/x-follower-scraper` delivered 100 useful profiles at $0.000163 per
   useful profile, 2.0 per second & 42 fields per row.
-  [View run](https://console.apify.com/view/runs/XkqZiTmkhgkPH6327)
+  `XkqZiTmkhgkPH6327`
 - `xquik/x-follower-scraper` delivered 100 useful profiles at $0.000165 per
   useful profile, 1.6 per second & 42 fields per row.
-  [View run](https://console.apify.com/view/runs/ixl6hzcwfVxPM3sRu)
+  `ixl6hzcwfVxPM3sRu`
 - `xquik/x-follower-scraper` delivered 100 useful profiles at $0.000163 per
   useful profile, 1.9 per second & 42 fields per row.
-  [View run](https://console.apify.com/view/runs/5QFbBNlUpUP2pemWh)
+  `5QFbBNlUpUP2pemWh`
 - `api-ninja/x-twitter-followers-scraper` delivered 22 useful profiles at
   $0.006364 per useful profile, 0.3 per second & 8 fields per row.
-  [View run](https://console.apify.com/view/runs/aes6bNAOWXiofbNSd)
+  `aes6bNAOWXiofbNSd`
 - `altimis/scweet` delivered 22 useful profiles at $0.007091 per useful profile,
   0.1 per second & 21 fields per row.
-  [View run](https://console.apify.com/view/runs/5OGUfY0cyLetRcTDC)
+  `5OGUfY0cyLetRcTDC`
 - `apidojo/twitter-user-scraper` delivered 23 useful profiles at $0.008330 per
   useful profile, 0.9 per second & 25 fields per row.
-  [View run](https://console.apify.com/view/runs/IXmW8b1si3G31HOF6)
+  `IXmW8b1si3G31HOF6`
 - `kaitoeasyapi/premium-x-follower-scraper-following-data` delivered 2 useful
   profiles at $0.045000 per useful profile, 0.2 per second & 48 fields per row.
-  [View run](https://console.apify.com/view/runs/5PVHCt3uaoFfMY2KU)
+  `5PVHCt3uaoFfMY2KU`
 
 ### Followers of NASA, SpaceX & esa
 
@@ -475,48 +475,48 @@ is unique & 30+ days old. It has 1+ follower & 1+ post.
 
 - `xquik/x-follower-scraper` delivered 1,000 useful profiles at $0.000155 per
   useful profile, 72.9 per second & 39 fields per row.
-  [View run](https://console.apify.com/view/runs/tmCrNYIOtaFcP1QGw)
+  `tmCrNYIOtaFcP1QGw`
 - `xquik/x-follower-scraper` delivered 1,000 useful profiles at $0.000155 per
   useful profile, 58.9 per second & 39 fields per row.
-  [View run](https://console.apify.com/view/runs/ge6n1Bc3uDNITzTkL)
+  `ge6n1Bc3uDNITzTkL`
 - `xquik/x-follower-scraper` delivered 1,000 useful profiles at $0.000155 per
   useful profile, 76.5 per second & 39 fields per row.
-  [View run](https://console.apify.com/view/runs/MxjD0zdsTQm6FiBDR)
+  `MxjD0zdsTQm6FiBDR`
 - `xquik/x-follower-scraper` delivered 1,000 useful profiles at $0.000155 per
   useful profile, 72.6 per second & 39 fields per row.
-  [View run](https://console.apify.com/view/runs/3NTZsXGl5T8IVQz71)
+  `3NTZsXGl5T8IVQz71`
 - `xquik/x-follower-scraper` delivered 1,000 useful profiles at $0.000155 per
   useful profile, 73.1 per second & 39 fields per row.
-  [View run](https://console.apify.com/view/runs/jQjw6MB3jAD9pMBh8)
+  `jQjw6MB3jAD9pMBh8`
 - `xquik/x-follower-scraper` delivered 1,000 useful profiles at $0.000155 per
   useful profile, 62.8 per second & 39 fields per row.
-  [View run](https://console.apify.com/view/runs/g1Z6Pm64Hra4Se7Ch)
+  `g1Z6Pm64Hra4Se7Ch`
 - `xquik/x-follower-scraper` delivered 1,000 useful profiles at $0.000155 per
   useful profile, 51.4 per second & 39 fields per row.
-  [View run](https://console.apify.com/view/runs/fBGDfoZAm1CamIY49)
+  `fBGDfoZAm1CamIY49`
 - `xquik/x-follower-scraper` delivered 1,000 useful profiles at $0.000155 per
   useful profile, 57.0 per second & 39 fields per row.
-  [View run](https://console.apify.com/view/runs/MQWzQabAX1dy6jYYr)
+  `MQWzQabAX1dy6jYYr`
 - `kaitoeasyapi/premium-x-follower-scraper-following-data` delivered 347 useful
   profiles at $0.000519 per useful profile, 25.6 per second & 48 fields per row.
-  [View run](https://console.apify.com/view/runs/FAVT3YDzrb1ARJnKC)
+  `FAVT3YDzrb1ARJnKC`
 - `kaitoeasyapi/premium-x-follower-scraper-following-data` delivered 337 useful
   profiles at $0.000534 per useful profile, 25.2 per second & 48 fields per row.
-  [View run](https://console.apify.com/view/runs/N12VE79E0KPndwaX4)
+  `N12VE79E0KPndwaX4`
 - `api-ninja/x-twitter-followers-scraper` delivered 418 useful profiles at
   $0.000687 per useful profile, 5.5 per second & 8 fields per row.
-  [View run](https://console.apify.com/view/runs/VubKrZpDJ7vTtaggf)
+  `VubKrZpDJ7vTtaggf`
 - `altimis/scweet` delivered 306 useful profiles at $0.001000 per useful
   profile, 15.9 per second & 21 fields per row.
-  [View run](https://console.apify.com/view/runs/X5t2sCi6GOyKePkEG)
+  `X5t2sCi6GOyKePkEG`
 - `apidojo/twitter-user-scraper` delivered 314 useful profiles at $0.001194 per
   useful profile, 16.6 per second & 25 fields per row.
-  [View run](https://console.apify.com/view/runs/tZaM1KGNutasbPJNE)
+  `tZaM1KGNutasbPJNE`
 
 All runs took place on 2026-10-15 on the Bronze tier. Cost is the customer's
 total spend per useful result. Ours includes the Apify usage our customers pay.
 Fields per row is the median count of non-empty fields. That count includes
-nested fields, & a list counts as 1. Open a run for its input, log & dataset.
+nested fields, & a list counts as 1. Each run ID names a public record under xquik.com/benchmarks/runs/.
 
 ## Input
 

@@ -634,56 +634,56 @@ vitesse. Sa ligne médiane avait 63 champs, soit 2x la médiane des autres.
 
 - `xquik/x-tweet-scraper` a livré 890 tweets utiles à $0.000175 par tweet utile,
   avec 39,2 par seconde & 63 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
+  `fflWVxHwYvtyHpAQX`
 - `xquik/x-tweet-scraper` a livré 883 tweets utiles à $0.000176 par tweet utile,
   avec 25,2 par seconde & 63 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
+  `EtSdBgkUcH4M1uicf`
 - `xquik/x-tweet-scraper` a livré 882 tweets utiles à $0.000177 par tweet utile,
   avec 25,7 par seconde & 63 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
+  `SK3ZWhPwzGJYoYQba`
 - `xquik/x-tweet-scraper` a livré 877 tweets utiles à $0.000178 par tweet utile,
   avec 26,9 par seconde & 63 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
+  `JRdbcigkBMCaFuH1W`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` a livré 813 tweets
   utiles à $0.000185 par tweet utile, avec 10,5 par seconde & 36 champs par
-  ligne. [Voir le run](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
+  ligne. `mIT1zf0xccCsYWO1E`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` a livré 805 tweets
   utiles à $0.000187 par tweet utile, avec 10,6 par seconde & 36 champs par
-  ligne. [Voir le run](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
+  ligne. `p1MUeElsamZUepTpm`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` a livré 805 tweets
   utiles à $0.000187 par tweet utile, avec 10,7 par seconde & 36 champs par
-  ligne. [Voir le run](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
+  ligne. `pQlQa0GMm7BWTUUOB`
 - `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` a livré
   880 tweets utiles à $0.000250 par tweet utile, avec 9,1 par seconde & 46
   champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
+  `3Fn8yvqncsWdcw1I2`
 - `scraper_one/x-posts-search` a livré 804 tweets utiles à $0.000314 par tweet
   utile, avec 3,3 par seconde & 14 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
+  `M9TgeCLLKZlNTOrj0`
 - `danek/twitter-scraper` a livré 807 tweets utiles à $0.000347 par tweet utile,
   avec 5,0 par seconde & 27 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
+  `kyeJqCeaARxQPGM5W`
 - `tweetapi/twitter-x-search-scraper` a livré 337 tweets utiles à $0.000374 par
   tweet utile, avec 2,6 par seconde & 28 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
+  `mxkP8EDAUVtCZdobb`
 - `api-ninja/x-twitter-advanced-search` a livré 837 tweets utiles à $0.000430
   par tweet utile, avec 7,4 par seconde & 28 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
+  `XAWKinvZyPNjCwrib`
 - `apidojo/twitter-scraper-lite` a livré 251 tweets utiles à $0.000494 par tweet
   utile, avec 12,9 par seconde & 54 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
+  `1t4XwmbQNTtwMJ0Ta`
 - `apidojo/tweet-scraper` a livré 481 tweets utiles à $0.000832 par tweet utile,
   avec 7,8 par seconde & 55 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
+  `PydoBgS1YRblg29bB`
 - `xtdata/twitter-x-scraper` a livré 1 378 tweets utiles à $0.001168 par tweet
   utile, avec 11,9 par seconde & 67 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
+  `U91dRXEvKvqu41aop`
 - `seemuapps/x-tweet-scraper` a livré 805 tweets utiles à $0.001242 par tweet
   utile, avec 6,9 par seconde & 24 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/FstursEw43TbcipYU)
+  `FstursEw43TbcipYU`
 - `maximedupre/twitter-scraper` a livré 46 tweets utiles à $0.002846 par tweet
   utile, avec 0,3 par seconde & 31 champs par ligne.
-  [Voir le run](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
+  `Hs8irhEcAfWcQNc4w`
 
 Chaque Actor a lancé la même recherche & les mêmes filtres. Les autres Actors
 ont tourné le 2026-09-27. Les runs de Xquik ont réglé `outputVariant: "rich"` &

@@ -625,59 +625,59 @@ Median-Datensatz hatte 63 Felder, das 2-Fache des Medians der anderen.
 
 - `xquik/x-tweet-scraper` lieferte 890 nützliche Posts zu $0.000175 pro
   nützlichem Post, mit 39,2 pro Sekunde & 63 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
+  `fflWVxHwYvtyHpAQX`
 - `xquik/x-tweet-scraper` lieferte 883 nützliche Posts zu $0.000176 pro
   nützlichem Post, mit 25,2 pro Sekunde & 63 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
+  `EtSdBgkUcH4M1uicf`
 - `xquik/x-tweet-scraper` lieferte 882 nützliche Posts zu $0.000177 pro
   nützlichem Post, mit 25,7 pro Sekunde & 63 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
+  `SK3ZWhPwzGJYoYQba`
 - `xquik/x-tweet-scraper` lieferte 877 nützliche Posts zu $0.000178 pro
   nützlichem Post, mit 26,9 pro Sekunde & 63 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
+  `JRdbcigkBMCaFuH1W`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` lieferte 813 nützliche
   Posts zu $0.000185 pro nützlichem Post, mit 10,5 pro Sekunde & 36 Feldern pro
   Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
+  `mIT1zf0xccCsYWO1E`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` lieferte 805 nützliche
   Posts zu $0.000187 pro nützlichem Post, mit 10,6 pro Sekunde & 36 Feldern pro
   Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
+  `p1MUeElsamZUepTpm`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` lieferte 805 nützliche
   Posts zu $0.000187 pro nützlichem Post, mit 10,7 pro Sekunde & 36 Feldern pro
   Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
+  `pQlQa0GMm7BWTUUOB`
 - `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` lieferte
   880 nützliche Posts zu $0.000250 pro nützlichem Post, mit 9,1 pro Sekunde & 46
   Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
+  `3Fn8yvqncsWdcw1I2`
 - `scraper_one/x-posts-search` lieferte 804 nützliche Posts zu $0.000314 pro
   nützlichem Post, mit 3,3 pro Sekunde & 14 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
+  `M9TgeCLLKZlNTOrj0`
 - `danek/twitter-scraper` lieferte 807 nützliche Posts zu $0.000347 pro
   nützlichem Post, mit 5,0 pro Sekunde & 27 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
+  `kyeJqCeaARxQPGM5W`
 - `tweetapi/twitter-x-search-scraper` lieferte 337 nützliche Posts zu $0.000374
   pro nützlichem Post, mit 2,6 pro Sekunde & 28 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
+  `mxkP8EDAUVtCZdobb`
 - `api-ninja/x-twitter-advanced-search` lieferte 837 nützliche Posts zu
   $0.000430 pro nützlichem Post, mit 7,4 pro Sekunde & 28 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
+  `XAWKinvZyPNjCwrib`
 - `apidojo/twitter-scraper-lite` lieferte 251 nützliche Posts zu $0.000494 pro
   nützlichem Post, mit 12,9 pro Sekunde & 54 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
+  `1t4XwmbQNTtwMJ0Ta`
 - `apidojo/tweet-scraper` lieferte 481 nützliche Posts zu $0.000832 pro
   nützlichem Post, mit 7,8 pro Sekunde & 55 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
+  `PydoBgS1YRblg29bB`
 - `xtdata/twitter-x-scraper` lieferte 1.378 nützliche Posts zu $0.001168 pro
   nützlichem Post, mit 11,9 pro Sekunde & 67 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
+  `U91dRXEvKvqu41aop`
 - `seemuapps/x-tweet-scraper` lieferte 805 nützliche Posts zu $0.001242 pro
   nützlichem Post, mit 6,9 pro Sekunde & 24 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/FstursEw43TbcipYU)
+  `FstursEw43TbcipYU`
 - `maximedupre/twitter-scraper` lieferte 46 nützliche Posts zu $0.002846 pro
   nützlichem Post, mit 0,3 pro Sekunde & 31 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
+  `Hs8irhEcAfWcQNc4w`
 
 Jeder Actor lief mit derselben Suche & denselben Filtern. Die anderen Actors
 liefen am 2026-09-27. Die Runs von Xquik setzten `outputVariant: "rich"` &

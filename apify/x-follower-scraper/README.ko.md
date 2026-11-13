@@ -420,43 +420,43 @@ Xquik의 X Follower Scraper는 비용 & 속도에서 다른 팔로워 Actor 9개
 
 - `xquik/x-follower-scraper` 실행은 유용한 프로필 1,000개를 전달했습니다. 유용한
   프로필당 $0.000155, 초당 100.0개 & 행당 필드 38개입니다.
-  [실행 보기](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
+  `z5ELS2u5sgjuhAFHN`
 - `xquik/x-follower-scraper` 실행은 유용한 프로필 1,000개를 전달했습니다. 유용한
   프로필당 $0.000155, 초당 77.9개 & 행당 필드 38개입니다.
-  [실행 보기](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
+  `Htim4jqodU6ZPjQiQ`
 - `b2b_leads/X-Real-Time-Data` 실행은 유용한 프로필 286개를 전달했습니다. 유용한
   프로필당 $0.000388, 초당 3.1개 & 행당 필드 21개입니다.
-  [실행 보기](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
+  `IkQButA6cVz4ys4GM`
 - `kaitoeasyapi/premium-x-follower-scraper-following-data` 실행은 유용한 프로필
   356개를 전달했습니다. 유용한 프로필당 $0.000506, 초당 21.9개 & 행당 필드
-  50개입니다. [실행 보기](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
+  50개입니다. `cJgj15HLBA50LEUf0`
 - `api-ninja/x-twitter-followers-scraper` 실행은 유용한 프로필 350개를
   전달했습니다. 유용한 프로필당 $0.000809, 초당 7.0개 & 행당 필드 8개입니다.
-  [실행 보기](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
+  `XjJ4UPKAILSz0Droz`
 - `altimis/scweet` 실행은 유용한 프로필 332개를 전달했습니다. 유용한 프로필당
   $0.000922, 초당 1.1개 & 행당 필드 21개입니다.
-  [실행 보기](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
+  `qVGvT7TPAJEHCuR42`
 - `apidojo/twitter-user-scraper` 실행은 유용한 프로필 323개를 전달했습니다.
   유용한 프로필당 $0.001160, 초당 7.3개 & 행당 필드 25개입니다.
-  [실행 보기](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
+  `Xnf7rh8jK6764gP1f`
 - `atomus/twitter-scraper` 실행은 유용한 프로필 323개를 전달했습니다. 유용한
   프로필당 $0.001272, 초당 6.2개 & 행당 필드 13개입니다.
-  [실행 보기](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
+  `MWz1l0cTcfPcEnaiH`
 - `practicaltools/cheap-simple-twitter-api` 실행은 유용한 프로필 283개를
   전달했습니다. 유용한 프로필당 $0.002036, 초당 6.5개 & 행당 필드 4개입니다.
-  [실행 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb),
-  [실행 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK),
-  [실행 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
+  `Zhvi7LsfpHdQNKcGb`,
+  `IsJj4fa8pFUG7uhlK`,
+  `2W7n8fpEqoxiXq6oX`
 - `maximedupre/twitter-scraper` 실행은 유용한 프로필 320개를 전달했습니다.
   유용한 프로필당 $0.002192, 초당 2.1개 & 행당 필드 15개입니다.
-  [실행 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs),
-  [실행 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39),
-  [실행 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
+  `HblUkhgI2svp1LBGs`,
+  `37yQFzgydzJoWfa39`,
+  `mtBoKcocaM4BUzZmm`
 - `seemuapps/x-followers-following-scraper` 실행은 유용한 프로필 286개를
   전달했습니다. 유용한 프로필당 $0.003504, 초당 3.9개 & 행당 필드 9개입니다.
-  [실행 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj),
-  [실행 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ),
-  [실행 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
+  `1r3je034X2qhFGgLj`,
+  `dc4ztVP3n2eemgiNQ`,
+  `gWPiBT00G7D9IJ0Cj`
 
 모든 Actor는 NASA, SpaceX & esa의 팔로워를 읽었습니다. 다른 Actor는 2026-09-28에
 실행했습니다. Xquik 실행은 `outputMode: "full"`을 설정하고 2026-09-29에

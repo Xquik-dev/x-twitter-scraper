@@ -620,61 +620,61 @@ katı.
 
 - `xquik/x-tweet-scraper` işe yarar gönderi başına $0.000175, saniyede 39,2
   gönderi & satır başına 63 alanla 890 işe yarar gönderi teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/fflWVxHwYvtyHpAQX)
+  `fflWVxHwYvtyHpAQX`
 - `xquik/x-tweet-scraper` işe yarar gönderi başına $0.000176, saniyede 25,2
   gönderi & satır başına 63 alanla 883 işe yarar gönderi teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/EtSdBgkUcH4M1uicf)
+  `EtSdBgkUcH4M1uicf`
 - `xquik/x-tweet-scraper` işe yarar gönderi başına $0.000177, saniyede 25,7
   gönderi & satır başına 63 alanla 882 işe yarar gönderi teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/SK3ZWhPwzGJYoYQba)
+  `SK3ZWhPwzGJYoYQba`
 - `xquik/x-tweet-scraper` işe yarar gönderi başına $0.000178, saniyede 26,9
   gönderi & satır başına 63 alanla 877 işe yarar gönderi teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/JRdbcigkBMCaFuH1W)
+  `JRdbcigkBMCaFuH1W`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` işe yarar gönderi
   başına $0.000185, saniyede 10,5 gönderi & satır başına 36 alanla 813 işe yarar
   gönderi teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/mIT1zf0xccCsYWO1E)
+  `mIT1zf0xccCsYWO1E`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` işe yarar gönderi
   başına $0.000187, saniyede 10,6 gönderi & satır başına 36 alanla 805 işe yarar
   gönderi teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/p1MUeElsamZUepTpm)
+  `p1MUeElsamZUepTpm`
 - `scrapesmith/twitter-x-scraper-tweets-profiles-replies` işe yarar gönderi
   başına $0.000187, saniyede 10,7 gönderi & satır başına 36 alanla 805 işe yarar
   gönderi teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/pQlQa0GMm7BWTUUOB)
+  `pQlQa0GMm7BWTUUOB`
 - `kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest` işe yarar
   gönderi başına $0.000250, saniyede 9,1 gönderi & satır başına 46 alanla 880
   işe yarar gönderi teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/3Fn8yvqncsWdcw1I2)
+  `3Fn8yvqncsWdcw1I2`
 - `scraper_one/x-posts-search` işe yarar gönderi başına $0.000314, saniyede 3,3
   gönderi & satır başına 14 alanla 804 işe yarar gönderi teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/M9TgeCLLKZlNTOrj0)
+  `M9TgeCLLKZlNTOrj0`
 - `danek/twitter-scraper` işe yarar gönderi başına $0.000347, saniyede 5,0
   gönderi & satır başına 27 alanla 807 işe yarar gönderi teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/kyeJqCeaARxQPGM5W)
+  `kyeJqCeaARxQPGM5W`
 - `tweetapi/twitter-x-search-scraper` işe yarar gönderi başına $0.000374,
   saniyede 2,6 gönderi & satır başına 28 alanla 337 işe yarar gönderi teslim
   etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/mxkP8EDAUVtCZdobb)
+  `mxkP8EDAUVtCZdobb`
 - `api-ninja/x-twitter-advanced-search` işe yarar gönderi başına $0.000430,
   saniyede 7,4 gönderi & satır başına 28 alanla 837 işe yarar gönderi teslim
   etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/XAWKinvZyPNjCwrib)
+  `XAWKinvZyPNjCwrib`
 - `apidojo/twitter-scraper-lite` işe yarar gönderi başına $0.000494, saniyede
   12,9 gönderi & satır başına 54 alanla 251 işe yarar gönderi teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/1t4XwmbQNTtwMJ0Ta)
+  `1t4XwmbQNTtwMJ0Ta`
 - `apidojo/tweet-scraper` işe yarar gönderi başına $0.000832, saniyede 7,8
   gönderi & satır başına 55 alanla 481 işe yarar gönderi teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/PydoBgS1YRblg29bB)
+  `PydoBgS1YRblg29bB`
 - `xtdata/twitter-x-scraper` işe yarar gönderi başına $0.001168, saniyede 11,9
   gönderi & satır başına 67 alanla 1.378 işe yarar gönderi teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/U91dRXEvKvqu41aop)
+  `U91dRXEvKvqu41aop`
 - `seemuapps/x-tweet-scraper` işe yarar gönderi başına $0.001242, saniyede 6,9
   gönderi & satır başına 24 alanla 805 işe yarar gönderi teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/FstursEw43TbcipYU)
+  `FstursEw43TbcipYU`
 - `maximedupre/twitter-scraper` işe yarar gönderi başına $0.002846, saniyede 0,3
   gönderi & satır başına 31 alanla 46 işe yarar gönderi teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/Hs8irhEcAfWcQNc4w)
+  `Hs8irhEcAfWcQNc4w`
 
 Her Actor aynı aramayı & filtreleri çalıştırdı. Diğer Actor'lar 2026-09-27'de
 çalıştı. Xquik'in çalıştırmaları `outputVariant: "rich"` ayarladı &

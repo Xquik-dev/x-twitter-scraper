@@ -451,45 +451,45 @@ der anderen.
 
 - `xquik/x-follower-scraper` lieferte 1.000 nützliche Profile zu $0.000155 pro
   nützlichem Profil, mit 100,0 pro Sekunde & 38 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
+  `z5ELS2u5sgjuhAFHN`
 - `xquik/x-follower-scraper` lieferte 1.000 nützliche Profile zu $0.000155 pro
   nützlichem Profil, mit 77,9 pro Sekunde & 38 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
+  `Htim4jqodU6ZPjQiQ`
 - `b2b_leads/X-Real-Time-Data` lieferte 286 nützliche Profile zu $0.000388 pro
   nützlichem Profil, mit 3,1 pro Sekunde & 21 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
+  `IkQButA6cVz4ys4GM`
 - `kaitoeasyapi/premium-x-follower-scraper-following-data` lieferte 356
   nützliche Profile zu $0.000506 pro nützlichem Profil, mit 21,9 pro Sekunde &
   50 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
+  `cJgj15HLBA50LEUf0`
 - `api-ninja/x-twitter-followers-scraper` lieferte 350 nützliche Profile zu
   $0.000809 pro nützlichem Profil, mit 7,0 pro Sekunde & 8 Feldern pro
   Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
+  `XjJ4UPKAILSz0Droz`
 - `altimis/scweet` lieferte 332 nützliche Profile zu $0.000922 pro nützlichem
   Profil, mit 1,1 pro Sekunde & 21 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
+  `qVGvT7TPAJEHCuR42`
 - `apidojo/twitter-user-scraper` lieferte 323 nützliche Profile zu $0.001160 pro
   nützlichem Profil, mit 7,3 pro Sekunde & 25 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
+  `Xnf7rh8jK6764gP1f`
 - `atomus/twitter-scraper` lieferte 323 nützliche Profile zu $0.001272 pro
   nützlichem Profil, mit 6,2 pro Sekunde & 13 Feldern pro Datensatz.
-  [Run ansehen](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
+  `MWz1l0cTcfPcEnaiH`
 - `practicaltools/cheap-simple-twitter-api` lieferte 283 nützliche Profile zu
   $0.002036 pro nützlichem Profil, mit 6,5 pro Sekunde & 4 Feldern pro
-  Datensatz. [Run 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb),
-  [Run 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK),
-  [Run 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
+  Datensatz. `Zhvi7LsfpHdQNKcGb`,
+  `IsJj4fa8pFUG7uhlK`,
+  `2W7n8fpEqoxiXq6oX`
 - `maximedupre/twitter-scraper` lieferte 320 nützliche Profile zu $0.002192 pro
   nützlichem Profil, mit 2,1 pro Sekunde & 15 Feldern pro Datensatz.
-  [Run 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs),
-  [Run 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39),
-  [Run 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
+  `HblUkhgI2svp1LBGs`,
+  `37yQFzgydzJoWfa39`,
+  `mtBoKcocaM4BUzZmm`
 - `seemuapps/x-followers-following-scraper` lieferte 286 nützliche Profile zu
   $0.003504 pro nützlichem Profil, mit 3,9 pro Sekunde & 9 Feldern pro
-  Datensatz. [Run 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj),
-  [Run 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ),
-  [Run 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
+  Datensatz. `1r3je034X2qhFGgLj`,
+  `dc4ztVP3n2eemgiNQ`,
+  `gWPiBT00G7D9IJ0Cj`
 
 Jeder Actor las die Follower von NASA, SpaceX & esa. Die anderen Actors liefen
 am 2026-09-28. Die Runs von Xquik setzten `outputMode: "full"` & liefen am

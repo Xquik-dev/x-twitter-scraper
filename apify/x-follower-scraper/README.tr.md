@@ -449,44 +449,44 @@ medyanının 2,5 katı.
 
 - `xquik/x-follower-scraper` işe yarar profil başına $0.000155, saniyede 100,0
   profil & satır başına 38 alanla 1.000 işe yarar profil teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/z5ELS2u5sgjuhAFHN)
+  `z5ELS2u5sgjuhAFHN`
 - `xquik/x-follower-scraper` işe yarar profil başına $0.000155, saniyede 77,9
   profil & satır başına 38 alanla 1.000 işe yarar profil teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/Htim4jqodU6ZPjQiQ)
+  `Htim4jqodU6ZPjQiQ`
 - `b2b_leads/X-Real-Time-Data` işe yarar profil başına $0.000388, saniyede 3,1
   profil & satır başına 21 alanla 286 işe yarar profil teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/IkQButA6cVz4ys4GM)
+  `IkQButA6cVz4ys4GM`
 - `kaitoeasyapi/premium-x-follower-scraper-following-data` işe yarar profil
   başına $0.000506, saniyede 21,9 profil & satır başına 50 alanla 356 işe yarar
   profil teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/cJgj15HLBA50LEUf0)
+  `cJgj15HLBA50LEUf0`
 - `api-ninja/x-twitter-followers-scraper` işe yarar profil başına $0.000809,
   saniyede 7,0 profil & satır başına 8 alanla 350 işe yarar profil teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/XjJ4UPKAILSz0Droz)
+  `XjJ4UPKAILSz0Droz`
 - `altimis/scweet` işe yarar profil başına $0.000922, saniyede 1,1 profil &
   satır başına 21 alanla 332 işe yarar profil teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/qVGvT7TPAJEHCuR42)
+  `qVGvT7TPAJEHCuR42`
 - `apidojo/twitter-user-scraper` işe yarar profil başına $0.001160, saniyede 7,3
   profil & satır başına 25 alanla 323 işe yarar profil teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/Xnf7rh8jK6764gP1f)
+  `Xnf7rh8jK6764gP1f`
 - `atomus/twitter-scraper` işe yarar profil başına $0.001272, saniyede 6,2
   profil & satır başına 13 alanla 323 işe yarar profil teslim etti.
-  [Çalıştırmayı gör](https://console.apify.com/view/runs/MWz1l0cTcfPcEnaiH)
+  `MWz1l0cTcfPcEnaiH`
 - `practicaltools/cheap-simple-twitter-api` işe yarar profil başına $0.002036,
   saniyede 6,5 profil & satır başına 4 alanla 283 işe yarar profil teslim etti.
-  [Çalıştırma 1](https://console.apify.com/view/runs/Zhvi7LsfpHdQNKcGb),
-  [Çalıştırma 2](https://console.apify.com/view/runs/IsJj4fa8pFUG7uhlK),
-  [Çalıştırma 3](https://console.apify.com/view/runs/2W7n8fpEqoxiXq6oX)
+  `Zhvi7LsfpHdQNKcGb`,
+  `IsJj4fa8pFUG7uhlK`,
+  `2W7n8fpEqoxiXq6oX`
 - `maximedupre/twitter-scraper` işe yarar profil başına $0.002192, saniyede 2,1
   profil & satır başına 15 alanla 320 işe yarar profil teslim etti.
-  [Çalıştırma 1](https://console.apify.com/view/runs/HblUkhgI2svp1LBGs),
-  [Çalıştırma 2](https://console.apify.com/view/runs/37yQFzgydzJoWfa39),
-  [Çalıştırma 3](https://console.apify.com/view/runs/mtBoKcocaM4BUzZmm)
+  `HblUkhgI2svp1LBGs`,
+  `37yQFzgydzJoWfa39`,
+  `mtBoKcocaM4BUzZmm`
 - `seemuapps/x-followers-following-scraper` işe yarar profil başına $0.003504,
   saniyede 3,9 profil & satır başına 9 alanla 286 işe yarar profil teslim etti.
-  [Çalıştırma 1](https://console.apify.com/view/runs/1r3je034X2qhFGgLj),
-  [Çalıştırma 2](https://console.apify.com/view/runs/dc4ztVP3n2eemgiNQ),
-  [Çalıştırma 3](https://console.apify.com/view/runs/gWPiBT00G7D9IJ0Cj)
+  `1r3je034X2qhFGgLj`,
+  `dc4ztVP3n2eemgiNQ`,
+  `gWPiBT00G7D9IJ0Cj`
 
 Her Actor NASA, SpaceX & esa'nın takipçilerini okudu. Diğer Actor'lar
 2026-09-28'de çalıştı. Xquik'in çalıştırmaları `outputMode: "full"` ayarladı &
