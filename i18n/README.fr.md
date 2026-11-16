@@ -29,7 +29,7 @@ Xquik est indépendant et n'est pas affilié à X Corp.
 
 <!-- trust:win:start -->
 
-Le 2026-10-15, Xquik X Tweet Scraper a lu 170 tweets par seconde à 0,155 $ les 1 000. Le plus rapide des 4 Actors concurrents a lu 12,5 par seconde. Le moins cher coûtait 0,173 $ les 1 000. [Comparer chaque exécution](https://xquik.com/benchmarks#benchmark-x-tweet-scraper).
+Le 2026-10-15, Xquik X Tweet Scraper a lu 170 tweets par seconde à 0,155 $ les 1 000. Le plus rapide des 4 Actors concurrents a lu 12,5 par seconde. Le moins cher coûtait 0,173 $ les 1 000. [Comparer chaque exécution](https://xquik.com/benchmarks#benchmark-x-tweet-scraper). La plupart des Actors concurrents facturent avant de filtrer ou de dédoublonner. Xquik ne facture que les résultats livrés, uniques et conformes au filtre.
 
 <!-- trust:win:end -->
 
@@ -158,12 +158,12 @@ page filtrée vide peut encore avoir une page suivante.
 [![X (Twitter) scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
 [![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
 
-- 1 500+ installations des Skills de ce dépôt sur skills.sh ([source](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1544 -->
-- 11 000+ utilisateurs des Actors de scraping X (Twitter) de Xquik sur Apify ([source](https://apify.com/xquik)) <!-- trust:apify-users 11962 -->
-- 8 500 000+ exécutions des Actors de scraping X (Twitter) de Xquik sur Apify ([source](https://apify.com/xquik)) <!-- trust:apify-runs 8597435 -->
+- 1 500+ installations des Skills de ce dépôt sur skills.sh ([source](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1549 -->
+- 13 000+ utilisateurs des Actors de scraping X (Twitter) de Xquik sur Apify ([source](https://apify.com/xquik)) <!-- trust:apify-users 13160 -->
+- 9 500 000+ exécutions des Actors de scraping X (Twitter) de Xquik sur Apify ([source](https://apify.com/xquik)) <!-- trust:apify-runs 9559478 -->
 - 4,66 sur 5 pour X Tweet Scraper d'après 16 avis Apify ([source](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
 
-Vérifié le 2026-11-09. Chaque nombre, sa date et sa source sont sur [xquik.com/benchmarks](https://xquik.com/benchmarks) ou en [JSON](https://xquik.com/trust.json).
+Vérifié le 2026-11-16. Chaque nombre, sa date et sa source sont sur [xquik.com/benchmarks](https://xquik.com/benchmarks) ou en [JSON](https://xquik.com/trust.json).
 
 <!-- trust:end -->
 

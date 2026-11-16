@@ -29,7 +29,7 @@ Xquik bağımsızdır ve X Corp. ile bağlantılı değildir.
 
 <!-- trust:win:start -->
 
-2026-10-15 tarihinde Xquik X Tweet Scraper saniyede 170 tweet okudu, 1.000 sonuç $0,155 tuttu. 4 rakip Actor içinde en hızlısı saniyede 12,5 okudu. En ucuzu 1.000 sonuç için $0,173 tuttu. [Her çalıştırmayı karşılaştırın](https://xquik.com/benchmarks#benchmark-x-tweet-scraper).
+2026-10-15 tarihinde Xquik X Tweet Scraper saniyede 170 tweet okudu, 1.000 sonuç $0,155 tuttu. 4 rakip Actor içinde en hızlısı saniyede 12,5 okudu. En ucuzu 1.000 sonuç için $0,173 tuttu. [Her çalıştırmayı karşılaştırın](https://xquik.com/benchmarks#benchmark-x-tweet-scraper). Çoğu rakip Actor, filtrelemeden ve tekrarları ayıklamadan önce ücret alır. Xquik yalnızca teslim edilen, benzersiz ve filtreye uyan sonuçlar için ücret alır.
 
 <!-- trust:win:end -->
 
@@ -161,12 +161,12 @@ gelebilir.
 [![X (Twitter) scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
 [![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
 
-- Bu deponun Skill'leri skills.sh'te 1.500+ kez kuruldu ([kaynak](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1544 -->
-- Xquik'in Apify'daki X (Twitter) scraper Actor'larını 11.000+ kişi kullandı ([kaynak](https://apify.com/xquik)) <!-- trust:apify-users 11962 -->
-- Xquik'in Apify'daki X (Twitter) scraper Actor'ları 8.500.000+ kez çalıştı ([kaynak](https://apify.com/xquik)) <!-- trust:apify-runs 8597435 -->
+- Bu deponun Skill'leri skills.sh'te 1.500+ kez kuruldu ([kaynak](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1549 -->
+- Xquik'in Apify'daki X (Twitter) scraper Actor'larını 13.000+ kişi kullandı ([kaynak](https://apify.com/xquik)) <!-- trust:apify-users 13160 -->
+- Xquik'in Apify'daki X (Twitter) scraper Actor'ları 9.500.000+ kez çalıştı ([kaynak](https://apify.com/xquik)) <!-- trust:apify-runs 9559478 -->
 - 4,66/5 puan, X Tweet Scraper için 16 Apify yorumundan ([kaynak](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
 
-2026-11-09 tarihinde kontrol edildi. Her sayıyı tarihi ve kaynağıyla [xquik.com/benchmarks](https://xquik.com/benchmarks) sayfasında ya da [JSON](https://xquik.com/trust.json) olarak görebilirsiniz.
+2026-11-16 tarihinde kontrol edildi. Her sayıyı tarihi ve kaynağıyla [xquik.com/benchmarks](https://xquik.com/benchmarks) sayfasında ya da [JSON](https://xquik.com/trust.json) olarak görebilirsiniz.
 
 <!-- trust:end -->
 

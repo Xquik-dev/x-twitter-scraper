@@ -23,7 +23,7 @@ Xquik 是全球最快、最便宜的 X（Twitter）抓取服务，X（Twitter）
 
 <!-- trust:win:start -->
 
-2026-10-15 的测试中，Xquik X Tweet Scraper 每秒读取 170 条推文，每 1,000 条 $0.155。4 个竞品 Actor 中最快的每秒读取 12.5 条，最便宜的每 1,000 条 $0.173。[比较每次运行](https://xquik.com/benchmarks#benchmark-x-tweet-scraper)。
+2026-10-15 的测试中，Xquik X Tweet Scraper 每秒读取 170 条推文，每 1,000 条 $0.155。4 个竞品 Actor 中最快的每秒读取 12.5 条，最便宜的每 1,000 条 $0.173。[比较每次运行](https://xquik.com/benchmarks#benchmark-x-tweet-scraper)。多数竞品 Actor 在过滤和去重之前就计费。Xquik 只对交付的、不重复且符合筛选条件的结果计费。
 
 <!-- trust:win:end -->
 
@@ -145,12 +145,12 @@ type SearchResponse = {
 [![X (Twitter) scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
 [![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
 
-- 本仓库的 Skill 在 skills.sh 上至少安装了 1,500 次 ([来源](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1544 -->
-- Xquik 在 Apify 上的 X（Twitter）抓取 Actor 至少有 11,000 位用户 ([来源](https://apify.com/xquik)) <!-- trust:apify-users 11962 -->
-- Xquik 在 Apify 上的 X（Twitter）抓取 Actor 至少运行了 8,500,000 次 ([来源](https://apify.com/xquik)) <!-- trust:apify-runs 8597435 -->
+- 本仓库的 Skill 在 skills.sh 上至少安装了 1,500 次 ([来源](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1549 -->
+- Xquik 在 Apify 上的 X（Twitter）抓取 Actor 至少有 13,000 位用户 ([来源](https://apify.com/xquik)) <!-- trust:apify-users 13160 -->
+- Xquik 在 Apify 上的 X（Twitter）抓取 Actor 至少运行了 9,500,000 次 ([来源](https://apify.com/xquik)) <!-- trust:apify-runs 9559478 -->
 - X Tweet Scraper 在 Apify 上获得 4.66 分（满分 5 分），共 16 条评价 ([来源](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
 
-检查日期为 2026-11-09。可在 [xquik.com/benchmarks](https://xquik.com/benchmarks) 查看每个数字的日期和来源，也可获取 [JSON](https://xquik.com/trust.json)。
+检查日期为 2026-11-16。可在 [xquik.com/benchmarks](https://xquik.com/benchmarks) 查看每个数字的日期和来源，也可获取 [JSON](https://xquik.com/trust.json)。
 
 <!-- trust:end -->
 

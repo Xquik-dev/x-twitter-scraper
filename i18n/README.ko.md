@@ -29,7 +29,7 @@ Xquik은 독립 서비스이며 X Corp.과 제휴 관계가 없습니다.
 
 <!-- trust:win:start -->
 
-2026-10-15 측정에서 Xquik X Tweet Scraper는 초당 트윗 170개를 읽었고 1,000개당 $0.155였습니다. 경쟁 Actor 4개 중 가장 빠른 것은 초당 12.5개, 가장 저렴한 것은 1,000개당 $0.173였습니다. [각 실행 비교하기](https://xquik.com/benchmarks#benchmark-x-tweet-scraper).
+2026-10-15 측정에서 Xquik X Tweet Scraper는 초당 트윗 170개를 읽었고 1,000개당 $0.155였습니다. 경쟁 Actor 4개 중 가장 빠른 것은 초당 12.5개, 가장 저렴한 것은 1,000개당 $0.173였습니다. [각 실행 비교하기](https://xquik.com/benchmarks#benchmark-x-tweet-scraper). 대부분의 경쟁 Actor는 필터링과 중복 제거 전에 과금합니다. Xquik은 전달된 고유하고 필터에 맞는 결과에만 과금합니다.
 
 <!-- trust:win:end -->
 
@@ -153,12 +153,12 @@ type SearchResponse = {
 [![X (Twitter) scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
 [![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
 
-- 이 저장소의 Skill은 skills.sh에서 1,500회 이상 설치되었습니다 ([출처](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1544 -->
-- Apify에 있는 Xquik의 X(Twitter) 스크레이퍼 Actor 사용자는 11,000명 이상입니다 ([출처](https://apify.com/xquik)) <!-- trust:apify-users 11962 -->
-- Apify에 있는 Xquik의 X(Twitter) 스크레이퍼 Actor는 8,500,000회 이상 실행되었습니다 ([출처](https://apify.com/xquik)) <!-- trust:apify-runs 8597435 -->
+- 이 저장소의 Skill은 skills.sh에서 1,500회 이상 설치되었습니다 ([출처](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1549 -->
+- Apify에 있는 Xquik의 X(Twitter) 스크레이퍼 Actor 사용자는 13,000명 이상입니다 ([출처](https://apify.com/xquik)) <!-- trust:apify-users 13160 -->
+- Apify에 있는 Xquik의 X(Twitter) 스크레이퍼 Actor는 9,500,000회 이상 실행되었습니다 ([출처](https://apify.com/xquik)) <!-- trust:apify-runs 9559478 -->
 - X Tweet Scraper는 Apify 리뷰 16개에서 5점 만점에 4.66점입니다 ([출처](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
 
-2026-11-09에 확인했습니다. 각 숫자의 날짜와 출처는 [xquik.com/benchmarks](https://xquik.com/benchmarks) 또는 [JSON](https://xquik.com/trust.json)에서 볼 수 있습니다.
+2026-11-16에 확인했습니다. 각 숫자의 날짜와 출처는 [xquik.com/benchmarks](https://xquik.com/benchmarks) 또는 [JSON](https://xquik.com/trust.json)에서 볼 수 있습니다.
 
 <!-- trust:end -->
 
