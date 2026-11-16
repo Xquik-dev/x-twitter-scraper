@@ -23,7 +23,7 @@ Xquik は世界最速かつ最安値の X（Twitter）スクレイパーサー�
 
 <!-- trust:win:start -->
 
-2026-10-15 の計測で、Xquik X Tweet Scraper は毎秒 170 件のツイートを読み取り、1,000 件あたり $0.155 でした。競合 4 件の Actor のうち最速は毎秒 12.5 件、最安は 1,000 件あたり $0.173 でした。[各実行を比較する](https://xquik.com/benchmarks#benchmark-x-tweet-scraper)。
+2026-10-15 の計測で、Xquik X Tweet Scraper は毎秒 170 件のツイートを読み取り、1,000 件あたり $0.155 でした。競合 4 件の Actor のうち最速は毎秒 12.5 件、最安は 1,000 件あたり $0.173 でした。[各実行を比較する](https://xquik.com/benchmarks#benchmark-x-tweet-scraper)。多くの競合 Actor はフィルターと重複除去の前に課金します。Xquik は、届けた重複のない、フィルターに合う結果だけに課金します。
 
 <!-- trust:win:end -->
 
@@ -146,12 +146,12 @@ type SearchResponse = {
 [![X (Twitter) scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
 [![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
 
-- このリポジトリの Skill は skills.sh で 1,500 回以上インストールされています ([出典](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1544 -->
-- Apify にある Xquik の X（Twitter）スクレイパー Actor の利用者は 11,000 人以上です ([出典](https://apify.com/xquik)) <!-- trust:apify-users 11962 -->
-- Apify にある Xquik の X（Twitter）スクレイパー Actor は 8,500,000 回以上実行されています ([出典](https://apify.com/xquik)) <!-- trust:apify-runs 8597435 -->
+- このリポジトリの Skill は skills.sh で 1,500 回以上インストールされています ([出典](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1549 -->
+- Apify にある Xquik の X（Twitter）スクレイパー Actor の利用者は 13,000 人以上です ([出典](https://apify.com/xquik)) <!-- trust:apify-users 13160 -->
+- Apify にある Xquik の X（Twitter）スクレイパー Actor は 9,500,000 回以上実行されています ([出典](https://apify.com/xquik)) <!-- trust:apify-runs 9559478 -->
 - X Tweet Scraper は Apify で 16 件のレビューから 5 点中 4.66 点です ([出典](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
 
-2026-11-09 に確認しました。各数値の日付と出典は [xquik.com/benchmarks](https://xquik.com/benchmarks) か [JSON](https://xquik.com/trust.json) で確認できます。
+2026-11-16 に確認しました。各数値の日付と出典は [xquik.com/benchmarks](https://xquik.com/benchmarks) か [JSON](https://xquik.com/trust.json) で確認できます。
 
 <!-- trust:end -->
 
