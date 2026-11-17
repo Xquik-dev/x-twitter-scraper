@@ -31,6 +31,7 @@ The [billing guide](https://docs.xquik.com/guides/billing) has the details.
 | Trends | 1 per request |
 | Post or reply | 30, plus 2 per started MB of media |
 | Like, repost, follow, DM, delete or media upload | 10 each |
+| Sign-in a write needs, refunded if it fails | 10 |
 | Active monitor | 30 per hour, 720 a day |
 | Giveaway draw | 2 base, plus 1 per inspected reply, reposter read or follow check |
 
