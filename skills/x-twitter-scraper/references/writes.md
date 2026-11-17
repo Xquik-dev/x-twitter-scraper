@@ -13,6 +13,9 @@ account ID. `GET /x/accounts` lists connected accounts.
   An effect reads like "a new post appears on @my_brand for its followers".
 - A text post or reply costs 30 credits, plus 2 per started MB of media.
   Likes, reposts, follows, DMs & deletes cost 10 credits each.
+- A write that must sign in to your X account first adds 10 credits.
+  Xquik refunds them if the sign-in fails. It signs in only when no working
+  session exists, so a preview names this fee as possible.
 - Itemize each operation, lookups included, with rates, total credits &
   dollars. Show the media charge, or say a text-only post has none.
 - Include `statusUrl`, or `GET https://xquik.com/api/v1/x/write-actions/{id}`,

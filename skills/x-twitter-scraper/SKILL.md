@@ -132,6 +132,8 @@ task needs.
 - An active monitor bills 30 credits per hour, so 720 a day. Pausing or
   deleting it stops the billing.
 - A post costs 30 credits. A like, repost, follow, DM, or delete costs 10.
+- A write that must sign in to your X account first adds 10 credits.
+  Xquik refunds them if the sign-in fails.
 - AI analysis bills 2 credits per analyzed post, so $0.0003. Posts without an
   analysis cost nothing.
 - [Pricing](references/pricing.md) lists every current rate and limit.
