@@ -1,6 +1,6 @@
 ---
 name: monitor-accounts
-description: "Use when the user wants ongoing alerts for new posts, replies, or profile changes. Ask before creating any monitor or webhook."
+description: "Use when the user wants ongoing alerts for new posts, replies, profile changes, or new and lost followers. Ask before creating any monitor or webhook."
 license: MIT
 metadata:
   internal: true
@@ -28,7 +28,7 @@ metadata:
 
 # Monitor X accounts
 
-Watch specific accounts for new posts or profile changes. Create a monitor only after confirmation. Poll events or deliver them through the chosen webhook.
+Watch specific accounts for new posts, profile changes, follows, or new and lost followers. Create a monitor only after confirmation. Poll events or deliver them through the chosen webhook.
 
 ## Choose an endpoint
 
