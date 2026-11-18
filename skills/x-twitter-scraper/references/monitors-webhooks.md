@@ -48,8 +48,10 @@ Only subscribed types are stored and delivered. `tweet.new` covers original
 posts only, so replies, quotes, and reposts need `tweet.reply`, `tweet.quote`,
 and `tweet.retweet`. An account monitor watches that account's own posts,
 profile, follows, and followers. Follower events hold the other account's
-profile, and a removal holds `reason`. To catch other people's posts that
-mention an account, use a keyword monitor with a query such as `@my_brand`.
+profile, or its ID when X shows none. A removal holds `reason` when the cause is
+known. Monitors name lost followers for accounts with up to 100,000 followers.
+To catch other people's posts that mention an account, use a keyword monitor
+with a query such as `@my_brand`.
 
 A post monitor, `POST /monitors/posts`, takes the 10 `post.*` types. They cover
 1 post's replies, quotes, metric changes, edit, and deletion.
