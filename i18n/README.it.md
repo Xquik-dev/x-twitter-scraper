@@ -157,8 +157,8 @@ filtrata vuota può avere una pagina successiva.
 [![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
 
 - 1500+ installazioni degli Skill di questo repository su skills.sh ([fonte](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1556 -->
-- 14.000+ utenti degli Actor di scraping X (Twitter) di Xquik su Apify ([fonte](https://apify.com/xquik)) <!-- trust:apify-users 14496 -->
-- 10.000.000+ esecuzioni degli Actor di scraping X (Twitter) di Xquik su Apify ([fonte](https://apify.com/xquik)) <!-- trust:apify-runs 10654660 -->
+- 14.000+ utenti degli Actor di scraping X (Twitter) di Xquik su Apify ([fonte](https://apify.com/xquik)) <!-- trust:apify-users 14493 -->
+- 10.000.000+ esecuzioni degli Actor di scraping X (Twitter) di Xquik su Apify ([fonte](https://apify.com/xquik)) <!-- trust:apify-runs 10662825 -->
 - 4,73 su 5 per X Tweet Scraper da 17 recensioni su Apify ([fonte](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.73 17 -->
 
 Verificato il 2026-11-23. Ogni numero con data e fonte è su [xquik.com/benchmarks](https://xquik.com/benchmarks) o in [JSON](https://xquik.com/trust.json).
