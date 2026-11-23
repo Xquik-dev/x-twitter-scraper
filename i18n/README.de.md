@@ -159,8 +159,8 @@ Eine gefilterte leere Seite kann trotzdem eine Folgeseite haben.
 [![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
 
 - 1.500+ Installationen der Skills dieses Repos auf skills.sh ([Quelle](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1556 -->
-- 14.000+ Nutzer der Scraper-Actors für X (Twitter) von Xquik auf Apify ([Quelle](https://apify.com/xquik)) <!-- trust:apify-users 14496 -->
-- 10.000.000+ Läufe der Scraper-Actors für X (Twitter) von Xquik auf Apify ([Quelle](https://apify.com/xquik)) <!-- trust:apify-runs 10654660 -->
+- 14.000+ Nutzer der Scraper-Actors für X (Twitter) von Xquik auf Apify ([Quelle](https://apify.com/xquik)) <!-- trust:apify-users 14493 -->
+- 10.000.000+ Läufe der Scraper-Actors für X (Twitter) von Xquik auf Apify ([Quelle](https://apify.com/xquik)) <!-- trust:apify-runs 10662825 -->
 - 4,73 von 5 für X Tweet Scraper aus 17 Apify-Bewertungen ([Quelle](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.73 17 -->
 
 Geprüft am 2026-11-23. Jede Zahl mit Datum & Quelle steht auf [xquik.com/benchmarks](https://xquik.com/benchmarks) oder als [JSON](https://xquik.com/trust.json).
