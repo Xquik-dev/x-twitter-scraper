@@ -161,12 +161,12 @@ gelebilir.
 [![X (Twitter) scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
 [![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
 
-- Bu deponun Skill'leri skills.sh'te 1.500+ kez kuruldu ([kaynak](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1549 -->
-- Xquik'in Apify'daki X (Twitter) scraper Actor'larını 13.000+ kişi kullandı ([kaynak](https://apify.com/xquik)) <!-- trust:apify-users 13160 -->
-- Xquik'in Apify'daki X (Twitter) scraper Actor'ları 9.500.000+ kez çalıştı ([kaynak](https://apify.com/xquik)) <!-- trust:apify-runs 9559478 -->
-- 4,66/5 puan, X Tweet Scraper için 16 Apify yorumundan ([kaynak](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
+- Bu deponun Skill'leri skills.sh'te 1.500+ kez kuruldu ([kaynak](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1556 -->
+- Xquik'in Apify'daki X (Twitter) scraper Actor'larını 14.000+ kişi kullandı ([kaynak](https://apify.com/xquik)) <!-- trust:apify-users 14496 -->
+- Xquik'in Apify'daki X (Twitter) scraper Actor'ları 10.000.000+ kez çalıştı ([kaynak](https://apify.com/xquik)) <!-- trust:apify-runs 10654660 -->
+- 4,73/5 puan, X Tweet Scraper için 17 Apify yorumundan ([kaynak](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.73 17 -->
 
-2026-11-16 tarihinde kontrol edildi. Her sayıyı tarihi ve kaynağıyla [xquik.com/benchmarks](https://xquik.com/benchmarks) sayfasında ya da [JSON](https://xquik.com/trust.json) olarak görebilirsiniz.
+2026-11-23 tarihinde kontrol edildi. Her sayıyı tarihi ve kaynağıyla [xquik.com/benchmarks](https://xquik.com/benchmarks) sayfasında ya da [JSON](https://xquik.com/trust.json) olarak görebilirsiniz.
 
 <!-- trust:end -->
 
