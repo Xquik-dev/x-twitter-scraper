@@ -158,12 +158,12 @@ page filtrée vide peut encore avoir une page suivante.
 [![X (Twitter) scraper runs on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-runs.json)](https://apify.com/xquik)
 [![X (Twitter) tweet scraper rating on Apify](https://img.shields.io/endpoint?url=https%3A%2F%2Fxquik.com%2Fbadges%2Fapify-rating.json)](https://apify.com/xquik/x-tweet-scraper/reviews)
 
-- 1 500+ installations des Skills de ce dépôt sur skills.sh ([source](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1549 -->
-- 13 000+ utilisateurs des Actors de scraping X (Twitter) de Xquik sur Apify ([source](https://apify.com/xquik)) <!-- trust:apify-users 13160 -->
-- 9 500 000+ exécutions des Actors de scraping X (Twitter) de Xquik sur Apify ([source](https://apify.com/xquik)) <!-- trust:apify-runs 9559478 -->
-- 4,66 sur 5 pour X Tweet Scraper d'après 16 avis Apify ([source](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.66 16 -->
+- 1 500+ installations des Skills de ce dépôt sur skills.sh ([source](https://skills.sh/xquik-dev/x-twitter-scraper)) <!-- trust:skills-x-twitter-scraper 1556 -->
+- 14 000+ utilisateurs des Actors de scraping X (Twitter) de Xquik sur Apify ([source](https://apify.com/xquik)) <!-- trust:apify-users 14496 -->
+- 10 000 000+ exécutions des Actors de scraping X (Twitter) de Xquik sur Apify ([source](https://apify.com/xquik)) <!-- trust:apify-runs 10654660 -->
+- 4,73 sur 5 pour X Tweet Scraper d'après 17 avis Apify ([source](https://apify.com/xquik/x-tweet-scraper/reviews)) <!-- trust:apify-rating 4.73 17 -->
 
-Vérifié le 2026-11-16. Chaque nombre, sa date et sa source sont sur [xquik.com/benchmarks](https://xquik.com/benchmarks) ou en [JSON](https://xquik.com/trust.json).
+Vérifié le 2026-11-23. Chaque nombre, sa date et sa source sont sur [xquik.com/benchmarks](https://xquik.com/benchmarks) ou en [JSON](https://xquik.com/trust.json).
 
 <!-- trust:end -->
 
