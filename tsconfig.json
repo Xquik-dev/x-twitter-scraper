@@ -13,6 +13,7 @@
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "types": [
+      "bun",
       "node"
     ],
     "moduleDetection": "force"

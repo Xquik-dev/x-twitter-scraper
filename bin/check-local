@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+
+for arg in "$@"; do
+	case $arg in
+		--no-status) ;;
+		*)
+			printf 'Unknown option: %s. Run bin/check-local or bin/check-local --no-status.\n' "$arg" >&2
+			exit 2
+			;;
+	esac
+done
+
+run() {
+	printf 'Running %s\n' "$*"
+	"$@"
+}
+
+run bun install --frozen-lockfile
+run bun run check
+
+printf 'All checks passed\n'
